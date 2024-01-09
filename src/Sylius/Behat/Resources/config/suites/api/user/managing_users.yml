@@ -21,5 +21,7 @@ default:
 
                 - sylius.behat.context.api.shop.login
 
+                - sylius.behat.context.api.user
+
             filters:
                 tags: "@managing_users&&@api"

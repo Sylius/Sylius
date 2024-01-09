@@ -18,6 +18,7 @@ use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Context\Api\Resources;
+use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Addressing\Model\CountryInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
@@ -32,6 +33,7 @@ final class ManagingCustomersContext implements Context
         private ApiClientInterface $client,
         private ResponseCheckerInterface $responseChecker,
         private IriConverterInterface $iriConverter,
+        private SharedStorageInterface $sharedStorage,
     ) {
     }
 
@@ -226,7 +228,9 @@ final class ManagingCustomersContext implements Context
      */
     public function iDeleteAccount(ShopUserInterface $shopUser): void
     {
+        $deletedShopUser = clone $shopUser;
         $this->client->delete(sprintf('customer/%s', $shopUser->getCustomer()->getId()), 'user');
+        $this->sharedStorage->set('deleted_user', $deletedShopUser);
     }
 
     /**
@@ -577,6 +581,21 @@ final class ManagingCustomersContext implements Context
         Assert::same(
             $this->responseChecker->getValue($this->client->getLastResponse(), 'group'),
             $this->iriConverter->getIriFromItem($customerGroup),
+        );
+    }
+
+    /**
+     * @Then the customer with this email should still exist
+     */
+    public function customerShouldStillExist(): void
+    {
+        $deletedUser = $this->sharedStorage->get('deleted_user');
+
+        $this->client->show(Resources::CUSTOMERS, (string) $deletedUser->getCustomer()->getId());
+
+        Assert::same(
+            $this->responseChecker->getValue($this->client->getLastResponse(), 'email'),
+            $deletedUser->getCustomer()->getEmail(),
         );
     }
 
