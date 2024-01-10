@@ -17,6 +17,7 @@ use ApiPlatform\OpenApi\Model\Operation;
 use ApiPlatform\OpenApi\Model\Parameter;
 use ApiPlatform\OpenApi\Model\PathItem;
 use ApiPlatform\OpenApi\OpenApi;
+use Sylius\Calendar\Provider\DateTimeProviderInterface;
 use Symfony\Component\HttpFoundation\Response;
 
 /** @experimental */
@@ -24,8 +25,10 @@ final class StatisticsModifier implements DocumentationModifierInterface
 {
     private const PATH = '/admin/statistics';
 
-    public function __construct(private string $apiRoute)
-    {
+    public function __construct(
+        private string $apiRoute,
+        private DateTimeProviderInterface $dateTimeProvider,
+    ) {
     }
 
     public function modify(OpenApi $docs): OpenApi
@@ -124,6 +127,41 @@ final class StatisticsModifier implements DocumentationModifierInterface
             ],
         );
 
-        return [$channelCode];
+        $startDate = new Parameter(
+            name: 'startDate',
+            in: 'query',
+            description: 'Start date for statistics',
+            required: true,
+            schema: [
+                'type' => 'string',
+                'format' => 'date-time',
+                'default' => $this->dateTimeProvider->now()->format('Y-01-01\T00:00:00'),
+            ],
+        );
+
+        $dateInterval = new Parameter(
+            name: 'dateInterval',
+            in: 'query',
+            description: 'Date interval for statistics',
+            required: true,
+            schema: [
+                'type' => 'string',
+                'default' => 'P1M',
+            ],
+        );
+
+        $endDate = new Parameter(
+            name: 'endDate',
+            in: 'query',
+            description: 'End date for statistics',
+            required: true,
+            schema: [
+                'type' => 'string',
+                'format' => 'date-time',
+                'default' => $this->dateTimeProvider->now()->format('Y-12-31\T23:59:59'),
+            ],
+        );
+
+        return [$channelCode, $startDate, $dateInterval, $endDate];
     }
 }

@@ -24,6 +24,7 @@ use Symfony\Component\Messenger\HandleTrait;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Component\Validator\Constraints as BaseAssert;
+use Symfony\Component\Validator\ConstraintViolationListInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 final class GetStatisticsAction
@@ -53,11 +54,7 @@ final class GetStatisticsAction
         $violations = $this->validator->validate($request->query->all(), $constraint);
 
         if (count($violations) > 0) {
-            return new JsonResponse(
-                data: $this->serializer->serialize($violations, 'json'),
-                status: Response::HTTP_BAD_REQUEST,
-                json: true,
-            );
+            return $this->createBadRequestResponse($violations);
         }
 
         $parameters = $request->query->all();
@@ -70,11 +67,7 @@ final class GetStatisticsAction
         $violations = $this->validator->validate($period, new Assert\DatePeriod());
 
         if (count($violations) > 0) {
-            return new JsonResponse(
-                data: $this->serializer->serialize($violations, 'json'),
-                status: Response::HTTP_BAD_REQUEST,
-                json: true,
-            );
+            return $this->createBadRequestResponse($violations);
         }
 
         try {
@@ -92,5 +85,14 @@ final class GetStatisticsAction
         }
 
         return new JsonResponse(data: $this->serializer->serialize($result, 'json'), status: $status, json: true);
+    }
+
+    private function createBadRequestResponse(ConstraintViolationListInterface $violations): JsonResponse
+    {
+        return new JsonResponse(
+            data: $this->serializer->serialize($violations, 'json'),
+            status: Response::HTTP_BAD_REQUEST,
+            json: true,
+        );
     }
 }

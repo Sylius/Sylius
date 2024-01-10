@@ -20,10 +20,6 @@ use Webmozart\Assert\Assert;
 /** @experimental */
 final class DateIntervalValidator extends ConstraintValidator
 {
-    /**
-     * @param string $value
-     * @param DateInterval $constraint
-     */
     public function validate(mixed $value, Constraint $constraint): void
     {
         Assert::string($value);

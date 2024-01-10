@@ -13,11 +13,16 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\Exception;
 
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+
 /** @experimental */
-final class ChannelNotFoundException extends \RuntimeException
+final class ChannelNotFoundException extends NotFoundHttpException
 {
-    public function __construct(string $channelCode)
-    {
-        parent::__construct(sprintf('Channel with code "%s" does not exist.', $channelCode));
+    public function __construct(
+        string $message = 'Channel not found.',
+        \Throwable $previous = null,
+        int $code = 0,
+    ) {
+        parent::__construct($message, $previous, $code);
     }
 }
