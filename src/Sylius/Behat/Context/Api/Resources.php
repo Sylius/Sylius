@@ -41,8 +41,6 @@ final class Resources
 
     public const CUSTOMERS = 'customers';
 
-    public const STATISTICS = 'statistics';
-
     public const EXCHANGE_RATES = 'exchange-rates';
 
     public const LOCALES = 'locales';

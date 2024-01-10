@@ -16,7 +16,6 @@ namespace Sylius\Behat\Context\Api\Admin;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
-use Sylius\Behat\Context\Api\Resources;
 use Sylius\Calendar\Provider\DateTimeProviderInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Webmozart\Assert\Assert;
@@ -35,18 +34,18 @@ final class DashboardContext implements Context
      */
     public function iBrowseStatistics(): void
     {
-        $this->client->index(Resources::STATISTICS);
+        $this->client->index('statistics');
     }
 
     /**
-     * @When /^I view statistics for ("[^"]+" channel) and current year split by month$/
+     * @When I view statistics for :channel channel and current year split by month
      * @When I choose :channel channel
      * @When I view statistics for :channel channel
      */
     public function iViewStatisticsForChannelAndYear(ChannelInterface $channel): void
     {
         $this->client->index(
-            Resources::STATISTICS,
+            'statistics',
             [
                 'channelCode' => $channel->getCode(),
                 'startDate' => $this->dateTimeProvider->now()->format('Y-01-01\T00:00:00'),
@@ -57,7 +56,26 @@ final class DashboardContext implements Context
     }
 
     /**
+     * @When I view statistics for :channel channel and previous year split by month
+     */
+    public function iViewStatisticsForChannelAndPreviousYear(ChannelInterface $channel): void
+    {
+        $currentYear = (int) $this->dateTimeProvider->now()->format('Y');
+
+        $this->client->index(
+            'statistics',
+            [
+                'channelCode' => $channel->getCode(),
+                'startDate' => ($currentYear - 1) . '-01-01T00:00:00',
+                'dateInterval' => 'P1M',
+                'endDate' => ($currentYear - 1) . '-12-31T23:59:59',
+            ],
+        );
+    }
+
+    /**
      * @Then I should see :count new orders
+     * @Then I should see :count new orders in the list
      */
     public function iShouldSeeNewOrders(int $count): void
     {
@@ -117,18 +135,6 @@ final class DashboardContext implements Context
                 ['averageOrderValue' => $averageTotalValue],
             ),
             sprintf('Average order value should be %s, but it does not.', $averageTotalValue),
-        );
-    }
-
-    /**
-     * @Then I should see :count new orders in the list
-     */
-    public function iShouldSeeNewOrdersInTheList(int $count): void
-    {
-        $this->responseChecker->hasValuesInSubresourceObject(
-            $this->client->getLastResponse(),
-            'businessActivitySummary',
-            ['newOrdersCount' => $count],
         );
     }
 }

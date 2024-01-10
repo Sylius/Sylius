@@ -26,7 +26,7 @@ Feature: Statistics
         And there should be total sales of "$7,000.58"
         And the average order value should be "$1,166.76"
 
-    @ui @javascript @no-api
+    @api @ui @javascript
     Scenario: Seeing statistics for the previous year
         Given it is "first day of January last year" now
         And 3 new customers have fulfilled 2 orders placed for total of "$2,000.00"
