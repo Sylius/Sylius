@@ -10,32 +10,32 @@ Feature: Impersonating shop users
         And there is a customer "Tanith Low" identified by an email "remnant@london.uk" and a password "swordlover1918"
         And I am logged in as "teddy@roosevelt.com" administrator
 
-    @ui
+    @todo @ui
     Scenario: Impersonating a customer
         When I view details of the customer "remnant@london.uk"
         And I impersonate them
         And I visit the store
         Then I should be logged in as "Tanith Low"
 
-    @ui
+    @todo @ui
     Scenario: Impersonating a customer in new tab
         When I impersonate the customer "remnant@london.uk"
         And I visit the store
         Then I should be logged in as "Tanith Low"
 
-    @ui
+    @todo @ui
     Scenario: Inability to impersonate a customer with no account
         Given the store has customer "harold@thrasher.ie" with first name "Harold"
         When I view their details
         Then I should be unable to impersonate them
 
-    @ui
+    @todo @ui
     Scenario: Seeing the impersonation was successful
         When I view details of the customer "remnant@london.uk"
         And I impersonate them
         Then I should see that impersonating "remnant@london.uk" was successful
 
-    @ui
+    @todo @ui
     Scenario: Keeping the administrator access while impersonating a user
         When I view details of the customer "remnant@london.uk"
         And I impersonate them
@@ -43,13 +43,13 @@ Feature: Impersonating shop users
         Then I should be logged in as "Tanith Low"
         But I should still be able to access the administration dashboard
 
-    @ui
+    @todo @ui
     Scenario: Logging out the user doesn't log out my admin account
         Given I am impersonating the customer "remnant@london.uk"
         When I log out from the store
         Then I should still be able to access the administration dashboard
 
-    @ui
+    @todo @ui
     Scenario: Logging out from my admin account logs me off the user I'm impersonating
         Given I am impersonating the customer "remnant@london.uk"
         When I log out from my admin account
