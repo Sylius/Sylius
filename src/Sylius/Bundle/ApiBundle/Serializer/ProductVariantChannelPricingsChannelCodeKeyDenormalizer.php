@@ -25,7 +25,9 @@ final class ProductVariantChannelPricingsChannelCodeKeyDenormalizer implements C
     use DenormalizerAwareTrait;
 
     private const ALREADY_CALLED = 'sylius_product_variant_channel_pricings_channel_code_key_denormalizer_already_called';
+
     private const KEY_CHANNEL_PRICINGS = 'channelPricings';
+
     private const KEY_CHANNEL_CODE = 'channelCode';
 
     public function supportsDenormalization(mixed $data, string $type, string $format = null, array $context = []): bool
