@@ -176,6 +176,35 @@ final class SyliusPromotionExtensionTest extends AbstractExtensionTestCase
     }
 
     /** @test */
+    public function it_loads_catalog_promotion_action_validation_groups_parameter_value_properly(): void
+    {
+        $this->load([
+            'catalog_promotion_action' => [
+                'validation_groups' => [
+                    'something' => ['sylius', 'something'],
+                    'test' => ['sylius', 'test'],
+                ],
+            ],
+        ]);
+
+        $this->assertContainerBuilderHasParameter(
+            'sylius.promotion.catalog_promotion_action.validation_groups',
+            ['something' => ['sylius', 'something'], 'test' => ['sylius', 'test']],
+        );
+    }
+
+    /** @test */
+    public function it_loads_empty_catalog_promotion_action_validation_groups_parameter_value(): void
+    {
+        $this->load();
+
+        $this->assertContainerBuilderHasParameter(
+            'sylius.promotion.catalog_promotion_action.validation_groups',
+            [],
+        );
+    }
+
+    /** @test */
     public function it_loads_catalog_promotion_scope_validation_groups_parameter_value_properly(): void
     {
         $this->load([

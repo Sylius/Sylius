@@ -15,7 +15,6 @@ namespace Sylius\Bundle\PromotionBundle\Validator;
 
 use Sylius\Bundle\PromotionBundle\Validator\CatalogPromotionAction\ActionValidatorInterface;
 use Sylius\Bundle\PromotionBundle\Validator\Constraints\CatalogPromotionAction;
-use Sylius\Component\Promotion\Model\CatalogPromotionActionInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 use Webmozart\Assert\Assert;
@@ -33,13 +32,6 @@ final class CatalogPromotionActionValidator extends ConstraintValidator
     {
         /** @var CatalogPromotionAction $constraint */
         Assert::isInstanceOf($constraint, CatalogPromotionAction::class);
-
-        /** @var CatalogPromotionActionInterface $value */
-        if (!in_array($value->getType(), $this->actionTypes, true)) {
-            $this->context->buildViolation($constraint->invalidType)->atPath('type')->addViolation();
-
-            return;
-        }
 
         $type = $value->getType();
         if (!array_key_exists($type, $this->actionValidators)) {

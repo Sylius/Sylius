@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace spec\Sylius\Bundle\PromotionBundle\Validator;
 
 use PhpSpec\ObjectBehavior;
+use Prophecy\Argument;
 use Sylius\Bundle\PromotionBundle\Validator\CatalogPromotionAction\ActionValidatorInterface;
 use Sylius\Bundle\PromotionBundle\Validator\Constraints\CatalogPromotionAction;
 use Sylius\Component\Promotion\Model\CatalogPromotionActionInterface;
@@ -44,16 +45,13 @@ final class CatalogPromotionActionValidatorSpec extends ObjectBehavior
         $this->shouldHaveType(ConstraintValidator::class);
     }
 
-    function it_adds_violation_if_catalog_promotion_action_has_invalid_type(
+    function it_does_nothing_when_passed_action_type_has_no_validators(
         ExecutionContextInterface $executionContext,
-        ConstraintViolationBuilderInterface $constraintViolationBuilder,
         CatalogPromotionActionInterface $action,
     ): void {
-        $action->getType()->willReturn('wrong_type');
+        $action->getType()->willReturn('custom');
 
-        $executionContext->buildViolation('sylius.catalog_promotion_action.invalid_type')->willReturn($constraintViolationBuilder);
-        $constraintViolationBuilder->atPath('type')->willReturn($constraintViolationBuilder);
-        $constraintViolationBuilder->addViolation()->shouldBeCalled();
+        $executionContext->buildViolation(Argument::any())->shouldNotBeCalled();
 
         $this->validate($action, new CatalogPromotionAction());
     }

@@ -26,6 +26,7 @@ sylius_promotion:
             unit_percentage_discount:
                 - 'sylius'
                 - 'sylius_promotion_action_unit_percentage_discount'
+
     promotion_rule:
         validation_groups:
             cart_quantity:
@@ -52,3 +53,9 @@ sylius_promotion:
             item_total:
                 - 'sylius'
                 - 'sylius_promotion_rule_item_total'
+
+    catalog_promotion_action:
+        validation_groups:
+            percentage_discount:
+                - 'sylius'
+                - 'sylius_catalog_promotion_action_percentage_discount'

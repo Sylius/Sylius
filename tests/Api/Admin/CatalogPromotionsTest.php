@@ -404,6 +404,12 @@ final class CatalogPromotionsTest extends JsonApiTestCase
                 ],
                 'actions' => [
                     [
+                        'type' => '',
+                        'configuration' => [
+                            'amount' => 0.5,
+                        ],
+                    ],
+                    [
                         'type' => 'invalid_type',
                         'configuration' => [
                             'amount' => 0.5,
@@ -412,6 +418,12 @@ final class CatalogPromotionsTest extends JsonApiTestCase
                     [
                         'type' => PercentageDiscountPriceCalculator::TYPE,
                         'configuration' => [],
+                    ],
+                    [
+                        'type' => PercentageDiscountPriceCalculator::TYPE,
+                        'configuration' => [
+                            'amount' => null,
+                        ],
                     ],
                     [
                         'type' => PercentageDiscountPriceCalculator::TYPE,
@@ -432,12 +444,6 @@ final class CatalogPromotionsTest extends JsonApiTestCase
                     [
                         'type' => FixedDiscountPriceCalculator::TYPE,
                         'configuration' => [
-                            'WEB' => [],
-                        ],
-                    ],
-                    [
-                        'type' => FixedDiscountPriceCalculator::TYPE,
-                        'configuration' => [
                             'invalid_channel' => [
                                 'amount' => 1000,
                             ],
@@ -446,6 +452,16 @@ final class CatalogPromotionsTest extends JsonApiTestCase
                     [
                         'type' => FixedDiscountPriceCalculator::TYPE,
                         'configuration' => [
+                            'WEB' => [],
+                            'MOBILE' => [],
+                        ],
+                    ],
+                    [
+                        'type' => FixedDiscountPriceCalculator::TYPE,
+                        'configuration' => [
+                            'MOBILE' => [
+                                'amount' => null,
+                            ],
                             'WEB' => [
                                 'amount' => 'text',
                             ],
@@ -471,11 +487,64 @@ final class CatalogPromotionsTest extends JsonApiTestCase
             ], \JSON_THROW_ON_ERROR),
         );
 
-        $this->assertResponse(
-            $this->client->getResponse(),
-            'admin/catalog_promotion/post_catalog_promotion_with_invalid_actions_response',
-            Response::HTTP_UNPROCESSABLE_ENTITY,
-        );
+        $this->assertJsonResponseViolations($this->client->getResponse(), [
+            [
+                'propertyPath' => 'actions[0].type',
+                'message' => 'Please choose an action type.',
+            ],
+            [
+                'propertyPath' => 'actions[1].type',
+                'message' => 'Catalog promotion action type is invalid. Available types are fixed_discount, percentage_discount.',
+            ],
+            [
+                'propertyPath' => 'actions[2].configuration[amount]',
+                'message' => 'This field is missing.',
+            ],
+            [
+                'propertyPath' => 'actions[3].configuration[amount]',
+                'message' => 'The percentage discount amount must be a number and can not be empty.',
+            ],
+            [
+                'propertyPath' => 'actions[4].configuration[amount]',
+                'message' => 'The percentage discount amount must be between 0% and 100%.',
+            ],
+            [
+                'propertyPath' => 'actions[5].configuration[amount]',
+                'message' => 'This value should be a valid number.',
+            ],
+            [
+                'propertyPath' => 'actions[6].configuration[MOBILE]',
+                'message' => 'This field is missing.',
+            ],
+            [
+                'propertyPath' => 'actions[6].configuration[WEB]',
+                'message' => 'This field is missing.',
+            ],
+            [
+                'propertyPath' => 'actions[7].configuration[MOBILE]',
+                'message' => 'This field is missing.',
+            ],
+            [
+                'propertyPath' => 'actions[7].configuration[WEB]',
+                'message' => 'This field is missing.',
+            ],
+            [
+                'propertyPath' => 'actions[8].configuration[WEB][amount]',
+                'message' => 'This field is missing.',
+            ],
+            [
+                'propertyPath' => 'actions[8].configuration[MOBILE][amount]',
+                'message' => 'This field is missing.',
+            ],
+            [
+                'propertyPath' => 'actions[9].configuration[MOBILE][amount]',
+                'message' => 'This value should not be blank.',
+            ],
+            [
+                'propertyPath' => 'actions[9].configuration[WEB][amount]',
+                'message' => 'This value should be of type numeric.',
+            ],
+        ]);
     }
 
     /** @test */

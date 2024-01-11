@@ -21,6 +21,12 @@ sylius_promotion:
                 model: Sylius\Component\Core\Model\PromotionCoupon
                 repository: Sylius\Bundle\PromotionBundle\Doctrine\ORM\PromotionCouponRepository
 
+    catalog_promotion_action:
+        validation_groups:
+            fixed_discount:
+                - 'sylius'
+                - 'sylius_catalog_promotion_action_fixed_discount'
+
     catalog_promotion_scope:
         validation_groups:
             for_products:

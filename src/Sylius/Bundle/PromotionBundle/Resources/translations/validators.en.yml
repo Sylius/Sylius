@@ -16,6 +16,9 @@ sylius:
         state:
             processing: The catalog promotion cannot be edited as it is currently being processed.
     catalog_promotion_action:
+        type:
+            not_blank: Please choose an action type.
+            invalid: Catalog promotion action type is invalid. Available types are {{ available_action_types }}.
         invalid_type: Catalog promotion action type is invalid. Please choose a valid type.
         percentage_discount:
             not_in_range: The percentage discount amount must be between 0% and 100%.
