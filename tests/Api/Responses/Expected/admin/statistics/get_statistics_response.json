@@ -34,7 +34,7 @@
     "businessActivitySummary": {
         "totalSales": 2500,
         "newOrdersCount": 1,
-        "newCustomersCount": 1,
+        "newCustomersCount": 0,
         "averageOrderValue": 2500
     }
 }
