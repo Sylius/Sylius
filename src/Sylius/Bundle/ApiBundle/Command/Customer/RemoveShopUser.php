@@ -21,6 +21,7 @@ class RemoveShopUser implements ShopUserIdAwareInterface
     public function __construct(private mixed $shopUserId)
     {
     }
+
     public function getShopUserId(): mixed
     {
         return $this->shopUserId;

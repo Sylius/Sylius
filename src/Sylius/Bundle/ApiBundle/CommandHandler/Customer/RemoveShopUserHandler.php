@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Bundle\ApiBundle\CommandHandler\Customer;
 
 use Sylius\Bundle\ApiBundle\Command\Customer\RemoveShopUser;
+use Sylius\Bundle\ApiBundle\Exception\UserNotFoundException;
 use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
 
@@ -33,7 +34,7 @@ final class RemoveShopUserHandler
         $shopUser = $this->shopUserRepository->find($removeShopUser->getShopUserId());
 
         if (null === $shopUser) {
-            return;
+            throw new UserNotFoundException();
         }
 
         $shopUser->setCustomer(null);
