@@ -31,7 +31,7 @@ final class ShopUserContext implements Context
     {
         $shopUser = $this->shopUserRepository->findOneByEmail($email);
 
-        Assert::notNull($shopUser, sprintf('User with email "%s" does not exist', $email));
+        Assert::notNull($shopUser, sprintf('Shop User with email "%s" does not exist', $email));
 
         return $shopUser;
     }

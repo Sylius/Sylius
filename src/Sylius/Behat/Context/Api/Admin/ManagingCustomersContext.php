@@ -228,9 +228,9 @@ final class ManagingCustomersContext implements Context
      */
     public function iDeleteAccount(ShopUserInterface $shopUser): void
     {
-        $deletedShopUser = clone $shopUser;
         $this->client->delete(sprintf('customer/%s', $shopUser->getCustomer()->getId()), 'user');
-        $this->sharedStorage->set('deleted_user', $deletedShopUser);
+
+        $this->sharedStorage->set('deleted_user', $shopUser);
     }
 
     /**
@@ -609,5 +609,18 @@ final class ManagingCustomersContext implements Context
      */
     public function intentionallyLeftBlank(): void
     {
+    }
+
+    /**
+     * @Then the user account should be deleted
+     */
+    public function accountShouldBeDeleted(): void
+    {
+        /** @var ShopUserInterface $deletedUser */
+        $deletedUser = $this->sharedStorage->get('deleted_user');
+
+        $response = $this->client->show(Resources::CUSTOMERS, (string) $deletedUser->getCustomer()->getId());
+
+        Assert::null($this->responseChecker->getValue($response, 'user'));
     }
 }

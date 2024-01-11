@@ -18,12 +18,4 @@
     <imports>
         <import resource="api/**/*.xml" />
     </imports>
-
-    <services>
-        <service id="sylius.behat.context.api.user" class="Sylius\Behat\Context\Api\UserContext" public="true">
-            <argument type="service" id="sylius.behat.api_platform_client.admin" />
-            <argument type="service" id="sylius.behat.shared_storage" />
-            <argument type="service" id="Sylius\Behat\Client\ResponseCheckerInterface" />
-        </service>
-    </services>
 </container>
