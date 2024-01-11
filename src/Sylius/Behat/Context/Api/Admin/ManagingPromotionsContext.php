@@ -33,6 +33,7 @@ use Sylius\Component\Core\Promotion\Checker\Rule\CustomerGroupRuleChecker;
 use Sylius\Component\Core\Promotion\Checker\Rule\HasTaxonRuleChecker;
 use Sylius\Component\Core\Promotion\Checker\Rule\TotalOfItemsFromTaxonRuleChecker;
 use Sylius\Component\Customer\Model\CustomerGroupInterface;
+use Sylius\Component\Promotion\Checker\Rule\ItemTotalRuleChecker;
 use Webmozart\Assert\Assert;
 
 final class ManagingPromotionsContext implements Context
@@ -362,7 +363,7 @@ final class ManagingPromotionsContext implements Context
         ChannelInterface $secondChannel,
     ): void {
         $this->addToRequestRule(
-            TotalOfItemsFromTaxonRuleChecker::TYPE,
+            ItemTotalRuleChecker::TYPE,
             [
                 $firstChannel->getCode() => [
                     'amount' => $firstAmount,

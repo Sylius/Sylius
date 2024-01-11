@@ -22,10 +22,12 @@
                         <option name="fields">
                             <value key="amount">
                                 <constraint name="NotBlank">
+                                    <option name="message">sylius.catalog_promotion_action.fixed_discount.not_valid</option>
                                     <option name="groups">sylius_catalog_promotion_action_fixed_discount</option>
                                 </constraint>
                                 <constraint name="Type">
                                     <option name="type">numeric</option>
+                                    <option name="message">sylius.catalog_promotion_action.fixed_discount.not_valid</option>
                                     <option name="groups">sylius_catalog_promotion_action_fixed_discount</option>
                                 </constraint>
                             </value>

@@ -36,6 +36,7 @@
 
             <constraint name="Sylius\Bundle\CoreBundle\Validator\Constraints\ChannelCodeCollection">
                 <option name="groups">sylius_shipping_method_rule_order_total</option>
+                <option name="validateAgainstAllChannels">true</option>
                 <option name="constraints">
                     <constraint name="Collection">
                         <option name="fields">

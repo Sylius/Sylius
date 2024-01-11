@@ -453,15 +453,19 @@ final class CatalogPromotionsTest extends JsonApiTestCase
                         'type' => FixedDiscountPriceCalculator::TYPE,
                         'configuration' => [
                             'WEB' => [],
-                            'MOBILE' => [],
                         ],
                     ],
                     [
                         'type' => FixedDiscountPriceCalculator::TYPE,
                         'configuration' => [
-                            'MOBILE' => [
+                            'WEB' => [
                                 'amount' => null,
                             ],
+                        ],
+                    ],
+                    [
+                        'type' => FixedDiscountPriceCalculator::TYPE,
+                        'configuration' => [
                             'WEB' => [
                                 'amount' => 'text',
                             ],
@@ -510,18 +514,14 @@ final class CatalogPromotionsTest extends JsonApiTestCase
             ],
             [
                 'propertyPath' => 'actions[5].configuration[amount]',
+                'message' => 'The percentage discount amount must be a number and can not be empty.',
+            ],
+            [
+                'propertyPath' => 'actions[5].configuration[amount]',
                 'message' => 'This value should be a valid number.',
             ],
             [
-                'propertyPath' => 'actions[6].configuration[MOBILE]',
-                'message' => 'This field is missing.',
-            ],
-            [
                 'propertyPath' => 'actions[6].configuration[WEB]',
-                'message' => 'This field is missing.',
-            ],
-            [
-                'propertyPath' => 'actions[7].configuration[MOBILE]',
                 'message' => 'This field is missing.',
             ],
             [
@@ -533,16 +533,12 @@ final class CatalogPromotionsTest extends JsonApiTestCase
                 'message' => 'This field is missing.',
             ],
             [
-                'propertyPath' => 'actions[8].configuration[MOBILE][amount]',
-                'message' => 'This field is missing.',
-            ],
-            [
-                'propertyPath' => 'actions[9].configuration[MOBILE][amount]',
-                'message' => 'This value should not be blank.',
-            ],
-            [
                 'propertyPath' => 'actions[9].configuration[WEB][amount]',
-                'message' => 'This value should be of type numeric.',
+                'message' => 'Provided configuration contains errors. Please add the fixed discount amount that is a number greater than 0.',
+            ],
+            [
+                'propertyPath' => 'actions[10].configuration[WEB][amount]',
+                'message' => 'Provided configuration contains errors. Please add the fixed discount amount that is a number greater than 0.',
             ],
         ]);
     }

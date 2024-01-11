@@ -36,6 +36,11 @@
                             <option name="message">sylius.catalog_promotion_action.percentage_discount.not_number_or_empty</option>
                             <option name="groups">sylius_catalog_promotion_action_percentage_discount</option>
                         </constraint>
+                        <constraint name="Type">
+                            <option name="type">numeric</option>
+                            <option name="message">sylius.catalog_promotion_action.percentage_discount.not_number_or_empty</option>
+                            <option name="groups">sylius_catalog_promotion_action_percentage_discount</option>
+                        </constraint>
                         <constraint name="Range">
                             <option name="min">0</option>
                             <option name="max">1</option>
