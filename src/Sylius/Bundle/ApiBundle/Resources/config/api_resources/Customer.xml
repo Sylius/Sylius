@@ -95,7 +95,7 @@
                 </attribute>
             </itemOperation>
 
-            <itemOperation name="admin_user_delete">
+            <itemOperation name="admin_delete_user">
                 <attribute name="method">DELETE</attribute>
                 <attribute name="path">/admin/customer/{id}/user</attribute>
                 <attribute name="controller">Sylius\Bundle\ApiBundle\Controller\RemoveCustomerShopUserAction</attribute>
