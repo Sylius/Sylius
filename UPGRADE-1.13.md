@@ -372,3 +372,60 @@ List of affected classes:
 
 1. The behavior of the `sylius:install:setup` command has changed, because `Sylius\Bundle\CoreBundle\Installer\Setup\LocaleSetup` has been updated.
    Now, it automatically replaces the existing `locale` parameter in the configuration with the one provided for the store.
+
+1. A new parameter has been added to specify the validation groups for a given catalog promotion scope.
+   If you have any custom validation groups for your catalog promotion scope, you need to add them to your `config/packages/_sylius.yaml` file.
+   Additionally, if you have your own catalog promotion scope and want to add your validation groups, you can add another key to the `catalog_promotion_scope.validation_groups` parameter.
+   This is handled by `Sylius\Bundle\PromotionBundle\Validator\CatalogPromotionScopeGroupValidator` and it resolves the groups based on the type of the passed catalog promotion scope.
+
+    ```yaml
+    sylius_promotion:
+        catalog_promotion_scope:
+            validation_groups:
+                for_products:
+                    - 'sylius'
+                    - 'sylius_catalog_promotion_scope_for_products'
+                for_taxons:
+                    - 'sylius'
+                    - 'sylius_catalog_promotion_scope_for_taxons'
+                your_scope:
+                    - 'sylius'
+                    - 'your_custom_validation_group'
+    ```
+   Along with this update, constraints have been removed from specific rule form types. The affected form types include:
+    - `Sylius\Bundle\CoreBundle\Form\Type\CatalogPromotionScope\ForProductsScopeConfigurationType`
+    - `Sylius\Bundle\CoreBundle\Form\Type\CatalogPromotionScope\ForTaxonsScopeConfigurationType`
+    - `Sylius\Bundle\CoreBundle\Form\Type\CatalogPromotionScope\ForVariantsScopeConfigurationType`
+
+   The constraints previously defined in these forms are now in `src/Sylius/Bundle/CoreBundle/Resources/config/validation/CatalogPromotionScope.xml` and managed via the new validation groups parameters in the configuration.
+
+1. A new parameter has been added to specify the validation groups for a given catalog promotion action.
+   If you have any custom validation groups for your catalog promotion action, you need to add them to your `config/packages/_sylius.yaml` file.
+   Additionally, if you have your own catalog promotion action and want to add your validation groups, you can add another key to the `catalog_promotion_action.validation_groups` parameter.
+   This is handled by `Sylius\Bundle\PromotionBundle\Validator\CatalogPromotionActionGroupValidator` and it resolves the groups based on the type of the passed catalog promotion action.
+
+    ```yaml
+    sylius_promotion:
+        catalog_promotion_action:
+            validation_groups:
+                percentage_discount:
+                    - 'sylius'
+                    - 'sylius_catalog_promotion_action_percentage_discount'
+                fixed_discount:
+                    - 'sylius'
+                    - 'sylius_catalog_promotion_action_fixed_discount'
+                your_action:
+                    - 'sylius'
+                    - 'your_custom_validation_group'
+    ```
+   Along with this update, constraints have been removed from specific rule form types. The affected form types include:
+    - `Sylius\Bundle\PromotionBundle\Form\Type\CatalogPromotionAction\FixedDiscountActionConfigurationType`
+    - `Sylius\Bundle\PromotionBundle\Form\Type\CatalogPromotionAction\PercentageDiscountActionConfigurationType`
+
+   The constraints previously defined in these forms are now in `src/Sylius/Bundle/PromotionBundle/Resources/config/validation/CatalogPromotionAction.xml` and `src/Sylius/Bundle/CoreBundle/Resources/config/validation/CatalogPromotionAction.xml` and are managed via the new validation groups parameters in the configuration.
+
+1. Since catalog promotion action and scope validations have been rewritten to be more inline with symfony, the previous abstraction has been deprecated. This includes:
+   - `Sylius\Bundle\PromotionBundle\Validator\CatalogPromotionAction\ActionValidatorInterface`
+   - `Sylius\Bundle\PromotionBundle\Validator\CatalogPromotionScope\ScopeValidatorInterface`
+   - `Sylius\Bundle\PromotionBundle\Validator\CatalogPromotionActionValidator`
+   - `Sylius\Bundle\PromotionBundle\Validator\CatalogPromotionScopeValidator`
