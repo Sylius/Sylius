@@ -19,6 +19,12 @@ use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 use Webmozart\Assert\Assert;
 
+trigger_deprecation(
+    'sylius/promotion-bundle',
+    '1.13',
+    'The "%s" class is deprecated and will be removed in Sylius 2.0, use the usual symfony logic for validation.',
+    CatalogPromotionActionValidator::class,
+);
 final class CatalogPromotionActionValidator extends ConstraintValidator
 {
     private array $actionValidators;
