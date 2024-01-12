@@ -16,6 +16,7 @@ Feature: Adding a new product variant
         When I want to create a new variant of this product
         And I specify its code as "VODKA_WYBOROWA_PREMIUM"
         And I set its price to "$100.00" for "United States" channel
+        And I set its "Taste" option to "Orange"
         And I add it
         Then I should be notified that it has been successfully created
         And the "VODKA_WYBOROWA_PREMIUM" variant of the "Wyborowa Vodka" product should appear in the store
@@ -29,6 +30,7 @@ Feature: Adding a new product variant
         And I name it "Vodka Wyborowa Premium" in "English (United States)"
         And I name it "Wódka Wyborowa Premium" in "Polish (Poland)"
         And I set its price to "$100.00" for "United States" channel
+        And I set its "Taste" option to "Orange"
         And I add it
         Then I should be notified that it has been successfully created
         And the "VODKA_WYBOROWA_PREMIUM" variant of the "Wyborowa Vodka" product should appear in the store
@@ -52,6 +54,7 @@ Feature: Adding a new product variant
         And I specify its code as "VODKA_WYBOROWA_PREMIUM"
         And I set its price to "$100.00" for "United States" channel
         And I set its shipping category as "Fragile"
+        And I set its "Taste" option to "Orange"
         And I add it
         Then I should be notified that it has been successfully created
         And the "VODKA_WYBOROWA_PREMIUM" variant of the "Wyborowa Vodka" product should appear in the store
@@ -62,6 +65,7 @@ Feature: Adding a new product variant
         And I specify its code as "VODKA_WYBOROWA_EXQUISITE"
         And I set its price to "$100.00" for "United States" channel
         And I set its original price to "$120.00" for "United States" channel
+        And I set its "Taste" option to "Orange"
         And I add it
         Then I should be notified that it has been successfully created
         And the "VODKA_WYBOROWA_EXQUISITE" variant of the "Wyborowa Vodka" product should appear in the store
@@ -74,6 +78,7 @@ Feature: Adding a new product variant
         And I specify its code as "VODKA_WYBOROWA_PREMIUM"
         And I set its price to "$100.00" for "United States" channel
         And I do not want to have shipping required for this product variant
+        And I set its "Taste" option to "Orange"
         And I add it
         Then I should be notified that it has been successfully created
         And the variant with code "VODKA_WYBOROWA_PREMIUM" should not have shipping required
@@ -85,6 +90,7 @@ Feature: Adding a new product variant
         When I want to create a new variant of this product
         And I specify its code as "VODKA_WYBOROWA_PREMIUM"
         And I set its price to "$0.00" for "United States" channel
+        And I set its "Taste" option to "Orange"
         And I add it
         Then I should be notified that it has been successfully created
         And the "VODKA_WYBOROWA_PREMIUM" variant of the "Wyborowa Vodka" product should appear in the store
@@ -96,6 +102,7 @@ Feature: Adding a new product variant
         And I specify its code as "VODKA_WYBOROWA"
         And I set its price to "$100.00" for "United States" channel
         And I set its minimum price to "$50.00" for "United States" channel
+        And I set its "Taste" option to "Orange"
         And I add it
         Then I should be notified that it has been successfully created
         And the "VODKA_WYBOROWA" variant of the "Wyborowa Vodka" product should appear in the store
