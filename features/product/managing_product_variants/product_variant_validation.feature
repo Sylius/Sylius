@@ -70,7 +70,7 @@ Feature: Product variant validation
         Then I should be notified that the variant can have only one value configured for a single option
         And the "Wyborowa Vodka" product should have no variants
 
-    @todo @api @no-ui
+    @api @no-ui
     Scenario: Adding a new product variant without any of required options configured
         Given this product has option "Taste" with values "Orange" and "Melon"
         And this product has option "Size" with values "Small" and "Big"
@@ -82,7 +82,7 @@ Feature: Product variant validation
         Then I should be notified that required options have not been configured
         And the "Wyborowa Vodka" product should have no variants
 
-    @todo @api @no-ui
+    @api @no-ui
     Scenario: Adding a new product variant without one of required options configured
         Given this product has option "Taste" with values "Orange" and "Melon"
         And this product has option "Size" with values "Small" and "Big"
