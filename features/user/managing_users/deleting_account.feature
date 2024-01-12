@@ -15,7 +15,7 @@ Feature: Deleting the customer account
         Then the user account should be deleted
         But the customer with this email should still exist
 
-    @ui @api
+    @api @ui
     Scenario: A customer with no user cannot be deleted
         Given the account of "theodore@example.com" was deleted
         Then I should not be able to delete it again

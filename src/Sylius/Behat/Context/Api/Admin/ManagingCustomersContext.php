@@ -588,14 +588,13 @@ final class ManagingCustomersContext implements Context
      */
     public function customerShouldStillExist(): void
     {
-        $deletedUser = $this->sharedStorage->get('deleted_user');
+        /** @var CustomerInterface $customer */
+        $customer = $this->sharedStorage->get('customer');
 
-        $this->client->show(Resources::CUSTOMERS, (string) $deletedUser->getCustomer()->getId());
+        $this->client->show(Resources::CUSTOMERS, (string) $customer->getId());
 
-        Assert::same(
-            $this->responseChecker->getValue($this->client->getLastResponse(), 'email'),
-            $deletedUser->getCustomer()->getEmail(),
-        );
+        Assert::same($this->client->getLastResponse()->getStatusCode(), 200);
+        Assert::same($this->responseChecker->getValue($this->client->getLastResponse(), 'email'), $customer->getEmail());
     }
 
     /**
