@@ -72,6 +72,7 @@ final class ProductVariantOptionValuesConfigurationValidatorSpec extends ObjectB
         $constraint = new ProductVariantOptionValuesConfiguration();
 
         $variant->getProduct()->willReturn($product);
+        $product->hasOptions()->willReturn(true);
 
         $firstOption->getCode()->willReturn('SIZE');
         $secondOption->getCode()->willReturn('COLOUR');
@@ -100,6 +101,7 @@ final class ProductVariantOptionValuesConfigurationValidatorSpec extends ObjectB
         $constraint = new ProductVariantOptionValuesConfiguration();
 
         $variant->getProduct()->willReturn($product);
+        $product->hasOptions()->willReturn(true);
 
         $firstOption->getCode()->willReturn('SIZE');
         $secondOption->getCode()->willReturn('COLOUR');
@@ -114,6 +116,34 @@ final class ProductVariantOptionValuesConfigurationValidatorSpec extends ObjectB
             $firstProductOptionValue->getWrappedObject(),
             $secondProductOptionValue->getWrappedObject(),
         ]));
+
+        $executionContext->addViolation($constraint->message)->shouldNotBeCalled();
+
+        $this->validate($variant, $constraint);
+    }
+
+    function it_does_nothing_if_variant_does_not_have_product(
+        ExecutionContextInterface $executionContext,
+        ProductVariantInterface $variant,
+    ): void {
+        $constraint = new ProductVariantOptionValuesConfiguration();
+
+        $variant->getProduct()->willReturn(null);
+
+        $executionContext->addViolation($constraint->message)->shouldNotBeCalled();
+
+        $this->validate($variant, $constraint);
+    }
+
+    function it_does_nothing_if_product_does_not_have_options(
+        ExecutionContextInterface $executionContext,
+        ProductVariantInterface $variant,
+        ProductInterface $product,
+    ): void {
+        $constraint = new ProductVariantOptionValuesConfiguration();
+
+        $variant->getProduct()->willReturn($product);
+        $product->hasOptions()->willReturn(false);
 
         $executionContext->addViolation($constraint->message)->shouldNotBeCalled();
 

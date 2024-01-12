@@ -31,11 +31,19 @@ final class ProductVariantOptionValuesConfigurationValidator extends ConstraintV
         /** @var ProductVariantOptionValuesConfiguration $constraint */
         Assert::isInstanceOf($constraint, ProductVariantOptionValuesConfiguration::class);
 
-        $options = $value->getProduct()->getOptions();
-        $optionValues = $value->getOptionValues();
+        $product = $value->getProduct();
+        if ($product === null || !$product->hasOptions()) {
+            return;
+        }
 
-        $requiredOptionCodes = array_map(fn (ProductOptionInterface $productOption) => $productOption->getCode(), $options->toArray());
-        $variantOptionCodes = array_map(fn (ProductOptionValueInterface $productOptionValue) => $productOptionValue->getOptionCode(), $optionValues->toArray());
+        $requiredOptionCodes = array_map(
+            fn (ProductOptionInterface $productOption) => $productOption->getCode(),
+            $product->getOptions()->toArray(),
+        );
+        $variantOptionCodes = array_map(
+            fn (ProductOptionValueInterface $productOptionValue) => $productOptionValue->getOptionCode(),
+            $value->getOptionValues()->toArray(),
+        );
 
         if (!empty(array_diff($requiredOptionCodes, $variantOptionCodes))) {
             $this->context->addViolation($constraint->message);
