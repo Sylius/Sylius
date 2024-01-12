@@ -13,6 +13,8 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Validator\Constraints;
 
+use Sylius\Component\Channel\Model\ChannelsAwareInterface;
+use Sylius\Component\Channel\Model\ChannelInterface as BaseChannelInterface;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Symfony\Component\Validator\Constraint;
@@ -38,9 +40,38 @@ final class ChannelCodeCollectionValidator extends ConstraintValidator
             throw new UnexpectedValueException($value, 'array');
         }
 
+        if ($constraint->validateAgainstAllChannels) {
+            $this->validateInChannelCollection($value, $this->channelRepository->findAll(), $constraint);
+
+            return;
+        }
+
+        $root = $this->context->getRoot();
+        if (!$root instanceof ChannelsAwareInterface) {
+            throw new \LogicException( sprintf(
+                'The validated root needs to implement the %s interface when option`validateAgainstAllChannels` is set to false.',
+                ChannelsAwareInterface::class,
+            ));
+        }
+
+        $this->validateInChannelCollection($value, $root->getChannels()->toArray(), $constraint);
+    }
+
+    /**
+     * @param array<array-key, array<array-key, mixed>> $value
+     * @param array<BaseChannelInterface> $channels
+     */
+    private function validateInChannelCollection(
+        array $value,
+        array $channels,
+        ChannelCodeCollection $constraint,
+    ): void {
         $fields = [];
-        foreach ($this->channelRepository->findAll() as $channel) {
+        foreach ($channels as $channel) {
             $fields[$channel->getCode()] = $constraint->constraints;
+        }
+        if ([] === $fields) {
+            return;
         }
 
         $collection = new Collection(
@@ -52,6 +83,7 @@ final class ChannelCodeCollectionValidator extends ConstraintValidator
             $constraint->extraFieldsMessage,
             $constraint->missingFieldsMessage,
         );
+
         $validator = $this->context->getValidator()->inContext($this->context);
         $validator->validate($value, $collection, $constraint->groups);
     }

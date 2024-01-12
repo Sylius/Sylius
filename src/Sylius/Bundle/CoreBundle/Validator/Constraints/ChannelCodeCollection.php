@@ -28,6 +28,8 @@ final class ChannelCodeCollection extends Constraint
 
     public ?string $missingFieldsMessage = null;
 
+    public bool $validateAgainstAllChannels = false;
+
     public function validatedBy(): string
     {
         return 'sylius_channel_code_collection';
