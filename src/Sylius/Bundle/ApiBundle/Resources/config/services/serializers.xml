@@ -143,5 +143,9 @@
         <service id="Sylius\Bundle\ApiBundle\Serializer\TranslatableLocaleKeyDenormalizer">
             <tag name="serializer.normalizer" priority="96" />
         </service>
+
+        <service id="Sylius\Bundle\ApiBundle\Serializer\ProductVariantChannelPricingsChannelCodeKeyDenormalizer">
+            <tag name="serializer.normalizer" priority="96" />
+        </service>
     </services>
 </container>
