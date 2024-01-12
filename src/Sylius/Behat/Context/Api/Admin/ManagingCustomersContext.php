@@ -622,4 +622,15 @@ final class ManagingCustomersContext implements Context
 
         Assert::null($this->responseChecker->getValue($response, 'user'));
     }
+
+    /**
+     * @Then I should not be able to delete it again
+     */
+    public function iShouldNotBeAbleToDeleteCustomerAgain(): void
+    {
+        $customer = $this->sharedStorage->get('customer');
+        $this->client->delete(sprintf('customer/%s', $customer->getId()), 'user');
+
+        Assert::same($this->client->getLastResponse()->getStatusCode(), 404);
+    }
 }
