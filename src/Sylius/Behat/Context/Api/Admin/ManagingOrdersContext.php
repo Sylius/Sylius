@@ -17,7 +17,6 @@ use ApiPlatform\Api\IriConverterInterface;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\RequestFactoryInterface;
-use Sylius\Behat\Client\RequestInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Context\Api\Resources;
 use Sylius\Behat\Context\Api\Subresources;
@@ -147,15 +146,12 @@ final class ManagingOrdersContext implements Context
      */
     public function iResendTheOrderConfirmationEmail(): void
     {
-        /** @var RequestInterface $request */
-        $request = $this->requestFactory->custom(
-            \sprintf('%s/admin/orders/resend-order-confirmation-email', $this->apiUrlPrefix),
+        $this->client->customItemAction(
+            Resources::ORDERS,
+            $this->sharedStorage->get('order')->getTokenValue(),
             HttpRequest::METHOD_POST,
+            'resend-confirmation-email',
         );
-
-        $request->setContent(['orderToken' => $this->sharedStorage->get('order')->getTokenValue()]);
-
-        $this->client->executeCustomRequest($request);
     }
 
     /**
@@ -332,9 +328,9 @@ final class ManagingOrdersContext implements Context
     }
 
     /**
-     * @Then /^I should be notified that the (order|shipment) confirmation email has been successfully resent to the customer$/
+     * @Then /^I should be notified that the order confirmation email has been successfully resent to the customer$/
      */
-    public function iShouldBeNotifiedThatTheOrderConfirmationEmailHasBeenSuccessfullyResentToTheCustomer(string $type): void
+    public function iShouldBeNotifiedThatTheOrderConfirmationEmailHasBeenSuccessfullyResentToTheCustomer(): void
     {
         $this->responseChecker->isCreationSuccessful($this->client->getLastResponse());
     }

@@ -301,11 +301,9 @@ final class OrdersTest extends JsonApiTestCase
 
         $this->client->request(
             method: 'POST',
-            uri: '/api/v2/admin/orders/resend-order-confirmation-email',
+            uri: sprintf('/api/v2/admin/orders/%s/resend-confirmation-email', $tokenValue),
             server: $this->buildHeaders('api@example.com'),
-            content: json_encode([
-                'orderToken' => $tokenValue,
-            ]),
+            content: json_encode([]),
         );
 
         $this->assertResponseCode($this->client->getResponse(), Response::HTTP_ACCEPTED);

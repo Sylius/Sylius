@@ -34,9 +34,9 @@ final class ResendOrderConfirmationEmailHandler implements MessageHandlerInterfa
     public function __invoke(ResendOrderConfirmationEmail $resendOrderConfirmation): void
     {
         /** @var OrderInterface|null $order */
-        $order = $this->orderRepository->findOneBy(['tokenValue' => $resendOrderConfirmation->orderToken()]);
+        $order = $this->orderRepository->findOneBy(['tokenValue' => $resendOrderConfirmation->getOrderTokenValue()]);
         if ($order === null) {
-            throw new NotFoundHttpException(sprintf('The order with id %s has not been found', $resendOrderConfirmation->orderToken()));
+            throw new NotFoundHttpException(sprintf('The order with id %s has not been found', $resendOrderConfirmation->getOrderTokenValue()));
         }
 
         $this->orderEmailManager->resendConfirmationEmail($order);
