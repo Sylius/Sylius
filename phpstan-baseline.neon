@@ -86,16 +86,6 @@ parameters:
 			path: src/Sylius/Bundle/AdminBundle/Action/ResendShipmentConfirmationEmailAction.php
 
 		-
-			message: "#^Method Sylius\\\\Bundle\\\\AdminBundle\\\\Command\\\\CreateAdminUserCommand\\:\\:askAdminUserData\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Sylius/Bundle/AdminBundle/Command/CreateAdminUserCommand.php
-
-		-
-			message: "#^Method Sylius\\\\Bundle\\\\AdminBundle\\\\Command\\\\CreateAdminUserCommand\\:\\:showSummary\\(\\) has parameter \\$adminUserData with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Sylius/Bundle/AdminBundle/Command/CreateAdminUserCommand.php
-
-		-
 			message: "#^Method Sylius\\\\Bundle\\\\AdminBundle\\\\Controller\\\\CustomerStatisticsController\\:\\:__construct\\(\\) has parameter \\$customerRepository with generic interface Sylius\\\\Component\\\\Resource\\\\Repository\\\\RepositoryInterface but does not specify its types\\: T$#"
 			count: 1
 			path: src/Sylius/Bundle/AdminBundle/Controller/CustomerStatisticsController.php

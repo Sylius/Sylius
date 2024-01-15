@@ -16,9 +16,11 @@ namespace Sylius\Bundle\AdminBundle\Tests\Command;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\AdminBundle\Command\CreateAdminUserCommand;
+use Sylius\Bundle\AdminBundle\Command\Factory\QuestionFactoryInterface;
 use Sylius\Bundle\AdminBundle\Exception\CreateAdminUserFailedException;
 use Sylius\Bundle\AdminBundle\Message\CreateAdminUser;
 use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Question\Question;
 use Symfony\Component\Console\Tester\CommandTester;
 use Symfony\Component\Messenger\Envelope;
 use Symfony\Component\Messenger\Exception\HandlerFailedException;
@@ -47,83 +49,52 @@ final class CreateAdminUserCommandTest extends TestCase
 
     private MockObject $messageBus;
 
+    private QuestionFactoryInterface $questionFactory;
+
     protected function setUp(): void
     {
         parent::setUp();
 
         $this->messageBus = $this->createMock(MessageBusInterface::class);
+        $this->questionFactory = $this->createMock(QuestionFactoryInterface::class);
 
         $this->command = new CommandTester(
-            new CreateAdminUserCommand($this->messageBus, self::LOCALE_CODE),
+            new CreateAdminUserCommand($this->messageBus, self::LOCALE_CODE, $this->questionFactory),
         );
     }
 
     /** @test */
     public function it_creates_an_admin_user_if_accepted_in_the_summary(): void
     {
-        $adminUserData = $this->getDefaultAdminUserDataSetup();
+        $this
+            ->questionFactory
+            ->expects($this->once())
+            ->method('createEmail')
+            ->willReturn($this->createQuestionMock('Email'));
 
-        $commandInputs = $this->getDefaultCommandInputsSetup();
+        $this
+            ->questionFactory
+            ->expects($this->exactly(2))
+            ->method('createWithNotNullValidator')
+            ->willReturnOnConsecutiveCalls(
+                $this->createQuestionMock('Username'),
+                $this->createQuestionMock('New password'),
+            );
 
-        $this->assertSuccessfulCommandExecution($adminUserData, $commandInputs);
-    }
+        $this->command->setInputs($this->getDefaultCommandInputsSetup());
 
-    /** @test */
-    public function it_has_set_up_three_attempts_to_write_a_valid_email(): void
-    {
-        $adminUserData = $this->getDefaultAdminUserDataSetup();
+        $message = new CreateAdminUser(...array_values($this->getDefaultAdminUserDataSetup()));
 
-        $commandInputs = array_merge(
-            [
-                'first_email_entry' => 'invalid-email',
-                'second_email_entry' => 'still-invalid-email',
-            ],
-            $this->getDefaultCommandInputsSetup(),
-        );
+        $this->messageBus->expects($this->once())
+            ->method('dispatch')
+            ->with($message)
+            ->willReturn(new Envelope($message, [new HandledStamp(self::anything(), 'handler')]))
+        ;
 
-        $this->assertSuccessfulCommandExecution($adminUserData, $commandInputs);
-    }
+        $this->command->execute([]);
 
-    /** @test */
-    public function it_has_set_up_three_attempts_to_write_a_non_blank_username(): void
-    {
-        $adminUserData = $this->getDefaultAdminUserDataSetup();
-
-        $commandInputs = [
-            'email' => self::EMAIL,
-            'first_username_entry' => '',
-            'second_username_entry' => '',
-            'username' => self::USERNAME,
-            'first_name' => self::FIRST_NAME,
-            'last_name' => self::LAST_NAME,
-            'password' => self::PASSWORD,
-            'locale_code' => self::LOCALE_CODE,
-            'admin_user_enabled' => self::YES,
-            'creation_confirmation' => self::YES,
-        ];
-
-        $this->assertSuccessfulCommandExecution($adminUserData, $commandInputs);
-    }
-
-    /** @test */
-    public function it_has_set_up_three_attempts_to_write_a_non_blank_password(): void
-    {
-        $adminUserData = $this->getDefaultAdminUserDataSetup();
-
-        $commandInputs = [
-            'email' => self::EMAIL,
-            'username' => self::USERNAME,
-            'first_name' => self::FIRST_NAME,
-            'last_name' => self::LAST_NAME,
-            'first_password_entry' => '',
-            'second_password_entry' => '',
-            'password' => self::PASSWORD,
-            'locale_code' => self::LOCALE_CODE,
-            'admin_user_enabled' => self::YES,
-            'creation_confirmation' => self::YES,
-        ];
-
-        $this->assertSuccessfulCommandExecution($adminUserData, $commandInputs);
+        $this->command->assertCommandIsSuccessful();
+        self::assertStringContainsString('Admin user has been successfully created.', $this->command->getDisplay());
     }
 
     /** @test */
@@ -140,6 +111,21 @@ final class CreateAdminUserCommandTest extends TestCase
             'creation_confirmation' => self::NO,
         ]);
 
+        $this
+            ->questionFactory
+            ->expects($this->once())
+            ->method('createEmail')
+            ->willReturn($this->createQuestionMock('Email'));
+
+        $this
+            ->questionFactory
+            ->expects($this->exactly(2))
+            ->method('createWithNotNullValidator')
+            ->willReturnOnConsecutiveCalls(
+                $this->createQuestionMock('Username'),
+                $this->createQuestionMock('New password'),
+            );
+
         $this->messageBus->expects($this->never())->method('dispatch');
 
         self::assertSame(Command::INVALID, $this->command->execute([]));
@@ -154,6 +140,21 @@ final class CreateAdminUserCommandTest extends TestCase
         $this->command->setInputs($this->getDefaultCommandInputsSetup());
 
         $message = new CreateAdminUser(...array_values($adminUserData));
+
+        $this
+            ->questionFactory
+            ->expects($this->once())
+            ->method('createEmail')
+            ->willReturn($this->createQuestionMock('Email'));
+
+        $this
+            ->questionFactory
+            ->expects($this->exactly(2))
+            ->method('createWithNotNullValidator')
+            ->willReturnOnConsecutiveCalls(
+                $this->createQuestionMock('Username'),
+                $this->createQuestionMock('New password'),
+            );
 
         $this->messageBus->expects($this->once())
             ->method('dispatch')
@@ -173,24 +174,6 @@ final class CreateAdminUserCommandTest extends TestCase
     public function it_does_not_create_an_admin_user_if_command_is_not_interactive(): void
     {
         self::assertSame(Command::FAILURE, $this->command->execute([], ['interactive' => false]));
-    }
-
-    private function assertSuccessfulCommandExecution(array $adminUserData, array $commandInputs): void
-    {
-        $this->command->setInputs($commandInputs);
-
-        $message = new CreateAdminUser(...array_values($adminUserData));
-
-        $this->messageBus->expects($this->once())
-            ->method('dispatch')
-            ->with($message)
-            ->willReturn(new Envelope($message, [new HandledStamp(self::anything(), 'handler')]))
-        ;
-
-        $this->command->execute([]);
-
-        $this->command->assertCommandIsSuccessful();
-        self::assertStringContainsString('Admin user has been successfully created.', $this->command->getDisplay());
     }
 
     private function getDefaultCommandInputsSetup(): array
@@ -218,5 +201,18 @@ final class CreateAdminUserCommandTest extends TestCase
             'locale_code' => self::LOCALE_CODE,
             'admin_user_enabled' => true,
         ];
+    }
+
+    private function createQuestionMock(string $askedQuestion): MockObject
+    {
+        $question = $this->createMock(Question::class);
+        $question
+            ->method('isTrimmable')
+            ->willReturn(true);
+        $question
+            ->method('getQuestion')
+            ->willReturn($askedQuestion);
+
+        return $question;
     }
 }
