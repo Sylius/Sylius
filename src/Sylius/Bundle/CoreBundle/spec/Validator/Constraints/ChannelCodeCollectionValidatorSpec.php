@@ -19,6 +19,7 @@ use Sylius\Bundle\CoreBundle\Validator\Constraints\ChannelCodeCollection;
 use Sylius\Component\Channel\Model\ChannelsAwareInterface;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
+use Symfony\Component\Form\Form;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\Constraints\Collection;
 use Symfony\Component\Validator\Constraints\NotBlank;
@@ -65,6 +66,52 @@ final class ChannelCodeCollectionValidatorSpec extends ObjectBehavior
             ->shouldThrow(\LogicException::class)
             ->during('validate', [[], new ChannelCodeCollection(['validateAgainstAllChannels' => false])])
         ;
+    }
+
+    function it_retrieves_an_object_from_value_if_value_is_form_and_validates_collections_for_local_channels(
+        ChannelRepositoryInterface $channelRepository,
+        ChannelInterface $channelMobile,
+        ChannelInterface $channelWeb,
+        ChannelsAwareInterface $channelsAware,
+        ContextualValidatorInterface $contextualValidator,
+        ExecutionContextInterface $context,
+        Form $form,
+        ValidatorInterface $validator,
+    ): void {
+        $channelWeb->getCode()->willReturn('WEB');
+        $channelMobile->getCode()->willReturn('MOBILE');
+
+        $channelsAware->getChannels()->willReturn(new ArrayCollection([
+            $channelMobile->getWrappedObject(),
+            $channelWeb->getWrappedObject(),
+        ]));
+
+        $context->getRoot()->willReturn($form);
+        $form->getNormData()->willReturn($channelsAware);
+
+        $constraints = [new NotBlank(), new Type('numeric')];
+        $groups = ['Default', 'test_group'];
+        $value = ['one', 'two'];
+
+        $collection = new Collection(
+            [
+                'WEB' => $constraints,
+                'MOBILE' => $constraints,
+            ],
+            $groups,
+        );
+
+        $channelRepository->findAll()->shouldNotBeCalled();
+
+        $context->getValidator()->willReturn($validator);
+        $validator->inContext($context)->willReturn($contextualValidator);
+
+        $contextualValidator->validate($value, $collection, $groups)->willReturn($contextualValidator)->shouldBeCalled();
+
+        $this->validate($value, new ChannelCodeCollection([
+            'constraints' => $constraints,
+            'groups' => $groups,
+        ]));
     }
 
     function it_validates_collections_for_local_channels(

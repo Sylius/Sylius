@@ -17,6 +17,7 @@ use Sylius\Component\Channel\Model\ChannelsAwareInterface;
 use Sylius\Component\Channel\Model\ChannelInterface as BaseChannelInterface;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
+use Symfony\Component\Form\Form;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\Constraints\Collection;
 use Symfony\Component\Validator\ConstraintValidator;
@@ -46,15 +47,20 @@ final class ChannelCodeCollectionValidator extends ConstraintValidator
             return;
         }
 
-        $root = $this->context->getRoot();
-        if (!$root instanceof ChannelsAwareInterface) {
+        $object = $this->context->getRoot();
+
+        if ($object instanceof Form) {
+            $object = $object->getNormData();
+        }
+
+        if (!$object instanceof ChannelsAwareInterface) {
             throw new \LogicException( sprintf(
                 'The validated root needs to implement the %s interface when option`validateAgainstAllChannels` is set to false.',
                 ChannelsAwareInterface::class,
             ));
         }
 
-        $this->validateInChannelCollection($value, $root->getChannels()->toArray(), $constraint);
+        $this->validateInChannelCollection($value, $object->getChannels()->toArray(), $constraint);
     }
 
     /**
