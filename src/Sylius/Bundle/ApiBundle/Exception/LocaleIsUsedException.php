@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\LocaleBundle\Checker\Exception;
+namespace Sylius\Bundle\ApiBundle\Exception;
 
 use Exception;
 
