@@ -131,11 +131,8 @@ Deployment
 .. toctree::
     :hidden:
 
-    deployment/symfonycloud
     deployment/platform-sh
-    deployment/cloudways
     deployment/cron-jobs
-    deployment/artifakt
     deployment/docker
 
 .. include:: /cookbook/deployment/map.rst.inc
