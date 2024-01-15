@@ -33,7 +33,7 @@
     },
     "businessActivitySummary": {
         "totalSales": 2500,
-        "newOrdersCount": 1,
+        "paidOrdersCount": 1,
         "newCustomersCount": 0,
         "averageOrderValue": 2500
     }

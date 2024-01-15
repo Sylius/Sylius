@@ -20,7 +20,7 @@ class BusinessActivitySummary
      */
     public function __construct(
         private int $totalSales,
-        private int $newOrdersCount,
+        private int $paidOrdersCount,
         private int $newCustomersCount,
     ) {
     }
@@ -30,9 +30,9 @@ class BusinessActivitySummary
         return $this->totalSales;
     }
 
-    public function getNewOrdersCount(): int
+    public function getPaidOrdersCount(): int
     {
-        return $this->newOrdersCount;
+        return $this->paidOrdersCount;
     }
 
     public function getNewCustomersCount(): int
@@ -42,10 +42,10 @@ class BusinessActivitySummary
 
     public function getAverageOrderValue(): int
     {
-        if (0 === $this->newOrdersCount) {
+        if (0 === $this->paidOrdersCount) {
             return 0;
         }
 
-        return (int) round($this->totalSales / $this->newOrdersCount);
+        return (int) round($this->totalSales / $this->paidOrdersCount);
     }
 }

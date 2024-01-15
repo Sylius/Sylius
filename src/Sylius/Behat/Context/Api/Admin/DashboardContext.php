@@ -74,8 +74,25 @@ final class DashboardContext implements Context
     }
 
     /**
-     * @Then I should see :count new orders
-     * @Then I should see :count new orders in the list
+     * @When I view statistics for :channel channel and next year split by month
+     */
+    public function iViewStatisticsForChannelAndNextYear(ChannelInterface $channel): void
+    {
+        $currentYear = (int) $this->dateTimeProvider->now()->format('Y');
+
+        $this->client->index(
+            'statistics',
+            [
+                'channelCode' => $channel->getCode(),
+                'startDate' => ($currentYear + 1) . '-01-01T00:00:00',
+                'dateInterval' => 'P1M',
+                'endDate' => ($currentYear + 1) . '-12-31T23:59:59',
+            ],
+        );
+    }
+
+    /**
+     * @Then I should see :count paid orders
      */
     public function iShouldSeeNewOrders(int $count): void
     {
@@ -83,7 +100,7 @@ final class DashboardContext implements Context
             $this->responseChecker->hasValuesInSubresourceObject(
                 $this->client->getLastResponse(),
                 'businessActivitySummary',
-                ['newOrdersCount' => $count],
+                ['paidOrdersCount' => $count],
             ),
         );
     }

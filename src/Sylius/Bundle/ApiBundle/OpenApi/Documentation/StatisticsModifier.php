@@ -58,7 +58,7 @@ final class StatisticsModifier implements DocumentationModifierInterface
                     'type' => 'integer',
                     'example' => '10',
                 ],
-                'newOrdersCount' => [
+                'paidOrdersCount' => [
                     'type' => 'integer',
                     'example' => '12',
                 ],
