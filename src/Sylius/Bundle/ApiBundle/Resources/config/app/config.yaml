@@ -60,6 +60,7 @@ api_platform:
         Sylius\Bundle\ApiBundle\Exception\ChannelPricingChannelCodeMismatchException: 422
         Sylius\Bundle\ApiBundle\Exception\InvalidProductAttributeValueTypeException: 422
         Sylius\Bundle\ApiBundle\Exception\InvalidRequestArgumentException: 400
+        Sylius\Bundle\ApiBundle\Exception\LocaleIsUsedException: 422
         Sylius\Bundle\ApiBundle\Exception\OrderItemNotFoundException: 422
         Sylius\Bundle\ApiBundle\Exception\OrderNoLongerEligibleForPromotion: 422
         Sylius\Bundle\ApiBundle\Exception\PaymentMethodCannotBeRemoved: 422
@@ -75,7 +76,6 @@ api_platform:
         Sylius\Bundle\ApiBundle\Exception\ZoneCannotBeRemoved: 422
         Sylius\Bundle\ApiBundle\Exception\CannotRemoveMenuTaxonException: 409
         Sylius\Bundle\ApiBundle\Exception\PromotionCannotBeRemoved: 422
-        Sylius\Bundle\LocaleBundle\Checker\Exception\LocaleIsUsedException: 422
         Sylius\Bundle\UserBundle\Exception\UserNotFoundException: 404
         Sylius\Component\Promotion\Exception\FailedGenerationException: 422
         Symfony\Component\Serializer\Exception\UnexpectedValueException: 400
