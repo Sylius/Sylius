@@ -54,6 +54,8 @@ sylius:
             min: Le prix ne peut pas être inférieur à 0.
             not_blank: Veuillez saisir un prix.
     checkout:
+        addressing:
+            csrf_error: Veuillez soumettre à nouveau le formulaire complet.
         shipping_method:
             not_blank: Veuillez sélectionner un mode de livraison.
         email:
@@ -64,12 +66,18 @@ sylius:
             not_blank: Veuillez saisir votre adresse email.
         message:
             not_blank: Veuillez saisir votre message.
+    country:
+        code:
+            not_exist: Le pays avec le code {{ code }} n'existe pas.
     currency:
         enabled:
             cannot_disable_base: La devise de base ne peut pas être désactivée.
     customer:
         currency_code:
             not_valid: Le code de devise que vous avez entré n’est pas valide.
+    customer_group:
+        code:
+            not_exist: Le groupe de clients avec le code {{ code }} n'existe pas.
     cart_item:
         not_available: '%itemName% est en rupture de stock.'
         insufficient_stock: 'Stock insuffisant'
@@ -87,12 +95,16 @@ sylius:
     product:
         variants:
             all_prices_defined: Vous devez d’abord définir le prix des variantes de produit pour les canaux nouvellement affectés.
+        code:
+            not_exist: Le produit avec le code {{ code }} n'existe pas.
     product_attribute:
         invalid: La position doit être un entier positif.
     product_image:
         file:
             max_size: L'image est trop grande - {{ size }}{{ suffix }}. La taille maximum autorisée est de {{ limit }}{{ suffix }}.
             upload_ini_size: L'image est trop grande. La taille maximum autorisée est de {{ limit }}{{ suffix }}.
+        product_variant:
+            not_belong_to_owner: 'La variante de produit avec le code "%productVariantCode%" n''appartient pas au produit avec le code "%ownerCode%", qui est le propriétaire de l''image.'
     product_taxon:
         unique: Les taxons de produits ne peuvent pas être dupliqués.
         product:
@@ -135,6 +147,9 @@ sylius:
         rating:
             range: La note de l'avis doit être un entier entre 1 et 5.
             not_in_range: L'évaluation doit être comprise entre {{ min }} et {{ max }}.
+    taxon:
+        code:
+            not_exist: La taxonomie avec le code {{ code }} n'existe pas.
     taxon_image:
         file:
             max_size: L'image est trop grande - {{ size }}{{ suffix }}. La taille maximum autorisée est de {{ limit }}{{ suffix }}.
