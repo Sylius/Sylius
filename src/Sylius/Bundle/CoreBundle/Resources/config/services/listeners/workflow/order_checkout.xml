@@ -23,7 +23,7 @@
         </service>
 
         <service id="Sylius\Bundle\CoreBundle\EventListener\Workflow\OrderCheckout\ApplyCreateTransitionOnOrderListener">
-            <argument type="service" id="sylius.state_machine" />
+            <argument type="service" id="sylius_abstraction.state_machine" />
             <tag name="kernel.event_listener" event="workflow.sylius_order_checkout.completed.complete" priority="-400"/>
         </service>
 

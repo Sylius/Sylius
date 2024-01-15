@@ -59,6 +59,7 @@
         "sylius/resource-bundle": "^1.9",
         "sylius/review-bundle": "^1.12",
         "sylius/shipping-bundle": "^1.12",
+        "sylius/state-machine-abstraction": "^1.12",
         "sylius/taxation-bundle": "^1.12",
         "sylius/taxonomy-bundle": "^1.12",
         "sylius/mailer-bundle": "^1.8 || ^2.0@beta",

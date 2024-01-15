@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Bundle\CoreBundle\Tests\Functional\StateMachine;
 
 use PHPUnit\Framework\MockObject\MockObject;
-use Sylius\Bundle\CoreBundle\StateMachine\StateMachineInterface;
+use Sylius\Abstraction\StateMachine\StateMachineInterface;
 use Sylius\Component\Core\Model\Order;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\Shipment;
@@ -61,6 +61,6 @@ final class ShipmentWorkflowTest extends KernelTestCase
 
     private function getStateMachine(): StateMachineInterface
     {
-        return self::getContainer()->get('sylius.state_machine.adapter.symfony_workflow');
+        return self::getContainer()->get('sylius_abstraction.state_machine.adapter.symfony_workflow');
     }
 }

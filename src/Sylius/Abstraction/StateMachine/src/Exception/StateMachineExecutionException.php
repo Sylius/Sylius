@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\CoreBundle\StateMachine\Exception;
+namespace Sylius\Abstraction\StateMachine\Exception;
 
 class StateMachineExecutionException extends \Exception
 {

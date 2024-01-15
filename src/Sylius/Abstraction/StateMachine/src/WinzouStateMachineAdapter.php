@@ -11,11 +11,11 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\CoreBundle\StateMachine;
+namespace Sylius\Abstraction\StateMachine;
 
 use SM\Factory\FactoryInterface;
 use SM\SMException;
-use Sylius\Bundle\CoreBundle\StateMachine\Exception\StateMachineExecutionException;
+use Sylius\Abstraction\StateMachine\Exception\StateMachineExecutionException;
 
 final class WinzouStateMachineAdapter implements StateMachineInterface
 {
