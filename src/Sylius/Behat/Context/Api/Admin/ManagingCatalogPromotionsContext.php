@@ -488,7 +488,8 @@ final class ManagingCatalogPromotionsContext implements Context
             $catalogPromotion,
             InForVariantsScopeVariantChecker::TYPE,
             ['variants' => [$productVariant->getCode()],
-        ]);
+        ],
+        );
     }
 
     /**
@@ -1422,6 +1423,7 @@ final class ManagingCatalogPromotionsContext implements Context
             'The percentage discount amount must be a number and can not be empty.',
         );
     }
+
     /**
      * @Then I should be notified that the fixed amount should be a number and cannot be empty
      */

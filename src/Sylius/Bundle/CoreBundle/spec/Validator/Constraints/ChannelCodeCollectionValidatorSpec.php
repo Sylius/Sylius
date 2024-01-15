@@ -59,7 +59,6 @@ final class ChannelCodeCollectionValidatorSpec extends ObjectBehavior
     function it_throws_exception_when_validating_using_local_channels_and_object_does_not_implement_channels_aware_interface(
         ExecutionContextInterface $context,
     ): void {
-
         $context->getRoot()->willReturn(new \stdClass());
 
         $this

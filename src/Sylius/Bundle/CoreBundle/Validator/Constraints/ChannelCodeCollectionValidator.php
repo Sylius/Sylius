@@ -13,8 +13,8 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Validator\Constraints;
 
-use Sylius\Component\Channel\Model\ChannelsAwareInterface;
 use Sylius\Component\Channel\Model\ChannelInterface as BaseChannelInterface;
+use Sylius\Component\Channel\Model\ChannelsAwareInterface;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Symfony\Component\Form\Form;
@@ -54,7 +54,7 @@ final class ChannelCodeCollectionValidator extends ConstraintValidator
         }
 
         if (!$object instanceof ChannelsAwareInterface) {
-            throw new \LogicException( sprintf(
+            throw new \LogicException(sprintf(
                 'The validated root needs to implement the %s interface when option`validateAgainstAllChannels` is set to false.',
                 ChannelsAwareInterface::class,
             ));

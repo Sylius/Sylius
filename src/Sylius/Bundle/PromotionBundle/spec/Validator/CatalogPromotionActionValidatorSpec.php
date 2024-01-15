@@ -20,7 +20,6 @@ use Sylius\Bundle\PromotionBundle\Validator\Constraints\CatalogPromotionAction;
 use Sylius\Component\Promotion\Model\CatalogPromotionActionInterface;
 use Symfony\Component\Validator\ConstraintValidator;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
-use Symfony\Component\Validator\Violation\ConstraintViolationBuilderInterface;
 
 final class CatalogPromotionActionValidatorSpec extends ObjectBehavior
 {
