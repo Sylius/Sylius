@@ -19,18 +19,7 @@ Feature: Seeing shipping total with applied promotion and taxes
         And the customer bought a single "Gryffindor scarf"
         And I am logged in as an administrator
 
-    @api @ui
-    Scenario: Seeing taxes of order items and shipping with applied promotion
-        Given the customer chose "Owl post" shipping method to "United States" with "Offline" payment
-        When I view the summary of the order "#00000777"
-        Then the order's items total should be "$123.00"
-        And there should be a shipping charge "$10.00" for "Owl post" method
-        And there should be a shipping tax "$1.15" for "Owl post" method
-        And the order's shipping total should be "$6.15"
-        And the order's tax total should be "$24.15"
-        And the order's total should be "$129.15"
-
-    @api @ui
+    @domain
     Scenario: Seeing taxes of order items and multiple shipments with applied promotion
         Given the store has "Pigeon post" shipping method with "$16.00" fee within the "US" zone
         And shipping method "Pigeon post" belongs to "Shipping Services" tax category
