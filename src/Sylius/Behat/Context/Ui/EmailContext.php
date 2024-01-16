@@ -129,6 +129,25 @@ final class EmailContext implements Context
     }
 
     /**
+     * @Then an email with the confirmation of the order :order should not be sent to :email
+     */
+    public function anEmailWithTheConfirmationOfTheOrderShouldNotBeSentTo(
+        OrderInterface $order,
+        string $recipient,
+        string $localeCode = 'en_US',
+    ): void {
+        $this->assertEmailDoesNotContainsMessageTo(
+            sprintf(
+                '%s %s %s',
+                $this->translator->trans('sylius.email.order_confirmation.your_order_number', [], null, $localeCode),
+                $order->getNumber(),
+                $this->translator->trans('sylius.email.order_confirmation.has_been_successfully_placed', [], null, $localeCode),
+            ),
+            $recipient,
+        );
+    }
+
+    /**
      * @Then /^an email with the summary of (order placed by "[^"]+") should be sent to him$/
      * @Then /^an email with the summary of (order placed by "[^"]+") should be sent to him in ("([^"]+)" locale)$/
      */
@@ -194,6 +213,11 @@ final class EmailContext implements Context
     public function onlyOneEmailShouldHaveBeenSentTo(string $recipient): void
     {
         Assert::eq($this->emailChecker->countMessagesTo($recipient), 1);
+    }
+
+    private function assertEmailDoesNotContainsMessageTo(string $message, string $recipient): void
+    {
+        Assert::false($this->emailChecker->hasMessageTo($message, $recipient));
     }
 
     private function assertEmailContainsMessageTo(string $message, string $recipient): void

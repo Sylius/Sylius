@@ -1,6 +1,8 @@
-<div class="ui segment">
-    {% set path = path('sylius_admin_order_resend_confirmation_email', {'id': order.id, '_csrf_token': csrf_token(order.id)}) %}
-    <a href="{{ path }}" class="ui icon labeled tiny fluid button" {{ sylius_test_html_attribute('resend-order-confirmation-email') }}>
-        <i class="send icon"></i> {{ 'sylius.ui.resend_the_order_confirmation_email'|trans }}
-    </a>
-</div>
+{% if order.state == 'new'%}
+    <div class="ui segment">
+        {% set path = path('sylius_admin_order_resend_confirmation_email', {'id': order.id, '_csrf_token': csrf_token(order.id)}) %}
+        <a href="{{ path }}" class="ui icon labeled tiny fluid button" {{ sylius_test_html_attribute('resend-order-confirmation-email') }}>
+            <i class="send icon"></i> {{ 'sylius.ui.resend_the_order_confirmation_email'|trans }}
+        </a>
+    </div>
+{% endif %}

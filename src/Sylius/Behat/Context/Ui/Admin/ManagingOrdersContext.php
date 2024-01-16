@@ -999,6 +999,17 @@ final class ManagingOrdersContext implements Context
     }
 
     /**
+     * @Then I should not be able to resend the order confirmation email
+     */
+    public function iShouldNotBeAbleToResendTheOrderConfirmationEmail(): void
+    {
+        Assert::false(
+            $this->showPage->isResendOrderConfirmationEmailButtonVisible(),
+            'Resend order confirmation email button should not be visible, but it does.',
+        );
+    }
+
+    /**
      * @Then I should see the shipping date as :dateTime
      */
     public function iShouldSeeTheShippingDateAs(string $dateTime): void

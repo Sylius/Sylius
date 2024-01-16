@@ -104,6 +104,11 @@
             <tag name="validator.constraint_validator" alias="sylius_product_variant_code_exists" />
         </service>
 
+        <service id="sylius.validator.order_confirmation_with_valid_order_state" class="Sylius\Bundle\CoreBundle\Validator\Constraints\ResendOrderConfirmationEmailWithValidOrderStateValidator">
+            <argument type="service" id="sylius.repository.order" />
+            <tag name="validator.constraint_validator" alias="sylius_order_confirmation_with_valid_order_state" />
+        </service>
+
         <service id="sylius.validator.product_image_variants_belong_to_owner" class="Sylius\Bundle\CoreBundle\Validator\Constraints\ProductImageVariantsBelongToOwnerValidator">
             <tag name="validator.constraint_validator" alias="sylius_product_image_variants_belong_to_owner" />
         </service>
