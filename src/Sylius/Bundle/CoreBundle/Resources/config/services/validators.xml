@@ -106,6 +106,7 @@
 
         <service id="sylius.validator.order_confirmation_with_valid_order_state" class="Sylius\Bundle\CoreBundle\Validator\Constraints\ResendOrderConfirmationEmailWithValidOrderStateValidator">
             <argument type="service" id="sylius.repository.order" />
+            <argument>%sylius_order.resend_order_confirmation_email.order_states%</argument>
             <tag name="validator.constraint_validator" alias="sylius_order_confirmation_with_valid_order_state" />
         </service>
 

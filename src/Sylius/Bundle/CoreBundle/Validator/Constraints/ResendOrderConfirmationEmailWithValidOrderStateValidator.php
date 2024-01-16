@@ -25,9 +25,12 @@ final class ResendOrderConfirmationEmailWithValidOrderStateValidator extends Con
 {
     /**
      * @param RepositoryInterface<OrderInterface> $orderRepository
+     * @param array<string, string> $orderStatesToAllowResendingConfirmationEmail
      */
-    public function __construct(private RepositoryInterface $orderRepository)
-    {
+    public function __construct(
+        private RepositoryInterface $orderRepository,
+        private array $orderStatesToAllowResendingConfirmationEmail
+    ) {
     }
 
     public function validate(mixed $value, Constraint $constraint): void
@@ -47,7 +50,7 @@ final class ResendOrderConfirmationEmailWithValidOrderStateValidator extends Con
             throw new NotFoundHttpException(sprintf('Order with %s token has not been found.', $value->getOrderTokenValue()));
         }
 
-        if ($order->getState() !== OrderInterface::STATE_NEW) {
+        if (!in_array($order->getState(), $this->orderStatesToAllowResendingConfirmationEmail, true)) {
             $this->context->addViolation(
                 $constraint->message,
                 ['%state%' => $order->getState()],

@@ -1,4 +1,4 @@
-{% if order.state == 'new'%}
+{% if order.state in sylius_order_states_that_allows_to_resend_order_confirmation_email %}
     <div class="ui segment">
         {% set path = path('sylius_admin_order_resend_confirmation_email', {'id': order.id, '_csrf_token': csrf_token(order.id)}) %}
         <a href="{{ path }}" class="ui icon labeled tiny fluid button" {{ sylius_test_html_attribute('resend-order-confirmation-email') }}>

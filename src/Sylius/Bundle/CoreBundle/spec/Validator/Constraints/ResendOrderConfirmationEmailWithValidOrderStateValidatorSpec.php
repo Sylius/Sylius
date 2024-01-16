@@ -29,7 +29,7 @@ final class ResendOrderConfirmationEmailWithValidOrderStateValidatorSpec extends
 
     function let(RepositoryInterface $orderRepository, ExecutionContextInterface $context): void
     {
-        $this->beConstructedWith($orderRepository);
+        $this->beConstructedWith($orderRepository, [OrderInterface::STATE_NEW]);
 
         $this->initialize($context);
     }
