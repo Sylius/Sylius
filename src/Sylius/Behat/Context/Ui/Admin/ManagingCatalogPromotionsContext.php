@@ -1192,7 +1192,7 @@ final class ManagingCatalogPromotionsContext implements Context
     {
         Assert::contains(
             $this->formElement->getValidationMessage(),
-            'This field is missing.',
+            'Provided configuration contains errors. Please add the fixed discount amount that is a number greater than 0.',
         );
     }
 
