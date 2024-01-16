@@ -14,7 +14,8 @@ declare(strict_types=1);
 namespace spec\Sylius\Bundle\CoreBundle\MessageDispatcher;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\CoreBundle\Message\Admin\ResendOrderConfirmationEmail;
+use Sylius\Bundle\CoreBundle\Message\ResendOrderConfirmationEmail;
+use Sylius\Component\Core\Model\OrderInterface;
 use Symfony\Component\Messenger\Envelope;
 use Symfony\Component\Messenger\MessageBusInterface;
 
@@ -25,12 +26,15 @@ final class ResendOrderConfirmationEmailDispatcherSpec extends ObjectBehavior
         $this->beConstructedWith($messageBus);
     }
 
-    function it_dispatches_a_resend_confirmation_email(MessageBusInterface $messageBus): void
-    {
+    function it_dispatches_a_resend_confirmation_email(
+        MessageBusInterface $messageBus,
+        OrderInterface $order,
+    ): void {
+        $order->getTokenValue()->willReturn('token');
         $message = new ResendOrderConfirmationEmail('token');
 
         $messageBus->dispatch($message)->willReturn(new Envelope($message))->shouldBeCalled();
 
-        $this->dispatch('token');
+        $this->dispatch($order);
     }
 }

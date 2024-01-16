@@ -46,13 +46,11 @@ final class ManagingOrdersContext implements Context
     public function __construct(
         private ApiClientInterface $client,
         private ResponseCheckerInterface $responseChecker,
-        private RequestFactoryInterface $requestFactory,
         private IriConverterInterface $iriConverter,
         private SecurityServiceInterface $adminSecurityService,
         private SharedStorageInterface $sharedStorage,
         private SharedSecurityServiceInterface $sharedSecurityService,
         private SectionAwareIriConverterInterface $sectionAwareIriConverter,
-        private string $apiUrlPrefix,
     ) {
     }
 
@@ -328,7 +326,7 @@ final class ManagingOrdersContext implements Context
     }
 
     /**
-     * @Then /^I should be notified that the order confirmation email has been successfully resent to the customer$/
+     * @Then I should be notified that the order confirmation email has been successfully resent to the customer
      */
     public function iShouldBeNotifiedThatTheOrderConfirmationEmailHasBeenSuccessfullyResentToTheCustomer(): void
     {

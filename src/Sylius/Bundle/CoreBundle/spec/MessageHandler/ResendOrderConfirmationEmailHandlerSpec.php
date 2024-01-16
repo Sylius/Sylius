@@ -11,11 +11,11 @@
 
 declare(strict_types=1);
 
-namespace spec\Sylius\Bundle\CoreBundle\MessageHandler\Admin;
+namespace spec\Sylius\Bundle\CoreBundle\MessageHandler;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\CoreBundle\EmailManager\OrderEmailManagerInterface;
-use Sylius\Bundle\CoreBundle\Message\Admin\ResendOrderConfirmationEmail;
+use Sylius\Bundle\CoreBundle\Message\ResendOrderConfirmationEmail;
 use Sylius\Component\Core\Model\Order;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;

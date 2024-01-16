@@ -35,7 +35,7 @@
             <tag name="messenger.message_handler" bus="sylius_default.bus" />
         </service>
 
-        <service id="Sylius\Bundle\CoreBundle\MessageHandler\Admin\ResendOrderConfirmationEmailHandler">
+        <service id="Sylius\Bundle\CoreBundle\MessageHandler\ResendOrderConfirmationEmailHandler">
             <argument type="service" id="Sylius\Bundle\CoreBundle\EmailManager\OrderEmailManagerInterface" />
             <argument type="service" id="sylius.repository.order" />
             <tag name="messenger.message_handler" bus="sylius.command_bus" />

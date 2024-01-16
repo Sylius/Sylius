@@ -13,7 +13,8 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\MessageDispatcher;
 
-use Sylius\Bundle\CoreBundle\Message\Admin\ResendOrderConfirmationEmail;
+use Sylius\Bundle\CoreBundle\Message\ResendOrderConfirmationEmail;
+use Sylius\Component\Core\Model\OrderInterface;
 use Symfony\Component\Messenger\MessageBusInterface;
 
 final class ResendOrderConfirmationEmailDispatcher implements ResendOrderConfirmationEmailDispatcherInterface
@@ -22,8 +23,8 @@ final class ResendOrderConfirmationEmailDispatcher implements ResendOrderConfirm
     {
     }
 
-    public function dispatch(string $orderToken): void
+    public function dispatch(OrderInterface $order): void
     {
-        $this->messageBus->dispatch(new ResendOrderConfirmationEmail($orderToken));
+        $this->messageBus->dispatch(new ResendOrderConfirmationEmail($order->getTokenValue()));
     }
 }

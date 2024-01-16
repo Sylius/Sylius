@@ -56,6 +56,13 @@ final class ResendOrderConfirmationEmailAction
                 self::class,
                 ResendOrderConfirmationEmailDispatcherInterface::class,
             );
+
+            trigger_deprecation(
+                'sylius/admin-bundle',
+                '1.13',
+                'The argument name of %s is deprecated and will be renamed to $resendOrderConfirmationEmailDispatcher in Sylius 2.0.',
+                OrderEmailManagerInterface::class,
+            );
         }
     }
 
@@ -90,7 +97,7 @@ final class ResendOrderConfirmationEmailAction
         if ($this->orderEmailManager instanceof OrderEmailManagerInterface) {
             $this->orderEmailManager->sendConfirmationEmail($order);
         } else {
-            $this->orderEmailManager->dispatch($order->getTokenValue());
+            $this->orderEmailManager->dispatch($order);
         }
     }
 }

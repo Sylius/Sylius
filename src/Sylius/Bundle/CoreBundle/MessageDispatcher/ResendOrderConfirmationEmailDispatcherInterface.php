@@ -13,7 +13,9 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\MessageDispatcher;
 
+use Sylius\Component\Core\Model\OrderInterface;
+
 interface ResendOrderConfirmationEmailDispatcherInterface
 {
-    public function dispatch(string $orderToken): void;
+    public function dispatch(OrderInterface $order): void;
 }

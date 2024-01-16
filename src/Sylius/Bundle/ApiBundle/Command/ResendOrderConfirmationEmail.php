@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\Command;
 
-use Sylius\Bundle\CoreBundle\Message\Admin\ResendOrderConfirmationEmail as BaseResendOrderConfirmationEmail;
+use Sylius\Bundle\CoreBundle\Message\ResendOrderConfirmationEmail as BaseResendOrderConfirmationEmail;
 
 class ResendOrderConfirmationEmail extends BaseResendOrderConfirmationEmail implements OrderTokenValueAwareInterface
 {
