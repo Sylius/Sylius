@@ -29,6 +29,7 @@ final class ShipmentEmailManager implements ShipmentEmailManagerInterface
     {
         /** @var OrderInterface $order */
         $order = $shipment->getOrder();
+        Assert::notNull($order);
         $email = $order->getCustomer()->getEmail();
         Assert::notNull($email);
 

@@ -13,7 +13,9 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\MessageDispatcher;
 
+use Sylius\Component\Core\Model\ShipmentInterface;
+
 interface ResendShipmentConfirmationEmailDispatcherInterface
 {
-    public function dispatch(int|string $shipmentId): void;
+    public function dispatch(ShipmentInterface $shipment): void;
 }

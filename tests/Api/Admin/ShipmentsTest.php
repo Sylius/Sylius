@@ -95,9 +95,9 @@ final class ShipmentsTest extends JsonApiTestCase
 
         $this->client->request(
             method: 'POST',
-            uri: '/api/v2/admin/shipments/resend-shipment-confirmation-email',
+            uri: '/api/v2/admin/shipments/' . $order->getShipments()->last()->getId() . '/resend-confirmation-email',
             server: $this->buildHeadersWithJsonLd('api@example.com'),
-            content: json_encode(['shipmentId' => $order->getShipments()->first()->getId()]),
+            content: json_encode([]),
         );
 
         $response = $this->client->getResponse();

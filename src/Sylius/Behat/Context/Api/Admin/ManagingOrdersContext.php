@@ -172,15 +172,12 @@ final class ManagingOrdersContext implements Context
      */
     public function iResendTheShipmentConfirmationEmail(): void
     {
-        /** @var RequestInterface $request */
-        $request = $this->requestFactory->custom(
-            \sprintf('%s/admin/shipments/resend-shipment-confirmation-email', $this->apiUrlPrefix),
+        $this->client->customItemAction(
+            Resources::SHIPMENTS,
+            (string)$this->sharedStorage->get('order')->getShipments()->last()->getId(),
             HttpRequest::METHOD_POST,
+            'resend-confirmation-email',
         );
-
-        $request->setContent(['shipmentId' => $this->sharedStorage->get('order')->getShipments()->first()->getId()]);
-
-        $this->client->executeCustomRequest($request);
     }
 
     /**

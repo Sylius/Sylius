@@ -11,10 +11,10 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\CoreBundle\MessageHandler\Admin;
+namespace Sylius\Bundle\CoreBundle\MessageHandler;
 
 use Sylius\Bundle\CoreBundle\EmailManager\ShipmentEmailManagerInterface;
-use Sylius\Bundle\CoreBundle\Message\Admin\ResendShipmentConfirmationEmail;
+use Sylius\Bundle\CoreBundle\Message\ResendShipmentConfirmationEmail;
 use Sylius\Component\Core\Model\ShipmentInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -34,9 +34,9 @@ final class ResendShipmentConfirmationEmailHandler implements MessageHandlerInte
     public function __invoke(ResendShipmentConfirmationEmail $resendShipmentConfirmationEmail): void
     {
         /** @var ShipmentInterface|null $shipment */
-        $shipment = $this->shipmentRepository->find($resendShipmentConfirmationEmail->shipmentId);
+        $shipment = $this->shipmentRepository->find($resendShipmentConfirmationEmail->getShipmentId());
         if (null === $shipment) {
-            throw new NotFoundHttpException(sprintf('Shipment with id "%s" does not exist.', $resendShipmentConfirmationEmail->shipmentId));
+            throw new NotFoundHttpException(sprintf('Shipment with id "%s" does not exist.', $resendShipmentConfirmationEmail->getShipmentId()));
         }
 
         $this->shipmentEmailManager->resendConfirmationEmail($shipment);

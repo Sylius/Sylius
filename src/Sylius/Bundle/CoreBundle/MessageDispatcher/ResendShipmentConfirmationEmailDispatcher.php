@@ -13,7 +13,8 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\MessageDispatcher;
 
-use Sylius\Bundle\CoreBundle\Message\Admin\ResendShipmentConfirmationEmail;
+use Sylius\Bundle\CoreBundle\Message\ResendShipmentConfirmationEmail;
+use Sylius\Component\Core\Model\ShipmentInterface;
 use Symfony\Component\Messenger\MessageBusInterface;
 
 final class ResendShipmentConfirmationEmailDispatcher implements ResendShipmentConfirmationEmailDispatcherInterface
@@ -22,8 +23,8 @@ final class ResendShipmentConfirmationEmailDispatcher implements ResendShipmentC
     {
     }
 
-    public function dispatch(int|string $shipmentId): void
+    public function dispatch(ShipmentInterface $shipment): void
     {
-        $this->messageBus->dispatch(new ResendShipmentConfirmationEmail($shipmentId));
+        $this->messageBus->dispatch(new ResendShipmentConfirmationEmail($shipment->getId()));
     }
 }

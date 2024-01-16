@@ -32,7 +32,7 @@ final class ResendShipmentConfirmationEmailAction
 {
     public function __construct(
         private ShipmentRepositoryInterface $shipmentRepository,
-        private ResendShipmentConfirmationEmailDispatcherInterface|ShipmentEmailManagerInterface $shipmentEmailManagerOrResendShipmentConfirmationEmailDispatcher,
+        private ResendShipmentConfirmationEmailDispatcherInterface|ShipmentEmailManagerInterface $shipmentEmailManager,
         private CsrfTokenManagerInterface $csrfTokenManager,
         private RequestStack|SessionInterface $requestStackOrSession,
     ) {
@@ -47,7 +47,7 @@ final class ResendShipmentConfirmationEmailAction
             );
         }
 
-        if ($this->shipmentEmailManagerOrResendShipmentConfirmationEmailDispatcher instanceof ShipmentEmailManagerInterface) {
+        if ($this->shipmentEmailManager instanceof ShipmentEmailManagerInterface) {
             trigger_deprecation(
                 'sylius/admin-bundle',
                 '1.13',
@@ -55,6 +55,13 @@ final class ResendShipmentConfirmationEmailAction
                 ShipmentEmailManagerInterface::class,
                 self::class,
                 ResendShipmentConfirmationEmailDispatcherInterface::class,
+            );
+
+            trigger_deprecation(
+                'sylius/admin-bundle',
+                '1.13',
+                'The argument name of %s is deprecated and will be renamed to $resendShipmentConfirmationDispatcher in Sylius 2.0.',
+                ShipmentEmailManagerInterface::class,
             );
         }
     }
@@ -87,10 +94,10 @@ final class ResendShipmentConfirmationEmailAction
 
     private function sendConfirmationEmailOrDispatchResendShipmentConfirmation(ShipmentInterface $shipment): void
     {
-        if ($this->shipmentEmailManagerOrResendShipmentConfirmationEmailDispatcher instanceof ShipmentEmailManagerInterface) {
-            $this->shipmentEmailManagerOrResendShipmentConfirmationEmailDispatcher->sendConfirmationEmail($shipment);
+        if ($this->shipmentEmailManager instanceof ShipmentEmailManagerInterface) {
+            $this->shipmentEmailManager->sendConfirmationEmail($shipment);
         } else {
-            $this->shipmentEmailManagerOrResendShipmentConfirmationEmailDispatcher->dispatch($shipment->getId());
+            $this->shipmentEmailManager->dispatch($shipment);
         }
     }
 }
