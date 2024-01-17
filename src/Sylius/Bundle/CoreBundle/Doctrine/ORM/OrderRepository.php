@@ -310,16 +310,8 @@ class OrderRepository extends BaseOrderRepository implements OrderRepositoryInte
         \DateTimeInterface $startDate,
         \DateTimeInterface $endDate,
     ): int {
-        return (int) $this->createQueryBuilder('o')
+        return (int) $this->createPaidOrdersInChannelPlacedWithinDateRangeQueryBuilder($channel, $startDate, $endDate)
             ->select('SUM(o.total)')
-            ->andWhere('o.channel = :channel')
-            ->andWhere('o.paymentState = :state')
-            ->andWhere('o.checkoutCompletedAt >= :startDate')
-            ->andWhere('o.checkoutCompletedAt <= :endDate')
-            ->setParameter('channel', $channel)
-            ->setParameter('state', OrderPaymentStates::STATE_PAID)
-            ->setParameter('startDate', $startDate)
-            ->setParameter('endDate', $endDate)
             ->getQuery()
             ->getSingleScalarResult()
         ;
@@ -330,15 +322,12 @@ class OrderRepository extends BaseOrderRepository implements OrderRepositoryInte
         \DateTimeInterface $startDate,
         \DateTimeInterface $endDate,
     ): array {
-        $queryBuilder = $this->createPaidOrdersSumInChannelQueryBuilder($channel);
+        $queryBuilder = $this->createPaidOrdersInChannelPlacedWithinDateRangeQueryBuilder($channel, $startDate, $endDate);
 
         return $queryBuilder
+            ->select('SUM(o.total) AS total')
             ->addSelect('YEAR(o.checkoutCompletedAt) AS year')
             ->addSelect('MONTH(o.checkoutCompletedAt) AS month')
-            ->andWhere('o.checkoutCompletedAt >= :startDate')
-            ->andWhere('o.checkoutCompletedAt <= :endDate')
-            ->setParameter('startDate', $startDate)
-            ->setParameter('endDate', $endDate)
             ->groupBy('year')
             ->addGroupBy('month')
             ->getQuery()
@@ -549,13 +538,19 @@ class OrderRepository extends BaseOrderRepository implements OrderRepositoryInte
         ;
     }
 
-    protected function createPaidOrdersSumInChannelQueryBuilder(ChannelInterface $channel): QueryBuilder
-    {
+    protected function createPaidOrdersInChannelPlacedWithinDateRangeQueryBuilder(
+        ChannelInterface $channel,
+        \DateTimeInterface $startDate,
+        \DateTimeInterface $endDate,
+    ): QueryBuilder {
         return $this->createQueryBuilder('o')
-            ->select('SUM(o.total) AS total')
             ->andWhere('o.paymentState = :paymentState')
             ->andWhere('o.channel = :channel')
+            ->andWhere('o.checkoutCompletedAt >= :startDate')
+            ->andWhere('o.checkoutCompletedAt <= :endDate')
             ->setParameter('paymentState', OrderPaymentStates::STATE_PAID)
-            ->setParameter('channel', $channel);
+            ->setParameter('channel', $channel)
+            ->setParameter('startDate', $startDate)
+            ->setParameter('endDate', $endDate);
     }
 }
