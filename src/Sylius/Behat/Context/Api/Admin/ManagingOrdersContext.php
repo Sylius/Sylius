@@ -346,14 +346,6 @@ final class ManagingOrdersContext implements Context
     }
 
     /**
-     * @Then I should be notified that the order confirmation email has been successfully resent to the customer
-     */
-    public function iShouldBeNotifiedThatTheOrderConfirmationEmailHasBeenSuccessfullyResentToTheCustomer(): void
-    {
-        $this->responseChecker->isCreationSuccessful($this->client->getLastResponse());
-    }
-
-    /**
      * @Then I should be notified that it has been successfully updated
      */
     public function iShouldBeNotifiedAboutItHasBeenSuccessfullyCanceled(): void
