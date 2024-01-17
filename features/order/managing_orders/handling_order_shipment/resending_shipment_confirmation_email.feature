@@ -31,3 +31,13 @@ Feature: Resending a shipment confirmation email for a chosen order
         And I resend the shipment confirmation email
         Then I should be notified that the shipment confirmation email has been successfully resent to the customer
         And an email with the shipment's confirmation of the order "#00000666" should be sent to "lucy@teamlucifer.com" in "Polish (Poland)" locale
+
+    @ui @email @api
+    Scenario: Not being able to resend a confirmation email for a given shipment with wrong state
+        Given this customer placed another order "#00000023"
+        And the customer bought a single "Angel T-Shirt"
+        And the customer "Lucifer Morningstar" addressed it to "Seaside Fwy", "90802" "Los Angeles" in the "United States" with identical billing address
+        And the customer chose "Free" shipping method with "Cash on Delivery" payment
+        When I view the summary of the order "#00000023"
+        Then I should not be able to resend the shipment confirmation email
+        And an email with the shipment's confirmation of the order "#00000023" should not be sent to "lucy@teamlucifer.com"

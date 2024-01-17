@@ -233,6 +233,17 @@ final class ManagingOrdersContext implements Context
     }
 
     /**
+     * @Then I should not be able to resend the shipment confirmation email
+     */
+    public function iShouldNotBeAbleToResendTheShipmentConfirmationEmail(): void
+    {
+        Assert::false(
+            $this->showPage->isResendShipmentConfirmationEmailButtonVisible(),
+            'Resend shipment confirmation email button should not be visible, but it does.',
+        );
+    }
+
+    /**
      * @Then I should see a single order in the list
      */
     public function iShouldSeeASingleOrderInTheList(): void

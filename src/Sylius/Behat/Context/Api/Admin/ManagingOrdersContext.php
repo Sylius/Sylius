@@ -16,8 +16,6 @@ namespace Sylius\Behat\Context\Api\Admin;
 use ApiPlatform\Api\IriConverterInterface;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
-use Sylius\Behat\Client\RequestFactoryInterface;
-use Sylius\Behat\Client\RequestInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Context\Api\Resources;
 use Sylius\Behat\Context\Api\Subresources;
@@ -52,7 +50,6 @@ final class ManagingOrdersContext implements Context
         private SharedStorageInterface $sharedStorage,
         private SharedSecurityServiceInterface $sharedSecurityService,
         private SectionAwareIriConverterInterface $sectionAwareIriConverter,
-        private string $apiUrlPrefix,
     ) {
     }
 
@@ -174,7 +171,7 @@ final class ManagingOrdersContext implements Context
     {
         $this->client->customItemAction(
             Resources::SHIPMENTS,
-            (string)$this->sharedStorage->get('order')->getShipments()->last()->getId(),
+            (string) $this->sharedStorage->get('order')->getShipments()->last()->getId(),
             HttpRequest::METHOD_POST,
             'resend-confirmation-email',
         );
@@ -475,6 +472,24 @@ final class ManagingOrdersContext implements Context
     public function theOrdersTaxTotalShouldBe(int $taxTotal): void
     {
         Assert::same($this->responseChecker->getValue($this->client->getLastResponse(), 'taxTotal'), $taxTotal);
+    }
+
+    /**
+     * @Then I should not be able to resend the shipment confirmation email
+     */
+    public function iShouldNotBeAbleToResendTheShipmentConfirmationEmail(): void
+    {
+        $this->client->customItemAction(
+            Resources::SHIPMENTS,
+            (string) $this->sharedStorage->get('order')->getShipments()->last()->getId(),
+            HttpRequest::METHOD_POST,
+            'resend-confirmation-email',
+        );
+
+        Assert::same(
+            $this->responseChecker->getError($this->client->getLastResponse()),
+            'Cannot resend shipment confirmation email for shipment in state ready.',
+        );
     }
 
     /**
