@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\AdminBundle\Command\Factory;
+namespace Sylius\Bundle\AdminBundle\Console\Command\Factory;
 
 use Symfony\Component\Console\Question\Question;
 

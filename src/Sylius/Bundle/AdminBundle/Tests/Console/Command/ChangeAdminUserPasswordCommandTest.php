@@ -11,12 +11,12 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\AdminBundle\Tests\Command;
+namespace Sylius\Bundle\AdminBundle\Tests\Console\Command;
 
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
-use Sylius\Bundle\AdminBundle\Command\ChangeAdminUserPasswordCommand;
-use Sylius\Bundle\AdminBundle\Command\Factory\QuestionFactoryInterface;
+use Sylius\Bundle\AdminBundle\Console\Command\ChangeAdminUserPasswordCommand;
+use Sylius\Bundle\AdminBundle\Console\Command\Factory\QuestionFactoryInterface;
 use Sylius\Component\Core\Model\AdminUser;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
 use Sylius\Component\User\Security\PasswordUpdaterInterface;

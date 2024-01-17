@@ -11,10 +11,10 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\AdminBundle\Tests\Command\Factory;
+namespace Sylius\Bundle\AdminBundle\Tests\Console\Command\Factory;
 
 use PHPUnit\Framework\TestCase;
-use Sylius\Bundle\AdminBundle\Command\Factory\QuestionFactory;
+use Sylius\Bundle\AdminBundle\Console\Command\Factory\QuestionFactory;
 
 final class QuestionFactoryTest extends TestCase
 {

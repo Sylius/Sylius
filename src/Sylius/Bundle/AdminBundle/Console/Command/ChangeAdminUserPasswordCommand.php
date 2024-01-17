@@ -11,9 +11,9 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\AdminBundle\Command;
+namespace Sylius\Bundle\AdminBundle\Console\Command;
 
-use Sylius\Bundle\AdminBundle\Command\Factory\QuestionFactoryInterface;
+use Sylius\Bundle\AdminBundle\Console\Command\Factory\QuestionFactoryInterface;
 use Sylius\Component\Core\Model\AdminUserInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
 use Sylius\Component\User\Security\PasswordUpdaterInterface;
