@@ -36,6 +36,7 @@ use Sylius\Component\Currency\Model\CurrencyInterface;
 use Sylius\Component\Order\OrderTransitions;
 use Sylius\Component\Payment\PaymentTransitions;
 use Sylius\Component\Shipping\ShipmentTransitions;
+use Symfony\Component\HttpFoundation\Request as HttpRequest;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Intl\Countries;
 use Webmozart\Assert\Assert;
@@ -45,7 +46,6 @@ final class ManagingOrdersContext implements Context
     public function __construct(
         private ApiClientInterface $client,
         private ResponseCheckerInterface $responseChecker,
-        private RequestFactoryInterface $requestFactory,
         private IriConverterInterface $iriConverter,
         private SecurityServiceInterface $adminSecurityService,
         private SharedStorageInterface $sharedStorage,
@@ -137,6 +137,19 @@ final class ManagingOrdersContext implements Context
     public function iSpecifyFilterDateToAs(string $dateTime): void
     {
         $this->client->addFilter('checkoutCompletedAt[before]', $dateTime);
+    }
+
+    /**
+     * @When I resend the order confirmation email
+     */
+    public function iResendTheOrderConfirmationEmail(): void
+    {
+        $this->client->customItemAction(
+            Resources::ORDERS,
+            $this->sharedStorage->get('order')->getTokenValue(),
+            HttpRequest::METHOD_POST,
+            'resend-confirmation-email',
+        );
     }
 
     /**
@@ -310,6 +323,14 @@ final class ManagingOrdersContext implements Context
     public function iShouldSeeASingleOrderInTheList(int $number = 1): void
     {
         Assert::same($this->responseChecker->countCollectionItems($this->client->getLastResponse()), $number);
+    }
+
+    /**
+     * @Then I should be notified that the order confirmation email has been successfully resent to the customer
+     */
+    public function iShouldBeNotifiedThatTheOrderConfirmationEmailHasBeenSuccessfullyResentToTheCustomer(): void
+    {
+        $this->responseChecker->isCreationSuccessful($this->client->getLastResponse());
     }
 
     /**

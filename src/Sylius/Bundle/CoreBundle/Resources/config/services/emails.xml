@@ -25,5 +25,9 @@
         <tag name="kernel.event_listener" event="sylius.user.post_email_verification" method="sendVerificationSuccessEmail" />
         <tag name="kernel.event_listener" event="sylius.customer.post_register" method="sendUserRegistrationEmail" />
     </service>
+
+    <service id="Sylius\Bundle\CoreBundle\EmailManager\OrderEmailManagerInterface" class="Sylius\Bundle\CoreBundle\EmailManager\OrderEmailManager">
+        <argument type="service" id="sylius.email_sender" />
+    </service>
 </services>
 </container>

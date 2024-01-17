@@ -290,6 +290,26 @@ final class OrdersTest extends JsonApiTestCase
         $this->assertSame('/api/v2/admin/customers/' . $customerTony->getId(), json_decode($content)->customer);
     }
 
+    /** @test */
+    public function it_resends_order_confirmation_email(): void
+    {
+        $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel.yaml', 'cart.yaml', 'country.yaml', 'shipping_method.yaml', 'payment_method.yaml']);
+
+        $tokenValue = 'nAWw2jewpA';
+
+        $this->placeOrder($tokenValue);
+
+        $this->client->request(
+            method: 'POST',
+            uri: sprintf('/api/v2/admin/orders/%s/resend-confirmation-email', $tokenValue),
+            server: $this->buildHeaders('api@example.com'),
+            content: json_encode([]),
+        );
+
+        $this->assertResponseCode($this->client->getResponse(), Response::HTTP_ACCEPTED);
+        $this->assertEmailCount(2);
+    }
+
     /** @return array<string, string> */
     private function buildHeaders(string $adminEmail): array
     {

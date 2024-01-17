@@ -53,6 +53,8 @@
 
 1. Class `Sylius\Component\Core\Promotion\Updater\Rule\ContainsProductRuleUpdater` has been deprecated, as it is no more used.
 
+1. Class `Sylius\Bundle\AdminBundle\EmailManager\OrderEmailManager` has been deprecated, use `Sylius\Bundle\CoreBundle\EmailManager\OrderEmailManager` instead.
+
 1. Class `Sylius\Bundle\ProductBundle\Form\Type\ProductOptionChoiceType` has been deprecated.
    Use `Sylius\Bundle\ProductBundle\Form\Type\ProductOptionAutocompleteType` instead.
 
@@ -68,6 +70,10 @@
 
 1. Passing `Symfony\Component\Messenger\MessageBusInterface` to `Sylius\Bundle\CoreBundle\CatalogPromotion\Processor\CatalogPromotionRemovalProcessor`
    as a second and third argument is deprecated.
+
+1. Passing `Sylius\Bundle\AdminBundle\EmailManager\OrderEmailManagerInterface` to `Sylius\Bundle\AdminBundle\Action\ResendOrderConfirmationEmailAction` as a second argument is deprecated, use `Sylius\Bundle\CoreBundle\MessageDispatcher\ResendOrderConfirmationEmailDispatcherInterface` instead.
+
+1. The name of the second argument of `Sylius\Bundle\AdminBundle\Action\ResendOrderConfirmationEmailAction` is deprecated and will be renamed to `$resendOrderConfirmationEmailDispatcher`.
 
 1. Not passing `Sylius\Bundle\CoreBundle\CatalogPromotion\Announcer\CatalogPromotionRemovalAnnouncerInterface` to `Sylius\Bundle\CoreBundle\CatalogPromotion\Processor\CatalogPromotionRemovalProcessor`
    as a second argument is deprecated.
