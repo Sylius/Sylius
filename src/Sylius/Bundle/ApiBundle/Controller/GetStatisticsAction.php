@@ -31,12 +31,21 @@ final class GetStatisticsAction
 {
     use HandleTrait;
 
+    private BaseAssert\Collection $constraint;
+
     public function __construct(
-        MessageBusInterface $queryBus,
+        MessageBusInterface $messageBus,
         private SerializerInterface $serializer,
         private ValidatorInterface $validator,
     ) {
-        $this->messageBus = $queryBus;
+        $this->messageBus = $messageBus;
+
+        $this->constraint = new BaseAssert\Collection([
+            'channelCode' => new Assert\Code(),
+            'startDate' => new BaseAssert\DateTime('Y-m-d\TH:i:s', message: 'sylius.date_time.invalid'),
+            'dateInterval' => new Assert\DateInterval(),
+            'endDate' => new BaseAssert\DateTime('Y-m-d\TH:i:s', message: 'sylius.date_time.invalid'),
+        ]);
     }
 
     /**
@@ -44,20 +53,13 @@ final class GetStatisticsAction
      */
     public function __invoke(Request $request): Response
     {
-        $constraint = new BaseAssert\Collection([
-            'channelCode' => new Assert\Code(),
-            'startDate' => new BaseAssert\DateTime('Y-m-d\TH:i:s', message: 'sylius.date_time.invalid'),
-            'dateInterval' => new Assert\DateInterval(),
-            'endDate' => new BaseAssert\DateTime('Y-m-d\TH:i:s', message: 'sylius.date_time.invalid'),
-        ]);
+        $parameters = $request->query->all();
 
-        $violations = $this->validator->validate($request->query->all(), $constraint);
-
+        $violations = $this->validator->validate($parameters, $this->constraint);
         if (count($violations) > 0) {
             return $this->createBadRequestResponse($violations);
         }
 
-        $parameters = $request->query->all();
         $period = new \DatePeriod(
             new \DateTimeImmutable($parameters['startDate']),
             new \DateInterval($parameters['dateInterval']),
@@ -65,7 +67,6 @@ final class GetStatisticsAction
         );
 
         $violations = $this->validator->validate($period, new Assert\DatePeriod());
-
         if (count($violations) > 0) {
             return $this->createBadRequestResponse($violations);
         }
