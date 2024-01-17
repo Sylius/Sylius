@@ -315,3 +315,18 @@
     - `Sylius\Bundle\PromotionBundle\Form\Type\Rule\ItemTotalConfigurationType`
 
    The constraints previously defined in these forms are now in `src/Sylius/Bundle/CoreBundle/Resources/config/validation/PromotionRule.xml` and managed via the new validation groups parameters in the configuration.
+
+1. The `Sylius\Component\Addressing\Repository\ZoneRepositoryInterface` and
+   `Sylius\Bundle\AddressingBundle\Repository\ZoneRepository` were added.
+   If you created a custom `Zone` repository, you should update it to extend the `Sylius\Bundle\AddressingBundle\Repository\ZoneRepository`
+
+1. The constructor of `Sylius\Component\Addressing\Matcher\ZoneMatcher` has been changed:
+    ```php
+   use Sylius\Component\Addressing\Repository\ZoneRepositoryInterface;
+   use Sylius\Component\Resource\Repository\RepositoryInterface;
+
+        public function __construct(
+    -       private RepositoryInterface $zoneRepository,
+    +       private RepositoryInterface|ZoneRepositoryInterface $zoneRepository,
+        )
+    ```
