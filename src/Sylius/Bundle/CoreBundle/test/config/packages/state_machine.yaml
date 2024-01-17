@@ -54,7 +54,7 @@ framework:
                     from: published
                     to: unpublished
 
-sylius_core:
+sylius_state_machine_abstraction:
     state_machine:
         default_adapter: 'winzou_state_machine'
         graphs_to_adapters_mapping:

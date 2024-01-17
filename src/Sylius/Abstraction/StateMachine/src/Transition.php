@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\CoreBundle\StateMachine;
+namespace Sylius\Abstraction\StateMachine;
 
 final class Transition implements TransitionInterface
 {

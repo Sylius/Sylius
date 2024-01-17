@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Bundle\CoreBundle\Tests\Functional\StateMachine;
 
 use PHPUnit\Framework\MockObject\MockObject;
-use Sylius\Bundle\CoreBundle\StateMachine\StateMachineInterface;
+use Sylius\Abstraction\StateMachine\StateMachineInterface;
 use Sylius\Component\Core\Checker\OrderPaymentMethodSelectionRequirementCheckerInterface;
 use Sylius\Component\Core\Checker\OrderShippingMethodSelectionRequirementCheckerInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
@@ -223,7 +223,7 @@ final class OrderCheckoutWorkflowTest extends KernelTestCase
 
     private function getStateMachine(): StateMachineInterface
     {
-        return self::getContainer()->get('sylius.state_machine.adapter.symfony_workflow');
+        return self::getContainer()->get('sylius_abstraction.state_machine.adapter.symfony_workflow');
     }
 
     public function setShippingMethodSelectionRequired(bool $isShippingMethodSelectionRequired): void

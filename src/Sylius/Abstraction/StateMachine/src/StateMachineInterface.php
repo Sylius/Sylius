@@ -11,9 +11,9 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\CoreBundle\StateMachine;
+namespace Sylius\Abstraction\StateMachine;
 
-use Sylius\Bundle\CoreBundle\StateMachine\Exception\StateMachineExecutionException;
+use Sylius\Abstraction\StateMachine\Exception\StateMachineExecutionException;
 
 interface StateMachineInterface
 {
