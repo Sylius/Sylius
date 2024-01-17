@@ -15,7 +15,7 @@ namespace Sylius\Bundle\CoreBundle\Console\Command;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Sylius\Bundle\CoreBundle\Command\Model\PluginInfo;
+use Sylius\Bundle\CoreBundle\Console\Command\Model\PluginInfo;
 use Sylius\Bundle\CoreBundle\Installer\Renderer\TableRenderer;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;

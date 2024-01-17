@@ -336,3 +336,30 @@
     +       private RepositoryInterface|ZoneRepositoryInterface $zoneRepository,
         )
     ```
+
+1. Moved classes from `Command` to `Console\Command`. The `Command` namespace is deprecated for console command classes and will be removed in Sylius 2.0.
+List of affected classes:
+    - `\Sylius\Bundle\OrderBundle\Command\RemoveExpiredCartsCommand` to `\Sylius\Bundle\OrderBundle\Console\Command\RemoveExpiredCartsCommand`
+    - `\Sylius\Bundle\PromotionBundle\Command\GenerateCouponsCommand` to `\Sylius\Bundle\PromotionBundle\Console\Command\GenerateCouponsCommand`
+    - `\Sylius\Bundle\UiBundle\Command\DebugTemplateEventCommand` to `\Sylius\Bundle\UiBundle\Console\Command\DebugTemplateEventCommand`
+    - `\Sylius\Bundle\UserBundle\Command\AbstractRoleCommand` to `\Sylius\Bundle\UserBundle\Console\Command\AbstractRoleCommand`
+    - `\Sylius\Bundle\UserBundle\Command\DemoteUserCommand` to `\Sylius\Bundle\UserBundle\Console\Command\DemoteUserCommand`
+    - `\Sylius\Bundle\UserBundle\Command\PromoteUserCommand` to `\Sylius\Bundle\UserBundle\Console\Command\PromoteUserCommand`
+    - `\Sylius\Bundle\CoreBundle\Command\Model\PluginInfo` to `\Sylius\Bundle\CoreBundle\Console\Command\Model\PluginInfo`
+    - `\Sylius\Bundle\CoreBundle\Command\AbstractInstallCommand` to `\Sylius\Bundle\CoreBundle\Console\Command\AbstractInstallCommand`
+    - `\Sylius\Bundle\CoreBundle\Command\CancelUnpaidOrdersCommand` to `\Sylius\Bundle\CoreBundle\Console\Command\CancelUnpaidOrdersCommand`
+    - `\Sylius\Bundle\CoreBundle\Command\CheckRequirementsCommand` to `\Sylius\Bundle\CoreBundle\Console\Command\CheckRequirementsCommand`
+    - `\Sylius\Bundle\CoreBundle\Command\InformAboutGUSCommand` to `\Sylius\Bundle\CoreBundle\Console\Command\InformAboutGUSCommand`
+    - `\Sylius\Bundle\CoreBundle\Command\InstallAssetsCommand` to `\Sylius\Bundle\CoreBundle\Console\Command\InstallAssetsCommand`
+    - `\Sylius\Bundle\CoreBundle\Command\InstallCommand` to `\Sylius\Bundle\CoreBundle\Console\Command\InstallCommand`
+    - `\Sylius\Bundle\CoreBundle\Command\InstallDatabaseCommand` to `\Sylius\Bundle\CoreBundle\Console\Command\InstallDatabaseCommand`
+    - `\Sylius\Bundle\CoreBundle\Command\InstallSampleDataCommand` to `\Sylius\Bundle\CoreBundle\Console\Command\InstallSampleDataCommand`
+    - `\Sylius\Bundle\CoreBundle\Command\JwtConfigurationCommand` to `\Sylius\Bundle\CoreBundle\Console\Command\JwtConfigurationCommand`
+    - `\Sylius\Bundle\CoreBundle\Command\SetupCommand` to `\Sylius\Bundle\CoreBundle\Console\Command\SetupCommand`
+    - `\Sylius\Bundle\CoreBundle\Command\ShowAvailablePluginsCommand` to `\Sylius\Bundle\CoreBundle\Console\Command\ShowAvailablePluginsCommand`
+
+1. In version 2.0 introduces a significant restructuring of our class system to enhance efficiency and clarity. The changes are as follows:
+   - `Message` will be migrated to `Command`.
+   - `MessageDispatcher` will be migrated  to `CommandDispatcher`.
+   - `MessageHandler` will be migrated  to `CommandHandler`. 
+   - Example: Within the `Sylius\Bundle\CoreBundle`, the `MessageHandler\OrderHandler` class will be migrated to `CommandHandler\OrderHandler`. This pattern will be mirrored across other bundles in the system.
