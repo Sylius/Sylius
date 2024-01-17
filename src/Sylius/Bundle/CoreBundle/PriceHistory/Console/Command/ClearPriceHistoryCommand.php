@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\CoreBundle\PriceHistory\Cli\Command;
+namespace Sylius\Bundle\CoreBundle\PriceHistory\Console\Command;
 
 use Sylius\Bundle\CoreBundle\PriceHistory\Remover\ChannelPricingLogEntriesRemoverInterface;
 use Symfony\Component\Console\Attribute\AsCommand;

@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 
-namespace spec\Sylius\Bundle\CoreBundle\Command\Model;
+namespace spec\Sylius\Bundle\CoreBundle\Console\Command\Model;
 
 use PhpSpec\ObjectBehavior;
 

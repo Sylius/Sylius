@@ -13,34 +13,7 @@
 
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <imports>
-        <import resource="services/calculators.xml" />
-        <import resource="services/catalog_promotion.xml" />
-        <import resource="services/checkers.xml" />
-        <import resource="services/checkout.xml" />
-        <import resource="services/commands.xml" />
-        <import resource="services/context.xml" />
-        <import resource="services/dashboard.xml" />
-        <import resource="services/emails.xml" />
-        <import resource="services/factories.xml" />
-        <import resource="services/fixtures.xml" />
-        <import resource="services/fixtures_factories.xml" />
-        <import resource="services/fixtures_listeners.xml" />
-        <import resource="services/form.xml" />
-        <import resource="services/installer.xml" />
-        <import resource="services/installer_requirements.xml" />
-        <import resource="services/listeners.xml" />
-        <import resource="services/message_handlers.xml" />
-        <import resource="services/order_processing.xml" />
-        <import resource="services/payment.xml" />
-        <import resource="services/price_history.xml" />
-        <import resource="services/product_variant_map.xml" />
-        <import resource="services/promotion.xml" />
-        <import resource="services/providers.xml" />
-        <import resource="services/shipping.xml" />
-        <import resource="services/state_resolvers.xml" />
-        <import resource="services/taxation.xml" />
-        <import resource="services/templating.xml" />
-        <import resource="services/validators.xml" />
+        <import resource="services/*.xml" />
     </imports>
 
     <parameters>

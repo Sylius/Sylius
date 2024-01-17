@@ -11,11 +11,11 @@
 
 declare(strict_types=1);
 
-namespace Tests\Sylius\Bundle\CoreBundle\PriceHistory\Cli\Command;
+namespace Tests\Sylius\Bundle\CoreBundle\PriceHistory\Console\Command;
 
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
-use Sylius\Bundle\CoreBundle\PriceHistory\Cli\Command\ClearPriceHistoryCommand;
+use Sylius\Bundle\CoreBundle\PriceHistory\Console\Command\ClearPriceHistoryCommand;
 use Sylius\Bundle\CoreBundle\PriceHistory\Remover\ChannelPricingLogEntriesRemoverInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Tester\CommandTester;
