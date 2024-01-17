@@ -35,5 +35,11 @@
             <argument type="service" id="sylius.repository.locale" />
             <argument type="string">%locale%</argument>
         </service>
+
+        <service id="sylius.provider.configurable_grid_provider" class="Sylius\Bundle\CoreBundle\Grid\Provider\ConfigurableProvider">
+            <argument type="tagged_locator" tag="sylius.grid_provider" index-by="key" />
+            <argument>%sylius_core.grids_configuration%</argument>
+            <tag name="sylius.grid_provider" key="array" priority="100"/>
+        </service>
     </services>
 </container>
