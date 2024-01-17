@@ -25,7 +25,7 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 
 #[AsCommand(
     name: 'sylius:admin-user:change-password',
-    description: 'Change password of admin user'
+    description: 'Change password of admin user',
 )]
 final class ChangeAdminUserPasswordCommand extends Command
 {
