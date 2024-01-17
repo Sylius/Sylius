@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\PromotionBundle\Tests\Command;
+namespace Sylius\Bundle\PromotionBundle\Tests\Console\Command;
 
 use InvalidArgumentException;
 use PHPUnit\Framework\MockObject\MockObject;
