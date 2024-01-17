@@ -57,6 +57,7 @@ final class ProductsTest extends JsonApiTestCase
 
     /**
      * @test
+     *
      * @dataProvider getGermanLocales
      */
     public function it_returns_product_with_translations_in_locale_from_header(string $germanLocale): void
@@ -138,6 +139,7 @@ final class ProductsTest extends JsonApiTestCase
 
     /**
      * @test
+     *
      * @dataProvider getPolishLocales
      */
     public function it_returns_product_attributes_collection_with_translations_in_locale_from_header(

@@ -77,7 +77,7 @@ final class ChangeAdminUserPasswordCommandTest extends TestCase
         $this
             ->command
             ->setInputs([
-                'email' => self::EMAIL
+                'email' => self::EMAIL,
             ]);
 
         $this->command->execute([]);
@@ -128,7 +128,7 @@ final class ChangeAdminUserPasswordCommandTest extends TestCase
             ->command
             ->setInputs([
                 'email' => self::EMAIL,
-                'password' => self::PASSWORD
+                'password' => self::PASSWORD,
             ]);
 
         $this->command->execute([]);
