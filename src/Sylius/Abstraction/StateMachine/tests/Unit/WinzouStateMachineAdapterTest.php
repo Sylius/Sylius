@@ -21,6 +21,7 @@ use SM\StateMachine\StateMachineInterface as WinzouStateMachineInterface;
 use Sylius\Abstraction\StateMachine\Exception\StateMachineExecutionException;
 use Sylius\Abstraction\StateMachine\StateMachineInterface;
 use Sylius\Abstraction\StateMachine\WinzouStateMachineAdapter;
+use Sylius\Component\Resource\StateMachine\StateMachineInterface as ResourceStateMachineInterface;
 
 final class WinzouStateMachineAdapterTest extends TestCase
 {
@@ -116,6 +117,38 @@ final class WinzouStateMachineAdapterTest extends TestCase
         $this->winzouStateMachineFactory->method('get')->willThrowException(new SMException());
 
         $this->createTestSubject()->getEnabledTransitions($subject, $graphName);
+    }
+
+    public function testItReturnsTransitionsToForGivenTransition(): void
+    {
+        $this->winzouStateMachine = $this->createMock(ResourceStateMachineInterface::class);
+        $this->winzouStateMachine->method('getTransitionToState')->willReturn('transition_to_state');
+
+        $this->winzouStateMachineFactory = $this->createMock(FactoryInterface::class);
+        $this->winzouStateMachineFactory->method('get')->willReturn($this->winzouStateMachine);
+
+        $stateMachine = $this->createTestSubject();
+
+        $this->assertSame(
+            'transition_to_state',
+            $stateMachine->getTransitionToState(new \stdClass(), 'graph_name', 'to_state'),
+        );
+    }
+
+    public function testItReturnsTransitionsFromForGivenTransition(): void
+    {
+        $this->winzouStateMachine = $this->createMock(ResourceStateMachineInterface::class);
+        $this->winzouStateMachine->method('getTransitionFromState')->willReturn('transition_from_state');
+
+        $this->winzouStateMachineFactory = $this->createMock(FactoryInterface::class);
+        $this->winzouStateMachineFactory->method('get')->willReturn($this->winzouStateMachine);
+
+        $stateMachine = $this->createTestSubject();
+
+        $this->assertSame(
+            'transition_from_state',
+            $stateMachine->getTransitionFromState(new \stdClass(), 'graph_name', 'to_state'),
+        );
     }
 
     private function createTestSubject(): StateMachineInterface

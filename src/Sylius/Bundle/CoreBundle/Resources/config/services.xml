@@ -205,7 +205,7 @@
 
         <service id="sylius.unpaid_orders_state_updater" class="Sylius\Component\Core\Updater\UnpaidOrdersStateUpdater">
             <argument type="service" id="sylius.repository.order" />
-            <argument type="service" id="sm.factory" />
+            <argument type="service" id="sylius_abstraction.state_machine" />
             <argument>%sylius_order.order_expiration_period%</argument>
             <argument type="service" id="logger" />
             <argument type="service" id="sylius.manager.order" />
@@ -215,7 +215,7 @@
         <service id="sylius.order_payment_provider" class="Sylius\Component\Core\Payment\Provider\OrderPaymentProvider">
             <argument type="service" id="sylius.payment_method_resolver.default" />
             <argument type="service" id="sylius.factory.payment" />
-            <argument type="service" id="sm.factory" />
+            <argument type="service" id="sylius_abstraction.state_machine" />
         </service>
         <service id="Sylius\Component\Core\Payment\Provider\OrderPaymentProviderInterface" alias="sylius.order_payment_provider" />
 

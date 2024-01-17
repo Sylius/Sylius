@@ -63,6 +63,16 @@ class CompositeStateMachine implements StateMachineInterface
         return $this->getStateMachineAdapter($graphName)->getEnabledTransitions($subject, $graphName);
     }
 
+    public function getTransitionFromState(object $subject, string $graphName, string $fromState): ?string
+    {
+        return $this->getStateMachineAdapter($graphName)->getTransitionFromState($subject, $graphName, $fromState);
+    }
+
+    public function getTransitionToState(object $subject, string $graphName, string $toState): ?string
+    {
+        return $this->getStateMachineAdapter($graphName)->getTransitionToState($subject, $graphName, $toState);
+    }
+
     private function getStateMachineAdapter(string $graphName): StateMachineInterface
     {
         if (isset($this->graphsToAdaptersMapping[$graphName])) {

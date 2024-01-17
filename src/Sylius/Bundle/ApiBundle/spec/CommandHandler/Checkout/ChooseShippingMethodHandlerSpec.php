@@ -17,7 +17,8 @@ use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use SM\Factory\FactoryInterface;
-use SM\StateMachine\StateMachineInterface;
+use SM\StateMachine\StateMachineInterface as WinzouStateMachineInterface;
+use Sylius\Abstraction\StateMachine\StateMachineInterface;
 use Sylius\Bundle\ApiBundle\Command\Checkout\ChooseShippingMethod;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\ShipmentInterface;
@@ -55,7 +56,7 @@ final class ChooseShippingMethodHandlerSpec extends ObjectBehavior
         OrderInterface $cart,
         ShippingMethodInterface $shippingMethod,
         ShipmentInterface $shipment,
-        StateMachineInterface $stateMachine,
+        WinzouStateMachineInterface $stateMachine,
     ): void {
         $chooseShippingMethod = new ChooseShippingMethod('DHL_SHIPPING_METHOD');
         $chooseShippingMethod->setOrderTokenValue('ORDERTOKEN');
@@ -82,6 +83,48 @@ final class ChooseShippingMethodHandlerSpec extends ObjectBehavior
         $this($chooseShippingMethod)->shouldReturn($cart);
     }
 
+    function it_uses_the_new_state_machine_abstraction_if_passed(
+        OrderRepositoryInterface $orderRepository,
+        ShippingMethodRepositoryInterface $shippingMethodRepository,
+        ShipmentRepositoryInterface $shipmentRepository,
+        ShippingMethodEligibilityCheckerInterface $eligibilityChecker,
+        StateMachineInterface $stateMachine,
+        OrderInterface $cart,
+        ShippingMethodInterface $shippingMethod,
+        ShipmentInterface $shipment,
+    ): void {
+        $this->beConstructedWith(
+            $orderRepository,
+            $shippingMethodRepository,
+            $shipmentRepository,
+            $eligibilityChecker,
+            $stateMachine,
+        );
+
+        $chooseShippingMethod = new ChooseShippingMethod('DHL_SHIPPING_METHOD');
+        $chooseShippingMethod->setOrderTokenValue('ORDERTOKEN');
+        $chooseShippingMethod->setSubresourceId('123');
+
+        $orderRepository->findOneBy(['tokenValue' => 'ORDERTOKEN'])->willReturn($cart);
+
+        $stateMachine->can($cart, OrderCheckoutTransitions::GRAPH, 'select_shipping')->willReturn(true);
+
+        $shippingMethodRepository->findOneBy(['code' => 'DHL_SHIPPING_METHOD'])->willReturn($shippingMethod);
+
+        $cart->getShipments()->willReturn(new ArrayCollection([$shipment->getWrappedObject()]));
+
+        $cart->getId()->willReturn('111');
+
+        $shipmentRepository->findOneByOrderId('123', '111')->willReturn($shipment);
+
+        $eligibilityChecker->isEligible($shipment, $shippingMethod)->willReturn(true);
+
+        $shipment->setMethod($shippingMethod)->shouldBeCalled();
+        $stateMachine->apply($cart, OrderCheckoutTransitions::GRAPH, 'select_shipping')->shouldBeCalled();
+
+        $this($chooseShippingMethod)->shouldReturn($cart);
+    }
+
     function it_throws_an_exception_if_shipping_method_is_not_eligible(
         OrderRepositoryInterface $orderRepository,
         ShippingMethodRepositoryInterface $shippingMethodRepository,
@@ -91,7 +134,7 @@ final class ChooseShippingMethodHandlerSpec extends ObjectBehavior
         OrderInterface $cart,
         ShippingMethodInterface $shippingMethod,
         ShipmentInterface $shipment,
-        StateMachineInterface $stateMachine,
+        WinzouStateMachineInterface $stateMachine,
     ): void {
         $chooseShippingMethod = new ChooseShippingMethod('DHL_SHIPPING_METHOD');
         $chooseShippingMethod->setOrderTokenValue('ORDERTOKEN');
@@ -143,7 +186,7 @@ final class ChooseShippingMethodHandlerSpec extends ObjectBehavior
         ShippingMethodRepositoryInterface $shippingMethodRepository,
         FactoryInterface $stateMachineFactory,
         OrderInterface $cart,
-        StateMachineInterface $stateMachine,
+        WinzouStateMachineInterface $stateMachine,
         ShipmentInterface $shipment,
     ): void {
         $chooseShippingMethod = new ChooseShippingMethod('DHL_SHIPPING_METHOD');
@@ -169,7 +212,7 @@ final class ChooseShippingMethodHandlerSpec extends ObjectBehavior
         ShippingMethodRepositoryInterface $shippingMethodRepository,
         FactoryInterface $stateMachineFactory,
         OrderInterface $cart,
-        StateMachineInterface $stateMachine,
+        WinzouStateMachineInterface $stateMachine,
         ShipmentInterface $shipment,
     ): void {
         $chooseShippingMethod = new ChooseShippingMethod('DHL_SHIPPING_METHOD');
@@ -199,7 +242,7 @@ final class ChooseShippingMethodHandlerSpec extends ObjectBehavior
         FactoryInterface $stateMachineFactory,
         OrderInterface $cart,
         ShippingMethodInterface $shippingMethod,
-        StateMachineInterface $stateMachine,
+        WinzouStateMachineInterface $stateMachine,
     ): void {
         $chooseShippingMethod = new ChooseShippingMethod('DHL_SHIPPING_METHOD');
         $chooseShippingMethod->setOrderTokenValue('ORDERTOKEN');

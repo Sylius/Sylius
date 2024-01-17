@@ -48,7 +48,7 @@
 
         <service id="Sylius\Bundle\ApiBundle\Validator\Constraints\CheckoutCompletionValidator">
             <argument type="service" id="sylius.repository.order" />
-            <argument type="service" id="sm.factory" />
+            <argument type="service" id="sylius_abstraction.state_machine" />
             <tag name="validator.constraint_validator" alias="sylius_api_validator_checkout_completion" />
         </service>
 

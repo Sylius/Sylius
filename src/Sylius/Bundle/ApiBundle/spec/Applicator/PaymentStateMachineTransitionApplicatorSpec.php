@@ -15,7 +15,8 @@ namespace spec\Sylius\Bundle\ApiBundle\Applicator;
 
 use PhpSpec\ObjectBehavior;
 use SM\Factory\FactoryInterface as StateMachineFactoryInterface;
-use SM\StateMachine\StateMachine;
+use SM\StateMachine\StateMachine as WinzouStateMachine;
+use Sylius\Abstraction\StateMachine\StateMachineInterface;
 use Sylius\Component\Core\Model\PaymentInterface;
 use Sylius\Component\Payment\PaymentTransitions;
 
@@ -29,10 +30,21 @@ final class PaymentStateMachineTransitionApplicatorSpec extends ObjectBehavior
     function it_completes_payment(
         StateMachineFactoryInterface $stateMachineFactory,
         PaymentInterface $payment,
-        StateMachine $stateMachine,
+        WinzouStateMachine $stateMachine,
     ): void {
         $stateMachineFactory->get($payment, PaymentTransitions::GRAPH)->willReturn($stateMachine);
         $stateMachine->apply(PaymentTransitions::TRANSITION_COMPLETE)->shouldBeCalled();
+
+        $this->complete($payment);
+    }
+
+    function it_uses_the_new_state_machine_abstraction_if_passed(
+        StateMachineInterface $stateMachine,
+        PaymentInterface $payment,
+    ): void {
+        $this->beConstructedWith($stateMachine);
+
+        $stateMachine->apply($payment, PaymentTransitions::GRAPH, PaymentTransitions::TRANSITION_COMPLETE)->shouldBeCalled();
 
         $this->complete($payment);
     }

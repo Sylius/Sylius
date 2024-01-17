@@ -14,7 +14,8 @@ declare(strict_types=1);
 namespace Sylius\Component\Core\StateResolver;
 
 use SM\Factory\FactoryInterface;
-use SM\StateMachine\StateMachineInterface;
+use Sylius\Abstraction\StateMachine\StateMachineInterface;
+use Sylius\Abstraction\StateMachine\WinzouStateMachineAdapter;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\ShipmentInterface;
 use Sylius\Component\Core\OrderShippingStates;
@@ -25,8 +26,19 @@ use Webmozart\Assert\Assert;
 
 final class OrderShippingStateResolver implements StateResolverInterface
 {
-    public function __construct(private FactoryInterface $stateMachineFactory)
+    public function __construct(private FactoryInterface|StateMachineInterface $stateMachineFactory)
     {
+        if ($this->stateMachineFactory instanceof FactoryInterface) {
+            trigger_deprecation(
+                'sylius/core',
+                '1.13',
+                sprintf(
+                    'Passing an instance of "%s" as the first argument is deprecated. It will accept only instances of "%s" in Sylius 2.0.',
+                    FactoryInterface::class,
+                    StateMachineInterface::class,
+                ),
+            );
+        }
     }
 
     public function resolve(BaseOrderInterface $order): void
@@ -37,15 +49,15 @@ final class OrderShippingStateResolver implements StateResolverInterface
         if (OrderShippingStates::STATE_SHIPPED === $order->getShippingState()) {
             return;
         }
-        /** @var StateMachineInterface $stateMachine */
-        $stateMachine = $this->stateMachineFactory->get($order, OrderShippingTransitions::GRAPH);
+
+        $stateMachine = $this->getStateMachine();
 
         if ($this->allShipmentsInStateButOrderStateNotUpdated($order, ShipmentInterface::STATE_SHIPPED, OrderShippingStates::STATE_SHIPPED)) {
-            $stateMachine->apply(OrderShippingTransitions::TRANSITION_SHIP);
+            $stateMachine->apply($order, OrderShippingTransitions::GRAPH, OrderShippingTransitions::TRANSITION_SHIP);
         }
 
         if ($this->isPartiallyShippedButOrderStateNotUpdated($order)) {
-            $stateMachine->apply(OrderShippingTransitions::TRANSITION_PARTIALLY_SHIP);
+            $stateMachine->apply($order, OrderShippingTransitions::GRAPH, OrderShippingTransitions::TRANSITION_PARTIALLY_SHIP);
         }
     }
 
@@ -82,5 +94,14 @@ final class OrderShippingStateResolver implements StateResolverInterface
             $shipmentInShippedStateAmount < $shipmentAmount &&
             OrderShippingStates::STATE_PARTIALLY_SHIPPED !== $order->getShippingState()
         ;
+    }
+
+    private function getStateMachine(): StateMachineInterface
+    {
+        if ($this->stateMachineFactory instanceof FactoryInterface) {
+            return new WinzouStateMachineAdapter($this->stateMachineFactory);
+        }
+
+        return $this->stateMachineFactory;
     }
 }

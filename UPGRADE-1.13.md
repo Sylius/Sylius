@@ -1,5 +1,27 @@
 # UPGRADE FROM `v1.12.X` TO `v1.13.0`
 
+1. Starting with Sylius `1.13` we provided a possibility to use the Symfony Workflow as your State Machine. To allow a smooth transition
+    we created a new package called `sylius/state-machine-abstraction`,
+   which provides a configurable abstraction,
+   allowing you to define which adapter should be used (Winzou State Machine or Symfony Workflow) per graph.
+   Starting with Sylius `1.13` we configure all existing Sylius' graphs to use the Symfony Workflow.
+   At the same time, all other graphs are using Winzou State Machine as a default state machine,
+   and must be configured manually to use the Symfony Workflow.
+
+    Configuration:
+    ```yaml
+    sylius_state_machine_abstraction:
+        graphs_to_adapters_mapping:
+            <graph_name>: <adapter_name>
+            # e.g.
+            sylius_order_checkout: symfony_workflow # available adapters: symfony_workflow, winzou_state_machine
+   
+        # we can also can the default adapter
+        default_adapter: symfony_workflow # winzou_state_machine is a default value here
+    ```
+   
+    > **Note!** Starting with Sylius `2.0` the Symfony Workflow will be the default state machine for all graphs.
+
 1. A new parameter has been added to specify the validation groups for given gateway factory.
    If you have any custom validation groups for your factory, you need to add them to your `config/packages/_sylius.yaml` file.
    Also, if you have your own gateway factory and want to add your validation groups you can add another entry to the `validation_groups` configuration node.
@@ -19,7 +41,7 @@
                     - 'your_custom_validation_group'
     ```
 
-1. New parameters have been added to specify the validation groups for given shipping method rules and calculators.
+1. There have been a naw parameters added to specify the validation groups for given shipping method rule and calculator.
    If you have any custom validation groups for your calculator or rules, you need to add them to your `config/packages/_sylius.yaml` file.
    Also, if you have your own shipping method rule or calculator and want to add your validation groups you can add another key to the `validation_groups` parameter.
 
@@ -58,7 +80,7 @@
 1. Class `Sylius\Bundle\ProductBundle\Form\Type\ProductOptionChoiceType` has been deprecated.
    Use `Sylius\Bundle\ProductBundle\Form\Type\ProductOptionAutocompleteType` instead.
 
-1. Using `parentId` query parameter to generate the slug in `Sylius\Bundle\TaxonomyBundle\Controller\TaxonSlugController` has been deprecated.
+1. Using `parentId` query parameter to generate slug in `Sylius\Bundle\TaxonomyBundle\Controller\TaxonSlugController` has been deprecated.
    Use the `parentCode` query parameter instead.
 
 1. Starting with Sylius 1.13, the `SyliusPriceHistoryPlugin` is included.
@@ -74,10 +96,6 @@
 1. Passing `Sylius\Bundle\AdminBundle\EmailManager\OrderEmailManagerInterface` to `Sylius\Bundle\AdminBundle\Action\ResendOrderConfirmationEmailAction` as a second argument is deprecated, use `Sylius\Bundle\CoreBundle\MessageDispatcher\ResendOrderConfirmationEmailDispatcherInterface` instead.
 
 1. The name of the second argument of `Sylius\Bundle\AdminBundle\Action\ResendOrderConfirmationEmailAction` is deprecated and will be renamed to `$resendOrderConfirmationEmailDispatcher`.
-
-1. Passing `Sylius\Bundle\AdminBundle\EmailManager\ShipmentEmailManagerInterface` to `Sylius\Bundle\AdminBundle\Action\ResendShipmentConfirmationEmailAction` as a second argument is deprecated, use `Sylius\Bundle\CoreBundle\MessageDispatcher\ResendShipmentConfirmationEmailDispatcherInterface` instead.
-
-1. The name of the second argument of `Sylius\Bundle\AdminBundle\Action\ResendShipmentConfirmationEmailAction` is deprecated and will be renamed to `$resendShipmentConfirmationEmailDispatcher`.
 
 1. Not passing `Sylius\Bundle\CoreBundle\CatalogPromotion\Announcer\CatalogPromotionRemovalAnnouncerInterface` to `Sylius\Bundle\CoreBundle\CatalogPromotion\Processor\CatalogPromotionRemovalProcessor`
    as a second argument is deprecated.

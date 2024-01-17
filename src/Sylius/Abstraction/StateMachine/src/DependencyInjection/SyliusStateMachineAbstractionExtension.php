@@ -27,7 +27,7 @@ final class SyliusStateMachineAbstractionExtension extends Extension
         $loader = new XmlFileLoader($container, new FileLocator(dirname(__DIR__, 2) . '/config/'));
         $loader->load('services.xml');
 
-        $container->setParameter('sylius_abstraction.state_machine.default_adapter', $config['state_machine']['default_adapter']);
-        $container->setParameter('sylius_abstraction.state_machine.graphs_to_adapters_mapping', $config['state_machine']['graphs_to_adapters_mapping']);
+        $container->setParameter('sylius_abstraction.state_machine.default_adapter', $config['default_adapter']);
+        $container->setParameter('sylius_abstraction.state_machine.graphs_to_adapters_mapping', $config['graphs_to_adapters_mapping']);
     }
 }

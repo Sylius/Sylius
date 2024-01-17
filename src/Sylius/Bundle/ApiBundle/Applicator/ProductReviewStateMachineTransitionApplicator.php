@@ -14,14 +14,27 @@ declare(strict_types=1);
 namespace Sylius\Bundle\ApiBundle\Applicator;
 
 use SM\Factory\FactoryInterface as StateMachineFactoryInterface;
+use Sylius\Abstraction\StateMachine\StateMachineInterface;
+use Sylius\Abstraction\StateMachine\WinzouStateMachineAdapter;
 use Sylius\Component\Core\ProductReviewTransitions;
 use Sylius\Component\Review\Model\ReviewInterface;
 
 /** @experimental */
 final class ProductReviewStateMachineTransitionApplicator implements ProductReviewStateMachineTransitionApplicatorInterface
 {
-    public function __construct(private StateMachineFactoryInterface $stateMachineFactory)
+    public function __construct(private StateMachineFactoryInterface|StateMachineInterface $stateMachineFactory)
     {
+        if ($this->stateMachineFactory instanceof StateMachineFactoryInterface) {
+            trigger_deprecation(
+                'sylius/api-bundle',
+                '1.13',
+                sprintf(
+                    'Passing an instance of "%s" as the first argument is deprecated. It will accept only instances of "%s" in Sylius 2.0.',
+                    StateMachineFactoryInterface::class,
+                    StateMachineInterface::class,
+                ),
+            );
+        }
     }
 
     public function accept(ReviewInterface $data): ReviewInterface
@@ -40,7 +53,15 @@ final class ProductReviewStateMachineTransitionApplicator implements ProductRevi
 
     private function applyTransition(ReviewInterface $review, string $transition): void
     {
-        $stateMachine = $this->stateMachineFactory->get($review, ProductReviewTransitions::GRAPH);
-        $stateMachine->apply($transition);
+        $this->getStateMachine()->apply($review, ProductReviewTransitions::GRAPH, $transition);
+    }
+
+    private function getStateMachine(): StateMachineInterface
+    {
+        if ($this->stateMachineFactory instanceof StateMachineFactoryInterface) {
+            return new WinzouStateMachineAdapter($this->stateMachineFactory);
+        }
+
+        return $this->stateMachineFactory;
     }
 }

@@ -16,6 +16,7 @@ namespace Sylius\Abstraction\StateMachine;
 use SM\Factory\FactoryInterface;
 use SM\SMException;
 use Sylius\Abstraction\StateMachine\Exception\StateMachineExecutionException;
+use Sylius\Component\Resource\StateMachine\StateMachineInterface as ResourceStateMachineInterface;
 
 final class WinzouStateMachineAdapter implements StateMachineInterface
 {
@@ -53,6 +54,38 @@ final class WinzouStateMachineAdapter implements StateMachineInterface
             fn (string $transition) => new Transition($transition, null, null),
             $transitions,
         );
+    }
+
+    public function getTransitionFromState(object $subject, string $graphName, string $fromState): ?string
+    {
+        $stateMachine = $this->getStateMachine($subject, $graphName);
+
+        if (!$stateMachine instanceof ResourceStateMachineInterface) {
+            throw new StateMachineExecutionException(sprintf(
+                "Method %s::%s() is not supported when the state machine is not an instance of %s.",
+                self::class,
+                __FUNCTION__,
+                ResourceStateMachineInterface::class,
+            ));
+        }
+
+        return $stateMachine->getTransitionFromState($fromState);
+    }
+
+    public function getTransitionToState(object $subject, string $graphName, string $toState): ?string
+    {
+        $stateMachine = $this->getStateMachine($subject, $graphName);
+
+        if (!$stateMachine instanceof ResourceStateMachineInterface) {
+            throw new StateMachineExecutionException(sprintf(
+                "Method %s::%s() is not supported when the state machine is not an instance of %s.",
+                self::class,
+                __FUNCTION__,
+                ResourceStateMachineInterface::class,
+            ));
+        }
+
+        return $stateMachine->getTransitionToState($toState);
     }
 
     private function getStateMachine(object $subject, string $graphName): \SM\StateMachine\StateMachineInterface

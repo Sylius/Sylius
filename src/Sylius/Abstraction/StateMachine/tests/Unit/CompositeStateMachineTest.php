@@ -78,6 +78,24 @@ final class CompositeStateMachineTest extends TestCase
         $this->assertSame(['some_transition'], $stateMachine->getEnabledTransitions(new \stdClass(), 'another_graph'));
     }
 
+    public function testItReturnsTransitionFromStateUsingMappedAdapter(): void
+    {
+        $this->someStateMachineAdapter->expects($this->never())->method('getTransitionFromState');
+        $this->anotherStateMachineAdapter->expects($this->once())->method('getTransitionFromState')->willReturn('some_transition');
+
+        $stateMachine = $this->createTestSubject();
+        $this->assertSame('some_transition', $stateMachine->getTransitionFromState(new \stdClass(), 'another_graph', 'some_state'));
+    }
+
+    public function testItReturnsTransitionToStateUsingMappedAdapter(): void
+    {
+        $this->someStateMachineAdapter->expects($this->never())->method('getTransitionToState');
+        $this->anotherStateMachineAdapter->expects($this->once())->method('getTransitionToState')->willReturn('some_transition');
+
+        $stateMachine = $this->createTestSubject();
+        $this->assertSame('some_transition', $stateMachine->getTransitionToState(new \stdClass(), 'another_graph', 'some_state'));
+    }
+
     private function createTestSubject(mixed ...$arguments): StateMachineInterface
     {
         return new CompositeStateMachine(...array_replace([

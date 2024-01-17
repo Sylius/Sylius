@@ -16,6 +16,7 @@ namespace spec\Sylius\Component\Core\Payment\Provider;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use SM\Factory\FactoryInterface as StateMachineFactoryInterface;
+use Sylius\Abstraction\StateMachine\StateMachineInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\PaymentInterface;
 use Sylius\Component\Core\Model\PaymentMethodInterface;
@@ -25,7 +26,7 @@ use Sylius\Component\Payment\Exception\UnresolvedDefaultPaymentMethodException;
 use Sylius\Component\Payment\Factory\PaymentFactoryInterface;
 use Sylius\Component\Payment\PaymentTransitions;
 use Sylius\Component\Payment\Resolver\DefaultPaymentMethodResolverInterface;
-use Sylius\Component\Resource\StateMachine\StateMachineInterface;
+use Sylius\Component\Resource\StateMachine\StateMachineInterface as WinzouStateMachineInterface;
 
 final class OrderPaymentProviderSpec extends ObjectBehavior
 {
@@ -54,7 +55,7 @@ final class OrderPaymentProviderSpec extends ObjectBehavior
         PaymentInterface $newPayment,
         PaymentMethodInterface $paymentMethod,
         StateMachineFactoryInterface $stateMachineFactory,
-        StateMachineInterface $stateMachine,
+        WinzouStateMachineInterface $stateMachine,
     ): void {
         $order->getTotal()->willReturn(1000);
         $order->getCurrencyCode()->willReturn('USD');
@@ -76,6 +77,40 @@ final class OrderPaymentProviderSpec extends ObjectBehavior
         $this->provideOrderPayment($order, PaymentInterface::STATE_NEW)->shouldReturn($newPayment);
     }
 
+    function it_uses_the_new_state_machine_abstraction_if_passed(
+        DefaultPaymentMethodResolverInterface $defaultPaymentMethodResolver,
+        PaymentFactoryInterface $paymentFactory,
+        StateMachineInterface $stateMachine,
+        OrderInterface $order,
+        PaymentInterface $lastCancelledPayment,
+        PaymentInterface $newPayment,
+        PaymentMethodInterface $paymentMethod,
+    ): void {
+        $this->beConstructedWith(
+            $defaultPaymentMethodResolver,
+            $paymentFactory,
+            $stateMachine,
+        );
+
+        $order->getTotal()->willReturn(1000);
+        $order->getCurrencyCode()->willReturn('USD');
+        $order->getLastPayment(PaymentInterface::STATE_CANCELLED)->willReturn($lastCancelledPayment);
+
+        $lastCancelledPayment->getMethod()->willReturn($paymentMethod);
+
+        $paymentFactory->createWithAmountAndCurrencyCode(1000, 'USD')->willReturn($newPayment);
+        $defaultPaymentMethodResolver->getDefaultPaymentMethod($newPayment)->willReturn($paymentMethod);
+
+        $newPayment->setMethod($paymentMethod)->shouldBeCalled();
+        $newPayment->getState()->willReturn(PaymentInterface::STATE_CART);
+        $newPayment->setOrder($order)->shouldBeCalled();
+
+        $stateMachine->getTransitionToState($newPayment, PaymentTransitions::GRAPH, PaymentInterface::STATE_NEW)->willReturn(PaymentTransitions::TRANSITION_CREATE);
+        $stateMachine->apply($newPayment, PaymentTransitions::GRAPH, PaymentTransitions::TRANSITION_CREATE)->shouldBeCalled();
+
+        $this->provideOrderPayment($order, PaymentInterface::STATE_NEW)->shouldReturn($newPayment);
+    }
+
     function it_provides_payment_in_configured_state_with_payment_method_from_last_failed_payment(
         DefaultPaymentMethodResolverInterface $defaultPaymentMethodResolver,
         OrderInterface $order,
@@ -84,7 +119,7 @@ final class OrderPaymentProviderSpec extends ObjectBehavior
         PaymentInterface $newPayment,
         PaymentMethodInterface $paymentMethod,
         StateMachineFactoryInterface $stateMachineFactory,
-        StateMachineInterface $stateMachine,
+        WinzouStateMachineInterface $stateMachine,
     ): void {
         $order->getTotal()->willReturn(1000);
         $order->getCurrencyCode()->willReturn('USD');
@@ -114,7 +149,7 @@ final class OrderPaymentProviderSpec extends ObjectBehavior
         PaymentInterface $newPayment,
         PaymentMethodInterface $paymentMethod,
         StateMachineFactoryInterface $stateMachineFactory,
-        StateMachineInterface $stateMachine,
+        WinzouStateMachineInterface $stateMachine,
     ): void {
         $order->getTotal()->willReturn(1000);
         $order->getCurrencyCode()->willReturn('USD');
