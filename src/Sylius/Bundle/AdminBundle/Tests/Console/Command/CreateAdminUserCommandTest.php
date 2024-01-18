@@ -15,10 +15,10 @@ namespace Sylius\Bundle\AdminBundle\Tests\Console\Command;
 
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
-use Sylius\Bundle\AdminBundle\Message\CreateAdminUser;
 use Sylius\Bundle\AdminBundle\Console\Command\Factory\QuestionFactoryInterface;
 use Sylius\Bundle\AdminBundle\Console\Command\CreateAdminUserCommand;
 use Sylius\Bundle\AdminBundle\Exception\CreateAdminUserFailedException;
+use Sylius\Bundle\AdminBundle\Message\CreateAdminUser;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Question\Question;
 use Symfony\Component\Console\Tester\CommandTester;
