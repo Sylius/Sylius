@@ -25,12 +25,12 @@
 
         <service id="Sylius\Bundle\CoreBundle\EventListener\Workflow\Order\CreatePaymentListener">
             <argument type="service" id="sylius_abstraction.state_machine" />
-            <tag name="kernel.event_listener" event="workflow.sylius_order.completed.cancel" priority="-600"/>
+            <tag name="kernel.event_listener" event="workflow.sylius_order.completed.create" priority="-600"/>
         </service>
 
         <service id="Sylius\Bundle\CoreBundle\EventListener\Workflow\Order\CreateShipmentListener">
             <argument type="service" id="sylius_abstraction.state_machine" />
-            <tag name="kernel.event_listener" event="workflow.sylius_order.completed.cancel" priority="-500"/>
+            <tag name="kernel.event_listener" event="workflow.sylius_order.completed.create" priority="-500"/>
         </service>
 
         <service id="Sylius\Bundle\CoreBundle\EventListener\Workflow\Order\DecrementPromotionUsagesListener">
