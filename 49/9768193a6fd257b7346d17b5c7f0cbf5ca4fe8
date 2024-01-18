@@ -1,0 +1,52 @@
+---------------------------------------------------------------------------
+
+by github-actions[bot] at 2023-12-04T16:24:58Z
+
+### [Bunnyshell](https://www.bunnyshell.com) Preview Environment started
+
+|Component|Endpoints|
+|---------|---------|
+|mailhog|https://mailhog-dcdqoy.bunnyenv.com/|
+|php|https://store-dcdqoy.bunnyenv.com/|
+
+Available commands:
+- `/bns:stop` to stop the environment
+- `/bns:deploy` to redeploy the environment
+- `/bns:delete` to remove the environment
+<!-- thollander/actions-comment-pull-request "bunnyshell-preview-env" -->
+
+---------------------------------------------------------------------------
+
+by diimpp at 2023-12-07T20:08:36Z
+
+With no connection to others source codes and only focusing on ValueObjects design,
+
+![image](https://github.com/Sylius/Sylius/assets/870747/c268e51a-3a1b-4371-84e7-cb9a7aa26d9d)
+
+- `SalesInPeriod` should be renamed to `SalesPoint`/`SalesRecord`/`SalesRow`, but ultimately I would suggest to go from sales VO to some basic `DataTable` for charts render. (Not some specific library, but a general data structure idea), which will allow to re-use this for more complex charts for end-users.
+    - https://developers.google.com/chart/interactive/docs/reference#DataTable
+    - https://github.com/kevinkhill/lavacharts/tree/3.1/src/DataTables
+    - https://github.com/tmilos/google-charts-php
+    - https://www.chartjs.org/docs/latest/general/data-structures.html
+- `SalesPeriod` should be renamed to `Period`.
+- `SalesSummary` should contain `Period`
+- `SalesStatistics` should be renamed to `Statistics` and would either not needed anymore after those changes, or contain `SalesSummary`,`SalesDataTable`,`OtherEndUserSummary` and possibly syncing/enforcing same `Period` of all child VOs.
+- `ValueObject` as part of the namespace is usually not used in `sylius/sylius` "components" and it can be just `ApiBundle\Statistics\Period`
+
+---------------------------------------------------------------------------
+
+by Rafikooo at 2023-12-08T08:46:52Z
+
+@diimpp, thank you for the valuable review. I'll strive to implement most of your suggestions. However, I want to clarify that this task isn't among our top priorities at the moment. We have agreed to focus on enabling retrieval within a yearly period, and closer to the release of 'Sylius 2.0', we will incorporate the requested period and interval management. Afterwards, we will deprecate the current code utilized by the UI and change the JS logic to use the new one
+
+---------------------------------------------------------------------------
+
+by jakubtobiasz at 2024-01-18T06:10:43Z
+
+/bns:start
+
+---------------------------------------------------------------------------
+
+by GSadee at 2024-01-18T06:20:15Z
+
+Thanks, Rafał! :tada:
