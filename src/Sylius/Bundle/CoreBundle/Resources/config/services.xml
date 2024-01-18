@@ -317,6 +317,8 @@
             <argument type="service" id="Sylius\Bundle\CoreBundle\Provider\CustomerProviderInterface" />
         </service>
 
+        <service id="Sylius\Component\Core\Statistics\Chart\ChartFactoryInterface" class="Sylius\Component\Core\Statistics\Chart\ChartFactory" />
+
         <service id="Sylius\Component\Core\Positioner\PositionerInterface" class="Sylius\Component\Core\Positioner\Positioner" />
     </services>
 </container>

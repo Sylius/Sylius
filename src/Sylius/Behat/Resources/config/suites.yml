@@ -9,6 +9,7 @@ imports:
     - suites/api/account/login.yml
     - suites/api/addressing/managing_countries.yml
     - suites/api/addressing/managing_zones.yml
+    - suites/api/admin/dashboard.yaml
     - suites/api/admin/login.yml
     - suites/api/admin/security.yml
     - suites/api/cart/accessing_cart.yml

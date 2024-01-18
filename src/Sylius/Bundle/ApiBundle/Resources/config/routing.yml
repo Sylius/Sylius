@@ -10,6 +10,12 @@ sylius_api_admin_authentication_token:
     path: /admin/authentication-token
     methods: ['POST']
 
+sylius_api_admin_statistics:
+    path: /admin/statistics
+    methods: ['GET']
+    defaults:
+        _controller: Sylius\Bundle\ApiBundle\Controller\GetStatisticsAction
+
 sylius_api_shop_authentication_token:
     path: /shop/authentication-token
     methods: ['POST']

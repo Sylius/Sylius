@@ -206,16 +206,6 @@ parameters:
 			path: src/Sylius/Bundle/AdminBundle/MessageHandler/CreateAdminUserHandler.php
 
 		-
-			message: "#^Method Sylius\\\\Bundle\\\\AdminBundle\\\\Provider\\\\StatisticsDataProvider\\:\\:getRawData\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Sylius/Bundle/AdminBundle/Provider/StatisticsDataProvider.php
-
-		-
-			message: "#^Method Sylius\\\\Bundle\\\\AdminBundle\\\\Provider\\\\StatisticsDataProviderInterface\\:\\:getRawData\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Sylius/Bundle/AdminBundle/Provider/StatisticsDataProviderInterface.php
-
-		-
 			message: "#^Method Sylius\\\\Bundle\\\\AdminBundle\\\\Twig\\\\ChannelNameExtension\\:\\:__construct\\(\\) has parameter \\$channelRepository with generic interface Sylius\\\\Component\\\\Channel\\\\Repository\\\\ChannelRepositoryInterface but does not specify its types\\: T$#"
 			count: 1
 			path: src/Sylius/Bundle/AdminBundle/Twig/ChannelNameExtension.php
