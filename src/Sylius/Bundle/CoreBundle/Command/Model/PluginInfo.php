@@ -13,24 +13,18 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Command\Model;
 
-final class PluginInfo
-{
-    public function __construct(private string $name, private string $description, private string $url)
-    {
-    }
+trigger_deprecation(
+    'sylius/core-bundle',
+    '1.13',
+    'The "%s" class is deprecated and will be removed in Sylius 2.0. Use "%s" instead.',
+    PluginInfo::class,
+    \Sylius\Bundle\CoreBundle\Console\Command\Model\PluginInfo::class,
+);
 
-    public function name(): string
-    {
-        return $this->name;
-    }
+class_exists(\Sylius\Bundle\CoreBundle\Console\Command\Model\PluginInfo::class);
 
-    public function description(): string
+if (false) {
+    final class PluginInfo
     {
-        return $this->description;
-    }
-
-    public function url(): string
-    {
-        return $this->url;
     }
 }
