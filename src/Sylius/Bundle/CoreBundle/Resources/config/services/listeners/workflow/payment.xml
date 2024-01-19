@@ -17,16 +17,16 @@
 
         <service id="Sylius\Bundle\CoreBundle\EventListener\Workflow\Payment\ProcessOrderListener">
             <argument type="service" id="sylius.order_processing.order_payment_processor.after_checkout" />
-            <tag name="kernel.event_listener" event="workflow.sylius_payment.completed.fail" priority="-100" />
-            <tag name="kernel.event_listener" event="workflow.sylius_payment.completed.cancel" priority="-100" />
+            <tag name="kernel.event_listener" event="workflow.sylius_payment.completed.fail" priority="100" />
+            <tag name="kernel.event_listener" event="workflow.sylius_payment.completed.cancel" priority="100" />
         </service>
 
         <service id="Sylius\Bundle\CoreBundle\EventListener\Workflow\Payment\ResolveOrderPaymentStateListener">
             <argument type="service" id="sylius.state_resolver.order_payment" />
-            <tag name="kernel.event_listener" event="workflow.sylius_payment.completed.complete" priority="-100" />
-            <tag name="kernel.event_listener" event="workflow.sylius_payment.completed.process" priority="-100" />
-            <tag name="kernel.event_listener" event="workflow.sylius_payment.completed.refund" priority="-100" />
-            <tag name="kernel.event_listener" event="workflow.sylius_payment.completed.authorize" priority="-100" />
+            <tag name="kernel.event_listener" event="workflow.sylius_payment.completed.complete" priority="100" />
+            <tag name="kernel.event_listener" event="workflow.sylius_payment.completed.process" priority="100" />
+            <tag name="kernel.event_listener" event="workflow.sylius_payment.completed.refund" priority="100" />
+            <tag name="kernel.event_listener" event="workflow.sylius_payment.completed.authorize" priority="100" />
         </service>
     </services>
 </container>
