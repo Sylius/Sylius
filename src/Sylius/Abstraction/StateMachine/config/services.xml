@@ -33,6 +33,7 @@
 
         <service id="sylius_abstraction.state_machine.adapter.winzou_state_machine" class="Sylius\Abstraction\StateMachine\WinzouStateMachineAdapter">
             <argument type="service" id="sm.factory" />
+            <argument>%sm.configs%</argument>
 
             <tag name="sylius.state_machine" key="winzou_state_machine" />
         </service>

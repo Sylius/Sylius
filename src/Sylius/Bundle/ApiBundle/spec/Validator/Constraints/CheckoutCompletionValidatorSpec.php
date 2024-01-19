@@ -16,7 +16,6 @@ namespace spec\Sylius\Bundle\ApiBundle\Validator\Constraints;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use SM\Factory\FactoryInterface;
-use SM\StateMachine\StateMachineInterface as WinzouStateMachineInterface;
 use Sylius\Abstraction\StateMachine\StateMachineInterface;
 use Sylius\Abstraction\StateMachine\Transition;
 use Sylius\Bundle\ApiBundle\Command\OrderTokenValueAwareInterface;
@@ -81,7 +80,7 @@ final class CheckoutCompletionValidatorSpec extends ObjectBehavior
         ExecutionContextInterface $executionContext,
         OrderInterface $order,
         OrderTokenValueAwareInterface $orderTokenValueAware,
-        WinzouStateMachineInterface $stateMachine,
+        WinzouStateMachineStub $stateMachine,
     ): void {
         $this->initialize($executionContext);
 
@@ -107,8 +106,20 @@ final class CheckoutCompletionValidatorSpec extends ObjectBehavior
         ExecutionContextInterface $executionContext,
         OrderInterface $order,
         OrderTokenValueAwareInterface $orderTokenValueAware,
-        WinzouStateMachineInterface $stateMachine,
+        WinzouStateMachineStub $stateMachine,
     ): void {
+        $this->setPropertyValue($stateMachine, 'config', [
+            'transitions' => [
+                'some_possible_transition' => [
+                    'from' => [],
+                    'to' => '',
+                ],
+                'another_possible_transition' => [
+                    'from' => [],
+                    'to' => '',
+                ],
+            ]
+        ]);
         $this->initialize($executionContext);
 
         $orderTokenValueAware->getOrderTokenValue()->willReturn('xxx');
@@ -116,7 +127,6 @@ final class CheckoutCompletionValidatorSpec extends ObjectBehavior
 
         $stateMachineFactory->get($order, 'sylius_order_checkout')->willReturn($stateMachine);
         $stateMachine->can(OrderCheckoutTransitions::TRANSITION_COMPLETE)->willReturn(false);
-        $stateMachine->getPossibleTransitions()->willReturn(['some_possible_transition', 'another_possible_transition']);
 
         $order->getCheckoutState()->willReturn('some_state_that_does_not_allow_to_complete_order');
 
@@ -168,5 +178,13 @@ final class CheckoutCompletionValidatorSpec extends ObjectBehavior
         ;
 
         $this->validate($orderTokenValueAware, new CheckoutCompletion());
+    }
+
+    private function setPropertyValue(object $object, string $property, mixed $value): void
+    {
+        $reflection = new \ReflectionClass(WinzouStateMachineStub::class);
+        $reflectionProperty = $reflection->getProperty($property);
+        $reflectionProperty->setAccessible(true);
+        $reflectionProperty->setValue($object, $value);
     }
 }

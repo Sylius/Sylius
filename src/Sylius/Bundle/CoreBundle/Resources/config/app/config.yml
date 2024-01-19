@@ -143,13 +143,13 @@ sonata_block:
                 statistics: ~
                 taxon: ~
 
-sylius_state_machine_abstraction:
-    graphs_to_adapters_mapping:
-        sylius_catalog_promotion: symfony_workflow
-        sylius_order: symfony_workflow
-        sylius_order_checkout: symfony_workflow
-        sylius_order_payment: symfony_workflow
-        sylius_order_shipping: symfony_workflow
-        sylius_payment: symfony_workflow
-        sylius_product_review: symfony_workflow
-        sylius_shipment: symfony_workflow
+#sylius_state_machine_abstraction:
+#    graphs_to_adapters_mapping:
+#        sylius_catalog_promotion: symfony_workflow
+#        sylius_order: symfony_workflow
+#        sylius_order_checkout: symfony_workflow
+#        sylius_order_payment: symfony_workflow
+#        sylius_order_shipping: symfony_workflow
+#        sylius_payment: symfony_workflow
+#        sylius_product_review: symfony_workflow
+#        sylius_shipment: symfony_workflow

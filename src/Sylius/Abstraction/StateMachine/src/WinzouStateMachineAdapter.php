@@ -16,7 +16,6 @@ namespace Sylius\Abstraction\StateMachine;
 use SM\Factory\FactoryInterface;
 use SM\SMException;
 use Sylius\Abstraction\StateMachine\Exception\StateMachineExecutionException;
-use Sylius\Component\Resource\StateMachine\StateMachineInterface as ResourceStateMachineInterface;
 
 final class WinzouStateMachineAdapter implements StateMachineInterface
 {
@@ -45,47 +44,63 @@ final class WinzouStateMachineAdapter implements StateMachineInterface
     public function getEnabledTransitions(object $subject, string $graphName): array
     {
         try {
-            $transitions = $this->getStateMachine($subject, $graphName)->getPossibleTransitions();
+            $stateMachine = $this->getStateMachine($subject, $graphName);
+            $transitions = $this->getTransitionsConfig($stateMachine);
         } catch (SMException $exception) {
             throw new StateMachineExecutionException($exception->getMessage(), $exception->getCode(), $exception);
         }
 
-        return array_map(
-            fn (string $transition) => new Transition($transition, null, null),
-            $transitions,
-        );
+        $result = [];
+
+        foreach ($transitions as $transitionName => $transitionConfig) {
+            $froms = $transitionConfig['from'];
+            $tos = array($transitionConfig['to']);
+            $result[] = new Transition($transitionName, $froms, $tos);
+        }
+
+        return $result;
     }
 
+    /**
+     * @return array<string, array{from: array<string>, to: string}>
+     * @throws \ReflectionException
+     */
+    private function getTransitionsConfig(\SM\StateMachine\StateMachineInterface $stateMachine): array
+    {
+        $reflection = new \ReflectionClass($stateMachine);
+        $configProperty = $reflection->getProperty('config');
+        $configProperty->setAccessible(true);
+        $configPropertyValue = $configProperty->getValue($stateMachine);
+
+        return $configPropertyValue['transitions'];
+    }
+
+    /**
+     * @throws StateMachineExecutionException
+     */
     public function getTransitionFromState(object $subject, string $graphName, string $fromState): ?string
     {
-        $stateMachine = $this->getStateMachine($subject, $graphName);
-
-        if (!$stateMachine instanceof ResourceStateMachineInterface) {
-            throw new StateMachineExecutionException(sprintf(
-                "Method %s::%s() is not supported when the state machine is not an instance of %s.",
-                self::class,
-                __FUNCTION__,
-                ResourceStateMachineInterface::class,
-            ));
+        foreach ($this->getEnabledTransitions($subject, $graphName) as $transition) {
+            if ($transition->getFroms() !== null && in_array($fromState, $transition->getFroms(), true)) {
+                return $transition->getName();
+            }
         }
 
-        return $stateMachine->getTransitionFromState($fromState);
+        return null;
     }
 
+    /**
+     * @throws StateMachineExecutionException
+     */
     public function getTransitionToState(object $subject, string $graphName, string $toState): ?string
     {
-        $stateMachine = $this->getStateMachine($subject, $graphName);
-
-        if (!$stateMachine instanceof ResourceStateMachineInterface) {
-            throw new StateMachineExecutionException(sprintf(
-                "Method %s::%s() is not supported when the state machine is not an instance of %s.",
-                self::class,
-                __FUNCTION__,
-                ResourceStateMachineInterface::class,
-            ));
+        foreach ($this->getEnabledTransitions($subject, $graphName) as $transition) {
+            if ($transition->getTos() !== null && in_array($toState, $transition->getTos(), true)) {
+                return $transition->getName();
+            }
         }
 
-        return $stateMachine->getTransitionToState($toState);
+        return null;
     }
 
     private function getStateMachine(object $subject, string $graphName): \SM\StateMachine\StateMachineInterface
