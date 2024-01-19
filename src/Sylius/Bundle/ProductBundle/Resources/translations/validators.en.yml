@@ -26,6 +26,8 @@ sylius:
             regex: Product variant code can only be comprised of letters, numbers, dashes and underscores.
             unique: Product variant code must be unique.
             within_product_unique: This code must be unique within this product.
+        option_values:
+            not_configured: 'The product variant must have configured values for all options chosen on the product.'
     simple_product:
         code:
             unique: Simple product code must be unique among all products and product variants.

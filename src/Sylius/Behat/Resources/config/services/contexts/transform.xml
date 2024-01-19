@@ -179,5 +179,9 @@
             <argument type="service" id="sylius.repository.zone" />
             <argument type="service" id="sylius.repository.zone_member" />
         </service>
+
+        <service id="sylius.behat.context.transform.shop_user" class="Sylius\Behat\Context\Transform\ShopUserContext">
+            <argument type="service" id="sylius.repository.shop_user" />
+        </service>
     </services>
 </container>

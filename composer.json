@@ -262,6 +262,7 @@
     },
     "autoload": {
         "psr-4": {
+            "Sylius\\Abstraction\\StateMachine\\": "src/Sylius/Abstraction/StateMachine/src",
             "Sylius\\Behat\\": "src/Sylius/Behat/",
             "Sylius\\Bundle\\": "src/Sylius/Bundle/",
             "Sylius\\Component\\": "src/Sylius/Component/"
@@ -316,7 +317,8 @@
             "spec\\Sylius\\Bundle\\TaxationBundle\\": "src/Sylius/Bundle/TaxationBundle/spec/",
             "spec\\Sylius\\Bundle\\TaxonomyBundle\\": "src/Sylius/Bundle/TaxonomyBundle/spec/",
             "spec\\Sylius\\Bundle\\UiBundle\\": "src/Sylius/Bundle/UiBundle/spec/",
-            "spec\\Sylius\\Bundle\\UserBundle\\": "src/Sylius/Bundle/UserBundle/spec/"
+            "spec\\Sylius\\Bundle\\UserBundle\\": "src/Sylius/Bundle/UserBundle/spec/",
+            "Tests\\Sylius\\Abstraction\\StateMachine\\": "src/Sylius/Abstraction/StateMachine/tests"
         },
         "classmap": [
             "src/Kernel.php"

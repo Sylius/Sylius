@@ -9,6 +9,7 @@ imports:
     - suites/api/account/login.yml
     - suites/api/addressing/managing_countries.yml
     - suites/api/addressing/managing_zones.yml
+    - suites/api/admin/dashboard.yaml
     - suites/api/admin/login.yml
     - suites/api/admin/security.yml
     - suites/api/cart/accessing_cart.yml
@@ -68,8 +69,10 @@ imports:
     - suites/api/user/managing_administrators.yml
     - suites/api/user/managing_customer_groups.yml
     - suites/api/user/managing_customers.yml
+    - suites/api/user/managing_users.yml
 
     - suites/cli/canceling_unpaid_orders.yml
+    - suites/cli/change_admin_password.yml
     - suites/cli/installer.yml
     - suites/cli/showing_available_plugins.yml
 

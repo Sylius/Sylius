@@ -222,7 +222,6 @@
         <service id="sylius.behat.context.api.admin.managing_orders" class="Sylius\Behat\Context\Api\Admin\ManagingOrdersContext">
             <argument type="service" id="sylius.behat.api_platform_client.admin" />
             <argument type="service" id="Sylius\Behat\Client\ResponseCheckerInterface" />
-            <argument type="service" id="sylius.behat.request_factory" />
             <argument type="service" id="api_platform.iri_converter" />
             <argument type="service" id="sylius.behat.api_security" />
             <argument type="service" id="sylius.behat.shared_storage" />
@@ -303,6 +302,7 @@
             <argument type="service" id="sylius.behat.api_platform_client.admin" />
             <argument type="service" id="Sylius\Behat\Client\ResponseCheckerInterface" />
             <argument type="service" id="api_platform.iri_converter" />
+            <argument type="service" id="sylius.behat.shared_storage" />
         </service>
 
         <service id="sylius.behat.context.api.admin.managing_placed_order_addresses" class="Sylius\Behat\Context\Api\Admin\ManagingPlacedOrderAddressesContext">
@@ -316,6 +316,12 @@
             <argument type="service" id="sylius.behat.request_factory" />
             <argument type="service" id="Sylius\Behat\Client\ResponseCheckerInterface" />
             <argument type="service" id="sylius.behat.section_iri_converter" />
+        </service>
+
+        <service id="Sylius\Behat\Context\Api\Admin\DashboardContext">
+            <argument type="service" id="sylius.behat.api_platform_client.admin" />
+            <argument type="service" id="Sylius\Behat\Client\ResponseCheckerInterface" />
+            <argument type="service" id="Sylius\Calendar\Provider\DateTimeProviderInterface" />
         </service>
     </services>
 </container>

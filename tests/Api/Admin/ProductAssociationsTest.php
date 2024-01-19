@@ -36,8 +36,7 @@ final class ProductAssociationsTest extends JsonApiTestCase
                 ->headerBuilder()
                 ->withJsonLdAccept()
                 ->withAdminUserAuthorization('api@example.com')
-                ->build()
-            ,
+                ->build(),
         );
 
         $this->assertResponse(
@@ -62,8 +61,7 @@ final class ProductAssociationsTest extends JsonApiTestCase
                 ->headerBuilder()
                 ->withJsonLdAccept()
                 ->withAdminUserAuthorization('api@example.com')
-                ->build()
-            ,
+                ->build(),
         );
 
         $response = $this->client->getResponse();
@@ -76,7 +74,7 @@ final class ProductAssociationsTest extends JsonApiTestCase
     {
         $this->loadFixturesFromFiles([
             'product/product_with_many_locales.yaml',
-            'authentication/api_administrator.yaml'
+            'authentication/api_administrator.yaml',
         ]);
 
         $this->client->request(
@@ -86,8 +84,7 @@ final class ProductAssociationsTest extends JsonApiTestCase
                 ->headerBuilder()
                 ->withJsonLdAccept()
                 ->withAdminUserAuthorization('api@example.com')
-                ->build()
-            ,
+                ->build(),
         );
 
         $this->assertResponse(
@@ -113,8 +110,7 @@ final class ProductAssociationsTest extends JsonApiTestCase
                 ->withJsonLdContentType()
                 ->withJsonLdAccept()
                 ->withAdminUserAuthorization('api@example.com')
-                ->build()
-            ,
+                ->build(),
             content: json_encode([
                 'type' => '/api/v2/admin/product-association-types/similar_products',
                 'owner' => '/api/v2/admin/products/CUP',
@@ -149,8 +145,7 @@ final class ProductAssociationsTest extends JsonApiTestCase
                 ->withJsonLdContentType()
                 ->withJsonLdAccept()
                 ->withAdminUserAuthorization('api@example.com')
-                ->build()
-            ,
+                ->build(),
             content: json_encode([
                 'associatedProducts' => [
                     '/api/v2/admin/products/TANKARD',
@@ -217,8 +212,7 @@ final class ProductAssociationsTest extends JsonApiTestCase
                 ->withJsonLdContentType()
                 ->withJsonLdAccept()
                 ->withAdminUserAuthorization('api@example.com')
-                ->build()
-            ,
+                ->build(),
             content: '{}',
         );
 
@@ -248,8 +242,7 @@ final class ProductAssociationsTest extends JsonApiTestCase
                 ->withJsonLdContentType()
                 ->withJsonLdAccept()
                 ->withAdminUserAuthorization('api@example.com')
-                ->build()
-            ,
+                ->build(),
             content: json_encode([
                 'type' => sprintf('/api/v2/admin/product-association-types/%s', $association->getType()->getCode()),
                 'owner' => sprintf('/api/v2/admin/products/%s', $association->getOwner()->getCode()),

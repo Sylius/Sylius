@@ -13,49 +13,18 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Command;
 
-use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Output\OutputInterface;
+trigger_deprecation(
+    'sylius/core-bundle',
+    '1.13',
+    'The "%s" class is deprecated and will be removed in Sylius 2.0. Use "%s" instead.',
+    InstallAssetsCommand::class,
+    \Sylius\Bundle\CoreBundle\Console\Command\InstallAssetsCommand::class,
+);
 
-final class InstallAssetsCommand extends AbstractInstallCommand
-{
-    protected static $defaultName = 'sylius:install:assets';
+class_exists(\Sylius\Bundle\CoreBundle\Console\Command\InstallAssetsCommand::class);
 
-    protected function configure(): void
+if (false) {
+    final class InstallAssetsCommand
     {
-        $this
-            ->setDescription('Installs all Sylius assets.')
-            ->setHelp(
-                <<<EOT
-The <info>%command.name%</info> command downloads and installs all Sylius media assets.
-EOT
-            )
-        ;
-    }
-
-    protected function execute(InputInterface $input, OutputInterface $output): int
-    {
-        $output->writeln(sprintf(
-            'Installing Sylius assets for environment <info>%s</info>.',
-            $this->getEnvironment(),
-        ));
-
-        try {
-            $publicDir = $this->getContainer()->getParameter('sylius_core.public_dir');
-
-            $this->ensureDirectoryExistsAndIsWritable($publicDir . '/assets/', $output);
-            $this->ensureDirectoryExistsAndIsWritable($publicDir . '/bundles/', $output);
-        } catch (\RuntimeException $exception) {
-            $output->writeln($exception->getMessage());
-
-            return 1;
-        }
-
-        $commands = [
-            'assets:install' => ['target' => $publicDir],
-        ];
-
-        $this->runCommands($commands, $output);
-
-        return 0;
     }
 }

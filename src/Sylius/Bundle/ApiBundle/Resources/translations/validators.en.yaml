@@ -6,10 +6,20 @@ sylius:
         is_verified: 'Account with email %email% is currently verified.'
     address:
         without_country: 'The address without country cannot exist'
+    code:
+        invalid: 'The code should contain only letters, numbers, dashes ("-" symbol) and underscores ("_" symbol).'
     contact_request:
         email_is_invalid: 'The provided email is invalid.'
     country:
         not_exist: 'The country %countryCode% does not exist.'
+    date_interval:
+        empty: 'The date interval cannot be empty.'
+        invalid: 'The date interval is not valid ISO 8601 interval.'
+    date_period:
+        end_date_is_not_before_start_date: 'The end date is not before start date.'
+        end_date_must_be_multiple_of_interval: 'End date "%givenDate%" must be multiple of interval, expected "%expectedDate%".'
+    date_time:
+        invalid: 'The date time is not valid ISO 8601 date time in Y-m-d\TH:i:s format.'
     order:
         not_empty: 'An empty order cannot be completed.'
     payment_method:

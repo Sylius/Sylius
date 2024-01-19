@@ -281,19 +281,28 @@ class OrderRepository extends BaseOrderRepository implements OrderRepositoryInte
         \DateTimeInterface $startDate,
         \DateTimeInterface $endDate,
     ): int {
-        return (int) $this->createQueryBuilder('o')
+        return (int) $this->createPaidOrdersInChannelPlacedWithinDateRangeQueryBuilder($channel, $startDate, $endDate)
             ->select('SUM(o.total)')
-            ->andWhere('o.channel = :channel')
-            ->andWhere('o.paymentState = :state')
-            ->andWhere('o.checkoutCompletedAt >= :startDate')
-            ->andWhere('o.checkoutCompletedAt <= :endDate')
-            ->setParameter('channel', $channel)
-            ->setParameter('state', OrderPaymentStates::STATE_PAID)
-            ->setParameter('startDate', $startDate)
-            ->setParameter('endDate', $endDate)
             ->getQuery()
             ->getSingleScalarResult()
         ;
+    }
+
+    public function getTotalPaidSalesForChannelInPeriodGroupedByYearAndMonth(
+        ChannelInterface $channel,
+        \DateTimeInterface $startDate,
+        \DateTimeInterface $endDate,
+    ): array {
+        $queryBuilder = $this->createPaidOrdersInChannelPlacedWithinDateRangeQueryBuilder($channel, $startDate, $endDate);
+
+        return $queryBuilder
+            ->select('SUM(o.total) AS total')
+            ->addSelect('YEAR(o.checkoutCompletedAt) AS year')
+            ->addSelect('MONTH(o.checkoutCompletedAt) AS month')
+            ->groupBy('year')
+            ->addGroupBy('month')
+            ->getQuery()
+            ->getArrayResult();
     }
 
     public function countFulfilledByChannel(ChannelInterface $channel): int
@@ -498,5 +507,21 @@ class OrderRepository extends BaseOrderRepository implements OrderRepositoryInte
             ->getQuery()
             ->getOneOrNullResult()
         ;
+    }
+
+    protected function createPaidOrdersInChannelPlacedWithinDateRangeQueryBuilder(
+        ChannelInterface $channel,
+        \DateTimeInterface $startDate,
+        \DateTimeInterface $endDate,
+    ): QueryBuilder {
+        return $this->createQueryBuilder('o')
+            ->andWhere('o.paymentState = :paymentState')
+            ->andWhere('o.channel = :channel')
+            ->andWhere('o.checkoutCompletedAt >= :startDate')
+            ->andWhere('o.checkoutCompletedAt <= :endDate')
+            ->setParameter('paymentState', OrderPaymentStates::STATE_PAID)
+            ->setParameter('channel', $channel)
+            ->setParameter('startDate', $startDate)
+            ->setParameter('endDate', $endDate);
     }
 }

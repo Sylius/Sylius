@@ -231,5 +231,11 @@
             <tag name="messenger.message_handler" bus="sylius.command_bus" />
             <tag name="messenger.message_handler" bus="sylius_default.bus" />
         </service>
+
+        <service id="Sylius\Bundle\ApiBundle\CommandHandler\Customer\RemoveShopUserHandler">
+            <argument type="service" id="sylius.repository.shop_user" />
+            <tag name="messenger.message_handler" bus="sylius.command_bus" />
+            <tag name="messenger.message_handler" bus="sylius_default.bus" />
+        </service>
     </services>
 </container>

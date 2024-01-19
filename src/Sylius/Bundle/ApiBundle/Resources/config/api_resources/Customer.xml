@@ -95,6 +95,12 @@
                 </attribute>
             </itemOperation>
 
+            <itemOperation name="admin_delete_user">
+                <attribute name="method">DELETE</attribute>
+                <attribute name="path">/admin/customer/{id}/user</attribute>
+                <attribute name="controller">Sylius\Bundle\ApiBundle\Controller\RemoveCustomerShopUserAction</attribute>
+            </itemOperation>
+
             <itemOperation name="shop_get">
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/shop/customers/{id}</attribute>

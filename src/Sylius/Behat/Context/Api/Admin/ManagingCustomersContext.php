@@ -18,8 +18,10 @@ use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Context\Api\Resources;
+use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Addressing\Model\CountryInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
+use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Component\Customer\Model\CustomerGroupInterface;
 use Webmozart\Assert\Assert;
 
@@ -31,6 +33,7 @@ final class ManagingCustomersContext implements Context
         private ApiClientInterface $client,
         private ResponseCheckerInterface $responseChecker,
         private IriConverterInterface $iriConverter,
+        private SharedStorageInterface $sharedStorage,
     ) {
     }
 
@@ -208,6 +211,25 @@ final class ManagingCustomersContext implements Context
         $this->client->sort([
             'channel.code' => self::SORT_TYPES[$sortType],
         ]);
+    }
+
+    /**
+     * @When I change the password of user :customer to :newPassword
+     */
+    public function iChangeThePasswordOfUserTo(CustomerInterface $customer, string $newPassword): void
+    {
+        $this->iWantToEditThisCustomer($customer);
+        $this->iSpecifyItsPasswordAs($newPassword);
+        $this->client->update();
+    }
+
+    /**
+     * @When I delete the account of :shopUser user
+     */
+    public function iDeleteAccount(ShopUserInterface $shopUser): void
+    {
+        $this->sharedStorage->set('customer', $shopUser->getCustomer());
+        $this->client->delete(sprintf('customer/%s', $shopUser->getCustomer()->getId()), 'user');
     }
 
     /**
@@ -562,6 +584,20 @@ final class ManagingCustomersContext implements Context
     }
 
     /**
+     * @Then the customer with this email should still exist
+     */
+    public function customerShouldStillExist(): void
+    {
+        /** @var CustomerInterface $customer */
+        $customer = $this->sharedStorage->get('customer');
+
+        $this->client->show(Resources::CUSTOMERS, (string) $customer->getId());
+
+        Assert::same($this->client->getLastResponse()->getStatusCode(), 200);
+        Assert::same($this->responseChecker->getValue($this->client->getLastResponse(), 'email'), $customer->getEmail());
+    }
+
+    /**
      * @Then I should not see create account option
      * @Then I should still be on the customer creation page
      * @Then I should be able to specify their password
@@ -571,5 +607,29 @@ final class ManagingCustomersContext implements Context
      */
     public function intentionallyLeftBlank(): void
     {
+    }
+
+    /**
+     * @Then the user account should be deleted
+     */
+    public function accountShouldBeDeleted(): void
+    {
+        /** @var CustomerInterface $customer */
+        $customer = $this->sharedStorage->get('customer');
+
+        $response = $this->client->show(Resources::CUSTOMERS, (string) $customer->getId());
+
+        Assert::null($this->responseChecker->getValue($response, 'user'));
+    }
+
+    /**
+     * @Then I should not be able to delete it again
+     */
+    public function iShouldNotBeAbleToDeleteCustomerAgain(): void
+    {
+        $customer = $this->sharedStorage->get('customer');
+        $this->client->delete(sprintf('customer/%s', $customer->getId()), 'user');
+
+        Assert::same($this->client->getLastResponse()->getStatusCode(), 404);
     }
 }
