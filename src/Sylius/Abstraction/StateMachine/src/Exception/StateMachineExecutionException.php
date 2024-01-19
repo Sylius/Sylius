@@ -13,6 +13,6 @@ declare(strict_types=1);
 
 namespace Sylius\Abstraction\StateMachine\Exception;
 
-class StateMachineExecutionException extends \Exception
+class StateMachineExecutionException extends \RuntimeException
 {
 }

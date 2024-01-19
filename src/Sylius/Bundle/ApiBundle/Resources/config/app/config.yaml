@@ -55,6 +55,7 @@ api_platform:
 
         # Sylius exception to status code mapping
         SM\SMException: 422
+        Sylius\Abstraction\StateMachine\Exception\StateMachineExecutionException: 422
         Sylius\Bundle\ApiBundle\Exception\CannotRemoveCurrentlyLoggedInUser: 422
         Sylius\Bundle\ApiBundle\Exception\ChannelCannotBeRemoved: 422
         Sylius\Bundle\ApiBundle\Exception\ChannelPricingChannelCodeMismatchException: 422

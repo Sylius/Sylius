@@ -49,6 +49,7 @@
         "sylius/resource": "^1.9",
         "sylius/review": "^1.13",
         "sylius/shipping": "^1.13",
+        "sylius/state-machine-abstraction": "^1.13",
         "sylius/taxation": "^1.13",
         "sylius/taxonomy": "^1.13",
         "sylius/user": "^1.13",
