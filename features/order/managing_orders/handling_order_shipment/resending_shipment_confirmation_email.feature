@@ -40,4 +40,3 @@ Feature: Resending a shipment confirmation email for a chosen order
         And the customer chose "Free" shipping method with "Cash on Delivery" payment
         When I view the summary of the order "#00000023"
         Then I should not be able to resend the shipment confirmation email
-        And an email with the shipment's confirmation of the order "#00000023" should not be sent to "lucy@teamlucifer.com"

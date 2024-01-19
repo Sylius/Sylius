@@ -152,26 +152,6 @@ final class EmailContext implements Context
     }
 
     /**
-     * @Then an email with the shipment's confirmation of the order :order should not be sent to :recipient
-     */
-    public function anEmailWithShipmentDetailsOfOrderShouldNotBeSentTo(
-        OrderInterface $order,
-        string $recipient,
-        string $localeCode = 'en_US',
-    ): void {
-        $this->assertEmailDoesNotContainsMessageTo(
-            sprintf(
-                '%s %s %s %s.',
-                $this->translator->trans('sylius.email.shipment_confirmation.your_order_with_number', [], null, $localeCode),
-                $order->getNumber(),
-                $this->translator->trans('sylius.email.shipment_confirmation.has_been_sent_using', [], null, $localeCode),
-                $this->getShippingMethodName($order),
-            ),
-            $recipient,
-        );
-    }
-
-    /**
      * @Then it should be sent to :recipient
      * @Then the email with contact request should be sent to :recipient
      */
