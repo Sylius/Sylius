@@ -67,7 +67,7 @@ class CheckoutCompletionValidator extends ConstraintValidator
         }
 
         $this->context->addViolation($constraint->message, [
-            '%currentState%' => $order->getState(),
+            '%currentState%' => $order->getCheckoutState(),
             '%possibleTransitions%' => implode(
                 ', ',
                 array_map(

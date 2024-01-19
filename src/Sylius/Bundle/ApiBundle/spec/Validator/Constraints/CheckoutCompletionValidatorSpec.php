@@ -118,7 +118,7 @@ final class CheckoutCompletionValidatorSpec extends ObjectBehavior
         $stateMachine->can(OrderCheckoutTransitions::TRANSITION_COMPLETE)->willReturn(false);
         $stateMachine->getPossibleTransitions()->willReturn(['some_possible_transition', 'another_possible_transition']);
 
-        $order->getState()->willReturn('some_state_that_does_not_allow_to_complete_order');
+        $order->getCheckoutState()->willReturn('some_state_that_does_not_allow_to_complete_order');
 
         $executionContext
             ->addViolation(
@@ -154,7 +154,7 @@ final class CheckoutCompletionValidatorSpec extends ObjectBehavior
             ->willReturn([new Transition('some_possible_transition', null, null), new Transition('another_possible_transition', null, null)])
         ;
 
-        $order->getState()->willReturn('some_state_that_does_not_allow_to_complete_order');
+        $order->getCheckoutState()->willReturn('some_state_that_does_not_allow_to_complete_order');
 
         $executionContext
             ->addViolation(
