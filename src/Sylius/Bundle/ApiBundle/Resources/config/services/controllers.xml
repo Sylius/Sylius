@@ -69,6 +69,10 @@
             <argument type="service" id="sylius.query_bus" />
             <argument type="service" id="serializer" />
             <argument type="service" id="validator" />
+            <argument type="collection">
+                <argument key="month">P1M</argument>
+                <argument key="day">P1D</argument>
+            </argument>
         </service>
     </services>
 </container>

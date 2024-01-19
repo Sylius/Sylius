@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\Controller;
 
-use Sylius\Bundle\ApiBundle\Exception\ChannelNotFoundException;
 use Sylius\Bundle\ApiBundle\Query\GetStatistics;
 use Sylius\Bundle\ApiBundle\Validator\Constraints as Assert;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -23,7 +22,7 @@ use Symfony\Component\Messenger\Exception\HandlerFailedException;
 use Symfony\Component\Messenger\HandleTrait;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Serializer\SerializerInterface;
-use Symfony\Component\Validator\Constraints as BaseAssert;
+use Symfony\Component\Validator\Constraints as SymfonyAssert;
 use Symfony\Component\Validator\ConstraintViolationListInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
@@ -31,21 +30,16 @@ final class GetStatisticsAction
 {
     use HandleTrait;
 
-    private BaseAssert\Collection $constraint;
+    private SymfonyAssert\Collection $constraint;
 
     public function __construct(
         MessageBusInterface $messageBus,
         private SerializerInterface $serializer,
         private ValidatorInterface $validator,
+        private array $intervals,
     ) {
         $this->messageBus = $messageBus;
-
-        $this->constraint = new BaseAssert\Collection([
-            'channelCode' => new Assert\Code(),
-            'startDate' => new BaseAssert\DateTime('Y-m-d\TH:i:s', message: 'sylius.date_time.invalid'),
-            'dateInterval' => new Assert\DateInterval(),
-            'endDate' => new BaseAssert\DateTime('Y-m-d\TH:i:s', message: 'sylius.date_time.invalid'),
-        ]);
+        $this->constraint = $this->createInputDataConstraints();
     }
 
     /**
@@ -62,14 +56,9 @@ final class GetStatisticsAction
 
         $period = new \DatePeriod(
             new \DateTimeImmutable($parameters['startDate']),
-            new \DateInterval($parameters['dateInterval']),
+            new \DateInterval($this->intervals[$parameters['interval']]),
             new \DateTimeImmutable($parameters['endDate']),
         );
-
-        $violations = $this->validator->validate($period, new Assert\DatePeriod());
-        if (count($violations) > 0) {
-            return $this->createBadRequestResponse($violations);
-        }
 
         try {
             $result = $this->handle(new GetStatistics($period, $parameters['channelCode']));
@@ -91,5 +80,22 @@ final class GetStatisticsAction
             status: Response::HTTP_BAD_REQUEST,
             json: true,
         );
+    }
+
+    private function createInputDataConstraints(): SymfonyAssert\Collection
+    {
+        return new SymfonyAssert\Collection([
+            'channelCode' => new Assert\Code(),
+            'startDate' => [
+                new SymfonyAssert\NotBlank(),
+                new SymfonyAssert\DateTime('Y-m-d\TH:i:s', message: 'sylius.date_time.invalid'),
+            ],
+            'interval' => new SymfonyAssert\Choice(choices: array_keys($this->intervals), multiple: false),
+            'endDate' => [
+                new SymfonyAssert\NotBlank(),
+                new SymfonyAssert\DateTime('Y-m-d\TH:i:s', message: 'sylius.date_time.invalid'),
+                new SymfonyAssert\GreaterThan(propertyPath: 'startDate'),
+            ],
+        ]);
     }
 }
