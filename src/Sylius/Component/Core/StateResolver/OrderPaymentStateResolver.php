@@ -48,9 +48,12 @@ final class OrderPaymentStateResolver implements StateResolverInterface
         Assert::isInstanceOf($order, OrderInterface::class);
 
         $targetTransition = $this->getTargetTransition($order);
+        $stateMachine = $this->getStateMachine();
 
         if (null !== $targetTransition) {
-            $this->getStateMachine()->apply($order, OrderPaymentTransitions::GRAPH, $targetTransition);
+            if ($stateMachine->can($order, OrderPaymentTransitions::GRAPH, $targetTransition)) {
+                $stateMachine->apply($order, OrderPaymentTransitions::GRAPH, $targetTransition);
+            }
         }
     }
 
