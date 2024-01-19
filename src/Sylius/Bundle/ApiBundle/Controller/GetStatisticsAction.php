@@ -73,19 +73,15 @@ final class GetStatisticsAction
 
         try {
             $result = $this->handle(new GetStatistics($period, $parameters['channelCode']));
-            $status = Response::HTTP_OK;
+
+            return new JsonResponse(
+                data: $this->serializer->serialize($result, 'json'),
+                status: Response::HTTP_OK,
+                json: true,
+            );
         } catch (HandlerFailedException $exception) {
-            $exception = $exception->getPrevious();
-            $result = ['message' => $exception->getMessage()];
-
-            if ($exception instanceof ChannelNotFoundException) {
-                $status = Response::HTTP_NOT_FOUND;
-            } else {
-                throw $exception;
-            }
+            throw $exception->getPrevious();
         }
-
-        return new JsonResponse(data: $this->serializer->serialize($result, 'json'), status: $status, json: true);
     }
 
     private function createBadRequestResponse(ConstraintViolationListInterface $violations): JsonResponse
