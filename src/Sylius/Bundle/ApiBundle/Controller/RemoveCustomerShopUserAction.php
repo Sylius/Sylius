@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace Sylius\Bundle\ApiBundle\Controller;
 
 use Sylius\Bundle\ApiBundle\Command\Customer\RemoveShopUser;
-use Sylius\Bundle\ApiBundle\Exception\CustomerNotFoundException;
 use Sylius\Bundle\ApiBundle\Exception\UserNotFoundException;
 use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;

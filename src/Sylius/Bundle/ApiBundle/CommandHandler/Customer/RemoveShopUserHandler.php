@@ -26,7 +26,7 @@ final class RemoveShopUserHandler
      */
     public function __construct(
         private UserRepositoryInterface $shopUserRepository,
-    ){
+    ) {
     }
 
     public function __invoke(RemoveShopUser $removeShopUser): void
