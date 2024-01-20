@@ -16,7 +16,6 @@ namespace Sylius\Behat\Context\Api\Admin;
 use ApiPlatform\Api\IriConverterInterface;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
-use Sylius\Behat\Client\RequestFactoryInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Context\Api\Resources;
 use Sylius\Behat\Context\Api\Subresources;
