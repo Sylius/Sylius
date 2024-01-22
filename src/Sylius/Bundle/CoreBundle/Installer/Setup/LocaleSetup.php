@@ -20,16 +20,29 @@ use Symfony\Component\Console\Helper\QuestionHelper;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\Question;
+use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Intl\Exception\MissingResourceException;
 use Symfony\Component\Intl\Languages;
+use Symfony\Component\Yaml\Yaml;
 
 final class LocaleSetup implements LocaleSetupInterface
 {
-    private string $locale;
-
-    public function __construct(private RepositoryInterface $localeRepository, private FactoryInterface $localeFactory, string $locale)
-    {
+    public function __construct(
+        private RepositoryInterface $localeRepository,
+        private FactoryInterface $localeFactory,
+        private string $locale,
+        private ?Filesystem $filesystem = null,
+        private ?string $localeParameterFilePath = 'config/parameters.yaml',
+    ) {
         $this->locale = trim($locale);
+
+        if (null === $this->filesystem) {
+            trigger_deprecation('sylius/sylius', '1.13', 'Not passing %s to %s constructor is deprecated. It will be required in Sylius 2.0.', Filesystem::class, self::class);
+        }
+
+        if (null === $this->localeParameterFilePath) {
+            trigger_deprecation('sylius/sylius', '1.13', 'Not passing $localeParameterFilePath to %s constructor is deprecated. It will be required in Sylius 2.0.', self::class);
+        }
     }
 
     public function setup(InputInterface $input, OutputInterface $output, QuestionHelper $questionHelper): LocaleInterface
@@ -37,10 +50,6 @@ final class LocaleSetup implements LocaleSetupInterface
         $code = $this->getLanguageCodeFromUser($input, $output, $questionHelper);
 
         $output->writeln(sprintf('Adding <info>%s</info> locale.', $code));
-
-        if ($this->locale !== $code) {
-            $output->writeln('<info>You may also need to add this locale into config/services.yaml configuration.</info>');
-        }
 
         /** @var LocaleInterface|null $existingLocale */
         $existingLocale = $this->localeRepository->findOneBy(['code' => $code]);
@@ -71,6 +80,8 @@ final class LocaleSetup implements LocaleSetupInterface
             $name = $this->getLanguageName($code);
         }
 
+        $this->updateLocaleParameter($code, $output);
+
         $output->writeln(sprintf('Adding <info>%s</info> Language.', $name));
 
         return $code;
@@ -99,5 +110,23 @@ final class LocaleSetup implements LocaleSetupInterface
         } catch (MissingResourceException) {
             return null;
         }
+    }
+
+    private function updateLocaleParameter(string $code, OutputInterface $output): void
+    {
+        if (
+            $this->localeParameterFilePath === null ||
+            $this->filesystem === null ||
+            !$this->filesystem->exists($this->localeParameterFilePath)
+        ) {
+            $output->writeln('<info>You may also need to add this locale into config/parameters.yaml configuration.</info>');
+
+            return;
+        }
+
+        $content = Yaml::parseFile($this->localeParameterFilePath);
+        $content['parameters']['locale'] = $code;
+
+        $this->filesystem->dumpFile($this->localeParameterFilePath, Yaml::dump($content));
     }
 }
