@@ -1,6 +1,6 @@
 # UPGRADE FROM `v1.12.X` TO `v1.13.0`
 
-1. There has been a naw parameter added to specify the validation groups for given gateway factory.
+1. A new parameter has been added to specify the validation groups for given gateway factory.
    If you have any custom validation groups for your factory, you need to add them to your `config/packages/_sylius.yaml` file.
    Also, if you have your own gateway factory and want to add your validation groups you can add another entry to the `validation_groups` configuration node.
    It is handled by `GatewayConfigGroupsGenerator` and it resolves the groups based on the passed factory name.
@@ -19,7 +19,7 @@
                     - 'your_custom_validation_group'
     ```
 
-1. There have been a naw parameters added to specify the validation groups for given shipping method rule and calculator.
+1. New parameters have been added to specify the validation groups for given shipping method rules and calculators.
    If you have any custom validation groups for your calculator or rules, you need to add them to your `config/packages/_sylius.yaml` file.
    Also, if you have your own shipping method rule or calculator and want to add your validation groups you can add another key to the `validation_groups` parameter.
 
@@ -58,7 +58,7 @@
 1. Class `Sylius\Bundle\ProductBundle\Form\Type\ProductOptionChoiceType` has been deprecated.
    Use `Sylius\Bundle\ProductBundle\Form\Type\ProductOptionAutocompleteType` instead.
 
-1. Using `parentId` query parameter to generate slug in `Sylius\Bundle\TaxonomyBundle\Controller\TaxonSlugController` has been deprecated.
+1. Using `parentId` query parameter to generate the slug in `Sylius\Bundle\TaxonomyBundle\Controller\TaxonSlugController` has been deprecated.
    Use the `parentCode` query parameter instead.
 
 1. Starting with Sylius 1.13, the `SyliusPriceHistoryPlugin` is included.
@@ -85,7 +85,7 @@
 1. Not passing `Doctrine\Persistence\ObjectManager` to `Sylius\Component\Core\Updater\UnpaidOrdersStateUpdater`
    as a fifth argument is deprecated.
 
-1. To ease customization we've introduces attributes for some services in `1.13`:
+1. To ease customization we've introduced attributes for some services in `1.13`:
    - `Sylius\Bundle\OrderBundle\Attribute\AsCartContext` for cart contexts
    - `Sylius\Bundle\OrderBundle\Attribute\AsOrderProcessor` for order processors
    - `Sylius\Bundle\ProductBundle\Attribute\AsProductVariantResolver` for product variant resolvers
