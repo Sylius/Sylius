@@ -14,8 +14,8 @@ declare(strict_types=1);
 namespace spec\Sylius\Bundle\ApiBundle\QueryHandler;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\ApiBundle\Query\GetStatistics;
 use Sylius\Bundle\ApiBundle\Exception\ChannelNotFoundException;
+use Sylius\Bundle\ApiBundle\Query\GetStatistics;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Statistics\Provider\StatisticsProviderInterface;
@@ -34,7 +34,7 @@ final class GetStatisticsHandlerSpec extends ObjectBehavior
         ChannelInterface $channel,
         GetStatistics $query,
         \DatePeriod $datePeriod,
-        Statistics $statistics
+        Statistics $statistics,
     ): void {
         $query->getChannelCode()->willReturn('CHANNEL_CODE');
         $query->getDatePeriod()->willReturn($datePeriod);

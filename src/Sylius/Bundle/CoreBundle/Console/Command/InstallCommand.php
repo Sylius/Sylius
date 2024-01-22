@@ -23,7 +23,7 @@ final class InstallCommand extends AbstractInstallCommand
 {
     protected static $defaultName = 'sylius:install';
 
-    /** @var array<int, array<string, string>> $commands */
+    /** @var array<int, array<string, string>> */
     private array $commands = [
         [
             'command' => 'check-requirements',

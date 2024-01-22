@@ -16,7 +16,6 @@ namespace spec\Sylius\Bundle\ApiBundle\CommandHandler;
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ApiBundle\Command\Customer\RemoveShopUser;
 use Sylius\Bundle\UserBundle\Exception\UserNotFoundException;
-use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
 

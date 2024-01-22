@@ -16,7 +16,6 @@ namespace Sylius\Behat\Context\Api\Admin;
 use ApiPlatform\Api\IriConverterInterface;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
-use Sylius\Behat\Client\RequestFactoryInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Context\Api\Resources;
 use Sylius\Behat\Context\Api\Subresources;
@@ -166,6 +165,19 @@ final class ManagingOrdersContext implements Context
     }
 
     /**
+     * @When I resend the shipment confirmation email
+     */
+    public function iResendTheShipmentConfirmationEmail(): void
+    {
+        $this->client->customItemAction(
+            Resources::SHIPMENTS,
+            (string) $this->sharedStorage->get('order')->getShipments()->last()->getId(),
+            HttpRequest::METHOD_POST,
+            'resend-confirmation-email',
+        );
+    }
+
+    /**
      * @When I choose :shippingMethod as a shipping method filter
      */
     public function iChooseAsAShippingMethodFilter(ShippingMethodInterface $shippingMethod): void
@@ -308,6 +320,14 @@ final class ManagingOrdersContext implements Context
     }
 
     /**
+     * @Then /^I should be notified that the (order|shipment) confirmation email has been successfully resent to the customer$/
+     */
+    public function iShouldBeNotifiedThatTheOrderConfirmationEmailHasBeenSuccessfullyResentToTheCustomer(): void
+    {
+        $this->responseChecker->isCreationSuccessful($this->client->getLastResponse());
+    }
+
+    /**
      * @Then it should( still) have a :state state
      */
     public function itShouldHaveState(string $state): void
@@ -323,14 +343,6 @@ final class ManagingOrdersContext implements Context
     public function iShouldSeeASingleOrderInTheList(int $number = 1): void
     {
         Assert::same($this->responseChecker->countCollectionItems($this->client->getLastResponse()), $number);
-    }
-
-    /**
-     * @Then I should be notified that the order confirmation email has been successfully resent to the customer
-     */
-    public function iShouldBeNotifiedThatTheOrderConfirmationEmailHasBeenSuccessfullyResentToTheCustomer(): void
-    {
-        $this->responseChecker->isCreationSuccessful($this->client->getLastResponse());
     }
 
     /**
@@ -452,6 +464,24 @@ final class ManagingOrdersContext implements Context
     public function theOrdersTaxTotalShouldBe(int $taxTotal): void
     {
         Assert::same($this->responseChecker->getValue($this->client->getLastResponse(), 'taxTotal'), $taxTotal);
+    }
+
+    /**
+     * @Then I should not be able to resend the shipment confirmation email
+     */
+    public function iShouldNotBeAbleToResendTheShipmentConfirmationEmail(): void
+    {
+        $this->client->customItemAction(
+            Resources::SHIPMENTS,
+            (string) $this->sharedStorage->get('order')->getShipments()->last()->getId(),
+            HttpRequest::METHOD_POST,
+            'resend-confirmation-email',
+        );
+
+        Assert::same(
+            $this->responseChecker->getError($this->client->getLastResponse()),
+            'Cannot resend shipment confirmation email for shipment in state ready.',
+        );
     }
 
     /**

@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\AdminBundle\Action;
 
-use Sylius\Bundle\AdminBundle\EmailManager\ShipmentEmailManagerInterface;
+use Sylius\Bundle\CoreBundle\MessageDispatcher\ResendShipmentConfirmationEmailDispatcherInterface;
 use Sylius\Bundle\CoreBundle\Provider\FlashBagProvider;
 use Sylius\Component\Core\Model\ShipmentInterface;
 use Sylius\Component\Core\Repository\ShipmentRepositoryInterface;
@@ -30,7 +30,7 @@ final readonly class ResendShipmentConfirmationEmailAction
 {
     public function __construct(
         private ShipmentRepositoryInterface $shipmentRepository,
-        private ShipmentEmailManagerInterface $shipmentEmailManager,
+        private ResendShipmentConfirmationEmailDispatcherInterface $resendShipmentConfirmationDispatcher,
         private CsrfTokenManagerInterface $csrfTokenManager,
         private RequestStack $requestStack,
     ) {
@@ -52,7 +52,7 @@ final readonly class ResendShipmentConfirmationEmailAction
             throw new NotFoundHttpException(sprintf('The shipment with id %s has not been found', $shipmentId));
         }
 
-        $this->shipmentEmailManager->sendConfirmationEmail($shipment);
+        $this->resendShipmentConfirmationDispatcher->dispatch($shipment);
 
         FlashBagProvider
             ::getFlashBag($this->requestStack)

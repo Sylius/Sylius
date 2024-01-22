@@ -1,0 +1,67 @@
+{
+    "@context": "\/api\/v2\/contexts\/Shipment",
+    "@id": "\/api\/v2\/admin\/shipments\/@integer@",
+    "@type": "Shipment",
+    "order": "\/api\/v2\/admin\/orders\/nAWw2jewpA",
+    "adjustments": {
+        "5": "\/api\/v2\/admin\/adjustments\/@integer@"
+    },
+    "adjustmentsTotal": @integer@,
+    "id": @integer@,
+    "state": "shipped",
+    "method": "\/api\/v2\/admin\/shipping-methods\/UPS",
+    "units": {
+        "15": "\/api\/v2\/admin\/order-item-units\/@integer@",
+        "16": "\/api\/v2\/admin\/order-item-units\/@integer@",
+        "17": "\/api\/v2\/admin\/order-item-units\/@integer@"
+    },
+    "shippedAt": @date@,
+    "createdAt": @date@,
+    "updatedAt": @date@,
+    "shippingUnitTotal": 6000,
+    "tracked": false,
+    "shippables": [
+        {
+            "@id": "\/api\/v2\/admin\/product-variants\/MUG_BLUE",
+            "@type": "ProductVariant",
+            "version": 1,
+            "onHold": 0,
+            "onHand": 0,
+            "tracked": false,
+            "channelPricings": {
+                "WEB": "\/api\/v2\/admin\/channel-pricings\/@integer@"
+            },
+            "shippingRequired": true,
+            "images": [],
+            "id": @integer@,
+            "code": "MUG_BLUE",
+            "product": "\/api\/v2\/admin\/products\/MUG",
+            "optionValues": [
+                "\/api\/v2\/admin\/product-option-values\/COLOR_BLUE"
+            ],
+            "position": 0,
+            "createdAt": @date@,
+            "updatedAt": @date@,
+            "enabled": true,
+            "translations": {
+                "en_US": "\/api\/v2\/admin\/product-variant-translations\/@integer@"
+            },
+            "inStock": false,
+            "inventoryName": "Mug",
+            "shippingVolume": 0,
+            "name": "Blue Mug",
+            "descriptor": "Blue Mug (MUG_BLUE)",
+            "translation": {
+                "@id": "\/api\/v2\/admin\/product-variant-translations\/@integer@",
+                "@type": "ProductVariantTranslation",
+                "id": @integer@,
+                "name": "Blue Mug",
+                "locale": "en_US",
+                "translatable": "\/api\/v2\/admin\/product-variants\/MUG_BLUE"
+            }
+        }
+    ],
+    "shippingWeight": 0,
+    "shippingVolume": 0,
+    "shippingUnitCount": 3
+}

@@ -23,6 +23,8 @@ interface Emails
 
     public const SHIPMENT_CONFIRMATION = 'shipment_confirmation';
 
+    public const SHIPMENT_CONFIRMATION_RESENT = 'shipment_confirmation_resent';
+
     public const USER_REGISTRATION = 'user_registration';
 
     public const PASSWORD_RESET = 'password_reset';

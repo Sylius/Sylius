@@ -387,6 +387,11 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
         $this->getElement('resend_shipment_confirmation_email')->click();
     }
 
+    public function isResendShipmentConfirmationEmailButtonVisible(): bool
+    {
+        return $this->getDocument()->has('css', '[data-test-resend-shipment-confirmation-email]');
+    }
+
     public function getShippedAtDate(): string
     {
         return  $this->getElement('shipment_shipped_at_date')->getText();
