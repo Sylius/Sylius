@@ -60,8 +60,7 @@ final class ResendOrderConfirmationEmailAction
             trigger_deprecation(
                 'sylius/admin-bundle',
                 '1.13',
-                'The argument name of %s is deprecated and will be renamed to $resendOrderConfirmationEmailDispatcher in Sylius 2.0.',
-                OrderEmailManagerInterface::class,
+                'The argument name $orderEmailManager is deprecated and will be renamed to $resendOrderConfirmationEmailDispatcher in Sylius 2.0.',
             );
         }
     }

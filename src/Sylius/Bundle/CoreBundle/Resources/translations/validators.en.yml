@@ -89,6 +89,8 @@ sylius:
         product_eligibility: 'This product %productName% has been disabled.'
         shipping_method_eligibility: 'Product does not fit requirements for %shippingMethodName% shipping method. Please reselect your shipping method.'
         shipping_method_not_available: 'The "%shippingMethodName%" shipping method is not available. Please reselect your shipping method.'
+    resend_shipment_confirmation_email:
+        invalid_shipment_state: 'Cannot resend shipment confirmation email for shipment in state %state%.'
     locale:
         enabled:
             cannot_disable_base: The base locale cannot be disabled.

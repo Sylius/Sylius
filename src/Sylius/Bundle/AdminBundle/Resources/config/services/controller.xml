@@ -51,7 +51,7 @@
 
         <service id="Sylius\Bundle\AdminBundle\Action\ResendShipmentConfirmationEmailAction" public="true">
             <argument type='service' id="sylius.repository.shipment" />
-            <argument type="service" id="Sylius\Bundle\AdminBundle\EmailManager\ShipmentEmailManagerInterface" />
+            <argument type="service" id="Sylius\Bundle\CoreBundle\MessageDispatcher\ResendShipmentConfirmationEmailDispatcher" />
             <argument type="service" id="security.csrf.token_manager" />
             <argument type="service" id="request_stack" />
         </service>

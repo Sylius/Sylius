@@ -204,6 +204,11 @@ final class EmailContext implements Context
         Assert::true($this->emailChecker->hasMessageTo($message, $recipient));
     }
 
+    private function assertEmailDoesNotContainsMessageTo(string $message, string $recipient): void
+    {
+        Assert::false($this->emailChecker->hasMessageTo($message, $recipient));
+    }
+
     private function assertEmailDoesNotContainMessageTo(string $message, string $recipient): void
     {
         Assert::false($this->emailChecker->hasMessageTo($message, $recipient));
