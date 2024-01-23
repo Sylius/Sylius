@@ -32,7 +32,7 @@
         "sylius/calendar": "^0.3 || ^0.4 || ^0.5",
         "sylius/registry": "^1.5",
         "sylius/resource-bundle": "^1.9",
-        "sylius/taxation": "^1.12",
+        "sylius/taxation": "^1.13",
         "symfony/framework-bundle": "^5.4.21 || ^6.0"
     },
     "conflict": {
@@ -57,7 +57,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "1.12-dev"
+            "dev-main": "1.13-dev"
         }
     },
     "autoload": {
