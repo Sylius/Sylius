@@ -44,7 +44,7 @@
         "sylius-labs/polyfill-symfony-framework-bundle": "^1.0 || ^1.1",
         "sylius/mailer-bundle": "^1.8 || ^2.0@beta",
         "sylius/resource-bundle": "^1.9",
-        "sylius/user": "^1.12",
+        "sylius/user": "^1.13",
         "symfony/framework-bundle": "^5.4.21 || ^6.0",
         "symfony/password-hasher": "^5.4.21 || ^6.0",
         "webmozart/assert": "^1.9"
@@ -73,7 +73,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "1.12-dev"
+            "dev-main": "1.13-dev"
         }
     },
     "autoload": {

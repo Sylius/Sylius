@@ -38,7 +38,7 @@
         "php": "^8.0",
         "doctrine/orm": "^2.13",
         "egulias/email-validator": "^3.1",
-        "sylius/customer": "^1.12",
+        "sylius/customer": "^1.13",
         "sylius/resource-bundle": "^1.9",
         "symfony/framework-bundle": "^5.4.21 || ^6.0",
         "webmozart/assert": "^1.9"
@@ -62,7 +62,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "1.12-dev"
+            "dev-main": "1.13-dev"
         }
     },
     "autoload": {

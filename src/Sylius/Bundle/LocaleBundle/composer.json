@@ -27,7 +27,7 @@
     ],
     "require": {
         "php": "^8.0",
-        "sylius/locale": "^1.12",
+        "sylius/locale": "^1.13",
         "sylius/resource-bundle": "^1.9",
         "symfony/framework-bundle": "^5.4.21 || ^6.0",
         "symfony/templating": "^5.4.21 || ^6.0"
@@ -54,7 +54,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "1.12-dev"
+            "dev-main": "1.13-dev"
         }
     },
     "autoload": {

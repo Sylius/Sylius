@@ -31,9 +31,9 @@
         "php": "^8.0",
         "stof/doctrine-extensions-bundle": "^1.4",
         "sylius/calendar": "^0.3 || ^0.4 || ^0.5",
-        "sylius/money-bundle": "^1.12",
+        "sylius/money-bundle": "^1.13",
         "sylius/resource-bundle": "^1.9",
-        "sylius/shipping": "^1.12",
+        "sylius/shipping": "^1.13",
         "symfony/framework-bundle": "^5.4.21 || ^6.0"
     },
     "conflict": {
@@ -59,7 +59,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "1.12-dev"
+            "dev-main": "1.13-dev"
         }
     },
     "autoload": {

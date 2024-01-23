@@ -41,7 +41,7 @@
         "phpspec/phpspec": "^7.2",
         "phpunit/phpunit": "^9.5",
         "polishsymfonycommunity/symfony-mocker-container": "^1.0",
-        "sylius/currency-bundle": "^1.12",
+        "sylius/currency-bundle": "^1.13",
         "symfony/browser-kit": "^5.4.21 || ^6.0",
         "symfony/dependency-injection": "^5.4.21 || ^6.0",
         "symfony/form": "^5.4.21 || ^6.0",
@@ -54,7 +54,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "1.12-dev"
+            "dev-main": "1.13-dev"
         }
     },
     "autoload": {
