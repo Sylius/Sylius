@@ -55,7 +55,7 @@ final class ChannelCodeCollectionValidator extends ConstraintValidator
 
         if (!$object instanceof ChannelsAwareInterface) {
             throw new \LogicException(sprintf(
-                'The validated root needs to implement the %s interface when option`validateAgainstAllChannels` is set to false.',
+                'The validated root needs to implement the %s interface when option `validateAgainstAllChannels` is set to false.',
                 ChannelsAwareInterface::class,
             ));
         }

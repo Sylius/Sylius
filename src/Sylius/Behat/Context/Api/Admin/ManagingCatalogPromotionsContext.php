@@ -487,8 +487,7 @@ final class ManagingCatalogPromotionsContext implements Context
         $this->changeFirstScopeConfigurationTo(
             $catalogPromotion,
             InForVariantsScopeVariantChecker::TYPE,
-            ['variants' => [$productVariant->getCode()],
-        ],
+            ['variants' => [$productVariant->getCode()]],
         );
     }
 
