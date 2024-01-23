@@ -85,6 +85,8 @@
 1. Not passing `Doctrine\Persistence\ObjectManager` to `Sylius\Component\Core\Updater\UnpaidOrdersStateUpdater`
    as a fifth argument is deprecated.
 
+1. Not passing `Symfony\Component\Filesystem\Filesystem` as fourth argument and parameters file path as fifth to `Sylius\Bundle\CoreBundle\Installer\Setup\LocaleSetup` is deprecated and will be prohibited in Sylius 2.0.
+
 1. To ease customization we've introduced attributes for some services in `1.13`:
    - `Sylius\Bundle\OrderBundle\Attribute\AsCartContext` for cart contexts
    - `Sylius\Bundle\OrderBundle\Attribute\AsOrderProcessor` for order processors
@@ -367,3 +369,6 @@ List of affected classes:
    - `MessageDispatcher` will be migrated  to `CommandDispatcher`.
    - `MessageHandler` will be migrated  to `CommandHandler`. 
    - Example: Within the `Sylius\Bundle\CoreBundle`, the `MessageHandler\OrderHandler` class will be migrated to `CommandHandler\OrderHandler`. This pattern will be mirrored across other bundles in the system.
+
+1. The behavior of the `sylius:install:setup` command has changed, because `Sylius\Bundle\CoreBundle\Installer\Setup\LocaleSetup` has been updated.
+   Now, it automatically replaces the existing `locale` parameter in the configuration with the one provided for the store.
