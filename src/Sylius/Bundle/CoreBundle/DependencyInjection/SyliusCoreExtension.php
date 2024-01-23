@@ -28,7 +28,6 @@ use Sylius\Component\Core\Filesystem\Adapter\FlysystemFilesystemAdapter;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ChildDefinition;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 
@@ -79,18 +78,10 @@ final class SyliusCoreExtension extends AbstractResourceExtension implements Pre
             $loader->load('test_services.xml');
         }
 
-        if ($config['process_shipments_before_recalculating_prices']) {
-            $this->switchOrderProcessorsPriorities(
-                $container->getDefinition('sylius.order_processing.order_shipment_processor'),
-                $container->getDefinition('sylius.order_processing.order_prices_recalculator'),
-            );
-        }
-
         $container->setAlias(
             FilesystemAdapterInterface::class,
             match ($config['filesystem']['adapter']) {
                 'default', 'flysystem' => FlysystemFilesystemAdapter::class,
-                'gaufrette' => 'Sylius\Component\Core\Filesystem\Adapter\GaufretteFilesystemAdapter',
                 default => throw new InvalidArgumentException(sprintf(
                     'Invalid filesystem adapter "%s" provided.',
                     $config['filesystem']['adapter'],
@@ -188,26 +179,6 @@ final class SyliusCoreExtension extends AbstractResourceExtension implements Pre
         $container->prependExtensionConfig('sylius_order', [
             'autoconfigure_with_attributes' => $config['autoconfigure_with_attributes'] ?? false,
         ]);
-    }
-
-    private function switchOrderProcessorsPriorities(
-        Definition $firstServiceDefinition,
-        Definition $secondServiceDefinition,
-    ) {
-        $firstServicePriority = $firstServiceDefinition->getTag('sylius.order_processor')[0]['priority'];
-        $secondServicePriority = $secondServiceDefinition->getTag('sylius.order_processor')[0]['priority'];
-
-        $firstServiceDefinition->clearTag('sylius.order_processor');
-        $secondServiceDefinition->clearTag('sylius.order_processor');
-
-        $firstServiceDefinition->addTag(
-            'sylius.order_processor',
-            ['priority' => $secondServicePriority],
-        );
-        $secondServiceDefinition->addTag(
-            'sylius.order_processor',
-            ['priority' => $firstServicePriority],
-        );
     }
 
     private function registerAutoconfiguration(ContainerBuilder $container): void

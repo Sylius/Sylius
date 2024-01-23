@@ -17,7 +17,6 @@ use Behat\Behat\Context\Context;
 use Doctrine\Persistence\ObjectManager;
 use SM\Factory\FactoryInterface as StateMachineFactoryInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
-use Sylius\Calendar\Provider\DateTimeProviderInterface;
 use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ChannelPricingInterface;
@@ -45,6 +44,7 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\Shipping\Repository\ShippingMethodRepositoryInterface;
 use Sylius\Component\Shipping\ShipmentTransitions;
+use Symfony\Component\Clock\ClockInterface;
 use Webmozart\Assert\Assert;
 
 final class OrderContext implements Context
@@ -65,7 +65,7 @@ final class OrderContext implements Context
         private ProductVariantResolverInterface $variantResolver,
         private OrderItemQuantityModifierInterface $itemQuantityModifier,
         private ObjectManager $objectManager,
-        private DateTimeProviderInterface $dateTimeProvider,
+        private ClockInterface $clock,
     ) {
     }
 
@@ -920,7 +920,7 @@ final class OrderContext implements Context
             $customer->setFirstname('John');
             $customer->setLastname('Doe' . $i);
 
-            $customer->setCreatedAt($this->dateTimeProvider->now());
+            $customer->setCreatedAt($this->clock->now());
 
             $customers[] = $customer;
 
@@ -1024,7 +1024,7 @@ final class OrderContext implements Context
                 $this->shipOrder($order);
             }
 
-            $order->setCheckoutCompletedAt($this->dateTimeProvider->now());
+            $order->setCheckoutCompletedAt($this->clock->now());
 
             $this->objectManager->persist($order);
             $this->sharedStorage->set('order', $order);

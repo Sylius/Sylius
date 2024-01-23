@@ -75,7 +75,18 @@ jobs:
             -   name: "Checkout"
                 if: "${{ inputs.branch == '' }}"
                 uses: actions/checkout@v3
-
+                
+            -   name: Prepare manifest.json files
+                run: |
+                    mkdir -p public/build/admin
+                    mkdir -p public/build/shop
+                    mkdir -p public/build/app/admin
+                    mkdir -p public/build/app/shop
+                    echo "{}" > public/build/admin/manifest.json
+                    echo "{}" > public/build/shop/manifest.json
+                    echo "{}" > public/build/app/admin/manifest.json
+                    echo "{}" > public/build/app/shop/manifest.json
+                
             -   name: Build application
                 uses: SyliusLabs/BuildTestAppAction@v2.2
                 with:

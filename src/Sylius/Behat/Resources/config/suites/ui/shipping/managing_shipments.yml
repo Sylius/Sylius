@@ -5,7 +5,7 @@ default:
                 - sylius.behat.context.hook.doctrine_orm
                 - sylius.behat.context.hook.mailer
                 - sylius.behat.context.hook.session
-                - Sylius\Calendar\Tests\Behat\Context\Hook\CalendarContext
+                - sylius.behat.context.hook.calendar
 
                 - sylius.behat.context.transform.address
                 - sylius.behat.context.transform.channel
@@ -27,7 +27,7 @@ default:
                 - sylius.behat.context.setup.product
                 - sylius.behat.context.setup.shipping
                 - sylius.behat.context.setup.zone
-                - Sylius\Calendar\Tests\Behat\Context\Setup\CalendarContext
+                - sylius.behat.context.setup.calendar
 
                 - sylius.behat.context.ui.channel
                 - sylius.behat.context.ui.email

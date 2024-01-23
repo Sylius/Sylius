@@ -26,7 +26,7 @@ use Sylius\Component\Core\OrderCheckoutTransitions;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Core\Repository\ShipmentRepositoryInterface;
 use Sylius\Component\Core\Repository\ShippingMethodRepositoryInterface;
-use Sylius\Component\Shipping\Checker\ShippingMethodEligibilityCheckerInterface;
+use Sylius\Component\Shipping\Checker\Eligibility\ShippingMethodEligibilityCheckerInterface;
 
 final class ChooseShippingMethodHandlerSpec extends ObjectBehavior
 {
