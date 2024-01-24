@@ -23,7 +23,7 @@
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/admin/countries</attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:country:read</attribute>
+                    <attribute name="groups">admin:country:index</attribute>
                 </attribute>
             </collectionOperation>
 
@@ -31,7 +31,7 @@
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/shop/countries</attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">shop:country:read</attribute>
+                    <attribute name="groups">shop:country:index</attribute>
                 </attribute>
             </collectionOperation>
 
@@ -42,7 +42,7 @@
                     <attribute name="groups">admin:country:create</attribute>
                 </attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:country:read</attribute>
+                    <attribute name="groups">admin:country:show</attribute>
                 </attribute>
             </collectionOperation>
         </collectionOperations>
@@ -52,14 +52,14 @@
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/admin/countries/{code}</attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:country:read</attribute>
+                    <attribute name="groups">admin:country:show</attribute>
                 </attribute>
             </itemOperation>
             <itemOperation name="shop_get">
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/shop/countries/{code}</attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">shop:country:read</attribute>
+                    <attribute name="groups">shop:country:show</attribute>
                 </attribute>
             </itemOperation>
 
@@ -70,7 +70,7 @@
                     <attribute name="groups">admin:country:update</attribute>
                 </attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:country:read</attribute>
+                    <attribute name="groups">admin:country:show</attribute>
                 </attribute>
             </itemOperation>
         </itemOperations>
