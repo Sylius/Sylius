@@ -2,6 +2,30 @@
 
 <div class="tab-pane" id="product-translations" role="tabpanel" tabindex="0">
     <div class="bg-white mb-3">
-        {{ _translations.default(form.translations) }}
+        {% set body %}
+            {% verbatim %}
+                <div class="row" data-controller="slug" data-slug-url-value="{{ path('sylius_admin_ajax_generate_product_slug') }}" data-slug-locale-value="{{ locale }}">
+                    <div class="col-12 col-md-6">
+                        {{ form_row(translationForm.name, { attr: { 'data-slug-target': 'sluggable', 'data-action': 'change->slug#generateSlug' } }) }}
+                    </div>
+                    <div class="col-12 col-md-6">
+                        {{ form_row(translationForm.slug, { attr: { 'data-slug-target': 'slug' } }) }}
+                    </div>
+                    <div class="col-12">
+                        {{ form_row(translationForm.description) }}
+                    </div>
+                    <div class="col-12 col-md-6">
+                        {{ form_row(translationForm.metaKeywords) }}
+                    </div>
+                    <div class="col-12 col-md-6">
+                        {{ form_row(translationForm.metaDescription) }}
+                    </div>
+                    <div class="col-12">
+                        {{ form_row(translationForm.shortDescription) }}
+                    </div>
+                </div>
+            {% endverbatim %}
+        {% endset %}
+        {{ _translations.default(_context.form.translations, body) }}
     </div>
 </div>
