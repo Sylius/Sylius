@@ -3,7 +3,7 @@
 
     {% if definition.actionGroups.bulk is defined and definition.getEnabledActions('bulk')|length > 0 %}
         <th class="center aligned">
-            <input data-js-bulk-checkboxes=".bulk-select-checkbox" data-js-bulk-buttons=".sylius-grid-nav__bulk" type="checkbox" class="form-check-input m-0 align-middle">
+            <input data-check-all="index" type="checkbox" class="form-check-input">
         </th>
     {% endif %}
 
@@ -26,7 +26,7 @@
 
     <tr class="item" {{ sylius_test_html_attribute('row') }}>
         {% if definition.actionGroups.bulk is defined and definition.getEnabledActions('bulk')|length > 0 %}
-            <td class="center aligned"><input class="bulk-select-checkbox form-check-input m-0 align-middle" type="checkbox" value="{{ row.id }}" /></td>
+            <td class="center aligned"><input data-check-all-group="index" class="form-check-input" type="checkbox" value="{{ row.id }}" /></td>
         {% endif %}
         {% for field in definition.enabledFields|sort_by('position') %}
             <td>{{ sylius_grid_render_field(grid, field, row) }}</td>

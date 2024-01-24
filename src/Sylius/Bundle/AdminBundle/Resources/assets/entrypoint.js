@@ -11,6 +11,7 @@ import './styles/main.scss';
 
 import './bootstrap';
 
+import './scripts/check-all';
 import './scripts/choices';
 import './scripts/statistics_chart';
 import './scripts/sticky-header';

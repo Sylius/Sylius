@@ -5,5 +5,5 @@
 <form action="{{ path }}" method="post">
     <input type="hidden" name="_method" value="DELETE" />
     <input type="hidden" name="_csrf_token" value="{{ csrf_token('bulk_delete') }}" />
-    {{ _button.delete({ text: action.label|default('sylius.ui.delete')|trans, disabled: true, type: 'submit', icon: 'trash-x' }) }}
+    {{ _button.delete({ text: action.label|default('sylius.ui.delete')|trans, disabled: true, type: 'submit', icon: 'trash-x', attr: 'data-check-all-action=index' }) }}
 </form>
