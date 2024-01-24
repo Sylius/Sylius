@@ -9,7 +9,7 @@
 
 <form action="{{ path }}" method="post">
     <input type="hidden" name="_method" value="DELETE">
-    <button class="dropdown-item" type="submit" data-requires-confirmation {{ sylius_test_html_attribute('delete-button') }}>
+    <button class="dropdown-item" type="submit" data-confirm-btn-submit {{ sylius_test_html_attribute('delete-button') }}>
         {{ icon({ icon: action.icon ?? 'trash-x', class: 'icon icon-tabler dropdown-item-icon' }) }} {{ message|trans }}
     </button>
     <input type="hidden" name="_csrf_token" value="{{ csrf_token(data.id) }}" />
