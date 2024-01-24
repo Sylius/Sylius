@@ -26,24 +26,28 @@ final class InstallCommand extends AbstractInstallCommand
     /** @var array<int, array<string, string>> */
     private array $commands = [
         [
-            'command' => 'check-requirements',
+            'command' => 'sylius:install:check-requirements',
             'message' => 'Checking system requirements.',
         ],
         [
-            'command' => 'database',
+            'command' => 'sylius:install:database',
             'message' => 'Setting up the database.',
         ],
         [
-            'command' => 'setup',
+            'command' => 'sylius:install:setup',
             'message' => 'Shop configuration.',
         ],
         [
-            'command' => 'jwt-setup',
+            'command' => 'sylius:install:jwt-setup',
             'message' => 'Configuring JWT token.',
         ],
         [
-            'command' => 'assets',
+            'command' => 'sylius:install:assets',
             'message' => 'Installing assets.',
+        ],
+        [
+            'command' => 'cache:clear',
+            'message' => 'Clearing cache.',
         ],
     ];
 
@@ -82,11 +86,11 @@ EOT
                 ));
 
                 $parameters = [];
-                if ('database' === $command['command'] && null !== $suite) {
+                if ('sylius:install:database' === $command['command'] && null !== $suite) {
                     $parameters['--fixture-suite'] = $suite;
                 }
 
-                $this->commandExecutor->runCommand('sylius:install:' . $command['command'], $parameters, $output);
+                $this->commandExecutor->runCommand($command['command'], $parameters, $output);
             } catch (RuntimeException) {
                 $errored = true;
             }
