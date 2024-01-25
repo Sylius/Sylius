@@ -17,19 +17,19 @@
 >
     <class name="Sylius\Bundle\PayumBundle\Model\GatewayConfig">
         <attribute name="id">
-            <group>admin:gateway_config:read</group>
+            <group>admin:gateway_config:show</group>
         </attribute>
         <attribute name="config">
-            <group>admin:gateway_config:read</group>
+            <group>admin:gateway_config:show</group>
             <group>admin:payment_method:create</group>
             <group>admin:payment_method:update</group>
         </attribute>
         <attribute name="gatewayName">
-            <group>admin:gateway_config:read</group>
+            <group>admin:gateway_config:show</group>
             <group>admin:payment_method:create</group>
         </attribute>
         <attribute name="factoryName">
-            <group>admin:gateway_config:read</group>
+            <group>admin:gateway_config:show</group>
             <group>admin:payment_method:create</group>
         </attribute>
     </class>
