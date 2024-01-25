@@ -49,7 +49,7 @@ final class DashboardContext implements Context
             [
                 'channelCode' => $channel->getCode(),
                 'startDate' => $this->dateTimeProvider->now()->format('Y-01-01\T00:00:00'),
-                'dateInterval' => 'P1M',
+                'interval' => 'P1M',
                 'endDate' => $this->dateTimeProvider->now()->format('Y-12-31\T23:59:59'),
             ],
         );
@@ -67,7 +67,7 @@ final class DashboardContext implements Context
             [
                 'channelCode' => $channel->getCode(),
                 'startDate' => ($currentYear - 1) . '-01-01T00:00:00',
-                'dateInterval' => 'P1M',
+                'interval' => 'P1M',
                 'endDate' => ($currentYear - 1) . '-12-31T23:59:59',
             ],
         );
@@ -85,7 +85,7 @@ final class DashboardContext implements Context
             [
                 'channelCode' => $channel->getCode(),
                 'startDate' => ($currentYear + 1) . '-01-01T00:00:00',
-                'dateInterval' => 'P1M',
+                'interval' => 'P1M',
                 'endDate' => ($currentYear + 1) . '-12-31T23:59:59',
             ],
         );

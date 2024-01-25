@@ -139,14 +139,14 @@ final class StatisticsModifier implements DocumentationModifierInterface
             ],
         );
 
-        $dateInterval = new Parameter(
-            name: 'dateInterval',
+        $interval = new Parameter(
+            name: 'interval',
             in: 'query',
-            description: 'Date interval for statistics',
+            description: 'Interval type for statistics',
             required: true,
             schema: [
                 'type' => 'string',
-                'default' => 'P1M',
+                'default' => 'month',
             ],
         );
 
@@ -162,6 +162,6 @@ final class StatisticsModifier implements DocumentationModifierInterface
             ],
         );
 
-        return [$channelCode, $startDate, $dateInterval, $endDate];
+        return [$channelCode, $startDate, $interval, $endDate];
     }
 }

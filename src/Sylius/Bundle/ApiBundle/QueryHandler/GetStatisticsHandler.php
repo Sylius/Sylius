@@ -41,6 +41,6 @@ final class GetStatisticsHandler
             );
         }
 
-        return $this->statisticsProvider->provide($query->getDatePeriod(), $channel);
+        return $this->statisticsProvider->provide($query->getIntervalType(), $query->getDatePeriod(), $channel);
     }
 }

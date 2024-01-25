@@ -16,8 +16,16 @@ namespace Sylius\Bundle\ApiBundle\Query;
 /** @experimental */
 class GetStatistics
 {
-    public function __construct(private \DatePeriod $datePeriod, private string $channelCode)
+    public function __construct(
+        private string $intervalType,
+        private \DatePeriod $datePeriod,
+        private string $channelCode,
+    ) {
+    }
+
+    public function getIntervalType(): string
     {
+        return $this->intervalType;
     }
 
     public function getDatePeriod(): \DatePeriod

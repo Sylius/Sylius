@@ -18,5 +18,5 @@ use Sylius\Component\Core\Statistics\Chart\ChartInterface;
 
 interface SalesTimeSeriesProviderInterface
 {
-    public function provide(\DatePeriod $datePeriod, ChannelInterface $channel): ChartInterface;
+    public function provide(string $intervalType, \DatePeriod $datePeriod, ChannelInterface $channel): ChartInterface;
 }

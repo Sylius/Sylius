@@ -72,6 +72,43 @@ final class ConfigurationTest extends TestCase
         );
     }
 
+    public function it_allows_to_configure_orders_statistics_intervals_map(): void
+    {
+        $this->assertProcessedConfigurationEquals(
+            [
+                [
+                    'orders_statistics' => [
+                        'intervals_map' => [
+                            'day' => [
+                                'interval' => 'P1D',
+                                'period_format' => 'Y-m-d',
+                            ],
+                            'month' => [
+                                'interval' => 'P1M',
+                                'period_format' => 'Y-m',
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+            [
+                'orders_statistics' => [
+                    'intervals_map' => [
+                        'day' => [
+                            'interval' => 'P1D',
+                            'period_format' => 'Y-m-d',
+                        ],
+                        'month' => [
+                            'interval' => 'P1M',
+                            'period_format' => 'Y-m',
+                        ],
+                    ],
+                ],
+            ],
+            'orders_statistics',
+        );
+    }
+
     /** @test */
     public function it_allows_to_configure_a_default_state_machine_adapter(): void
     {

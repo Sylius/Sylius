@@ -32,13 +32,18 @@ final class GetStatisticsAction
 
     private SymfonyAssert\Collection $constraint;
 
+    /** @var array<string, string> */
+    private array $intervalsMap;
+
+    /** @param array<string, array{interval: string, period_format: string}> $intervalsMap */
     public function __construct(
         MessageBusInterface $messageBus,
         private SerializerInterface $serializer,
         private ValidatorInterface $validator,
-        private array $intervals,
+        array $intervalsMap,
     ) {
         $this->messageBus = $messageBus;
+        $this->intervalsMap = $this->populateIntervals($intervalsMap);
         $this->constraint = $this->createInputDataConstraints();
     }
 
@@ -54,14 +59,20 @@ final class GetStatisticsAction
             return $this->createBadRequestResponse($violations);
         }
 
+        $interval = $parameters['interval'];
+
         $period = new \DatePeriod(
             new \DateTimeImmutable($parameters['startDate']),
-            new \DateInterval($this->intervals[$parameters['interval']]),
+            new \DateInterval($this->intervalsMap[$interval]),
             new \DateTimeImmutable($parameters['endDate']),
         );
 
         try {
-            $result = $this->handle(new GetStatistics($period, $parameters['channelCode']));
+            $result = $this->handle(new GetStatistics(
+                $interval,
+                $period,
+                $parameters['channelCode'],
+            ));
 
             return new JsonResponse(
                 data: $this->serializer->serialize($result, 'json'),
@@ -90,12 +101,27 @@ final class GetStatisticsAction
                 new SymfonyAssert\NotBlank(),
                 new SymfonyAssert\DateTime('Y-m-d\TH:i:s', message: 'sylius.date_time.invalid'),
             ],
-            'interval' => new SymfonyAssert\Choice(choices: array_keys($this->intervals), multiple: false),
+            'interval' => new SymfonyAssert\Choice(choices: array_keys($this->intervalsMap), multiple: false),
             'endDate' => [
                 new SymfonyAssert\NotBlank(),
                 new SymfonyAssert\DateTime('Y-m-d\TH:i:s', message: 'sylius.date_time.invalid'),
                 new SymfonyAssert\GreaterThan(propertyPath: 'startDate'),
             ],
         ]);
+    }
+
+    /**
+     * @param array<string, array{interval: string, period_format: string}> $intervalsMap
+     *
+     * @return array<string, string>
+     */
+    private function populateIntervals(array $intervalsMap): array
+    {
+        $intervals = [];
+        foreach ($intervalsMap as $type => $intervalMap) {
+            $intervals[$type] = $intervalMap['interval'];
+        }
+
+        return $intervals;
     }
 }

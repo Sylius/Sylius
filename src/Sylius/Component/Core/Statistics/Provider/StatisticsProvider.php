@@ -24,9 +24,9 @@ class StatisticsProvider implements StatisticsProviderInterface
     ) {
     }
 
-    public function provide(\DatePeriod $datePeriod, ChannelInterface $channel): Statistics
+    public function provide(string $intervalType, \DatePeriod $datePeriod, ChannelInterface $channel): Statistics
     {
-        $salesTimeSeries = $this->salesTimeSeriesProvider->provide($datePeriod, $channel);
+        $salesTimeSeries = $this->salesTimeSeriesProvider->provide($intervalType, $datePeriod, $channel);
         $businessActivitySummary = $this->businessActivitySummaryProvider->provide($datePeriod, $channel);
 
         return new Statistics($salesTimeSeries, $businessActivitySummary);
