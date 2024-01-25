@@ -41,10 +41,6 @@ final class AddingEligibleProductVariantToCartValidator extends ConstraintValida
         /** @var AddingEligibleProductVariantToCart $constraint */
         Assert::isInstanceOf($constraint, AddingEligibleProductVariantToCart::class);
 
-        if ($value->productVariantCode === null) {
-            return;
-        }
-
         /** @var ProductVariantInterface|null $productVariant */
         $productVariant = $this->productVariantRepository->findOneBy(['code' => $value->productVariantCode]);
 

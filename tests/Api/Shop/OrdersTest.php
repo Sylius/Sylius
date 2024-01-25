@@ -52,7 +52,7 @@ final class OrdersTest extends JsonApiTestCase
         $this->client->request(method: 'GET', uri: '/api/v2/shop/orders/nAWw2jewpA', server: self::CONTENT_TYPE_HEADER);
         $response = $this->client->getResponse();
 
-        $this->assertResponse($response, 'shop/get_order_response', Response::HTTP_OK);
+        $this->assertResponse($response, 'shop/order/get_order_response', Response::HTTP_OK);
     }
 
     /** @test */
@@ -72,7 +72,7 @@ final class OrdersTest extends JsonApiTestCase
         );
         $response = $this->client->getResponse();
 
-        $this->assertResponse($response, 'shop/get_order_response', Response::HTTP_OK);
+        $this->assertResponse($response, 'shop/order/get_order_response', Response::HTTP_OK);
     }
 
     /** @test */
@@ -97,7 +97,7 @@ final class OrdersTest extends JsonApiTestCase
         );
         $response = $this->client->getResponse();
 
-        $this->assertResponse($response, 'shop/get_order_items_response', Response::HTTP_OK);
+        $this->assertResponse($response, 'shop/order/get_order_items_response', Response::HTTP_OK);
     }
 
     /** @test */
@@ -122,7 +122,7 @@ final class OrdersTest extends JsonApiTestCase
         );
         $response = $this->client->getResponse();
 
-        $this->assertResponse($response, 'shop/get_order_adjustments_response', Response::HTTP_OK);
+        $this->assertResponse($response, 'shop/order/get_order_adjustments_response', Response::HTTP_OK);
     }
 
     /** @test */
@@ -162,7 +162,7 @@ final class OrdersTest extends JsonApiTestCase
         );
         $response = $this->client->getResponse();
 
-        $this->assertResponse($response, 'shop/get_order_item_adjustments_response', Response::HTTP_OK);
+        $this->assertResponse($response, 'shop/order/get_order_item_adjustments_response', Response::HTTP_OK);
     }
 
     /** @test */
@@ -189,7 +189,7 @@ final class OrdersTest extends JsonApiTestCase
         );
         $response = $this->client->getResponse();
 
-        $this->assertResponse($response, 'shop/add_item_response', Response::HTTP_CREATED);
+        $this->assertResponse($response, 'shop/order/add_item_response', Response::HTTP_CREATED);
     }
 
     /** @test */
@@ -235,7 +235,7 @@ final class OrdersTest extends JsonApiTestCase
         );
         $response = $this->client->getResponse();
 
-        $this->assertResponse($response, 'shop/updated_payment_method_on_order_response', Response::HTTP_OK);
+        $this->assertResponse($response, 'shop/order/updated_payment_method_on_order_response', Response::HTTP_OK);
     }
 
     /** @test */
@@ -273,7 +273,7 @@ final class OrdersTest extends JsonApiTestCase
         );
         $response = $this->client->getResponse();
 
-        $this->assertResponse($response, 'shop/updated_payment_method_on_cancelled_order_response', Response::HTTP_UNPROCESSABLE_ENTITY);
+        $this->assertResponse($response, 'shop/order/updated_payment_method_on_cancelled_order_response', Response::HTTP_UNPROCESSABLE_ENTITY);
     }
 
     /** @test */
@@ -289,7 +289,7 @@ final class OrdersTest extends JsonApiTestCase
         );
         $response = $this->client->getResponse();
 
-        $this->assertResponse($response, 'shop/create_cart_response', Response::HTTP_CREATED);
+        $this->assertResponse($response, 'shop/order/create_cart_response', Response::HTTP_CREATED);
     }
 
     /** @test */
@@ -305,7 +305,7 @@ final class OrdersTest extends JsonApiTestCase
         );
         $response = $this->client->getResponse();
 
-        $this->assertResponse($response, 'shop/create_cart_with_default_locale_response', Response::HTTP_CREATED);
+        $this->assertResponse($response, 'shop/order/create_cart_with_default_locale_response', Response::HTTP_CREATED);
     }
 
     /** @test */
@@ -349,7 +349,7 @@ final class OrdersTest extends JsonApiTestCase
         );
         $response = $this->client->getResponse();
 
-        $this->assertResponse($response, 'shop/updated_billing_address_on_order_response', Response::HTTP_OK);
+        $this->assertResponse($response, 'shop/order/updated_billing_address_on_order_response', Response::HTTP_OK);
     }
 
     /** @test */
@@ -419,7 +419,11 @@ final class OrdersTest extends JsonApiTestCase
         );
         $response = $this->client->getResponse();
 
-        $this->assertResponseCode($response, Response::HTTP_UNPROCESSABLE_ENTITY);
+        $this->assertResponse(
+            $response,
+            'shop/order/add_item_to_cart_with_missing_product_variant',
+            Response::HTTP_BAD_REQUEST
+        );
     }
 
     /** @test */
@@ -428,9 +432,6 @@ final class OrdersTest extends JsonApiTestCase
         $this->loadFixturesFromFiles(['channel.yaml', 'cart.yaml']);
 
         $tokenValue = 'nAWw2jewpA';
-
-        /** @var MessageBusInterface $commandBus */
-        $commandBus = self::getContainer()->get('sylius.command_bus');
 
         $pickupCartCommand = new PickupCart($tokenValue);
         $pickupCartCommand->setChannelCode('WEB');
@@ -446,7 +447,11 @@ final class OrdersTest extends JsonApiTestCase
         );
         $response = $this->client->getResponse();
 
-        $this->assertResponseCode($response, Response::HTTP_UNPROCESSABLE_ENTITY);
+        $this->assertResponse(
+            $response,
+            'shop/order/add_item_to_cart_with_missing_quantity',
+            Response::HTTP_BAD_REQUEST
+        );
     }
 
     /** @test */
@@ -455,9 +460,6 @@ final class OrdersTest extends JsonApiTestCase
         $this->loadFixturesFromFiles(['channel.yaml', 'cart.yaml']);
 
         $tokenValue = 'nAWw2jewpA';
-
-        /** @var MessageBusInterface $commandBus */
-        $commandBus = self::getContainer()->get('sylius.command_bus');
 
         $pickupCartCommand = new PickupCart($tokenValue);
         $pickupCartCommand->setChannelCode('WEB');
@@ -471,7 +473,11 @@ final class OrdersTest extends JsonApiTestCase
         );
         $response = $this->client->getResponse();
 
-        $this->assertResponseCode($response, Response::HTTP_UNPROCESSABLE_ENTITY);
+        $this->assertResponse(
+            $response,
+            'shop/order/add_item_to_cart_with_missing_quantity',
+            Response::HTTP_BAD_REQUEST
+        );
     }
 
     public function it_returns_unprocessable_entity_status_if_trying_to_assign_shipping_method_to_non_existing_shipment(): void

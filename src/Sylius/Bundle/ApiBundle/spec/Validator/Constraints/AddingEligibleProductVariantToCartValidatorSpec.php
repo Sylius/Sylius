@@ -136,37 +136,6 @@ final class AddingEligibleProductVariantToCartValidatorSpec extends ObjectBehavi
         );
     }
 
-    function it_does_nothing_if_product_variant_is_not_provided(
-        ProductVariantRepositoryInterface $productVariantRepository,
-        OrderRepositoryInterface $orderRepository,
-        AvailabilityCheckerInterface $availabilityChecker,
-        AddItemToCart $addItemToCart,
-        ExecutionContextInterface $executionContext,
-        ProductInterface $product,
-        ProductVariantInterface $productVariant,
-    ): void {
-        $this->initialize($executionContext);
-
-        $productVariantRepository->findOneBy(['code' => null])->shouldNotBeCalled();
-        $productVariant->getProduct()->shouldNotBeCalled();
-        $product->isEnabled()->shouldNotBeCalled();
-
-        $addItemToCart->getOrderTokenValue()->willReturn('TOKEN');
-        $orderRepository->findCartByTokenValue('TOKEN')->shouldNotBeCalled();
-
-        $availabilityChecker->isStockSufficient($productVariant, 1)->shouldNotBeCalled();
-
-        $executionContext
-            ->addViolation(Argument::any())
-            ->shouldNotBeCalled()
-        ;
-
-        $this->validate(
-            new AddItemToCart(null, 1),
-            new AddingEligibleProductVariantToCart(),
-        );
-    }
-
     function it_adds_violation_if_product_variant_stock_is_not_sufficient_and_cart_has_same_units(
         ProductVariantRepositoryInterface $productVariantRepository,
         OrderRepositoryInterface $orderRepository,
