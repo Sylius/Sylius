@@ -84,7 +84,7 @@
                 <attribute name="controller">Sylius\Bundle\ApiBundle\Controller\GetOrderAdjustmentsAction</attribute>
                 <attribute name="write">false</attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:adjustment:read</attribute>
+                    <attribute name="groups">admin:adjustment:show</attribute>
                 </attribute>
             </itemOperation>
 

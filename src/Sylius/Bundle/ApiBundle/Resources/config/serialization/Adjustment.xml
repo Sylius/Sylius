@@ -17,53 +17,71 @@
 >
     <class name="Sylius\Component\Order\Model\Adjustment">
         <attribute name="id">
-            <group>admin:adjustment:read</group>
-            <group>shop:adjustment:read</group>
+            <group>admin:adjustment:index</group>
+            <group>admin:adjustment:show</group>
+            <group>shop:adjustment:index</group>
+            <group>shop:adjustment:show</group>
             <group>shop:cart:read</group>
         </attribute>
 
         <attribute name="type">
-            <group>admin:adjustment:read</group>
-            <group>shop:adjustment:read</group>
+            <group>admin:adjustment:index</group>
+            <group>admin:adjustment:show</group>
+            <group>shop:adjustment:index</group>
+            <group>shop:adjustment:show</group>
             <group>shop:cart:read</group>
        </attribute>
 
         <attribute name="label">
-            <group>admin:adjustment:read</group>
-            <group>shop:adjustment:read</group>
+            <group>admin:adjustment:index</group>
+            <group>admin:adjustment:show</group>
+            <group>shop:adjustment:index</group>
+            <group>shop:adjustment:show</group>
             <group>shop:cart:read</group>
        </attribute>
 
        <attribute name="amount">
-           <group>admin:adjustment:read</group>
-           <group>shop:adjustment:read</group>
+           <group>admin:adjustment:index</group>
+           <group>admin:adjustment:show</group>
+           <group>shop:adjustment:index</group>
+           <group>shop:adjustment:show</group>
            <group>shop:cart:read</group>
        </attribute>
 
        <attribute name="order">
-           <group>admin:adjustment:read</group>
-           <group>shop:adjustment:read</group>
+           <group>admin:adjustment:index</group>
+           <group>admin:adjustment:show</group>
+           <group>shop:adjustment:index</group>
+           <group>shop:adjustment:show</group>
        </attribute>
 
        <attribute name="order_item">
-           <group>admin:adjustment:read</group>
-           <group>shop:adjustment:read</group>
+           <group>admin:adjustment:index</group>
+           <group>admin:adjustment:show</group>
+           <group>shop:adjustment:index</group>
+           <group>shop:adjustment:show</group>
        </attribute>
 
        <attribute name="order_item_unit">
-           <group>admin:adjustment:read</group>
-           <group>shop:adjustment:read</group>
+           <group>admin:adjustment:index</group>
+           <group>admin:adjustment:show</group>
+           <group>shop:adjustment:index</group>
+           <group>shop:adjustment:show</group>
        </attribute>
 
        <attribute name="neutral">
-           <group>admin:adjustment:read</group>
-           <group>shop:adjustment:read</group>
+           <group>admin:adjustment:index</group>
+           <group>admin:adjustment:show</group>
+           <group>shop:adjustment:index</group>
+           <group>shop:adjustment:show</group>
            <group>shop:cart:read</group>
        </attribute>
 
        <attribute name="locked">
-           <group>admin:adjustment:read</group>
-           <group>shop:adjustment:read</group>
+           <group>admin:adjustment:index</group>
+           <group>admin:adjustment:show</group>
+           <group>shop:adjustment:index</group>
+           <group>shop:adjustment:show</group>
        </attribute>
     </class>
 </serializer>

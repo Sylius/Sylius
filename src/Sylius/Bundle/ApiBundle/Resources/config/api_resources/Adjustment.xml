@@ -24,7 +24,7 @@
                     <attribute>sylius.api.order_token_filter</attribute>
                 </attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:adjustment:read</attribute>
+                    <attribute name="groups">admin:adjustment:index</attribute>
                 </attribute>
             </collectionOperation>
         </collectionOperations>
@@ -34,7 +34,7 @@
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/admin/adjustments/{id}</attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:adjustment:read</attribute>
+                    <attribute name="groups">admin:adjustment:show</attribute>
                 </attribute>
             </itemOperation>
 
@@ -42,7 +42,7 @@
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/shop/adjustments/{id}</attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">shop:adjustment:read</attribute>
+                    <attribute name="groups">shop:adjustment:show</attribute>
                 </attribute>
             </itemOperation>
         </itemOperations>
