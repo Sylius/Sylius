@@ -17,12 +17,12 @@
 >
     <class name="Sylius\Component\Product\Model\ProductOptionValueTranslation">
         <attribute name="id">
-            <group>admin:product_option_value:read</group>
+            <group>admin:product_option_value:show</group>
         </attribute>
         <attribute name="value">
             <group>admin:product_option:create</group>
             <group>admin:product_option:update</group>
-            <group>admin:product_option_value:read</group>
+            <group>admin:product_option_value:show</group>
             <group>admin:product_option_value:write</group>
         </attribute>
         <attribute name="locale">

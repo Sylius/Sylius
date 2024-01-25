@@ -17,7 +17,8 @@
             <group>admin:catalog_promotion:show</group>
             <group>admin:catalog_promotion:create</group>
             <group>admin:catalog_promotion:update</group>
-            <group>admin:product_variant:read</group>
+            <group>admin:product_variant:index</group>
+            <group>admin:product_variant:show</group>
             <group>shop:catalog_promotion:show</group>
         </attribute>
 
@@ -25,7 +26,8 @@
             <group>admin:catalog_promotion:index</group>
             <group>admin:catalog_promotion:show</group>
             <group>admin:catalog_promotion:create</group>
-            <group>admin:product_variant:read</group>
+            <group>admin:product_variant:index</group>
+            <group>admin:product_variant:show</group>
         </attribute>
 
         <attribute name="name">

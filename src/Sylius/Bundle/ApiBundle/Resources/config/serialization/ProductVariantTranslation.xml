@@ -17,19 +17,23 @@
 >
     <class name="Sylius\Component\Product\Model\ProductVariantTranslation">
         <attribute name="id">
-            <group>admin:product_variant:read</group>
+            <group>admin:product_variant:index</group>
+            <group>admin:product_variant:show</group>
             <group>admin:order:index</group>
             <group>admin:order:show</group>
-            <group>shop:product_variant:read</group>
+            <group>shop:product_variant:index</group>
+            <group>shop:product_variant:show</group>
             <group>shop:order:account:show</group>
         </attribute>
         <attribute name="name">
-            <group>admin:product_variant:read</group>
+            <group>admin:product_variant:index</group>
+            <group>admin:product_variant:show</group>
             <group>admin:product_variant:create</group>
             <group>admin:product_variant:update</group>
             <group>admin:order:index</group>
             <group>admin:order:show</group>
-            <group>shop:product_variant:read</group>
+            <group>shop:product_variant:index</group>
+            <group>shop:product_variant:show</group>
             <group>shop:order:account:show</group>
         </attribute>
         <attribute name="locale">
