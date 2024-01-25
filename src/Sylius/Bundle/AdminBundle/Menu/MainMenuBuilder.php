@@ -359,5 +359,13 @@ final class MainMenuBuilder
             ->setLabel('sylius.menu.admin.main.official_support.find_a_partner')
             ->setLabelAttribute('icon', 'handshake')
         ;
+
+        $configuration
+            ->addChild('sylius_certification')
+            ->setUri('https://sylius.com/certification/')
+            ->setLinkAttribute('target', '_blank')
+            ->setLabel('sylius.menu.admin.main.official_support.sylius_certification')
+            ->setLabelAttribute('icon', 'certificate')
+        ;
     }
 }
