@@ -11,7 +11,7 @@
             method: GET
             path: /shop/channels-new-path
             normalization_context:
-                groups: ['shop:channel:read']
+                groups: ['shop:channel:index']
             filters: ['test.channel.id_filter']
 
 '%sylius.model.order.class%':

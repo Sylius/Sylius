@@ -21,7 +21,7 @@
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/admin/channels</attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:channel:read</attribute>
+                    <attribute name="groups">admin:channel:index</attribute>
                 </attribute>
             </collectionOperation>
 
@@ -29,7 +29,7 @@
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/shop/channels</attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">shop:channel:read</attribute>
+                    <attribute name="groups">shop:channel:index</attribute>
                 </attribute>
             </collectionOperation>
 
@@ -40,7 +40,7 @@
                     <attribute name="groups">admin:channel:create</attribute>
                 </attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:channel:read</attribute>
+                    <attribute name="groups">admin:channel:show</attribute>
                 </attribute>
                 <attribute name="validation_groups">sylius</attribute>
             </collectionOperation>
@@ -54,7 +54,7 @@
                     <attribute name="summary">Use $code to retrieve a channel resource.</attribute>
                 </attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:channel:read</attribute>
+                    <attribute name="groups">admin:channel:show</attribute>
                 </attribute>
             </itemOperation>
 
@@ -62,7 +62,7 @@
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/shop/channels/{code}</attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">shop:channel:read</attribute>
+                    <attribute name="groups">shop:channel:show</attribute>
                 </attribute>
                 <attribute name="openapi_context">
                     <attribute name="summary">Use $code to retrieve a channel resource.</attribute>
@@ -76,7 +76,7 @@
                     <attribute name="groups">admin:channel:update</attribute>
                 </attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:channel:read</attribute>
+                    <attribute name="groups">admin:channel:show</attribute>
                 </attribute>
                 <attribute name="validation_groups">sylius</attribute>
             </itemOperation>
@@ -92,7 +92,7 @@
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/admin/channels/{code}/shop-billing-data</attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:shop_billing_data:read</attribute>
+                    <attribute name="groups">admin:shop_billing_data:show</attribute>
                 </attribute>
             </subresourceOperation>
         </subresourceOperations>
