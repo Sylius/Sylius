@@ -35,15 +35,18 @@ final class WinzouStateMachineAdapterTest extends TestCase
         parent::setUp();
 
         $this->winzouStateMachine = $this->createMock(WinzouStateMachine::class);
-        /** @phpstan-ignore-next-line */
-        $this->winzouStateMachine->config = [
+        $this->setStateMachineConfig($this->winzouStateMachine, [
             'transitions' => [
                 'transition' => [
                     'from' => ['from_state'],
                     'to' => 'to_state',
                 ],
+                'another_transition' => [
+                    'from' => ['another_from_state'],
+                    'to' => 'another_to_state',
+                ],
             ],
-        ];
+        ]);
 
         $this->winzouStateMachineFactory = $this->createMock(FactoryInterface::class);
         $this->winzouStateMachineFactory
@@ -78,6 +81,11 @@ final class WinzouStateMachineAdapterTest extends TestCase
     {
         $subject = new \stdClass();
         $graphName = 'graph_name';
+
+        $this->winzouStateMachine->method('can')->willReturnMap([
+            ['transition', true],
+            ['another_transition', false],
+        ]);
 
         $transitions = $this->createTestSubject()->getEnabledTransitions($subject, $graphName);
 
@@ -127,15 +135,17 @@ final class WinzouStateMachineAdapterTest extends TestCase
 
     public function testItReturnsTransitionsToForGivenTransition(): void
     {
-        /** @phpstan-ignore-next-line */
-        $this->winzouStateMachine->config = [
+        $this->setStateMachineConfig($this->winzouStateMachine, [
             'transitions' => [
                 'transition_to_state' => [
                     'from' => ['from_state'],
                     'to' => 'to_state',
                 ],
             ],
-        ];
+        ]);
+
+        $this->winzouStateMachine->method('can')->willReturn(true);
+
         $this->winzouStateMachineFactory = $this->createMock(FactoryInterface::class);
         $this->winzouStateMachineFactory->method('get')->willReturn($this->winzouStateMachine);
 
@@ -149,15 +159,17 @@ final class WinzouStateMachineAdapterTest extends TestCase
 
     public function testItReturnsTransitionsFromForGivenTransition(): void
     {
-        /** @phpstan-ignore-next-line */
-        $this->winzouStateMachine->config = [
+        $this->setStateMachineConfig($this->winzouStateMachine, [
             'transitions' => [
                 'transition_from_state' => [
                     'from' => ['from_state'],
                     'to' => 'to_state',
                 ],
             ],
-        ];
+        ]);
+
+        $this->winzouStateMachine->method('can')->willReturn(true);
+
         $this->winzouStateMachineFactory = $this->createMock(FactoryInterface::class);
         $this->winzouStateMachineFactory->method('get')->willReturn($this->winzouStateMachine);
 
@@ -172,5 +184,16 @@ final class WinzouStateMachineAdapterTest extends TestCase
     private function createTestSubject(): StateMachineInterface
     {
         return new WinzouStateMachineAdapter($this->winzouStateMachineFactory);
+    }
+
+    /**
+     * @param array<string, mixed> $config
+     */
+    private function setStateMachineConfig(WinzouStateMachine $stateMachine, array $config): void
+    {
+        $reflection = new \ReflectionClass($stateMachine);
+        $configProperty = $reflection->getProperty('config');
+        $configProperty->setAccessible(true);
+        $configProperty->setValue($stateMachine, $config);
     }
 }

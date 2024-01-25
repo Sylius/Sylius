@@ -56,6 +56,7 @@ final class OrderPaymentProviderSpec extends ObjectBehavior
         StateMachineFactoryInterface $stateMachineFactory,
         WinzouStateMachineStub $stateMachine,
     ): void {
+        $stateMachine->can(PaymentTransitions::TRANSITION_CREATE)->willReturn(true);
         $this->setPropertyValue($stateMachine, 'config', [
             'transitions' => [
                 PaymentTransitions::TRANSITION_CREATE => [
@@ -128,6 +129,7 @@ final class OrderPaymentProviderSpec extends ObjectBehavior
         StateMachineFactoryInterface $stateMachineFactory,
         WinzouStateMachineStub $stateMachine,
     ): void {
+        $stateMachine->can(PaymentTransitions::TRANSITION_CREATE)->willReturn(true);
         $this->setPropertyValue($stateMachine, 'config', [
             'transitions' => [
                 PaymentTransitions::TRANSITION_CREATE => [
@@ -166,6 +168,7 @@ final class OrderPaymentProviderSpec extends ObjectBehavior
         StateMachineFactoryInterface $stateMachineFactory,
         WinzouStateMachineStub $stateMachine,
     ): void {
+        $stateMachine->can(PaymentTransitions::TRANSITION_CREATE)->willReturn(true);
         $this->setPropertyValue($stateMachine, 'config', [
             'transitions' => [
                 PaymentTransitions::TRANSITION_CREATE => [

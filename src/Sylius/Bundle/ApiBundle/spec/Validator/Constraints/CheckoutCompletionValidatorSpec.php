@@ -108,6 +108,9 @@ final class CheckoutCompletionValidatorSpec extends ObjectBehavior
         OrderTokenValueAwareInterface $orderTokenValueAware,
         WinzouStateMachineStub $stateMachine,
     ): void {
+        $stateMachine->can('some_possible_transition')->willReturn(true);
+        $stateMachine->can('another_possible_transition')->willReturn(true);
+        $stateMachine->can('yet_another_possible_transition')->willReturn(false);
         $this->setPropertyValue($stateMachine, 'config', [
             'transitions' => [
                 'some_possible_transition' => [
@@ -115,6 +118,10 @@ final class CheckoutCompletionValidatorSpec extends ObjectBehavior
                     'to' => '',
                 ],
                 'another_possible_transition' => [
+                    'from' => [],
+                    'to' => '',
+                ],
+                'yet_another_possible_transition' => [
                     'from' => [],
                     'to' => '',
                 ],
