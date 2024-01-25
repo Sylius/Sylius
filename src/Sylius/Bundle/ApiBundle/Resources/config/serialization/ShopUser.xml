@@ -23,13 +23,15 @@
 
         <attribute name="enabled">
             <group>admin:customer:create</group>
-            <group>admin:customer:read</group>
+            <group>admin:customer:index</group>
+            <group>admin:customer:show</group>
             <group>admin:customer:update</group>
         </attribute>
 
         <attribute name="verified">
-            <group>admin:customer:read</group>
-            <group>shop:customer:read</group>
+            <group>admin:customer:index</group>
+            <group>admin:customer:show</group>
+            <group>shop:customer:show</group>
         </attribute>
 
         <attribute name="verifiedAt" serialized-name="verified">
