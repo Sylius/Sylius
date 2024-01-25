@@ -37,7 +37,7 @@
                     <attribute name="number">DESC</attribute>
                 </attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:order:read</attribute>
+                    <attribute name="groups">admin:order:index</attribute>
                 </attribute>
             </collectionOperation>
 
@@ -51,8 +51,8 @@
                 </attribute>
                 <attribute name="normalization_context">
                     <attribute name="groups">
-                        <attribute>shop:order:read</attribute>
-                        <attribute>shop:cart:read</attribute>
+                        <attribute>shop:order:show</attribute>
+                        <attribute>shop:cart:show</attribute>
                     </attribute>
                 </attribute>
                 <attribute name="openapi_context">
@@ -64,7 +64,7 @@
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/shop/orders</attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">shop:order:read</attribute>
+                    <attribute name="groups">shop:order:index</attribute>
                 </attribute>
             </collectionOperation>
         </collectionOperations>
@@ -74,7 +74,7 @@
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/admin/orders/{tokenValue}</attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:order:read</attribute>
+                    <attribute name="groups">admin:order:show</attribute>
                 </attribute>
             </itemOperation>
 
@@ -92,7 +92,7 @@
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/shop/orders/{tokenValue}</attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">shop:cart:read</attribute>
+                    <attribute name="groups">shop:cart:show</attribute>
                 </attribute>
             </itemOperation>
 
@@ -103,7 +103,7 @@
                     <attribute name="summary">Deletes cart</attribute>
                 </attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">shop:order:read</attribute>
+                    <attribute name="groups">shop:order:show</attribute>
                 </attribute>
             </itemOperation>
 
@@ -116,7 +116,7 @@
                     <attribute name="groups">admin:order:update</attribute>
                 </attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:order:read</attribute>
+                    <attribute name="groups">admin:order:show</attribute>
                 </attribute>
                 <attribute name="openapi_context">
                     <attribute name="summary">Cancels Order</attribute>
@@ -129,7 +129,7 @@
                 <attribute name="messenger">input</attribute>
                 <attribute name="input">Sylius\Bundle\ApiBundle\Command\Cart\AddItemToCart</attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">shop:cart:read</attribute>
+                    <attribute name="groups">shop:cart:show</attribute>
                 </attribute>
                 <attribute name="denormalization_context">
                     <attribute name="groups">shop:cart:add_item</attribute>
@@ -152,8 +152,8 @@
                 </attribute>
                 <attribute name="normalization_context">
                     <attribute name="groups">
-                        <attribute>shop:order:read</attribute>
-                        <attribute>shop:cart:read</attribute>
+                        <attribute>shop:order:show</attribute>
+                        <attribute>shop:cart:show</attribute>
                     </attribute>
                 </attribute>
                 <attribute name="openapi_context">
@@ -189,8 +189,8 @@
                 </attribute>
                 <attribute name="normalization_context">
                     <attribute name="groups">
-                        <attribute>shop:order:read</attribute>
-                        <attribute>shop:cart:read</attribute>
+                        <attribute>shop:order:show</attribute>
+                        <attribute>shop:cart:show</attribute>
                     </attribute>
                 </attribute>
                 <attribute name="openapi_context">
@@ -225,7 +225,7 @@
                     <attribute name="groups">shop:order:account:change_payment_method</attribute>
                 </attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">shop:order:account:read</attribute>
+                    <attribute name="groups">shop:order:account:show</attribute>
                 </attribute>
                 <attribute name="openapi_context">
                     <attribute name="summary">Change the payment method as logged shop user</attribute>
@@ -291,8 +291,8 @@
                 </attribute>
                 <attribute name="normalization_context">
                     <attribute name="groups">
-                        <attribute>shop:order:read</attribute>
-                        <attribute>shop:cart:read</attribute>
+                        <attribute>shop:order:show</attribute>
+                        <attribute>shop:cart:show</attribute>
                     </attribute>
                 </attribute>
                 <attribute name="openapi_context">
@@ -339,7 +339,7 @@
                     <attribute name="groups">shop:cart:change_quantity</attribute>
                 </attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">shop:cart:read</attribute>
+                    <attribute name="groups">shop:cart:show</attribute>
                 </attribute>
                 <attribute name="openapi_context">
                     <attribute name="summary">Changes quantity of order item</attribute>
@@ -374,8 +374,8 @@
                 </attribute>
                 <attribute name="normalization_context">
                     <attribute name="groups">
-                        <attribute>shop:order:read</attribute>
-                        <attribute>shop:cart:read</attribute>
+                        <attribute>shop:order:show</attribute>
+                        <attribute>shop:cart:show</attribute>
                     </attribute>
                 </attribute>
                 <attribute name="openapi_context">

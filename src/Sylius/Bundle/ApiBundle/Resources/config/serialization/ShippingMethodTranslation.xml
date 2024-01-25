@@ -24,8 +24,8 @@
             <group>admin:shipping_method:create</group>
             <group>admin:shipping_method:read</group>
             <group>admin:shipping_method:update</group>
-            <group>shop:cart:read</group>
-            <group>shop:order:account:read</group>
+            <group>shop:cart:show</group>
+            <group>shop:order:account:show</group>
             <group>shop:shipping_method:read</group>
             <group>shop:shipment:read</group>
         </attribute>

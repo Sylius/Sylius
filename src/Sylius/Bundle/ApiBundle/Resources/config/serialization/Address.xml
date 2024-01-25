@@ -30,105 +30,113 @@
             <group>admin:address:index</group>
             <group>admin:address:show</group>
             <group>admin:address:update</group>
-            <group>admin:order:read</group>
+            <group>admin:order:index</group>
+            <group>admin:order:show</group>
             <group>shop:address:create</group>
             <group>shop:address:index</group>
             <group>shop:address:show</group>
             <group>shop:address:update</group>
             <group>shop:cart:update</group>
-            <group>shop:cart:read</group>
-            <group>shop:order:account:read</group>
+            <group>shop:cart:show</group>
+            <group>shop:order:account:show</group>
         </attribute>
         <attribute name="lastName">
             <group>admin:address:index</group>
             <group>admin:address:show</group>
             <group>admin:address:update</group>
-            <group>admin:order:read</group>
+            <group>admin:order:index</group>
+            <group>admin:order:show</group>
             <group>shop:address:create</group>
             <group>shop:address:index</group>
             <group>shop:address:show</group>
             <group>shop:address:update</group>
             <group>shop:cart:update</group>
-            <group>shop:cart:read</group>
-            <group>shop:order:account:read</group>
+            <group>shop:cart:show</group>
+            <group>shop:order:account:show</group>
         </attribute>
         <attribute name="phoneNumber">
             <group>admin:address:index</group>
             <group>admin:address:show</group>
             <group>admin:address:update</group>
-            <group>admin:order:read</group>
+            <group>admin:order:index</group>
+            <group>admin:order:show</group>
             <group>shop:address:create</group>
             <group>shop:address:index</group>
             <group>shop:address:show</group>
             <group>shop:address:update</group>
             <group>shop:cart:update</group>
-            <group>shop:cart:read</group>
-            <group>shop:order:account:read</group>
+            <group>shop:cart:show</group>
+            <group>shop:order:account:show</group>
         </attribute>
         <attribute name="company">
             <group>admin:address:index</group>
             <group>admin:address:show</group>
             <group>admin:address:update</group>
-            <group>admin:order:read</group>
+            <group>admin:order:index</group>
+            <group>admin:order:show</group>
             <group>shop:address:create</group>
             <group>shop:address:index</group>
             <group>shop:address:show</group>
             <group>shop:address:update</group>
             <group>shop:cart:update</group>
-            <group>shop:cart:read</group>
-            <group>shop:order:account:read</group>
+            <group>shop:cart:show</group>
+            <group>shop:order:account:show</group>
         </attribute>
         <attribute name="city">
             <group>admin:address:index</group>
             <group>admin:address:show</group>
             <group>admin:address:update</group>
-            <group>admin:order:read</group>
+            <group>admin:order:index</group>
+            <group>admin:order:show</group>
             <group>shop:address:create</group>
             <group>shop:address:index</group>
             <group>shop:address:show</group>
             <group>shop:address:update</group>
             <group>shop:cart:update</group>
-            <group>shop:cart:read</group>
-            <group>shop:order:account:read</group>
+            <group>shop:cart:show</group>
+            <group>shop:order:account:show</group>
         </attribute>
         <attribute name="street">
             <group>admin:address:index</group>
             <group>admin:address:show</group>
             <group>admin:address:update</group>
-            <group>admin:order:read</group>
+            <group>admin:order:index</group>
+            <group>admin:order:show</group>
             <group>shop:address:create</group>
             <group>shop:address:index</group>
             <group>shop:address:show</group>
             <group>shop:address:update</group>
             <group>shop:cart:update</group>
-            <group>shop:cart:read</group>
-            <group>shop:order:account:read</group>
+            <group>shop:cart:show</group>
+            <group>shop:order:account:show</group>
         </attribute>
         <attribute name="postcode">
             <group>admin:address:index</group>
             <group>admin:address:show</group>
             <group>admin:address:update</group>
-            <group>admin:order:read</group>
+            <group>admin:order:index</group>
+            <group>admin:order:show</group>
             <group>shop:address:create</group>
             <group>shop:address:index</group>
             <group>shop:address:show</group>
             <group>shop:address:update</group>
             <group>shop:cart:update</group>
-            <group>shop:cart:read</group>
-            <group>shop:order:account:read</group>
+            <group>shop:cart:show</group>
+            <group>shop:order:account:show</group>
         </attribute>
         <attribute name="countryCode">
             <group>admin:address:index</group>
             <group>admin:address:show</group>
             <group>admin:address:update</group>
-            <group>admin:order:read</group>
+            <group>admin:order:index</group>
+            <group>admin:order:show</group>
             <group>shop:address:create</group>
             <group>shop:address:index</group>
             <group>shop:address:show</group>
             <group>shop:address:update</group>
             <group>shop:cart:update</group>
-            <group>shop:cart:read</group>
-            <group>shop:order:account:read</group>
+            <group>shop:cart:show</group>
+            <group>shop:order:account:show</group>
         </attribute>
         <attribute name="provinceCode">
             <group>admin:address:index</group>
@@ -139,21 +147,22 @@
             <group>shop:address:show</group>
             <group>shop:address:update</group>
             <group>shop:cart:update</group>
-            <group>shop:cart:read</group>
-            <group>shop:order:account:read</group>
+            <group>shop:cart:show</group>
+            <group>shop:order:account:show</group>
         </attribute>
         <attribute name="provinceName">
             <group>admin:address:index</group>
             <group>admin:address:show</group>
             <group>admin:address:update</group>
-            <group>admin:order:read</group>
+            <group>admin:order:index</group>
+            <group>admin:order:show</group>
             <group>shop:address:create</group>
             <group>shop:address:index</group>
             <group>shop:address:show</group>
             <group>shop:address:update</group>
             <group>shop:cart:update</group>
-            <group>shop:cart:read</group>
-            <group>shop:order:account:read</group>
+            <group>shop:cart:show</group>
+            <group>shop:order:account:show</group>
         </attribute>
     </class>
 </serializer>
