@@ -162,7 +162,7 @@ final class ProductReviewContext implements Context
      */
     public function iShouldBeNotifiedThatIMustCheckReviewRating(): void
     {
-        $this->assertViolation('You must check review rating.', 'rating');
+        $this->assertError('Request field "rating" should be of type "int".');
     }
 
     /**
@@ -170,7 +170,7 @@ final class ProductReviewContext implements Context
      */
     public function iShouldBeNotifiedThatTitleIsRequired(): void
     {
-        $this->assertViolation('Review title should not be blank.', 'title');
+        $this->assertError('Request field "title" should be of type "string".');
     }
 
     /**
@@ -194,7 +194,7 @@ final class ProductReviewContext implements Context
      */
     public function iShouldBeNotifiedThatCommentIsRequired(): void
     {
-        $this->assertViolation('Review comment should not be blank.', 'comment');
+        $this->assertError('Request field "comment" should be of type "string".');
     }
 
     /**
@@ -238,5 +238,13 @@ final class ProductReviewContext implements Context
 
         Assert::same($response->getStatusCode(), 422);
         Assert::true($this->responseChecker->hasViolationWithMessage($response, $message, $property));
+    }
+
+    private function assertError(string $error): void
+    {
+        $response = $this->client->getLastResponse();
+
+        Assert::same($response->getStatusCode(), 400);
+        Assert::same($this->responseChecker->getError($response), $error);
     }
 }

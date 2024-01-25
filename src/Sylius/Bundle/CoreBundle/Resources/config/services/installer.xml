@@ -41,6 +41,7 @@
             <argument type="service" id="sylius.repository.locale" />
             <argument type="service" id="sylius.factory.locale" />
             <argument>%locale%</argument>
+            <argument type="service" id="filesystem" />
         </service>
         <service id="Sylius\Bundle\CoreBundle\Installer\Setup\LocaleSetupInterface" alias="sylius.setup.locale" />
 
