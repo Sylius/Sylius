@@ -28,7 +28,7 @@
                     <attribute>Sylius\Bundle\ApiBundle\Filter\Doctrine\PromotionCouponPromotionFilter</attribute>
                 </attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:promotion_coupon:read</attribute>
+                    <attribute name="groups">admin:promotion_coupon:index</attribute>
                 </attribute>
                 <attribute name="order">
                     <attribute name="used">DESC</attribute>
@@ -38,7 +38,7 @@
             <collectionOperation name="admin_post">
                 <attribute name="method">POST</attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:promotion_coupon:read</attribute>
+                    <attribute name="groups">admin:promotion_coupon:show</attribute>
                 </attribute>
                 <attribute name="denormalization_context">
                     <attribute name="groups">admin:promotion_coupon:create</attribute>
@@ -54,7 +54,7 @@
                     <attribute name="groups">admin:promotion_coupon:generate</attribute>
                 </attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:promotion_coupon:read</attribute>
+                    <attribute name="groups">admin:promotion_coupon:show</attribute>
                 </attribute>
                 <attribute name="openapi_context">
                     <attribute name="summary">Generates promotion coupons</attribute>
@@ -67,14 +67,14 @@
             <itemOperation name="admin_get">
                 <attribute name="method">GET</attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:promotion_coupon:read</attribute>
+                    <attribute name="groups">admin:promotion_coupon:show</attribute>
                 </attribute>
             </itemOperation>
 
             <itemOperation name="admin_put">
                 <attribute name="method">PUT</attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:promotion_coupon:read</attribute>
+                    <attribute name="groups">admin:promotion_coupon:show</attribute>
                 </attribute>
                 <attribute name="denormalization_context">
                     <attribute name="groups">admin:promotion_coupon:update</attribute>
@@ -89,7 +89,7 @@
         <subresourceOperations>
             <subresourceOperation name="api_promotions_coupons_get_subresource">
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:promotion_coupon:read</attribute>
+                    <attribute name="groups">admin:promotion_coupon:show</attribute>
                 </attribute>
             </subresourceOperation>
         </subresourceOperations>
