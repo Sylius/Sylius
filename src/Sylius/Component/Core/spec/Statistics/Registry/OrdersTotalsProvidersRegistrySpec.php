@@ -11,12 +11,11 @@
 
 declare(strict_types=1);
 
-namespace spec\Sylius\Component\Core\Statistics\Provider\OrdersTotals;
+namespace spec\Sylius\Component\Core\Statistics\Registry;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Statistics\Provider\OrdersTotals\OrdersTotalsProviderInterface;
-use Sylius\Component\Core\Statistics\Provider\OrdersTotals\OrdersTotalsProviderRegistryInterface;
-use Sylius\Component\Core\Statistics\Provider\OrdersTotals\OrdersTotalsProvidersRegistry;
+use Sylius\Component\Core\Statistics\Registry\OrdersTotalsProviderRegistryInterface;
 
 final class OrdersTotalsProvidersRegistrySpec extends ObjectBehavior
 {

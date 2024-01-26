@@ -37,13 +37,8 @@
         </service>
 
         <service id="Sylius\Component\Core\Statistics\Provider\StatisticsProviderInterface" class="Sylius\Component\Core\Statistics\Provider\StatisticsProvider" >
-            <argument type="service" id="Sylius\Component\Core\Statistics\Provider\SalesTimeSeriesProviderInterface"/>
+            <argument type="service" id="Sylius\Component\Core\Statistics\Provider\SalesStatisticsProviderInterface" />
             <argument type="service" id="Sylius\Component\Core\Statistics\Provider\SalesSummaryProviderInterface"/>
-        </service>
-
-        <service id="Sylius\Component\Core\Statistics\Provider\SalesTimeSeriesProviderInterface" class="Sylius\Bundle\CoreBundle\Provider\SalesTimeSeriesProvider">
-            <argument type="service" id="Sylius\Component\Core\Statistics\Provider\OrdersTotals\OrdersTotalsProvidersRegistryInterface" />
-            <argument type="service" id="Sylius\Component\Core\Statistics\Chart\ChartFactoryInterface" />
         </service>
 
         <service id="Sylius\Component\Core\Statistics\Provider\SalesSummaryProviderInterface" class="Sylius\Component\Core\Statistics\Provider\BusinessActivitySummaryProvider">
@@ -51,8 +46,9 @@
             <argument type="service" id="sylius.repository.customer" />
         </service>
 
-        <service id="Sylius\Component\Core\Statistics\Provider\OrdersTotals\OrdersTotalsProvidersRegistryInterface" class="Sylius\Component\Core\Statistics\Provider\OrdersTotals\OrdersTotalsProvidersRegistry">
-            <argument type="tagged_iterator" index-by="type" tag="sylius.orders_totals_provider" />
+        <service id="Sylius\Component\Core\Statistics\Provider\SalesStatisticsProviderInterface" class="Sylius\Component\Core\Statistics\Provider\SalesStatisticsProvider">
+            <argument type="service" id="Sylius\Component\Core\Statistics\Registry\OrdersTotalsProvidersRegistryInterface" />
+            <argument>%sylius_core.orders_statistics.intervals_map%</argument>
         </service>
 
         <service id="sylius.orders_totals_provider.day" class="Sylius\Component\Core\Statistics\Provider\OrdersTotals\DayBasedOrdersTotalProvider">

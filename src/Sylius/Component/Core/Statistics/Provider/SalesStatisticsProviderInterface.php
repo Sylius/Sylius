@@ -14,9 +14,9 @@ declare(strict_types=1);
 namespace Sylius\Component\Core\Statistics\Provider;
 
 use Sylius\Component\Core\Model\ChannelInterface;
-use Sylius\Component\Core\Statistics\Chart\ChartInterface;
 
-interface SalesTimeSeriesProviderInterface
+interface SalesStatisticsProviderInterface
 {
-    public function provide(string $intervalType, \DatePeriod $datePeriod, ChannelInterface $channel): ChartInterface;
+    /** @return array<array{total: int, period: string}> */
+    public function provide(string $intervalType, \DatePeriod $datePeriod, ChannelInterface $channel): array;
 }

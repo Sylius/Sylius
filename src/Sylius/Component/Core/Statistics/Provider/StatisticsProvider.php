@@ -19,16 +19,16 @@ use Sylius\Component\Core\Statistics\ValueObject\Statistics;
 class StatisticsProvider implements StatisticsProviderInterface
 {
     public function __construct(
-        private SalesTimeSeriesProviderInterface $salesTimeSeriesProvider,
+        private SalesStatisticsProviderInterface $salesProvider,
         private BusinessActivitySummaryProviderInterface $businessActivitySummaryProvider,
     ) {
     }
 
     public function provide(string $intervalType, \DatePeriod $datePeriod, ChannelInterface $channel): Statistics
     {
-        $salesTimeSeries = $this->salesTimeSeriesProvider->provide($intervalType, $datePeriod, $channel);
+        $sales = $this->salesProvider->provide($intervalType, $datePeriod, $channel);
         $businessActivitySummary = $this->businessActivitySummaryProvider->provide($datePeriod, $channel);
 
-        return new Statistics($salesTimeSeries, $businessActivitySummary);
+        return new Statistics($sales, $businessActivitySummary);
     }
 }

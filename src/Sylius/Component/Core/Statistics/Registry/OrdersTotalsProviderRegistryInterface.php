@@ -11,7 +11,9 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Component\Core\Statistics\Provider\OrdersTotals;
+namespace Sylius\Component\Core\Statistics\Registry;
+
+use Sylius\Component\Core\Statistics\Provider\OrdersTotals\OrdersTotalsProviderInterface;
 
 interface OrdersTotalsProviderRegistryInterface
 {

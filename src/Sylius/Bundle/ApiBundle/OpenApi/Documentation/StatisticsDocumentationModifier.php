@@ -21,13 +21,14 @@ use Sylius\Calendar\Provider\DateTimeProviderInterface;
 use Symfony\Component\HttpFoundation\Response;
 
 /** @experimental */
-final class StatisticsModifier implements DocumentationModifierInterface
+final class StatisticsDocumentationModifier implements DocumentationModifierInterface
 {
     private const PATH = '/admin/statistics';
 
     public function __construct(
         private string $apiRoute,
         private DateTimeProviderInterface $dateTimeProvider,
+        private array $intervalsMap,
     ) {
     }
 
@@ -37,7 +38,7 @@ final class StatisticsModifier implements DocumentationModifierInterface
         $schemas['Statistics'] = [
             'type' => 'object',
             'properties' => [
-                'salesPerPeriod' => [
+                'sales' => [
                     'type' => 'array',
                     'items' => [
                         'type' => 'object',
@@ -45,6 +46,7 @@ final class StatisticsModifier implements DocumentationModifierInterface
                             'period' => [
                                 'type' => 'string',
                                 'format' => 'date-time',
+                                'example' => '1999-12',
                             ],
                             'total' => [
                                 'type' => 'integer',
@@ -52,27 +54,30 @@ final class StatisticsModifier implements DocumentationModifierInterface
                             ],
                         ],
                     ],
-                    'minItems' => 12,
                 ],
-                'newCustomersCount' => [
-                    'type' => 'integer',
-                    'example' => '10',
-                ],
-                'paidOrdersCount' => [
-                    'type' => 'integer',
-                    'example' => '12',
-                ],
-                'averageOrderValue' => [
-                    'type' => 'integer',
-                    'example' => '1000',
-                ],
-                'totalSales' => [
-                    'type' => 'integer',
-                    'example' => '12000',
-                ],
-                'intervalType' => [
-                    'type' => 'string',
-                    'enum' => ['month', 'year', 'week', 'day'],
+                'businessActivitySummary' => [
+                    'type' => 'array',
+                    'items' => [
+                        'type' => 'object',
+                        'properties' => [
+                            'totalSales' => [
+                                'type' => 'integer',
+                                'example' => '100000',
+                            ],
+                            'paidOrdersCount' => [
+                                'type' => 'integer',
+                                'example' => '12',
+                            ],
+                            'newCustomersCount' => [
+                                'type' => 'integer',
+                                'example' => '7',
+                            ],
+                            'averageOrderValue' => [
+                                'type' => 'integer',
+                                'example' => '2500',
+                            ],
+                        ],
+                    ],
                 ],
             ],
         ];
@@ -147,6 +152,7 @@ final class StatisticsModifier implements DocumentationModifierInterface
             schema: [
                 'type' => 'string',
                 'default' => 'month',
+                'enum' => array_keys($this->intervalsMap),
             ],
         );
 

@@ -294,8 +294,8 @@
             <argument type="service" id="Sylius\Bundle\CoreBundle\Provider\CustomerProviderInterface" />
         </service>
 
-        <service id="Sylius\Component\Core\Statistics\Chart\ChartFactoryInterface" class="Sylius\Component\Core\Statistics\Chart\ChartFactory">
-            <argument>%sylius_core.orders_statistics.intervals_map%</argument>
+        <service id="Sylius\Component\Core\Statistics\Registry\OrdersTotalsProvidersRegistryInterface" class="Sylius\Component\Core\Statistics\Registry\OrdersTotalsProvidersRegistry">
+            <argument type="tagged_iterator" index-by="type" tag="sylius.orders_totals_provider" />
         </service>
 
         <service id="Sylius\Component\Core\Positioner\PositionerInterface" class="Sylius\Component\Core\Positioner\Positioner" />
