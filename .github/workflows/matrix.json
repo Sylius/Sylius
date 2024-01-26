@@ -64,6 +64,13 @@
         }
       ]
     },
+    "frontend": {
+      "include": [
+        {
+          "node": "20.x"
+        }
+      ]
+    },
     "packages": {
       "include": [
         {
@@ -173,6 +180,22 @@
         {
           "php": "8.0",
           "symfony": "^6.4"
+        }
+      ]
+    },
+    "frontend": {
+      "include": [
+        {
+          "node": "14.x"
+        },
+        {
+          "node": "16.x"
+        },
+        {
+          "node": "18.x"
+        },
+        {
+          "node": "20.x"
         }
       ]
     },

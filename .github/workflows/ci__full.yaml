@@ -35,6 +35,12 @@ jobs:
         name: End-to-end tests (Custom)
         needs: static-checks
         uses: ./.github/workflows/ci_e2e-custom.yaml
+    frontend:
+        name: Frontend
+        needs: static-checks
+        uses: ./.github/workflows/ci_frontend.yaml
+        with:
+            type: full
     packages:
         name: Packages
         needs: static-checks
