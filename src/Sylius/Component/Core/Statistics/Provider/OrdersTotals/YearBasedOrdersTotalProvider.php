@@ -50,10 +50,10 @@ final class YearBasedOrdersTotalProvider implements OrdersTotalsProviderInterfac
     /** @param array<array{total: string|int, year: int}> $totals */
     private function getTotalForDate(array $totals, \DateTimeInterface $date): int
     {
-        $formattedPeriodDate = (int) $date->format('Y');
+        $formattedPeriodDate = $date->format('Y');
 
         foreach ($totals as $entry) {
-            if ($formattedPeriodDate === $entry['year']) {
+            if ($formattedPeriodDate === (string) $entry['year']) {
                 return (int) $entry['total'];
             }
         }
