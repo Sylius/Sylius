@@ -14,8 +14,10 @@ declare(strict_types=1);
 namespace Sylius\Bundle\ApiBundle\CommandHandler\Checkout;
 
 use SM\Factory\FactoryInterface;
+use SM\SMException;
 use Sylius\Bundle\ApiBundle\Command\Cart\InformAboutCartRecalculation;
 use Sylius\Bundle\ApiBundle\Command\Checkout\CompleteOrder;
+use Sylius\Bundle\ApiBundle\CommandHandler\Checkout\Exception\OrderTotalHasChangedException;
 use Sylius\Bundle\ApiBundle\Event\OrderCompleted;
 use Sylius\Bundle\CoreBundle\Order\Checker\OrderPromotionsIntegrityCheckerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
@@ -38,6 +40,10 @@ final class CompleteOrderHandler implements MessageHandlerInterface
     ) {
     }
 
+    /**
+     * @throws SMException
+     * @throws OrderTotalHasChangedException
+     */
     public function __invoke(CompleteOrder $completeOrder): OrderInterface
     {
         $orderTokenValue = $completeOrder->orderTokenValue;
@@ -52,6 +58,8 @@ final class CompleteOrderHandler implements MessageHandlerInterface
             $cart->setNotes($completeOrder->notes);
         }
 
+        $oldTotal = $cart->getTotal();
+
         if ($promotion = $this->orderPromotionsIntegrityChecker->check($cart)) {
             $this->commandBus->dispatch(
                 new InformAboutCartRecalculation($promotion->getName()),
@@ -59,6 +67,10 @@ final class CompleteOrderHandler implements MessageHandlerInterface
             );
 
             return $cart;
+        }
+
+        if ($oldTotal !== $cart->getTotal()) {
+            throw new OrderTotalHasChangedException();
         }
 
         $stateMachine = $this->stateMachineFactory->get($cart, OrderCheckoutTransitions::GRAPH);

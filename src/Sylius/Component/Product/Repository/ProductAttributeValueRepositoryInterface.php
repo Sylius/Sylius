@@ -17,6 +17,11 @@ use Doctrine\ORM\QueryBuilder;
 use Sylius\Component\Product\Model\ProductAttributeValueInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
+/**
+ * @template T of ProductAttributeValueInterface
+ *
+ * @extends RepositoryInterface<T>
+ */
 interface ProductAttributeValueRepositoryInterface extends RepositoryInterface
 {
     /**

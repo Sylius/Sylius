@@ -20,25 +20,57 @@
             <group>admin:payment_method:read</group>
             <group>shop:payment_method:read</group>
         </attribute>
-        <attribute name="name">
+
+        <attribute name="translations">
             <group>admin:payment:read</group>
+            <group>admin:payment_method:create</group>
             <group>admin:payment_method:read</group>
+            <group>admin:payment_method:update</group>
             <group>shop:order:account:read</group>
             <group>shop:payment:read</group>
+        </attribute>
+
+        <attribute name="name">
             <group>shop:payment_method:read</group>
         </attribute>
+
+        <attribute name="enabled">
+            <group>admin:payment_method:create</group>
+            <group>admin:payment_method:read</group>
+            <group>admin:payment_method:update</group>
+        </attribute>
+
         <attribute name="code">
             <group>admin:payment_method:read</group>
+            <group>admin:payment_method:create</group>
             <group>shop:payment_method:read</group>
         </attribute>
+
         <attribute name="description">
             <group>shop:payment_method:read</group>
         </attribute>
+
         <attribute name="instructions">
             <group>shop:payment_method:read</group>
         </attribute>
+
+        <attribute name="channels">
+            <group>admin:payment_method:create</group>
+            <group>admin:payment_method:read</group>
+            <group>admin:payment_method:update</group>
+        </attribute>
+
         <attribute name="position">
+            <group>admin:payment_method:read</group>
+            <group>admin:payment_method:create</group>
+            <group>admin:payment_method:update</group>
             <group>shop:payment_method:read</group>
+        </attribute>
+
+        <attribute name="gatewayConfig">
+            <group>admin:payment_method:read</group>
+            <group>admin:payment_method:create</group>
+            <group>admin:payment_method:update</group>
         </attribute>
     </class>
 </serializer>

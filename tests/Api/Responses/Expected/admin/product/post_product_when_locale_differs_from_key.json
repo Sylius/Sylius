@@ -1,0 +1,6 @@
+{
+    "@context": "\/api\/v2\/contexts\/Error",
+    "@type": "hydra:Error",
+    "hydra:title": "An error occurred",
+    "hydra:description": "The locale of translation does not match the key. Key: \"en_US\", locale: \"locale\""
+}

@@ -1,0 +1,92 @@
+{
+    "@context": "\/api\/v2\/contexts\/ProductReview",
+    "@id": "\/api\/v2\/admin\/product-reviews",
+    "@type": "hydra:Collection",
+    "hydra:member": [
+        {
+            "@id": "\/api\/v2\/admin\/product-reviews\/@integer@",
+            "@type": "ProductReview",
+            "id": @integer@,
+            "title": "Greatest product!",
+            "rating": 3,
+            "comment": "I have never bought anything better.",
+            "author": "\/api\/v2\/admin\/customers\/@integer@",
+            "status": "accepted",
+            "reviewSubject": "\/api\/v2\/admin\/products\/MUG",
+            "createdAt": @date@,
+            "updatedAt": @date@
+        },
+        {
+            "@id": "\/api\/v2\/admin\/product-reviews\/@integer@",
+            "@type": "ProductReview",
+            "id": @integer@,
+            "title": "Could be better",
+            "rating": 4,
+            "comment": "No real problems, but I feel it is a little lacking",
+            "author": "\/api\/v2\/admin\/customers\/@integer@",
+            "status": "accepted",
+            "reviewSubject": "\/api\/v2\/admin\/products\/MUG",
+            "createdAt": @date@,
+            "updatedAt": @date@
+        },
+        {
+            "@id": "\/api\/v2\/admin\/product-reviews\/@integer@",
+            "@type": "ProductReview",
+            "id": @integer@,
+            "title": "This review was definitely not bought",
+            "rating": 5,
+            "comment": "Bestest thing you could ever imagine!",
+            "author": "\/api\/v2\/admin\/customers\/@integer@",
+            "status": "accepted",
+            "reviewSubject": "\/api\/v2\/admin\/products\/MUG",
+            "createdAt": @date@,
+            "updatedAt": @date@
+        },
+        {
+            "@id": "\/api\/v2\/admin\/product-reviews\/@integer@",
+            "@type": "ProductReview",
+            "id": @integer@,
+            "title": "Hello",
+            "rating": 3,
+            "comment": "I seem to have a problem with...",
+            "author": "\/api\/v2\/admin\/customers\/@integer@",
+            "status": "new",
+            "reviewSubject": "\/api\/v2\/admin\/products\/MUG",
+            "createdAt": @date@,
+            "updatedAt": @date@
+        },
+        {
+            "@id": "\/api\/v2\/admin\/product-reviews\/@integer@",
+            "@type": "ProductReview",
+            "id": @integer@,
+            "title": "Boost the experience of this product with one quick trick",
+            "rating": 5,
+            "comment": "Visit <definitely not suspicious link> for more info!",
+            "author": "\/api\/v2\/admin\/customers\/@integer@",
+            "status": "rejected",
+            "reviewSubject": "\/api\/v2\/admin\/products\/MUG",
+            "createdAt": @date@,
+            "updatedAt": @date@
+        }
+    ],
+    "hydra:totalItems": 5,
+    "hydra:search": {
+        "@type": "hydra:IriTemplate",
+        "hydra:template": "\/api\/v2\/admin\/product-reviews{?status,status[]}",
+        "hydra:variableRepresentation": "BasicRepresentation",
+        "hydra:mapping": [
+            {
+                "@type": "IriTemplateMapping",
+                "variable": "status",
+                "property": "status",
+                "required": false
+            },
+            {
+                "@type": "IriTemplateMapping",
+                "variable": "status[]",
+                "property": "status",
+                "required": false
+            }
+        ]
+    }
+}

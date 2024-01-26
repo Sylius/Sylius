@@ -5,6 +5,16 @@ security:
     password_hashers:
         argon2i: argon2i
 
+when@test:
+    security:
+        password_hashers:
+            plaintext: plaintext
+
+when@test_cached:
+    security:
+        password_hashers:
+            plaintext: plaintext
+
 sylius_user:
     encoder: argon2i
 

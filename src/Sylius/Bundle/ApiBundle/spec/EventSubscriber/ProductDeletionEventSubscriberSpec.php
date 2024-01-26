@@ -43,12 +43,32 @@ final class ProductDeletionEventSubscriberSpec extends ObjectBehavior
             $product->getWrappedObject(),
         );
 
+        $productInPromotionRuleChecker->isInUse($product)->shouldNotBeCalled();
+
+        $this->shouldNotThrow()->during('protectFromRemovingProductInUseByPromotionRule', [$event]);
+    }
+
+    function it_does_not_throw_exception_when_product_is_not_in_use_by_a_promotion_rule(
+        ProductInPromotionRuleCheckerInterface $productInPromotionRuleChecker,
+        ProductInterface $product,
+        Request $request,
+        HttpKernelInterface $kernel,
+    ): void {
+        $request->getMethod()->willReturn(Request::METHOD_POST);
+
+        $event = new ViewEvent(
+            $kernel->getWrappedObject(),
+            $request->getWrappedObject(),
+            HttpKernelInterface::MAIN_REQUEST,
+            $product->getWrappedObject(),
+        );
+
         $productInPromotionRuleChecker->isInUse($product)->willReturn(false);
 
         $this->shouldNotThrow()->during('protectFromRemovingProductInUseByPromotionRule', [$event]);
     }
 
-    function it_throws_an_exception_when_trying_to_delete_product_assigned_to_promotion_rule(
+    function it_throws_an_exception_when_trying_to_delete_product_that_is_in_use_by_a_promotion_rule(
         ProductInPromotionRuleCheckerInterface $productInPromotionRuleChecker,
         ProductInterface $product,
         Request $request,

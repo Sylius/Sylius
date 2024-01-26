@@ -23,8 +23,8 @@
 
         <field name="provider" type="string" />
         <field name="identifier" type="string" />
-        <field name="accessToken" column="access_token" type="string" nullable="true" />
-        <field name="refreshToken" column="refresh_token" type="string" nullable="true" />
+        <field name="accessToken" column="access_token" type="text" nullable="true" length="8192" />
+        <field name="refreshToken" column="refresh_token" type="text" nullable="true" length="8192" />
 
         <many-to-one field="user" target-entity="Sylius\Component\User\Model\UserInterface" inversed-by="oauthAccounts">
             <join-column name="user_id" referenced-column-name="id" />

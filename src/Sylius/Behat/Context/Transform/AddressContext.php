@@ -66,7 +66,7 @@ final class AddressContext implements Context
     }
 
     /**
-     * @Transform /^clear old (shipping|billing) address$/
+     * @Transform /^clear the (shipping|billing) address$/
      * @Transform /^do not specify any (shipping|billing) address$/
      */
     public function createEmptyAddress()
@@ -104,6 +104,8 @@ final class AddressContext implements Context
      * @Transform /^of "([^"]+)" in the "([^"]+)", "([^"]+)" "([^"]+)", "([^"]+)"$/
      * @Transform /^addressed it to "([^"]+)", "([^"]+)", "([^"]+)" "([^"]+)" in the "([^"]+)"$/
      * @Transform /^address (?:|is |as )"([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)"$/
+     * @Transform /^"([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)" as its(?:| new) billing address$/
+     * @Transform /^be shipped to "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)"$/
      */
     public function createNewAddressWithName($name, $street, $postcode, $city, $countryName)
     {

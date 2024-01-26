@@ -25,14 +25,16 @@ use Webmozart\Assert\Assert;
 /** @experimental */
 class CheckoutCompletionValidator extends ConstraintValidator
 {
+    /**
+     * @param OrderRepositoryInterface<OrderInterface> $orderRepository
+     */
     public function __construct(
         private OrderRepositoryInterface $orderRepository,
         private FactoryInterface $stateMachineFactory,
     ) {
     }
 
-    /** @param OrderTokenValueAwareInterface $value */
-    public function validate($value, Constraint $constraint): void
+    public function validate(mixed $value, Constraint $constraint): void
     {
         Assert::isInstanceOf($value, OrderTokenValueAwareInterface::class);
 

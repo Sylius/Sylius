@@ -33,3 +33,17 @@ Sylius\Component\Core\Model\ProductReview:
         status: "accepted"
         author: "@customer_oliver"
         reviewSubject: "@product_mug"
+    new_review:
+        title: "Hello"
+        comment: "I seem to have a problem with..."
+        rating: 3
+        status: "new"
+        author: "@customer_oliver"
+        reviewSubject: "@product_mug"
+    rejected_review:
+        title: "Boost the experience of this product with one quick trick"
+        comment: "Visit <definitely not suspicious link> for more info!"
+        rating: 5
+        status: "rejected"
+        author: "@customer_oliver"
+        reviewSubject: "@product_mug"

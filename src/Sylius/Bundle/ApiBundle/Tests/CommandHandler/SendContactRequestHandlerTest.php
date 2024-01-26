@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\Tests\CommandHandler;
 
+use Prophecy\PhpUnit\ProphecyTrait;
 use Prophecy\Prophecy\ObjectProphecy;
 use Sylius\Bundle\ApiBundle\Command\SendContactRequest;
 use Sylius\Bundle\ApiBundle\CommandHandler\SendContactRequestHandler;
@@ -24,6 +25,7 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 final class SendContactRequestHandlerTest extends KernelTestCase
 {
+    use ProphecyTrait;
     use MailerAssertionsTrait;
 
     /** @test */

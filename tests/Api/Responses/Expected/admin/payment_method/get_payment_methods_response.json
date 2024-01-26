@@ -1,0 +1,121 @@
+{
+    "@context": "\/api\/v2\/contexts\/PaymentMethod",
+    "@id": "\/api\/v2\/admin\/payment-methods",
+    "@type": "hydra:Collection",
+    "hydra:member": [
+        {
+            "@id": "\/api\/v2\/admin\/payment-methods\/CASH_ON_DELIVERY",
+            "@type": "PaymentMethod",
+            "channels": [
+                "\/api\/v2\/admin\/channels\/WEB"
+            ],
+            "gatewayConfig": "\/api\/v2\/admin\/gateway-configs\/@integer@",
+            "id": @integer@,
+            "code": "CASH_ON_DELIVERY",
+            "position": 0,
+            "enabled": true,
+            "translations": {
+                "en_US": {
+                    "@id": "\/api\/v2\/admin\/payment-method-translations\/@integer@",
+                    "@type": "PaymentMethodTranslation",
+                    "id": @integer@,
+                    "name": "Cash on delivery",
+                    "description": @string@,
+                    "instructions": null
+                }
+            }
+        },
+        {
+            "@id": "\/api\/v2\/admin\/payment-methods\/BANK_TRANSFER",
+            "@type": "PaymentMethod",
+            "channels": [
+                "\/api\/v2\/admin\/channels\/WEB"
+            ],
+            "gatewayConfig": "\/api\/v2\/admin\/gateway-configs\/@integer@",
+            "id": @integer@,
+            "code": "BANK_TRANSFER",
+            "position": 1,
+            "enabled": true,
+            "translations": {
+                "en_US": {
+                    "@id": "\/api\/v2\/admin\/payment-method-translations\/@integer@",
+                    "@type": "PaymentMethodTranslation",
+                    "id": @integer@,
+                    "name": "Bank transfer",
+                    "description": @string@,
+                    "instructions": null
+                }
+            }
+        },
+        {
+            "@id": "\/api\/v2\/admin\/payment-methods\/DISABLED_PAYMENT_METHOD",
+            "@type": "PaymentMethod",
+            "channels": [
+                "\/api\/v2\/admin\/channels\/WEB"
+            ],
+            "gatewayConfig": "\/api\/v2\/admin\/gateway-configs\/@integer@",
+            "id": @integer@,
+            "code": "DISABLED_PAYMENT_METHOD",
+            "position": 2,
+            "enabled": false,
+            "translations": {
+                "en_US": {
+                    "@id": "\/api\/v2\/admin\/payment-method-translations\/@integer@",
+                    "@type": "PaymentMethodTranslation",
+                    "id": @integer@,
+                    "name": "Disabled payment method",
+                    "description": @string@,
+                    "instructions": null
+                }
+            }
+        },
+        {
+            "@id": "\/api\/v2\/admin\/payment-methods\/PAYPAL",
+            "@type": "PaymentMethod",
+            "channels": [
+                "\/api\/v2\/admin\/channels\/WEB"
+            ],
+            "gatewayConfig": "\/api\/v2\/admin\/gateway-configs\/@integer@",
+            "id": @integer@,
+            "code": "PAYPAL",
+            "position": 3,
+            "enabled": true,
+            "translations": {
+                "en_US": {
+                    "@id": "\/api\/v2\/admin\/payment-method-translations\/@integer@",
+                    "@type": "PaymentMethodTranslation",
+                    "id": @integer@,
+                    "name": "PayPal",
+                    "description": @string@,
+                    "instructions": null
+                }
+            }
+        }
+    ],
+    "hydra:totalItems": 4,
+    "hydra:search": {
+        "@type": "hydra:IriTemplate",
+        "hydra:template": "\/api\/v2\/admin\/payment-methods{?order[code],order[translation.name],localeCode for order[translation.name]}",
+        "hydra:variableRepresentation": "BasicRepresentation",
+        "hydra:mapping": [
+            {
+                "@type": "IriTemplateMapping",
+                "variable": "order[code]",
+                "property": "code",
+                "required": false
+            },
+            {
+                "@type": "IriTemplateMapping",
+                "variable": "order[translation.name]",
+                "property": "translation",
+                "required": false
+            },
+            {
+                "@type": "IriTemplateMapping",
+                "variable": "localeCode for order[translation.name]",
+                "property": "localeCode",
+                "required": false
+            }
+        ]
+    }
+}

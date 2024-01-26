@@ -64,6 +64,18 @@
                     <attribute name="groups">admin:shipment:update</attribute>
                 </attribute>
             </itemOperation>
+
+            <itemOperation name="admin_resend_confirmation">
+                <attribute name="method">POST</attribute>
+                <attribute name="path">/admin/shipments/{id}/resend-confirmation-email</attribute>
+                <attribute name="messenger">input</attribute>
+                <attribute name="input">Sylius\Bundle\ApiBundle\Command\ResendShipmentConfirmationEmail</attribute>
+                <attribute name="output">false</attribute>
+                <attribute name="status">202</attribute>
+                <attribute name="openapi_context">
+                    <attribute name="summary">Resends shipment confirmation email</attribute>
+                </attribute>
+            </itemOperation>
         </itemOperations>
 
         <property name="id" identifier="true" />

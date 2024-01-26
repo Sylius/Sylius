@@ -1,0 +1,25 @@
+framework:
+    workflows:
+        !php/const Sylius\Component\Order\OrderTransitions::GRAPH:
+            type: state_machine
+            marking_store:
+                type: method
+                property: state
+            supports: 
+                - Sylius\Component\Core\Model\OrderInterface
+            initial_marking: !php/const Sylius\Component\Order\Model\OrderInterface::STATE_CART
+            places:
+                - !php/const Sylius\Component\Order\Model\OrderInterface::STATE_CART
+                - !php/const Sylius\Component\Order\Model\OrderInterface::STATE_NEW
+                - !php/const Sylius\Component\Order\Model\OrderInterface::STATE_CANCELLED
+                - !php/const Sylius\Component\Order\Model\OrderInterface::STATE_FULFILLED
+            transitions:
+                !php/const Sylius\Component\Order\OrderTransitions::TRANSITION_CREATE:
+                    from: !php/const Sylius\Component\Order\Model\OrderInterface::STATE_CART
+                    to: !php/const Sylius\Component\Order\Model\OrderInterface::STATE_NEW
+                !php/const Sylius\Component\Order\OrderTransitions::TRANSITION_CANCEL:
+                    from: !php/const Sylius\Component\Order\Model\OrderInterface::STATE_NEW
+                    to: !php/const Sylius\Component\Order\Model\OrderInterface::STATE_CANCELLED
+                !php/const Sylius\Component\Order\OrderTransitions::TRANSITION_FULFILL:
+                    from: !php/const Sylius\Component\Order\Model\OrderInterface::STATE_NEW
+                    to: !php/const Sylius\Component\Order\Model\OrderInterface::STATE_FULFILLED

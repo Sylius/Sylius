@@ -16,15 +16,21 @@ namespace Sylius\Bundle\CoreBundle\Form\Extension;
 use Sylius\Bundle\ChannelBundle\Form\Type\ChannelChoiceType;
 use Sylius\Bundle\PaymentBundle\Form\Type\PaymentMethodType;
 use Sylius\Bundle\PayumBundle\Form\Type\GatewayConfigType;
+use Sylius\Bundle\PayumBundle\Validator\GroupsGenerator\GatewayConfigGroupsGenerator;
 use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\PaymentMethodInterface;
 use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class PaymentMethodTypeExtension extends AbstractTypeExtension
 {
+    public function __construct(private GatewayConfigGroupsGenerator $gatewayConfigGroupsGenerator)
+    {
+    }
+
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $gatewayFactory = $options['data']->getGatewayConfig();
@@ -57,9 +63,11 @@ final class PaymentMethodTypeExtension extends AbstractTypeExtension
         ;
     }
 
-    public function getExtendedType(): string
+    public function configureOptions(OptionsResolver $resolver): void
     {
-        return PaymentMethodType::class;
+        $resolver->setDefaults([
+            'validation_groups' => $this->gatewayConfigGroupsGenerator,
+        ]);
     }
 
     public static function getExtendedTypes(): iterable

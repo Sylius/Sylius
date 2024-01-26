@@ -32,9 +32,10 @@ final class RequestFactory implements RequestFactoryInterface
         string $resource,
         string $authorizationHeader,
         ?string $token = null,
+        array $queryParameters = [],
     ): RequestInterface {
         $builder = RequestBuilder::create(
-            sprintf('%s/%s/%s', $this->apiUrlPrefix, $section, $resource),
+            sprintf('%s/%s/%s%s', $this->apiUrlPrefix, $section, $resource, $this->getQueryString($queryParameters)),
             HttpRequest::METHOD_GET,
         );
         $builder->withHeader('HTTP_ACCEPT', self::LINKED_DATA_JSON_CONTENT_TYPE);
@@ -46,10 +47,23 @@ final class RequestFactory implements RequestFactoryInterface
         return $builder->build();
     }
 
-    public function subResourceIndex(string $section, string $resource, string $id, string $subResource): RequestInterface
-    {
+    public function subResourceIndex(
+        string $section,
+        string $resource,
+        string $id,
+        string $subResource,
+        array $queryParameters = [],
+    ): RequestInterface {
         $builder = RequestBuilder::create(
-            sprintf('%s/%s/%s/%s/%s', $this->apiUrlPrefix, $section, $resource, $id, $subResource),
+            sprintf(
+                '%s/%s/%s/%s/%s%s',
+                $this->apiUrlPrefix,
+                $section,
+                $resource,
+                $id,
+                $subResource,
+                $this->getQueryString($queryParameters),
+            ),
             HttpRequest::METHOD_GET,
         );
         $builder->withHeader('HTTP_ACCEPT', self::LINKED_DATA_JSON_CONTENT_TYPE);
@@ -194,5 +208,10 @@ final class RequestFactory implements RequestFactoryInterface
         }
 
         return $builder->build();
+    }
+
+    private function getQueryString(array $queryParameters): string
+    {
+        return count($queryParameters) > 0 ? '?' . http_build_query($queryParameters) : '';
     }
 }

@@ -1,0 +1,23 @@
+{
+    "@context": "\/api\/v2\/contexts\/Customer",
+    "@id": "\/api\/v2\/admin\/customers\/@string@",
+    "@type": "Customer",
+    "defaultAddress": "\/api\/v2\/admin\/addresses\/@string@",
+    "user": {
+        "@id": "\/api\/v2\/admin\/shop-users\/@string@",
+        "@type": "ShopUser",
+        "enabled": true,
+        "verified": true
+    },
+    "id": @integer@,
+    "email": "tony@doe.com",
+    "firstName": "tony",
+    "lastName": "Doe",
+    "birthday": @date@,
+    "gender": "u",
+    "group": null,
+    "phoneNumber": null,
+    "subscribedToNewsletter": false,
+    "createdAt": @date@,
+    "fullName": "tony Doe"
+}

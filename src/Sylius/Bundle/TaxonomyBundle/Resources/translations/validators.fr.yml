@@ -17,3 +17,8 @@ sylius:
         name:
             max_length: La taxonomie ne peux dépasser les 255 caractères.
             not_blank: Veuillez saisir un nom pour la taxonomie.
+    translation:
+        locale:
+            not_blank: Vous devez entrer une valeur.
+            invalid: Ce paramètre régional n'est pas valide.
+            unique: Une traduction pour la locale {{ value }} existe déjà.

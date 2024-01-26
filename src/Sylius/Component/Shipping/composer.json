@@ -31,7 +31,7 @@
         "php": "^8.0",
         "sylius/registry": "^1.5",
         "sylius/resource": "^1.9",
-        "symfony/options-resolver": "^5.4 || ^6.0"
+        "symfony/options-resolver": "^5.4.21 || ^6.0"
     },
     "require-dev": {
         "phpspec/phpspec": "^7.2"
@@ -43,7 +43,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "1.12-dev"
+            "dev-main": "1.13-dev"
         }
     },
     "autoload": {

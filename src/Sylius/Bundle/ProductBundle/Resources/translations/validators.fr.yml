@@ -50,6 +50,12 @@ sylius:
             unique: La valeur de l'option existe déjà.
         value:
             not_blank: Veuillez saisir la valeur de l'option.
+    association:
+        unique: Une association avec ce propriétaire et ce type existe déjà.
+        type:
+            not_blank: Veuillez entrer un type d'association.
+        owner:
+            not_blank: Veuillez entrer le propriétaire de l'association.
     association_type:
         name:
             not_blank: Entrez le nom du type d'association.
@@ -59,3 +65,8 @@ sylius:
             not_blank: Veuillez entrer le code du type d'association.
             regex: Le code du type d'association peut uniquement être constitué de lettres, chiffres, tirets et tirets bas.
             unique: Le type d'association avec le code donné existe déjà.
+    translation:
+        locale:
+            not_blank: Vous devez entrer une valeur.
+            invalid: Ce paramètre régional n'est pas valide.
+            unique: Une traduction pour la locale {{ value }} existe déjà.

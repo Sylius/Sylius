@@ -17,6 +17,11 @@ use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Component\Core\Model\ProductTaxonInterface;
 use Sylius\Component\Core\Repository\ProductTaxonRepositoryInterface;
 
+/**
+ * @template T of ProductTaxonInterface
+ *
+ * @implements ProductTaxonRepositoryInterface<T>
+ */
 class ProductTaxonRepository extends EntityRepository implements ProductTaxonRepositoryInterface
 {
     public function findOneByProductCodeAndTaxonCode(string $productCode, string $taxonCode): ?ProductTaxonInterface

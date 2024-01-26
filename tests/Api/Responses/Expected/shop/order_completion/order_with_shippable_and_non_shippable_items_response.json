@@ -78,9 +78,12 @@
     "itemsTotal": 9000,
     "total": 10000,
     "state": "new",
+    "itemsSubtotal": 9000,
     "taxTotal": 0,
+    "shippingTaxTotal": 1000,
     "taxExcludedTotal": 0,
     "taxIncludedTotal": 0,
     "shippingTotal": 1000,
-    "orderPromotionTotal": 0
+    "orderPromotionTotal": 0,
+    "shippingPromotionTotal": 0
 }

@@ -4,5 +4,5 @@
   "@type": "ProductImage",
   "id": "@integer@",
   "type": "thumbnail",
-  "path": "@string@\/media\/cache\/resolve\/sylius_small\/uo\/product.jpg"
+  "path": "@string@\/media\/cache\/resolve\/sylius_small\/uo\/thumbnail.jpg"
 }

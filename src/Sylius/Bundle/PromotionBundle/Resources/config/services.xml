@@ -13,11 +13,7 @@
 
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <imports>
-        <import resource="services/eligibility_checkers.xml" />
-        <import resource="services/criteria.xml" />
-        <import resource="services/forms.xml" />
-        <import resource="services/command.xml" />
-        <import resource="services/validators.xml" />
+        <import resource="services/*.xml" />
     </imports>
 
     <services>
@@ -27,6 +23,9 @@
             <argument type="service" id="sylius.custom_factory.promotion_coupon.inner" />
         </service>
         <service id="Sylius\Component\Promotion\Factory\PromotionCouponFactoryInterface" alias="sylius.factory.promotion_coupon" />
+
+        <service id="sylius.factory.promotion_coupon_generator_instruction" class="Sylius\Component\Promotion\Factory\PromotionCouponGeneratorInstructionFactory" public="false" />
+        <service id="Sylius\Component\Promotion\Factory\PromotionCouponGeneratorInstructionFactoryInterface" alias="sylius.factory.promotion_coupon_generator_instruction" />
 
         <service id="sylius.promotion_processor" class="Sylius\Component\Promotion\Processor\PromotionProcessor">
             <argument type="service" id="sylius.active_promotions_provider" />

@@ -70,7 +70,7 @@
             <argument type="service" id="sylius.repository.order_item" />
             <argument type="service" id="sylius.repository.order" />
             <argument type="service" id="sylius.availability_checker" />
-            <tag name="validator.constraint_validator" alias="sylius_api_validator_changed_item_guantity_in_cart" />
+            <tag name="validator.constraint_validator" alias="sylius_api_validator_changed_item_quantity_in_cart" />
         </service>
 
         <service id="Sylius\Bundle\ApiBundle\Validator\Constraints\CorrectOrderAddressValidator">
@@ -88,6 +88,11 @@
             <argument type="service" id="sylius.repository.payment_method" />
             <argument type="service" id="sylius.payment_methods_resolver" />
             <tag name="validator.constraint_validator" alias="sylius_api_chosen_payment_method_eligibility" />
+        </service>
+
+        <service id="Sylius\Bundle\ApiBundle\Validator\Constraints\CanPaymentMethodBeChangedValidator">
+            <argument type="service" id="sylius.repository.order" />
+            <tag name="validator.constraint_validator" alias="sylius_api_validator_can_payment_method_be_changed" />
         </service>
 
         <service id="Sylius\Bundle\ApiBundle\Validator\Constraints\CorrectChangeShopUserConfirmPasswordValidator">
@@ -110,9 +115,24 @@
             <tag name="validator.constraint_validator" alias="sylius_api_shipment_already_shipped" />
         </service>
 
+        <service id="Sylius\Bundle\ApiBundle\Validator\Constraints\ShopUserResetPasswordTokenExistsValidator">
+            <argument type="service" id="sylius.repository.shop_user" />
+            <tag name="validator.constraint_validator" alias="sylius_api_shop_user_reset_password_token_exists" />
+        </service>
+
+        <service id="Sylius\Bundle\ApiBundle\Validator\Constraints\ShopUserResetPasswordTokenNotExpiredValidator">
+            <argument type="service" id="sylius.repository.shop_user" />
+            <argument type="string">%sylius.shop_user.token.password_reset.ttl%</argument>
+            <tag name="validator.constraint_validator" alias="sylius_api_shop_user_reset_password_token_not_expired" />
+        </service>
+
         <service id="Sylius\Bundle\ApiBundle\Validator\Constraints\ShopUserNotVerifiedValidator">
             <argument type="service" id="sylius.repository.shop_user" />
             <tag name="validator.constraint_validator" alias="sylius_api_shop_user_not_verified" />
+        </service>
+
+        <service id="Sylius\Bundle\ApiBundle\Validator\Constraints\SingleValueForProductVariantOptionValidator">
+            <tag name="validator.constraint_validator" alias="sylius_api_validator_single_value_for_product_variant_option" />
         </service>
 
         <service id="Sylius\Bundle\ApiBundle\Validator\Constraints\AccountVerificationTokenEligibilityValidator">
@@ -167,6 +187,18 @@
         >
             <argument type="service" id="Sylius\Bundle\ApiBundle\Validator\CatalogPromotion\ForVariantsScopeValidator.inner" />
             <argument type="service" id="Sylius\Bundle\CoreBundle\SectionResolver\SectionProviderInterface" />
+        </service>
+
+        <service id="Sylius\Bundle\ApiBundle\Validator\Constraints\DateIntervalValidator">
+            <tag name="validator.constraint_validator" alias="sylius_api_validator_date_interval" />
+        </service>
+
+        <service id="Sylius\Bundle\ApiBundle\Validator\Constraints\EndDateIsNotBeforeStartDateValidator">
+            <tag name="validator.constraint_validator" alias="sylius_api_validator_date_period_end_date_is_not_before_start_date" />
+        </service>
+
+        <service id="Sylius\Bundle\ApiBundle\Validator\Constraints\EndDateAgainstIntervalValidator">
+            <tag name="validator.constraint_validator" alias="sylius_api_validator_end_date_against_interval" />
         </service>
     </services>
 </container>

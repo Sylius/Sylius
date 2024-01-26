@@ -25,7 +25,11 @@ final class ZoneChoiceType extends AbstractType
     public function __construct(private RepositoryInterface $zoneRepository, private array $scopeTypes = [])
     {
         if (count($scopeTypes) === 0) {
-            @trigger_error('Not passing scopeTypes thru constructor is deprecated in Sylius 1.5 and it will be removed in Sylius 2.0');
+            trigger_deprecation(
+                'sylius/addressing-bundle',
+                '1.5',
+                'Not passing $scopeTypes through constructor is deprecated and will be prohibited in Sylius 2.0.',
+            );
         }
     }
 

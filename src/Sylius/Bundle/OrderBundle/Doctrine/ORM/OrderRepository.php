@@ -19,6 +19,11 @@ use Sylius\Component\Order\Model\OrderInterface;
 use Sylius\Component\Order\Repository\OrderRepositoryInterface;
 use Webmozart\Assert\Assert;
 
+/**
+ * @template T of OrderInterface
+ *
+ * @implements OrderRepositoryInterface<T>
+ */
 class OrderRepository extends EntityRepository implements OrderRepositoryInterface
 {
     public function countPlacedOrders(): int
@@ -91,7 +96,7 @@ class OrderRepository extends EntityRepository implements OrderRepositoryInterfa
         ;
     }
 
-    /** @deprecated since 1.9 and  will be removed in Sylius 2.0, use src/Sylius/Bundle/CoreBundle/Doctrine/ORM/OrderRepositoryInterface instead */
+    /** @deprecated since Sylius 1.9 and  will be removed in Sylius 2.0, use src/Sylius/Bundle/CoreBundle/Doctrine/ORM/OrderRepositoryInterface instead */
     public function findCartByTokenValue(string $tokenValue): ?OrderInterface
     {
         return $this->createQueryBuilder('o')

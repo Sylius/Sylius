@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Tests\Api\Shop;
 
 use Sylius\Component\Core\Model\CustomerInterface;
@@ -23,25 +25,17 @@ final class CustomersTest extends JsonApiTestCase
     /** @test */
     public function it_returns_small_amount_of_data_on_customer_update(): void
     {
-        $loadedData = $this->loadFixturesFromFiles(['authentication/customer.yaml']);
-        $token = $this->logInShopUser('oliver@doe.com');
-
+        $fixtures = $this->loadFixturesFromFiles(['authentication/customer.yaml']);
         /** @var CustomerInterface $customer */
-        $customer = $loadedData['customer_oliver'];
+        $customer = $fixtures['customer_oliver'];
+
+        $header = array_merge($this->logInShopUser($customer->getEmailCanonical()), self::CONTENT_TYPE_HEADER);
 
         $this->client->request(
-            'PUT',
-            '/api/v2/shop/customers/' . $customer->getId(),
-            [],
-            [],
-            [
-                'CONTENT_TYPE' => 'application/ld+json',
-                'HTTP_ACCEPT' => 'application/ld+json',
-                'HTTP_Authorization' => sprintf('Bearer %s', $token)
-            ],
-            json_encode([
-                'firstName' => 'John'
-            ])
+            method: 'PUT',
+            uri: '/api/v2/shop/customers/' . $customer->getId(),
+            server: $header,
+            content: json_encode(['firstName' => 'John'], \JSON_THROW_ON_ERROR),
         );
 
         $response = $this->client->getResponse();
@@ -55,18 +49,16 @@ final class CustomersTest extends JsonApiTestCase
         $this->loadFixturesFromFiles(['channel.yaml']);
 
         $this->client->request(
-            'POST',
-            '/api/v2/shop/customers',
-            [],
-            [],
-            self::CONTENT_TYPE_HEADER,
-            json_encode([
+            method: 'POST',
+            uri: '/api/v2/shop/customers',
+            server: self::CONTENT_TYPE_HEADER,
+            content: json_encode([
                 'firstName' => 'John',
                 'lastName' => 'Doe',
                 'email' => 'shop@example.com',
                 'password' => 'sylius',
                 'subscribedToNewsletter' => true,
-            ])
+            ], \JSON_THROW_ON_ERROR),
         );
 
         $response = $this->client->getResponse();
@@ -80,15 +72,13 @@ final class CustomersTest extends JsonApiTestCase
         $this->loadFixturesFromFiles(['authentication/customer.yaml']);
 
         $this->client->request(
-            'POST',
-            '/api/v2/shop/authentication-token',
-            [],
-            [],
-            self::CONTENT_TYPE_HEADER,
-            json_encode([
+            method: 'POST',
+            uri: '/api/v2/shop/authentication-token',
+            server: self::CONTENT_TYPE_HEADER,
+            content: json_encode([
                 'email' => 'oliver@doe.com',
-                'password' => 'sylius'
-            ])
+                'password' => 'sylius',
+            ], \JSON_THROW_ON_ERROR),
         );
 
         $response = $this->client->getResponse();
@@ -100,28 +90,22 @@ final class CustomersTest extends JsonApiTestCase
     public function it_allows_customer_to_update_its_data(): void
     {
         $loadedData = $this->loadFixturesFromFiles(['authentication/customer.yaml']);
-        $token = $this->logInShopUser('oliver@doe.com');
-
         /** @var CustomerInterface $customer */
         $customer = $loadedData['customer_oliver'];
 
+        $header = array_merge($this->logInShopUser($customer->getEmailCanonical()), self::CONTENT_TYPE_HEADER);
+
         $this->client->request(
-            'PUT',
-            '/api/v2/shop/customers/' . $customer->getId(),
-            [],
-            [],
-            [
-                'CONTENT_TYPE' => 'application/ld+json',
-                'HTTP_ACCEPT' => 'application/ld+json',
-                'HTTP_Authorization' => sprintf('Bearer %s', $token)
-            ],
-            json_encode([
+            method: 'PUT',
+            uri: '/api/v2/shop/customers/' . $customer->getId(),
+            server: $header,
+            content: json_encode([
                 'email' => 'john.wick@tarasov.mob',
                 'firstName' => 'John',
                 'lastName' => 'Wick',
                 'gender' => 'm',
-                'subscribedToNewsletter' => true
-            ])
+                'subscribedToNewsletter' => true,
+            ], \JSON_THROW_ON_ERROR),
         );
 
         $response = $this->client->getResponse();

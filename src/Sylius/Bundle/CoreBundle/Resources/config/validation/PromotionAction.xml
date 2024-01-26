@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Sylius Sp. z o.o.
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<constraint-mapping xmlns="http://symfony.com/schema/dic/constraint-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/constraint-mapping http://symfony.com/schema/dic/services/constraint-mapping-1.0.xsd">
+    <class name="Sylius\Component\Promotion\Model\PromotionAction">
+        <property name="configuration">
+            <constraint name="Collection">
+                <option name="allowExtraFields">true</option>
+                <option name="groups">
+                    <value>sylius_promotion_action_order_percentage_discount</value>
+                    <value>sylius_promotion_action_shipping_percentage_discount</value>
+                </option>
+                <option name="fields">
+                    <value key="percentage">
+                        <constraint name="NotBlank">
+                            <option name="groups">
+                                <value>sylius_promotion_action_order_percentage_discount</value>
+                                <value>sylius_promotion_action_shipping_percentage_discount</value>
+                            </option>
+                        </constraint>
+                        <constraint name="Type">
+                            <option name="type">numeric</option>
+                            <option name="groups">
+                                <value>sylius_promotion_action_order_percentage_discount</value>
+                                <value>sylius_promotion_action_shipping_percentage_discount</value>
+                            </option>
+                        </constraint>
+                        <constraint name="Range">
+                            <option name="min">0</option>
+                            <option name="max">1</option>
+                            <option name="notInRangeMessage">sylius.promotion_action.percentage_discount_configuration.not_in_range</option>
+                            <option name="groups">
+                                <value>sylius_promotion_action_order_percentage_discount</value>
+                                <value>sylius_promotion_action_shipping_percentage_discount</value>
+                            </option>
+                        </constraint>
+                    </value>
+                </option>
+            </constraint>
+
+            <constraint name="Sylius\Bundle\CoreBundle\Validator\Constraints\ChannelCodeCollection">
+                <option name="allowExtraFields">true</option>
+                <option name="groups">sylius_promotion_action_order_fixed_discount</option>
+                <option name="constraints">
+                    <constraint name="Collection">
+                        <option name="allowExtraFields">true</option>
+                        <option name="fields">
+                            <value key="amount">
+                                <constraint name="NotBlank">
+                                    <option name="groups">sylius_promotion_action_order_fixed_discount</option>
+                                </constraint>
+                                <constraint name="Type">
+                                    <option name="type">numeric</option>
+                                    <option name="groups">sylius_promotion_action_order_fixed_discount</option>
+                                </constraint>
+                            </value>
+                        </option>
+                    </constraint>
+                </option>
+            </constraint>
+
+            <constraint name="Sylius\Bundle\CoreBundle\Validator\Constraints\ChannelCodeCollection">
+                <option name="allowExtraFields">true</option>
+                <option name="groups">sylius_promotion_action_unit_fixed_discount</option>
+                <option name="constraints">
+                    <constraint name="Collection">
+                        <option name="allowExtraFields">true</option>
+                        <option name="fields">
+                            <value key="amount">
+                                <constraint name="NotBlank">
+                                    <option name="groups">sylius_promotion_action_unit_fixed_discount</option>
+                                </constraint>
+                                <constraint name="Type">
+                                    <option name="type">numeric</option>
+                                    <option name="groups">sylius_promotion_action_unit_fixed_discount</option>
+                                </constraint>
+                            </value>
+                            <value key="filters">
+                                <constraint name="Optional">
+                                    <constraint name="Collection">
+                                        <option name="fields">
+                                            <value key="price_range_filter">
+                                                <constraint name="Optional">
+                                                    <constraint name="Collection">
+                                                        <option name="fields">
+                                                            <value key="min">
+                                                                <constraint name="Optional">
+                                                                    <constraint name="Type">
+                                                                        <option name="type">numeric</option>
+                                                                        <option name="groups">sylius_promotion_action_unit_fixed_discount</option>
+                                                                    </constraint>
+                                                                </constraint>
+                                                            </value>
+                                                            <value key="max">
+                                                                <constraint name="Optional">
+                                                                    <constraint name="Type">
+                                                                        <option name="type">numeric</option>
+                                                                        <option name="groups">sylius_promotion_action_unit_fixed_discount</option>
+                                                                    </constraint>
+                                                                </constraint>
+                                                            </value>
+                                                        </option>
+                                                    </constraint>
+                                                </constraint>
+                                            </value>
+                                            <value key="taxons_filter">
+                                                <constraint name="Optional">
+                                                    <constraint name="Collection">
+                                                        <option name="fields">
+                                                            <value key="taxons">
+                                                                <constraint name="Optional">
+                                                                    <constraint name="All">
+                                                                        <option name="groups">sylius_promotion_action_unit_fixed_discount</option>
+                                                                        <option name="constraints">
+                                                                            <constraint name="NotBlank">
+                                                                                <option name="groups">sylius_promotion_action_unit_fixed_discount</option>
+                                                                            </constraint>
+                                                                            <constraint name="Sylius\Bundle\CoreBundle\Validator\Constraints\TaxonCodeExists">
+                                                                                <option name="groups">sylius_promotion_action_unit_fixed_discount</option>
+                                                                            </constraint>
+                                                                        </option>
+                                                                    </constraint>
+                                                                </constraint>
+                                                            </value>
+                                                        </option>
+                                                    </constraint>
+                                                </constraint>
+                                            </value>
+                                            <value key="products_filter">
+                                                <constraint name="Optional">
+                                                    <constraint name="Collection">
+                                                        <option name="fields">
+                                                            <value key="products">
+                                                                <constraint name="Optional">
+                                                                    <constraint name="All">
+                                                                        <option name="groups">sylius_promotion_action_unit_fixed_discount</option>
+                                                                        <option name="constraints">
+                                                                            <constraint name="NotBlank">
+                                                                                <option name="groups">sylius_promotion_action_unit_fixed_discount</option>
+                                                                            </constraint>
+                                                                            <constraint name="Sylius\Bundle\CoreBundle\Validator\Constraints\ProductCodeExists">
+                                                                                <option name="groups">sylius_promotion_action_unit_fixed_discount</option>
+                                                                            </constraint>
+                                                                        </option>
+                                                                    </constraint>
+                                                                </constraint>
+                                                            </value>
+                                                        </option>
+                                                    </constraint>
+                                                </constraint>
+                                            </value>
+                                        </option>
+                                    </constraint>
+                                </constraint>
+                            </value>
+                        </option>
+                    </constraint>
+                </option>
+            </constraint>
+
+            <constraint name="Sylius\Bundle\CoreBundle\Validator\Constraints\ChannelCodeCollection">
+                <option name="allowExtraFields">true</option>
+                <option name="groups">sylius_promotion_action_unit_percentage_discount</option>
+                <option name="constraints">
+                    <constraint name="Collection">
+                        <option name="allowExtraFields">true</option>
+                        <option name="fields">
+                            <value key="percentage">
+                                <constraint name="NotBlank">
+                                    <option name="groups">sylius_promotion_action_unit_percentage_discount</option>
+                                </constraint>
+                                <constraint name="Type">
+                                    <option name="type">numeric</option>
+                                    <option name="groups">sylius_promotion_action_unit_percentage_discount</option>
+                                </constraint>
+                                <constraint name="Range">
+                                    <option name="min">0</option>
+                                    <option name="max">1</option>
+                                    <option name="notInRangeMessage">sylius.promotion_action.percentage_discount_configuration.not_in_range</option>
+                                    <option name="groups">sylius_promotion_action_unit_percentage_discount</option>
+                                </constraint>
+                            </value>
+                            <value key="filters">
+                                <constraint name="Optional">
+                                    <constraint name="Collection">
+                                        <option name="fields">
+                                            <value key="price_range_filter">
+                                                <constraint name="Optional">
+                                                    <constraint name="Collection">
+                                                        <option name="fields">
+                                                            <value key="min">
+                                                                <constraint name="Optional">
+                                                                    <constraint name="Type">
+                                                                        <option name="type">numeric</option>
+                                                                        <option name="groups">sylius_promotion_action_unit_percentage_discount</option>
+                                                                    </constraint>
+                                                                </constraint>
+                                                            </value>
+                                                            <value key="max">
+                                                                <constraint name="Optional">
+                                                                    <constraint name="Type">
+                                                                        <option name="type">numeric</option>
+                                                                        <option name="groups">sylius_promotion_action_unit_percentage_discount</option>
+                                                                    </constraint>
+                                                                </constraint>
+                                                            </value>
+                                                        </option>
+                                                    </constraint>
+                                                </constraint>
+                                            </value>
+                                            <value key="taxons_filter">
+                                                <constraint name="Optional">
+                                                    <constraint name="Collection">
+                                                        <option name="fields">
+                                                            <value key="taxons">
+                                                                <constraint name="Optional">
+                                                                    <constraint name="All">
+                                                                        <option name="groups">sylius_promotion_action_unit_percentage_discount</option>
+                                                                        <option name="constraints">
+                                                                            <constraint name="NotBlank">
+                                                                                <option name="groups">sylius_promotion_action_unit_percentage_discount</option>
+                                                                            </constraint>
+                                                                            <constraint name="Sylius\Bundle\CoreBundle\Validator\Constraints\TaxonCodeExists">
+                                                                                <option name="groups">sylius_promotion_action_unit_percentage_discount</option>
+                                                                            </constraint>
+                                                                        </option>
+                                                                    </constraint>
+                                                                </constraint>
+                                                            </value>
+                                                        </option>
+                                                    </constraint>
+                                                </constraint>
+                                            </value>
+                                            <value key="products_filter">
+                                                <constraint name="Optional">
+                                                    <constraint name="Collection">
+                                                        <option name="fields">
+                                                            <value key="products">
+                                                                <constraint name="Optional">
+                                                                    <constraint name="All">
+                                                                        <option name="groups">sylius_promotion_action_unit_percentage_discount</option>
+                                                                        <option name="constraints">
+                                                                            <constraint name="NotBlank">
+                                                                                <option name="groups">sylius_promotion_action_unit_percentage_discount</option>
+                                                                            </constraint>
+                                                                            <constraint name="Sylius\Bundle\CoreBundle\Validator\Constraints\ProductCodeExists">
+                                                                                <option name="groups">sylius_promotion_action_unit_percentage_discount</option>
+                                                                            </constraint>
+                                                                        </option>
+                                                                    </constraint>
+                                                                </constraint>
+                                                            </value>
+                                                        </option>
+                                                    </constraint>
+                                                </constraint>
+                                            </value>
+                                        </option>
+                                    </constraint>
+                                </constraint>
+                            </value>
+                        </option>
+                    </constraint>
+                </option>
+            </constraint>
+        </property>
+    </class>
+</constraint-mapping>

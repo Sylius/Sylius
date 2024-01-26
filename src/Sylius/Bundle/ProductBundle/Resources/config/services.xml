@@ -13,7 +13,7 @@
 
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <imports>
-        <import resource="services/form.xml" />
+        <import resource="services/**/*.xml" />
     </imports>
 
     <services>
@@ -37,15 +37,6 @@
         </service>
         <service id="Sylius\Component\Product\Factory\ProductFactoryInterface" alias="sylius.factory.product" />
 
-        <service id="sylius.validator.product_variant_combination" class="Sylius\Bundle\ProductBundle\Validator\ProductVariantCombinationValidator">
-            <argument type="service" id="sylius.checker.product_variants_parity" />
-            <tag name="validator.constraint_validator" alias="sylius.validator.product_variant_combination" />
-        </service>
-        <service id="sylius.validator.product_code_uniqueness" class="Sylius\Bundle\ProductBundle\Validator\UniqueSimpleProductCodeValidator">
-            <argument type="service" id="sylius.repository.product_variant" />
-            <tag name="validator.constraint_validator" alias="sylius.validator.unique_simple_product_code" />
-        </service>
-
         <service id="sylius.generator.product_variant" class="Sylius\Component\Product\Generator\ProductVariantGenerator">
             <argument type="service" id="sylius.factory.product_variant" />
             <argument type="service" id="sylius.checker.product_variants_parity" />
@@ -58,9 +49,13 @@
         <service id="sylius.generator.slug" class="Sylius\Component\Product\Generator\SlugGenerator" />
         <service id="Sylius\Component\Product\Generator\SlugGeneratorInterface" alias="sylius.generator.slug" />
 
+        <service id="Sylius\Component\Product\Resolver\ProductVariantResolverInterface" class="Sylius\Component\Product\Resolver\CompositeProductVariantResolver">
+            <argument type="tagged_iterator" tag="sylius.product_variant_resolver" />
+        </service>
+
         <service id="sylius.product_variant_resolver.default" class="Sylius\Component\Product\Resolver\DefaultProductVariantResolver">
             <argument type="service" id="sylius.repository.product_variant" />
-            <tag name="sylius.product_variant_resolver.default" type="default" />
+            <tag name="sylius.product_variant_resolver" priority="-999" />
         </service>
 
         <service id="sylius.listener.select_product_attribute_choice_remove" class="Sylius\Bundle\ProductBundle\EventListener\SelectProductAttributeChoiceRemoveListener">

@@ -18,7 +18,6 @@
     <class name="Sylius\Component\Shipping\Model\ShippingMethodTranslation">
         <attribute name="id">
             <group>admin:shipping_method:read</group>
-            <group>shop:shipping_method:read</group>
         </attribute>
 
         <attribute name="name">

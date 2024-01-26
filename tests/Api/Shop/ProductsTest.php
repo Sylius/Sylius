@@ -24,7 +24,11 @@ final class ProductsTest extends JsonApiTestCase
     {
         $this->loadFixturesFromFile('product/product_variant_with_original_price.yaml');
 
-        $this->client->request('GET', '/api/v2/shop/products-by-slug/mug?paramName=paramValue', [], [], self::CONTENT_TYPE_HEADER);
+        $this->client->request(
+            method: 'GET',
+            uri: '/api/v2/shop/products-by-slug/mug?paramName=paramValue',
+            server: self::CONTENT_TYPE_HEADER,
+        );
         $response = $this->client->getResponse();
 
         $this->assertEquals('/api/v2/shop/products/MUG?paramName=paramValue', $response->headers->get(('Location')));
@@ -39,22 +43,21 @@ final class ProductsTest extends JsonApiTestCase
         /** @var ProductInterface $product */
         $product = $fixtures['product_mug'];
         $this->client->request(
-            'GET',
-            sprintf('/api/v2/shop/products/%s', $product->getCode()),
-            [],
-            [],
-            self::CONTENT_TYPE_HEADER
+            method: 'GET',
+            uri: sprintf('/api/v2/shop/products/%s', $product->getCode()),
+            server: self::CONTENT_TYPE_HEADER,
         );
 
         $this->assertResponse(
             $this->client->getResponse(),
             'shop/product/get_product_with_default_locale_translation',
-            Response::HTTP_OK
+            Response::HTTP_OK,
         );
     }
 
     /**
      * @test
+     *
      * @dataProvider getGermanLocales
      */
     public function it_returns_product_with_translations_in_locale_from_header(string $germanLocale): void
@@ -64,17 +67,19 @@ final class ProductsTest extends JsonApiTestCase
         /** @var ProductInterface $product */
         $product = $fixtures['product_mug'];
         $this->client->request(
-            'GET',
-            sprintf('/api/v2/shop/products/%s', $product->getCode()),
-            [],
-            [],
-            ['CONTENT_TYPE' => 'application/ld+json', 'HTTP_ACCEPT' => 'application/ld+json', 'HTTP_ACCEPT_LANGUAGE' => $germanLocale]
+            method: 'GET',
+            uri: sprintf('/api/v2/shop/products/%s', $product->getCode()),
+            server: [
+                'CONTENT_TYPE' => 'application/ld+json',
+                'HTTP_ACCEPT' => 'application/ld+json',
+                'HTTP_ACCEPT_LANGUAGE' => $germanLocale,
+            ],
         );
 
         $this->assertResponse(
             $this->client->getResponse(),
             'shop/product/get_product_with_de_DE_locale_translation',
-            Response::HTTP_OK
+            Response::HTTP_OK,
         );
     }
 
@@ -84,22 +89,57 @@ final class ProductsTest extends JsonApiTestCase
         $this->loadFixturesFromFiles(['product/product_variant_with_original_price.yaml']);
 
         $this->client->request(
-            'GET',
-            '/api/v2/shop/products',
-            [],
-            [],
-            self::CONTENT_TYPE_HEADER
+            method: 'GET',
+            uri: '/api/v2/shop/products',
+            server: self::CONTENT_TYPE_HEADER,
         );
 
         $this->assertResponse(
             $this->client->getResponse(),
             'shop/product/get_products_collection_response',
-            Response::HTTP_OK
+            Response::HTTP_OK,
+        );
+    }
+
+    /** @test */
+    public function it_returns_products_collection_with_only_available_associations(): void
+    {
+        $this->loadFixturesFromFile('product/products_with_associations.yaml');
+
+        $this->client->request(
+            method: 'GET',
+            uri: '/api/v2/shop/products',
+            server: self::CONTENT_TYPE_HEADER,
+        );
+
+        $this->assertResponse(
+            $this->client->getResponse(),
+            'shop/product/get_products_collection_with_associations_response',
+            Response::HTTP_OK,
+        );
+    }
+
+    /** @test */
+    public function it_returns_product_item_with_only_available_associations(): void
+    {
+        $this->loadFixturesFromFile('product/products_with_associations.yaml');
+
+        $this->client->request(
+            method: 'GET',
+            uri: '/api/v2/shop/products/MUG',
+            server: self::CONTENT_TYPE_HEADER,
+        );
+
+        $this->assertResponse(
+            $this->client->getResponse(),
+            'shop/product/get_product_with_default_locale_translation',
+            Response::HTTP_OK,
         );
     }
 
     /**
      * @test
+     *
      * @dataProvider getPolishLocales
      */
     public function it_returns_product_attributes_collection_with_translations_in_locale_from_header(
@@ -108,16 +148,14 @@ final class ProductsTest extends JsonApiTestCase
         $this->loadFixturesFromFiles(['channel.yaml', 'product/product_attribute.yaml']);
 
         $this->client->request(
-            'GET',
-            sprintf('/api/v2/shop/products/%s/attributes', 'MUG_SW'),
-            [],
-            [],
-            array_merge(self::CONTENT_TYPE_HEADER, ['HTTP_ACCEPT_LANGUAGE' => $polishLocale])
+            method: 'GET',
+            uri: sprintf('/api/v2/shop/products/%s/attributes', 'MUG_SW'),
+            server: array_merge(self::CONTENT_TYPE_HEADER, ['HTTP_ACCEPT_LANGUAGE' => $polishLocale]),
         );
 
         $this->assertResponse(
             $this->client->getResponse(),
-            'shop/product/get_product_attributes_collection_response'
+            'shop/product/get_product_attributes_collection_response',
         );
     }
 
@@ -127,11 +165,10 @@ final class ProductsTest extends JsonApiTestCase
         $this->loadFixturesFromFiles(['channel.yaml', 'product/product_attribute.yaml']);
 
         $this->client->request(
-            'GET',
-            sprintf('/api/v2/shop/products/%s/attributes', 'MUG_SW'),
-            ['itemsPerPage' => 2],
-            [],
-            array_merge(self::CONTENT_TYPE_HEADER, ['HTTP_ACCEPT_LANGUAGE' => 'pl_PL'])
+            method: 'GET',
+            uri: sprintf('/api/v2/shop/products/%s/attributes', 'MUG_SW'),
+            parameters: ['itemsPerPage' => 2],
+            server: array_merge(self::CONTENT_TYPE_HEADER, ['HTTP_ACCEPT_LANGUAGE' => 'pl_PL']),
         );
 
         $this->assertCount(2, json_decode($this->client->getResponse()->getContent(), true)['hydra:member']);

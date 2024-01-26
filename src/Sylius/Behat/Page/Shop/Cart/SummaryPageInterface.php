@@ -66,6 +66,8 @@ interface SummaryPageInterface extends PageInterface
 
     public function hasItemWithOptionValue(string $productName, string $optionName, string $optionValue): bool;
 
+    public function hasItemWithInsufficientStock(string $productName): bool;
+
     public function hasProductOutOfStockValidationMessage(ProductInterface $product): bool;
 
     public function isEmpty(): bool;

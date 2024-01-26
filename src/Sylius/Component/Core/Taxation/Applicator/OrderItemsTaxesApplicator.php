@@ -35,6 +35,14 @@ class OrderItemsTaxesApplicator implements OrderTaxesApplicatorInterface
         private TaxRateResolverInterface $taxRateResolver,
         private ?ProportionalIntegerDistributorInterface $proportionalIntegerDistributor = null,
     ) {
+        if ($this->proportionalIntegerDistributor === null) {
+            trigger_deprecation(
+                'sylius/core',
+                '1.13',
+                'Not passing an $proportionalIntegerDistributor to %s constructor is deprecated and will be prohibited in Sylius 2.0.',
+                self::class,
+            );
+        }
     }
 
     /** @throws \InvalidArgumentException */
@@ -118,6 +126,8 @@ class OrderItemsTaxesApplicator implements OrderTaxesApplicatorInterface
         $unitSplitTaxes = $this->distributor->distribute($totalTaxAmount, $quantity);
 
         $units = $item->getUnits()->getValues();
+
+        /** @var OrderItemUnitInterface $unit */
         foreach ($units as $index => $unit) {
             if (!array_key_exists($index, $unitSplitTaxes)) {
                 $index = count($unitSplitTaxes) - 1;

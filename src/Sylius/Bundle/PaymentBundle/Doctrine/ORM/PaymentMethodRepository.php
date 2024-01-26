@@ -14,8 +14,14 @@ declare(strict_types=1);
 namespace Sylius\Bundle\PaymentBundle\Doctrine\ORM;
 
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
+use Sylius\Component\Payment\Model\PaymentMethodInterface;
 use Sylius\Component\Payment\Repository\PaymentMethodRepositoryInterface;
 
+/**
+ * @template T of PaymentMethodInterface
+ *
+ * @implements PaymentMethodRepositoryInterface<T>
+ */
 class PaymentMethodRepository extends EntityRepository implements PaymentMethodRepositoryInterface
 {
     public function findByName(string $name, string $locale): array

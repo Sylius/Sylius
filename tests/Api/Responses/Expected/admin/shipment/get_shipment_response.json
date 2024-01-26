@@ -1,0 +1,16 @@
+{
+    "@context": "\/api\/v2\/contexts\/Shipment",
+    "@id": "\/api\/v2\/admin\/shipments\/@integer@",
+    "@type": "Shipment",
+    "order": "\/api\/v2\/admin\/orders\/nAWw2jewpA",
+    "id": @integer@,
+    "state": "ready",
+    "method": "\/api\/v2\/admin\/shipping-methods\/UPS",
+    "units": {
+        "15": "\/api\/v2\/admin\/order-item-units\/@integer@",
+        "16": "\/api\/v2\/admin\/order-item-units\/@integer@",
+        "17": "\/api\/v2\/admin\/order-item-units\/@integer@"
+    },
+    "createdAt": @date@,
+    "updatedAt": @date@
+}

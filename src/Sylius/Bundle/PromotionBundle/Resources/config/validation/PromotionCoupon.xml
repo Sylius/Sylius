@@ -18,6 +18,16 @@
             <option name="message">sylius.promotion_coupon.code.unique</option>
             <option name="groups">sylius</option>
         </constraint>
+        <constraint name="Sylius\Bundle\PromotionBundle\Validator\Constraints\PromotionNotCouponBased">
+            <option name="groups">sylius</option>
+        </constraint>
+
+        <property name="promotion">
+            <constraint name="NotBlank">
+                <option name="message">sylius.promotion_coupon.promotion.not_blank</option>
+                <option name="groups">sylius</option>
+            </constraint>
+        </property>
 
         <property name="code">
             <constraint name="NotBlank">

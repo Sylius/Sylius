@@ -10,7 +10,7 @@ Feature: Generating product variant generation
         And this product has option "Taste" with values "Orange" and "Melon"
         And I am logged in as an administrator
 
-    @ui
+    @ui @no-api
     Scenario: Generating a product's variant without price
         When I want to generate new variants for this product
         And I specify that the 1st variant is identified by "WYBOROWA_ORANGE" code
@@ -18,37 +18,37 @@ Feature: Generating product variant generation
         Then I should be notified that prices in all channels must be defined for the 1st variant
         And I should not see any variants in the list
 
-    @ui
+    @ui @no-api
     Scenario: Generating a product's variant without code
         When I want to generate new variants for this product
-        And I specify that the 1st variant costs "$90" in "United States" channel
+        And I specify that the 1st variant costs "$90.00" in "United States" channel
         And I try to generate it
         Then I should be notified that code is required for the 1st variant
         And I should not see any variants in the list
 
-    @ui
+    @ui @no-api
     Scenario: Generating product's variants without specific required fields for second variant
         When I want to generate new variants for this product
         And I specify that the 1st variant is identified by "WYBOROWA_ORANGE" code
-        And I specify that the 1st variant costs "$90" in "United States" channel
+        And I specify that the 1st variant costs "$90.00" in "United States" channel
         And I try to generate it
         Then I should be notified that code is required for the 2nd variant
         Then I should be notified that prices in all channels must be defined for the 2nd variant
         And I should not see any variants in the list
 
-    @ui
+    @ui @no-api
     Scenario: Generating product's variants with the same code
         When I want to generate new variants for this product
         And I specify that the 1st variant is identified by "WYBOROWA_TASTE" code
-        And I specify that the 1st variant costs "$90" in "United States" channel
+        And I specify that the 1st variant costs "$90.00" in "United States" channel
         And I specify that the 2nd variant is identified by "WYBOROWA_TASTE" code
-        And I specify that the 2nd variant costs "$90" in "United States" channel
+        And I specify that the 2nd variant costs "$90.00" in "United States" channel
         And I try to generate it
         Then I should be notified that variant code must be unique within this product for the 1st variant
         And I should be notified that variant code must be unique within this product for the 2nd variant
         And I should not see any variants in the list
 
-    @ui
+    @ui @no-api
     Scenario: Generating product's variants without specific required fields for second variant
         When I want to generate new variants for this product
         And I do not specify any information about variants

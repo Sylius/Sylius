@@ -17,24 +17,24 @@ Feature: Viewing product's select attributes
         Then I should see the product attribute "T-Shirt material" with value "Banana skin" on the list
         And I should also see the product attribute "T-Shirt material" with value "Cotton" on the list
 
-    @ui
+    @ui @api
     Scenario: Viewing a detailed page with product's select attribute after changing a value
         Given this product has select attribute "T-Shirt material" with values "Banana skin" and "Cotton"
-        When the administrator changes this product attribute's value "Cotton" to "Orange skin"
+        When this product attribute's value changed from "Cotton" to "Orange skin"
         And I check this product's details
         Then I should see the product attribute "T-Shirt material" with value "Banana skin" on the list
         And I should also see the product attribute "T-Shirt material" with value "Orange skin" on the list
 
-    @ui @javascript
+    @ui @javascript @api @no-postgres
     Scenario: Viewing a detailed page with product's select attribute after removing an only value
         Given this product has select attribute "T-Shirt material" with value "Cotton"
-        When the administrator deletes the value "Cotton" from this product attribute
+        When this product attribute's value "Cotton" has been removed
         And I check this product's details
         Then I should not see the product attribute "T-Shirt material"
 
-    @ui @javascript
+    @ui @javascript @api @no-postgres
     Scenario: Viewing a detailed page with product's select attribute after removing one of the value
         Given this product has select attribute "T-Shirt material" with values "Banana skin" and "Cotton"
-        When the administrator deletes the value "Cotton" from this product attribute
+        When this product attribute's value "Cotton" has been removed
         And I check this product's details
         Then I should see the product attribute "T-Shirt material" with value "Banana skin"

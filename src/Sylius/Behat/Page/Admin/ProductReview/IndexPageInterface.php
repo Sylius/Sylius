@@ -20,4 +20,6 @@ interface IndexPageInterface extends BaseIndexPageInterface
     public function accept(array $parameters): void;
 
     public function reject(array $parameters): void;
+
+    public function chooseState(string $state): void;
 }

@@ -1,3 +1,7 @@
 Sylius\Component\Locale\Model\Locale:
     locale_en:
         code: 'en_US'
+    locale_pl:
+        code: 'pl_PL'
+    locale_ga:
+        code: 'ga_IE'

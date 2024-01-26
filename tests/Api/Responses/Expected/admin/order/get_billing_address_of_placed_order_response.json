@@ -1,0 +1,17 @@
+{
+    "@id": "\/api\/v2\/admin\/addresses\/@integer@",
+    "@context": "\/api\/v2\/contexts\/Address",
+    "@type": "Address",
+    "customer": "\/api\/v2\/admin\/customers\/@integer@",
+    "id": "@integer@",
+    "firstName": "Andrzej",
+    "lastName": "Legs",
+    "company": "Polmotors office",
+    "street": "Moniuszki 16/20",
+    "countryCode": "PL",
+    "city": "Pabianice",
+    "postcode": "31-999",
+    "phoneNumber": "111999222",
+    "provinceCode": "PL-PL",
+    "provinceName": "kujawsko-pomorskie"
+}

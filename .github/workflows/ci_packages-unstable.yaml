@@ -14,6 +14,9 @@ on:
                 type: boolean
                 default: false
 
+permissions:
+    contents: read
+
 jobs:
     get-matrix:
         runs-on: ubuntu-latest
@@ -40,7 +43,7 @@ jobs:
             matrix: ${{ fromJson(needs.get-matrix.outputs.matrix) }}
 
         env:
-            COMPOSER_ROOT_VERSION: "dev-master"
+            COMPOSER_ROOT_VERSION: "dev-main"
             SYMFONY_VERSION: "${{ matrix.symfony }}"
             UNSTABLE: "yes"
 

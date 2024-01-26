@@ -43,11 +43,21 @@ class AdminUserExampleFactory extends AbstractExampleFactory implements ExampleF
         $this->configureOptions($this->optionsResolver);
 
         if ($this->fileLocator === null || $this->imageUploader === null) {
-            @trigger_error(sprintf('Not passing a $fileLocator or/and $imageUploader to %s constructor is deprecated since Sylius 1.6 and will be removed in Sylius 2.0.', self::class), \E_USER_DEPRECATED);
+            trigger_deprecation(
+                'sylius/core-bundle',
+                '1.6',
+                'Not passing a $fileLocator or/and an $imageUploader to %s constructor is deprecated and will be removed in Sylius 2.0.',
+                self::class,
+            );
         }
 
         if ($this->avatarImageFactory === null) {
-            @trigger_error(sprintf('Not passing a $avatarImageFactory to %s constructor is deprecated since Sylius 1.10 and will be removed in Sylius 2.0.', self::class), \E_USER_DEPRECATED);
+            trigger_deprecation(
+                'sylius/core-bundle',
+                '1.10',
+                'Not passing an $avatarImageFactory to %s constructor is deprecated and will be removed in Sylius 2.0.',
+                self::class,
+            );
         }
     }
 

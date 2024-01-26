@@ -22,6 +22,9 @@
                 <attribute name="denormalization_context">
                     <attribute name="groups">admin:taxon:create</attribute>
                 </attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">admin:taxon:read</attribute>
+                </attribute>
             </collectionOperation>
 
             <collectionOperation name="shop_get">
@@ -48,6 +51,14 @@
                 <attribute name="denormalization_context">
                     <attribute name="groups">admin:taxon:update</attribute>
                 </attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">admin:taxon:read</attribute>
+                </attribute>
+            </itemOperation>
+
+            <itemOperation name="admin_delete">
+                <attribute name="method">DELETE</attribute>
+                <attribute name="path">/admin/taxons/{code}</attribute>
             </itemOperation>
 
             <itemOperation name="shop_get">
@@ -59,12 +70,38 @@
             </itemOperation>
         </itemOperations>
 
+        <subresourceOperations>
+            <subresourceOperation name="images_get_subresource">
+                <attribute name="method">GET</attribute>
+                <attribute name="path">/admin/taxons/{code}/images</attribute>
+                <attribute name="openapi_context">
+                    <attribute name="summary">Retrieves the collection of TaxonImage resources for a given Taxon.</attribute>
+                </attribute>
+            </subresourceOperation>
+        </subresourceOperations>
+
         <property name="id" identifier="false" writable="false" />
         <property name="code" identifier="true" required="true" />
         <property name="name" required="true" />
         <property name="slug" required="true" />
         <property name="description" required="true" />
+        <property name="parent" readableLink="false" writableLink="false" />
         <property name="children" readableLink="false" />
-        <property name="translations" readable="true" writable="true" />
+        <property name="position" writable="true" />
+        <property name="translations" readable="true" writable="true">
+            <attribute name="openapi_context">
+                <attribute name="type">object</attribute>
+                <attribute name="example">
+                    <attribute name="en_US">
+                        <attribute name="name">string</attribute>
+                        <attribute name="description">string</attribute>
+                        <attribute name="slug">string</attribute>
+                    </attribute>
+                </attribute>
+            </attribute>
+        </property>
+        <property name="images" writable="false" required="false">
+            <subresource resourceClass="%sylius.model.taxon_image.class%" collection="true" />
+        </property>
     </resource>
 </resources>

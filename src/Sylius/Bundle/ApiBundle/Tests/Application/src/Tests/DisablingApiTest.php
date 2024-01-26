@@ -17,7 +17,7 @@ use ApiPlatform\Core\Bridge\Symfony\Bundle\Test\ApiTestCase;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-class DisablingApiTest extends ApiTestCase
+final class DisablingApiTest extends ApiTestCase
 {
     use SetUpTestsTrait;
 
