@@ -52,6 +52,7 @@
                 <option name="allowExtraFields">true</option>
                 <option name="groups">sylius_promotion_action_order_fixed_discount</option>
                 <option name="validateAgainstAllChannels">true</option>
+                <option name="channelAwarePropertyPath">promotion</option>
                 <option name="constraints">
                     <constraint name="Collection">
                         <option name="allowExtraFields">true</option>
@@ -74,6 +75,7 @@
                 <option name="allowExtraFields">true</option>
                 <option name="groups">sylius_promotion_action_unit_fixed_discount</option>
                 <option name="validateAgainstAllChannels">true</option>
+                <option name="channelAwarePropertyPath">promotion</option>
                 <option name="constraints">
                     <constraint name="Collection">
                         <option name="allowExtraFields">true</option>
@@ -174,6 +176,7 @@
                 <option name="allowExtraFields">true</option>
                 <option name="groups">sylius_promotion_action_unit_percentage_discount</option>
                 <option name="validateAgainstAllChannels">true</option>
+                <option name="channelAwarePropertyPath">promotion</option>
                 <option name="constraints">
                     <constraint name="Collection">
                         <option name="allowExtraFields">true</option>

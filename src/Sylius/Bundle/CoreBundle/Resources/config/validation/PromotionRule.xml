@@ -108,6 +108,7 @@
                 <option name="allowExtraFields">true</option>
                 <option name="groups">sylius_promotion_rule_total_of_items_from_taxon</option>
                 <option name="validateAgainstAllChannels">true</option>
+                <option name="channelAwarePropertyPath">promotion</option>
                 <option name="constraints">
                     <constraint name="Collection">
                         <option name="allowExtraFields">true</option>
@@ -158,6 +159,7 @@
                 <option name="allowExtraFields">true</option>
                 <option name="groups">sylius_promotion_rule_item_total</option>
                 <option name="validateAgainstAllChannels">true</option>
+                <option name="channelAwarePropertyPath">promotion</option>
                 <option name="constraints">
                     <constraint name="Collection">
                         <option name="allowExtraFields">true</option>

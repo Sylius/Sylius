@@ -75,6 +75,7 @@
 
         <service id="sylius.validator.channel_code_collection" class="Sylius\Bundle\CoreBundle\Validator\Constraints\ChannelCodeCollectionValidator">
             <argument type="service" id="sylius.repository.channel" />
+            <argument type="service" id="property_accessor" />
             <tag name="validator.constraint_validator" alias="sylius_channel_code_collection" />
         </service>
 

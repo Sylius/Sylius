@@ -23,6 +23,7 @@
             <constraint name="Sylius\Bundle\CoreBundle\Validator\Constraints\ChannelCodeCollection">
                 <option name="groups">sylius_shipping_method_calculator_rate</option>
                 <option name="validateAgainstAllChannels">true</option>
+                <option name="channelAwarePropertyPath">shippingMethod</option>
                 <option name="constraints">
                     <constraint name="Collection">
                         <option name="groups">sylius_shipping_method_calculator_rate</option>
