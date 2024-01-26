@@ -28,8 +28,12 @@ final class StatisticsTest extends JsonApiTestCase
         parent::setUp();
     }
 
-    /** @test */
-    public function it_gets_fulfilled_orders_in_specific_year_statistics(): void
+    /**
+     * @test
+     *
+     * @dataProvider getIntervals
+     */
+    public function it_gets_fulfilled_orders_in_specific_year_statistics(string $interval): void
     {
         $this->loadFixturesFromFiles([
             'authentication/api_administrator.yaml',
@@ -40,31 +44,66 @@ final class StatisticsTest extends JsonApiTestCase
         ]);
 
         $this->fulfillOrder(
-            tokenValue: 'ORDER_FULFILLED_BEFORE_REQUESTED_PERIOD',
+            tokenValue: 'ORDER_BEFORE_START',
+            productVariantCode: 'product_variant_that_costs_1000',
+            quantity: 2,
+            checkoutCompletedAt: new \DateTimeImmutable('2021-12-31T23:59:59'),
+        );
+
+        $this->fulfillOrder(
+            tokenValue: '2022ORDER1',
+            productVariantCode: 'product_variant_that_costs_1000',
+            quantity: 2,
+            checkoutCompletedAt: new \DateTimeImmutable('2022-07-01T23:59:59'),
+        );
+
+        $this->fulfillOrder(
+            tokenValue: '2022ORDER2',
             productVariantCode: 'product_variant_that_costs_1000',
             quantity: 2,
             checkoutCompletedAt: new \DateTimeImmutable('2022-12-31T23:59:59'),
         );
 
         $this->fulfillOrder(
-            tokenValue: 'ORDER_FULFILLED_IN_JANUARY',
+            tokenValue: '2023ORDER1',
             productVariantCode: 'product_variant_that_costs_1000',
             quantity: 2,
             checkoutCompletedAt: new \DateTimeImmutable('2023-01-01T00:00:00'),
         );
 
         $this->fulfillOrder(
-            tokenValue: 'ORDER_FULFILLED_AFTER_REQUESTED_PERIOD',
+            tokenValue: '2023ORDER2',
+            productVariantCode: 'product_variant_that_costs_1000',
+            quantity: 2,
+            checkoutCompletedAt: new \DateTimeImmutable('2023-04-20T00:00:00'),
+        );
+
+        $this->fulfillOrder(
+            tokenValue: '2024ORDER1',
             productVariantCode: 'product_variant_that_costs_1000',
             quantity: 2,
             checkoutCompletedAt: new \DateTimeImmutable('2024-01-01T00:00:00'),
         );
 
+        $this->fulfillOrder(
+            tokenValue: '2024ORDER2',
+            productVariantCode: 'product_variant_that_costs_1000',
+            quantity: 2,
+            checkoutCompletedAt: new \DateTimeImmutable('2024-11-15T00:00:00'),
+        );
+
+        $this->fulfillOrder(
+            tokenValue: 'ORDER_AFTER_END',
+            productVariantCode: 'product_variant_that_costs_1000',
+            quantity: 2,
+            checkoutCompletedAt: new \DateTimeImmutable('2025-01-01T00:00:00'),
+        );
+
         $parameters = [
             'channelCode' => 'WEB',
-            'startDate' => '2023-01-01T00:00:00',
-            'interval' => 'month',
-            'endDate' => '2023-12-31T23:59:59',
+            'startDate' => '2022-01-01T00:00:00',
+            'interval' => $interval,
+            'endDate' => '2024-12-31T23:59:59',
         ];
 
         $this->client->request(
@@ -76,7 +115,7 @@ final class StatisticsTest extends JsonApiTestCase
 
         $this->assertResponse(
             $this->client->getResponse(),
-            'admin/statistics/get_statistics_response',
+            'admin/statistics/get_' . $interval .'_statistics_response',
             Response::HTTP_OK,
         );
     }
@@ -131,6 +170,13 @@ final class StatisticsTest extends JsonApiTestCase
         );
 
         $this->assertResponseCode($this->client->getResponse(), Response::HTTP_BAD_REQUEST);
+    }
+
+    public function getIntervals(): iterable
+    {
+        yield ['day'];
+        yield ['month'];
+        yield ['year'];
     }
 
     public function missingQueryParameters(): iterable
