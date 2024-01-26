@@ -31,6 +31,10 @@
     </service>
     <service id="Sylius\Bundle\CoreBundle\Mailer\ContactEmailManagerInterface" alias="sylius.mailer.contact_email_manager" />
 
+    <service id="Sylius\Bundle\CoreBundle\Mailer\ContactEmailManagerInterface" class="Sylius\Bundle\CoreBundle\Mailer\ContactEmailManager">
+        <argument type="service" id="sylius.email_sender" />
+    </service>
+
     <service id="sylius.mailer.order_email_manager" class="Sylius\Bundle\CoreBundle\Mailer\OrderEmailManager">
         <argument type="service" id="sylius.email_sender" />
     </service>
