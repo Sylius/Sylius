@@ -19,53 +19,62 @@
         <attribute name="id">
             <group>admin:order:index</group>
             <group>admin:order:show</group>
-            <group>admin:shipment:read</group>
+            <group>admin:shipment:index</group>
+            <group>admin:shipment:show</group>
             <group>shop:cart:show</group>
-            <group>shop:shipment:read</group>
+            <group>shop:shipment:show</group>
         </attribute>
 
         <attribute name="createdAt">
-            <group>admin:shipment:read</group>
-            <group>shop:shipment:read</group>
+            <group>admin:shipment:index</group>
+            <group>admin:shipment:show</group>
+            <group>shop:shipment:show</group>
         </attribute>
 
         <attribute name="updatedAt">
-            <group>admin:shipment:read</group>
-            <group>shop:shipment:read</group>
+            <group>admin:shipment:index</group>
+            <group>admin:shipment:show</group>
+            <group>shop:shipment:show</group>
         </attribute>
 
         <attribute name="state">
-            <group>admin:shipment:read</group>
-            <group>shop:shipment:read</group>
+            <group>admin:shipment:index</group>
+            <group>admin:shipment:show</group>
+            <group>shop:shipment:show</group>
         </attribute>
 
         <attribute name="method">
             <group>admin:order:index</group>
             <group>admin:order:show</group>
-            <group>admin:shipment:read</group>
+            <group>admin:shipment:index</group>
+            <group>admin:shipment:show</group>
             <group>shop:cart:show</group>
             <group>shop:order:account:show</group>
-            <group>shop:shipment:read</group>
+            <group>shop:shipment:show</group>
         </attribute>
 
         <attribute name="units">
-            <group>admin:shipment:read</group>
-            <group>shop:shipment:read</group>
+            <group>admin:shipment:index</group>
+            <group>admin:shipment:show</group>
+            <group>shop:shipment:show</group>
         </attribute>
 
         <attribute name="tracking">
-            <group>admin:shipment:read</group>
-            <group>shop:shipment:read</group>
+            <group>admin:shipment:index</group>
+            <group>admin:shipment:show</group>
+            <group>shop:shipment:show</group>
         </attribute>
 
         <attribute name="shippedAt">
-            <group>admin:shipment:read</group>
-            <group>shop:shipment:read</group>
+            <group>admin:shipment:index</group>
+            <group>admin:shipment:show</group>
+            <group>shop:shipment:show</group>
         </attribute>
 
         <attribute name="order">
-            <group>admin:shipment:read</group>
-            <group>shop:shipment:read</group>
+            <group>admin:shipment:index</group>
+            <group>admin:shipment:show</group>
+            <group>shop:shipment:show</group>
         </attribute>
     </class>
 </serializer>

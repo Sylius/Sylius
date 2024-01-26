@@ -21,20 +21,20 @@
            <group>admin:country:update</group>
            <group>shop:country:index</group>
            <group>shop:country:show</group>
-           <group>admin:province:read</group>
+           <group>admin:province:show</group>
        </attribute>
        <attribute name="name">
            <group>admin:country:create</group>
            <group>admin:country:update</group>
            <group>shop:country:index</group>
            <group>shop:country:show</group>
-           <group>admin:province:read</group>
+           <group>admin:province:show</group>
            <group>admin:province:update</group>
        </attribute>
        <attribute name="abbreviation">
            <group>admin:country:create</group>
            <group>admin:country:update</group>
-           <group>admin:province:read</group>
+           <group>admin:province:show</group>
            <group>admin:province:update</group>
        </attribute>
     </class>
