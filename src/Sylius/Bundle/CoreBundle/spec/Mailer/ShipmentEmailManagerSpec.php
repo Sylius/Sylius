@@ -47,6 +47,32 @@ final class ShipmentEmailManagerSpec extends ObjectBehavior
         $customer->getEmail()->willReturn('customer@example.com');
 
         $sender
+            ->send('shipment_confirmation', ['customer@example.com'], [
+                'shipment' => $shipment,
+                'order' => $order,
+                'channel' => $channel,
+                'localeCode' => 'en_US',
+            ])
+            ->shouldBeCalled()
+        ;
+
+        $this->sendConfirmationEmail($shipment);
+    }
+
+    function it_resends_a_shipment_confirmation_email(
+        SenderInterface $sender,
+        ShipmentInterface $shipment,
+        OrderInterface $order,
+        ChannelInterface $channel,
+        CustomerInterface $customer,
+    ): void {
+        $shipment->getOrder()->willReturn($order);
+        $order->getChannel()->willReturn($channel);
+        $order->getLocaleCode()->willReturn('en_US');
+        $order->getCustomer()->willReturn($customer);
+        $customer->getEmail()->willReturn('customer@example.com');
+
+        $sender
             ->send('shipment_confirmation_resent', ['customer@example.com'], [
                 'shipment' => $shipment,
                 'order' => $order,

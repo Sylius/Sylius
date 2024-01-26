@@ -24,6 +24,25 @@ final class ShipmentEmailManager implements ShipmentEmailManagerInterface
     {
     }
 
+    public function sendConfirmationEmail(ShipmentInterface $shipment): void
+    {
+        /** @var OrderInterface $order */
+        $order = $shipment->getOrder();
+        $email = $order->getCustomer()->getEmail();
+        Assert::notNull($email);
+
+        $this->emailSender->send(
+            Emails::SHIPMENT_CONFIRMATION,
+            [$email],
+            [
+                'shipment' => $shipment,
+                'order' => $order,
+                'channel' => $order->getChannel(),
+                'localeCode' => $order->getLocaleCode(),
+            ],
+        );
+    }
+
     public function resendConfirmationEmail(ShipmentInterface $shipment): void
     {
         /** @var OrderInterface $order */
