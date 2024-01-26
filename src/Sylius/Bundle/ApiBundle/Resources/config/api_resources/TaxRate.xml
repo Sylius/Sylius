@@ -24,7 +24,7 @@
                 <attribute name="method">GET</attribute>
                 <attribute name="normalization_context">
                     <attribute name="groups">
-                        <attribute>admin:tax_rate:read</attribute>
+                        <attribute>admin:tax_rate:show</attribute>
                     </attribute>
                 </attribute>
             </itemOperation>
@@ -38,7 +38,7 @@
                 </attribute>
                 <attribute name="normalization_context">
                     <attribute name="groups">
-                        <attribute>admin:tax_rate:read</attribute>
+                        <attribute>admin:tax_rate:show</attribute>
                     </attribute>
                 </attribute>
             </itemOperation>
@@ -56,7 +56,7 @@
                 </attribute>
                 <attribute name="normalization_context">
                     <attribute name="groups">
-                        <attribute>admin:tax_rate:read</attribute>
+                        <attribute>admin:tax_rate:index</attribute>
                     </attribute>
                 </attribute>
             </collectionOperation>
@@ -70,7 +70,7 @@
                 </attribute>
                 <attribute name="normalization_context">
                     <attribute name="groups">
-                        <attribute>admin:tax_rate:read</attribute>
+                        <attribute>admin:tax_rate:show</attribute>
                     </attribute>
                 </attribute>
             </collectionOperation>
