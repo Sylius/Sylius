@@ -111,7 +111,6 @@ final class StatisticsTest extends JsonApiTestCase
         $this->assertResponseCode($this->client->getResponse(), Response::HTTP_NOT_FOUND);
     }
 
-    //     * @dataProvider invalidPeriods TODO: split date range strictly by period, last period cut to fit
     /**
      * @test
      *

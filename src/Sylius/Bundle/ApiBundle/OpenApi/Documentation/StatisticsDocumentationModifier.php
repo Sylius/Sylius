@@ -25,6 +25,7 @@ final class StatisticsDocumentationModifier implements DocumentationModifierInte
 {
     private const PATH = '/admin/statistics';
 
+    /** @param array<string, array<string, string>> $intervalsMap */
     public function __construct(
         private string $apiRoute,
         private DateTimeProviderInterface $dateTimeProvider,
