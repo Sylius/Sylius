@@ -14,7 +14,8 @@ declare(strict_types=1);
 namespace Sylius\Bundle\ShopBundle\Controller;
 
 use Sylius\Bundle\CoreBundle\Form\Type\ContactType;
-use Sylius\Bundle\ShopBundle\EmailManager\ContactEmailManagerInterface;
+use Sylius\Bundle\CoreBundle\Mailer\ContactEmailManagerInterface;
+use Sylius\Bundle\ShopBundle\EmailManager\ContactEmailManagerInterface as DeprecatedContactEmailManagerInterface;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Customer\Context\CustomerContextInterface;
@@ -37,7 +38,7 @@ final class ContactController
         private ChannelContextInterface $channelContext,
         private CustomerContextInterface $customerContext,
         private LocaleContextInterface $localeContext,
-        private ContactEmailManagerInterface $contactEmailManager,
+        private DeprecatedContactEmailManagerInterface|ContactEmailManagerInterface $contactEmailManager,
     ) {
     }
 

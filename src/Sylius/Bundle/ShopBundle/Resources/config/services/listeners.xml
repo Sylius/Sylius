@@ -45,7 +45,7 @@
         </service>
 
         <service id="sylius.listener.order_complete" class="Sylius\Bundle\ShopBundle\EventListener\OrderCompleteListener">
-            <argument type="service" id="sylius.email_manager.order" />
+            <argument type="service" id="Sylius\Bundle\CoreBundle\Mailer\OrderEmailManagerInterface" />
             <tag name="kernel.event_listener" event="sylius.order.post_complete" method="sendConfirmationEmail" />
         </service>
 
