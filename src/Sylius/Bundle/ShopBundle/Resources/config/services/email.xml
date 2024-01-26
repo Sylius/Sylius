@@ -17,8 +17,11 @@
 
         <service id="sylius.email_manager.contact" class="Sylius\Bundle\ShopBundle\EmailManager\ContactEmailManager">
             <argument type="service" id="sylius.email_sender" />
+            <deprecated package="sylius/shop-bundle" version="1.13">The "%service_id%" service is deprecated since 1.13 and will be removed in 2.0. Use "Sylius\Bundle\CoreBundle\Mailer\ContactEmailManagerInterface" instead.</deprecated>
         </service>
-        <service id="Sylius\Bundle\ShopBundle\EmailManager\ContactEmailManagerInterface" alias="sylius.email_manager.contact" />
+        <service id="Sylius\Bundle\ShopBundle\EmailManager\ContactEmailManagerInterface" alias="sylius.email_manager.contact">
+            <deprecated package="sylius/shop-bundle" version="1.13">The "%service_id%" service is deprecated since 1.13 and will be removed in 2.0. Use "Sylius\Bundle\CoreBundle\Mailer\ContactEmailManagerInterface" instead.</deprecated>
+        </service>
 
         <service id="sylius.email_manager.order" class="Sylius\Bundle\ShopBundle\EmailManager\OrderEmailManager">
             <argument type="service" id="sylius.email_sender" />
