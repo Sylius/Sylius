@@ -29,7 +29,7 @@
 
         <service id="Sylius\Bundle\CoreBundle\MessageHandler\ResendShipmentConfirmationEmailHandler">
             <argument type="service" id="sylius.repository.shipment" />
-            <argument type="service" id="Sylius\Bundle\CoreBundle\EmailManager\ShipmentEmailManagerInterface" />
+            <argument type="service" id="Sylius\Bundle\CoreBundle\Mailer\ShipmentEmailManagerInterface" />
             <tag name="messenger.message_handler" bus="sylius.command_bus" />
             <tag name="messenger.message_handler" bus="sylius_default.bus" />
         </service>
@@ -42,7 +42,7 @@
         </service>
 
         <service id="Sylius\Bundle\CoreBundle\MessageHandler\ResendOrderConfirmationEmailHandler">
-            <argument type="service" id="Sylius\Bundle\CoreBundle\EmailManager\OrderEmailManagerInterface" />
+            <argument type="service" id="Sylius\Bundle\CoreBundle\Mailer\OrderEmailManagerInterface" />
             <argument type="service" id="sylius.repository.order" />
             <tag name="messenger.message_handler" bus="sylius.command_bus" />
             <tag name="messenger.message_handler" bus="sylius_default.bus" />
