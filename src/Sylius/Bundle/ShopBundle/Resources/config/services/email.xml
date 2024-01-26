@@ -20,7 +20,7 @@
             <deprecated package="sylius/shop-bundle" version="1.13">The "%service_id%" service is deprecated since 1.13 and will be removed in 2.0. Use "Sylius\Bundle\CoreBundle\Mailer\ContactEmailManagerInterface" instead.</deprecated>
         </service>
         <service id="Sylius\Bundle\ShopBundle\EmailManager\ContactEmailManagerInterface" alias="sylius.email_manager.contact">
-            <deprecated package="sylius/shop-bundle" version="1.13">The "%service_id%" service is deprecated since 1.13 and will be removed in 2.0. Use "Sylius\Bundle\CoreBundle\Mailer\ContactEmailManagerInterface" instead.</deprecated>
+            <deprecated package="sylius/shop-bundle" version="1.13">The "%alias_id%" service is deprecated since 1.13 and will be removed in 2.0. Use "Sylius\Bundle\CoreBundle\Mailer\ContactEmailManagerInterface" instead.</deprecated>
         </service>
 
         <service id="sylius.email_manager.order" class="Sylius\Bundle\ShopBundle\EmailManager\OrderEmailManager">
@@ -29,7 +29,7 @@
             <deprecated package="sylius/shop-bundle" version="1.13">The "%service_id%" service is deprecated since 1.13 and will be removed in 2.0. Use "Sylius\Bundle\CoreBundle\Mailer\OrderEmailManagerInterface" instead.</deprecated>
         </service>
         <service id="Sylius\Bundle\ShopBundle\EmailManager\OrderEmailManagerInterface" alias="sylius.email_manager.order">
-            <deprecated package="sylius/shop-bundle" version="1.13">The "%service_id%" service is deprecated since 1.13 and will be removed in 2.0. Use "Sylius\Bundle\CoreBundle\Mailer\OrderEmailManagerInterface" instead.</deprecated>
+            <deprecated package="sylius/shop-bundle" version="1.13">The "%alias_id%" service is deprecated since 1.13 and will be removed in 2.0. Use "Sylius\Bundle\CoreBundle\Mailer\OrderEmailManagerInterface" instead.</deprecated>
         </service>
     </services>
 </container>
