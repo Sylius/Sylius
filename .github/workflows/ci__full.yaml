@@ -67,6 +67,7 @@ jobs:
         needs: static-checks
         uses: ./.github/workflows/ci_frontend.yaml
         with:
+            branch: ${{ matrix.branch }}
             type: full
     packages:
         strategy:
