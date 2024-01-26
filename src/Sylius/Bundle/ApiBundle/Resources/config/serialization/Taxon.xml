@@ -17,48 +17,62 @@
 >
     <class name="Sylius\Component\Core\Model\Taxon">
         <attribute name="id">
-            <group>admin:taxon:read</group>
-            <group>shop:taxon:read</group>
+            <group>admin:taxon:index</group>
+            <group>admin:taxon:show</group>
+            <group>shop:taxon:index</group>
+            <group>shop:taxon:show</group>
         </attribute>
         <attribute name="code">
-            <group>admin:taxon:read</group>
-            <group>shop:taxon:read</group>
+            <group>admin:taxon:index</group>
+            <group>admin:taxon:show</group>
+            <group>shop:taxon:index</group>
+            <group>shop:taxon:show</group>
             <group>admin:taxon:create</group>
         </attribute>
         <attribute name="name">
-            <group>shop:taxon:read</group>
+            <group>shop:taxon:index</group>
+            <group>shop:taxon:show</group>
         </attribute>
         <attribute name="slug">
-            <group>shop:taxon:read</group>
+            <group>shop:taxon:index</group>
+            <group>shop:taxon:show</group>
         </attribute>
         <attribute name="description">
-            <group>shop:taxon:read</group>
+            <group>shop:taxon:index</group>
+            <group>shop:taxon:show</group>
         </attribute>
         <attribute name="translations">
-            <group>admin:taxon:read</group>
+            <group>admin:taxon:index</group>
+            <group>admin:taxon:show</group>
             <group>admin:taxon:create</group>
             <group>admin:taxon:update</group>
         </attribute>
         <attribute name="parent">
-            <group>admin:taxon:read</group>
+            <group>admin:taxon:index</group>
+            <group>admin:taxon:show</group>
             <group>admin:taxon:create</group>
             <group>admin:taxon:update</group>
         </attribute>
         <attribute name="children">
-            <group>admin:taxon:read</group>
-            <group>shop:taxon:read</group>
+            <group>admin:taxon:index</group>
+            <group>admin:taxon:show</group>
+            <group>shop:taxon:index</group>
+            <group>shop:taxon:show</group>
         </attribute>
         <attribute name="enabled">
-            <group>admin:taxon:read</group>
+            <group>admin:taxon:index</group>
+            <group>admin:taxon:show</group>
             <group>admin:taxon:create</group>
             <group>admin:taxon:update</group>
         </attribute>
         <attribute name="position">
-            <group>admin:taxon:read</group>
+            <group>admin:taxon:index</group>
+            <group>admin:taxon:show</group>
             <group>admin:taxon:update</group>
         </attribute>
         <attribute name="images">
-            <group>admin:taxon:read</group>
+            <group>admin:taxon:index</group>
+            <group>admin:taxon:show</group>
         </attribute>
     </class>
 </serializer>

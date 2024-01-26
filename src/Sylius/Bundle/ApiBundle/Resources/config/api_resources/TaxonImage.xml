@@ -12,7 +12,7 @@
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/admin/taxon-images</attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:taxon_image:read</attribute>
+                    <attribute name="groups">admin:taxon_image:index</attribute>
                 </attribute>
             </collectionOperation>
 
@@ -52,7 +52,7 @@
                     </attribute>
                 </attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:taxon_image:read</attribute>
+                    <attribute name="groups">admin:taxon_image:show</attribute>
                 </attribute>
             </collectionOperation>
         </collectionOperations>
@@ -62,7 +62,7 @@
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/admin/taxon-images/{id}</attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:taxon_image:read</attribute>
+                    <attribute name="groups">admin:taxon_image:show</attribute>
                 </attribute>
             </itemOperation>
 
@@ -73,7 +73,7 @@
                     <attribute name="groups">admin:taxon_image:update</attribute>
                 </attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:taxon_image:read</attribute>
+                    <attribute name="groups">admin:taxon_image:show</attribute>
                 </attribute>
             </itemOperation>
 
@@ -86,7 +86,7 @@
         <subresourceOperations>
             <subresourceOperation name="api_taxa_images_get_subresource">
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:taxon_image:read</attribute>
+                    <attribute name="groups">admin:taxon_image:show</attribute>
                 </attribute>
             </subresourceOperation>
         </subresourceOperations>
