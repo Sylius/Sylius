@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\CoreBundle\EmailManager;
+namespace Sylius\Bundle\CoreBundle\Mailer;
 
 use Sylius\Component\Core\Model\ShipmentInterface;
 

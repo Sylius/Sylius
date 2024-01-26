@@ -11,10 +11,10 @@
 
 declare(strict_types=1);
 
-namespace spec\Sylius\Bundle\CoreBundle\EmailManager;
+namespace spec\Sylius\Bundle\CoreBundle\Mailer;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\CoreBundle\EmailManager\ShipmentEmailManagerInterface;
+use Sylius\Bundle\CoreBundle\Mailer\ShipmentEmailManagerInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;

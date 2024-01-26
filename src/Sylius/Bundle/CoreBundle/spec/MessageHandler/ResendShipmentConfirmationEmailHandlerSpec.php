@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace spec\Sylius\Bundle\CoreBundle\MessageHandler;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\CoreBundle\EmailManager\ShipmentEmailManagerInterface;
+use Sylius\Bundle\CoreBundle\Mailer\ShipmentEmailManagerInterface;
 use Sylius\Bundle\CoreBundle\Message\ResendShipmentConfirmationEmail;
 use Sylius\Component\Core\Model\ShipmentInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;

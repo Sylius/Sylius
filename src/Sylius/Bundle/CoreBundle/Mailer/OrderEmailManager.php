@@ -41,4 +41,20 @@ final class OrderEmailManager implements OrderEmailManagerInterface
             ],
         );
     }
+
+    public function resendConfirmationEmail(OrderInterface $order): void
+    {
+        $email = $order->getCustomer()->getEmail();
+        Assert::notNull($email);
+
+        $this->emailSender->send(
+            Emails::ORDER_CONFIRMATION_RESENT,
+            [$email],
+            [
+                'order' => $order,
+                'channel' => $order->getChannel(),
+                'localeCode' => $order->getLocaleCode(),
+            ],
+        );
+    }
 }
