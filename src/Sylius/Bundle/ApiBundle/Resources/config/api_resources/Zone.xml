@@ -24,7 +24,7 @@
             <collectionOperation name="admin_get">
                 <attribute name="method">GET</attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:zone:read</attribute>
+                    <attribute name="groups">admin:zone:index</attribute>
                 </attribute>
             </collectionOperation>
 
@@ -40,7 +40,7 @@
             <itemOperation name="admin_get">
                 <attribute name="method">GET</attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:zone:read</attribute>
+                    <attribute name="groups">admin:zone:show</attribute>
                 </attribute>
             </itemOperation>
 
