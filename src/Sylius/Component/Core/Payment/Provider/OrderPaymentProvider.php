@@ -38,7 +38,7 @@ final class OrderPaymentProvider implements OrderPaymentProviderInterface
                 'sylius/core',
                 '1.13',
                 sprintf(
-                    'Passing an instance of "%s" as the first argument is deprecated. It will accept only instances of "%s" in Sylius 2.0.',
+                    'Passing an instance of "%s" as the third argument is deprecated. It will accept only instances of "%s" in Sylius 2.0.',
                     StateMachineFactoryInterface::class,
                     StateMachineInterface::class,
                 ),

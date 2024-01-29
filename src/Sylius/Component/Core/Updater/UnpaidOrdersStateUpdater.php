@@ -55,7 +55,7 @@ final class UnpaidOrdersStateUpdater implements UnpaidOrdersStateUpdaterInterfac
                 'sylius/core',
                 '1.13',
                 sprintf(
-                    'Passing an instance of "%s" as the first argument is deprecated. It will accept only instances of "%s" in Sylius 2.0.',
+                    'Passing an instance of "%s" as the second argument is deprecated. It will accept only instances of "%s" in Sylius 2.0.',
                     FactoryInterface::class,
                     StateMachineInterface::class,
                 ),

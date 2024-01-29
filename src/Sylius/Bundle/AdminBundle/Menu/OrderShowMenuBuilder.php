@@ -39,8 +39,8 @@ final class OrderShowMenuBuilder
                 'sylius/admin-bundle',
                 '1.13',
                 sprintf(
-                    'Passing an instance of "%s" as the fifth argument is deprecated. It will accept only instances of "%s" in Sylius 2.0.',
-                    FactoryInterface::class,
+                    'Passing an instance of "%s" as the third argument is deprecated. It will accept only instances of "%s" in Sylius 2.0.',
+                    StateMachineFactoryInterface::class,
                     StateMachineInterface::class,
                 ),
             );
