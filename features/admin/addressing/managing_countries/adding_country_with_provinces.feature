@@ -7,7 +7,7 @@ Feature: Adding countries with provinces
     Background:
         Given I am logged in as an administrator
 
-    @ui @javascript
+    @ui @javascript @api
     Scenario: Adding a country with a province
         When I want to add a new country
         And I choose "United Kingdom"
@@ -17,7 +17,7 @@ Feature: Adding countries with provinces
         And the country "United Kingdom" should appear in the store
         And the country "United Kingdom" should have the "Scotland" province
 
-    @todo @ui @javascript @api
+    @ui @javascript @api
     Scenario: Adding a country with two provinces
         When I want to add a new country
         And I choose "United Kingdom"

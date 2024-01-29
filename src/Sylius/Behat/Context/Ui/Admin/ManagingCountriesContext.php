@@ -69,7 +69,12 @@ final class ManagingCountriesContext implements Context
         /** @var CreatePageInterface|UpdatePageInterface $currentPage */
         $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
 
-        $currentPage->addProvince($provinceName, $provinceCode, $provinceAbbreviation);
+        $currentPage->addProvince();
+        $currentPage->specifyProvinceName($provinceName);
+        $currentPage->specifyProvinceCode($provinceCode);
+        if (null !== $provinceAbbreviation) {
+            $currentPage->specifyProvinceAbbreviation($provinceAbbreviation);
+        }
     }
 
     /**

@@ -20,39 +20,53 @@ use Webmozart\Assert\Assert;
 
 class CreatePage extends BaseCreatePage implements CreatePageInterface
 {
-    use ChoosesName;
-
-    public function addProvince(string $name, string $code, string $abbreviation = null): void
-    {
-        $this->getElement('add_province')->click();
-
-        $this->waitForElement(5, 'last_province');
-        $province = $this->getElement('last_province');
-
-        $province->find('css', '[data-test-province-name]')->setValue($name);
-        $province->find('css', '[data-test-province-code]')->setValue($code);
-
-        if (null !== $abbreviation) {
-            $province->find('css', '[data-test-province-abbreviation]')->setValue($abbreviation);
-        }
-    }
-
     public function selectCountry(string $countryName): void
     {
         $this->getElement('code')->selectOption($countryName);
+    }
+
+    public function addProvince(): void
+    {
+        $count = count($this->getProvinceItems());
+
+        $this->getElement('add_province')->click();
+
+        $this->getDocument()->waitFor(5, fn () => $count + 1 === count($this->getProvinceItems()));
+    }
+
+    public function specifyProvinceName(string $name): void
+    {
+        $province = $this->getElement('last_province');
+        $province->find('css', '[data-test-province-name]')->setValue($name);
+    }
+
+    public function specifyProvinceCode(string $code): void
+    {
+        $province = $this->getElement('last_province');
+        $province->find('css', '[data-test-province-code]')->setValue($code);
+    }
+
+    public function specifyProvinceAbbreviation(string $abbreviation): void
+    {
+        $province = $this->getElement('last_province');
+        $province->find('css', '[data-test-province-abbreviation]')->setValue($abbreviation);
     }
 
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
             'code' => '[data-test-code]',
+            'provinces' => '[data-test-provinces]',
             'last_province' => '[data-test-provinces] [data-test-province]:last-child',
             'add_province' => '[data-test-add-province]'
         ]);
     }
 
-    private function waitForElement(int $timeout, string $elementName): bool
+    private function getProvinceItems(): array
     {
-        return $this->getDocument()->waitFor($timeout, fn () => $this->hasElement($elementName));
+        $items = $this->getElement('provinces')->findAll('css', '[data-test-province]');
+        Assert::isArray($items);
+
+        return $items;
     }
 }
