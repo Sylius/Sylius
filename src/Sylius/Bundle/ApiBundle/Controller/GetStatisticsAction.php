@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Bundle\ApiBundle\Controller;
 
 use Sylius\Bundle\ApiBundle\Query\GetStatistics;
-use Sylius\Bundle\ApiBundle\Validator\Constraints as Assert;
+use Sylius\Bundle\ApiBundle\Validator\Constraints;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -22,7 +22,7 @@ use Symfony\Component\Messenger\Exception\HandlerFailedException;
 use Symfony\Component\Messenger\HandleTrait;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Serializer\SerializerInterface;
-use Symfony\Component\Validator\Constraints as SymfonyAssert;
+use Symfony\Component\Validator\Constraints as SymfonyConstraints;
 use Symfony\Component\Validator\ConstraintViolationListInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
@@ -30,7 +30,7 @@ final class GetStatisticsAction
 {
     use HandleTrait;
 
-    private SymfonyAssert\Collection $constraint;
+    private SymfonyConstraints\Collection $constraint;
 
     /** @var array<string, string> */
     private array $intervalsMap;
@@ -93,19 +93,19 @@ final class GetStatisticsAction
         );
     }
 
-    private function createInputDataConstraints(): SymfonyAssert\Collection
+    private function createInputDataConstraints(): SymfonyConstraints\Collection
     {
-        return new SymfonyAssert\Collection([
-            'channelCode' => new Assert\Code(),
+        return new SymfonyConstraints\Collection([
+            'channelCode' => new Constraints\Code(),
             'startDate' => [
-                new SymfonyAssert\NotBlank(),
-                new SymfonyAssert\DateTime('Y-m-d\TH:i:s', message: 'sylius.date_time.invalid'),
+                new SymfonyConstraints\NotBlank(),
+                new SymfonyConstraints\DateTime('Y-m-d\TH:i:s', message: 'sylius.date_time.invalid'),
             ],
-            'interval' => new SymfonyAssert\Choice(choices: array_keys($this->intervalsMap), multiple: false),
+            'interval' => new SymfonyConstraints\Choice(choices: array_keys($this->intervalsMap), multiple: false),
             'endDate' => [
-                new SymfonyAssert\NotBlank(),
-                new SymfonyAssert\DateTime('Y-m-d\TH:i:s', message: 'sylius.date_time.invalid'),
-                new SymfonyAssert\GreaterThan(propertyPath: 'startDate'),
+                new SymfonyConstraints\NotBlank(),
+                new SymfonyConstraints\DateTime('Y-m-d\TH:i:s', message: 'sylius.date_time.invalid'),
+                new SymfonyConstraints\GreaterThan(propertyPath: 'startDate'),
             ],
         ]);
     }

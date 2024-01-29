@@ -32,17 +32,17 @@ final class DayBasedOrdersTotalProviderSpec extends AbstractOrdersTotalsProvider
         $this->beConstructedWith($orderRepository);
     }
 
-    function it_is_a_orders_totals_provider(): void
+    function it_is_an_orders_totals_provider(): void
     {
         $this->shouldImplement(OrdersTotalsProviderInterface::class);
     }
 
-    function it_returns_an_array_of_zeros_when_no_totals_have_been_found_for_period(
+    function it_returns_zeros_when_no_totals_have_been_found_for_period(
         OrderRepositoryInterface $orderRepository,
         ChannelInterface $channel,
     ): void {
-        $start = \DateTimeImmutable::createFromFormat('Y-m-d H', '1999-01-01 1');
-        $end = \DateTimeImmutable::createFromFormat('Y-m-d H', '1999-01-01 23');
+        $start = \DateTimeImmutable::createFromFormat('Y-m-d H:i', '1999-01-01 00:00');
+        $end = \DateTimeImmutable::createFromFormat('Y-m-d H:i', '1999-01-03 23:59');
         $period = new \DatePeriod($start, new \DateInterval('P1D'), $end);
 
         $orderRepository
@@ -52,6 +52,8 @@ final class DayBasedOrdersTotalProviderSpec extends AbstractOrdersTotalsProvider
 
         $this->provideForPeriodInChannel($period, $channel)->shouldBeLikeStatisticsCollection([
             ['period' => \DateTimeImmutable::createFromFormat('Y-m-d', '1999-01-01'), 'total' => 0],
+            ['period' => \DateTimeImmutable::createFromFormat('Y-m-d', '1999-01-02'), 'total' => 0],
+            ['period' => \DateTimeImmutable::createFromFormat('Y-m-d', '1999-01-03'), 'total' => 0],
         ]);
     }
 
@@ -59,8 +61,8 @@ final class DayBasedOrdersTotalProviderSpec extends AbstractOrdersTotalsProvider
         OrderRepositoryInterface $orderRepository,
         ChannelInterface $channel,
     ): void {
-        $start = \DateTimeImmutable::createFromFormat('Y-m-d H', '1999-01-01 1');
-        $end = \DateTimeImmutable::createFromFormat('Y-m-d H', '1999-01-03 23');
+        $start = \DateTimeImmutable::createFromFormat('Y-m-d H:i', '1999-01-01 00:00');
+        $end = \DateTimeImmutable::createFromFormat('Y-m-d H:i', '1999-01-03 23:59');
         $period = new \DatePeriod($start, new \DateInterval('P1D'), $end);
 
         $orderRepository
@@ -79,12 +81,12 @@ final class DayBasedOrdersTotalProviderSpec extends AbstractOrdersTotalsProvider
         ]);
     }
 
-    function it_returns_fills_zeros_in_periods_with_no_totals(
+    function it_fills_zeros_in_periods_with_no_totals(
         OrderRepositoryInterface $orderRepository,
         ChannelInterface $channel,
     ): void {
-        $start = \DateTimeImmutable::createFromFormat('Y-m-d H', '1999-01-01 1');
-        $end = \DateTimeImmutable::createFromFormat('Y-m-d H', '1999-01-03 23');
+        $start = \DateTimeImmutable::createFromFormat('Y-m-d H:i', '1999-01-01 00:00');
+        $end = \DateTimeImmutable::createFromFormat('Y-m-d H:i', '1999-01-03 23:59');
         $period = new \DatePeriod($start, new \DateInterval('P1D'), $end);
 
         $orderRepository

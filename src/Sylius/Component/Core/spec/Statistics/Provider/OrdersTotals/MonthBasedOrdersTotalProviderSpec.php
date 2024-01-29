@@ -19,7 +19,7 @@ use Sylius\Component\Core\Statistics\Provider\OrdersTotals\OrdersTotalsProviderI
 
 final class MonthBasedOrdersTotalProviderSpec extends AbstractOrdersTotalsProviderSpec
 {
-    protected const DATE_FORMAT = 'Y-m';
+    protected const DATE_FORMAT = 'Y-m-d';
 
     private const GROUP_SELECT = [
         'year' => 'YEAR(o.checkoutCompletedAt) AS year',
@@ -31,17 +31,17 @@ final class MonthBasedOrdersTotalProviderSpec extends AbstractOrdersTotalsProvid
         $this->beConstructedWith($orderRepository);
     }
 
-    function it_is_a_orders_totals_provider(): void
+    function it_is_an_orders_totals_provider(): void
     {
         $this->shouldImplement(OrdersTotalsProviderInterface::class);
     }
 
-    function it_returns_an_array_of_zeros_when_no_totals_have_been_found_for_period(
+    function it_returns_zeros_when_no_totals_have_been_found_for_period(
         OrderRepositoryInterface $orderRepository,
         ChannelInterface $channel,
     ): void {
         $start = \DateTimeImmutable::createFromFormat('Y-m-d', '1999-01-01');
-        $end = \DateTimeImmutable::createFromFormat('Y-m-d', '1999-01-02');
+        $end = \DateTimeImmutable::createFromFormat('Y-m-d', '1999-03-02');
         $period = new \DatePeriod($start, new \DateInterval('P1M'), $end);
 
         $orderRepository
@@ -50,7 +50,9 @@ final class MonthBasedOrdersTotalProviderSpec extends AbstractOrdersTotalsProvid
         ;
 
         $this->provideForPeriodInChannel($period, $channel)->shouldBeLikeStatisticsCollection([
-            ['period' => \DateTimeImmutable::createFromFormat('Y-m', '1999-01'), 'total' => 0],
+            ['period' => \DateTimeImmutable::createFromFormat('Y-m-d', '1999-01-01'), 'total' => 0],
+            ['period' => \DateTimeImmutable::createFromFormat('Y-m-d', '1999-02-01'), 'total' => 0],
+            ['period' => \DateTimeImmutable::createFromFormat('Y-m-d', '1999-03-01'), 'total' => 0],
         ]);
     }
 
@@ -72,13 +74,13 @@ final class MonthBasedOrdersTotalProviderSpec extends AbstractOrdersTotalsProvid
         ;
 
         $this->provideForPeriodInChannel($period, $channel)->shouldBeLikeStatisticsCollection([
-            ['period' => \DateTimeImmutable::createFromFormat('Y-m', '1999-01'), 'total' => 1000],
-            ['period' => \DateTimeImmutable::createFromFormat('Y-m', '1999-02'), 'total' => 2000],
-            ['period' => \DateTimeImmutable::createFromFormat('Y-m', '1999-03'), 'total' => 3000],
+            ['period' => \DateTimeImmutable::createFromFormat('Y-m-d', '1999-01-01'), 'total' => 1000],
+            ['period' => \DateTimeImmutable::createFromFormat('Y-m-d', '1999-02-01'), 'total' => 2000],
+            ['period' => \DateTimeImmutable::createFromFormat('Y-m-d', '1999-03-01'), 'total' => 3000],
         ]);
     }
 
-    function it_returns_fills_zeros_in_periods_with_no_totals(
+    function it_fills_zeros_in_periods_with_no_totals(
         OrderRepositoryInterface $orderRepository,
         ChannelInterface $channel,
     ): void {
@@ -95,9 +97,9 @@ final class MonthBasedOrdersTotalProviderSpec extends AbstractOrdersTotalsProvid
         ;
 
         $this->provideForPeriodInChannel($period, $channel)->shouldBeLikeStatisticsCollection([
-            ['period' => \DateTimeImmutable::createFromFormat('Y-m', '1999-01'), 'total' => 1000],
-            ['period' => \DateTimeImmutable::createFromFormat('Y-m', '1999-02'), 'total' => 0],
-            ['period' => \DateTimeImmutable::createFromFormat('Y-m', '1999-03'), 'total' => 3000],
+            ['period' => \DateTimeImmutable::createFromFormat('Y-m-d', '1999-01-01'), 'total' => 1000],
+            ['period' => \DateTimeImmutable::createFromFormat('Y-m-d', '1999-02-01'), 'total' => 0],
+            ['period' => \DateTimeImmutable::createFromFormat('Y-m-d', '1999-03-01'), 'total' => 3000],
         ]);
     }
 }

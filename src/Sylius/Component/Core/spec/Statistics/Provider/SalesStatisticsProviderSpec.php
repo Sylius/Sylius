@@ -36,7 +36,7 @@ final class SalesStatisticsProviderSpec extends ObjectBehavior
         $this->shouldImplement(SalesStatisticsProviderInterface::class);
     }
 
-    function it_throw_exception_when_period_format_for_interval_type_is_unknown(
+    function it_throws_an_exception_when_period_format_for_interval_type_is_unknown(
         OrdersTotalsProviderRegistryInterface $ordersTotalsProviderRegistry,
         \DatePeriod $datePeriod,
         ChannelInterface $channel,
@@ -49,7 +49,7 @@ final class SalesStatisticsProviderSpec extends ObjectBehavior
         ;
     }
 
-    function it_throw_exception_when_interval_type_is_unknown(
+    function it_throws_an_exception_when_interval_type_is_unknown(
         OrdersTotalsProviderRegistryInterface $ordersTotalsProviderRegistry,
         \DatePeriod $datePeriod,
         ChannelInterface $channel,

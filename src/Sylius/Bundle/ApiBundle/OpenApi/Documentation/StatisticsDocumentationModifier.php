@@ -51,7 +51,7 @@ final class StatisticsDocumentationModifier implements DocumentationModifierInte
                             ],
                             'total' => [
                                 'type' => 'integer',
-                                'example' => '1000',
+                                'example' => 1000,
                             ],
                         ],
                     ],
@@ -63,19 +63,19 @@ final class StatisticsDocumentationModifier implements DocumentationModifierInte
                         'properties' => [
                             'totalSales' => [
                                 'type' => 'integer',
-                                'example' => '100000',
+                                'example' => 100000,
                             ],
                             'paidOrdersCount' => [
                                 'type' => 'integer',
-                                'example' => '12',
+                                'example' => 12,
                             ],
                             'newCustomersCount' => [
                                 'type' => 'integer',
-                                'example' => '7',
+                                'example' => 7,
                             ],
                             'averageOrderValue' => [
                                 'type' => 'integer',
-                                'example' => '2500',
+                                'example' => 2500,
                             ],
                         ],
                     ],
