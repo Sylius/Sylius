@@ -1,5 +1,18 @@
 # UPGRADE FROM `v1.12.x` TO `v1.13.0`
 
+1. All the `:read` serialization groups are now split to `index` and `show`.
+   By this change, the `:read` serialization group is now deprecated and will no more used in the future.
+   There is a BC layer that will allow you to use the `:read` serialization group `Sylius\Bundle\ApiBundle\SerializerContextBuilder\ReadOperationContextBuilder` by adding the `read` serialization group to your context.
+   Inside of this service there are 2 configurable parameters `$skipAddingReadGroup` and `$skipAddingIndexAndShowGroups` that will allow you to skip adding the chosen serialization group to your context.
+   To configure skipping adding the index and show or read serialization groups to the context, add the following configuration to your `config/packages/_sylius.yaml` file:
+
+    ```yaml
+    sylius_api:
+        serialization_groups:
+            skip_adding_index_and_show_groups: true
+            skip_adding_read_group: true
+    ```
+
 1. The constructor of `Sylius\Bundle\ApiBundle\Serializer\ChannelDenormalizer` has been changed:
 
     ```diff
