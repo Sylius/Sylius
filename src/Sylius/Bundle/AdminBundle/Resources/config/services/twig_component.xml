@@ -63,5 +63,21 @@
             />
             <tag name="controller.service_arguments" />
         </service>
+
+        <service id="Sylius\Bundle\AdminBundle\TwigComponent\Country\CountryType">
+            <argument type="service" id="form.factory" />
+
+            <tag
+                name="twig.component"
+                key="SyliusAdmin.Country.CountryType"
+                template="@SyliusAdmin/Country/Component/countryType.html.twig"
+                default_action="null"
+                live="true"
+                csrf="true"
+                route="ux_live_component"
+            />
+
+            <tag name="controller.service_arguments" />
+        </service>
     </services>
 </container>

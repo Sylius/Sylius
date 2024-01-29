@@ -10,8 +10,6 @@ sylius_admin_country:
         vars:
             all:
                 subheader: sylius.ui.manage_shipping_destinations
-                templates:
-                    form: "@SyliusAdmin/Country/_form.html.twig"
             index:
                 icon: flag
     type: sylius.resource

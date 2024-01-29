@@ -1,0 +1,6 @@
+{% set main_event = twig_event_name(_context.main_event, 'sections') %}
+{% set fallback_event = twig_event_name(_context.fallback_event, 'sections') %}
+
+<div class="col-12">
+    {{ twig_event([main_event, fallback_event], _context|merge({ main_event, fallback_event })) }}
+</div>

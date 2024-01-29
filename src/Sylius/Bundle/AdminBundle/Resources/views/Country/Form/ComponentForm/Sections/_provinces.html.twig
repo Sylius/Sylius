@@ -1,0 +1,48 @@
+<div class="card mb-3">
+    <div class="card-body" {{ sylius_test_html_attribute('provinces') }}>
+
+        {{ form_label(form.provinces) }}
+        {{ form_errors(form.provinces) }}
+
+        {% for key, provinceForm in form.provinces %}
+            <div class="card mb-3">
+                <div class="card-body" {{ sylius_test_html_attribute('province') }}>
+                    <div class="row">
+                        <div class="col">
+                            <div class="row">
+                                {{ form_label(provinceForm.code, null, {label_attr: {class: 'col-form-label col-auto'}}) }}
+                                <div class="col">
+                                    {{ form_widget(provinceForm.code, sylius_test_form_attribute('province-code')) }}
+                                    {{ form_errors(provinceForm.code) }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="row">
+                                {{ form_label(provinceForm.name, null, {label_attr: {class: 'col-form-label col-auto'}}) }}
+                                <div class="col">
+                                    {{ form_widget(provinceForm.name, sylius_test_form_attribute('province-name')) }}
+                                    {{ form_errors(provinceForm.name) }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="row">
+                                {{ form_label(provinceForm.abbreviation, null, {label_attr: {class: 'col-form-label col-auto'}}) }}
+                                <div class="col">
+                                    {{ form_widget(provinceForm.abbreviation, sylius_test_form_attribute('province-abbreviation')) }}
+                                    {{ form_errors(provinceForm.abbreviation) }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-auto">
+                            {{ form_row(provinceForm.vars.button_delete, {label: 'X', attr: {class: 'btn btn-outline-danger'}}) }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+
+        {{ form_widget(form.provinces.vars.button_add, sylius_test_form_attribute('add-province')) }}
+    </div>
+</div>
