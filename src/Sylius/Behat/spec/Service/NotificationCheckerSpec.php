@@ -25,7 +25,7 @@ final class NotificationCheckerSpec extends ObjectBehavior
 {
     function let(NotificationAccessorInterface $notificationAccessor)
     {
-        $this->beConstructedWith($notificationAccessor);
+        $this->beConstructedWith($notificationAccessor, ['failure' => 'negative', 'success' => 'alert-success']);
     }
 
     function it_is_initializable()
