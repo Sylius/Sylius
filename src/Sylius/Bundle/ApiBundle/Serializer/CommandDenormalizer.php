@@ -45,7 +45,7 @@ final class CommandDenormalizer implements ContextAwareDenormalizerInterface
                 throw new InvalidRequestArgumentException(
                     sprintf(
                         'Request field "%s" should be of type "%s".',
-                        $this->nameConverter->normalize($previousException->getPath(), class: $context['input']['class']),
+                        $this->normalizeFieldName($previousException->getPath(), $context['input']['class']),
                         implode(', ', $previousException->getExpectedTypes()),
                     ),
                 );
@@ -53,9 +53,20 @@ final class CommandDenormalizer implements ContextAwareDenormalizerInterface
 
             throw $exception;
         } catch (MissingConstructorArgumentsException $exception) {
-            throw new MissingConstructorArgumentsException(
-                sprintf('Request does not have the following required fields specified: %s.', implode(', ', $exception->getMissingConstructorArguments())),
-            );
+            $class = $context['input']['class'];
+
+            throw new MissingConstructorArgumentsException(sprintf(
+                'Request does not have the following required fields specified: %s.',
+                implode(', ', array_map(
+                    fn (string $field) => $this->normalizeFieldName($field, $class),
+                    $exception->getMissingConstructorArguments(),
+                )),
+            ));
         }
+    }
+
+    private function normalizeFieldName(string $field, string $class): string
+    {
+        return $this->nameConverter->normalize($field, $class);
     }
 }
