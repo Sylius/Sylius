@@ -3,12 +3,17 @@
 <div class="bg-white mb-3">
     {% set body %}
         {% verbatim %}
-            <div class="row" data-controller="slug" data-slug-url-value="{{ path('sylius_admin_ajax_generate_taxon_slug') }}" data-slug-locale-value="{{ locale }}">
+            <div class="row"
+                data-controller="taxon-slug"
+                data-taxon-slug-url-value="{{ path('sylius_admin_ajax_generate_taxon_slug') }}"
+                data-taxon-slug-locale-value="{{ locale }}"
+                data-taxon-slug-taxon-parent-code-value="{{ translationForm.vars.data.translatable.code ?? null }}"
+            >
                 <div class="col-12 col-md-6">
-                    {{ form_row(translationForm.name, { attr: { 'data-slug-target': 'sluggable', 'data-action': 'change->slug#generateSlug' } }) }}
+                    {{ form_row(translationForm.name, { attr: { 'data-taxon-slug-target': 'sluggable', 'data-action': 'change->taxon-slug#generateSlug' } }) }}
                 </div>
                 <div class="col-12 col-md-6">
-                    {{ form_row(translationForm.slug, { attr: { 'data-slug-target': 'slug' } }) }}
+                    {{ form_row(translationForm.slug, { attr: { 'data-taxon-slug-target': 'slug' } }) }}
                 </div>
                 <div class="col-12">
                     {{ form_row(translationForm.description) }}

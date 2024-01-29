@@ -8,22 +8,18 @@
  */
 
 import {ApplicationController, useDebounce} from 'stimulus-use'
+import slugify from 'slugify';
 
 export default class extends ApplicationController {
   static debounces = ['generateSlug']
   static targets = [ 'sluggable', 'slug' ]
-  static values = { url: String, locale: String }
+  static values = { locale: String }
 
   connect() {
     useDebounce(this);
   }
 
   generateSlug() {
-    let url = this.urlValue + '?' + new URLSearchParams({locale: this.localeValue, name: this.sluggableTarget.value})
-
-    fetch(url)
-      .then(response => response.json())
-      .then(data => { this.slugTarget.value = data.slug; })
-    ;
+    this.slugTarget.value = slugify(this.sluggableTarget.value, { locale: this.localeValue, lower: true });
   }
 }
