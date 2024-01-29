@@ -26,15 +26,12 @@
 
         <service id="sylius_abstraction.state_machine.adapter.symfony_workflow" class="Sylius\Abstraction\StateMachine\SymfonyWorkflowAdapter">
             <argument type="service" id="workflow.registry" />
-
             <tag name="sylius.state_machine" key="symfony_workflow" />
         </service>
         <service id="Sylius\Abstraction\StateMachine\StateMachineInterface $symfonyWorkflow" alias="sylius_abstraction.state_machine.adapter.symfony_workflow" />
 
         <service id="sylius_abstraction.state_machine.adapter.winzou_state_machine" class="Sylius\Abstraction\StateMachine\WinzouStateMachineAdapter">
             <argument type="service" id="sm.factory" />
-            <argument>%sm.configs%</argument>
-
             <tag name="sylius.state_machine" key="winzou_state_machine" />
         </service>
         <service id="Sylius\Abstraction\StateMachine\StateMachineInterface $winzouStateMachine" alias="sylius_abstraction.state_machine.adapter.winzou_state_machine" />
