@@ -20,6 +20,4 @@ interface ShipmentEmailManagerInterface
     public function sendConfirmationEmail(ShipmentInterface $shipment): void;
 
     public function resendConfirmationEmail(ShipmentInterface $shipment): void;
-
-    public function sendConfirmationEmail(ShipmentInterface $shipment): void;
 }
