@@ -33,6 +33,8 @@
             decoration-priority="64"
         >
             <argument type="service" id=".inner" />
+            <argument>%sylius_api.serialization_groups.skip_adding_read_group%</argument>
+            <argument>%sylius_api.serialization_groups.skip_adding_index_and_show_groups%</argument>
         </service>
 
         <service

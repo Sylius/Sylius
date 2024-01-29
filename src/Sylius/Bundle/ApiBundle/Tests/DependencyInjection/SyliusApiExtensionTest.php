@@ -107,6 +107,28 @@ final class SyliusApiExtensionTest extends AbstractExtensionTestCase
     }
 
     /** @test */
+    public function it_loads_skip_read_and_skip_index_and_show_serialization_groups_parameters_properly(): void
+    {
+        $this->container->setParameter('kernel.bundles_metadata', ['SyliusApiBundle' => ['path' => __DIR__ . '../..']]);
+
+        $this->load([
+            'serialization_groups' => [
+                'skip_adding_read_group' => true,
+                'skip_adding_index_and_show_groups' => false,
+            ],
+        ]);
+
+        $this->assertContainerBuilderHasParameter(
+            'sylius_api.serialization_groups.skip_adding_read_group',
+            true,
+        );
+        $this->assertContainerBuilderHasParameter(
+            'sylius_api.serialization_groups.skip_adding_index_and_show_groups',
+            false,
+        );
+    }
+
+    /** @test */
     public function it_loads_default_filter_eager_loading_extension_restricted_operations_configuration_properly(): void
     {
         $this->container->setParameter('kernel.bundles_metadata', ['SyliusApiBundle' => ['path' => __DIR__ . '../..']]);
