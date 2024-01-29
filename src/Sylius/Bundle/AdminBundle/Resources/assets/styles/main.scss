@@ -1,4 +1,4 @@
-/*
+/*!
  * This file is part of the Sylius package.
  *
  * (c) Sylius Sp. z o.o.
@@ -7,31 +7,23 @@
  * file that was distributed with this source code.
  */
 
-$assets-base: $rootDir + "/node_modules/@tabler/core/dist";
-$primary: #1ABB9C;
+@import "variables";
 
 @import "choices.js/src/styles/choices.scss";
 @import "@tabler/core/src/scss/tabler.scss";
-
 
 // TODO: Once https://github.com/tabler/tabler/pull/1718 merged or resolve remove the custom _flags.scss and import the tabler's one
 //@import "@tabler/core/src/scss/tabler-flags.scss";
 @import "_flags.scss";
 
-body {
-    font-family: "Inter", sans-serif;
-    font-feature-settings: "cv03", "cv04", "cv11";
-}
-
-.w-fit-content {
-    width: fit-content;
-}
-
 @import "alert";
 @import "avatar";
 @import "collapse";
+@import "dialog";
 @import "form";
 @import "layout";
 @import "loader";
 @import "navbar";
 @import "tree";
+
+@import "body";

@@ -4,7 +4,7 @@
     <input type="hidden" name="_method" value="PATCH">
     <input type="hidden" name="sylius_archivable[_token]" value="{{ csrf_token('sylius_archivable') }}" />
 
-    <button class="dropdown-item" type="submit" data-requires-confirmation>
+    <button class="dropdown-item" type="submit" data-confirm-btn-submit>
         <i class="{{ action.icon|default('archive') }} icon"></i>
         {% if data.archivedAt is not null %}
             {{ action.options.restore_label|default('sylius.ui.restore')|trans }}

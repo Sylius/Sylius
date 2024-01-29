@@ -1,26 +1,28 @@
 <!DOCTYPE html>
 <html lang="{{ app.request.locale }}">
-<head>
-    <meta charset="UTF-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <head>
+        <meta charset="UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <title>{% block title %}Sylius{% endblock %}</title>
+        <title>{% block title %}Sylius{% endblock %}</title>
 
-    {% block metatags %}{% endblock %}
-    {{ encore_entry_link_tags('admin-entry', null, 'admin') }}
-    {% block stylesheets %}
-        {{ twig_event('sylius.admin.common.stylesheets') }}
-    {% endblock %}
-</head>
-<body class="{% block body_class %}{% endblock %}">
-<div class="page">
-    {% block body %}{% endblock %}
-</div>
+        {% block metatags %}{% endblock %}
+        {{ encore_entry_link_tags('admin-entry', null, 'admin') }}
+        {% block stylesheets %}
+            {{ twig_event('sylius.admin.common.stylesheets') }}
+        {% endblock %}
+    </head>
+    <body class="{% block body_class %}{% endblock %}">
+        <div class="page">
+            {% block body %}{% endblock %}
+        </div>
 
-{{ encore_entry_script_tags('admin-entry', null, 'admin') }}
-{% block javascripts %}
-    {{ twig_event('sylius.admin.common.javascripts') }}
-{% endblock %}
-</body>
+        {% include '@SyliusAdmin/Shared/Layout/_dialog.html.twig' %}
+
+        {{ encore_entry_script_tags('admin-entry', null, 'admin') }}
+        {% block javascripts %}
+            {{ twig_event('sylius.admin.common.javascripts') }}
+        {% endblock %}
+    </body>
 </html>

@@ -16,3 +16,13 @@
         height: 4rem;
     }
 }
+
+.navbar-collapse a.nav-link,
+.navbar-collapse a.dropdown-item {
+    transition: all .1s;
+
+    &:hover {
+        color: var(--tblr-primary) !important;
+        background: transparent;
+    }
+}
