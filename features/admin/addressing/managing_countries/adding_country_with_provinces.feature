@@ -7,7 +7,7 @@ Feature: Adding countries with provinces
     Background:
         Given I am logged in as an administrator
 
-    @todo @ui @javascript @api
+    @ui @javascript
     Scenario: Adding a country with a province
         When I want to add a new country
         And I choose "United Kingdom"

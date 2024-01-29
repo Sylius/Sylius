@@ -132,10 +132,15 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
-            'code' => '#sylius_country_code',
-            'enabled' => '#sylius_country_enabled',
-            'form' => 'form',
-            'provinces' => '#sylius_country_provinces',
+            'code' => '[data-test-code]',
+            'enabled' => '[data-test-enabled]',
+            'provinces' => '[data-test-provinces]',
+//            'last_province' => '[data-test-provinces] [data-test-province]:last-child',
+//            'add_province' => '[data-test-add-province]'
+//            'code' => '#sylius_country_code',
+//            'enabled' => '#sylius_country_enabled',
+//            'form' => 'form',
+//            'provinces' => '#sylius_country_provinces',
         ]);
     }
 

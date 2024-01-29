@@ -43,7 +43,7 @@ final class NotificationChecker implements NotificationCheckerInterface
         $typeClassMap = [
             'failure' => 'negative',
             'info' => 'info',
-            'success' => 'positive',
+            'success' => 'alert-success',
         ];
 
         Assert::keyExists($typeClassMap, $type->__toString());

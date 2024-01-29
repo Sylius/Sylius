@@ -20,4 +20,6 @@ interface CreatePageInterface extends BaseCreatePageInterface
     public function chooseName(string $name): void;
 
     public function addProvince(string $name, string $code, string $abbreviation = null): void;
+
+    public function selectCountry(string $countryName): void;
 }

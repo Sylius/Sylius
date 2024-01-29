@@ -55,16 +55,16 @@ final class ManagingCountriesContext implements Context
     /**
      * @When I choose :countryName
      */
-    public function iChoose($countryName)
+    public function iChoose(string $countryName): void
     {
-        $this->createPage->chooseName($countryName);
+        $this->createPage->selectCountry($countryName);
     }
 
     /**
      * @When I add the :provinceName province with :provinceCode code
      * @When I add the :provinceName province with :provinceCode code and :provinceAbbreviation abbreviation
      */
-    public function iAddProvinceWithCode($provinceName, $provinceCode, $provinceAbbreviation = null)
+    public function iAddProvinceWithCode(string $provinceName, string $provinceCode, string $provinceAbbreviation = null): void
     {
         /** @var CreatePageInterface|UpdatePageInterface $currentPage */
         $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
@@ -76,7 +76,7 @@ final class ManagingCountriesContext implements Context
      * @When I add it
      * @When I try to add it
      */
-    public function iAddIt()
+    public function iAddIt(): void
     {
         $this->createPage->create();
     }

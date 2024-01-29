@@ -24,10 +24,10 @@ final class NotificationAccessor implements NotificationAccessorInterface
 
     public function getMessageElements(): array
     {
-        $messageElements = $this->session->getPage()->findAll('css', '.sylius-flash-message');
+        $messageElements = $this->session->getPage()->findAll('css', '[data-test-sylius-flash-message]');
 
         if (empty($messageElements)) {
-            throw new ElementNotFoundException($this->session->getDriver(), 'message element', 'css', '.sylius-flash-message');
+            throw new ElementNotFoundException($this->session->getDriver(), 'message element', 'css', '[data-test-sylius-flash-message]');
         }
 
         return $messageElements;

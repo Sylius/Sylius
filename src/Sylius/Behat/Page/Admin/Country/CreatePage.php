@@ -24,32 +24,35 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
 
     public function addProvince(string $name, string $code, string $abbreviation = null): void
     {
-        $this->getDocument()->clickLink('Add province');
+        $this->getElement('add_province')->click();
 
-        $provinceForm = $this->getLastProvinceElement();
+        $this->waitForElement(5, 'last_province');
+        $province = $this->getElement('last_province');
 
-        $provinceForm->fillField('Name', $name);
-        $provinceForm->fillField('Code', $code);
+        $province->find('css', '[data-test-province-name]')->setValue($name);
+        $province->find('css', '[data-test-province-code]')->setValue($code);
 
         if (null !== $abbreviation) {
-            $provinceForm->fillField('Abbreviation', $abbreviation);
+            $province->find('css', '[data-test-province-abbreviation]')->setValue($abbreviation);
         }
+    }
+
+    public function selectCountry(string $countryName): void
+    {
+        $this->getElement('code')->selectOption($countryName);
     }
 
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
-            'provinces' => '#sylius_country_provinces',
+            'code' => '[data-test-code]',
+            'last_province' => '[data-test-provinces] [data-test-province]:last-child',
+            'add_province' => '[data-test-add-province]'
         ]);
     }
 
-    private function getLastProvinceElement(): NodeElement
+    private function waitForElement(int $timeout, string $elementName): bool
     {
-        $provinces = $this->getElement('provinces');
-        $items = $provinces->findAll('css', 'div[data-form-collection="item"]');
-
-        Assert::notEmpty($items);
-
-        return end($items);
+        return $this->getDocument()->waitFor($timeout, fn () => $this->hasElement($elementName));
     }
 }
