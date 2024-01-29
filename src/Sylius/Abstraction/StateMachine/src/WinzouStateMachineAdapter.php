@@ -87,9 +87,6 @@ final class WinzouStateMachineAdapter implements StateMachineInterface
         return  $configProperty->getValue($stateMachine);
     }
 
-    /**
-     * @throws StateMachineExecutionException
-     */
     public function getTransitionFromState(object $subject, string $graphName, string $fromState): ?string
     {
         foreach ($this->getEnabledTransitions($subject, $graphName) as $transition) {
@@ -101,9 +98,6 @@ final class WinzouStateMachineAdapter implements StateMachineInterface
         return null;
     }
 
-    /**
-     * @throws StateMachineExecutionException
-     */
     public function getTransitionToState(object $subject, string $graphName, string $toState): ?string
     {
         foreach ($this->getEnabledTransitions($subject, $graphName) as $transition) {
