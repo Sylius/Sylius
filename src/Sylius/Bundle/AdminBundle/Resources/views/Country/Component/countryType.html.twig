@@ -1,16 +1,16 @@
 {% form_theme form '@SyliusAdmin/Shared/form_theme.html.twig' %}
 
-{% set main_event = twig_event_name(attributes.all.main_event, 'component_form') %}
-{% set fallback_event = twig_event_name(attributes.all.fallback_event, 'component_form') %}
+{% set main_event = twig_event_name(this.mainEvent, 'component_form') %}
+{% set fallback_event = twig_event_name(this.fallbackEvent, 'component_form') %}
 
 <div class="row" {{ attributes }}>
     {{ form_start(form, {'attr': {'class': 'ui loadable form', 'novalidate': 'novalidate', 'id': form.vars.id}}) }}
-    {% if attributes.all.update|default(false) %}
-        <input type="hidden" name="_method" value="PUT" />
-    {% endif %}
-    {{ form_errors(form) }}
-    {{ form_widget(form._token) }}
+        {% if this.isUpdate %}
+            <input type="hidden" name="_method" value="PUT" />
+        {% endif %}
+        {{ form_errors(form) }}
+        {{ form_widget(form._token) }}
 
-    {{ twig_event([main_event, fallback_event], _context|merge({ main_event, fallback_event })) }}
+        {{ twig_event([main_event, fallback_event], _context|merge({ main_event, fallback_event })) }}
     {{ form_end(form, {render_rest: false}) }}
 </div>

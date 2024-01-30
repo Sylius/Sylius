@@ -12,8 +12,8 @@ sylius_ui:
                         inputs:
                             country: 'expr:context["resource"]'
                             form: 'expr:context["form"]'
-                            main_event: 'expr:context["main_event"]'
-                            fallback_event: 'expr:context["fallback_event"]'
+                            mainEvent: 'expr:context["main_event"]'
+                            fallbackEvent: 'expr:context["fallback_event"]'
         sylius.admin.country.create.content.form.component_form:
             blocks:
                 sections:

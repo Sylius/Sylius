@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Bundle\AdminBundle\TwigComponent\Country;
 
 use Sylius\Bundle\AddressingBundle\Form\Type\CountryType as CountryTypeForm;
+use Sylius\Bundle\AdminBundle\TwigComponent\UiEventsTrait;
 use Sylius\Component\Addressing\Model\Country;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
@@ -27,9 +28,13 @@ final class CountryType
 {
     use DefaultActionTrait;
     use LiveCollectionTrait;
+    use UiEventsTrait;
 
     #[LiveProp(fieldName: 'formData')]
     public ?Country $country = null;
+
+    #[LiveProp]
+    public bool $isUpdate = false;
 
     public function __construct(
         private readonly FormFactoryInterface $formFactory,
