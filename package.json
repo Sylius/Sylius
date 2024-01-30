@@ -6,7 +6,7 @@
     "url": "git+https://github.com/Sylius/Sylius.git"
   },
   "license": "MIT",
-  "author": "Paweł Jędrzejewski",
+  "author": "Sylius Sp. z o.o.",
   "scripts": {
     "build": "encore dev",
     "build:prod": "encore production",
