@@ -40,10 +40,10 @@
                 <attribute name="messenger">input</attribute>
                 <attribute name="input">Sylius\Bundle\ApiBundle\Command\Payment\AddPaymentRequest</attribute>
                 <attribute name="denormalization_context">
-                    <attribute name="groups">shop:product_review:create</attribute>
+                    <attribute name="groups">shop:payment_request:create</attribute>
                 </attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">shop:product_review:read</attribute>
+                    <attribute name="groups">shop:payment_request:read</attribute>
                 </attribute>
             </collectionOperation>
         </collectionOperations>
@@ -54,6 +54,21 @@
                 <attribute name="path">/shop/payment-requests/{hash}</attribute>
                 <attribute name="normalization_context">
                     <attribute name="groups">shop:payment_request:read</attribute>
+                </attribute>
+            </itemOperation>
+
+            <itemOperation name="shop_put">
+                <attribute name="method">PUT</attribute>
+                <attribute name="path">/shop/payment-requests/{hash}</attribute>
+                <attribute name="messenger">input</attribute>
+                <attribute name="input">Sylius\Bundle\ApiBundle\Command\Payment\UpdatePaymentRequest</attribute>
+                <attribute name="denormalization_context">
+                    <attribute name="groups">shop:payment_request:update</attribute>
+                </attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">
+                        <attribute>shop:payment_request:read</attribute>
+                    </attribute>
                 </attribute>
             </itemOperation>
         </itemOperations>

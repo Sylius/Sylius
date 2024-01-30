@@ -13,13 +13,12 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Payment\Repository;
 
-use Sylius\Component\Payment\Model\PaymentInterface;
-use Sylius\Component\Payment\Model\PaymentMethodInterface;
 use Sylius\Component\Payment\Model\PaymentRequestInterface;
+
 interface PaymentRequestRepositoryInterface
 {
     /**
      * @return PaymentRequestInterface[]
      */
-    public function findExisting(PaymentInterface $payment, PaymentMethodInterface $paymentMethod, string $type): array;
+    public function findOtherExisting(PaymentRequestInterface $paymentRequest): array;
 }

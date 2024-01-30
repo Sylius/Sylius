@@ -14,35 +14,30 @@ declare(strict_types=1);
 namespace Sylius\Bundle\ApiBundle\Command\Payment;
 
 use Sylius\Bundle\ApiBundle\Command\IriToIdentifierConversionAwareInterface;
+use Sylius\Bundle\ApiBundle\Command\PaymentRequestHashAwareInterface;
 
 /** @experimental */
-class AddPaymentRequest implements IriToIdentifierConversionAwareInterface
+class UpdatePaymentRequest implements PaymentRequestHashAwareInterface, IriToIdentifierConversionAwareInterface
 {
+    protected ?string $hash = null;
+
     public function __construct(
-        private string $paymentId,
-        private string $paymentMethodCode,
-        private string $type,
         private mixed $requestPayload = null,
     ) {
-    }
-
-    public function getPaymentId(): string
-    {
-        return $this->paymentId;
-    }
-
-    public function getPaymentMethodCode(): string
-    {
-        return $this->paymentMethodCode;
-    }
-
-    public function getType(): string
-    {
-        return $this->type;
     }
 
     public function getRequestPayload(): mixed
     {
         return $this->requestPayload;
+    }
+
+    public function getHash(): ?string
+    {
+        return $this->hash;
+    }
+
+    public function setHash(?string $hash): void
+    {
+        $this->hash = $hash;
     }
 }
