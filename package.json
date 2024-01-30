@@ -1,21 +1,26 @@
 {
   "name": "@sylius-ui/frontend",
   "version": "1.0.2",
-  "license": "MIT",
-  "author": "Sylius Sp. z o.o.",
-  "dependencies": {
-    "@babel/polyfill": "^7.0.0",
-    "chart.js": "^3.7.1",
-    "jquery": "^3.5.0",
-    "jquery.dirtyforms": "^2.0.0",
-    "lightbox2": "^2.9.0",
-    "semantic-ui-css": "^2.2.0",
-    "slick-carousel": "^1.8.1"
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Sylius/Sylius.git"
   },
-  "devDependencies": {
+  "license": "MIT",
+  "author": "Paweł Jędrzejewski",
+  "scripts": {
+    "build": "encore dev",
+    "build:prod": "encore production",
+    "gulp": "gulp build",
+    "postinstall": "semantic-ui-css-patch",
+    "lint": "yarn lint:js",
+    "lint:js": "eslint gulpfile.babel.js src/Sylius/Bundle/AdminBundle/gulpfile.babel.js src/Sylius/Bundle/ShopBundle/gulpfile.babel.js src/Sylius/Bundle/UiBundle/Resources/private/js src/Sylius/Bundle/AdminBundle/Resources/private/js src/Sylius/Bundle/ShopBundle/Resources/private/js",
+    "watch": "encore dev --watch"
+  },
+  "dependencies": {
     "@babel/core": "^7.0.0",
     "@babel/plugin-external-helpers": "^7.0.0",
     "@babel/plugin-proposal-object-rest-spread": "^7.18.9",
+    "@babel/polyfill": "^7.0.0",
     "@babel/preset-env": "^7.18.10",
     "@babel/register": "^7.0.0",
     "@rollup/plugin-babel": "^5.3.1",
@@ -26,6 +31,7 @@
     "@symfony/webpack-encore": "^3.1.0",
     "babel-plugin-fast-async": "^6.1.2",
     "babel-plugin-module-resolver": "^4.1.0",
+    "chart.js": "^3.7.1",
     "dedent": "^0.7.0",
     "eslint": "^8.23.0",
     "eslint-config-airbnb-base": "^15.0.0",
@@ -42,31 +48,21 @@
     "gulp-sass": "^5.1.0",
     "gulp-sourcemaps": "^3.0.0",
     "gulp-uglifycss": "^1.1.0",
+    "jquery": "^3.5.0",
+    "jquery.dirtyforms": "^2.0.0",
+    "lightbox2": "^2.9.0",
     "merge-stream": "^2.0.0",
     "rollup": "^2.79.0",
     "rollup-plugin-terser": "^7.0.2",
     "sass": "^1.54.8",
     "sass-loader": "^13.0.0",
+    "semantic-ui-css": "^2.2.0",
+    "slick-carousel": "^1.8.1",
     "upath": "^2.0.1",
     "yargs": "^17.5.1"
   },
   "engines": {
     "node": "^14 || ^16 || ^18 || ^20"
   },
-  "engineStrict": true,
-  "scripts": {
-    "watch": "encore dev --watch",
-    "build": "encore dev",
-    "build:prod": "encore production",
-    "gulp": "gulp build",
-    "lint": "yarn lint:js",
-    "lint:js": "eslint gulpfile.babel.js src/Sylius/Bundle/AdminBundle/gulpfile.babel.js src/Sylius/Bundle/ShopBundle/gulpfile.babel.js src/Sylius/Bundle/UiBundle/Resources/private/js src/Sylius/Bundle/AdminBundle/Resources/private/js src/Sylius/Bundle/ShopBundle/Resources/private/js",
-    "postinstall": "semantic-ui-css-patch"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Sylius/Sylius.git"
-  },
-  "author": "Sylius Sp. z o.o.",
-  "license": "MIT"
+  "engineStrict": true
 }
