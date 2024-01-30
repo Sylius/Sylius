@@ -240,11 +240,18 @@
         </service>
 
         <service id="Sylius\Bundle\ApiBundle\CommandHandler\Payment\AddPaymentRequestHandler">
-            <argument type="service" id="sylius.factory.payment" />
+            <argument type="service" id="sylius.factory.payment_request" />
             <argument type="service" id="sylius.repository.payment_method" />
             <argument type="service" id="sylius.repository.payment" />
-            <argument type="service" id="sylius.manager.payment_request" />
-            <argument type="service" id="Sylius\Bundle\ApiBundle\Payment\PaymentRequestCommandProviderInterface" />
+            <argument type="service" id="Sylius\Bundle\PaymentBundle\Provider\PaymentRequestCommandProviderInterface" />
+            <argument type="service" id="sylius.command_bus" />
+            <tag name="messenger.message_handler" bus="sylius.command_bus" />
+            <tag name="messenger.message_handler" bus="sylius_default.bus" />
+        </service>
+
+        <service id="Sylius\Bundle\ApiBundle\CommandHandler\Payment\UpdatePaymentRequestHandler">
+            <argument type="service" id="sylius.repository.payment_request" />
+            <argument type="service" id="Sylius\Bundle\PaymentBundle\Provider\PaymentRequestCommandProviderInterface" />
             <argument type="service" id="sylius.command_bus" />
             <tag name="messenger.message_handler" bus="sylius.command_bus" />
             <tag name="messenger.message_handler" bus="sylius_default.bus" />
