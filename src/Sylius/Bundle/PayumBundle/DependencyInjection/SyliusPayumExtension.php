@@ -52,7 +52,6 @@ final class SyliusPayumExtension extends AbstractResourceExtension implements Pr
     public function prepend(ContainerBuilder $container): void
     {
         $this->prependSyliusPayment($container);
-        $this->prependSyliusApi($container);
     }
 
     private function registerAutoconfiguration(ContainerBuilder $container): void
@@ -89,24 +88,16 @@ final class SyliusPayumExtension extends AbstractResourceExtension implements Pr
         }
 
         $container->prependExtensionConfig('sylius_payment', ['gateways' => $gateways]);
-    }
-
-    private function prependSyliusApi(ContainerBuilder $container): void
-    {
-        if (!$container->hasExtension('sylius_api')) {
-            return;
-        }
 
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
-
-        $loader->load('integrations/sylius_api.xml');
+        $loader->load('integrations/payment_request.xml');
 
         if (class_exists(OfflineGatewayFactory::class)) {
             $loader->load('integrations/offline.xml');
         }
 
         if (class_exists(PaypalExpressCheckoutGatewayFactory::class)) {
-            $loader->load('integrations/paypal.xml');
+            $loader->load('integrations/paypal_express_checkout.xml');
         }
 
         if (class_exists(StripeCheckoutGatewayFactory::class)) {

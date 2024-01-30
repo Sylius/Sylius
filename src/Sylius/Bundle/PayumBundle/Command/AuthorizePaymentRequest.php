@@ -15,7 +15,7 @@ namespace Sylius\Bundle\PayumBundle\Command;
 
 use Sylius\Bundle\PaymentBundle\Command\PaymentRequestHashAwareInterface;
 
-class StatusPaymentRequest implements PaymentRequestHashAwareInterface
+class AuthorizePaymentRequest implements PaymentRequestHashAwareInterface
 {
     public function __construct(
         protected string $hash,

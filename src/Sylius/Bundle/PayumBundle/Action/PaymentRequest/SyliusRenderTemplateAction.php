@@ -11,18 +11,18 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\PayumBundle\Action;
+namespace Sylius\Bundle\PayumBundle\Action\PaymentRequest;
 
 use Payum\Core\Action\ActionInterface;
 use Payum\Core\Exception\RequestNotSupportedException;
 use Payum\Core\Request\RenderTemplate;
-use Sylius\Bundle\PayumBundle\Api\PayumApiContextInterface;
+use Sylius\Bundle\PayumBundle\PaymentRequest\PayumPaymentRequestContextInterface;
 use Webmozart\Assert\Assert;
 
-final class SyliusApiRenderTemplateAction implements ActionInterface
+final class SyliusRenderTemplateAction implements ActionInterface
 {
     public function __construct(
-        private PayumApiContextInterface $payumApiContext,
+        private PayumPaymentRequestContextInterface $payumApiContext,
     ) {
     }
     public function execute($request): void
