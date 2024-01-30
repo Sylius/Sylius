@@ -11,11 +11,11 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\ApiBundle\Payment\Offline;
+namespace Sylius\Bundle\PaymentBundle\Processor;
 
 use Sylius\Component\Payment\Model\PaymentRequestInterface;
 
-interface CapturePaymentRequestProcessorInterface
+interface OfflineCaptureProcessorInterface
 {
     public function process(PaymentRequestInterface $paymentRequest): void;
 }

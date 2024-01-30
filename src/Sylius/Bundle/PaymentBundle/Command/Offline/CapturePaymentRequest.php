@@ -11,9 +11,9 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\ApiBundle\Command\Payment\Offline;
+namespace Sylius\Bundle\PaymentBundle\Command\Offline;
 
-use Sylius\Bundle\ApiBundle\Command\PaymentRequestHashAwareInterface;
+use Sylius\Bundle\PaymentBundle\Command\PaymentRequestHashAwareInterface;
 
 class CapturePaymentRequest implements PaymentRequestHashAwareInterface
 {
