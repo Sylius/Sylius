@@ -11,11 +11,11 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\PayumBundle\Api;
+namespace Sylius\Bundle\PayumBundle\PaymentRequest;
 
 use Sylius\Component\Payment\Model\PaymentRequestInterface;
 
-final class PayumApiContext implements PayumApiContextInterface
+final class PayumPaymentRequestContext implements PayumPaymentRequestContextInterface
 {
     private ?PaymentRequestInterface $paymentRequest = null;
 

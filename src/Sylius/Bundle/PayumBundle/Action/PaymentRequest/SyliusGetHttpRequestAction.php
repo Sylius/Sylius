@@ -11,18 +11,18 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\PayumBundle\Action;
+namespace Sylius\Bundle\PayumBundle\Action\PaymentRequest;
 
 use Payum\Core\Action\ActionInterface;
 use Payum\Core\Exception\RequestNotSupportedException;
 use Payum\Core\Request\GetHttpRequest;
-use Sylius\Bundle\PayumBundle\Api\PayumApiContextInterface;
+use Sylius\Bundle\PayumBundle\PaymentRequest\PayumPaymentRequestContextInterface;
 use Webmozart\Assert\Assert;
 
-final class SyliusApiGetHttpRequestAction implements ActionInterface
+final class SyliusGetHttpRequestAction implements ActionInterface
 {
     public function __construct(
-        private PayumApiContextInterface $payumApiContext,
+        private PayumPaymentRequestContextInterface $payumApiContext,
     ) {
     }
 
@@ -43,15 +43,16 @@ final class SyliusApiGetHttpRequestAction implements ActionInterface
         $payload = $paymentRequest->getRequestPayload();
         $httpRequest = $payload['http_request'] ?? [];
 
-        $request->query = $httpRequest['query'];
-        $request->request = $httpRequest['request'];
-        // Not existing property
-        $request->headers = $httpRequest['headers'];
+        $request->query = $httpRequest['query'] ?? [];
+        $request->request = $httpRequest['request'] ?? [];
         $request->method = $httpRequest['method'] ?? 'POST';
         $request->uri = $httpRequest['uri'] ?? '';
         $request->clientIp = $httpRequest['client_ip'] ?? '';
-        $request->userAgent = $httpRequest['user_agent'];
-        $request->content = $httpRequest['content'];
+        $request->userAgent = $httpRequest['user_agent'] ?? '';
+        $request->content = $httpRequest['content'] ?? '';
+
+        // Not existing property but used by the Symfony bridge
+        $request->headers = $httpRequest['headers'] ?? [];
     }
 
     public function supports($request): bool

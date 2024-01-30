@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\PayumBundle\Api;
+namespace Sylius\Bundle\PayumBundle\PaymentRequest\Factory;
 
 use Payum\Core\Payum;
 use Payum\Core\Security\TokenInterface;
@@ -21,7 +21,6 @@ use Webmozart\Assert\Assert;
 
 final class PayumTokenFactory implements PayumTokenFactoryInterface
 {
-
     public function __construct(private Payum $payum)
     {
     }
@@ -42,15 +41,15 @@ final class PayumTokenFactory implements PayumTokenFactoryInterface
 
         /** @var array|null $payload */
         $payload = $paymentRequest->getRequestPayload();
-        Assert::notNull($payload);
+        Assert::notNull($payload, 'The request payload need to be not null!');
 
         $targetPath = $payload['target_path'] ?? null;
-        Assert::notNull($targetPath);
+        Assert::notNull($targetPath, 'The request payload must have a "target_path" field!');
 
         $targetPathParameters = $payload['target_path_parameters'] ?? [];
 
         $afterPath = $payload['after_path'] ?? null;
-        Assert::notNull($afterPath);
+        Assert::notNull($afterPath, 'The request payload must have an "after_path" field!');
 
         $afterPathParameters = $payload['after_path_parameters'] ?? [];
 
