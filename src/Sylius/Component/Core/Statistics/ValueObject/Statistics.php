@@ -13,19 +13,19 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Core\Statistics\ValueObject;
 
-use Sylius\Component\Core\Statistics\Chart\ChartInterface;
-
 class Statistics
 {
+    /** @param array<array{total: int, period: string}> $sales */
     public function __construct(
-        private ChartInterface $chart,
+        private array $sales,
         private BusinessActivitySummary $businessActivitySummary,
     ) {
     }
 
-    public function getSalesChart(): ChartInterface
+    /** @return array<array{total: int, period: string}> */
+    public function getSales(): array
     {
-        return $this->chart;
+        return $this->sales;
     }
 
     public function getBusinessActivitySummary(): BusinessActivitySummary

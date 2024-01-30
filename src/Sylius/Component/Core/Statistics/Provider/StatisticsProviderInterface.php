@@ -18,5 +18,9 @@ use Sylius\Component\Core\Statistics\ValueObject\Statistics;
 
 interface StatisticsProviderInterface
 {
-    public function provide(\DatePeriod $datePeriod, ChannelInterface $channel): Statistics;
+    public function provide(
+        string $intervalType,
+        \DatePeriod $datePeriod,
+        ChannelInterface $channel,
+    ): Statistics;
 }

@@ -15,9 +15,8 @@ namespace spec\Sylius\Component\Core\Statistics\Provider;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\ChannelInterface;
-use Sylius\Component\Core\Statistics\Chart\ChartInterface;
 use Sylius\Component\Core\Statistics\Provider\BusinessActivitySummaryProviderInterface;
-use Sylius\Component\Core\Statistics\Provider\SalesTimeSeriesProviderInterface;
+use Sylius\Component\Core\Statistics\Provider\SalesStatisticsProviderInterface;
 use Sylius\Component\Core\Statistics\Provider\StatisticsProviderInterface;
 use Sylius\Component\Core\Statistics\ValueObject\BusinessActivitySummary;
 use Sylius\Component\Core\Statistics\ValueObject\Statistics;
@@ -25,10 +24,10 @@ use Sylius\Component\Core\Statistics\ValueObject\Statistics;
 final class StatisticsProviderSpec extends ObjectBehavior
 {
     function let(
-        SalesTimeSeriesProviderInterface $salesTimeSeriesProvider,
+        SalesStatisticsProviderInterface $salesProvider,
         BusinessActivitySummaryProviderInterface $businessActivitySummaryProvider,
     ): void {
-        $this->beConstructedWith($salesTimeSeriesProvider, $businessActivitySummaryProvider);
+        $this->beConstructedWith($salesProvider, $businessActivitySummaryProvider);
     }
 
     function it_is_initializable(): void
@@ -37,16 +36,15 @@ final class StatisticsProviderSpec extends ObjectBehavior
     }
 
     function it_provides_statistics(
-        SalesTimeSeriesProviderInterface $salesTimeSeriesProvider,
+        SalesStatisticsProviderInterface $salesProvider,
         BusinessActivitySummaryProviderInterface $businessActivitySummaryProvider,
         ChannelInterface $channel,
         \DatePeriod $datePeriod,
-        ChartInterface $salesTimeSeries,
         BusinessActivitySummary $businessActivitySummary,
     ): void {
-        $salesTimeSeriesProvider->provide($datePeriod, $channel)->willReturn($salesTimeSeries);
+        $salesProvider->provide('day', $datePeriod, $channel)->willReturn([]);
         $businessActivitySummaryProvider->provide($datePeriod, $channel)->willReturn($businessActivitySummary);
 
-        $this->provide($datePeriod, $channel)->shouldBeAnInstanceOf(Statistics::class);
+        $this->provide('day', $datePeriod, $channel)->shouldBeAnInstanceOf(Statistics::class);
     }
 }

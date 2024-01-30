@@ -13,12 +13,12 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\DependencyInjection;
 
-use InvalidArgumentException;
 use Sylius\Bundle\CoreBundle\Attribute\AsCatalogPromotionApplicatorCriteria;
 use Sylius\Bundle\CoreBundle\Attribute\AsCatalogPromotionPriceCalculator;
 use Sylius\Bundle\CoreBundle\Attribute\AsEntityObserver;
 use Sylius\Bundle\CoreBundle\Attribute\AsOrderItemsTaxesApplicator;
 use Sylius\Bundle\CoreBundle\Attribute\AsOrderItemUnitsTaxesApplicator;
+use Sylius\Bundle\CoreBundle\Attribute\AsOrdersTotalsProvider;
 use Sylius\Bundle\CoreBundle\Attribute\AsProductVariantMapProvider;
 use Sylius\Bundle\CoreBundle\Attribute\AsTaxCalculationStrategy;
 use Sylius\Bundle\CoreBundle\Attribute\AsUriBasedSectionResolver;
@@ -72,6 +72,7 @@ final class SyliusCoreExtension extends AbstractResourceExtension implements Pre
         $container->setParameter('sylius_core.order_by_identifier', $config['order_by_identifier']);
         $container->setParameter('sylius_core.catalog_promotions.batch_size', $config['catalog_promotions']['batch_size']);
         $container->setParameter('sylius_core.price_history.batch_size', $config['price_history']['batch_size']);
+        $container->setParameter('sylius_core.orders_statistics.intervals_map', $config['orders_statistics']['intervals_map'] ?? []);
 
         /** @var string $env */
         $env = $container->getParameter('kernel.environment');
@@ -91,7 +92,7 @@ final class SyliusCoreExtension extends AbstractResourceExtension implements Pre
             match ($config['filesystem']['adapter']) {
                 'default', 'flysystem' => FlysystemFilesystemAdapter::class,
                 'gaufrette' => 'Sylius\Component\Core\Filesystem\Adapter\GaufretteFilesystemAdapter',
-                default => throw new InvalidArgumentException(sprintf(
+                default => throw new \InvalidArgumentException(sprintf(
                     'Invalid filesystem adapter "%s" provided.',
                     $config['filesystem']['adapter'],
                 )),
@@ -193,7 +194,7 @@ final class SyliusCoreExtension extends AbstractResourceExtension implements Pre
     private function switchOrderProcessorsPriorities(
         Definition $firstServiceDefinition,
         Definition $secondServiceDefinition,
-    ) {
+    ): void {
         $firstServicePriority = $firstServiceDefinition->getTag('sylius.order_processor')[0]['priority'];
         $secondServicePriority = $secondServiceDefinition->getTag('sylius.order_processor')[0]['priority'];
 
@@ -269,6 +270,13 @@ final class SyliusCoreExtension extends AbstractResourceExtension implements Pre
             AsUriBasedSectionResolver::class,
             static function (ChildDefinition $definition, AsUriBasedSectionResolver $attribute): void {
                 $definition->addTag(AsUriBasedSectionResolver::SERVICE_TAG, ['priority' => $attribute->getPriority()]);
+            },
+        );
+
+        $container->registerAttributeForAutoconfiguration(
+            AsOrdersTotalsProvider::class,
+            static function (ChildDefinition $definition, AsOrdersTotalsProvider $attribute): void {
+                $definition->addTag(AsOrdersTotalsProvider::SERVICE_TAG, ['type' => $attribute->getType()]);
             },
         );
     }

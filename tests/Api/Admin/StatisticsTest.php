@@ -28,8 +28,12 @@ final class StatisticsTest extends JsonApiTestCase
         parent::setUp();
     }
 
-    /** @test */
-    public function it_gets_fulfilled_orders_in_specific_year_statistics(): void
+    /**
+     * @test
+     *
+     * @dataProvider getIntervals
+     */
+    public function it_gets_fulfilled_orders_in_specific_year_statistics(string $interval): void
     {
         $this->loadFixturesFromFiles([
             'authentication/api_administrator.yaml',
@@ -40,31 +44,66 @@ final class StatisticsTest extends JsonApiTestCase
         ]);
 
         $this->fulfillOrder(
-            tokenValue: 'ORDER_FULFILLED_BEFORE_REQUESTED_PERIOD',
+            tokenValue: 'ORDER_BEFORE_START',
+            productVariantCode: 'product_variant_that_costs_1000',
+            quantity: 2,
+            checkoutCompletedAt: new \DateTimeImmutable('2021-12-31T23:59:59'),
+        );
+
+        $this->fulfillOrder(
+            tokenValue: '2022ORDER1',
+            productVariantCode: 'product_variant_that_costs_1000',
+            quantity: 2,
+            checkoutCompletedAt: new \DateTimeImmutable('2022-07-01T23:59:59'),
+        );
+
+        $this->fulfillOrder(
+            tokenValue: '2022ORDER2',
             productVariantCode: 'product_variant_that_costs_1000',
             quantity: 2,
             checkoutCompletedAt: new \DateTimeImmutable('2022-12-31T23:59:59'),
         );
 
         $this->fulfillOrder(
-            tokenValue: 'ORDER_FULFILLED_IN_JANUARY',
+            tokenValue: '2023ORDER1',
             productVariantCode: 'product_variant_that_costs_1000',
             quantity: 2,
             checkoutCompletedAt: new \DateTimeImmutable('2023-01-01T00:00:00'),
         );
 
         $this->fulfillOrder(
-            tokenValue: 'ORDER_FULFILLED_AFTER_REQUESTED_PERIOD',
+            tokenValue: '2023ORDER2',
+            productVariantCode: 'product_variant_that_costs_1000',
+            quantity: 2,
+            checkoutCompletedAt: new \DateTimeImmutable('2023-04-20T00:00:00'),
+        );
+
+        $this->fulfillOrder(
+            tokenValue: '2024ORDER1',
             productVariantCode: 'product_variant_that_costs_1000',
             quantity: 2,
             checkoutCompletedAt: new \DateTimeImmutable('2024-01-01T00:00:00'),
         );
 
+        $this->fulfillOrder(
+            tokenValue: '2024ORDER2',
+            productVariantCode: 'product_variant_that_costs_1000',
+            quantity: 2,
+            checkoutCompletedAt: new \DateTimeImmutable('2024-11-15T00:00:00'),
+        );
+
+        $this->fulfillOrder(
+            tokenValue: 'ORDER_AFTER_END',
+            productVariantCode: 'product_variant_that_costs_1000',
+            quantity: 2,
+            checkoutCompletedAt: new \DateTimeImmutable('2025-01-01T00:00:00'),
+        );
+
         $parameters = [
             'channelCode' => 'WEB',
-            'startDate' => '2023-01-01T00:00:00',
-            'dateInterval' => 'P1M',
-            'endDate' => '2023-12-31T23:59:59',
+            'startDate' => '2022-01-01T00:00:00',
+            'interval' => $interval,
+            'endDate' => '2024-12-31T23:59:59',
         ];
 
         $this->client->request(
@@ -76,7 +115,7 @@ final class StatisticsTest extends JsonApiTestCase
 
         $this->assertResponse(
             $this->client->getResponse(),
-            'admin/statistics/get_statistics_response',
+            'admin/statistics/get_' . $interval .'_statistics_response',
             Response::HTTP_OK,
         );
     }
@@ -102,7 +141,7 @@ final class StatisticsTest extends JsonApiTestCase
             parameters: [
                 'channelCode' => 'CHANNEL_DOES_NOT_EXIST',
                 'startDate' => '2023-01-01T00:00:00',
-                'dateInterval' => 'P1M',
+                'interval' => 'month',
                 'endDate' => '2023-12-31T23:59:59',
             ],
             server: $this->headerBuilder()->withAdminUserAuthorization('api@example.com')->build(),
@@ -117,7 +156,6 @@ final class StatisticsTest extends JsonApiTestCase
      * @dataProvider missingQueryParameters
      * @dataProvider emptyQueryParameters
      * @dataProvider invalidQueryParameters
-     * @dataProvider invalidPeriods
      */
     public function it_returns_a_bad_request_status_code_if_any_of_required_parameters_is_missing_empty_or_invalid(
         array $queryParameters,
@@ -134,12 +172,19 @@ final class StatisticsTest extends JsonApiTestCase
         $this->assertResponseCode($this->client->getResponse(), Response::HTTP_BAD_REQUEST);
     }
 
+    public function getIntervals(): iterable
+    {
+        yield ['day'];
+        yield ['month'];
+        yield ['year'];
+    }
+
     public function missingQueryParameters(): iterable
     {
         yield 'missing channelCode' => [
              'parameters' => [
                 'startDate' => '2023-01-01T00:00:00',
-                'dateInterval' => 'P1M',
+                'interval' => 'month',
                 'endDate' => '2023-12-31T23:59:59',
              ],
         ];
@@ -147,12 +192,12 @@ final class StatisticsTest extends JsonApiTestCase
         yield 'missing startDate' => [
             'parameters' => [
                 'channelCode' => 'WEB',
-                'dateInterval' => 'P1M',
+                'interval' => 'month',
                 'endDate' => '2023-12-31T23:59:59',
             ],
         ];
 
-        yield 'missing dateInterval' => [
+        yield 'missing interval' => [
             'parameters' => [
                 'channelCode' => 'WEB',
                 'startDate' => '2023-01-01T00:00:00',
@@ -164,7 +209,7 @@ final class StatisticsTest extends JsonApiTestCase
             'parameters' => [
                 'channelCode' => 'WEB',
                 'startDate' => '2023-01-01T00:00:00',
-                'dateInterval' => 'P1M',
+                'interval' => 'month',
             ],
         ];
 
@@ -179,7 +224,7 @@ final class StatisticsTest extends JsonApiTestCase
             'parameters' => [
                 'channelCode' => '',
                 'startDate' => '2023-01-01T00:00:00',
-                'dateInterval' => 'P1M',
+                'interval' => 'month',
                 'endDate' => '2023-12-31T23:59:59',
             ],
         ];
@@ -188,16 +233,16 @@ final class StatisticsTest extends JsonApiTestCase
             'parameters' => [
                 'channelCode' => 'WEB',
                 'startDate' => '',
-                'dateInterval' => 'P1M',
+                'interval' => 'month',
                 'endDate' => '2023-12-31T23:59:59',
             ],
         ];
 
-        yield 'empty dateInterval' => [
+        yield 'empty interval' => [
             'parameters' => [
                 'channelCode' => 'WEB',
                 'startDate' => '2023-01-01T00:00:00',
-                'dateInterval' => '',
+                'interval' => '',
                 'endDate' => '2023-12-31T23:59:59',
             ],
         ];
@@ -206,7 +251,7 @@ final class StatisticsTest extends JsonApiTestCase
             'parameters' => [
                 'channelCode' => 'WEB',
                 'startDate' => '2023-01-01T00:00:00',
-                'dateInterval' => 'P1M',
+                'interval' => 'month',
                 'endDate' => '',
             ],
         ];
@@ -218,7 +263,7 @@ final class StatisticsTest extends JsonApiTestCase
             'parameters' => [
                 'channelCode' => 1.1,
                 'startDate' => '2023-01-01T00:00:00',
-                'dateInterval' => 'P1M',
+                'interval' => 'month',
                 'endDate' => '2023-12-31T23:59:59',
             ],
         ];
@@ -227,16 +272,16 @@ final class StatisticsTest extends JsonApiTestCase
             'parameters' => [
                 'channelCode' => 'WEB',
                 'startDate' => 'INVALID_START_DATE',
-                'dateInterval' => 'P1M',
+                'interval' => 'month',
                 'endDate' => '2023-12-31T23:59:59',
             ],
         ];
 
-        yield 'invalid dateInterval' => [
+        yield 'unknown interval' => [
             'parameters' => [
                 'channelCode' => 'WEB',
                 'startDate' => '2023-01-01T00:00:00',
-                'dateInterval' => 'INVALID_DATE_INTERVAL',
+                'interval' => 'invalid',
                 'endDate' => '2023-12-31T23:59:59',
             ],
         ];
@@ -245,17 +290,8 @@ final class StatisticsTest extends JsonApiTestCase
             'parameters' => [
                 'channelCode' => 'WEB',
                 'startDate' => '2023-01-01T00:00:00',
-                'dateInterval' => 'P1M',
+                'interval' => 'month',
                 'endDate' => 'INVALID_END_DATE',
-            ],
-        ];
-
-        yield 'interval is not a valid ISO 8601 interval' => [
-            'parameters' => [
-                'channelCode' => 'WEB',
-                'startDate' => '2023-01-01T00:00:00',
-                'dateInterval' => 'P1M1D',
-                'endDate' => '2023-12-31T23:59:59',
             ],
         ];
 
@@ -263,7 +299,7 @@ final class StatisticsTest extends JsonApiTestCase
             'parameters' => [
                 'channelCode' => 'WEB',
                 'startDate' => '2023-01-01T00:00:00',
-                'dateInterval' => 'P1M1D',
+                'interval' => 'day',
                 'endDate' => '2023-12-31T23:59:59',
                 'unexpected_parameter' => 'unexpected_value',
             ],
@@ -276,7 +312,7 @@ final class StatisticsTest extends JsonApiTestCase
             'parameters' => [
                 'channelCode' => 'WEB',
                 'startDate' => '2023-01-01T00:00:00',
-                'dateInterval' => 'P1M',
+                'interval' => 'month',
                 'endDate' => '2022-12-31T23:59:59',
             ],
         ];
@@ -285,7 +321,7 @@ final class StatisticsTest extends JsonApiTestCase
             'parameters' => [
                 'channelCode' => 'WEB',
                 'startDate' => '2023-01-01T00:00:00',
-                'dateInterval' => 'P1M',
+                'interval' => 'month',
                 'endDate' => '2023-12-15T23:59:59',
             ],
         ];
@@ -294,7 +330,7 @@ final class StatisticsTest extends JsonApiTestCase
             'parameters' => [
                 'channelCode' => 'WEB',
                 'startDate' => '2023-12-01T00:00:00',
-                'dateInterval' => 'P1M',
+                'interval' => 'month',
                 'endDate' => '2023-12-31T00:00:00',
             ],
         ];
@@ -304,7 +340,7 @@ final class StatisticsTest extends JsonApiTestCase
             'parameters' => [
                 'channelCode' => 'WEB',
                 'startDate' => '2023-01-01T00:00:00',
-                'dateInterval' => 'P1M',
+                'interval' => 'month',
                 'endDate' => '2024-01-01T00:00:00', // Supports only closed intervals
             ],
         ];
@@ -313,7 +349,7 @@ final class StatisticsTest extends JsonApiTestCase
             'parameters' => [
                 'channelCode' => 'WEB',
                 'startDate' => '2023-12-01T00:00:00',
-                'dateInterval' => 'P1M',
+                'interval' => 'month',
                 'endDate' => '2023-12-15T23:59:59',
             ],
         ];
@@ -322,7 +358,7 @@ final class StatisticsTest extends JsonApiTestCase
             'parameters' => [
                 'channelCode' => 'WEB',
                 'startDate' => '2023-12-15T00:00:00',
-                'dateInterval' => 'P1M',
+                'interval' => 'month',
                 'endDate' => '2023-12-31T23:59:59',
             ],
         ];
@@ -331,7 +367,7 @@ final class StatisticsTest extends JsonApiTestCase
             'parameters' => [
                 'channelCode' => 'WEB',
                 'startDate' => '2023-12-01T00:00:00+00:00',
-                'dateInterval' => 'P1M',
+                'interval' => 'month',
                 'endDate' => '2023-12-31T23:59:59',
             ],
         ];
@@ -340,7 +376,7 @@ final class StatisticsTest extends JsonApiTestCase
             'parameters' => [
                 'channelCode' => 'WEB',
                 'startDate' => '2023-12-01T00:00:00',
-                'dateInterval' => 'P1M',
+                'interval' => 'month',
                 'endDate' => '2023-12-31T23:59:59+00:00',
             ],
         ];

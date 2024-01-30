@@ -13,9 +13,8 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\Controller;
 
-use Sylius\Bundle\ApiBundle\Exception\ChannelNotFoundException;
 use Sylius\Bundle\ApiBundle\Query\GetStatistics;
-use Sylius\Bundle\ApiBundle\Validator\Constraints as Assert;
+use Sylius\Bundle\ApiBundle\Validator\Constraints;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -23,7 +22,7 @@ use Symfony\Component\Messenger\Exception\HandlerFailedException;
 use Symfony\Component\Messenger\HandleTrait;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Serializer\SerializerInterface;
-use Symfony\Component\Validator\Constraints as BaseAssert;
+use Symfony\Component\Validator\Constraints as SymfonyConstraints;
 use Symfony\Component\Validator\ConstraintViolationListInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
@@ -31,21 +30,21 @@ final class GetStatisticsAction
 {
     use HandleTrait;
 
-    private BaseAssert\Collection $constraint;
+    private SymfonyConstraints\Collection $constraint;
 
+    /** @var array<string, string> */
+    private array $intervalsMap;
+
+    /** @param array<string, array{interval: string, period_format: string}> $intervalsMap */
     public function __construct(
         MessageBusInterface $messageBus,
         private SerializerInterface $serializer,
         private ValidatorInterface $validator,
+        array $intervalsMap,
     ) {
         $this->messageBus = $messageBus;
-
-        $this->constraint = new BaseAssert\Collection([
-            'channelCode' => new Assert\Code(),
-            'startDate' => new BaseAssert\DateTime('Y-m-d\TH:i:s', message: 'sylius.date_time.invalid'),
-            'dateInterval' => new Assert\DateInterval(),
-            'endDate' => new BaseAssert\DateTime('Y-m-d\TH:i:s', message: 'sylius.date_time.invalid'),
-        ]);
+        $this->intervalsMap = $this->populateIntervals($intervalsMap);
+        $this->constraint = $this->createInputDataConstraints();
     }
 
     /**
@@ -60,32 +59,29 @@ final class GetStatisticsAction
             return $this->createBadRequestResponse($violations);
         }
 
+        $interval = $parameters['interval'];
+
         $period = new \DatePeriod(
             new \DateTimeImmutable($parameters['startDate']),
-            new \DateInterval($parameters['dateInterval']),
+            new \DateInterval($this->intervalsMap[$interval]),
             new \DateTimeImmutable($parameters['endDate']),
         );
 
-        $violations = $this->validator->validate($period, new Assert\DatePeriod());
-        if (count($violations) > 0) {
-            return $this->createBadRequestResponse($violations);
-        }
-
         try {
-            $result = $this->handle(new GetStatistics($period, $parameters['channelCode']));
-            $status = Response::HTTP_OK;
+            $result = $this->handle(new GetStatistics(
+                $interval,
+                $period,
+                $parameters['channelCode'],
+            ));
+
+            return new JsonResponse(
+                data: $this->serializer->serialize($result, 'json'),
+                status: Response::HTTP_OK,
+                json: true,
+            );
         } catch (HandlerFailedException $exception) {
-            $exception = $exception->getPrevious();
-            $result = ['message' => $exception->getMessage()];
-
-            if ($exception instanceof ChannelNotFoundException) {
-                $status = Response::HTTP_NOT_FOUND;
-            } else {
-                throw $exception;
-            }
+            throw $exception->getPrevious();
         }
-
-        return new JsonResponse(data: $this->serializer->serialize($result, 'json'), status: $status, json: true);
     }
 
     private function createBadRequestResponse(ConstraintViolationListInterface $violations): JsonResponse
@@ -95,5 +91,37 @@ final class GetStatisticsAction
             status: Response::HTTP_BAD_REQUEST,
             json: true,
         );
+    }
+
+    private function createInputDataConstraints(): SymfonyConstraints\Collection
+    {
+        return new SymfonyConstraints\Collection([
+            'channelCode' => new Constraints\Code(),
+            'startDate' => [
+                new SymfonyConstraints\NotBlank(),
+                new SymfonyConstraints\DateTime('Y-m-d\TH:i:s', message: 'sylius.date_time.invalid'),
+            ],
+            'interval' => new SymfonyConstraints\Choice(choices: array_keys($this->intervalsMap), multiple: false),
+            'endDate' => [
+                new SymfonyConstraints\NotBlank(),
+                new SymfonyConstraints\DateTime('Y-m-d\TH:i:s', message: 'sylius.date_time.invalid'),
+                new SymfonyConstraints\GreaterThan(propertyPath: 'startDate'),
+            ],
+        ]);
+    }
+
+    /**
+     * @param array<string, array{interval: string, period_format: string}> $intervalsMap
+     *
+     * @return array<string, string>
+     */
+    private function populateIntervals(array $intervalsMap): array
+    {
+        $intervals = [];
+        foreach ($intervalsMap as $type => $intervalMap) {
+            $intervals[$type] = $intervalMap['interval'];
+        }
+
+        return $intervals;
     }
 }

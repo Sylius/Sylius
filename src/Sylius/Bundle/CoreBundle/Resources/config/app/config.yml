@@ -33,6 +33,19 @@ parameters:
     sylius_core.images_dir: "%sylius_core.public_dir%/media/image"
     locale: en_US
 
+sylius_core:
+    orders_statistics:
+        intervals_map:
+            day:
+                interval: P1D
+                period_format: Y-m-d
+            month:
+                interval: P1M
+                period_format: Y-m
+            year:
+                interval: P1Y
+                period_format: Y
+
 doctrine:
     orm:
         auto_generate_proxy_classes: "%kernel.debug%"
