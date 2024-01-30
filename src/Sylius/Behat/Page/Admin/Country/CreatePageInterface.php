@@ -17,6 +17,8 @@ use Sylius\Behat\Page\Admin\Crud\CreatePageInterface as BaseCreatePageInterface;
 
 interface CreatePageInterface extends BaseCreatePageInterface
 {
+    public function selectCountry(string $countryName): void;
+
     public function addProvince(): void;
 
     public function specifyProvinceName(string $name): void;
@@ -24,6 +26,4 @@ interface CreatePageInterface extends BaseCreatePageInterface
     public function specifyProvinceCode(string $code): void;
 
     public function specifyProvinceAbbreviation(string $abbreviation): void;
-
-    public function selectCountry(string $countryName): void;
 }

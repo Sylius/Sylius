@@ -1,1 +1,1 @@
-{{ form_row(form.enabled, { label_attr: { class: 'checkbox-switch' } }, sylius_test_form_attribute('enabled')) }}
+{{ form_row(form.enabled, sylius_test_form_attribute('enabled')|merge({ label_attr: { class: 'checkbox-switch' } })) }}

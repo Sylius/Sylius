@@ -36,8 +36,8 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-auto">
-                                {{ form_row(provinceForm.vars.button_delete, {label: 'X', attr: {class: 'btn btn-outline-danger'}}) }}
+                            <div class="col-auto" {{ sylius_test_html_attribute('delete-province') }}>
+                                {{ form_row(provinceForm.vars.button_delete, {attr: {class: 'btn btn-outline-danger'}}) }}
                             </div>
                         </div>
                     </div>

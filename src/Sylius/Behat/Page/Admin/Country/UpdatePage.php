@@ -30,6 +30,33 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
         return $codeField->getAttribute('disabled') === 'disabled';
     }
 
+    public function addProvince(): void
+    {
+        $count = count($this->getProvinceItems());
+
+        $this->getElement('add_province')->click();
+
+        $this->getDocument()->waitFor(5, fn () => $count + 1 === count($this->getProvinceItems()));
+    }
+
+    public function specifyProvinceName(string $name): void
+    {
+        $province = $this->getElement('last_province');
+        $province->find('css', '[data-test-province-name]')->setValue($name);
+    }
+
+    public function specifyProvinceCode(string $code): void
+    {
+        $province = $this->getElement('last_province');
+        $province->find('css', '[data-test-province-code]')->setValue($code);
+    }
+
+    public function specifyProvinceAbbreviation(string $abbreviation): void
+    {
+        $province = $this->getElement('last_province');
+        $province->find('css', '[data-test-province-abbreviation]')->setValue($abbreviation);
+    }
+
     public function isThereProvince(string $provinceName): bool
     {
         $provinces = $this->getElement('provinces');
@@ -47,78 +74,36 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     public function removeProvince(string $provinceName): void
     {
         if ($this->isThereProvince($provinceName)) {
-            $provinces = $this->getElement('provinces');
+            $province = $this->getProvinceElement($provinceName);
 
-            $item = $provinces
-                ->find('css', sprintf('div[data-form-collection="item"] input[value="%s"]', $provinceName))
-                ->getParent()
-                ->getParent()
-                ->getParent()
-                ->getParent()
-                ->getParent()
-            ;
-
-            $item->clickLink('Delete');
+            $province->find('css', '[data-test-delete-province]')->click();
+            $this->getDocument()->waitFor(5, fn () => !$this->isThereProvince($provinceName));
         }
-    }
-
-    public function addProvince(string $name, string $code, string $abbreviation = null): void
-    {
-        $this->clickAddProvinceButton();
-
-        $provinceForm = $this->getLastProvinceElement();
-
-        $provinceForm->fillField('Name', $name);
-        $provinceForm->fillField('Code', $code);
-
-        if (null !== $abbreviation) {
-            $provinceForm->fillField('Abbreviation', $abbreviation);
-        }
-    }
-
-    public function clickAddProvinceButton(): void
-    {
-        $this->getDocument()->clickLink('Add province');
-    }
-
-    public function nameProvince(string $name): void
-    {
-        $provinceForm = $this->getLastProvinceElement();
-
-        $provinceForm->fillField('Name', $name);
     }
 
     public function removeProvinceName(string $provinceName): void
     {
         if ($this->isThereProvince($provinceName)) {
-            $provinces = $this->getElement('provinces');
-
-            $item = $provinces->find('css', 'div[data-form-collection="item"] input[value="' . $provinceName . '"]')->getParent();
-            $item->fillField('Name', '');
+            $province = $this->getProvinceElement($provinceName);
+            $province->find('css', '[data-test-province-name]')->setValue('');
         }
     }
 
-    public function specifyProvinceCode(string $code): void
-    {
-        $provinceForm = $this->getLastProvinceElement();
-
-        $provinceForm->fillField('Code', $code);
-    }
 
     public function getFormValidationErrors(): array
     {
-        $errors = $this->getElement('form')->findAll('css', '.sylius-validation-error:not(.pointing)');
+        $errors = $this->getElement('form')->findAll('css', '.alert-danger');
 
         return array_map(fn (NodeElement $element) => $element->getText(), $errors);
     }
 
     public function getValidationMessage(string $element): string
     {
-        $provinceForm = $this->getLastProvinceElement();
+        $province = $this->getElement('last_province');
 
-        $foundElement = $provinceForm->find('css', '.sylius-validation-error');
+        $foundElement = $province->find('css', '.invalid-feedback');
         if (null === $foundElement) {
-            throw new ElementNotFoundException($this->getSession(), 'Tag', 'css', '.sylius-validation-error');
+            throw new ElementNotFoundException($this->getSession(), 'Tag', 'css', '.invalid-feedback');
         }
 
         return $foundElement->getText();
@@ -135,22 +120,22 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
             'code' => '[data-test-code]',
             'enabled' => '[data-test-enabled]',
             'provinces' => '[data-test-provinces]',
-//            'last_province' => '[data-test-provinces] [data-test-province]:last-child',
-//            'add_province' => '[data-test-add-province]'
-//            'code' => '#sylius_country_code',
-//            'enabled' => '#sylius_country_enabled',
-//            'form' => 'form',
-//            'provinces' => '#sylius_country_provinces',
+            'last_province' => '[data-test-provinces] [data-test-province]:last-child',
+            'add_province' => '[data-test-add-province]',
+            'form' => 'form',
         ]);
     }
 
-    private function getLastProvinceElement(): NodeElement
+    private function getProvinceItems(): array
     {
-        $provinces = $this->getElement('provinces');
-        $items = $provinces->findAll('css', 'div[data-form-collection="item"]');
+        $items = $this->getElement('provinces')->findAll('css', '[data-test-province]');
+        Assert::isArray($items);
 
-        Assert::notEmpty($items);
+        return $items;
+    }
 
-        return end($items);
+    private function getProvinceElement(string $provinceName): NodeElement|null
+    {
+        return $this->getDocument()->find('xpath', sprintf('//*[@data-test-province and .//*[contains(@value, \'%s\')]]', $provinceName));
     }
 }
