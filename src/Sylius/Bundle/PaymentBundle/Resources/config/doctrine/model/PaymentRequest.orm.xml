@@ -15,8 +15,8 @@
                   xmlns:gedmo="http://gediminasm.org/schemas/orm/doctrine-extensions-mapping">
 
     <mapped-superclass name="Sylius\Component\Payment\Model\PaymentRequest" table="sylius_payment_request">
-        <id name="hash" column="hash" type="sylius_uuid">
-            <generator strategy="AUTO" />
+        <id name="hash" column="hash" type="uuid">
+            <generator strategy="CUSTOM" />
             <custom-id-generator class="Ramsey\Uuid\Doctrine\UuidGenerator"/>
         </id>
 

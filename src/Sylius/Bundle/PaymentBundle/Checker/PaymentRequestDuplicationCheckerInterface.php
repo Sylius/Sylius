@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\ApiBundle\Payment\Checker;
+namespace Sylius\Bundle\PaymentBundle\Checker;
 
 use Sylius\Component\Payment\Model\PaymentRequestInterface;
 
