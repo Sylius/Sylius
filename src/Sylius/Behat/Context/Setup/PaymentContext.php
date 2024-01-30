@@ -17,6 +17,7 @@ use Behat\Behat\Context\Context;
 use Doctrine\Persistence\ObjectManager;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\ExampleFactoryInterface;
+use Sylius\Bundle\PayumBundle\Model\GatewayConfigInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\OrderInterface;
@@ -151,6 +152,7 @@ final class PaymentContext implements Context
      */
     public function thePaymentMethodRequiresAuthorizationBeforeCapturing(PaymentMethodInterface $paymentMethod)
     {
+        /** @var GatewayConfigInterface $config */
         $config = $paymentMethod->getGatewayConfig();
         $config->setConfig(array_merge($config->getConfig(), ['use_authorize' => true]));
         $paymentMethod->setGatewayConfig($config);

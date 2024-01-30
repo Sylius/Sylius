@@ -13,10 +13,9 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\CommandHandler\Payment;
 
-use Doctrine\Persistence\ObjectManager;
 use Sylius\Bundle\ApiBundle\Command\Payment\AddPaymentRequest;
 use Sylius\Bundle\ApiBundle\Exception\PaymentRequestNotSupportedException;
-use Sylius\Bundle\ApiBundle\Payment\PaymentRequestCommandProviderInterface;
+use Sylius\Bundle\PaymentBundle\Provider\PaymentRequestCommandProviderInterface;
 use Sylius\Component\Core\Model\PaymentInterface;
 use Sylius\Component\Core\Model\PaymentMethodInterface;
 use Sylius\Component\Core\Repository\PaymentMethodRepositoryInterface;
@@ -34,7 +33,6 @@ final class AddPaymentRequestHandler implements MessageHandlerInterface
         private FactoryInterface $paymentRequestFactory,
         private PaymentMethodRepositoryInterface $paymentMethodRepository,
         private PaymentRepositoryInterface $paymentRepository,
-        private ObjectManager $paymentRequestManager,
         private PaymentRequestCommandProviderInterface $paymentRequestCommandProvider,
         private MessageBusInterface $commandBus,
     ) {
@@ -47,7 +45,7 @@ final class AddPaymentRequestHandler implements MessageHandlerInterface
             throw new PaymentRequestNotSupportedException();
         }
 
-        $command = $this->paymentRequestCommandProvider->handle($paymentRequest);
+        $command = $this->paymentRequestCommandProvider->provide($paymentRequest);
 
         $this->commandBus->dispatch($command);
 
@@ -57,20 +55,28 @@ final class AddPaymentRequestHandler implements MessageHandlerInterface
     private function createPaymentRequest(AddPaymentRequest $addPaymentRequest): PaymentRequestInterface
     {
         /** @var PaymentMethodInterface|null $paymentMethod */
-        $paymentMethod = $this->paymentMethodRepository->findOneBy(['code' => $addPaymentRequest->paymentMethodCode]);
-        Assert::notNull($paymentMethod);
+        $paymentMethod = $this->paymentMethodRepository->findOneBy([
+            'code' => $addPaymentRequest->getPaymentMethodCode()
+        ]);
+        Assert::notNull($paymentMethod, sprintf(
+            'Payment method code "%s", can not be found!',
+            $addPaymentRequest->getPaymentMethodCode()
+        ));
         /** @var PaymentInterface|null $payment */
-        $payment = $this->paymentRepository->find($addPaymentRequest->paymentId);
-        Assert::notNull($payment);
+        $payment = $this->paymentRepository->find($addPaymentRequest->getPaymentId());
+        Assert::notNull(
+            $payment,
+            sprintf('Payment ID "%s" can not be found!', $addPaymentRequest->getPaymentId())
+        );
 
         /** @var PaymentRequestInterface $paymentRequest */
         $paymentRequest = $this->paymentRequestFactory->createNew();
         $paymentRequest->setPayment($payment);
         $paymentRequest->setMethod($paymentMethod);
-        $paymentRequest->setType($addPaymentRequest->type);
-        $paymentRequest->setRequestPayload($addPaymentRequest->requestPayload);
+        $paymentRequest->setType($addPaymentRequest->getType());
+        $paymentRequest->setRequestPayload($addPaymentRequest->getRequestPayload());
 
-        $this->paymentRequestManager->persist($paymentRequest);
+        $this->paymentRepository->add($paymentRequest);
         return $paymentRequest;
     }
 }
