@@ -18,12 +18,17 @@
     <services>
         <defaults public="true" />
 
-        <service id="sylius.api.payment_request.command_provider.payum.offline.capture" class="Sylius\Bundle\ApiBundle\Payment\Payum\PayumCapturePaymentRequestCommandProvider">
-            <tag name="sylius.api.payment_request.command_provider" factory="offline" type="capture" priority="-200" />
+        <service id="sylius.payment_request.command_provider.payum.offline" class="Sylius\Bundle\PaymentBundle\Provider\PaymentRequestTypeCommandProvider">
+            <argument type="tagged_locator" tag="sylius.payment_request.command_provider.payum.offline" index-by="type" />
+            <tag name="sylius.payment_request.command_provider" factory="offline" />
         </service>
 
-        <service id="sylius.api.payment_request.command_provider.payum.offline.status" class="Sylius\Bundle\ApiBundle\Payment\Payum\PayumStatusPaymentRequestCommandProvider">
-            <tag name="sylius.api.payment_request.command_provider" factory="offline" type="status" priority="-200" />
+        <service id="sylius.payment_request.command_provider.payum.offline.capture" class="Sylius\Bundle\PayumBundle\PaymentRequest\Provider\PayumCapturePaymentRequestCommandProvider">
+            <tag name="sylius.payment_request.command_provider.payum.offline" type="capture" />
+        </service>
+
+        <service id="sylius.payment_request.command_provider.payum.offline.status" class="Sylius\Bundle\PayumBundle\PaymentRequest\Provider\PayumStatusPaymentRequestCommandProvider">
+            <tag name="sylius.payment_request.command_provider.payum.offline" type="status" />
         </service>
 
     </services>
