@@ -7,7 +7,7 @@ parameters:
 doctrine:
     dbal:
         types:
-            sylius_uuid: "%sylius.uuid_type%"
+            uuid: "%sylius.uuid_type%"
 
 jms_serializer:
     metadata:

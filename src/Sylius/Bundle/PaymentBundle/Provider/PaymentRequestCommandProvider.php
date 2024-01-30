@@ -11,9 +11,9 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\ApiBundle\Payment;
+namespace Sylius\Bundle\PaymentBundle\Provider;
 
-use Sylius\Bundle\ApiBundle\Payment\Checker\PaymentRequestDuplicationCheckerInterface;
+use Sylius\Bundle\PaymentBundle\Checker\PaymentRequestDuplicationCheckerInterface;
 use Sylius\Component\Core\Model\PaymentMethodInterface;
 use Sylius\Component\Payment\Model\PaymentRequestInterface;
 use Symfony\Contracts\Service\ServiceProviderInterface;
@@ -23,7 +23,7 @@ final class PaymentRequestCommandProvider implements PaymentRequestCommandProvid
 {
     public function __construct(
         private PaymentRequestDuplicationCheckerInterface $paymentRequestDuplicationChecker,
-        private ServiceProviderInterface $paymentRequestCommandProviderLocator,
+        private ServiceProviderInterface $locator,
     ) {
     }
 
@@ -38,9 +38,9 @@ final class PaymentRequestCommandProvider implements PaymentRequestCommandProvid
         return $this->getCommandProvider($paymentRequest)->supports($paymentRequest);
     }
 
-    public function handle(PaymentRequestInterface $paymentRequest): object
+    public function provide(PaymentRequestInterface $paymentRequest): object
     {
-        return $this->getCommandProvider($paymentRequest)->handle($paymentRequest);
+        return $this->getCommandProvider($paymentRequest)->provide($paymentRequest);
     }
 
     private function getCommandProvider(PaymentRequestInterface $paymentRequest): PaymentRequestCommandProviderInterface
@@ -54,11 +54,8 @@ final class PaymentRequestCommandProvider implements PaymentRequestCommandProvid
         /** @var PaymentRequestCommandProviderInterface $service */
         $factoryName = $gatewayConfig->getConfig()['factory'] ?? $gatewayConfig->getFactoryName();
 
-        /** @todo consider founding better nested service provider */
-        $id = sprintf('%s::%s', $factoryName, $paymentRequest->getType());
-
         /** @var PaymentRequestCommandProviderInterface $provider */
-        $provider = $this->paymentRequestCommandProviderLocator->get($id);
+        $provider = $this->locator->get($factoryName);
 
         return $provider;
     }

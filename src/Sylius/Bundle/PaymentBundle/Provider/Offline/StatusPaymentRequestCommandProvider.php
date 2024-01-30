@@ -11,10 +11,10 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\ApiBundle\Payment\Offline;
+namespace Sylius\Bundle\PaymentBundle\Provider\Offline;
 
-use Sylius\Bundle\ApiBundle\Command\Payment\Offline\StatusPaymentRequest;
-use Sylius\Bundle\ApiBundle\Payment\PaymentRequestCommandProviderInterface;
+use Sylius\Bundle\PaymentBundle\Command\Offline\StatusPaymentRequest;
+use Sylius\Bundle\PaymentBundle\Provider\PaymentRequestCommandProviderInterface;
 use Sylius\Component\Payment\Model\PaymentRequestInterface;
 
 final class StatusPaymentRequestCommandProvider implements PaymentRequestCommandProviderInterface
@@ -24,7 +24,7 @@ final class StatusPaymentRequestCommandProvider implements PaymentRequestCommand
         return $paymentRequest->getType() === PaymentRequestInterface::DATA_TYPE_CAPTURE;
     }
 
-    public function handle(PaymentRequestInterface $paymentRequest): object
+    public function provide(PaymentRequestInterface $paymentRequest): object
     {
         return new StatusPaymentRequest($paymentRequest->getHash());
     }
