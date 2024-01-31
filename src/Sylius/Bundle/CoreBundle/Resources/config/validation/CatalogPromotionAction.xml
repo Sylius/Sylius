@@ -12,39 +12,30 @@
 -->
 
 <constraint-mapping xmlns="http://symfony.com/schema/dic/constraint-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/constraint-mapping http://symfony.com/schema/dic/services/constraint-mapping-1.0.xsd">
-    <class name="Sylius\Component\Core\Model\ShippingMethod">
-        <property name="zone">
-            <constraint name="NotBlank">
-                <option name="message">sylius.shipping_method.zone.not_blank</option>
-                <option name="groups">sylius</option>
-            </constraint>
-        </property>
+    <class name="Sylius\Component\Promotion\Model\CatalogPromotionAction">
         <property name="configuration">
             <constraint name="Sylius\Bundle\CoreBundle\Validator\Constraints\ChannelCodeCollection">
-                <option name="groups">sylius_shipping_method_calculator_rate</option>
-                <option name="validateAgainstAllChannels">true</option>
-                <option name="channelAwarePropertyPath">shippingMethod</option>
+                <option name="channelAwarePropertyPath">catalogPromotion</option>
+                <option name="groups">sylius_catalog_promotion_action_fixed_discount</option>
                 <option name="constraints">
                     <constraint name="Collection">
-                        <option name="groups">sylius_shipping_method_calculator_rate</option>
+                        <option name="groups">sylius_catalog_promotion_action_fixed_discount</option>
                         <option name="fields">
                             <value key="amount">
-                                <constraint name="Range">
-                                    <option name="min">0</option>
-                                    <option name="minMessage">sylius.shipping_method.calculator.min</option>
-                                    <option name="groups">sylius_shipping_method_calculator_rate</option>
-                                </constraint>
                                 <constraint name="NotBlank">
-                                    <option name="groups">sylius_shipping_method_calculator_rate</option>
+                                    <option name="message">sylius.catalog_promotion_action.fixed_discount.not_valid</option>
+                                    <option name="groups">sylius_catalog_promotion_action_fixed_discount</option>
                                 </constraint>
                                 <constraint name="Type">
-                                    <option name="groups">sylius_shipping_method_calculator_rate</option>
                                     <option name="type">numeric</option>
+                                    <option name="message">sylius.catalog_promotion_action.fixed_discount.not_valid</option>
+                                    <option name="groups">sylius_catalog_promotion_action_fixed_discount</option>
                                 </constraint>
                             </value>
                         </option>
                     </constraint>
                 </option>
+                <option name="allowExtraFields">true</option>
             </constraint>
         </property>
     </class>

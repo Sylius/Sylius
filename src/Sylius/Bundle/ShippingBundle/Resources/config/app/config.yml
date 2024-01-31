@@ -17,17 +17,3 @@ sylius_shipping:
             total_weight_less_than_or_equal:
                 - 'sylius'
                 - 'sylius_shipping_method_rule_total_weight'
-            order_total_greater_than_or_equal:
-                - 'sylius'
-                - 'sylius_shipping_method_rule_order_total'
-            order_total_less_than_or_equal:
-                - 'sylius'
-                - 'sylius_shipping_method_rule_order_total'
-    shipping_method_calculator:
-        validation_groups:
-            flat_rate:
-                - 'sylius'
-                - 'sylius_shipping_method_calculator_rate'
-            per_unit_rate:
-                - 'sylius'
-                - 'sylius_shipping_method_calculator_rate'

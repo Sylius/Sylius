@@ -24,9 +24,13 @@ final class ChannelCodeCollection extends Constraint
 
     public bool $allowMissingFields = false;
 
+    public ?string $channelAwarePropertyPath = null;
+
     public ?string $extraFieldsMessage = null;
 
     public ?string $missingFieldsMessage = null;
+
+    public bool $validateAgainstAllChannels = false;
 
     public function validatedBy(): string
     {
