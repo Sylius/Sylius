@@ -18,7 +18,7 @@ sylius_grid:
                     path: checkoutCompletedAt
                     sortable: checkoutCompletedAt
                     options:
-                        format: d-m-Y H:i:s
+                        format: d-m-Y H:i
                 number:
                     type: twig
                     label: sylius.ui.number
