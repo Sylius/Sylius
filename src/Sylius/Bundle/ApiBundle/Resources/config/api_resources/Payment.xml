@@ -30,7 +30,7 @@
                     <attribute>sylius.api.search_payment_filter</attribute>
                 </attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:payment:read</attribute>
+                    <attribute name="groups">admin:payment:index</attribute>
                 </attribute>
             </collectionOperation>
         </collectionOperations>
@@ -40,7 +40,7 @@
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/admin/payments/{id}</attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:payment:read</attribute>
+                    <attribute name="groups">admin:payment:show</attribute>
                 </attribute>
             </itemOperation>
 
@@ -48,7 +48,7 @@
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/shop/payments/{id}</attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">shop:payment:read</attribute>
+                    <attribute name="groups">shop:payment:show</attribute>
                 </attribute>
             </itemOperation>
 

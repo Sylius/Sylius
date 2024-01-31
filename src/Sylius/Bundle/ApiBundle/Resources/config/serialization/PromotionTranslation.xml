@@ -17,11 +17,13 @@
 >
     <class name="Sylius\Component\Promotion\Model\PromotionTranslation">
         <attribute name="id">
-            <group>admin:promotion:read</group>
+            <group>admin:promotion:index</group>
+            <group>admin:promotion:show</group>
         </attribute>
 
         <attribute name="label">
-            <group>admin:promotion:read</group>
+            <group>admin:promotion:index</group>
+            <group>admin:promotion:show</group>
             <group>admin:promotion:create</group>
             <group>admin:promotion:update</group>
         </attribute>

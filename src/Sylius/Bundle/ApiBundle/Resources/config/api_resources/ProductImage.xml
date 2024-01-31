@@ -15,7 +15,7 @@
                     <attribute>sylius.api.product_image_product_variants_filter</attribute>
                 </attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:product_image:read</attribute>
+                    <attribute name="groups">admin:product_image:index</attribute>
                 </attribute>
             </collectionOperation>
 
@@ -68,7 +68,7 @@
                     </attribute>
                 </attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:product_image:read</attribute>
+                    <attribute name="groups">admin:product_image:show</attribute>
                 </attribute>
             </collectionOperation>
         </collectionOperations>
@@ -78,7 +78,7 @@
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/admin/product-images/{id}</attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:product_image:read</attribute>
+                    <attribute name="groups">admin:product_image:show</attribute>
                 </attribute>
             </itemOperation>
 
@@ -86,7 +86,7 @@
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/shop/product-images/{id}</attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">shop:product_image:read</attribute>
+                    <attribute name="groups">shop:product_image:show</attribute>
                 </attribute>
                 <attribute name="openapi_context">
                     <attribute name="parameters">
@@ -109,7 +109,7 @@
                     <attribute name="groups">admin:product_image:update</attribute>
                 </attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:product_image:read</attribute>
+                    <attribute name="groups">admin:product_image:show</attribute>
                 </attribute>
             </itemOperation>
 
@@ -122,7 +122,7 @@
         <subresourceOperations>
             <subresourceOperation name="api_products_images_get_subresource">
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:product_image:read</attribute>
+                    <attribute name="groups">admin:product_image:show</attribute>
                 </attribute>
             </subresourceOperation>
         </subresourceOperations>

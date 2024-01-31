@@ -27,7 +27,7 @@
                 </attribute>
                 <attribute name="normalization_context">
                     <attribute name="groups">
-                        <attribute>admin:product_association:read</attribute>
+                        <attribute>admin:product_association:index</attribute>
                     </attribute>
                 </attribute>
             </collectionOperation>
@@ -42,7 +42,7 @@
                 </attribute>
                 <attribute name="normalization_context">
                     <attribute name="groups">
-                        <attribute>admin:product_association:read</attribute>
+                        <attribute>admin:product_association:show</attribute>
                     </attribute>
                 </attribute>
             </collectionOperation>
@@ -54,7 +54,7 @@
                 <attribute name="path">/admin/product-associations/{id}</attribute>
                 <attribute name="normalization_context">
                     <attribute name="groups">
-                        <attribute>admin:product_association:read</attribute>
+                        <attribute>admin:product_association:show</attribute>
                     </attribute>
                 </attribute>
             </itemOperation>
@@ -69,7 +69,7 @@
                 </attribute>
                 <attribute name="normalization_context">
                     <attribute name="groups">
-                        <attribute>admin:product_association:read</attribute>
+                        <attribute>admin:product_association:show</attribute>
                     </attribute>
                 </attribute>
             </itemOperation>
@@ -84,7 +84,7 @@
                 <attribute name="path">/shop/product-associations/{id}</attribute>
                 <attribute name="normalization_context">
                     <attribute name="groups">
-                        <attribute>shop:product_association:read</attribute>
+                        <attribute>shop:product_association:show</attribute>
                     </attribute>
                 </attribute>
             </itemOperation>

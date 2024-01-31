@@ -17,14 +17,17 @@
 >
     <class name="Sylius\Component\Customer\Model\CustomerGroup">
         <attribute name="id">
-            <group>admin:customer_group:read</group>
+            <group>admin:customer_group:index</group>
+            <group>admin:customer_group:show</group>
         </attribute>
         <attribute name="code">
-            <group>admin:customer_group:read</group>
+            <group>admin:customer_group:index</group>
+            <group>admin:customer_group:show</group>
             <group>admin:customer_group:create</group>
         </attribute>
         <attribute name="name">
-            <group>admin:customer_group:read</group>
+            <group>admin:customer_group:index</group>
+            <group>admin:customer_group:show</group>
             <group>admin:customer_group:create</group>
             <group>admin:customer_group:update</group>
         </attribute>

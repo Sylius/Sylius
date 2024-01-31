@@ -17,16 +17,21 @@
 >
     <class name="Sylius\Component\Locale\Model\Locale">
         <attribute name="id">
-            <group>admin:locale:read</group>
+            <group>admin:locale:index</group>
+            <group>admin:locale:show</group>
         </attribute>
         <attribute name="code">
-            <group>admin:locale:read</group>
+            <group>admin:locale:index</group>
+            <group>admin:locale:show</group>
             <group>admin:locale:create</group>
-            <group>shop:locale:read</group>
+            <group>shop:locale:index</group>
+            <group>shop:locale:show</group>
         </attribute>
         <attribute name="name">
-            <group>admin:locale:read</group>
-            <group>shop:locale:read</group>
+            <group>admin:locale:index</group>
+            <group>admin:locale:show</group>
+            <group>shop:locale:index</group>
+            <group>shop:locale:show</group>
         </attribute>
     </class>
 </serializer>

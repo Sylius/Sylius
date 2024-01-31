@@ -17,15 +17,18 @@
 >
     <class name="Sylius\Component\Core\Model\AdminUser">
         <attribute name="id">
-            <group>admin:admin_user:read</group>
+            <group>admin:admin_user:index</group>
+            <group>admin:admin_user:show</group>
         </attribute>
         <attribute name="email">
-            <group>admin:admin_user:read</group>
+            <group>admin:admin_user:index</group>
+            <group>admin:admin_user:show</group>
             <group>admin:admin_user:create</group>
             <group>admin:admin_user:update</group>
         </attribute>
         <attribute name="username">
-            <group>admin:admin_user:read</group>
+            <group>admin:admin_user:index</group>
+            <group>admin:admin_user:show</group>
             <group>admin:admin_user:create</group>
             <group>admin:admin_user:update</group>
         </attribute>
@@ -34,39 +37,48 @@
             <group>admin:admin_user:update</group>
         </attribute>
         <attribute name="enabled">
-            <group>admin:admin_user:read</group>
+            <group>admin:admin_user:index</group>
+            <group>admin:admin_user:show</group>
             <group>admin:admin_user:create</group>
             <group>admin:admin_user:update</group>
         </attribute>
         <attribute name="firstName">
-            <group>admin:admin_user:read</group>
+            <group>admin:admin_user:index</group>
+            <group>admin:admin_user:show</group>
             <group>admin:admin_user:create</group>
             <group>admin:admin_user:update</group>
         </attribute>
         <attribute name="lastName">
-            <group>admin:admin_user:read</group>
+            <group>admin:admin_user:index</group>
+            <group>admin:admin_user:show</group>
             <group>admin:admin_user:create</group>
             <group>admin:admin_user:update</group>
         </attribute>
         <attribute name="localeCode">
-            <group>admin:admin_user:read</group>
+            <group>admin:admin_user:index</group>
+            <group>admin:admin_user:show</group>
             <group>admin:admin_user:create</group>
             <group>admin:admin_user:update</group>
         </attribute>
         <attribute name="avatar">
-            <group>admin:admin_user:read</group>
+            <group>admin:admin_user:index</group>
+            <group>admin:admin_user:show</group>
         </attribute>
         <attribute name="createdAt">
-            <group>admin:admin_user:read</group>
+            <group>admin:admin_user:index</group>
+            <group>admin:admin_user:show</group>
         </attribute>
         <attribute name="updatedAt">
-            <group>admin:admin_user:read</group>
+            <group>admin:admin_user:index</group>
+            <group>admin:admin_user:show</group>
         </attribute>
         <attribute name="verifiedAt">
-            <group>admin:admin_user:read</group>
+            <group>admin:admin_user:index</group>
+            <group>admin:admin_user:show</group>
         </attribute>
         <attribute name="lastLogin">
-            <group>admin:admin_user:read</group>
+            <group>admin:admin_user:index</group>
+            <group>admin:admin_user:show</group>
         </attribute>
     </class>
 </serializer>

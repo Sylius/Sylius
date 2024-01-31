@@ -36,7 +36,7 @@
                     <attribute>sylius.api.order_filter.priority</attribute>
                 </attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:catalog_promotion:read</attribute>
+                    <attribute name="groups">admin:catalog_promotion:index</attribute>
                 </attribute>
             </collectionOperation>
 
@@ -47,7 +47,7 @@
                     <attribute name="groups">admin:catalog_promotion:create</attribute>
                 </attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:catalog_promotion:read</attribute>
+                    <attribute name="groups">admin:catalog_promotion:show</attribute>
                 </attribute>
                 <attribute name="openapi_context">
                     <attribute name="description">
@@ -84,7 +84,7 @@ Example configuration for `percentage_discount` action type:
                 <attribute name="path">/admin/catalog-promotions/{code}</attribute>
                 <attribute name="method">GET</attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:catalog_promotion:read</attribute>
+                    <attribute name="groups">admin:catalog_promotion:show</attribute>
                 </attribute>
             </itemOperation>
 
@@ -92,7 +92,7 @@ Example configuration for `percentage_discount` action type:
                 <attribute name="path">/shop/catalog-promotions/{code}</attribute>
                 <attribute name="method">GET</attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">shop:catalog_promotion:read</attribute>
+                    <attribute name="groups">shop:catalog_promotion:show</attribute>
                 </attribute>
             </itemOperation>
 
@@ -103,7 +103,7 @@ Example configuration for `percentage_discount` action type:
                     <attribute name="groups">admin:catalog_promotion:update</attribute>
                 </attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:catalog_promotion:read</attribute>
+                    <attribute name="groups">admin:catalog_promotion:show</attribute>
                 </attribute>
                 <attribute name="openapi_context">
                     <attribute name="description">

@@ -27,7 +27,7 @@
                     <attribute>sylius.api.product_review_status_filter</attribute>
                 </attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:product_review:read</attribute>
+                    <attribute name="groups">admin:product_review:index</attribute>
                 </attribute>
             </collectionOperation>
 
@@ -40,7 +40,7 @@
                     <attribute name="groups">shop:product_review:create</attribute>
                 </attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">shop:product_review:read</attribute>
+                    <attribute name="groups">shop:product_review:show</attribute>
                 </attribute>
             </collectionOperation>
 
@@ -52,7 +52,7 @@
                     <attribute>sylius.api.product_review_date_filter</attribute>
                 </attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">shop:product_review:read</attribute>
+                    <attribute name="groups">shop:product_review:index</attribute>
                 </attribute>
             </collectionOperation>
         </collectionOperations>
@@ -62,7 +62,7 @@
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/admin/product-reviews/{id}</attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:product_review:read</attribute>
+                    <attribute name="groups">admin:product_review:show</attribute>
                 </attribute>
             </itemOperation>
 
@@ -70,7 +70,7 @@
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/shop/product-reviews/{id}</attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">shop:product_review:read</attribute>
+                    <attribute name="groups">shop:product_review:show</attribute>
                 </attribute>
             </itemOperation>
 
@@ -89,7 +89,7 @@
                     <attribute name="groups">admin:product_review:update</attribute>
                 </attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:product_review:read</attribute>
+                    <attribute name="groups">admin:product_review:show</attribute>
                 </attribute>
             </itemOperation>
 
@@ -102,7 +102,7 @@
                     <attribute name="summary">Accepts Product Review</attribute>
                 </attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:product_review:read</attribute>
+                    <attribute name="groups">admin:product_review:show</attribute>
                 </attribute>
             </itemOperation>
 
@@ -115,7 +115,7 @@
                     <attribute name="summary">Rejects Product Review</attribute>
                 </attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:product_review:read</attribute>
+                    <attribute name="groups">admin:product_review:show</attribute>
                 </attribute>
             </itemOperation>
         </itemOperations>

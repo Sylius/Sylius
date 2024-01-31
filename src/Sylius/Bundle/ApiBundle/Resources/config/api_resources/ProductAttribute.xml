@@ -30,7 +30,7 @@
                     <attribute>sylius.api.order_filter.position</attribute>
                 </attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:product_attribute:read</attribute>
+                    <attribute name="groups">admin:product_attribute:index</attribute>
                 </attribute>
             </collectionOperation>
 
@@ -41,7 +41,7 @@
                     <attribute name="groups">admin:product_attribute:create</attribute>
                 </attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:product_attribute:read</attribute>
+                    <attribute name="groups">admin:product_attribute:show</attribute>
                 </attribute>
                 <attribute name="openapi_context">
                     <attribute name="description">
@@ -111,7 +111,7 @@ Example configuration for a `select` type attribute:
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/admin/product-attributes/{code}</attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:product_attribute:read</attribute>
+                    <attribute name="groups">admin:product_attribute:show</attribute>
                 </attribute>
             </itemOperation>
 
@@ -127,7 +127,7 @@ Example configuration for a `select` type attribute:
                     <attribute name="groups">admin:product_attribute:update</attribute>
                 </attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:product_attribute:read</attribute>
+                    <attribute name="groups">admin:product_attribute:show</attribute>
                 </attribute>
                 <attribute name="openapi_context">
                     <attribute name="description">
@@ -195,7 +195,7 @@ Example configuration for a `select` type attribute:
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/shop/product-attributes/{code}</attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">shop:product_attribute:read</attribute>
+                    <attribute name="groups">shop:product_attribute:show</attribute>
                 </attribute>
             </itemOperation>
         </itemOperations>

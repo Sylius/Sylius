@@ -17,55 +17,67 @@
 >
     <class name="Sylius\Component\Taxation\Model\TaxRate">
         <attribute name="id">
-            <group>admin:tax_rate:read</group>
+            <group>admin:tax_rate:index</group>
+            <group>admin:tax_rate:show</group>
         </attribute>
         <attribute name="createdAt">
-            <group>admin:tax_rate:read</group>
+            <group>admin:tax_rate:index</group>
+            <group>admin:tax_rate:show</group>
         </attribute>
         <attribute name="updatedAt">
-            <group>admin:tax_rate:read</group>
+            <group>admin:tax_rate:index</group>
+            <group>admin:tax_rate:show</group>
         </attribute>
         <attribute name="code">
-            <group>admin:tax_rate:read</group>
+            <group>admin:tax_rate:index</group>
+            <group>admin:tax_rate:show</group>
             <group>admin:tax_rate:create</group>
         </attribute>
         <attribute name="zone">
-            <group>admin:tax_rate:read</group>
+            <group>admin:tax_rate:index</group>
+            <group>admin:tax_rate:show</group>
             <group>admin:tax_rate:create</group>
             <group>admin:tax_rate:update</group>
         </attribute>
         <attribute name="name">
-            <group>admin:tax_rate:read</group>
+            <group>admin:tax_rate:index</group>
+            <group>admin:tax_rate:show</group>
             <group>admin:tax_rate:create</group>
             <group>admin:tax_rate:update</group>
         </attribute>
         <attribute name="category">
-            <group>admin:tax_rate:read</group>
+            <group>admin:tax_rate:index</group>
+            <group>admin:tax_rate:show</group>
             <group>admin:tax_rate:create</group>
             <group>admin:tax_rate:update</group>
         </attribute>
         <attribute name="calculator">
-            <group>admin:tax_rate:read</group>
+            <group>admin:tax_rate:index</group>
+            <group>admin:tax_rate:show</group>
             <group>admin:tax_rate:create</group>
             <group>admin:tax_rate:update</group>
         </attribute>
         <attribute name="amount">
-            <group>admin:tax_rate:read</group>
+            <group>admin:tax_rate:index</group>
+            <group>admin:tax_rate:show</group>
             <group>admin:tax_rate:create</group>
             <group>admin:tax_rate:update</group>
         </attribute>
         <attribute name="includedInPrice">
-            <group>admin:tax_rate:read</group>
+            <group>admin:tax_rate:index</group>
+            <group>admin:tax_rate:show</group>
             <group>admin:tax_rate:create</group>
             <group>admin:tax_rate:update</group>
         </attribute>
         <attribute name="startDate">
-            <group>admin:tax_rate:read</group>
+            <group>admin:tax_rate:index</group>
+            <group>admin:tax_rate:show</group>
             <group>admin:tax_rate:create</group>
             <group>admin:tax_rate:update</group>
         </attribute>
         <attribute name="endDate">
-            <group>admin:tax_rate:read</group>
+            <group>admin:tax_rate:index</group>
+            <group>admin:tax_rate:show</group>
             <group>admin:tax_rate:create</group>
             <group>admin:tax_rate:update</group>
         </attribute>

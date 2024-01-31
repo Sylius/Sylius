@@ -15,8 +15,8 @@
                 <attribute name="path">/admin/taxon-translations/{id}</attribute>
                 <attribute name="normalization_context">
                     <attribute name="groups">
-                        <attribute>admin:taxon:read</attribute>
-                        <attribute>admin:taxon_translation:read</attribute>
+                        <attribute>admin:taxon:show</attribute>
+                        <attribute>admin:taxon_translation:show</attribute>
                     </attribute>
                 </attribute>
             </itemOperation>
@@ -26,7 +26,7 @@
                 <attribute name="path">/shop/taxon-translations/{id}</attribute>
                 <attribute name="normalization_context">
                     <attribute name="groups">
-                        <attribute>shop:taxon_translation:read</attribute>
+                        <attribute>shop:taxon_translation:show</attribute>
                     </attribute>
                 </attribute>
             </itemOperation>

@@ -24,7 +24,7 @@
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/admin/locales</attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:locale:read</attribute>
+                    <attribute name="groups">admin:locale:index</attribute>
                 </attribute>
             </collectionOperation>
 
@@ -35,7 +35,7 @@
                     <attribute name="groups">admin:locale:create</attribute>
                 </attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:locale:read</attribute>
+                    <attribute name="groups">admin:locale:show</attribute>
                 </attribute>
             </collectionOperation>
 
@@ -43,7 +43,7 @@
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/shop/locales</attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">shop:locale:read</attribute>
+                    <attribute name="groups">shop:locale:index</attribute>
                 </attribute>
             </collectionOperation>
         </collectionOperations>
@@ -53,7 +53,7 @@
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/admin/locales/{code}</attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:locale:read</attribute>
+                    <attribute name="groups">admin:locale:show</attribute>
                 </attribute>
             </itemOperation>
 
@@ -66,7 +66,7 @@
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/shop/locales/{code}</attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">shop:locale:read</attribute>
+                    <attribute name="groups">shop:locale:show</attribute>
                 </attribute>
             </itemOperation>
         </itemOperations>

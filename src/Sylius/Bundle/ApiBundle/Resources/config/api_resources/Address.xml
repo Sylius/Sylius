@@ -19,7 +19,7 @@
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/shop/addresses</attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">shop:address:read</attribute>
+                    <attribute name="groups">shop:address:index</attribute>
                 </attribute>
             </collectionOperation>
 
@@ -30,7 +30,7 @@
                     <attribute name="groups">shop:address:create</attribute>
                 </attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">shop:address:read</attribute>
+                    <attribute name="groups">shop:address:show</attribute>
                 </attribute>
             </collectionOperation>
         </collectionOperations>
@@ -41,7 +41,7 @@
                 <attribute name="path">/admin/addresses/{id}</attribute>
                 <attribute name="normalization_context">
                     <attribute name="groups">
-                        <attribute>admin:address:read</attribute>
+                        <attribute>admin:address:show</attribute>
                     </attribute>
                 </attribute>
             </itemOperation>
@@ -56,7 +56,7 @@
                 </attribute>
                 <attribute name="normalization_context">
                     <attribute name="groups">
-                        <attribute>admin:address:read</attribute>
+                        <attribute>admin:address:show</attribute>
                     </attribute>
                 </attribute>
             </itemOperation>
@@ -66,7 +66,7 @@
                 <attribute name="path">/admin/addresses/{id}/log-entries</attribute>
                 <attribute name="controller">Sylius\Bundle\ApiBundle\Controller\GetAddressLogEntryCollectionAction</attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:address:log_entry:read</attribute>
+                    <attribute name="groups">admin:address:log_entry:show</attribute>
                 </attribute>
                 <attribute name="openapi_context">
                     <attribute name="summary">Retrieves the collection of AddressLogEntry resources.</attribute>
@@ -78,7 +78,7 @@
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/shop/addresses/{id}</attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">shop:address:read</attribute>
+                    <attribute name="groups">shop:address:show</attribute>
                 </attribute>
             </itemOperation>
 
@@ -94,7 +94,7 @@
                     <attribute name="groups">shop:address:update</attribute>
                 </attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">shop:address:read</attribute>
+                    <attribute name="groups">shop:address:show</attribute>
                 </attribute>
             </itemOperation>
         </itemOperations>

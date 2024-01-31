@@ -17,26 +17,30 @@
 
     <class name="Sylius\Component\Core\Model\ProductTaxon">
         <attribute name="id">
-            <group>admin:product_taxon:read</group>
-            <group>shop:product_taxon:read</group>
+            <group>admin:product_taxon:index</group>
+            <group>admin:product_taxon:show</group>
+            <group>shop:product_taxon:show</group>
         </attribute>
         <attribute name="taxon">
-            <group>admin:product_taxon:read</group>
+            <group>admin:product_taxon:index</group>
+            <group>admin:product_taxon:show</group>
             <group>admin:product_taxon:update</group>
             <group>admin:product_taxon:create</group>
-            <group>shop:product_taxon:read</group>
+            <group>shop:product_taxon:show</group>
         </attribute>
         <attribute name="product">
-            <group>admin:product_taxon:read</group>
+            <group>admin:product_taxon:index</group>
+            <group>admin:product_taxon:show</group>
             <group>admin:product_taxon:update</group>
             <group>admin:product_taxon:create</group>
-            <group>shop:product_taxon:read</group>
+            <group>shop:product_taxon:show</group>
         </attribute>
         <attribute name="position">
-            <group>admin:product_taxon:read</group>
+            <group>admin:product_taxon:index</group>
+            <group>admin:product_taxon:show</group>
             <group>admin:product_taxon:update</group>
             <group>admin:product_taxon:create</group>
-            <group>shop:product_taxon:read</group>
+            <group>shop:product_taxon:show</group>
         </attribute>
     </class>
 </serializer>

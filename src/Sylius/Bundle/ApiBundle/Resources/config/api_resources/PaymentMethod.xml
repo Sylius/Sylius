@@ -33,7 +33,7 @@
                 </attribute>
                 <attribute name="normalization_context">
                     <attribute name="groups">
-                        <attribute>shop:payment_method:read</attribute>
+                        <attribute>shop:payment_method:index</attribute>
                     </attribute>
                 </attribute>
             </collectionOperation>
@@ -47,7 +47,7 @@
                 </attribute>
                 <attribute name="normalization_context">
                     <attribute name="groups">
-                        <attribute>admin:payment_method:read</attribute>
+                        <attribute>admin:payment_method:index</attribute>
                     </attribute>
                 </attribute>
             </collectionOperation>
@@ -59,7 +59,7 @@
                     <attribute name="groups">admin:payment_method:create</attribute>
                 </attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:payment_method:read</attribute>
+                    <attribute name="groups">admin:payment_method:show</attribute>
                 </attribute>
             </collectionOperation>
         </collectionOperations>
@@ -69,7 +69,7 @@
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/admin/payment-methods/{code}</attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:payment_method:read</attribute>
+                    <attribute name="groups">admin:payment_method:show</attribute>
                 </attribute>
             </itemOperation>
 
@@ -80,7 +80,7 @@
                     <attribute name="groups">admin:payment_method:update</attribute>
                 </attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:payment_method:read</attribute>
+                    <attribute name="groups">admin:payment_method:show</attribute>
                 </attribute>
             </itemOperation>
 
@@ -93,7 +93,7 @@
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/shop/payment-methods/{code}</attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">shop:payment_method:read</attribute>
+                    <attribute name="groups">shop:payment_method:show</attribute>
                 </attribute>
             </itemOperation>
         </itemOperations>
@@ -103,7 +103,7 @@
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/admin/payment-methods/{code}/gateway-config</attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:gateway_config:read</attribute>
+                    <attribute name="groups">admin:gateway_config:show</attribute>
                 </attribute>
             </subresourceOperation>
         </subresourceOperations>

@@ -25,7 +25,7 @@
             <itemOperation name="admin_get">
                 <attribute name="method">GET</attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:channel_price_history_config:read</attribute>
+                    <attribute name="groups">admin:channel_price_history_config:show</attribute>
                 </attribute>
             </itemOperation>
             <itemOperation name="admin_put">
@@ -34,7 +34,7 @@
                     <attribute name="groups">admin:channel_price_history_config:update</attribute>
                 </attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:channel_price_history_config:read</attribute>
+                    <attribute name="groups">admin:channel_price_history_config:show</attribute>
                 </attribute>
             </itemOperation>
         </itemOperations>

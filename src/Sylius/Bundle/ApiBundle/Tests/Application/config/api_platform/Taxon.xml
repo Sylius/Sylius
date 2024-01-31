@@ -12,7 +12,7 @@
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/admin/taxons</attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:taxon:read</attribute>
+                    <attribute name="groups">admin:taxon:index</attribute>
                 </attribute>
             </collectionOperation>
 
@@ -28,7 +28,7 @@
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/shop/taxons</attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">shop:taxon:read</attribute>
+                    <attribute name="groups">shop:taxon:index</attribute>
                 </attribute>
             </collectionOperation>
         </collectionOperations>
@@ -38,7 +38,7 @@
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/admin/taxons/{code}</attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:taxon:read</attribute>
+                    <attribute name="groups">admin:taxon:show</attribute>
                 </attribute>
             </itemOperation>
 
@@ -54,7 +54,7 @@
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/shop/taxons/{code}</attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">shop:taxon:read</attribute>
+                    <attribute name="groups">shop:taxon:show</attribute>
                 </attribute>
             </itemOperation>
         </itemOperations>
