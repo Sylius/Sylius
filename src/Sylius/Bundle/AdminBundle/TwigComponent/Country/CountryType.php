@@ -18,12 +18,10 @@ use Sylius\Bundle\AdminBundle\TwigComponent\UiEventsTrait;
 use Sylius\Component\Addressing\Model\Country;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
-use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\UX\LiveComponent\Attribute\AsLiveComponent;
 use Symfony\UX\LiveComponent\Attribute\LiveProp;
 use Symfony\UX\LiveComponent\DefaultActionTrait;
 use Symfony\UX\LiveComponent\LiveCollectionTrait;
-use Symfony\UX\TwigComponent\Attribute\ExposeInTemplate;
 
 #[AsLiveComponent(name: 'SyliusAdmin.Country.CountryType', template: '@SyliusAdmin/Country/Component/countryType.html.twig')]
 final class CountryType
@@ -35,7 +33,7 @@ final class CountryType
     #[LiveProp(fieldName: 'formData')]
     public ?Country $country = null;
 
-    #[ExposeInTemplate(name: 'is_update')]
+    #[LiveProp]
     public bool $isUpdate = false;
 
     public function __construct(

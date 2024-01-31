@@ -13,13 +13,13 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\AdminBundle\TwigComponent;
 
-use Symfony\UX\TwigComponent\Attribute\ExposeInTemplate;
+use Symfony\UX\LiveComponent\Attribute\LiveProp;
 
 trait UiEventsTrait
 {
-    #[ExposeInTemplate(name: 'main_event')]
+    #[LiveProp]
     public ?string $mainEvent = null;
 
-    #[ExposeInTemplate(name: 'fallback_event')]
+    #[LiveProp]
     public ?string $fallbackEvent = null;
 }
