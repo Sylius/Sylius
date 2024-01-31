@@ -50,5 +50,11 @@
     >
         <argument type="service" id="sylius.email_sender" />
     </service>
+
+    <service id="Sylius\Bundle\CoreBundle\Mailer\AccountRegistrationEmailManagerInterface"
+             class="Sylius\Bundle\CoreBundle\Mailer\AccountRegistrationEmailManager"
+    >
+        <argument type="service" id="sylius.email_sender" />
+    </service>
 </services>
 </container>
