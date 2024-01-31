@@ -5,4 +5,4 @@
     configuration.vars.index.route.parameters|default(configuration.vars.route.parameters|default({}))
 ) %}
 
-{{ _button.cancel({ text: 'sylius.ui.cancel'|trans, url: index_url, class: 'btn' }) }}
+{{ _button.cancel(sylius_test_form_attribute('cancel-changes-button')|merge({ text: 'sylius.ui.cancel'|trans, url: index_url, class: 'btn' })) }}

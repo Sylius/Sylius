@@ -25,7 +25,7 @@ final class NotificationCheckerSpec extends ObjectBehavior
 {
     function let(NotificationAccessorInterface $notificationAccessor)
     {
-        $this->beConstructedWith($notificationAccessor);
+        $this->beConstructedWith($notificationAccessor, ['failure' => 'negative', 'success' => 'alert-success']);
     }
 
     function it_is_initializable()
@@ -46,10 +46,10 @@ final class NotificationCheckerSpec extends ObjectBehavior
         $notificationAccessor->getMessageElements()->willReturn([$firstMessage, $secondMessage]);
 
         $firstMessage->getText()->willReturn('Some resource has been successfully edited.');
-        $firstMessage->hasClass('positive')->willReturn(true);
+        $firstMessage->hasClass('alert-success')->willReturn(true);
 
         $secondMessage->getText()->willReturn('Some resource has been successfully deleted.');
-        $secondMessage->hasClass('positive')->willReturn(true);
+        $secondMessage->hasClass('alert-success')->willReturn(true);
 
         $this->checkNotification('Some resource has been successfully deleted.', NotificationType::success());
     }

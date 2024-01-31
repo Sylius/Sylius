@@ -36,6 +36,11 @@
             <tag name="form.type_extension" extended-type="Sylius\Bundle\PromotionBundle\Form\Type\CatalogPromotionScopeType" priority="100" />
         </service>
 
+        <service id="sylius.form.extension.type.country" class="Sylius\Bundle\AdminBundle\Form\Extension\CountryTypeExtension">
+            <argument type="service" id="sylius.repository.country" />
+            <tag name="form.type_extension" extended-type="Sylius\Bundle\AddressingBundle\Form\Type\CountryType" priority="100" />
+        </service>
+
         <service id="Sylius\Bundle\AdminBundle\Form\RequestPasswordResetType">
             <argument>%sylius.form.type.admin.password_reset_request.validation_groups%</argument>
             <tag name="form.type" />

@@ -1,0 +1,32 @@
+sylius_ui:
+    events:
+        sylius.admin.country.create.content:
+            blocks:
+                form:
+                    template: '@SyliusAdmin/Country/_form.html.twig'
+        sylius.admin.country.create.content.form:
+            blocks:
+                component_form:
+                    component:
+                        name: 'SyliusAdmin.Country.CountryType'
+                        inputs:
+                            country: 'expr:context["resource"]'
+                            form: 'expr:context["form"]'
+                            mainEvent: 'expr:context["main_event"]'
+                            fallbackEvent: 'expr:context["fallback_event"]'
+        sylius.admin.country.create.content.form.component_form:
+            blocks:
+                sections:
+                    template: '@SyliusAdmin/Country/Form/ComponentForm/_sections.html.twig'
+        sylius.admin.country.create.content.form.component_form.sections:
+            blocks:
+                details:
+                    template: '@SyliusAdmin/Country/Form/ComponentForm/Sections/_details.html.twig'
+                provinces:
+                    template: '@SyliusAdmin/Country/Form/ComponentForm/Sections/_provinces.html.twig'
+        sylius.admin.country.create.content.form.component_form.sections.details:
+            blocks:
+                code:
+                    template: '@SyliusAdmin/Country/Form/ComponentForm/Sections/Details/_code.html.twig'
+                enabled:
+                    template: '@SyliusAdmin/Country/Form/ComponentForm/Sections/Details/_enabled.html.twig'

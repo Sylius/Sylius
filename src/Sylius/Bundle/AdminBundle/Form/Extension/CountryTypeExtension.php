@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\CoreBundle\Form\Extension;
+namespace Sylius\Bundle\AdminBundle\Form\Extension;
 
 use Sylius\Bundle\AddressingBundle\Form\Type\CountryType;
 use Sylius\Bundle\AddressingBundle\Form\Type\ProvinceType;
@@ -19,15 +19,16 @@ use Sylius\Component\Addressing\Model\CountryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
-use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Intl\Countries;
+use Symfony\UX\LiveComponent\Form\Type\LiveCollectionType;
 
 final class CountryTypeExtension extends AbstractTypeExtension
 {
-    public function __construct(private RepositoryInterface $countryRepository)
+    /** @param RepositoryInterface<CountryInterface> $countryRepository */
+    public function __construct(private readonly RepositoryInterface $countryRepository)
     {
     }
 
@@ -52,12 +53,14 @@ final class CountryTypeExtension extends AbstractTypeExtension
         });
 
         $builder
-            ->add('provinces', CollectionType::class, [
+            ->add('provinces', LiveCollectionType::class, [
                 'entry_type' => ProvinceType::class,
                 'allow_add' => true,
                 'allow_delete' => true,
                 'by_reference' => false,
-                'button_add_label' => 'sylius.form.country.add_province',
+                'button_add_options' => [
+                    'label' => 'sylius.form.country.add_province',
+                ],
             ])
             ->add('enabled', CheckboxType::class, [
                 'label' => 'sylius.form.country.enabled',

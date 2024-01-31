@@ -11,19 +11,10 @@
 
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
+        <defaults autoconfigure="true" />
         <service id="Sylius\Bundle\AdminBundle\TwigComponent\Dashboard\StatisticsComponent">
             <argument type="service" id="sylius.repository.channel" />
             <argument type="service" id="Sylius\Bundle\AdminBundle\Provider\StatisticsDataProviderInterface" />
-            <tag name="controller.service_arguments" />
-            <tag
-                name="twig.component"
-                key="SyliusAdmin.Dashboard.Statistics"
-                template="@SyliusAdmin/Dashboard/Index/Component/statistics.html.twig"
-                default_action="null"
-                live="true"
-                csrf="true"
-                route="ux_live_component"
-            />
         </service>
 
         <service id="Sylius\Bundle\AdminBundle\TwigComponent\Dashboard\NewCustomersComponent">
@@ -51,17 +42,10 @@
         <service id="Sylius\Bundle\AdminBundle\TwigComponent\Taxon\TaxonTreeComponent">
             <argument type="service" id="sylius.repository.taxon" />
             <argument type="service" id="sylius.manager.taxon" />
+        </service>
 
-            <tag
-                name="twig.component"
-                key="SyliusAdmin.Taxon.TaxonTree"
-                template="@SyliusAdmin/Taxon/Component/taxonTree.html.twig"
-                default_action="null"
-                live="true"
-                csrf="true"
-                route="ux_live_component"
-            />
-            <tag name="controller.service_arguments" />
+        <service id="Sylius\Bundle\AdminBundle\TwigComponent\Country\CountryType">
+            <argument type="service" id="form.factory" />
         </service>
     </services>
 </container>
