@@ -22,6 +22,7 @@ use Symfony\UX\LiveComponent\Attribute\AsLiveComponent;
 use Symfony\UX\LiveComponent\Attribute\LiveProp;
 use Symfony\UX\LiveComponent\DefaultActionTrait;
 use Symfony\UX\LiveComponent\LiveCollectionTrait;
+use Symfony\UX\TwigComponent\Attribute\ExposeInTemplate;
 
 #[AsLiveComponent]
 final class CountryType
@@ -33,7 +34,7 @@ final class CountryType
     #[LiveProp(fieldName: 'formData')]
     public ?Country $country = null;
 
-    #[LiveProp]
+    #[ExposeInTemplate(name: 'is_update')]
     public bool $isUpdate = false;
 
     public function __construct(
