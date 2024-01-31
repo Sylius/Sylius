@@ -15,20 +15,19 @@ namespace spec\Sylius\Bundle\ApiBundle\CommandHandler\Checkout;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ApiBundle\Command\Checkout\SendShipmentConfirmationEmail;
-use Sylius\Bundle\CoreBundle\Mailer\Emails;
+use Sylius\Bundle\CoreBundle\Mailer\ShipmentEmailManagerInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\ShipmentInterface;
 use Sylius\Component\Core\Repository\ShipmentRepositoryInterface;
-use Sylius\Component\Mailer\Sender\SenderInterface;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 
 final class SendShipmentConfirmationEmailHandlerSpec extends ObjectBehavior
 {
-    function let(SenderInterface $sender, ShipmentRepositoryInterface $shipmentRepository): void
+    function let(ShipmentEmailManagerInterface $shipmentEmailManager, ShipmentRepositoryInterface $shipmentRepository): void
     {
-        $this->beConstructedWith($sender, $shipmentRepository);
+        $this->beConstructedWith($shipmentEmailManager, $shipmentRepository);
     }
 
     function it_is_a_message_handler(): void
@@ -37,8 +36,8 @@ final class SendShipmentConfirmationEmailHandlerSpec extends ObjectBehavior
     }
 
     function it_sends_shipment_confirmation_message(
+        ShipmentEmailManagerInterface $shipmentEmailManager,
         ShipmentInterface $shipment,
-        SenderInterface $sender,
         CustomerInterface $customer,
         ChannelInterface $channel,
         ShipmentRepositoryInterface $shipmentRepository,
@@ -53,16 +52,7 @@ final class SendShipmentConfirmationEmailHandlerSpec extends ObjectBehavior
         $order->getCustomer()->willReturn($customer);
         $customer->getEmail()->willReturn('johnny.bravo@email.com');
 
-        $sender->send(
-            Emails::SHIPMENT_CONFIRMATION,
-            ['johnny.bravo@email.com'],
-            [
-                'shipment' => $shipment->getWrappedObject(),
-                'order' => $order->getWrappedObject(),
-                'channel' => $channel->getWrappedObject(),
-                'localeCode' => 'pl_PL',
-            ],
-        )->shouldBeCalled();
+        $shipmentEmailManager->sendConfirmationEmail($shipment)->shouldBeCalled();
 
         $this(new SendShipmentConfirmationEmail(123));
     }

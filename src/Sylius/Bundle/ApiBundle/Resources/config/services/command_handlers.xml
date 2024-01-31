@@ -204,7 +204,7 @@
         </service>
 
         <service id="Sylius\Bundle\ApiBundle\CommandHandler\Checkout\SendShipmentConfirmationEmailHandler">
-            <argument type="service" id="sylius.email_sender" />
+            <argument type="service" id="Sylius\Bundle\CoreBundle\Mailer\ShipmentEmailManagerInterface" />
             <argument type="service" id="sylius.repository.shipment" />
             <tag name="messenger.message_handler" bus="sylius.command_bus" />
             <tag name="messenger.message_handler" bus="sylius_default.bus" />

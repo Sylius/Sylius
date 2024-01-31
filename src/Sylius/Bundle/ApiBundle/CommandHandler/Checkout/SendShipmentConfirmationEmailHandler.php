@@ -14,10 +14,9 @@ declare(strict_types=1);
 namespace Sylius\Bundle\ApiBundle\CommandHandler\Checkout;
 
 use Sylius\Bundle\ApiBundle\Command\Checkout\SendShipmentConfirmationEmail;
-use Sylius\Bundle\CoreBundle\Mailer\Emails;
+use Sylius\Bundle\CoreBundle\Mailer\ShipmentEmailManagerInterface;
 use Sylius\Component\Core\Model\ShipmentInterface;
 use Sylius\Component\Core\Repository\ShipmentRepositoryInterface;
-use Sylius\Component\Mailer\Sender\SenderInterface;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 use Webmozart\Assert\Assert;
 
@@ -25,7 +24,7 @@ use Webmozart\Assert\Assert;
 final class SendShipmentConfirmationEmailHandler implements MessageHandlerInterface
 {
     public function __construct(
-        private SenderInterface $emailSender,
+        private ShipmentEmailManagerInterface $shipmentEmailManager,
         private ShipmentRepositoryInterface $shipmentRepository,
     ) {
     }
@@ -40,15 +39,6 @@ final class SendShipmentConfirmationEmailHandler implements MessageHandlerInterf
         $email = $order->getCustomer()->getEmail();
         Assert::notNull($email);
 
-        $this->emailSender->send(
-            Emails::SHIPMENT_CONFIRMATION,
-            [$email],
-            [
-                'shipment' => $shipment,
-                'order' => $order,
-                'channel' => $order->getChannel(),
-                'localeCode' => $order->getLocaleCode(),
-            ],
-        );
+        $this->shipmentEmailManager->sendConfirmationEmail($shipment);
     }
 }
