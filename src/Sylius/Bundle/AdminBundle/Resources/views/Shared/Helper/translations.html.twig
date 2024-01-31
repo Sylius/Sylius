@@ -1,4 +1,4 @@
-{% macro default(translationFields, options = {}) %}
+{% macro default(translationFields, body = null, options = {}) %}
     {% set options = {
         accordionId: 'product-translations'
     }|merge(options) %}
@@ -14,9 +14,13 @@
                 </h2>
                 <div id="translation-{{ locale }}" class="accordion-collapse collapse {% if loop.first %}show{% endif %}" data-bs-parent="#product-translations">
                     <div class="accordion-body">
-                        {% for field in translationForm %}
-                            {{ form_row(field) }}
-                        {% endfor %}
+                        {% if body is not null %}
+                            {{ include(template_from_string(body), { locale: locale, translationForm: translationForm }) }}
+                        {% else %}
+                            {% for field in translationForm %}
+                                {{ form_row(field) }}
+                            {% endfor %}
+                        {% endif %}
                     </div>
                 </div>
             </div>
