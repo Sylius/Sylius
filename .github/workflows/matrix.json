@@ -19,13 +19,15 @@
         {
           "php": "8.0",
           "symfony": "^5.4",
-          "mariadb": "10.4.10"
+          "mariadb": "10.4.10",
+          "state_machine_adapter": "winzou_state_machine"
         },
         {
           "php": "8.2",
           "symfony": "^6.4",
           "mariadb": "10.4.10",
-          "dbal": "^3.0"
+          "dbal": "^3.0",
+          "state_machine_adapter": "symfony_workflow"
         }
       ]
     },
@@ -105,6 +107,7 @@
       "php": [ "8.0", "8.1", "8.2" ],
       "symfony": [ "^5.4", "^6.4" ],
       "mariadb": [ "10.4.10" ],
+      "state_machine_adapter": [ "winzou_state_machine", "symfony_workflow" ],
       "exclude": [
         {
           "php": "8.0",

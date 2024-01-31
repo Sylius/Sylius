@@ -72,8 +72,8 @@
     },
     "autoload-dev": {
         "psr-4": {
+            "spec\\Sylius\\Bundle\\ApiBundle\\": "spec/",
             "Sylius\\Bundle\\ApiBundle\\Application\\": "Tests/Application/src/",
-            "Sylius\\Bundle\\ApiBundle\\spec\\": "spec/",
             "Sylius\\Bundle\\ApiBundle\\Tests\\": "Tests/"
         }
     },

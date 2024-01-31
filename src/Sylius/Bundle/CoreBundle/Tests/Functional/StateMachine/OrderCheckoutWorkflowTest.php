@@ -21,7 +21,6 @@ use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\Customer;
 use Sylius\Component\Core\Model\Order;
 use Sylius\Component\Core\Model\OrderInterface;
-use Sylius\Component\Core\OrderShippingStates;
 use Sylius\Component\Core\Repository\PromotionRepositoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
@@ -216,7 +215,6 @@ final class OrderCheckoutWorkflowTest extends KernelTestCase
         $order->setChannel($channel);
         $order->setCustomer($customer);
         $order->setCheckoutState($checkoutState);
-        $order->setShippingState(OrderShippingStates::STATE_READY);
 
         return  $order;
     }

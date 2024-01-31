@@ -21,22 +21,17 @@ final class Configuration implements ConfigurationInterface
 {
     public function getConfigTreeBuilder(): TreeBuilder
     {
-        $treeBuilder = new TreeBuilder('sylius_abstraction');
+        $treeBuilder = new TreeBuilder('sylius_state_machine_abstraction');
         /** @var ArrayNodeDefinition $rootNode */
         $rootNode = $treeBuilder->getRootNode();
 
         $rootNode
             ->addDefaultsIfNotSet()
             ->children()
-                ->arrayNode('state_machine')
-                    ->addDefaultsIfNotSet()
-                    ->children()
-                        ->scalarNode('default_adapter')->defaultValue('winzou_state_machine')->end()
-                        ->arrayNode('graphs_to_adapters_mapping')
-                            ->useAttributeAsKey('graph_name')
-                            ->scalarPrototype()->end()
-                        ->end()
-                    ->end()
+                ->scalarNode('default_adapter')->defaultValue('winzou_state_machine')->end()
+                ->arrayNode('graphs_to_adapters_mapping')
+                    ->useAttributeAsKey('graph_name')
+                    ->scalarPrototype()->end()
                 ->end()
             ->end()
         ;

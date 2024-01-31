@@ -11,8 +11,11 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Abstraction\StateMachine\Exception;
+namespace spec\Sylius\Bundle\ApiBundle\Validator\Constraints;
 
-class StateMachineExecutionException extends \RuntimeException
+use SM\StateMachine\StateMachine;
+
+class WinzouStateMachineStub extends StateMachine
 {
+    public $config = [];
 }

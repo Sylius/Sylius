@@ -61,4 +61,26 @@ final class SymfonyWorkflowAdapter implements StateMachineInterface
             $enabledTransitions,
         );
     }
+
+    public function getTransitionFromState(object $subject, string $graphName, string $fromState): ?string
+    {
+        foreach ($this->getEnabledTransitions($subject, $graphName) as $transition) {
+            if ($transition->getFroms() !== null && in_array($fromState, $transition->getFroms(), true)) {
+                return $transition->getName();
+            }
+        }
+
+        return null;
+    }
+
+    public function getTransitionToState(object $subject, string $graphName, string $toState): ?string
+    {
+        foreach ($this->getEnabledTransitions($subject, $graphName) as $transition) {
+            if ($transition->getTos() !== null && in_array($toState, $transition->getTos(), true)) {
+                return $transition->getName();
+            }
+        }
+
+        return null;
+    }
 }

@@ -19,7 +19,8 @@ use Prophecy\Argument;
 use Psr\Log\LoggerInterface;
 use SM\Factory\Factory;
 use SM\SMException;
-use SM\StateMachine\StateMachineInterface;
+use SM\StateMachine\StateMachineInterface as WinzouStateMachineInterface;
+use Sylius\Abstraction\StateMachine\StateMachineInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Core\Updater\UnpaidOrdersStateUpdaterInterface;
 use Sylius\Component\Order\Model\OrderInterface;
@@ -55,9 +56,9 @@ final class UnpaidOrdersStateUpdaterSpec extends ObjectBehavior
         OrderInterface $secondOrder,
         OrderInterface $thirdOrder,
         OrderRepositoryInterface $orderRepository,
-        StateMachineInterface $firstOrderStateMachine,
-        StateMachineInterface $secondOrderStateMachine,
-        StateMachineInterface $thirdOrderStateMachine,
+        WinzouStateMachineInterface $firstOrderStateMachine,
+        WinzouStateMachineInterface $secondOrderStateMachine,
+        WinzouStateMachineInterface $thirdOrderStateMachine,
     ): void {
         $orderRepository->findOrdersUnpaidSince(Argument::type(\DateTimeInterface::class), 100)->willReturn(
             [$firstOrder, $secondOrder],
@@ -79,14 +80,47 @@ final class UnpaidOrdersStateUpdaterSpec extends ObjectBehavior
         $this->cancel();
     }
 
+    function it_uses_the_new_state_machine_abstraction_if_passed(
+        StateMachineInterface $stateMachine,
+        ObjectManager $objectManager,
+        OrderInterface $firstOrder,
+        OrderInterface $secondOrder,
+        OrderInterface $thirdOrder,
+        OrderRepositoryInterface $orderRepository,
+    ): void {
+        $this->beConstructedWith(
+            $orderRepository,
+            $stateMachine,
+            '10 months',
+            null,
+            $objectManager,
+            100,
+        );
+
+        $orderRepository->findOrdersUnpaidSince(Argument::type(\DateTimeInterface::class), 100)->willReturn(
+            [$firstOrder, $secondOrder],
+            [$thirdOrder],
+            [],
+        );
+
+        $objectManager->flush()->shouldBeCalledTimes(2);
+        $objectManager->clear()->shouldBeCalledTimes(2);
+
+        $stateMachine->apply($firstOrder, 'sylius_order', OrderTransitions::TRANSITION_CANCEL)->shouldBeCalled();
+        $stateMachine->apply($secondOrder, 'sylius_order', OrderTransitions::TRANSITION_CANCEL)->shouldBeCalled();
+        $stateMachine->apply($thirdOrder, 'sylius_order', OrderTransitions::TRANSITION_CANCEL)->shouldBeCalled();
+
+        $this->cancel();
+    }
+
     function it_wont_stop_cancelling_unpaid_orders_on_exception_for_a_single_order_and_logs_error(
         Factory $stateMachineFactory,
         ObjectManager $objectManager,
         OrderInterface $firstOrder,
         OrderInterface $secondOrder,
         OrderRepositoryInterface $orderRepository,
-        StateMachineInterface $firstOrderStateMachine,
-        StateMachineInterface $secondOrderStateMachine,
+        WinzouStateMachineInterface $firstOrderStateMachine,
+        WinzouStateMachineInterface $secondOrderStateMachine,
         LoggerInterface $logger,
     ): void {
         $orderRepository->findOrdersUnpaidSince(Argument::type(\DateTimeInterface::class), 100)->willReturn(
@@ -121,8 +155,8 @@ final class UnpaidOrdersStateUpdaterSpec extends ObjectBehavior
         OrderInterface $firstOrder,
         OrderInterface $secondOrder,
         OrderRepositoryInterface $orderRepository,
-        StateMachineInterface $firstOrderStateMachine,
-        StateMachineInterface $secondOrderStateMachine,
+        WinzouStateMachineInterface $firstOrderStateMachine,
+        WinzouStateMachineInterface $secondOrderStateMachine,
     ): void {
         $this->beConstructedWith($orderRepository, $stateMachineFactory, '10 months', null, $objectManager);
 
@@ -150,8 +184,8 @@ final class UnpaidOrdersStateUpdaterSpec extends ObjectBehavior
         OrderInterface $firstOrder,
         OrderInterface $secondOrder,
         OrderRepositoryInterface $orderRepository,
-        StateMachineInterface $firstOrderStateMachine,
-        StateMachineInterface $secondOrderStateMachine,
+        WinzouStateMachineInterface $firstOrderStateMachine,
+        WinzouStateMachineInterface $secondOrderStateMachine,
     ): void {
         $this->beConstructedWith($orderRepository, $stateMachineFactory, '10 months', null, null, 100);
 

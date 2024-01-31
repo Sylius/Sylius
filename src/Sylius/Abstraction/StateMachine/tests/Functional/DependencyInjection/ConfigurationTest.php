@@ -28,18 +28,13 @@ final class ConfigurationTest extends TestCase
         $this->assertProcessedConfigurationEquals(
             [
                 [
-                    'state_machine' => [
-                        'default_adapter' => 'symfony_workflow',
-                    ],
+                    'default_adapter' => 'symfony_workflow',
                 ],
             ],
             [
-                'state_machine' => [
-                    'default_adapter' => 'symfony_workflow',
-                    'graphs_to_adapters_mapping' => [],
-                ],
+                'default_adapter' => 'symfony_workflow',
+                'graphs_to_adapters_mapping' => [],
             ],
-            'state_machine',
         );
     }
 
@@ -49,24 +44,19 @@ final class ConfigurationTest extends TestCase
         $this->assertProcessedConfigurationEquals(
             [
                 [
-                    'state_machine' => [
-                        'graphs_to_adapters_mapping' => [
-                            'order' => 'symfony_workflow',
-                            'payment' => 'winzou_state_machine',
-                        ],
-                    ],
-                ],
-            ],
-            [
-                'state_machine' => [
-                    'default_adapter' => 'winzou_state_machine',
                     'graphs_to_adapters_mapping' => [
                         'order' => 'symfony_workflow',
                         'payment' => 'winzou_state_machine',
                     ],
                 ],
             ],
-            'state_machine',
+            [
+                'default_adapter' => 'winzou_state_machine',
+                'graphs_to_adapters_mapping' => [
+                    'order' => 'symfony_workflow',
+                    'payment' => 'winzou_state_machine',
+                ],
+            ],
         );
     }
 

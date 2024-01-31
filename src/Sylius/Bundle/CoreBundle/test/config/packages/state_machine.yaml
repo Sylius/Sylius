@@ -55,7 +55,6 @@ framework:
                     to: unpublished
 
 sylius_state_machine_abstraction:
-    state_machine:
-        default_adapter: 'winzou_state_machine'
-        graphs_to_adapters_mapping:
-            app_blog_post: 'symfony_workflow'
+    default_adapter: 'winzou_state_machine'
+    graphs_to_adapters_mapping:
+        app_blog_post: 'symfony_workflow'

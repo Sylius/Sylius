@@ -19,7 +19,7 @@
             <argument type="service" id="sylius.state_resolver.order_shipping" />
             <tag name="kernel.event_listener"
                  event="workflow.sylius_shipment.completed.ship"
-                 priority="-100"
+                 priority="100"
             />
         </service>
 
@@ -27,7 +27,7 @@
             <argument type="service" id="sylius.shipping_date_assigner" />
             <tag name="kernel.event_listener"
                  event="workflow.sylius_shipment.transition.ship"
-                 priority="-100"
+                 priority="100"
             />
         </service>
     </services>

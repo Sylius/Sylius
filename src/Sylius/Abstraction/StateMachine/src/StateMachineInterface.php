@@ -35,4 +35,14 @@ interface StateMachineInterface
      * @return array<TransitionInterface>
      */
     public function getEnabledTransitions(object $subject, string $graphName): array;
+
+    /**
+     * @throws StateMachineExecutionException
+     */
+    public function getTransitionFromState(object $subject, string $graphName, string $fromState): ?string;
+
+    /**
+     * @throws StateMachineExecutionException
+     */
+    public function getTransitionToState(object $subject, string $graphName, string $toState): ?string;
 }
