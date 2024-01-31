@@ -24,7 +24,7 @@ use Symfony\UX\LiveComponent\ComponentToolsTrait;
 use Symfony\UX\LiveComponent\DefaultActionTrait;
 use Symfony\UX\TwigComponent\Attribute\ExposeInTemplate;
 
-#[AsLiveComponent]
+#[AsLiveComponent(name: 'SyliusAdmin.Dashboard.Statistics', template: '@SyliusAdmin/Dashboard/Index/Component/statistics.html.twig')]
 final class StatisticsComponent
 {
     use ComponentToolsTrait;
