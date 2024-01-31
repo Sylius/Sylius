@@ -56,5 +56,11 @@
     >
         <argument type="service" id="sylius.email_sender" />
     </service>
+
+    <service id="Sylius\Bundle\CoreBundle\Mailer\AccountVerificationEmailManagerInterface"
+             class="Sylius\Bundle\CoreBundle\Mailer\AccountVerificationEmailManager"
+    >
+        <argument type="service" id="sylius.email_sender" />
+    </service>
 </services>
 </container>

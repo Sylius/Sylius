@@ -181,9 +181,9 @@
         </service>
 
         <service id="Sylius\Bundle\ApiBundle\CommandHandler\Account\SendAccountVerificationEmailHandler">
+            <argument type="service" id="Sylius\Bundle\CoreBundle\Mailer\AccountVerificationEmailManagerInterface" />
             <argument type="service" id="sylius.repository.shop_user" />
             <argument type="service" id="sylius.repository.channel" />
-            <argument type="service" id="sylius.email_sender" />
             <tag name="messenger.message_handler" bus="sylius.command_bus" />
             <tag name="messenger.message_handler" bus="sylius_default.bus" />
         </service>

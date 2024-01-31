@@ -14,10 +14,9 @@ declare(strict_types=1);
 namespace Sylius\Bundle\ApiBundle\CommandHandler\Account;
 
 use Sylius\Bundle\ApiBundle\Command\Account\SendAccountVerificationEmail;
-use Sylius\Bundle\CoreBundle\Mailer\Emails;
+use Sylius\Bundle\CoreBundle\Mailer\AccountVerificationEmailManagerInterface;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
-use Sylius\Component\Mailer\Sender\SenderInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 
@@ -25,9 +24,9 @@ use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 final class SendAccountVerificationEmailHandler implements MessageHandlerInterface
 {
     public function __construct(
+        private AccountVerificationEmailManagerInterface $accountVerificationEmailManager,
         private UserRepositoryInterface $shopUserRepository,
         private ChannelRepositoryInterface $channelRepository,
-        private SenderInterface $emailSender,
     ) {
     }
 
@@ -38,10 +37,10 @@ final class SendAccountVerificationEmailHandler implements MessageHandlerInterfa
 
         $channel = $this->channelRepository->findOneByCode($command->channelCode);
 
-        $this->emailSender->send(
-            Emails::ACCOUNT_VERIFICATION_TOKEN,
-            [$command->shopUserEmail],
-            ['user' => $shopUser, 'localeCode' => $command->localeCode, 'channel' => $channel],
+        $this->accountVerificationEmailManager->sendAccountVerificationEmail(
+            $shopUser,
+            $channel,
+            $command->localeCode,
         );
     }
 }

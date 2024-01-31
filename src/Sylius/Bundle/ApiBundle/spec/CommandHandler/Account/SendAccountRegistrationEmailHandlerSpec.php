@@ -52,7 +52,7 @@ final class SendAccountRegistrationEmailHandlerSpec extends ObjectBehavior
         $this(new SendAccountRegistrationEmail('shop@example.com', 'en_US', 'WEB'));
     }
 
-    function it_sends_user_registration_email_when_account_verification_required_and_user_is_verified(
+    function it_sends_user_registration_email_when_account_verification_required_and_user_is_enabled(
         AccountRegistrationEmailManagerInterface $accountRegistrationEmailManager,
         UserRepositoryInterface $shopUserRepository,
         ChannelRepositoryInterface $channelRepository,
