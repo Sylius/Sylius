@@ -15,22 +15,22 @@ namespace spec\Sylius\Bundle\ApiBundle\CommandHandler;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ApiBundle\Command\SendContactRequest;
-use Sylius\Bundle\CoreBundle\Mailer\Emails;
+use Sylius\Bundle\ApiBundle\Exception\ChannelNotFoundException;
+use Sylius\Bundle\CoreBundle\Mailer\ContactEmailManagerInterface;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
-use Sylius\Component\Mailer\Sender\SenderInterface;
 
 final class SendContactRequestHandlerSpec extends ObjectBehavior
 {
-    function let(SenderInterface $sender, ChannelRepositoryInterface $channelRepository): void
+    function let(ContactEmailManagerInterface $contactEmailManager, ChannelRepositoryInterface $channelRepository): void
     {
-        $this->beConstructedWith($sender, $channelRepository);
+        $this->beConstructedWith($contactEmailManager, $channelRepository);
     }
 
     function it_sends_contact_request(
-        ChannelInterface $channel,
+        ContactEmailManagerInterface $contactEmailManager,
         ChannelRepositoryInterface $channelRepository,
-        SenderInterface $sender,
+        ChannelInterface $channel,
     ): void {
         $command = new SendContactRequest('adam@sylius.com', 'message');
         $command->setChannelCode('CODE');
@@ -40,16 +40,11 @@ final class SendContactRequestHandlerSpec extends ObjectBehavior
 
         $channel->getContactEmail()->willReturn('channel@contact.com');
 
-        $sender->send(
-            Emails::CONTACT_REQUEST,
+        $contactEmailManager->sendContactRequest(
+            ['message' => 'message', 'email' => 'adam@sylius.com'],
             ['channel@contact.com'],
-            [
-                'data' => ['message' => 'message', 'email' => 'adam@sylius.com'],
-                'channel' => $channel,
-                'localeCode' => 'en_US',
-            ],
-            [],
-            ['adam@sylius.com'],
+            $channel,
+            'en_US',
         );
 
         $this($command);
@@ -63,7 +58,7 @@ final class SendContactRequestHandlerSpec extends ObjectBehavior
         $channelRepository->findOneByCode('CODE')->willReturn(null);
 
         $this
-            ->shouldThrow(\InvalidArgumentException::class)
+            ->shouldThrow(ChannelNotFoundException::class)
             ->during('__invoke', [$command])
         ;
     }
