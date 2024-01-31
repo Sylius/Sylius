@@ -196,7 +196,7 @@
         </service>
 
         <service id="Sylius\Bundle\ApiBundle\CommandHandler\Account\SendResetPasswordEmailHandler">
-            <argument type="service" id="sylius.email_sender" />
+            <argument type="service" id="Sylius\Bundle\CoreBundle\Mailer\ResetPasswordEmailManagerInterface" />
             <argument type="service" id="sylius.repository.channel" />
             <argument type="service" id="sylius.repository.shop_user" />
             <tag name="messenger.message_handler" bus="sylius.command_bus" />
