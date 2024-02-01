@@ -85,5 +85,3 @@ EOT
         return 0;
     }
 }
-
-class_alias(InstallSampleDataCommand::class, '\Sylius\Bundle\CoreBundle\Command\InstallSampleDataCommand');

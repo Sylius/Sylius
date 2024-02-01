@@ -49,5 +49,3 @@ final class InformAboutGUSCommand extends Command
         return 0;
     }
 }
-
-class_alias(InformAboutGUSCommand::class, '\Sylius\Bundle\CoreBundle\Command\InformAboutGUSCommand');

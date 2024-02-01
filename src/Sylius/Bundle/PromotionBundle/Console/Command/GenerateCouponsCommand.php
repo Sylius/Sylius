@@ -92,5 +92,3 @@ final class GenerateCouponsCommand extends Command
         );
     }
 }
-
-class_alias(GenerateCouponsCommand::class, \Sylius\Bundle\PromotionBundle\Command\GenerateCouponsCommand::class);

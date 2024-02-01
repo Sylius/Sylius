@@ -68,5 +68,3 @@ EOT
         }
     }
 }
-
-class_alias(DemoteUserCommand::class, \Sylius\Bundle\UserBundle\Command\DemoteUserCommand::class);

@@ -58,5 +58,3 @@ EOT
         return 0;
     }
 }
-
-class_alias(JwtConfigurationCommand::class, '\Sylius\Bundle\CoreBundle\Command\JwtConfigurationCommand');
