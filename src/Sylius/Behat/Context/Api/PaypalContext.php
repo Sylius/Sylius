@@ -61,28 +61,7 @@ final class PaypalContext implements Context
     public function iSignInToPaypalAndAuthorizeSuccessfully(): void
     {
         $this->paypalApiMocker->performActionInApiSuccessfulScope(function () {
-            $uri = $this->sharedStorage->get('payment_request_uri');
-            $request = $this->requestFactory->custom(
-                $uri,
-                HttpRequest::METHOD_PUT,
-                [],
-                $this->client->getToken(),
-            );
-
-            $request->setContent([
-                'requestPayload' => [
-                    'target_path' => 'https://myshop.tld/target-path',
-                    'after_path' => 'https://myshop.tld/after-path',
-                    'http_request' => [
-                        'query' => [
-                            'token'=>'EC-2d9EV13959UR209410U',
-                            'PayerID'=>'UX8WBNYWGBVMG',
-                        ]
-                    ],
-                ],
-            ]);
-
-            $this->client->executeCustomRequest($request);
+            $this->putPaymentRequest($this->sharedStorage->get('payment_request_uri'));
         });
     }
 
@@ -175,6 +154,31 @@ final class PaypalContext implements Context
             'requestPayload' => [
                 'target_path' => 'https://myshop.tld/target-path',
                 'after_path' => 'https://myshop.tld/after-path',
+            ],
+        ]);
+
+        $this->client->executeCustomRequest($request);
+    }
+
+    function putPaymentRequest(string $paymentRequestUri): void
+    {
+        $request = $this->requestFactory->custom(
+            $paymentRequestUri,
+            HttpRequest::METHOD_PUT,
+            [],
+            $this->client->getToken(),
+        );
+
+        $request->setContent([
+            'requestPayload' => [
+                'target_path' => 'https://myshop.tld/target-path',
+                'after_path' => 'https://myshop.tld/after-path',
+                'http_request' => [
+                    'query' => [
+                        'token' => 'EC-2d9EV13959UR209410U',
+                        'PayerID' => 'UX8WBNYWGBVMG',
+                    ]
+                ],
             ],
         ]);
 

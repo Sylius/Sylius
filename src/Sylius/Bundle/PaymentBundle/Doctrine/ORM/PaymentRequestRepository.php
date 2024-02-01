@@ -17,6 +17,11 @@ use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Component\Payment\Model\PaymentRequestInterface;
 use Sylius\Component\Payment\Repository\PaymentRequestRepositoryInterface;
 
+/**
+ * @template T of PaymentRequestInterface
+ *
+ * @implements PaymentRequestRepositoryInterface<T>
+ */
 class PaymentRequestRepository extends EntityRepository implements PaymentRequestRepositoryInterface
 {
     public function findOtherExisting(PaymentRequestInterface $paymentRequest): array

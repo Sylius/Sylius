@@ -23,15 +23,15 @@
             <tag name="sylius.payment_request.command_provider" factory="stripe" />
         </service>
 
-        <service id="sylius.payment_request.command_provider.payum.stripe.capture" class="Sylius\Bundle\PayumBundle\PaymentRequest\Provider\PayumCapturePaymentRequestCommandProvider">
+        <service id="sylius.payment_request.command_provider.payum.stripe.capture" class="Sylius\Bundle\PayumBundle\PaymentRequest\Provider\CaptureCommandProvider">
             <tag name="sylius.payment_request.command_provider.payum.stripe" type="capture" />
         </service>
 
-        <service id="sylius.payment_request.command_provider.payum.stripe.authorize" class="Sylius\Bundle\PayumBundle\PaymentRequest\Provider\PayumAuthorizePaymentRequestCommandProvider">
+        <service id="sylius.payment_request.command_provider.payum.stripe.authorize" class="Sylius\Bundle\PayumBundle\PaymentRequest\Provider\AuthorizeCommandProvider">
             <tag name="sylius.payment_request.command_provider.payum.stripe" type="authorize" />
         </service>
 
-        <service id="sylius.payment_request.command_provider.payum.stripe.status" class="Sylius\Bundle\PayumBundle\PaymentRequest\Provider\PayumStatusPaymentRequestCommandProvider">
+        <service id="sylius.payment_request.command_provider.payum.stripe.status" class="Sylius\Bundle\PayumBundle\PaymentRequest\Provider\StatusCommandProvider">
             <tag name="sylius.payment_request.command_provider.payum.stripe" type="status" />
         </service>
 

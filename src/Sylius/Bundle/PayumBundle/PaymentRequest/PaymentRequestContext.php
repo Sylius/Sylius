@@ -15,7 +15,7 @@ namespace Sylius\Bundle\PayumBundle\PaymentRequest;
 
 use Sylius\Component\Payment\Model\PaymentRequestInterface;
 
-final class PayumPaymentRequestContext implements PayumPaymentRequestContextInterface
+final class PaymentRequestContext implements PaymentRequestContextInterface
 {
     private ?PaymentRequestInterface $paymentRequest = null;
 

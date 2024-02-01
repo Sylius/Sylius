@@ -13,29 +13,31 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\PayumBundle\CommandHandler;
 
+use Payum\Core\Security\TokenAggregateInterface;
 use Sylius\Bundle\PayumBundle\Command\AuthorizePaymentRequest;
 use Sylius\Bundle\PayumBundle\Factory\AuthorizeRequestFactoryInterface;
 use Sylius\Bundle\PayumBundle\PaymentRequest\Factory\PayumTokenFactoryInterface;
-use Sylius\Bundle\PayumBundle\PaymentRequest\Processor\PayumRequestProcessorInterface;
+use Sylius\Bundle\PayumBundle\PaymentRequest\Processor\AfterTokenizedRequestProcessorInterface;
+use Sylius\Bundle\PayumBundle\PaymentRequest\Processor\RequestProcessorInterface;
+use Sylius\Bundle\PayumBundle\PaymentRequest\Provider\PaymentRequestProviderInterface;
 use Sylius\Component\Payment\Model\PaymentRequestInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 use Webmozart\Assert\Assert;
 
 final class AuthorizePaymentRequestHandler implements MessageHandlerInterface
 {
     public function __construct(
-        private RepositoryInterface $paymentRequestRepository,
+        private PaymentRequestProviderInterface $paymentRequestProvider,
         private PayumTokenFactoryInterface $payumTokenFactory,
-        private PayumRequestProcessorInterface $payumReplyProcessor,
+        private RequestProcessorInterface $requestProcessor,
         private AuthorizeRequestFactoryInterface $factory,
+        private AfterTokenizedRequestProcessorInterface $afterTokenizedRequestProcessor,
     ) {
     }
 
     public function __invoke(AuthorizePaymentRequest $command): void
     {
-        /** @var PaymentRequestInterface|null $paymentRequest */
-        $paymentRequest = $this->paymentRequestRepository->find($command->getHash());
+        $paymentRequest = $this->paymentRequestProvider->provideFromHash($command->getHash());
         Assert::notNull($paymentRequest);
 
         $token = $this->payumTokenFactory->createNew($paymentRequest);
@@ -45,6 +47,8 @@ final class AuthorizePaymentRequestHandler implements MessageHandlerInterface
         $token = $request->getToken();
         Assert::notNull($token);
 
-        $this->payumReplyProcessor->process($paymentRequest, $request, $token->getGatewayName());
+        $this->requestProcessor->process($paymentRequest, $request, $token->getGatewayName());
+
+        $this->afterTokenizedRequestProcessor->process($paymentRequest, $token);
     }
 }

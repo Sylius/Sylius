@@ -16,13 +16,13 @@ namespace Sylius\Bundle\PayumBundle\Action\PaymentRequest;
 use Payum\Core\Action\ActionInterface;
 use Payum\Core\Exception\RequestNotSupportedException;
 use Payum\Core\Request\GetHttpRequest;
-use Sylius\Bundle\PayumBundle\PaymentRequest\PayumPaymentRequestContextInterface;
+use Sylius\Bundle\PayumBundle\PaymentRequest\PaymentRequestContextInterface;
 use Webmozart\Assert\Assert;
 
 final class SyliusGetHttpRequestAction implements ActionInterface
 {
     public function __construct(
-        private PayumPaymentRequestContextInterface $payumApiContext,
+        private PaymentRequestContextInterface $payumApiContext,
     ) {
     }
 

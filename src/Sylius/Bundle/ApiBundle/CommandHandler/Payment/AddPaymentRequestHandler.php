@@ -20,6 +20,7 @@ use Sylius\Component\Core\Model\PaymentInterface;
 use Sylius\Component\Core\Model\PaymentMethodInterface;
 use Sylius\Component\Core\Repository\PaymentMethodRepositoryInterface;
 use Sylius\Component\Core\Repository\PaymentRepositoryInterface;
+use Sylius\Component\Payment\Factory\PaymentRequestFactoryInterface;
 use Sylius\Component\Payment\Model\PaymentRequestInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
@@ -30,7 +31,7 @@ use Webmozart\Assert\Assert;
 final class AddPaymentRequestHandler implements MessageHandlerInterface
 {
     public function __construct(
-        private FactoryInterface $paymentRequestFactory,
+        private PaymentRequestFactoryInterface $paymentRequestFactory,
         private PaymentMethodRepositoryInterface $paymentMethodRepository,
         private PaymentRepositoryInterface $paymentRepository,
         private PaymentRequestCommandProviderInterface $paymentRequestCommandProvider,
@@ -69,10 +70,7 @@ final class AddPaymentRequestHandler implements MessageHandlerInterface
             sprintf('Payment ID "%s" can not be found!', $addPaymentRequest->getPaymentId())
         );
 
-        /** @var PaymentRequestInterface $paymentRequest */
-        $paymentRequest = $this->paymentRequestFactory->createNew();
-        $paymentRequest->setPayment($payment);
-        $paymentRequest->setMethod($paymentMethod);
+        $paymentRequest = $this->paymentRequestFactory->createWithPaymentAndPaymentMethod($payment, $paymentMethod);
         $paymentRequest->setType($addPaymentRequest->getType());
         $paymentRequest->setRequestPayload($addPaymentRequest->getRequestPayload());
 

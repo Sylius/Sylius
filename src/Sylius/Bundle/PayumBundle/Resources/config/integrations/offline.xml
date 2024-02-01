@@ -23,11 +23,11 @@
             <tag name="sylius.payment_request.command_provider" factory="offline" />
         </service>
 
-        <service id="sylius.payment_request.command_provider.payum.offline.capture" class="Sylius\Bundle\PayumBundle\PaymentRequest\Provider\PayumCapturePaymentRequestCommandProvider">
+        <service id="sylius.payment_request.command_provider.payum.offline.capture" class="Sylius\Bundle\PayumBundle\PaymentRequest\Provider\CaptureCommandProvider">
             <tag name="sylius.payment_request.command_provider.payum.offline" type="capture" />
         </service>
 
-        <service id="sylius.payment_request.command_provider.payum.offline.status" class="Sylius\Bundle\PayumBundle\PaymentRequest\Provider\PayumStatusPaymentRequestCommandProvider">
+        <service id="sylius.payment_request.command_provider.payum.offline.status" class="Sylius\Bundle\PayumBundle\PaymentRequest\Provider\StatusCommandProvider">
             <tag name="sylius.payment_request.command_provider.payum.offline" type="status" />
         </service>
 

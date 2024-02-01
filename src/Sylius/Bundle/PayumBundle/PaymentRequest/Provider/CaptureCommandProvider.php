@@ -8,7 +8,7 @@ use Sylius\Bundle\PaymentBundle\Provider\PaymentRequestCommandProviderInterface;
 use Sylius\Bundle\PayumBundle\Command\CapturePaymentRequest;
 use Sylius\Component\Payment\Model\PaymentRequestInterface;
 
-final class PayumCapturePaymentRequestCommandProvider implements PaymentRequestCommandProviderInterface
+final class CaptureCommandProvider implements PaymentRequestCommandProviderInterface
 {
     public function supports(PaymentRequestInterface $paymentRequest): bool
     {
