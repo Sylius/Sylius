@@ -239,7 +239,7 @@ final class ManagingOrdersContext implements Context
     {
         Assert::false(
             $this->showPage->isResendShipmentConfirmationEmailButtonVisible(),
-            'Resend shipment confirmation email button should not be visible, but it does.',
+            'Resend shipment confirmation email button should not be visible.',
         );
     }
 
@@ -1005,7 +1005,7 @@ final class ManagingOrdersContext implements Context
     {
         Assert::false(
             $this->showPage->isResendOrderConfirmationEmailButtonVisible(),
-            'Resend order confirmation email button should not be visible, but it does.',
+            'Resend order confirmation email button should not be visible.',
         );
     }
 

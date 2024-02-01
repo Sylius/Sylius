@@ -136,7 +136,7 @@ final class EmailContext implements Context
         string $recipient,
         string $localeCode = 'en_US',
     ): void {
-        $this->assertEmailDoesNotContainsMessageTo(
+        $this->assertEmailDoesNotContainMessageTo(
             sprintf(
                 '%s %s %s',
                 $this->translator->trans('sylius.email.order_confirmation.your_order_number', [], null, $localeCode),
@@ -213,11 +213,6 @@ final class EmailContext implements Context
     public function onlyOneEmailShouldHaveBeenSentTo(string $recipient): void
     {
         Assert::eq($this->emailChecker->countMessagesTo($recipient), 1);
-    }
-
-    private function assertEmailDoesNotContainsMessageTo(string $message, string $recipient): void
-    {
-        Assert::false($this->emailChecker->hasMessageTo($message, $recipient));
     }
 
     private function assertEmailContainsMessageTo(string $message, string $recipient): void
