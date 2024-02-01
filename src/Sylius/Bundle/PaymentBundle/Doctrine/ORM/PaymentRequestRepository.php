@@ -36,4 +36,18 @@ class PaymentRequestRepository extends EntityRepository implements PaymentReques
             ->getResult()
         ;
     }
+
+    public function findOneByHash(string $hash): ?PaymentRequestInterface
+    {
+        return $this->createQueryBuilder('o')
+            ->addSelect('payment')
+            ->addSelect('method')
+            ->innerJoin('o.payment', 'payment')
+            ->innerJoin('o.method', 'method')
+            ->where('o.hash = :hash')
+            ->setParameter('hash', $hash)
+            ->getQuery()
+            ->getOneOrNullResult()
+        ;
+    }
 }

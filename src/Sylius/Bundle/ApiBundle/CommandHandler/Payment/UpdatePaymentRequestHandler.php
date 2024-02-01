@@ -36,8 +36,9 @@ final class UpdatePaymentRequestHandler implements MessageHandlerInterface
     {
         $hash = $updatePaymentRequest->getHash();
         Assert::notNull($hash);
-        /** @var PaymentRequestInterface $paymentRequest */
-        $paymentRequest = $this->paymentRequestRepository->find($hash);
+
+        $paymentRequest = $this->paymentRequestRepository->findOneByHash($hash);
+        Assert::notNull($paymentRequest);
 
         $paymentRequest->setRequestPayload($updatePaymentRequest->getRequestPayload());
 
