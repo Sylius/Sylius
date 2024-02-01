@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Promotion\Generator;
 
-final class PromotionCouponGeneratorInstruction implements PromotionCouponGeneratorInstructionInterface
+final class PromotionCouponGeneratorInstruction implements ReadablePromotionCouponGeneratorInstructionInterface
 {
     public function __construct(
         private ?int $amount = 5,
@@ -30,19 +30,9 @@ final class PromotionCouponGeneratorInstruction implements PromotionCouponGenera
         return $this->amount;
     }
 
-    public function setAmount(?int $amount): void
-    {
-        $this->amount = $amount;
-    }
-
     public function getPrefix(): ?string
     {
         return $this->prefix;
-    }
-
-    public function setPrefix(?string $prefix): void
-    {
-        $this->prefix = $prefix;
     }
 
     public function getCodeLength(): ?int
@@ -50,19 +40,9 @@ final class PromotionCouponGeneratorInstruction implements PromotionCouponGenera
         return $this->codeLength;
     }
 
-    public function setCodeLength(?int $codeLength): void
-    {
-        $this->codeLength = $codeLength;
-    }
-
     public function getSuffix(): ?string
     {
         return $this->suffix;
-    }
-
-    public function setSuffix(?string $suffix): void
-    {
-        $this->suffix = $suffix;
     }
 
     public function getExpiresAt(): ?\DateTimeInterface
@@ -70,18 +50,8 @@ final class PromotionCouponGeneratorInstruction implements PromotionCouponGenera
         return $this->expiresAt;
     }
 
-    public function setExpiresAt(?\DateTimeInterface $expiresAt): void
-    {
-        $this->expiresAt = $expiresAt;
-    }
-
     public function getUsageLimit(): ?int
     {
         return $this->usageLimit;
-    }
-
-    public function setUsageLimit(int $usageLimit): void
-    {
-        $this->usageLimit = $usageLimit;
     }
 }
