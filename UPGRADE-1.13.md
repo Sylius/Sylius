@@ -447,3 +447,6 @@ List of affected classes:
    - `Sylius\Bundle\PromotionBundle\Validator\CatalogPromotionScope\ScopeValidatorInterface`
    - `Sylius\Bundle\PromotionBundle\Validator\CatalogPromotionActionValidator`
    - `Sylius\Bundle\PromotionBundle\Validator\CatalogPromotionScopeValidator`
+
+1. Class `Sylius\Component\Promotion\Checker\Rule\CartQuantityRuleChecker` has been deprecated.
+   Use `Sylius\Component\Core\Promotion\Checker\Rule\CartQuantityRuleChecker` instead.
