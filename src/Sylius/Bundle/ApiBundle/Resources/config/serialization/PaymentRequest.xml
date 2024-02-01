@@ -17,40 +17,58 @@
 >
     <class name="Sylius\Component\Core\Model\PaymentRequest">
         <attribute name="hash">
-            <group>admin:payment_request:read</group>
-            <group>shop:payment_request:read</group>
+            <group>admin:payment_request:show</group>
+            <group>admin:payment_request:index</group>
+            <group>shop:payment_request:show</group>
+            <group>shop:payment_request:index</group>
         </attribute>
         <attribute name="payment">
-            <group>admin:payment_request:read</group>
-            <group>shop:payment_request:read</group>
+            <group>admin:payment_request:show</group>
+            <group>admin:payment_request:index</group>
+            <group>shop:payment_request:show</group>
+            <group>shop:payment_request:index</group>
         </attribute>
         <attribute name="method">
-            <group>admin:payment_request:read</group>
-            <group>shop:payment_request:read</group>
+            <group>admin:payment_request:show</group>
+            <group>admin:payment_request:index</group>
+            <group>shop:payment_request:show</group>
+            <group>shop:payment_request:index</group>
         </attribute>
         <attribute name="type">
-            <group>admin:payment_request:read</group>
-            <group>shop:payment_request:read</group>
+            <group>admin:payment_request:show</group>
+            <group>admin:payment_request:index</group>
+            <group>shop:payment_request:show</group>
+            <group>shop:payment_request:index</group>
         </attribute>
         <attribute name="state">
-            <group>admin:payment_request:read</group>
-            <group>shop:payment_request:read</group>
+            <group>admin:payment_request:show</group>
+            <group>admin:payment_request:index</group>
+            <group>shop:payment_request:show</group>
+            <group>shop:payment_request:index</group>
         </attribute>
         <attribute name="requestPayload">
-            <group>admin:payment_request:read</group>
-            <group>shop:payment_request:read</group>
+            <group>admin:payment_request:show</group>
+            <group>admin:payment_request:index</group>
+            <group>shop:payment_request:show</group>
+            <group>shop:payment_request:index</group>
         </attribute>
         <attribute name="responseData">
-            <group>admin:payment_request:read</group>
-            <group>shop:payment_request:read</group>
+            <group>admin:payment_request:show</group>
+            <group>admin:payment_request:index</group>
+            <group>shop:payment_request:show</group>
+            <group>shop:payment_request:index</group>
         </attribute>
         <attribute name="createdAt">
-            <group>admin:payment_request:read</group>
-            <group>shop:payment_request:read</group>
+            <group>admin:payment_request:show</group>
+            <group>admin:payment_request:index</group>
+            <group>shop:payment_request:show</group>
+            <group>shop:payment_request:index</group>
         </attribute>
         <attribute name="updatedAt">
-            <group>admin:payment_request:read</group>
-            <group>shop:payment_request:read</group>
+            <group>admin:payment_request:show</group>
+            <group>admin:payment_request:index</group>
+            <group>shop:payment_request:show</group>
+            <group>shop:payment_request:index</group>
         </attribute>
     </class>
 </serializer>

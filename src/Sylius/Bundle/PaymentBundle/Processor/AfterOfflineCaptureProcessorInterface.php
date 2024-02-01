@@ -11,11 +11,11 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\PayumBundle\Factory;
+namespace Sylius\Bundle\PaymentBundle\Processor;
 
-use Payum\Core\Request\GetStatusInterface;
+use Sylius\Component\Payment\Model\PaymentRequestInterface;
 
-interface GetStatusFactoryInterface extends ModelAggregateRequestFactoryInterface
+interface AfterOfflineCaptureProcessorInterface
 {
-    public function createNewWithModel($model): GetStatusInterface;
+    public function process(PaymentRequestInterface $paymentRequest): void;
 }
