@@ -26,7 +26,7 @@
         }
     ],
     "require": {
-        "php": "^8.0",
+        "php": "^8.2",
         "doctrine/doctrine-migrations-bundle": "^3.0.1",
         "egulias/email-validator": "^3.1",
         "fakerphp/faker": "^1.10",
@@ -40,39 +40,40 @@
         "sylius-labs/association-hydrator": "^1.1 || ^1.2",
         "sylius-labs/doctrine-migrations-extra-bundle": "^0.1.4 || ^0.2",
         "sylius-labs/polyfill-symfony-framework-bundle": "^1.0 || ^1.1",
-        "sylius/addressing-bundle": "^1.13",
-        "sylius/attribute-bundle": "^1.13",
-        "sylius/channel-bundle": "^1.13",
-        "sylius/core": "^1.13",
-        "sylius/currency-bundle": "^1.13",
-        "sylius/customer-bundle": "^1.13",
-        "sylius/fixtures-bundle": "^1.7",
-        "sylius/grid-bundle": "^1.11",
-        "sylius/inventory-bundle": "^1.13",
-        "sylius/locale-bundle": "^1.13",
-        "sylius/money-bundle": "^1.13",
-        "sylius/order-bundle": "^1.13",
-        "sylius/payment-bundle": "^1.13",
-        "sylius/payum-bundle": "^1.13",
-        "sylius/product-bundle": "^1.13",
-        "sylius/promotion-bundle": "^1.13",
-        "sylius/resource-bundle": "^1.9",
-        "sylius/review-bundle": "^1.13",
-        "sylius/shipping-bundle": "^1.13",
-        "sylius/state-machine-abstraction": "^1.13",
-        "sylius/taxation-bundle": "^1.13",
-        "sylius/taxonomy-bundle": "^1.13",
-        "sylius/mailer-bundle": "^1.8 || ^2.0@beta",
-        "sylius/theme-bundle": "^2.1.1 || ^2.3",
-        "sylius/ui-bundle": "^1.13",
-        "sylius/user-bundle": "^1.13",
-        "symfony/framework-bundle": "^5.4.21 || ^6.0",
-        "symfony/intl": "^5.4.21 || ^6.0",
-        "symfony/mailer": "^5.4.21 || ^6.0",
-        "symfony/messenger": "^5.4.21 || ^6.0",
-        "symfony/templating": "^5.4.21 || ^6.0",
-        "symfony/webpack-encore-bundle": "^1.15",
-        "symfony/workflow": "^5.4.21 || ^6.0",
+        "sylius/addressing-bundle": "^2.0",
+        "sylius/attribute-bundle": "^2.0",
+        "sylius/channel-bundle": "^2.0",
+        "sylius/core": "^2.0",
+        "sylius/currency-bundle": "^2.0",
+        "sylius/customer-bundle": "^2.0",
+        "sylius/fixtures-bundle": "^1.8",
+        "sylius/grid-bundle": "^1.12",
+        "sylius/inventory-bundle": "^2.0",
+        "sylius/locale-bundle": "^2.0",
+        "sylius/mailer-bundle": "^2.0",
+        "sylius/money-bundle": "^2.0",
+        "sylius/order-bundle": "^2.0",
+        "sylius/payment-bundle": "^2.0",
+        "sylius/payum-bundle": "^2.0",
+        "sylius/product-bundle": "^2.0",
+        "sylius/promotion-bundle": "^2.0",
+        "sylius/resource-bundle": "^1.10",
+        "sylius/review-bundle": "^2.0",
+        "sylius/shipping-bundle": "^2.0",
+        "sylius/state-machine-abstraction": "^2.0",
+        "sylius/taxation-bundle": "^2.0",
+        "sylius/taxonomy-bundle": "^2.0",
+        "sylius/theme-bundle": "^2.3",
+        "sylius/ui-bundle": "^2.0",
+        "sylius/user-bundle": "^2.0",
+        "symfony/clock": "^6.4.0",
+        "symfony/framework-bundle": "^6.4.1",
+        "symfony/intl": "^6.4.0",
+        "symfony/mailer": "^6.4.0",
+        "symfony/messenger": "^6.4.0",
+        "symfony/templating": "^6.4.0",
+        "symfony/webpack-encore-bundle": "^1.17.1",
+        "symfony/workflow": "^6.4.0",
         "winzou/state-machine-bundle": "^0.6"
     },
     "require-dev": {
@@ -83,11 +84,8 @@
         "phpspec/phpspec": "^7.2",
         "phpspec/prophecy-phpunit": "^2.0",
         "phpunit/phpunit": "^9.5",
-        "symfony/dependency-injection": "^5.4.21 || ^6.0",
-        "symfony/dotenv": "^5.4.21 || ^6.0"
-    },
-    "conflict": {
-        "symfony/doctrine-bridge": "4.4.20 || 5.2.4 || 5.2.5"
+        "symfony/dependency-injection": "^6.4.1",
+        "symfony/dotenv": "^6.4.0"
     },
     "config": {
         "allow-plugins": {
@@ -97,10 +95,10 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-main": "1.13-dev"
+            "dev-main": "2.0-dev"
         },
         "symfony": {
-            "require": "^5.4.21"
+            "require": "6.3.*"
         }
     },
     "autoload": {

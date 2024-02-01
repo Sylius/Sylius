@@ -66,11 +66,6 @@ parameters:
 			path: src/Sylius/Bundle/AddressingBundle/Validator/Constraints/ProvinceAddressConstraintValidator.php
 
 		-
-			message: "#^Method Sylius\\\\Bundle\\\\AdminBundle\\\\Action\\\\Account\\\\RenderResetPasswordPageAction\\:\\:__construct\\(\\) has parameter \\$userRepository with generic interface Sylius\\\\Component\\\\User\\\\Repository\\\\UserRepositoryInterface but does not specify its types\\: T$#"
-			count: 1
-			path: src/Sylius/Bundle/AdminBundle/Action/Account/RenderResetPasswordPageAction.php
-
-		-
 			message: "#^Method Sylius\\\\Bundle\\\\AdminBundle\\\\Action\\\\RemoveAvatarAction\\:\\:__construct\\(\\) has parameter \\$avatarRepository with generic interface Sylius\\\\Component\\\\Core\\\\Repository\\\\AvatarImageRepositoryInterface but does not specify its types\\: T$#"
 			count: 1
 			path: src/Sylius/Bundle/AdminBundle/Action/RemoveAvatarAction.php
@@ -1341,21 +1336,6 @@ parameters:
 			path: src/Sylius/Bundle/ApiBundle/DataTransformer/SubresourceIdAwareCommandDataTransformer.php
 
 		-
-			message: "#^Method Sylius\\\\Bundle\\\\ApiBundle\\\\DependencyInjection\\\\Compiler\\\\CommandDataTransformerPass\\:\\:process\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Sylius/Bundle/ApiBundle/DependencyInjection/Compiler/CommandDataTransformerPass.php
-
-		-
-			message: "#^Method Sylius\\\\Bundle\\\\ApiBundle\\\\DependencyInjection\\\\Compiler\\\\FlattenExceptionNormalizerDecoratorCompilerPass\\:\\:process\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Sylius/Bundle/ApiBundle/DependencyInjection/Compiler/FlattenExceptionNormalizerDecoratorCompilerPass.php
-
-		-
-			message: "#^Method Sylius\\\\Bundle\\\\ApiBundle\\\\DependencyInjection\\\\Compiler\\\\LegacyErrorHandlingCompilerPass\\:\\:process\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Sylius/Bundle/ApiBundle/DependencyInjection/Compiler/LegacyErrorHandlingCompilerPass.php
-
-		-
 			message: "#^Method Sylius\\\\Bundle\\\\ApiBundle\\\\Doctrine\\\\QueryCollectionExtension\\\\AcceptedProductReviewsExtension\\:\\:applyToCollection\\(\\) has parameter \\$context with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Sylius/Bundle/ApiBundle/Doctrine/QueryCollectionExtension/AcceptedProductReviewsExtension.php
@@ -2111,11 +2091,6 @@ parameters:
 			path: src/Sylius/Bundle/CoreBundle/CatalogPromotion/CommandHandler/RemoveCatalogPromotionHandler.php
 
 		-
-			message: "#^Method Sylius\\\\Bundle\\\\CoreBundle\\\\CatalogPromotion\\\\CommandHandler\\\\RemoveInactiveCatalogPromotionHandler\\:\\:__construct\\(\\) has parameter \\$catalogPromotionRepository with generic interface Sylius\\\\Component\\\\Promotion\\\\Repository\\\\CatalogPromotionRepositoryInterface but does not specify its types\\: T$#"
-			count: 1
-			path: src/Sylius/Bundle/CoreBundle/CatalogPromotion/CommandHandler/RemoveInactiveCatalogPromotionHandler.php
-
-		-
 			message: "#^Method Sylius\\\\Bundle\\\\CoreBundle\\\\CatalogPromotion\\\\CommandHandler\\\\UpdateCatalogPromotionStateHandler\\:\\:__construct\\(\\) has parameter \\$catalogPromotionRepository with generic interface Sylius\\\\Component\\\\Resource\\\\Repository\\\\RepositoryInterface but does not specify its types\\: T$#"
 			count: 1
 			path: src/Sylius/Bundle/CoreBundle/CatalogPromotion/CommandHandler/UpdateCatalogPromotionStateHandler.php
@@ -2281,14 +2256,29 @@ parameters:
 			path: src/Sylius/Bundle/CoreBundle/Collector/SyliusCollector.php
 
 		-
+			message: "#^PHPDoc tag @var for variable \\$command has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Sylius/Bundle/CoreBundle/Command/InstallCommand.php
+
+		-
+			message: "#^Property Sylius\\\\Bundle\\\\CoreBundle\\\\Command\\\\InstallCommand\\:\\:\\$commands type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Sylius/Bundle/CoreBundle/Command/InstallCommand.php
+
+		-
+			message: "#^Method Sylius\\\\Bundle\\\\CoreBundle\\\\Command\\\\SetupCommand\\:\\:getAdminUserRepository\\(\\) return type with generic interface Sylius\\\\Component\\\\User\\\\Repository\\\\UserRepositoryInterface does not specify its types\\: T$#"
+			count: 1
+			path: src/Sylius/Bundle/CoreBundle/Command/SetupCommand.php
+
+		-
+			message: "#^PHPDoc tag @var for variable \\$userRepository contains generic interface Sylius\\\\Component\\\\User\\\\Repository\\\\UserRepositoryInterface but does not specify its types\\: T$#"
+			count: 3
+			path: src/Sylius/Bundle/CoreBundle/Command/SetupCommand.php
+
+		-
 			message: "#^Method Sylius\\\\Bundle\\\\CoreBundle\\\\Context\\\\CustomerAndChannelBasedCartContext\\:\\:__construct\\(\\) has parameter \\$orderRepository with generic interface Sylius\\\\Component\\\\Core\\\\Repository\\\\OrderRepositoryInterface but does not specify its types\\: T$#"
 			count: 1
 			path: src/Sylius/Bundle/CoreBundle/Context/CustomerAndChannelBasedCartContext.php
-
-		-
-			message: "#^PHPDoc tag @var for variable \\$smConfigs has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Sylius/Bundle/CoreBundle/DependencyInjection/Compiler/BackwardsCompatibility/CancelOrderStateMachineCallbackPass.php
 
 		-
 			message: "#^Method Sylius\\\\Bundle\\\\CoreBundle\\\\DependencyInjection\\\\SyliusCoreExtension\\:\\:getNamespacesOfMigrationsExecutedBefore\\(\\) return type has no value type specified in iterable type array\\.$#"
@@ -2297,11 +2287,6 @@ parameters:
 
 		-
 			message: "#^Method Sylius\\\\Bundle\\\\CoreBundle\\\\DependencyInjection\\\\SyliusCoreExtension\\:\\:prependSyliusOrderBundle\\(\\) has parameter \\$config with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Sylius/Bundle/CoreBundle/DependencyInjection/SyliusCoreExtension.php
-
-		-
-			message: "#^Method Sylius\\\\Bundle\\\\CoreBundle\\\\DependencyInjection\\\\SyliusCoreExtension\\:\\:switchOrderProcessorsPriorities\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/Sylius/Bundle/CoreBundle/DependencyInjection/SyliusCoreExtension.php
 
@@ -2332,11 +2317,6 @@ parameters:
 
 		-
 			message: "#^Method Sylius\\\\Bundle\\\\CoreBundle\\\\Doctrine\\\\ORM\\\\OrderRepository\\:\\:createByCustomerAndChannelIdQueryBuilder\\(\\) has parameter \\$customerId with no type specified\\.$#"
-			count: 1
-			path: src/Sylius/Bundle/CoreBundle/Doctrine/ORM/OrderRepository.php
-
-		-
-			message: "#^Method Sylius\\\\Bundle\\\\CoreBundle\\\\Doctrine\\\\ORM\\\\OrderRepository\\:\\:createByCustomerIdQueryBuilder\\(\\) has parameter \\$customerId with no type specified\\.$#"
 			count: 1
 			path: src/Sylius/Bundle/CoreBundle/Doctrine/ORM/OrderRepository.php
 
@@ -2491,16 +2471,6 @@ parameters:
 			path: src/Sylius/Bundle/CoreBundle/Fixture/AbstractResourceFixture.php
 
 		-
-			message: "#^Method Sylius\\\\Bundle\\\\CoreBundle\\\\Fixture\\\\BookProductFixture\\:\\:getUniqueNames\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Sylius/Bundle/CoreBundle/Fixture/BookProductFixture.php
-
-		-
-			message: "#^Method Sylius\\\\Bundle\\\\CoreBundle\\\\Fixture\\\\BookProductFixture\\:\\:load\\(\\) has parameter \\$options with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Sylius/Bundle/CoreBundle/Fixture/BookProductFixture.php
-
-		-
 			message: "#^Method Sylius\\\\Bundle\\\\CoreBundle\\\\Fixture\\\\CurrencyFixture\\:\\:__construct\\(\\) has parameter \\$currencyFactory with generic interface Sylius\\\\Component\\\\Resource\\\\Factory\\\\FactoryInterface but does not specify its types\\: T$#"
 			count: 1
 			path: src/Sylius/Bundle/CoreBundle/Fixture/CurrencyFixture.php
@@ -2637,16 +2607,6 @@ parameters:
 
 		-
 			message: "#^Method Sylius\\\\Bundle\\\\CoreBundle\\\\Fixture\\\\Factory\\\\ChannelExampleFactory\\:\\:create\\(\\) has parameter \\$options with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Sylius/Bundle/CoreBundle/Fixture/Factory/ChannelExampleFactory.php
-
-		-
-			message: "#^Property Sylius\\\\Bundle\\\\CoreBundle\\\\Fixture\\\\Factory\\\\ChannelExampleFactory\\:\\:\\$shopBillingDataFactory with generic interface Sylius\\\\Component\\\\Resource\\\\Factory\\\\FactoryInterface does not specify its types\\: T$#"
-			count: 1
-			path: src/Sylius/Bundle/CoreBundle/Fixture/Factory/ChannelExampleFactory.php
-
-		-
-			message: "#^Property Sylius\\\\Bundle\\\\CoreBundle\\\\Fixture\\\\Factory\\\\ChannelExampleFactory\\:\\:\\$taxonRepository with generic interface Sylius\\\\Component\\\\Taxonomy\\\\Repository\\\\TaxonRepositoryInterface does not specify its types\\: T$#"
 			count: 1
 			path: src/Sylius/Bundle/CoreBundle/Fixture/Factory/ChannelExampleFactory.php
 
@@ -3236,16 +3196,6 @@ parameters:
 			path: src/Sylius/Bundle/CoreBundle/Fixture/LocaleFixture.php
 
 		-
-			message: "#^Method Sylius\\\\Bundle\\\\CoreBundle\\\\Fixture\\\\MugProductFixture\\:\\:getUniqueNames\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Sylius/Bundle/CoreBundle/Fixture/MugProductFixture.php
-
-		-
-			message: "#^Method Sylius\\\\Bundle\\\\CoreBundle\\\\Fixture\\\\MugProductFixture\\:\\:load\\(\\) has parameter \\$options with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Sylius/Bundle/CoreBundle/Fixture/MugProductFixture.php
-
-		-
 			message: "#^Method Sylius\\\\Bundle\\\\CoreBundle\\\\Fixture\\\\OptionsResolver\\\\LazyOption\\:\\:all\\(\\) has parameter \\$repository with generic interface Sylius\\\\Component\\\\Resource\\\\Repository\\\\RepositoryInterface but does not specify its types\\: T$#"
 			count: 1
 			path: src/Sylius/Bundle/CoreBundle/Fixture/OptionsResolver/LazyOption.php
@@ -3326,61 +3276,6 @@ parameters:
 			path: src/Sylius/Bundle/CoreBundle/Fixture/OptionsResolver/LazyOption.php
 
 		-
-			message: "#^Method Sylius\\\\Bundle\\\\CoreBundle\\\\Fixture\\\\OrderFixture\\:\\:__construct\\(\\) has parameter \\$addressFactory with generic interface Sylius\\\\Component\\\\Resource\\\\Factory\\\\FactoryInterface but does not specify its types\\: T$#"
-			count: 1
-			path: src/Sylius/Bundle/CoreBundle/Fixture/OrderFixture.php
-
-		-
-			message: "#^Method Sylius\\\\Bundle\\\\CoreBundle\\\\Fixture\\\\OrderFixture\\:\\:__construct\\(\\) has parameter \\$channelRepository with generic interface Sylius\\\\Component\\\\Resource\\\\Repository\\\\RepositoryInterface but does not specify its types\\: T$#"
-			count: 1
-			path: src/Sylius/Bundle/CoreBundle/Fixture/OrderFixture.php
-
-		-
-			message: "#^Method Sylius\\\\Bundle\\\\CoreBundle\\\\Fixture\\\\OrderFixture\\:\\:__construct\\(\\) has parameter \\$countryRepository with generic interface Sylius\\\\Component\\\\Resource\\\\Repository\\\\RepositoryInterface but does not specify its types\\: T$#"
-			count: 1
-			path: src/Sylius/Bundle/CoreBundle/Fixture/OrderFixture.php
-
-		-
-			message: "#^Method Sylius\\\\Bundle\\\\CoreBundle\\\\Fixture\\\\OrderFixture\\:\\:__construct\\(\\) has parameter \\$customerRepository with generic interface Sylius\\\\Component\\\\Resource\\\\Repository\\\\RepositoryInterface but does not specify its types\\: T$#"
-			count: 1
-			path: src/Sylius/Bundle/CoreBundle/Fixture/OrderFixture.php
-
-		-
-			message: "#^Method Sylius\\\\Bundle\\\\CoreBundle\\\\Fixture\\\\OrderFixture\\:\\:__construct\\(\\) has parameter \\$orderFactory with generic interface Sylius\\\\Component\\\\Resource\\\\Factory\\\\FactoryInterface but does not specify its types\\: T$#"
-			count: 1
-			path: src/Sylius/Bundle/CoreBundle/Fixture/OrderFixture.php
-
-		-
-			message: "#^Method Sylius\\\\Bundle\\\\CoreBundle\\\\Fixture\\\\OrderFixture\\:\\:__construct\\(\\) has parameter \\$orderItemFactory with generic interface Sylius\\\\Component\\\\Resource\\\\Factory\\\\FactoryInterface but does not specify its types\\: T$#"
-			count: 1
-			path: src/Sylius/Bundle/CoreBundle/Fixture/OrderFixture.php
-
-		-
-			message: "#^Method Sylius\\\\Bundle\\\\CoreBundle\\\\Fixture\\\\OrderFixture\\:\\:__construct\\(\\) has parameter \\$paymentMethodRepository with generic interface Sylius\\\\Component\\\\Core\\\\Repository\\\\PaymentMethodRepositoryInterface but does not specify its types\\: T$#"
-			count: 1
-			path: src/Sylius/Bundle/CoreBundle/Fixture/OrderFixture.php
-
-		-
-			message: "#^Method Sylius\\\\Bundle\\\\CoreBundle\\\\Fixture\\\\OrderFixture\\:\\:__construct\\(\\) has parameter \\$productRepository with generic interface Sylius\\\\Component\\\\Resource\\\\Repository\\\\RepositoryInterface but does not specify its types\\: T$#"
-			count: 1
-			path: src/Sylius/Bundle/CoreBundle/Fixture/OrderFixture.php
-
-		-
-			message: "#^Method Sylius\\\\Bundle\\\\CoreBundle\\\\Fixture\\\\OrderFixture\\:\\:__construct\\(\\) has parameter \\$shippingMethodRepository with generic interface Sylius\\\\Component\\\\Core\\\\Repository\\\\ShippingMethodRepositoryInterface but does not specify its types\\: T$#"
-			count: 1
-			path: src/Sylius/Bundle/CoreBundle/Fixture/OrderFixture.php
-
-		-
-			message: "#^Method Sylius\\\\Bundle\\\\CoreBundle\\\\Fixture\\\\OrderFixture\\:\\:generateDates\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Sylius/Bundle/CoreBundle/Fixture/OrderFixture.php
-
-		-
-			message: "#^Method Sylius\\\\Bundle\\\\CoreBundle\\\\Fixture\\\\OrderFixture\\:\\:load\\(\\) has parameter \\$options with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Sylius/Bundle/CoreBundle/Fixture/OrderFixture.php
-
-		-
 			message: "#^Method Sylius\\\\Bundle\\\\CoreBundle\\\\Fixture\\\\ProductAttributeFixture\\:\\:__construct\\(\\) has parameter \\$attributeTypes with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Sylius/Bundle/CoreBundle/Fixture/ProductAttributeFixture.php
@@ -3399,26 +3294,6 @@ parameters:
 			message: "#^Method Sylius\\\\Bundle\\\\CoreBundle\\\\Fixture\\\\SimilarProductAssociationFixture\\:\\:load\\(\\) has parameter \\$options with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Sylius/Bundle/CoreBundle/Fixture/SimilarProductAssociationFixture.php
-
-		-
-			message: "#^Method Sylius\\\\Bundle\\\\CoreBundle\\\\Fixture\\\\StickerProductFixture\\:\\:getUniqueNames\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Sylius/Bundle/CoreBundle/Fixture/StickerProductFixture.php
-
-		-
-			message: "#^Method Sylius\\\\Bundle\\\\CoreBundle\\\\Fixture\\\\StickerProductFixture\\:\\:load\\(\\) has parameter \\$options with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Sylius/Bundle/CoreBundle/Fixture/StickerProductFixture.php
-
-		-
-			message: "#^Method Sylius\\\\Bundle\\\\CoreBundle\\\\Fixture\\\\TshirtProductFixture\\:\\:getUniqueNames\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Sylius/Bundle/CoreBundle/Fixture/TshirtProductFixture.php
-
-		-
-			message: "#^Method Sylius\\\\Bundle\\\\CoreBundle\\\\Fixture\\\\TshirtProductFixture\\:\\:load\\(\\) has parameter \\$options with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Sylius/Bundle/CoreBundle/Fixture/TshirtProductFixture.php
 
 		-
 			message: "#^Class Sylius\\\\Bundle\\\\CoreBundle\\\\Form\\\\DataTransformer\\\\ProductTaxonToTaxonTransformer implements generic interface Symfony\\\\Component\\\\Form\\\\DataTransformerInterface but does not specify its types\\: T, R$#"
@@ -3521,11 +3396,6 @@ parameters:
 			path: src/Sylius/Bundle/CoreBundle/Form/Extension/LocaleTypeExtension.php
 
 		-
-			message: "#^Method Sylius\\\\Bundle\\\\CoreBundle\\\\Form\\\\Type\\\\AddressChoiceType\\:\\:__construct\\(\\) has parameter \\$addressRepository with generic interface Sylius\\\\Component\\\\Core\\\\Repository\\\\AddressRepositoryInterface but does not specify its types\\: T$#"
-			count: 1
-			path: src/Sylius/Bundle/CoreBundle/Form/Type/AddressChoiceType.php
-
-		-
 			message: "#^Method Sylius\\\\Bundle\\\\CoreBundle\\\\Form\\\\Type\\\\CatalogPromotionScope\\\\ForProductsScopeConfigurationType\\:\\:__construct\\(\\) has parameter \\$productsToCodesTransformer with generic interface Symfony\\\\Component\\\\Form\\\\DataTransformerInterface but does not specify its types\\: T, R$#"
 			count: 1
 			path: src/Sylius/Bundle/CoreBundle/Form/Type/CatalogPromotionScope/ForProductsScopeConfigurationType.php
@@ -3609,11 +3479,6 @@ parameters:
 			message: "#^Method Sylius\\\\Bundle\\\\CoreBundle\\\\Form\\\\Type\\\\Promotion\\\\Rule\\\\TotalOfItemsFromTaxonConfigurationType\\:\\:__construct\\(\\) has parameter \\$taxonRepository with generic interface Sylius\\\\Component\\\\Resource\\\\Repository\\\\RepositoryInterface but does not specify its types\\: T$#"
 			count: 1
 			path: src/Sylius/Bundle/CoreBundle/Form/Type/Promotion/Rule/TotalOfItemsFromTaxonConfigurationType.php
-
-		-
-			message: "#^Method Sylius\\\\Bundle\\\\CoreBundle\\\\Form\\\\Type\\\\ShopBillingDataType\\:\\:configureOptions\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Sylius/Bundle/CoreBundle/Form/Type/ShopBillingDataType.php
 
 		-
 			message: "#^Method Sylius\\\\Bundle\\\\CoreBundle\\\\Form\\\\Type\\\\TaxCalculationStrategyChoiceType\\:\\:__construct\\(\\) has parameter \\$strategies with no value type specified in iterable type array\\.$#"
@@ -3744,21 +3609,6 @@ parameters:
 			message: "#^Method Sylius\\\\Bundle\\\\CoreBundle\\\\MessageHandler\\\\Admin\\\\Account\\\\SendResetPasswordEmailHandler\\:\\:__construct\\(\\) has parameter \\$userRepository with generic interface Sylius\\\\Component\\\\User\\\\Repository\\\\UserRepositoryInterface but does not specify its types\\: T$#"
 			count: 1
 			path: src/Sylius/Bundle/CoreBundle/MessageHandler/Admin/Account/SendResetPasswordEmailHandler.php
-
-		-
-			message: "#^Method Sylius\\\\Bundle\\\\CoreBundle\\\\Migrations\\\\Version20161214153137\\:\\:setContainer\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Sylius/Bundle/CoreBundle/Migrations/Version20161214153137.php
-
-		-
-			message: "#^Method Sylius\\\\Bundle\\\\CoreBundle\\\\Migrations\\\\Version20161219160441\\:\\:setContainer\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Sylius/Bundle/CoreBundle/Migrations/Version20161219160441.php
-
-		-
-			message: "#^Method Sylius\\\\Bundle\\\\CoreBundle\\\\Migrations\\\\Version20170109143010\\:\\:setContainer\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Sylius/Bundle/CoreBundle/Migrations/Version20170109143010.php
 
 		-
 			message: "#^Method Sylius\\\\Bundle\\\\CoreBundle\\\\Migrations\\\\Version20171003103916\\:\\:getProductAttributes\\(\\) return type has no value type specified in iterable type array\\.$#"
@@ -3979,11 +3829,6 @@ parameters:
 			message: "#^Method Sylius\\\\Bundle\\\\CoreBundle\\\\Templating\\\\Helper\\\\PriceHelper\\:\\:hasLowestPriceBeforeDiscount\\(\\) has parameter \\$context with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Sylius/Bundle/CoreBundle/Templating/Helper/PriceHelper.php
-
-		-
-			message: "#^Method Sylius\\\\Bundle\\\\CoreBundle\\\\Templating\\\\Helper\\\\ProductVariantsPricesHelper\\:\\:getPrices\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Sylius/Bundle/CoreBundle/Templating/Helper/ProductVariantsPricesHelper.php
 
 		-
 			message: "#^Method Sylius\\\\Bundle\\\\CoreBundle\\\\Twig\\\\BundleLoadedCheckerExtension\\:\\:__construct\\(\\) has parameter \\$listOfBundles with no value type specified in iterable type array\\.$#"
@@ -4401,11 +4246,6 @@ parameters:
 			path: src/Sylius/Bundle/ProductBundle/Form/Type/ProductCodeChoiceType.php
 
 		-
-			message: "#^Method Sylius\\\\Bundle\\\\ProductBundle\\\\Form\\\\Type\\\\ProductOptionChoiceType\\:\\:__construct\\(\\) has parameter \\$productOptionRepository with generic interface Sylius\\\\Component\\\\Resource\\\\Repository\\\\RepositoryInterface but does not specify its types\\: T$#"
-			count: 1
-			path: src/Sylius/Bundle/ProductBundle/Form/Type/ProductOptionChoiceType.php
-
-		-
 			message: "#^Method Sylius\\\\Bundle\\\\ProductBundle\\\\Form\\\\Type\\\\ProductOptionValueCollectionType\\:\\:assertOptionsAreValid\\(\\) has parameter \\$options with no type specified\\.$#"
 			count: 1
 			path: src/Sylius/Bundle/ProductBundle/Form/Type/ProductOptionValueCollectionType.php
@@ -4716,26 +4556,6 @@ parameters:
 			path: src/Sylius/Bundle/ShopBundle/DependencyInjection/SyliusShopExtension.php
 
 		-
-			message: "#^Method Sylius\\\\Bundle\\\\ShopBundle\\\\EmailManager\\\\ContactEmailManager\\:\\:sendContactRequest\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Sylius/Bundle/ShopBundle/EmailManager/ContactEmailManager.php
-
-		-
-			message: "#^Method Sylius\\\\Bundle\\\\ShopBundle\\\\EmailManager\\\\ContactEmailManager\\:\\:sendContactRequest\\(\\) has parameter \\$recipients with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Sylius/Bundle/ShopBundle/EmailManager/ContactEmailManager.php
-
-		-
-			message: "#^Method Sylius\\\\Bundle\\\\ShopBundle\\\\EmailManager\\\\ContactEmailManagerInterface\\:\\:sendContactRequest\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Sylius/Bundle/ShopBundle/EmailManager/ContactEmailManagerInterface.php
-
-		-
-			message: "#^Method Sylius\\\\Bundle\\\\ShopBundle\\\\EmailManager\\\\ContactEmailManagerInterface\\:\\:sendContactRequest\\(\\) has parameter \\$recipients with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Sylius/Bundle/ShopBundle/EmailManager/ContactEmailManagerInterface.php
-
-		-
 			message: "#^Method Sylius\\\\Bundle\\\\ShopBundle\\\\EventListener\\\\UserImpersonatedListener\\:\\:__construct\\(\\) has parameter \\$orderRepository with generic interface Sylius\\\\Component\\\\Core\\\\Repository\\\\OrderRepositoryInterface but does not specify its types\\: T$#"
 			count: 1
 			path: src/Sylius/Bundle/ShopBundle/EventListener/UserImpersonatedListener.php
@@ -4759,11 +4579,6 @@ parameters:
 			message: "#^Method Sylius\\\\Bundle\\\\ShopBundle\\\\Router\\\\LocaleStrippingRouter\\:\\:matchRequest\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Sylius/Bundle/ShopBundle/Router/LocaleStrippingRouter.php
-
-		-
-			message: "#^Method Sylius\\\\Bundle\\\\ShopBundle\\\\SyliusShopBundle\\:\\:build\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Sylius/Bundle/ShopBundle/SyliusShopBundle.php
 
 		-
 			message: "#^Method Sylius\\\\Bundle\\\\TaxationBundle\\\\Form\\\\Type\\\\TaxCalculatorChoiceType\\:\\:__construct\\(\\) has parameter \\$calculators with no value type specified in iterable type array\\.$#"
@@ -5141,11 +4956,6 @@ parameters:
 			path: src/Sylius/Bundle/UserBundle/Provider/AbstractUserProvider.php
 
 		-
-			message: "#^Interface Sylius\\\\Bundle\\\\UserBundle\\\\Provider\\\\UserProviderInterface extends generic interface Symfony\\\\Component\\\\Security\\\\Core\\\\User\\\\UserProviderInterface but does not specify its types\\: TUser$#"
-			count: 1
-			path: src/Sylius/Bundle/UserBundle/Provider/UserProviderInterface.php
-
-		-
 			message: "#^Method Sylius\\\\Bundle\\\\UserBundle\\\\Provider\\\\UserProviderInterface\\:\\:loadUserByUsername\\(\\) has parameter \\$username with no type specified\\.$#"
 			count: 1
 			path: src/Sylius/Bundle/UserBundle/Provider/UserProviderInterface.php
@@ -5341,11 +5151,6 @@ parameters:
 			path: src/Sylius/Component/Channel/Context/CachedPerRequestChannelContext.php
 
 		-
-			message: "#^Method Sylius\\\\Component\\\\Channel\\\\Context\\\\ChannelNotFoundException\\:\\:__construct\\(\\) has parameter \\$messageOrPreviousException with no type specified\\.$#"
-			count: 1
-			path: src/Sylius/Component/Channel/Context/ChannelNotFoundException.php
-
-		-
 			message: "#^Property Sylius\\\\Component\\\\Channel\\\\Context\\\\CompositeChannelContext\\:\\:\\$channelContexts with generic class Laminas\\\\Stdlib\\\\PriorityQueue does not specify its types\\: TValue, TPriority$#"
 			count: 1
 			path: src/Sylius/Component/Channel/Context/CompositeChannelContext.php
@@ -5391,9 +5196,14 @@ parameters:
 			path: src/Sylius/Component/Core/Calculator/ProductVariantPriceCalculator.php
 
 		-
-			message: "#^Method Sylius\\\\Component\\\\Core\\\\Calculator\\\\ProductVariantPriceCalculatorInterface\\:\\:calculate\\(\\) has parameter \\$context with no value type specified in iterable type array\\.$#"
+			message: "#^Method Sylius\\\\Component\\\\Core\\\\Calculator\\\\ProductVariantPricesCalculatorInterface\\:\\:calculate\\(\\) has parameter \\$context with no value type specified in iterable type array\\.$#"
 			count: 1
-			path: src/Sylius/Component/Core/Calculator/ProductVariantPriceCalculatorInterface.php
+			path: src/Sylius/Component/Core/Calculator/ProductVariantPricesCalculatorInterface.php
+
+		-
+			message: "#^Method Sylius\\\\Component\\\\Core\\\\Calculator\\\\ProductVariantPricesCalculatorInterface\\:\\:calculateLowestPriceBeforeDiscount\\(\\) has parameter \\$context with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Sylius/Component/Core/Calculator/ProductVariantPricesCalculatorInterface.php
 
 		-
 			message: "#^Method Sylius\\\\Component\\\\Core\\\\Calculator\\\\ProductVariantPricesCalculatorInterface\\:\\:calculateOriginal\\(\\) has parameter \\$context with no value type specified in iterable type array\\.$#"
@@ -5631,11 +5441,6 @@ parameters:
 			path: src/Sylius/Component/Core/OrderProcessing/OrderAdjustmentsClearer.php
 
 		-
-			message: "#^Property Sylius\\\\Component\\\\Core\\\\OrderProcessing\\\\OrderAdjustmentsClearer\\:\\:\\$adjustmentsToRemove type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Sylius/Component/Core/OrderProcessing/OrderAdjustmentsClearer.php
-
-		-
 			message: "#^Method Sylius\\\\Component\\\\Core\\\\OrderProcessing\\\\OrderShipmentProcessor\\:\\:__construct\\(\\) has parameter \\$shipmentFactory with generic interface Sylius\\\\Component\\\\Resource\\\\Factory\\\\FactoryInterface but does not specify its types\\: T$#"
 			count: 1
 			path: src/Sylius/Component/Core/OrderProcessing/OrderShipmentProcessor.php
@@ -5821,16 +5626,6 @@ parameters:
 			path: src/Sylius/Component/Core/Promotion/Filter/TaxonFilter.php
 
 		-
-			message: "#^Method Sylius\\\\Component\\\\Core\\\\Promotion\\\\Updater\\\\Rule\\\\ContainsProductRuleUpdater\\:\\:__construct\\(\\) has parameter \\$promotionRuleRepository with generic interface Sylius\\\\Component\\\\Resource\\\\Repository\\\\RepositoryInterface but does not specify its types\\: T$#"
-			count: 1
-			path: src/Sylius/Component/Core/Promotion/Updater/Rule/ContainsProductRuleUpdater.php
-
-		-
-			message: "#^Method Sylius\\\\Component\\\\Core\\\\Promotion\\\\Updater\\\\Rule\\\\ContainsProductRuleUpdater\\:\\:updateAfterProductDeletion\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Sylius/Component/Core/Promotion/Updater/Rule/ContainsProductRuleUpdater.php
-
-		-
 			message: "#^Method Sylius\\\\Component\\\\Core\\\\Promotion\\\\Updater\\\\Rule\\\\HasTaxonRuleUpdater\\:\\:__construct\\(\\) has parameter \\$promotionRuleRepository with generic interface Sylius\\\\Component\\\\Resource\\\\Repository\\\\RepositoryInterface but does not specify its types\\: T$#"
 			count: 1
 			path: src/Sylius/Component/Core/Promotion/Updater/Rule/HasTaxonRuleUpdater.php
@@ -5841,24 +5636,9 @@ parameters:
 			path: src/Sylius/Component/Core/Promotion/Updater/Rule/HasTaxonRuleUpdater.php
 
 		-
-			message: "#^Method Sylius\\\\Component\\\\Core\\\\Promotion\\\\Updater\\\\Rule\\\\ProductAwareRuleUpdaterInterface\\:\\:updateAfterProductDeletion\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Sylius/Component/Core/Promotion/Updater/Rule/ProductAwareRuleUpdaterInterface.php
-
-		-
 			message: "#^Method Sylius\\\\Component\\\\Core\\\\Promotion\\\\Updater\\\\Rule\\\\TaxonAwareRuleUpdaterInterface\\:\\:updateAfterDeletingTaxon\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Sylius/Component/Core/Promotion/Updater/Rule/TaxonAwareRuleUpdaterInterface.php
-
-		-
-			message: "#^Method Sylius\\\\Component\\\\Core\\\\Promotion\\\\Updater\\\\Rule\\\\TotalOfItemsFromTaxonRuleUpdater\\:\\:__construct\\(\\) has parameter \\$promotionRuleRepository with generic interface Sylius\\\\Component\\\\Resource\\\\Repository\\\\RepositoryInterface but does not specify its types\\: T$#"
-			count: 1
-			path: src/Sylius/Component/Core/Promotion/Updater/Rule/TotalOfItemsFromTaxonRuleUpdater.php
-
-		-
-			message: "#^Method Sylius\\\\Component\\\\Core\\\\Promotion\\\\Updater\\\\Rule\\\\TotalOfItemsFromTaxonRuleUpdater\\:\\:updateAfterDeletingTaxon\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Sylius/Component/Core/Promotion/Updater/Rule/TotalOfItemsFromTaxonRuleUpdater.php
 
 		-
 			message: "#^Method Sylius\\\\Component\\\\Core\\\\Provider\\\\ActivePromotionsByChannelProvider\\:\\:__construct\\(\\) has parameter \\$promotionRepository with generic interface Sylius\\\\Component\\\\Core\\\\Repository\\\\PromotionRepositoryInterface but does not specify its types\\: T$#"
@@ -5996,26 +5776,6 @@ parameters:
 			path: src/Sylius/Component/Core/Provider/ProductVariantMap/ProductVariantsMapProviderInterface.php
 
 		-
-			message: "#^Method Sylius\\\\Component\\\\Core\\\\Provider\\\\ProductVariantsPricesProvider\\:\\:constructOptionsMap\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Sylius/Component/Core/Provider/ProductVariantsPricesProvider.php
-
-		-
-			message: "#^Method Sylius\\\\Component\\\\Core\\\\Provider\\\\ProductVariantsPricesProvider\\:\\:provideVariantsPrices\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Sylius/Component/Core/Provider/ProductVariantsPricesProvider.php
-
-		-
-			message: "#^PHPDoc tag @var for variable \\$appliedPromotions contains generic class Doctrine\\\\Common\\\\Collections\\\\ArrayCollection but does not specify its types\\: TKey, T$#"
-			count: 1
-			path: src/Sylius/Component/Core/Provider/ProductVariantsPricesProvider.php
-
-		-
-			message: "#^Method Sylius\\\\Component\\\\Core\\\\Provider\\\\ProductVariantsPricesProviderInterface\\:\\:provideVariantsPrices\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Sylius/Component/Core/Provider/ProductVariantsPricesProviderInterface.php
-
-		-
 			message: "#^Method Sylius\\\\Component\\\\Core\\\\Provider\\\\TranslationLocaleProvider\\:\\:__construct\\(\\) has parameter \\$localeRepository with generic interface Sylius\\\\Component\\\\Resource\\\\Repository\\\\RepositoryInterface but does not specify its types\\: T$#"
 			count: 1
 			path: src/Sylius/Component/Core/Provider/TranslationLocaleProvider.php
@@ -6037,11 +5797,6 @@ parameters:
 
 		-
 			message: "#^Method Sylius\\\\Component\\\\Core\\\\Repository\\\\OrderRepositoryInterface\\:\\:createByCustomerAndChannelIdQueryBuilder\\(\\) has parameter \\$customerId with no type specified\\.$#"
-			count: 1
-			path: src/Sylius/Component/Core/Repository/OrderRepositoryInterface.php
-
-		-
-			message: "#^Method Sylius\\\\Component\\\\Core\\\\Repository\\\\OrderRepositoryInterface\\:\\:createByCustomerIdQueryBuilder\\(\\) has parameter \\$customerId with no type specified\\.$#"
 			count: 1
 			path: src/Sylius/Component/Core/Repository/OrderRepositoryInterface.php
 
@@ -6164,11 +5919,6 @@ parameters:
 			message: "#^Method Sylius\\\\Component\\\\Core\\\\Resolver\\\\DefaultPaymentMethodResolver\\:\\:__construct\\(\\) has parameter \\$paymentMethodRepository with generic interface Sylius\\\\Component\\\\Core\\\\Repository\\\\PaymentMethodRepositoryInterface but does not specify its types\\: T$#"
 			count: 1
 			path: src/Sylius/Component/Core/Resolver/DefaultPaymentMethodResolver.php
-
-		-
-			message: "#^Method Sylius\\\\Component\\\\Core\\\\Resolver\\\\DefaultShippingMethodResolver\\:\\:__construct\\(\\) has parameter \\$shippingMethodRepository with generic interface Sylius\\\\Component\\\\Core\\\\Repository\\\\ShippingMethodRepositoryInterface but does not specify its types\\: T$#"
-			count: 1
-			path: src/Sylius/Component/Core/Resolver/DefaultShippingMethodResolver.php
 
 		-
 			message: "#^Method Sylius\\\\Component\\\\Core\\\\Resolver\\\\EligibleDefaultShippingMethodResolver\\:\\:__construct\\(\\) has parameter \\$shippingMethodRepository with generic interface Sylius\\\\Component\\\\Core\\\\Repository\\\\ShippingMethodRepositoryInterface but does not specify its types\\: T$#"
@@ -6846,17 +6596,12 @@ parameters:
 			path: src/Sylius/Component/Shipping/Resolver/DefaultShippingMethodResolver.php
 
 		-
-			message: "#^Method Sylius\\\\Component\\\\Shipping\\\\Resolver\\\\ShippingMethodsResolver\\:\\:__construct\\(\\) has parameter \\$shippingMethodRepository with generic interface Doctrine\\\\Persistence\\\\ObjectRepository but does not specify its types\\: TEntityClass$#"
+			message: "#^Method Sylius\\\\Component\\\\Shipping\\\\Resolver\\\\ShippingMethodsResolver\\:\\:__construct\\(\\) has parameter \\$shippingMethodRepository with generic interface Sylius\\\\Component\\\\Shipping\\\\Repository\\\\ShippingMethodRepositoryInterface but does not specify its types\\: T$#"
 			count: 1
 			path: src/Sylius/Component/Shipping/Resolver/ShippingMethodsResolver.php
 
 		-
 			message: "#^Method Sylius\\\\Component\\\\Taxation\\\\Resolver\\\\TaxRateResolver\\:\\:__construct\\(\\) has parameter \\$taxRateRepository with generic interface Sylius\\\\Component\\\\Resource\\\\Repository\\\\RepositoryInterface but does not specify its types\\: T$#"
-			count: 1
-			path: src/Sylius/Component/Taxation/Resolver/TaxRateResolver.php
-
-		-
-			message: "#^Method Sylius\\\\Component\\\\Taxation\\\\Resolver\\\\TaxRateResolver\\:\\:provideEligibleTaxRate\\(\\) has parameter \\$taxRates with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Sylius/Component/Taxation/Resolver/TaxRateResolver.php
 
@@ -6891,11 +6636,6 @@ parameters:
 			path: src/Sylius/Component/User/Model/CredentialsHolderInterface.php
 
 		-
-			message: "#^Method Sylius\\\\Component\\\\User\\\\Model\\\\User\\:\\:__unserialize\\(\\) has parameter \\$serialized with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Sylius/Component/User/Model/User.php
-
-		-
 			message: "#^Method Sylius\\\\Component\\\\User\\\\Model\\\\User\\:\\:getRoles\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Sylius/Component/User/Model/User.php
@@ -6906,19 +6646,14 @@ parameters:
 			path: src/Sylius/Component/User/Model/UserAwareInterface.php
 
 		-
-			message: "#^Method Sylius\\\\Component\\\\User\\\\Model\\\\UserInterface\\:\\:__unserialize\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Sylius/Component/User/Model/UserInterface.php
-
-		-
 			message: "#^Method Sylius\\\\Component\\\\User\\\\Security\\\\Checker\\\\TokenUniquenessChecker\\:\\:__construct\\(\\) has parameter \\$repository with generic interface Sylius\\\\Component\\\\Resource\\\\Repository\\\\RepositoryInterface but does not specify its types\\: T$#"
 			count: 1
 			path: src/Sylius/Component/User/Security/Checker/TokenUniquenessChecker.php
 
 		-
-			message: "#^If condition is always false.$#"
+			message: "#^Interface Sylius\\\\Bundle\\\\UserBundle\\\\Provider\\\\UserProviderInterface extends generic interface Symfony\\\\Component\\\\Security\\\\Core\\\\User\\\\UserProviderInterface but does not specify its types\\: TUser$#"
 			count: 1
-			path: src/Sylius/Bundle/CoreBundle/Command/AbstractInstallCommand.php
+			path: src/Sylius/Bundle/UserBundle/Provider/UserProviderInterface.php
 
 		-
 			message: "#^If condition is always false.$#"

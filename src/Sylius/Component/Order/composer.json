@@ -26,8 +26,8 @@
         }
     ],
     "require": {
-        "php": "^8.0",
-        "sylius/resource": "^1.9",
+        "php": "^8.2",
+        "sylius/resource": "^1.10",
         "webmozart/assert": "^1.9",
         "laminas/laminas-stdlib": "^3.3.1"
     },
@@ -41,7 +41,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-main": "1.13-dev"
+            "dev-main": "2.0-dev"
         }
     },
     "autoload": {
