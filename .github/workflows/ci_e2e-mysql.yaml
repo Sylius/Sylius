@@ -102,6 +102,7 @@ jobs:
                     legacy_postgresql_setup: ${{ env.USE_LEGACY_POSTGRES_SETUP }}
                     php_version: ${{ matrix.php }}
                     symfony_version: ${{ matrix.symfony }}
+                    node_version: "20.x"
 
             -   name: Test installer
                 run: bin/console sylius:install --no-interaction -vvv
@@ -183,6 +184,7 @@ jobs:
                     legacy_postgresql_setup: ${{ env.USE_LEGACY_POSTGRES_SETUP }}
                     php_version: ${{ matrix.php }}
                     symfony_version: ${{ matrix.symfony }}
+                    node_version: "20.x"
 
             -   name: Install Behat driver
                 run: vendor/bin/bdi detect drivers
