@@ -115,7 +115,7 @@ final class StatisticsTest extends JsonApiTestCase
 
         $this->assertResponse(
             $this->client->getResponse(),
-            'admin/statistics/get_' . $interval .'_statistics_response',
+            'admin/statistics/get_' . $interval . '_statistics_response',
             Response::HTTP_OK,
         );
     }
