@@ -66,7 +66,7 @@ final class WinzouStateMachineAdapter implements StateMachineInterface
 
         foreach ($transitionsConfig as $transitionName => $transitionConfig) {
             $froms = $transitionConfig['from'];
-            $tos = array($transitionConfig['to']);
+            $tos = [$transitionConfig['to']];
             $transitions[] = new Transition($transitionName, $froms, $tos);
         }
 
