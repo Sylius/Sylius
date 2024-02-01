@@ -1,24 +1,28 @@
 <?php
 
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Sylius Sp. z o.o.
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 declare(strict_types=1);
 
 namespace Sylius\Bundle\PayumBundle\PaymentRequest\Processor;
 
 use Payum\Core\Security\TokenInterface;
-use Sylius\Bundle\ApiBundle\Exception\PaymentRequestNotSupportedException;
-use Sylius\Bundle\PaymentBundle\Provider\PaymentRequestCommandProviderInterface;
-use Sylius\Component\Core\Repository\PaymentRepositoryInterface;
+use Sylius\Bundle\PaymentBundle\CommandDispatcher\PaymentRequestCommandDispatcherInterface;
 use Sylius\Component\Payment\Factory\PaymentRequestFactoryInterface;
 use Sylius\Component\Payment\Model\PaymentRequestInterface;
-use Symfony\Component\Messenger\MessageBusInterface;
 
 final class AfterTokenizedRequestProcessor implements AfterTokenizedRequestProcessorInterface
 {
     public function __construct(
         private PaymentRequestFactoryInterface $paymentRequestFactory,
-        private PaymentRequestCommandProviderInterface $paymentRequestCommandProvider,
-        private PaymentRepositoryInterface $paymentRepository,
-        private MessageBusInterface $commandBus,
+        private PaymentRequestCommandDispatcherInterface $paymentRequestCommandDispatcher,
     ) {
     }
 
@@ -37,14 +41,6 @@ final class AfterTokenizedRequestProcessor implements AfterTokenizedRequestProce
         $newPaymentRequest = $this->paymentRequestFactory->createFromPaymentRequest($paymentRequest);
         $newPaymentRequest->setType(PaymentRequestInterface::DATA_TYPE_STATUS);
 
-        $this->paymentRepository->add($newPaymentRequest);
-
-        if (!$this->paymentRequestCommandProvider->supports($newPaymentRequest)) {
-            throw new PaymentRequestNotSupportedException();
-        }
-
-        $command = $this->paymentRequestCommandProvider->provide($newPaymentRequest);
-
-        $this->commandBus->dispatch($command);
+        $this->paymentRequestCommandDispatcher->add($newPaymentRequest);
     }
 }

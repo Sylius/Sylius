@@ -16,8 +16,8 @@ namespace spec\Sylius\Component\Payment\Model;
 use PhpSpec\ObjectBehavior;
 use stdClass;
 use Sylius\Component\Payment\Model\PaymentInterface;
-use Sylius\Component\Payment\Model\PaymentRequestInterface;
 use Sylius\Component\Payment\Model\PaymentMethodInterface;
+use Sylius\Component\Payment\Model\PaymentRequestInterface;
 
 final class PaymentRequestSpec extends ObjectBehavior
 {

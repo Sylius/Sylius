@@ -13,36 +13,34 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\PayumBundle\CommandHandler;
 
-use Payum\Core\Security\TokenAggregateInterface;
-use Sylius\Bundle\PayumBundle\Command\AuthorizePaymentRequest;
-use Sylius\Bundle\PayumBundle\Factory\AuthorizeRequestFactoryInterface;
+use Sylius\Bundle\PaymentBundle\Command\PaymentRequestHashAwareInterface;
+use Sylius\Bundle\PayumBundle\Factory\TokenAggregateRequestFactoryInterface;
 use Sylius\Bundle\PayumBundle\PaymentRequest\Factory\PayumTokenFactoryInterface;
 use Sylius\Bundle\PayumBundle\PaymentRequest\Processor\AfterTokenizedRequestProcessorInterface;
 use Sylius\Bundle\PayumBundle\PaymentRequest\Processor\RequestProcessorInterface;
 use Sylius\Bundle\PayumBundle\PaymentRequest\Provider\PaymentRequestProviderInterface;
-use Sylius\Component\Payment\Model\PaymentRequestInterface;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 use Webmozart\Assert\Assert;
 
-final class AuthorizePaymentRequestHandler implements MessageHandlerInterface
+final class TokenPaymentRequestHandler implements MessageHandlerInterface
 {
     public function __construct(
         private PaymentRequestProviderInterface $paymentRequestProvider,
         private PayumTokenFactoryInterface $payumTokenFactory,
         private RequestProcessorInterface $requestProcessor,
-        private AuthorizeRequestFactoryInterface $factory,
         private AfterTokenizedRequestProcessorInterface $afterTokenizedRequestProcessor,
+        private TokenAggregateRequestFactoryInterface $payumRequestFactory,
     ) {
     }
 
-    public function __invoke(AuthorizePaymentRequest $command): void
+    public function __invoke(PaymentRequestHashAwareInterface $command): void
     {
         $paymentRequest = $this->paymentRequestProvider->provideFromHash($command->getHash());
         Assert::notNull($paymentRequest);
 
         $token = $this->payumTokenFactory->createNew($paymentRequest);
 
-        $request = $this->factory->createNewWithToken($token);
+        $request = $this->payumRequestFactory->createNewWithToken($token);
 
         $token = $request->getToken();
         Assert::notNull($token);

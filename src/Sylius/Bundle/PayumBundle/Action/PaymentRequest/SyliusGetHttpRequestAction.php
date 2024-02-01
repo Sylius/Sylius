@@ -28,7 +28,7 @@ final class SyliusGetHttpRequestAction implements ActionInterface
 
     public function execute($request): void
     {
-        /** @var $request GetHttpRequest */
+        /** @var GetHttpRequest $request */
         RequestNotSupportedException::assertSupports($this, $request);
 
         $this->updateRequest($request);
