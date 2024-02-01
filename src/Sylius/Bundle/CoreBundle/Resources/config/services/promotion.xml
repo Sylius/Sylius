@@ -56,6 +56,9 @@
         <service id="sylius.promotion_rule_checker.item_total" class="Sylius\Component\Promotion\Checker\Rule\ItemTotalRuleChecker">
             <tag name="sylius.promotion_rule_checker" type="item_total" label="sylius.form.promotion_rule.item_total" form-type="Sylius\Bundle\CoreBundle\Form\Type\Promotion\Rule\ChannelBasedItemTotalConfigurationType" />
         </service>
+        <service id="sylius.promotion_rule_checker.cart_quantity" class="Sylius\Component\Core\Promotion\Checker\Rule\CartQuantityRuleChecker">
+            <tag name="sylius.promotion_rule_checker" type="cart_quantity" label="sylius.form.promotion_rule.cart_quantity" form-type="Sylius\Bundle\PromotionBundle\Form\Type\Rule\CartQuantityConfigurationType" />
+        </service>
 
         <service id="sylius.promotion_action.fixed_discount" class="Sylius\Component\Core\Promotion\Action\FixedDiscountPromotionActionCommand">
             <argument type="service" id="sylius.proportional_integer_distributor" />
