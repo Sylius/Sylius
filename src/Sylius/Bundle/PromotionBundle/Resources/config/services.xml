@@ -36,6 +36,7 @@
 
         <service id="sylius.promotion_rule_checker.cart_quantity" class="Sylius\Component\Promotion\Checker\Rule\CartQuantityRuleChecker">
             <tag name="sylius.promotion_rule_checker" type="cart_quantity" label="sylius.form.promotion_rule.cart_quantity" form-type="Sylius\Bundle\PromotionBundle\Form\Type\Rule\CartQuantityConfigurationType" />
+            <deprecated package="sylius/promotion-bundle" version="1.13">The "%service_id%" service is deprecated since 1.13 and will be removed in 2.0.</deprecated>
         </service>
 
         <service id="sylius.promotion_applicator" class="Sylius\Component\Promotion\Action\PromotionApplicator">
