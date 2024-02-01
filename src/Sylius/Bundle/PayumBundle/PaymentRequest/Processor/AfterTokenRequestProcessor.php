@@ -18,7 +18,7 @@ use Sylius\Bundle\PaymentBundle\CommandDispatcher\PaymentRequestCommandDispatche
 use Sylius\Component\Payment\Factory\PaymentRequestFactoryInterface;
 use Sylius\Component\Payment\Model\PaymentRequestInterface;
 
-final class AfterTokenizedRequestProcessor implements AfterTokenizedRequestProcessorInterface
+final class AfterTokenRequestProcessor implements AfterTokenRequestProcessorInterface
 {
     public function __construct(
         private PaymentRequestFactoryInterface $paymentRequestFactory,
