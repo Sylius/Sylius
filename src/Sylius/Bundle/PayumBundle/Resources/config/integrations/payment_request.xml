@@ -28,7 +28,7 @@
             <argument type="service" id="sylius.payment_request.payum.context" />
         </service>
 
-        <service id="Sylius\Bundle\PayumBundle\PaymentRequest\Processor\AfterTokenizedRequestProcessorInterface" class="Sylius\Bundle\PayumBundle\PaymentRequest\Processor\AfterTokenizedRequestProcessor">
+        <service id="Sylius\Bundle\PayumBundle\PaymentRequest\Processor\AfterTokenRequestProcessorInterface" class="Sylius\Bundle\PayumBundle\PaymentRequest\Processor\AfterTokenRequestProcessor">
             <argument type="service" id="sylius.custom_factory.payment_request" />
             <argument type="service" id="Sylius\Bundle\PaymentBundle\CommandDispatcher\PaymentRequestCommandDispatcherInterface" />
         </service>
@@ -41,7 +41,7 @@
             <argument type="service" id="Sylius\Bundle\PayumBundle\PaymentRequest\Provider\PaymentRequestProviderInterface" />
             <argument type="service" id="Sylius\Bundle\PayumBundle\PaymentRequest\Factory\PayumTokenFactoryInterface" />
             <argument type="service" id="Sylius\Bundle\PayumBundle\PaymentRequest\Processor\RequestProcessorInterface" />
-            <argument type="service" id="Sylius\Bundle\PayumBundle\PaymentRequest\Processor\AfterTokenizedRequestProcessorInterface" />
+            <argument type="service" id="Sylius\Bundle\PayumBundle\PaymentRequest\Processor\AfterTokenRequestProcessorInterface" />
         </service>
 
         <service id="sylius.payment_request.payum.capture" parent="Sylius\Bundle\PayumBundle\CommandHandler\TokenPaymentRequestHandler">

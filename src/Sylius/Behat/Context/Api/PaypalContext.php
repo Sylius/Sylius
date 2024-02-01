@@ -57,21 +57,20 @@ final class PaypalContext implements Context
 
     /**
      * @When I sign in to PayPal and authorize successfully
-     */
-    public function iSignInToPaypalAndAuthorizeSuccessfully(): void
-    {
-        $this->paypalApiMocker->performActionInApiSuccessfulScope(function () {
-            $this->putPaymentRequest($this->sharedStorage->get('payment_request_uri'));
-        });
-    }
-
-    /**
      * @When I sign in to PayPal and pay successfully
      */
-    public function iSignInToPaypalAndPaySuccessfully(): void
+    public function iSignInToPaypalAndAuthorizeOrPaySuccessfully(): void
     {
         $this->paypalApiMocker->performActionInApiSuccessfulScope(function () {
-            $this->paypalExpressCheckoutPage->pay();
+            $this->putPaymentRequest(
+                $this->sharedStorage->get('payment_request_uri'),
+                [
+                    'query' => [
+                        'token' => 'EC-2d9EV13959UR209410U',
+                        'PayerID' => 'UX8WBNYWGBVMG',
+                    ]
+                ]
+            );
         });
     }
 
@@ -81,7 +80,15 @@ final class PaypalContext implements Context
      */
     public function iCancelMyPaypalPayment(): void
     {
-        $this->paypalExpressCheckoutPage->cancel();
+        $this->putPaymentRequest(
+            $this->sharedStorage->get('payment_request_uri'),
+            [
+                'query' => [
+                    'token' => 'EC-2d9EV13959UR209410U',
+                    'cancelled' => 1,
+                ]
+            ]
+        );
     }
 
     /**
@@ -89,8 +96,15 @@ final class PaypalContext implements Context
      */
     public function iTryToPayAgain(): void
     {
+        $this->client->show(Resources::ORDERS, $this->sharedStorage->get('cart_token'));
+
         $this->paypalApiMocker->performActionInApiInitializeScope(function () {
-            $this->orderDetails->pay();
+            $payments = $this->responseChecker->getValue($this->client->getLastResponse(), 'payments');
+            $payment = end($payments);
+            $this->postPaymentRequest($payment);
+
+            $uri = $this->responseChecker->getValue($this->client->getLastResponse(), '@id');
+            $this->sharedStorage->set('payment_request_uri', $uri);
         });
     }
 
@@ -99,7 +113,13 @@ final class PaypalContext implements Context
      */
     public function iShouldBeNotifiedThatMyPaymentHasBeenCancelled(): void
     {
-        $this->assertNotification('Payment has been cancelled.');
+        Assert::true(
+            $this->responseChecker->isUpdateSuccessful($this->client->getLastResponse()),
+            sprintf(
+                'Payment request could not be updated: %s',
+                $this->responseChecker->getError($this->client->getLastResponse()),
+            ),
+        );
     }
 
     /**
@@ -110,7 +130,7 @@ final class PaypalContext implements Context
         Assert::true(
             $this->responseChecker->isUpdateSuccessful($this->client->getLastResponse()),
             sprintf(
-                'Payment request could not be edited: %s',
+                'Payment request could not be updated: %s',
                 $this->responseChecker->getError($this->client->getLastResponse()),
             ),
         );
@@ -160,7 +180,7 @@ final class PaypalContext implements Context
         $this->client->executeCustomRequest($request);
     }
 
-    function putPaymentRequest(string $paymentRequestUri): void
+    function putPaymentRequest(string $paymentRequestUri, array $httpRequest = []): void
     {
         $request = $this->requestFactory->custom(
             $paymentRequestUri,
@@ -173,12 +193,7 @@ final class PaypalContext implements Context
             'requestPayload' => [
                 'target_path' => 'https://myshop.tld/target-path',
                 'after_path' => 'https://myshop.tld/after-path',
-                'http_request' => [
-                    'query' => [
-                        'token' => 'EC-2d9EV13959UR209410U',
-                        'PayerID' => 'UX8WBNYWGBVMG',
-                    ]
-                ],
+                'http_request' => $httpRequest,
             ],
         ]);
 

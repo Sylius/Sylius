@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Bundle\PayumBundle\PaymentRequest\Processor;
 
 use Payum\Core\Payum;
+use Payum\Core\Security\TokenAggregateInterface;
 use Sylius\Bundle\PayumBundle\PaymentRequest\PaymentRequestContextInterface;
 use Sylius\Component\Payment\Model\PaymentRequestInterface;
 
@@ -41,5 +42,16 @@ final class RequestProcessor implements RequestProcessorInterface
         }
 
         $paymentRequest->setState(PaymentRequestInterface::STATE_COMPLETED);
+
+        if (false === $request instanceof TokenAggregateInterface) {
+            return;
+        }
+
+        $token = $request->getToken();
+        if (null === $token) {
+            return;
+        }
+
+        $this->payum->getHttpRequestVerifier()->invalidate($token);
     }
 }
