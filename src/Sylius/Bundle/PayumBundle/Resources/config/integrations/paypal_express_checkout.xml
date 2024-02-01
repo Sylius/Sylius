@@ -23,15 +23,15 @@
             <tag name="sylius.payment_request.command_provider" factory="paypal_express_checkout" />
         </service>
 
-        <service id="sylius.payment_request.command_provider.payum.paypal_express_checkout_nvp.capture" class="Sylius\Bundle\PayumBundle\PaymentRequest\Provider\PayumCapturePaymentRequestCommandProvider">
+        <service id="sylius.payment_request.command_provider.payum.paypal_express_checkout_nvp.capture" class="Sylius\Bundle\PayumBundle\PaymentRequest\Provider\CaptureCommandProvider">
             <tag name="sylius.payment_request.command_provider.payum.paypal_express_checkout" type="capture" />
         </service>
 
-        <service id="sylius.payment_request.command_provider.payum.paypal_express_checkout_nvp.authorize" class="Sylius\Bundle\PayumBundle\PaymentRequest\Provider\PayumAuthorizePaymentRequestCommandProvider">
+        <service id="sylius.payment_request.command_provider.payum.paypal_express_checkout_nvp.authorize" class="Sylius\Bundle\PayumBundle\PaymentRequest\Provider\AuthorizeCommandProvider">
             <tag name="sylius.payment_request.command_provider.payum.paypal_express_checkout" type="authorize" />
         </service>
 
-        <service id="sylius.payment_request.command_provider.payum.paypal_express_checkout_nvp.status" class="Sylius\Bundle\PayumBundle\PaymentRequest\Provider\PayumStatusPaymentRequestCommandProvider">
+        <service id="sylius.payment_request.command_provider.payum.paypal_express_checkout_nvp.status" class="Sylius\Bundle\PayumBundle\PaymentRequest\Provider\StatusCommandProvider">
             <tag name="sylius.payment_request.command_provider.payum.paypal_express_checkout" type="status" />
         </service>
 

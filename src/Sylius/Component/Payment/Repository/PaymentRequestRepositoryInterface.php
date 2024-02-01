@@ -14,8 +14,14 @@ declare(strict_types=1);
 namespace Sylius\Component\Payment\Repository;
 
 use Sylius\Component\Payment\Model\PaymentRequestInterface;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
 
-interface PaymentRequestRepositoryInterface
+/**
+ * @template T of PaymentRequestInterface
+ *
+ * @extends RepositoryInterface<T>
+ */
+interface PaymentRequestRepositoryInterface extends RepositoryInterface
 {
     /**
      * @return PaymentRequestInterface[]
