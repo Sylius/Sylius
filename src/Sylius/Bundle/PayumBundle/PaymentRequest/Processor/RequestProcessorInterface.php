@@ -16,7 +16,7 @@ namespace Sylius\Bundle\PayumBundle\PaymentRequest\Processor;
 use Payum\Core\Security\TokenAggregateInterface;
 use Sylius\Component\Payment\Model\PaymentRequestInterface;
 
-interface PayumRequestProcessorInterface
+interface RequestProcessorInterface
 {
     public function process(
         PaymentRequestInterface $paymentRequest,

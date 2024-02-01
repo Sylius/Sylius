@@ -14,16 +14,14 @@ declare(strict_types=1);
 namespace Sylius\Bundle\PayumBundle\PaymentRequest\Processor;
 
 use Payum\Core\Payum;
-use Payum\Core\Security\TokenAggregateInterface;
-use Sylius\Bundle\PayumBundle\PaymentRequest\PayumPaymentRequestContextInterface;
+use Sylius\Bundle\PayumBundle\PaymentRequest\PaymentRequestContextInterface;
 use Sylius\Component\Payment\Model\PaymentRequestInterface;
-use Webmozart\Assert\Assert;
 
-final class PayumRequestProcessor implements PayumRequestProcessorInterface
+final class RequestProcessor implements RequestProcessorInterface
 {
     public function __construct(
         private Payum $payum,
-        private PayumPaymentRequestContextInterface $payumApiContext,
+        private PaymentRequestContextInterface $payumApiContext,
     ) {
     }
 
@@ -43,18 +41,5 @@ final class PayumRequestProcessor implements PayumRequestProcessorInterface
         }
 
         $paymentRequest->setState(PaymentRequestInterface::STATE_COMPLETED);
-
-        if (false === $request instanceof TokenAggregateInterface) {
-            return;
-        }
-
-        $token = $request->getToken();
-        if (null === $token) {
-            return;
-        }
-
-        $details = $paymentRequest->getResponseData();
-        $details['after_url'] = $token->getAfterUrl();
-        $paymentRequest->setResponseData($details);
     }
 }
