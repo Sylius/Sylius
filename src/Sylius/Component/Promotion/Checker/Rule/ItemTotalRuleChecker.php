@@ -15,6 +15,15 @@ namespace Sylius\Component\Promotion\Checker\Rule;
 
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 
+trigger_deprecation(
+    'sylius/promotion-bundle',
+    '1.13',
+    'The "%s" class is deprecated and will be removed in Sylius 2.0. Use "%s" instead.',
+    ItemTotalRuleChecker::class,
+    \Sylius\Component\Core\Promotion\Checker\Rule\ItemTotalRuleChecker::class,
+);
+
+/** @deprecated since Sylius 1.13 and will be removed in Sylius 2.0. Use {@see \Sylius\Component\Core\Promotion\Checker\Rule\ItemTotalRuleChecker} instead. */
 final class ItemTotalRuleChecker implements RuleCheckerInterface
 {
     public const TYPE = 'item_total';

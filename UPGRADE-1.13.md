@@ -450,3 +450,6 @@ List of affected classes:
 
 1. Class `Sylius\Component\Promotion\Checker\Rule\CartQuantityRuleChecker` has been deprecated.
    Use `Sylius\Component\Core\Promotion\Checker\Rule\CartQuantityRuleChecker` instead.
+
+1. Class `Sylius\Component\Promotion\Checker\Rule\ItemTotalRuleChecker` has been deprecated.
+   Use `Sylius\Component\Core\Promotion\Checker\Rule\ItemTotalRuleChecker` instead.
