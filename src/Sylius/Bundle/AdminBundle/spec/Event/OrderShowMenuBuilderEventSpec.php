@@ -51,7 +51,7 @@ final class OrderShowMenuBuilderEventSpec extends ObjectBehavior
         FactoryInterface $factory,
         ItemInterface $menu,
         OrderInterface $order,
-        StateMachineInterface $newStateMachineAbstraction
+        StateMachineInterface $newStateMachineAbstraction,
     ): void {
         $this->beConstructedWith($factory, $menu, $order, $newStateMachineAbstraction);
         $this->getStateMachine()->shouldReturn($newStateMachineAbstraction);
