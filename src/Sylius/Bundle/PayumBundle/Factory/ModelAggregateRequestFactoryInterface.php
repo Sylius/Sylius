@@ -13,9 +13,9 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\PayumBundle\Factory;
 
-use Payum\Core\Request\GetStatusInterface;
+use Payum\Core\Model\ModelAggregateInterface;
 
-interface GetStatusFactoryInterface extends ModelAggregateRequestFactoryInterface
+interface ModelAggregateRequestFactoryInterface
 {
-    public function createNewWithModel($model): GetStatusInterface;
+    public function createNewWithModel($model): ModelAggregateInterface;
 }

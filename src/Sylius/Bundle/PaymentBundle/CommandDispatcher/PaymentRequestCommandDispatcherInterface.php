@@ -11,16 +11,13 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\PayumBundle\PaymentRequest\Processor;
+namespace Sylius\Bundle\PaymentBundle\CommandDispatcher;
 
-use Payum\Core\Security\TokenAggregateInterface;
 use Sylius\Component\Payment\Model\PaymentRequestInterface;
 
-interface RequestProcessorInterface
+interface PaymentRequestCommandDispatcherInterface
 {
-    public function process(
-        PaymentRequestInterface $paymentRequest,
-        TokenAggregateInterface $request,
-        string $gatewayName,
-    ): void;
+    public function add(PaymentRequestInterface $paymentRequest): void;
+
+    public function update(PaymentRequestInterface $paymentRequest): void;
 }

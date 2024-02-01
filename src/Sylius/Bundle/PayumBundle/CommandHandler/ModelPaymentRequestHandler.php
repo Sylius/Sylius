@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\PayumBundle\CommandHandler;
 
-use Sylius\Bundle\PayumBundle\Command\StatusPaymentRequest;
+use Sylius\Bundle\PaymentBundle\Command\PaymentRequestHashAwareInterface;
 use Sylius\Bundle\PayumBundle\Factory\GetStatusFactoryInterface;
 use Sylius\Bundle\PayumBundle\PaymentRequest\Processor\RequestProcessorInterface;
 use Sylius\Bundle\PayumBundle\PaymentRequest\Provider\PaymentRequestProviderInterface;
@@ -21,7 +21,7 @@ use Sylius\Component\Core\Model\PaymentMethodInterface;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 use Webmozart\Assert\Assert;
 
-final class StatusPaymentRequestHandler implements MessageHandlerInterface
+final class ModelPaymentRequestHandler implements MessageHandlerInterface
 {
     public function __construct(
         private PaymentRequestProviderInterface $paymentRequestProvider,
@@ -30,7 +30,7 @@ final class StatusPaymentRequestHandler implements MessageHandlerInterface
     ) {
     }
 
-    public function __invoke(StatusPaymentRequest $command): void
+    public function __invoke(PaymentRequestHashAwareInterface $command): void
     {
         $paymentRequest = $this->paymentRequestProvider->provideFromHash($command->getHash());
         Assert::notNull($paymentRequest);

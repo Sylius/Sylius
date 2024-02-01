@@ -25,9 +25,10 @@ final class SyliusRenderTemplateAction implements ActionInterface
         private PaymentRequestContextInterface $payumApiContext,
     ) {
     }
+
     public function execute($request): void
     {
-        /** @var $request RenderTemplate */
+        /** @var RenderTemplate $request */
         RequestNotSupportedException::assertSupports($this, $request);
 
         $paymentRequest = $this->payumApiContext->getPaymentRequest();

@@ -13,13 +13,11 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\PaymentBundle\CommandHandler\Offline;
 
-use SM\Factory\FactoryInterface as StateMachineFactoryInterface;
 use Sylius\Bundle\PaymentBundle\Command\Offline\CapturePaymentRequest;
+use Sylius\Bundle\PaymentBundle\Processor\AfterOfflineCaptureProcessorInterface;
 use Sylius\Bundle\PaymentBundle\Processor\OfflineCaptureProcessorInterface;
 use Sylius\Component\Core\Model\PaymentMethodInterface;
-use Sylius\Component\Payment\Model\PaymentRequestInterface;
-use Sylius\Component\Payment\PaymentTransitions;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Component\Payment\Repository\PaymentRequestRepositoryInterface;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 use Webmozart\Assert\Assert;
 
@@ -29,16 +27,15 @@ final class CapturePaymentRequestHandler implements MessageHandlerInterface
     public const FACTORY_NAME = 'offline';
 
     public function __construct(
-        private RepositoryInterface              $paymentRequestRepository,
-        private OfflineCaptureProcessorInterface $capturePaymentRequestProcessor,
-        private StateMachineFactoryInterface     $stateMachineFactory,
+        private PaymentRequestRepositoryInterface $paymentRequestRepository,
+        private OfflineCaptureProcessorInterface $offlineCaptureProcessor,
+        private AfterOfflineCaptureProcessorInterface $afterOfflineCaptureProcessor,
     ) {
     }
 
     public function __invoke(CapturePaymentRequest $capturePaymentRequest): void
     {
-        /** @var PaymentRequestInterface|null $paymentRequest */
-        $paymentRequest = $this->paymentRequestRepository->find($capturePaymentRequest->getHash());
+        $paymentRequest = $this->paymentRequestRepository->findOneByHash($capturePaymentRequest->getHash());
         Assert::notNull($paymentRequest);
 
         /** @var PaymentMethodInterface|null $paymentMethod */
@@ -53,15 +50,7 @@ final class CapturePaymentRequestHandler implements MessageHandlerInterface
         $payment = $paymentRequest->getPayment();
         Assert::notNull($payment);
 
-        $this->capturePaymentRequestProcessor->process($paymentRequest);
-
-        // @todo modify Payment->getDetails() to retrieve last payment request `responseData`
-
-        $stateMachine = $this->stateMachineFactory->get($payment, PaymentTransitions::GRAPH);
-        if ($paymentRequest->getResponseData()['paid']) {
-            $stateMachine->apply(PaymentTransitions::TRANSITION_COMPLETE);
-        } else {
-            $stateMachine->apply(PaymentTransitions::TRANSITION_PROCESS);
-        }
+        $this->offlineCaptureProcessor->process($paymentRequest);
+        $this->afterOfflineCaptureProcessor->process($paymentRequest);
     }
 }

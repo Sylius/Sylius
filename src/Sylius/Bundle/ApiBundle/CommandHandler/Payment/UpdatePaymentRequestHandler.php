@@ -14,12 +14,10 @@ declare(strict_types=1);
 namespace Sylius\Bundle\ApiBundle\CommandHandler\Payment;
 
 use Sylius\Bundle\ApiBundle\Command\Payment\UpdatePaymentRequest;
-use Sylius\Bundle\ApiBundle\Exception\PaymentRequestNotSupportedException;
-use Sylius\Bundle\PaymentBundle\Provider\PaymentRequestCommandProviderInterface;
+use Sylius\Bundle\PaymentBundle\CommandDispatcher\PaymentRequestCommandDispatcherInterface;
 use Sylius\Component\Payment\Model\PaymentRequestInterface;
 use Sylius\Component\Payment\Repository\PaymentRequestRepositoryInterface;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
-use Symfony\Component\Messenger\MessageBusInterface;
 use Webmozart\Assert\Assert;
 
 /** @experimental */
@@ -27,8 +25,7 @@ final class UpdatePaymentRequestHandler implements MessageHandlerInterface
 {
     public function __construct(
         private PaymentRequestRepositoryInterface $paymentRequestRepository,
-        private PaymentRequestCommandProviderInterface $paymentRequestCommandProvider,
-        private MessageBusInterface $commandBus,
+        private PaymentRequestCommandDispatcherInterface $paymentRequestCommandDispatcher,
     ) {
     }
 
@@ -42,13 +39,7 @@ final class UpdatePaymentRequestHandler implements MessageHandlerInterface
 
         $paymentRequest->setRequestPayload($updatePaymentRequest->getRequestPayload());
 
-        if (!$this->paymentRequestCommandProvider->supports($paymentRequest)) {
-            throw new PaymentRequestNotSupportedException();
-        }
-
-        $command = $this->paymentRequestCommandProvider->provide($paymentRequest);
-
-        $this->commandBus->dispatch($command);
+        $this->paymentRequestCommandDispatcher->add($paymentRequest);
 
         return $paymentRequest;
     }

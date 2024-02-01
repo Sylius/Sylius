@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\ApiBundle\Exception;
+namespace Sylius\Bundle\PaymentBundle\Exception;
 
 /** @experimental */
 final class PaymentRequestNotSupportedException extends \RuntimeException
