@@ -16,8 +16,6 @@ namespace Sylius\Behat\Context\Api\Shop\Checkout;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\RequestFactoryInterface;
-use Sylius\Behat\Page\Shop\Order\ShowPageInterface;
-use Sylius\Behat\Page\Shop\Order\ThankYouPageInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Webmozart\Assert\Assert;
