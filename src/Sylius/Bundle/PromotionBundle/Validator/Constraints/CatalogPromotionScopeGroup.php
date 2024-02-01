@@ -11,18 +11,15 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\ApiBundle\Validator\Constraints;
+namespace Sylius\Bundle\PromotionBundle\Validator\Constraints;
 
 use Symfony\Component\Validator\Constraint;
 
-/** @experimental */
-final class EndDateIsNotBeforeStartDate extends Constraint
+final class CatalogPromotionScopeGroup extends Constraint
 {
-    public string $message = 'sylius.date_period.end_date_is_not_before_start_date';
-
     public function validatedBy(): string
     {
-        return 'sylius_api_validator_date_period_end_date_is_not_before_start_date';
+        return 'sylius_catalog_promotion_scope_group';
     }
 
     public function getTargets(): string

@@ -17,24 +17,30 @@
 >
     <class name="Sylius\Component\Taxonomy\Model\TaxonTranslation">
         <attribute name="id">
-            <group>admin:taxon:read</group>
-            <group>shop:taxon:read</group>
-            <group>admin:taxon_translation:read</group>
-            <group>shop:taxon_translation:read</group>
+            <group>admin:taxon:index</group>
+            <group>admin:taxon:show</group>
+            <group>shop:taxon:index</group>
+            <group>shop:taxon:show</group>
+            <group>admin:taxon_translation:show</group>
+            <group>shop:taxon_translation:show</group>
         </attribute>
         <attribute name="name">
-            <group>admin:taxon:read</group>
-            <group>shop:taxon:read</group>
-            <group>admin:taxon_translation:read</group>
-            <group>shop:taxon_translation:read</group>
+            <group>admin:taxon:index</group>
+            <group>admin:taxon:show</group>
+            <group>shop:taxon:index</group>
+            <group>shop:taxon:show</group>
+            <group>admin:taxon_translation:show</group>
+            <group>shop:taxon_translation:show</group>
             <group>admin:taxon:create</group>
             <group>admin:taxon:update</group>
         </attribute>
         <attribute name="description">
-            <group>admin:taxon:read</group>
-            <group>shop:taxon:read</group>
-            <group>admin:taxon_translation:read</group>
-            <group>shop:taxon_translation:read</group>
+            <group>admin:taxon:index</group>
+            <group>admin:taxon:show</group>
+            <group>shop:taxon:index</group>
+            <group>shop:taxon:show</group>
+            <group>admin:taxon_translation:show</group>
+            <group>shop:taxon_translation:show</group>
             <group>admin:taxon:create</group>
             <group>admin:taxon:update</group>
         </attribute>
@@ -43,10 +49,12 @@
             <group>admin:taxon:update</group>
         </attribute>
         <attribute name="slug">
-            <group>admin:taxon:read</group>
-            <group>shop:taxon:read</group>
-            <group>admin:taxon_translation:read</group>
-            <group>shop:taxon_translation:read</group>
+            <group>admin:taxon:index</group>
+            <group>admin:taxon:show</group>
+            <group>shop:taxon:index</group>
+            <group>shop:taxon:show</group>
+            <group>admin:taxon_translation:show</group>
+            <group>shop:taxon_translation:show</group>
             <group>admin:taxon:create</group>
             <group>admin:taxon:update</group>
         </attribute>

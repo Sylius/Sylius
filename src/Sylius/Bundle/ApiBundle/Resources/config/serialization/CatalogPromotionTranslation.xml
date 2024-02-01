@@ -17,17 +17,20 @@
 >
     <class name="Sylius\Component\Promotion\Model\CatalogPromotionTranslation">
         <attribute name="id">
-            <group>admin:catalog_promotion:read</group>
+            <group>admin:catalog_promotion:index</group>
+            <group>admin:catalog_promotion:show</group>
         </attribute>
 
         <attribute name="label">
-            <group>admin:catalog_promotion:read</group>
+            <group>admin:catalog_promotion:index</group>
+            <group>admin:catalog_promotion:show</group>
             <group>admin:catalog_promotion:create</group>
             <group>admin:catalog_promotion:update</group>
         </attribute>
 
         <attribute name="description">
-            <group>admin:catalog_promotion:read</group>
+            <group>admin:catalog_promotion:index</group>
+            <group>admin:catalog_promotion:show</group>
             <group>admin:catalog_promotion:create</group>
             <group>admin:catalog_promotion:update</group>
         </attribute>

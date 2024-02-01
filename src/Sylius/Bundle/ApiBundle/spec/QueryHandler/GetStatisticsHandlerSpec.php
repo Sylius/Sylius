@@ -38,10 +38,11 @@ final class GetStatisticsHandlerSpec extends ObjectBehavior
     ): void {
         $query->getChannelCode()->willReturn('CHANNEL_CODE');
         $query->getDatePeriod()->willReturn($datePeriod);
+        $query->getIntervalType()->willReturn('day');
 
         $channelRepository->findOneByCode('CHANNEL_CODE')->willReturn($channel);
 
-        $statisticsProvider->provide($datePeriod, $channel)->willReturn($statistics);
+        $statisticsProvider->provide('day', $datePeriod, $channel)->willReturn($statistics);
 
         $this->__invoke($query)->shouldBe($statistics);
     }
@@ -49,9 +50,16 @@ final class GetStatisticsHandlerSpec extends ObjectBehavior
     function it_throws_channel_not_found_exception_when_channel_is_null(
         ChannelRepositoryInterface $channelRepository,
     ): void {
-        $datePeriod = new \DatePeriod(new \DateTime('2022-01-01'), new \DateInterval('P1D'), new \DateTime('2022-12-31'));
+        $datePeriod = new \DatePeriod(
+            new \DateTime('2022-01-01'),
+            new \DateInterval('P1D'),
+            new \DateTime('2022-12-31'),
+        );
         $channelRepository->findOneByCode('NON_EXISTING_CHANNEL_CODE')->willReturn(null);
 
-        $this->shouldThrow(ChannelNotFoundException::class)->during('__invoke', [new GetStatistics($datePeriod, 'NON_EXISTING_CHANNEL_CODE')]);
+        $this
+            ->shouldThrow(ChannelNotFoundException::class)
+            ->during('__invoke', [new GetStatistics('day', $datePeriod, 'NON_EXISTING_CHANNEL_CODE')])
+        ;
     }
 }

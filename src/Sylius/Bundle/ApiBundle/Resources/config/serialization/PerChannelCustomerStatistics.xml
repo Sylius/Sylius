@@ -17,16 +17,16 @@
 >
     <class name="Sylius\Component\Core\Customer\Statistics\PerChannelCustomerStatistics">
         <attribute name="channel">
-            <group>admin:customer:statistics:read</group>
+            <group>admin:customer:statistics:show</group>
         </attribute>
         <attribute name="ordersCount">
-            <group>admin:customer:statistics:read</group>
+            <group>admin:customer:statistics:show</group>
         </attribute>
         <attribute name="ordersValue">
-            <group>admin:customer:statistics:read</group>
+            <group>admin:customer:statistics:show</group>
         </attribute>
         <attribute name="averageOrderValue">
-            <group>admin:customer:statistics:read</group>
+            <group>admin:customer:statistics:show</group>
         </attribute>
     </class>
 </serializer>

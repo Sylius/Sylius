@@ -17,18 +17,20 @@
 >
     <class name="Sylius\Component\Product\Model\ProductAttributeTranslation">
         <attribute name="id">
-            <group>shop:product_attribute:read</group>
-            <group>admin:product_attribute:read</group>
+            <group>admin:product_attribute:index</group>
+            <group>admin:product_attribute:show</group>
+            <group>shop:product_attribute:show</group>
         </attribute>
         <attribute name="locale">
             <group>admin:product_attribute:create</group>
             <group>admin:product_attribute:update</group>
         </attribute>
         <attribute name="name">
-            <group>shop:product_attribute:read</group>
-            <group>admin:product_attribute:read</group>
+            <group>admin:product_attribute:index</group>
+            <group>admin:product_attribute:show</group>
             <group>admin:product_attribute:create</group>
             <group>admin:product_attribute:update</group>
+            <group>shop:product_attribute:show</group>
         </attribute>
     </class>
 </serializer>

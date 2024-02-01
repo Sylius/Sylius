@@ -15,7 +15,8 @@ namespace spec\Sylius\Bundle\ApiBundle\Applicator;
 
 use PhpSpec\ObjectBehavior;
 use SM\Factory\FactoryInterface as StateMachineFactoryInterface;
-use SM\StateMachine\StateMachine;
+use SM\StateMachine\StateMachine as WinzouStateMachine;
+use Sylius\Abstraction\StateMachine\StateMachineInterface;
 use Sylius\Component\Core\ProductReviewTransitions;
 use Sylius\Component\Review\Model\ReviewInterface;
 
@@ -29,7 +30,7 @@ final class ProductReviewStateMachineTransitionApplicatorSpec extends ObjectBeha
     public function it_accepts_product_review(
         StateMachineFactoryInterface $stateMachineFactory,
         ReviewInterface $review,
-        StateMachine $stateMachine,
+        WinzouStateMachine $stateMachine,
     ): void {
         $stateMachineFactory->get($review, ProductReviewTransitions::GRAPH)->willReturn($stateMachine);
         $stateMachine->apply(ProductReviewTransitions::TRANSITION_ACCEPT)->shouldBeCalled();
@@ -37,13 +38,35 @@ final class ProductReviewStateMachineTransitionApplicatorSpec extends ObjectBeha
         $this->accept($review);
     }
 
+    public function it_uses_the_new_state_machine_abstraction_if_passed_while_accepting_a_product_review(
+        StateMachineInterface $stateMachine,
+        ReviewInterface $review,
+    ): void {
+        $this->beConstructedWith($stateMachine);
+
+        $stateMachine->apply($review, ProductReviewTransitions::GRAPH, ProductReviewTransitions::TRANSITION_ACCEPT)->shouldBeCalled();
+
+        $this->accept($review);
+    }
+
     public function it_rejects_product_review(
         StateMachineFactoryInterface $stateMachineFactory,
         ReviewInterface $review,
-        StateMachine $stateMachine,
+        WinzouStateMachine $stateMachine,
     ): void {
         $stateMachineFactory->get($review, ProductReviewTransitions::GRAPH)->willReturn($stateMachine);
         $stateMachine->apply(ProductReviewTransitions::TRANSITION_REJECT)->shouldBeCalled();
+
+        $this->reject($review);
+    }
+
+    public function it_uses_the_new_state_machine_abstraction_if_passed_while_rejecting_a_product_review(
+        StateMachineInterface $stateMachine,
+        ReviewInterface $review,
+    ): void {
+        $this->beConstructedWith($stateMachine);
+
+        $stateMachine->apply($review, ProductReviewTransitions::GRAPH, ProductReviewTransitions::TRANSITION_REJECT)->shouldBeCalled();
 
         $this->reject($review);
     }

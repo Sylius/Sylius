@@ -16,8 +16,8 @@ namespace Sylius\Behat\Context\Api\Admin;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
-use Sylius\Calendar\Provider\DateTimeProviderInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
+use Symfony\Component\Clock\ClockInterface;
 use Webmozart\Assert\Assert;
 
 final class DashboardContext implements Context
@@ -25,7 +25,7 @@ final class DashboardContext implements Context
     public function __construct(
         private ApiClientInterface $client,
         private ResponseCheckerInterface $responseChecker,
-        private DateTimeProviderInterface $dateTimeProvider,
+        private ClockInterface $clock,
     ) {
     }
 
@@ -48,9 +48,9 @@ final class DashboardContext implements Context
             'statistics',
             [
                 'channelCode' => $channel->getCode(),
-                'startDate' => $this->dateTimeProvider->now()->format('Y-01-01\T00:00:00'),
-                'dateInterval' => 'P1M',
-                'endDate' => $this->dateTimeProvider->now()->format('Y-12-31\T23:59:59'),
+                'startDate' => $this->clock->now()->format('Y-01-01\T00:00:00'),
+                'interval' => 'month',
+                'endDate' => $this->clock->now()->format('Y-12-31\T23:59:59'),
             ],
         );
     }
@@ -60,14 +60,14 @@ final class DashboardContext implements Context
      */
     public function iViewStatisticsForChannelAndPreviousYear(ChannelInterface $channel): void
     {
-        $currentYear = (int) $this->dateTimeProvider->now()->format('Y');
+        $currentYear = (int) $this->clock->now()->format('Y');
 
         $this->client->index(
             'statistics',
             [
                 'channelCode' => $channel->getCode(),
                 'startDate' => ($currentYear - 1) . '-01-01T00:00:00',
-                'dateInterval' => 'P1M',
+                'interval' => 'month',
                 'endDate' => ($currentYear - 1) . '-12-31T23:59:59',
             ],
         );
@@ -78,14 +78,14 @@ final class DashboardContext implements Context
      */
     public function iViewStatisticsForChannelAndNextYear(ChannelInterface $channel): void
     {
-        $currentYear = (int) $this->dateTimeProvider->now()->format('Y');
+        $currentYear = (int) $this->clock->now()->format('Y');
 
         $this->client->index(
             'statistics',
             [
                 'channelCode' => $channel->getCode(),
                 'startDate' => ($currentYear + 1) . '-01-01T00:00:00',
-                'dateInterval' => 'P1M',
+                'interval' => 'month',
                 'endDate' => ($currentYear + 1) . '-12-31T23:59:59',
             ],
         );

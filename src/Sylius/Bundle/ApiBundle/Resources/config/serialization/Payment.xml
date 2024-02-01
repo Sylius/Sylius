@@ -17,45 +17,56 @@
 >
     <class name="Sylius\Component\Core\Model\Payment">
         <attribute name="id">
-            <group>admin:order:read</group>
-            <group>admin:payment:read</group>
-            <group>shop:cart:read</group>
-            <group>shop:payment:read</group>
+            <group>admin:order:index</group>
+            <group>admin:order:show</group>
+            <group>admin:payment:index</group>
+            <group>admin:payment:show</group>
+            <group>shop:cart:show</group>
+            <group>shop:payment:show</group>
         </attribute>
         <attribute name="method">
-            <group>admin:order:read</group>
-            <group>admin:payment:read</group>
-            <group>shop:cart:read</group>
-            <group>shop:order:account:read</group>
-            <group>shop:payment:read</group>
+            <group>admin:order:index</group>
+            <group>admin:order:show</group>
+            <group>admin:payment:index</group>
+            <group>admin:payment:show</group>
+            <group>shop:cart:show</group>
+            <group>shop:order:account:show</group>
+            <group>shop:payment:show</group>
         </attribute>
         <attribute name="currencyCode">
-            <group>admin:payment:read</group>
-            <group>shop:payment:read</group>
+            <group>admin:payment:index</group>
+            <group>admin:payment:show</group>
+            <group>shop:payment:show</group>
         </attribute>
         <attribute name="amount">
-            <group>admin:payment:read</group>
-            <group>shop:payment:read</group>
+            <group>admin:payment:index</group>
+            <group>admin:payment:show</group>
+            <group>shop:payment:show</group>
         </attribute>
         <attribute name="state">
-            <group>admin:payment:read</group>
-            <group>shop:payment:read</group>
+            <group>admin:payment:index</group>
+            <group>admin:payment:show</group>
+            <group>shop:payment:show</group>
         </attribute>
         <attribute name="details">
-            <group>admin:payment:read</group>
-            <group>shop:payment:read</group>
+            <group>admin:payment:index</group>
+            <group>admin:payment:show</group>
+            <group>shop:payment:show</group>
         </attribute>
         <attribute name="createdAt">
-            <group>admin:payment:read</group>
-            <group>shop:payment:read</group>
+            <group>admin:payment:index</group>
+            <group>admin:payment:show</group>
+            <group>shop:payment:show</group>
         </attribute>
         <attribute name="updatedAt">
-            <group>admin:payment:read</group>
-            <group>shop:payment:read</group>
+            <group>admin:payment:index</group>
+            <group>admin:payment:show</group>
+            <group>shop:payment:show</group>
         </attribute>
         <attribute name="order">
-            <group>admin:payment:read</group>
-            <group>shop:payment:read</group>
+            <group>admin:payment:index</group>
+            <group>admin:payment:show</group>
+            <group>shop:payment:show</group>
         </attribute>
     </class>
 </serializer>

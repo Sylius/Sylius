@@ -11,18 +11,17 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\ApiBundle\Validator\Constraints;
+namespace Sylius\Bundle\PromotionBundle\Validator\Constraints;
 
 use Symfony\Component\Validator\Constraint;
 
-/** @experimental */
-final class DateInterval extends Constraint
+final class CatalogPromotionActionType extends Constraint
 {
-    public string $message = 'sylius.date_interval.invalid';
+    public string $invalidType = 'sylius.catalog_promotion_action.type.invalid';
 
     public function validatedBy(): string
     {
-        return 'sylius_api_validator_date_interval';
+        return 'sylius_catalog_promotion_action_type_validator';
     }
 
     public function getTargets(): string

@@ -16,6 +16,8 @@ namespace Sylius\Bundle\AdminBundle\Menu;
 use Knp\Menu\FactoryInterface;
 use Knp\Menu\ItemInterface;
 use SM\Factory\FactoryInterface as StateMachineFactoryInterface;
+use Sylius\Abstraction\StateMachine\StateMachineInterface;
+use Sylius\Abstraction\StateMachine\WinzouStateMachineAdapter;
 use Sylius\Bundle\AdminBundle\Event\OrderShowMenuBuilderEvent;
 use Sylius\Component\Order\OrderTransitions;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
@@ -28,9 +30,21 @@ final class OrderShowMenuBuilder
     public function __construct(
         private FactoryInterface $factory,
         private EventDispatcherInterface $eventDispatcher,
-        private StateMachineFactoryInterface $stateMachineFactory,
+        private StateMachineFactoryInterface|StateMachineInterface $stateMachineFactory,
         private CsrfTokenManagerInterface $csrfTokenManager,
-    ) {
+    )
+    {
+        if ($this->stateMachineFactory instanceof StateMachineFactoryInterface) {
+            trigger_deprecation(
+                'sylius/admin-bundle',
+                '1.13',
+                sprintf(
+                    'Passing an instance of "%s" as the third argument is deprecated. It will accept only instances of "%s" in Sylius 2.0.',
+                    StateMachineFactoryInterface::class,
+                    StateMachineInterface::class,
+                ),
+            );
+        }
     }
 
     public function createMenu(array $options): ItemInterface
@@ -50,25 +64,24 @@ final class OrderShowMenuBuilder
             ])
             ->setAttribute('type', 'link')
             ->setLabel('sylius.ui.history')
-            ->setLabelAttribute('icon', 'history')
-        ;
+            ->setLabelAttribute('icon', 'history');
 
-        $stateMachine = $this->stateMachineFactory->get($order, OrderTransitions::GRAPH);
-        if ($stateMachine->can(OrderTransitions::TRANSITION_CANCEL)) {
+        $stateMachine = $this->getStateMachine();
+
+        if ($stateMachine->can($order, OrderTransitions::GRAPH, OrderTransitions::TRANSITION_CANCEL)) {
             $menu
                 ->addChild('cancel', [
                     'route' => 'sylius_admin_order_cancel',
                     'routeParameters' => [
                         'id' => $order->getId(),
-                        '_csrf_token' => $this->csrfTokenManager->getToken((string) $order->getId())->getValue(),
+                        '_csrf_token' => $this->csrfTokenManager->getToken((string)$order->getId())->getValue(),
                     ],
                 ])
                 ->setAttribute('type', 'transition')
                 ->setAttribute('confirmation', true)
                 ->setLabel('sylius.ui.cancel')
                 ->setLabelAttribute('icon', 'ban')
-                ->setLabelAttribute('color', 'yellow')
-            ;
+                ->setLabelAttribute('color', 'yellow');
         }
 
         $this->eventDispatcher->dispatch(
@@ -77,5 +90,14 @@ final class OrderShowMenuBuilder
         );
 
         return $menu;
+    }
+
+    private function getStateMachine(): StateMachineInterface
+    {
+        if ($this->stateMachineFactory instanceof StateMachineFactoryInterface) {
+            return new WinzouStateMachineAdapter($this->stateMachineFactory);
+        }
+
+        return $this->stateMachineFactory;
     }
 }

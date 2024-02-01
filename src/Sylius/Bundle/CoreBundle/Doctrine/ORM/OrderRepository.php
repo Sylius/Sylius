@@ -288,21 +288,26 @@ class OrderRepository extends BaseOrderRepository implements OrderRepositoryInte
         ;
     }
 
-    public function getTotalPaidSalesForChannelInPeriodGroupedByYearAndMonth(
+    public function getGroupedTotalPaidSalesForChannelInPeriod(
         ChannelInterface $channel,
         \DateTimeInterface $startDate,
         \DateTimeInterface $endDate,
+        array $groupBy,
     ): array {
         $queryBuilder = $this->createPaidOrdersInChannelPlacedWithinDateRangeQueryBuilder($channel, $startDate, $endDate);
+        $queryBuilder->select('SUM(o.total) AS total');
+
+        foreach ($groupBy as $name => $select) {
+            $queryBuilder
+                ->addSelect($select)
+                ->addGroupBy($name)
+            ;
+        }
 
         return $queryBuilder
-            ->select('SUM(o.total) AS total')
-            ->addSelect('YEAR(o.checkoutCompletedAt) AS year')
-            ->addSelect('MONTH(o.checkoutCompletedAt) AS month')
-            ->groupBy('year')
-            ->addGroupBy('month')
             ->getQuery()
-            ->getArrayResult();
+            ->getArrayResult()
+        ;
     }
 
     public function countFulfilledByChannel(ChannelInterface $channel): int

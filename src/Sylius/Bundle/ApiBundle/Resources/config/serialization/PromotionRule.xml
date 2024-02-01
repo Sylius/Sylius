@@ -13,15 +13,18 @@
 >
     <class name="Sylius\Component\Promotion\Model\PromotionRule">
         <attribute name="id">
-            <group>admin:promotion:read</group>
+            <group>admin:promotion:index</group>
+            <group>admin:promotion:show</group>
         </attribute>
         <attribute name="type">
-            <group>admin:promotion:read</group>
+            <group>admin:promotion:index</group>
+            <group>admin:promotion:show</group>
             <group>admin:promotion:create</group>
             <group>admin:promotion:update</group>
         </attribute>
         <attribute name="configuration">
-            <group>admin:promotion:read</group>
+            <group>admin:promotion:index</group>
+            <group>admin:promotion:show</group>
             <group>admin:promotion:create</group>
             <group>admin:promotion:update</group>
         </attribute>

@@ -1,0 +1,154 @@
+{
+    "sales": [
+        {
+            "period": "2022-01",
+            "total": 0
+        },
+        {
+            "period": "2022-02",
+            "total": 0
+        },
+        {
+            "period": "2022-03",
+            "total": 0
+        },
+        {
+            "period": "2022-04",
+            "total": 0
+        },
+        {
+            "period": "2022-05",
+            "total": 0
+        },
+        {
+            "period": "2022-06",
+            "total": 0
+        },
+        {
+            "period": "2022-07",
+            "total": 2500
+        },
+        {
+            "period": "2022-08",
+            "total": 0
+        },
+        {
+            "period": "2022-09",
+            "total": 0
+        },
+        {
+            "period": "2022-10",
+            "total": 0
+        },
+        {
+            "period": "2022-11",
+            "total": 0
+        },
+        {
+            "period": "2022-12",
+            "total": 2500
+        },
+        {
+            "period": "2023-01",
+            "total": 2500
+        },
+        {
+            "period": "2023-02",
+            "total": 0
+        },
+        {
+            "period": "2023-03",
+            "total": 0
+        },
+        {
+            "period": "2023-04",
+            "total": 2500
+        },
+        {
+            "period": "2023-05",
+            "total": 0
+        },
+        {
+            "period": "2023-06",
+            "total": 0
+        },
+        {
+            "period": "2023-07",
+            "total": 0
+        },
+        {
+            "period": "2023-08",
+            "total": 0
+        },
+        {
+            "period": "2023-09",
+            "total": 0
+        },
+        {
+            "period": "2023-10",
+            "total": 0
+        },
+        {
+            "period": "2023-11",
+            "total": 0
+        },
+        {
+            "period": "2023-12",
+            "total": 0
+        },
+        {
+            "period": "2024-01",
+            "total": 2500
+        },
+        {
+            "period": "2024-02",
+            "total": 0
+        },
+        {
+            "period": "2024-03",
+            "total": 0
+        },
+        {
+            "period": "2024-04",
+            "total": 0
+        },
+        {
+            "period": "2024-05",
+            "total": 0
+        },
+        {
+            "period": "2024-06",
+            "total": 0
+        },
+        {
+            "period": "2024-07",
+            "total": 0
+        },
+        {
+            "period": "2024-08",
+            "total": 0
+        },
+        {
+            "period": "2024-09",
+            "total": 0
+        },
+        {
+            "period": "2024-10",
+            "total": 0
+        },
+        {
+            "period": "2024-11",
+            "total": 2500
+        },
+        {
+            "period": "2024-12",
+            "total": 0
+        }
+    ],
+    "businessActivitySummary": {
+        "totalSales": 15000,
+        "paidOrdersCount": 6,
+        "newCustomersCount": 1,
+        "averageOrderValue": 2500
+    }
+}

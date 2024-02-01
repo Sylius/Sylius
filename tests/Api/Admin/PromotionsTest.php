@@ -383,8 +383,6 @@ final class PromotionsTest extends JsonApiTestCase
                     [
                         'type' => ItemTotalRuleChecker::TYPE,
                         'configuration' => [
-                            'MOBILE' => [
-                            ],
                         ],
                     ],
                     [

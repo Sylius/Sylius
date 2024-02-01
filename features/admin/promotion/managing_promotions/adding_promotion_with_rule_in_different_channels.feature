@@ -10,7 +10,7 @@ Feature: Adding a new promotion with rule configured in different channels
         And I am logged in as an administrator
 
     @api @ui @mink:chromedriver
-    Scenario: Adding a new promotion with total price of items from taxon rule
+    Scenario: Adding a new promotion with total price of items
         When I want to create a new promotion
         And I specify its code as "100_IN_EVERY_CURRENCY"
         And I name it "100 in every currency"

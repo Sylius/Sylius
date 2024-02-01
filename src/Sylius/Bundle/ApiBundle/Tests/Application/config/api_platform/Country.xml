@@ -35,7 +35,7 @@
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/shop/countries/new/{code}</attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">shop:country:read</attribute>
+                    <attribute name="groups">shop:country:show</attribute>
                 </attribute>
             </itemOperation>
 

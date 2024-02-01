@@ -62,6 +62,13 @@ jobs:
         uses: ./.github/workflows/ci_e2e-custom.yaml
         with:
             branch: ${{ matrix.branch }}
+    frontend:
+        name: Frontend
+        needs: static-checks
+        uses: ./.github/workflows/ci_frontend.yaml
+        with:
+            branch: ${{ matrix.branch }}
+            type: full
     packages:
         strategy:
             matrix:

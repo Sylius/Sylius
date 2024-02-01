@@ -77,7 +77,7 @@
             <argument type="service" id="sylius.repository.shipping_method" />
             <argument type="service" id="sylius.repository.shipment" />
             <argument type="service" id="sylius.shipping_method_eligibility_checker" />
-            <argument type="service" id="sm.factory" />
+            <argument type="service" id="sylius_abstraction.state_machine" />
             <tag name="messenger.message_handler" bus="sylius.command_bus" />
             <tag name="messenger.message_handler" bus="sylius_default.bus" />
         </service>
@@ -86,7 +86,7 @@
             <argument type="service" id="sylius.repository.order" />
             <argument type="service" id="sylius.repository.payment_method" />
             <argument type="service" id="sylius.repository.payment" />
-            <argument type="service" id="sm.factory" />
+            <argument type="service" id="sylius_abstraction.state_machine" />
             <argument type="service" id="Sylius\Bundle\ApiBundle\Changer\PaymentMethodChangerInterface" />
             <tag name="messenger.message_handler" bus="sylius.command_bus" />
             <tag name="messenger.message_handler" bus="sylius_default.bus" />
@@ -94,7 +94,7 @@
 
         <service id="Sylius\Bundle\ApiBundle\CommandHandler\Checkout\CompleteOrderHandler">
             <argument type="service" id="sylius.repository.order" />
-            <argument type="service" id="sm.factory" />
+            <argument type="service" id="sylius_abstraction.state_machine" />
             <argument type="service" id="sylius.command_bus" />
             <argument type="service" id="sylius.event_bus" />
             <argument type="service" id="Sylius\Bundle\CoreBundle\Order\Checker\OrderPromotionsIntegrityCheckerInterface" />
@@ -104,7 +104,7 @@
 
         <service id="Sylius\Bundle\ApiBundle\CommandHandler\Checkout\ShipShipmentHandler">
             <argument type="service" id="sylius.repository.shipment" />
-            <argument type="service" id="sm.factory" />
+            <argument type="service" id="sylius_abstraction.state_machine" />
             <argument type="service" id="sylius.command_bus" />
             <tag name="messenger.message_handler" bus="sylius.command_bus" />
             <tag name="messenger.message_handler" bus="sylius_default.bus" />

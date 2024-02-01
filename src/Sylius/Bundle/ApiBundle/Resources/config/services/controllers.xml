@@ -69,6 +69,7 @@
             <argument type="service" id="sylius.query_bus" />
             <argument type="service" id="serializer" />
             <argument type="service" id="validator" />
+            <argument>%sylius_core.orders_statistics.intervals_map%</argument>
         </service>
     </services>
 </container>

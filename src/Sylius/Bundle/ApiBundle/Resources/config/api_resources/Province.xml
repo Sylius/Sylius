@@ -26,7 +26,7 @@
             <itemOperation name="admin_get">
                 <attribute name="method">GET</attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:province:read</attribute>
+                    <attribute name="groups">admin:province:show</attribute>
                 </attribute>
             </itemOperation>
 
@@ -36,7 +36,7 @@
                     <attribute name="groups">admin:province:update</attribute>
                 </attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:province:read</attribute>
+                    <attribute name="groups">admin:province:show</attribute>
                 </attribute>
             </itemOperation>
         </itemOperations>

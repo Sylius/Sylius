@@ -11,23 +11,21 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\ApiBundle\Validator\Constraints;
+namespace Sylius\Bundle\CoreBundle\Validator\Constraints;
 
 use Symfony\Component\Validator\Constraint;
 
-/** @experimental */
-final class EndDateAgainstInterval extends Constraint
+final class ProductVariantCodeExists extends Constraint
 {
-    /** @var string */
-    public $message = 'sylius.date_period.end_date_must_be_multiple_of_interval';
+    public string $message = 'sylius.product_variant.code.not_exist';
 
     public function validatedBy(): string
     {
-        return 'sylius_api_validator_end_date_against_interval';
+        return 'sylius_product_variant_code_exists';
     }
 
     public function getTargets(): string
     {
-        return self::CLASS_CONSTRAINT;
+        return Constraint::PROPERTY_CONSTRAINT;
     }
 }
