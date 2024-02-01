@@ -68,8 +68,8 @@ final class PaypalContext implements Context
                     'query' => [
                         'token' => 'EC-2d9EV13959UR209410U',
                         'PayerID' => 'UX8WBNYWGBVMG',
-                    ]
-                ]
+                    ],
+                ],
             );
         });
     }
@@ -86,8 +86,8 @@ final class PaypalContext implements Context
                 'query' => [
                     'token' => 'EC-2d9EV13959UR209410U',
                     'cancelled' => 1,
-                ]
-            ]
+                ],
+            ],
         );
     }
 
@@ -169,8 +169,7 @@ final class PaypalContext implements Context
             'paymentMethodCode' => $payment['method'],
             'type' => $authorize
                 ? PaymentRequestInterface::DATA_TYPE_AUTHORIZE
-                : PaymentRequestInterface::DATA_TYPE_CAPTURE
-            ,
+                : PaymentRequestInterface::DATA_TYPE_CAPTURE,
             'requestPayload' => [
                 'target_path' => 'https://myshop.tld/target-path',
                 'after_path' => 'https://myshop.tld/after-path',
@@ -180,7 +179,7 @@ final class PaypalContext implements Context
         $this->client->executeCustomRequest($request);
     }
 
-    function putPaymentRequest(string $paymentRequestUri, array $httpRequest = []): void
+    public function putPaymentRequest(string $paymentRequestUri, array $httpRequest = []): void
     {
         $request = $this->requestFactory->custom(
             $paymentRequestUri,
