@@ -21,4 +21,6 @@ interface PaymentRequestRepositoryInterface
      * @return PaymentRequestInterface[]
      */
     public function findOtherExisting(PaymentRequestInterface $paymentRequest): array;
+
+    public function findOneByHash(string $hash): ?PaymentRequestInterface;
 }
