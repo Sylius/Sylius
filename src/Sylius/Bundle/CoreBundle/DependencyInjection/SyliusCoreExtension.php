@@ -83,7 +83,7 @@ final class SyliusCoreExtension extends AbstractResourceExtension implements Pre
             FilesystemAdapterInterface::class,
             match ($config['filesystem']['adapter']) {
                 'default', 'flysystem' => FlysystemFilesystemAdapter::class,
-                default => throw new InvalidArgumentException(sprintf(
+                default => throw new \InvalidArgumentException(sprintf(
                     'Invalid filesystem adapter "%s" provided.',
                     $config['filesystem']['adapter'],
                 )),

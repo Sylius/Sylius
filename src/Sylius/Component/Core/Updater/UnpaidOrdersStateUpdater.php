@@ -75,7 +75,7 @@ final class UnpaidOrdersStateUpdater implements UnpaidOrdersStateUpdaterInterfac
             $stateMachine = $this->getStateMachine();
             $stateMachine->apply($expiredUnpaidOrder, OrderTransitions::GRAPH, OrderTransitions::TRANSITION_CANCEL);
         } catch (StateMachineExecutionException $e) {
-            $this->logger?->error(
+            $this->logger->error(
                 sprintf('An error occurred while cancelling unpaid order #%s', $expiredUnpaidOrder->getId()),
                 ['exception' => $e, 'message' => $e->getMessage()],
             );
