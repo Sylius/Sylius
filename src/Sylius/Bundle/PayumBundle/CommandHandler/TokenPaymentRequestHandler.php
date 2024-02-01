@@ -16,7 +16,7 @@ namespace Sylius\Bundle\PayumBundle\CommandHandler;
 use Sylius\Bundle\PaymentBundle\Command\PaymentRequestHashAwareInterface;
 use Sylius\Bundle\PayumBundle\Factory\TokenAggregateRequestFactoryInterface;
 use Sylius\Bundle\PayumBundle\PaymentRequest\Factory\PayumTokenFactoryInterface;
-use Sylius\Bundle\PayumBundle\PaymentRequest\Processor\AfterTokenizedRequestProcessorInterface;
+use Sylius\Bundle\PayumBundle\PaymentRequest\Processor\AfterTokenRequestProcessorInterface;
 use Sylius\Bundle\PayumBundle\PaymentRequest\Processor\RequestProcessorInterface;
 use Sylius\Bundle\PayumBundle\PaymentRequest\Provider\PaymentRequestProviderInterface;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
@@ -28,7 +28,7 @@ final class TokenPaymentRequestHandler implements MessageHandlerInterface
         private PaymentRequestProviderInterface $paymentRequestProvider,
         private PayumTokenFactoryInterface $payumTokenFactory,
         private RequestProcessorInterface $requestProcessor,
-        private AfterTokenizedRequestProcessorInterface $afterTokenizedRequestProcessor,
+        private AfterTokenRequestProcessorInterface $afterTokenRequestProcessor,
         private TokenAggregateRequestFactoryInterface $payumRequestFactory,
     ) {
     }
@@ -47,6 +47,6 @@ final class TokenPaymentRequestHandler implements MessageHandlerInterface
 
         $this->requestProcessor->process($paymentRequest, $request, $token->getGatewayName());
 
-        $this->afterTokenizedRequestProcessor->process($paymentRequest, $token);
+        $this->afterTokenRequestProcessor->process($paymentRequest, $token);
     }
 }
