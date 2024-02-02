@@ -66,6 +66,8 @@
                 <attribute name="path">/admin/shipments/{id}/ship</attribute>
                 <attribute name="messenger">input</attribute>
                 <attribute name="input">Sylius\Bundle\ApiBundle\Command\Checkout\ShipShipment</attribute>
+                <attribute name="output">false</attribute>
+                <attribute name="status">202</attribute>
                 <attribute name="openapi_context">
                     <attribute name="summary">Ships Shipment</attribute>
                 </attribute>
