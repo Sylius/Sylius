@@ -26,7 +26,7 @@
         }
     ],
     "require": {
-        "php": "^8.0",
+        "php": "^8.2",
         "enshrined/svg-sanitize": "^0.16",
         "guzzlehttp/guzzle": "^6.5 || ^7.0",
         "knplabs/gaufrette": "^0.10 || ^0.11",
@@ -34,37 +34,37 @@
         "payum/core": "^1.7.3",
         "psr/http-client": "^1.0",
         "psr/http-message": "^1.0",
-        "sylius/addressing": "^1.13",
-        "sylius/attribute": "^1.13",
-        "sylius/channel": "^1.13",
-        "sylius/currency": "^1.13",
-        "sylius/customer": "^1.13",
-        "sylius/inventory": "^1.13",
-        "sylius/locale": "^1.13",
-        "sylius/order": "^1.13",
-        "sylius/payment": "^1.13",
-        "sylius/product": "^1.13",
-        "sylius/promotion": "^1.13",
-        "sylius/registry": "^1.5",
-        "sylius/resource": "^1.9",
-        "sylius/review": "^1.13",
-        "sylius/shipping": "^1.13",
-        "sylius/state-machine-abstraction": "^1.13",
-        "sylius/taxation": "^1.13",
-        "sylius/taxonomy": "^1.13",
-        "sylius/user": "^1.13",
-        "symfony/http-client": "^5.4.21 || ^6.0",
-        "symfony/http-foundation": "^5.4.21 || ^6.0",
-        "symfony/mime": "^5.4.21 || ^6.0",
+        "sylius/addressing": "^2.0",
+        "sylius/attribute": "^2.0",
+        "sylius/channel": "^2.0",
+        "sylius/currency": "^2.0",
+        "sylius/customer": "^2.0",
+        "sylius/inventory": "^2.0",
+        "sylius/locale": "^2.0",
+        "sylius/order": "^2.0",
+        "sylius/payment": "^2.0",
+        "sylius/product": "^2.0",
+        "sylius/promotion": "^2.0",
+        "sylius/registry": "^1.6",
+        "sylius/resource": "^1.10",
+        "sylius/review": "^2.0",
+        "sylius/shipping": "^2.0",
+        "sylius/state-machine-abstraction": "^2.0",
+        "sylius/taxation": "^2.0",
+        "sylius/taxonomy": "^2.0",
+        "sylius/user": "^2.0",
+        "symfony/http-client": "^6.4.0",
+        "symfony/http-foundation": "^6.4.0",
+        "symfony/mime": "^6.3.3",
         "symfony/service-contracts": "^2.5 || ^3.0",
-        "symfony/string": "^5.4.21 || ^6.0",
+        "symfony/string": "^6.4.0",
         "webmozart/assert": "^1.9",
         "laminas/laminas-stdlib": "^3.3.1"
     },
     "require-dev": {
         "phpspec/phpspec": "^7.2",
         "phpunit/phpunit": "^9.5",
-        "symfony/property-access": "^5.4.21 || ^6.0"
+        "symfony/property-access": "^6.4.0"
     },
     "config": {
         "allow-plugins": {
@@ -73,7 +73,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-main": "1.13-dev"
+            "dev-main": "2.0-dev"
         }
     },
     "autoload": {

@@ -25,7 +25,6 @@ interface UserInterface extends
     AdvancedUserInterface,
     CredentialsHolderInterface,
     ResourceInterface,
-    \Serializable,
     TimestampableInterface,
     ToggleableInterface,
     EncoderAwareInterface,
@@ -114,5 +113,6 @@ interface UserInterface extends
 
     public function __serialize(): array;
 
+    /** @param array<array-key, mixed> $data */
     public function __unserialize(array $data): void;
 }
