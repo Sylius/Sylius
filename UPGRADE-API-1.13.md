@@ -13,6 +13,10 @@
             skip_adding_read_group: true
     ```
 
+1. Sylius serialization groups have been updated with a new prefix of `sylius:some_resource`.
+   If you extend any of the Sylius resources, you should update your serialization groups to use the new prefix.
+   Non-prefix serialization groups are deprecated and will be removed in Sylius 2.0.
+
 1. The constructor of `Sylius\Bundle\ApiBundle\Serializer\ChannelDenormalizer` has been changed:
 
     ```diff
