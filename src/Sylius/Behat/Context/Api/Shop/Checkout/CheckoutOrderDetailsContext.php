@@ -15,17 +15,20 @@ namespace Sylius\Behat\Context\Api\Shop\Checkout;
 
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
-use Sylius\Behat\Client\RequestFactoryInterface;
+use Sylius\Behat\Client\ResponseCheckerInterface;
+use Sylius\Behat\Context\Api\Resources;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Core\OrderPaymentStates;
+use Sylius\Component\Payment\Model\PaymentInterface;
 use Webmozart\Assert\Assert;
 
 final class CheckoutOrderDetailsContext implements Context
 {
     public function __construct(
-        private RequestFactoryInterface $requestFactory,
         private SharedStorageInterface $sharedStorage,
         private ApiClientInterface $client,
+        private ResponseCheckerInterface $responseChecker,
     ) {
     }
 
@@ -34,43 +37,8 @@ final class CheckoutOrderDetailsContext implements Context
      */
     public function iWantToBrowseOrderDetailsForThisOrder(OrderInterface $order): void
     {
-        $this->orderDetails->open(['tokenValue' => $order->getTokenValue()]);
-    }
-
-    /**
-     * @When I try to pay with :paymentMethodName payment method
-     */
-    public function iChangePaymentMethodTo(string $paymentMethodName): void
-    {
-        $this->orderDetails->choosePaymentMethod($paymentMethodName);
-        $this->orderDetails->pay();
-    }
-
-    /**
-     * @When I retry the payment with :paymentMethodName payment method
-     */
-    public function iChangePaymentMethodAfterCheckout(string $paymentMethodName): void
-    {
-        $this->thankYouPage->goToTheChangePaymentMethodPage();
-        $this->orderDetails->choosePaymentMethod($paymentMethodName);
-        $this->orderDetails->pay();
-    }
-
-    /**
-     * @When I want to pay for my order
-     */
-    public function iWantToPayForMyOrder(): void
-    {
-        $this->thankYouPage->goToTheChangePaymentMethodPage();
-    }
-
-    /**
-     * @When I try to pay for my order
-     */
-    public function iTryToPayForMyOrder(): void
-    {
-        $this->thankYouPage->goToTheChangePaymentMethodPage();
-        $this->orderDetails->pay();
+        $this->sharedStorage->set('cart_token', $order->getTokenValue());
+        $this->client->show(Resources::ORDERS, $order->getTokenValue());
     }
 
     /**
@@ -78,7 +46,8 @@ final class CheckoutOrderDetailsContext implements Context
      */
     public function iShouldBeAbleToPay(): void
     {
-        Assert::true($this->orderDetails->hasPayAction());
+        $state = $this->getLatestPaymentState();
+        Assert::eq($state, PaymentInterface::STATE_NEW);
     }
 
     /**
@@ -86,31 +55,27 @@ final class CheckoutOrderDetailsContext implements Context
      */
     public function iShouldNotBeAbleToPay(): void
     {
-        Assert::false($this->orderDetails->canBePaid());
+        $state = $this->getLatestPaymentState();
+        Assert::notEq($state, PaymentInterface::STATE_NEW);
     }
 
-    /**
-     * @Then I should see :quantity as number of items
-     */
-    public function iShouldSeeAsNumberOfItems(int $quantity): void
-    {
-        Assert::same($this->orderDetails->getAmountOfItems(), $quantity);
-    }
 
-    /**
-     * @Then I should have chosen :paymentMethodName payment method
-     */
-    public function iShouldHaveChosenPaymentMethod(string $paymentMethodName): void
+    private function getLatestPaymentState(): ?string
     {
-        $this->thankYouPage->goToTheChangePaymentMethodPage();
-        Assert::same($this->orderDetails->getChosenPaymentMethod(), $paymentMethodName);
-    }
+        $response = $this->client->show(Resources::ORDERS, $this->sharedStorage->get('cart_token'));
+        Assert::same($this->client->getLastResponse()->getStatusCode(), 200);
 
-    /**
-     * @Then I should be notified to choose a payment method
-     */
-    public function iShouldBeNotifiedToChooseAPaymentMethod(): void
-    {
-        Assert::contains($this->orderDetails->getPaymentValidationMessage(), 'Please select a payment method.');
+        // If the payment is canceled we won't be able to retrieve it because only new one are retrievable
+        if (OrderPaymentStates::STATE_CANCELLED === $this->responseChecker->getValue($response, 'paymentState')) {
+            return PaymentInterface::STATE_CANCELLED;
+        }
+
+        $payments = $this->responseChecker->getValue($response, 'payments');
+        $payment = end($payments);
+
+        $paymentId = $payment['id'];
+        $response = $this->client->show(Resources::PAYMENTS, (string) $paymentId);
+
+        return $this->responseChecker->getValue($response, 'state');
     }
 }
