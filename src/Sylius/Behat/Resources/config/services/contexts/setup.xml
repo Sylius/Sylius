@@ -311,11 +311,5 @@
             <argument type="service" id="sylius.event_bus" />
             <argument type="service" id="sylius.behat.shared_storage" />
         </service>
-
-        <service id="Sylius\Behat\Context\Setup\PriceHistoryContext" public="true">
-            <argument type="service" id="Sylius\Calendar\Tests\Behat\Context\Setup\CalendarContext" />
-            <argument type="service" id="sylius.manager.channel_pricing" />
-            <argument type="service" id="Sylius\Component\Product\Resolver\ProductVariantResolverInterface" />
-        </service>
     </services>
 </container>
