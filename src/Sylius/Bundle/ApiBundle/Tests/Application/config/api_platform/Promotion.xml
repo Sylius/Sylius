@@ -24,7 +24,10 @@
             <collectionOperation name="admin_get">
                 <attribute name="method">GET</attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:promotion:index</attribute>
+                    <attribute name="groups">
+                        <attribute>admin:promotion:index</attribute>
+                        <attribute>sylius:admin:promotion:index</attribute>
+                    </attribute>
                 </attribute>
             </collectionOperation>
         </collectionOperations>
@@ -33,7 +36,10 @@
             <itemOperation name="admin_get">
                 <attribute name="method">GET</attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:promotion:show</attribute>
+                    <attribute name="groups">
+                        <attribute>admin:promotion:show</attribute>
+                        <attribute>sylius:admin:promotion:show</attribute>
+                    </attribute>
                 </attribute>
             </itemOperation>
             <itemOperation name="admin_delete">

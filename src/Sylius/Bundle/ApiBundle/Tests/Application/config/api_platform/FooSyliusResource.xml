@@ -16,14 +16,20 @@
             <collectionOperation name="get">
                 <attribute name="method">GET</attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">foo-sylius-resource:read</attribute>
+                    <attribute name="groups">
+                        <attribute>foo-sylius-resource:read</attribute>
+                        <attribute>sylius:foo-sylius-resource:read</attribute>
+                    </attribute>
                 </attribute>
             </collectionOperation>
 
             <collectionOperation name="post">
                 <attribute name="method">POST</attribute>
                 <attribute name="denormalization_context">
-                    <attribute name="groups">foo-sylius-resource:create</attribute>
+                    <attribute name="groups">
+                        <attribute>foo-sylius-resource:create</attribute>
+                        <attribute>sylius:foo-sylius-resource:create</attribute>
+                    </attribute>
                 </attribute>
             </collectionOperation>
         </collectionOperations>
@@ -32,7 +38,10 @@
             <itemOperation name="get">
                 <attribute name="method">GET</attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">foo-sylius-resource:read</attribute>
+                    <attribute name="groups">
+                        <attribute>foo-sylius-resource:read</attribute>
+                        <attribute>sylius:foo-sylius-resource:read</attribute>
+                    </attribute>
                 </attribute>
             </itemOperation>
         </itemOperations>
