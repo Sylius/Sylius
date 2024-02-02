@@ -39,7 +39,19 @@ final class SyliusGetHttpRequestAction implements ActionInterface
         $paymentRequest = $this->payumApiContext->getPaymentRequest();
         Assert::notNull($paymentRequest);
 
-        /** @var array $payload */
+        /** @var array{
+         *     'http_request'?: array{
+         *         'query'?: array<string, string>,
+         *         'request'?: array<string, string>,
+         *         'method'?: string,
+         *         'uri'?: string,
+         *         'client_ip'?: string,
+         *         'user_agent'?: string,
+         *         'content'?: string,
+         *         'headers'?: array<string, string>,
+         *     },
+         * } $payload
+         */
         $payload = $paymentRequest->getRequestPayload();
         $httpRequest = $payload['http_request'] ?? [];
 
@@ -52,6 +64,7 @@ final class SyliusGetHttpRequestAction implements ActionInterface
         $request->content = $httpRequest['content'] ?? '';
 
         // Not existing property but used by the Symfony bridge
+        /** @phpstan-ignore-next-line */
         $request->headers = $httpRequest['headers'] ?? [];
     }
 

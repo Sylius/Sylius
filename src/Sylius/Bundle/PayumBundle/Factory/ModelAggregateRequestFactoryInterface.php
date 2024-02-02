@@ -17,5 +17,5 @@ use Payum\Core\Model\ModelAggregateInterface;
 
 interface ModelAggregateRequestFactoryInterface
 {
-    public function createNewWithModel($model): ModelAggregateInterface;
+    public function createNewWithModel(mixed $model): ModelAggregateInterface;
 }

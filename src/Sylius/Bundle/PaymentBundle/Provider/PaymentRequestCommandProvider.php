@@ -51,7 +51,6 @@ final class PaymentRequestCommandProvider implements PaymentRequestCommandProvid
 
         $gatewayConfig = $paymentMethod->getGatewayConfig();
         Assert::notNull($gatewayConfig);
-        /** @var PaymentRequestCommandProviderInterface $service */
         $factoryName = $gatewayConfig->getConfig()['factory'] ?? $gatewayConfig->getFactoryName();
 
         /** @var PaymentRequestCommandProviderInterface $provider */
