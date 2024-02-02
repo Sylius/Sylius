@@ -13,7 +13,7 @@ Feature: Preventing to pay for the cancelled order
         And the store allows paying Offline
         And there is a customer "sylius@example.com" that placed an order "#00000022"
 
-    @ui @no-api
+    @ui @api
     Scenario: Not being able to pay for cancelled order
         Given the customer bought 3 "Iron Maiden T-Shirt" products
         And the customer chose "Free" shipping method to "United States" with "Offline" payment
