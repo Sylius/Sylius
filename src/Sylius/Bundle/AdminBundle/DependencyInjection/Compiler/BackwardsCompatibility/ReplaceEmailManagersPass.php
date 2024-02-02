@@ -20,7 +20,6 @@ use Sylius\Bundle\AdminBundle\EmailManager\ShipmentEmailManagerInterface;
 use Sylius\Bundle\AdminBundle\EventListener\ShipmentShipListener;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException;
 use Symfony\Component\DependencyInjection\Reference;
 
 /** @internal */
@@ -33,9 +32,9 @@ final class ReplaceEmailManagersPass implements CompilerPassInterface
                 continue;
             }
 
-            $decoratedServiceClass = $definition->getDecoratedService()[0];
+            $decoratedServiceId = $definition->getDecoratedService()[0];
 
-            if ($decoratedServiceClass === OrderEmailManagerInterface::class) {
+            if ($decoratedServiceId === OrderEmailManagerInterface::class) {
                 $this->replaceArgument(
                     $container,
                     ResendOrderConfirmationEmailAction::class,
@@ -47,7 +46,7 @@ final class ReplaceEmailManagersPass implements CompilerPassInterface
                 continue;
             }
 
-            if ($decoratedServiceClass === 'sylius.email_manager.shipment') {
+            if ($decoratedServiceId === 'sylius.email_manager.shipment') {
                 $this->replaceArgument(
                     $container,
                     'sylius.listener.shipment_ship',
@@ -59,7 +58,7 @@ final class ReplaceEmailManagersPass implements CompilerPassInterface
                 continue;
             }
 
-            if ($decoratedServiceClass === ShipmentEmailManagerInterface::class) {
+            if ($decoratedServiceId === ShipmentEmailManagerInterface::class) {
                 $this->replaceArgument(
                     $container,
                     ResendShipmentConfirmationEmailAction::class,
@@ -78,13 +77,13 @@ final class ReplaceEmailManagersPass implements CompilerPassInterface
         int $argumentIndex,
         string $argumentId,
     ): void {
-        try {
-            $listenerDefinition = $container->findDefinition($serviceId);
-            if ($listenerDefinition->getClass() === $serviceClass) {
-                $listenerDefinition->setArgument($argumentIndex, new Reference($argumentId));
-            }
-        } catch (ServiceNotFoundException) {
+        if (!$container->hasDefinition($serviceId)) {
             return;
+        }
+
+        $definition = $container->findDefinition($serviceId);
+        if ($definition->getClass() === $serviceClass) {
+            $definition->setArgument($argumentIndex, new Reference($argumentId));
         }
     }
 }

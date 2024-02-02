@@ -17,7 +17,6 @@ use Sylius\Bundle\ShopBundle\Controller\ContactController;
 use Sylius\Bundle\ShopBundle\EventListener\OrderCompleteListener;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException;
 use Symfony\Component\DependencyInjection\Reference;
 
 /** @internal */
@@ -30,9 +29,9 @@ final class ReplaceEmailManagersPass implements CompilerPassInterface
                 continue;
             }
 
-            $decoratedServiceClass = $definition->getDecoratedService()[0];
+            $decoratedServiceId = $definition->getDecoratedService()[0];
 
-            if ($decoratedServiceClass === 'sylius.email_manager.contact') {
+            if ($decoratedServiceId === 'sylius.email_manager.contact') {
                 $this->replaceArgument(
                     $container,
                     'sylius.controller.shop.contact',
@@ -44,7 +43,7 @@ final class ReplaceEmailManagersPass implements CompilerPassInterface
                 continue;
             }
 
-            if ($decoratedServiceClass === 'sylius.email_manager.order') {
+            if ($decoratedServiceId === 'sylius.email_manager.order') {
                 $this->replaceArgument(
                     $container,
                     'sylius.listener.order_complete',
@@ -63,13 +62,13 @@ final class ReplaceEmailManagersPass implements CompilerPassInterface
         int $argumentIndex,
         string $argumentId,
     ): void {
-        try {
-            $listenerDefinition = $container->findDefinition($serviceId);
-            if ($listenerDefinition->getClass() === $serviceClass) {
-                $listenerDefinition->setArgument($argumentIndex, new Reference($argumentId));
-            }
-        } catch (ServiceNotFoundException) {
+        if (!$container->hasDefinition($serviceId)) {
             return;
+        }
+
+        $definition = $container->findDefinition($serviceId);
+        if ($definition->getClass() === $serviceClass) {
+            $definition->setArgument($argumentIndex, new Reference($argumentId));
         }
     }
 }
