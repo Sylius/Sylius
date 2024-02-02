@@ -44,7 +44,7 @@
         </service>
 
         <service id="Sylius\Bundle\CoreBundle\EventListener\Workflow\Order\HoldInventoryListener">
-            <argument type="service" id="sylius.custom_inventory.order_inventory_operator"/>
+            <argument type="service" id="sylius.inventory.order_inventory_operator"/>
             <tag name="kernel.event_listener" event="workflow.sylius_order.completed.create" priority="400"/>
         </service>
 
