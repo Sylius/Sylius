@@ -455,3 +455,5 @@ List of affected classes:
    Use `Sylius\Component\Core\Promotion\Checker\Rule\ItemTotalRuleChecker` instead.
 
 1. The first parameter of the constructor in the `\Sylius\Component\Core\Promotion\Checker\Rule\ItemTotalRuleChecker` class has been deprecated and will be removed in version 2.0.
+
+1. The service definition for `sylius.promotion_rule_checker.item_total` has been updated. The class has been changed from `Sylius\Component\Promotion\Checker\Rule\ItemTotalRuleChecker` to `Sylius\Component\Core\Promotion\Checker\Rule\ItemTotalRuleChecker`.
