@@ -35,6 +35,7 @@ final class CountryType
     #[LiveProp]
     public bool $isUpdate = false;
 
+    /** @param class-string $formClass */
     public function __construct(
         private readonly FormFactoryInterface $formFactory,
         private readonly string $formClass,
