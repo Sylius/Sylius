@@ -1166,7 +1166,7 @@ final class ManagingOrdersContext implements Context
 
         Assert::same(
             $this->responseChecker->getError($this->client->getLastResponse()),
-            'Order confirmation email cannot be resent for orders with state cancelled.',
+            'Cannot resend order confirmation email for order with state cancelled.',
         );
     }
 

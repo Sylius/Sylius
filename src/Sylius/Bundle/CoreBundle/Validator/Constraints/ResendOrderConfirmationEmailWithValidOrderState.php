@@ -17,7 +17,7 @@ use Symfony\Component\Validator\Constraint;
 
 final class ResendOrderConfirmationEmailWithValidOrderState extends Constraint
 {
-    public string $message = 'sylius.admin.resend_order_confirmation_email.invalid_order_state';
+    public string $message = 'sylius.resend_order_confirmation_email.invalid_order_state';
 
     public function validatedBy(): string
     {

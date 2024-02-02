@@ -16,7 +16,6 @@ namespace Sylius\Bundle\CoreBundle\Validator\Constraints;
 use Sylius\Bundle\CoreBundle\Message\ResendOrderConfirmationEmail;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 use Symfony\Component\Validator\Exception\UnexpectedTypeException;
@@ -45,9 +44,8 @@ final class ResendOrderConfirmationEmailWithValidOrderStateValidator extends Con
 
         /** @var OrderInterface|null $order */
         $order = $this->orderRepository->findOneBy(['tokenValue' => $value->getOrderTokenValue()]);
-
         if (null === $order) {
-            throw new NotFoundHttpException(sprintf('Order with %s token has not been found.', $value->getOrderTokenValue()));
+            return;
         }
 
         if (!in_array($order->getState(), $this->orderStatesToAllowResendingConfirmationEmail, true)) {
