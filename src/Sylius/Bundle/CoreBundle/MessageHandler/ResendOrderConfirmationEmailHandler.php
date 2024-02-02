@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\MessageHandler;
 
-use Sylius\Bundle\CoreBundle\EmailManager\OrderEmailManagerInterface;
+use Sylius\Bundle\CoreBundle\Mailer\OrderEmailManagerInterface;
 use Sylius\Bundle\CoreBundle\Message\ResendOrderConfirmationEmail;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;

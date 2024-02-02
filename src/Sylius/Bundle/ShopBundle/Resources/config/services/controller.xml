@@ -22,7 +22,7 @@
             <argument type="service" id="sylius.context.channel" />
             <argument type="service" id="sylius.context.customer" />
             <argument type="service" id="sylius.context.locale" />
-            <argument type="service" id="sylius.email_manager.contact" />
+            <argument type="service" id="sylius.mailer.contact_email_manager.shop" />
         </service>
 
         <service id="sylius.controller.shop.homepage" class="Sylius\Bundle\ShopBundle\Controller\HomepageController">

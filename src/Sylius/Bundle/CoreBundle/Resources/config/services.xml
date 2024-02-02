@@ -253,10 +253,6 @@
             <tag name="sylius.grid_filter" type="resource_autocomplete" form-type="Sylius\Bundle\CoreBundle\Form\Type\Grid\Filter\ResourceAutocompleteFilterType" />
         </service>
 
-        <service class="Sylius\Bundle\CoreBundle\Mailer\OrderEmailManager" id="sylius.mailer.order_email_manager">
-            <argument type="service" id="sylius.email_sender" />
-        </service>
-
         <service id="Sylius\Component\Core\Cart\Resolver\CreatedByGuestFlagResolverInterface" class="Sylius\Component\Core\Cart\Resolver\CreatedByGuestFlagResolver">
             <argument type="service" id="security.token_storage" />
         </service>

@@ -75,7 +75,17 @@
 
 1. Class `Sylius\Component\Core\Promotion\Updater\Rule\ContainsProductRuleUpdater` has been deprecated, as it is no more used.
 
-1. Class `Sylius\Bundle\AdminBundle\EmailManager\OrderEmailManager` has been deprecated, use `Sylius\Bundle\CoreBundle\EmailManager\OrderEmailManager` instead.
+1. Class `Sylius\Bundle\AdminBundle\EmailManager\OrderEmailManager` and its interface `Sylius\Bundle\AdminBundle\EmailManager\OrderEmailManagerInterface` 
+   have been deprecated, use `Sylius\Bundle\CoreBundle\Mailer\OrderEmailManager` and `Sylius\Bundle\CoreBundle\Mailer\OrderEmailManagerInterface` instead.
+
+1. Class `Sylius\Bundle\AdminBundle\EmailManager\ShipmentEmailManager` and its interface `Sylius\Bundle\AdminBundle\EmailManager\ShipmentEmailManagerInterface`
+   have been deprecated, use `Sylius\Bundle\CoreBundle\Mailer\ShipmentEmailManager` and `Sylius\Bundle\CoreBundle\Mailer\ShipmentEmailManagerInterface` instead.
+
+1. Class `Sylius\Bundle\ShopBundle\EmailManager\ContactEmailManager` and its interface `Sylius\Bundle\ShopBundle\EmailManager\ContactEmailManagerInterface`
+   have been deprecated, use `Sylius\Bundle\CoreBundle\Mailer\ContactEmailManager` and `Sylius\Bundle\CoreBundle\Mailer\ContactEmailManagerInterface` instead.
+
+1. Class `Sylius\Bundle\ShopBundle\EmailManager\OrderEmailManager` and its interface `Sylius\Bundle\ShopBundle\EmailManager\OrderEmailManagerInterface`
+   have been deprecated, use `Sylius\Bundle\CoreBundle\Mailer\OrderEmailManager` and `Sylius\Bundle\CoreBundle\Mailer\OrderEmailManagerInterface` instead.
 
 1. Class `Sylius\Bundle\ProductBundle\Form\Type\ProductOptionChoiceType` has been deprecated.
    Use `Sylius\Bundle\ProductBundle\Form\Type\ProductOptionAutocompleteType` instead.
@@ -96,6 +106,16 @@
 1. Passing `Sylius\Bundle\AdminBundle\EmailManager\OrderEmailManagerInterface` to `Sylius\Bundle\AdminBundle\Action\ResendOrderConfirmationEmailAction` as a second argument is deprecated, use `Sylius\Bundle\CoreBundle\MessageDispatcher\ResendOrderConfirmationEmailDispatcherInterface` instead.
 
 1. The name of the second argument of `Sylius\Bundle\AdminBundle\Action\ResendOrderConfirmationEmailAction` is deprecated and will be renamed to `$resendOrderConfirmationEmailDispatcher`.
+
+1. Passing `Sylius\Bundle\AdminBundle\EmailManager\ShipmentEmailManagerInterface` to `Sylius\Bundle\AdminBundle\Action\ResendShipmentConfirmationEmailAction` as a second argument is deprecated, use `Sylius\Bundle\CoreBundle\MessageDispatcher\ResendShipmentConfirmationEmailDispatcherInterface` instead.
+
+1. The name of the second argument of `Sylius\Bundle\AdminBundle\Action\ResendShipmentConfirmationEmailAction` is deprecated and will be renamed to `$resendShipmentConfirmationEmailDispatcher`.
+
+1. Passing `Sylius\Bundle\AdminBundle\EmailManager\ShipmentEmailManagerInterface` to `Sylius\Bundle\AdminBundle\EventListener\ShipmentShipListener` as a first argument is deprecated, use `Sylius\Bundle\CoreBundle\Mailer\ShipmentEmailManagerInterface` instead.
+
+1. Passing `Sylius\Bundle\ShopBundle\EmailManager\OrderEmailManagerInterface` to `Sylius\Bundle\ShopBundle\EventListener\OrderCompleteListener` as a first argument is deprecated, use `Sylius\Bundle\CoreBundle\Mailer\OrderEmailManagerInterface` instead.
+
+1. Passing `Sylius\Bundle\ShopBundle\EmailManager\ContactEmailManagerInterface` to `Sylius\Bundle\ShopBundle\Controller\ContactController` as last argument is deprecated, use `Sylius\Bundle\CoreBundle\Mailer\ContactEmailManagerInterface` instead.
 
 1. Not passing `Sylius\Bundle\CoreBundle\CatalogPromotion\Announcer\CatalogPromotionRemovalAnnouncerInterface` to `Sylius\Bundle\CoreBundle\CatalogPromotion\Processor\CatalogPromotionRemovalProcessor`
    as a second argument is deprecated.
