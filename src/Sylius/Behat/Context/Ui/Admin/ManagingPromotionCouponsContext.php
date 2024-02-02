@@ -98,7 +98,7 @@ final class ManagingPromotionCouponsContext implements Context
     }
 
     /**
-     * @When /^I limit generated coupons usage to (\d+) times$/
+     * @When /^I limit generated coupons usage to (\d+) times?$/
      */
     public function iSetGeneratedCouponsUsageLimitTo(int $limit)
     {
@@ -123,7 +123,7 @@ final class ManagingPromotionCouponsContext implements Context
     }
 
     /**
-     * @When I limit its usage to :limit times
+     * @When I limit its usage to :limit time(s)
      */
     public function iLimitItsUsageLimitTo(int $limit)
     {
@@ -149,7 +149,7 @@ final class ManagingPromotionCouponsContext implements Context
     }
 
     /**
-     * @When /^I limit its per customer usage to ([^"]+) times$/
+     * @When /^I limit its per customer usage to ([^"]+) times?$/
      */
     public function iLimitItsPerCustomerUsageLimitTo(int $limit)
     {
@@ -165,6 +165,14 @@ final class ManagingPromotionCouponsContext implements Context
     }
 
     /**
+     * @When I make it not reusable from cancelled orders
+     */
+    public function iMakeItReusableFromCancelledOrders(): void
+    {
+        $this->updatePage->toggleReusableFromCancelledOrders(false);
+    }
+
+    /**
      * @When I make it valid until :date
      */
     public function iMakeItValidUntil(\DateTimeInterface $date)
@@ -173,9 +181,9 @@ final class ManagingPromotionCouponsContext implements Context
     }
 
     /**
-     * @When I change expires date to :date
+     * @When I change its expiration date to :date
      */
-    public function iChangeExpiresDateTo(\DateTimeInterface $date)
+    public function iChangeItsExpirationDateTo(\DateTimeInterface $date)
     {
         $this->updatePage->setExpiresAt($date);
     }
@@ -275,9 +283,7 @@ final class ManagingPromotionCouponsContext implements Context
     }
 
     /**
-     * @Then /^there should be (0|1) coupon related to (this promotion)$/
-     * @Then /^there should be (\b(?![01]\b)\d{1,9}\b) coupons related to (this promotion)$/
-     * @Then /^there should still be (\d+) coupons related to (this promotion)$/
+     * @Then /^there should(?:| still) be (\d+) coupons? related to (this promotion)$/
      */
     public function thereShouldBeCouponRelatedTo(int $number, PromotionInterface $promotion): void
     {
@@ -315,9 +321,10 @@ final class ManagingPromotionCouponsContext implements Context
     }
 
     /**
-     * @Then /^there should be coupon with code "([^"]+)"$/
+     * @Then there should be a coupon with code :code
+     * @Then there should be a :promotion promotion with a coupon code :code
      */
-    public function thereShouldBeCouponWithCode($code)
+    public function thereShouldBeCouponWithCode(string $code): void
     {
         Assert::true($this->indexPage->isSingleResourceOnPage(['code' => $code]));
     }
@@ -325,9 +332,9 @@ final class ManagingPromotionCouponsContext implements Context
     /**
      * @Then this coupon should be valid until :date
      */
-    public function thisCouponShouldBeValidUntil(\DateTimeInterface $date)
+    public function thisCouponShouldBeValidUntil(\DateTime $date)
     {
-        Assert::true($this->indexPage->isSingleResourceOnPage(['expiresAt' => date('d-m-Y', $date->getTimestamp())]));
+        Assert::true($this->indexPage->isSingleResourceOnPage(['expiresAt' => $date->format('d-m-Y')]));
     }
 
     /**
@@ -355,9 +362,20 @@ final class ManagingPromotionCouponsContext implements Context
     }
 
     /**
+     * @Then /^(this coupon) should not be reusable from cancelled orders$/
+     */
+    public function thisCouponShouldBeReusableFromCancelledOrders(PromotionCouponInterface $coupon): void
+    {
+        $this->updatePage->open(['id' => $coupon->getId(), 'promotionId' => $coupon->getPromotion()->getId()]);
+
+        Assert::false($this->updatePage->isReusableFromCancelledOrders());
+    }
+
+    /**
+     * @Then I should not be able to edit its code
      * @Then the code field should be disabled
      */
-    public function theCodeFieldShouldBeDisabled()
+    public function iShouldNotBeAbleToEditItsCode(): void
     {
         Assert::true($this->updatePage->isCodeDisabled());
     }

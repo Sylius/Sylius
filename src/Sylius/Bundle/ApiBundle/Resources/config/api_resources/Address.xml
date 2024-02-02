@@ -19,15 +19,18 @@
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/shop/addresses</attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">shop:address:read</attribute>
+                    <attribute name="groups">shop:address:index</attribute>
                 </attribute>
             </collectionOperation>
 
             <collectionOperation name="shop_post">
                 <attribute name="method">POST</attribute>
                 <attribute name="path">/shop/addresses</attribute>
-                <attribute name="normalization_context">
+                <attribute name="denormalization_context">
                     <attribute name="groups">shop:address:create</attribute>
+                </attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">shop:address:show</attribute>
                 </attribute>
             </collectionOperation>
         </collectionOperations>
@@ -38,8 +41,36 @@
                 <attribute name="path">/admin/addresses/{id}</attribute>
                 <attribute name="normalization_context">
                     <attribute name="groups">
-                        <attribute>admin:address:read</attribute>
+                        <attribute>admin:address:show</attribute>
                     </attribute>
+                </attribute>
+            </itemOperation>
+
+            <itemOperation name="admin_put">
+                <attribute name="method">PUT</attribute>
+                <attribute name="path">/admin/addresses/{id}</attribute>
+                <attribute name="denormalization_context">
+                    <attribute name="groups">
+                        <attribute>admin:address:update</attribute>
+                    </attribute>
+                </attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">
+                        <attribute>admin:address:show</attribute>
+                    </attribute>
+                </attribute>
+            </itemOperation>
+
+            <itemOperation name="admin_get_log_entries">
+                <attribute name="method">GET</attribute>
+                <attribute name="path">/admin/addresses/{id}/log-entries</attribute>
+                <attribute name="controller">Sylius\Bundle\ApiBundle\Controller\GetAddressLogEntryCollectionAction</attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">admin:address:log_entry:show</attribute>
+                </attribute>
+                <attribute name="openapi_context">
+                    <attribute name="summary">Retrieves the collection of AddressLogEntry resources.</attribute>
+                    <attribute name="description">Retrieves the collection of AddressLogEntry resources.</attribute>
                 </attribute>
             </itemOperation>
 
@@ -47,7 +78,7 @@
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/shop/addresses/{id}</attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">shop:address:read</attribute>
+                    <attribute name="groups">shop:address:show</attribute>
                 </attribute>
             </itemOperation>
 
@@ -62,6 +93,9 @@
                 <attribute name="denormalization_context">
                     <attribute name="groups">shop:address:update</attribute>
                 </attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">shop:address:show</attribute>
+                </attribute>
             </itemOperation>
         </itemOperations>
 
@@ -72,6 +106,7 @@
         <property name="street" writable="true" />
         <property name="postcode" writable="true" />
         <property name="countryCode" writable="true" />
+        <property name="provinceCode" writable="true" />
         <property name="provinceName" writable="true" />
     </resource>
 </resources>

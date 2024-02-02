@@ -16,12 +16,6 @@
            xsi:schemaLocation="https://api-platform.com/schema/metadata https://api-platform.com/schema/metadata/metadata-2.0.xsd"
 >
     <resource class="%sylius.model.product_attribute_value.class%" shortName="ProductAttributeValue">
-        <attribute name="normalization_context">
-            <attribute name="groups">
-                <attribute>shop:product_attribute_value:read</attribute>
-            </attribute>
-        </attribute>
-
         <attribute name="validation_groups">sylius</attribute>
 
         <attribute name="order">
@@ -31,11 +25,30 @@
         <collectionOperations />
 
         <itemOperations>
+            <itemOperation name="admin_get">
+                <attribute name="method">GET</attribute>
+                <attribute name="path">/admin/product-attribute-values/{id}</attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">admin:product_attribute_value:show</attribute>
+                </attribute>
+            </itemOperation>
+
             <itemOperation name="shop_get">
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/shop/product-attribute-values/{id}</attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">shop:product_attribute_value:show</attribute>
+                </attribute>
             </itemOperation>
         </itemOperations>
+
+        <subresourceOperations>
+            <subresourceOperation name="api_products_attributes_get_subresource">
+                <attribute name="normalization_context">
+                    <attribute name="groups">shop:product_attribute_value:show</attribute>
+                </attribute>
+            </subresourceOperation>
+        </subresourceOperations>
 
         <property name="id" identifier="true" writable="false" />
         <property name="attribute" />

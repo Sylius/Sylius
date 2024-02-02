@@ -19,6 +19,8 @@ final class InStock extends Constraint
 {
     public string $message = 'sylius.cart_item.not_available';
 
+    public string $shortMessage = 'sylius.cart_item.insufficient_stock';
+
     public string $stockablePath = 'stockable';
 
     public string $quantityPath = 'quantity';
@@ -28,8 +30,8 @@ final class InStock extends Constraint
         return 'sylius_in_stock';
     }
 
-    public function getTargets(): string
+    public function getTargets(): array
     {
-        return self::CLASS_CONSTRAINT;
+        return [self::PROPERTY_CONSTRAINT, self::CLASS_CONSTRAINT];
     }
 }

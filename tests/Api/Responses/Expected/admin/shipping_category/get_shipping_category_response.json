@@ -1,0 +1,11 @@
+{
+    "@context": "\/api\/v2\/contexts\/ShippingCategory",
+    "@id": "\/api\/v2\/admin\/shipping-categories\/special",
+    "@type": "ShippingCategory",
+    "id": "@integer@",
+    "code": "special",
+    "name": "Special",
+    "description": "For special care",
+    "createdAt": @date@,
+    "updatedAt": @date@
+}

@@ -20,13 +20,6 @@ use Sylius\Bundle\ApiBundle\Command\LocaleCodeAwareInterface;
 /** @experimental */
 class PickupCart implements ChannelCodeAwareInterface, CustomerEmailAwareInterface, LocaleCodeAwareInterface
 {
-    /**
-     * @immutable
-     *
-     * @var string|null
-     */
-    public $tokenValue;
-
     /** @var string|null */
     public $localeCode;
 
@@ -36,9 +29,8 @@ class PickupCart implements ChannelCodeAwareInterface, CustomerEmailAwareInterfa
     /** @var string|null */
     public $email;
 
-    public function __construct(?string $tokenValue = null)
+    public function __construct(public ?string $tokenValue = null)
     {
-        $this->tokenValue = $tokenValue;
     }
 
     public function getChannelCode(): ?string

@@ -72,6 +72,91 @@ final class ConfigurationTest extends TestCase
         );
     }
 
+    public function it_allows_to_configure_orders_statistics_intervals_map(): void
+    {
+        $this->assertProcessedConfigurationEquals(
+            [
+                [
+                    'orders_statistics' => [
+                        'intervals_map' => [
+                            'day' => [
+                                'interval' => 'P1D',
+                                'period_format' => 'Y-m-d',
+                            ],
+                            'month' => [
+                                'interval' => 'P1M',
+                                'period_format' => 'Y-m',
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+            [
+                'orders_statistics' => [
+                    'intervals_map' => [
+                        'day' => [
+                            'interval' => 'P1D',
+                            'period_format' => 'Y-m-d',
+                        ],
+                        'month' => [
+                            'interval' => 'P1M',
+                            'period_format' => 'Y-m',
+                        ],
+                    ],
+                ],
+            ],
+            'orders_statistics',
+        );
+    }
+
+    /** @test */
+    public function it_allows_to_configure_a_default_state_machine_adapter(): void
+    {
+        $this->assertProcessedConfigurationEquals(
+            [
+                [
+                    'state_machine' => [
+                        'default_adapter' => 'symfony_workflow',
+                    ],
+                ],
+            ],
+            [
+                'state_machine' => [
+                    'default_adapter' => 'symfony_workflow',
+                    'graphs_to_adapters_mapping' => [],
+                ],
+            ],
+            'state_machine',
+        );
+    }
+
+    /** @test */
+    public function it_allows_to_configure_the_state_machines_adapters_mapping(): void
+    {
+        $this->assertProcessedConfigurationEquals(
+            [
+                [
+                    'state_machine' => [
+                        'graphs_to_adapters_mapping' => [
+                            'order' => 'symfony_workflow',
+                            'payment' => 'winzou_state_machine',
+                        ],
+                    ],
+                ],
+            ],
+            [
+                'state_machine' => [
+                    'default_adapter' => 'winzou_state_machine',
+                    'graphs_to_adapters_mapping' => [
+                        'order' => 'symfony_workflow',
+                        'payment' => 'winzou_state_machine',
+                    ],
+                ],
+            ],
+            'state_machine',
+        );
+    }
+
     /** @test */
     public function it_throws_an_exception_if_value_other_then_integer_is_declared_as_batch_size(): void
     {
@@ -91,6 +176,26 @@ final class ConfigurationTest extends TestCase
         $this->assertConfigurationIsInvalid(
             [['catalog_promotions' => ['batch_size' => 0]]],
             ' Expected value bigger than 0, but got 0.',
+        );
+    }
+
+    /** @test */
+    public function it_does_not_autoconfigure_with_attributes_by_default(): void
+    {
+        $this->assertProcessedConfigurationEquals(
+            [[]],
+            ['autoconfigure_with_attributes' => false],
+            'autoconfigure_with_attributes',
+        );
+    }
+
+    /** @test */
+    public function it_allows_to_enable_autoconfiguring_with_attributes(): void
+    {
+        $this->assertProcessedConfigurationEquals(
+            [['autoconfigure_with_attributes' => true]],
+            ['autoconfigure_with_attributes' => true],
+            'autoconfigure_with_attributes',
         );
     }
 

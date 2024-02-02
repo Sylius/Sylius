@@ -72,4 +72,4 @@ Feature: Product review validation
         And I leave a comment "This book made me sad, but plot was fine.", titled "Not good, not bad" as "example@example.com"
         And I rate it with 6 points
         And I try to add it
-        Then I should be notified that rate must be an integer in the range 1-5
+        Then I should be notified that rating must be between 1 and 5

@@ -24,4 +24,8 @@ interface UpdatePageInterface extends BaseUpdatePageInterface
     public function setExpiresAt(\DateTimeInterface $date): void;
 
     public function setUsageLimit(string $limit): void;
+
+    public function isReusableFromCancelledOrders(): bool;
+
+    public function toggleReusableFromCancelledOrders(bool $reusable): void;
 }

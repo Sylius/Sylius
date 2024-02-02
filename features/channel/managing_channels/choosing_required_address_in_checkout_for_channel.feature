@@ -14,6 +14,7 @@ Feature: Choosing a required address in the checkout for a channel
         And I specify its code as "MOBILE"
         And I name it "Mobile Store"
         And I choose "USD" as the base currency
+        And I make it available in "English (United States)"
         And I choose "English (United States)" as a default locale
         And I select the "Order items based" as tax calculation strategy
         And I choose shipping address as a required address in the checkout

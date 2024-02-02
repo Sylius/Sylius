@@ -18,6 +18,9 @@ use Sylius\Component\Review\Model\ReviewableInterface;
 use Sylius\Component\Review\Model\ReviewerInterface;
 use Sylius\Component\Review\Model\ReviewInterface;
 
+/**
+ * @implements ReviewFactoryInterface<ReviewInterface>
+ */
 final class ReviewFactory implements ReviewFactoryInterface
 {
     public function __construct(private FactoryInterface $factory)

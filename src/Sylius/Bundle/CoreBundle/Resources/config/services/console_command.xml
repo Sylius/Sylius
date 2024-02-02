@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Sylius Sp. z o.o.
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <defaults public="true" />
+
+        <service id="Sylius\Bundle\CoreBundle\Console\Command\CancelUnpaidOrdersCommand">
+            <tag name="console.command" />
+        </service>
+
+        <service id="Sylius\Bundle\CoreBundle\Command\CancelUnpaidOrdersCommand" alias="Sylius\Bundle\CoreBundle\Console\Command\CancelUnpaidOrdersCommand" />
+
+        <service id="Sylius\Bundle\CoreBundle\Console\Command\CheckRequirementsCommand">
+            <tag name="console.command" />
+        </service>
+
+        <service id="Sylius\Bundle\CoreBundle\Command\CheckRequirementsCommand" alias="Sylius\Bundle\CoreBundle\Console\Command\CheckRequirementsCommand" />
+
+        <service id="Sylius\Bundle\CoreBundle\PriceHistory\Console\Command\ClearPriceHistoryCommand">
+            <argument type="service" id="Sylius\Bundle\CoreBundle\PriceHistory\Remover\ChannelPricingLogEntriesRemoverInterface" />
+            <tag name="console.command"/>
+        </service>
+
+        <service id="Sylius\Bundle\CoreBundle\Console\Command\InstallAssetsCommand">
+            <tag name="console.command" />
+        </service>
+
+        <service id="Sylius\Bundle\CoreBundle\Command\InstallAssetsCommand" alias="Sylius\Bundle\CoreBundle\Console\Command\InstallAssetsCommand" />
+
+        <service id="Sylius\Bundle\CoreBundle\Console\Command\InstallCommand">
+            <tag name="console.command" />
+        </service>
+
+        <service id="Sylius\Bundle\CoreBundle\Command\InstallCommand" alias="Sylius\Bundle\CoreBundle\Console\Command\InstallCommand" />
+
+        <service id="Sylius\Bundle\CoreBundle\Console\Command\InstallDatabaseCommand">
+            <tag name="console.command" />
+        </service>
+
+        <service id="Sylius\Bundle\CoreBundle\Command\InstallDatabaseCommand" alias="Sylius\Bundle\CoreBundle\Console\Command\InstallDatabaseCommand" />
+
+        <service id="Sylius\Bundle\CoreBundle\Console\Command\InstallSampleDataCommand">
+            <tag name="console.command" />
+        </service>
+
+        <service id="Sylius\Bundle\CoreBundle\Command\InstallSampleDataCommand" alias="Sylius\Bundle\CoreBundle\Console\Command\InstallSampleDataCommand" />
+
+        <service id="Sylius\Bundle\CoreBundle\Console\Command\SetupCommand">
+            <tag name="console.command" />
+        </service>
+
+        <service id="Sylius\Bundle\CoreBundle\Command\SetupCommand" alias="Sylius\Bundle\CoreBundle\Console\Command\SetupCommand" />
+
+        <service id="Sylius\Bundle\CoreBundle\Console\Command\ShowAvailablePluginsCommand">
+            <tag name="console.command" />
+        </service>
+
+        <service id="Sylius\Bundle\CoreBundle\Command\ShowAvailablePluginsCommand" alias="Sylius\Bundle\CoreBundle\Console\Command\ShowAvailablePluginsCommand" />
+
+        <service id="Sylius\Bundle\CoreBundle\Console\Command\InformAboutGUSCommand">
+            <tag name="console.command" />
+        </service>
+
+        <service id="Sylius\Bundle\CoreBundle\Command\InformAboutGUSCommand" alias="Sylius\Bundle\CoreBundle\Console\Command\InformAboutGUSCommand" />
+
+        <service id="Sylius\Bundle\CoreBundle\Console\Command\JwtConfigurationCommand">
+            <tag name="console.command" />
+        </service>
+
+        <service id="Sylius\Bundle\CoreBundle\Command\JwtConfigurationCommand" alias="Sylius\Bundle\CoreBundle\Console\Command\JwtConfigurationCommand" />
+    </services>
+</container>

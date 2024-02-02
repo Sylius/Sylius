@@ -16,6 +16,7 @@ namespace Sylius\Bundle\CoreBundle\CatalogPromotion\Applicator;
 use Sylius\Bundle\CoreBundle\CatalogPromotion\Checker\CatalogPromotionEligibilityCheckerInterface;
 use Sylius\Bundle\CoreBundle\CatalogPromotion\Checker\ProductVariantForCatalogPromotionEligibilityInterface;
 use Sylius\Component\Core\Model\CatalogPromotionInterface;
+use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Promotion\Model\CatalogPromotionActionInterface;
 
@@ -50,6 +51,7 @@ final class CatalogPromotionApplicator implements CatalogPromotionApplicatorInte
         CatalogPromotionActionInterface $action,
         ProductVariantInterface $variant,
     ): void {
+        /** @var ChannelInterface $channel */
         foreach ($catalogPromotion->getChannels() as $channel) {
             $channelPricing = $variant->getChannelPricingForChannel($channel);
             if ($channelPricing === null) {

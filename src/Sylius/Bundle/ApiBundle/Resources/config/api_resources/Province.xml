@@ -26,16 +26,18 @@
             <itemOperation name="admin_get">
                 <attribute name="method">GET</attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:province:read</attribute>
-                </attribute>
-
-                <attribute name="denormalization_context">
-                    <attribute name="groups">admin:province:update</attribute>
+                    <attribute name="groups">admin:province:show</attribute>
                 </attribute>
             </itemOperation>
 
             <itemOperation name="admin_put">
                 <attribute name="method">PUT</attribute>
+                <attribute name="denormalization_context">
+                    <attribute name="groups">admin:province:update</attribute>
+                </attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">admin:province:show</attribute>
+                </attribute>
             </itemOperation>
         </itemOperations>
 
@@ -43,7 +45,5 @@
         <property name="code" identifier="true" required="true" />
         <property name="name" required="true" />
         <property name="abbreviation" writable="true" />
-        <property name="createdAt" writable="false" />
-        <property name="updatedAt" writable="false" />
     </resource>
 </resources>

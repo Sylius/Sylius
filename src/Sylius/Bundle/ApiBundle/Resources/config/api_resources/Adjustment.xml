@@ -16,14 +16,25 @@
            xsi:schemaLocation="https://api-platform.com/schema/metadata https://api-platform.com/schema/metadata/metadata-2.0.xsd"
 >
     <resource class="%sylius.model.adjustment.class%" shortName="Adjustment">
-        <collectionOperations />
+        <collectionOperations>
+            <collectionOperation name="admin_get">
+                <attribute name="method">GET</attribute>
+                <attribute name="path">/admin/adjustments</attribute>
+                <attribute name="filters">
+                    <attribute>sylius.api.order_token_filter</attribute>
+                </attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">admin:adjustment:index</attribute>
+                </attribute>
+            </collectionOperation>
+        </collectionOperations>
 
         <itemOperations>
             <itemOperation name="admin_get">
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/admin/adjustments/{id}</attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:adjustment:read</attribute>
+                    <attribute name="groups">admin:adjustment:show</attribute>
                 </attribute>
             </itemOperation>
 
@@ -31,7 +42,7 @@
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/shop/adjustments/{id}</attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">shop:adjustment:read</attribute>
+                    <attribute name="groups">shop:adjustment:show</attribute>
                 </attribute>
             </itemOperation>
         </itemOperations>
@@ -39,12 +50,12 @@
         <subresourceOperations>
             <subresourceOperation name="api_orders_adjustments_get_subresource">
                 <attribute name="normalization_context">
-                    <attribute name="groups">shop:cart:read</attribute>
+                    <attribute name="groups">shop:cart:show</attribute>
                 </attribute>
             </subresourceOperation>
             <subresourceOperation name="api_orders_items_adjustments_get_subresource">
                 <attribute name="normalization_context">
-                    <attribute name="groups">shop:cart:read</attribute>
+                    <attribute name="groups">shop:cart:show</attribute>
                 </attribute>
             </subresourceOperation>
         </subresourceOperations>

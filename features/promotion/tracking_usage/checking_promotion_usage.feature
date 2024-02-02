@@ -16,7 +16,7 @@ Feature: Checking a promotion usage after placing an order
         And there is a promotion "Christmas promotion"
         And I am logged in as an administrator
 
-    @ui
+    @api @ui
     Scenario: Seeing item fixed discount promotion usage unchanged after order placement
         Given the promotion gives "$10.00" off on every product with minimum price at "$50.00"
         And the promotion gives another "$5.00" off on every product classified as "T-Shirts"
@@ -26,7 +26,7 @@ Feature: Checking a promotion usage after placing an order
         When I browse promotions
         Then the promotion "Christmas promotion" should not be used
 
-    @ui
+    @api @ui
     Scenario: Seeing item fixed discount promotion usage increased after order placement
         Given the promotion gives "$10.00" off on every product with minimum price at "$50.00"
         And the promotion gives another "$5.00" off on every product classified as "Mugs"
@@ -36,7 +36,7 @@ Feature: Checking a promotion usage after placing an order
         When I browse promotions
         Then the promotion "Christmas promotion" should be used 1 time
 
-    @ui
+    @api @ui
     Scenario: Seeing shipping percentage discount promotion usage unchanged after order placement
         Given the promotion gives "100%" discount on shipping to every order
         And there is a customer "john.doe@gmail.com" that placed an order "#00000022"

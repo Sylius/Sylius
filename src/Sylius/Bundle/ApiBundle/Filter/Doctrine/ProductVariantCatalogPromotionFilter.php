@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\Filter\Doctrine;
 
-use ApiPlatform\Core\Api\IriConverterInterface;
+use ApiPlatform\Api\IriConverterInterface;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\AbstractContextAwareFilter;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Util\QueryNameGeneratorInterface;
 use Doctrine\ORM\Query\Expr\Join;
@@ -49,7 +49,7 @@ final class ProductVariantCatalogPromotionFilter extends AbstractContextAwareFil
             return;
         }
 
-        $catalogPromotion = $this->iriConverter->getItemFromIri($value);
+        $catalogPromotion = $this->iriConverter->getResourceFromIri($value);
 
         $parameterName = $queryNameGenerator->generateParameterName($property);
         $channelPricingJoinAlias = $queryNameGenerator->generateJoinAlias('channelPricing');

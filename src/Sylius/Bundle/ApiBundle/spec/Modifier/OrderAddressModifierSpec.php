@@ -16,7 +16,8 @@ namespace spec\Sylius\Bundle\ApiBundle\Modifier;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use SM\Factory\FactoryInterface as StateMachineFactoryInterface;
-use SM\StateMachine\StateMachineInterface;
+use SM\StateMachine\StateMachineInterface as WinzouStateMachineInterface;
+use Sylius\Abstraction\StateMachine\StateMachineInterface;
 use Sylius\Bundle\ApiBundle\Mapper\AddressMapperInterface;
 use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
@@ -37,7 +38,7 @@ final class OrderAddressModifierSpec extends ObjectBehavior
         AddressInterface $billingAddress,
         OrderInterface $order,
         ChannelInterface $channel,
-        StateMachineInterface $stateMachine,
+        WinzouStateMachineInterface $stateMachine,
     ): void {
         $order->getTokenValue()->willReturn('ORDERTOKEN');
         $order->getShippingAddress()->willReturn(null);
@@ -61,7 +62,7 @@ final class OrderAddressModifierSpec extends ObjectBehavior
         AddressInterface $shippingAddress,
         OrderInterface $order,
         ChannelInterface $channel,
-        StateMachineInterface $stateMachine,
+        WinzouStateMachineInterface $stateMachine,
     ): void {
         $order->getTokenValue()->willReturn('ORDERTOKEN');
         $order->getShippingAddress()->willReturn(null);
@@ -86,7 +87,7 @@ final class OrderAddressModifierSpec extends ObjectBehavior
         AddressInterface $shippingAddress,
         OrderInterface $order,
         ChannelInterface $channel,
-        StateMachineInterface $stateMachine,
+        WinzouStateMachineInterface $stateMachine,
     ): void {
         $order->getTokenValue()->willReturn('ORDERTOKEN');
         $order->getShippingAddress()->willReturn(null);
@@ -105,6 +106,32 @@ final class OrderAddressModifierSpec extends ObjectBehavior
         $this->modify($order, $billingAddress->getWrappedObject(), $shippingAddress->getWrappedObject(), 'r2d2@droid.com');
     }
 
+    function it_uses_the_new_state_machine_abstraction_if_provided(
+        StateMachineInterface $stateMachine,
+        AddressMapperInterface $addressMapper,
+        AddressInterface $billingAddress,
+        AddressInterface $shippingAddress,
+        OrderInterface $order,
+        ChannelInterface $channel,
+    ): void {
+        $this->beConstructedWith($stateMachine, $addressMapper);
+
+        $order->getTokenValue()->willReturn('ORDERTOKEN');
+        $order->getShippingAddress()->willReturn(null);
+        $order->getBillingAddress()->willReturn(null);
+        $order->getChannel()->willReturn($channel);
+
+        $channel->isShippingAddressInCheckoutRequired()->willReturn(false);
+
+        $order->setBillingAddress($billingAddress)->shouldBeCalled();
+        $order->setShippingAddress($shippingAddress)->shouldBeCalled();
+
+        $stateMachine->can($order, OrderCheckoutTransitions::GRAPH, OrderCheckoutTransitions::TRANSITION_ADDRESS)->willReturn(true);
+        $stateMachine->apply($order, OrderCheckoutTransitions::GRAPH, OrderCheckoutTransitions::TRANSITION_ADDRESS)->shouldBeCalled();
+
+        $this->modify($order, $billingAddress->getWrappedObject(), $shippingAddress->getWrappedObject(), 'r2d2@droid.com');
+    }
+
     function it_updates_order_addresses(
         StateMachineFactoryInterface $stateMachineFactory,
         AddressMapperInterface $addressMapper,
@@ -114,7 +141,7 @@ final class OrderAddressModifierSpec extends ObjectBehavior
         AddressInterface $oldShippingAddress,
         OrderInterface $order,
         ChannelInterface $channel,
-        StateMachineInterface $stateMachine,
+        WinzouStateMachineInterface $stateMachine,
     ): void {
         $order->getTokenValue()->willReturn('ORDERTOKEN');
         $order->getBillingAddress()->willReturn($oldBillingAddress);
@@ -141,7 +168,7 @@ final class OrderAddressModifierSpec extends ObjectBehavior
         AddressInterface $billingAddress,
         AddressInterface $shippingAddress,
         OrderInterface $order,
-        StateMachineInterface $stateMachine,
+        WinzouStateMachineInterface $stateMachine,
     ): void {
         $stateMachineFactory->get($order, OrderCheckoutTransitions::GRAPH)->willReturn($stateMachine);
         $stateMachine->can(OrderCheckoutTransitions::TRANSITION_ADDRESS)->willReturn(false);

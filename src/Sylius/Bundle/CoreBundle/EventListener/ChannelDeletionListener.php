@@ -14,13 +14,13 @@ declare(strict_types=1);
 namespace Sylius\Bundle\CoreBundle\EventListener;
 
 use Sylius\Bundle\ResourceBundle\Event\ResourceControllerEvent;
+use Sylius\Component\Channel\Checker\ChannelDeletionCheckerInterface;
 use Sylius\Component\Channel\Model\ChannelInterface;
-use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 
 final class ChannelDeletionListener
 {
-    public function __construct(private ChannelRepositoryInterface $channelRepository)
+    public function __construct(private ChannelDeletionCheckerInterface $channelDeletionChecker)
     {
     }
 
@@ -38,9 +38,7 @@ final class ChannelDeletionListener
             );
         }
 
-        $results = $this->channelRepository->findBy(['enabled' => true]);
-
-        if (!$results || (count($results) === 1 && current($results) === $channel)) {
+        if (!$this->channelDeletionChecker->isDeletable($channel)) {
             $event->stop('sylius.channel.delete_error');
         }
     }

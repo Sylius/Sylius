@@ -29,18 +29,22 @@
     ],
     "require": {
         "php": "^8.0",
-        "payum/payum": "^1.7.2",
+        "payum/offline": "^1.7.3",
         "payum/payum-bundle": "^2.5",
-        "php-http/guzzle6-adapter": "^2.0",
-        "sylius/core": "^1.12",
-        "sylius/currency": "^1.12",
-        "sylius/order-bundle": "^1.12",
-        "sylius/payment-bundle": "^1.12",
-        "sylius/resource-bundle": "^1.9"
+        "sylius/core": "^1.13",
+        "sylius/currency": "^1.13",
+        "sylius/order-bundle": "^1.13",
+        "sylius/payment-bundle": "^1.13",
+        "sylius/resource-bundle": "^1.9",
+        "php-http/httplug": "^2.4"
     },
     "require-dev": {
         "phpspec/phpspec": "^7.2",
-        "symfony/dependency-injection": "^5.4 || ^6.0"
+        "symfony/dependency-injection": "^5.4.21 || ^6.0"
+    },
+    "suggest": {
+        "payum/paypal-express-checkout-nvp": "To use PayPal Express Chekout NVP",
+        "payum/stripe": "To use Stripe Checkout"
     },
     "config": {
         "allow-plugins": {
@@ -49,7 +53,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "1.12-dev"
+            "dev-main": "1.13-dev"
         }
     },
     "autoload": {
@@ -59,7 +63,8 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Sylius\\Bundle\\PayumBundle\\spec\\": "spec/"
+            "Sylius\\Bundle\\PayumBundle\\spec\\": "spec/",
+            "Sylius\\Bundle\\PayumBundle\\Tests\\": "Tests/"
         }
     },
     "repositories": [

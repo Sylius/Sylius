@@ -18,20 +18,8 @@ use Sylius\Bundle\ApiBundle\Command\OrderTokenValueAwareInterface;
 /** @experimental */
 class RemoveItemFromCart implements OrderTokenValueAwareInterface
 {
-    /** @var string|null */
-    public $orderTokenValue;
-
-    /**
-     * @immutable
-     *
-     * @var string
-     */
-    public $itemId;
-
-    public function __construct(?string $orderTokenValue, string $itemId)
+    public function __construct(public ?string $orderTokenValue, public string $itemId)
     {
-        $this->orderTokenValue = $orderTokenValue;
-        $this->itemId = $itemId;
     }
 
     public static function removeFromData(string $tokenValue, string $orderItemId): self

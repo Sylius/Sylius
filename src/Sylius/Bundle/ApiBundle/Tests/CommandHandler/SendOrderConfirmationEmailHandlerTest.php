@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\Tests\CommandHandler;
 
+use Prophecy\PhpUnit\ProphecyTrait;
 use Prophecy\Prophecy\ObjectProphecy;
 use Sylius\Bundle\ApiBundle\Command\Checkout\SendOrderConfirmation;
 use Sylius\Bundle\ApiBundle\CommandHandler\Checkout\SendOrderConfirmationHandler;
@@ -25,6 +26,7 @@ use Symfony\Bundle\FrameworkBundle\Test\MailerAssertionsTrait;
 
 final class SendOrderConfirmationEmailHandlerTest extends KernelTestCase
 {
+    use ProphecyTrait;
     use MailerAssertionsTrait;
 
     /** @test */

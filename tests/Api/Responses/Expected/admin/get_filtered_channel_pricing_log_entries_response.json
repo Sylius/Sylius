@@ -1,0 +1,51 @@
+{
+    "@context": "\/api\/v2\/contexts\/ChannelPricingLogEntry",
+    "@id": "\/api\/v2\/admin\/channel-pricing-log-entries",
+    "@type": "hydra:Collection",
+    "hydra:member": [
+        {
+            "@id": "\/api\/v2\/admin\/channel-pricing-log-entries\/@integer@",
+            "@type": "ChannelPricingLogEntry",
+            "channelPricing": "\/api\/v2\/admin\/channel-pricings\/@integer@",
+            "price": 1000,
+            "originalPrice": 2000,
+            "loggedAt": "@date@"
+        }
+    ],
+    "hydra:totalItems": 1,
+    "hydra:view": {
+        "@id": @string@,
+        "@type": "hydra:PartialCollectionView"
+    },
+    "hydra:search": {
+        "@type": "hydra:IriTemplate",
+        "hydra:template": "\/api\/v2\/admin\/channel-pricing-log-entries{?channelPricing.channelCode,channelPricing.channelCode[],channelPricing.productVariant.code,channelPricing.productVariant.code[]}",
+        "hydra:variableRepresentation": "BasicRepresentation",
+        "hydra:mapping": [
+            {
+                "@type": "IriTemplateMapping",
+                "variable": "channelPricing.channelCode",
+                "property": "channelPricing.channelCode",
+                "required": false
+            },
+            {
+                "@type": "IriTemplateMapping",
+                "variable": "channelPricing.channelCode[]",
+                "property": "channelPricing.channelCode",
+                "required": false
+            },
+            {
+                "@type": "IriTemplateMapping",
+                "variable": "channelPricing.productVariant.code",
+                "property": "channelPricing.productVariant.code",
+                "required": false
+            },
+            {
+                "@type": "IriTemplateMapping",
+                "variable": "channelPricing.productVariant.code[]",
+                "property": "channelPricing.productVariant.code",
+                "required": false
+            }
+        ]
+    }
+}

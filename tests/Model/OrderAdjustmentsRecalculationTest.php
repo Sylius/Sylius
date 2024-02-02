@@ -23,6 +23,7 @@ use Sylius\Component\Order\Model\OrderItemUnit;
 final class OrderAdjustmentsRecalculationTest extends TestCase
 {
     private Order $order;
+
     private OrderItemInterface $item;
 
     protected function setUp(): void

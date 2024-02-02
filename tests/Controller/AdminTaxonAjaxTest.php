@@ -18,7 +18,7 @@ use Symfony\Component\BrowserKit\Cookie;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 
-final class AdminTaxonAjaxTest extends SessionAwareAjaxTest
+final class AdminTaxonAjaxTest extends SessionAwareAjaxTestCase
 {
     /** @test */
     public function it_denies_access_to_taxons_for_not_authenticated_user(): void
@@ -65,11 +65,11 @@ final class AdminTaxonAjaxTest extends SessionAwareAjaxTest
     {
         Assert::assertNotEmpty(
             $this->loadFixturesFromFile('authentication/administrator.yml'),
-            'Could not load administrator.yml'
+            'Could not load administrator.yml',
         );
         Assert::assertNotEmpty(
             $this->loadFixturesFromFile('resources/taxons.yml'),
-            'Could not load taxons.yml'
+            'Could not load taxons.yml',
         );
 
         $this->authenticateAdminUser();

@@ -1,6 +1,6 @@
 {
   "name": "@sylius-ui/frontend",
-  "version": "1.0.1",
+  "version": "1.0.3",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Sylius/Sylius.git"

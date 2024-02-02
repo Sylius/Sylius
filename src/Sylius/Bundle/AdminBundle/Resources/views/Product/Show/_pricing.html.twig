@@ -8,7 +8,9 @@
                     <th><strong class="gray text">{{ 'sylius.ui.channels'|trans }}</strong></th>
                     <th><strong class="gray text">{{ 'sylius.ui.price'|trans }}</strong></th>
                     <th><strong class="gray text">{{ 'sylius.ui.original_price'|trans }}</strong></th>
+                    <th><strong class="gray text">{{ 'sylius.ui.lowest_price_before_discount'|trans }}</strong></th>
                     <th><strong class="gray text">{{ 'sylius.ui.discounted_by'|trans }}</strong></th>
+                    <th><strong class="gray text">{{ 'sylius.ui.history'|trans }}</strong></th>
                 </tr>
             </thead>
             <tbody>
@@ -19,12 +21,19 @@
                             <strong>{{ channelPricing.channelCode|sylius_channel_name }}</strong>
                         </td>
                         <td>{{ money.format(channelPricing.price, product.channels.first.baseCurrency) }}</td>
-                        {% if channelPricing.originalPrice != null %}
-                            <td>{{ money.format(channelPricing.originalPrice, product.channels.first.baseCurrency) }}</td>
-                        {% else %}
-                            <td>-</td>
-                        {% endif %}
+                        <td>{{ channelPricing.originalPrice ? money.format(channelPricing.originalPrice, product.channels.first.baseCurrency) : '-' }}</td>
+                        <td>{{ channelPricing.lowestPriceBeforeDiscount ? money.format(channelPricing.lowestPriceBeforeDiscount, product.channels.first.baseCurrency) : '-' }}</td>
                         {% include '@SyliusAdmin/Product/Show/_appliedPromotions.html.twig' %}
+                        <td>
+                            <a class="ui blue labeled icon button" href="{{ path('sylius_admin_channel_pricing_log_entry_index', {
+                                'productId': product.id,
+                                'variantId': product.variants.first.id,
+                                'channelPricingId': channelPricing.id
+                            }) }}">
+                                <i class="icon search"></i>
+                                {{ 'sylius.ui.show'|trans }}
+                            </a>
+                        </td>
                     </tr>
                 {% endif %}
             {% endfor %}

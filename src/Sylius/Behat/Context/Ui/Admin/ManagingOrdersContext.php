@@ -233,6 +233,17 @@ final class ManagingOrdersContext implements Context
     }
 
     /**
+     * @Then I should not be able to resend the shipment confirmation email
+     */
+    public function iShouldNotBeAbleToResendTheShipmentConfirmationEmail(): void
+    {
+        Assert::false(
+            $this->showPage->isResendShipmentConfirmationEmailButtonVisible(),
+            'Resend shipment confirmation email button should not be visible, but it does.',
+        );
+    }
+
+    /**
      * @Then I should see a single order in the list
      */
     public function iShouldSeeASingleOrderInTheList(): void
@@ -290,23 +301,20 @@ final class ManagingOrdersContext implements Context
         string $city,
         string $countryName,
     ) {
-        $this->itShouldBeBilledTo(null, $customerName, $street, $postcode, $city, $countryName);
+        Assert::true($this->showPage->hasBillingAddress($customerName, $street, $postcode, $city, $countryName));
     }
 
     /**
-     * @Then /^(this order) bill should (?:|still )be shipped to "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)"$/
+     * @Then /^(?:it|this order) should(?:| still) have "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)" as its(?:| new) billing address$/
      */
-    public function itShouldBeBilledTo(
-        ?OrderInterface $order,
+    public function itShouldHaveAsItsBillingAddress(
         string $customerName,
         string $street,
         string $postcode,
         string $city,
         string $countryName,
-    ) {
-        if (null !== $order) {
-            $this->iSeeTheOrder($order);
-        }
+    ): void {
+        $this->iSeeTheOrder($this->sharedStorage->get('order'));
 
         Assert::true($this->showPage->hasBillingAddress($customerName, $street, $postcode, $city, $countryName));
     }
@@ -791,14 +799,22 @@ final class ManagingOrdersContext implements Context
     }
 
     /**
-     * @Then /^I should be notified that the "([^"]+)", the "([^"]+)", the "([^"]+)" and the "([^"]+)" in (shipping|billing) details are required$/
+     * @Then /^I should be notified that all mandatory (shipping|billing) address details are incomplete$/
      */
-    public function iShouldBeNotifiedThatTheAndTheInShippingDetailsAreRequired($firstElement, $secondElement, $thirdElement, $fourthElement, $type)
+    public function iShouldBeNotifiedThatAllMandatoryAddressDetailsAreIncomplete(string $type): void
     {
-        $this->assertElementValidationMessage($type, $firstElement, sprintf('Please enter %s.', $firstElement));
-        $this->assertElementValidationMessage($type, $secondElement, sprintf('Please enter %s.', $secondElement));
-        $this->assertElementValidationMessage($type, $thirdElement, sprintf('Please enter %s.', $thirdElement));
-        $this->assertElementValidationMessage($type, $fourthElement, sprintf('Please enter %s.', $fourthElement));
+        /** @var array<int, string> $mandatoryAddressFields */
+        $mandatoryAddressFields = ['first name', 'last name', 'street', 'city', 'postcode'];
+
+        foreach ($mandatoryAddressFields as $mandatoryAddressField) {
+            $this->assertElementValidationMessage(
+                $type,
+                $mandatoryAddressField,
+                sprintf('Please enter %s.', $mandatoryAddressField),
+            );
+        }
+
+        $this->assertElementValidationMessage($type, 'country', 'Please select country.');
     }
 
     /**
@@ -810,7 +826,7 @@ final class ManagingOrdersContext implements Context
     }
 
     /**
-     * @Then I should see :provinceName ad province in the billing address
+     * @Then I should see :provinceName as province in the billing address
      */
     public function iShouldSeeAdProvinceInTheBillingAddress($provinceName)
     {
@@ -835,17 +851,17 @@ final class ManagingOrdersContext implements Context
     }
 
     /**
-     * @When /^I (clear old billing address) information$/
+     * @When /^I (clear the billing address) information$/
      */
-    public function iSpecifyTheBillingAddressAs(AddressInterface $address)
+    public function iClearTheBillingAddressInformation(AddressInterface $address)
     {
         $this->updatePage->specifyBillingAddress($address);
     }
 
     /**
-     * @When /^I (clear old shipping address) information$/
+     * @When /^I (clear the shipping address) information$/
      */
-    public function iSpecifyTheShippingAddressAs(AddressInterface $address)
+    public function iClearTheShippingAddressInformation(AddressInterface $address)
     {
         $this->updatePage->specifyShippingAddress($address);
     }
@@ -853,7 +869,7 @@ final class ManagingOrdersContext implements Context
     /**
      * @When /^I do not specify new information$/
      */
-    public function iDoNotSpecifyNewInformation()
+    public function iDoNotSpecifyNewInformation(): void
     {
         // Intentionally left blank to fulfill context expectation
     }
@@ -883,11 +899,19 @@ final class ManagingOrdersContext implements Context
     }
 
     /**
-     * @Then there should be :count changes in the registry
+     * @Then there should be :count shipping address changes in the registry
      */
-    public function thereShouldBeCountChangesInTheRegistry($count)
+    public function thereShouldBeCountShippingAddressChangesInTheRegistry(int $count): void
     {
-        Assert::same($this->historyPage->countShippingAddressChanges(), (int) $count);
+        Assert::same($this->historyPage->countShippingAddressChanges(), $count);
+    }
+
+    /**
+     * @Then there should be :count billing address changes in the registry
+     */
+    public function thereShouldBeCountBillingAddressChangesInTheRegistry(int $count): void
+    {
+        Assert::same($this->historyPage->countBillingAddressChanges(), $count);
     }
 
     /**

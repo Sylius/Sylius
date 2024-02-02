@@ -17,10 +17,12 @@
 >
     <class name="Sylius\Component\Product\Model\ProductAssociationTypeTranslation">
         <attribute name="id">
-            <group>admin:product_association_type:read</group>
+            <group>admin:product_association_type:index</group>
+            <group>admin:product_association_type:show</group>
         </attribute>
         <attribute name="name">
-            <group>admin:product_association_type:read</group>
+            <group>admin:product_association_type:index</group>
+            <group>admin:product_association_type:show</group>
             <group>admin:product_association_type:create</group>
             <group>admin:product_association_type:update</group>
         </attribute>

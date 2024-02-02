@@ -30,10 +30,11 @@
                     <attribute>sylius.api.product_name_filter</attribute>
                     <attribute>sylius.api.product_order_filter</attribute>
                     <attribute>sylius.api.product_taxon_code_filter</attribute>
+                    <attribute>Sylius\Bundle\ApiBundle\Filter\Doctrine\ChannelsAwareChannelFilter</attribute>
                     <attribute>Sylius\Bundle\ApiBundle\Filter\Doctrine\TranslationOrderNameAndLocaleFilter</attribute>
                 </attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:product:read</attribute>
+                    <attribute name="groups">admin:product:index</attribute>
                 </attribute>
             </collectionOperation>
 
@@ -49,7 +50,7 @@
                     <attribute>Sylius\Bundle\ApiBundle\Filter\Doctrine\TaxonFilter</attribute>
                 </attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">shop:product:read</attribute>
+                    <attribute name="groups">shop:product:index</attribute>
                 </attribute>
             </collectionOperation>
 
@@ -58,6 +59,9 @@
                 <attribute name="path">/admin/products</attribute>
                 <attribute name="denormalization_context">
                     <attribute name="groups">admin:product:create</attribute>
+                </attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">admin:product:show</attribute>
                 </attribute>
             </collectionOperation>
         </collectionOperations>
@@ -70,7 +74,7 @@
                     <attribute name="summary">Use code to retrieve a product resource.</attribute>
                 </attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:product:read</attribute>
+                    <attribute name="groups">admin:product:show</attribute>
                 </attribute>
             </itemOperation>
 
@@ -81,7 +85,7 @@
                     <attribute name="summary">Use code to retrieve a product resource.</attribute>
                 </attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">shop:product:read</attribute>
+                    <attribute name="groups">shop:product:show</attribute>
                 </attribute>
             </itemOperation>
 
@@ -104,7 +108,7 @@
                     </attribute>
                 </attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">shop:product:read</attribute>
+                    <attribute name="groups">shop:product:show</attribute>
                 </attribute>
             </itemOperation>
 
@@ -113,6 +117,9 @@
                 <attribute name="path">/admin/products/{code}</attribute>
                 <attribute name="denormalization_context">
                     <attribute name="groups">admin:product:update</attribute>
+                </attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">admin:product:show</attribute>
                 </attribute>
             </itemOperation>
 
@@ -123,12 +130,14 @@
         </itemOperations>
 
         <subresourceOperations>
+            <subresourceOperation name="images_get_subresource">
+                <attribute name="method">GET</attribute>
+                <attribute name="path">/admin/products/{code}/images</attribute>
+            </subresourceOperation>
+
             <subresourceOperation name="attributes_get_subresource">
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/shop/products/{code}/attributes</attribute>
-                <attribute name="normalization_context">
-                    <attribute name="groups">shop:product:read</attribute>
-                </attribute>
             </subresourceOperation>
         </subresourceOperations>
 
@@ -143,7 +152,10 @@
                     <attribute name="en_US">
                         <attribute name="name">string</attribute>
                         <attribute name="slug">string</attribute>
-                        <attribute name="locale">string</attribute>
+                        <attribute name="description">string</attribute>
+                        <attribute name="shortDescription">string</attribute>
+                        <attribute name="metaKeywords">string</attribute>
+                        <attribute name="metaDescription">string</attribute>
                     </attribute>
                 </attribute>
             </attribute>
@@ -163,6 +175,9 @@
         <property name="associations" readable="true" />
         <property name="attributes" readable="true" writable="true">
             <subresource resourceClass="%sylius.model.product_attribute_value.class%" collection="true" />
+        </property>
+        <property name="images" writable="false" required="false">
+            <subresource resourceClass="%sylius.model.product_image.class%" collection="true" />
         </property>
     </resource>
 </resources>

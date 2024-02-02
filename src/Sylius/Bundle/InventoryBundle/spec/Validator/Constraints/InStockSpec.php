@@ -30,6 +30,6 @@ final class InStockSpec extends ObjectBehavior
 
     function it_has_a_target(): void
     {
-        $this->getTargets()->shouldReturn(Constraint::CLASS_CONSTRAINT);
+        $this->getTargets()->shouldReturn([Constraint::PROPERTY_CONSTRAINT, Constraint::CLASS_CONSTRAINT]);
     }
 }

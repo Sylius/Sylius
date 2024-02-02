@@ -26,12 +26,15 @@ sylius:
         for_products:
             invalid_products: Provided configuration contains errors. Please add only existing products.
             not_empty: Provided configuration contains errors. Please add at least 1 product.
+            unique: Provided configuration contains errors. Please add only unique products.
         for_variants:
             invalid_variants: Provided configuration contains errors. Please add only existing variants.
             not_empty: Please add at least 1 variant.
+            unique: Provided configuration contains errors. Please add only unique variants.
         for_taxons:
             invalid_taxons: Provided configuration contains errors. Please add only existing taxons.
             not_empty: Provided configuration contains errors. Please add at least 1 taxon.
+            unique: Provided configuration contains errors. Please add only unique taxons.
     channel:
         base_currency:
             not_blank: Please enter channel base currency.
@@ -42,7 +45,14 @@ sylius:
             invalid: This email is invalid.
             max: Email must not be longer than {{ limit }} characters.
             min: Email must be at least {{ limit }} characters long.
+    channel_price_history_config:
+        lowest_price_for_discounted_products_checking_period:
+            greater_than: 'Value must be greater than {{ compared_value }}'
+            less_than: 'Value must be less than {{ compared_value }}'
     channel_pricing:
+        channel_code:
+            not_blank: Please set channel code.
+            unique: This channel already has a price for this product variant.
         price:
             min: Price cannot be lower than 0.
             not_blank: Please enter the price.
@@ -59,14 +69,21 @@ sylius:
             not_blank: Please enter your email.
         message:
             not_blank: Please enter your message.
+    country:
+        code:
+            not_exist: Country with code {{ code }} does not exist.
     currency:
         enabled:
             cannot_disable_base: The base currency cannot be disabled.
     customer:
         currency_code:
             not_valid: The currency code you entered is invalid.
+    customer_group:
+        code:
+            not_exist: Customer group with code {{ code }} does not exist.
     cart_item:
         not_available: '%itemName% does not have sufficient stock.'
+        insufficient_stock: 'Insufficient stock'
     order:
         currency_code:
             not_valid: The currency code you entered is invalid.
@@ -75,19 +92,33 @@ sylius:
         product_eligibility: 'This product %productName% has been disabled.'
         shipping_method_eligibility: 'Product does not fit requirements for %shippingMethodName% shipping method. Please reselect your shipping method.'
         shipping_method_not_available: 'The "%shippingMethodName%" shipping method is not available. Please reselect your shipping method.'
+    resend_shipment_confirmation_email:
+        invalid_shipment_state: 'Cannot resend shipment confirmation email for shipment in state %state%.'
     locale:
         enabled:
             cannot_disable_base: The base locale cannot be disabled.
     product:
         variants:
             all_prices_defined: You have to define product variants' prices for newly assigned channels first.
+        code:
+            not_exist: Product with code {{ code }} does not exist.
     product_attribute:
         invalid: Position must be an integer.
     product_image:
         file:
             max_size: The image is too big - {{ size }}{{ suffix }}. Maximum allowed size is {{ limit }}{{ suffix }}.
             upload_ini_size: The image is too big. Maximum allowed size is {{ limit }}{{ suffix }}.
+        product_variant:
+            not_belong_to_owner: 'The product variant with code "%productVariantCode%" does not belong to the product with code "%ownerCode%", which is the owner of the image.'
+    product_taxon:
+        unique: Product taxons cannot be duplicated.
+        product:
+            not_blank: Please select a product.
+        taxon:
+            not_blank: Please select a taxon.
     product_variant:
+        code:
+            not_exist: Product variant with code {{ code }} does not exist.
         onHand:
             min: On hand must be greater than {{ limit }}.
             not_blank: Please enter on hand.
@@ -107,7 +138,8 @@ sylius:
             min: Depth cannot be negative.
             invalid: Depth must be a number.
         channel_pricing:
-            all_defined: 'You must define price for every channel.'
+            all_defined: 'You must define price for every enabled channel.'
+            existing_code: Channel with code {{ channelCode }} does not exist.
     promotion_coupon:
         per_customer_usage_limit:
             min: Coupon usage limit per customer must be at least {{ limit }}.
@@ -117,12 +149,21 @@ sylius:
     review:
         author:
             not_blank: Please enter your email.
+        product:
+            not_blank: Please enter a product.
         rating:
             range: Review rating must be an integer in the range 1-5.
+            not_in_range: Review rating must be between {{ min }} and {{ max }}.
+    taxon:
+        code:
+            not_exist: Taxon with code {{ code }} does not exist.
     taxon_image:
         file:
             max_size: The image is too big - {{ size }}{{ suffix }}. Maximum allowed size is {{ limit }}{{ suffix }}.
             upload_ini_size: The image is too big. Maximum allowed size is {{ limit }}{{ suffix }}.
+    translation:
+        locale_code:
+            invalid: 'Please choose one of the available locales: %locales%'
     user:
         email:
             unique: This email is already used.

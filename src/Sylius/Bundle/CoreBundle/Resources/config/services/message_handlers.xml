@@ -23,7 +23,13 @@
             <argument type="service" id="sylius.admin_user.token_generator.password_reset" />
             <argument type="service" id="Sylius\Calendar\Provider\DateTimeProviderInterface" />
             <argument type="service" id="messenger.default_bus" />
+            <tag name="messenger.message_handler" bus="sylius.command_bus" />
+            <tag name="messenger.message_handler" bus="sylius_default.bus" />
+        </service>
 
+        <service id="Sylius\Bundle\CoreBundle\MessageHandler\ResendShipmentConfirmationEmailHandler">
+            <argument type="service" id="sylius.repository.shipment" />
+            <argument type="service" id="Sylius\Bundle\CoreBundle\EmailManager\ShipmentEmailManagerInterface" />
             <tag name="messenger.message_handler" bus="sylius.command_bus" />
             <tag name="messenger.message_handler" bus="sylius_default.bus" />
         </service>
@@ -31,6 +37,13 @@
         <service id="Sylius\Bundle\CoreBundle\MessageHandler\Admin\Account\ResetPasswordHandler">
             <argument type="service" id="sylius.user_password_resetter.admin" />
 
+            <tag name="messenger.message_handler" bus="sylius.command_bus" />
+            <tag name="messenger.message_handler" bus="sylius_default.bus" />
+        </service>
+
+        <service id="Sylius\Bundle\CoreBundle\MessageHandler\ResendOrderConfirmationEmailHandler">
+            <argument type="service" id="Sylius\Bundle\CoreBundle\EmailManager\OrderEmailManagerInterface" />
+            <argument type="service" id="sylius.repository.order" />
             <tag name="messenger.message_handler" bus="sylius.command_bus" />
             <tag name="messenger.message_handler" bus="sylius_default.bus" />
         </service>

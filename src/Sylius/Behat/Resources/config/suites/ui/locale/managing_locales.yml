@@ -14,6 +14,7 @@ default:
                 - sylius.behat.context.setup.channel
                 - sylius.behat.context.setup.locale
                 - sylius.behat.context.setup.admin_security
+                - sylius.behat.context.setup.product
 
                 - sylius.behat.context.ui.admin.managing_locales
                 - sylius.behat.context.ui.admin.managing_translatable_entities

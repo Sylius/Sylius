@@ -16,23 +16,7 @@ namespace Sylius\Bundle\ApiBundle\Command\Cart;
 /** @experimental */
 class BlameCart
 {
-    /**
-     * @immutable
-     *
-     * @var string
-     */
-    public $shopUserEmail;
-
-    /**
-     * @immutable
-     *
-     * @var string
-     */
-    public $orderTokenValue;
-
-    public function __construct(string $shopUserEmail, string $orderTokenValue)
+    public function __construct(public string $shopUserEmail, public string $orderTokenValue)
     {
-        $this->shopUserEmail = $shopUserEmail;
-        $this->orderTokenValue = $orderTokenValue;
     }
 }

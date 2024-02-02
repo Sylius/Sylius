@@ -10,7 +10,7 @@ Feature: Shipping method code validation
         And the store has a zone "United States" with code "US"
         And I am logged in as an administrator
 
-    @ui
+    @ui @api
     Scenario: Trying to add a new shipping method with special symbols in the code
         When I want to create a new shipping method
         And I name it "FedEx Carrier" in "English (United States)"
@@ -19,7 +19,7 @@ Feature: Shipping method code validation
         Then I should be notified that code needs to contain only specific symbols
         And shipping method with name "FedEx Carrier" should not be added
 
-    @ui
+    @ui @api
     Scenario: Trying to add a new shipping method with spaces in the code
         When I want to create a new shipping method
         And I name it "FedEx Carrier" in "English (United States)"
@@ -27,14 +27,3 @@ Feature: Shipping method code validation
         And I try to add it
         Then I should be notified that code needs to contain only specific symbols
         And shipping method with name "FedEx Carrier" should not be added
-
-    @ui @javascript
-    Scenario: Trying to add a new shipping method with
-        When I want to create a new shipping method
-        And I name it "FedEx Carrier First US Division" in "English (United States)"
-        And I specify its code as "PEC-US_01"
-        And I define it for the zone named "United States"
-        And I choose "Flat rate per shipment" calculator
-        And I specify its amount as 50 for "Web-US" channel
-        And I add it
-        Then the shipping method "FedEx Carrier First US Division" should appear in the registry

@@ -30,7 +30,7 @@
                     <attribute>sylius.api.search_shipment_filter</attribute>
                 </attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:shipment:read</attribute>
+                    <attribute name="groups">admin:shipment:index</attribute>
                 </attribute>
             </collectionOperation>
         </collectionOperations>
@@ -40,7 +40,7 @@
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/admin/shipments/{id}</attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:shipment:read</attribute>
+                    <attribute name="groups">admin:shipment:show</attribute>
                 </attribute>
             </itemOperation>
 
@@ -48,7 +48,7 @@
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/shop/shipments/{id}</attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">shop:shipment:read</attribute>
+                    <attribute name="groups">shop:shipment:show</attribute>
                 </attribute>
             </itemOperation>
 
@@ -62,6 +62,18 @@
                 </attribute>
                 <attribute name="denormalization_context">
                     <attribute name="groups">admin:shipment:update</attribute>
+                </attribute>
+            </itemOperation>
+
+            <itemOperation name="admin_resend_confirmation">
+                <attribute name="method">POST</attribute>
+                <attribute name="path">/admin/shipments/{id}/resend-confirmation-email</attribute>
+                <attribute name="messenger">input</attribute>
+                <attribute name="input">Sylius\Bundle\ApiBundle\Command\ResendShipmentConfirmationEmail</attribute>
+                <attribute name="output">false</attribute>
+                <attribute name="status">202</attribute>
+                <attribute name="openapi_context">
+                    <attribute name="summary">Resends shipment confirmation email</attribute>
                 </attribute>
             </itemOperation>
         </itemOperations>

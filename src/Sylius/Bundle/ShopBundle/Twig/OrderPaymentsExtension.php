@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Bundle\ShopBundle\Twig;
 
 use Sylius\Component\Core\Model\OrderInterface;
-use Sylius\Component\Core\Model\PaymentInterface;
+use Sylius\Component\Payment\Model\PaymentInterface;
 use Sylius\Component\Payment\Resolver\PaymentMethodsResolverInterface;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;

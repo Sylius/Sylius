@@ -15,7 +15,8 @@ namespace spec\Sylius\Bundle\ApiBundle\Applicator;
 
 use PhpSpec\ObjectBehavior;
 use SM\Factory\FactoryInterface as StateMachineFactoryInterface;
-use SM\StateMachine\StateMachine;
+use SM\StateMachine\StateMachine as WinzouStateMachine;
+use Sylius\Abstraction\StateMachine\StateMachineInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Order\OrderTransitions;
 
@@ -29,10 +30,21 @@ final class OrderStateMachineTransitionApplicatorSpec extends ObjectBehavior
     function it_cancels_order(
         StateMachineFactoryInterface $stateMachineFactory,
         OrderInterface $order,
-        StateMachine $stateMachine,
+        WinzouStateMachine $stateMachine,
     ): void {
         $stateMachineFactory->get($order, OrderTransitions::GRAPH)->willReturn($stateMachine);
         $stateMachine->apply(OrderTransitions::TRANSITION_CANCEL)->shouldBeCalled();
+
+        $this->cancel($order);
+    }
+
+    function it_uses_the_new_state_machine_abstraction_if_passed(
+        StateMachineInterface $stateMachine,
+        OrderInterface $order,
+    ): void {
+        $this->beConstructedWith($stateMachine);
+
+        $stateMachine->apply($order, OrderTransitions::GRAPH, OrderTransitions::TRANSITION_CANCEL)->shouldBeCalled();
 
         $this->cancel($order);
     }

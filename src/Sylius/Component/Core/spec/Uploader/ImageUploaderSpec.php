@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace spec\Sylius\Component\Core\Uploader;
 
-use Gaufrette\FilesystemInterface;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Component\Core\Filesystem\Adapter\FilesystemAdapterInterface;
@@ -38,30 +37,6 @@ final class ImageUploaderSpec extends ObjectBehavior
         $this->beConstructedWith($filesystem, $imagePathGenerator);
 
         $this->shouldImplement(ImageUploaderInterface::class);
-    }
-
-    function it_triggers_a_deprecation_exception_if_no_image_path_generator_is_passed(
-        FilesystemAdapterInterface $filesystem,
-        ImagePathGeneratorInterface $imagePathGenerator,
-    ): void {
-        $this->beConstructedWith($filesystem, $imagePathGenerator);
-
-        $this
-            ->shouldTrigger(\E_USER_DEPRECATED)
-            ->during('__construct', [$filesystem])
-        ;
-    }
-
-    function it_triggers_a_deprecation_exception_if_gaufrette_filesystem_is_passed(
-        FilesystemInterface $filesystem,
-        ImagePathGeneratorInterface $imagePathGenerator,
-    ): void {
-        $this->beConstructedWith($filesystem, $imagePathGenerator);
-
-        $this
-            ->shouldTrigger(\E_USER_DEPRECATED)
-            ->duringInstantiation()
-        ;
     }
 
     function it_uploads_an_image(

@@ -1,12 +1,12 @@
 {% include '@SyliusAdmin/Product/Show/_header.html.twig' %}
 
 <div class="ui grid">
-    <div class="sixteen wide mobile ten wide computer column">
+    <div class="sixteen wide mobile eight wide computer column">
         {{ sylius_template_event('sylius.admin.simple_product.show.details', _context) }}
         <div class="ui hidden divider"></div>
         {{ sylius_template_event('sylius.admin.simple_product.show.taxonomy', _context) }}
     </div>
-    <div class="sixteen wide mobile six wide computer column">
+    <div class="sixteen wide mobile eight wide computer column">
         {{ sylius_template_event('sylius.admin.simple_product.show.pricing', _context) }}
         <div class="ui hidden divider"></div>
         {{ sylius_template_event('sylius.admin.simple_product.show.shipping', _context) }}

@@ -1,3 +1,4 @@
 {
-    "token": "@string@"
+    "token": "@string@",
+    "adminUser": "@string@"
 }

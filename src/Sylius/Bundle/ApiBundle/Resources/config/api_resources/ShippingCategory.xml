@@ -24,7 +24,7 @@
             <collectionOperation name="admin_get">
                 <attribute name="method">GET</attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:shipping_category:read</attribute>
+                    <attribute name="groups">admin:shipping_category:index</attribute>
                 </attribute>
             </collectionOperation>
 
@@ -33,6 +33,9 @@
                 <attribute name="denormalization_context">
                     <attribute name="groups">admin:shipping_category:create</attribute>
                 </attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">admin:shipping_category:show</attribute>
+                </attribute>
             </collectionOperation>
         </collectionOperations>
 
@@ -40,7 +43,7 @@
             <itemOperation name="admin_get">
                 <attribute name="method">GET</attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:shipping_category:read</attribute>
+                    <attribute name="groups">admin:shipping_category:show</attribute>
                 </attribute>
             </itemOperation>
 
@@ -48,6 +51,9 @@
                 <attribute name="method">PUT</attribute>
                 <attribute name="denormalization_context">
                     <attribute name="groups">admin:shipping_category:update</attribute>
+                </attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">admin:shipping_category:show</attribute>
                 </attribute>
             </itemOperation>
 

@@ -14,16 +14,23 @@ declare(strict_types=1);
 namespace Sylius\Bundle\ShopBundle\Twig;
 
 use Sylius\Component\Core\Model\AdjustmentInterface;
+use Sylius\Component\Core\Model\Order;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Order\Model\AdjustmentInterface as BaseAdjustmentInterface;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 
-@trigger_error(
-    'The "Sylius\Bundle\ShopBundle\Twig\OrderTaxesTotalExtension" class is deprecated since Sylius 1.12 and will be removed in 2.0. Use methods "getTaxExcludedTotal" and "getTaxIncludedTotal" from "Sylius\Component\Core\Model\Order" instead.',
-    \E_USER_DEPRECATED,
+trigger_deprecation(
+    'sylius/shop-bundle',
+    '1.12',
+    'The "%s" class is deprecated and will be removed in Sylius 2.0. Use methods "getTaxExcludedTotal" and "getTaxIncludedTotal" from "%s" instead.',
+    OrderTaxesTotalExtension::class,
+    Order::class,
 );
 
+/**
+ * @deprecated since Sylius 1.12 and will be removed in Sylius 2.0. Use methods "getTaxExcludedTotal" and "getTaxIncludedTotal" from {@see Order} instead.
+ */
 class OrderTaxesTotalExtension extends AbstractExtension
 {
     public function getFunctions(): array

@@ -20,6 +20,11 @@ use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\ShipmentInterface;
 use Sylius\Component\Core\Repository\ShipmentRepositoryInterface;
 
+/**
+ * @template T of ShipmentInterface
+ *
+ * @implements ShipmentRepositoryInterface<T>
+ */
 class ShipmentRepository extends EntityRepository implements ShipmentRepositoryInterface
 {
     public function createListQueryBuilder(): QueryBuilder

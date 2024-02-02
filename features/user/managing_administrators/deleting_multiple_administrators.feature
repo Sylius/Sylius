@@ -10,7 +10,7 @@ Feature: Deleting multiple administrators
         And there is also an administrator "watermelon@example.com"
         And I am logged in as "watermelon@example.com" administrator
 
-    @ui @mink:chromedriver
+    @ui @mink:chromedriver @no-api
     Scenario: Deleting multiple administrators at once
         Given I browse administrators
         And I check the "banana@example.com" administrator

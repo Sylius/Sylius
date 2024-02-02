@@ -17,25 +17,39 @@
 >
     <class name="Sylius\Component\Product\Model\ProductAttributeValue">
         <attribute name="id">
-            <group>shop:product_attribute_value:read</group>
+            <group>admin:product:index</group>
+            <group>admin:product:show</group>
+            <group>shop:product_attribute_value:show</group>
         </attribute>
         <attribute name="attribute">
-            <group>shop:product_attribute_value:read</group>
-        </attribute>
-        <attribute name="name">
-            <group>shop:product_attribute_value:read</group>
-        </attribute>
-        <attribute name="type">
-            <group>shop:product_attribute_value:read</group>
-        </attribute>
-        <attribute name="code">
-            <group>shop:product_attribute_value:read</group>
+            <group>admin:product:index</group>
+            <group>admin:product:show</group>
+            <group>admin:product:create</group>
+            <group>admin:product:update</group>
+            <group>shop:product_attribute_value:show</group>
         </attribute>
         <attribute name="value">
-            <group>shop:product_attribute_value:read</group>
+            <group>admin:product:index</group>
+            <group>admin:product:show</group>
+            <group>admin:product:create</group>
+            <group>admin:product:update</group>
+            <group>shop:product_attribute_value:show</group>
         </attribute>
         <attribute name="localeCode">
-            <group>shop:product_attribute_value:read</group>
+            <group>admin:product:index</group>
+            <group>admin:product:show</group>
+            <group>admin:product:create</group>
+            <group>admin:product:update</group>
+            <group>shop:product_attribute_value:show</group>
+        </attribute>
+        <attribute name="name">
+            <group>shop:product_attribute_value:show</group>
+        </attribute>
+        <attribute name="type">
+            <group>shop:product_attribute_value:show</group>
+        </attribute>
+        <attribute name="code">
+            <group>shop:product_attribute_value:show</group>
         </attribute>
     </class>
 </serializer>

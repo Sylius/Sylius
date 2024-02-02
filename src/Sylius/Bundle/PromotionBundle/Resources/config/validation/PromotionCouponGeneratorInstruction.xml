@@ -13,20 +13,25 @@
 
 <constraint-mapping xmlns="http://symfony.com/schema/dic/constraint-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/constraint-mapping http://symfony.com/schema/dic/services/constraint-mapping-1.0.xsd">
     <class name="Sylius\Component\Promotion\Generator\PromotionCouponGeneratorInstruction">
-        <constraint name="Sylius\Bundle\PromotionBundle\Validator\Constraints\CouponPossibleGenerationAmount" />
+        <constraint name="Sylius\Bundle\PromotionBundle\Validator\Constraints\CouponPossibleGenerationAmount">
+            <option name="groups">sylius</option>
+        </constraint>
         <property name="amount">
             <constraint name="NotBlank">
                 <option name="message">sylius.promotion_coupon_generator_instruction.amount.not_blank</option>
+                <option name="groups">sylius</option>
             </constraint>
             <constraint name="Range">
                 <option name="min">1</option>
                 <option name="minMessage">sylius.promotion_coupon_generator_instruction.amount.min</option>
+                <option name="groups">sylius</option>
             </constraint>
         </property>
         <property name="usageLimit">
             <constraint name="Range">
                 <option name="min">1</option>
                 <option name="minMessage">sylius.promotion_coupon_generator_instruction.usage_limit.min</option>
+                <option name="groups">sylius</option>
             </constraint>
         </property>
         <property name="codeLength">
@@ -34,9 +39,11 @@
                 <option name="min">1</option>
                 <option name="max">40</option>
                 <option name="notInRangeMessage">sylius.promotion_coupon_generator_instruction.code_length.not_in_range</option>
+                <option name="groups">sylius</option>
             </constraint>
             <constraint name="NotBlank">
                 <option name="message">sylius.promotion_coupon_generator_instruction.code_length.not_blank</option>
+                <option name="groups">sylius</option>
             </constraint>
         </property>
     </class>

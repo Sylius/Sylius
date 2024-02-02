@@ -29,8 +29,8 @@
     "require": {
         "php": "^8.0",
         "sylius/resource": "^1.9",
-        "symfony/form": "^5.4 || ^6.0",
-        "symfony/http-foundation": "^5.4 || ^6.0",
+        "symfony/form": "^5.4.21 || ^6.0",
+        "symfony/http-foundation": "^5.4.21 || ^6.0",
         "laminas/laminas-stdlib": "^3.3.1"
     },
     "require-dev": {
@@ -43,7 +43,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "1.12-dev"
+            "dev-main": "1.13-dev"
         }
     },
     "autoload": {

@@ -30,11 +30,6 @@ final class ProductTranslationTypeExtension extends AbstractTypeExtension
         ;
     }
 
-    public function getExtendedType(): string
-    {
-        return ProductTranslationType::class;
-    }
-
     public static function getExtendedTypes(): iterable
     {
         return [ProductTranslationType::class];

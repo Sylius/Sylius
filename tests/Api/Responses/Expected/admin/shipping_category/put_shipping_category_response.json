@@ -1,0 +1,11 @@
+{
+    "@context": "\/api\/v2\/contexts\/ShippingCategory",
+    "@id": "\/api\/v2\/admin\/shipping-categories\/default",
+    "@type": "ShippingCategory",
+    "id": "@integer@",
+    "code": "default",
+    "name": "Not so default",
+    "description": null,
+    "createdAt": @date@,
+    "updatedAt": @date@
+}

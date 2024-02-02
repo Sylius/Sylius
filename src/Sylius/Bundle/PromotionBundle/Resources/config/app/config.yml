@@ -7,3 +7,19 @@ jms_serializer:
             sylius-promotion:
                 namespace_prefix: "Sylius\\Component\\Promotion"
                 path: "@SyliusPromotionBundle/Resources/config/serializer"
+
+sylius_promotion:
+    promotion_rule:
+        validation_groups:
+            cart_quantity:
+                - 'sylius'
+                - 'sylius_promotion_rule_cart_quantity'
+            item_total:
+                - 'sylius'
+                - 'sylius_promotion_rule_item_total'
+
+    catalog_promotion_action:
+        validation_groups:
+            percentage_discount:
+                - 'sylius'
+                - 'sylius_catalog_promotion_action_percentage_discount'

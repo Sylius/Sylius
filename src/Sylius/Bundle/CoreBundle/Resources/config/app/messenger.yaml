@@ -24,9 +24,11 @@ framework:
                 dsn: '%sylius_messenger_transport_catalog_promotion_removal_failed_dsn%'
         reset_on_message: true
         routing:
-            'Sylius\Bundle\CoreBundle\CatalogPromotion\Command\UpdateCatalogPromotionState': main
             'Sylius\Bundle\CoreBundle\CatalogPromotion\Command\ApplyCatalogPromotionsOnVariants': main
+            'Sylius\Bundle\CoreBundle\CatalogPromotion\Command\DisableCatalogPromotion': main
+            'Sylius\Bundle\CoreBundle\CatalogPromotion\Command\RemoveCatalogPromotion': catalog_promotion_removal
             'Sylius\Bundle\CoreBundle\CatalogPromotion\Command\RemoveInactiveCatalogPromotion': catalog_promotion_removal
+            'Sylius\Bundle\CoreBundle\PriceHistory\Command\ApplyLowestPriceOnChannelPricings': main
             'Sylius\Component\Promotion\Event\CatalogPromotionCreated': main
             'Sylius\Component\Promotion\Event\CatalogPromotionEnded': main
             'Sylius\Component\Promotion\Event\CatalogPromotionUpdated': main
@@ -36,8 +38,10 @@ framework:
                 middleware:
                     - 'validation'
                     - 'doctrine_transaction'
+            sylius.query_bus:
+                middleware:
+                    - validation
             sylius.event_bus: &event_bus
                 default_middleware: allow_no_handlers
             sylius_default.bus: *command_bus
             sylius_event.bus: *event_bus
-

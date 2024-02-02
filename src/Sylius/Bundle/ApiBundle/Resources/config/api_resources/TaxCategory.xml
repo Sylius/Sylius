@@ -24,7 +24,7 @@
             <collectionOperation name="admin_get">
                 <attribute name="method">GET</attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:tax_category:read</attribute>
+                    <attribute name="groups">admin:tax_category:index</attribute>
                 </attribute>
             </collectionOperation>
 
@@ -33,6 +33,9 @@
                 <attribute name="denormalization_context">
                     <attribute name="groups">admin:tax_category:create</attribute>
                 </attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">admin:tax_category:show</attribute>
+                </attribute>
             </collectionOperation>
         </collectionOperations>
 
@@ -40,7 +43,7 @@
             <itemOperation name="admin_get">
                 <attribute name="method">GET</attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:tax_category:read</attribute>
+                    <attribute name="groups">admin:tax_category:show</attribute>
                 </attribute>
             </itemOperation>
 
@@ -48,6 +51,9 @@
                 <attribute name="method">PUT</attribute>
                 <attribute name="denormalization_context">
                     <attribute name="groups">admin:tax_category:update</attribute>
+                </attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">admin:tax_category:show</attribute>
                 </attribute>
             </itemOperation>
 
@@ -57,9 +63,9 @@
         </itemOperations>
 
         <property name="id" identifier="false" writable="false" />
+        <property name="code" identifier="true" required="true" />
         <property name="createdAt" writable="false" />
         <property name="updatedAt" writable="false" />
-        <property name="code" identifier="true" required="true" />
         <property name="name" writable="true" />
         <property name="description" writable="true" />
         <property name="rates" writable="false" />

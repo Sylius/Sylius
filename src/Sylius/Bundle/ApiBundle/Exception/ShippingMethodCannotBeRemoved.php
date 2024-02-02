@@ -16,8 +16,11 @@ namespace Sylius\Bundle\ApiBundle\Exception;
 /** @experimental */
 final class ShippingMethodCannotBeRemoved extends \RuntimeException
 {
-    public function __construct()
-    {
-        parent::__construct('Cannot delete, the shipping method is in use.');
+    public function __construct(
+        string $message = 'Cannot delete, the shipping method is in use.',
+        int $code = 0,
+        \Throwable $previous = null,
+    ) {
+        parent::__construct($message, $code, $previous);
     }
 }
