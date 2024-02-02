@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace spec\Sylius\Bundle\CoreBundle\Validator\Constraints;
 
 use PhpSpec\ObjectBehavior;
+use Prophecy\Argument;
 use Sylius\Bundle\CoreBundle\Message\ResendShipmentConfirmationEmail;
 use Sylius\Bundle\CoreBundle\Validator\Constraints\ResendShipmentConfirmationEmailWithValidShipmentState;
 use Sylius\Component\Core\Model\ShipmentInterface;
@@ -21,12 +22,9 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
 use Symfony\Component\Validator\Exception\UnexpectedTypeException;
-use Symfony\Component\Validator\Violation\ConstraintViolationBuilderInterface;
 
 final class ResendShipmentConfirmationEmailWithValidShipmentStateValidatorSpec extends ObjectBehavior
 {
-    const MESSAGE = 'sylius.resend_shipment_confirmation_email.invalid_shipment_state';
-
     function let(RepositoryInterface $shipmentRepository, ExecutionContextInterface $context): void
     {
         $this->beConstructedWith($shipmentRepository);
@@ -36,11 +34,18 @@ final class ResendShipmentConfirmationEmailWithValidShipmentStateValidatorSpec e
 
     function it_throws_an_exception_if_constraint_is_not_an_instance_of_resend_order_confirmation_email_with_valid_order_state(
         Constraint $constraint,
-        ResendShipmentConfirmationEmail $value,
     ): void {
         $this
             ->shouldThrow(UnexpectedTypeException::class)
-            ->during('validate', [$value, $constraint])
+            ->during('validate', [new ResendShipmentConfirmationEmail(123), $constraint])
+        ;
+    }
+
+    function it_throws_an_exception_if_value_is_not_resend_shipment_confirmation(): void
+    {
+        $this
+            ->shouldThrow(UnexpectedTypeException::class)
+            ->during('validate', [new \stdClass(), new ResendShipmentConfirmationEmailWithValidShipmentState()])
         ;
     }
 
@@ -51,22 +56,29 @@ final class ResendShipmentConfirmationEmailWithValidShipmentStateValidatorSpec e
     ): void {
         $shipmentRepository->findOneBy(['id' => 2])->willReturn($shipment);
         $shipment->getState()->willReturn(ShipmentInterface::STATE_SHIPPED);
-        $this->validate(new ResendShipmentConfirmationEmail(2), new ResendShipmentConfirmationEmailWithValidShipmentState());
 
-        $context->buildViolation(self::MESSAGE)->shouldNotHaveBeenCalled();
+        $context->buildViolation(Argument::any())->shouldNotBeCalled();
+
+        $this->validate(
+            new ResendShipmentConfirmationEmail(2),
+            new ResendShipmentConfirmationEmailWithValidShipmentState()
+        );
     }
 
     function it_adds_a_violation_if_order_has_invalid_state(
         RepositoryInterface $shipmentRepository,
         ShipmentInterface $shipment,
         ExecutionContextInterface $context,
-        ConstraintViolationBuilderInterface $constraintViolationBuilder,
     ): void {
+        $constraint = new ResendShipmentConfirmationEmailWithValidShipmentState();
         $shipmentRepository->findOneBy(['id' => 2])->willReturn($shipment);
         $shipment->getState()->willReturn(ShipmentInterface::STATE_CANCELLED);
 
-        $context->addViolation(self::MESSAGE, ['%state%' => ShipmentInterface::STATE_CANCELLED])->shouldBeCalled()->willReturn($constraintViolationBuilder);
+        $context
+            ->addViolation($constraint->message, ['%state%' => ShipmentInterface::STATE_CANCELLED])
+            ->shouldBeCalled()
+        ;
 
-        $this->validate(new ResendShipmentConfirmationEmail(2), new ResendShipmentConfirmationEmailWithValidShipmentState());
+        $this->validate(new ResendShipmentConfirmationEmail(2), $constraint);
     }
 }

@@ -120,6 +120,8 @@ interface ShowPageInterface extends SymfonyPageInterface
 
     public function resendOrderConfirmationEmail(): void;
 
+    public function isResendOrderConfirmationEmailButtonVisible(): bool;
+
     public function resendShipmentConfirmationEmail(): void;
 
     public function isResendShipmentConfirmationEmailButtonVisible(): bool;

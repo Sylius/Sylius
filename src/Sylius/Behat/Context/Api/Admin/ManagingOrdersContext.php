@@ -1153,6 +1153,24 @@ final class ManagingOrdersContext implements Context
     }
 
     /**
+     * @Then I should not be able to resend the order confirmation email
+     */
+    public function iShouldNotBeAbleToResendTheOrderConfirmationEmail(): void
+    {
+        $this->client->customItemAction(
+            Resources::ORDERS,
+            $this->sharedStorage->get('order')->getTokenValue(),
+            HttpRequest::METHOD_POST,
+            'resend-confirmation-email',
+        );
+
+        Assert::same(
+            $this->responseChecker->getError($this->client->getLastResponse()),
+            'Cannot resend order confirmation email for order with state cancelled.',
+        );
+    }
+
+    /**
      * @Then there should be :count billing address changes in the registry
      */
     public function thereShouldBeCountBillingAddressChangesInTheRegistry(int $count): void
