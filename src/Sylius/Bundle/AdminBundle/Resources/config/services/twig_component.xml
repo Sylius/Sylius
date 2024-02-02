@@ -46,6 +46,7 @@
 
         <service id="Sylius\Bundle\AdminBundle\TwigComponent\Country\CountryType">
             <argument type="service" id="form.factory" />
+            <argument>Sylius\Bundle\AddressingBundle\Form\Type\CountryType</argument>
         </service>
     </services>
 </container>
