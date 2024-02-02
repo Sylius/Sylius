@@ -125,7 +125,7 @@ final class CheckoutCompletionValidatorSpec extends ObjectBehavior
                     'from' => [],
                     'to' => '',
                 ],
-            ]
+            ],
         ]);
         $this->initialize($executionContext);
 

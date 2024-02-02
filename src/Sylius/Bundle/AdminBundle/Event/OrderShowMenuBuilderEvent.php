@@ -26,7 +26,7 @@ class OrderShowMenuBuilderEvent extends MenuBuilderEvent
         FactoryInterface $factory,
         ItemInterface $menu,
         private OrderInterface $order,
-        private WinzouStateMachineInterface|StateMachineInterface $stateMachine,
+        private StateMachineInterface|WinzouStateMachineInterface $stateMachine,
     ) {
         parent::__construct($factory, $menu);
 
@@ -48,7 +48,7 @@ class OrderShowMenuBuilderEvent extends MenuBuilderEvent
         return $this->order;
     }
 
-    public function getStateMachine(): WinzouStateMachineInterface|StateMachineInterface
+    public function getStateMachine(): StateMachineInterface|WinzouStateMachineInterface
     {
         return $this->stateMachine;
     }

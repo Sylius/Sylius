@@ -32,8 +32,7 @@ final class OrderShowMenuBuilder
         private EventDispatcherInterface $eventDispatcher,
         private StateMachineFactoryInterface|StateMachineInterface $stateMachineFactory,
         private CsrfTokenManagerInterface $csrfTokenManager,
-    )
-    {
+    ) {
         if ($this->stateMachineFactory instanceof StateMachineFactoryInterface) {
             trigger_deprecation(
                 'sylius/admin-bundle',
@@ -74,7 +73,7 @@ final class OrderShowMenuBuilder
                     'route' => 'sylius_admin_order_cancel',
                     'routeParameters' => [
                         'id' => $order->getId(),
-                        '_csrf_token' => $this->csrfTokenManager->getToken((string)$order->getId())->getValue(),
+                        '_csrf_token' => $this->csrfTokenManager->getToken((string) $order->getId())->getValue(),
                     ],
                 ])
                 ->setAttribute('type', 'transition')
