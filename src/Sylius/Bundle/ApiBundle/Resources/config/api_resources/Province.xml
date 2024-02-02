@@ -26,17 +26,26 @@
             <itemOperation name="admin_get">
                 <attribute name="method">GET</attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:province:show</attribute>
+                    <attribute name="groups">
+                        <attribute>admin:province:show</attribute>
+                        <attribute>sylius:admin:province:show</attribute>
+                    </attribute>
                 </attribute>
             </itemOperation>
 
             <itemOperation name="admin_put">
                 <attribute name="method">PUT</attribute>
                 <attribute name="denormalization_context">
-                    <attribute name="groups">admin:province:update</attribute>
+                    <attribute name="groups">
+                        <attribute>admin:province:update</attribute>
+                        <attribute>sylius:admin:province:update</attribute>
+                    </attribute>
                 </attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:province:show</attribute>
+                    <attribute name="groups">
+                        <attribute>admin:province:show</attribute>
+                        <attribute>sylius:admin:province:show</attribute>
+                    </attribute>
                 </attribute>
             </itemOperation>
         </itemOperations>

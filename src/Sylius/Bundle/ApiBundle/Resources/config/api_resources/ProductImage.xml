@@ -15,7 +15,10 @@
                     <attribute>sylius.api.product_image_product_variants_filter</attribute>
                 </attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:product_image:index</attribute>
+                    <attribute name="groups">
+                        <attribute>admin:product_image:index</attribute>
+                        <attribute>sylius:admin:product_image:index</attribute>
+                    </attribute>
                 </attribute>
             </collectionOperation>
 
@@ -68,7 +71,10 @@
                     </attribute>
                 </attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:product_image:show</attribute>
+                    <attribute name="groups">
+                        <attribute>admin:product_image:show</attribute>
+                        <attribute>sylius:admin:product_image:show</attribute>
+                    </attribute>
                 </attribute>
             </collectionOperation>
         </collectionOperations>
@@ -78,7 +84,10 @@
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/admin/product-images/{id}</attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:product_image:show</attribute>
+                    <attribute name="groups">
+                        <attribute>admin:product_image:show</attribute>
+                        <attribute>sylius:admin:product_image:show</attribute>
+                    </attribute>
                 </attribute>
             </itemOperation>
 
@@ -86,7 +95,10 @@
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/shop/product-images/{id}</attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">shop:product_image:show</attribute>
+                    <attribute name="groups">
+                        <attribute>shop:product_image:show</attribute>
+                        <attribute>sylius:shop:product_image:show</attribute>
+                    </attribute>
                 </attribute>
                 <attribute name="openapi_context">
                     <attribute name="parameters">
@@ -106,10 +118,16 @@
                 <attribute name="method">PUT</attribute>
                 <attribute name="path">/admin/product-images/{id}</attribute>
                 <attribute name="denormalization_context">
-                    <attribute name="groups">admin:product_image:update</attribute>
+                    <attribute name="groups">
+                        <attribute>admin:product_image:update</attribute>
+                        <attribute>sylius:admin:product_image:update</attribute>
+                    </attribute>
                 </attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:product_image:show</attribute>
+                    <attribute name="groups">
+                        <attribute>admin:product_image:show</attribute>
+                        <attribute>sylius:admin:product_image:show</attribute>
+                    </attribute>
                 </attribute>
             </itemOperation>
 
@@ -122,7 +140,10 @@
         <subresourceOperations>
             <subresourceOperation name="api_products_images_get_subresource">
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:product_image:show</attribute>
+                    <attribute name="groups">
+                        <attribute>admin:product_image:show</attribute>
+                        <attribute>sylius:admin:product_image:show</attribute>
+                    </attribute>
                 </attribute>
             </subresourceOperation>
         </subresourceOperations>

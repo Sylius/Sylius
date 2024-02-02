@@ -34,6 +34,7 @@
                 <attribute name="normalization_context">
                     <attribute name="groups">
                         <attribute>shop:payment_method:index</attribute>
+                        <attribute>sylius:shop:payment_method:index</attribute>
                     </attribute>
                 </attribute>
             </collectionOperation>
@@ -48,6 +49,7 @@
                 <attribute name="normalization_context">
                     <attribute name="groups">
                         <attribute>admin:payment_method:index</attribute>
+                        <attribute>sylius:admin:payment_method:index</attribute>
                     </attribute>
                 </attribute>
             </collectionOperation>
@@ -56,10 +58,16 @@
                 <attribute name="method">POST</attribute>
                 <attribute name="path">/admin/payment-methods</attribute>
                 <attribute name="denormalization_context">
-                    <attribute name="groups">admin:payment_method:create</attribute>
+                    <attribute name="groups">
+                        <attribute>admin:payment_method:create</attribute>
+                        <attribute>sylius:admin:payment_method:create</attribute>
+                    </attribute>
                 </attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:payment_method:show</attribute>
+                    <attribute name="groups">
+                        <attribute>admin:payment_method:show</attribute>
+                        <attribute>sylius:admin:payment_method:show</attribute>
+                    </attribute>
                 </attribute>
             </collectionOperation>
         </collectionOperations>
@@ -69,7 +77,10 @@
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/admin/payment-methods/{code}</attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:payment_method:show</attribute>
+                    <attribute name="groups">
+                        <attribute>admin:payment_method:show</attribute>
+                        <attribute>sylius:admin:payment_method:show</attribute>
+                    </attribute>
                 </attribute>
             </itemOperation>
 
@@ -77,10 +88,16 @@
                 <attribute name="method">PUT</attribute>
                 <attribute name="path">/admin/payment-methods/{code}</attribute>
                 <attribute name="denormalization_context">
-                    <attribute name="groups">admin:payment_method:update</attribute>
+                    <attribute name="groups">
+                        <attribute>admin:payment_method:update</attribute>
+                        <attribute>sylius:admin:payment_method:update</attribute>
+                    </attribute>
                 </attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:payment_method:show</attribute>
+                    <attribute name="groups">
+                        <attribute>admin:payment_method:show</attribute>
+                        <attribute>sylius:admin:payment_method:show</attribute>
+                    </attribute>
                 </attribute>
             </itemOperation>
 
@@ -93,7 +110,10 @@
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/shop/payment-methods/{code}</attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">shop:payment_method:show</attribute>
+                    <attribute name="groups">
+                        <attribute>shop:payment_method:show</attribute>
+                        <attribute>sylius:shop:payment_method:show</attribute>
+                    </attribute>
                 </attribute>
             </itemOperation>
         </itemOperations>
@@ -103,7 +123,10 @@
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/admin/payment-methods/{code}/gateway-config</attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:gateway_config:show</attribute>
+                    <attribute name="groups">
+                        <attribute>admin:gateway_config:show</attribute>
+                        <attribute>sylius:admin:gateway_config:show</attribute>
+                    </attribute>
                 </attribute>
             </subresourceOperation>
         </subresourceOperations>

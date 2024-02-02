@@ -27,7 +27,9 @@
                 <attribute name="normalization_context">
                     <attribute name="groups">
                         <attribute>admin:product_attribute:show</attribute>
+                        <attribute>sylius:admin:product_attribute:show</attribute>
                         <attribute>admin:product_attribute_translation:show</attribute>
+                        <attribute>sylius:admin:product_attribute_translation:show</attribute>
                     </attribute>
                 </attribute>
             </itemOperation>

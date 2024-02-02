@@ -36,7 +36,10 @@
                     <attribute>sylius.api.order_filter.priority</attribute>
                 </attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:catalog_promotion:index</attribute>
+                    <attribute name="groups">
+                        <attribute>admin:catalog_promotion:index</attribute>
+                        <attribute>sylius:admin:catalog_promotion:index</attribute>
+                    </attribute>
                 </attribute>
             </collectionOperation>
 
@@ -44,10 +47,16 @@
                 <attribute name="path">/admin/catalog-promotions</attribute>
                 <attribute name="method">POST</attribute>
                 <attribute name="denormalization_context">
-                    <attribute name="groups">admin:catalog_promotion:create</attribute>
+                    <attribute name="groups">
+                        <attribute>admin:catalog_promotion:create</attribute>
+                        <attribute>sylius:admin:catalog_promotion:create</attribute>
+                    </attribute>
                 </attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:catalog_promotion:show</attribute>
+                    <attribute name="groups">
+                        <attribute>admin:catalog_promotion:show</attribute>
+                        <attribute>sylius:admin:catalog_promotion:show</attribute>
+                    </attribute>
                 </attribute>
                 <attribute name="openapi_context">
                     <attribute name="description">
@@ -84,7 +93,10 @@ Example configuration for `percentage_discount` action type:
                 <attribute name="path">/admin/catalog-promotions/{code}</attribute>
                 <attribute name="method">GET</attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:catalog_promotion:show</attribute>
+                    <attribute name="groups">
+                        <attribute>admin:catalog_promotion:show</attribute>
+                        <attribute>sylius:admin:catalog_promotion:show</attribute>
+                    </attribute>
                 </attribute>
             </itemOperation>
 
@@ -92,7 +104,10 @@ Example configuration for `percentage_discount` action type:
                 <attribute name="path">/shop/catalog-promotions/{code}</attribute>
                 <attribute name="method">GET</attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">shop:catalog_promotion:show</attribute>
+                    <attribute name="groups">
+                        <attribute>shop:catalog_promotion:show</attribute>
+                        <attribute>sylius:shop:catalog_promotion:show</attribute>
+                    </attribute>
                 </attribute>
             </itemOperation>
 
@@ -100,10 +115,16 @@ Example configuration for `percentage_discount` action type:
                 <attribute name="path">/admin/catalog-promotions/{code}</attribute>
                 <attribute name="method">PUT</attribute>
                 <attribute name="denormalization_context">
-                    <attribute name="groups">admin:catalog_promotion:update</attribute>
+                    <attribute name="groups">
+                        <attribute>admin:catalog_promotion:update</attribute>
+                        <attribute>sylius:admin:catalog_promotion:update</attribute>
+                    </attribute>
                 </attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:catalog_promotion:show</attribute>
+                    <attribute name="groups">
+                        <attribute>admin:catalog_promotion:show</attribute>
+                        <attribute>sylius:admin:catalog_promotion:show</attribute>
+                    </attribute>
                 </attribute>
                 <attribute name="openapi_context">
                     <attribute name="description">

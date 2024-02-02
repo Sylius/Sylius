@@ -23,7 +23,10 @@
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/admin/order-items/{id}</attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:order_item:show</attribute>
+                    <attribute name="groups">
+                        <attribute>admin:order_item:show</attribute>
+                        <attribute>sylius:admin:order_item:show</attribute>
+                    </attribute>
                 </attribute>
             </itemOperation>
 
@@ -31,8 +34,14 @@
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/shop/order-items/{id}</attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">shop:order_item:show</attribute>
-                    <attribute name="groups">shop:cart:show</attribute>
+                    <attribute name="groups">
+                        <attribute>shop:order_item:show</attribute>
+                        <attribute>sylius:shop:order_item:show</attribute>
+                    </attribute>
+                    <attribute name="groups">
+                        <attribute>shop:cart:show</attribute>
+                        <attribute>sylius:shop:cart:show</attribute>
+                    </attribute>
                 </attribute>
             </itemOperation>
         </itemOperations>
@@ -42,12 +51,18 @@
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/admin/order-items/{id}/adjustments</attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:order_item:show</attribute>
+                    <attribute name="groups">
+                        <attribute>admin:order_item:show</attribute>
+                        <attribute>sylius:admin:order_item:show</attribute>
+                    </attribute>
                 </attribute>
             </subresourceOperation>
             <subresourceOperation name="api_orders_items_get_subresource">
                 <attribute name="normalization_context">
-                    <attribute name="groups">shop:cart:show</attribute>
+                    <attribute name="groups">
+                        <attribute>shop:cart:show</attribute>
+                        <attribute>sylius:shop:cart:show</attribute>
+                    </attribute>
                 </attribute>
             </subresourceOperation>
         </subresourceOperations>
