@@ -18,20 +18,31 @@
     <class name="Sylius\Component\Locale\Model\Locale">
         <attribute name="id">
             <group>admin:locale:index</group>
+            <group>sylius:admin:locale:index</group>
             <group>admin:locale:show</group>
+            <group>sylius:admin:locale:show</group>
         </attribute>
         <attribute name="code">
             <group>admin:locale:index</group>
+            <group>sylius:admin:locale:index</group>
             <group>admin:locale:show</group>
+            <group>sylius:admin:locale:show</group>
             <group>admin:locale:create</group>
+            <group>sylius:admin:locale:create</group>
             <group>shop:locale:index</group>
+            <group>sylius:shop:locale:index</group>
             <group>shop:locale:show</group>
+            <group>sylius:shop:locale:show</group>
         </attribute>
         <attribute name="name">
             <group>admin:locale:index</group>
+            <group>sylius:admin:locale:index</group>
             <group>admin:locale:show</group>
+            <group>sylius:admin:locale:show</group>
             <group>shop:locale:index</group>
+            <group>sylius:shop:locale:index</group>
             <group>shop:locale:show</group>
+            <group>sylius:shop:locale:show</group>
         </attribute>
     </class>
 </serializer>

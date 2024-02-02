@@ -18,19 +18,29 @@
     <class name="Sylius\Component\Shipping\Model\ShippingMethodRule">
         <attribute name="id">
             <group>admin:shipping_method:index</group>
+            <group>sylius:admin:shipping_method:index</group>
             <group>admin:shipping_method:show</group>
+            <group>sylius:admin:shipping_method:show</group>
         </attribute>
         <attribute name="type">
             <group>admin:shipping_method:index</group>
+            <group>sylius:admin:shipping_method:index</group>
             <group>admin:shipping_method:show</group>
+            <group>sylius:admin:shipping_method:show</group>
             <group>admin:shipping_method:create</group>
+            <group>sylius:admin:shipping_method:create</group>
             <group>admin:shipping_method:update</group>
+            <group>sylius:admin:shipping_method:update</group>
         </attribute>
         <attribute name="configuration">
             <group>admin:shipping_method:index</group>
+            <group>sylius:admin:shipping_method:index</group>
             <group>admin:shipping_method:show</group>
+            <group>sylius:admin:shipping_method:show</group>
             <group>admin:shipping_method:create</group>
+            <group>sylius:admin:shipping_method:create</group>
             <group>admin:shipping_method:update</group>
+            <group>sylius:admin:shipping_method:update</group>
         </attribute>
     </class>
 </serializer>

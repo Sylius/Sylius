@@ -18,28 +18,43 @@
     <class name="Sylius\Bundle\ApiBundle\Command\Catalog\AddProductReview">
         <attribute name="title">
             <group>shop:product_review:create</group>
+            <group>sylius:shop:product_review:create</group>
             <group>shop:product_review:index</group>
+            <group>sylius:shop:product_review:index</group>
             <group>shop:product_review:show</group>
+            <group>sylius:shop:product_review:show</group>
         </attribute>
         <attribute name="rating">
             <group>shop:product_review:create</group>
+            <group>sylius:shop:product_review:create</group>
             <group>shop:product_review:index</group>
+            <group>sylius:shop:product_review:index</group>
             <group>shop:product_review:show</group>
+            <group>sylius:shop:product_review:show</group>
         </attribute>
         <attribute name="comment">
             <group>shop:product_review:create</group>
+            <group>sylius:shop:product_review:create</group>
             <group>shop:product_review:index</group>
+            <group>sylius:shop:product_review:index</group>
             <group>shop:product_review:show</group>
+            <group>sylius:shop:product_review:show</group>
         </attribute>
         <attribute name="productCode" serialized-name="product">
             <group>shop:product_review:create</group>
+            <group>sylius:shop:product_review:create</group>
             <group>shop:product_review:index</group>
+            <group>sylius:shop:product_review:index</group>
             <group>shop:product_review:show</group>
+            <group>sylius:shop:product_review:show</group>
         </attribute>
         <attribute name="email">
             <group>shop:product_review:create</group>
+            <group>sylius:shop:product_review:create</group>
             <group>shop:product_review:index</group>
+            <group>sylius:shop:product_review:index</group>
             <group>shop:product_review:show</group>
+            <group>sylius:shop:product_review:show</group>
         </attribute>
     </class>
 </serializer>

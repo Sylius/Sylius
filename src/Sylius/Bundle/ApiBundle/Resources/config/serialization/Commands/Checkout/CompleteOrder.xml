@@ -18,6 +18,7 @@
     <class name="Sylius\Bundle\ApiBundle\Command\Checkout\CompleteOrder">
         <attribute name="notes">
             <group>shop:cart:complete</group>
+            <group>sylius:shop:cart:complete</group>
         </attribute>
     </class>
 </serializer>

@@ -18,25 +18,36 @@
     <class name="Sylius\Component\Core\Model\ShopUser">
         <attribute name="plainPassword">
             <group>admin:customer:create</group>
+            <group>sylius:admin:customer:create</group>
             <group>admin:customer:update</group>
+            <group>sylius:admin:customer:update</group>
         </attribute>
 
         <attribute name="enabled">
             <group>admin:customer:create</group>
+            <group>sylius:admin:customer:create</group>
             <group>admin:customer:index</group>
+            <group>sylius:admin:customer:index</group>
             <group>admin:customer:show</group>
+            <group>sylius:admin:customer:show</group>
             <group>admin:customer:update</group>
+            <group>sylius:admin:customer:update</group>
         </attribute>
 
         <attribute name="verified">
             <group>admin:customer:index</group>
+            <group>sylius:admin:customer:index</group>
             <group>admin:customer:show</group>
+            <group>sylius:admin:customer:show</group>
             <group>shop:customer:show</group>
+            <group>sylius:shop:customer:show</group>
         </attribute>
 
         <attribute name="verifiedAt" serialized-name="verified">
             <group>admin:customer:create</group>
+            <group>sylius:admin:customer:create</group>
             <group>admin:customer:update</group>
+            <group>sylius:admin:customer:update</group>
         </attribute>
     </class>
 </serializer>

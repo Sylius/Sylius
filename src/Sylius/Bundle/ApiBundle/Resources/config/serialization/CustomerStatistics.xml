@@ -18,9 +18,11 @@
     <class name="Sylius\Component\Core\Customer\Statistics\CustomerStatistics">
         <attribute name="allOrdersCount">
             <group>admin:customer:statistics:show</group>
+            <group>sylius:admin:customer:statistics:show</group>
         </attribute>
         <attribute name="perChannelsStatistics">
             <group>admin:customer:statistics:show</group>
+            <group>sylius:admin:customer:statistics:show</group>
         </attribute>
     </class>
 </serializer>

@@ -18,29 +18,44 @@
     <class name="Sylius\Component\Core\Model\TaxonImage">
         <attribute name="id">
             <group>admin:taxon_image:index</group>
+            <group>sylius:admin:taxon_image:index</group>
             <group>admin:taxon_image:show</group>
+            <group>sylius:admin:taxon_image:show</group>
             <group>admin:taxon:index</group>
+            <group>sylius:admin:taxon:index</group>
             <group>admin:taxon:show</group>
+            <group>sylius:admin:taxon:show</group>
         </attribute>
 
         <attribute name="path">
             <group>admin:taxon_image:index</group>
+            <group>sylius:admin:taxon_image:index</group>
             <group>admin:taxon_image:show</group>
+            <group>sylius:admin:taxon_image:show</group>
             <group>admin:taxon:index</group>
+            <group>sylius:admin:taxon:index</group>
             <group>admin:taxon:show</group>
+            <group>sylius:admin:taxon:show</group>
         </attribute>
 
         <attribute name="owner">
             <group>admin:taxon_image:index</group>
+            <group>sylius:admin:taxon_image:index</group>
             <group>admin:taxon_image:show</group>
+            <group>sylius:admin:taxon_image:show</group>
         </attribute>
 
         <attribute name="type">
             <group>admin:taxon_image:index</group>
+            <group>sylius:admin:taxon_image:index</group>
             <group>admin:taxon_image:show</group>
+            <group>sylius:admin:taxon_image:show</group>
             <group>admin:taxon_image:update</group>
+            <group>sylius:admin:taxon_image:update</group>
             <group>admin:taxon:index</group>
+            <group>sylius:admin:taxon:index</group>
             <group>admin:taxon:show</group>
+            <group>sylius:admin:taxon:show</group>
         </attribute>
     </class>
 </serializer>
