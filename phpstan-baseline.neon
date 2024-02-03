@@ -1356,6 +1356,21 @@ parameters:
 			path: src/Sylius/Bundle/ApiBundle/DataTransformer/SubresourceIdAwareCommandDataTransformer.php
 
 		-
+			message: "#^Method Sylius\\\\Bundle\\\\ApiBundle\\\\DependencyInjection\\\\Compiler\\\\CommandDataTransformerPass\\:\\:process\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: src/Sylius/Bundle/ApiBundle/DependencyInjection/Compiler/CommandDataTransformerPass.php
+
+		-
+			message: "#^Method Sylius\\\\Bundle\\\\ApiBundle\\\\DependencyInjection\\\\Compiler\\\\FlattenExceptionNormalizerDecoratorCompilerPass\\:\\:process\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: src/Sylius/Bundle/ApiBundle/DependencyInjection/Compiler/FlattenExceptionNormalizerDecoratorCompilerPass.php
+
+		-
+			message: "#^Method Sylius\\\\Bundle\\\\ApiBundle\\\\DependencyInjection\\\\Compiler\\\\LegacyErrorHandlingCompilerPass\\:\\:process\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: src/Sylius/Bundle/ApiBundle/DependencyInjection/Compiler/LegacyErrorHandlingCompilerPass.php
+
+		-
 			message: "#^Method Sylius\\\\Bundle\\\\ApiBundle\\\\Doctrine\\\\QueryCollectionExtension\\\\AcceptedProductReviewsExtension\\:\\:applyToCollection\\(\\) has parameter \\$context with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Sylius/Bundle/ApiBundle/Doctrine/QueryCollectionExtension/AcceptedProductReviewsExtension.php
@@ -2281,66 +2296,6 @@ parameters:
 			path: src/Sylius/Bundle/CoreBundle/Collector/SyliusCollector.php
 
 		-
-			message: "#^If condition is always false\\.$#"
-			count: 1
-			path: src/Sylius/Bundle/CoreBundle/Command/AbstractInstallCommand.php
-
-		-
-			message: "#^If condition is always false\\.$#"
-			count: 1
-			path: src/Sylius/Bundle/CoreBundle/Command/CancelUnpaidOrdersCommand.php
-
-		-
-			message: "#^If condition is always false\\.$#"
-			count: 1
-			path: src/Sylius/Bundle/CoreBundle/Command/CheckRequirementsCommand.php
-
-		-
-			message: "#^If condition is always false\\.$#"
-			count: 1
-			path: src/Sylius/Bundle/CoreBundle/Command/InformAboutGUSCommand.php
-
-		-
-			message: "#^If condition is always false\\.$#"
-			count: 1
-			path: src/Sylius/Bundle/CoreBundle/Command/InstallAssetsCommand.php
-
-		-
-			message: "#^If condition is always false\\.$#"
-			count: 1
-			path: src/Sylius/Bundle/CoreBundle/Command/InstallCommand.php
-
-		-
-			message: "#^If condition is always false\\.$#"
-			count: 1
-			path: src/Sylius/Bundle/CoreBundle/Command/InstallDatabaseCommand.php
-
-		-
-			message: "#^If condition is always false\\.$#"
-			count: 1
-			path: src/Sylius/Bundle/CoreBundle/Command/InstallSampleDataCommand.php
-
-		-
-			message: "#^If condition is always false\\.$#"
-			count: 1
-			path: src/Sylius/Bundle/CoreBundle/Command/JwtConfigurationCommand.php
-
-		-
-			message: "#^If condition is always false\\.$#"
-			count: 1
-			path: src/Sylius/Bundle/CoreBundle/Command/Model/PluginInfo.php
-
-		-
-			message: "#^If condition is always false\\.$#"
-			count: 1
-			path: src/Sylius/Bundle/CoreBundle/Command/SetupCommand.php
-
-		-
-			message: "#^If condition is always false\\.$#"
-			count: 1
-			path: src/Sylius/Bundle/CoreBundle/Command/ShowAvailablePluginsCommand.php
-
-		-
 			message: "#^Method Sylius\\\\Bundle\\\\CoreBundle\\\\Context\\\\CustomerAndChannelBasedCartContext\\:\\:__construct\\(\\) has parameter \\$orderRepository with generic interface Sylius\\\\Component\\\\Core\\\\Repository\\\\OrderRepositoryInterface but does not specify its types\\: T$#"
 			count: 1
 			path: src/Sylius/Bundle/CoreBundle/Context/CustomerAndChannelBasedCartContext.php
@@ -2357,6 +2312,11 @@ parameters:
 
 		-
 			message: "#^Method Sylius\\\\Bundle\\\\CoreBundle\\\\DependencyInjection\\\\SyliusCoreExtension\\:\\:prependSyliusOrderBundle\\(\\) has parameter \\$config with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Sylius/Bundle/CoreBundle/DependencyInjection/SyliusCoreExtension.php
+
+		-
+			message: "#^Method Sylius\\\\Bundle\\\\CoreBundle\\\\DependencyInjection\\\\SyliusCoreExtension\\:\\:switchOrderProcessorsPriorities\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/Sylius/Bundle/CoreBundle/DependencyInjection/SyliusCoreExtension.php
 
@@ -3666,6 +3626,11 @@ parameters:
 			path: src/Sylius/Bundle/CoreBundle/Form/Type/Promotion/Rule/TotalOfItemsFromTaxonConfigurationType.php
 
 		-
+			message: "#^Method Sylius\\\\Bundle\\\\CoreBundle\\\\Form\\\\Type\\\\ShopBillingDataType\\:\\:configureOptions\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: src/Sylius/Bundle/CoreBundle/Form/Type/ShopBillingDataType.php
+
+		-
 			message: "#^Method Sylius\\\\Bundle\\\\CoreBundle\\\\Form\\\\Type\\\\TaxCalculationStrategyChoiceType\\:\\:__construct\\(\\) has parameter \\$strategies with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Sylius/Bundle/CoreBundle/Form/Type/TaxCalculationStrategyChoiceType.php
@@ -3794,6 +3759,21 @@ parameters:
 			message: "#^Method Sylius\\\\Bundle\\\\CoreBundle\\\\MessageHandler\\\\Admin\\\\Account\\\\SendResetPasswordEmailHandler\\:\\:__construct\\(\\) has parameter \\$userRepository with generic interface Sylius\\\\Component\\\\User\\\\Repository\\\\UserRepositoryInterface but does not specify its types\\: T$#"
 			count: 1
 			path: src/Sylius/Bundle/CoreBundle/MessageHandler/Admin/Account/SendResetPasswordEmailHandler.php
+
+		-
+			message: "#^Method Sylius\\\\Bundle\\\\CoreBundle\\\\Migrations\\\\Version20161214153137\\:\\:setContainer\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: src/Sylius/Bundle/CoreBundle/Migrations/Version20161214153137.php
+
+		-
+			message: "#^Method Sylius\\\\Bundle\\\\CoreBundle\\\\Migrations\\\\Version20161219160441\\:\\:setContainer\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: src/Sylius/Bundle/CoreBundle/Migrations/Version20161219160441.php
+
+		-
+			message: "#^Method Sylius\\\\Bundle\\\\CoreBundle\\\\Migrations\\\\Version20170109143010\\:\\:setContainer\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: src/Sylius/Bundle/CoreBundle/Migrations/Version20170109143010.php
 
 		-
 			message: "#^Method Sylius\\\\Bundle\\\\CoreBundle\\\\Migrations\\\\Version20171003103916\\:\\:getProductAttributes\\(\\) return type has no value type specified in iterable type array\\.$#"
@@ -4124,11 +4104,6 @@ parameters:
 			message: "#^Method Sylius\\\\Bundle\\\\LocaleBundle\\\\SyliusLocaleBundle\\:\\:getSupportedDrivers\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Sylius/Bundle/LocaleBundle/SyliusLocaleBundle.php
-
-		-
-			message: "#^If condition is always false\\.$#"
-			count: 1
-			path: src/Sylius/Bundle/OrderBundle/Command/RemoveExpiredCartsCommand.php
 
 		-
 			message: "#^Method Sylius\\\\Bundle\\\\OrderBundle\\\\Context\\\\SessionBasedCartContext\\:\\:__construct\\(\\) has parameter \\$orderRepository with generic interface Sylius\\\\Component\\\\Order\\\\Repository\\\\OrderRepositoryInterface but does not specify its types\\: T$#"
@@ -4486,11 +4461,6 @@ parameters:
 			path: src/Sylius/Bundle/ProductBundle/Validator/UniqueSimpleProductCodeValidator.php
 
 		-
-			message: "#^If condition is always false\\.$#"
-			count: 1
-			path: src/Sylius/Bundle/PromotionBundle/Command/GenerateCouponsCommand.php
-
-		-
 			message: "#^Method Sylius\\\\Bundle\\\\PromotionBundle\\\\DiscountApplicationCriteria\\\\DiscountApplicationCriteriaInterface\\:\\:isApplicable\\(\\) has parameter \\$context with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Sylius/Bundle/PromotionBundle/DiscountApplicationCriteria/DiscountApplicationCriteriaInterface.php
@@ -4616,12 +4586,12 @@ parameters:
 			path: src/Sylius/Bundle/PromotionBundle/Validator/CatalogPromotionActionValidator.php
 
 		-
-			message: "#^Property Sylius\\\\Bundle\\\\PromotionBundle\\\\Validator\\\\CatalogPromotionActionValidator\\:\\:\\$actionTypes is never read, only written\\.$#"
+			message: "#^Property Sylius\\\\Bundle\\\\PromotionBundle\\\\Validator\\\\CatalogPromotionActionValidator\\:\\:\\$actionValidators type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Sylius/Bundle/PromotionBundle/Validator/CatalogPromotionActionValidator.php
 
 		-
-			message: "#^Property Sylius\\\\Bundle\\\\PromotionBundle\\\\Validator\\\\CatalogPromotionActionValidator\\:\\:\\$actionValidators type has no value type specified in iterable type array\\.$#"
+			message: "#^Property Sylius\\\\Bundle\\\\PromotionBundle\\\\Validator\\\\CatalogPromotionActionValidator\\:\\:\\$actionTypes is never read, only written.$#"
 			count: 1
 			path: src/Sylius/Bundle/PromotionBundle/Validator/CatalogPromotionActionValidator.php
 
@@ -4636,12 +4606,12 @@ parameters:
 			path: src/Sylius/Bundle/PromotionBundle/Validator/CatalogPromotionScopeValidator.php
 
 		-
-			message: "#^Method Sylius\\\\Bundle\\\\PromotionBundle\\\\Validator\\\\CatalogPromotionScopeValidator\\:\\:__construct\\(\\) has parameter \\$scopeValidators with no value type specified in iterable type iterable\\.$#"
+			message: "#^Property Sylius\\\\Bundle\\\\PromotionBundle\\\\Validator\\\\CatalogPromotionScopeValidator\\:\\:\\$scopeTypes is never read, only written.$#"
 			count: 1
 			path: src/Sylius/Bundle/PromotionBundle/Validator/CatalogPromotionScopeValidator.php
 
 		-
-			message: "#^Property Sylius\\\\Bundle\\\\PromotionBundle\\\\Validator\\\\CatalogPromotionScopeValidator\\:\\:\\$scopeTypes is never read, only written\\.$#"
+			message: "#^Method Sylius\\\\Bundle\\\\PromotionBundle\\\\Validator\\\\CatalogPromotionScopeValidator\\:\\:__construct\\(\\) has parameter \\$scopeValidators with no value type specified in iterable type iterable\\.$#"
 			count: 1
 			path: src/Sylius/Bundle/PromotionBundle/Validator/CatalogPromotionScopeValidator.php
 
@@ -4821,6 +4791,11 @@ parameters:
 			path: src/Sylius/Bundle/ShopBundle/Router/LocaleStrippingRouter.php
 
 		-
+			message: "#^Method Sylius\\\\Bundle\\\\ShopBundle\\\\SyliusShopBundle\\:\\:build\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: src/Sylius/Bundle/ShopBundle/SyliusShopBundle.php
+
+		-
 			message: "#^Method Sylius\\\\Bundle\\\\TaxationBundle\\\\Form\\\\Type\\\\TaxCalculatorChoiceType\\:\\:__construct\\(\\) has parameter \\$calculators with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Sylius/Bundle/TaxationBundle/Form/Type/TaxCalculatorChoiceType.php
@@ -4859,11 +4834,6 @@ parameters:
 			message: "#^Method Sylius\\\\Bundle\\\\TaxonomyBundle\\\\SyliusTaxonomyBundle\\:\\:getSupportedDrivers\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Sylius/Bundle/TaxonomyBundle/SyliusTaxonomyBundle.php
-
-		-
-			message: "#^If condition is always false\\.$#"
-			count: 1
-			path: src/Sylius/Bundle/UiBundle/Command/DebugTemplateEventCommand.php
 
 		-
 			message: "#^Method Sylius\\\\Bundle\\\\UiBundle\\\\ContextProvider\\\\ContextProviderInterface\\:\\:provide\\(\\) has parameter \\$templateContext with no value type specified in iterable type array\\.$#"
@@ -5061,21 +5031,6 @@ parameters:
 			path: src/Sylius/Bundle/UiBundle/Twig/TemplateEventExtension.php
 
 		-
-			message: "#^If condition is always false\\.$#"
-			count: 1
-			path: src/Sylius/Bundle/UserBundle/Command/AbstractRoleCommand.php
-
-		-
-			message: "#^If condition is always false\\.$#"
-			count: 1
-			path: src/Sylius/Bundle/UserBundle/Command/DemoteUserCommand.php
-
-		-
-			message: "#^If condition is always false\\.$#"
-			count: 1
-			path: src/Sylius/Bundle/UserBundle/Command/PromoteUserCommand.php
-
-		-
 			message: "#^Method Sylius\\\\Bundle\\\\UserBundle\\\\Console\\\\Command\\\\AbstractRoleCommand\\:\\:getUserRepository\\(\\) return type with generic interface Sylius\\\\Component\\\\User\\\\Repository\\\\UserRepositoryInterface does not specify its types\\: T$#"
 			count: 1
 			path: src/Sylius/Bundle/UserBundle/Console/Command/AbstractRoleCommand.php
@@ -5084,6 +5039,16 @@ parameters:
 			message: "#^Unable to resolve the template type T in call to method Doctrine\\\\Persistence\\\\ObjectManager\\:\\:getRepository\\(\\)$#"
 			count: 1
 			path: src/Sylius/Bundle/UserBundle/Console/Command/AbstractRoleCommand.php
+
+		-
+			message: "#^Method Sylius\\\\Bundle\\\\UserBundle\\\\Command\\\\DemoteUserCommand\\:\\:executeRoleCommand\\(\\) has parameter \\$securityRoles with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Sylius/Bundle/UserBundle/Command/DemoteUserCommand.php
+
+		-
+			message: "#^Method Sylius\\\\Bundle\\\\UserBundle\\\\Command\\\\PromoteUserCommand\\:\\:executeRoleCommand\\(\\) has parameter \\$securityRoles with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Sylius/Bundle/UserBundle/Command/PromoteUserCommand.php
 
 		-
 			message: "#^Method Sylius\\\\Bundle\\\\UserBundle\\\\Controller\\\\UserController\\:\\:getSyliusAttribute\\(\\) has no return type specified\\.$#"
@@ -7009,3 +6974,93 @@ parameters:
 			message: "#^Method Sylius\\\\Component\\\\User\\\\Security\\\\Checker\\\\TokenUniquenessChecker\\:\\:__construct\\(\\) has parameter \\$repository with generic interface Sylius\\\\Component\\\\Resource\\\\Repository\\\\RepositoryInterface but does not specify its types\\: T$#"
 			count: 1
 			path: src/Sylius/Component/User/Security/Checker/TokenUniquenessChecker.php
+
+		-
+			message: "#^If condition is always false.$#"
+			count: 1
+			path: src/Sylius/Bundle/CoreBundle/Command/AbstractInstallCommand.php
+
+		-
+			message: "#^If condition is always false.$#"
+			count: 1
+			path: src/Sylius/Bundle/CoreBundle/Command/CancelUnpaidOrdersCommand.php
+
+		-
+			message: "#^If condition is always false.$#"
+			count: 1
+			path: src/Sylius/Bundle/CoreBundle/Command/CheckRequirementsCommand.php
+
+		-
+			message: "#^If condition is always false.$#"
+			count: 1
+			path: src/Sylius/Bundle/CoreBundle/Command/InformAboutGUSCommand.php
+
+		-
+			message: "#^If condition is always false.$#"
+			count: 1
+			path: src/Sylius/Bundle/CoreBundle/Command/InstallAssetsCommand.php
+
+		-
+			message: "#^If condition is always false.$#"
+			count: 1
+			path: src/Sylius/Bundle/CoreBundle/Command/InstallCommand.php
+
+		-
+			message: "#^If condition is always false.$#"
+			count: 1
+			path: src/Sylius/Bundle/CoreBundle/Command/InstallDatabaseCommand.php
+
+		-
+			message: "#^If condition is always false.$#"
+			count: 1
+			path: src/Sylius/Bundle/CoreBundle/Command/InstallSampleDataCommand.php
+
+		-
+			message: "#^If condition is always false.$#"
+			count: 1
+			path: src/Sylius/Bundle/CoreBundle/Command/JwtConfigurationCommand.php
+
+		-
+			message: "#^If condition is always false.$#"
+			count: 1
+			path: src/Sylius/Bundle/CoreBundle/Command/SetupCommand.php
+
+		-
+			message: "#^If condition is always false.$#"
+			count: 1
+			path: src/Sylius/Bundle/CoreBundle/Command/ShowAvailablePluginsCommand.php
+
+		-
+			message: "#^If condition is always false.$#"
+			count: 1
+			path: src/Sylius/Bundle/CoreBundle/Command/Model/PluginInfo.php
+
+		-
+			message: "#^If condition is always false.$#"
+			count: 1
+			path: src/Sylius/Bundle/OrderBundle/Command/RemoveExpiredCartsCommand.php
+
+		-
+			message: "#^If condition is always false.$#"
+			count: 1
+			path: src/Sylius/Bundle/PromotionBundle/Command/GenerateCouponsCommand.php
+
+		-
+			message: "#^If condition is always false.$#"
+			count: 1
+			path: src/Sylius/Bundle/UiBundle/Command/DebugTemplateEventCommand.php
+
+		-
+			message: "#^If condition is always false.$#"
+			count: 1
+			path: src/Sylius/Bundle/UserBundle/Command/AbstractRoleCommand.php
+
+		-
+			message: "#^If condition is always false.$#"
+			count: 1
+			path: src/Sylius/Bundle/UserBundle/Command/DemoteUserCommand.php
+
+		-
+			message: "#^If condition is always false.$#"
+			count: 1
+			path: src/Sylius/Bundle/UserBundle/Command/PromoteUserCommand.php
