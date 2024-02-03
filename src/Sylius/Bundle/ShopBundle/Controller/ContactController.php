@@ -38,7 +38,7 @@ final class ContactController
         private ChannelContextInterface $channelContext,
         private CustomerContextInterface $customerContext,
         private LocaleContextInterface $localeContext,
-        private DeprecatedContactEmailManagerInterface|ContactEmailManagerInterface $contactEmailManager,
+        private ContactEmailManagerInterface|DeprecatedContactEmailManagerInterface $contactEmailManager,
     ) {
         if ($this->contactEmailManager instanceof DeprecatedContactEmailManagerInterface) {
             trigger_deprecation(

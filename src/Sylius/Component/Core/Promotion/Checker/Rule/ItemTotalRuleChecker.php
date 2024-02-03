@@ -22,12 +22,12 @@ final class ItemTotalRuleChecker implements RuleCheckerInterface
 {
     public function __construct(private ?RuleCheckerInterface $itemTotalRuleChecker = null)
     {
-        if ($this->itemTotalRuleChecker instanceof ItemTotalRuleChecker) {
+        if ($this->itemTotalRuleChecker instanceof self) {
             trigger_deprecation(
                 'sylius/core-bundle',
                 '1.13',
                 'Passing an instance of %s as constructor argument for %s is deprecated and will be removed in 2.0.',
-                ItemTotalRuleChecker::class,
+                self::class,
                 self::class,
             );
         }
