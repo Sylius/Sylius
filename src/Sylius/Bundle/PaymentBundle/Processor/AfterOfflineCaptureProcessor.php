@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Bundle\PaymentBundle\Processor;
 
 use SM\Factory\FactoryInterface as StateMachineFactoryInterface;
+use Sylius\Abstraction\StateMachine\StateMachineInterface;
 use Sylius\Component\Payment\Model\PaymentRequestInterface;
 use Sylius\Component\Payment\PaymentTransitions;
 use Webmozart\Assert\Assert;
@@ -21,8 +22,19 @@ use Webmozart\Assert\Assert;
 final class AfterOfflineCaptureProcessor implements AfterOfflineCaptureProcessorInterface
 {
     public function __construct(
-        private StateMachineFactoryInterface $stateMachineFactory,
+        private StateMachineFactoryInterface|StateMachineInterface $stateMachineFactory,
     ) {
+        if ($this->stateMachineFactory instanceof StateMachineFactoryInterface) {
+            trigger_deprecation(
+                'sylius/payment-bundle',
+                '1.13',
+                sprintf(
+                    'Passing an instance of "%s" as the first argument is deprecated. It will accept only instances of "%s" in Sylius 2.0.',
+                    StateMachineFactoryInterface::class,
+                    StateMachineInterface::class,
+                ),
+            );
+        }
     }
 
     public function process(PaymentRequestInterface $paymentRequest): void
