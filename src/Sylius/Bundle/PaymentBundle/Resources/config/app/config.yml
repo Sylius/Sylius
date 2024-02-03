@@ -15,3 +15,23 @@ jms_serializer:
             sylius-payment:
                 namespace_prefix: "Sylius\\Component\\Payment"
                 path: "@SyliusPaymentBundle/Resources/config/serializer"
+
+sylius_payum:
+    gateway_config:
+        validation_groups:
+            paypal_express_checkout:
+                - 'sylius'
+                - 'sylius_paypal_express_checkout'
+            stripe_checkout:
+                - 'sylius'
+                - 'sylius_stripe_checkout'
+
+framework:
+    messenger:
+        buses:
+            sylius.event_bus:
+                default_middleware: allow_no_handlers
+            sylius.command_bus:
+                middleware:
+                    - 'validation'
+                    - 'doctrine_transaction'
