@@ -30,6 +30,7 @@
         "sylius/payment": "^2.0",
         "sylius/resource-bundle": "^1.10",
         "symfony/framework-bundle": "^6.4.1",
+        "symfony/messenger": "^6.4.0",
         "ramsey/uuid-doctrine": "^2.0"
     },
     "conflict": {
