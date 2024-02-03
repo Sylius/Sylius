@@ -35,11 +35,11 @@ final class SyliusPayumExtension extends AbstractResourceExtension implements Pr
         $loader->load('services.xml');
 
         if (class_exists(PaypalExpressCheckoutGatewayFactory::class)) {
-            $loader->load('paypal.xml');
+            $loader->load('integrations/payum/paypal.xml');
         }
 
         if (class_exists(StripeCheckoutGatewayFactory::class)) {
-            $loader->load('stripe.xml');
+            $loader->load('integrations/payum/stripe.xml');
         }
 
         $container->setParameter('payum.template.layout', $config['template']['layout']);
@@ -89,19 +89,19 @@ final class SyliusPayumExtension extends AbstractResourceExtension implements Pr
 
         $container->prependExtensionConfig('sylius_payment', ['gateways' => $gateways]);
 
-        $loader = new XmlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
-        $loader->load('integrations/payment_request.xml');
+        $loader = new XmlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config/integrations/sylius_payment'));
+        $loader->load('services.xml');
 
         if (class_exists(OfflineGatewayFactory::class)) {
-            $loader->load('integrations/offline.xml');
+            $loader->load('offline.xml');
         }
 
         if (class_exists(PaypalExpressCheckoutGatewayFactory::class)) {
-            $loader->load('integrations/paypal_express_checkout.xml');
+            $loader->load('paypal_express_checkout.xml');
         }
 
         if (class_exists(StripeCheckoutGatewayFactory::class)) {
-            $loader->load('integrations/stripe.xml');
+            $loader->load('stripe.xml');
         }
     }
 }
