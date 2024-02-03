@@ -61,7 +61,7 @@ final class ResendShipmentConfirmationEmailWithValidShipmentStateValidatorSpec e
 
         $this->validate(
             new ResendShipmentConfirmationEmail(2),
-            new ResendShipmentConfirmationEmailWithValidShipmentState()
+            new ResendShipmentConfirmationEmailWithValidShipmentState(),
         );
     }
 
