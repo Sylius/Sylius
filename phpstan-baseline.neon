@@ -3836,6 +3836,16 @@ parameters:
 			path: src/Sylius/Bundle/PaymentBundle/Form/Type/PaymentMethodChoiceType.php
 
 		-
+			message: "#^Method Sylius\\\\Bundle\\\\PaymentBundle\\\\Provider\\\\PaymentRequestCommandProvider\\:\\:__construct\\(\\) has parameter \\$locator with generic interface Symfony\\\\Contracts\\\\Service\\\\ServiceProviderInterface but does not specify its types\\: T$#"
+			count: 1
+			path: src/Sylius/Bundle/PaymentBundle/Provider/PaymentRequestCommandProvider.php
+
+		-
+			message: "#^Method Sylius\\\\Bundle\\\\PaymentBundle\\\\Provider\\\\PaymentRequestTypeCommandProvider\\:\\:__construct\\(\\) has parameter \\$locator with generic interface Symfony\\\\Contracts\\\\Service\\\\ServiceProviderInterface but does not specify its types\\: T$#"
+			count: 1
+			path: src/Sylius/Bundle/PaymentBundle/Provider/PaymentRequestTypeCommandProvider.php
+
+		-
 			message: "#^Method Sylius\\\\Bundle\\\\PaymentBundle\\\\SyliusPaymentBundle\\:\\:getSupportedDrivers\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Sylius/Bundle/PaymentBundle/SyliusPaymentBundle.php
