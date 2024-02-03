@@ -25,3 +25,13 @@ sylius_payum:
             stripe_checkout:
                 - 'sylius'
                 - 'sylius_stripe_checkout'
+
+framework:
+    messenger:
+        buses:
+            sylius.event_bus:
+                default_middleware: allow_no_handlers
+            sylius.command_bus:
+                middleware:
+                    - 'validation'
+                    - 'doctrine_transaction'
