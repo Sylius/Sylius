@@ -40,8 +40,9 @@
         </service>
 
         <service id="Sylius\Bundle\PaymentBundle\Processor\OfflineCaptureProcessorInterface" class="Sylius\Bundle\PaymentBundle\Processor\OfflineCaptureProcessor" />
+
         <service id="Sylius\Bundle\PaymentBundle\Processor\AfterOfflineCaptureProcessorInterface" class="Sylius\Bundle\PaymentBundle\Processor\AfterOfflineCaptureProcessor">
-            <argument tag="service" id="sm.factory" />
+            <argument type="service" id="sylius_abstraction.state_machine" />
         </service>
 
     </services>
