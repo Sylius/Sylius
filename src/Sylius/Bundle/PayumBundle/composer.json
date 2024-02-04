@@ -1,7 +1,7 @@
 {
     "name": "sylius/payum-bundle",
     "type": "symfony-bundle",
-    "description": "CommandHandler integration for Symfony e-commerce applications.",
+    "description": "Payum integration for Symfony e-commerce applications.",
     "keywords": [
         "payments",
         "payment",

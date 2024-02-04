@@ -13,6 +13,9 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\DependencyInjection;
 
+use Payum\Offline\OfflineGatewayFactory;
+use Payum\Paypal\ExpressCheckout\Nvp\PaypalExpressCheckoutGatewayFactory;
+use Payum\Stripe\StripeCheckoutGatewayFactory;
 use Sylius\Bundle\CoreBundle\Attribute\AsCatalogPromotionApplicatorCriteria;
 use Sylius\Bundle\CoreBundle\Attribute\AsCatalogPromotionPriceCalculator;
 use Sylius\Bundle\CoreBundle\Attribute\AsEntityObserver;
@@ -105,6 +108,7 @@ final class SyliusCoreExtension extends AbstractResourceExtension implements Pre
         $this->prependDoctrineMigrations($container);
         $this->prependJmsSerializerIfAdminApiBundleIsNotPresent($container);
         $this->prependSyliusOrderBundle($container, $config);
+        $this->prependPayum($container);
     }
 
     protected function getMigrationsNamespace(): string
@@ -182,6 +186,23 @@ final class SyliusCoreExtension extends AbstractResourceExtension implements Pre
         $container->prependExtensionConfig('sylius_order', [
             'autoconfigure_with_attributes' => $config['autoconfigure_with_attributes'] ?? false,
         ]);
+    }
+
+    private function prependPayum(ContainerBuilder $container): void
+    {
+        $loader = new XmlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
+
+        if (class_exists(OfflineGatewayFactory::class)) {
+            $loader->load('services/integrations/payum/offline.xml');
+        }
+
+        if (class_exists(PaypalExpressCheckoutGatewayFactory::class)) {
+            $loader->load('services/integrations/payum/paypal_express_checkout.xml');
+        }
+
+        if (class_exists(StripeCheckoutGatewayFactory::class)) {
+            $loader->load('services/integrations/payum/stripe.xml');
+        }
     }
 
     private function registerAutoconfiguration(ContainerBuilder $container): void
