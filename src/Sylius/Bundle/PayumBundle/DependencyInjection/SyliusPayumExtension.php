@@ -88,20 +88,5 @@ final class SyliusPayumExtension extends AbstractResourceExtension implements Pr
         }
 
         $container->prependExtensionConfig('sylius_payment', ['gateways' => $gateways]);
-
-        $loader = new XmlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config/integrations/sylius_payment'));
-        $loader->load('services.xml');
-
-        if (class_exists(OfflineGatewayFactory::class)) {
-            $loader->load('offline.xml');
-        }
-
-        if (class_exists(PaypalExpressCheckoutGatewayFactory::class)) {
-            $loader->load('paypal_express_checkout.xml');
-        }
-
-        if (class_exists(StripeCheckoutGatewayFactory::class)) {
-            $loader->load('stripe.xml');
-        }
     }
 }

@@ -4191,19 +4191,19 @@ parameters:
 			path: src/Sylius/Bundle/OrderBundle/Templating/Helper/AdjustmentsHelper.php
 
 		-
-			message: "#^Method Sylius\\\\Bundle\\\\PaymentBundle\\\\Checker\\\\PaymentRequestDuplicationChecker\\:\\:__construct\\(\\) has parameter \\$paymentRequestRepository with generic interface Sylius\\\\Component\\\\Payment\\\\Repository\\\\PaymentRequestRepositoryInterface but does not specify its types\\: T$#"
+			message: "#^Method Sylius\\\\Bundle\\\\CoreBundle\\\\PaymentRequest\\\\Checker\\\\PaymentRequestDuplicationChecker\\:\\:__construct\\(\\) has parameter \\$paymentRequestRepository with generic interface Sylius\\\\Component\\\\Payment\\\\Repository\\\\PaymentRequestRepositoryInterface but does not specify its types\\: T$#"
 			count: 1
-			path: src/Sylius/Bundle/PaymentBundle/Checker/PaymentRequestDuplicationChecker.php
+			path: src/Sylius/Bundle/CoreBundle/PaymentRequest/Checker/PaymentRequestDuplicationChecker.php
 
 		-
-			message: "#^Method Sylius\\\\Bundle\\\\PaymentBundle\\\\CommandDispatcher\\\\PaymentRequestCommandDispatcher\\:\\:__construct\\(\\) has parameter \\$paymentRequestRepository with generic interface Sylius\\\\Component\\\\Payment\\\\Repository\\\\PaymentRequestRepositoryInterface but does not specify its types\\: T$#"
+			message: "#^Method Sylius\\\\Bundle\\\\CoreBundle\\\\PaymentRequest\\\\CommandDispatcher\\\\PaymentRequestCommandDispatcher\\:\\:__construct\\(\\) has parameter \\$paymentRequestRepository with generic interface Sylius\\\\Component\\\\Payment\\\\Repository\\\\PaymentRequestRepositoryInterface but does not specify its types\\: T$#"
 			count: 1
-			path: src/Sylius/Bundle/PaymentBundle/CommandDispatcher/PaymentRequestCommandDispatcher.php
+			path: src/Sylius/Bundle/CoreBundle/PaymentRequest/CommandDispatcher/PaymentRequestCommandDispatcher.php
 
 		-
-			message: "#^Method Sylius\\\\Bundle\\\\PaymentBundle\\\\CommandHandler\\\\Offline\\\\CapturePaymentRequestHandler\\:\\:__construct\\(\\) has parameter \\$paymentRequestRepository with generic interface Sylius\\\\Component\\\\Payment\\\\Repository\\\\PaymentRequestRepositoryInterface but does not specify its types\\: T$#"
+			message: "#^Method Sylius\\\\Bundle\\\\CoreBundle\\\\PaymentRequest\\\\CommandHandler\\\\Offline\\\\CapturePaymentRequestHandler\\:\\:__construct\\(\\) has parameter \\$paymentRequestRepository with generic interface Sylius\\\\Component\\\\Payment\\\\Repository\\\\PaymentRequestRepositoryInterface but does not specify its types\\: T$#"
 			count: 1
-			path: src/Sylius/Bundle/PaymentBundle/CommandHandler/Offline/CapturePaymentRequestHandler.php
+			path: src/Sylius/Bundle/CoreBundle/PaymentRequest/CommandHandler/Offline/CapturePaymentRequestHandler.php
 
 		-
 			message: "#^Method Sylius\\\\Bundle\\\\PaymentBundle\\\\Form\\\\Type\\\\PaymentGatewayChoiceType\\:\\:__construct\\(\\) has parameter \\$gateways with no value type specified in iterable type array\\.$#"
@@ -4216,14 +4216,14 @@ parameters:
 			path: src/Sylius/Bundle/PaymentBundle/Form/Type/PaymentMethodChoiceType.php
 
 		-
-			message: "#^Method Sylius\\\\Bundle\\\\PaymentBundle\\\\Provider\\\\PaymentRequestCommandProvider\\:\\:__construct\\(\\) has parameter \\$locator with generic interface Symfony\\\\Contracts\\\\Service\\\\ServiceProviderInterface but does not specify its types\\: T$#"
+			message: "#^Method Sylius\\\\Bundle\\\\CoreBundle\\\\PaymentRequest\\\\Provider\\\\PaymentRequestCommandProvider\\:\\:__construct\\(\\) has parameter \\$locator with generic interface Symfony\\\\Contracts\\\\Service\\\\ServiceProviderInterface but does not specify its types\\: T$#"
 			count: 1
-			path: src/Sylius/Bundle/PaymentBundle/Provider/PaymentRequestCommandProvider.php
+			path: src/Sylius/Bundle/CoreBundle/PaymentRequest/Provider/PaymentRequestCommandProvider.php
 
 		-
-			message: "#^Method Sylius\\\\Bundle\\\\PaymentBundle\\\\Provider\\\\PaymentRequestTypeCommandProvider\\:\\:__construct\\(\\) has parameter \\$locator with generic interface Symfony\\\\Contracts\\\\Service\\\\ServiceProviderInterface but does not specify its types\\: T$#"
+			message: "#^Method Sylius\\\\Bundle\\\\CoreBundle\\\\PaymentRequest\\\\Provider\\\\PaymentRequestTypeCommandProvider\\:\\:__construct\\(\\) has parameter \\$locator with generic interface Symfony\\\\Contracts\\\\Service\\\\ServiceProviderInterface but does not specify its types\\: T$#"
 			count: 1
-			path: src/Sylius/Bundle/PaymentBundle/Provider/PaymentRequestTypeCommandProvider.php
+			path: src/Sylius/Bundle/CoreBundle/PaymentRequest/Provider/PaymentRequestTypeCommandProvider.php
 
 		-
 			message: "#^Method Sylius\\\\Bundle\\\\PaymentBundle\\\\SyliusPaymentBundle\\:\\:getSupportedDrivers\\(\\) return type has no value type specified in iterable type array\\.$#"
@@ -4256,14 +4256,14 @@ parameters:
 			path: src/Sylius/Bundle/PayumBundle/Controller/PayumController.php
 
 		-
-			message: "#^Method Sylius\\\\Bundle\\\\PayumBundle\\\\PaymentRequest\\\\Processor\\\\AfterTokenRequestProcessor\\:\\:__construct\\(\\) has parameter \\$paymentRequestFactory with generic interface Sylius\\\\Component\\\\Payment\\\\Factory\\\\PaymentRequestFactoryInterface but does not specify its types\\: T$#"
+			message: "#^Method Sylius\\\\Bundle\\\\CoreBundle\\\\PaymentRequest\\\\Payum\\\\Processor\\\\AfterTokenRequestProcessor\\:\\:__construct\\(\\) has parameter \\$paymentRequestFactory with generic interface Sylius\\\\Component\\\\Payment\\\\Factory\\\\PaymentRequestFactoryInterface but does not specify its types\\: T$#"
 			count: 1
-			path: src/Sylius/Bundle/PayumBundle/PaymentRequest/Processor/AfterTokenRequestProcessor.php
+			path: src/Sylius/Bundle/CoreBundle/PaymentRequest/Payum/Processor/AfterTokenRequestProcessor.php
 
 		-
-			message: "#^Method Sylius\\\\Bundle\\\\PayumBundle\\\\PaymentRequest\\\\Provider\\\\PaymentRequestProvider\\:\\:__construct\\(\\) has parameter \\$paymentRequestRepository with generic interface Sylius\\\\Component\\\\Payment\\\\Repository\\\\PaymentRequestRepositoryInterface but does not specify its types\\: T$#"
+			message: "#^Method Sylius\\\\Bundle\\\\CoreBundle\\\\PaymentRequest\\\\Payum\\\\Provider\\\\PaymentRequestProvider\\:\\:__construct\\(\\) has parameter \\$paymentRequestRepository with generic interface Sylius\\\\Component\\\\Payment\\\\Repository\\\\PaymentRequestRepositoryInterface but does not specify its types\\: T$#"
 			count: 1
-			path: src/Sylius/Bundle/PayumBundle/PaymentRequest/Provider/PaymentRequestProvider.php
+			path: src/Sylius/Bundle/CoreBundle/PaymentRequest/Payum/Provider/PaymentRequestProvider.php
 
 		-
 			message: "#^Method Sylius\\\\Bundle\\\\PayumBundle\\\\Request\\\\ResolveNextRoute\\:\\:getRouteParameters\\(\\) return type has no value type specified in iterable type array\\.$#"
