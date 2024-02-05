@@ -49,7 +49,7 @@ jobs:
             matrix: ${{ fromJson(needs.get-matrix.outputs.matrix) }}
         
         env:
-            COMPOSER_ROOT_VERSION: "dev-master"
+            COMPOSER_ROOT_VERSION: "dev-main"
             SYMFONY_VERSION: "${{ matrix.symfony }}"
             UNSTABLE: "no"
 
@@ -100,7 +100,7 @@ jobs:
         
         env:
             APP_ENV: "test_with_swiftmailer"
-            COMPOSER_ROOT_VERSION: "dev-master"
+            COMPOSER_ROOT_VERSION: "dev-main"
             SYMFONY_VERSION: "${{ matrix.symfony }}"
             USE_SWIFTMAILER: "yes"
             UNSTABLE: "no"
