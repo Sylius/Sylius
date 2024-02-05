@@ -76,5 +76,10 @@
             <argument type="service" id="sylius.resource_registry" />
             <argument type="service" id="doctrine.orm.entity_manager" />
         </service>
+
+        <service id="sylius.validator.translation_for_existing_locales" class="Sylius\Bundle\LocaleBundle\Validator\TranslationForExistingLocalesValidator">
+            <argument type="service" id="sylius.repository.locale" />
+            <tag name="validator.constraint_validator" alias="sylius_translation_for_existing_locales" />
+        </service>
     </services>
 </container>

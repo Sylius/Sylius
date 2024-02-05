@@ -161,9 +161,6 @@ sylius:
         file:
             max_size: The image is too big - {{ size }}{{ suffix }}. Maximum allowed size is {{ limit }}{{ suffix }}.
             upload_ini_size: The image is too big. Maximum allowed size is {{ limit }}{{ suffix }}.
-    translation:
-        locale_code:
-            invalid: 'Please choose one of the available locales: %locales%'
     user:
         email:
             unique: This email is already used.

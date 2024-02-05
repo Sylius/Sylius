@@ -11,13 +11,13 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\CoreBundle\Validator\Constraints;
+namespace Sylius\Bundle\LocaleBundle\Validator;
 
 use Symfony\Component\Validator\Constraint;
 
 final class TranslationForExistingLocales extends Constraint
 {
-    public string $message = 'sylius.translation.locale_code.invalid';
+    public string $message = 'sylius.translation.locale.not_available';
 
     public function validatedBy(): string
     {

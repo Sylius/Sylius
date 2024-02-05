@@ -4016,11 +4016,6 @@ parameters:
 			path: src/Sylius/Bundle/CoreBundle/Validator/Constraints/RegisteredUserValidator.php
 
 		-
-			message: "#^Method Sylius\\\\Bundle\\\\CoreBundle\\\\Validator\\\\Constraints\\\\TranslationForExistingLocalesValidator\\:\\:__construct\\(\\) has parameter \\$localeRepository with generic interface Sylius\\\\Component\\\\Resource\\\\Repository\\\\RepositoryInterface but does not specify its types\\: T$#"
-			count: 1
-			path: src/Sylius/Bundle/CoreBundle/Validator/Constraints/TranslationForExistingLocalesValidator.php
-
-		-
 			message: "#^Method Sylius\\\\Bundle\\\\CoreBundle\\\\Validator\\\\Constraints\\\\UniqueReviewerEmailValidator\\:\\:__construct\\(\\) has parameter \\$userRepository with generic interface Sylius\\\\Component\\\\User\\\\Repository\\\\UserRepositoryInterface but does not specify its types\\: T$#"
 			count: 1
 			path: src/Sylius/Bundle/CoreBundle/Validator/Constraints/UniqueReviewerEmailValidator.php

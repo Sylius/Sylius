@@ -60,7 +60,7 @@
         <constraint name="Sylius\Bundle\CoreBundle\Validator\Constraints\HasAllPricesDefined">
             <option name="groups">sylius</option>
         </constraint>
-        <constraint name="Sylius\Bundle\CoreBundle\Validator\Constraints\TranslationForExistingLocales">
+        <constraint name="Sylius\Bundle\LocalBundle\Validator\TranslationForExistingLocales">
             <option name="groups">sylius</option>
         </constraint>
         <property name="channelPricings">
