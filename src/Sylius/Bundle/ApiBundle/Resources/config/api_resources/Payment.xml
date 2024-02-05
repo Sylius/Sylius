@@ -72,6 +72,14 @@
             </itemOperation>
         </itemOperations>
 
+        <subresourceOperations>
+            <subresourceOperation name="api_orders_payments_get_subresource">
+                <attribute name="normalization_context">
+                    <attribute name="groups">admin:payment:show</attribute>
+                </attribute>
+            </subresourceOperation>
+        </subresourceOperations>
+
         <property name="id" identifier="true" writable="false" />
         <property name="createdAt" writable="false" />
         <property name="updatedAt" writable="false" />

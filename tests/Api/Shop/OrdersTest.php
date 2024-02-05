@@ -422,7 +422,7 @@ final class OrdersTest extends JsonApiTestCase
         $this->assertResponse(
             $response,
             'shop/order/add_item_to_cart_with_missing_product_variant',
-            Response::HTTP_BAD_REQUEST
+            Response::HTTP_BAD_REQUEST,
         );
     }
 
@@ -450,7 +450,7 @@ final class OrdersTest extends JsonApiTestCase
         $this->assertResponse(
             $response,
             'shop/order/add_item_to_cart_with_missing_quantity',
-            Response::HTTP_BAD_REQUEST
+            Response::HTTP_BAD_REQUEST,
         );
     }
 
@@ -476,7 +476,7 @@ final class OrdersTest extends JsonApiTestCase
         $this->assertResponse(
             $response,
             'shop/order/add_item_to_cart_with_missing_quantity',
-            Response::HTTP_BAD_REQUEST
+            Response::HTTP_BAD_REQUEST,
         );
     }
 

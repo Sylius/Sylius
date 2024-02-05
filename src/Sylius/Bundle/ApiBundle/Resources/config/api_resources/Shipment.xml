@@ -92,6 +92,14 @@
             </itemOperation>
         </itemOperations>
 
+        <subresourceOperations>
+            <subresourceOperation name="api_orders_shipments_get_subresource">
+                <attribute name="normalization_context">
+                    <attribute name="groups">admin:shipment:show</attribute>
+                </attribute>
+            </subresourceOperation>
+        </subresourceOperations>
+
         <property name="id" identifier="true" />
         <property name="createdAt" />
         <property name="updatedAt" />

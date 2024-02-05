@@ -267,11 +267,16 @@ final class ManagingOrdersContext implements Context
      */
     public function iShipThisOrder(OrderInterface $order): void
     {
+        $shipment = $order->getShipments()->last();
+        Assert::notNull($shipment, 'There is no shipment for this order');
+
         $this->client->applyTransition(
             Resources::SHIPMENTS,
-            (string) $order->getShipments()->first()->getId(),
+            (string) $shipment->getId(),
             ShipmentTransitions::TRANSITION_SHIP,
         );
+
+        $this->sharedStorage->set('shipment', $shipment);
     }
 
     /**
@@ -821,6 +826,8 @@ final class ManagingOrdersContext implements Context
      */
     public function iShouldSeeTheShippingDateAs(string $dateTime): void
     {
+        $this->client->show(Resources::SHIPMENTS, (string) $this->sharedStorage->get('shipment')->getId());
+
         Assert::same(
             $this->responseChecker->getValue($this->client->getLastResponse(), 'shippedAt'),
             (new \DateTime($dateTime))->format('Y-m-d H:i:s'),
@@ -1074,8 +1081,8 @@ final class ManagingOrdersContext implements Context
     {
         $response = $this->client->getLastResponse();
         Assert::true(
-            $this->responseChecker->isUpdateSuccessful($response),
-            'Order could not be shipped. Reason: ' . $response->getContent(),
+            $this->responseChecker->isAccepted($response),
+            'Order could not be shipped.',
         );
     }
 
