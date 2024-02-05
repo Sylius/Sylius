@@ -75,7 +75,10 @@
         <subresourceOperations>
             <subresourceOperation name="api_orders_payments_get_subresource">
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:payment:show</attribute>
+                    <attribute name="groups">
+                        <attribute>admin:payment:show</attribute>
+                        <attribute>sylius:admin:payment:show</attribute>
+                    </attribute>
                 </attribute>
             </subresourceOperation>
         </subresourceOperations>

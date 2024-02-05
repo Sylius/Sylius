@@ -121,6 +121,8 @@
             <group>admin:payment_method:index</group>
             <group>sylius:admin:payment_method:index</group>
             <group>admin:payment_method:show</group>
+            <group>admin:gateway_config:show</group>
+            <group>sylius:admin:gateway_config:show</group>
             <group>sylius:admin:payment_method:show</group>
             <group>admin:payment_method:create</group>
             <group>sylius:admin:payment_method:create</group>
