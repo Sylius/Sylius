@@ -16,7 +16,6 @@ namespace Sylius\Bundle\CoreBundle\Validator\Constraints;
 use Sylius\Bundle\CoreBundle\Message\ResendShipmentConfirmationEmail;
 use Sylius\Component\Core\Model\ShipmentInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 use Symfony\Component\Validator\Exception\UnexpectedTypeException;
@@ -42,9 +41,8 @@ final class ResendShipmentConfirmationEmailWithValidShipmentStateValidator exten
 
         /** @var ShipmentInterface|null $shipment */
         $shipment = $this->shipmentRepository->findOneBy(['id' => $value->getShipmentId()]);
-
         if (null === $shipment) {
-            throw new NotFoundHttpException(sprintf('Shipment with %s id has not been found.', $value->getShipmentId()));
+            return;
         }
 
         if ($shipment->getState() !== ShipmentInterface::STATE_SHIPPED) {

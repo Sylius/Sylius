@@ -11,11 +11,13 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\CoreBundle\EmailManager;
+namespace Sylius\Bundle\CoreBundle\Mailer;
 
 use Sylius\Component\Core\Model\ShipmentInterface;
 
 interface ShipmentEmailManagerInterface
 {
+    public function sendConfirmationEmail(ShipmentInterface $shipment): void;
+
     public function resendConfirmationEmail(ShipmentInterface $shipment): void;
 }

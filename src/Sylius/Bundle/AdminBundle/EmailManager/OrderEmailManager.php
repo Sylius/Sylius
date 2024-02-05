@@ -23,7 +23,7 @@ trigger_deprecation(
     '1.13',
     'The "%s" class is deprecated, use "%s" instead.',
     OrderEmailManager::class,
-    \Sylius\Bundle\CoreBundle\EmailManager\OrderEmailManager::class,
+    \Sylius\Bundle\CoreBundle\Mailer\OrderEmailManager::class,
 );
 
 /** @deprecated since Sylius 1.13 and will be removed in Sylius 2.0. Use {@see \Sylius\Bundle\CoreBundle\Mailer\OrderEmailManager} instead. */

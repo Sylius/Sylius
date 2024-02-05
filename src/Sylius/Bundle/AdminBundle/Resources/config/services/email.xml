@@ -17,11 +17,19 @@
 
         <service id="Sylius\Bundle\AdminBundle\EmailManager\OrderEmailManagerInterface" class="Sylius\Bundle\AdminBundle\EmailManager\OrderEmailManager">
             <argument type="service" id="sylius.email_sender" />
+            <deprecated package="sylius/admin-bundle" version="1.13">The "%service_id%" service is deprecated since 1.13 and will be removed in 2.0. Use "sylius.mailer.order_email_manager" instead.</deprecated>
         </service>
 
         <service id="sylius.email_manager.shipment" class="Sylius\Bundle\AdminBundle\EmailManager\ShipmentEmailManager">
             <argument type="service" id="sylius.email_sender" />
+            <deprecated package="sylius/admin-bundle" version="1.13">The "%service_id%" service is deprecated since 1.13 and will be removed in 2.0. Use "sylius.mailer.shipment_email_manager.admin" instead.</deprecated>
         </service>
-        <service id="Sylius\Bundle\AdminBundle\EmailManager\ShipmentEmailManagerInterface" alias="sylius.email_manager.shipment" />
+        <service id="Sylius\Bundle\AdminBundle\EmailManager\ShipmentEmailManagerInterface" alias="sylius.email_manager.shipment">
+            <deprecated package="sylius/admin-bundle" version="1.13">The "%alias_id%" service is deprecated since 1.13 and will be removed in 2.0. Use "sylius.mailer.shipment_email_manager.admin" instead.</deprecated>
+        </service>
+
+        <service id="sylius.mailer.shipment_email_manager.admin" class="Sylius\Bundle\CoreBundle\Mailer\ShipmentEmailManager">
+            <argument type="service" id="sylius.email_sender" />
+        </service>
     </services>
 </container>

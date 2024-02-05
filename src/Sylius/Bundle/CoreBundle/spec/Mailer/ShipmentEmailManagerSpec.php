@@ -11,10 +11,10 @@
 
 declare(strict_types=1);
 
-namespace spec\Sylius\Bundle\CoreBundle\EmailManager;
+namespace spec\Sylius\Bundle\CoreBundle\Mailer;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\CoreBundle\EmailManager\ShipmentEmailManagerInterface;
+use Sylius\Bundle\CoreBundle\Mailer\ShipmentEmailManagerInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
@@ -34,6 +34,32 @@ final class ShipmentEmailManagerSpec extends ObjectBehavior
     }
 
     function it_sends_a_shipment_confirmation_email(
+        SenderInterface $sender,
+        ShipmentInterface $shipment,
+        OrderInterface $order,
+        ChannelInterface $channel,
+        CustomerInterface $customer,
+    ): void {
+        $shipment->getOrder()->willReturn($order);
+        $order->getChannel()->willReturn($channel);
+        $order->getLocaleCode()->willReturn('en_US');
+        $order->getCustomer()->willReturn($customer);
+        $customer->getEmail()->willReturn('customer@example.com');
+
+        $sender
+            ->send('shipment_confirmation', ['customer@example.com'], [
+                'shipment' => $shipment,
+                'order' => $order,
+                'channel' => $channel,
+                'localeCode' => 'en_US',
+            ])
+            ->shouldBeCalled()
+        ;
+
+        $this->sendConfirmationEmail($shipment);
+    }
+
+    function it_resends_a_shipment_confirmation_email(
         SenderInterface $sender,
         ShipmentInterface $shipment,
         OrderInterface $order,

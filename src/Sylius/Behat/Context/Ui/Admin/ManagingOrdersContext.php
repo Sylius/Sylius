@@ -239,7 +239,7 @@ final class ManagingOrdersContext implements Context
     {
         Assert::false(
             $this->showPage->isResendShipmentConfirmationEmailButtonVisible(),
-            'Resend shipment confirmation email button should not be visible, but it does.',
+            'Resend shipment confirmation email button should not be visible.',
         );
     }
 
@@ -995,6 +995,17 @@ final class ManagingOrdersContext implements Context
         $this->notificationChecker->checkNotification(
             sprintf('%s confirmation has been successfully resent to the customer.', ucfirst($type)),
             NotificationType::success(),
+        );
+    }
+
+    /**
+     * @Then I should not be able to resend the order confirmation email
+     */
+    public function iShouldNotBeAbleToResendTheOrderConfirmationEmail(): void
+    {
+        Assert::false(
+            $this->showPage->isResendOrderConfirmationEmailButtonVisible(),
+            'Resend order confirmation email button should not be visible.',
         );
     }
 

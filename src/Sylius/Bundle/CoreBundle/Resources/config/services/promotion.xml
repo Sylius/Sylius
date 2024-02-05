@@ -50,11 +50,11 @@
         <service id="sylius.promotion_rule_checker.contains_product" class="Sylius\Component\Core\Promotion\Checker\Rule\ContainsProductRuleChecker">
             <tag name="sylius.promotion_rule_checker" type="contains_product" label="sylius.form.promotion_rule.contains_product" form-type="Sylius\Bundle\CoreBundle\Form\Type\Promotion\Rule\ContainsProductConfigurationType" />
         </service>
-        <service id="sylius.channel_aware_promotion_rule_checker.item_total" class="Sylius\Component\Core\Promotion\Checker\Rule\ItemTotalRuleChecker" decorates="sylius.promotion_rule_checker.item_total" decoration-priority="256" public="false">
-            <argument type="service" id="sylius.channel_aware_promotion_rule_checker.item_total.inner" />
-        </service>
-        <service id="sylius.promotion_rule_checker.item_total" class="Sylius\Component\Promotion\Checker\Rule\ItemTotalRuleChecker">
+        <service id="sylius.promotion_rule_checker.item_total" class="Sylius\Component\Core\Promotion\Checker\Rule\ItemTotalRuleChecker">
             <tag name="sylius.promotion_rule_checker" type="item_total" label="sylius.form.promotion_rule.item_total" form-type="Sylius\Bundle\CoreBundle\Form\Type\Promotion\Rule\ChannelBasedItemTotalConfigurationType" />
+        </service>
+        <service id="sylius.channel_aware_promotion_rule_checker.item_total" alias="sylius.promotion_rule_checker.item_total">
+            <deprecated package="sylius/core-bundle" version="1.13">The "%service_id%" service is deprecated since 1.13 and will be removed in 2.0. Use "%alias_id%" instead</deprecated>
         </service>
         <service id="sylius.promotion_rule_checker.cart_quantity" class="Sylius\Component\Core\Promotion\Checker\Rule\CartQuantityRuleChecker">
             <tag name="sylius.promotion_rule_checker" type="cart_quantity" label="sylius.form.promotion_rule.cart_quantity" form-type="Sylius\Bundle\PromotionBundle\Form\Type\Rule\CartQuantityConfigurationType" />

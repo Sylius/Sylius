@@ -26,12 +26,19 @@
         <tag name="kernel.event_listener" event="sylius.customer.post_register" method="sendUserRegistrationEmail" />
     </service>
 
-    <service id="Sylius\Bundle\CoreBundle\EmailManager\ShipmentEmailManagerInterface" class="Sylius\Bundle\CoreBundle\EmailManager\ShipmentEmailManager">
+    <service id="sylius.mailer.contact_email_manager" class="Sylius\Bundle\CoreBundle\Mailer\ContactEmailManager">
         <argument type="service" id="sylius.email_sender" />
     </service>
+    <service id="Sylius\Bundle\CoreBundle\Mailer\ContactEmailManagerInterface" alias="sylius.mailer.contact_email_manager" />
 
-    <service id="Sylius\Bundle\CoreBundle\EmailManager\OrderEmailManagerInterface" class="Sylius\Bundle\CoreBundle\EmailManager\OrderEmailManager">
+    <service id="sylius.mailer.order_email_manager" class="Sylius\Bundle\CoreBundle\Mailer\OrderEmailManager">
         <argument type="service" id="sylius.email_sender" />
     </service>
+    <service id="Sylius\Bundle\CoreBundle\Mailer\OrderEmailManagerInterface" alias="sylius.mailer.order_email_manager" />
+
+    <service id="sylius.mailer.shipment_email_manager" class="Sylius\Bundle\CoreBundle\Mailer\ShipmentEmailManager">
+        <argument type="service" id="sylius.email_sender" />
+    </service>
+    <service id="Sylius\Bundle\CoreBundle\Mailer\ShipmentEmailManagerInterface" alias="sylius.mailer.shipment_email_manager" />
 </services>
 </container>
