@@ -577,6 +577,9 @@
     "sylius/theme-bundle": {
         "version": "v1.4.2"
     },
+    "sylius/twig-hooks": {
+        "version": "dev-main"
+    },
     "symfony/asset": {
         "version": "v4.1.3"
     },

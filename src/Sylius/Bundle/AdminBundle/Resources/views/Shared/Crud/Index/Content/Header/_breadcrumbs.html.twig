@@ -1,6 +1,9 @@
 {% import '@SyliusAdmin/Shared/Helper/breadcrumbs.html.twig' as _breadcrumbs %}
 
+{% set metadata = hookable_data.metadata %}
+{% set title = hookable_configuration.title|default(metadata.applicationName~'.ui.'~metadata.pluralName) %}
+
 {{ _breadcrumbs.default([
     { 'name': 'Dashboard', 'url': path('sylius_admin_dashboard'), 'active': false },
-    { 'name': metadata.applicationName~'.ui.'~metadata.pluralName, 'active': true },
+    { 'name': title, 'active': true },
 ]) }}

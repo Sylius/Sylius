@@ -1,7 +1,7 @@
 {% import '@SyliusAdmin/Shared/Helper/table.html.twig' as _table %}
 {% import '@SyliusAdmin/Shared/Helper/pagination.html.twig' as _pagination %}
 
-{% set grid = _context.resources %}
+{% set grid = hookable_data.resources %}
 {% set data = grid.data %}
 {% set definition = grid.definition %}
 

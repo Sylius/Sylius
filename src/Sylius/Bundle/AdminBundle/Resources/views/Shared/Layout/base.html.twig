@@ -1,3 +1,5 @@
+{% set generic_hook = hook_name(_self) %}
+
 <!DOCTYPE html>
 <html lang="{{ app.request.locale }}">
     <head>
@@ -11,6 +13,7 @@
         {{ encore_entry_link_tags('admin-entry', null, 'admin') }}
         {% block stylesheets %}
             {{ twig_event('sylius.admin.common.stylesheets') }}
+            {% hook generic_hook ~ '#stylesheets' %}
         {% endblock %}
     </head>
     <body class="{% block body_class %}{% endblock %}">
@@ -23,6 +26,7 @@
         {{ encore_entry_script_tags('admin-entry', null, 'admin') }}
         {% block javascripts %}
             {{ twig_event('sylius.admin.common.javascripts') }}
+            {% hook generic_hook ~ '#javascripts' %}
         {% endblock %}
     </body>
 </html>

@@ -4,6 +4,7 @@
 imports:
     - { resource: 'template_events/*.yaml' }
     - { resource: 'template_events/**/*.yaml' }
+    - { resource: 'twig_hooks/**/*.yaml' }
 
 sylius_ui:
     events:
