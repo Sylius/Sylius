@@ -35,6 +35,7 @@
         "knplabs/knp-menu-bundle": "^3.0",
         "sylius/core-bundle": "^2.0",
         "sylius/ui-bundle": "^2.0",
+        "sylius/twig-hooks": "dev-main",
         "symfony/framework-bundle": "^6.4.1",
         "symfony/stimulus-bundle": "^2.12",
         "symfony/ux-live-component": "^2.12",

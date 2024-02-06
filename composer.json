@@ -87,6 +87,7 @@
         "sylius/resource": "^1.10",
         "sylius/resource-bundle": "^1.10",
         "sylius/theme-bundle": "^2.3",
+        "sylius/twig-hooks": "dev-main",
         "symfony/asset": "^6.4.0",
         "symfony/clock": "^6.4.0",
         "symfony/config": "^6.4.0",
