@@ -1,0 +1,53 @@
+{
+    "@context": "\/api\/v2\/contexts\/Adjustment",
+    "@id": "\/api\/v2\/admin\/adjustments",
+    "@type": "hydra:Collection",
+    "hydra:member": [
+        {
+            "@id": "\/api\/v2\/admin\/adjustments\/@integer@",
+            "@type": "Adjustment",
+            "id": @integer@,
+            "order": "\/api\/v2\/admin\/orders\/@string@",
+            "type": "shipping",
+            "label": "UPS",
+            "amount": 500,
+            "neutral": false,
+            "locked": false,
+            "order_item": null,
+            "order_item_unit": null
+        },
+        {
+            "@id": "\/api\/v2\/admin\/adjustments\/@integer@",
+            "@type": "Adjustment",
+            "id": @integer@,
+            "order": "\/api\/v2\/admin\/orders\/@string@",
+            "type": "shipping",
+            "label": "UPS",
+            "amount": 500,
+            "neutral": false,
+            "locked": false,
+            "order_item": null,
+            "order_item_unit": null
+        }
+    ],
+    "hydra:totalItems": 2,
+    "hydra:search": {
+        "@type": "hydra:IriTemplate",
+        "hydra:template": "\/api\/v2\/admin\/adjustments{?order.tokenValue,order.tokenValue[]}",
+        "hydra:variableRepresentation": "BasicRepresentation",
+        "hydra:mapping": [
+            {
+                "@type": "IriTemplateMapping",
+                "variable": "order.tokenValue",
+                "property": "order.tokenValue",
+                "required": false
+            },
+            {
+                "@type": "IriTemplateMapping",
+                "variable": "order.tokenValue[]",
+                "property": "order.tokenValue",
+                "required": false
+            }
+        ]
+    }
+}
