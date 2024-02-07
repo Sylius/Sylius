@@ -95,7 +95,10 @@
         <subresourceOperations>
             <subresourceOperation name="api_orders_shipments_get_subresource">
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:shipment:show</attribute>
+                    <attribute name="groups">
+                        <attribute>admin:shipment:show</attribute>
+                        <attribute>sylius:admin:shipment:show</attribute>
+                    </attribute>
                 </attribute>
             </subresourceOperation>
         </subresourceOperations>
