@@ -18,15 +18,19 @@
     <class name="Sylius\Component\Addressing\Model\AddressLogEntry">
         <attribute name="action">
             <group>admin:address:log_entry:show</group>
+            <group>sylius:admin:address:log_entry:show</group>
         </attribute>
         <attribute name="logged_at">
             <group>admin:address:log_entry:show</group>
+            <group>sylius:admin:address:log_entry:show</group>
         </attribute>
         <attribute name="version">
             <group>admin:address:log_entry:show</group>
+            <group>sylius:admin:address:log_entry:show</group>
         </attribute>
         <attribute name="data">
             <group>admin:address:log_entry:show</group>
+            <group>sylius:admin:address:log_entry:show</group>
         </attribute>
     </class>
 </serializer>

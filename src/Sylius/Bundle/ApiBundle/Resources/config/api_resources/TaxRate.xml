@@ -25,6 +25,7 @@
                 <attribute name="normalization_context">
                     <attribute name="groups">
                         <attribute>admin:tax_rate:show</attribute>
+                        <attribute>sylius:admin:tax_rate:show</attribute>
                     </attribute>
                 </attribute>
             </itemOperation>
@@ -34,11 +35,13 @@
                 <attribute name="denormalization_context">
                     <attribute name="groups">
                         <attribute>admin:tax_rate:update</attribute>
+                        <attribute>sylius:admin:tax_rate:update</attribute>
                     </attribute>
                 </attribute>
                 <attribute name="normalization_context">
                     <attribute name="groups">
                         <attribute>admin:tax_rate:show</attribute>
+                        <attribute>sylius:admin:tax_rate:show</attribute>
                     </attribute>
                 </attribute>
             </itemOperation>
@@ -57,6 +60,7 @@
                 <attribute name="normalization_context">
                     <attribute name="groups">
                         <attribute>admin:tax_rate:index</attribute>
+                        <attribute>sylius:admin:tax_rate:index</attribute>
                     </attribute>
                 </attribute>
             </collectionOperation>
@@ -66,11 +70,13 @@
                 <attribute name="denormalization_context">
                     <attribute name="groups">
                         <attribute>admin:tax_rate:create</attribute>
+                        <attribute>sylius:admin:tax_rate:create</attribute>
                     </attribute>
                 </attribute>
                 <attribute name="normalization_context">
                     <attribute name="groups">
                         <attribute>admin:tax_rate:show</attribute>
+                        <attribute>sylius:admin:tax_rate:show</attribute>
                     </attribute>
                 </attribute>
             </collectionOperation>

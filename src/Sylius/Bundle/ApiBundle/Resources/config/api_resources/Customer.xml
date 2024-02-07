@@ -24,7 +24,10 @@
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/admin/customers</attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:customer:index</attribute>
+                    <attribute name="groups">
+                        <attribute>admin:customer:index</attribute>
+                        <attribute>sylius:admin:customer:index</attribute>
+                    </attribute>
                 </attribute>
                 <attribute name="filters">
                     <attribute>sylius.api.customer_group_filter</attribute>
@@ -35,10 +38,16 @@
                 <attribute name="method">POST</attribute>
                 <attribute name="path">/admin/customers</attribute>
                 <attribute name="denormalization_context">
-                    <attribute name="groups">admin:customer:create</attribute>
+                    <attribute name="groups">
+                        <attribute>admin:customer:create</attribute>
+                        <attribute>sylius:admin:customer:create</attribute>
+                    </attribute>
                 </attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:customer:show</attribute>
+                    <attribute name="groups">
+                        <attribute>admin:customer:show</attribute>
+                        <attribute>sylius:admin:customer:show</attribute>
+                    </attribute>
                 </attribute>
                 <attribute name="validation_groups">
                     <attribute>sylius</attribute>
@@ -54,7 +63,10 @@
                     <attribute name="summary">Registers a new customer</attribute>
                 </attribute>
                 <attribute name="denormalization_context">
-                    <attribute name="groups">shop:customer:create</attribute>
+                    <attribute name="groups">
+                        <attribute>shop:customer:create</attribute>
+                        <attribute>sylius:shop:customer:create</attribute>
+                    </attribute>
                 </attribute>
                 <attribute name="messenger">input</attribute>
                 <attribute name="input">Sylius\Bundle\ApiBundle\Command\Account\RegisterShopUser</attribute>
@@ -67,7 +79,10 @@
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/admin/customers/{id}</attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:customer:show</attribute>
+                    <attribute name="groups">
+                        <attribute>admin:customer:show</attribute>
+                        <attribute>sylius:admin:customer:show</attribute>
+                    </attribute>
                 </attribute>
             </itemOperation>
 
@@ -76,7 +91,10 @@
                 <attribute name="path">/admin/customers/{id}/statistics</attribute>
                 <attribute name="controller">Sylius\Bundle\ApiBundle\Controller\GetCustomerStatisticsAction</attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:customer:statistics:show</attribute>
+                    <attribute name="groups">
+                        <attribute>admin:customer:statistics:show</attribute>
+                        <attribute>sylius:admin:customer:statistics:show</attribute>
+                    </attribute>
                 </attribute>
             </itemOperation>
 
@@ -84,10 +102,16 @@
                 <attribute name="method">PUT</attribute>
                 <attribute name="path">/admin/customers/{id}</attribute>
                 <attribute name="denormalization_context">
-                    <attribute name="groups">admin:customer:update</attribute>
+                    <attribute name="groups">
+                        <attribute>admin:customer:update</attribute>
+                        <attribute>sylius:admin:customer:update</attribute>
+                    </attribute>
                 </attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:customer:show</attribute>
+                    <attribute name="groups">
+                        <attribute>admin:customer:show</attribute>
+                        <attribute>sylius:admin:customer:show</attribute>
+                    </attribute>
                 </attribute>
                 <attribute name="validation_groups">
                     <attribute>sylius</attribute>
@@ -107,6 +131,7 @@
                 <attribute name="normalization_context">
                     <attribute name="groups">
                         <attribute>shop:customer:show</attribute>
+                        <attribute>sylius:shop:customer:show</attribute>
                     </attribute>
                 </attribute>
             </itemOperation>
@@ -118,7 +143,10 @@
                 <attribute name="input">Sylius\Bundle\ApiBundle\Command\Account\ChangeShopUserPassword</attribute>
                 <attribute name="output">false</attribute>
                 <attribute name="denormalization_context">
-                    <attribute name="groups">shop:customer:password:update</attribute>
+                    <attribute name="groups">
+                        <attribute>shop:customer:password:update</attribute>
+                        <attribute>sylius:shop:customer:password:update</attribute>
+                    </attribute>
                 </attribute>
                 <attribute name="openapi_context">
                     <attribute name="summary">Change password for logged in customer</attribute>
@@ -129,10 +157,16 @@
                 <attribute name="method">PUT</attribute>
                 <attribute name="path">/shop/customers/{id}</attribute>
                 <attribute name="denormalization_context">
-                    <attribute name="groups">shop:customer:update</attribute>
+                    <attribute name="groups">
+                        <attribute>shop:customer:update</attribute>
+                        <attribute>sylius:shop:customer:update</attribute>
+                    </attribute>
                 </attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">shop:customer:show</attribute>
+                    <attribute name="groups">
+                        <attribute>shop:customer:show</attribute>
+                        <attribute>sylius:shop:customer:show</attribute>
+                    </attribute>
                 </attribute>
             </itemOperation>
         </itemOperations>

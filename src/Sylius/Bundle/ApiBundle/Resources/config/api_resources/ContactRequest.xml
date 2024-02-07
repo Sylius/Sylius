@@ -30,7 +30,10 @@
                 <attribute name="input">Sylius\Bundle\ApiBundle\Command\SendContactRequest</attribute>
                 <attribute name="status">202</attribute>
                 <attribute name="denormalization_context">
-                    <attribute name="groups">shop:contact_request:create</attribute>
+                    <attribute name="groups">
+                        <attribute>shop:contact_request:create</attribute>
+                        <attribute>sylius:shop:contact_request:create</attribute>
+                    </attribute>
                 </attribute>
                 <attribute name="openapi_context">
                     <attribute name="summary">Send contact request</attribute>

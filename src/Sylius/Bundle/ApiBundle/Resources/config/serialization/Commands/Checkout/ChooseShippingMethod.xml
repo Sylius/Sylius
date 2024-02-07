@@ -18,6 +18,7 @@
     <class name="Sylius\Bundle\ApiBundle\Command\Checkout\ChooseShippingMethod">
         <attribute name="shippingMethodCode" serialized-name="shippingMethod">
             <group>shop:cart:select_shipping_method</group>
+            <group>sylius:shop:cart:select_shipping_method</group>
         </attribute>
     </class>
 </serializer>

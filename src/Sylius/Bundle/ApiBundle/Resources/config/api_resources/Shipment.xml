@@ -30,7 +30,10 @@
                     <attribute>sylius.api.search_shipment_filter</attribute>
                 </attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:shipment:index</attribute>
+                    <attribute name="groups">
+                        <attribute>admin:shipment:index</attribute>
+                        <attribute>sylius:admin:shipment:index</attribute>
+                    </attribute>
                 </attribute>
             </collectionOperation>
         </collectionOperations>
@@ -40,7 +43,10 @@
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/admin/shipments/{id}</attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:shipment:show</attribute>
+                    <attribute name="groups">
+                        <attribute>admin:shipment:show</attribute>
+                        <attribute>sylius:admin:shipment:show</attribute>
+                    </attribute>
                 </attribute>
             </itemOperation>
 
@@ -48,7 +54,10 @@
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/shop/shipments/{id}</attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">shop:shipment:show</attribute>
+                    <attribute name="groups">
+                        <attribute>shop:shipment:show</attribute>
+                        <attribute>sylius:shop:shipment:show</attribute>
+                    </attribute>
                 </attribute>
             </itemOperation>
 
@@ -61,7 +70,10 @@
                     <attribute name="summary">Ships Shipment</attribute>
                 </attribute>
                 <attribute name="denormalization_context">
-                    <attribute name="groups">admin:shipment:update</attribute>
+                    <attribute name="groups">
+                        <attribute>admin:shipment:update</attribute>
+                        <attribute>sylius:admin:shipment:update</attribute>
+                    </attribute>
                 </attribute>
             </itemOperation>
 

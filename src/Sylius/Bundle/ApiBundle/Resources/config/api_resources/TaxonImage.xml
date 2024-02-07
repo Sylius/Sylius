@@ -12,7 +12,10 @@
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/admin/taxon-images</attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:taxon_image:index</attribute>
+                    <attribute name="groups">
+                        <attribute>admin:taxon_image:index</attribute>
+                        <attribute>sylius:admin:taxon_image:index</attribute>
+                    </attribute>
                 </attribute>
             </collectionOperation>
 
@@ -52,7 +55,10 @@
                     </attribute>
                 </attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:taxon_image:show</attribute>
+                    <attribute name="groups">
+                        <attribute>admin:taxon_image:show</attribute>
+                        <attribute>sylius:admin:taxon_image:show</attribute>
+                    </attribute>
                 </attribute>
             </collectionOperation>
         </collectionOperations>
@@ -62,7 +68,10 @@
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/admin/taxon-images/{id}</attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:taxon_image:show</attribute>
+                    <attribute name="groups">
+                        <attribute>admin:taxon_image:show</attribute>
+                        <attribute>sylius:admin:taxon_image:show</attribute>
+                    </attribute>
                 </attribute>
             </itemOperation>
 
@@ -70,10 +79,16 @@
                 <attribute name="method">PUT</attribute>
                 <attribute name="path">/admin/taxon-images/{id}</attribute>
                 <attribute name="denormalization_context">
-                    <attribute name="groups">admin:taxon_image:update</attribute>
+                    <attribute name="groups">
+                        <attribute>admin:taxon_image:update</attribute>
+                        <attribute>sylius:admin:taxon_image:update</attribute>
+                    </attribute>
                 </attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:taxon_image:show</attribute>
+                    <attribute name="groups">
+                        <attribute>admin:taxon_image:show</attribute>
+                        <attribute>sylius:admin:taxon_image:show</attribute>
+                    </attribute>
                 </attribute>
             </itemOperation>
 
@@ -86,7 +101,10 @@
         <subresourceOperations>
             <subresourceOperation name="api_taxa_images_get_subresource">
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:taxon_image:show</attribute>
+                    <attribute name="groups">
+                        <attribute>admin:taxon_image:show</attribute>
+                        <attribute>sylius:admin:taxon_image:show</attribute>
+                    </attribute>
                 </attribute>
             </subresourceOperation>
         </subresourceOperations>

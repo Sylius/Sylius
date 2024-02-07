@@ -12,7 +12,10 @@
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/admin/taxons</attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:taxon:index</attribute>
+                    <attribute name="groups">
+                        <attribute>admin:taxon:index</attribute>
+                        <attribute>sylius:admin:taxon:index</attribute>
+                    </attribute>
                 </attribute>
             </collectionOperation>
 
@@ -20,7 +23,10 @@
                 <attribute name="method">POST</attribute>
                 <attribute name="path">/admin/taxons</attribute>
                 <attribute name="denormalization_context">
-                    <attribute name="groups">admin:taxon:create</attribute>
+                    <attribute name="groups">
+                        <attribute>admin:taxon:create</attribute>
+                        <attribute>sylius:admin:taxon:create</attribute>
+                    </attribute>
                 </attribute>
             </collectionOperation>
 
@@ -28,7 +34,10 @@
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/shop/taxons</attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">shop:taxon:index</attribute>
+                    <attribute name="groups">
+                        <attribute>shop:taxon:index</attribute>
+                        <attribute>sylius:shop:taxon:index</attribute>
+                    </attribute>
                 </attribute>
             </collectionOperation>
         </collectionOperations>
@@ -38,7 +47,10 @@
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/admin/taxons/{code}</attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:taxon:show</attribute>
+                    <attribute name="groups">
+                        <attribute>admin:taxon:show</attribute>
+                        <attribute>sylius:admin:taxon:show</attribute>
+                    </attribute>
                 </attribute>
             </itemOperation>
 
@@ -46,7 +58,10 @@
                 <attribute name="method">PUT</attribute>
                 <attribute name="path">/admin/taxons/{code}</attribute>
                 <attribute name="denormalization_context">
-                    <attribute name="groups">admin:taxon:update</attribute>
+                    <attribute name="groups">
+                        <attribute>admin:taxon:update</attribute>
+                        <attribute>sylius:admin:taxon:update</attribute>
+                    </attribute>
                 </attribute>
             </itemOperation>
 
@@ -54,7 +69,10 @@
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/shop/taxons/{code}</attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">shop:taxon:show</attribute>
+                    <attribute name="groups">
+                        <attribute>shop:taxon:show</attribute>
+                        <attribute>sylius:shop:taxon:show</attribute>
+                    </attribute>
                 </attribute>
             </itemOperation>
         </itemOperations>

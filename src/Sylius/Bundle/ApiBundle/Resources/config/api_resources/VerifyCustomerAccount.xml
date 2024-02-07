@@ -28,7 +28,10 @@
                 <attribute name="input">Sylius\Bundle\ApiBundle\Command\Account\ResendVerificationEmail</attribute>
                 <attribute name="status">202</attribute>
                 <attribute name="denormalization_context">
-                    <attribute name="groups">shop:resend_verification_email:create</attribute>
+                    <attribute name="groups">
+                        <attribute>shop:resend_verification_email:create</attribute>
+                        <attribute>sylius:shop:resend_verification_email:create</attribute>
+                    </attribute>
                 </attribute>
                 <attribute name="openapi_context">
                     <attribute name="summary">Resends verification email</attribute>
@@ -44,7 +47,10 @@
                 <attribute name="input">Sylius\Bundle\ApiBundle\Command\Account\VerifyCustomerAccount</attribute>
                 <attribute name="status">202</attribute>
                 <attribute name="denormalization_context">
-                    <attribute name="groups">shop:account_verification:update</attribute>
+                    <attribute name="groups">
+                        <attribute>shop:account_verification:update</attribute>
+                        <attribute>sylius:shop:account_verification:update</attribute>
+                    </attribute>
                 </attribute>
                 <attribute name="openapi_context">
                     <attribute name="summary">Verifies Customer account</attribute>

@@ -25,7 +25,10 @@
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/admin/catalog-promotion-translations/{id}</attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:catalog_promotion:show</attribute>
+                    <attribute name="groups">
+                        <attribute>admin:catalog_promotion:show</attribute>
+                        <attribute>sylius:admin:catalog_promotion:show</attribute>
+                    </attribute>
                 </attribute>
             </itemOperation>
         </itemOperations>

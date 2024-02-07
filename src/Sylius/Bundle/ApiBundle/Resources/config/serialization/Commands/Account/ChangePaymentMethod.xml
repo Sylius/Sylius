@@ -18,6 +18,7 @@
     <class name="Sylius\Bundle\ApiBundle\Command\Account\ChangePaymentMethod">
         <attribute name="paymentMethodCode" serialized-name="paymentMethod">
             <group>shop:order:account:change_payment_method</group>
+            <group>sylius:shop:order:account:change_payment_method</group>
         </attribute>
     </class>
 </serializer>

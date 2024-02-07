@@ -27,7 +27,10 @@
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/admin/shipping-methods/{code}</attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:shipping_method:show</attribute>
+                    <attribute name="groups">
+                        <attribute>admin:shipping_method:show</attribute>
+                        <attribute>sylius:admin:shipping_method:show</attribute>
+                    </attribute>
                 </attribute>
             </itemOperation>
 
@@ -35,7 +38,10 @@
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/shop/shipping-methods/{code}</attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">shop:shipping_method:show</attribute>
+                    <attribute name="groups">
+                        <attribute>shop:shipping_method:show</attribute>
+                        <attribute>sylius:shop:shipping_method:show</attribute>
+                    </attribute>
                 </attribute>
             </itemOperation>
 
@@ -43,10 +49,16 @@
                 <attribute name="method">PUT</attribute>
                 <attribute name="path">/admin/shipping-methods/{code}</attribute>
                 <attribute name="denormalization_context">
-                    <attribute name="groups">admin:shipping_method:update</attribute>
+                    <attribute name="groups">
+                        <attribute>admin:shipping_method:update</attribute>
+                        <attribute>sylius:admin:shipping_method:update</attribute>
+                    </attribute>
                 </attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:shipping_method:show</attribute>
+                    <attribute name="groups">
+                        <attribute>admin:shipping_method:show</attribute>
+                        <attribute>sylius:admin:shipping_method:show</attribute>
+                    </attribute>
                 </attribute>
                 <attribute name="openapi_context">
                     <attribute name="description">
@@ -91,7 +103,10 @@ Example configuration for `order_total_greater_than_or_equal` rule type:
                     <attribute name="summary">Archives Shipping Method</attribute>
                 </attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:shipping_method:show</attribute>
+                    <attribute name="groups">
+                        <attribute>admin:shipping_method:show</attribute>
+                        <attribute>sylius:admin:shipping_method:show</attribute>
+                    </attribute>
                 </attribute>
             </itemOperation>
 
@@ -104,7 +119,10 @@ Example configuration for `order_total_greater_than_or_equal` rule type:
                     <attribute name="summary">Restores archived Shipping Method</attribute>
                 </attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:shipping_method:show</attribute>
+                    <attribute name="groups">
+                        <attribute>admin:shipping_method:show</attribute>
+                        <attribute>sylius:admin:shipping_method:show</attribute>
+                    </attribute>
                 </attribute>
             </itemOperation>
         </itemOperations>
@@ -119,7 +137,10 @@ Example configuration for `order_total_greater_than_or_equal` rule type:
                     <attribute>Sylius\Bundle\ApiBundle\Filter\Doctrine\TranslationOrderNameAndLocaleFilter</attribute>
                 </attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:shipping_method:index</attribute>
+                    <attribute name="groups">
+                        <attribute>admin:shipping_method:index</attribute>
+                        <attribute>sylius:admin:shipping_method:index</attribute>
+                    </attribute>
                 </attribute>
             </collectionOperation>
             <collectionOperation name="shop_get">
@@ -132,6 +153,7 @@ Example configuration for `order_total_greater_than_or_equal` rule type:
                 <attribute name="normalization_context">
                     <attribute name="groups">
                         <attribute>shop:shipping_method:index</attribute>
+                        <attribute>sylius:shop:shipping_method:index</attribute>
                     </attribute>
                 </attribute>
             </collectionOperation>
@@ -140,10 +162,16 @@ Example configuration for `order_total_greater_than_or_equal` rule type:
                 <attribute name="method">POST</attribute>
                 <attribute name="path">/admin/shipping-methods</attribute>
                 <attribute name="denormalization_context">
-                    <attribute name="groups">admin:shipping_method:create</attribute>
+                    <attribute name="groups">
+                        <attribute>admin:shipping_method:create</attribute>
+                        <attribute>sylius:admin:shipping_method:create</attribute>
+                    </attribute>
                 </attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:shipping_method:show</attribute>
+                    <attribute name="groups">
+                        <attribute>admin:shipping_method:show</attribute>
+                        <attribute>sylius:admin:shipping_method:show</attribute>
+                    </attribute>
                 </attribute>
                 <attribute name="openapi_context">
                     <attribute name="description">

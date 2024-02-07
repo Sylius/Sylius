@@ -23,7 +23,10 @@
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/admin/order-item-units/{id}</attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:order_item_unit:show</attribute>
+                    <attribute name="groups">
+                        <attribute>admin:order_item_unit:show</attribute>
+                        <attribute>sylius:admin:order_item_unit:show</attribute>
+                    </attribute>
                 </attribute>
             </itemOperation>
 
@@ -31,7 +34,10 @@
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/shop/order-item-units/{id}</attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">shop:order_item_unit:show</attribute>
+                    <attribute name="groups">
+                        <attribute>shop:order_item_unit:show</attribute>
+                        <attribute>sylius:shop:order_item_unit:show</attribute>
+                    </attribute>
                 </attribute>
             </itemOperation>
         </itemOperations>

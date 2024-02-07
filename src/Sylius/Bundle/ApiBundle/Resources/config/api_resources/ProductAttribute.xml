@@ -30,7 +30,10 @@
                     <attribute>sylius.api.order_filter.position</attribute>
                 </attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:product_attribute:index</attribute>
+                    <attribute name="groups">
+                        <attribute>admin:product_attribute:index</attribute>
+                        <attribute>sylius:admin:product_attribute:index</attribute>
+                    </attribute>
                 </attribute>
             </collectionOperation>
 
@@ -38,10 +41,16 @@
                 <attribute name="method">POST</attribute>
                 <attribute name="path">/admin/product-attributes</attribute>
                 <attribute name="denormalization_context">
-                    <attribute name="groups">admin:product_attribute:create</attribute>
+                    <attribute name="groups">
+                        <attribute>admin:product_attribute:create</attribute>
+                        <attribute>sylius:admin:product_attribute:create</attribute>
+                    </attribute>
                 </attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:product_attribute:show</attribute>
+                    <attribute name="groups">
+                        <attribute>admin:product_attribute:show</attribute>
+                        <attribute>sylius:admin:product_attribute:show</attribute>
+                    </attribute>
                 </attribute>
                 <attribute name="openapi_context">
                     <attribute name="description">
@@ -111,7 +120,10 @@ Example configuration for a `select` type attribute:
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/admin/product-attributes/{code}</attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:product_attribute:show</attribute>
+                    <attribute name="groups">
+                        <attribute>admin:product_attribute:show</attribute>
+                        <attribute>sylius:admin:product_attribute:show</attribute>
+                    </attribute>
                 </attribute>
             </itemOperation>
 
@@ -124,10 +136,16 @@ Example configuration for a `select` type attribute:
                 <attribute name="method">PUT</attribute>
                 <attribute name="path">/admin/product-attributes/{code}</attribute>
                 <attribute name="denormalization_context">
-                    <attribute name="groups">admin:product_attribute:update</attribute>
+                    <attribute name="groups">
+                        <attribute>admin:product_attribute:update</attribute>
+                        <attribute>sylius:admin:product_attribute:update</attribute>
+                    </attribute>
                 </attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:product_attribute:show</attribute>
+                    <attribute name="groups">
+                        <attribute>admin:product_attribute:show</attribute>
+                        <attribute>sylius:admin:product_attribute:show</attribute>
+                    </attribute>
                 </attribute>
                 <attribute name="openapi_context">
                     <attribute name="description">
@@ -195,7 +213,10 @@ Example configuration for a `select` type attribute:
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/shop/product-attributes/{code}</attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">shop:product_attribute:show</attribute>
+                    <attribute name="groups">
+                        <attribute>shop:product_attribute:show</attribute>
+                        <attribute>sylius:shop:product_attribute:show</attribute>
+                    </attribute>
                 </attribute>
             </itemOperation>
         </itemOperations>
