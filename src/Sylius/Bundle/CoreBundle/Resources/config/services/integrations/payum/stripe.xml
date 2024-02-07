@@ -18,21 +18,21 @@
     <services>
         <defaults public="true" />
 
-        <service id="sylius.payment_request.command_provider.payum.stripe" class="Sylius\Bundle\CoreBundle\PaymentRequest\Provider\PaymentRequestTypeCommandProvider">
-            <argument type="tagged_locator" tag="sylius.payment_request.command_provider.payum.stripe" index-by="type" />
+        <service id="sylius.payment_request.payum.command_provider.stripe" class="Sylius\Bundle\CoreBundle\PaymentRequest\CommandProvider\PaymentRequestTypeCommandProvider">
+            <argument type="tagged_locator" tag="sylius.payment_request.payum.command_provider.stripe" index-by="type" />
             <tag name="sylius.payment_request.command_provider" factory="stripe" />
         </service>
 
-        <service id="sylius.payment_request.command_provider.payum.stripe.capture" class="Sylius\Bundle\CoreBundle\PaymentRequest\Payum\Provider\CaptureCommandProvider">
-            <tag name="sylius.payment_request.command_provider.payum.stripe" type="capture" />
+        <service id="sylius.payment_request.payum.command_provider.stripe.capture" class="Sylius\Bundle\CoreBundle\PaymentRequest\Payum\CommandProvider\CaptureCommandProvider">
+            <tag name="sylius.payment_request.payum.command_provider.stripe" type="capture" />
         </service>
 
-        <service id="sylius.payment_request.command_provider.payum.stripe.authorize" class="Sylius\Bundle\CoreBundle\PaymentRequest\Payum\Provider\AuthorizeCommandProvider">
-            <tag name="sylius.payment_request.command_provider.payum.stripe" type="authorize" />
+        <service id="sylius.payment_request.payum.command_provider.stripe.authorize" class="Sylius\Bundle\CoreBundle\PaymentRequest\Payum\CommandProvider\AuthorizeCommandProvider">
+            <tag name="sylius.payment_request.payum.command_provider.stripe" type="authorize" />
         </service>
 
-        <service id="sylius.payment_request.command_provider.payum.stripe.status" class="Sylius\Bundle\CoreBundle\PaymentRequest\Payum\Provider\StatusCommandProvider">
-            <tag name="sylius.payment_request.command_provider.payum.stripe" type="status" />
+        <service id="sylius.payment_request.payum.command_provider.stripe.status" class="Sylius\Bundle\CoreBundle\PaymentRequest\Payum\CommandProvider\StatusCommandProvider">
+            <tag name="sylius.payment_request.payum.command_provider.stripe" type="status" />
         </service>
 
     </services>

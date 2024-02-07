@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\PaymentRequest\CommandDispatcher;
 
-use Sylius\Bundle\CoreBundle\PaymentRequest\Provider\PaymentRequestCommandProviderInterface;
+use Sylius\Bundle\CoreBundle\PaymentRequest\CommandProvider\PaymentRequestCommandProviderInterface;
 use Sylius\Bundle\PaymentBundle\Exception\PaymentRequestNotSupportedException;
 use Sylius\Component\Payment\Model\PaymentRequestInterface;
 use Sylius\Component\Payment\Repository\PaymentRequestRepositoryInterface;

@@ -20,7 +20,7 @@
 
         <service id="Sylius\Bundle\CoreBundle\PaymentRequest\CommandDispatcher\PaymentRequestCommandDispatcherInterface" class="Sylius\Bundle\CoreBundle\PaymentRequest\CommandDispatcher\PaymentRequestCommandDispatcher">
             <argument type="service" id="sylius.repository.payment_request" />
-            <argument type="service" id="Sylius\Bundle\CoreBundle\PaymentRequest\Provider\PaymentRequestCommandProviderInterface" />
+            <argument type="service" id="Sylius\Bundle\CoreBundle\PaymentRequest\CommandProvider\PaymentRequestCommandProviderInterface" />
             <argument type="service" id="sylius.command_bus" />
         </service>
 

@@ -11,13 +11,13 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\CoreBundle\PaymentRequest\Payum\Provider;
+namespace Sylius\Bundle\CoreBundle\PaymentRequest\CommandProvider\Offline;
 
-use Sylius\Bundle\CoreBundle\PaymentRequest\Payum\Command\CapturePaymentRequest;
-use Sylius\Bundle\CoreBundle\PaymentRequest\Provider\PaymentRequestCommandProviderInterface;
+use Sylius\Bundle\CoreBundle\PaymentRequest\Command\Offline\CapturePaymentRequest;
+use Sylius\Bundle\CoreBundle\PaymentRequest\CommandProvider\PaymentRequestCommandProviderInterface;
 use Sylius\Component\Payment\Model\PaymentRequestInterface;
 
-final class CaptureCommandProvider implements PaymentRequestCommandProviderInterface
+final class CapturePaymentRequestCommandProvider implements PaymentRequestCommandProviderInterface
 {
     public function supports(PaymentRequestInterface $paymentRequest): bool
     {
