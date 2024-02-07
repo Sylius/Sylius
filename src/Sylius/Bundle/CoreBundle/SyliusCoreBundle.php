@@ -25,6 +25,7 @@ use Sylius\Bundle\CoreBundle\DependencyInjection\Compiler\BackwardsCompatibility
 use Sylius\Bundle\CoreBundle\DependencyInjection\Compiler\BackwardsCompatibility\ResolveShopUserTargetEntityPass;
 use Sylius\Bundle\CoreBundle\DependencyInjection\Compiler\BackwardsCompatibility\Symfony5AuthenticationManagerPass;
 use Sylius\Bundle\CoreBundle\DependencyInjection\Compiler\BackwardsCompatibility\Symfony6PrivateServicesPass;
+use Sylius\Bundle\CoreBundle\DependencyInjection\Compiler\CheckStatisticsOrdersTotalsProviderTypePass;
 use Sylius\Bundle\CoreBundle\DependencyInjection\Compiler\CircularDependencyBreakingErrorListenerPass;
 use Sylius\Bundle\CoreBundle\DependencyInjection\Compiler\IgnoreAnnotationsPass;
 use Sylius\Bundle\CoreBundle\DependencyInjection\Compiler\LazyCacheWarmupPass;
@@ -95,6 +96,7 @@ final class SyliusCoreBundle extends AbstractResourceBundle
         $container->addCompilerPass(new TranslatableEntityLocalePass());
         $container->addCompilerPass(new CancelOrderStateMachineCallbackPass());
         $container->addCompilerPass(new SyliusPriceHistoryLegacyAliasesPass());
+        $container->addCompilerPass(new CheckStatisticsOrdersTotalsProviderTypePass());
     }
 
     protected function getModelNamespace(): string
