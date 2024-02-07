@@ -18,16 +18,16 @@
     <services>
         <defaults public="true" />
 
-        <service id="sylius.payment_request.command_provider.offline" class="Sylius\Bundle\CoreBundle\PaymentRequest\Provider\PaymentRequestTypeCommandProvider">
+        <service id="sylius.payment_request.command_provider.offline" class="Sylius\Bundle\CoreBundle\PaymentRequest\CommandProvider\PaymentRequestTypeCommandProvider">
             <argument type="tagged_locator" tag="sylius.payment_request.command_provider.offline" index-by="type" />
             <tag name="sylius.payment_request.command_provider" factory="offline" priority="-100" />
         </service>
 
-        <service id="sylius.payment_request.command_provider.offline.capture" class="Sylius\Bundle\CoreBundle\PaymentRequest\Provider\Offline\CapturePaymentRequestCommandProvider">
+        <service id="sylius.payment_request.command_provider.offline.capture" class="Sylius\Bundle\CoreBundle\PaymentRequest\CommandProvider\Offline\CapturePaymentRequestCommandProvider">
             <tag name="sylius.payment_request.command_provider.offline" type="capture" />
         </service>
 
-        <service id="sylius.payment_request.command_provider.offline.status" class="Sylius\Bundle\CoreBundle\PaymentRequest\Provider\Offline\StatusPaymentRequestCommandProvider">
+        <service id="sylius.payment_request.command_provider.offline.status" class="Sylius\Bundle\CoreBundle\PaymentRequest\CommandProvider\Offline\StatusPaymentRequestCommandProvider">
             <tag name="sylius.payment_request.command_provider.offline" type="status" />
         </service>
 
