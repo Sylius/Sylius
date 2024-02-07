@@ -150,6 +150,62 @@ final class StatisticsTest extends JsonApiTestCase
         $this->assertResponseCode($this->client->getResponse(), Response::HTTP_NOT_FOUND);
     }
 
+    /** @test */
+    public function it_returns_a_validation_error_if_start_date_is_after_end_date(): void
+    {
+        $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel.yaml']);
+
+        $this->client->request(
+            method: 'GET',
+            uri: '/api/v2/admin/statistics',
+            parameters: [
+                'channelCode' => 'WEB',
+                'startDate' => '2023-01-01T00:00:00',
+                'interval' => 'month',
+                'endDate' => '2022-01-01T00:00:00',
+            ],
+            server: $this->headerBuilder()->withAdminUserAuthorization('api@example.com')->build(),
+        );
+
+        $this->assertResponseViolations(
+            $this->client->getResponse(),
+            [
+                [
+                    'propertyPath' => '',
+                    'message' => 'The start date must be earlier than the end date.',
+                ],
+            ],
+        );
+    }
+
+    /** @test */
+    public function it_returns_a_validation_error_if_start_date_is_equal_to_end_date(): void
+    {
+        $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel.yaml']);
+
+        $this->client->request(
+            method: 'GET',
+            uri: '/api/v2/admin/statistics',
+            parameters: [
+                'channelCode' => 'WEB',
+                'startDate' => '2023-01-01T00:00:00',
+                'interval' => 'month',
+                'endDate' => '2023-01-01T00:00:00',
+            ],
+            server: $this->headerBuilder()->withAdminUserAuthorization('api@example.com')->build(),
+        );
+
+        $this->assertResponseViolations(
+            $this->client->getResponse(),
+            [
+                [
+                    'propertyPath' => '',
+                    'message' => 'The start date must be earlier than the end date.',
+                ],
+            ],
+        );
+    }
+
     /**
      * @test
      *
@@ -169,7 +225,7 @@ final class StatisticsTest extends JsonApiTestCase
             server: $this->headerBuilder()->withAdminUserAuthorization('api@example.com')->build(),
         );
 
-        $this->assertResponseCode($this->client->getResponse(), Response::HTTP_BAD_REQUEST);
+        $this->assertResponseCode($this->client->getResponse(), Response::HTTP_UNPROCESSABLE_ENTITY);
     }
 
     public function getIntervals(): iterable

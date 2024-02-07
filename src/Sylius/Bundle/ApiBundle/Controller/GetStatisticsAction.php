@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\Controller;
 
+use ApiPlatform\Symfony\Validator\Exception\ValidationException;
 use Sylius\Bundle\ApiBundle\Query\GetStatistics;
 use Sylius\Bundle\ApiBundle\Validator\Constraints;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -22,15 +23,16 @@ use Symfony\Component\Messenger\Exception\HandlerFailedException;
 use Symfony\Component\Messenger\HandleTrait;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Serializer\SerializerInterface;
+use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\Constraints as SymfonyConstraints;
-use Symfony\Component\Validator\ConstraintViolationListInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 final class GetStatisticsAction
 {
     use HandleTrait;
 
-    private SymfonyConstraints\Collection $constraint;
+    /** @var array<array-key, Constraint> */
+    private array $constraints;
 
     /** @var array<string, string> */
     private array $intervalsMap;
@@ -44,7 +46,7 @@ final class GetStatisticsAction
     ) {
         $this->messageBus = $messageBus;
         $this->intervalsMap = $this->populateIntervals($intervalsMap);
-        $this->constraint = $this->createInputDataConstraints();
+        $this->constraints = $this->createInputDataConstraints();
     }
 
     /**
@@ -54,9 +56,9 @@ final class GetStatisticsAction
     {
         $parameters = $request->query->all();
 
-        $violations = $this->validator->validate($parameters, $this->constraint);
+        $violations = $this->validator->validate($parameters, $this->constraints);
         if (count($violations) > 0) {
-            return $this->createBadRequestResponse($violations);
+            throw new ValidationException($violations);
         }
 
         $interval = $parameters['interval'];
@@ -84,30 +86,24 @@ final class GetStatisticsAction
         }
     }
 
-    private function createBadRequestResponse(ConstraintViolationListInterface $violations): JsonResponse
+    /** @return array<array-key, Constraint> */
+    private function createInputDataConstraints(): array
     {
-        return new JsonResponse(
-            data: $this->serializer->serialize($violations, 'json'),
-            status: Response::HTTP_BAD_REQUEST,
-            json: true,
-        );
-    }
-
-    private function createInputDataConstraints(): SymfonyConstraints\Collection
-    {
-        return new SymfonyConstraints\Collection([
-            'channelCode' => new Constraints\Code(),
-            'startDate' => [
-                new SymfonyConstraints\NotBlank(),
-                new SymfonyConstraints\DateTime('Y-m-d\TH:i:s', message: 'sylius.date_time.invalid'),
-            ],
-            'interval' => new SymfonyConstraints\Choice(choices: array_keys($this->intervalsMap), multiple: false),
-            'endDate' => [
-                new SymfonyConstraints\NotBlank(),
-                new SymfonyConstraints\DateTime('Y-m-d\TH:i:s', message: 'sylius.date_time.invalid'),
-                new SymfonyConstraints\GreaterThan(propertyPath: 'startDate'),
-            ],
-        ]);
+        return [
+            new SymfonyConstraints\Collection([
+                'channelCode' => new Constraints\Code(),
+                'startDate' => [
+                    new SymfonyConstraints\NotBlank(),
+                    new SymfonyConstraints\DateTime('Y-m-d\TH:i:s', message: 'sylius.date_time.invalid'),
+                ],
+                'interval' => new SymfonyConstraints\Choice(choices: array_keys($this->intervalsMap), multiple: false),
+                'endDate' => [
+                    new SymfonyConstraints\NotBlank(),
+                    new SymfonyConstraints\DateTime('Y-m-d\TH:i:s', message: 'sylius.date_time.invalid'),
+                ],
+            ]),
+            new SymfonyConstraints\Expression(expression: 'value["startDate"] < value["endDate"]', message: 'sylius.statistics.end_date.invalid'),
+        ];
     }
 
     /**
