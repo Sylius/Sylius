@@ -139,3 +139,53 @@ is determined directly from its key, making the explicit transmission of the `lo
 continues to support the explicit sending of the `locale` field, it is essential that this explicitly sent locale matches 
 the key in the translation array. In cases of a mismatch between the key and an explicitly sent locale, the API will 
 respond with a `Sylius\Bundle\ApiBundle\Exception\TranslationLocaleMismatchException`.
+
+1. The following Command Handlers constructor signatures have changed:
+
+    `Sylius\Bundle\ApiBundle\CommandHandler\Account\SendAccountRegistrationEmailHandler`:
+    ```diff
+        use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
+    -   use Sylius\Component\Mailer\Sender\SenderInterface;
+        use Sylius\Component\User\Repository\UserRepositoryInterface;
+    +   use Sylius\Bundle\CoreBundle\Mailer\AccountRegistrationEmailManagerInterface;
+   
+        public function __construct(
+    +       private AccountRegistrationEmailManagerInterface $accountRegistrationEmailManager,
+            private UserRepositoryInterface $shopUserRepository,
+            private ChannelRepositoryInterface $channelRepository,
+    -       private SenderInterface $emailSender,
+        ) {
+        }
+    ```
+
+    `Sylius\Bundle\ApiBundle\CommandHandler\Account\SendAccountVerificationEmailHandler`:
+    ```diff
+        use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
+    -   use Sylius\Component\Mailer\Sender\SenderInterface;
+        use Sylius\Component\User\Repository\UserRepositoryInterface;
+    +   use Sylius\Bundle\CoreBundle\Mailer\AccountVerificationEmailManagerInterface;
+   
+        public function __construct(
+    +       private AccountVerificationEmailManagerInterface $accountVerificationEmailManager,
+            private UserRepositoryInterface $shopUserRepository,
+            private ChannelRepositoryInterface $channelRepository,
+    -       private SenderInterface $emailSender,
+        ) {
+        }
+    ```
+
+    `Sylius\Bundle\ApiBundle\CommandHandler\Account\SendResetPasswordEmailHandler`:
+    ```diff
+        use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
+    -   use Sylius\Component\Mailer\Sender\SenderInterface;
+        use Sylius\Component\User\Repository\UserRepositoryInterface;
+    +   use Sylius\Bundle\CoreBundle\Mailer\ResetPasswordEmailManagerInterface;
+   
+        public function __construct(
+    +       private ResetPasswordEmailManagerInterface $resetPasswordEmailManager,
+            private UserRepositoryInterface $shopUserRepository,
+            private ChannelRepositoryInterface $channelRepository,
+    -       private SenderInterface $emailSender,
+        ) {
+        }
+    ```
