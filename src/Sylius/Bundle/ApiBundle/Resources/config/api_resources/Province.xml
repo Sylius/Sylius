@@ -50,6 +50,17 @@
             </itemOperation>
         </itemOperations>
 
+        <subresourceOperations>
+            <subresourceOperation name="api_countries_provinces_get_subresource">
+                <attribute name="normalization_context">
+                    <attribute name="groups">
+                        <attribute>admin:province:show</attribute>
+                        <attribute>sylius:admin:province:show</attribute>
+                    </attribute>
+                </attribute>
+            </subresourceOperation>
+        </subresourceOperations>
+
         <property name="id" identifier="false" writable="false" />
         <property name="code" identifier="true" required="true" />
         <property name="name" required="true" />
