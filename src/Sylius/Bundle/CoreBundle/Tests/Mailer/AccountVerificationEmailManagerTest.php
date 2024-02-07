@@ -58,7 +58,7 @@ final class AccountVerificationEmailManagerTest extends KernelTestCase
         self::assertEmailAddressContains($email, 'To', 'customer@example.com');
         self::assertEmailHtmlBodyContains(
             $email,
-            $translator->trans('sylius.email.verification_token.verify_your_email_address', [], null, 'en_US'),
+            $translator->trans('sylius.email.verification_token.message', [], null, 'en_US'),
         );
     }
 
