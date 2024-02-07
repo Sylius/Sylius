@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Bundle\AdminBundle\TwigComponent\Dashboard;
 
 use Sylius\Bundle\AdminBundle\Provider\StatisticsDataProviderInterface;
+use Sylius\Bundle\AdminBundle\TwigComponent\HookableComponentTrait;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Symfony\UX\LiveComponent\Attribute\AsLiveComponent;
@@ -29,12 +30,7 @@ final class StatisticsComponent
 {
     use ComponentToolsTrait;
     use DefaultActionTrait;
-
-    #[ExposeInTemplate]
-    public readonly string $eventName;
-
-    #[LiveProp]
-    public string $channelCode;
+    use HookableComponentTrait;
 
     #[LiveProp]
     #[ExposeInTemplate]
@@ -59,7 +55,6 @@ final class StatisticsComponent
         private readonly ChannelRepositoryInterface $channelRepository,
         private readonly StatisticsDataProviderInterface $statisticsDataProvider,
     ) {
-        $this->eventName = 'sylius.admin.dashboard.statistics';
     }
 
     /**
@@ -70,7 +65,7 @@ final class StatisticsComponent
     public function getStatistics(): array
     {
         /** @var ChannelInterface $channel */
-        $channel = $this->channelRepository->findOneByCode($this->channelCode);
+        $channel = $this->channelRepository->findOneByCode($this->hookableData['channelCode']);
 
         return $this->statisticsDataProvider->getRawData(
             $channel,

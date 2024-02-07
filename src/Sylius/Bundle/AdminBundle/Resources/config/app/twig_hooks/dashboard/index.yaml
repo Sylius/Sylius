@@ -1,0 +1,49 @@
+twig_hooks:
+    hooks:
+        'sylius_admin.dashboard.index':
+            sidebar:
+                template: '@SyliusAdmin/Shared/Crud/Common/_sidebar.html.twig'
+            navbar:
+                template: '@SyliusAdmin/Shared/Crud/Common/_navbar.html.twig'
+            content:
+                template: '@SyliusAdmin/Shared/Crud/Common/_content.html.twig'
+
+        'sylius_admin.dashboard.index.content':
+            header:
+                template: '@SyliusAdmin/Shared/Crud/Common/Content/_header.html.twig'
+            statistics:
+                component: 'SyliusAdmin.Dashboard.Statistics'
+            latest_statistics:
+                template: '@SyliusAdmin/Dashboard/Index/Content/_latestStatistics.html.twig'
+
+        'sylius_admin.dashboard.index.content.header':
+            title_block:
+                template: '@SyliusAdmin/Shared/Crud/Common/Content/Header/_titleBlock.html.twig'
+
+        'sylius_admin.dashboard.index.content.header.title_block':
+            title:
+                template: '@SyliusAdmin/Shared/Crud/Common/Content/Header/TitleBlock/_title.html.twig'
+                configuration:
+                    title: sylius.ui.dashboard
+
+        'sylius_admin.dashboard.index.content.statistics':
+            statistics_grid:
+                template: '@SyliusAdmin/Dashboard/Index/Content/_statisticsGrid.html.twig'
+            statistics_chart:
+                template: '@SyliusAdmin/Dashboard/Index/Content/_statisticsChart.html.twig'
+
+        'sylius_admin.dashboard.index.content.statistics.statistics_grid':
+            sales:
+                template: '@SyliusAdmin/Dashboard/Index/Content/StatisticsGrid/_sales.html.twig'
+            paid_orders:
+                template: '@SyliusAdmin/Dashboard/Index/Content/StatisticsGrid/_paidOrders.html.twig'
+            customers:
+                template: '@SyliusAdmin/Dashboard/Index/Content/StatisticsGrid/_customers.html.twig'
+            average_order_value:
+                template: '@SyliusAdmin/Dashboard/Index/Content/StatisticsGrid/_averageOrderValue.html.twig'
+
+        'sylius_admin.dashboard.index.content.latest_statistics':
+            new_customers:
+                component: 'SyliusAdmin.Dashboard.NewCustomers'
+            new_orders:
+                component: 'SyliusAdmin.Dashboard.NewOrders'

@@ -1,3 +1,6 @@
+{% set rangeName = hookable_data.range %}
+{% set statisticsData = hookable_data.statisticsData %}
+
 <div class="card mb-3">
     <div data-loading>
         <div class="sylius-loader">
@@ -19,6 +22,6 @@
                 </button>
             </div>
         </div>
-        <div id="statistics-chart" class="chart-lg" data-intervals="{{ _context.statisticsData.sales_summary.intervals|json_encode }}" data-sales="{{ _context.statisticsData.sales_summary.sales|json_encode }}"></div>
+        <div id="statistics-chart" class="chart-lg" data-intervals="{{ statisticsData.sales_summary.intervals|json_encode }}" data-sales="{{ statisticsData.sales_summary.sales|json_encode }}"></div>
     </div>
 </div>

@@ -18,14 +18,6 @@ use Symfony\UX\TwigComponent\Attribute\ExposeInTemplate;
 
 trait HookableComponentTrait
 {
-    #[LiveProp(fieldName: 'parent_main_hook')]
-    #[ExposeInTemplate(name: 'parent_main_hook')]
-    public ?string $parentMainHook = null;
-
-    #[LiveProp(fieldName: 'parent_fallback_hook')]
-    #[ExposeInTemplate(name: 'parent_fallback_hook')]
-    public ?string $parentFallbackHook = null;
-
     #[LiveProp(fieldName: 'hookable_data')]
     #[ExposeInTemplate(name: 'hookable_data')]
     public mixed $hookableData = null;
