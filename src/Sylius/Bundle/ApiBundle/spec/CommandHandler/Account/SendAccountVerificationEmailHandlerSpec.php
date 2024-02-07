@@ -14,7 +14,10 @@ declare(strict_types=1);
 namespace spec\Sylius\Bundle\ApiBundle\CommandHandler\Account;
 
 use PhpSpec\ObjectBehavior;
+use Prophecy\Argument;
 use Sylius\Bundle\ApiBundle\Command\Account\SendAccountVerificationEmail;
+use Sylius\Bundle\ApiBundle\Exception\ChannelNotFoundException;
+use Sylius\Bundle\ApiBundle\Exception\UserNotFoundException;
 use Sylius\Bundle\CoreBundle\Mailer\AccountVerificationEmailManagerInterface;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
@@ -49,5 +52,40 @@ final class SendAccountVerificationEmailHandlerSpec extends ObjectBehavior
         ;
 
         $this(new SendAccountVerificationEmail('shop@example.com', 'en_US', 'WEB'));
+    }
+
+    function it_throws_an_exception_if_user_has_not_been_found(
+        AccountVerificationEmailManagerInterface $accountVerificationEmailManager,
+        UserRepositoryInterface $shopUserRepository,
+        ChannelRepositoryInterface $channelRepository,
+    ): void {
+        $shopUserRepository->findOneByEmail('shop@example.com')->willReturn(null);
+        $channelRepository->findOneByCode('WEB')->shouldNotBeCalled();
+        $accountVerificationEmailManager->sendAccountVerificationEmail(Argument::cetera())->shouldNotBeCalled();
+
+        $this
+            ->shouldThrow(UserNotFoundException::class)
+            ->during(
+                '__invoke',
+                [new SendAccountVerificationEmail('shop@example.com', 'en_US', 'WEB')],
+            );
+    }
+
+    function it_throws_an_exception_if_channel_has_not_been_found(
+        AccountVerificationEmailManagerInterface $accountVerificationEmailManager,
+        UserRepositoryInterface $shopUserRepository,
+        ChannelRepositoryInterface $channelRepository,
+        ShopUserInterface $shopUser,
+    ): void {
+        $shopUserRepository->findOneByEmail('shop@example.com')->willReturn($shopUser);
+        $channelRepository->findOneByCode('WEB')->willReturn(null);
+        $accountVerificationEmailManager->sendAccountVerificationEmail(Argument::cetera())->shouldNotBeCalled();
+
+        $this
+            ->shouldThrow(ChannelNotFoundException::class)
+            ->during(
+                '__invoke',
+                [new SendAccountVerificationEmail('shop@example.com', 'en_US', 'WEB')],
+            );
     }
 }
