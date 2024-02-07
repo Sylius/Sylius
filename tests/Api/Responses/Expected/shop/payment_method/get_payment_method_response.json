@@ -6,6 +6,6 @@
     "code": "PAYPAL",
     "position": 3,
     "name": "PayPal",
-    "description": "Ex aliquid eveniet harum temporibus voluptatem et eligendi aperiam. Odit corrupti odio earum esse ab.",
+    "description": @string@,
     "instructions": null
 }
