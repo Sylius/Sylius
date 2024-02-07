@@ -1,9 +1,9 @@
 {% import '@SyliusAdmin/Shared/Helper/table.html.twig' as _table %}
 {% import '@SyliusAdmin/Shared/Helper/pagination.html.twig' as _pagination %}
 
-{% set grid = hookable_data.resources %}
-{% set data = grid.data %}
-{% set definition = grid.definition %}
+{% set resources = hookable_data.resources %}
+{% set data = resources.data %}
+{% set definition = resources.definition %}
 
 {% if data|length > 0 %}
     <div class="card">
@@ -12,7 +12,7 @@
                 {% if data|length > 0 and definition.actionGroups.bulk is defined and definition.getEnabledActions('bulk')|length > 0 %}
                     <div class="sylius-grid-nav__bulk">
                         {% for action in definition.getEnabledActions('bulk') %}
-                            {{ sylius_grid_render_bulk_action(grid, action, null) }}
+                            {{ sylius_grid_render_bulk_action(resources, action, null) }}
                         {% endfor %}
                     </div>
                 {% endif %}
