@@ -39,6 +39,12 @@
                         <attribute>sylius:admin:zone:create</attribute>
                     </attribute>
                 </attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">
+                        <attribute>admin:zone:show</attribute>
+                        <attribute>sylius:admin:zone:show</attribute>
+                    </attribute>
+                </attribute>
             </collectionOperation>
         </collectionOperations>
 
@@ -61,12 +67,24 @@
                         <attribute>sylius:admin:zone:update</attribute>
                     </attribute>
                 </attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">
+                        <attribute>admin:zone:show</attribute>
+                        <attribute>sylius:admin:zone:show</attribute>
+                    </attribute>
+                </attribute>
             </itemOperation>
 
             <itemOperation name="admin_delete">
                 <attribute name="method">DELETE</attribute>
             </itemOperation>
         </itemOperations>
+
+        <subresourceOperations>
+            <subresourceOperation name="members_get_subresource">
+                <attribute name="method">GET</attribute>
+            </subresourceOperation>
+        </subresourceOperations>
 
         <property name="id" identifier="false" writable="false" />
         <property name="createdAt" writable="false" />
