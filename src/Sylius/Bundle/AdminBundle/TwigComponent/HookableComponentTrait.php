@@ -18,10 +18,6 @@ use Symfony\UX\TwigComponent\Attribute\ExposeInTemplate;
 
 trait HookableComponentTrait
 {
-    #[LiveProp(fieldName: 'hookable_data')]
-    #[ExposeInTemplate(name: 'hookable_data')]
-    public mixed $hookableData = null;
-
     #[LiveProp(fieldName: 'hookable_configuration')]
     #[ExposeInTemplate(name: 'hookable_configuration')]
     public mixed $hookableConfiguration = null;
