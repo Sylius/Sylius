@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\CoreBundle\Tests\DependencyInjection\Compiler;
 
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractCompilerPassTestCase;
@@ -16,7 +18,7 @@ use Sylius\Bundle\CoreBundle\DependencyInjection\Compiler\CheckStatisticsOrdersT
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 
-class CheckStatisticsOrdersTotalsProviderTypePassTest extends AbstractCompilerPassTestCase
+final class CheckStatisticsOrdersTotalsProviderTypePassTest extends AbstractCompilerPassTestCase
 {
     /** @test */
     public function it_passes_when_all_providers_are_present(): void
