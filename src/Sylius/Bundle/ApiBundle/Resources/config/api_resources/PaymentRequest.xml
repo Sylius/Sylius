@@ -30,7 +30,7 @@
                     <attribute>sylius.api.search_payment_request_filter</attribute>
                 </attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:payment_request:show</attribute>
+                    <attribute name="groups">sylius:admin:payment_request:show</attribute>
                 </attribute>
             </collectionOperation>
 
@@ -40,10 +40,10 @@
                 <attribute name="messenger">input</attribute>
                 <attribute name="input">Sylius\Bundle\ApiBundle\Command\Payment\AddPaymentRequest</attribute>
                 <attribute name="denormalization_context">
-                    <attribute name="groups">shop:payment_request:create</attribute>
+                    <attribute name="groups">sylius:shop:payment_request:create</attribute>
                 </attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">shop:payment_request:show</attribute>
+                    <attribute name="groups">sylius:shop:payment_request:show</attribute>
                 </attribute>
             </collectionOperation>
         </collectionOperations>
@@ -53,7 +53,7 @@
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/shop/payment-requests/{hash}</attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">shop:payment_request:show</attribute>
+                    <attribute name="groups">sylius:shop:payment_request:show</attribute>
                 </attribute>
             </itemOperation>
 
@@ -63,11 +63,11 @@
                 <attribute name="messenger">input</attribute>
                 <attribute name="input">Sylius\Bundle\ApiBundle\Command\Payment\UpdatePaymentRequest</attribute>
                 <attribute name="denormalization_context">
-                    <attribute name="groups">shop:payment_request:update</attribute>
+                    <attribute name="groups">sylius:shop:payment_request:update</attribute>
                 </attribute>
                 <attribute name="normalization_context">
                     <attribute name="groups">
-                        <attribute>shop:payment_request:show</attribute>
+                        <attribute>sylius:shop:payment_request:show</attribute>
                     </attribute>
                 </attribute>
             </itemOperation>
