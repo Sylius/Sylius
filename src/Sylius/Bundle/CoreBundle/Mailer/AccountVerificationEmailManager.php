@@ -26,9 +26,9 @@ class AccountVerificationEmailManager implements AccountVerificationEmailManager
     public function sendAccountVerificationEmail(UserInterface $user, ChannelInterface $channel, string $localeCode): void
     {
         $this->emailSender->send(
-            Emails::ACCOUNT_VERIFICATION_TOKEN,
-            [$user->getEmail()],
-            [
+            code: Emails::VERIFICATION,
+            recipients: [$user->getEmail()],
+            data: [
                 'user' => $user,
                 'localeCode' => $localeCode,
                 'channel' => $channel,

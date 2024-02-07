@@ -1,0 +1,11 @@
+{% extends '@SyliusCore/Email/layout.html.twig' %}
+
+{% block subject %}
+    {{ 'sylius.email.verification_token.subject'|trans({}, null, localeCode)|raw }}
+{% endblock %}
+
+{% block content %}
+    <div style="text-align: center;">
+        <span>{{ 'sylius.email.verification_token.message'|trans({}, null, localeCode) }}{{ user.emailVerificationToken }}</span>
+    </div>
+{% endblock %}

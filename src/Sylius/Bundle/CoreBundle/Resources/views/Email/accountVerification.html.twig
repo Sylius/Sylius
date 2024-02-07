@@ -1,3 +1,5 @@
+{% deprecated 'The "@SyliusCore/Email/accountVerification.html.twig" template is deprecated since Sylius 1.8 and will be removed in Sylius 2.0, use "@SyliusCore/Email/verification.html.twig" instead.' %}
+
 {% extends '@SyliusCore/Email/layout.html.twig' %}
 
 {% block subject %}
@@ -5,7 +7,23 @@
 {% endblock %}
 
 {% block content %}
-    <div style="text-align: center;">
-        <span>{{ 'sylius.email.verification_token.message'|trans({}, null, localeCode) }}{{ user.emailVerificationToken }}</span>
-    </div>
+    {% if sylius_bundle_loaded_checker('SyliusShopBundle') %}
+        {% set url = sylius_channel_url(path('sylius_shop_user_verification', { 'token': user.emailVerificationToken, '_locale': localeCode }), channel) %}
+        <div style="text-align: center; margin-bottom: 30px;">
+            <div style="font-size: 24px;">
+                {{ 'sylius.email.verification_token.hello'|trans({}, null, localeCode) }} <strong>{{ user.username }}</strong><br>
+            </div>
+            {{ 'sylius.email.verification_token.to_verify_your_email_address'|trans({}, null, localeCode) }}:
+        </div>
+
+        <div style="text-align: center;">
+            <a href="{{ url|raw }}" style="display: inline-block; text-align: center; background: #1abb9c; padding: 18px 28px; color: #fff; text-decoration: none; border-radius: 3px;">
+                {{ 'sylius.email.verification_token.verify_your_email_address'|trans({}, null, localeCode) }}
+            </a>
+        </div>
+    {% else %}
+        <div style="text-align: center;">
+            <span>{{ 'sylius.email.verification_token.message'|trans({}, null, localeCode) }}{{ user.emailVerificationToken }}</span>
+        </div>
+    {% endif %}
 {% endblock %}

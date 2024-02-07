@@ -48,7 +48,7 @@ final class AccountRegistrationEmailManagerSpec extends ObjectBehavior
                     'channel' => $channel,
                 ],
                 [],
-                ['customer@example.com']
+                ['customer@example.com'],
             )
             ->shouldBeCalled();
 

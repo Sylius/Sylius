@@ -25,9 +25,13 @@ sylius_mailer:
         password_reset:
             subject: sylius.emails.user.password_reset.subject
             template: "@SyliusCore/Email/passwordReset.html.twig"
+        #deprecated since Sylius 1.13 and will be removed in 2.0, use verification_token instead
         account_verification_token:
             subject: sylius.emails.user.verification_token.subject
             template: "@SyliusCore/Email/accountVerification.html.twig"
+        verification:
+            subject: sylius.emails.user.verification_token.subject
+            template: "@SyliusCore/Email/verification.html.twig"    
         contact_request:
             subject: sylius.emails.contact_request.subject
             template: "@SyliusCore/Email/contactRequest.html.twig"

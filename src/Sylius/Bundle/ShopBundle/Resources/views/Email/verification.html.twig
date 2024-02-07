@@ -1,5 +1,9 @@
 {% extends '@SyliusCore/Email/layout.html.twig' %}
 
+{% block subject %}
+    {{ 'sylius.email.verification_token.subject'|trans({}, null, localeCode)|raw }}
+{% endblock %}
+
 {% block content %}
     {% set url = sylius_channel_url(path('sylius_shop_user_verification', { 'token': user.emailVerificationToken, '_locale': localeCode }), channel) %}
     <div style="text-align: center; margin-bottom: 30px;">
