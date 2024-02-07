@@ -23,12 +23,24 @@ final class ResetPasswordEmailManager implements ResetPasswordEmailManagerInterf
     {
     }
 
+    public function sendAdminResetPasswordEmail(UserInterface $user, string $localCode): void
+    {
+        $this->emailSender->send(
+            code: Emails::ADMIN_PASSWORD_RESET,
+            recipients: [$user->getEmail()],
+            data: [
+                'adminUser' => $user,
+                'localeCode' => $localCode,
+            ],
+        );
+    }
+
     public function sendResetPasswordEmail(UserInterface $user, ChannelInterface $channel, string $localCode): void
     {
         $this->emailSender->send(
-            Emails::PASSWORD_RESET,
-            [$user->getEmail()],
-            [
+            code: Emails::PASSWORD_RESET,
+            recipients: [$user->getEmail()],
+            data: [
                 'user' => $user,
                 'localeCode' => $localCode,
                 'channel' => $channel,

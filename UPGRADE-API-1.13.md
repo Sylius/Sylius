@@ -189,3 +189,17 @@ respond with a `Sylius\Bundle\ApiBundle\Exception\TranslationLocaleMismatchExcep
         ) {
         }
     ```
+
+    `Sylius\Bundle\CoreBundle\MessageHandler\Admin\Account\SendResetPasswordEmailHandler`:
+    ```diff
+    -   use Sylius\Component\Mailer\Sender\SenderInterface;
+        use Sylius\Component\User\Repository\UserRepositoryInterface;
+    +   use Sylius\Bundle\CoreBundle\Mailer\ResetPasswordEmailManagerInterface;
+   
+        public function __construct(
+    +       private ResetPasswordEmailManagerInterface $resetPasswordEmailManager,
+            private UserRepositoryInterface $shopUserRepository,
+    -       private SenderInterface $emailSender,
+        ) {
+        }
+    ```

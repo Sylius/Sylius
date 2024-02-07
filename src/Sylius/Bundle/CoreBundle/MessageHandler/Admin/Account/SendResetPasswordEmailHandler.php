@@ -13,18 +13,21 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\MessageHandler\Admin\Account;
 
-use Sylius\Bundle\CoreBundle\Mailer\Emails;
+use Sylius\Bundle\CoreBundle\Mailer\ResetPasswordEmailManagerInterface;
 use Sylius\Bundle\CoreBundle\Message\Admin\Account\SendResetPasswordEmail;
-use Sylius\Component\Mailer\Sender\SenderInterface;
+use Sylius\Component\Core\Model\AdminUserInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 use Webmozart\Assert\Assert;
 
 final class SendResetPasswordEmailHandler implements MessageHandlerInterface
 {
+    /**
+     * @param UserRepositoryInterface<AdminUserInterface> $userRepository
+     */
     public function __construct(
+        private ResetPasswordEmailManagerInterface $resetPasswordEmailManager,
         private UserRepositoryInterface $userRepository,
-        private SenderInterface $sender,
     ) {
     }
 
@@ -33,13 +36,6 @@ final class SendResetPasswordEmailHandler implements MessageHandlerInterface
         $adminUser = $this->userRepository->findOneByEmail($sendResetPasswordEmail->email);
         Assert::notNull($adminUser);
 
-        $this->sender->send(
-            Emails::ADMIN_PASSWORD_RESET,
-            [$sendResetPasswordEmail->email],
-            [
-                'adminUser' => $adminUser,
-                'localeCode' => $sendResetPasswordEmail->localeCode,
-            ],
-        );
+        $this->resetPasswordEmailManager->sendAdminResetPasswordEmail($adminUser, $sendResetPasswordEmail->localeCode);
     }
 }

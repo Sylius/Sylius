@@ -18,5 +18,7 @@ use Sylius\Component\User\Model\UserInterface;
 
 interface ResetPasswordEmailManagerInterface
 {
+    public function sendAdminResetPasswordEmail(UserInterface $user, string $localCode): void;
+
     public function sendResetPasswordEmail(UserInterface $user, ChannelInterface $channel, string $localCode): void;
 }

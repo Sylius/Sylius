@@ -49,8 +49,8 @@
         </service>
 
         <service id="Sylius\Bundle\CoreBundle\MessageHandler\Admin\Account\SendResetPasswordEmailHandler">
+            <argument type="service" id="Sylius\Bundle\CoreBundle\Mailer\ResetPasswordEmailManagerInterface" />
             <argument type="service" id="sylius.repository.admin_user"/>
-            <argument type="service" id="sylius.email_sender"/>
 
             <tag name="messenger.message_handler" bus="sylius.command_bus" />
             <tag name="messenger.message_handler" bus="sylius_default.bus" />
