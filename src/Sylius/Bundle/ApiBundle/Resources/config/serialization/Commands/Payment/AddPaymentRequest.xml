@@ -17,16 +17,16 @@
 >
     <class name="Sylius\Bundle\ApiBundle\Command\Payment\AddPaymentRequest">
         <attribute name="paymentId">
-            <group>shop:payment_request:create</group>
+            <group>sylius:shop:payment_request:create</group>
         </attribute>
         <attribute name="paymentMethodCode">
-            <group>shop:payment_request:create</group>
+            <group>sylius:shop:payment_request:create</group>
         </attribute>
         <attribute name="type">
-            <group>shop:payment_request:create</group>
+            <group>sylius:shop:payment_request:create</group>
         </attribute>
         <attribute name="requestPayload">
-            <group>shop:payment_request:create</group>
+            <group>sylius:shop:payment_request:create</group>
         </attribute>
     </class>
 </serializer>

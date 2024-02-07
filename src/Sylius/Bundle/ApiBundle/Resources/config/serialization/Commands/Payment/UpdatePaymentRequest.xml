@@ -17,7 +17,7 @@
 >
     <class name="Sylius\Bundle\ApiBundle\Command\Payment\UpdatePaymentRequest">
         <attribute name="requestPayload">
-            <group>shop:payment_request:update</group>
+            <group>sylius:shop:payment_request:update</group>
         </attribute>
     </class>
 </serializer>
