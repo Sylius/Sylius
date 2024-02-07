@@ -33,19 +33,18 @@ final class StatisticsComponent
     use HookableComponentTrait;
 
     #[LiveProp]
-    #[ExposeInTemplate]
+    public string $channelCode;
+
+    #[LiveProp]
     public string $startDate = 'first day of january this year';
 
     #[LiveProp]
-    #[ExposeInTemplate]
     public string $endDate = 'first day of january next year';
 
     #[LiveProp]
-    #[ExposeInTemplate]
     public string $range = 'month';
 
     #[LiveProp]
-    #[ExposeInTemplate]
     public string $rangeName = 'year';
 
     /**
@@ -65,7 +64,7 @@ final class StatisticsComponent
     public function getStatistics(): array
     {
         /** @var ChannelInterface $channel */
-        $channel = $this->channelRepository->findOneByCode($this->hookableData['channelCode']);
+        $channel = $this->channelRepository->findOneByCode($this->channelCode);
 
         return $this->statisticsDataProvider->getRawData(
             $channel,

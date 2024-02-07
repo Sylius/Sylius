@@ -1,5 +1,5 @@
-{% set main_hook = hook_name(hookable_data.parent_main_hook, 'statistics') %}
-{% set fallback_hook = hook_name(hookable_data.parent_fallback_hook, 'statistics') %}
+{% set main_hook = hook_name(parent_main_hook, 'statistics') %}
+{% set fallback_hook = hook_name(parent_fallback_hook, 'statistics') %}
 
 <div class="container-xl" {{ attributes }}>
     {% hook [main_hook, fallback_hook] with {

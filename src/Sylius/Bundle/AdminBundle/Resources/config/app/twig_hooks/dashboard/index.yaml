@@ -13,6 +13,10 @@ twig_hooks:
                 template: '@SyliusAdmin/Shared/Crud/Common/Content/_header.html.twig'
             statistics:
                 component: 'SyliusAdmin.Dashboard.Statistics'
+                data:
+                    channelCode: '@=channelCode'
+                    parentMainHook: '@=parent_main_hook'
+                    parentFallbackHook: '@=parent_fallback_hook'
             latest_statistics:
                 template: '@SyliusAdmin/Dashboard/Index/Content/_latestStatistics.html.twig'
 
