@@ -30,6 +30,10 @@
             <argument type="service" id="behat.mink.parameters" />
         </service>
 
+        <service id="sylius.behat.context.setup.calendar" class="Sylius\Behat\Context\Setup\CalendarContext">
+            <argument>%sylius.behat.clock.date_file%</argument>
+        </service>
+
         <service id="sylius.behat.context.setup.cart" class="Sylius\Behat\Context\Setup\CartContext">
             <argument type="service" id="sylius.repository.order" />
             <argument type="service" id="sylius.command_bus" />
@@ -119,7 +123,7 @@
             <argument type="service" id="Sylius\Component\Product\Resolver\ProductVariantResolverInterface" />
             <argument type="service" id="sylius.order_item_quantity_modifier" />
             <argument type="service" id="doctrine.orm.entity_manager" />
-            <argument type="service" id="Sylius\Calendar\Provider\DateTimeProviderInterface" />
+            <argument type="service" id="sylius.behat.clock" />
         </service>
 
         <service id="sylius.behat.context.setup.payment" class="Sylius\Behat\Context\Setup\PaymentContext">
@@ -137,7 +141,7 @@
         </service>
 
         <service id="Sylius\Behat\Context\Setup\PriceHistoryContext">
-            <argument type="service" id="Sylius\Calendar\Tests\Behat\Context\Setup\CalendarContext" />
+            <argument type="service" id="sylius.behat.context.setup.calendar" />
             <argument type="service" id="sylius.manager.channel_pricing" />
             <argument type="service" id="Sylius\Component\Product\Resolver\ProductVariantResolverInterface" />
         </service>

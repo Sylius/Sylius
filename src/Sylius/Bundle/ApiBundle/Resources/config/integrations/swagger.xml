@@ -82,7 +82,7 @@
 
         <service id="Sylius\Bundle\ApiBundle\OpenApi\Documentation\StatisticsDocumentationModifier">
             <argument>%sylius.security.new_api_route%</argument>
-            <argument type="service" id="Sylius\Calendar\Provider\DateTimeProviderInterface" />
+            <argument type="service" id="clock" />
             <argument>%sylius_core.orders_statistics.intervals_map%</argument>
             <tag name="sylius.open_api.modifier" />
         </service>

@@ -35,12 +35,6 @@
             <tag name="messenger.message_handler" bus="sylius.command_bus" />
         </service>
 
-        <service id="Sylius\Bundle\CoreBundle\CatalogPromotion\CommandHandler\RemoveInactiveCatalogPromotionHandler">
-            <argument type="service" id="sylius.repository.catalog_promotion" />
-            <argument type="service" id="sylius.manager.catalog_promotion"/>
-            <tag name="messenger.message_handler" bus="sylius.command_bus" />
-        </service>
-
         <service id="Sylius\Bundle\CoreBundle\CatalogPromotion\CommandHandler\UpdateCatalogPromotionStateHandler">
             <argument type="service" id="Sylius\Bundle\CoreBundle\CatalogPromotion\Processor\CatalogPromotionStateProcessorInterface" />
             <argument type="service" id="sylius.repository.catalog_promotion" />

@@ -4,10 +4,6 @@ imports:
 webpack_encore:
     output_path: '%kernel.project_dir%/public/build/default'
 
-twig:
-    globals:
-        use_webpack: '%sylius_ui.use_webpack%'
-
 sylius_grid:
     templates:
         action:
