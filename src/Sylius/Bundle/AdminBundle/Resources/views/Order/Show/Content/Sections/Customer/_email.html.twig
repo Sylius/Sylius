@@ -1,6 +1,8 @@
+{% set customer = hookable_data.resource.customer %}
+
 <div>
     <strong>{{ 'sylius.ui.email'|trans }}:</strong>
 </div>
 <div class="mb-3">
-    <a href="mailto:{{ _context.customer.email }}">{{ _context.customer.email }}</a>
+    <a href="mailto:{{ customer.email }}">{{ customer.email }}</a>
 </div>

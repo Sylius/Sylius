@@ -1,26 +1,20 @@
-{% set left_section_event = twig_event_name(_context.main_event, 'left_section') %}
-{% set left_section_fallback_event = twig_event_name(_context.fallback_event, 'left_section') %}
-
-{% set right_section_event = twig_event_name(_context.main_event, 'right_section') %}
-{% set right_section_fallback_event = twig_event_name(_context.fallback_event, 'right_section') %}
-
-{% set main_event = twig_event_name(_context.main_event, 'sections') %}
-{% set fallback_event_event = twig_event_name(_context.fallback_event, 'sections') %}
+{% set main_hook = hook_name(hookable_data.parent_main_hook, 'sections') %}
+{% set fallback_hook = hook_name(hookable_data.parent_fallback_hook, 'sections') %}
 
 <div class="page-body">
     <div class="container-xl">
         <div class="row">
             <div class="col-12 col-lg-3 order-lg-1">
-                {{ twig_event(
-                    [right_section_event, right_section_fallback_event],
-                    _context|merge({ main_event, fallback_event, order: _context.resource })
-                ) }}
+                {% hook [main_hook ~ '#right', fallback_hook ~ '#right'] with hookable_data|merge({
+                    parent_main_hook: main_hook ~ '#right',
+                    parent_fallback_hook: fallback_hook ~ '#right',
+                }) %}
             </div>
             <div class="col-12 col-lg-9 order-lg-0">
-                {{ twig_event(
-                    [left_section_event, left_section_fallback_event],
-                    _context|merge({ main_event, fallback_event, order: _context.resource })
-                ) }}
+                {% hook [main_hook ~ '#left', fallback_hook ~ '#left'] with hookable_data|merge({
+                    parent_main_hook: main_hook ~ '#left',
+                    parent_fallback_hook: fallback_hook ~ '#left',
+                }) %}
             </div>
         </div>
     </div>

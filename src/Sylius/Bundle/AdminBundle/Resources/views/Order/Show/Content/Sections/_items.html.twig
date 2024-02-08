@@ -6,6 +6,8 @@
 {% set shippingAdjustment = constant('Sylius\\Component\\Core\\Model\\AdjustmentInterface::SHIPPING_ADJUSTMENT') %}
 {% set taxAdjustment = constant('Sylius\\Component\\Core\\Model\\AdjustmentInterface::TAX_ADJUSTMENT') %}
 
+{% set order = hookable_data.resource %}
+
 <div class="card mb-3">
     <div class="card-header">
         <div class="card-title">{{ 'sylius.ui.items'|trans }}</div>

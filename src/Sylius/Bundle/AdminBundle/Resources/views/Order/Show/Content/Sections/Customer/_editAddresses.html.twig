@@ -1,5 +1,7 @@
+{% set order = hookable_data.resource %}
+
 <div class="mb-3">
-    <a href="{{ path('sylius_admin_order_update', { id: _context.order.id }) }}" class="btn btn-secondary btn-sm w-100">
+    <a href="{{ path('sylius_admin_order_update', { id: order.id }) }}" class="btn btn-secondary btn-sm w-100">
         {{ 'sylius.ui.edit_addresses'|trans }}
     </a>
 </div>
