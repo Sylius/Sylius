@@ -1,7 +1,7 @@
 {% from '@SyliusAdmin/Shared/Helper/icon.html.twig' import icon as _icon %}
 {% import '@SyliusAdmin/Shared/Helper/money.html.twig' as _money %}
 
-{% set product = _context.resource %}
+{% set product = hookable_data.resource %}
 {% set channels = [] %}
 {% for channel in product.channels %}
     {% set channels = channels|merge({ (channel.code): channel }) %}

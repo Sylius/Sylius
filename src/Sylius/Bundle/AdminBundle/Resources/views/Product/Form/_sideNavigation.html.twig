@@ -1,10 +1,13 @@
-{% set main_event = twig_event_name(_context.main_event, 'side_navigation') %}
-{% set fallback_event = twig_event_name(_context.fallback_event, 'side_navigation') %}
+{% set main_hook = hook_name(hookable_data.parent_main_hook, 'side_navigation') %}
+{% set fallback_hook = hook_name(hookable_data.parent_fallback_hook, 'side_navigation') %}
 
 <div class="col-12 col-lg-3">
     <div id="side-nav" class="sticky-md-top" style="top: 7.6rem;">
         <div class="list-group bg-white mb-5" role="tablist">
-            {{ twig_event([main_event, fallback_event], _context|merge({ main_event: main_event, fallback_event: fallback_event })) }}
+            {% hook [main_hook, fallback_hook] with hookable_data|merge({
+                parent_main_hook: main_hook,
+                parent_fallback_hook: fallback_hook,
+            }) %}
         </div>
     </div>
 </div>
