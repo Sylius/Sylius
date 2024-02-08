@@ -18,14 +18,13 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 final class CheckStatisticsOrdersTotalsProviderTypePass implements CompilerPassInterface
 {
-
     public function process(ContainerBuilder $container): void
     {
         if (!$container->hasParameter('sylius_core.orders_statistics.intervals_map')) {
             return;
         }
 
-        $intervalsType = $container->getParameter('sylius_core.orders_statistics.intervals_map');
+        $intervalsTypes = $container->getParameter('sylius_core.orders_statistics.intervals_map');
         $ordersTotalsProviderTypes = [];
 
         foreach ($container->findTaggedServiceIds('sylius.statistics.orders_totals_provider') as $id => $attributes) {
@@ -33,15 +32,15 @@ final class CheckStatisticsOrdersTotalsProviderTypePass implements CompilerPassI
                 if (!isset($attribute['type'])) {
                     throw new \InvalidArgumentException('Tagged orders totals providers need to have `type` attribute.');
                 }
+
                 $ordersTotalsProviderTypes[] = $attribute['type'];
             }
         }
 
-        foreach ($intervalsType as $type => $interval) {
+        foreach ($intervalsTypes as $type => $interval) {
             if (!in_array($type, $ordersTotalsProviderTypes, true)) {
                 throw new \InvalidArgumentException(sprintf('There is no orders totals provider for interval type "%s"', $type));
             }
-
         }
     }
 }
