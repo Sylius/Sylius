@@ -18,61 +18,97 @@
     <class name="Sylius\Component\Core\Model\Taxon">
         <attribute name="id">
             <group>admin:taxon:index</group>
+            <group>sylius:admin:taxon:index</group>
             <group>admin:taxon:show</group>
+            <group>sylius:admin:taxon:show</group>
             <group>shop:taxon:index</group>
+            <group>sylius:shop:taxon:index</group>
             <group>shop:taxon:show</group>
+            <group>sylius:shop:taxon:show</group>
         </attribute>
         <attribute name="code">
             <group>admin:taxon:index</group>
+            <group>sylius:admin:taxon:index</group>
             <group>admin:taxon:show</group>
+            <group>sylius:admin:taxon:show</group>
             <group>shop:taxon:index</group>
+            <group>sylius:shop:taxon:index</group>
             <group>shop:taxon:show</group>
+            <group>sylius:shop:taxon:show</group>
             <group>admin:taxon:create</group>
+            <group>sylius:admin:taxon:create</group>
         </attribute>
         <attribute name="name">
             <group>shop:taxon:index</group>
+            <group>sylius:shop:taxon:index</group>
             <group>shop:taxon:show</group>
+            <group>sylius:shop:taxon:show</group>
         </attribute>
         <attribute name="slug">
             <group>shop:taxon:index</group>
+            <group>sylius:shop:taxon:index</group>
             <group>shop:taxon:show</group>
+            <group>sylius:shop:taxon:show</group>
         </attribute>
         <attribute name="description">
             <group>shop:taxon:index</group>
+            <group>sylius:shop:taxon:index</group>
             <group>shop:taxon:show</group>
+            <group>sylius:shop:taxon:show</group>
         </attribute>
         <attribute name="translations">
             <group>admin:taxon:index</group>
+            <group>sylius:admin:taxon:index</group>
             <group>admin:taxon:show</group>
+            <group>sylius:admin:taxon:show</group>
             <group>admin:taxon:create</group>
+            <group>sylius:admin:taxon:create</group>
             <group>admin:taxon:update</group>
+            <group>sylius:admin:taxon:update</group>
         </attribute>
         <attribute name="parent">
             <group>admin:taxon:index</group>
+            <group>sylius:admin:taxon:index</group>
             <group>admin:taxon:show</group>
+            <group>sylius:admin:taxon:show</group>
             <group>admin:taxon:create</group>
+            <group>sylius:admin:taxon:create</group>
             <group>admin:taxon:update</group>
+            <group>sylius:admin:taxon:update</group>
         </attribute>
         <attribute name="children">
             <group>admin:taxon:index</group>
+            <group>sylius:admin:taxon:index</group>
             <group>admin:taxon:show</group>
+            <group>sylius:admin:taxon:show</group>
             <group>shop:taxon:index</group>
+            <group>sylius:shop:taxon:index</group>
             <group>shop:taxon:show</group>
+            <group>sylius:shop:taxon:show</group>
         </attribute>
         <attribute name="enabled">
             <group>admin:taxon:index</group>
+            <group>sylius:admin:taxon:index</group>
             <group>admin:taxon:show</group>
+            <group>sylius:admin:taxon:show</group>
             <group>admin:taxon:create</group>
+            <group>sylius:admin:taxon:create</group>
             <group>admin:taxon:update</group>
+            <group>sylius:admin:taxon:update</group>
         </attribute>
         <attribute name="position">
             <group>admin:taxon:index</group>
+            <group>sylius:admin:taxon:index</group>
             <group>admin:taxon:show</group>
+            <group>sylius:admin:taxon:show</group>
             <group>admin:taxon:update</group>
+            <group>sylius:admin:taxon:update</group>
         </attribute>
         <attribute name="images">
             <group>admin:taxon:index</group>
+            <group>sylius:admin:taxon:index</group>
             <group>admin:taxon:show</group>
+            <group>sylius:admin:taxon:show</group>
         </attribute>
     </class>
 </serializer>

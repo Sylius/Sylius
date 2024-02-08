@@ -18,12 +18,15 @@
     <class name="Sylius\Component\Core\Model\AvatarImage">
         <attribute name="id">
             <group>admin:avatar_image:show</group>
+            <group>sylius:admin:avatar_image:show</group>
         </attribute>
         <attribute name="path">
             <group>admin:avatar_image:show</group>
+            <group>sylius:admin:avatar_image:show</group>
         </attribute>
         <attribute name="owner">
             <group>admin:avatar_image:show</group>
+            <group>sylius:admin:avatar_image:show</group>
         </attribute>
     </class>
 </serializer>

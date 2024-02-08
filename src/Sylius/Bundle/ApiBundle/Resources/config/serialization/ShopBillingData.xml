@@ -18,36 +18,55 @@
     <class name="Sylius\Component\Core\Model\ShopBillingData">
         <attribute name="id">
             <group>admin:shop_billing_data:show</group>
+            <group>sylius:admin:shop_billing_data:show</group>
         </attribute>
        <attribute name="company">
            <group>admin:channel:create</group>
+            <group>sylius:admin:channel:create</group>
            <group>admin:channel:update</group>
+            <group>sylius:admin:channel:update</group>
            <group>admin:shop_billing_data:show</group>
+            <group>sylius:admin:shop_billing_data:show</group>
        </attribute>
        <attribute name="taxId">
            <group>admin:channel:create</group>
+            <group>sylius:admin:channel:create</group>
            <group>admin:channel:update</group>
+            <group>sylius:admin:channel:update</group>
            <group>admin:shop_billing_data:show</group>
+            <group>sylius:admin:shop_billing_data:show</group>
        </attribute>
        <attribute name="countryCode">
            <group>admin:channel:create</group>
+            <group>sylius:admin:channel:create</group>
            <group>admin:channel:update</group>
+            <group>sylius:admin:channel:update</group>
            <group>admin:shop_billing_data:show</group>
+            <group>sylius:admin:shop_billing_data:show</group>
        </attribute>
        <attribute name="street">
            <group>admin:channel:create</group>
+            <group>sylius:admin:channel:create</group>
            <group>admin:channel:update</group>
+            <group>sylius:admin:channel:update</group>
            <group>admin:shop_billing_data:show</group>
+            <group>sylius:admin:shop_billing_data:show</group>
        </attribute>
        <attribute name="city">
            <group>admin:channel:create</group>
+            <group>sylius:admin:channel:create</group>
            <group>admin:channel:update</group>
+            <group>sylius:admin:channel:update</group>
            <group>admin:shop_billing_data:show</group>
+            <group>sylius:admin:shop_billing_data:show</group>
        </attribute>
        <attribute name="postcode">
            <group>admin:channel:create</group>
+            <group>sylius:admin:channel:create</group>
            <group>admin:channel:update</group>
+            <group>sylius:admin:channel:update</group>
            <group>admin:shop_billing_data:show</group>
+            <group>sylius:admin:shop_billing_data:show</group>
        </attribute>
     </class>
 </serializer>

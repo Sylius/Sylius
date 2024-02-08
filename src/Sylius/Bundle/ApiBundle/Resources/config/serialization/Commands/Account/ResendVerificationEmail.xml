@@ -18,12 +18,15 @@
     <class name="Sylius\Bundle\ApiBundle\Command\Account\ResendVerificationEmail">
         <attribute name="shopUserId">
             <group>shop:resend_verification_email:create</group>
+            <group>sylius:shop:resend_verification_email:create</group>
         </attribute>
         <attribute name="channelCode">
             <group>shop:resend_verification_email:create</group>
+            <group>sylius:shop:resend_verification_email:create</group>
         </attribute>
         <attribute name="localeCode">
             <group>shop:resend_verification_email:create</group>
+            <group>sylius:shop:resend_verification_email:create</group>
         </attribute>
     </class>
 </serializer>

@@ -27,7 +27,10 @@
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/admin/product-options</attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:product_option:index</attribute>
+                    <attribute name="groups">
+                        <attribute>admin:product_option:index</attribute>
+                        <attribute>sylius:admin:product_option:index</attribute>
+                    </attribute>
                 </attribute>
             </collectionOperation>
 
@@ -35,10 +38,16 @@
                 <attribute name="method">POST</attribute>
                 <attribute name="path">/admin/product-options</attribute>
                 <attribute name="denormalization_context">
-                    <attribute name="groups">admin:product_option:create</attribute>
+                    <attribute name="groups">
+                        <attribute>admin:product_option:create</attribute>
+                        <attribute>sylius:admin:product_option:create</attribute>
+                    </attribute>
                 </attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:product_option:show</attribute>
+                    <attribute name="groups">
+                        <attribute>admin:product_option:show</attribute>
+                        <attribute>sylius:admin:product_option:show</attribute>
+                    </attribute>
                 </attribute>
             </collectionOperation>
         </collectionOperations>
@@ -48,7 +57,10 @@
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/admin/product-options/{code}</attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:product_option:show</attribute>
+                    <attribute name="groups">
+                        <attribute>admin:product_option:show</attribute>
+                        <attribute>sylius:admin:product_option:show</attribute>
+                    </attribute>
                 </attribute>
             </itemOperation>
 
@@ -56,7 +68,10 @@
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/shop/product-options/{code}</attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">shop:product_option:show</attribute>
+                    <attribute name="groups">
+                        <attribute>shop:product_option:show</attribute>
+                        <attribute>sylius:shop:product_option:show</attribute>
+                    </attribute>
                 </attribute>
             </itemOperation>
 
@@ -64,10 +79,16 @@
                 <attribute name="method">PUT</attribute>
                 <attribute name="path">/admin/product-options/{code}</attribute>
                 <attribute name="denormalization_context">
-                    <attribute name="groups">admin:product_option:update</attribute>
+                    <attribute name="groups">
+                        <attribute>admin:product_option:update</attribute>
+                        <attribute>sylius:admin:product_option:update</attribute>
+                    </attribute>
                 </attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:product_option:show</attribute>
+                    <attribute name="groups">
+                        <attribute>admin:product_option:show</attribute>
+                        <attribute>sylius:admin:product_option:show</attribute>
+                    </attribute>
                 </attribute>
             </itemOperation>
         </itemOperations>
@@ -77,7 +98,10 @@
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/admin/product-options/{code}/values</attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:product_option:show</attribute>
+                    <attribute name="groups">
+                        <attribute>admin:product_option:show</attribute>
+                        <attribute>sylius:admin:product_option:show</attribute>
+                    </attribute>
                 </attribute>
             </subresourceOperation>
         </subresourceOperations>

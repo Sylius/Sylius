@@ -18,33 +18,52 @@
     <class name="Sylius\Component\Shipping\Model\ShippingMethodTranslation">
         <attribute name="id">
             <group>admin:shipping_method:index</group>
+            <group>sylius:admin:shipping_method:index</group>
             <group>admin:shipping_method:show</group>
+            <group>sylius:admin:shipping_method:show</group>
         </attribute>
 
         <attribute name="name">
             <group>admin:shipping_method:create</group>
+            <group>sylius:admin:shipping_method:create</group>
             <group>admin:shipping_method:index</group>
+            <group>sylius:admin:shipping_method:index</group>
             <group>admin:shipping_method:show</group>
+            <group>sylius:admin:shipping_method:show</group>
             <group>admin:shipping_method:update</group>
+            <group>sylius:admin:shipping_method:update</group>
             <group>shop:cart:show</group>
+            <group>sylius:shop:cart:show</group>
             <group>shop:order:account:show</group>
+            <group>sylius:shop:order:account:show</group>
             <group>shop:shipping_method:index</group>
+            <group>sylius:shop:shipping_method:index</group>
             <group>shop:shipping_method:show</group>
+            <group>sylius:shop:shipping_method:show</group>
             <group>shop:shipment:show</group>
+            <group>sylius:shop:shipment:show</group>
         </attribute>
 
         <attribute name="description">
             <group>admin:shipping_method:create</group>
+            <group>sylius:admin:shipping_method:create</group>
             <group>admin:shipping_method:index</group>
+            <group>sylius:admin:shipping_method:index</group>
             <group>admin:shipping_method:show</group>
+            <group>sylius:admin:shipping_method:show</group>
             <group>admin:shipping_method:update</group>
+            <group>sylius:admin:shipping_method:update</group>
             <group>shop:shipping_method:index</group>
+            <group>sylius:shop:shipping_method:index</group>
             <group>shop:shipping_method:show</group>
+            <group>sylius:shop:shipping_method:show</group>
         </attribute>
 
         <attribute name="locale">
             <group>admin:shipping_method:create</group>
+            <group>sylius:admin:shipping_method:create</group>
             <group>admin:shipping_method:update</group>
+            <group>sylius:admin:shipping_method:update</group>
         </attribute>
     </class>
 </serializer>

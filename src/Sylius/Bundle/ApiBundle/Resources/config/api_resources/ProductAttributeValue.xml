@@ -29,7 +29,10 @@
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/admin/product-attribute-values/{id}</attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:product_attribute_value:show</attribute>
+                    <attribute name="groups">
+                        <attribute>admin:product_attribute_value:show</attribute>
+                        <attribute>sylius:admin:product_attribute_value:show</attribute>
+                    </attribute>
                 </attribute>
             </itemOperation>
 
@@ -37,7 +40,10 @@
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/shop/product-attribute-values/{id}</attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">shop:product_attribute_value:show</attribute>
+                    <attribute name="groups">
+                        <attribute>shop:product_attribute_value:show</attribute>
+                        <attribute>sylius:shop:product_attribute_value:show</attribute>
+                    </attribute>
                 </attribute>
             </itemOperation>
         </itemOperations>
@@ -45,7 +51,10 @@
         <subresourceOperations>
             <subresourceOperation name="api_products_attributes_get_subresource">
                 <attribute name="normalization_context">
-                    <attribute name="groups">shop:product_attribute_value:show</attribute>
+                    <attribute name="groups">
+                        <attribute>shop:product_attribute_value:show</attribute>
+                        <attribute>sylius:shop:product_attribute_value:show</attribute>
+                    </attribute>
                 </attribute>
             </subresourceOperation>
         </subresourceOperations>

@@ -28,7 +28,10 @@
             <itemOperation name="admin_get">
                 <attribute name="method">GET</attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:gateway_config:show</attribute>
+                    <attribute name="groups">
+                        <attribute>admin:gateway_config:show</attribute>
+                        <attribute>sylius:admin:gateway_config:show</attribute>
+                    </attribute>
                 </attribute>
             </itemOperation>
         </itemOperations>

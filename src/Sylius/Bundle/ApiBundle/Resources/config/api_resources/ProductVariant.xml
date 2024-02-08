@@ -23,7 +23,10 @@
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/admin/product-variants/{code}</attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:product_variant:show</attribute>
+                    <attribute name="groups">
+                        <attribute>admin:product_variant:show</attribute>
+                        <attribute>sylius:admin:product_variant:show</attribute>
+                    </attribute>
                 </attribute>
             </itemOperation>
 
@@ -31,10 +34,16 @@
                 <attribute name="method">PUT</attribute>
                 <attribute name="path">/admin/product-variants/{code}</attribute>
                 <attribute name="denormalization_context">
-                    <attribute name="groups">admin:product_variant:update</attribute>
+                    <attribute name="groups">
+                        <attribute>admin:product_variant:update</attribute>
+                        <attribute>sylius:admin:product_variant:update</attribute>
+                    </attribute>
                 </attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:product_variant:show</attribute>
+                    <attribute name="groups">
+                        <attribute>admin:product_variant:show</attribute>
+                        <attribute>sylius:admin:product_variant:show</attribute>
+                    </attribute>
                 </attribute>
             </itemOperation>
 
@@ -42,7 +51,10 @@
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/shop/product-variants/{code}</attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">shop:product_variant:show</attribute>
+                    <attribute name="groups">
+                        <attribute>shop:product_variant:show</attribute>
+                        <attribute>sylius:shop:product_variant:show</attribute>
+                    </attribute>
                 </attribute>
             </itemOperation>
 
@@ -62,7 +74,10 @@
                     <attribute>Sylius\Bundle\ApiBundle\Filter\Doctrine\ProductVariantCatalogPromotionFilter</attribute>
                 </attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:product_variant:index</attribute>
+                    <attribute name="groups">
+                        <attribute>admin:product_variant:index</attribute>
+                        <attribute>sylius:admin:product_variant:index</attribute>
+                    </attribute>
                 </attribute>
             </collectionOperation>
 
@@ -70,10 +85,16 @@
                 <attribute name="method">POST</attribute>
                 <attribute name="path">/admin/product-variants</attribute>
                 <attribute name="denormalization_context">
-                    <attribute name="groups">admin:product_variant:create</attribute>
+                    <attribute name="groups">
+                        <attribute>admin:product_variant:create</attribute>
+                        <attribute>sylius:admin:product_variant:create</attribute>
+                    </attribute>
                 </attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:product_variant:show</attribute>
+                    <attribute name="groups">
+                        <attribute>admin:product_variant:show</attribute>
+                        <attribute>sylius:admin:product_variant:show</attribute>
+                    </attribute>
                 </attribute>
             </collectionOperation>
 
@@ -85,7 +106,10 @@
                     <attribute>Sylius\Bundle\ApiBundle\Filter\Doctrine\ProductVariantOptionValueFilter</attribute>
                 </attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">shop:product_variant:index</attribute>
+                    <attribute name="groups">
+                        <attribute>shop:product_variant:index</attribute>
+                        <attribute>sylius:shop:product_variant:index</attribute>
+                    </attribute>
                 </attribute>
             </collectionOperation>
         </collectionOperations>
