@@ -1,1 +1,3 @@
-<a href="{{ path|default(app.request.headers.get('referer')) }}" class="ui button">{{ 'sylius.ui.cancel'|trans }}</a>
+<a href="{{ path|default(app.request.headers.get('referer')) }}" class="ui button" {{ sylius_test_html_attribute('cancel-changes-button')}}>
+    {{ 'sylius.ui.cancel'|trans }}
+</a>

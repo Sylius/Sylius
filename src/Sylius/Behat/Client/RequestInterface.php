@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -15,59 +15,6 @@ namespace Sylius\Behat\Client;
 
 interface RequestInterface
 {
-    public static function index(
-        ?string $section,
-        string $resource,
-        string $authorizationHeader,
-        ?string $token = null,
-    ): self;
-
-    public static function subResourceIndex(?string $section, string $resource, string $id, string $subResource): self;
-
-    public static function show(
-        ?string $section,
-        string $resource,
-        string $id,
-        string $authorizationHeader,
-        ?string $token = null,
-    ): self;
-
-    public static function create(
-        ?string $section,
-        string $resource,
-        string $authorizationHeader,
-        ?string $token = null,
-    ): self;
-
-    public static function update(
-        ?string $section,
-        string $resource,
-        string $id,
-        string $authorizationHeader,
-        ?string $token = null,
-    ): self;
-
-    public static function delete(
-        ?string $section,
-        string $resource,
-        string $id,
-        string $authorizationHeader,
-        ?string $token = null,
-    ): self;
-
-    public static function transition(?string $section, string $resource, string $id, string $transition): self;
-
-    public static function customItemAction(?string $section, string $resource, string $id, string $type, string $action): self;
-
-    public static function upload(
-        ?string $section,
-        string $resource,
-        string $authorizationHeader,
-        ?string $token = null,
-    ): self;
-
-    public static function custom(string $url, string $method, ?string $token = null): self;
-
     public function url(): string;
 
     public function method(): string;

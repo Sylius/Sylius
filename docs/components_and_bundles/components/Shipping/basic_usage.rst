@@ -368,13 +368,12 @@ container. The calculators are retrieved by name.
 
 .. caution::
        The method ``->register()`` and  ``->get()`` used in ``->calculate`` throw `InvalidArgumentException`_.
-       The method ``->calculate`` throws `UndefinedShippingMethodException`_ when given shipment does not have a shipping method defined.
+       The method ``->calculate`` throws `UndefinedShippingMethodException` when given shipment does not have a shipping method defined.
 
 .. hint::
     You can read more about each of the available calculators in the :doc:`calculators` chapter.
 
 .. _InvalidArgumentException: https://php.net/manual/en/class.invalidargumentexception.php
-.. _UndefinedShippingMethodException: http://api.sylius.com/Sylius/Component/Shipping/Calculator/UndefinedShippingMethodException.html
 
 Resolvers
 ---------

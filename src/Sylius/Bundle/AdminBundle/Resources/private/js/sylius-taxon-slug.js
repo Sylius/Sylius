@@ -1,7 +1,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -11,26 +11,21 @@ import $ from 'jquery';
 
 const updateSlug = function updateSlug(element) {
   const slugInput = element.parents('.content').find('[name*="[slug]"]');
-  const loadableParent = slugInput.parents('.field.loadable');
-
   if (slugInput.attr('readonly') === 'readonly') {
     return;
   }
 
+  const loadableParent = slugInput.parents('.field.loadable');
+  const parentTaxonInput = $('#sylius_taxon_parent');
+
   loadableParent.addClass('loading');
 
   let data;
-  if (slugInput.attr('data-parent') != '' && slugInput.attr('data-parent') != undefined) {
+  if (parentTaxonInput.length > 0 && parentTaxonInput.val() !== '') {
     data = {
       name: element.val(),
       locale: element.closest('[data-locale]').data('locale'),
-      parentId: slugInput.attr('data-parent'),
-    };
-  } else if ($('#sylius_taxon_parent').length > 0 && $('#sylius_taxon_parent').is(':visible') && $('#sylius_taxon_parent').val() != '') {
-    data = {
-      name: element.val(),
-      locale: element.closest('[data-locale]').data('locale'),
-      parentId: $('#sylius_taxon_parent').val(),
+      parentCode: parentTaxonInput.val(),
     };
   } else {
     data = {
@@ -51,6 +46,11 @@ const updateSlug = function updateSlug(element) {
         slugInput.parents('.field').removeClass('error');
         slugInput.parents('.field').find('.sylius-validation-error').remove();
       }
+    },
+    error() {
+      slugInput.val('');
+    },
+    complete() {
       loadableParent.removeClass('loading');
     },
   });
@@ -77,6 +77,14 @@ $.fn.extend({
       timeout = setTimeout(() => {
         updateSlug(element);
       }, 1000);
+    });
+    $('#sylius_taxon_parent').parent().on('change', () => {
+      const nameInput = $('[data-locale]').find('.content.active [name*="sylius_taxon[translations]"][name*="[name]"]');
+      if (nameInput.val() === '') {
+        return;
+      }
+
+      updateSlug($(nameInput));
     });
 
     $('.toggle-taxon-slug-modification').on('click', (event) => {

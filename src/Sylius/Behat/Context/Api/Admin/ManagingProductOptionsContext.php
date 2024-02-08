@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -16,6 +16,7 @@ namespace Sylius\Behat\Context\Api\Admin;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
+use Sylius\Behat\Context\Api\Resources;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Product\Model\ProductOptionInterface;
 use Webmozart\Assert\Assert;
@@ -34,7 +35,7 @@ final class ManagingProductOptionsContext implements Context
      */
     public function iWantToCreateANewProductOption(): void
     {
-        $this->client->buildCreateRequest();
+        $this->client->buildCreateRequest(Resources::PRODUCT_OPTIONS);
     }
 
     /**
@@ -42,7 +43,7 @@ final class ManagingProductOptionsContext implements Context
      */
     public function iBrowseProductOptions(): void
     {
-        $this->client->index();
+        $this->client->index(Resources::PRODUCT_OPTIONS);
     }
 
     /**
@@ -51,7 +52,7 @@ final class ManagingProductOptionsContext implements Context
     public function iWantToModifyProductOption(ProductOptionInterface $productOption): void
     {
         $this->sharedStorage->set('product_option', $productOption);
-        $this->client->buildUpdateRequest($productOption->getCode());
+        $this->client->buildUpdateRequest(Resources::PRODUCT_OPTIONS, $productOption->getCode());
     }
 
     /**
@@ -149,7 +150,7 @@ final class ManagingProductOptionsContext implements Context
         $this->sharedStorage->set('product_option', $productOption);
 
         Assert::true(
-            $this->responseChecker->hasItemWithValue($this->client->index(), 'name', $productOption->getName()),
+            $this->responseChecker->hasItemWithValue($this->client->index(Resources::PRODUCT_OPTIONS), 'name', $productOption->getName()),
             sprintf('Product option should have name "%s", but it does not.', $productOption->getName()),
         );
     }
@@ -184,7 +185,7 @@ final class ManagingProductOptionsContext implements Context
     public function theProductOptionWithElementValueShouldNotBeAdded(string $element, string $value): void
     {
         Assert::false(
-            $this->responseChecker->hasItemWithValue($this->client->index(), $element, $value),
+            $this->responseChecker->hasItemWithValue($this->client->index(Resources::PRODUCT_OPTIONS), $element, $value),
             sprintf('Product option should not have %s "%s", but it does,', $element, $value),
         );
     }
@@ -194,7 +195,7 @@ final class ManagingProductOptionsContext implements Context
      */
     public function thereShouldStillBeOnlyOneProductOptionWith(string $element, string $value): void
     {
-        $response = $this->client->index();
+        $response = $this->client->index(Resources::PRODUCT_OPTIONS);
         $itemsCount = $this->responseChecker->countCollectionItems($response);
 
         Assert::same($itemsCount, 1, sprintf('Expected 1 product options, but got %d', $itemsCount));
@@ -207,7 +208,7 @@ final class ManagingProductOptionsContext implements Context
      */
     public function thisProductOptionNameShouldBe(ProductOptionInterface $productOption, string $name): void
     {
-        Assert::true($this->responseChecker->hasValue($this->client->show($productOption->getCode()), 'name', $name));
+        Assert::true($this->responseChecker->hasValue($this->client->show(Resources::PRODUCT_OPTIONS, $productOption->getCode()), 'name', $name));
     }
 
     /**
@@ -219,7 +220,7 @@ final class ManagingProductOptionsContext implements Context
         string $optionValueName,
     ): void {
         Assert::true($this->responseChecker->hasItemWithTranslation(
-            $this->client->subResourceIndex('values', $productOption->getCode()),
+            $this->client->subResourceIndex(Resources::PRODUCT_OPTIONS, 'values', $productOption->getCode()),
             'en_US',
             'value',
             $optionValueName,

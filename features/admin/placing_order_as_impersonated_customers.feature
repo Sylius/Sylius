@@ -7,8 +7,8 @@ Feature: Placing an order as impersonated shop users
     Background:
         Given the store operates on a single channel in "United States"
         And the store has a product "PHP T-Shirt" priced at "$19.99"
-        And the store ships everywhere for free
-        And the store allows paying offline
+        And the store ships everywhere for Free
+        And the store allows paying Offline
         And there is a customer "John Doe" identified by an email "john.doe@london.uk" and a password "johndoe"
         And there is a customer "Tanith Low" identified by an email "tanith.low@london.uk" and a password "tanithlow"
         And I am logged in as an administrator

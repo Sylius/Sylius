@@ -4,7 +4,7 @@
 
  This file is part of the Sylius package.
 
- (c) Paweł Jędrzejewski
+ (c) Sylius Sp. z o.o.
 
  For the full copyright and license information, please view the LICENSE
  file that was distributed with this source code.
@@ -22,6 +22,14 @@
                 <attribute name="path">/admin/channels</attribute>
                 <attribute name="normalization_context">
                     <attribute name="groups">admin:channel:read</attribute>
+                </attribute>
+            </collectionOperation>
+
+            <collectionOperation name="shop_get">
+                <attribute name="method">GET</attribute>
+                <attribute name="path">/shop/channels</attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">shop:channel:read</attribute>
                 </attribute>
             </collectionOperation>
 
@@ -56,6 +64,14 @@
                     <attribute name="summary">Use $code to retrieve a channel resource.</attribute>
                 </attribute>
             </itemOperation>
+
+            <itemOperation name="admin_put">
+                <attribute name="method">PUT</attribute>
+                <attribute name="path">/admin/channels/{code}</attribute>
+                <attribute name="denormalization_context">
+                    <attribute name="groups">admin:channel:update</attribute>
+                </attribute>
+            </itemOperation>
         </itemOperations>
 
         <subresourceOperations>
@@ -84,6 +100,7 @@
         <property name="skippingShippingStepAllowed" writable="true" readable="true" />
         <property name="skippingPaymentStepAllowed" writable="true" readable="true" />
         <property name="accountVerificationRequired" writable="true" readable="true" />
+        <property name="shippingAddressInCheckoutRequired" writable="true" readable="true" />
         <property name="shopBillingData" readable="true" writable="true">
             <subresource resourceClass="%sylius.model.shop_billing_data.class%" collection="false" />
         </property>

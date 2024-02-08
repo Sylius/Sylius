@@ -7,7 +7,7 @@ Feature: Skipping payment selection when order total is zero
     Background:
         Given the store operates on a single channel in "United States"
         And the store has a product "PHP T-Shirt" priced at "$10.00"
-        And the store ships everywhere for free
+        And the store ships everywhere for Free
         And the store has "SHL" shipping method with "$5.00" fee
         And there is a promotion "Holiday promotion"
         And the promotion gives "$10.00" discount to every order with quantity at least 1

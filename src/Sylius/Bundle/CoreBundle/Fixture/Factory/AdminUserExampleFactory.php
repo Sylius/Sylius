@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -108,10 +108,10 @@ class AdminUserExampleFactory extends AbstractExampleFactory implements ExampleF
         $imagePath = $this->fileLocator->locate($options['avatar']);
         $uploadedImage = new UploadedFile($imagePath, basename($imagePath));
 
-        /** @var AvatarImage $avatarImage */
         if ($this->avatarImageFactory === null) {
             $avatarImage = new AvatarImage();
         } else {
+            /** @var AvatarImage $avatarImage */
             $avatarImage = $this->avatarImageFactory->createNew();
         }
 

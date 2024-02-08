@@ -4,7 +4,7 @@
 
  This file is part of the Sylius package.
 
- (c) Paweł Jędrzejewski
+ (c) Sylius Sp. z o.o.
 
  For the full copyright and license information, please view the LICENSE
  file that was distributed with this source code.
@@ -37,7 +37,6 @@
             <argument type="service" id="sylius.context.cart.new_shop_based.inner" />
             <argument type="service" id="sylius.context.shopper" />
             <argument type="service" id="Sylius\Component\Core\Cart\Resolver\CreatedByGuestFlagResolverInterface" />
-            <tag name="kernel.reset" method="reset" />
         </service>
         <service id="sylius.context.cart.customer_and_channel_based" class="Sylius\Bundle\CoreBundle\Context\CustomerAndChannelBasedCartContext">
             <argument type="service" id="sylius.context.customer" />

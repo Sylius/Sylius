@@ -1,11 +1,13 @@
 # This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
+# (c) Sylius Sp. z o.o.
 
 default:
     suites:
         ui_applying_taxes:
             contexts:
                 - sylius.behat.context.hook.doctrine_orm
+                - sylius.behat.context.hook.session
+                - Sylius\Calendar\Tests\Behat\Context\Hook\CalendarContext
 
                 - sylius.behat.context.transform.address
                 - sylius.behat.context.transform.country
@@ -15,6 +17,7 @@ default:
                 - sylius.behat.context.transform.shared_storage
                 - sylius.behat.context.transform.shipping_method
                 - sylius.behat.context.transform.tax_category
+                - sylius.behat.context.transform.tax_rate
                 - sylius.behat.context.transform.zone
 
                 - sylius.behat.context.setup.channel
@@ -28,6 +31,7 @@ default:
                 - sylius.behat.context.setup.user
                 - sylius.behat.context.setup.zone
                 - sylius.behat.context.setup.shop_security
+                - Sylius\Calendar\Tests\Behat\Context\Setup\CalendarContext
 
                 - sylius.behat.context.ui.shop.cart
                 - sylius.behat.context.ui.shop.checkout

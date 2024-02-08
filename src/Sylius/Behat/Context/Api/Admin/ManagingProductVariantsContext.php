@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -17,6 +17,7 @@ use ApiPlatform\Core\Api\IriConverterInterface;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
+use Sylius\Behat\Context\Api\Resources;
 use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ProductInterface;
@@ -37,7 +38,7 @@ final class ManagingProductVariantsContext implements Context
      */
     public function iWantToCreateANewProductVariant(ProductInterface $product): void
     {
-        $this->client->buildCreateRequest();
+        $this->client->buildCreateRequest(Resources::PRODUCT_VARIANTS);
         $this->client->addRequestData('product', $this->iriConverter->getIriFromItem($product));
     }
 
@@ -141,7 +142,7 @@ final class ManagingProductVariantsContext implements Context
      */
     public function theProductVariantShouldAppearInTheShop(string $productVariantCode, ProductInterface $product): void
     {
-        $response = $this->client->index();
+        $response = $this->client->index(Resources::PRODUCT_VARIANTS);
 
         Assert::true($this->responseChecker->hasItemWithValue($response, 'code', $productVariantCode));
     }
@@ -151,7 +152,7 @@ final class ManagingProductVariantsContext implements Context
      */
     public function theVariantWithCodeShouldBePricedAtForChannel(ProductVariantInterface $productVariant, int $price, ChannelInterface $channel): void
     {
-        $response = $this->responseChecker->getCollection($this->client->index());
+        $response = $this->responseChecker->getCollection($this->client->index(Resources::PRODUCT_VARIANTS));
 
         Assert::same($response[0]['channelPricings'][$channel->getCode()]['price'], $price);
     }
@@ -161,7 +162,7 @@ final class ManagingProductVariantsContext implements Context
      */
     public function theVariantWithCodeShouldHaveMinimumPriceForChannel(ProductVariantInterface $productVariant, int $minimumPrice, ChannelInterface $channel): void
     {
-        $response = $this->responseChecker->getCollection($this->client->index());
+        $response = $this->responseChecker->getCollection($this->client->index(Resources::PRODUCT_VARIANTS));
 
         Assert::same($response[0]['channelPricings'][$channel->getCode()]['minimumPrice'], $minimumPrice);
     }
@@ -172,7 +173,7 @@ final class ManagingProductVariantsContext implements Context
         ?int $price,
         string $field,
     ): void {
-        $this->client->buildUpdateRequest($variant->getCode());
+        $this->client->buildUpdateRequest(Resources::PRODUCT_VARIANTS, $variant->getCode());
 
         $content = $this->client->getContent();
         $content['channelPricings'][$channel->getCode()][$field] = $price;
@@ -187,7 +188,7 @@ final class ManagingProductVariantsContext implements Context
         ProductInterface $product,
         ChannelInterface $channel,
     ): void {
-        $this->client->buildCreateRequest();
+        $this->client->buildCreateRequest(Resources::PRODUCT_VARIANTS);
         $this->client->addRequestData('product', $this->iriConverter->getIriFromItem($product));
         $this->client->addRequestData('code', StringInflector::nameToCode($name));
 

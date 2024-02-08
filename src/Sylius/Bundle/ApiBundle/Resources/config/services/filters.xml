@@ -2,7 +2,7 @@
 
 <!--
  This file is part of the Sylius package.
- (c) Paweł Jędrzejewski
+ (c) Sylius Sp. z o.o.
  For the full copyright and license information, please view the LICENSE
  file that was distributed with this source code.
 -->
@@ -43,6 +43,10 @@
         <service id="Sylius\Bundle\ApiBundle\Filter\Doctrine\TaxonFilter" public="true">
             <argument type="service" id="doctrine" />
             <argument type="service" id="api_platform.iri_converter" />
+            <tag name="api_platform.filter" />
+        </service>
+
+        <service id="Sylius\Bundle\ApiBundle\Filter\ShippingMethodFilter" public="true">
             <tag name="api_platform.filter" />
         </service>
 
@@ -120,7 +124,53 @@
             <tag name="api_platform.filter" />
         </service>
 
+        <service id="Sylius\Bundle\ApiBundle\Filter\Doctrine\ProductVariantCatalogPromotionFilter" public="true">
+            <argument type="service" id="api_platform.iri_converter" />
+            <argument type="service" id="doctrine" />
+            <tag name="api_platform.filter" />
+        </service>
+
         <service id="Sylius\Bundle\ApiBundle\Filter\Doctrine\ProductPriceOrderFilter" public="true">
+            <argument type="service" id="doctrine" />
+            <tag name="api_platform.filter" />
+        </service>
+
+        <service id="Sylius\Bundle\ApiBundle\Filter\PaymentMethodFilter" public="true">
+            <tag name="api_platform.filter" />
+        </service>
+
+        <service id="sylius.api.catalog_promotion_search_filter" parent="api_platform.doctrine.orm.search_filter" public="true">
+            <argument type="collection">
+                <argument key="name">partial</argument>
+                <argument key="code">partial</argument>
+                <argument key="state">exact</argument>
+            </argument>
+            <tag name="api_platform.filter" />
+        </service>
+
+        <service id="sylius.api.catalog_promotion_enabled_filter" parent="api_platform.doctrine.orm.boolean_filter" public="true">
+            <argument type="collection">
+                <argument key="enabled" />
+            </argument>
+            <tag name="api_platform.filter" />
+        </service>
+
+        <service id="sylius.api.catalog_promotion_start_date_filter" parent="api_platform.doctrine.orm.date_filter" public="true">
+            <argument type="collection">
+                <argument key="startDate">exclude_null</argument>
+            </argument>
+            <tag name="api_platform.filter" />
+        </service>
+
+        <service id="sylius.api.catalog_promotion_end_date_filter" parent="api_platform.doctrine.orm.date_filter" public="true">
+            <argument type="collection">
+                <argument key="endDate">exclude_null</argument>
+            </argument>
+            <tag name="api_platform.filter" />
+        </service>
+
+        <service id="Sylius\Bundle\ApiBundle\Filter\Doctrine\CatalogPromotionChannelFilter" public="true">
+            <argument type="service" id="api_platform.iri_converter" />
             <argument type="service" id="doctrine" />
             <tag name="api_platform.filter" />
         </service>

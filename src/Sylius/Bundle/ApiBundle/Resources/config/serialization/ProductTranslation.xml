@@ -30,5 +30,17 @@
         <attribute name="shortDescription">
             <group>shop:product:read</group>
         </attribute>
+        <attribute name="metaKeywords">
+            <group>admin:product:create</group>
+            <group>admin:product:read</group>
+            <group>admin:product:update</group>
+            <group>shop:product:read</group>
+        </attribute>
+        <attribute name="metaDescription">
+            <group>admin:product:create</group>
+            <group>admin:product:read</group>
+            <group>admin:product:update</group>
+            <group>shop:product:read</group>
+        </attribute>
     </class>
 </serializer>

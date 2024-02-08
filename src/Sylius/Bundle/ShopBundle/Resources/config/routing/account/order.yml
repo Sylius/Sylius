@@ -1,11 +1,11 @@
 # This file is a part of the Sylius package.
-# (c) Paweł Jędrzejewski
+# (c) Sylius Sp. z o.o.
 
 sylius_shop_account_order_index:
     path: /
     methods: [GET]
     defaults:
-        _controller: sylius.controller.order:indexAction
+        _controller: sylius.controller.order::indexAction
         _sylius:
             section: shop_account
             template: "@SyliusShop/Account/Order/index.html.twig"
@@ -15,7 +15,7 @@ sylius_shop_account_order_show:
     path: /{number}
     methods: [GET]
     defaults:
-        _controller: sylius.controller.order:showAction
+        _controller: sylius.controller.order::showAction
         _sylius:
             section: shop_account
             template: "@SyliusShop/Account/Order/show.html.twig"

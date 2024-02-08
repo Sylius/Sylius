@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -36,6 +36,11 @@ class UpdatePage extends SymfonyPage implements UpdatePageInterface
     public function saveChanges(): void
     {
         $this->getDocument()->pressButton('sylius_save_changes_button');
+    }
+
+    public function cancelChanges(): void
+    {
+        $this->getDocument()->find('css', '[data-test-cancel-changes-button]')->click();
     }
 
     public function getValidationMessage(string $element): string

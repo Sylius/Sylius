@@ -11,7 +11,7 @@ Feature: Checking a promotion usage after placing an order
         And it belongs to "T-Shirts"
         And the store has a product "PHP Mug" priced at "$20.00"
         And it belongs to "Mugs"
-        And the store ships everywhere for free
+        And the store ships everywhere for Free
         And the store allows paying with "Cash on Delivery"
         And there is a promotion "Christmas promotion"
         And I am logged in as an administrator

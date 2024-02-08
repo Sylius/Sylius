@@ -1,12 +1,5 @@
-.. rst-class:: outdated
-
 Basic Usage
 ===========
-
-.. danger::
-
-   We're sorry but **this documentation section is outdated**. Please have that in mind when trying to use it.
-   You can help us making documentation up to date via Sylius Github. Thank you!
 
 Creating an attributable class
 ------------------------------
@@ -16,117 +9,86 @@ of the :ref:`component_attribute_model_attribute-subject-interface`.
 
 .. code-block:: php
 
-   <?php
+    <?php
 
-   namespace App\Model;
+    namespace App\Model;
 
-   use Sylius\Component\Attribute\Model\AttributeSubjectInterface;
-   use Sylius\Component\Attribute\Model\AttributeValueInterface;
-   use Doctrine\Common\Collections\Collection;
+    use Doctrine\Common\Collections\Collection;
+    use Sylius\Component\Attribute\Model\AttributeSubjectInterface;
+    use Sylius\Component\Attribute\Model\AttributeValueInterface;
 
-   class Shirt implements AttributeSubjectInterface
-   {
-       /**
-        * @var AttributeValueInterface[]
-        */
-       private $attributes;
+    class Shirt implements AttributeSubjectInterface
+    {
+        private Collection $attributes;
 
-       /**
-        * {@inheritdoc}
-        */
-       public function getAttributes()
-       {
-           return $this->attributes;
-       }
+        public function getAttributes(): Collection
+        {
+            return $this->attributes;
+        }
 
-       /**
-        * {@inheritdoc}
-        */
-       public function setAttributes(Collection $attributes)
-       {
-           foreach ($attributes as $attribute) {
-               $this->addAttribute($attribute);
-           }
-       }
+        public function setAttributes(Collection $attributes): void
+        {
+            foreach ($attributes as $attribute) {
+                $this->addAttribute($attribute);
+            }
+        }
 
-       /**
-        * {@inheritdoc}
-        */
-       public function addAttribute(AttributeValueInterface $attribute)
-       {
-           if (!$this->hasAttribute($attribute)) {
-               $attribute->setSubject($this);
-               $this->attributes[] = $attribute;
-           }
-       }
+        public function addAttribute(AttributeValueInterface $attribute): void
+        {
+            if (!$this->hasAttribute($attribute)) {
+                $attribute->setSubject($this);
+                $this->attributes->add($attribute);
+            }
+        }
 
-       /**
-        * {@inheritdoc}
-        */
-       public function removeAttribute(AttributeValueInterface $attribute)
-       {
-           if ($this->hasAttribute($attribute)){
-               $attribute->setSubject(null);
-               $key = array_search($attribute, $this->attributes);
-               unset($this->attributes[$key]);
-           }
-       }
+        public function removeAttribute(AttributeValueInterface $attribute): void
+        {
+            if ($this->hasAttribute($attribute)) {
+                $attribute->setSubject(null);
+                $this->attributes->removeElement($attribute);
+            }
+        }
 
-       /**
-        * {@inheritdoc}
-        */
-       public function hasAttribute(AttributeValueInterface $attribute)
-       {
-           return in_array($attribute, $this->attributes);
-       }
+        public function hasAttribute(AttributeValueInterface $attribute): bool
+        {
+            return $this->attributes->contains($attribute);
+        }
 
-       /**
-        * {@inheritdoc}
-        */
-       public function hasAttributeByName($attributeName)
-       {
-           foreach ($this->attributes as $attribute) {
-               if ($attribute->getName() === $attributeName) {
-                   return true;
-               }
-           }
+        public function hasAttributeByCodeAndLocale($attributeCode, $localeCode = null): bool
+        {
+            return (bool) $this->getAttributeByCodeAndLocale($attributeCode, $localeCode);
+        }
 
-           return false;
-       }
+        public function getAttributeByCodeAndLocale(string $attributeCode, string $localeCode = null): ?AttributeValueInterface
+        {
+            return $this->attributes->filter(fn (AttributeValueInterface $attribute) => $attributeCode === $attribute->getCode() &&
+                ($attribute->getLocaleCode() === $localeCode || null === $attribute->getLocaleCode()))
+                ->first();
+        }
 
-       /**
-        * {@inheritdoc}
-        */
-       public function getAttributeByName($attributeName)
-       {
-           foreach ($this->attributes as $attribute) {
-               if ($attribute->getName() === $attributeName) {
-                   return $attribute;
-               }
-           }
+        public function getAttributesByLocale(string $localeCode, string $fallbackLocaleCode, ?string $baseLocaleCode = null): Collection
+        {
+            return $this->attributes->filter(function (AttributeValueInterface $attribute) use ($localeCode) {
+                    return $attribute->getLocaleCode() === $localeCode;
+                }
+            );
+        }
 
-           return null;
-       }
-       
-       /**
-        * {@inheritdoc}
-        */
-       public function hasAttributeByCodeAndLocale($attributeCode, $localeCode = null)
-       {
-   
-       }
+        // Optional: you can search attributes by name
 
-       /**
-        * {@inheritdoc}
-        */
-       public function getAttributeByCodeAndLocale($attributeCode, $localeCode = null)
-       {
-   
-       }
-   }
+        public function hasAttributeByName(string $attributeName): bool
+        {
+            return (bool) $this->getAttributeByName($attributeName);
+        }
+
+        public function getAttributeByName(string $attributeName): Collection
+        {
+            return $this->attributes->filter(fn ($attribute) => $attributeName === $attribute->getName());
+        }
+    }
 
 .. note::
-   An implementation similar to the one above has been done in the :ref:`component_product_model_product` model.
+    An implementation similar to the one above has been done in the :ref:`component_product_model_product` model.
 
 Adding attributes to an object
 ------------------------------
@@ -135,91 +97,91 @@ Once we have our class we can characterize it with attributes.
 
 .. code-block:: php
 
-   <?php
+    <?php
 
-   use App\Model\Shirt;
-   use Sylius\Component\Attribute\Model\Attribute;
-   use Sylius\Component\Attribute\Model\AttributeValue;
-   use Sylius\Component\Attribute\AttributeType\TextAttributeType;
-   use Sylius\Component\Attribute\Model\AttributeValueInterface;
+    use App\Model\Shirt;
+    use Sylius\Component\Attribute\Model\Attribute;
+    use Sylius\Component\Attribute\Model\AttributeValue;
+    use Sylius\Component\Attribute\AttributeType\TextAttributeType;
+    use Sylius\Component\Attribute\Model\AttributeValueInterface;
 
-   $attribute = new Attribute();
-   $attribute->setName('Size');
-   $attribute->setType(TextAttributeType::TYPE);
-   $attribute->setStorageType(AttributeValueInterface::STORAGE_TEXT);
+    $attribute = new Attribute();
+    $attribute->setName('Size');
+    $attribute->setType(TextAttributeType::TYPE);
+    $attribute->setStorageType(AttributeValueInterface::STORAGE_TEXT);
 
-   $smallSize = new AttributeValue();
-   $mediumSize = new AttributeValue();
-   
-   $smallSize->setAttribute($attribute);
-   $mediumSize->setAttribute($attribute);
+    $smallSize = new AttributeValue();
+    $mediumSize = new AttributeValue();
 
-   $smallSize->setValue('S');
-   $mediumSize->setValue('M');
+    $smallSize->setAttribute($attribute);
+    $mediumSize->setAttribute($attribute);
 
-   $shirt = new Shirt();
+    $smallSize->setValue('S');
+    $mediumSize->setValue('M');
 
-   $shirt->addAttribute($smallSize);
-   $shirt->addAttribute($mediumSize);
+    $shirt = new Shirt();
+
+    $shirt->addAttribute($smallSize);
+    $shirt->addAttribute($mediumSize);
 
 Or you can just add all attributes needed using a class implementing
-Doctrine's `Collection`_ interface, e.g. the `ArrayCollection`_ class.
-
-.. _Collection: http://www.doctrine-project.org/api/common/2.3/class-Doctrine.Common.Collections.Collection.html
-.. _ArrayCollection: http://www.doctrine-project.org/api/common/2.3/class-Doctrine.Common.Collections.ArrayCollection.html
+Doctrine's ``Collection`` interface, e.g. the ``ArrayCollection`` class.
 
 .. warning::
-   Beware! It's really important to set proper attribute storage type, which should reflect value type that is set in `AttributeValue`.
+    Beware! It's really important to set proper attribute storage type, which should reflect value type that is set in `AttributeValue`.
 
 .. code-block:: php
 
-   <?php
+    <?php
 
-   use Doctrine\Common\Collections\ArrayCollection;
+    use Doctrine\Common\Collections\ArrayCollection;
 
-   $attributes = new ArrayCollection();
+    $attributes = new ArrayCollection();
 
-   $attributes->add($smallSize);
-   $attributes->add($mediumSize);
+    $attributes->add($smallSize);
+    $attributes->add($mediumSize);
 
-   $shirt->setAttributes($attributes);
+    $shirt->setAttributes($attributes);
 
 .. note::
-   Notice that you don't actually add an :ref:`component_attribute_model_attribute` to the subject,
-   instead you need to add every :ref:`component_attribute_model_attribute-value` assigned to the attribute.
+    Notice that you don't actually add an :ref:`component_attribute_model_attribute` to the subject,
+    instead you need to add every :ref:`component_attribute_model_attribute-value` assigned to the attribute.
 
 Accessing attributes
 --------------------
 
 .. code-block:: php
 
-   <?php
+    <?php
 
-   $shirt->getAttributes(); // returns an array containing all set attributes
+    $shirt->getAttributes(); // returns an array containing all set attributes
 
-   $shirt->hasAttribute($smallSize); // returns true
-   $shirt->hasAttribute($hugeSize); // returns false
+    $shirt->hasAttribute($smallSize); // returns true
+    $shirt->hasAttribute($hugeSize); // returns false
 
 Accessing attributes by name
 ----------------------------
 
+If you are using the optional functions that checks attributes by name you can access them by this value
+
 .. code-block:: php
 
-   <?php
+    <?php
 
-   $shirt->hasAttributeByName('Size'); // returns true
+    $shirt->hasAttributeByName('Size'); // returns true
 
-   $shirt->getAttributeByName('Size'); // returns $smallSize
+    $shirt->getAttributeByName('Size'); // returns $smallSize
 
 Removing an attribute
 ---------------------
 
 .. code-block:: php
 
-   <?php
+    <?php
 
-   $shirt->hasAttribute($smallSize); // returns true
+    // in example implementation, removeAttribute function checks if collection has attribute
+    $shirt->hasAttribute($smallSize); // returns true
 
-   $shirt->removeAttribute($smallSize);
+    $shirt->removeAttribute($smallSize);
 
-   $shirt->hasAttribute($smallSize); // now returns false
+    $shirt->hasAttribute($smallSize); // now returns false

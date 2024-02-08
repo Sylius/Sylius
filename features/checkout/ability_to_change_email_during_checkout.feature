@@ -7,8 +7,8 @@ Feature: Changing email during checkout with registered email
     Background:
         Given the store operates on a single channel in "United States"
         And the store has a product "Mantis blade" priced at "$1200"
-        And the store ships everywhere for free
-        And the store allows paying offline
+        And the store ships everywhere for Free
+        And the store allows paying Offline
         And there is a customer "John Doe" identified by an email "john@example.com" and a password "secret"
 
     @ui

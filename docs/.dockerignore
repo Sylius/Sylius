@@ -1,0 +1,14 @@
+**/.dockerignore
+**/.DS_Store
+**/.git/
+**/.gitattributes
+**/.github
+**/.gitignore
+**/.gitkeep
+**/.gitmodules
+**/.idea
+**/Dockerfile
+**/Thumbs.db
+.editorconfig
+docker-compose*.yaml
+docker-compose*.yml

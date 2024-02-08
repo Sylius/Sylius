@@ -7,6 +7,7 @@ parameters:
     locale: en_US
     database_driver: pdo_sqlite
     database_path: "%kernel.project_dir%/var/db.sql"
+    kernel.api_bundle_path: '%kernel.project_dir%/../../'
 
 api_platform:
     enable_swagger_ui: false
@@ -16,7 +17,6 @@ api_platform:
     enable_docs: false
     mapping:
         paths:
-            - '%kernel.api_bundle_path%/Resources/config/api_resources'
             - '%kernel.project_dir%/config/api_platform'
 
 sylius_api:
@@ -28,12 +28,16 @@ framework:
     default_locale: "%locale%"
     session:
         handler_id: ~
-        storage_id: session.storage.mock_file
+        storage_factory_id: session.storage.factory.mock_file
     http_method_override: true
     test: ~
+    router:
+        resource: "%kernel.project_dir%/config/routing.yaml"
     serializer:
         mapping:
             paths: ['%kernel.project_dir%/config/serialization']
+    mailer:
+        dsn: 'null://null'
 
 doctrine_migrations:
     storage:
@@ -61,13 +65,6 @@ lexik_jwt_authentication:
     secret_key: "%kernel.project_dir%/config/jwt/private-test.pem"
     public_key: "%kernel.project_dir%/config/jwt/public-test.pem"
     pass_phrase: "ALL_THAT_IS_GOLD_DOES_NOT_GLITTER_NOT_ALL_THOSE_WHO_WANDER_ARE_LOST"
-
-swiftmailer:
-    disable_delivery: true
-    logging: true
-    spool:
-        type: file
-        path: '%kernel.cache_dir%/spool'
 
 sylius_taxonomy:
     resources:

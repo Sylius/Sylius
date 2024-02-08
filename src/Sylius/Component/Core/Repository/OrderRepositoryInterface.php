@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -24,6 +24,8 @@ use Sylius\Component\Order\Repository\OrderRepositoryInterface as BaseOrderRepos
 interface OrderRepositoryInterface extends BaseOrderRepositoryInterface
 {
     public function createListQueryBuilder(): QueryBuilder;
+
+    public function createSearchListQueryBuilder(): QueryBuilder;
 
     public function createByCustomerIdQueryBuilder($customerId): QueryBuilder;
 
@@ -86,4 +88,6 @@ interface OrderRepositoryInterface extends BaseOrderRepositoryInterface
     public function findCartForSelectingPayment($id): ?OrderInterface;
 
     public function findCartByTokenValue(string $tokenValue): ?BaseOrderInterface;
+
+    public function findCartByTokenValueAndChannel(string $tokenValue, ChannelInterface $channel): ?BaseOrderInterface;
 }

@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -17,11 +17,11 @@ use Doctrine\Common\DataFixtures\Purger\ORMPurger;
 use Doctrine\Persistence\ObjectManager;
 use Fidry\AliceDataFixtures\LoaderInterface;
 use Fidry\AliceDataFixtures\Persistence\PurgeMode;
-use Sylius\Bundle\ApiBundle\Assigner\OrderPromoCodeAssignerInterface;
+use Sylius\Bundle\ApiBundle\Assigner\OrderPromotionCodeAssignerInterface;
 use Sylius\Bundle\ApiBundle\Command\Checkout\UpdateCart;
 use Sylius\Bundle\ApiBundle\CommandHandler\Checkout\UpdateCartHandler;
 use Sylius\Bundle\ApiBundle\Modifier\OrderAddressModifierInterface;
-use Sylius\Bundle\ApiBundle\Provider\CustomerProviderInterface;
+use Sylius\Bundle\CoreBundle\Resolver\CustomerResolverInterface;
 use Sylius\Component\Core\Model\Address;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
@@ -47,9 +47,9 @@ final class ChangeAddressOrderHandlerTest extends KernelTestCase
 
         $orderAddressModifier = $container->get(OrderAddressModifierInterface::class);
 
-        $orderPromoCodeAssigner = $container->get(OrderPromoCodeAssignerInterface::class);
+        $orderPromotionCodeAssigner = $container->get(OrderPromotionCodeAssignerInterface::class);
 
-        $customerProvider = $container->get(CustomerProviderInterface::class);
+        $customerResolver = $container->get(CustomerResolverInterface::class);
 
         $purger = new ORMPurger($manager);
         $purger->purge();
@@ -73,8 +73,8 @@ final class ChangeAddressOrderHandlerTest extends KernelTestCase
         $updateCartHandler = new UpdateCartHandler(
             $orderRepository,
             $orderAddressModifier,
-            $orderPromoCodeAssigner,
-            $customerProvider,
+            $orderPromotionCodeAssigner,
+            $customerResolver,
         );
 
         $newBillingAddress = $address = new Address();

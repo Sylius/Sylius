@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -15,19 +15,19 @@ namespace Sylius\Bundle\ApiBundle\Command\Cart;
 
 use Sylius\Bundle\ApiBundle\Command\ChannelCodeAwareInterface;
 use Sylius\Bundle\ApiBundle\Command\CustomerEmailAwareInterface;
+use Sylius\Bundle\ApiBundle\Command\LocaleCodeAwareInterface;
 
 /** @experimental */
-class PickupCart implements ChannelCodeAwareInterface, CustomerEmailAwareInterface
+class PickupCart implements ChannelCodeAwareInterface, CustomerEmailAwareInterface, LocaleCodeAwareInterface
 {
-    /** @psalm-immutable
-     * @var string|null */
-    public $tokenValue;
-
     /**
-     * @psalm-immutable
+     * @immutable
      *
      * @var string|null
      */
+    public $tokenValue;
+
+    /** @var string|null */
     public $localeCode;
 
     /** @var string|null */
@@ -36,10 +36,9 @@ class PickupCart implements ChannelCodeAwareInterface, CustomerEmailAwareInterfa
     /** @var string|null */
     public $email;
 
-    public function __construct(?string $tokenValue = null, ?string $localeCode = null)
+    public function __construct(?string $tokenValue = null)
     {
         $this->tokenValue = $tokenValue;
-        $this->localeCode = $localeCode;
     }
 
     public function getChannelCode(): ?string
@@ -60,5 +59,15 @@ class PickupCart implements ChannelCodeAwareInterface, CustomerEmailAwareInterfa
     public function setEmail(?string $email): void
     {
         $this->email = $email;
+    }
+
+    public function getLocaleCode(): ?string
+    {
+        return $this->localeCode;
+    }
+
+    public function setLocaleCode(?string $localeCode): void
+    {
+        $this->localeCode = $localeCode;
     }
 }

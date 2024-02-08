@@ -1,5 +1,5 @@
 # This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
+# (c) Sylius Sp. z o.o.
 
 sylius_ui:
     events:
@@ -235,7 +235,7 @@ sylius_ui:
                     priority: 5
                     context:
                         event: sylius.admin.layout.topbar_right
-                        
+
         sylius.admin.order.update.form:
             blocks:
                 legacy:
@@ -325,6 +325,15 @@ sylius_ui:
                     priority: 5
                     context:
                         event: sylius.admin.login.after_content
+
+        sylius.admin.login.form.content:
+            blocks:
+                divider:
+                    template: "@SyliusAdmin/_divider.html.twig"
+                    priority: 0
+                request_password_reset:
+                    template: "@SyliusAdmin/Security/Form/_requestPasswordResetButton.html.twig"
+                    priority: 0
 
         sylius.admin.dashboard.header.content:
             blocks:
@@ -970,6 +979,24 @@ sylius_ui:
                     context:
                         event: sylius.admin.product.index.after_taxon_tree
 
+        sylius.admin.catalog_promotion.product_variant.index.content:
+            blocks:
+                header:
+                    template: "@SyliusAdmin/CatalogPromotion/ProductVariant/Index/_headerWidget.html.twig"
+                    priority: 20
+                content:
+                    template: "@SyliusAdmin/Crud/Index/_content.html.twig"
+                    priority: 10 
+
+        sylius.admin.catalog_promotion.product_variant.index.header.content:
+            blocks:
+                content:
+                    template: "@SyliusAdmin/CatalogPromotion/ProductVariant/Index/Header/_content.html.twig"
+                    priority: 20
+                breadcrumb:
+                    template: "@SyliusAdmin/CatalogPromotion/ProductVariant/Index/Header/_breadcrumb.html.twig"
+                    priority: 10
+
         sylius.admin.catalog_promotion.show.content:
             blocks:
                 header:
@@ -1077,6 +1104,9 @@ sylius_ui:
                 countries:
                     template: '@SyliusAdmin/Channel/Form/_countries.html.twig'
                     priority: 20
+                required_address_in_checkout:
+                    template: '@SyliusAdmin/Channel/Form/_shippingAddressInCheckoutRequired.html.twig'
+                    priority: 15
                 money:
                     template: '@SyliusAdmin/Channel/Form/_money.html.twig'
                     priority: 10
@@ -1286,4 +1316,52 @@ sylius_ui:
                     priority: 20
                 shipment_units:
                     template: '@SyliusAdmin/Shipment/Show/_shipmentUnits.html.twig'
+                    priority: 10
+
+        sylius.admin.request_password_reset.content:
+            blocks:
+                form:
+                    template: '@SyliusAdmin/Security/RequestPasswordReset/_form.html.twig'
+                    priority: 10
+
+        sylius.admin.request_password_reset.before_form:
+            blocks:
+                header:
+                    template: "@SyliusAdmin/Security/_logo.html.twig"
+                    priority: 20
+                flashes:
+                    template: "@SyliusUi/_flashes.html.twig"
+                    priority: 10
+
+        sylius.admin.request_password_reset.form.content:
+            blocks:
+                email:
+                    template: '@SyliusAdmin/Security/RequestPasswordReset/_email.html.twig'
+                    priority: 20
+                submit:
+                    template: '@SyliusAdmin/Security/RequestPasswordReset/_submit.html.twig'
+                    priority: 10
+
+        sylius.admin.reset_password.content:
+            blocks:
+                form:
+                    template: '@SyliusAdmin/Security/ResetPassword/_content.html.twig'
+                    priority: 10
+
+        sylius.admin.reset_password.form:
+            blocks:
+                logo:
+                    template: '@SyliusAdmin/Security/_logo.html.twig'
+                    priority: 20
+                content:
+                    template: '@SyliusAdmin/Security/ResetPassword/_form.html.twig'
+                    priority: 10
+
+        sylius.admin.reset_password.form.content:
+            blocks:
+                passwords:
+                    template: '@SyliusAdmin/Security/ResetPassword/Form/_passwords.html.twig'
+                    priority: 20
+                submit:
+                    template: '@SyliusAdmin/Security/ResetPassword/Form/_submit.html.twig'
                     priority: 10

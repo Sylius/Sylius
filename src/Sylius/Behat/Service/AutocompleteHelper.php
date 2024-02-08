@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -44,6 +44,17 @@ abstract class AutocompleteHelper
         }
 
         static::waitForElementToBeVisible($session, $element);
+    }
+
+    public static function isValueVisible(Session $session, NodeElement $element, $value): bool
+    {
+        static::activateAutocompleteDropdown($session, $element);
+
+        $result = $element->find('css', sprintf('div.item:contains("%s")', $value));
+
+        static::waitForElementToBeVisible($session, $element);
+
+        return null !== $result;
     }
 
     private static function activateAutocompleteDropdown(Session $session, NodeElement $element)

@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -69,10 +69,11 @@ EOT
             return 1;
         }
 
-        $parameters = [
-            'suite' => $suite,
-            '--no-interaction' => true,
-        ];
+        $parameters = ['--no-interaction' => true];
+
+        if (null !== $suite) {
+            $parameters['suite'] = $suite;
+        }
 
         $commands = [
             'sylius:fixtures:load' => $parameters,

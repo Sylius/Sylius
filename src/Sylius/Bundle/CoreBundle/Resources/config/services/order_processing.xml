@@ -4,7 +4,7 @@
 
  This file is part of the Sylius package.
 
- (c) Paweł Jędrzejewski
+ (c) Sylius Sp. z o.o.
 
  For the full copyright and license information, please view the LICENSE
  file that was distributed with this source code.
@@ -12,6 +12,16 @@
 -->
 
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <parameters>
+        <parameter key="sylius.order_payment_processor.checkout.unsupported_states" type="collection">
+            <parameter type="constant">Sylius\Component\Order\Model\OrderInterface::STATE_CANCELLED</parameter>
+            <parameter type="constant">Sylius\Component\Order\Model\OrderInterface::STATE_FULFILLED</parameter>
+        </parameter>
+        <parameter key="sylius.order_payment_processor.after_checkout.unsupported_states" type="collection">
+            <parameter type="constant">Sylius\Component\Order\Model\OrderInterface::STATE_CANCELLED</parameter>
+            <parameter type="constant">Sylius\Component\Order\Model\OrderInterface::STATE_FULFILLED</parameter>
+        </parameter>
+    </parameters>
     <services>
         <defaults public="true" />
 
@@ -61,11 +71,15 @@
         <service id="sylius.order_processing.order_payment_processor.checkout" class="Sylius\Component\Core\OrderProcessing\OrderPaymentProcessor">
             <argument type="service" id="sylius.order_payment_provider" />
             <argument>cart</argument>
+            <argument type="service" id="Sylius\Component\Core\Payment\Remover\OrderPaymentsRemoverInterface" />
+            <argument>%sylius.order_payment_processor.checkout.unsupported_states%</argument>
             <tag name="sylius.order_processor" priority="0"/>
         </service>
         <service id="sylius.order_processing.order_payment_processor.after_checkout" class="Sylius\Component\Core\OrderProcessing\OrderPaymentProcessor">
             <argument type="service" id="sylius.order_payment_provider" />
             <argument>new</argument>
+            <argument type="service" id="Sylius\Component\Core\Payment\Remover\OrderPaymentsRemoverInterface" />
+            <argument>%sylius.order_payment_processor.after_checkout.unsupported_states%</argument>
         </service>
     </services>
 </container>

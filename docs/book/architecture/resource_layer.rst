@@ -190,4 +190,4 @@ Creating a product using custom form and a redirection method:
 
 All other methods have the same level of flexibility and are documented in the `SyliusResourceBundle <https://github.com/Sylius/SyliusResourceBundle/blob/master/docs/index.md>`_.
 
-.. _`ObjectManager`: http://www.doctrine-project.org/api/common/2.4/class-Doctrine.Common.Persistence.ObjectManager.html
+.. _`ObjectManager`: https://www.doctrine-project.org/projects/doctrine-persistence/en/latest/reference/index.html#object-manager

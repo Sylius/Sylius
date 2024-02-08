@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -24,15 +24,10 @@ use Symfony\Component\HttpKernel\DataCollector\DataCollector;
 final class ChannelCollector extends DataCollector
 {
     public function __construct(
-        ChannelRepositoryInterface $channelRepository,
+        private ChannelRepositoryInterface $channelRepository,
         private ChannelContextInterface $channelContext,
-        bool $channelChangeSupport = false,
+        private bool $channelChangeSupport = false,
     ) {
-        $this->data = [
-            'channel' => null,
-            'channels' => array_map([$this, 'pluckChannel'], $channelRepository->findAll()),
-            'channel_change_support' => $channelChangeSupport,
-        ];
     }
 
     public function getChannel(): ?array
@@ -56,9 +51,16 @@ final class ChannelCollector extends DataCollector
     public function collect(Request $request, Response $response, \Throwable $exception = null): void
     {
         try {
-            $this->data['channel'] = $this->pluckChannel($this->channelContext->getChannel());
+            $channel = $this->pluckChannel($this->channelContext->getChannel());
         } catch (ChannelNotFoundException) {
+            $channel = null;
         }
+
+        $this->data = [
+            'channel' => $channel,
+            'channels' => array_map([$this, 'pluckChannel'], $this->channelRepository->findAll()),
+            'channel_change_support' => $this->channelChangeSupport,
+        ];
     }
 
     public function reset(): void

@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -21,6 +21,11 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     public function hasPayAction(): bool
     {
         return $this->hasElement('pay_link');
+    }
+
+    public function canBePaid(): bool
+    {
+        return $this->hasPayAction() && !$this->getElement('pay_link')->hasAttribute('disabled');
     }
 
     public function pay(): void
@@ -70,6 +75,17 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
         }
 
         return '';
+    }
+
+    public function getPaymentValidationMessage(): string
+    {
+        $message = '';
+        $validationElements = $this->getDocument()->findAll('css', 'form .items .sylius-validation-error');
+        foreach ($validationElements as $validationElement) {
+            $message .= $validationElement->getText();
+        }
+
+        return $message;
     }
 
     protected function getDefinedElements(): array

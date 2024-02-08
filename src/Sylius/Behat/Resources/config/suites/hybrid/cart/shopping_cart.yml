@@ -1,0 +1,35 @@
+# This file is part of the Sylius package.
+# (c) Sylius Sp. z o.o.
+
+default:
+    suites:
+        hybrid_shopping_cart:
+            contexts:
+                - sylius.behat.context.hook.doctrine_orm
+
+                - sylius.behat.context.setup.cart
+                - sylius.behat.context.setup.channel
+                - sylius.behat.context.setup.currency
+                - sylius.behat.context.setup.product
+                - sylius.behat.context.setup.promotion
+                - sylius.behat.context.setup.shipping
+                - sylius.behat.context.setup.shipping_category
+                - sylius.behat.context.setup.shop_api_security
+                - sylius.behat.context.setup.user
+                - Sylius\Behat\Context\Setup\CatalogPromotionContext
+
+                - sylius.behat.context.transform.cart
+                - sylius.behat.context.transform.channel
+                - sylius.behat.context.transform.lexical
+                - sylius.behat.context.transform.product
+                - sylius.behat.context.transform.product_variant
+                - sylius.behat.context.transform.shared_storage
+                - sylius.behat.context.transform.shipping_category
+
+                - sylius.behat.context.api.shop.cart
+                - sylius.behat.context.api.shop.registration
+                - sylius.behat.context.hybrid.shop.composite_cart
+                - sylius.behat.context.hybrid.shop.composite_customer
+
+            filters:
+                tags: "@shopping_cart&&@hybrid"

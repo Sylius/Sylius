@@ -1,6 +1,6 @@
 <h1 align="center">
     <a href="https://sylius.com/github-readme/link/" target="_blank">
-        <img src="https://sylius.com/assets/github-readme.png?v110" />
+        <img src="https://sylius.com/assets/github-readme.png?sylius-days" />
     </a>
 </h1>
 
@@ -9,9 +9,11 @@ Sylius is an Open Source eCommerce framework on top of [**Symfony**](https://sym
 The highest quality of code, strong testing culture, built-in Agile (BDD) workflow and exceptional flexibility make it the best solution for applications tailored to your business requirements. 
 Powerful REST API allows for easy integrations and creating unique customer experience on any device.
 
-We're using full-stack Behavior-Driven-Development, with [phpspec](https://phpspec.net) and [Behat](http://behat.org).
+We're using full-stack Behavior-Driven-Development, with [phpspec](https://phpspec.net) and [Behat](https://behat.org).
 
 Enjoy being an eCommerce Developer again!
+
+<img src="https://sylius.com/assets/readme/readme-main.png" />
 
 ⚙️ Installation
 --------------
@@ -42,6 +44,10 @@ Instead, all security issues must be sent to `security@sylius.com`.
 
 📦 Plugins and Extensions: Sylius Store
 ---------------------------------------
+
+<a href="https://store.sylius.com/" target="_blank">
+    <img src="https://sylius.com/assets/readme/readme-store.png" />
+</a>
    
 You can find Sylius plugins on [our Sylius Store](https://sylius.com/plugins/) which is a Marketplace with Sylius extensions. 
 
@@ -49,6 +55,10 @@ Or search for [packages marked as *sylius-plugin*](https://packagist.org/explore
 
 ➕ Sylius Plus
 --------------
+
+<a href="https://sylius.com/plus/" target="_blank">
+    <img src="https://sylius.com/assets/readme/readme-plus.png" />
+</a>
 
 Sylius Plus gives you all the power of Open Source and much more. It comes with the following set of enterprise-grade features:
 

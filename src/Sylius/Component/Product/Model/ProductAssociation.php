@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -30,11 +30,7 @@ class ProductAssociation implements ProductAssociationInterface
     /** @var ProductInterface|null */
     protected $owner;
 
-    /**
-     * @var Collection|ProductInterface[]
-     *
-     * @psalm-var Collection<array-key, ProductInterface>
-     */
+    /** @var Collection<array-key, ProductInterface> */
     protected $associatedProducts;
 
     public function __construct()

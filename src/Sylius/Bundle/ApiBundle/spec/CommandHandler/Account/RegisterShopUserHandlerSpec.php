@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -18,7 +18,7 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ApiBundle\Command\Account\RegisterShopUser;
 use Sylius\Bundle\ApiBundle\Command\Account\SendAccountRegistrationEmail;
 use Sylius\Bundle\ApiBundle\Command\Account\SendAccountVerificationEmail;
-use Sylius\Bundle\ApiBundle\Provider\CustomerProviderInterface;
+use Sylius\Bundle\CoreBundle\Resolver\CustomerResolverInterface;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
@@ -35,7 +35,7 @@ final class RegisterShopUserHandlerSpec extends ObjectBehavior
     function let(
         FactoryInterface $shopUserFactory,
         ObjectManager $shopUserManager,
-        CustomerProviderInterface $customerProvider,
+        CustomerResolverInterface $customerResolver,
         ChannelRepositoryInterface $channelRepository,
         GeneratorInterface $generator,
         MessageBusInterface $commandBus,
@@ -43,7 +43,7 @@ final class RegisterShopUserHandlerSpec extends ObjectBehavior
         $this->beConstructedWith(
             $shopUserFactory,
             $shopUserManager,
-            $customerProvider,
+            $customerResolver,
             $channelRepository,
             $generator,
             $commandBus,
@@ -58,7 +58,7 @@ final class RegisterShopUserHandlerSpec extends ObjectBehavior
     function it_creates_a_shop_user_with_given_data(
         FactoryInterface $shopUserFactory,
         ObjectManager $shopUserManager,
-        CustomerProviderInterface $customerProvider,
+        CustomerResolverInterface $customerResolver,
         ShopUserInterface $shopUser,
         CustomerInterface $customer,
         ChannelRepositoryInterface $channelRepository,
@@ -71,7 +71,7 @@ final class RegisterShopUserHandlerSpec extends ObjectBehavior
         $command->setLocaleCode('en_US');
 
         $shopUserFactory->createNew()->willReturn($shopUser);
-        $customerProvider->provide('WILL.SMITH@example.com')->willReturn($customer);
+        $customerResolver->resolve('WILL.SMITH@example.com')->willReturn($customer);
 
         $customer->getUser()->willReturn(null);
 
@@ -109,7 +109,7 @@ final class RegisterShopUserHandlerSpec extends ObjectBehavior
     function it_creates_a_shop_user_with_given_data_and_verifies_it(
         FactoryInterface $shopUserFactory,
         ObjectManager $shopUserManager,
-        CustomerProviderInterface $customerProvider,
+        CustomerResolverInterface $customerResolver,
         ShopUserInterface $shopUser,
         CustomerInterface $customer,
         ChannelRepositoryInterface $channelRepository,
@@ -121,7 +121,7 @@ final class RegisterShopUserHandlerSpec extends ObjectBehavior
         $command->setLocaleCode('en_US');
 
         $shopUserFactory->createNew()->willReturn($shopUser);
-        $customerProvider->provide('WILL.SMITH@example.com')->willReturn($customer);
+        $customerResolver->resolve('WILL.SMITH@example.com')->willReturn($customer);
 
         $customer->getUser()->willReturn(null);
 
@@ -151,14 +151,14 @@ final class RegisterShopUserHandlerSpec extends ObjectBehavior
     function it_throws_an_exception_if_customer_with_user_already_exists(
         FactoryInterface $shopUserFactory,
         ObjectManager $shopUserManager,
-        CustomerProviderInterface $customerProvider,
+        CustomerResolverInterface $customerResolver,
         ShopUserInterface $shopUser,
         CustomerInterface $customer,
         ShopUserInterface $existingShopUser,
         MessageBusInterface $commandBus,
     ): void {
         $shopUserFactory->createNew()->willReturn($shopUser);
-        $customerProvider->provide('WILL.SMITH@example.com')->willReturn($customer);
+        $customerResolver->resolve('WILL.SMITH@example.com')->willReturn($customer);
 
         $customer->getUser()->willReturn($existingShopUser);
 

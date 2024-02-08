@@ -6,7 +6,7 @@ Feature: Having proper product image displayed in the cart
 
     Background:
         Given the store operates on a single channel in "United States"
-        And the store has a product "T-shirt Car"
+        And the store has a product "T-Shirt Car"
         And this product has "Small logo" variant priced at "$12.35"
         And this product has "Medium logo" variant priced at "$15.35"
         And this product has an image "lamborghini.jpg" with "main" type

@@ -1,5 +1,5 @@
 # This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
+# (c) Sylius Sp. z o.o.
 
 sylius:
     menu:
@@ -7,3 +7,9 @@ sylius:
             main:
                 customers:
                     groups: 그룹
+            official_support:
+                header: 공식 지원
+                browse_plugins: 플러그인 탐색
+                sylius_plus: Sylius Plus
+                professional_services: 전문 서비스
+                find_a_partner: 파트너 찾기

@@ -20,7 +20,7 @@ sylius_admin_product_attribute_create:
     path: /product-attributes/{type}/new
     methods: [GET, POST]
     defaults:
-        _controller: sylius.controller.product_attribute:createAction
+        _controller: sylius.controller.product_attribute::createAction
         _sylius:
             section: admin
             factory:
@@ -37,24 +37,3 @@ sylius_admin_product_attribute_create:
                 route:
                     parameters:
                         type: $type
-
-sylius_admin_get_attribute_types:
-    path: /attribute-types
-    methods: [GET]
-    defaults:
-        _controller: sylius.controller.product_attribute:getAttributeTypesAction
-        template: "@SyliusAdmin/ProductAttribute/Types/attributeTypes.html.twig"
-
-sylius_admin_get_product_attributes:
-    path: /attributes
-    methods: [GET]
-    defaults:
-        _controller: sylius.controller.product_attribute:renderAttributesAction
-        template: "@SyliusAdmin/Product/Attribute/attributeChoice.html.twig"
-
-sylius_admin_render_attribute_forms:
-    path: /attribute-forms
-    methods: [GET]
-    defaults:
-        _controller: sylius.controller.product_attribute:renderAttributeValueFormsAction
-        template: "@SyliusAdmin/Product/Attribute/attributeValues.html.twig"

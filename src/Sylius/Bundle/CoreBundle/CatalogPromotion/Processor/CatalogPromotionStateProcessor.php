@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -29,6 +29,12 @@ final class CatalogPromotionStateProcessor implements CatalogPromotionStateProce
     public function process(CatalogPromotionInterface $catalogPromotion): void
     {
         $stateMachine = $this->stateMachineFactory->get($catalogPromotion, CatalogPromotionTransitions::GRAPH);
+
+        if ($stateMachine->can(CatalogPromotionTransitions::TRANSITION_PROCESS)) {
+            $stateMachine->apply(CatalogPromotionTransitions::TRANSITION_PROCESS);
+
+            return;
+        }
 
         if (!$this->catalogPromotionEligibilityChecker->isCatalogPromotionEligible($catalogPromotion)) {
             if ($stateMachine->can(CatalogPromotionTransitions::TRANSITION_DEACTIVATE)) {

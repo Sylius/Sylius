@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -16,10 +16,13 @@ namespace spec\Sylius\Bundle\ApiBundle\CommandHandler\Checkout;
 use PhpSpec\ObjectBehavior;
 use SM\Factory\FactoryInterface;
 use SM\StateMachine\StateMachineInterface;
+use Sylius\Bundle\ApiBundle\Command\Cart\InformAboutCartRecalculation;
 use Sylius\Bundle\ApiBundle\Command\Checkout\CompleteOrder;
 use Sylius\Bundle\ApiBundle\Event\OrderCompleted;
+use Sylius\Bundle\CoreBundle\Order\Checker\OrderPromotionsIntegrityCheckerInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Core\Model\PromotionInterface;
 use Sylius\Component\Core\OrderCheckoutTransitions;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Symfony\Component\Messenger\Envelope;
@@ -31,9 +34,11 @@ final class CompleteOrderHandlerSpec extends ObjectBehavior
     function let(
         OrderRepositoryInterface $orderRepository,
         FactoryInterface $stateMachineFactory,
+        MessageBusInterface $commandBus,
         MessageBusInterface $eventBus,
+        OrderPromotionsIntegrityCheckerInterface $orderPromotionsIntegrityChecker,
     ): void {
-        $this->beConstructedWith($orderRepository, $stateMachineFactory, $eventBus);
+        $this->beConstructedWith($orderRepository, $stateMachineFactory, $commandBus, $eventBus, $orderPromotionsIntegrityChecker);
     }
 
     function it_handles_order_completion_without_notes(
@@ -43,6 +48,7 @@ final class CompleteOrderHandlerSpec extends ObjectBehavior
         FactoryInterface $stateMachineFactory,
         MessageBusInterface $eventBus,
         CustomerInterface $customer,
+        OrderPromotionsIntegrityCheckerInterface $orderPromotionsIntegrityChecker,
     ): void {
         $completeOrder = new CompleteOrder();
         $completeOrder->setOrderTokenValue('ORDERTOKEN');
@@ -52,6 +58,8 @@ final class CompleteOrderHandlerSpec extends ObjectBehavior
         $order->getCustomer()->willReturn($customer);
 
         $order->setNotes(null)->shouldNotBeCalled();
+
+        $orderPromotionsIntegrityChecker->check($order)->willReturn(null);
 
         $stateMachineFactory->get($order, OrderCheckoutTransitions::GRAPH)->willReturn($stateMachine);
         $stateMachine->can('complete')->willReturn(true);
@@ -77,6 +85,7 @@ final class CompleteOrderHandlerSpec extends ObjectBehavior
         FactoryInterface $stateMachineFactory,
         MessageBusInterface $eventBus,
         CustomerInterface $customer,
+        OrderPromotionsIntegrityCheckerInterface $orderPromotionsIntegrityChecker,
     ): void {
         $completeOrder = new CompleteOrder('ThankYou');
         $completeOrder->setOrderTokenValue('ORDERTOKEN');
@@ -86,6 +95,8 @@ final class CompleteOrderHandlerSpec extends ObjectBehavior
         $orderRepository->findOneBy(['tokenValue' => 'ORDERTOKEN'])->willReturn($order);
 
         $order->setNotes('ThankYou')->shouldBeCalled();
+
+        $orderPromotionsIntegrityChecker->check($order)->willReturn(null);
 
         $stateMachineFactory->get($order, OrderCheckoutTransitions::GRAPH)->willReturn($stateMachine);
         $stateMachine->can('complete')->willReturn(true);
@@ -98,6 +109,37 @@ final class CompleteOrderHandlerSpec extends ObjectBehavior
         $eventBus
             ->dispatch($orderCompleted, [new DispatchAfterCurrentBusStamp()])
             ->willReturn(new Envelope($orderCompleted))
+            ->shouldBeCalled()
+        ;
+
+        $this($completeOrder)->shouldReturn($order);
+    }
+
+    function it_delays_an_information_about_cart_recalculate(
+        OrderRepositoryInterface $orderRepository,
+        OrderInterface $order,
+        MessageBusInterface $commandBus,
+        CustomerInterface $customer,
+        PromotionInterface $promotion,
+        OrderPromotionsIntegrityCheckerInterface $orderPromotionsIntegrityChecker,
+    ): void {
+        $completeOrder = new CompleteOrder('ThankYou');
+        $completeOrder->setOrderTokenValue('ORDERTOKEN');
+
+        $order->getCustomer()->willReturn($customer);
+
+        $orderRepository->findOneBy(['tokenValue' => 'ORDERTOKEN'])->willReturn($order);
+
+        $order->setNotes('ThankYou')->shouldBeCalled();
+
+        $orderPromotionsIntegrityChecker->check($order)->willReturn($promotion);
+        $promotion->getName()->willReturn('Christmas');
+
+        $informAboutCartRecalculate = new InformAboutCartRecalculation('Christmas');
+
+        $commandBus
+            ->dispatch($informAboutCartRecalculate, [new DispatchAfterCurrentBusStamp()])
+            ->willReturn(new Envelope($informAboutCartRecalculate))
             ->shouldBeCalled()
         ;
 
@@ -124,6 +166,7 @@ final class CompleteOrderHandlerSpec extends ObjectBehavior
         OrderInterface $order,
         FactoryInterface $stateMachineFactory,
         CustomerInterface $customer,
+        OrderPromotionsIntegrityCheckerInterface $orderPromotionsIntegrityChecker,
     ): void {
         $completeOrder = new CompleteOrder();
         $completeOrder->setOrderTokenValue('ORDERTOKEN');
@@ -131,6 +174,8 @@ final class CompleteOrderHandlerSpec extends ObjectBehavior
         $orderRepository->findOneBy(['tokenValue' => 'ORDERTOKEN'])->willReturn($order);
 
         $order->getCustomer()->willReturn($customer);
+
+        $orderPromotionsIntegrityChecker->check($order)->willReturn(null);
 
         $stateMachineFactory->get($order, OrderCheckoutTransitions::GRAPH)->willReturn($stateMachine);
         $stateMachine->can(OrderCheckoutTransitions::TRANSITION_COMPLETE)->willReturn(false);

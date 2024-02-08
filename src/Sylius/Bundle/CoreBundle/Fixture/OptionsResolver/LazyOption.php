@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Fixture\OptionsResolver;
 
-use Doctrine\Common\Collections\Collection;
+use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\OptionsResolver\Options;
 use Webmozart\Assert\Assert;
@@ -39,11 +39,11 @@ final class LazyOption
     public static function randomOne(RepositoryInterface $repository, array $criteria = []): \Closure
     {
         return function (Options $options) use ($repository, $criteria): object {
-            $objects = $repository->findBy($criteria);
-
-            if ($objects instanceof Collection) {
-                $objects = $objects->toArray();
+            if (is_a($repository, EntityRepository::class)) {
+                return self::findRandomOne($repository, $criteria, false);
             }
+
+            $objects = $repository->findBy($criteria);
 
             Assert::notEmpty($objects, 'No entities found of type ' . $repository->getClassName());
 
@@ -60,12 +60,11 @@ final class LazyOption
             if (random_int(1, 100) > $chanceOfRandomOne) {
                 return null;
             }
+            if (is_a($repository, EntityRepository::class)) {
+                return self::findRandomOne($repository, $criteria);
+            }
 
             $objects = $repository->findBy($criteria);
-
-            if ($objects instanceof Collection) {
-                $objects = $objects->toArray();
-            }
 
             return 0 === count($objects) ? null : $objects[array_rand($objects)];
         };
@@ -74,11 +73,11 @@ final class LazyOption
     public static function randomOnes(RepositoryInterface $repository, int $amount, array $criteria = []): \Closure
     {
         return function (Options $options) use ($repository, $amount, $criteria): iterable {
-            $objects = $repository->findBy($criteria);
-
-            if ($objects instanceof Collection) {
-                $objects = $objects->toArray();
+            if (is_a($repository, EntityRepository::class)) {
+                return self::findRandom($repository, $criteria, $amount);
             }
+
+            $objects = $repository->findBy($criteria);
 
             $selectedObjects = [];
             for (; $amount > 0 && count($objects) > 0; --$amount) {
@@ -164,6 +163,61 @@ final class LazyOption
 
                 return $resource;
             }
+        ;
+    }
+
+    private static function findRandomOne(
+        EntityRepository $repository,
+        array $criteria,
+        bool $allowNull = true,
+    ): ?object {
+        $objects = self::findRandom($repository, $criteria, 1);
+        $object = array_pop($objects);
+
+        if (!$allowNull && null === $object) {
+            throw new \InvalidArgumentException(sprintf('No entities found of type %s', $repository->getClassName()));
+        }
+
+        return $object;
+    }
+
+    private static function findRandom(EntityRepository $repository, array $criteria, int $limit): array
+    {
+        $queryBuilder = $repository->createQueryBuilder('o');
+        $queryBuilder->select('o.id');
+
+        foreach ($criteria as $field => $value) {
+            if (is_array($value)) {
+                $queryBuilder->andWhere(sprintf('o.%s IN (:%s)', $field, $field));
+                $queryBuilder->setParameter($field, $value);
+
+                continue;
+            }
+
+            $queryBuilder->andWhere(sprintf('o.%s = :%s', $field, $field));
+            $queryBuilder->setParameter($field, $value);
+        }
+
+        $ids = $queryBuilder->getQuery()->getSingleColumnResult();
+        if ([] === $ids) {
+            return [];
+        }
+
+        if (count($ids) <= $limit) {
+            $randomIds = $ids;
+        } else {
+            $randomKeys = array_rand($ids, $limit);
+            $randomIds = array_map(fn ($key): int|string => $ids[$key], (array) $randomKeys);
+        }
+
+        unset($ids);
+
+        return $repository
+            ->createQueryBuilder('o')
+            ->where('o.id IN (:ids)')
+            ->setParameter('ids', $randomIds)
+            ->getQuery()
+            ->getResult()
         ;
     }
 }

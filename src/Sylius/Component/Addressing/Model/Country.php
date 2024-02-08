@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -32,11 +32,7 @@ class Country implements CountryInterface, \Stringable
      */
     protected $code;
 
-    /**
-     * @var Collection|ProvinceInterface[]
-     *
-     * @psalm-var Collection<array-key, ProvinceInterface>
-     */
+    /** @var Collection<array-key, ProvinceInterface> */
     protected $provinces;
 
     public function __construct()

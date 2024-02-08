@@ -1,11 +1,11 @@
 # This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
+# (c) Sylius Sp. z o.o.
 
 sylius_admin_partial_taxon_tree:
     path: /tree
     methods: [GET]
     defaults:
-        _controller: sylius.controller.taxon:indexAction
+        _controller: sylius.controller.taxon::indexAction
         _sylius:
             template: $template
             repository:
@@ -16,7 +16,7 @@ sylius_admin_partial_taxon_show:
     path: /{id}
     methods: [GET]
     defaults:
-        _controller: sylius.controller.taxon:showAction
+        _controller: sylius.controller.taxon::showAction
         _sylius:
             template: $template
             vars: $vars

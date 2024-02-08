@@ -4,7 +4,7 @@
 
  This file is part of the Sylius package.
 
- (c) Paweł Jędrzejewski
+ (c) Sylius Sp. z o.o.
 
  For the full copyright and license information, please view the LICENSE
  file that was distributed with this source code.
@@ -18,19 +18,23 @@
     <class name="Sylius\Component\Currency\Model\ExchangeRate">
         <attribute name="id">
             <group>admin:exchange_rate:read</group>
+            <group>shop:exchange_rate:read</group>
         </attribute>
         <attribute name="ratio">
             <group>admin:exchange_rate:create</group>
             <group>admin:exchange_rate:read</group>
             <group>admin:exchange_rate:update</group>
+            <group>shop:exchange_rate:read</group>
         </attribute>
         <attribute name="sourceCurrency">
             <group>admin:exchange_rate:create</group>
             <group>admin:exchange_rate:read</group>
+            <group>shop:exchange_rate:read</group>
         </attribute>
         <attribute name="targetCurrency">
             <group>admin:exchange_rate:create</group>
             <group>admin:exchange_rate:read</group>
+            <group>shop:exchange_rate:read</group>
         </attribute>
     </class>
 </serializer>

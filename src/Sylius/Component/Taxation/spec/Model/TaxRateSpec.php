@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -123,5 +123,21 @@ final class TaxRateSpec extends ObjectBehavior
         $this->setAmount(0.23);
 
         $this->getLabel()->shouldReturn('Test tax (23%)');
+    }
+
+    function it_has_start_date(): void
+    {
+        $startDate = new \DateTime('01-01-2022');
+
+        $this->setStartDate($startDate);
+        $this->getStartDate()->shouldReturn($startDate);
+    }
+
+    function it_has_end_date(): void
+    {
+        $endDate = new \DateTime('01-01-2022');
+
+        $this->setEndDate($endDate);
+        $this->getEndDate()->shouldReturn($endDate);
     }
 }

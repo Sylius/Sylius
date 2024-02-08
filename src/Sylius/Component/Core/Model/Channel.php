@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -35,25 +35,13 @@ class Channel extends BaseChannel implements ChannelInterface
     /** @var string|null */
     protected $taxCalculationStrategy;
 
-    /**
-     * @var Collection|CurrencyInterface[]
-     *
-     * @psalm-var Collection<array-key, CurrencyInterface>
-     */
+    /** @var Collection<array-key, CurrencyInterface> */
     protected $currencies;
 
-    /**
-     * @var Collection|LocaleInterface[]
-     *
-     * @psalm-var Collection<array-key, LocaleInterface>
-     */
+    /** @var Collection<array-key, LocaleInterface> */
     protected $locales;
 
-    /**
-     * @var Collection|CountryInterface[]
-     *
-     * @psalm-var Collection<array-key, CountryInterface>
-     */
+    /** @var Collection<array-key, CountryInterface> */
     protected $countries;
 
     /** @var string|null */
@@ -73,6 +61,8 @@ class Channel extends BaseChannel implements ChannelInterface
 
     /** @var bool */
     protected $accountVerificationRequired = true;
+
+    protected bool $shippingAddressInCheckoutRequired = false;
 
     /** @var ShopBillingDataInterface|null */
     protected $shopBillingData;
@@ -262,6 +252,16 @@ class Channel extends BaseChannel implements ChannelInterface
     public function setAccountVerificationRequired(bool $accountVerificationRequired): void
     {
         $this->accountVerificationRequired = $accountVerificationRequired;
+    }
+
+    public function isShippingAddressInCheckoutRequired(): bool
+    {
+        return $this->shippingAddressInCheckoutRequired;
+    }
+
+    public function setShippingAddressInCheckoutRequired(bool $shippingAddressInCheckoutRequired): void
+    {
+        $this->shippingAddressInCheckoutRequired = $shippingAddressInCheckoutRequired;
     }
 
     public function getShopBillingData(): ?ShopBillingDataInterface

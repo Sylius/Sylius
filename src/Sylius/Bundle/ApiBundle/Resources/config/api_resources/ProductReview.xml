@@ -4,7 +4,7 @@
 
  This file is part of the Sylius package.
 
- (c) Paweł Jędrzejewski
+ (c) Sylius Sp. z o.o.
 
  For the full copyright and license information, please view the LICENSE
  file that was distributed with this source code.
@@ -91,7 +91,7 @@
                 <attribute name="method">PATCH</attribute>
                 <attribute name="path">/admin/product-reviews/{id}/accept</attribute>
                 <attribute name="input">false</attribute>
-                <attribute name="controller">Sylius\Bundle\ApiBundle\Applicator\ProductReviewStateMachineTransitionApplicatorInterface:accept</attribute>
+                <attribute name="controller">Sylius\Bundle\ApiBundle\Applicator\ProductReviewStateMachineTransitionApplicatorInterface::accept</attribute>
                 <attribute name="openapi_context">
                     <attribute name="summary">Accepts Product Review</attribute>
                 </attribute>
@@ -104,7 +104,7 @@
                 <attribute name="method">PATCH</attribute>
                 <attribute name="path">/admin/product-reviews/{id}/reject</attribute>
                 <attribute name="input">false</attribute>
-                <attribute name="controller">Sylius\Bundle\ApiBundle\Applicator\ProductReviewStateMachineTransitionApplicatorInterface:reject</attribute>
+                <attribute name="controller">Sylius\Bundle\ApiBundle\Applicator\ProductReviewStateMachineTransitionApplicatorInterface::reject</attribute>
                 <attribute name="openapi_context">
                     <attribute name="summary">Rejects Product Review</attribute>
                 </attribute>

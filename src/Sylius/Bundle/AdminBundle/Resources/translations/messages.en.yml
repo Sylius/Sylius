@@ -6,6 +6,12 @@ sylius:
             thank_you_for_transaction: 'Thank you for a successful transaction.'
             you_can_check_its_location_with_the_tracking_code: 'You can check it''s location with the %tracking_code% tracking code.'
             your_order_with_number: 'Your order with number'
+    form:
+        admin:
+            reset_password:
+                password:
+                    label: New password
+                    confirmation: Confirm new password
     menu:
         admin:
             main:
@@ -44,13 +50,22 @@ sylius:
                 sales:
                     header: Sales
                     orders: Orders
+                official_support:
+                    header: Official support
+                    browse_plugins: Browse plugins
+                    sylius_plus: Sylius Plus
+                    professional_services: Professional services
+                    find_a_partner: Find a partner
+                    sylius_certification: Sylius certification
     ui:
         catalog_promotion:
             dates_details: This operation is time-consuming! Please consider a 2-10 minutes delay starting from the specified dates. The delay depends on the size of the catalog.
+        channel:
+            account_verification_required_details: By disabling this option, it will be possible to create accounts and access them without email verification and thus potentially access order data placed as a guest.
         channel_pricings: Channel pricings
         product:
             product_not_active_in_channel: The product is not yet activated in this channel.
-        original_price_details: Original price - this is the price of the product variant It is displayed as crossed-out in the catalog. It is used as the base for current price calculations. If this value is not defined, Catalog Promotion logic will copy value from Price to Original Price. 
+        original_price_details: Original price - this is the price of the product variant It is displayed as crossed-out in the catalog. It is used as the base for current price calculations. If this value is not defined, Catalog Promotion logic will copy value from Price to Original Price.
         price_details: Price - this is the current price of the product variant displayed in the catalog. It can be modified explicitly by i.e. catalog promotions.
         minimum_price_details: Minimum price - this is the pricing threshold below which the current price cannot be discounted by neither catalog nor cart promotions. Use this to guard the profitability of your sales.
         gateway:
@@ -59,6 +74,7 @@ sylius:
                 PayPal Express Checkout is deprecated. Please, use new
                 <a href="https://github.com/Sylius/PayPalPlugin" target="_blank">PayPal Commerce Platform</a> integration.
         sales_summary: Sales summary
+        shipment_for_order: Shipment for order
         statistics:
             day: Day
             lifetime: Lifetime

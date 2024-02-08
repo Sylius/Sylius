@@ -106,6 +106,22 @@ Feature: Products validation
         And product with code "BOARD_DICE_BREWING" should not be added
 
     @ui @api
+    Scenario: Trying to set too long meta keywords for a product
+        Given the store has a "Dice Brewing" product
+        When I want to modify this product
+        And I set its meta keywords to too long string in "English (United States)"
+        And I try to save my changes
+        Then I should be notified that meta keywords are too long
+
+    @ui @api
+    Scenario: Trying to set too long meta keywords for a product
+        Given the store has a "Dice Brewing" product
+        When I want to modify this product
+        And I set its meta description to too long string in "English (United States)"
+        And I try to save my changes
+        Then I should be notified that meta description is too long
+
+    @ui @api
     Scenario: Trying to remove name from existing product
         Given the store has a "Dice Brewing" product
         When I want to modify this product
@@ -144,7 +160,7 @@ Feature: Products validation
         Then I should be notified that slug has to be unique
         And product with code "7-WONDERS-BABEL" should not be added
 
-    @ui @javascript @no-api
+    @ui @mink:chromedriver @no-api
     Scenario: Trying to add a new product with a text attribute without specifying its value in default locale
         When I want to create a new simple product
         And I specify its code as "X-18-MUG"
@@ -156,7 +172,7 @@ Feature: Products validation
         Then I should be notified that I have to define the "Mug material" attribute in "English (United States)"
         And product with code "X-18-MUG" should not be added
 
-    @ui @javascript @no-api
+    @ui @mink:chromedriver @no-api
     Scenario: Trying to add a new product with a text attribute without specifying its value in additional locale with proper length
         When I want to create a new simple product
         And I specify its code as "X-18-MUG"

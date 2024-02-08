@@ -1,5 +1,5 @@
 # This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
+# (c) Sylius Sp. z o.o.
 
 sylius:
     email:
@@ -42,6 +42,10 @@ sylius:
             coupon: Gutschein
         catalog_promotion:
             channels: Ausgabekanäle
+            scope:
+                for_products: Für Produkte
+                for_taxons: Für Produktgruppen
+                for_variants: Für Varianten
         checkout:
             addressing:
                 different_billing_address: Eine andere Rechnungsadresse benutzen?

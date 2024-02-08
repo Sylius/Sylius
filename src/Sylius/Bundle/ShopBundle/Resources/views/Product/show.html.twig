@@ -10,7 +10,7 @@
     <div class="column">
         {{ sylius_template_event('sylius.shop.product.show.left_sidebar', _context) }}
     </div>
-    <div class="column">
+    <div class="column" {{ sylius_test_html_attribute('product-box') }}>
         {{ sylius_template_event('sylius.shop.product.show.right_sidebar', _context) }}
     </div>
 </div>

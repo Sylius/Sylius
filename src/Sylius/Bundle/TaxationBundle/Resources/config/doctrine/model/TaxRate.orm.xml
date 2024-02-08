@@ -4,7 +4,7 @@
 
  This file is part of the Sylius package.
 
- (c) Paweł Jędrzejewski
+ (c) Sylius Sp. z o.o.
 
  For the full copyright and license information, please view the LICENSE
  file that was distributed with this source code.
@@ -24,6 +24,8 @@
         <field name="amount" column="amount" type="decimal" precision="10" scale="5" />
         <field name="includedInPrice" column="included_in_price" type="boolean" />
         <field name="calculator" column="calculator" type="string" />
+        <field name="startDate" column="start_date" type="datetime" nullable="true"/>
+        <field name="endDate" column="end_date" type="datetime" nullable="true"/>
 
         <many-to-one field="category" target-entity="Sylius\Component\Taxation\Model\TaxCategoryInterface" inversed-by="rates">
             <join-column name="category_id" referenced-column-name="id" nullable="false" />

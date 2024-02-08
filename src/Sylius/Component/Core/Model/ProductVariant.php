@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -19,6 +19,7 @@ use Doctrine\Common\Comparable;
 use Sylius\Component\Product\Model\ProductVariant as BaseVariant;
 use Sylius\Component\Shipping\Model\ShippingCategoryInterface;
 use Sylius\Component\Taxation\Model\TaxCategoryInterface;
+use Webmozart\Assert\Assert;
 
 class ProductVariant extends BaseVariant implements ProductVariantInterface, Comparable, \Stringable
 {
@@ -58,11 +59,7 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface, Com
     /** @var bool */
     protected $shippingRequired = true;
 
-    /**
-     * @var Collection|ProductImageInterface[]
-     *
-     * @psalm-var Collection<array-key, ProductImageInterface>
-     */
+    /** @var Collection<array-key, ProductImageInterface> */
     protected $images;
 
     public function __construct()
@@ -285,24 +282,21 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface, Com
         return ($channelPricing !== null) ? $channelPricing->getAppliedPromotions() : new ArrayCollection();
     }
 
-    /**
-     * @psalm-suppress InvalidReturnType https://github.com/doctrine/collections/pull/220
-     * @psalm-suppress InvalidReturnStatement https://github.com/doctrine/collections/pull/220
-     */
     public function getImages(): Collection
     {
+        /** @phpstan-ignore-next-line */
         return $this->images;
     }
 
-    /**
-     * @psalm-suppress InvalidReturnType https://github.com/doctrine/collections/pull/220
-     * @psalm-suppress InvalidReturnStatement https://github.com/doctrine/collections/pull/220
-     */
     public function getImagesByType(string $type): Collection
     {
-        return $this->images->filter(function (ProductImageInterface $image) use ($type): bool {
+        /** @var Collection<array-key, ImageInterface> $imagesByType */
+        $imagesByType = $this->images->filter(function (ProductImageInterface $image) use ($type): bool {
             return $type === $image->getType();
         });
+        Assert::allIsInstanceOf($imagesByType, ImageInterface::class);
+
+        return $imagesByType;
     }
 
     public function hasImages(): bool

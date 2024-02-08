@@ -1,0 +1,71 @@
+name: End-to-End (Unstable)
+
+on:
+    workflow_call:
+        inputs:
+            ignore-failure:
+                description: "Don't fail on error"
+                required: false
+                type: boolean
+                default: false
+    workflow_dispatch: ~
+
+jobs:
+    behat-no-js-unstable:
+        runs-on: ubuntu-latest
+        name: "Non-JS, PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}, MySQL ${{ matrix.mysql }} (Unstable Dependencies)"
+        timeout-minutes: 45
+        continue-on-error: true
+        strategy:
+            fail-fast: false
+            matrix:
+                php: [ "8.1" ]
+                symfony: [ "^6.4" ]
+                mysql: [ "8.0" ]
+
+        env:
+            APP_ENV: test_cached
+            DATABASE_URL: "mysql://root:root@127.0.0.1/sylius?charset=utf8mb4&serverVersion=${{ matrix.mysql }}"
+
+        steps:
+            -
+                uses: actions/checkout@v3
+
+            -   name: Change minimum-stability to dev
+                run: |
+                    composer config minimum-stability dev
+                    composer config prefer-stable false
+
+            -   name: Build application
+                uses: SyliusLabs/BuildTestAppAction@v2.0
+                with:
+                    build_type: "sylius"
+                    cache_key:  "${{ github.run_id }}-${{ runner.os }}-${{ hashFiles('composer.json') }}-php-${{ matrix.php }}-symfony-${{ matrix.symfony }}-"
+                    cache_restore_key: "${{ github.run_id }}-${{ runner.os }}-${{ hashFiles('composer.json') }}-php-${{ matrix.php }}-symfony-${{ matrix.symfony }}-"
+                    e2e: "yes"
+                    database_version: ${{ matrix.mysql }}
+                    php_version: ${{ matrix.php }}
+                    symfony_version: ${{ matrix.symfony }}
+
+            -   name: Run PHPUnit
+                continue-on-error: ${{ inputs.ignore-failure }}
+                run: vendor/bin/phpunit --colors=always
+
+            -   name: Run CLI Behat
+                run: vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="@cli&&~@todo" --suite-tags="@cli" || vendor/bin/behat --strict --no-interaction -vvv -f progress --tags="@cli&&~@todo" --suite-tags="@cli" --rerun
+
+            -   name: Run non-UI Behat
+                run: vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="~@todo&&~@cli" --suite-tags="@api,@domain,@hybrid" || vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="~@todo&&~@cli" --suite-tags="@api,@domain,@hybrid" --rerun
+
+            -   name: Run non-JS Behat
+                run: vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="~@javascript&&~@mink:chromedriver&&~@todo&&~@cli" --suite-tags="@ui" || vendor/bin/behat --strict --no-interaction -vvv -f progress --tags="~@javascript&&~@mink:chromedriver&&~@todo&&~@cli" --suite-tags="@ui" --rerun
+
+            -   name: Upload logs
+                uses: actions/upload-artifact@v3
+                if: failure()
+                with:
+                    name: "Logs (non-JS, PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}) [Unstable], MySQL ${{ matrix.mysql }})"
+                    path: |
+                        etc/build/
+                        var/log
+                    if-no-files-found: ignore

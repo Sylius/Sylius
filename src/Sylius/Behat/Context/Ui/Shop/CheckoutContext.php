@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -25,7 +25,9 @@ use Sylius\Behat\Page\Shop\Checkout\CompletePageInterface;
 use Sylius\Behat\Page\Shop\Checkout\SelectPaymentPageInterface;
 use Sylius\Behat\Page\Shop\Checkout\SelectShippingPageInterface;
 use Sylius\Behat\Service\Resolver\CurrentPageResolverInterface;
+use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Addressing\Model\CountryInterface;
+use Sylius\Component\Core\Model\ShippingMethodInterface;
 use Webmozart\Assert\Assert;
 
 final class CheckoutContext implements Context
@@ -41,6 +43,7 @@ final class CheckoutContext implements Context
         private CheckoutAddressingContext $addressingContext,
         private CheckoutShippingContext $shippingContext,
         private CheckoutPaymentContext $paymentContext,
+        private SharedStorageInterface $sharedStorage,
     ) {
     }
 
@@ -75,6 +78,7 @@ final class CheckoutContext implements Context
     /**
      * @Given I have proceeded order with :shippingMethodName shipping method and :paymentMethodName payment
      * @Given I proceeded with :shippingMethodName shipping method and :paymentMethodName payment
+     * @Given I proceeded with :shippingMethodName shipping method and :paymentMethodName payment method
      * @When I proceed with :shippingMethodName shipping method and :paymentMethodName payment
      */
     public function iProceedOrderWithShippingMethodAndPayment(string $shippingMethodName, string $paymentMethodName): void
@@ -95,6 +99,18 @@ final class CheckoutContext implements Context
         $this->addressingContext->iProceedSelectingBillingCountry(null, $localeCode, $email);
         $this->shippingContext->iCompleteTheShippingStep();
         $this->paymentContext->iCompleteThePaymentStep();
+    }
+
+    /**
+     * @Given I have proceeded through checkout process with :shippingMethod shipping method
+     */
+    public function iHaveProceededThroughCheckoutProcessWithShippingMethod(ShippingMethodInterface $shippingMethod): void
+    {
+        $this->addressingContext->iProceedSelectingBillingCountry();
+        $this->shippingContext->iHaveProceededSelectingShippingMethod($shippingMethod->getName());
+        $this->paymentContext->iCompleteThePaymentStep();
+
+        $this->sharedStorage->set('shipping_method', $shippingMethod);
     }
 
     /**

@@ -39,6 +39,7 @@ Shop
     shop/embedding-products
     shop/facebook-login
     shop/cms
+    shop/vue-storefront
 
 .. include:: /cookbook/shop/map.rst.inc
 
@@ -57,6 +58,7 @@ Payments
     payments/refund-process
     payments/custom-field-on-refund-payment
     payments/custom-type-of-refund
+    payments/custom-unit-refund
     payments/custom-invoice
     payments/generating-invoice-after-payment
 
@@ -117,6 +119,7 @@ Images
     :hidden:
 
     images/images
+    images/image-on-entity
     images/images-on-entity
     images/images-on-aws-s3
 
@@ -128,11 +131,9 @@ Deployment
 .. toctree::
     :hidden:
 
-    deployment/symfonycloud
     deployment/platform-sh
-    deployment/cloudways
     deployment/cron-jobs
-    deployment/artifakt
+    deployment/docker
 
 .. include:: /cookbook/deployment/map.rst.inc
 
@@ -155,9 +156,10 @@ Frontend
 .. toctree::
     :hidden:
 
-    frontend/admin-js-and-css
     frontend/google-analytics.rst
-    frontend/webpack.rst
+    frontend/migrating-to-webpack-1-11-or-earlier
+    frontend/migrating-to-webpack-1-12-or-later
+    frontend/staying-with-gulp
 
 .. include:: /cookbook/frontend/map.rst.inc
 
@@ -181,3 +183,4 @@ API
     api/how_force_login_already_registered_user_during_checkout
 
 .. include:: /cookbook/api/map.rst.inc
+

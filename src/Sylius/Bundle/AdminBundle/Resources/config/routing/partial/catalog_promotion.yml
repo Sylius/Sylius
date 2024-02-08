@@ -1,0 +1,12 @@
+# This file is part of the Sylius package.
+# (c) Sylius Sp. z o.o.
+
+sylius_admin_partial_catalog_promotion_show:
+    path: /{id}
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.catalog_promotion::showAction
+        _sylius:
+            template: $template
+            vars: $vars
+            permission: true

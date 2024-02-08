@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -17,7 +17,9 @@ use Sylius\Bundle\CoreBundle\CatalogPromotion\Applicator\CatalogPromotionApplica
 use Sylius\Bundle\CoreBundle\CatalogPromotion\Command\ApplyCatalogPromotionsOnVariants;
 use Sylius\Bundle\CoreBundle\CatalogPromotion\Processor\CatalogPromotionClearerInterface;
 use Sylius\Bundle\PromotionBundle\Provider\EligibleCatalogPromotionsProviderInterface;
+use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Repository\ProductVariantRepositoryInterface;
+use Webmozart\Assert\Assert;
 
 final class ApplyCatalogPromotionsOnVariantsHandler
 {
@@ -36,6 +38,7 @@ final class ApplyCatalogPromotionsOnVariantsHandler
         $variants = $this->productVariantRepository->findByCodes($updateVariants->variantsCodes);
 
         foreach ($variants as $variant) {
+            Assert::isInstanceOf($variant, ProductVariantInterface::class);
             $this->clearer->clearVariant($variant);
 
             foreach ($catalogPromotions as $promotion) {

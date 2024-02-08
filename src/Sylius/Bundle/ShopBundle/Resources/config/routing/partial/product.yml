@@ -1,11 +1,11 @@
 # This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
+# (c) Sylius Sp. z o.o.
 
 sylius_shop_partial_product_index_latest:
     path: /latest/{count}
     methods: [GET]
     defaults:
-        _controller: sylius.controller.product:indexAction
+        _controller: sylius.controller.product::indexAction
         _sylius:
             template: $template
             repository:
@@ -19,7 +19,7 @@ sylius_shop_partial_product_show_by_slug:
     path: /{slug}
     methods: [GET]
     defaults:
-        _controller: sylius.controller.product:showAction
+        _controller: sylius.controller.product::showAction
         _sylius:
             template: $template
             repository:

@@ -4,7 +4,7 @@ SyliusProductBundle
 Products system for [**Symfony**](https://symfony.com) applications.
 It supports simple product catalogs, as well as stores with requirement for fully customizable variants, options and properties.
 
-Its initial version was inspired by [Spree product and variants system](http://guides.spreecommerce.org/developer/products.html).
+Its initial version was inspired by [Spree product and variants system](https://dev-docs.spreecommerce.org/internals/products).
 
 Sylius
 ------

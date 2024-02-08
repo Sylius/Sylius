@@ -1,0 +1,51 @@
+{
+    "@context": "\/api\/v2\/contexts\/PaymentMethod",
+    "@id": "\/api\/v2\/shop\/payment-methods",
+    "@type": "hydra:Collection",
+    "hydra:member": [
+        {
+            "@id": "\/api\/v2\/shop\/payment-methods\/CASH_ON_DELIVERY",
+            "@type": "PaymentMethod",
+            "id": @integer@,
+            "code": "CASH_ON_DELIVERY",
+            "position": 0,
+            "name": "Cash on delivery",
+            "description": @string@,
+            "instructions": null
+        },
+        {
+            "@id": "\/api\/v2\/shop\/payment-methods\/BANK_TRANSFER",
+            "@type": "PaymentMethod",
+            "id": @integer@,
+            "code": "BANK_TRANSFER",
+            "position": 1,
+            "name": "Bank transfer",
+            "description": @string@,
+            "instructions": null
+        }
+    ],
+   "hydra:totalItems": 2,
+   "hydra:view": {
+      "@id": @string@,
+      "@type": "hydra:PartialCollectionView"
+   },
+   "hydra:search": {
+        "@type": "hydra:IriTemplate",
+        "hydra:template": "/api/v2/shop/payment-methods{?paymentId,tokenValue}",
+        "hydra:variableRepresentation": "BasicRepresentation",
+        "hydra:mapping": [
+       {
+            "@type": "IriTemplateMapping",
+            "variable": "paymentId",
+            "property": null,
+            "required": false
+       },
+       {
+            "@type": "IriTemplateMapping",
+            "variable": "tokenValue",
+            "property": null,
+            "required": false
+       }
+     ]
+   }
+}

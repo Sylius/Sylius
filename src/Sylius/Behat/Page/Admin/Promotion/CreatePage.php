@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -19,6 +19,7 @@ use Sylius\Behat\Behaviour\NamesIt;
 use Sylius\Behat\Behaviour\SpecifiesItsCode;
 use Sylius\Behat\Page\Admin\Crud\CreatePage as BaseCreatePage;
 use Sylius\Behat\Service\AutocompleteHelper;
+use Sylius\Behat\Service\TabsHelper;
 use Webmozart\Assert\Assert;
 
 class CreatePage extends BaseCreatePage implements CreatePageInterface
@@ -68,9 +69,9 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
         $this->getLastCollectionItem('rules')->fillField($option, $value);
     }
 
-    public function fillRuleOptionForChannel(string $channelName, string $option, string $value): void
+    public function fillRuleOptionForChannel(string $channelCode, string $option, string $value): void
     {
-        $lastAction = $this->getChannelConfigurationOfLastRule($channelName);
+        $lastAction = $this->getChannelConfigurationOfLastRule($channelCode);
         $lastAction->fillField($option, $value);
     }
 
@@ -97,9 +98,9 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
         $this->getLastCollectionItem('actions')->fillField($option, $value);
     }
 
-    public function fillActionOptionForChannel(string $channelName, string $option, string $value): void
+    public function fillActionOptionForChannel(string $channelCode, string $option, string $value): void
     {
-        $lastAction = $this->getChannelConfigurationOfLastAction($channelName);
+        $lastAction = $this->getChannelConfigurationOfLastAction($channelCode);
         $lastAction->fillField($option, $value);
     }
 
@@ -201,19 +202,25 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
         ];
     }
 
-    private function getChannelConfigurationOfLastAction(string $channelName): NodeElement
+    private function getChannelConfigurationOfLastAction(string $channelCode): NodeElement
     {
-        return $this
-            ->getLastCollectionItem('actions')
-            ->find('css', sprintf('[id$="configuration"] .field:contains("%s")', $channelName))
+        $lastAction = $this->getLastCollectionItem('actions');
+
+        TabsHelper::switchTab($this->getSession(), $lastAction, $channelCode);
+
+        return $lastAction
+            ->find('css', sprintf('[id^="sylius_promotion_actions_"][id$="_configuration_%s"]', $channelCode))
         ;
     }
 
-    private function getChannelConfigurationOfLastRule(string $channelName): NodeElement
+    private function getChannelConfigurationOfLastRule(string $channelCode): NodeElement
     {
-        return $this
-            ->getLastCollectionItem('rules')
-            ->find('css', sprintf('[id$="configuration"] .field:contains("%s")', $channelName))
+        $lastRule = $this->getLastCollectionItem('rules');
+
+        TabsHelper::switchTab($this->getSession(), $lastRule, $channelCode);
+
+        return $lastRule
+            ->find('css', sprintf('[id^="sylius_promotion_rules_"][id$="_configuration_%s"]', $channelCode))
         ;
     }
 

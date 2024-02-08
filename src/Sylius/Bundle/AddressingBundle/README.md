@@ -15,7 +15,7 @@ Every address can be matched against all defined zones, which is useful for tax 
 Sylius
 ------
 
-![Sylius](http://demo.sylius.com/assets/admin/img/logo.png)
+![Sylius](https://demo.sylius.com/assets/admin/img/logo.png)
 
 Sylius is an Open Source eCommerce solution built from decoupled components with powerful API and the highest quality code. [Read more on sylius.com](https://sylius.com).
 

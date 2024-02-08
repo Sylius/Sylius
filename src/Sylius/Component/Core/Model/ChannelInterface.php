@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -67,6 +67,10 @@ interface ChannelInterface extends
 
     public function setAccountVerificationRequired(bool $accountVerificationRequired): void;
 
+    public function isShippingAddressInCheckoutRequired(): bool;
+
+    public function setShippingAddressInCheckoutRequired(bool $shippingAddressInCheckoutRequired): void;
+
     public function getShopBillingData(): ?ShopBillingDataInterface;
 
     public function setShopBillingData(ShopBillingDataInterface $shopBillingData): void;
@@ -76,9 +80,7 @@ interface ChannelInterface extends
     public function setMenuTaxon(?TaxonInterface $menuTaxon): void;
 
     /**
-     * @return Collection|CountryInterface[]
-     *
-     * @psalm-return Collection<array-key, CountryInterface>
+     * @return Collection<array-key, CountryInterface>
      */
     public function getCountries(): Collection;
 

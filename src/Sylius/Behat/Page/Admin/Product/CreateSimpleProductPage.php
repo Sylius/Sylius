@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -133,8 +133,9 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
     public function isMainTaxonChosen(string $taxonName): bool
     {
         $this->openTaxonBookmarks();
+        $mainTaxonElement = $this->getElement('main_taxon')->getParent();
 
-        return $taxonName === $this->getDocument()->find('css', '.search > .text')->getText();
+        return $taxonName === $mainTaxonElement->find('css', '.search > .text')->getText();
     }
 
     public function checkProductTaxon(TaxonInterface $taxon): void
@@ -244,6 +245,11 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
         return $this->getElement('prices_validation_message')->getText();
     }
 
+    public function cancelChanges(): void
+    {
+        $this->getElement('cancel_button')->click();
+    }
+
     protected function getElement(string $name, array $parameters = []): NodeElement
     {
         if (!isset($parameters['%locale%'])) {
@@ -264,6 +270,7 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
             'attribute_value' => '#attributesContainer [data-test-product-attribute-value-in-locale="%attributeName% %localeCode%"] input',
             'attribute_value_select' => '#attributesContainer [data-test-product-attribute-value-in-locale="%attributeName% %localeCode%"] select',
             'attributes_choice' => '#sylius_product_attribute_choice',
+            'cancel_button' => '[data-test-cancel-changes-button]',
             'channel_checkbox' => '.checkbox:contains("%channelName%") input',
             'code' => '#sylius_product_code',
             'form' => 'form[name="sylius_product"]',
@@ -274,8 +281,8 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
             'product_taxons' => '#sylius_product_productTaxons',
             'name' => '#sylius_product_translations_%locale%_name',
             'non_translatable_attribute_value' => '#attributesContainer [data-test-product-attribute-value-in-locale="%attributeName% "] input',
-            'original_price' => '#sylius_product_variant_channelPricings input[name$="[originalPrice]"][id*="%channelCode%"]',
-            'price' => '#sylius_product_variant_channelPricings input[id*="%channelCode%"]',
+            'original_price' => '#sylius_product_variant_channelPricings_%channelCode%_originalPrice',
+            'price' => '#sylius_product_variant_channelPricings_%channelCode%_price',
             'prices_validation_message' => '#sylius_product_variant_channelPricings ~ .sylius-validation-error, #sylius_product_variant_channelPricings .sylius-validation-error',
             'price_calculator' => '#sylius_product_variant_pricingCalculator',
             'shipping_category' => '#sylius_product_variant_shippingCategory',

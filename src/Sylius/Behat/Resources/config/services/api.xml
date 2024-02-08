@@ -4,7 +4,7 @@
 
  This file is part of the Sylius package.
 
- (c) Paweł Jędrzejewski
+ (c) Sylius Sp. z o.o.
 
  For the full copyright and license information, please view the LICENSE
  file that was distributed with this source code.
@@ -16,207 +16,16 @@
         <service id="sylius.behat.api_platform_client" class="Sylius\Behat\Client\ApiPlatformClient" abstract="true">
             <argument type="service" id="test.client" />
             <argument type="service" id="sylius.behat.shared_storage" />
+            <argument type="service" id="sylius.behat.request_factory" />
             <argument>%sylius.api.authorization_header%</argument>
         </service>
 
-        <service id="sylius.behat.api_platform_client.shop.address" class="Sylius\Behat\Client\ApiPlatformClient" parent="sylius.behat.api_platform_client">
-            <argument>addresses</argument>
+        <service id="sylius.behat.api_platform_client.shop" class="Sylius\Behat\Client\ApiPlatformClient" parent="sylius.behat.api_platform_client">
             <argument>shop</argument>
         </service>
 
-        <service id="sylius.behat.api_platform_client.administrator" class="Sylius\Behat\Client\ApiPlatformClient" parent="sylius.behat.api_platform_client">
-            <argument>administrators</argument>
+        <service id="sylius.behat.api_platform_client.admin" class="Sylius\Behat\Client\ApiPlatformClient" parent="sylius.behat.api_platform_client">
             <argument>admin</argument>
-        </service>
-
-        <service id="sylius.behat.api_platform_client.admin.avatar_image" class="Sylius\Behat\Client\ApiPlatformClient" parent="sylius.behat.api_platform_client">
-            <argument>avatar-images</argument>
-            <argument>admin</argument>
-        </service>
-
-        <service id="sylius.behat.api_platform_client.admin.channel" class="Sylius\Behat\Client\ApiPlatformClient" parent="sylius.behat.api_platform_client">
-            <argument>channels</argument>
-            <argument>admin</argument>
-        </service>
-
-        <service id="sylius.behat.api_platform_client.shop.channel" class="Sylius\Behat\Client\ApiPlatformClient" parent="sylius.behat.api_platform_client">
-            <argument>channels</argument>
-            <argument>shop</argument>
-        </service>
-
-        <service id="sylius.behat.api_platform_client.shop.currency" class="Sylius\Behat\Client\ApiPlatformClient" parent="sylius.behat.api_platform_client">
-            <argument>currencies</argument>
-            <argument>shop</argument>
-        </service>
-
-        <service id="sylius.behat.api_platform_client.admin.country" class="Sylius\Behat\Client\ApiPlatformClient" parent="sylius.behat.api_platform_client">
-            <argument>countries</argument>
-            <argument>admin</argument>
-        </service>
-
-        <service id="sylius.behat.api_platform_client.shop.country" class="Sylius\Behat\Client\ApiPlatformClient" parent="sylius.behat.api_platform_client">
-            <argument>countries</argument>
-            <argument>shop</argument>
-        </service>
-
-        <service id="sylius.behat.api_platform_client.admin.currency" class="Sylius\Behat\Client\ApiPlatformClient" parent="sylius.behat.api_platform_client">
-            <argument>currencies</argument>
-            <argument>admin</argument>
-        </service>
-
-        <service id="sylius.behat.api_platform_client.admin.customer_group" class="Sylius\Behat\Client\ApiPlatformClient" parent="sylius.behat.api_platform_client">
-            <argument>customer-groups</argument>
-            <argument>admin</argument>
-        </service>
-
-        <service id="sylius.behat.api_platform_client.admin.exchange_rate" class="Sylius\Behat\Client\ApiPlatformClient" parent="sylius.behat.api_platform_client">
-            <argument>exchange-rates</argument>
-            <argument>admin</argument>
-        </service>
-
-        <service id="sylius.behat.api_platform_client.admin.locale" class="Sylius\Behat\Client\ApiPlatformClient" parent="sylius.behat.api_platform_client">
-            <argument>locales</argument>
-            <argument>admin</argument>
-        </service>
-
-        <service id="sylius.behat.api_platform_client.admin.payment" class="Sylius\Behat\Client\ApiPlatformClient" parent="sylius.behat.api_platform_client">
-            <argument>payments</argument>
-            <argument>admin</argument>
-        </service>
-
-        <service id="sylius.behat.api_platform_client.admin.product_association_type" class="Sylius\Behat\Client\ApiPlatformClient" parent="sylius.behat.api_platform_client">
-            <argument>product-association-types</argument>
-            <argument>admin</argument>
-        </service>
-
-        <service id="sylius.behat.api_platform_client.admin.product_option" class="Sylius\Behat\Client\ApiPlatformClient" parent="sylius.behat.api_platform_client">
-            <argument>product-options</argument>
-            <argument>admin</argument>
-        </service>
-
-        <service id="sylius.behat.api_platform_client.admin.product_review" class="Sylius\Behat\Client\ApiPlatformClient" parent="sylius.behat.api_platform_client">
-            <argument>product-reviews</argument>
-            <argument>admin</argument>
-        </service>
-
-        <service id="sylius.behat.api_platform_client.admin.product" class="Sylius\Behat\Client\ApiPlatformClient" parent="sylius.behat.api_platform_client">
-            <argument>products</argument>
-            <argument>admin</argument>
-        </service>
-
-        <service id="sylius.behat.api_platform_client.admin.product_variant" class="Sylius\Behat\Client\ApiPlatformClient" parent="sylius.behat.api_platform_client">
-            <argument>product-variants</argument>
-            <argument>admin</argument>
-        </service>
-
-        <service id="sylius.behat.api_platform_client.shop.product" class="Sylius\Behat\Client\ApiPlatformClient" parent="sylius.behat.api_platform_client">
-            <argument>products</argument>
-            <argument>shop</argument>
-        </service>
-
-        <service id="sylius.behat.api_platform_client.shop.product_variant" class="Sylius\Behat\Client\ApiPlatformClient" parent="sylius.behat.api_platform_client">
-            <argument>product-variants</argument>
-            <argument>shop</argument>
-        </service>
-
-        <service id="sylius.behat.api_platform_client.shop.product_review" class="Sylius\Behat\Client\ApiPlatformClient" parent="sylius.behat.api_platform_client">
-            <argument>product-reviews</argument>
-            <argument>shop</argument>
-        </service>
-
-        <service id="sylius.behat.api_platform_client.admin.province" class="Sylius\Behat\Client\ApiPlatformClient" parent="sylius.behat.api_platform_client">
-            <argument>provinces</argument>
-            <argument>admin</argument>
-        </service>
-
-        <service id="sylius.behat.api_platform_client.shop.cart" class="Sylius\Behat\Client\ApiPlatformClient" parent="sylius.behat.api_platform_client">
-            <argument>orders</argument>
-            <argument>shop</argument>
-        </service>
-
-        <service id="sylius.behat.api_platform_client.admin.shipping_category" class="Sylius\Behat\Client\ApiPlatformClient" parent="sylius.behat.api_platform_client">
-            <argument>shipping-categories</argument>
-            <argument>admin</argument>
-        </service>
-
-        <service id="sylius.behat.api_platform_client.admin.shipping_method" class="Sylius\Behat\Client\ApiPlatformClient" parent="sylius.behat.api_platform_client">
-            <argument>shipping-methods</argument>
-            <argument>admin</argument>
-        </service>
-
-        <service id="sylius.behat.api_platform_client.admin.tax_category" class="Sylius\Behat\Client\ApiPlatformClient" parent="sylius.behat.api_platform_client">
-            <argument>tax-categories</argument>
-            <argument>admin</argument>
-        </service>
-
-        <service id="sylius.behat.api_platform_client.admin.shipment" class="Sylius\Behat\Client\ApiPlatformClient" parent="sylius.behat.api_platform_client">
-            <argument>shipments</argument>
-            <argument>admin</argument>
-        </service>
-
-        <service id="sylius.behat.api_platform_client.admin.order" class="Sylius\Behat\Client\ApiPlatformClient" parent="sylius.behat.api_platform_client">
-            <argument>orders</argument>
-            <argument>admin</argument>
-        </service>
-
-        <service id="sylius.behat.api_platform_client.shop.order" class="Sylius\Behat\Client\ApiPlatformClient" parent="sylius.behat.api_platform_client">
-            <argument>orders</argument>
-            <argument>shop</argument>
-        </service>
-
-        <service id="sylius.behat.api_platform_client.shop.order_item" class="Sylius\Behat\Client\ApiPlatformClient" parent="sylius.behat.api_platform_client">
-            <argument>order-items</argument>
-            <argument>shop</argument>
-        </service>
-
-        <service id="sylius.behat.api_platform_client.shop.order_item_unit" class="Sylius\Behat\Client\ApiPlatformClient" parent="sylius.behat.api_platform_client">
-            <argument>order-item-units</argument>
-            <argument>shop</argument>
-        </service>
-
-        <service id="sylius.behat.api_platform_client.shop.payment" class="Sylius\Behat\Client\ApiPlatformClient" parent="sylius.behat.api_platform_client">
-            <argument>payments</argument>
-            <argument>shop</argument>
-        </service>
-
-        <service id="sylius.behat.api_platform_client.shop.shipment" class="Sylius\Behat\Client\ApiPlatformClient" parent="sylius.behat.api_platform_client">
-            <argument>shipments</argument>
-            <argument>shop</argument>
-        </service>
-
-        <service id="sylius.behat.api_platform_client.admin.taxon" class="Sylius\Behat\Client\ApiPlatformClient" parent="sylius.behat.api_platform_client">
-            <argument>taxons</argument>
-            <argument>admin</argument>
-        </service>
-
-        <service id="sylius.behat.api_platform_client.admin.zone" class="Sylius\Behat\Client\ApiPlatformClient" parent="sylius.behat.api_platform_client">
-            <argument>zones</argument>
-            <argument>admin</argument>
-        </service>
-
-        <service id="sylius.behat.api_platform_client.admin.promotion" class="Sylius\Behat\Client\ApiPlatformClient" parent="sylius.behat.api_platform_client">
-            <argument>promotions</argument>
-            <argument>admin</argument>
-        </service>
-
-        <service id="sylius.behat.api_platform_client.shop.account" class="Sylius\Behat\Client\ApiPlatformClient" parent="sylius.behat.api_platform_client">
-            <argument>customers</argument>
-            <argument>shop</argument>
-        </service>
-
-        <service id="sylius.behat.api_platform_client.shop.locale" class="Sylius\Behat\Client\ApiPlatformClient" parent="sylius.behat.api_platform_client">
-            <argument>locales</argument>
-            <argument>shop</argument>
-        </service>
-
-        <service id="sylius.behat.api_platform_client.admin.catalog_promotion" class="Sylius\Behat\Client\ApiPlatformClient" parent="sylius.behat.api_platform_client">
-            <argument>catalog-promotions</argument>
-            <argument>admin</argument>
-        </service>
-
-        <service id="sylius.behat.api_platform_client.shop.catalog_promotion" class="Sylius\Behat\Client\ApiPlatformClient" parent="sylius.behat.api_platform_client">
-            <argument>catalog-promotions</argument>
-            <argument>shop</argument>
         </service>
 
         <service id="Sylius\Behat\Client\ResponseCheckerInterface" class="Sylius\Behat\Client\ResponseChecker">
@@ -225,20 +34,23 @@
 
         <service id="sylius.behat.client.admin_api_platform_security_client" class="Sylius\Behat\Client\ApiPlatformSecurityClient">
             <argument type="service" id="test.client" />
-            <argument>admin</argument>
             <argument type="service" id="sylius.behat.shared_storage" />
+            <argument>%sylius.security.new_api_route%</argument>
+            <argument>admin</argument>
         </service>
 
         <service id="sylius.behat.client.shop_api_platform_security_client" class="Sylius\Behat\Client\ApiPlatformSecurityClient">
             <argument type="service" id="test.client" />
-            <argument>shop</argument>
             <argument type="service" id="sylius.behat.shared_storage" />
+            <argument>%sylius.security.new_api_route%</argument>
+            <argument>shop</argument>
         </service>
 
-        <service id="sylius.behat.api_platform_client.iri" class="Sylius\Behat\Client\ApiPlatformIriClient">
-            <argument type="service" id="test.client" />
-            <argument type="service" id="sylius.behat.shared_storage" />
-            <argument>%sylius.api.authorization_header%</argument>
+        <service id="sylius.behat.content_type_guide" class="Sylius\Behat\Client\ContentTypeGuide" />
+
+        <service id="sylius.behat.request_factory" class="Sylius\Behat\Client\RequestFactory">
+            <argument type="service" id="sylius.behat.content_type_guide"/>
+            <argument>%sylius.security.new_api_route%</argument>
         </service>
     </services>
 </container>

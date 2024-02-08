@@ -1,5 +1,5 @@
 # This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
+# (c) Sylius Sp. z o.o.
 
 sylius:
     email:
@@ -41,3 +41,9 @@ sylius:
                 sales:
                     header: Försäljning
                     orders: Beställningar
+                official_support:
+                    header: Officiellt stöd
+                    browse_plugins: Bläddra bland plugins
+                    sylius_plus: Sylius Plus
+                    professional_services: Professionella tjänster
+                    find_a_partner: Hitta en partner

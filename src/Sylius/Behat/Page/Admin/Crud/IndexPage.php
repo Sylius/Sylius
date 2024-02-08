@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -39,9 +39,7 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
             $rows = $this->tableAccessor->getRowsWithFields($this->getElement('table'), $parameters);
 
             return 1 === count($rows);
-        } catch (\InvalidArgumentException) {
-            return false;
-        } catch (ElementNotFoundException) {
+        } catch (\InvalidArgumentException|ElementNotFoundException) {
             return false;
         }
     }
@@ -51,12 +49,21 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
         return $this->tableAccessor->getIndexedColumn($this->getElement('table'), $columnName);
     }
 
-    public function sortBy(string $fieldName): void
+    public function sortBy(string $fieldName, ?string $order = null): void
     {
         $sortableHeaders = $this->tableAccessor->getSortableHeaders($this->getElement('table'));
-        Assert::keyExists($sortableHeaders, $fieldName, sprintf('Column "%s" is not sortable.', $fieldName));
+        Assert::keyExists($sortableHeaders, $fieldName, sprintf('Column "%s" does not exist or is not sortable.', $fieldName));
+
+        /** @var NodeElement $sortingHeader */
+        $sortingHeader = $sortableHeaders[$fieldName]->find('css', 'a');
+        preg_match('/\?sorting[^=]+\=([acdes]+)/i', $sortingHeader->getAttribute('href'), $matches);
+        $nextSortingOrder = $matches[1] ?? 'desc';
 
         $sortableHeaders[$fieldName]->find('css', 'a')->click();
+
+        if (null !== $order && ($order !== $nextSortingOrder)) {
+            $sortableHeaders[$fieldName]->find('css', 'a')->click();
+        }
     }
 
     public function isSingleResourceWithSpecificElementOnPage(array $parameters, string $element): bool
@@ -69,9 +76,7 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
             }
 
             return null !== $rows[0]->find('css', $element);
-        } catch (\InvalidArgumentException) {
-            return false;
-        } catch (ElementNotFoundException) {
+        } catch (\InvalidArgumentException|ElementNotFoundException) {
             return false;
         }
     }
@@ -135,6 +140,16 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
         $this->getDocument()->clickLink($order);
     }
 
+    public function chooseEnabledFilter(): void
+    {
+        $this->getElement('enabled_filter')->selectOption('Yes');
+    }
+
+    public function isEnabledFilterApplied(): bool
+    {
+        return $this->getElement('enabled_filter')->getValue() === 'true';
+    }
+
     public function getRouteName(): string
     {
         return $this->routeName;
@@ -150,6 +165,7 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
         return array_merge(parent::getDefinedElements(), [
             'bulk_actions' => '.sylius-grid-nav__bulk',
             'confirmation_button' => '#confirmation-button',
+            'enabled_filter' => '#criteria_enabled',
             'filter' => 'button:contains("Filter")',
             'table' => '.table',
         ]);

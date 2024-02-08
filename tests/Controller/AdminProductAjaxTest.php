@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -16,10 +16,12 @@ namespace Sylius\Tests\Controller;
 use ApiTestCase\JsonApiTestCase;
 use Exception;
 use Symfony\Component\BrowserKit\Cookie;
+use Symfony\Component\HttpFoundation\Exception\SessionNotFoundException;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 
-final class AdminProductAjaxTest extends JsonApiTestCase
+final class AdminProductAjaxTest extends SessionAwareAjaxTest
 {
     /**
      * @test
@@ -59,10 +61,10 @@ final class AdminProductAjaxTest extends JsonApiTestCase
 
     private function authenticateAdminUser(): void
     {
-        $adminUserRepository = self::$container->get('sylius.repository.admin_user');
+        $adminUserRepository = self::$kernel->getContainer()->get('sylius.repository.admin_user');
         $user = $adminUserRepository->findOneByEmail('admin@sylius.com');
+        $session = self::$kernel->getContainer()->get('request_stack')->getSession();
 
-        $session = self::$container->get('session');
         $firewallName = 'admin';
         $firewallContext = 'admin';
 

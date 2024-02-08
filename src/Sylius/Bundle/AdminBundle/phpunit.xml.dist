@@ -9,4 +9,15 @@
             <directory>./Tests/</directory>
         </testsuite>
     </testsuites>
+
+    <php>
+        <ini name="error_reporting" value="-1" />
+
+        <!-- ###+ symfony/framework-bundle ### -->
+        <env name="APP_ENV" value="test"/>
+        <env name="SHELL_VERBOSITY" value="-1" />
+        <!-- ###- symfony/framework-bundle ### -->
+
+        <server name="KERNEL_CLASS" value="\Sylius\Bundle\AdminBundle\Application\Kernel" />
+    </php>
 </phpunit>

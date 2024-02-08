@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -52,6 +52,47 @@ final class SyliusCoreConfigurationTest extends TestCase
             $this->getConfiguration(),
             'process_shipments_before_recalculating_prices',
             [['process_shipments_before_recalculating_prices' => 'yolo']],
+        );
+    }
+
+    /** @test */
+    public function it_sets_default_filesystem_adapter(): void
+    {
+        $this->assertProcessedConfigurationEquals(
+            [[]],
+            ['filesystem' => ['adapter' => 'default']],
+            'filesystem',
+        );
+    }
+
+    /** @test */
+    public function it_allows_to_define_filesystem_adapter(): void
+    {
+        $this->assertProcessedConfigurationEquals(
+            [['filesystem' => ['adapter' => 'default']]],
+            ['filesystem' => ['adapter' => 'default']],
+            'filesystem',
+        );
+
+        $this->assertProcessedConfigurationEquals(
+            [['filesystem' => ['adapter' => 'flysystem']]],
+            ['filesystem' => ['adapter' => 'flysystem']],
+            'filesystem',
+        );
+
+        $this->assertProcessedConfigurationEquals(
+            [['filesystem' => ['adapter' => 'gaufrette']]],
+            ['filesystem' => ['adapter' => 'gaufrette']],
+            'filesystem',
+        );
+    }
+
+    /** @test */
+    public function it_does_not_allow_to_define_invalid_filesystem_adapter(): void
+    {
+        $this->assertConfigurationIsInvalid(
+            [['filesystem' => ['adapter' => 'yolo']]],
+            'Expected adapter "default", "flysystem" or "gaufrette", but "yolo" passed.',
         );
     }
 

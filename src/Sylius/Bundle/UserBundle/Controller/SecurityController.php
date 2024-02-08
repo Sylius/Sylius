@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -38,21 +38,19 @@ class SecurityController extends AbstractController
 
     /**
      * Login form action.
-     *
-     * @psalm-suppress DeprecatedMethod
      */
     public function loginAction(Request $request): Response
     {
         if ($this->authenticationUtils !== null) {
             $authenticationUtils = $this->authenticationUtils;
         } else {
-            $authenticationUtils = $this->get('security.authentication_utils');
+            $authenticationUtils = $this->container->get('security.authentication_utils');
         }
 
         $error = $authenticationUtils->getLastAuthenticationError();
         $lastUsername = $authenticationUtils->getLastUsername();
 
-        $options = $request->attributes->get('_sylius');
+        $options = $request->attributes->get('_sylius', []);
 
         $template = $options['template'] ?? null;
         Assert::notNull($template, 'Template is not configured.');
@@ -62,7 +60,7 @@ class SecurityController extends AbstractController
         if ($this->formFactory !== null) {
             $form = $this->formFactory->createNamed('', $formType);
         } else {
-            $form = $this->get('form.factory')->createNamed('', $formType);
+            $form = $this->container->get('form.factory')->createNamed('', $formType);
         }
 
         return $this->render($template, [

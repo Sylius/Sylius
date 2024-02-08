@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -19,7 +19,6 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\HttpException;
-use Symfony\Component\Templating\EngineInterface;
 use Twig\Environment;
 
 final class CustomerStatisticsController
@@ -27,7 +26,7 @@ final class CustomerStatisticsController
     public function __construct(
         private CustomerStatisticsProviderInterface $statisticsProvider,
         private RepositoryInterface $customerRepository,
-        private EngineInterface|Environment $templatingEngine,
+        private Environment $templatingEngine,
     ) {
     }
 

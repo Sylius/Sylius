@@ -6,3 +6,4 @@
 * :doc:`/cookbook/shop/embedding-products`
 * :doc:`/cookbook/shop/disabling-localised-urls`
 * :doc:`/cookbook/shop/cms`
+* :doc:`/cookbook/shop/vue-storefront`

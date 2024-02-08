@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -66,5 +66,18 @@ final class ShopSecurityContext implements Context
         $this->securityService->logIn($user);
 
         $this->sharedStorage->set('user', $user);
+    }
+
+    /**
+     * @Given I am a logged in customer by using remember me option
+     */
+    public function iAmLoggedInCustomerByUsingRememberMeOption(): void
+    {
+        $userData = ['email' => 'sylius@example.com', 'password' => 'sylius', 'enabled' => true];
+
+        $user = $this->userFactory->create($userData);
+        $this->userRepository->add($user);
+
+        $this->securityService->logInWithRememberMe($user);
     }
 }

@@ -1,5 +1,5 @@
 # This file is a part of the Sylius package.
-# (c) Paweł Jędrzejewski
+# (c) Sylius Sp. z o.o.
 
 sylius_shop_account_order:
     resource: "@SyliusShopBundle/Resources/config/routing/account/order.yml"
@@ -13,7 +13,7 @@ sylius_shop_account_root:
     path: /
     methods: [GET]
     defaults:
-        _controller: Symfony\Bundle\FrameworkBundle\Controller\RedirectController:redirectAction
+        _controller: Symfony\Bundle\FrameworkBundle\Controller\RedirectController::redirectAction
         route: sylius_shop_account_dashboard
         permanent: true
 
@@ -21,7 +21,7 @@ sylius_shop_account_dashboard:
     path: /dashboard
     methods: [GET]
     defaults:
-        _controller: sylius.controller.customer:showAction
+        _controller: sylius.controller.customer::showAction
         _sylius:
             template: "@SyliusShop/Account/dashboard.html.twig"
             repository:
@@ -33,7 +33,7 @@ sylius_shop_account_profile_update:
     path: /profile/edit
     methods: [GET, PUT]
     defaults:
-        _controller: sylius.controller.customer:updateAction
+        _controller: sylius.controller.customer::updateAction
         _sylius:
             template: "@SyliusShop/Account/profileUpdate.html.twig"
             form: Sylius\Bundle\CustomerBundle\Form\Type\CustomerProfileType
@@ -49,7 +49,7 @@ sylius_shop_account_change_password:
     path: /change-password
     methods: [GET, POST]
     defaults:
-        _controller: sylius.controller.shop_user:changePasswordAction
+        _controller: sylius.controller.shop_user::changePasswordAction
         _sylius:
             template: "@SyliusShop/Account/changePassword.html.twig"
             redirect: sylius_shop_account_dashboard

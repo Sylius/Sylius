@@ -1,12 +1,16 @@
 {% block body %}
     {% autoescape false %}
-        {% set logo = channel.hostname is not null ? 'http://' ~ channel.hostname ~ asset('assets/shop/img/logo.png') : absolute_url(asset('assets/shop/img/logo.png')) %}
+        {% if use_webpack %}
+            {% set logo = sylius_channel_url(asset('build/shop/images/logo.png', 'shop'), channel) %}
+        {% else %}
+            {% set logo = sylius_channel_url(asset('assets/shop/img/logo.png'), channel) %}
+        {% endif %}
 
         <div style="font-family: sans-serif; background: #eee; padding-top: 30px; padding-bottom: 30px; font-size: 16px; color: #333; line-height: 1.5">
             <div style="max-width: 600px; margin: 20px auto;">
                 <div style="margin-bottom: 30px; text-align: center;">
                     {% if sylius_bundle_loaded_checker('SyliusShopBundle') %}
-                        {% set url = channel.hostname is not null ? 'http://' ~ channel.hostname ~ path('sylius_shop_homepage', {'_locale': localeCode}) : url('sylius_shop_homepage', {'_locale': localeCode}) %}
+                        {% set url = sylius_channel_url(path('sylius_shop_homepage', {'_locale': localeCode}), channel) %}
                         <a href="{{ url|raw }}">
                             <img src="{{ logo }}" alt="Sylius" style="width: 170px">
                         </a>

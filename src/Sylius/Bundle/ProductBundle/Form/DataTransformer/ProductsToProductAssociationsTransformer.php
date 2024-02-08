@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -22,14 +22,11 @@ use Sylius\Component\Product\Repository\ProductRepositoryInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\Form\DataTransformerInterface;
+use Webmozart\Assert\Assert;
 
 final class ProductsToProductAssociationsTransformer implements DataTransformerInterface
 {
-    /**
-     * @var Collection|ProductAssociationInterface[]
-     *
-     * @psalm-var Collection<array-key, ProductAssociationInterface>
-     */
+    /** @var Collection<array-key, ProductAssociationInterface> */
     private ?Collection $productAssociations = null;
 
     public function __construct(
@@ -65,9 +62,7 @@ final class ProductsToProductAssociationsTransformer implements DataTransformerI
             return null;
         }
 
-        /**
-         * @psalm-var Collection<array-key, ProductAssociationInterface> $productAssociations
-         */
+        /** @var Collection<array-key, ProductAssociationInterface> $productAssociations */
         $productAssociations = new ArrayCollection();
         foreach ($value as $productAssociationTypeCode => $productCodes) {
             if (null === $productCodes) {
@@ -75,7 +70,7 @@ final class ProductsToProductAssociationsTransformer implements DataTransformerI
             }
 
             /** @var ProductAssociationInterface $productAssociation */
-            $productAssociation = $this->getProductAssociationByTypeCode($productAssociationTypeCode);
+            $productAssociation = $this->getProductAssociationByTypeCode((string) $productAssociationTypeCode);
             $this->setAssociatedProductsByProductCodes($productAssociation, $productCodes);
             $productAssociations->add($productAssociation);
         }
@@ -129,6 +124,7 @@ final class ProductsToProductAssociationsTransformer implements DataTransformerI
 
         $productAssociation->clearAssociatedProducts();
         foreach ($products as $product) {
+            Assert::isInstanceOf($product, ProductInterface::class);
             $productAssociation->addAssociatedProduct($product);
         }
     }

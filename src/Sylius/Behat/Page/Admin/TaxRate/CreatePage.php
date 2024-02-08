@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -42,6 +42,22 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
         $this->getDocument()->fillField('Amount', $amount);
     }
 
+    public function specifyStartDate(\DateTimeInterface $startDate): void
+    {
+        $timestamp = $startDate->getTimestamp();
+
+        $this->getElement('start_date')->setValue(date('Y-m-d', $timestamp));
+        $this->getElement('start_date_time')->setValue(date('H:i', $timestamp));
+    }
+
+    public function specifyEndDate(\DateTimeInterface $endDate): void
+    {
+        $timestamp = $endDate->getTimestamp();
+
+        $this->getElement('end_date')->setValue(date('Y-m-d', $timestamp));
+        $this->getElement('end_date_time')->setValue(date('H:i', $timestamp));
+    }
+
     public function chooseIncludedInPrice(): void
     {
         $this->getDocument()->find('css', 'label[for=sylius_tax_rate_includedInPrice]')->click();
@@ -54,7 +70,11 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
             'calculator' => '#sylius_tax_rate_calculator',
             'category' => '#sylius_tax_rate_category',
             'code' => '#sylius_tax_rate_code',
+            'end_date' => '#sylius_tax_rate_endDate_date',
+            'end_date_time' => '#sylius_tax_rate_endDate_time',
             'name' => '#sylius_tax_rate_name',
+            'start_date' => '#sylius_tax_rate_startDate_date',
+            'start_date_time' => '#sylius_tax_rate_startDate_time',
             'zone' => '#sylius_tax_rate_zone',
         ]);
     }

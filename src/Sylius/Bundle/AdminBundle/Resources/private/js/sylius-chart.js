@@ -1,4 +1,4 @@
-import 'chart.js/dist/Chart.min';
+import Chart from 'chart.js/auto';
 
 const drawChart = function drawChart(canvas, labels = [], values = [], currency) {
   return new Chart(canvas, {
@@ -41,8 +41,10 @@ const drawChart = function drawChart(canvas, labels = [], values = [], currency)
       },
       responsive: true,
       maintainAspectRatio: false,
-      legend: {
-        display: false,
+      plugins: {
+        legend: {
+          display: false,
+        },
       },
     },
   });

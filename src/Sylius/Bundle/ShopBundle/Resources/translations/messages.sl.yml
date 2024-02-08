@@ -1,11 +1,8 @@
 # This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
+# (c) Sylius Sp. z o.o.
 
 sylius:
     email:
-        contact_request:
-            content: 'Vsebina'
-            subject: 'Zahteva stika'
         order_confirmation:
             subject: 'Potrditev naročila'
             view_order_or_change_payment_method: 'Ogled naročila ali sprememba načina plačila'
@@ -13,7 +10,7 @@ sylius:
             subject: 'Ponastavitev gesla'
     homepage:
         about_us_content: 'Dobrodošli v naši spletni trgovini. Izbirate lahko med pestro ponudbo oblačil in obutve.'
-        carousel_header: 'Pripravite se! Zima Prihaja'
+        banner_content: 'Pripravite se! Zima Prihaja'
         newsletter_description: 'Prijavite se na naše e-novice!'
     lightbox:
         image_album_label: 'Slika %1 od %2'

@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -18,11 +18,7 @@ use Doctrine\Common\Collections\Collection;
 
 class ProductImage extends Image implements ProductImageInterface
 {
-    /**
-     * @var Collection|ProductVariantInterface[]
-     *
-     * @psalm-var Collection<array-key, ProductVariantInterface>
-     */
+    /** @var Collection<array-key, ProductVariantInterface> */
     protected $productVariants;
 
     public function __construct()

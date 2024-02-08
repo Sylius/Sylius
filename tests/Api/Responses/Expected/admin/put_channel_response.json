@@ -1,0 +1,33 @@
+{
+    "@context": "\/api\/v2\/contexts\/Channel",
+    "@id": "\/api\/v2\/admin\/channels\/WEB",
+    "@type": "Channel",
+    "id":"@integer@",
+    "code": "WEB",
+    "name": "Web Channel",
+    "enabled": true,
+    "baseCurrency": "\/api\/v2\/admin\/currencies\/USD",
+    "defaultLocale": "\/api\/v2\/admin\/locales\/en_US",
+    "defaultTaxZone": null,
+    "taxCalculationStrategy": "order_items_based",
+    "currencies": [],
+    "locales": [
+      "\/api\/v2\/admin\/locales\/en_US",
+      "\/api\/v2\/admin\/locales\/pl_PL"
+    ],
+    "countries": [],
+    "themeName": null,
+    "contactEmail": "web@sylius.com",
+    "contactPhoneNumber": null,
+    "skippingShippingStepAllowed": false,
+    "skippingPaymentStepAllowed": false,
+    "accountVerificationRequired": true,
+    "shippingAddressInCheckoutRequired": true,
+    "shopBillingData": null,
+    "menuTaxon": null,
+    "description": "Lorem ipsum",
+    "hostname": "localhost",
+    "color": "black",
+    "createdAt": @string@,
+    "updatedAt": @string@
+}

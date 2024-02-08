@@ -4,7 +4,7 @@
 
  This file is part of the Sylius package.
 
- (c) Paweł Jędrzejewski
+ (c) Sylius Sp. z o.o.
 
  For the full copyright and license information, please view the LICENSE
  file that was distributed with this source code.
@@ -23,6 +23,20 @@
                 <option name="minMessage">sylius.product.name.min_length</option>
                 <option name="max">255</option>
                 <option name="maxMessage">sylius.product.name.max_length</option>
+                <option name="groups">sylius</option>
+            </constraint>
+        </property>
+        <property name="metaKeywords">
+            <constraint name="Length">
+                <option name="max">255</option>
+                <option name="maxMessage">sylius.product.meta_keywords.max_length</option>
+                <option name="groups">sylius</option>
+            </constraint>
+        </property>
+        <property name="metaDescription">
+            <constraint name="Length">
+                <option name="max">255</option>
+                <option name="maxMessage">sylius.product.meta_description.max_length</option>
                 <option name="groups">sylius</option>
             </constraint>
         </property>

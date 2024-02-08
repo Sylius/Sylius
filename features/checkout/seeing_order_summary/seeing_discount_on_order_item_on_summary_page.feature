@@ -9,8 +9,8 @@ Feature: Seeing a order item discount
         And the store has a product "Lannister Coat" priced at "$100.00"
         And there is a promotion "Christmas sale"
         And this promotion gives "10%" off on every product with minimum price at "$50.00"
-        And the store ships everywhere for free
-        And the store allows paying offline
+        And the store ships everywhere for Free
+        And the store allows paying Offline
         And I am a logged in customer
 
     @ui @api

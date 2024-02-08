@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -38,11 +38,7 @@ final class CachedPerRequestChannelContextSpec extends ObjectBehavior
         Request $request,
         ChannelInterface $channel,
     ): void {
-        if (\method_exists(RequestStack::class, 'getMainRequest')) {
-            $requestStack->getMainRequest()->willReturn($request, $request);
-        } else {
-            $requestStack->getMasterRequest()->willReturn($request, $request);
-        }
+        $requestStack->getMainRequest()->willReturn($request, $request);
 
         $decoratedChannelContext->getChannel()->willReturn($channel)->shouldBeCalledTimes(1);
 
@@ -58,11 +54,7 @@ final class CachedPerRequestChannelContextSpec extends ObjectBehavior
         ChannelInterface $firstChannel,
         ChannelInterface $secondChannel,
     ): void {
-        if (\method_exists(RequestStack::class, 'getMainRequest')) {
-            $requestStack->getMainRequest()->willReturn($firstRequest, $secondRequest);
-        } else {
-            $requestStack->getMasterRequest()->willReturn($firstRequest, $secondRequest);
-        }
+        $requestStack->getMainRequest()->willReturn($firstRequest, $secondRequest);
 
         $decoratedChannelContext->getChannel()->willReturn($firstChannel, $secondChannel);
 
@@ -78,11 +70,7 @@ final class CachedPerRequestChannelContextSpec extends ObjectBehavior
         ChannelInterface $firstChannel,
         ChannelInterface $secondChannel,
     ): void {
-        if (\method_exists(RequestStack::class, 'getMainRequest')) {
-            $requestStack->getMainRequest()->willReturn($firstRequest, $secondRequest, $firstRequest);
-        } else {
-            $requestStack->getMasterRequest()->willReturn($firstRequest, $secondRequest, $firstRequest);
-        }
+        $requestStack->getMainRequest()->willReturn($firstRequest, $secondRequest, $firstRequest);
 
         $decoratedChannelContext->getChannel()->willReturn($firstChannel, $secondChannel)->shouldBeCalledTimes(2);
 
@@ -97,11 +85,7 @@ final class CachedPerRequestChannelContextSpec extends ObjectBehavior
         ChannelInterface $firstChannel,
         ChannelInterface $secondChannel,
     ): void {
-        if (\method_exists(RequestStack::class, 'getMainRequest')) {
-            $requestStack->getMainRequest()->willReturn(null, null);
-        } else {
-            $requestStack->getMasterRequest()->willReturn(null, null);
-        }
+        $requestStack->getMainRequest()->willReturn(null, null);
 
         $decoratedChannelContext->getChannel()->willReturn($firstChannel, $secondChannel)->shouldBeCalledTimes(2);
 
@@ -114,11 +98,7 @@ final class CachedPerRequestChannelContextSpec extends ObjectBehavior
         RequestStack $requestStack,
         Request $request,
     ): void {
-        if (\method_exists(RequestStack::class, 'getMainRequest')) {
-            $requestStack->getMainRequest()->willReturn($request, $request);
-        } else {
-            $requestStack->getMasterRequest()->willReturn($request, $request);
-        }
+        $requestStack->getMainRequest()->willReturn($request, $request);
 
         $decoratedChannelContext->getChannel()->willThrow(ChannelNotFoundException::class)->shouldBeCalledTimes(1);
 
@@ -131,11 +111,7 @@ final class CachedPerRequestChannelContextSpec extends ObjectBehavior
         RequestStack $requestStack,
         ChannelInterface $channel,
     ): void {
-        if (\method_exists(RequestStack::class, 'getMainRequest')) {
-            $requestStack->getMainRequest()->willReturn(null, null);
-        } else {
-            $requestStack->getMasterRequest()->willReturn(null, null);
-        }
+        $requestStack->getMainRequest()->willReturn(null, null);
 
         $decoratedChannelContext
             ->getChannel()

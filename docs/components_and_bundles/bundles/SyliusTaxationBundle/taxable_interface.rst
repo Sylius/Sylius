@@ -8,7 +8,7 @@ The TaxableInterface
    We're sorry but **this documentation section is outdated**. Please have that in mind when trying to use it.
    You can help us making documentation up to date via Sylius Github. Thank you!
 
-In order to calculate the taxes for a model in your application, it needs to implement the ``TaxableInterface`` 
+In order to calculate the taxes for a model in your application, it needs to implement the ``TaxableInterface``
 It is a very simple interface, with only one method - the ``getTaxCategory()``, as every taxable has to belong to a specific tax category.
 
 Implementing the interface
@@ -58,10 +58,10 @@ Second and last task is to define the relation inside ``Resources/config/doctrin
 
     <?xml version="1.0" encoding="UTF-8"?>
 
-    <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
-                      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-                      xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
-                                          http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+    <doctrine-mapping xmlns="https://doctrine-project.org/schemas/orm/doctrine-mapping"
+                      xmlns:xsi="https://www.w3.org/2001/XMLSchema-instance"
+                      xsi:schemaLocation="https://doctrine-project.org/schemas/orm/doctrine-mapping
+                                          https://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
 
         <entity name="AcmeBundle\Entity\Server" table="acme_server">
             <!-- your mappings... -->

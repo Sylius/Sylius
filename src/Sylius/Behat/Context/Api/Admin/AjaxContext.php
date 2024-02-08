@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -17,14 +17,14 @@ use Behat\Behat\Context\Context;
 use Sylius\Component\Core\Model\ProductInterface;
 use Symfony\Component\BrowserKit\AbstractBrowser;
 use Symfony\Component\BrowserKit\Cookie;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Webmozart\Assert\Assert;
 
 final class AjaxContext implements Context
 {
     public function __construct(
         private AbstractBrowser $client,
-        private SessionInterface $session,
+        private RequestStack $requestStack,
     ) {
     }
 
@@ -33,7 +33,7 @@ final class AjaxContext implements Context
      */
     public function iLookForVariantWithDescriptorWithinProduct($phrase, ProductInterface $product): void
     {
-        $this->client->getCookieJar()->set(new Cookie($this->session->getName(), $this->session->getId()));
+        $this->client->getCookieJar()->set(new Cookie($this->requestStack->getSession()->getName(), $this->requestStack->getSession()->getId()));
         $this->client->request(
             'GET',
             '/admin/ajax/product-variants/search',

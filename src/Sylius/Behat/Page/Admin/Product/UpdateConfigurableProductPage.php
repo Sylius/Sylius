@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -16,6 +16,7 @@ namespace Sylius\Behat\Page\Admin\Product;
 use Behat\Mink\Element\NodeElement;
 use Sylius\Behat\Behaviour\ChecksCodeImmutability;
 use Sylius\Behat\Page\Admin\Crud\UpdatePage as BaseUpdatePage;
+use Sylius\Behat\Service\AutocompleteHelper;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
 use Webmozart\Assert\Assert;
 
@@ -33,9 +34,27 @@ class UpdateConfigurableProductPage extends BaseUpdatePage implements UpdateConf
         );
     }
 
+    public function setMetaKeywords(string $keywords, string $localeCode): void
+    {
+        $this->getDocument()->fillField(
+            sprintf('sylius_product_translations_%s_metaKeywords', $localeCode),
+            $keywords,
+        );
+    }
+
+    public function setMetaDescription(string $description, string $localeCode): void
+    {
+        $this->getDocument()->fillField(
+            sprintf('sylius_product_translations_%s_metaDescription', $localeCode),
+            $description,
+        );
+    }
+
     public function isProductOptionChosen(string $option): bool
     {
-        return $this->getElement('options')->find('named', ['option', $option])->hasAttribute('selected');
+        $optionElement = $this->getElement('options')->getParent();
+
+        return AutocompleteHelper::isValueVisible($this->getSession(), $optionElement, $option);
     }
 
     public function isProductOptionsDisabled(): bool
@@ -46,9 +65,9 @@ class UpdateConfigurableProductPage extends BaseUpdatePage implements UpdateConf
     public function isMainTaxonChosen(string $taxonName): bool
     {
         $this->openTaxonBookmarks();
-        Assert::notNull($this->getDocument()->find('css', '.search > .text'));
+        $mainTaxonElement = $this->getElement('main_taxon')->getParent();
 
-        return $taxonName === $this->getDocument()->find('css', '.search > .text')->getText();
+        return $taxonName === $mainTaxonElement->find('css', '.search > .text')->getText();
     }
 
     public function selectMainTaxon(TaxonInterface $taxon): void
@@ -184,6 +203,7 @@ class UpdateConfigurableProductPage extends BaseUpdatePage implements UpdateConf
             'channels' => '#sylius_product_channels',
             'code' => '#sylius_product_code',
             'images' => '#sylius_product_images',
+            'main_taxon' => '#sylius_product_mainTaxon',
             'name' => '#sylius_product_translations_en_US_name',
             'options' => '#sylius_product_options',
             'price' => '#sylius_product_variant_price',

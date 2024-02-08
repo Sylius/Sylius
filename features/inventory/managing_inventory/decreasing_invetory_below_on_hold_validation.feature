@@ -10,7 +10,7 @@ Feature: Validation of decreasing inventory below on hold validation
         And the product "Wyborowa Vodka" has "Wyborowa Vodka Exquisite" variant priced at "$40.00"
         And "Wyborowa Vodka" product is tracked by the inventory
         And there are 5 units of "Wyborowa Vodka Exquisite" variant of product "Wyborowa Vodka" available in the inventory
-        And the store ships everywhere for free
+        And the store ships everywhere for Free
         And the store allows paying with "Cash on Delivery"
         And there is a customer "john.doe@gmail.com" that placed an order "#00000023"
         And the customer bought 4 units of "Wyborowa Vodka Exquisite" variant of product "Wyborowa Vodka"

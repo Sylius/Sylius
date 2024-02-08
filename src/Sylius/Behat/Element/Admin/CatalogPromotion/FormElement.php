@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -16,6 +16,7 @@ namespace Sylius\Behat\Element\Admin\CatalogPromotion;
 use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Exception\ElementNotFoundException;
 use FriendsOfBehat\PageObjectExtension\Element\Element;
+use Sylius\Behat\Service\TabsHelper;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Webmozart\Assert\Assert;
 
@@ -117,7 +118,9 @@ final class FormElement extends Element implements FormElementInterface
     {
         $lastAction = $this->getElement('last_action');
 
-        $lastAction->find('css', sprintf('.field:contains("%s") input', $channel->getName()))->setValue($discount);
+        TabsHelper::switchTab($this->getSession(), $lastAction, $channel->getCode());
+
+        $lastAction->find('css', sprintf('[id$="%s_amount"]', $channel->getCode()))->setValue($discount);
     }
 
     public function getFieldValueInLocale(string $field, string $localeCode): string
@@ -143,7 +146,9 @@ final class FormElement extends Element implements FormElementInterface
     {
         $lastAction = $this->getElement('last_action');
 
-        return $lastAction->find('css', 'input')->getValue();
+        TabsHelper::switchTab($this->getSession(), $lastAction, $channel->getCode());
+
+        return $lastAction->find('css', sprintf('[id$="%s_amount"]', $channel->getCode()))->getValue();
     }
 
     public function getValidationMessage(): string

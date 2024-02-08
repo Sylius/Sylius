@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -27,7 +27,11 @@ interface IndexPageInterface extends CrudIndexPageInterface
 
     public function filter(): void;
 
+    public function goToPage(int $page): void;
+
     public function checkFirstProductHasDataAttribute(string $attributeName): bool;
 
     public function checkLastProductHasDataAttribute(string $attributeName): bool;
+
+    public function getPageNumber(): int;
 }

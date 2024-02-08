@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -20,6 +20,7 @@ use Sylius\Component\Core\OrderCheckoutStates;
 use Sylius\Component\Core\OrderPaymentStates;
 use Sylius\Component\Core\OrderShippingStates;
 use Sylius\Component\Customer\Model\CustomerInterface as BaseCustomerInterface;
+use Sylius\Component\Order\Model\AdjustmentInterface as BaseAdjustmentInterface;
 use Sylius\Component\Order\Model\Order as BaseOrder;
 use Sylius\Component\Payment\Model\PaymentInterface as BasePaymentInterface;
 use Sylius\Component\Promotion\Model\PromotionCouponInterface as BaseCouponInterface;
@@ -31,10 +32,10 @@ use function round;
 
 class Order extends BaseOrder implements OrderInterface
 {
-    /** @var \Sylius\Component\Core\Model\CustomerInterface|null */
+    /** @var CustomerInterface|null */
     protected $customer;
 
-    /** @var \Sylius\Component\Core\Model\ChannelInterface|null */
+    /** @var ChannelInterface|null */
     protected $channel;
 
     /** @var AddressInterface|null */
@@ -43,18 +44,10 @@ class Order extends BaseOrder implements OrderInterface
     /** @var AddressInterface|null */
     protected $billingAddress;
 
-    /**
-     * @var Collection|PaymentInterface[]
-     *
-     * @psalm-var Collection<array-key, PaymentInterface>
-     */
+    /** @var Collection<array-key, PaymentInterface> */
     protected $payments;
 
-    /**
-     * @var Collection|ShipmentInterface[]
-     *
-     * @psalm-var Collection<array-key, ShipmentInterface>
-     */
+    /** @var Collection<array-key, ShipmentInterface> */
     protected $shipments;
 
     /** @var string|null */
@@ -75,11 +68,7 @@ class Order extends BaseOrder implements OrderInterface
     /** @var string */
     protected $shippingState = OrderShippingStates::STATE_CART;
 
-    /**
-     * @var Collection|BasePromotionInterface[]
-     *
-     * @psalm-var Collection<array-key, BasePromotionInterface>
-     */
+    /** @var Collection<array-key, BasePromotionInterface> */
     protected $promotions;
 
     /** @var string|null */
@@ -129,6 +118,7 @@ class Order extends BaseOrder implements OrderInterface
 
     public function setChannel(?BaseChannelInterface $channel): void
     {
+        Assert::isInstanceOf($channel, ChannelInterface::class);
         $this->channel = $channel;
     }
 
@@ -203,12 +193,9 @@ class Order extends BaseOrder implements OrderInterface
         });
     }
 
-    /**
-     * @psalm-suppress InvalidReturnType https://github.com/doctrine/collections/pull/220
-     * @psalm-suppress InvalidReturnStatement https://github.com/doctrine/collections/pull/220
-     */
     public function getPayments(): Collection
     {
+        /** @phpstan-ignore-next-line */
         return $this->payments;
     }
 
@@ -410,6 +397,24 @@ class Order extends BaseOrder implements OrderInterface
         return (int) round($taxTotal);
     }
 
+    public function getTaxExcludedTotal(): int
+    {
+        return array_reduce(
+            $this->getAdjustmentsRecursively(AdjustmentInterface::TAX_ADJUSTMENT)->toArray(),
+            static fn (int $total, BaseAdjustmentInterface $adjustment) => !$adjustment->isNeutral() ? $total + $adjustment->getAmount() : $total,
+            0,
+        );
+    }
+
+    public function getTaxIncludedTotal(): int
+    {
+        return array_reduce(
+            $this->getAdjustmentsRecursively(AdjustmentInterface::TAX_ADJUSTMENT)->toArray(),
+            static fn (int $total, BaseAdjustmentInterface $adjustment) => $adjustment->isNeutral() ? $total + $adjustment->getAmount() : $total,
+            0,
+        );
+    }
+
     /**
      * Returns shipping fee together with taxes decreased by shipping discount.
      */
@@ -477,11 +482,15 @@ class Order extends BaseOrder implements OrderInterface
 
     public function getCreatedByGuest(): bool
     {
+        @trigger_error('This method is deprecated since Sylius 1.12 and it will be removed in Sylius 2.0. Please use `isCreatedByGuest` instead.');
+
         return $this->isCreatedByGuest();
     }
 
     public function setCreatedByGuest(bool $createdByGuest): void
     {
+        @trigger_error('This method is deprecated since Sylius 1.12 and it will be removed in Sylius 2.0. This flag should be changed only through `setCustomerWithAuthorization` method.');
+
         $this->createdByGuest = $createdByGuest;
     }
 }

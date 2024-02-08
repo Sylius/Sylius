@@ -6,8 +6,8 @@ Feature: Seeing order with different promotions
 
     Background:
         Given the store operates on a single channel in "United States"
-        And the store ships everywhere for free
-        And the store allows paying offline
+        And the store ships everywhere for Free
+        And the store allows paying Offline
         And the store has a product "PHP T-Shirt" priced at "$60.00"
         And the store has a product "Symfony Mug" priced at "$40.00"
         And there is a promotion "T-Shirts promotion"
@@ -21,7 +21,7 @@ Feature: Seeing order with different promotions
     Scenario: Seeing prices and discount prices of order item
         Given the customer bought 2 "PHP T-Shirt" products
         And the customer bought a single "Symfony Mug"
-        And the customer chose "Free" shipping method to "United States" with "offline" payment
+        And the customer chose "Free" shipping method to "United States" with "Offline" payment
         When I view the summary of the order "#00000666"
         Then the "PHP T-Shirt" product's unit price should be "$60.00"
         And the "PHP T-Shirt" product's item discount should be "-$20.00"

@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -17,7 +17,7 @@ use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Psr7\Uri;
 use Http\Message\MessageFactory;
-use Sylius\Bundle\CoreBundle\Application\Kernel;
+use Sylius\Bundle\CoreBundle\SyliusCoreBundle;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -37,7 +37,7 @@ final class NotificationController
     public function getVersionAction(Request $request): JsonResponse
     {
         $content = [
-            'version' => Kernel::VERSION,
+            'version' => SyliusCoreBundle::VERSION,
             'hostname' => $request->getHost(),
             'locale' => $request->getLocale(),
             'user_agent' => $request->headers->get('User-Agent'),
@@ -56,7 +56,7 @@ final class NotificationController
         try {
             $hubResponse = $this->client->send($hubRequest, ['verify' => false]);
         } catch (GuzzleException) {
-            return JsonResponse::create('', JsonResponse::HTTP_NO_CONTENT);
+            return new JsonResponse('', JsonResponse::HTTP_NO_CONTENT);
         }
 
         $hubResponse = json_decode($hubResponse->getBody()->getContents(), true);

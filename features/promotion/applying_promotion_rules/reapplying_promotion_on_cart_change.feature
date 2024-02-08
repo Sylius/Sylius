@@ -30,7 +30,7 @@ Feature: Reapplying promotion on cart change
         And I chose "DHL" shipping method
         When I change shipping method to "FedEx"
         Then my cart total should be "$100.00"
-        And my cart shipping should be for free
+        And my cart shipping should be for Free
 
     @ui
     Scenario: Receiving discount after removing an item from the cart and then adding another one

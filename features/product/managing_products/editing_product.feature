@@ -69,7 +69,7 @@ Feature: Editing a product
         Then I should be notified that it has been successfully edited
         And this product name should be "Sobieski Vodka"
 
-    @ui @api
+    @ui @javascript @api
     Scenario: Changing options of configurable product without any variant defined
         Given the store has a "Marvel's T-Shirt" configurable product
         And the store has a product option "T-Shirt size" with a code "t_shirt_size"

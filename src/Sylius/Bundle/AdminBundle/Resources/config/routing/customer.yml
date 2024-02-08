@@ -19,7 +19,7 @@ sylius_admin_customer:
 sylius_admin_customer_show:
     path: /customers/{id}
     defaults:
-        _controller: sylius.controller.customer:showAction
+        _controller: sylius.controller.customer::showAction
         _sylius:
             section: admin
             template: "@SyliusAdmin/Customer/show.html.twig"
@@ -29,7 +29,7 @@ sylius_admin_customer_order_index:
     path: /customers/{id}/orders
     methods: [GET]
     defaults:
-        _controller: sylius.controller.order:indexAction
+        _controller: sylius.controller.order::indexAction
         _sylius:
             section: admin
             permission: true
@@ -49,7 +49,7 @@ sylius_admin_customer_orders_statistics:
     path: /orders-statistics
     methods: [GET]
     defaults:
-        _controller: sylius.controller.customer_statistics:renderAction
+        _controller: sylius.controller.customer_statistics::renderAction
         _sylius:
             section: admin
             permission: true

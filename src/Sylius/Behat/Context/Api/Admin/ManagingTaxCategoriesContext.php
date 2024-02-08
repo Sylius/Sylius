@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -16,6 +16,7 @@ namespace Sylius\Behat\Context\Api\Admin;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
+use Sylius\Behat\Context\Api\Resources;
 use Sylius\Component\Taxation\Model\TaxCategoryInterface;
 use Webmozart\Assert\Assert;
 
@@ -32,7 +33,7 @@ final class ManagingTaxCategoriesContext implements Context
      */
     public function iWantToCreateNewTaxCategory(): void
     {
-        $this->client->buildCreateRequest();
+        $this->client->buildCreateRequest(Resources::TAX_CATEGORIES);
     }
 
     /**
@@ -41,7 +42,7 @@ final class ManagingTaxCategoriesContext implements Context
      */
     public function iWantToModifyTaxCategory(TaxCategoryInterface $taxCategory): void
     {
-        $this->client->buildUpdateRequest($taxCategory->getCode());
+        $this->client->buildUpdateRequest(Resources::TAX_CATEGORIES, $taxCategory->getCode());
     }
 
     /**
@@ -49,7 +50,7 @@ final class ManagingTaxCategoriesContext implements Context
      */
     public function iDeleteTaxCategory(TaxCategoryInterface $taxCategory): void
     {
-        $this->client->delete($taxCategory->getCode());
+        $this->client->delete(Resources::TAX_CATEGORIES, $taxCategory->getCode());
     }
 
     /**
@@ -112,7 +113,7 @@ final class ManagingTaxCategoriesContext implements Context
      */
     public function iWantToBrowseTaxCategories(): void
     {
-        $this->client->index();
+        $this->client->index(Resources::TAX_CATEGORIES);
     }
 
     /**
@@ -159,7 +160,7 @@ final class ManagingTaxCategoriesContext implements Context
     public function thisTaxCategoryNameShouldBe(TaxCategoryInterface $taxCategory, string $taxCategoryName): void
     {
         Assert::true(
-            $this->responseChecker->hasValue($this->client->show($taxCategory->getCode()), 'name', $taxCategoryName),
+            $this->responseChecker->hasValue($this->client->show(Resources::TAX_CATEGORIES, $taxCategory->getCode()), 'name', $taxCategoryName),
             sprintf('Tax category name is not %s', $taxCategoryName),
         );
     }
@@ -181,7 +182,7 @@ final class ManagingTaxCategoriesContext implements Context
     public function thereShouldStillBeOnlyOneTaxCategoryWith(string $element, string $value): void
     {
         Assert::same(
-            count($this->responseChecker->getCollectionItemsWithValue($this->client->index(), $element, $value)),
+            count($this->responseChecker->getCollectionItemsWithValue($this->client->index(Resources::TAX_CATEGORIES), $element, $value)),
             1,
         );
     }
@@ -248,6 +249,6 @@ final class ManagingTaxCategoriesContext implements Context
 
     private function isItemOnIndex(string $property, string $value): bool
     {
-        return $this->responseChecker->hasItemWithValue($this->client->index(), $property, $value);
+        return $this->responseChecker->hasItemWithValue($this->client->index(Resources::TAX_CATEGORIES), $property, $value);
     }
 }

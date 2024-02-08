@@ -1,0 +1,22 @@
+Sylius\Component\Core\Model\Channel:
+    channel_web:
+        code: "WEB"
+        name: "Web Channel"
+        hostname: "localhost"
+        description: "Lorem ipsum"
+        baseCurrency: "@currency_euro"
+        defaultLocale: "@locale_en_US"
+        locales: ["@locale_en_US", "@locale_pl_PL"]
+        color: "black"
+        enabled: true
+        taxCalculationStrategy: "order_items_based"
+
+Sylius\Component\Currency\Model\Currency:
+    currency_euro:
+        code: "EUR"
+
+Sylius\Component\Locale\Model\Locale:
+    locale_en_US:
+        code: "en_US"
+    locale_pl_PL:
+        code: "pl_PL"

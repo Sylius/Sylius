@@ -1,5 +1,5 @@
 # This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
+# (c) Sylius Sp. z o.o.
 
 sylius:
     form:
@@ -42,8 +42,6 @@ sylius:
             tax_category: Таксийн ангилал
             translations: Орчуулгууд
         shipping_method_rule:
-            order_total_greater_than_or_equal: Нийт захиалга их эсвэл тэнцүү
-            order_total_less_than_or_equal: Нийт захиалга бага эсвэл тэнцүү
             type: Төрөл
             total: Нийт
             total_weight_greater_than_or_equal: Нийт жин их эсвэл тэнцүү

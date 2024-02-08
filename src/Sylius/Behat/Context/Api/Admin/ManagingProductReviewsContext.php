@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -16,6 +16,7 @@ namespace Sylius\Behat\Context\Api\Admin;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
+use Sylius\Behat\Context\Api\Resources;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Review\Model\ReviewInterface;
 use Webmozart\Assert\Assert;
@@ -34,7 +35,7 @@ final class ManagingProductReviewsContext implements Context
      */
     public function iWantToBrowseProductReviews(): void
     {
-        $this->client->index();
+        $this->client->index(Resources::PRODUCT_REVIEWS);
     }
 
     /**
@@ -42,7 +43,7 @@ final class ManagingProductReviewsContext implements Context
      */
     public function iWantToModifyTheProductReview(ReviewInterface $productReview): void
     {
-        $this->client->buildUpdateRequest((string) $productReview->getId());
+        $this->client->buildUpdateRequest(Resources::PRODUCT_REVIEWS, (string) $productReview->getId());
     }
 
     /**
@@ -84,7 +85,7 @@ final class ManagingProductReviewsContext implements Context
      */
     public function iChangeStateTheProductReview(string $state, ReviewInterface $productReview): void
     {
-        $this->client->applyTransition((string) $productReview->getId(), $state);
+        $this->client->applyTransition(Resources::PRODUCT_REVIEWS, (string) $productReview->getId(), $state);
     }
 
     /**
@@ -94,7 +95,7 @@ final class ManagingProductReviewsContext implements Context
     {
         $this->sharedStorage->set('product_review_id', $productReview->getId());
 
-        $this->client->delete((string) $productReview->getId());
+        $this->client->delete(Resources::PRODUCT_REVIEWS, (string) $productReview->getId());
     }
 
     /**
@@ -212,13 +213,13 @@ final class ManagingProductReviewsContext implements Context
 
     private function isItemOnIndex(string $property, string $value): bool
     {
-        return $this->responseChecker->hasItemWithValue($this->client->index(), $property, $value);
+        return $this->responseChecker->hasItemWithValue($this->client->index(Resources::PRODUCT_REVIEWS), $property, $value);
     }
 
     private function assertIfReviewHasElementWithValue(ReviewInterface $productReview, string $element, int|string $value): void
     {
         Assert::true(
-            $this->responseChecker->hasValue($this->client->show((string) $productReview->getId()), $element, $value),
+            $this->responseChecker->hasValue($this->client->show(Resources::PRODUCT_REVIEWS, (string) $productReview->getId()), $element, $value),
             sprintf('Product review %s is not %s', $element, $value),
         );
     }

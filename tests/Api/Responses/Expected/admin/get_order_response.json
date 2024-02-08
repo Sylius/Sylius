@@ -66,6 +66,8 @@
     "total": 6500,
     "state": "new",
     "taxTotal": 0,
+    "taxIncludedTotal": 0,
+    "taxExcludedTotal": 0,
     "shippingTotal": 500,
     "orderPromotionTotal": 0
 }

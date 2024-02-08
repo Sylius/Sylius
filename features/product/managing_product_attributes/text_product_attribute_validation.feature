@@ -20,15 +20,15 @@ Feature: Text product attribute validation
     @ui
     Scenario: Trying to add a new text product attribute without code
         When I want to create a new text product attribute
-        And I name it "T-shirt brand" in "English (United States)"
+        And I name it "T-Shirt brand" in "English (United States)"
         But I do not specify its code
         And I try to add it
         Then I should be notified that code is required
-        And the attribute with name "T-shirt brand" should not appear in the store
+        And the attribute with name "T-Shirt brand" should not appear in the store
 
     @ui
     Scenario: Trying to remove name for existing text product attribute
-        Given the store has a text product attribute "T-shirt cotton brand"
+        Given the store has a text product attribute "T-Shirt cotton brand"
         When I want to edit this product attribute
         And I remove its name from "English (United States)" translation
         And I try to save my changes
@@ -38,7 +38,7 @@ Feature: Text product attribute validation
     @ui
     Scenario: Trying to add a new text product attribute with wrong configuration
         When I want to create a new text product attribute
-        And I name it "T-shirt brand" in "English (United States)"
+        And I name it "T-Shirt brand" in "English (United States)"
         And I specify its code as "t_shirt_brand"
         And I specify its min length as 8
         And I specify its max length as 6

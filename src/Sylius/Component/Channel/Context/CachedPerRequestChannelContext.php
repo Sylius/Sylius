@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -30,12 +30,7 @@ final class CachedPerRequestChannelContext implements ChannelContextInterface
 
     public function getChannel(): ChannelInterface
     {
-        if (\method_exists($this->requestStack, 'getMainRequest')) {
-            $objectIdentifier = $this->requestStack->getMainRequest();
-        } else {
-            $objectIdentifier = $this->requestStack->getMasterRequest();
-        }
-
+        $objectIdentifier = $this->requestStack->getMainRequest();
         if (null === $objectIdentifier) {
             return $this->decoratedChannelContext->getChannel();
         }

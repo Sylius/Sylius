@@ -4,7 +4,7 @@
 
  This file is part of the Sylius package.
 
- (c) Paweł Jędrzejewski
+ (c) Sylius Sp. z o.o.
 
  For the full copyright and license information, please view the LICENSE
  file that was distributed with this source code.
@@ -19,6 +19,23 @@
     <services>
         <defaults public="true" />
 
+        <service id="Sylius\Bundle\AdminBundle\Action\Account\RenderResetPasswordPageAction">
+            <argument type="service" id="sylius.repository.admin_user" />
+            <argument type="service" id="form.factory" />
+            <argument type="service" id="request_stack" />
+            <argument type="service" id="router" />
+            <argument type="service" id="twig" />
+            <argument type="string">%sylius.admin_user.token.password_reset.ttl%</argument>
+        </service>
+
+        <service id="Sylius\Bundle\AdminBundle\Action\Account\ResetPasswordAction">
+            <argument type="service" id="form.factory" />
+            <argument type="service" id="Sylius\Bundle\CoreBundle\MessageDispatcher\ResetPasswordDispatcher" />
+            <argument type="service" id="request_stack" />
+            <argument type="service" id="router" />
+            <argument type="service" id="twig" />
+        </service>
+
         <service id="Sylius\Bundle\AdminBundle\Action\RemoveAvatarAction" public="true">
             <argument type='service' id="sylius.repository.avatar_image" />
             <argument type="service" id="router" />
@@ -29,14 +46,27 @@
             <argument type='service' id="sylius.repository.order" />
             <argument type="service" id="Sylius\Bundle\AdminBundle\EmailManager\OrderEmailManagerInterface" />
             <argument type="service" id="security.csrf.token_manager" />
-            <argument type="service" id="session" />
+            <argument type="service" id="request_stack" />
         </service>
 
         <service id="Sylius\Bundle\AdminBundle\Action\ResendShipmentConfirmationEmailAction" public="true">
             <argument type='service' id="sylius.repository.shipment" />
             <argument type="service" id="Sylius\Bundle\AdminBundle\EmailManager\ShipmentEmailManagerInterface" />
             <argument type="service" id="security.csrf.token_manager" />
-            <argument type="service" id="session" />
+            <argument type="service" id="request_stack" />
+        </service>
+
+        <service id="Sylius\Bundle\AdminBundle\Action\Account\RenderRequestPasswordResetPageAction">
+            <argument type="service" id="twig"/>
+            <argument type="service" id="form.factory"/>
+        </service>
+
+        <service id="Sylius\Bundle\AdminBundle\Action\Account\RequestPasswordResetAction">
+            <argument type="service" id="form.factory"/>
+            <argument type="service" id="sylius.command_bus"/>
+            <argument type="service" id="request_stack" />
+            <argument type="service" id="router"/>
+            <argument type="service" id="twig" />
         </service>
 
         <service id="sylius.controller.admin.dashboard" class="Sylius\Bundle\AdminBundle\Controller\DashboardController" public="true">
@@ -63,6 +93,19 @@
             <argument type="service" id="sylius.http_message_factory" />
             <argument type="string">%sylius.admin.notification.uri%</argument>
             <argument type="string">%kernel.environment%</argument>
+        </service>
+
+        <service id="Sylius\Bundle\AdminBundle\Controller\RemoveCatalogPromotionAction" public="true">
+            <argument type="service" id="Sylius\Bundle\CoreBundle\CatalogPromotion\Processor\CatalogPromotionRemovalProcessorInterface" />
+        </service>
+
+        <service
+            id="Sylius\Bundle\AdminBundle\Controller\RedirectHandler"
+            decorates="sylius.resource_controller.redirect_handler"
+            public="false"
+        >
+            <argument type="service" id="Sylius\Bundle\AdminBundle\Controller\RedirectHandler.inner" />
+            <argument type="service" id="Sylius\Bundle\UiBundle\Storage\FilterStorage" />
         </service>
     </services>
 </container>

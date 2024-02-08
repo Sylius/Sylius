@@ -4,7 +4,7 @@
 
  This file is part of the Sylius package.
 
- (c) Paweł Jędrzejewski
+ (c) Sylius Sp. z o.o.
 
  For the full copyright and license information, please view the LICENSE
  file that was distributed with this source code.
@@ -36,10 +36,19 @@
         <service id="sylius.tax_calculator.default" class="Sylius\Component\Taxation\Calculator\DefaultCalculator">
             <tag name="sylius.tax_calculator" calculator="default" />
         </service>
+        <service id="sylius.tax_calculator.decimal" class="Sylius\Component\Taxation\Calculator\DecimalCalculator">
+            <tag name="sylius.tax_calculator" calculator="decimal" />
+        </service>
 
         <service id="sylius.tax_rate_resolver" class="Sylius\Component\Taxation\Resolver\TaxRateResolver">
             <argument type="service" id="sylius.repository.tax_rate" />
+            <argument type="service" id="sylius.tax_rate_date_eligibility_checker" on-invalid="null" />
         </service>
         <service id="Sylius\Component\Taxation\Resolver\TaxRateResolverInterface" alias="sylius.tax_rate_resolver" />
+
+        <service id="sylius.tax_rate_date_eligibility_checker" class="Sylius\Component\Taxation\Checker\TaxRateDateEligibilityChecker">
+            <argument type="service" id="Sylius\Calendar\Provider\DateTimeProviderInterface" />
+        </service>
+        <service id="Sylius\Component\Taxation\Checker\TaxRateDateEligibilityCheckerInterface" alias="sylius.tax_rate_date_eligibility_checker" />
     </services>
 </container>

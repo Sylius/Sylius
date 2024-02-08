@@ -1,11 +1,12 @@
 # This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
+# (c) Sylius Sp. z o.o.
 
 default:
     suites:
         ui_managing_promotions:
             contexts:
                 - sylius.behat.context.hook.doctrine_orm
+                - sylius.behat.context.hook.session
 
                 - sylius.behat.context.transform.address
                 - sylius.behat.context.transform.channel
@@ -32,8 +33,9 @@ default:
                 - sylius.behat.context.setup.taxonomy
 
                 - sylius.behat.context.ui.admin.managing_promotions
-                - sylius.behat.context.ui.admin.removing_taxons
                 - sylius.behat.context.ui.admin.notification
+                - sylius.behat.context.ui.admin.removing_taxons
+                - Sylius\Behat\Context\Ui\Admin\RemovingProductContext
 
             filters:
                 tags: "@managing_promotions&&@ui"

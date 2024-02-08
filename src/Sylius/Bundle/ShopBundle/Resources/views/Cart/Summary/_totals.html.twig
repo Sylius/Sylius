@@ -1,8 +1,8 @@
 {% import "@SyliusShop/Common/Macro/money.html.twig" as money %}
 
 {% set itemsSubtotal = sylius_order_items_subtotal(cart) %}
-{% set taxIncluded = sylius_order_tax_included(cart) %}
-{% set taxExcluded = sylius_order_tax_excluded(cart) %}
+{% set taxIncluded = cart.getTaxIncludedTotal() %}
+{% set taxExcluded = cart.getTaxExcludedTotal() %}
 
 <div class="ui segment">
     <h2 class="ui dividing header">{{ 'sylius.ui.summary'|trans }}</h2>

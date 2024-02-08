@@ -32,28 +32,28 @@
         "doctrine/collections": "^1.6",
         "knplabs/knp-menu": "^3.1",
         "knplabs/knp-menu-bundle": "^3.0",
-        "sonata-project/block-bundle": "^3.20|^4.0",
+        "sonata-project/block-bundle": "^4.2",
         "sylius-labs/polyfill-symfony-event-dispatcher": "^1.0.1",
-        "sylius/grid-bundle": "^1.8",
-        "symfony/config": "^4.4 || ^5.4",
-        "symfony/framework-bundle": "^4.4 || ^5.4",
-        "symfony/security-core": "^4.4 || ^5.4",
-        "symfony/security-bundle": "^4.4 || ^5.4",
-        "symfony/templating": "^4.4 || ^5.4",
-        "laminas/laminas-stdlib": "^3.2"
+        "sylius/grid-bundle": "^1.11",
+        "symfony/config": "^5.4 || ^6.0",
+        "symfony/framework-bundle": "^5.4 || ^6.0",
+        "symfony/security-core": "^5.4 || ^6.0",
+        "symfony/security-bundle": "^5.4 || ^6.0",
+        "symfony/templating": "^5.4 || ^6.0",
+        "symfony/webpack-encore-bundle": "^1.15",
+        "laminas/laminas-stdlib": "^3.3.1"
     },
     "conflict": {
-        "doctrine/annotations": "^2.0",
         "twig/twig": "^1.0"
     },
     "require-dev": {
         "matthiasnoback/symfony-config-test": "^4.2",
-        "matthiasnoback/symfony-dependency-injection-test": "^4.1",
+        "matthiasnoback/symfony-dependency-injection-test": "^4.2",
         "phpspec/phpspec": "^7.2",
         "phpunit/phpunit": "^8.5",
-        "symfony/dependency-injection": "^4.4 || ^5.4",
-        "symfony/form": "^4.4 || ^5.4",
-        "twig/twig": "^2.12"
+        "symfony/dependency-injection": "^5.4 || ^6.0",
+        "symfony/form": "^5.4 || ^6.0",
+        "twig/twig": "^2.12 || ^3.3"
     },
     "config": {
         "allow-plugins": {
@@ -62,12 +62,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "1.9-dev"
-        },
-        "symfony": {
-            "endpoint": [
-                "https://raw.githubusercontent.com/symfony/recipes/c8d90298241f176a261dadc4814d7058415a4c1f/index.json"
-            ]
+            "dev-main": "1.12-dev"
         }
     },
     "autoload": {

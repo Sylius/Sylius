@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -47,19 +47,12 @@ class AddressPage extends SymfonyPage implements AddressPageInterface
 
     public function chooseDifferentShippingAddress(): void
     {
-        if (DriverHelper::isJavascript($this->getDriver())) {
-            $this->getElement('different_shipping_address_label')->click();
+        $this->chooseDifferentAddress('shipping');
+    }
 
-            return;
-        }
-
-        $billingAddressSwitch = $this->getElement('different_shipping_address');
-        Assert::false(
-            $billingAddressSwitch->isChecked(),
-            'Previous state of different billing address switch was true expected to be false',
-        );
-
-        $billingAddressSwitch->check();
+    public function chooseDifferentBillingAddress(): void
+    {
+        $this->chooseDifferentAddress('billing');
     }
 
     public function isDifferentShippingAddressChecked(): bool
@@ -106,6 +99,23 @@ class AddressPage extends SymfonyPage implements AddressPageInterface
         }
 
         return $message === $validationMessage->getText();
+    }
+
+    public function checkFormValidationMessage(string $message): bool
+    {
+        $formElement = $this->getElement('form');
+        if (null === $formElement) {
+            throw new ElementNotFoundException($this->getSession(), 'Form');
+        }
+
+        $validationMessage = $formElement->findAll('css', '[data-test-validation-error]');
+        foreach ($validationMessage as $validationMessage) {
+            if ($validationMessage->getText() === $message) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     public function specifyShippingAddress(AddressInterface $shippingAddress): void
@@ -303,6 +313,7 @@ class AddressPage extends SymfonyPage implements AddressPageInterface
             'shipping_postcode' => '[data-test-shipping-postcode]',
             'shipping_province' => '[data-test-shipping-address] [data-test-province-name]',
             'shipping_street' => '[data-test-shipping-street]',
+            'form' => 'form[name="sylius_checkout_address"]',
         ]);
     }
 
@@ -390,5 +401,16 @@ class AddressPage extends SymfonyPage implements AddressPageInterface
         $availableTypes = [self::TYPE_BILLING, self::TYPE_SHIPPING];
 
         Assert::oneOf($type, $availableTypes, sprintf('There are only two available types %s, %s. %s given', self::TYPE_BILLING, self::TYPE_SHIPPING, $type));
+    }
+
+    private function chooseDifferentAddress(string $type): void
+    {
+        if (DriverHelper::isJavascript($this->getDriver())) {
+            $this->getElement(sprintf('different_%s_address_label', $type))->click();
+
+            return;
+        }
+
+        $this->getElement(sprintf('different_%s_address', $type))->check();
     }
 }

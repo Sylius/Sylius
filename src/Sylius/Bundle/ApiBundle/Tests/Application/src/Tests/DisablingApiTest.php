@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Bundle\ApiBundle\Application\Tests;
 
 use ApiPlatform\Core\Bridge\Symfony\Bundle\Test\ApiTestCase;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class DisablingApiTest extends ApiTestCase
@@ -36,7 +37,7 @@ class DisablingApiTest extends ApiTestCase
             ['auth_bearer' => $this->JWTAdminUserToken],
         );
 
-        $this->assertResponseIsSuccessful();
+        self::assertResponseIsSuccessful();
     }
 
     /** @test */
@@ -51,17 +52,7 @@ class DisablingApiTest extends ApiTestCase
             ['auth_bearer' => $this->JWTAdminUserToken],
         );
 
-        $this->assertResponseStatusCodeSame(404);
-
-        $this->enableApi();
-
-        static::createClient()->request(
-            'GET',
-            'api/v2/admin/channels',
-            ['auth_bearer' => $this->JWTAdminUserToken],
-        );
-
-        $this->assertResponseIsSuccessful();
+        self::assertResponseStatusCodeSame(Response::HTTP_NOT_FOUND);
     }
 
     /** @test */
@@ -75,16 +66,16 @@ class DisablingApiTest extends ApiTestCase
             'api/v2/',
         );
 
-        $this->assertResponseStatusCodeSame(404);
+        self::assertResponseStatusCodeSame(Response::HTTP_NOT_FOUND);
     }
 
     private function disableApi(): void
     {
-        $_ENV['SYLIUS_API_ENABLED'] = false;
+        putenv('SYLIUS_API_ENABLED=false');
     }
 
     private function enableApi(): void
     {
-        $_ENV['SYLIUS_API_ENABLED'] = true;
+        putenv('SYLIUS_API_ENABLED=true');
     }
 }

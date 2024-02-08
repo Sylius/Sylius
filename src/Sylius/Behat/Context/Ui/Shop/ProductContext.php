@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Ui\Shop;
 
 use Behat\Behat\Context\Context;
-use Behat\Mink\Element\NodeElement;
 use Sylius\Behat\Element\Product\IndexPage\VerticalMenuElementInterface;
 use Sylius\Behat\Page\ErrorPageInterface;
 use Sylius\Behat\Page\Shop\Product\IndexPageInterface;
@@ -169,61 +168,6 @@ final class ProductContext implements Context
     }
 
     /**
-     * @Then I should (also) see the product attribute :attributeName with value :expectedAttribute
-     */
-    public function iShouldSeeTheProductAttributeWithValue($attributeName, $expectedAttribute): void
-    {
-        Assert::same($this->showPage->getAttributeByName($attributeName), $expectedAttribute);
-    }
-
-    /**
-     * @Then I should not see the product attribute :attributeName
-     */
-    public function iShouldNotSeeTheProductAttribute(string $attributeName): void
-    {
-        $this->showPage->getAttributeByName($attributeName);
-    }
-
-    /**
-     * @Then I should (also) see the product attribute :attributeName with date :expectedAttribute
-     */
-    public function iShouldSeeTheProductAttributeWithDate($attributeName, $expectedAttribute): void
-    {
-        Assert::eq(
-            new \DateTime($this->showPage->getAttributeByName($attributeName)),
-            new \DateTime($expectedAttribute),
-        );
-    }
-
-    /**
-     * @Then I should see :count attributes
-     */
-    public function iShouldSeeAttributes($count): void
-    {
-        Assert::same(count($this->getProductAttributes()), (int) $count);
-    }
-
-    /**
-     * @Then the first attribute should be :name
-     */
-    public function theFirstAttributeShouldBe($name): void
-    {
-        $attributes = $this->getProductAttributes();
-
-        Assert::same(reset($attributes)->getText(), $name);
-    }
-
-    /**
-     * @Then the last attribute should be :name
-     */
-    public function theLastAttributeShouldBe($name): void
-    {
-        $attributes = $this->getProductAttributes();
-
-        Assert::same(end($attributes)->getText(), $name);
-    }
-
-    /**
      * @When I browse products from taxon :taxon
      * @When I browse products from product taxon code :taxon
      */
@@ -249,6 +193,16 @@ final class ProductContext implements Context
     }
 
     /**
+     * @When /^I sort products by the (oldest|newest) date first$/
+     */
+    public function iSortProductsByTheDateFirst(string $sortDirection): void
+    {
+        $sortDirection = 'oldest' === $sortDirection ? 'Oldest first' : 'Newest first';
+
+        $this->indexPage->sort($sortDirection);
+    }
+
+    /**
      * @When I sort products by the lowest price first
      */
     public function iSortProductsByTheLowestPriceFirst(): void
@@ -259,7 +213,7 @@ final class ProductContext implements Context
     /**
      * @When I sort products by the highest price first
      */
-    public function iSortProductsByTheHighestPriceFisrt(): void
+    public function iSortProductsByTheHighestPriceFirst(): void
     {
         $this->indexPage->sort('Most expensive first');
     }
@@ -379,16 +333,20 @@ final class ProductContext implements Context
 
     /**
      * @Then I should see :productName product discounted from :originalPrice to :price by :promotionLabel on the list
+     * @Then I should see :productName product discounted from :originalPrice to :price
      */
     public function iShouldSeeProductDiscountedOnTheList(
         string $productName,
         string $originalPrice,
         string $price,
-        string $promotionLabel,
+        ?string $promotionLabel = null,
     ): void {
         Assert::same($this->indexPage->getProductPrice($productName), $price);
         Assert::same($this->indexPage->getProductOriginalPrice($productName), $originalPrice);
-        Assert::same($this->indexPage->getProductPromotionLabel($productName), $promotionLabel);
+
+        if ($promotionLabel !== null) {
+            Assert::same($this->indexPage->getProductPromotionLabel($productName), $promotionLabel);
+        }
     }
 
     /**
@@ -657,16 +615,6 @@ final class ProductContext implements Context
     public function iShouldSeeAMainImage(): void
     {
         Assert::true($this->showPage->isMainImageDisplayed());
-    }
-
-    /**
-     * @When /^I view (oldest|newest) products from (taxon "([^"]+)")$/
-     */
-    public function iViewSortedProductsFromTaxon($sortDirection, TaxonInterface $taxon): void
-    {
-        $sorting = ['createdAt' => 'oldest' === $sortDirection ? 'asc' : 'desc'];
-
-        $this->indexPage->open(['slug' => $taxon->getSlug(), 'sorting' => $sorting]);
     }
 
     /**
@@ -1005,18 +953,5 @@ final class ProductContext implements Context
                 $productAssociationName,
             ),
         );
-    }
-
-    /**
-     * @return NodeElement[]
-     *
-     * @throws \InvalidArgumentException
-     */
-    private function getProductAttributes(): array
-    {
-        $attributes = $this->showPage->getAttributes();
-        Assert::notNull($attributes, 'The product has no attributes.');
-
-        return $attributes;
     }
 }

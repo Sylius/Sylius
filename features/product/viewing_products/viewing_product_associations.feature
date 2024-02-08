@@ -5,9 +5,9 @@ Feature: Viewing product's associations
     I want to see related products when viewing product details
 
     Background:
-        Given the store operates on a channel named "Smartphone Store"
+        Given the store operates on a channel named "Smartphone Store" with hostname "smartphone.shop"
         And that channel allows to shop using "English (United States)" and "Polish (Poland)" locales
-        And the store also operates on another channel named "Notebook Store"
+        And the store also operates on another channel named "Notebook Store" with hostname "notebook.shop"
         And the "Smartphone Store" channel has a product "LG G3"
         And the "Smartphone Store" channel has "LG headphones", "LG earphones", "LG G4" and "LG G5" products
         And the "Notebook Store" channel has "LG Gram" and "LG AC Adapter" products
@@ -17,7 +17,7 @@ Feature: Viewing product's associations
         And the product "LG G3" has also an association "Alternatives" with products "LG G4" and "LG G5"
         And the product "LG Gram" has an association "Alternatives" with products "LG AC Adapter" and "LG headphones"
 
-    @ui
+    @ui @api
     Scenario: Viewing a detailed page with product's associations in default locale
         Given I am browsing channel "Smartphone Store"
         When I view product "LG G3"

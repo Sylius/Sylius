@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -13,6 +13,8 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Doctrine\DQL;
 
+use Doctrine\DBAL\Platforms\MySQLPlatform;
+use Doctrine\DBAL\Platforms\PostgreSQLPlatform;
 use Doctrine\ORM\Query\AST\Functions\FunctionNode;
 use Doctrine\ORM\Query\AST\Node;
 use Doctrine\ORM\Query\Lexer;
@@ -36,12 +38,16 @@ final class Hour extends FunctionNode
 
     public function getSql(SqlWalker $sqlWalker): string
     {
-        $platformName = $sqlWalker->getConnection()->getDatabasePlatform()->getName();
+        $platform = $sqlWalker->getConnection()->getDatabasePlatform();
 
-        return match ($platformName) {
-            'mysql' => sprintf('HOUR(%s)', $sqlWalker->walkArithmeticPrimary($this->date)),
-            'postgresql' => sprintf('EXTRACT(HOUR FROM %s)', $sqlWalker->walkArithmeticPrimary($this->date)),
-            default => throw new \RuntimeException(sprintf('Platform "%s" is not supported!', $platformName)),
-        };
+        if (is_a($platform, MySQLPlatform::class, true)) {
+            return sprintf('HOUR(%s)', $sqlWalker->walkArithmeticPrimary($this->date));
+        }
+
+        if (is_a($platform, PostgreSQLPlatform::class, true)) {
+            return sprintf('EXTRACT(HOUR FROM %s)', $sqlWalker->walkArithmeticPrimary($this->date));
+        }
+
+        throw new \RuntimeException(sprintf('Platform "%s" is not supported!', get_class($platform)));
     }
 }

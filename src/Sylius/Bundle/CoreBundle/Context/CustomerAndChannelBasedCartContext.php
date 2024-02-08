@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -15,11 +15,14 @@ namespace Sylius\Bundle\CoreBundle\Context;
 
 use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Sylius\Component\Channel\Context\ChannelNotFoundException;
+use Sylius\Component\Core\Model\ChannelInterface;
+use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Customer\Context\CustomerContextInterface;
 use Sylius\Component\Order\Context\CartContextInterface;
 use Sylius\Component\Order\Context\CartNotFoundException;
 use Sylius\Component\Order\Model\OrderInterface;
+use Webmozart\Assert\Assert;
 
 final class CustomerAndChannelBasedCartContext implements CartContextInterface
 {
@@ -42,7 +45,8 @@ final class CustomerAndChannelBasedCartContext implements CartContextInterface
         if (null === $customer) {
             throw new CartNotFoundException('Sylius was not able to find the cart, as there is no logged in user.');
         }
-
+        Assert::isInstanceOf($channel, ChannelInterface::class);
+        Assert::isInstanceOf($customer, CustomerInterface::class);
         $cart = $this->orderRepository->findLatestNotEmptyCartByChannelAndCustomer($channel, $customer);
         if (null === $cart) {
             throw new CartNotFoundException('Sylius was not able to find the cart for currently logged in user.');

@@ -6,11 +6,11 @@ Feature: Inability to add a specific product to the cart when it is out of stock
 
     Background:
         Given the store operates on a single channel in "United States"
-        And the store has a product "T-shirt banana"
+        And the store has a product "T-Shirt banana"
 
     @ui @api
     Scenario: Not being able to add a product to the cart when it is out of stock
-        Given the product "T-shirt banana" is out of stock
+        Given the product "T-Shirt banana" is out of stock
         When I check this product's details
         Then I should see that it is out of stock
         And I should be unable to add it to the cart

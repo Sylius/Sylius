@@ -1,11 +1,15 @@
 # This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
+# (c) Sylius Sp. z o.o.
 
 sylius_mailer:
     sender:
         name: Example.com
         address: no-reply@example.com
+    sender_adapter: sylius.email_sender.adapter.symfony_mailer
     emails:
+        admin_password_reset:
+            subject: sylius.emails.admin_password_reset.subject
+            template: "@SyliusCore/Email/adminPasswordReset.html.twig"
         order_confirmation:
             subject: sylius.emails.order_confirmation.subject
             template: "@SyliusCore/Email/orderConfirmation.html.twig"
@@ -21,3 +25,6 @@ sylius_mailer:
         account_verification_token:
             subject: sylius.emails.user.verification_token.subject
             template: "@SyliusCore/Email/accountVerification.html.twig"
+        contact_request:
+            subject: sylius.emails.contact_request.subject
+            template: "@SyliusCore/Email/contactRequest.html.twig"

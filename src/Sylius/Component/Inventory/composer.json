@@ -27,8 +27,8 @@
     ],
     "require": {
         "php": "^8.0",
-        "sylius/resource": "^1.7",
-        "webmozart/assert": "^1.8"
+        "sylius/resource": "^1.9",
+        "webmozart/assert": "^1.9"
     },
     "require-dev": {
         "phpspec/phpspec": "^7.2"
@@ -40,7 +40,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "1.9-dev"
+            "dev-main": "1.12-dev"
         }
     },
     "autoload": {

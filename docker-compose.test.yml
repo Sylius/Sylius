@@ -1,0 +1,49 @@
+services:
+    static:
+        image: sylius/standard:1.11-traditional
+        entrypoint: ["make", "static"]
+        profiles: ["static-analyze"]
+        environment:
+            APP_ENV: "test_cached"
+            PHP_DATE_TIMEZONE: "Europe/Warsaw"
+        volumes:
+            - ./:/app:delegated
+            - ./.docker/test/php.ini:/etc/php/8.0/fpm/php.ini:delegated
+            - ./.docker/test/php.ini:/etc/php/8.0/cli/php.ini:delegated
+        networks:
+            - sylius
+    
+    behat:
+        image: sylius/standard:1.11-traditional
+        entrypoint: ["make", "integration"]
+        profiles: ["integration"]
+        environment:
+            APP_ENV: "test_cached"
+            APP_DEBUG: 0
+            DATABASE_URL: "mysql://root:mysql@mysql/sylius_%kernel.environment%"
+            PHP_DATE_TIMEZONE: "Europe/Warsaw"
+            SYLIUS_MESSENGER_TRANSPORT_MAIN_DSN: "sync://"
+            SYLIUS_MESSENGER_TRANSPORT_MAIN_FAILED_DSN: "sync://"
+            SYLIUS_MESSENGER_TRANSPORT_CATALOG_PROMOTION_REMOVAL_DSN: "sync://"
+            SYLIUS_MESSENGER_TRANSPORT_CATALOG_PROMOTION_REMOVAL_FAILED_DSN: "sync://"
+        volumes:
+            - ./:/app:delegated
+            - ./.docker/test/php.ini:/etc/php/8.0/fpm/php.ini:delegated
+            - ./.docker/test/php.ini:/etc/php/8.0/cli/php.ini:delegated
+        depends_on:
+            - mysql
+        networks:
+            - sylius
+
+    mysql:
+        image: mysql:5.7
+        profiles: ["integration"]
+        platform: linux/amd64
+        environment:
+            MYSQL_ROOT_PASSWORD: mysql
+        networks:
+            - sylius
+
+networks:
+    sylius:
+        driver: bridge

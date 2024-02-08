@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -17,6 +17,7 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\Taxonomy\Generator\TaxonSlugGeneratorInterface;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
+use Symfony\Component\HttpFoundation\Exception\BadRequestException;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -33,8 +34,11 @@ final class TaxonSlugController
     public function generateAction(Request $request): Response
     {
         $name = (string) $request->query->get('name');
+        if ('' === trim($name)) {
+            throw new BadRequestException('Cannot generate slug without a name');
+        }
+
         $locale = (string) $request->query->get('locale');
-        $parentId = $request->query->get('parentId');
 
         /** @var TaxonInterface $taxon */
         $taxon = $this->taxonFactory->createNew();
@@ -42,12 +46,25 @@ final class TaxonSlugController
         $taxon->setFallbackLocale($locale);
         $taxon->setName($name);
 
-        if (null !== $parentId) {
-            $taxon->setParent($this->taxonRepository->find($parentId));
-        }
+        $taxon->setParent($this->getParentTaxon($request));
 
         return new JsonResponse([
             'slug' => $this->taxonSlugGenerator->generate($taxon, $locale),
         ]);
+    }
+
+    private function getParentTaxon(Request $request): ?TaxonInterface
+    {
+        $parentCode = $request->query->get('parentCode');
+        if (null !== $parentCode) {
+            return $this->taxonRepository->findOneBy(['code' => $parentCode]);
+        }
+
+        $parentId = $request->query->get('parentId');
+        if (null !== $parentId) {
+            return $this->taxonRepository->find($parentId);
+        }
+
+        return null;
     }
 }

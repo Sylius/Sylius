@@ -4,7 +4,7 @@
 
  This file is part of the Sylius package.
 
- (c) Paweł Jędrzejewski
+ (c) Sylius Sp. z o.o.
 
  For the full copyright and license information, please view the LICENSE
  file that was distributed with this source code.
@@ -14,6 +14,12 @@
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <parameters>
         <parameter key="sylius.form.type.product_review.validation_groups" type="collection">
+            <parameter>sylius</parameter>
+        </parameter>
+        <parameter key="sylius.form.type.admin.password_reset_request.validation_groups" type="collection">
+            <parameter>sylius</parameter>
+        </parameter>
+        <parameter key="sylius.form.type.admin.reset_password.validation_groups" type="collection">
             <parameter>sylius</parameter>
         </parameter>
     </parameters>
@@ -28,6 +34,16 @@
             <argument type="tagged_iterator" tag="sylius.catalog_promotion.scope_configuration_type" index-by="key" />
             <argument type="service" id="twig" />
             <tag name="form.type_extension" extended-type="Sylius\Bundle\PromotionBundle\Form\Type\CatalogPromotionScopeType" priority="100" />
+        </service>
+
+        <service id="Sylius\Bundle\AdminBundle\Form\RequestPasswordResetType">
+            <argument>%sylius.form.type.admin.password_reset_request.validation_groups%</argument>
+            <tag name="form.type" />
+        </service>
+
+        <service id="Sylius\Bundle\AdminBundle\Form\Type\ResetPasswordType">
+            <argument>%sylius.form.type.admin.reset_password.validation_groups%</argument>
+            <tag name="form.type" />
         </service>
     </services>
 </container>

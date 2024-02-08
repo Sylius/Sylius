@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -39,11 +39,7 @@ class Taxon implements TaxonInterface, \Stringable
     /** @var TaxonInterface|null */
     protected $parent;
 
-    /**
-     * @var Collection|TaxonInterface[]
-     *
-     * @psalm-var Collection<array-key, TaxonInterface>
-     */
+    /** @var Collection<array-key, TaxonInterface> */
     protected $children;
 
     /** @var int|null */

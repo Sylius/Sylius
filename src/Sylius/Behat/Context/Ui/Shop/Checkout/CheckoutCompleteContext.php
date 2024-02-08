@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -238,7 +238,7 @@ final class CheckoutCompleteContext implements Context
      */
     public function myOrderLocaleShouldBe(LocaleInterface $locale): void
     {
-        Assert::true($this->completePage->hasLocale($locale->getName()));
+        Assert::true($this->completePage->hasLocale($locale->getName($locale->getCode())));
     }
 
     /**
@@ -367,6 +367,20 @@ final class CheckoutCompleteContext implements Context
         }
 
         throw new UnexpectedPageException('It should not be possible to complete checkout complete step.');
+    }
+
+    /**
+     * @Then I should not be able to confirm order because the :shippingMethodName shipping method is not available
+     */
+    public function iShouldNotBeAbleToConfirmOrderBecauseTheShippingMethodIsNotAvailable(string $shippingMethodName): void
+    {
+        Assert::same(
+            $this->completePage->getValidationErrors(),
+            sprintf(
+                'The "%s" shipping method is not available. Please reselect your shipping method.',
+                $shippingMethodName,
+            ),
+        );
     }
 
     /**

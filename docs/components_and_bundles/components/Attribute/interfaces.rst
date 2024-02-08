@@ -1,12 +1,5 @@
-.. rst-class:: outdated
-
 Interfaces
 ==========
-
-.. danger::
-
-   We're sorry but **this documentation section is outdated**. Please have that in mind when trying to use it.
-   You can help us making documentation up to date via Sylius Github. Thank you!
 
 Model Interfaces
 ----------------
@@ -20,12 +13,11 @@ This interface should be implemented by models
 used for describing a product's attribute.
 
 .. note::
-   This interface extends the `TimestampableInterface <https://github.com/Sylius/SyliusResourceBundle/blob/master/src/Component/Model/TimestampableInterface.php>`_ and
-   the :ref:`component_attribute_model_attribute-translation-interface`.
+    This interface extends the `TimestampableInterface <https://github.com/Sylius/SyliusResourceBundle/blob/master/src/Component/Model/TimestampableInterface.php>`_ and
+    `ToggleableInterface <https://github.com/Sylius/SyliusResourceBundle/blob/master/src/Component/Model/ToggleableInterface.php>`_
+    and `CodeAwareInterface <https://github.com/Sylius/SyliusResourceBundle/blob/master/src/Component/Model/CodeAwareInterface.php>`_.
 
-   For more detailed information go to `Sylius API AttributeInterface`_.
-
-.. _Sylius API AttributeInterface: http://api.sylius.com/Sylius/Component/Attribute/Model/AttributeInterface.html
+    For more detailed information go to `Sylius Attribute Component AttributeInterface <https://github.com/Sylius/Attribute/blob/master/Model/AttributeInterface.php>`_.
 
 .. _component_attribute_model_attribute-value-interface:
 
@@ -38,22 +30,18 @@ with a model implementing the :ref:`component_attribute_model_attribute-subject-
 e.g. the :ref:`component_product_model_product`.
 
 .. note::
-   For more detailed information go to `Sylius API AttributeValueInterface`_.
-
-.. _Sylius API AttributeValueInterface: http://api.sylius.com/Sylius/Component/Attribute/Model/AttributeValueInterface.html
+    For more detailed information go to `Sylius Attribute Component AttributeValueInterface <https://github.com/Sylius/Attribute/blob/master/Model/AttributeValueInterface.php>`_.
 
 .. _component_attribute_model_attribute-translation-interface:
 
 AttributeTranslationInterface
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-This interface should be implemented by models maintaining a single translation
+This interface should be implemented by models maintaining a translation
 of an :ref:`component_attribute_model_attribute` for specified locale.
 
 .. note::
-   For more detailed information go to `Sylius API AttributeTranslationInterface`_.
-
-.. _Sylius API AttributeTranslationInterface: http://api.sylius.com/Sylius/Component/Attribute/Model/AttributeTranslationInterface.html
+    For more detailed information go to `Sylius Attribute Component AttributeTranslationInterface <https://github.com/Sylius/Attribute/blob/master/Model/AttributeTranslationInterface.php>`_.
 
 .. _component_attribute_model_attribute-subject-interface:
 
@@ -66,14 +54,4 @@ various :ref:`component_attribute_model_attribute-value` objects.
 It will ask you to implement the management of :ref:`component_attribute_model_attribute-value` models.
 
 .. note::
-   For more detailed information go to `Sylius API AttributeSubjectInterface`_.
-
-.. _Sylius API AttributeSubjectInterface: http://api.sylius.com/Sylius/Component/Attribute/Model/AttributeSubjectInterface.html
-
-.. _component_attribute_model_attribute-type-interface:
-
-AttributeTypeInterface
-~~~~~~~~~~~~~~~~~~~~~~
-
-This interface should be implemented by models
-used for describing a product's attribute type.
+    For more detailed information go to `Sylius Attribute Component AttributeSubjectInterface <https://github.com/Sylius/Attribute/blob/master/Model/AttributeSubjectInterface.php>`_.

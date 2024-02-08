@@ -4,7 +4,7 @@
 
  This file is part of the Sylius package.
 
- (c) Paweł Jędrzejewski
+ (c) Sylius Sp. z o.o.
 
  For the full copyright and license information, please view the LICENSE
  file that was distributed with this source code.
@@ -22,13 +22,6 @@
     <services>
         <defaults public="true" />
 
-        <service id="sylius.handler.shop_user_logout" class="Sylius\Bundle\ShopBundle\EventListener\ShopUserLogoutHandler">
-            <argument type="service" id="security.http_utils" />
-            <argument>sylius_shop_homepage</argument>
-            <argument type="service" id="sylius.context.channel.composite" />
-            <argument type="service" id="sylius.storage.cart_session" />
-        </service>
-
         <service id="sylius.section_resolver.shop_uri_based_section_resolver" class="Sylius\Bundle\ShopBundle\SectionResolver\ShopUriBasedSectionResolver">
             <argument>account</argument>
             <tag name="sylius.uri_based_section_resolver" priority="-10" />
@@ -41,7 +34,7 @@
         </service>
 
         <service id="sylius.storage.cart_session" class="Sylius\Bundle\CoreBundle\Storage\CartSessionStorage">
-            <argument type="service" id="session" />
+            <argument type="service" id="request_stack" />
             <argument>_sylius.cart</argument>
             <argument type="service" id="sylius.repository.order" />
         </service>

@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -46,7 +46,7 @@ final class OrderPricesRecalculatorSpec extends ObjectBehavior
         ProductVariantInterface $variant,
         ProductVariantPricesCalculatorInterface $productVariantPriceCalculator,
     ): void {
-        $order->getState()->willReturn(OrderInterface::STATE_CART);
+        $order->canBeProcessed()->willReturn(true);
 
         $order->getCustomer()->willReturn($customer);
         $order->getChannel()->willReturn(null);
@@ -83,9 +83,9 @@ final class OrderPricesRecalculatorSpec extends ObjectBehavior
         ;
     }
 
-    function it_does_nothing_if_the_order_is_in_a_state_different_than_cart(OrderInterface $order): void
+    function it_does_nothing_if_the_order_cannot_be_processed(OrderInterface $order): void
     {
-        $order->getState()->willReturn(OrderInterface::STATE_NEW);
+        $order->canBeProcessed()->willReturn(false);
 
         $order->getChannel()->shouldNotBeCalled();
         $order->getItems()->shouldNotBeCalled();

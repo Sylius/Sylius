@@ -1,5 +1,5 @@
 # This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
+# (c) Sylius Sp. z o.o.
 
 sylius:
     email:
@@ -213,8 +213,8 @@ sylius:
             intl: Intl
             json_encode: JSON
             mbstring: Multibyte String
-            off: off
-            on: on
+            off: false
+            on: true
             pcre: PCRE
             pdo: PDO
             php_xml: PHP-XML
@@ -244,8 +244,8 @@ sylius:
             detect_unicode_help: Setzen Sie 'detect_unicode = Off' in der php.ini Datei
             magic_quotes_gpc: magic_quotes_gpc
             non_deprecated: Nicht veraltet
-            off: off
-            on: on
+            off: false
+            on: true
             register_globals: register_globals
             session:
                 auto_start: session.auto_start

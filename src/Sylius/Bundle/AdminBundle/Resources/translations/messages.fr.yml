@@ -1,5 +1,5 @@
 # This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
+# (c) Sylius Sp. z o.o.
 
 sylius:
     email:
@@ -9,6 +9,12 @@ sylius:
             thank_you_for_transaction: 'Merci pour votre transaction réussie.'
             you_can_check_its_location_with_the_tracking_code: 'Vous pouvez vérifier sa progression avec le code de suivi %tracking_code%.'
             your_order_with_number: 'Votre commande numéro'
+    form:
+        admin:
+            reset_password:
+                password:
+                    label: Nouveau mot de passe
+                    confirmation: Confirmer nouveau mot de passe
     menu:
         admin:
             main:
@@ -47,14 +53,29 @@ sylius:
                 sales:
                     header: Ventes
                     orders: Commandes
+                official_support:
+                    header: Support officiel
+                    browse_plugins: Parcourir les plugins
+                    sylius_plus: Sylius Plus
+                    professional_services: Services professionnels
+                    find_a_partner: Trouver un partenaire
     ui:
+        catalog_promotion:
+            dates_details: Cette opération prend du temps ! Veuillez tenir compte d'un délai de 2 à 10 minutes à partir des dates spécifiées. Le délai dépend de la taille du catalogue.
+        channel:
+            account_verification_required_details: En désactivant cette option, il sera possible de créer des comptes et d'y accéder sans vérification de l'adresse électronique et donc d'accéder potentiellement aux données des commandes passées en tant qu'invité.
+        channel_pricings: Prix du canal
         product:
             product_not_active_in_channel: Le produit n'est pas encore activé pour ce canal.
+        original_price_details: Prix original (aussi appelé prix barré) - il s'agit du prix de la variante de produit, il est affiché barré dans le catalogue. Il est utilisé comme base pour les calculs de prix actuels. Si cette valeur n'est pas définie, la logique de promotion du catalogue (Catalog Promotion) copiera la valeur du prix dans le prix d'origine.
+        price_details: 'Prix - il s''agit du prix actuel de la variante de produit affichée dans le catalogue. Il peut être modifié par des mécanismes internes, ex: les promotions du catalogue.'
+        minimum_price_details: Prix minimum - il s'agit du seuil de prix en dessous duquel le prix actuel ne peut être remisé par une quelconque promotion. Utilisez ceci pour garder la rentabilité de vos ventes.
         gateway:
             no_sca_support_notice: L'interface de paiement choisie ne prend pas en charge l'authentification forte du client.
             pay_pal_express_checkout_deprecation_notice: >
                 PayPal Express Checkout est obsolète. Veuillez utiliser la nouvelle intégration de <a href="https://github.com/Sylius/PayPalPlugin" target="_blank">PayPal Commerce Platform</a>.
         sales_summary: Récapitulatif des ventes
+        shipment_for_order: Expédition pour la commande
         statistics:
             day: Jour
             lifetime: Durée de vie

@@ -10,8 +10,8 @@ Feature: Seeing taxes of order items
         And the store has a product "PHP T-Shirt" priced at "$80.00"
         And the store has a product "Symfony2 T-Shirt" priced at "$140.00"
         And it belongs to "Clothes" tax category
-        And the store ships everything for free within the "US" zone
-        And the store allows paying offline
+        And the store ships everything for Free within the "US" zone
+        And the store allows paying Offline
         And there is a customer "lucy@teamlucifer.com" that placed an order "#00000666"
         And I am logged in as an administrator
 

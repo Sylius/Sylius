@@ -16,7 +16,7 @@ framework:
     default_locale: "%locale%"
     session:
         handler_id: ~
-        storage_id: session.storage.mock_file
+        storage_factory_id: session.storage.factory.mock_file
     http_method_override: true
     test: ~
 
@@ -44,6 +44,8 @@ fos_rest:
             - { path: '^/', priorities: ['json'], fallback_format: json, prefer_extension: true }
 
 security:
+    enable_authenticator_manager: true
+
     providers:
         sylius_admin_user_provider:
             memory:
@@ -51,7 +53,7 @@ security:
                     foo:
                         password: foo
                         roles: ROLE_USER
-    encoders:
+    password_hashers:
         Sylius\Component\User\Model\UserInterface: sha512
     firewalls:
         admin:
@@ -69,7 +71,6 @@ security:
             logout:
                 path: sylius_admin_logout
                 target: sylius_admin_login
-            anonymous: true
 
         oauth_token:
             pattern: ^/api/oauth/v2/token

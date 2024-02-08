@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -22,35 +22,35 @@ use Sylius\Bundle\ApiBundle\Command\LocaleCodeAwareInterface;
 class RegisterShopUser implements ChannelCodeAwareInterface, LocaleCodeAwareInterface
 {
     /**
-     * @psalm-immutable
+     * @immutable
      *
      * @var string
      */
     public $firstName;
 
     /**
-     * @psalm-immutable
+     * @immutable
      *
      * @var string
      */
     public $lastName;
 
     /**
-     * @psalm-immutable
+     * @immutable
      *
      * @var string
      */
     public $email;
 
     /**
-     * @psalm-immutable
+     * @immutable
      *
      * @var string
      */
     public $password;
 
     /**
-     * @psalm-immutable
+     * @immutable
      *
      * @var bool
      */

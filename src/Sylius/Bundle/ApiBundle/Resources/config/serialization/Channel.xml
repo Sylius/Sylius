@@ -4,7 +4,7 @@
 
  This file is part of the Sylius package.
 
- (c) Paweł Jędrzejewski
+ (c) Sylius Sp. z o.o.
 
  For the full copyright and license information, please view the LICENSE
  file that was distributed with this source code.
@@ -46,6 +46,7 @@
         <attribute name="defaultLocale">
             <group>admin:channel:read</group>
             <group>admin:channel:create</group>
+            <group>shop:channel:read</group>
         </attribute>
         <attribute name="defaultTaxZone">
             <group>admin:channel:read</group>
@@ -58,10 +59,12 @@
         <attribute name="currencies">
             <group>admin:channel:read</group>
             <group>admin:channel:create</group>
+            <group>shop:channel:read</group>
         </attribute>
         <attribute name="locales">
             <group>admin:channel:read</group>
             <group>admin:channel:create</group>
+            <group>shop:channel:read</group>
         </attribute>
         <attribute name="countries">
             <group>admin:channel:read</group>
@@ -90,6 +93,11 @@
         <attribute name="accountVerificationRequired">
             <group>admin:channel:read</group>
             <group>admin:channel:create</group>
+        </attribute>
+        <attribute name="shippingAddressInCheckoutRequired">
+            <group>admin:channel:read</group>
+            <group>admin:channel:create</group>
+            <group>admin:channel:update</group>
         </attribute>
         <attribute name="shopBillingData">
             <group>admin:channel:read</group>

@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -46,9 +46,7 @@ interface OrderItemInterface extends AdjustableInterface, OrderAwareInterface, R
     public function setImmutable(bool $immutable): void;
 
     /**
-     * @return Collection|OrderItemUnitInterface[]
-     *
-     * @psalm-return Collection<array-key, OrderItemUnitInterface>
+     * @return Collection<array-key, OrderItemUnitInterface>
      */
     public function getUnits(): Collection;
 
@@ -59,9 +57,7 @@ interface OrderItemInterface extends AdjustableInterface, OrderAwareInterface, R
     public function removeUnit(OrderItemUnitInterface $itemUnit): void;
 
     /**
-     * @return Collection|AdjustmentInterface[]
-     *
-     * @psalm-return Collection<array-key, AdjustmentInterface>
+     * @return Collection<array-key, AdjustmentInterface>
      */
     public function getAdjustmentsRecursively(?string $type = null): Collection;
 

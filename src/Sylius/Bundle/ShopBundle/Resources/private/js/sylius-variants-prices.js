@@ -1,7 +1,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -15,9 +15,12 @@ function formatAppliedPromotions(appliedPromotions) {
 
   if (appliedPromotions !== '[]') {
     $.each(appliedPromotions, (index, promotion) => {
-      let promotionInfo = promotion.label;
-      promotionInfo += promotion.description ? ` - ${promotion.description}` : '';
-      appliedPromotionsElement += `<div class="ui blue label promotion_label" style="margin: 1rem 0;"><div class="row ui small sylius_catalog_promotion">${promotionInfo}</div></div>`;
+      appliedPromotionsElement += `<div style="margin-top: 20px;">
+        <div class="ui label promotion_label">
+          <div class="row ui small sylius_catalog_promotion">${promotion.label}</div>
+        </div>
+        <span class="text-teal">${promotion.description}</span>
+      </div>`;
     });
     $('#appliedPromotions').html(appliedPromotionsElement);
   }

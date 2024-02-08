@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -38,8 +38,9 @@ class ProvinceController extends ResourceController
             throw new AccessDeniedException();
         }
 
-        /** @var CountryInterface $country */
-        if (!$country = $this->get('sylius.repository.country')->findOneBy(['code' => $countryCode])) {
+        /** @var CountryInterface|null $country */
+        $country = $this->get('sylius.repository.country')->findOneBy(['code' => $countryCode]);
+        if ($country === null) {
             throw new NotFoundHttpException('Requested country does not exist.');
         }
 

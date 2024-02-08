@@ -1,0 +1,5 @@
+{{ render(url('sylius_admin_partial_catalog_promotion_show', {
+    'id': app.request.attributes.get('id'),
+    'template': '@SyliusAdmin/CatalogPromotion/ProductVariant/Index/_catalogPromotionHeader.html.twig',
+    'vars': configuration.vars
+})) }}

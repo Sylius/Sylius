@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -16,6 +16,7 @@ namespace Sylius\Behat\Context\Api\Admin;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
+use Sylius\Behat\Context\Api\Resources;
 use Webmozart\Assert\Assert;
 
 final class ManagingCurrenciesContext implements Context
@@ -31,7 +32,7 @@ final class ManagingCurrenciesContext implements Context
      */
     public function iWantToSeeAllCurrenciesInStore(): void
     {
-        $this->client->index();
+        $this->client->index(Resources::CURRENCIES);
     }
 
     /**
@@ -39,7 +40,7 @@ final class ManagingCurrenciesContext implements Context
      */
     public function iWantToAddNewCurrency(): void
     {
-        $this->client->buildCreateRequest();
+        $this->client->buildCreateRequest(Resources::CURRENCIES);
     }
 
     /**
@@ -75,7 +76,7 @@ final class ManagingCurrenciesContext implements Context
     public function currencyShouldAppearInTheStore(string $currencyName): void
     {
         Assert::true(
-            $this->responseChecker->hasItemWithValue($this->client->index(), 'name', $currencyName),
+            $this->responseChecker->hasItemWithValue($this->client->index(Resources::CURRENCIES), 'name', $currencyName),
             sprintf('There is no currency with name "%s"', $currencyName),
         );
     }
@@ -85,7 +86,7 @@ final class ManagingCurrenciesContext implements Context
      */
     public function thereShouldStillBeOnlyOneCurrencyWithCode(string $code): void
     {
-        $response = $this->client->index();
+        $response = $this->client->index(Resources::CURRENCIES);
         Assert::same($this->responseChecker->countCollectionItems($response), 1);
         Assert::true(
             $this->responseChecker->hasItemWithValue($response, 'code', $code),

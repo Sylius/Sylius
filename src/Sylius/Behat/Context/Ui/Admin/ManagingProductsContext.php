@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -212,6 +212,14 @@ final class ManagingProductsContext implements Context
     }
 
     /**
+     * @When I choose enabled filter
+     */
+    public function iChooseEnabledFilter(): void
+    {
+        $this->indexPage->chooseEnabledFilter();
+    }
+
+    /**
      * @When I filter
      */
     public function iFilter(): void
@@ -248,6 +256,15 @@ final class ManagingProductsContext implements Context
     public function iAmBrowsingProductsFromTaxon(TaxonInterface $taxon)
     {
         $this->indexPerTaxonPage->open(['taxonId' => $taxon->getId()]);
+    }
+
+    /**
+     * @When /^I am browsing the (\d+)(?:st|nd|rd|th) page of products from ("([^"]+)" taxon)$/
+     * @When /^I go to the (\d+)(?:st|nd|rd|th) page of products from ("([^"]+)" taxon)$/
+     */
+    public function iAmBrowsingProductsFromTaxonPage(int $page, TaxonInterface $taxon): void
+    {
+        $this->indexPerTaxonPage->open(['taxonId' => $taxon->getId(), 'page' => $page]);
     }
 
     /**
@@ -301,6 +318,52 @@ final class ManagingProductsContext implements Context
     }
 
     /**
+     * @Then /^the (\d+)(?:st|nd|rd|th) product on this page should be named "([^"]+)"$/
+     */
+    public function theNthProductOnThisPageShouldBeNamed(int $position, string $value): void
+    {
+        $values = $this->indexPerTaxonPage->getColumnFields('name');
+
+        Assert::same($values[$position - 1], $value);
+
+        $this->sharedStorage->set('product_taxon_name', $value);
+    }
+
+    /**
+     * @Then this product should be at position :position
+     */
+    public function theNthProductOnThisPageShouldBeAtPosition(int $position): void
+    {
+        $productName = $this->sharedStorage->get('product_taxon_name');
+        Assert::same($this->indexPerTaxonPage->getProductPosition($productName), $position);
+    }
+
+    /**
+     * @Then the one before last product on the list should have :field :value
+     */
+    public function theOneBeforeLastProductOnTheListShouldHave(string $field, string $value): void
+    {
+        $values = $this->indexPerTaxonPage->getColumnFields($field);
+
+        Assert::same($values[count($values) - 2], $value);
+
+        $this->sharedStorage->set('product_taxon_name', $value);
+    }
+
+    /**
+     * @Then the one before last product on the list should have name :productName with position :position
+     */
+    public function theOneBeforeLastProductOnTheListShouldHaveNameWithPosition(string $productName, int $position): void
+    {
+        $productNames = $this->indexPerTaxonPage->getColumnFields('name');
+
+        Assert::same($productNames[count($productNames) - 2], $productName);
+        Assert::same($this->indexPerTaxonPage->getProductPosition($productName), $position);
+
+        $this->sharedStorage->set('product_taxon_name', $productName);
+    }
+
+    /**
      * @Then the last product on the list should have :field :value
      */
     public function theLastProductOnTheListShouldHave($field, $value)
@@ -308,6 +371,21 @@ final class ManagingProductsContext implements Context
         $values = $this->indexPerTaxonPage->getColumnFields($field);
 
         Assert::same(end($values), $value);
+
+        $this->sharedStorage->set('product_taxon_name', $value);
+    }
+
+    /**
+     * @Then the last product on the list should have name :productName with position :position
+     */
+    public function theLastProductOnTheListShouldHaveNameWithPosition(string $productName, int $position): void
+    {
+        $productNames = $this->indexPerTaxonPage->getColumnFields('name');
+
+        Assert::same(end($productNames), $productName);
+        Assert::same($this->indexPerTaxonPage->getProductPosition($productName), $position);
+
+        $this->sharedStorage->set('product_taxon_name', $productName);
     }
 
     /**
@@ -331,18 +409,6 @@ final class ManagingProductsContext implements Context
     }
 
     /**
-     * @When I delete the :product product
-     * @When I try to delete the :product product
-     */
-    public function iDeleteProduct(ProductInterface $product)
-    {
-        $this->sharedStorage->set('product', $product);
-
-        $this->iWantToBrowseProducts();
-        $this->indexPage->deleteResourceOnPage(['name' => $product->getName()]);
-    }
-
-    /**
      * @Then /^(this product) should not exist in the product catalog$/
      */
     public function productShouldNotExist(ProductInterface $product)
@@ -358,7 +424,7 @@ final class ManagingProductsContext implements Context
     public function iShouldBeNotifiedOfFailure()
     {
         $this->notificationChecker->checkNotification(
-            'Cannot delete, the product is in use.',
+            'Cannot delete, the Product is in use.',
             NotificationType::failure(),
         );
     }
@@ -374,6 +440,7 @@ final class ManagingProductsContext implements Context
     /**
      * @When I want to modify the :product product
      * @When /^I want to modify (this product)$/
+     * @When /^I want to edit (this product)$/
      * @When I modify the :product product
      */
     public function iWantToModifyAProduct(ProductInterface $product): void
@@ -387,6 +454,14 @@ final class ManagingProductsContext implements Context
         }
 
         $this->testHelper->waitUntilPageOpens($this->updateSimpleProductPage, ['id' => $product->getId()]);
+    }
+
+    /**
+     * @When /^I go to the (\d)(?:st|nd|rd|th) page$/
+     */
+    public function iGoToPage(int $page): void
+    {
+        $this->indexPage->goToPage($page);
     }
 
     /**
@@ -425,6 +500,22 @@ final class ManagingProductsContext implements Context
     }
 
     /**
+     * @Then I should be notified that meta keywords are too long
+     */
+    public function iShouldBeNotifiedThatMetaKeywordsAreTooLong(): void
+    {
+        $this->assertValidationMessage('meta_keywords', 'Product meta keywords must not be longer than 255 characters.');
+    }
+
+    /**
+     * @Then I should be notified that meta description is too long
+     */
+    public function iShouldBeNotifiedThatMetaDescriptionIsTooLong(): void
+    {
+        $this->assertValidationMessage('meta_description', 'Product meta description must not be longer than 255 characters.');
+    }
+
+    /**
      * @When I save my changes
      * @When I try to save my changes
      */
@@ -433,6 +524,16 @@ final class ManagingProductsContext implements Context
         $currentPage = $this->resolveCurrentPage();
 
         $currentPage->saveChanges();
+    }
+
+    /**
+     * @When I cancel my changes
+     */
+    public function iCancelChanges(): void
+    {
+        $currentPage = $this->resolveCurrentPage();
+
+        $currentPage->cancelChanges();
     }
 
     /**
@@ -579,6 +680,53 @@ final class ManagingProductsContext implements Context
         $currentPage = $this->resolveCurrentPage();
 
         $currentPage->nameItIn('', $language);
+    }
+
+    /**
+     * @When I set its meta keywords to too long string in :language
+     */
+    public function iSetItsMetaKeywordsToTooLongStringIn(string $language): void
+    {
+        $this->updateConfigurableProductPage->setMetaKeywords(str_repeat('a', 256), $language);
+    }
+
+    /**
+     * @When I set its meta description to too long string in :language
+     */
+    public function iSetItsMetaDescriptionToTooLongStringIn(string $language): void
+    {
+        $this->updateConfigurableProductPage->setMetaDescription(str_repeat('a', 256), $language);
+    }
+
+    /**
+     * @When I want to choose main taxon for product :product
+     */
+    public function iWantToChooseMainTaxonForProduct(ProductInterface $product): void
+    {
+        $this->iWantToModifyAProduct($product);
+
+        $currentPage = $this->resolveCurrentPage();
+        $currentPage->open(['id' => $product->getId()]);
+    }
+
+    /**
+     * @Then I should be able to choose taxon :taxonName from the list
+     */
+    public function iShouldBeAbleToChooseTaxonForThisProduct(string $taxonName): void
+    {
+        $currentPage = $this->resolveCurrentPage();
+
+        Assert::true($currentPage->isTaxonVisibleInMainTaxonList($taxonName));
+    }
+
+    /**
+     * @Then I should not be able to choose taxon :taxonName from the list
+     */
+    public function iShouldNotBeAbleToChooseTaxonForThisProduct(string $taxonName): void
+    {
+        $currentPage = $this->resolveCurrentPage();
+
+        Assert::false($currentPage->isTaxonVisibleInMainTaxonList($taxonName));
     }
 
     /**
@@ -1155,6 +1303,53 @@ final class ManagingProductsContext implements Context
     public function theLastProductOnTheListShouldNotHaveName(): void
     {
         Assert::true($this->indexPage->checkLastProductHasDataAttribute('data-test-missing-translation-paragraph'));
+    }
+
+    /**
+     * @Then I should be redirected to the previous page of only enabled products
+     */
+    public function iShouldBeRedirectedToThePreviousFilteredPageWithFilter(): void
+    {
+        Assert::true($this->indexPage->isEnabledFilterApplied());
+    }
+
+    /**
+     * @Then /^I should be redirected to the ([^"]+)(nd) page of only enabled products$/
+     */
+    public function iShouldBeRedirectedToThePreviousFilteredPageWithFilterAndPage(int $page): void
+    {
+        Assert::true($this->indexPage->isEnabledFilterApplied());
+        Assert::eq($this->indexPage->getPageNumber(), $page);
+    }
+
+    /**
+     * @Then the show product's page button should be enabled
+     */
+    public function theShowProductsPageButtonShouldBeEnabled(): void
+    {
+        Assert::false($this->updateSimpleProductPage->isShowInShopButtonDisabled());
+    }
+
+    /**
+     * @Then the show product's page button should be disabled
+     */
+    public function theShowProductsPageButtonShouldBeDisabled(): void
+    {
+        Assert::true($this->updateSimpleProductPage->isShowInShopButtonDisabled());
+    }
+
+    /**
+     * @Then /^it should be leading to (the product)'s page in the ("[^"]+" locale)$/
+     */
+    public function itShouldBeLeadingToTheProductPageInTheLocale(ProductInterface $product, string $localeCode): void
+    {
+        $productTranslation = $product->getTranslation($localeCode);
+        $showProductPageUrl = $this->updateSimpleProductPage->getShowProductInSingleChannelUrl();
+
+        Assert::contains(
+            $showProductPageUrl,
+            sprintf('/%s/products/%s', $localeCode, $productTranslation->getSlug()),
+        );
     }
 
     /**

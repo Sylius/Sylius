@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -57,7 +57,7 @@ final class CustomerRegistrationFormSubscriberSpec extends ObjectBehavior
         $customer->getUser()->willReturn($user);
 
         $existingCustomer->setUser($user)->shouldBeCalled();
-        $form->setData($existingCustomer)->shouldBeCalled();
+        $form->setData($existingCustomer)->willReturn($form)->shouldBeCalled();
 
         $this->preSubmit($event);
     }

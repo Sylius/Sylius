@@ -12,13 +12,16 @@
 /docs/.doctrees
 
 /composer.lock
-/node_modules
 
 /etc/build/*
 !/etc/build/.gitignore
 
+docker-compose.override.yml
+
 /behat.yml
 /phpspec.yml
+
+/drivers/
 
 # Symfony CLI https://symfony.com/doc/current/setup/symfony_server.html#different-php-settings-per-project
 /.php-version
@@ -51,3 +54,10 @@
 /config/jwt/*.pem
 !/config/jwt/*-test.pem
 ###< lexik/jwt-authentication-bundle ###
+
+###> symfony/webpack-encore-bundle ###
+/node_modules/
+/public/build/
+npm-debug.log
+yarn-error.log
+###< symfony/webpack-encore-bundle ###

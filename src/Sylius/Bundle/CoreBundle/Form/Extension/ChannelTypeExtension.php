@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -90,6 +90,10 @@ final class ChannelTypeExtension extends AbstractTypeExtension
             ])
             ->add('accountVerificationRequired', CheckboxType::class, [
                 'label' => 'sylius.form.channel.account_verification_required',
+                'required' => false,
+            ])
+            ->add('shippingAddressInCheckoutRequired', CheckboxType::class, [
+                'label' => 'sylius.form.channel.shipping_address_in_checkout_required',
                 'required' => false,
             ])
             ->add('shopBillingData', ShopBillingDataType::class, [

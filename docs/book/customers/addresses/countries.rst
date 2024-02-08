@@ -6,10 +6,10 @@ Countries
 
 **Countries** are a part of the :doc:`Addressing </book/customers/addresses/addresses>` concept.
 The **Country** entity represents a real country that your shop is willing to sell its goods in (for example the UK).
-It has an ISO code to be identified easily (`ISO 3166-1 alpha-2 <http://www.iso.org/iso/country_codes>`_).
+It has an ISO code to be identified easily (`ISO 3166-1 alpha-2 <https://www.iso.org/iso/country_codes>`_).
 
 Countries might also have **Provinces**, which is in fact a general name for an administrative division, within a country.
-Therefore we understand provinces as states of the USA, voivodeships of Poland, cantons of Belgium or Bundesländer of Germany.
+Therefore we understand provinces as states of the USA, voivodeships of Poland or Bundesländer of Germany.
 
 How to add a country?
 ---------------------

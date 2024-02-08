@@ -1,11 +1,8 @@
 # This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
+# (c) Sylius Sp. z o.o.
 
 sylius:
     email:
-        contact_request:
-            message_from: 'Ziņa no'
-            subject: 'Kontaktu pieprasījums'
         password_reset:
             reset_your_password: 'Atjaunot paroli'
             subject: 'Atjaunot paroli'

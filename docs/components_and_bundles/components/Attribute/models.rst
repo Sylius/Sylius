@@ -1,12 +1,5 @@
-.. rst-class:: outdated
-
 Models
 ======
-
-.. danger::
-
-   We're sorry but **this documentation section is outdated**. Please have that in mind when trying to use it.
-   You can help us making documentation up to date via Sylius Github. Thank you!
 
 .. _component_attribute_model_attribute:
 
@@ -22,13 +15,11 @@ Every attribute is represented by the **Attribute** model which by default has t
 +---------------+-----------------------------------------------------------+
 | type          | Attribute's type ('text' by default)                      |
 +---------------+-----------------------------------------------------------+
-| name          | Attribute's name                                          |
+| name          | Attribute's name (from AttributeTranslation)              |
 +---------------+-----------------------------------------------------------+
 | configuration | Attribute's configuration                                 |
 +---------------+-----------------------------------------------------------+
-| validation    | Attribute's validation configuration                      |
-+---------------+-----------------------------------------------------------+
-| values        | Collection of attribute values                            |
+| translatable  | Attribute possibility to be translated                    |
 +---------------+-----------------------------------------------------------+
 | storageType   | Defines how attribute value should be stored in database  |
 +---------------+-----------------------------------------------------------+
@@ -38,15 +29,13 @@ Every attribute is represented by the **Attribute** model which by default has t
 +---------------+-----------------------------------------------------------+
 
 .. note::
-   This model uses the `TranslatableTrait <https://github.com/Sylius/SyliusResourceBundle/blob/master/src/Component/Model/TranslatableTrait.php>`_
-   and implements the :ref:`component_attribute_model_attribute-interface`.
+    This model uses the `TranslatableTrait <https://github.com/Sylius/SyliusResourceBundle/blob/master/src/Component/Model/TranslatableTrait.php>`_
+    and implements the :ref:`component_attribute_model_attribute-interface`.
 
-   For more detailed information go to `Sylius API Attribute`_.
-
-.. _Sylius API Attribute: http://api.sylius.com/Sylius/Component/Attribute/Model/Attribute.html
+    For more detailed information go to `Sylius Attribute Component Attribute <https://github.com/Sylius/Attribute/blob/master/Model/Attribute.php>`_.
 
 .. attention::
-   Attribute's type is an alias of AttributeType service.
+    Attribute's type is an alias of AttributeType service.
 
 .. _component_attribute_model_attribute-value:
 
@@ -80,6 +69,8 @@ It has the following properties:
 +-----------+---------------------------------------+
 | date      | Value of attribute stored as date     |
 +-----------+---------------------------------------+
+| json      | Value of attribute stored as array    |
++-----------+---------------------------------------+
 
 .. attention::
    ``Value`` property is used only as proxy, that stores data in proper field. It's crucial to set attribute value in field, that is mapped as attribute's storage type.
@@ -87,9 +78,7 @@ It has the following properties:
 .. note::
    This model implements the :ref:`component_attribute_model_attribute-value-interface`.
 
-   For more detailed information go to `Sylius API AttributeValue`_.
-
-.. _Sylius API AttributeValue: http://api.sylius.com/Sylius/Component/Attribute/Model/AttributeValue.html
+    For more detailed information go to `Sylius Attribute Component AttributeValue <https://github.com/Sylius/Attribute/blob/master/Model/AttributeValue.php>`_.
 
 .. _component_attribute_model_attribute-translation:
 
@@ -111,6 +100,4 @@ model which has the following properties:
    This model extends the `AbstractTranslation <https://github.com/Sylius/SyliusResourceBundle/blob/master/src/Component/Model/AbstractTranslation.php>`_ class
    and implements the :ref:`component_attribute_model_attribute-translation-interface`.
 
-   For more detailed information go to `Sylius API AttributeTranslation`_.
-
-.. _Sylius API AttributeTranslation: http://api.sylius.com/Sylius/Component/Attribute/Model/AttributeTranslation.html
+   For more detailed information go to `Sylius Attribute Component AttributeTranslation <https://github.com/Sylius/Attribute/blob/master/Model/AttributeTranslation.php>`_.

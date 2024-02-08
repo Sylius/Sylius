@@ -43,6 +43,11 @@ They can visit and modify their account.
 While creating new account the existence of the provided email in the system is checked - if the email was present - it will already have a Customer
 therefore the existing one will be assigned to the newly created ShopUser, if not - a new Customer will be created together with the ShopUser.
 
+.. note::
+
+    Please note that if a newly created ShopUser has been assigned to an existing Customer, they will have access
+    to previously placed orders as a guest.
+
 How to create a ShopUser programmatically?
 ''''''''''''''''''''''''''''''''''''''''''
 

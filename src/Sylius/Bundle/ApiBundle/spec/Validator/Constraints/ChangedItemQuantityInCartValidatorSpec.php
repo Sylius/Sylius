@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -16,6 +16,7 @@ namespace spec\Sylius\Bundle\ApiBundle\Validator\Constraints;
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ApiBundle\Command\Cart\ChangeItemQuantityInCart;
 use Sylius\Bundle\ApiBundle\Command\Checkout\CompleteOrder;
+use Sylius\Bundle\ApiBundle\Exception\OrderItemNotFoundException;
 use Sylius\Bundle\ApiBundle\Validator\Constraints\AddingEligibleProductVariantToCart;
 use Sylius\Bundle\ApiBundle\Validator\Constraints\ChangedItemQuantityInCart;
 use Sylius\Component\Core\Model\ChannelInterface;
@@ -23,9 +24,9 @@ use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
+use Sylius\Component\Core\Repository\OrderItemRepositoryInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Inventory\Checker\AvailabilityCheckerInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidatorInterface;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
@@ -33,7 +34,7 @@ use Symfony\Component\Validator\Context\ExecutionContextInterface;
 final class ChangedItemQuantityInCartValidatorSpec extends ObjectBehavior
 {
     function let(
-        RepositoryInterface $orderItemRepository,
+        OrderItemRepositoryInterface $orderItemRepository,
         OrderRepositoryInterface $orderRepository,
         AvailabilityCheckerInterface $availabilityChecker,
     ): void {
@@ -65,14 +66,31 @@ final class ChangedItemQuantityInCartValidatorSpec extends ObjectBehavior
         ;
     }
 
+    function it_throws_an_exception_if_order_item_does_not_exist(
+        OrderItemRepositoryInterface $orderItemRepository,
+        ExecutionContextInterface $executionContext,
+    ): void {
+        $this->initialize($executionContext);
+
+        $orderItemRepository->findOneByIdAndCartTokenValue('11', 'token')->willReturn(null);
+
+        $this
+            ->shouldThrow(OrderItemNotFoundException::class)
+            ->during('validate', [
+                ChangeItemQuantityInCart::createFromData('token', '11', 2),
+                new ChangedItemQuantityInCart(),
+            ])
+        ;
+    }
+
     function it_adds_violation_if_product_variant_does_not_exist(
-        RepositoryInterface $orderItemRepository,
+        OrderItemRepositoryInterface $orderItemRepository,
         ExecutionContextInterface $executionContext,
         OrderItemInterface $orderItem,
     ): void {
         $this->initialize($executionContext);
 
-        $orderItemRepository->findOneBy(['id' => '11'])->willReturn($orderItem);
+        $orderItemRepository->findOneByIdAndCartTokenValue('11', 'token')->willReturn($orderItem);
         $orderItem->getVariant()->willReturn(null);
         $orderItem->getVariantName()->willReturn('MacPro');
 
@@ -88,7 +106,7 @@ final class ChangedItemQuantityInCartValidatorSpec extends ObjectBehavior
     }
 
     function it_adds_violation_if_product_is_disabled(
-        RepositoryInterface $orderItemRepository,
+        OrderItemRepositoryInterface $orderItemRepository,
         ExecutionContextInterface $executionContext,
         OrderItemInterface $orderItem,
         ProductVariantInterface $productVariant,
@@ -96,7 +114,7 @@ final class ChangedItemQuantityInCartValidatorSpec extends ObjectBehavior
     ): void {
         $this->initialize($executionContext);
 
-        $orderItemRepository->findOneBy(['id' => '11'])->willReturn($orderItem);
+        $orderItemRepository->findOneByIdAndCartTokenValue('11', 'token')->willReturn($orderItem);
         $orderItem->getVariant()->willReturn($productVariant);
         $orderItem->getVariantName()->willReturn('Variant Name');
 
@@ -118,7 +136,7 @@ final class ChangedItemQuantityInCartValidatorSpec extends ObjectBehavior
     }
 
     function it_adds_violation_if_product_variant_is_disabled(
-        RepositoryInterface $orderItemRepository,
+        OrderItemRepositoryInterface $orderItemRepository,
         ExecutionContextInterface $executionContext,
         OrderItemInterface $orderItem,
         ProductVariantInterface $productVariant,
@@ -126,7 +144,7 @@ final class ChangedItemQuantityInCartValidatorSpec extends ObjectBehavior
     ): void {
         $this->initialize($executionContext);
 
-        $orderItemRepository->findOneBy(['id' => '11'])->willReturn($orderItem);
+        $orderItemRepository->findOneByIdAndCartTokenValue('11', 'token')->willReturn($orderItem);
         $orderItem->getVariant()->willReturn($productVariant);
         $orderItem->getVariantName()->willReturn('Variant Name');
 
@@ -150,7 +168,7 @@ final class ChangedItemQuantityInCartValidatorSpec extends ObjectBehavior
     }
 
     function it_adds_violation_if_product_variant_stock_is_not_sufficient(
-        RepositoryInterface $orderItemRepository,
+        OrderItemRepositoryInterface $orderItemRepository,
         ExecutionContextInterface $executionContext,
         OrderItemInterface $orderItem,
         ProductVariantInterface $productVariant,
@@ -159,7 +177,7 @@ final class ChangedItemQuantityInCartValidatorSpec extends ObjectBehavior
     ): void {
         $this->initialize($executionContext);
 
-        $orderItemRepository->findOneBy(['id' => '11'])->willReturn($orderItem);
+        $orderItemRepository->findOneByIdAndCartTokenValue('11', 'token')->willReturn($orderItem);
         $orderItem->getVariant()->willReturn($productVariant);
         $orderItem->getVariantName()->willReturn('Variant Name');
 
@@ -185,7 +203,7 @@ final class ChangedItemQuantityInCartValidatorSpec extends ObjectBehavior
     }
 
     function it_adds_violation_if_product_is_not_available_in_channel(
-        RepositoryInterface $orderItemRepository,
+        OrderItemRepositoryInterface $orderItemRepository,
         OrderRepositoryInterface $orderRepository,
         ExecutionContextInterface $executionContext,
         OrderItemInterface $orderItem,
@@ -197,7 +215,7 @@ final class ChangedItemQuantityInCartValidatorSpec extends ObjectBehavior
     ): void {
         $this->initialize($executionContext);
 
-        $orderItemRepository->findOneBy(['id' => '11'])->willReturn($orderItem);
+        $orderItemRepository->findOneByIdAndCartTokenValue('11', 'token')->willReturn($orderItem);
         $orderItem->getVariant()->willReturn($productVariant);
         $orderItem->getVariantName()->willReturn('Variant Name');
 
@@ -213,7 +231,7 @@ final class ChangedItemQuantityInCartValidatorSpec extends ObjectBehavior
 
         $product->getName()->willReturn('PRODUCT NAME');
 
-        $orderRepository->findCartByTokenValue('TOKEN')->willReturn($cart);
+        $orderRepository->findCartByTokenValue('token')->willReturn($cart);
         $cart->getChannel()->willReturn($channel);
 
         $product->hasChannel($channel)->willReturn(false);
@@ -224,13 +242,13 @@ final class ChangedItemQuantityInCartValidatorSpec extends ObjectBehavior
         ;
 
         $this->validate(
-            ChangeItemQuantityInCart::createFromData('TOKEN', '11', 2),
+            ChangeItemQuantityInCart::createFromData('token', '11', 2),
             new ChangedItemQuantityInCart(),
         );
     }
 
     function it_does_nothing_if_product_and_variant_are_enabled_and_available_in_channel(
-        RepositoryInterface $orderItemRepository,
+        OrderItemRepositoryInterface $orderItemRepository,
         OrderRepositoryInterface $orderRepository,
         ExecutionContextInterface $executionContext,
         OrderItemInterface $orderItem,
@@ -242,7 +260,7 @@ final class ChangedItemQuantityInCartValidatorSpec extends ObjectBehavior
     ): void {
         $this->initialize($executionContext);
 
-        $orderItemRepository->findOneBy(['id' => '11'])->willReturn($orderItem);
+        $orderItemRepository->findOneByIdAndCartTokenValue('11', 'token')->willReturn($orderItem);
         $orderItem->getVariant()->willReturn($productVariant);
         $orderItem->getVariantName()->willReturn('Variant Name');
 
@@ -258,7 +276,7 @@ final class ChangedItemQuantityInCartValidatorSpec extends ObjectBehavior
 
         $product->getName()->willReturn('PRODUCT NAME');
 
-        $orderRepository->findCartByTokenValue('TOKEN')->willReturn($cart);
+        $orderRepository->findCartByTokenValue('token')->willReturn($cart);
         $cart->getChannel()->willReturn($channel);
 
         $product->hasChannel($channel)->willReturn(true);
@@ -277,7 +295,7 @@ final class ChangedItemQuantityInCartValidatorSpec extends ObjectBehavior
         ;
 
         $this->validate(
-            ChangeItemQuantityInCart::createFromData('TOKEN', '11', 2),
+            ChangeItemQuantityInCart::createFromData('token', '11', 2),
             new ChangedItemQuantityInCart(),
         );
     }

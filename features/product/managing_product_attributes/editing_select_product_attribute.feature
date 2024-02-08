@@ -6,16 +6,16 @@ Feature: Editing a select product attribute
 
     Background:
         Given the store is available in "English (United States)"
-        And the store has a select product attribute "T-shirt material" with value "Banana skin"
+        And the store has a select product attribute "T-Shirt material" with value "Banana skin"
         And I am logged in as an administrator
 
     @ui
     Scenario: Editing a select product attribute name
         When I want to edit this product attribute
-        And I change its name to "T-shirt material" in "English (United States)"
+        And I change its name to "T-Shirt material" in "English (United States)"
         And I save my changes
         Then I should be notified that it has been successfully edited
-        And the select attribute "T-shirt material" should appear in the store
+        And the select attribute "T-Shirt material" should appear in the store
 
     @ui
     Scenario: Editing a select product attribute value
@@ -33,7 +33,7 @@ Feature: Editing a select product attribute
         Then I should be notified that it has been successfully edited
         And this product attribute should have value "Orange skin"
 
-    @ui @javascript
+    @ui @javascript @no-postgres # LIKE on a json column issue
     Scenario: Deleting a value from an existing select product attribute
         When I want to edit this product attribute
         And I delete value "Banana skin"

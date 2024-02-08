@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -16,13 +16,14 @@ namespace Sylius\Behat\Context\Api\Shop;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
+use Sylius\Behat\Context\Api\Resources;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Webmozart\Assert\Assert;
 
 final class PromotionContext implements Context
 {
     public function __construct(
-        private ApiClientInterface $ordersClient,
+        private ApiClientInterface $client,
         private SharedStorageInterface $sharedStorage,
         private ResponseCheckerInterface $responseChecker,
     ) {
@@ -42,7 +43,7 @@ final class PromotionContext implements Context
      */
     public function iShouldBeNotifiedThatCouponIsInvalid(): void
     {
-        $response = $this->ordersClient->getLastResponse();
+        $response = $this->client->getLastResponse();
 
         Assert::same($response->getStatusCode(), 422);
         Assert::same($this->responseChecker->getError($response), 'couponCode: Coupon code is invalid.');
@@ -59,8 +60,8 @@ final class PromotionContext implements Context
 
     private function useCouponCode(?string $couponCode): void
     {
-        $this->ordersClient->buildUpdateRequest($this->getCartTokenValue());
-        $this->ordersClient->setRequestData(['couponCode' => $couponCode]);
-        $this->ordersClient->update();
+        $this->client->buildUpdateRequest(Resources::ORDERS, $this->getCartTokenValue());
+        $this->client->setRequestData(['couponCode' => $couponCode]);
+        $this->client->update();
     }
 }

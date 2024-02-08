@@ -1,7 +1,7 @@
 SyliusTaxonomyBundle
 ======================
 
-Flexible categorization system based on [Spree Taxonomies system](http://guides.spreecommerce.org/user/configuring_taxonomies.html) for [**Symfony**](https://symfony.com) eCommerce applications.
+Flexible categorization system based on [Spree Taxonomies system](https://user-docs.spreecommerce.org/products/taxonomies-and-taxons) for [**Symfony**](https://symfony.com) eCommerce applications.
 
 Sylius
 ------

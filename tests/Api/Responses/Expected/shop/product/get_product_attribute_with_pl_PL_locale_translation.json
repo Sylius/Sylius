@@ -1,0 +1,10 @@
+{
+    "@context": "\/api\/v2\/contexts\/ProductAttribute",
+    "@id": "\/api\/v2\/shop\/product-attributes\/dishwasher_safe",
+    "@type": "ProductAttribute",
+    "id": @integer@,
+    "code": "dishwasher_safe",
+    "type": "checkbox",
+    "position": @integer@,
+    "name": "mozna myc w zmywarce"
+}

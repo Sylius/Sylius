@@ -1,0 +1,29 @@
+sylius_admin_ajax_product_options_by_phrase:
+    path: /search-phrase
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.product_option::indexAction
+        _format: json
+        _sylius:
+            serialization_groups: [Autocomplete]
+            permission: true
+            repository:
+                method: findByPhrase
+                arguments:
+                    phrase: $phrase
+                    locale: expr:service('sylius.context.locale').getLocaleCode()
+                    limit: "!!int %sylius.ajax.product.option_autocomplete_limit%"
+
+sylius_admin_ajax_find_product_options:
+    path: /options
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.product_option::indexAction
+        _format: json
+        _sylius:
+            serialization_groups: [Autocomplete]
+            permission: true
+            repository:
+                method: findByCodes
+                arguments:
+                    codes: $code

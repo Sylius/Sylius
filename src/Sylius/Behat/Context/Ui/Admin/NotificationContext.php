@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -64,6 +64,18 @@ final class NotificationContext implements Context
     }
 
     /**
+     * @Then I should be notified that the removal operation has started successfully
+     */
+    public function iShouldBeNotifiedThatTheRemovalOperationHasStartedSuccessfully(): void
+    {
+        $this->testHelper->waitUntilNotificationPopups(
+            $this->notificationChecker,
+            NotificationType::success(),
+            'has been requested. This process can take a while depending on the number of affected products.',
+        );
+    }
+
+    /**
      * @Then I should be notified that it has been failed deleted :name
      */
     public function iShouldBeNotifiedThatItHasBeenFailedDeleted(string $name): void
@@ -71,7 +83,7 @@ final class NotificationContext implements Context
         $this->testHelper->waitUntilNotificationPopups(
             $this->notificationChecker,
             NotificationType::failure(),
-            'Cannot delete, the ' . $name . ' is in use.',
+            'Cannot delete, the ' . ucfirst($name) . ' is in use.',
         );
     }
 }

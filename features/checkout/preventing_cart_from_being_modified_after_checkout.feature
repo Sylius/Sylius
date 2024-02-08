@@ -8,8 +8,8 @@ Feature: Preventing cart from being modified after checkout
         Given the store operates on a single channel in "United States"
         And the store has a product "Sig Sauer P226" priced at "$499.99"
         And the store has a product "AK-47" priced at "$99.99"
-        And the store ships everywhere for free
-        And the store ships everywhere with ups
+        And the store ships everywhere for Free
+        And the store ships everywhere with "UPS"
         And the store allows paying with "Cash on Delivery"
         And the store also allows paying with "Helicopter Money"
         And I am a logged in customer

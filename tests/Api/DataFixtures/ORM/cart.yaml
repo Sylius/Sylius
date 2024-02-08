@@ -28,21 +28,55 @@ Sylius\Component\Core\Model\ProductVariant:
         product: '@product_mug'
         currentLocale: 'en_US'
         translations:
-            en_US: '@product_variant_translation_mug'
+            en_US: '@product_variant_translation_mug_blue'
         optionValues: ['@product_option_value_color_blue']
         channelPricings:
             WEB: '@channel_pricing_product_variant_mug_blue_web'
+    product_variant_mug_nft:
+        channelPricings:
+            WEB: '@channel_pricing_product_variant_mug_nft_web'
+        code: 'MUG_NFT'
+        currentLocale: 'en_US'
+        optionValues: ['@product_option_value_color_blue']
+        product: '@product_mug'
+        shippingRequired: false
+        translations:
+            en_US: '@product_variant_translation_mug_nft'
+    product_variant_free_mug_nft:
+        channelPricings:
+            WEB: '@channel_pricing_product_variant_free_mug_nft_web'
+        code: 'MUG_NFT_FREE'
+        currentLocale: 'en_US'
+        optionValues: ['@product_option_value_color_blue']
+        product: '@product_mug'
+        shippingRequired: false
+        translations:
+            en_US: '@product_variant_translation_free_mug_nft'
 
 Sylius\Component\Product\Model\ProductVariantTranslation:
-    product_variant_translation_mug:
+    product_variant_translation_mug_blue:
         locale: 'en_US'
         name: 'Blue Mug'
         translatable: '@product_variant_mug_blue'
+    product_variant_translation_mug_nft:
+        locale: 'en_US'
+        name: 'NFT Mug'
+        translatable: '@product_variant_mug_nft'
+    product_variant_translation_free_mug_nft:
+        locale: 'en_US'
+        name: 'NFT Mug'
+        translatable: '@product_variant_free_mug_nft'
 
 Sylius\Component\Core\Model\ChannelPricing:
     channel_pricing_product_variant_mug_blue_web:
         channelCode: 'WEB'
         price: 2000
+    channel_pricing_product_variant_mug_nft_web:
+        channelCode: 'WEB'
+        price: 3000
+    channel_pricing_product_variant_free_mug_nft_web:
+        channelCode: 'WEB'
+        price: 0
 
 Sylius\Component\Product\Model\ProductOption:
     product_option_color:

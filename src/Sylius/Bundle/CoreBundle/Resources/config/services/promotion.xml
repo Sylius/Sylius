@@ -4,7 +4,7 @@
 
  This file is part of the Sylius package.
 
- (c) Paweł Jędrzejewski
+ (c) Sylius Sp. z o.o.
 
  For the full copyright and license information, please view the LICENSE
  file that was distributed with this source code.
@@ -121,6 +121,18 @@
         </service>
 
         <service id="sylius.promotion_rule_updater.total_of_items_from_taxon" class="Sylius\Component\Core\Promotion\Updater\Rule\TotalOfItemsFromTaxonRuleUpdater">
+            <argument type="service" id="sylius.repository.promotion_rule" />
+        </service>
+
+        <service id="Sylius\Component\Core\Promotion\Updater\Rule\ContainsProductRuleUpdater">
+            <argument type="service" id="sylius.repository.promotion_rule" />
+        </service>
+
+        <service id="Sylius\Component\Core\Promotion\Checker\ProductInPromotionRuleCheckerInterface" class="Sylius\Component\Core\Promotion\Checker\ProductInPromotionRuleChecker">
+            <argument type="service" id="sylius.repository.promotion_rule" />
+        </service>
+
+        <service id="Sylius\Component\Core\Promotion\Checker\TaxonInPromotionRuleCheckerInterface" class="Sylius\Component\Core\Promotion\Checker\TaxonInPromotionRuleChecker">
             <argument type="service" id="sylius.repository.promotion_rule" />
         </service>
     </services>

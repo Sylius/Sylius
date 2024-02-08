@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -80,13 +80,15 @@ final class BuildAttributesFormSubscriber implements EventSubscriberInterface
         }
     }
 
-    private function resolveLocalizedAttributes(ProductInterface $product, ProductAttributeValueInterface $attribute): void
+    private function resolveLocalizedAttributes(ProductInterface $product, ProductAttributeValueInterface $productAttributeValue): void
     {
         $localeCodes = $this->localeProvider->getDefinedLocalesCodes();
 
         foreach ($localeCodes as $localeCode) {
-            if (!$product->hasAttributeByCodeAndLocale($attribute->getCode(), $localeCode)) {
-                $attributeValue = $this->createProductAttributeValue($attribute->getAttribute(), $localeCode);
+            if (!$product->hasAttributeByCodeAndLocale($productAttributeValue->getCode(), $localeCode)) {
+                $attribute = $productAttributeValue->getAttribute();
+                Assert::isInstanceOf($attribute, ProductAttributeInterface::class);
+                $attributeValue = $this->createProductAttributeValue($attribute, $localeCode);
                 $product->addAttribute($attributeValue);
             }
         }

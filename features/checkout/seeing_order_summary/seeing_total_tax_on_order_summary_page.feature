@@ -9,8 +9,8 @@ Feature: Seeing tax total on order summary page
         And the store has "VAT" tax rate of 23% for "Clothes" within the "US" zone
         And the store has a product "The Sorting Hat" priced at "$100.00"
         And it belongs to "Clothes" tax category
-        And the store ships everywhere for free
-        And the store allows paying offline
+        And the store ships everywhere for Free
+        And the store allows paying Offline
         And I am a logged in customer
 
     @ui @api

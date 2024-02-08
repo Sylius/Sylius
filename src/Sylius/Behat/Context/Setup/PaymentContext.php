@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -18,6 +18,7 @@ use Doctrine\Persistence\ObjectManager;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\ExampleFactoryInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
+use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\PaymentMethodInterface;
 use Sylius\Component\Payment\Model\PaymentMethodTranslationInterface;
@@ -44,6 +45,21 @@ final class PaymentContext implements Context
     public function storeAllowsPaying($paymentMethodName, $position = null)
     {
         $this->createPaymentMethod($paymentMethodName, 'PM_' . StringInflector::nameToCode($paymentMethodName), 'Offline', 'Payment method', true, $position);
+    }
+
+    /**
+     * @Given the store has disabled all payment methods
+     */
+    public function theStoreHasDisabledAllPaymentMethods(): void
+    {
+        $paymentMethods = $this->paymentMethodRepository->findAll();
+
+        /** @var PaymentMethodInterface $paymentMethod */
+        foreach ($paymentMethods as $paymentMethod) {
+            $paymentMethod->setEnabled(false);
+        }
+
+        $this->paymentMethodManager->flush();
     }
 
     /**
@@ -103,6 +119,7 @@ final class PaymentContext implements Context
     /**
      * @Given the payment method :paymentMethod is disabled
      * @Given /^(this payment method) has been disabled$/
+     * @When the payment method :paymentMethod gets disabled
      */
     public function theStoreHasAPaymentMethodDisabled(PaymentMethodInterface $paymentMethod)
     {
@@ -139,6 +156,22 @@ final class PaymentContext implements Context
         $paymentMethod->setGatewayConfig($config);
 
         $this->paymentMethodManager->flush();
+    }
+
+    /**
+     * @Given the store allows paying with :paymentMethodName in :channel channel
+     */
+    public function theStoreAllowsPayingWithInChannel(string $paymentMethodName, ChannelInterface $channel): void
+    {
+        $paymentMethod = $this->createPaymentMethod(
+            $paymentMethodName,
+            StringInflector::nameToUppercaseCode($paymentMethodName),
+            'Offline',
+            'Payment method',
+            false,
+        );
+
+        $paymentMethod->addChannel($channel);
     }
 
     /**

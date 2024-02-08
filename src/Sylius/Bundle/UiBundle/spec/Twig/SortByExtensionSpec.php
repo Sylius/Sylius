@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -17,12 +17,13 @@ use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\UiBundle\spec\Fixtures\SampleInterface;
 use Symfony\Component\PropertyAccess\Exception\NoSuchPropertyException;
+use Twig\Extension\ExtensionInterface;
 
 final class SortByExtensionSpec extends ObjectBehavior
 {
     function it_extends_twig_extensions(): void
     {
-        $this->shouldHaveType(\Twig_Extension::class);
+        $this->shouldImplement(ExtensionInterface::class);
     }
 
     function it_sorts_in_ascending_order_by_default(

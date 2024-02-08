@@ -163,16 +163,9 @@ Decrease
     $product->getOnHand(); // Output will be 4.
 
 .. caution::
-    All methods in **InventoryOperator** throw `InvalidArgumentException`_ or `InsufficientStockException`_ if an error occurs.
-
-.. _InsufficientStockException: http://api.sylius.com/Sylius/Component/Inventory/Operator/InsufficientStockException.html
+    All methods in **InventoryOperator** throw `InvalidArgumentException`_ or `InsufficientStockException` if an error occurs.
 
 .. _InvalidArgumentException: https://php.net/manual/en/class.invalidargumentexception.php
-
-.. note::
-    For more detailed information go to `Sylius API InventoryOperator`_.
-
-.. _Sylius API InventoryOperator: http://api.sylius.com/Sylius/Component/Inventory/Operator/InventoryOperator.html
 
 .. hint::
     To understand how events work check `Symfony EventDispatcher`_.
@@ -190,11 +183,6 @@ In some cases, you may want to have unlimited inventory, this operator will allo
     This operator is based on the null object pattern. For more detailed information go to `Null Object pattern`_.
 
 .. _Null Object pattern: https://en.wikipedia.org/wiki/Null_Object_pattern
-
-.. note::
-    For more detailed information go to `Sylius API NoopInventoryOperator`_.
-
-.. _Sylius API NoopInventoryOperator: http://api.sylius.com/Sylius/Component/Inventory/Operator/NoopInventoryOperator.html
 
 .. _component_inventory_checker_availability-checker:
 
@@ -244,8 +232,3 @@ The **InventoryUnitFactory** creates a collection of new inventory units.
     $inventoryUnits[0]->getStockable(); // Output will be your's stockable model.
     $inventoryUnits[0]->getInventoryState(); // Output will be 'returned'.
     count($inventoryUnits); // Output will be 10.
-
-.. note::
-    For more detailed information go to `Sylius API InventoryUnitFactory`_.
-
-.. _Sylius API InventoryUnitFactory: http://api.sylius.com/Sylius/Component/Inventory/Factory/InventoryUnitFactory.html

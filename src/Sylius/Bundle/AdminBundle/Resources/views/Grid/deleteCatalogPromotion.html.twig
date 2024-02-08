@@ -1,0 +1,15 @@
+{% set path = options.link.url|default(path(options.link.route, options.link.parameters)) %}
+
+<form action="{{ path }}" method="post">
+    <button
+        {% if options.state == 'processing' %} disabled {% endif %}
+        class="ui labeled {% if options.state != 'processing' %}red {% endif %}icon button"
+        type="submit"
+        data-requires-confirmation {{ sylius_test_html_attribute('delete-button') }}
+    >
+        <i class="icon {% if action.icon is not empty %} {{ action.icon }} {% else %}trash{% endif %}"></i>
+        {% if action.label is not empty %} {{ action.label|trans }} {% else %} {{ 'sylius.ui.delete'|trans }} {% endif %}
+    </button>
+    <input type="hidden" name="_csrf_token" value="{{ csrf_token(options.link.parameters.code) }}" />
+    <input type="hidden" name="_method" value="DELETE"/>
+</form>

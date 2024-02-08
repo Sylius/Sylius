@@ -4,7 +4,7 @@
 
  This file is part of the Sylius package.
 
- (c) Paweł Jędrzejewski
+ (c) Sylius Sp. z o.o.
 
  For the full copyright and license information, please view the LICENSE
  file that was distributed with this source code.
@@ -44,6 +44,12 @@
             <argument type="service" id="sylius.repository.order" />
             <argument type="service" id="sylius.shipping_method_eligibility_checker" />
             <tag name="validator.constraint_validator" alias="sylius_api_validator_order_shipping_method_eligibility" />
+        </service>
+
+        <service id="Sylius\Bundle\ApiBundle\Validator\Constraints\CheckoutCompletionValidator">
+            <argument type="service" id="sylius.repository.order" />
+            <argument type="service" id="sm.factory" />
+            <tag name="validator.constraint_validator" alias="sylius_api_validator_checkout_completion" />
         </service>
 
         <service id="Sylius\Bundle\ApiBundle\Validator\Constraints\ChosenShippingMethodEligibilityValidator">
@@ -92,11 +98,6 @@
             <tag name="validator.constraint_validator" alias="sylius_api_confirm_reset_password" />
         </service>
 
-        <service id="Sylius\Bundle\ApiBundle\Validator\Constraints\PickupCartLocaleValidator">
-            <argument type="service" id="sylius.repository.channel" />
-            <tag name="validator.constraint_validator" alias="sylius_api_pickup_cart_locale" />
-        </service>
-
         <service id="Sylius\Bundle\ApiBundle\Validator\Constraints\PromotionCouponEligibilityValidator">
             <argument type="service" id="sylius.repository.promotion_coupon" />
             <argument type="service" id="sylius.repository.order" />
@@ -123,6 +124,12 @@
             <argument type="service" id="sylius.repository.shop_user" />
             <argument type="service" id="Sylius\Bundle\ApiBundle\Context\UserContextInterface" />
             <tag name="validator.constraint_validator" alias="sylius_api_unique_reviewer_email_validator" />
+        </service>
+
+        <service id="Sylius\Bundle\ApiBundle\Validator\Constraints\AdminResetPasswordTokenNonExpiredValidator">
+            <argument type="service" id="sylius.repository.admin_user" />
+            <argument type="string">%sylius.admin_user.token.password_reset.ttl%</argument>
+            <tag name="validator.constraint_validator" alias="sylius_api_validator_admin_non_expired_password_reset_token" />
         </service>
 
         <service id="Sylius\Bundle\ApiBundle\Validator\CatalogPromotion\PercentageDiscountActionValidator">

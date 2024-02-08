@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -14,12 +14,13 @@ declare(strict_types=1);
 namespace Sylius\Bundle\ApiBundle\Validator\Constraints;
 
 use Sylius\Bundle\ApiBundle\Command\Cart\ChangeItemQuantityInCart;
+use Sylius\Bundle\ApiBundle\Exception\OrderItemNotFoundException;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\Model\ProductInterface;
+use Sylius\Component\Core\Repository\OrderItemRepositoryInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Inventory\Checker\AvailabilityCheckerInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 use Webmozart\Assert\Assert;
@@ -27,7 +28,7 @@ use Webmozart\Assert\Assert;
 final class ChangedItemQuantityInCartValidator extends ConstraintValidator
 {
     public function __construct(
-        private RepositoryInterface $orderItemRepository,
+        private OrderItemRepositoryInterface $orderItemRepository,
         private OrderRepositoryInterface $orderRepository,
         private AvailabilityCheckerInterface $availabilityChecker,
     ) {
@@ -41,8 +42,14 @@ final class ChangedItemQuantityInCartValidator extends ConstraintValidator
         Assert::isInstanceOf($constraint, ChangedItemQuantityInCart::class);
 
         /** @var OrderItemInterface|null $orderItem */
-        $orderItem = $this->orderItemRepository->findOneBy(['id' => $value->orderItemId]);
-        Assert::notNull($orderItem);
+        $orderItem = $this->orderItemRepository->findOneByIdAndCartTokenValue(
+            $value->orderItemId,
+            $value->orderTokenValue,
+        );
+
+        if ($orderItem === null) {
+            throw new OrderItemNotFoundException();
+        }
 
         $productVariant = $orderItem->getVariant();
 

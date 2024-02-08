@@ -3,85 +3,30 @@
 This document explains why certain conflicts were added to `composer.json` and
 references related issues.
 
- - `symfony/cache": "^6.0`, "symfony/amqp-messenger": "^6.0", "symfony/doctrine-messenger": "^6.0", 
-"symfony/error-handler": "^6.0", "symfony/redis-messenger": "^6.0", "symfony/stopwatch": "^6.0", "symfony/twig-bridge": "^6.0", 
-"symfony/var-dumper": "^6.0", "symfony/var-exporter": "^6.0",:
-
-   These libraries still happen to be installed with Sylius if no flex is used. As we don't support Sf6 yet they are conflicted. Installation of symfony/cache v6.0 results with following error:
-   ```
-   Uncaught Error: Class "Symfony\Component\Cache\DoctrineProvider" not found
-   ```
-   
- - `symfony/password-hasher": "^6.0`:
-
-   Symfony in version 5.3 change password hashing logic, and in version 6.0 they removed BC layer
-   
-   References: https://github.com/Sylius/Sylius/pull/13358
-
  - `doctrine/doctrine-bundle:2.3.0`:
 
    This version makes Gedmo Doctrine Extensions fail (tree and position behaviour mostly).
 
    References: https://github.com/doctrine/DoctrineBundle/issues/1305
 
- - `jms/serializer-bundle:3.9`:
+ - `jms/serializer-bundle:4.1.0`:
 
-   This version automatically registered DocBlockDriver, which is always turned on, while docblocks used in our code are not usable with it. Sample error:
-   `Can't use incorrect type object for collection in Doctrine\ORM\PersistentCollection:owner`
+   This version contains service with a wrong constructor arguments:
+   `Invalid definition for service ".container.private.profiler": argument 4 of "JMS\SerializerBundle\Debug\DataCollector::__construct()" accepts "JMS\SerializerBundle\Debug\TraceableDriver", "JMS\SerializerBundle\Debug\TraceableMetadataFactory" passed.`
 
-   References: https://github.com/schmittjoh/JMSSerializerBundle/issues/844
-
- - `symfony/serializer:4.4.19|5.2.2`:
-
-   These versions of Symfony Serializer introduces a bug with trying to access some private properties that don't have getters.
+   References: https://github.com/schmittjoh/JMSSerializerBundle/issues/902
+ 
+ - `symfony/dependency-injection:5.4.5`:
    
-   References: https://github.com/symfony/symfony/pull/40004
-
- - `symfony/property-info:4.4.22|5.2.7`:
-
-   These versions of Symfony PropertyInfo Component introduce a bug with resolving wrong namespace for some translation entities 
-   in Swagger UI docs for API.
-   
-   The potential solution would be to explicitly define these translation entities as API resources with proper serialization.
-
-   Probably introduced in: https://github.com/symfony/symfony/pull/40811
-
- - `symfony/dependency-injection:4.4.38|5.4.5`:
-   
-   These versions are causing a problem with mink session:
+   This version is causing a problem with mink session:
   `InvalidArgumentException: Specify session name to get in vendor/friends-of-behat/mink/src/Mink.php:198`,
-   Psalm error: 
-   `UndefinedDocblockClass: Docblock-defined class, interface or enum named UnitEnum does not exist`.
 
- - `symfony/framework-bundle:^4.4.38|^5.4.5`:
+ - `symfony/framework-bundle:5.4.5`:
 
-   These versions are causing a problem with returning null as token from `Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage`
+   This version is causing a problem with returning null as token from `Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage`
    which leads to wrong solving path prefix by `Sylius\Bundle\ApiBundle\Provider\PathPrefixProvider` in API scenarios
 
-In this section we keep track of the reasons, why some restrictions were added to the `requires` section of `composer.json`
-
-- `doctrine/dbal:^2`:
-
-  In `doctrine/dbal:^3` doctrine column type `json_array` has been removed creating error during a
-  doctrine migration
-
-   ```
-   Error:  Migration Sylius\Bundle\CoreBundle\Migrations\Version20201130071338
-   failed during Execution.
-   In Exception.php line 125:
-   Unknown column type "json_array" requested. Any Doctrine type that you use   
-   has to be registered with \Doctrine\DBAL\Types\Type::addType(). You can get  
-   a list of all the known types with \Doctrine\DBAL\Types\Type::getTypesMap(  
-   ). If this error occurs during database introspection then you might have f  
-   orgotten to register all database types for a Doctrine Type. Use AbstractPl  
-   atform#registerDoctrineTypeMapping() or have your custom types implement Ty  
-   pe#getMappedDatabaseTypes(). If the type name is empty you might have a pro  
-   blem with the cache or forgot some mapping information.
-   ```
-
-  References: https://github.com/Sylius/Sylius/issues/13211
-
-- `api-platform/core:2.7.0`:
+ - `api-platform/core:2.7.0`:
 
    The FQCN of `ApiPlatform\Core\Metadata\Resource\ResourceNameCollection` has changed to:
    `ApiPlatform\Metadata\Resource\ResourceNameCollection` and due to this fact
@@ -89,17 +34,37 @@ In this section we keep track of the reasons, why some restrictions were added t
    references this class throws an exception
   `Class "ApiPlatform\Core\Metadata\Resource\ResourceNameCollection" not found`
 
-- `polishsymfonycommunity/symfony-mocker-container:1.0.6`:
-
-  ```
-  PHP Fatal error:  Declaration of PSS\SymfonyMockerContainer\DependencyInjection\MockerContainer::has(string $id): bool 
-  must be compatible with Symfony\Component\DependencyInjection\Container::has($id) 
-  in /home/runner/work/Sylius/Sylius/vendor/polishsymfonycommunity/symfony-mocker-container/src/DependencyInjection/MockerContainer.php on line 64
-  ```
-
-  References: https://github.com/PolishSymfonyCommunity/SymfonyMockerContainer/issues/20
-
 - `doctrine/migrations:3.5.3`:
 
   This version is causing a problem with migrations and results in throwing a `Doctrine\Migrations\Exception\MetadataStorageError` exception e.g. when executing `sylius:install` command.
   References: https://github.com/doctrine/migrations/issues/1302
+
+- `lexik/jwt-authentication-bundle: ^2.18`
+
+  After bumping to this version ApiBundle starts failing due to requesting a non-existing `api_platform.openapi.factory.legacy` service.
+  As we are not using this service across the ApiBundle we added this conflict to unlock the builds, until we investigate the problem.
+
+- `symfony/framework-bundle:6.2.8`:
+
+  This version is missing the service alias `validator.expression`
+  which causes ValidatorException exception to be thrown when using `Expression` constraint. 
+
+- `doctrine/orm:>= 2.16.0`
+
+  This version makes Sylius Fixtures loading fail on the product review fixtures.
+  References: https://github.com/doctrine/orm/issues/10869
+
+- `symfony/validator:5.4.25 || 6.2.12 || 6.3.1`
+
+  This version introduced a bug, causing validation constraints to not work.
+  References: https://github.com/symfony/symfony/issues/50780
+
+- `stof/doctrine-extensions-bundle:1.8.0`
+
+  This version introduced configuring the metadata cache for the extensions, what breaks the `Timestampable` behaviour.
+  This package is not exactly the root of the problem, but it started using a bugged feature of the `gedmo/doctrine-extensions` package.
+
+  References:
+
+    - https://github.com/stof/StofDoctrineExtensionsBundle/issues/455
+    - https://github.com/doctrine-extensions/DoctrineExtensions/issues/2600

@@ -1,10 +1,15 @@
 sylius_grid:
+    templates:
+        action:
+            delete_catalog_promotion: "@SyliusAdmin/Grid/deleteCatalogPromotion.html.twig"
     grids:
         sylius_admin_catalog_promotion:
             driver:
                 name: doctrine/orm
                 options:
                     class: "%sylius.model.catalog_promotion.class%"
+            sorting:
+                code: asc
             fields:
                 code:
                     type: string
@@ -46,6 +51,41 @@ sylius_grid:
                     sortable: ~
                     options:
                         template: "@SyliusUi/Grid/Field/enabled.html.twig"
+            filters:
+                search:
+                    type: string
+                    label: sylius.ui.search
+                    form_options:
+                        type: contains
+                    options:
+                        fields: [name, code]
+                channel:
+                    type: entities
+                    label: sylius.ui.channel
+                    form_options:
+                        class: "%sylius.model.channel.class%"
+                    options:
+                        field: channels.id
+                startDate:
+                    type: date
+                    label: sylius.ui.start_date
+                    options:
+                        inclusive_to: true
+                endDate:
+                    type: date
+                    label: sylius.ui.end_date
+                    options:
+                        inclusive_to: true
+                enabled:
+                    type: boolean
+                    label: sylius.ui.enabled
+                state:
+                    type: select
+                    label: sylius.ui.state
+                    form_options:
+                        choices:
+                            sylius.ui.active: !php/const Sylius\Component\Promotion\Model\CatalogPromotionStates::STATE_ACTIVE
+                            sylius.ui.inactive: !php/const Sylius\Component\Promotion\Model\CatalogPromotionStates::STATE_INACTIVE
             actions:
                 main:
                     create:
@@ -53,5 +93,21 @@ sylius_grid:
                 item:
                     show:
                         type: show
+                    show_variants:
+                        type: show
+                        label: sylius.ui.list_variants
+                        options:
+                            link:
+                                route: sylius_admin_catalog_promotion_product_variant_index
+                                parameters:
+                                    id: resource.id
                     update:
                         type: update
+                    delete:
+                        type: delete_catalog_promotion
+                        options:
+                            link:
+                                route: sylius_admin_catalog_promotion_delete
+                                parameters:
+                                    code: resource.code
+                            state: resource.state

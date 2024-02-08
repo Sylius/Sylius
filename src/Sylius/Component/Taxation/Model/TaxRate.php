@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -39,6 +39,10 @@ class TaxRate implements TaxRateInterface
 
     /** @var string|null */
     protected $calculator;
+
+    protected ?\DateTimeInterface $startDate = null;
+
+    protected ?\DateTimeInterface $endDate = null;
 
     public function __construct()
     {
@@ -80,7 +84,6 @@ class TaxRate implements TaxRateInterface
         $this->name = $name;
     }
 
-    /** @psalm-suppress RedundantCastGivenDocblockType */
     public function getAmount(): float
     {
         return (float) $this->amount;
@@ -119,5 +122,25 @@ class TaxRate implements TaxRateInterface
     public function getLabel(): ?string
     {
         return sprintf('%s (%s%%)', $this->name, $this->getAmountAsPercentage());
+    }
+
+    public function getStartDate(): ?\DateTimeInterface
+    {
+        return $this->startDate;
+    }
+
+    public function setStartDate(?\DateTimeInterface $startDate): void
+    {
+        $this->startDate = $startDate;
+    }
+
+    public function getEndDate(): ?\DateTimeInterface
+    {
+        return $this->endDate;
+    }
+
+    public function setEndDate(?\DateTimeInterface $endDate): void
+    {
+        $this->endDate = $endDate;
     }
 }

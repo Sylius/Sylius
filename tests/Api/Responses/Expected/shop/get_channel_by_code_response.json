@@ -1,0 +1,14 @@
+{
+    "@context": "\/api\/v2\/contexts\/Channel",
+    "@id": "\/api\/v2\/shop\/channels\/WEB",
+    "@type": "Channel",
+    "baseCurrency": "\/api\/v2\/shop\/currencies\/USD",
+    "defaultLocale": "\/api\/v2\/shop\/locales\/en_US",
+    "currencies": [],
+    "locales": [
+        "\/api\/v2\/shop\/locales\/en_US",
+        "\/api\/v2\/shop\/locales\/pl_PL"
+    ],
+    "code": "WEB",
+    "name": "Web Channel"
+}

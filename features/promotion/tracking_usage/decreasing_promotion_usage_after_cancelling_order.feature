@@ -7,7 +7,7 @@ Feature: Decreasing a promotion usage after cancelling an order
     Background:
         Given the store operates on a single channel in "United States"
         And the store has a product "PHP T-Shirt"
-        And the store ships everywhere for free
+        And the store ships everywhere for Free
         And the store allows paying with "Cash on Delivery"
         And there is a promotion "Limited promotion" limited to 5 usages
         And I am logged in as an administrator

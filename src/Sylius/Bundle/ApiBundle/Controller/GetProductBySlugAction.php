@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -15,12 +15,14 @@ namespace Sylius\Bundle\ApiBundle\Controller;
 
 use ApiPlatform\Core\Api\IriConverterInterface;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
+use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Repository\ProductRepositoryInterface;
 use Sylius\Component\Locale\Context\LocaleContextInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Webmozart\Assert\Assert;
 
 final class GetProductBySlugAction
 {
@@ -36,6 +38,7 @@ final class GetProductBySlugAction
     public function __invoke(string $slug): RedirectResponse
     {
         $channel = $this->channelContext->getChannel();
+        Assert::isInstanceOf($channel, ChannelInterface::class);
         $locale = $this->localeContext->getLocaleCode();
 
         $product = $this->productRepository->findOneByChannelAndSlug($channel, $locale, $slug);

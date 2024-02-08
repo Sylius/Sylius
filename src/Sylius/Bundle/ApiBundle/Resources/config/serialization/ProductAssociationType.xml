@@ -4,7 +4,7 @@
 
  This file is part of the Sylius package.
 
- (c) Paweł Jędrzejewski
+ (c) Sylius Sp. z o.o.
 
  For the full copyright and license information, please view the LICENSE
  file that was distributed with this source code.
@@ -18,19 +18,24 @@
     <class name="Sylius\Component\Product\Model\ProductAssociationType">
         <attribute name="id">
             <group>admin:product_association_type:read</group>
+            <group>shop:product_association_type:read</group>
         </attribute>
         <attribute name="code">
             <group>admin:product_association_type:read</group>
             <group>admin:product_association_type:create</group>
+            <group>shop:product_association_type:read</group>
         </attribute>
         <attribute name="name">
             <group>admin:product_association_type:read</group>
+            <group>shop:product_association_type:read</group>
         </attribute>
         <attribute name="createdAt">
             <group>admin:product_association_type:read</group>
+            <group>shop:product_association_type:read</group>
         </attribute>
         <attribute name="updatedAt">
             <group>admin:product_association_type:read</group>
+            <group>shop:product_association_type:read</group>
         </attribute>
         <attribute name="translations">
             <group>admin:product_association_type:read</group>

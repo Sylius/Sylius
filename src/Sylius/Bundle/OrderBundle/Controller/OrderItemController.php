@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -51,11 +51,12 @@ class OrderItemController extends ResourceController
             $configuration->getFormOptions(),
         );
 
-        if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
+        if ($request->isMethod('POST') && $form->handleRequest($request)->isSubmitted() && $form->isValid()) {
             /** @var AddToCartCommandInterface $addToCartCommand */
             $addToCartCommand = $form->getData();
+            [$cart, $orderItem] = [$addToCartCommand->getCart(), $addToCartCommand->getCartItem()];
 
-            $errors = $this->getCartItemErrors($addToCartCommand->getCartItem());
+            $errors = $this->getCartItemErrors($orderItem);
             if (0 < count($errors)) {
                 $form = $this->getAddToCartFormWithErrors($errors, $form);
 
@@ -73,11 +74,13 @@ class OrderItemController extends ResourceController
                 return $this->redirectHandler->redirectToIndex($configuration, $orderItem);
             }
 
-            $this->getOrderModifier()->addToOrder($addToCartCommand->getCart(), $addToCartCommand->getCartItem());
+            $this->getOrderModifier()->addToOrder($cart, $orderItem);
 
             $cartManager = $this->getCartManager();
             $cartManager->persist($cart);
             $cartManager->flush();
+
+            $orderItem = $this->resolveAddedOrderItem($cart, $orderItem);
 
             $resourceControllerEvent = $this->eventDispatcher->dispatchPostEvent(CartActions::ADD, $configuration, $orderItem);
             if ($resourceControllerEvent->hasResponse()) {
@@ -241,5 +244,10 @@ class OrderItemController extends ResourceController
             $configuration,
             View::create($form, Response::HTTP_BAD_REQUEST)->setData(['errors' => $form->getErrors(true, true)]),
         );
+    }
+
+    protected function resolveAddedOrderItem(OrderInterface $order, OrderItemInterface $item): OrderItemInterface
+    {
+        return $order->getItems()->filter(fn (OrderItemInterface $orderItem): bool => $orderItem->equals($item))->first();
     }
 }

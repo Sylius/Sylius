@@ -1,5 +1,5 @@
 # This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
+# (c) Sylius Sp. z o.o.
 
 sylius_ui:
     events:
@@ -20,7 +20,7 @@ sylius_ui:
                 pagination:
                     template: "@SyliusUi/Grid/Body/_pagination.html.twig"
                     priority: 10
-        
+
         sylius.grid.filters:
             blocks:
                 content:
@@ -40,6 +40,9 @@ sylius_ui:
                 error:
                     template: "@SyliusUi/Security/_error.html.twig"
                     priority: 10
+                flashes:
+                    template: "@SyliusUi/_flashes.html.twig"
+                    priority: 0
 
         sylius.admin.login.form.content:
             blocks:

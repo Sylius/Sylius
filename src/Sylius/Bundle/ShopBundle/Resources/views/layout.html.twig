@@ -8,6 +8,9 @@
     <title>{% block title %}{{ sylius.channel.name }}{% endblock %}</title>
 
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
 
     {% block metatags %}
     {% endblock %}
@@ -21,10 +24,11 @@
 
 <body class="pushable">
 {{ sylius_template_event('sylius.shop.layout.before_body') }}
-<div class="pusher">
+<div class="pusher" data-route="{{ app.request.get('_route') }}">
     {% block top %}
-        <div id="menu" class="ui large sticky inverted stackable menu">
-            {{ sylius_template_event('sylius.shop.layout.topbar') }}
+        <div id="menu" class="top-menu">
+            <a href="#" class="top-menu__link">{{ 'sylius.top_bar'|trans }}</a>
+            <div class="top-bar">{{ sylius_template_event('sylius.shop.layout.topbar') }}</div>
         </div>
     {% endblock %}
 

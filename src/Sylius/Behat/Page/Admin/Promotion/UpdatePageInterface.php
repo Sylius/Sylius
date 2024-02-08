@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -50,4 +50,18 @@ interface UpdatePageInterface extends BaseUpdatePageInterface
     public function hasAnyRule(): bool;
 
     public function hasRule(string $name): bool;
+
+    public function removeActionFieldValue(string $channelCode, string $field): void;
+
+    public function getItemPercentageDiscountActionValue(string $channelCode): string;
+
+    public function specifyOrderPercentageDiscountActionValue(string $discount): void;
+
+    public function getOrderPercentageDiscountActionValue(): string;
+
+    public function removeRuleAmount(string $channelCode): void;
+
+    public function getActionValidationErrorsCount(string $channelCode): int;
+
+    public function getRuleValidationErrorsCount(string $channelCode): int;
 }

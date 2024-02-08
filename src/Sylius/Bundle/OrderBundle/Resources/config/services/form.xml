@@ -4,7 +4,7 @@
 
  This file is part of the Sylius package.
 
- (c) Paweł Jędrzejewski
+ (c) Sylius Sp. z o.o.
 
  For the full copyright and license information, please view the LICENSE
  file that was distributed with this source code.
@@ -33,9 +33,7 @@
         <service id="sylius.form.data_mapper.order_item_quantity" class="Sylius\Bundle\OrderBundle\Form\DataMapper\OrderItemQuantityDataMapper">
             <argument type="service" id="sylius.order_item_quantity_modifier" />
             <argument type="service">
-                <service class="Symfony\Component\Form\Extension\Core\DataMapper\PropertyPathMapper">
-                    <argument type="service" id="property_accessor" />
-                </service>
+                <service class="\Symfony\Component\Form\Extension\Core\DataMapper\DataMapper" />
             </argument>
         </service>
 

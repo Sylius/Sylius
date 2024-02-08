@@ -1,5 +1,5 @@
 # This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
+# (c) Sylius Sp. z o.o.
 
 sylius:
     avatar_image:
@@ -87,8 +87,8 @@ sylius:
     user:
         email:
             unique: Bu e-posta adresi zaten kullanılmakta.
-            min: E-posta en az {{ min }} karakterden oluşmalıdır.
-            max: E-posta en fazla {{ max }} karakterden oluşmalıdır.
+            min: E-posta en az {{ limit }} karakterden oluşmalıdır.
+            max: E-posta en fazla {{ limit }} karakterden oluşmalıdır.
             invalid: Bu e-posta geçerli değil.
         username:
             unique: Bu kullanıcı adı zaten kullanılıyor.

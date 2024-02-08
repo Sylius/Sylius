@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -95,11 +95,7 @@ class User implements UserInterface, \Stringable
      */
     protected $roles = [UserInterface::DEFAULT_ROLE];
 
-    /**
-     * @var Collection|UserOAuthInterface[]
-     *
-     * @psalm-var Collection<array-key, UserOAuthInterface>
-     */
+    /** @var Collection<array-key, UserOAuthInterface> */
     protected $oauthAccounts;
 
     /** @var string|null */
@@ -124,7 +120,6 @@ class User implements UserInterface, \Stringable
         $this->enabled = false;
     }
 
-    /** @psalm-suppress RedundantCastGivenDocblockType */
     public function __toString(): string
     {
         return (string) $this->getUsername();
@@ -173,6 +168,11 @@ class User implements UserInterface, \Stringable
     public function setUsernameCanonical(?string $usernameCanonical): void
     {
         $this->usernameCanonical = $usernameCanonical;
+    }
+
+    public function getUserIdentifier(): string
+    {
+        return (string) $this->usernameCanonical;
     }
 
     public function getSalt(): string
@@ -376,6 +376,11 @@ class User implements UserInterface, \Stringable
     public function setEncoderName(?string $encoderName): void
     {
         $this->encoderName = $encoderName;
+    }
+
+    public function getPasswordHasherName(): ?string
+    {
+        return $this->getEncoderName();
     }
 
     /**

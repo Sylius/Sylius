@@ -1,0 +1,21 @@
+# This file is part of the Sylius package.
+# (c) Sylius Sp. z o.o.
+
+default:
+    suites:
+        api_customer_requesting_contact:
+            contexts:
+                - sylius.behat.context.hook.doctrine_orm
+                - sylius.behat.context.hook.mailer
+
+                - sylius.behat.context.transform.shared_storage
+
+                - sylius.behat.context.setup.channel
+                - sylius.behat.context.setup.shop_api_security
+                - sylius.behat.context.setup.user
+
+                - sylius.behat.context.api.shop.contact
+                - sylius.behat.context.api.email
+
+            filters:
+                tags: "@requesting_contact&&@api"

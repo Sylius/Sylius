@@ -22,7 +22,15 @@ Feature: Resetting a password
         When I reset password for email "goodman@example.com" in "Polish (Poland)" locale
         Then an email with reset token should be sent to "goodman@example.com" in "Polish (Poland)" locale
 
-    @ui @email @api
+    @email @api @ui
+    Scenario: Notifying about sending reset instructions even when an account with email does not exist
+        When I want to reset password
+        And I specify customer email as "does-not-exist@example.com"
+        And I reset it
+        Then I should be notified that email with reset instruction has been sent
+        But "does-not-exist@example.com" should receive no emails
+
+    @ui @api
     Scenario: Changing my account password with token I received
         Given I have already received a resetting password email
         When I follow link on my email to reset my password
@@ -32,7 +40,7 @@ Feature: Resetting a password
         Then I should be notified that my password has been successfully reset
         And I should be able to log in as "goodman@example.com" with "newp@ssw0rd" password
 
-    @ui @email @api
+    @ui @api
     Scenario: Trying to change my account password twice with token I received
         Given I have already received a resetting password email
         When I follow link on my email to reset my password

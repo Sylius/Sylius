@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -20,9 +20,13 @@ interface AddressPageInterface extends SymfonyPageInterface
 {
     public function chooseDifferentShippingAddress(): void;
 
+    public function chooseDifferentBillingAddress(): void;
+
     public function checkInvalidCredentialsValidation(): bool;
 
     public function checkValidationMessageFor(string $element, string $message): bool;
+
+    public function checkFormValidationMessage(string $message): bool;
 
     public function specifyShippingAddress(AddressInterface $shippingAddress): void;
 

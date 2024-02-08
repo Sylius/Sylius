@@ -1,7 +1,26 @@
 # This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
+# (c) Sylius Sp. z o.o.
 
 sylius:
+    catalog_promotion:
+        code:
+            unique: Eine Katalog-Aktion mit diesem Code existiert bereits.
+            regex: Katalog-Aktions Code darf nur aus Buchstaben, Zahlen, Bindestrichen und Unterstrichen bestehen.
+            not_blank: Bitte geben Sie einen Code für die Katalog Promotion an.
+        date:
+            greater_than_start_date: Enddatum kann nicht vor dem Startdatum liegen.
+        name:
+            max_length: Katalog-Aktions Name muss länger als {{ limit }} Zeichen sein.
+            min_length: Katalog-Aktions Name muss mindestens {{ limit }} Zeichen lang sein.
+            not_blank: Bitte geben Sie einen Namen für die Katalog Aktion an.
+        state:
+            processing: Die Katalog Aktion kann nicht bearbeitet werden, da sie gerade verarbeitet wird.
+    catalog_promotion_action:
+        invalid_type: Katalog-Aktionen Typ ist ungültig. Bitte wählen Sie einen gültigen Typ aus.
+        percentage_discount:
+            not_in_range: Prozentualer Rabatt muss zwischen 0% und 100% liegen.
+            not_number_or_empty: Prozentualer Rabatt muss eine Zahl und darf nicht leer sein.
+            not_valid: Prozentualer Rabatt muss konfiguriert sein..
     promotion:
         code:
             unique: Eine Aktion mit diesem Kürzel existiert bereits.

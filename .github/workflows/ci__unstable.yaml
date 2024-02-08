@@ -1,0 +1,33 @@
+name: Continuous Integration (Unstable)
+
+on:
+    workflow_call:
+        inputs:
+            ignore-failure:
+                description: "Don't fail on error"
+                required: false
+                type: boolean
+                default: false
+    workflow_dispatch:
+        inputs:
+            ignore-failure:
+                description: "Don't fail on error"
+                type: boolean
+                default: false
+
+concurrency:
+    group: ci-${{ github.workflow }}-${{ github.ref }}-unstable
+    cancel-in-progress: true
+
+jobs:
+    e2e-unstable:
+        name: End-to-end tests (Unstable)
+        uses: ./.github/workflows/ci_e2e-unstable.yaml
+        with:
+            ignore-failure: ${{ inputs.ignore-failure }}
+    packages-unstable:
+        name: Packages (Unstable)
+        uses: ./.github/workflows/ci_packages-unstable.yaml
+        with:
+            type: minimal
+            ignore-failure: ${{ inputs.ignore-failure }}

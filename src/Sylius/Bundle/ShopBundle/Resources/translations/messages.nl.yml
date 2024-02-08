@@ -1,12 +1,8 @@
 # This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
+# (c) Sylius Sp. z o.o.
 
 sylius:
     email:
-        contact_request:
-            content: 'Inhoud'
-            message_from: 'Bericht van'
-            subject: 'Contactverzoek'
         order_confirmation:
             has_been_successfully_placed: 'is met succes geplaatst.'
             subject: 'Order bevestiging'
@@ -31,7 +27,7 @@ sylius:
     homepage:
         about_us: 'Over ons'
         about_us_content: 'Welkom bij onze winkel, uw nummer één webwinkel die u de beste producten biedt. U kunt kiezen uit de allerbeste kleding en schoenen uit ons aanbod. (<i>U kunt deze inhoud wijzigen door de sleutel "sylius.homepage.about_us_content" in uw vertaalbestand te overschrijven</i>)'
-        carousel_header: 'Zet je schrap! De winter komt eraan'
+        banner_content: 'Zet je schrap! De winter komt eraan'
         newsletter: 'Nieuwsbrief'
         newsletter_description: 'Schrijf u in op onze nieuwsbrief om nieuwe aanbiedingen te zien die op u wachten! (<i>U kunt deze inhoud wijzigen door de sleutel "sylius.homepage.newsletter_description" in uw vertaalbestand te overschrijven</i>)'
         subscribe: 'Abonneren'

@@ -1,13 +1,13 @@
 # This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
+# (c) Sylius Sp. z o.o.
 
 parameters:
     env(SYLIUS_API_AUTHORIZATION_HEADER): Authorization
     sylius.api.authorization_header: "%env(resolve:SYLIUS_API_AUTHORIZATION_HEADER)%"
-    sylius.api.paths_to_hide: 
-        - "/api/v2/admin/catalog-promotion-actions/{id}"
-        - "/api/v2/admin/catalog-promotion-scopes/{id}"
-        - "/api/v2/admin/channel-pricings/{id}"
+    sylius.api.paths_to_hide:
+        - "%sylius.security.new_api_route%/admin/catalog-promotion-actions/{id}"
+        - "%sylius.security.new_api_route%/admin/catalog-promotion-scopes/{id}"
+        - "%sylius.security.new_api_route%/admin/channel-pricings/{id}"
     sylius.security.new_api_route: "/api/v2"
     sylius.security.new_api_regex: "^%sylius.security.new_api_route%"
     sylius.security.new_api_admin_route: "%sylius.security.new_api_route%/admin"
@@ -16,7 +16,7 @@ parameters:
     sylius.security.new_api_shop_regex: "^%sylius.security.new_api_shop_route%"
     sylius.security.new_api_user_account_route: "%sylius.security.new_api_shop_route%/account"
     sylius.security.new_api_user_account_regex: "^%sylius.security.new_api_user_account_route%"
-      
+
 sylius_api:
     filter_eager_loading_extension:
         restricted_resources:
@@ -35,11 +35,22 @@ api_platform:
                 name: "%sylius.api.authorization_header%"
                 type: header
     exception_to_status:
+        # Default API Platform exception to status code mapping
+        ApiPlatform\Exception\FilterValidationException: 400
+        ApiPlatform\Exception\InvalidArgumentException: 400
+        ApiPlatform\Validator\Exception\ValidationException: 422
+        Doctrine\ORM\OptimisticLockException: 409
+        Symfony\Component\Serializer\Exception\ExceptionInterface: 400
+
+        # Sylius exception to status code mapping
         SM\SMException: 422
         Sylius\Bundle\ApiBundle\Exception\CannotRemoveCurrentlyLoggedInUser: 422
+        Sylius\Bundle\ApiBundle\Exception\OrderItemNotFoundException: 422
+        Sylius\Bundle\ApiBundle\Exception\OrderNoLongerEligibleForPromotion: 422
+        Sylius\Bundle\ApiBundle\Exception\ProductCannotBeRemoved: 422
+        Sylius\Bundle\ApiBundle\Exception\ProvinceCannotBeRemoved: 422
         Sylius\Bundle\ApiBundle\Exception\ShippingMethodCannotBeRemoved: 422
         Sylius\Bundle\ApiBundle\Exception\ZoneCannotBeRemoved: 422
-        Sylius\Bundle\ApiBundle\Exception\ProvinceCannotBeRemoved: 422
         Symfony\Component\Serializer\Exception\MissingConstructorArgumentsException: 400
     collection:
         pagination:

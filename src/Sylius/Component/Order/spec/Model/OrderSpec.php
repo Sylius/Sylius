@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -158,6 +158,19 @@ final class OrderSpec extends ObjectBehavior
         $this->hasAdjustment($adjustment)->shouldReturn(false);
         $this->addAdjustment($adjustment);
         $this->hasAdjustment($adjustment)->shouldReturn(true);
+    }
+
+    function it_adds_adjustments_and_recalculates_them_properly(AdjustmentInterface $adjustment): void
+    {
+        $adjustment->setAdjustable($this)->shouldBeCalled();
+        $adjustment->isNeutral()->willReturn(false);
+
+        $adjustment->getAmount()->willReturn(100);
+
+        $this->hasAdjustment($adjustment)->shouldReturn(false);
+        $this->addAdjustment($adjustment);
+        $this->hasAdjustment($adjustment)->shouldReturn(true);
+        $this->getAdjustmentsTotal()->shouldReturn(100);
     }
 
     function it_removes_adjustments_properly(AdjustmentInterface $adjustment): void

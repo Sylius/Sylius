@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -69,14 +69,6 @@ final class ZoneMemberIntegrityListener
 
     private function getSession(): SessionInterface
     {
-        // bc-layer for Symfony 4
-        if (!method_exists(RequestStack::class, 'getSession')) {
-            $request = $this->requestStack->getMasterRequest();
-            Assert::notNull($request, 'No main request available to get a session !');
-
-            return $request->getSession();
-        }
-
         return $this->requestStack->getSession();
     }
 }

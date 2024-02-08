@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -204,7 +204,7 @@ final class ManagingTaxonsContext implements Context
     {
         $this->updatePage->open(['id' => $taxon->getId()]);
 
-        Assert::true($this->updatePage->hasResourceValues(['slug' => $slug]));
+        Assert::same($this->updatePage->getSlug(), $slug);
     }
 
     /**
@@ -387,7 +387,7 @@ final class ManagingTaxonsContext implements Context
     public function iShouldBeNotifiedThatICannotDeleteATaxonInUse(): void
     {
         $this->notificationChecker->checkNotification(
-            'Cannot delete, the taxon is in use.',
+            'Cannot delete, the Taxon is in use.',
             NotificationType::failure(),
         );
     }
@@ -414,6 +414,14 @@ final class ManagingTaxonsContext implements Context
     public function theFirstTaxonOnTheListShouldBe(string $taxonName)
     {
         Assert::same($this->createPage->getFirstTaxonOnTheList(), $taxonName);
+    }
+
+    /**
+     * @Then the last taxon on the list should be :taxonName
+     */
+    public function theLastTaxonOnTheListShouldBe(string $taxonName): void
+    {
+        Assert::same($this->createPage->getLastTaxonOnTheList(), $taxonName);
     }
 
     /**

@@ -4,7 +4,7 @@
 
  This file is part of the Sylius package.
 
- (c) Paweł Jędrzejewski
+ (c) Sylius Sp. z o.o.
 
  For the full copyright and license information, please view the LICENSE
  file that was distributed with this source code.
@@ -44,6 +44,12 @@
             <tag name="serializer.normalizer" priority="64" />
         </service>
 
+        <service id="Sylius\Bundle\ApiBundle\Serializer\ProductAttributeValueNormalizer">
+            <argument type="service" id="sylius.locale_provider.channel_based" />
+            <argument>%locale%</argument>
+            <tag name="serializer.normalizer" priority="64" />
+        </service>
+
         <service id="Sylius\Bundle\ApiBundle\Serializer\ProductImageNormalizer">
             <argument type="service" id="liip_imagine.cache.manager" />
             <argument type="service" id="request_stack" />
@@ -58,6 +64,7 @@
 
         <service id="Sylius\Bundle\ApiBundle\Serializer\CommandDenormalizer">
             <argument type="service" id="api_platform.serializer.normalizer.item" />
+            <argument type="service" id="api_platform.name_converter" />
             <tag name="serializer.normalizer" />
         </service>
 
@@ -80,6 +87,8 @@
             <argument type="service" id="sylius.repository.order" />
             <argument type="service" id="sylius.repository.shipment" />
             <argument type="service" id="sylius.registry.shipping_calculator" />
+            <argument type="service" id="Symfony\Component\HttpFoundation\RequestStack" />
+            <argument type="service" id="Sylius\Component\Channel\Context\ChannelContextInterface" />
             <tag name="serializer.normalizer" priority="64" />
         </service>
 

@@ -1,11 +1,27 @@
 # This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
+# (c) Sylius Sp. z o.o.
 
 sylius:
     avatar_image:
         file:
             max_size: Das Bild ist zu groß - {{ size }}{{ suffix }}. Maximal zulässige Größe {{ limit }}{{ suffix }}.
             upload_ini_size: Das Bild ist zu groß. Maximal zulässige Größe {{ limit }}{{ suffix }}.
+    catalog_promotion_action:
+        fixed_discount:
+            channel_not_configured: Die Konfiguration für einen der benötigten Ausgabekanäle ist nicht vorhanden.
+            invalid_channel: Die angegebene Konfiguration enthält Fehler. Mindestens einer der angegebenen Codes für Ausgabekanäle existiert nicht.
+            not_valid: Die angegebene Konfiguration enthält Fehler. Bitte geben Sie einen fixen Rabattbetrag größer 0 an.
+    catalog_promotion_scope:
+        invalid_type: Geltungsbereich der Katalog Aktion is ungültig. Bitte geben Sie einen gültigen Typ an.
+        for_products:
+            invalid_products: Die angegebene Konfiguration enthält Fehler. Bitte fügen Sie nur existierende Produkte hinzu.
+            not_empty: Die angegebene Konfiguration enthält Fehler. Bitte fügen Sie mindestens ein Produkt hinzu.
+        for_variants:
+            invalid_variants: Die angegebene Konfiguration enthält Fehler. Bitte fügen Sie nur existierende Produktvarianten hinzu.
+            not_empty: Bitte fügen Sie mindestens eine Produktvariante hinzu.
+        for_taxons:
+            invalid_taxons: Die angegebene Konfiguration enthält Fehler. Bitte fügen Sie nur existierende Produktkategorien hinzu.
+            not_empty: Die angegebene Konfiguration enthält Fehler. Bitte fügen Sie mindestens eine Produktkategorie hinzu.
     channel:
         base_currency:
             not_blank: Bitte geben Sie die Basiswährung für den Kanal an.
@@ -23,6 +39,8 @@ sylius:
     checkout:
         shipping_method:
             not_blank: Bitte wählen Sie die Versandart.
+        email:
+            not_changeable: E-Mail-Adresse kann für angemeldete Benutzer nicht geändert werden.
     contact:
         email:
             invalid: Diese E-Mail Adresse ist ungültig.
@@ -91,8 +109,8 @@ sylius:
     user:
         email:
             unique: Diese E-Mail-Adresse wird bereits verwendet.
-            min: E-Mail muss mindestens {{ min }} Zeichen haben.
-            max: Email darf maximal {{ max }} Zeichen lang sein.
+            min: E-Mail muss mindestens {{ limit }} Zeichen haben.
+            max: Email darf maximal {{ limit }} Zeichen lang sein.
             invalid: Diese E-Mail Adresse ist ungültig.
         username:
             unique: Der Benutzername wird bereits verwendet.

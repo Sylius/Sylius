@@ -1,11 +1,8 @@
 # This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
+# (c) Sylius Sp. z o.o.
 
 sylius:
     email:
-        contact_request:
-            content: '内容'
-            subject: '联系请求'
         order_confirmation:
             subject: '订单确认'
             view_order_or_change_payment_method: '查看订单或更改付款方式'

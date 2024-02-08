@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -14,18 +14,19 @@ declare(strict_types=1);
 namespace Sylius\Bundle\ApiBundle\Serializer;
 
 use Symfony\Component\Serializer\Exception\MissingConstructorArgumentsException;
+use Symfony\Component\Serializer\NameConverter\NameConverterInterface;
 use Symfony\Component\Serializer\Normalizer\ContextAwareDenormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 
-/**
- * @experimental
- */
+/** @experimental */
 final class CommandDenormalizer implements ContextAwareDenormalizerInterface
 {
     private const OBJECT_TO_POPULATE = 'object_to_populate';
 
-    public function __construct(private DenormalizerInterface $itemNormalizer)
-    {
+    public function __construct(
+        private DenormalizerInterface $itemNormalizer,
+        private NameConverterInterface $nameConverter,
+    ) {
     }
 
     public function supportsDenormalization($data, $type, $format = null, array $context = []): bool
@@ -39,23 +40,28 @@ final class CommandDenormalizer implements ContextAwareDenormalizerInterface
             return $this->itemNormalizer->denormalize($data, $type, $format, $context);
         }
 
-        $constructor = (new \ReflectionClass($context['input']['class']))->getConstructor();
+        $class = $context['input']['class'];
+        $constructor = (new \ReflectionClass($class))->getConstructor();
 
         if (null !== $constructor) {
-            $this->assertConstructorArgumentsPresence($constructor, $data);
+            $this->assertConstructorArgumentsPresence($constructor, $class, $data);
         }
 
         return $this->itemNormalizer->denormalize($data, $type, $format, $context);
     }
 
-    private function assertConstructorArgumentsPresence(\ReflectionMethod $constructor, $data): void
-    {
+    private function assertConstructorArgumentsPresence(
+        \ReflectionMethod $constructor,
+        string $class,
+        mixed $data,
+    ): void {
         $parameters = $constructor->getParameters();
 
         $missingFields = [];
         foreach ($parameters as $parameter) {
-            if (!isset($data[$parameter->getName()]) && !($parameter->allowsNull() || $parameter->isDefaultValueAvailable())) {
-                $missingFields[] = $parameter->getName();
+            $name = $this->nameConverter->normalize($parameter->getName(), $class);
+            if (!isset($data[$name]) && !($parameter->allowsNull() || $parameter->isDefaultValueAvailable())) {
+                $missingFields[] = $name;
             }
         }
 

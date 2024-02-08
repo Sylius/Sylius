@@ -29,7 +29,7 @@ Feature: Removing images of an existing taxon
         Then I should be notified that it has been successfully edited
         And this taxon should not have any images
 
-    @ui @javascript
+    @ui @mink:chromedriver
     Scenario: Removing only one image of a taxon
         Given the "T-Shirts" taxon has an image "t-shirts.jpg" with "banner" type
         And the "T-Shirts" taxon also has an image "t-shirts.jpg" with "thumbnail" type
@@ -50,7 +50,7 @@ Feature: Removing images of an existing taxon
         Then I should be notified that it has been successfully edited
         And this taxon should have only one image
 
-    @ui @javascript
+    @ui @mink:chromedriver
     Scenario: Adding multiple images and removing a single image of a taxon
         When I want to modify the "T-Shirts" taxon
         And I attach the "t-shirts.jpg" image with "banner" type

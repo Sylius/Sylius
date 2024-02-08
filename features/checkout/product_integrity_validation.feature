@@ -10,8 +10,8 @@ Feature: Order products integrity
         And the store has a "Super Cool T-Shirt" configurable product
         And this product has "Small", "Medium" and "Large" variants
         And this product's price is "$19.99"
-        And the store ships everywhere for free
-        And the store allows paying offline
+        And the store ships everywhere for Free
+        And the store allows paying Offline
         And I am a logged in customer
 
     @ui @api

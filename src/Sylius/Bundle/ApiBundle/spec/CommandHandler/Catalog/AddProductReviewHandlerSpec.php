@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -15,7 +15,7 @@ namespace spec\Sylius\Bundle\ApiBundle\CommandHandler\Catalog;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ApiBundle\Command\Catalog\AddProductReview;
-use Sylius\Bundle\ApiBundle\Provider\CustomerProviderInterface;
+use Sylius\Bundle\CoreBundle\Resolver\CustomerResolverInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Repository\ProductRepositoryInterface;
@@ -29,13 +29,13 @@ final class AddProductReviewHandlerSpec extends ObjectBehavior
         FactoryInterface $productReviewFactory,
         RepositoryInterface $productReviewRepository,
         ProductRepositoryInterface $productRepository,
-        CustomerProviderInterface $customerProvider,
+        CustomerResolverInterface $customerResolver,
     ): void {
         $this->beConstructedWith(
             $productReviewFactory,
             $productReviewRepository,
             $productRepository,
-            $customerProvider,
+            $customerResolver,
         );
     }
 
@@ -43,14 +43,14 @@ final class AddProductReviewHandlerSpec extends ObjectBehavior
         FactoryInterface $productReviewFactory,
         RepositoryInterface $productReviewRepository,
         ProductRepositoryInterface $productRepository,
-        CustomerProviderInterface $customerProvider,
+        CustomerResolverInterface $customerResolver,
         ProductInterface $product,
         CustomerInterface $customer,
         ReviewInterface $review,
     ): void {
         $productRepository->findOneByCode('winter_cap')->willReturn($product);
 
-        $customerProvider->provide('mark@example.com')->willReturn($customer);
+        $customerResolver->resolve('mark@example.com')->willReturn($customer);
 
         $productReviewFactory->createNew()->willReturn($review);
 

@@ -4,7 +4,7 @@
 
  This file is part of the Sylius package.
 
- (c) Paweł Jędrzejewski
+ (c) Sylius Sp. z o.o.
 
  For the full copyright and license information, please view the LICENSE
  file that was distributed with this source code.
@@ -21,6 +21,7 @@
         <import resource="services/context.xml" />
         <import resource="services/dashboard.xml" />
         <import resource="services/emails.xml" />
+        <import resource="services/factories.xml" />
         <import resource="services/fixtures.xml" />
         <import resource="services/fixtures_listeners.xml" />
         <import resource="services/fixtures_factories.xml" />
@@ -28,9 +29,11 @@
         <import resource="services/installer.xml" />
         <import resource="services/installer_requirements.xml" />
         <import resource="services/listeners.xml" />
+        <import resource="services/message_handlers.xml" />
         <import resource="services/order_processing.xml" />
         <import resource="services/payment.xml" />
         <import resource="services/promotion.xml" />
+        <import resource="services/providers.xml" />
         <import resource="services/shipping.xml" />
         <import resource="services/state_resolvers.xml" />
         <import resource="services/taxation.xml" />
@@ -40,12 +43,12 @@
 
     <parameters>
         <parameter key="sylius.order_item_quantity_modifier.limit">9999</parameter>
+        <parameter key="env(SYLIUS_UNSECURED_URLS)">yes</parameter>
+        <parameter key="sylius.unsecured_urls">%env(bool:SYLIUS_UNSECURED_URLS)%</parameter>
     </parameters>
 
     <services>
         <defaults public="true" />
-
-        <service id="sylius.provider.channel_based_default_zone_provider" class="Sylius\Bundle\CoreBundle\Provider\ChannelBasedDefaultTaxZoneProvider" />
 
         <service id="sylius.integer_distributor" class="Sylius\Component\Core\Distributor\IntegerDistributor" />
         <service id="Sylius\Component\Core\Distributor\IntegerDistributorInterface" alias="sylius.integer_distributor" />
@@ -61,15 +64,22 @@
         <service id="Sylius\Component\Core\Payment\InvoiceNumberGeneratorInterface" alias="sylius.invoice_number_generator" />
 
         <service id="sylius.image_uploader" class="Sylius\Component\Core\Uploader\ImageUploader">
+            <argument type="service" id="Sylius\Component\Core\Filesystem\Adapter\FilesystemAdapterInterface" />
+            <argument type="service" id="Sylius\Component\Core\Generator\ImagePathGeneratorInterface" />
+        </service>
+        <service id="Sylius\Component\Core\Uploader\ImageUploaderInterface" alias="sylius.image_uploader" />
+
+        <service id="Sylius\Component\Core\Filesystem\Adapter\FlysystemFilesystemAdapter">
+            <argument type="service" id="sylius.storage" />
+        </service>
+        <service id="Sylius\Component\Core\Filesystem\Adapter\GaufretteFilesystemAdapter">
             <argument type="service">
                 <service class="Gaufrette\Filesystem">
                     <argument>%sylius.uploader.filesystem%</argument>
                     <factory service="knp_gaufrette.filesystem_map" method="get" />
                 </service>
             </argument>
-            <argument type="service" id="Sylius\Component\Core\Generator\ImagePathGeneratorInterface" />
         </service>
-        <service id="Sylius\Component\Core\Uploader\ImageUploaderInterface" alias="sylius.image_uploader" />
 
         <service
             id="Sylius\Component\Core\Generator\ImagePathGeneratorInterface"
@@ -149,11 +159,6 @@
         </service>
         <service id="Sylius\Component\Core\Factory\CustomerAfterCheckoutFactoryInterface" alias="sylius.factory.customer_after_checkout" />
 
-        <service id="sylius.provider.product_variants_prices" class="Sylius\Component\Core\Provider\ProductVariantsPricesProvider">
-            <argument type="service" id="sylius.calculator.product_variant_price" />
-        </service>
-        <service id="Sylius\Component\Core\Provider\ProductVariantsPricesProviderInterface" alias="sylius.provider.product_variants_prices" />
-
         <service id="sylius.twig.extension.product_variants_prices" class="Sylius\Bundle\CoreBundle\Twig\ProductVariantsPricesExtension" public="false">
             <argument type="service" id="sylius.templating.helper.product_variants_prices" />
             <tag name="twig.extension" />
@@ -190,11 +195,6 @@
         <service id="sylius.calculator.product_variant_price" class="Sylius\Component\Core\Calculator\ProductVariantPriceCalculator" />
         <service id="Sylius\Component\Core\Calculator\ProductVariantPriceCalculatorInterface" alias="sylius.calculator.product_variant_price" />
 
-        <service id="sylius.translation_locale_provider.admin" class="Sylius\Component\Core\Provider\TranslationLocaleProvider">
-            <argument type="service" id="sylius.repository.locale" />
-            <argument type="string">%locale%</argument>
-        </service>
-
         <service id="sylius.section_resolver.uri_based_section_resolver" class="Sylius\Bundle\CoreBundle\SectionResolver\UriBasedSectionProvider">
             <argument type="service" id="request_stack" />
             <argument type="collection" />
@@ -222,6 +222,8 @@
             <argument type="service" id="sm.factory" />
         </service>
         <service id="Sylius\Component\Core\Payment\Provider\OrderPaymentProviderInterface" alias="sylius.order_payment_provider" />
+
+        <service id="Sylius\Component\Core\Payment\Remover\OrderPaymentsRemoverInterface" class="Sylius\Component\Core\Payment\Remover\OrderPaymentsRemover" />
 
         <service id="sylius.customer_statistics_provider" class="Sylius\Component\Core\Customer\Statistics\CustomerStatisticsProvider">
             <argument type="service" id="sylius.repository.order" />
@@ -251,15 +253,43 @@
         <service id="sylius.grid_filter.entities" class="Sylius\Component\Core\Grid\Filter\EntitiesFilter">
             <tag name="sylius.grid_filter" type="entities" form-type="Sylius\Bundle\CoreBundle\Form\Type\Grid\Filter\EntitiesFilterType" />
         </service>
+        <service id="sylius.grid_filter.resource_autocomplete" class="Sylius\Component\Core\Grid\Filter\ResourceAutocompleteFilter">
+            <tag name="sylius.grid_filter" type="resource_autocomplete" form-type="Sylius\Bundle\CoreBundle\Form\Type\Grid\Filter\ResourceAutocompleteFilterType" />
+        </service>
 
         <service class="Sylius\Bundle\CoreBundle\Mailer\OrderEmailManager" id="sylius.mailer.order_email_manager">
             <argument type="service" id="sylius.email_sender" />
         </service>
 
-        <service id="security.authentication_manager" alias="security.authentication.manager" />
-
         <service id="Sylius\Component\Core\Cart\Resolver\CreatedByGuestFlagResolverInterface" class="Sylius\Component\Core\Cart\Resolver\CreatedByGuestFlagResolver">
             <argument type="service" id="security.token_storage" />
         </service>
+
+        <service id="Sylius\Bundle\CoreBundle\Order\Checker\OrderPromotionsIntegrityCheckerInterface" class="Sylius\Bundle\CoreBundle\Order\Checker\OrderPromotionsIntegrityChecker">
+            <argument type="service" id="sylius.order_processing.order_processor" />
+        </service>
+
+        <service id="sylius.user_password_resetter.admin" class="Sylius\Bundle\CoreBundle\Security\UserPasswordResetter">
+            <argument type="service" id="sylius.repository.admin_user" />
+            <argument type="service" id="Sylius\Component\User\Security\PasswordUpdaterInterface" />
+            <argument type="string">%sylius.admin_user.token.password_reset.ttl%</argument>
+        </service>
+
+        <service id="sylius.user_password_resetter.shop" class="Sylius\Bundle\CoreBundle\Security\UserPasswordResetter">
+            <argument type="service" id="sylius.repository.shop_user" />
+            <argument type="service" id="Sylius\Component\User\Security\PasswordUpdaterInterface" />
+            <argument type="string">%sylius.shop_user.token.password_reset.ttl%</argument>
+        </service>
+
+        <service id="Sylius\Bundle\CoreBundle\MessageDispatcher\ResetPasswordDispatcher">
+            <argument type="service" id="sylius.command_bus" />
+        </service>
+
+        <service id="Sylius\Bundle\CoreBundle\Resolver\CustomerResolverInterface" class="Sylius\Bundle\CoreBundle\Resolver\CustomerResolver">
+            <argument type="service" id="sylius.factory.customer" />
+            <argument type="service" id="Sylius\Bundle\CoreBundle\Provider\CustomerProviderInterface" />
+        </service>
+
+        <service id="Sylius\Component\Core\Positioner\PositionerInterface" class="Sylius\Component\Core\Positioner\Positioner" />
     </services>
 </container>

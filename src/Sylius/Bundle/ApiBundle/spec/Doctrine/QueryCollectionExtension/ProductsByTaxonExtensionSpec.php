@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -91,9 +91,9 @@ final class ProductsByTaxonExtensionSpec extends ObjectBehavior
         $queryBuilder->getRootAliases()->willReturn(['o']);
         $queryBuilder->addSelect('productTaxons')->shouldBeCalled()->willReturn($queryBuilder);
         $queryBuilder->leftJoin('o.productTaxons', 'productTaxons', 'WITH', 'productTaxons.product = o.id')->shouldBeCalled()->willReturn($queryBuilder);
-        $queryBuilder->leftJoin('productTaxons.taxon', 'taxon', 'WITH', 'taxon.code = :taxonCode')->shouldBeCalled()->willReturn($queryBuilder);
+        $queryBuilder->leftJoin('productTaxons.taxon', 'taxon', 'WITH', 'taxon.code IN (:taxonCode)')->shouldBeCalled()->willReturn($queryBuilder);
         $queryBuilder->orderBy('productTaxons.position', 'ASC')->shouldBeCalled()->willReturn($queryBuilder);
-        $queryBuilder->setParameter('taxonCode', 't_shirts')->shouldBeCalled()->willReturn($queryBuilder);
+        $queryBuilder->setParameter('taxonCode', ['t_shirts'])->shouldBeCalled()->willReturn($queryBuilder);
 
         $this->applyToCollection($queryBuilder, $queryNameGenerator, ProductInterface::class, 'get', ['filters' => ['productTaxons.taxon.code' => 't_shirts']]);
     }

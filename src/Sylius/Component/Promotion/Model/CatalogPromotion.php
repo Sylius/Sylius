@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -42,13 +42,10 @@ class CatalogPromotion implements CatalogPromotionInterface
 
     protected string $state = CatalogPromotionStates::STATE_INACTIVE;
 
-    /**
-     * @var Collection|CatalogPromotionScopeInterface[]
-     *
-     * @psalm-var Collection<array-key, CatalogPromotionScopeInterface>
-     */
+    /** @var Collection<array-key, CatalogPromotionScopeInterface> */
     protected Collection $scopes;
 
+    /** @var Collection<array-key, CatalogPromotionActionInterface> */
     protected Collection $actions;
 
     protected ?bool $enabled = true;

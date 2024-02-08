@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -16,10 +16,8 @@ namespace Sylius\Bundle\UiBundle\Twig;
 use Sylius\Bundle\UiBundle\Renderer\TemplateEventRendererInterface;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
+use Webmozart\Assert\Assert;
 
-/**
- * @experimental
- */
 final class TemplateEventExtension extends AbstractExtension
 {
     public function __construct(private TemplateEventRendererInterface $templateEventRenderer)
@@ -38,6 +36,11 @@ final class TemplateEventExtension extends AbstractExtension
      */
     public function render(string|array $eventName, array $context = []): string
     {
-        return $this->templateEventRenderer->render((array) $eventName, $context);
+        if (is_string($eventName)) {
+            $eventName = [$eventName];
+        }
+        Assert::notEmpty($eventName);
+
+        return $this->templateEventRenderer->render($eventName, $context);
     }
 }

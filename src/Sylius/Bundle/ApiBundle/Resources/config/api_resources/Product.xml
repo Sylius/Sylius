@@ -4,7 +4,7 @@
 
  This file is part of the Sylius package.
 
- (c) Paweł Jędrzejewski
+ (c) Sylius Sp. z o.o.
 
  For the full copyright and license information, please view the LICENSE
  file that was distributed with this source code.
@@ -122,6 +122,16 @@
             </itemOperation>
         </itemOperations>
 
+        <subresourceOperations>
+            <subresourceOperation name="attributes_get_subresource">
+                <attribute name="method">GET</attribute>
+                <attribute name="path">/shop/products/{code}/attributes</attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">shop:product:read</attribute>
+                </attribute>
+            </subresourceOperation>
+        </subresourceOperations>
+
         <property name="id" identifier="false" writable="false" />
         <property name="code" identifier="true" required="true" />
         <property name="createdAt" writable="false" />
@@ -150,5 +160,9 @@
         <property name="slug" readable="true" />
         <property name="shortDescription" readable="true" />
         <property name="name" readable="true" />
+        <property name="associations" readable="true" />
+        <property name="attributes" readable="true" writable="true">
+            <subresource resourceClass="%sylius.model.product_attribute_value.class%" collection="true" />
+        </property>
     </resource>
 </resources>

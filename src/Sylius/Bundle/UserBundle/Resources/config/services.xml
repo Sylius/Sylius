@@ -4,7 +4,7 @@
 
  This file is part of the Sylius package.
 
- (c) Paweł Jędrzejewski
+ (c) Sylius Sp. z o.o.
 
  For the full copyright and license information, please view the LICENSE
  file that was distributed with this source code.
@@ -30,6 +30,7 @@
         <service id="Sylius\Bundle\UserBundle\Command\DemoteUserCommand">
             <tag name="console.command" />
         </service>
+
         <service id="Sylius\Bundle\UserBundle\Command\PromoteUserCommand">
             <tag name="console.command" />
         </service>
@@ -54,11 +55,17 @@
         <service id="sylius.security.password_encoder" class="Sylius\Bundle\UserBundle\Security\UserPasswordEncoder">
             <argument type="service" id="security.encoder_factory" />
         </service>
-        <service id="Sylius\Bundle\UserBundle\Security\UserPasswordEncoderInterface" alias="sylius.security.password_encoder" />
+
+        <service id="Sylius\Component\User\Security\UserPasswordEncoderInterface" alias="sylius.security.password_hasher" />
+
+        <service id="sylius.security.password_hasher" class="Sylius\Bundle\UserBundle\Security\UserPasswordHasher">
+            <argument type="service" id="security.password_hasher_factory" />
+        </service>
 
         <service id="sylius.security.password_updater" class="Sylius\Component\User\Security\PasswordUpdater">
-            <argument type="service" id="sylius.security.password_encoder" />
+            <argument type="service" id="sylius.security.password_hasher" />
         </service>
+
         <service id="Sylius\Component\User\Security\PasswordUpdaterInterface" alias="sylius.security.password_updater" />
 
         <service id="sylius.security.user_login" class="Sylius\Bundle\UserBundle\Security\UserLogin">

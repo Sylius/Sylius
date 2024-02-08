@@ -10,8 +10,8 @@ Feature: Seeing included in price taxes of order items
         And default tax zone is "US"
         And the store has a product "Winchester M1866" priced at "$220.00"
         And it belongs to "Guns" tax category
-        And the store ships everywhere for free
-        And the store allows paying offline
+        And the store ships everywhere for Free
+        And the store allows paying Offline
         And there is a customer "lucy@teamlucifer.com" that placed an order "#00000666"
         And I am logged in as an administrator
 

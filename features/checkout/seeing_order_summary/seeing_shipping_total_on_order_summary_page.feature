@@ -10,7 +10,7 @@ Feature: Seeing order shipping total on order summary page
         And this product has "Guards! Guards! - book" variant priced at "$20.00"
         And this product has "Guards! Guards! - ebook" variant priced at "$15.00" which does not require shipping
         And the store has "UPS" shipping method with "$20.00" fee
-        And the store allows paying offline
+        And the store allows paying Offline
         And I am a logged in customer
 
     @ui @api

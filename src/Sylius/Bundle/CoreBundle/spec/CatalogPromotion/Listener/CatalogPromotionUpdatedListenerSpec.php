@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -15,10 +15,14 @@ namespace spec\Sylius\Bundle\CoreBundle\CatalogPromotion\Listener;
 
 use Doctrine\ORM\EntityManagerInterface;
 use PhpSpec\ObjectBehavior;
+use Prophecy\Argument;
+use Sylius\Bundle\CoreBundle\CatalogPromotion\Command\UpdateCatalogPromotionState;
 use Sylius\Bundle\CoreBundle\CatalogPromotion\Processor\AllProductVariantsCatalogPromotionsProcessorInterface;
 use Sylius\Component\Core\Model\CatalogPromotionInterface;
 use Sylius\Component\Promotion\Event\CatalogPromotionUpdated;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Symfony\Component\Messenger\Envelope;
+use Symfony\Component\Messenger\MessageBusInterface;
 
 final class CatalogPromotionUpdatedListenerSpec extends ObjectBehavior
 {
@@ -26,17 +30,33 @@ final class CatalogPromotionUpdatedListenerSpec extends ObjectBehavior
         AllProductVariantsCatalogPromotionsProcessorInterface $allProductVariantsCatalogPromotionsProcessor,
         RepositoryInterface $catalogPromotionRepository,
         EntityManagerInterface $entityManager,
+        MessageBusInterface $messageBus,
     ): void {
-        $this->beConstructedWith($allProductVariantsCatalogPromotionsProcessor, $catalogPromotionRepository, $entityManager);
+        $this->beConstructedWith(
+            $allProductVariantsCatalogPromotionsProcessor,
+            $catalogPromotionRepository,
+            $entityManager,
+            $messageBus,
+        );
     }
 
     function it_processes_catalog_promotion_that_has_just_been_updated(
         AllProductVariantsCatalogPromotionsProcessorInterface $allProductVariantsCatalogPromotionsProcessor,
         RepositoryInterface $catalogPromotionRepository,
         EntityManagerInterface $entityManager,
+        MessageBusInterface $messageBus,
         CatalogPromotionInterface $catalogPromotion,
     ): void {
         $catalogPromotionRepository->findOneBy(['code' => 'WINTER_MUGS_SALE'])->willReturn($catalogPromotion);
+
+        $catalogPromotion->getCode()->willReturn('WINTER_MUGS_SALE');
+        $updateCatalogPromotionStateCommand = new UpdateCatalogPromotionState('WINTER_MUGS_SALE');
+
+        $messageBus
+            ->dispatch($updateCatalogPromotionStateCommand)
+            ->willReturn(new Envelope($updateCatalogPromotionStateCommand))
+            ->shouldBeCalled()
+        ;
 
         $allProductVariantsCatalogPromotionsProcessor->process()->shouldBeCalled();
 
@@ -49,10 +69,12 @@ final class CatalogPromotionUpdatedListenerSpec extends ObjectBehavior
         AllProductVariantsCatalogPromotionsProcessorInterface $allProductVariantsCatalogPromotionsProcessor,
         RepositoryInterface $catalogPromotionRepository,
         EntityManagerInterface $entityManager,
+        MessageBusInterface $messageBus,
     ): void {
         $catalogPromotionRepository->findOneBy(['code' => 'WINTER_MUGS_SALE'])->willReturn(null);
         $catalogPromotionRepository->findAll()->shouldNotBeCalled();
 
+        $messageBus->dispatch(Argument::any())->shouldNotBeCalled();
         $allProductVariantsCatalogPromotionsProcessor->process()->shouldNotBeCalled();
         $entityManager->flush()->shouldNotBeCalled();
 

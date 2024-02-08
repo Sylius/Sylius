@@ -11,13 +11,13 @@ Feature: Taxons autocomplete
 
     @api
     Scenario: Getting a hint when looking for taxons
-        When I look for a taxon with "b" in name
+        When I look for a taxon with "B" in name
         Then I should see 1 taxons on the list
         And I should see the taxon named "Belts" in the list
 
     @api
     Scenario: Getting a hint when looking for taxons
-        When I look for a taxon with "shi" in name
+        When I look for a taxon with "Shi" in name
         Then I should see 1 taxons on the list
         And I should see the taxon named "T-Shirts" in the list
 

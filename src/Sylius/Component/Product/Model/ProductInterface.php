@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -36,6 +36,8 @@ interface ProductInterface extends
 
     public function setName(?string $name): void;
 
+    public function getDescriptor(): string;
+
     public function getDescription(): ?string;
 
     public function setDescription(?string $description): void;
@@ -51,9 +53,7 @@ interface ProductInterface extends
     public function hasVariants(): bool;
 
     /**
-     * @return Collection|ProductVariantInterface[]
-     *
-     * @psalm-return Collection<array-key, ProductVariantInterface>
+     * @return Collection<array-key, ProductVariantInterface>
      */
     public function getVariants(): Collection;
 
@@ -64,18 +64,14 @@ interface ProductInterface extends
     public function hasVariant(ProductVariantInterface $variant): bool;
 
     /**
-     * @return Collection|ProductVariantInterface[]
-     *
-     * @psalm-return Collection<array-key, ProductVariantInterface>
+     * @return Collection<array-key, ProductVariantInterface>
      */
     public function getEnabledVariants(): Collection;
 
     public function hasOptions(): bool;
 
     /**
-     * @return Collection|ProductOptionInterface[]
-     *
-     * @psalm-return Collection<array-key, ProductOptionInterface>
+     * @return Collection<array-key, ProductOptionInterface>
      */
     public function getOptions(): Collection;
 
@@ -86,9 +82,7 @@ interface ProductInterface extends
     public function hasOption(ProductOptionInterface $option): bool;
 
     /**
-     * @return Collection|ProductAssociationInterface[]
-     *
-     * @psalm-return Collection<array-key, ProductAssociationInterface>
+     * @return Collection<array-key, ProductAssociationInterface>
      */
     public function getAssociations(): Collection;
 

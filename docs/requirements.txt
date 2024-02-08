@@ -1,7 +1,8 @@
 sphinx==1.8.5
+alabaster==0.7.13
 docutils<0.18
 jinja2==3.0.0
 pyOpenSSL
 requests[security]
 sphinx-copybutton
-git+https://github.com/fabpot/sphinx-php.git
+sphinx-autobuild

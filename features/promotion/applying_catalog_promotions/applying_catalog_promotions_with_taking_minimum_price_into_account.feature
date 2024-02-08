@@ -25,6 +25,6 @@ Feature: Applying catalog promotions with taking minimum price into account
     @api @ui
     Scenario: Not applying promotion if product is priced on same price as its minimum price
         Given there is a catalog promotion "Winter sale" that reduces price by "80%" and applies on "PHP T-Shirt" variant
-        And there is a catalog promotion "T-shirt Sale" that reduces price by "40%" and applies on "PHP T-Shirt" variant
+        And there is a catalog promotion "T-Shirt Sale" that reduces price by "40%" and applies on "PHP T-Shirt" variant
         When I view "PHP T-Shirt" variant of the "T-Shirt" product
         Then I should see this variant is discounted from "$20.00" to "$15.00" with only "Winter sale" promotion

@@ -1,5 +1,5 @@
 # This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
+# (c) Sylius Sp. z o.o.
 
 sylius:
     email:
@@ -45,6 +45,12 @@ sylius:
                 sales:
                     header: Борлуулалт
                     orders: Захиалгууд
+                official_support:
+                    header: Албан ёсны дэмжлэг
+                    browse_plugins: Плагинуудыг үзэх
+                    sylius_plus: Sylius Plus
+                    professional_services: Мэргэжлийн үйлчилгээнүүд
+                    find_a_partner: Хамтран ажиллах түнш танилцах
     ui:
         product:
             product_not_active_in_channel: Энэ сувагт бүтээгдэхүүн хараахан идэвхижээгүй байна.

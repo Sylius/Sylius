@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -62,6 +62,18 @@ final class Configuration implements ConfigurationInterface
                             ->validate()
                                 ->ifTrue(fn (int $batchSize): bool => $batchSize <= 0)
                                 ->thenInvalid('Expected value bigger than 0, but got %s.')
+                            ->end()
+                        ->end()
+                    ->end()
+                ->end()
+                ->arrayNode('filesystem')
+                    ->addDefaultsIfNotSet()
+                    ->children()
+                        ->scalarNode('adapter')
+                            ->defaultValue('default')
+                            ->validate()
+                                ->ifNotInArray(['default', 'flysystem', 'gaufrette'])
+                                ->thenInvalid('Expected adapter "default", "flysystem" or "gaufrette", but %s passed.')
                             ->end()
                         ->end()
                     ->end()

@@ -1,21 +1,24 @@
 import { rollup } from 'rollup';
-import { uglify } from 'rollup-plugin-uglify';
-import babel from 'rollup-plugin-babel';
-import commonjs from 'rollup-plugin-commonjs';
+import { terser } from 'rollup-plugin-terser';
+import babel from '@rollup/plugin-babel';
+import commonjs from '@rollup/plugin-commonjs';
 import concat from 'gulp-concat';
 import dedent from 'dedent';
 import gulp from 'gulp';
 import gulpif from 'gulp-if';
-import inject from 'rollup-plugin-inject';
+import gulpSass from 'gulp-sass';
+import inject from '@rollup/plugin-inject';
 import livereload from 'gulp-livereload';
 import merge from 'merge-stream';
 import order from 'gulp-order';
-import resolve from 'rollup-plugin-node-resolve';
-import sass from 'gulp-sass';
+import realSass from 'sass';
+import resolve from '@rollup/plugin-node-resolve';
 import sourcemaps from 'gulp-sourcemaps';
 import uglifycss from 'gulp-uglifycss';
 import upath from 'upath';
 import yargs from 'yargs';
+
+const sass = gulpSass(realSass);
 
 const { argv } = yargs
   .options({
@@ -148,7 +151,7 @@ export const buildShopJs = async function buildShopJs() {
         babelrc: false,
         exclude: `${nodeModulesPath}/**`,
         presets: [
-          ['env', {
+          ['@babel/preset-env', {
             targets: {
               browsers: [
                 'last 2 versions',
@@ -162,24 +165,22 @@ export const buildShopJs = async function buildShopJs() {
             exclude: [
               'transform-async-to-generator',
               'transform-regenerator',
-            ],
-            useBuiltIns: true,
+            ]
           }],
         ],
         plugins: [
-          ['external-helpers'],
           ['fast-async'],
           ['module-resolver', {
             alias: {
               'sylius/ui': upath.relative('', upath.joinSafe(vendorUiPath, 'Resources/private/js')),
             },
           }],
-          ['transform-object-rest-spread', {
+          ['@babel/plugin-proposal-object-rest-spread', {
             useBuiltIns: false,
           }],
         ],
       }),
-      options.minify && uglify(),
+      options.minify && terser(),
     ],
     treeshake: false,
   });

@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -21,6 +21,8 @@ final class ChosenShippingMethodEligibility extends Constraint
     public string $message = 'sylius.shipping_method.not_available';
 
     public string $notFoundMessage = 'sylius.shipping_method.not_found';
+
+    public string $shipmentNotFoundMessage = 'sylius.shipment.not_found';
 
     /** @var string */
     public $shippingAddressNotFoundMessage = 'sylius.shipping_method.shipping_address_not_found';

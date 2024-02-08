@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -14,12 +14,12 @@ declare(strict_types=1);
 namespace Sylius\Component\Core\OrderProcessing;
 
 use Sylius\Component\Core\Model\OrderInterface;
-use Sylius\Component\Core\Model\PaymentInterface;
-use Sylius\Component\Core\OrderPaymentStates;
 use Sylius\Component\Core\Payment\Exception\NotProvidedOrderPaymentException;
 use Sylius\Component\Core\Payment\Provider\OrderPaymentProviderInterface;
+use Sylius\Component\Core\Payment\Remover\OrderPaymentsRemoverInterface;
 use Sylius\Component\Order\Model\OrderInterface as BaseOrderInterface;
 use Sylius\Component\Order\Processor\OrderProcessorInterface;
+use Sylius\Component\Payment\Model\PaymentInterface;
 use Webmozart\Assert\Assert;
 
 final class OrderPaymentProcessor implements OrderProcessorInterface
@@ -27,6 +27,9 @@ final class OrderPaymentProcessor implements OrderProcessorInterface
     public function __construct(
         private OrderPaymentProviderInterface $orderPaymentProvider,
         private string $targetState = PaymentInterface::STATE_CART,
+        private ?OrderPaymentsRemoverInterface $orderPaymentsRemover = null,
+        /** @var array<string> $unprocessableOrderStates */
+        private array $unprocessableOrderStates = [],
     ) {
     }
 
@@ -35,18 +38,12 @@ final class OrderPaymentProcessor implements OrderProcessorInterface
         /** @var OrderInterface $order */
         Assert::isInstanceOf($order, OrderInterface::class);
 
-        if (OrderInterface::STATE_CANCELLED === $order->getState()) {
+        if ($this->cannotBeProcessed($order)) {
             return;
         }
 
-        if (0 === $order->getTotal()) {
-            $removablePayments = $order->getPayments()->filter(function (PaymentInterface $payment): bool {
-                return $payment->getState() === OrderPaymentStates::STATE_CART;
-            });
-
-            foreach ($removablePayments as $payment) {
-                $order->removePayment($payment);
-            }
+        if ($this->canPaymentsBeRemoved($order)) {
+            $this->removePayments($order);
 
             return;
         }
@@ -65,5 +62,40 @@ final class OrderPaymentProcessor implements OrderProcessorInterface
         } catch (NotProvidedOrderPaymentException) {
             return;
         }
+    }
+
+    private function canPaymentsBeRemoved(OrderInterface $order): bool
+    {
+        if (null !== $this->orderPaymentsRemover) {
+            return $this->orderPaymentsRemover->canRemovePayments($order);
+        }
+
+        return 0 === $order->getTotal();
+    }
+
+    private function removePayments(OrderInterface $order): void
+    {
+        if (null !== $this->orderPaymentsRemover) {
+            $this->orderPaymentsRemover->removePayments($order);
+
+            return;
+        }
+
+        $removablePayments = $order->getPayments()->filter(function (PaymentInterface $payment): bool {
+            return $payment->getState() === PaymentInterface::STATE_CART;
+        });
+
+        foreach ($removablePayments as $payment) {
+            $order->removePayment($payment);
+        }
+    }
+
+    private function cannotBeProcessed(OrderInterface $order): bool
+    {
+        if ([] === $this->unprocessableOrderStates) {
+            return OrderInterface::STATE_CANCELLED === $order->getState();
+        }
+
+        return in_array($order->getState(), $this->unprocessableOrderStates, true);
     }
 }

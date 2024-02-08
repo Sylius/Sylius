@@ -9,7 +9,7 @@ Feature: Adding associations to an existing product
         And the store has "LG G3", "LG headphones" and "LG earphones" products
         And I am logged in as an administrator
 
-    @ui @javascript
+    @ui @mink:chromedriver
     Scenario: Adding an association to an existing product
         When I want to modify the "LG G3" product
         And I associate as "Accessories" the "LG headphones" and "LG earphones" products

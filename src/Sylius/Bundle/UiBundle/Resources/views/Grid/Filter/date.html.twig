@@ -1,7 +1,7 @@
 {% form_theme form '@SyliusUi/Form/theme.html.twig' %}
 
 <div class="sylius-filters__group">
-    {{ form_row(form.from, { attr: {'class': 'sylius-filters__group'}, 'label': filter.label|trans ~ ' | ' ~ form.from.vars.label|trans }) }}
+    {{ form_row(form.from, { attr: {'class': 'sylius-filters__group'}, 'label': 'sylius.ui.date_filter', 'label_translation_parameters': {'%label%': filter.label|trans, '%altLabel%': form.from.vars.label|trans} }) }}
     <div class="disabled field">
         <label>&nbsp;</label>
         <input type="text" value="-" disabled>

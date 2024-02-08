@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -15,17 +15,12 @@ namespace Sylius\Bundle\UiBundle\Registry;
 
 use Laminas\Stdlib\SplPriorityQueue;
 
-/**
- * @experimental
- */
 final class TemplateBlockRegistry implements TemplateBlockRegistryInterface
 {
     /**
      * Blocks within an event should be sorted by their priority descending.
      *
-     * @var TemplateBlock[][]
-     *
-     * @psalm-var array<string, array<string, TemplateBlock>>
+     * @var array<string, array<string, TemplateBlock>>
      */
     private $eventsToTemplateBlocks;
 
@@ -65,19 +60,13 @@ final class TemplateBlockRegistry implements TemplateBlockRegistryInterface
     }
 
     /**
-     * @param string[] $eventNames
-     *
-     * @psalm-param non-empty-list<string> $eventNames
+     * @param non-empty-list<string> $eventNames
      *
      * @return TemplateBlock[]
      */
     private function findFinalizedForEvents(array $eventNames): array
     {
-        /**
-         * @var TemplateBlock[] $finalizedTemplateBlocks
-         *
-         * @psalm-var array<string, TemplateBlock> $finalizedTemplateBlocks
-         */
+        /** @var array<string, TemplateBlock> $finalizedTemplateBlocks */
         $finalizedTemplateBlocks = [];
         $reversedEventNames = array_reverse($eventNames);
         foreach ($reversedEventNames as $eventName) {

@@ -4,7 +4,7 @@
 
  This file is part of the Sylius package.
 
- (c) Paweł Jędrzejewski
+ (c) Sylius Sp. z o.o.
 
  For the full copyright and license information, please view the LICENSE
  file that was distributed with this source code.
@@ -51,14 +51,21 @@
             <argument type="service" id="sylius.behat.page.admin.catalog_promotion.update" />
             <argument type="service" id="sylius.behat.page.admin.catalog_promotion.show" />
             <argument type="service" id="Sylius\Behat\Element\Admin\CatalogPromotion\FormElement" />
+            <argument type="service" id="Sylius\Behat\Element\Admin\CatalogPromotion\FilterElement" />
             <argument type="service" id="sylius.behat.shared_storage" />
             <argument type="service" id="sylius.behat.notification_checker" />
+        </service>
+
+        <service id="Sylius\Behat\Context\Ui\Admin\BrowsingCatalogPromotionProductVariantsContext">
+            <argument type="service" id="sylius.behat.page.admin.catalog_promotion.product_variant.index" />
+            <argument type="service" id="sylius.behat.page.admin.product.show_page" />
         </service>
 
         <service id="sylius.behat.context.ui.admin.managing_channels" class="Sylius\Behat\Context\Ui\Admin\ManagingChannelsContext">
             <argument type="service" id="sylius.behat.page.admin.channel.index" />
             <argument type="service" id="sylius.behat.page.admin.channel.create" />
             <argument type="service" id="sylius.behat.page.admin.channel.update" />
+            <argument type="service" id="sylius.behat.element.admin.channel.shipping_address_in_checkout_required" />
             <argument type="service" id="sylius.behat.current_page_resolver" />
             <argument type="service" id="sylius.behat.notification_checker" />
         </service>
@@ -162,6 +169,7 @@
             <argument type="service" id="sylius.behat.element.product.show.taxonomy" />
             <argument type="service" id="sylius.behat.element.product.show.options" />
             <argument type="service" id="sylius.behat.element.product.show.variants" />
+            <argument type="service" id="router" />
         </service>
 
         <service id="sylius.behat.context.ui.admin.managing_products" class="Sylius\Behat\Context\Ui\Admin\ManagingProductsContext">
@@ -179,6 +187,7 @@
             <argument type="service" id="sylius.behat.notification_checker" />
             <argument type="service" id="sylius.behat.page.admin.product_variant.update" />
             <argument type="service" id="sylius.behat.java_script_test_helper" />
+            <argument type="service" id="sylius.behat.page.admin.product.show_page" />
         </service>
 
         <service id="sylius.behat.context.ui.admin.managing_product_association_types" class="Sylius\Behat\Context\Ui\Admin\ManagingProductAssociationTypesContext">
@@ -290,6 +299,7 @@
             <argument type="service" id="sylius.behat.page.admin.tax_rate.create" />
             <argument type="service" id="sylius.behat.page.admin.tax_rate.update" />
             <argument type="service" id="sylius.behat.current_page_resolver" />
+            <argument type="service" id="Sylius\Behat\Element\Admin\TaxRate\FilterElement" />
         </service>
 
         <service id="sylius.behat.context.ui.admin.managing_zones" class="Sylius\Behat\Context\Ui\Admin\ManagingZonesContext">
@@ -312,10 +322,23 @@
             <argument type="service" id="sylius.behat.page.admin.impersonate_user" />
         </service>
 
+        <service id="Sylius\Behat\Context\Ui\Admin\RemovingProductContext">
+            <argument type="service" id="sylius.behat.shared_storage" />
+            <argument type="service" id="sylius.behat.page.admin.product.index" />
+            <argument type="service" id="sylius.behat.notification_checker" />
+        </service>
+
         <service id="sylius.behat.context.ui.admin.removing_taxons" class="Sylius\Behat\Context\Ui\Admin\RemovingTaxonContext">
             <argument type="service" id="sylius.behat.page.admin.taxon.create" />
+            <argument type="service" id="sylius.behat.shared_storage" />
             <argument type="service" id="sylius.behat.notification_checker" />
-            <tag name="fob.context_service" />
+        </service>
+
+        <service id="sylius.behat.context.ui.admin.resetting_password" class="Sylius\Behat\Context\Ui\Admin\ResettingPasswordContext">
+            <argument type="service" id="sylius.behat.page.admin.request_password_reset" />
+            <argument type="service" id="sylius.behat.page.admin.reset_password" />
+            <argument type="service" id="sylius.behat.element.admin.account.reset" />
+            <argument type="service" id="sylius.behat.notification_checker" />
         </service>
 
         <service id="sylius.behat.context.ui.browser" class="Sylius\Behat\Context\Ui\BrowserContext">
@@ -342,6 +365,7 @@
             <argument type="service" id="sylius.behat.context.ui.shop.checkout.addressing" />
             <argument type="service" id="sylius.behat.context.ui.shop.checkout.shipping" />
             <argument type="service" id="sylius.behat.context.ui.shop.checkout.payment" />
+            <argument type="service" id="sylius.behat.shared_storage" />
         </service>
 
         <service id="sylius.behat.context.ui.shop.checkout.thank_you" class="Sylius\Behat\Context\Ui\Shop\Checkout\CheckoutThankYouContext">
@@ -447,9 +471,13 @@
         <service id="sylius.behat.context.ui.shop.cart" class="Sylius\Behat\Context\Ui\Shop\CartContext">
             <argument type="service" id="sylius.behat.shared_storage" />
             <argument type="service" id="sylius.behat.page.shop.cart_summary" />
+            <argument type="service" id="sylius.behat.page.shop.checkout.address" />
+            <argument type="service" id="Sylius\Behat\Element\Shop\CheckoutSubtotalElementInterface" />
             <argument type="service" id="sylius.behat.page.shop.product.show" />
+            <argument type="service" id="Sylius\Behat\Element\Shop\CartWidgetElementInterface" />
             <argument type="service" id="sylius.behat.notification_checker" />
             <argument type="service" id="Sylius\Behat\Service\SessionManagerInterface"/>
+            <argument type="service" id="sylius.behat.element.browser" />
         </service>
 
         <service id="sylius.behat.context.ui.shop.contact" class="Sylius\Behat\Context\Ui\Shop\ContactContext">
@@ -468,6 +496,7 @@
 
         <service id="sylius.behat.context.ui.shop.locale" class="Sylius\Behat\Context\Ui\Shop\LocaleContext">
             <argument type="service" id="sylius.behat.page.shop.home" />
+            <argument type="service" id="sylius.behat.shared_storage" />
         </service>
 
         <service id="sylius.behat.context.ui.shop.login" class="Sylius\Behat\Context\Ui\Shop\LoginContext">
@@ -489,6 +518,10 @@
             <argument type="service" id="sylius.behat.page.error" />
             <argument type="service" id="sylius.behat.element.product.index.vertical_menu" />
             <argument type="service" id="sylius.behat.channel_context_setter" />
+        </service>
+
+        <service id="sylius.behat.context.ui.shop.product_attribute" class="Sylius\Behat\Context\Ui\Shop\ProductAttributeContext">
+            <argument type="service" id="sylius.behat.page.shop.product.show" />
         </service>
 
         <service id="sylius.behat.context.ui.shop.browsing_product" class="Sylius\Behat\Context\Ui\Shop\BrowsingProductContext">

@@ -1,5 +1,16 @@
 sylius:
     email:
+        admin_password_reset:
+            hello: 'Hello'
+            subject: 'Administrator password reset'
+            reset_your_password: 'Reset your password'
+            to_reset_your_password: 'To reset your password - click the link below'
+            to_reset_your_password_token: 'To reset your password - use the token below'
+            token: 'Your password reset token is'
+        contact_request:
+            content: 'Content'
+            message_from: 'Message from'
+            subject: 'Contact request'
         order_confirmation:
             has_been_successfully_placed: 'has been successfully placed.'
             subject: 'Order confirmation'
@@ -79,6 +90,7 @@ sylius:
             locales: Locales
             menu_taxon: Menu taxon
             payment_methods: Payment Methods
+            shipping_address_in_checkout_required: Address required in checkout
             shipping_methods: Shipping Methods
             shop_billing_data: Shop billing data
             skipping_shipping_step_allowed: Skip shipping step if only one shipping method is available?

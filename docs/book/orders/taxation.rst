@@ -145,10 +145,23 @@ which has the services that implement the `OrderTaxesApplicatorInterface <https:
 Calculators
 '''''''''''
 
-For calculating Taxes **Sylius** is using the `DefaultCalculator <https://github.com/Sylius/Sylius/blob/master/src/Sylius/Component/Taxation/Calculator/DefaultCalculator.php>`_.
+For calculating Taxes **Sylius** is using tax calculators.
+
+To select a proper service we have a one that decides for us
+- the `DelegatingCalculator <https://github.com/Sylius/Sylius/blob/{current_version}/src/Sylius/Component/Taxation/Calculator/DelegatingCalculator.php>`_.
+Basing on the **TaxRate** assigned on the Product it will get its calculator type calculate the amount properly.
+
 You can create your custom calculator for taxes by creating a class that implements
-the `CalculatorInterface <https://github.com/Sylius/Sylius/blob/master/src/Sylius/Component/Taxation/Calculator/CalculatorInterface.php>`_
-and registering it as a ``sylius.tax_calculator.your_calculator_name`` service.
+the `CalculatorInterface <https://github.com/Sylius/Sylius/blob/{current_version}/src/Sylius/Component/Taxation/Calculator/CalculatorInterface.php>`_
+and registering it as a ``sylius.tax_calculator.your_calculator_name`` service and tagging it with the `sylius.tax_calculator` tag.
+
+Built-in Calculators
+''''''''''''''''''''
+
+The already defined calculators in Sylius:
+
+* **DefaultCalculator** - calculates the ``amount`` with rounding.
+* **DecimalCalculator** - calculates the ``amount`` without rounding, which results in a distribution of decimal values among the items.
 
 Learn more
 ----------

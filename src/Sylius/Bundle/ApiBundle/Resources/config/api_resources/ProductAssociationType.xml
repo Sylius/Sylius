@@ -4,7 +4,7 @@
 
  This file is part of the Sylius package.
 
- (c) Paweł Jędrzejewski
+ (c) Sylius Sp. z o.o.
 
  For the full copyright and license information, please view the LICENSE
  file that was distributed with this source code.
@@ -16,12 +16,12 @@
            xsi:schemaLocation="https://api-platform.com/schema/metadata https://api-platform.com/schema/metadata/metadata-2.0.xsd"
 >
     <resource class="%sylius.model.product_association_type.class%" shortName="ProductAssociationType">
-        <attribute name="route_prefix">admin</attribute>
         <attribute name="validation_groups">sylius</attribute>
 
         <collectionOperations>
             <collectionOperation name="admin_get">
                 <attribute name="method">GET</attribute>
+                <attribute name="path">/admin/product-association-types</attribute>
                 <attribute name="filters">
                     <attribute>sylius.api.product_association_type_filter</attribute>
                 </attribute>
@@ -32,11 +32,15 @@
 
             <collectionOperation name="admin_post">
                 <attribute name="method">POST</attribute>
+                <attribute name="path">/admin/product-association-types</attribute>
                 <attribute name="normalization_context">
                     <attribute name="groups">admin:product_association_type:read</attribute>
                 </attribute>
                 <attribute name="denormalization_context">
                     <attribute name="groups">admin:product_association_type:create</attribute>
+                </attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">admin:product_association_type:read</attribute>
                 </attribute>
             </collectionOperation>
         </collectionOperations>
@@ -44,13 +48,23 @@
         <itemOperations>
             <itemOperation name="admin_get">
                 <attribute name="method">GET</attribute>
+                <attribute name="path">/admin/product-association-types/{code}</attribute>
                 <attribute name="normalization_context">
                     <attribute name="groups">admin:product_association_type:read</attribute>
                 </attribute>
             </itemOperation>
 
+            <itemOperation name="shop_get">
+                <attribute name="method">GET</attribute>
+                <attribute name="path">/shop/product-association-types/{code}</attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">shop:product_association_type:read</attribute>
+                </attribute>
+            </itemOperation>
+
             <itemOperation name="admin_put">
                 <attribute name="method">PUT</attribute>
+                <attribute name="path">/admin/product-association-types/{code}</attribute>
                 <attribute name="normalization_context">
                     <attribute name="groups">admin:product_association_type:read</attribute>
                 </attribute>
@@ -61,6 +75,7 @@
 
             <itemOperation name="admin_delete">
                 <attribute name="method">DELETE</attribute>
+                <attribute name="path">/admin/product-association-types/{code}</attribute>
             </itemOperation>
         </itemOperations>
 

@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Client;
 
+use Lexik\Bundle\JWTAuthenticationBundle\Response\JWTAuthenticationFailureResponse;
 use Sylius\Behat\Service\SprintfResponseEscaper;
 use Symfony\Component\HttpFoundation\Response;
 use Webmozart\Assert\Assert;
@@ -62,6 +63,11 @@ final class ResponseChecker implements ResponseCheckerInterface
         return $this->getResponseContentValue($response, 'hydra:description');
     }
 
+    public function isAccepted(Response $response): bool
+    {
+        return $response->getStatusCode() === Response::HTTP_ACCEPTED;
+    }
+
     public function isCreationSuccessful(Response $response): bool
     {
         return $response->getStatusCode() === Response::HTTP_CREATED;
@@ -74,6 +80,10 @@ final class ResponseChecker implements ResponseCheckerInterface
 
     public function hasAccessDenied(Response $response): bool
     {
+        if (!$response instanceof JWTAuthenticationFailureResponse) {
+            return false;
+        }
+
         return
             $response->getMessage() === 'JWT Token not found' &&
             $response->getStatusCode() === Response::HTTP_UNAUTHORIZED;

@@ -42,7 +42,7 @@
     </div>
 </div>
 {% else %}
-<a class="item {% if attributes.class is defined %}{{ attributes.class }}{% endif %}" href="{{ item.uri }}">
+<a class="item {% if attributes.class is defined %}{{ attributes.class }}{% endif %}" href="{{ item.uri }}" {% for linkAttributeName, linkAttributeValue in item.linkAttributes %}{{ linkAttributeName }}="{{ linkAttributeValue }}"{% endfor %}>
     {{ block('icon') }}
     {{ item.label|trans }}
 </a>

@@ -1,12 +1,13 @@
 # This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
+# (c) Sylius Sp. z o.o.
 
 default:
     suites:
         ui_customer_requesting_contact:
             contexts:
                 - sylius.behat.context.hook.doctrine_orm
-                - sylius.behat.context.hook.email_spool
+                - sylius.behat.context.hook.session
+                - sylius.behat.context.hook.mailer
 
                 - sylius.behat.context.transform.shared_storage
 

@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -19,20 +19,28 @@ use Sylius\Bundle\ApiBundle\Command\Account\RegisterShopUser;
 use Sylius\Bundle\ApiBundle\Command\Account\VerifyCustomerAccount;
 use Sylius\Component\Core\Model\Customer;
 use Symfony\Component\Serializer\Exception\MissingConstructorArgumentsException;
+use Symfony\Component\Serializer\NameConverter\NameConverterInterface;
 use Symfony\Component\Serializer\Normalizer\ContextAwareDenormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 
 final class CommandDenormalizerSpec extends ObjectBehavior
 {
-    function let(DenormalizerInterface $baseNormalizer): void
+    function let(DenormalizerInterface $baseNormalizer, NameConverterInterface $nameConverter): void
     {
-        $this->beConstructedWith($baseNormalizer);
+        $this->beConstructedWith($baseNormalizer, $nameConverter);
     }
 
     function it_throws_exception_if_not_all_required_parameters_are_present_in_the_context(
         DenormalizerInterface $baseNormalizer,
+        NameConverterInterface $nameConverter,
     ): void {
         $baseNormalizer->denormalize(Argument::any())->shouldNotBeCalled();
+
+        $nameConverter->normalize('firstName', RegisterShopUser::class)->willReturn('firstName');
+        $nameConverter->normalize('lastName', RegisterShopUser::class)->willReturn('lastName');
+        $nameConverter->normalize('email', RegisterShopUser::class)->willReturn('email');
+        $nameConverter->normalize('password', RegisterShopUser::class)->willReturn('password');
+        $nameConverter->normalize('subscribedToNewsletter', RegisterShopUser::class)->willReturn('subscribedToNewsletter');
 
         $this
             ->shouldThrow(new MissingConstructorArgumentsException(
@@ -52,7 +60,14 @@ final class CommandDenormalizerSpec extends ObjectBehavior
 
     function it_denormalizes_data_if_all_required_parameters_are_specified(
         DenormalizerInterface $baseNormalizer,
+        NameConverterInterface $nameConverter,
     ): void {
+        $nameConverter->normalize('firstName', RegisterShopUser::class)->willReturn('firstName');
+        $nameConverter->normalize('lastName', RegisterShopUser::class)->willReturn('lastName');
+        $nameConverter->normalize('email', RegisterShopUser::class)->willReturn('email');
+        $nameConverter->normalize('password', RegisterShopUser::class)->willReturn('password');
+        $nameConverter->normalize('subscribedToNewsletter', RegisterShopUser::class)->willReturn('subscribedToNewsletter');
+
         $baseNormalizer
             ->denormalize(
                 ['firstName' => 'John', 'lastName' => 'Doe', 'email' => 'test@example.com', 'password' => 'pa$$word'],
@@ -65,6 +80,34 @@ final class CommandDenormalizerSpec extends ObjectBehavior
 
         $this->denormalize(
             ['firstName' => 'John', 'lastName' => 'Doe', 'email' => 'test@example.com', 'password' => 'pa$$word'],
+            Customer::class,
+            null,
+            ['input' => ['class' => RegisterShopUser::class]],
+        )->shouldReturn(['key' => 'value']);
+    }
+
+    function it_denormalizes_data_if_all_required_parameters_are_specified_based_on_their_normalized_names(
+        DenormalizerInterface $baseNormalizer,
+        NameConverterInterface $nameConverter,
+    ): void {
+        $baseNormalizer
+            ->denormalize(
+                ['first_name' => 'John', 'last_name' => 'Doe', 'email_address' => 'test@example.com', 'pass' => 'pa$$word'],
+                Customer::class,
+                null,
+                ['input' => ['class' => RegisterShopUser::class]],
+            )
+            ->willReturn(['key' => 'value'])
+        ;
+
+        $nameConverter->normalize('firstName', RegisterShopUser::class)->willReturn('first_name');
+        $nameConverter->normalize('lastName', RegisterShopUser::class)->willReturn('last_name');
+        $nameConverter->normalize('email', RegisterShopUser::class)->willReturn('email_address');
+        $nameConverter->normalize('password', RegisterShopUser::class)->willReturn('pass');
+        $nameConverter->normalize('subscribedToNewsletter', RegisterShopUser::class)->willReturn('hasNewsletter');
+
+        $this->denormalize(
+            ['first_name' => 'John', 'last_name' => 'Doe', 'email_address' => 'test@example.com', 'pass' => 'pa$$word'],
             Customer::class,
             null,
             ['input' => ['class' => RegisterShopUser::class]],

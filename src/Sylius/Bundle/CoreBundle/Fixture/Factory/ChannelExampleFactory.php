@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -125,7 +125,7 @@ class ChannelExampleFactory extends AbstractExampleFactory implements ExampleFac
             })
             ->setDefault('code', fn (Options $options): string => StringInflector::nameToCode($options['name']))
             ->setDefault('hostname', fn (Options $options): string => $options['code'] . '.localhost')
-            ->setDefault('color', fn (Options $options): string => $this->faker->colorName)
+            ->setDefault('color', fn (Options $options): string => $this->faker->hexColor)
             ->setDefault('enabled', fn (Options $options): bool => $this->faker->boolean(90))
             ->setAllowedTypes('enabled', 'bool')
             ->setDefault('skipping_shipping_step_allowed', false)

@@ -1,12 +1,8 @@
 # This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
+# (c) Sylius Sp. z o.o.
 
 sylius:
     email:
-        contact_request:
-            content: 'Content'
-            message_from: 'Message from'
-            subject: 'Contact request'
         order_confirmation:
             has_been_successfully_placed: 'has been successfully placed.'
             subject: 'Order confirmation'
@@ -30,10 +26,20 @@ sylius:
             subject: 'Email address verification'
             to_verify_your_email_address: 'To verify your email address - click the link below'
             verify_your_email_address: 'Verify your email address'
+    footer:
+        banner:
+            free_shipping_title: 'Free Shipping & Return'
+            free_shipping_content: 'Free shipping on all orders'
+            guarantee_title: 'Money Guarantee'
+            guarantee_content: '30 days money back guarantee'
+            multiple_payments_title: 'Multiple Payment methods'
+            multiple_payments_content: 'We accept credit cards and PayPal'
     homepage:
         about_us: 'About Us'
         about_us_content: 'Welcome to our store, your number one online shop that gives you the very best products. You can choose from the very best clothes and shoes from our offer. (<i>You can modify this content by overriding "sylius.homepage.about_us_content" key in your translation file</i>)'
-        carousel_header: 'Brace yourself! Winter is coming'
+        banner_content: 'Brace yourself! Winter is coming'
+        banner_button: 'Check out the new collection'
+        carousel_header: 'Featured products'
         newsletter: 'Newsletter'
         newsletter_description: 'Subscribe to our newsletter to see new offers that are waiting for you! (<i>You can modify this content by overriding "sylius.homepage.newsletter_description" key in your translation file</i>)'
         subscribe: 'Subscribe'
@@ -48,3 +54,4 @@ sylius:
                 header: 'Your account'
                 order_history: 'Order history'
                 personal_information: 'Personal information'
+    top_bar: 'Sign up to our newsletter and grab -20% off'

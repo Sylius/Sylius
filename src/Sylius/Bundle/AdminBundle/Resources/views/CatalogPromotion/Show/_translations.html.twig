@@ -1,11 +1,12 @@
+{% import '@SyliusUi/Macro/flags.html.twig' as flags %}
+
 <div class="ui hidden divider"></div>
 
 <div class="ui styled fluid accordion">
     {% for translation in catalog_promotion.translations %}
         <div class="title">
             <i class="dropdown icon"></i>
-            <i class="{{ translation.locale|slice(-2)|lower }} flag"></i>
-            {{ translation.locale|sylius_locale_name }}
+            {{ flags.fromLocaleCode(translation.locale) }} {{ translation.locale|sylius_locale_name }}
         </div>
         <div class="ui content">
             <table class="ui very basic celled table">

@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -20,9 +20,9 @@ use Symfony\Component\Form\FormView;
 use Symfony\Component\HttpFoundation\ParameterBag;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
+use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Twig\Environment;
 
@@ -47,15 +47,15 @@ final class SecurityControllerSpec extends ObjectBehavior
         FormView $formView,
         Environment $templatingEngine,
         AuthorizationCheckerInterface $authorizationChecker,
-        Response $response,
+        AuthenticationException $authenticationException,
     ): void {
         $authorizationChecker->isGranted('IS_AUTHENTICATED_FULLY')->willReturn(false);
 
-        $authenticationUtils->getLastAuthenticationError()->willReturn('Bad credentials.');
+        $authenticationUtils->getLastAuthenticationError()->willReturn($authenticationException);
         $authenticationUtils->getLastUsername()->willReturn('john.doe');
 
         $request->attributes = $requestAttributes;
-        $requestAttributes->get('_sylius')->willReturn([
+        $requestAttributes->get('_sylius', [])->willReturn([
             'template' => 'CustomTemplateName',
             'form' => 'custom_form_type',
         ]);
@@ -67,7 +67,7 @@ final class SecurityControllerSpec extends ObjectBehavior
             ->render('CustomTemplateName', [
                 'form' => $formView,
                 'last_username' => 'john.doe',
-                'last_error' => 'Bad credentials.',
+                'last_error' => $authenticationException->getWrappedObject(),
             ])
             ->willReturn('content')
         ;
@@ -82,7 +82,7 @@ final class SecurityControllerSpec extends ObjectBehavior
         RouterInterface $router,
     ): void {
         $request->attributes = $requestAttributes;
-        $requestAttributes->get('_sylius')->willReturn(['logged_in_route' => 'foo_bar']);
+        $requestAttributes->get('_sylius', [])->willReturn(['logged_in_route' => 'foo_bar']);
         $authorizationChecker->isGranted('IS_AUTHENTICATED_FULLY')->willReturn(true);
         $router->generate('foo_bar')->willReturn('/login');
 

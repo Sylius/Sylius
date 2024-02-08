@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -18,14 +18,11 @@ use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Channel\Model\ChannelInterface as BaseChannelInterface;
 use Sylius\Component\Promotion\Model\CatalogPromotion as BaseCatalogPromotion;
 use Sylius\Component\Promotion\Model\CatalogPromotionTranslation;
+use Webmozart\Assert\Assert;
 
 class CatalogPromotion extends BaseCatalogPromotion implements CatalogPromotionInterface
 {
-    /**
-     * @var Collection<array-key, ChannelInterface>
-     *
-     * @psalm-var Collection<array-key, ChannelInterface>
-     */
+    /** @var Collection<array-key, ChannelInterface> */
     protected Collection $channels;
 
     public function __construct()
@@ -35,12 +32,9 @@ class CatalogPromotion extends BaseCatalogPromotion implements CatalogPromotionI
         $this->channels = new ArrayCollection();
     }
 
-    /**
-     * @psalm-suppress InvalidReturnType https://github.com/doctrine/collections/pull/220
-     * @psalm-suppress InvalidReturnStatement https://github.com/doctrine/collections/pull/220
-     */
     public function getChannels(): Collection
     {
+        /** @phpstan-ignore-next-line */
         return $this->channels;
     }
 
@@ -51,6 +45,7 @@ class CatalogPromotion extends BaseCatalogPromotion implements CatalogPromotionI
 
     public function addChannel(BaseChannelInterface $channel): void
     {
+        Assert::isInstanceOf($channel, ChannelInterface::class);
         if (!$this->hasChannel($channel)) {
             $this->channels->add($channel);
         }
@@ -58,6 +53,7 @@ class CatalogPromotion extends BaseCatalogPromotion implements CatalogPromotionI
 
     public function removeChannel(BaseChannelInterface $channel): void
     {
+        Assert::isInstanceOf($channel, ChannelInterface::class);
         if ($this->hasChannel($channel)) {
             $this->channels->removeElement($channel);
         }

@@ -3,8 +3,8 @@
 {% block content %}
     {{ sylius_template_event('sylius.admin.taxon.update.before_content', {'resource': resource}) }}
 
-    <div class="ui grid">
-        <div class="sixteen wide mobile sixteen wide tablet four wide computer column">
+    <div class="ui grid sticky-container">
+        <div class="sixteen wide mobile sixteen wide tablet four wide computer column sticky-column">
             {{ sylius_template_event('sylius.admin.taxon.update.taxon_tree', {'resource': resource}) }}
         </div>
         <div class="sixteen wide mobile sixteen wide tablet twelve wide computer column">

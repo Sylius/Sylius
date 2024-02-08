@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -58,9 +58,7 @@ interface CatalogPromotionInterface extends ResourceInterface, CodeAwareInterfac
     public function getTranslation(?string $locale = null): TranslationInterface;
 
     /**
-     * @return Collection|CatalogPromotionScopeInterface[]
-     *
-     * @psalm-return Collection<array-key, CatalogPromotionScopeInterface>
+     * @return Collection<array-key, CatalogPromotionScopeInterface>
      */
     public function getScopes(): Collection;
 
@@ -71,9 +69,7 @@ interface CatalogPromotionInterface extends ResourceInterface, CodeAwareInterfac
     public function removeScope(CatalogPromotionScopeInterface $scope): void;
 
     /**
-     * @return Collection|CatalogPromotionActionInterface[]
-     *
-     * @psalm-return Collection<array-key, CatalogPromotionActionInterface>
+     * @return Collection<array-key, CatalogPromotionActionInterface>
      */
     public function getActions(): Collection;
 

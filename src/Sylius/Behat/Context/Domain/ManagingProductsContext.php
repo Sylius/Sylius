@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Domain;
 
 use Behat\Behat\Context\Context;
-use Doctrine\DBAL\DBALException;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
@@ -46,7 +45,8 @@ final class ManagingProductsContext implements Context
     {
         try {
             $this->productVariantRepository->remove($productVariant);
-        } catch (DBALException $exception) {
+            /** @phpstan-ignore-next-line  */
+        } catch (\Doctrine\DBAL\DBALException|\Doctrine\DBAL\Exception $exception) {
             $this->sharedStorage->set('last_exception', $exception);
         }
     }
@@ -66,7 +66,7 @@ final class ManagingProductsContext implements Context
     {
         try {
             $this->productRepository->remove($product);
-        } catch (DBALException $exception) {
+        } catch (\Exception $exception) {
             $this->sharedStorage->set('last_exception', $exception);
         }
     }
@@ -76,7 +76,13 @@ final class ManagingProductsContext implements Context
      */
     public function iShouldBeNotifiedThatThisProductVariantIsInUseAndCannotBeDeleted()
     {
-        Assert::isInstanceOf($this->sharedStorage->get('last_exception'), DBALException::class);
+        if (class_exists('\Doctrine\DBAL\DBALException')) {
+            Assert::isInstanceOf($this->sharedStorage->get('last_exception'), \Doctrine\DBAL\DBALException::class);
+        }
+
+        if (class_exists('\Doctrine\DBAL\Exception')) {
+            Assert::isInstanceOf($this->sharedStorage->get('last_exception'), \Doctrine\DBAL\Exception::class);
+        }
     }
 
     /**

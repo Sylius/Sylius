@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -21,6 +21,7 @@ use Sylius\Bundle\UserBundle\spec\Fixture\FixtureUserInterface;
 use Sylius\Component\User\Model\User;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
 
 final class UpdateUserEncoderListenerSpec extends ObjectBehavior
@@ -34,9 +35,8 @@ final class UpdateUserEncoderListenerSpec extends ObjectBehavior
         ObjectManager $objectManager,
         Request $request,
         TokenInterface $token,
+        UserInterface $user,
     ): void {
-        $user = new \stdClass();
-
         $token->getUser()->willReturn($user);
 
         $objectManager->persist($user)->shouldNotBeCalled();

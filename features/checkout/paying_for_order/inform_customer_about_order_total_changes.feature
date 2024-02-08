@@ -9,8 +9,8 @@ Feature: Inform customer about any order total changes during checkout process
         And the store has "NA VAT" tax rate of 23% for "Clothes" within the "US" zone
         And the store has a product "PHP T-Shirt" priced at "$19.99"
         And it belongs to "Clothes" tax category
-        And the store ships everywhere for free
-        And the store allows paying offline
+        And the store ships everywhere for Free
+        And the store allows paying Offline
 
     @ui
     Scenario: Inform customer about order total change due to product price change

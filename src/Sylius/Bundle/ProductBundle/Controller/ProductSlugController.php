@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -28,9 +28,6 @@ class ProductSlugController extends AbstractController
         }
     }
 
-    /**
-     * @psalm-suppress DeprecatedMethod
-     */
     public function generateAction(Request $request): Response
     {
         $name = $request->query->get('name');
@@ -42,7 +39,7 @@ class ProductSlugController extends AbstractController
         }
 
         return new JsonResponse([
-            'slug' => $this->get('sylius.generator.slug')->generate($name),
+            'slug' => $this->container->get('sylius.generator.slug')->generate($name),
         ]);
     }
 }

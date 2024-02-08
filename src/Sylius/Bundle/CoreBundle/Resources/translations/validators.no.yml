@@ -1,5 +1,5 @@
 # This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
+# (c) Sylius Sp. z o.o.
 
 sylius:
     avatar_image:
@@ -86,8 +86,8 @@ sylius:
     user:
         email:
             unique: Denne e-postadressen er allerede i bruk.
-            min: E-post må være minst {{ min }} tegn.
-            max: E-post må være maks {{ max }} tegn.
+            min: E-post må være minst {{ limit }} tegn.
+            max: E-post må være maks {{ limit }} tegn.
             invalid: Ugyldig epostadresse.
         username:
             unique: Dette brukernavnet er allerede i bruk.

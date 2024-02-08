@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -16,8 +16,10 @@ namespace Sylius\Component\Core\Factory;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\Model\ProductInterface;
+use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Product\Resolver\ProductVariantResolverInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
+use Webmozart\Assert\Assert;
 
 final class CartItemFactory implements CartItemFactoryInterface
 {
@@ -34,7 +36,9 @@ final class CartItemFactory implements CartItemFactoryInterface
     {
         /** @var OrderItemInterface $cartItem */
         $cartItem = $this->createNew();
-        $cartItem->setVariant($this->variantResolver->getVariant($product));
+        $variant = $this->variantResolver->getVariant($product);
+        Assert::nullOrIsInstanceOf($variant, ProductVariantInterface::class);
+        $cartItem->setVariant($variant);
 
         return $cartItem;
     }

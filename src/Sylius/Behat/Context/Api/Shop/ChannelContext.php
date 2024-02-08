@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -16,6 +16,7 @@ namespace Sylius\Behat\Context\Api\Shop;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
+use Sylius\Behat\Context\Api\Resources;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Webmozart\Assert\Assert;
@@ -26,26 +27,21 @@ final class ChannelContext implements Context
         private ApiClientInterface $client,
         private ResponseCheckerInterface $responseChecker,
         private SharedStorageInterface $sharedStorage,
+        private string $apiUrlPrefix,
     ) {
     }
 
     /**
-     * @Given I am browsing channel :channel
+     * @When /^I (?:am browsing|start browsing|try to browse|browse) (?:|the )("[^"]+" channel)$/
+     * @When /^I (?:start browsing|try to browse|browse) (that channel)$/
+     * @When /^I (?:am browsing|start browsing|try to browse|browse) (?:|the )(channel "[^"]+")$/
      */
     public function iAmBrowsingChannel(ChannelInterface $channel): void
     {
         $this->sharedStorage->set('hostname', $channel->getHostname());
-    }
+        $this->sharedStorage->remove('current_locale_code');
 
-    /**
-     * @When /^I (?:start browsing|try to browse|browse) (that channel)$/
-     * @When /^I (?:am browsing|start browsing|try to browse|browse) (?:|the )("[^"]+" channel)$/
-     */
-    public function iVisitChannelHomepage(ChannelInterface $channel): void
-    {
-        $this->sharedStorage->set('hostname', $channel->getHostname());
-
-        $this->client->show($channel->getCode());
+        $this->client->show(Resources::CHANNELS, $channel->getCode());
     }
 
     /**
@@ -57,8 +53,8 @@ final class ChannelContext implements Context
             $this->responseChecker->getValue(
                 $this->client->getLastResponse(),
                 'baseCurrency',
-            )['code'],
-            $currencyCode,
+            ),
+            sprintf('%s/shop/currencies/%s', $this->apiUrlPrefix, $currencyCode),
         );
     }
 }

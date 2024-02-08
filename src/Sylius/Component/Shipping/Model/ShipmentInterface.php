@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -36,9 +36,7 @@ interface ShipmentInterface extends ResourceInterface, ShippingSubjectInterface,
     public function setMethod(?ShippingMethodInterface $method): void;
 
     /**
-     * @return Collection|ShipmentUnitInterface[]
-     *
-     * @psalm-return Collection<array-key, ShipmentUnitInterface>
+     * @return Collection<array-key, ShipmentUnitInterface>
      */
     public function getUnits(): Collection;
 

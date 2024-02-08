@@ -1,0 +1,18 @@
+{
+    "@context": "\/api\/v2\/contexts\/ProductAssociationType",
+    "@id": "\/api\/v2\/admin\/product-association-types\/TEST",
+    "@type": "ProductAssociationType",
+    "id": @integer@,
+    "code": "TEST",
+    "name": "test",
+    "createdAt": "@string@",
+    "updatedAt": "@string@",
+    "translations": {
+        "en_US": {
+            "@id": "\/api\/v2\/admin\/product-association-type-translations\/@integer@",
+            "@type": "ProductAssociationTypeTranslation",
+            "id": @integer@,
+            "name": "test"
+        }
+    }
+}

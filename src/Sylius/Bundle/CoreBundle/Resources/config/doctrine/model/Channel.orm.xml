@@ -4,7 +4,7 @@
 
  This file is part of the Sylius package.
 
- (c) Paweł Jędrzejewski
+ (c) Sylius Sp. z o.o.
 
  For the full copyright and license information, please view the LICENSE
  file that was distributed with this source code.
@@ -24,6 +24,11 @@
         <field name="skippingShippingStepAllowed" column="skipping_shipping_step_allowed" type="boolean" />
         <field name="skippingPaymentStepAllowed" column="skipping_payment_step_allowed" type="boolean" />
         <field name="accountVerificationRequired" column="account_verification_required" type="boolean" />
+        <field name="shippingAddressInCheckoutRequired" column="shipping_address_in_checkout_required" type="boolean">
+            <options>
+                <option name="default">0</option>
+            </options>
+        </field>
 
         <many-to-one field="defaultLocale" target-entity="Sylius\Component\Locale\Model\LocaleInterface" fetch="EAGER">
             <join-column name="default_locale_id" referenced-column-name="id" nullable="false" />

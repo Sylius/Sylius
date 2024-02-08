@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -25,7 +25,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 use Symfony\Component\Routing\RouterInterface;
-use Symfony\Component\Templating\EngineInterface;
 use Twig\Environment;
 use Webmozart\Assert\Assert;
 
@@ -34,7 +33,7 @@ final class ContactController
     public function __construct(
         private RouterInterface $router,
         private FormFactoryInterface $formFactory,
-        private EngineInterface|Environment $templatingEngine,
+        private Environment $templatingEngine,
         private ChannelContextInterface $channelContext,
         private CustomerContextInterface $customerContext,
         private LocaleContextInterface $localeContext,
@@ -47,8 +46,10 @@ final class ContactController
         $formType = $this->getSyliusAttribute($request, 'form', ContactType::class);
         $form = $this->formFactory->create($formType, null, $this->getFormOptions());
 
-        if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
+        if ($request->isMethod('POST') && $form->handleRequest($request)->isSubmitted() && $form->isValid()) {
+            /** @var mixed $data */
             $data = $form->getData();
+            Assert::isArray($data);
 
             $channel = $this->channelContext->getChannel();
 
@@ -96,7 +97,7 @@ final class ContactController
 
     private function getSyliusAttribute(Request $request, string $attributeName, ?string $default): ?string
     {
-        $attributes = $request->attributes->get('_sylius');
+        $attributes = $request->attributes->get('_sylius', []);
 
         return $attributes[$attributeName] ?? $default;
     }

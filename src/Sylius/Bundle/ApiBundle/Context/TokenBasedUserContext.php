@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -25,14 +25,10 @@ final class TokenBasedUserContext implements UserContextInterface
 
     public function getUser(): ?UserInterface
     {
-        $token = $this->tokenStorage->getToken();
-        if ($token === null) {
-            return null;
-        }
+        /** @var UserInterface|null $user */
+        $user = $this->tokenStorage->getToken()?->getUser();
 
-        /** @var UserInterface|string $user */
-        $user = $token->getUser();
-        if (is_string($user)) {
+        if (!$user instanceof UserInterface) {
             return null;
         }
 

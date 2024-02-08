@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -28,10 +28,10 @@ final class PercentFloatToLocalizedStringTransformer extends PercentToLocalizedS
      * @throws TransformationFailedException if the given value is not a string or
      *                                       if the value could not be transformed
      */
-    public function reverseTransform($value)
+    public function reverseTransform(mixed $value): int|float|null
     {
         if (!is_numeric($value)) {
-            return;
+            return null;
         }
 
         return (float) parent::reverseTransform($value);
@@ -40,10 +40,10 @@ final class PercentFloatToLocalizedStringTransformer extends PercentToLocalizedS
     /**
      * @param float|string $value
      */
-    public function transform($value)
+    public function transform(mixed $value): string
     {
         if (!is_numeric($value)) {
-            return;
+            return '';
         }
 
         return parent::transform((float) $value);

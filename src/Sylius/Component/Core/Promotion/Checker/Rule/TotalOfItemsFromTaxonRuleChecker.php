@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -15,6 +15,7 @@ namespace Sylius\Component\Core\Promotion\Checker\Rule;
 
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
+use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Promotion\Checker\Rule\RuleCheckerInterface;
 use Sylius\Component\Promotion\Exception\UnsupportedTypeException;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
@@ -51,7 +52,7 @@ final class TotalOfItemsFromTaxonRuleChecker implements RuleCheckerInterface
         }
 
         $targetTaxon = $this->taxonRepository->findOneBy(['code' => $configuration['taxon']]);
-        if (null === $targetTaxon) {
+        if (!$targetTaxon instanceof TaxonInterface) {
             return false;
         }
 

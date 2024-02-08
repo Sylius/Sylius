@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -21,6 +21,8 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Security\Core\User\UserCheckerInterface;
+use Symfony\Component\Security\Core\User\UserInterface as SymfonyUserInterface;
+use Webmozart\Assert\Assert;
 
 class UserLogin implements UserLoginInterface
 {
@@ -35,11 +37,12 @@ class UserLogin implements UserLoginInterface
     {
         $firewallName = $firewallName ?? 'main';
 
+        Assert::isInstanceOf($user, SymfonyUserInterface::class);
         $this->userChecker->checkPreAuth($user);
         $this->userChecker->checkPostAuth($user);
 
         $token = $this->createToken($user, $firewallName);
-        if (!$token->isAuthenticated()) {
+        if (null === $token->getUser() || [] === $token->getUser()->getRoles()) {
             throw new AuthenticationException('Unauthenticated token');
         }
 
@@ -49,6 +52,7 @@ class UserLogin implements UserLoginInterface
 
     protected function createToken(UserInterface $user, string $firewallName): UsernamePasswordToken
     {
+        Assert::isInstanceOf($user, SymfonyUserInterface::class);
         /** @deprecated parameter credential was deprecated in Symfony 5.4, so in Sylius 1.11 too, in Sylius 2.0 providing 4 arguments will be prohibited. */
         if (3 === (new \ReflectionClass(UsernamePasswordToken::class))->getConstructor()->getNumberOfParameters()) {
             return new UsernamePasswordToken(
@@ -60,8 +64,8 @@ class UserLogin implements UserLoginInterface
 
         return new UsernamePasswordToken(
             $user,
-            null,
-            $firewallName,
+            null, // @phpstan-ignore-line continue to support Sf < 6
+            $firewallName, // @phpstan-ignore-line continue to support Sf < 6
             array_map(/** @param object|string $role */ static fn ($role): string => (string) $role, $user->getRoles()),
         );
     }

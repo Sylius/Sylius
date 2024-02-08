@@ -12,8 +12,8 @@ Feature: Being unable to buy products that are out of stock
         And "2Pac T-Shirt" product is also tracked by the inventory
         And there are 5 units of product "Iron Maiden T-Shirt" available in the inventory
         And there are 10 units of product "2Pac T-Shirt" available in the inventory
-        And the store ships everywhere for free
-        And the store allows paying offline
+        And the store ships everywhere for Free
+        And the store allows paying Offline
         And I am a logged in customer
 
     @ui @api

@@ -4,7 +4,7 @@
 
  This file is part of the Sylius package.
 
- (c) Paweł Jędrzejewski
+ (c) Sylius Sp. z o.o.
 
  For the full copyright and license information, please view the LICENSE
  file that was distributed with this source code.
@@ -17,12 +17,6 @@
 >
     <services>
         <defaults public="true" />
-
-        <service id="Sylius\Bundle\ApiBundle\Provider\CustomerProviderInterface" class="Sylius\Bundle\ApiBundle\Provider\CustomerProvider">
-            <argument type="service" id="sylius.canonicalizer" />
-            <argument type="service" id="sylius.factory.customer" />
-            <argument type="service" id="sylius.repository.customer" />
-        </service>
 
         <service id="Sylius\Bundle\ApiBundle\Provider\PathPrefixProviderInterface" class="Sylius\Bundle\ApiBundle\Provider\PathPrefixProvider">
             <argument type="service" id="Sylius\Bundle\ApiBundle\Context\UserContextInterface" />

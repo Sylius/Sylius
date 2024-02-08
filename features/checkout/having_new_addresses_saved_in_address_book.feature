@@ -7,7 +7,7 @@ Feature: Having new addresses saved in the address book after checkout
     Background:
         Given the store operates on a single channel in "United States"
         And the store has a product "Lannister Coat" priced at "$19.99"
-        And the store ships everywhere for free
+        And the store ships everywhere for Free
         And the store allows paying with "Cash on Delivery"
         And I am a logged in customer
         And I have product "Lannister Coat" in the cart

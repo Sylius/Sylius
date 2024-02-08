@@ -1,0 +1,99 @@
+{
+    "@context": "\/api\/v2\/contexts\/ProductAttributeValue",
+    "@id": "\/api\/v2\/shop\/products\/MUG_SW\/attributes",
+    "@type": "hydra:Collection",
+    "hydra:member": [
+        {
+            "@id": "\/api\/v2\/shop\/product-attribute-values\/@integer@",
+            "@type": "ProductAttributeValue",
+            "id": @integer@,
+            "attribute": "\/api\/v2\/shop\/product-attributes\/dishwasher_safe",
+            "localeCode": "pl_PL",
+            "name": "mozna myc w zmywarce",
+            "type": "checkbox",
+            "code": "dishwasher_safe",
+            "value": false
+        },
+        {
+            "@id": "\/api\/v2\/shop\/product-attribute-values\/@integer@",
+            "@type": "ProductAttributeValue",
+            "id": @integer@,
+            "attribute": "\/api\/v2\/shop\/product-attributes\/manufactured",
+            "localeCode": "en_US",
+            "name": "manufactured",
+            "type": "date",
+            "code": "manufactured",
+            "value": "2021-11-11"
+        },
+        {
+            "@id": "\/api\/v2\/shop\/product-attribute-values\/@integer@",
+            "@type": "ProductAttributeValue",
+            "id": @integer@,
+            "attribute": "\/api\/v2\/shop\/product-attributes\/available_until",
+            "localeCode": "en_US",
+            "name": "available until",
+            "type": "datetime",
+            "code": "available_until",
+            "value": "2023-05-02 13:45:00"
+        },
+        {
+            "@id": "\/api\/v2\/shop\/product-attribute-values\/@integer@",
+            "@type": "ProductAttributeValue",
+            "id": @integer@,
+            "attribute": "\/api\/v2\/shop\/product-attributes\/capacity",
+            "localeCode": "en_US",
+            "name": "capacity",
+            "type": "integer",
+            "code": "capacity",
+            "value": 250
+        },
+        {
+            "@id": "\/api\/v2\/shop\/product-attribute-values\/@integer@",
+            "@type": "ProductAttributeValue",
+            "id": @integer@,
+            "attribute": "\/api\/v2\/shop\/product-attributes\/yixing_clay",
+            "localeCode": "en_US",
+            "name": "yixing clay",
+            "type": "percent",
+            "code": "yixing_clay",
+            "value": 0.9
+        },
+        {
+            "@id": "\/api\/v2\/shop\/product-attribute-values\/@integer@",
+            "@type": "ProductAttributeValue",
+            "id": @integer@,
+            "attribute": "\/api\/v2\/shop\/product-attributes\/extra_info",
+            "localeCode": "pl_PL",
+            "name": "extra info",
+            "type": "select",
+            "code": "extra_info",
+            "value": [
+                "handmade",
+                "opakowanie prezentowe"
+            ]
+        },
+        {
+            "@id": "\/api\/v2\/shop\/product-attribute-values\/@integer@",
+            "@type": "ProductAttributeValue",
+            "id": @integer@,
+            "attribute": "\/api\/v2\/shop\/product-attributes\/note",
+            "localeCode": "en_US",
+            "name": "note",
+            "type": "textarea",
+            "code": "note",
+            "value": "Duis efficitur vel mauris vel interdum. Integer posuere fermentum lacinia. Sed a tellus ut risuslaoreet sollicitudin eu a felis. Ut fringilla lobortis felis, ut vestibulum risus. Pellentesque massa turpis, cursus sed auctor ac, tincidunt sed nunc."
+        },
+        {
+            "@id": "\/api\/v2\/shop\/product-attribute-values\/@integer@",
+            "@type": "ProductAttributeValue",
+            "id": @integer@,
+            "attribute": "\/api\/v2\/shop\/product-attributes\/origin",
+            "localeCode": "pl_PL",
+            "name": "origin",
+            "type": "text",
+            "code": "origin",
+            "value": "Chiny"
+        }
+    ],
+    "hydra:totalItems": 8
+}

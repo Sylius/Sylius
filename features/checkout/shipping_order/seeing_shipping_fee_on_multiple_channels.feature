@@ -12,7 +12,7 @@ Feature: Seeing detailed shipping fee on multiple channels with different base c
         And this zone has the "United States" country member
         And the store has "UPS" shipping method with "$15.00" fee per shipment for "Web-US" channel and "£12.00" for "Web-GB" channel
         And the store has "FedEx" shipping method with "$10.00" fee per unit for "Web-US" channel and "£8.00" for "Web-GB" channel
-        And the store allows paying offline for all channels
+        And the store allows paying Offline for all channels
         And the store has a product "PHP T-Shirt" priced at "$12.54" available in channel "Web-US" and channel "Web-GB"
         And I am a logged in customer
 

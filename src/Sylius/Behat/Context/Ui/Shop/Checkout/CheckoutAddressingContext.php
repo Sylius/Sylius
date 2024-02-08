@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -140,6 +140,22 @@ final class CheckoutAddressingContext implements Context
     }
 
     /**
+     * @When /^I specify the required shipping (address as "[^"]+", "[^"]+", "[^"]+", "[^"]+" for "[^"]+")$/
+     */
+    public function iSpecifyTheRequiredShippingAddressAs(AddressInterface $address): void
+    {
+        $key = sprintf(
+            'shipping_address_%s_%s',
+            strtolower((string) $address->getFirstName()),
+            strtolower((string) $address->getLastName()),
+        );
+        $this->sharedStorage->set($key, $address);
+        $this->sharedStorage->set(str_replace('shipping', 'billing', $key), $address);
+
+        $this->addressPage->specifyShippingAddress($address);
+    }
+
+    /**
      * @When I specify shipping country province as :provinceName
      */
     public function iSpecifyShippingCountryProvinceAs(string $provinceName): void
@@ -173,6 +189,17 @@ final class CheckoutAddressingContext implements Context
     }
 
     /**
+     * @When /^I specify different billing (address as "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)" for "([^"]+)")$/
+     */
+    public function iSpecifyDifferentBillingAddressAs(AddressInterface $address): void
+    {
+        $this->addressPage->chooseDifferentShippingAddress();
+
+        $this->iSpecifyTheBillingAddressAs($address);
+    }
+
+    /**
+     * @Given /^I have specified the billing (address as "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)" for "([^"]+)")$/
      * @When I specified the billing address
      * @When /^I specified the billing (address as "[^"]+", "[^"]+", "[^"]+", "[^"]+" for "[^"]+")$/
      * @When /^I define the billing (address as "[^"]+", "[^"]+", "[^"]+", "[^"]+" for "[^"]+")$/
@@ -326,6 +353,22 @@ final class CheckoutAddressingContext implements Context
     public function iShouldBeNotifiedAboutBadCredentials()
     {
         Assert::true($this->addressPage->checkInvalidCredentialsValidation());
+    }
+
+    /**
+     * @Then I should be notified to resubmit the addressing form
+     */
+    public function iShouldBeNotifiedToResubmitTheAddressingForm()
+    {
+        Assert::true($this->addressPage->checkFormValidationMessage('Please resubmit complete form.'), 'Unable to find "Please resubmit complete form." validation message');
+    }
+
+    /**
+     * @Then I should not be notified that the form contains extra fields
+     */
+    public function iShouldNotBeNotifiedTheFormContainsExtraFields()
+    {
+        Assert::false($this->addressPage->checkFormValidationMessage('This form should not contain extra fields.'), 'Found "This form should not contains extra fields." validation message');
     }
 
     /**

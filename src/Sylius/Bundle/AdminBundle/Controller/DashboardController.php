@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -22,16 +22,16 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\RouterInterface;
-use Symfony\Component\Templating\EngineInterface;
 use Twig\Environment;
+use Webmozart\Assert\Assert;
 
 final class DashboardController
 {
     public function __construct(
         private ChannelRepositoryInterface $channelRepository,
-        private EngineInterface|Environment $templatingEngine,
+        private Environment $templatingEngine,
         private RouterInterface $router,
-        private ?SalesDataProviderInterface $salesDataProvider = null,
+        private ?SalesDataProviderInterface $salesDataProvider = null, /** @phpstan-ignore-line */
         private ?StatisticsDataProviderInterface $statisticsDataProvider = null,
     ) {
     }
@@ -72,9 +72,15 @@ final class DashboardController
     private function findChannelByCodeOrFindFirst(?string $channelCode): ?ChannelInterface
     {
         if (null !== $channelCode) {
-            return $this->channelRepository->findOneByCode($channelCode);
+            $channel = $this->channelRepository->findOneByCode($channelCode);
+            Assert::nullOrIsInstanceOf($channel, ChannelInterface::class);
+
+            return $channel;
         }
 
-        return $this->channelRepository->findOneBy([]);
+        $channel = $this->channelRepository->findBy([], ['id' => 'ASC'], 1)[0] ?? null;
+        Assert::nullOrIsInstanceOf($channel, ChannelInterface::class);
+
+        return $channel;
     }
 }

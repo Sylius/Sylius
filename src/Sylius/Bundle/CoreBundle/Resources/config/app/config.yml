@@ -1,5 +1,5 @@
 # This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
+# (c) Sylius Sp. z o.o.
 
 imports:
     - { resource: "@SyliusAddressingBundle/Resources/config/app/config.yml" }
@@ -17,6 +17,7 @@ imports:
     - { resource: "@SyliusTaxationBundle/Resources/config/app/config.yml" }
     - { resource: "@SyliusTaxonomyBundle/Resources/config/app/config.yml" }
     - { resource: "@SyliusUserBundle/Resources/config/app/config.yml" }
+    - { resource: "@SyliusUiBundle/Resources/config/app/config.yml" }
 
     - { resource: "@SyliusCoreBundle/Resources/config/app/parameters.yml" }
     - { resource: "@SyliusCoreBundle/Resources/config/app/sylius.yml" }
@@ -43,6 +44,13 @@ doctrine:
                         MONTH: Sylius\Bundle\CoreBundle\Doctrine\DQL\Month
                         WEEK: Sylius\Bundle\CoreBundle\Doctrine\DQL\Week
                         YEAR: Sylius\Bundle\CoreBundle\Doctrine\DQL\Year
+
+flysystem:
+    storages:
+        sylius.storage:
+            adapter: 'local'
+            options:
+                directory: '%sylius_core.images_dir%'
 
 knp_gaufrette:
     adapters:
@@ -109,7 +117,7 @@ twig:
         sylius: "@sylius.context.shopper"
         sylius_base_locale: "%locale%"
         sylius_meta:
-            version: !php/const Sylius\Bundle\CoreBundle\Application\Kernel::VERSION
+            version: !php/const Sylius\Bundle\CoreBundle\SyliusCoreBundle::VERSION
 
 sonata_block:
     blocks:

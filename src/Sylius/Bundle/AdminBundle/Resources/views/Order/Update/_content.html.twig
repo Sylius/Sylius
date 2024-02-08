@@ -17,6 +17,6 @@
     {{ sylius_template_event('sylius.admin.order.update.form', {'resource': resource}) }}
 
     {{ form_row(form._token) }}
-    {% include '@SyliusUi/Form/Buttons/_update.html.twig' with {'paths': {'cancel': path('sylius_admin_order_index')}} %}
+    {% include '@SyliusUi/Form/Buttons/_update.html.twig' with {'paths': {'cancel': sylius_generate_redirect_path(path('sylius_admin_order_index'))}} %}
 </div>
 {{ form_end(form, {'render_rest': false}) }}

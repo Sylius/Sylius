@@ -33,7 +33,7 @@ Feature: Adding a new product
         And the product "Dice Brewing" should appear in the store
 
     @ui @no-api
-    Scenario: Adding a new simple free product
+    Scenario: Adding a new simple Free product
         When I want to create a new simple product
         And I specify its code as "BOARD_DICE_BREWING"
         And I name it "Dice Brewing" in "English (United States)"
@@ -55,7 +55,7 @@ Feature: Adding a new product
         Then I should be notified that it has been successfully created
         And the product "Dice Brewing" should appear in the store
 
-    @ui
+    @ui @javascript
     Scenario: Adding a new configurable product
         Given the store has a product option "Bottle size" with a code "bottle_size"
         And this product option has the "0.7" option value with code "bottle_size_medium"

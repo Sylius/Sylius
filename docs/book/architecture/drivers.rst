@@ -73,7 +73,7 @@ Sylius uses a lot of libraries for various tasks:
 
 * `Payum <https://github.com/Payum/Payum>`_ for payments
 * `KnpMenu <https://symfony.com/doc/current/bundles/KnpMenuBundle/index.html>`_ - for shop and admin menus
-* `Gaufrette <https://github.com/KnpLabs/Gaufrette>`_ for filesystem abstraction (store images locally, Amazon S3 or external server)
+* `Flysystem <https://github.com/thephpleague/flysystem>`_ for filesystem abstraction (store images locally, Amazon S3 or external server)
 * `Imagine <https://github.com/liip/LiipImagineBundle>`_ for images processing, generating thumbnails and cropping
 * `Pagerfanta <https://github.com/whiteoctober/Pagerfanta>`_ for pagination
 * `Winzou State Machine <https://github.com/winzou/StateMachineBundle>`_ -  for the state machines handling

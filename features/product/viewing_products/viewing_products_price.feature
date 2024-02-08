@@ -9,6 +9,6 @@ Feature: Viewing a product price
 
     @ui @api
     Scenario: Viewing a detailed page with product's price
-        Given the store has a product "T-shirt banana" priced at "$39.00"
+        Given the store has a product "T-Shirt banana" priced at "$39.00"
         When I check this product's details
         Then I should see the product price "$39.00"

@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -20,35 +20,35 @@ use Sylius\Bundle\ApiBundle\Command\IriToIdentifierConversionAwareInterface;
 class AddProductReview implements IriToIdentifierConversionAwareInterface, CustomerEmailAwareInterface
 {
     /**
-     * @psalm-immutable
+     * @immutable
      *
      * @var string|null
      */
     public $title;
 
     /**
-     * @psalm-immutable
+     * @immutable
      *
      * @var int|null
      */
     public $rating;
 
     /**
-     * @psalm-immutable
+     * @immutable
      *
      * @var string|null
      */
     public $comment;
 
     /**
-     * @psalm-immutable
+     * @immutable
      *
      * @var string
      */
     public $productCode;
 
     /**
-     * @psalm-immutable
+     * @immutable
      *
      * @var string|null
      */

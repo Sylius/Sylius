@@ -10,7 +10,7 @@ Feature: Returning from order summary page to one of previous steps
         And the store has a product "Paganini T-Shirt" priced at "$10.00"
         And there is a promotion "Holiday promotion"
         And the promotion gives "$66.99" discount to every order with quantity at least 2
-        And the store ships everywhere for free
+        And the store ships everywhere for Free
         And the store allows paying with "Cash on Delivery"
 
     @ui @no-api
@@ -54,7 +54,7 @@ Feature: Returning from order summary page to one of previous steps
     @ui @no-api
     Scenario: Going back to shipping step with steps panel when order total is zero
         Given I have product "Stark Robe" in the cart
-        And I have product "Paganini T-shirt" in the cart
+        And I have product "Paganini T-Shirt" in the cart
         And I complete addressing step with email "jon@snow.wall" and "United States" based billing address
         And I proceed with "Free" shipping method
         When I go to the shipping step
@@ -64,7 +64,7 @@ Feature: Returning from order summary page to one of previous steps
     @ui @no-api
     Scenario: Going back to addressing step with steps panel when order total is zero
         Given I have product "Stark Robe" in the cart
-        And I have product "Paganini T-shirt" in the cart
+        And I have product "Paganini T-Shirt" in the cart
         And I complete addressing step with email "jon@snow.wall" and "United States" based billing address
         And I proceed with "Free" shipping method
         When I go to the addressing step

@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -30,11 +30,7 @@ class Shipment implements ShipmentInterface, \Stringable
     /** @var ShippingMethodInterface|null */
     protected $method;
 
-    /**
-     * @var Collection|ShipmentUnitInterface[]
-     *
-     * @psalm-var Collection<array-key, ShipmentUnitInterface>
-     */
+    /** @var Collection<array-key, ShipmentUnitInterface> */
     protected $units;
 
     /** @var string|null */

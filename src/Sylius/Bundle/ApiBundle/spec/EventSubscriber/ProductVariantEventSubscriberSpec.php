@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -78,6 +78,7 @@ final class ProductVariantEventSubscriberSpec extends ObjectBehavior
         HttpKernelInterface $kernel,
         Request $request,
     ): void {
+        $request->getMethod()->willReturn(Request::METHOD_PUT);
         $eventBus->dispatch(Argument::any())->shouldNotBeCalled();
 
         $this->postWrite(new ViewEvent(

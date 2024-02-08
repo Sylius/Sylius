@@ -1,11 +1,8 @@
 # This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
+# (c) Sylius Sp. z o.o.
 
 sylius:
     email:
-        contact_request:
-            content: 'Contenuto'
-            subject: 'Richiesta di contatto'
         order_confirmation:
             subject: 'Conferma dell''ordine'
             view_order_or_change_payment_method: 'Mostra l''ordine o cambia il metodo di pagamento'
@@ -19,7 +16,7 @@ sylius:
             subject: 'Verifica dell''indirizzo di posta elettronica'
     homepage:
         about_us_content: 'Benvenuti nel nostro negozio, il negozio online numero uno che ti offre i migliori prodotti. È possibile scegliere tra i migliori vestiti e scarpe dalle nostre offerte. (<i>Puoi modificare questo contenuto sovrascrivendo la chiave "sylius.homepage.about_us_content" nel tuo file di traduzione</i>)'
-        carousel_header: 'Preparati! L''inverno sta arrivando'
+        banner_content: 'Preparati! L''inverno sta arrivando'
         newsletter_description: 'Iscriviti alla nostra newsletter per ricevere le nuove offerte che ti aspettano! (<i>Puoi modificare questo contenuto sovrascrivendo "sylius. omepage.newsletter_description" chiave nel tuo file di traduzione</i>)'
     lightbox:
         image_album_label: 'Immagine %1 di %2'

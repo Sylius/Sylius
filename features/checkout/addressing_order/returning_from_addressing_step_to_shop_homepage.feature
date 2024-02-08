@@ -7,7 +7,7 @@ Feature: Returning from addressing step to shop homepage
     Background:
         Given the store operates on a single channel in "United States"
         And the store has a product "The Stick of Truth" priced at "$19.99"
-        And the store ships everywhere for free
+        And the store ships everywhere for Free
         And I am a logged in customer
 
     @ui @no-api

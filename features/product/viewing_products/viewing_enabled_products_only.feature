@@ -9,10 +9,10 @@ Feature: Viewing enabled products only
         And the store has a "Super Cool T-Shirt" product
         And the store has a "PHP T-Shirt" product
         And the store has a "Shiny T-Shirt" product
-        And the "PHP T-shirt" product is disabled
+        And the "PHP T-Shirt" product is disabled
 
     @api
     Scenario: Seeing only enabled products
         When I browse products
         Then I should see only 2 products
-        And I should not see the product with name "PHP T-shirt"
+        And I should not see the product with name "PHP T-Shirt"

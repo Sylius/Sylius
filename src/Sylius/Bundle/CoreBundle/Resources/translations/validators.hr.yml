@@ -1,5 +1,5 @@
 # This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
+# (c) Sylius Sp. z o.o.
 
 sylius:
     avatar_image:
@@ -87,8 +87,8 @@ sylius:
     user:
         email:
             unique: Ova email adresa je trenutno zauzeta.
-            min: Email adresa mora imati barem {{ min }} znakova.
-            max: Email adresa ne smije imati više od {{ max }} znakova.
+            min: Email adresa mora imati barem {{ limit }} znakova.
+            max: Email adresa ne smije imati više od {{ limit }} znakova.
             invalid: Ovaj e-mail nije valjan.
         username:
             unique: Ovo korisničko ime je zauzeto.

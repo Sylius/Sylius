@@ -7,8 +7,8 @@ Feature: Seeing order promotion total on order summary page
     Background:
         Given the store operates on a single channel in "United States"
         And the store has a product "The Sorting Hat" priced at "$20.00"
-        And the store ships everywhere for free
-        And the store allows paying offline
+        And the store ships everywhere for Free
+        And the store allows paying Offline
         And there is a promotion "Holiday promotion"
         And it gives "20%" discount to every order
         And there is a promotion "All year promotion"

@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -13,12 +13,10 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ShopBundle\EventListener;
 
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Persistence\ObjectManager;
+use Sylius\Bundle\CoreBundle\Order\Checker\OrderPromotionsIntegrityCheckerInterface;
 use Sylius\Bundle\ResourceBundle\Event\ResourceControllerEvent;
 use Sylius\Component\Core\Model\OrderInterface;
-use Sylius\Component\Core\Model\PromotionInterface;
-use Sylius\Component\Order\Processor\OrderProcessorInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Routing\RouterInterface;
 use Webmozart\Assert\Assert;
@@ -27,8 +25,8 @@ final class OrderIntegrityChecker implements OrderIntegrityCheckerInterface
 {
     public function __construct(
         private RouterInterface $router,
-        private OrderProcessorInterface $orderProcessor,
         private ObjectManager $manager,
+        private OrderPromotionsIntegrityCheckerInterface $orderPromotionsIntegrityChecker,
     ) {
     }
 
@@ -39,28 +37,21 @@ final class OrderIntegrityChecker implements OrderIntegrityCheckerInterface
         /** @var OrderInterface $order */
         Assert::isInstanceOf($order, OrderInterface::class);
 
-        /** @var ArrayCollection<array-key, PromotionInterface> $previousPromotions */
-        $previousPromotions = new ArrayCollection($order->getPromotions()->toArray());
         $oldTotal = $order->getTotal();
 
-        $this->orderProcessor->process($order);
+        if ($promotion = $this->orderPromotionsIntegrityChecker->check($order)) {
+            $event->stop(
+                'sylius.order.promotion_integrity',
+                ResourceControllerEvent::TYPE_ERROR,
+                ['%promotionName%' => $promotion->getName()],
+            );
 
-        /** @var PromotionInterface $previousPromotion */
-        foreach ($previousPromotions as $previousPromotion) {
-            if (!$order->getPromotions()->contains($previousPromotion)) {
-                $event->stop(
-                    'sylius.order.promotion_integrity',
-                    ResourceControllerEvent::TYPE_ERROR,
-                    ['%promotionName%' => $previousPromotion->getName()],
-                );
+            $event->setResponse(new RedirectResponse($this->router->generate('sylius_shop_checkout_complete')));
 
-                $event->setResponse(new RedirectResponse($this->router->generate('sylius_shop_checkout_complete')));
+            $this->manager->persist($order);
+            $this->manager->flush();
 
-                $this->manager->persist($order);
-                $this->manager->flush();
-
-                return;
-            }
+            return;
         }
 
         if ($order->getTotal() !== $oldTotal) {
@@ -69,8 +60,6 @@ final class OrderIntegrityChecker implements OrderIntegrityCheckerInterface
 
             $this->manager->persist($order);
             $this->manager->flush();
-
-            return;
         }
     }
 }

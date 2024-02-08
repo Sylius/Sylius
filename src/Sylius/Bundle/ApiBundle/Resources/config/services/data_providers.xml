@@ -4,7 +4,7 @@
 
  This file is part of the Sylius package.
 
- (c) Paweł Jędrzejewski
+ (c) Sylius Sp. z o.o.
 
  For the full copyright and license information, please view the LICENSE
  file that was distributed with this source code.
@@ -17,6 +17,14 @@
 >
     <services>
         <defaults public="true" />
+
+        <service id="Sylius\Bundle\ApiBundle\DataProvider\AccountResetPasswordItemDataProvider">
+            <tag name="api_platform.item_data_provider" priority="10" />
+        </service>
+
+        <service id="Sylius\Bundle\ApiBundle\DataProvider\AdminResetPasswordItemDataProvider">
+            <tag name="api_platform.item_data_provider" priority="10" />
+        </service>
 
         <service id="Sylius\Bundle\ApiBundle\DataProvider\OrderItemItemDataProvider">
             <argument type="service" id="sylius.repository.order_item" />
@@ -48,28 +56,41 @@
             <tag name="api_platform.item_data_provider" priority="10" />
         </service>
 
+        <service id="Sylius\Bundle\ApiBundle\DataProvider\ProductAttributesSubresourceDataProvider">
+            <argument type="tagged_iterator" tag="api_platform.doctrine.orm.query_extension.collection" />
+            <argument type="service" id="sylius.repository.product_attribute_value" />
+            <argument type="service" id="sylius.context.locale" />
+            <argument type="service" id="sylius.locale_provider.channel_based" />
+            <argument>%locale%</argument>
+            <tag name="api_platform.subresource_data_provider" priority="10" />
+        </service>
+
         <service id="Sylius\Bundle\ApiBundle\DataProvider\CustomerItemDataProvider">
             <argument type="service" id="Sylius\Bundle\ApiBundle\Context\UserContextInterface" />
             <argument type="service" id="sylius.repository.customer" />
             <tag name="api_platform.item_data_provider" priority="10" />
         </service>
 
-        <service id="Sylius\Bundle\ApiBundle\DataProvider\ResetPasswordItemDataProvider">
-            <tag name="api_platform.item_data_provider" priority="10" />
-        </service>
-
-        <service id="Sylius\Bundle\ApiBundle\DataProvider\CartShippingMethodsSubresourceDataProvider">
-            <argument type="service" id="sylius.repository.order" />
+        <service id="Sylius\Bundle\ApiBundle\DataProvider\ShippingMethodsCollectionDataProvider">
             <argument type="service" id="sylius.repository.shipment" />
+            <argument type="service" id="sylius.repository.shipping_method" />
             <argument type="service" id="sylius.shipping_methods_resolver" />
-            <tag name="api_platform.subresource_data_provider" priority="10" />
+            <argument type="service" id="Sylius\Component\Channel\Context\ChannelContextInterface" />
+            <tag name="api_platform.collection_data_provider" priority="10" />
         </service>
 
-        <service id="Sylius\Bundle\ApiBundle\DataProvider\CartPaymentMethodsSubresourceDataProvider">
+        <service id="Sylius\Bundle\ApiBundle\DataProvider\PaymentMethodsCollectionDataProvider">
             <argument type="service" id="sylius.repository.order" />
+            <argument type="service" id="sylius.repository.payment_method" />
             <argument type="service" id="sylius.repository.payment" />
-            <argument type="service" id="sylius.payment_methods_resolver.channel_based" />
-            <tag name="api_platform.subresource_data_provider" priority="10" />
+            <argument type="service" id="Sylius\Component\Channel\Context\ChannelContextInterface" />
+            <argument type="service" id="sylius.payment_methods_resolver" />
+            <tag name="api_platform.collection_data_provider" priority="10" />
+        </service>
+
+        <service id="Sylius\Bundle\ApiBundle\DataProvider\ChannelsCollectionDataProvider">
+            <argument type="service" id="sylius.context.channel" />
+            <tag name="api_platform.collection_data_provider" priority="10" />
         </service>
 
         <service id="Sylius\Bundle\ApiBundle\DataProvider\OrderAdjustmentsSubresourceDataProvider">

@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -13,7 +13,9 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Page\Admin\Order;
 
+use Behat\Mink\Element\NodeElement;
 use Sylius\Behat\Page\Admin\Crud\IndexPage as BaseIndexPage;
+use Sylius\Behat\Service\AutocompleteHelper;
 
 class IndexPage extends BaseIndexPage implements IndexPageInterface
 {
@@ -58,12 +60,46 @@ class IndexPage extends BaseIndexPage implements IndexPageInterface
         $this->getDocument()->fillField('criteria_total_lessThan', $total);
     }
 
+    public function specifyFilterProduct(string $productName): void
+    {
+        $productFilterElement = $this->getElement('filter_product')->getParent();
+
+        $this->specifyAutocompleteFilter($productFilterElement, $productName);
+    }
+
+    public function specifyFilterVariant(string $variantName): void
+    {
+        $variantFilterElement = $this->getElement('filter_variant')->getParent();
+
+        $this->specifyAutocompleteFilter($variantFilterElement, $variantName);
+    }
+
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
             'filter_channel' => '#criteria_channel',
-            'filter_shipping_method' => '#criteria_shipping_method',
             'filter_currency' => '#criteria_total_currency',
+            'filter_product' => '#criteria_product',
+            'filter_shipping_method' => '#criteria_shipping_method',
+            'filter_variant' => '#criteria_variant',
+            'filters' => '.ui.styled.fluid.accordion:contains("Filters")',
         ]);
+    }
+
+    private function specifyAutocompleteFilter(NodeElement $autocomplete, string $value): void
+    {
+        $this->showFilters();
+
+        AutocompleteHelper::chooseValue($this->getSession(), $autocomplete, $value);
+    }
+
+    private function showFilters(): void
+    {
+        $filters = $this->getElement('filters');
+        if ($filters->find('css', '.title')->hasClass('active')) {
+            return;
+        }
+
+        $filters->click();
     }
 }

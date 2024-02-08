@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Service\Setter;
 
+use Behat\Mink\Driver\PantherDriver;
 use Behat\Mink\Driver\Selenium2Driver;
 use Behat\Mink\Session;
 use DMore\ChromeDriver\ChromeDriver;
@@ -31,7 +32,7 @@ final class CookieSetter implements CookieSetterInterface
     {
         $driver = $this->minkSession->getDriver();
 
-        if ($driver instanceof ChromeDriver) {
+        if ($driver instanceof ChromeDriver || $driver instanceof PantherDriver) {
             if (!$driver->isStarted()) {
                 $driver->start();
             }

@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -112,6 +112,10 @@ class OrderController extends ResourceController
             return $this->redirectHandler->redirectToResource($configuration, $resource);
         }
 
+        if ($form->isSubmitted() && !$form->isValid()) {
+            $this->resetChangesOnCart($resource);
+        }
+
         if (!$configuration->isHtmlRequest()) {
             return $this->viewHandler->handle($configuration, View::create($form, Response::HTTP_BAD_REQUEST));
         }
@@ -127,9 +131,18 @@ class OrderController extends ResourceController
         );
     }
 
-    /**
-     * @psalm-suppress DeprecatedMethod
-     */
+    private function resetChangesOnCart(OrderInterface $cart): void
+    {
+        if (!$this->manager->contains($cart)) {
+            return;
+        }
+
+        $this->manager->refresh($cart);
+        foreach ($cart->getItems() as $item) {
+            $this->manager->refresh($item);
+        }
+    }
+
     public function clearAction(Request $request): Response
     {
         $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);

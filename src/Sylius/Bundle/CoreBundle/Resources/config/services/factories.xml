@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Sylius Sp. z o.o.
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <defaults public="true" />
+
+        <service id="sylius.custom_factory.order" class="Sylius\Bundle\CoreBundle\Factory\OrderFactory" decorates="sylius.factory.order">
+            <argument type="service" id="sylius.custom_factory.order.inner" />
+        </service>
+        <service id="Sylius\Bundle\CoreBundle\Factory\OrderFactoryInterface" alias="sylius.custom_factory.order" />
+    </services>
+</container>

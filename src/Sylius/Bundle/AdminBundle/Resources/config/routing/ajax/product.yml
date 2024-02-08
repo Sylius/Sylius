@@ -2,14 +2,14 @@ sylius_admin_ajax_generate_product_slug:
     path: /generate-slug/
     methods: [GET]
     defaults:
-        _controller: sylius.controller.product_slug:generateAction
+        _controller: sylius.controller.product_slug::generateAction
         _format: json
 
 sylius_admin_ajax_product_by_name_phrase:
     path: /search
     methods: [GET]
     defaults:
-        _controller: sylius.controller.product:indexAction
+        _controller: sylius.controller.product::indexAction
         _format: json
         _sylius:
             serialization_groups: [Autocomplete]
@@ -19,13 +19,29 @@ sylius_admin_ajax_product_by_name_phrase:
                 arguments:
                     phrase: $phrase
                     locale: expr:service('sylius.context.locale').getLocaleCode()
-                    limit: 25
+                    limit: "!!int %sylius.ajax.product.autocomplete_limit%"
+
+sylius_admin_ajax_products_by_phrase:
+    path: /search-phrase
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.product::indexAction
+        _format: json
+        _sylius:
+            serialization_groups: [Autocomplete]
+            permission: true
+            repository:
+                method: findByPhrase
+                arguments:
+                    phrase: $phrase
+                    locale: expr:service('sylius.context.locale').getLocaleCode()
+                    limit: "!!int %sylius.ajax.product.autocomplete_limit%"
 
 sylius_admin_ajax_product_by_code:
     path: /code
     methods: [GET]
     defaults:
-        _controller: sylius.controller.product:indexAction
+        _controller: sylius.controller.product::indexAction
         _format: json
         _sylius:
             serialization_groups: [Autocomplete]
@@ -38,7 +54,7 @@ sylius_admin_ajax_product_index:
     path: /
     methods: [GET]
     defaults:
-        _controller: sylius.controller.product:indexAction
+        _controller: sylius.controller.product::indexAction
         _format: json
         _sylius:
             serialization_groups: [Default]

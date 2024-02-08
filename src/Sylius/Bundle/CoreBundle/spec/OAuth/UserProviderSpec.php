@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -29,8 +29,8 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\User\Canonicalizer\CanonicalizerInterface;
 use Sylius\Component\User\Model\UserOAuthInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
+use SyliusLabs\Polyfill\Symfony\Security\Core\Exception\UserNotFoundException;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
-use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 final class UserProviderSpec extends ObjectBehavior
@@ -223,7 +223,7 @@ final class UserProviderSpec extends ObjectBehavior
         $response->getEmail()->willReturn(null);
         $userRepository->findOneByEmail(Argument::any())->shouldNotBeCalled();
 
-        $this->shouldThrow(UsernameNotFoundException::class)->during('loadUserByOAuthUserResponse', [$response]);
+        $this->shouldThrow(UserNotFoundException::class)->during('loadUserByOAuthUserResponse', [$response]);
     }
 
     function it_should_throw_exception_when_unsupported_user_is_used(

@@ -10,7 +10,7 @@ Feature: Having a default address preselected
         And I have an address "Lucifer Morningstar", "Seaside Fwy", "90802", "Los Angeles", "United States", "Arkansas" in my address book
         And my default address is of "Lucifer Morningstar"
         And the store has a product "PHP T-Shirt" priced at "$19.99"
-        And the store ships everywhere for free
+        And the store ships everywhere for Free
 
     @ui @no-api
     Scenario: Having a default address preselected on checkout addressing step

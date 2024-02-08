@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -19,10 +19,11 @@ use Sylius\Bundle\UiBundle\Registry\TemplateBlockRegistryInterface;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
+use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 
-final class SyliusUiExtension extends Extension
+final class SyliusUiExtension extends Extension implements PrependExtensionInterface
 {
     public function load(array $configs, ContainerBuilder $container): void
     {
@@ -39,9 +40,7 @@ final class SyliusUiExtension extends Extension
     }
 
     /**
-     * @experimental
-     *
-     * @psalm-param array<string, array{blocks: array<string, array{template: string, context: array, priority: int, enabled: bool}>}> $eventsConfig
+     * @param array<string, array{blocks: array<string, array{template: string, context: array, priority?: int, enabled: bool}>}> $eventsConfig
      */
     private function loadEvents(array $eventsConfig, ContainerBuilder $container): void
     {
@@ -59,7 +58,7 @@ final class SyliusUiExtension extends Extension
             }
 
             foreach ($blocksPriorityQueue->toArray() as $details) {
-                /** @psalm-var array{name: string, eventName: string, template: string, context: array, priority: int, enabled: bool} $details */
+                /** @var array{name: string, eventName: string, template: string, context: array, priority: int, enabled: bool} $details */
                 $blocksForEvents[$eventName][$details['name']] = new Definition(TemplateBlock::class, [
                     $details['name'],
                     $details['eventName'],
@@ -72,5 +71,40 @@ final class SyliusUiExtension extends Extension
         }
 
         $templateBlockRegistryDefinition->setArgument(0, $blocksForEvents);
+    }
+
+    public function prepend(ContainerBuilder $container): void
+    {
+        $useWebpack = $this->isWebpackEnabled($container);
+
+        $container->setParameter('sylius_ui.use_webpack', $useWebpack);
+
+        if (true === $useWebpack) {
+            $container->prependExtensionConfig('framework', [
+                'assets' => [
+                    'packages' => [
+                        'shop' => [
+                            'json_manifest_path' => '%kernel.project_dir%/public/build/shop/manifest.json',
+                        ],
+                        'admin' => [
+                            'json_manifest_path' => '%kernel.project_dir%/public/build/admin/manifest.json',
+                        ],
+                    ],
+                ],
+            ]);
+        }
+    }
+
+    private function isWebpackEnabled(ContainerBuilder $container): bool
+    {
+        $configs = $container->getExtensionConfig($this->getAlias());
+
+        foreach (array_reverse($configs) as $config) {
+            if (isset($config['use_webpack'])) {
+                return (bool) $config['use_webpack'];
+            }
+        }
+
+        return true;
     }
 }

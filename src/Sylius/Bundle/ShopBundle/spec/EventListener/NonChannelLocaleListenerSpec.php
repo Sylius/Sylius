@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -176,11 +176,6 @@ final class NonChannelLocaleListenerSpec extends ObjectBehavior
 
         $localeProvider->getAvailableLocalesCodes()->willReturn(['ga', 'ga_IE']);
 
-        $this
-            ->shouldNotThrow(NotFoundHttpException::class)
-            ->during('restrictRequestLocale', [$event])
-        ;
-
         $request->attributes = new ParameterBag(['_route' => '_profiler']);
         $this
             ->shouldNotThrow(NotFoundHttpException::class)
@@ -206,7 +201,7 @@ final class NonChannelLocaleListenerSpec extends ObjectBehavior
         );
 
         $request->getLocale()->willReturn('en');
-        $request->attributes = new ParameterBag();
+        $request->attributes = new ParameterBag(['_locale' => 'en']);
 
         $localeProvider->getAvailableLocalesCodes()->willReturn(['ga', 'ga_IE']);
         $localeProvider->getDefaultLocaleCode()->willReturn('ga');
@@ -215,5 +210,25 @@ final class NonChannelLocaleListenerSpec extends ObjectBehavior
 
         $this->restrictRequestLocale($event);
         $event->setResponse(new RedirectResponse('/ga/'))->shouldHaveBeenCalledOnce();
+    }
+
+    function it_does_nothing_if_request_attributes_does_not_have_locale(
+        Request $request,
+        RequestEvent $event,
+    ): void {
+        if (\method_exists(RequestEvent::class, 'isMainRequest')) {
+            $event->isMainRequest()->willReturn(true);
+        } else {
+            $event->isMasterRequest()->willReturn(true);
+        }
+        $event->getRequest()->willReturn($request);
+
+        $request->getLocale()->willReturn('en');
+        $request->attributes = new ParameterBag();
+
+        $this
+            ->shouldNotThrow(NotFoundHttpException::class)
+            ->during('restrictRequestLocale', [$event])
+        ;
     }
 }

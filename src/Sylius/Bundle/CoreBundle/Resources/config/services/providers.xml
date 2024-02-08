@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Sylius Sp. z o.o.
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <defaults public="true" />
+
+        <service id="sylius.provider.channel_based_default_zone_provider" class="Sylius\Bundle\CoreBundle\Provider\ChannelBasedDefaultTaxZoneProvider" />
+
+        <service id="Sylius\Bundle\CoreBundle\Provider\ChannelBasedProductTranslationProviderInterface" class="Sylius\Bundle\CoreBundle\Provider\ChannelBasedProductTranslationProvider">
+            <argument type="service" id="sylius.context.locale" />
+        </service>
+
+        <service id="Sylius\Bundle\CoreBundle\Provider\CustomerProviderInterface" class="Sylius\Bundle\CoreBundle\Provider\CustomerProvider" >
+            <argument type="service" id="sylius.repository.customer" />
+            <argument type="service" id="sylius.canonicalizer" />
+        </service>
+
+        <service id="sylius.provider.product_variants_prices" class="Sylius\Component\Core\Provider\ProductVariantsPricesProvider">
+            <argument type="service" id="sylius.calculator.product_variant_price" />
+        </service>
+        <service id="Sylius\Component\Core\Provider\ProductVariantsPricesProviderInterface" alias="sylius.provider.product_variants_prices" />
+
+        <service id="sylius.translation_locale_provider.admin" class="Sylius\Component\Core\Provider\TranslationLocaleProvider">
+            <argument type="service" id="sylius.repository.locale" />
+            <argument type="string">%locale%</argument>
+        </service>
+    </services>
+</container>

@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -37,7 +37,8 @@ final class ResendVerificationEmailHandler implements MessageHandlerInterface
     public function __invoke(ResendVerificationEmail $command): void
     {
         /** @var ShopUserInterface|null $user */
-        Assert::notNull($user = $this->shopUserRepository->find($command->getShopUserId()));
+        $user = $this->shopUserRepository->find($command->getShopUserId());
+        Assert::notNull($user);
 
         $token = $this->tokenGenerator->generate();
         $user->setEmailVerificationToken($token);

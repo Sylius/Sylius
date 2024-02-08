@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -20,7 +20,7 @@ use Sylius\Component\Resource\Exception\UnsupportedMethodException;
 class OrderItemUnitFactory implements OrderItemUnitFactoryInterface
 {
     /**
-     * @psalm-param class-string $className
+     * @param class-string $className
      */
     public function __construct(private string $className)
     {

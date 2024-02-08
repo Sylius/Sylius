@@ -17,3 +17,13 @@ Feature: Adding a new promotion with action
         And I add it
         Then I should be notified that it has been successfully created
         And the "$10.00 for all products!" promotion should appear in the registry
+
+    @ui @javascript
+    Scenario: Adding a promotion with item percentage discount
+        When I want to create a new promotion
+        And I specify its code as "promotion_for_all_product_items"
+        And I name it "-20% for all product items!"
+        And I add the "Item percentage discount" action configured with a percentage value of 20% for "United States" channel
+        And I add it
+        Then I should be notified that it has been successfully created
+        And it should have "20.00%" of item percentage discount configured for "United States" channel

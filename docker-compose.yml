@@ -1,0 +1,66 @@
+services:
+    app:
+        build:
+            context: .docker/dev
+        environment:
+            APP_ENV: "dev"
+            DATABASE_URL: "mysql://root:mysql@mysql/sylius_%kernel.environment%?charset=utf8mb4"
+#            DATABASE_URL: "pgsql://root:postgres@postgres/sylius_%kernel.environment%?charset=utf8" # When using postgres
+            PHP_DATE_TIMEZONE: "Europe/Warsaw"
+            PHP_XDEBUG_IDEKEY: "PHPSTORM"
+            MAILER_URL: "smtp://mailhog:1025"
+        volumes:
+            - ./:/app:delegated
+            - ./.docker/dev/php.ini:/etc/php/8.0/fpm/php.ini:delegated
+            - ./.docker/dev/php.ini:/etc/php/8.0/cli/php.ini:delegated
+        ports:
+            - ${APP_PORT:-80}:80
+        depends_on:
+            - mysql
+        networks:
+            - sylius
+
+    mysql:
+        image: mysql:5.7
+        platform: linux/amd64
+        environment:
+            MYSQL_ROOT_PASSWORD: mysql
+        ports:
+            - ${MYSQL_PORT:-3306}:3306
+        networks:
+            - sylius
+    
+#    postgres:
+#        image: postgres:13-alpine
+#        environment:
+#            POSTGRES_USER: root
+#            POSTGRES_PASSWORD: postgres
+#        ports:
+#            - ${POSTGRES_PORT:-5432}:5432
+#        networks:
+#            - sylius
+
+    mailhog:
+        image: mailhog/mailhog
+        ports:
+            - ${MAILHOG_PORT:-8025}:8025 # UI
+        networks:
+            - sylius
+
+    blackfire:
+        image: blackfire/blackfire:2
+        environment:
+            BLACKFIRE_LOG_LEVEL: 4
+            BLACKFIRE_SERVER_ID: ~
+            BLACKFIRE_SERVER_TOKEN: ~
+            BLACKFIRE_CLIENT_ID: ~
+            BLACKFIRE_CLIENT_TOKEN: ~
+            BLACKFIRE_DISABLE_LEGACY_PORT: 1
+        ports:
+            - ${BLACKFIRE_PORT:-8307}:8307
+        networks:
+            - sylius
+
+networks:
+    sylius:
+        driver: bridge

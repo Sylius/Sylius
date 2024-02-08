@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -17,6 +17,7 @@ use ApiPlatform\Core\Api\IriConverterInterface;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
+use Sylius\Behat\Context\Api\Resources;
 use Sylius\Component\Addressing\Model\CountryInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\ChannelInterface;
@@ -41,7 +42,7 @@ final class ManagingChannelsContext implements Context
      */
     public function iWantToCreateANewChannel(): void
     {
-        $this->client->buildCreateRequest();
+        $this->client->buildCreateRequest(Resources::CHANNELS);
     }
 
     /**
@@ -60,7 +61,7 @@ final class ManagingChannelsContext implements Context
      */
     public function iChooseAsTheBaseCurrency(CurrencyInterface $currency): void
     {
-        $this->client->addRequestData('baseCurrency', $this->iriConverter->getIriFromItem($currency));
+        $this->client->addRequestData('baseCurrency', $this->iriConverter->getIriFromItemInSection($currency, 'admin'));
     }
 
     /**
@@ -68,7 +69,7 @@ final class ManagingChannelsContext implements Context
      */
     public function iChooseAsADefaultLocale(LocaleInterface $locale): void
     {
-        $this->client->addRequestData('defaultLocale', $this->iriConverter->getIriFromItem($locale));
+        $this->client->addRequestData('defaultLocale', $this->iriConverter->getIriFromItemInSection($locale, 'admin'));
     }
 
     /**
@@ -101,8 +102,8 @@ final class ManagingChannelsContext implements Context
     public function iChooseAndAsOperatingCountries(CountryInterface $country, CountryInterface $otherCountry): void
     {
         $this->client->addRequestData('countries', [
-            $this->iriConverter->getIriFromItem($country),
-            $this->iriConverter->getIriFromItem($otherCountry),
+            $this->iriConverter->getIriFromItemInSection($country, 'admin'),
+            $this->iriConverter->getIriFromItemInSection($otherCountry, 'admin'),
         ]);
     }
 
@@ -127,7 +128,7 @@ final class ManagingChannelsContext implements Context
      */
     public function iSpecifyMenuTaxonAs(TaxonInterface $taxon): void
     {
-        $this->client->addRequestData('menuTaxon', $this->iriConverter->getIriFromItem($taxon));
+        $this->client->addRequestData('menuTaxon', $this->iriConverter->getIriFromItemInSection($taxon, 'admin'));
     }
 
     /**
@@ -184,7 +185,31 @@ final class ManagingChannelsContext implements Context
      */
     public function iWantToBrowseChannels(): void
     {
-        $this->client->index();
+        $this->client->index(Resources::CHANNELS);
+    }
+
+    /**
+     * @When /^I choose (billing|shipping) address as a required address in the checkout$/
+     */
+    public function iChooseAddressAsARequiredAddressInTheCheckout(string $type): void
+    {
+        $this->client->addRequestData('shippingAddressInCheckoutRequired', $type === 'shipping');
+    }
+
+    /**
+     * @When /^I want to modify (this channel)$/
+     */
+    public function iWantToModifyThisChannel(ChannelInterface $channel): void
+    {
+        $this->client->buildUpdateRequest(Resources::CHANNELS, $channel->getCode());
+    }
+
+    /**
+     * @When I save my changes
+     */
+    public function iSaveMyChanges(): void
+    {
+        $this->client->update();
     }
 
     /**
@@ -205,7 +230,7 @@ final class ManagingChannelsContext implements Context
     public function theChannelShouldAppearInTheRegistry(string $name): void
     {
         Assert::true(
-            $this->responseChecker->hasItemWithValue($this->client->index(), 'name', $name),
+            $this->responseChecker->hasItemWithValue($this->client->index(Resources::CHANNELS), 'name', $name),
             sprintf('Channel with name %s does not exist', $name),
         );
     }
@@ -216,8 +241,8 @@ final class ManagingChannelsContext implements Context
     public function theChannelShouldHaveAsAMenuTaxon(ChannelInterface $channel, TaxonInterface $taxon): void
     {
         Assert::same(
-            $this->responseChecker->getValue($this->client->show($channel->getCode()), 'menuTaxon'),
-            $this->iriConverter->getIriFromItem($taxon),
+            $this->responseChecker->getValue($this->client->show(Resources::CHANNELS, $channel->getCode()), 'menuTaxon'),
+            $this->iriConverter->getIriFromItemInSection($taxon, 'admin'),
             sprintf('Channel %s does not have %s menu taxon', $channel->getName(), $taxon->getName()),
         );
     }
@@ -228,5 +253,28 @@ final class ManagingChannelsContext implements Context
     public function iShouldSeeChannelsInTheList(int $count): void
     {
         Assert::same($this->responseChecker->countCollectionItems($this->client->getLastResponse()), $count);
+    }
+
+    /**
+     * @Then /^the required address in the checkout for this channel should be (billing|shipping)$/
+     */
+    public function theRequiredAddressInTheCheckoutForTheChannelShouldBe(string $type): void
+    {
+        Assert::true($this->responseChecker->hasValue(
+            $this->client->getLastResponse(),
+            'shippingAddressInCheckoutRequired',
+            $type === 'shipping',
+        ));
+    }
+
+    /**
+     * @Then I should be notified that it has been successfully edited
+     */
+    public function iShouldBeNotifiedThatItHasBeenSuccessfullyEdited(): void
+    {
+        Assert::true(
+            $this->responseChecker->isUpdateSuccessful($this->client->getLastResponse()),
+            'Channel could not be edited',
+        );
     }
 }

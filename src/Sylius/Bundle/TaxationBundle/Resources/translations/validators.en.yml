@@ -22,3 +22,5 @@ sylius:
             not_blank: Please enter tax rate code.
             regex: Tax rate code can only be comprised of letters, numbers, dashes and underscores.
             unique: The tax rate with given code already exists.
+        date:
+            greater_than_start_date: The tax rate should not end before it starts

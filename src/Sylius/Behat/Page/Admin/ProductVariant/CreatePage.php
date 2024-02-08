@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -112,14 +112,14 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
             'depth' => '#sylius_product_variant_depth',
             'form' => 'form[name="sylius_product_variant"]',
             'height' => '#sylius_product_variant_height',
-            'minimum_price' => '#sylius_product_variant_channelPricings input[name$="[minimumPrice]"][id*="%channelCode%"]',
+            'minimum_price' => '#sylius_product_variant_channelPricings_%channelCode%_minimumPrice',
             'on_hand' => '#sylius_product_variant_onHand',
             'option_select' => '#sylius_product_variant_optionValues_%option-name%',
             'price_calculator' => '#sylius_product_variant_pricingCalculator',
             'shipping_category' => '#sylius_product_variant_shippingCategory',
             'shipping_required' => '#sylius_product_variant_shippingRequired',
-            'original_price' => '#sylius_product_variant_channelPricings input[name$="[originalPrice]"][id*="%channelCode%"]',
-            'price' => '#sylius_product_variant_channelPricings input[id*="%channelCode%"]',
+            'original_price' => '#sylius_product_variant_channelPricings_%channelCode%_originalPrice',
+            'price' => '#sylius_product_variant_channelPricings_%channelCode%_price',
             'prices_validation_message' => '#sylius_product_variant_channelPricings ~ .sylius-validation-error, #sylius_product_variant_channelPricings .sylius-validation-error',
             'weight' => '#sylius_product_variant_weight',
             'width' => '#sylius_product_variant_width',

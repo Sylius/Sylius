@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -13,12 +13,16 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\Serializer;
 
+use ApiPlatform\Core\Util\RequestParser;
+use Sylius\Component\Channel\Context\ChannelContextInterface;
+use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\ShipmentInterface;
 use Sylius\Component\Core\Model\ShippingMethodInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Core\Repository\ShipmentRepositoryInterface;
 use Sylius\Component\Registry\ServiceRegistryInterface;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Serializer\Normalizer\ContextAwareNormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareTrait;
@@ -35,6 +39,8 @@ final class ShippingMethodNormalizer implements ContextAwareNormalizerInterface,
         private OrderRepositoryInterface $orderRepository,
         private ShipmentRepositoryInterface $shipmentRepository,
         private ServiceRegistryInterface $shippingCalculators,
+        private RequestStack $requestStack,
+        private ChannelContextInterface $channelContext,
     ) {
     }
 
@@ -45,24 +51,38 @@ final class ShippingMethodNormalizer implements ContextAwareNormalizerInterface,
 
         $context[self::ALREADY_CALLED] = true;
 
-        $subresourceIdentifiers = $context['subresource_identifiers'];
+        $request = $this->requestStack->getCurrentRequest();
 
-        $shipmentId = $subresourceIdentifiers['shipments'] ?? $subresourceIdentifiers['id'];
-
-        /** @var ShipmentInterface $shipment */
-        $shipment = $this->shipmentRepository->find($shipmentId);
-
-        Assert::notNull($shipment);
-
-        if (isset($subresourceIdentifiers['tokenValue'])) {
-            /** @var OrderInterface|null $cart */
-            $cart = $this->orderRepository->findCartByTokenValue($subresourceIdentifiers['tokenValue']);
-            Assert::notNull($cart);
-
-            Assert::true($cart->hasShipment($shipment), 'Shipment doesn\'t match for order');
+        $filters = $request->attributes->get('_api_filters');
+        if (null === $filters) {
+            $queryString = RequestParser::getQueryString($request);
+            $filters = $queryString ? RequestParser::parseRequestParams($queryString) : null;
         }
 
         $data = $this->normalizer->normalize($object, $format, $context);
+
+        if (null === $filters) {
+            return $data;
+        }
+
+        if (!isset($filters['tokenValue']) || !isset($filters['shipmentId'])) {
+            return null;
+        }
+
+        /** @var ChannelInterface $channel */
+        $channel = $this->channelContext->getChannel();
+
+        /** @var OrderInterface|null $cart */
+        $cart = $this->orderRepository->findCartByTokenValueAndChannel($filters['tokenValue'], $channel);
+
+        Assert::notNull($cart);
+
+        /** @var ShipmentInterface|null $shipment */
+        $shipment = $this->shipmentRepository->findOneByOrderId($filters['shipmentId'], $cart->getId());
+
+        Assert::notNull($shipment);
+
+        Assert::true($cart->hasShipment($shipment), 'Shipment doesn\'t match for order');
 
         $calculator = $this->shippingCalculators->get($object->getCalculator());
         $data['price'] = $calculator->calculate($shipment, $object->getConfiguration());
@@ -76,20 +96,11 @@ final class ShippingMethodNormalizer implements ContextAwareNormalizerInterface,
             return false;
         }
 
-        $subresourceIdentifiers = $context['subresource_identifiers'] ?? null;
-
-        return
-            $data instanceof ShippingMethodInterface &&
-            $this->isNotAdminGetOperation($context) &&
-            (
-                isset($subresourceIdentifiers['tokenValue'], $subresourceIdentifiers['shipments']) ||
-                isset($subresourceIdentifiers['id'])
-            )
-        ;
+        return $data instanceof ShippingMethodInterface && $this->isShopGetCollectionOperation($context);
     }
 
-    private function isNotAdminGetOperation(array $context): bool
+    private function isShopGetCollectionOperation(array $context): bool
     {
-        return !isset($context['item_operation_name']) || !($context['item_operation_name'] === 'admin_get');
+        return isset($context['collection_operation_name']) && \str_starts_with($context['collection_operation_name'], 'shop');
     }
 }

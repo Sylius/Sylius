@@ -29,6 +29,6 @@ Feature: Seeing shipping costs only when order requires shipping
     Scenario: Not seeing free cost if the order items that require shipping are removed
         Given I have "Guards! Guards! - book" variant of this product in the cart
         When I add "Guards! Guards! - ebook" variant of this product to the cart
-        And I remove product "Guards! Guards!" from the cart
+        And I remove "Guards! Guards! - book" variant from the cart
         Then I see the summary of my cart
         And I should not see shipping total for my cart

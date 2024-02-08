@@ -8,9 +8,23 @@ Feature: Locale validation
         Given the store has locale "Norwegian (Norway)"
         And I am logged in as an administrator
 
-    @api
+    @api @no-ui
     Scenario: Trying to add a locale without specifying a code
         When I want to create a new locale
         And I do not choose a code
         And I try to add it
         Then I should be notified that a code is required
+
+    @api @no-ui
+    Scenario: Trying to add a locale with an invalid code
+        When I want to create a new locale
+        And I set code to "invalid"
+        And I try to add it
+        Then I should be notified that the code is invalid
+
+    @api @no-ui
+    Scenario: Trying to add a locale with an non-existent code
+        When I want to create a new locale
+        And I set code to "en_BR"
+        And I try to add it
+        Then I should be notified that the code is invalid

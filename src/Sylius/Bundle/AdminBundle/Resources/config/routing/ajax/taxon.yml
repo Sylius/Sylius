@@ -2,7 +2,7 @@ sylius_admin_ajax_taxon_root_nodes:
     path: /root-nodes
     methods: [GET]
     defaults:
-        _controller: sylius.controller.taxon:indexAction
+        _controller: sylius.controller.taxon::indexAction
         _format: json
         _sylius:
             serialization_groups: [Autocomplete]
@@ -14,7 +14,7 @@ sylius_admin_ajax_taxon_leafs:
     path: /leafs
     methods: [GET]
     defaults:
-        _controller: sylius.controller.taxon:indexAction
+        _controller: sylius.controller.taxon::indexAction
         _format: json
         _sylius:
             serialization_groups: [Autocomplete]
@@ -28,7 +28,7 @@ sylius_admin_ajax_taxon_by_code:
     path: /leaf
     methods: [GET]
     defaults:
-        _controller: sylius.controller.taxon:indexAction
+        _controller: sylius.controller.taxon::indexAction
         _format: json
         _sylius:
             serialization_groups: [Autocomplete]
@@ -41,7 +41,7 @@ sylius_admin_ajax_taxon_by_name_phrase:
     path: /search
     methods: [GET]
     defaults:
-        _controller: sylius.controller.taxon:indexAction
+        _controller: sylius.controller.taxon::indexAction
         _format: json
         _sylius:
             serialization_groups: [Autocomplete]
@@ -57,15 +57,33 @@ sylius_admin_ajax_generate_taxon_slug:
     path: /generate-slug/
     methods: [GET]
     defaults:
-        _controller: sylius.controller.taxon_slug:generateAction
+        _controller: sylius.controller.taxon_slug::generateAction
         _format: json
 
 sylius_admin_ajax_taxon_move:
     path: /{id}/move
     methods: [PUT]
     defaults:
-        _controller: sylius.controller.taxon:updateAction
+        _controller: sylius.controller.taxon::updateAction
         _format: json
         _sylius:
             permission: true
             form: Sylius\Bundle\TaxonomyBundle\Form\Type\TaxonPositionType
+
+sylius_admin_ajax_taxon_move_up:
+    path: /{id}/move-up
+    methods: [PUT]
+    defaults:
+        _controller: sylius.controller.taxon_position::moveUpAction
+        _format: json
+        _sylius:
+            permission: true
+
+sylius_admin_ajax_taxon_move_down:
+    path: /{id}/move-down
+    methods: [PUT]
+    defaults:
+        _controller: sylius.controller.taxon_position::moveDownAction
+        _format: json
+        _sylius:
+            permission: true

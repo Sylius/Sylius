@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -43,7 +43,6 @@ final class SelectAttributeTypeTest extends TypeTestCase
     protected function setUp(): void
     {
         $this->translationProvider = $this->prophesize(TranslationLocaleProviderInterface::class);
-        /** @psalm-suppress TooManyArguments */
         $this->translationProvider->getDefaultLocaleCode()->willReturn('en_GB');
 
         parent::setUp();
@@ -67,6 +66,6 @@ final class SelectAttributeTypeTest extends TypeTestCase
         );
         $view = $form->createView();
 
-        Assert::assertSame($expectedLabels, array_map(fn (ChoiceView $choiceView): string => $choiceView->label, $view->vars['choices']));
+        Assert::assertSame($expectedLabels, array_map(fn (ChoiceView $choiceView): string => (string) $choiceView->label, $view->vars['choices']));
     }
 }

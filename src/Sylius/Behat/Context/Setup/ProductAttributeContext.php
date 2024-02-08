@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -421,10 +421,10 @@ final class ProductAttributeContext implements Context
         ?string $localeCode = 'en_US',
         bool $translatable = true,
     ): ProductAttributeValueInterface {
-        /** @var ProductAttributeValueInterface $attributeValue */
         $attribute->setTranslatable($translatable);
         $this->objectManager->persist($attribute);
 
+        /** @var ProductAttributeValueInterface $attributeValue */
         $attributeValue = $this->productAttributeValueFactory->createNew();
         $attributeValue->setAttribute($attribute);
         $attributeValue->setValue($value);

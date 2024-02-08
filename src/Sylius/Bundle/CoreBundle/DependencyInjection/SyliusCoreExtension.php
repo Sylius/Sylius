@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -13,7 +13,10 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\DependencyInjection;
 
+use InvalidArgumentException;
 use Sylius\Bundle\ResourceBundle\DependencyInjection\Extension\AbstractResourceExtension;
+use Sylius\Component\Core\Filesystem\Adapter\FilesystemAdapterInterface;
+use Sylius\Component\Core\Filesystem\Adapter\FlysystemFilesystemAdapter;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
@@ -60,8 +63,9 @@ final class SyliusCoreExtension extends AbstractResourceExtension implements Pre
         $container->setParameter('sylius_core.order_by_identifier', $config['order_by_identifier']);
         $container->setParameter('sylius_core.catalog_promotions.batch_size', $config['catalog_promotions']['batch_size']);
 
+        /** @var string $env */
         $env = $container->getParameter('kernel.environment');
-        if ('test' === $env || 'test_cached' === $env) {
+        if (str_starts_with($env, 'test')) {
             $loader->load('test_services.xml');
         }
 
@@ -71,6 +75,18 @@ final class SyliusCoreExtension extends AbstractResourceExtension implements Pre
                 $container->getDefinition('sylius.order_processing.order_prices_recalculator'),
             );
         }
+
+        $container->setAlias(
+            FilesystemAdapterInterface::class,
+            match ($config['filesystem']['adapter']) {
+                'default', 'flysystem' => FlysystemFilesystemAdapter::class,
+                'gaufrette' => 'Sylius\Component\Core\Filesystem\Adapter\GaufretteFilesystemAdapter',
+                default => throw new InvalidArgumentException(sprintf(
+                    'Invalid filesystem adapter "%s" provided.',
+                    $config['filesystem']['adapter'],
+                )),
+            },
+        );
     }
 
     public function prepend(ContainerBuilder $container): void

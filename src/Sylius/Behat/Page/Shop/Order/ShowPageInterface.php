@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -19,6 +19,8 @@ interface ShowPageInterface extends SymfonyPageInterface
 {
     public function hasPayAction(): bool;
 
+    public function canBePaid(): bool;
+
     public function pay(): void;
 
     public function choosePaymentMethod(string $paymentMethodName): void;
@@ -28,4 +30,6 @@ interface ShowPageInterface extends SymfonyPageInterface
     public function getAmountOfItems(): int;
 
     public function getChosenPaymentMethod(): string;
+
+    public function getPaymentValidationMessage(): string;
 }

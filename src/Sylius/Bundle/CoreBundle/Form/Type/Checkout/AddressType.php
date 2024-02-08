@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -17,7 +17,9 @@ use Sylius\Bundle\AddressingBundle\Form\Type\AddressType as SyliusAddressType;
 use Sylius\Bundle\CoreBundle\Form\Type\Customer\CustomerCheckoutGuestType;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Sylius\Component\Addressing\Comparator\AddressComparatorInterface;
+use Sylius\Component\Channel\Model\ChannelAwareInterface;
 use Sylius\Component\Core\Model\AddressInterface;
+use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Customer\Model\CustomerAwareInterface;
@@ -117,21 +119,40 @@ final class AddressType extends AbstractResourceType
                     $form->add('customer', CustomerCheckoutGuestType::class, ['constraints' => [new Valid()]]);
                 }
             })
-            ->addEventListener(FormEvents::PRE_SUBMIT, function (FormEvent $event): void {
+            ->addEventListener(FormEvents::PRE_SUBMIT, function (FormEvent $event) use ($options): void {
                 $orderData = $event->getData();
+
+                /** @var ChannelAwareInterface $order */
+                $order = $options['data'];
+                /** @var ChannelInterface $channel */
+                $channel = $order->getChannel();
 
                 $differentBillingAddress = $orderData['differentBillingAddress'] ?? false;
                 $differentShippingAddress = $orderData['differentShippingAddress'] ?? false;
 
-                if (isset($orderData['billingAddress']) && !$differentBillingAddress && !$differentShippingAddress) {
+                if ($differentBillingAddress || $differentShippingAddress) {
+                    return;
+                }
+
+                if (isset($orderData['billingAddress']) && !$channel->isShippingAddressInCheckoutRequired()) {
                     $orderData['shippingAddress'] = $orderData['billingAddress'];
                 }
 
-                if (isset($orderData['shippingAddress']) && !$differentBillingAddress && !$differentShippingAddress) {
+                if (isset($orderData['shippingAddress']) && $channel->isShippingAddressInCheckoutRequired()) {
                     $orderData['billingAddress'] = $orderData['shippingAddress'];
                 }
 
                 $event->setData($orderData);
+            })
+            ->addEventListener(FormEvents::PRE_SUBMIT, static function (FormEvent $event): void {
+                $orderData = $event->getData();
+                $form = $event->getForm();
+
+                if (array_key_exists('customer', $orderData) && !$form->has('customer')) {
+                    // Logged-in user try to submit customer while reloading page after login
+                    unset($orderData['customer']);
+                    $event->setData($orderData);
+                }
             })
         ;
     }
@@ -143,6 +164,7 @@ final class AddressType extends AbstractResourceType
         $resolver
             ->setDefaults([
                 'customer' => null,
+                'csrf_message' => 'sylius.checkout.addressing.csrf_error',
             ])
         ;
     }

@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -14,10 +14,10 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Api;
 
 use Behat\Behat\Context\Context;
+use Sylius\Behat\Service\Checker\EmailCheckerInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\ShipmentInterface;
-use Sylius\Component\Core\Test\Services\EmailCheckerInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Webmozart\Assert\Assert;
 
@@ -136,6 +136,37 @@ final class EmailContext implements Context
     public function anEmailShouldBeSentTo(string $recipient): void
     {
         Assert::true($this->emailChecker->hasRecipient($recipient));
+    }
+
+    /**
+     * @Then a welcoming email should have been sent to :recipient
+     * @Then a welcoming email should have been sent to :recipient in :localeCode locale
+     */
+    public function aWelcomingEmailShouldHaveBeenSentTo(string $recipient, string $localeCode = 'en_US'): void
+    {
+        $this->assertEmailContainsMessageTo(
+            $this->translator->trans('sylius.email.user_registration.welcome_to_our_store', [], null, $localeCode),
+            $recipient,
+        );
+    }
+
+    /**
+     * @Then an email with instructions on how to reset the administrator's password should be sent to :recipient
+     */
+    public function anEmailWithInstructionsOnHowToResetTheAdministratorsPasswordShouldBeSentTo(string $recipient): void
+    {
+        $this->assertEmailContainsMessageTo(
+            $this->translator->trans('sylius.email.admin_password_reset.to_reset_your_password', [], null, 'en_US'),
+            $recipient,
+        );
+    }
+
+    /**
+     * @Then :recipient should receive no emails
+     */
+    public function recipientShouldReceiveNoEmails(string $recipient): void
+    {
+        Assert::false($this->emailChecker->hasRecipient($recipient));
     }
 
     private function assertEmailContainsMessageTo(string $message, string $recipient): void

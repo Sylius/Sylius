@@ -11,7 +11,7 @@ Feature: Applying catalog promotions only in proper channels
         And this product has "PHP T-Shirt" variant priced at "$20.00" in "Web-US" channel
         And "PHP T-Shirt" variant priced at "$30.00" in "Web-GB" channel
         And this product is available in "Web-US" channel and "Web-GB" channel
-        And there is a catalog promotion "Winter sale" available in "Web-US" channel that reduces price by "30%" and applies on "PHP T-shirt" variant
+        And there is a catalog promotion "Winter sale" available in "Web-US" channel that reduces price by "30%" and applies on "PHP T-Shirt" variant
 
     @api @ui
     Scenario: Applying catalog promotion

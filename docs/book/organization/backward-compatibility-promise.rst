@@ -102,6 +102,6 @@ the migration:
         \E_USER_DEPRECATED
     );
 
-.. _Semantic Versioning: http://semver.org/
+.. _Semantic Versioning: https://semver.org/
 .. _Symfony's Backward Compatibility Promise: https://symfony.com/doc/current/contributing/code/bc.html
 .. _Symfony's Experimental Features: https://symfony.com/doc/current/contributing/code/experimental.html

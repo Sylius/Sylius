@@ -1,12 +1,15 @@
 # This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
+# (c) Sylius Sp. z o.o.
 
 default:
     suites:
         ui_administrator_login:
             contexts:
                 - sylius.behat.context.hook.doctrine_orm
+                - sylius.behat.context.hook.session
 
+                - sylius.behat.context.transform.admin
+                - sylius.behat.context.transform.shared_storage
                 - sylius.behat.context.transform.user
 
                 - sylius.behat.context.setup.channel
@@ -16,6 +19,8 @@ default:
 
                 - sylius.behat.context.ui.admin.dashboard
                 - sylius.behat.context.ui.admin.login
+                - sylius.behat.context.ui.admin.resetting_password
+                - sylius.behat.context.ui.email
 
             filters:
                 tags: "@administrator_login&&@ui"

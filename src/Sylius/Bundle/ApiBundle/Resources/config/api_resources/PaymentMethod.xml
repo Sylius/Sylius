@@ -4,7 +4,7 @@
 
  This file is part of the Sylius package.
 
- (c) Paweł Jędrzejewski
+ (c) Sylius Sp. z o.o.
 
  For the full copyright and license information, please view the LICENSE
  file that was distributed with this source code.
@@ -16,7 +16,21 @@
            xsi:schemaLocation="https://api-platform.com/schema/metadata https://api-platform.com/schema/metadata/metadata-2.0.xsd"
 >
     <resource class="%sylius.model.payment_method.class%" shortName="PaymentMethod">
-        <collectionOperations />
+        <collectionOperations>
+            <collectionOperation name="shop_get">
+                <attribute name="method">GET</attribute>
+                <attribute name="path">/shop/payment-methods</attribute>
+                <attribute name="pagination_enabled">false</attribute>
+                <attribute name="filters">
+                    <attribute>Sylius\Bundle\ApiBundle\Filter\PaymentMethodFilter</attribute>
+                </attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">
+                        <attribute>shop:payment_method:read</attribute>
+                    </attribute>
+                </attribute>
+            </collectionOperation>
+        </collectionOperations>
 
         <itemOperations>
             <itemOperation name="admin_get">
@@ -35,23 +49,6 @@
                 </attribute>
             </itemOperation>
         </itemOperations>
-
-        <subresourceOperations>
-            <subresourceOperation name="api_orders_payments_methods_get_subresource">
-                <attribute name="normalization_context">
-                    <attribute name="groups">
-                        <attribute>shop:payment_method:read</attribute>
-                    </attribute>
-                </attribute>
-            </subresourceOperation>
-            <subresourceOperation name="api_payments_methods_get_subresource">
-                <attribute name="normalization_context">
-                    <attribute name="groups">
-                        <attribute>shop:payment_method:read</attribute>
-                    </attribute>
-                </attribute>
-            </subresourceOperation>
-        </subresourceOperations>
 
         <property name="id" identifier="false" writable="false" />
         <property name="code" identifier="true" writable="false" />

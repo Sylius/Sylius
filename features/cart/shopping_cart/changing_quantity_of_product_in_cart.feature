@@ -6,17 +6,17 @@ Feature: Changing quantity of a product in cart
 
     Background:
         Given the store operates on a single channel in "United States"
-        And the store has a product "T-shirt banana" priced at "$12.54"
+        And the store has a product "T-Shirt banana" priced at "$12.54"
         And I add this product to the cart
 
     @ui @api
     Scenario: Increasing quantity of an item in cart
         Given I see the summary of my cart
-        When I change product "T-shirt banana" quantity to 2 in my cart
-        Then I should see "T-shirt banana" with quantity 2 in my cart
+        When I change product "T-Shirt banana" quantity to 2 in my cart
+        Then I should see "T-Shirt banana" with quantity 2 in my cart
 
     @ui @api
     Scenario: Increasing quantity of an item in cart beyond the threshold
         Given I see the summary of my cart
-        When I change product "T-shirt banana" quantity to 20000 in my cart
-        Then I should see "T-shirt banana" with quantity 9999 in my cart
+        When I change product "T-Shirt banana" quantity to 20000 in my cart
+        Then I should see "T-Shirt banana" with quantity 9999 in my cart

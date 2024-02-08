@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -22,21 +22,21 @@ class ChangeShopUserPassword implements ShopUserIdAwareInterface
     public $shopUserId;
 
     /**
-     * @psalm-immutable
+     * @immutable
      *
      * @var string|null
      */
     public $newPassword;
 
     /**
-     * @psalm-immutable
+     * @immutable
      *
      * @var string|null
      */
     public $confirmNewPassword;
 
     /**
-     * @psalm-immutable
+     * @immutable
      *
      * @var string|null
      */

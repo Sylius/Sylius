@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -51,7 +51,12 @@ final class ChosenShippingMethodEligibilityValidator extends ConstraintValidator
 
         /** @var ShipmentInterface|null $shipment */
         $shipment = $this->shipmentRepository->find($value->shipmentId);
-        Assert::notNull($shipment);
+
+        if (null === $shipment) {
+            $this->context->addViolation($constraint->shipmentNotFoundMessage);
+
+            return;
+        }
 
         $order = $shipment->getOrder();
 

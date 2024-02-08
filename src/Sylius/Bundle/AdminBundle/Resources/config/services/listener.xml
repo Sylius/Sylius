@@ -4,7 +4,7 @@
 
  This file is part of the Sylius package.
 
- (c) Paweł Jędrzejewski
+ (c) Sylius Sp. z o.o.
 
  For the full copyright and license information, please view the LICENSE
  file that was distributed with this source code.
@@ -22,13 +22,18 @@
 
         <service id="sylius.event_subscriber.resource_delete" class="Sylius\Bundle\AdminBundle\EventListener\ResourceDeleteSubscriber">
             <argument type="service" id="router" />
-            <argument type="service" id="session" />
+            <argument type="service" id="request_stack" />
             <tag name="kernel.event_subscriber" event="kernel.exception" />
         </service>
 
         <service id="sylius.event_subscriber.admin_cache_control_subscriber" class="Sylius\Bundle\AdminBundle\EventListener\AdminSectionCacheControlSubscriber">
             <argument type="service" id="sylius.section_resolver.uri_based_section_resolver" />
             <tag name="kernel.event_subscriber" event="kernel.response" />
+        </service>
+
+        <service id="sylius.event_subscriber.admin_filter_subscriber" class="Sylius\Bundle\AdminBundle\EventListener\AdminFilterSubscriber">
+            <argument type="service" id="Sylius\Bundle\UiBundle\Storage\FilterStorage" />
+            <tag name="kernel.event_subscriber" event="kernel.request" />
         </service>
     </services>
 </container>

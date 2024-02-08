@@ -28,20 +28,20 @@ Feature: Receiving percentage discount on shipping
         Then my cart total should be "$100.00"
         And my cart shipping total should be "$0.00"
 
-    @ui
+    @ui @api
     Scenario: Receiving free shipping after changing the quantity of a product in the cart
         Given the promotion gives free shipping to every order over "$70.00"
         When I add product "PHP Mug" to the cart
-        And I change "PHP Mug" quantity to 4
+        And I change product "PHP Mug" quantity to 4 in my cart
         Then my cart total should be "$80.00"
         And my cart shipping total should be "$0.00"
 
-    @ui
+    @ui @api
     Scenario: Not receiving free shipping after changing the quantity of a product in the cart
         Given the promotion gives free shipping to every order over "$70.00"
         When I add product "PHP Mug" to the cart
-        And I change "PHP Mug" quantity to 4
-        And I change "PHP Mug" quantity to 2
+        And I change product "PHP Mug" quantity to 4 in my cart
+        And I change product "PHP Mug" quantity to 2 in my cart
         Then my cart total should be "$50.00"
         And my cart shipping total should be "$10.00"
 

@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -51,6 +51,19 @@ final class ProportionalIntegerDistributorSpec extends ObjectBehavior
     function it_distributes_an_integer_even_for_non_distributable_items(): void
     {
         $this->distribute([0], -299)->shouldReturn([0]);
+    }
+
+    function it_keeps_original_keys_after_computation(): void
+    {
+        $this->distribute([
+            1 => 4000,
+            3 => 2000,
+            6 => 2000,
+        ], 300)->shouldReturn([
+            1 => 150,
+            3 => 75,
+            6 => 75,
+        ]);
     }
 
     function it_throws_an_exception_if_any_of_integers_array_element_is_not_integer(): void

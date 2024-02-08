@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Doctrine\ORM\Handler;
 
+use Doctrine\DBAL\Exception\ForeignKeyConstraintViolationException;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\ORMException;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceDeleteHandlerInterface;
@@ -37,6 +38,16 @@ final class ResourceDeleteHandler implements ResourceDeleteHandlerInterface
             $this->decoratedHandler->handle($resource, $repository);
 
             $this->entityManager->commit();
+        } catch (ForeignKeyConstraintViolationException $exception) {
+            $this->entityManager->rollback();
+
+            throw new DeleteHandlingException(
+                'Cannot delete, the resource is in use.',
+                'delete_error',
+                409,
+                0,
+                $exception,
+            );
         } catch (ORMException $exception) {
             $this->entityManager->rollback();
 

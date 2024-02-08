@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -23,9 +23,7 @@ interface CountryInterface extends ToggleableInterface, ResourceInterface, CodeA
     public function getName(?string $locale = null): ?string;
 
     /**
-     * @return Collection|ProvinceInterface[]
-     *
-     * @psalm-return Collection<array-key, ProvinceInterface>
+     * @return Collection<array-key, ProvinceInterface>
      */
     public function getProvinces(): Collection;
 

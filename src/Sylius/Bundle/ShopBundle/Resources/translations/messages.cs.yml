@@ -1,12 +1,8 @@
 # This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
+# (c) Sylius Sp. z o.o.
 
 sylius:
     email:
-        contact_request:
-            content: 'Obsah'
-            message_from: 'Zpráva od'
-            subject: 'Žádost kontaktu'
         order_confirmation:
             has_been_successfully_placed: 'byl úspěšně umístěn.'
             subject: 'Potvrzení objednávky'
@@ -31,7 +27,7 @@ sylius:
     homepage:
         about_us: 'O nás'
         about_us_content: 'Vítejte v našem obchodě, Váš e-shop číslo jedna, který vám dává ty nejlepší produkty. Z naší nabídky si můžete vybrat ty nejlepší oblečení a boty. (<i>Tento obsah můžete upravit přepsáním klíče "sylius.homepage.about_us_content" ve vašem překladovém souboru</i>)'
-        carousel_header: 'Brace yourself! Winter is coming'
+        banner_content: 'Brace yourself! Winter is coming'
         newsletter: 'Odběr novinek'
         newsletter_description: 'Přihlaste se k odběru našeho newsletteru a uvidíte nové nabídky, které na vás čekají! (<i>Můžete upravit tento obsah přepsáním klíče "sylius. homepage.newsletter_description" ve vašem překladovém souboru</i>)'
         subscribe: 'Odebírat'

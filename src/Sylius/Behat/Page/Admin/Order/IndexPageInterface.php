@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -30,4 +30,8 @@ interface IndexPageInterface extends BaseIndexPageInterface
     public function specifyFilterTotalGreaterThan(string $total): void;
 
     public function specifyFilterTotalLessThan(string $total): void;
+
+    public function specifyFilterProduct(string $productName): void;
+
+    public function specifyFilterVariant(string $variantName): void;
 }

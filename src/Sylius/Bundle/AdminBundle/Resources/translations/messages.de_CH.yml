@@ -1,5 +1,5 @@
 # This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
+# (c) Sylius Sp. z o.o.
 
 sylius:
     email:
@@ -35,6 +35,8 @@ sylius:
                     tax_rates: Steuersätze
                     zones: Gebiete
                 marketing:
+                    cart_promotions: Warenkorb Aktionen
+                    catalog_promotions: Katalog Aktionen
                     header: Marketing
                     product_reviews: Produkt-Bewertung
                     promotions: Aktionen
@@ -45,9 +47,21 @@ sylius:
                 sales:
                     header: Verkäufe
                     orders: Bestellungen
+                official_support:
+                    header: Offizieller Support
+                    sylius_plus: Sylius Plus
+                    browse_plugins: Plugins durchsuchen
+                    professional_services: Professionelle Dienstleistungen
+                    find_a_partner: Einen Partner finden
     ui:
+        catalog_promotion:
+            dates_details: Dieser Vorgang ist zeitintensiv! Bitte berücksichtigen Sie eine Verzögerung von 2-10 Minuten ab Start des angegebenen Datums. Die Verzögerung hängt von der Größe des Katalogs ab.
+        channel_pricings: Ausgabekanäle Bepreisung
         product:
             product_not_active_in_channel: Das Produkt ist in diesem Kanal noch nicht aktiviert.
+        original_price_details: Originalpreis - Dies ist der Preis der Produktvariante. Wird durchgestrichen im Katalog angezeigt. Dient als Basis für aktuelle Preisberechnungen. Ist dieser Wert nicht definiert, verwendet die Logik der Warbenkorb-Aktion den Ist-Preis.
+        price_details: Preis - Dies ist der aktuelle Preis der Produktvariante im Katalog. Kann explizit durch z.B. Katalog-Aktionen geändert werden.
+        minimum_price_details: Mindestpreis - die Schwelle, unter die der aktuelle Preis weder durch Katalog- noch Warenkorb-Werbeaktionen verringert werden kann. Verwenden Sie dieses Feld, um Rentabilität Ihre Verkäufe zu sichern.
         gateway:
             no_sca_support_notice: Das gewählte Zahlungs-Gateway unterstützt kein SCA.
             pay_pal_express_checkout_deprecation_notice: >

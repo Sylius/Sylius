@@ -1,11 +1,11 @@
 # This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
+# (c) Sylius Sp. z o.o.
 
 sylius_shop_partial_cart_summary:
     path: /summary
     methods: [GET]
     defaults:
-        _controller: sylius.controller.order:widgetAction
+        _controller: sylius.controller.order::widgetAction
         _sylius:
             template: $template
 
@@ -13,7 +13,7 @@ sylius_shop_partial_cart_add_item:
     path: /add-item
     methods: [GET]
     defaults:
-        _controller: sylius.controller.order_item:addAction
+        _controller: sylius.controller.order_item::addAction
         _sylius:
             template: $template
             factory:

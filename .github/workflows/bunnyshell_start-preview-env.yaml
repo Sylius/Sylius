@@ -1,0 +1,18 @@
+name: Bunnyshell - Start Preview Environment
+concurrency: bns-start-stop-${{ github.event.issue.number }}
+on:
+    issue_comment:
+        types: [created, edited]
+permissions:
+    pull-requests: write
+jobs:
+    start:
+        name: Start Environment
+        uses: bunnyshell/workflows/.github/workflows/start-env.yaml@v1
+        with:
+            project-id: ${{ vars.BUNNYSHELL_PROJECT_ID }}
+            env-name: 'Sylius PR #${{ github.event.issue.number }}'
+            allowed-users: ${{ vars.BUNNYSHELL_ALLOWED_USERS }}
+            comment-on-pr: true
+        secrets:
+            bunnyshell-access-token: ${{ secrets.BUNNYSHELL_ACCESS_TOKEN }}

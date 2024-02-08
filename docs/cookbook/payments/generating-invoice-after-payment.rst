@@ -146,24 +146,24 @@ Let's start first with EventListeners that will override the default ones:
     # config/services.yaml
     services:
         sylius_invoicing_plugin.listener.order_payment_paid:
-        class: App\EventListener\OrderPaymentPaidListener
-        arguments:
-            - '@sylius_invoicing_plugin.creator.invoice'
-            - '@sylius.command_bus'
-        tags:
-            - { name: messenger.message_handler }
+            class: App\EventListener\OrderPaymentPaidListener
+            arguments:
+                - '@sylius_invoicing_plugin.creator.invoice'
+                - '@sylius.command_bus'
+            tags:
+                - { name: messenger.message_handler }
 
-    sylius_invoicing_plugin.event_listener.order_placed:
-        class: App\EventListener\NoInvoiceOnOrderPlacedListener
-        tags:
-            - { name: messenger.message_handler }
+        sylius_invoicing_plugin.event_listener.order_placed:
+            class: App\EventListener\NoInvoiceOnOrderPlacedListener
+            tags:
+                - { name: messenger.message_handler }
 
-    sylius_invoicing_plugin.event_producer.order_payment_paid:
-        class: App\Producer\OrderPaymentPaidProducer
-        arguments:
-            - '@sylius.event_bus'
-            - '@sylius_invoicing_plugin.date_time_provider'
-        public: true
+        sylius_invoicing_plugin.event_producer.order_payment_paid:
+            class: App\Producer\OrderPaymentPaidProducer
+            arguments:
+                - '@sylius.event_bus'
+                - '@sylius_invoicing_plugin.date_time_provider'
+            public: true
 
 After these changes, the invoice will be generated after the order is paid, not just after it is placed.
 

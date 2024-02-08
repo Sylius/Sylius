@@ -1,11 +1,8 @@
 # This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
+# (c) Sylius Sp. z o.o.
 
 sylius:
     email:
-        contact_request:
-            content: 'محتوا'
-            subject: 'درخواست پشتیبانی'
         order_confirmation:
             subject: 'تایید سفارش'
         password_reset:

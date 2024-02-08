@@ -7,7 +7,7 @@ Feature: Cancelling unpaid orders automatically
     Background:
         Given the store operates on a single channel in "United States"
         And the store has a product "PHP T-Shirt" priced at "$10.00" in "United States" channel
-        And the store ships everywhere for free
+        And the store ships everywhere for Free
         And the store allows paying with "Paypal Express Checkout"
 
     @domain

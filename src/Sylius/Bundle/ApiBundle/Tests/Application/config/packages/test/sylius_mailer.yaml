@@ -1,0 +1,2 @@
+sylius_mailer:
+    sender_adapter: sylius.email_sender.adapter.symfony_mailer

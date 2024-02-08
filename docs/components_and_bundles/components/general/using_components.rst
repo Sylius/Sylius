@@ -30,7 +30,7 @@ Using the Taxation Component
 
 .. |install_composer_link| raw:: html
 
-   <a href="http://getcomposer.org/download" target="_blank">Install Composer</a>
+   <a href="https://getcomposer.org/download" target="_blank">Install Composer</a>
 
 .. code-block:: bash
 

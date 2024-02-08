@@ -9,9 +9,9 @@ Feature: Filtering orders by a shipping method
         And the store has a product "Blue ElePHPant"
         And the store has a product "White ElePHPant"
         And the store has a product "Red ElePHPant"
-        And the store ships everywhere for free
+        And the store ships everywhere for Free
         But the store has "DHL" shipping method with "$10.00" fee
-        And the store allows paying offline
+        And the store allows paying Offline
         And there is a customer "jack@teambiz.com" that placed an order "#000001337"
         And the customer bought a single "Blue ElePHPant"
         And the customer chose "Free" shipping method to "United States" with "Offline" payment

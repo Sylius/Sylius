@@ -4,7 +4,7 @@
 
  This file is part of the Sylius package.
 
- (c) Paweł Jędrzejewski
+ (c) Sylius Sp. z o.o.
 
  For the full copyright and license information, please view the LICENSE
  file that was distributed with this source code.
@@ -16,6 +16,11 @@
                     xsi:schemaLocation="http://symfony.com/schema/dic/constraint-mapping http://symfony.com/schema/dic/services/constraint-mapping-1.0.xsd">
 
     <class name="Sylius\Bundle\ApiBundle\Command\Checkout\CompleteOrder">
+        <constraint name="Sylius\Bundle\ApiBundle\Validator\Constraints\CheckoutCompletion">
+            <option name="groups">
+                <value>sylius_checkout_complete</value>
+            </option>
+        </constraint>
         <constraint name="Sylius\Bundle\ApiBundle\Validator\Constraints\OrderNotEmpty">
             <option name="groups">
                 <value>sylius_checkout_complete</value>

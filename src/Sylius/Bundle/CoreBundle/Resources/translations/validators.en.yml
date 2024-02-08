@@ -1,4 +1,17 @@
 sylius:
+    admin:
+        password_reset_request:
+            email:
+                invalid: This email is not valid.
+                max: Email must be at most {{ limit }} characters long.
+                min: Email must be at least {{ limit }} characters long.
+                not_blank: Please enter an email.
+        reset_password:
+            mismatch: The entered passwords do not match.
+            password:
+                min: Password must be at least {{ limit }} characters long.
+                max: Password must be at most {{ limit }} characters long.
+                not_blank: Please enter the password.
     avatar_image:
         file:
             max_size: The image is too big - {{ size }}{{ suffix }}. Maximum allowed size is {{ limit }}{{ suffix }}.
@@ -34,6 +47,8 @@ sylius:
             min: Price cannot be lower than 0.
             not_blank: Please enter the price.
     checkout:
+        addressing:
+            csrf_error: Please resubmit complete form.
         shipping_method:
             not_blank: Please select shipping method.
         email:
@@ -55,9 +70,11 @@ sylius:
     order:
         currency_code:
             not_valid: The currency code you entered is invalid.
+        invalid_state_transition: 'Cannot complete as order is in a wrong state. Current: %currentState%. Possible transitions: %possibleTransitions%.'
         payment_method_eligibility: 'This payment method %paymentMethodName% has been disabled. Please reselect your payment method.'
         product_eligibility: 'This product %productName% has been disabled.'
         shipping_method_eligibility: 'Product does not fit requirements for %shippingMethodName% shipping method. Please reselect your shipping method.'
+        shipping_method_not_available: 'The "%shippingMethodName%" shipping method is not available. Please reselect your shipping method.'
     locale:
         enabled:
             cannot_disable_base: The base locale cannot be disabled.
@@ -109,8 +126,8 @@ sylius:
     user:
         email:
             unique: This email is already used.
-            min: Email must have at least {{ min }} characters.
-            max: Email must have at most {{ max }} characters.
+            min: Email must have at least {{ limit }} characters.
+            max: Email must have at most {{ limit }} characters.
             invalid: This email is invalid.
         username:
             unique: This username is already used.

@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -17,7 +17,6 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Component\Locale\Context\LocaleContextInterface;
 use Sylius\Component\Locale\Context\LocaleNotFoundException;
 use Sylius\Component\Locale\Provider\LocaleProviderInterface;
-use Symfony\Component\HttpFoundation\HeaderBag;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 
@@ -35,63 +34,83 @@ final class RequestHeaderBasedLocaleContextSpec extends ObjectBehavior
 
     function it_throws_locale_not_found_exception_if_main_request_is_not_found(RequestStack $requestStack): void
     {
-        if (\method_exists(RequestStack::class, 'getMainRequest')) {
-            $requestStack->getMainRequest()->willReturn(null);
-        } else {
-            $requestStack->getMasterRequest()->willReturn(null);
-        }
+        $requestStack->getMainRequest()->willReturn(null);
 
         $this->shouldThrow(LocaleNotFoundException::class)->during('getLocaleCode');
     }
 
-    function it_throws_locale_not_found_exception_if_main_request_does_not_have_accept_language_in_header(
-        RequestStack $requestStack,
-        Request $request,
-    ): void {
-        if (\method_exists(RequestStack::class, 'getMainRequest')) {
-            $requestStack->getMainRequest()->willReturn($request);
-        } else {
-            $requestStack->getMasterRequest()->willReturn($request);
-        }
-
-        $request->headers = new HeaderBag();
-
-        $this->shouldThrow(LocaleNotFoundException::class)->during('getLocaleCode');
-    }
-
-    function it_throws_locale_not_found_exception_if_main_request_locale_code_is_not_among_available_ones(
+    function it_throws_locale_not_found_exception_if_locale_from_main_request_preferred_language_cannot_be_resolved(
         RequestStack $requestStack,
         LocaleProviderInterface $localeProvider,
-        Request $request,
     ): void {
-        if (\method_exists(RequestStack::class, 'getMainRequest')) {
-            $requestStack->getMainRequest()->willReturn($request);
-        } else {
-            $requestStack->getMasterRequest()->willReturn($request);
-        }
+        $request = new Request();
+        $request->headers->set('Accept-Language', 'fr_FR');
 
-        $request->headers = new HeaderBag(['ACCEPT_LANGUAGE' => 'en_US']);
+        $requestStack->getMainRequest()->willReturn($request);
 
+        $localeProvider->getDefaultLocaleCode()->willReturn('pl_PL');
         $localeProvider->getAvailableLocalesCodes()->willReturn(['pl_PL', 'de_DE']);
 
         $this->shouldThrow(LocaleNotFoundException::class)->during('getLocaleCode');
     }
 
-    function it_returns_main_request_locale_code(
+    function it_resolves_locale_from_main_request_preferred_language_in_locale_syntax(
         RequestStack $requestStack,
         LocaleProviderInterface $localeProvider,
-        Request $request,
     ): void {
-        if (\method_exists(RequestStack::class, 'getMainRequest')) {
-            $requestStack->getMainRequest()->willReturn($request);
-        } else {
-            $requestStack->getMasterRequest()->willReturn($request);
-        }
+        $request = new Request();
+        $request->headers->set('Accept-Language', 'de_DE');
 
-        $request->headers = new HeaderBag(['Accept-Language' => 'pl_PL']);
+        $requestStack->getMainRequest()->willReturn($request);
 
+        $localeProvider->getDefaultLocaleCode()->willReturn('pl_PL');
         $localeProvider->getAvailableLocalesCodes()->willReturn(['pl_PL', 'de_DE']);
 
-        $this->getLocaleCode()->shouldReturn('pl_PL');
+        $this->getLocaleCode()->shouldReturn('de_DE');
+    }
+
+    function it_resolves_locale_from_main_request_preferred_language_in_mixed_cased_language_syntax(
+        RequestStack $requestStack,
+        LocaleProviderInterface $localeProvider,
+    ): void {
+        $request = new Request();
+        $request->headers->set('Accept-Language', 'dE-De');
+
+        $requestStack->getMainRequest()->willReturn($request);
+
+        $localeProvider->getDefaultLocaleCode()->willReturn('pl_PL');
+        $localeProvider->getAvailableLocalesCodes()->willReturn(['pl_PL', 'de_DE']);
+
+        $this->getLocaleCode()->shouldReturn('de_DE');
+    }
+
+    function it_resolves_locale_from_main_request_preferred_language_in_upper_cased_language_syntax(
+        RequestStack $requestStack,
+        LocaleProviderInterface $localeProvider,
+    ): void {
+        $request = new Request();
+        $request->headers->set('Accept-Language', 'DE-DE');
+
+        $requestStack->getMainRequest()->willReturn($request);
+
+        $localeProvider->getDefaultLocaleCode()->willReturn('pl_PL');
+        $localeProvider->getAvailableLocalesCodes()->willReturn(['pl_PL', 'de_DE']);
+
+        $this->getLocaleCode()->shouldReturn('de_DE');
+    }
+
+    function it_resolves_locale_from_main_request_preferred_language_in_lower_cased_language_syntax(
+        RequestStack $requestStack,
+        LocaleProviderInterface $localeProvider,
+    ): void {
+        $request = new Request();
+        $request->headers->set('Accept-Language', 'de-de');
+
+        $requestStack->getMainRequest()->willReturn($request);
+
+        $localeProvider->getDefaultLocaleCode()->willReturn('pl_PL');
+        $localeProvider->getAvailableLocalesCodes()->willReturn(['pl_PL', 'de_DE']);
+
+        $this->getLocaleCode()->shouldReturn('de_DE');
     }
 }

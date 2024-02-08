@@ -1,11 +1,12 @@
 # This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
+# (c) Sylius Sp. z o.o.
 
 default:
     suites:
         ui_products_accessibility_in_multiple_channels:
             contexts:
                 - sylius.behat.context.hook.doctrine_orm
+                - sylius.behat.context.hook.session
 
                 - sylius.behat.context.transform.shared_storage
                 - sylius.behat.context.transform.channel

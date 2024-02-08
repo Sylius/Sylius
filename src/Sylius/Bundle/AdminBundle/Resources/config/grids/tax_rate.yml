@@ -29,6 +29,16 @@ sylius_grid:
                     options:
                         template: "@SyliusUi/Grid/Field/percent.html.twig"
             filters:
+                startDate:
+                    type: date
+                    label: sylius.ui.start_date
+                    options:
+                        inclusive_to: true
+                endDate:
+                    type: date
+                    label: sylius.ui.end_date
+                    options:
+                        inclusive_to: true
                 search:
                     type: string
                     label: sylius.ui.search

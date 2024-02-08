@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -41,19 +41,16 @@ class ExchangeRate implements ExchangeRateInterface
         return $this->id;
     }
 
-    /**
-     * @psalm-suppress TypeDoesNotContainType
-     * @psalm-suppress RedundantCondition
-     */
     public function getRatio(): ?float
     {
         /**
          * It looks like Doctrine is hydrating decimal field as string, force casting to float.
          *
-         * @psalm-suppress DocblockTypeContradiction
-         * @psalm-suppress RedundantConditionGivenDocblockType
+         * @var float|string|null $ratio
          */
-        return is_string($this->ratio) ? (float) $this->ratio : $this->ratio;
+        $ratio = $this->ratio;
+
+        return is_string($ratio) ? (float) $ratio : $ratio;
     }
 
     /**

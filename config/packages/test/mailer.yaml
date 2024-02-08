@@ -1,0 +1,5 @@
+framework:
+    cache:
+        pools:
+            test.mailer_pool:
+                adapter: cache.adapter.filesystem

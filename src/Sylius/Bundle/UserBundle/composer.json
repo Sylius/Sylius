@@ -38,45 +38,43 @@
     ],
     "require": {
         "php": "^8.0",
-        "doctrine/orm": "^2.7",
-        "egulias/email-validator": "^3.0",
+        "doctrine/orm": "^2.13",
+        "egulias/email-validator": "^3.1",
         "sylius-labs/polyfill-symfony-event-dispatcher": "^1.0.1",
-        "sylius-labs/polyfill-symfony-framework-bundle": "^1.0",
-        "sylius/mailer-bundle": "^1.4",
-        "sylius/resource-bundle": "^1.7",
-        "sylius/user": "^1.6",
-        "symfony/framework-bundle": "^4.4 || ^5.4",
-        "webmozart/assert": "^1.8"
+        "sylius-labs/polyfill-symfony-framework-bundle": "^1.0 || ^1.1",
+        "sylius/mailer-bundle": "^1.8 || ^2.0@beta",
+        "sylius/resource-bundle": "^1.9",
+        "sylius/user": "^1.12",
+        "symfony/framework-bundle": "^5.4 || ^6.0",
+        "symfony/password-hasher": "^5.4 || ^6.0",
+        "webmozart/assert": "^1.9"
     },
     "conflict": {
+        "doctrine/orm": "2.15.2",
         "twig/twig": "^3.0"
     },
     "require-dev": {
-        "hwi/oauth-bundle": "^1.1",
-        "matthiasnoback/symfony-dependency-injection-test": "^4.1",
+        "hwi/oauth-bundle": "^1.1 || ^2.0@beta",
+        "matthiasnoback/symfony-dependency-injection-test": "^4.2",
         "php-http/guzzle6-adapter": "^2.0",
         "phpspec/phpspec": "^7.2",
         "phpunit/phpunit": "^8.5",
-        "symfony/dependency-injection": "^4.4 || ^5.4",
-        "symfony/security-bundle": "^4.4 || ^5.4",
-        "symfony/swiftmailer-bundle": "^3.1"
+        "symfony/dependency-injection": "^5.4 || ^6.0",
+        "symfony/security-bundle": "^5.4 || ^6.0",
+        "symfony/mailer": "^5.4 || ^6.0"
     },
     "suggest": {
         "hwi/oauth-bundle": "For OAuth integration"
     },
     "config": {
         "allow-plugins": {
+            "php-http/discovery": false,
             "symfony/flex": true
         }
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "1.9-dev"
-        },
-        "symfony": {
-            "endpoint": [
-                "https://raw.githubusercontent.com/symfony/recipes/c8d90298241f176a261dadc4814d7058415a4c1f/index.json"
-            ]
+            "dev-main": "1.12-dev"
         }
     },
     "autoload": {

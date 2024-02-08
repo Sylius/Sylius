@@ -1,10 +1,8 @@
 # This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
+# (c) Sylius Sp. z o.o.
 
 sylius:
     email:
-        contact_request:
-            content: 'Sadržaj'
         password_reset:
             hello: 'Zdravo'
         verification_token:

@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -33,11 +33,19 @@ final class CheckoutResolver implements EventSubscriberInterface
     ) {
     }
 
+    public static function getSubscribedEvents(): array
+    {
+        return [
+            KernelEvents::REQUEST => 'onKernelRequest',
+        ];
+    }
+
     public function onKernelRequest(RequestEvent $event): void
     {
         if (\method_exists($event, 'isMainRequest')) {
             $isMainRequest = $event->isMainRequest();
         } else {
+            /** @phpstan-ignore-next-line */
             $isMainRequest = $event->isMasterRequest();
         }
         if (!$isMainRequest) {
@@ -54,31 +62,33 @@ final class CheckoutResolver implements EventSubscriberInterface
         $order = $this->cartContext->getCart();
         if ($order->isEmpty()) {
             $event->setResponse(new RedirectResponse($this->urlGenerator->generateForCart()));
+
+            return;
         }
 
-        $stateMachine = $this->stateMachineFactory->get($order, $this->getRequestedGraph($request));
+        $graph = $this->getRequestedGraph($request);
+        $transition = $this->getRequestedTransition($request);
 
-        if ($stateMachine->can($this->getRequestedTransition($request))) {
+        if (null === $graph || null === $transition) {
+            return;
+        }
+
+        $stateMachine = $this->stateMachineFactory->get($order, $graph);
+
+        if ($stateMachine->can($transition)) {
             return;
         }
 
         $event->setResponse(new RedirectResponse($this->urlGenerator->generateForOrderCheckoutState($order)));
     }
 
-    public static function getSubscribedEvents(): array
+    private function getRequestedGraph(Request $request): ?string
     {
-        return [
-            KernelEvents::REQUEST => 'onKernelRequest',
-        ];
+        return $request->attributes->get('_sylius', [])['state_machine']['graph'] ?? null;
     }
 
-    private function getRequestedGraph(Request $request): string
+    private function getRequestedTransition(Request $request): ?string
     {
-        return $request->attributes->get('_sylius')['state_machine']['graph'];
-    }
-
-    private function getRequestedTransition(Request $request): string
-    {
-        return $request->attributes->get('_sylius')['state_machine']['transition'];
+        return $request->attributes->get('_sylius', [])['state_machine']['transition'] ?? null;
     }
 }

@@ -5,7 +5,7 @@ Feature: Deleting payment methods
     I want to be able to delete a payment method
 
     Background:
-        Given the store has a payment method "Offline" with a code "offline"
+        Given the store has a payment method "Offline" with a code "Offline"
         And I am logged in as an administrator
 
     @ui

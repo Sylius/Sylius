@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -36,11 +36,7 @@ class ChannelPricing implements ChannelPricingInterface, \Stringable
     /** @var int */
     protected $minimumPrice = 0;
 
-    /**
-     * @var ArrayCollection
-     *
-     * @psalm-var ArrayCollection<array-key, CatalogPromotionInterface>
-     */
+    /** @var ArrayCollection<array-key, CatalogPromotionInterface> */
     protected $appliedPromotions;
 
     public function __construct()

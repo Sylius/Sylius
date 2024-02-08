@@ -27,20 +27,21 @@
     ],
     "require": {
         "php": "^8.0",
-        "sylius/core-bundle": "^1.6",
-        "sylius/ui-bundle": "^1.6",
-        "symfony/framework-bundle": "^4.4 || ^5.4",
-        "symfony/security-bundle": "^4.4 || ^5.4",
-        "twig/intl-extra": "^2.12",
-        "twig/twig": "^2.12"
+        "sylius/core-bundle": "^1.12",
+        "sylius/ui-bundle": "^1.12",
+        "symfony/framework-bundle": "^5.4 || ^6.0",
+        "symfony/security-bundle": "^5.4 || ^6.0",
+        "symfony/webpack-encore-bundle": "^1.15",
+        "twig/intl-extra": "^2.12 || ^3.4",
+        "twig/twig": "^2.12 || ^3.3"
     },
     "require-dev": {
         "matthiasnoback/symfony-config-test": "^4.2",
-        "matthiasnoback/symfony-dependency-injection-test": "^4.1",
+        "matthiasnoback/symfony-dependency-injection-test": "^4.2",
         "mockery/mockery": "^1.4",
         "phpspec/phpspec": "^7.2",
         "phpunit/phpunit": "^8.5",
-        "symfony/dependency-injection": "^4.4 || ^5.4"
+        "symfony/dependency-injection": "^5.4 || ^6.0"
     },
     "config": {
         "allow-plugins": {
@@ -49,12 +50,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "1.9-dev"
-        },
-        "symfony": {
-            "endpoint": [
-                "https://raw.githubusercontent.com/symfony/recipes/c8d90298241f176a261dadc4814d7058415a4c1f/index.json"
-            ]
+            "dev-main": "1.12-dev"
         }
     },
     "autoload": {

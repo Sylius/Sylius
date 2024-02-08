@@ -56,7 +56,6 @@ header in addition to this path, however it may be misleading for consumers.
 - https://github.com/api-platform/core/issues/972
 - https://stackoverflow.com/questions/389169/best-practices-for-api-versioning
 - https://www.troyhunt.com/your-api-versioning-is-wrong-which-is/
-- http://codebetter.com/howarddierking/2012/11/09/versioning-restful-services/
 - https://github.com/api-platform/core/issues/45
 - https://github.com/api-platform/docs/issues/451
 - https://github.com/api-platform/docs/pull/452

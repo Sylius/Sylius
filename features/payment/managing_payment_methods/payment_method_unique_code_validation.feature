@@ -6,14 +6,14 @@ Feature: Payment method unique code validation
 
     Background:
         Given the store operates on a single channel in "United States"
-        And the store has a payment method "Offline" with a code "offline"
+        And the store has a payment method "Offline" with a code "Offline"
         And I am logged in as an administrator
 
     @ui
     Scenario: Trying to add payment method with taken code
-        When I want to create a new offline payment method
+        When I want to create a new Offline payment method
         And I name it "Paypal Express Checkout" in "English (United States)"
-        And I specify its code as "offline"
+        And I specify its code as "Offline"
         And I try to add it
         Then I should be notified that payment method with this code already exists
-        And there should still be only one payment method with code "offline"
+        And there should still be only one payment method with code "Offline"

@@ -1,7 +1,13 @@
 # This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
+# (c) Sylius Sp. z o.o.
 
 sylius:
+    admin:
+        request_reset_password:
+            success: 'If the email you have specified exists in our system, we have sent there an instruction on how to reset your password.'
+        password_reset:
+            success: 'Your password has been changed successfully!'
+            token_expired: 'The password reset token has expired.'
     email:
         order_confirmation_resent: 'Order confirmation has been successfully resent to the customer.'
         shipment_confirmation_resent: 'Shipment confirmation has been successfully resent to the customer.'

@@ -1,12 +1,8 @@
 # This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
+# (c) Sylius Sp. z o.o.
 
 sylius:
     email:
-        contact_request:
-            content: 'Агуулга'
-            message_from: 'Ирсэн зурвас'
-            subject: 'Холбоо барих хүсэлт'
         order_confirmation:
             has_been_successfully_placed: 'амжилттай байрлууллаа.'
             subject: 'Захиалгын баталгаажуулалт'
@@ -31,7 +27,7 @@ sylius:
     homepage:
         about_us: 'Бидний тухай'
         about_us_content: 'Танд хамгийн шилдэг бүтээгдэхүүнийг санал болгодог номер нэг онлайн дэлгүүр болох манай дэлгүүрт тавтай морилно уу. Та манай санал болгож буй хамгийн сайн хувцас, гутлыг сонгож болно. (<i>Та орчуулгын файл доторх "sylius.homepage.about_us_content" энэ агуулгыг өөрчлөх боломжтой.</i>)'
-        carousel_header: 'Дулаалаарай! Өвөл хаяанд ирж байна.'
+        banner_content: 'Дулаалаарай! Өвөл хаяанд ирж байна.'
         newsletter: 'Мэдээллийн товхимол'
         newsletter_description: 'Таныг хүлээж буй шинэ саналуудыг үзэхийн тулд манай мэдээллийн товхимолд бүртгүүлээрэй! (<i> Та орчуулгын файл доторх "sylius.homepage.newsletter_description" энэ агуулгыг өөрчлөх боломжтой </i>)'
         subscribe: 'Бүртгүүлэх'

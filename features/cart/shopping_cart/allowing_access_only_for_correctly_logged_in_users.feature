@@ -7,7 +7,7 @@ Feature: Allowing access only for correctly logged in users
     Background:
         Given the store operates on a single channel in "United States"
         And the store has a product "Stark T-Shirt" priced at "$12.00"
-        And the store allows paying offline
+        And the store allows paying Offline
         And the store has "UPS" shipping method with "$20.00" fee
 
     @api
@@ -39,7 +39,7 @@ Feature: Allowing access only for correctly logged in users
         And the visitor has specified address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
         And the visitor has completed the addressing step
         And the visitor has proceeded "UPS" shipping method
-        When the visitor proceed with "offline" payment
+        When the visitor proceed with "Offline" payment
         Then the visitor should have checkout payment step completed
 
     @api
@@ -49,7 +49,7 @@ Feature: Allowing access only for correctly logged in users
         And the visitor has specified address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
         And the visitor has completed the addressing step
         And the visitor has proceeded "UPS" shipping method
-        And the visitor has proceeded "offline" payment
+        And the visitor has proceeded "Offline" payment
         When the visitor confirm his order
         Then the visitor should see the thank you page
 
@@ -90,7 +90,7 @@ Feature: Allowing access only for correctly logged in users
         And the customer has specified address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
         And the customer has completed the addressing step
         And the customer has proceeded "UPS" shipping method
-        When the customer proceed with "offline" payment
+        When the customer proceed with "Offline" payment
         Then the customer should have checkout payment step completed
 
     @api
@@ -100,7 +100,7 @@ Feature: Allowing access only for correctly logged in users
         And the customer has specified address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
         And the customer has completed the addressing step
         And the customer has proceeded "UPS" shipping method
-        And the customer has proceeded "offline" payment
+        And the customer has proceeded "Offline" payment
         When the customer confirm his order
         Then the customer should see the thank you page
 
@@ -153,7 +153,7 @@ Feature: Allowing access only for correctly logged in users
         And the customer has completed the addressing step
         And the customer has proceeded "UPS" shipping method
         And the customer logged out
-        Then the visitor has no access to proceed with "offline" payment in the customer cart
+        Then the visitor has no access to proceed with "Offline" payment in the customer cart
 
     @api
     Scenario: Denying access to complete the customer cart by the visitor
@@ -162,7 +162,7 @@ Feature: Allowing access only for correctly logged in users
         And the customer has specified address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
         And the customer has completed the addressing step
         And the customer has proceeded "UPS" shipping method
-        And the customer has proceeded "offline" payment
+        And the customer has proceeded "Offline" payment
         And the customer logged out
         Then the visitor has no access to confirm the customer order
 

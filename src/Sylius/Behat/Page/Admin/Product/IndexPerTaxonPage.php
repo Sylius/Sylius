@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -19,6 +19,11 @@ use Webmozart\Assert\Assert;
 
 class IndexPerTaxonPage extends CrudIndexPage implements IndexPerTaxonPageInterface
 {
+    public function getProductPosition(string $productName): int
+    {
+        return (int) $this->getElement('product_taxon_position', ['%name%' => $productName])->getValue();
+    }
+
     public function hasProductsInOrder(array $productNames): bool
     {
         $productsOnPage = $this->getColumnFields('name');
@@ -52,6 +57,7 @@ class IndexPerTaxonPage extends CrudIndexPage implements IndexPerTaxonPageInterf
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
+            'product_taxon_position' => '.sylius-product-taxon-position[data-test-product-name="%name%"]',
             'save_configuration_button' => '.sylius-save-position',
         ]);
     }

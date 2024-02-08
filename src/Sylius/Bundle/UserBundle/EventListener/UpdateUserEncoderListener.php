@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -16,6 +16,7 @@ namespace Sylius\Bundle\UserBundle\EventListener;
 use Doctrine\Persistence\ObjectManager;
 use Sylius\Component\User\Model\UserInterface;
 use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
+use Webmozart\Assert\Assert;
 
 final class UpdateUserEncoderListener
 {
@@ -40,6 +41,7 @@ final class UpdateUserEncoderListener
             return;
         }
 
+        Assert::methodExists($user, 'getEncoderName');
         if ($user->getEncoderName() === $this->recommendedEncoderName) {
             return;
         }

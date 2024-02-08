@@ -1,12 +1,5 @@
-.. rst-class:: outdated
-
 Attribute
 =========
-
-.. danger::
-
-   We're sorry but **this documentation section is outdated**. Please have that in mind when trying to use it.
-   You can help us making documentation up to date via Sylius Github. Thank you!
 
 Handling of dynamic attributes on PHP models is a common task for most of modern business applications.
 Sylius component makes it easier to handle different types of attributes

@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -180,6 +180,32 @@ final class ManagingOrdersContext implements Context
     public function iFilter()
     {
         $this->indexPage->filter();
+    }
+
+    /**
+     * @When I filter by product :productName
+     * @When I filter by products :firstProduct and :secondProduct
+     */
+    public function iFilterByProduct(string ...$productsNames): void
+    {
+        foreach ($productsNames as $productName) {
+            $this->indexPage->specifyFilterProduct($productName);
+        }
+
+        $this->iFilter();
+    }
+
+    /**
+     * @When I filter by variant :variantName
+     * @When I filter by variants :firstVariant and :secondVariant
+     */
+    public function iFilterByVariant(string ...$variantsNames): void
+    {
+        foreach ($variantsNames as $variantName) {
+            $this->indexPage->specifyFilterVariant($variantName);
+        }
+
+        $this->iFilter();
     }
 
     /**
@@ -502,6 +528,17 @@ final class ManagingOrdersContext implements Context
         $this->notificationChecker->checkNotification(
             'Payment has been successfully updated.',
             NotificationType::success(),
+        );
+    }
+
+    /**
+     * @Then I should be notified that the order's payment could not be finalized due to insufficient stock
+     */
+    public function iShouldBeNotifiedThatTheOrderSPaymentCouldNotBeFinalizedDueToInsufficientStock()
+    {
+        $this->notificationChecker->checkNotification(
+            'The payment cannot be completed due to insufficient stock of the',
+            NotificationType::failure(),
         );
     }
 

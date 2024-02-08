@@ -1,11 +1,11 @@
 # This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
+# (c) Sylius Sp. z o.o.
 
 sylius_shop_ajax_user_check_action:
     path: /check
     methods: [GET]
     defaults:
-        _controller: sylius.controller.shop_user:showAction
+        _controller: sylius.controller.shop_user::showAction
         _format: json
         _sylius:
             repository:

@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -17,6 +17,7 @@ use Sylius\Component\Shipping\Exception\UnresolvedDefaultShippingMethodException
 use Sylius\Component\Shipping\Model\ShipmentInterface;
 use Sylius\Component\Shipping\Model\ShippingMethodInterface;
 use Sylius\Component\Shipping\Repository\ShippingMethodRepositoryInterface;
+use Webmozart\Assert\Assert;
 
 final class DefaultShippingMethodResolver implements DefaultShippingMethodResolverInterface
 {
@@ -30,7 +31,9 @@ final class DefaultShippingMethodResolver implements DefaultShippingMethodResolv
         if (empty($shippingMethods)) {
             throw new UnresolvedDefaultShippingMethodException();
         }
+        $shippingMethod = $shippingMethods[0];
+        Assert::isInstanceOf($shippingMethod, ShippingMethodInterface::class);
 
-        return $shippingMethods[0];
+        return $shippingMethod;
     }
 }

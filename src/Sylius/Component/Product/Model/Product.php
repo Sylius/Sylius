@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -36,32 +36,16 @@ class Product implements ProductInterface, \Stringable
     /** @var string|null */
     protected $code;
 
-    /**
-     * @var Collection|AttributeValueInterface[]
-     *
-     * @psalm-var Collection<array-key, AttributeValueInterface>
-     */
+    /** @var Collection<array-key, AttributeValueInterface> */
     protected $attributes;
 
-    /**
-     * @var Collection|ProductVariantInterface[]
-     *
-     * @psalm-var Collection<array-key, ProductVariantInterface>
-     */
+    /** @var Collection<array-key, ProductVariantInterface> */
     protected $variants;
 
-    /**
-     * @var Collection|ProductOptionInterface[]
-     *
-     * @psalm-var Collection<array-key, ProductOptionInterface>
-     */
+    /** @var Collection<array-key, ProductOptionInterface> */
     protected $options;
 
-    /**
-     * @var Collection|ProductAssociationInterface[]
-     *
-     * @psalm-var Collection<array-key, ProductAssociationInterface>
-     */
+    /** @var Collection<array-key, ProductAssociationInterface> */
     protected $associations;
 
     public function __construct()
@@ -117,6 +101,11 @@ class Product implements ProductInterface, \Stringable
     public function setName(?string $name): void
     {
         $this->getTranslation()->setName($name);
+    }
+
+    public function getDescriptor(): string
+    {
+        return trim(sprintf('%s (%s)', $this->getName(), $this->code));
     }
 
     public function getSlug(): ?string
@@ -225,23 +214,12 @@ class Product implements ProductInterface, \Stringable
 
     public function hasAttributeByCodeAndLocale(string $attributeCode, ?string $localeCode = null): bool
     {
-        $localeCode = $localeCode ?: $this->getTranslation()->getLocale();
-
-        foreach ($this->attributes as $attribute) {
-            if ($attribute->getAttribute()->getCode() === $attributeCode &&
-                ($attribute->getLocaleCode() === $localeCode || null === $attribute->getLocaleCode())) {
-                return true;
-            }
-        }
-
-        return false;
+        return $this->getAttributeByCodeAndLocale($attributeCode, $localeCode) !== null;
     }
 
     public function getAttributeByCodeAndLocale(string $attributeCode, ?string $localeCode = null): ?AttributeValueInterface
     {
-        if (null === $localeCode) {
-            $localeCode = $this->getTranslation()->getLocale();
-        }
+        $localeCode = $localeCode ?: $this->getTranslation()->getLocale();
 
         foreach ($this->attributes as $attribute) {
             if ($attribute->getAttribute()->getCode() === $attributeCode &&

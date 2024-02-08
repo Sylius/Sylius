@@ -51,7 +51,7 @@
 </svg>
 <header>
     <a id="logo" href="https://api-platform.com"><img src="{{ asset('bundles/apiplatform/logo-header.svg') }}" alt="API Platform"></a>
-    <a href="https://docs.sylius.com/en/latest/api/unified_api/introduction.html">
+    <a href="https://docs.sylius.com/en/latest/book/api/introduction.html">
         <div style="align-items: center; display: flex; height: 70px; font-size: 14px; color: #fff; font-weight: 700; font-family: sans-serif; padding: 10px 40px; position: fixed; top: 0; left: 0; background: #ed6a5a; z-index: 103;"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-alert-circle" style="margin-right: 10px;"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>EXPERIMENTAL</div>
     </a>
 </header>
@@ -67,7 +67,7 @@
         <div class="info">
             Available formats:
             {% for format in formats|keys %}
-                <a href="{{ path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')|merge({'_format': format})) }}">{{ format }}</a>
+                <a href="{{ path(app.request.attributes.get('_route'), app.request.attributes.all('_route_params')|merge({'_format': format})) }}">{{ format }}</a>
             {% endfor %}
             <br>
             Other API docs:
@@ -91,6 +91,94 @@
         <script src="{{ asset('bundles/apiplatform/init-swagger-ui.js') }}"></script>
     {% endif %}
 {% endblock %}
+<script>
+    class ClassWatcher {
+        constructor(targetNode, classToWatch, classAddedCallback, classRemovedCallback) {
+            this.targetNode = targetNode
+            this.classToWatch = classToWatch
+            this.classAddedCallback = classAddedCallback
+            this.classRemovedCallback = classRemovedCallback
+            this.observer = null
+            this.lastClassState = targetNode.classList.contains(this.classToWatch)
+
+            this.init()
+        }
+
+        init() {
+            this.observer = new MutationObserver(this.mutationCallback)
+            this.observe()
+        }
+
+        observe() {
+            this.observer.observe(this.targetNode, { attributes: true })
+        }
+
+        disconnect() {
+            this.observer.disconnect()
+        }
+
+        mutationCallback = mutationsList => {
+            for(let mutation of mutationsList) {
+                if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+                    let currentClassState = mutation.target.classList.contains(this.classToWatch)
+                    if(this.lastClassState !== currentClassState) {
+                        this.lastClassState = currentClassState
+                        if(currentClassState) {
+                            this.classAddedCallback()
+                        }
+                        else {
+                            this.classRemovedCallback()
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    let tokenRequestContainer = null;
+
+    function credentialsRequestReady() {
+        const tokenRequestContainer2 = document.querySelector('#operations-AdminUserToken-postCredentialsItem').getElementsByClassName('opblock-body')[0];
+
+        const executeWrapper = tokenRequestContainer2.getElementsByClassName('execute-wrapper')[0];
+        new ClassWatcher(executeWrapper, 'btn-group', credentialsRequestFinished, () => {});
+    }
+
+    function credentialsRequestFinished() {
+        const tokenElement = JSON.parse(tokenRequestContainer.querySelector('.highlight-code').getElementsByTagName('code')[0].innerText)
+
+        const buttonLogin = document.querySelector("#swagger-ui > section > div.swagger-ui > div:nth-child(2) > div.scheme-container > section > div > button");
+
+        const mouseEvent = new MouseEvent('click', {
+            view: window,
+            bubbles: true,
+            cancelable: true
+        });
+
+        buttonLogin.dispatchEvent(mouseEvent);
+
+        const authFormField = document.querySelector("#swagger-ui > section > div.swagger-ui > div:nth-child(2) > div.scheme-container > section > div > div > div.modal-ux > div > div > div.modal-ux-content > div > form > div:nth-child(1) > div > div:nth-child(5) > section > input[type=text]");
+
+        const authorizeSubmitButton = document.querySelector("#swagger-ui > section > div.swagger-ui > div:nth-child(2) > div.scheme-container > section > div > div > div.modal-ux > div > div > div.modal-ux-content > div > form > div.auth-btn-wrapper > button.btn.modal-btn.auth.authorize.button");
+
+        const nativeInputValueSetter = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, "value").set;
+        nativeInputValueSetter.call(authFormField, `Bearer ${tokenElement.token}`);
+
+        authFormField.dispatchEvent(new Event('input', { bubbles: true }));
+
+        authorizeSubmitButton.dispatchEvent(mouseEvent);
+
+        const closeAuthFormButton = document.querySelector("#swagger-ui > section > div.swagger-ui > div:nth-child(2) > div.scheme-container > section > div > div > div.modal-ux > div > div > div.modal-ux-content > div > form > div.auth-btn-wrapper > button.btn.modal-btn.auth.btn-done.button");
+
+        closeAuthFormButton.dispatchEvent(mouseEvent);
+    }
+
+    window.addEventListener('load', event => {
+        tokenRequestContainer = document.querySelector('#operations-AdminUserToken-postCredentialsItem');
+
+        new ClassWatcher(tokenRequestContainer, 'is-open', credentialsRequestReady, function(){});
+    });
+</script>
 
 </body>
 </html>

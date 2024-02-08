@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -17,6 +17,7 @@ use ApiPlatform\Core\Api\IriConverterInterface;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
+use Sylius\Behat\Context\Api\Resources;
 use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
@@ -30,6 +31,7 @@ final class ManagingPaymentsContext implements Context
         private ApiClientInterface $client,
         private ResponseCheckerInterface $responseChecker,
         private IriConverterInterface $iriConverter,
+        private string $apiUrlPrefix,
     ) {
     }
 
@@ -39,7 +41,7 @@ final class ManagingPaymentsContext implements Context
      */
     public function iAmBrowsingPayments(): void
     {
-        $this->client->index();
+        $this->client->index(Resources::PAYMENTS);
     }
 
     /**
@@ -51,6 +53,7 @@ final class ManagingPaymentsContext implements Context
         Assert::notNull($payment);
 
         $this->client->applyTransition(
+            Resources::PAYMENTS,
             (string) $payment->getId(),
             PaymentTransitions::TRANSITION_COMPLETE,
         );
@@ -131,7 +134,7 @@ final class ManagingPaymentsContext implements Context
             $this->client->getLastResponse(),
             $position - 1,
             'order',
-            sprintf('/api/v2/admin/orders/%s', $order->getTokenValue()),
+            sprintf('%s/admin/orders/%s', $this->apiUrlPrefix, $order->getTokenValue()),
         ));
     }
 
@@ -152,7 +155,7 @@ final class ManagingPaymentsContext implements Context
         Assert::notNull($payment);
 
         Assert::true($this->responseChecker->hasValue(
-            $this->client->show((string) $payment->getId()),
+            $this->client->show(Resources::PAYMENTS, (string) $payment->getId()),
             'state',
             StringInflector::nameToLowercaseCode($paymentState),
         ));
@@ -166,7 +169,7 @@ final class ManagingPaymentsContext implements Context
         Assert::true($this->responseChecker->hasItemWithValue(
             $this->client->getLastResponse(),
             'order',
-            $this->iriConverter->getIriFromItem($order),
+            $this->iriConverter->getIriFromItemInSection($order, 'admin'),
         ));
     }
 
@@ -178,7 +181,7 @@ final class ManagingPaymentsContext implements Context
         Assert::false($this->responseChecker->hasItemWithValue(
             $this->client->getLastResponse(),
             'order',
-            $this->iriConverter->getIriFromItem($order),
+            $this->iriConverter->getIriFromItemInSection($order, 'admin'),
         ));
     }
 }

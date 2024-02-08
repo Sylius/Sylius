@@ -1,5 +1,5 @@
 # This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
+# (c) Sylius Sp. z o.o.
 
 sylius:
     channel:
@@ -21,10 +21,12 @@ sylius:
     payment:
         apply_state_machine_transition_error: 'Il y a eu une erreur inconnue lors de la mise à jour du paiement. Veuillez réessayer.'
     product:
+        in_use_by_promotion_rule: ''
         out_of_stock: 'Il ne reste que %quantity% produit(s) en stock.'
     product_variant:
         update_error: 'Il y a eu une erreur inconnue lors de la mise à jour de la variante du produit. Veuillez réessayer.'
     promotion:
         update_rules: 'Certaines règles des promotions avec les codes %codes% ont été mises à jour.'
     taxon:
+        in_use_by_promotion_rule: ''
         menu_taxon_delete: 'Vous ne pouvez pas supprimer la Taxon de menu d''un canal.'

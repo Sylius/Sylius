@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -116,14 +116,16 @@ final class OrderPaymentStateResolver implements StateResolverInterface
     }
 
     /**
-     * @return Collection|PaymentInterface[]
-     *
-     * @psalm-return Collection<array-key, PaymentInterface>
+     * @return Collection<array-key, PaymentInterface>
      */
     private function getPaymentsWithState(OrderInterface $order, string $state): Collection
     {
-        return $order->getPayments()->filter(function (PaymentInterface $payment) use ($state) {
+        /** @var Collection<array-key, PaymentInterface> $payments */
+        $payments = $order->getPayments()->filter(function (PaymentInterface $payment) use ($state) {
             return $state === $payment->getState();
         });
+        Assert::allIsInstanceOf($payments, PaymentInterface::class);
+
+        return $payments;
     }
 }

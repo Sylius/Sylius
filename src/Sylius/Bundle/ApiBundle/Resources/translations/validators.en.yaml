@@ -1,13 +1,15 @@
 sylius:
+    admin:
+        expired_password_reset_token: 'The password reset token has expired.'
     account:
         invalid_verification_token: 'There is no shop user with %verificationToken% email verification token.'
         is_verified: 'Account with email %email% is currently verified.'
     address:
         without_country: 'The address without country cannot exist'
+    contact_request:
+        email_is_invalid: 'The provided email is invalid.'
     country:
         not_exist: 'The country %countryCode% does not exist.'
-    locale:
-        not_exist: 'The locale %localeCode% does not exist.'
     order:
         not_empty: 'An empty order cannot be completed.'
     payment_method:
@@ -21,6 +23,7 @@ sylius:
         not_sufficient: 'The product variant with %productVariantCode% code does not have sufficient stock.'
         product_variant_with_name_not_sufficient: 'The product variant with %productVariantName% name does not have sufficient stock.'
     shipment:
+        not_found: 'The shipment does not exist.'
         shipped: 'You cannot ship a shipment that was shipped before.'
     shipping_method:
         not_found: 'The shipping method with %code% code does not exist.'

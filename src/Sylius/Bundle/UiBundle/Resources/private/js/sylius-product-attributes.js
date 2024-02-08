@@ -1,7 +1,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -27,7 +27,12 @@ const controlAttributesList = function controlAttributesList() {
 };
 
 const modifyAttributesListOnSelectorElementDelete = function modifyAttributesListOnSelectorElementDelete(removedValue) {
-  $(`#attributesContainer .attributes-group[data-attribute-code="${removedValue}"]`).remove();
+  // Once the enter key pressed on any field in the product page cause an attribute deletion.
+  // When this bug occurs, the value of pageX is equal to 0. So if pageX is not equal to 0, it means the user clicked
+  // on the delete button, so the remove method should be called.
+  if (event.pageX != 0) {
+    $(`#attributesContainer .attributes-group[data-attribute-code="${removedValue}"]`).remove();
+  }
 };
 
 const modifySelectorOnAttributesListElementDelete = function modifySelectorOnAttributesListElementDelete() {
@@ -128,7 +133,7 @@ const setAttributeChoiceListener = function setAttributeChoiceListener() {
 
         $('#sylius_product_attribute_choice').val('');
 
-        addAttributesNumber($.grep(attributeFormElements, a => $(a).hasClass('attribute')).length);
+        addAttributesNumber(attributeFormElements.find('.attribute').length);
         modifySelectorOnAttributesListElementDelete();
 
         $('form').removeClass('loading');

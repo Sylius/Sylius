@@ -5,8 +5,8 @@ Feature: Sorting listed product attributes by position
     I want to sort product attributes by their positions
 
     Background:
-        Given the store has a text product attribute "T-shirt brand" at position 1
-        And the store has a checkbox product attribute "T-shirt with cotton" at position 2
+        Given the store has a text product attribute "T-Shirt brand" at position 1
+        And the store has a checkbox product attribute "T-Shirt with cotton" at position 2
         And the store has a integer product attribute "Book pages" at position 0
         And I am logged in as an administrator
 
@@ -15,7 +15,7 @@ Feature: Sorting listed product attributes by position
         When I want to see all product attributes in store
         Then I should see 3 product attributes in the list
         And the first product attribute on the list should have name "Book pages"
-        And the last product attribute on the list should have name "T-shirt with cotton"
+        And the last product attribute on the list should have name "T-Shirt with cotton"
 
     @ui
     Scenario: Product attribute added at no position gets put at the bottom of the list

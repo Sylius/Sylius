@@ -1,5 +1,5 @@
 # This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
+# (c) Sylius Sp. z o.o.
 
 imports:
     - { resource: "@SyliusUiBundle/Resources/config/app/config.yml" }
@@ -10,6 +10,10 @@ imports:
 
 parameters:
     sylius.security.shop_regex: "^/(?!%sylius_admin.path_name%|api/.*|api$|media/.*)[^/]++"
+
+webpack_encore:
+    builds:
+        shop: '%kernel.project_dir%/public/build/shop'
 
 sylius_grid:
     templates:
@@ -22,7 +26,7 @@ sylius_grid:
 
 sylius_shop:
     checkout_resolver:
-        pattern: /checkout/.+
+        pattern: "%sylius.security.shop_regex%/checkout/.+"
         route_map:
             empty_order:
                 route: sylius_shop_cart_summary

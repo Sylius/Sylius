@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -17,7 +17,6 @@ use Symfony\Component\Form\Extension\Core\DataTransformer\MoneyToLocalizedString
 
 final class SyliusMoneyTransformer extends MoneyToLocalizedStringTransformer
 {
-    /** @psalm-suppress ImplementedReturnTypeMismatch Parent class from Symfony returns null but does not include it in the docblock */
     public function reverseTransform($value): ?int
     {
         /** @var int|float|null $value */

@@ -11,9 +11,9 @@ Feature: Seeing shipping methods which category is same as category of all my un
         And this product belongs to "Over-sized" shipping category
         And the store has a product "Picasso T-Shirt" priced at "$19.99"
         And this product belongs to "Standard" shipping category
-        And the store has a product "Rocket T-shirt" priced at "$20.00"
+        And the store has a product "Rocket T-Shirt" priced at "$20.00"
         And this product belongs to "Standard" shipping category
-        And the store has a product "T-shirt banana"
+        And the store has a product "T-Shirt banana"
         And this product has option "Size" with values "S" and "M"
         And this product is available in "S" size priced at "$12.54"
         And this product is available in "M" size priced at "$12.30"
@@ -25,8 +25,8 @@ Feature: Seeing shipping methods which category is same as category of all my un
 
     @ui @api
     Scenario: Seeing only shipping method which category is same as categories of all my units
-        Given I have product "Rocket T-shirt" in the cart
-        And I have product "Picasso T-shirt" in the cart
+        Given I have product "Rocket T-Shirt" in the cart
+        And I have product "Picasso T-Shirt" in the cart
         When I am at the checkout addressing step
         And I specify the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
         And I complete the addressing step
@@ -46,7 +46,7 @@ Feature: Seeing shipping methods which category is same as category of all my un
 
     @ui @api
     Scenario: Seeing no shipping methods if my units matches to different shipping categories
-        And I have product "Rocket T-shirt" in the cart
+        And I have product "Rocket T-Shirt" in the cart
         And I have product "Star Trek Ship" in the cart
         When I am at the checkout addressing step
         And I specify the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
@@ -55,10 +55,10 @@ Feature: Seeing shipping methods which category is same as category of all my un
 
     @ui @api
     Scenario: Seeing no shipping methods if not all variants of my units has same shipping category
-        Given the "T-shirt banana" product's "S" size belongs to "Standard" shipping category
-        And the "T-shirt banana" product's "M" size belongs to "Over-sized" shipping category
-        And I have product "T-shirt banana" with product option "Size" S in the cart
-        And I have product "T-shirt banana" with product option "Size" M in the cart
+        Given the "T-Shirt banana" product's "S" size belongs to "Standard" shipping category
+        And the "T-Shirt banana" product's "M" size belongs to "Over-sized" shipping category
+        And I have product "T-Shirt banana" with product option "Size" S in the cart
+        And I have product "T-Shirt banana" with product option "Size" M in the cart
         When I am at the checkout addressing step
         And I specify the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
         And I complete the addressing step
@@ -66,10 +66,10 @@ Feature: Seeing shipping methods which category is same as category of all my un
 
     @ui @api
     Scenario: Seeing shipping methods if all variants of my units has same shipping category
-        Given the "T-shirt banana" product's "M" size belongs to "Standard" shipping category
-        And the "T-shirt banana" product's "S" size belongs to "Standard" shipping category
-        And I have product "T-shirt banana" with product option "Size" S in the cart
-        And I have product "T-shirt banana" with product option "Size" M in the cart
+        Given the "T-Shirt banana" product's "M" size belongs to "Standard" shipping category
+        And the "T-Shirt banana" product's "S" size belongs to "Standard" shipping category
+        And I have product "T-Shirt banana" with product option "Size" S in the cart
+        And I have product "T-Shirt banana" with product option "Size" M in the cart
         When I am at the checkout addressing step
         And I specify the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
         And I complete the addressing step

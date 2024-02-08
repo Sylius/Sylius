@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -15,6 +15,7 @@ namespace Sylius\Bundle\PayumBundle;
 
 use Sylius\Bundle\PayumBundle\DependencyInjection\Compiler\InjectContainerIntoControllersPass;
 use Sylius\Bundle\PayumBundle\DependencyInjection\Compiler\RegisterGatewayConfigTypePass;
+use Sylius\Bundle\PayumBundle\DependencyInjection\Compiler\UnregisterStripeGatewayTypePass;
 use Sylius\Bundle\PayumBundle\DependencyInjection\Compiler\UseTweakedDoctrineStoragePass;
 use Sylius\Bundle\ResourceBundle\AbstractResourceBundle;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
@@ -36,5 +37,6 @@ final class SyliusPayumBundle extends AbstractResourceBundle
         $container->addCompilerPass(new InjectContainerIntoControllersPass());
         $container->addCompilerPass(new RegisterGatewayConfigTypePass());
         $container->addCompilerPass(new UseTweakedDoctrineStoragePass());
+        $container->addCompilerPass(new UnregisterStripeGatewayTypePass(), priority: 128);
     }
 }

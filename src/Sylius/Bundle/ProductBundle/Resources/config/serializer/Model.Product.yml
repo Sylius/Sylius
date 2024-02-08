@@ -31,3 +31,6 @@ Sylius\Component\Product\Model\Product:
         getName:
             serialized_name: name
             groups: [Default, Detailed, Autocomplete]
+        getDescriptor:
+            serialized_name: descriptor
+            groups: [Autocomplete]

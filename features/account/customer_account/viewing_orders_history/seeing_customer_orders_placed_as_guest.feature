@@ -8,8 +8,8 @@ Feature: Seeing customer's orders placed as guest
         Given the store operates on a single channel in "United States"
         And on this channel account verification is not required
         And the store has a product "PHP T-Shirt" priced at "$19.99"
-        And the store ships everywhere for free
-        And the store allows paying offline
+        And the store ships everywhere for Free
+        And the store allows paying Offline
         And the guest customer placed order with "PHP T-Shirt" product for "john@snow.com" and "United States" based billing address with "Free" shipping method and "Offline" payment
         And the another guest customer placed order with "PHP T-Shirt" product for "ned@stark.com" and "United States" based billing address with "Free" shipping method and "Offline" payment
 

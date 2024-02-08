@@ -12,7 +12,7 @@
     {{ form_widget(form.comment, sylius_test_form_attribute('comment')|sylius_merge_recursive( {'attr': {'placeholder': 'sylius.ui.write_your_own_review'|trans}})) }}
     {{ form_errors(form.comment) }}
 </div>
-{% if not is_granted("IS_AUTHENTICATED_FULLY") %}
+{% if not is_granted("IS_AUTHENTICATED_REMEMBERED") %}
     <div class="field">
         {{ form_widget(form.author.email, sylius_test_form_attribute('author-email')|sylius_merge_recursive( {'attr': {'placeholder': 'sylius.ui.email'|trans}})) }}
         {{ form_errors(form.author.email) }}

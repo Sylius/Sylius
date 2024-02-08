@@ -16,7 +16,8 @@
 
             {% include '@SyliusShop/Checkout/SelectPayment/_form.html.twig' %}
             <div class="ui hidden divider"></div>
-            <button type="submit" class="ui large blue icon labeled button" id="sylius-pay-link" {{ sylius_test_html_attribute('pay-link') }}>
+            {% set order_cannot_be_paid = not sylius_order_can_be_paid(order) %}
+            <button type="submit" class="ui large blue icon labeled button {% if order_cannot_be_paid %}disabled{% endif %}" id="sylius-pay-link" {{ sylius_test_html_attribute('pay-link') }} {% if order_cannot_be_paid %}disabled{% endif %}>
                 <i class="check icon"></i> {{ 'sylius.ui.pay'|trans }}
             </button>
 

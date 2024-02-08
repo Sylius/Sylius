@@ -1,0 +1,109 @@
+name: Static Analysis
+
+on:
+    workflow_dispatch: ~
+    workflow_call:
+        inputs:
+            type:
+                description: "Type of the build"
+                required: true
+                type: string
+
+jobs:
+    get-matrix:
+        runs-on: ubuntu-latest
+        name: "Get matrix"
+        outputs:
+            matrix: ${{ steps.matrix.outputs.prop }}
+        steps:
+            -   uses: actions/checkout@v3
+            -
+                name: "Get matrix"
+                id: matrix
+                uses: notiz-dev/github-action-json-property@release
+                with:
+                    path: '.github/workflows/matrix.json'
+                    prop_path: '${{ inputs.type }}.static-checks'
+
+    static-checks:
+        needs: get-matrix
+        runs-on: ubuntu-latest
+        name: "PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}, API Platform ${{ matrix.api-platform }}"
+        strategy:
+            fail-fast: false
+            matrix: ${{ fromJson(needs.get-matrix.outputs.matrix) }}
+        env:
+            APP_ENV: test_cached
+            DATABASE_URL: "mysql://root:root@127.0.0.1/sylius?charset=utf8mb4&serverVersion=8.0"
+        steps:
+            -
+                uses: actions/checkout@v3
+
+            -   name: "Setup PHP"
+                uses: shivammathur/setup-php@v2
+                with:
+                    php-version: "${{ matrix.php }}"
+                    ini-values: date.timezone=Europe/Warsaw, opcache.enable=1, opcache.enable_cli=0, opcache.memory_consumption=512, opcache.max_accelerated_files=65407, opcache.interned_strings_buffer=8, opcache.validate_timestamps=0, opcache.save_comments=1, opcache.fast_shutdown=0
+                    extensions: intl, gd, opcache, mysql, pdo_mysql
+                    tools: symfony, composer-require-checker
+                    coverage: none
+
+            -   name: "Restrict packages' versions"
+                run: |
+                    composer global config --no-plugins allow-plugins.symfony/flex true
+                    composer global require --no-progress --no-scripts --no-plugins "symfony/flex:1.18.5"
+                    composer config extra.symfony.require "${{ matrix.symfony }}"
+                    composer require "api-platform/core:${{ matrix.api-platform }}" --no-update --no-scripts --no-interaction
+
+            -   name: Restrict API Platform version for ApiBundle
+                run: composer require "api-platform/core:${{ matrix.api-platform }}" --no-update --no-scripts --no-interaction
+                working-directory: "src/Sylius/Bundle/ApiBundle"
+
+            -   name: Get Composer cache directory
+                id: composer-cache
+                run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
+
+            -   name: "Setup cache"
+                uses: actions/cache@v3
+                with:
+                    path: |
+                        ${{ steps.composer-cache.outputs.dir }}
+                    key: ${{ github.run_id }}-${{ runner.os }}-${{ hashFiles('composer.json') }}-symfony-${{ matrix.symfony }}-api-platform-${{ matrix.api-platform }}
+
+            -   name: "Install dependencies"
+                run: composer update --no-interaction --no-scripts
+
+            -   name: "Validate composer.json"
+                run: composer validate --strict --no-check-version
+
+            -   name: "Check for security vulnerabilities"
+                run: symfony security:check
+                continue-on-error: true
+
+            -   name: "Validate Twig templates"
+                run: bin/console lint:twig src
+
+            -   name: "Validate Container"
+                run: bin/console lint:container
+
+            -   name: Validate Yaml files
+                run: bin/console lint:yaml src
+
+            -   name: Validate Package versions
+                run: vendor/bin/monorepo-builder validate
+
+            -   name: Run PHPArkitect
+                run: vendor/bin/phparkitect check
+
+            -   name: Run PHPStan
+                run: vendor/bin/phpstan analyse
+
+            -   name: Run PHPSpec
+                run: vendor/bin/phpspec run --ansi --no-interaction -f dot
+
+            -   name: Run ComposerRequireChecker
+                run: |
+                    (cat composer.json | jq '.["autoload-dev"]["psr-4"] |= . + {"Sylius\\Behat\\": "src/Sylius/Behat/"}' | jq 'del(.autoload["psr-4"]["Sylius\\Behat\\"])') > _composer.json
+                    mv _composer.json composer.json
+                    composer dump-autoload
+                    composer-require-checker check --config-file=composer-require-checker.json --ignore-parse-errors

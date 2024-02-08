@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -35,6 +35,25 @@ final class CatalogPromotionStateProcessorSpec extends ObjectBehavior
         $this->shouldImplement(CatalogPromotionStateProcessorInterface::class);
     }
 
+    function it_processes_a_catalog_promotion(
+        CatalogPromotionEligibilityCheckerInterface $catalogPromotionEligibilityChecker,
+        CatalogPromotionInterface $catalogPromotion,
+        FactoryInterface $stateMachineFactory,
+        StateMachineInterface $stateMachine,
+    ): void {
+        $stateMachineFactory->get($catalogPromotion, CatalogPromotionTransitions::GRAPH)->willReturn($stateMachine);
+
+        $catalogPromotionEligibilityChecker->isCatalogPromotionEligible($catalogPromotion)->willReturn(true);
+
+        $stateMachine->can(CatalogPromotionTransitions::TRANSITION_PROCESS)->willReturn(true);
+        $stateMachine->apply(CatalogPromotionTransitions::TRANSITION_PROCESS)->shouldBeCalled();
+
+        $stateMachine->apply(CatalogPromotionTransitions::TRANSITION_ACTIVATE)->shouldNotBeCalled();
+        $stateMachine->apply(CatalogPromotionTransitions::TRANSITION_DEACTIVATE)->shouldNotBeCalled();
+
+        $this->process($catalogPromotion);
+    }
+
     function it_activates_a_catalog_promotion(
         CatalogPromotionEligibilityCheckerInterface $catalogPromotionEligibilityChecker,
         CatalogPromotionInterface $catalogPromotion,
@@ -45,8 +64,12 @@ final class CatalogPromotionStateProcessorSpec extends ObjectBehavior
 
         $catalogPromotionEligibilityChecker->isCatalogPromotionEligible($catalogPromotion)->willReturn(true);
 
+        $stateMachine->can(CatalogPromotionTransitions::TRANSITION_PROCESS)->willReturn(false);
         $stateMachine->can(CatalogPromotionTransitions::TRANSITION_ACTIVATE)->willReturn(true);
         $stateMachine->apply(CatalogPromotionTransitions::TRANSITION_ACTIVATE)->shouldBeCalled();
+
+        $stateMachine->apply(CatalogPromotionTransitions::TRANSITION_PROCESS)->shouldNotBeCalled();
+        $stateMachine->apply(CatalogPromotionTransitions::TRANSITION_DEACTIVATE)->shouldNotBeCalled();
 
         $this->process($catalogPromotion);
     }
@@ -55,14 +78,18 @@ final class CatalogPromotionStateProcessorSpec extends ObjectBehavior
         CatalogPromotionEligibilityCheckerInterface $catalogPromotionEligibilityChecker,
         CatalogPromotionInterface $catalogPromotion,
         FactoryInterface $stateMachineFactory,
-        StateMachineInterface $stateMachineInterface,
+        StateMachineInterface $stateMachine,
     ): void {
-        $stateMachineFactory->get($catalogPromotion, CatalogPromotionTransitions::GRAPH)->willReturn($stateMachineInterface);
+        $stateMachineFactory->get($catalogPromotion, CatalogPromotionTransitions::GRAPH)->willReturn($stateMachine);
 
         $catalogPromotionEligibilityChecker->isCatalogPromotionEligible($catalogPromotion)->willReturn(false);
 
-        $stateMachineInterface->can(CatalogPromotionTransitions::TRANSITION_DEACTIVATE)->willReturn(true);
-        $stateMachineInterface->apply(CatalogPromotionTransitions::TRANSITION_DEACTIVATE)->shouldBeCalled();
+        $stateMachine->can(CatalogPromotionTransitions::TRANSITION_PROCESS)->willReturn(false);
+        $stateMachine->can(CatalogPromotionTransitions::TRANSITION_DEACTIVATE)->willReturn(true);
+        $stateMachine->apply(CatalogPromotionTransitions::TRANSITION_DEACTIVATE)->shouldBeCalled();
+
+        $stateMachine->apply(CatalogPromotionTransitions::TRANSITION_PROCESS)->shouldNotBeCalled();
+        $stateMachine->apply(CatalogPromotionTransitions::TRANSITION_ACTIVATE)->shouldNotBeCalled();
 
         $this->process($catalogPromotion);
     }

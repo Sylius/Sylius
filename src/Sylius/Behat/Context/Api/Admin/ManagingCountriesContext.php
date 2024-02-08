@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -17,6 +17,7 @@ use ApiPlatform\Core\Api\IriConverterInterface;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
+use Sylius\Behat\Context\Api\Resources;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Addressing\Model\CountryInterface;
 use Sylius\Component\Addressing\Model\ProvinceInterface;
@@ -27,7 +28,6 @@ final class ManagingCountriesContext implements Context
 {
     public function __construct(
         private ApiClientInterface $client,
-        private ApiClientInterface $provincesClient,
         private ResponseCheckerInterface $responseChecker,
         private SharedStorageInterface $sharedStorage,
         private IriConverterInterface $iriConverter,
@@ -39,7 +39,7 @@ final class ManagingCountriesContext implements Context
      */
     public function iWantToAddANewCountry(): void
     {
-        $this->client->buildCreateRequest();
+        $this->client->buildCreateRequest(Resources::COUNTRIES);
     }
 
     /**
@@ -52,6 +52,7 @@ final class ManagingCountriesContext implements Context
 
     /**
      * @When I add it
+     * @When I try to add it
      */
     public function iAddIt(): void
     {
@@ -65,7 +66,7 @@ final class ManagingCountriesContext implements Context
      */
     public function iWantToEditThisCountry(CountryInterface $country): void
     {
-        $this->client->buildUpdateRequest($country->getCode());
+        $this->client->buildUpdateRequest(Resources::COUNTRIES, $country->getCode());
     }
 
     /**
@@ -144,7 +145,7 @@ final class ManagingCountriesContext implements Context
     {
         $iri = $this->iriConverter->getItemIriFromResourceClass($province::class, ['code' => $province->getCode()]);
 
-        $provinces = $this->responseChecker->getValue($this->client->show($country->getCode()), 'provinces');
+        $provinces = $this->responseChecker->getValue($this->client->show(Resources::COUNTRIES, $country->getCode()), 'provinces');
         foreach ($provinces as $countryProvince) {
             if ($iri === $countryProvince) {
                 $this->client->removeSubResource('provinces', $countryProvince);
@@ -166,9 +167,9 @@ final class ManagingCountriesContext implements Context
      */
     public function iRemoveProvinceName(ProvinceInterface $province): void
     {
-        $this->provincesClient->buildUpdateRequest($province->getCode());
-        $this->provincesClient->addRequestData('name', '');
-        $this->provincesClient->update();
+        $this->client->buildUpdateRequest(Resources::PROVINCES, $province->getCode());
+        $this->client->addRequestData('name', '');
+        $this->client->update();
     }
 
     /**
@@ -188,7 +189,7 @@ final class ManagingCountriesContext implements Context
     public function theCountryShouldAppearInTheStore(CountryInterface $country): void
     {
         Assert::true(
-            $this->responseChecker->hasItemWithValue($this->client->index(), 'code', $country->getCode()),
+            $this->responseChecker->hasItemWithValue($this->client->index(Resources::COUNTRIES), 'code', $country->getCode()),
             sprintf('There is no country with name "%s"', $country->getName()),
         );
     }
@@ -200,7 +201,7 @@ final class ManagingCountriesContext implements Context
     public function theCountryShouldHaveTheProvince(CountryInterface $country, ProvinceInterface $province): void
     {
         Assert::true($this->responseChecker->hasItemWithValue(
-            $this->client->subResourceIndex('provinces', $country->getCode()),
+            $this->client->subResourceIndex(Resources::COUNTRIES, 'provinces', $country->getCode()),
             'code',
             $province->getCode(),
         ));
@@ -224,7 +225,7 @@ final class ManagingCountriesContext implements Context
         /** @var CountryInterface $country */
         $country = $this->sharedStorage->get('country');
         Assert::true($this->responseChecker->hasItemWithValue(
-            $this->client->subResourceIndex('provinces', $country->getCode()),
+            $this->client->subResourceIndex(Resources::COUNTRIES, 'provinces', $country->getCode()),
             'code',
             $province->getCode(),
         ));
@@ -262,7 +263,7 @@ final class ManagingCountriesContext implements Context
     {
         Assert::true(
             $this->responseChecker->hasValue(
-                $this->client->show($country->getCode()),
+                $this->client->show(Resources::COUNTRIES, $country->getCode()),
                 'enabled',
                 $enabled === 'enabled',
             ),
@@ -312,13 +313,24 @@ final class ManagingCountriesContext implements Context
     }
 
     /**
-     * @Then I should be notified that province code must be unique
+     * @Then /^I should be notified that province (code|name) must be unique$/
      */
-    public function iShouldBeNotifiedThatProvinceCodeMustBeUnique(): void
+    public function iShouldBeNotifiedThatProvinceCodeMustBeUnique(string $field): void
     {
-        Assert::same(
+        Assert::regex(
             $this->responseChecker->getError($this->client->getLastResponse()),
-            'provinces[1].code: Province code must be unique.',
+            sprintf('/provinces\[[\d+]\]\.%1$s: Province %1$s must be unique\./', $field),
+        );
+    }
+
+    /**
+     * @Then I should be notified that all province codes and names within this country need to be unique
+     */
+    public function iShouldBeNotifiedThatAllProvinceCodesAndNamesWithinThisCountryNeedToBeUnique(): void
+    {
+        Assert::contains(
+            $this->responseChecker->getError($this->client->getLastResponse()),
+            'provinces: All provinces within this country need to have unique codes and names.',
         );
     }
 
@@ -339,7 +351,7 @@ final class ManagingCountriesContext implements Context
     public function iShouldBeNotifiedThatNameOfTheProvinceIsRequired(): void
     {
         Assert::contains(
-            $this->responseChecker->getError($this->provincesClient->getLastResponse()),
+            $this->responseChecker->getError($this->client->getLastResponse()),
             'Please enter province name.',
         );
     }
@@ -369,7 +381,7 @@ final class ManagingCountriesContext implements Context
 
     private function getProvincesOfCountry(CountryInterface $country): iterable
     {
-        $response = $this->client->show($country->getCode());
+        $response = $this->client->show(Resources::COUNTRIES, $country->getCode());
         $countryFromResponse = $this->responseChecker->getResponseContent($response);
 
         foreach ($countryFromResponse['provinces'] as $provinceFromResponse) {

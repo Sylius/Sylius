@@ -7,5 +7,6 @@
 * :doc:`/cookbook/payments/refund-process`
 * :doc:`/cookbook/payments/custom-field-on-refund-payment`
 * :doc:`/cookbook/payments/custom-type-of-refund`
+* :doc:`/cookbook/payments/custom-unit-refund`
 * :doc:`/cookbook/payments/custom-invoice`
 * :doc:`/cookbook/payments/generating-invoice-after-payment`

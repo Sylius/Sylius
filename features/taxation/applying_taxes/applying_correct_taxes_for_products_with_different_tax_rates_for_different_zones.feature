@@ -8,7 +8,7 @@ Feature: Apply correct taxes for products with different tax rates for different
         Given the store operates on a single channel in "United States"
         And there is a zone "The Rest of the World" containing all other countries
         And the store ships to "Germany"
-        And the store ships everywhere for free
+        And the store ships everywhere for Free
         And default tax zone is "US"
         And the store has "No tax" tax rate of 0% for "Clothes" within the "US" zone
         And the store has "Low VAT" tax rate of 5% for "Mugs" within the "US" zone
@@ -19,34 +19,34 @@ Feature: Apply correct taxes for products with different tax rates for different
         And it belongs to "Mugs" tax category
         And I am a logged in customer
 
-    @ui
+    @ui @api
     Scenario: Displaying correct tax before specifying shipping address
         When I add product "PHP T-Shirt" to the cart
         Then my cart total should be "$100.00"
         And there should be no taxes charged
 
-    @ui
+    @ui @api
     Scenario: Displaying correct tax after specifying billing address
         Given I have product "PHP T-Shirt" in the cart
         When I proceed selecting "Germany" as billing country
         Then my cart total should be "$123.00"
         And my cart taxes should be "$23.00"
 
-    @ui
+    @ui @api
     Scenario: Displaying correct taxes for multiple products after specifying billing address
         Given I have 3 products "PHP T-Shirt" in the cart
         When I proceed selecting "Germany" as billing country
         Then my cart total should be "$369.00"
         And my cart taxes should be "$69.00"
 
-    @ui
+    @ui @api
     Scenario: Displaying correct taxes for multiple products from different zones before specifying shipping address
         When I add product "PHP T-Shirt" to the cart
         And I add 2 products "Symfony Mug" to the cart
         Then my cart total should be "$205.00"
         And my cart taxes should be "$5.00"
 
-    @ui
+    @ui @api
     Scenario: Displaying correct taxes for multiple products from different zones after specifying billing address
         Given I have product "PHP T-Shirt" in the cart
         And I have 2 products "Symfony Mug" in the cart

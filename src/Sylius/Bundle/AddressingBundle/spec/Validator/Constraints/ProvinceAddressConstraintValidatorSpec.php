@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -23,6 +23,7 @@ use Sylius\Component\Addressing\Model\Province;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintViolation;
+use Symfony\Component\Validator\ConstraintViolationList;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
 final class ProvinceAddressConstraintValidatorSpec extends ObjectBehavior
@@ -64,7 +65,7 @@ final class ProvinceAddressConstraintValidatorSpec extends ObjectBehavior
         $this->initialize($context);
 
         $context->getPropertyPath()->willReturn('property_path');
-        $context->getViolations()->willReturn(new \ArrayIterator([
+        $context->getViolations()->willReturn(new ConstraintViolationList([
             $this->createViolation('property_path'),
         ]));
 
@@ -92,7 +93,7 @@ final class ProvinceAddressConstraintValidatorSpec extends ObjectBehavior
         $this->initialize($context);
 
         $context->getPropertyPath()->willReturn('');
-        $context->getViolations()->willReturn(new \ArrayIterator([
+        $context->getViolations()->willReturn(new ConstraintViolationList([
             $this->createViolation('property_path'),
         ]));
 
@@ -117,7 +118,7 @@ final class ProvinceAddressConstraintValidatorSpec extends ObjectBehavior
         $this->initialize($context);
 
         $context->getPropertyPath()->willReturn('property_path');
-        $context->getViolations()->willReturn(new \ArrayIterator([
+        $context->getViolations()->willReturn(new ConstraintViolationList([
             $this->createViolation('other_property_path'),
         ]));
 
@@ -149,7 +150,7 @@ final class ProvinceAddressConstraintValidatorSpec extends ObjectBehavior
         $this->initialize($context);
 
         $context->getPropertyPath()->willReturn('property_path');
-        $context->getViolations()->willReturn(new \ArrayIterator([
+        $context->getViolations()->willReturn(new ConstraintViolationList([
             $this->createViolation('other_property_path'),
         ]));
 
@@ -178,7 +179,7 @@ final class ProvinceAddressConstraintValidatorSpec extends ObjectBehavior
         $this->initialize($context);
 
         $context->getPropertyPath()->willReturn('property_path');
-        $context->getViolations()->willReturn(new \ArrayIterator([
+        $context->getViolations()->willReturn(new ConstraintViolationList([
             $this->createViolation('other_property_path'),
         ]));
 
@@ -210,7 +211,7 @@ final class ProvinceAddressConstraintValidatorSpec extends ObjectBehavior
         $this->initialize($context);
 
         $context->getPropertyPath()->willReturn('property_path');
-        $context->getViolations()->willReturn(new \ArrayIterator([
+        $context->getViolations()->willReturn(new ConstraintViolationList([
             $this->createViolation('other_property_path'),
         ]));
 

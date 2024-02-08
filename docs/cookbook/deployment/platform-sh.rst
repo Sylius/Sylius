@@ -73,7 +73,7 @@ In this guide you will find sufficient instructions to have your application up 
         build: |
             set -e
             yarn install
-            GULP_ENV=prod yarn build
+            yarn build:prod
         deploy: |
             set -e
             rm -rf var/cache/*
@@ -94,7 +94,6 @@ In this guide you will find sufficient instructions to have your application up 
     dependencies:
         nodejs:
             yarn: "*"
-            gulp-cli: "*"
         php:
             composer/composer: '^2'
 
@@ -225,7 +224,7 @@ After that, you should modify your ``.platform.app.yaml``. Configuration from st
         build: |
             set -e
             yarn install --ignore-engines # without this flag you will get error related with node version conflict
-            GULP_ENV=prod yarn build
+            yarn build:prod
             wkhtmltopdf -V # Sylius Plus is installed with InvoicingPlugin, so we need wkhtmltopdf to generate PDF
 
         deploy: |
@@ -240,7 +239,6 @@ After that, you should modify your ``.platform.app.yaml``. Configuration from st
     dependencies:
         nodejs:
             yarn: "*"
-            gulp-cli: "*"
         ruby:
             "wkhtmltopdf-binary": "0.12.5.1" # adding wkhtmltopdf as a one of dependencies
 
@@ -293,7 +291,6 @@ Additional tips:
 ~~~~~~~~~~~~~~~~
 
 * Platform.sh can serve gzipped versions of your static assets. Make sure to save your assets in the same folder, but with a .gz suffix.
-  The ``gulp-gzip`` node package comes very helpful integrating saving of .gz versions of your assets.
 
 * Platform.sh comes with a `New Relic integration <https://docs.platform.sh/administration/integrations/new-relic.html>`_.
 

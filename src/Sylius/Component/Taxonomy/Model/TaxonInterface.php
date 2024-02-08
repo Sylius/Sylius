@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -32,16 +32,12 @@ interface TaxonInterface extends CodeAwareInterface, TranslatableInterface, Reso
     public function setParent(?self $taxon): void;
 
     /**
-     * @return Collection|TaxonInterface[]
-     *
-     * @psalm-return Collection<array-key, TaxonInterface>
+     * @return Collection<array-key, TaxonInterface>
      */
     public function getAncestors(): Collection;
 
     /**
-     * @return Collection|TaxonInterface[]
-     *
-     * @psalm-return Collection<array-key, TaxonInterface>
+     * @return Collection<array-key, TaxonInterface>
      */
     public function getChildren(): Collection;
 
@@ -54,9 +50,7 @@ interface TaxonInterface extends CodeAwareInterface, TranslatableInterface, Reso
     public function removeChild(self $taxon): void;
 
     /**
-     * @return Collection|TaxonInterface[]
-     *
-     * @psalm-return Collection<array-key, TaxonInterface>
+     * @return Collection<array-key, TaxonInterface>
      */
     public function getEnabledChildren(): Collection;
 

@@ -1,5 +1,5 @@
 # This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
+# (c) Sylius Sp. z o.o.
 
 default:
     suites:
@@ -9,15 +9,20 @@ default:
 
                 - sylius.behat.context.transform.channel
                 - sylius.behat.context.transform.lexical
+                - sylius.behat.context.transform.locale
                 - sylius.behat.context.transform.product
+                - sylius.behat.context.transform.product_association_type
                 - sylius.behat.context.transform.product_variant
                 - sylius.behat.context.transform.shared_storage
                 - sylius.behat.context.transform.taxon
 
+                - sylius.behat.context.setup.admin_user
                 - sylius.behat.context.setup.channel
                 - sylius.behat.context.setup.customer
                 - sylius.behat.context.setup.locale
                 - sylius.behat.context.setup.product
+                - sylius.behat.context.setup.product_association
+                - sylius.behat.context.setup.product_attribute
                 - sylius.behat.context.setup.product_review
                 - sylius.behat.context.setup.product_taxon
                 - sylius.behat.context.setup.shop_security
@@ -26,6 +31,7 @@ default:
 
                 - sylius.behat.context.api.shop.channel
                 - sylius.behat.context.api.shop.product
+                - sylius.behat.context.api.shop.product_attribute
                 - sylius.behat.context.api.shop.product_variant
 
             filters:

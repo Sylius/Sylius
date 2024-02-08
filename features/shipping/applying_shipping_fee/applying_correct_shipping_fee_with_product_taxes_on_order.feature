@@ -18,7 +18,7 @@ Feature: Apply correct shipping fee with product taxes on order
         And the store has "FedEx" shipping method with "$20.00" fee for the rest of the world
         And shipping method "DHL" belongs to "Shipping Services" tax category
         And shipping method "FedEx" belongs to "Shipping Services" tax category
-        And the store allows paying offline
+        And the store allows paying Offline
         And I am a logged in customer
 
     @ui @api

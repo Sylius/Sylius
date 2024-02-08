@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -28,9 +28,7 @@ interface ProductAssociationInterface extends TimestampableInterface, ResourceIn
     public function setOwner(?ProductInterface $owner): void;
 
     /**
-     * @return Collection|ProductInterface[]
-     *
-     * @psalm-return Collection<array-key, ProductInterface>
+     * @return Collection<array-key, ProductInterface>
      */
     public function getAssociatedProducts(): Collection;
 

@@ -4,7 +4,7 @@
 
  This file is part of the Sylius package.
 
- (c) Paweł Jędrzejewski
+ (c) Sylius Sp. z o.o.
 
  For the full copyright and license information, please view the LICENSE
  file that was distributed with this source code.
@@ -65,7 +65,6 @@
         </service>
 
         <service id="sylius.form.type.attribute_type.select.choices_collection" class="Sylius\Bundle\AttributeBundle\Form\Type\AttributeType\Configuration\SelectAttributeChoicesCollectionType">
-            <argument id="sylius.translation_locale_provider" type="service"/>
             <tag name="form.type" />
         </service>
 

@@ -2,7 +2,6 @@ Theming with BootstrapTheme
 ---------------------------
 
 This tutorial will guide you on how to create your own theme based on `BootstrapTheme <https://github.com/Sylius/BootstrapTheme>`_ using Webpack.
-If you haven't used Webpack yet, :doc:`here </cookbook/frontend/webpack>` you can learn how to do it.
 
 Tutorial is divided into 3 parts:
 
@@ -121,7 +120,7 @@ In the ``config/packages/assets.yaml`` add:
                 bootstrapTheme:
                     json_manifest_path: '%kernel.project_dir%/public/bootstrap-theme/manifest.json'
 
-and in the ``config/packages/webpack_encore.yaml`` add:
+in the ``config/packages/webpack_encore.yaml`` add:
 
 .. code-block:: yaml
 
@@ -129,6 +128,13 @@ and in the ``config/packages/webpack_encore.yaml`` add:
         output_path: '%kernel.project_dir%/public/build/default'
         builds:
             bootstrapTheme: '%kernel.project_dir%/public/bootstrap-theme'
+
+finally in the ``config/packages/_sylius.yaml`` add:
+
+.. code-block:: yaml
+
+    sylius_theme:
+        legacy_mode: true # for sylius 1.9, 1.10, 1.11, 1.12
 
 Now you can use one of the commands ``yarn encore dev``, ``yarn encore production`` or ``yarn encore dev-server``
 to compile all assets. Open the page - everything should work.
@@ -164,4 +170,4 @@ Overwriting templates
 
 To overwrite the template, copy the selected twig file from BootstrapTheme and paste it into the same place
 in your theme. For example, if you want to change something in the ``layout.html.twig`` file,
-copy it to ``themes/BootstrapChildTheme/SyliusShopBundle/views``
+copy it to ``themes/BootstrapChildTheme/templates/bundles/SyliusShopBundle``

@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -120,9 +120,18 @@ class TaxonRepository extends EntityRepository implements TaxonRepositoryInterfa
 
     public function findByNamePart(string $phrase, ?string $locale = null, ?int $limit = null): array
     {
+        $subqueryBuilder = $this->createQueryBuilder('sq')
+            ->innerJoin('sq.translations', 'translation', 'WITH', 'translation.name LIKE :name')
+            ->groupBy('sq.id')
+            ->addGroupBy('translation.translatable')
+            ->orderBy('translation.translatable', 'DESC')
+        ;
+
+        $queryBuilder = $this->createQueryBuilder('o');
+
         /** @var TaxonInterface[] $results */
-        $results = $this->createTranslationBasedQueryBuilder($locale)
-            ->andWhere('translation.name LIKE :name')
+        $results = $queryBuilder
+            ->andWhere($queryBuilder->expr()->in('o', $subqueryBuilder->getDQL()))
             ->setParameter('name', '%' . $phrase . '%')
             ->setMaxResults($limit)
             ->getQuery()

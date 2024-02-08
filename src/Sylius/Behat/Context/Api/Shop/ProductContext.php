@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -17,8 +17,9 @@ use ApiPlatform\Core\Api\IriConverterInterface;
 use Behat\Behat\Context\Context;
 use Doctrine\Common\Collections\ArrayCollection;
 use Sylius\Behat\Client\ApiClientInterface;
-use Sylius\Behat\Client\Request;
+use Sylius\Behat\Client\RequestFactoryInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
+use Sylius\Behat\Context\Api\Resources;
 use Sylius\Behat\Service\Setter\ChannelContextSetterInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
@@ -33,11 +34,12 @@ final class ProductContext implements Context
 {
     public function __construct(
         private ApiClientInterface $client,
-        private ApiClientInterface $productVariantClient,
         private ResponseCheckerInterface $responseChecker,
         private SharedStorageInterface $sharedStorage,
         private IriConverterInterface $iriConverter,
         private ChannelContextSetterInterface $channelContextSetter,
+        private RequestFactoryInterface $requestFactory,
+        private string $apiUrlPrefix,
     ) {
     }
 
@@ -46,16 +48,30 @@ final class ProductContext implements Context
      * @When I view product :product
      * @When customer view product :product
      */
-    public function iOpenProductPage(ProductInterface $product): void
+    public function iViewProduct(ProductInterface $product): void
     {
+        $this->client->show(Resources::PRODUCTS, $product->getCode());
+
         /** @var ProductVariantInterface $productVariant */
         $productVariant = $product->getVariants()->first();
 
-        $this->client->show($product->getCode());
-        $this->productVariantClient->show($productVariant->getCode());
-
         $this->sharedStorage->set('product', $product);
         $this->sharedStorage->set('product_variant', $productVariant);
+        $this->sharedStorage->remove('product_attributes');
+    }
+
+    /**
+     * @When I view product :product in the :localeCode locale
+     * @When /^I check (this product)'s details in the ("([^"]+)" locale)$/
+     * @When /^I try to check (this product)'s details in the ("([^"]+)" locale)$/
+     */
+    public function iViewProductInTheLocale(ProductInterface $product, string $localeCode): void
+    {
+        $this->sharedStorage->set('current_locale_code', $localeCode);
+
+        $this->iViewProduct($product);
+
+        $this->sharedStorage->remove('current_locale_code');
     }
 
     /**
@@ -63,7 +79,7 @@ final class ProductContext implements Context
      */
     public function iViewProductUsingSlug(ProductInterface $product): void
     {
-        $this->client->showByIri('/api/v2/shop/products-by-slug/' . $product->getSlug());
+        $this->client->showByIri(sprintf('%s/shop/products-by-slug/%s', $this->apiUrlPrefix, $product->getSlug()));
 
         $this->sharedStorage->set('product', $product);
     }
@@ -75,7 +91,7 @@ final class ProductContext implements Context
     {
         $response = $this->client->getLastResponse();
 
-        Assert::eq($response->headers->get('Location'), '/api/v2/shop/products/' . $product->getCode());
+        Assert::eq($response->headers->get('Location'), sprintf('%s/shop/products/%s', $this->apiUrlPrefix, $product->getCode()));
     }
 
     /**
@@ -84,7 +100,7 @@ final class ProductContext implements Context
      */
     public function iBrowseProductsFromTaxon(?TaxonInterface $taxon = null): void
     {
-        $this->client->index();
+        $this->client->index(Resources::PRODUCTS);
 
         if ($taxon !== null) {
             $this->client->addFilter('taxon', $this->iriConverter->getIriFromItem($taxon));
@@ -97,9 +113,44 @@ final class ProductContext implements Context
      */
     public function iBrowseProductsFromProductTaxonCode(TaxonInterface $taxon): void
     {
-        $this->client->index();
+        $this->client->index(Resources::PRODUCTS);
         $this->client->addFilter('productTaxons.taxon.code', $taxon->getCode());
         $this->client->filter();
+    }
+
+    /**
+     * @When /^I browse products from ("([^"]+)" and "([^"]+)" taxons)$/
+     */
+    public function iBrowseProductsFromProductTaxonCodes(iterable $taxons): void
+    {
+        $this->client->index(Resources::PRODUCTS);
+
+        foreach ($taxons as $index => $taxon) {
+            $this->client->addFilter('productTaxons.taxon.code[' . $index . ']', $taxon->getCode());
+        }
+
+        $this->client->filter();
+    }
+
+    /**
+     * @When I browse products from non existing taxon
+     */
+    public function iBrowseProductsFromNonExistingTaxon(): void
+    {
+        $this->client->index(Resources::PRODUCTS);
+
+        $this->client->addFilter('taxon', 'non-existing-taxon');
+        $this->client->filter();
+    }
+
+    /**
+     * @When /^I sort products by the (oldest|newest) date first$/
+     */
+    public function iSortProductsByTheDateFirst(string $sortDirection): void
+    {
+        $sortDirection = 'oldest' === $sortDirection ? 'asc' : 'desc';
+
+        $this->client->sort(['createdAt' => $sortDirection]);
     }
 
     /**
@@ -261,6 +312,25 @@ final class ProductContext implements Context
     }
 
     /**
+     * @Then /^I should see ("[^"]+" product) discounted from ("[^"]+") to ("[^"]+")$/
+     */
+    public function iShouldSeeProductDiscountedFromTo(ProductInterface $product, int $originalPrice, int $price): void
+    {
+        $lastResponse = $this->client->getLastResponse();
+
+        $this->iShouldSeeTheProductWithPrice($product, $price);
+        Assert::true(
+            $this->hasProductWithPrice(
+                $this->responseChecker->getCollection($lastResponse),
+                $originalPrice,
+                $product->getCode(),
+                'originalPrice',
+            ),
+            sprintf('There is no product with %s code and %s original price', $product->getCode(), $originalPrice),
+        );
+    }
+
+    /**
      * @Then /^I should see the (product "[^"]+") with price ("[^"]+")$/
      */
     public function iShouldSeeTheProductWithPrice(ProductInterface $product, int $price): void
@@ -325,10 +395,10 @@ final class ProductContext implements Context
      */
     public function theFirstProductOnTheListShouldHaveNameAndPrice(string $name, int $price): void
     {
-        $product = $this->responseChecker->getCollection($this->client->getLastResponse())[0];
+        $product = $this->responseChecker->getCollection($this->client->resend())[0];
 
         $defaultVariantPrice = $this->responseChecker->getValue(
-            $this->productVariantClient->showByIri($product['defaultVariant']),
+            $this->client->showByIri($product['defaultVariant']),
             'price',
         );
 
@@ -351,11 +421,11 @@ final class ProductContext implements Context
      */
     public function theLastProductOnTheListShouldHaveNameAndPrice(string $name, int $price): void
     {
-        $products = $this->responseChecker->getCollection($this->client->getLastResponse());
+        $products = $this->responseChecker->getCollection($this->client->resend());
         $product = end($products);
 
         $defaultVariantPrice = $this->responseChecker->getValue(
-            $this->productVariantClient->showByIri($product['defaultVariant']),
+            $this->client->showByIri($product['defaultVariant']),
             'price',
         );
 
@@ -392,6 +462,18 @@ final class ProductContext implements Context
     }
 
     /**
+     * @Then /^I should not be able to view (this product) in the ("([^"]+)" locale)$/
+     */
+    public function iShouldNotBeAbleToViewThisProductInLocale(ProductInterface $product, string $localeCode): void
+    {
+        Assert::false($this->responseChecker->hasValue(
+            $this->client->getLastResponse(),
+            'name',
+            $product->getTranslation($localeCode)->getName(),
+        ));
+    }
+
+    /**
      * @Then its current variant should be named :variantName
      */
     public function itsCurrentVariantShouldBeNamed(string $variantName): void
@@ -399,7 +481,8 @@ final class ProductContext implements Context
         $response = $this->client->getLastResponse();
 
         $productVariant = $this->responseChecker->getValue($response, 'variants');
-        $this->client->executeCustomRequest(Request::custom($productVariant[0], HttpRequest::METHOD_GET));
+        $request = $this->requestFactory->custom($productVariant[0], HttpRequest::METHOD_GET);
+        $this->client->executeCustomRequest($request);
 
         Assert::true($this->responseChecker->hasValue($this->client->getLastResponse(), 'name', $variantName));
     }
@@ -441,8 +524,10 @@ final class ProductContext implements Context
      */
     public function theProductPriceShouldBe(int $price): void
     {
+        $response = $this->client->getLastResponse();
+
         $defaultVariantResponse = $this->client->showByIri(
-            $this->responseChecker->getValue($this->client->getLastResponse(), 'defaultVariant'),
+            $this->responseChecker->getValue($response, 'defaultVariant'),
         );
 
         Assert::same($this->responseChecker->getValue($defaultVariantResponse, 'price'), $price);
@@ -473,11 +558,63 @@ final class ProductContext implements Context
         $this->channelContextSetter->setChannel($channel);
 
         Assert::true($this->hasProductWithPrice(
-            [$this->responseChecker->getResponseContent($this->client->show($product->getCode()))],
+            [$this->responseChecker->getResponseContent($this->client->show(Resources::PRODUCTS, $product->getCode()))],
             $price,
             null,
             StringInflector::nameToCamelCase($priceType),
         ));
+    }
+
+    /**
+     * @Then I should see a main image
+     */
+    public function iShouldSeeAMainImage(): void
+    {
+        Assert::true($this->hasProductWithMainImage());
+    }
+
+    /**
+     * @Then /^I should not be able to select the "([^"]+)" ([^\s]+) option value$/
+     */
+    public function iShouldNotBeAbleToSelectTheOptionValue(string $optionValue, string $optionName): void
+    {
+        Assert::false($this->hasProductOptionWithNameAndValue($optionValue, $optionName));
+    }
+
+    /**
+     * @Then I should be able to select between :count variants
+     */
+    public function iShouldBeAbleToSelectBetweenVariants(int $count): void
+    {
+        $response = $this->client->getLastResponse();
+        $variants = $this->responseChecker->getValue($response, 'variants');
+
+        Assert::count($variants, $count);
+    }
+
+    /**
+     * @Then I should not be able to select the :productVariantName variant
+     */
+    public function iShouldNotBeAbleToSelectTheVariant(string $productVariantName): void
+    {
+        $response = $this->client->getLastResponse();
+        $variants = $this->responseChecker->getValue($response, 'variants');
+
+        Assert::false($this->productHasProductVariantWithName($variants, $productVariantName));
+    }
+
+    /**
+     * @Then /^I should(?:| also) see the product association "([^"]+)" with (products "[^"]+" and "[^"]+")$/
+     */
+    public function iShouldSeeTheProductAssociationWithProductsAnd(string $productAssociationName, array $products): void
+    {
+        /** @var ProductInterface $product */
+        $product = $this->sharedStorage->get('product');
+
+        $response = $this->client->show(Resources::PRODUCTS, $product->getCode());
+        $associations = $this->responseChecker->getValue($response, 'associations');
+
+        Assert::true($this->hasAssociationsWithProducts($associations, $productAssociationName, $products));
     }
 
     private function hasProductWithPrice(
@@ -492,7 +629,8 @@ final class ProductContext implements Context
             }
 
             foreach ($product['variants'] as $variantIri) {
-                $response = $this->client->executeCustomRequest(Request::custom($variantIri, HttpRequest::METHOD_GET));
+                $request = $this->requestFactory->custom($variantIri, HttpRequest::METHOD_GET);
+                $response = $this->client->executeCustomRequest($request);
 
                 /** @var int $variantPrice */
                 $variantPrice = $this->responseChecker->getValue($response, $priceType);
@@ -526,5 +664,114 @@ final class ProductContext implements Context
         }
 
         return false;
+    }
+
+    private function hasProductOptionWithNameAndValue(string $optionValue, string $optionName): bool
+    {
+        $response = $this->client->getLastResponse();
+        $productOptions = $this->responseChecker->getValue($response, 'options');
+
+        foreach ($productOptions as $optionIri) {
+            if (!$this->hasProductOptionWithName($optionIri, $optionName)) {
+                continue;
+            }
+
+            $variants = $this->responseChecker->getValue($response, 'variants');
+            foreach ($variants as $variantIri) {
+                if ($this->variantHasProductOptionValue($variantIri, $optionValue)) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
+    private function hasProductOptionWithName(string $optionIri, string $optionName): bool
+    {
+        $response = $this->client->showByIri($optionIri);
+
+        return $this->responseChecker->hasValue($response, 'code', StringInflector::nameToUppercaseCode($optionName));
+    }
+
+    private function variantHasProductOptionValue(string $variantIri, string $optionValue): bool
+    {
+        $variants = $this->client->showByIri($variantIri);
+        $optionValues = $this->responseChecker->getValue($variants, 'optionValues');
+
+        foreach ($optionValues as $valueIri) {
+            if ($this->hasProductOptionWithValue($valueIri, $optionValue)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private function hasProductOptionWithValue(string $valueIri, string $optionValue): bool
+    {
+        return $this->responseChecker->hasValue($this->client->ShowByIri($valueIri), 'code', StringInflector::nameToUppercaseCode($optionValue));
+    }
+
+    private function productHasProductVariantWithName(array $variants, string $variantName): bool
+    {
+        foreach ($variants as $variantIri) {
+            if ($this->responseChecker->hasValue($this->client->showByIri($variantIri), 'name', $variantName)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private function hasProductWithMainImage(): bool
+    {
+        $images = $this->responseChecker->getValue($this->client->getLastResponse(), 'images');
+
+        return $images[0]['type'] === 'main' && $images[0]['path'];
+    }
+
+    private function hasAssociationsWithProducts(
+        array $associationsIris,
+        string $productAssociationTypeName,
+        array $products,
+    ): bool {
+        try {
+            $associatedProducts = $this->provideAssociatedProductsOfAssociationTypeName($associationsIris, $productAssociationTypeName);
+        } catch (\InvalidArgumentException) {
+            return false;
+        }
+
+        foreach ($products as $product) {
+            if (!$this->isProductAssociated($product, $associatedProducts)) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    private function provideAssociatedProductsOfAssociationTypeName(
+        array $associationsIris,
+        string $productAssociationTypeName,
+    ): array {
+        foreach ($associationsIris as $associationIri) {
+            $associationResponse = $this->client->showByIri($associationIri);
+            $associationTypeIri = $this->responseChecker->getValue($associationResponse, 'type');
+            $associationTypeResponse = $this->client->showByIri($associationTypeIri);
+
+            if ($this->responseChecker->hasValue($associationTypeResponse, 'name', $productAssociationTypeName)) {
+                return $this->responseChecker->getValue($associationResponse, 'associatedProducts');
+            }
+        }
+
+        throw new \InvalidArgumentException(sprintf('There is no product association with name %s.', $productAssociationTypeName));
+    }
+
+    private function isProductAssociated(ProductInterface $product, array $associatedProducts): bool
+    {
+        $productIri = $this->iriConverter->getIriFromItem($product);
+
+        return in_array($productIri, $associatedProducts, true);
     }
 }

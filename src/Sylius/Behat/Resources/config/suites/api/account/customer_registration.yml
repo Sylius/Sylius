@@ -1,13 +1,15 @@
 # This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
+# (c) Sylius Sp. z o.o.
 
 default:
     suites:
         api_customer_registration:
             contexts:
                 - sylius.behat.context.hook.doctrine_orm
+                - sylius.behat.context.hook.mailer
 
                 - sylius.behat.context.transform.customer
+                - sylius.behat.context.transform.locale
                 - sylius.behat.context.transform.shared_storage
 
                 - sylius.behat.context.setup.channel
@@ -17,6 +19,7 @@ default:
                 - sylius.behat.context.setup.shop_security
                 - sylius.behat.context.setup.user
 
+                - sylius.behat.context.api.email
                 - sylius.behat.context.api.shop.registration
 
             filters:

@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -35,23 +35,22 @@ final class SalesDataProviderTest extends WebTestCase
     {
         self::$client = static::createClient();
         self::$client->followRedirects(true);
-        self::$container = self::$client->getContainer();
 
         /** @var LoaderInterface $fixtureLoader */
-        $fixtureLoader = self::$container->get('fidry_alice_data_fixtures.loader.doctrine');
+        $fixtureLoader = self::$kernel->getContainer()->get('fidry_alice_data_fixtures.loader.doctrine');
 
         $fixtureLoader->load([__DIR__ . '/../DataFixtures/ORM/resources/year_sales.yml'], [], [], PurgeMode::createDeleteMode());
 
         /** @var OrderInterface[] $orders */
-        $orders = self::$container->get('sylius.repository.order')->findAll();
+        $orders = self::$kernel->getContainer()->get('sylius.repository.order')->findAll();
         /** @var OrderProcessorInterface $orderProcessor */
-        $orderProcessor = self::$container->get('sylius.order_processing.order_processor');
+        $orderProcessor = self::$kernel->getContainer()->get('sylius.order_processing.order_processor');
 
         foreach ($orders as $order) {
             $orderProcessor->process($order);
         }
 
-        self::$container->get('sylius.manager.order')->flush();
+        self::$kernel->getContainer()->get('sylius.manager.order')->flush();
     }
 
     /** @test */
@@ -141,12 +140,12 @@ final class SalesDataProviderTest extends WebTestCase
     private function getSummaryForChannel(\DateTimeInterface $startDate, \DateTimeInterface $endDate, Interval $interval, string $channelCode): SalesSummaryInterface
     {
         /** @var ChannelRepositoryInterface $channelRepository */
-        $channelRepository = self::$container->get('sylius.repository.channel');
+        $channelRepository = self::$kernel->getContainer()->get('sylius.repository.channel');
         /** @var ChannelInterface $channel */
         $channel = $channelRepository->findOneByCode($channelCode);
 
         /** @var SalesDataProviderInterface $salesDataProvider */
-        $salesDataProvider = self::$container->get(SalesDataProviderInterface::class);
+        $salesDataProvider = self::$kernel->getContainer()->get(SalesDataProviderInterface::class);
 
         return $salesDataProvider->getSalesSummary($channel, $startDate, $endDate, $interval);
     }

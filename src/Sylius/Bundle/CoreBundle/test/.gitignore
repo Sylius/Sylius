@@ -1,0 +1,47 @@
+/public/assets
+/public/css
+/public/js
+/public/media
+/public/build
+!/public/media/image/.gitkeep
+
+/bin/symfony_requirements
+
+/docs/.doctrees
+
+/composer.lock
+/node_modules
+
+/etc/build/*
+!/etc/build/.gitignore
+
+/behat.yml
+/phpspec.yml
+
+# Symfony CLI https://symfony.com/doc/current/setup/symfony_server.html#different-php-settings-per-project
+/.php-version
+/php.ini
+
+###> symfony/framework-bundle ###
+.env.*.local
+.env.local
+.env.local.php
+/public/bundles
+/var/
+/vendor/
+###< symfony/framework-bundle ###
+
+###> friendsofphp/php-cs-fixer ###
+/.php_cs
+/.php_cs.cache
+###< friendsofphp/php-cs-fixer ###
+
+###> phpunit/phpunit ###
+/phpunit.xml
+/.phpunit.result.cache
+###< phpunit/phpunit ###
+
+###> lexik/jwt-authentication-bundle ###
+/Application/config/jwt/private.pem
+/Application/config/jwt/public.pem
+###< lexik/jwt-authentication-bundle ###

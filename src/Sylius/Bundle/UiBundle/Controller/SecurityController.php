@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -21,7 +21,6 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
-use Symfony\Component\Templating\EngineInterface;
 use Twig\Environment;
 
 final class SecurityController
@@ -29,7 +28,7 @@ final class SecurityController
     public function __construct(
         private AuthenticationUtils $authenticationUtils,
         private FormFactoryInterface $formFactory,
-        private EngineInterface|Environment $templatingEngine,
+        private Environment $templatingEngine,
         private AuthorizationCheckerInterface $authorizationChecker,
         private RouterInterface $router,
     ) {
@@ -37,7 +36,7 @@ final class SecurityController
 
     public function loginAction(Request $request): Response
     {
-        $alreadyLoggedInRedirectRoute = $request->attributes->get('_sylius')['logged_in_route'] ?? null;
+        $alreadyLoggedInRedirectRoute = $request->attributes->get('_sylius', [])['logged_in_route'] ?? null;
 
         if ($alreadyLoggedInRedirectRoute && $this->authorizationChecker->isGranted('IS_AUTHENTICATED_FULLY')) {
             return new RedirectResponse($this->router->generate($alreadyLoggedInRedirectRoute));
@@ -46,7 +45,7 @@ final class SecurityController
         $lastError = $this->authenticationUtils->getLastAuthenticationError();
         $lastUsername = $this->authenticationUtils->getLastUsername();
 
-        $options = $request->attributes->get('_sylius');
+        $options = $request->attributes->get('_sylius', []);
 
         $template = $options['template'] ?? '@SyliusUi/Security/login.html.twig';
         $formType = $options['form'] ?? SecurityLoginType::class;

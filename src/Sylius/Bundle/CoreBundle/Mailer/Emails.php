@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -26,6 +26,8 @@ interface Emails
     public const USER_REGISTRATION = 'user_registration';
 
     public const PASSWORD_RESET = 'password_reset';
+
+    public const ADMIN_PASSWORD_RESET = 'admin_password_reset';
 
     public const ACCOUNT_VERIFICATION_TOKEN = 'account_verification_token';
 }

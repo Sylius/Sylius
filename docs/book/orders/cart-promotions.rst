@@ -58,10 +58,12 @@ The types of rules that are configured in **Sylius** by default are:
 
 * **Cart Quantity** - checks if there is a given amount of items in the cart,
 * **Item Total** - checks if items in the cart cost a given amount of money,
-* **Taxon** - checks if there is at least one item from given taxons in the cart,
-* **Items From Taxon Total** - checks in the cart if items from a given taxon cost a given amount of money,
+* **Has at least one from taxons** - checks if there is at least one item from given taxons in the cart,
+* **Total price of items from taxon** - checks in the cart if items from a given taxon cost a given amount of money,
 * **Nth Order** - checks if this is for example the second order made by the customer,
 * **Shipping Country** - checks if the order's shipping address is in a given country.
+* **Customer Group** - checks if the current customer is in a given customer group.
+* **Contains Product** - checks if the order contains a certain product.
 
 How to create a new PromotionRule programmatically?
 '''''''''''''''''''''''''''''''''''''''''''''''''''
@@ -118,7 +120,7 @@ There are a few kinds of actions in **Sylius**:
 * percentage discount on the order (for example: -10% on the whole order)
 * fixed unit discount (for example: -1$ off the order total but *distributed and applied on each order item unit*)
 * percentage unit discount (for example: -10% off the order total but *distributed and applied on each order item unit*)
-* shipping discount (for example: -6$ on the costs of shipping)
+* shipping precentage discount (for example: -10% off the costs of shipping)
 
 .. tip::
 

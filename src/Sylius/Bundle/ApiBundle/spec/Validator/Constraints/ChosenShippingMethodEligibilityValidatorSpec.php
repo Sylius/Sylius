@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -186,7 +186,7 @@ final class ChosenShippingMethodEligibilityValidatorSpec extends ObjectBehavior
         $this->validate($command, new ChosenShippingMethodEligibility());
     }
 
-    function it_throws_an_exception_if_given_shipmnent_is_null(
+    function it_adds_violation_if_order_shipment_is_not_found(
         ShipmentRepositoryInterface $shipmentRepository,
         ShippingMethodRepositoryInterface $shippingMethodRepository,
         ExecutionContextInterface $executionContext,
@@ -199,14 +199,20 @@ final class ChosenShippingMethodEligibilityValidatorSpec extends ObjectBehavior
         $shippingMethodRepository->findOneBy(['code' => 'SHIPPING_METHOD_CODE'])->willReturn($shippingMethod);
 
         $shipmentRepository->find('123')->willReturn(null);
+
         $executionContext
             ->addViolation('sylius.shipping_method.not_available', Argument::any())
             ->shouldNotBeCalled()
         ;
-
-        $this
-            ->shouldThrow(\InvalidArgumentException::class)
-            ->during('validate', [$command, new ChosenShippingMethodEligibility()])
+        $executionContext
+            ->addViolation('sylius.shipping_method.not_found', Argument::any())
+            ->shouldNotBeCalled()
         ;
+        $executionContext
+            ->addViolation('sylius.shipment.not_found')
+            ->shouldBeCalled()
+        ;
+
+        $this->validate($command, new ChosenShippingMethodEligibility());
     }
 }

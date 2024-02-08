@@ -1,12 +1,12 @@
 {% extends '@SyliusCore/Email/layout.html.twig' %}
 
 {% block subject %}
-    {{ 'sylius.email.verification_token.subject'|trans({}, null, localeCode) }}
+    {{ 'sylius.email.verification_token.subject'|trans({}, null, localeCode)|raw }}
 {% endblock %}
 
 {% block content %}
     {% if sylius_bundle_loaded_checker('SyliusShopBundle') %}
-        {% set url = channel.hostname is not null ? 'http://' ~ channel.hostname ~ path('sylius_shop_user_verification', { 'token': user.emailVerificationToken}) : url('sylius_shop_user_verification', { 'token': user.emailVerificationToken, '_locale': localeCode}) %}
+        {% set url = sylius_channel_url(path('sylius_shop_user_verification', { 'token': user.emailVerificationToken, '_locale': localeCode }), channel) %}
         <div style="text-align: center; margin-bottom: 30px;">
             <div style="font-size: 24px;">
                 {{ 'sylius.email.verification_token.hello'|trans({}, null, localeCode) }} <strong>{{ user.username }}</strong><br>

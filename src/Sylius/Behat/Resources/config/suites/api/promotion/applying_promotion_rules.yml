@@ -1,5 +1,5 @@
 # This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
+# (c) Sylius Sp. z o.o.
 
 default:
     suites:
@@ -19,6 +19,7 @@ default:
                 - sylius.behat.context.transform.shared_storage
                 - sylius.behat.context.transform.shipping_method
                 - sylius.behat.context.transform.taxon
+                - sylius.behat.context.transform.user
 
                 - sylius.behat.context.setup.cart
                 - sylius.behat.context.setup.channel

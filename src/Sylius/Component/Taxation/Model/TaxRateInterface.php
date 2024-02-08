@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -42,4 +42,12 @@ interface TaxRateInterface extends CodeAwareInterface, TimestampableInterface, R
     public function setCalculator(?string $calculator): void;
 
     public function getLabel(): ?string;
+
+    public function getStartDate(): ?\DateTimeInterface;
+
+    public function setStartDate(?\DateTimeInterface $startDate): void;
+
+    public function getEndDate(): ?\DateTimeInterface;
+
+    public function setEndDate(?\DateTimeInterface $endDate): void;
 }

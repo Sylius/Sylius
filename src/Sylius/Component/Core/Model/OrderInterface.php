@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -52,25 +52,19 @@ interface OrderInterface extends
     public function setPaymentState(?string $paymentState): void;
 
     /**
-     * @return Collection|OrderItemUnitInterface[]
-     *
-     * @psalm-return Collection<array-key, OrderItemUnitInterface>
+     * @return Collection<array-key, OrderItemUnitInterface>
      */
     public function getItemUnits(): Collection;
 
     /**
-     * @return Collection|OrderItemUnitInterface[]
-     *
-     * @psalm-return Collection<array-key, OrderItemUnitInterface>
+     * @return Collection<array-key, OrderItemUnitInterface>
      */
     public function getItemUnitsByVariant(ProductVariantInterface $variant): Collection;
 
     public function isShippingRequired(): bool;
 
     /**
-     * @return Collection|ShipmentInterface[]
-     *
-     * @psalm-return Collection<array-key, ShipmentInterface>
+     * @return Collection<array-key, ShipmentInterface>
      */
     public function getShipments(): Collection;
 
@@ -102,6 +96,10 @@ interface OrderInterface extends
 
     public function getTaxTotal(): int;
 
+    public function getTaxExcludedTotal(): int;
+
+    public function getTaxIncludedTotal(): int;
+
     public function getShippingTotal(): int;
 
     public function getOrderPromotionTotal(): int;
@@ -123,11 +121,9 @@ interface OrderInterface extends
     public function setCreatedByGuest(bool $createdByGuest): void;
 
     /**
-     * @return Collection|OrderItemInterface[]
+     * @phpstan-ignore-next-line
      *
-     * @psalm-return Collection<array-key, OrderItemInterface>
-     *
-     * @psalm-suppress ImplementedReturnTypeMismatch
+     * @return Collection<array-key, OrderItemInterface>
      */
     public function getItems(): Collection;
 

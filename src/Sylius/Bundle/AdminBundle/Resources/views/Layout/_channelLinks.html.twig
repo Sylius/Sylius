@@ -1,3 +1,5 @@
+{% set homepage_path = sylius_bundle_loaded_checker('SyliusShopBundle') ? path('sylius_shop_homepage') : '/' %}
+
 {% if channels|length > 1 %}
     <div class="ui simple dropdown item">
         <span>
@@ -6,7 +8,7 @@
         <i class="dropdown icon"></i>
         <div class="menu">
             {% for channel in channels|filter(channel => channel.hostname is not empty) %}
-            <a href="http://{{ channel.hostname }}" target="_blank" class="item">
+            <a href="{{ sylius_channel_url(homepage_path, channel) }}" target="_blank" class="item">
                 {% include '@SyliusAdmin/Common/_channel.html.twig' %}
             </a>
             {% endfor %}
@@ -15,7 +17,5 @@
 {% elseif channels|length == 1 %}
     {% set channel = channels|first %}
 
-    {% if channel.hostname is not empty %}
-    <a href="http://{{ channel.hostname }}" target="_blank" class="item">{{ 'sylius.ui.view_your_store'|trans }}</a>
-    {% endif %}
+    <a href="{{ sylius_channel_url(homepage_path, channel) }}" target="_blank" class="item">{{ 'sylius.ui.view_your_store'|trans }}</a>
 {% endif %}

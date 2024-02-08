@@ -1,5 +1,5 @@
 # This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
+# (c) Sylius Sp. z o.o.
 
 sylius_shop_ajax_user:
     resource: "@SyliusShopBundle/Resources/config/routing/ajax/user.yml"
@@ -13,6 +13,6 @@ sylius_shop_ajax_render_province_form:
     path: /render-province-form
     methods: [GET]
     defaults:
-        _controller: sylius.controller.province:choiceOrTextFieldFormAction
+        _controller: sylius.controller.province::choiceOrTextFieldFormAction
         _sylius:
             template: "@SyliusShop/Common/Form/_province.html.twig"

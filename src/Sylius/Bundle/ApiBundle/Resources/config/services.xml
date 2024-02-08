@@ -4,7 +4,7 @@
 
  This file is part of the Sylius package.
 
- (c) Paweł Jędrzejewski
+ (c) Sylius Sp. z o.o.
 
  For the full copyright and license information, please view the LICENSE
  file that was distributed with this source code.
@@ -47,7 +47,7 @@
         </service>
 
         <service id="Sylius\Bundle\ApiBundle\DataTransformer\OrderTokenValueAwareInputCommandDataTransformer">
-            <tag name="sylius.api.command_data_transformer" />
+            <tag name="sylius.api.command_data_transformer" priority="1000" />
         </service>
 
         <service id="Sylius\Bundle\ApiBundle\DataTransformer\ShipmentIdAwareInputCommandDataTransformer">
@@ -61,6 +61,11 @@
 
         <service id="Sylius\Bundle\ApiBundle\DataTransformer\ChannelCodeAwareInputCommandDataTransformer">
             <argument type="service" id="sylius.context.channel" />
+            <tag name="sylius.api.command_data_transformer" />
+        </service>
+
+        <service id="Sylius\Bundle\ApiBundle\DataTransformer\LoggedInCustomerEmailIfNotSetAwareCommandDataTransformer">
+            <argument type="service" id="Sylius\Bundle\ApiBundle\Context\UserContextInterface" />
             <tag name="sylius.api.command_data_transformer" />
         </service>
 
@@ -86,6 +91,11 @@
 
         <service id="Sylius\Bundle\ApiBundle\Controller\DeleteOrderItemAction" public="true">
             <argument type="service" id="sylius.command_bus" />
+            <argument type="service" id="sylius.repository.order_item" />
+        </service>
+
+        <service id="Sylius\Bundle\ApiBundle\Controller\RemoveCatalogPromotionAction" public="true">
+            <argument type="service" id="Sylius\Bundle\CoreBundle\CatalogPromotion\Processor\CatalogPromotionRemovalProcessorInterface" />
         </service>
 
         <service id="Sylius\Bundle\ApiBundle\DataProvider\ChannelAwareItemDataProvider" decorates="api_platform.item_data_provider">
@@ -108,12 +118,16 @@
             <argument type="service" id="sylius.context.cart" />
             <argument type="service" id="sylius.section_resolver.uri_based_section_resolver" />
             <argument type="service" id="sylius.command_bus" />
-            <tag name="kernel.event_listener" event="security.interactive_login" method="onInteractiveLogin" />
+            <tag name="kernel.event_listener" event="Symfony\Component\Security\Http\Event\LoginSuccessEvent" method="onLoginSuccess" />
         </service>
 
         <service id="sylius.listener.api_authentication_success_listener" class="Sylius\Bundle\ApiBundle\EventListener\AuthenticationSuccessListener">
             <argument type="service" id="api_platform.iri_converter" />
             <tag name="kernel.event_listener" event="lexik_jwt_authentication.on_authentication_success" method="onAuthenticationSuccessResponse" />
+        </service>
+
+        <service id="sylius.listener.api_postgresql_driver_exception_listener" class="Sylius\Bundle\ApiBundle\EventListener\PostgreSQLDriverExceptionListener">
+            <tag name="kernel.event_listener" event="kernel.exception" method="onKernelException" />
         </service>
 
         <service id="Sylius\Bundle\ApiBundle\Converter\IriToIdentifierConverterInterface" class="Sylius\Bundle\ApiBundle\Converter\IriToIdentifierConverter">
@@ -148,10 +162,10 @@
         <service id="Sylius\Bundle\ApiBundle\Modifier\OrderAddressModifierInterface" class="Sylius\Bundle\ApiBundle\Modifier\OrderAddressModifier" public="true">
             <argument type="service" id="sm.factory" />
             <argument type="service" id="Sylius\Bundle\ApiBundle\Mapper\AddressMapperInterface" />
-            <argument type="service" id="Sylius\Bundle\ApiBundle\Provider\CustomerProviderInterface" />
+            <argument type="service" id="Sylius\Bundle\CoreBundle\Resolver\CustomerResolverInterface" />
         </service>
 
-        <service id="Sylius\Bundle\ApiBundle\Assigner\OrderPromoCodeAssignerInterface" class="Sylius\Bundle\ApiBundle\Assigner\OrderPromoCodeAssigner" public="true">
+        <service id="Sylius\Bundle\ApiBundle\Assigner\OrderPromotionCodeAssignerInterface" class="Sylius\Bundle\ApiBundle\Assigner\OrderPromotionCodeAssigner" public="true">
             <argument type="service" id="sylius.repository.promotion_coupon" />
             <argument type="service" id="sylius.order_processing.order_processor" />
         </service>

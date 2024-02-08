@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -14,8 +14,10 @@ declare(strict_types=1);
 namespace Sylius\Bundle\ApiBundle\CommandHandler\Checkout;
 
 use SM\Factory\FactoryInterface;
+use Sylius\Bundle\ApiBundle\Command\Cart\InformAboutCartRecalculation;
 use Sylius\Bundle\ApiBundle\Command\Checkout\CompleteOrder;
 use Sylius\Bundle\ApiBundle\Event\OrderCompleted;
+use Sylius\Bundle\CoreBundle\Order\Checker\OrderPromotionsIntegrityCheckerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\OrderCheckoutTransitions;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
@@ -30,7 +32,9 @@ final class CompleteOrderHandler implements MessageHandlerInterface
     public function __construct(
         private OrderRepositoryInterface $orderRepository,
         private FactoryInterface $stateMachineFactory,
+        private MessageBusInterface $commandBus,
         private MessageBusInterface $eventBus,
+        private OrderPromotionsIntegrityCheckerInterface $orderPromotionsIntegrityChecker,
     ) {
     }
 
@@ -46,6 +50,15 @@ final class CompleteOrderHandler implements MessageHandlerInterface
 
         if ($completeOrder->notes !== null) {
             $cart->setNotes($completeOrder->notes);
+        }
+
+        if ($promotion = $this->orderPromotionsIntegrityChecker->check($cart)) {
+            $this->commandBus->dispatch(
+                new InformAboutCartRecalculation($promotion->getName()),
+                [new DispatchAfterCurrentBusStamp()],
+            );
+
+            return $cart;
         }
 
         $stateMachine = $this->stateMachineFactory->get($cart, OrderCheckoutTransitions::GRAPH);

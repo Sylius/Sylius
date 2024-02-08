@@ -241,7 +241,7 @@ We can also make it programmatically:
 
     /** @var MessageBusInterface $eventBus */
     $eventBus = $this->container->get('sylius.event_bus');
-    $this->eventBus->dispatch(new CatalogPromotionCreated($catalogPromotion->getCode()));
+    $eventBus->dispatch(new CatalogPromotionCreated($catalogPromotion->getCode()));
 
 And now you should be able to see created Catalog Promotion. You can check if it exists like in the last example (with GET endpoint).
 If you look into ``product-variant`` endpoint in shop you should see now that chosen variants have lowered price and added field ``appliedPromotions``:
@@ -310,8 +310,12 @@ After changes in CatalogPromotion, we dispatch proper message with delay calcula
 
 .. warning::
 
-    To enable asynchronous Catalog Promotion, remember about running messenger consumer in a separate process, use the command: ``php bin/console messenger:consume main``
+    To enable asynchronous Catalog Promotion, remember about running messenger consumer in a separate process, use the command: ``php bin/console messenger:consume main catalog_promotion_removal``
     For more information check official `Symfony docs <https://symfony.com/doc/current/messenger.html#consuming-messages-running-the-worker>`_
+
+.. note::
+
+    The reason why we use two transports is explained below in the Catalog Promotion removal section.
 
 Catalog promotion synchronicity
 -------------------------------
@@ -345,11 +349,31 @@ one is edited, then the ``CatalogPromotionUpdated`` event is dispatched to event
 This event is handled by `CatalogPromotionUpdateListener <https://github.com/Sylius/Sylius/blob/master/src/Sylius/Bundle/CoreBundle/Listener/CatalogPromotionUpdateListener.php>`_ which resolves the appropriate ``CatalogPromotion``.
 With the needed data and configuration from ``CatalogPromotion`` we can now process the Product Catalog.
 
-Any changes in Catalog Promotion cause recalculations of entire Product Catalog (`BatchedApplyCatalogPromotionsOnVariantsCommandDispatcher <https://github.com/Sylius/Sylius/blob/master/src/Sylius/Bundle/CoreBundle/CommandDispatcher/BatchedApplyCatalogPromotionsOnVariantsCommandDispatcher.php>`_ is called, which dispatch events `ApplyCatalogPromotionsOnVariants <https://github.com/Sylius/Sylius/blob/master/src/Sylius/Bundle/CoreBundle/Command/ApplyCatalogPromotionsOnVariants.php>`_)
+Any changes in Catalog Promotion cause recalculations of entire Product Catalog (`BatchedApplyCatalogPromotionsOnVariantsCommandDispatcher <https://github.com/Sylius/Sylius/blob/master/src/Sylius/Bundle/CoreBundle/CatalogPromotion/CommandDispatcher/BatchedApplyCatalogPromotionsOnVariantsCommandDispatcher.php>`_ is called, which dispatch events `ApplyCatalogPromotionsOnVariants <https://github.com/Sylius/Sylius/blob/master/src/Sylius/Bundle/CoreBundle/CatalogPromotion/Command/ApplyCatalogPromotionsOnVariants.php>`_)
 
 .. note::
 
     If you want to reapply Catalog Promotion manually you can refer to the :ref:`How to create a Catalog Promotion Scope and Action? <how-to-create-a-catalog-promotion-scope-and-action>` section
+
+Removal of catalog promotion
+---------------------------------------
+
+Removal of the catalog promotion consists in turning off the promotion, recalculation of the catalog
+and the actual removal of the promotion resource. By using catalog promotions in asynchronous mode,
+it is necessary to start the worker for two transports, the **main** transport is responsible for recalculation of the catalog
+and the **catalog_promotion_removal** transport is self explanatory. The order of transports provided as the command arguments is important,
+it is responsible for the priority of consumed messages:
+
+.. code-block:: bash
+
+    php bin/console messenger:consume main catalog_promotion_removal
+
+Each transport has its own failure transport, which is responsible for storing messages that haven't been processed for some reason.
+For the **main** transport it is the **main_failed** transport and for the **catalog_promotion_removal** transport it is the **catalog_promotion_removal_failed** transport.
+
+You can read more about failure handling in the `Symfony Messenger documentation <https://symfony.com/doc/current/messenger.html#retries-failures>`_.
+
+For synchronous processing, no additional configuration is required.
 
 How to manage catalog promotion priority?
 -----------------------------------------

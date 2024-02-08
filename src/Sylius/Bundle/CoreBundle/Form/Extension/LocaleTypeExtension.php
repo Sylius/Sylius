@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -40,7 +40,6 @@ final class LocaleTypeExtension extends AbstractTypeExtension
             if ($locale instanceof LocaleInterface && null !== $locale->getCode()) {
                 $options['disabled'] = true;
 
-                /** @psalm-suppress InvalidArrayOffset */
                 $options['choices'] = [$this->getLocaleName($locale->getCode()) => $locale->getCode()];
             } else {
                 $options['choices'] = array_flip($this->getAvailableLocales());
@@ -61,14 +60,12 @@ final class LocaleTypeExtension extends AbstractTypeExtension
         return [LocaleType::class];
     }
 
-    private function getLocaleName(string $code): ?string
+    private function getLocaleName(string $code): string
     {
         return Locales::getName($code);
     }
 
-    /**
-     * @return array|LocaleInterface[]
-     */
+    /** @return string[] */
     private function getAvailableLocales(): array
     {
         $availableLocales = Locales::getNames();

@@ -65,7 +65,7 @@ Feature: Sorting listed products
         Then I should see 3 products in the list
         And the first product on the list should have name "Szałowy Mops"
 
-    @ui
+    @ui @no-postgres
     Scenario: Missing translations are sorted as first when sorting by name ascending
         When I change my locale to "Polish"
         And I browse products
@@ -74,7 +74,7 @@ Feature: Sorting listed products
         And the first product on the list shouldn't have a name
         And the last product on the list should have name "Ekstremalny Mops"
 
-    @ui
+    @ui @no-postgres
     Scenario: Missing translation are sorted as last when sorting by name descending
         When I change my locale to "Polish"
         And I browse products

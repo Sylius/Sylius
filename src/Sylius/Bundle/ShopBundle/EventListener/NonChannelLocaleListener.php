@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -49,6 +49,7 @@ final class NonChannelLocaleListener
         if (\method_exists($event, 'isMainRequest')) {
             $isMainRequest = $event->isMainRequest();
         } else {
+            /** @phpstan-ignore-next-line */
             $isMainRequest = $event->isMasterRequest();
         }
         if (!$isMainRequest) {
@@ -56,8 +57,7 @@ final class NonChannelLocaleListener
         }
 
         $request = $event->getRequest();
-        /** @psalm-suppress RedundantConditionGivenDocblockType Symfony docblock is not always true */
-        if ($request->attributes && in_array($request->attributes->get('_route'), ['_wdt', '_profiler', '_profiler_search', '_profiler_search_results'])) {
+        if (!$request->attributes->has('_locale')) {
             return;
         }
 

@@ -6,8 +6,8 @@ Feature: Preventing starting checkout with an empty cart
 
     Background:
         Given the store operates on a single channel in "United States"
-        And the store allows paying offline
-        And the store ships everywhere for free
+        And the store allows paying Offline
+        And the store ships everywhere for Free
         And the store has a product "PHP T-Shirt"
         And I am a logged in customer
 

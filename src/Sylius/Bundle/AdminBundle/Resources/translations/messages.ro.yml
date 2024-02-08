@@ -1,5 +1,5 @@
 # This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
+# (c) Sylius Sp. z o.o.
 
 sylius:
     email:
@@ -45,6 +45,12 @@ sylius:
                 sales:
                     header: Vânzări
                     orders: Comenzi
+                official_support:
+                    header: Sprijin oficial
+                    browse_plugins: Răsfoiește plugin-uri
+                    sylius_plus: Sylius Plus
+                    professional_services: Servicii profesionale
+                    find_a_partner: Găsește un partener
     ui:
         product:
             product_not_active_in_channel: Produsul nu este încă activat în acest canal.

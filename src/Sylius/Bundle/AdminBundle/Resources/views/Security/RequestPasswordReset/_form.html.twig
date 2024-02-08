@@ -1,0 +1,17 @@
+{% form_theme form '@SyliusUi/Form/theme.html.twig' %}
+
+<div class="ui middle aligned center aligned grid">
+    <div class="column">
+        {{ sylius_template_event('sylius.admin.request_password_reset.before_form') }}
+
+        {{ form_start(form, {action: path('sylius_admin_request_password_reset'), 'attr': {'class': 'ui large loadable form', 'novalidate': 'novalidate'}}) }}
+
+            <div class="ui left aligned very padded segment">
+                {{ sylius_template_event('sylius.admin.request_password_reset.form.content', _context) }}
+            </div>
+            {{ form_row(form._token) }}
+        {{ form_end(form, {'render_rest': false}) }}
+
+        {{ sylius_template_event('sylius.admin.request_password_reset.after_form') }}
+    </div>
+</div>

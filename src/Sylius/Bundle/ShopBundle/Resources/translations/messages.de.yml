@@ -1,12 +1,8 @@
 # This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
+# (c) Sylius Sp. z o.o.
 
 sylius:
     email:
-        contact_request:
-            content: 'Inhalt'
-            message_from: 'Nachricht von'
-            subject: 'Kontaktanfrage'
         order_confirmation:
             has_been_successfully_placed: 'wurde erfolgreich platziert.'
             subject: 'Bestellbestätigung'
@@ -33,7 +29,7 @@ sylius:
     homepage:
         about_us: 'Über uns'
         about_us_content: 'Willkommen in unserem Shop. Wir freuen uns, Sie als unseren Kunden begrüßen zu dürfen. Kaufen Sie in Ruhe ein, wir sind steht''s benüht Ihnen den bestern Service zu bieten.  (<i>Sie können diesen Inhalt ändern, indem Sie den Schlüssel "sylius.homepage.about_us_content" in Ihrer Übersetzungsdatei überschreiben</i>)'
-        carousel_header: 'Wappnet euch! Der Winter kommt'
+        banner_content: 'Wappnet euch! Der Winter kommt'
         newsletter: 'Newsletter'
         newsletter_description: 'Abonnieren Sie jetzt unseren Newsletter, und sichern Sie sich die vielen Vorteile unseres Shops" (<i>Sie können diesen Text in der Übersetzungsdatei anpassen, wenn Sie nach dem Schlüssel  "sylius.homepage.newsletter_description" suchen</i>)'
         subscribe: 'Abonnieren'

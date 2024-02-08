@@ -17,10 +17,11 @@
                 <div class="attribute" data-id="{{ code }}">
                     {% set id = form.vars.label|replace({' ': '_'})|lower %}
                     <div class="attribute-row">
-                        <div class="attribute-label {% if not localeCode or localeCode == sylius_base_locale %} required field {% endif %}">
+                        <div class="attribute-label{% if not localeCode or localeCode == sylius_base_locale %} required field{% endif %}">
                             <label>
                                 {% if localeCode %}
-                                    {{ flags.fromLocaleCode(localeCode) }}
+                                    <span class="language">{{ flags.fromLocaleCode(localeCode) }} {{ localeCode|sylius_locale_name }}</span>
+                                    <br>
                                 {% else %}
                                     <i class="globe icon"></i>
                                 {% endif %}

@@ -1,5 +1,5 @@
 # This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
+# (c) Sylius Sp. z o.o.
 
 sylius:
     channel:
@@ -21,10 +21,12 @@ sylius:
     payment:
         apply_state_machine_transition_error: 'There was an unexpected problem with updating a payment. Please, try to update payment again.'
     product:
+        in_use_by_promotion_rule: 'Cannot delete a product that is in use by a promotion rule.'
         out_of_stock: 'There is only %quantity% of this product in the stock.'
     product_variant:
         update_error: 'There was an unexpected problem with updating a product variant. Please, try to update product variant again.'
     promotion:
         update_rules: 'Some rules of the promotions with codes %codes% have been updated.'
     taxon:
+        in_use_by_promotion_rule: 'Cannot delete a taxon that is in use by a promotion rule.'
         menu_taxon_delete: 'You cannot delete a menu taxon of any channel.'

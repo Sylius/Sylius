@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -22,9 +22,9 @@ use Webmozart\Assert\Assert;
 final class HomepageContext implements Context
 {
     public function __construct(
-        private ApiClientInterface $productsClient,
-        private ApiClientInterface $taxonsClient,
+        private ApiClientInterface $client,
         private ResponseCheckerInterface $responseChecker,
+        private string $apiUrlPrefix,
     ) {
     }
 
@@ -33,8 +33,8 @@ final class HomepageContext implements Context
      */
     public function iCheckLatestProducts(): void
     {
-        $this->productsClient->customAction(
-            'api/v2/shop/products?itemsPerPage=3&order[createdAt]=desc',
+        $this->client->customAction(
+            sprintf('%s/shop/products?itemsPerPage=3&order[createdAt]=desc', $this->apiUrlPrefix),
             HttpRequest::METHOD_GET,
         );
     }
@@ -46,7 +46,7 @@ final class HomepageContext implements Context
     {
         Assert::true(
             $this->responseChecker->hasItemWithValue(
-                $this->productsClient->getLastResponse(),
+                $this->client->getLastResponse(),
                 'name',
                 $productName,
             ),
@@ -60,7 +60,7 @@ final class HomepageContext implements Context
     {
         Assert::false(
             $this->responseChecker->hasItemWithValue(
-                $this->productsClient->getLastResponse(),
+                $this->client->getLastResponse(),
                 'name',
                 $productName,
             ),
@@ -72,7 +72,7 @@ final class HomepageContext implements Context
      */
     public function iCheckAvailableTaxons(): void
     {
-        $this->taxonsClient->customAction('api/v2/shop/taxons', HttpRequest::METHOD_GET);
+        $this->client->customAction(sprintf('%s/shop/taxons', $this->apiUrlPrefix), HttpRequest::METHOD_GET);
     }
 
     /**
@@ -80,7 +80,7 @@ final class HomepageContext implements Context
      */
     public function iShouldSeeProductsInTheList(int $count): void
     {
-        Assert::eq($this->responseChecker->countCollectionItems($this->productsClient->getLastResponse()), $count);
+        Assert::eq($this->responseChecker->countCollectionItems($this->client->getLastResponse()), $count);
     }
 
     /**
@@ -89,7 +89,7 @@ final class HomepageContext implements Context
      */
     public function iShouldSeeAndInTheMenu(string ...$expectedMenuItems): void
     {
-        $response = json_decode($this->taxonsClient->getLastResponse()->getContent(), true);
+        $response = json_decode($this->client->getLastResponse()->getContent(), true);
         Assert::keyExists($response, 'hydra:member');
         $menuItems = array_column($response['hydra:member'], 'name');
 
@@ -104,7 +104,7 @@ final class HomepageContext implements Context
      */
     public function iShouldNotSeeAndInTheMenu(string ...$unexpectedMenuItems): void
     {
-        $response = json_decode($this->taxonsClient->getLastResponse()->getContent(), true);
+        $response = json_decode($this->client->getLastResponse()->getContent(), true);
         $menuItems = array_column($response, 'name');
 
         foreach ($unexpectedMenuItems as $unexpectedMenuItem) {

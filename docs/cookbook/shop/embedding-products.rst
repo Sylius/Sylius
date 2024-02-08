@@ -72,7 +72,7 @@ To be able to render a partial with the retrieved products configure routing for
         path: /latest/{code}/{count} # configure a new path that has all the needed variables
         methods: [GET]
         defaults:
-            _controller: sylius.controller.product:indexAction # you make a call on the Product Controller's index action
+            _controller: sylius.controller.product::indexAction # you make a call on the Product Controller's index action
             _sylius:
                 template: $template
                 repository:

@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -19,7 +19,7 @@ abstract class JsonApiTestCase extends BaseJsonApiTestCase
 {
     public const CONTENT_TYPE_HEADER = ['CONTENT_TYPE' => 'application/ld+json', 'HTTP_ACCEPT' => 'application/ld+json'];
 
-    public function __construct(?string $name = null, array $data = [], string $dataName = '')
+    public function __construct(?string $name = null, array $data = [], int|string $dataName = '')
     {
         parent::__construct($name, $data, $dataName);
 
@@ -30,7 +30,7 @@ abstract class JsonApiTestCase extends BaseJsonApiTestCase
     protected function get($id)
     {
         if (property_exists(static::class, 'container')) {
-            return static::$container->get($id);
+            return self::$kernel->getContainer()->get($id);
         }
 
         return parent::get($id);
@@ -51,7 +51,7 @@ abstract class JsonApiTestCase extends BaseJsonApiTestCase
         $token = json_decode($this->client->getResponse()->getContent(), true)['token'];
         $this->assertIsString($token);
 
-        $authorizationHeader = self::$container->getParameter('sylius.api.authorization_header');
+        $authorizationHeader = self::$kernel->getContainer()->getParameter('sylius.api.authorization_header');
         $this->assertIsString($authorizationHeader);
 
         return ['HTTP_' . $authorizationHeader => 'Bearer ' . $token];

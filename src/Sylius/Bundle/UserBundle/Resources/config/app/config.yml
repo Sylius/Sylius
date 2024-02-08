@@ -1,8 +1,8 @@
 # This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
+# (c) Sylius Sp. z o.o.
 
 security:
-    encoders:
+    password_hashers:
         argon2i: argon2i
 
 sylius_user:

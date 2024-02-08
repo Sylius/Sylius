@@ -27,74 +27,76 @@
     ],
     "require": {
         "php": "^8.0",
-        "doctrine/doctrine-migrations-bundle": "^3.0",
-        "egulias/email-validator": "^3.0",
+        "doctrine/doctrine-migrations-bundle": "^3.0.1",
+        "egulias/email-validator": "^3.1",
         "fakerphp/faker": "^1.10",
-        "jms/serializer-bundle": "^3.5 || ^4.0",
-        "knplabs/gaufrette": "^0.8 || ^0.9 || ^0.10 || ^0.11",
+        "jms/serializer-bundle": "^4.0",
+        "knplabs/gaufrette": "^0.10 || ^0.11",
         "knplabs/knp-gaufrette-bundle": "^0.7 || ^0.8",
+        "league/flysystem-bundle": "^2.4",
         "liip/imagine-bundle": "^2.3",
         "sonata-project/block-bundle": "^4.2",
-        "swiftmailer/swiftmailer": "^6.2",
-        "sylius-labs/association-hydrator": "^1.1",
-        "sylius-labs/doctrine-migrations-extra-bundle": "^0.1.3",
-        "sylius-labs/polyfill-symfony-framework-bundle": "^1.0",
-        "sylius/addressing-bundle": "^1.6",
-        "sylius/attribute-bundle": "^1.6",
-        "sylius/channel-bundle": "^1.6",
-        "sylius/core": "^1.6",
-        "sylius/currency-bundle": "^1.6",
-        "sylius/customer-bundle": "^1.6",
-        "sylius/fixtures-bundle": "^1.6.1",
-        "sylius/grid-bundle": "^1.8",
-        "sylius/inventory-bundle": "^1.6",
-        "sylius/locale-bundle": "^1.6",
-        "sylius/money-bundle": "^1.6",
-        "sylius/order-bundle": "^1.6",
-        "sylius/payment-bundle": "^1.6",
-        "sylius/payum-bundle": "^1.6",
-        "sylius/product-bundle": "^1.6",
-        "sylius/promotion-bundle": "^1.6",
-        "sylius/resource-bundle": "^1.7",
-        "sylius/review-bundle": "^1.6",
-        "sylius/shipping-bundle": "^1.6",
-        "sylius/taxation-bundle": "^1.6",
-        "sylius/taxonomy-bundle": "^1.6",
-        "sylius/theme-bundle": "^2.1.1",
-        "sylius/ui-bundle": "^1.6",
-        "sylius/user-bundle": "^1.6",
-        "symfony/framework-bundle": "^4.4 || ^5.4",
-        "symfony/intl": "^4.4 || ^5.4",
-        "symfony/messenger": "^4.4 || ^5.4",
-        "symfony/swiftmailer-bundle": "^3.4",
-        "symfony/templating": "^4.4 || ^5.4",
-        "winzou/state-machine-bundle": "~0.5"
+        "sylius-labs/association-hydrator": "^1.1 || ^1.2",
+        "sylius-labs/doctrine-migrations-extra-bundle": "^0.1.4 || ^0.2",
+        "sylius-labs/polyfill-symfony-framework-bundle": "^1.0 || ^1.1",
+        "sylius/addressing-bundle": "^1.12",
+        "sylius/attribute-bundle": "^1.12",
+        "sylius/channel-bundle": "^1.12",
+        "sylius/core": "^1.12",
+        "sylius/currency-bundle": "^1.12",
+        "sylius/customer-bundle": "^1.12",
+        "sylius/fixtures-bundle": "^1.7",
+        "sylius/grid-bundle": "^1.11",
+        "sylius/inventory-bundle": "^1.12",
+        "sylius/locale-bundle": "^1.12",
+        "sylius/money-bundle": "^1.12",
+        "sylius/order-bundle": "^1.12",
+        "sylius/payment-bundle": "^1.12",
+        "sylius/payum-bundle": "^1.12",
+        "sylius/product-bundle": "^1.12",
+        "sylius/promotion-bundle": "^1.12",
+        "sylius/resource-bundle": "^1.9",
+        "sylius/review-bundle": "^1.12",
+        "sylius/shipping-bundle": "^1.12",
+        "sylius/taxation-bundle": "^1.12",
+        "sylius/taxonomy-bundle": "^1.12",
+        "sylius/mailer-bundle": "^1.8 || ^2.0@beta",
+        "sylius/theme-bundle": "^2.1.1 || ^2.3",
+        "sylius/ui-bundle": "^1.12",
+        "sylius/user-bundle": "^1.12",
+        "symfony/framework-bundle": "^5.4 || ^6.0",
+        "symfony/intl": "^5.4 || ^6.0",
+        "symfony/mailer": "^5.4 || ^6.0",
+        "symfony/messenger": "^5.4 || ^6.0",
+        "symfony/templating": "^5.4 || ^6.0",
+        "symfony/webpack-encore-bundle": "^1.15",
+        "winzou/state-machine-bundle": "^0.6"
     },
     "require-dev": {
         "doctrine/doctrine-bundle": "^1.12 || ^2.0",
-        "hwi/oauth-bundle": "^1.1",
+        "hwi/oauth-bundle": "^1.1 || ^2.0@beta",
         "matthiasnoback/symfony-config-test": "^4.2",
         "matthiasnoback/symfony-dependency-injection-test": "^4.2",
         "phpspec/phpspec": "^7.2",
         "phpunit/phpunit": "^8.5",
-        "symfony/dependency-injection": "^4.4 || ^5.4"
+        "symfony/dependency-injection": "^5.4 || ^6.0",
+        "symfony/dotenv": "^5.4 || ^6.0"
     },
     "conflict": {
         "symfony/doctrine-bridge": "4.4.20 || 5.2.4 || 5.2.5"
     },
     "config": {
         "allow-plugins": {
+            "php-http/discovery": false,
             "symfony/flex": true
         }
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "1.9-dev"
+            "dev-main": "1.12-dev"
         },
         "symfony": {
-            "endpoint": [
-                "https://raw.githubusercontent.com/symfony/recipes/c8d90298241f176a261dadc4814d7058415a4c1f/index.json"
-            ]
+            "require": "^5.4"
         }
     },
     "autoload": {
@@ -105,7 +107,8 @@
     "autoload-dev": {
         "psr-4": {
             "Sylius\\Bundle\\CoreBundle\\spec\\": "spec/",
-            "Sylius\\Bundle\\CoreBundle\\Tests\\": "Tests/"
+            "Sylius\\Bundle\\CoreBundle\\Tests\\": "Tests/",
+            "Sylius\\Bundle\\CoreBundle\\Application\\": "test/src/"
         }
     },
     "repositories": [

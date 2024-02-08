@@ -38,10 +38,6 @@ Every payment is represented by a **Payment** instance and has the following pro
 .. note::
    This model implements the :ref:`component_payment_model_payment-interface`.
 
-   For more detailed information go to `Sylius API Payment`_.
-
-.. _Sylius API Payment: http://api.sylius.com/Sylius/Component/Payment/Model/Payment.html
-
 .. hint::
    All default payment states are available in :ref:`component_payment_payment-states`.
 
@@ -79,10 +75,6 @@ Every method of payment is represented by a **PaymentMethod** instance and has t
 .. note::
    This model implements the :ref:`component_payment_model_payment-method-interface`.
 
-   For more detailed information go to `Sylius API PaymentMethod`_.
-
-.. _Sylius API PaymentMethod: http://api.sylius.com/Sylius/Component/Payment/Model/PaymentMethod.html
-
 .. _component_payment_model_payment-method-translation:
 
 PaymentMethodTranslation
@@ -103,7 +95,3 @@ correct representation of the following payment properties:
 
 .. note::
    This model implements the :ref:`component_payment_model_payment-method-translation-interface`.
-
-   For more detailed information go to `Sylius API PaymentMethodTranslation`_.
-
-.. _Sylius API PaymentMethodTranslation: http://api.sylius.com/Sylius/Component/Payment/Model/PaymentMethodTranslation.html

@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -140,9 +140,8 @@ final class CircularDependencyBreakingErrorListenerTest extends TestCase
     private function createExceptionEvent(): ExceptionEvent
     {
         $kernel = $this->createMock(HttpKernelInterface::class);
-        $request = $this->createMock(Request::class);
         $exception = new \Exception();
 
-        return new ExceptionEvent($kernel, $request, HttpKernelInterface::MASTER_REQUEST, $exception);
+        return new ExceptionEvent($kernel, new Request(), HttpKernelInterface::MAIN_REQUEST, $exception);
     }
 }

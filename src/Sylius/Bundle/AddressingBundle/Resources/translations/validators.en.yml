@@ -31,6 +31,7 @@ sylius:
             not_blank: Please enter country ISO code.
             regex: Country code can only be comprised of letters, numbers, dashes and underscores.
             unique: Country ISO code must be unique.
+        unique_provinces: All provinces within this country need to have unique codes and names.
     province:
         code:
             min_length: Province code must be at least 5 characters long|Province code must be at least 5 characters long.

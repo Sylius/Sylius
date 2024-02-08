@@ -1,0 +1,32 @@
+# This file is part of the Sylius package.
+# (c) Sylius Sp. z o.o.
+
+default:
+    suites:
+        api_removing_catalog_promotions:
+            contexts:
+                - sylius.behat.context.hook.doctrine_orm
+                - Sylius\Calendar\Tests\Behat\Context\Hook\CalendarContext
+
+                - sylius.behat.context.transform.channel
+                - sylius.behat.context.transform.lexical
+                - sylius.behat.context.transform.locale
+                - sylius.behat.context.transform.product
+                - sylius.behat.context.transform.product_variant
+                - sylius.behat.context.transform.shared_storage
+                - sylius.behat.context.transform.taxon
+                - Sylius\Behat\Context\Transform\CatalogPromotionContext
+
+                - sylius.behat.context.setup.admin_api_security
+                - sylius.behat.context.setup.channel
+                - sylius.behat.context.setup.product
+                - sylius.behat.context.setup.product_taxon
+                - sylius.behat.context.setup.taxonomy
+                - Sylius\Behat\Context\Setup\CatalogPromotionContext
+                - Sylius\Calendar\Tests\Behat\Context\Setup\CalendarContext
+
+                - sylius.behat.context.api.admin.managing_catalog_promotions
+                - sylius.behat.context.api.shop.product_variant
+
+            filters:
+                tags: "@removing_catalog_promotions&&@api"

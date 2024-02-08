@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -29,10 +29,9 @@ final class ImageUploaderTest extends WebTestCase
     public function it_sanitizes_file_content_if_it_is_svg_mime_type(): void
     {
         self::$client = static::createClient();
-        self::$container = self::$client->getContainer();
 
-        $imageUploader = self::$container->get('sylius.image_uploader');
-        $fileSystem =  self::$container->get('gaufrette.sylius_image_filesystem');
+        $imageUploader = self::$kernel->getContainer()->get('sylius.image_uploader');
+        $fileSystem =  self::$kernel->getContainer()->get('gaufrette.sylius_image_filesystem');
 
         $file = new UploadedFile(__DIR__ . '/../Resources/xss.svg', 'xss.svg');
         Assert::assertStringContainsString('<script', $this->getContent($file));

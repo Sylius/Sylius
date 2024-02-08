@@ -29,18 +29,18 @@
     ],
     "require": {
         "php": "^8.0",
-        "payum/payum": "^1.6",
-        "payum/payum-bundle": "^2.4",
+        "payum/payum": "^1.7.2",
+        "payum/payum-bundle": "^2.5",
         "php-http/guzzle6-adapter": "^2.0",
-        "sylius/core": "^1.6",
-        "sylius/currency": "^1.6",
-        "sylius/order-bundle": "^1.6",
-        "sylius/payment-bundle": "^1.6",
-        "sylius/resource-bundle": "^1.7"
+        "sylius/core": "^1.12",
+        "sylius/currency": "^1.12",
+        "sylius/order-bundle": "^1.12",
+        "sylius/payment-bundle": "^1.12",
+        "sylius/resource-bundle": "^1.9"
     },
     "require-dev": {
         "phpspec/phpspec": "^7.2",
-        "symfony/dependency-injection": "^4.4 || ^5.4"
+        "symfony/dependency-injection": "^5.4 || ^6.0"
     },
     "config": {
         "allow-plugins": {
@@ -49,12 +49,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "1.9-dev"
-        },
-        "symfony": {
-            "endpoint": [
-                "https://raw.githubusercontent.com/symfony/recipes/c8d90298241f176a261dadc4814d7058415a4c1f/index.json"
-            ]
+            "dev-main": "1.12-dev"
         }
     },
     "autoload": {

@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -21,21 +21,13 @@ use Webmozart\Assert\Assert;
 
 class Customer extends BaseCustomer implements CustomerInterface
 {
-    /**
-     * @var Collection|OrderInterface[]
-     *
-     * @psalm-var Collection<array-key, OrderInterface>
-     */
+    /** @var Collection<array-key, OrderInterface> */
     protected $orders;
 
     /** @var AddressInterface|null */
     protected $defaultAddress;
 
-    /**
-     * @var Collection|AddressInterface[]
-     *
-     * @psalm-var Collection<array-key, AddressInterface>
-     */
+    /** @var Collection<array-key, AddressInterface> */
     protected $addresses;
 
     /** @var ShopUserInterface|null */
@@ -112,7 +104,6 @@ class Customer extends BaseCustomer implements CustomerInterface
         $previousUser = $this->user;
         $this->user = $user;
 
-        /** @psalm-suppress RedundantConditionGivenDocblockType */
         if ($previousUser instanceof ShopUserInterface) {
             $previousUser->setCustomer(null);
         }

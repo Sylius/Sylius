@@ -4,7 +4,7 @@
 
  This file is part of the Sylius package.
 
- (c) Paweł Jędrzejewski
+ (c) Sylius Sp. z o.o.
 
  For the full copyright and license information, please view the LICENSE
  file that was distributed with this source code.
@@ -61,6 +61,13 @@
         <property name="calculator">
             <constraint name="NotBlank">
                 <option name="message">sylius.tax_rate.calculator.not_blank</option>
+                <option name="groups">sylius</option>
+            </constraint>
+        </property>
+        <property name="endDate">
+            <constraint name="GreaterThan">
+                <option name="propertyPath">startDate</option>
+                <option name="message">sylius.tax_rate.date.greater_than_start_date</option>
                 <option name="groups">sylius</option>
             </constraint>
         </property>

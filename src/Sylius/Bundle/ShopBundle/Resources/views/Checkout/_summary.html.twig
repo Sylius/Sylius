@@ -1,8 +1,8 @@
 {% import "@SyliusShop/Common/Macro/money.html.twig" as money %}
 
 {% set itemsSubtotal = sylius_order_items_subtotal(order) %}
-{% set taxIncluded = sylius_order_tax_included(order) %}
-{% set taxExcluded = sylius_order_tax_excluded(order) %}
+{% set taxIncluded = order.getTaxIncludedTotal() %}
+{% set taxExcluded = order.getTaxExcludedTotal() %}
 
 <div class="ui segment">
     <table class="ui very basic table" id="sylius-checkout-subtotal" {{ sylius_test_html_attribute('checkout-subtotal') }}>
@@ -17,7 +17,7 @@
         {% for item in order.items %}
             <tr>
                 <td>{{ item.getVariant.product.name }}</td>
-                <td class="center aligned">
+                <td class="center aligned" {{ sylius_test_html_attribute('item-subtotal-quantity', item.variant.product.name) }}>
                     {{ item.quantity }}
                 </td>
                 <td class="right aligned" id="sylius-item-{{ item.variant.product.slug }}-subtotal" {{ sylius_test_html_attribute('item-subtotal', item.variant.product.slug) }}>

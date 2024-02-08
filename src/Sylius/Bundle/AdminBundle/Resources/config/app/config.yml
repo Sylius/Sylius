@@ -25,6 +25,7 @@ imports:
     - { resource: "@SyliusAdminBundle/Resources/config/grids/product_option.yml" }
     - { resource: "@SyliusAdminBundle/Resources/config/grids/product_review.yml" }
     - { resource: "@SyliusAdminBundle/Resources/config/grids/product_variant.yml" }
+    - { resource: "@SyliusAdminBundle/Resources/config/grids/product_variant_with_catalog_promotion.yml" }
     - { resource: "@SyliusAdminBundle/Resources/config/grids/promotion.yml" }
     - { resource: "@SyliusAdminBundle/Resources/config/grids/promotion_coupon.yml" }
     - { resource: "@SyliusAdminBundle/Resources/config/grids/shipment.yml" }
@@ -40,6 +41,10 @@ parameters:
     sylius_admin.path_name: '%env(resolve:SYLIUS_ADMIN_ROUTING_PATH_NAME)%'
     sylius.security.admin_regex: "^/%sylius_admin.path_name%"
 
+webpack_encore:
+    builds:
+        admin: '%kernel.project_dir%/public/build/admin'
+
 sylius_grid:
     templates:
         action:
@@ -51,6 +56,7 @@ sylius_grid:
             update_product_variant_positions: "@SyliusAdmin/ProductVariant/Grid/Action/updatePositions.html.twig"
         filter:
             entities: '@SyliusUi/Grid/Filter/entities.html.twig'
+            resource_autocomplete: '@SyliusUi/Grid/Filter/resourceAutocomplete.html.twig'
 
 liip_imagine:
     filter_sets:

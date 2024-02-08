@@ -4,7 +4,7 @@
 
  This file is part of the Sylius package.
 
- (c) Paweł Jędrzejewski
+ (c) Sylius Sp. z o.o.
 
  For the full copyright and license information, please view the LICENSE
  file that was distributed with this source code.
@@ -32,9 +32,10 @@
         </service>
 
         <service id="sylius.behat.admin_security" class="Sylius\Behat\Service\SecurityService" public="false">
-            <argument type="service" id="session" />
+            <argument type="service" id="request_stack" />
             <argument type="service" id="sylius.behat.cookie_setter" />
             <argument type="string">admin</argument>
+            <argument type="service" id="session.factory" on-invalid="null" />
         </service>
 
         <service id="sylius.behat.api_security" class="Sylius\Behat\Service\ApiSecurityService" public="true">
@@ -43,9 +44,10 @@
         </service>
 
         <service id="sylius.behat.shop_security" class="Sylius\Behat\Service\SecurityService" public="false">
-            <argument type="service" id="session" />
+            <argument type="service" id="request_stack" />
             <argument type="service" id="sylius.behat.cookie_setter" />
             <argument type="string">shop</argument>
+            <argument type="service" id="session.factory" on-invalid="null" />
         </service>
 
         <service id="Sylius\Behat\Service\SessionManagerInterface" class="Sylius\Behat\Service\SessionManager" public="false">
@@ -69,17 +71,21 @@
             <argument type="service" id="sylius.behat.mocker" />
             <argument type="service" id="sylius.behat.response_loader" />
         </service>
+
         <service id="sylius.behat.mocker" class="Sylius\Behat\Service\Mocker\Mocker" public="false">
             <argument type="service" id="service_container" />
         </service>
+
         <service id="sylius.behat.response_loader" class="Sylius\Behat\Service\ResponseLoader" public="false" />
 
         <service id="sylius.behat.notification_accessor" class="Sylius\Behat\Service\Accessor\NotificationAccessor" public="false">
             <argument type="service" id="behat.mink.default_session" />
         </service>
+
         <service id="sylius.behat.notification_checker" class="Sylius\Behat\Service\NotificationChecker" public="false">
             <argument type="service" id="sylius.behat.notification_accessor" />
         </service>
+
         <service id="sylius.behat.current_page_resolver" class="Sylius\Behat\Service\Resolver\CurrentPageResolver" public="false">
             <argument type="service" id="behat.mink.default_session" />
             <argument type="service" id="router" />
@@ -90,6 +96,29 @@
         <service id="sylius.behat.java_script_test_helper" class="Sylius\Behat\Service\Helper\JavaScriptTestHelper" >
             <argument>100000</argument>
             <argument>7</argument>
+        </service>
+
+        <service id="sylius.behat.email_checker" class="Sylius\Behat\Service\Checker\EmailChecker">
+            <argument type="service" id="test.mailer_pool" />
+        </service>
+
+        <service id="sylius.behat.message_send_cacher" class="Sylius\Behat\Service\MessageSendCacher">
+            <argument type="service" id="test.mailer_pool" />
+            <tag name="kernel.event_subscriber" />
+        </service>
+
+        <service id="api_platform.iri_converter" class="Sylius\Behat\Service\Converter\IriConverter" public="false">
+            <argument type="service" id="api_platform.metadata.property.name_collection_factory" />
+            <argument type="service" id="api_platform.metadata.property.metadata_factory" />
+            <argument type="service" id="api_platform.item_data_provider" />
+            <argument type="service" id="api_platform.route_name_resolver" />
+            <argument type="service" id="api_platform.router" />
+            <argument type="service" id="api_platform.property_accessor" />
+            <argument type="service" id="api_platform.identifiers_extractor.cached" />
+            <argument type="service" id="api_platform.subresource_data_provider" on-invalid="ignore" />
+            <argument type="service" id="api_platform.identifier.converter" on-invalid="ignore" />
+            <argument type="service" id="api_platform.resource_class_resolver" />
+            <argument type="service" id="api_platform.metadata.resource.metadata_factory" />
         </service>
     </services>
 </container>

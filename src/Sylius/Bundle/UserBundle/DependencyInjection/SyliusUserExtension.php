@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -48,6 +48,7 @@ final class SyliusUserExtension extends AbstractResourceExtension
 
         $loader->load('services.xml');
 
+        $this->createParameters($config['resources'], $container);
         $this->createServices($config['resources'], $container);
         $this->loadEncodersAwareServices($config['encoder'], $config['resources'], $container);
     }
@@ -78,6 +79,13 @@ final class SyliusUserExtension extends AbstractResourceExtension
             $this->createLastLoginListeners($userType, $userClass, $config['user'], $container);
             $this->createProviders($userType, $userClass, $container);
             $this->createUserDeleteListeners($userType, $container);
+        }
+    }
+
+    private function createParameters(array $resources, ContainerBuilder $container): void
+    {
+        foreach ($resources as $userType => $config) {
+            $this->createResettingTokenParameters($userType, $config['user'], $container);
         }
     }
 
@@ -212,7 +220,7 @@ final class SyliusUserExtension extends AbstractResourceExtension
 
         $userDeleteListenerDefinition = new Definition(UserDeleteListener::class);
         $userDeleteListenerDefinition->addArgument(new Reference('security.token_storage'));
-        $userDeleteListenerDefinition->addArgument(new Reference('session'));
+        $userDeleteListenerDefinition->addArgument(new Reference('request_stack'));
         $userDeleteListenerDefinition->addTag('kernel.event_listener', ['event' => $userPreDeleteEventName, 'method' => 'deleteUser']);
         $container->setDefinition($userDeleteListenerServiceId, $userDeleteListenerDefinition);
     }
@@ -277,5 +285,10 @@ final class SyliusUserExtension extends AbstractResourceExtension
             sprintf('sylius.%s_user.listener.update_user_encoder', $userType),
             $updateUserEncoderListenerDefinition,
         );
+    }
+
+    private function createResettingTokenParameters(string $userType, array $config, ContainerBuilder $container)
+    {
+        $container->setParameter(sprintf('sylius.%s_user.token.password_reset.ttl', $userType), $config['resetting']['token']['ttl']);
     }
 }

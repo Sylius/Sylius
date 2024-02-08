@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -18,17 +18,15 @@ use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Order\Model\AdjustmentInterface as BaseAdjustmentInterface;
 use Sylius\Component\Order\Model\OrderInterface as BaseOrderInterface;
 use Sylius\Component\Shipping\Model\Shipment as BaseShipment;
+use Sylius\Component\Shipping\Model\ShipmentUnitInterface;
+use Webmozart\Assert\Assert;
 
 class Shipment extends BaseShipment implements ShipmentInterface
 {
     /** @var BaseOrderInterface|null */
     protected $order;
 
-    /**
-     * @var Collection|BaseAdjustmentInterface[]
-     *
-     * @psalm-var Collection<array-key, BaseAdjustmentInterface>
-     */
+    /** @var Collection<array-key, BaseAdjustmentInterface> */
     protected $adjustments;
 
     /** @var int */
@@ -44,6 +42,8 @@ class Shipment extends BaseShipment implements ShipmentInterface
 
     public function getOrder(): ?BaseOrderInterface
     {
+        Assert::nullOrIsInstanceOf($this->order, OrderInterface::class);
+
         return $this->order;
     }
 
@@ -116,5 +116,14 @@ class Shipment extends BaseShipment implements ShipmentInterface
     public function recalculateAdjustmentsTotal(): void
     {
         $this->adjustmentsTotal = $this->getAdjustmentsTotal();
+    }
+
+    public function getShippingUnitTotal(): int
+    {
+        return array_sum(array_map(function (ShipmentUnitInterface $shipmentUnit) {
+            Assert::isInstanceOf($shipmentUnit, OrderItemUnitInterface::class);
+
+            return $shipmentUnit->getTotal();
+        }, $this->units->toArray()));
     }
 }

@@ -4,7 +4,7 @@
 
  This file is part of the Sylius package.
 
- (c) Paweł Jędrzejewski
+ (c) Sylius Sp. z o.o.
 
  For the full copyright and license information, please view the LICENSE
  file that was distributed with this source code.
@@ -21,7 +21,7 @@
         <collectionOperations>
             <collectionOperation name="admin_get">
                 <attribute name="method">GET</attribute>
-                <attribute name="path">admin/orders</attribute>
+                <attribute name="path">/admin/orders</attribute>
                 <attribute name="normalization_context">
                     <attribute name="groups">admin:order:read</attribute>
                 </attribute>
@@ -33,13 +33,16 @@
                 <attribute name="messenger">input</attribute>
                 <attribute name="input">Sylius\Bundle\ApiBundle\Command\Cart\PickupCart</attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">shop:order:read</attribute>
+                    <attribute name="groups">
+                        <attribute>shop:order:read</attribute>
+                        <attribute>shop:cart:read</attribute>
+                    </attribute>
                 </attribute>
                 <attribute name="denormalization_context">
                     <attribute name="groups">shop:order:create</attribute>
                 </attribute>
                 <attribute name="openapi_context">
-                    <attribute name="summary">Pickups a new cart. Provided locale code has to be one of available for a particular channel.</attribute>
+                    <attribute name="summary">Pickups a new cart</attribute>
                 </attribute>
             </collectionOperation>
 
@@ -86,7 +89,7 @@
                 <attribute name="method">PATCH</attribute>
                 <attribute name="path">/admin/orders/{tokenValue}/cancel</attribute>
                 <attribute name="input">false</attribute>
-                <attribute name="controller">Sylius\Bundle\ApiBundle\Applicator\OrderStateMachineTransitionApplicatorInterface:cancel</attribute>
+                <attribute name="controller">Sylius\Bundle\ApiBundle\Applicator\OrderStateMachineTransitionApplicatorInterface::cancel</attribute>
                 <attribute name="normalization_context">
                     <attribute name="groups">
                         <attribute>admin:order:read</attribute>
@@ -106,7 +109,9 @@
                 <attribute name="messenger">input</attribute>
                 <attribute name="input">Sylius\Bundle\ApiBundle\Command\Cart\AddItemToCart</attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">shop:cart:read</attribute>
+                    <attribute name="groups">
+                        <attribute>shop:cart:read</attribute>
+                    </attribute>
                 </attribute>
                 <attribute name="denormalization_context">
                     <attribute name="groups">shop:cart:add_item</attribute>
@@ -128,7 +133,10 @@
                     <attribute name="groups">shop:cart:select_shipping_method</attribute>
                 </attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">shop:cart:read</attribute>
+                    <attribute name="groups">
+                        <attribute>shop:order:read</attribute>
+                        <attribute>shop:cart:read</attribute>
+                    </attribute>
                 </attribute>
                 <attribute name="openapi_context">
                     <attribute name="summary">Selects shipping methods for particular shipment</attribute>
@@ -162,7 +170,10 @@
                     <attribute name="groups">shop:cart:select_payment_method</attribute>
                 </attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">shop:cart:read</attribute>
+                    <attribute name="groups">
+                        <attribute>shop:order:read</attribute>
+                        <attribute>shop:cart:read</attribute>
+                    </attribute>
                 </attribute>
                 <attribute name="openapi_context">
                     <attribute name="summary">Selects payment methods for particular payment</attribute>
@@ -261,7 +272,10 @@
                     <attribute name="groups">shop:cart:complete</attribute>
                 </attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">shop:cart:read</attribute>
+                    <attribute name="groups">
+                        <attribute>shop:order:read</attribute>
+                        <attribute>shop:cart:read</attribute>
+                    </attribute>
                 </attribute>
                 <attribute name="openapi_context">
                     <attribute name="summary">Completes checkout</attribute>
@@ -271,7 +285,6 @@
             <itemOperation name="shop_remove_item">
                 <attribute name="method">DELETE</attribute>
                 <attribute name="path">/shop/orders/{tokenValue}/items/{itemId}</attribute>
-                <attribute name="messenger">input</attribute>
                 <attribute name="controller">Sylius\Bundle\ApiBundle\Controller\DeleteOrderItemAction</attribute>
                 <attribute name="write">false</attribute>
                 <attribute name="denormalization_context">
@@ -342,7 +355,10 @@
                     <attribute name="groups">shop:cart:update</attribute>
                 </attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">shop:cart:read</attribute>
+                    <attribute name="groups">
+                        <attribute>shop:order:read</attribute>
+                        <attribute>shop:cart:read</attribute>
+                    </attribute>
                 </attribute>
                 <attribute name="openapi_context">
                     <attribute name="summary">Addresses cart to given location, logged in Customer does not have to provide an email. Applies coupon to cart.</attribute>
@@ -369,16 +385,6 @@
             <subresourceOperation name="adjustments_get_subresource">
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/shop/orders/{tokenValue}/adjustments</attribute>
-            </subresourceOperation>
-
-            <subresourceOperation name="payments_methods_get_subresource">
-                <attribute name="method">GET</attribute>
-                <attribute name="path">/shop/orders/{tokenValue}/payments/{payments}/methods</attribute>
-            </subresourceOperation>
-
-            <subresourceOperation name="shipments_methods_get_subresource">
-                <attribute name="method">GET</attribute>
-                <attribute name="path">/shop/orders/{tokenValue}/shipments/{shipments}/methods</attribute>
             </subresourceOperation>
 
             <subresourceOperation name="items_adjustments_get_subresource">
@@ -409,6 +415,8 @@
         <property name="notes" writable="true" />
         <property name="itemsTotal" readable="true" />
         <property name="taxTotal" readable="true"/>
+        <property name="taxExcludedTotal" readable="true"/>
+        <property name="taxIncludedTotal" readable="true"/>
         <property name="adjustments" writable="false">
             <subresource resourceClass="%sylius.model.adjustment.class%" />
         </property>

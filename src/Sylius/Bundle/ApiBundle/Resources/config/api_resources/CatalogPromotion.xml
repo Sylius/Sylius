@@ -4,7 +4,7 @@
 
  This file is part of the Sylius package.
 
- (c) Paweł Jędrzejewski
+ (c) Sylius Sp. z o.o.
 
  For the full copyright and license information, please view the LICENSE
  file that was distributed with this source code.
@@ -23,6 +23,13 @@
             <collectionOperation name="admin_get">
                 <attribute name="path">/admin/catalog-promotions</attribute>
                 <attribute name="method">GET</attribute>
+                <attribute name="filters">
+                    <attribute>sylius.api.catalog_promotion_search_filter</attribute>
+                    <attribute>sylius.api.catalog_promotion_enabled_filter</attribute>
+                    <attribute>sylius.api.catalog_promotion_start_date_filter</attribute>
+                    <attribute>sylius.api.catalog_promotion_end_date_filter</attribute>
+                    <attribute>Sylius\Bundle\ApiBundle\Filter\Doctrine\CatalogPromotionChannelFilter</attribute>
+                </attribute>
                 <attribute name="normalization_context">
                     <attribute name="groups">admin:catalog_promotion:read</attribute>
                 </attribute>
@@ -75,6 +82,7 @@ Example configuration for `percentage_discount` action type:
                     <attribute name="groups">admin:catalog_promotion:read</attribute>
                 </attribute>
             </itemOperation>
+
             <itemOperation name="shop_get">
                 <attribute name="path">/shop/catalog-promotions/{code}</attribute>
                 <attribute name="method">GET</attribute>
@@ -117,6 +125,25 @@ Example configuration for `percentage_discount` action type:
     }
 }
 ```
+                    </attribute>
+                </attribute>
+            </itemOperation>
+
+            <itemOperation name="admin_delete">
+                <attribute name="method">DELETE</attribute>
+                <attribute name="path">/admin/catalog-promotions/{code}</attribute>
+                <attribute name="controller">Sylius\Bundle\ApiBundle\Controller\RemoveCatalogPromotionAction</attribute>
+                <attribute name="openapi_context">
+                    <attribute name="responses">
+                        <attribute name="202">
+                            <attribute name="description">CatalogPromotion resource removal request accepted</attribute>
+                        </attribute>
+                        <attribute name="400">
+                            <attribute name="description">Invalid CatalogPromotion state</attribute>
+                        </attribute>
+                        <attribute name="404">
+                            <attribute name="description">Resource not found</attribute>
+                        </attribute>
                     </attribute>
                 </attribute>
             </itemOperation>

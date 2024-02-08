@@ -8,8 +8,8 @@ Feature: Seeing current prices of products after catalog promotion becomes ineli
         Given the store operates on a single channel in "United States"
         And the store has a product "T-Shirt"
         And this product has "PHP T-Shirt" variant priced at "$20.00" in "United States" channel
-        And the store ships everywhere for free
-        And the store allows paying offline
+        And the store ships everywhere for Free
+        And the store allows paying Offline
         And there is a catalog promotion "Winter sale" available in "United States" channel that reduces price by "25%" and applies on "PHP T-Shirt" variant
         And I am a logged in customer
 

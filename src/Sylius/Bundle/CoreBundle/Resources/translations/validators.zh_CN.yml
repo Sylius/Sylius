@@ -1,5 +1,5 @@
 # This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
+# (c) Sylius Sp. z o.o.
 
 sylius:
     avatar_image:
@@ -87,8 +87,8 @@ sylius:
     user:
         email:
             unique: 该电子邮件已被使用
-            min: 电子邮件必须至少有 {{ min }} 个字符。
-            max: 电子邮件最多 {{ max }} 个字符。
+            min: 电子邮件必须至少有 {{ limit }} 个字符。
+            max: 电子邮件最多 {{ limit }} 个字符。
             invalid: 电子邮件地址无效。
         username:
             unique: 此用户名已被使用。

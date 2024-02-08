@@ -4,7 +4,7 @@
 
  This file is part of the Sylius package.
 
- (c) Paweł Jędrzejewski
+ (c) Sylius Sp. z o.o.
 
  For the full copyright and license information, please view the LICENSE
  file that was distributed with this source code.
@@ -19,6 +19,7 @@
         <parameter key="sylius.behat.page.admin.catalog_promotion.create.class">Sylius\Behat\Page\Admin\CatalogPromotion\CreatePage</parameter>
         <parameter key="sylius.behat.page.admin.catalog_promotion.index.class">%sylius.behat.page.admin.crud.index.class%</parameter>
         <parameter key="sylius.behat.page.admin.catalog_promotion.show.class">Sylius\Behat\Page\Admin\CatalogPromotion\ShowPage</parameter>
+        <parameter key="sylius.behat.page.admin.catalog_promotion.product_variant.index.class">Sylius\Behat\Page\Admin\CatalogPromotion\ProductVariant\IndexPage</parameter>
         <parameter key="sylius.behat.page.admin.catalog_promotion.update.class">Sylius\Behat\Page\Admin\CatalogPromotion\UpdatePage</parameter>
     </parameters>
 
@@ -37,6 +38,14 @@
             parent="sylius.behat.page.admin.crud.index"
         >
             <argument type="string">sylius_admin_catalog_promotion_index</argument>
+        </service>
+
+        <service
+            id="sylius.behat.page.admin.catalog_promotion.product_variant.index"
+            class="%sylius.behat.page.admin.catalog_promotion.product_variant.index.class%"
+            parent="sylius.behat.page.admin.crud.index"
+        >
+            <argument type="string">sylius_admin_catalog_promotion_product_variant_index</argument>
         </service>
 
         <service

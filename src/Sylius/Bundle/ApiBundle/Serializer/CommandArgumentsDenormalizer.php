@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -31,7 +31,7 @@ final class CommandArgumentsDenormalizer implements ContextAwareDenormalizerInte
 
     public function supportsDenormalization($data, $type, $format = null, array $context = []): bool
     {
-        /** @psalm-var class-string $inputClassName|null */
+        /** @var class-string|null $inputClassName */
         $inputClassName = $this->getInputClassName($context);
 
         if ($inputClassName === null) {
@@ -49,7 +49,7 @@ final class CommandArgumentsDenormalizer implements ContextAwareDenormalizerInte
 
     public function denormalize($data, $type, $format = null, array $context = [])
     {
-        /** @psalm-var class-string $inputClassName */
+        /** @var class-string $inputClassName */
         $inputClassName = $this->getInputClassName($context);
 
         foreach (class_implements($inputClassName) as $classInterface) {

@@ -4,7 +4,7 @@
 
  This file is part of the Sylius package.
 
- (c) Paweł Jędrzejewski
+ (c) Sylius Sp. z o.o.
 
  For the full copyright and license information, please view the LICENSE
  file that was distributed with this source code.
@@ -42,7 +42,7 @@
         <service id="Sylius\Bundle\LocaleBundle\Context\RequestHeaderBasedLocaleContext">
             <argument type="service" id="request_stack" />
             <argument type="service" id="sylius.locale_provider" />
-            <tag name="sylius.context.locale" priority="256" />
+            <tag name="sylius.context.locale" priority="32" />
         </service>
 
         <service id="sylius.locale_provider" class="Sylius\Component\Locale\Provider\LocaleProvider">

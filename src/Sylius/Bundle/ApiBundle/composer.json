@@ -24,30 +24,31 @@
     ],
     "require": {
         "php": "^8.0",
-        "doctrine/dbal": "^2.7",
+        "doctrine/dbal": "^2.7 || ^3.0",
         "api-platform/core": "^2.6",
         "enshrined/svg-sanitize": "^0.15.4 || ^0.16",
-        "lexik/jwt-authentication-bundle": "^2.6",
-        "sylius/core-bundle": "^1.7",
-        "symfony/messenger": "^4.4 || ^5.4"
+        "lexik/jwt-authentication-bundle": "^2.11",
+        "sylius/core-bundle": "^1.12",
+        "symfony/messenger": "^5.4 || ^6.0"
     },
     "require-dev": {
         "matthiasnoback/symfony-config-test": "^4.2",
-        "matthiasnoback/symfony-dependency-injection-test": "^4.1",
+        "matthiasnoback/symfony-dependency-injection-test": "^4.2",
         "nelmio/alice": "^3.8",
         "phparkitect/phparkitect": "^0.2.9",
         "phpspec/phpspec": "^7.2",
         "phpunit/phpunit": "^8.5",
-        "symfony/browser-kit": "^4.4 || ^5.4",
-        "symfony/debug-bundle": "^4.4 || ^5.4",
-        "symfony/dotenv": "^4.4 || ^5.4",
-        "symfony/http-client": "^5.2",
+        "symfony/browser-kit": "^5.4 || ^6.0",
+        "symfony/debug-bundle": "^5.4 || ^6.0",
+        "symfony/dotenv": "^5.4 || ^6.0",
+        "symfony/http-client": "^5.4 || ^6.0",
+        "symfony/webpack-encore-bundle": "^1.15",
         "theofidry/alice-data-fixtures": "^1.4"
     },
     "conflict": {
         "api-platform/core": "2.7.0",
-        "doctrine/dbal": "3.*",
         "doctrine/doctrine-bundle": "2.3.0",
+        "lexik/jwt-authentication-bundle": "^2.18",
         "symfony/doctrine-bridge": "4.4.20 || 5.2.4 || 5.2.5"
     },
     "config": {
@@ -57,12 +58,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "1.7-dev"
-        },
-        "symfony": {
-            "endpoint": [
-                "https://raw.githubusercontent.com/symfony/recipes/c8d90298241f176a261dadc4814d7058415a4c1f/index.json"
-            ]
+            "dev-main": "1.12-dev"
         }
     },
     "autoload": {

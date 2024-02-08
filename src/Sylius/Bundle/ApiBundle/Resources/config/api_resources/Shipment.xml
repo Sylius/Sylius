@@ -4,7 +4,7 @@
 
  This file is part of the Sylius package.
 
- (c) Paweł Jędrzejewski
+ (c) Sylius Sp. z o.o.
 
  For the full copyright and license information, please view the LICENSE
  file that was distributed with this source code.
@@ -66,20 +66,10 @@
             </itemOperation>
         </itemOperations>
 
-        <subresourceOperations>
-            <subresourceOperation name="methods_get_subresource">
-                <attribute name="method">GET</attribute>
-                <attribute name="path">/shop/shipments/{id}/methods</attribute>
-            </subresourceOperation>
-        </subresourceOperations>
-
         <property name="id" identifier="true" />
         <property name="createdAt" />
         <property name="updatedAt" />
         <property name="state" />
-        <property name="method">
-            <subresource resourceClass="%sylius.model.shipping_method.class%" />
-        </property>
         <property name="units" />
         <property name="tracking" />
         <property name="shippedAt" />

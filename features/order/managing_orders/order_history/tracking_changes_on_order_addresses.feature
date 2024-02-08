@@ -3,10 +3,10 @@ Feature: Tracking changes on order addresses
     In order to be aware of order's addresses changes on order
     As an Administrator
     I want to be able to track changes on order's addresses
-    
+
     Background:
         Given the store operates on a single channel in "United States"
-        And the store ships everywhere for free
+        And the store ships everywhere for Free
         And the store allows paying with "Cash on Delivery"
         And the store has a product "Italian suit" priced at "$4000.00"
         And there is a customer "barney@stinson.com" that placed an order "#00000001"

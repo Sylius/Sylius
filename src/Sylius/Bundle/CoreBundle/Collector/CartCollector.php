@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -38,46 +38,50 @@ final class CartCollector extends DataCollector
 
     public function getId(): ?int
     {
-        return $this->data['id'];
+        return $this->data['id'] ?? null;
     }
 
     public function getTotal(): ?int
     {
-        return $this->data['total'];
+        return $this->data['total'] ?? null;
     }
 
     public function getSubtotal(): ?int
     {
-        return $this->data['subtotal'];
+        return $this->data['subtotal'] ?? null;
     }
 
     public function getCurrency(): ?string
     {
-        return $this->data['currency'];
+        return $this->data['currency'] ?? null;
     }
 
     public function getLocale(): ?string
     {
-        return $this->data['locale'];
+        return $this->data['locale'] ?? null;
     }
 
     public function getQuantity(): ?int
     {
-        return $this->data['quantity'];
+        return $this->data['quantity'] ?? null;
     }
 
     public function getItems(): ?array
     {
-        return $this->data['items'];
+        return $this->data['items'] ?? null;
     }
 
     public function getStates(): ?array
     {
-        return $this->data['states'];
+        return $this->data['states'] ?? null;
     }
 
     public function collect(Request $request, Response $response, \Throwable $exception = null): void
     {
+        if ($request->attributes->getBoolean('_stateless')) {
+            return;
+        }
+
         try {
             /** @var OrderInterface $cart */
             $cart = $this->cartContext->getCart();

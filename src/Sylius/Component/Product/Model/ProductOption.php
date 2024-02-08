@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -36,11 +36,7 @@ class ProductOption implements ProductOptionInterface, \Stringable
     /** @var int|null */
     protected $position;
 
-    /**
-     * @var Collection|ProductOptionValueInterface[]
-     *
-     * @psalm-var Collection<array-key, ProductOptionValueInterface>
-     */
+    /** @var Collection<array-key, ProductOptionValueInterface> */
     protected $values;
 
     public function __construct()

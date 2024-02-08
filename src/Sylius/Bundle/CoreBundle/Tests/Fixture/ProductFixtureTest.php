@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -113,6 +113,15 @@ final class ProductFixtureTest extends TestCase
             ['custom' => [[]]],
             'custom.*.channels',
         );
+    }
+
+    /**
+     * @test
+     */
+    public function product_variant_selection_method_is_optional(): void
+    {
+        $this->assertConfigurationIsValid([['custom' => [['variant_selection_method' => 'custom']]]], 'custom.*.variant_selection_method');
+        $this->assertConfigurationIsValid([['custom' => [['variant_selection_method' => 'match']]]], 'custom.*.variant_selection_method');
     }
 
     /**

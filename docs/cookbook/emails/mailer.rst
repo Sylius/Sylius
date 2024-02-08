@@ -2,14 +2,16 @@ How to configure mailer?
 ========================
 
 There are many services used for sending transactional emails in web applications. You can find for instance
-`Mailjet <https://www.mailjet.com>`_, `Mandrill <http://www.mandrill.com>`_ or `SendGrid <https://sendgrid.com>`_ among them.
+`Mailjet <https://www.mailjet.com>`_, `Mandrill <https://www.mandrill.com>`_ or `SendGrid <https://sendgrid.com>`_ among them.
 
 In Sylius emails are configured the Symfony way, so you can get inspired by the Symfony guides to those mailing services.
 
-Basically to start sending emails via a mailing service you will need to:
+We are recommending to use `Symfony Mailer <https://symfony.com/doc/current/mailer.html>`_ where out of the box, you can deliver emails by configuring the ``MAILER_DSN`` variable in your .env file.
+
+If you prefer using the SwiftMailer service you will need to:
 
 1. **Create an account on a mailing service.**
-2. **In the your** `.env` file **modify variable** ``MAILER_URL``
+2. **In the your** ``.env`` **file modify/add the** ``MAILER_URL`` **variable.**
 
 .. code-block:: text
 

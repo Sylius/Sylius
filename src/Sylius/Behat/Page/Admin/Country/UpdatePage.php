@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -105,6 +105,13 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
         $provinceForm->fillField('Code', $code);
     }
 
+    public function getFormValidationErrors(): array
+    {
+        $errors = $this->getElement('form')->findAll('css', '.sylius-validation-error:not(.pointing)');
+
+        return array_map(fn (NodeElement $element) => $element->getText(), $errors);
+    }
+
     public function getValidationMessage(string $element): string
     {
         $provinceForm = $this->getLastProvinceElement();
@@ -127,6 +134,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
         return array_merge(parent::getDefinedElements(), [
             'code' => '#sylius_country_code',
             'enabled' => '#sylius_country_enabled',
+            'form' => 'form',
             'provinces' => '#sylius_country_provinces',
         ]);
     }

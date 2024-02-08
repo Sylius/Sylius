@@ -9,8 +9,8 @@ Feature: Statistics dashboard per channel
         And there is product "Onion" available in this channel
         And the store operates on another channel named "United States"
         And there is product "Banana" available in that channel
-        And the store ships everywhere for free
-        And the store allows paying offline
+        And the store ships everywhere for Free
+        And the store allows paying Offline
         And I am logged in as an administrator
 
     @ui

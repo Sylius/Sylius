@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -278,7 +278,7 @@ final class ManagingProductVariantsContext implements Context
     public function iShouldBeNotifiedOfFailure()
     {
         $this->notificationChecker->checkNotification(
-            'Cannot delete, the product variant is in use.',
+            'Cannot delete, the Product variant is in use.',
             NotificationType::failure(),
         );
     }
@@ -641,6 +641,22 @@ final class ManagingProductVariantsContext implements Context
         $this->iWantToModifyAProduct($productVariant);
 
         Assert::true($this->updatePage->isEnabled());
+    }
+
+    /**
+     * @Then I should (also) see a variant named :name
+     */
+    public function iShouldSeeAVariantNamed(string $name): void
+    {
+        Assert::true($this->indexPage->isSingleResourceOnPage(['name' => $name]));
+    }
+
+    /**
+     * @Then I should (also) see :count variant(s) with no name
+     */
+    public function IShouldSeeCountVariantsWithNoName(int $count = 1): void
+    {
+        Assert::same($this->indexPage->countItemsWithNoName(), $count);
     }
 
     /**

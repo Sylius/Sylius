@@ -82,14 +82,14 @@ Admin
 ~~~~~
 
 In every system with the security layer the functionalities of system administration need to be restricted to only some users with a certain role - Administrator.
-This is the responsibility of our ``AdminBundle`` although if you do not need it, you can turn it off. Views have been built using the `SemanticUI <http://semantic-ui.com/>`_.
+This is the responsibility of our ``AdminBundle`` although if you do not need it, you can turn it off. Views have been built using the `SemanticUI <https://semantic-ui.com/>`_.
 
 Shop
 ~~~~
 
 Our ``ShopBundle`` is basically a standard B2C interface for everything that happens in the system.
 It is made mainly of yaml configurations and templates.
-Also here views have been built using the `SemanticUI <http://semantic-ui.com/>`_.
+Also here views have been built using the `SemanticUI <https://semantic-ui.com/>`_.
 
 API
 ~~~

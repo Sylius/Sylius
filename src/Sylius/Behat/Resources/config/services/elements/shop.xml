@@ -4,7 +4,7 @@
 
  This file is part of the Sylius package.
 
- (c) Paweł Jędrzejewski
+ (c) Sylius Sp. z o.o.
 
  For the full copyright and license information, please view the LICENSE
  file that was distributed with this source code.
@@ -21,5 +21,9 @@
         <service id="sylius.behat.element.shop.account.register" class="Sylius\Behat\Element\Shop\Account\RegisterElement" parent="sylius.behat.element" public="false" />
 
         <service id="sylius.behat.element.shop.menu" class="Sylius\Behat\Element\Shop\MenuElement" parent="sylius.behat.element" public="false" />
+
+        <service id="Sylius\Behat\Element\Shop\CartWidgetElementInterface" class="Sylius\Behat\Element\Shop\CartWidgetElement" parent="sylius.behat.element" public="false" />
+
+        <service id="Sylius\Behat\Element\Shop\CheckoutSubtotalElementInterface" class="Sylius\Behat\Element\Shop\CheckoutSubtotalElement" parent="sylius.behat.element" public="false" />
     </services>
 </container>

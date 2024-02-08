@@ -1,0 +1,18 @@
+services:
+    docs:
+        build:
+            context: .
+        command: ["sphinx-autobuild", ".", "build"]
+        volumes:
+            - ./:/usr/src/app:delegated
+
+    nginx:
+        image: nginx:1.22-alpine
+        volumes:
+            - ./build:/usr/share/nginx/html:delegated
+        ports:
+            - 80:80
+
+networks:
+    sylius:
+        driver: bridge

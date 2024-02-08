@@ -53,7 +53,7 @@ Configure the connection to Facebook
 
 .. note::
 
-    To properly connect to Facebook you will need a `Facebook developer account <http://developers.facebook.com>`_.
+    To properly connect to Facebook you will need a `Facebook developer account <https://developers.facebook.com>`_.
     Having an account create a new `app for your website <https://developers.facebook.com/quickstarts/?platform=web>`_.
     In your app dashboard you will have the ``client_id`` (App ID) and the ``client_secret`` (App Secret),
     which are needed for the configuration.
@@ -78,13 +78,13 @@ Sylius uses email as the username, that's why we choose emails as ``scope`` for 
 
     * **App Domain**: ``localhost``
     * Click ``+Add Platform`` and choose "Website" type.
-    * Provide the **Site URL** of the platform - your local server on which you run Sylius: ``http://localhost:8000``
+    * Provide the **Site URL** of the platform - your local server on which you run Sylius: ``https://localhost:8000``
 
     Alternatively, you could temporarily expose your localhost to be publicly accessible, using a tool like `ngrok <https://ngrok.com/>`_.
     Facebook app configuration would be similar to:
 
     * **App Domain**: ``abcde12345.ngrok.io``
-    * **Site URL** ``http://abcde12345.ngrok.io``
+    * **Site URL** ``https://abcde12345.ngrok.io``
 
 Configure the security layer
 ----------------------------

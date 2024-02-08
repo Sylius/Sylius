@@ -2,12 +2,12 @@
 
 {% if sylius_bundle_loaded_checker('SyliusShopBundle') %}
     {% if not product.enabled or enabledChannels|length < 1 %}
-        <a class="ui labeled icon button disabled" href="#">
+        <a class="ui labeled icon button disabled" href="#" {{ sylius_test_html_attribute('show-product-in-shop-page') }}>
             <i class="angle right icon"></i>
             {{ 'sylius.ui.show_product_in_shop_page'|trans }}
         </a>
     {% elseif enabledChannels|length > 1 %}
-        <div class="ui floating dropdown labeled icon button">
+        <div class="ui floating dropdown labeled icon button" {{ sylius_test_html_attribute('show-product-in-shop-page') }}>
             <i class="share alternate icon"></i>
             <span class="text">
                 {{ 'sylius.ui.show_product_in_shop_page'|trans }}
@@ -15,8 +15,16 @@
             <div class="menu">
                 <div class="scrolling menu">
                     {% for channel in enabledChannels %}
-                        {% set url = channel.hostname is not null ? 'http://' ~ channel.hostname ~ path('sylius_shop_product_show', {'slug': product.slug, '_locale': channel.defaultLocale.code}) : url('sylius_shop_product_show', {'slug': product.slug, '_locale': channel.defaultLocale.code}) %}
-                        <a href="{{ url|raw }}" class="item" target="_blank">
+                        {% set product_translation = sylius_product_translation(product, channel) %}
+                        {% if product_translation is not null %}
+                            {% set url = sylius_channel_url(path('sylius_shop_product_show', {'slug': product_translation.slug, '_locale': product_translation.locale}), channel) %}
+                        {% endif %}
+
+                        <a
+                            href="{{ (url is not defined) ? '#' : url|raw }}"
+                            class="item {% if url is not defined %}disabled{% endif %}"
+                            target="_blank"
+                        >
                             <i class="angle right icon"></i>
                             {{ 'sylius.ui.show_in'|trans }}
                             {{ channel.name }} ({{ channel.code }})
@@ -27,8 +35,17 @@
         </div>
     {% else %}
         {% for channel in enabledChannels %}
-            {% set url = channel.hostname is not null ? 'http://' ~ channel.hostname ~ path('sylius_shop_product_show', {'slug': product.slug, '_locale': channel.defaultLocale.code}) : url('sylius_shop_product_show', {'slug': product.slug, '_locale': channel.defaultLocale.code}) %}
-            <a class="ui labeled icon button" href="{{ url|raw }}" target="_blank">
+            {% set product_translation = sylius_product_translation(product, channel) %}
+            {% if product_translation is not null %}
+                {% set url = sylius_channel_url(path('sylius_shop_product_show', {'slug': product_translation.slug, '_locale': product_translation.locale}), channel) %}
+            {% endif %}
+
+            <a
+                class="ui labeled icon button {% if url is not defined %}disabled{% endif %}"
+                href="{{ (url is not defined) ? '#' : url|raw }}"
+                target="_blank"
+                {{ sylius_test_html_attribute('show-product-in-shop-page') }}
+            >
                 <i class="angle right icon"></i>
                 {{ 'sylius.ui.show_product_in_shop_page'|trans }}
             </a>

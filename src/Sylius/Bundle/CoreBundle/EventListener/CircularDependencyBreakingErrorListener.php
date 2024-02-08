@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -59,7 +59,7 @@ final class CircularDependencyBreakingErrorListener extends ErrorListener
     public function onKernelException(ExceptionEvent $event, string $eventName = null, EventDispatcherInterface $eventDispatcher = null): void
     {
         try {
-            /** @psalm-suppress TooManyArguments */
+            /** @phpstan-ignore-next-line */
             $this->decoratedListener->onKernelException($event, $eventName, $eventDispatcher);
         } catch (\Throwable $throwable) {
             $this->breakCircularDependency($throwable);

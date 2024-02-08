@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -138,6 +138,7 @@ class ProductExampleFactory extends AbstractExampleFactory implements ExampleFac
             ->setNormalizer('channels', LazyOption::findBy($this->channelRepository, 'code'))
 
             ->setDefault('variant_selection_method', ProductInterface::VARIANT_SELECTION_MATCH)
+            ->setAllowedTypes('variant_selection_method', 'string')
             ->setAllowedValues('variant_selection_method', [ProductInterface::VARIANT_SELECTION_MATCH, ProductInterface::VARIANT_SELECTION_CHOICE])
 
             ->setDefault('product_attributes', [])

@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -25,6 +25,8 @@ use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ShopBillingData;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Core\Test\Services\DefaultChannelFactoryInterface;
+use Sylius\Component\Locale\Model\LocaleInterface;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 final class ChannelContext implements Context
 {
@@ -35,6 +37,7 @@ final class ChannelContext implements Context
         private DefaultChannelFactoryInterface $defaultChannelFactory,
         private ChannelRepositoryInterface $channelRepository,
         private ObjectManager $channelManager,
+        private RepositoryInterface $localeRepository,
     ) {
     }
 
@@ -84,17 +87,32 @@ final class ChannelContext implements Context
     }
 
     /**
+     * @Given the store operates on a single channel in :localeCode locale
+     */
+    public function storeOperatesOnASingleChannelInLocale(string $localeCode): void
+    {
+        $defaultData = $this->defaultChannelFactory->create(localeCode: $localeCode);
+
+        $this->sharedStorage->setClipboard($defaultData);
+        $this->sharedStorage->set('channel', $defaultData['channel']);
+    }
+
+    /**
      * @Given /^the store(?:| also) operates on (?:a|another) channel named "([^"]+)"$/
      * @Given /^the store(?:| also) operates on (?:a|another) channel named "([^"]+)" in "([^"]+)" currency$/
      * @Given /^the store(?:| also) operates on (?:a|another) channel named "([^"]+)" in "([^"]+)" currency and with hostname "([^"]+)"$/
-     * @Given the store operates on a channel identified by :code code
      * @Given the store (also) operates on a(nother) channel named :channelName with hostname :hostname
+     * @Given the store operates on a channel identified by :channelCode code
      */
-    public function theStoreOperatesOnAChannelNamed(string $channelName, string $currencyCode = null, string $hostname = null): void
-    {
-        $channelCode = StringInflector::nameToLowercaseCode($channelName);
+    public function theStoreOperatesOnAChannelNamed(
+        string $channelName = null,
+        string $currencyCode = null,
+        string $hostname = null,
+        string $channelCode = null,
+    ): void {
+        $channelCode = $channelCode ?? StringInflector::nameToLowercaseCode($channelName);
+        $channelName = $channelName ?? $channelCode;
         $defaultData = $this->defaultChannelFactory->create($channelCode, $channelName, $currencyCode);
-
         $defaultData['channel']->setHostname($hostname);
 
         $this->sharedStorage->setClipboard($defaultData);
@@ -238,13 +256,49 @@ final class ChannelContext implements Context
      * @Given /^I changed (?:|back )my current (channel to "([^"]+)")$/
      * @When /^I change (?:|back )my current (channel to "([^"]+)")$/
      * @When customer view shop on :channel channel
-     * @When I view shop on :channel channel
+     * @When I am in the :channel channel
      */
     public function iChangeMyCurrentChannelTo(ChannelInterface $channel): void
     {
         $this->sharedStorage->set('channel', $channel);
         $this->sharedStorage->set('hostname', $channel->getHostname());
         $this->channelContextSetter->setChannel($channel);
+    }
+
+    /**
+     * @Given /^its required address in the checkout is (billing|shipping)$/
+     */
+    public function itsRequiredAddressInTheCheckoutIs(string $type): void
+    {
+        /** @var ChannelInterface $channel */
+        $channel = $this->sharedStorage->get('channel');
+        $channel->setShippingAddressInCheckoutRequired($type === 'shipping');
+
+        $this->channelManager->flush();
+    }
+
+    /**
+     * @Given the store also operates in :locale locale
+     */
+    public function theStoreAlsoOperatesInLocale(LocaleInterface $locale): void
+    {
+        /** @var ChannelInterface $channel */
+        $channel = $this->sharedStorage->get('channel');
+        $channel->addLocale($locale);
+
+        $this->channelManager->flush();
+    }
+
+    /**
+     * @Given the store uses the :taxCalculationStrategy tax calculation strategy
+     */
+    public function theStoreUsesTheTaxCalculationStrategy(string $taxCalculationStrategy): void
+    {
+        /** @var ChannelInterface $channel */
+        $channel = $this->sharedStorage->get('channel');
+        $channel->setTaxCalculationStrategy(StringInflector::nameToLowercaseCode($taxCalculationStrategy));
+
+        $this->channelManager->flush();
     }
 
     /**

@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -23,16 +23,15 @@ use Symfony\Component\Form\FormEvents;
 
 class SelectAttributeChoicesCollectionType extends AbstractType
 {
-    private string $defaultLocaleCode;
+    private ?string $defaultLocaleCode = null;
 
-    public function __construct(TranslationLocaleProviderInterface $localeProvider)
+    public function __construct(?TranslationLocaleProviderInterface $localeProvider = null)
     {
-        $this->defaultLocaleCode = $localeProvider->getDefaultLocaleCode();
+        if (null !== $localeProvider) {
+            $this->defaultLocaleCode = $localeProvider->getDefaultLocaleCode();
+        }
     }
 
-    /**
-     * @psalm-suppress InvalidScalarArgument Some weird magic going on here, not sure about refactor
-     */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder->addEventListener(FormEvents::SUBMIT, function (FormEvent $event) {
@@ -48,7 +47,7 @@ class SelectAttributeChoicesCollectionType extends AbstractType
                         continue;
                     }
 
-                    if (!array_key_exists($this->defaultLocaleCode, $values)) {
+                    if ($this->defaultLocaleCode !== null && !array_key_exists($this->defaultLocaleCode, $values)) {
                         continue;
                     }
 
@@ -85,6 +84,11 @@ class SelectAttributeChoicesCollectionType extends AbstractType
         return Uuid::uuid1()->toString();
     }
 
+    /**
+     * @param array<array-key, mixed|null> $values
+     *
+     * @return array<string, mixed>
+     */
     private function resolveValues(array $values): array
     {
         $fixedValues = [];

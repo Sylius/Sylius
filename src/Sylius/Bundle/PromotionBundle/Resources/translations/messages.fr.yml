@@ -1,10 +1,11 @@
 # This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
+# (c) Sylius Sp. z o.o.
 
 sylius:
     form:
         catalog_promotion:
             action:
+                fixed_discount: Remise fixe
                 percentage_discount: Pourcentage de remise
             description: Description
             enabled: Activée
@@ -18,6 +19,8 @@ sylius:
             actions: Actions
             add_action: Ajouter une action
             add_rule: Ajouter une règle
+            applies_to_discounted: S'applique aux articles déjà remisés
+            applies_to_discounted_details: Avec cette option, la promotion du panier sera appliquée aux articles déjà remisés par la ou les promotion(s) du catalogue.
             coupon_based: Comprend des coupons
             description: Description
             ends_at: Se termine le

@@ -4,7 +4,7 @@
 
  This file is part of the Sylius package.
 
- (c) Paweł Jędrzejewski
+ (c) Sylius Sp. z o.o.
 
  For the full copyright and license information, please view the LICENSE
  file that was distributed with this source code.
@@ -19,13 +19,17 @@
             <argument type="service" id="doctrine.orm.entity_manager" />
         </service>
 
+        <service id="sylius.behat.context.hook.session" class="Sylius\Behat\Context\Hook\SessionContext">
+            <argument type="service" id="request_stack" />
+            <argument type="service" id="session.factory" on-invalid="null" />
+        </service>
+
         <service id="sylius.behat.context.hook.test_theme" class="Sylius\Behat\Context\Hook\TestThemeContext">
             <argument type="service" id="Sylius\Bundle\ThemeBundle\Configuration\Test\TestThemeConfigurationManagerInterface" />
         </service>
 
-        <service id="sylius.behat.context.hook.email_spool" class="Sylius\Behat\Context\Hook\EmailSpoolContext">
-            <argument type="service" id="sylius.behat.email_checker"/>
-            <argument type="service" id="filesystem" />
+        <service id="sylius.behat.context.hook.mailer" class="Sylius\Behat\Context\Hook\MailerContext">
+            <argument type="service" id="test.mailer_pool"/>
         </service>
     </services>
 </container>

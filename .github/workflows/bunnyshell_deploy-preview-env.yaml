@@ -1,0 +1,91 @@
+name: Bunnyshell - Deploy Preview Environment
+on:
+  workflow_run:
+    workflows:
+      - "Bunnyshell - Prepare Preview Environment Configuration"
+    types:
+      - completed
+permissions:
+  pull-requests: write
+jobs:
+  load-artifact:
+    name: Load artifact
+    runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    outputs:
+      pr-number: ${{ env.PR_NUMBER }}
+      skip-deployment: ${{ fromJSON(env.FLAGS_JSON).skip_deployment }}
+      is-pull-request-event: ${{ fromJSON(env.EVENT_JSON).pull_request != '' }}
+      bunnyshell-yaml-contents: ${{ env.BUNNYSHELL_YAML_CONTENTS }}
+    steps:
+      - name: Download artifact
+        uses: actions/github-script@v6
+        with:
+          script: |
+            let allArtifacts = await github.rest.actions.listWorkflowRunArtifacts({
+               owner: context.repo.owner,
+               repo: context.repo.repo,
+               run_id: context.payload.workflow_run.id,
+            });
+            let matchArtifact = allArtifacts.data.artifacts.filter((artifact) => {
+              return artifact.name == "bunnyshell"
+            })[0];
+            if (matchArtifact === undefined) {
+              throw TypeError('Build Artifact not found!');
+            }
+            let download = await github.rest.actions.downloadArtifact({
+               owner: context.repo.owner,
+               repo: context.repo.repo,
+               artifact_id: matchArtifact.id,
+               archive_format: 'zip',
+            });
+            let fs = require('fs');
+            fs.writeFileSync(`${process.env.GITHUB_WORKSPACE}/artifact.zip`, Buffer.from(download.data));
+      - name: Load artifact data
+        run: |
+          unzip artifact.zip
+
+          echo 'EVENT_JSON<<EOFEVENTJSON' >> $GITHUB_ENV
+          cat event.json >> $GITHUB_ENV
+          echo -e '\nEOFEVENTJSON' >> $GITHUB_ENV
+
+          echo 'FLAGS_JSON<<EOFFLAGSJSON' >> $GITHUB_ENV
+          cat flags.json >> $GITHUB_ENV
+          echo -e '\nEOFFLAGSJSON' >> $GITHUB_ENV
+
+          if [ -f "bunnyshell.yaml" ]; then
+            echo 'BUNNYSHELL_YAML_CONTENTS<<EOFBNSYAML' >> $GITHUB_ENV
+            cat bunnyshell.yaml >> $GITHUB_ENV
+            echo -e '\nEOFBNSYAML' >> $GITHUB_ENV
+          fi
+      - name: Set variables
+        run: |
+          echo "IS_PULL_REQUEST=${{ fromJSON(env.EVENT_JSON).pull_request != '' }}" >> $GITHUB_ENV
+          echo "IS_ISSUE_COMMENT=${{ fromJSON(env.EVENT_JSON).issue.pull_request != '' }}" >> $GITHUB_ENV
+          echo "PR_NUMBER=${{ fromJSON(env.EVENT_JSON).issue.number || fromJSON(env.EVENT_JSON).number }}" >> $GITHUB_ENV
+      - name: Comment unapproved deployment
+        uses: thollander/actions-comment-pull-request@v2
+        if: ${{ fromJSON(env.FLAGS_JSON).skip_deployment }}
+        with:
+          message: |
+            ### Bunnyshell Preview Environment automatic creation skipped due to restricted files changes.
+
+            Add a comment containing `/bns:deploy` to approve the creation of the environment.
+          comment_tag: bunnyshell-preview-env
+          pr_number: ${{ env.PR_NUMBER }}
+  deploy:
+    name: Deploy Environment
+    needs: load-artifact
+    uses: bunnyshell/workflows/.github/workflows/deploy-env.yaml@v1
+    concurrency: bns-deploy-${{ needs.load-artifact.outputs.prNumber }}
+    if: ${{ github.event.workflow_run.conclusion == 'success' && needs.load-artifact.outputs.skip-deployment == 'false' }}
+    with:
+      pr-number: "${{ needs.load-artifact.outputs.pr-number }}"
+      project-id: ${{ vars.BUNNYSHELL_PROJECT_ID }}
+      cluster-id: ${{ vars.BUNNYSHELL_CLUSTER_ID }}
+      env-name: "Sylius PR #${{ needs.load-artifact.outputs.pr-number }}"
+      bunnyshell-yaml-contents: ${{ needs.load-artifact.outputs.bunnyshell-yaml-contents }}
+      comment-on-pr: true
+      deploy-as-stopped: ${{ needs.load-artifact.outputs.is-pull-request-event == 'true' }}
+    secrets:
+      bunnyshell-access-token: ${{ secrets.BUNNYSHELL_ACCESS_TOKEN }}

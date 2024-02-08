@@ -1,11 +1,12 @@
 # This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
+# (c) Sylius Sp. z o.o.
 
 default:
     suites:
         ui_managing_catalog_promotions:
             contexts:
                 - sylius.behat.context.hook.doctrine_orm
+                - sylius.behat.context.hook.session
 
                 - sylius.behat.context.transform.channel
                 - sylius.behat.context.transform.lexical
@@ -25,6 +26,7 @@ default:
 
                 - sylius.behat.context.ui.admin.notification
                 - sylius.behat.context.ui.shop.product
+                - Sylius\Behat\Context\Ui\Admin\BrowsingCatalogPromotionProductVariantsContext
                 - Sylius\Behat\Context\Ui\Admin\ManagingCatalogPromotionsContext
 
             filters:

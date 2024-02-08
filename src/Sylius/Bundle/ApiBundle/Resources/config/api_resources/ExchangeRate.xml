@@ -4,7 +4,7 @@
 
  This file is part of the Sylius package.
 
- (c) Paweł Jędrzejewski
+ (c) Sylius Sp. z o.o.
 
  For the full copyright and license information, please view the LICENSE
  file that was distributed with this source code.
@@ -16,13 +16,12 @@
            xsi:schemaLocation="https://api-platform.com/schema/metadata https://api-platform.com/schema/metadata/metadata-2.0.xsd"
 >
     <resource class="%sylius.model.exchange_rate.class%" shortName="ExchangeRate">
-        <attribute name="route_prefix">admin</attribute>
-
         <attribute name="validation_groups">sylius</attribute>
 
         <collectionOperations>
             <collectionOperation name="admin_get">
                 <attribute name="method">GET</attribute>
+                <attribute name="path">/admin/exchange-rates</attribute>
                 <attribute name="filters">
                     <attribute>Sylius\Bundle\ApiBundle\Filter\Doctrine\ExchangeRateFilter</attribute>
                 </attribute>
@@ -31,8 +30,17 @@
                 </attribute>
             </collectionOperation>
 
+            <collectionOperation name="shop_get">
+                <attribute name="method">GET</attribute>
+                <attribute name="path">/shop/exchange-rates</attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">shop:exchange_rate:read</attribute>
+                </attribute>
+            </collectionOperation>
+
             <collectionOperation name="admin_post">
                 <attribute name="method">POST</attribute>
+                <attribute name="path">/admin/exchange-rates</attribute>
                 <attribute name="denormalization_context">
                     <attribute name="groups">admin:exchange_rate:create</attribute>
                 </attribute>
@@ -42,13 +50,23 @@
         <itemOperations>
             <itemOperation name="admin_get">
                 <attribute name="method">GET</attribute>
+                <attribute name="path">/admin/exchange-rates/{id}</attribute>
                 <attribute name="normalization_context">
                     <attribute name="groups">admin:exchange_rate:read</attribute>
                 </attribute>
             </itemOperation>
 
+            <itemOperation name="shop_get">
+                <attribute name="method">GET</attribute>
+                <attribute name="path">/shop/exchange-rates/{id}</attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">shop:exchange_rate:read</attribute>
+                </attribute>
+            </itemOperation>
+
             <itemOperation name="admin_put">
                 <attribute name="method">PUT</attribute>
+                <attribute name="path">/admin/exchange-rates/{id}</attribute>
                 <attribute name="denormalization_context">
                     <attribute name="groups">admin:exchange_rate:update</attribute>
                 </attribute>
@@ -56,6 +74,7 @@
 
             <itemOperation name="admin_delete">
                 <attribute name="method">DELETE</attribute>
+                <attribute name="path">/admin/exchange-rates/{id}</attribute>
             </itemOperation>
         </itemOperations>
 

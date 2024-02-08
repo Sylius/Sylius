@@ -8,7 +8,7 @@ Feature: Viewing product's attributes in different locales
         Given the store operates on a channel named "Web"
         And that channel allows to shop using "English (United States)" and "Polish (Poland)" locales
         And it uses the "English (United States)" locale by default
-        And the store has a product "Iron shield"
+        And the store has a product "Iron Shield"
         And this product has a text attribute "material" with value "oak wood" in "English (United States)" locale
         And this product has a text attribute "material" with value "drewno dębowe" in "Polish (Poland)" locale
         And this product has a textarea attribute "shield details" with value "oak wood is a very good material." in "English (United States)" locale

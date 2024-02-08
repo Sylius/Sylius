@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -15,12 +15,17 @@ namespace Sylius\Behat\Context\Ui\Shop;
 
 use Behat\Behat\Context\Context;
 use Behat\Mink\Exception\ElementNotFoundException;
+use Sylius\Behat\Element\BrowserElementInterface;
+use Sylius\Behat\Element\Shop\CartWidgetElementInterface;
+use Sylius\Behat\Element\Shop\CheckoutSubtotalElementInterface;
 use Sylius\Behat\NotificationType;
 use Sylius\Behat\Page\Shop\Cart\SummaryPageInterface;
+use Sylius\Behat\Page\Shop\Checkout\AddressPageInterface;
 use Sylius\Behat\Page\Shop\Product\ShowPageInterface;
 use Sylius\Behat\Service\NotificationCheckerInterface;
 use Sylius\Behat\Service\SessionManagerInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
+use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Product\Model\ProductOptionInterface;
 use Webmozart\Assert\Assert;
@@ -30,13 +35,18 @@ final class CartContext implements Context
     public function __construct(
         private SharedStorageInterface $sharedStorage,
         private SummaryPageInterface $summaryPage,
+        private AddressPageInterface $addressPage,
+        private CheckoutSubtotalElementInterface $checkoutSubtotalElement,
         private ShowPageInterface $productShowPage,
+        private CartWidgetElementInterface $cartWidgetElement,
         private NotificationCheckerInterface $notificationChecker,
         private SessionManagerInterface $sessionManager,
+        private BrowserElementInterface $browserElement,
     ) {
     }
 
     /**
+     * @Given I am on the summary of my cart page
      * @When /^I see the summary of my (?:|previous )cart$/
      * @When /^I check details of my cart$/
      */
@@ -46,11 +56,28 @@ final class CartContext implements Context
     }
 
     /**
+     * @Given I've been gone for a long time
+     */
+    public function iveBeenGoneForLongTime(): void
+    {
+        $this->browserElement->resetSession();
+    }
+
+    /**
      * @When I update my cart
+     * @When I try to update my cart
      */
     public function iUpdateMyCart()
     {
         $this->summaryPage->updateCart();
+    }
+
+    /**
+     * @When I proceed to the checkout
+     */
+    public function iProceedToTheCheckout(): void
+    {
+        $this->summaryPage->checkout();
     }
 
     /**
@@ -73,6 +100,16 @@ final class CartContext implements Context
     {
         $this->summaryPage->open();
         $this->summaryPage->removeProduct($productName);
+    }
+
+    /**
+     * @When I remove :variant variant from the cart
+     */
+    public function iRemoveVariantFromTheCart(ProductVariantInterface $variant): void
+    {
+        $this->summaryPage->open();
+        $product = $variant->getProduct();
+        $this->summaryPage->removeProduct($product->getName());
     }
 
     /**
@@ -213,6 +250,7 @@ final class CartContext implements Context
 
     /**
      * @Then /^(its|theirs) price should be decreased by ("[^"]+")$/
+     * @Then /^(its|theirs) subtotal price should be decreased by ("[^"]+")$/
      * @Then /^(product "[^"]+") price should be decreased by ("[^"]+")$/
      */
     public function itsPriceShouldBeDecreasedBy(ProductInterface $product, $amount)
@@ -224,6 +262,20 @@ final class CartContext implements Context
         $regularUnitPrice = $this->summaryPage->getItemUnitRegularPrice($product->getName());
 
         Assert::same($this->getPriceFromString($itemTotal), ($quantity * $regularUnitPrice) - $amount);
+    }
+
+    /**
+     * @Then /^(product "[^"]+") price should be discounted by ("[^"]+")$/
+     */
+    public function itsPriceShouldBeDiscountedBy(ProductInterface $product, $amount)
+    {
+        $this->summaryPage->open();
+
+        $quantity = $this->summaryPage->getQuantity($product->getName());
+        $discountedUnitPrice = $this->summaryPage->getItemUnitPrice($product->getName());
+        $regularUnitPrice = $this->summaryPage->getItemUnitRegularPrice($product->getName());
+
+        Assert::same($discountedUnitPrice, ($quantity * $regularUnitPrice) - $amount);
     }
 
     /**
@@ -319,6 +371,14 @@ final class CartContext implements Context
         $this->productShowPage->addToCartWithQuantity($quantity);
 
         $this->sharedStorage->set('product', $product);
+    }
+
+    /**
+     * @When I specify product :productName quantity to :quantity
+     */
+    public function iSpecifyQuantityToInMyCart(string $productName, int $quantity): void
+    {
+        $this->summaryPage->specifyQuantity($productName, $quantity);
     }
 
     /**
@@ -483,7 +543,7 @@ final class CartContext implements Context
     }
 
     /**
-     * @Then /^I should be notified that (this product) cannot be updated$/
+     * @Then /^I should be notified that (this product) has insufficient stock$/
      */
     public function iShouldBeNotifiedThatThisProductDoesNotHaveSufficientStock(ProductInterface $product)
     {
@@ -514,6 +574,38 @@ final class CartContext implements Context
     public function itemShouldHaveImageDisplayed(int $itemNumber, string $image): void
     {
         Assert::contains($this->summaryPage->getItemImage($itemNumber), $image);
+    }
+
+    /**
+     * @Then I should see cart total quantity is :totalQuantity
+     */
+    public function iShouldSeeCartTotalQuantity(int $totalQuantity): void
+    {
+        Assert::same($this->cartWidgetElement->getCartTotalQuantity(), $totalQuantity);
+    }
+
+    /**
+     * @Then I should be on the checkout addressing page
+     */
+    public function iShouldBeOnTheCheckoutAddressingStep(): void
+    {
+        $this->addressPage->verify();
+    }
+
+    /**
+     * @Then the quantity of :productName should be :quantity
+     */
+    public function theQuantityOfShouldBe(string $productName, int $quantity): void
+    {
+        Assert::same($this->checkoutSubtotalElement->getProductQuantity($productName), $quantity);
+    }
+
+    /**
+     * @Then I should see an empty cart
+     */
+    public function iShouldSeeAnEmptyCart(): void
+    {
+        Assert::true($this->summaryPage->isEmpty());
     }
 
     private function getPriceFromString(string $price): int

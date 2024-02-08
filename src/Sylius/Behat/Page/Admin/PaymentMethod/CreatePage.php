@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -31,6 +31,11 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
             sprintf('sylius_payment_method_translations_%s_name', $languageCode),
             $name,
         );
+    }
+
+    public function cancelChanges(): void
+    {
+        $this->getElement('cancel_button')->click();
     }
 
     public function checkChannel(string $channelName): void
@@ -97,6 +102,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
+            'cancel_button' => '[data-test-cancel-changes-button]',
             'code' => '#sylius_payment_method_code',
             'enabled' => '#sylius_payment_method_enabled',
             'gateway_name' => '#sylius_payment_method_gatewayConfig_gatewayName',

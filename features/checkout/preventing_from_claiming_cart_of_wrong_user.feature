@@ -10,11 +10,11 @@ Feature: Preventing from claiming cart of a wrong user
         And the store has a product "Kotlin T-Shirt" priced at "$30.00"
         And the store has a product "Symfony T-Shirt" priced at "$100.00"
         And the store has a product "Sylius T-Shirt" priced at "$150.00"
-        And the store ships everywhere for free
-        And the store allows paying offline
+        And the store ships everywhere for Free
+        And the store allows paying Offline
         And there is a user "robb@stark.com" identified by "KingInTheNorth"
 
-    @ui @javascript @no-api
+    @ui @mink:chromedriver @no-api
     Scenario: Preventing anonymous user from claiming cart of logged in user
         Given I am logged in as "robb@stark.com"
         And I have product "PHP T-Shirt" in the cart
@@ -23,7 +23,7 @@ Feature: Preventing from claiming cart of a wrong user
         And they add product "Symfony T-Shirt" to the cart
         Then their cart total should be "$150.00"
 
-    @ui @javascript @no-api
+    @ui @mink:chromedriver @no-api
     Scenario: Preventing anonymous user from claiming cart of logged in user
         Given I am logged in as "robb@stark.com"
         And I have product "PHP T-Shirt" in the cart

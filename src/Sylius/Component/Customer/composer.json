@@ -33,7 +33,7 @@
     "require": {
         "php": "^8.0",
         "doctrine/collections": "^1.6",
-        "sylius/resource": "^1.0"
+        "sylius/resource": "^1.9"
     },
     "require-dev": {
         "phpspec/phpspec": "^7.2"
@@ -45,7 +45,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "1.9-dev"
+            "dev-main": "1.12-dev"
         }
     },
     "autoload": {

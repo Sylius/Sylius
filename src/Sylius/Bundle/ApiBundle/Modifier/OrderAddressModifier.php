@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -28,8 +28,11 @@ final class OrderAddressModifier implements OrderAddressModifierInterface
     ) {
     }
 
-    public function modify(OrderInterface $order, AddressInterface $billingAddress, ?AddressInterface $shippingAddress = null): OrderInterface
-    {
+    public function modify(
+        OrderInterface $order,
+        ?AddressInterface $billingAddress,
+        ?AddressInterface $shippingAddress = null,
+    ): OrderInterface {
         $stateMachine = $this->stateMachineFactory->get($order, OrderCheckoutTransitions::GRAPH);
 
         Assert::true(
@@ -37,27 +40,55 @@ final class OrderAddressModifier implements OrderAddressModifierInterface
             sprintf('Order with %s token cannot be addressed.', $order->getTokenValue()),
         );
 
+        $channel = $order->getChannel();
+        Assert::notNull($channel);
+
+        if ($channel->isShippingAddressInCheckoutRequired()) {
+            Assert::notNull($shippingAddress);
+            $billingAddress = $billingAddress ?? clone $shippingAddress;
+        } else {
+            Assert::notNull($billingAddress);
+            $shippingAddress = $shippingAddress ?? clone $billingAddress;
+        }
+
         /** @var AddressInterface|null $oldBillingAddress */
         $oldBillingAddress = $order->getBillingAddress();
         /** @var AddressInterface|null $oldShippingAddress */
         $oldShippingAddress = $order->getShippingAddress();
 
-        if ($oldBillingAddress !== null) {
-            $order->setBillingAddress($this->addressMapper->mapExisting($oldBillingAddress, $billingAddress));
-        } else {
-            $order->setBillingAddress($billingAddress);
-        }
-
-        $newShippingAddress = $shippingAddress ?? clone $billingAddress;
-
-        if ($oldShippingAddress !== null) {
-            $order->setShippingAddress($this->addressMapper->mapExisting($oldShippingAddress, $newShippingAddress));
-        } else {
-            $order->setShippingAddress($newShippingAddress);
-        }
+        $this->setBillingAddress($order, $oldBillingAddress, $billingAddress);
+        $this->setShippingAddress($order, $oldShippingAddress, $shippingAddress);
 
         $stateMachine->apply(OrderCheckoutTransitions::TRANSITION_ADDRESS);
 
         return $order;
+    }
+
+    private function setBillingAddress(
+        OrderInterface $order,
+        ?AddressInterface $oldBillingAddress,
+        ?AddressInterface $billingAddress,
+    ): void {
+        if ($oldBillingAddress !== null) {
+            $order->setBillingAddress($this->addressMapper->mapExisting($oldBillingAddress, $billingAddress));
+
+            return;
+        }
+
+        $order->setBillingAddress($billingAddress);
+    }
+
+    private function setShippingAddress(
+        OrderInterface $order,
+        ?AddressInterface $oldShippingAddress,
+        ?AddressInterface $shippingAddress,
+    ): void {
+        if ($oldShippingAddress !== null) {
+            $order->setShippingAddress($this->addressMapper->mapExisting($oldShippingAddress, $shippingAddress));
+
+            return;
+        }
+
+        $order->setShippingAddress($shippingAddress);
     }
 }

@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -55,6 +55,23 @@ final class CheckoutOrderDetailsContext implements Context
     }
 
     /**
+     * @When I want to pay for my order
+     */
+    public function iWantToPayForMyOrder(): void
+    {
+        $this->thankYouPage->goToTheChangePaymentMethodPage();
+    }
+
+    /**
+     * @When I try to pay for my order
+     */
+    public function iTryToPayForMyOrder(): void
+    {
+        $this->thankYouPage->goToTheChangePaymentMethodPage();
+        $this->orderDetails->pay();
+    }
+
+    /**
      * @Then I should be able to pay (again)
      */
     public function iShouldBeAbleToPay(): void
@@ -67,7 +84,7 @@ final class CheckoutOrderDetailsContext implements Context
      */
     public function iShouldNotBeAbleToPay(): void
     {
-        Assert::false($this->orderDetails->hasPayAction());
+        Assert::false($this->orderDetails->canBePaid());
     }
 
     /**
@@ -85,5 +102,13 @@ final class CheckoutOrderDetailsContext implements Context
     {
         $this->thankYouPage->goToTheChangePaymentMethodPage();
         Assert::same($this->orderDetails->getChosenPaymentMethod(), $paymentMethodName);
+    }
+
+    /**
+     * @Then I should be notified to choose a payment method
+     */
+    public function iShouldBeNotifiedToChooseAPaymentMethod(): void
+    {
+        Assert::contains($this->orderDetails->getPaymentValidationMessage(), 'Please select a payment method.');
     }
 }

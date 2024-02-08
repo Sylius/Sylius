@@ -1,5 +1,5 @@
 # This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
+# (c) Sylius Sp. z o.o.
 
 default:
     suites:
@@ -14,8 +14,12 @@ default:
 
                 - sylius.behat.context.setup.channel
                 - sylius.behat.context.setup.locale
+                - sylius.behat.context.setup.product
 
+                - sylius.behat.context.api.shop.cart
+                - sylius.behat.context.api.shop.channel
                 - sylius.behat.context.api.shop.locale
+                - sylius.behat.context.api.shop.product
                 
             filters:
                 tags: "@locales&&@api"

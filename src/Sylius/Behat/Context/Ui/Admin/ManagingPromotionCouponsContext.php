@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -38,6 +38,7 @@ final class ManagingPromotionCouponsContext implements Context
     }
 
     /**
+     * @Given /^I am browsing coupons of (this promotion)$/
      * @Given /^I browse coupons of (this promotion)$/
      * @When /^I want to view all coupons of (this promotion)$/
      * @When /^I browse all coupons of ("[^"]+" promotion)$/
@@ -234,6 +235,46 @@ final class ManagingPromotionCouponsContext implements Context
     }
 
     /**
+     * @When /^I sort coupons by (ascending|descending) number of uses$/
+     */
+    public function iSortCouponsByNumberOfUses(string $order): void
+    {
+        $this->sortBy($order, 'used');
+    }
+
+    /**
+     * @When /^I sort coupons by (ascending|descending) code$/
+     */
+    public function iSortCouponsByCode(string $order): void
+    {
+        $this->sortBy($order, 'code');
+    }
+
+    /**
+     * @When /^I sort coupons by (ascending|descending) usage limit$/
+     */
+    public function iSortCouponsByUsageLimit(string $order): void
+    {
+        $this->sortBy($order, 'usageLimit');
+    }
+
+    /**
+     * @When /^I sort coupons by (ascending|descending) usage limit per customer$/
+     */
+    public function iSortCouponsByPerCustomerUsageLimit(string $order): void
+    {
+        $this->sortBy($order, 'perCustomerUsageLimit');
+    }
+
+    /**
+     * @When /^I sort coupons by (ascending|descending) expiration date$/
+     */
+    public function iSortCouponsByExpirationDate(string $order): void
+    {
+        $this->sortBy($order, 'expiresAt');
+    }
+
+    /**
      * @Then /^there should be (0|1) coupon related to (this promotion)$/
      * @Then /^there should be (\b(?![01]\b)\d{1,9}\b) coupons related to (this promotion)$/
      * @Then /^there should still be (\d+) coupons related to (this promotion)$/
@@ -421,7 +462,7 @@ final class ManagingPromotionCouponsContext implements Context
     public function iShouldBeNotifiedOfFailure()
     {
         $this->notificationChecker->checkNotification(
-            'Error Cannot delete, the promotion coupon is in use.',
+            'Error Cannot delete, the Promotion coupon is in use.',
             NotificationType::failure(),
         );
     }
@@ -452,5 +493,26 @@ final class ManagingPromotionCouponsContext implements Context
     public function iShouldSeeTheCouponInTheList(string $couponCode): void
     {
         Assert::true($this->indexPage->isSingleResourceOnPage(['code' => $couponCode]));
+    }
+
+    /**
+     * @Then I should see :count coupons on the list
+     */
+    public function iShouldSeeCountCouponsOnTheList(int $count): void
+    {
+        Assert::same($this->indexPage->countItems(), $count);
+    }
+
+    /**
+     * @Then the first coupon should have code :code
+     */
+    public function theFirstCouponShouldHaveCode(string $code): void
+    {
+        Assert::same($this->indexPage->getColumnFields('code')[0], $code);
+    }
+
+    private function sortBy(string $order, string $field): void
+    {
+        $this->indexPage->sortBy($field, str_starts_with($order, 'de') ? 'desc' : 'asc');
     }
 }

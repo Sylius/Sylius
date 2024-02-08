@@ -1,12 +1,8 @@
 # This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
+# (c) Sylius Sp. z o.o.
 
 sylius:
     email:
-        contact_request:
-            content: 'Conţinut'
-            message_from: 'Mesaj de la'
-            subject: 'Solicitare de contact'
         order_confirmation:
             has_been_successfully_placed: 'a fost plasata cu succes.'
             subject: 'Confirmare comandă'
@@ -31,7 +27,7 @@ sylius:
     homepage:
         about_us: 'Despre noi'
         about_us_content: 'Bine ai venit la magazinul nostru, magazinul tău numărul unu online, care îți oferă cele mai bune produse. Poți alege din cele mai bune haine și pantofi din oferta noastră. (<i>Puteți modifica acest conținut suprascriind "sylius.homepage.about_us_content" în fișierul dvs. de traducere</i>)'
-        carousel_header: 'Pregătește-te! Iarna vine'
+        banner_content: 'Pregătește-te! Iarna vine'
         newsletter: 'Buletin Informativ'
         newsletter_description: 'Abonează-te la newsletter-ul nostru pentru a vedea ofertele noi care te așteaptă! (<i>Poți modifica acest conținut suprascriind "sylius. cheia omepage.newsletter_description" în fișierul de traducere</i>)'
         subscribe: 'Abonează-te'

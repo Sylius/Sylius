@@ -1,5 +1,5 @@
 # This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
+# (c) Sylius Sp. z o.o.
 
 sylius:
     email:
@@ -47,6 +47,12 @@ sylius:
                 sales:
                     header: Verkäufe
                     orders: Bestellungen
+                official_support:
+                    header: Offizieller Support
+                    sylius_plus: Sylius Plus
+                    browse_plugins: Plugins durchsuchen                    
+                    professional_services: Professionelle Dienstleistungen
+                    find_a_partner: Einen Partner finden
     ui:
         catalog_promotion:
             dates_details: Dieser Vorgang ist zeitintensiv! Bitte berücksichtigen Sie eine Verzögerung von 2-10 Minuten ab Start des angegebenen Datums. Die Verzögerung hängt von der Größe des Katalogs ab.

@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -18,22 +18,21 @@ use Doctrine\Persistence\ObjectManager;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\ApiBundle\Command\Cart\PickupCart;
+use Sylius\Bundle\CoreBundle\Factory\OrderFactoryInterface;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Repository\CustomerRepositoryInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
-use Sylius\Component\Currency\Model\CurrencyInterface;
 use Sylius\Component\Locale\Model\LocaleInterface;
-use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Generator\RandomnessGeneratorInterface;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 
 final class PickupCartHandlerSpec extends ObjectBehavior
 {
     function let(
-        FactoryInterface $cartFactory,
+        OrderFactoryInterface $cartFactory,
         OrderRepositoryInterface $cartRepository,
         ChannelRepositoryInterface $channelRepository,
         ObjectManager $orderManager,
@@ -56,7 +55,7 @@ final class PickupCartHandlerSpec extends ObjectBehavior
     }
 
     function it_picks_up_a_new_cart_for_logged_in_shop_user(
-        FactoryInterface $cartFactory,
+        OrderFactoryInterface $cartFactory,
         OrderRepositoryInterface $cartRepository,
         ChannelRepositoryInterface $channelRepository,
         CustomerInterface $customer,
@@ -65,7 +64,6 @@ final class PickupCartHandlerSpec extends ObjectBehavior
         CustomerRepositoryInterface $customerRepository,
         OrderInterface $cart,
         ChannelInterface $channel,
-        CurrencyInterface $currency,
         LocaleInterface $locale,
     ): void {
         $pickupCart = new PickupCart();
@@ -73,7 +71,6 @@ final class PickupCartHandlerSpec extends ObjectBehavior
         $pickupCart->setEmail('sample@email.com');
 
         $channelRepository->findOneByCode('code')->willReturn($channel);
-        $channel->getBaseCurrency()->willReturn($currency);
         $channel->getDefaultLocale()->willReturn($locale);
 
         $customerRepository->findOneBy(['email' => 'sample@email.com'])->willReturn($customer);
@@ -81,25 +78,51 @@ final class PickupCartHandlerSpec extends ObjectBehavior
         $cartRepository->findLatestNotEmptyCartByChannelAndCustomer($channel, $customer)->willReturn(null);
 
         $generator->generateUriSafeString(10)->willReturn('urisafestr');
-        $currency->getCode()->willReturn('USD');
         $locale->getCode()->willReturn('en_US');
 
         $channel->getLocales()->willReturn(new ArrayCollection([$locale->getWrappedObject()]));
 
-        $cartFactory->createNew()->willReturn($cart);
-        $cart->setCustomerWithAuthorization($customer)->shouldBeCalled();
-        $cart->setChannel($channel)->shouldBeCalled();
-        $cart->setCurrencyCode('USD')->shouldBeCalled();
-        $cart->setLocaleCode('en_US')->shouldBeCalled();
-        $cart->setTokenValue('urisafestr')->shouldBeCalled();
-
+        $cartFactory->createNewCart($channel, $customer, 'en_US', 'urisafestr')->willReturn($cart);
         $orderManager->persist($cart)->shouldBeCalled();
 
         $this($pickupCart);
     }
 
-    function it_picks_up_an_existing_cart_for_logged_in_shop_user(
-        FactoryInterface $cartFactory,
+    function it_picks_up_a_new_cart_for_logged_in_shop_user_when_the_user_has_no_default_address(
+        OrderFactoryInterface $cartFactory,
+        OrderRepositoryInterface $cartRepository,
+        ChannelRepositoryInterface $channelRepository,
+        CustomerInterface $customer,
+        ObjectManager $orderManager,
+        RandomnessGeneratorInterface $generator,
+        CustomerRepositoryInterface $customerRepository,
+        OrderInterface $cart,
+        ChannelInterface $channel,
+        LocaleInterface $locale,
+    ): void {
+        $pickupCart = new PickupCart();
+        $pickupCart->setChannelCode('code');
+        $pickupCart->setEmail('sample@email.com');
+
+        $channelRepository->findOneByCode('code')->willReturn($channel);
+        $channel->getDefaultLocale()->willReturn($locale);
+
+        $customerRepository->findOneBy(['email' => 'sample@email.com'])->willReturn($customer);
+
+        $cartRepository->findLatestNotEmptyCartByChannelAndCustomer($channel, $customer)->willReturn(null);
+
+        $generator->generateUriSafeString(10)->willReturn('urisafestr');
+        $locale->getCode()->willReturn('en_US');
+
+        $channel->getLocales()->willReturn(new ArrayCollection([$locale->getWrappedObject()]));
+
+        $cartFactory->createNewCart($channel, $customer, 'en_US', 'urisafestr')->willReturn($cart);
+        $orderManager->persist($cart)->shouldBeCalled();
+
+        $this($pickupCart);
+    }
+
+    function it_picks_up_an_existing_cart_with_token_for_logged_in_shop_user(
         OrderRepositoryInterface $cartRepository,
         ChannelRepositoryInterface $channelRepository,
         CustomerRepositoryInterface $customerRepository,
@@ -117,65 +140,76 @@ final class PickupCartHandlerSpec extends ObjectBehavior
         $customerRepository->findOneBy(['email' => 'sample@email.com'])->willReturn($customer);
 
         $cartRepository->findLatestNotEmptyCartByChannelAndCustomer($channel, $customer)->willReturn($cart);
+        $cart->getTokenValue()->willReturn('token');
 
-        $cartFactory->createNew()->willReturn($cart);
-        $cart->setCustomer($customer)->shouldNotBeCalled();
-        $cart->setCreatedByGuest(false)->shouldNotBeCalled();
-        $cart->setChannel($channel)->shouldNotBeCalled();
+        $orderManager->persist(Argument::any())->shouldNotBeCalled();
 
-        $orderManager->persist($cart)->shouldNotBeCalled();
+        $this($pickupCart);
+    }
+
+    function it_picks_up_an_existing_cart_without_token_for_logged_in_shop_user(
+        OrderRepositoryInterface $cartRepository,
+        ChannelRepositoryInterface $channelRepository,
+        CustomerRepositoryInterface $customerRepository,
+        CustomerInterface $customer,
+        ObjectManager $orderManager,
+        OrderInterface $cart,
+        ChannelInterface $channel,
+        RandomnessGeneratorInterface $generator,
+    ): void {
+        $pickupCart = new PickupCart();
+        $pickupCart->setChannelCode('code');
+        $pickupCart->setEmail('sample@email.com');
+
+        $channelRepository->findOneByCode('code')->willReturn($channel);
+
+        $customerRepository->findOneBy(['email' => 'sample@email.com'])->willReturn($customer);
+
+        $generator->generateUriSafeString(10)->willReturn('urisafestr');
+
+        $cartRepository->findLatestNotEmptyCartByChannelAndCustomer($channel, $customer)->willReturn($cart);
+        $orderManager->persist($cart);
 
         $this($pickupCart);
     }
 
     function it_picks_up_a_cart_for_visitor(
-        FactoryInterface $cartFactory,
+        OrderFactoryInterface $cartFactory,
         OrderRepositoryInterface $cartRepository,
         ChannelRepositoryInterface $channelRepository,
         ObjectManager $orderManager,
         RandomnessGeneratorInterface $generator,
         OrderInterface $cart,
         ChannelInterface $channel,
-        CurrencyInterface $currency,
         LocaleInterface $locale,
     ): void {
         $pickupCart = new PickupCart();
         $pickupCart->setChannelCode('code');
 
         $channelRepository->findOneByCode('code')->willReturn($channel);
-        $channel->getBaseCurrency()->willReturn($currency);
         $channel->getDefaultLocale()->willReturn($locale);
 
         $cartRepository->findLatestNotEmptyCartByChannelAndCustomer($channel, Argument::any())->shouldNotBeCalled(null);
 
         $generator->generateUriSafeString(10)->willReturn('urisafestr');
-        $currency->getCode()->willReturn('USD');
         $locale->getCode()->willReturn('en_US');
 
         $channel->getLocales()->willReturn(new ArrayCollection([$locale->getWrappedObject()]));
 
-        $cartFactory->createNew()->willReturn($cart);
-        $cart->setCustomer(Argument::any())->shouldNotBeCalled();
-        $cart->setCreatedByGuest(false)->shouldNotBeCalled();
-        $cart->setChannel($channel)->shouldBeCalled();
-        $cart->setCurrencyCode('USD')->shouldBeCalled();
-        $cart->setLocaleCode('en_US')->shouldBeCalled();
-        $cart->setTokenValue('urisafestr')->shouldBeCalled();
-
+        $cartFactory->createNewCart($channel, null, 'en_US', 'urisafestr')->willReturn($cart);
         $orderManager->persist($cart)->shouldBeCalled();
 
         $this($pickupCart);
     }
 
     function it_picks_up_a_cart_with_locale_code_for_visitor(
-        FactoryInterface $cartFactory,
+        OrderFactoryInterface $cartFactory,
         OrderRepositoryInterface $cartRepository,
         ChannelRepositoryInterface $channelRepository,
         ObjectManager $orderManager,
         RandomnessGeneratorInterface $generator,
         OrderInterface $cart,
         ChannelInterface $channel,
-        CurrencyInterface $currency,
         LocaleInterface $locale,
     ): void {
         $pickupCart = new PickupCart();
@@ -183,7 +217,6 @@ final class PickupCartHandlerSpec extends ObjectBehavior
         $pickupCart->localeCode = 'en_US';
 
         $channelRepository->findOneByCode('code')->willReturn($channel);
-        $channel->getBaseCurrency()->willReturn($currency);
         $channel->getDefaultLocale()->willReturn($locale);
         $locale->getCode()->willReturn('en_US');
         $channel->getLocales()->willReturn(new ArrayCollection([$locale->getWrappedObject()]));
@@ -191,30 +224,21 @@ final class PickupCartHandlerSpec extends ObjectBehavior
         $cartRepository->findLatestNotEmptyCartByChannelAndCustomer($channel, Argument::any())->shouldNotBeCalled(null);
 
         $generator->generateUriSafeString(10)->willReturn('urisafestr');
-        $currency->getCode()->willReturn('USD');
         $locale->getCode()->willReturn('en_US');
 
-        $cartFactory->createNew()->willReturn($cart);
-        $cart->setCustomer(Argument::any())->shouldNotBeCalled();
-        $cart->setCreatedByGuest(false)->shouldNotBeCalled();
-        $cart->setChannel($channel)->shouldBeCalled();
-        $cart->setCurrencyCode('USD')->shouldBeCalled();
-        $cart->setLocaleCode('en_US')->shouldBeCalled();
-        $cart->setTokenValue('urisafestr')->shouldBeCalled();
-
+        $cartFactory->createNewCart($channel, null, 'en_US', 'urisafestr')->willReturn($cart);
         $orderManager->persist($cart)->shouldBeCalled();
 
         $this($pickupCart);
     }
 
     function it_throws_exception_if_locale_code_is_not_correct(
-        FactoryInterface $cartFactory,
+        OrderFactoryInterface $cartFactory,
         OrderRepositoryInterface $cartRepository,
         ChannelRepositoryInterface $channelRepository,
         RandomnessGeneratorInterface $generator,
         OrderInterface $cart,
         ChannelInterface $channel,
-        CurrencyInterface $currency,
         LocaleInterface $locale,
     ): void {
         $pickupCart = new PickupCart();
@@ -222,7 +246,6 @@ final class PickupCartHandlerSpec extends ObjectBehavior
         $pickupCart->localeCode = 'ru_RU';
 
         $channelRepository->findOneByCode('code')->willReturn($channel);
-        $channel->getBaseCurrency()->willReturn($currency);
         $channel->getDefaultLocale()->willReturn($locale);
         $locale->getCode()->willReturn('en_US');
         $locales = new ArrayCollection([]);
@@ -231,12 +254,8 @@ final class PickupCartHandlerSpec extends ObjectBehavior
         $cartRepository->findLatestNotEmptyCartByChannelAndCustomer($channel, Argument::any())->shouldNotBeCalled(null);
 
         $generator->generateUriSafeString(10)->willReturn('urisafestr');
-        $currency->getCode()->willReturn('USD');
 
-        $cartFactory->createNew()->willReturn($cart);
-        $cart->setCustomer(Argument::any())->shouldNotBeCalled();
-        $cart->setCreatedByGuest(false)->shouldNotBeCalled();
-        $cart->setChannel($channel)->shouldBeCalled();
+        $cartFactory->createNewCart($channel, null, 'en_US', 'urisafestr')->willReturn($cart);
 
         $this
             ->shouldThrow(\InvalidArgumentException::class)

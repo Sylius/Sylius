@@ -8,7 +8,7 @@ Feature: Seeing an order shipping method and payment method details on summary p
         Given the store operates on a single channel in "United States"
         And the store has a product "Lannister Coat" priced at "$19.99"
         And the store allows shipping with "Cash on delivery"
-        And the store allows paying "offline"
+        And the store allows paying "Offline"
         And I am a logged in customer
 
     @ui @api

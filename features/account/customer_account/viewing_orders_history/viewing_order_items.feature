@@ -8,7 +8,7 @@ Feature: Viewing details of an order
         Given the store operates on a single channel in "United States"
         And the store has a product "Angel T-Shirt" priced at "$39.00"
         And the store has a product "Angel Mug" priced at "$19.00"
-        And the store ships everywhere for free
+        And the store ships everywhere for Free
         And the store allows paying with "Cash on Delivery"
         And I am a logged in customer
         And I placed an order "#00000666"

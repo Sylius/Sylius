@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -21,11 +21,7 @@ class OrderItemUnit implements OrderItemUnitInterface
     /** @var mixed */
     protected $id;
 
-    /**
-     * @var Collection|AdjustmentInterface[]
-     *
-     * @psalm-var Collection<array-key, AdjustmentInterface>
-     */
+    /** @var Collection<array-key, AdjustmentInterface> */
     protected $adjustments;
 
     /** @var float */
@@ -79,6 +75,7 @@ class OrderItemUnit implements OrderItemUnitInterface
         $this->addToAdjustmentsTotal($adjustment);
         $this->orderItem->recalculateUnitsTotal();
         $adjustment->setAdjustable($this);
+        $this->recalculateAdjustmentsTotal();
     }
 
     public function removeAdjustment(AdjustmentInterface $adjustment): void
@@ -91,6 +88,7 @@ class OrderItemUnit implements OrderItemUnitInterface
         $this->subtractFromAdjustmentsTotal($adjustment);
         $this->orderItem->recalculateUnitsTotal();
         $adjustment->setAdjustable(null);
+        $this->recalculateAdjustmentsTotal();
     }
 
     public function hasAdjustment(AdjustmentInterface $adjustment): bool

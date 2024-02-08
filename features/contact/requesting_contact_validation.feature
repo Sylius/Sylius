@@ -7,7 +7,7 @@ Feature: Requesting contact validation
     Background:
         Given the store operates on a single channel in "United States"
 
-    @ui
+    @ui @api
     Scenario: Trying to request contact without specifying an email
         Given this channel has contact email set as "contact@goodshop.com"
         When I want to request contact
@@ -16,7 +16,7 @@ Feature: Requesting contact validation
         And I try to send it
         Then I should be notified that the email is required
 
-    @ui
+    @ui @api
     Scenario: Trying to request contact without specifying a message
         Given this channel has contact email set as "contact@goodshop.com"
         When I want to request contact
@@ -25,7 +25,7 @@ Feature: Requesting contact validation
         And I try to send it
         Then I should be notified that the message is required
 
-    @ui
+    @ui @api
     Scenario: Trying to request contact with an invalid email address
         Given this channel has contact email set as "contact@goodshop.com"
         When I want to request contact
@@ -34,7 +34,7 @@ Feature: Requesting contact validation
         And I try to send it
         Then I should be notified that the email is invalid
 
-    @ui
+    @ui @no-api
     Scenario: Trying to request contact when a current channel has no contact email set
         Given this channel has no contact email set
         When I want to request contact

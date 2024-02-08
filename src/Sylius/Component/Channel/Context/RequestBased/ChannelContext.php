@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -45,11 +45,7 @@ final class ChannelContext implements ChannelContextInterface
 
     private function getMainRequest(): Request
     {
-        if (\method_exists($this->requestStack, 'getMainRequest')) {
-            $mainRequest = $this->requestStack->getMainRequest();
-        } else {
-            $mainRequest = $this->requestStack->getMasterRequest();
-        }
+        $mainRequest = $this->requestStack->getMainRequest();
         if (null === $mainRequest) {
             throw new \UnexpectedValueException('There are not any requests on request stack');
         }

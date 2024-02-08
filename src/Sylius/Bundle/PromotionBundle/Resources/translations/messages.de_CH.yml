@@ -1,16 +1,26 @@
 # This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
+# (c) Sylius Sp. z o.o.
 
 sylius:
     form:
         catalog_promotion:
+            action:
+                fixed_discount: Fixer Rabatt
+                percentage_discount: Prozentualer Rabatt
             description: Beschreibung
+            enabled: Aktiviert
+            end_date: Enddatum
+            label: Bezeichnung
             name: Name
             priority: Priorität
+            start_date: Startdatum
+            translations: Übersetzungen
         promotion:
             actions: Aktionen
             add_action: Aktion hinzufügen
             add_rule: Regel hinzufügen
+            applies_to_discounted: Gilt für bereits reduzierte Bestellartikel
+            applies_to_discounted_details: Mit dieser Option wird die Warenkorb Aktion auch auf bereits durch Katalog Aktionen reduzierte Produkte angewendet.
             coupon_based: Gutschein basierend
             description: Beschreibung
             ends_at: Endet am

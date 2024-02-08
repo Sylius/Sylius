@@ -1,0 +1,33 @@
+imports:
+    - { resource: "@SyliusCoreBundle/Resources/config/app/config.yml" }
+
+parameters:
+    locale: en_US
+    database_driver: pdo_sqlite
+    database_path: "%kernel.project_dir%/var/db.sql"
+
+framework:
+    secret: "ch4mb3r0f5ecr3ts"
+    default_locale: "%locale%"
+    session:
+        handler_id: ~
+        storage_factory_id: session.storage.factory.mock_file
+    test: ~
+    mailer:
+        dsn: 'null://null'
+
+security:
+    firewalls:
+        main:
+            security: false
+
+doctrine_migrations:
+    storage:
+        table_storage:
+            table_name: sylius_migrations
+
+doctrine:
+    dbal:
+        driver: "%database_driver%"
+        path: "%database_path%"
+        charset: UTF8

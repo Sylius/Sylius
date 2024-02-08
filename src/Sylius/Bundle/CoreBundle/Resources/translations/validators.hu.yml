@@ -1,5 +1,5 @@
 # This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
+# (c) Sylius Sp. z o.o.
 
 sylius:
     avatar_image:
@@ -87,8 +87,8 @@ sylius:
     user:
         email:
             unique: Ez az email cím már használatban van.
-            min: Az email címnek legalább {{ min }} karakter hosszúnak kell lennie.
-            max: Az email cím legfeljebb {{ max }} karakterből állhat.
+            min: Az email címnek legalább {{ limit }} karakter hosszúnak kell lennie.
+            max: Az email cím legfeljebb {{ limit }} karakterből állhat.
             invalid: Ez az email cím érvénytelen.
         username:
             unique: Ez a felhasználónév már használatban van.

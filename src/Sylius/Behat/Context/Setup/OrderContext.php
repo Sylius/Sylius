@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -407,6 +407,7 @@ final class OrderContext implements Context
 
     /**
      * @Given /^the customer bought a single ("[^"]+" variant of product "[^"]+")$/
+     * @Given /^the customer also bought a ("[^"]+" variant of product "[^"]+")$/
      */
     public function theCustomerBoughtSingleProductVariant(ProductVariantInterface $productVariant)
     {
@@ -747,6 +748,19 @@ final class OrderContext implements Context
         /** @var OrderInterface $order */
         $order = $this->sharedStorage->get('order');
         $this->completeCheckout($order);
+
+        $this->objectManager->flush();
+    }
+
+    /**
+     * @Given the :product product's inventory has become tracked with :numberOfItems items
+     */
+    public function theProductSInventoryHasBecameTrackedWithItems(ProductInterface $product, int $numberOfItems): void
+    {
+        /** @var ProductVariantInterface $productVariant */
+        $productVariant = $product->getVariants()->first();
+        $productVariant->setTracked(true);
+        $productVariant->setOnHand($numberOfItems);
 
         $this->objectManager->flush();
     }

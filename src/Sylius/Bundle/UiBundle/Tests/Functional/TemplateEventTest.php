@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -15,6 +15,7 @@ namespace Sylius\Bundle\UiBundle\Tests\Functional;
 
 use PHPUnit\Framework\Assert;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
+use Twig\Environment;
 
 final class TemplateEventTest extends KernelTestCase
 {
@@ -24,7 +25,7 @@ final class TemplateEventTest extends KernelTestCase
     {
         self::bootKernel();
 
-        $this->twig = self::$container->get('twig');
+        $this->twig = self::getContainer()->get(Environment::class);
     }
 
     /** @test */
@@ -69,6 +70,18 @@ final class TemplateEventTest extends KernelTestCase
             'Block: option1=foo, option2=baz',
         ];
         $renderedLines = array_values(array_filter(explode("\n", $this->twig->render('contextTemplateBlock.txt.twig'))));
+
+        Assert::assertSame($expectedLines, $renderedLines);
+    }
+
+    /** @test */
+    public function it_passes_context_with_custom_context_provider_defined_in_block_configuration_during_rendering(): void
+    {
+        // See Kernel.php for the configuration resulting in those lines
+        $expectedLines = [
+            'Block: option1=foo, option2=baz, custom=yolo',
+        ];
+        $renderedLines = array_values(array_filter(explode("\n", $this->twig->render('customContextProvider.txt.twig'))));
 
         Assert::assertSame($expectedLines, $renderedLines);
     }

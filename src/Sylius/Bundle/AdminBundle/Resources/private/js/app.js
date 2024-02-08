@@ -1,7 +1,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -54,12 +54,24 @@ $(document).ready(() => {
   });
 
   $('.sylius-update-product-variants').moveProductVariant($('.sylius-product-variant-position'));
-  $('.sylius-taxon-move-up').taxonMoveUp();
-  $('.sylius-taxon-move-down').taxonMoveDown();
+
+  $('.sylius-taxon-move-up').taxonMove();
+  $('.sylius-taxon-move-down').taxonMove();
 
   $('#sylius_shipping_method_calculator').handlePrototypes({
     prototypePrefix: 'sylius_shipping_method_calculator_calculators',
     containerSelector: '.configuration',
+  }).change(() => {
+    $('.ui.tabular.menu .item').tab();
+  });
+  setTimeout(() => {
+    $('.ui.tabular.menu .item').tab();
+  }, 50);
+
+  $('#sylius_shipping_method_rules > a[data-form-collection="add"]').on('click', () => {
+    setTimeout(() => {
+      $('select[name^="sylius_shipping_method[rules]"][name$="[type]"]').last().change();
+    }, 50);
   });
 
   $(document).setFromCollectionOnClickEventHandler('sylius_promotion_actions', 'actions');
@@ -113,6 +125,9 @@ $(document).ready(() => {
   $('body').on('DOMNodeInserted', '[data-form-collection="item"]', (event) => {
     if ($(event.target).find('.ui.accordion').length > 0) {
       $(event.target).find('.ui.accordion').accordion();
+    }
+    if ($(event.target).find('.ui.tabular.menu').length > 0) {
+      $(event.target).find('.ui.tabular.menu .item').tab();
     }
   });
 

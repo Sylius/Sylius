@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -21,17 +21,17 @@ use Sylius\Component\Core\Model\ProductInterface;
 
 final class SharedStorageSpec extends ObjectBehavior
 {
-    function it_is_initializable()
+    function it_is_initializable(): void
     {
         $this->shouldHaveType(SharedStorage::class);
     }
 
-    function it_implements_shared_storage_interface()
+    function it_implements_shared_storage_interface(): void
     {
         $this->shouldImplement(SharedStorageInterface::class);
     }
 
-    function it_has_resources_in_clipboard(ChannelInterface $channel, ProductInterface $product)
+    function it_has_resources_in_clipboard(ChannelInterface $channel, ProductInterface $product): void
     {
         $this->set('channel1', $channel);
         $this->get('channel1')->shouldReturn($channel);
@@ -40,7 +40,7 @@ final class SharedStorageSpec extends ObjectBehavior
         $this->get('product1')->shouldReturn($product);
     }
 
-    function it_returns_latest_added_resource(ChannelInterface $channel, ProductInterface $product)
+    function it_returns_latest_added_resource(ChannelInterface $channel, ProductInterface $product): void
     {
         $this->set('channel1', $channel);
         $this->set('product1', $product);
@@ -48,7 +48,7 @@ final class SharedStorageSpec extends ObjectBehavior
         $this->getLatestResource()->shouldReturn($product);
     }
 
-    function it_overrides_existing_resource_key(ChannelInterface $firstChannel, ChannelInterface $secondChannel)
+    function it_overrides_existing_resource_key(ChannelInterface $firstChannel, ChannelInterface $secondChannel): void
     {
         $this->set('channel', $firstChannel);
         $this->set('channel', $secondChannel);
@@ -56,17 +56,25 @@ final class SharedStorageSpec extends ObjectBehavior
         $this->get('channel')->shouldReturn($secondChannel);
     }
 
-    function its_clipboard_can_be_set(ChannelInterface $channel)
+    function its_clipboard_can_be_set(ChannelInterface $channel): void
     {
         $this->setClipboard(['channel' => $channel]);
 
         $this->get('channel')->shouldReturn($channel);
     }
 
-    function it_checks_if_resource_under_given_key_exist(ChannelInterface $channel)
+    function it_checks_if_resource_under_given_key_exist(ChannelInterface $channel): void
     {
         $this->setClipboard(['channel' => $channel]);
 
         $this->has('channel')->shouldReturn(true);
+    }
+
+    function it_removes_existing_key(): void
+    {
+        $this->set('key', 'value');
+        $this->remove('key');
+
+        $this->has('key')->shouldReturn(false);
     }
 }

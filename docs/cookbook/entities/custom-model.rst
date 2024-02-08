@@ -195,7 +195,7 @@ Having a grid prepared we can configure routing for the entity administration:
 
 .. tip::
 
-    To see what you can do with your new entity access the ``http://localhost:8000/admin/suppliers/`` url.
+    To see what you can do with your new entity access the ``https://localhost:8000/admin/suppliers/`` url.
 
 Learn more
 ----------

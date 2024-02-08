@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -17,8 +17,9 @@ use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\Resource\Model\TimestampableInterface;
 use Sylius\Component\Resource\Model\ToggleableInterface;
+use SyliusLabs\Polyfill\Symfony\Security\Core\Encoder\EncoderAwareInterface;
 use SyliusLabs\Polyfill\Symfony\Security\Core\User\AdvancedUserInterface;
-use Symfony\Component\Security\Core\Encoder\EncoderAwareInterface;
+use Symfony\Component\PasswordHasher\Hasher\PasswordHasherAwareInterface;
 
 interface UserInterface extends
     AdvancedUserInterface,
@@ -27,7 +28,8 @@ interface UserInterface extends
     \Serializable,
     TimestampableInterface,
     ToggleableInterface,
-    EncoderAwareInterface
+    EncoderAwareInterface,
+    PasswordHasherAwareInterface
 {
     public const DEFAULT_ROLE = 'ROLE_USER';
 
@@ -100,9 +102,7 @@ interface UserInterface extends
     public function removeRole(string $role): void;
 
     /**
-     * @return Collection|UserOAuthInterface[]
-     *
-     * @psalm-return Collection<array-key, UserOAuthInterface>
+     * @return Collection<array-key, UserOAuthInterface>
      */
     public function getOAuthAccounts(): Collection;
 

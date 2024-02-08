@@ -20,6 +20,6 @@
         <env name="SHELL_VERBOSITY" value="-1" />
         <!-- ###- symfony/framework-bundle ### -->
 
-        <server name="KERNEL_CLASS" value="Sylius\Bundle\CoreBundle\Tests\TestKernel" />
+        <server name="KERNEL_CLASS" value="\Sylius\Bundle\CoreBundle\Application\Kernel" />
     </php>
 </phpunit>

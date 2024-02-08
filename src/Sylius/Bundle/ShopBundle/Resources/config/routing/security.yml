@@ -1,11 +1,11 @@
 # This file is a part of the Sylius package.
-# (c) Paweł Jędrzejewski
+# (c) Sylius Sp. z o.o.
 
 sylius_shop_login:
     path: /login
     methods: [GET]
     defaults:
-        _controller: sylius.controller.security:loginAction
+        _controller: sylius.controller.security::loginAction
         _sylius:
             template: "@SyliusShop/login.html.twig"
             logged_in_route: sylius_shop_account_dashboard
@@ -14,7 +14,7 @@ sylius_shop_login_check:
     path: /login-check
     methods: [POST]
     defaults:
-        _controller: sylius.controller.security:checkAction
+        _controller: sylius.controller.security::checkAction
 
 sylius_shop_logout:
     path: /logout
@@ -24,7 +24,7 @@ sylius_shop_register:
     path: /register
     methods: [GET, POST]
     defaults:
-        _controller: sylius.controller.customer:createAction
+        _controller: sylius.controller.customer::createAction
         _sylius:
             template: "@SyliusShop/register.html.twig"
             form: Sylius\Bundle\CoreBundle\Form\Type\Customer\CustomerRegistrationType
@@ -37,7 +37,7 @@ sylius_shop_register_after_checkout:
     path: /register-after-checkout/{tokenValue}
     methods: [GET]
     defaults:
-        _controller: sylius.controller.customer:createAction
+        _controller: sylius.controller.customer::createAction
         _sylius:
             form: Sylius\Bundle\CoreBundle\Form\Type\Customer\CustomerRegistrationType
             factory:
@@ -54,7 +54,7 @@ sylius_shop_request_password_reset_token:
     path: /forgotten-password
     methods: [GET, POST]
     defaults:
-        _controller: sylius.controller.shop_user:requestPasswordResetTokenAction
+        _controller: sylius.controller.shop_user::requestPasswordResetTokenAction
         _sylius:
             template: "@SyliusShop/Account/requestPasswordReset.html.twig"
             redirect: sylius_shop_login
@@ -63,7 +63,7 @@ sylius_shop_password_reset:
     path: /forgotten-password/{token}
     methods: [GET, POST]
     defaults:
-        _controller: sylius.controller.shop_user:resetPasswordAction
+        _controller: sylius.controller.shop_user::resetPasswordAction
         _sylius:
             template: "@SyliusShop/Account/resetPassword.html.twig"
             redirect: sylius_shop_login

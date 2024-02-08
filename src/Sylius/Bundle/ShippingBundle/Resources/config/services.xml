@@ -4,7 +4,7 @@
 
  This file is part of the Sylius package.
 
- (c) Paweł Jędrzejewski
+ (c) Sylius Sp. z o.o.
 
  For the full copyright and license information, please view the LICENSE
  file that was distributed with this source code.
@@ -74,7 +74,7 @@
         </service>
 
         <service id="sylius.calendar" class="Sylius\Bundle\ShippingBundle\Provider\Calendar">
-            <deprecated>The "%service_id%" is deprecated since Sylius 1.11 and will be removed in 2.0. Use "Sylius\Calendar\Provider\DateTimeProviderInterface" instead.</deprecated>
+            <deprecated package="sylius/sylius" version="1.11">The "%service_id%" is deprecated since Sylius 1.11 and will be removed in 2.0. Use "Sylius\Calendar\Provider\DateTimeProviderInterface" instead.</deprecated>
         </service>
 
         <service id="sylius.shipping_date_assigner" class="Sylius\Bundle\ShippingBundle\Assigner\ShippingDateAssigner">

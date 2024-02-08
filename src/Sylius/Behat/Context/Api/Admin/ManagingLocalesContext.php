@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -16,6 +16,7 @@ namespace Sylius\Behat\Context\Api\Admin;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
+use Sylius\Behat\Context\Api\Resources;
 use Webmozart\Assert\Assert;
 
 final class ManagingLocalesContext implements Context
@@ -31,11 +32,12 @@ final class ManagingLocalesContext implements Context
      */
     public function iWantToAddNewLocale(): void
     {
-        $this->client->buildCreateRequest();
+        $this->client->buildCreateRequest(Resources::LOCALES);
     }
 
     /**
      * @When I choose :localeCode
+     * @When I set code to :code
      * @When I do not choose a code
      */
     public function iChoose(string $localeCode = ''): void
@@ -67,7 +69,7 @@ final class ManagingLocalesContext implements Context
      */
     public function theStoreShouldBeAvailableInTheLanguage(string $localeCode): void
     {
-        $response = $this->client->index();
+        $response = $this->client->index(Resources::LOCALES);
         Assert::true(
             $this->responseChecker->hasItemWithValue($response, 'code', $localeCode),
             sprintf('There is no locale with code "%s"', $localeCode),
@@ -99,5 +101,18 @@ final class ManagingLocalesContext implements Context
             'Locale has been created successfully, but it should not',
         );
         Assert::same($this->responseChecker->getError($response), 'code: Please choose locale code.');
+    }
+
+    /**
+     * @Then I should be notified that the code is invalid
+     */
+    public function iShouldBeNotifiedThatTheCodeIsInvalid(): void
+    {
+        $response = $this->client->getLastResponse();
+        Assert::false(
+            $this->responseChecker->isCreationSuccessful($response),
+            'Locale has been created successfully, but it should not',
+        );
+        Assert::same($this->responseChecker->getError($response), 'code: This value is not a valid locale code.');
     }
 }

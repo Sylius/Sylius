@@ -29,11 +29,11 @@
     ],
     "require": {
         "php": "^8.0",
-        "behat/transliterator": "^1.1",
-        "sylius/attribute": "^1.6",
-        "sylius/resource": "^1.7",
-        "symfony/polyfill-iconv": "^1.6",
-        "webmozart/assert": "^1.8"
+        "behat/transliterator": "^1.3",
+        "sylius/attribute": "^1.12",
+        "sylius/resource": "^1.9",
+        "symfony/polyfill-iconv": "^1.17",
+        "webmozart/assert": "^1.9"
     },
     "require-dev": {
         "phpspec/phpspec": "^7.2"
@@ -48,7 +48,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "1.9-dev"
+            "dev-main": "1.12-dev"
         }
     },
     "autoload": {

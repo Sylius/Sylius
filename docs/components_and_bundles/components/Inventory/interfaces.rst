@@ -24,21 +24,12 @@ This interface should be implemented by model representing a single InventoryUni
 .. note::
     This interface extends `TimestampableInterface <https://github.com/Sylius/SyliusResourceBundle/blob/master/src/Component/Model/TimestampableInterface.php>`_.
 
-    For more detailed information go to `Sylius API InventoryUnitInterface`_.
-
-.. _Sylius API InventoryUnitInterface: http://api.sylius.com/Sylius/Component/Inventory/Model/InventoryUnitInterface.html
-
 .. _component_inventory_model_stockable-interface:
 
 StockableInterface
 ~~~~~~~~~~~~~~~~~~
 
 This interface provides basic operations for any model that can be stored.
-
-.. note::
-    For more detailed information go to `Sylius API StockableInterface`_.
-
-.. _Sylius API StockableInterface: http://api.sylius.com/Sylius/Component/Inventory/Model/StockableInterface.html
 
 Service Interfaces
 ------------------
@@ -50,21 +41,11 @@ AvailabilityCheckerInterface
 
 This interface provides methods for checking availability of stockable objects.
 
-.. note::
-    For more detailed information go to `Sylius API AvailabilityCheckerInterface`_.
-
-.. _Sylius API AvailabilityCheckerInterface: http://api.sylius.com/Sylius/Component/Inventory/Checker/AvailabilityCheckerInterface.html
-
 .. _component_inventory_factory_inventory-unit-factory-interface:
 
 InventoryUnitFactoryInterface
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 This interface is implemented by services responsible for creating collection of new inventory units.
-
-.. note::
-    For more detailed information go to `Sylius API InventoryUnitFactoryInterface`_.
-
-.. _Sylius API InventoryUnitFactoryInterface: http://api.sylius.com/Sylius/Component/Inventory/Factory/InventoryUnitFactoryInterface.html
 
 .. _component_inventory_operator_inventory-operator-interface:

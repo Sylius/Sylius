@@ -15,19 +15,19 @@ Installing Sylius Plus as a plugin to a Sylius application
 +---------------+-----------------------+
 | PHP           | ^8.0                  |
 +---------------+-----------------------+
-| sylius/sylius | ^1.10.1               |
+| sylius/sylius | ~1.11.2 || ~1.12.0    |
 +---------------+-----------------------+
-| Symfony       | ^4.4 || ^5.4          |
+| Symfony       | ^5.4 || ^6.0          |
 +---------------+-----------------------+
 
 **0.** Prepare project:
 
 .. tip::
 
-    If it is a new project you are initiating, then first install Sylius-Standard in **version ^1.11** according to
+    If it is a new project you are initiating, then first install Sylius-Standard in **version ^1.11 or ^1.12** according to
     :doc:`these instructions </book/installation/installation>`.
 
-    If you're installing Plus package to an existing project, then make sure you're upgraded to ``sylius/sylius ^1.11``.
+    If you're installing Plus package to an existing project, then make sure you're upgraded to ``sylius/sylius ^1.11`` or ``sylius/sylius ^1.12``.
 
 **1.** Configure access to the private Packagist package in composer by using the Access Token you have been given with your license.
 
@@ -40,7 +40,7 @@ Installing Sylius Plus as a plugin to a Sylius application
 .. code-block:: bash
 
     composer config repositories.plus composer https://sylius.repo.packagist.com/ShortNameOfYourOrganization/
-    composer require "sylius/plus:^1.0.0-ALPHA.7" --no-update
+    composer require "sylius/plus:^1.0.0@beta" --no-update
     composer update --no-scripts
     composer sync-recipes
 
@@ -90,6 +90,9 @@ Installing Sylius Plus as a plugin to a Sylius application
         resource: "@SyliusPlusPlugin/Resources/config/admin_routing.yaml"
         prefix: /admin
 
+.. warning:: Skip `sylius_plus_shop` if you are not using SyliusShopBundle
+          and `sylius_plus_admin` if you are not using SyliusAdminBundle.
+
 **6.** Update security providers in ``config/packages/security.yaml``:
 
 .. code-block:: yaml
@@ -122,7 +125,6 @@ Installing Sylius Plus as a plugin to a Sylius application
 
     use Doctrine\Common\Collections\ArrayCollection;
     use Doctrine\ORM\Mapping as ORM;
-    use Sylius\Component\Channel\Model\ChannelAwareInterface;
     use Sylius\Component\Core\Model\AdminUser as BaseAdminUser;
     use Sylius\Component\Core\Model\AdminUserInterface;
     use Sylius\Plus\ChannelAdmin\Domain\Model\AdminChannelAwareTrait;
@@ -136,12 +138,12 @@ Installing Sylius Plus as a plugin to a Sylius application
      * @ORM\Entity
      * @ORM\Table(name="sylius_admin_user")
      */
-    class AdminUser extends BaseAdminUser implements AdminUserInterface, RbacAdminUserInterface, ChannelAwareInterface, LastLoginIpAwareInterface
+    class AdminUser extends BaseAdminUser implements AdminUserInterface, RbacAdminUserInterface, LastLoginIpAwareInterface
     {
         use AdminChannelAwareTrait;
         use LastLoginIpAwareTrait;
-        use ToggleablePermissionCheckerTrait;
         use RoleableTrait;
+        use ToggleablePermissionCheckerTrait;
 
         public function __construct()
         {
@@ -176,9 +178,9 @@ Installing Sylius Plus as a plugin to a Sylius application
      */
     class Channel extends BaseChannel implements ChannelInterface, ReturnsChannelInterface, BusinessUnitsChannelInterface, CustomerPoolsChannelInterface
     {
-        use ReturnRequestsAllowedAwareTrait;
-        use CustomerPoolAwareTrait;
         use BusinessUnitAwareTrait;
+        use CustomerPoolAwareTrait;
+        use ReturnRequestsAllowedAwareTrait;
     }
 
 .. code-block:: php
@@ -350,13 +352,7 @@ your application's ``.env`` file:
 
         bin/console sylius:install -s plus -n
 
-**11.** Copy templates that are overridden by Sylius Plus into ``templates/bundles``:
-
-.. code-block:: bash
-
-    cp -fr vendor/sylius/plus/src/Resources/templates/bundles/* templates/bundles
-
-**12.** Install JS libraries using Yarn:
+**11.** Install JS libraries using Yarn:
 
 .. code-block:: bash
 
@@ -364,14 +360,14 @@ your application's ``.env`` file:
     yarn build
     bin/console assets:install --ansi
 
-**13.** Rebuild cache for proper display of all translations:
+**12.** Rebuild cache for proper display of all translations:
 
 .. code-block:: bash
 
     bin/console cache:clear
     bin/console cache:warmup
 
-**14.** For more details check the installation guides for all plugins installed as dependencies with Sylius Plus.
+**13.** For more details check the installation guides for all plugins installed as dependencies with Sylius Plus.
 
 * `Sylius/InvoicingPlugin <https://github.com/Sylius/InvoicingPlugin/blob/master/README.md#installation>`_
 * `Sylius/RefundPlugin <https://github.com/Sylius/RefundPlugin/blob/master/README.md#installation>`_

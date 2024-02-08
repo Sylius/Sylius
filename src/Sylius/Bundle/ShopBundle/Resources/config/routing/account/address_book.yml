@@ -1,11 +1,11 @@
 # This file is a part of the Sylius package.
-# (c) Paweł Jędrzejewski
+# (c) Sylius Sp. z o.o.
 
 sylius_shop_account_address_book_index:
     path: /
     methods: [GET]
     defaults:
-        _controller: sylius.controller.address:indexAction
+        _controller: sylius.controller.address::indexAction
         _sylius:
             section: shop_account
             template: "@SyliusShop/Account/AddressBook/index.html.twig"
@@ -19,7 +19,7 @@ sylius_shop_account_address_book_create:
     path: /add
     methods: [GET, POST]
     defaults:
-        _controller: sylius.controller.address:createAction
+        _controller: sylius.controller.address::createAction
         _sylius:
             section: shop_account
             template: "@SyliusShop/Account/AddressBook/create.html.twig"
@@ -36,7 +36,7 @@ sylius_shop_account_address_book_update:
     path: /{id}/edit
     methods: [GET, PUT]
     defaults:
-        _controller: sylius.controller.address:updateAction
+        _controller: sylius.controller.address::updateAction
         _sylius:
             section: shop_account
             template: "@SyliusShop/Account/AddressBook/update.html.twig"
@@ -53,7 +53,7 @@ sylius_shop_account_address_book_delete:
     path: /{id}
     methods: [DELETE]
     defaults:
-        _controller: sylius.controller.address:deleteAction
+        _controller: sylius.controller.address::deleteAction
         _sylius:
             section: shop_account
             repository:
@@ -67,7 +67,7 @@ sylius_shop_account_address_book_set_as_default:
     path: /{id}/set-as-default
     methods: [GET, PATCH]
     defaults:
-        _controller: sylius.controller.customer:updateAction
+        _controller: sylius.controller.customer::updateAction
         _sylius:
             section: shop_account
             template: "@SyliusShop/Account/AddressBook/_defaultAddressForm.html.twig"

@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -61,9 +61,7 @@ interface PromotionInterface extends CodeAwareInterface, TimestampableInterface,
     public function setCouponBased(?bool $couponBased): void;
 
     /**
-     * @return Collection|PromotionCouponInterface[]
-     *
-     * @psalm-return Collection<array-key, PromotionCouponInterface>
+     * @return Collection<array-key, PromotionCouponInterface>
      */
     public function getCoupons(): Collection;
 
@@ -76,9 +74,7 @@ interface PromotionInterface extends CodeAwareInterface, TimestampableInterface,
     public function removeCoupon(PromotionCouponInterface $coupon): void;
 
     /**
-     * @return Collection|PromotionRuleInterface[]
-     *
-     * @psalm-return Collection<array-key, PromotionRuleInterface>
+     * @return Collection<array-key, PromotionRuleInterface>
      */
     public function getRules(): Collection;
 
@@ -91,9 +87,7 @@ interface PromotionInterface extends CodeAwareInterface, TimestampableInterface,
     public function removeRule(PromotionRuleInterface $rule): void;
 
     /**
-     * @return Collection|PromotionActionInterface[]
-     *
-     * @psalm-return Collection<array-key, PromotionActionInterface>
+     * @return Collection<array-key, PromotionActionInterface>
      */
     public function getActions(): Collection;
 

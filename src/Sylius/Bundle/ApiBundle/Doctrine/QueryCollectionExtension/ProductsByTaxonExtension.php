@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -51,8 +51,13 @@ final class ProductsByTaxonExtension implements ContextAwareQueryCollectionExten
         $this->addSortingToQuery($queryBuilder, $taxonCode, $queryNameGenerator);
     }
 
-    private function addSortingToQuery(QueryBuilder $queryBuilder, string $taxonCode, QueryNameGeneratorInterface $queryNameGenerator): void
+    /**
+     * @param array<string>|string $taxonCode
+     */
+    private function addSortingToQuery(QueryBuilder $queryBuilder, array|string $taxonCode, QueryNameGeneratorInterface $queryNameGenerator): void
     {
+        $taxonCode = is_array($taxonCode) ? $taxonCode : [$taxonCode];
+
         $rootAlias = $queryBuilder->getRootAliases()[0];
         $taxonCodeParameterName = $queryNameGenerator->generateParameterName('taxonCode');
         $productTaxonAliasName = $queryNameGenerator->generateJoinAlias('productTaxons');
@@ -70,7 +75,7 @@ final class ProductsByTaxonExtension implements ContextAwareQueryCollectionExten
                 sprintf('%s.taxon', $productTaxonAliasName),
                 $taxonAliasName,
                 'WITH',
-                sprintf('%s.code = :%s', $taxonAliasName, $taxonCodeParameterName),
+                sprintf('%s.code IN (:%s)', $taxonAliasName, $taxonCodeParameterName),
             )
             ->orderBy(sprintf('%s.position', $productTaxonAliasName), 'ASC')
             ->setParameter($taxonCodeParameterName, $taxonCode)

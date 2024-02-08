@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -69,6 +69,14 @@ final class ProductAssociationContext implements Context
         foreach ($names as $name) {
             $this->createProductAssociationType($name);
         }
+    }
+
+    /**
+     * @Given the store has :firstName product association type
+     */
+    public function theStoreHasProductAssociationType($name)
+    {
+        $this->createProductAssociationType($name);
     }
 
     /**

@@ -1,5 +1,5 @@
 # This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
+# (c) Sylius Sp. z o.o.
 
 sylius:
     gateway_config:
@@ -7,7 +7,7 @@ sylius:
             password:
                 not_blank: Veuillez entrer votre mot de passe PayPal.
             signature:
-                not_blank: Veuillez entrer la signature PayPal.
+                not_blank: Veuillez entrer la signature Paypal.
             username:
                 not_blank: Veuillez entrer votre nom d'utilisateur PayPal.
         stripe:

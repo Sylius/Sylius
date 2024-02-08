@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -34,9 +34,11 @@ final class RemoveAvatarAction
 
     public function __invoke(Request $request): Response
     {
-        $userId = $request->attributes->get('id');
+        $userId = $request->attributes->get('id', '');
 
-        if (!$this->csrfTokenManager->isTokenValid(new CsrfToken($userId, (string) $request->query->get('_csrf_token')))) {
+        if (!$this->csrfTokenManager->isTokenValid(
+            new CsrfToken($userId, (string) $request->query->get('_csrf_token', '')),
+        )) {
             throw new HttpException(Response::HTTP_FORBIDDEN, 'Invalid csrf token.');
         }
 

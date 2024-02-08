@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -18,11 +18,9 @@ use Sylius\Bundle\ApiBundle\Command\Account\SendResetPasswordEmail;
 use Sylius\Bundle\ApiBundle\CommandHandler\Account\SendResetPasswordEmailHandler;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
-use Sylius\Component\Core\Test\Services\EmailChecker;
 use Sylius\Component\User\Model\UserInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
-use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 final class SendResetPasswordEmailHandlerTest extends KernelTestCase
@@ -32,18 +30,10 @@ final class SendResetPasswordEmailHandlerTest extends KernelTestCase
      */
     public function it_sends_password_reset_token_email_without_hostname(): void
     {
-        $container = self::bootKernel()->getContainer();
-
-        /** @var Filesystem $filesystem */
-        $filesystem = $container->get('filesystem');
+        $container = self::getContainer();
 
         /** @var TranslatorInterface $translator */
         $translator = $container->get('translator');
-
-        /** @var EmailChecker $emailChecker */
-        $emailChecker = $container->get('sylius.behat.email_checker');
-
-        $filesystem->remove($emailChecker->getSpoolDirectory());
 
         $emailSender = $container->get('sylius.email_sender');
 
@@ -74,11 +64,13 @@ final class SendResetPasswordEmailHandlerTest extends KernelTestCase
             'en_US'
         ));
 
-        self::assertSame(1, $emailChecker->countMessagesTo('user@example.com'));
-        self::assertTrue($emailChecker->hasMessageTo(
+        self::assertEmailCount(1);
+        $email = self::getMailerMessage();
+        self::assertEmailAddressContains($email, 'To', 'user@example.com');
+        self::assertEmailHtmlBodyContains(
+            $email,
             $translator->trans('sylius.email.password_reset.to_reset_your_password', [], null, 'en_US'),
-            'user@example.com'
-        ));
+        );
     }
 
     /**
@@ -86,18 +78,10 @@ final class SendResetPasswordEmailHandlerTest extends KernelTestCase
      */
     public function it_sends_password_reset_token_email_with_hostname(): void
     {
-        $container = self::bootKernel()->getContainer();
-
-        /** @var Filesystem $filesystem */
-        $filesystem = $container->get('filesystem');
+        $container = self::getContainer();
 
         /** @var TranslatorInterface $translator */
         $translator = $container->get('translator');
-
-        /** @var EmailChecker $emailChecker */
-        $emailChecker = $container->get('sylius.behat.email_checker');
-
-        $filesystem->remove($emailChecker->getSpoolDirectory());
 
         $emailSender = $container->get('sylius.email_sender');
 
@@ -128,10 +112,12 @@ final class SendResetPasswordEmailHandlerTest extends KernelTestCase
             'en_US'
         ));
 
-        self::assertSame(1, $emailChecker->countMessagesTo('user@example.com'));
-        self::assertTrue($emailChecker->hasMessageTo(
+        self::assertEmailCount(1);
+        $email = self::getMailerMessage();
+        self::assertEmailAddressContains($email, 'To', 'user@example.com');
+        self::assertEmailHtmlBodyContains(
+            $email,
             $translator->trans('sylius.email.password_reset.to_reset_your_password', [], null, 'en_US'),
-            'user@example.com'
-        ));
+        );
     }
 }

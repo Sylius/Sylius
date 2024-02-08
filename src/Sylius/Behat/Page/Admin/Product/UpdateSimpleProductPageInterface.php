@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -50,6 +50,8 @@ interface UpdateSimpleProductPageInterface extends BaseUpdatePageInterface
     public function isMainTaxonChosen(string $taxonName): bool;
 
     public function selectMainTaxon(TaxonInterface $taxon): void;
+
+    public function isTaxonVisibleInMainTaxonList(string $taxonName): bool;
 
     public function selectProductTaxon(TaxonInterface $taxon): void;
 
@@ -107,6 +109,8 @@ interface UpdateSimpleProductPageInterface extends BaseUpdatePageInterface
     public function goToVariantGeneration(): void;
 
     public function hasInventoryTab(): bool;
+
+    public function getShowProductInSingleChannelUrl(): string;
 
     public function isShowInShopButtonDisabled(): bool;
 

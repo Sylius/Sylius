@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -23,14 +23,15 @@ final class ApiPlatformSecurityClient implements ApiSecurityClientInterface
 
     public function __construct(
         private AbstractBrowser $client,
-        private string $section,
         private SharedStorageInterface $sharedStorage,
+        private string $apiUrlPrefix,
+        private string $section,
     ) {
     }
 
     public function prepareLoginRequest(): void
     {
-        $this->request['url'] = sprintf('/api/v2/%s/authentication-token', $this->section);
+        $this->request['url'] = sprintf('%s/%s/authentication-token', $this->apiUrlPrefix, $this->section);
         $this->request['method'] = 'POST';
     }
 

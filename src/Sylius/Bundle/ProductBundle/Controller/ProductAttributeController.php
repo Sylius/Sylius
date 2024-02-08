@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -17,6 +17,7 @@ use Sylius\Bundle\ProductBundle\Form\Type\ProductAttributeChoiceType;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Sylius\Component\Attribute\Model\AttributeInterface;
 use Sylius\Component\Locale\Context\LocaleContextInterface;
+use Sylius\Component\Product\Model\ProductAttribute;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -50,13 +51,12 @@ class ProductAttributeController extends ResourceController
     {
         $template = $request->attributes->get('template', '@SyliusAttribute/attributeValueForms.html.twig');
 
-        $form = $this->get('form.factory')->create(ProductAttributeChoiceType::class, null, [
-            'multiple' => true,
+        /** @var ProductAttribute[] $attributes */
+        $attributes = $this->repository->findBy([
+            'code' => $request->query->all('sylius_product_attribute_choice'),
         ]);
-        $form->handleRequest($request);
 
-        $attributes = $form->getData();
-        if (null === $attributes) {
+        if (empty($attributes)) {
             throw new BadRequestHttpException();
         }
 

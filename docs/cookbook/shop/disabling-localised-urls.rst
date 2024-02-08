@@ -14,7 +14,7 @@ Replace:
 .. code-block:: yaml
 
     # config/routes/sylius_shop.yaml
-    
+
     sylius_shop:
         resource: "@SyliusShopBundle/Resources/config/routing.yml"
         prefix: /{_locale}
@@ -34,7 +34,7 @@ With:
 
 .. code-block:: yaml
 
-    # config/routes/sylius_shop.yaml    
+    # config/routes/sylius_shop.yaml
     sylius_shop:
         resource: "@SyliusShopBundle/Resources/config/routing.yml"
 
@@ -63,3 +63,26 @@ With:
         product_grid:
             include_all_descendants: true
         locale_switcher: storage
+
+**3.** Adjust Sylius' security shop regex in the ``config/packages/security.yaml``
+
+Add on the top of the file:
+
+.. code-block:: yaml
+
+    # config/packages/security.yaml
+
+    parameters:
+        sylius.security.shop_regex: "^(?:/(?!%sylius_admin.path_name%|api/.*|api$|media/.*)[^/]++)?"
+
+So the file should look like this:
+
+.. code-block:: yaml
+
+    # config/packages/security.yaml
+
+    parameters:
+        sylius.security.shop_regex: "^(?:/(?!%sylius_admin.path_name%|api/.*|api$|media/.*)[^/]++)?"
+
+    security:
+    # rest of the file

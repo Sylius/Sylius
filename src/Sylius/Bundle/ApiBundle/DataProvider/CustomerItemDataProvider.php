@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -20,6 +20,7 @@ use Sylius\Component\Core\Model\AdminUserInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Component\Core\Repository\CustomerRepositoryInterface;
+use Symfony\Component\Security\Core\User\UserInterface as SymfonyUserInterface;
 
 /** @experimental */
 final class CustomerItemDataProvider implements RestrictedDataProviderInterface, ItemDataProviderInterface
@@ -35,7 +36,7 @@ final class CustomerItemDataProvider implements RestrictedDataProviderInterface,
         /** @var ShopUserInterface|null $user */
         $user = $this->userContext->getUser();
 
-        if ($user instanceof AdminUserInterface && in_array('ROLE_API_ACCESS', $user->getRoles(), true)) {
+        if ($user instanceof AdminUserInterface && $user instanceof SymfonyUserInterface && in_array('ROLE_API_ACCESS', $user->getRoles(), true)) {
             return $this->customerRepository->find($id);
         }
 

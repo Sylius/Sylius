@@ -1,8 +1,20 @@
-<span class="ui small header">
-    {% set product = data.product %}
-    {{ data.name is null ? product.name : data.name }}
-</span>
-{% if data.optionValues|length > 0 %}
+{% set current_locale = sylius.localeCode %}
+{% set translation = data.getTranslation(current_locale) %}
+{% set translation = translation.locale == current_locale ? translation : null %}
+
+{% if data.optionValues is empty %}
+    {% if translation is not null and translation.name is not null %}
+        <span class="ui small header">
+            {{ translation.name }}
+        </span>
+    {% else %}
+        {% include '@SyliusAdmin/Common/_missingTranslation.html.twig' %}
+    {% endif %}
+{% else %}
+    <span class="ui small header">
+        {% set product = data.product %}
+        {{ translation is not null and translation.name is not null ? translation.name : product.name }}
+    </span>
     <br>
     <div class="ui horizontal divided list">
         {% for optionValue in data.optionValues %}

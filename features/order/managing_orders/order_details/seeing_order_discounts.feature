@@ -9,7 +9,7 @@ Feature: Seeing discounts of an order
         And the store classifies its products as "T-Shirts"
         And the store has a product "Angel T-Shirt" priced at "$39.00"
         And it belongs to "T-Shirts"
-        And the store ships everywhere for free
+        And the store ships everywhere for Free
         And the store allows paying with "Cash on Delivery"
         And there is a promotion "Holiday promotion"
         And there is a customer "lucy@teamlucifer.com" that placed an order "#00000666"

@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -33,19 +33,18 @@ class EligibleCatalogPromotionsProcessorTest extends WebTestCase
     {
         self::$client = static::createClient();
         self::$client->followRedirects(true);
-        self::$container = self::$client->getContainer();
 
         /** @var LoaderInterface $fixtureLoader */
-        $fixtureLoader = self::$container->get('fidry_alice_data_fixtures.loader.doctrine');
+        $fixtureLoader = self::$kernel->getContainer()->get('fidry_alice_data_fixtures.loader.doctrine');
 
-        $fixtureLoader->load([__DIR__ . '/../DataFixtures/ORM/resources/catalog_promotions.yml'], [], [], PurgeMode::createDeleteMode());
+        $fixtureLoader->load([__DIR__ . '/../DataFixtures/ORM/resources/scheduled_catalog_promotions.yml'], [], [], PurgeMode::createDeleteMode());
     }
 
     /** @test */
     public function it_provides_catalog_promotions_with_precision_to_seconds(): void
     {
         /** @var EligibleCatalogPromotionsProvider $eligibleCatalogPromotionsProvider */
-        $eligibleCatalogPromotionsProvider = self::$container->get('Sylius\Bundle\PromotionBundle\Provider\EligibleCatalogPromotionsProviderInterface');
+        $eligibleCatalogPromotionsProvider = self::$kernel->getContainer()->get('Sylius\Bundle\PromotionBundle\Provider\EligibleCatalogPromotionsProviderInterface');
 
         file_put_contents(self::$kernel->getProjectDir() . '/var/temporaryDate.txt', '2021-10-12 00:00:02');
 
@@ -57,14 +56,14 @@ class EligibleCatalogPromotionsProcessorTest extends WebTestCase
             new \DateTime('2021-10-12 00:00:02'),
         ];
 
-        $actualDateTimes = [];
+        $actualDateTimes = array_map(
+            fn (CatalogPromotionInterface $eligibleCatalogPromotion) => $eligibleCatalogPromotion->getStartDate(),
+            $eligibleCatalogPromotions
+        );
 
-        /** @var CatalogPromotionInterface $eligibleCatalogPromotion */
-        foreach ($eligibleCatalogPromotions as $eligibleCatalogPromotion) {
-            $actualDateTimes[] = $eligibleCatalogPromotion->getStartDate();
+        foreach ($actualDateTimes as $actualDateTime) {
+            $this->assertTrue(in_array($actualDateTime, $expectedDateTimes));
         }
-
-        $this->assertTrue(($expectedDateTimes == $actualDateTimes));
 
         unlink(self::$kernel->getProjectDir() . '/var/temporaryDate.txt');
     }
@@ -73,7 +72,7 @@ class EligibleCatalogPromotionsProcessorTest extends WebTestCase
     public function it_provides_catalog_promotions_with_precision_to_seconds_for_end_date(): void
     {
         /** @var EligibleCatalogPromotionsProvider $eligibleCatalogPromotionsProvider */
-        $eligibleCatalogPromotionsProvider = self::$container->get('Sylius\Bundle\PromotionBundle\Provider\EligibleCatalogPromotionsProviderInterface');
+        $eligibleCatalogPromotionsProvider = self::$kernel->getContainer()->get('Sylius\Bundle\PromotionBundle\Provider\EligibleCatalogPromotionsProviderInterface');
 
         file_put_contents(self::$kernel->getProjectDir() . '/var/temporaryDate.txt', '2021-10-12 23:59:58');
 

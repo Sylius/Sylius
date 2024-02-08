@@ -33,6 +33,12 @@ Sylius\Component\Core\Model\Product:
             pl_PL: '@product_translation_mug_pl_PL'
             de_DE: '@product_translation_mug_de_DE'
         options: ['@product_option_color']
+    product_cup:
+        code: 'CUP'
+        channels: [ '@channel_web' ]
+        currentLocale: 'en_US'
+        translations:
+            en_US: '@product_translation_cup_en_US'
 
 Sylius\Component\Core\Model\ProductTranslation:
     product_translation_mug_en_US:
@@ -55,7 +61,14 @@ Sylius\Component\Core\Model\ProductTranslation:
         name: 'Becher'
         description: 'das ist becher'
         shortDescription: 'Kurzbeschreibung der Becher'
-        translatable: '@product_mug'    
+        translatable: '@product_mug'   
+    product_translation_cup_en_US:
+        slug: 'Cup'
+        locale: 'en_US'
+        name: 'Cup'
+        description: 'Short cup description'
+        shortDescription: 'Cup'
+        translatable: '@product_cup'
 
 Sylius\Component\Core\Model\ProductVariant:
     product_variant_mug_blue:
@@ -145,3 +158,21 @@ Sylius\Component\Product\Model\ProductOptionValueTranslation:
         locale: 'en_US'
         value: 'Red'
         translatable: '@product_option_value_color_red'
+
+Sylius\Component\Product\Model\ProductAssociation:
+    product_association:
+        type: '@product_association_type'
+        owner: '@product_mug'
+        associatedProducts: ['@product_cup']
+
+Sylius\Component\Product\Model\ProductAssociationType:
+    product_association_type:
+        code: 'similar_products'
+        translations:
+            en_US: '@product_association_type_translation'
+
+Sylius\Component\Product\Model\ProductAssociationTypeTranslation:
+    product_association_type_translation:
+        name: 'Similar products'
+        locale: 'en_US'
+        translatable: '@product_association_type'

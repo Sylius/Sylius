@@ -1,9 +1,9 @@
 {% if resources.data.nbResults > 0 %}
 
 {% set route = app.request.attributes.get('_route') %}
-{% set route_parameters = app.request.attributes.get('_route_params')|merge(app.request.query.all) %}
+{% set route_parameters = app.request.attributes.all('_route_params')|merge(app.request.query.all) %}
 
-{% set criteria = app.request.query.get('criteria', {}) %}
+{% set criteria = app.request.query.all('criteria') %}
 
 {% set default_path = path(route, route_parameters|merge({'sorting': null, 'criteria': criteria})) %}
 {% set from_a_to_z_path = path(route, route_parameters|merge({'sorting': {'name': 'asc'}, 'criteria': criteria})) %}
@@ -13,19 +13,19 @@
 {% set cheapest_first_path = path(route, route_parameters|merge({'sorting': {'price': 'asc'}, 'criteria': criteria})) %}
 {% set most_expensive_first_path = path(route, route_parameters|merge({'sorting': {'price': 'desc'}, 'criteria': criteria})) %}
 
-{% if app.request.query.get('sorting') is empty %}
+{% if app.request.query.all()['sorting'] is not defined or app.request.query.all()['sorting'] is empty %}
     {% set current_sorting_label = 'sylius.ui.by_position'|trans|lower %}
-{% elseif app.request.query.get('sorting').name is defined and app.request.query.get('sorting').name == 'asc'%}
+{% elseif app.request.query.all()['sorting'].name is defined and app.request.query.all()['sorting'].name == 'asc'%}
     {% set current_sorting_label = 'sylius.ui.from_a_to_z'|trans|lower %}
-{% elseif app.request.query.get('sorting').name is defined and app.request.query.get('sorting').name == 'desc'%}
+{% elseif app.request.query.all()['sorting'].name is defined and app.request.query.all()['sorting'].name == 'desc'%}
     {% set current_sorting_label = 'sylius.ui.from_z_to_a'|trans|lower %}
-{% elseif app.request.query.get('sorting').createdAt is defined and app.request.query.get('sorting').createdAt == 'desc'%}
+{% elseif app.request.query.all()['sorting'].createdAt is defined and app.request.query.all()['sorting'].createdAt == 'desc'%}
     {% set current_sorting_label = 'sylius.ui.newest_first'|trans|lower %}
-{% elseif app.request.query.get('sorting').createdAt is defined and app.request.query.get('sorting').createdAt == 'asc'%}
+{% elseif app.request.query.all()['sorting'].createdAt is defined and app.request.query.all()['sorting'].createdAt == 'asc'%}
     {% set current_sorting_label = 'sylius.ui.oldest_first'|trans|lower %}
-{% elseif app.request.query.get('sorting').price is defined and app.request.query.get('sorting').price == 'asc'%}
+{% elseif app.request.query.all()['sorting'].price is defined and app.request.query.all()['sorting'].price == 'asc'%}
     {% set current_sorting_label = 'sylius.ui.cheapest_first'|trans|lower %}
-{% elseif app.request.query.get('sorting').price is defined and app.request.query.get('sorting').price == 'desc' %}
+{% elseif app.request.query.all()['sorting'].price is defined and app.request.query.all()['sorting'].price == 'desc' %}
     {% set current_sorting_label = 'sylius.ui.most_expensive_first'|trans|lower %}
 {% endif %}
 

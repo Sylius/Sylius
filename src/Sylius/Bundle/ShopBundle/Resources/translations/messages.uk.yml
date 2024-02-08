@@ -1,11 +1,8 @@
 # This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
+# (c) Sylius Sp. z o.o.
 
 sylius:
     email:
-        contact_request:
-            content: 'Вміст'
-            message_from: 'Повідомлення від'
         order_confirmation:
             has_been_successfully_placed: 'було успішно розміщено.'
             subject: 'Підтвердження замовлення'
@@ -29,7 +26,7 @@ sylius:
             verify_your_email_address: 'Підтердіть вашу електронну пошту'
     homepage:
         about_us: 'Про нас'
-        carousel_header: 'Приготуйтесь! Зима наближається'
+        banner_content: 'Приготуйтесь! Зима наближається'
         newsletter: 'Розсилка новин'
         subscribe: 'Підписатися'
     lightbox:

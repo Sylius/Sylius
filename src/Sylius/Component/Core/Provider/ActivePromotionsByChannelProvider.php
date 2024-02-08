@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -34,6 +34,10 @@ final class ActivePromotionsByChannelProvider implements PreQualifiedPromotionsP
         $channel = $subject->getChannel();
         if (null === $channel) {
             throw new \InvalidArgumentException('Order has no channel, but it should.');
+        }
+
+        if (null === $subject->getPromotionCoupon()) {
+            return $this->promotionRepository->findActiveNonCouponBasedByChannel($channel);
         }
 
         return $this->promotionRepository->findActiveByChannel($channel);

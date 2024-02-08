@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -453,7 +453,7 @@ final class ManagingShippingMethodsContext implements Context
      */
     public function iShouldBeNotifiedThatItIsInUse()
     {
-        $this->notificationChecker->checkNotification('Cannot delete, the shipping method is in use.', NotificationType::failure());
+        $this->notificationChecker->checkNotification('Cannot delete, the Shipping method is in use.', NotificationType::failure());
     }
 
     /**
@@ -503,21 +503,42 @@ final class ManagingShippingMethodsContext implements Context
     }
 
     /**
-     * @When /^I add the "Items total greater than or equal" rule configured with (?:€|£|\$)([^"]+) for "([^"]+)" channel$/
+     * @When /^I add the "Items total greater than or equal" rule configured with (?:€|£|\$)([^"]+) for ("[^"]+" channel)$/
      */
-    public function iAddTheItemsTotalGreaterThanOrEqualRuleConfiguredWith($value, string $channel): void
+    public function iAddTheItemsTotalGreaterThanOrEqualRuleConfiguredWith($value, ChannelInterface $channel): void
     {
         $this->createPage->addRule('Items total greater than or equal');
-        $this->createPage->fillRuleOptionForChannel($channel, 'Amount', (string) $value);
+        $this->createPage->fillRuleOptionForChannel($channel->getCode(), 'Amount', (string) $value);
     }
 
     /**
-     * @When /^I add the "Items total less than or equal" rule configured with (?:€|£|\$)([^"]+) for "([^"]+)" channel$/
+     * @When /^I add the "Items total less than or equal" rule configured with (?:€|£|\$)([^"]+) for ("[^"]+" channel)$/
      */
-    public function iAddTheItemsTotalLessThanOrEqualRuleConfiguredWith($value, string $channel): void
+    public function iAddTheItemsTotalLessThanOrEqualRuleConfiguredWith($value, ChannelInterface $channel): void
     {
         $this->createPage->addRule('Items total less than or equal');
-        $this->createPage->fillRuleOptionForChannel($channel, 'Amount', (string) $value);
+        $this->createPage->fillRuleOptionForChannel($channel->getCode(), 'Amount', (string) $value);
+    }
+
+    /**
+     * @When /^I remove the shipping charges of ("[^"]+" channel)$/
+     */
+    public function iRemoveTheShippingChargesOfChannel(ChannelInterface $channel): void
+    {
+        $this->updatePage->removeShippingChargesAmount($channel->getCode());
+    }
+
+    /**
+     * @Then /^I should see that the shipping charges for ("[^"]+" channel) has (\d+) validation errors?$/
+     */
+    public function iShouldSeeThatTheShippingChargesForChannelHasCountValidationErrors(
+        ChannelInterface $channel,
+        int $count,
+    ): void {
+        Assert::same(
+            $this->updatePage->getShippingChargesValidationErrorsCount($channel->getCode()),
+            $count,
+        );
     }
 
     /**

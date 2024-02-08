@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -16,6 +16,7 @@ namespace Sylius\Behat\Context\Api\Shop;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
+use Sylius\Behat\Context\Api\Resources;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
@@ -26,8 +27,7 @@ use Webmozart\Assert\Assert;
 final class OrderItemContext implements Context
 {
     public function __construct(
-        private ApiClientInterface $orderItemsClient,
-        private ApiClientInterface $orderItemUnitsClient,
+        private ApiClientInterface $client,
         private ResponseCheckerInterface $responseChecker,
         private SharedStorageInterface $sharedStorage,
     ) {
@@ -45,7 +45,7 @@ final class OrderItemContext implements Context
         /** @var OrderItemInterface $orderItem */
         $orderItem = $order->getItems()->first();
 
-        $this->orderItemsClient->show((string) $orderItem->getId());
+        $this->client->show(Resources::ORDER_ITEMS, (string) $orderItem->getId());
     }
 
     /**
@@ -60,7 +60,7 @@ final class OrderItemContext implements Context
         /** @var OrderItemUnitInterface $orderItemUnit */
         $orderItemUnit = $order->getItemUnits()->first();
 
-        $this->orderItemUnitsClient->show((string) $orderItemUnit->getId());
+        $this->client->show(Resources::ORDER_ITEM_UNITS, (string) $orderItemUnit->getId());
     }
 
     /**
@@ -68,7 +68,7 @@ final class OrderItemContext implements Context
      */
     public function iShouldNotBeAbleToSeeThatItem(): void
     {
-        Assert::false($this->responseChecker->isShowSuccessful($this->orderItemsClient->getLastResponse()));
+        Assert::false($this->responseChecker->isShowSuccessful($this->client->getLastResponse()));
     }
 
     /**
@@ -76,6 +76,6 @@ final class OrderItemContext implements Context
      */
     public function iShouldNotBeAbleToSeeThatUnit(): void
     {
-        Assert::false($this->responseChecker->isShowSuccessful($this->orderItemUnitsClient->getLastResponse()));
+        Assert::false($this->responseChecker->isShowSuccessful($this->client->getLastResponse()));
     }
 }

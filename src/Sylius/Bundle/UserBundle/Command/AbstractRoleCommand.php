@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -17,10 +17,12 @@ use Doctrine\Persistence\ObjectManager;
 use Sylius\Component\User\Model\UserInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
 use SyliusLabs\Polyfill\Symfony\FrameworkBundle\Command\ContainerAwareCommand;
+use Symfony\Component\Console\Helper\QuestionHelper;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\ChoiceQuestion;
 use Symfony\Component\Console\Question\Question;
+use Webmozart\Assert\Assert;
 
 abstract class AbstractRoleCommand extends ContainerAwareCommand
 {
@@ -32,6 +34,8 @@ abstract class AbstractRoleCommand extends ContainerAwareCommand
             throw new \Exception(sprintf('At least one user type should implement %s', UserInterface::class));
         }
 
+        $helper = $this->getHelper('question');
+        Assert::isInstanceOf($helper, QuestionHelper::class);
         if (!$input->getOption('user-type')) {
             // Do not ask if there's only 1 user type configured
             if (count($availableUserTypes) === 1) {
@@ -39,7 +43,7 @@ abstract class AbstractRoleCommand extends ContainerAwareCommand
             } else {
                 $question = new ChoiceQuestion('Please enter the user type:', $availableUserTypes, 1);
                 $question->setErrorMessage('Choice %s is invalid.');
-                $userType = $this->getHelper('question')->ask($input, $output, $question);
+                $userType = $helper->ask($input, $output, $question);
                 $input->setOption('user-type', $userType);
             }
         }
@@ -53,20 +57,20 @@ abstract class AbstractRoleCommand extends ContainerAwareCommand
 
                 return $email;
             });
-            $email = $this->getHelper('question')->ask($input, $output, $question);
+            $email = $helper->ask($input, $output, $question);
             $input->setArgument('email', $email);
         }
 
         if (!$input->getArgument('roles')) {
             $question = new Question('Please enter user\'s roles (separated by space):');
             $question->setValidator(function (?string $roles) {
-                if (strlen($roles) < 1) {
+                if ('' === $roles) {
                     throw new \RuntimeException('The value cannot be blank.');
                 }
 
                 return $roles;
             });
-            $roles = $this->getHelper('question')->ask($input, $output, $question);
+            $roles = $helper->ask($input, $output, $question);
 
             if (!empty($roles)) {
                 $input->setArgument('roles', explode(' ', $roles));
@@ -119,7 +123,10 @@ abstract class AbstractRoleCommand extends ContainerAwareCommand
     {
         $class = $this->getUserModelClass($userType);
 
-        return $this->getEntityManager($userType)->getRepository($class);
+        $userRepository = $this->getEntityManager($userType)->getRepository($class);
+        Assert::isInstanceOf($userRepository, UserRepositoryInterface::class);
+
+        return $userRepository;
     }
 
     protected function getAvailableUserTypes(): array
@@ -137,7 +144,7 @@ abstract class AbstractRoleCommand extends ContainerAwareCommand
      */
     protected function getUserModelClass(string $userType): string
     {
-        $config = $this->getContainer()->getParameter('sylius.user.users');
+        $config = (array) $this->getContainer()->getParameter('sylius.user.users');
         if (empty($config[$userType]['user']['classes']['model'])) {
             throw new \InvalidArgumentException(sprintf('User type %s misconfigured.', $userType));
         }

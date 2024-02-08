@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -20,6 +20,7 @@ use Sylius\Component\Channel\Model\ChannelInterface as BaseChannelInterface;
 use Sylius\Component\Shipping\Model\ShippingMethod as BaseShippingMethod;
 use Sylius\Component\Shipping\Model\ShippingMethodTranslation;
 use Sylius\Component\Taxation\Model\TaxCategoryInterface;
+use Webmozart\Assert\Assert;
 
 class ShippingMethod extends BaseShippingMethod implements ShippingMethodInterface
 {
@@ -29,11 +30,7 @@ class ShippingMethod extends BaseShippingMethod implements ShippingMethodInterfa
     /** @var TaxCategoryInterface|null */
     protected $taxCategory;
 
-    /**
-     * @var Collection|ChannelInterface[]
-     *
-     * @psalm-var Collection<array-key, ChannelInterface>
-     */
+    /** @var Collection<array-key, ChannelInterface> */
     protected $channels;
 
     public function __construct()
@@ -64,12 +61,9 @@ class ShippingMethod extends BaseShippingMethod implements ShippingMethodInterfa
         $this->taxCategory = $category;
     }
 
-    /**
-     * @psalm-suppress InvalidReturnType https://github.com/doctrine/collections/pull/220
-     * @psalm-suppress InvalidReturnStatement https://github.com/doctrine/collections/pull/220
-     */
     public function getChannels(): Collection
     {
+        /** @phpstan-ignore-next-line */
         return $this->channels;
     }
 
@@ -80,6 +74,7 @@ class ShippingMethod extends BaseShippingMethod implements ShippingMethodInterfa
 
     public function addChannel(BaseChannelInterface $channel): void
     {
+        Assert::isInstanceOf($channel, ChannelInterface::class);
         if (!$this->hasChannel($channel)) {
             $this->channels->add($channel);
         }
@@ -87,6 +82,7 @@ class ShippingMethod extends BaseShippingMethod implements ShippingMethodInterfa
 
     public function removeChannel(BaseChannelInterface $channel): void
     {
+        Assert::isInstanceOf($channel, ChannelInterface::class);
         if ($this->hasChannel($channel)) {
             $this->channels->removeElement($channel);
         }

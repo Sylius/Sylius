@@ -17,7 +17,7 @@ sylius_admin_order_show:
     path: /orders/{id}
     methods: [GET]
     defaults:
-        _controller: sylius.controller.order:showAction
+        _controller: sylius.controller.order::showAction
         _sylius:
             section: admin
             repository:
@@ -31,7 +31,7 @@ sylius_admin_order_history:
     path: /orders/{id}/history
     methods: [GET]
     defaults:
-        _controller: sylius.controller.order:showAction
+        _controller: sylius.controller.order::showAction
         _sylius:
             section: admin
             repository:
@@ -45,7 +45,7 @@ sylius_admin_order_update:
     path: /orders/{id}/edit
     methods: [GET, PUT]
     defaults:
-        _controller: sylius.controller.order:updateAction
+        _controller: sylius.controller.order::updateAction
         _sylius:
             section: admin
             repository:
@@ -63,7 +63,7 @@ sylius_admin_order_cancel:
     path: /orders/{id}/cancel
     methods: [PUT]
     defaults:
-        _controller: sylius.controller.order:applyStateMachineTransitionAction
+        _controller: sylius.controller.order::applyStateMachineTransitionAction
         _sylius:
             repository:
               method: findOrderById
@@ -79,7 +79,7 @@ sylius_admin_order_payment_complete:
     path: /orders/{orderId}/payments/{id}/complete
     methods: [PUT]
     defaults:
-        _controller: sylius.controller.payment:applyStateMachineTransitionAction
+        _controller: sylius.controller.payment::applyStateMachineTransitionAction
         _sylius:
             event: complete
             permission: true
@@ -97,7 +97,7 @@ sylius_admin_order_payment_refund:
     path: /orders/{orderId}/payments/{id}/refund
     methods: [PUT]
     defaults:
-        _controller: sylius.controller.payment:applyStateMachineTransitionAction
+        _controller: sylius.controller.payment::applyStateMachineTransitionAction
         _sylius:
             permission: true
             repository:
@@ -112,10 +112,10 @@ sylius_admin_order_payment_refund:
             flash: sylius.payment.refunded
 
 sylius_admin_order_shipment_ship:
-    path: /{id}/ship
+    path: /orders/{id}/ship
     methods: [PUT]
     defaults:
-        _controller: sylius.controller.shipment:updateAction
+        _controller: sylius.controller.shipment::updateAction
         _sylius:
             event: ship
             repository:
@@ -137,7 +137,7 @@ sylius_admin_order_shipment_ship:
                         id: $id
 
 sylius_admin_order_resend_confirmation_email:
-    path: /{id}/resend-confirmation-email
+    path: /orders/{id}/resend-confirmation-email
     methods: [GET]
     defaults:
         _controller: Sylius\Bundle\AdminBundle\Action\ResendOrderConfirmationEmailAction

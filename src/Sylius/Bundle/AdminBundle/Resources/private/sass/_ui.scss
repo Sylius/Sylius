@@ -67,6 +67,7 @@ a {
 // ------------ Sidebar menu
 // ----------------------------------
 
+.admin-layout__nav,
 #sidebar.ui.sidebar.vertical.menu {
     > .item:first-child {
         margin-bottom: 10px;
@@ -341,4 +342,19 @@ div[id^="sylius_catalog_promotion_actions"] {
 
 .navigation-next {
     right: 0;
+}
+
+// ----------------------------------
+// ------------ Sticky columns
+// ----------------------------------
+
+@media (min-width: 1000px) {
+    .sticky-container {
+        align-items: flex-start !important;
+    }
+
+    .sticky-column {
+        position: sticky !important;
+        top: 60px;
+    }
 }

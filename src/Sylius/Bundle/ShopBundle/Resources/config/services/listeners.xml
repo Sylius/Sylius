@@ -4,7 +4,7 @@
 
  This file is part of the Sylius package.
 
- (c) Paweł Jędrzejewski
+ (c) Sylius Sp. z o.o.
 
  For the full copyright and license information, please view the LICENSE
  file that was distributed with this source code.
@@ -26,8 +26,9 @@
             <argument type="service" id="sylius.shop_user.token_generator.email_verification" />
             <argument type="service" id="sylius.context.channel" />
             <argument type="service" id="event_dispatcher" />
-            <argument type="service" id="session" />
+            <argument type="service" id="request_stack" />
             <argument type="service" id="sylius.section_resolver.uri_based_section_resolver" />
+            <argument type="service" id="security.token_storage" />
             <tag name="kernel.event_listener" event="sylius.customer.pre_update" method="eraseVerification" />
             <tag name="kernel.event_listener" event="sylius.customer.post_update" method="sendVerificationEmail" />
         </service>
@@ -60,8 +61,8 @@
 
         <service id="sylius.listener.order_integrity_checker" class="Sylius\Bundle\ShopBundle\EventListener\OrderIntegrityChecker">
             <argument type="service" id="router" />
-            <argument type="service" id="sylius.order_processing.order_processor" />
             <argument type="service" id="sylius.manager.order" />
+            <argument type="service" id="Sylius\Bundle\CoreBundle\Order\Checker\OrderPromotionsIntegrityCheckerInterface" />
             <tag name="kernel.event_listener" event="sylius.order.pre_complete" method="check" />
         </service>
         <service id="Sylius\Bundle\ShopBundle\EventListener\OrderIntegrityCheckerInterface" alias="sylius.listener.order_integrity_checker" />

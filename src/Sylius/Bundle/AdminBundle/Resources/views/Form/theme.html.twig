@@ -26,3 +26,23 @@
 {% block sylius_product_autocomplete_choice_row %}
     {{ form_row(form, {'remote_url': path('sylius_admin_ajax_product_by_name_phrase'), 'load_edit_url': path('sylius_admin_ajax_product_by_code')}) }}
 {% endblock %}
+
+{% block sylius_channel_collection_widget %}
+    {% set channelsErrorCount = form.vars.channels_errors_count %}
+    <div class="ui top attached tabular menu">
+        {% for channelCode, channelForm in form %}
+            {% set channelErrorCount = channelsErrorCount[channelCode] ?? 0 %}
+            <a class="item{% if loop.first %} active{% endif %}" data-tab="{{ channelForm.vars.full_name }}">
+                {{ channelForm.vars.label }}
+                {% if channelErrorCount > 0 %}
+                    <span class="ui small horizontal circular label" style="background-color: #DB2828">{{ channelErrorCount }}</span>
+                {% endif %}
+            </a>
+        {% endfor %}
+    </div>
+    {% for channelCode, channelForm in form %}
+        <div class="ui bottom attached tab segment{% if loop.first %} active{% endif %}" data-tab="{{ channelForm.vars.full_name }}">
+            {{ form_row(channelForm, {'label': false}) }}
+        </div>
+    {% endfor %}
+{% endblock %}

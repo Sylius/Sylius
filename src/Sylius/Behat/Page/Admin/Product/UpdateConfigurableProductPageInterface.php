@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -21,6 +21,10 @@ interface UpdateConfigurableProductPageInterface extends UpdatePageInterface
     public function isCodeDisabled(): bool;
 
     public function nameItIn(string $name, string $localeCode): void;
+
+    public function setMetaKeywords(string $keywords, string $localeCode): void;
+
+    public function setMetaDescription(string $description, string $localeCode): void;
 
     public function isProductOptionChosen(string $option): bool;
 

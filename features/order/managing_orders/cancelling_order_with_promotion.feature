@@ -6,7 +6,7 @@ Feature: Cancelling order with promotion applied
 
     Background:
         Given the store operates on a single channel in the "United States" named "Web"
-        And the store ships everywhere for free
+        And the store ships everywhere for Free
         And the store allows paying with "Cash on Delivery"
         And the store has a product "Suit" priced at "$400.00"
         And there is a promotion "Holiday promotion"

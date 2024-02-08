@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -26,8 +26,10 @@ use Sylius\Behat\Element\Product\ShowPage\TaxonomyElementInterface;
 use Sylius\Behat\Element\Product\ShowPage\VariantsElementInterface;
 use Sylius\Behat\Page\Admin\Product\IndexPageInterface;
 use Sylius\Behat\Page\Admin\Product\ShowPageInterface;
+use Sylius\Component\Core\Model\CatalogPromotionInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Webmozart\Assert\Assert;
 
 final class ProductShowPageContext implements Context
@@ -45,6 +47,7 @@ final class ProductShowPageContext implements Context
         private TaxonomyElementInterface $taxonomyElement,
         private OptionsElementInterface $optionsElement,
         private VariantsElementInterface $variantsElement,
+        private UrlGeneratorInterface $urlGenerator,
     ) {
     }
 
@@ -86,6 +89,14 @@ final class ProductShowPageContext implements Context
     public function iGoToEditPage(): void
     {
         $this->productShowPage->showProductEditPage();
+    }
+
+    /**
+     * @When I access :product product
+     */
+    public function iAccessProduct(ProductInterface $product): void
+    {
+        $this->productShowPage->open(['id' => $product->getId()]);
     }
 
     /**
@@ -155,9 +166,9 @@ final class ProductShowPageContext implements Context
     /**
      * @Then I should see original price :price for channel :channelName
      */
-    public function iShouldSeeOrginalPriceForChannel(string $orginalPrice, string $channelName): void
+    public function iShouldSeeOriginalPriceForChannel(string $originalPrice, string $channelName): void
     {
-        Assert::same($this->pricingElement->getOriginalPriceForChannel($channelName), $orginalPrice);
+        Assert::same($this->pricingElement->getOriginalPriceForChannel($channelName), $originalPrice);
     }
 
     /**
@@ -369,5 +380,50 @@ final class ProductShowPageContext implements Context
     public function iShouldNotBeAbleToShowThisProductInShop(): void
     {
         Assert::true($this->productShowPage->isShowInShopButtonDisabled());
+    }
+
+    /**
+     * @Then this product price should be decreased by catalog promotion :catalogPromotion in :channelName channel
+     */
+    public function thisProductPriceShouldBeDecreasedByCatalogPromotion(
+        CatalogPromotionInterface $catalogPromotion,
+        string $channelName,
+    ): void {
+        Assert::inArray(
+            $catalogPromotion->getName(),
+            $this->pricingElement->getCatalogPromotionsNamesForChannel($channelName),
+        );
+
+        $url = $this->urlGenerator->generate('sylius_admin_catalog_promotion_show', ['id' => $catalogPromotion->getId()]);
+        Assert::inArray($url, $this->pricingElement->getCatalogPromotionLinksForChannel($channelName));
+    }
+
+    /**
+     * @Then :variantName variant price should be decreased by catalog promotion :catalogPromotion in :channelName channel
+     */
+    public function variantPriceShouldBeDecreasedByCatalogPromotion(
+        string $variantName,
+        CatalogPromotionInterface $catalogPromotion,
+        string $channelName,
+    ): void {
+        Assert::inArray(
+            $catalogPromotion->getName(),
+            $this->productShowPage->getAppliedCatalogPromotionsNames($variantName, $channelName),
+        );
+
+        $url = $this->urlGenerator->generate('sylius_admin_catalog_promotion_show', ['id' => $catalogPromotion->getId()]);
+        Assert::inArray($url, $this->productShowPage->getAppliedCatalogPromotionsLinks($variantName, $channelName));
+    }
+
+    /**
+     * @Then :variantName variant price should not be decreased by catalog promotion :catalogPromotion in :channelName channel
+     */
+    public function variantPriceShouldNotBeDecreasedByCatalogPromotion(
+        string $variantName,
+        CatalogPromotionInterface $catalogPromotion,
+        string $channelName,
+    ): void {
+        $appliedPromotions = $this->productShowPage->getAppliedCatalogPromotionsNames($variantName, $channelName);
+        Assert::false(in_array($catalogPromotion->getName(), $appliedPromotions));
     }
 }

@@ -1,5 +1,5 @@
 # This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
+# (c) Sylius Sp. z o.o.
 
 sylius:
     email:
@@ -41,3 +41,9 @@ sylius:
                 sales:
                     header: ยอดขาย
                     orders: ใบสั่งซื้อ
+                official_support:
+                    header: การสนับสนุนอย่างเป็นทางการ
+                    browse_plugins: ค้นหาปลั๊กอิน
+                    sylius_plus: Sylius Plus
+                    professional_services: บริการระดับมืออาชีพ
+                    find_a_partner: หาคู่ค้า

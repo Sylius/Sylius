@@ -4,7 +4,7 @@
 
  This file is part of the Sylius package.
 
- (c) Paweł Jędrzejewski
+ (c) Sylius Sp. z o.o.
 
  For the full copyright and license information, please view the LICENSE
  file that was distributed with this source code.
@@ -37,6 +37,7 @@
 
         <attribute name="channel">
             <group>admin:order:read</group>
+            <group>shop:order:read</group>
         </attribute>
 
         <attribute name="customer">
@@ -63,6 +64,7 @@
 
         <attribute name="state">
             <group>admin:order:read</group>
+            <group>shop:order:read</group>
         </attribute>
 
         <attribute name="paymentState">
@@ -112,6 +114,18 @@
         </attribute>
 
         <attribute name="taxTotal">
+            <group>admin:order:read</group>
+            <group>shop:cart:read</group>
+            <group>shop:order:account:read</group>
+        </attribute>
+
+        <attribute name="taxExcludedTotal">
+            <group>admin:order:read</group>
+            <group>shop:cart:read</group>
+            <group>shop:order:account:read</group>
+        </attribute>
+
+        <attribute name="taxIncludedTotal">
             <group>admin:order:read</group>
             <group>shop:cart:read</group>
             <group>shop:order:account:read</group>

@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -104,7 +104,7 @@ final class ManagingPaymentMethodsContext implements Context
      */
     public function iShouldBeNotifiedThatItIsInUse()
     {
-        $this->notificationChecker->checkNotification('Cannot delete, the payment method is in use.', NotificationType::failure());
+        $this->notificationChecker->checkNotification('Cannot delete, the Payment method is in use.', NotificationType::failure());
     }
 
     /**
@@ -167,6 +167,14 @@ final class ManagingPaymentMethodsContext implements Context
     }
 
     /**
+     * @When I cancel my changes
+     */
+    public function iCancelMyChanges(): void
+    {
+        $this->createPage->cancelChanges();
+    }
+
+    /**
      * @When I check (also) the :paymentMethodName payment method
      */
     public function iCheckThePaymentMethod(string $paymentMethodName): void
@@ -209,6 +217,22 @@ final class ManagingPaymentMethodsContext implements Context
     public function iBrowsePaymentMethods()
     {
         $this->indexPage->open();
+    }
+
+    /**
+     * @When I choose enabled filter
+     */
+    public function iChooseEnabledFilter(): void
+    {
+        $this->indexPage->chooseEnabledFilter();
+    }
+
+    /**
+     * @When I filter
+     */
+    public function iFilter(): void
+    {
+        $this->indexPage->filter();
     }
 
     /**
@@ -439,5 +463,13 @@ final class ManagingPaymentMethodsContext implements Context
     {
         $this->createPage->setStripeSecretKey('TEST');
         $this->createPage->setStripePublishableKey('TEST');
+    }
+
+    /**
+     * @Then I should be redirected to the previous page of only enabled payment methods
+     */
+    public function iShouldBeRedirectedToThePreviousFilteredPageWithFilter(): void
+    {
+        Assert::true($this->indexPage->isEnabledFilterApplied());
     }
 }

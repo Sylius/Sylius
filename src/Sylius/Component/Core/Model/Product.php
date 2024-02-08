@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -27,38 +27,22 @@ class Product extends BaseProduct implements ProductInterface, ReviewableProduct
     /** @var string|null */
     protected $variantSelectionMethod = self::VARIANT_SELECTION_CHOICE;
 
-    /**
-     * @var Collection|ProductTaxonInterface[]
-     *
-     * @psalm-var Collection<array-key, ProductTaxonInterface>
-     */
+    /** @var Collection<array-key, ProductTaxonInterface> */
     protected $productTaxons;
 
-    /**
-     * @var Collection|ChannelInterface[]
-     *
-     * @psalm-var Collection<array-key, ChannelInterface>
-     */
+    /** @var Collection<array-key, ChannelInterface> */
     protected $channels;
 
-    /** @var \Sylius\Component\Core\Model\TaxonInterface|null */
+    /** @var TaxonInterface|null */
     protected $mainTaxon;
 
-    /**
-     * @var Collection|ReviewInterface[]
-     *
-     * @psalm-var Collection<array-key, ReviewInterface>
-     */
+    /** @var Collection<array-key, ReviewInterface> */
     protected $reviews;
 
     /** @var float */
     protected $averageRating = 0.0;
 
-    /**
-     * @var Collection|ImageInterface[]
-     *
-     * @psalm-var Collection<array-key, ImageInterface>
-     */
+    /** @var Collection<array-key, ImageInterface> */
     protected $images;
 
     public function __construct()
@@ -143,17 +127,15 @@ class Product extends BaseProduct implements ProductInterface, ReviewableProduct
         return $this->getTaxons()->contains($taxon);
     }
 
-    /**
-     * @psalm-suppress InvalidReturnType https://github.com/doctrine/collections/pull/220
-     * @psalm-suppress InvalidReturnStatement https://github.com/doctrine/collections/pull/220
-     */
     public function getChannels(): Collection
     {
+        /** @phpstan-ignore-next-line */
         return $this->channels;
     }
 
     public function addChannel(BaseChannelInterface $channel): void
     {
+        Assert::isInstanceOf($channel, ChannelInterface::class);
         if (!$this->hasChannel($channel)) {
             $this->channels->add($channel);
         }
@@ -161,6 +143,7 @@ class Product extends BaseProduct implements ProductInterface, ReviewableProduct
 
     public function removeChannel(BaseChannelInterface $channel): void
     {
+        Assert::isInstanceOf($channel, ChannelInterface::class);
         if ($this->hasChannel($channel)) {
             $this->channels->removeElement($channel);
         }
@@ -272,7 +255,10 @@ class Product extends BaseProduct implements ProductInterface, ReviewableProduct
      */
     public function getTranslation(?string $locale = null): TranslationInterface
     {
-        return parent::getTranslation($locale);
+        $productTranslation = parent::getTranslation($locale);
+        Assert::isInstanceOf($productTranslation, ProductTranslationInterface::class);
+
+        return $productTranslation;
     }
 
     /**

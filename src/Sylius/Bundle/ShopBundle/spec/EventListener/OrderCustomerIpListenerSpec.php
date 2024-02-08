@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -35,12 +35,7 @@ final class OrderCustomerIpListenerSpec extends ObjectBehavior
         RequestStack $requestStack,
     ): void {
         $event->getSubject()->willReturn($order);
-
-        if (method_exists(RequestStack::class, 'getMainRequest')) {
-            $requestStack->getMainRequest()->willReturn($request);
-        } else {
-            $requestStack->getMasterRequest()->willReturn($request);
-        }
+        $requestStack->getMainRequest()->willReturn($request);
 
         $ipAssigner->assign($order, $request)->shouldBeCalled();
 
@@ -64,11 +59,7 @@ final class OrderCustomerIpListenerSpec extends ObjectBehavior
     ): void {
         $event->getSubject()->willReturn($order);
 
-        if (method_exists(RequestStack::class, 'getMainRequest')) {
-            $requestStack->getMainRequest()->willReturn(null);
-        } else {
-            $requestStack->getMasterRequest()->willReturn(null);
-        }
+        $requestStack->getMainRequest()->willReturn(null);
 
         $this
             ->shouldThrow(\InvalidArgumentException::class)

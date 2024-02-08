@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -144,6 +144,11 @@ class SummaryPage extends SymfonyPage implements SummaryPageInterface
         $this->getElement('save_button')->click();
     }
 
+    public function specifyQuantity(string $productName, int $quantity): void
+    {
+        $this->getElement('item_quantity_input', ['%name%' => $productName])->setValue($quantity);
+    }
+
     public function isSingleItemOnPage(): bool
     {
         $items = $this->getElement('cart_items')->findAll('css', '[data-test-cart-product-row]');
@@ -222,6 +227,11 @@ class SummaryPage extends SymfonyPage implements SummaryPageInterface
         $this->getElement('update_button')->click();
     }
 
+    public function checkout(): void
+    {
+        $this->getElement('checkout_button')->click();
+    }
+
     public function waitForRedirect(int $timeout): void
     {
         $this->getDocument()->waitFor($timeout, fn () => $this->isOpen());
@@ -239,6 +249,7 @@ class SummaryPage extends SymfonyPage implements SummaryPageInterface
             'base_grand_total' => '[data-test-cart-base-grand-total]',
             'cart_items' => '[data-test-cart-items]',
             'cart_total' => '[data-test-cart-total]',
+            'checkout_button' => '[data-test-cart-checkout-button]',
             'clear_button' => '[data-test-cart-clear-button]',
             'coupon_field' => '[data-test-cart-promotion-coupon-input]',
             'delete_button' => '[data-test-cart-remove-button="%name%"]',

@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -64,6 +64,11 @@ class IndexPage extends CrudIndexPage implements IndexPageInterface
         $field->clickLink('Details');
     }
 
+    public function goToPage(int $page): void
+    {
+        $this->getElement('pagination_button', ['%page%' => $page])->click();
+    }
+
     public function checkFirstProductHasDataAttribute(string $attributeName): bool
     {
         return $this->getElement('first_product')->find('css', sprintf('[%s]', $attributeName)) !== null;
@@ -74,13 +79,22 @@ class IndexPage extends CrudIndexPage implements IndexPageInterface
         return $this->getElement('last_product')->find('css', sprintf('[%s]', $attributeName)) !== null;
     }
 
+    public function getPageNumber(): int
+    {
+        return (int) $this->getElement('page_number')->getText();
+    }
+
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
             'channel_filter' => '#criteria_channel',
-            'taxon_filter' => '.sylius-tree__item a:contains("%taxon%")',
+            'enabled_filter' => '#criteria_enabled',
             'first_product' => '.table > tbody > tr:first-child',
             'last_product' => '.table > tbody > tr:last-child',
+            'page_number' => '.sylius-grid-nav__pagination .active',
+            'pagination_button' => '.sylius-grid-nav__pagination a.item:contains("%page%")',
+            'pagination_buttons' => '.sylius-grid-nav__pagination',
+            'taxon_filter' => '.sylius-tree__item a:contains("%taxon%")',
         ]);
     }
 }

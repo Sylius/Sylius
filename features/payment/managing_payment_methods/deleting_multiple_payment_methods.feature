@@ -5,12 +5,12 @@ Feature: Deleting multiple payment methods
     I want to be able to delete multiple payment methods at once
 
     Background:
-        Given the store has a payment method "Offline" with a code "offline"
+        Given the store has a payment method "Offline" with a code "Offline"
         And the store has also a payment method "Bank transfer" with a code "transfer"
         And the store has also a payment method "PayPal Express Checkout" with a code "paypal" and Paypal Express Checkout gateway
         And I am logged in as an administrator
 
-    @ui @javascript
+    @ui @mink:chromedriver
     Scenario: Deleting multiple payment methods at once
         When I browse payment methods
         And I check the "Offline" payment method

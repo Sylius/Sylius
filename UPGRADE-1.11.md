@@ -165,7 +165,7 @@ We've introduced promoted properties all over the code where it was possible. Pl
 - `Sylius\Bundle\ShopBundle\Controller\SecurityWidgetController`
 - `Sylius\Bundle\UiBundle\Controller\SecurityController`
 
-In all of them constructor argument `$templatingEngine`, previously typed as `object` was changed to `EngineInterface|Environment`.
+In all of them constructor argument `$templatingEngine`, previously typed as `object` was changed to `Environment`.
 It should not cause any problems (only such services would work in these controllers), but is theoretically making the type
 requirement stricter.
 

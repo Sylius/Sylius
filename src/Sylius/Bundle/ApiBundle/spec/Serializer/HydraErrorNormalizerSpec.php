@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -40,16 +40,11 @@ final class HydraErrorNormalizerSpec extends ObjectBehavior
 
         $request->getPathInfo()->willReturn('/api/v1/resource');
 
-        if (method_exists(RequestStack::class, 'getMainRequest')) {
-            $requestStack->getMainRequest()->willReturn($request);
-        } else {
-            /** @phpstan-ignore-next-line */
-            $requestStack->getMasterRequest()->willReturn($request);
-        }
+        $requestStack->getMainRequest()->willReturn($request);
 
         $normalizer->supportsNormalization('data', 'format')->shouldNotBeCalled();
 
-        $this->supportsNormalization('data', 'format');
+        $this->supportsNormalization('data', 'format')->shouldReturn(false);
     }
 
     function it_calls_decorated_support_normalize_method_when_path_starts_with_new_api_route(
@@ -61,16 +56,11 @@ final class HydraErrorNormalizerSpec extends ObjectBehavior
 
         $request->getPathInfo()->willReturn('/api/v2/resource');
 
-        if (method_exists(RequestStack::class, 'getMainRequest')) {
-            $requestStack->getMainRequest()->willReturn($request);
-        } else {
-            /** @phpstan-ignore-next-line */
-            $requestStack->getMasterRequest()->willReturn($request);
-        }
+        $requestStack->getMainRequest()->willReturn($request);
 
-        $normalizer->supportsNormalization('data', 'format')->shouldBeCalled();
+        $normalizer->supportsNormalization('data', 'format')->shouldBeCalled()->willReturn(true);
 
-        $this->supportsNormalization('data', 'format');
+        $this->supportsNormalization('data', 'format')->shouldReturn(true);
     }
 
     function it_decorates_has_cacheable_supports_method(
@@ -92,11 +82,7 @@ final class HydraErrorNormalizerSpec extends ObjectBehavior
     ): void {
         $this->beConstructedWith($normalizer, $requestStack, '/api/v2');
 
-        if (method_exists(RequestStack::class, 'getMainRequest')) {
-            $requestStack->getMainRequest()->willReturn(null);
-        } else {
-            $requestStack->getMasterRequest()->willReturn(null);
-        }
+        $requestStack->getMainRequest()->willReturn(null);
 
         $normalizer->supportsNormalization('data', 'format')->shouldNotBeCalled();
 

@@ -8,7 +8,7 @@ Feature: Seeing shipment shipping date
         Given the store operates on a single channel in "United States"
         And the store has a product "Gryffindor scarf" priced at "$100.00"
         And the store has "Owl post" shipping method with "$10.00" fee within the "US" zone
-        And the store allows paying offline
+        And the store allows paying Offline
         And there is a customer "fleur@delacour.com" that placed an order "#00000777"
         And the customer bought a single "Gryffindor scarf"
         And the customer chose "Owl post" shipping method to "United States" with "Offline" payment

@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -18,14 +18,14 @@ use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Symfony\Component\BrowserKit\AbstractBrowser;
 use Symfony\Component\BrowserKit\Cookie;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Webmozart\Assert\Assert;
 
 final class ManagingTaxonsContext implements Context
 {
     public function __construct(
         private AbstractBrowser $client,
-        private SessionInterface $session,
+        private RequestStack $requestStack,
         private ResponseCheckerInterface $responseChecker,
     ) {
     }
@@ -35,7 +35,7 @@ final class ManagingTaxonsContext implements Context
      */
     public function iTypeIn($phrase): void
     {
-        $this->client->getCookieJar()->set(new Cookie($this->session->getName(), $this->session->getId()));
+        $this->client->getCookieJar()->set(new Cookie($this->requestStack->getSession()->getName(), $this->requestStack->getSession()->getId()));
         $this->client->request('GET', '/admin/ajax/taxons/search', ['phrase' => $phrase], [], ['ACCEPT' => 'application/json']);
     }
 
@@ -44,7 +44,7 @@ final class ManagingTaxonsContext implements Context
      */
     public function iWantToGetTaxonWithCode($code): void
     {
-        $this->client->getCookieJar()->set(new Cookie($this->session->getName(), $this->session->getId()));
+        $this->client->getCookieJar()->set(new Cookie($this->requestStack->getSession()->getName(), $this->requestStack->getSession()->getId()));
         $this->client->request('GET', '/admin/ajax/taxons/leaf', ['code' => $code], [], ['ACCEPT' => 'application/json']);
     }
 
@@ -53,7 +53,7 @@ final class ManagingTaxonsContext implements Context
      */
     public function iWantToGetChildrenFromTaxon(TaxonInterface $taxon): void
     {
-        $this->client->getCookieJar()->set(new Cookie($this->session->getName(), $this->session->getId()));
+        $this->client->getCookieJar()->set(new Cookie($this->requestStack->getSession()->getName(), $this->requestStack->getSession()->getId()));
         $this->client->request('GET', '/admin/ajax/taxons/leafs', ['parentCode' => $taxon->getCode()], [], ['ACCEPT' => 'application/json']);
     }
 
@@ -62,7 +62,7 @@ final class ManagingTaxonsContext implements Context
      */
     public function iWantToGetTaxonRoot(): void
     {
-        $this->client->getCookieJar()->set(new Cookie($this->session->getName(), $this->session->getId()));
+        $this->client->getCookieJar()->set(new Cookie($this->requestStack->getSession()->getName(), $this->requestStack->getSession()->getId()));
         $this->client->request('GET', '/admin/ajax/taxons/root-nodes', [], [], ['ACCEPT' => 'application/json']);
     }
 

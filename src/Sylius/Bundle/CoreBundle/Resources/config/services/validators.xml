@@ -4,7 +4,7 @@
 
  This file is part of the Sylius package.
 
- (c) Paweł Jędrzejewski
+ (c) Sylius Sp. z o.o.
 
  For the full copyright and license information, please view the LICENSE
  file that was distributed with this source code.
@@ -59,7 +59,6 @@
         <service id="sylius.validator.product_integrity" class="Sylius\Bundle\CoreBundle\Validator\Constraints\OrderProductEligibilityValidator">
             <tag name="validator.constraint_validator" alias="sylius_order_product_eligibility_validator" />
         </service>
-
         <service id="sylius.validator.channel_default_locale_enabled" class="Sylius\Bundle\CoreBundle\Validator\Constraints\ChannelDefaultLocaleEnabledValidator">
             <tag name="validator.constraint_validator" alias="sylius_channel_default_locale_enabled" />
         </service>

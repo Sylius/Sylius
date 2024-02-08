@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -789,5 +789,58 @@ final class OrderSpec extends ObjectBehavior
         $this->setChannel($channel);
 
         $this->getNonDiscountedItemsTotal()->shouldReturn(500);
+    }
+
+    function it_returns_a_proper_total_of_taxes_included_in_price_or_excluded_from_it(
+        OrderItemInterface $firstOrderItem,
+        OrderItemInterface $secondOrderItem,
+        AdjustmentInterface $includedUnitTaxAdjustment,
+        AdjustmentInterface $excludedUnitTaxAdjustment,
+        AdjustmentInterface $shippingTaxAdjustment,
+    ): void {
+        $includedUnitTaxAdjustment->getType()->willReturn(AdjustmentInterface::TAX_ADJUSTMENT);
+        $includedUnitTaxAdjustment->isNeutral()->willReturn(true);
+        $includedUnitTaxAdjustment->getAmount()->willReturn(1000);
+
+        $excludedUnitTaxAdjustment->getType()->willReturn(AdjustmentInterface::TAX_ADJUSTMENT);
+        $excludedUnitTaxAdjustment->isNeutral()->willReturn(false);
+        $excludedUnitTaxAdjustment->getAmount()->willReturn(800);
+
+        $firstOrderItem->getTotal()->willReturn(5000);
+        $firstOrderItem
+            ->getAdjustmentsRecursively(AdjustmentInterface::TAX_ADJUSTMENT)
+            ->willReturn(new ArrayCollection([$includedUnitTaxAdjustment->getWrappedObject()]))
+        ;
+
+        $secondOrderItem->getTotal()->willReturn(5000);
+        $secondOrderItem
+            ->getAdjustmentsRecursively(AdjustmentInterface::TAX_ADJUSTMENT)
+            ->willReturn(new ArrayCollection([$excludedUnitTaxAdjustment->getWrappedObject()]))
+        ;
+
+        $firstOrderItem->setOrder($this)->shouldBeCalled();
+        $secondOrderItem->setOrder($this)->shouldBeCalled();
+        $this->addItem($firstOrderItem);
+        $this->addItem($secondOrderItem);
+
+        $shippingTaxAdjustment->getType()->willReturn(AdjustmentInterface::TAX_ADJUSTMENT);
+        $shippingTaxAdjustment->setAdjustable($this)->shouldBeCalled();
+        $shippingTaxAdjustment->isNeutral()->willReturn(true);
+        $shippingTaxAdjustment->getAmount()->willReturn(500);
+        $this->addAdjustment($shippingTaxAdjustment);
+
+        $this->getTaxIncludedTotal()->shouldReturn(1500);
+        $this->getTaxExcludedTotal()->shouldReturn(800);
+    }
+
+    function it_can_be_processed(): void
+    {
+        $this->setState(OrderInterface::STATE_CART);
+
+        $this->canBeProcessed()->shouldReturn(true);
+
+        $this->setState(OrderInterface::STATE_NEW);
+
+        $this->canBeProcessed()->shouldReturn(false);
     }
 }

@@ -1,0 +1,25 @@
+# This file is part of the Sylius package.
+# (c) Sylius Sp. z o.o.
+
+default:
+    suites:
+        api_administrator_security:
+            contexts:
+                - sylius.behat.context.hook.doctrine_orm
+
+                - sylius.behat.context.transform.admin
+                - sylius.behat.context.transform.shared_storage
+                - sylius.behat.context.transform.user
+
+                - sylius.behat.context.setup.channel
+                - sylius.behat.context.setup.admin_security
+                - sylius.behat.context.setup.admin_user
+                - sylius.behat.context.setup.user
+
+                - sylius.behat.context.api.admin.login
+                - sylius.behat.context.api.admin.managing_administrators
+                - sylius.behat.context.api.email
+
+            filters:
+                tags: "@administrator_security&&@api"
+            javascript: false

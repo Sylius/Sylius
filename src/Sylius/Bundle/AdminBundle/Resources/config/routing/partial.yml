@@ -2,6 +2,10 @@ sylius_admin_partial_address:
     resource: "@SyliusAdminBundle/Resources/config/routing/partial/address.yml"
     prefix: /address
 
+sylius_admin_partial_catalog_promotion:
+    resource: "@SyliusAdminBundle/Resources/config/routing/partial/catalog_promotion.yml"
+    prefix: /catalog-promotions
+
 sylius_admin_partial_channel:
     resource: "@SyliusAdminBundle/Resources/config/routing/partial/channel.yml"
     prefix: /channels
@@ -14,9 +18,17 @@ sylius_admin_partial_order:
     resource: "@SyliusAdminBundle/Resources/config/routing/partial/order.yml"
     prefix: /orders
 
+sylius_admin_partial_payment_method:
+    resource: "@SyliusAdminBundle/Resources/config/routing/partial/payment_method.yml"
+    prefix: /payment-methods
+
 sylius_admin_partial_product:
     resource: "@SyliusAdminBundle/Resources/config/routing/partial/product.yml"
     prefix: /products
+
+sylius_admin_partial_product_attribute:
+    resource: "@SyliusAdminBundle/Resources/config/routing/partial/product_attribute.yml"
+    prefix: /product-attributes
 
 sylius_admin_partial_promotion:
     resource: "@SyliusAdminBundle/Resources/config/routing/partial/promotion.yml"

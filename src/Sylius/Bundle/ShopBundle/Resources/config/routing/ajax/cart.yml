@@ -1,11 +1,11 @@
 # This file is a part of the Sylius package.
-# (c) Paweł Jędrzejewski
+# (c) Sylius Sp. z o.o.
 
 sylius_shop_ajax_cart_add_item:
     path: /add
     methods: [POST]
     defaults:
-        _controller: sylius.controller.order_item:addAction
+        _controller: sylius.controller.order_item::addAction
         _format: json
         _sylius:
             factory:
@@ -24,7 +24,7 @@ sylius_shop_ajax_cart_item_remove:
     path: /{id}/remove
     methods: [DELETE]
     defaults:
-        _controller: sylius.controller.order_item:removeAction
+        _controller: sylius.controller.order_item::removeAction
         _format: json
         _sylius:
             flash: sylius.cart.remove_item

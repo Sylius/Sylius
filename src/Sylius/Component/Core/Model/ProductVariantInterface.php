@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -51,9 +51,7 @@ interface ProductVariantInterface extends
     public function setShippingCategory(?ShippingCategoryInterface $shippingCategory): void;
 
     /**
-     * @return Collection|ChannelPricingInterface[]
-     *
-     * @psalm-return Collection<array-key, ChannelPricingInterface>
+     * @return Collection<array-key, ChannelPricingInterface>
      */
     public function getChannelPricings(): Collection;
 

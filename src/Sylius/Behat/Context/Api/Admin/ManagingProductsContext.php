@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -17,6 +17,7 @@ use ApiPlatform\Core\Api\IriConverterInterface;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
+use Sylius\Behat\Context\Api\Resources;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Model\AdminUserInterface;
 use Sylius\Component\Core\Model\ProductInterface;
@@ -32,11 +33,10 @@ final class ManagingProductsContext implements Context
 
     public function __construct(
         private ApiClientInterface $client,
-        private ApiClientInterface $adminUsersClient,
-        private ApiClientInterface $productReviewsClient,
         private ResponseCheckerInterface $responseChecker,
         private IriConverterInterface $iriConverter,
         private SharedStorageInterface $sharedStorage,
+        private string $apiUrlPrefix,
     ) {
     }
 
@@ -52,6 +52,8 @@ final class ManagingProductsContext implements Context
             'translation.name' => self::SORT_TYPES[$sortType],
             'localeCode' => $this->getAdminLocaleCode(),
         ]);
+
+        $this->sharedStorage->set('response', $this->client->getLastResponse());
     }
 
     /**
@@ -61,7 +63,9 @@ final class ManagingProductsContext implements Context
      */
     public function iWantToBrowseProducts(): void
     {
-        $this->client->index();
+        $this->client->index(Resources::PRODUCTS);
+
+        $this->sharedStorage->set('response', $this->client->getLastResponse());
     }
 
     /**
@@ -72,10 +76,10 @@ final class ManagingProductsContext implements Context
         /** @var AdminUserInterface $adminUser */
         $adminUser = $this->sharedStorage->get('administrator');
 
-        $this->adminUsersClient->buildUpdateRequest((string) $adminUser->getId());
+        $this->client->buildUpdateRequest(Resources::ADMINISTRATORS, (string) $adminUser->getId());
 
-        $this->adminUsersClient->updateRequestData(['localeCode' => $localeCode]);
-        $this->adminUsersClient->update();
+        $this->client->updateRequestData(['localeCode' => $localeCode]);
+        $this->client->update();
     }
 
     /**
@@ -83,7 +87,7 @@ final class ManagingProductsContext implements Context
      */
     public function iWantToCreateANewConfigurableProduct(): void
     {
-        $this->client->buildCreateRequest();
+        $this->client->buildCreateRequest(Resources::PRODUCTS);
     }
 
     /**
@@ -146,9 +150,9 @@ final class ManagingProductsContext implements Context
         /** @var ProductInterface $product */
         $product = $this->sharedStorage->get('product');
 
-        $productOptions = $this->responseChecker->getValue($this->client->show($product->getCode()), 'options');
+        $productOptions = $this->responseChecker->getValue($this->client->show(Resources::PRODUCTS, $product->getCode()), 'options');
 
-        $productOptions[] = $this->iriConverter->getIriFromItem($productOption);
+        $productOptions[] = $this->iriConverter->getIriFromItemInSection($productOption, 'admin');
 
         $this->client->updateRequestData(['options' => $productOptions]);
     }
@@ -158,7 +162,7 @@ final class ManagingProductsContext implements Context
      */
     public function iChooseMainTaxon(TaxonInterface $taxon): void
     {
-        $this->client->updateRequestData(['mainTaxon' => $this->iriConverter->getIriFromItem($taxon)]);
+        $this->client->updateRequestData(['mainTaxon' => $this->iriConverter->getIriFromItemInSection($taxon, 'admin')]);
     }
 
     /**
@@ -185,6 +189,8 @@ final class ManagingProductsContext implements Context
     public function iSwitchTheWayProductsAreSortedByCode(string $sortType = 'ascending'): void
     {
         $this->client->sort(['code' => self::SORT_TYPES[$sortType]]);
+
+        $this->sharedStorage->set('response', $this->client->getLastResponse());
     }
 
     /**
@@ -192,7 +198,7 @@ final class ManagingProductsContext implements Context
      */
     public function iDeleteProduct(ProductInterface $product): void
     {
-        $this->client->delete($product->getCode());
+        $this->client->delete(Resources::PRODUCTS, $product->getCode());
     }
 
     /**
@@ -201,7 +207,7 @@ final class ManagingProductsContext implements Context
      */
     public function iWantToModifyAProduct(ProductInterface $product): void
     {
-        $this->client->buildUpdateRequest($product->getCode());
+        $this->client->buildUpdateRequest(Resources::PRODUCTS, $product->getCode());
     }
 
     /**
@@ -223,7 +229,7 @@ final class ManagingProductsContext implements Context
      */
     public function theProductShouldAppearInTheShop(string $productName): void
     {
-        $response = $this->client->index();
+        $response = $this->client->index(Resources::PRODUCTS);
 
         Assert::true(
             $this->responseChecker->hasItemWithTranslation($response, 'en_US', 'name', $productName),
@@ -239,6 +245,36 @@ final class ManagingProductsContext implements Context
             'translations' => [
                 $localeCode => [
                     'name' => '',
+                    'locale' => $localeCode,
+                ],
+            ],
+        ]);
+    }
+
+    /**
+     * @When I set its meta keywords to too long string in :localeCode
+     */
+    public function iSetItsMetaKeywordsToTooLongStringIn(string $localeCode): void
+    {
+        $this->client->updateRequestData([
+            'translations' => [
+                $localeCode => [
+                    'metaKeywords' => str_repeat('a', 256),
+                    'locale' => $localeCode,
+                ],
+            ],
+        ]);
+    }
+
+    /**
+     * @When I set its meta description to too long string in :localeCode
+     */
+    public function iSetItsMetaDescriptionToTooLongStringIn(string $localeCode): void
+    {
+        $this->client->updateRequestData([
+            'translations' => [
+                $localeCode => [
+                    'metaDescription' => str_repeat('a', 256),
                     'locale' => $localeCode,
                 ],
             ],
@@ -298,6 +334,28 @@ final class ManagingProductsContext implements Context
     }
 
     /**
+     * @Then I should be notified that meta keywords are too long
+     */
+    public function iShouldBeNotifiedThatMetaKeywordsAreTooLong(): void
+    {
+        Assert::contains(
+            $this->responseChecker->getError($this->client->getLastResponse()),
+            'Product meta keywords must not be longer than 255 characters.',
+        );
+    }
+
+    /**
+     * @Then I should be notified that meta description is too long
+     */
+    public function iShouldBeNotifiedThatMetaDescriptionIsTooLong(): void
+    {
+        Assert::contains(
+            $this->responseChecker->getError($this->client->getLastResponse()),
+            'Product meta description must not be longer than 255 characters.',
+        );
+    }
+
+    /**
      * @Then I should be notified that code has to be unique
      */
     public function iShouldBeNotifiedThatCodeHasToBeUnique(): void
@@ -321,8 +379,10 @@ final class ManagingProductsContext implements Context
      */
     public function iShouldSeeProductWith(string $field, string $value): void
     {
+        $response = $this->getLastResponse();
+
         Assert::true(
-            $this->hasProductWithFieldValue($this->client->getLastResponse(), $field, $value),
+            $this->hasProductWithFieldValue($response, $field, $value),
             sprintf('Product has not %s with %s', $field, $value),
         );
     }
@@ -332,10 +392,10 @@ final class ManagingProductsContext implements Context
      */
     public function iShouldNotSeeAnyProductWith(string $field, string $value): void
     {
+        $response = $this->getLastResponse();
+
         Assert::false(
-            $this
-                ->responseChecker
-                ->hasItemWithTranslation($this->client->getLastResponse(), 'en_US', $field, $value),
+            $this->responseChecker->hasItemWithTranslation($response, 'en_US', $field, $value),
             sprintf('Product with %s set as %s still exists, but it should not', $field, $value),
         );
     }
@@ -347,14 +407,14 @@ final class ManagingProductsContext implements Context
     {
         $this->client->addRequestData('code', '_NEW');
         $this->client->update();
-        $this->client->index();
+        $this->client->index(Resources::PRODUCTS);
 
         Assert::false(
             $this->responseChecker->hasItemOnPositionWithValue(
                 $this->client->getLastResponse(),
                 0,
                 'code',
-                '/api/v2/admin/products/_NEW',
+                sprintf('%s/admin/products/_NEW', $this->apiUrlPrefix),
             ),
             sprintf('It was possible to change %s', '_NEW'),
         );
@@ -366,11 +426,11 @@ final class ManagingProductsContext implements Context
      */
     public function thisProductMainTaxonShouldBe(ProductInterface $product, TaxonInterface $taxon): void
     {
-        $response = $this->client->show($product->getCode());
+        $response = $this->client->show(Resources::PRODUCTS, $product->getCode());
 
         $mainTaxon = $this->responseChecker->getValue($response, 'mainTaxon');
 
-        Assert::same($mainTaxon, $this->iriConverter->getIriFromItem($taxon));
+        Assert::same($mainTaxon, $this->iriConverter->getIriFromItemInSection($taxon, 'admin'));
     }
 
     /**
@@ -378,7 +438,7 @@ final class ManagingProductsContext implements Context
      */
     public function thisProductNameShouldBe(ProductInterface $product, string $name): void
     {
-        $response = $this->client->show($product->getCode());
+        $response = $this->client->show(Resources::PRODUCTS, $product->getCode());
 
         Assert::true(
             $this->responseChecker->hasTranslation($response, 'en_US', 'name', $name),
@@ -391,7 +451,7 @@ final class ManagingProductsContext implements Context
      */
     public function productShouldNotExist(ProductInterface $product): void
     {
-        $response = $this->client->index();
+        $response = $this->client->index(Resources::PRODUCTS);
 
         Assert::false(
             $this->responseChecker->hasItemWithValue($response, 'code', $product->getCode()),
@@ -404,12 +464,12 @@ final class ManagingProductsContext implements Context
      */
     public function thisProductShouldHaveOption(ProductInterface $product, ProductOptionInterface $productOption): void
     {
-        $response = $this->client->show($product->getCode());
+        $response = $this->client->show(Resources::PRODUCTS, $product->getCode());
 
         $productFromResponse = $this->responseChecker->getResponseContent($response);
 
         Assert::true(
-            in_array($this->iriConverter->getIriFromItem($productOption), $productFromResponse['options'], true),
+            in_array($this->iriConverter->getIriFromItemInSection($productOption, 'admin'), $productFromResponse['options'], true),
             sprintf('Product with option %s does not exist', $productOption->getName()),
         );
     }
@@ -419,7 +479,9 @@ final class ManagingProductsContext implements Context
      */
     public function theFirstProductOnTheListShouldHave(string $field, string $value): void
     {
-        $products = $this->responseChecker->getCollection($this->client->getLastResponse());
+        $response = $this->getLastResponse();
+
+        $products = $this->responseChecker->getCollection($response);
 
         Assert::same($this->getFieldValueOfFirstProduct($products[0], $field), $value);
     }
@@ -430,7 +492,7 @@ final class ManagingProductsContext implements Context
      */
     public function productSlugShouldBe(ProductInterface $product, string $slug, $localeCode = 'en_US'): void
     {
-        $response = $this->client->show($product->getCode());
+        $response = $this->client->show(Resources::PRODUCTS, $product->getCode());
 
         Assert::true(
             $this->responseChecker->hasTranslation($response, $localeCode, 'slug', $slug),
@@ -443,13 +505,13 @@ final class ManagingProductsContext implements Context
      */
     public function thereAreNoProductReviews(ProductInterface $product): void
     {
-        $response = $this->productReviewsClient->index();
+        $response = $this->client->index(Resources::PRODUCT_REVIEWS);
 
         Assert::isEmpty(
             $this->responseChecker->getCollectionItemsWithValue(
                 $response,
                 'reviewSubject',
-                $this->iriConverter->getIriFromItem($product),
+                $this->iriConverter->getIriFromItemInSection($product, 'admin'),
             ),
             'Should be no reviews, but some exist',
         );
@@ -460,7 +522,7 @@ final class ManagingProductsContext implements Context
      */
     public function productShouldExistInTheProductCatalog(ProductInterface $product): void
     {
-        $response = $this->client->index();
+        $response = $this->client->index(Resources::PRODUCTS);
         $code = $product->getCode();
 
         Assert::true(
@@ -474,7 +536,7 @@ final class ManagingProductsContext implements Context
      */
     public function productShouldStillHaveAnAccessibleImage(ProductInterface $product): void
     {
-        $response = $this->client->show($product->getCode());
+        $response = $this->client->show(Resources::PRODUCTS, $product->getCode());
 
         Assert::true($this->hasProductImage($response, $product), 'Image does not exists');
     }
@@ -484,7 +546,7 @@ final class ManagingProductsContext implements Context
      */
     public function productWithNameShouldNotBeAdded(string $field, string $value): void
     {
-        Assert::false($this->hasProductWithFieldValue($this->client->index(), $field, $value));
+        Assert::false($this->hasProductWithFieldValue($this->client->index(Resources::PRODUCTS), $field, $value));
     }
 
     private function getAdminLocaleCode(): string
@@ -492,7 +554,7 @@ final class ManagingProductsContext implements Context
         /** @var AdminUserInterface $adminUser */
         $adminUser = $this->sharedStorage->get('administrator');
 
-        $response = $this->adminUsersClient->show((string) $adminUser->getId());
+        $response = $this->client->show(Resources::ADMINISTRATORS, (string) $adminUser->getId());
 
         return $this->responseChecker->getValue($response, 'localeCode');
     }
@@ -531,5 +593,10 @@ final class ManagingProductsContext implements Context
         }
 
         return false;
+    }
+
+    private function getLastResponse(): Response
+    {
+        return $this->sharedStorage->has('response') ? $this->sharedStorage->get('response') : $this->client->getLastResponse();
     }
 }

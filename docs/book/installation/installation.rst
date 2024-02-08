@@ -47,6 +47,17 @@ the contents of that new file should look like the following snippet:
 
     DATABASE_URL=mysql://username:password@host/my_custom_sylius_database
 
+.. warning::
+    Specific Sylius versions may support various Symfony versions. To make sure the correct Symfony version will be
+    installed (Symfony 6.0 for example) use:
+
+    .. code-block:: bash
+
+        composer config extra.symfony.require "^6.0"
+        composer update
+
+    Otherwise, you may face the problem of having Symfony components of the wrong version installed.
+
 After everything is in place, run the following command to install Sylius:
 
 .. code-block:: bash
@@ -64,10 +75,14 @@ After everything is in place, run the following command to install Sylius:
 Configuring Mailer
 ------------------
 
-In order to send emails you need to configure Mailer Service. Basically you need to:
+In order to send emails you need to configure Mailer Service. Basically there are multiple ways to do it:
+
+* We are recommending to use `Symfony Mailer <https://symfony.com/doc/current/mailer.html>`_ where out of the box, you can deliver emails by configuring the ``MAILER_DSN`` variable in your .env file.
+* In Symfony Mailer use the `3rd Party Transports <https://symfony.com/doc/current/mailer.html#using-a-3rd-party-transport>`_
+* (deprecated) Use SwiftMailer with this short configuration:
 
 1. **Create an account on a mailing service.**
-2. **In your** ``.env`` **file modify the** ``MAILER_URL`` **variable.**
+2. **In your** ``.env`` **file modify/add the** ``MAILER_URL`` **variable.**
 
 .. code-block:: text
 
@@ -84,7 +99,10 @@ Installing assets
 
 In order to see a fully functional frontend you will need to install its assets.
 
-**Sylius** uses `Gulp`_ to build frontend assets using `Yarn`_ as a JavaScript package manager.
+**Sylius** uses `Webpack`_ to build frontend assets using `Yarn`_ as a JavaScript package manager.
+
+.. note::
+    If you want to read more, you can read a :doc:`chapter of our Book devoted to the Sylius' frontend </book/frontend/index>`.
 
 Having Yarn installed, go to your project directory to install the dependencies:
 
@@ -102,7 +120,7 @@ Accessing the Shop
 ------------------
 
 We strongly recommend using the Symfony Local Web Server by running the ``symfony server:start``
-command and then accessing ``http://127.0.0.1:8000`` in your web browser to see the shop.
+command and then accessing ``https://127.0.0.1:8000`` in your web browser to see the shop.
 
 .. note::
     Get to know more about using Symfony Local Web Server `in the Symfony server documentation <https://symfony.com/doc/current/setup/symfony_server.html>`_.
@@ -145,6 +163,7 @@ Contributing
 
 If you would like to contribute to Sylius - please go to the :doc:`Contribution Guide </book/contributing/index>`
 
-.. _Gulp: http://gulpjs.com/
+.. _Gulp: https://gulpjs.com/
+.. _Webpack: https://webpack.js.org/
 .. _Yarn: https://yarnpkg.com/lang/en/
-.. _Composer: http://packagist.org
+.. _Composer: https://packagist.org

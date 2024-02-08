@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -160,6 +160,54 @@ final class SyliusUserExtensionTest extends AbstractExtensionTestCase
         Assert::assertSame(User::class, $shopUserListenerDefinition->getArgument(2));
         Assert::assertSame(UserInterface::class, $shopUserListenerDefinition->getArgument(3));
         Assert::assertSame('_password', $shopUserListenerDefinition->getArgument(4));
+    }
+
+    /** @test */
+    public function it_creates_default_resetting_token_parameters_for_each_user_type(): void
+    {
+        $this->load([
+            'resources' => [
+                'admin' => [
+                    'user' => [],
+                ],
+                'shop' => [
+                    'user' => [],
+                ],
+            ],
+        ]);
+
+        Assert::assertSame('P1D', $this->container->getParameter('sylius.admin_user.token.password_reset.ttl'));
+        Assert::assertSame('P1D', $this->container->getParameter('sylius.shop_user.token.password_reset.ttl'));
+    }
+
+    /** @test */
+    public function it_creates_custom_resetting_token_parameters_for_each_user_type(): void
+    {
+        $this->load([
+            'resources' => [
+                'admin' => [
+                    'user' => [
+                        'resetting' => [
+                            'token' => [
+                                'ttl' => 'P5D',
+                            ],
+                        ],
+                    ],
+                ],
+                'shop' => [
+                    'user' => [
+                        'resetting' => [
+                            'token' => [
+                                'ttl' => 'P2D',
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+        ]);
+
+        Assert::assertSame('P5D', $this->container->getParameter('sylius.admin_user.token.password_reset.ttl'));
+        Assert::assertSame('P2D', $this->container->getParameter('sylius.shop_user.token.password_reset.ttl'));
     }
 
     protected function getContainerExtensions(): array

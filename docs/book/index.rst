@@ -116,10 +116,22 @@ This part of the documentation is about the currently developed unified API for 
 
 .. include:: /book/api/map.rst.inc
 
+Frontend
+--------
+
+This chapter will introduce you to the world of Sylius' frontend.
+
+.. toctree::
+    :hidden:
+
+    frontend/index
+
+.. include:: /book/frontend/map.rst.inc
+
 Themes
 ------
 
-Here you will learn basics about the Theming concept of Sylius. How to change the theme of your shop? keep reading!
+Here you will learn basics about the theming concept of sylius. How to change the theme of your shop? keep reading!
 
 .. toctree::
     :hidden:

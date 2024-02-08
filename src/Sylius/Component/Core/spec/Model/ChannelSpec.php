@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -170,6 +170,17 @@ final class ChannelSpec extends ObjectBehavior
     {
         $this->setAccountVerificationRequired(false);
         $this->isAccountVerificationRequired()->shouldReturn(false);
+    }
+
+    function it_does_not_have_shipping_address_in_checkout_required_by_default(): void
+    {
+        $this->isShippingAddressInCheckoutRequired()->shouldReturn(false);
+    }
+
+    function it_can_set_shipping_address_in_checkout_required(): void
+    {
+        $this->setShippingAddressInCheckoutRequired(true);
+        $this->isShippingAddressInCheckoutRequired()->shouldReturn(true);
     }
 
     function its_menu_taxon_is_mutable(TaxonInterface $taxon): void

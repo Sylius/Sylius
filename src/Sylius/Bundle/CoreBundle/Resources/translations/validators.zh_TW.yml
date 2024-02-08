@@ -1,5 +1,5 @@
 # This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
+# (c) Sylius Sp. z o.o.
 
 sylius:
     channel:
@@ -22,8 +22,8 @@ sylius:
     user:
         email:
             unique: 此電郵位址已被使用。
-            min: 電郵地址必須至少有 {{ min }} 個字元。
-            max: 電郵地址最多只能含有 {{ max }} 個字元。
+            min: 電郵地址必須至少有 {{ limit }} 個字元。
+            max: 電郵地址最多只能含有 {{ limit }} 個字元。
             invalid: 這不是正確的電郵地址。
         username:
             not_blank: 請輸入您的姓名。

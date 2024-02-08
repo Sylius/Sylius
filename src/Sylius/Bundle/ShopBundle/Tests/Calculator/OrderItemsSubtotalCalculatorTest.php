@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -58,6 +58,7 @@ final class OrderItemsSubtotalCalculatorTest extends MockeryTestCase
     private function getOrderItemMock(int $subTotal): OrderItemInterface
     {
         $orderItem = Mockery::mock(OrderItemInterface::class);
+        /** @phpstan-ignore-next-line */
         $orderItem
             ->shouldReceive('getSubTotal')
             ->once()
@@ -70,6 +71,7 @@ final class OrderItemsSubtotalCalculatorTest extends MockeryTestCase
     private function getOrderMock(array $orderItems): OrderInterface
     {
         $order = Mockery::mock(OrderInterface::class);
+        /** @phpstan-ignore-next-line */
         $order
             ->shouldReceive('getItems->toArray')
             ->once()

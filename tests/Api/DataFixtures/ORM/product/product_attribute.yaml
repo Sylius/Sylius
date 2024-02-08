@@ -1,0 +1,144 @@
+Sylius\Component\Core\Model\Product:
+    product:
+        fallbackLocale: en_US
+        currentLocale: en_US
+        code: MUG_SW
+
+Sylius\Component\Product\Model\ProductAttribute:
+    product_attribute_checkbox:
+        fallbackLocale: en_US
+        currentLocale: en_US
+        code: 'dishwasher_safe'
+        name: 'dishwasher safe'
+        type: 'checkbox'
+        storage_type: 'boolean'
+        configuration: []
+        translatable: false
+    product_attribute_date:
+        fallbackLocale: en_US
+        currentLocale: en_US
+        code: 'manufactured'
+        name: 'manufactured'
+        type: 'date'
+        storage_type: 'date'
+        configuration: []
+        translatable: false
+    product_attribute_datetime:
+        fallbackLocale: en_US
+        currentLocale: en_US
+        code: 'available_until'
+        name: 'available until'
+        type: 'datetime'
+        storage_type: 'datetime'
+        configuration: []
+        translatable: false
+    product_attribute_integer:
+        fallbackLocale: en_US
+        currentLocale: en_US
+        code: 'capacity'
+        name: 'capacity'
+        type: 'integer'
+        storage_type: 'integer'
+        configuration: []
+        translatable: false
+    product_attribute_percent:
+        fallbackLocale: en_US
+        currentLocale: en_US
+        code: 'yixing_clay'
+        name: 'yixing clay'
+        type: 'percent'
+        storage_type: 'float'
+        configuration: []
+        translatable: false
+    product_attribute_select:
+        fallbackLocale: en_US
+        currentLocale: en_US
+        code: 'extra_info'
+        name: 'extra info'
+        type: 'select'
+        storage_type: 'json'
+        configuration: {
+            choices: {
+                0afb212e-cd08-11ec-871e-0242ac120005: {
+                    fr_FR: 'fait a la main',
+                    en_US: 'handmade'
+                },
+                0afb4e88-cd08-11ec-bcd4-0242ac120005: {
+                    fr_FR: 'coffret cadeau',
+                    en_US: 'gift box',
+                    pl_PL: 'opakowanie prezentowe'
+                }
+            }
+        }
+        translatable: false
+    product_attribute_textarea:
+        fallbackLocale: en_US
+        currentLocale: en_US
+        code: 'note'
+        name: 'note'
+        type: 'textarea'
+        storage_type: 'text'
+        configuration: []
+        translatable: false
+    product_attribute_text:
+        fallbackLocale: en_US
+        currentLocale: en_US
+        code: 'origin'
+        name: 'origin'
+        type: 'text'
+        storage_type: 'text'
+        configuration: []
+        translatable: true
+        
+Sylius\Component\Product\Model\ProductAttributeTranslation:
+    product_attribute_translation_checkbox:
+        locale: pl_PL
+        name: 'mozna myc w zmywarce'
+        translatable: '@product_attribute_checkbox'
+        
+Sylius\Component\Product\Model\ProductAttributeValue:
+    product_attribute_value_checkbox:
+        localeCode: pl_PL
+        product: '@product'
+        attribute: '@product_attribute_checkbox'
+        value: false
+    product_attribute_value_date:
+        localeCode: en_US
+        product: '@product'
+        attribute: '@product_attribute_date'
+        value: "<(new \\DateTime('2021-11-11'))>"
+    product_attribute_value_datetime:
+        localeCode: en_US
+        product: '@product'
+        attribute: '@product_attribute_datetime'
+        value: "<(new \\DateTime('2023-05-02 13:45:00'))>"
+    product_attribute_value_integer:
+        localeCode: en_US
+        product: '@product'
+        attribute: '@product_attribute_integer'
+        value: 250
+    product_attribute_value_percent:
+        localeCode: en_US
+        product: '@product'
+        attribute: '@product_attribute_percent'
+        value: 0.9
+    product_attribute_value_select:
+        localeCode: pl_PL
+        product: '@product'
+        attribute: '@product_attribute_select'
+        value: ['0afb212e-cd08-11ec-871e-0242ac120005', '0afb4e88-cd08-11ec-bcd4-0242ac120005']
+    product_attribute_value_textarea:
+        localeCode: en_US
+        product: '@product'
+        attribute: '@product_attribute_textarea'
+        value: 'Duis efficitur vel mauris vel interdum. Integer posuere fermentum lacinia. Sed a tellus ut risuslaoreet sollicitudin eu a felis. Ut fringilla lobortis felis, ut vestibulum risus. Pellentesque massa turpis, cursus sed auctor ac, tincidunt sed nunc.'
+    product_attribute_value_origin_en:
+        localeCode: en_US
+        product: '@product'
+        attribute: '@product_attribute_text'
+        value: 'China'
+    product_attribute_value_origin_pl:
+        localeCode: pl_PL
+        product: '@product'
+        attribute: '@product_attribute_text'
+        value: 'Chiny'
