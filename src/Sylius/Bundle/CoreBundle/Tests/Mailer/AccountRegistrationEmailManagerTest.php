@@ -30,7 +30,7 @@ final class AccountRegistrationEmailManagerTest extends KernelTestCase
     /** @test */
     public function it_sends_account_registration_email(): void
     {
-        if ($this->isSwiftmailerTestEnv()) {
+        if (self::isSwiftmailerTestEnv()) {
             self::markTestSkipped('This test should be executed only outside of test_with_swiftmailer environment');
         }
 
@@ -63,12 +63,5 @@ final class AccountRegistrationEmailManagerTest extends KernelTestCase
             $email,
             $translator->trans('sylius.email.user_registration.start_shopping', [], null, 'en_US'),
         );
-    }
-
-    private function isSwiftmailerTestEnv(): bool
-    {
-        $env = self::getContainer()->getParameter('kernel.environment');
-
-        return $env === 'test_with_swiftmailer';
     }
 }

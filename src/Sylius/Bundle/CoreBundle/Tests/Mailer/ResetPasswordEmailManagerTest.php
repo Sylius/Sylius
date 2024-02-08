@@ -45,7 +45,7 @@ final class ResetPasswordEmailManagerTest extends KernelTestCase
     /** @test */
     public function it_sends_admin_reset_password_email(): void
     {
-        if (self::isItSwiftmailerTestEnv()) {
+        if (self::isSwiftmailerTestEnv()) {
             $this->markTestSkipped('Test is relevant only for the environment without swiftmailer');
         }
 
@@ -63,7 +63,7 @@ final class ResetPasswordEmailManagerTest extends KernelTestCase
     /** @test */
     public function it_sends_reset_password_email_with_swiftmailer(): void
     {
-        if (!self::isItSwiftmailerTestEnv()) {
+        if (!self::isSwiftmailerTestEnv()) {
             $this->markTestSkipped('Test is relevant only for the environment with swiftmailer');
         }
 

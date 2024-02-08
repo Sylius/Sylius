@@ -17,6 +17,7 @@ use Prophecy\PhpUnit\ProphecyTrait;
 use Prophecy\Prophecy\ObjectProphecy;
 use Sylius\Bundle\CoreBundle\Mailer\AccountVerificationEmailManagerInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
+use Sylius\Component\Core\Test\SwiftmailerAssertionTrait;
 use Sylius\Component\User\Model\UserInterface;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Contracts\Translation\TranslatorInterface;
@@ -24,11 +25,12 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 final class AccountVerificationEmailManagerTest extends KernelTestCase
 {
     use ProphecyTrait;
+    use SwiftmailerAssertionTrait;
 
     /** @test */
     public function it_sends_account_verification_token_email(): void
     {
-        if ($this->isItSwiftmailerTestEnv()) {
+        if (self::isSwiftmailerTestEnv()) {
             $this->markTestSkipped('This test should be executed only outside of test_with_swiftmailer environment');
         }
 
@@ -60,12 +62,5 @@ final class AccountVerificationEmailManagerTest extends KernelTestCase
             $email,
             $translator->trans('sylius.email.verification_token.message', [], null, 'en_US'),
         );
-    }
-
-    private function isItSwiftmailerTestEnv(): bool
-    {
-        $env = self::getContainer()->getParameter('kernel.environment');
-
-        return $env === 'test_with_swiftmailer';
     }
 }

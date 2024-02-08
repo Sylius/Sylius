@@ -23,7 +23,7 @@ trait SwiftmailerAssertionTrait
 {
     private static ?string $spoolDirectory = null;
 
-    public static function isItSwiftmailerTestEnv(): bool
+    public static function isSwiftmailerTestEnv(): bool
     {
         $env = self::getContainer()->getParameter('kernel.environment');
 
