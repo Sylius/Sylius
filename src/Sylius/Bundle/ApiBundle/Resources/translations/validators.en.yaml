@@ -7,6 +7,7 @@ sylius:
     address:
         without_country: 'The address without country cannot exist'
     code:
+        not_blank: 'Please enter a code.'
         invalid: 'The code should contain only letters, numbers, dashes ("-" symbol) and underscores ("_" symbol).'
     contact_request:
         email_is_invalid: 'The provided email is invalid.'
