@@ -1,0 +1,21 @@
+twig_hooks:
+    hooks:
+        'sylius_admin.security.login':
+            logo:
+                template: '@SyliusAdmin/Security/Login/_logo.html.twig'
+            content:
+                template: '@SyliusAdmin/Security/Login/_content.html.twig'
+        'sylius_admin.security.login.content':
+            header:
+                template: '@SyliusAdmin/Security/Login/Content/_header.html.twig'
+            form:
+                template: '@SyliusAdmin/Security/Login/Content/_form.html.twig'
+        'sylius_admin.security.login.content.form':
+            username_field:
+                template: '@SyliusAdmin/Security/Login/Content/Form/_usernameField.html.twig'
+            password_field:
+                template: '@SyliusAdmin/Security/Login/Content/Form/_passwordField.html.twig'
+            remember_me_field:
+                template: '@SyliusAdmin/Security/Login/Content/Form/_rememberMeField.html.twig'
+            submit_button:
+                template: '@SyliusAdmin/Security/Login/Content/Form/_submitButton.html.twig'
