@@ -73,10 +73,10 @@ NPM Package Manager
 -------------------
 
 Sylius Frontend depends on `npm packages <https://docs.npmjs.com/about-npm>`_ for it to run you need to have Node.js installed.
-Current minimum supported version of Node.js is:
+Current supported versions of Node.js are:
 
 +---------------+-----------------------+
-| Node.js       | 14.x                  |
+| Node.js       | 18.x, 20.x            |
 +---------------+-----------------------+
 
 Access rights
