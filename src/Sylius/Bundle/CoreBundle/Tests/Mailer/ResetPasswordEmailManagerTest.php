@@ -59,28 +59,4 @@ final class ResetPasswordEmailManagerTest extends KernelTestCase
             $this->translator->trans(id: 'sylius.email.admin_password_reset.to_reset_your_password_token', locale: 'en_US'),
         );
     }
-
-    /** @test */
-    public function it_sends_reset_password_email_with_swiftmailer(): void
-    {
-        if (!self::isSwiftmailerTestEnv()) {
-            $this->markTestSkipped('Test is relevant only for the environment with swiftmailer');
-        }
-
-        $container = self::getContainer();
-
-        self::setSpoolDirectory($container->getParameter('kernel.cache_dir') . '/spool');
-
-        /** @var Filesystem $filesystem */
-        $filesystem = $container->get('filesystem');
-        $filesystem->remove(self::getSpoolDirectory());
-
-        $this->resetPasswordEmailManager->sendAdminResetPasswordEmail($this->adminUser, 'en_US');
-
-        self::assertSpooledMessagesCountWithRecipient(1, self::RECIPIENT_EMAIL);
-        self::assertSpooledMessageWithContentHasRecipient(
-            $this->translator->trans('sylius.email.admin_password_reset.to_reset_your_password_token', [], null, 'en_US'),
-            self::RECIPIENT_EMAIL,
-        );
-    }
 }
