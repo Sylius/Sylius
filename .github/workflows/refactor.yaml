@@ -35,7 +35,7 @@ jobs:
                 name: Setup PHP
                 uses: shivammathur/setup-php@v2
                 with:
-                    php-version: 8.0 # the lowest PHP version working with ECS
+                    php-version: 8.1 # the lowest PHP version working with ECS
 
             -
                 name: Install PHP dependencies

@@ -38,7 +38,7 @@
         }
     ],
     "require": {
-        "php": "^8.0",
+        "php": "^8.1",
         "stof/doctrine-extensions-bundle": "^1.4",
         "sylius/mailer-bundle": "^1.8 || ^2.0@beta",
         "sylius/resource-bundle": "^1.9",

@@ -28,7 +28,7 @@
         }
     ],
     "require": {
-        "php": "^8.0",
+        "php": "^8.1",
         "payum/offline": "^1.7.3",
         "payum/payum-bundle": "^2.5",
         "sylius/core": "^1.13",
