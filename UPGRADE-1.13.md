@@ -8,6 +8,11 @@ Sylius 1.13 comes with a bump of minimum PHP version to 8.1. We strongly advice 
 so it is highly recommended updating your PHP version being still on Sylius 1.12. After ensuring, that previous step succeed, 
 you may move forward to the Sylius 1.13 update.
 
+### Symfony support
+
+In Sylius 1.13, the minimum supported version of Symfony 6 has been bumped up to 6.4. Sylius 1.13 supports both long-term
+supported Symfony versions: 5.4 and 6.4.
+
 ## Main update
 
 1. Starting with Sylius `1.13` we provided a possibility to use the Symfony Workflow as your State Machine. To allow a smooth transition

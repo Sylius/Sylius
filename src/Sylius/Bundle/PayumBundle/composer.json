@@ -40,7 +40,7 @@
     },
     "require-dev": {
         "phpspec/phpspec": "^7.2",
-        "symfony/dependency-injection": "^5.4.21 || ^6.0"
+        "symfony/dependency-injection": "^5.4.21 || ^6.4"
     },
     "suggest": {
         "payum/paypal-express-checkout-nvp": "To use PayPal Express Chekout NVP",

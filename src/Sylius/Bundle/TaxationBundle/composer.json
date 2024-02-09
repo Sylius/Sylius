@@ -33,7 +33,7 @@
         "sylius/registry": "^1.5",
         "sylius/resource-bundle": "^1.9",
         "sylius/taxation": "^1.13",
-        "symfony/framework-bundle": "^5.4.21 || ^6.0"
+        "symfony/framework-bundle": "^5.4.21 || ^6.4"
     },
     "conflict": {
         "doctrine/orm": ">= 2.16.0",
@@ -46,9 +46,9 @@
         "phpspec/phpspec": "^7.2",
         "phpunit/phpunit": "^9.5",
         "polishsymfonycommunity/symfony-mocker-container": "^1.0",
-        "symfony/browser-kit": "^5.4.21 || ^6.0",
-        "symfony/dependency-injection": "^5.4.21 || ^6.0",
-        "symfony/form": "^5.4.21 || ^6.0"
+        "symfony/browser-kit": "^5.4.21 || ^6.4",
+        "symfony/dependency-injection": "^5.4.21 || ^6.4",
+        "symfony/form": "^5.4.21 || ^6.4"
     },
     "config": {
         "allow-plugins": {

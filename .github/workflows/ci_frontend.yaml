@@ -79,5 +79,5 @@ jobs:
                     e2e_js: "yes"
                     database_version: "8.0"
                     php_version: "8.1"
-                    symfony_version: "6.4.*"
+                    symfony_version: "^6.4"
                     node_version: ${{ matrix.node }}
