@@ -8,6 +8,8 @@ twig_hooks:
                     form: '@=form'
                     parentMainHook: '@=parent_main_hook'
                     parentFallbackHook: '@=parent_fallback_hook'
+                configuration:
+                    method: 'PUT'
         
         'sylius_admin.country.update.content.form':
             sections:
