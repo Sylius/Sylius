@@ -1,0 +1,24 @@
+{% set main_hook = hook_name(hookable_data.parent_main_hook, 'item') %}
+{% set fallback_hook = hook_name(hookable_data.parent_fallback_hook, 'item') %}
+
+{% set order = hookable_data.resource %}
+
+<div class="py-3">
+    {% if order.hasShipments %}
+        <table class="table table-vcenter table-borderless table-sm card-table">
+            <tbody>
+            <tr>
+                {% for shipment in order.shipments %}
+                    {% hook [main_hook, fallback_hook] with hookable_data|merge({
+                        parent_main_hook: main_hook,
+                        parent_fallback_hook: fallback_hook,
+                        shipment: shipment
+                    }) %}
+                {% endfor %}
+            </tr>
+            </tbody>
+        </table>
+    {% else %}
+        <span class="px-3 text-secondary italic">{{ 'sylius.ui.there_are_no_shipments_to_display'|trans }}</span>
+    {% endif %}
+</div>
