@@ -48,7 +48,7 @@ final class EmailContext implements Context
     public function aVerificationEmailShouldHaveBeenSentTo(string $recipient): void
     {
         $this->assertEmailContainsMessageTo(
-            $this->translator->trans('sylius.email.verification_token.to_verify_your_email_address'),
+            $this->translator->trans('sylius.email.user.verification.message'),
             $recipient,
         );
     }
