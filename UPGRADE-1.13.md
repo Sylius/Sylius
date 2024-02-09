@@ -1,5 +1,15 @@
 # UPGRADE FROM `v1.12.X` TO `v1.13.0`
 
+## Preconditions
+
+### PHP 8.1 support
+
+Sylius 1.13 comes with a bump of minimum PHP version to 8.1. We strongly advice to make upgrade process step by step,
+so it is highly recommended updating your PHP version being still on Sylius 1.12. After ensuring, that previous step succeed, 
+you may move forward to the Sylius 1.13 update.
+
+## Main update
+
 1. Starting with Sylius `1.13` we provided a possibility to use the Symfony Workflow as your State Machine. To allow a smooth transition
     we created a new package called `sylius/state-machine-abstraction`,
    which provides a configurable abstraction,
