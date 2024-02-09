@@ -86,9 +86,6 @@
         "symfony/dependency-injection": "^5.4.21 || ^6.4",
         "symfony/dotenv": "^5.4.21 || ^6.4"
     },
-    "conflict": {
-        "symfony/doctrine-bridge": "4.4.20 || 5.2.4 || 5.2.5"
-    },
     "config": {
         "allow-plugins": {
             "php-http/discovery": false,

@@ -48,8 +48,7 @@
     },
     "conflict": {
         "doctrine/doctrine-bundle": "2.3.0",
-        "lexik/jwt-authentication-bundle": "^2.18",
-        "symfony/doctrine-bridge": "4.4.20 || 5.2.4 || 5.2.5"
+        "lexik/jwt-authentication-bundle": "^2.18"
     },
     "config": {
         "allow-plugins": {
