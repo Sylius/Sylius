@@ -28,7 +28,7 @@
         "php": "^8.1",
         "sylius/channel": "^1.13",
         "sylius/resource-bundle": "^1.9",
-        "symfony/framework-bundle": "^5.4.21 || ^6.0"
+        "symfony/framework-bundle": "^5.4.21 || ^6.4"
     },
     "require-dev": {
         "doctrine/orm": "^2.13",
@@ -36,9 +36,9 @@
         "phpspec/phpspec": "^7.2",
         "phpunit/phpunit": "^9.5",
         "polishsymfonycommunity/symfony-mocker-container": "^1.0",
-        "symfony/browser-kit": "^5.4.21 || ^6.0",
-        "symfony/dependency-injection": "^5.4.21 || ^6.0",
-        "symfony/form": "^5.4.21 || ^6.0",
+        "symfony/browser-kit": "^5.4.21 || ^6.4",
+        "symfony/dependency-injection": "^5.4.21 || ^6.4",
+        "symfony/form": "^5.4.21 || ^6.4",
         "twig/twig": "^2.12 || ^3.3"
     },
     "conflict": {

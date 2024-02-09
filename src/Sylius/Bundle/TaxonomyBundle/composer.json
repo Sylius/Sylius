@@ -32,7 +32,7 @@
         "stof/doctrine-extensions-bundle": "^1.4",
         "sylius/resource-bundle": "^1.9",
         "sylius/taxonomy": "^1.13",
-        "symfony/framework-bundle": "^5.4.21 || ^6.0"
+        "symfony/framework-bundle": "^5.4.21 || ^6.4"
     },
     "conflict": {
         "doctrine/orm": "2.15.2",
@@ -43,7 +43,7 @@
         "doctrine/orm": "^2.13",
         "phpspec/phpspec": "^7.2",
         "phpunit/phpunit": "^9.5",
-        "symfony/dependency-injection": "^5.4.21 || ^6.0"
+        "symfony/dependency-injection": "^5.4.21 || ^6.4"
     },
     "config": {
         "allow-plugins": {
