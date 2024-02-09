@@ -37,7 +37,7 @@
         }
     ],
     "require": {
-        "php": "^8.0",
+        "php": "^8.1",
         "doctrine/orm": "^2.13",
         "egulias/email-validator": "^3.1",
         "sylius-labs/polyfill-symfony-event-dispatcher": "^1.0.1",

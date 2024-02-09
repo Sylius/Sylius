@@ -23,7 +23,7 @@
         }
     ],
     "require": {
-        "php": "^8.0",
+        "php": "^8.1",
         "doctrine/dbal": "^3.0",
         "api-platform/core": "^2.7.10",
         "enshrined/svg-sanitize": "^0.16",

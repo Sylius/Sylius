@@ -26,7 +26,7 @@
         }
     ],
     "require": {
-        "php": "^8.0",
+        "php": "^8.1",
         "sylius/locale": "^1.13",
         "sylius/resource-bundle": "^1.9",
         "symfony/framework-bundle": "^5.4.21 || ^6.0",
