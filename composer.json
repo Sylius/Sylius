@@ -231,7 +231,7 @@
         "symfony/browser-kit": "^6.4.0",
         "symfony/debug-bundle": "^6.4.0",
         "symfony/dotenv": "^6.4.0",
-        "symfony/flex": "^2.2",
+        "symfony/flex": "^2.4",
         "symfony/runtime": "^6.3",
         "symfony/web-profiler-bundle": "^6.3",
         "symplify/monorepo-builder": "^11.0"
