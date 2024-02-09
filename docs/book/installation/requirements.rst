@@ -62,7 +62,7 @@ Database
 By default, the database connection is pre-configured to work with a following MySQL configuration:
 
 +---------------+-----------------------+
-| MySQL         | 5.7+, 8.0+            |
+| MySQL         | 8.0+                  |
 +---------------+-----------------------+
 
 .. note::
