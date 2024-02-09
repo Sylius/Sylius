@@ -2,9 +2,14 @@ twig_hooks:
     hooks:
         'sylius_admin.product.update.content':
             form:
-                template: '@SyliusAdmin/Shared/Crud/Update/Content/_form.html.twig'
+                component: 'SyliusAdmin.Product.Form'
+                data:
+                    form: '@=form'
+                    resource: '@=resource'
+                    parentMainHook: '@=parent_main_hook'
+                    parentFallbackHook: '@=parent_fallback_hook'
                 configuration:
-                    render_rest: false
+                    method: 'PUT'
         
         'sylius_admin.product.update.content.header.title_block.actions':
             more:
@@ -16,16 +21,12 @@ twig_hooks:
                 template: '@SyliusAdmin/Product/Update/Header/TitleBlock/Actions/More/_viewInStore.html.twig'
 
         'sylius_admin.product.update.content.form':
-            form_body:
-                template: '@SyliusAdmin/Product/Form/formBody.html.twig'
-
-        'sylius_admin.product.update.content.form.form_body':
             side_navigation:
                 template: '@SyliusAdmin/Product/Form/_sideNavigation.html.twig'
             sections:
                 template: '@SyliusAdmin/Product/Form/_sections.html.twig'
 
-        'sylius_admin.product.update.content.form.form_body.side_navigation':
+        'sylius_admin.product.update.content.form.side_navigation':
             details:
                 template: '@SyliusAdmin/Product/Form/SideNavigation/_details.html.twig'
                 configuration:
@@ -45,7 +46,7 @@ twig_hooks:
             media:
                 template: '@SyliusAdmin/Product/Form/SideNavigation/_media.html.twig'
 
-        'sylius_admin.product.update.content.form.form_body.sections':
+        'sylius_admin.product.update.content.form.sections':
             details:
                 template: '@SyliusAdmin/Product/Form/Sections/_details.html.twig'
             translations:
