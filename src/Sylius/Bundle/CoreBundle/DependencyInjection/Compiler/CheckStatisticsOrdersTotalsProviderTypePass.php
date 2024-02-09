@@ -27,7 +27,7 @@ final class CheckStatisticsOrdersTotalsProviderTypePass implements CompilerPassI
         $intervalsTypes = $container->getParameter('sylius_core.orders_statistics.intervals_map');
         $ordersTotalsProviderTypes = [];
 
-        foreach ($container->findTaggedServiceIds('sylius.statistics.orders_totals_provider') as $id => $attributes) {
+        foreach ($container->findTaggedServiceIds('sylius.statistics.orders_totals_provider') as $attributes) {
             foreach ($attributes as $attribute) {
                 if (!isset($attribute['type'])) {
                     throw new \InvalidArgumentException('Tagged orders totals providers need to have `type` attribute.');

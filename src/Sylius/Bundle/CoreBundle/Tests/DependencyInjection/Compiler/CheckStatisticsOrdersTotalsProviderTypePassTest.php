@@ -32,7 +32,12 @@ final class CheckStatisticsOrdersTotalsProviderTypePassTest extends AbstractComp
         );
 
         $this->compile();
-        $this->assertTrue(true, 'Compiler pass completed without throwing an exception.');
+
+        $this->assertContainerBuilderHasService('sylius.registry.statistics_orders_totals_provider');
+        $this->assertContainerBuilderHasParameter(
+            'sylius_core.orders_statistics.intervals_map',
+            ['daily' => 'Daily', 'monthly' => 'Monthly']
+        );
     }
 
     /** @test */
