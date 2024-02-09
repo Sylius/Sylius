@@ -77,7 +77,7 @@ jobs:
                 if: matrix.symfony != ''
                 run: |
                     composer global config --no-plugins allow-plugins.symfony/flex true
-                    composer global require --no-progress --no-scripts --no-plugins "symfony/flex:1.18.5"
+                    composer global require --no-progress --no-scripts --no-plugins "symfony/flex:^2"
                     composer config extra.symfony.require "${{ matrix.symfony }}"
 
             -   name: Get Composer cache directory

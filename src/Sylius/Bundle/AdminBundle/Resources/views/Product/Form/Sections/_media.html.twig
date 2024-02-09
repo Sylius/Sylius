@@ -6,7 +6,7 @@
             </h2>
         </div>
         <div class="card-body">
-            {% for imageForm in form.images %}
+            {% for imageForm in hookable_data.form.images %}
                 <div class="row mb-4">
                     <div class="col-auto">
                         <span class="avatar avatar-xl" style="background-image: url('{{ imageForm.vars.value.path|imagine_filter('sylius_small') }}')"></span>

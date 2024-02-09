@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Bundle\AdminBundle\TwigComponent\Dashboard;
 
 use Sylius\Bundle\AdminBundle\Provider\StatisticsDataProviderInterface;
+use Sylius\Bundle\AdminBundle\TwigComponent\HookableComponentTrait;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Symfony\UX\LiveComponent\Attribute\AsLiveComponent;
@@ -29,27 +30,21 @@ final class StatisticsComponent
 {
     use ComponentToolsTrait;
     use DefaultActionTrait;
-
-    #[ExposeInTemplate]
-    public readonly string $eventName;
+    use HookableComponentTrait;
 
     #[LiveProp]
     public string $channelCode;
 
     #[LiveProp]
-    #[ExposeInTemplate]
     public string $startDate = 'first day of january this year';
 
     #[LiveProp]
-    #[ExposeInTemplate]
     public string $endDate = 'first day of january next year';
 
     #[LiveProp]
-    #[ExposeInTemplate]
     public string $range = 'month';
 
     #[LiveProp]
-    #[ExposeInTemplate]
     public string $rangeName = 'year';
 
     /**
@@ -59,7 +54,6 @@ final class StatisticsComponent
         private readonly ChannelRepositoryInterface $channelRepository,
         private readonly StatisticsDataProviderInterface $statisticsDataProvider,
     ) {
-        $this->eventName = 'sylius.admin.dashboard.statistics';
     }
 
     /**

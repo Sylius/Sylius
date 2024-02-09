@@ -1,8 +1,22 @@
-{% set main_event = _context.main_event ~ '.form' %}
-{% set fallback_event = _context.fallback_event ~ '.form' %}
+{# Rendered with using \Sylius\Bundle\AdminBundle\TwigComponent\Country\CountryType #}
 
-<div class="page-body">
-    <div class="container-xl">
-        {{ twig_event([main_event, fallback_event],_context|merge({main_event: main_event,fallback_event: fallback_event})) }}
-    </div>
+{% form_theme form '@SyliusAdmin/Shared/form_theme.html.twig' %}
+
+{% set main_hook = hook_name(parent_main_hook, 'form') %}
+{% set fallback_hook = hook_name(parent_fallback_hook, 'form') %}
+
+<div class="container-xl" {{ attributes }}>
+    {{ form_start(form, {'attr': {'class': 'ui loadable form', 'novalidate': 'novalidate', 'id': form.vars.id}}) }}
+    {% if this.isUpdate %}
+        <input type="hidden" name="_method" value="PUT" />
+    {% endif %}
+    {{ form_errors(form) }}
+    {{ form_widget(form._token) }}
+
+    {% hook [main_hook, fallback_hook] with {
+        parent_main_hook: main_hook,
+        parent_fallback_hook: fallback_hook,
+        form,
+    } %}
+    {{ form_end(form, {render_rest: false}) }}
 </div>

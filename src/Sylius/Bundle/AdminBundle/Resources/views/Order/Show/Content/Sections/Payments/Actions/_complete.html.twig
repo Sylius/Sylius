@@ -1,9 +1,12 @@
-{% if sm_can(_context.payment, 'complete', 'sylius_payment') %}
+{% set order = hookable_data.resource %}
+{% set payment = hookable_data.payment %}
+
+{% if sm_can(payment, 'complete', 'sylius_payment') %}
     {% from '@SyliusAdmin/Shared/Helper/icon.html.twig' import icon as _icon %}
 
     <div class="ui segment">
         <form
-            action="{{ path('sylius_admin_order_payment_complete', {'orderId': _context.order.id, 'id': _context.payment.id}) }}"
+            action="{{ path('sylius_admin_order_payment_complete', {'orderId': order.id, 'id': payment.id}) }}"
             method="post"
             novalidate
         >

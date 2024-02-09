@@ -1,3 +1,9 @@
-<button type="button" class="list-group-item list-group-item-action {% if _context.active|default(false) %}active{% endif %}" data-bs-toggle="tab" data-bs-target="#product-details" role="tab">
+<button
+    type="button"
+    class="list-group-item list-group-item-action {% if hookable_configuration.active|default(false) %}active{% endif %}"
+    data-bs-toggle="tab"
+    data-bs-target="#product-details"
+    role="tab"
+>
     {{ 'sylius.ui.details'|trans }}
 </button>

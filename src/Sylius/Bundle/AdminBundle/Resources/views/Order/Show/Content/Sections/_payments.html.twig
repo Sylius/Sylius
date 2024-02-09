@@ -1,17 +1,16 @@
 {% import '@SyliusAdmin/Shared/Helper/money.html.twig' as _money %}
 
-{% set main_event = twig_event_name(_context.main_event, 'payments') %}
-{% set fallback_event = twig_event_name(_context.fallback_event, 'payments') %}
+{% set main_hook = hook_name(hookable_data.parent_main_hook, 'payments') %}
+{% set fallback_hook = hook_name(hookable_data.parent_fallback_hook, 'payments') %}
 
-{% set actions_event = twig_event_name(main_event, 'actions') %}
-{% set actions_fallback_event = twig_event_name(fallback_event, 'actions') %}
+{% set order = hookable_data.resource %}
 
 <div class="card mb-3">
     <div class="card-header">
         <div class="card-title">
             {{ 'sylius.ui.payments'|trans }}
             <span class="ms-2">
-                {{ include('@SyliusAdmin/Order/_Shared/Label/PaymentState/' ~ _context.order.paymentState ~ '.html.twig') }}
+                {{ include('@SyliusAdmin/Order/_Shared/Label/PaymentState/' ~ order.paymentState ~ '.html.twig') }}
             </span>
         </div>
     </div>
@@ -19,7 +18,7 @@
         {% if order.hasPayments() %}
             <table class="table table-vcenter table-borderless table-sm card-table">
                 <tbody>
-                {% for payment in _context.order.payments %}
+                {% for payment in order.payments %}
                     <tr>
                         <td class="w-1">
                             <div class="text-success">{{ payment.state|upper }}</div>
@@ -28,17 +27,14 @@
                             <strong>{{ payment.method.name }}</strong>
                         </td>
                         <td class="text-end">
-                            {{ _money.format(payment.amount, _context.order.currencyCode) }}
+                            {{ _money.format(payment.amount, order.currencyCode) }}
                         </td>
                         <td class="w-1 text-end">
-                            {{ twig_event(
-                                [actions_event, actions_fallback_event],
-                                _context|merge({
-                                    main_event: actions_event,
-                                    fallback_event: actions_fallback_event,
-                                    payment,
-                                })
-                            ) }}
+                            {% hook [main_hook ~ '#actions', fallback_hook ~ '#actions'] with hookable_data|merge({
+                                parent_main_hook: main_hook ~ '#actions',
+                                parent_fallback_hook: fallback_hook ~ '#actions',
+                                payment,
+                            }) %}
                         </td>
                     </tr>
                 {% endfor %}

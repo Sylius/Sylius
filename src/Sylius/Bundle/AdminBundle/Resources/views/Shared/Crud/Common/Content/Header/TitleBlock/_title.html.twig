@@ -1,6 +1,12 @@
 {% import '@SyliusAdmin/Shared/Helper/header.html.twig' as _header %}
 
-{% set header = configuration.vars.header|default(metadata.applicationName~'.ui.'~metadata.pluralName) %}
+{% if hookable_data.metadata is defined %}
+    {% set metadata = hookable_data.metadata %}
+    {% set header = hookable_configuration.title|default(metadata.applicationName~'.ui.'~metadata.pluralName) %}
+{% else %}
+    {% set header = hookable_configuration.title %}
+{% endif %}
+
 
 <div class="col-12 col-md-6">
     <div class="d-md-flex gap-2 align-items-center">

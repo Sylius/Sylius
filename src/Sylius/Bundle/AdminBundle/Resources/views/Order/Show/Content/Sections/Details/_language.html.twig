@@ -1,8 +1,10 @@
+{% set order = hookable_data.resource %}
+
 <div>
     <div>
         <strong>{{ 'sylius.ui.language'|trans }}:</strong>
     </div>
     <div class="mb-3">
-        {{ _context.order.localeCode|sylius_locale_name }}
+        {{ order.localeCode|sylius_locale_name }}
     </div>
 </div>

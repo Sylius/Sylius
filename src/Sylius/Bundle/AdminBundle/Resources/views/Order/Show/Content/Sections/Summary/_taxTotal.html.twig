@@ -1,6 +1,6 @@
 {% import '@SyliusAdmin/Shared/Helper/money.html.twig' as _money %}
 
-{% set order = _context.resource %}
+{% set order = hookable_data.resource %}
 
 <tr>
     <td><strong>{{ 'sylius.ui.tax_total'|trans }}:</strong></td>

@@ -1,10 +1,15 @@
 {% import '@SyliusAdmin/Shared/Helper/header.html.twig' as _header %}
 
-{% set metadata = _context.metadata %}
-{% set configuration = _context.configuration %}
+{% if hookable_data.metadata is defined and hookable_data.configuration is defined %}
+    {% set configuration = hookable_data.configuration %}
+    {% set metadata = hookable_data.metadata %}
 
-{% set singularName = metadata.applicationName ~ '.ui.' ~ metadata.name %}
-{% set header = configuration.vars.header.create|default(null) %}
+    {% set singularName = hookable_configuration.resource_name|default(metadata.applicationName ~ '.ui.' ~ _context.metadata.name) %}
+    {% set header = hookable_configuration.header|default(null) %}
+{% else %}
+    {% set singularName = hookable_configuration.resource_name %}
+    {% set header = hookable_configuration.header %}
+{% endif %}
 
 <div class="col-12 col-md-6">
     <div class="d-md-flex gap-2 align-items-center">

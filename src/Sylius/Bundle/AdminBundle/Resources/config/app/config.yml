@@ -1,7 +1,7 @@
 imports:
     - { resource: "@SyliusUiBundle/Resources/config/app/config.yml" }
 
-    - { resource: "@SyliusAdminBundle/Resources/config/app/template_events.yaml" }
+    - { resource: 'twig_hooks/**/*.yaml' }
     - { resource: "@SyliusAdminBundle/Resources/config/app/sylius/sylius_mailer.yml" }
     - { resource: "@SyliusAdminBundle/Resources/config/grids/address_log_entry.yml" }
     - { resource: "@SyliusAdminBundle/Resources/config/grids/admin_user.yml" }

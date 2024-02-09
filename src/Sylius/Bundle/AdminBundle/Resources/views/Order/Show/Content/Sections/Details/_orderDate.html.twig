@@ -1,8 +1,10 @@
+{% set order = hookable_data.resource %}
+
 <div>
     <div>
         <strong>{{ 'sylius.ui.order.date'|trans }}:</strong>
     </div>
     <div class="mb-3">
-        {{ _context.order.checkoutCompletedAt|format_datetime }}
+        {{ order.checkoutCompletedAt|format_datetime }}
     </div>
 </div>

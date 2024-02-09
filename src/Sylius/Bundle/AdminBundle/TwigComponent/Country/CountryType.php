@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\AdminBundle\TwigComponent\Country;
 
-use Sylius\Bundle\AdminBundle\TwigComponent\UiEventsTrait;
+use Sylius\Bundle\AdminBundle\TwigComponent\HookableComponentTrait;
 use Sylius\Component\Addressing\Model\Country;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
@@ -22,12 +22,12 @@ use Symfony\UX\LiveComponent\Attribute\LiveProp;
 use Symfony\UX\LiveComponent\DefaultActionTrait;
 use Symfony\UX\LiveComponent\LiveCollectionTrait;
 
-#[AsLiveComponent(name: 'SyliusAdmin.Country.CountryType', template: '@SyliusAdmin/Country/Component/countryType.html.twig')]
+#[AsLiveComponent(name: 'SyliusAdmin.Country.CountryType', template: '@SyliusAdmin/Country/_form.html.twig')]
 final class CountryType
 {
     use DefaultActionTrait;
+    use HookableComponentTrait;
     use LiveCollectionTrait;
-    use UiEventsTrait;
 
     #[LiveProp(fieldName: 'formData')]
     public ?Country $country = null;

@@ -14,9 +14,9 @@ declare(strict_types=1);
 namespace Sylius\Bundle\AdminBundle\TwigComponent\Taxon;
 
 use Doctrine\Persistence\ObjectManager;
+use Sylius\Bundle\AdminBundle\TwigComponent\HookableComponentTrait;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Taxonomy\Repository\TaxonRepositoryInterface;
-use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\UX\LiveComponent\Attribute\AsLiveComponent;
 use Symfony\UX\LiveComponent\Attribute\LiveAction;
 use Symfony\UX\LiveComponent\Attribute\LiveArg;
@@ -24,9 +24,10 @@ use Symfony\UX\LiveComponent\DefaultActionTrait;
 use Symfony\UX\TwigComponent\Attribute\ExposeInTemplate;
 
 #[AsLiveComponent(name: 'SyliusAdmin.Taxon.TaxonTree', template: '@SyliusAdmin/Taxon/Component/taxonTree.html.twig')]
-final readonly class TaxonTreeComponent
+final class TaxonTreeComponent
 {
     use DefaultActionTrait;
+    use HookableComponentTrait;
 
     /**
      * @param TaxonRepositoryInterface<TaxonInterface> $taxonRepository

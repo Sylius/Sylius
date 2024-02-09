@@ -1,6 +1,6 @@
 {% extends '@SyliusAdmin/Shared/Layout/base.html.twig' %}
 
-{% set event_name = 'sylius.admin.security.login' %}
+{% set main_hook = hook_name(_self) %}
 
 {% block title %}Sylius | {{ 'sylius.ui.administration_panel_login'|trans }}{% endblock %}
 
@@ -9,7 +9,7 @@
 {% block body %}
     <div class="page page-center">
         <div class="container container-tight py-4">
-            {{ sylius_template_event(event_name, { event_prefix: event_name }|merge(_context)) }}
+            {% hook main_hook with { parent_main_hook: main_hook, form } %}
         </div>
     </div>
 {% endblock %}

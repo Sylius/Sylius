@@ -1,9 +1,11 @@
+{% set order = hookable_data.resource %}
+
 <div>
     <div>
         <strong>{{ 'sylius.ui.channel'|trans }}:</strong>
     </div>
     <div class="mb-3">
-        <span class="badge" style="background-color: {{ _context.order.channel.color }}"></span>
-        {{ _context.order.channel.name }}
+        <span class="badge" style="background-color: {{ order.channel.color }}"></span>
+        {{ order.channel.name }}
     </div>
 </div>

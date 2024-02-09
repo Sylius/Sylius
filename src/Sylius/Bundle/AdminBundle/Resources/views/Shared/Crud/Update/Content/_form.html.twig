@@ -1,39 +1,42 @@
-{% form_theme form '@SyliusAdmin/Shared/form_theme.html.twig' %}
-
 {% import '@SyliusAdmin/Shared/Helper/button.html.twig' as _button %}
 
-{% set main_event = _context.main_event ~ '.form' %}
-{% set fallback_event = _context.fallback_event ~ '.form' %}
+{% set main_hook = hook_name(hookable_data.parent_main_hook, 'form') %}
+{% set fallback_hook = hook_name(hookable_data.parent_fallback_hook, 'form') %}
 
-{% set route = _context.configuration.vars.route|default(null) %}
-{% set indexRoute = _context.configuration.vars.index.route|default(null) %}
+{% set resource = hookable_data.resource %}
+{% set configuration = hookable_data.configuration %}
+{% set form = hookable_data.form %}
+
+{% set route = configuration.vars.route|default(null) %}
+{% set indexRoute = configuration.vars.index.route|default(null) %}
 {% set index_url = path(
     indexRoute.name|default(_context.configuration.getRouteName('index')),
     indexRoute.parameters|default(route.parameters|default({}))
 )
 %}
 
+{% form_theme form '@SyliusAdmin/Shared/form_theme.html.twig' %}
+
 <div class="page-body">
     <div class="container-xl">
         {% block content %}
-            {% if _context.render_rest %}
+            {% set renderRest = hookable_configuration.render_rest %}
+
+            {% if renderRest %}
                 <div class="card">
                     <div class="card-body">
             {% endif %}
                         {{ form_start(form, {'action': path(configuration.vars.route.name|default(configuration.getRouteName('update')), configuration.vars.route.parameters|default({ 'id': resource.id })), 'attr': {'class': 'ui loadable form', 'novalidate': 'novalidate', 'id': form.vars.id}}) }}
                             {% block form_content %}
                                 <input type="hidden" name="_method" value="PUT" />
-                                {{ twig_event(
-                                    [main_event, fallback_event],
-                                    _context|merge({
-                                        main_event: main_event,
-                                        fallback_event: fallback_event,
-                                        form: form
-                                    })
-                                ) }}
+
+                                {% hook [main_hook, fallback_hook] with hookable_data|merge({
+                                    parent_main_hook: main_hook,
+                                    parent_fallback_hook: fallback_hook,
+                                }) %}
                             {% endblock %}
-                        {{ form_end(form, {'render_rest': _context.render_rest}) }}
-            {% if _context.render_rest %}
+                        {{ form_end(form, {'render_rest': renderRest}) }}
+            {% if renderRest %}
                     </div>
                     <div class="card-footer">
                         <div class="row align-items-center">

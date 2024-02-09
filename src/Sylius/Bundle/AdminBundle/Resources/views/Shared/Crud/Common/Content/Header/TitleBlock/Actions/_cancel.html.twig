@@ -1,5 +1,7 @@
 {% import '@SyliusAdmin/Shared/Helper/button.html.twig' as _button %}
 
+{% set configuration = hookable_data.configuration %}
+
 {% set index_url = path(
     configuration.vars.index.route.name|default(configuration.getRouteName('index')),
     configuration.vars.index.route.parameters|default(configuration.vars.route.parameters|default({}))

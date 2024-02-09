@@ -1,6 +1,7 @@
-{% set main_event = twig_event_name(_context.main_event, 'translations', 'translation_content') %}
-{% set fallback_event = twig_event_name(_context.fallback_event, 'translations', 'translation_content') %}
-{% set product = _context.resource %}
+{% set main_hook = hook_name(hookable_data.parent_main_hook, 'translations') %}
+{% set fallback_hook = hook_name(hookable_data.parent_fallback_hook, 'translations') %}
+
+{% set product = hookable_data.resource %}
 
 <div class="bg-white mb-3">
     <div class="accordion" id="product-translations">
@@ -23,7 +24,11 @@
                                 </div>
                                 <div class="card-body">
                                     <div class="divide-y">
-                                        {{ twig_event([main_event, fallback_event], _context|merge({ main_event: main_event, fallback_event: fallback_event })) }}
+                                        {% hook [main_hook, fallback_hook] with hookable_data|merge({
+                                            parent_main_hook: main_hook,
+                                            parent_fallback_hook: fallback_hook,
+                                            productTranslation,
+                                        }) %}
                                     </div>
                                 </div>
                             </div>
