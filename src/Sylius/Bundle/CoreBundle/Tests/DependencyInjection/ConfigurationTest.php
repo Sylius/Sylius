@@ -122,7 +122,7 @@ final class ConfigurationTest extends TestCase
     public function it_throws_an_exception_if_orders_statistics_intervals_map_interval_is_invalid(): void
     {
         $this->assertConfigurationIsInvalid(
-            [['orders_statistics' => ['intervals_map' => ['day' => ['interval' => 'invalid','period_format' => 'Y-m-d']]]]],
+            [['orders_statistics' => ['intervals_map' => ['day' => ['interval' => 'invalid', 'period_format' => 'Y-m-d']]]]],
             'Invalid format for interval ""invalid"". Expected a string compatible with DateInterval.',
         );
     }
@@ -131,7 +131,7 @@ final class ConfigurationTest extends TestCase
     public function it_throws_an_exception_if_orders_statistics_intervals_map_period_format_is_empty(): void
     {
         $this->assertConfigurationIsInvalid(
-            [['orders_statistics' => ['intervals_map' => ['day' => ['interval' => 'P1D','period_format' => '']]]]],
+            [['orders_statistics' => ['intervals_map' => ['day' => ['interval' => 'P1D', 'period_format' => '']]]]],
             'The path "sylius_core.orders_statistics.intervals_map.day.period_format" cannot contain an empty value, but got "".',
         );
     }
