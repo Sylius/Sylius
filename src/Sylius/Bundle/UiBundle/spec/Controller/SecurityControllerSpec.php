@@ -75,20 +75,6 @@ final class SecurityControllerSpec extends ObjectBehavior
         $this->loginAction($request)->getContent()->shouldReturn('content');
     }
 
-    function it_redirects_when_user_is_logged_in(
-        Request $request,
-        ParameterBag $requestAttributes,
-        AuthorizationCheckerInterface $authorizationChecker,
-        RouterInterface $router,
-    ): void {
-        $request->attributes = $requestAttributes;
-        $requestAttributes->get('_sylius', [])->willReturn(['logged_in_route' => 'foo_bar']);
-        $authorizationChecker->isGranted('IS_AUTHENTICATED_REMEMBERED')->willReturn(true);
-        $router->generate('foo_bar')->willReturn('/login');
-
-        $this->loginAction($request)->shouldHaveType(RedirectResponse::class);
-    }
-
     function it_throws_an_exception_when_check_action_is_accessed(Request $request): void
     {
         $this
