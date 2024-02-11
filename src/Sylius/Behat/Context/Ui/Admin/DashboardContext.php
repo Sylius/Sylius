@@ -15,14 +15,17 @@ namespace Sylius\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
 use FriendsOfBehat\PageObjectExtension\Page\UnexpectedPageException;
+use Sylius\Behat\Page\Admin\Account\LoginPageInterface;
 use Sylius\Behat\Page\Admin\DashboardPageInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Webmozart\Assert\Assert;
 
 final class DashboardContext implements Context
 {
-    public function __construct(private DashboardPageInterface $dashboardPage)
-    {
+    public function __construct(
+        private DashboardPageInterface $dashboardPage,
+        private LoginPageInterface $loginPage
+    ){
     }
 
     /**
@@ -147,5 +150,13 @@ final class DashboardContext implements Context
     public function iShouldNotSeeTheAdministrationDashboard(): void
     {
         Assert::false($this->dashboardPage->isOpen());
+    }
+
+    /**
+     * @Then I should be redirected to the administration dashboard
+     */
+    public function iShouldBeRedirectedToMyAccountDashboard(): void
+    {
+        Assert::true($this->dashboardPage->isOpen());
     }
 }
