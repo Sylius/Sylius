@@ -52,7 +52,7 @@ class RegistrationContext implements Context
      */
     public function iWantToRegisterANewAccount(): void
     {
-        $this->registerPage->tryToOpen();
+        $this->registerPage->open();
     }
 
     /**

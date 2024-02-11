@@ -461,6 +461,7 @@
             <argument type="service" id="sylius.behat.page.shop.account.login" />
             <argument type="service" id="sylius.behat.notification_checker" />
             <argument type="service" id="sylius.behat.shared_storage" />
+            <argument type="service" id="sylius.behat.page.shop.account.register" />
         </service>
 
         <service id="sylius.behat.context.ui.shop.address_book" class="Sylius\Behat\Context\Ui\Shop\AddressBookContext">
