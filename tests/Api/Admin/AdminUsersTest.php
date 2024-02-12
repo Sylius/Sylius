@@ -40,7 +40,7 @@ final class AdminUsersTest extends JsonApiTestCase
 
         $response = $this->client->getResponse();
 
-        $this->assertResponse($response, 'admin/log_in_admin_response', Response::HTTP_OK);
+        $this->assertResponse($response, 'admin/admin_user/log_in_admin_response', Response::HTTP_OK);
     }
 
     /** @test */
@@ -96,7 +96,7 @@ final class AdminUsersTest extends JsonApiTestCase
 
         $this->assertResponse(
             $this->client->getResponse(),
-            'admin/administrator/get_administrators_response',
+            'admin/admin_user/get_administrators_response',
             Response::HTTP_OK,
         );
     }
@@ -118,7 +118,7 @@ final class AdminUsersTest extends JsonApiTestCase
 
         $this->assertResponse(
             $this->client->getResponse(),
-            'admin/administrator/get_administrator_response',
+            'admin/admin_user/get_administrator_response',
             Response::HTTP_OK,
         );
     }
@@ -146,7 +146,7 @@ final class AdminUsersTest extends JsonApiTestCase
 
         $this->assertResponse(
             $this->client->getResponse(),
-            'admin/administrator/create_administrator_response',
+            'admin/admin_user/create_administrator_response',
             Response::HTTP_CREATED,
         );
     }
@@ -177,7 +177,7 @@ final class AdminUsersTest extends JsonApiTestCase
 
         $this->assertResponse(
             $this->client->getResponse(),
-            'admin/administrator/put_administrator_response',
+            'admin/admin_user/put_administrator_response',
             Response::HTTP_OK,
         );
     }
