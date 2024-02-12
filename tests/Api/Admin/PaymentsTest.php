@@ -56,7 +56,7 @@ final class PaymentsTest extends JsonApiTestCase
             server: $header,
         );
         $response = $this->client->getResponse();
-        $this->assertResponse($response, 'admin/get_payment_response', Response::HTTP_OK);
+        $this->assertResponse($response, 'admin/payment/get_payment_response', Response::HTTP_OK);
     }
 
     /** @test */
@@ -78,6 +78,6 @@ final class PaymentsTest extends JsonApiTestCase
 
         $this->client->request(method: 'GET', uri: '/api/v2/admin/payments', server: $header);
         $response = $this->client->getResponse();
-        $this->assertResponse($response, 'admin/get_payments_response', Response::HTTP_OK);
+        $this->assertResponse($response, 'admin/payment/get_payments_response', Response::HTTP_OK);
     }
 }
