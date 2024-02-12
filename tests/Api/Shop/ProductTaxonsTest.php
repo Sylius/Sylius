@@ -35,7 +35,7 @@ final class ProductTaxonsTest extends JsonApiTestCase
 
         $this->assertResponse(
             $this->client->getResponse(),
-            'shop/get_product_taxon_response',
+            'shop/product/get_product_taxon_response',
             Response::HTTP_OK,
         );
     }
