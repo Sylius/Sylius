@@ -231,7 +231,7 @@ final class ChannelsTest extends JsonApiTestCase
 
         $this->assertResponse(
             $this->client->getResponse(),
-            'admin/put_shop_billing_data_response',
+            'admin/shop_billing_data/put_shop_billing_data_response',
             Response::HTTP_OK,
         );
     }
