@@ -44,7 +44,7 @@ final class ShipType
         return $this->formFactory->create($this->formClass, $this->shipment);
     }
 
-    private function getDataModelValue(): ?string
+    protected function getDataModelValue(): string
     {
         return 'norender|*';
     }
