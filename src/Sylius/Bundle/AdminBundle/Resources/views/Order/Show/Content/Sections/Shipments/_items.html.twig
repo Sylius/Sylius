@@ -7,7 +7,7 @@
     {% if order.hasShipments %}
         <table class="table table-vcenter table-borderless table-sm card-table">
             <tbody>
-            <tr>
+            <tr {{ sylius_test_html_attribute('shipment') }}>
                 {% for shipment in order.shipments %}
                     {% hook [main_hook, fallback_hook] with hookable_data|merge({
                         parent_main_hook: main_hook,

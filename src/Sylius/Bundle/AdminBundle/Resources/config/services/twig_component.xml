@@ -48,5 +48,10 @@
             <argument type="service" id="form.factory" />
             <argument>Sylius\Bundle\AddressingBundle\Form\Type\CountryType</argument>
         </service>
+
+        <service id="Sylius\Bundle\AdminBundle\TwigComponent\Shipment\ShipType">
+            <argument type="service" id="form.factory" />
+            <argument>Sylius\Bundle\ShippingBundle\Form\Type\ShipmentShipType</argument>
+        </service>
     </services>
 </container>

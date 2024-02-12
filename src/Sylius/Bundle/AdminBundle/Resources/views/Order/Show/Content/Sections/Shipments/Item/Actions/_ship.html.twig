@@ -1,7 +1,10 @@
-{% set order = hookable_data.resource %}
 {% set shipment = hookable_data.shipment %}
+{% set main_hook = hook_name(hookable_data.parent_main_hook, 'ship') %}
+{% set fallback_hook = hook_name(hookable_data.parent_fallback_hook, 'ship') %}
 
 {% if sm_can(shipment, 'ship', 'sylius_shipment') %}
-{# TODO: probably convert the partial into a live component #}
-{#    {{ render(path('sylius_admin_partial_shipment_ship', {'orderId': order.id, 'id': shipment.id})) }}#}
+    {% hook [main_hook, fallback_hook] with hookable_data|merge({
+        parent_main_hook: main_hook,
+        parent_fallback_hook: fallback_hook
+    }) %}
 {% endif %}
