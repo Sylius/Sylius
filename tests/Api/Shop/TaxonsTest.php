@@ -26,7 +26,7 @@ final class TaxonsTest extends JsonApiTestCase
         $this->client->request(method: 'GET', uri: '/api/v2/shop/taxons', server: self::CONTENT_TYPE_HEADER);
         $response = $this->client->getResponse();
 
-        $this->assertResponse($response, 'shop/get_taxonomy_response', Response::HTTP_OK);
+        $this->assertResponse($response, 'shop/taxon/get_taxonomy_response', Response::HTTP_OK);
     }
 
     /** @test */
@@ -37,7 +37,7 @@ final class TaxonsTest extends JsonApiTestCase
         $this->client->request(method: 'GET', uri: '/api/v2/shop/taxons/T_SHIRTS', server: self::CONTENT_TYPE_HEADER);
         $response = $this->client->getResponse();
 
-        $this->assertResponse($response, 'shop/get_taxonomy_item_response', Response::HTTP_OK);
+        $this->assertResponse($response, 'shop/taxon/get_taxonomy_item_response', Response::HTTP_OK);
     }
 
     /** @test */
