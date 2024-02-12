@@ -12,8 +12,7 @@
 {% set index_url = path(
     indexRoute.name|default(_context.configuration.getRouteName('index')),
     indexRoute.parameters|default(route.parameters|default({}))
-)
-%}
+) %}
 
 {% form_theme form '@SyliusAdmin/Shared/form_theme.html.twig' %}
 
@@ -24,29 +23,29 @@
 
             {% if renderRest %}
                 <div class="card">
-                    <div class="card-body">
+                <div class="card-body">
             {% endif %}
-                        {{ form_start(form, {'action': path(configuration.vars.route.name|default(configuration.getRouteName('update')), configuration.vars.route.parameters|default({ 'id': resource.id })), 'attr': {'class': 'ui loadable form', 'novalidate': 'novalidate', 'id': form.vars.id}}) }}
-                            {% block form_content %}
-                                <input type="hidden" name="_method" value="PUT" />
+            {{ form_start(form, {'action': path(configuration.vars.route.name|default(configuration.getRouteName('update')), configuration.vars.route.parameters|default({ 'id': resource.id })), 'attr': {'class': 'ui loadable form', 'novalidate': 'novalidate', 'id': form.vars.id}}) }}
+            {% block form_content %}
+                <input type="hidden" name="_method" value="PUT"/>
 
-                                {% hook [main_hook, fallback_hook] with hookable_data|merge({
-                                    parent_main_hook: main_hook,
-                                    parent_fallback_hook: fallback_hook,
-                                }) %}
-                            {% endblock %}
-                        {{ form_end(form, {'render_rest': renderRest}) }}
+                {% hook [main_hook, fallback_hook] with hookable_data|merge({
+                    parent_main_hook: main_hook,
+                    parent_fallback_hook: fallback_hook,
+                }) %}
+            {% endblock %}
+            {{ form_end(form, {'render_rest': renderRest}) }}
             {% if renderRest %}
-                    </div>
-                    <div class="card-footer">
-                        <div class="row align-items-center">
-                            <div class="col"></div>
-                            <div class="col-auto">
-                                {{ _button.cancel({ text: 'sylius.ui.cancel'|trans, url: index_url, class: 'btn btn-ghost-secondary' }) }}
-                                {{ _button.primary({ text: 'sylius.ui.update'|trans, type: 'submit', form: form.vars.id }) }}
-                            </div>
+                </div>
+                <div class="card-footer">
+                    <div class="row align-items-center">
+                        <div class="col"></div>
+                        <div class="col-auto">
+                            {{ _button.cancel({ text: 'sylius.ui.cancel'|trans, url: index_url, class: 'btn btn-ghost-secondary' }) }}
+                            {{ _button.primary({ text: 'sylius.ui.update'|trans, type: 'submit', form: form.vars.id }) }}
                         </div>
                     </div>
+                </div>
                 </div>
             {% endif %}
         {% endblock %}
