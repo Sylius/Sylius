@@ -495,7 +495,7 @@ final class OrdersTest extends JsonApiTestCase
 
         $this->assertResponse(
             $this->client->getResponse(),
-            'shop/assign_shipping_method_to_non_existing_shipment_response',
+            'shop/order/assign_shipping_method_to_non_existing_shipment_response',
             Response::HTTP_UNPROCESSABLE_ENTITY,
         );
     }
