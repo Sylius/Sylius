@@ -57,6 +57,7 @@
         <service id="Sylius\Bundle\AdminBundle\TwigComponent\Product\FormComponent">
             <argument type="service" id="form.factory" />
             <argument>Sylius\Bundle\ProductBundle\Form\Type\ProductType</argument>
+            <argument type="service" id="sylius.context.locale" />
         </service>
     </services>
 </container>
