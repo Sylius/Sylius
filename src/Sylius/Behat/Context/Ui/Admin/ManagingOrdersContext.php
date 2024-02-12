@@ -96,7 +96,7 @@ final class ManagingOrdersContext implements Context
     /**
      * @When specify its tracking code as :trackingCode
      */
-    public function specifyItsTrackingCodeAs($trackingCode)
+    public function specifyItsTrackingCodeAs(string $trackingCode): void
     {
         $this->showPage->specifyTrackingCode($trackingCode);
         $this->sharedStorage->set('tracking_code', $trackingCode);
@@ -105,7 +105,7 @@ final class ManagingOrdersContext implements Context
     /**
      * @When /^I ship (this order)$/
      */
-    public function iShipThisOrder(OrderInterface $order)
+    public function iShipThisOrder(OrderInterface $order): void
     {
         $this->showPage->shipOrder($order);
     }
@@ -597,7 +597,7 @@ final class ManagingOrdersContext implements Context
     public function iShouldBeNotifiedThatTheOrderHasBeenSuccessfullyShipped()
     {
         $this->notificationChecker->checkNotification(
-            'Shipment has been successfully updated.',
+            'Shipment has been successfully shipped.',
             NotificationType::success(),
         );
     }
@@ -707,9 +707,9 @@ final class ManagingOrdersContext implements Context
     /**
      * @Then it should have shipment in state :shipmentState
      */
-    public function itShouldHaveShipmentState($shipmentState)
+    public function itShouldHaveShipmentState(string $shipmentState): void
     {
-        Assert::true($this->showPage->hasShipment($shipmentState));
+        Assert::true($this->showPage->hasShipmentWithStatus($shipmentState));
     }
 
     /**

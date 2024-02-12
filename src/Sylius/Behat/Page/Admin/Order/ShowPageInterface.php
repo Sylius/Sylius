@@ -28,6 +28,8 @@ interface ShowPageInterface extends SymfonyPageInterface
 
     public function hasShipment(string $shippingMethodName): bool;
 
+    public function hasShipmentWithStatus(string $status);
+
     public function specifyTrackingCode(string $code): void;
 
     public function canShipOrder(OrderInterface $order): bool;

@@ -15,7 +15,7 @@ Feature: Shipments are in the state "ready" after checkout
         And the customer chose "Free" shipping method with "Cash on Delivery" payment
         And I am logged in as an administrator
 
-    @todo @ui @api
+    @api @ui
     Scenario: Checking shipment state of a placed order
         When I view the summary of the order "#00000666"
         Then it should have shipment in state "Ready"

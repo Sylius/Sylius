@@ -16,14 +16,14 @@ Feature: Sending a confirmation email after shipping an order
         And the customer chose "Free" shipping method with "Cash on Delivery" payment
         And I am logged in as an administrator
 
-    @todo @ui @email
+    @ui @email
     Scenario: Sending a confirmation email after shipping an order
         When I view the summary of the order "#00000666"
         And specify its tracking code as "#00044"
         And I ship this order
         Then an email with shipment's details of this order should be sent to "lucy@teamlucifer.com"
 
-    @todo @ui @email
+    @ui @email
     Scenario: Sending a confirmation email after shipping an order in different locale than the default one
         Given the order "#00000666" has been placed in "Polish (Poland)" locale
         When I view the summary of the order "#00000666"
