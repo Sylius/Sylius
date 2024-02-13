@@ -22,6 +22,7 @@ use Symfony\Component\Form\FormInterface;
 use Symfony\UX\LiveComponent\Attribute\AsLiveComponent;
 use Symfony\UX\LiveComponent\Attribute\LiveAction;
 use Symfony\UX\LiveComponent\Attribute\LiveArg;
+use Symfony\UX\LiveComponent\Attribute\LiveListener;
 use Symfony\UX\LiveComponent\Attribute\LiveProp;
 use Symfony\UX\LiveComponent\DefaultActionTrait;
 use Symfony\UX\LiveComponent\LiveCollectionTrait;
@@ -82,5 +83,19 @@ final class FormComponent
                 : $value,
             $this->formValues['attributes'],
         );
+    }
+
+    #[LiveListener('product_attribute_autocomplete:add')]
+    public function addAttributes(#[LiveArg] array $attributeCodes): void
+    {
+        foreach ($attributeCodes as $attributeCode) {
+            foreach ($this->formValues['translations'] as $localesCode => $translation) {
+                $this->formValues['attributes'][] = [
+                    'attribute' => $attributeCode,
+                    'localeCode' => $localesCode,
+                    'value' => '',
+                ];
+            }
+        }
     }
 }

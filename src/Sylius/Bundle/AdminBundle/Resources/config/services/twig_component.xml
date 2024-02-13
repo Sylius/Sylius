@@ -59,5 +59,11 @@
             <argument>Sylius\Bundle\ProductBundle\Form\Type\ProductType</argument>
             <argument type="service" id="sylius.context.locale" />
         </service>
+
+        <service id="Sylius\Bundle\AdminBundle\TwigComponent\Product\ProductAttributeAutocompleteComponent">
+            <call method="setLiveResponder">
+                <argument type="service" id="ux.live_component.live_responder"/>
+            </call>
+        </service>
     </services>
 </container>
