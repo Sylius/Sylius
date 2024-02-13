@@ -50,7 +50,7 @@ final class StatisticsComponent
     /**
      * @param ChannelRepositoryInterface<ChannelInterface> $channelRepository
      */
-    public function __construct (
+    public function __construct(
         private readonly ChannelRepositoryInterface $channelRepository,
         private readonly StatisticsDataProviderInterface $statisticsDataProvider,
     ) {
@@ -58,6 +58,7 @@ final class StatisticsComponent
 
     /**
      * @return array<string, mixed>
+     *
      * @throws \Exception
      */
     #[ExposeInTemplate]
@@ -79,7 +80,7 @@ final class StatisticsComponent
         #[LiveArg] string $name,
         #[LiveArg] string $range,
         #[LiveArg] string $startDate,
-        #[LiveArg] string $endDate
+        #[LiveArg] string $endDate,
     ): void {
         $this->rangeName = $name;
         $this->range = $range;

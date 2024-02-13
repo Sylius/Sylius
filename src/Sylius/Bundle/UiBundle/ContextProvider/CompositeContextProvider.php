@@ -33,6 +33,7 @@ final class CompositeContextProvider implements ContextProviderInterface
 
     /**
      * @param array<string, mixed> $templateContext
+     *
      * @return array<string, mixed>
      */
     public function provide(array $templateContext, Block $templateBlock): array

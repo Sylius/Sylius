@@ -19,7 +19,7 @@ use Twig\TwigFunction;
 
 final class AttributeExtension extends AbstractExtension
 {
-    public function __construct (
+    public function __construct(
         private readonly ServiceRegistryInterface $attributeTypeRegistry,
     ) {
     }

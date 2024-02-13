@@ -21,7 +21,7 @@ use Symfony\UX\TwigComponent\Attribute\ExposeInTemplate;
 
 final class UserDropdownComponent
 {
-    public function __construct (
+    public function __construct(
         private UrlGeneratorInterface $urlGenerator,
         private TranslatorInterface $translator,
         private Security $security,
@@ -50,6 +50,7 @@ final class UserDropdownComponent
     {
         /**
          * @phpstan-ignore-next-line PHPStan complains the declared return type does not match the returned value
+         *
          * @psalm-suppress InvalidReturnStatement
          */
         return [
@@ -61,10 +62,10 @@ final class UserDropdownComponent
             [
                 'title' => $this->translator->trans('sylius.ui.logout'),
                 'url' => $this->urlGenerator->generate('sylius_admin_logout'),
-                'icon' =>  'logout',
+                'icon' => 'logout',
             ],
             [
-                'type' => 'divider'
+                'type' => 'divider',
             ],
             [
                 'title' => $this->translator->trans('sylius.ui.documentation'),

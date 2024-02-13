@@ -21,7 +21,7 @@ final class PaymentMethodExtension extends AbstractExtension
     /**
      * @param array<string, string> $gatewayFactories
      */
-    public function __construct (private readonly array $gatewayFactories)
+    public function __construct(private readonly array $gatewayFactories)
     {
     }
 
