@@ -5,6 +5,6 @@
 <div>
     <strong>{{ 'sylius.ui.billing_address'|trans }}</strong>
 </div>
-<div class="mb-3" id="billing-address">
+<div class="mb-3" {{ sylius_test_html_attribute('billing-address') }}>
     {{ _address.default(order.billingAddress) }}
 </div>

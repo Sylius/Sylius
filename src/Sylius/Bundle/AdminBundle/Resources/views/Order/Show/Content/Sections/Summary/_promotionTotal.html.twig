@@ -16,7 +16,7 @@
             <div><strong>{{ 'sylius.ui.promotion_total'|trans }}:</strong></div>
         </div>
     </td>
-    <td class="text-end" id="promotion-total">
+    <td class="text-end" {{ sylius_test_html_attribute('promotion-total') }}>
         {% if totalAdjustments == 0 %}
             <p>{{ 'sylius.ui.no_promotion'|trans }}</p>
         {% else %}

@@ -4,5 +4,5 @@
 
 <tr>
     <td><strong>{{ 'sylius.ui.items_total'|trans }}:</strong></td>
-    <td class="text-end" id="total">{{ _money.format(order.itemsTotal, order.currencyCode) }}</td>
+    <td class="text-end" {{ sylius_test_html_attribute('total') }}>{{ _money.format(order.itemsTotal, order.currencyCode) }}</td>
 </tr>
