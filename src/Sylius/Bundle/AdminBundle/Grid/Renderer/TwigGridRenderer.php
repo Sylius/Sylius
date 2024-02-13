@@ -29,7 +29,7 @@ final readonly class TwigGridRenderer implements GridRendererInterface
     /**
      * @param array<string, string> $itemActionTemplates
      */
-    public function __construct (
+    public function __construct(
         private BaseGridRendererInterface $decorated,
         private Twig $twig,
         private OptionsParserInterface $optionsParser,
@@ -72,7 +72,8 @@ final readonly class TwigGridRenderer implements GridRendererInterface
             'action' => $action,
             'data' => $data,
             'options' => $options,
-        ]);    }
+        ]);
+    }
 
     public function renderFilter(GridViewInterface $gridView, Filter $filter): string
     {

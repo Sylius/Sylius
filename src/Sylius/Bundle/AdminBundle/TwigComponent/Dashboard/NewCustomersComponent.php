@@ -26,7 +26,7 @@ final class NewCustomersComponent
     /**
      * @param CustomerRepositoryInterface<CustomerInterface> $customerRepository
      */
-    public function __construct (
+    public function __construct(
         private readonly CustomerRepositoryInterface $customerRepository,
     ) {
     }

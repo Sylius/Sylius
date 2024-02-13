@@ -89,7 +89,6 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
         }
     }
 
-
     public function getFormValidationErrors(): array
     {
         $errors = $this->getElement('form')->findAll('css', '.alert-danger');

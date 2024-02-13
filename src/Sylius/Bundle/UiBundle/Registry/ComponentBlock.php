@@ -44,7 +44,7 @@ final class ComponentBlock extends Block
 
     public function overwriteWith(Block $block): self
     {
-        if (!$block instanceof ComponentBlock) {
+        if (!$block instanceof self) {
             throw new \DomainException(sprintf(
                 'Trying to overwrite component block "%s" with block of different type "%s".',
                 $this->name,

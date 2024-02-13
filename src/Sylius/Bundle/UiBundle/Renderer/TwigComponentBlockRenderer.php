@@ -62,6 +62,7 @@ final class TwigComponentBlockRenderer implements SupportableBlockRendererInterf
 
     /**
      * @param array<array-key, mixed> $array
+     *
      * @return array<array-key, mixed>
      */
     private function mapArrayRecursively(callable $callback, array $array): array

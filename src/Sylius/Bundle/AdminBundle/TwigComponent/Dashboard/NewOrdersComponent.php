@@ -26,7 +26,7 @@ final class NewOrdersComponent
     /**
      * @param OrderRepositoryInterface<OrderInterface> $orderRepository
      */
-    public function __construct (
+    public function __construct(
         private readonly OrderRepositoryInterface $orderRepository,
     ) {
     }

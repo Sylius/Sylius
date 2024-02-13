@@ -19,7 +19,7 @@ use Twig\TwigFunction;
 
 final class GridExtension extends AbstractExtension
 {
-    public function __construct (
+    public function __construct(
         private readonly GridRendererInterface $gridRenderer,
     ) {
     }

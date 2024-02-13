@@ -56,7 +56,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
             'code' => '[data-test-code]',
             'provinces' => '[data-test-provinces]',
             'last_province' => '[data-test-provinces] [data-test-province]:last-child',
-            'add_province' => '[data-test-add-province]'
+            'add_province' => '[data-test-add-province]',
         ]);
     }
 

@@ -32,7 +32,7 @@ final class TaxonTreeComponent
     /**
      * @param TaxonRepositoryInterface<TaxonInterface> $taxonRepository
      */
-    public function __construct (
+    public function __construct(
         private TaxonRepositoryInterface $taxonRepository,
         private ObjectManager $taxonManager,
     ) {
