@@ -52,16 +52,13 @@ twig_hooks:
 
         'sylius_admin.order.show.content.sections#left.shipments.item.actions':
             ship:
-                template: '@SyliusAdmin/Order/Show/Content/Sections/Shipments/Item/Actions/_ship.html.twig'
+                component: 'SyliusAdmin.Shipment.ShipType'
+                data:
+                    shipment: '@=shipment'
             resend_confirmation:
                 template: '@SyliusAdmin/Order/Show/Content/Sections/Shipments/Item/Actions/_resendConfirmation.html.twig'
             show:
                 template: '@SyliusAdmin/Order/Show/Content/Sections/Shipments/Item/Actions/_show.html.twig'
-        'sylius_admin.order.show.content.sections#left.shipments.item.actions.ship':
-            form:
-                component: 'SyliusAdmin.Shipment.ShipType'
-                data:
-                    shipment: '@=shipment'
         'sylius_admin.order.show.content.sections#left.payments#actions':
             complete:
                 template: '@SyliusAdmin/Order/Show/Content/Sections/Payments/Actions/_complete.html.twig'
