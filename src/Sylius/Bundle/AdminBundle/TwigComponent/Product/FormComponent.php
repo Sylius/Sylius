@@ -24,6 +24,7 @@ use Symfony\UX\LiveComponent\Attribute\LiveAction;
 use Symfony\UX\LiveComponent\Attribute\LiveArg;
 use Symfony\UX\LiveComponent\Attribute\LiveListener;
 use Symfony\UX\LiveComponent\Attribute\LiveProp;
+use Symfony\UX\LiveComponent\ComponentToolsTrait;
 use Symfony\UX\LiveComponent\DefaultActionTrait;
 use Symfony\UX\LiveComponent\LiveCollectionTrait;
 use Symfony\UX\TwigComponent\Attribute\ExposeInTemplate;
@@ -31,6 +32,9 @@ use Symfony\UX\TwigComponent\Attribute\ExposeInTemplate;
 #[AsLiveComponent(name: 'SyliusAdmin.Product.Form', template: '@SyliusAdmin/Product/_form.html.twig')]
 final class FormComponent
 {
+    public const ATTRIBUTE_REMOVED_EVENT = 'sylius_admin:product:form:attributed_deleted';
+
+    use ComponentToolsTrait;
     use DefaultActionTrait;
     use HookableComponentTrait;
     use LiveCollectionTrait;
@@ -83,6 +87,16 @@ final class FormComponent
                 : $value,
             $this->formValues['attributes'],
         );
+    }
+
+    #[LiveAction]
+    public function removeAttribute(#[LiveArg] string $attributeCode): void
+    {
+        $this->formValues['attributes'] = array_filter(
+            $this->formValues['attributes'],
+            fn (array $value) => $value['attribute'] !== $attributeCode
+        );
+        $this->dispatchBrowserEvent(self::ATTRIBUTE_REMOVED_EVENT, ['attributeCode' => $attributeCode]);
     }
 
     #[LiveListener('product_attribute_autocomplete:add')]

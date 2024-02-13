@@ -13,13 +13,23 @@
         <div class="row">
             <div class="col-12 col-sm-4">
                 <div class="border-end">
-                    <div class="list-group list-group-flush" role="tablist">
+                    <div id="product_attribute_tabs" class="list-group list-group-flush" role="tablist">
                         {% for productAttributeCode, productAttributeValue in productAttributes %}
-                            <div class="py-2 cursor-pointer list-group-item list-group-item-action {% if loop.first %}active{% endif %}" data-bs-toggle="tab" data-bs-target="#{{ productAttributeCode }}" aria-selected="{{ loop.first ? 'true' : 'false' }}" role="tab">
+                            <div
+                                class="py-2 cursor-pointer list-group-item list-group-item-action {% if loop.first %}active{% endif %}"
+                                data-bs-toggle="tab" data-bs-target="#{{ productAttributeCode }}"
+                                aria-selected="{{ loop.first ? 'true' : 'false' }}"
+                                role="tab"
+                            >
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div>{{ productAttributeValue['en_US'].vars.data.name }}</div>
                                     <div style="transform: translateX(1rem)">
-                                        <button type="button" class="btn btn-sm border-0 shadow-none">
+                                        <button
+                                            type="button"
+                                            class="btn btn-sm border-0 shadow-none"
+                                            data-action="live#action:stop"
+                                            data-action-name="prevent|removeAttribute(attributeCode={{ productAttributeCode }})"
+                                        >
                                             <svg xmlns="http://www.w3.org/2000/svg" class="text-muted" width="12" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                                                 <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                                                 <path d="M18 6l-12 12"></path>
@@ -37,7 +47,11 @@
                 <div class="py-3 px-5">
                     <div class="tab-content">
                         {% for productAttributeCode, productAttributeValues in productAttributes %}
-                            <div class="tab-pane show {% if loop.first %}active{% endif %}" id="{{ productAttributeCode }}" role="tabpanel">
+                            <div
+                                class="tab-pane show {% if loop.first %}active{% endif %}"
+                                id="{{ productAttributeCode }}"
+                                role="tabpanel"
+                            >
                                 {% for productAttributeValue in productAttributeValues %}
                                     <div class="d-flex gap-2 mb-3">
                                         <div>
@@ -62,4 +76,14 @@
             </div>
         </div>
     </div>
+
+    {# TODO: It should be moved into a standalone js file #}
+    <script type="module">
+        window.addEventListener('sylius_admin:product:form:attributed_deleted', () => {
+            let tabs = document.getElementById('product_attribute_tabs');
+            let firstTab = tabs.querySelector('.list-group-item');
+
+            window.bootstrap.Tab.getOrCreateInstance(firstTab).show();
+        });
+    </script>
 </div>
