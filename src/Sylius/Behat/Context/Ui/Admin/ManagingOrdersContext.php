@@ -709,7 +709,7 @@ final class ManagingOrdersContext implements Context
      */
     public function itShouldHaveShipmentState(string $shipmentState): void
     {
-        Assert::true($this->showPage->hasShipmentWithStatus($shipmentState));
+        Assert::true($this->showPage->hasShipmentWithState($shipmentState));
     }
 
     /**

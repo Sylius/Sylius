@@ -1,5 +1,5 @@
 {% set shipment = hookable_data.shipment %}
 
-<td class="w-1" {{ sylius_test_html_attribute('shipment-status') }}>
+<td class="w-1" {{ sylius_test_html_attribute('shipment-state') }}>
     <div class="text-primary strong">{{ ('sylius.ui.' ~ shipment.state)|trans|upper }}</div>
 </td>

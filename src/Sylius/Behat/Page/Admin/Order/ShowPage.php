@@ -73,10 +73,10 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
         return stripos($shipmentsText, $shippingDetails) !== false;
     }
 
-    public function hasShipmentWithStatus(string $status): bool
+    public function hasShipmentWithState(string $state): bool
     {
-        foreach ($this->getElement('shipments')->findAll('css' , '[data-test-shipment-status]') as $shipmentStatus) {
-            if (0 === strcasecmp($status, $shipmentStatus->getText())) {
+        foreach ($this->getElement('shipments')->findAll('css' , '[data-test-shipment-state]') as $shipmentState) {
+            if (0 === strcasecmp($state, $shipmentState->getText())) {
                 return true;
             }
         }
