@@ -26,7 +26,7 @@ final class LocalesTest extends JsonApiTestCase
         $this->client->request(method: 'GET', uri: '/api/v2/shop/locales', server: self::CONTENT_TYPE_HEADER);
         $response = $this->client->getResponse();
 
-        $this->assertResponse($response, 'shop/get_locales_response', Response::HTTP_OK);
+        $this->assertResponse($response, 'shop/locale/get_locales_response', Response::HTTP_OK);
     }
 
     /** @test */
@@ -37,6 +37,6 @@ final class LocalesTest extends JsonApiTestCase
         $this->client->request(method: 'GET', uri: '/api/v2/shop/locales/en_US', server: self::CONTENT_TYPE_HEADER);
         $response = $this->client->getResponse();
 
-        $this->assertResponse($response, 'shop/get_locale_response', Response::HTTP_OK);
+        $this->assertResponse($response, 'shop/locale/get_locale_response', Response::HTTP_OK);
     }
 }

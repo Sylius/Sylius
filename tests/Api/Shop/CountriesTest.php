@@ -26,7 +26,7 @@ final class CountriesTest extends JsonApiTestCase
         $this->client->request(method: 'GET', uri: '/api/v2/shop/countries', server: self::CONTENT_TYPE_HEADER);
         $response = $this->client->getResponse();
 
-        $this->assertResponse($response, 'shop/get_countries_response', Response::HTTP_OK);
+        $this->assertResponse($response, 'shop/country/get_countries_response', Response::HTTP_OK);
     }
 
     /** @test */
@@ -37,6 +37,6 @@ final class CountriesTest extends JsonApiTestCase
         $this->client->request(method: 'GET', uri: '/api/v2/shop/countries/FR', server: self::CONTENT_TYPE_HEADER);
         $response = $this->client->getResponse();
 
-        $this->assertResponse($response, 'shop/get_country_response', Response::HTTP_OK);
+        $this->assertResponse($response, 'shop/country/get_country_response', Response::HTTP_OK);
     }
 }
