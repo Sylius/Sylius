@@ -1,0 +1,16 @@
+{
+    "@context": "\/api\/v2\/contexts\/Address",
+    "@id": "\/api\/v2\/shop\/addresses\/@integer@",
+    "@type": "Address",
+    "id": @integer@,
+    "firstName": "Tony",
+    "lastName": "Stark",
+    "phoneNumber": "123456789",
+    "company": "Stark Industries",
+    "countryCode": "US",
+    "provinceCode": "999",
+    "provinceName": "east",
+    "street": "10880 Malibu Point",
+    "city": "Malibu",
+    "postcode": "90265"
+}

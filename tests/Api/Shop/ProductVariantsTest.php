@@ -87,4 +87,23 @@ final class ProductVariantsTest extends JsonApiTestCase
 
         $this->assertSame(Response::HTTP_NOT_FOUND, $response->getStatusCode());
     }
+
+    /** @test */
+    public function it_gets_product_variants(): void
+    {
+        $this->loadFixturesFromFile('product/product_variant_with_original_price.yaml');
+
+        $this->client->request(
+            method: 'GET',
+            uri: '/api/v2/shop/product-variants',
+            server: self::CONTENT_TYPE_HEADER,
+        );
+        $response = $this->client->getResponse();
+
+        $this->assertResponse(
+            $response,
+            'shop/product/get_product_variants_response',
+            Response::HTTP_OK,
+        );
+    }
 }

@@ -18,7 +18,6 @@
     <resource class="%sylius.model.payment_method.class%" shortName="PaymentMethod">
         <attribute name="validation_groups">Sylius\Bundle\PayumBundle\Validator\GroupsGenerator\GatewayConfigGroupsGenerator</attribute>
 
-
         <attribute name="order">
             <attribute name="position">ASC</attribute>
         </attribute>
@@ -122,12 +121,6 @@
             <subresourceOperation name="gateway_config_get_subresource">
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/admin/payment-methods/{code}/gateway-config</attribute>
-                <attribute name="normalization_context">
-                    <attribute name="groups">
-                        <attribute>admin:gateway_config:show</attribute>
-                        <attribute>sylius:admin:gateway_config:show</attribute>
-                    </attribute>
-                </attribute>
             </subresourceOperation>
         </subresourceOperations>
 

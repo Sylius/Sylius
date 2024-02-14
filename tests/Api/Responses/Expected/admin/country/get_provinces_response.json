@@ -1,0 +1,22 @@
+{
+    "@context": "\/api\/v2\/contexts\/Province",
+    "@id": "\/api\/v2\/admin\/countries\/US\/provinces",
+    "@type": "hydra:Collection",
+    "hydra:member": [
+        {
+            "@id": "\/api\/v2\/admin\/provinces\/US-WY",
+            "@type": "Province",
+            "code": "US-WY",
+            "name": "Wyoming",
+            "abbreviation": null
+        },
+        {
+            "@id": "\/api\/v2\/admin\/provinces\/US-MI",
+            "@type": "Province",
+            "code": "US-MI",
+            "name": "Minnesota",
+            "abbreviation": null
+        }
+    ],
+    "hydra:totalItems": 2
+}

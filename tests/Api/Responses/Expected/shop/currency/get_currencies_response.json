@@ -1,0 +1,26 @@
+{
+    "@context": "\/api\/v2\/contexts\/Currency",
+    "@id": "\/api\/v2\/shop\/currencies",
+    "@type": "hydra:Collection",
+    "hydra:member": [
+        {
+            "@id": "\/api\/v2\/shop\/currencies\/USD",
+            "@type": "Currency",
+            "code": "USD",
+            "name": "US Dollar"
+        },
+        {
+            "@id": "\/api\/v2\/shop\/currencies\/GBP",
+            "@type": "Currency",
+            "code": "GBP",
+            "name": "British Pound"
+        },
+        {
+            "@id": "\/api\/v2\/shop\/currencies\/EUR",
+            "@type": "Currency",
+            "code": "EUR",
+            "name": "Euro"
+        }
+    ],
+    "hydra:totalItems": 3
+}

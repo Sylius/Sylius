@@ -155,7 +155,10 @@ final class ManagingShipmentsContext implements Context
      */
     public function iShouldBeNotifiedThatTheShipmentHasBeenSuccessfullyShipped(): void
     {
-        Assert::same($this->responseChecker->getValue($this->client->getLastResponse(), 'state'), 'shipped', 'Shipment is not shipped');
+        Assert::true(
+            $this->responseChecker->isAccepted($this->client->getLastResponse()),
+            'Shipment was not successfully shipped',
+        );
     }
 
     /**

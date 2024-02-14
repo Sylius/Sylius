@@ -1,0 +1,28 @@
+{
+    "@context": "\/api\/v2\/contexts\/OrderItem",
+    "@id": "\/api\/v2\/admin\/order-items\/@integer@",
+    "@type": "OrderItem",
+    "variant": "\/api\/v2\/admin\/product-variants\/MUG_BLUE",
+    "productName": "Mug",
+    "id": @integer@,
+    "order": "\/api\/v2\/admin\/orders\/token",
+    "quantity": 3,
+    "unitPrice": 2000,
+    "originalUnitPrice": 2000,
+    "total": 6000,
+    "units": [
+        "\/api\/v2\/admin\/order-item-units\/@integer@",
+        "\/api\/v2\/admin\/order-item-units\/@integer@",
+        "\/api\/v2\/admin\/order-item-units\/@integer@"
+    ],
+    "adjustments": [],
+    "adjustmentsTotal": 0,
+    "product": {
+        "@id": "\/api\/v2\/admin\/products\/MUG",
+        "@type": "Product"
+    },
+    "fullDiscountedUnitPrice": 2000,
+    "subtotal": 6000,
+    "adjustmentsRecursively": [],
+    "adjustmentsTotalRecursively": 0
+}

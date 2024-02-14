@@ -62,6 +62,31 @@ final class AdminUsersTest extends JsonApiTestCase
     }
 
     /** @test */
+    public function it_resets_administrator_password(): void
+    {
+        $loadedData = $this->loadFixturesFromFile('authentication/api_administrator.yaml');
+
+        /** @var AdminUserInterface $adminUser */
+        $adminUser = $loadedData['admin'];
+        $adminUser->setPasswordResetToken('token');
+        $adminUser->setPasswordRequestedAt(new \DateTime('now'));
+        $this->getEntityManager()->flush();
+
+        $this->client->request(
+            method: 'PATCH',
+            uri: '/api/v2/admin/reset-password-requests/token',
+            server: self::PATCH_CONTENT_TYPE_HEADER,
+            content: json_encode([
+                'newPassword' => 'newPassword',
+                'confirmNewPassword' => 'newPassword',
+            ], \JSON_THROW_ON_ERROR),
+        );
+
+        $response = $this->client->getResponse();
+        $this->assertResponseCode($response, Response::HTTP_ACCEPTED);
+    }
+
+    /** @test */
     public function it_gets_administrators(): void
     {
         $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'administrator.yaml']);

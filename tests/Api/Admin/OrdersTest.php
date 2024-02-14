@@ -331,6 +331,44 @@ final class OrdersTest extends JsonApiTestCase
         $this->assertEmailCount(1);
     }
 
+    /** @test */
+    public function it_gets_payments_of_order(): void
+    {
+        $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel.yaml', 'cart.yaml', 'country.yaml', 'shipping_method.yaml', 'payment_method.yaml']);
+
+        $tokenValue = 'nAWw2jewpA';
+
+        $this->placeOrder($tokenValue);
+
+        $this->client->request(
+            method: 'GET',
+            uri: sprintf('/api/v2/admin/orders/%s/payments', $tokenValue),
+            server: $this->buildHeaders('api@example.com'),
+            content: json_encode([]),
+        );
+
+        $this->assertResponse($this->client->getResponse(), 'admin/order/get_payments_of_order_response', Response::HTTP_OK);
+    }
+
+    /** @test */
+    public function it_gets_shipments_of_order(): void
+    {
+        $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel.yaml', 'cart.yaml', 'country.yaml', 'shipping_method.yaml', 'payment_method.yaml']);
+
+        $tokenValue = 'nAWw2jewpA';
+
+        $this->placeOrder($tokenValue);
+
+        $this->client->request(
+            method: 'GET',
+            uri: sprintf('/api/v2/admin/orders/%s/shipments', $tokenValue),
+            server: $this->buildHeaders('api@example.com'),
+            content: json_encode([]),
+        );
+
+        $this->assertResponse($this->client->getResponse(), 'admin/order/get_shipments_of_order_response', Response::HTTP_OK);
+    }
+
     /** @return array<string, string> */
     private function buildHeaders(string $adminEmail): array
     {

@@ -15,6 +15,7 @@ namespace Sylius\Tests\Api\Shop;
 
 use Sylius\Component\Addressing\Model\CountryInterface;
 use Sylius\Component\Addressing\Model\ProvinceInterface;
+use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Tests\Api\JsonApiTestCase;
 use Sylius\Tests\Api\Utils\ShopUserLoginTrait;
@@ -131,6 +132,36 @@ final class AddressesPostTest extends JsonApiTestCase
             'shop/address/create_address_without_province_response',
             Response::HTTP_CREATED,
         );
+    }
+
+    /** @test */
+    public function it_updates_an_address_of_the_authorized_user(): void
+    {
+        $fixtures = $this->loadFixturesFromFiles(['address_with_customer.yaml']);
+        /** @var CustomerInterface $customer */
+        $customer = $fixtures['customer_tony'];
+        /** @var AddressInterface $address */
+        $address = $fixtures['address'];
+
+        $header = array_merge($this->logInShopUser($customer->getEmailCanonical()), self::CONTENT_TYPE_HEADER);
+
+        $this->client->request(
+            method: 'PUT',
+            uri: '/api/v2/shop/addresses/' . $address->getId(),
+            server: $header,
+            content: json_encode([
+                'firstName' => 'Tony',
+                'lastName' => 'Stark',
+                'company' => 'Stark Industries',
+                'countryCode' => 'US',
+                'street' => '10880 Malibu Point',
+                'city' => 'Malibu',
+                'postcode' => '90265',
+                'phoneNumber' => '123456789',
+            ]),
+        );
+
+        $this->assertResponse($this->client->getResponse(), 'shop/address/update_an_address_response');
     }
 
     private function createBodyRequest(
