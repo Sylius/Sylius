@@ -139,3 +139,78 @@ is determined directly from its key, making the explicit transmission of the `lo
 continues to support the explicit sending of the `locale` field, it is essential that this explicitly sent locale matches 
 the key in the translation array. In cases of a mismatch between the key and an explicitly sent locale, the API will 
 respond with a `Sylius\Bundle\ApiBundle\Exception\TranslationLocaleMismatchException`.
+
+1. The following Command Handlers constructor signatures have changed:
+
+    `Sylius\Bundle\ApiBundle\CommandHandler\Account\SendAccountRegistrationEmailHandler`:
+    ```diff
+        public function __construct(
+            private UserRepositoryInterface $shopUserRepository,
+            private ChannelRepositoryInterface $channelRepository,
+    -       private SenderInterface $emailSender,
+    +       private Sylius\Bundle\CoreBundle\Mailer\AccountRegistrationEmailManagerInterface $accountRegistrationEmailManager,
+        ) {
+        }
+    ```
+
+    `Sylius\Bundle\ApiBundle\CommandHandler\Account\SendAccountVerificationEmailHandler`:
+    ```diff
+        public function __construct(
+            private UserRepositoryInterface $shopUserRepository,
+            private ChannelRepositoryInterface $channelRepository,
+    -       private SenderInterface $emailSender,
+    +       private Sylius\Bundle\CoreBundle\Mailer\AccountVerificationEmailManagerInterface $accountVerificationEmailManager,
+        ) {
+        }
+    ```
+
+    `Sylius\Bundle\ApiBundle\CommandHandler\Account\SendResetPasswordEmailHandler`:
+    ```diff
+        public function __construct(
+    -       private SenderInterface $emailSender,
+            private UserRepositoryInterface $shopUserRepository,
+            private ChannelRepositoryInterface $channelRepository,
+    +       private Sylius\Bundle\CoreBundle\Mailer\ResetPasswordEmailManagerInterface $resetPasswordEmailManager,
+        ) {
+        }
+    ```
+
+    `Sylius\Bundle\ApiBundle\CommandHandler\Checkout\SendOrderConfirmationHandler`:
+    ```diff
+        public function __construct(
+    -       private SenderInterface $emailSender,
+            private OrderRepositoryInterface $orderRepository,
+    +       private Sylius\Bundle\CoreBundle\Mailer\OrderEmailManagerInterface $orderEmailManager,
+        ) {
+        }
+    ```
+
+    `Sylius\Bundle\ApiBundle\CommandHandler\Checkout\SendShipmentConfirmationEmailHandler`:
+    ```diff
+        public function __construct(
+    -       private SenderInterface $emailSender,
+            private ShipmentRepositoryInterface $shipmentRepository,
+    +       private Sylius\Bundle\CoreBundle\Mailer\ShipmentEmailManagerInterface $shipmentEmailManager,
+        ) {
+        }
+    ```
+
+    `Sylius\Bundle\ApiBundle\CommandHandler\SendContactRequestHandler`:
+    ```diff
+        public function __construct(
+    -       private SenderInterface $emailSender,
+            private ChannelRepositoryInterface $channelRepository,
+    +       private Sylius\Bundle\CoreBundle\Mailer\ContactEmailManagerInterface $contactEmailManager,
+        ) {
+        }
+    ```
+
+    `Sylius\Bundle\CoreBundle\MessageHandler\Admin\Account\SendResetPasswordEmailHandler`: 
+   ```diff
+        public function __construct(
+            private UserRepositoryInterface $shopUserRepository,
+    -       private SenderInterface $emailSender,
+    +       private Sylius\Bundle\CoreBundle\Mailer\ResetPasswordEmailManagerInterface $resetPasswordEmailManager,
+        ) {
+        }
+    ```

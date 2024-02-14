@@ -14,41 +14,45 @@ declare(strict_types=1);
 namespace Sylius\Bundle\ApiBundle\CommandHandler;
 
 use Sylius\Bundle\ApiBundle\Command\SendContactRequest;
-use Sylius\Bundle\CoreBundle\Mailer\Emails;
+use Sylius\Bundle\ApiBundle\Exception\ChannelNotFoundException;
+use Sylius\Bundle\CoreBundle\Mailer\ContactEmailManagerInterface;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
-use Sylius\Component\Mailer\Sender\SenderInterface;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 use Webmozart\Assert\Assert;
 
 /** experimental */
 final class SendContactRequestHandler implements MessageHandlerInterface
 {
+    /**
+     * @param ChannelRepositoryInterface<ChannelInterface> $channelRepository
+     */
     public function __construct(
-        private SenderInterface $sender,
         private ChannelRepositoryInterface $channelRepository,
+        private ContactEmailManagerInterface $contactEmailManager,
     ) {
     }
 
     public function __invoke(SendContactRequest $command): void
     {
-        /** @var ChannelInterface $channel */
+        /** @var ChannelInterface|null $channel */
         $channel = $this->channelRepository->findOneByCode($command->getChannelCode());
-        Assert::notNull($channel);
+
+        if ($channel === null) {
+            throw new ChannelNotFoundException($command->getChannelCode());
+        }
 
         $email = $command->getEmail();
         Assert::notNull($email);
 
-        $this->sender->send(
-            Emails::CONTACT_REQUEST,
-            [$channel->getContactEmail()],
+        $this->contactEmailManager->sendContactRequest(
             [
-                'data' => ['message' => $command->getMessage(), 'email' => $email],
-                'channel' => $channel,
-                'localeCode' => $command->getLocaleCode(),
+                'email' => $email,
+                'message' => $command->getMessage(),
             ],
-            [],
-            [$email],
+            [$channel->getContactEmail()],
+            $channel,
+            $command->localeCode,
         );
     }
 }

@@ -36,7 +36,7 @@ final class CheckStatisticsOrdersTotalsProviderTypePassTest extends AbstractComp
         $this->assertContainerBuilderHasService('sylius.registry.statistics_orders_totals_provider');
         $this->assertContainerBuilderHasParameter(
             'sylius_core.orders_statistics.intervals_map',
-            ['daily' => 'Daily', 'monthly' => 'Monthly']
+            ['daily' => 'Daily', 'monthly' => 'Monthly'],
         );
     }
 
@@ -57,7 +57,6 @@ final class CheckStatisticsOrdersTotalsProviderTypePassTest extends AbstractComp
         $this->compile();
     }
 
-
     /** @test */
     public function it_throws_exception_if_statistics_orders_totals_provider_type_is_incorrect(): void
     {
@@ -73,7 +72,6 @@ final class CheckStatisticsOrdersTotalsProviderTypePassTest extends AbstractComp
 
         $this->compile();
     }
-
 
     protected function registerCompilerPass(ContainerBuilder $container): void
     {

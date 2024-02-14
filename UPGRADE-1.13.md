@@ -492,3 +492,50 @@ List of affected classes:
 1. The first parameter of the constructor in the `\Sylius\Component\Core\Promotion\Checker\Rule\ItemTotalRuleChecker` class has been deprecated and will be removed in version 2.0.
 
 1. The service definition for `sylius.promotion_rule_checker.item_total` has been updated. The class has been changed from `Sylius\Component\Promotion\Checker\Rule\ItemTotalRuleChecker` to `Sylius\Component\Core\Promotion\Checker\Rule\ItemTotalRuleChecker`.
+
+1. Sylius Mailer email configuration keys in the `src/Sylius/Bundle/CoreBundle/Resources/config/app/sylius/sylius_mailer.yml` file have been changed:
+
+    Deprecated:
+    ```yaml
+    sylius_mailer:
+        emails:
+           account_verification_token:
+               subject: sylius.emails.user.verification_token.subject
+    ```
+
+   New:
+    ```yaml
+    sylius_mailer:
+        emails:
+            account_verification:         
+                subject: sylius.email.user.account_verification.subject
+    ```
+
+1. Translation keys in the `Sylius\Bundle\CoreBundle\Resources\translations\messages.en.yml` under the `sylius.email` key have been changed:
+
+    Deprecated:
+    ```yaml
+    sylius:
+        email:  
+            verification_token:
+                hello: 'Hello'
+                message: 'Verify your account with token: '
+                subject: 'Email address verification'
+                to_verify_your_email_address: 'To verify your email address - click the link below'
+                verify_your_email_address: 'Verify your email address'
+    ```
+
+    New:
+    ```yaml
+    sylius:
+        email:
+            user:
+                account_verification:
+                    greeting: 'Hello'
+                    message: 'Verify your account with token: '
+                    statement: 'Verify your email address'
+                    strategy: 'To verify your email address - click the link below'
+                    subject: 'Email address verification'
+   ```
+
+1 Extracted the section responsible for the `ShopBundle` from `@SyliusCore/Email/accountVerification.html.twig` and relocated it to `@SyliusShop/Email/verification.html.twig`.
