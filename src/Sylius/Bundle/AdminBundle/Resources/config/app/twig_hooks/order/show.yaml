@@ -32,6 +32,35 @@ twig_hooks:
             promotion_total:
                 template: '@SyliusAdmin/Order/Show/Content/Sections/Summary/_promotionTotal.html.twig'
 
+        'sylius_admin.order.show.content.sections#left.shipments':
+            header:
+                template: '@SyliusAdmin/Order/Show/Content/Sections/Shipments/_header.html.twig'
+            items:
+                template: '@SyliusAdmin/Order/Show/Content/Sections/Shipments/_items.html.twig'
+
+        'sylius_admin.order.show.content.sections#left.shipments.header':
+            title:
+                template: '@SyliusAdmin/Order/Show/Content/Sections/Shipments/Header/_title.html.twig'
+            state:
+                template: '@SyliusAdmin/Order/Show/Content/Sections/Shipments/Header/_state.html.twig'
+
+        'sylius_admin.order.show.content.sections#left.shipments.item':
+            state:
+                template: '@SyliusAdmin/Order/Show/Content/Sections/Shipments/Item/_state.html.twig'
+            details:
+                template: '@SyliusAdmin/Order/Show/Content/Sections/Shipments/Item/_details.html.twig'
+            actions:
+                template: '@SyliusAdmin/Order/Show/Content/Sections/Shipments/Item/_actions.html.twig'
+
+        'sylius_admin.order.show.content.sections#left.shipments.item.actions':
+            ship:
+                component: 'SyliusAdmin.Shipment.ShipType'
+                data:
+                    shipment: '@=shipment'
+            resend_confirmation:
+                template: '@SyliusAdmin/Order/Show/Content/Sections/Shipments/Item/Actions/_resendConfirmation.html.twig'
+            show:
+                template: '@SyliusAdmin/Order/Show/Content/Sections/Shipments/Item/Actions/_show.html.twig'
         'sylius_admin.order.show.content.sections#left.payments#actions':
             complete:
                 template: '@SyliusAdmin/Order/Show/Content/Sections/Payments/Actions/_complete.html.twig'

@@ -73,19 +73,29 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
         return stripos($shipmentsText, $shippingDetails) !== false;
     }
 
+    public function hasShipmentWithState(string $state): bool
+    {
+        foreach ($this->getElement('shipments')->findAll('css' , '[data-test-shipment-state]') as $shipmentState) {
+            if (0 === strcasecmp($state, $shipmentState->getText())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public function specifyTrackingCode(string $code): void
     {
-        $this->getDocument()->fillField('sylius_shipment_ship_tracking', $code);
+        $this->getElement('shipment_tracking')->setValue($code);
     }
 
     public function canShipOrder(OrderInterface $order): bool
     {
-        return $this->getLastOrderShipmentElement($order)->hasButton('Ship');
+        return $this->hasElement('shipment_ship_button');
     }
 
     public function shipOrder(OrderInterface $order): void
     {
-        $this->getLastOrderShipmentElement($order)->pressButton('Ship');
+        $this->getElement('shipment_ship_button')->press();
     }
 
     public function hasPayment(string $paymentDetails): bool
@@ -411,7 +421,11 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
             'resend_order_confirmation_email' => '[data-test-resend-order-confirmation-email]',
             'resend_shipment_confirmation_email' => '[data-test-resend-shipment-confirmation-email]',
             'shipment_shipped_at_date' => '#sylius-shipments .shipped-at-date',
-            'shipments' => '#sylius-shipments',
+
+            'shipments' => '[data-test-shipments]',
+            'shipment_tracking' => '[data-test-shipment-tracking]',
+            'shipment_ship_button' => '[data-test-shipment-ship-button]',
+
             'shipping_address' => '#shipping-address',
             'shipping_adjustment_name' => '#shipping-adjustment-label',
             'shipping_charges' => '#shipping-base-value',
@@ -462,16 +476,6 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
         $paymentStateElement = end($paymentStateElements);
 
         return $paymentStateElement->getParent()->getParent();
-    }
-
-    protected function getLastOrderShipmentElement(OrderInterface $order): ?NodeElement
-    {
-        $shipment = $order->getShipments()->last();
-
-        $shipmentStateElements = $this->getElement('shipments')->findAll('css', sprintf('span.ui.label:contains(\'%s\')', ucfirst($shipment->getState())));
-        $shipmentStateElement = end($shipmentStateElements);
-
-        return $shipmentStateElement->getParent()->getParent();
     }
 
     protected function getFormattedMoney(int $orderPromotionTotal): string

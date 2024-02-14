@@ -1,39 +1,9 @@
-{% from '@SyliusAdmin/Shared/Helper/icon.html.twig' import icon as _icon %}
+{% set main_hook = hook_name(hookable_data.parent_main_hook, 'shipments') %}
+{% set fallback_hook = hook_name(hookable_data.parent_fallback_hook, 'shipments') %}
 
-{% set order = hookable_data.resource %}
-
-<div class="card mb-3">
-    <div class="card-header">
-        <div class="card-title">
-            {{ 'sylius.ui.shipments'|trans }}
-            <span class="ms-2">
-                <span class="badge">{{ 'sylius.ui.work_in_progress'|trans }}</span>
-            </span>
-        </div>
-    </div>
-    <div class="py-3">
-        <table class="table table-vcenter table-borderless table-sm card-table">
-            <tbody>
-                {% for shipment in order.shipments %}
-                    <tr>
-                        <td class="w-1">
-                            <div class="text-primary">{{ shipment.state|upper }}</div>
-                        </td>
-                        <td class="px-3 py-2">
-                            <strong>{{ shipment.method.name }}</strong>
-                            <div class="text-secondary">{{ _icon({ icon: 'world' }) }} {{ shipment.method.zone }}</div>
-                        </td>
-                        <td>
-                            <div class="input-group">
-                                <input type="text" placeholder="Tracking code" class="form-control      ">
-                                <button type="button" class="btn">
-                                    {{ 'sylius.ui.ship'|trans }}
-                                </button>
-                            </div>
-                        </td>
-                    </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-    </div>
+<div class="card mb-3" {{ sylius_test_html_attribute('shipments') }}>
+    {% hook [main_hook, fallback_hook] with hookable_data|merge({
+        parent_main_hook: main_hook,
+        parent_fallback_hook: fallback_hook
+    }) %}
 </div>
