@@ -41,6 +41,8 @@ twig_hooks:
         'sylius_admin.order.show.content.sections#left.shipments.header':
             title:
                 template: '@SyliusAdmin/Order/Show/Content/Sections/Shipments/Header/_title.html.twig'
+            state:
+                template: '@SyliusAdmin/Order/Show/Content/Sections/Shipments/Header/_state.html.twig'
 
         'sylius_admin.order.show.content.sections#left.shipments.item':
             state:

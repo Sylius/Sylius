@@ -12,7 +12,7 @@
                     {% hook [main_hook, fallback_hook] with hookable_data|merge({
                         parent_main_hook: main_hook,
                         parent_fallback_hook: fallback_hook,
-                        shipment: shipment
+                        shipment,
                     }) %}
                 {% endfor %}
             </tr>
