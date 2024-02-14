@@ -24,8 +24,8 @@ use Webmozart\Assert\Assert;
 final class SendOrderConfirmationHandler implements MessageHandlerInterface
 {
     public function __construct(
-        private OrderEmailManagerInterface $orderEmailManager,
         private OrderRepositoryInterface $orderRepository,
+        private OrderEmailManagerInterface $orderEmailManager,
     ) {
     }
 

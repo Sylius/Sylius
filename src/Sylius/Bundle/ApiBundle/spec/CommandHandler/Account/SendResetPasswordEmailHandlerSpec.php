@@ -25,11 +25,11 @@ use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 final class SendResetPasswordEmailHandlerSpec extends ObjectBehavior
 {
     function let(
-        ResetPasswordEmailManagerInterface $resetPasswordEmailManager,
         ChannelRepositoryInterface $channelRepository,
         UserRepositoryInterface $userRepository,
+        ResetPasswordEmailManagerInterface $resetPasswordEmailManager,
     ): void {
-        $this->beConstructedWith($resetPasswordEmailManager, $channelRepository, $userRepository);
+        $this->beConstructedWith($channelRepository, $userRepository, $resetPasswordEmailManager);
     }
 
     function it_is_a_message_handler(): void
@@ -38,9 +38,9 @@ final class SendResetPasswordEmailHandlerSpec extends ObjectBehavior
     }
 
     function it_sends_message_with_reset_password_token(
-        ResetPasswordEmailManagerInterface $resetPasswordEmailManager,
         ChannelRepositoryInterface $channelRepository,
         UserRepositoryInterface $userRepository,
+        ResetPasswordEmailManagerInterface $resetPasswordEmailManager,
         UserInterface $user,
         ChannelInterface $channel,
     ): void {

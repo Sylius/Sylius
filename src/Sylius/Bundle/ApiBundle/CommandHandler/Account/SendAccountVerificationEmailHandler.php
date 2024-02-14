@@ -31,9 +31,9 @@ final class SendAccountVerificationEmailHandler implements MessageHandlerInterfa
      * @param ChannelRepositoryInterface<ChannelInterface> $channelRepository
      */
     public function __construct(
-        private AccountVerificationEmailManagerInterface $accountVerificationEmailManager,
         private UserRepositoryInterface $shopUserRepository,
         private ChannelRepositoryInterface $channelRepository,
+        private AccountVerificationEmailManagerInterface $accountVerificationEmailManager,
     ) {
     }
 

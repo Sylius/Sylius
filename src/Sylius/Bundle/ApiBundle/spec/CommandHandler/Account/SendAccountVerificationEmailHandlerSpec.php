@@ -27,17 +27,17 @@ use Sylius\Component\User\Repository\UserRepositoryInterface;
 final class SendAccountVerificationEmailHandlerSpec extends ObjectBehavior
 {
     function let(
-        AccountVerificationEmailManagerInterface $accountVerificationEmailManager,
         UserRepositoryInterface $shopUserRepository,
         ChannelRepositoryInterface $channelRepository,
+        AccountVerificationEmailManagerInterface $accountVerificationEmailManager,
     ): void {
-        $this->beConstructedWith($accountVerificationEmailManager, $shopUserRepository, $channelRepository);
+        $this->beConstructedWith($shopUserRepository, $channelRepository, $accountVerificationEmailManager);
     }
 
     function it_sends_user_account_verification_email(
-        AccountVerificationEmailManagerInterface $accountVerificationEmailManager,
         UserRepositoryInterface $shopUserRepository,
         ChannelRepositoryInterface $channelRepository,
+        AccountVerificationEmailManagerInterface $accountVerificationEmailManager,
         ShopUserInterface $shopUser,
         ChannelInterface $channel,
     ): void {
@@ -55,9 +55,9 @@ final class SendAccountVerificationEmailHandlerSpec extends ObjectBehavior
     }
 
     function it_throws_an_exception_if_user_has_not_been_found(
-        AccountVerificationEmailManagerInterface $accountVerificationEmailManager,
         UserRepositoryInterface $shopUserRepository,
         ChannelRepositoryInterface $channelRepository,
+        AccountVerificationEmailManagerInterface $accountVerificationEmailManager,
     ): void {
         $shopUserRepository->findOneByEmail('shop@example.com')->willReturn(null);
         $channelRepository->findOneByCode('WEB')->shouldNotBeCalled();
@@ -72,9 +72,9 @@ final class SendAccountVerificationEmailHandlerSpec extends ObjectBehavior
     }
 
     function it_throws_an_exception_if_channel_has_not_been_found(
-        AccountVerificationEmailManagerInterface $accountVerificationEmailManager,
         UserRepositoryInterface $shopUserRepository,
         ChannelRepositoryInterface $channelRepository,
+        AccountVerificationEmailManagerInterface $accountVerificationEmailManager,
         ShopUserInterface $shopUser,
     ): void {
         $shopUserRepository->findOneByEmail('shop@example.com')->willReturn($shopUser);

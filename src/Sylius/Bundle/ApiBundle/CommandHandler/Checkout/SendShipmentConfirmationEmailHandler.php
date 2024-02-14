@@ -24,8 +24,8 @@ use Webmozart\Assert\Assert;
 final class SendShipmentConfirmationEmailHandler implements MessageHandlerInterface
 {
     public function __construct(
-        private ShipmentEmailManagerInterface $shipmentEmailManager,
         private ShipmentRepositoryInterface $shipmentRepository,
+        private ShipmentEmailManagerInterface $shipmentEmailManager,
     ) {
     }
 

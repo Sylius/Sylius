@@ -26,8 +26,8 @@ final class SendResetPasswordEmailHandler implements MessageHandlerInterface
      * @param UserRepositoryInterface<AdminUserInterface> $userRepository
      */
     public function __construct(
-        private ResetPasswordEmailManagerInterface $resetPasswordEmailManager,
         private UserRepositoryInterface $userRepository,
+        private ResetPasswordEmailManagerInterface $resetPasswordEmailManager,
     ) {
     }
 

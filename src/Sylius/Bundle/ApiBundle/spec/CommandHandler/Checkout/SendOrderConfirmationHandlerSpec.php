@@ -23,9 +23,11 @@ use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 
 final class SendOrderConfirmationHandlerSpec extends ObjectBehavior
 {
-    function let(OrderEmailManagerInterface $orderEmailManager, OrderRepositoryInterface $orderRepository): void
-    {
-        $this->beConstructedWith($orderEmailManager, $orderRepository);
+    function let(
+        OrderRepositoryInterface $orderRepository,
+        OrderEmailManagerInterface $orderEmailManager,
+    ): void {
+        $this->beConstructedWith($orderRepository, $orderEmailManager);
     }
 
     function it_is_a_message_handler(): void
@@ -34,10 +36,10 @@ final class SendOrderConfirmationHandlerSpec extends ObjectBehavior
     }
 
     function it_sends_order_confirmation_message(
+        OrderRepositoryInterface $orderRepository,
         OrderEmailManagerInterface $orderEmailManager,
         OrderInterface $order,
         CustomerInterface $customer,
-        OrderRepositoryInterface $orderRepository,
     ): void {
         $orderRepository->findOneByTokenValue('TOKEN')->willReturn($order);
 

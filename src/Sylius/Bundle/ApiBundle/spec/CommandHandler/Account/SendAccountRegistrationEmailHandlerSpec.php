@@ -25,17 +25,17 @@ use Sylius\Component\User\Repository\UserRepositoryInterface;
 final class SendAccountRegistrationEmailHandlerSpec extends ObjectBehavior
 {
     function let(
-        AccountRegistrationEmailManagerInterface $accountRegistrationEmailManager,
         UserRepositoryInterface $shopUserRepository,
         ChannelRepositoryInterface $channelRepository,
+        AccountRegistrationEmailManagerInterface $accountRegistrationEmailManager,
     ): void {
-        $this->beConstructedWith($accountRegistrationEmailManager, $shopUserRepository, $channelRepository);
+        $this->beConstructedWith($shopUserRepository, $channelRepository, $accountRegistrationEmailManager);
     }
 
     function it_sends_user_account_registration_email_when_account_verification_is_not_required(
-        AccountRegistrationEmailManagerInterface $accountRegistrationEmailManager,
         UserRepositoryInterface $shopUserRepository,
         ChannelRepositoryInterface $channelRepository,
+        AccountRegistrationEmailManagerInterface $accountRegistrationEmailManager,
         ShopUserInterface $shopUser,
         ChannelInterface $channel,
     ): void {
@@ -53,9 +53,9 @@ final class SendAccountRegistrationEmailHandlerSpec extends ObjectBehavior
     }
 
     function it_sends_user_registration_email_when_account_verification_required_and_user_is_enabled(
-        AccountRegistrationEmailManagerInterface $accountRegistrationEmailManager,
         UserRepositoryInterface $shopUserRepository,
         ChannelRepositoryInterface $channelRepository,
+        AccountRegistrationEmailManagerInterface $accountRegistrationEmailManager,
         ShopUserInterface $shopUser,
         ChannelInterface $channel,
     ): void {
@@ -74,9 +74,9 @@ final class SendAccountRegistrationEmailHandlerSpec extends ObjectBehavior
     }
 
     function it_does_nothing_when_account_verification_is_required_and_user_is_disabled(
-        AccountRegistrationEmailManagerInterface $accountRegistrationEmailManager,
         UserRepositoryInterface $shopUserRepository,
         ChannelRepositoryInterface $channelRepository,
+        AccountRegistrationEmailManagerInterface $accountRegistrationEmailManager,
         ShopUserInterface $shopUser,
         ChannelInterface $channel,
     ): void {

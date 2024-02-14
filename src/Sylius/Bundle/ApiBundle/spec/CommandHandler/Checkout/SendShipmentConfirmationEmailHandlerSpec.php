@@ -25,9 +25,11 @@ use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 
 final class SendShipmentConfirmationEmailHandlerSpec extends ObjectBehavior
 {
-    function let(ShipmentEmailManagerInterface $shipmentEmailManager, ShipmentRepositoryInterface $shipmentRepository): void
-    {
-        $this->beConstructedWith($shipmentEmailManager, $shipmentRepository);
+    function let(
+        ShipmentRepositoryInterface $shipmentRepository,
+        ShipmentEmailManagerInterface $shipmentEmailManager,
+    ): void {
+        $this->beConstructedWith($shipmentRepository, $shipmentEmailManager);
     }
 
     function it_is_a_message_handler(): void
@@ -36,11 +38,11 @@ final class SendShipmentConfirmationEmailHandlerSpec extends ObjectBehavior
     }
 
     function it_sends_shipment_confirmation_message(
+        ShipmentRepositoryInterface $shipmentRepository,
         ShipmentEmailManagerInterface $shipmentEmailManager,
         ShipmentInterface $shipment,
         CustomerInterface $customer,
         ChannelInterface $channel,
-        ShipmentRepositoryInterface $shipmentRepository,
         OrderInterface $order,
     ): void {
         $shipmentRepository->find(123)->willReturn($shipment);

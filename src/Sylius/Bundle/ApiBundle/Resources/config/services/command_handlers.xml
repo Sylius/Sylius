@@ -173,39 +173,39 @@
         </service>
 
         <service id="Sylius\Bundle\ApiBundle\CommandHandler\Account\SendAccountRegistrationEmailHandler">
-            <argument type="service" id="Sylius\Bundle\CoreBundle\Mailer\AccountRegistrationEmailManagerInterface" />
             <argument type="service" id="sylius.repository.shop_user" />
             <argument type="service" id="sylius.repository.channel" />
+            <argument type="service" id="Sylius\Bundle\CoreBundle\Mailer\AccountRegistrationEmailManagerInterface" />
             <tag name="messenger.message_handler" bus="sylius.command_bus" />
             <tag name="messenger.message_handler" bus="sylius_default.bus" />
         </service>
 
         <service id="Sylius\Bundle\ApiBundle\CommandHandler\Account\SendAccountVerificationEmailHandler">
-            <argument type="service" id="Sylius\Bundle\CoreBundle\Mailer\AccountVerificationEmailManagerInterface" />
             <argument type="service" id="sylius.repository.shop_user" />
             <argument type="service" id="sylius.repository.channel" />
+            <argument type="service" id="Sylius\Bundle\CoreBundle\Mailer\AccountVerificationEmailManagerInterface" />
             <tag name="messenger.message_handler" bus="sylius.command_bus" />
             <tag name="messenger.message_handler" bus="sylius_default.bus" />
         </service>
 
         <service id="Sylius\Bundle\ApiBundle\CommandHandler\Checkout\SendOrderConfirmationHandler">
-            <argument type="service" id="Sylius\Bundle\CoreBundle\Mailer\OrderEmailManagerInterface" />
             <argument type="service" id="sylius.repository.order" />
+            <argument type="service" id="Sylius\Bundle\CoreBundle\Mailer\OrderEmailManagerInterface" />
             <tag name="messenger.message_handler" bus="sylius.command_bus" />
             <tag name="messenger.message_handler" bus="sylius_default.bus" />
         </service>
 
         <service id="Sylius\Bundle\ApiBundle\CommandHandler\Account\SendResetPasswordEmailHandler">
-            <argument type="service" id="Sylius\Bundle\CoreBundle\Mailer\ResetPasswordEmailManagerInterface" />
             <argument type="service" id="sylius.repository.channel" />
             <argument type="service" id="sylius.repository.shop_user" />
+            <argument type="service" id="Sylius\Bundle\CoreBundle\Mailer\ResetPasswordEmailManagerInterface" />
             <tag name="messenger.message_handler" bus="sylius.command_bus" />
             <tag name="messenger.message_handler" bus="sylius_default.bus" />
         </service>
 
         <service id="Sylius\Bundle\ApiBundle\CommandHandler\Checkout\SendShipmentConfirmationEmailHandler">
-            <argument type="service" id="Sylius\Bundle\CoreBundle\Mailer\ShipmentEmailManagerInterface" />
             <argument type="service" id="sylius.repository.shipment" />
+            <argument type="service" id="Sylius\Bundle\CoreBundle\Mailer\ShipmentEmailManagerInterface" />
             <tag name="messenger.message_handler" bus="sylius.command_bus" />
             <tag name="messenger.message_handler" bus="sylius_default.bus" />
         </service>
@@ -219,8 +219,8 @@
         </service>
 
         <service id="Sylius\Bundle\ApiBundle\CommandHandler\SendContactRequestHandler">
-            <argument type="service" id="Sylius\Bundle\CoreBundle\Mailer\ContactEmailManagerInterface" />
             <argument type="service" id="sylius.repository.channel" />
+            <argument type="service" id="Sylius\Bundle\CoreBundle\Mailer\ContactEmailManagerInterface" />
             <tag name="messenger.message_handler" bus="sylius.command_bus" />
             <tag name="messenger.message_handler" bus="sylius_default.bus" />
         </service>

@@ -24,10 +24,10 @@ use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 final class SendResetPasswordEmailHandlerSpec extends ObjectBehavior
 {
     public function let(
-        ResetPasswordEmailManagerInterface $resetPasswordEmailManager,
         UserRepositoryInterface $userRepository,
+        ResetPasswordEmailManagerInterface $resetPasswordEmailManager,
     ): void {
-        $this->beConstructedWith($resetPasswordEmailManager, $userRepository);
+        $this->beConstructedWith($userRepository, $resetPasswordEmailManager);
     }
 
     public function it_is_a_message_handler(): void
@@ -36,8 +36,8 @@ final class SendResetPasswordEmailHandlerSpec extends ObjectBehavior
     }
 
     public function it_handles_sending_reset_password_email(
-        ResetPasswordEmailManagerInterface $resetPasswordEmailManager,
         UserRepositoryInterface $userRepository,
+        ResetPasswordEmailManagerInterface $resetPasswordEmailManager,
         AdminUserInterface $adminUser,
     ): void {
         $userRepository->findOneByEmail('admin@example.com')->willReturn($adminUser);

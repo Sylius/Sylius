@@ -25,9 +25,9 @@ use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 final class SendAccountRegistrationEmailHandler implements MessageHandlerInterface
 {
     public function __construct(
-        private AccountRegistrationEmailManagerInterface $accountRegistrationEmailManager,
         private UserRepositoryInterface $shopUserRepository,
         private ChannelRepositoryInterface $channelRepository,
+        private AccountRegistrationEmailManagerInterface $accountRegistrationEmailManager,
     ) {
     }
 

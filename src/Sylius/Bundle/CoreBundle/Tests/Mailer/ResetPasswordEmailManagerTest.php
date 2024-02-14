@@ -17,7 +17,6 @@ use Sylius\Bundle\CoreBundle\Mailer\ResetPasswordEmailManagerInterface;
 use Sylius\Component\Core\Model\AdminUser;
 use Sylius\Component\Core\Test\SwiftmailerAssertionTrait;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
-use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 final class ResetPasswordEmailManagerTest extends KernelTestCase
@@ -58,7 +57,7 @@ final class ResetPasswordEmailManagerTest extends KernelTestCase
             $email,
             $this->translator->trans(
                 id: 'sylius.email.admin_password_reset.to_reset_your_password_token',
-                locale: 'en_US'
+                locale: 'en_US',
             ),
         );
     }

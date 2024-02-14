@@ -28,8 +28,8 @@ final class SendContactRequestHandler implements MessageHandlerInterface
      * @param ChannelRepositoryInterface<ChannelInterface> $channelRepository
      */
     public function __construct(
-        private ContactEmailManagerInterface $contactEmailManager,
         private ChannelRepositoryInterface $channelRepository,
+        private ContactEmailManagerInterface $contactEmailManager,
     ) {
     }
 

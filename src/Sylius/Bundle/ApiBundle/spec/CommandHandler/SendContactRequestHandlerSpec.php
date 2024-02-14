@@ -22,14 +22,16 @@ use Sylius\Component\Core\Model\ChannelInterface;
 
 final class SendContactRequestHandlerSpec extends ObjectBehavior
 {
-    function let(ContactEmailManagerInterface $contactEmailManager, ChannelRepositoryInterface $channelRepository): void
-    {
-        $this->beConstructedWith($contactEmailManager, $channelRepository);
+    function let(
+        ChannelRepositoryInterface $channelRepository,
+        ContactEmailManagerInterface $contactEmailManager,
+    ): void {
+        $this->beConstructedWith($channelRepository, $contactEmailManager);
     }
 
     function it_sends_contact_request(
-        ContactEmailManagerInterface $contactEmailManager,
         ChannelRepositoryInterface $channelRepository,
+        ContactEmailManagerInterface $contactEmailManager,
         ChannelInterface $channel,
     ): void {
         $command = new SendContactRequest('adam@sylius.com', 'message');
