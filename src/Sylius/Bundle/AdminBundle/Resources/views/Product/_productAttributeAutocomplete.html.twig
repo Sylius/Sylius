@@ -3,17 +3,13 @@
         <input
             name="product_attributes"
             data-model="attributeCodes"
-            {{ stimulus_controller('symfony/ux-autocomplete/autocomplete', {
+            {{ stimulus_controller('product-attribute-autocomplete', {
                 url: path('ux_entity_autocomplete', { alias: 'product_attribute' }),
+                dummy: attributeCodes|join(','),
             }) }}
         />
         <button type="button" class="btn btn-primary" data-action="live#action" data-action-name="prevent|addAttribute()">
             {{ 'sylius.ui.add'|trans }}
         </button>
     </div>
-    <script>
-        window.addEventListener('product_attribute_autocomplete:clear', () => {
-            document.querySelector('input[name="product_attributes"]').tomselect.clear();
-        });
-    </script>
 </div>

@@ -22,7 +22,7 @@ use Symfony\UX\LiveComponent\DefaultActionTrait;
 #[AsLiveComponent(name: 'SyliusAdmin.Product.ProductAttributeAutocomplete', template: '@SyliusAdmin/Product/_productAttributeAutocomplete.html.twig')]
 final class ProductAttributeAutocompleteComponent
 {
-    #[LiveProp(writable: true)]
+    #[LiveProp(writable: true, )]
     public ?string $attributeCodes = null;
 
     use ComponentToolsTrait;
@@ -33,6 +33,5 @@ final class ProductAttributeAutocompleteComponent
     {
         $this->emit('product_attribute_autocomplete:add', ['attributeCodes' => explode(',', $this->attributeCodes)]);
         $this->attributeCodes = '';
-        $this->dispatchBrowserEvent('product_attribute_autocomplete:clear');
     }
 }

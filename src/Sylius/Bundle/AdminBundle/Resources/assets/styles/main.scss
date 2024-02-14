@@ -33,3 +33,7 @@ body {
 @import "tree";
 
 @import "body";
+
+.focus .ts-control {
+    box-shadow: none;
+}
