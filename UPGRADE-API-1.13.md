@@ -148,7 +148,7 @@ respond with a `Sylius\Bundle\ApiBundle\Exception\TranslationLocaleMismatchExcep
             private UserRepositoryInterface $shopUserRepository,
             private ChannelRepositoryInterface $channelRepository,
     -       private SenderInterface $emailSender,
-    +       private AccountRegistrationEmailManagerInterface $accountRegistrationEmailManager,
+    +       private Sylius\Bundle\CoreBundle\Mailer\AccountRegistrationEmailManagerInterface $accountRegistrationEmailManager,
         ) {
         }
     ```
@@ -159,7 +159,7 @@ respond with a `Sylius\Bundle\ApiBundle\Exception\TranslationLocaleMismatchExcep
             private UserRepositoryInterface $shopUserRepository,
             private ChannelRepositoryInterface $channelRepository,
     -       private SenderInterface $emailSender,
-    +       private AccountVerificationEmailManagerInterface $accountVerificationEmailManager,
+    +       private Sylius\Bundle\CoreBundle\Mailer\AccountVerificationEmailManagerInterface $accountVerificationEmailManager,
         ) {
         }
     ```
@@ -170,7 +170,7 @@ respond with a `Sylius\Bundle\ApiBundle\Exception\TranslationLocaleMismatchExcep
     -       private SenderInterface $emailSender,
             private UserRepositoryInterface $shopUserRepository,
             private ChannelRepositoryInterface $channelRepository,
-    +       private ResetPasswordEmailManagerInterface $resetPasswordEmailManager,
+    +       private Sylius\Bundle\CoreBundle\Mailer\ResetPasswordEmailManagerInterface $resetPasswordEmailManager,
         ) {
         }
     ```
@@ -180,7 +180,7 @@ respond with a `Sylius\Bundle\ApiBundle\Exception\TranslationLocaleMismatchExcep
         public function __construct(
     -       private SenderInterface $emailSender,
             private OrderRepositoryInterface $orderRepository,
-    +       private OrderEmailManagerInterface $orderEmailManager,
+    +       private Sylius\Bundle\CoreBundle\Mailer\OrderEmailManagerInterface $orderEmailManager,
         ) {
         }
     ```
@@ -190,7 +190,7 @@ respond with a `Sylius\Bundle\ApiBundle\Exception\TranslationLocaleMismatchExcep
         public function __construct(
     -       private SenderInterface $emailSender,
             private ShipmentRepositoryInterface $shipmentRepository,
-    +       private ShipmentEmailManagerInterface $shipmentEmailManager,
+    +       private Sylius\Bundle\CoreBundle\Mailer\ShipmentEmailManagerInterface $shipmentEmailManager,
         ) {
         }
     ```
@@ -200,7 +200,7 @@ respond with a `Sylius\Bundle\ApiBundle\Exception\TranslationLocaleMismatchExcep
         public function __construct(
     -       private SenderInterface $emailSender,
             private ChannelRepositoryInterface $channelRepository,
-    +       private ContactEmailManagerInterface $contactEmailManager,
+    +       private Sylius\Bundle\CoreBundle\Mailer\ContactEmailManagerInterface $contactEmailManager,
         ) {
         }
     ```
@@ -210,7 +210,7 @@ respond with a `Sylius\Bundle\ApiBundle\Exception\TranslationLocaleMismatchExcep
         public function __construct(
             private UserRepositoryInterface $shopUserRepository,
     -       private SenderInterface $emailSender,
-    +       private ResetPasswordEmailManagerInterface $resetPasswordEmailManager,
+    +       private Sylius\Bundle\CoreBundle\Mailer\ResetPasswordEmailManagerInterface $resetPasswordEmailManager,
         ) {
         }
     ```

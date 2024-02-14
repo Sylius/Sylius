@@ -41,9 +41,7 @@
     </service>
     <service id="Sylius\Bundle\CoreBundle\Mailer\ShipmentEmailManagerInterface" alias="sylius.mailer.shipment_email_manager" />
 
-    <service id="sylius.mailer.reset_password_email_manager"
-             class="Sylius\Bundle\CoreBundle\Mailer\ResetPasswordEmailManager"
-    >
+    <service id="sylius.mailer.reset_password_email_manager" class="Sylius\Bundle\CoreBundle\Mailer\ResetPasswordEmailManager">
         <argument type="service" id="sylius.email_sender" />
     </service>
     <service id="Sylius\Bundle\CoreBundle\Mailer\ResetPasswordEmailManagerInterface" alias="sylius.mailer.reset_password_email_manager" />

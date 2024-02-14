@@ -537,3 +537,5 @@ List of affected classes:
                     strategy: 'To verify your email address - click the link below'
                     subject: 'Email address verification'
    ```
+
+1 Extracted the section responsible for the `ShopBundle` from `@SyliusCore/Email/accountVerification.html.twig` and relocated it to `@SyliusShop/Email/verification.html.twig`.
