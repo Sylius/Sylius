@@ -56,7 +56,10 @@ final class ResetPasswordEmailManagerTest extends KernelTestCase
         self::assertEmailAddressContains($email, 'To', self::RECIPIENT_EMAIL);
         self::assertEmailHtmlBodyContains(
             $email,
-            $this->translator->trans(id: 'sylius.email.admin_password_reset.to_reset_your_password_token', locale: 'en_US'),
+            $this->translator->trans(
+                id: 'sylius.email.admin_password_reset.to_reset_your_password_token',
+                locale: 'en_US'
+            ),
         );
     }
 }

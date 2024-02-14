@@ -32,9 +32,9 @@ interface Emails
     public const ADMIN_PASSWORD_RESET = 'admin_password_reset';
 
     /**
-     * @deprecated Since Sylius 1.13 and will be removed in Sylius 2.0. Use VERIFICATION instead.
+     * @deprecated Since Sylius 1.13 and will be removed in Sylius 2.0. Use ACCOUNT_VERIFICATION instead.
      */
     public const ACCOUNT_VERIFICATION_TOKEN = 'account_verification_token';
 
-    public const VERIFICATION = 'verification';
+    public const ACCOUNT_VERIFICATION = 'account_verification';
 }

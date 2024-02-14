@@ -40,7 +40,7 @@ final class AccountVerificationEmailManagerSpec extends ObjectBehavior
 
         $sender
             ->send(
-                'verification',
+                'account_verification',
                 ['customer@example.com'],
                 [
                     'user' => $user,

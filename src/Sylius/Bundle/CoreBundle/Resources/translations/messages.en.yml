@@ -43,8 +43,11 @@ sylius:
             to_verify_your_email_address: 'To verify your email address - click the link below'
             verify_your_email_address: 'Verify your email address'
         user:
-            verification:
+            account_verification:
+                greeting: 'Hello'
                 message: 'Verify your account with token: '
+                statement: 'Verify your email address'
+                strategy: 'To verify your email address - click the link below'
                 subject: 'Email address verification'
     form:
         block:
