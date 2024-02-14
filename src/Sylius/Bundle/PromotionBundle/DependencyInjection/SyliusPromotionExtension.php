@@ -55,6 +55,7 @@ final class SyliusPromotionExtension extends AbstractResourceExtension
                 $definition->addTag(AsPromotionAction::SERVICE_TAG, [
                     'type' => $attribute->getType(),
                     'label' => $attribute->getLabel(),
+                    'form-type' => $attribute->getFormType(),
                     'priority' => $attribute->getPriority(),
                 ]);
             },
