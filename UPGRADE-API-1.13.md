@@ -144,62 +144,73 @@ respond with a `Sylius\Bundle\ApiBundle\Exception\TranslationLocaleMismatchExcep
 
     `Sylius\Bundle\ApiBundle\CommandHandler\Account\SendAccountRegistrationEmailHandler`:
     ```diff
-        use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
-    -   use Sylius\Component\Mailer\Sender\SenderInterface;
-        use Sylius\Component\User\Repository\UserRepositoryInterface;
-    +   use Sylius\Bundle\CoreBundle\Mailer\AccountRegistrationEmailManagerInterface;
-   
         public function __construct(
-    +       private AccountRegistrationEmailManagerInterface $accountRegistrationEmailManager,
             private UserRepositoryInterface $shopUserRepository,
             private ChannelRepositoryInterface $channelRepository,
     -       private SenderInterface $emailSender,
+    +       private AccountRegistrationEmailManagerInterface $accountRegistrationEmailManager,
         ) {
         }
     ```
 
     `Sylius\Bundle\ApiBundle\CommandHandler\Account\SendAccountVerificationEmailHandler`:
     ```diff
-        use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
-    -   use Sylius\Component\Mailer\Sender\SenderInterface;
-        use Sylius\Component\User\Repository\UserRepositoryInterface;
-    +   use Sylius\Bundle\CoreBundle\Mailer\AccountVerificationEmailManagerInterface;
-   
         public function __construct(
-    +       private AccountVerificationEmailManagerInterface $accountVerificationEmailManager,
             private UserRepositoryInterface $shopUserRepository,
             private ChannelRepositoryInterface $channelRepository,
     -       private SenderInterface $emailSender,
+    +       private AccountVerificationEmailManagerInterface $accountVerificationEmailManager,
         ) {
         }
     ```
 
     `Sylius\Bundle\ApiBundle\CommandHandler\Account\SendResetPasswordEmailHandler`:
     ```diff
-        use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
-    -   use Sylius\Component\Mailer\Sender\SenderInterface;
-        use Sylius\Component\User\Repository\UserRepositoryInterface;
-    +   use Sylius\Bundle\CoreBundle\Mailer\ResetPasswordEmailManagerInterface;
-   
         public function __construct(
-    +       private ResetPasswordEmailManagerInterface $resetPasswordEmailManager,
+    -       private SenderInterface $emailSender,
             private UserRepositoryInterface $shopUserRepository,
             private ChannelRepositoryInterface $channelRepository,
-    -       private SenderInterface $emailSender,
+    +       private ResetPasswordEmailManagerInterface $resetPasswordEmailManager,
         ) {
         }
     ```
 
-    `Sylius\Bundle\CoreBundle\MessageHandler\Admin\Account\SendResetPasswordEmailHandler`:
+    `Sylius\Bundle\ApiBundle\CommandHandler\Checkout\SendOrderConfirmationHandler`:
     ```diff
-    -   use Sylius\Component\Mailer\Sender\SenderInterface;
-        use Sylius\Component\User\Repository\UserRepositoryInterface;
-    +   use Sylius\Bundle\CoreBundle\Mailer\ResetPasswordEmailManagerInterface;
-   
         public function __construct(
-    +       private ResetPasswordEmailManagerInterface $resetPasswordEmailManager,
+    -       private SenderInterface $emailSender,
+            private OrderRepositoryInterface $orderRepository,
+    +       private OrderEmailManagerInterface $orderEmailManager,
+        ) {
+        }
+    ```
+
+    `Sylius\Bundle\ApiBundle\CommandHandler\Checkout\SendShipmentConfirmationEmailHandler`:
+    ```diff
+        public function __construct(
+    -       private SenderInterface $emailSender,
+            private ShipmentRepositoryInterface $shipmentRepository,
+    +       private ShipmentEmailManagerInterface $shipmentEmailManager,
+        ) {
+        }
+    ```
+
+    `Sylius\Bundle\ApiBundle\CommandHandler\SendContactRequestHandler`:
+    ```diff
+        public function __construct(
+    -       private SenderInterface $emailSender,
+            private ChannelRepositoryInterface $channelRepository,
+    +       private ContactEmailManagerInterface $contactEmailManager,
+        ) {
+        }
+    ```
+
+    `Sylius\Bundle\CoreBundle\MessageHandler\Admin\Account\SendResetPasswordEmailHandler`: 
+   ```diff
+        public function __construct(
             private UserRepositoryInterface $shopUserRepository,
     -       private SenderInterface $emailSender,
+    +       private ResetPasswordEmailManagerInterface $resetPasswordEmailManager,
         ) {
         }
     ```
