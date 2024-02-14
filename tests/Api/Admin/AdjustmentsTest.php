@@ -31,7 +31,14 @@ final class AdjustmentsTest extends JsonApiTestCase
     /** @test */
     public function it_gets_adjustments(): void
     {
-        $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel.yaml', 'cart.yaml', 'country.yaml', 'shipping_method.yaml', 'payment_method.yaml']);
+        $this->loadFixturesFromFiles([
+            'authentication/api_administrator.yaml',
+            'channel.yaml',
+            'cart.yaml', 'country.yaml',
+            'shipping_method.yaml',
+            'payment_method.yaml'
+        ]);
+
         $this->placeOrder('token');
         $this->placeOrder('token2');
 
@@ -51,7 +58,14 @@ final class AdjustmentsTest extends JsonApiTestCase
     /** @test */
     public function it_gets_adjustment_by_id(): void
     {
-        $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel.yaml', 'cart.yaml', 'country.yaml', 'shipping_method.yaml', 'payment_method.yaml']);
+        $this->loadFixturesFromFiles([
+            'authentication/api_administrator.yaml',
+            'channel.yaml',
+            'cart.yaml',
+            'country.yaml',
+            'shipping_method.yaml',
+            'payment_method.yaml'
+        ]);
 
         $order = $this->placeOrder('token');
 

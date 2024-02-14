@@ -37,8 +37,6 @@
                     <attribute name="groups">
                         <attribute>shop:order_item:show</attribute>
                         <attribute>sylius:shop:order_item:show</attribute>
-                        <attribute>shop:cart:show</attribute>
-                        <attribute>sylius:shop:cart:show</attribute>
                     </attribute>
                 </attribute>
             </itemOperation>
