@@ -24,49 +24,49 @@
         </attribute>
        <attribute name="code">
            <group>admin:country:index</group>
-            <group>sylius:admin:country:index</group>
+           <group>sylius:admin:country:index</group>
            <group>admin:country:show</group>
-            <group>sylius:admin:country:show</group>
+           <group>sylius:admin:country:show</group>
            <group>admin:country:create</group>
-            <group>sylius:admin:country:create</group>
+           <group>sylius:admin:country:create</group>
            <group>shop:country:index</group>
-            <group>sylius:shop:country:index</group>
+           <group>sylius:shop:country:index</group>
            <group>shop:country:show</group>
-            <group>sylius:shop:country:show</group>
+           <group>sylius:shop:country:show</group>
        </attribute>
        <attribute name="name">
            <group>admin:country:index</group>
-            <group>sylius:admin:country:index</group>
+           <group>sylius:admin:country:index</group>
            <group>admin:country:show</group>
-            <group>sylius:admin:country:show</group>
+           <group>sylius:admin:country:show</group>
            <group>shop:country:index</group>
-            <group>sylius:shop:country:index</group>
+           <group>sylius:shop:country:index</group>
            <group>shop:country:show</group>
-            <group>sylius:shop:country:show</group>
+           <group>sylius:shop:country:show</group>
        </attribute>
        <attribute name="enabled">
            <group>admin:country:index</group>
-            <group>sylius:admin:country:index</group>
+           <group>sylius:admin:country:index</group>
            <group>admin:country:show</group>
-            <group>sylius:admin:country:show</group>
+           <group>sylius:admin:country:show</group>
            <group>admin:country:create</group>
-            <group>sylius:admin:country:create</group>
+           <group>sylius:admin:country:create</group>
            <group>admin:country:update</group>
-            <group>sylius:admin:country:update</group>
+           <group>sylius:admin:country:update</group>
        </attribute>
        <attribute name="provinces">
            <group>admin:country:index</group>
-            <group>sylius:admin:country:index</group>
+           <group>sylius:admin:country:index</group>
            <group>admin:country:show</group>
-            <group>sylius:admin:country:show</group>
+           <group>sylius:admin:country:show</group>
            <group>admin:country:create</group>
-            <group>sylius:admin:country:create</group>
+           <group>sylius:admin:country:create</group>
            <group>admin:country:update</group>
-            <group>sylius:admin:country:update</group>
+           <group>sylius:admin:country:update</group>
            <group>shop:country:index</group>
-            <group>sylius:shop:country:index</group>
+           <group>sylius:shop:country:index</group>
            <group>shop:country:show</group>
-            <group>sylius:shop:country:show</group>
+           <group>sylius:shop:country:show</group>
        </attribute>
     </class>
 </serializer>
