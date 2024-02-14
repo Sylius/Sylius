@@ -31,10 +31,6 @@
     </service>
     <service id="Sylius\Bundle\CoreBundle\Mailer\ContactEmailManagerInterface" alias="sylius.mailer.contact_email_manager" />
 
-    <service id="Sylius\Bundle\CoreBundle\Mailer\ContactEmailManagerInterface" class="Sylius\Bundle\CoreBundle\Mailer\ContactEmailManager">
-        <argument type="service" id="sylius.email_sender" />
-    </service>
-
     <service id="sylius.mailer.order_email_manager" class="Sylius\Bundle\CoreBundle\Mailer\OrderEmailManager">
         <argument type="service" id="sylius.email_sender" />
     </service>
@@ -45,22 +41,25 @@
     </service>
     <service id="Sylius\Bundle\CoreBundle\Mailer\ShipmentEmailManagerInterface" alias="sylius.mailer.shipment_email_manager" />
 
-    <service id="Sylius\Bundle\CoreBundle\Mailer\ResetPasswordEmailManagerInterface"
+    <service id="sylius.mailer.reset_password_email_manager"
              class="Sylius\Bundle\CoreBundle\Mailer\ResetPasswordEmailManager"
     >
         <argument type="service" id="sylius.email_sender" />
     </service>
+    <service id="Sylius\Bundle\CoreBundle\Mailer\ResetPasswordEmailManagerInterface" alias="sylius.mailer.reset_password_email_manager" />
 
-    <service id="Sylius\Bundle\CoreBundle\Mailer\AccountRegistrationEmailManagerInterface"
+    <service id="sylius.mailer.account_registration_email_manager"
              class="Sylius\Bundle\CoreBundle\Mailer\AccountRegistrationEmailManager"
     >
         <argument type="service" id="sylius.email_sender" />
     </service>
+    <service id="Sylius\Bundle\CoreBundle\Mailer\AccountRegistrationEmailManagerInterface" alias="sylius.mailer.account_registration_email_manager" />
 
-    <service id="Sylius\Bundle\CoreBundle\Mailer\AccountVerificationEmailManagerInterface"
+    <service id="sylius.mailer.account_verification_email_manager"
              class="Sylius\Bundle\CoreBundle\Mailer\AccountVerificationEmailManager"
     >
         <argument type="service" id="sylius.email_sender" />
     </service>
+    <service id="Sylius\Bundle\CoreBundle\Mailer\AccountVerificationEmailManagerInterface" alias="sylius.mailer.account_verification_email_manager" />
 </services>
 </container>
