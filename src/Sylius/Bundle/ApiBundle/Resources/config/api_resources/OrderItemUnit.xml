@@ -43,6 +43,5 @@
         </itemOperations>
 
         <property name="id" identifier="true" writable="false" />
-        <property name="shippable" />
     </resource>
 </resources>

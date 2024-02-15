@@ -40,6 +40,7 @@
             <group>sylius:shop:adjustment:show</group>
             <group>shop:cart:show</group>
             <group>sylius:shop:cart:show</group>
+            <group>sylius:admin:order_item:index</group>
         </attribute>
 
         <attribute name="label">
@@ -66,6 +67,7 @@
             <group>sylius:shop:adjustment:show</group>
             <group>shop:cart:show</group>
             <group>sylius:shop:cart:show</group>
+           <group>sylius:admin:order_item:index</group>
         </attribute>
 
         <attribute name="order">
@@ -112,6 +114,7 @@
             <group>sylius:shop:adjustment:show</group>
             <group>shop:cart:show</group>
             <group>sylius:shop:cart:show</group>
+           <group>sylius:admin:order_item:index</group>
         </attribute>
 
         <attribute name="locked">
@@ -123,6 +126,7 @@
             <group>sylius:shop:adjustment:index</group>
             <group>shop:adjustment:show</group>
             <group>sylius:shop:adjustment:show</group>
+           <group>sylius:admin:order_item:index</group>
         </attribute>
     </class>
 </serializer>

@@ -826,10 +826,10 @@ final class ManagingOrdersContext implements Context
      */
     public function iShouldSeeTheShippingDateAs(string $dateTime): void
     {
-        $this->client->show(Resources::SHIPMENTS, (string) $this->sharedStorage->get('shipment')->getId());
+        $response = $this->client->show(Resources::SHIPMENTS, (string) $this->sharedStorage->get('shipment')->getId());
 
         Assert::same(
-            $this->responseChecker->getValue($this->client->getLastResponse(), 'shippedAt'),
+            $this->responseChecker->getValue($response, 'shippedAt'),
             (new \DateTime($dateTime))->format('Y-m-d H:i:s'),
         );
     }

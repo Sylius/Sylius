@@ -5,7 +5,11 @@
     "hydra:member": [
         {
             "@id": "\/api\/v2\/admin\/adjustments\/@integer@",
-            "@type": "Adjustment"
+            "@type": "Adjustment",
+            "type": "promotion",
+            "amount": 1000,
+            "neutral": false,
+            "locked": false
         }
     ],
     "hydra:totalItems": 1

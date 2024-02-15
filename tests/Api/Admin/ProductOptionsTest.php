@@ -129,7 +129,7 @@ final class ProductOptionsTest extends JsonApiTestCase
 
         $this->assertResponse(
             $this->client->getResponse(),
-            'admin/product_option/put_product_option',
+            'admin/product_option/put_product_option_response',
             Response::HTTP_OK,
         );
     }
@@ -167,9 +167,10 @@ final class ProductOptionsTest extends JsonApiTestCase
             ], \JSON_THROW_ON_ERROR),
         );
 
+
         $this->assertResponse(
             $this->client->getResponse(),
-            'admin/product_option/post_product_option',
+            'admin/product_option/post_product_option_response',
             Response::HTTP_CREATED,
         );
     }
