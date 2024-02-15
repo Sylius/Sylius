@@ -19,7 +19,7 @@ Feature: Modifying a customer's billing address on an order with an applied coup
         And the customer chose "Free" shipping method with "Cash on Delivery" payment
         And I am logged in as an administrator
 
-    @api @todo @ui
+    @api @ui
     Scenario: Modifying a customer's billing address when the applied coupon is no longer valid
         Given the coupon "HOLIDAY" was used up to its usage limit
         When I view the summary of the order "#00000001"

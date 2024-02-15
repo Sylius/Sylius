@@ -20,7 +20,7 @@ Feature: Modifying a customer's shipping address on an order with an applied pro
         And the customer chose "Free" shipping method with "Cash on Delivery" payment
         And I am logged in as an administrator
 
-    @api @todo @ui
+    @api @ui
     Scenario: Modifying a customer's shipping address of already placed order when the applied promotion is no longer valid
         Given the promotion was disabled for the channel "Web"
         When I view the summary of the order "#00000001"

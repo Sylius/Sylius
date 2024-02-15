@@ -3,8 +3,8 @@
 {% set order = hookable_data.resource %}
 
 <div>
-    <strong>Shipping address:</strong>
+    <strong>{{ 'sylius.ui.shipping_address'|trans }}</strong>
 </div>
-<div class="mb-3">
+<div class="mb-3" {{ sylius_test_html_attribute('shipping-address') }}>
     {{ _address.default(_context.order.shippingAddress) }}
 </div>
