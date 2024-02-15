@@ -51,6 +51,7 @@ flysystem:
             adapter: 'local'
             options:
                 directory: '%sylius_core.images_dir%'
+            directory_visibility: 'public'
 
 knp_gaufrette:
     adapters:
