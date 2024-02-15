@@ -21,6 +21,7 @@ final class AsPromotionAction
     public function __construct(
         private string $type,
         private string $label,
+        private string $formType,
         private int $priority = 0,
     ) {
     }
@@ -33,6 +34,11 @@ final class AsPromotionAction
     public function getLabel(): string
     {
         return $this->label;
+    }
+
+    public function getFormType(): string
+    {
+        return $this->formType;
     }
 
     public function getPriority(): int
