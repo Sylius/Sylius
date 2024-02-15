@@ -64,6 +64,7 @@
         </service>
 
         <service id="Sylius\Bundle\AdminBundle\TwigComponent\Product\ProductAttributeAutocompleteComponent">
+            <argument type="service" id="ux.autocomplete.checksum_calculator" />
             <call method="setLiveResponder">
                 <argument type="service" id="ux.live_component.live_responder"/>
             </call>

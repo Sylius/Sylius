@@ -11,6 +11,7 @@ import AutocompleteController from '@symfony/ux-autocomplete';
 
 export default class extends AutocompleteController {
   observer;
+  connected = false;
 
   initialize() {
     super.initialize();
@@ -29,11 +30,25 @@ export default class extends AutocompleteController {
     super.connect();
 
     this.observer.observe(this.element, { attributes: true });
+
+    this.connected = true;
   }
 
   disconnect() {
     super.disconnect();
 
     this.observer.disconnect();
+
+    this.connected = false;
+  }
+
+  urlValueChanged() {
+    if (!this.connected) {
+      return;
+    }
+
+    this.disconnect();
+    this.connect();
+    this.tomSelect.refreshItems();
   }
 }

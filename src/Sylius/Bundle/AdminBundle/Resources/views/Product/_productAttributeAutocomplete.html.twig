@@ -4,7 +4,7 @@
             name="product_attributes"
             data-model="attributeCodes"
             {{ stimulus_controller('product-attribute-autocomplete', {
-                url: path('ux_entity_autocomplete', { alias: 'product_attribute' }),
+                url: path('ux_entity_autocomplete', { alias: 'product_attribute', 'extra_options': extraOptions }),
                 dummy: attributeCodes|join(','),
             }) }}
         />

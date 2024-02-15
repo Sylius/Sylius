@@ -16,12 +16,17 @@ namespace Sylius\Bundle\AdminBundle\Autocompleter;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\QueryBuilder;
 use Symfony\Bundle\SecurityBundle\Security;
-use Symfony\UX\Autocomplete\EntityAutocompleterInterface;
+use Symfony\UX\Autocomplete\OptionsAwareEntityAutocompleterInterface;
 
-final readonly class ProductAttributeAutocompleter implements EntityAutocompleterInterface
+/**
+ * @method mixed getGroupBy()
+ */
+final class ProductAttributeAutocompleter implements OptionsAwareEntityAutocompleterInterface
 {
+    private array $options = [];
+
     public function __construct (
-        private string $productAttributeClass,
+        private readonly string $productAttributeClass,
     ) {
     }
 
@@ -32,9 +37,13 @@ final readonly class ProductAttributeAutocompleter implements EntityAutocomplete
 
     public function createFilteredQueryBuilder(EntityRepository $repository, string $query): QueryBuilder
     {
+        $productAttributesToBeExcluded = $this->options['extra_options']['attributeCodes'];
+
         return $repository->createQueryBuilder('o')
             ->andWhere('o.code LIKE :query')
+            ->andWhere('o.code NOT IN (:productAttributesToBeExcluded)')
             ->setParameter('query', '%' . $query . '%')
+            ->setParameter('productAttributesToBeExcluded', $productAttributesToBeExcluded)
         ;
     }
 
@@ -51,5 +60,15 @@ final readonly class ProductAttributeAutocompleter implements EntityAutocomplete
     public function isGranted(Security $security): bool
     {
         return true;
+    }
+
+    public function setOptions(array $options): void
+    {
+        $this->options = $options;
+    }
+
+    public function __call(string $name, array $arguments)
+    {
+        // TODO: Implement @method mixed getGroupBy()
     }
 }
