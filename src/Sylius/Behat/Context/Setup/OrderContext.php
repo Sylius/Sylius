@@ -48,6 +48,7 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\Shipping\Repository\ShippingMethodRepositoryInterface;
 use Sylius\Component\Shipping\ShipmentTransitions;
+use Sylius\Component\User\Security\Generator\GeneratorInterface;
 use Webmozart\Assert\Assert;
 
 final class OrderContext implements Context
@@ -81,6 +82,7 @@ final class OrderContext implements Context
         private readonly OrderItemQuantityModifierInterface $itemQuantityModifier,
         private readonly ObjectManager $objectManager,
         private readonly DateTimeProviderInterface $dateTimeProvider,
+        private readonly GeneratorInterface $tokenGenerator,
     ) {
     }
 
@@ -875,6 +877,7 @@ final class OrderContext implements Context
         string $localeCode = null,
     ): OrderInterface {
         $order = $this->createCart($customer, $channel, $localeCode);
+        $order->setTokenValue($this->tokenGenerator->generate());
 
         if (null !== $number) {
             $order->setNumber($number);
