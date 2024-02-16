@@ -23,6 +23,8 @@
             <group>sylius:admin:product:show</group>
             <group>shop:product_attribute_value:show</group>
             <group>sylius:shop:product_attribute_value:show</group>
+            <group>admin:product_attribute_value:show</group>
+            <group>sylius:admin:product_attribute_value:show</group>
         </attribute>
         <attribute name="attribute">
             <group>admin:product:index</group>
@@ -35,6 +37,8 @@
             <group>sylius:admin:product:update</group>
             <group>shop:product_attribute_value:show</group>
             <group>sylius:shop:product_attribute_value:show</group>
+            <group>admin:product_attribute_value:show</group>
+            <group>sylius:admin:product_attribute_value:show</group>
         </attribute>
         <attribute name="value">
             <group>admin:product:index</group>
@@ -47,6 +51,8 @@
             <group>sylius:admin:product:update</group>
             <group>shop:product_attribute_value:show</group>
             <group>sylius:shop:product_attribute_value:show</group>
+            <group>admin:product_attribute_value:show</group>
+            <group>sylius:admin:product_attribute_value:show</group>
         </attribute>
         <attribute name="localeCode">
             <group>admin:product:index</group>
@@ -59,18 +65,26 @@
             <group>sylius:admin:product:update</group>
             <group>shop:product_attribute_value:show</group>
             <group>sylius:shop:product_attribute_value:show</group>
+            <group>admin:product_attribute_value:show</group>
+            <group>sylius:admin:product_attribute_value:show</group>
         </attribute>
         <attribute name="name">
             <group>shop:product_attribute_value:show</group>
             <group>sylius:shop:product_attribute_value:show</group>
+            <group>admin:product_attribute_value:show</group>
+            <group>sylius:admin:product_attribute_value:show</group>
         </attribute>
         <attribute name="type">
             <group>shop:product_attribute_value:show</group>
             <group>sylius:shop:product_attribute_value:show</group>
+            <group>admin:product_attribute_value:show</group>
+            <group>sylius:admin:product_attribute_value:show</group>
         </attribute>
         <attribute name="code">
             <group>shop:product_attribute_value:show</group>
             <group>sylius:shop:product_attribute_value:show</group>
+            <group>admin:product_attribute_value:show</group>
+            <group>sylius:admin:product_attribute_value:show</group>
         </attribute>
     </class>
 </serializer>

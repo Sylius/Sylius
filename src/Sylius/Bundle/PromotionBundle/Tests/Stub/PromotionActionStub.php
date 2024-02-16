@@ -18,7 +18,7 @@ use Sylius\Component\Promotion\Action\PromotionActionCommandInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 
-#[AsPromotionAction(type: 'test', label: 'Test', priority: 10)]
+#[AsPromotionAction(type: 'test', label: 'Test', formType: 'SomeFormType', priority: 10)]
 final class PromotionActionStub implements PromotionActionCommandInterface
 {
     public function execute(PromotionSubjectInterface $subject, array $configuration, PromotionInterface $promotion): bool

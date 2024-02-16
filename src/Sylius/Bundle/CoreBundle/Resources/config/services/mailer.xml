@@ -40,5 +40,24 @@
         <argument type="service" id="sylius.email_sender" />
     </service>
     <service id="Sylius\Bundle\CoreBundle\Mailer\ShipmentEmailManagerInterface" alias="sylius.mailer.shipment_email_manager" />
+
+    <service id="sylius.mailer.reset_password_email_manager" class="Sylius\Bundle\CoreBundle\Mailer\ResetPasswordEmailManager">
+        <argument type="service" id="sylius.email_sender" />
+    </service>
+    <service id="Sylius\Bundle\CoreBundle\Mailer\ResetPasswordEmailManagerInterface" alias="sylius.mailer.reset_password_email_manager" />
+
+    <service id="sylius.mailer.account_registration_email_manager"
+             class="Sylius\Bundle\CoreBundle\Mailer\AccountRegistrationEmailManager"
+    >
+        <argument type="service" id="sylius.email_sender" />
+    </service>
+    <service id="Sylius\Bundle\CoreBundle\Mailer\AccountRegistrationEmailManagerInterface" alias="sylius.mailer.account_registration_email_manager" />
+
+    <service id="sylius.mailer.account_verification_email_manager"
+             class="Sylius\Bundle\CoreBundle\Mailer\AccountVerificationEmailManager"
+    >
+        <argument type="service" id="sylius.email_sender" />
+    </service>
+    <service id="Sylius\Bundle\CoreBundle\Mailer\AccountVerificationEmailManagerInterface" alias="sylius.mailer.account_verification_email_manager" />
 </services>
 </container>

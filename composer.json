@@ -232,8 +232,8 @@
         "symfony/debug-bundle": "^6.4.0",
         "symfony/dotenv": "^6.4.0",
         "symfony/flex": "^2.4",
-        "symfony/runtime": "^6.3",
-        "symfony/web-profiler-bundle": "^6.3",
+        "symfony/runtime": "^6.4",
+        "symfony/web-profiler-bundle": "^6.4",
         "symplify/monorepo-builder": "^11.0"
     },
     "suggest": {
@@ -257,7 +257,7 @@
     "extra": {
         "symfony": {
             "allow-contrib": false,
-            "require": "6.4.*"
+            "require": "^6.4"
         },
         "branch-alias": {
             "dev-main": "2.0-dev"

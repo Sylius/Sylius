@@ -83,7 +83,7 @@ final class ShipmentsTest extends JsonApiTestCase
         );
 
         $response = $this->client->getResponse();
-        $this->assertResponse($response, 'admin/shipment/ship_shipment_response', Response::HTTP_OK);
+        $this->assertResponseCode($response, Response::HTTP_ACCEPTED);
     }
 
     /** @test */

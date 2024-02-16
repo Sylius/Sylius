@@ -28,5 +28,9 @@
             <group>admin:zone_member:show</group>
             <group>sylius:admin:zone_member:show</group>
         </attribute>
+        <attribute name="belongsTo">
+            <group>admin:zone_member:show</group>
+            <group>sylius:admin:zone_member:show</group>
+        </attribute>
     </class>
 </serializer>

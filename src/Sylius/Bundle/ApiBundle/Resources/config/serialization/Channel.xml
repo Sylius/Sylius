@@ -240,6 +240,8 @@
             <group>admin:channel:index</group>
             <group>sylius:admin:channel:index</group>
             <group>admin:channel:show</group>
+            <group>admin:shop_billing_data:show</group>
+            <group>sylius:admin:shop_billing_data:show</group>
             <group>sylius:admin:channel:show</group>
             <group>admin:channel:create</group>
             <group>sylius:admin:channel:create</group>

@@ -40,7 +40,8 @@
             <group>sylius:shop:adjustment:show</group>
             <group>shop:cart:show</group>
             <group>sylius:shop:cart:show</group>
-       </attribute>
+            <group>sylius:admin:order_item:index</group>
+        </attribute>
 
         <attribute name="label">
             <group>admin:adjustment:index</group>
@@ -53,76 +54,79 @@
             <group>sylius:shop:adjustment:show</group>
             <group>shop:cart:show</group>
             <group>sylius:shop:cart:show</group>
-       </attribute>
+        </attribute>
 
-       <attribute name="amount">
-           <group>admin:adjustment:index</group>
+        <attribute name="amount">
+            <group>admin:adjustment:index</group>
             <group>sylius:admin:adjustment:index</group>
-           <group>admin:adjustment:show</group>
+            <group>admin:adjustment:show</group>
             <group>sylius:admin:adjustment:show</group>
-           <group>shop:adjustment:index</group>
+            <group>shop:adjustment:index</group>
             <group>sylius:shop:adjustment:index</group>
-           <group>shop:adjustment:show</group>
+            <group>shop:adjustment:show</group>
             <group>sylius:shop:adjustment:show</group>
-           <group>shop:cart:show</group>
+            <group>shop:cart:show</group>
             <group>sylius:shop:cart:show</group>
-       </attribute>
+           <group>sylius:admin:order_item:index</group>
+        </attribute>
 
-       <attribute name="order">
-           <group>admin:adjustment:index</group>
+        <attribute name="order">
+            <group>admin:adjustment:index</group>
             <group>sylius:admin:adjustment:index</group>
-           <group>admin:adjustment:show</group>
+            <group>admin:adjustment:show</group>
             <group>sylius:admin:adjustment:show</group>
-           <group>shop:adjustment:index</group>
+            <group>shop:adjustment:index</group>
             <group>sylius:shop:adjustment:index</group>
-           <group>shop:adjustment:show</group>
+            <group>shop:adjustment:show</group>
             <group>sylius:shop:adjustment:show</group>
-       </attribute>
+        </attribute>
 
-       <attribute name="order_item">
-           <group>admin:adjustment:index</group>
+        <attribute name="order_item">
+            <group>admin:adjustment:index</group>
             <group>sylius:admin:adjustment:index</group>
-           <group>admin:adjustment:show</group>
+            <group>admin:adjustment:show</group>
             <group>sylius:admin:adjustment:show</group>
-           <group>shop:adjustment:index</group>
+            <group>shop:adjustment:index</group>
             <group>sylius:shop:adjustment:index</group>
-           <group>shop:adjustment:show</group>
+            <group>shop:adjustment:show</group>
             <group>sylius:shop:adjustment:show</group>
-       </attribute>
+        </attribute>
 
-       <attribute name="order_item_unit">
-           <group>admin:adjustment:index</group>
+        <attribute name="order_item_unit">
+            <group>admin:adjustment:index</group>
             <group>sylius:admin:adjustment:index</group>
-           <group>admin:adjustment:show</group>
+            <group>admin:adjustment:show</group>
             <group>sylius:admin:adjustment:show</group>
-           <group>shop:adjustment:index</group>
+            <group>shop:adjustment:index</group>
             <group>sylius:shop:adjustment:index</group>
-           <group>shop:adjustment:show</group>
+            <group>shop:adjustment:show</group>
             <group>sylius:shop:adjustment:show</group>
-       </attribute>
+        </attribute>
 
-       <attribute name="neutral">
-           <group>admin:adjustment:index</group>
+        <attribute name="neutral">
+            <group>admin:adjustment:index</group>
             <group>sylius:admin:adjustment:index</group>
-           <group>admin:adjustment:show</group>
+            <group>admin:adjustment:show</group>
             <group>sylius:admin:adjustment:show</group>
-           <group>shop:adjustment:index</group>
+            <group>shop:adjustment:index</group>
             <group>sylius:shop:adjustment:index</group>
-           <group>shop:adjustment:show</group>
+            <group>shop:adjustment:show</group>
             <group>sylius:shop:adjustment:show</group>
-           <group>shop:cart:show</group>
+            <group>shop:cart:show</group>
             <group>sylius:shop:cart:show</group>
-       </attribute>
+           <group>sylius:admin:order_item:index</group>
+        </attribute>
 
-       <attribute name="locked">
-           <group>admin:adjustment:index</group>
+        <attribute name="locked">
+            <group>admin:adjustment:index</group>
             <group>sylius:admin:adjustment:index</group>
-           <group>admin:adjustment:show</group>
+            <group>admin:adjustment:show</group>
             <group>sylius:admin:adjustment:show</group>
-           <group>shop:adjustment:index</group>
+            <group>shop:adjustment:index</group>
             <group>sylius:shop:adjustment:index</group>
-           <group>shop:adjustment:show</group>
+            <group>shop:adjustment:show</group>
             <group>sylius:shop:adjustment:show</group>
-       </attribute>
+           <group>sylius:admin:order_item:index</group>
+        </attribute>
     </class>
 </serializer>

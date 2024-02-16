@@ -7,7 +7,7 @@ Installation
 The Sylius main application can serve as an end-user app, as well as a foundation
 for your custom e-commerce application.
 
-To create your Sylius-based application, first make sure you use PHP 8.0 or higher
+To create your Sylius-based application, first make sure you use PHP 8.1 or higher
 and have `Composer`_ installed.
 
 .. note::
@@ -30,7 +30,7 @@ To begin creating your new project, run this command:
 
 .. note::
 
-    Make sure to use PHP ^8.0. Using an older PHP version will result in installing an older version of Sylius.
+    Make sure to use PHP ^8.1. Using an older PHP version will result in installing an older version of Sylius.
 
 This will create a new Symfony project in the ``acme`` directory. Next, move to the project directory:
 

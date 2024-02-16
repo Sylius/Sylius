@@ -58,7 +58,7 @@
     "packages-swiftmailer": {
       "include": [
         {
-          "php": "8.0",
+          "php": "8.1",
           "symfony": "^5.4"
         }
       ]

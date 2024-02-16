@@ -35,7 +35,7 @@
             <group>sylius:shop:product_review:index</group>
             <group>shop:product_review:show</group>
             <group>sylius:shop:product_review:show</group>
-       </attribute>
+        </attribute>
         <attribute name="updatedAt">
             <group>admin:product_review:index</group>
             <group>sylius:admin:product_review:index</group>
@@ -45,72 +45,72 @@
             <group>sylius:shop:product_review:index</group>
             <group>shop:product_review:show</group>
             <group>sylius:shop:product_review:show</group>
-       </attribute>
-       <attribute name="title">
-           <group>admin:product_review:index</group>
+        </attribute>
+        <attribute name="title">
+            <group>admin:product_review:index</group>
             <group>sylius:admin:product_review:index</group>
-           <group>admin:product_review:show</group>
+            <group>admin:product_review:show</group>
             <group>sylius:admin:product_review:show</group>
-           <group>admin:product_review:update</group>
+            <group>admin:product_review:update</group>
             <group>sylius:admin:product_review:update</group>
-           <group>shop:product_review:index</group>
+            <group>shop:product_review:index</group>
             <group>sylius:shop:product_review:index</group>
-           <group>shop:product_review:show</group>
+            <group>shop:product_review:show</group>
             <group>sylius:shop:product_review:show</group>
-       </attribute>
-       <attribute name="rating">
-           <group>admin:product_review:index</group>
+        </attribute>
+        <attribute name="rating">
+            <group>admin:product_review:index</group>
             <group>sylius:admin:product_review:index</group>
-           <group>admin:product_review:show</group>
+            <group>admin:product_review:show</group>
             <group>sylius:admin:product_review:show</group>
-           <group>admin:product_review:update</group>
+            <group>admin:product_review:update</group>
             <group>sylius:admin:product_review:update</group>
-           <group>shop:product_review:index</group>
+            <group>shop:product_review:index</group>
             <group>sylius:shop:product_review:index</group>
-           <group>shop:product_review:show</group>
+            <group>shop:product_review:show</group>
             <group>sylius:shop:product_review:show</group>
-       </attribute>
-       <attribute name="comment">
-           <group>admin:product_review:index</group>
+        </attribute>
+        <attribute name="comment">
+            <group>admin:product_review:index</group>
             <group>sylius:admin:product_review:index</group>
-           <group>admin:product_review:show</group>
+            <group>admin:product_review:show</group>
             <group>sylius:admin:product_review:show</group>
-           <group>admin:product_review:update</group>
+            <group>admin:product_review:update</group>
             <group>sylius:admin:product_review:update</group>
-           <group>shop:product_review:index</group>
+            <group>shop:product_review:index</group>
             <group>sylius:shop:product_review:index</group>
-           <group>shop:product_review:show</group>
+            <group>shop:product_review:show</group>
             <group>sylius:shop:product_review:show</group>
-       </attribute>
-       <attribute name="author">
-           <group>admin:product_review:index</group>
+        </attribute>
+        <attribute name="author">
+            <group>admin:product_review:index</group>
             <group>sylius:admin:product_review:index</group>
-           <group>admin:product_review:show</group>
+            <group>admin:product_review:show</group>
             <group>sylius:admin:product_review:show</group>
-           <group>shop:product_review:index</group>
+            <group>shop:product_review:index</group>
             <group>sylius:shop:product_review:index</group>
-           <group>shop:product_review:show</group>
+            <group>shop:product_review:show</group>
             <group>sylius:shop:product_review:show</group>
-       </attribute>
-       <attribute name="status">
-           <group>admin:product_review:index</group>
+        </attribute>
+        <attribute name="status">
+            <group>admin:product_review:index</group>
             <group>sylius:admin:product_review:index</group>
-           <group>admin:product_review:show</group>
+            <group>admin:product_review:show</group>
             <group>sylius:admin:product_review:show</group>
-           <group>shop:product_review:index</group>
+            <group>shop:product_review:index</group>
             <group>sylius:shop:product_review:index</group>
-           <group>shop:product_review:show</group>
+            <group>shop:product_review:show</group>
             <group>sylius:shop:product_review:show</group>
-       </attribute>
-       <attribute name="reviewSubject">
-           <group>admin:product_review:index</group>
+        </attribute>
+        <attribute name="reviewSubject">
+            <group>admin:product_review:index</group>
             <group>sylius:admin:product_review:index</group>
-           <group>admin:product_review:show</group>
+            <group>admin:product_review:show</group>
             <group>sylius:admin:product_review:show</group>
-           <group>shop:product_review:index</group>
+            <group>shop:product_review:index</group>
             <group>sylius:shop:product_review:index</group>
-           <group>shop:product_review:show</group>
+            <group>shop:product_review:show</group>
             <group>sylius:shop:product_review:show</group>
-       </attribute>
+        </attribute>
     </class>
 </serializer>

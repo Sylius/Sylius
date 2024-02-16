@@ -29,7 +29,7 @@ PHP required modules and configuration
 **PHP version**:
 
 +---------------+-----------------------+
-| PHP           | ^8.0                  |
+| PHP           | ^8.1                  |
 +---------------+-----------------------+
 
 **PHP extensions**:
@@ -62,7 +62,7 @@ Database
 By default, the database connection is pre-configured to work with a following MySQL configuration:
 
 +---------------+-----------------------+
-| MySQL         | 5.7+, 8.0+            |
+| MySQL         | 8.0+                  |
 +---------------+-----------------------+
 
 .. note::
@@ -73,10 +73,10 @@ NPM Package Manager
 -------------------
 
 Sylius Frontend depends on `npm packages <https://docs.npmjs.com/about-npm>`_ for it to run you need to have Node.js installed.
-Current minimum supported version of Node.js is:
+Current supported versions of Node.js are:
 
 +---------------+-----------------------+
-| Node.js       | 14.x                  |
+| Node.js       | 18.x, 20.x            |
 +---------------+-----------------------+
 
 Access rights

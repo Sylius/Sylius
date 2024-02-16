@@ -68,8 +68,24 @@ final class Configuration implements ConfigurationInterface
                             ->useAttributeAsKey('type')
                             ->arrayPrototype()
                                 ->children()
-                                    ->scalarNode('interval')->end()
-                                    ->scalarNode('period_format')->end()
+                                    ->scalarNode('interval')
+                                        ->cannotBeEmpty()
+                                        ->validate()
+                                            ->ifTrue(
+                                                function (mixed $interval) {
+                                                    try {
+                                                        new \DateInterval($interval);
+
+                                                        return false;
+                                                    } catch (\Exception $e) {
+                                                        return true;
+                                                    }
+                                                },
+                                            )
+                                            ->thenInvalid('Invalid format for interval "%s". Expected a string compatible with DateInterval.')
+                                        ->end()
+                                    ->end()
+                                    ->scalarNode('period_format')->cannotBeEmpty()->end()
                                 ->end()
                             ->end()
                         ->end()

@@ -1,0 +1,8 @@
+{
+    "@context": "\/api\/v2\/contexts\/ZoneMember",
+    "@id": "\/api\/v2\/admin\/zone-members\/NL",
+    "@type": "ZoneMember",
+    "id": @integer@,
+    "code": "NL",
+    "belongsTo": "\/api\/v2\/admin\/zones\/EU"
+}

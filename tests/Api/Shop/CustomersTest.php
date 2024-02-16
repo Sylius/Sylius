@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Tests\Api\Shop;
 
 use Sylius\Component\Core\Model\CustomerInterface;
+use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Tests\Api\JsonApiTestCase;
 use Sylius\Tests\Api\Utils\ShopUserLoginTrait;
 use Symfony\Component\HttpFoundation\Response;
@@ -40,7 +41,7 @@ final class CustomersTest extends JsonApiTestCase
 
         $response = $this->client->getResponse();
 
-        $this->assertResponse($response, 'shop/update_customer_response', Response::HTTP_OK);
+        $this->assertResponse($response, 'shop/customer/update_customer_response', Response::HTTP_OK);
     }
 
     /** @test */
@@ -83,7 +84,7 @@ final class CustomersTest extends JsonApiTestCase
 
         $response = $this->client->getResponse();
 
-        $this->assertResponse($response, 'shop/log_in_customer_response', Response::HTTP_OK);
+        $this->assertResponse($response, 'shop/customer/log_in_customer_response', Response::HTTP_OK);
     }
 
     /** @test */
@@ -110,6 +111,74 @@ final class CustomersTest extends JsonApiTestCase
 
         $response = $this->client->getResponse();
 
-        $this->assertResponse($response, 'shop/updated_gender_customer_response', Response::HTTP_OK);
+        $this->assertResponse($response, 'shop/customer/updated_gender_customer_response', Response::HTTP_OK);
+    }
+
+    /** @test */
+    public function it_sends_reset_password_email(): void
+    {
+        $loadedData = $this->loadFixturesFromFiles(['authentication/customer.yaml', 'channel.yaml']);
+        /** @var CustomerInterface $customer */
+        $customer = $loadedData['customer_oliver'];
+
+        $this->client->request(
+            method: 'POST',
+            uri: '/api/v2/shop/reset-password-requests',
+            server: self::CONTENT_TYPE_HEADER,
+            content: json_encode([
+                'email' => $customer->getEmailCanonical(),
+                'localeCode' => 'en_US',
+            ], \JSON_THROW_ON_ERROR),
+        );
+
+        $response = $this->client->getResponse();
+
+        $this->assertResponseCode($response, Response::HTTP_ACCEPTED);
+        $this->assertEmailCount(1);
+    }
+
+    /** @test */
+    public function it_resets_account_password(): void
+    {
+        $loadedData = $this->loadFixturesFromFiles(['authentication/customer.yaml', 'channel.yaml']);
+
+        /** @var ShopUserInterface $shopUser */
+        $shopUser = $loadedData['shop_user_oliver'];
+        $shopUser->setPasswordResetToken('token');
+        $shopUser->setPasswordRequestedAt(new \DateTime('now'));
+        $this->getEntityManager()->flush();
+
+        $this->client->request(
+            method: 'PATCH',
+            uri: '/api/v2/shop/reset-password-requests/token',
+            server: self::PATCH_CONTENT_TYPE_HEADER,
+            content: json_encode([
+                'newPassword' => 'newPassword',
+                'confirmNewPassword' => 'newPassword',
+            ], \JSON_THROW_ON_ERROR),
+        );
+
+        $response = $this->client->getResponse();
+
+        $this->assertResponseCode($response, Response::HTTP_ACCEPTED);
+    }
+
+    public function it_gets_customer(): void
+    {
+        $fixtures = $this->loadFixturesFromFiles(['authentication/customer.yaml']);
+        /** @var CustomerInterface $customer */
+        $customer = $fixtures['customer_oliver'];
+
+        $header = array_merge($this->logInShopUser($customer->getEmailCanonical()), self::CONTENT_TYPE_HEADER);
+
+        $this->client->request(
+            method: 'GET',
+            uri: '/api/v2/shop/customers/' . $customer->getId(),
+            server: $header,
+        );
+
+        $response = $this->client->getResponse();
+
+        $this->assertResponse($response, 'shop/customer/get_customer_response', Response::HTTP_OK);
     }
 }

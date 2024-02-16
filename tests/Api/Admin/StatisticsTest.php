@@ -115,7 +115,7 @@ final class StatisticsTest extends JsonApiTestCase
 
         $this->assertResponse(
             $this->client->getResponse(),
-            'admin/statistics/get_' . $interval .'_statistics_response',
+            'admin/statistics/get_' . $interval . '_statistics_response',
             Response::HTTP_OK,
         );
     }
@@ -153,12 +153,40 @@ final class StatisticsTest extends JsonApiTestCase
     /**
      * @test
      *
+     * @dataProvider invalidPeriods
+     */
+    public function it_returns_a_validation_error_if_period_is_invalid(array $parameters): void
+    {
+        $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel.yaml']);
+
+        $this->client->request(
+            method: 'GET',
+            uri: '/api/v2/admin/statistics',
+            parameters: $parameters,
+            server: $this->headerBuilder()->withAdminUserAuthorization('api@example.com')->build(),
+        );
+
+        $this->assertResponseViolations(
+            $this->client->getResponse(),
+            [
+                [
+                    'propertyPath' => '',
+                    'message' => 'The start date must be earlier than the end date.',
+                ],
+            ],
+        );
+    }
+
+    /**
+     * @test
+     *
      * @dataProvider missingQueryParameters
      * @dataProvider emptyQueryParameters
      * @dataProvider invalidQueryParameters
      */
-    public function it_returns_a_bad_request_status_code_if_any_of_required_parameters_is_missing_empty_or_invalid(
+    public function it_returns_a_validation_error_if_any_of_required_parameters_is_missing_empty_or_invalid(
         array $queryParameters,
+        array $expectedViolations,
     ): void {
         $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel.yaml']);
 
@@ -169,7 +197,7 @@ final class StatisticsTest extends JsonApiTestCase
             server: $this->headerBuilder()->withAdminUserAuthorization('api@example.com')->build(),
         );
 
-        $this->assertResponseCode($this->client->getResponse(), Response::HTTP_BAD_REQUEST);
+        $this->assertResponseViolations($this->client->getResponse(), $expectedViolations);
     }
 
     public function getIntervals(): iterable
@@ -187,6 +215,12 @@ final class StatisticsTest extends JsonApiTestCase
                 'interval' => 'month',
                 'endDate' => '2023-12-31T23:59:59',
              ],
+            'expectedViolations' => [
+                [
+                    'propertyPath' => '[channelCode]',
+                    'message' => 'This field is missing.',
+                ],
+            ],
         ];
 
         yield 'missing startDate' => [
@@ -194,6 +228,12 @@ final class StatisticsTest extends JsonApiTestCase
                 'channelCode' => 'WEB',
                 'interval' => 'month',
                 'endDate' => '2023-12-31T23:59:59',
+            ],
+            'expectedViolations' => [
+                [
+                    'propertyPath' => '[startDate]',
+                    'message' => 'This field is missing.',
+                ],
             ],
         ];
 
@@ -203,6 +243,12 @@ final class StatisticsTest extends JsonApiTestCase
                 'startDate' => '2023-01-01T00:00:00',
                 'endDate' => '2023-12-31T23:59:59',
             ],
+            'expectedViolations' => [
+                [
+                    'propertyPath' => '[interval]',
+                    'message' => 'This field is missing.',
+                ],
+            ],
         ];
 
         yield 'missing endDate' => [
@@ -211,10 +257,42 @@ final class StatisticsTest extends JsonApiTestCase
                 'startDate' => '2023-01-01T00:00:00',
                 'interval' => 'month',
             ],
+            'expectedViolations' => [
+                [
+                    'propertyPath' => '[endDate]',
+                    'message' => 'This field is missing.',
+                ],
+                [
+                    'propertyPath' => '',
+                    'message' => 'The start date must be earlier than the end date.',
+                ],
+            ],
         ];
 
         yield 'missing all parameters' => [
             'parameters' => [],
+            'expectedViolations' => [
+                [
+                    'propertyPath' => '[channelCode]',
+                    'message' => 'This field is missing.',
+                ],
+                [
+                    'propertyPath' => '[startDate]',
+                    'message' => 'This field is missing.',
+                ],
+                [
+                    'propertyPath' => '[interval]',
+                    'message' => 'This field is missing.',
+                ],
+                [
+                    'propertyPath' => '[endDate]',
+                    'message' => 'This field is missing.',
+                ],
+                [
+                    'propertyPath' => '',
+                    'message' => 'The start date must be earlier than the end date.',
+                ],
+            ],
         ];
     }
 
@@ -227,6 +305,12 @@ final class StatisticsTest extends JsonApiTestCase
                 'interval' => 'month',
                 'endDate' => '2023-12-31T23:59:59',
             ],
+            'expectedViolations' => [
+                [
+                    'propertyPath' => '[channelCode]',
+                    'message' => 'Please enter a code.',
+                ],
+            ],
         ];
 
         yield 'empty startDate' => [
@@ -235,6 +319,12 @@ final class StatisticsTest extends JsonApiTestCase
                 'startDate' => '',
                 'interval' => 'month',
                 'endDate' => '2023-12-31T23:59:59',
+            ],
+            'expectedViolations' => [
+                [
+                    'propertyPath' => '[startDate]',
+                    'message' => 'This value should not be blank.',
+                ],
             ],
         ];
 
@@ -245,6 +335,12 @@ final class StatisticsTest extends JsonApiTestCase
                 'interval' => '',
                 'endDate' => '2023-12-31T23:59:59',
             ],
+            'expectedViolations' => [
+                [
+                    'propertyPath' => '[interval]',
+                    'message' => 'The value you selected is not a valid choice.',
+                ],
+            ],
         ];
 
         yield 'empty endDate' => [
@@ -253,6 +349,16 @@ final class StatisticsTest extends JsonApiTestCase
                 'startDate' => '2023-01-01T00:00:00',
                 'interval' => 'month',
                 'endDate' => '',
+            ],
+            'expectedViolations' => [
+                [
+                    'propertyPath' => '[endDate]',
+                    'message' => 'This value should not be blank.',
+                ],
+                [
+                    'propertyPath' => '',
+                    'message' => 'The start date must be earlier than the end date.',
+                ],
             ],
         ];
     }
@@ -266,6 +372,12 @@ final class StatisticsTest extends JsonApiTestCase
                 'interval' => 'month',
                 'endDate' => '2023-12-31T23:59:59',
             ],
+            'expectedViolations' => [
+                [
+                    'propertyPath' => '[channelCode]',
+                    'message' => 'The code should contain only letters, numbers, dashes ("-" symbol) and underscores ("_" symbol).',
+                ],
+            ],
         ];
 
         yield 'invalid startDate' => [
@@ -274,6 +386,16 @@ final class StatisticsTest extends JsonApiTestCase
                 'startDate' => 'INVALID_START_DATE',
                 'interval' => 'month',
                 'endDate' => '2023-12-31T23:59:59',
+            ],
+            'expectedViolations' => [
+                [
+                    'propertyPath' => '[startDate]',
+                    'message' => 'The date time is not valid ISO 8601 date time in Y-m-d\TH:i:s format.',
+                ],
+                [
+                    'propertyPath' => '',
+                    'message' => 'The start date must be earlier than the end date.',
+                ],
             ],
         ];
 
@@ -284,6 +406,12 @@ final class StatisticsTest extends JsonApiTestCase
                 'interval' => 'invalid',
                 'endDate' => '2023-12-31T23:59:59',
             ],
+            'expectedViolations' => [
+                [
+                    'propertyPath' => '[interval]',
+                    'message' => 'The value you selected is not a valid choice.',
+                ],
+            ],
         ];
 
         yield 'invalid endDate' => [
@@ -292,6 +420,12 @@ final class StatisticsTest extends JsonApiTestCase
                 'startDate' => '2023-01-01T00:00:00',
                 'interval' => 'month',
                 'endDate' => 'INVALID_END_DATE',
+            ],
+            'expectedViolations' => [
+                [
+                    'propertyPath' => '[endDate]',
+                    'message' => 'The date time is not valid ISO 8601 date time in Y-m-d\TH:i:s format.',
+                ],
             ],
         ];
 
@@ -302,6 +436,12 @@ final class StatisticsTest extends JsonApiTestCase
                 'interval' => 'day',
                 'endDate' => '2023-12-31T23:59:59',
                 'unexpected_parameter' => 'unexpected_value',
+            ],
+            'expectedViolations' => [
+                [
+                    'propertyPath' => '[unexpected_parameter]',
+                    'message' => 'This field was not expected.',
+                ],
             ],
         ];
     }
@@ -317,67 +457,12 @@ final class StatisticsTest extends JsonApiTestCase
             ],
         ];
 
-        yield 'n-th date from interval is not matching the end date' => [
+        yield 'startDate is equal to endDate' => [
             'parameters' => [
                 'channelCode' => 'WEB',
                 'startDate' => '2023-01-01T00:00:00',
                 'interval' => 'month',
-                'endDate' => '2023-12-15T23:59:59',
-            ],
-        ];
-
-        yield 'n-th date from interval matches the end date but not the time' => [
-            'parameters' => [
-                'channelCode' => 'WEB',
-                'startDate' => '2023-12-01T00:00:00',
-                'interval' => 'month',
-                'endDate' => '2023-12-31T00:00:00',
-            ],
-        ];
-
-        /** @see https://www.php.net/manual/en/class.dateperiod.php - DatePeriod::INCLUDE_END_DATE */
-        yield 'n-th date from interval is exact n-times bigger than the start date' => [
-            'parameters' => [
-                'channelCode' => 'WEB',
-                'startDate' => '2023-01-01T00:00:00',
-                'interval' => 'month',
-                'endDate' => '2024-01-01T00:00:00', // Supports only closed intervals
-            ],
-        ];
-
-        yield 'interval is bigger than date range' => [
-            'parameters' => [
-                'channelCode' => 'WEB',
-                'startDate' => '2023-12-01T00:00:00',
-                'interval' => 'month',
-                'endDate' => '2023-12-15T23:59:59',
-            ],
-        ];
-
-        yield 'interval is bigger than date range and startDate is not the first day of the month' => [
-            'parameters' => [
-                'channelCode' => 'WEB',
-                'startDate' => '2023-12-15T00:00:00',
-                'interval' => 'month',
-                'endDate' => '2023-12-31T23:59:59',
-            ],
-        ];
-
-        yield 'timezone included in startDate' => [
-            'parameters' => [
-                'channelCode' => 'WEB',
-                'startDate' => '2023-12-01T00:00:00+00:00',
-                'interval' => 'month',
-                'endDate' => '2023-12-31T23:59:59',
-            ],
-        ];
-
-        yield 'timezone included in endDate' => [
-            'parameters' => [
-                'channelCode' => 'WEB',
-                'startDate' => '2023-12-01T00:00:00',
-                'interval' => 'month',
-                'endDate' => '2023-12-31T23:59:59+00:00',
+                'endDate' => '2023-01-01T00:00:00',
             ],
         ];
     }

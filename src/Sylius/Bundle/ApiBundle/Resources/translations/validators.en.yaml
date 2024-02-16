@@ -7,6 +7,7 @@ sylius:
     address:
         without_country: 'The address without country cannot exist'
     code:
+        not_blank: 'Please enter a code.'
         invalid: 'The code should contain only letters, numbers, dashes ("-" symbol) and underscores ("_" symbol).'
     contact_request:
         email_is_invalid: 'The provided email is invalid.'
@@ -42,3 +43,6 @@ sylius:
         not_found: 'The shipping method with %code% code does not exist.'
         not_available: 'The shipping method %name% is not available for this order. Please reselect your shipping method.'
         shipping_address_not_found: 'Order should be addressed first.'
+    statistics:
+        end_date:
+            invalid: 'The start date must be earlier than the end date.'

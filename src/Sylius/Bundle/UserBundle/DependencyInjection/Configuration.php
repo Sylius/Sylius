@@ -73,7 +73,7 @@ final class Configuration implements ConfigurationInterface
                                                                     new \DateInterval($ttl);
 
                                                                     return false;
-                                                                } catch (\Exception $e) {
+                                                                } catch (\Exception) {
                                                                     return true;
                                                                 }
                                                             },

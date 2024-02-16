@@ -97,12 +97,6 @@
             <subresourceOperation name="values_get_subresource">
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/admin/product-options/{code}/values</attribute>
-                <attribute name="normalization_context">
-                    <attribute name="groups">
-                        <attribute>admin:product_option:show</attribute>
-                        <attribute>sylius:admin:product_option:show</attribute>
-                    </attribute>
-                </attribute>
             </subresourceOperation>
         </subresourceOperations>
 

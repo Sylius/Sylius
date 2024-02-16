@@ -47,6 +47,7 @@ final class SyliusPromotionExtensionTest extends AbstractExtensionTestCase
             [
                 'type' => 'test',
                 'label' => 'Test',
+                'form-type' => 'SomeFormType',
                 'priority' => 10,
             ],
         );
