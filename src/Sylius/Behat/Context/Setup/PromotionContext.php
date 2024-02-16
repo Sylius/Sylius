@@ -282,9 +282,9 @@ final class PromotionContext implements Context
     }
 
     /**
-     * @Given /^the (promotion "[^"]+") is archival$/
+     * @Given /^the (promotion "[^"]+") is archived$/
      */
-    public function thisPromotionIsArchival(PromotionInterface $promotion): void
+    public function thisPromotionIsArchived(PromotionInterface $promotion): void
     {
         $promotion->setArchivedAt(new \DateTime());
 

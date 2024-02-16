@@ -24,7 +24,7 @@ Feature: Archiving promotions
 
     @ui
     Scenario: Seeing only archived promotions
-        Given the promotion "Christmas sale" is archival
+        Given the promotion "Christmas sale" is archived
         When I browse promotions
         And I filter archival promotions
         Then I should see a single promotion in the list
@@ -33,7 +33,7 @@ Feature: Archiving promotions
 
     @ui
     Scenario: Restoring an archival promotion
-        Given the promotion "Christmas sale" is archival
+        Given the promotion "Christmas sale" is archived
         When I browse promotions
         And I filter archival promotions
         And I restore the "Christmas sale" promotion
