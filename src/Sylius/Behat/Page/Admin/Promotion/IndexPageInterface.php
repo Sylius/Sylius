@@ -23,4 +23,6 @@ interface IndexPageInterface extends BaseIndexPageInterface
     public function isAbleToManageCouponsFor(PromotionInterface $promotion): bool;
 
     public function isCouponBasedFor(PromotionInterface $promotion): bool;
+
+    public function chooseArchival(string $isArchival): void;
 }
