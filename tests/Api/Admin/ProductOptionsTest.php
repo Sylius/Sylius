@@ -167,7 +167,6 @@ final class ProductOptionsTest extends JsonApiTestCase
             ], \JSON_THROW_ON_ERROR),
         );
 
-
         $this->assertResponse(
             $this->client->getResponse(),
             'admin/product_option/post_product_option_response',
