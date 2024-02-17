@@ -282,7 +282,7 @@ final class PromotionContext implements Context
     }
 
     /**
-     * @Given /^the (promotion "[^"]+") is archived$/
+     * @Given the promotion :promotion is archived
      */
     public function thisPromotionIsArchived(PromotionInterface $promotion): void
     {

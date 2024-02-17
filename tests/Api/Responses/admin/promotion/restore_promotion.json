@@ -1,26 +1,23 @@
 {
     "@context": "\/api\/v2\/contexts\/Promotion",
-    "@id": "\/api\/v2\/admin\/promotions\/50_off",
+    "@id": "\/api\/v2\/admin\/promotions\/back_to_school",
     "@type": "Promotion",
     "channels": [
+        "\/api\/v2\/admin\/channels\/WEB",
         "\/api\/v2\/admin\/channels\/MOBILE"
     ],
     "id": @integer@,
-    "code": "50_off",
-    "name": "50% Off on your first order",
-    "description": "Get 50% off of your first purchase",
+    "code": "back_to_school",
+    "name": "Back to school",
+    "description": "Get 10% off on all school supplies",
     "priority": 3,
-    "exclusive": true,
-    "usageLimit": 1,
+    "exclusive": false,
     "used": 0,
-    "startsAt": null,
-    "endsAt": null,
     "couponBased": false,
     "coupons": [],
     "rules": [],
     "actions": [],
-    "appliesToDiscounted": false,
-    "archivedAt": null,
+    "appliesToDiscounted": true,
     "createdAt": @date@,
     "updatedAt": @date@,
     "translations": {
@@ -28,7 +25,7 @@
             "@id": "\/api\/v2\/admin\/promotion-translations\/@integer@",
             "@type": "PromotionTranslation",
             "id": @integer@,
-            "label": "-50% on first order!"
+            "label": "Back to school sale!"
         }
     }
 }

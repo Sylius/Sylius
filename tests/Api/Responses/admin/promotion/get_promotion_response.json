@@ -20,6 +20,7 @@
     "coupons": [],
     "rules": [],
     "actions": [],
+    "archivedAt": null,
     "createdAt": @date@,
     "updatedAt": @date@,
     "translations": {

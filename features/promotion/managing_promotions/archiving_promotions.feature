@@ -10,7 +10,7 @@ Feature: Archiving promotions
         And there is also a promotion "New Year sale"
         And I am logged in as an administrator
 
-    @ui
+    @api @ui
     Scenario: Archiving a promotion
         When I browse promotions
         And I archive the "Christmas sale" promotion
@@ -22,7 +22,7 @@ Feature: Archiving promotions
         When I archive the "Christmas sale" promotion
         Then the promotion "Christmas sale" should still exist in the registry
 
-    @ui
+    @api @ui
     Scenario: Seeing only archived promotions
         Given the promotion "Christmas sale" is archived
         When I browse promotions
@@ -31,7 +31,7 @@ Feature: Archiving promotions
         And I should see the promotion "Christmas sale" in the list
         And I should not see the promotion "New Year sale" in the list
 
-    @ui
+    @api @ui
     Scenario: Restoring an archival promotion
         Given the promotion "Christmas sale" is archived
         When I browse promotions

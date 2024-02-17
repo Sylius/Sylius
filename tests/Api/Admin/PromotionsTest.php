@@ -577,6 +577,56 @@ final class PromotionsTest extends JsonApiTestCase
     }
 
     /** @test */
+    public function it_archives_a_promotion(): void
+    {
+        $fixtures = $this->loadFixturesFromFiles([
+            'authentication/api_administrator.yaml',
+            'channel.yaml',
+            'promotion/promotion.yaml'
+        ]);
+
+        /** @var PromotionInterface $promotion */
+        $promotion = $fixtures['promotion_50_off'];
+
+        $this->client->request(
+            method: 'PATCH',
+            uri: sprintf('/api/v2/admin/promotions/%s/archive', $promotion->getCode()),
+            server: $this->headerBuilder()->withJsonLdAccept()->withAdminUserAuthorization('api@example.com')->build(),
+        );
+
+        $this->assertResponse(
+            $this->client->getResponse(),
+            'admin/promotion/archive_promotion',
+            Response::HTTP_OK,
+        );
+    }
+
+    /** @test */
+    public function it_restore_a_promotion(): void
+    {
+        $fixtures = $this->loadFixturesFromFiles([
+            'authentication/api_administrator.yaml',
+            'channel.yaml',
+            'promotion/promotion.yaml'
+        ]);
+
+        /** @var PromotionInterface $promotion */
+        $promotion = $fixtures['promotion_back_to_school'];
+
+        $this->client->request(
+            method: 'PATCH',
+            uri: sprintf('/api/v2/admin/promotions/%s/restore', $promotion->getCode()),
+            server: $this->headerBuilder()->withJsonLdAccept()->withAdminUserAuthorization('api@example.com')->build(),
+        );
+
+        $this->assertResponse(
+            $this->client->getResponse(),
+            'admin/promotion/restore_promotion',
+            Response::HTTP_OK,
+        );
+    }
+
+    /** @test */
     public function it_deletes_a_promotion(): void
     {
         $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel.yaml', 'promotion/promotion.yaml']);
