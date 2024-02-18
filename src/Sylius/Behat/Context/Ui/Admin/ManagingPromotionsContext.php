@@ -88,7 +88,6 @@ final class ManagingPromotionsContext implements Context
     }
 
     /**
-     * @Then I should see the promotion :promotionName in the list
      * @Then the :promotionName promotion should appear in the registry
      * @Then the :promotionName promotion should exist in the registry
      * @Then this promotion should still be named :promotionName
@@ -96,6 +95,8 @@ final class ManagingPromotionsContext implements Context
      */
     public function thePromotionShouldAppearInTheRegistry(string $promotionName): void
     {
+        $this->indexPage->open();
+
         Assert::true($this->indexPage->isSingleResourceOnPage(['name' => $promotionName]));
     }
 
@@ -852,6 +853,14 @@ final class ManagingPromotionsContext implements Context
             $currentPage->getValidationMessageForTranslation('label', $localeCode),
             'This value is too long. It should have 255 characters or less.',
         );
+    }
+
+    /**
+     * @Then I should see the promotion :promotionName in the list
+     */
+    public function iShouldSeeThePromotionInTheList(string $promotionName): void
+    {
+        Assert::true($this->indexPage->isSingleResourceOnPage(['name' => $promotionName]));
     }
 
     /**
