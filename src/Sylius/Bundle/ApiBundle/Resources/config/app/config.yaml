@@ -64,6 +64,7 @@ api_platform:
         Sylius\Bundle\ApiBundle\Exception\OrderCancellationFailedException: 422
         Sylius\Bundle\ApiBundle\Exception\OrderItemNotFoundException: 422
         Sylius\Bundle\ApiBundle\Exception\OrderNoLongerEligibleForPromotion: 422
+        Sylius\Bundle\ApiBundle\Exception\PaymentCompletionFailedException: 422
         Sylius\Bundle\ApiBundle\Exception\PaymentMethodCannotBeRemoved: 422
         Sylius\Bundle\ApiBundle\Exception\ProductAttributeCannotBeRemoved: 422
         Sylius\Bundle\ApiBundle\Exception\ProductCannotBeRemoved: 422
