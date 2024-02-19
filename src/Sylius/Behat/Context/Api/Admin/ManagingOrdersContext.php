@@ -517,7 +517,7 @@ final class ManagingOrdersContext implements Context
         $this->iCancelThisOrder($order);
         Assert::contains(
             $this->responseChecker->getError($this->client->getLastResponse()),
-            'Transition "cancel" cannot be applied',
+            'Transition "cancel" is not enabled for workflow',
         );
     }
 
