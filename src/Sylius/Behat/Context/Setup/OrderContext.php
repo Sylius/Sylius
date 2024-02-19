@@ -186,12 +186,7 @@ final class OrderContext implements Context
     public function theCustomerAddedProductToTheCart(CustomerInterface $customer, ProductInterface $product): void
     {
         $cart = $this->createCart($customer);
-
-        /** @var ProductVariantInterface|null $variant */
-        $variant = $this->variantResolver->getVariant($product);
-        if ($variant === null) {
-            throw new \InvalidArgumentException('Product has no variant');
-        }
+        $variant = $this->getProductVariant($product);
 
         $this->addProductVariantsToOrderWithChannelPrice(
             $cart,
@@ -375,8 +370,8 @@ final class OrderContext implements Context
      */
     public function theCustomerBoughtSingleProduct(ProductInterface $product, ?ChannelInterface $channel = null): void
     {
-        /** @var ProductVariantInterface $variant */
-        $variant = $this->variantResolver->getVariant($product);
+        $variant = $this->getProductVariant($product);
+
         $this->addProductVariantToOrder($variant, 1, $channel);
 
         $this->objectManager->flush();
@@ -389,8 +384,7 @@ final class OrderContext implements Context
         ProductInterface $product,
         ShippingMethodInterface $shippingMethod,
     ): void {
-        /** @var ProductVariantInterface $variant */
-        $variant = $this->variantResolver->getVariant($product);
+        $variant = $this->getProductVariant($product);
 
         $this->addProductVariantToOrder($variant, 1);
 
@@ -421,8 +415,8 @@ final class OrderContext implements Context
      */
     public function theCustomerBoughtSeveralProducts(int $quantity, ProductInterface $product): void
     {
-        /** @var ProductVariantInterface $variant */
-        $variant = $this->variantResolver->getVariant($product);
+        $variant = $this->getProductVariant($product);
+
         $this->addProductVariantToOrder($variant, $quantity);
 
         $this->objectManager->flush();
@@ -455,8 +449,8 @@ final class OrderContext implements Context
      */
     public function theCustomerBoughtSingleUsing(ProductInterface $product, PromotionCouponInterface $coupon): void
     {
-        /** @var ProductVariantInterface $variant */
-        $variant = $this->variantResolver->getVariant($product);
+        $variant = $this->getProductVariant($product);
+
         $order = $this->addProductVariantToOrder($variant);
         $order->setPromotionCoupon($coupon);
 
@@ -693,8 +687,8 @@ final class OrderContext implements Context
         $order = $this->createOrder($customer, $orderNumber, $channel);
         $order->setState(BaseOrderInterface::STATE_NEW);
 
-        /** @var ProductVariantInterface $variant */
-        $variant = $product->getVariants()->first();
+        $variant = $this->getProductVariant($product);
+
         $this->addVariantWithPriceToOrder($order, $variant, $price);
 
         $this->orderRepository->add($order);
@@ -1116,8 +1110,7 @@ final class OrderContext implements Context
         ProductInterface $product,
         bool $isFulfilled = false,
     ): void {
-        /** @var ProductVariantInterface $variant */
-        $variant = $this->variantResolver->getVariant($product);
+        $variant = $this->getProductVariant($product);
 
         for ($i = 0; $i < $orderCount; ++$i) {
             $order = $this->createOrder($customer, uniqid('#'), $channel);
@@ -1162,8 +1155,7 @@ final class OrderContext implements Context
         CustomerInterface $customer,
         int $number,
     ): void {
-        /** @var ProductVariantInterface $variant */
-        $variant = $this->variantResolver->getVariant($product);
+        $variant = $this->getProductVariant($product);
 
         $channelPricing = $variant->getChannelPricingForChannel($this->sharedStorage->get('channel'));
 
@@ -1182,6 +1174,18 @@ final class OrderContext implements Context
 
         $this->objectManager->persist($order);
         $this->sharedStorage->set('order', $order);
+    }
+
+    private function getProductVariant(ProductInterface $product): ProductVariantInterface
+    {
+        /** @var ProductVariantInterface|null $variant */
+        $variant = $this->variantResolver->getVariant($product);
+
+        if ($variant === null) {
+            throw new \InvalidArgumentException(sprintf('Product %s has no variant', $product->getName()));
+        }
+
+        return $variant;
     }
 
     /** @throws SMException */
