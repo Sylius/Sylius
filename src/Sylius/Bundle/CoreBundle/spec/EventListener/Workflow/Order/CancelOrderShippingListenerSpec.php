@@ -34,11 +34,35 @@ final class CancelOrderShippingListenerSpec extends ObjectBehavior
             ->during('__invoke', [new CompletedEvent($callback->getWrappedObject(), new Marking())]);
     }
 
+    function it_does_nothing_if_order_cannot_have_shipping_cancelled(
+        StateMachineInterface $compositeStateMachine,
+        OrderInterface $order,
+    ): void {
+        $event = new CompletedEvent($order->getWrappedObject(), new Marking());
+
+        $compositeStateMachine
+            ->can($order, OrderShippingTransitions::GRAPH, OrderShippingTransitions::TRANSITION_CANCEL)
+            ->willReturn(false)
+        ;
+
+        $this($event);
+
+        $compositeStateMachine
+            ->apply($order, OrderShippingTransitions::GRAPH, OrderShippingTransitions::TRANSITION_CANCEL)
+            ->shouldNotHaveBeenCalled()
+        ;
+    }
+
     function it_cancels_order_shipping(
         StateMachineInterface $compositeStateMachine,
         OrderInterface $order,
     ): void {
         $event = new CompletedEvent($order->getWrappedObject(), new Marking());
+
+        $compositeStateMachine
+            ->can($order, OrderShippingTransitions::GRAPH, OrderShippingTransitions::TRANSITION_CANCEL)
+            ->willReturn(true)
+        ;
 
         $this($event);
 

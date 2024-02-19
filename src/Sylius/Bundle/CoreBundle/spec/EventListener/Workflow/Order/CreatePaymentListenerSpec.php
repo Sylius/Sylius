@@ -13,14 +13,16 @@ declare(strict_types=1);
 
 namespace spec\Sylius\Bundle\CoreBundle\EventListener\Workflow\Order;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
 use Sylius\Abstraction\StateMachine\StateMachineInterface;
 use Sylius\Component\Core\Model\OrderInterface;
-use Sylius\Component\Core\OrderPaymentTransitions;
+use Sylius\Component\Core\Model\PaymentInterface;
+use Sylius\Component\Payment\PaymentTransitions;
 use Symfony\Component\Workflow\Event\CompletedEvent;
 use Symfony\Component\Workflow\Marking;
 
-final class RequestOrderPaymentListenerSpec extends ObjectBehavior
+final class CreatePaymentListenerSpec extends ObjectBehavior
 {
     function let(StateMachineInterface $compositeStateMachine): void
     {
@@ -31,45 +33,58 @@ final class RequestOrderPaymentListenerSpec extends ObjectBehavior
     {
         $this
             ->shouldThrow(\InvalidArgumentException::class)
-            ->during('__invoke', [new CompletedEvent($callback->getWrappedObject(), new Marking())])
-        ;
+            ->during('__invoke', [new CompletedEvent($callback->getWrappedObject(), new Marking())]);
     }
 
-    function it_does_nothing_if_order_cannot_have_payment_requested(
+    function it_does_nothing_if_payment_cannot_be_created(
         StateMachineInterface $compositeStateMachine,
         OrderInterface $order,
+        PaymentInterface $payment,
     ): void {
         $event = new CompletedEvent($order->getWrappedObject(), new Marking());
-
+        $order->getPayments()->willReturn(new ArrayCollection([$payment->getWrappedObject()]));
         $compositeStateMachine
-            ->can($order, OrderPaymentTransitions::GRAPH, OrderPaymentTransitions::TRANSITION_REQUEST_PAYMENT)
+            ->can($payment, PaymentTransitions::GRAPH, PaymentTransitions::TRANSITION_CREATE)
             ->willReturn(false)
         ;
 
         $this($event);
 
         $compositeStateMachine
-            ->apply($order, OrderPaymentTransitions::GRAPH, OrderPaymentTransitions::TRANSITION_REQUEST_PAYMENT)
+            ->apply($payment, PaymentTransitions::GRAPH, PaymentTransitions::TRANSITION_CREATE)
             ->shouldNotHaveBeenCalled()
         ;
     }
 
-    function it_requests_order_payment(
+    function it_creates_payments(
         StateMachineInterface $compositeStateMachine,
         OrderInterface $order,
+        PaymentInterface $payment1,
+        PaymentInterface $payment2,
     ): void {
         $event = new CompletedEvent($order->getWrappedObject(), new Marking());
+        $order->getPayments()->willReturn(new ArrayCollection([$payment1->getWrappedObject(), $payment2->getWrappedObject()]));
 
         $compositeStateMachine
-            ->can($order, OrderPaymentTransitions::GRAPH, OrderPaymentTransitions::TRANSITION_REQUEST_PAYMENT)
+            ->can($payment1, PaymentTransitions::GRAPH, PaymentTransitions::TRANSITION_CREATE)
+            ->willReturn(true)
+        ;
+
+        $compositeStateMachine
+            ->can($payment2, PaymentTransitions::GRAPH, PaymentTransitions::TRANSITION_CREATE)
             ->willReturn(true)
         ;
 
         $this($event);
 
         $compositeStateMachine
-            ->apply($order, OrderPaymentTransitions::GRAPH, OrderPaymentTransitions::TRANSITION_REQUEST_PAYMENT)
-            ->shouldBeCalled()
+            ->apply($payment1, PaymentTransitions::GRAPH, PaymentTransitions::TRANSITION_CREATE)
+            ->shouldHaveBeenCalledOnce()
+        ;
+
+        $compositeStateMachine
+            ->apply($payment2, PaymentTransitions::GRAPH, PaymentTransitions::TRANSITION_CREATE)
+            ->shouldHaveBeenCalledOnce()
         ;
     }
 }

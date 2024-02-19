@@ -31,6 +31,8 @@ final class RequestOrderShippingListener
         $order = $event->getSubject();
         Assert::isInstanceOf($order, OrderInterface::class);
 
-        $this->compositeStateMachine->apply($order, OrderShippingTransitions::GRAPH, OrderShippingTransitions::TRANSITION_REQUEST_SHIPPING);
+        if ($this->compositeStateMachine->can($order, OrderShippingTransitions::GRAPH, OrderShippingTransitions::TRANSITION_REQUEST_SHIPPING)) {
+            $this->compositeStateMachine->apply($order, OrderShippingTransitions::GRAPH, OrderShippingTransitions::TRANSITION_REQUEST_SHIPPING);
+        }
     }
 }

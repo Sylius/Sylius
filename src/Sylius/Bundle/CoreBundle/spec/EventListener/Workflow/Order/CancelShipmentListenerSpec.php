@@ -37,6 +37,25 @@ final class CancelShipmentListenerSpec extends ObjectBehavior
         ;
     }
 
+    function it_does_nothing_if_shipment_cannot_be_cancelled(
+        StateMachineInterface $compositeStateMachine,
+        OrderInterface $order,
+        ShipmentInterface $shipment,
+    ): void {
+        $event = new CompletedEvent($order->getWrappedObject(), new Marking());
+        $order->getShipments()->willReturn(new ArrayCollection([$shipment->getWrappedObject()]));
+        $compositeStateMachine
+            ->can($shipment, ShipmentTransitions::GRAPH, ShipmentTransitions::TRANSITION_CANCEL)
+            ->willReturn(false);
+
+        $this($event);
+
+        $compositeStateMachine
+            ->apply($shipment, ShipmentTransitions::GRAPH, ShipmentTransitions::TRANSITION_CANCEL)
+            ->shouldNotHaveBeenCalled()
+        ;
+    }
+
     function it_cancels_shipments(
         StateMachineInterface $compositeStateMachine,
         OrderInterface $order,
@@ -45,6 +64,16 @@ final class CancelShipmentListenerSpec extends ObjectBehavior
     ): void {
         $event = new CompletedEvent($order->getWrappedObject(), new Marking());
         $order->getShipments()->willReturn(new ArrayCollection([$shipment1->getWrappedObject(), $shipment2->getWrappedObject()]));
+
+        $compositeStateMachine
+            ->can($shipment1, ShipmentTransitions::GRAPH, ShipmentTransitions::TRANSITION_CANCEL)
+            ->willReturn(true)
+        ;
+
+        $compositeStateMachine
+            ->can($shipment2, ShipmentTransitions::GRAPH, ShipmentTransitions::TRANSITION_CANCEL)
+            ->willReturn(true)
+        ;
 
         $this($event);
 
