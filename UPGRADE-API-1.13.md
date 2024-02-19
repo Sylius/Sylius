@@ -214,3 +214,4 @@ respond with a `Sylius\Bundle\ApiBundle\Exception\TranslationLocaleMismatchExcep
         ) {
         }
     ```
+1. Disabled product and taxon editing at `/admin/product-taxons/{id}` operation to improve data integrity. To modify a productTaxon, remove the existing association and create a new one.
