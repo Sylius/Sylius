@@ -45,10 +45,10 @@ use Sylius\Component\Payment\PaymentTransitions;
 use Sylius\Component\Payment\Repository\PaymentMethodRepositoryInterface;
 use Sylius\Component\Product\Resolver\ProductVariantResolverInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
+use Sylius\Component\Resource\Generator\RandomnessGeneratorInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\Shipping\Repository\ShippingMethodRepositoryInterface;
 use Sylius\Component\Shipping\ShipmentTransitions;
-use Sylius\Component\User\Security\Generator\GeneratorInterface;
 use Webmozart\Assert\Assert;
 
 final class OrderContext implements Context
@@ -82,7 +82,7 @@ final class OrderContext implements Context
         private readonly OrderItemQuantityModifierInterface $itemQuantityModifier,
         private readonly ObjectManager $objectManager,
         private readonly DateTimeProviderInterface $dateTimeProvider,
-        private readonly GeneratorInterface $tokenGenerator,
+        private readonly RandomnessGeneratorInterface $randomnessGenerator,
     ) {
     }
 
@@ -871,7 +871,7 @@ final class OrderContext implements Context
         string $localeCode = null,
     ): OrderInterface {
         $order = $this->createCart($customer, $channel, $localeCode);
-        $order->setTokenValue($this->tokenGenerator->generate());
+        $order->setTokenValue($this->generateToken());
 
         if (null !== $number) {
             $order->setNumber($number);
@@ -1182,7 +1182,7 @@ final class OrderContext implements Context
         $variant = $this->variantResolver->getVariant($product);
 
         if ($variant === null) {
-            throw new \InvalidArgumentException(sprintf('Product %s has no variant', $product->getName()));
+            throw new \RuntimeException(sprintf('Product %s has no variant', $product->getName()));
         }
 
         return $variant;
@@ -1198,5 +1198,14 @@ final class OrderContext implements Context
     private function payOrder(OrderInterface $order): void
     {
         $this->stateMachine->apply($order, OrderPaymentTransitions::GRAPH, OrderPaymentTransitions::TRANSITION_PAY);
+    }
+
+    private function generateToken(): string
+    {
+        do {
+            $token = $this->randomnessGenerator->generateUriSafeString(10);
+        } while ($this->orderRepository->findOneBy(['tokenValue' => $token]) !== null);
+
+        return $token;
     }
 }
