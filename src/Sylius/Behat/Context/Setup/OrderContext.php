@@ -15,7 +15,7 @@ namespace Sylius\Behat\Context\Setup;
 
 use Behat\Behat\Context\Context;
 use Doctrine\Persistence\ObjectManager;
-use SM\Factory\FactoryInterface as StateMachineFactoryInterface;
+use Sylius\Abstraction\StateMachine\StateMachineInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Calendar\Provider\DateTimeProviderInterface;
 use Sylius\Component\Core\Model\AddressInterface;
@@ -56,7 +56,7 @@ final class OrderContext implements Context
         private FactoryInterface $customerFactory,
         private FactoryInterface $orderItemFactory,
         private FactoryInterface $shipmentFactory,
-        private StateMachineFactoryInterface $stateMachineFactory,
+        private StateMachineInterface $stateMachine,
         private RepositoryInterface $countryRepository,
         private RepositoryInterface $customerRepository,
         private OrderRepositoryInterface $orderRepository,
@@ -320,7 +320,7 @@ final class OrderContext implements Context
         $this->applyTransitionOnOrderCheckout($order, OrderCheckoutTransitions::TRANSITION_SELECT_SHIPPING);
         $this->applyTransitionOnOrderCheckout($order, OrderCheckoutTransitions::TRANSITION_COMPLETE);
         if (!$order->getPayments()->isEmpty()) {
-            $this->stateMachineFactory->get($order, OrderPaymentTransitions::GRAPH)->apply(OrderPaymentTransitions::TRANSITION_PAY);
+            $this->stateMachine->apply($order, OrderPaymentTransitions::GRAPH, OrderPaymentTransitions::TRANSITION_PAY);
         }
 
         $this->objectManager->flush();
@@ -693,7 +693,7 @@ final class OrderContext implements Context
      */
     public function theCustomerCancelledThisOrder(OrderInterface $order): void
     {
-        $this->stateMachineFactory->get($order, OrderTransitions::GRAPH)->apply(OrderTransitions::TRANSITION_CANCEL);
+        $this->stateMachine->apply($order, OrderTransitions::GRAPH, OrderTransitions::TRANSITION_CANCEL);
 
         $this->objectManager->flush();
     }
@@ -704,7 +704,7 @@ final class OrderContext implements Context
     public function theCustomerCancelledMyLastOrder(): void
     {
         $order = $this->sharedStorage->get('order');
-        $this->stateMachineFactory->get($order, OrderTransitions::GRAPH)->apply(OrderTransitions::TRANSITION_CANCEL);
+        $this->stateMachine->apply($order, OrderTransitions::GRAPH, OrderTransitions::TRANSITION_CANCEL);
 
         $this->objectManager->flush();
     }
@@ -773,7 +773,7 @@ final class OrderContext implements Context
     private function applyShipmentTransitionOnOrder(OrderInterface $order, $transition)
     {
         foreach ($order->getShipments() as $shipment) {
-            $this->stateMachineFactory->get($shipment, ShipmentTransitions::GRAPH)->apply($transition);
+            $this->stateMachine->apply($shipment, ShipmentTransitions::GRAPH, $transition);
         }
     }
 
@@ -783,7 +783,7 @@ final class OrderContext implements Context
     private function applyPaymentTransitionOnOrder(OrderInterface $order, $transition)
     {
         foreach ($order->getPayments() as $payment) {
-            $this->stateMachineFactory->get($payment, PaymentTransitions::GRAPH)->apply($transition);
+            $this->stateMachine->apply($payment, PaymentTransitions::GRAPH, $transition);
         }
     }
 
@@ -792,12 +792,12 @@ final class OrderContext implements Context
      */
     private function applyTransitionOnOrderCheckout(OrderInterface $order, $transition)
     {
-        $this->stateMachineFactory->get($order, OrderCheckoutTransitions::GRAPH)->apply($transition);
+        $this->stateMachine->apply($order, OrderCheckoutTransitions::GRAPH, $transition);
     }
 
     private function applyTransitionOnOrder(OrderInterface $order, string $transition): void
     {
-        $this->stateMachineFactory->get($order, OrderTransitions::GRAPH)->apply($transition);
+        $this->stateMachine->apply($order, OrderTransitions::GRAPH, $transition);
     }
 
     /**
@@ -1011,7 +1011,7 @@ final class OrderContext implements Context
 
         for ($i = 0; $i < $numberOfOrders; ++$i) {
             $order = $this->createOrder($customers[random_int(0, $numberOfCustomers - 1)], '#' . uniqid());
-            $this->stateMachineFactory->get($order, OrderTransitions::GRAPH)->apply(OrderTransitions::TRANSITION_CREATE);
+            $this->stateMachine->apply($order, OrderTransitions::GRAPH, OrderTransitions::TRANSITION_CREATE);
             $this->applyPaymentTransitionOnOrder($order, PaymentTransitions::TRANSITION_COMPLETE);
 
             $price = $i === ($numberOfOrders - 1) ? $total : random_int(1, $total);
@@ -1040,7 +1040,7 @@ final class OrderContext implements Context
 
         for ($i = 0; $i < $numberOfOrders; ++$i) {
             $order = $this->createOrder($customers[random_int(0, $numberOfCustomers - 1)], '#' . uniqid());
-            $this->stateMachineFactory->get($order, OrderTransitions::GRAPH)->apply(OrderTransitions::TRANSITION_CREATE);
+            $this->stateMachine->apply($order, OrderTransitions::GRAPH, OrderTransitions::TRANSITION_CREATE);
             $this->applyPaymentTransitionOnOrder($order, PaymentTransitions::TRANSITION_COMPLETE);
 
             $price = $i === ($numberOfOrders - 1) ? $total : random_int(1, $total);
@@ -1069,7 +1069,7 @@ final class OrderContext implements Context
 
         for ($i = 0; $i < $numberOfOrders; ++$i) {
             $order = $this->createOrder($customers[random_int(0, $numberOfCustomers - 1)], '#' . uniqid(), $product->getChannels()->first());
-            $this->stateMachineFactory->get($order, OrderTransitions::GRAPH)->apply(OrderTransitions::TRANSITION_CREATE);
+            $this->stateMachine->apply($order, OrderTransitions::GRAPH, OrderTransitions::TRANSITION_CREATE);
             $this->applyPaymentTransitionOnOrder($order, PaymentTransitions::TRANSITION_COMPLETE);
 
             $price = $i === ($numberOfOrders - 1) ? $total : random_int(1, $total);
@@ -1164,11 +1164,11 @@ final class OrderContext implements Context
 
     private function shipOrder(OrderInterface $order): void
     {
-        $this->stateMachineFactory->get($order, OrderShippingTransitions::GRAPH)->apply(OrderShippingTransitions::TRANSITION_SHIP);
+        $this->stateMachine->apply($order, OrderShippingTransitions::GRAPH, OrderShippingTransitions::TRANSITION_SHIP);
     }
 
     private function payOrder(OrderInterface $order): void
     {
-        $this->stateMachineFactory->get($order, OrderPaymentTransitions::GRAPH)->apply(OrderPaymentTransitions::TRANSITION_PAY);
+        $this->stateMachine->apply($order, OrderPaymentTransitions::GRAPH, OrderPaymentTransitions::TRANSITION_PAY);
     }
 }
