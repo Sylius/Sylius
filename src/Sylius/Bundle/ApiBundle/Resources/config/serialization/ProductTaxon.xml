@@ -29,8 +29,6 @@
             <group>sylius:admin:product_taxon:index</group>
             <group>admin:product_taxon:show</group>
             <group>sylius:admin:product_taxon:show</group>
-            <group>admin:product_taxon:update</group>
-            <group>sylius:admin:product_taxon:update</group>
             <group>admin:product_taxon:create</group>
             <group>sylius:admin:product_taxon:create</group>
             <group>shop:product_taxon:show</group>
@@ -41,8 +39,6 @@
             <group>sylius:admin:product_taxon:index</group>
             <group>admin:product_taxon:show</group>
             <group>sylius:admin:product_taxon:show</group>
-            <group>admin:product_taxon:update</group>
-            <group>sylius:admin:product_taxon:update</group>
             <group>admin:product_taxon:create</group>
             <group>sylius:admin:product_taxon:create</group>
             <group>shop:product_taxon:show</group>
