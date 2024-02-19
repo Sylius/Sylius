@@ -16,6 +16,7 @@ namespace Sylius\Bundle\ApiBundle\Applicator;
 use SM\Factory\FactoryInterface as StateMachineFactoryInterface;
 use Sylius\Abstraction\StateMachine\StateMachineInterface;
 use Sylius\Abstraction\StateMachine\WinzouStateMachineAdapter;
+use Sylius\Bundle\ApiBundle\Exception\OrderCancellationFailedException;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Order\OrderTransitions;
 
@@ -39,7 +40,11 @@ final class OrderStateMachineTransitionApplicator implements OrderStateMachineTr
 
     public function cancel(OrderInterface $data): OrderInterface
     {
-        $this->applyTransition($data, OrderTransitions::TRANSITION_CANCEL);
+        try {
+            $this->applyTransition($data, OrderTransitions::TRANSITION_CANCEL);
+        } catch (\Exception) {
+            throw new OrderCancellationFailedException();
+        }
 
         return $data;
     }

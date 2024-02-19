@@ -54,7 +54,6 @@ api_platform:
         Symfony\Component\Serializer\Exception\ExceptionInterface: 400
 
         # Sylius exception to status code mapping
-        SM\SMException: 422
         Sylius\Abstraction\StateMachine\Exception\StateMachineExecutionException: 422
         Sylius\Bundle\ApiBundle\Exception\CannotRemoveCurrentlyLoggedInUser: 422
         Sylius\Bundle\ApiBundle\Exception\ChannelCannotBeRemoved: 422
@@ -62,6 +61,7 @@ api_platform:
         Sylius\Bundle\ApiBundle\Exception\InvalidProductAttributeValueTypeException: 422
         Sylius\Bundle\ApiBundle\Exception\InvalidRequestArgumentException: 400
         Sylius\Bundle\ApiBundle\Exception\LocaleIsUsedException: 422
+        Sylius\Bundle\ApiBundle\Exception\OrderCancellationFailedException: 422
         Sylius\Bundle\ApiBundle\Exception\OrderItemNotFoundException: 422
         Sylius\Bundle\ApiBundle\Exception\OrderNoLongerEligibleForPromotion: 422
         Sylius\Bundle\ApiBundle\Exception\PaymentMethodCannotBeRemoved: 422
