@@ -43,6 +43,8 @@
             <group>sylius:admin:order_item:index</group>
             <group>admin:order_item_unit:index</group>
             <group>sylius:admin:order_item_unit:index</group>
+            <group>admin:shipment:index</group>
+            <group>sylius:admin:shipment:index</group>
         </attribute>
 
         <attribute name="label">
@@ -72,6 +74,8 @@
            <group>sylius:admin:order_item:index</group>
             <group>admin:order_item_unit:index</group>
             <group>sylius:admin:order_item_unit:index</group>
+            <group>admin:shipment:index</group>
+            <group>sylius:admin:shipment:index</group>
         </attribute>
 
         <attribute name="order">
@@ -121,6 +125,8 @@
            <group>sylius:admin:order_item:index</group>
             <group>admin:order_item_unit:index</group>
             <group>sylius:admin:order_item_unit:index</group>
+            <group>admin:shipment:index</group>
+            <group>sylius:admin:shipment:index</group>
         </attribute>
 
         <attribute name="locked">
@@ -135,6 +141,8 @@
            <group>sylius:admin:order_item:index</group>
            <group>admin:order_item_unit:index</group>
            <group>sylius:admin:order_item_unit:index</group>
+            <group>admin:shipment:index</group>
+            <group>sylius:admin:shipment:index</group>
         </attribute>
     </class>
 </serializer>

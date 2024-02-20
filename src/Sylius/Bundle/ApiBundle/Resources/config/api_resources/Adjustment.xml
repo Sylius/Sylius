@@ -92,6 +92,15 @@
                     </attribute>
                 </attribute>
             </subresourceOperation>
+
+            <subresourceOperation name="api_shipments_adjustments_get_subresource">
+                <attribute name="normalization_context">
+                    <attribute name="groups">
+                        <attribute>admin:shipment:index</attribute>
+                        <attribute>sylius:admin:shipment:index</attribute>
+                    </attribute>
+                </attribute>
+            </subresourceOperation>
         </subresourceOperations>
 
         <property name="id" identifier="true" writable="false" />
