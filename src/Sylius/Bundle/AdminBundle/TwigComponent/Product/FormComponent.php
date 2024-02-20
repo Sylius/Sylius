@@ -124,6 +124,10 @@ final class FormComponent
      */
     public function hydrateAttributesToBeAdded(string $value): array
     {
+        if ('' === $value) {
+            return [];
+        }
+
         return explode(',', $value);
     }
 
