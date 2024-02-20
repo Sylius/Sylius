@@ -1,0 +1,38 @@
+Sylius\Component\Core\Model\Promotion:
+    promotion_50_off:
+        code: '50_off'
+        name: '50% Off on your first order'
+        description: 'Get 50% off of your first purchase'
+        channels: ['@channel_web']
+        priority: 1
+        exclusive: false
+        appliesToDiscounted: false
+        usageLimit: 1
+        used: 0
+        couponBased: false
+        translations:
+            - '@promotion_50_off_en'
+        actions:
+            - '@action_percentage_discount_50'
+        rules:
+            - '@rule_cart_quantity'
+
+Sylius\Component\Promotion\Model\PromotionTranslation:
+    promotion_50_off_en:
+        locale: 'en_US'
+        label: '-50% on first order!'
+        translatable: '@promotion_50_off'
+
+Sylius\Component\Promotion\Model\PromotionAction:
+    action_percentage_discount_50:
+        type: order_percentage_discount
+        configuration:
+            percentage: 0.5
+        promotion: '@promotion_50_off'
+
+Sylius\Component\Promotion\Model\PromotionRule:
+    rule_cart_quantity:
+        type: cart_quantity
+        configuration:
+            count: 1
+        promotion: '@promotion_50_off'

@@ -83,6 +83,15 @@
                     </attribute>
                 </attribute>
             </subresourceOperation>
+
+            <subresourceOperation name="api_order_item_units_adjustments_get_subresource">
+                <attribute name="normalization_context">
+                    <attribute name="groups">
+                        <attribute>admin:order_item_unit:index</attribute>
+                        <attribute>sylius:admin:order_item_unit:index</attribute>
+                    </attribute>
+                </attribute>
+            </subresourceOperation>
         </subresourceOperations>
 
         <property name="id" identifier="true" writable="false" />
