@@ -111,6 +111,13 @@
             <group>sylius:shop:adjustment:show</group>
         </attribute>
 
+        <attribute name="shipment">
+            <group>admin:adjustment:index</group>
+            <group>sylius:admin:adjustment:index</group>
+            <group>admin:adjustment:show</group>
+            <group>sylius:admin:adjustment:show</group>
+        </attribute>
+
         <attribute name="neutral">
             <group>admin:adjustment:index</group>
             <group>sylius:admin:adjustment:index</group>

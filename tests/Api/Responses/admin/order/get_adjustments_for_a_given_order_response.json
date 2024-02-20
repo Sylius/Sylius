@@ -6,6 +6,7 @@
         {
             "@id": "/api/v2/admin/adjustments/@integer@",
             "@type": "Adjustment",
+            "shipment": "/api/v2/admin/shipments/@integer@",
             "id": @integer@,
             "order": "/api/v2/admin/orders/nAWw2jewpA",
             "type": "shipping",
