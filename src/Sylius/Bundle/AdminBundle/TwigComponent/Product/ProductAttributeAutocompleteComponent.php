@@ -15,7 +15,6 @@ namespace Sylius\Bundle\AdminBundle\TwigComponent\Product;
 
 use Symfony\UX\Autocomplete\Checksum\ChecksumCalculator;
 use Symfony\UX\LiveComponent\Attribute\AsLiveComponent;
-use Symfony\UX\LiveComponent\Attribute\LiveAction;
 use Symfony\UX\LiveComponent\Attribute\LiveProp;
 use Symfony\UX\LiveComponent\ComponentToolsTrait;
 use Symfony\UX\LiveComponent\DefaultActionTrait;
@@ -24,8 +23,11 @@ use Symfony\UX\TwigComponent\Attribute\ExposeInTemplate;
 #[AsLiveComponent(name: 'SyliusAdmin.Product.ProductAttributeAutocomplete', template: '@SyliusAdmin/Product/_productAttributeAutocomplete.html.twig')]
 final class ProductAttributeAutocompleteComponent
 {
-    #[LiveProp(writable: true)]
-    public ?string $attributeCodes = null;
+    /**
+     * @var array<string>
+     */
+    #[LiveProp(writable: true, hydrateWith: 'hydrateSelectedAttributeCodes', dehydrateWith: 'dehydrateSelectedAttributeCodes', updateFromParent: true)]
+    public array $selectedAttributeCodes = [];
 
     #[LiveProp(updateFromParent: true)]
     public array $excludedAttributeCodes = [];
@@ -38,13 +40,6 @@ final class ProductAttributeAutocompleteComponent
     ) {
     }
 
-    #[LiveAction]
-    public function addAttribute(): void
-    {
-        $this->emit('product_attribute_autocomplete:add', ['attributeCodes' => explode(',', $this->attributeCodes)]);
-        $this->attributeCodes = '';
-    }
-
     #[ExposeInTemplate]
     public function getExtraOptions(): string
     {
@@ -54,5 +49,21 @@ final class ProductAttributeAutocompleteComponent
                 '@checksum' => $this->checksumCalculator->calculateForArray(['attributeCodes' => $this->excludedAttributeCodes]),
             ]
         ));
+    }
+
+    /**
+     * @return array<string>
+     */
+    public function hydrateSelectedAttributeCodes(string $value): array
+    {
+        return explode(',', $value);
+    }
+
+    /**
+     * @param array<string> $value
+     */
+    public function dehydrateSelectedAttributeCodes(array $value): string
+    {
+        return implode(',', $value);
     }
 }

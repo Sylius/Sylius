@@ -1,4 +1,5 @@
 {% set productAttributes = hookable_data.mappedProductAttributes %}
+{% set attributesToBeAdded = hookable_data.attributesToBeAdded %}
 
 <div class="tab-pane" id="product-attributes" role="tabpanel" tabindex="0">
     <div class="card mb-3">
@@ -8,7 +9,12 @@
             </h2>
         </div>
         <div class="card-body py-4 border-bottom">
-            <twig:SyliusAdmin.Product.ProductAttributeAutocomplete :excludedAttributeCodes="productAttributes|keys" />
+            <div class="sylius-admin-product-attribute-autocomplete">
+                <twig:SyliusAdmin.Product.ProductAttributeAutocomplete data-model="attributesToBeAdded:selectedAttributeCodes" :excludedAttributeCodes="productAttributes|keys" />
+                <button type="button" class="btn btn-primary" data-action="live#action" data-action-name="prevent|addAttributes()">
+                    {{ 'sylius.ui.add'|trans }}
+                </button>
+            </div>
         </div>
         <div class="row">
             <div class="col-12 col-sm-4">
@@ -60,7 +66,7 @@
                                         <div class="flex-grow-1">
                                             <div class="d-flex justify-content-between align-items-center">
                                                 {{ form_label(productAttributeValue.value) }}
-                                                <button class="btn btn-secondary btn-sm" data-action="live#action" data-action-name="prevent|applyToAll(attributeCode={{ productAttributeCode }},localeCode={{ productAttributeValue.vars.data.localeCode }})">apply to all</button>
+                                                <button class="btn btn-secondary btn-sm" data-action="live#action" data-action-name="prevent|applyToAll(attributeCode={{ productAttributeCode }},localeCode={{ productAttributeValue.vars.data.localeCode }})">{{ 'sylius.ui.apply_to_all'|trans }}</button>
                                             </div>
                                             {{ form_widget(productAttributeValue.value) }}
 

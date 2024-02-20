@@ -22,7 +22,6 @@ use Symfony\Component\Form\FormInterface;
 use Symfony\UX\LiveComponent\Attribute\AsLiveComponent;
 use Symfony\UX\LiveComponent\Attribute\LiveAction;
 use Symfony\UX\LiveComponent\Attribute\LiveArg;
-use Symfony\UX\LiveComponent\Attribute\LiveListener;
 use Symfony\UX\LiveComponent\Attribute\LiveProp;
 use Symfony\UX\LiveComponent\ComponentToolsTrait;
 use Symfony\UX\LiveComponent\DefaultActionTrait;
@@ -41,6 +40,12 @@ final class FormComponent
 
     #[LiveProp(fieldName: 'formData')]
     public ?Product $resource = null;
+
+    /**
+     * @var array<string>
+     */
+    #[LiveProp(writable: true, hydrateWith: 'hydrateAttributesToBeAdded', dehydrateWith: 'dehydrateAttributesToBeAdded')]
+    public array $attributesToBeAdded = [];
 
     /** @param class-string $formClass */
     public function __construct(
@@ -99,10 +104,10 @@ final class FormComponent
         $this->dispatchBrowserEvent(self::ATTRIBUTE_REMOVED_EVENT, ['attributeCode' => $attributeCode]);
     }
 
-    #[LiveListener('product_attribute_autocomplete:add')]
-    public function addAttributes(#[LiveArg] array $attributeCodes): void
+    #[LiveAction]
+    public function addAttributes(): void
     {
-        foreach ($attributeCodes as $attributeCode) {
+        foreach ($this->attributesToBeAdded as $attributeCode) {
             foreach ($this->formValues['translations'] as $localesCode => $translation) {
                 $this->formValues['attributes'][] = [
                     'attribute' => $attributeCode,
@@ -111,5 +116,22 @@ final class FormComponent
                 ];
             }
         }
+        $this->dispatchBrowserEvent('sylius_admin.product_attribute_autocomplete.clear_requested');
+    }
+
+    /**
+     * @return array<string>
+     */
+    public function hydrateAttributesToBeAdded(string $value): array
+    {
+        return explode(',', $value);
+    }
+
+    /**
+     * @param array<string> $value
+     */
+    public function dehydrateAttributesToBeAdded(array $value): string
+    {
+        return implode(',', $value);
     }
 }

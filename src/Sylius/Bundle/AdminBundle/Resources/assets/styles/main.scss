@@ -37,3 +37,9 @@ body {
 .focus .ts-control {
     box-shadow: none;
 }
+
+.sylius-admin-product-attribute-autocomplete {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 0.5rem;
+}

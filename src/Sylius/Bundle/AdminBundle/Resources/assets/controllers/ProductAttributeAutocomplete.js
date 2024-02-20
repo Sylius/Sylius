@@ -24,6 +24,9 @@ export default class extends AutocompleteController {
         this.tomSelect.sync();
       });
     });
+    window.addEventListener('sylius_admin.product_attribute_autocomplete.clear_requested', () => {
+      this.tomSelect.clear();
+    });
   }
 
   connect() {

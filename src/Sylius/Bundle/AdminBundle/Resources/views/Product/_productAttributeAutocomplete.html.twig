@@ -1,15 +1,10 @@
-<div {{ attributes }}>
-    <div class="input-group mb-3">
-        <input
-            name="product_attributes"
-            data-model="attributeCodes"
-            {{ stimulus_controller('product-attribute-autocomplete', {
-                url: path('ux_entity_autocomplete', { alias: 'product_attribute', 'extra_options': extraOptions }),
-                dummy: attributeCodes|join(','),
-            }) }}
-        />
-        <button type="button" class="btn btn-primary" data-action="live#action" data-action-name="prevent|addAttribute()">
-            {{ 'sylius.ui.add'|trans }}
-        </button>
-    </div>
+<div {{ attributes }} class="d-grid">
+    <input
+        name="product_attributes"
+        data-model="selectedAttributeCodes"
+        {{ stimulus_controller('product-attribute-autocomplete', {
+            url: path('ux_entity_autocomplete', { alias: 'product_attribute', 'extra_options': extraOptions }),
+            selectedAttributeCodes: selectedAttributeCodes|join(','),
+        }) }}
+    />
 </div>
