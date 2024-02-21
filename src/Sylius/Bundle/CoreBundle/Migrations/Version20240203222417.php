@@ -32,12 +32,6 @@ final class Version20240203222417 extends AbstractPostgreSQLMigration
         $this->addSql('COMMENT ON COLUMN sylius_payment_request.request_payload IS \'(DC2Type:object)\'');
         $this->addSql('ALTER TABLE sylius_payment_request ADD CONSTRAINT FK_86D904B19883967 FOREIGN KEY (method_id) REFERENCES sylius_payment_method (id) NOT DEFERRABLE INITIALLY IMMEDIATE');
         $this->addSql('ALTER TABLE sylius_payment_request ADD CONSTRAINT FK_86D904B4C3A3BB FOREIGN KEY (payment_id) REFERENCES sylius_payment (id) NOT DEFERRABLE INITIALLY IMMEDIATE');
-        $this->addSql('ALTER TABLE messenger_messages ALTER created_at TYPE TIMESTAMP(0) WITHOUT TIME ZONE');
-        $this->addSql('ALTER TABLE messenger_messages ALTER available_at TYPE TIMESTAMP(0) WITHOUT TIME ZONE');
-        $this->addSql('ALTER TABLE messenger_messages ALTER delivered_at TYPE TIMESTAMP(0) WITHOUT TIME ZONE');
-        $this->addSql('COMMENT ON COLUMN messenger_messages.created_at IS \'(DC2Type:datetime_immutable)\'');
-        $this->addSql('COMMENT ON COLUMN messenger_messages.available_at IS \'(DC2Type:datetime_immutable)\'');
-        $this->addSql('COMMENT ON COLUMN messenger_messages.delivered_at IS \'(DC2Type:datetime_immutable)\'');
     }
 
     public function down(Schema $schema): void
@@ -45,11 +39,5 @@ final class Version20240203222417 extends AbstractPostgreSQLMigration
         $this->addSql('ALTER TABLE sylius_payment_request DROP CONSTRAINT FK_86D904B19883967');
         $this->addSql('ALTER TABLE sylius_payment_request DROP CONSTRAINT FK_86D904B4C3A3BB');
         $this->addSql('DROP TABLE sylius_payment_request');
-        $this->addSql('ALTER TABLE messenger_messages ALTER created_at TYPE TIMESTAMP(0) WITHOUT TIME ZONE');
-        $this->addSql('ALTER TABLE messenger_messages ALTER available_at TYPE TIMESTAMP(0) WITHOUT TIME ZONE');
-        $this->addSql('ALTER TABLE messenger_messages ALTER delivered_at TYPE TIMESTAMP(0) WITHOUT TIME ZONE');
-        $this->addSql('COMMENT ON COLUMN messenger_messages.created_at IS NULL');
-        $this->addSql('COMMENT ON COLUMN messenger_messages.available_at IS NULL');
-        $this->addSql('COMMENT ON COLUMN messenger_messages.delivered_at IS NULL');
     }
 }
