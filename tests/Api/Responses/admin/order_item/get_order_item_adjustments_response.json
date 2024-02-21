@@ -10,7 +10,15 @@
             "amount": 1000,
             "neutral": false,
             "locked": false
+        },
+        {
+            "@id": "\/api\/v2\/admin\/adjustments\/@integer@",
+            "@type": "Adjustment",
+            "type": "order_promotion",
+            "amount": -500,
+            "neutral": false,
+            "locked": false
         }
     ],
-    "hydra:totalItems": 1
+    "hydra:totalItems": 2
 }
