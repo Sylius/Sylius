@@ -23,9 +23,11 @@
                         {% for productAttributeCode, productAttributeValue in productAttributes %}
                             <div
                                 class="py-2 cursor-pointer list-group-item list-group-item-action {% if loop.first %}active{% endif %}"
-                                data-bs-toggle="tab" data-bs-target="#{{ productAttributeCode }}"
+                                data-bs-toggle="tab"
+                                data-bs-target="#{{ productAttributeCode }}"
                                 aria-selected="{{ loop.first ? 'true' : 'false' }}"
                                 role="tab"
+                                {{ sylius_test_html_attribute('product-attribute-tab', productAttributeValue['en_US'].vars.data.name) }}
                             >
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div>{{ productAttributeValue['en_US'].vars.data.name }}</div>
@@ -68,7 +70,14 @@
                                                 {{ form_label(productAttributeValue.value) }}
                                                 <button class="btn btn-secondary btn-sm" data-action="live#action" data-action-name="prevent|applyToAll(attributeCode={{ productAttributeCode }},localeCode={{ productAttributeValue.vars.data.localeCode }})">{{ 'sylius.ui.apply_to_all'|trans }}</button>
                                             </div>
-                                            {{ form_widget(productAttributeValue.value) }}
+                                            {{ form_widget(
+                                                productAttributeValue.value,
+                                                sylius_test_form_attributes({
+                                                    'attribute-value': '',
+                                                    'attribute-name': productAttributeValue.value.vars.label,
+                                                    'locale-code': productAttributeValue.localeCode.vars.value,
+                                                })
+                                            ) }}
 
                                             <input type="hidden" name="{{ productAttributeValue.attribute.vars.full_name }}" value="{{ productAttributeValue.attribute.vars.value }}">
                                             <input type="hidden" name="{{ productAttributeValue.localeCode.vars.full_name }}" value="{{ productAttributeValue.localeCode.vars.value }}">

@@ -39,12 +39,25 @@ final class ProductAttributeAutocompleter implements OptionsAwareEntityAutocompl
     {
         $productAttributesToBeExcluded = $this->options['extra_options']['attributeCodes'];
 
-        return $repository->createQueryBuilder('o')
-            ->andWhere('o.code LIKE :query')
-            ->andWhere('o.code NOT IN (:productAttributesToBeExcluded)')
+        $qb = $repository->createQueryBuilder('o');
+
+        $qb
+            ->leftJoin('o.translations', 'translation')
+            ->andWhere($qb->expr()->orX(
+                $qb->expr()->like('o.code', ':query'),
+                $qb->expr()->like('translation.name', ':query')
+            ))
             ->setParameter('query', '%' . $query . '%')
-            ->setParameter('productAttributesToBeExcluded', $productAttributesToBeExcluded)
         ;
+
+        if ($productAttributesToBeExcluded !== []) {
+            $qb
+                ->andWhere('o.code NOT IN (:productAttributesToBeExcluded)')
+                ->setParameter('productAttributesToBeExcluded', $productAttributesToBeExcluded)
+            ;
+        }
+
+        return $qb;
     }
 
     public function getLabel(object $entity): string

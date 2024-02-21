@@ -6,11 +6,11 @@ Feature: Adding attributes to an existing product
 
     Background:
         Given the store operates on a single channel in "United States"
-        And the store has a product "44 Magnum"
+        And the store has a "44 Magnum" configurable product
         And the store has a text product attribute "Overall length"
         And I am logged in as an administrator
 
-    @todo @ui @mink:chromedriver @api
+    @ui @mink:chromedriver @api
     Scenario: Adding a text attribute to an existing product
         When I want to modify the "44 Magnum" product
         And I set its "Overall length" attribute to "30.5 cm" in "English (United States)"

@@ -1,3 +1,10 @@
-<button type="button" class="list-group-item list-group-item-action {% if hookable_configuration.active|default(false) %}active{% endif %}" data-bs-toggle="tab" data-bs-target="#product-media" role="tab">
+<button
+    type="button"
+    class="list-group-item list-group-item-action {% if hookable_configuration.active|default(false) %}active{% endif %}"
+    data-bs-toggle="tab"
+    data-bs-target="#product-media"
+    role="tab"
+    {{ sylius_test_html_attribute('side-navigation-tab', 'media') }}
+>
     {{ 'sylius.ui.media'|trans }}
 </button>
