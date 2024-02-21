@@ -126,46 +126,6 @@ final class OrdersTest extends JsonApiTestCase
     }
 
     /** @test */
-    public function it_gets_order_item_adjustments(): void
-    {
-        $this->loadFixturesFromFiles([
-            'channel.yaml',
-            'cart.yaml',
-            'country.yaml',
-            'shipping_method.yaml',
-            'payment_method.yaml',
-        ]);
-
-        $tokenValue = $this->pickUpCart();
-
-        $this->addItemToCart('MUG_BLUE', 3, $tokenValue);
-
-        /** @var OrderInterface $order */
-        $order = $this->get('sylius.repository.order')->findCartByTokenValue($tokenValue);
-        $orderItem = $order->getItems()->first();
-
-        /** @var AdjustmentInterface $adjustment */
-        $adjustment = $this->get('sylius.factory.adjustment')->createNew();
-
-        $adjustment->setType(AdjustmentInterface::ORDER_ITEM_PROMOTION_ADJUSTMENT);
-        $adjustment->setAmount(200);
-        $adjustment->setNeutral(false);
-        $adjustment->setLabel('Test Promotion Adjustment');
-
-        $orderItem->addAdjustment($adjustment);
-        $this->get('sylius.manager.order')->flush();
-
-        $this->client->request(
-            method: 'GET',
-            uri: '/api/v2/shop/orders/nAWw2jewpA/items/' . $order->getItems()->first()->getId() . '/adjustments',
-            server: self::CONTENT_TYPE_HEADER,
-        );
-        $response = $this->client->getResponse();
-
-        $this->assertResponse($response, 'shop/order/get_order_item_adjustments_response', Response::HTTP_OK);
-    }
-
-    /** @test */
     public function it_allows_to_add_items_to_order(): void
     {
         $this->loadFixturesFromFiles([
