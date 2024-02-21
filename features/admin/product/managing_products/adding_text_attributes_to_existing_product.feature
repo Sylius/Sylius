@@ -37,7 +37,7 @@ Feature: Adding attributes to an existing product
         Then I should be notified that it has been successfully edited
         And product "44 Magnum" should not have a "Overall length" attribute
 
-    @todo @ui @mink:chromedriver @api
+    @ui @mink:chromedriver @api
     Scenario: Adding and removing after saving text attributes on product update page
         Given this product has a text attribute "Gun caliber" with value "11 mm" in "English (United States)" locale
         When I want to modify the "44 Magnum" product
