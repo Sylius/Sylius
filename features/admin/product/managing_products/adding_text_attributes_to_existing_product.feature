@@ -28,7 +28,7 @@ Feature: Adding attributes to an existing product
         And attribute "Gun caliber" of product "44 Magnum" should be "11 mm"
         And attribute "Overall length" of product "44 Magnum" should be "30.5 cm"
 
-    @todo @ui @mink:chromedriver @api
+    @ui @mink:chromedriver @api
     Scenario: Adding and removing text attributes on product update page
         When I want to modify the "44 Magnum" product
         And I set its "Overall length" attribute to "30.5 cm" in "English (United States)"

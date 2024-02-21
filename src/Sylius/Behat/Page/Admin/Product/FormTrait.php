@@ -21,6 +21,7 @@ trait FormTrait
             'form' => '[data-live-name-value="SyliusAdmin.Product.Form"]',
             'attribute_value' => '[data-test-attribute-value][data-test-locale-code="%localeCode%"][data-test-attribute-name="%attributeName%"]',
             'product_attribute_autocomplete' => '[data-test-product-attribute-autocomplete]',
+            'product_attribute_delete_button' => '[data-test-product-attribute-delete-button="%attributeName%"]',
             'product_attribute_input' => 'input[name="product_attributes"]',
             'product_attribute_tab' => '[data-test-product-attribute-tab="%name%"]',
             'side_navigation_tab' => '[data-test-side-navigation-tab="%name%"]',
@@ -63,6 +64,15 @@ trait FormTrait
             ->getElement('attribute_value', ['%attributeName%' => $attributeName, '%localeCode%' => $localeCode])
             ->setValue($value)
         ;
+    }
+
+    public function removeAttribute(string $attributeName, string $localeCode): void
+    {
+        $this->changeTab('attributes');
+
+        $this->getElement('product_attribute_delete_button', ['%attributeName%' => $attributeName])->press();
+
+        $this->waitForFormUpdate();
     }
 
     public function getAttributeValue(string $attribute, string $localeCode): string
