@@ -57,6 +57,8 @@ trait FormTrait
             return;
         }
 
+        $this->changeAttributeTab($attributeName);
+
         $this
             ->getElement('attribute_value', ['%attributeName%' => $attributeName, '%localeCode%' => $localeCode])
             ->setValue($value)

@@ -18,7 +18,7 @@ Feature: Adding attributes to an existing product
         Then I should be notified that it has been successfully edited
         And attribute "Overall length" of product "44 Magnum" should be "30.5 cm"
 
-    @todo @ui @mink:chromedriver @api
+    @ui @mink:chromedriver @api
     Scenario: Adding another text attribute to an existing product
         Given this product has a text attribute "Gun caliber" with value "11 mm" in "English (United States)" locale
         When I want to modify the "44 Magnum" product
