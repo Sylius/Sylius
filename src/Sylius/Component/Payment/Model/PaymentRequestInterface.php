@@ -15,6 +15,7 @@ namespace Sylius\Component\Payment\Model;
 
 use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\Resource\Model\TimestampableInterface;
+use Symfony\Component\Uid\Uuid;
 
 interface PaymentRequestInterface extends TimestampableInterface, ResourceInterface
 {
@@ -40,7 +41,7 @@ interface PaymentRequestInterface extends TimestampableInterface, ResourceInterf
 
     public const DATA_TYPE_PAYOUT = 'payout';
 
-    public function getHash(): ?string;
+    public function getHash(): ?Uuid;
 
     public function getMethod(): ?PaymentMethodInterface;
 
