@@ -15,9 +15,9 @@ namespace Sylius\Bundle\CoreBundle\PaymentRequest\CommandHandler\Payum;
 
 use Sylius\Bundle\CoreBundle\PaymentRequest\Command\PaymentRequestHashAwareInterface;
 use Sylius\Bundle\CoreBundle\PaymentRequest\Payum\Factory\PayumTokenFactoryInterface;
-use Sylius\Bundle\CoreBundle\PaymentRequest\Payum\Processor\AfterTokenRequestProcessorInterface;
-use Sylius\Bundle\CoreBundle\PaymentRequest\Payum\Processor\RequestProcessorInterface;
 use Sylius\Bundle\CoreBundle\PaymentRequest\Payum\Provider\PaymentRequestProviderInterface;
+use Sylius\Bundle\CoreBundle\PaymentRequest\Processor\Payum\AfterTokenRequestProcessorInterface;
+use Sylius\Bundle\CoreBundle\PaymentRequest\Processor\Payum\RequestProcessorInterface;
 use Sylius\Bundle\PayumBundle\Factory\TokenAggregateRequestFactoryInterface;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 use Webmozart\Assert\Assert;

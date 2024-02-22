@@ -18,8 +18,10 @@
     <services>
         <defaults public="true" />
 
-        <service id="Sylius\Bundle\CoreBundle\PaymentRequest\Payum\Factory\PayumTokenFactoryInterface" class="Sylius\Bundle\CoreBundle\PaymentRequest\Payum\Factory\PayumTokenFactory">
-            <argument type="service" id="payum" />
+        <service id="Sylius\Bundle\CoreBundle\PaymentRequest\Processor\Offline\CaptureProcessorInterface" class="Sylius\Bundle\CoreBundle\PaymentRequest\Processor\Offline\CaptureProcessor" />
+
+        <service id="Sylius\Bundle\CoreBundle\PaymentRequest\Processor\Offline\AfterCaptureProcessorInterface" class="Sylius\Bundle\CoreBundle\PaymentRequest\Processor\Offline\AfterCaptureProcessor">
+            <argument type="service" id="sylius_abstraction.state_machine" />
         </service>
 
     </services>
