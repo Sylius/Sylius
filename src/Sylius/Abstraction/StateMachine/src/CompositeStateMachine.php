@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Abstraction\StateMachine;
 
+use Sylius\Abstraction\StateMachine\Exception\StateMachineExecutionException;
 use Traversable;
 use Webmozart\Assert\Assert;
 
@@ -40,7 +41,7 @@ class CompositeStateMachine implements StateMachineInterface
     }
 
     /**
-     * @throws \Exception
+     * @throws StateMachineExecutionException
      */
     public function can(object $subject, string $graphName, string $transition): bool
     {
@@ -48,7 +49,7 @@ class CompositeStateMachine implements StateMachineInterface
     }
 
     /**
-     * @throws \Exception
+     * @throws StateMachineExecutionException
      */
     public function apply(object $subject, string $graphName, string $transition, array $context = []): void
     {
@@ -56,18 +57,24 @@ class CompositeStateMachine implements StateMachineInterface
     }
 
     /**
-     * @throws \Exception
+     * @throws StateMachineExecutionException
      */
     public function getEnabledTransitions(object $subject, string $graphName): array
     {
         return $this->getStateMachineAdapter($graphName)->getEnabledTransitions($subject, $graphName);
     }
 
+    /**
+     * @throws StateMachineExecutionException
+     */
     public function getTransitionFromState(object $subject, string $graphName, string $fromState): ?string
     {
         return $this->getStateMachineAdapter($graphName)->getTransitionFromState($subject, $graphName, $fromState);
     }
 
+    /**
+     * @throws StateMachineExecutionException
+     */
     public function getTransitionToState(object $subject, string $graphName, string $toState): ?string
     {
         return $this->getStateMachineAdapter($graphName)->getTransitionToState($subject, $graphName, $toState);
