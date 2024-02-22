@@ -21,7 +21,7 @@ final class CapturePaymentRequestCommandProvider implements PaymentRequestComman
 {
     public function supports(PaymentRequestInterface $paymentRequest): bool
     {
-        return $paymentRequest->getType() === PaymentRequestInterface::DATA_TYPE_CAPTURE;
+        return $paymentRequest->getAction() === PaymentRequestInterface::ACTION_CAPTURE;
     }
 
     public function provide(PaymentRequestInterface $paymentRequest): object

@@ -28,7 +28,7 @@ class PaymentRequest implements PaymentRequestInterface
 
     protected string $state = PaymentRequestInterface::STATE_NEW;
 
-    protected string $type = PaymentRequestInterface::DATA_TYPE_CAPTURE;
+    protected string $action = PaymentRequestInterface::ACTION_CAPTURE;
 
     protected mixed $requestPayload = null;
 
@@ -79,14 +79,14 @@ class PaymentRequest implements PaymentRequestInterface
         $this->state = $state;
     }
 
-    public function getType(): string
+    public function getAction(): string
     {
-        return $this->type;
+        return $this->action;
     }
 
-    public function setType(string $type): void
+    public function setAction(string $action): void
     {
-        $this->type = $type;
+        $this->action = $action;
     }
 
     public function getRequestPayload(): mixed

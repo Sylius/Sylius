@@ -25,11 +25,11 @@ final class PaymentRequestTypeCommandProvider implements PaymentRequestCommandPr
 
     public function supports(PaymentRequestInterface $paymentRequest): bool
     {
-        return $this->locator->get($paymentRequest->getType())->supports($paymentRequest);
+        return $this->locator->get($paymentRequest->getAction())->supports($paymentRequest);
     }
 
     public function provide(PaymentRequestInterface $paymentRequest): object
     {
-        return $this->locator->get($paymentRequest->getType())->provide($paymentRequest);
+        return $this->locator->get($paymentRequest->getAction())->provide($paymentRequest);
     }
 }

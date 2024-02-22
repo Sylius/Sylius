@@ -62,7 +62,7 @@ final class AddPaymentRequestHandler implements MessageHandlerInterface
         );
 
         $paymentRequest = $this->paymentRequestFactory->createWithPaymentAndPaymentMethod($payment, $paymentMethod);
-        $paymentRequest->setType($addPaymentRequest->getType());
+        $paymentRequest->setAction($addPaymentRequest->getAction());
         $paymentRequest->setRequestPayload($addPaymentRequest->getRequestPayload());
 
         return $paymentRequest;

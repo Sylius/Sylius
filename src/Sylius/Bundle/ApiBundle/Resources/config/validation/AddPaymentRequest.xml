@@ -27,7 +27,7 @@
                 </option>
             </constraint>
         </property>
-        <property name="type">
+        <property name="action">
             <constraint name="NotBlank">
                 <option name="groups">
                     <value>sylius</value>

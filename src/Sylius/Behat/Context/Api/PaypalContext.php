@@ -167,9 +167,9 @@ final class PaypalContext implements Context
         $request->setContent([
             'paymentId' => $payment['@id'],
             'paymentMethodCode' => $payment['method'],
-            'type' => $authorize
-                ? PaymentRequestInterface::DATA_TYPE_AUTHORIZE
-                : PaymentRequestInterface::DATA_TYPE_CAPTURE,
+            'action' => $authorize
+                ? PaymentRequestInterface::ACTION_AUTHORIZE
+                : PaymentRequestInterface::ACTION_CAPTURE,
             'requestPayload' => [
                 'target_path' => 'https://myshop.tld/target-path',
                 'after_path' => 'https://myshop.tld/after-path',

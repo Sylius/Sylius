@@ -64,15 +64,15 @@ final class PaymentRequestSpec extends ObjectBehavior
         $this->getState()->shouldReturn('test_state');
     }
 
-    function it_has_capture_type_by_default(): void
+    function it_has_capture_action_by_default(): void
     {
-        $this->getType()->shouldReturn(PaymentRequestInterface::DATA_TYPE_CAPTURE);
+        $this->getAction()->shouldReturn(PaymentRequestInterface::ACTION_CAPTURE);
     }
 
-    function its_type_is_mutable(): void
+    function its_action_is_mutable(): void
     {
-        $this->setType('test_type');
-        $this->getType()->shouldReturn('test_type');
+        $this->setAction('test_action');
+        $this->getAction()->shouldReturn('test_action');
     }
 
     function it_has_null_data_by_default(): void
