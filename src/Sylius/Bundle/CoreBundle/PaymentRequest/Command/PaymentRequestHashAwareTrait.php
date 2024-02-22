@@ -13,10 +13,17 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\PaymentRequest\Command;
 
-/** @experimental */
-interface PaymentRequestHashAwareInterface
+trait PaymentRequestHashAwareTrait
 {
-    public function getHash(): ?string;
+    protected ?string $hash;
 
-    public function setHash(?string $hash): void;
+    public function getHash(): ?string
+    {
+        return $this->hash;
+    }
+
+    public function setHash(?string $hash): void
+    {
+        $this->hash = $hash;
+    }
 }
