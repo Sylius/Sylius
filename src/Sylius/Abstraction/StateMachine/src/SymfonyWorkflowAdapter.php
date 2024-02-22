@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Abstraction\StateMachine;
 
 use Sylius\Abstraction\StateMachine\Exception\StateMachineExecutionException;
-use Symfony\Component\Workflow\Exception\InvalidArgumentException;
+use Symfony\Component\Workflow\Exception\ExceptionInterface as WorkflowExceptionInterface;
 use Symfony\Component\Workflow\Registry;
 use Symfony\Component\Workflow\Transition as SymfonyWorkflowTransition;
 
@@ -28,7 +28,7 @@ final class SymfonyWorkflowAdapter implements StateMachineInterface
     {
         try {
             return $this->symfonyWorkflowRegistry->get($subject, $graphName)->can($subject, $transition);
-        } catch (InvalidArgumentException $exception) {
+        } catch (WorkflowExceptionInterface $exception) {
             throw new StateMachineExecutionException($exception->getMessage(), $exception->getCode(), $exception);
         }
     }
@@ -37,7 +37,7 @@ final class SymfonyWorkflowAdapter implements StateMachineInterface
     {
         try {
             $this->symfonyWorkflowRegistry->get($subject, $graphName)->apply($subject, $transition, $context);
-        } catch (InvalidArgumentException $exception) {
+        } catch (WorkflowExceptionInterface $exception) {
             throw new StateMachineExecutionException($exception->getMessage(), $exception->getCode(), $exception);
         }
     }
@@ -46,7 +46,7 @@ final class SymfonyWorkflowAdapter implements StateMachineInterface
     {
         try {
             $enabledTransitions = $this->symfonyWorkflowRegistry->get($subject, $graphName)->getEnabledTransitions($subject);
-        } catch (InvalidArgumentException $exception) {
+        } catch (WorkflowExceptionInterface $exception) {
             throw new StateMachineExecutionException($exception->getMessage(), $exception->getCode(), $exception);
         }
 
