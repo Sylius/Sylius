@@ -51,14 +51,14 @@ final class AddPaymentRequestHandler implements MessageHandlerInterface
             'code' => $addPaymentRequest->getPaymentMethodCode(),
         ]);
         Assert::notNull($paymentMethod, sprintf(
-            'Payment method code "%s", can not be found!',
+            'Payment method (code "%s") not found.',
             $addPaymentRequest->getPaymentMethodCode(),
         ));
         /** @var PaymentInterface|null $payment */
         $payment = $this->paymentRepository->find($addPaymentRequest->getPaymentId());
         Assert::notNull(
             $payment,
-            sprintf('Payment ID "%s" can not be found!', $addPaymentRequest->getPaymentId()),
+            sprintf('Payment (id "%s") not found.', $addPaymentRequest->getPaymentId()),
         );
 
         $paymentRequest = $this->paymentRequestFactory->createWithPaymentAndPaymentMethod($payment, $paymentMethod);
