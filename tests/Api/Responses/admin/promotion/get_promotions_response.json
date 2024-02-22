@@ -9,7 +9,7 @@
             "id": @integer@,
             "code": "dollar_off",
             "name": "1 dollar off each item",
-            "description": "Get 1 dollar off every item when buying more than 10",
+            "description": "Get 1 dollar off every item",
             "channels": [
                 "\/api\/v2\/admin\/channels\/WEB",
                 "\/api\/v2\/admin\/channels\/MOBILE"

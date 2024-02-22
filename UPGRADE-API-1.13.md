@@ -215,3 +215,5 @@ respond with a `Sylius\Bundle\ApiBundle\Exception\TranslationLocaleMismatchExcep
         }
     ```
 1. Disabled product and taxon editing at `/admin/product-taxons/{id}` operation to improve data integrity. To modify a productTaxon, remove the existing association and create a new one.
+
+1. The keys for adjustment endpoints' responses have been changed from `order_item` to `orderItem` and `order_item_unit` to `orderItemUnit`.

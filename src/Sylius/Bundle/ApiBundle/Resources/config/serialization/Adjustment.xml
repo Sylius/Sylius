@@ -89,7 +89,7 @@
             <group>sylius:shop:adjustment:show</group>
         </attribute>
 
-        <attribute name="order_item">
+        <attribute name="orderItem">
             <group>admin:adjustment:index</group>
             <group>sylius:admin:adjustment:index</group>
             <group>admin:adjustment:show</group>
@@ -100,7 +100,18 @@
             <group>sylius:shop:adjustment:show</group>
         </attribute>
 
-        <attribute name="order_item_unit">
+        <attribute name="orderItemUnit">
+            <group>admin:adjustment:index</group>
+            <group>sylius:admin:adjustment:index</group>
+            <group>admin:adjustment:show</group>
+            <group>sylius:admin:adjustment:show</group>
+            <group>shop:adjustment:index</group>
+            <group>sylius:shop:adjustment:index</group>
+            <group>shop:adjustment:show</group>
+            <group>sylius:shop:adjustment:show</group>
+        </attribute>
+
+        <attribute name="shipment">
             <group>admin:adjustment:index</group>
             <group>sylius:admin:adjustment:index</group>
             <group>admin:adjustment:show</group>
