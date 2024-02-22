@@ -19,23 +19,18 @@ use Symfony\Contracts\Service\ServiceProviderInterface;
 final class PaymentRequestTypeCommandProvider implements PaymentRequestCommandProviderInterface
 {
     public function __construct(
+        /** @var ServiceProviderInterface<PaymentRequestCommandProviderInterface> */
         private ServiceProviderInterface $locator,
     ) {
     }
 
     public function supports(PaymentRequestInterface $paymentRequest): bool
     {
-        /** @var PaymentRequestCommandProviderInterface $provider */
-        $provider = $this->locator->get($paymentRequest->getType());
-
-        return $provider->supports($paymentRequest);
+        return $this->locator->get($paymentRequest->getType())->supports($paymentRequest);
     }
 
     public function provide(PaymentRequestInterface $paymentRequest): object
     {
-        /** @var PaymentRequestCommandProviderInterface $provider */
-        $provider = $this->locator->get($paymentRequest->getType());
-
-        return $provider->provide($paymentRequest);
+        return $this->locator->get($paymentRequest->getType())->provide($paymentRequest);
     }
 }

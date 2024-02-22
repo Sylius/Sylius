@@ -23,6 +23,7 @@ final class PaymentRequestCommandProvider implements PaymentRequestCommandProvid
 {
     public function __construct(
         private PaymentRequestDuplicationCheckerInterface $paymentRequestDuplicationChecker,
+        /** @var ServiceProviderInterface<PaymentRequestCommandProviderInterface> */
         private ServiceProviderInterface $locator,
     ) {
     }
@@ -53,9 +54,6 @@ final class PaymentRequestCommandProvider implements PaymentRequestCommandProvid
         Assert::notNull($gatewayConfig);
         $factoryName = $gatewayConfig->getConfig()['factory'] ?? $gatewayConfig->getFactoryName();
 
-        /** @var PaymentRequestCommandProviderInterface $provider */
-        $provider = $this->locator->get($factoryName);
-
-        return $provider;
+        return $this->locator->get($factoryName);
     }
 }
