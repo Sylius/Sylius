@@ -14,8 +14,8 @@ declare(strict_types=1);
 namespace Sylius\Bundle\CoreBundle\PaymentRequest\CommandHandler\Offline;
 
 use Sylius\Bundle\CoreBundle\PaymentRequest\Command\Offline\CapturePaymentRequest;
-use Sylius\Bundle\CoreBundle\PaymentRequest\Processor\AfterOfflineCaptureProcessorInterface;
-use Sylius\Bundle\CoreBundle\PaymentRequest\Processor\OfflineCaptureProcessorInterface;
+use Sylius\Bundle\CoreBundle\PaymentRequest\Processor\Offline\AfterCaptureProcessorInterface;
+use Sylius\Bundle\CoreBundle\PaymentRequest\Processor\Offline\CaptureProcessorInterface;
 use Sylius\Component\Core\Model\PaymentMethodInterface;
 use Sylius\Component\Payment\Repository\PaymentRequestRepositoryInterface;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
@@ -28,8 +28,8 @@ final class CapturePaymentRequestHandler implements MessageHandlerInterface
 
     public function __construct(
         private PaymentRequestRepositoryInterface $paymentRequestRepository,
-        private OfflineCaptureProcessorInterface $offlineCaptureProcessor,
-        private AfterOfflineCaptureProcessorInterface $afterOfflineCaptureProcessor,
+        private CaptureProcessorInterface         $offlineCaptureProcessor,
+        private AfterCaptureProcessorInterface    $afterOfflineCaptureProcessor,
     ) {
     }
 

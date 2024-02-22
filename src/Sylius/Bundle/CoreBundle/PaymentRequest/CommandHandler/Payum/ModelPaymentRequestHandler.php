@@ -14,8 +14,8 @@ declare(strict_types=1);
 namespace Sylius\Bundle\CoreBundle\PaymentRequest\CommandHandler\Payum;
 
 use Sylius\Bundle\CoreBundle\PaymentRequest\Command\PaymentRequestHashAwareInterface;
-use Sylius\Bundle\CoreBundle\PaymentRequest\Payum\Processor\RequestProcessorInterface;
 use Sylius\Bundle\CoreBundle\PaymentRequest\Payum\Provider\PaymentRequestProviderInterface;
+use Sylius\Bundle\CoreBundle\PaymentRequest\Processor\Payum\RequestProcessorInterface;
 use Sylius\Bundle\PayumBundle\Factory\GetStatusFactoryInterface;
 use Sylius\Component\Core\Model\PaymentMethodInterface;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
