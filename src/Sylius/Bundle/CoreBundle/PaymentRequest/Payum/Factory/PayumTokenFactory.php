@@ -46,7 +46,7 @@ final class PayumTokenFactory implements PayumTokenFactoryInterface
          *     'after_path_parameters'?: array<string, string>,
          * }|null $payload
          */
-        $payload = $paymentRequest->getRequestPayload();
+        $payload = $paymentRequest->getPayload();
         Assert::notNull($payload, 'The request payload need to be not null!');
 
         $targetPath = $payload['target_path'] ?? null;
