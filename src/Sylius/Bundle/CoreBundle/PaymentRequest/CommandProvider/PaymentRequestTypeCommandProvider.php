@@ -19,7 +19,6 @@ use Symfony\Contracts\Service\ServiceProviderInterface;
 final class PaymentRequestTypeCommandProvider implements PaymentRequestCommandProviderInterface
 {
     public function __construct(
-        /** @var ServiceProviderInterface<PaymentRequestCommandProviderInterface> */
         private ServiceProviderInterface $locator,
     ) {
     }
