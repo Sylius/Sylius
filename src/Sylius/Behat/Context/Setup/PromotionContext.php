@@ -282,6 +282,16 @@ final class PromotionContext implements Context
     }
 
     /**
+     * @Given the promotion :promotion is archived
+     */
+    public function thisPromotionIsArchived(PromotionInterface $promotion): void
+    {
+        $promotion->setArchivedAt(new \DateTime());
+
+        $this->objectManager->flush();
+    }
+
+    /**
      * @Given /^(this coupon) has already expired$/
      */
     public function thisCouponHasExpired(PromotionCouponInterface $coupon): void

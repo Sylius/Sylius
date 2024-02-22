@@ -23,6 +23,18 @@ Sylius\Component\Core\Model\Promotion:
         couponBased: true
         translations:
             - '@promotion_1_off_en'
+    promotion_back_to_school:
+        code: 'back_to_school'
+        name: 'Back to school'
+        description: 'Get 10% off on all school supplies'
+        channels: ['@channel_web', '@channel_mobile']
+        priority: 3
+        exclusive: false
+        appliesToDiscounted: true
+        couponBased: false
+        archivedAt: <dateTimeBetween('-1 month', 'now')>
+        translations:
+            - '@promotion_back_to_school_en'
 
 Sylius\Component\Promotion\Model\PromotionTranslation:
     promotion_50_off_en:
@@ -33,6 +45,10 @@ Sylius\Component\Promotion\Model\PromotionTranslation:
         locale: 'en_US'
         label: '1$ off every item!'
         translatable: '@promotion_1_off'
+    promotion_back_to_school_en:
+        locale: 'en_US'
+        label: 'Back to school sale!'
+        translatable: '@promotion_back_to_school'
 
 Sylius\Component\Core\Model\PromotionCoupon:
     promotion_1_off_coupon_1:
