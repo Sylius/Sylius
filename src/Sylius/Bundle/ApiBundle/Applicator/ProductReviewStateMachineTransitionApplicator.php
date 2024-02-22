@@ -58,7 +58,6 @@ final class ProductReviewStateMachineTransitionApplicator implements ProductRevi
         } catch (StateMachineExecutionException) {
             throw new ProductReviewRejectionFailedException();
         }
-        $this->applyTransition($data, ProductReviewTransitions::TRANSITION_REJECT);
 
         return $data;
     }
