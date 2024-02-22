@@ -18,34 +18,34 @@
     <services>
         <defaults public="true" />
 
-        <service id="Sylius\Bundle\CoreBundle\PaymentRequest\Payum\CommandHandler\TokenPaymentRequestHandler" abstract="true">
+        <service id="Sylius\Bundle\CoreBundle\PaymentRequest\CommandHandler\Payum\TokenPaymentRequestHandler" abstract="true">
             <argument type="service" id="Sylius\Bundle\CoreBundle\PaymentRequest\Payum\Provider\PaymentRequestProviderInterface" />
             <argument type="service" id="Sylius\Bundle\CoreBundle\PaymentRequest\Payum\Factory\PayumTokenFactoryInterface" />
             <argument type="service" id="Sylius\Bundle\CoreBundle\PaymentRequest\Payum\Processor\RequestProcessorInterface" />
             <argument type="service" id="Sylius\Bundle\CoreBundle\PaymentRequest\Payum\Processor\AfterTokenRequestProcessorInterface" />
         </service>
 
-        <service id="sylius.payment_request.payum.capture" parent="Sylius\Bundle\CoreBundle\PaymentRequest\Payum\CommandHandler\TokenPaymentRequestHandler">
+        <service id="sylius.payment_request.payum.capture" parent="Sylius\Bundle\CoreBundle\PaymentRequest\CommandHandler\Payum\TokenPaymentRequestHandler">
             <argument type="service" id="sylius.factory.payum_capture" />
-            <tag name="messenger.message_handler" bus="sylius.command_bus" handles="Sylius\Bundle\CoreBundle\PaymentRequest\Payum\Command\CapturePaymentRequest" />
-            <tag name="messenger.message_handler" bus="sylius_default.bus" handles="Sylius\Bundle\CoreBundle\PaymentRequest\Payum\Command\CapturePaymentRequest" />
+            <tag name="messenger.message_handler" bus="sylius.command_bus" handles="Sylius\Bundle\CoreBundle\PaymentRequest\Command\Payum\CapturePaymentRequest" />
+            <tag name="messenger.message_handler" bus="sylius_default.bus" handles="Sylius\Bundle\CoreBundle\PaymentRequest\Command\Payum\CapturePaymentRequest" />
         </service>
 
-        <service id="sylius.payment_request.payum.authorize" parent="Sylius\Bundle\CoreBundle\PaymentRequest\Payum\CommandHandler\TokenPaymentRequestHandler">
+        <service id="sylius.payment_request.payum.authorize" parent="Sylius\Bundle\CoreBundle\PaymentRequest\CommandHandler\Payum\TokenPaymentRequestHandler">
             <argument type="service" id="sylius.factory.payum_authorize" />
-            <tag name="messenger.message_handler" bus="sylius.command_bus" handles="Sylius\Bundle\CoreBundle\PaymentRequest\Payum\Command\AuthorizePaymentRequest" />
-            <tag name="messenger.message_handler" bus="sylius_default.bus" handles="Sylius\Bundle\CoreBundle\PaymentRequest\Payum\Command\AuthorizePaymentRequest" />
+            <tag name="messenger.message_handler" bus="sylius.command_bus" handles="Sylius\Bundle\CoreBundle\PaymentRequest\Command\Payum\AuthorizePaymentRequest" />
+            <tag name="messenger.message_handler" bus="sylius_default.bus" handles="Sylius\Bundle\CoreBundle\PaymentRequest\Command\Payum\AuthorizePaymentRequest" />
         </service>
 
-        <service id="Sylius\Bundle\CoreBundle\PaymentRequest\Payum\CommandHandler\ModelPaymentRequestHandler" abstract="true">
+        <service id="Sylius\Bundle\CoreBundle\PaymentRequest\CommandHandler\Payum\ModelPaymentRequestHandler" abstract="true">
             <argument type="service" id="Sylius\Bundle\CoreBundle\PaymentRequest\Payum\Provider\PaymentRequestProviderInterface" />
             <argument type="service" id="Sylius\Bundle\CoreBundle\PaymentRequest\Payum\Processor\RequestProcessorInterface" />
         </service>
 
         <service id="sylius.payment_request.payum.status" parent="Sylius\Bundle\CoreBundle\PaymentRequest\Payum\CommandHandler\ModelPaymentRequestHandler">
             <argument type="service" id="sylius.factory.payum_get_status_action" />
-            <tag name="messenger.message_handler" bus="sylius.command_bus" handles="Sylius\Bundle\CoreBundle\PaymentRequest\Payum\Command\StatusPaymentRequest" />
-            <tag name="messenger.message_handler" bus="sylius_default.bus" handles="Sylius\Bundle\CoreBundle\PaymentRequest\Payum\Command\StatusPaymentRequest" />
+            <tag name="messenger.message_handler" bus="sylius.command_bus" handles="Sylius\Bundle\CoreBundle\PaymentRequest\Command\Payum\StatusPaymentRequest" />
+            <tag name="messenger.message_handler" bus="sylius_default.bus" handles="Sylius\Bundle\CoreBundle\PaymentRequest\Command\Payum\StatusPaymentRequest" />
         </service>
 
     </services>
