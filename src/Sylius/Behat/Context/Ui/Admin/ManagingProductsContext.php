@@ -611,7 +611,7 @@ final class ManagingProductsContext implements Context
      */
     public function iSelectValueForTheAttribute(string $value, string $attribute): void
     {
-        $this->createSimpleProductPage->selectAttributeValue($attribute, $value, '');
+        $this->createSimpleProductPage->updateAttribute($attribute, $value, '');
     }
 
     /**
@@ -619,7 +619,7 @@ final class ManagingProductsContext implements Context
      */
     public function iSetItsNonTranslatableAttributeTo(string $attributeName, string $value): void
     {
-        $this->createSimpleProductPage->addNonTranslatableAttribute($attributeName, $value);
+        $this->createSimpleProductPage->updateAttribute($attributeName, $value, '');
     }
 
     /**
@@ -680,7 +680,7 @@ final class ManagingProductsContext implements Context
     {
         $this->updateSimpleProductPage->open(['id' => $product->getId()]);
 
-        Assert::same($this->updateSimpleProductPage->getNonTranslatableAttributeValue($attributeName), $value);
+        Assert::same($this->updateSimpleProductPage->getAttributeValue($attributeName, ''), $value);
     }
 
     /**

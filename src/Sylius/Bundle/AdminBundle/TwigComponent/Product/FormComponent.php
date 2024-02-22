@@ -17,7 +17,9 @@ use Sylius\Bundle\AdminBundle\TwigComponent\HookableComponentTrait;
 use Sylius\Component\Core\Model\Product;
 use Sylius\Component\Locale\Context\LocaleContextInterface;
 use Sylius\Component\Product\Generator\SlugGeneratorInterface;
+use Sylius\Component\Product\Model\ProductAttributeInterface;
 use Sylius\Component\Product\Model\ProductAttributeValueInterface;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\UX\LiveComponent\Attribute\AsLiveComponent;
@@ -48,12 +50,16 @@ final class FormComponent
     #[LiveProp(writable: true, hydrateWith: 'hydrateAttributesToBeAdded', dehydrateWith: 'dehydrateAttributesToBeAdded')]
     public array $attributesToBeAdded = [];
 
-    /** @param class-string $formClass */
+    /**
+     * @param class-string $formClass
+     * @param RepositoryInterface<ProductAttributeInterface> $productAttributeRepository
+     */
     public function __construct(
         private readonly FormFactoryInterface $formFactory,
         private readonly string $formClass,
         private readonly LocaleContextInterface $localeContext,
         private readonly SlugGeneratorInterface $slugGenerator,
+        private readonly RepositoryInterface $productAttributeRepository,
     ) {
     }
 
@@ -110,6 +116,18 @@ final class FormComponent
     public function addAttributes(): void
     {
         foreach ($this->attributesToBeAdded as $attributeCode) {
+            $productAttribute = $this->productAttributeRepository->findOneBy(['code' => $attributeCode]);
+
+            if (!$productAttribute->isTranslatable()) {
+                $this->formValues['attributes'][] = [
+                    'attribute' => $attributeCode,
+                    'localeCode' => null,
+                    'value' => '',
+                ];
+
+                continue;
+            }
+
             foreach ($this->formValues['translations'] as $localesCode => $translation) {
                 $this->formValues['attributes'][] = [
                     'attribute' => $attributeCode,

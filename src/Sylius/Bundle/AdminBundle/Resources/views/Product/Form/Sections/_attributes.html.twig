@@ -21,23 +21,24 @@
                 <div class="border-end">
                     <div id="product_attribute_tabs" class="list-group list-group-flush" role="tablist">
                         {% for productAttributeCode, productAttributeValue in productAttributes %}
+                            {% set productAttributeName = (productAttributeValue|first).vars.data.name %}
                             <div
                                 class="py-2 cursor-pointer list-group-item list-group-item-action {% if loop.first %}active{% endif %}"
                                 data-bs-toggle="tab"
                                 data-bs-target="#{{ productAttributeCode }}"
                                 aria-selected="{{ loop.first ? 'true' : 'false' }}"
                                 role="tab"
-                                {{ sylius_test_html_attribute('product-attribute-tab', productAttributeValue['en_US'].vars.data.name) }}
+                                {{ sylius_test_html_attribute('product-attribute-tab', productAttributeName) }}
                             >
                                 <div class="d-flex justify-content-between align-items-center">
-                                    <div>{{ productAttributeValue['en_US'].vars.data.name }}</div>
+                                    <div>{{ productAttributeName }}</div>
                                     <div style="transform: translateX(1rem)">
                                         <button
                                             type="button"
                                             class="btn btn-sm border-0 shadow-none"
                                             data-action="live#action:stop"
                                             data-action-name="prevent|removeAttribute(attributeCode={{ productAttributeCode }})"
-                                            {{ sylius_test_html_attribute('product-attribute-delete-button', productAttributeValue['en_US'].vars.data.name) }}
+                                            {{ sylius_test_html_attribute('product-attribute-delete-button', productAttributeName) }}
                                         >
                                             <svg xmlns="http://www.w3.org/2000/svg" class="text-muted" width="12" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                                                 <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
@@ -62,14 +63,27 @@
                                 role="tabpanel"
                             >
                                 {% for productAttributeValue in productAttributeValues %}
+                                    {% set localeCode = productAttributeValue.vars.data.localeCode %}
                                     <div class="d-flex gap-2 mb-3">
                                         <div>
-                                            <span class="flag flag-sm flag-country-{{ productAttributeValue.vars.data.localeCode|lower|split('_')|last }} me-3"></span>
+                                            {% if localeCode is not null %}
+                                                <span class="flag flag-sm flag-country-{{ localeCode|lower|split('_')|last }} me-3"></span>
+                                            {% else %}
+                                                <span class="flag flag-sm flag-country-eu me-3"></span>
+                                            {% endif %}
                                         </div>
                                         <div class="flex-grow-1">
                                             <div class="d-flex justify-content-between align-items-center">
                                                 {{ form_label(productAttributeValue.value) }}
-                                                <button class="btn btn-secondary btn-sm" data-action="live#action" data-action-name="prevent|applyToAll(attributeCode={{ productAttributeCode }},localeCode={{ productAttributeValue.vars.data.localeCode }})">{{ 'sylius.ui.apply_to_all'|trans }}</button>
+                                                {% if localeCode is not null %}
+                                                    <button
+                                                        class="btn btn-secondary btn-sm"
+                                                        data-action="live#action"
+                                                        data-action-name="prevent|applyToAll(attributeCode={{ productAttributeCode }},localeCode={{ productAttributeValue.vars.data.localeCode }})"
+                                                    >
+                                                        {{ 'sylius.ui.apply_to_all'|trans }}
+                                                    </button>
+                                                {% endif %}
                                             </div>
                                             {{ form_widget(
                                                 productAttributeValue.value,

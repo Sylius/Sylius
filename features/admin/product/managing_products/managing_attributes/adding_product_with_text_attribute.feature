@@ -23,11 +23,12 @@ Feature: Adding a new product with text attribute
         And the product "44 Magnum" should appear in the store
         And attribute "Gun caliber" of product "44 Magnum" should be "11 mm"
 
-    @todo @ui @mink:chromedriver @api
+    @ui @mink:chromedriver @api
     Scenario: Adding a non-translatable text attribute to product
         When I want to create a new configurable product
         And I specify its code as "44_MAGNUM"
         And I name it "44 Magnum" in "English (United States)"
+        And I add the "Author" attribute to it
         And I set its non-translatable "Author" attribute to "Colt"
         And I add it
         Then I should be notified that it has been successfully created

@@ -9,7 +9,7 @@ Feature: Adding a new product with a select attribute
         And the store has a non-translatable select product attribute "Mug material" with value "Ceramic"
         And I am logged in as an administrator
 
-    @todo @ui @javascript @api
+    @ui @javascript @api
     Scenario: Adding a product with a select attribute with choices in different locales
         When I want to create a new configurable product
         And I specify its code as "mug"

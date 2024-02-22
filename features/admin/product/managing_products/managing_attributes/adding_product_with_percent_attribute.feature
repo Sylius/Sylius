@@ -22,11 +22,12 @@ Feature: Adding a new product with a percent attribute
         And the product "44 Magnum" should appear in the store
         And attribute "Awesomeness rating" of product "44 Magnum" should be 80
 
-    @todo @ui @mink:chromedriver @api
+    @ui @mink:chromedriver @api
     Scenario: Adding a non-translatable percent attribute to product
         When I want to create a new configurable product
         And I specify its code as "44_MAGNUM"
         And I name it "44 Magnum" in "English (United States)"
+        And I add the "Accuracy" attribute to it
         And I set its non-translatable "Accuracy" attribute to 95
         And I add it
         Then I should be notified that it has been successfully created
