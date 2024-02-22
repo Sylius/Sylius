@@ -8,8 +8,8 @@
     "phoneNumber": "123456789",
     "company": "Stark Industries",
     "countryCode": "US",
-    "provinceCode": "999",
-    "provinceName": "east",
+    "provinceCode": "US-WY",
+    "provinceName": null,
     "street": "10880 Malibu Point",
     "city": "Malibu",
     "postcode": "90265"

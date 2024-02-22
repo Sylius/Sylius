@@ -21,12 +21,61 @@ use Sylius\Tests\Api\JsonApiTestCase;
 use Sylius\Tests\Api\Utils\ShopUserLoginTrait;
 use Symfony\Component\HttpFoundation\Response;
 
-final class AddressesPostTest extends JsonApiTestCase
+final class AddressesTest extends JsonApiTestCase
 {
     use ShopUserLoginTrait;
 
     /** @test */
-    public function it_denies_access_to_a_create_an_address_for_not_authenticated_user(): void
+    public function it_denies_access_to_get_addresses_for_not_authenticated_user(): void
+    {
+        $this->loadFixturesFromFiles(['authentication/customer.yaml']);
+
+        $this->client->request(method: 'GET', uri: '/api/v2/shop/addresses', server: self::CONTENT_TYPE_HEADER);
+
+        $response = $this->client->getResponse();
+        $this->assertSame(Response::HTTP_UNAUTHORIZED, $response->getStatusCode());
+    }
+
+    /** @test */
+    public function it_gets_addresses(): void
+    {
+        $fixtures = $this->loadFixturesFromFiles(['address_with_customer.yaml']);
+        /** @var CustomerInterface $customer */
+        $customer = $fixtures['customer_tony'];
+
+        $header = array_merge($this->logInShopUser($customer->getEmailCanonical()), self::CONTENT_TYPE_HEADER);
+
+        $this->client->request(method: 'GET', uri: '/api/v2/shop/addresses', server: $header);
+
+        $this->assertResponse(
+            $this->client->getResponse(),
+            'shop/address/get_addresses_response',
+            Response::HTTP_OK,
+        );
+    }
+
+    /** @test */
+    public function it_gets_an_address(): void
+    {
+        $fixtures = $this->loadFixturesFromFiles(['address_with_customer.yaml']);
+        /** @var CustomerInterface $customer */
+        $customer = $fixtures['customer_tony'];
+        /** @var AddressInterface $address */
+        $address = $fixtures['address'];
+
+        $header = array_merge($this->logInShopUser($customer->getEmailCanonical()), self::CONTENT_TYPE_HEADER);
+
+        $this->client->request(method: 'GET', uri: '/api/v2/shop/addresses/' . $address->getId(), server: $header);
+
+        $this->assertResponse(
+            $this->client->getResponse(),
+            'shop/address/get_address_response',
+            Response::HTTP_OK,
+        );
+    }
+
+    /** @test */
+    public function it_denies_access_to_create_an_address_for_not_authenticated_user(): void
     {
         $fixtures = $this->loadFixturesFromFiles(['authentication/customer.yaml', 'country.yaml']);
         /** @var CountryInterface $country */
@@ -46,7 +95,7 @@ final class AddressesPostTest extends JsonApiTestCase
     }
 
     /** @test */
-    public function it_creates_new_address_for_logged_customer_with_country_with_provinces(): void
+    public function it_creates_a_new_address_with_country_and_province_code(): void
     {
         $fixtures = $this->loadFixturesFromFiles(['authentication/customer.yaml', 'country.yaml']);
         /** @var CustomerInterface $customer */
@@ -67,17 +116,15 @@ final class AddressesPostTest extends JsonApiTestCase
             content: json_encode($bodyRequest, \JSON_THROW_ON_ERROR),
         );
 
-        $response = $this->client->getResponse();
-
         $this->assertResponse(
-            $response,
-            'shop/address/create_address_with_province_code_response',
+            $this->client->getResponse(),
+            'shop/address/post_address_with_province_code_response',
             Response::HTTP_CREATED,
         );
     }
 
     /** @test */
-    public function it_creates_new_address_for_logged_customer_without_province(): void
+    public function it_creates_a_new_address_with_country_and_province_name(): void
     {
         $fixtures = $this->loadFixturesFromFiles(['authentication/customer.yaml', 'country.yaml']);
         /** @var CustomerInterface $customer */
@@ -96,17 +143,15 @@ final class AddressesPostTest extends JsonApiTestCase
             content: json_encode($bodyRequest, \JSON_THROW_ON_ERROR),
         );
 
-        $response = $this->client->getResponse();
-
         $this->assertResponse(
-            $response,
-            'shop/address/create_address_with_province_name_response',
+            $this->client->getResponse(),
+            'shop/address/post_address_with_province_name_response',
             Response::HTTP_CREATED,
         );
     }
 
     /** @test */
-    public function it_creates_new_address_for_logged_customer_with_country_with_custom_provinces(): void
+    public function it_creates_a_new_address_with_country_without_province_data(): void
     {
         $fixtures = $this->loadFixturesFromFiles(['authentication/customer.yaml', 'country.yaml']);
         /** @var CustomerInterface $customer */
@@ -125,17 +170,15 @@ final class AddressesPostTest extends JsonApiTestCase
             content: json_encode($bodyRequest, \JSON_THROW_ON_ERROR),
         );
 
-        $response = $this->client->getResponse();
-
         $this->assertResponse(
-            $response,
-            'shop/address/create_address_without_province_response',
+            $this->client->getResponse(),
+            'shop/address/post_address_without_province_response',
             Response::HTTP_CREATED,
         );
     }
 
     /** @test */
-    public function it_updates_an_address_of_the_authorized_user(): void
+    public function it_updates_an_address(): void
     {
         $fixtures = $this->loadFixturesFromFiles(['address_with_customer.yaml']);
         /** @var CustomerInterface $customer */
@@ -154,6 +197,7 @@ final class AddressesPostTest extends JsonApiTestCase
                 'lastName' => 'Stark',
                 'company' => 'Stark Industries',
                 'countryCode' => 'US',
+                'provinceCode' => 'US-WY',
                 'street' => '10880 Malibu Point',
                 'city' => 'Malibu',
                 'postcode' => '90265',
@@ -161,7 +205,11 @@ final class AddressesPostTest extends JsonApiTestCase
             ]),
         );
 
-        $this->assertResponse($this->client->getResponse(), 'shop/address/update_an_address_response');
+        $this->assertResponse(
+            $this->client->getResponse(),
+            'shop/address/put_address_response',
+            Response::HTTP_OK,
+        );
     }
 
     private function createBodyRequest(
