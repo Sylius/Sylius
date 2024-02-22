@@ -23,7 +23,6 @@ final class PaymentRequestCommandProvider implements PaymentRequestCommandProvid
 {
     public function __construct(
         private PaymentRequestDuplicationCheckerInterface $paymentRequestDuplicationChecker,
-        /** @var ServiceProviderInterface<PaymentRequestCommandProviderInterface> */
         private ServiceProviderInterface $locator,
     ) {
     }
