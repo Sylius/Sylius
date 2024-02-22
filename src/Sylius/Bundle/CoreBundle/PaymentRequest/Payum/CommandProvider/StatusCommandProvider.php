@@ -26,6 +26,6 @@ final class StatusCommandProvider implements PaymentRequestCommandProviderInterf
 
     public function provide(PaymentRequestInterface $paymentRequest): object
     {
-        return new StatusPaymentRequest($paymentRequest->getHash());
+        return new StatusPaymentRequest($paymentRequest->getHash()?->toBinary());
     }
 }

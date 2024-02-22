@@ -26,6 +26,6 @@ final class AuthorizeCommandProvider implements PaymentRequestCommandProviderInt
 
     public function provide(PaymentRequestInterface $paymentRequest): object
     {
-        return new AuthorizePaymentRequest($paymentRequest->getHash());
+        return new AuthorizePaymentRequest($paymentRequest->getHash()?->toBinary());
     }
 }

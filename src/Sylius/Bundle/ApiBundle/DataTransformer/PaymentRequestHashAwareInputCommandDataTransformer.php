@@ -24,7 +24,12 @@ final class PaymentRequestHashAwareInputCommandDataTransformer implements Comman
         /** @var PaymentRequestInterface $paymentRequest */
         $paymentRequest = $context['object_to_populate'];
 
-        $object->setHash($paymentRequest->getHash());
+        $hash = $paymentRequest->getHash();
+        if (null === $hash) {
+            return $object;
+        }
+
+        $object->setHash($hash->toBinary());
 
         return $object;
     }
