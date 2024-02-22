@@ -44,8 +44,7 @@
     },
     "suggest": {
         "payum/paypal-express-checkout-nvp": "To use PayPal Express Chekout NVP",
-        "payum/stripe": "To use Stripe Checkout",
-        "sylius/api-bundle": "To use Payum with the Sylius API Bundle"
+        "payum/stripe": "To use Stripe Checkout"
     },
     "config": {
         "allow-plugins": {
