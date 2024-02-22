@@ -14,11 +14,9 @@ declare(strict_types=1);
 namespace Sylius\Bundle\ApiBundle\Applicator;
 
 use SM\Factory\FactoryInterface as StateMachineFactoryInterface;
-use Sylius\Abstraction\StateMachine\Exception\StateMachineExecutionException;
 use Sylius\Abstraction\StateMachine\StateMachineInterface;
 use Sylius\Abstraction\StateMachine\WinzouStateMachineAdapter;
-use Sylius\Bundle\ApiBundle\Exception\ProductReviewAcceptanceFailedException;
-use Sylius\Bundle\ApiBundle\Exception\ProductReviewRejectionFailedException;
+use Sylius\Bundle\ApiBundle\Exception\StateMachineTransitionFailedException;
 use Sylius\Component\Core\ProductReviewTransitions;
 use Sylius\Component\Review\Model\ReviewInterface;
 
@@ -42,29 +40,27 @@ final class ProductReviewStateMachineTransitionApplicator implements ProductRevi
 
     public function accept(ReviewInterface $data): ReviewInterface
     {
-        try {
-            $this->applyTransition($data, ProductReviewTransitions::TRANSITION_ACCEPT);
-        } catch (StateMachineExecutionException) {
-            throw new ProductReviewAcceptanceFailedException();
-        }
+        $this->applyTransition($data, ProductReviewTransitions::TRANSITION_ACCEPT);
 
         return $data;
     }
 
     public function reject(ReviewInterface $data): ReviewInterface
     {
-        try {
-            $this->applyTransition($data, ProductReviewTransitions::TRANSITION_REJECT);
-        } catch (StateMachineExecutionException) {
-            throw new ProductReviewRejectionFailedException();
-        }
+        $this->applyTransition($data, ProductReviewTransitions::TRANSITION_REJECT);
 
         return $data;
     }
 
     private function applyTransition(ReviewInterface $review, string $transition): void
     {
-        $this->getStateMachine()->apply($review, ProductReviewTransitions::GRAPH, $transition);
+        $stateMachine = $this->getStateMachine();
+
+        if (false === $stateMachine->can($review, ProductReviewTransitions::GRAPH, $transition)) {
+            throw new StateMachineTransitionFailedException(sprintf('Cannot %s  the product review.', $transition));
+        }
+
+        $stateMachine->apply($review, ProductReviewTransitions::GRAPH, $transition);
     }
 
     private function getStateMachine(): StateMachineInterface

@@ -13,13 +13,13 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\Exception;
 
-final class ProductReviewAcceptanceFailedException extends \RuntimeException
+final class StateMachineTransitionFailedException extends \RuntimeException
 {
     public function __construct(
-        string $message = 'Cannot accept the product review.',
+        string $message = 'Transition failed.',
         int $code = 0,
         \Throwable $previous = null,
     ) {
-      parent::__construct($message, $code, $previous);
+        parent::__construct($message, $code, $previous);
     }
 }

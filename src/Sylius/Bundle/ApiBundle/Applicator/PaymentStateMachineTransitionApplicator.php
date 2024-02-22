@@ -14,10 +14,9 @@ declare(strict_types=1);
 namespace Sylius\Bundle\ApiBundle\Applicator;
 
 use SM\Factory\FactoryInterface as StateMachineFactoryInterface;
-use Sylius\Abstraction\StateMachine\Exception\StateMachineExecutionException;
 use Sylius\Abstraction\StateMachine\StateMachineInterface;
 use Sylius\Abstraction\StateMachine\WinzouStateMachineAdapter;
-use Sylius\Bundle\ApiBundle\Exception\PaymentCompletionFailedException;
+use Sylius\Bundle\ApiBundle\Exception\StateMachineTransitionFailedException;
 use Sylius\Component\Payment\Model\PaymentInterface;
 use Sylius\Component\Payment\PaymentTransitions;
 
@@ -41,18 +40,20 @@ final class PaymentStateMachineTransitionApplicator implements PaymentStateMachi
 
     public function complete(PaymentInterface $data): PaymentInterface
     {
-        try {
-            $this->applyTransition($data, PaymentTransitions::TRANSITION_COMPLETE);
-        } catch (StateMachineExecutionException) {
-            throw new PaymentCompletionFailedException();
-        }
+        $this->applyTransition($data, PaymentTransitions::TRANSITION_COMPLETE);
 
         return $data;
     }
 
     private function applyTransition(PaymentInterface $payment, string $transition): void
     {
-        $this->getStateMachine()->apply($payment, PaymentTransitions::GRAPH, $transition);
+        $stateMachine = $this->getStateMachine();
+
+        if (false === $stateMachine->can($payment, PaymentTransitions::GRAPH, $transition)) {
+            throw new StateMachineTransitionFailedException('Cannot complete the payment.');
+        }
+
+        $stateMachine->apply($payment, PaymentTransitions::GRAPH, $transition);
     }
 
     private function getStateMachine(): StateMachineInterface
