@@ -30,7 +30,7 @@
 
         <field name="state" column="state" type="string" />
         <field name="action" column="action" type="string" />
-        <field name="requestPayload" column="request_payload" type="object" />
+        <field name="payload" column="payload" type="object" />
         <field name="responseData" column="response_data" type="json" />
 
         <field name="createdAt" column="created_at" type="datetime">

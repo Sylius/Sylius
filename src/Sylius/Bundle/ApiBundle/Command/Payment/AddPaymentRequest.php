@@ -22,7 +22,7 @@ class AddPaymentRequest implements IriToIdentifierConversionAwareInterface
         private string $paymentId,
         private string $paymentMethodCode,
         private string $action,
-        private mixed  $requestPayload = null,
+        private mixed $payload = null,
     ) {
     }
 
@@ -41,8 +41,8 @@ class AddPaymentRequest implements IriToIdentifierConversionAwareInterface
         return $this->action;
     }
 
-    public function getRequestPayload(): mixed
+    public function getPayload(): mixed
     {
-        return $this->requestPayload;
+        return $this->payload;
     }
 }

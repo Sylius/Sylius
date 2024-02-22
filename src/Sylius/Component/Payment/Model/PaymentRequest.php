@@ -30,7 +30,7 @@ class PaymentRequest implements PaymentRequestInterface
 
     protected string $action = PaymentRequestInterface::ACTION_CAPTURE;
 
-    protected mixed $requestPayload = null;
+    protected mixed $payload = null;
 
     protected array $responseData = [];
 
@@ -89,14 +89,14 @@ class PaymentRequest implements PaymentRequestInterface
         $this->action = $action;
     }
 
-    public function getRequestPayload(): mixed
+    public function getPayload(): mixed
     {
-        return $this->requestPayload;
+        return $this->payload;
     }
 
-    public function setRequestPayload(mixed $requestPayload): void
+    public function setPayload(mixed $payload): void
     {
-        $this->requestPayload = $requestPayload;
+        $this->payload = $payload;
     }
 
     public function getResponseData(): array

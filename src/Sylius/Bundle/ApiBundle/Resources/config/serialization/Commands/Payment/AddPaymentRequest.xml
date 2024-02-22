@@ -25,7 +25,7 @@
         <attribute name="action">
             <group>sylius:shop:payment_request:create</group>
         </attribute>
-        <attribute name="requestPayload">
+        <attribute name="payload">
             <group>sylius:shop:payment_request:create</group>
         </attribute>
     </class>
