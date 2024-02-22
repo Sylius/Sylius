@@ -12,13 +12,14 @@ Feature: Adding text attributes in different locales to a product
         And the store has a text product attribute "Mug material"
         And I am logged in as an administrator
 
-    @todo @ui @mink:chromedriver @api
+    @ui @mink:chromedriver @api
     Scenario: Adding a product with a text attribute in different locales
         When I want to create a new configurable product
         And I specify its code as "mug"
         And I name it "PHP Mug" in "English (United States)"
-        And I set its "Mug material" attribute to "Wood" in "English (United States)"
-        And I set its "Mug material" attribute to "Drewno" in "Polish (Poland)"
+        And I add the "Mug material" attribute
+        And I set the "Mug material" attribute value to "Wood" in "English (United States)"
+        And I set the "Mug material" attribute value to "Drewno" in "Polish (Poland)"
         And I add it
         Then I should be notified that it has been successfully created
         And the product "PHP Mug" should appear in the store

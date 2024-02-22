@@ -32,19 +32,6 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
 
     private array $imageUrls = [];
 
-    public function nameItIn(string $name, string $localeCode): void
-    {
-        $this->activateLanguageTab($localeCode);
-        $this->getElement('name', ['%locale%' => $localeCode])->setValue($name);
-
-        if (DriverHelper::isJavascript($this->getDriver())) {
-            SlugGenerationHelper::waitForSlugGeneration(
-                $this->getSession(),
-                $this->getElement('slug', ['%locale%' => $localeCode]),
-            );
-        }
-    }
-
     public function specifyPrice(ChannelInterface $channel, string $price): void
     {
         $this->getElement('price', ['%channelCode%' => $channel->getCode()])->setValue($price);

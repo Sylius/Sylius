@@ -576,13 +576,26 @@ final class ManagingProductsContext implements Context
     }
 
     /**
+     * @When I add the :attributeName attribute
+     * @When I add the :attributeName attribute to it
+     */
+    public function iAddTheAttribute(string $attributeName): void
+    {
+        $this->createSimpleProductPage->addAttribute($attributeName);
+    }
+
+    /**
      * @When I set its :attributeName attribute to :value in :localeCode
      * @When I do not set its :attributeName attribute in :localeCode
-     * @When I add the :attributeName attribute
+     * @When I set the :attributeName attribute value to :value in :localeCode
      */
-    public function iSetItsAttributeTo(string $attributeName, ?string $value = null, $localeCode = 'en_US'): void
+    public function iSetItsAttributeTo(?string $attributeName = null, ?string $value = null, $localeCode = 'en_US'): void
     {
-        $this->createSimpleProductPage->addAttribute($attributeName, $value ?? '', $localeCode);
+        if (null === $attributeName) {
+            $attributeName = $this->sharedStorage->get('last_used_attribute_name');
+        }
+
+        $this->createSimpleProductPage->updateAttribute($attributeName, $value ?? '', $localeCode);
     }
 
     /**

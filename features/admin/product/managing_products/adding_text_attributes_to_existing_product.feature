@@ -13,7 +13,8 @@ Feature: Adding attributes to an existing product
     @ui @mink:chromedriver @api
     Scenario: Adding a text attribute to an existing product
         When I want to modify the "44 Magnum" product
-        And I set its "Overall length" attribute to "30.5 cm" in "English (United States)"
+        And I add the "Overall length" attribute to it
+        And I set the "Overall length" attribute value to "30.5 cm" in "English (United States)"
         And I save my changes
         Then I should be notified that it has been successfully edited
         And attribute "Overall length" of product "44 Magnum" should be "30.5 cm"
@@ -22,7 +23,8 @@ Feature: Adding attributes to an existing product
     Scenario: Adding another text attribute to an existing product
         Given this product has a text attribute "Gun caliber" with value "11 mm" in "English (United States)" locale
         When I want to modify the "44 Magnum" product
-        And I set its "Overall length" attribute to "30.5 cm" in "English (United States)"
+        And I add the "Overall length" attribute to it
+        And I set the "Overall length" attribute value to "30.5 cm" in "English (United States)"
         And I save my changes
         Then I should be notified that it has been successfully edited
         And attribute "Gun caliber" of product "44 Magnum" should be "11 mm"
@@ -31,7 +33,8 @@ Feature: Adding attributes to an existing product
     @ui @mink:chromedriver @api
     Scenario: Adding and removing text attributes on product update page
         When I want to modify the "44 Magnum" product
-        And I set its "Overall length" attribute to "30.5 cm" in "English (United States)"
+        And I add the "Overall length" attribute to it
+        And I set the "Overall length" attribute value to "30.5 cm" in "English (United States)"
         And I remove its "Overall length" attribute
         And I save my changes
         Then I should be notified that it has been successfully edited
@@ -41,7 +44,8 @@ Feature: Adding attributes to an existing product
     Scenario: Adding and removing after saving text attributes on product update page
         Given this product has a text attribute "Gun caliber" with value "11 mm" in "English (United States)" locale
         When I want to modify the "44 Magnum" product
-        And I set its "Overall length" attribute to "30.5 cm" in "English (United States)"
+        And I add the "Overall length" attribute to it
+        And I set the "Overall length" attribute value to "30.5 cm" in "English (United States)"
         And I save my changes
         And I remove its "Gun caliber" attribute
         And I save my changes

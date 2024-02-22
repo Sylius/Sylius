@@ -58,6 +58,7 @@
             <argument type="service" id="form.factory" />
             <argument>Sylius\Bundle\ProductBundle\Form\Type\ProductType</argument>
             <argument type="service" id="sylius.context.locale" />
+            <argument type="service" id="sylius.generator.slug" />
             <call method="setLiveResponder">
                 <argument type="service" id="ux.live_component.live_responder"/>
             </call>

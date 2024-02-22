@@ -317,9 +317,10 @@ final class ManagingProductsContext implements Context
      * @When I set its :attribute attribute to :value
      * @When I set its :attribute attribute to :value in :localeCode
      * @When I do not set its :attribute attribute in :localeCode
+     * @When I set the :attribute attribute value to :value in :localeCode
      */
     public function iSetItsAttributeTo(
-        ProductAttributeInterface $attribute,
+        ?ProductAttributeInterface $attribute = null,
         ?string $value = null,
         string $localeCode = 'en_US',
     ): void {
@@ -352,6 +353,7 @@ final class ManagingProductsContext implements Context
 
     /**
      * @When I add the :attributeName attribute
+     * @When I add the :attributeName attribute to it
      */
     public function iAddTheAttribute(string $attributeName): void
     {

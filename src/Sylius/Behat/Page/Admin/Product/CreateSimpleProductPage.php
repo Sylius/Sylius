@@ -20,7 +20,6 @@ use Sylius\Behat\Page\Admin\Crud\CreatePage as BaseCreatePage;
 use Sylius\Behat\Service\AutocompleteHelper;
 use Sylius\Behat\Service\DriverHelper;
 use Sylius\Behat\Service\Helper\AutocompleteHelperInterface;
-use Sylius\Behat\Service\SlugGenerationHelper;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Product\Model\ProductAssociationTypeInterface;
@@ -29,8 +28,8 @@ use Webmozart\Assert\Assert;
 
 class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProductPageInterface
 {
-    use SpecifiesItsCode;
     use FormTrait;
+    use SpecifiesItsCode;
 
     public function __construct(
         Session $session,
@@ -45,20 +44,6 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
     public function getRouteName(): string
     {
         return parent::getRouteName() . '_simple';
-    }
-
-    public function nameItIn(string $name, string $localeCode): void
-    {
-        $this->clickTabIfItsNotActive('details');
-        $this->activateLanguageTab($localeCode);
-        $this->getElement('name', ['%locale%' => $localeCode])->setValue($name);
-
-        if (DriverHelper::isJavascript($this->getDriver())) {
-            SlugGenerationHelper::waitForSlugGeneration(
-                $this->getSession(),
-                $this->getElement('slug', ['%locale%' => $localeCode]),
-            );
-        }
     }
 
     public function specifySlugIn(?string $slug, string $locale): void

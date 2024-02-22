@@ -20,6 +20,8 @@ export default class extends ApplicationController {
   }
 
   generateSlug() {
+    this.element.setAttribute('busy', '');
     this.slugTarget.value = slugify(this.sluggableTarget.value, { locale: this.localeValue, lower: true });
+    this.element.removeAttribute('busy');
   }
 }

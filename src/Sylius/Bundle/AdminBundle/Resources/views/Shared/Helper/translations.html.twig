@@ -7,7 +7,15 @@
         {% for locale, translationForm in translationFields %}
             <div class="accordion-item">
                 <h2 class="accordion-header">
-                    <button class="accordion-button {% if loop.first == false %}collapsed{% endif %}" type="button" data-bs-toggle="collapse" data-bs-target="#translation-{{ locale }}" aria-expanded="{% if loop.first %}true{% else %}false{% endif %}" aria-controls="translation-{{ locale }}">
+                    <button
+                        class="accordion-button {% if loop.first == false %}collapsed{% endif %}"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#translation-{{ locale }}"
+                        aria-expanded="{% if loop.first %}true{% else %}false{% endif %}"
+                        aria-controls="translation-{{ locale }}"
+                        {{ sylius_test_html_attribute('product-translation-accordion', locale) }}
+                    >
                         <span class="flag flag-sm flag-country-{{ locale|lower|split('_')|last }} me-3"></span>
                         {{ locale|sylius_locale_name }}
                     </button>

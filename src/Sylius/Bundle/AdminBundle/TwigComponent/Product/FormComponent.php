@@ -16,6 +16,7 @@ namespace Sylius\Bundle\AdminBundle\TwigComponent\Product;
 use Sylius\Bundle\AdminBundle\TwigComponent\HookableComponentTrait;
 use Sylius\Component\Core\Model\Product;
 use Sylius\Component\Locale\Context\LocaleContextInterface;
+use Sylius\Component\Product\Generator\SlugGeneratorInterface;
 use Sylius\Component\Product\Model\ProductAttributeValueInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
@@ -52,6 +53,7 @@ final class FormComponent
         private readonly FormFactoryInterface $formFactory,
         private readonly string $formClass,
         private readonly LocaleContextInterface $localeContext,
+        private readonly SlugGeneratorInterface $slugGenerator,
     ) {
     }
 
@@ -117,6 +119,12 @@ final class FormComponent
             }
         }
         $this->dispatchBrowserEvent('sylius_admin.product_attribute_autocomplete.clear_requested');
+    }
+
+    #[LiveAction]
+    public function generateProductSlug(#[LiveArg] string $localeCode): void
+    {
+        $this->formValues['translations'][$localeCode]['slug'] = $this->slugGenerator->generate($this->formValues['translations'][$localeCode]['name']);
     }
 
     /**
