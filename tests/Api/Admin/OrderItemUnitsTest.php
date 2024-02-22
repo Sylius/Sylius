@@ -45,4 +45,31 @@ final class OrderItemUnitsTest extends JsonApiTestCase
 
         $this->assertResponse($response, 'admin/order_item_units/get_order_item_unit_response', Response::HTTP_OK);
     }
+
+    /** @test */
+    public function it_gets_adjustments_for_an_order_item_unit(): void
+    {
+        $this->loadFixturesFromFiles([
+            'authentication/api_administrator.yaml',
+            'channel.yaml',
+            'cart.yaml',
+            'country.yaml',
+            'shipping_method.yaml',
+            'payment_method.yaml',
+            'cart/promotion.yaml',
+        ]);
+
+        $order = $this->placeOrder('token');
+        $orderItemUnit = $order->getItems()->first()->getUnits()->first();
+
+        $this->client->request(
+            method: 'GET',
+            uri: '/api/v2/admin/order-item-units/' . $orderItemUnit->getId() . '/adjustments',
+            server: $this->headerBuilder()->withJsonLdAccept()->withAdminUserAuthorization('api@example.com')->build(),
+        );
+
+        $response = $this->client->getResponse();
+
+        $this->assertResponse($response, 'admin/order_item_units/get_order_item_unit_adjustments', Response::HTTP_OK);
+    }
 }
