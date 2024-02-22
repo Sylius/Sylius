@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Bundle\ApiBundle\Applicator;
 
 use SM\Factory\FactoryInterface as StateMachineFactoryInterface;
+use Sylius\Abstraction\StateMachine\Exception\StateMachineExecutionException;
 use Sylius\Abstraction\StateMachine\StateMachineInterface;
 use Sylius\Abstraction\StateMachine\WinzouStateMachineAdapter;
 use Sylius\Bundle\ApiBundle\Exception\PaymentCompletionFailedException;
@@ -42,7 +43,7 @@ final class PaymentStateMachineTransitionApplicator implements PaymentStateMachi
     {
         try {
             $this->applyTransition($data, PaymentTransitions::TRANSITION_COMPLETE);
-        } catch (\Exception) {
+        } catch (StateMachineExecutionException) {
             throw new PaymentCompletionFailedException();
         }
 

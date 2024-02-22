@@ -69,6 +69,7 @@ api_platform:
         Sylius\Bundle\ApiBundle\Exception\ProductAttributeCannotBeRemoved: 422
         Sylius\Bundle\ApiBundle\Exception\ProductCannotBeRemoved: 422
         Sylius\Bundle\ApiBundle\Exception\ProductReviewAcceptanceFailedException: 422
+        Sylius\Bundle\ApiBundle\Exception\ProductReviewRejectionFailedException: 422
         Sylius\Bundle\ApiBundle\Exception\ProductVariantCannotBeRemoved: 422
         Sylius\Bundle\ApiBundle\Exception\PromotionCouponCannotBeRemoved: 422
         Sylius\Bundle\ApiBundle\Exception\ProvinceCannotBeRemoved: 422

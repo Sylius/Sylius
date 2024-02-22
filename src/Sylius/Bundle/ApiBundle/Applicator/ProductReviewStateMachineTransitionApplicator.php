@@ -14,9 +14,11 @@ declare(strict_types=1);
 namespace Sylius\Bundle\ApiBundle\Applicator;
 
 use SM\Factory\FactoryInterface as StateMachineFactoryInterface;
+use Sylius\Abstraction\StateMachine\Exception\StateMachineExecutionException;
 use Sylius\Abstraction\StateMachine\StateMachineInterface;
 use Sylius\Abstraction\StateMachine\WinzouStateMachineAdapter;
 use Sylius\Bundle\ApiBundle\Exception\ProductReviewAcceptanceFailedException;
+use Sylius\Bundle\ApiBundle\Exception\ProductReviewRejectionFailedException;
 use Sylius\Component\Core\ProductReviewTransitions;
 use Sylius\Component\Review\Model\ReviewInterface;
 
@@ -42,7 +44,7 @@ final class ProductReviewStateMachineTransitionApplicator implements ProductRevi
     {
         try {
             $this->applyTransition($data, ProductReviewTransitions::TRANSITION_ACCEPT);
-        } catch (\Exception) {
+        } catch (StateMachineExecutionException) {
             throw new ProductReviewAcceptanceFailedException();
         }
 
@@ -51,6 +53,11 @@ final class ProductReviewStateMachineTransitionApplicator implements ProductRevi
 
     public function reject(ReviewInterface $data): ReviewInterface
     {
+        try {
+            $this->applyTransition($data, ProductReviewTransitions::TRANSITION_REJECT);
+        } catch (StateMachineExecutionException) {
+            throw new ProductReviewRejectionFailedException();
+        }
         $this->applyTransition($data, ProductReviewTransitions::TRANSITION_REJECT);
 
         return $data;
