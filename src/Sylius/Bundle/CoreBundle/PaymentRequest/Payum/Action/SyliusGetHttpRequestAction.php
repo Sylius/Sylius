@@ -52,7 +52,7 @@ final class SyliusGetHttpRequestAction implements ActionInterface
          *     },
          * } $payload
          */
-        $payload = $paymentRequest->getRequestPayload();
+        $payload = $paymentRequest->getPayload();
         $httpRequest = $payload['http_request'] ?? [];
 
         $request->query = $httpRequest['query'] ?? [];

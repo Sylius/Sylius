@@ -22,13 +22,13 @@ class UpdatePaymentRequest implements PaymentRequestHashAwareInterface, IriToIde
     protected ?string $hash = null;
 
     public function __construct(
-        private mixed $requestPayload = null,
+        private mixed $payload = null,
     ) {
     }
 
-    public function getRequestPayload(): mixed
+    public function getPayload(): mixed
     {
-        return $this->requestPayload;
+        return $this->payload;
     }
 
     public function getHash(): ?string

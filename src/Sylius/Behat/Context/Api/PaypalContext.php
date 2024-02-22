@@ -170,7 +170,7 @@ final class PaypalContext implements Context
             'action' => $authorize
                 ? PaymentRequestInterface::ACTION_AUTHORIZE
                 : PaymentRequestInterface::ACTION_CAPTURE,
-            'requestPayload' => [
+            'payload' => [
                 'target_path' => 'https://myshop.tld/target-path',
                 'after_path' => 'https://myshop.tld/after-path',
             ],
@@ -189,7 +189,7 @@ final class PaypalContext implements Context
         );
 
         $request->setContent([
-            'requestPayload' => [
+            'payload' => [
                 'target_path' => 'https://myshop.tld/target-path',
                 'after_path' => 'https://myshop.tld/after-path',
                 'http_request' => $httpRequest,

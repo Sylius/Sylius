@@ -46,7 +46,7 @@
             <group>sylius:shop:payment_request:show</group>
             <group>sylius:shop:payment_request:index</group>
         </attribute>
-        <attribute name="requestPayload">
+        <attribute name="payload">
             <group>sylius:admin:payment_request:show</group>
             <group>sylius:admin:payment_request:index</group>
             <group>sylius:shop:payment_request:show</group>

@@ -59,9 +59,9 @@ interface PaymentRequestInterface extends TimestampableInterface, ResourceInterf
 
     public function setAction(string $action): void;
 
-    public function getRequestPayload(): mixed;
+    public function getPayload(): mixed;
 
-    public function setRequestPayload(mixed $requestPayload): void;
+    public function setPayload(mixed $payload): void;
 
     public function getResponseData(): array;
 
