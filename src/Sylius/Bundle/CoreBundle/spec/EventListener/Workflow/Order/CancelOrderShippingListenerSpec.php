@@ -53,7 +53,7 @@ final class CancelOrderShippingListenerSpec extends ObjectBehavior
         ;
     }
 
-    function it_cancels_order_shipping(
+    function it_applies_transition_cancel_on_order_shipping(
         StateMachineInterface $compositeStateMachine,
         OrderInterface $order,
     ): void {

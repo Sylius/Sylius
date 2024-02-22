@@ -53,7 +53,7 @@ final class CancelOrderPaymentListenerSpec extends ObjectBehavior
         ;
     }
 
-    function it_cancels_order_payment(
+    function it_applies_transition_cancel_on_order_payment(
         StateMachineInterface $compositeStateMachine,
         OrderInterface $order,
     ): void {

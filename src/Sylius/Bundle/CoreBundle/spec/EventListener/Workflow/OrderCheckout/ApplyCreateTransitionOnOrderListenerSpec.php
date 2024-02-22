@@ -53,7 +53,7 @@ final class ApplyCreateTransitionOnOrderListenerSpec extends ObjectBehavior
         ;
     }
 
-    function it_creates_order(
+    function it_applies_transition_create_on_order(
         StateMachineInterface $compositeStateMachine,
         OrderInterface $order,
     ): void {

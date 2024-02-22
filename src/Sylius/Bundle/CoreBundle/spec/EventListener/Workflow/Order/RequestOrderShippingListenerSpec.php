@@ -54,7 +54,7 @@ final class RequestOrderShippingListenerSpec extends ObjectBehavior
         ;
     }
 
-    function it_requests_order_shipping(
+    function it_applies_transition_request_shipping_on_order_shipping(
         StateMachineInterface $compositeStateMachine,
         OrderInterface $order,
     ): void {

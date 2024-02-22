@@ -56,7 +56,7 @@ final class CancelShipmentListenerSpec extends ObjectBehavior
         ;
     }
 
-    function it_cancels_shipments(
+    function it_applies_transition_cancel_on_shipments(
         StateMachineInterface $compositeStateMachine,
         OrderInterface $order,
         ShipmentInterface $shipment1,

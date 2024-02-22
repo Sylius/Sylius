@@ -56,7 +56,7 @@ final class CreatePaymentListenerSpec extends ObjectBehavior
         ;
     }
 
-    function it_creates_payments(
+    function it_applies_transition_create_on_payments(
         StateMachineInterface $compositeStateMachine,
         OrderInterface $order,
         PaymentInterface $payment1,

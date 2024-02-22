@@ -54,7 +54,7 @@ final class RequestOrderPaymentListenerSpec extends ObjectBehavior
         ;
     }
 
-    function it_requests_order_payment(
+    function it_applies_transition_request_payment_on_order_payment(
         StateMachineInterface $compositeStateMachine,
         OrderInterface $order,
     ): void {
