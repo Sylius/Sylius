@@ -18,7 +18,12 @@
     <services>
         <defaults public="true" />
 
-        <service id="Sylius\Bundle\CoreBundle\PaymentRequest\Payum\Processor\RequestProcessorInterface" class="Sylius\Bundle\CoreBundle\PaymentRequest\Payum\Processor\RequestProcessor">
+        <service id="Sylius\Bundle\CoreBundle\PaymentRequest\Processor\Payum\AfterTokenRequestProcessorInterface" class="Sylius\Bundle\CoreBundle\PaymentRequest\Processor\Payum\AfterTokenRequestProcessor">
+            <argument type="service" id="sylius.custom_factory.payment_request" />
+            <argument type="service" id="Sylius\Bundle\CoreBundle\PaymentRequest\CommandDispatcher\PaymentRequestCommandDispatcherInterface" />
+        </service>
+
+        <service id="Sylius\Bundle\CoreBundle\PaymentRequest\Processor\Payum\RequestProcessorInterface" class="Sylius\Bundle\CoreBundle\PaymentRequest\Processor\Payum\RequestProcessor">
             <argument type="service" id="payum" />
             <argument type="service" id="sylius.payment_request.payum.context" />
         </service>

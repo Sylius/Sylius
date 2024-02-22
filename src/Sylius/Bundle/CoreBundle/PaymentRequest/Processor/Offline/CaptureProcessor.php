@@ -11,13 +11,13 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\CoreBundle\PaymentRequest\Processor;
+namespace Sylius\Bundle\CoreBundle\PaymentRequest\Processor\Offline;
 
 use Sylius\Component\Payment\Model\PaymentInterface;
 use Sylius\Component\Payment\Model\PaymentRequestInterface;
 use Webmozart\Assert\Assert;
 
-final class OfflineCaptureProcessor implements OfflineCaptureProcessorInterface
+final class CaptureProcessor implements CaptureProcessorInterface
 {
     public function process(PaymentRequestInterface $paymentRequest): void
     {

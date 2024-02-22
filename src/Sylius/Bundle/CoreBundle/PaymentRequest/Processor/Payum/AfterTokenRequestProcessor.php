@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\CoreBundle\PaymentRequest\Payum\Processor;
+namespace Sylius\Bundle\CoreBundle\PaymentRequest\Processor\Payum;
 
 use Payum\Core\Security\TokenInterface;
 use Sylius\Bundle\CoreBundle\PaymentRequest\CommandDispatcher\PaymentRequestCommandDispatcherInterface;

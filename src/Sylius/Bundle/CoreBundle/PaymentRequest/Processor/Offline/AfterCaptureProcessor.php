@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\CoreBundle\PaymentRequest\Processor;
+namespace Sylius\Bundle\CoreBundle\PaymentRequest\Processor\Offline;
 
 use SM\Factory\FactoryInterface as StateMachineFactoryInterface;
 use Sylius\Abstraction\StateMachine\StateMachineInterface;
@@ -19,7 +19,7 @@ use Sylius\Component\Payment\Model\PaymentRequestInterface;
 use Sylius\Component\Payment\PaymentTransitions;
 use Webmozart\Assert\Assert;
 
-final class AfterOfflineCaptureProcessor implements AfterOfflineCaptureProcessorInterface
+final class AfterCaptureProcessor implements AfterCaptureProcessorInterface
 {
     public function __construct(
         private StateMachineFactoryInterface|StateMachineInterface $stateMachineFactory,
