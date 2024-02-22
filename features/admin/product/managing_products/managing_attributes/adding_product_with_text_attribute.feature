@@ -11,12 +11,13 @@ Feature: Adding a new product with text attribute
         And the store has a non-translatable text product attribute "Author"
         And I am logged in as an administrator
 
-    @todo @ui @mink:chromedriver @api
+    @ui @mink:chromedriver @api
     Scenario: Adding a text attribute to product
         When I want to create a new configurable product
         And I specify its code as "44_MAGNUM"
         And I name it "44 Magnum" in "English (United States)"
-        And I set its "Gun caliber" attribute to "11 mm" in "English (United States)"
+        And I add the "Gun caliber" attribute
+        And I set the "Gun caliber" attribute value to "11 mm" in "English (United States)"
         And I add it
         Then I should be notified that it has been successfully created
         And the product "44 Magnum" should appear in the store
@@ -33,13 +34,15 @@ Feature: Adding a new product with text attribute
         And the product "44 Magnum" should appear in the store
         And non-translatable attribute "Author" of product "44 Magnum" should be "Colt"
 
-    @todo @ui @mink:chromedriver @api
+    @ui @mink:chromedriver @api
     Scenario: Adding and removing text attributes on product create page
         When I want to create a new configurable product
         And I specify its code as "44_MAGNUM"
         And I name it "44 Magnum" in "English (United States)"
-        And I set its "Gun caliber" attribute to "11 mm" in "English (United States)"
-        And I set its "Overall length" attribute to "30.5 cm" in "English (United States)"
+        And I add the "Gun caliber" attribute
+        And I set the "Gun caliber" attribute value to "11 mm" in "English (United States)"
+        And I add the "Overall length" attribute
+        And I set the "Overall length" attribute value to "30.5 cm" in "English (United States)"
         And I remove its "Gun caliber" attribute
         And I add it
         Then I should be notified that it has been successfully created
