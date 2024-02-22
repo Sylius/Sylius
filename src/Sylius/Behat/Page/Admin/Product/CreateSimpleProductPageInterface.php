@@ -38,8 +38,6 @@ interface CreateSimpleProductPageInterface extends BaseCreatePageInterface
 
     public function updateAttribute(string $attributeName, string $value, string $localeCode): void;
 
-    public function selectAttributeValue(string $attributeName, string $value, string $localeCode): void;
-
     public function addNonTranslatableAttribute(string $attributeName, string $value): void;
 
     public function getAttributeValidationErrors(string $attributeName, string $localeCode): string;

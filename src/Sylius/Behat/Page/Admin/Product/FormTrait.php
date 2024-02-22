@@ -93,10 +93,13 @@ trait FormTrait
         $this->changeTab('attributes');
         $this->changeAttributeTab($attributeName);
 
-        $this
-            ->getElement('attribute_value', ['%attributeName%' => $attributeName, '%localeCode%' => $localeCode])
-            ->setValue($value)
-        ;
+        $attributeValue = $this->getElement('attribute_value', ['%attributeName%' => $attributeName, '%localeCode%' => $localeCode]);
+
+        match ($attributeValue->getTagName()) {
+            'input' => $attributeValue->setValue($value),
+            'select' => $attributeValue->selectOption($value),
+            default => throw new \InvalidArgumentException('Unsupported attribute value type'),
+        };
     }
 
     public function removeAttribute(string $attributeName, string $localeCode): void
@@ -113,10 +116,13 @@ trait FormTrait
         $this->changeTab('attributes');
         $this->changeAttributeTab($attribute);
 
-        return $this
-            ->getElement('attribute_value', ['%attributeName%' => $attribute, '%localeCode%' => $localeCode])
-            ->getValue()
-        ;
+        $attributeValue = $this->getElement('attribute_value', ['%attributeName%' => $attribute, '%localeCode%' => $localeCode]);
+
+        return match ($attributeValue->getTagName()) {
+            'input' => $attributeValue->getValue(),
+            'select' => $attributeValue->getText(),
+            default => throw new \InvalidArgumentException('Unsupported attribute value type'),
+        };
     }
 
     private function selectAttributeToBeAdded(string $attributeName): void

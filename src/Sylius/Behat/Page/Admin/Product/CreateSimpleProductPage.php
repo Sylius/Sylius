@@ -63,11 +63,6 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
         $this->getElement('original_price', ['%channelCode%' => $channel->getCode()])->setValue($originalPrice);
     }
 
-    public function selectAttributeValue(string $attributeName, string $value, string $localeCode): void
-    {
-        $this->getElement('attribute_value_select', ['%attributeName%' => $attributeName, '%localeCode%' => $localeCode])->selectOption($value);
-    }
-
     public function addNonTranslatableAttribute(string $attributeName, string $value): void
     {
         $this->clickTabIfItsNotActive('attributes');

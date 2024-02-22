@@ -603,7 +603,7 @@ final class ManagingProductsContext implements Context
      */
     public function iSelectValueInLanguageForTheAttribute(string $value, string $language, string $attribute): void
     {
-        $this->createSimpleProductPage->selectAttributeValue($attribute, $value, $language);
+        $this->createSimpleProductPage->updateAttribute($attribute, $value, $language);
     }
 
     /**
@@ -670,7 +670,7 @@ final class ManagingProductsContext implements Context
     ): void {
         $this->updateSimpleProductPage->open(['id' => $product->getId()]);
 
-        Assert::same($this->updateSimpleProductPage->getAttributeSelectText($attributeName, $localeCode), $value);
+        Assert::same($this->updateSimpleProductPage->getAttributeValue($attributeName, $localeCode), $value);
     }
 
     /**
