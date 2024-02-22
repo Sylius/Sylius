@@ -42,16 +42,6 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
         $this->getElement('original_price', ['%channelCode%' => $channel->getCode()])->setValue($originalPrice);
     }
 
-    public function addSelectedAttributes(): void
-    {
-        $this->clickTabIfItsNotActive('attributes');
-        $this->getDocument()->pressButton('Add attributes');
-
-        $form = $this->getDocument()->find('css', 'form');
-
-        $this->getDocument()->waitFor(1, fn () => $form->hasClass('loading'));
-    }
-
     public function removeAttribute(string $attributeName, string $localeCode): void
     {
         $this->clickTabIfItsNotActive('attributes');
@@ -80,11 +70,6 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
         $validationError = $this->getElement('attribute_element')->find('css', '.sylius-validation-error');
 
         return $validationError->getText();
-    }
-
-    public function getNumberOfAttributes(): int
-    {
-        return count($this->getDocument()->findAll('css', '.attribute'));
     }
 
     public function hasAttribute(string $attributeName): bool

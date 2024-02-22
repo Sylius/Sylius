@@ -125,6 +125,18 @@ trait FormTrait
         };
     }
 
+    public function addSelectedAttributes(): void
+    {
+        $this->changeTab('attributes');
+        $this->clickButton('Add');
+        $this->waitForFormUpdate();
+    }
+
+    public function getNumberOfAttributes(): int
+    {
+        return count($this->getDocument()->findAll('css', '[data-test-product-attribute-tab]'));
+    }
+
     private function selectAttributeToBeAdded(string $attributeName): void
     {
         $driver = $this->getDriver();

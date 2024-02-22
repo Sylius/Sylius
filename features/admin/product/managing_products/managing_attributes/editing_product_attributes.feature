@@ -11,7 +11,7 @@ Feature: Editing product's attributes
         And this product has a text attribute "Gun caliber" with value "11 mm"
         And I am logged in as an administrator
 
-    @todo @ui @javascript @no-api
+    @ui @javascript @no-api
     Scenario: Seeing message about no new attributes selected
         When I want to modify the "44 Magnum" product
         And I try to add new attributes
