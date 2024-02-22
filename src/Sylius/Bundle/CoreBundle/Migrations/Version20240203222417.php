@@ -25,7 +25,7 @@ final class Version20240203222417 extends AbstractPostgreSQLMigration
 
     public function up(Schema $schema): void
     {
-        $this->addSql('CREATE TABLE sylius_payment_request (hash UUID NOT NULL, method_id INT DEFAULT NULL, payment_id INT DEFAULT NULL, state VARCHAR(255) NOT NULL, type VARCHAR(255) NOT NULL, request_payload TEXT NOT NULL, response_data JSON NOT NULL, created_at TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL, updated_at TIMESTAMP(0) WITHOUT TIME ZONE DEFAULT NULL, PRIMARY KEY(hash))');
+        $this->addSql('CREATE TABLE sylius_payment_request (hash UUID NOT NULL, method_id INT DEFAULT NULL, payment_id INT DEFAULT NULL, state VARCHAR(255) NOT NULL, action VARCHAR(255) NOT NULL, request_payload TEXT NOT NULL, response_data JSON NOT NULL, created_at TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL, updated_at TIMESTAMP(0) WITHOUT TIME ZONE DEFAULT NULL, PRIMARY KEY(hash))');
         $this->addSql('CREATE INDEX IDX_86D904B19883967 ON sylius_payment_request (method_id)');
         $this->addSql('CREATE INDEX IDX_86D904B4C3A3BB ON sylius_payment_request (payment_id)');
         $this->addSql('COMMENT ON COLUMN sylius_payment_request.hash IS \'(DC2Type:uuid)\'');

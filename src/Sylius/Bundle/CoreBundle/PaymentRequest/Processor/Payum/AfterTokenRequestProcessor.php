@@ -39,7 +39,7 @@ final class AfterTokenRequestProcessor implements AfterTokenRequestProcessorInte
         $paymentRequest->setResponseData($details);
 
         $newPaymentRequest = $this->paymentRequestFactory->createFromPaymentRequest($paymentRequest);
-        $newPaymentRequest->setType(PaymentRequestInterface::DATA_TYPE_STATUS);
+        $newPaymentRequest->setAction(PaymentRequestInterface::ACTION_STATUS);
 
         $this->paymentRequestCommandDispatcher->add($newPaymentRequest);
     }
