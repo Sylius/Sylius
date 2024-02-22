@@ -20,7 +20,7 @@
 
         <service id="Sylius\Bundle\CoreBundle\PaymentRequest\CommandProvider\PaymentRequestCommandProviderInterface" class="Sylius\Bundle\CoreBundle\PaymentRequest\CommandProvider\PaymentRequestCommandProvider">
             <argument type="service" id="Sylius\Bundle\CoreBundle\PaymentRequest\Checker\PaymentRequestDuplicationCheckerInterface" />
-            <argument type="tagged_locator" tag="sylius.payment_request.command_provider" index-by="factory" />
+            <argument type="tagged_locator" tag="sylius.payment_request.command_provider" index-by="gateway-factory" />
         </service>
 
     </services>

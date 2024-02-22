@@ -19,20 +19,20 @@
         <defaults public="true" />
 
         <service id="sylius.payment_request.payum.command_provider.paypal_express_checkout" class="Sylius\Bundle\CoreBundle\PaymentRequest\CommandProvider\PaymentRequestTypeCommandProvider">
-            <argument type="tagged_locator" tag="sylius.payment_request.payum.command_provider.paypal_express_checkout" index-by="type" />
-            <tag name="sylius.payment_request.command_provider" factory="paypal_express_checkout" />
+            <argument type="tagged_locator" tag="sylius.payment_request.command_provider.payum.paypal_express_checkout" index-by="type" />
+            <tag name="sylius.payment_request.command_provider" gateway-factory="paypal_express_checkout" />
         </service>
 
         <service id="sylius.payment_request.payum.command_provider.paypal_express_checkout_nvp.capture" class="Sylius\Bundle\CoreBundle\PaymentRequest\Payum\CommandProvider\CaptureCommandProvider">
-            <tag name="sylius.payment_request.payum.command_provider.paypal_express_checkout" type="capture" />
+            <tag name="sylius.payment_request.command_provider.payum.paypal_express_checkout" type="capture" />
         </service>
 
         <service id="sylius.payment_request.command_provider.payum.paypal_express_checkout_nvp.authorize" class="Sylius\Bundle\CoreBundle\PaymentRequest\Payum\CommandProvider\AuthorizeCommandProvider">
-            <tag name="sylius.payment_request.payum.command_provider.paypal_express_checkout" type="authorize" />
+            <tag name="sylius.payment_request.command_provider.payum.paypal_express_checkout" type="authorize" />
         </service>
 
         <service id="sylius.payment_request.command_provider.payum.paypal_express_checkout_nvp.status" class="Sylius\Bundle\CoreBundle\PaymentRequest\Payum\CommandProvider\StatusCommandProvider">
-            <tag name="sylius.payment_request.payum.command_provider.paypal_express_checkout" type="status" />
+            <tag name="sylius.payment_request.command_provider.payum.paypal_express_checkout" type="status" />
         </service>
 
     </services>
