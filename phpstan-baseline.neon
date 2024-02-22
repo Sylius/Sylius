@@ -4256,9 +4256,9 @@ parameters:
 			path: src/Sylius/Bundle/PayumBundle/Controller/PayumController.php
 
 		-
-			message: "#^Method Sylius\\\\Bundle\\\\CoreBundle\\\\PaymentRequest\\\\Payum\\\\Processor\\\\AfterTokenRequestProcessor\\:\\:__construct\\(\\) has parameter \\$paymentRequestFactory with generic interface Sylius\\\\Component\\\\Payment\\\\Factory\\\\PaymentRequestFactoryInterface but does not specify its types\\: T$#"
+			message: "#^Method Sylius\\\\Bundle\\\\CoreBundle\\\\PaymentRequest\\\\Processor\\\\Payum\\\\AfterTokenRequestProcessor\\:\\:__construct\\(\\) has parameter \\$paymentRequestFactory with generic interface Sylius\\\\Component\\\\Payment\\\\Factory\\\\PaymentRequestFactoryInterface but does not specify its types\\: T$#"
 			count: 1
-			path: src/Sylius/Bundle/CoreBundle/PaymentRequest/Payum/Processor/AfterTokenRequestProcessor.php
+			path: src/Sylius/Bundle/CoreBundle/PaymentRequest/Processor/Payum/AfterTokenRequestProcessor.php
 
 		-
 			message: "#^Method Sylius\\\\Bundle\\\\CoreBundle\\\\PaymentRequest\\\\Payum\\\\Provider\\\\PaymentRequestProvider\\:\\:__construct\\(\\) has parameter \\$paymentRequestRepository with generic interface Sylius\\\\Component\\\\Payment\\\\Repository\\\\PaymentRequestRepositoryInterface but does not specify its types\\: T$#"
