@@ -35,7 +35,10 @@ final class CapturePaymentRequestHandler implements MessageHandlerInterface
 
     public function __invoke(CapturePaymentRequest $capturePaymentRequest): void
     {
-        $paymentRequest = $this->paymentRequestRepository->findOneByHash($capturePaymentRequest->getHash());
+        $hash = $capturePaymentRequest->getHash();
+        Assert::notNull($hash, 'The payment request hash cannot be null.');
+
+        $paymentRequest = $this->paymentRequestRepository->findOneByHash($hash);
         Assert::notNull($paymentRequest);
 
         /** @var PaymentMethodInterface|null $paymentMethod */

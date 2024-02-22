@@ -35,7 +35,10 @@ final class TokenPaymentRequestHandler implements MessageHandlerInterface
 
     public function __invoke(PaymentRequestHashAwareInterface $command): void
     {
-        $paymentRequest = $this->paymentRequestProvider->provideFromHash($command->getHash());
+        $hash = $command->getHash();
+        Assert::notNull($hash, 'The payment request hash cannot be null.');
+
+        $paymentRequest = $this->paymentRequestProvider->provideFromHash($hash);
         Assert::notNull($paymentRequest);
 
         $token = $this->payumTokenFactory->createNew($paymentRequest);

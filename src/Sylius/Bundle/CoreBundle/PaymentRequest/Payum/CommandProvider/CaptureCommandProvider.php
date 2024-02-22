@@ -26,6 +26,6 @@ final class CaptureCommandProvider implements PaymentRequestCommandProviderInter
 
     public function provide(PaymentRequestInterface $paymentRequest): object
     {
-        return new CapturePaymentRequest($paymentRequest->getHash());
+        return new CapturePaymentRequest($paymentRequest->getHash()?->toBinary());
     }
 }

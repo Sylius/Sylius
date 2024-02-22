@@ -16,6 +16,7 @@ namespace Sylius\Bundle\PaymentBundle\Doctrine\ORM;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Component\Payment\Model\PaymentRequestInterface;
 use Sylius\Component\Payment\Repository\PaymentRequestRepositoryInterface;
+use Symfony\Bridge\Doctrine\Types\UuidType;
 
 /**
  * @template T of PaymentRequestInterface
@@ -33,7 +34,7 @@ class PaymentRequestRepository extends EntityRepository implements PaymentReques
             ->andWhere('o.type = :type')
             ->andWhere('o.payment = :payment')
             ->andWhere('o.method = :method')
-            ->setParameter('paymentRequest', $paymentRequest)
+            ->setParameter('paymentRequest', $paymentRequest->getHash(), UuidType::NAME)
             ->setParameter('type', $paymentRequest->getType())
             ->setParameter('method', $paymentRequest->getMethod())
             ->setParameter('payment', $paymentRequest->getPayment())
