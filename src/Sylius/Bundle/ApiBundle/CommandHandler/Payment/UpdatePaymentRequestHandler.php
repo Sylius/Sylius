@@ -32,10 +32,10 @@ final class UpdatePaymentRequestHandler implements MessageHandlerInterface
     public function __invoke(UpdatePaymentRequest $updatePaymentRequest): PaymentRequestInterface
     {
         $hash = $updatePaymentRequest->getHash();
-        Assert::notNull($hash);
+        Assert::notNull($hash, 'Payment request hash cannot be null.');
 
         $paymentRequest = $this->paymentRequestRepository->findOneByHash($hash);
-        Assert::notNull($paymentRequest);
+        Assert::notNull($paymentRequest, sprintf('Payment request (hash "%s") not found.', $hash));
 
         $paymentRequest->setRequestPayload($updatePaymentRequest->getRequestPayload());
 

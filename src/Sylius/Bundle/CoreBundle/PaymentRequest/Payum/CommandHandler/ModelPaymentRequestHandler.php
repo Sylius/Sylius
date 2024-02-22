@@ -33,22 +33,22 @@ final class ModelPaymentRequestHandler implements MessageHandlerInterface
     public function __invoke(PaymentRequestHashAwareInterface $command): void
     {
         $hash = $command->getHash();
-        Assert::notNull($hash, 'The payment request hash cannot be null.');
+        Assert::notNull($hash, 'Payment request hash cannot be null.');
 
         $paymentRequest = $this->paymentRequestProvider->provideFromHash($hash);
-        Assert::notNull($paymentRequest);
+        Assert::notNull($paymentRequest, sprintf('Payment request (hash "%s") not found.', $hash));
 
         $payment = $paymentRequest->getPayment();
-        Assert::notNull($payment);
+        Assert::notNull($payment, 'Payment cannot be null.');
 
         $request = $this->factory->createNewWithModel($payment);
 
         /** @var PaymentMethodInterface|null $paymentMethod */
         $paymentMethod = $paymentRequest->getMethod();
-        Assert::notNull($paymentMethod);
+        Assert::notNull($paymentMethod, 'Payment method cannot be null.');
 
         $gatewayConfig = $paymentMethod->getGatewayConfig();
-        Assert::notNull($gatewayConfig);
+        Assert::notNull($gatewayConfig, 'Gateway config cannot be null.');
 
         $gatewayName = $gatewayConfig->getGatewayName();
 
