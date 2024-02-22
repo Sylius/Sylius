@@ -36,17 +36,17 @@ final class CapturePaymentRequestHandler implements MessageHandlerInterface
     public function __invoke(CapturePaymentRequest $capturePaymentRequest): void
     {
         $hash = $capturePaymentRequest->getHash();
-        Assert::notNull($hash, 'The payment request hash cannot be null.');
+        Assert::notNull($hash, 'Payment request hash cannot be null.');
 
         $paymentRequest = $this->paymentRequestRepository->findOneByHash($hash);
-        Assert::notNull($paymentRequest);
+        Assert::notNull($paymentRequest, sprintf('Payment request (hash "%s") not found.', $hash));
 
         /** @var PaymentMethodInterface|null $paymentMethod */
         $paymentMethod = $paymentRequest->getMethod();
-        Assert::notNull($paymentMethod);
+        Assert::notNull($paymentMethod, 'Payment cannot be null.');
 
         $gatewayConfig = $paymentMethod->getGatewayConfig();
-        Assert::notNull($gatewayConfig);
+        Assert::notNull($gatewayConfig, 'Payment method cannot be null.');
         $factoryName = $gatewayConfig->getConfig()['factory'] ?? $gatewayConfig->getFactoryName();
         Assert::eq($factoryName, self::FACTORY_NAME, 'Expected a factory name equal to %2$s. Got: %s');
 
