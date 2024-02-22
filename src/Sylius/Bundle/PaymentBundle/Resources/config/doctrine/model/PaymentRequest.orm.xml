@@ -17,7 +17,7 @@
     <mapped-superclass name="Sylius\Component\Payment\Model\PaymentRequest" table="sylius_payment_request">
         <id name="hash" column="hash" type="uuid">
             <generator strategy="CUSTOM" />
-            <custom-id-generator class="Ramsey\Uuid\Doctrine\UuidGenerator"/>
+            <custom-id-generator class="doctrine.uuid_generator"/>
         </id>
 
         <many-to-one field="method" target-entity="Sylius\Component\Payment\Model\PaymentMethodInterface">
