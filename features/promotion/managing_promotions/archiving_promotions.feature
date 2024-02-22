@@ -1,7 +1,7 @@
 @managing_promotions
 Feature: Archiving promotions
     In order to hide no longer available promotions from the list and customers' use
-    As a Administrator
+    As an Administrator
     I want to archive promotions
 
     Background:
@@ -18,7 +18,7 @@ Feature: Archiving promotions
         And I should see the promotion "New Year sale" in the list
 
     @domain
-    Scenario: Archiving a promotion does not remove it form the database
+    Scenario: Archiving a promotion does not remove it from the database
         When I archive the "Christmas sale" promotion
         Then the promotion "Christmas sale" should still exist in the registry
 

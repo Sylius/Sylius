@@ -602,7 +602,7 @@ final class PromotionsTest extends JsonApiTestCase
     }
 
     /** @test */
-    public function it_restore_a_promotion(): void
+    public function it_restores_a_promotion(): void
     {
         $fixtures = $this->loadFixturesFromFiles([
             'authentication/api_administrator.yaml',

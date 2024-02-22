@@ -15,7 +15,6 @@ default:
                 - sylius.behat.context.transform.product
                 - sylius.behat.context.transform.product_option
                 - sylius.behat.context.transform.product_variant
-                - sylius.behat.context.transform.promotion
                 - sylius.behat.context.transform.shipping_category
                 - sylius.behat.context.transform.tax_category
                 - sylius.behat.context.transform.zone
