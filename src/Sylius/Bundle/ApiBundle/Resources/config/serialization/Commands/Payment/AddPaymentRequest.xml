@@ -22,7 +22,7 @@
         <attribute name="paymentMethodCode">
             <group>sylius:shop:payment_request:create</group>
         </attribute>
-        <attribute name="type">
+        <attribute name="action">
             <group>sylius:shop:payment_request:create</group>
         </attribute>
         <attribute name="requestPayload">

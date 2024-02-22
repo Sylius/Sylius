@@ -29,17 +29,17 @@ interface PaymentRequestInterface extends TimestampableInterface, ResourceInterf
 
     public const STATE_COMPLETED = 'completed';
 
-    public const DATA_TYPE_CAPTURE = 'capture';
+    public const ACTION_CAPTURE = 'capture';
 
-    public const DATA_TYPE_AUTHORIZE = 'authorize';
+    public const ACTION_AUTHORIZE = 'authorize';
 
-    public const DATA_TYPE_REFUND = 'refund';
+    public const ACTION_REFUND = 'refund';
 
-    public const DATA_TYPE_STATUS = 'status';
+    public const ACTION_STATUS = 'status';
 
-    public const DATA_TYPE_SYNC = 'sync';
+    public const ACTION_SYNC = 'sync';
 
-    public const DATA_TYPE_PAYOUT = 'payout';
+    public const ACTION_PAYOUT = 'payout';
 
     public function getHash(): ?Uuid;
 
@@ -55,9 +55,9 @@ interface PaymentRequestInterface extends TimestampableInterface, ResourceInterf
 
     public function setState(string $state): void;
 
-    public function getType(): string;
+    public function getAction(): string;
 
-    public function setType(string $type): void;
+    public function setAction(string $action): void;
 
     public function getRequestPayload(): mixed;
 

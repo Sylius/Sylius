@@ -21,7 +21,7 @@ final class AuthorizeCommandProvider implements PaymentRequestCommandProviderInt
 {
     public function supports(PaymentRequestInterface $paymentRequest): bool
     {
-        return $paymentRequest->getType() === PaymentRequestInterface::DATA_TYPE_AUTHORIZE;
+        return $paymentRequest->getAction() === PaymentRequestInterface::ACTION_AUTHORIZE;
     }
 
     public function provide(PaymentRequestInterface $paymentRequest): object
