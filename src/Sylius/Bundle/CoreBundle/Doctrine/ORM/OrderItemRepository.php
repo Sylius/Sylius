@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Doctrine\ORM;
 
+use Doctrine\DBAL\Types\Types;
 use Sylius\Bundle\OrderBundle\Doctrine\ORM\OrderItemRepository as BaseOrderItemRepository;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
@@ -39,5 +40,21 @@ class OrderItemRepository extends BaseOrderItemRepository implements OrderItemRe
             ->getQuery()
             ->getOneOrNullResult()
         ;
+    }
+
+    public function findOneByIdAndOrderTokenValue(int $id, string $tokenValue): ?OrderItemInterface
+    {
+        $queryBuilder = $this->createQueryBuilder('o')
+            ->innerJoin('o.order', 'ord')
+        ;
+
+        $queryBuilder
+            ->andWhere($queryBuilder->expr()->eq('o.id', ':id'))
+            ->andWhere($queryBuilder->expr()->eq('ord.tokenValue', ':tokenValue'))
+            ->setParameter('id', $id, Types::BIGINT)
+            ->setParameter('tokenValue', $tokenValue, Types::STRING)
+        ;
+
+        return $queryBuilder->getQuery()->getOneOrNullResult();
     }
 }

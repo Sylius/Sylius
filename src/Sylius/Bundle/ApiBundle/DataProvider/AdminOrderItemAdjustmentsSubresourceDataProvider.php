@@ -15,26 +15,30 @@ namespace Sylius\Bundle\ApiBundle\DataProvider;
 
 use ApiPlatform\Core\DataProvider\RestrictedDataProviderInterface;
 use ApiPlatform\Core\DataProvider\SubresourceDataProviderInterface;
+use Sylius\Bundle\ApiBundle\SectionResolver\AdminApiSection;
+use Sylius\Bundle\CoreBundle\SectionResolver\SectionProviderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
-use Sylius\Component\Core\Repository\OrderItemRepositoryInterface;
 use Sylius\Component\Order\Model\AdjustmentInterface;
+use Sylius\Component\Order\Repository\OrderItemRepositoryInterface;
+use Webmozart\Assert\Assert;
 
 /** @experimental */
-final class OrderItemAdjustmentsSubresourceDataProvider implements RestrictedDataProviderInterface, SubresourceDataProviderInterface
+final class AdminOrderItemAdjustmentsSubresourceDataProvider implements RestrictedDataProviderInterface, SubresourceDataProviderInterface
 {
     /** @param OrderItemRepositoryInterface<OrderItemInterface> $orderItemRepository */
-    public function __construct(private readonly OrderItemRepositoryInterface $orderItemRepository)
-    {
+    public function __construct(
+        private readonly OrderItemRepositoryInterface $orderItemRepository,
+        private readonly SectionProviderInterface $sectionProvider,
+    ) {
     }
 
     /** @param array<array-key, mixed> $context */
     public function supports(string $resourceClass, string $operationName = null, array $context = []): bool
     {
-        $subresourceIdentifiers = $context['subresource_identifiers'] ?? null;
-
         return
             is_a($resourceClass, AdjustmentInterface::class, true) &&
-            isset($subresourceIdentifiers['tokenValue'], $subresourceIdentifiers['items'])
+            $this->sectionProvider->getSection() instanceof AdminApiSection &&
+            is_a(array_key_first($context['subresource_resources']), OrderItemInterface::class, true)
         ;
     }
 
@@ -46,12 +50,7 @@ final class OrderItemAdjustmentsSubresourceDataProvider implements RestrictedDat
      */
     public function getSubresource(string $resourceClass, array $identifiers, array $context, string $operationName = null): iterable
     {
-        $subresourceIdentifiers = $context['subresource_identifiers'];
-
-        $orderItem = $this->orderItemRepository->findOneByIdAndOrderTokenValue(
-            (int) $subresourceIdentifiers['items'],
-            $subresourceIdentifiers['tokenValue']
-        );
+        $orderItem = $this->orderItemRepository->find(reset($context['subresource_identifiers']));
         if (null === $orderItem) {
             return [];
         }
