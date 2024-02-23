@@ -34,7 +34,9 @@ final class CancelPaymentListener
         $payments = $order->getPayments();
 
         foreach ($payments as $payment) {
-            $this->compositeOrderStateMachine->apply($payment, PaymentTransitions::GRAPH, PaymentTransitions::TRANSITION_CANCEL);
+            if ($this->compositeOrderStateMachine->can($payment, PaymentTransitions::GRAPH, PaymentTransitions::TRANSITION_CANCEL)) {
+                $this->compositeOrderStateMachine->apply($payment, PaymentTransitions::GRAPH, PaymentTransitions::TRANSITION_CANCEL);
+            }
         }
     }
 }

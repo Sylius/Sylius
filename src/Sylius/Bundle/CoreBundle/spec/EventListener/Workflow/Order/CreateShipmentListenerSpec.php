@@ -13,14 +13,16 @@ declare(strict_types=1);
 
 namespace spec\Sylius\Bundle\CoreBundle\EventListener\Workflow\Order;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
 use Sylius\Abstraction\StateMachine\StateMachineInterface;
 use Sylius\Component\Core\Model\OrderInterface;
-use Sylius\Component\Core\OrderPaymentTransitions;
+use Sylius\Component\Core\Model\ShipmentInterface;
+use Sylius\Component\Shipping\ShipmentTransitions;
 use Symfony\Component\Workflow\Event\CompletedEvent;
 use Symfony\Component\Workflow\Marking;
 
-final class RequestOrderPaymentListenerSpec extends ObjectBehavior
+final class CreateShipmentListenerSpec extends ObjectBehavior
 {
     function let(StateMachineInterface $compositeStateMachine): void
     {
@@ -35,41 +37,54 @@ final class RequestOrderPaymentListenerSpec extends ObjectBehavior
         ;
     }
 
-    function it_does_nothing_if_order_cannot_have_payment_requested(
+    function it_does_nothing_if_shipment_cannot_be_created(
         StateMachineInterface $compositeStateMachine,
         OrderInterface $order,
+        ShipmentInterface $shipment,
     ): void {
         $event = new CompletedEvent($order->getWrappedObject(), new Marking());
-
+        $order->getShipments()->willReturn(new ArrayCollection([$shipment->getWrappedObject()]));
         $compositeStateMachine
-            ->can($order, OrderPaymentTransitions::GRAPH, OrderPaymentTransitions::TRANSITION_REQUEST_PAYMENT)
-            ->willReturn(false)
-        ;
+            ->can($shipment, ShipmentTransitions::GRAPH, ShipmentTransitions::TRANSITION_CREATE)
+            ->willReturn(false);
 
         $this($event);
 
         $compositeStateMachine
-            ->apply($order, OrderPaymentTransitions::GRAPH, OrderPaymentTransitions::TRANSITION_REQUEST_PAYMENT)
+            ->apply($shipment, ShipmentTransitions::GRAPH, ShipmentTransitions::TRANSITION_CREATE)
             ->shouldNotHaveBeenCalled()
         ;
     }
 
-    function it_applies_transition_request_payment_on_order_payment(
+    function it_applies_transition_create_on_shipments(
         StateMachineInterface $compositeStateMachine,
         OrderInterface $order,
+        ShipmentInterface $shipment1,
+        ShipmentInterface $shipment2,
     ): void {
         $event = new CompletedEvent($order->getWrappedObject(), new Marking());
+        $order->getShipments()->willReturn(new ArrayCollection([$shipment1->getWrappedObject(), $shipment2->getWrappedObject()]));
 
         $compositeStateMachine
-            ->can($order, OrderPaymentTransitions::GRAPH, OrderPaymentTransitions::TRANSITION_REQUEST_PAYMENT)
+            ->can($shipment1, ShipmentTransitions::GRAPH, ShipmentTransitions::TRANSITION_CREATE)
+            ->willReturn(true)
+        ;
+
+        $compositeStateMachine
+            ->can($shipment2, ShipmentTransitions::GRAPH, ShipmentTransitions::TRANSITION_CREATE)
             ->willReturn(true)
         ;
 
         $this($event);
 
         $compositeStateMachine
-            ->apply($order, OrderPaymentTransitions::GRAPH, OrderPaymentTransitions::TRANSITION_REQUEST_PAYMENT)
-            ->shouldBeCalled()
+            ->apply($shipment1, ShipmentTransitions::GRAPH, ShipmentTransitions::TRANSITION_CREATE)
+            ->shouldHaveBeenCalledOnce()
+        ;
+
+        $compositeStateMachine
+            ->apply($shipment2, ShipmentTransitions::GRAPH, ShipmentTransitions::TRANSITION_CREATE)
+            ->shouldHaveBeenCalledOnce()
         ;
     }
 }

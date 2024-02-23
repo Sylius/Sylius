@@ -35,11 +35,35 @@ final class RequestOrderShippingListenerSpec extends ObjectBehavior
         ;
     }
 
-    function it_requests_order_shipping(
+    function it_does_nothing_if_order_cannot_have_shipping_requested(
         StateMachineInterface $compositeStateMachine,
         OrderInterface $order,
     ): void {
         $event = new CompletedEvent($order->getWrappedObject(), new Marking());
+
+        $compositeStateMachine
+            ->can($order, OrderShippingTransitions::GRAPH, OrderShippingTransitions::TRANSITION_REQUEST_SHIPPING)
+            ->willReturn(false)
+        ;
+
+        $this($event);
+
+        $compositeStateMachine
+            ->apply($order, OrderShippingTransitions::GRAPH, OrderShippingTransitions::TRANSITION_REQUEST_SHIPPING)
+            ->shouldNotHaveBeenCalled()
+        ;
+    }
+
+    function it_applies_transition_request_shipping_on_order_shipping(
+        StateMachineInterface $compositeStateMachine,
+        OrderInterface $order,
+    ): void {
+        $event = new CompletedEvent($order->getWrappedObject(), new Marking());
+
+        $compositeStateMachine
+            ->can($order, OrderShippingTransitions::GRAPH, OrderShippingTransitions::TRANSITION_REQUEST_SHIPPING)
+            ->willReturn(true)
+        ;
 
         $this($event);
 

@@ -34,7 +34,9 @@ final class CreateShipmentListener
         $shipments = $order->getShipments();
 
         foreach ($shipments as $shipment) {
-            $this->compositeStateMachine->apply($shipment, ShipmentTransitions::GRAPH, ShipmentTransitions::TRANSITION_CREATE);
+            if ($this->compositeStateMachine->can($shipment, ShipmentTransitions::GRAPH, ShipmentTransitions::TRANSITION_CREATE)) {
+                $this->compositeStateMachine->apply($shipment, ShipmentTransitions::GRAPH, ShipmentTransitions::TRANSITION_CREATE);
+            }
         }
     }
 }

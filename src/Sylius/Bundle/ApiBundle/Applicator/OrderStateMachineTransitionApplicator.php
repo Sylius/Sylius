@@ -16,6 +16,7 @@ namespace Sylius\Bundle\ApiBundle\Applicator;
 use SM\Factory\FactoryInterface as StateMachineFactoryInterface;
 use Sylius\Abstraction\StateMachine\StateMachineInterface;
 use Sylius\Abstraction\StateMachine\WinzouStateMachineAdapter;
+use Sylius\Bundle\ApiBundle\Exception\StateMachineTransitionFailedException;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Order\OrderTransitions;
 
@@ -46,7 +47,13 @@ final class OrderStateMachineTransitionApplicator implements OrderStateMachineTr
 
     private function applyTransition(OrderInterface $order, string $transition): void
     {
-        $this->getStateMachine()->apply($order, OrderTransitions::GRAPH, $transition);
+        $stateMachine = $this->getStateMachine();
+
+        if (false === $stateMachine->can($order, OrderTransitions::GRAPH, $transition)) {
+            throw new StateMachineTransitionFailedException('Cannot cancel the order.');
+        }
+
+        $stateMachine->apply($order, OrderTransitions::GRAPH, $transition);
     }
 
     private function getStateMachine(): StateMachineInterface
