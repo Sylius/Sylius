@@ -144,7 +144,7 @@ final class ShipmentsTest extends JsonApiTestCase
         $this->client->request(
             method: 'GET',
             uri: '/api/v2/admin/shipments/' . $shipment->getId() . '/adjustments',
-            server: $this->buildHeadersWithJsonLd('api@example.com')
+            server: $this->buildHeadersWithJsonLd('api@example.com'),
         );
 
         $response = $this->client->getResponse();
