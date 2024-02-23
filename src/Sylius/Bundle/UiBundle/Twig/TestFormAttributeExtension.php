@@ -53,6 +53,9 @@ final class TestFormAttributeExtension extends AbstractExtension
         ];
     }
 
+    /**
+     * @return array{attr: non-empty-array<non-falsy-string, string>}|array{}
+     */
     public function getTestFormAttribute(string $name, ?string $value = null): array
     {
         if (str_starts_with($this->environment, 'test')) {

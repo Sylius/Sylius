@@ -15,13 +15,13 @@ namespace Sylius\Bundle\AdminBundle\TwigComponent\Product;
 
 use Sylius\Bundle\AdminBundle\TwigComponent\HookableComponentTrait;
 use Sylius\Component\Core\Model\Product;
-use Sylius\Component\Locale\Context\LocaleContextInterface;
 use Sylius\Component\Product\Generator\SlugGeneratorInterface;
 use Sylius\Component\Product\Model\ProductAttributeInterface;
 use Sylius\Component\Product\Model\ProductAttributeValueInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
+use Symfony\Component\Form\FormView;
 use Symfony\UX\LiveComponent\Attribute\AsLiveComponent;
 use Symfony\UX\LiveComponent\Attribute\LiveAction;
 use Symfony\UX\LiveComponent\Attribute\LiveArg;
@@ -57,7 +57,6 @@ final class FormComponent
     public function __construct(
         private readonly FormFactoryInterface $formFactory,
         private readonly string $formClass,
-        private readonly LocaleContextInterface $localeContext,
         private readonly SlugGeneratorInterface $slugGenerator,
         private readonly RepositoryInterface $productAttributeRepository,
     ) {
@@ -68,6 +67,9 @@ final class FormComponent
         return $this->formFactory->create($this->formClass, $this->resource);
     }
 
+    /**
+     * @return array<string, array<string, FormView>>
+     */
     #[ExposeInTemplate]
     public function getMappedProductAttributes(): array
     {
@@ -86,7 +88,7 @@ final class FormComponent
     }
 
     #[LiveAction]
-    public function applyToAll(#[LiveArg] $attributeCode, #[LiveArg] $localeCode): void
+    public function applyToAll(#[LiveArg] string $attributeCode, #[LiveArg] string $localeCode): void
     {
         $matchingAttributes = array_filter(
             $this->formValues['attributes'],

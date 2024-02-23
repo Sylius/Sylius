@@ -29,6 +29,9 @@ final class ProductAttributeAutocompleteComponent
     #[LiveProp(writable: true, hydrateWith: 'hydrateSelectedAttributeCodes', dehydrateWith: 'dehydrateSelectedAttributeCodes', updateFromParent: true)]
     public array $selectedAttributeCodes = [];
 
+    /**
+     * @var array<string>
+     */
     #[LiveProp(updateFromParent: true)]
     public array $excludedAttributeCodes = [];
 

@@ -57,7 +57,6 @@
         <service id="Sylius\Bundle\AdminBundle\TwigComponent\Product\FormComponent">
             <argument type="service" id="form.factory" />
             <argument>Sylius\Bundle\ProductBundle\Form\Type\ProductType</argument>
-            <argument type="service" id="sylius.context.locale" />
             <argument type="service" id="sylius.generator.slug" />
             <argument type="service" id="sylius.repository.product_attribute" />
             <call method="setLiveResponder">
