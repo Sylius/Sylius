@@ -124,8 +124,7 @@ final class ProductReviewStateMachineTransitionApplicatorSpec extends ObjectBeha
     function it_throws_exception_if_cannot_reject_product_review_with_new_state_machine_abstraction(
         StateMachineInterface $stateMachine,
         ReviewInterface $review,
-    ): void
-    {
+    ): void {
         $this->beConstructedWith($stateMachine);
 
         $stateMachine->can($review, ProductReviewTransitions::GRAPH, ProductReviewTransitions::TRANSITION_REJECT)->willReturn(false);

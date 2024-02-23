@@ -15,7 +15,7 @@ namespace Sylius\Component\Locale\Context;
 
 final class LocaleNotFoundException extends \RuntimeException
 {
-    public function __construct(?string $message = null, \Exception $previousException = null)
+    public function __construct(?string $message = null, ?\Exception $previousException = null)
     {
         parent::__construct($message ?: 'Locale could not be found!', 0, $previousException);
     }

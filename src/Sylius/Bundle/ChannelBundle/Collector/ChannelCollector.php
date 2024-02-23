@@ -48,7 +48,7 @@ final class ChannelCollector extends DataCollector
         return $this->data['channel_change_support'];
     }
 
-    public function collect(Request $request, Response $response, \Throwable $exception = null): void
+    public function collect(Request $request, Response $response, ?\Throwable $exception = null): void
     {
         try {
             $channel = $this->pluckChannel($this->channelContext->getChannel());

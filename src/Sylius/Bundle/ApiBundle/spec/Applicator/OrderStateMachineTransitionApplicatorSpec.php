@@ -60,7 +60,7 @@ final class OrderStateMachineTransitionApplicatorSpec extends ObjectBehavior
         OrderInterface $order,
     ): void {
         $this->beConstructedWith($stateMachine);
-        $stateMachine->can($order, OrderTransitions::GRAPH,OrderTransitions::TRANSITION_CANCEL)->willReturn(true);
+        $stateMachine->can($order, OrderTransitions::GRAPH, OrderTransitions::TRANSITION_CANCEL)->willReturn(true);
         $stateMachine->apply($order, OrderTransitions::GRAPH, OrderTransitions::TRANSITION_CANCEL)->shouldBeCalled();
 
         $this->cancel($order);
@@ -71,7 +71,7 @@ final class OrderStateMachineTransitionApplicatorSpec extends ObjectBehavior
         OrderInterface $order,
     ): void {
         $this->beConstructedWith($stateMachine);
-        $stateMachine->can($order, OrderTransitions::GRAPH,OrderTransitions::TRANSITION_CANCEL)->willReturn(false);
+        $stateMachine->can($order, OrderTransitions::GRAPH, OrderTransitions::TRANSITION_CANCEL)->willReturn(false);
         $stateMachine->apply($order, OrderTransitions::GRAPH, OrderTransitions::TRANSITION_CANCEL)->shouldNotBeCalled();
 
         $this

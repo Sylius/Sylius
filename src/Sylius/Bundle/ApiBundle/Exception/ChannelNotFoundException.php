@@ -20,7 +20,7 @@ final class ChannelNotFoundException extends NotFoundHttpException
 {
     public function __construct(
         string $message = 'Channel not found.',
-        \Throwable $previous = null,
+        ?\Throwable $previous = null,
         int $code = 0,
     ) {
         parent::__construct($message, $previous, $code);
