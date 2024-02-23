@@ -96,8 +96,8 @@ final class OrderContext implements Context
      */
     public function thereIsCustomerThatPlacedOrder(
         CustomerInterface $customer,
-        string $orderNumber = null,
-        ChannelInterface $channel = null,
+        ?string $orderNumber = null,
+        ?ChannelInterface $channel = null,
     ): void {
         $order = $this->createOrder($customer, $orderNumber, $channel);
 
@@ -497,7 +497,7 @@ final class OrderContext implements Context
     public function thereIsAOrderWithProduct(
         string $orderNumber,
         ProductInterface $product,
-        string $state = null,
+        ?string $state = null,
         ?ChannelInterface $channel = null,
     ): void {
         $order = $this->createOrder($this->createOrProvideCustomer('amba@fatima.org'), $orderNumber, $channel);
@@ -818,16 +818,6 @@ final class OrderContext implements Context
         $this->stateMachine->apply($order, OrderCheckoutTransitions::GRAPH, $transition);
     }
 
-    private function applyTransitionOnOrder(OrderInterface $order, string $transition): void
-    {
-        $this->stateMachine->apply($order, OrderTransitions::GRAPH, $transition);
-    }
-
-    /**
-     * @param int $quantity
-     *
-     * @return OrderInterface
-     */
     private function addProductVariantToOrder(
         ProductVariantInterface $productVariant,
         int $quantity = 1,
@@ -839,7 +829,7 @@ final class OrderContext implements Context
             $order,
             $channel ?? $this->sharedStorage->get('channel'),
             $productVariant,
-            (int) $quantity,
+            $quantity,
         );
 
         return $order;
@@ -866,11 +856,10 @@ final class OrderContext implements Context
 
     private function createOrder(
         CustomerInterface $customer,
-        string $number = null,
-        ChannelInterface $channel = null,
-        string $localeCode = null,
+        ?string $number = null,
+        ?ChannelInterface $channel = null,
     ): OrderInterface {
-        $order = $this->createCart($customer, $channel, $localeCode);
+        $order = $this->createCart($customer, $channel);
         $order->setTokenValue($this->generateToken());
 
         if (null !== $number) {
@@ -882,17 +871,14 @@ final class OrderContext implements Context
         return $order;
     }
 
-    private function createCart(
-        CustomerInterface $customer,
-        ChannelInterface $channel = null,
-        ?string $localeCode = null,
-    ): OrderInterface {
+    private function createCart(CustomerInterface $customer, ?ChannelInterface $channel = null): OrderInterface
+    {
         /** @var OrderInterface $order */
         $order = $this->orderFactory->createNew();
 
         $order->setCustomer($customer);
         $order->setChannel($channel ?? $this->sharedStorage->get('channel'));
-        $order->setLocaleCode($localeCode ?? $this->sharedStorage->get('locale')->getCode());
+        $order->setLocaleCode($this->sharedStorage->get('locale')->getCode());
         $order->setCurrencyCode($order->getChannel()->getBaseCurrency()->getCode());
 
         return $order;
@@ -1068,7 +1054,6 @@ final class OrderContext implements Context
         $this->objectManager->flush();
     }
 
-    /** @throws SMException */
     private function createOrdersWithProduct(
         int $numberOfCustomers,
         int $numberOfOrders,
@@ -1182,19 +1167,17 @@ final class OrderContext implements Context
         $variant = $this->variantResolver->getVariant($product);
 
         if ($variant === null) {
-            throw new \RuntimeException(sprintf('Product %s has no variant', $product->getName()));
+            throw new \RuntimeException(sprintf('Product "%s" has no variant', $product->getCode()));
         }
 
         return $variant;
     }
 
-    /** @throws SMException */
     private function shipOrder(OrderInterface $order): void
     {
         $this->stateMachine->apply($order, OrderShippingTransitions::GRAPH, OrderShippingTransitions::TRANSITION_SHIP);
     }
 
-    /** @throws SMException */
     private function payOrder(OrderInterface $order): void
     {
         $this->stateMachine->apply($order, OrderPaymentTransitions::GRAPH, OrderPaymentTransitions::TRANSITION_PAY);
