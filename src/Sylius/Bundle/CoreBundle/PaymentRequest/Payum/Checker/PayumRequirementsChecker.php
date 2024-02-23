@@ -11,30 +11,22 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\CoreBundle\PaymentRequest\Payum\Provider;
+namespace Sylius\Bundle\CoreBundle\PaymentRequest\Payum\Checker;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\Proxy;
 use Sylius\Component\Core\Model\PaymentInterface;
 use Sylius\Component\Payment\Model\PaymentRequestInterface;
-use Sylius\Component\Payment\Repository\PaymentRequestRepositoryInterface;
 
-final class PaymentRequestProvider implements PaymentRequestProviderInterface
+final class PayumRequirementsChecker implements PayumRequirementsCheckerInterface
 {
     public function __construct(
-        private PaymentRequestRepositoryInterface $paymentRequestRepository,
         private EntityManagerInterface $entityManager,
     ) {
     }
 
-    public function provideFromHash(string $hash): ?PaymentRequestInterface
+    public function check(PaymentRequestInterface $paymentRequest): void
     {
-        $paymentRequest = $this->paymentRequestRepository->findOneByHash($hash);
-
-        if (null === $paymentRequest) {
-            return null;
-        }
-
         // Needed to get a real object to give to Payum which is not handling
         // Proxy class from Doctrine when a token is created for ex.
         $payment = $paymentRequest->getPayment();
@@ -43,7 +35,5 @@ final class PaymentRequestProvider implements PaymentRequestProviderInterface
             $payment = $this->entityManager->find(PaymentInterface::class, $payment->getId());
             $paymentRequest->setPayment($payment);
         }
-
-        return $paymentRequest;
     }
 }

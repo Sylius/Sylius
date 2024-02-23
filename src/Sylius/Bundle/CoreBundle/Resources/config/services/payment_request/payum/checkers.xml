@@ -18,10 +18,8 @@
     <services>
         <defaults public="true" />
 
-        <service id="sylius.payment_request.command_provider.gateway_factory" class="Sylius\Bundle\CoreBundle\PaymentRequest\CommandProvider\GatewayFactoryCommandProvider">
-            <argument type="service" id="Sylius\Bundle\CoreBundle\PaymentRequest\Checker\PaymentRequestDuplicationCheckerInterface" />
-            <argument type="service" id="Sylius\Bundle\CoreBundle\PaymentRequest\Provider\GatewayFactoryNameProviderInterface" />
-            <argument type="tagged_locator" tag="sylius.payment_request.command_provider" index-by="gateway-factory" />
+        <service id="Sylius\Bundle\CoreBundle\PaymentRequest\Payum\Checker\PayumRequirementsCheckerInterface" class="Sylius\Bundle\CoreBundle\PaymentRequest\Payum\Checker\PayumRequirementsChecker">
+            <argument type="service" id="doctrine.orm.entity_manager" />
         </service>
 
     </services>

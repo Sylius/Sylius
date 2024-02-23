@@ -19,7 +19,8 @@
         <defaults public="true" />
 
         <service id="Sylius\Bundle\CoreBundle\PaymentRequest\CommandHandler\Payum\TokenPaymentRequestHandler" abstract="true">
-            <argument type="service" id="Sylius\Bundle\CoreBundle\PaymentRequest\Payum\Provider\PaymentRequestProviderInterface" />
+            <argument type="service" id="Sylius\Bundle\CoreBundle\PaymentRequest\Checker\PaymentRequestIntegrityCheckerInterface" />
+            <argument type="service" id="Sylius\Bundle\CoreBundle\PaymentRequest\Payum\Checker\PayumRequirementsCheckerInterface" />
             <argument type="service" id="Sylius\Bundle\CoreBundle\PaymentRequest\Payum\Factory\PayumTokenFactoryInterface" />
             <argument type="service" id="Sylius\Bundle\CoreBundle\PaymentRequest\Processor\Payum\RequestProcessorInterface" />
             <argument type="service" id="Sylius\Bundle\CoreBundle\PaymentRequest\Processor\Payum\AfterTokenRequestProcessorInterface" />
@@ -38,7 +39,8 @@
         </service>
 
         <service id="Sylius\Bundle\CoreBundle\PaymentRequest\CommandHandler\Payum\ModelPaymentRequestHandler" abstract="true">
-            <argument type="service" id="Sylius\Bundle\CoreBundle\PaymentRequest\Payum\Provider\PaymentRequestProviderInterface" />
+            <argument type="service" id="Sylius\Bundle\CoreBundle\PaymentRequest\Checker\PaymentRequestIntegrityCheckerInterface" />
+            <argument type="service" id="Sylius\Bundle\CoreBundle\PaymentRequest\Payum\Checker\PayumRequirementsCheckerInterface" />
             <argument type="service" id="Sylius\Bundle\CoreBundle\PaymentRequest\Processor\Payum\RequestProcessorInterface" />
         </service>
 
