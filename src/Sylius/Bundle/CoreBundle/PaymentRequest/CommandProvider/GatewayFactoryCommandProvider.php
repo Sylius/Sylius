@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Bundle\CoreBundle\PaymentRequest\CommandProvider;
 
 use Sylius\Bundle\CoreBundle\PaymentRequest\Checker\PaymentRequestDuplicationCheckerInterface;
+use Sylius\Bundle\CoreBundle\PaymentRequest\Provider\GatewayFactoryNameProviderInterface;
 use Sylius\Bundle\PaymentBundle\Exception\PaymentRequestNotSupportedException;
 use Sylius\Component\Core\Model\PaymentMethodInterface;
 use Sylius\Component\Payment\Model\PaymentRequestInterface;
@@ -24,6 +25,7 @@ final class GatewayFactoryCommandProvider implements ServiceProviderAwareCommand
 {
     public function __construct(
         private PaymentRequestDuplicationCheckerInterface $paymentRequestDuplicationChecker,
+        private GatewayFactoryNameProviderInterface $gatewayFactoryNameProvider,
         private ServiceProviderInterface $locator,
     ) {
     }
@@ -72,8 +74,9 @@ final class GatewayFactoryCommandProvider implements ServiceProviderAwareCommand
         $paymentMethod = $paymentRequest->getMethod();
         Assert::notNull($paymentMethod, 'Payment method cannot be null.');
 
-        $gatewayConfig = $paymentMethod->getGatewayConfig();
-        Assert::notNull($gatewayConfig, 'Gateway config cannot be null.');
-        return $gatewayConfig->getConfig()['factory'] ?? $gatewayConfig->getFactoryName();
+        $factoryName = $this->gatewayFactoryNameProvider->provide($paymentMethod);
+        Assert::notNull($factoryName, 'Gateway config cannot be null.');
+
+        return $factoryName;
     }
 }

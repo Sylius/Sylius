@@ -13,9 +13,10 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\PaymentRequest\CommandHandler\Payum;
 
+use Sylius\Bundle\CoreBundle\PaymentRequest\Checker\PaymentRequestIntegrityCheckerInterface;
 use Sylius\Bundle\CoreBundle\PaymentRequest\Command\PaymentRequestHashAwareInterface;
 use Sylius\Bundle\CoreBundle\PaymentRequest\Payum\Factory\PayumTokenFactoryInterface;
-use Sylius\Bundle\CoreBundle\PaymentRequest\Payum\Provider\PaymentRequestProviderInterface;
+use Sylius\Bundle\CoreBundle\PaymentRequest\Payum\Checker\PayumRequirementsCheckerInterface;
 use Sylius\Bundle\CoreBundle\PaymentRequest\Processor\Payum\AfterTokenRequestProcessorInterface;
 use Sylius\Bundle\CoreBundle\PaymentRequest\Processor\Payum\RequestProcessorInterface;
 use Sylius\Bundle\PayumBundle\Factory\TokenAggregateRequestFactoryInterface;
@@ -25,7 +26,8 @@ use Webmozart\Assert\Assert;
 final class TokenPaymentRequestHandler implements MessageHandlerInterface
 {
     public function __construct(
-        private PaymentRequestProviderInterface $paymentRequestProvider,
+        private PaymentRequestIntegrityCheckerInterface $paymentRequestIntegrityChecker,
+        private PayumRequirementsCheckerInterface $payumRequirementsChecker,
         private PayumTokenFactoryInterface $payumTokenFactory,
         private RequestProcessorInterface $requestProcessor,
         private AfterTokenRequestProcessorInterface $afterTokenRequestProcessor,
@@ -35,21 +37,16 @@ final class TokenPaymentRequestHandler implements MessageHandlerInterface
 
     public function __invoke(PaymentRequestHashAwareInterface $command): void
     {
-        $hash = $command->getHash();
-        Assert::notNull($hash, 'The payment request hash cannot be null.');
-
-        $paymentRequest = $this->paymentRequestProvider->provideFromHash($hash);
-        Assert::notNull($paymentRequest);
+        $paymentRequest = $this->paymentRequestIntegrityChecker->check($command);
+        $this->payumRequirementsChecker->check($paymentRequest);
 
         $token = $this->payumTokenFactory->createNew($paymentRequest);
-
         $request = $this->payumRequestFactory->createNewWithToken($token);
 
         $token = $request->getToken();
-        Assert::notNull($token);
+        Assert::notNull($token, 'A Payum token cannot be null.');
 
         $this->requestProcessor->process($paymentRequest, $request, $token->getGatewayName());
-
         $this->afterTokenRequestProcessor->process($paymentRequest, $token);
     }
 }

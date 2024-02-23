@@ -22,5 +22,9 @@
             <argument type="service" id="sylius.repository.payment_request" />
         </service>
 
+        <service id="Sylius\Bundle\CoreBundle\PaymentRequest\Checker\PaymentRequestIntegrityCheckerInterface" class="Sylius\Bundle\CoreBundle\PaymentRequest\Checker\PaymentRequestIntegrityChecker">
+            <argument type="service" id="sylius.repository.payment_request" />
+        </service>
+
     </services>
 </container>

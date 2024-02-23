@@ -16,6 +16,7 @@ namespace Sylius\Bundle\ApiBundle\Validator\Constraints;
 use Sylius\Bundle\ApiBundle\Command\Payment\AddPaymentRequest;
 use Sylius\Bundle\CoreBundle\PaymentRequest\CommandProvider\PaymentRequestCommandProviderInterface;
 use Sylius\Bundle\CoreBundle\PaymentRequest\CommandProvider\ServiceProviderAwareCommandProviderInterface;
+use Sylius\Bundle\CoreBundle\PaymentRequest\Provider\GatewayFactoryNameProviderInterface;
 use Sylius\Component\Core\Model\PaymentMethodInterface;
 use Sylius\Component\Core\Repository\PaymentMethodRepositoryInterface;
 use Symfony\Component\Validator\Constraint;
@@ -28,6 +29,7 @@ final class ChosenPaymentRequestActionEligibilityValidator extends ConstraintVal
     public function __construct(
         private PaymentMethodRepositoryInterface $paymentMethodRepository,
         private ServiceProviderAwareCommandProviderInterface $gatewayFactoryCommandProvider,
+        private GatewayFactoryNameProviderInterface $gatewayFactoryNameProvider,
     ) {
     }
     public function validate(mixed $value, Constraint $constraint): void
@@ -65,7 +67,6 @@ final class ChosenPaymentRequestActionEligibilityValidator extends ConstraintVal
         $paymentMethod = $this->paymentMethodRepository->findOneBy(['code' => $addPaymentRequest->getPaymentMethodCode()]);
 
         if ($paymentMethod === null) {
-
             return null;
         }
 
@@ -74,7 +75,7 @@ final class ChosenPaymentRequestActionEligibilityValidator extends ConstraintVal
             return null;
         }
 
-        $factoryName = $gatewayConfig->getConfig()['factory'] ?? $gatewayConfig->getFactoryName();
+        $factoryName = $this->gatewayFactoryNameProvider->provide($paymentMethod);
         $commandProvider = $this->gatewayFactoryCommandProvider->getCommandProvider($factoryName);
         return $commandProvider ?? null;
     }
