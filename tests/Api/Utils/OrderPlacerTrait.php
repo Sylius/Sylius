@@ -202,6 +202,13 @@ trait OrderPlacerTrait
         return $tokenValue;
     }
 
+    protected function updateCartWithAddress(
+        string $tokenValue,
+        string $email = 'sylius@example.com',
+    ): OrderInterface {
+        return $this->updateCartWithAddressAndCouponCode($tokenValue, $email);
+    }
+
     protected function updateCartWithAddressAndCouponCode(
         string $tokenValue,
         string $email = 'sylius@example.com',
