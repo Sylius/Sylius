@@ -16,7 +16,6 @@
            xsi:schemaLocation="https://api-platform.com/schema/metadata https://api-platform.com/schema/metadata/metadata-2.0.xsd"
 >
     <resource class="%sylius.model.customer.class%" shortName="Customer">
-
         <attribute name="validation_groups">sylius</attribute>
 
         <collectionOperations>

@@ -9,9 +9,9 @@
         "verified": false
     },
     "email": "oliver@doe.com",
-    "firstName": "John",
+    "firstName": "oliver",
     "lastName": "Doe",
     "gender": "u",
     "subscribedToNewsletter": false,
-    "fullName": "John Doe"
+    "fullName": "oliver Doe"
 }
