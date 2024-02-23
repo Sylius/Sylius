@@ -18,7 +18,7 @@ final class TranslationInDefaultLocaleCannotBeRemoved extends \RuntimeException
     public function __construct(
         string $message = 'Translation in the default locale cannot be removed.',
         int $code = 0,
-        \Throwable $previous = null,
+        ?\Throwable $previous = null,
     ) {
         parent::__construct($message, $code, $previous);
     }

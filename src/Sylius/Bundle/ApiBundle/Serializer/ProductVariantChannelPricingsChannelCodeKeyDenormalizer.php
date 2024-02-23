@@ -29,7 +29,7 @@ final class ProductVariantChannelPricingsChannelCodeKeyDenormalizer implements C
 
     private const KEY_CHANNEL_CODE = 'channelCode';
 
-    public function supportsDenormalization(mixed $data, string $type, string $format = null, array $context = []): bool
+    public function supportsDenormalization(mixed $data, string $type, ?string $format = null, array $context = []): bool
     {
         return
             !isset($context[self::ALREADY_CALLED]) &&
@@ -39,7 +39,7 @@ final class ProductVariantChannelPricingsChannelCodeKeyDenormalizer implements C
     }
 
     /** @param array<string, array{ channelPricings: array<array-key, mixed> }> $data */
-    public function denormalize(mixed $data, string $type, string $format = null, array $context = [])
+    public function denormalize(mixed $data, string $type, ?string $format = null, array $context = [])
     {
         $context[self::ALREADY_CALLED] = true;
 

@@ -20,7 +20,7 @@ final class FilesystemRequirements extends RequirementCollection
     /**
      * @param string $rootDir Deprecated.
      */
-    public function __construct(TranslatorInterface $translator, string $cacheDir, string $logsDir, string $rootDir = null)
+    public function __construct(TranslatorInterface $translator, string $cacheDir, string $logsDir, ?string $rootDir = null)
     {
         parent::__construct($translator->trans('sylius.installer.filesystem.header', []));
 

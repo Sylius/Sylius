@@ -30,7 +30,7 @@ final class EnabledProductVariantItemExtension implements QueryItemExtensionInte
         QueryNameGeneratorInterface $queryNameGenerator,
         string $resourceClass,
         array $identifiers,
-        string $operationName = null,
+        ?string $operationName = null,
         array $context = [],
     ) {
         if (!is_a($resourceClass, ProductVariantInterface::class, true)) {

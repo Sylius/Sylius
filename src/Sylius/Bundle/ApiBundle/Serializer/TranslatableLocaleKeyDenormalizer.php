@@ -25,7 +25,7 @@ final class TranslatableLocaleKeyDenormalizer implements ContextAwareDenormalize
 
     private const ALREADY_CALLED = 'sylius_translatable_locale_key_denormalizer_already_called_for_%s';
 
-    public function supportsDenormalization(mixed $data, string $type, string $format = null, array $context = []): bool
+    public function supportsDenormalization(mixed $data, string $type, ?string $format = null, array $context = []): bool
     {
         return
             !isset($context[self::getAlreadyCalledKey($type)]) &&
@@ -35,7 +35,7 @@ final class TranslatableLocaleKeyDenormalizer implements ContextAwareDenormalize
     }
 
     /** @param array<string, array{ translations: array<array-key, mixed> }> $data */
-    public function denormalize(mixed $data, string $type, string $format = null, array $context = [])
+    public function denormalize(mixed $data, string $type, ?string $format = null, array $context = [])
     {
         $context[self::getAlreadyCalledKey($type)] = true;
 

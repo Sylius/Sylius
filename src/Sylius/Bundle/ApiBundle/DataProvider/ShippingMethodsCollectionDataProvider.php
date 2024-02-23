@@ -33,7 +33,7 @@ final class ShippingMethodsCollectionDataProvider implements ContextAwareCollect
     ) {
     }
 
-    public function getCollection(string $resourceClass, string $operationName = null, array $context = []): array
+    public function getCollection(string $resourceClass, ?string $operationName = null, array $context = []): array
     {
         /** @var ChannelInterface $channel */
         $channel = $this->channelContext->getChannel();
@@ -57,7 +57,7 @@ final class ShippingMethodsCollectionDataProvider implements ContextAwareCollect
         return $this->shippingMethodsResolver->getSupportedMethods($shipment);
     }
 
-    public function supports(string $resourceClass, string $operationName = null, array $context = []): bool
+    public function supports(string $resourceClass, ?string $operationName = null, array $context = []): bool
     {
         return is_a($resourceClass, ShippingMethodInterface::class, true) && $this->isShopGetCollectionOperation($context);
     }

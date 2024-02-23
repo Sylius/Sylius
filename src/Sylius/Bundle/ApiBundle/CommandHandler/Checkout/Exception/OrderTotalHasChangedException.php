@@ -21,7 +21,7 @@ class OrderTotalHasChangedException extends Exception
     public function __construct(
         string $message = 'Order total has changed during checkout process.',
         int $code = 0,
-        Throwable $previous = null,
+        ?Throwable $previous = null,
     ) {
         parent::__construct($message, $code, $previous);
     }

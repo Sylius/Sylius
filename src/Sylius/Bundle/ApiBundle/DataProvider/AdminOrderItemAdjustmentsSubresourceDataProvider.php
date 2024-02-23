@@ -31,7 +31,7 @@ final class AdminOrderItemAdjustmentsSubresourceDataProvider implements Restrict
     }
 
     /** @param array<array-key, mixed> $context */
-    public function supports(string $resourceClass, string $operationName = null, array $context = []): bool
+    public function supports(string $resourceClass, ?string $operationName = null, array $context = []): bool
     {
         return
             is_a($resourceClass, AdjustmentInterface::class, true) &&
@@ -46,7 +46,7 @@ final class AdminOrderItemAdjustmentsSubresourceDataProvider implements Restrict
      *
      * @return iterable<AdjustmentInterface>
      */
-    public function getSubresource(string $resourceClass, array $identifiers, array $context, string $operationName = null): iterable
+    public function getSubresource(string $resourceClass, array $identifiers, array $context, ?string $operationName = null): iterable
     {
         $orderItem = $this->orderItemRepository->find(reset($context['subresource_identifiers']));
         if (null === $orderItem) {

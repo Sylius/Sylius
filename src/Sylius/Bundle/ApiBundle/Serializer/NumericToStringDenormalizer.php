@@ -30,7 +30,7 @@ final class NumericToStringDenormalizer implements ContextAwareDenormalizerInter
     ) {
     }
 
-    public function supportsDenormalization(mixed $data, string $type, string $format = null, array $context = []): bool
+    public function supportsDenormalization(mixed $data, string $type, ?string $format = null, array $context = []): bool
     {
         return
             is_a($type, $this->resourceClass, true) &&
@@ -40,7 +40,7 @@ final class NumericToStringDenormalizer implements ContextAwareDenormalizerInter
         ;
     }
 
-    public function denormalize(mixed $data, string $type, string $format = null, array $context = [])
+    public function denormalize(mixed $data, string $type, ?string $format = null, array $context = [])
     {
         $context[self::getAlreadyCalledKey($type)] = true;
 
