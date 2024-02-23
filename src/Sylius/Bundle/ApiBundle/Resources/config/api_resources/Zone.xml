@@ -23,6 +23,7 @@
         <collectionOperations>
             <collectionOperation name="admin_get">
                 <attribute name="method">GET</attribute>
+                <attribute name="path">/zones</attribute>
                 <attribute name="normalization_context">
                     <attribute name="groups">admin:zone:read</attribute>
                 </attribute>
@@ -30,6 +31,7 @@
 
             <collectionOperation name="admin_post">
                 <attribute name="method">POST</attribute>
+                <attribute name="path">/zones</attribute>
                 <attribute name="denormalization_context">
                     <attribute name="groups">admin:zone:create</attribute>
                 </attribute>
@@ -39,6 +41,7 @@
         <itemOperations>
             <itemOperation name="admin_get">
                 <attribute name="method">GET</attribute>
+                <attribute name="path">/zones/{code}</attribute>
                 <attribute name="normalization_context">
                     <attribute name="groups">admin:zone:read</attribute>
                 </attribute>
@@ -46,6 +49,7 @@
 
             <itemOperation name="admin_put">
                 <attribute name="method">PUT</attribute>
+                <attribute name="path">/zones/{code}</attribute>
                 <attribute name="denormalization_context">
                     <attribute name="groups">admin:zone:update</attribute>
                 </attribute>
@@ -53,6 +57,7 @@
 
             <itemOperation name="admin_delete">
                 <attribute name="method">DELETE</attribute>
+                <attribute name="path">/zones/{code}</attribute>
             </itemOperation>
         </itemOperations>
 

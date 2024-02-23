@@ -43,6 +43,7 @@ final class ZoneMemberContext implements Context
 
     /**
      * @Transform /^"([^"]+)", "([^"]+)" and "([^"]+)" country members$/
+     * @Transform /^"([^"]+)" and "([^"]+)" country members$/
      */
     public function getCountryTypeZoneMembersByNames(string ...$names): array
     {
