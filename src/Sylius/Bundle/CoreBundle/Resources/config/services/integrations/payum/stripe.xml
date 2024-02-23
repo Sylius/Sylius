@@ -18,7 +18,7 @@
     <services>
         <defaults public="true" />
 
-        <service id="sylius.payment_request.command_provider.payum.stripe_checkout" class="Sylius\Bundle\CoreBundle\PaymentRequest\CommandProvider\PaymentRequestTypeCommandProvider">
+        <service id="sylius.payment_request.command_provider.payum.stripe_checkout" class="Sylius\Bundle\CoreBundle\PaymentRequest\CommandProvider\ActionsCommandProvider">
             <argument type="tagged_locator" tag="sylius.payment_request.command_provider.payum.stripe_checkout" index-by="type" />
             <tag name="sylius.payment_request.command_provider" gateway-factory="stripe_checkout" />
         </service>

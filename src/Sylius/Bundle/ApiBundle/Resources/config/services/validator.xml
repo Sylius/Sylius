@@ -152,6 +152,12 @@
             <tag name="validator.constraint_validator" alias="sylius_api_validator_admin_non_expired_password_reset_token" />
         </service>
 
+        <service id="Sylius\Bundle\ApiBundle\Validator\Constraints\ChosenPaymentRequestActionEligibilityValidator">
+            <argument type="service" id="sylius.repository.payment_method" />
+            <argument type="service" id="sylius.payment_request.command_provider.gateway_factory" />
+            <tag name="validator.constraint_validator" alias="sylius_api_chosen_payment_request_action_eligibility" />
+        </service>
+
         <service id="Sylius\Bundle\ApiBundle\Validator\CatalogPromotion\PercentageDiscountActionValidator">
             <argument type="service" id="Sylius\Bundle\CoreBundle\SectionResolver\SectionProviderInterface" />
             <tag name="sylius.catalog_promotion.action_validator" key="percentage_discount"/>

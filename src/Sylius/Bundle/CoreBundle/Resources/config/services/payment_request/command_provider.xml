@@ -18,7 +18,7 @@
     <services>
         <defaults public="true" />
 
-        <service id="Sylius\Bundle\CoreBundle\PaymentRequest\CommandProvider\PaymentRequestCommandProviderInterface" class="Sylius\Bundle\CoreBundle\PaymentRequest\CommandProvider\PaymentRequestCommandProvider">
+        <service id="sylius.payment_request.command_provider.gateway_factory" class="Sylius\Bundle\CoreBundle\PaymentRequest\CommandProvider\GatewayFactoryCommandProvider">
             <argument type="service" id="Sylius\Bundle\CoreBundle\PaymentRequest\Checker\PaymentRequestDuplicationCheckerInterface" />
             <argument type="tagged_locator" tag="sylius.payment_request.command_provider" index-by="gateway-factory" />
         </service>

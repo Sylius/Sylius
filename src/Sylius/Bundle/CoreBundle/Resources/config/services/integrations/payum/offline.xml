@@ -18,7 +18,7 @@
     <services>
         <defaults public="true" />
 
-        <service id="sylius.payment_request.command_provider.payum.offline" class="Sylius\Bundle\CoreBundle\PaymentRequest\CommandProvider\PaymentRequestTypeCommandProvider">
+        <service id="sylius.payment_request.command_provider.payum.offline" class="Sylius\Bundle\CoreBundle\PaymentRequest\CommandProvider\ActionsCommandProvider">
             <argument type="tagged_locator" tag="sylius.payment_request.command_provider.payum.offline" index-by="type" />
             <tag name="sylius.payment_request.command_provider" gateway-factory="offline" />
         </service>
