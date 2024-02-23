@@ -22,7 +22,6 @@ use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 /** @experimental */
 final class CapturePaymentRequestHandler implements MessageHandlerInterface
 {
-
     public function __construct(
         private PaymentRequestIntegrityCheckerInterface $paymentRequestIntegrityChecker,
         private CaptureProcessorInterface $offlineCaptureProcessor,
