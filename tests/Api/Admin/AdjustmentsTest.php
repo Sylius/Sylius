@@ -37,7 +37,7 @@ final class AdjustmentsTest extends JsonApiTestCase
             'cart.yaml',
             'country.yaml',
             'shipping_method.yaml',
-            'payment_method.yaml'
+            'payment_method.yaml',
         ]);
 
         $order = $this->placeOrder('token');
