@@ -18,12 +18,12 @@
     <services>
         <defaults public="true" />
 
-        <service id="sylius.payment_request.payum.command_provider.paypal_express_checkout" class="Sylius\Bundle\CoreBundle\PaymentRequest\CommandProvider\PaymentRequestTypeCommandProvider">
+        <service id="sylius.payment_request.command_provider.payum.paypal_express_checkout" class="Sylius\Bundle\CoreBundle\PaymentRequest\CommandProvider\ActionsCommandProvider">
             <argument type="tagged_locator" tag="sylius.payment_request.command_provider.payum.paypal_express_checkout" index-by="type" />
             <tag name="sylius.payment_request.command_provider" gateway-factory="paypal_express_checkout" />
         </service>
 
-        <service id="sylius.payment_request.payum.command_provider.paypal_express_checkout_nvp.capture" class="Sylius\Bundle\CoreBundle\PaymentRequest\CommandProvider\Payum\CaptureCommandProvider">
+        <service id="sylius.payment_request.command_provider.payum.paypal_express_checkout_nvp.capture" class="Sylius\Bundle\CoreBundle\PaymentRequest\CommandProvider\Payum\CaptureCommandProvider">
             <tag name="sylius.payment_request.command_provider.payum.paypal_express_checkout" type="capture" />
         </service>
 

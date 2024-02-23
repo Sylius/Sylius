@@ -1726,6 +1726,11 @@ parameters:
 			path: src/Sylius/Bundle/ApiBundle/Validator/Constraints/ChosenPaymentMethodEligibilityValidator.php
 
 		-
+			message: "#^Method Sylius\\\\Bundle\\\\ApiBundle\\\\Validator\\\\Constraints\\\\ChosenPaymentRequestActionEligibilityValidator\\:\\:__construct\\(\\) has parameter \\$paymentMethodRepository with generic interface Sylius\\\\Component\\\\Core\\\\Repository\\\\PaymentMethodRepositoryInterface but does not specify its types\\: T$#"
+			count: 1
+			path: src/Sylius/Bundle/ApiBundle/Validator/Constraints/ChosenPaymentRequestActionEligibilityValidator.php
+
+		-
 			message: "#^Method Sylius\\\\Bundle\\\\ApiBundle\\\\Validator\\\\Constraints\\\\ChosenShippingMethodEligibilityValidator\\:\\:__construct\\(\\) has parameter \\$shipmentRepository with generic interface Sylius\\\\Component\\\\Core\\\\Repository\\\\ShipmentRepositoryInterface but does not specify its types\\: T$#"
 			count: 1
 			path: src/Sylius/Bundle/ApiBundle/Validator/Constraints/ChosenShippingMethodEligibilityValidator.php
