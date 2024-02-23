@@ -50,7 +50,7 @@ final class OrderItemAdjustmentsSubresourceDataProvider implements RestrictedDat
 
         $orderItem = $this->orderItemRepository->findOneByIdAndOrderTokenValue(
             (int) $subresourceIdentifiers['items'],
-            $subresourceIdentifiers['tokenValue']
+            $subresourceIdentifiers['tokenValue'],
         );
         if (null === $orderItem) {
             return [];
