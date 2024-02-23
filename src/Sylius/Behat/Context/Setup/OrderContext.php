@@ -79,8 +79,8 @@ final class OrderContext implements Context
      */
     public function thereIsCustomerThatPlacedOrder(
         CustomerInterface $customer,
-        string $orderNumber = null,
-        ChannelInterface $channel = null,
+        ?string $orderNumber = null,
+        ?ChannelInterface $channel = null,
     ): void {
         $order = $this->createOrder($customer, $orderNumber, $channel);
 
@@ -469,7 +469,7 @@ final class OrderContext implements Context
     public function thereIsAOrderWithProduct(
         string $orderNumber,
         ProductInterface $product,
-        string $state = null,
+        ?string $state = null,
         ?ChannelInterface $channel = null,
     ): void {
         $order = $this->createOrder($this->createOrProvideCustomer('amba@fatima.org'), $orderNumber, $channel);
@@ -850,7 +850,7 @@ final class OrderContext implements Context
     private function createOrder(
         CustomerInterface $customer,
         $number = null,
-        ChannelInterface $channel = null,
+        ?ChannelInterface $channel = null,
         $localeCode = null,
     ) {
         $order = $this->createCart($customer, $channel, $localeCode);
@@ -871,7 +871,7 @@ final class OrderContext implements Context
      */
     private function createCart(
         CustomerInterface $customer,
-        ChannelInterface $channel = null,
+        ?ChannelInterface $channel = null,
         $localeCode = null,
     ) {
         /** @var OrderInterface $order */

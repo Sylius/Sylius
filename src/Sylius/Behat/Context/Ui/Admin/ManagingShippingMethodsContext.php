@@ -54,7 +54,7 @@ final class ManagingShippingMethodsContext implements Context
     /**
      * @When I specify its position as :position
      */
-    public function iSpecifyItsPositionAs(int $position = null)
+    public function iSpecifyItsPositionAs(?int $position = null)
     {
         $this->createPage->specifyPosition($position);
     }

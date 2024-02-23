@@ -223,7 +223,7 @@ final class ManagingShipmentsContext implements Context
         string $orderNumber,
         string $shippingState,
         CustomerInterface $customer,
-        ChannelInterface $channel = null,
+        ?ChannelInterface $channel = null,
     ): void {
         $this->client->index(Resources::SHIPMENTS);
 

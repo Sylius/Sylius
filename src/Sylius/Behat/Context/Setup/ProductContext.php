@@ -79,7 +79,7 @@ final class ProductContext implements Context
      * @Given /^the store(?:| also) has a product "([^"]+)" priced at ("[^"]+")$/
      * @Given /^the store(?:| also) has a product "([^"]+)" priced at ("[^"]+") in ("[^"]+" channel)$/
      */
-    public function storeHasAProductPricedAt($productName, int $price = 100, ChannelInterface $channel = null): void
+    public function storeHasAProductPricedAt($productName, int $price = 100, ?ChannelInterface $channel = null): void
     {
         $product = $this->createProduct($productName, $price, $channel);
 
@@ -330,7 +330,7 @@ final class ProductContext implements Context
         ProductInterface $product,
         $productVariantName,
         $price,
-        ChannelInterface $channel = null,
+        ?ChannelInterface $channel = null,
     ) {
         $this->createProductVariant(
             $product,
@@ -1368,7 +1368,7 @@ final class ProductContext implements Context
         return (int) round((float) str_replace(['€', '£', '$'], '', $price) * 100, 2);
     }
 
-    private function createProduct(string $productName, int $price = 100, ChannelInterface $channel = null): ProductInterface
+    private function createProduct(string $productName, int $price = 100, ?ChannelInterface $channel = null): ProductInterface
     {
         if (null === $channel && $this->sharedStorage->has('channel')) {
             $channel = $this->sharedStorage->get('channel');
@@ -1458,7 +1458,7 @@ final class ProductContext implements Context
         $productVariantName,
         $price,
         $code,
-        ChannelInterface $channel = null,
+        ?ChannelInterface $channel = null,
         $position = null,
         $shippingRequired = true,
         int $currentStock = 0,
@@ -1549,7 +1549,7 @@ final class ProductContext implements Context
         $productVariant->addTranslation($translation);
     }
 
-    private function createChannelPricingForChannel(int $price, ChannelInterface $channel = null): ChannelPricingInterface
+    private function createChannelPricingForChannel(int $price, ?ChannelInterface $channel = null): ChannelPricingInterface
     {
         /** @var ChannelPricingInterface $channelPricing */
         $channelPricing = $this->channelPricingFactory->createNew();

@@ -125,8 +125,8 @@ final class CheckoutContext implements Context
 
     private function completeCheckout(
         OrderInterface $order,
-        ShippingMethodInterface $shippingMethod = null,
-        PaymentMethodInterface $paymentMethod = null,
+        ?ShippingMethodInterface $shippingMethod = null,
+        ?PaymentMethodInterface $paymentMethod = null,
     ): void {
         $shippingMethod = $shippingMethod ?: $this->shippingMethodRepository->findOneBy([]);
 

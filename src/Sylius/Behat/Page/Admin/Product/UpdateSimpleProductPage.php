@@ -230,7 +230,7 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
         return in_array($statusCode, [200, 304], true);
     }
 
-    public function attachImage(string $path, string $type = null): void
+    public function attachImage(string $path, ?string $type = null): void
     {
         $this->clickTabIfItsNotActive('media');
 

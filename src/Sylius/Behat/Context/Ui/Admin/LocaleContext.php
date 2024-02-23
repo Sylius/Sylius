@@ -56,7 +56,7 @@ final class LocaleContext implements Context
         Assert::true($this->dashboardPage->isSectionWithLabelVisible($this->translate('sylius.menu.admin.main.catalog.header', $localeCode)));
     }
 
-    private function translate(string $text, string $localeCode, string $domain = null): string
+    private function translate(string $text, string $localeCode, ?string $domain = null): string
     {
         return $this->translator->trans($text, [], $domain, $localeCode);
     }

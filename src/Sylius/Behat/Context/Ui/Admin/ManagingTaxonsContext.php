@@ -302,7 +302,7 @@ final class ManagingTaxonsContext implements Context
      * @When I attach the :path image
      * @When I attach the :path image to this taxon
      */
-    public function iAttachImageWithType(string $path, string $type = null): void
+    public function iAttachImageWithType(string $path, ?string $type = null): void
     {
         $currentPage = $this->resolveCurrentPage();
 

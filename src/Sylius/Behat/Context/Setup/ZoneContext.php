@@ -85,7 +85,7 @@ final class ZoneContext implements Context
      * @Given the store has a zone :zoneName with code :code
      * @Given the store also has a zone :zoneName with code :code
      */
-    public function theStoreHasAZoneWithCode(string $zoneName, string $code = null): void
+    public function theStoreHasAZoneWithCode(string $zoneName, ?string $code = null): void
     {
         $this->saveZone($this->createZone($zoneName, $code, Scope::ALL), 'zone');
     }

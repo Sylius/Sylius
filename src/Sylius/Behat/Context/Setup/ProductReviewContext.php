@@ -136,7 +136,7 @@ final class ProductReviewContext implements Context
         $title,
         $rating,
         $comment,
-        CustomerInterface $customer = null,
+        ?CustomerInterface $customer = null,
         $transition = ProductReviewTransitions::TRANSITION_ACCEPT,
     ) {
         /** @var ReviewInterface $review */

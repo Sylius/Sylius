@@ -36,14 +36,14 @@ interface CreatePageInterface extends BaseCreatePageInterface
 
     public function specifySlug(string $slug, string $languageCode): void;
 
-    public function attachImage(string $path, string $type = null): void;
+    public function attachImage(string $path, ?string $type = null): void;
 
     /**
      * @return NodeElement[]
      *
      * @throws ElementNotFoundException
      */
-    public function getLeaves(TaxonInterface $parentTaxon = null): array;
+    public function getLeaves(?TaxonInterface $parentTaxon = null): array;
 
     public function activateLanguageTab(string $locale): void;
 

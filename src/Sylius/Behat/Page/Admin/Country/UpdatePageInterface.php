@@ -27,7 +27,7 @@ interface UpdatePageInterface extends BaseUpdatePageInterface
 
     public function isThereProvinceWithCode(string $provinceCode): bool;
 
-    public function addProvince(string $name, string $code, string $abbreviation = null): void;
+    public function addProvince(string $name, string $code, ?string $abbreviation = null): void;
 
     public function removeProvince(string $provinceName): void;
 

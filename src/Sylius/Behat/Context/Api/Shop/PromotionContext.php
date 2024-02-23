@@ -33,7 +33,7 @@ final class PromotionContext implements Context
      * @When I use coupon with code :couponCode
      * @When I remove coupon from my cart
      */
-    public function iUseCouponWithCode(string $couponCode = null): void
+    public function iUseCouponWithCode(?string $couponCode = null): void
     {
         $this->useCouponCode($couponCode);
     }
