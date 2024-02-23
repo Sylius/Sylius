@@ -50,7 +50,7 @@ final class ManagingProductAssociationTypesContext implements Context
      * @When I name it :productAssociationTypeName in :localeCode
      * @When I do not name it
      */
-    public function iNameItIn(string $productAssociationTypeName = null, string $localeCode = 'en_US'): void
+    public function iNameItIn(?string $productAssociationTypeName = null, string $localeCode = 'en_US'): void
     {
         $this->client->updateRequestData([
             'translations' => [

@@ -62,7 +62,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
         }
     }
 
-    public function addProvince(string $name, string $code, string $abbreviation = null): void
+    public function addProvince(string $name, string $code, ?string $abbreviation = null): void
     {
         $this->clickAddProvinceButton();
 

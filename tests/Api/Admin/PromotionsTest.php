@@ -582,7 +582,7 @@ final class PromotionsTest extends JsonApiTestCase
         $fixtures = $this->loadFixturesFromFiles([
             'authentication/api_administrator.yaml',
             'channel.yaml',
-            'promotion/promotion.yaml'
+            'promotion/promotion.yaml',
         ]);
 
         /** @var PromotionInterface $promotion */
@@ -607,7 +607,7 @@ final class PromotionsTest extends JsonApiTestCase
         $fixtures = $this->loadFixturesFromFiles([
             'authentication/api_administrator.yaml',
             'channel.yaml',
-            'promotion/promotion.yaml'
+            'promotion/promotion.yaml',
         ]);
 
         /** @var PromotionInterface $promotion */

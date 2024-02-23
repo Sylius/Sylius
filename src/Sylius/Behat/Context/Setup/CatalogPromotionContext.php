@@ -855,7 +855,7 @@ final class CatalogPromotionContext implements Context
         array $channels = [],
         array $scopes = [],
         array $actions = [],
-        int $priority = null,
+        ?int $priority = null,
         bool $exclusive = false,
         ?string $startDate = null,
         ?string $endDate = null,

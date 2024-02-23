@@ -204,7 +204,7 @@ final class CheckoutAddressingContext implements Context
      * @When /^I specified the billing (address as "[^"]+", "[^"]+", "[^"]+", "[^"]+" for "[^"]+")$/
      * @When /^I define the billing (address as "[^"]+", "[^"]+", "[^"]+", "[^"]+" for "[^"]+")$/
      */
-    public function iSpecifiedTheBillingAddress(AddressInterface $address = null)
+    public function iSpecifiedTheBillingAddress(?AddressInterface $address = null)
     {
         if (null === $address) {
             $address = $this->createDefaultAddress();
@@ -257,7 +257,7 @@ final class CheckoutAddressingContext implements Context
      * @When /^I proceed selecting ("[^"]+" as billing country)$/
      */
     public function iProceedSelectingBillingCountry(
-        CountryInterface $shippingCountry = null,
+        ?CountryInterface $shippingCountry = null,
         string $localeCode = 'en_US',
         ?string $email = null,
     ) {
@@ -278,7 +278,7 @@ final class CheckoutAddressingContext implements Context
      */
     public function iProceedLoggingAsGuestWithAsBillingCountry(
         string $email,
-        CountryInterface $shippingCountry = null,
+        ?CountryInterface $shippingCountry = null,
     ): void {
         $this->addressPage->open();
         $this->addressPage->specifyEmail($email);

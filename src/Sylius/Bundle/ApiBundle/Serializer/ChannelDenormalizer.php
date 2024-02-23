@@ -39,7 +39,7 @@ final class ChannelDenormalizer implements ContextAwareDenormalizerInterface, De
     ) {
     }
 
-    public function supportsDenormalization(mixed $data, string $type, string $format = null, array $context = []): bool
+    public function supportsDenormalization(mixed $data, string $type, ?string $format = null, array $context = []): bool
     {
         return
             !isset($context[self::ALREADY_CALLED]) &&
@@ -48,7 +48,7 @@ final class ChannelDenormalizer implements ContextAwareDenormalizerInterface, De
         ;
     }
 
-    public function denormalize(mixed $data, string $type, string $format = null, array $context = [])
+    public function denormalize(mixed $data, string $type, ?string $format = null, array $context = [])
     {
         $context[self::ALREADY_CALLED] = true;
         $data = (array) $data;

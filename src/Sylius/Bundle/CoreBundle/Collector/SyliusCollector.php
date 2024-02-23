@@ -92,7 +92,7 @@ final class SyliusCollector extends DataCollector
         return $this->data['default_locale_code'];
     }
 
-    public function collect(Request $request, Response $response, \Throwable $exception = null): void
+    public function collect(Request $request, Response $response, ?\Throwable $exception = null): void
     {
         try {
             /** @var ChannelInterface $channel */

@@ -20,7 +20,7 @@ class LocaleIsUsedException extends Exception
     public function __construct(
         string $localeCode,
         int $code = 0,
-        \Throwable $previous = null,
+        ?\Throwable $previous = null,
     ) {
         $message = sprintf('Locale "%s" is used.', $localeCode);
 

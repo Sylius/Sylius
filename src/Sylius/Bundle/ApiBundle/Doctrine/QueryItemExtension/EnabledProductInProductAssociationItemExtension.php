@@ -34,7 +34,7 @@ final class EnabledProductInProductAssociationItemExtension implements QueryItem
         QueryNameGeneratorInterface $queryNameGenerator,
         string $resourceClass,
         array $identifiers,
-        string $operationName = null,
+        ?string $operationName = null,
         array $context = [],
     ) {
         if (!is_a($resourceClass, ProductAssociationInterface::class, true)) {

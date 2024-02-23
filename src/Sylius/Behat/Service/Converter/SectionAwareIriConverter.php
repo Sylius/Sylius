@@ -43,17 +43,17 @@ final class SectionAwareIriConverter implements SectionAwareIriConverterInterfac
         private RouterInterface $router,
         PropertyNameCollectionFactoryInterface $propertyNameCollectionFactory,
         PropertyMetadataFactoryInterface $propertyMetadataFactory,
-        PropertyAccessorInterface $propertyAccessor = null,
-        IdentifiersExtractorInterface $identifiersExtractor = null,
-        ResourceClassResolverInterface $resourceClassResolver = null,
-        ResourceMetadataFactoryInterface $resourceMetadataFactory = null,
+        ?PropertyAccessorInterface $propertyAccessor = null,
+        ?IdentifiersExtractorInterface $identifiersExtractor = null,
+        ?ResourceClassResolverInterface $resourceClassResolver = null,
+        ?ResourceMetadataFactoryInterface $resourceMetadataFactory = null,
     ) {
         $this->identifiersExtractor = $identifiersExtractor ?: new IdentifiersExtractor($propertyNameCollectionFactory, $propertyMetadataFactory, $propertyAccessor ?? PropertyAccess::createPropertyAccessor());
         $this->resourceClassResolver = $resourceClassResolver;
         $this->resourceMetadataFactory = $resourceMetadataFactory;
     }
 
-    public function getIriFromResourceInSection(object $item, string $section, int $referenceType = null): string
+    public function getIriFromResourceInSection(object $item, string $section, ?int $referenceType = null): string
     {
         $resourceClass = $this->getResourceClass($item, true);
 

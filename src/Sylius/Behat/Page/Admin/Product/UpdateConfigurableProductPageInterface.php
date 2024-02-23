@@ -41,7 +41,7 @@ interface UpdateConfigurableProductPageInterface extends UpdatePageInterface
 
     public function hasLastImageAVariant(ProductVariantInterface $productVariant): bool;
 
-    public function attachImage(string $path, string $type = null, ?ProductVariantInterface $productVariant = null): void;
+    public function attachImage(string $path, ?string $type = null, ?ProductVariantInterface $productVariant = null): void;
 
     public function changeImageWithType(string $type, string $path): void;
 
