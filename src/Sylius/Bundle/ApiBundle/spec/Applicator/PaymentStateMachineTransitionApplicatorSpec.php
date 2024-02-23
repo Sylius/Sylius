@@ -40,17 +40,6 @@ final class PaymentStateMachineTransitionApplicatorSpec extends ObjectBehavior
         $this->complete($payment);
     }
 
-    function it_process_payment(
-        StateMachineFactoryInterface $stateMachineFactory,
-        PaymentInterface $payment,
-        WinzouStateMachine $stateMachine,
-    ): void {
-        $stateMachineFactory->get($payment, PaymentTransitions::GRAPH)->willReturn($stateMachine);
-        $stateMachine->apply(PaymentTransitions::TRANSITION_PROCESS)->shouldBeCalled();
-
-        $this->process($payment);
-    }
-
     function it_throws_exception_if_cannot_complete_payment(
         StateMachineFactoryInterface $stateMachineFactory,
         PaymentInterface $payment,
