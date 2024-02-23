@@ -24,7 +24,7 @@ final class CustomersTest extends JsonApiTestCase
     use ShopUserLoginTrait;
 
     /** @test */
-    public function it_returns_small_amount_of_data_on_customer_update(): void
+    public function it_gets_customer(): void
     {
         $fixtures = $this->loadFixturesFromFiles(['authentication/customer.yaml']);
         /** @var CustomerInterface $customer */
@@ -33,19 +33,38 @@ final class CustomersTest extends JsonApiTestCase
         $header = array_merge($this->logInShopUser($customer->getEmailCanonical()), self::CONTENT_TYPE_HEADER);
 
         $this->client->request(
-            method: 'PUT',
+            method: 'GET',
             uri: '/api/v2/shop/customers/' . $customer->getId(),
             server: $header,
-            content: json_encode(['firstName' => 'John'], \JSON_THROW_ON_ERROR),
         );
 
         $response = $this->client->getResponse();
 
-        $this->assertResponse($response, 'shop/customer/update_customer_response', Response::HTTP_OK);
+        $this->assertResponse($response, 'shop/customer/get_customer_response', Response::HTTP_OK);
     }
 
     /** @test */
-    public function it_registers_customers(): void
+    public function it_logs_in(): void
+    {
+        $this->loadFixturesFromFiles(['authentication/customer.yaml']);
+
+        $this->client->request(
+            method: 'POST',
+            uri: '/api/v2/shop/authentication-token',
+            server: self::CONTENT_TYPE_HEADER,
+            content: json_encode([
+                'email' => 'oliver@doe.com',
+                'password' => 'sylius',
+            ], \JSON_THROW_ON_ERROR),
+        );
+
+        $response = $this->client->getResponse();
+
+        $this->assertResponse($response, 'shop/customer/log_in_customer_response', Response::HTTP_OK);
+    }
+
+    /** @test */
+    public function it_registers_a_new_customer(): void
     {
         $this->loadFixturesFromFiles(['channel.yaml']);
 
@@ -68,27 +87,7 @@ final class CustomersTest extends JsonApiTestCase
     }
 
     /** @test */
-    public function it_allows_customer_to_log_in(): void
-    {
-        $this->loadFixturesFromFiles(['authentication/customer.yaml']);
-
-        $this->client->request(
-            method: 'POST',
-            uri: '/api/v2/shop/authentication-token',
-            server: self::CONTENT_TYPE_HEADER,
-            content: json_encode([
-                'email' => 'oliver@doe.com',
-                'password' => 'sylius',
-            ], \JSON_THROW_ON_ERROR),
-        );
-
-        $response = $this->client->getResponse();
-
-        $this->assertResponse($response, 'shop/customer/log_in_customer_response', Response::HTTP_OK);
-    }
-
-    /** @test */
-    public function it_allows_customer_to_update_its_data(): void
+    public function it_updates_customers_data(): void
     {
         $loadedData = $this->loadFixturesFromFiles(['authentication/customer.yaml']);
         /** @var CustomerInterface $customer */
@@ -104,14 +103,16 @@ final class CustomersTest extends JsonApiTestCase
                 'email' => 'john.wick@tarasov.mob',
                 'firstName' => 'John',
                 'lastName' => 'Wick',
+                'phoneNumber' => '666777888',
                 'gender' => 'm',
+                'birthday' => '2023-10-24T11:00:00.000Z',
                 'subscribedToNewsletter' => true,
             ], \JSON_THROW_ON_ERROR),
         );
 
         $response = $this->client->getResponse();
 
-        $this->assertResponse($response, 'shop/customer/updated_gender_customer_response', Response::HTTP_OK);
+        $this->assertResponse($response, 'shop/customer/put_customer_response', Response::HTTP_OK);
     }
 
     /** @test */
@@ -161,24 +162,5 @@ final class CustomersTest extends JsonApiTestCase
         $response = $this->client->getResponse();
 
         $this->assertResponseCode($response, Response::HTTP_ACCEPTED);
-    }
-
-    public function it_gets_customer(): void
-    {
-        $fixtures = $this->loadFixturesFromFiles(['authentication/customer.yaml']);
-        /** @var CustomerInterface $customer */
-        $customer = $fixtures['customer_oliver'];
-
-        $header = array_merge($this->logInShopUser($customer->getEmailCanonical()), self::CONTENT_TYPE_HEADER);
-
-        $this->client->request(
-            method: 'GET',
-            uri: '/api/v2/shop/customers/' . $customer->getId(),
-            server: $header,
-        );
-
-        $response = $this->client->getResponse();
-
-        $this->assertResponse($response, 'shop/customer/get_customer_response', Response::HTTP_OK);
     }
 }

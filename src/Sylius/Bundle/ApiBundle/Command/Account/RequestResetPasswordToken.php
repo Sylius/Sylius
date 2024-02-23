@@ -18,20 +18,17 @@ use Sylius\Bundle\ApiBundle\Command\IriToIdentifierConversionAwareInterface;
 use Sylius\Bundle\ApiBundle\Command\LocaleCodeAwareInterface;
 
 /** @experimental */
-class RequestResetPasswordToken implements ChannelCodeAwareInterface, LocaleCodeAwareInterface, IriToIdentifierConversionAwareInterface
+class RequestResetPasswordToken implements
+    ChannelCodeAwareInterface,
+    LocaleCodeAwareInterface,
+    IriToIdentifierConversionAwareInterface
 {
-    /** @var string */
-    public $email;
+    public ?string $channelCode = null;
 
-    /** @var string|null */
-    public $channelCode;
+    public ?string $localeCode = null;
 
-    /** @var string|null */
-    public $localeCode;
-
-    public function __construct(string $email)
+    public function __construct(public readonly string $email)
     {
-        $this->email = $email;
     }
 
     public function getEmail(): string
