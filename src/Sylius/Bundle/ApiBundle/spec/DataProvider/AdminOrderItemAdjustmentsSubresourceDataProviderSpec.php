@@ -22,7 +22,6 @@ use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Repository\OrderItemRepositoryInterface;
 use Sylius\Component\Order\Model\AdjustmentInterface;
-use Sylius\Component\Order\Model\OrderInterface;
 use Symfony\Component\HttpFoundation\Request;
 
 final class AdminOrderItemAdjustmentsSubresourceDataProviderSpec extends ObjectBehavior
@@ -34,7 +33,8 @@ final class AdminOrderItemAdjustmentsSubresourceDataProviderSpec extends ObjectB
         $this->beConstructedWith($orderItemRepository, $sectionProvider);
     }
 
-    function it_does_not_support_not_adjustment_resource(): void {
+    function it_does_not_support_not_adjustment_resource(): void
+    {
         $this
             ->supports(ProductInterface::class, Request::METHOD_GET, [])
             ->shouldReturn(false)
@@ -43,7 +43,7 @@ final class AdminOrderItemAdjustmentsSubresourceDataProviderSpec extends ObjectB
 
     function it_does_not_support_in_shop_api_section(
         SectionProviderInterface $sectionProvider,
-        ShopApiSection $shopApiSection
+        ShopApiSection $shopApiSection,
     ): void {
         $sectionProvider->getSection()->willReturn($shopApiSection);
 
@@ -100,12 +100,11 @@ final class AdminOrderItemAdjustmentsSubresourceDataProviderSpec extends ObjectB
         OrderItemInterface $orderItem,
         AdjustmentInterface $adjustment1,
         AdjustmentInterface $adjustment2,
-    ): void
-    {
+    ): void {
         $context['subresource_identifiers'] = ['id' => '11'];
         $orderItemRepository->find('11')->willReturn($orderItem);
         $orderItem->getAdjustmentsRecursively()->willReturn(
-            new ArrayCollection([$adjustment1->getWrappedObject(), $adjustment2->getWrappedObject()])
+            new ArrayCollection([$adjustment1->getWrappedObject(), $adjustment2->getWrappedObject()]),
         );
 
         $this
