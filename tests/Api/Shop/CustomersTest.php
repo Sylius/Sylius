@@ -103,7 +103,9 @@ final class CustomersTest extends JsonApiTestCase
                 'email' => 'john.wick@tarasov.mob',
                 'firstName' => 'John',
                 'lastName' => 'Wick',
+                'phoneNumber' => '666777888',
                 'gender' => 'm',
+                'birthday' => '2023-10-24T11:00:00.000Z',
                 'subscribedToNewsletter' => true,
             ], \JSON_THROW_ON_ERROR),
         );

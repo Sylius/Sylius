@@ -11,7 +11,9 @@
     "email": "oliver@doe.com",
     "firstName": "oliver",
     "lastName": "Doe",
+    "fullName": "oliver Doe",
+    "phoneNumber": null,
     "gender": "u",
-    "subscribedToNewsletter": false,
-    "fullName": "oliver Doe"
+    "birthday": @date@,
+    "subscribedToNewsletter": false
 }
