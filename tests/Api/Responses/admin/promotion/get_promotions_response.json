@@ -27,7 +27,19 @@
                 "\/api\/v2\/admin\/promotion-coupons\/XYZ2"
             ],
             "rules": [],
-            "actions": [],
+            "actions": [
+                {
+                    "@id": "\/api\/v2\/admin\/promotion-actions\/@integer@",
+                    "@type": "PromotionAction",
+                    "id": @integer@,
+                    "type": "unit_fixed_discount",
+                    "configuration": {
+                        "WEB": {
+                            "amount": 100
+                        }
+                    }
+                }
+            ],
             "archivedAt": null,
             "createdAt": @date@,
             "updatedAt": @date@,
