@@ -58,7 +58,6 @@ final class SendContactRequestTest extends JsonApiTestCase
             uri: '/api/v2/shop/contact-requests',
             server: $header,
             content: json_encode([
-                'email' => 'customer@email.com',
                 'message' => 'Example of message',
             ], \JSON_THROW_ON_ERROR),
         );
