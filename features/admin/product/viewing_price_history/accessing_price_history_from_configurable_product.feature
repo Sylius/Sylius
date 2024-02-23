@@ -11,7 +11,7 @@ Feature: Accessing the price history from the configurable product show page
         And the product "Wyborowa Vodka" has a "Wyborowa Vodka Lemon" variant priced at "$10.00"
         And I am logged in as an administrator
 
-    @todo @ui @no-api
+    @ui @no-api
     Scenario: Being able to access the price history of variant from the configurable product show page
         Given I am browsing products
         When I access the "Wyborowa Vodka" product

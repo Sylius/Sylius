@@ -51,7 +51,7 @@
                                     <img src="{{ path }}" alt="{{ product.name }}" class="avatar" />
                                 </div>
                                 <div>
-                                    <div><strong>{{ variant.name }}</strong></div>
+                                    <div><strong {{ sylius_test_html_attribute('product-variant-name') }}>{{ variant.name }}</strong></div>
                                     <div class="text-muted small">{{ variant.code }}</div>
                                 </div>
                             </div>
@@ -112,16 +112,16 @@
                                                     {% set currencyCode = channel.baseCurrency.code %}
                                                     {% set price = channelPricing.price %}
                                                     {% set originalPrice = channelPricing.originalPrice ?? 0 %}
-                                                    {% set lowestPriceBeforeDiscount = channelPricing.lowestPriceBeforeDiscount ?? 0 %}
+                                                    {% set lowestPriceBeforeDiscount = channelPricing.lowestPriceBeforeDiscount %}
 
-                                                    <tr>
-                                                        <td>
-                                                            <span class="badge me-2" style="background-color: {{ channel.color }};"></span>
+                                                    <tr {{ sylius_test_html_attribute('variants') }}>
+                                                        <td {{ sylius_test_html_attribute('channel-name') }}>
+                                                            <span class="badge me-2" style="background-color: {{ channel.color }};" ></span>
                                                             {{ channel.name }}
                                                         </td>
                                                         <td class="text-end">{{ _money.format(price, currencyCode) }}</td>
                                                         <td class="text-end">{{ _money.format(originalPrice, currencyCode) }}</td>
-                                                        <td class="text-end">{{ _money.format(lowestPriceBeforeDiscount, currencyCode) }}</td>
+                                                        <td class="text-end" {{ sylius_test_html_attribute('lowest-price-before-the-discount') }}>{% if lowestPriceBeforeDiscount != null %}{{ _money.format(lowestPriceBeforeDiscount, currencyCode) }}{% else %} - {% endif %}</td>
                                                         <td class="text-end">
                                                             <ul>
                                                                 {% for promotion in channelPricing.appliedPromotions %}
@@ -130,7 +130,7 @@
                                                             </ul>
                                                         </td>
                                                         <td class="text-end">
-                                                            <a class="btn btn-primary" href="{{ path('sylius_admin_channel_pricing_log_entry_index', { productId: product.id, variantId: variant.id, channelPricingId: channelPricing.id }) }}">
+                                                            <a class="btn btn-primary" {{ sylius_test_html_attribute('price-history') }} href="{{ path('sylius_admin_channel_pricing_log_entry_index', { productId: product.id, variantId: variant.id, channelPricingId: channelPricing.id }) }}">
                                                                 {{ 'sylius.ui.price_history'|trans }}
                                                             </a>
                                                         </td>
