@@ -130,7 +130,7 @@
         "symfony/templating": "^6.4.0",
         "symfony/translation": "^6.4.0",
         "symfony/translation-contracts": "^2.5.2",
-        "symfony/ux-autocomplete": "2.x-dev",
+        "symfony/ux-autocomplete": "^2.15",
         "symfony/ux-live-component": "^2.12",
         "symfony/ux-twig-component": "^2.11.2",
         "symfony/twig-bundle": "^6.4.0",
