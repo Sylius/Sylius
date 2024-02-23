@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\PayumBundle\DependencyInjection;
 
-use Payum\Offline\OfflineGatewayFactory;
 use Payum\Paypal\ExpressCheckout\Nvp\PaypalExpressCheckoutGatewayFactory;
 use Payum\Stripe\StripeCheckoutGatewayFactory;
 use Sylius\Bundle\PayumBundle\Attribute\AsGatewayConfigurationType;
