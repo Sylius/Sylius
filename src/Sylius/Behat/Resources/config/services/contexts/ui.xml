@@ -318,8 +318,7 @@
         </service>
 
         <service id="sylius.behat.context.ui.admin.notification" class="Sylius\Behat\Context\Ui\Admin\NotificationContext">
-            <argument type="service" id="sylius.behat.notification_checker.admin" />
-            <argument type="service" id="sylius.behat.java_script_test_helper" />
+            <argument type="service" id="sylius.behat.element.admin.notifications" />
         </service>
 
         <service id="sylius.behat.context.ui.admin.impersonating_customers" class="Sylius\Behat\Context\Ui\Admin\ImpersonatingCustomersContext">
