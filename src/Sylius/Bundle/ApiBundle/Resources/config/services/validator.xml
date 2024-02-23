@@ -155,6 +155,7 @@
         <service id="Sylius\Bundle\ApiBundle\Validator\Constraints\ChosenPaymentRequestActionEligibilityValidator">
             <argument type="service" id="sylius.repository.payment_method" />
             <argument type="service" id="sylius.payment_request.command_provider.gateway_factory" />
+            <argument type="service" id="Sylius\Bundle\CoreBundle\PaymentRequest\Provider\GatewayFactoryNameProviderInterface" />
             <tag name="validator.constraint_validator" alias="sylius_api_chosen_payment_request_action_eligibility" />
         </service>
 

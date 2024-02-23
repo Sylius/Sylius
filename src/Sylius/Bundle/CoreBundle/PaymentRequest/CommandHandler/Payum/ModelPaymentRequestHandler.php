@@ -13,18 +13,21 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\PaymentRequest\CommandHandler\Payum;
 
+use Sylius\Bundle\CoreBundle\PaymentRequest\Checker\PaymentRequestIntegrityCheckerInterface;
 use Sylius\Bundle\CoreBundle\PaymentRequest\Command\PaymentRequestHashAwareInterface;
-use Sylius\Bundle\CoreBundle\PaymentRequest\Payum\Provider\PaymentRequestProviderInterface;
+use Sylius\Bundle\CoreBundle\PaymentRequest\Payum\Checker\PayumRequirementsCheckerInterface;
 use Sylius\Bundle\CoreBundle\PaymentRequest\Processor\Payum\RequestProcessorInterface;
 use Sylius\Bundle\PayumBundle\Factory\GetStatusFactoryInterface;
+use Sylius\Bundle\PayumBundle\Model\GatewayConfigInterface;
+use Sylius\Component\Core\Model\PaymentInterface;
 use Sylius\Component\Core\Model\PaymentMethodInterface;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
-use Webmozart\Assert\Assert;
 
 final class ModelPaymentRequestHandler implements MessageHandlerInterface
 {
     public function __construct(
-        private PaymentRequestProviderInterface $paymentRequestProvider,
+        private PaymentRequestIntegrityCheckerInterface $paymentRequestIntegrityChecker,
+        private PayumRequirementsCheckerInterface $payumRequirementsChecker,
         private RequestProcessorInterface $requestProcessor,
         private GetStatusFactoryInterface $factory,
     ) {
@@ -32,26 +35,19 @@ final class ModelPaymentRequestHandler implements MessageHandlerInterface
 
     public function __invoke(PaymentRequestHashAwareInterface $command): void
     {
-        $hash = $command->getHash();
-        Assert::notNull($hash, 'Payment request hash cannot be null.');
+        $paymentRequest = $this->paymentRequestIntegrityChecker->check($command);
+        $this->payumRequirementsChecker->check($paymentRequest);
 
-        $paymentRequest = $this->paymentRequestProvider->provideFromHash($hash);
-        Assert::notNull($paymentRequest, sprintf('Payment request (hash "%s") not found.', $hash));
-
+        /** @var PaymentInterface $payment */
         $payment = $paymentRequest->getPayment();
-        Assert::notNull($payment, 'Payment cannot be null.');
-
         $request = $this->factory->createNewWithModel($payment);
 
-        /** @var PaymentMethodInterface|null $paymentMethod */
+        /** @var PaymentMethodInterface $paymentMethod */
         $paymentMethod = $paymentRequest->getMethod();
-        Assert::notNull($paymentMethod, 'Payment method cannot be null.');
 
+        /** @var GatewayConfigInterface $gatewayConfig */
         $gatewayConfig = $paymentMethod->getGatewayConfig();
-        Assert::notNull($gatewayConfig, 'Gateway config cannot be null.');
 
-        $gatewayName = $gatewayConfig->getGatewayName();
-
-        $this->requestProcessor->process($paymentRequest, $request, $gatewayName);
+        $this->requestProcessor->process($paymentRequest, $request, $gatewayConfig->getGatewayName());
     }
 }

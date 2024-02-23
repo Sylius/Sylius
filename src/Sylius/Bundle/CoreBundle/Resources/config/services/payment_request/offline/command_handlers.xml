@@ -19,7 +19,7 @@
         <defaults public="true" />
 
         <service id="sylius.payment_request.offline.capture" class="Sylius\Bundle\CoreBundle\PaymentRequest\CommandHandler\Offline\CapturePaymentRequestHandler">
-            <argument type="service" id="sylius.repository.payment_request" />
+            <argument type="service" id="Sylius\Bundle\CoreBundle\PaymentRequest\Checker\PaymentRequestIntegrityCheckerInterface" />
             <argument type="service" id="Sylius\Bundle\CoreBundle\PaymentRequest\Processor\Offline\CaptureProcessorInterface" />
             <argument type="service" id="Sylius\Bundle\CoreBundle\PaymentRequest\Processor\Offline\AfterCaptureProcessorInterface" />
             <tag name="messenger.message_handler" bus="sylius.command_bus" />

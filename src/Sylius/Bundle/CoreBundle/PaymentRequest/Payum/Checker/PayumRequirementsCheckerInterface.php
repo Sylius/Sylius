@@ -11,11 +11,11 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\CoreBundle\PaymentRequest\Payum\Provider;
+namespace Sylius\Bundle\CoreBundle\PaymentRequest\Payum\Checker;
 
 use Sylius\Component\Payment\Model\PaymentRequestInterface;
 
-interface PaymentRequestProviderInterface
+interface PayumRequirementsCheckerInterface
 {
-    public function provideFromHash(string $hash): ?PaymentRequestInterface;
+    public function check(PaymentRequestInterface $paymentRequest): void;
 }
