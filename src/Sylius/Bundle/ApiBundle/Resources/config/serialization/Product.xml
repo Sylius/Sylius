@@ -157,6 +157,8 @@
             <group>sylius:admin:product:index</group>
             <group>admin:product:show</group>
             <group>sylius:admin:product:show</group>
+        </attribute>
+        <attribute name="acceptedReviews" serialized-name="reviews">
             <group>shop:product:index</group>
             <group>sylius:shop:product:index</group>
             <group>shop:product:show</group>
