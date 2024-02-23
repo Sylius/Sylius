@@ -32,6 +32,7 @@ final class ChosenPaymentRequestActionEligibilityValidator extends ConstraintVal
         private GatewayFactoryNameProviderInterface $gatewayFactoryNameProvider,
     ) {
     }
+
     public function validate(mixed $value, Constraint $constraint): void
     {
         Assert::isInstanceOf($value, AddPaymentRequest::class);
@@ -77,6 +78,7 @@ final class ChosenPaymentRequestActionEligibilityValidator extends ConstraintVal
 
         $factoryName = $this->gatewayFactoryNameProvider->provide($paymentMethod);
         $commandProvider = $this->gatewayFactoryCommandProvider->getCommandProvider($factoryName);
+
         return $commandProvider ?? null;
     }
 }
