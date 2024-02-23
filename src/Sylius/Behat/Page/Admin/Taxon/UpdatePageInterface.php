@@ -29,7 +29,7 @@ interface UpdatePageInterface extends BaseUpdatePageInterface
 
     public function specifySlug(string $slug, string $languageCode): void;
 
-    public function attachImage(string $path, string $type = null): void;
+    public function attachImage(string $path, ?string $type = null): void;
 
     public function isImageWithTypeDisplayed(string $type): bool;
 

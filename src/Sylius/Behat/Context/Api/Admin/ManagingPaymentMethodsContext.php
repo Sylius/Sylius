@@ -146,7 +146,7 @@ final class ManagingPaymentMethodsContext implements Context
      * @When I specify its code as :code
      * @When I do not specify its code
      */
-    public function iSpecifyItsCodeAs(string $code = null): void
+    public function iSpecifyItsCodeAs(?string $code = null): void
     {
         $this->client->addRequestData('code', $code);
     }
