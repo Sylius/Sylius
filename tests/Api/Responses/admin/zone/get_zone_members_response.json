@@ -4,14 +4,14 @@
     "@type": "hydra:Collection",
     "hydra:member": [
         {
-            "@id": "\/api\/v2\/admin\/zone-members\/NL",
+            "@id": "\/api\/v2\/admin\/zone-members\/@integer@",
             "@type": "ZoneMember",
             "id": @integer@,
             "code": "NL",
             "belongsTo": "\/api\/v2\/admin\/zones\/EU"
         },
         {
-            "@id": "\/api\/v2\/admin\/zone-members\/BE",
+            "@id": "\/api\/v2\/admin\/zone-members\/@integer@",
             "@type": "ZoneMember",
             "id": @integer@,
             "code": "BE",
