@@ -589,12 +589,8 @@ final class ManagingProductsContext implements Context
      * @When I do not set its :attributeName attribute in :localeCode
      * @When I set the :attributeName attribute value to :value in :localeCode
      */
-    public function iSetItsAttributeTo(?string $attributeName = null, ?string $value = null, $localeCode = 'en_US'): void
+    public function iSetItsAttributeTo(string $attributeName, ?string $value = null, $localeCode = 'en_US'): void
     {
-        if (null === $attributeName) {
-            $attributeName = $this->sharedStorage->get('last_used_attribute_name');
-        }
-
         $this->createSimpleProductPage->updateAttribute($attributeName, $value ?? '', $localeCode);
     }
 
