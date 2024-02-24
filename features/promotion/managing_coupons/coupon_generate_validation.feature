@@ -10,7 +10,7 @@ Feature: Coupon generate instruction validation
         And it is coupon based promotion
         And I am logged in as an administrator
 
-    @ui
+    @api @ui
     Scenario: Trying to generate new coupons without specifying their amount
         When I want to generate new coupons for this promotion
         And I do not specify its amount
@@ -21,7 +21,7 @@ Feature: Coupon generate instruction validation
         Then I should be notified that generate amount is required
         And there should be 0 coupon related to this promotion
 
-    @ui
+    @api @ui
     Scenario: Trying to generate new coupons without specifying their code length
         When I want to generate new coupons for this promotion
         And I do not specify their code length
@@ -32,7 +32,7 @@ Feature: Coupon generate instruction validation
         Then I should be notified that generate code length is required
         And there should be 0 coupon related to this promotion
 
-    @ui
+    @api @ui
     Scenario: Trying to generate new coupons with code length impossible to generate
         When I want to generate new coupons for this promotion
         And I specify their code length as 50
@@ -43,7 +43,7 @@ Feature: Coupon generate instruction validation
         Then I should be notified that generate code length is out of range
         And there should be 0 coupon related to this promotion
 
-    @ui
+    @api @ui
     Scenario: Trying to generate new coupons with amount and code length impossible to generate
         When I want to generate new coupons for this promotion
         And I specify their code length as 1

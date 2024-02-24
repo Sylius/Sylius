@@ -43,6 +43,28 @@ final class EmailContext implements Context
     }
 
     /**
+     * @Then a verification email should have been sent to :recipient
+     */
+    public function aVerificationEmailShouldHaveBeenSentTo(string $recipient): void
+    {
+        $this->assertEmailContainsMessageTo(
+            $this->translator->trans('sylius.email.user.account_verification.message'),
+            $recipient,
+        );
+    }
+
+    /**
+     * @Then a welcoming email should not have been sent to :recipient
+     */
+    public function aWelcomingEmailShouldNotHaveBeenSentTo(string $recipient): void
+    {
+        $this->assertEmailDoesNotContainMessageTo(
+            $this->translator->trans('sylius.email.user_registration.welcome_to_our_store'),
+            $recipient,
+        );
+    }
+
+    /**
      * @Then :count email(s) should be sent to :recipient
      */
     public function numberOfEmailsShouldBeSentTo(int $count, string $recipient): void
@@ -84,6 +106,25 @@ final class EmailContext implements Context
         string $localeCode = 'en_US',
     ): void {
         $this->assertEmailContainsMessageTo(
+            sprintf(
+                '%s %s %s',
+                $this->translator->trans('sylius.email.order_confirmation.your_order_number', [], null, $localeCode),
+                $order->getNumber(),
+                $this->translator->trans('sylius.email.order_confirmation.has_been_successfully_placed', [], null, $localeCode),
+            ),
+            $recipient,
+        );
+    }
+
+    /**
+     * @Then an email with the confirmation of the order :order should not be sent to :email
+     */
+    public function anEmailWithTheConfirmationOfTheOrderShouldNotBeSentTo(
+        OrderInterface $order,
+        string $recipient,
+        string $localeCode = 'en_US',
+    ): void {
+        $this->assertEmailDoesNotContainMessageTo(
             sprintf(
                 '%s %s %s',
                 $this->translator->trans('sylius.email.order_confirmation.your_order_number', [], null, $localeCode),
@@ -169,9 +210,22 @@ final class EmailContext implements Context
         Assert::false($this->emailChecker->hasRecipient($recipient));
     }
 
+    /**
+     * @Then only one email should have been sent to :recipient
+     */
+    public function onlyOneEmailShouldHaveBeenSentTo(string $recipient): void
+    {
+        Assert::eq($this->emailChecker->countMessagesTo($recipient), 1);
+    }
+
     private function assertEmailContainsMessageTo(string $message, string $recipient): void
     {
         Assert::true($this->emailChecker->hasMessageTo($message, $recipient));
+    }
+
+    private function assertEmailDoesNotContainMessageTo(string $message, string $recipient): void
+    {
+        Assert::false($this->emailChecker->hasMessageTo($message, $recipient));
     }
 
     private function getShippingMethodName(OrderInterface $order): string

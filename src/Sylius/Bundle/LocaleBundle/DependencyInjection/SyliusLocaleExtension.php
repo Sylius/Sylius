@@ -13,8 +13,10 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\LocaleBundle\DependencyInjection;
 
+use Sylius\Bundle\LocaleBundle\Attribute\AsLocaleContext;
 use Sylius\Bundle\ResourceBundle\DependencyInjection\Extension\AbstractResourceExtension;
 use Symfony\Component\Config\FileLocator;
+use Symfony\Component\DependencyInjection\ChildDefinition;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 
@@ -32,5 +34,17 @@ final class SyliusLocaleExtension extends AbstractResourceExtension
         $container->setParameter('sylius_locale.locale', $config['locale']);
 
         $container->findDefinition('sylius.repository.locale')->setLazy(true);
+
+        $this->registerAutoconfiguration($container);
+    }
+
+    private function registerAutoconfiguration(ContainerBuilder $container): void
+    {
+        $container->registerAttributeForAutoconfiguration(
+            AsLocaleContext::class,
+            static function (ChildDefinition $definition, AsLocaleContext $attribute): void {
+                $definition->addTag(AsLocaleContext::SERVICE_TAG, ['priority' => $attribute->getPriority()]);
+            },
+        );
     }
 }

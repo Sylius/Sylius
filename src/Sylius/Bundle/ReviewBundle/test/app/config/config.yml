@@ -50,7 +50,7 @@ security:
                         password:           foo
                         roles:              ROLE_USER
     password_hashers:
-        Sylius\Component\User\Model\UserInterface: sha512
+        Sylius\Component\User\Model\UserInterface: plaintext
     firewalls:
         admin:
             switch_user: true

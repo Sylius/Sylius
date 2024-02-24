@@ -70,5 +70,11 @@
             <argument type="service" id="sylius.templating.helper.locale" />
             <tag name="twig.extension" />
         </service>
+
+        <service id="Sylius\Bundle\LocaleBundle\Checker\LocaleUsageCheckerInterface" class="Sylius\Bundle\LocaleBundle\Checker\LocaleUsageChecker">
+            <argument type="service" id="sylius.repository.locale" />
+            <argument type="service" id="sylius.resource_registry" />
+            <argument type="service" id="doctrine.orm.entity_manager" />
+        </service>
     </services>
 </container>

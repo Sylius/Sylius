@@ -33,6 +33,7 @@ final class PathPrefixProvider implements PathPrefixProviderInterface
             return null;
         }
 
+        /** @var array<int, string> $pathElements */
         $pathElements = array_values(array_filter(explode('/', str_replace($this->apiRoute, '', $path))));
 
         if ($pathElements[0] === PathPrefixes::SHOP_PREFIX) {

@@ -1,0 +1,46 @@
+<?xml version="1.0" ?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Sylius Sp. z o.o.
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<serializer xmlns="http://symfony.com/schema/dic/serializer-mapping"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xsi:schemaLocation="http://symfony.com/schema/dic/serializer-mapping https://symfony.com/schema/dic/serializer-mapping/serializer-mapping-1.0.xsd"
+>
+    <class name="Sylius\Component\Shipping\Model\ShippingMethodRule">
+        <attribute name="id">
+            <group>admin:shipping_method:index</group>
+            <group>sylius:admin:shipping_method:index</group>
+            <group>admin:shipping_method:show</group>
+            <group>sylius:admin:shipping_method:show</group>
+        </attribute>
+        <attribute name="type">
+            <group>admin:shipping_method:index</group>
+            <group>sylius:admin:shipping_method:index</group>
+            <group>admin:shipping_method:show</group>
+            <group>sylius:admin:shipping_method:show</group>
+            <group>admin:shipping_method:create</group>
+            <group>sylius:admin:shipping_method:create</group>
+            <group>admin:shipping_method:update</group>
+            <group>sylius:admin:shipping_method:update</group>
+        </attribute>
+        <attribute name="configuration">
+            <group>admin:shipping_method:index</group>
+            <group>sylius:admin:shipping_method:index</group>
+            <group>admin:shipping_method:show</group>
+            <group>sylius:admin:shipping_method:show</group>
+            <group>admin:shipping_method:create</group>
+            <group>sylius:admin:shipping_method:create</group>
+            <group>admin:shipping_method:update</group>
+            <group>sylius:admin:shipping_method:update</group>
+        </attribute>
+    </class>
+</serializer>

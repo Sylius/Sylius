@@ -1,0 +1,68 @@
+Sylius\Component\Core\Model\Promotion:
+    promotion_50_off:
+        code: '50_off'
+        name: '50% Off on your first order'
+        description: 'Get 50% off of your first purchase'
+        channels: ['@channel_mobile']
+        priority: 1
+        exclusive: true
+        appliesToDiscounted: false
+        usageLimit: 1
+        used: 0
+        couponBased: false
+        translations:
+            - '@promotion_50_off_en'
+    promotion_1_off:
+        code: 'dollar_off'
+        name: '1 dollar off each item'
+        description: 'Get 1 dollar off every item when buying more than 10'
+        channels: ['@channel_web', '@channel_mobile']
+        priority: 2
+        exclusive: false
+        appliesToDiscounted: true
+        couponBased: true
+        translations:
+            - '@promotion_1_off_en'
+    promotion_back_to_school:
+        code: 'back_to_school'
+        name: 'Back to school'
+        description: 'Get 10% off on all school supplies'
+        channels: ['@channel_web', '@channel_mobile']
+        priority: 3
+        exclusive: false
+        appliesToDiscounted: true
+        couponBased: false
+        archivedAt: <dateTimeBetween('-1 month', 'now')>
+        translations:
+            - '@promotion_back_to_school_en'
+
+Sylius\Component\Promotion\Model\PromotionTranslation:
+    promotion_50_off_en:
+        locale: 'en_US'
+        label: '-50% on first order!'
+        translatable: '@promotion_50_off'
+    promotion_1_off_en:
+        locale: 'en_US'
+        label: '1$ off every item!'
+        translatable: '@promotion_1_off'
+    promotion_back_to_school_en:
+        locale: 'en_US'
+        label: 'Back to school sale!'
+        translatable: '@promotion_back_to_school'
+
+Sylius\Component\Core\Model\PromotionCoupon:
+    promotion_1_off_coupon_1:
+        code: 'XYZ1'
+        usageLimit: 2
+        perCustomerUsageLimit: 1
+        used: 1
+        reusableFromCancelledOrders: true
+        promotion: '@promotion_1_off'
+        expiresAt: null
+    promotion_1_off_coupon_2:
+        code: 'XYZ2'
+        usageLimit: null
+        perCustomerUsageLimit: null
+        reusableFromCancelledOrders: false
+        promotion: '@promotion_1_off'
+        expiresAt: <dateTimeBetween('now', '+20 days')>

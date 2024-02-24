@@ -73,14 +73,6 @@ final class ManagingCustomerGroupsContext implements Context
     }
 
     /**
-     * @When I (try to) save my changes
-     */
-    public function iSaveMyChanges(): void
-    {
-        $this->client->update();
-    }
-
-    /**
      * @When I browse customer groups
      * @When I want to browse customer groups
      */
@@ -200,17 +192,6 @@ final class ManagingCustomerGroupsContext implements Context
         Assert::true(
             $this->responseChecker->isCreationSuccessful($this->client->getLastResponse()),
             'Customer group could not be created',
-        );
-    }
-
-    /**
-     * @Then I should be notified that it has been successfully edited
-     */
-    public function iShouldBeNotifiedThatItHasBeenSuccessfullyEdited(): void
-    {
-        Assert::true(
-            $this->responseChecker->isUpdateSuccessful($this->client->getLastResponse()),
-            'Customer group could not be edited',
         );
     }
 

@@ -1,51 +1,83 @@
 name: Continuous Integration (Full)
 
 on:
+    schedule:
+        -
+            cron: "0 2 * * *" # Run every day at 2am
     workflow_dispatch: ~
 
 concurrency:
     group: ci-${{ github.workflow }}-${{ github.ref }}-full
     cancel-in-progress: true
 
+permissions: 
+    contents: read
+
 jobs:
     static-checks:
-        name: Static checks
+        strategy:
+            matrix:
+                branch: [ "1.12", "1.13" ]
+        name: "[${{ matrix.branch }}] Static checks"
         uses: ./.github/workflows/ci_static-checks.yaml
         with:
+            branch: ${{ matrix.branch }}
             type: full
     e2e-mariadb:
-        name: End-to-end tests (MariaDB)
+        strategy:
+            matrix:
+                branch: [ "1.12", "1.13" ]
+        name: "[${{ matrix.branch }}] End-to-end tests (MariaDB)"
         needs: static-checks
         uses: ./.github/workflows/ci_e2e-mariadb.yaml
         with:
+            branch: ${{ matrix.branch }}
             type: full
     e2e-mysql:
-        name: End-to-end tests (MySQL)
+        strategy:
+            matrix:
+                branch: [ "1.12", "1.13" ]
+        name: "[${{ matrix.branch }}] End-to-end tests (MySQL)"
         needs: static-checks
         uses: ./.github/workflows/ci_e2e-mysql.yaml
         with:
+            branch: ${{ matrix.branch }}
             type: full
     e2e-pgsql:
-        name: End-to-end tests (PostgreSQL)
+        strategy:
+            matrix:
+                branch: [ "1.12", "1.13" ]
+        name: "[${{ matrix.branch }}] End-to-end tests (PostgreSQL)"
         needs: static-checks
         uses: ./.github/workflows/ci_e2e-pgsql.yaml
         with:
+            branch: ${{ matrix.branch }}
             type: full
     e2e-custom:
-        name: End-to-end tests (Custom)
+        strategy:
+            matrix:
+                branch: [ "1.12", "1.13" ]
+        name: "[${{ matrix.branch }}] End-to-end tests (Custom)"
         needs: static-checks
         uses: ./.github/workflows/ci_e2e-custom.yaml
+        with:
+            branch: ${{ matrix.branch }}
     frontend:
         name: Frontend
         needs: static-checks
         uses: ./.github/workflows/ci_frontend.yaml
         with:
+            branch: ${{ matrix.branch }}
             type: full
     packages:
-        name: Packages
+        strategy:
+            matrix:
+                branch: [ "1.12", "1.13" ]
+        name: "[${{ matrix.branch }}] Packages"
         needs: static-checks
         uses: ./.github/workflows/ci_packages.yaml
         with:
+            branch: ${{ matrix.branch }}
             type: full
     unstable:
         name: Unstable

@@ -1,0 +1,20 @@
+# This file is part of the Sylius package.
+# (c) Sylius Sp. z o.o.
+
+default:
+    suites:
+        managing_taxons_ajax:
+            contexts:
+                - sylius.behat.context.hook.doctrine_orm
+
+                - sylius.behat.context.transform.channel
+                - sylius.behat.context.transform.taxon
+
+                - sylius.behat.context.setup.channel
+                - sylius.behat.context.setup.taxonomy
+                - sylius.behat.context.setup.admin_security
+
+                - sylius.behat.context.api.admin.ajax_taxons
+            filters:
+                tags: "@managing_taxons_ajax&&@api"
+            javascript: false

@@ -20,18 +20,18 @@ use HWI\Bundle\OAuthBundle\OAuth\ResourceOwner\AbstractResourceOwner;
 use HWI\Bundle\OAuthBundle\OAuth\Response\AbstractUserResponse;
 use PHPUnit\Framework\Assert;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
-use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\BrowserKit\Client;
+use Symfony\Component\PasswordHasher\Hasher\SodiumPasswordHasher;
 
-final class UpdatingUserPasswordEncoderTest extends WebTestCase
+final class UpdatingUserPasswordEncoderTest extends AbstractWebTestCase
 {
     /** @var Client */
     private $client;
 
     protected function setUp(): void
     {
-        $this->client = static::createClient();
-        $this->client->followRedirects(true);
+        $this->client = $this->createClient(['test_case' => 'PasswordHasherState']);
+        $this->client->followRedirects();
 
         /** @var LoaderInterface $fixtureLoader */
         $fixtureLoader = $this->client->getContainer()->get('fidry_alice_data_fixtures.loader.doctrine');
@@ -43,7 +43,7 @@ final class UpdatingUserPasswordEncoderTest extends WebTestCase
             ],
             [],
             [],
-            PurgeMode::createDeleteMode()
+            PurgeMode::createDeleteMode(),
         );
     }
 
@@ -60,8 +60,9 @@ final class UpdatingUserPasswordEncoderTest extends WebTestCase
 
         Assert::assertNotNull($shopUser, 'Could not find Shop User with oliver@doe.com email address');
 
-        $shopUser->setPlainPassword('testpassword');
-        $shopUser->setEncoderName('argon2i');
+        $passwordHasher = new SodiumPasswordHasher();
+        $shopUser->setPassword($passwordHasher->hash('testpassword'));
+        $shopUser->setEncoderName('sodium');
 
         $shopUserManager->persist($shopUser);
         $shopUserManager->flush();
@@ -88,8 +89,10 @@ final class UpdatingUserPasswordEncoderTest extends WebTestCase
         $adminUserManager = $this->client->getContainer()->get('sylius.manager.admin_user');
 
         $adminUser = $adminUserRepository->findOneByEmail('user@example.com');
-        $adminUser->setPlainPassword('testpassword');
-        $adminUser->setEncoderName('argon2i');
+
+        $passwordHasher = new SodiumPasswordHasher();
+        $adminUser->setPassword($passwordHasher->hash('testpassword'));
+        $adminUser->setEncoderName('sodium');
 
         $adminUserManager->persist($adminUser);
         $adminUserManager->flush();
@@ -124,7 +127,7 @@ final class UpdatingUserPasswordEncoderTest extends WebTestCase
             AbstractResourceOwner::class,
             [
                 'getName' => 'resourceProviderName',
-            ]
+            ],
         );
 
         $responseMock = $this->createConfiguredMock(
@@ -134,7 +137,7 @@ final class UpdatingUserPasswordEncoderTest extends WebTestCase
                 'getResourceOwner' => $resourceOwnerMock,
                 'getAccessToken' => 'LongAccessToken',
                 'getRefreshToken' => 'LongRefreshToken',
-            ]
+            ],
         );
 
         $oAuthUserProvider->connect($shopUser, $responseMock);

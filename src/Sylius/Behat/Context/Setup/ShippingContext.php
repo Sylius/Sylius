@@ -48,7 +48,7 @@ final class ShippingContext implements Context
     }
 
     /**
-     * @Given the store ships everything for free within the :zone zone
+     * @Given the store ships everything for Free within the :zone zone
      */
     public function storeShipsEverythingForFree(ZoneInterface $zone): void
     {

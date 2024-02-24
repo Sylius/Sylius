@@ -34,11 +34,6 @@ final class TaxonTypeExtension extends AbstractTypeExtension
         ;
     }
 
-    public function getExtendedType(): string
-    {
-        return TaxonType::class;
-    }
-
     public static function getExtendedTypes(): iterable
     {
         return [TaxonType::class];

@@ -4,7 +4,7 @@
         {{ form_widget(slugField, {'attr': {'data-url': path('sylius_admin_ajax_generate_taxon_slug'), 'data-parent': app.request.attributes.get('id')}}) }}
     {% else %}
     <div class="ui action input">
-        {{ form_widget(slugField, {'attr': {'readonly': 'readonly', 'data-url': path('sylius_admin_ajax_generate_taxon_slug')}}) }}
+        {{ form_widget(slugField, {'attr': {'readonly': 'readonly', 'data-url': path('sylius_admin_ajax_generate_taxon_slug'), 'data-parent': resource.parent ? resource.parent.id : null}}) }}
         <span class="ui icon button toggle-taxon-slug-modification">
             <i class="lock icon"></i>
         </span>

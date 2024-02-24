@@ -1,0 +1,13 @@
+{
+    "@context": "\/api\/v2\/contexts\/ConstraintViolationList",
+    "@type": "ConstraintViolationList",
+    "hydra:title": "An error occurred",
+    "hydra:description": "Configuration max length must be greater or equal to the min length.",
+    "violations":[
+        {
+            "propertyPath": "",
+            "message": "Configuration max length must be greater or equal to the min length.",
+            "code": null
+        }
+    ]
+}

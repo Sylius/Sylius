@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\Controller;
 
-use ApiPlatform\Core\Api\IriConverterInterface;
+use ApiPlatform\Api\IriConverterInterface;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Repository\ProductRepositoryInterface;
@@ -47,7 +47,7 @@ final class GetProductBySlugAction
             throw new NotFoundHttpException('Not Found');
         }
 
-        $iri = $this->iriConverter->getIriFromItem($product);
+        $iri = $this->iriConverter->getIriFromResource($product);
 
         $request = $this->requestStack->getCurrentRequest();
 

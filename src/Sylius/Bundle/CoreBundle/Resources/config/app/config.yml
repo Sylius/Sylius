@@ -22,13 +22,29 @@ imports:
     - { resource: "@SyliusCoreBundle/Resources/config/app/parameters.yml" }
     - { resource: "@SyliusCoreBundle/Resources/config/app/sylius.yml" }
     - { resource: "@SyliusCoreBundle/Resources/config/app/state_machine.yml" }
+    - { resource: "@SyliusCoreBundle/Resources/config/app/workflow.yaml" }
     - { resource: "@SyliusCoreBundle/Resources/config/app/fixtures.yml" }
     - { resource: "@SyliusCoreBundle/Resources/config/app/messenger.yaml" }
+    - { resource: "@SyliusCoreBundle/Resources/config/app/nyholm_psr7.yaml" }
     - { resource: "@SyliusCoreBundle/Resources/config/app/doctrine_migrations.yaml" }
 
 parameters:
     sylius_core.public_dir: "%kernel.project_dir%/web"
     sylius_core.images_dir: "%sylius_core.public_dir%/media/image"
+    locale: en_US
+
+sylius_core:
+    orders_statistics:
+        intervals_map:
+            day:
+                interval: P1D
+                period_format: Y-m-d
+            month:
+                interval: P1M
+                period_format: Y-m
+            year:
+                interval: P1Y
+                period_format: Y
 
 doctrine:
     orm:
@@ -141,3 +157,14 @@ sonata_block:
                 resources: ~
                 statistics: ~
                 taxon: ~
+
+sylius_state_machine_abstraction:
+    graphs_to_adapters_mapping:
+        sylius_catalog_promotion: symfony_workflow
+        sylius_order: symfony_workflow
+        sylius_order_checkout: symfony_workflow
+        sylius_order_payment: symfony_workflow
+        sylius_order_shipping: symfony_workflow
+        sylius_payment: symfony_workflow
+        sylius_product_review: symfony_workflow
+        sylius_shipment: symfony_workflow

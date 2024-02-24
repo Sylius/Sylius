@@ -1,0 +1,59 @@
+{
+    "@context": "\/api\/v2\/contexts\/Promotion",
+    "@id": "\/api\/v2\/admin\/promotions\/50_off",
+    "@type": "Promotion",
+    "channels": [
+        "\/api\/v2\/admin\/channels\/MOBILE"
+    ],
+    "id": @integer@,
+    "code": "50_off",
+    "name": "Christmas",
+    "description": "Get 50% off of your first purchase",
+    "priority": 1,
+    "exclusive": true,
+    "usageLimit": 11,
+    "used": 0,
+    "archivedAt": null,
+    "startsAt": null,
+    "endsAt": null,
+    "couponBased": false,
+    "coupons": [],
+    "rules": [
+        {
+            "@id": "\/api\/v2\/admin\/promotion-rules\/@integer@",
+            "@type": "PromotionRule",
+            "id": @integer@,
+            "type": "cart_quantity",
+            "configuration": {
+                "count": 1
+            }
+        }
+    ],
+    "actions": [
+        {
+            "@id": "\/api\/v2\/admin\/promotion-actions\/@integer@",
+            "@type": "PromotionAction",
+            "id": @integer@,
+            "type": "order_fixed_discount",
+            "configuration": {
+                "WEB": {
+                    "amount": 2
+                },
+                "MOBILE": {
+                    "amount": 2
+                }
+            }
+        }
+    ],
+    "appliesToDiscounted": true,
+    "createdAt": @date@,
+    "updatedAt": @date@,
+    "translations": {
+        "en_US": {
+            "@id": "\/api\/v2\/admin\/promotion-translations\/@integer@",
+            "@type": "PromotionTranslation",
+            "id": @integer@,
+            "label": "Christmas"
+        }
+    }
+}

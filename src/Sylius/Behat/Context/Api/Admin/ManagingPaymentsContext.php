@@ -13,16 +13,18 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Api\Admin;
 
-use ApiPlatform\Core\Api\IriConverterInterface;
+use ApiPlatform\Api\IriConverterInterface;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Context\Api\Resources;
+use Sylius\Behat\Service\Converter\SectionAwareIriConverterInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Payment\PaymentTransitions;
+use Symfony\Component\HttpFoundation\Request as HttpRequest;
 use Webmozart\Assert\Assert;
 
 final class ManagingPaymentsContext implements Context
@@ -30,6 +32,7 @@ final class ManagingPaymentsContext implements Context
     public function __construct(
         private ApiClientInterface $client,
         private ResponseCheckerInterface $responseChecker,
+        private SectionAwareIriConverterInterface $sectionAwareIriConverter,
         private IriConverterInterface $iriConverter,
         private string $apiUrlPrefix,
     ) {
@@ -42,6 +45,34 @@ final class ManagingPaymentsContext implements Context
     public function iAmBrowsingPayments(): void
     {
         $this->client->index(Resources::PAYMENTS);
+    }
+
+    /**
+     * @When I go to the details of the first payment's order
+     */
+    public function iGoToTheDetailsOfTheFirstPaymentSOrder(): void
+    {
+        $firstPayment = $this->responseChecker->getCollection($this->client->getLastResponse())[0];
+
+        /** @var OrderInterface $order */
+        $order = $this->iriConverter->getResourceFromIri($firstPayment['order']);
+
+        $this->client->customItemAction(Resources::ORDERS, $order->getTokenValue(), HttpRequest::METHOD_GET, 'payments');
+    }
+
+    /**
+     * @Then I should see the details of order :order
+     */
+    public function iShouldSeeOrderWithDetails(OrderInterface $order): void
+    {
+        Assert::true(
+            $this->responseChecker->hasItemWithValue(
+                $this->client->getLastResponse(),
+                'order',
+                $this->sectionAwareIriConverter->getIriFromResourceInSection($order, 'admin'),
+            ),
+            sprintf('Order with number %s does not exist', $order->getNumber()),
+        );
     }
 
     /**
@@ -169,7 +200,7 @@ final class ManagingPaymentsContext implements Context
         Assert::true($this->responseChecker->hasItemWithValue(
             $this->client->getLastResponse(),
             'order',
-            $this->iriConverter->getIriFromItemInSection($order, 'admin'),
+            $this->sectionAwareIriConverter->getIriFromResourceInSection($order, 'admin'),
         ));
     }
 
@@ -181,7 +212,7 @@ final class ManagingPaymentsContext implements Context
         Assert::false($this->responseChecker->hasItemWithValue(
             $this->client->getLastResponse(),
             'order',
-            $this->iriConverter->getIriFromItemInSection($order, 'admin'),
+            $this->sectionAwareIriConverter->getIriFromResourceInSection($order, 'admin'),
         ));
     }
 }

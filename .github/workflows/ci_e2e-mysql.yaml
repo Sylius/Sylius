@@ -4,10 +4,18 @@ on:
     workflow_dispatch: ~
     workflow_call:
         inputs:
+            branch:
+                description: "Branch"
+                required: false
+                type: string
+                default: ""
             type:
                 description: "Type of the build"
                 required: true
                 type: string
+
+permissions:
+    contents: read
 
 jobs:
     get-matrix:
@@ -16,7 +24,15 @@ jobs:
         outputs:
             matrix: ${{ steps.matrix.outputs.prop }}
         steps:
-            -   uses: actions/checkout@v3
+            -   name: "Checkout (With Branch)"
+                if: "${{ inputs.branch != '' }}"
+                uses: actions/checkout@v3
+                with:
+                    ref: ${{ inputs.branch }}
+
+            -   name: "Checkout"
+                uses: actions/checkout@v3
+                if: "${{ inputs.branch == '' }}"
             -
                 name: "Get matrix"
                 id: matrix
@@ -28,7 +44,7 @@ jobs:
     behat-no-js:
         needs: get-matrix
         runs-on: ubuntu-latest
-        name: "Non-JS, PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}, MySQL ${{ matrix.mysql }}, Twig ${{ matrix.twig }}, DBAL ${{ matrix.dbal }}.x, API Platform ${{ matrix.api-platform }}"
+        name: "Non-JS, PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}, MySQL ${{ matrix.mysql }}, Twig ${{ matrix.twig }}, API Platform ${{ matrix.api-platform }}"
         timeout-minutes: 45
         strategy:
             fail-fast: false
@@ -39,25 +55,40 @@ jobs:
             DATABASE_URL: "mysql://root:root@127.0.0.1/sylius?charset=utf8mb4&serverVersion=${{ matrix.mysql }}"
 
         steps:
-            -
+            -   name: Set variables
+                shell: bash
+                env:
+                    BRANCH: ${{ inputs.branch }}
+                run: |
+                    if [ "$BRANCH" == "1.12" ]; then
+                        echo "USE_LEGACY_POSTGRES_SETUP=yes" >> $GITHUB_ENV
+                    else
+                        echo "USE_LEGACY_POSTGRES_SETUP=no" >> $GITHUB_ENV
+                    fi
+
+            -   name: "Checkout (With Branch)"
+                if: "${{ inputs.branch != '' }}"
+                uses: actions/checkout@v3
+                with:
+                    ref: ${{ inputs.branch }}
+
+            -   name: "Checkout"
+                if: "${{ inputs.branch == '' }}"
                 uses: actions/checkout@v3
 
             -   name: Restrict Twig
                 if: matrix.twig == '^2.12'
                 run: composer require --no-update --no-scripts --no-interaction "twig/twig:${{ matrix.twig }}"
-                    
-            -   name: Restrict DBAL
-                if: matrix.dbal == '^2.7'
-                run: composer require --no-update --no-scripts --no-interaction "doctrine/dbal:${{ matrix.dbal }}"
-                
+
             -   name: Build application
-                uses: SyliusLabs/BuildTestAppAction@v2.0
+                uses: SyliusLabs/BuildTestAppAction@v2.2
                 with:
                     build_type: "sylius"
                     cache_key:  "${{ github.run_id }}-${{ runner.os }}-${{ hashFiles('composer.json') }}-symfony-${{ matrix.symfony }}-api-platform-${{ matrix.api-platform }}"
                     cache_restore_key: "${{ github.run_id }}-${{ runner.os }}-${{ hashFiles('composer.json') }}-symfony-${{ matrix.symfony }}-api-platform-${{ matrix.api-platform }}"
                     e2e: "yes"
                     database_version: ${{ matrix.mysql }}
+                    legacy_postgresql_setup: ${{ env.USE_LEGACY_POSTGRES_SETUP }}
                     php_version: ${{ matrix.php }}
                     symfony_version: ${{ matrix.symfony }}
 
@@ -80,7 +111,7 @@ jobs:
                 uses: actions/upload-artifact@v3
                 if: failure()
                 with:
-                    name: "Logs (non-JS, PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}), ApiPlatform ${{ matrix.api-platform }}, Twig ${{ matrix.twig }}, MySQL ${{ matrix.mysql }}, DBAL ${{ matrix.dbal }}"
+                    name: "Logs (non-JS, PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}), ApiPlatform ${{ matrix.api-platform }}, Twig ${{ matrix.twig }}, MySQL ${{ matrix.mysql }}"
                     path: |
                         etc/build/
                         var/log
@@ -89,7 +120,7 @@ jobs:
     behat-ui-js:
         needs: get-matrix
         runs-on: ubuntu-latest
-        name: "JS, PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}, MySQL ${{ matrix.mysql }}, Twig ${{ matrix.twig }}, DBAL ${{ matrix.dbal }}, API Platform ${{ matrix.api-platform }}"
+        name: "JS, PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}, MySQL ${{ matrix.mysql }}, Twig ${{ matrix.twig }}, API Platform ${{ matrix.api-platform }}"
         timeout-minutes: 45
         strategy:
             fail-fast: false
@@ -100,6 +131,17 @@ jobs:
             DATABASE_URL: "mysql://root:root@127.0.0.1/sylius?charset=utf8mb4&serverVersion=${{ matrix.mysql }}"
 
         steps:
+            -   name: Set variables
+                shell: bash
+                env:
+                    BRANCH: ${{ inputs.branch }}
+                run: |
+                    if [ "$BRANCH" == "1.12" ]; then
+                        echo "USE_LEGACY_POSTGRES_SETUP=yes" >> $GITHUB_ENV
+                    else
+                        echo "USE_LEGACY_POSTGRES_SETUP=no" >> $GITHUB_ENV
+                    fi
+
             -
                 uses: actions/checkout@v3
 
@@ -118,12 +160,8 @@ jobs:
                 if: matrix.twig == '^2.12'
                 run: composer require --no-update --no-scripts --no-interaction "twig/twig:${{ matrix.twig }}"
 
-            -   name: Restrict DBAL
-                if: matrix.dbal == '^2.7'
-                run: composer require --no-update --no-scripts --no-interaction "doctrine/dbal:${{ matrix.dbal }}"
-
             -   name: Build application
-                uses: jakubtobiasz/SyliusBuildTestAppAction@v2.0
+                uses: SyliusLabs/BuildTestAppAction@v2.2
                 with:
                     build_type: "sylius"
                     cache_key:  "${{ github.run_id }}-${{ runner.os }}-${{ hashFiles('composer.json') }}-symfony-${{ matrix.symfony }}-api-platform-${{ matrix.api-platform }}"
@@ -131,8 +169,10 @@ jobs:
                     e2e: "yes"
                     e2e_js: "yes"
                     database_version: ${{ matrix.mysql }}
+                    legacy_postgresql_setup: ${{ env.USE_LEGACY_POSTGRES_SETUP }}
                     php_version: ${{ matrix.php }}
                     symfony_version: ${{ matrix.symfony }}
+                    node_version: "20.x"
 
             -   name: Install Behat driver
                 run: vendor/bin/bdi detect drivers
@@ -147,7 +187,7 @@ jobs:
                 uses: actions/upload-artifact@v3
                 if: failure()
                 with:
-                    name: "Logs (JS, PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}, ApiPlatform ${{ matrix.api-platform }}, Twig ${{ matrix.twig }}, MySQL ${{ matrix.mysql }}, DBAL ${{ matrix.dbal }})"
+                    name: "Logs (JS, PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}, ApiPlatform ${{ matrix.api-platform }}, Twig ${{ matrix.twig }}, MySQL ${{ matrix.mysql }})"
                     path: |
                         etc/build/
                         var/log

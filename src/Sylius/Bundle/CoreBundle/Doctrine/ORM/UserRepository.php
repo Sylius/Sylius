@@ -17,6 +17,13 @@ use Sylius\Bundle\UserBundle\Doctrine\ORM\UserRepository as BaseUserRepository;
 use Sylius\Component\User\Model\UserInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
 
+/**
+ * @template T of UserInterface
+ *
+ * @extends BaseUserRepository<T>
+ *
+ * @implements UserRepositoryInterface<T>
+ */
 class UserRepository extends BaseUserRepository implements UserRepositoryInterface
 {
     public function findOneByEmail(string $email): ?UserInterface

@@ -24,7 +24,10 @@
             <collectionOperation name="admin_get">
                 <attribute name="method">GET</attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:admin_user:read</attribute>
+                    <attribute name="groups">
+                        <attribute>admin:admin_user:index</attribute>
+                        <attribute>sylius:admin:admin_user:index</attribute>
+                    </attribute>
                 </attribute>
             </collectionOperation>
 
@@ -34,8 +37,17 @@
                     <attribute>sylius</attribute>
                     <attribute>sylius_user_create</attribute>
                 </attribute>
+                <attribute name="denormalization_context">
+                    <attribute name="groups">
+                        <attribute>admin:admin_user:create</attribute>
+                        <attribute>sylius:admin:admin_user:create</attribute>
+                    </attribute>
+                </attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:admin_user:create</attribute>
+                    <attribute name="groups">
+                        <attribute>admin:admin_user:show</attribute>
+                        <attribute>sylius:admin:admin_user:show</attribute>
+                    </attribute>
                 </attribute>
             </collectionOperation>
         </collectionOperations>
@@ -44,14 +56,26 @@
             <itemOperation name="admin_get">
                 <attribute name="method">GET</attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:admin_user:read</attribute>
+                    <attribute name="groups">
+                        <attribute>admin:admin_user:show</attribute>
+                        <attribute>sylius:admin:admin_user:show</attribute>
+                    </attribute>
                 </attribute>
             </itemOperation>
 
             <itemOperation name="admin_put">
                 <attribute name="method">PUT</attribute>
                 <attribute name="denormalization_context">
-                    <attribute name="groups">admin:admin_user:update</attribute>
+                    <attribute name="groups">
+                        <attribute>admin:admin_user:update</attribute>
+                        <attribute>sylius:admin:admin_user:update</attribute>
+                    </attribute>
+                </attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">
+                        <attribute>admin:admin_user:show</attribute>
+                        <attribute>sylius:admin:admin_user:show</attribute>
+                    </attribute>
                 </attribute>
             </itemOperation>
 

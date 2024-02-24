@@ -50,6 +50,23 @@ class IndexPage extends BaseIndexPage implements IndexPageInterface
         $this->getDocument()->fillField(sprintf('criteria_%s_value', $field), $value);
     }
 
+    public function chooseArchival(string $isArchival): void
+    {
+        $this->getElement('filter_archival')->selectOption($isArchival);
+    }
+
+    public function isArchivalFilterEnabled(): bool
+    {
+        return '1' === $this->getElement('filter_archival')->getValue();
+    }
+
+    protected function getDefinedElements(): array
+    {
+        return array_merge(parent::getDefinedElements(), [
+            'filter_archival' => '#criteria_archival',
+        ]);
+    }
+
     private function getPromotionFieldsWithHeader(PromotionInterface $promotion, string $header): NodeElement
     {
         $tableAccessor = $this->getTableAccessor();

@@ -2,7 +2,7 @@
     {% import _self as macros %}
 
     {% if taxon.enabledChildren|length > 0 %}
-        <div class="ui dropdown item" {{ sylius_test_html_attribute('menu-item') }}>
+        <div class="ui dropdown item" {{ sylius_test_html_attribute('menu-item', taxon.name) }}>
             <span class="text">{{ taxon.name }}</span>
             <i class="dropdown icon"></i>
             <div class="menu">
@@ -12,7 +12,7 @@
             </div>
         </div>
     {% else %}
-        <a href="{{ path('sylius_shop_product_index', {'slug': taxon.slug, '_locale': taxon.translation.locale}) }}" class="item" {{ sylius_test_html_attribute('menu-item') }}>{{ taxon.name }}</a>
+        <a href="{{ path('sylius_shop_product_index', {'slug': taxon.slug, '_locale': taxon.translation.locale}) }}" class="item" {{ sylius_test_html_attribute('menu-item', taxon.name) }}>{{ taxon.name }}</a>
     {% endif %}
 {% endmacro %}
 

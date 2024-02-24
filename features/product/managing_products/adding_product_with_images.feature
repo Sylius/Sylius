@@ -32,7 +32,7 @@ Feature: Adding a new product with images
         And the product "Lamborghini Gallardo Model" should have an image with "banner" type
         And it should also have an image with "thumbnail" type
 
-    @ui @mink:chromedriver
+    @ui @mink:chromedriver @no-api
     Scenario: Adding a new configurable product with a single image
         Given the store has a product option "Model scale" with a code "model_scale"
         And this product option has the "1:43" option value with code "model_scale_medium"

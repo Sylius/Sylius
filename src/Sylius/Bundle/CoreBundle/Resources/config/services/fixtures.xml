@@ -199,7 +199,7 @@
             <argument type="service" id="sylius.repository.payment_method" />
             <argument type="service" id="sylius.repository.shipping_method" />
             <argument type="service" id="sylius.factory.address" />
-            <argument type="service" id="sm.factory" />
+            <argument type="service" id="sylius_abstraction.state_machine" />
             <argument type="service" id="sylius.checker.order_shipping_method_selection_requirement" />
             <argument type="service" id="sylius.checker.order_payment_method_selection_requirement" />
             <argument type="service" id="sylius.fixture.example_factory.order" />

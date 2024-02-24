@@ -28,7 +28,7 @@ final class OrderVisitorItemExtensionSpec extends ObjectBehavior
 {
     function let(UserContextInterface $userContext): void
     {
-        $this->beConstructedWith($userContext);
+        $this->beConstructedWith($userContext, ['shop_select_payment_method']);
     }
 
     function it_filters_carts_for_visitors_to_not_authorized_for_methods_other_than_get(

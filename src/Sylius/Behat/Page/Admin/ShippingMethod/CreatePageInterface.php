@@ -32,12 +32,13 @@ interface CreatePageInterface extends BaseCreatePageInterface
 
     public function chooseCalculator(string $name): void;
 
-    public function checkChannel($channelName): void;
+    public function checkChannel(string $channelName): void;
 
-    /**
-     * @throws ElementNotFoundException
-     */
+    /** @throws ElementNotFoundException */
     public function getValidationMessageForAmount(string $channelCode): string;
+
+    /** @throws ElementNotFoundException */
+    public function getValidationMessageForRuleAmount(string $channelCode): string;
 
     public function addRule(string $ruleName): void;
 

@@ -44,7 +44,7 @@ interface CreateSimpleProductPageInterface extends BaseCreatePageInterface
 
     public function removeAttribute(string $attributeName, string $localeCode): void;
 
-    public function isMainTaxonChosen(string $taxonName): bool;
+    public function hasMainTaxonWithName(string $taxonName): bool;
 
     public function selectMainTaxon(TaxonInterface $taxon): void;
 

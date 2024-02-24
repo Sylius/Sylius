@@ -1,4 +1,4 @@
-@modifying_address
+@modifying_placed_order_address
 Feature: Modifying a customer's billing address on an order with an applied promotion
     In order to ship an order's bill to a correct place
     As an Administrator
@@ -19,14 +19,14 @@ Feature: Modifying a customer's billing address on an order with an applied prom
         And the customer chose "Free" shipping method with "Cash on Delivery" payment
         And I am logged in as an administrator
 
-    @ui
-    Scenario: Modifying a customer's billing address when the applied promotion is no longer valid
+    @api @ui
+    Scenario: Modifying a customer's billing address of already placed order when the applied promotion is no longer valid
         Given the promotion was disabled for the channel "Web"
         When I view the summary of the order "#00000001"
         And I want to modify a customer's billing address of this order
         And I specify their new billing address as "Los Angeles", "Seaside Fwy", "90802", "United States" for "Lucifer Morningstar"
         And I save my changes
         Then I should be notified that it has been successfully edited
-        And the order should be billed to "Lucifer Morningstar", "Seaside Fwy", "90802", "Los Angeles", "United States"
+        And this order should have "Lucifer Morningstar", "Seaside Fwy", "90802", "Los Angeles", "United States" as its billing address
         And the order's total should still be "$350.00"
         And the order's promotion total should still be "-$50.00"

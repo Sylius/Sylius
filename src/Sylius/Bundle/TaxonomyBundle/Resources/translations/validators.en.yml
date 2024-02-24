@@ -17,3 +17,8 @@ sylius:
         name:
             max_length: Taxonomy name must not be longer than 255 characters.
             not_blank: Please enter taxonomy name.
+    translation:
+        locale:
+            not_blank: Please enter the locale.
+            invalid: This value is not a valid locale.
+            unique: A translation for the {{ value }} locale code already exists.

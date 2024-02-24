@@ -1,3 +1,4 @@
+
 Customizing Grids
 =================
 
@@ -138,6 +139,24 @@ If you would like to change the link to which an action button is redirecting, t
 
 The above grid modification will change the redirect of the ``show`` action to redirect to the shop, instead of admin show.
 Also the label was changed here.
+
+How to remove label of an action from a grid?
+'''''''''''''''''''''''''''''''''''''''''''''
+
+If you would like to remove label for some actions in any grid, you just need to set its ``labeled`` option to ``false`` like below:
+
+.. code-block:: yaml
+
+    # config/packages/_sylius.yaml
+    sylius_grid:
+        grids:
+            sylius_admin_product_review:
+                actions:
+                    item:
+                        delete:
+                            type: delete
+                            options:
+                                labeled: false
 
 How to modify positions of fields, filters and actions in a grid?
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^

@@ -15,13 +15,11 @@
            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
            xsi:schemaLocation="https://api-platform.com/schema/metadata https://api-platform.com/schema/metadata/metadata-2.0.xsd"
 >
-    <resource class="Sylius\Bundle\ApiBundle\Command\SendContactRequest" shortName="RequestContact">
+    <resource class="Sylius\Bundle\ApiBundle\Command\SendContactRequest" shortName="ContactRequest">
         <attribute name="route_prefix">shop</attribute>
         <attribute name="messenger">input</attribute>
         <attribute name="validation_groups">sylius</attribute>
         <attribute name="output">false</attribute>
-
-        <itemOperations />
 
         <collectionOperations>
             <collectionOperation name="shop_send_contact_request">
@@ -30,13 +28,18 @@
                 <attribute name="input">Sylius\Bundle\ApiBundle\Command\SendContactRequest</attribute>
                 <attribute name="status">202</attribute>
                 <attribute name="denormalization_context">
-                    <attribute name="groups">shop:contact_request:create</attribute>
+                    <attribute name="groups">
+                        <attribute>shop:contact_request:create</attribute>
+                        <attribute>sylius:shop:contact_request:create</attribute>
+                    </attribute>
                 </attribute>
                 <attribute name="openapi_context">
-                    <attribute name="summary">Send contact request</attribute>
+                    <attribute name="summary">Sends contact request</attribute>
                 </attribute>
             </collectionOperation>
         </collectionOperations>
+
+        <itemOperations />
 
         <property name="email" />
         <property name="message" />

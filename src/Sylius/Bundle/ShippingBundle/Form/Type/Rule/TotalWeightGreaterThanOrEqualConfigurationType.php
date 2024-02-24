@@ -16,9 +16,6 @@ namespace Sylius\Bundle\ShippingBundle\Form\Type\Rule;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Validator\Constraints\GreaterThan;
-use Symfony\Component\Validator\Constraints\NotBlank;
-use Symfony\Component\Validator\Constraints\Type;
 
 final class TotalWeightGreaterThanOrEqualConfigurationType extends AbstractType
 {
@@ -29,11 +26,6 @@ final class TotalWeightGreaterThanOrEqualConfigurationType extends AbstractType
             NumberType::class,
             [
                 'label' => 'sylius.form.shipping_method_rule.weight',
-                'constraints' => [
-                    new NotBlank(['groups' => ['sylius']]),
-                    new Type(['type' => 'numeric', 'groups' => ['sylius']]),
-                    new GreaterThan(['value' => 0, 'groups' => ['sylius']]),
-                ],
             ],
         );
     }

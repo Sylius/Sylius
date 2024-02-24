@@ -97,14 +97,6 @@ final class CustomerContext implements Context
     }
 
     /**
-     * @When I (try to) save my changes
-     */
-    public function iSaveMyChanges(): void
-    {
-        $this->client->update();
-    }
-
-    /**
      * @When I specify the current password as :password
      */
     public function iSpecifyTheCurrentPasswordAs(string $password): void
@@ -203,14 +195,6 @@ final class CustomerContext implements Context
     {
         $this->registerAccount($email, $password);
         $this->loginContext->iLogInAsWithPassword($email, $password);
-    }
-
-    /**
-     * @Then I should be notified that it has been successfully edited
-     */
-    public function iShouldBeNotifiedThatItHasBeenSuccessfullyEdited(): void
-    {
-        Assert::true($this->responseChecker->isUpdateSuccessful($this->client->getLastResponse()));
     }
 
     /**

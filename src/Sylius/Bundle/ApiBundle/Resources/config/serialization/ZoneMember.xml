@@ -17,12 +17,20 @@
 >
     <class name="Sylius\Component\Addressing\Model\ZoneMember">
         <attribute name="id">
-            <group>admin:zone_member:read</group>
+            <group>admin:zone_member:show</group>
+            <group>sylius:admin:zone_member:show</group>
         </attribute>
         <attribute name="code">
             <group>admin:zone:create</group>
+            <group>sylius:admin:zone:create</group>
             <group>admin:zone:update</group>
-            <group>admin:zone_member:read</group>
+            <group>sylius:admin:zone:update</group>
+            <group>admin:zone_member:show</group>
+            <group>sylius:admin:zone_member:show</group>
+        </attribute>
+        <attribute name="belongsTo">
+            <group>admin:zone_member:show</group>
+            <group>sylius:admin:zone_member:show</group>
         </attribute>
     </class>
 </serializer>

@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Sylius Sp. z o.o.
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <service id="Sylius\Bundle\CoreBundle\EventListener\Workflow\Order\AssignOrderNumberListener">
+            <argument type="service" id="Sylius\Bundle\OrderBundle\NumberAssigner\OrderNumberAssignerInterface"/>
+            <tag name="kernel.event_listener" event="workflow.sylius_order.transition.create" priority="200"/>
+        </service>
+
+        <service id="Sylius\Bundle\CoreBundle\EventListener\Workflow\Order\AssignOrderTokenListener">
+            <argument type="service" id="Sylius\Component\Core\TokenAssigner\OrderTokenAssignerInterface" />
+            <tag name="kernel.event_listener" event="workflow.sylius_order.transition.create" priority="100"/>
+        </service>
+
+        <service id="Sylius\Bundle\CoreBundle\EventListener\Workflow\Order\CreatePaymentListener">
+            <argument type="service" id="sylius_abstraction.state_machine" />
+            <tag name="kernel.event_listener" event="workflow.sylius_order.completed.create" priority="600"/>
+        </service>
+
+        <service id="Sylius\Bundle\CoreBundle\EventListener\Workflow\Order\CreateShipmentListener">
+            <argument type="service" id="sylius_abstraction.state_machine" />
+            <tag name="kernel.event_listener" event="workflow.sylius_order.completed.create" priority="500"/>
+        </service>
+
+        <service id="Sylius\Bundle\CoreBundle\EventListener\Workflow\Order\DecrementPromotionUsagesListener">
+            <argument type="service" id="Sylius\Component\Core\Promotion\Modifier\OrderPromotionsUsageModifierInterface"/>
+            <tag name="kernel.event_listener" event="workflow.sylius_order.completed.cancel" priority="100"/>
+        </service>
+
+        <service id="Sylius\Bundle\CoreBundle\EventListener\Workflow\Order\IncrementPromotionUsagesListener">
+            <argument type="service" id="Sylius\Component\Core\Promotion\Modifier\OrderPromotionsUsageModifierInterface"/>
+            <tag name="kernel.event_listener" event="workflow.sylius_order.completed.create" priority="300"/>
+        </service>
+
+        <service id="Sylius\Bundle\CoreBundle\EventListener\Workflow\Order\HoldInventoryListener">
+            <argument type="service" id="sylius.inventory.order_inventory_operator"/>
+            <tag name="kernel.event_listener" event="workflow.sylius_order.completed.create" priority="400"/>
+        </service>
+
+        <service id="Sylius\Bundle\CoreBundle\EventListener\Workflow\Order\GiveBackInventoryListener">
+            <argument type="service" id="Sylius\Component\Core\Inventory\Operator\OrderInventoryOperatorInterface"/>
+            <tag name="kernel.event_listener" event="workflow.sylius_order.completed.cancel" priority="200"/>
+        </service>
+
+        <service id="Sylius\Bundle\CoreBundle\EventListener\Workflow\Order\RequestOrderPaymentListener">
+            <argument type="service" id="sylius_abstraction.state_machine" />
+            <tag name="kernel.event_listener" event="workflow.sylius_order.completed.create" priority="700"/>
+        </service>
+
+        <service id="Sylius\Bundle\CoreBundle\EventListener\Workflow\Order\RequestOrderShippingListener">
+            <argument type="service" id="sylius_abstraction.state_machine" />
+            <tag name="kernel.event_listener" event="workflow.sylius_order.completed.create" priority="800"/>
+        </service>
+
+        <service id="Sylius\Bundle\CoreBundle\EventListener\Workflow\Order\SaveCustomerAddressesListener">
+            <argument type="service" id="Sylius\Component\Core\Customer\OrderAddressesSaverInterface" />
+            <tag name="kernel.event_listener" event="workflow.sylius_order.completed.create" priority="200"/>
+        </service>
+
+        <service id="Sylius\Bundle\CoreBundle\EventListener\Workflow\Order\SetImmutableNamesListener">
+            <argument type="service" id="Sylius\Component\Core\Order\OrderItemNamesSetterInterface" />
+            <tag name="kernel.event_listener" event="workflow.sylius_order.completed.create" priority="100"/>
+        </service>
+
+        <service id="Sylius\Bundle\CoreBundle\EventListener\Workflow\Order\CancelOrderPaymentListener">
+            <argument type="service" id="sylius_abstraction.state_machine" />
+            <tag name="kernel.event_listener" event="workflow.sylius_order.completed.cancel" priority="400"/>
+        </service>
+
+        <service id="Sylius\Bundle\CoreBundle\EventListener\Workflow\Order\CancelOrderShippingListener">
+            <argument type="service" id="sylius_abstraction.state_machine" />
+            <tag name="kernel.event_listener" event="workflow.sylius_order.completed.cancel" priority="300"/>
+        </service>
+
+        <service id="Sylius\Bundle\CoreBundle\EventListener\Workflow\Order\CancelPaymentListener">
+            <argument type="service" id="sylius_abstraction.state_machine" />
+            <tag name="kernel.event_listener" event="workflow.sylius_order.completed.cancel" priority="600"/>
+        </service>
+
+        <service id="Sylius\Bundle\CoreBundle\EventListener\Workflow\Order\CancelShipmentListener">
+            <argument type="service" id="sylius_abstraction.state_machine" />
+            <tag name="kernel.event_listener" event="workflow.sylius_order.completed.cancel" priority="500"/>
+        </service>
+    </services>
+</container>

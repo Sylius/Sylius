@@ -1,0 +1,15 @@
+{
+    "@context": "\/api\/v2\/contexts\/Zone",
+    "@id": "\/api\/v2\/admin\/zones\/US",
+    "@type": "Zone",
+    "id": @integer@,
+    "code": "US",
+    "name": "UnitedStates",
+    "type": "province",
+    "scope": "all",
+    "members": [
+        "\/api\/v2\/admin\/zone-members\/AL",
+        "\/api\/v2\/admin\/zone-members\/CA",
+        "\/api\/v2\/admin\/zone-members\/NY"
+    ]
+}

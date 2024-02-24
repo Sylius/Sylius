@@ -44,6 +44,18 @@ sylius_grid:
                     label: sylius.ui.search
                     options:
                         fields: [email, firstName, lastName]
+                group:
+                    type: resource_autocomplete
+                    label: sylius.ui.customer_groups
+                    form_options:
+                        resource: sylius.customer_group
+                        choice_name: name
+                        choice_value: code
+                        multiple: true
+                        remote_path: sylius_admin_ajax_customer_groups_by_phrase
+                        load_edit_path: sylius_admin_ajax_customer_group_by_code
+                    options:
+                        fields: [group.code]
             actions:
                 main:
                     create:

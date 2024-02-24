@@ -15,17 +15,15 @@ namespace Sylius\Component\Promotion\Generator;
 
 final class PromotionCouponGeneratorInstruction implements PromotionCouponGeneratorInstructionInterface
 {
-    private ?int $amount = 5;
-
-    private ?string $prefix = null;
-
-    private ?int $codeLength = 6;
-
-    private ?string $suffix = null;
-
-    private ?\DateTimeInterface $expiresAt = null;
-
-    private ?int $usageLimit = null;
+    public function __construct(
+        private ?int $amount = 5,
+        private ?string $prefix = null,
+        private ?int $codeLength = 6,
+        private ?string $suffix = null,
+        private ?\DateTimeInterface $expiresAt = null,
+        private ?int $usageLimit = null,
+    ) {
+    }
 
     public function getAmount(): ?int
     {

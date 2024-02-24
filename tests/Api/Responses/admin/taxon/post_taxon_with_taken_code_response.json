@@ -1,0 +1,13 @@
+{
+    "@context": "\/api\/v2\/contexts\/ConstraintViolationList",
+    "@type": "ConstraintViolationList",
+    "hydra:title": "An error occurred",
+    "hydra:description": "code: Taxon with given code already exists.",
+    "violations": [
+        {
+            "propertyPath": "code",
+            "message": "Taxon with given code already exists.",
+            "code": @string@
+        }
+    ]
+}

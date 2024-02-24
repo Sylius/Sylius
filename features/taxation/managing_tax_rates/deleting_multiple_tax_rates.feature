@@ -11,7 +11,7 @@ Feature: Deleting multiple tax rates
         And the store has "High VAT" tax rate of 40% for "Food" for the rest of the world
         And I am logged in as an administrator
 
-    @ui @mink:chromedriver
+    @ui @mink:chromedriver @no-api
     Scenario: Deleting multiple tax rates at once
         When I browse tax rates
         And I check the "Low VAT" tax rate

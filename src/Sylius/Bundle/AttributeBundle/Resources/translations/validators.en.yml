@@ -17,8 +17,15 @@ sylius:
             not_blank: Please enter attribute presentation.
             min_length: Attribute presentation must be at least 1 character long.|Attribute presentation must be at least {{ limit }} characters long.
             max_length: Attribute presentation must not be longer than 1 character.|Attribute presentation must not be longer than {{ limit }} characters.
+        type:
+            unregistered: The attribute type "%type%" is not registered.
     attribute_value:
         attribute:
             not_blank: Please select attribute.
         value:
             not_blank: Please enter attribute value.
+    translation:
+        locale:
+            not_blank: Please enter the locale.
+            invalid: This value is not a valid locale.
+            unique: A translation for the {{ value }} locale code already exists.

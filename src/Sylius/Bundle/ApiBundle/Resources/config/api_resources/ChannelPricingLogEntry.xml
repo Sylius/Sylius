@@ -1,0 +1,58 @@
+<?xml version="1.0" ?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Sylius Sp. z o.o.
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<resources xmlns="https://api-platform.com/schema/metadata"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="https://api-platform.com/schema/metadata https://api-platform.com/schema/metadata/metadata-2.0.xsd"
+>
+    <resource class="%sylius.model.channel_pricing_log_entry.class%" shortName="ChannelPricingLogEntry">
+        <collectionOperations>
+            <collectionOperation name="admin_get">
+                <attribute name="method">GET</attribute>
+                <attribute name="path">/admin/channel-pricing-log-entries</attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">
+                        <attribute>admin:channel_pricing_log_entry:index</attribute>
+                        <attribute>sylius:admin:channel_pricing_log_entry:index</attribute>
+                    </attribute>
+                </attribute>
+                <attribute name="filters">
+                    <attribute>sylius.api.channel_pricing_channel_filter</attribute>
+                    <attribute>sylius.api.channel_pricing_product_variant_filter</attribute>
+                </attribute>
+                <attribute name="order">
+                    <attribute name="id">DESC</attribute>
+                </attribute>
+            </collectionOperation>
+        </collectionOperations>
+
+        <itemOperations>
+            <itemOperation name="admin_get">
+                <attribute name="method">GET</attribute>
+                <attribute name="path">/admin/channel-pricing-log-entries/{id}</attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">
+                        <attribute>admin:channel_pricing_log_entry:show</attribute>
+                        <attribute>sylius:admin:channel_pricing_log_entry:show</attribute>
+                    </attribute>
+                </attribute>
+            </itemOperation>
+        </itemOperations>
+
+        <property name="id" identifier="true" writable="false" />
+        <property name="channelPricing" readable="true" writable="false" />
+        <property name="price" readable="true" writable="false" />
+        <property name="originalPrice" readable="true" writable="false" />
+        <property name="loggedAt" readable="true" writable="false" />
+    </resource>
+</resources>

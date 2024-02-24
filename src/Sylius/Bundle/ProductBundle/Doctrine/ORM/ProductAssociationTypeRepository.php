@@ -15,8 +15,14 @@ namespace Sylius\Bundle\ProductBundle\Doctrine\ORM;
 
 use Doctrine\ORM\QueryBuilder;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
+use Sylius\Component\Product\Model\ProductAssociationTypeInterface;
 use Sylius\Component\Product\Repository\ProductAssociationTypeRepositoryInterface;
 
+/**
+ * @template T of ProductAssociationTypeInterface
+ *
+ * @implements ProductAssociationTypeRepositoryInterface<T>
+ */
 class ProductAssociationTypeRepository extends EntityRepository implements ProductAssociationTypeRepositoryInterface
 {
     public function createListQueryBuilder(string $locale): QueryBuilder

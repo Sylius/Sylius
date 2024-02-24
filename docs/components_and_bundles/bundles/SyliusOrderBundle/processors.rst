@@ -1,12 +1,5 @@
-.. rst-class:: outdated
-
 Processors
 ==========
-
-.. danger::
-
-   We're sorry but **this documentation section is outdated**. Please have that in mind when trying to use it.
-   You can help us making documentation up to date via Sylius Github. Thank you!
 
 Order processors are responsible of manipulating the orders to apply different predefined adjustments or other modifications based on order state.
 
@@ -34,6 +27,38 @@ Once you have your own :ref:`component_order_processors_order-processor-interfac
 .. note::
 
     You can add your own processor to the :ref:`component_order_processors_composite_order_processor` using `sylius.order_processor`
+
+.. note::
+
+    If services autoconfiguration is enabled, you should register your own processor by adding the ``Sylius\Bundle\OrderBundle\Attribute\AsOrderProcessor`` attribute
+    on the top of the processor class.
+
+    .. code-block:: php
+
+        <?php
+
+        namespace App\OrderProcessor;
+
+        use Sylius\Bundle\OrderBundle\Attribute\AsOrderProcessor;
+        use Sylius\Component\Order\Model\OrderInterface;
+        use Sylius\Component\Order\Processor\OrderProcessorInterface;
+
+        #[AsOrderProcessor(priority: 10)] //priority is optional
+        //#[AsOrderProcessor] can be used as well
+        final class CustomOrderProcessor implements OrderProcessorInterface
+        {
+            public function process(OrderInterface $order): void
+            {
+                 // ...
+            }
+        }
+
+    Then you should enable autoconfiguring with attributes in your ``config/packages/_sylius.yaml`` file:
+
+    .. code-block:: yaml
+
+        sylius_order:
+            autoconfigure_with_attributes: true
 
 Using CompositeOrderProcessor
 -----------------------------

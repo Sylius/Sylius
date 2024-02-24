@@ -96,7 +96,7 @@ final class SalesDataProviderTest extends WebTestCase
         $this->assertSame($expectedPeriods, $salesSummary->getIntervals());
         $this->assertSame(
             ['70.00', '40.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00'],
-            $salesSummary->getSales()
+            $salesSummary->getSales(),
         );
     }
 
@@ -116,7 +116,7 @@ final class SalesDataProviderTest extends WebTestCase
                 '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '20.00',
                 '70.00', '40.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00',
             ],
-            $salesSummary->getSales()
+            $salesSummary->getSales(),
         );
     }
 
@@ -133,7 +133,7 @@ final class SalesDataProviderTest extends WebTestCase
         $this->assertSame($expectedMonths, $salesSummary->getIntervals());
         $this->assertSame(
             ['330.00'],
-            $salesSummary->getSales()
+            $salesSummary->getSales(),
         );
     }
 
@@ -156,7 +156,7 @@ final class SalesDataProviderTest extends WebTestCase
         $interval = new \DatePeriod(
             $startDate,
             \DateInterval::createFromDateString($interval),
-            $endDate
+            $endDate,
         );
 
         /** @var \DateTimeInterface $date */

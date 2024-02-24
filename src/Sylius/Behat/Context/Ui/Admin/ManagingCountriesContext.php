@@ -99,7 +99,7 @@ final class ManagingCountriesContext implements Context
 
     /**
      * @When I save my changes
-     * @When I try to save changes
+     * @When I try to save my changes
      */
     public function iSaveMyChanges()
     {

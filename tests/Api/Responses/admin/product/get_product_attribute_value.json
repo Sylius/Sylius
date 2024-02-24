@@ -1,0 +1,12 @@
+{
+    "@context": "\/api\/v2\/contexts\/ProductAttributeValue",
+    "@id": "\/api\/v2\/admin\/product-attribute-values\/@integer@",
+    "@type": "ProductAttributeValue",
+    "id": @integer@,
+    "attribute": "\/api\/v2\/admin\/product-attributes\/dishwasher_safe",
+    "localeCode": "pl_PL",
+    "value": false,
+    "name": "dishwasher safe",
+    "type": "checkbox",
+    "code": "dishwasher_safe"
+}

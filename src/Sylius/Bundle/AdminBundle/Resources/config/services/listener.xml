@@ -16,8 +16,14 @@
         <defaults public="true" />
 
         <service id="sylius.listener.shipment_ship" class="Sylius\Bundle\AdminBundle\EventListener\ShipmentShipListener">
-            <argument type="service" id="sylius.email_manager.shipment" />
+            <argument type="service" id="sylius.mailer.shipment_email_manager.admin" />
             <tag name="kernel.event_listener" event="sylius.shipment.post_ship" method="sendConfirmationEmail" />
+        </service>
+
+        <service id="sylius.listener.locale" class="Sylius\Bundle\AdminBundle\EventListener\LocaleListener">
+            <argument type="service" id="Sylius\Bundle\LocaleBundle\Checker\LocaleUsageCheckerInterface" />
+
+            <tag name="kernel.event_listener" event="sylius.locale.pre_delete" method="preDelete" />
         </service>
 
         <service id="sylius.event_subscriber.resource_delete" class="Sylius\Bundle\AdminBundle\EventListener\ResourceDeleteSubscriber">

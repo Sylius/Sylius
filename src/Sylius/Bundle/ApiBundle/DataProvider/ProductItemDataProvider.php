@@ -45,7 +45,7 @@ final class ProductItemDataProvider implements RestrictedDataProviderInterface, 
         /** @var ChannelInterface $channel */
         $channel = $context[ContextKeys::CHANNEL];
 
-        return $this->productRepository->findOneByChannelAndCode($channel, $id);
+        return $this->productRepository->findOneByChannelAndCodeWithAvailableAssociations($channel, $id);
     }
 
     public function supports(string $resourceClass, string $operationName = null, array $context = []): bool

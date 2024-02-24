@@ -16,6 +16,9 @@ namespace Sylius\Component\Payment\Factory;
 use Sylius\Component\Payment\Model\PaymentInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
+/**
+ * @implements PaymentFactoryInterface<PaymentInterface>
+ */
 final class PaymentFactory implements PaymentFactoryInterface
 {
     public function __construct(private FactoryInterface $factory)

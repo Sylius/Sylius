@@ -14,6 +14,9 @@ declare(strict_types=1);
 namespace Sylius\Bundle\ApiBundle\Validator\Constraints;
 
 use SM\Factory\FactoryInterface;
+use Sylius\Abstraction\StateMachine\StateMachineInterface;
+use Sylius\Abstraction\StateMachine\TransitionInterface;
+use Sylius\Abstraction\StateMachine\WinzouStateMachineAdapter;
 use Sylius\Bundle\ApiBundle\Command\OrderTokenValueAwareInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\OrderCheckoutTransitions;
@@ -25,34 +28,62 @@ use Webmozart\Assert\Assert;
 /** @experimental */
 class CheckoutCompletionValidator extends ConstraintValidator
 {
+    /**
+     * @param OrderRepositoryInterface<OrderInterface> $orderRepository
+     */
     public function __construct(
         private OrderRepositoryInterface $orderRepository,
-        private FactoryInterface $stateMachineFactory,
+        private FactoryInterface|StateMachineInterface $stateMachineFactory,
     ) {
+        if ($this->stateMachineFactory instanceof FactoryInterface) {
+            trigger_deprecation(
+                'sylius/api-bundle',
+                '1.13',
+                sprintf(
+                    'Passing an instance of "%s" as the second argument is deprecated. It will accept only instances of "%s" in Sylius 2.0.',
+                    FactoryInterface::class,
+                    StateMachineInterface::class,
+                ),
+            );
+        }
     }
 
-    /** @param OrderTokenValueAwareInterface $value */
-    public function validate($value, Constraint $constraint): void
+    public function validate(mixed $value, Constraint $constraint): void
     {
         Assert::isInstanceOf($value, OrderTokenValueAwareInterface::class);
 
         /** @var CheckoutCompletion $constraint */
         Assert::isInstanceOf($constraint, CheckoutCompletion::class);
 
+        /** @var OrderInterface|null $order */
         $order = $this->orderRepository->findOneBy(['tokenValue' => $value->getOrderTokenValue()]);
 
-        /** @var OrderInterface $order */
         Assert::isInstanceOf($order, OrderInterface::class);
 
-        $stateMachine = $this->stateMachineFactory->get($order, OrderCheckoutTransitions::GRAPH);
+        $stateMachine = $this->getStateMachine();
 
-        if ($stateMachine->can(OrderCheckoutTransitions::TRANSITION_COMPLETE)) {
+        if ($stateMachine->can($order, OrderCheckoutTransitions::GRAPH, OrderCheckoutTransitions::TRANSITION_COMPLETE)) {
             return;
         }
 
         $this->context->addViolation($constraint->message, [
-            '%currentState%' => $stateMachine->getState(),
-            '%possibleTransitions%' => implode(', ', $stateMachine->getPossibleTransitions()),
+            '%currentState%' => $order->getCheckoutState(),
+            '%possibleTransitions%' => implode(
+                ', ',
+                array_map(
+                    fn (TransitionInterface $transition) => $transition->getName(),
+                    $stateMachine->getEnabledTransitions($order, OrderCheckoutTransitions::GRAPH),
+                ),
+            ),
         ]);
+    }
+
+    private function getStateMachine(): StateMachineInterface
+    {
+        if ($this->stateMachineFactory instanceof FactoryInterface) {
+            return new WinzouStateMachineAdapter($this->stateMachineFactory);
+        }
+
+        return $this->stateMachineFactory;
     }
 }

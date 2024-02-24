@@ -35,12 +35,20 @@ sylius:
             subject: 'User registration'
             welcome_to_our_store: 'Welcome to our store!'
             you_have_just_been_registered: 'You have just been registered. Thank you'
+        #deprecated since Sylius 1.13 and will be removed in 2.0, use user.verification instead    
         verification_token:
             hello: 'Hello'
             message: 'Verify your account with token: '
             subject: 'Email address verification'
             to_verify_your_email_address: 'To verify your email address - click the link below'
             verify_your_email_address: 'Verify your email address'
+        user:
+            account_verification:
+                greeting: 'Hello'
+                message: 'Verify your account with token: '
+                statement: 'Verify your email address'
+                strategy: 'To verify your email address - click the link below'
+                subject: 'Email address verification'
     form:
         block:
             body: Body

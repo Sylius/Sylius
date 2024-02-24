@@ -1,0 +1,4 @@
+{
+    "code": 400,
+    "message": "Request does not have the following required fields specified: productVariant."
+}

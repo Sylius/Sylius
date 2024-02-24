@@ -43,3 +43,8 @@ sylius:
             not_blank: 'Veuillez entrez le code du moyen de paiement.'
             regex: 'Le code du moyen de paiement peut uniquement être constitué de lettres, chiffres, tirets et tirets bas.'
             unique: 'Le moyen de paiement avec le code attribué existe déjà.'
+    translation:
+        locale:
+            not_blank: Veuillez entrer la locale.
+            invalid: Cette valeur n'est pas une locale valide.
+            unique: Une traduction pour la locale {{ value }} existe déjà.

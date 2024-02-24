@@ -16,18 +16,18 @@
         <defaults public="true" />
 
         <service id="sylius.state_resolver.order" class="Sylius\Component\Core\StateResolver\OrderStateResolver">
-            <argument type="service" id="sm.factory" />
+            <argument type="service" id="sylius_abstraction.state_machine" />
         </service>
         <service id="sylius.state_resolver.order_checkout" class="Sylius\Component\Core\StateResolver\CheckoutStateResolver">
-            <argument type="service" id="sm.factory" />
+            <argument type="service" id="sylius_abstraction.state_machine" />
             <argument type="service" id="sylius.checker.order_payment_method_selection_requirement" />
             <argument type="service" id="sylius.checker.order_shipping_method_selection_requirement" />
         </service>
         <service id="sylius.state_resolver.order_payment" class="Sylius\Component\Core\StateResolver\OrderPaymentStateResolver">
-            <argument type="service" id="sm.factory" />
+            <argument type="service" id="sylius_abstraction.state_machine" />
         </service>
         <service id="sylius.state_resolver.order_shipping" class="Sylius\Component\Core\StateResolver\OrderShippingStateResolver">
-            <argument type="service" id="sm.factory" />
+            <argument type="service" id="sylius_abstraction.state_machine" />
         </service>
     </services>
 </container>

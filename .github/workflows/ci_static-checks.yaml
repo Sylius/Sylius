@@ -4,10 +4,18 @@ on:
     workflow_dispatch: ~
     workflow_call:
         inputs:
+            branch:
+                description: "Branch"
+                required: false
+                type: string
+                default: ""
             type:
                 description: "Type of the build"
                 required: true
                 type: string
+
+permissions:
+    contents: read
 
 jobs:
     get-matrix:
@@ -16,7 +24,16 @@ jobs:
         outputs:
             matrix: ${{ steps.matrix.outputs.prop }}
         steps:
-            -   uses: actions/checkout@v3
+            -   name: "Checkout (With Branch)"
+                if: "${{ inputs.branch != '' }}"
+                uses: actions/checkout@v3
+                with:
+                    ref: ${{ inputs.branch }}
+
+            -   name: "Checkout"
+                if: "${{ inputs.branch == '' }}"
+                uses: actions/checkout@v3
+
             -
                 name: "Get matrix"
                 id: matrix
@@ -36,7 +53,14 @@ jobs:
             APP_ENV: test_cached
             DATABASE_URL: "mysql://root:root@127.0.0.1/sylius?charset=utf8mb4&serverVersion=8.0"
         steps:
-            -
+            -   name: "Checkout (With Branch)"
+                if: "${{ inputs.branch != '' }}"
+                uses: actions/checkout@v3
+                with:
+                    ref: ${{ inputs.branch }}
+
+            -   name: "Checkout"
+                if: "${{ inputs.branch == '' }}"
                 uses: actions/checkout@v3
 
             -   name: "Setup PHP"
@@ -69,6 +93,10 @@ jobs:
                     path: |
                         ${{ steps.composer-cache.outputs.dir }}
                     key: ${{ github.run_id }}-${{ runner.os }}-${{ hashFiles('composer.json') }}-symfony-${{ matrix.symfony }}-api-platform-${{ matrix.api-platform }}
+
+            -   name: "Require ext-random"
+                if: matrix.php == '8.2'
+                run: composer require ext-random --no-update --no-scripts --no-interaction
 
             -   name: "Install dependencies"
                 run: composer update --no-interaction --no-scripts

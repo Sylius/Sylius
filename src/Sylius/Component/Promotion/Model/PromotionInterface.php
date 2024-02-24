@@ -14,11 +14,13 @@ declare(strict_types=1);
 namespace Sylius\Component\Promotion\Model;
 
 use Doctrine\Common\Collections\Collection;
+use Sylius\Component\Resource\Model\ArchivableInterface;
 use Sylius\Component\Resource\Model\CodeAwareInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\Resource\Model\TimestampableInterface;
+use Sylius\Component\Resource\Model\TranslatableInterface;
 
-interface PromotionInterface extends CodeAwareInterface, TimestampableInterface, ResourceInterface
+interface PromotionInterface extends ArchivableInterface, CodeAwareInterface, TimestampableInterface, TranslatableInterface, ResourceInterface
 {
     public function getName(): ?string;
 
@@ -102,4 +104,8 @@ interface PromotionInterface extends CodeAwareInterface, TimestampableInterface,
     public function getAppliesToDiscounted(): bool;
 
     public function setAppliesToDiscounted(bool $applyOnDiscounted): void;
+
+    public function getLabel(): ?string;
+
+    public function setLabel(?string $label): void;
 }

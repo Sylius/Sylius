@@ -127,7 +127,7 @@
         <service id="sylius.form.type.product" class="Sylius\Bundle\ProductBundle\Form\Type\ProductType">
             <argument>%sylius.model.product.class%</argument>
             <argument>%sylius.form.type.product.validation_groups%</argument>
-            <argument type="service" id="sylius.product_variant_resolver.default" />
+            <argument type="service" id="Sylius\Component\Product\Resolver\ProductVariantResolverInterface" />
             <argument type="service" id="sylius.factory.product_attribute_value" />
             <argument type="service" id="sylius.translation_locale_provider" />
             <tag name="form.type" />

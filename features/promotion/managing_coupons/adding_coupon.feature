@@ -10,7 +10,7 @@ Feature: Adding a new coupon
         And it is coupon based promotion
         And I am logged in as an administrator
 
-    @ui
+    @ui @api
     Scenario: Adding a new coupon
         When I want to create a new coupon for this promotion
         And I specify its code as "SANTA2016"
@@ -19,4 +19,4 @@ Feature: Adding a new coupon
         And I make it valid until "21.04.2017"
         And I add it
         Then I should be notified that it has been successfully created
-        And there should be coupon with code "SANTA2016"
+        And there should be a "Christmas sale" promotion with a coupon code "SANTA2016"

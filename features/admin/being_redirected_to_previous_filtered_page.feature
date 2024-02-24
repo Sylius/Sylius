@@ -39,7 +39,7 @@ Feature: Being redirected to previous filtered page
         And I cancel my changes
         Then I should be redirected to the 2nd page of only enabled products
 
-    @ui @javascript @no-api
+    @ui @no-api
     Scenario: Being redirected to previous filtered page after cancelling creating a new product
         When I browse products
         And I choose enabled filter

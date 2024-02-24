@@ -1,0 +1,24 @@
+{
+    "@context": "\/api\/v2\/contexts\/Payment",
+    "@id": "\/api\/v2\/admin\/payments\/@integer@",
+    "@type": "Payment",
+    "order": "\/api\/v2\/admin\/orders\/nAWw2jewpA",
+    "id": @integer@,
+    "method": {
+        "@id": "\/api\/v2\/admin\/payment-methods\/CASH_ON_DELIVERY",
+        "@type": "PaymentMethod",
+        "translations": {
+            "en_US": {
+                "@id": "\/api\/v2\/admin\/payment-method-translations\/@integer@",
+                "@type": "PaymentMethodTranslation",
+                "name": "Cash on delivery"
+            }
+        }
+    },
+    "currencyCode": "USD",
+    "amount": 6500,
+    "state": "new",
+    "details": [],
+    "createdAt": @string@,
+    "updatedAt": @string@
+}

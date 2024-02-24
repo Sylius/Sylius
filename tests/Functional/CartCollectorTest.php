@@ -136,7 +136,7 @@ final class CartCollectorTest extends KernelTestCase
         ], $collector->getStates());
         $this->assertSame(
             array_map(fn (OrderItemInterface $item) => $item->getId(), $cart->getItems()->toArray()),
-            array_column($collector->getItems(), 'id')
+            array_column($collector->getItems(), 'id'),
         );
     }
 
