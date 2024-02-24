@@ -1,3 +1,7 @@
+# UPGRADE FROM `v1.12.13` TO `v1.12.14`
+
+1. The `api/v2/admin/zone-members/{code}` endpoint has been changed to `api/v2/admin/zone-members/{id}`.
+
 # UPGRADE FROM `v1.12.1` TO `v1.12.2`
 
 1. So far, on production environment when any non-validation related error occurred, the `FOS\RestBundle\Serializer\Normalizer\FlattenExceptionHandler` was used, even on API Platform endpoints.

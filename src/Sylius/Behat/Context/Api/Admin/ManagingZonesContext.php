@@ -139,6 +139,8 @@ final class ManagingZonesContext implements Context
      */
     public function iWantToModifyTheZoneNamed(ZoneInterface $zone): void
     {
+        $this->sharedStorage->set('zone', $zone);
+
         $this->client->buildUpdateRequest(Resources::ZONES, $zone->getCode());
     }
 
@@ -174,6 +176,19 @@ final class ManagingZonesContext implements Context
     public function iRemoveTheZoneMember(ZoneInterface $zone): void
     {
         $this->removeZoneMember($zone);
+    }
+
+    /**
+     * @When I add the country :country again
+     */
+    public function iAddTheCountryToTheZoneNamedAgain(CountryInterface $country): void
+    {
+        $this->iWantToModifyTheZoneNamed($this->sharedStorage->get('zone'));
+        $this->client->addSubResourceData('members', [
+            'code' => $country->getCode(),
+        ]);
+
+        $this->client->update();
     }
 
     /**
@@ -324,8 +339,31 @@ final class ManagingZonesContext implements Context
         ));
 
         Assert::same(
-            $this->responseChecker->countCollectionItems($this->client->subResourceIndex(Resources::ZONES, 'members', $zone->getCode())),
+            $this->responseChecker->countCollectionItems($this->client->getLastResponse()),
             1,
+        );
+    }
+
+    /**
+     * @Then /^(this zone) should have ("([^"]+)" and "([^"]+)" country members)$/
+     */
+    public function thisZoneShouldHaveTheCountryAndTheProvinceMembers(
+        ZoneInterface $zone,
+        array $zoneMembers,
+    ): void {
+        $response = $this->client->subResourceIndex(Resources::ZONES, 'members', $zone->getCode());
+
+        foreach ($zoneMembers as $zoneMember) {
+            Assert::true($this->responseChecker->hasItemWithValue(
+                $response,
+                'code',
+                $zoneMember->getCode(),
+            ));
+        }
+
+        Assert::same(
+            $this->responseChecker->countCollectionItems($response),
+            2,
         );
     }
 
@@ -411,7 +449,18 @@ final class ManagingZonesContext implements Context
 
     private function removeZoneMember(CountryInterface|ProvinceInterface|ZoneInterface $objectToRemove): void
     {
-        $iri = $this->iriConverter->getItemIriFromResourceClass($this->zoneMemberClass, ['code' => $objectToRemove->getCode()]);
+        /** @var ZoneInterface $zone */
+        $zone = $this->sharedStorage->get('zone');
+
+        $members = $zone->getMembers();
+
+        foreach ($members as $member) {
+            if ($member->getCode() === $objectToRemove->getCode()) {
+                $objectToRemove = $member;
+            }
+        }
+
+        $iri = $this->iriConverter->getItemIriFromResourceClass($this->zoneMemberClass, ['id' => $objectToRemove->getId()]);
 
         $this->client->removeSubResource('members', $iri);
     }

@@ -33,7 +33,7 @@ final class ZoneMembersTest extends JsonApiTestCase
 
         $this->client->request(
             method: 'GET',
-            uri: sprintf('/api/v2/admin/zone-members/%s', $zoneMember->getCode()),
+            uri: sprintf('/api/v2/admin/zone-members/%s', $zoneMember->getId()),
             server: $header,
         );
 
