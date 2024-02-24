@@ -36,6 +36,8 @@ final class FormComponent
 {
     public const ATTRIBUTE_REMOVED_EVENT = 'sylius_admin:product:form:attributed_deleted';
 
+    public const AUTOCOMPLETE_CLEAR_REQUESTED_EVENT = 'sylius_admin.product_attribute_autocomplete.clear_requested';
+
     use ComponentToolsTrait;
     use DefaultActionTrait;
     use HookableComponentTrait;
@@ -138,7 +140,8 @@ final class FormComponent
                 ];
             }
         }
-        $this->dispatchBrowserEvent('sylius_admin.product_attribute_autocomplete.clear_requested');
+
+        $this->dispatchBrowserEvent(self::AUTOCOMPLETE_CLEAR_REQUESTED_EVENT);
     }
 
     #[LiveAction]

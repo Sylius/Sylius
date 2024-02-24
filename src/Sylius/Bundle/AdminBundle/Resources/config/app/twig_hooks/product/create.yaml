@@ -1,5 +1,8 @@
 twig_hooks:
     hooks:
+        'sylius_admin.product.create#javascripts':
+            scripts:
+                template: '@SyliusAdmin/Product/scripts.html.twig'
         'sylius_admin.product.create.content':
             form:
                 component: 'SyliusAdmin.Product.Form'

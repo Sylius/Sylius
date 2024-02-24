@@ -106,14 +106,4 @@
             </div>
         </div>
     </div>
-
-    {# TODO: It should be moved into a standalone js file #}
-    <script type="module">
-        window.addEventListener('sylius_admin:product:form:attributed_deleted', () => {
-            let tabs = document.getElementById('product_attribute_tabs');
-            let firstTab = tabs.querySelector('.list-group-item');
-
-            window.bootstrap.Tab.getOrCreateInstance(firstTab).show();
-        });
-    </script>
 </div>
