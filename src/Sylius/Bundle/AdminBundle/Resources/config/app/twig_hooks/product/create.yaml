@@ -23,10 +23,6 @@ twig_hooks:
                 template: '@SyliusAdmin/Product/Form/SideNavigation/_details.html.twig'
                 configuration:
                     active: true
-            channel_pricing:
-                template: '@SyliusAdmin/Product/Form/SideNavigation/_channelPricing.html.twig'
-            inventory:
-                template: '@SyliusAdmin/Product/Form/SideNavigation/_inventory.html.twig'
             translations:
                 template: '@SyliusAdmin/Product/Form/SideNavigation/_translations.html.twig'
             taxonomy:
@@ -37,6 +33,10 @@ twig_hooks:
                 template: '@SyliusAdmin/Product/Form/SideNavigation/_associations.html.twig'
             media:
                 template: '@SyliusAdmin/Product/Form/SideNavigation/_media.html.twig'
+            channel_pricing:
+                template: '@SyliusAdmin/Product/Form/SideNavigation/_channelPricing.html.twig'
+            inventory:
+                template: '@SyliusAdmin/Product/Form/SideNavigation/_inventory.html.twig'
 
         'sylius_admin.product.create.content.form.sections':
             details:
@@ -51,3 +51,7 @@ twig_hooks:
                 template: '@SyliusAdmin/Product/Form/Sections/_associations.html.twig'
             media:
                 template: '@SyliusAdmin/Product/Form/Sections/_media.html.twig'
+            channel_pricing:
+                template: '@SyliusAdmin/Product/Form/Sections/_channelPricing.html.twig'
+            inventory:
+                template: '@SyliusAdmin/Product/Form/Sections/_inventory.html.twig'

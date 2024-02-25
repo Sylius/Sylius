@@ -1,8 +1,8 @@
-{% set product = _context.form.vars.data %}
+{% set product = hookable_data.resource %}
 
 {% if product.isSimple %}
     <div class="tab-pane" id="product-channel-pricing" role="tabpanel" tabindex="0">
-        {% set variantForm = _context.form.variant %}
+        {% set variantForm = hookable_data.form.variant %}
 
         {% set isChannelPricingInvalid = variantForm.channelPricings.vars.errors is not empty %}
 

@@ -1,7 +1,7 @@
-{% set product = _context.form.vars.data %}
+{% set product = hookable_data.resource %}
 
 {% if product.isSimple %}
-    {% set variantForm = _context.form.variant %}
+    {% set variantForm = hookable_data.form.variant %}
     <div class="tab-pane" id="product-inventory" role="tabpanel" tabindex="0">
         <div class="card mb-3">
             <div class="card-header">

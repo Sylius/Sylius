@@ -52,6 +52,10 @@ twig_hooks:
         'sylius_admin.product.update.content.form.sections':
             details:
                 template: '@SyliusAdmin/Product/Form/Sections/_details.html.twig'
+            channel_pricing:
+                template: '@SyliusAdmin/Product/Form/Sections/_channelPricing.html.twig'
+            inventory:
+                template: '@SyliusAdmin/Product/Form/Sections/_inventory.html.twig'
             translations:
                 template: '@SyliusAdmin/Product/Form/Sections/_translations.html.twig'
             taxonomy:
