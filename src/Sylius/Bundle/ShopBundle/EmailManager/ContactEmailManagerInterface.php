@@ -26,10 +26,14 @@ trigger_deprecation(
 /** @deprecated since Sylius 1.13 and will be removed in Sylius 2.0. Use {@see \Sylius\Bundle\CoreBundle\Mailer\ContactEmailManagerInterface} instead. */
 interface ContactEmailManagerInterface
 {
+    /**
+     * @param array<string, mixed> $data
+     * @param array<array-key, string> $recipients
+     */
     public function sendContactRequest(
         array $data,
         array $recipients,
-        ?ChannelInterface $channel = null,
-        ?string $localeCode = null,
+        ChannelInterface $channel,
+        string $localeCode,
     ): void;
 }

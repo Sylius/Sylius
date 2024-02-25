@@ -96,8 +96,5 @@
         </service>
 
         <service id="sylius.http_client" alias="Psr\Http\Client\ClientInterface" public="false" />
-        <service id="sylius.http_message_factory" class="Http\Message\MessageFactory\GuzzleMessageFactory" public="false">
-            <deprecated package="sylius/admin-bundle" version="1.13">The "%service_id%" service is deprecated since 1.13 and will be removed in 2.0. Use "Psr\Http\Message\RequestFactoryInterface" instead.</deprecated>
-        </service>
     </services>
 </container>

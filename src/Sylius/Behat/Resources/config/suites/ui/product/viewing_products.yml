@@ -42,7 +42,7 @@ default:
                 - sylius.behat.context.setup.product_option
                 - Sylius\Behat\Context\Setup\CatalogPromotionContext
                 - Sylius\Behat\Context\Setup\PriceHistoryContext
-                - Sylius\Calendar\Tests\Behat\Context\Setup\CalendarContext
+                - sylius.behat.context.setup.calendar
 
                 - sylius.behat.context.ui.channel
                 - sylius.behat.context.ui.shop.locale

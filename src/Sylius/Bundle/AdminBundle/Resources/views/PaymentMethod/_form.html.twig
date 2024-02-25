@@ -28,17 +28,6 @@
             </div>
         </div>
     {% endif %}
-    {% if resource.gatewayConfig.factoryName == 'paypal_express_checkout' %}
-        <div class="ui icon negative orange message sylius-flash-message">
-            <i class="close icon"></i>
-            <i class="warning icon"></i>
-            <div class="content">
-                <div class="header">
-                    {% autoescape false %}{{ 'sylius.ui.gateway.pay_pal_express_checkout_deprecation_notice'|trans }}{% endautoescape %}
-                </div>
-            </div>
-        </div>
-    {% endif %}
 
     {{ form_row(form.gatewayConfig.factoryName) }}
     {% if form.gatewayConfig.config is defined %}
