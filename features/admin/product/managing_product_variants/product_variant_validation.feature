@@ -70,6 +70,31 @@ Feature: Product variant validation
         Then I should be notified that the variant can have only one value configured for a single option
         And the "Wyborowa Vodka" product should have no variants
 
+    @api @no-ui
+    Scenario: Adding a new product variant without any of required options configured
+        Given this product has option "Taste" with values "Orange" and "Melon"
+        And this product has option "Size" with values "Small" and "Big"
+        When I want to create a new variant of this product
+        And I specify its code as "VODKA_WYBOROWA_PREMIUM"
+        And I do not set its "Taste" and "Size" options
+        And I set its price to "$100.00" for "United States" channel
+        And I try to add it
+        Then I should be notified that required options have not been configured
+        And the "Wyborowa Vodka" product should have no variants
+
+    @api @no-ui
+    Scenario: Adding a new product variant without one of required options configured
+        Given this product has option "Taste" with values "Orange" and "Melon"
+        And this product has option "Size" with values "Small" and "Big"
+        When I want to create a new variant of this product
+        And I specify its code as "VODKA_WYBOROWA_PREMIUM"
+        And I set its "Taste" option to "Orange"
+        And I do not set its "Size" option
+        And I set its price to "$100.00" for "United States" channel
+        And I try to add it
+        Then I should be notified that required options have not been configured
+        And the "Wyborowa Vodka" product should have no variants
+
     @api @todo @ui
     Scenario: Adding a new product variant with negative properties
         When I want to create a new variant of this product

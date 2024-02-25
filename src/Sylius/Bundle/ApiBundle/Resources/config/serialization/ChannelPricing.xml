@@ -17,34 +17,57 @@
 >
     <class name="Sylius\Component\Core\Model\ChannelPricing">
         <attribute name="channelCode">
-            <group>admin:product_variant:read</group>
             <group>admin:product_variant:create</group>
+            <group>sylius:admin:product_variant:create</group>
+            <group>admin:product_variant:update</group>
+            <group>sylius:admin:product_variant:update</group>
         </attribute>
 
         <attribute name="price">
-            <group>admin:product_variant:read</group>
+            <group>admin:product_variant:index</group>
+            <group>sylius:admin:product_variant:index</group>
+            <group>admin:product_variant:show</group>
+            <group>sylius:admin:product_variant:show</group>
             <group>admin:product_variant:create</group>
+            <group>sylius:admin:product_variant:create</group>
             <group>admin:product_variant:update</group>
+            <group>sylius:admin:product_variant:update</group>
         </attribute>
 
         <attribute name="originalPrice">
-            <group>admin:product_variant:read</group>
+            <group>admin:product_variant:index</group>
+            <group>sylius:admin:product_variant:index</group>
+            <group>admin:product_variant:show</group>
+            <group>sylius:admin:product_variant:show</group>
             <group>admin:product_variant:create</group>
+            <group>sylius:admin:product_variant:create</group>
             <group>admin:product_variant:update</group>
+            <group>sylius:admin:product_variant:update</group>
         </attribute>
 
         <attribute name="minimumPrice">
-            <group>admin:product_variant:read</group>
+            <group>admin:product_variant:index</group>
+            <group>sylius:admin:product_variant:index</group>
+            <group>admin:product_variant:show</group>
+            <group>sylius:admin:product_variant:show</group>
             <group>admin:product_variant:create</group>
+            <group>sylius:admin:product_variant:create</group>
             <group>admin:product_variant:update</group>
+            <group>sylius:admin:product_variant:update</group>
         </attribute>
 
         <attribute name="lowestPriceBeforeDiscount">
-            <group>admin:product_variant:read</group>
+            <group>admin:product_variant:index</group>
+            <group>sylius:admin:product_variant:index</group>
+            <group>admin:product_variant:show</group>
+            <group>sylius:admin:product_variant:show</group>
         </attribute>
 
         <attribute name="appliedPromotions">
-            <group>admin:product_variant:read</group>
+            <group>admin:product_variant:index</group>
+            <group>sylius:admin:product_variant:index</group>
+            <group>admin:product_variant:show</group>
+            <group>sylius:admin:product_variant:show</group>
         </attribute>
     </class>
 </serializer>

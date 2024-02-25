@@ -80,7 +80,9 @@ class RoboFile extends Tasks
             $task->exec('Tests/Application/bin/console doctrine:schema:update --force');
         }
 
-        $task->exec('vendor/bin/phpspec run --ansi --no-interaction -f dot');
+        if (file_exists(sprintf('%s/phpspec.yml', $packagePath)) || file_exists(sprintf('%s/phpspec.yml.dist', $packagePath)) || file_exists(sprintf('%s/phpspec.yaml', $packagePath))) {
+            $task->exec('vendor/bin/phpspec run --ansi --no-interaction -f dot');
+        }
 
         if (file_exists(sprintf('%s/phpunit.xml', $packagePath)) || file_exists(sprintf('%s/phpunit.xml.dist', $packagePath))) {
             $task->exec('vendor/bin/phpunit --colors=always');

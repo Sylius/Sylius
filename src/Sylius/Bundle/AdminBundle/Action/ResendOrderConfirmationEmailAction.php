@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\AdminBundle\Action;
 
-use Sylius\Bundle\AdminBundle\EmailManager\OrderEmailManagerInterface;
+use Sylius\Bundle\CoreBundle\MessageDispatcher\ResendOrderConfirmationEmailDispatcherInterface;
 use Sylius\Bundle\CoreBundle\Provider\FlashBagProvider;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
@@ -30,7 +30,7 @@ final readonly class ResendOrderConfirmationEmailAction
 {
     public function __construct(
         private OrderRepositoryInterface $orderRepository,
-        private OrderEmailManagerInterface $orderEmailManager,
+        private ResendOrderConfirmationEmailDispatcherInterface $resendOrderConfirmationEmailDispatcher,
         private CsrfTokenManagerInterface $csrfTokenManager,
         private RequestStack $requestStack,
     ) {
@@ -52,7 +52,7 @@ final readonly class ResendOrderConfirmationEmailAction
             throw new NotFoundHttpException(sprintf('The order with id %s has not been found', $orderId));
         }
 
-        $this->orderEmailManager->sendConfirmationEmail($order);
+        $this->resendOrderConfirmationEmailDispatcher->dispatch($order);
 
         FlashBagProvider
             ::getFlashBag($this->requestStack)

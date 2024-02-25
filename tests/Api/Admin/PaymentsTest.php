@@ -56,6 +56,28 @@ final class PaymentsTest extends JsonApiTestCase
             server: $header,
         );
         $response = $this->client->getResponse();
-        $this->assertResponse($response, 'admin/get_payment_response', Response::HTTP_OK);
+        $this->assertResponse($response, 'admin/payment/get_payment_response', Response::HTTP_OK);
+    }
+
+    /** @test */
+    public function it_gets_payments(): void
+    {
+        $this->loadFixturesFromFiles([
+            'authentication/api_administrator.yaml',
+            'channel.yaml',
+            'cart.yaml',
+            'country.yaml',
+            'shipping_method.yaml',
+            'payment_method.yaml',
+        ]);
+        $tokenValue = 'nAWw2jewpA';
+
+        $this->placeOrder($tokenValue);
+
+        $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
+
+        $this->client->request(method: 'GET', uri: '/api/v2/admin/payments', server: $header);
+        $response = $this->client->getResponse();
+        $this->assertResponse($response, 'admin/payment/get_payments_response', Response::HTTP_OK);
     }
 }

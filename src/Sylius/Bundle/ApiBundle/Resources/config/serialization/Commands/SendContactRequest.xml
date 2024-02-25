@@ -18,9 +18,11 @@
     <class name="Sylius\Bundle\ApiBundle\Command\SendContactRequest">
         <attribute name="email">
             <group>shop:contact_request:create</group>
+            <group>sylius:shop:contact_request:create</group>
         </attribute>
         <attribute name="message">
             <group>shop:contact_request:create</group>
+            <group>sylius:shop:contact_request:create</group>
         </attribute>
     </class>
 </serializer>

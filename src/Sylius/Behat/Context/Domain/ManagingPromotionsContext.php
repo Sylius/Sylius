@@ -15,6 +15,7 @@ namespace Sylius\Behat\Context\Domain;
 
 use Behat\Behat\Context\Context;
 use Doctrine\DBAL\Exception\ForeignKeyConstraintViolationException;
+use Doctrine\Persistence\ObjectManager;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Promotion\Repository\PromotionRepositoryInterface;
@@ -25,6 +26,7 @@ final class ManagingPromotionsContext implements Context
     public function __construct(
         private SharedStorageInterface $sharedStorage,
         private PromotionRepositoryInterface $promotionRepository,
+        private ObjectManager $promotionManager,
     ) {
     }
 
@@ -49,6 +51,16 @@ final class ManagingPromotionsContext implements Context
     }
 
     /**
+     * @When I archive the :promotion promotion
+     */
+    public function iArchiveThePromotion(PromotionInterface $promotion): void
+    {
+        $promotion->setArchivedAt(new \DateTime());
+
+        $this->promotionManager->flush();
+    }
+
+    /**
      * @Then /^(this promotion) should no longer exist in the promotion registry$/
      */
     public function promotionShouldNotExistInTheRegistry(PromotionInterface $promotion)
@@ -70,5 +82,13 @@ final class ManagingPromotionsContext implements Context
     public function iShouldBeNotifiedOfFailure()
     {
         Assert::isInstanceOf($this->sharedStorage->get('last_exception'), ForeignKeyConstraintViolationException::class);
+    }
+
+    /**
+     * @Then the promotion :promotion should still exist in the registry
+     */
+    public function thePromotionShouldStillExistInTheRegistry(PromotionInterface $promotion): void
+    {
+        Assert::notNull($this->promotionRepository->find($promotion));
     }
 }

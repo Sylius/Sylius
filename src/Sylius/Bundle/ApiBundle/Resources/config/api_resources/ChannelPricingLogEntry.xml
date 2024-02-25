@@ -21,7 +21,10 @@
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/admin/channel-pricing-log-entries</attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:channel_pricing_log_entry:read</attribute>
+                    <attribute name="groups">
+                        <attribute>admin:channel_pricing_log_entry:index</attribute>
+                        <attribute>sylius:admin:channel_pricing_log_entry:index</attribute>
+                    </attribute>
                 </attribute>
                 <attribute name="filters">
                     <attribute>sylius.api.channel_pricing_channel_filter</attribute>
@@ -38,7 +41,10 @@
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/admin/channel-pricing-log-entries/{id}</attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:channel_pricing_log_entry:read</attribute>
+                    <attribute name="groups">
+                        <attribute>admin:channel_pricing_log_entry:show</attribute>
+                        <attribute>sylius:admin:channel_pricing_log_entry:show</attribute>
+                    </attribute>
                 </attribute>
             </itemOperation>
         </itemOperations>

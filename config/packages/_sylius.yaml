@@ -7,6 +7,8 @@ imports:
 
     - { resource: "@SyliusAdminBundle/Resources/config/app/config.yml" }
 
+    - { resource: "../parameters.yaml" }
+
 parameters:
     sylius_core.public_dir: '%kernel.project_dir%/public'
 

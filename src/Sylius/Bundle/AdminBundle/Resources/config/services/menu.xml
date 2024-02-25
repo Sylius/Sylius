@@ -37,7 +37,7 @@
         <service id="sylius.admin.menu_builder.order.show" class="Sylius\Bundle\AdminBundle\Menu\OrderShowMenuBuilder">
             <argument type="service" id="knp_menu.factory" />
             <argument type="service" id="event_dispatcher" />
-            <argument type="service" id="sm.factory" />
+            <argument type="service" id="sylius_abstraction.state_machine" />
             <argument type="service" id="security.csrf.token_manager" />
             <tag name="knp_menu.menu_builder" method="createMenu" alias="sylius.admin.order.show" />
         </service>

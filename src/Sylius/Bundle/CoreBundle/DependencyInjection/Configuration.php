@@ -58,6 +58,39 @@ final class Configuration implements ConfigurationInterface
                 ->booleanNode('prepend_doctrine_migrations')->defaultTrue()->end()
                 ->booleanNode('shipping_address_based_taxation')->defaultFalse()->end()
                 ->booleanNode('order_by_identifier')->defaultTrue()->end()
+                ->booleanNode('process_shipments_before_recalculating_prices')
+                    ->setDeprecated('sylius/sylius', '1.10', 'The "%path%.%node%" parameter is deprecated and will be removed in 2.0.')
+                    ->defaultFalse()
+                ->end()
+                ->arrayNode('orders_statistics')
+                    ->children()
+                        ->arrayNode('intervals_map')
+                            ->useAttributeAsKey('type')
+                            ->arrayPrototype()
+                                ->children()
+                                    ->scalarNode('interval')
+                                        ->cannotBeEmpty()
+                                        ->validate()
+                                            ->ifTrue(
+                                                function (mixed $interval) {
+                                                    try {
+                                                        new \DateInterval($interval);
+
+                                                        return false;
+                                                    } catch (\Exception $e) {
+                                                        return true;
+                                                    }
+                                                },
+                                            )
+                                            ->thenInvalid('Invalid format for interval "%s". Expected a string compatible with DateInterval.')
+                                        ->end()
+                                    ->end()
+                                    ->scalarNode('period_format')->cannotBeEmpty()->end()
+                                ->end()
+                            ->end()
+                        ->end()
+                    ->end()
+                ->end()
                 ->arrayNode('catalog_promotions')
                     ->addDefaultsIfNotSet()
                     ->children()

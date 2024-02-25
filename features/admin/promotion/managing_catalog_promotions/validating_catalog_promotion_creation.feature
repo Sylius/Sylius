@@ -86,7 +86,7 @@ Feature: Validating a catalog promotion creation
         And I add scope that applies on variants "PHP T-Shirt" variant and "Kotlin T-Shirt" variant
         And I add percentage discount action without amount configured
         And I try to add it
-        Then I should be notified that a discount amount should be a number and cannot be empty
+        Then I should be notified that the percentage amount should be a number and cannot be empty
         And there should be an empty list of catalog promotions
 
     @api @todo @ui @mink:chromedriver
@@ -111,7 +111,7 @@ Feature: Validating a catalog promotion creation
         And I add scope that applies on variants "PHP T-Shirt" variant and "Kotlin T-Shirt" variant
         And I add invalid percentage discount action with non number in amount
         And I try to add it
-        Then I should be notified that a discount amount should be a number and cannot be empty
+        Then I should be notified that the percentage amount should be a number and cannot be empty
         And there should be an empty list of catalog promotions
 
     @api @todo @ui @mink:chromedriver
@@ -123,9 +123,9 @@ Feature: Validating a catalog promotion creation
         And I specify its label as "Winter -50%" in "English (United States)"
         And I describe it as "This promotion gives a $10.00 discount on every product" in "English (United States)"
         And I add scope that applies on variants "PHP T-Shirt" variant and "Kotlin T-Shirt" variant
-        And I add fixed discount action without amount configured
+        And I add fixed discount action without amount configured for the "United States" channel
         And I try to add it
-        Then I should be notified that a discount amount should be configured for at least one channel
+        Then I should be notified that the fixed amount should be a number and cannot be empty
         And there should be an empty list of catalog promotions
 
     @api
@@ -139,7 +139,7 @@ Feature: Validating a catalog promotion creation
         And I add scope that applies on variants "PHP T-Shirt" variant and "Kotlin T-Shirt" variant
         And I add invalid fixed discount action with non number in amount for the "United States" channel
         And I try to add it
-        Then I should be notified that a discount amount should be configured for at least one channel
+        Then I should be notified that the fixed amount should be a number and cannot be empty
         And there should be an empty list of catalog promotions
 
     @api

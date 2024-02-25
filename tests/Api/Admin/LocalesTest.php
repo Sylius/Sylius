@@ -41,7 +41,7 @@ final class LocalesTest extends JsonApiTestCase
 
         $this->assertResponse(
             $this->client->getResponse(),
-            'admin/post_locale_with_invalid_code_response',
+            'admin/locale/post_locale_with_invalid_code_response',
             Response::HTTP_UNPROCESSABLE_ENTITY,
         );
     }

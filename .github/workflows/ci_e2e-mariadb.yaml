@@ -44,7 +44,7 @@ jobs:
     behat-no-js:
         needs: get-matrix
         runs-on: ubuntu-latest
-        name: "Non-JS, PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}, MariaDB ${{ matrix.mariadb }}"
+        name: "Non-JS, PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}, MariaDB ${{ matrix.mariadb }}, State Machine Adapter ${{ matrix.state_machine_adapter }}"
         timeout-minutes: 45
         strategy:
             fail-fast: false
@@ -53,6 +53,7 @@ jobs:
         env:
             APP_ENV: test_cached
             DATABASE_URL: "mysql://root:root@127.0.0.1/sylius?charset=utf8mb4&serverVersion=mariadb-${{ matrix.mariadb }}"
+            TEST_SYLIUS_STATE_MACHINE_ADAPTER: "${{ matrix.state_machine_adapter }}"
 
         steps:
             -   name: Set variables
@@ -99,6 +100,7 @@ jobs:
                     legacy_postgresql_setup: ${{ env.USE_LEGACY_POSTGRES_SETUP }}
                     php_version: ${{ matrix.php }}
                     symfony_version: ${{ matrix.symfony }}
+                    node_version: "20.x"
 
             -   name: Run PHPUnit
                 run: vendor/bin/phpunit --colors=always

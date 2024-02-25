@@ -16,8 +16,3 @@ Feature: Deleting a product
         When I delete the "Toyota GT86 model" product
         Then I should be notified that it has been successfully deleted
         And this product should not exist in the product catalog
-
-    @domain
-    Scenario: Deleted product variants disappear from the product catalog
-        When I delete the "Toyota GT86 model" product
-        Then there should be no variants of this product in the product catalog

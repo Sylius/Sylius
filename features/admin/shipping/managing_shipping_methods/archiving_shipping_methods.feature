@@ -15,11 +15,6 @@ Feature: Archiving obsolete shipping methods
         When I archive the "UPS Carrier" shipping method
         Then the only shipping method on the list should be "FedEx Carrier"
 
-    @domain
-    Scenario: Archiving a shipping method does not remove it from the database
-        When I archive the "UPS Carrier" shipping method
-        Then the shipping method "UPS Carrier" should still exist in the registry
-
     @todo @ui @api
     Scenario: Seeing only archived shipping methods
         Given the shipping method "UPS Carrier" is archival

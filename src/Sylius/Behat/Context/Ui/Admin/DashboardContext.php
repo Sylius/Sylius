@@ -90,7 +90,7 @@ final class DashboardContext implements Context
     }
 
     /**
-     * @Then I should see :number new orders
+     * @Then I should see :number paid orders
      */
     public function iShouldSeeNewOrders(int $number): void
     {

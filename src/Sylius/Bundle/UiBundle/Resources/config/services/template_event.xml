@@ -44,9 +44,11 @@
         </service>
         <service id="Sylius\Bundle\UiBundle\Renderer\TemplateEventRendererInterface" alias="Sylius\Bundle\UiBundle\Renderer\TwigEventRendererInterface" />
 
-        <service id="Sylius\Bundle\UiBundle\Command\DebugTemplateEventCommand">
+        <service id="Sylius\Bundle\UiBundle\Console\Command\DebugTemplateEventCommand">
             <argument type="service" id="Sylius\Bundle\UiBundle\Registry\TemplateBlockRegistryInterface" />
             <tag name="console.command" command="sylius:debug:template-event" />
         </service>
+
+        <service id="Sylius\Bundle\UiBundle\Command\DebugTemplateEventCommand" alias="Sylius\Bundle\UiBundle\Console\Command\DebugTemplateEventCommand" />
     </services>
 </container>

@@ -98,6 +98,8 @@ final class ManagingProductVariantsContext implements Context
     /**
      * @When I do not set its price
      * @When I do not specify its code
+     * @When I do not set its :optionName option
+     * @When I do not set its :firstOptionName and :secondOptionName options
      */
     public function iDoNotSetValue(): void
     {
@@ -720,6 +722,17 @@ final class ManagingProductVariantsContext implements Context
         Assert::contains(
             $this->responseChecker->getError($this->client->getLastResponse()),
             'The product variant can have only one value configured for a single option.',
+        );
+    }
+
+    /**
+     * @Then I should be notified that required options have not been configured
+     */
+    public function iShouldBeNotifiedThatRequiredOptionsHaveNotBeenConfigured(): void
+    {
+        Assert::contains(
+            $this->responseChecker->getError($this->client->getLastResponse()),
+            'The product variant must have configured values for all options chosen on the product.',
         );
     }
 

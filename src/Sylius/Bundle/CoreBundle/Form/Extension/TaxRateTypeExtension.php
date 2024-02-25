@@ -26,11 +26,6 @@ final class TaxRateTypeExtension extends AbstractTypeExtension
         $builder->add('zone', ZoneChoiceType::class, ['zone_scope' => Scope::TAX]);
     }
 
-    public function getExtendedType(): string
-    {
-        return TaxRateType::class;
-    }
-
     public static function getExtendedTypes(): iterable
     {
         return [TaxRateType::class];

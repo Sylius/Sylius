@@ -16,7 +16,6 @@ namespace Sylius\Behat\Context\Api\Admin;
 use ApiPlatform\Api\IriConverterInterface;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
-use Sylius\Behat\Client\RequestFactoryInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Context\Api\Resources;
 use Sylius\Behat\Context\Api\Subresources;
@@ -36,6 +35,7 @@ use Sylius\Component\Currency\Model\CurrencyInterface;
 use Sylius\Component\Order\OrderTransitions;
 use Sylius\Component\Payment\PaymentTransitions;
 use Sylius\Component\Shipping\ShipmentTransitions;
+use Symfony\Component\HttpFoundation\Request as HttpRequest;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Intl\Countries;
 use Webmozart\Assert\Assert;
@@ -45,7 +45,6 @@ final class ManagingOrdersContext implements Context
     public function __construct(
         private ApiClientInterface $client,
         private ResponseCheckerInterface $responseChecker,
-        private RequestFactoryInterface $requestFactory,
         private IriConverterInterface $iriConverter,
         private SecurityServiceInterface $adminSecurityService,
         private SharedStorageInterface $sharedStorage,
@@ -140,6 +139,19 @@ final class ManagingOrdersContext implements Context
     }
 
     /**
+     * @When I resend the order confirmation email
+     */
+    public function iResendTheOrderConfirmationEmail(): void
+    {
+        $this->client->customItemAction(
+            Resources::ORDERS,
+            $this->sharedStorage->get('order')->getTokenValue(),
+            HttpRequest::METHOD_POST,
+            'resend-confirmation-email',
+        );
+    }
+
+    /**
      * @When I filter by product :productName
      * @When I filter by products :firstProduct and :secondProduct
      */
@@ -150,6 +162,19 @@ final class ManagingOrdersContext implements Context
         }
 
         $this->client->filter();
+    }
+
+    /**
+     * @When I resend the shipment confirmation email
+     */
+    public function iResendTheShipmentConfirmationEmail(): void
+    {
+        $this->client->customItemAction(
+            Resources::SHIPMENTS,
+            (string) $this->sharedStorage->get('order')->getShipments()->last()->getId(),
+            HttpRequest::METHOD_POST,
+            'resend-confirmation-email',
+        );
     }
 
     /**
@@ -242,11 +267,16 @@ final class ManagingOrdersContext implements Context
      */
     public function iShipThisOrder(OrderInterface $order): void
     {
+        $shipment = $order->getShipments()->last();
+        Assert::notNull($shipment, 'There is no shipment for this order');
+
         $this->client->applyTransition(
             Resources::SHIPMENTS,
-            (string) $order->getShipments()->first()->getId(),
+            (string) $shipment->getId(),
             ShipmentTransitions::TRANSITION_SHIP,
         );
+
+        $this->sharedStorage->set('shipment', $shipment);
     }
 
     /**
@@ -292,6 +322,14 @@ final class ManagingOrdersContext implements Context
             ),
             sprintf('There is no order for customer %s', $customer->getEmail()),
         );
+    }
+
+    /**
+     * @Then /^I should be notified that the (order|shipment) confirmation email has been successfully resent to the customer$/
+     */
+    public function iShouldBeNotifiedThatTheOrderConfirmationEmailHasBeenSuccessfullyResentToTheCustomer(): void
+    {
+        $this->responseChecker->isCreationSuccessful($this->client->getLastResponse());
     }
 
     /**
@@ -434,6 +472,24 @@ final class ManagingOrdersContext implements Context
     }
 
     /**
+     * @Then I should not be able to resend the shipment confirmation email
+     */
+    public function iShouldNotBeAbleToResendTheShipmentConfirmationEmail(): void
+    {
+        $this->client->customItemAction(
+            Resources::SHIPMENTS,
+            (string) $this->sharedStorage->get('order')->getShipments()->last()->getId(),
+            HttpRequest::METHOD_POST,
+            'resend-confirmation-email',
+        );
+
+        Assert::same(
+            $this->responseChecker->getError($this->client->getLastResponse()),
+            'Cannot resend shipment confirmation email for shipment in state ready.',
+        );
+    }
+
+    /**
      * @Then /^the order's items total should be ("[^"]+")$/
      */
     public function theOrdersItemsTotalShouldBe(int $itemsTotal): void
@@ -461,7 +517,7 @@ final class ManagingOrdersContext implements Context
         $this->iCancelThisOrder($order);
         Assert::contains(
             $this->responseChecker->getError($this->client->getLastResponse()),
-            'Transition "cancel" cannot be applied',
+            'Cannot cancel the order.',
         );
     }
 
@@ -770,8 +826,10 @@ final class ManagingOrdersContext implements Context
      */
     public function iShouldSeeTheShippingDateAs(string $dateTime): void
     {
+        $response = $this->client->show(Resources::SHIPMENTS, (string) $this->sharedStorage->get('shipment')->getId());
+
         Assert::same(
-            $this->responseChecker->getValue($this->client->getLastResponse(), 'shippedAt'),
+            $this->responseChecker->getValue($response, 'shippedAt'),
             (new \DateTime($dateTime))->format('Y-m-d H:i:s'),
         );
     }
@@ -1023,8 +1081,8 @@ final class ManagingOrdersContext implements Context
     {
         $response = $this->client->getLastResponse();
         Assert::true(
-            $this->responseChecker->isUpdateSuccessful($response),
-            'Order could not be shipped. Reason: ' . $response->getContent(),
+            $this->responseChecker->isAccepted($response),
+            'Order could not be shipped.',
         );
     }
 
@@ -1099,6 +1157,24 @@ final class ManagingOrdersContext implements Context
             (string) $order->getShippingAddress()->getId(),
         );
         Assert::same($this->responseChecker->countCollectionItems($response), $count);
+    }
+
+    /**
+     * @Then I should not be able to resend the order confirmation email
+     */
+    public function iShouldNotBeAbleToResendTheOrderConfirmationEmail(): void
+    {
+        $this->client->customItemAction(
+            Resources::ORDERS,
+            $this->sharedStorage->get('order')->getTokenValue(),
+            HttpRequest::METHOD_POST,
+            'resend-confirmation-email',
+        );
+
+        Assert::same(
+            $this->responseChecker->getError($this->client->getLastResponse()),
+            'Cannot resend order confirmation email for order with state cancelled.',
+        );
     }
 
     /**

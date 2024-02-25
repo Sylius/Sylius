@@ -59,6 +59,7 @@ sylius:
                     sylius_plus: Sylius Plus
                     professional_services: Professional services
                     find_a_partner: Find a partner
+                    sylius_certification: Sylius certification
     ui:
         add_new_entry: Add a new entry
         catalog_promotion:

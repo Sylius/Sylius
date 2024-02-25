@@ -14,7 +14,7 @@ Feature: Preventing deletion of purchased product
         And the customer chose "Free" shipping method to "United States" with "Cash on Delivery" payment
         And I am logged in as an administrator
 
-    @domain @todo @ui @api
+    @todo @ui @api
     Scenario: Purchased product cannot be deleted
         When I try to delete the "Toyota GT86 model" product
         Then I should be notified that this product is in use and cannot be deleted

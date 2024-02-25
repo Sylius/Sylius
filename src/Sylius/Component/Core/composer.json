@@ -49,6 +49,7 @@
         "sylius/resource": "^1.10",
         "sylius/review": "^2.0",
         "sylius/shipping": "^2.0",
+        "sylius/state-machine-abstraction": "^2.0",
         "sylius/taxation": "^2.0",
         "sylius/taxonomy": "^2.0",
         "sylius/user": "^2.0",
@@ -82,7 +83,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Sylius\\Component\\Core\\spec\\": "spec/"
+            "spec\\Sylius\\Component\\Core\\": "spec/"
         }
     },
     "repositories": [

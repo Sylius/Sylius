@@ -127,4 +127,19 @@ final class PaymentMethodsTest extends JsonApiTestCase
 
         $this->assertResponse($response, 'shop/payment_method/get_payment_methods_response');
     }
+
+    /** @test */
+    public function it_gets_payment_method_by_code(): void
+    {
+        $this->loadFixturesFromFiles(['channel.yaml', 'payment_method.yaml']);
+
+        $this->client->request(
+            method: 'GET',
+            uri: '/api/v2/shop/payment-methods/PAYPAL',
+            server: self::CONTENT_TYPE_HEADER,
+        );
+        $response = $this->client->getResponse();
+
+        $this->assertResponse($response, 'shop/payment_method/get_payment_method_response');
+    }
 }

@@ -17,120 +17,276 @@
 >
     <class name="Sylius\Component\Core\Model\Address">
         <attribute name="id">
-            <group>admin:address:read</group>
-            <group>shop:address:read</group>
+            <group>admin:address:index</group>
+            <group>sylius:admin:address:index</group>
+            <group>admin:address:show</group>
+            <group>sylius:admin:address:show</group>
+            <group>shop:address:index</group>
+            <group>sylius:shop:address:index</group>
+            <group>shop:address:show</group>
+            <group>sylius:shop:address:show</group>
         </attribute>
         <attribute name="customer">
-            <group>admin:address:read</group>
+            <group>admin:address:index</group>
+            <group>sylius:admin:address:index</group>
+            <group>admin:address:show</group>
+            <group>sylius:admin:address:show</group>
         </attribute>
         <attribute name="firstName">
-            <group>admin:address:read</group>
+            <group>admin:address:index</group>
+            <group>sylius:admin:address:index</group>
+            <group>admin:address:show</group>
+            <group>sylius:admin:address:show</group>
             <group>admin:address:update</group>
-            <group>admin:order:read</group>
+            <group>sylius:admin:address:update</group>
+            <group>admin:order:index</group>
+            <group>sylius:admin:order:index</group>
+            <group>admin:order:show</group>
+            <group>sylius:admin:order:show</group>
             <group>shop:address:create</group>
-            <group>shop:address:read</group>
+            <group>sylius:shop:address:create</group>
+            <group>shop:address:index</group>
+            <group>sylius:shop:address:index</group>
+            <group>shop:address:show</group>
+            <group>sylius:shop:address:show</group>
             <group>shop:address:update</group>
+            <group>sylius:shop:address:update</group>
             <group>shop:cart:update</group>
-            <group>shop:cart:read</group>
-            <group>shop:order:account:read</group>
+            <group>sylius:shop:cart:update</group>
+            <group>shop:cart:show</group>
+            <group>sylius:shop:cart:show</group>
+            <group>shop:order:account:show</group>
+            <group>sylius:shop:order:account:show</group>
         </attribute>
         <attribute name="lastName">
-            <group>admin:address:read</group>
+            <group>admin:address:index</group>
+            <group>sylius:admin:address:index</group>
+            <group>admin:address:show</group>
+            <group>sylius:admin:address:show</group>
             <group>admin:address:update</group>
-            <group>admin:order:read</group>
+            <group>sylius:admin:address:update</group>
+            <group>admin:order:index</group>
+            <group>sylius:admin:order:index</group>
+            <group>admin:order:show</group>
+            <group>sylius:admin:order:show</group>
             <group>shop:address:create</group>
-            <group>shop:address:read</group>
+            <group>sylius:shop:address:create</group>
+            <group>shop:address:index</group>
+            <group>sylius:shop:address:index</group>
+            <group>shop:address:show</group>
+            <group>sylius:shop:address:show</group>
             <group>shop:address:update</group>
+            <group>sylius:shop:address:update</group>
             <group>shop:cart:update</group>
-            <group>shop:cart:read</group>
-            <group>shop:order:account:read</group>
+            <group>sylius:shop:cart:update</group>
+            <group>shop:cart:show</group>
+            <group>sylius:shop:cart:show</group>
+            <group>shop:order:account:show</group>
+            <group>sylius:shop:order:account:show</group>
         </attribute>
         <attribute name="phoneNumber">
-            <group>admin:address:read</group>
+            <group>admin:address:index</group>
+            <group>sylius:admin:address:index</group>
+            <group>admin:address:show</group>
+            <group>sylius:admin:address:show</group>
             <group>admin:address:update</group>
-            <group>admin:order:read</group>
+            <group>sylius:admin:address:update</group>
+            <group>admin:order:index</group>
+            <group>sylius:admin:order:index</group>
+            <group>admin:order:show</group>
+            <group>sylius:admin:order:show</group>
             <group>shop:address:create</group>
-            <group>shop:address:read</group>
+            <group>sylius:shop:address:create</group>
+            <group>shop:address:index</group>
+            <group>sylius:shop:address:index</group>
+            <group>shop:address:show</group>
+            <group>sylius:shop:address:show</group>
             <group>shop:address:update</group>
+            <group>sylius:shop:address:update</group>
             <group>shop:cart:update</group>
-            <group>shop:cart:read</group>
-            <group>shop:order:account:read</group>
+            <group>sylius:shop:cart:update</group>
+            <group>shop:cart:show</group>
+            <group>sylius:shop:cart:show</group>
+            <group>shop:order:account:show</group>
+            <group>sylius:shop:order:account:show</group>
         </attribute>
         <attribute name="company">
-            <group>admin:address:read</group>
+            <group>admin:address:index</group>
+            <group>sylius:admin:address:index</group>
+            <group>admin:address:show</group>
+            <group>sylius:admin:address:show</group>
             <group>admin:address:update</group>
-            <group>admin:order:read</group>
+            <group>sylius:admin:address:update</group>
+            <group>admin:order:index</group>
+            <group>sylius:admin:order:index</group>
+            <group>admin:order:show</group>
+            <group>sylius:admin:order:show</group>
             <group>shop:address:create</group>
-            <group>shop:address:read</group>
+            <group>sylius:shop:address:create</group>
+            <group>shop:address:index</group>
+            <group>sylius:shop:address:index</group>
+            <group>shop:address:show</group>
+            <group>sylius:shop:address:show</group>
             <group>shop:address:update</group>
+            <group>sylius:shop:address:update</group>
             <group>shop:cart:update</group>
-            <group>shop:cart:read</group>
-            <group>shop:order:account:read</group>
+            <group>sylius:shop:cart:update</group>
+            <group>shop:cart:show</group>
+            <group>sylius:shop:cart:show</group>
+            <group>shop:order:account:show</group>
+            <group>sylius:shop:order:account:show</group>
         </attribute>
         <attribute name="city">
-            <group>admin:address:read</group>
+            <group>admin:address:index</group>
+            <group>sylius:admin:address:index</group>
+            <group>admin:address:show</group>
+            <group>sylius:admin:address:show</group>
             <group>admin:address:update</group>
-            <group>admin:order:read</group>
+            <group>sylius:admin:address:update</group>
+            <group>admin:order:index</group>
+            <group>sylius:admin:order:index</group>
+            <group>admin:order:show</group>
+            <group>sylius:admin:order:show</group>
             <group>shop:address:create</group>
-            <group>shop:address:read</group>
+            <group>sylius:shop:address:create</group>
+            <group>shop:address:index</group>
+            <group>sylius:shop:address:index</group>
+            <group>shop:address:show</group>
+            <group>sylius:shop:address:show</group>
             <group>shop:address:update</group>
+            <group>sylius:shop:address:update</group>
             <group>shop:cart:update</group>
-            <group>shop:cart:read</group>
-            <group>shop:order:account:read</group>
+            <group>sylius:shop:cart:update</group>
+            <group>shop:cart:show</group>
+            <group>sylius:shop:cart:show</group>
+            <group>shop:order:account:show</group>
+            <group>sylius:shop:order:account:show</group>
         </attribute>
         <attribute name="street">
-            <group>admin:address:read</group>
+            <group>admin:address:index</group>
+            <group>sylius:admin:address:index</group>
+            <group>admin:address:show</group>
+            <group>sylius:admin:address:show</group>
             <group>admin:address:update</group>
-            <group>admin:order:read</group>
+            <group>sylius:admin:address:update</group>
+            <group>admin:order:index</group>
+            <group>sylius:admin:order:index</group>
+            <group>admin:order:show</group>
+            <group>sylius:admin:order:show</group>
             <group>shop:address:create</group>
-            <group>shop:address:read</group>
+            <group>sylius:shop:address:create</group>
+            <group>shop:address:index</group>
+            <group>sylius:shop:address:index</group>
+            <group>shop:address:show</group>
+            <group>sylius:shop:address:show</group>
             <group>shop:address:update</group>
+            <group>sylius:shop:address:update</group>
             <group>shop:cart:update</group>
-            <group>shop:cart:read</group>
-            <group>shop:order:account:read</group>
+            <group>sylius:shop:cart:update</group>
+            <group>shop:cart:show</group>
+            <group>sylius:shop:cart:show</group>
+            <group>shop:order:account:show</group>
+            <group>sylius:shop:order:account:show</group>
         </attribute>
         <attribute name="postcode">
-            <group>admin:address:read</group>
+            <group>admin:address:index</group>
+            <group>sylius:admin:address:index</group>
+            <group>admin:address:show</group>
+            <group>sylius:admin:address:show</group>
             <group>admin:address:update</group>
-            <group>admin:order:read</group>
+            <group>sylius:admin:address:update</group>
+            <group>admin:order:index</group>
+            <group>sylius:admin:order:index</group>
+            <group>admin:order:show</group>
+            <group>sylius:admin:order:show</group>
             <group>shop:address:create</group>
-            <group>shop:address:read</group>
+            <group>sylius:shop:address:create</group>
+            <group>shop:address:index</group>
+            <group>sylius:shop:address:index</group>
+            <group>shop:address:show</group>
+            <group>sylius:shop:address:show</group>
             <group>shop:address:update</group>
+            <group>sylius:shop:address:update</group>
             <group>shop:cart:update</group>
-            <group>shop:cart:read</group>
-            <group>shop:order:account:read</group>
+            <group>sylius:shop:cart:update</group>
+            <group>shop:cart:show</group>
+            <group>sylius:shop:cart:show</group>
+            <group>shop:order:account:show</group>
+            <group>sylius:shop:order:account:show</group>
         </attribute>
         <attribute name="countryCode">
-            <group>admin:address:read</group>
+            <group>admin:address:index</group>
+            <group>sylius:admin:address:index</group>
+            <group>admin:address:show</group>
+            <group>sylius:admin:address:show</group>
             <group>admin:address:update</group>
-            <group>admin:order:read</group>
+            <group>sylius:admin:address:update</group>
+            <group>admin:order:index</group>
+            <group>sylius:admin:order:index</group>
+            <group>admin:order:show</group>
+            <group>sylius:admin:order:show</group>
             <group>shop:address:create</group>
-            <group>shop:address:read</group>
+            <group>sylius:shop:address:create</group>
+            <group>shop:address:index</group>
+            <group>sylius:shop:address:index</group>
+            <group>shop:address:show</group>
+            <group>sylius:shop:address:show</group>
             <group>shop:address:update</group>
+            <group>sylius:shop:address:update</group>
             <group>shop:cart:update</group>
-            <group>shop:cart:read</group>
-            <group>shop:order:account:read</group>
+            <group>sylius:shop:cart:update</group>
+            <group>shop:cart:show</group>
+            <group>sylius:shop:cart:show</group>
+            <group>shop:order:account:show</group>
+            <group>sylius:shop:order:account:show</group>
         </attribute>
         <attribute name="provinceCode">
-            <group>admin:address:read</group>
+            <group>admin:address:index</group>
+            <group>sylius:admin:address:index</group>
+            <group>admin:address:show</group>
+            <group>sylius:admin:address:show</group>
             <group>admin:address:update</group>
+            <group>sylius:admin:address:update</group>
             <group>shop:address:create</group>
-            <group>shop:address:read</group>
+            <group>sylius:shop:address:create</group>
+            <group>shop:address:index</group>
+            <group>sylius:shop:address:index</group>
+            <group>shop:address:show</group>
+            <group>sylius:shop:address:show</group>
             <group>shop:address:update</group>
+            <group>sylius:shop:address:update</group>
             <group>shop:cart:update</group>
-            <group>shop:cart:read</group>
-            <group>shop:order:account:read</group>
+            <group>sylius:shop:cart:update</group>
+            <group>shop:cart:show</group>
+            <group>sylius:shop:cart:show</group>
+            <group>shop:order:account:show</group>
+            <group>sylius:shop:order:account:show</group>
         </attribute>
         <attribute name="provinceName">
-            <group>admin:address:read</group>
+            <group>admin:address:index</group>
+            <group>sylius:admin:address:index</group>
+            <group>admin:address:show</group>
+            <group>sylius:admin:address:show</group>
             <group>admin:address:update</group>
-            <group>admin:order:read</group>
+            <group>sylius:admin:address:update</group>
+            <group>admin:order:index</group>
+            <group>sylius:admin:order:index</group>
+            <group>admin:order:show</group>
+            <group>sylius:admin:order:show</group>
             <group>shop:address:create</group>
-            <group>shop:address:read</group>
+            <group>sylius:shop:address:create</group>
+            <group>shop:address:index</group>
+            <group>sylius:shop:address:index</group>
+            <group>shop:address:show</group>
+            <group>sylius:shop:address:show</group>
             <group>shop:address:update</group>
+            <group>sylius:shop:address:update</group>
             <group>shop:cart:update</group>
-            <group>shop:cart:read</group>
-            <group>shop:order:account:read</group>
+            <group>sylius:shop:cart:update</group>
+            <group>shop:cart:show</group>
+            <group>sylius:shop:cart:show</group>
+            <group>shop:order:account:show</group>
+            <group>sylius:shop:order:account:show</group>
         </attribute>
     </class>
 </serializer>

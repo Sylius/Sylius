@@ -34,7 +34,10 @@
                     <attribute>Sylius\Bundle\ApiBundle\Filter\Doctrine\TranslationOrderNameAndLocaleFilter</attribute>
                 </attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:product:read</attribute>
+                    <attribute name="groups">
+                        <attribute>admin:product:index</attribute>
+                        <attribute>sylius:admin:product:index</attribute>
+                    </attribute>
                 </attribute>
             </collectionOperation>
 
@@ -50,7 +53,10 @@
                     <attribute>Sylius\Bundle\ApiBundle\Filter\Doctrine\TaxonFilter</attribute>
                 </attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">shop:product:read</attribute>
+                    <attribute name="groups">
+                        <attribute>shop:product:index</attribute>
+                        <attribute>sylius:shop:product:index</attribute>
+                    </attribute>
                 </attribute>
             </collectionOperation>
 
@@ -58,10 +64,16 @@
                 <attribute name="method">POST</attribute>
                 <attribute name="path">/admin/products</attribute>
                 <attribute name="denormalization_context">
-                    <attribute name="groups">admin:product:create</attribute>
+                    <attribute name="groups">
+                        <attribute>admin:product:create</attribute>
+                        <attribute>sylius:admin:product:create</attribute>
+                    </attribute>
                 </attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:product:read</attribute>
+                    <attribute name="groups">
+                        <attribute>admin:product:show</attribute>
+                        <attribute>sylius:admin:product:show</attribute>
+                    </attribute>
                 </attribute>
             </collectionOperation>
         </collectionOperations>
@@ -74,7 +86,10 @@
                     <attribute name="summary">Use code to retrieve a product resource.</attribute>
                 </attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:product:read</attribute>
+                    <attribute name="groups">
+                        <attribute>admin:product:show</attribute>
+                        <attribute>sylius:admin:product:show</attribute>
+                    </attribute>
                 </attribute>
             </itemOperation>
 
@@ -85,7 +100,10 @@
                     <attribute name="summary">Use code to retrieve a product resource.</attribute>
                 </attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">shop:product:read</attribute>
+                    <attribute name="groups">
+                        <attribute>shop:product:show</attribute>
+                        <attribute>sylius:shop:product:show</attribute>
+                    </attribute>
                 </attribute>
             </itemOperation>
 
@@ -108,7 +126,10 @@
                     </attribute>
                 </attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">shop:product:read</attribute>
+                    <attribute name="groups">
+                        <attribute>shop:product:show</attribute>
+                        <attribute>sylius:shop:product:show</attribute>
+                    </attribute>
                 </attribute>
             </itemOperation>
 
@@ -116,10 +137,16 @@
                 <attribute name="method">PUT</attribute>
                 <attribute name="path">/admin/products/{code}</attribute>
                 <attribute name="denormalization_context">
-                    <attribute name="groups">admin:product:update</attribute>
+                    <attribute name="groups">
+                        <attribute>admin:product:update</attribute>
+                        <attribute>sylius:admin:product:update</attribute>
+                    </attribute>
                 </attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:product:read</attribute>
+                    <attribute name="groups">
+                        <attribute>admin:product:show</attribute>
+                        <attribute>sylius:admin:product:show</attribute>
+                    </attribute>
                 </attribute>
             </itemOperation>
 

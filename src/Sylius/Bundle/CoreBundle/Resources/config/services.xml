@@ -13,35 +13,7 @@
 
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <imports>
-        <import resource="services/calculators.xml" />
-        <import resource="services/catalog_promotion.xml" />
-        <import resource="services/checkers.xml" />
-        <import resource="services/checkout.xml" />
-        <import resource="services/commands.xml" />
-        <import resource="services/context.xml" />
-        <import resource="services/dashboard.xml" />
-        <import resource="services/emails.xml" />
-        <import resource="services/factories.xml" />
-        <import resource="services/fixtures.xml" />
-        <import resource="services/fixtures_factories.xml" />
-        <import resource="services/fixtures_listeners.xml" />
-        <import resource="services/form.xml" />
-        <import resource="services/installer.xml" />
-        <import resource="services/installer_requirements.xml" />
-        <import resource="services/listeners.xml" />
-        <import resource="services/message_handlers.xml" />
-        <import resource="services/order_processing.xml" />
-        <import resource="services/payment.xml" />
-        <import resource="services/price_history.xml" />
-        <import resource="services/product_variant_map.xml" />
-        <import resource="services/promotion.xml" />
-        <import resource="services/providers.xml" />
-        <import resource="services/shipping.xml" />
-        <import resource="services/state_machines.xml" />
-        <import resource="services/state_resolvers.xml" />
-        <import resource="services/taxation.xml" />
-        <import resource="services/templating.xml" />
-        <import resource="services/validators.xml" />
+        <import resource="services/*.xml" />
     </imports>
 
     <parameters>
@@ -220,7 +192,7 @@
 
         <service id="sylius.unpaid_orders_state_updater" class="Sylius\Component\Core\Updater\UnpaidOrdersStateUpdater">
             <argument type="service" id="sylius.repository.order" />
-            <argument type="service" id="sm.factory" />
+            <argument type="service" id="sylius_abstraction.state_machine" />
             <argument>%sylius_order.order_expiration_period%</argument>
             <argument type="service" id="logger" />
             <argument type="service" id="sylius.manager.order" />
@@ -230,7 +202,7 @@
         <service id="sylius.order_payment_provider" class="Sylius\Component\Core\Payment\Provider\OrderPaymentProvider">
             <argument type="service" id="sylius.payment_method_resolver.default" />
             <argument type="service" id="sylius.factory.payment" />
-            <argument type="service" id="sm.factory" />
+            <argument type="service" id="sylius_abstraction.state_machine" />
         </service>
         <service id="Sylius\Component\Core\Payment\Provider\OrderPaymentProviderInterface" alias="sylius.order_payment_provider" />
 
@@ -268,10 +240,6 @@
             <tag name="sylius.grid_filter" type="resource_autocomplete" form-type="Sylius\Bundle\CoreBundle\Form\Type\Grid\Filter\ResourceAutocompleteFilterType" />
         </service>
 
-        <service class="Sylius\Bundle\CoreBundle\Mailer\OrderEmailManager" id="sylius.mailer.order_email_manager">
-            <argument type="service" id="sylius.email_sender" />
-        </service>
-
         <service id="Sylius\Component\Core\Cart\Resolver\CreatedByGuestFlagResolverInterface" class="Sylius\Component\Core\Cart\Resolver\CreatedByGuestFlagResolver">
             <argument type="service" id="security.token_storage" />
         </service>
@@ -296,9 +264,21 @@
             <argument type="service" id="sylius.command_bus" />
         </service>
 
+        <service id="Sylius\Bundle\CoreBundle\MessageDispatcher\ResendOrderConfirmationEmailDispatcherInterface" class="Sylius\Bundle\CoreBundle\MessageDispatcher\ResendOrderConfirmationEmailDispatcher">
+            <argument type="service" id="sylius.command_bus" />
+        </service>
+
+        <service id="Sylius\Bundle\CoreBundle\MessageDispatcher\ResendShipmentConfirmationEmailDispatcher">
+            <argument type="service" id="sylius.command_bus" />
+        </service>
+
         <service id="Sylius\Bundle\CoreBundle\Resolver\CustomerResolverInterface" class="Sylius\Bundle\CoreBundle\Resolver\CustomerResolver">
             <argument type="service" id="sylius.factory.customer" />
             <argument type="service" id="Sylius\Bundle\CoreBundle\Provider\CustomerProviderInterface" />
+        </service>
+
+        <service id="Sylius\Component\Core\Statistics\Registry\OrdersTotalsProvidersRegistryInterface" class="Sylius\Component\Core\Statistics\Registry\OrdersTotalsProvidersRegistry">
+            <argument type="tagged_iterator" index-by="type" tag="sylius.statistics.orders_totals_provider" />
         </service>
 
         <service id="Sylius\Component\Core\Positioner\PositionerInterface" class="Sylius\Component\Core\Positioner\Positioner" />

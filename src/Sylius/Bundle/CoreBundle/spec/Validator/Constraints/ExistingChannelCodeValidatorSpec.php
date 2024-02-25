@@ -77,6 +77,17 @@ final class ExistingChannelCodeValidatorSpec extends ObjectBehavior
         $this->validate(null, new ExistingChannelCode());
     }
 
+    function it_does_nothing_if_value_is_empty(
+        ChannelRepositoryInterface $channelRepository,
+        ExecutionContextInterface $context,
+    ): void {
+        $channelRepository->findOneByCode(Argument::any())->shouldNotBeCalled();
+
+        $context->buildViolation((new ExistingChannelCode())->message)->shouldNotBeCalled();
+
+        $this->validate('', new ExistingChannelCode());
+    }
+
     function it_adds_a_violation_if_channel_with_given_code_does_not_exist(
         ChannelRepositoryInterface $channelRepository,
         ExecutionContextInterface $context,
@@ -85,7 +96,6 @@ final class ExistingChannelCodeValidatorSpec extends ObjectBehavior
         $channelRepository->findOneByCode('channel_code')->willReturn(null);
 
         $constraintViolationBuilder->addViolation()->shouldBeCalled();
-        $constraintViolationBuilder->atPath(Argument::any())->willReturn($constraintViolationBuilder);
         $constraintViolationBuilder->setParameter(Argument::cetera())->willReturn($constraintViolationBuilder);
 
         $context->buildViolation((new ExistingChannelCode())->message)->shouldBeCalled()->willReturn($constraintViolationBuilder);

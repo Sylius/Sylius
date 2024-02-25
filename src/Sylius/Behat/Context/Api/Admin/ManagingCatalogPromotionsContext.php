@@ -484,18 +484,11 @@ final class ManagingCatalogPromotionsContext implements Context
         CatalogPromotionInterface $catalogPromotion,
         ProductVariantInterface $productVariant,
     ): void {
-        $this->client->buildUpdateRequest(Resources::CATALOG_PROMOTIONS, $catalogPromotion->getCode());
-        $scopes = [[
-            'type' => InForVariantsScopeVariantChecker::TYPE,
-            'configuration' => [
-                'variants' => [
-                    $productVariant->getCode(),
-                ],
-            ],
-        ]];
-
-        $this->client->updateRequestData(['scopes' => $scopes]);
-        $this->client->update();
+        $this->changeFirstScopeConfigurationTo(
+            $catalogPromotion,
+            InForVariantsScopeVariantChecker::TYPE,
+            ['variants' => [$productVariant->getCode()]],
+        );
     }
 
     /**
@@ -505,16 +498,11 @@ final class ManagingCatalogPromotionsContext implements Context
         CatalogPromotionInterface $catalogPromotion,
         TaxonInterface $taxon,
     ): void {
-        $this->client->buildUpdateRequest(Resources::CATALOG_PROMOTIONS, $catalogPromotion->getCode());
-
-        $content = $this->client->getContent();
-        unset($content['scopes'][0]['configuration']['variants']);
-        $content['scopes'][0]['type'] = InForTaxonsScopeVariantChecker::TYPE;
-        $content['scopes'][0]['configuration']['taxons'] = [$taxon->getCode()];
-
-        $this->client->setRequestData($content);
-
-        $this->client->update();
+        $this->changeFirstScopeConfigurationTo(
+            $catalogPromotion,
+            InForTaxonsScopeVariantChecker::TYPE,
+            ['taxons' => [$taxon->getCode()]],
+        );
     }
 
     /**
@@ -524,16 +512,11 @@ final class ManagingCatalogPromotionsContext implements Context
         CatalogPromotionInterface $catalogPromotion,
         ProductInterface $product,
     ): void {
-        $this->client->buildUpdateRequest(Resources::CATALOG_PROMOTIONS, $catalogPromotion->getCode());
-
-        $content = $this->client->getContent();
-        unset($content['scopes'][0]['configuration']['variants']);
-        $content['scopes'][0]['type'] = InForProductScopeVariantChecker::TYPE;
-        $content['scopes'][0]['configuration']['products'] = [$product->getCode()];
-
-        $this->client->setRequestData($content);
-
-        $this->client->update();
+        $this->changeFirstScopeConfigurationTo(
+            $catalogPromotion,
+            InForProductScopeVariantChecker::TYPE,
+            ['products' => [$product->getCode()]],
+        );
     }
 
     /**
@@ -615,7 +598,7 @@ final class ManagingCatalogPromotionsContext implements Context
 
         $content['actions'] = [[
             'type' => PercentageDiscountPriceCalculator::TYPE,
-            'configuration' => ['amount' => ''],
+            'configuration' => ['amount' => null],
         ]];
 
         $this->client->setRequestData($content);
@@ -630,7 +613,7 @@ final class ManagingCatalogPromotionsContext implements Context
 
         $content['actions'] = [[
             'type' => FixedDiscountPriceCalculator::TYPE,
-            'configuration' => [$channel->getCode() => ['amount' => '']],
+            'configuration' => [$channel->getCode() => ['amount' => null]],
         ]];
 
         $this->client->setRequestData($content);
@@ -688,20 +671,22 @@ final class ManagingCatalogPromotionsContext implements Context
     {
         $actions = [[
             'type' => PercentageDiscountPriceCalculator::TYPE,
-            'configuration' => [],
+            'configuration' => [
+                'amount' => null,
+            ],
         ]];
 
         $this->client->addRequestData('actions', $actions);
     }
 
     /**
-     * @When I add fixed discount action without amount configured
+     * @When I add fixed discount action without amount configured for the :channel channel
      */
-    public function iAddFixedDiscountActionWithoutAmountConfigured(): void
+    public function iAddFixedDiscountActionWithoutAmountConfigured(ChannelInterface $channel): void
     {
         $actions = [[
             'type' => FixedDiscountPriceCalculator::TYPE,
-            'configuration' => ['channel' => ['amount' => null]],
+            'configuration' => [$channel->getCode() => ['amount' => null]],
         ]];
 
         $this->client->addRequestData('actions', $actions);
@@ -728,7 +713,7 @@ final class ManagingCatalogPromotionsContext implements Context
     {
         $actions = [[
             'type' => FixedDiscountPriceCalculator::TYPE,
-            'configuration' => ['nonexistent_action' => ['amount' => 1000]],
+            'configuration' => ['nonexistent_channel' => ['amount' => 1000]],
         ]];
 
         $this->client->addRequestData('actions', $actions);
@@ -1230,7 +1215,7 @@ final class ManagingCatalogPromotionsContext implements Context
     {
         $response = $this->responseChecker->getResponseContent($this->client->getLastResponse());
 
-        Assert::same($response['violations'][0]['message'], 'Configuration for one of the required channels is not provided.');
+        Assert::same($response['violations'][0]['message'], 'This field is missing.');
     }
 
     /**
@@ -1274,7 +1259,7 @@ final class ManagingCatalogPromotionsContext implements Context
     ): void {
         $this->client->show(Resources::CATALOG_PROMOTIONS, $catalogPromotion->getCode());
 
-        Assert::true($this->catalogPromotionAppliesOnVariants($productVariant));
+        Assert::true($this->catalogPromotionHasValuesInScopeConfiguration('variants', $productVariant->getCode()));
     }
 
     /**
@@ -1282,7 +1267,7 @@ final class ManagingCatalogPromotionsContext implements Context
      */
     public function itShouldApplyOnVariant(ProductVariantInterface $variant): void
     {
-        Assert::true($this->catalogPromotionAppliesOnVariants($variant));
+        Assert::true($this->catalogPromotionHasValuesInScopeConfiguration('variants', $variant->getCode()));
     }
 
     /**
@@ -1290,7 +1275,7 @@ final class ManagingCatalogPromotionsContext implements Context
      */
     public function itShouldApplyOnProduct(ProductInterface $product): void
     {
-        Assert::true($this->catalogPromotionAppliesOnProducts($product));
+        Assert::true($this->catalogPromotionHasValuesInScopeConfiguration('products', $product->getCode()));
     }
 
     /**
@@ -1302,7 +1287,7 @@ final class ManagingCatalogPromotionsContext implements Context
     ): void {
         $this->client->show(Resources::CATALOG_PROMOTIONS, $catalogPromotion->getCode());
 
-        Assert::true($this->catalogPromotionAppliesOnTaxons($taxon));
+        Assert::true($this->catalogPromotionHasValuesInScopeConfiguration('taxons', $taxon->getCode()));
     }
 
     /**
@@ -1314,7 +1299,7 @@ final class ManagingCatalogPromotionsContext implements Context
     ): void {
         $this->client->show(Resources::CATALOG_PROMOTIONS, $catalogPromotion->getCode());
 
-        Assert::false($this->catalogPromotionAppliesOnVariants($productVariant));
+        Assert::false($this->catalogPromotionHasValuesInScopeConfiguration('variants', $productVariant->getCode()));
     }
 
     /**
@@ -1326,7 +1311,7 @@ final class ManagingCatalogPromotionsContext implements Context
     ): void {
         $this->client->show(Resources::CATALOG_PROMOTIONS, $catalogPromotion->getCode());
 
-        Assert::true($this->catalogPromotionAppliesOnProducts($product));
+        Assert::true($this->catalogPromotionHasValuesInScopeConfiguration('products', $product->getCode()));
     }
 
     /**
@@ -1395,13 +1380,24 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
-     * @Then /^I should be notified that type of (action|scope) is invalid$/
+     * @Then /^I should be notified that type of action is invalid$/
      */
-    public function iShouldBeNotifiedThatTypeIsInvalid(string $field): void
+    public function iShouldBeNotifiedThatTypeOfActionIsInvalid(): void
     {
         Assert::contains(
             $this->responseChecker->getError($this->client->getLastResponse()),
-            sprintf('Catalog promotion %s type is invalid. Please choose a valid type.', $field),
+            'Catalog promotion action type is invalid. Available types are fixed_discount, percentage_discount.',
+        );
+    }
+
+    /**
+     * @Then /^I should be notified that type of scope is invalid$/
+     */
+    public function iShouldBeNotifiedThatTypeOfScopeIsInvalid(): void
+    {
+        Assert::contains(
+            $this->responseChecker->getError($this->client->getLastResponse()),
+            'Catalog promotion scope type is invalid. Available types are for_products, for_taxons, for_variants.',
         );
     }
 
@@ -1417,10 +1413,9 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
-     * @Then I should be notified that a discount amount should be a number and cannot be empty
-     * @Then I should be notified that a discount amount is not valid
+     * @Then I should be notified that the percentage amount should be a number and cannot be empty
      */
-    public function iShouldBeNotifiedThatDiscountAmountShouldBeNumber(): void
+    public function iShouldBeNotifiedThatDiscountAmountShouldBeANumberAndCannotBeEmpty(): void
     {
         Assert::contains(
             $this->responseChecker->getError($this->client->getLastResponse()),
@@ -1429,9 +1424,9 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
-     * @Then I should be notified that a discount amount should be configured for at least one channel
+     * @Then I should be notified that the fixed amount should be a number and cannot be empty
      */
-    public function iShouldBeNotifiedThatADiscountAmountShouldBeConfiguredForAtLeasOneChannel(): void
+    public function iShouldBeNotifiedThatTheFixedAmountShouldBeANumber(): void
     {
         Assert::contains(
             $this->responseChecker->getError($this->client->getLastResponse()),
@@ -1457,7 +1452,7 @@ final class ManagingCatalogPromotionsContext implements Context
     {
         Assert::contains(
             $this->responseChecker->getError($this->client->getLastResponse()),
-            'Provided configuration contains errors. Please add only existing variants.',
+            'Product variant with code wrong_code does not exist.',
         );
     }
 
@@ -1477,9 +1472,9 @@ final class ManagingCatalogPromotionsContext implements Context
      */
     public function iShouldBeNotifiedThatICanAddOnlyExisting(string $entity): void
     {
-        Assert::contains(
+        Assert::regex(
             $this->responseChecker->getError($this->client->getLastResponse()),
-            sprintf('Provided configuration contains errors. Please add only existing %ss.', $entity),
+            sprintf('/%s with code [^"]+ does not exist.$/', ucfirst($entity)),
         );
     }
 
@@ -1584,78 +1579,23 @@ final class ManagingCatalogPromotionsContext implements Context
         Assert::same(reset($catalogPromotions)['code'], $code);
     }
 
-    private function catalogPromotionAppliesOnVariants(ProductVariantInterface ...$productVariants): bool
+    private function catalogPromotionHasValuesInScopeConfiguration(string $configurationKey, string ...$values): bool
     {
         $response = $this->responseChecker->getResponseContent($this->client->getLastResponse());
-
-        foreach ($productVariants as $productVariant) {
-            if (!isset($response['scopes'][0]['configuration']['variants'])) {
-                return false;
-            }
-
-            if ($this->hasVariantInConfiguration($response['scopes'][0]['configuration']['variants'], $productVariant) === false) {
-                return false;
-            }
+        $configuration = $response['scopes'] ?? [];
+        if ([] === $configuration || empty($configuration[0])) {
+            return false;
         }
 
-        return true;
-    }
-
-    private function catalogPromotionAppliesOnTaxons(TaxonInterface ...$taxons): bool
-    {
-        $response = $this->responseChecker->getResponseContent($this->client->getLastResponse());
-
-        foreach ($taxons as $taxon) {
-            if ($this->hasTaxonInConfiguration($response['scopes'][0]['configuration']['taxons'], $taxon) === false) {
-                return false;
+        foreach ($configuration as $scope) {
+            if (!isset($scope['configuration'][$configurationKey])) {
+                continue;
             }
-        }
 
-        return true;
-    }
-
-    private function catalogPromotionAppliesOnProducts(ProductInterface ...$products): bool
-    {
-        $response = $this->responseChecker->getResponseContent($this->client->getLastResponse());
-
-        foreach ($products as $product) {
-            foreach ($response['scopes'] as $scope) {
-                if (isset($scope['configuration']['products']) && $this->hasProductInConfiguration($scope['configuration']['products'], $product) === true) {
+            foreach ($values as $value) {
+                if (in_array($value, $scope['configuration'][$configurationKey], true)) {
                     return true;
                 }
-            }
-        }
-
-        return false;
-    }
-
-    private function hasVariantInConfiguration(array $configuration, ProductVariantInterface $productVariant): bool
-    {
-        foreach ($configuration as $productVariantIri) {
-            if ($productVariantIri === $productVariant->getCode()) {
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-    private function hasTaxonInConfiguration(array $configuration, TaxonInterface $taxon): bool
-    {
-        foreach ($configuration as $configuredTaxon) {
-            if ($configuredTaxon === $taxon->getCode()) {
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-    private function hasProductInConfiguration(array $configuration, ProductInterface $product): bool
-    {
-        foreach ($configuration as $configuredProduct) {
-            if ($configuredProduct === $product->getCode()) {
-                return true;
             }
         }
 
@@ -1670,6 +1610,23 @@ final class ManagingCatalogPromotionsContext implements Context
         $this->client->update();
 
         $this->sharedStorage->set('catalog_promotion', $catalogPromotion);
+    }
+
+    private function changeFirstScopeConfigurationTo(
+        CatalogPromotionInterface $catalogPromotion,
+        string $type,
+        array $configuration,
+    ): void {
+        $this->client->buildUpdateRequest(Resources::CATALOG_PROMOTIONS, $catalogPromotion->getCode());
+
+        $content = $this->client->getContent();
+        unset($content['scopes'][0]);
+        $content['scopes'][0]['type'] = $type;
+        $content['scopes'][0]['configuration'] = $configuration;
+
+        $this->client->setRequestData($content);
+
+        $this->client->update();
     }
 
     private function createCatalogPromotion(

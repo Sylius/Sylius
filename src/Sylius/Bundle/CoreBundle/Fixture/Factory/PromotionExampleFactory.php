@@ -73,6 +73,10 @@ class PromotionExampleFactory extends AbstractExampleFactory implements ExampleF
             $promotion->setEndsAt(new \DateTime($options['ends_at']));
         }
 
+        if (isset($options['archived_at'])) {
+            $promotion->setArchivedAt(new \DateTime($options['archived_at']));
+        }
+
         foreach ($options['channels'] as $channel) {
             $promotion->addChannel($channel);
         }
@@ -119,6 +123,8 @@ class PromotionExampleFactory extends AbstractExampleFactory implements ExampleF
             ->setAllowedTypes('starts_at', ['null', 'string'])
             ->setDefault('ends_at', null)
             ->setAllowedTypes('ends_at', ['null', 'string'])
+            ->setDefault('archived_at', null)
+            ->setAllowedTypes('archived_at', ['null', 'string'])
             ->setDefault('channels', LazyOption::all($this->channelRepository))
             ->setAllowedTypes('channels', 'array')
             ->setNormalizer('channels', LazyOption::findBy($this->channelRepository, 'code'))

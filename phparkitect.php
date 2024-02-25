@@ -6,6 +6,7 @@ use Arkitect\ClassSet;
 use Arkitect\CLI\Config;
 use Arkitect\Expression\ForClasses\Extend;
 use Arkitect\Expression\ForClasses\HaveNameMatching;
+use Arkitect\Expression\ForClasses\IsNotAbstract;
 use Arkitect\Expression\ForClasses\IsFinal;
 use Arkitect\Expression\ForClasses\NotDependsOnTheseNamespaces;
 use Arkitect\Expression\ForClasses\ResideInOneOfTheseNamespaces;
@@ -25,6 +26,7 @@ return static function (Config $config): void
         ,
         Rule::allClasses()
             ->that(new Extend(ObjectBehavior::class))
+            ->andThat(new IsNotAbstract())
             ->should(new IsFinal())
             ->because('Specifications should not be extendable')
         ,

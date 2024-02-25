@@ -16,25 +16,17 @@
            xsi:schemaLocation="https://api-platform.com/schema/metadata https://api-platform.com/schema/metadata/metadata-2.0.xsd"
 >
     <resource class="%sylius.model.adjustment.class%" shortName="Adjustment">
-        <collectionOperations>
-            <collectionOperation name="admin_get">
-                <attribute name="method">GET</attribute>
-                <attribute name="path">/admin/adjustments</attribute>
-                <attribute name="filters">
-                    <attribute>sylius.api.order_token_filter</attribute>
-                </attribute>
-                <attribute name="normalization_context">
-                    <attribute name="groups">admin:adjustment:read</attribute>
-                </attribute>
-            </collectionOperation>
-        </collectionOperations>
+        <collectionOperations />
 
         <itemOperations>
             <itemOperation name="admin_get">
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/admin/adjustments/{id}</attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:adjustment:read</attribute>
+                    <attribute name="groups">
+                        <attribute>admin:adjustment:show</attribute>
+                        <attribute>sylius:admin:adjustment:show</attribute>
+                    </attribute>
                 </attribute>
             </itemOperation>
 
@@ -42,7 +34,10 @@
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/shop/adjustments/{id}</attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">shop:adjustment:read</attribute>
+                    <attribute name="groups">
+                        <attribute>shop:adjustment:show</attribute>
+                        <attribute>sylius:shop:adjustment:show</attribute>
+                    </attribute>
                 </attribute>
             </itemOperation>
         </itemOperations>
@@ -50,12 +45,46 @@
         <subresourceOperations>
             <subresourceOperation name="api_orders_adjustments_get_subresource">
                 <attribute name="normalization_context">
-                    <attribute name="groups">shop:cart:read</attribute>
+                    <attribute name="groups">
+                        <attribute>shop:cart:show</attribute>
+                        <attribute>sylius:shop:cart:show</attribute>
+                    </attribute>
                 </attribute>
             </subresourceOperation>
+
             <subresourceOperation name="api_orders_items_adjustments_get_subresource">
                 <attribute name="normalization_context">
-                    <attribute name="groups">shop:cart:read</attribute>
+                    <attribute name="groups">
+                        <attribute>shop:cart:show</attribute>
+                        <attribute>sylius:shop:cart:show</attribute>
+                    </attribute>
+                </attribute>
+            </subresourceOperation>
+
+            <subresourceOperation name="api_order_items_adjustments_get_subresource">
+                <attribute name="normalization_context">
+                    <attribute name="groups">
+                        <attribute>admin:order_item:index</attribute>
+                        <attribute>sylius:admin:order_item:index</attribute>
+                    </attribute>
+                </attribute>
+            </subresourceOperation>
+
+            <subresourceOperation name="api_order_item_units_adjustments_get_subresource">
+                <attribute name="normalization_context">
+                    <attribute name="groups">
+                        <attribute>admin:order_item_unit:index</attribute>
+                        <attribute>sylius:admin:order_item_unit:index</attribute>
+                    </attribute>
+                </attribute>
+            </subresourceOperation>
+
+            <subresourceOperation name="api_shipments_adjustments_get_subresource">
+                <attribute name="normalization_context">
+                    <attribute name="groups">
+                        <attribute>admin:shipment:index</attribute>
+                        <attribute>sylius:admin:shipment:index</attribute>
+                    </attribute>
                 </attribute>
             </subresourceOperation>
         </subresourceOperations>

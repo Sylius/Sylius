@@ -9,7 +9,7 @@ Feature: Changing shop user's password
         And there is a user "kibsoon@example.com" identified by "goodGuy"
         And I am logged in as an administrator
 
-    @todo @ui
+    @api @todo @ui
     Scenario: Changing a password of a shop user
         When I change the password of user "kibsoon@example.com" to "veryGoodGuy"
         Then I should be notified that it has been successfully edited

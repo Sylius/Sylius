@@ -30,9 +30,17 @@
     <services>
         <defaults public="true" />
 
-        <service id="Sylius\Bundle\AdminBundle\Command\CreateAdminUserCommand">
+        <service id="Sylius\Bundle\AdminBundle\Console\Command\CreateAdminUserCommand">
             <argument type="service" id="sylius.command_bus" />
             <argument>%sylius_locale.locale%</argument>
+            <argument type="service" id="sylius.console.command_factory.question" />
+            <tag name="console.command" />
+        </service>
+
+        <service id="Sylius\Bundle\AdminBundle\Console\Command\ChangeAdminUserPasswordCommand">
+            <argument type="service" id="sylius.repository.admin_user" />
+            <argument type="service" id="sylius.security.password_updater" />
+            <argument type="service" id="sylius.console.command_factory.question" />
             <tag name="console.command" />
         </service>
 
@@ -45,6 +53,10 @@
             <tag name="messenger.message_handler" bus="sylius.command_bus" />
             <tag name="messenger.message_handler" bus="sylius_default.bus" />
         </service>
+
+        <service id="sylius.console.command_factory.question" class="Sylius\Bundle\AdminBundle\Console\Command\Factory\QuestionFactory" />
+
+        <service id="Sylius\Bundle\AdminBundle\Console\Command\Factory\QuestionFactoryInterface" alias="sylius.console.command_factory.question" />
 
         <service id="sylius.context.locale.admin_based" class="Sylius\Bundle\AdminBundle\Context\AdminBasedLocaleContext">
             <argument type="service" id="security.token_storage" />

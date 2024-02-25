@@ -1,0 +1,25 @@
+# This file is part of the Sylius package.
+# (c) Sylius Sp. z o.o.
+
+default:
+    suites:
+        api_managing_users:
+            contexts:
+                - sylius.behat.context.hook.doctrine_orm
+
+                - sylius.behat.context.transform.customer
+                - sylius.behat.context.transform.shared_storage
+                - sylius.behat.context.transform.shop_user
+
+                - sylius.behat.context.setup.admin_api_security
+                - sylius.behat.context.setup.channel
+                - sylius.behat.context.setup.customer
+                - sylius.behat.context.setup.user
+
+                - sylius.behat.context.api.admin.managing_customers
+                - sylius.behat.context.api.admin.response
+
+                - sylius.behat.context.api.shop.login
+
+            filters:
+                tags: "@managing_users&&@api"

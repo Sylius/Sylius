@@ -17,16 +17,28 @@
 >
     <class name="Sylius\Component\Core\Model\ChannelPricingLogEntry">
         <attribute name="channelPricing">
-            <group>admin:channel_pricing_log_entry:read</group>
+            <group>admin:channel_pricing_log_entry:index</group>
+            <group>sylius:admin:channel_pricing_log_entry:index</group>
+            <group>admin:channel_pricing_log_entry:show</group>
+            <group>sylius:admin:channel_pricing_log_entry:show</group>
         </attribute>
         <attribute name="price">
-            <group>admin:channel_pricing_log_entry:read</group>
+            <group>admin:channel_pricing_log_entry:index</group>
+            <group>sylius:admin:channel_pricing_log_entry:index</group>
+            <group>admin:channel_pricing_log_entry:show</group>
+            <group>sylius:admin:channel_pricing_log_entry:show</group>
         </attribute>
         <attribute name="originalPrice">
-            <group>admin:channel_pricing_log_entry:read</group>
+            <group>admin:channel_pricing_log_entry:index</group>
+            <group>sylius:admin:channel_pricing_log_entry:index</group>
+            <group>admin:channel_pricing_log_entry:show</group>
+            <group>sylius:admin:channel_pricing_log_entry:show</group>
         </attribute>
         <attribute name="loggedAt">
-            <group>admin:channel_pricing_log_entry:read</group>
+            <group>admin:channel_pricing_log_entry:index</group>
+            <group>sylius:admin:channel_pricing_log_entry:index</group>
+            <group>admin:channel_pricing_log_entry:show</group>
+            <group>sylius:admin:channel_pricing_log_entry:show</group>
         </attribute>
     </class>
 </serializer>

@@ -9,7 +9,6 @@ Feature: Editing a product variant
         And this channel allows to shop using "English (United States)" and "Polish (Poland)" locales
         And the store has a "T-Shirt" configurable product
         And this product has option "Size" with values "S", "M" and "L"
-        And this product has option "Color" with values "Green" and "Blue"
         And this product has "Go" variant priced at "$100.00" configured with "S" option value
         And this product is named "Go" in the "English (United States)" locale
         And this product is named "Idź" in the "Polish (Poland)" locale
@@ -28,9 +27,7 @@ Feature: Editing a product variant
     @api @todo @ui
     Scenario: Changing product variant option values
         When I want to modify the "Go" product variant
-        And I set its "Color" option to "Green"
         And I change its "Size" option to "L"
         And I save my changes
         Then I should be notified that it has been successfully edited
-        And the variant "Go" should have "Color" option as "Green"
         And the variant "Go" should have "Size" option as "L"

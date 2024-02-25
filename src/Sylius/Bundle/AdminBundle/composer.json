@@ -44,6 +44,7 @@
         "twig/twig": "^2.12 || ^3.3"
     },
     "require-dev": {
+        "matthiasnoback/symfony-dependency-injection-test": "^4.2",
         "php-http/message-factory": "^1.0",
         "phpspec/phpspec": "^7.2",
         "phpspec/prophecy-phpunit": "^2.0",

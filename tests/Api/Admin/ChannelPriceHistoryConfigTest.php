@@ -32,7 +32,7 @@ final class ChannelPriceHistoryConfigTest extends JsonApiTestCase
 
         $this->assertResponse(
             $this->client->getResponse(),
-            'admin/get_channel_price_history_config_response',
+            'admin/channel_price_history_config/get_channel_price_history_config_response',
             Response::HTTP_OK,
         );
     }
@@ -59,7 +59,7 @@ final class ChannelPriceHistoryConfigTest extends JsonApiTestCase
 
         $this->assertResponse(
             $this->client->getResponse(),
-            'admin/put_channel_price_history_config_response',
+            'admin/channel_price_history_config/put_channel_price_history_config_response',
             Response::HTTP_OK,
         );
     }

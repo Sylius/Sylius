@@ -79,6 +79,7 @@ jobs:
                     legacy_postgresql_setup: ${{ env.USE_LEGACY_POSTGRES_SETUP }}
                     php_version: ${{ matrix.php }}
                     symfony_version: ${{ matrix.symfony }}
+                    node_version: "20.x"
 
             -   name: Run PHPUnit
                 continue-on-error: true

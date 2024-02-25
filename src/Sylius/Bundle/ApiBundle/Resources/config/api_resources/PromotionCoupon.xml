@@ -28,7 +28,10 @@
                     <attribute>Sylius\Bundle\ApiBundle\Filter\Doctrine\PromotionCouponPromotionFilter</attribute>
                 </attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:promotion_coupon:read</attribute>
+                    <attribute name="groups">
+                        <attribute>admin:promotion_coupon:index</attribute>
+                        <attribute>sylius:admin:promotion_coupon:index</attribute>
+                    </attribute>
                 </attribute>
                 <attribute name="order">
                     <attribute name="used">DESC</attribute>
@@ -38,10 +41,16 @@
             <collectionOperation name="admin_post">
                 <attribute name="method">POST</attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:promotion_coupon:read</attribute>
+                    <attribute name="groups">
+                        <attribute>admin:promotion_coupon:show</attribute>
+                        <attribute>sylius:admin:promotion_coupon:show</attribute>
+                    </attribute>
                 </attribute>
                 <attribute name="denormalization_context">
-                    <attribute name="groups">admin:promotion_coupon:create</attribute>
+                    <attribute name="groups">
+                        <attribute>admin:promotion_coupon:create</attribute>
+                        <attribute>sylius:admin:promotion_coupon:create</attribute>
+                    </attribute>
                 </attribute>
             </collectionOperation>
 
@@ -51,10 +60,16 @@
                 <attribute name="path">/promotion-coupons/generate</attribute>
                 <attribute name="input">Sylius\Bundle\ApiBundle\Command\Promotion\GeneratePromotionCoupon</attribute>
                 <attribute name="denormalization_context">
-                    <attribute name="groups">admin:promotion_coupon:generate</attribute>
+                    <attribute name="groups">
+                        <attribute>admin:promotion_coupon:generate</attribute>
+                        <attribute>sylius:admin:promotion_coupon:generate</attribute>
+                    </attribute>
                 </attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:promotion_coupon:read</attribute>
+                    <attribute name="groups">
+                        <attribute>admin:promotion_coupon:show</attribute>
+                        <attribute>sylius:admin:promotion_coupon:show</attribute>
+                    </attribute>
                 </attribute>
                 <attribute name="openapi_context">
                     <attribute name="summary">Generates promotion coupons</attribute>
@@ -67,17 +82,26 @@
             <itemOperation name="admin_get">
                 <attribute name="method">GET</attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:promotion_coupon:read</attribute>
+                    <attribute name="groups">
+                        <attribute>admin:promotion_coupon:show</attribute>
+                        <attribute>sylius:admin:promotion_coupon:show</attribute>
+                    </attribute>
                 </attribute>
             </itemOperation>
 
             <itemOperation name="admin_put">
                 <attribute name="method">PUT</attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:promotion_coupon:read</attribute>
+                    <attribute name="groups">
+                        <attribute>admin:promotion_coupon:show</attribute>
+                        <attribute>sylius:admin:promotion_coupon:show</attribute>
+                    </attribute>
                 </attribute>
                 <attribute name="denormalization_context">
-                    <attribute name="groups">admin:promotion_coupon:update</attribute>
+                    <attribute name="groups">
+                        <attribute>admin:promotion_coupon:update</attribute>
+                        <attribute>sylius:admin:promotion_coupon:update</attribute>
+                    </attribute>
                 </attribute>
             </itemOperation>
 
@@ -89,7 +113,10 @@
         <subresourceOperations>
             <subresourceOperation name="api_promotions_coupons_get_subresource">
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:promotion_coupon:read</attribute>
+                    <attribute name="groups">
+                        <attribute>admin:promotion_coupon:show</attribute>
+                        <attribute>sylius:admin:promotion_coupon:show</attribute>
+                    </attribute>
                 </attribute>
             </subresourceOperation>
         </subresourceOperations>

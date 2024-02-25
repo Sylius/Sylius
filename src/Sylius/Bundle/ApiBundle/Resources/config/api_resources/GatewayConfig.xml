@@ -28,10 +28,24 @@
             <itemOperation name="admin_get">
                 <attribute name="method">GET</attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:gateway_config:read</attribute>
+                    <attribute name="groups">
+                        <attribute>admin:gateway_config:show</attribute>
+                        <attribute>sylius:admin:gateway_config:show</attribute>
+                    </attribute>
                 </attribute>
             </itemOperation>
         </itemOperations>
+
+        <subresourceOperations>
+            <subresourceOperation name="api_payment_methods_gateway_config_get_subresource">
+                <attribute name="normalization_context">
+                    <attribute name="groups">
+                        <attribute>admin:gateway_config:show</attribute>
+                        <attribute>sylius:admin:gateway_config:show</attribute>
+                    </attribute>
+                </attribute>
+            </subresourceOperation>
+        </subresourceOperations>
 
         <property name="id" identifier="true" writable="false" />
         <property name="config" writable="true" readable="true" />

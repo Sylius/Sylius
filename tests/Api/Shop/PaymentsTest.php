@@ -57,6 +57,6 @@ final class PaymentsTest extends JsonApiTestCase
             server: $header,
         );
         $response = $this->client->getResponse();
-        $this->assertResponse($response, 'shop/get_payment_response', Response::HTTP_OK);
+        $this->assertResponse($response, 'shop/payment/get_payment_response', Response::HTTP_OK);
     }
 }

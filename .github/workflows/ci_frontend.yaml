@@ -1,0 +1,83 @@
+name: Frontend
+
+on:
+    workflow_dispatch: ~
+    workflow_call:
+        inputs:
+            branch:
+                description: "Branch"
+                required: false
+                type: string
+                default: ""
+            type:
+                description: "Type of the build"
+                required: true
+                type: string
+
+jobs:
+    get-matrix:
+        runs-on: ubuntu-latest
+        name: "Get matrix"
+        outputs:
+            matrix: ${{ steps.matrix.outputs.prop }}
+        steps:
+            -   name: "Checkout (With Branch)"
+                if: "${{ inputs.branch != '' }}"
+                uses: actions/checkout@v3
+                with:
+                    ref: ${{ inputs.branch }}
+
+            -   name: "Checkout"
+                uses: actions/checkout@v3
+                if: "${{ inputs.branch == '' }}"
+            -
+                name: "Get matrix"
+                id: matrix
+                uses: notiz-dev/github-action-json-property@release
+                with:
+                    path: '.github/workflows/matrix.json'
+                    prop_path: '${{ inputs.type }}.e2e-mysql'
+
+    frontend:
+        needs: get-matrix
+        runs-on: ubuntu-latest
+        name: "NodeJS ${{ matrix.node }}"
+        strategy:
+            fail-fast: false
+            matrix: ${{ fromJson(needs.get-matrix.outputs.matrix) }}
+
+        env:
+            APP_ENV: test_cached
+            DATABASE_URL: "mysql://root:root@127.0.0.1/sylius?charset=utf8mb4&serverVersion=8.0"
+
+        steps:
+            -   name: Set variables
+                shell: bash
+                env:
+                    BRANCH: ${{ inputs.branch }}
+                run: |
+                    if [ "$BRANCH" == "1.12" ]; then
+                        echo "USE_LEGACY_POSTGRES_SETUP=yes" >> $GITHUB_ENV
+                    else
+                        echo "USE_LEGACY_POSTGRES_SETUP=no" >> $GITHUB_ENV
+                    fi
+
+            -   name: "Checkout (With Branch)"
+                if: "${{ inputs.branch != '' }}"
+                uses: actions/checkout@v3
+                with:
+                    ref: ${{ inputs.branch }}
+
+            -   name: "Checkout"
+                if: "${{ inputs.branch == '' }}"
+                uses: actions/checkout@v3
+
+            -   name: Build application
+                uses: SyliusLabs/BuildTestAppAction@v2.0
+                with:
+                    build_type: "sylius"
+                    e2e_js: "yes"
+                    database_version: "8.0"
+                    php_version: "8.2"
+                    symfony_version: "6.4.*"
+                    node_version: ${{ matrix.node }}

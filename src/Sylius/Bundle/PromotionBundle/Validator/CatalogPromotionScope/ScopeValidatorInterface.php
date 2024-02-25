@@ -16,6 +16,12 @@ namespace Sylius\Bundle\PromotionBundle\Validator\CatalogPromotionScope;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
+trigger_deprecation(
+    'sylius/promotion-bundle',
+    '1.13',
+    'The "%s" interface is deprecated and will be removed in Sylius 2.0, use the usual symfony logic for validation.',
+    ScopeValidatorInterface::class,
+);
 interface ScopeValidatorInterface
 {
     public function validate(array $configuration, Constraint $constraint, ExecutionContextInterface $context): void;

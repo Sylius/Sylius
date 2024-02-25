@@ -1,0 +1,31 @@
+{
+    "@context": "\/api\/v2\/contexts\/Promotion",
+    "@id": "\/api\/v2\/admin\/promotions\/back_to_school",
+    "@type": "Promotion",
+    "channels": [
+        "\/api\/v2\/admin\/channels\/WEB",
+        "\/api\/v2\/admin\/channels\/MOBILE"
+    ],
+    "id": @integer@,
+    "code": "back_to_school",
+    "name": "Back to school",
+    "description": "Get 10% off on all school supplies",
+    "priority": 3,
+    "exclusive": false,
+    "used": 0,
+    "couponBased": false,
+    "coupons": [],
+    "rules": [],
+    "actions": [],
+    "appliesToDiscounted": true,
+    "createdAt": @date@,
+    "updatedAt": @date@,
+    "translations": {
+        "en_US": {
+            "@id": "\/api\/v2\/admin\/promotion-translations\/@integer@",
+            "@type": "PromotionTranslation",
+            "id": @integer@,
+            "label": "Back to school sale!"
+        }
+    }
+}

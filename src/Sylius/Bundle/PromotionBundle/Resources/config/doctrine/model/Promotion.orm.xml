@@ -34,6 +34,7 @@
                 <option name="default">1</option>
             </options>
         </field>
+        <field name="archivedAt" column="archived_at" type="datetime" nullable="true" />
 
         <one-to-many field="coupons" target-entity="Sylius\Component\Promotion\Model\PromotionCouponInterface" mapped-by="promotion">
             <cascade>

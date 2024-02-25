@@ -21,7 +21,7 @@ class ChangeShopUserPassword implements ShopUserIdAwareInterface
     /** @var mixed|null */
     public $shopUserId;
 
-    public function __construct(public ?string $newPassword, public ?string $confirmNewPassword, public ?string $currentPassword)
+    public function __construct(public string $newPassword, public string $confirmNewPassword, public string $currentPassword)
     {
     }
 

@@ -13,38 +13,18 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Command;
 
-use RuntimeException;
-use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Output\OutputInterface;
+trigger_deprecation(
+    'sylius/core-bundle',
+    '1.13',
+    'The "%s" class is deprecated and will be removed in Sylius 2.0. Use "%s" instead.',
+    CheckRequirementsCommand::class,
+    \Sylius\Bundle\CoreBundle\Console\Command\CheckRequirementsCommand::class,
+);
 
-final class CheckRequirementsCommand extends AbstractInstallCommand
-{
-    protected static $defaultName = 'sylius:install:check-requirements';
+class_exists(\Sylius\Bundle\CoreBundle\Console\Command\CheckRequirementsCommand::class);
 
-    protected function configure(): void
+if (false) {
+    final class CheckRequirementsCommand
     {
-        $this
-            ->setDescription('Checks if all Sylius requirements are satisfied.')
-            ->setHelp(
-                <<<EOT
-The <info>%command.name%</info> command checks system requirements.
-EOT
-            )
-        ;
-    }
-
-    protected function execute(InputInterface $input, OutputInterface $output): int
-    {
-        $fulfilled = $this->getContainer()->get('sylius.installer.checker.sylius_requirements')->check($input, $output);
-
-        if (!$fulfilled) {
-            throw new RuntimeException(
-                'Some system requirements are not fulfilled. Please check output messages and fix them.',
-            );
-        }
-
-        $output->writeln('<info>Success! Your system can run Sylius properly.</info>');
-
-        return 0;
     }
 }

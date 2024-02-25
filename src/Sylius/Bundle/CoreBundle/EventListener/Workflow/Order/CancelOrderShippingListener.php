@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\EventListener\Workflow\Order;
 
-use Sylius\Bundle\CoreBundle\StateMachine\StateMachineInterface;
+use Sylius\Abstraction\StateMachine\StateMachineInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\OrderShippingTransitions;
 use Symfony\Component\Workflow\Event\CompletedEvent;
@@ -31,6 +31,8 @@ final class CancelOrderShippingListener
         $order = $event->getSubject();
         Assert::isInstanceOf($order, OrderInterface::class);
 
-        $this->compositeOrderStateMachine->apply($order, OrderShippingTransitions::GRAPH, OrderShippingTransitions::TRANSITION_CANCEL);
+        if ($this->compositeOrderStateMachine->can($order, OrderShippingTransitions::GRAPH, OrderShippingTransitions::TRANSITION_CANCEL)) {
+            $this->compositeOrderStateMachine->apply($order, OrderShippingTransitions::GRAPH, OrderShippingTransitions::TRANSITION_CANCEL);
+        }
     }
 }
