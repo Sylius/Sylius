@@ -25,4 +25,6 @@ use Sylius\Component\Order\Repository\OrderItemRepositoryInterface as BaseOrderI
 interface OrderItemRepositoryInterface extends BaseOrderItemRepositoryInterface
 {
     public function findOneByIdAndCustomer($id, CustomerInterface $customer): ?OrderItemInterface;
+
+    public function findOneByIdAndOrderTokenValue(int $id, string $tokenValue): ?OrderItemInterface;
 }

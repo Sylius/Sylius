@@ -8,8 +8,8 @@
     "type": "province",
     "scope": "all",
     "members": [
-        "\/api\/v2\/admin\/zone-members\/AL",
-        "\/api\/v2\/admin\/zone-members\/CA",
-        "\/api\/v2\/admin\/zone-members\/NY"
+        "\/api\/v2\/admin\/zone-members\/@integer@",
+        "\/api\/v2\/admin\/zone-members\/@integer@",
+        "\/api\/v2\/admin\/zone-members\/@integer@"
     ]
 }

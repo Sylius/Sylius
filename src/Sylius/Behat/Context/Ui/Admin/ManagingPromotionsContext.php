@@ -88,7 +88,6 @@ final class ManagingPromotionsContext implements Context
     }
 
     /**
-     * @Then I should see the promotion :promotionName in the list
      * @Then the :promotionName promotion should appear in the registry
      * @Then the :promotionName promotion should exist in the registry
      * @Then this promotion should still be named :promotionName
@@ -276,6 +275,33 @@ final class ManagingPromotionsContext implements Context
     public function iDeleteThem(): void
     {
         $this->indexPage->bulkDelete();
+    }
+
+    /**
+     * @When I archive the :promotionName promotion
+     */
+    public function iArchiveThePromotion(string $promotionName): void
+    {
+        $actions = $this->indexPage->getActionsForResource(['name' => $promotionName]);
+        $actions->pressButton('Archive');
+    }
+
+    /**
+     * @When I restore the :promotionName promotion
+     */
+    public function iRestoreThePromotion(string $promotionName): void
+    {
+        $actions = $this->indexPage->getActionsForResource(['name' => $promotionName]);
+        $actions->pressButton('Restore');
+    }
+
+    /**
+     * @When I filter archival promotions
+     */
+    public function iFilterArchivalPromotions(): void
+    {
+        $this->indexPage->chooseArchival('Yes');
+        $this->indexPage->filter();
     }
 
     /**
@@ -827,6 +853,30 @@ final class ManagingPromotionsContext implements Context
             $currentPage->getValidationMessageForTranslation('label', $localeCode),
             'This value is too long. It should have 255 characters or less.',
         );
+    }
+
+    /**
+     * @Then I should see the promotion :promotionName in the list
+     */
+    public function iShouldSeeThePromotionInTheList(string $promotionName): void
+    {
+        Assert::true($this->indexPage->isSingleResourceOnPage(['name' => $promotionName]));
+    }
+
+    /**
+     * @Then I should not see the promotion :promotionName in the list
+     */
+    public function iShouldNotSeeThePromotionInTheList(string $promotionName): void
+    {
+        Assert::false($this->indexPage->isSingleResourceOnPage(['name' => $promotionName]));
+    }
+
+    /**
+     * @Then I should be viewing non archival promotions
+     */
+    public function iShouldBeViewingNonArchivalPromotions(): void
+    {
+        Assert::false($this->indexPage->isArchivalFilterEnabled());
     }
 
     private function assertFieldValidationMessage(string $element, string $expectedMessage)

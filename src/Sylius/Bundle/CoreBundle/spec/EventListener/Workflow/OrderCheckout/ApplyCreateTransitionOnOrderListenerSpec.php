@@ -34,11 +34,35 @@ final class ApplyCreateTransitionOnOrderListenerSpec extends ObjectBehavior
             ->during('__invoke', [new CompletedEvent($callback->getWrappedObject(), new Marking())]);
     }
 
-    function it_creates_order(
+    function it_does_nothing_if_order_cannot_be_created(
         StateMachineInterface $compositeStateMachine,
         OrderInterface $order,
     ): void {
         $event = new CompletedEvent($order->getWrappedObject(), new Marking());
+
+        $compositeStateMachine
+            ->can($order, OrderTransitions::GRAPH, OrderTransitions::TRANSITION_CREATE)
+            ->willReturn(false)
+        ;
+
+        $this($event);
+
+        $compositeStateMachine
+            ->apply($order, OrderTransitions::GRAPH, OrderTransitions::TRANSITION_CREATE)
+            ->shouldNotHaveBeenCalled()
+        ;
+    }
+
+    function it_applies_transition_create_on_order(
+        StateMachineInterface $compositeStateMachine,
+        OrderInterface $order,
+    ): void {
+        $event = new CompletedEvent($order->getWrappedObject(), new Marking());
+
+        $compositeStateMachine
+            ->can($order, OrderTransitions::GRAPH, OrderTransitions::TRANSITION_CREATE)
+            ->willReturn(true)
+        ;
 
         $this($event);
 

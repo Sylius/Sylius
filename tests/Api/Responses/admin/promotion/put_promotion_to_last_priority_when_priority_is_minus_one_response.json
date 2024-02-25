@@ -9,7 +9,7 @@
     "code": "50_off",
     "name": "50% Off on your first order",
     "description": "Get 50% off of your first purchase",
-    "priority": 2,
+    "priority": 3,
     "exclusive": true,
     "usageLimit": 1,
     "used": 0,
@@ -20,6 +20,7 @@
     "rules": [],
     "actions": [],
     "appliesToDiscounted": false,
+    "archivedAt": null,
     "createdAt": @date@,
     "updatedAt": @date@,
     "translations": {

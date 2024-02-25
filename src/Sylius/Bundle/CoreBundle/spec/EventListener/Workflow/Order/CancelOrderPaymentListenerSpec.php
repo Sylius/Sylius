@@ -34,11 +34,35 @@ final class CancelOrderPaymentListenerSpec extends ObjectBehavior
             ->during('__invoke', [new CompletedEvent($callback->getWrappedObject(), new Marking())]);
     }
 
-    function it_cancels_order_payment(
+    function it_does_nothing_if_order_cannot_have_payment_cancelled(
         StateMachineInterface $compositeStateMachine,
         OrderInterface $order,
     ): void {
         $event = new CompletedEvent($order->getWrappedObject(), new Marking());
+
+        $compositeStateMachine
+            ->can($order, OrderPaymentTransitions::GRAPH, OrderPaymentTransitions::TRANSITION_CANCEL)
+            ->willReturn(false)
+        ;
+
+        $this($event);
+
+        $compositeStateMachine
+            ->apply($order, OrderPaymentTransitions::GRAPH, OrderPaymentTransitions::TRANSITION_CANCEL)
+            ->shouldNotHaveBeenCalled()
+        ;
+    }
+
+    function it_applies_transition_cancel_on_order_payment(
+        StateMachineInterface $compositeStateMachine,
+        OrderInterface $order,
+    ): void {
+        $event = new CompletedEvent($order->getWrappedObject(), new Marking());
+
+        $compositeStateMachine
+            ->can($order, OrderPaymentTransitions::GRAPH, OrderPaymentTransitions::TRANSITION_CANCEL)
+            ->willReturn(true)
+        ;
 
         $this($event);
 

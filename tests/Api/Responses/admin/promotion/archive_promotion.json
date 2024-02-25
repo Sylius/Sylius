@@ -1,0 +1,32 @@
+{
+    "@context": "\/api\/v2\/contexts\/Promotion",
+    "@id": "\/api\/v2\/admin\/promotions\/50_off",
+    "@type": "Promotion",
+    "channels": [
+        "\/api\/v2\/admin\/channels\/MOBILE"
+    ],
+    "id": @integer@,
+    "code": "50_off",
+    "name": "50% Off on your first order",
+    "description": "Get 50% off of your first purchase",
+    "priority": 1,
+    "exclusive": true,
+    "usageLimit": 1,
+    "used": 0,
+    "couponBased": false,
+    "coupons": [],
+    "rules": [],
+    "actions": [],
+    "appliesToDiscounted": false,
+    "archivedAt": @date@,
+    "createdAt": @date@,
+    "updatedAt": @date@,
+    "translations": {
+        "en_US": {
+            "@id": "\/api\/v2\/admin\/promotion-translations\/@integer@",
+            "@type": "PromotionTranslation",
+            "id": @integer@,
+            "label": "-50% on first order!"
+        }
+    }
+}

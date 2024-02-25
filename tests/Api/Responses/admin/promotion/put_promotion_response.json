@@ -13,6 +13,7 @@
     "exclusive": true,
     "usageLimit": 11,
     "used": 0,
+    "archivedAt": null,
     "startsAt": null,
     "endsAt": null,
     "couponBased": false,

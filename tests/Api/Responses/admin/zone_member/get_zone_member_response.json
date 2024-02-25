@@ -1,6 +1,6 @@
 {
     "@context": "\/api\/v2\/contexts\/ZoneMember",
-    "@id": "\/api\/v2\/admin\/zone-members\/NL",
+    "@id": "\/api\/v2\/admin\/zone-members\/@integer@",
     "@type": "ZoneMember",
     "id": @integer@,
     "code": "NL",

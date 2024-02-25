@@ -16,8 +16,8 @@
                 "city": "New York",
                 "postcode": "00000",
                 "countryCode": "US",
-                "provinceCode": "999",
-                "provinceName": "east"
+                "provinceCode": null,
+                "provinceName": null
             },
             "logged_at": @date@
         }

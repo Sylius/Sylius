@@ -16,6 +16,7 @@ namespace Sylius\Bundle\ApiBundle\Applicator;
 use SM\Factory\FactoryInterface as StateMachineFactoryInterface;
 use Sylius\Abstraction\StateMachine\StateMachineInterface;
 use Sylius\Abstraction\StateMachine\WinzouStateMachineAdapter;
+use Sylius\Bundle\ApiBundle\Exception\StateMachineTransitionFailedException;
 use Sylius\Component\Core\ProductReviewTransitions;
 use Sylius\Component\Review\Model\ReviewInterface;
 
@@ -53,7 +54,13 @@ final class ProductReviewStateMachineTransitionApplicator implements ProductRevi
 
     private function applyTransition(ReviewInterface $review, string $transition): void
     {
-        $this->getStateMachine()->apply($review, ProductReviewTransitions::GRAPH, $transition);
+        $stateMachine = $this->getStateMachine();
+
+        if (false === $stateMachine->can($review, ProductReviewTransitions::GRAPH, $transition)) {
+            throw new StateMachineTransitionFailedException(sprintf('Cannot %s  the product review.', $transition));
+        }
+
+        $stateMachine->apply($review, ProductReviewTransitions::GRAPH, $transition);
     }
 
     private function getStateMachine(): StateMachineInterface

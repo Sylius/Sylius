@@ -116,6 +116,35 @@ final class ProductTaxonsTest extends JsonApiTestCase
     }
 
     /** @test */
+    public function it_does_not_update_product_and_taxon_on_product_taxon(): void
+    {
+        $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel.yaml', 'product/product_taxon.yaml']);
+
+        /** @var ProductTaxonInterface $productTaxon */
+        $productTaxon = $fixtures['product_cap_taxon_caps'];
+        /** @var ProductInterface $product */
+        $product = $fixtures['product_mug'];
+        /** @var TaxonInterface $taxon */
+        $taxon = $fixtures['taxon_mugs'];
+
+        $this->client->request(
+            method: 'PUT',
+            uri: sprintf('/api/v2/admin/product-taxons/%s', $productTaxon->getId()),
+            server: $this->headerBuilder()->withJsonLdContentType()->withJsonLdAccept()->withAdminUserAuthorization('api@example.com')->build(),
+            content: json_encode([
+                'product' => sprintf('/api/v2/admin/products/%s', $product->getCode()),
+                'taxon' => sprintf('/api/v2/admin/taxons/%s', $taxon->getCode()),
+            ], \JSON_THROW_ON_ERROR),
+        );
+
+        $this->assertResponse(
+            $this->client->getResponse(),
+            'admin/product_taxon/put_does_not_update_product_and_taxon_on_product_taxon',
+            Response::HTTP_OK,
+        );
+    }
+
+    /** @test */
     public function it_deletes_a_product_taxon(): void
     {
         $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel.yaml', 'product/product_taxon.yaml']);

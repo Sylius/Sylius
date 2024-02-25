@@ -31,6 +31,8 @@ final class CancelOrderShippingListener
         $order = $event->getSubject();
         Assert::isInstanceOf($order, OrderInterface::class);
 
-        $this->compositeOrderStateMachine->apply($order, OrderShippingTransitions::GRAPH, OrderShippingTransitions::TRANSITION_CANCEL);
+        if ($this->compositeOrderStateMachine->can($order, OrderShippingTransitions::GRAPH, OrderShippingTransitions::TRANSITION_CANCEL)) {
+            $this->compositeOrderStateMachine->apply($order, OrderShippingTransitions::GRAPH, OrderShippingTransitions::TRANSITION_CANCEL);
+        }
     }
 }

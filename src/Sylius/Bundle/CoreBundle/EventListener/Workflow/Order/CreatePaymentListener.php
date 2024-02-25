@@ -34,7 +34,9 @@ final class CreatePaymentListener
         $payments = $order->getPayments();
 
         foreach ($payments as $payment) {
-            $this->compositeStateMachine->apply($payment, PaymentTransitions::GRAPH, PaymentTransitions::TRANSITION_CREATE);
+            if ($this->compositeStateMachine->can($payment, PaymentTransitions::GRAPH, PaymentTransitions::TRANSITION_CREATE)) {
+                $this->compositeStateMachine->apply($payment, PaymentTransitions::GRAPH, PaymentTransitions::TRANSITION_CREATE);
+            }
         }
     }
 }

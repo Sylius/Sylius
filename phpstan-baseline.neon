@@ -916,31 +916,6 @@ parameters:
 			path: src/Sylius/Bundle/ApiBundle/DataProvider/OrderAdjustmentsSubresourceDataProvider.php
 
 		-
-			message: "#^Method Sylius\\\\Bundle\\\\ApiBundle\\\\DataProvider\\\\OrderItemAdjustmentsSubresourceDataProvider\\:\\:__construct\\(\\) has parameter \\$orderItemRepository with generic interface Sylius\\\\Component\\\\Order\\\\Repository\\\\OrderItemRepositoryInterface but does not specify its types\\: T$#"
-			count: 1
-			path: src/Sylius/Bundle/ApiBundle/DataProvider/OrderItemAdjustmentsSubresourceDataProvider.php
-
-		-
-			message: "#^Method Sylius\\\\Bundle\\\\ApiBundle\\\\DataProvider\\\\OrderItemAdjustmentsSubresourceDataProvider\\:\\:getSubresource\\(\\) has parameter \\$context with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Sylius/Bundle/ApiBundle/DataProvider/OrderItemAdjustmentsSubresourceDataProvider.php
-
-		-
-			message: "#^Method Sylius\\\\Bundle\\\\ApiBundle\\\\DataProvider\\\\OrderItemAdjustmentsSubresourceDataProvider\\:\\:getSubresource\\(\\) has parameter \\$identifiers with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Sylius/Bundle/ApiBundle/DataProvider/OrderItemAdjustmentsSubresourceDataProvider.php
-
-		-
-			message: "#^Method Sylius\\\\Bundle\\\\ApiBundle\\\\DataProvider\\\\OrderItemAdjustmentsSubresourceDataProvider\\:\\:getSubresource\\(\\) return type has no value type specified in iterable type iterable\\.$#"
-			count: 1
-			path: src/Sylius/Bundle/ApiBundle/DataProvider/OrderItemAdjustmentsSubresourceDataProvider.php
-
-		-
-			message: "#^Method Sylius\\\\Bundle\\\\ApiBundle\\\\DataProvider\\\\OrderItemAdjustmentsSubresourceDataProvider\\:\\:supports\\(\\) has parameter \\$context with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Sylius/Bundle/ApiBundle/DataProvider/OrderItemAdjustmentsSubresourceDataProvider.php
-
-		-
 			message: "#^Method Sylius\\\\Bundle\\\\ApiBundle\\\\DataProvider\\\\OrderItemItemDataProvider\\:\\:__construct\\(\\) has parameter \\$orderItemRepository with generic interface Sylius\\\\Component\\\\Core\\\\Repository\\\\OrderItemRepositoryInterface but does not specify its types\\: T$#"
 			count: 1
 			path: src/Sylius/Bundle/ApiBundle/DataProvider/OrderItemItemDataProvider.php

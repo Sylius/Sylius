@@ -31,6 +31,8 @@ final class ApplyCreateTransitionOnOrderListener
         $order = $event->getSubject();
         Assert::isInstanceOf($order, OrderInterface::class);
 
-        $this->compositeStateMachine->apply($order, OrderTransitions::GRAPH, OrderTransitions::TRANSITION_CREATE);
+        if ($this->compositeStateMachine->can($order, OrderTransitions::GRAPH, OrderTransitions::TRANSITION_CREATE)) {
+            $this->compositeStateMachine->apply($order, OrderTransitions::GRAPH, OrderTransitions::TRANSITION_CREATE);
+        }
     }
 }

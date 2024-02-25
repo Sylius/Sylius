@@ -12,8 +12,8 @@
       "phoneNumber": "123456789",
       "company": "CocaCola",
       "countryCode": "US",
-      "provinceCode": "999",
-      "provinceName": "east",
+      "provinceCode": null,
+      "provinceName": null,
       "street": "Green Avenue",
       "city": "New York",
       "postcode": "00000"

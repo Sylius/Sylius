@@ -135,6 +135,8 @@ imports:
     - suites/ui/product/viewing_product_in_admin_panel.yaml
     - suites/ui/product/viewing_product_reviews.yml
     - suites/ui/product/viewing_products.yml
+    - suites/ui/product/viewing_price_history.yaml
+    - suites/ui/product/viewing_price_history_after_catalog_promotions.yaml
     - suites/ui/promotion/applying_catalog_promotions.yml
     - suites/ui/promotion/applying_promotion_coupon.yml
     - suites/ui/promotion/applying_promotion_rules.yml

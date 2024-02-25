@@ -35,11 +35,35 @@ final class RequestOrderPaymentListenerSpec extends ObjectBehavior
         ;
     }
 
-    function it_requests_order_payment(
+    function it_does_nothing_if_order_cannot_have_payment_requested(
         StateMachineInterface $compositeStateMachine,
         OrderInterface $order,
     ): void {
         $event = new CompletedEvent($order->getWrappedObject(), new Marking());
+
+        $compositeStateMachine
+            ->can($order, OrderPaymentTransitions::GRAPH, OrderPaymentTransitions::TRANSITION_REQUEST_PAYMENT)
+            ->willReturn(false)
+        ;
+
+        $this($event);
+
+        $compositeStateMachine
+            ->apply($order, OrderPaymentTransitions::GRAPH, OrderPaymentTransitions::TRANSITION_REQUEST_PAYMENT)
+            ->shouldNotHaveBeenCalled()
+        ;
+    }
+
+    function it_applies_transition_request_payment_on_order_payment(
+        StateMachineInterface $compositeStateMachine,
+        OrderInterface $order,
+    ): void {
+        $event = new CompletedEvent($order->getWrappedObject(), new Marking());
+
+        $compositeStateMachine
+            ->can($order, OrderPaymentTransitions::GRAPH, OrderPaymentTransitions::TRANSITION_REQUEST_PAYMENT)
+            ->willReturn(true)
+        ;
 
         $this($event);
 

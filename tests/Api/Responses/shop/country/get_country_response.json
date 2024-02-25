@@ -1,8 +1,21 @@
 {
     "@context": "\/api\/v2\/contexts\/Country",
-    "@id": "\/api\/v2\/shop\/countries\/FR",
+    "@id": "\/api\/v2\/shop\/countries\/US",
     "@type": "Country",
-    "code": "FR",
-    "name": "France",
-    "provinces": []
+    "code": "US",
+    "name": "United States",
+    "provinces": [
+        {
+            "@id": "\/api\/v2\/shop\/provinces\/US-MI",
+            "@type": "Province",
+            "code": "US-MI",
+            "name": "Minnesota"
+        },
+        {
+            "@id": "\/api\/v2\/shop\/provinces\/US-WY",
+            "@type": "Province",
+            "code": "US-WY",
+            "name": "Wyoming"
+        }
+    ]
 }

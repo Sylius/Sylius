@@ -136,6 +136,10 @@
             <group>sylius:admin:customer:show</group>
             <group>admin:customer:update</group>
             <group>sylius:admin:customer:update</group>
+            <group>shop:customer:show</group>
+            <group>sylius:shop:customer:show</group>
+            <group>shop:customer:update</group>
+            <group>sylius:shop:customer:update</group>
         </attribute>
 
         <attribute name="phoneNumber">
@@ -147,6 +151,10 @@
             <group>sylius:admin:customer:show</group>
             <group>admin:customer:update</group>
             <group>sylius:admin:customer:update</group>
+            <group>shop:customer:show</group>
+            <group>sylius:shop:customer:show</group>
+            <group>shop:customer:update</group>
+            <group>sylius:shop:customer:update</group>
         </attribute>
 
         <attribute name="subscribedToNewsletter">

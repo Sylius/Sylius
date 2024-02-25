@@ -49,6 +49,7 @@
         <service id="sylius.behat.context.domain.managing_promotions" class="Sylius\Behat\Context\Domain\ManagingPromotionsContext">
             <argument type="service" id="sylius.behat.shared_storage" />
             <argument type="service" id="sylius.repository.promotion" />
+            <argument type="service" id="sylius.manager.promotion" />
         </service>
 
         <service id="sylius.behat.context.domain.managing_promotion_coupons" class="Sylius\Behat\Context\Domain\ManagingPromotionCouponsContext">

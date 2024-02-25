@@ -16,6 +16,7 @@ namespace Sylius\Bundle\ApiBundle\Applicator;
 use SM\Factory\FactoryInterface as StateMachineFactoryInterface;
 use Sylius\Abstraction\StateMachine\StateMachineInterface;
 use Sylius\Abstraction\StateMachine\WinzouStateMachineAdapter;
+use Sylius\Bundle\ApiBundle\Exception\StateMachineTransitionFailedException;
 use Sylius\Component\Payment\Model\PaymentInterface;
 use Sylius\Component\Payment\PaymentTransitions;
 
@@ -46,7 +47,13 @@ final class PaymentStateMachineTransitionApplicator implements PaymentStateMachi
 
     private function applyTransition(PaymentInterface $payment, string $transition): void
     {
-        $this->getStateMachine()->apply($payment, PaymentTransitions::GRAPH, $transition);
+        $stateMachine = $this->getStateMachine();
+
+        if (false === $stateMachine->can($payment, PaymentTransitions::GRAPH, $transition)) {
+            throw new StateMachineTransitionFailedException('Cannot complete the payment.');
+        }
+
+        $stateMachine->apply($payment, PaymentTransitions::GRAPH, $transition);
     }
 
     private function getStateMachine(): StateMachineInterface

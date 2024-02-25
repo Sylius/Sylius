@@ -114,7 +114,7 @@
             <argument type="service" id="sylius.factory.customer" />
             <argument type="service" id="sylius.factory.order_item" />
             <argument type="service" id="sylius.factory.shipment" />
-            <argument type="service" id="sm.factory" />
+            <argument type="service" id="sylius_abstraction.state_machine" />
             <argument type="service" id="sylius.repository.country" />
             <argument type="service" id="sylius.repository.customer" />
             <argument type="service" id="sylius.repository.order" />
@@ -124,6 +124,7 @@
             <argument type="service" id="sylius.order_item_quantity_modifier" />
             <argument type="service" id="doctrine.orm.entity_manager" />
             <argument type="service" id="sylius.behat.clock" />
+            <argument type="service" id="Sylius\Component\Resource\Generator\RandomnessGeneratorInterface" />
         </service>
 
         <service id="sylius.behat.context.setup.payment" class="Sylius\Behat\Context\Setup\PaymentContext">
@@ -199,7 +200,7 @@
             <argument type="service" id="sylius.behat.shared_storage" />
             <argument type="service" id="sylius.factory.product_review" />
             <argument type="service" id="sylius.repository.product_review" />
-            <argument type="service" id="sm.factory" />
+            <argument type="service" id="sylius_abstraction.state_machine" />
         </service>
 
         <service id="sylius.behat.context.setup.product_taxon" class="Sylius\Behat\Context\Setup\ProductTaxonContext">
@@ -311,7 +312,7 @@
             <argument type="service" id="sylius.factory.catalog_promotion_action" />
             <argument type="service" id="sylius.manager.catalog_promotion" />
             <argument type="service" id="sylius.repository.channel" />
-            <argument type="service" id="sm.factory" />
+            <argument type="service" id="sylius_abstraction.state_machine" />
             <argument type="service" id="sylius.event_bus" />
             <argument type="service" id="sylius.behat.shared_storage" />
         </service>

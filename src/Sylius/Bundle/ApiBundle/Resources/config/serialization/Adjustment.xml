@@ -41,6 +41,10 @@
             <group>shop:cart:show</group>
             <group>sylius:shop:cart:show</group>
             <group>sylius:admin:order_item:index</group>
+            <group>admin:order_item_unit:index</group>
+            <group>sylius:admin:order_item_unit:index</group>
+            <group>admin:shipment:index</group>
+            <group>sylius:admin:shipment:index</group>
         </attribute>
 
         <attribute name="label">
@@ -68,6 +72,10 @@
             <group>shop:cart:show</group>
             <group>sylius:shop:cart:show</group>
            <group>sylius:admin:order_item:index</group>
+            <group>admin:order_item_unit:index</group>
+            <group>sylius:admin:order_item_unit:index</group>
+            <group>admin:shipment:index</group>
+            <group>sylius:admin:shipment:index</group>
         </attribute>
 
         <attribute name="order">
@@ -103,6 +111,13 @@
             <group>sylius:shop:adjustment:show</group>
         </attribute>
 
+        <attribute name="shipment">
+            <group>admin:adjustment:index</group>
+            <group>sylius:admin:adjustment:index</group>
+            <group>admin:adjustment:show</group>
+            <group>sylius:admin:adjustment:show</group>
+        </attribute>
+
         <attribute name="neutral">
             <group>admin:adjustment:index</group>
             <group>sylius:admin:adjustment:index</group>
@@ -115,6 +130,10 @@
             <group>shop:cart:show</group>
             <group>sylius:shop:cart:show</group>
            <group>sylius:admin:order_item:index</group>
+            <group>admin:order_item_unit:index</group>
+            <group>sylius:admin:order_item_unit:index</group>
+            <group>admin:shipment:index</group>
+            <group>sylius:admin:shipment:index</group>
         </attribute>
 
         <attribute name="locked">
@@ -127,6 +146,10 @@
             <group>shop:adjustment:show</group>
             <group>sylius:shop:adjustment:show</group>
            <group>sylius:admin:order_item:index</group>
+           <group>admin:order_item_unit:index</group>
+           <group>sylius:admin:order_item_unit:index</group>
+            <group>admin:shipment:index</group>
+            <group>sylius:admin:shipment:index</group>
         </attribute>
     </class>
 </serializer>

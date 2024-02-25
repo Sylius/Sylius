@@ -14,7 +14,13 @@
           "@type": "Locale",
           "code": "pl_PL",
           "name": "Polish (Poland)"
+      },
+      {
+          "@id": "\/api\/v2\/shop\/locales\/ga_IE",
+          "@type": "Locale",
+          "code": "ga_IE",
+          "name": "Irish (Ireland)"
       }
     ],
-    "hydra:totalItems": 2
+    "hydra:totalItems": 3
 }

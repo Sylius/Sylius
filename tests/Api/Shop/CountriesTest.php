@@ -30,11 +30,22 @@ final class CountriesTest extends JsonApiTestCase
     }
 
     /** @test */
+    public function it_gets_only_countries_from_current_channel(): void
+    {
+        $this->loadFixturesFromFiles(['channel_with_countries.yaml', 'country.yaml']);
+
+        $this->client->request(method: 'GET', uri: '/api/v2/shop/countries', server: self::CONTENT_TYPE_HEADER);
+        $response = $this->client->getResponse();
+
+        $this->assertResponse($response, 'shop/country/get_countries_from_channel_response', Response::HTTP_OK);
+    }
+
+    /** @test */
     public function it_gets_a_country(): void
     {
         $this->loadFixturesFromFiles(['country.yaml']);
 
-        $this->client->request(method: 'GET', uri: '/api/v2/shop/countries/FR', server: self::CONTENT_TYPE_HEADER);
+        $this->client->request(method: 'GET', uri: '/api/v2/shop/countries/US', server: self::CONTENT_TYPE_HEADER);
         $response = $this->client->getResponse();
 
         $this->assertResponse($response, 'shop/country/get_country_response', Response::HTTP_OK);

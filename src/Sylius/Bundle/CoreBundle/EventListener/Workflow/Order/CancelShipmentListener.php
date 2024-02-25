@@ -34,7 +34,9 @@ final class CancelShipmentListener
         $shipments = $order->getShipments();
 
         foreach ($shipments as $shipment) {
-            $this->compositeOrderStateMachine->apply($shipment, ShipmentTransitions::GRAPH, ShipmentTransitions::TRANSITION_CANCEL);
+            if ($this->compositeOrderStateMachine->can($shipment, ShipmentTransitions::GRAPH, ShipmentTransitions::TRANSITION_CANCEL)) {
+                $this->compositeOrderStateMachine->apply($shipment, ShipmentTransitions::GRAPH, ShipmentTransitions::TRANSITION_CANCEL);
+            }
         }
     }
 }
