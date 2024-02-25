@@ -35,7 +35,7 @@
         </service>
 
         <service id="sylius.api.applicator.archiving_promotion" class="Sylius\Bundle\ApiBundle\Applicator\ArchivingPromotionApplicator">
-            <argument type="service" id="Sylius\Calendar\Provider\DateTimeProviderInterface" />
+            <argument type="service" id="clock" />
         </service>
         <service id="Sylius\Bundle\ApiBundle\Applicator\ArchivingPromotionApplicatorInterface" alias="sylius.api.applicator.archiving_promotion" />
     </services>
