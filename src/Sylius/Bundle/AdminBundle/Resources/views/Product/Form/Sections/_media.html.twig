@@ -1,12 +1,14 @@
+{% set form = hookable_data.form %}
+
 <div class="tab-pane" id="product-media" role="tabpanel" tabindex="0">
     <div class="card mb-3">
         <div class="card-header">
             <h2 id="productMedia" class="card-title">
-                {{ 'sylius.ui.media'|trans }} <span class="badge">{{ 'sylius.ui.work_in_progress'|trans }}</span>
+                {{ 'sylius.ui.media'|trans }}
             </h2>
         </div>
         <div class="card-body">
-            {% for imageForm in hookable_data.form.images %}
+            {% for imageForm in form.images %}
                 <div class="row mb-4">
                     <div class="col-auto">
                         <span class="avatar avatar-xl" style="background-image: url('{{ imageForm.vars.value.path|imagine_filter('sylius_small') }}')"></span>
@@ -21,6 +23,10 @@
                     </div>
                 </div>
             {% endfor %}
+
+            <div class="d-grid gap-2">
+                {{ form_widget(form.images.vars.button_add, {label: 'sylius.ui.add_image'|trans, attr: {class: 'btn btn-outline-primary '}}) }}
+            </div>
         </div>
     </div>
 </div>
