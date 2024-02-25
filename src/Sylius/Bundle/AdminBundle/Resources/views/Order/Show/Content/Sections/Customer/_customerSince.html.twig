@@ -1,0 +1,6 @@
+{% set customer = hookable_data.resource.customer %}
+
+<div>
+    <strong>{{ 'sylius.ui.customer_since'|trans }}:</strong>
+</div>
+<div class="mb-3"> {{ customer.createdAt|format_date }}</div>

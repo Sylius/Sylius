@@ -13,7 +13,7 @@ sylius_grid:
                     label: sylius.ui.priority
                     sortable: ~
                     options:
-                        template: "@SyliusUi/Grid/Field/position.html.twig"
+                        template: "@SyliusAdmin/Promotion/Grid/Field/priority.html.twig"
                 code:
                     type: string
                     label: sylius.ui.code
@@ -29,7 +29,7 @@ sylius_grid:
                     type: twig
                     label: sylius.ui.coupons
                     options:
-                        template: "@SyliusUi/Grid/Field/yesNo.html.twig"
+                        template: "@SyliusAdmin/Shared/Grid/Field/boolean.html.twig"
                 usage:
                     type: twig
                     label: sylius.ui.usage

@@ -1,0 +1,31 @@
+{% set session = _context.app.session|default(null) %}
+
+{% if session is not null and session.started %}
+    {% from '@SyliusAdmin/Shared/Helper/icon.html.twig' import icon as _icon %}
+    <div class="container-xl mt-3">
+        {% for type in ['success', 'error', 'info', 'warning'] %}
+            {% for flash in session.flashbag.get(type) %}
+                <div class="sylius alert alert-{{ type == 'error' ? 'danger' : type }}" role="alert" {{ sylius_test_html_attribute('sylius-flash-message')}}>
+                    <div class="d-flex">
+                        <div>
+                            {{ _icon({ icon: type == 'error' ? 'danger' : type }) }}
+                        </div>
+                        <div class="mx-2">
+                            <h4 class="alert-title">
+                                {% set header = 'sylius.ui.' ~ type %}
+                                {{ header|trans }}
+                            </h4>
+                            <div class="text-secondary">
+                                {% if flash is iterable %}
+                                    {{ flash.message|trans(flash.parameters, 'flashes') }}
+                                {% else %}
+                                    {{ flash|trans({}, 'flashes') }}
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        {% endfor %}
+    </div>
+{% endif %}

@@ -2,7 +2,7 @@ sylius_admin_order:
     resource: |
         alias: sylius.order
         section: admin
-        templates: "@SyliusAdmin\\Crud"
+        templates: "@SyliusAdmin\\Shared\\Crud"
         only: ['index']
         grid: sylius_admin_order
         permission: true
@@ -25,7 +25,7 @@ sylius_admin_order_show:
               arguments:
                 - '$id'
             permission: true
-            template: "@SyliusAdmin/Order/show.html.twig"
+            template: "@SyliusAdmin/Shared/Crud/show.html.twig"
 
 sylius_admin_order_history:
     path: /orders/{id}/history
@@ -53,7 +53,7 @@ sylius_admin_order_update:
               arguments:
                 - '$id'
             permission: true
-            template: "@SyliusAdmin/Order/update.html.twig"
+            template: "@SyliusAdmin/Shared/Crud/update.html.twig"
             form:
                 options:
                     validation_groups:

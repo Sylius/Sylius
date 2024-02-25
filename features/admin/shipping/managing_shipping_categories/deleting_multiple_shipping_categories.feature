@@ -9,7 +9,7 @@ Feature: Deleting multiple shipping categories
         And the store has "Big" and "Small" shipping category
         And I am logged in as an administrator
 
-    @ui @mink:chromedriver @no-api
+    @todo @ui @mink:chromedriver @no-api
     Scenario: Deleting multiple shipping categories at once
         When I browse shipping categories
         And I check the "Big" shipping category

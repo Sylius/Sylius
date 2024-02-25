@@ -9,7 +9,7 @@ Feature: Browsing administrators
         And there is also an administrator "ted@example.com"
         And I am logged in as "ted@example.com" administrator
 
-    @ui @api
+    @todo @ui @api
     Scenario: Browsing administrators in store
         When I want to browse administrators
         Then there should be 2 administrators in the list

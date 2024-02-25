@@ -1,0 +1,39 @@
+twig_hooks:
+    hooks:
+        'sylius_admin.product.show.content':
+            page_body:
+                template: '@SyliusAdmin/Product/Show/Content/_pageBody.html.twig'
+
+        'sylius_admin.product.show.content.header.title_block':
+            title:
+                template: '@SyliusAdmin/Product/Show/Content/Header/TitleBlock/_title.html.twig'
+
+        'sylius_admin.product.show.content.page_body':
+            details:
+                template: '@SyliusAdmin/Product/Show/Content/PageBody/_details.html.twig'
+            translations:
+                template: '@SyliusAdmin/Product/Show/Content/PageBody/_translations.html.twig'
+            taxonomy:
+                template: '@SyliusAdmin/Product/Show/Content/PageBody/_taxonomy.html.twig'
+            associations:
+                template: '@SyliusAdmin/Product/Show/Content/PageBody/_associations.html.twig'
+
+        'sylius_admin.product.show.content.page_body.translations':
+            product_name:
+                template: '@SyliusAdmin/Product/Show/Content/PageBody/TranslationContent/_productName.html.twig'
+            slug:
+                template: '@SyliusAdmin/Product/Show/Content/PageBody/TranslationContent/_slug.html.twig'
+            description:
+                template: '@SyliusAdmin/Product/Show/Content/PageBody/TranslationContent/_description.html.twig'
+            short_description:
+                template: '@SyliusAdmin/Product/Show/Content/PageBody/TranslationContent/_shortDescription.html.twig'
+            meta_keywords:
+                template: '@SyliusAdmin/Product/Show/Content/PageBody/TranslationContent/_metaKeywords.html.twig'
+            meta_description:
+                template: '@SyliusAdmin/Product/Show/Content/PageBody/TranslationContent/_metaDescription.html.twig'
+
+        'sylius_admin.product.show.content.page_body.taxonomy':
+            main_taxon:
+                template: '@SyliusAdmin/Product/Show/Content/PageBody/Taxonomy/_mainTaxon.html.twig'
+            product_taxons:
+                template: '@SyliusAdmin/Product/Show/Content/PageBody/Taxonomy/_productTaxons.html.twig'

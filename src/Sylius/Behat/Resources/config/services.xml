@@ -22,6 +22,18 @@
 
     <parameters>
         <parameter key="sylius.behat.clock.date_file">%kernel.project_dir%/var/date.txt</parameter>
+        <parameter key="sylius.behat.notification_accessor.admin.locator" type="string">[data-test-sylius-flash-message]</parameter>
+        <parameter key="sylius.behat.notification_accessor.shop.locator" type="string">.sylius-flash-message</parameter>
+        <parameter key="sylius.behat.notification_checker.admin.class_map" type="collection">
+            <parameter key="failure">alert-danger</parameter>
+            <parameter key="info">alert-info</parameter>
+            <parameter key="success">alert-success</parameter>
+        </parameter>
+        <parameter key="sylius.behat.notification_checker.shop.class_map" type="collection">
+            <parameter key="failure">negative</parameter>
+            <parameter key="info">info</parameter>
+            <parameter key="success">positive</parameter>
+        </parameter>
     </parameters>
 
     <services>
@@ -87,12 +99,24 @@
 
         <service id="sylius.behat.response_loader" class="Sylius\Behat\Service\ResponseLoader" public="false" />
 
-        <service id="sylius.behat.notification_accessor" class="Sylius\Behat\Service\Accessor\NotificationAccessor" public="false">
+        <service id="sylius.behat.notification_accessor.admin" class="Sylius\Behat\Service\Accessor\NotificationAccessor" public="false">
             <argument type="service" id="behat.mink.default_session" />
+            <argument type="string">%sylius.behat.notification_accessor.admin.locator%</argument>
         </service>
 
-        <service id="sylius.behat.notification_checker" class="Sylius\Behat\Service\NotificationChecker" public="false">
-            <argument type="service" id="sylius.behat.notification_accessor" />
+        <service id="sylius.behat.notification_accessor.shop" class="Sylius\Behat\Service\Accessor\NotificationAccessor" public="false">
+            <argument type="service" id="behat.mink.default_session" />
+            <argument type="string">%sylius.behat.notification_accessor.shop.locator%</argument>
+        </service>
+
+        <service id="sylius.behat.notification_checker.admin" class="Sylius\Behat\Service\NotificationChecker" public="false">
+            <argument type="service" id="sylius.behat.notification_accessor.admin"/>
+            <argument>%sylius.behat.notification_checker.admin.class_map%</argument>
+        </service>
+
+        <service id="sylius.behat.notification_checker.shop" class="Sylius\Behat\Service\NotificationChecker" public="false">
+            <argument type="service" id="sylius.behat.notification_accessor.shop"/>
+            <argument>%sylius.behat.notification_checker.shop.class_map%</argument>
         </service>
 
         <service id="sylius.behat.current_page_resolver" class="Sylius\Behat\Service\Resolver\CurrentPageResolver" public="false">

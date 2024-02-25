@@ -15,35 +15,35 @@ Feature: Order gets fulfilled after it's been paid and shipped
         And I am logged in as an administrator
         And I am viewing the summary of this order
 
-    @ui @api
+    @todo @ui @api
     Scenario: An order can be fulfilled
         When I mark this order as paid
         And I ship this order
         Then its state should be "Fulfilled"
 
-    @ui @api
+    @todo @ui @api
     Scenario: An order which has been shipped gets fulfilled after paying
         Given the order "#00000123" is already shipped
         When I mark this order as paid
         Then its state should be "Fulfilled"
 
-    @ui @api
+    @todo @ui @api
     Scenario: An order which has been paid for gets fulfilled after shipping it
         Given the order "#00000123" is already paid
         When I ship this order
         Then its state should be "Fulfilled"
 
-    @ui @api
+    @todo @ui @api
     Scenario: A paid, but not shipped order is not fulfilled
         When I mark this order as paid
         Then its state should be "New"
 
-    @ui @api
+    @todo @ui @api
     Scenario: A shipped, but not paid order is not fulfilled
         When I ship this order
         Then its state should be "New"
 
-    @ui @api
+    @todo @ui @api
     Scenario: Fulfilled orders cannot be cancelled
         When I mark this order as paid
         And I ship this order

@@ -1,0 +1,45 @@
+{% macro headers(grid, definition, requestAttributes) %}
+    {% import '@SyliusUi/Macro/sorting.html.twig' as sorting %}
+
+    {% if definition.actionGroups.bulk is defined and definition.getEnabledActions('bulk')|length > 0 %}
+        <th class="center aligned">
+            <input data-check-all="index" type="checkbox" class="form-check-input">
+        </th>
+    {% endif %}
+
+    {% for field in definition.fields|sort_by('position') %}
+        {% if field.enabled %}
+            {% if field.isSortable %}
+                {{ sorting.tableHeader(grid, field, requestAttributes) }}
+            {% else %}
+                <th class="sylius-table-column-{{ field.name }}">{{ field.label|trans }}</th>
+            {% endif %}
+        {% endif %}
+    {% endfor %}
+    {% if definition.actionGroups.item is defined and definition.getEnabledActions('item')|length > 0 %}
+        <th class="sylius-table-column-actions">{{ 'sylius.ui.actions'|trans }}</th>
+    {% endif %}
+{% endmacro %}
+
+{% macro row(grid, definition, row) %}
+    {% import '@SyliusAdmin/Shared/Helper/dropdown.html.twig' as dropdown %}
+
+    <tr class="item" {{ sylius_test_html_attribute('row') }}>
+        {% if definition.actionGroups.bulk is defined and definition.getEnabledActions('bulk')|length > 0 %}
+            <td class="center aligned"><input data-check-all-group="index" class="form-check-input" type="checkbox" value="{{ row.id }}" /></td>
+        {% endif %}
+        {% for field in definition.enabledFields|sort_by('position') %}
+            <td>{{ sylius_grid_render_field(grid, field, row) }}</td>
+        {% endfor %}
+        {% if definition.actionGroups.item is defined and definition.getEnabledActions('item')|length > 0 %}
+            <td {{ sylius_test_html_attribute('actions') }}>
+                {% set actions %}
+                    {% for action in definition.getEnabledActions('item')|sort_by('position') %}
+                        {{ sylius_grid_render_item_action(grid, action, row) }}
+                    {% endfor %}
+                {% endset %}
+                {{ dropdown.default({ content: actions, button: { text: 'Actions' } }) }}
+            </td>
+        {% endif %}
+    </tr>
+{% endmacro %}

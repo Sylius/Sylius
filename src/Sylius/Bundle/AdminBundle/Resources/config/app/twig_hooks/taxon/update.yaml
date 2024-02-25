@@ -1,0 +1,29 @@
+twig_hooks:
+    hooks:
+        'sylius_admin.taxon.update.content':
+            form:
+                template: '@SyliusAdmin/Taxon/Update/_form.html.twig'
+                configuration:
+                    render_rest: false
+
+        'sylius_admin.taxon.update.content.form':
+            tree:
+                component: 'SyliusAdmin.Taxon.TaxonTree'
+            sections:
+                template: '@SyliusAdmin/Taxon/Form/_sections.html.twig'
+
+        'sylius_admin.taxon.update.content.form.sections':
+            details:
+                template: '@SyliusAdmin/Taxon/Form/Sections/_details.html.twig'
+            translations:
+                template: '@SyliusAdmin/Taxon/Form/Sections/_translations.html.twig'
+            media:
+                template: '@SyliusAdmin/Taxon/Form/Sections/_media.html.twig'
+
+        'sylius_admin.taxon.update.content.form.sections.details':
+            code:
+                template: '@SyliusAdmin/Taxon/Form/Sections/Details/_code.html.twig'
+            parent:
+                template: '@SyliusAdmin/Taxon/Form/Sections/Details/_parent.html.twig'
+            enabled:
+                template: '@SyliusAdmin/Taxon/Form/Sections/Details/_enabled.html.twig'

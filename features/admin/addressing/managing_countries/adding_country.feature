@@ -7,7 +7,7 @@ Feature: Adding a new country
     Background:
         Given I am logged in as an administrator
 
-    @ui @api
+    @api @ui
     Scenario: Adding country
         When I want to add a new country
         And I choose "United States"

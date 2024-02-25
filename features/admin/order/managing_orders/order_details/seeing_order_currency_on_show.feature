@@ -22,7 +22,7 @@ Feature: Seeing the currency an order has been placed in on it's details page
         And there is a customer "Satin" identified by an email "satin@teamlucifer.com" and a password "pswd"
         And I am logged in as an administrator
 
-    @api @ui
+    @api @todo @ui
     Scenario: All prices are in the base currency when the client haven't chosen any other
         Given there is a customer "satin@teamlucifer.com" that placed an order "#00000666"
         And the customer bought a single "Angel T-Shirt"

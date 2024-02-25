@@ -1,6 +1,0 @@
-{% if app.user.avatar is not empty and app.user.avatar.path is not empty %}
-    {% set path = app.user.avatar.path|imagine_filter('sylius_admin_admin_user_avatar_thumbnail') %}
-    <img style="margin-right: 10px;" class="ui avatar image" src="{{ path }}">
-{% else %}
-    <i class="ui avatar icon user"></i>
-{% endif %}

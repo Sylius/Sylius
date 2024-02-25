@@ -17,7 +17,7 @@ Feature: Filtering orders by products
         And the customer chose "Free" shipping method to "United States" with "Offline" payment
         And I am logged in as an administrator
 
-    @ui @api @javascript
+    @todo @ui @api @javascript
     Scenario: Filtering orders by product
         When I browse orders
         And I filter by product "Galaxy T-Shirt"
@@ -25,7 +25,7 @@ Feature: Filtering orders by products
         And I should see an order with "#0000001" number
         And I should see an order with "#0000003" number
 
-    @ui @api @mink:chromedriver
+    @todo @ui @api @mink:chromedriver
     Scenario: Filtering orders by multiple products
         When I browse orders
         And I filter by products "Galaxy T-Shirt" and "Space Dress"

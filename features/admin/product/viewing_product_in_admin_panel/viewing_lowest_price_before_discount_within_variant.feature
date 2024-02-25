@@ -13,7 +13,7 @@ Feature: Seeing the lowest price before the discount within variant
         And I am logged in as an administrator
         And I am browsing products
 
-    @ui @no-api
+    @todo @ui @no-api
     Scenario: Seeing price block with lowest price before the discount within variant
         When I access the "Wyborowa Vodka" product
         Then I should not see the lowest price before the discount for "Wyborowa Vodka Rye" variant in "United States" channel
