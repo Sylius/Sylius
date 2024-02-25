@@ -21,10 +21,10 @@ use Sylius\Bundle\TaxonomyBundle\Form\Type\TaxonAutocompleteChoiceType;
 use Sylius\Component\Core\Model\Product;
 use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
+use Symfony\UX\LiveComponent\Form\Type\LiveCollectionType;
 
 final class ProductTypeExtension extends AbstractTypeExtension
 {
@@ -53,7 +53,7 @@ final class ProductTypeExtension extends AbstractTypeExtension
                 'choices' => array_flip(Product::getVariantSelectionMethodLabels()),
                 'label' => 'sylius.form.product.variant_selection_method',
             ])
-            ->add('images', CollectionType::class, [
+            ->add('images', LiveCollectionType::class, [
                 'entry_type' => ProductImageType::class,
                 'entry_options' => ['product' => $options['data']],
                 'allow_add' => true,
