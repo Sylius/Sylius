@@ -10,6 +10,6 @@ twig_hooks:
                     parentFallbackHook: '@=parent_fallback_hook'
         sylius_admin.order.update.content.form:
             billing_address:
-                template: '@SyliusAdmin/Order/_billingAddress.html.twig'
+                template: '@SyliusAdmin/Order/Form/_billingAddress.html.twig'
             shipping_address:
-                template: '@SyliusAdmin/Order/_shippingAddress.html.twig'
+                template: '@SyliusAdmin/Order/Form/_shippingAddress.html.twig'
