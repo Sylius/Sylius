@@ -38,7 +38,7 @@ final class ProductOptionValuesTest extends JsonApiTestCase
 
         $this->assertResponse(
             $this->client->getResponse(),
-            'shop/product/get_product_option_value_directly',
+            'shop/product_option/get_product_option_value',
             Response::HTTP_OK,
         );
     }
