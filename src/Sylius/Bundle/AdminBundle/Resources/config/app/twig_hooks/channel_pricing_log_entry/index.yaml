@@ -2,7 +2,7 @@ twig_hooks:
     hooks:
         'sylius_admin.channel_pricing_log_entry.index.content.header':
             breadcrumbs:
-                template: '@SyliusAdmin/ChannelPricingLogEntry/Index/Content/Header/_breadcrumbs.html.twig'
+                template: '@SyliusAdmin/ChannelPricingLogEntry/Index/Content/Header/breadcrumbs.html.twig'
                     
         'sylius_admin.channel_pricing_log_entry.index.content.header.title_block':
             title:
