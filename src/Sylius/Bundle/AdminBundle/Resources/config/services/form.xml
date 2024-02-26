@@ -30,6 +30,11 @@
             <tag name="form.type_extension" extended-type="Sylius\Bundle\PromotionBundle\Form\Type\CatalogPromotionActionType" priority="100" />
         </service>
 
+        <service id="Sylius\Bundle\AdminBundle\Form\Extension\AddressTypeExtension">
+            <argument type="service" id="sylius.repository.country" />
+            <tag name="form.type_extension" extended-type="Sylius\Bundle\AddressingBundle\Form\Type\AddressType" priority="100" />
+        </service>
+
         <service id="Sylius\Bundle\AdminBundle\Form\Extension\CatalogPromotionScopeTypeExtension">
             <argument type="tagged_iterator" tag="sylius.catalog_promotion.scope_configuration_type" index-by="key" />
             <argument type="service" id="twig" />

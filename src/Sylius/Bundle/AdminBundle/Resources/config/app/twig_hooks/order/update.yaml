@@ -1,0 +1,15 @@
+twig_hooks:
+    hooks:
+        sylius_admin.order.update.content:
+            form:
+                component: 'SyliusAdmin.Order.OrderType'
+                data:
+                    order: '@=resource'
+                    form: '@=form'
+                    parentMainHook: '@=parent_main_hook'
+                    parentFallbackHook: '@=parent_fallback_hook'
+        sylius_admin.order.update.content.form:
+            billing_address:
+                template: '@SyliusAdmin/Order/_billingAddress.html.twig'
+            shipping_address:
+                template: '@SyliusAdmin/Order/_shippingAddress.html.twig'
