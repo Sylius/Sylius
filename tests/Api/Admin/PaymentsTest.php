@@ -31,7 +31,7 @@ final class PaymentsTest extends JsonApiTestCase
     }
 
     /** @test */
-    public function it_gets_an_order(): void
+    public function it_gets_payments_of_the_specific_order(): void
     {
         $this->loadFixturesFromFiles([
             'authentication/api_administrator.yaml',

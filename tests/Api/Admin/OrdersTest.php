@@ -98,12 +98,12 @@ final class OrdersTest extends JsonApiTestCase
         $fixtures = $this->loadFixturesFromFiles([
             'authentication/api_administrator.yaml',
             'channel.yaml',
-            'order/order.yaml',
+            'order/new.yaml',
             'order/customer.yaml',
         ]);
 
         /** @var AddressInterface $billingAddress */
-        $billingAddress = $fixtures['billing_address'];
+        $billingAddress = $fixtures['first_order_billing_address'];
 
         $this->client->request(
             method: 'GET',
@@ -125,11 +125,11 @@ final class OrdersTest extends JsonApiTestCase
             'authentication/api_administrator.yaml',
             'channel.yaml',
             'order/customer.yaml',
-            'order/order.yaml',
+            'order/new.yaml',
         ]);
 
         /** @var AddressInterface $billingAddress */
-        $billingAddress = $fixtures['billing_address'];
+        $billingAddress = $fixtures['first_order_billing_address'];
 
         $this->client->request(
             method: 'PUT',
@@ -162,12 +162,12 @@ final class OrdersTest extends JsonApiTestCase
         $fixtures = $this->loadFixturesFromFiles([
             'authentication/api_administrator.yaml',
             'channel.yaml',
-            'order/order.yaml',
+            'order/new.yaml',
             'order/customer.yaml',
         ]);
 
         /** @var AddressInterface $billingAddress */
-        $billingAddress = $fixtures['billing_address'];
+        $billingAddress = $fixtures['first_order_billing_address'];
 
         /** @var CustomerInterface $customerTony */
         $customerTony = $fixtures['customer_tony'];
@@ -198,11 +198,11 @@ final class OrdersTest extends JsonApiTestCase
             'authentication/api_administrator.yaml',
             'channel.yaml',
             'order/customer.yaml',
-            'order/order.yaml',
+            'order/new.yaml',
         ]);
 
         /** @var AddressInterface $shippingAddress */
-        $shippingAddress = $fixtures['shipping_address'];
+        $shippingAddress = $fixtures['first_order_shipping_address'];
 
         $this->client->request(
             method: 'GET',
@@ -224,11 +224,11 @@ final class OrdersTest extends JsonApiTestCase
             'authentication/api_administrator.yaml',
             'channel.yaml',
             'order/customer.yaml',
-            'order/order.yaml',
+            'order/new.yaml',
         ]);
 
         /** @var AddressInterface $shippingAddress */
-        $shippingAddress = $fixtures['shipping_address'];
+        $shippingAddress = $fixtures['first_order_shipping_address'];
 
         $this->client->request(
             method: 'PUT',
@@ -262,11 +262,11 @@ final class OrdersTest extends JsonApiTestCase
             'authentication/api_administrator.yaml',
             'channel.yaml',
             'order/customer.yaml',
-            'order/order.yaml',
+            'order/new.yaml',
         ]);
 
         /** @var AddressInterface $shippingAddress */
-        $shippingAddress = $fixtures['shipping_address'];
+        $shippingAddress = $fixtures['first_order_shipping_address'];
 
         /** @var CustomerInterface $customerTony */
         $customerTony = $fixtures['customer_tony'];
