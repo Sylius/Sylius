@@ -55,6 +55,32 @@ final class OrdersTest extends JsonApiTestCase
     }
 
     /** @test */
+    public function it_gets_orders_filtered_by_channel(): void
+    {
+        $fixtures = $this->loadFixturesFromFiles([
+            'authentication/api_administrator.yaml',
+            'channel.yaml',
+            'order/customer.yaml',
+            'order/new.yaml',
+        ]);
+
+        $channel = $fixtures['channel_mobile'];
+
+        $this->client->request(
+            method: 'GET',
+            uri: '/api/v2/admin/orders',
+            parameters: ['channel.code' => $channel->getCode()],
+            server: $this->buildHeaders('api@example.com'),
+        );
+
+        $this->assertResponse(
+            $this->client->getResponse(),
+            'admin/order/get_orders_filtered_by_channel_response',
+            Response::HTTP_OK,
+        );
+    }
+
+    /** @test */
     public function it_gets_an_order(): void
     {
         $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel.yaml', 'cart.yaml', 'country.yaml', 'shipping_method.yaml', 'payment_method.yaml']);
