@@ -26,6 +26,9 @@ jobs:
                     -
                         base_branch: "1.13"
                         target_branch: "2.0"
+                    -
+                        base_branch: "2.0"
+                        target_branch: "bootstrap-admin-panel"
 
         steps:
             -
@@ -54,8 +57,8 @@ jobs:
                         In case of conflicts, please resolve them manually with usign the following commands:
                         ```
                         git fetch upstream
-                        gh pr checkout ${{ github.event.number }}
-                        git merge upstream/${{ matrix.target_branch }} --no-commit
+                        gh pr checkout <this-pr-number>
+                        git merge upstream/${{ matrix.target_branch }} -m "Resolve conflicts between ${{ matrix.base_branch }} and ${{ matrix.target_branch }}"
                         ```
                         
                         If you use other name for the upstream remote, please replace `upstream` with the name of your remote pointing to the `Sylius/Sylius` repository.
