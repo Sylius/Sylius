@@ -59,6 +59,7 @@ sylius:
                     sylius_plus: Sylius Plus
                     professional_services: Services professionnels
                     find_a_partner: Trouver un partenaire
+                    sylius_certification: Certification Sylius
     ui:
         catalog_promotion:
             dates_details: Cette opération prend du temps ! Veuillez tenir compte d'un délai de 2 à 10 minutes à partir des dates spécifiées. Le délai dépend de la taille du catalogue.
