@@ -32,6 +32,29 @@ final class OrdersTest extends JsonApiTestCase
     }
 
     /** @test */
+    public function it_gets_all_orders(): void
+    {
+        $this->loadFixturesFromFiles([
+            'authentication/api_administrator.yaml',
+            'channel.yaml',
+            'order/customer.yaml',
+            'order/new.yaml',
+        ]);
+
+        $this->client->request(
+            method: 'GET',
+            uri: '/api/v2/admin/orders',
+            server: $this->buildHeaders('api@example.com'),
+        );
+
+        $this->assertResponse(
+            $this->client->getResponse(),
+            'admin/order/get_all_orders_response',
+            Response::HTTP_OK,
+        );
+    }
+
+    /** @test */
     public function it_gets_an_order(): void
     {
         $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel.yaml', 'cart.yaml', 'country.yaml', 'shipping_method.yaml', 'payment_method.yaml']);
