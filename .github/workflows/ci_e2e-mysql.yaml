@@ -142,7 +142,14 @@ jobs:
                         echo "USE_LEGACY_POSTGRES_SETUP=no" >> $GITHUB_ENV
                     fi
 
-            -
+            -   name: "Checkout (With Branch)"
+                if: "${{ inputs.branch != '' }}"
+                uses: actions/checkout@v3
+                with:
+                    ref: ${{ inputs.branch }}
+
+            -   name: "Checkout"
+                if: "${{ inputs.branch == '' }}"
                 uses: actions/checkout@v3
 
             -   name: Get Composer cache directory
