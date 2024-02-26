@@ -63,6 +63,43 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
         return $message === $validationMessage->getText();
     }
 
+    public function changeBillingCountry(string $countryCode): void
+    {
+        $this->getElement('billing_country')->selectOption($countryCode);
+        $this->waitForFormUpdate();
+    }
+
+    public function changeShippingCountry(string $countryCode): void
+    {
+        $this->getElement('shipping_country')->selectOption($countryCode);
+        $this->waitForFormUpdate();
+    }
+
+    public function getAvailableProvincesForBillingAddress(): array
+    {
+        return $this->getOptionTextsFor($this->getElement('billing_province_code'));
+    }
+
+    public function getAvailableProvincesForShippingAddress(): array
+    {
+        return $this->getOptionTextsFor($this->getElement('shipping_province_code'));
+    }
+
+    /**
+     * @return array<string>
+     */
+    private function getOptionTextsFor(NodeElement $element): array
+    {
+        $result = [];
+        $options = $element->findAll('css', 'option');
+
+        foreach ($options as $option) {
+            $result[] = $option->getText();
+        }
+
+        return $result;
+    }
+
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
@@ -71,12 +108,17 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
             'billing_first_name' => '#sylius_order_billingAddress_firstName',
             'billing_last_name' => '#sylius_order_billingAddress_lastName',
             'billing_postcode' => '#sylius_order_billingAddress_postcode',
+            'billing_province_name' => '#sylius_order_billingAddress_provinceName',
+            'billing_province_code' => '#sylius_order_billingAddress_provinceCode',
             'billing_street' => '#sylius_order_billingAddress_street',
+            'live_form' => '[data-live-name-value="SyliusAdmin.Order.OrderType"]',
             'shipping_city' => '#sylius_order_shippingAddress_city',
             'shipping_country' => '#sylius_order_shippingAddress_countryCode',
             'shipping_first_name' => '#sylius_order_shippingAddress_firstName',
             'shipping_last_name' => '#sylius_order_shippingAddress_lastName',
             'shipping_postcode' => '#sylius_order_shippingAddress_postcode',
+            'shipping_province_name' => '#sylius_order_shippingAddress_provinceName',
+            'shipping_province_code' => '#sylius_order_shippingAddress_provinceCode',
             'shipping_street' => '#sylius_order_shippingAddress_street',
         ]);
     }
@@ -108,5 +150,10 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
         }
 
         return $element;
+    }
+
+    private function waitForFormUpdate(): void
+    {
+        $this->getElement('live_form')->waitFor('5', fn (NodeElement $element) => !$element->hasAttribute('busy'));
     }
 }

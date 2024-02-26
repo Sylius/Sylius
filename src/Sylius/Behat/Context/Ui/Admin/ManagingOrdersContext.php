@@ -24,6 +24,7 @@ use Sylius\Behat\Service\NotificationCheckerInterface;
 use Sylius\Behat\Service\SharedSecurityServiceInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Addressing\Model\AddressInterface;
+use Sylius\Component\Addressing\Model\ProvinceInterface;
 use Sylius\Component\Core\Model\AdminUserInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
@@ -225,6 +226,18 @@ final class ManagingOrdersContext implements Context
     }
 
     /**
+     * @When I change the :addressType country to :country
+     */
+    public function iChangeTheCountryTo(string $addressType, string $country): void
+    {
+        match($addressType) {
+            'shipping' => $this->updatePage->changeShippingCountry($country),
+            'billing' => $this->updatePage->changeBillingCountry($country),
+            default => throw new \InvalidArgumentException(sprintf('Address type "%s" is not supported.', $addressType)),
+        };
+    }
+
+    /**
      * @Then I should see a single order from customer :customer
      */
     public function iShouldSeeASingleOrderFromCustomer(CustomerInterface $customer)
@@ -317,6 +330,21 @@ final class ManagingOrdersContext implements Context
         $this->iSeeTheOrder($this->sharedStorage->get('order'));
 
         Assert::true($this->showPage->hasBillingAddress($customerName, $street, $postcode, $city, $countryName));
+    }
+
+    /**
+     * @Then I should be able to choose the :province province for the :addressType address
+     */
+    public function iShouldBeAbleToChooseTheProvinceForTheAddressType(ProvinceInterface $province, string $addressType): void
+    {
+        Assert::inArray(
+            $province->getName(),
+            match ($addressType) {
+                'billing' => $this->updatePage->getAvailableProvincesForBillingAddress(),
+                'shipping' => $this->updatePage->getAvailableProvincesForShippingAddress(),
+                default => [],
+            },
+        );
     }
 
     /**

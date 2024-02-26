@@ -1,3 +1,9 @@
 <div class="col-12 col-md-6">
-    {{ form_row(hookable_data.form.provinceName) }}
+    {% if hookable_data.form.provinceName is defined %}
+        {{ form_row(hookable_data.form.provinceName) }}
+    {% endif %}
+
+    {% if hookable_data.form.provinceCode is defined %}
+        {{ form_row(hookable_data.form.provinceCode) }}
+    {% endif %}
 </div>
