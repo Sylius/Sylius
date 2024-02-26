@@ -29,9 +29,15 @@ final class AdjustmentsTest extends JsonApiTestCase
     }
 
     /** @test */
-    public function it_gets_adjustment_by_id(): void
+    public function it_gets_shipment_adjustment(): void
     {
-        $this->loadFixturesFromFiles(['channel.yaml', 'cart.yaml', 'country.yaml', 'shipping_method.yaml', 'payment_method.yaml']);
+        $this->loadFixturesFromFiles([
+            'channel.yaml',
+            'cart.yaml',
+            'country.yaml',
+            'shipping_method.yaml',
+            'payment_method.yaml',
+        ]);
 
         $order = $this->placeOrder('token');
 
@@ -43,7 +49,35 @@ final class AdjustmentsTest extends JsonApiTestCase
 
         $this->assertResponse(
             $this->client->getResponse(),
-            'shop/adjustments/get_adjustment_response',
+            'shop/adjustments/get_shipment_adjustment_response',
+            Response::HTTP_OK,
+        );
+    }
+
+    /** @test */
+    public function it_gets_promotion_adjustments(): void
+    {
+        $this->loadFixturesFromFiles([
+            'channel.yaml',
+            'cart.yaml',
+            'country.yaml',
+            'shipping_method.yaml',
+            'payment_method.yaml',
+            'promotion/promotion.yaml',
+        ]);
+
+        $order = $this->placeOrder(tokenValue: 'token', quantity: 2, couponCode: 'XYZ1');
+        $unit = $order->getItemUnits()->first();
+
+        $this->client->request(
+            method: 'GET',
+            uri: '/api/v2/shop/adjustments/' . $unit->getAdjustments()->first()->getId(),
+            server: $this->headerBuilder()->withJsonLdAccept()->build(),
+        );
+
+        $this->assertResponse(
+            $this->client->getResponse(),
+            'shop/adjustments/get_promotion_adjustment_response',
             Response::HTTP_OK,
         );
     }

@@ -1024,7 +1024,7 @@ final class ManagingOrdersContext implements Context
         );
 
         foreach ($adjustments as $adjustment) {
-            if (in_array($adjustment['order_item_unit']['@id'], $orderItem['units'])) {
+            if (in_array($adjustment['orderItemUnit'], $orderItem['units'])) {
                 Assert::same($this->getTotalAsInt($price), $adjustment['amount']);
 
                 return;
@@ -1046,7 +1046,7 @@ final class ManagingOrdersContext implements Context
         );
 
         foreach ($adjustments as $adjustment) {
-            if (in_array($adjustment['order_item_unit']['@id'], $orderItem['units'])) {
+            if (in_array($adjustment['orderItemUnit'], $orderItem['units'])) {
                 Assert::same($this->getTotalAsInt(trim($price, ' ~')), $adjustment['amount']);
 
                 return;
@@ -1065,7 +1065,7 @@ final class ManagingOrdersContext implements Context
         $unitPromotionAdjustments = 0;
         foreach ($this->responseChecker->getCollection($response) as $adjustment) {
             if (in_array($adjustment['type'], [AdjustmentInterface::ORDER_UNIT_PROMOTION_ADJUSTMENT, AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT])) {
-                if (in_array($adjustment['order_item_unit']['@id'], $orderItem['units'])) {
+                if (in_array($adjustment['orderItemUnit'], $orderItem['units'])) {
                     $unitPromotionAdjustments += $adjustment['amount'];
                 }
             }

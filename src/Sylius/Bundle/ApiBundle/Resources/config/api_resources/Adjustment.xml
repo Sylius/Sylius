@@ -94,8 +94,9 @@
         <property name="label" writable="false" />
         <property name="amount" writable="false" />
         <property name="order" writable="false" />
-        <property name="order_item" writable="false" />
-        <property name="order_item_unit" writable="false" />
+        <property name="orderItem" writable="false" />
+        <property name="orderItemUnit" writable="false" />
+        <property name="shipment" writable="false" />
         <property name="neutral" writable="false" />
         <property name="locked" writable="false" />
     </resource>
