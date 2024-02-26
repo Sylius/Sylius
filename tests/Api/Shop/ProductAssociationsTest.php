@@ -34,7 +34,7 @@ final class ProductAssociationsTest extends JsonApiTestCase
 
         $this->assertResponse(
             $this->client->getResponse(),
-            'shop/product/get_product_association_response',
+            'shop/product_association/get_product_association_response',
             Response::HTTP_OK,
         );
     }

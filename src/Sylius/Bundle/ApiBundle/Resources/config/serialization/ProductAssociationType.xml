@@ -47,16 +47,12 @@
             <group>sylius:admin:product_association_type:index</group>
             <group>admin:product_association_type:show</group>
             <group>sylius:admin:product_association_type:show</group>
-            <group>shop:product_association_type:show</group>
-            <group>sylius:shop:product_association_type:show</group>
         </attribute>
         <attribute name="updatedAt">
             <group>admin:product_association_type:index</group>
             <group>sylius:admin:product_association_type:index</group>
             <group>admin:product_association_type:show</group>
             <group>sylius:admin:product_association_type:show</group>
-            <group>shop:product_association_type:show</group>
-            <group>sylius:shop:product_association_type:show</group>
         </attribute>
         <attribute name="translations">
             <group>admin:product_association_type:index</group>
