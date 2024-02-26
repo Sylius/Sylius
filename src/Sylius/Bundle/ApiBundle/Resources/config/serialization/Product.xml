@@ -163,6 +163,9 @@
             <group>sylius:shop:product:index</group>
             <group>shop:product:show</group>
             <group>sylius:shop:product:show</group>
+            <normalization_context>
+                <entry name="collection_array_values">true</entry>
+            </normalization_context>
         </attribute>
         <attribute name="averageRating">
             <group>admin:product:index</group>
