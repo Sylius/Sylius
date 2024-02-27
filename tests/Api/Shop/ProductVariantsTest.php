@@ -74,6 +74,30 @@ final class ProductVariantsTest extends JsonApiTestCase
     }
 
     /** @test */
+    public function it_returns_product_variant_with_applied_promotion(): void
+    {
+        $fixtures = $this->loadFixturesFromFiles([
+            'channel.yaml',
+            'catalog_promotion/catalog_promotion.yaml',
+            'catalog_promotion/product_variant.yaml',
+        ]);
+
+        /** @var ProductInterface $product */
+        $product = $fixtures['product_variant'];
+        $this->client->request(
+            method: 'GET',
+            uri: sprintf('/api/v2/shop/product-variants/%s', $product->getCode()),
+            server: self::CONTENT_TYPE_HEADER,
+        );
+
+        $this->assertResponse(
+            $this->client->getResponse(),
+            'shop/product_variant/get_product_variant_with_applied_promotion',
+            Response::HTTP_OK,
+        );
+    }
+
+    /** @test */
     public function it_returns_nothing_if_variant_not_found(): void
     {
         $this->loadFixturesFromFile('product/product_with_many_locales.yaml');
