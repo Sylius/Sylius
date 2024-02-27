@@ -101,6 +101,28 @@ final class OrdersTest extends JsonApiTestCase
     }
 
     /** @test */
+    public function it_gets_orders_for_customer(): void
+    {
+        $fixtures = $this->loadFixturesFromFiles([
+            'authentication/api_administrator.yaml',
+            'channel.yaml',
+            'order/customer.yaml',
+            'order/fulfilled.yaml',
+        ]);
+
+        /** @var CustomerInterface $customer */
+        $customer = $fixtures['customer_tony'];
+
+        $this->requestGet(
+            uri: '/api/v2/admin/orders',
+            queryParameters: ['customer.id' => $customer->getId()],
+            headers: $this->buildHeaders('api@example.com'),
+        );
+
+        $this->assertResponseSuccessful('admin/order/gets_orders_for_customer_response');
+    }
+
+    /** @test */
     public function it_gets_an_order(): void
     {
         $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel.yaml', 'cart.yaml', 'country.yaml', 'shipping_method.yaml', 'payment_method.yaml']);
@@ -130,28 +152,6 @@ final class OrdersTest extends JsonApiTestCase
         $this->requestGet(uri: '/api/v2/admin/orders/nAWw2jewpA/adjustments', headers: $header);
 
         $this->assertResponseSuccessful('admin/order/get_adjustments_for_a_given_order_response');
-    }
-
-    /** @test */
-    public function it_gets_orders_for_customer(): void
-    {
-        $fixtures = $this->loadFixturesFromFiles([
-            'authentication/api_administrator.yaml',
-            'channel.yaml',
-            'order/customer.yaml',
-            'order/fulfilled.yaml',
-        ]);
-
-        /** @var CustomerInterface $customer */
-        $customer = $fixtures['customer_tony'];
-
-        $this->requestGet(
-            uri: '/api/v2/admin/orders',
-            queryParameters: ['customer.id' => $customer->getId()],
-            headers: $this->buildHeaders('api@example.com'),
-        );
-
-        $this->assertResponseSuccessful('admin/order/gets_orders_for_customer_response');
     }
 
     /** @test */
