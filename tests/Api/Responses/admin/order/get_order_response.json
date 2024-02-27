@@ -42,11 +42,9 @@
     ],
     "currencyCode": "USD",
     "localeCode": "en_US",
-    "checkoutState": "completed",
     "paymentState": "awaiting_payment",
     "shippingState": "ready",
     "tokenValue": "nAWw2jewpA",
-    "id": @integer@,
     "number": @string@,
     "items": [
         {
