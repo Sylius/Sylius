@@ -1,0 +1,16 @@
+{
+    "@context": "\/api\/v2\/contexts\/ProductVariant",
+    "@id": "\/api\/v2\/shop\/product-variants\/MUG",
+    "@type": "ProductVariant",
+    "code": "MUG",
+    "product": "\/api\/v2\/shop\/products\/MUG",
+    "optionValues": [],
+    "name": "Mug",
+    "inStock": true,
+    "price": 2500,
+    "originalPrice": 3000,
+    "lowestPriceBeforeDiscount": null,
+    "appliedPromotions": [
+        "\/api\/v2\/shop\/catalog-promotions\/mugs_discount"
+    ]
+}
