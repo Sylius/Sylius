@@ -113,6 +113,41 @@ final class ProductReviewsTest extends JsonApiTestCase
     }
 
     /** @test */
+    public function it_prevents_from_creating_a_product_review_without_email(): void
+    {
+        $fixtures = $this->loadFixturesFromFiles([
+            'channel.yaml',
+            'tax_category.yaml',
+            'shipping_category.yaml',
+            'product/product_variant.yaml',
+        ]);
+        /** @var ProductInterface $product */
+        $product = $fixtures['product'];
+
+        $this->client->request(
+            method: 'POST',
+            uri: '/api/v2/shop/product-reviews',
+            server: self::CONTENT_TYPE_HEADER,
+            content: json_encode([
+                'title' => 'Greatest product!',
+                'rating' => 3,
+                'comment' => 'I\'ve never bought anything better.',
+                'product' => '/api/v2/shop/products/' . $product->getCode(),
+            ], \JSON_THROW_ON_ERROR),
+        );
+
+        $this->assertResponseViolations(
+            $this->client->getResponse(),
+            [
+                [
+                    'propertyPath' => 'email',
+                    'message' => 'Please enter your email.',
+                ]
+            ]
+        );
+    }
+
+    /** @test */
     public function it_prevents_from_creating_a_product_review_if_required_fields_are_missing(): void
     {
         $this->loadFixturesFromFiles([
