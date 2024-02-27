@@ -27,6 +27,9 @@ abstract class JsonApiTestCase extends BaseJsonApiTestCase
 
     public const PATCH_CONTENT_TYPE_HEADER = ['CONTENT_TYPE' => 'application/merge-patch+json', 'HTTP_ACCEPT' => 'application/ld+json'];
 
+    /**
+     * @param array<array-key, mixed> $data
+     */
     public function __construct(?string $name = null, array $data = [], int|string $dataName = '')
     {
         parent::__construct($name, $data, $dataName);
@@ -35,7 +38,7 @@ abstract class JsonApiTestCase extends BaseJsonApiTestCase
         $this->expectedResponsesPath = __DIR__ . '/Responses';
     }
 
-    protected function get($id): ?object
+    protected function get(string $id): ?object
     {
         if (property_exists(static::class, 'container')) {
             return self::$kernel->getContainer()->get($id);
@@ -59,7 +62,25 @@ abstract class JsonApiTestCase extends BaseJsonApiTestCase
         );
     }
 
-    /** @throws \Exception */
+    /** @throws \JsonException */
+    protected function assertResponseSuccessful(string $filename): void
+    {
+        try {
+            $this->assertResponse(
+                $this->client->getResponse(),
+                $filename,
+                Response::HTTP_OK,
+            );
+        } catch (\Exception $exception) {
+            throw new \JsonException("JSON string is not valid: {$exception->getMessage()}");
+        }
+    }
+
+    /**
+     * @throws \Exception
+     *
+     * @param array<array-key, mixed> $expectedViolations
+     */
     protected function assertResponseViolations(Response $response, array $expectedViolations): void
     {
         if (isset($_SERVER['OPEN_ERROR_IN_BROWSER']) && true === $_SERVER['OPEN_ERROR_IN_BROWSER']) {
@@ -71,6 +92,11 @@ abstract class JsonApiTestCase extends BaseJsonApiTestCase
         $this->assertJsonResponseViolations($response, $expectedViolations);
     }
 
+    /**
+     * @throws \Exception
+     *
+     * @param array<array-key, mixed> $expectedViolations
+     */
     protected function assertJsonResponseViolations(Response $response, array $expectedViolations): void
     {
         $responseContent = $response->getContent() ?: '';

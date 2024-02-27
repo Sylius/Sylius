@@ -48,11 +48,7 @@ final class OrdersTest extends JsonApiTestCase
             server: $this->buildHeaders('api@example.com'),
         );
 
-        $this->assertResponse(
-            $this->client->getResponse(),
-            'admin/order/get_all_orders_response',
-            Response::HTTP_OK,
-        );
+        $this->assertResponseSuccessful('admin/order/get_all_orders_response');
     }
 
     /** @test */
@@ -74,11 +70,7 @@ final class OrdersTest extends JsonApiTestCase
             server: $this->buildHeaders('api@example.com'),
         );
 
-        $this->assertResponse(
-            $this->client->getResponse(),
-            'admin/order/get_orders_filtered_by_channel_response',
-            Response::HTTP_OK,
-        );
+        $this->assertResponseSuccessful('admin/order/get_orders_filtered_by_channel_response');
     }
 
     /** @test */
@@ -93,28 +85,13 @@ final class OrdersTest extends JsonApiTestCase
         ]);
 
         $this->getOrdersByCurrencyCodes('PLN');
-
-        $this->assertResponse(
-            $this->client->getResponse(),
-            'admin/order/get_orders_filtered_by_pln_currency_code_response',
-            Response::HTTP_OK,
-        );
+        $this->assertResponseSuccessful('admin/order/get_orders_filtered_by_pln_currency_code_response');
 
         $this->getOrdersByCurrencyCodes('USD');
-
-        $this->assertResponse(
-            $this->client->getResponse(),
-            'admin/order/get_orders_filtered_by_usd_currency_code_response',
-            Response::HTTP_OK,
-        );
+        $this->assertResponseSuccessful('admin/order/get_orders_filtered_by_usd_currency_code_response');
 
         $this->getOrdersByCurrencyCodes('PLN', 'USD');
-
-        $this->assertResponse(
-            $this->client->getResponse(),
-            'admin/order/get_orders_filtered_by_pln_and_usd_currency_codes_response',
-            Response::HTTP_OK,
-        );
+        $this->assertResponseSuccessful('admin/order/get_orders_filtered_by_pln_and_usd_currency_codes_response');
     }
 
     /** @test */
@@ -132,8 +109,7 @@ final class OrdersTest extends JsonApiTestCase
             server: $this->buildHeaders('api@example.com'),
         );
 
-        $response = $this->client->getResponse();
-        $this->assertResponse($response, 'admin/order/get_order_response', Response::HTTP_OK);
+        $this->assertResponseSuccessful('admin/order/get_order_response');
     }
 
     /** @test */
@@ -147,9 +123,8 @@ final class OrdersTest extends JsonApiTestCase
         $this->placeOrder($tokenValue);
 
         $this->client->request(method: 'GET', uri: '/api/v2/admin/orders/nAWw2jewpA/adjustments', server: $header);
-        $response = $this->client->getResponse();
 
-        $this->assertResponse($response, 'admin/order/get_adjustments_for_a_given_order_response', Response::HTTP_OK);
+        $this->assertResponseSuccessful('admin/order/get_adjustments_for_a_given_order_response');
     }
 
     /** @test */
@@ -171,11 +146,7 @@ final class OrdersTest extends JsonApiTestCase
             server: $this->buildHeaders('api@example.com'),
         );
 
-        $this->assertResponse(
-            $this->client->getResponse(),
-            'admin/order/gets_orders_for_customer_response',
-            Response::HTTP_OK,
-        );
+        $this->assertResponseSuccessful('admin/order/gets_orders_for_customer_response');
     }
 
     /** @test */
@@ -197,11 +168,7 @@ final class OrdersTest extends JsonApiTestCase
             server: $this->buildHeaders('api@example.com'),
         );
 
-        $this->assertResponse(
-            $this->client->getResponse(),
-            'admin/order/get_billing_address_of_placed_order_response',
-            Response::HTTP_OK,
-        );
+        $this->assertResponseSuccessful('admin/order/get_billing_address_of_placed_order_response');
     }
 
     /** @test */
@@ -235,11 +202,7 @@ final class OrdersTest extends JsonApiTestCase
             ]),
         );
 
-        $this->assertResponse(
-            $this->client->getResponse(),
-            'admin/order/put_billing_address_of_placed_order_response',
-            Response::HTTP_OK,
-        );
+        $this->assertResponseSuccessful('admin/order/put_billing_address_of_placed_order_response');
     }
 
     /** @test */
@@ -296,11 +259,7 @@ final class OrdersTest extends JsonApiTestCase
             server: $this->buildHeaders('api@example.com'),
         );
 
-        $this->assertResponse(
-            $this->client->getResponse(),
-            'admin/order/get_shipping_address_of_placed_order_response',
-            Response::HTTP_OK,
-        );
+        $this->assertResponseSuccessful('admin/order/get_shipping_address_of_placed_order_response');
     }
 
     /** @test */
@@ -334,11 +293,7 @@ final class OrdersTest extends JsonApiTestCase
             ]),
         );
 
-        $this->assertResponse(
-            $this->client->getResponse(),
-            'admin/order/put_shipping_address_of_placed_order_response',
-            Response::HTTP_OK,
-        );
+        $this->assertResponseSuccessful('admin/order/put_shipping_address_of_placed_order_response');
     }
 
     /** @test */
@@ -433,7 +388,7 @@ final class OrdersTest extends JsonApiTestCase
             content: json_encode([]),
         );
 
-        $this->assertResponse($this->client->getResponse(), 'admin/order/get_payments_of_order_response', Response::HTTP_OK);
+        $this->assertResponseSuccessful('admin/order/get_payments_of_order_response');
     }
 
     /** @test */
