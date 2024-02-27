@@ -11,7 +11,6 @@
     "paymentState": "cart",
     "shippingState": "cart",
     "tokenValue": @string@,
-    "id": @integer@,
     "items": [],
     "itemsTotal": 0,
     "total": 0,
