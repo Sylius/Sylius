@@ -16,10 +16,7 @@ namespace Sylius\Tests\Api\Utils;
 enum FilterTypes: string
 {
     case Before = 'before';
-
     case StrictlyBefore = 'strictly_before';
-
     case After = 'after';
-
     case StrictlyAfter = 'strictly_after';
 }

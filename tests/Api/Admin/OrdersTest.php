@@ -65,7 +65,7 @@ final class OrdersTest extends JsonApiTestCase
 
         $this->requestGet(
             uri: '/api/v2/admin/orders',
-            queryParameters: ['channel.code' => (string) $channel->getCode()],
+            queryParameters: ['channel.code' => $channel->getCode()],
         );
 
         $this->assertResponseSuccessful('admin/order/get_orders_filtered_by_channel_response');
@@ -164,7 +164,7 @@ final class OrdersTest extends JsonApiTestCase
         yield 'checkoutCompletedBefore' => [
             'tokenValue' => 'firstOrderToken',
             'checkoutsCompletedAt' => [
-                '2024-01-01T00:00:00+00:00'
+                '2024-01-01T00:00:00+00:00',
             ],
             'requestedLimit' => [
                 'filterType' => FilterTypes::Before,
@@ -176,7 +176,7 @@ final class OrdersTest extends JsonApiTestCase
         yield 'checkoutCompletedStrictlyBefore' => [
             'tokenValue' => 'firstOrderToken',
             'checkoutsCompletedAt' => [
-                '2024-01-01T00:00:00+00:00'
+                '2024-01-01T00:00:00+00:00',
             ],
             'requestedLimit' => [
                 'filterType' => FilterTypes::StrictlyBefore,

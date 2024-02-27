@@ -30,9 +30,7 @@ abstract class JsonApiTestCase extends BaseJsonApiTestCase
 
     private bool $isAdminContext = false;
 
-    /**
-     * @var array <string, string>
-     */
+    /** @var array <string, string> */
     private array $defaultGetHeaders = [];
 
     /**
