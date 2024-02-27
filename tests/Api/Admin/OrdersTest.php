@@ -89,7 +89,7 @@ final class OrdersTest extends JsonApiTestCase
             'channel.yaml',
             'order/customer.yaml',
             'order/new.yaml',
-            'order/new_in_polish_currency.yaml',
+            'order/new_in_different_currencies.yaml',
         ]);
 
         $this->getOrdersByCurrencyCodes('PLN');
@@ -105,6 +105,14 @@ final class OrdersTest extends JsonApiTestCase
         $this->assertResponse(
             $this->client->getResponse(),
             'admin/order/get_orders_filtered_by_usd_currency_code_response',
+            Response::HTTP_OK,
+        );
+
+        $this->getOrdersByCurrencyCodes('PLN', 'USD');
+
+        $this->assertResponse(
+            $this->client->getResponse(),
+            'admin/order/get_orders_filtered_by_pln_and_usd_currency_codes_response',
             Response::HTTP_OK,
         );
     }
