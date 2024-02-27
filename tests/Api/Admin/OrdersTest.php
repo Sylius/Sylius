@@ -17,6 +17,7 @@ use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Tests\Api\JsonApiTestCase;
 use Sylius\Tests\Api\Utils\OrderPlacerTrait;
+use Symfony\Component\DomCrawler\Crawler;
 use Symfony\Component\HttpFoundation\Response;
 use Webmozart\Assert\Assert;
 
@@ -76,6 +77,34 @@ final class OrdersTest extends JsonApiTestCase
         $this->assertResponse(
             $this->client->getResponse(),
             'admin/order/get_orders_filtered_by_channel_response',
+            Response::HTTP_OK,
+        );
+    }
+
+    /** @test */
+    public function it_gets_orders_filtered_by_different_currencies(): void
+    {
+        $this->loadFixturesFromFiles([
+            'authentication/api_administrator.yaml',
+            'channel.yaml',
+            'order/customer.yaml',
+            'order/new.yaml',
+            'order/new_in_polish_currency.yaml',
+        ]);
+
+        $this->getOrdersByCurrencyCodes('PLN');
+
+        $this->assertResponse(
+            $this->client->getResponse(),
+            'admin/order/get_orders_filtered_by_pln_currency_code_response',
+            Response::HTTP_OK,
+        );
+
+        $this->getOrdersByCurrencyCodes('USD');
+
+        $this->assertResponse(
+            $this->client->getResponse(),
+            'admin/order/get_orders_filtered_by_usd_currency_code_response',
             Response::HTTP_OK,
         );
     }
@@ -428,5 +457,16 @@ final class OrdersTest extends JsonApiTestCase
             ->withAdminUserAuthorization($adminEmail)
             ->build()
         ;
+    }
+
+    private function getOrdersByCurrencyCodes(string ...$currencyCodes): Crawler
+    {
+        $queryString = http_build_query(['currencyCode' => $currencyCodes]);
+
+        return $this->client->request(
+            method: 'GET',
+            uri: '/api/v2/admin/orders?' . $queryString,
+            server: $this->buildHeaders('api@example.com'),
+        );
     }
 }
