@@ -14,8 +14,10 @@ declare(strict_types=1);
 namespace Sylius\Tests\Api\Admin;
 
 use Sylius\Component\Core\Model\AddressInterface;
+use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Tests\Api\JsonApiTestCase;
+use Sylius\Tests\Api\Utils\FilterTypes;
 use Sylius\Tests\Api\Utils\OrderPlacerTrait;
 use Symfony\Component\HttpFoundation\Response;
 use Webmozart\Assert\Assert;
@@ -58,11 +60,12 @@ final class OrdersTest extends JsonApiTestCase
             'order/new.yaml',
         ]);
 
+        /** @var ChannelInterface $channel */
         $channel = $fixtures['channel_mobile'];
 
         $this->requestGet(
             uri: '/api/v2/admin/orders',
-            queryParameters: ['channel.code' => $channel->getCode()],
+            queryParameters: ['channel.code' => (string) $channel->getCode()],
         );
 
         $this->assertResponseSuccessful('admin/order/get_orders_filtered_by_channel_response');
@@ -117,6 +120,58 @@ final class OrdersTest extends JsonApiTestCase
         );
 
         $this->assertResponseSuccessful('admin/order/gets_orders_for_customer_response');
+    }
+
+    /**
+     * @test
+     *
+     * @dataProvider provideOrderFilterDates
+     */
+    public function it_gets_orders_by_period(
+        string $tokenValue,
+        array $checkoutsCompletedAt,
+        array $requestedLimit,
+        string $filename,
+    ): void {
+        $this->loadFixturesFromFiles([
+            'authentication/api_administrator.yaml',
+            'cart.yaml',
+            'channel.yaml',
+            'order/customer.yaml',
+            'payment_method.yaml',
+            'shipping_method.yaml',
+        ]);
+
+        foreach ($checkoutsCompletedAt as $checkoutCompletedAt) {
+            $this->placeOrder(
+                tokenValue: $tokenValue,
+                checkoutCompletedAt: new \DateTimeImmutable($checkoutCompletedAt),
+            );
+        }
+
+        $checkoutCompletedAt = sprintf('checkoutCompletedAt[%s]', $requestedLimit['filterType']->value);
+
+        $this->requestGet(
+            uri: '/api/v2/admin/orders',
+            queryParameters: [$checkoutCompletedAt => $requestedLimit['date']],
+        );
+
+        $this->assertResponseSuccessful($filename);
+    }
+
+    private function provideOrderFilterDates(): iterable
+    {
+        yield 'checkoutCompletedBefore' => [
+            'tokenValue' => 'firstOrderToken',
+            'checkoutsCompletedAt' => [
+                '2024-01-01T00:00:00+00:00'
+            ],
+            'requestedLimit' => [
+                'filterType' => FilterTypes::Before,
+                'date' => '2024-01-01T00:00:00+00:00',
+            ],
+            'filename' => 'admin/order/get_orders_before_date_response',
+        ];
     }
 
     /** @test */

@@ -84,7 +84,7 @@ abstract class JsonApiTestCase extends BaseJsonApiTestCase
     }
 
     /**
-     * @param array<string, string[]> $queryParameters
+     * @param array<string, array<string>|string> $queryParameters
      * @param array<string, string> $headers
      */
     protected function requestGet(string $uri, array $queryParameters = [], array $headers = []): Crawler

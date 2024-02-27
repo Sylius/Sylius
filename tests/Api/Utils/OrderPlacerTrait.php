@@ -99,6 +99,8 @@ trait OrderPlacerTrait
 
         $order = $this->dispatchCompleteOrderCommand($tokenValue);
 
+        $this->setCheckoutCompletedAt($order, $checkoutCompletedAt);
+
         return $order;
     }
 
