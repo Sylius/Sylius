@@ -16,6 +16,7 @@ namespace Sylius\Tests\Api;
 use ApiTestCase\JsonApiTestCase as BaseJsonApiTestCase;
 use Sylius\Tests\Api\Utils\AdminUserLoginTrait;
 use Sylius\Tests\Api\Utils\HeadersBuilder;
+use Symfony\Component\DomCrawler\Crawler;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -62,18 +63,31 @@ abstract class JsonApiTestCase extends BaseJsonApiTestCase
         );
     }
 
-    /** @throws \JsonException */
+    /**
+     * @param array<string, string[]> $queryParameters
+     * @param array<string, string> $headers
+     */
+    protected function requestGet(string $uri, ?array $queryParameters = null, ?array $headers = null): Crawler
+    {
+        $queryStrings = null !== $queryParameters ? http_build_query($queryParameters) : '';
+
+        $uri = $queryStrings ? $uri . '?' . $queryStrings : $uri;
+
+        return $this->client->request(
+            method: 'GET',
+            uri: $uri,
+            server: $headers,
+        );
+    }
+
+    /** @throws \Exception */
     protected function assertResponseSuccessful(string $filename): void
     {
-        try {
-            $this->assertResponse(
-                $this->client->getResponse(),
-                $filename,
-                Response::HTTP_OK,
-            );
-        } catch (\Exception $exception) {
-            throw new \JsonException("JSON string is not valid: {$exception->getMessage()}");
-        }
+        $this->assertResponse(
+            $this->client->getResponse(),
+            $filename,
+            Response::HTTP_OK,
+        );
     }
 
     /**

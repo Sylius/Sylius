@@ -17,7 +17,6 @@ use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Tests\Api\JsonApiTestCase;
 use Sylius\Tests\Api\Utils\OrderPlacerTrait;
-use Symfony\Component\DomCrawler\Crawler;
 use Symfony\Component\HttpFoundation\Response;
 use Webmozart\Assert\Assert;
 
@@ -42,11 +41,7 @@ final class OrdersTest extends JsonApiTestCase
             'order/new.yaml',
         ]);
 
-        $this->client->request(
-            method: 'GET',
-            uri: '/api/v2/admin/orders',
-            server: $this->buildHeaders('api@example.com'),
-        );
+        $this->requestGet(uri: '/api/v2/admin/orders', headers: $this->buildHeaders('api@example.com'));
 
         $this->assertResponseSuccessful('admin/order/get_all_orders_response');
     }
@@ -63,11 +58,10 @@ final class OrdersTest extends JsonApiTestCase
 
         $channel = $fixtures['channel_mobile'];
 
-        $this->client->request(
-            method: 'GET',
+        $this->requestGet(
             uri: '/api/v2/admin/orders',
-            parameters: ['channel.code' => $channel->getCode()],
-            server: $this->buildHeaders('api@example.com'),
+            queryParameters: ['channel.code' => $channel->getCode()],
+            headers: $this->buildHeaders('api@example.com'),
         );
 
         $this->assertResponseSuccessful('admin/order/get_orders_filtered_by_channel_response');
@@ -84,13 +78,25 @@ final class OrdersTest extends JsonApiTestCase
             'order/new_in_different_currencies.yaml',
         ]);
 
-        $this->getOrdersByCurrencyCodes('PLN');
+        $this->requestGet(
+            uri: '/api/v2/admin/orders',
+            queryParameters: ['currencyCode' => ['PLN']],
+            headers: $this->buildHeaders('api@example.com'),
+        );
         $this->assertResponseSuccessful('admin/order/get_orders_filtered_by_pln_currency_code_response');
 
-        $this->getOrdersByCurrencyCodes('USD');
+        $this->requestGet(
+            uri: '/api/v2/admin/orders',
+            queryParameters: ['currencyCode' => ['USD']],
+            headers: $this->buildHeaders('api@example.com'),
+        );
         $this->assertResponseSuccessful('admin/order/get_orders_filtered_by_usd_currency_code_response');
 
-        $this->getOrdersByCurrencyCodes('PLN', 'USD');
+        $this->requestGet(
+            uri: '/api/v2/admin/orders',
+            queryParameters: ['currencyCode' => ['PLN', 'USD']],
+            headers: $this->buildHeaders('api@example.com'),
+        );
         $this->assertResponseSuccessful('admin/order/get_orders_filtered_by_pln_and_usd_currency_codes_response');
     }
 
@@ -103,10 +109,9 @@ final class OrdersTest extends JsonApiTestCase
 
         $this->placeOrder($tokenValue);
 
-        $this->client->request(
-            method: 'GET',
+        $this->requestGet(
             uri: '/api/v2/admin/orders/' . $tokenValue,
-            server: $this->buildHeaders('api@example.com'),
+            headers: $this->buildHeaders('api@example.com'),
         );
 
         $this->assertResponseSuccessful('admin/order/get_order_response');
@@ -122,7 +127,7 @@ final class OrdersTest extends JsonApiTestCase
 
         $this->placeOrder($tokenValue);
 
-        $this->client->request(method: 'GET', uri: '/api/v2/admin/orders/nAWw2jewpA/adjustments', server: $header);
+        $this->requestGet(uri: '/api/v2/admin/orders/nAWw2jewpA/adjustments', headers: $header);
 
         $this->assertResponseSuccessful('admin/order/get_adjustments_for_a_given_order_response');
     }
@@ -140,10 +145,10 @@ final class OrdersTest extends JsonApiTestCase
         /** @var CustomerInterface $customer */
         $customer = $fixtures['customer_tony'];
 
-        $this->client->request(
-            method: 'GET',
-            uri: '/api/v2/admin/orders?customer.id=' . $customer->getId(),
-            server: $this->buildHeaders('api@example.com'),
+        $this->requestGet(
+            uri: '/api/v2/admin/orders',
+            queryParameters: ['customer.id' => $customer->getId()],
+            headers: $this->buildHeaders('api@example.com'),
         );
 
         $this->assertResponseSuccessful('admin/order/gets_orders_for_customer_response');
@@ -404,10 +409,9 @@ final class OrdersTest extends JsonApiTestCase
             method: 'GET',
             uri: sprintf('/api/v2/admin/orders/%s/shipments', $tokenValue),
             server: $this->buildHeaders('api@example.com'),
-            content: json_encode([]),
         );
 
-        $this->assertResponse($this->client->getResponse(), 'admin/order/get_shipments_of_order_response', Response::HTTP_OK);
+        $this->assertResponseSuccessful('admin/order/get_shipments_of_order_response');
     }
 
     /** @return array<string, string> */
@@ -418,18 +422,6 @@ final class OrdersTest extends JsonApiTestCase
             ->withJsonLdContentType()
             ->withJsonLdAccept()
             ->withAdminUserAuthorization($adminEmail)
-            ->build()
-        ;
-    }
-
-    private function getOrdersByCurrencyCodes(string ...$currencyCodes): Crawler
-    {
-        $queryString = http_build_query(['currencyCode' => $currencyCodes]);
-
-        return $this->client->request(
-            method: 'GET',
-            uri: '/api/v2/admin/orders?' . $queryString,
-            server: $this->buildHeaders('api@example.com'),
-        );
+            ->build();
     }
 }
