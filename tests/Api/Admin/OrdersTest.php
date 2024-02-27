@@ -27,6 +27,8 @@ final class OrdersTest extends JsonApiTestCase
     protected function setUp(): void
     {
         $this->setUpOrderPlacer();
+        $this->setUpAdminContext();
+        $this->setUpDefaultHeaders();
 
         parent::setUp();
     }
@@ -41,7 +43,7 @@ final class OrdersTest extends JsonApiTestCase
             'order/new.yaml',
         ]);
 
-        $this->requestGet(uri: '/api/v2/admin/orders', headers: $this->buildHeaders('api@example.com'));
+        $this->requestGet(uri: '/api/v2/admin/orders');
 
         $this->assertResponseSuccessful('admin/order/get_all_orders_response');
     }
@@ -61,7 +63,6 @@ final class OrdersTest extends JsonApiTestCase
         $this->requestGet(
             uri: '/api/v2/admin/orders',
             queryParameters: ['channel.code' => $channel->getCode()],
-            headers: $this->buildHeaders('api@example.com'),
         );
 
         $this->assertResponseSuccessful('admin/order/get_orders_filtered_by_channel_response');
@@ -81,21 +82,18 @@ final class OrdersTest extends JsonApiTestCase
         $this->requestGet(
             uri: '/api/v2/admin/orders',
             queryParameters: ['currencyCode' => ['PLN']],
-            headers: $this->buildHeaders('api@example.com'),
         );
         $this->assertResponseSuccessful('admin/order/get_orders_filtered_by_pln_currency_code_response');
 
         $this->requestGet(
             uri: '/api/v2/admin/orders',
             queryParameters: ['currencyCode' => ['USD']],
-            headers: $this->buildHeaders('api@example.com'),
         );
         $this->assertResponseSuccessful('admin/order/get_orders_filtered_by_usd_currency_code_response');
 
         $this->requestGet(
             uri: '/api/v2/admin/orders',
             queryParameters: ['currencyCode' => ['PLN', 'USD']],
-            headers: $this->buildHeaders('api@example.com'),
         );
         $this->assertResponseSuccessful('admin/order/get_orders_filtered_by_pln_and_usd_currency_codes_response');
     }
@@ -116,7 +114,6 @@ final class OrdersTest extends JsonApiTestCase
         $this->requestGet(
             uri: '/api/v2/admin/orders',
             queryParameters: ['customer.id' => $customer->getId()],
-            headers: $this->buildHeaders('api@example.com'),
         );
 
         $this->assertResponseSuccessful('admin/order/gets_orders_for_customer_response');
@@ -131,10 +128,7 @@ final class OrdersTest extends JsonApiTestCase
 
         $this->placeOrder($tokenValue);
 
-        $this->requestGet(
-            uri: '/api/v2/admin/orders/' . $tokenValue,
-            headers: $this->buildHeaders('api@example.com'),
-        );
+        $this->requestGet(uri: '/api/v2/admin/orders/' . $tokenValue);
 
         $this->assertResponseSuccessful('admin/order/get_order_response');
     }
@@ -143,13 +137,12 @@ final class OrdersTest extends JsonApiTestCase
     public function it_gets_adjustments_for_order(): void
     {
         $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel.yaml', 'cart.yaml', 'country.yaml', 'shipping_method.yaml', 'payment_method.yaml']);
-        $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
 
         $tokenValue = 'nAWw2jewpA';
 
         $this->placeOrder($tokenValue);
 
-        $this->requestGet(uri: '/api/v2/admin/orders/nAWw2jewpA/adjustments', headers: $header);
+        $this->requestGet(uri: '/api/v2/admin/orders/nAWw2jewpA/adjustments');
 
         $this->assertResponseSuccessful('admin/order/get_adjustments_for_a_given_order_response');
     }
@@ -167,11 +160,7 @@ final class OrdersTest extends JsonApiTestCase
         /** @var AddressInterface $billingAddress */
         $billingAddress = $fixtures['first_order_billing_address'];
 
-        $this->client->request(
-            method: 'GET',
-            uri: '/api/v2/admin/addresses/' . $billingAddress->getId(),
-            server: $this->buildHeaders('api@example.com'),
-        );
+        $this->requestGet(uri: '/api/v2/admin/addresses/' . $billingAddress->getId());
 
         $this->assertResponseSuccessful('admin/order/get_billing_address_of_placed_order_response');
     }
@@ -258,11 +247,7 @@ final class OrdersTest extends JsonApiTestCase
         /** @var AddressInterface $shippingAddress */
         $shippingAddress = $fixtures['first_order_shipping_address'];
 
-        $this->client->request(
-            method: 'GET',
-            uri: '/api/v2/admin/addresses/' . $shippingAddress->getId(),
-            server: $this->buildHeaders('api@example.com'),
-        );
+        $this->requestGet(uri: '/api/v2/admin/addresses/' . $shippingAddress->getId());
 
         $this->assertResponseSuccessful('admin/order/get_shipping_address_of_placed_order_response');
     }
@@ -386,12 +371,7 @@ final class OrdersTest extends JsonApiTestCase
 
         $this->placeOrder($tokenValue);
 
-        $this->client->request(
-            method: 'GET',
-            uri: sprintf('/api/v2/admin/orders/%s/payments', $tokenValue),
-            server: $this->buildHeaders('api@example.com'),
-            content: json_encode([]),
-        );
+        $this->requestGet(uri: sprintf('/api/v2/admin/orders/%s/payments', $tokenValue));
 
         $this->assertResponseSuccessful('admin/order/get_payments_of_order_response');
     }
@@ -405,11 +385,7 @@ final class OrdersTest extends JsonApiTestCase
 
         $this->placeOrder($tokenValue);
 
-        $this->client->request(
-            method: 'GET',
-            uri: sprintf('/api/v2/admin/orders/%s/shipments', $tokenValue),
-            server: $this->buildHeaders('api@example.com'),
-        );
+        $this->requestGet(uri: sprintf('/api/v2/admin/orders/%s/shipments', $tokenValue));
 
         $this->assertResponseSuccessful('admin/order/get_shipments_of_order_response');
     }

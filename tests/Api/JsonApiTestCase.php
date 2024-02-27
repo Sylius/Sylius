@@ -28,6 +28,13 @@ abstract class JsonApiTestCase extends BaseJsonApiTestCase
 
     public const PATCH_CONTENT_TYPE_HEADER = ['CONTENT_TYPE' => 'application/merge-patch+json', 'HTTP_ACCEPT' => 'application/ld+json'];
 
+    private bool $isAdminContext = false;
+
+    /**
+     * @var array <string, string>
+     */
+    private array $defaultGetHeaders = [];
+
     /**
      * @param array<array-key, mixed> $data
      */
@@ -37,6 +44,19 @@ abstract class JsonApiTestCase extends BaseJsonApiTestCase
 
         $this->dataFixturesPath = __DIR__ . '/DataFixtures/ORM';
         $this->expectedResponsesPath = __DIR__ . '/Responses';
+    }
+
+    protected function setUpAdminContext(): void
+    {
+        $this->isAdminContext = true;
+    }
+
+    protected function setUpDefaultHeaders(): void
+    {
+        $this->defaultGetHeaders = [
+            'HTTP_ACCEPT' => 'application/ld+json',
+            'CONTENT_TYPE' => 'application/ld+json',
+        ];
     }
 
     protected function get(string $id): ?object
@@ -67,9 +87,17 @@ abstract class JsonApiTestCase extends BaseJsonApiTestCase
      * @param array<string, string[]> $queryParameters
      * @param array<string, string> $headers
      */
-    protected function requestGet(string $uri, ?array $queryParameters = null, ?array $headers = null): Crawler
+    protected function requestGet(string $uri, array $queryParameters = [], array $headers = []): Crawler
     {
-        $queryStrings = null !== $queryParameters ? http_build_query($queryParameters) : '';
+        if ($this->isAdminContext) {
+            $headers = array_merge($this->headerBuilder()->withAdminUserAuthorization('api@example.com')->build(), $headers);
+        }
+
+        if (!empty($this->defaultGetHeaders)) {
+            $headers = array_merge($this->defaultGetHeaders, $headers);
+        }
+
+        $queryStrings = empty($queryParameters) ? '' : http_build_query($queryParameters);
 
         $uri = $queryStrings ? $uri . '?' . $queryStrings : $uri;
 
