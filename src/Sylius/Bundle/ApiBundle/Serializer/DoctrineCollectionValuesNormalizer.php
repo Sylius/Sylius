@@ -18,11 +18,11 @@ use Symfony\Component\Serializer\Normalizer\ContextAwareNormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareTrait;
 
-final class DoctrineCollectionArrayValuesNormalizer implements ContextAwareNormalizerInterface, NormalizerAwareInterface
+final class DoctrineCollectionValuesNormalizer implements ContextAwareNormalizerInterface, NormalizerAwareInterface
 {
     use NormalizerAwareTrait;
 
-    private const NORMALIZATION_CONTEXT_KEY = 'collection_array_values';
+    private const NORMALIZATION_CONTEXT_KEY = 'collection_values';
 
     public function supportsNormalization(mixed $data, ?string $format = null, array $context = []): bool
     {

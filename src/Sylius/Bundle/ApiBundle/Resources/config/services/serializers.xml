@@ -148,7 +148,7 @@
             <tag name="serializer.normalizer" priority="96" />
         </service>
 
-        <service id="Sylius\Bundle\ApiBundle\Serializer\DoctrineCollectionArrayValuesNormalizer">
+        <service id="Sylius\Bundle\ApiBundle\Serializer\DoctrineCollectionValuesNormalizer">
             <tag name="serializer.normalizer" priority="64" />
         </service>
     </services>

@@ -19,30 +19,30 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\OrderInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
-final class DoctrineCollectionArrayValuesNormalizerSpec extends ObjectBehavior
+final class DoctrineCollectionValuesNormalizerSpec extends ObjectBehavior
 {
     function it_supports_only_doctrine_collection_with_normalization_context_key(
         OrderInterface $order,
         Collection $collection,
     ): void {
         $this->supportsNormalization($order)->shouldReturn(false);
-        $this->supportsNormalization($order, null, ['collection_array_values' => false])->shouldReturn(false);
-        $this->supportsNormalization($order, null, ['collection_array_values' => true])->shouldReturn(false);
+        $this->supportsNormalization($order, null, ['collection_values' => false])->shouldReturn(false);
+        $this->supportsNormalization($order, null, ['collection_values' => true])->shouldReturn(false);
 
         $this->supportsNormalization($collection)->shouldReturn(false);
-        $this->supportsNormalization($collection, null, ['collection_array_values' => false])->shouldReturn(false);
-        $this->supportsNormalization($collection, null, ['collection_array_values' => true])->shouldReturn(true);
+        $this->supportsNormalization($collection, null, ['collection_values' => false])->shouldReturn(false);
+        $this->supportsNormalization($collection, null, ['collection_values' => true])->shouldReturn(true);
     }
 
-    function it_normalizes_collection_with_array_values(
+    function it_normalizes_collection_values(
         NormalizerInterface $normalizer,
     ): void {
         $this->setNormalizer($normalizer);
 
         $collection = new ArrayCollection(['1' => ['id' => 1], '2' => ['id' => 2]]);
 
-        $this->normalize($collection, null, ['collection_array_values' => true]);
+        $this->normalize($collection, null, ['collection_values' => true]);
 
-        $normalizer->normalize([['id' => 1], ['id' => 2]], null, ['collection_array_values' => true])->shouldHaveBeenCalled();
+        $normalizer->normalize([['id' => 1], ['id' => 2]], null, ['collection_values' => true])->shouldHaveBeenCalled();
     }
 }

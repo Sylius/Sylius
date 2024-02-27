@@ -164,7 +164,7 @@
             <group>shop:product:show</group>
             <group>sylius:shop:product:show</group>
             <normalization_context>
-                <entry name="collection_array_values">true</entry>
+                <entry name="collection_values">true</entry>
             </normalization_context>
         </attribute>
         <attribute name="averageRating">
