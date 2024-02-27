@@ -172,6 +172,13 @@ Sylius\Component\Core\Model\ProductReview:
         author: '@customer'
         status: 'accepted'
         reviewSubject: '@product_mug'
+    product_review_3:
+        title: 'Bad mug'
+        rating: 1
+        comment: 'Bad mug'
+        author: '@customer'
+        status: 'rejected'
+        reviewSubject: '@product_mug'
 
 Sylius\Component\Core\Model\Customer:
     customer:
