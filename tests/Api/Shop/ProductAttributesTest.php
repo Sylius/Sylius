@@ -31,7 +31,7 @@ final class ProductAttributesTest extends JsonApiTestCase
 
         $this->assertResponse(
             $this->client->getResponse(),
-            'shop/product/get_product_attribute_with_default_locale_translation',
+            'shop/product_attribute/get_product_attribute_with_default_locale_translation',
             Response::HTTP_OK,
         );
     }
@@ -49,7 +49,7 @@ final class ProductAttributesTest extends JsonApiTestCase
 
         $this->assertResponse(
             $this->client->getResponse(),
-            'shop/product/get_product_attribute_with_pl_PL_locale_translation',
+            'shop/product_attribute/get_product_attribute_with_pl_PL_locale_translation',
             Response::HTTP_OK,
         );
     }
