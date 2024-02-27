@@ -172,6 +172,18 @@ final class OrdersTest extends JsonApiTestCase
             ],
             'filename' => 'admin/order/get_orders_before_date_response',
         ];
+
+        yield 'checkoutCompletedStrictlyBefore' => [
+            'tokenValue' => 'firstOrderToken',
+            'checkoutsCompletedAt' => [
+                '2024-01-01T00:00:00+00:00'
+            ],
+            'requestedLimit' => [
+                'filterType' => FilterTypes::StrictlyBefore,
+                'date' => '2024-01-01T00:00:00+00:00',
+            ],
+            'filename' => 'admin/order/get_orders_empty_collection_response',
+        ];
     }
 
     /** @test */
