@@ -33,7 +33,7 @@ final class ProductImagesTest extends JsonApiTestCase
         );
         $response = $this->client->getResponse();
 
-        $this->assertResponse($response, 'shop/product/get_product_image_response', Response::HTTP_OK);
+        $this->assertResponse($response, 'shop/product_image/get_product_image_response', Response::HTTP_OK);
     }
 
     /** @test */
@@ -51,6 +51,6 @@ final class ProductImagesTest extends JsonApiTestCase
         );
         $response = $this->client->getResponse();
 
-        $this->assertResponse($response, 'shop/product/get_filtered_product_image_response', Response::HTTP_OK);
+        $this->assertResponse($response, 'shop/product_image/get_filtered_product_image_response', Response::HTTP_OK);
     }
 }
