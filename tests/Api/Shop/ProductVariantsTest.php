@@ -33,7 +33,7 @@ final class ProductVariantsTest extends JsonApiTestCase
 
         $this->assertResponse(
             $response,
-            'shop/product/get_product_variant_with_original_price_response',
+            'shop/product_variant/get_product_variant_with_original_price_response',
             Response::HTTP_OK,
         );
     }
@@ -50,7 +50,7 @@ final class ProductVariantsTest extends JsonApiTestCase
         );
         $response = $this->client->getResponse();
 
-        $this->assertResponse($response, 'shop/product/get_product_variant_with_price_response', Response::HTTP_OK);
+        $this->assertResponse($response, 'shop/product_variant/get_product_variant_with_price_response', Response::HTTP_OK);
     }
 
     /** @test */
@@ -68,7 +68,7 @@ final class ProductVariantsTest extends JsonApiTestCase
 
         $this->assertResponse(
             $this->client->getResponse(),
-            'shop/product/get_product_variant_with_default_locale_translation',
+            'shop/product_variant/get_product_variant_with_default_locale_translation',
             Response::HTTP_OK,
         );
     }
@@ -102,7 +102,7 @@ final class ProductVariantsTest extends JsonApiTestCase
 
         $this->assertResponse(
             $response,
-            'shop/product/get_product_variants_response',
+            'shop/product_variant/get_product_variants_response',
             Response::HTTP_OK,
         );
     }
