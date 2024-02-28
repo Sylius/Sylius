@@ -25,8 +25,6 @@ final class PaymentRequestDuplicationChecker implements PaymentRequestDuplicatio
 
     public function hasDuplicates(PaymentRequestInterface $paymentRequest): bool
     {
-        $paymentRequests = $this->paymentRequestRepository->findOtherExisting($paymentRequest);
-
-        return count($paymentRequests) > 0;
+        return $this->paymentRequestRepository->duplicateExists($paymentRequest);
     }
 }
