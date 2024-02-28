@@ -44,17 +44,5 @@
         <service id="sylius.grid_filter.shop_string" class="Sylius\Component\Grid\Filter\StringFilter">
             <tag name="sylius.grid_filter" type="shop_string" form-type="Sylius\Bundle\GridBundle\Form\Type\Filter\StringFilterType" />
         </service>
-
-        <service id="Sylius\Bundle\ShopBundle\Form\Type\AddressType">
-            <argument>%sylius.model.address.class%</argument>
-            <argument>%sylius.form.type.address.validation_groups%</argument>
-            <argument type="service">
-                <service class="Sylius\Bundle\AddressingBundle\Form\EventListener\BuildAddressFormSubscriber">
-                    <argument type="service" id="sylius.repository.country" />
-                    <argument type="service" id="form.factory" />
-                </service>
-            </argument>
-            <tag name="form.type" />
-        </service>
     </services>
 </container>
