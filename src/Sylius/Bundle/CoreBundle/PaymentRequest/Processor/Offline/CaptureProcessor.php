@@ -15,14 +15,12 @@ namespace Sylius\Bundle\CoreBundle\PaymentRequest\Processor\Offline;
 
 use Sylius\Component\Payment\Model\PaymentInterface;
 use Sylius\Component\Payment\Model\PaymentRequestInterface;
-use Webmozart\Assert\Assert;
 
 final class CaptureProcessor implements CaptureProcessorInterface
 {
     public function process(PaymentRequestInterface $paymentRequest): void
     {
         $payment = $paymentRequest->getPayment();
-        Assert::notNull($payment);
 
         $responseData = $payment->getDetails();
         if (PaymentInterface::STATE_NEW === $payment->getState()) {

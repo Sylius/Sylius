@@ -34,15 +34,11 @@ final class PaymentRequestIntegrityChecker implements PaymentRequestIntegrityChe
         $paymentRequest = $this->paymentRequestRepository->findOneByHash($hash);
         Assert::notNull($paymentRequest, sprintf('Payment request (hash "%s") not found.', $hash));
 
-        /** @var PaymentMethodInterface|null $paymentMethod */
+        /** @var PaymentMethodInterface $paymentMethod */
         $paymentMethod = $paymentRequest->getMethod();
-        Assert::notNull($paymentMethod, 'Payment cannot be null.');
 
         $gatewayConfig = $paymentMethod->getGatewayConfig();
-        Assert::notNull($gatewayConfig, 'Payment method cannot be null.');
-
-        $payment = $paymentRequest->getPayment();
-        Assert::notNull($payment, 'Payment cannot be null.');
+        Assert::notNull($gatewayConfig, 'Gateway config cannot be null.');
 
         return $paymentRequest;
     }
