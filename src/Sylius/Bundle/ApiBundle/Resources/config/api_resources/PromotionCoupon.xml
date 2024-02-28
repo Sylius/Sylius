@@ -23,6 +23,7 @@
         <collectionOperations>
             <collectionOperation name="admin_get">
                 <attribute name="method">GET</attribute>
+                <attribute name="path">/promotion-coupons</attribute>
                 <attribute name="filters">
                     <attribute>sylius.api.promotion_coupon_order_filter</attribute>
                     <attribute>Sylius\Bundle\ApiBundle\Filter\Doctrine\PromotionCouponPromotionFilter</attribute>
@@ -40,6 +41,7 @@
 
             <collectionOperation name="admin_post">
                 <attribute name="method">POST</attribute>
+                <attribute name="path">/promotion-coupons</attribute>
                 <attribute name="normalization_context">
                     <attribute name="groups">
                         <attribute>admin:promotion_coupon:show</attribute>
@@ -81,6 +83,7 @@
         <itemOperations>
             <itemOperation name="admin_get">
                 <attribute name="method">GET</attribute>
+                <attribute name="path">/promotion-coupons/{code}</attribute>
                 <attribute name="normalization_context">
                     <attribute name="groups">
                         <attribute>admin:promotion_coupon:show</attribute>
@@ -91,6 +94,7 @@
 
             <itemOperation name="admin_put">
                 <attribute name="method">PUT</attribute>
+                <attribute name="path">/promotion-coupons/{code}</attribute>
                 <attribute name="normalization_context">
                     <attribute name="groups">
                         <attribute>admin:promotion_coupon:show</attribute>
@@ -107,6 +111,7 @@
 
             <itemOperation name="admin_delete">
                 <attribute name="method">DELETE</attribute>
+                <attribute name="path">/promotion-coupons/{code}</attribute>
             </itemOperation>
         </itemOperations>
 
