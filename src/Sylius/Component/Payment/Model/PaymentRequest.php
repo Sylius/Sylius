@@ -47,24 +47,9 @@ class PaymentRequest implements PaymentRequestInterface
         return $this->hash;
     }
 
-    public function getMethod(): PaymentMethodInterface
-    {
-        return $this->method;
-    }
-
-    public function setMethod(PaymentMethodInterface $method): void
-    {
-        $this->method = $method;
-    }
-
     public function getPayment(): PaymentInterface
     {
         return $this->payment;
-    }
-
-    public function setPayment(PaymentInterface $payment): void
-    {
-        $this->payment = $payment;
     }
 
     public function getState(): string
@@ -105,5 +90,20 @@ class PaymentRequest implements PaymentRequestInterface
     public function setResponseData(array $responseData): void
     {
         $this->responseData = $responseData;
+    }
+
+    public function setPayment(PaymentInterface $payment): void
+    {
+        $this->payment = $payment;
+    }
+
+    public function getMethod(): PaymentMethodInterface
+    {
+        return $this->method;
+    }
+
+    public function setMethod(PaymentMethodInterface $method): void
+    {
+        $this->method = $method;
     }
 }
