@@ -98,7 +98,6 @@ abstract class JsonApiTestCase extends BaseJsonApiTestCase
      */
     protected function requestGet(string $uri, array $queryParameters = [], array $headers = []): Crawler
     {
-
         if (!empty($this->defaultGetHeaders)) {
             $headers = array_merge($this->defaultGetHeaders, $headers);
         }
@@ -126,6 +125,16 @@ abstract class JsonApiTestCase extends BaseJsonApiTestCase
             $this->client->getResponse(),
             $filename,
             Response::HTTP_OK,
+        );
+    }
+
+    /** @throws \Exception */
+    protected function assertResponseUnprocessableEntity(string $filename): void
+    {
+        $this->assertResponse(
+            $this->client->getResponse(),
+            $filename,
+            Response::HTTP_UNPROCESSABLE_ENTITY,
         );
     }
 

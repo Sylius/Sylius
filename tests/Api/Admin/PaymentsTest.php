@@ -15,7 +15,6 @@ namespace Sylius\Tests\Api\Admin;
 
 use Sylius\Tests\Api\JsonApiTestCase;
 use Sylius\Tests\Api\Utils\OrderPlacerTrait;
-use Symfony\Component\HttpFoundation\Response;
 
 final class PaymentsTest extends JsonApiTestCase
 {
@@ -93,5 +92,27 @@ final class PaymentsTest extends JsonApiTestCase
         $this->requestPatch(uri: sprintf('/api/v2/admin/payments/%s/complete', $order->getPayments()->first()->getId()));
 
         $this->assertResponseSuccessful('admin/payment/patch_complete_payment_response');
+    }
+
+    /** @test */
+    public function it_does_not_complete_payment_if_it_is_not_in_the_new_state(): void
+    {
+        $this->setUpDefaultPatchHeaders();
+
+        $this->loadFixturesFromFiles([
+            'authentication/api_administrator.yaml',
+            'channel.yaml',
+            'cart.yaml',
+            'country.yaml',
+            'shipping_method.yaml',
+            'payment_method.yaml',
+        ]);
+
+        $order = $this->placeOrder('nAWw2jewpA');
+
+        $this->requestPatch(uri: sprintf('/api/v2/admin/payments/%s/complete', $order->getPayments()->first()->getId()));
+        $this->requestPatch(uri: sprintf('/api/v2/admin/payments/%s/complete', $order->getPayments()->first()->getId()));
+
+        $this->assertResponseUnprocessableEntity('admin/payment/patch_not_complete_payment_response');
     }
 }
