@@ -17,6 +17,8 @@ use Doctrine\Persistence\ObjectManager;
 use HWI\Bundle\OAuthBundle\Connect\AccountConnectorInterface;
 use HWI\Bundle\OAuthBundle\OAuth\Response\UserResponseInterface;
 use HWI\Bundle\OAuthBundle\Security\Core\User\OAuthAwareUserProviderInterface;
+use Sylius\Bundle\CoreBundle\Event\UserByOAuthResponseCreatedEvent;
+use Sylius\Bundle\CoreBundle\Event\UserByOAuthResponseUpdatedEvent;
 use Sylius\Bundle\UserBundle\Provider\UsernameOrEmailProvider as BaseUserProvider;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\ShopUserInterface as SyliusUserInterface;
@@ -27,6 +29,7 @@ use Sylius\Component\User\Canonicalizer\CanonicalizerInterface;
 use Sylius\Component\User\Model\UserOAuthInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
 use SyliusLabs\Polyfill\Symfony\Security\Core\Exception\UserNotFoundException;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Security\Core\User\UserInterface as SymfonyUserInterface;
 use Webmozart\Assert\Assert;
 
@@ -45,8 +48,21 @@ class UserProvider extends BaseUserProvider implements AccountConnectorInterface
         private ObjectManager $userManager,
         CanonicalizerInterface $canonicalizer,
         private CustomerRepositoryInterface $customerRepository,
+        private ?EventDispatcherInterface $eventDispatcher = null,
     ) {
         parent::__construct($supportedUserClass, $userRepository, $canonicalizer);
+        if ($this->eventDispatcher === null) {
+            trigger_deprecation(
+                'sylius/sylius',
+                '1.13',
+                sprintf(
+                    'Not passing an instance of %s as constructor argument for %s is deprecated as of Sylius 1.13 ' .
+                    'and will be required in 2.0.',
+                    EventDispatcherInterface::class,
+                    self::class
+                )
+            );
+        }
     }
 
     public function loadUserByOAuthUserResponse(UserResponseInterface $response): SymfonyUserInterface
@@ -66,10 +82,14 @@ class UserProvider extends BaseUserProvider implements AccountConnectorInterface
         if (null !== $response->getEmail()) {
             $user = $this->userRepository->findOneByEmail($response->getEmail());
             if ($user instanceof SymfonyUserInterface) {
-                return $this->updateUserByOAuthUserResponse($user, $response);
+                $user = $this->updateUserByOAuthUserResponse($user, $response);
+                $this->eventDispatcher->dispatch(new UserByOAuthResponseUpdatedEvent($user));
+                return $user;
             }
 
-            return $this->createUserByOAuthUserResponse($response);
+            $user = $this->createUserByOAuthUserResponse($response);
+            $this->eventDispatcher->dispatch(new UserByOAuthResponseCreatedEvent($user));
+            return $user;
         }
 
         /** @phpstan-ignore-next-line */

@@ -538,4 +538,7 @@ List of affected classes:
                     subject: 'Email address verification'
    ```
 
-1 Extracted the section responsible for the `ShopBundle` from `@SyliusCore/Email/accountVerification.html.twig` and relocated it to `@SyliusShop/Email/verification.html.twig`.
+1. Extracted the section responsible for the `ShopBundle` from `@SyliusCore/Email/accountVerification.html.twig` and relocated it to `@SyliusShop/Email/verification.html.twig`.
+
+1. Not passing an instance of `Symfony\Component\EventDispatcher\EventDispatcherInterface`
+   to `Sylius\Bundle\CoreBundle\OAuth\UserProvider` as the tenth argument is deprecated.
