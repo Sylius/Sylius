@@ -41,7 +41,7 @@ final class ProductAttributeAutocompleter implements OptionsAwareEntityAutocompl
      */
     public function createFilteredQueryBuilder(EntityRepository $repository, string $query): QueryBuilder
     {
-        $productAttributesToBeExcluded = $this->options['extra_options']['attributeCodes'];
+        $productAttributesToBeExcluded = $this->options['extra_options']['attributeCodes'] ?? [];
 
         $qb = $repository->createQueryBuilder('o');
 

@@ -59,6 +59,10 @@ final class ProductAttributeAutocompleteComponent
      */
     public function hydrateSelectedAttributeCodes(string $value): array
     {
+        if ('' === $value) {
+            return [];
+        }
+
         return explode(',', $value);
     }
 

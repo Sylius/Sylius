@@ -91,7 +91,7 @@ class CreateConfigurableProductPage extends BaseCreatePage implements CreateConf
     {
         return array_merge(
             parent::getDefinedElements(),
-                [
+            [
                 'attribute' => '.attribute',
                 'code' => '#sylius_product_code',
                 'images' => '#sylius_product_images',
