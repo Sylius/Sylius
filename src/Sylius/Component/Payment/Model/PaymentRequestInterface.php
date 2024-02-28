@@ -35,6 +35,8 @@ interface PaymentRequestInterface extends TimestampableInterface, ResourceInterf
 
     public const ACTION_REFUND = 'refund';
 
+    public const ACTION_CANCEL = 'cancel';
+
     public const ACTION_STATUS = 'status';
 
     public const ACTION_SYNC = 'sync';
