@@ -3,11 +3,15 @@ parameters:
     env(SYLIUS_MESSENGER_TRANSPORT_MAIN_FAILED_DSN): 'doctrine://default?queue_name=main_failed'
     env(SYLIUS_MESSENGER_TRANSPORT_CATALOG_PROMOTION_REMOVAL_DSN): 'doctrine://default?queue_name=catalog_promotion_removal'
     env(SYLIUS_MESSENGER_TRANSPORT_CATALOG_PROMOTION_REMOVAL_FAILED_DSN): 'doctrine://default?queue_name=catalog_promotion_removal_failed'
+    env(SYLIUS_MESSENGER_TRANSPORT_PAYMENT_REQUEST_DSN): 'doctrine://default?queue_name=payment_request'
+    env(SYLIUS_MESSENGER_TRANSPORT_PAYMENT_REQUEST_FAILED_DSN): 'doctrine://default?queue_name=payment_request_failed'
 
     sylius_messenger_transport_main_dsn: '%env(resolve:SYLIUS_MESSENGER_TRANSPORT_MAIN_DSN)%'
     sylius_messenger_transport_main_failed_dsn: '%env(resolve:SYLIUS_MESSENGER_TRANSPORT_MAIN_FAILED_DSN)%'
     sylius_messenger_transport_catalog_promotion_removal_dsn: '%env(resolve:SYLIUS_MESSENGER_TRANSPORT_CATALOG_PROMOTION_REMOVAL_DSN)%'
     sylius_messenger_transport_catalog_promotion_removal_failed_dsn: '%env(resolve:SYLIUS_MESSENGER_TRANSPORT_CATALOG_PROMOTION_REMOVAL_FAILED_DSN)%'
+    sylius_messenger_transport_payment_request_dsn: '%env(resolve:SYLIUS_MESSENGER_TRANSPORT_PAYMENT_REQUEST_DSN)%'
+    sylius_messenger_transport_payment_request_failed_dsn: '%env(resolve:SYLIUS_MESSENGER_TRANSPORT_PAYMENT_REQUEST_FAILED_DSN)%'
 
 framework:
     messenger:
@@ -22,11 +26,17 @@ framework:
                 failure_transport: 'catalog_promotion_removal_failed'
             catalog_promotion_removal_failed:
                 dsn: '%sylius_messenger_transport_catalog_promotion_removal_failed_dsn%'
+            payment_request:
+                dsn: '%sylius_messenger_transport_payment_request_dsn%'
+                failure_transport: 'payment_request_failed'
+            payment_request_failed:
+                dsn: '%sylius_messenger_transport_payment_request_failed_dsn%'
         reset_on_message: true
         routing:
             'Sylius\Bundle\CoreBundle\CatalogPromotion\Command\ApplyCatalogPromotionsOnVariants': main
             'Sylius\Bundle\CoreBundle\CatalogPromotion\Command\DisableCatalogPromotion': main
             'Sylius\Bundle\CoreBundle\CatalogPromotion\Command\RemoveCatalogPromotion': catalog_promotion_removal
+            'Sylius\Bundle\CoreBundle\PaymentRequest\Command\PaymentRequestHashAwareInterface': payment_request
             'Sylius\Bundle\CoreBundle\PriceHistory\Command\ApplyLowestPriceOnChannelPricings': main
             'Sylius\Component\Promotion\Event\CatalogPromotionCreated': main
             'Sylius\Component\Promotion\Event\CatalogPromotionEnded': main

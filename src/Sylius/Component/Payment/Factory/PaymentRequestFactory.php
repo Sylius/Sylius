@@ -17,7 +17,6 @@ use Sylius\Component\Payment\Model\PaymentInterface;
 use Sylius\Component\Payment\Model\PaymentMethodInterface;
 use Sylius\Component\Payment\Model\PaymentRequestInterface;
 use Sylius\Component\Resource\Exception\UnsupportedMethodException;
-use Webmozart\Assert\Assert;
 
 /**
  * @implements PaymentRequestFactoryInterface<PaymentRequestInterface>
