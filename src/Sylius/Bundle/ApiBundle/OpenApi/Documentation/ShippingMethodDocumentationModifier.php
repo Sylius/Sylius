@@ -19,7 +19,6 @@ use ApiPlatform\OpenApi\OpenApi;
 /** @experimental */
 final class ShippingMethodDocumentationModifier implements DocumentationModifierInterface
 {
-
     public const ROUTE_ADMIN_SHIPPING_METHODS = '/admin/shipping-methods';
 
     public const ROUTE_ADMIN_SHIPPING_METHOD = '/admin/shipping-methods/{code}';
@@ -31,7 +30,7 @@ final class ShippingMethodDocumentationModifier implements DocumentationModifier
     public function __construct(
         private string $apiRoute,
         private array $ruleTypes,
-        private array $shippingMethodCalculators
+        private array $shippingMethodCalculators,
     ) {
     }
 
