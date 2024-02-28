@@ -173,6 +173,25 @@ final class PaymentMethodsTest extends JsonApiTestCase
     }
 
     /** @test */
+    public function it_removes_a_payment_method(): void
+    {
+        $this->setUpAdminContext();
+
+        $fixtures = $this->loadFixturesFromFiles([
+            'authentication/api_administrator.yaml',
+            'channel.yaml',
+            'payment_method.yaml',
+        ]);
+
+        /** @var PaymentMethodInterface $paymentMethod */
+        $paymentMethod = $fixtures['payment_method_cash_on_delivery'];
+
+        $this->requestDelete(uri: '/api/v2/admin/payment-methods/'. $paymentMethod->getCode());
+
+        $this->assertResponseCode($this->client->getResponse(), Response::HTTP_NO_CONTENT);
+    }
+
+    /** @test */
     public function it_does_not_update_a_payment_method_with_duplicate_locale_translation(): void
     {
         $fixtures = $this->loadFixturesFromFiles([

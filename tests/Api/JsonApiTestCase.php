@@ -118,6 +118,15 @@ abstract class JsonApiTestCase extends BaseJsonApiTestCase
         return $this->request('PATCH', $uri, $queryParameters, $headers);
     }
 
+    /**
+     * @param array<string, array<string>|string> $queryParameters
+     * @param array<string, string> $headers
+     */
+    protected function requestDelete(string $uri, array $queryParameters = [], array $headers = []): Crawler
+    {
+        return $this->request('DELETE', $uri, $queryParameters, $headers);
+    }
+
     /** @throws \Exception */
     protected function assertResponseSuccessful(string $filename): void
     {
