@@ -90,14 +90,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
      */
     private function getOptionTextsFor(NodeElement $element): array
     {
-        $result = [];
-        $options = $element->findAll('css', 'option');
-
-        foreach ($options as $option) {
-            $result[] = $option->getText();
-        }
-
-        return $result;
+        return array_map(fn ($option) => $option->getText(), $element->findAll('css', 'option'));
     }
 
     protected function getDefinedElements(): array
