@@ -61,7 +61,7 @@ final class AddPaymentRequestHandler implements MessageHandlerInterface
             sprintf('Payment (id "%s") not found.', $addPaymentRequest->getPaymentId()),
         );
 
-        $paymentRequest = $this->paymentRequestFactory->createWithPaymentAndPaymentMethod($payment, $paymentMethod);
+        $paymentRequest = $this->paymentRequestFactory->create($payment, $paymentMethod);
         $paymentRequest->setAction($addPaymentRequest->getAction());
         $paymentRequest->setPayload($addPaymentRequest->getPayload());
 

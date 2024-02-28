@@ -16,39 +16,39 @@ namespace Sylius\Component\Payment\Factory;
 use Sylius\Component\Payment\Model\PaymentInterface;
 use Sylius\Component\Payment\Model\PaymentMethodInterface;
 use Sylius\Component\Payment\Model\PaymentRequestInterface;
-use Sylius\Component\Resource\Factory\FactoryInterface;
+use Sylius\Component\Resource\Exception\UnsupportedMethodException;
+use Webmozart\Assert\Assert;
 
 /**
  * @implements PaymentRequestFactoryInterface<PaymentRequestInterface>
  */
 final class PaymentRequestFactory implements PaymentRequestFactoryInterface
 {
-    public function __construct(private FactoryInterface $factory)
+    public function __construct(private string $className)
     {
+        if (!is_a($className, PaymentRequestInterface::class, true)) {
+            throw new \DomainException(sprintf(
+                'This factory requires %s or its descend to be used as resource',
+                PaymentRequestInterface::class,
+            ));
+        }
     }
 
-    public function createNew(): PaymentRequestInterface
+    /**
+     * @throws UnsupportedMethodException
+     */
+    public function createNew(): object
     {
-        return $this->factory->createNew();
+        throw new UnsupportedMethodException('createNew');
     }
 
-    public function createWithPaymentAndPaymentMethod(PaymentInterface $payment, PaymentMethodInterface $paymentMethod): PaymentRequestInterface
+    public function create(PaymentInterface $payment, PaymentMethodInterface $paymentMethod): PaymentRequestInterface
     {
-        $paymentRequest = $this->createNew();
-
-        $paymentRequest->setPayment($payment);
-        $paymentRequest->setMethod($paymentMethod);
-
-        return $paymentRequest;
+        return new $this->className($payment, $paymentMethod);
     }
 
     public function createFromPaymentRequest(PaymentRequestInterface $paymentRequest): PaymentRequestInterface
     {
-        $newPaymentRequest = $this->createNew();
-
-        $newPaymentRequest->setPayment($paymentRequest->getPayment());
-        $newPaymentRequest->setMethod($paymentRequest->getMethod());
-
-        return $newPaymentRequest;
+        return $this->create($paymentRequest->getPayment(), $paymentRequest->getMethod());
     }
 }

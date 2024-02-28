@@ -22,10 +22,6 @@ class PaymentRequest implements PaymentRequestInterface
 
     protected ?Uuid $hash = null;
 
-    protected ?PaymentMethodInterface $method = null;
-
-    protected ?PaymentInterface $payment = null;
-
     protected string $state = PaymentRequestInterface::STATE_NEW;
 
     protected string $action = PaymentRequestInterface::ACTION_CAPTURE;
@@ -34,8 +30,10 @@ class PaymentRequest implements PaymentRequestInterface
 
     protected array $responseData = [];
 
-    public function __construct()
-    {
+    public function __construct(
+        protected PaymentInterface $payment,
+        protected PaymentMethodInterface $method,
+    ) {
         $this->createdAt = new \DateTime();
     }
 
@@ -49,22 +47,22 @@ class PaymentRequest implements PaymentRequestInterface
         return $this->hash;
     }
 
-    public function getMethod(): ?PaymentMethodInterface
+    public function getMethod(): PaymentMethodInterface
     {
         return $this->method;
     }
 
-    public function setMethod(?PaymentMethodInterface $method): void
+    public function setMethod(PaymentMethodInterface $method): void
     {
         $this->method = $method;
     }
 
-    public function getPayment(): ?PaymentInterface
+    public function getPayment(): PaymentInterface
     {
         return $this->payment;
     }
 
-    public function setPayment(?PaymentInterface $payment): void
+    public function setPayment(PaymentInterface $payment): void
     {
         $this->payment = $payment;
     }

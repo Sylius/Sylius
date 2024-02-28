@@ -25,7 +25,7 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
  */
 interface PaymentRequestFactoryInterface extends FactoryInterface
 {
-    public function createWithPaymentAndPaymentMethod(PaymentInterface $payment, PaymentMethodInterface $paymentMethod): PaymentRequestInterface;
+    public function create(PaymentInterface $payment, PaymentMethodInterface $paymentMethod): PaymentRequestInterface;
 
     public function createFromPaymentRequest(PaymentRequestInterface $paymentRequest): PaymentRequestInterface;
 }

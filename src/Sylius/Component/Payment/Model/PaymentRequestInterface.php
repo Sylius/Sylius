@@ -43,13 +43,13 @@ interface PaymentRequestInterface extends TimestampableInterface, ResourceInterf
 
     public function getHash(): ?Uuid;
 
-    public function getMethod(): ?PaymentMethodInterface;
+    public function getMethod(): PaymentMethodInterface;
 
-    public function setMethod(?PaymentMethodInterface $method): void;
+    public function setMethod(PaymentMethodInterface $method): void;
 
-    public function getPayment(): ?PaymentInterface;
+    public function getPayment(): PaymentInterface;
 
-    public function setPayment(?PaymentInterface $payment): void;
+    public function setPayment(PaymentInterface $payment): void;
 
     public function getState(): string;
 

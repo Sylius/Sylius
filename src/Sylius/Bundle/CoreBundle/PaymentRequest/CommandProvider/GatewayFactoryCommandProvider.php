@@ -70,9 +70,8 @@ final class GatewayFactoryCommandProvider implements ServiceProviderAwareCommand
 
     private function getFactoryName(PaymentRequestInterface $paymentRequest): string
     {
-        /** @var PaymentMethodInterface|null $paymentMethod */
+        /** @var PaymentMethodInterface $paymentMethod */
         $paymentMethod = $paymentRequest->getMethod();
-        Assert::notNull($paymentMethod, 'Payment method cannot be null.');
 
         $factoryName = $this->gatewayFactoryNameProvider->provide($paymentMethod);
         Assert::notNull($factoryName, 'Gateway config cannot be null.');

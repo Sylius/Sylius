@@ -28,14 +28,12 @@ final class PayumTokenFactory implements PayumTokenFactoryInterface
     public function createNew(PaymentRequestInterface $paymentRequest): TokenInterface
     {
         $payment = $paymentRequest->getPayment();
-        Assert::notNull($payment);
 
-        /** @var PaymentMethodInterface|null $paymentMethod */
+        /** @var PaymentMethodInterface $paymentMethod */
         $paymentMethod = $paymentRequest->getMethod();
-        Assert::notNull($paymentMethod);
 
         $gatewayConfig = $paymentMethod->getGatewayConfig();
-        Assert::notNull($gatewayConfig);
+        Assert::notNull($gatewayConfig, 'Gateway config cannot be null.');
 
         $gatewayName = $gatewayConfig->getGatewayName();
 
