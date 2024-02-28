@@ -43,15 +43,9 @@ interface PaymentRequestInterface extends TimestampableInterface, ResourceInterf
 
     public const ACTION_PAYOUT = 'payout';
 
+    public function getId(): ?string;
+
     public function getHash(): ?Uuid;
-
-    public function getMethod(): PaymentMethodInterface;
-
-    public function setMethod(PaymentMethodInterface $method): void;
-
-    public function getPayment(): PaymentInterface;
-
-    public function setPayment(PaymentInterface $payment): void;
 
     public function getState(): string;
 
@@ -68,4 +62,12 @@ interface PaymentRequestInterface extends TimestampableInterface, ResourceInterf
     public function getResponseData(): array;
 
     public function setResponseData(array $responseData): void;
+
+    public function getPayment(): PaymentInterface;
+
+    public function setPayment(PaymentInterface $payment): void;
+
+    public function getMethod(): PaymentMethodInterface;
+
+    public function setMethod(PaymentMethodInterface $method): void;
 }
