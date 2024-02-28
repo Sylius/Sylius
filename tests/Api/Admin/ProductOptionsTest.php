@@ -100,6 +100,7 @@ final class ProductOptionsTest extends JsonApiTestCase
                         ],
                     ],
                 ],
+                'position' => 9,
             ], \JSON_THROW_ON_ERROR),
         );
 
@@ -184,6 +185,7 @@ final class ProductOptionsTest extends JsonApiTestCase
                         ],
                     ],
                 ],
+                'position' => 9,
             ], \JSON_THROW_ON_ERROR),
         );
 
