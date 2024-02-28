@@ -22,6 +22,7 @@
         <itemOperations>
             <itemOperation name="admin_get">
                 <attribute name="method">GET</attribute>
+                <attribute name="path">/tax-rates/{code}</attribute>
                 <attribute name="normalization_context">
                     <attribute name="groups">
                         <attribute>admin:tax_rate:show</attribute>
@@ -32,6 +33,7 @@
 
             <itemOperation name="admin_put">
                 <attribute name="method">PUT</attribute>
+                <attribute name="path">/tax-rates/{code}</attribute>
                 <attribute name="denormalization_context">
                     <attribute name="groups">
                         <attribute>admin:tax_rate:update</attribute>
@@ -48,12 +50,14 @@
 
             <itemOperation name="admin_delete">
                 <attribute name="method">DELETE</attribute>
+                <attribute name="path">/tax-rates/{code}</attribute>
             </itemOperation>
         </itemOperations>
 
         <collectionOperations>
             <collectionOperation name="admin_get">
                 <attribute name="method">GET</attribute>
+                <attribute name="path">/tax-rates</attribute>
                 <attribute name="filters">
                     <attribute>sylius.api.tax_rate.date_filter</attribute>
                 </attribute>
@@ -67,6 +71,7 @@
 
             <collectionOperation name="admin_post">
                 <attribute name="method">POST</attribute>
+                <attribute name="path">/tax-rates</attribute>
                 <attribute name="denormalization_context">
                     <attribute name="groups">
                         <attribute>admin:tax_rate:create</attribute>
