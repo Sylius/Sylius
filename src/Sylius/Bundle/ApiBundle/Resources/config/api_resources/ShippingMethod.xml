@@ -85,6 +85,17 @@ Example configuration for `order_total_greater_than_or_equal` rule type:
     }
 }
 ```
+
+Example configuration for `flat_rate` shipping charges calculator:
+
+```
+"shippingChargesCalculator": "flat_rate",
+"shippingChargesCalculatorConfiguration": {
+    "channel-code": [
+        "amount": int,
+    ]
+}
+```
                     </attribute>
                 </attribute>
             </itemOperation>
@@ -196,6 +207,17 @@ Example configuration for `order_total_greater_than_or_equal` rule type:
             "amount": int,
         ]
     }
+}
+```
+
+Example configuration for `flat_rate` shipping charges calculator:
+
+```
+"shippingChargesCalculator": "flat_rate",
+"shippingChargesCalculatorConfiguration": {
+    "channel-code": [
+        "amount": int,
+    ]
 }
 ```
                     </attribute>
