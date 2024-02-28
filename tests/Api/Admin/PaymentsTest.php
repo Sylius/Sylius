@@ -25,7 +25,6 @@ final class PaymentsTest extends JsonApiTestCase
     {
         $this->setUpOrderPlacer();
         $this->setUpAdminContext();
-        $this->setUpDefaultHeaders();
 
         parent::setUp();
     }
@@ -33,6 +32,8 @@ final class PaymentsTest extends JsonApiTestCase
     /** @test */
     public function it_gets_payments(): void
     {
+        $this->setUpDefaultGetHeaders();
+
         $this->loadFixturesFromFiles([
             'authentication/api_administrator.yaml',
             'channel.yaml',
@@ -52,6 +53,8 @@ final class PaymentsTest extends JsonApiTestCase
     /** @test */
     public function it_gets_payments_of_the_specific_order(): void
     {
+        $this->setUpDefaultGetHeaders();
+
         $this->loadFixturesFromFiles([
             'authentication/api_administrator.yaml',
             'channel.yaml',
@@ -74,6 +77,8 @@ final class PaymentsTest extends JsonApiTestCase
     /** @test */
     public function it_completes_payment(): void
     {
+        $this->setUpDefaultPatchHeaders();
+
         $this->loadFixturesFromFiles([
             'authentication/api_administrator.yaml',
             'channel.yaml',
@@ -85,14 +90,8 @@ final class PaymentsTest extends JsonApiTestCase
 
         $order = $this->placeOrder('nAWw2jewpA');
 
-        $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
+        $this->requestPatch(uri: sprintf('/api/v2/admin/payments/%s/complete', $order->getPayments()->first()->getId()));
 
-        $this->client->request(
-            method: 'PATCH',
-            uri: sprintf('/api/v2/admin/payments/%s/complete', $order->getPayments()->first()->getId()),
-            server: $header,
-        );
-
-        $this->assertResponse($this->client->getResponse(), 'admin/payment/patch_complete_payment_response', Response::HTTP_OK);
+        $this->assertResponseSuccessful('admin/payment/patch_complete_payment_response');
     }
 }
