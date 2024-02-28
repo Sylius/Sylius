@@ -17,8 +17,6 @@ interface ServiceProviderAwareCommandProviderInterface extends PaymentRequestCom
 {
     public function getCommandProvider(string $index): ?PaymentRequestCommandProviderInterface;
 
-    /**
-     * @return string[]
-     */
+    /** @return string[] */
     public function getCommandProviderIndex(): array;
 }
