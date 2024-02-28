@@ -239,7 +239,7 @@
         </service>
 
         <service id="Sylius\Bundle\ApiBundle\CommandHandler\Payment\AddPaymentRequestHandler">
-            <argument type="service" id="sylius.custom_factory.payment_request" />
+            <argument type="service" id="sylius.factory.payment_request" />
             <argument type="service" id="sylius.repository.payment_method" />
             <argument type="service" id="sylius.repository.payment" />
             <argument type="service" id="Sylius\Bundle\CoreBundle\PaymentRequest\CommandDispatcher\PaymentRequestCommandDispatcherInterface" />
