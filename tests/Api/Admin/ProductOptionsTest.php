@@ -24,6 +24,177 @@ final class ProductOptionsTest extends JsonApiTestCase
     use AdminUserLoginTrait;
 
     /** @test */
+    public function it_gets_a_product_option(): void
+    {
+        $fixtures = $this->loadFixturesFromFiles([
+            'authentication/api_administrator.yaml',
+            'channel.yaml',
+            'product/product_option.yaml',
+        ]);
+
+        /** @var ProductOptionInterface $productOption */
+        $productOption = $fixtures['product_option_color'];
+
+        $this->client->request(
+            method: 'GET',
+            uri: sprintf('/api/v2/admin/product-options/%s', $productOption->getCode()),
+            server: $this->headerBuilder()->withJsonLdAccept()->withAdminUserAuthorization('api@example.com')->build(),
+        );
+
+        $this->assertResponse(
+            $this->client->getResponse(),
+            'admin/product_option/get_product_option',
+            Response::HTTP_OK,
+        );
+    }
+
+    /** @test */
+    public function it_gets_product_options(): void
+    {
+        $this->loadFixturesFromFiles([
+            'authentication/api_administrator.yaml',
+            'channel.yaml',
+            'product/product_option.yaml',
+        ]);
+
+        $this->client->request(
+            method: 'GET',
+            uri: '/api/v2/admin/product-options',
+            server: $this->headerBuilder()->withJsonLdAccept()->withAdminUserAuthorization('api@example.com')->build(),
+        );
+
+        $this->assertResponse(
+            $this->client->getResponse(),
+            'admin/product_option/get_product_options',
+            Response::HTTP_OK,
+        );
+    }
+
+    /** @test */
+    public function it_creates_a_product_option(): void
+    {
+        $this->loadFixturesFromFiles([
+            'authentication/api_administrator.yaml',
+            'channel.yaml',
+        ]);
+        $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
+
+        $this->client->request(
+            method: 'POST',
+            uri: '/api/v2/admin/product-options',
+            server: $header,
+            content: json_encode([
+                'code' => 'NEW_COLOR',
+                'translations' => [
+                    'en_US' => [
+                        'name' => 'New Color',
+                    ],
+                ],
+                'values' => [
+                    [
+                        'code' => 'NEW_COLOR_RED',
+                        'translations' => [
+                            'en_US' => [
+                                'value' => 'Red',
+                            ],
+                        ],
+                    ],
+                ],
+            ], \JSON_THROW_ON_ERROR),
+        );
+
+        $this->assertResponse(
+            $this->client->getResponse(),
+            'admin/product_option/post_product_option_response',
+            Response::HTTP_CREATED,
+        );
+    }
+
+    /** @test */
+    public function it_does_not_allow_to_create_a_product_option_with_invalid_data(): void
+    {
+        $this->loadFixturesFromFiles([
+            'authentication/api_administrator.yaml',
+            'channel.yaml',
+        ]);
+        $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
+
+        $this->client->request(
+            method: 'POST',
+            uri: '/api/v2/admin/product-options',
+            server: $header,
+            content: json_encode([
+                'values' => [
+                    [
+                        'translations' => [
+                        ],
+                    ],
+                ],
+            ], \JSON_THROW_ON_ERROR),
+        );
+
+        $this->assertResponseViolations(
+            $this->client->getResponse(),
+            [
+                [
+                    'propertyPath' => 'code',
+                    'message' => 'Please enter option code.',
+                ],
+                [
+                    'propertyPath' => 'values[0].code',
+                    'message' => 'Please enter option value code.',
+                ],
+                [
+                    'propertyPath' => 'values[0].translations[en_US].value',
+                    'message' => 'Please enter option value.',
+                ],
+                [
+                    'propertyPath' => 'translations[en_US].name',
+                    'message' => 'Please enter option name.',
+                ],
+            ],
+        );
+    }
+
+    /** @test */
+    public function it_updates_a_product_option(): void
+    {
+        $fixtures = $this->loadFixturesFromFiles([
+            'authentication/api_administrator.yaml',
+            'channel.yaml',
+            'product/product_option.yaml',
+        ]);
+        $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
+
+        /** @var ProductOptionInterface $productOption */
+        $productOption = $fixtures['product_option_color'];
+
+        $this->client->request(
+            method: 'PUT',
+            uri: sprintf('/api/v2/admin/product-options/%s', $productOption->getCode()),
+            server: $header,
+            content: json_encode([
+                'values' => [
+                    [
+                        'code' => 'CHANGED_COLOR',
+                        'translations' => [
+                            'en_US' => [
+                                'value' => 'Red',
+                            ],
+                        ],
+                    ],
+                ],
+            ], \JSON_THROW_ON_ERROR),
+        );
+
+        $this->assertResponse(
+            $this->client->getResponse(),
+            'admin/product_option/put_product_option_response',
+            Response::HTTP_OK,
+        );
+    }
+
+    /** @test */
     public function it_does_not_update_a_product_option_with_duplicate_locale_translation(): void
     {
         $fixtures = $this->loadFixturesFromFiles([
@@ -97,80 +268,48 @@ final class ProductOptionsTest extends JsonApiTestCase
     }
 
     /** @test */
-    public function it_updates_a_product_option(): void
+    public function it_deletes_a_product_option(): void
     {
         $fixtures = $this->loadFixturesFromFiles([
             'authentication/api_administrator.yaml',
             'channel.yaml',
             'product/product_option.yaml',
         ]);
-        $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
 
         /** @var ProductOptionInterface $productOption */
         $productOption = $fixtures['product_option_color'];
 
         $this->client->request(
-            method: 'PUT',
+            method: 'DELETE',
             uri: sprintf('/api/v2/admin/product-options/%s', $productOption->getCode()),
-            server: $header,
-            content: json_encode([
-                'values' => [
-                    [
-                        'code' => 'CHANGED_COLOR',
-                        'translations' => [
-                            'en_US' => [
-                                'value' => 'Red',
-                            ],
-                        ],
-                    ],
-                ],
-            ], \JSON_THROW_ON_ERROR),
+            server: $this->headerBuilder()->withJsonLdAccept()->withAdminUserAuthorization('api@example.com')->build(),
         );
 
-        $this->assertResponse(
-            $this->client->getResponse(),
-            'admin/product_option/put_product_option_response',
-            Response::HTTP_OK,
-        );
+        $this->assertResponseCode($this->client->getResponse(), Response::HTTP_NO_CONTENT);
     }
 
     /** @test */
-    public function it_creates_a_product_option(): void
+    public function it_gets_product_option_values_for_product_option(): void
     {
-        $this->loadFixturesFromFiles([
+        $fixtures = $this->loadFixturesFromFiles([
             'authentication/api_administrator.yaml',
             'channel.yaml',
+            'product/product_option.yaml',
         ]);
-        $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
+
+        /** @var ProductOptionInterface $productOption */
+        $productOption = $fixtures['product_option_color'];
 
         $this->client->request(
-            method: 'POST',
-            uri: '/api/v2/admin/product-options',
-            server: $header,
-            content: json_encode([
-                'code' => 'NEW_COLOR',
-                'translations' => [
-                    'en_US' => [
-                        'name' => 'New Color',
-                    ],
-                ],
-                'values' => [
-                    [
-                        'code' => 'NEW_COLOR_RED',
-                        'translations' => [
-                            'en_US' => [
-                                'value' => 'Red',
-                            ],
-                        ],
-                    ],
-                ],
-            ], \JSON_THROW_ON_ERROR),
+            method: 'GET',
+            uri: sprintf('/api/v2/admin/product-options/%s/values', $productOption->getCode()),
+            server: $this->headerBuilder()->withJsonLdAccept()->withAdminUserAuthorization('api@example.com')->build(),
         );
 
         $this->assertResponse(
             $this->client->getResponse(),
-            'admin/product_option/post_product_option_response',
-            Response::HTTP_CREATED,
+            'admin/product_option/get_product_option_values_for_product_option',
+            Response::HTTP_OK,
         );
     }
 }
