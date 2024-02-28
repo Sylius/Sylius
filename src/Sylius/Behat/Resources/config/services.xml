@@ -126,6 +126,8 @@
 
         <service id="sylius.behat.shared_storage" class="Sylius\Behat\Service\SharedStorage" public="false"/>
 
+        <service id="Sylius\Behat\Service\Helper\AutocompleteHelperInterface" class="Sylius\Behat\Service\Helper\AutocompleteHelper" />
+
         <service id="sylius.behat.java_script_test_helper" class="Sylius\Behat\Service\Helper\JavaScriptTestHelper" >
             <argument>1000000</argument>
             <argument>7</argument>

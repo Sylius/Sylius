@@ -24,16 +24,9 @@ use Webmozart\Assert\Assert;
 class UpdateConfigurableProductPage extends BaseUpdatePage implements UpdateConfigurableProductPageInterface
 {
     use ChecksCodeImmutability;
+    use FormTrait;
 
     private array $imageUrls = [];
-
-    public function nameItIn(string $name, string $localeCode): void
-    {
-        $this->getDocument()->fillField(
-            sprintf('sylius_product_translations_%s_name', $localeCode),
-            $name,
-        );
-    }
 
     public function setMetaKeywords(string $keywords, string $localeCode): void
     {
@@ -219,20 +212,24 @@ class UpdateConfigurableProductPage extends BaseUpdatePage implements UpdateConf
 
     protected function getDefinedElements(): array
     {
-        return array_merge(parent::getDefinedElements(), [
-            'channel_checkbox' => '.checkbox:contains("%channel%") input',
-            'channels' => '#sylius_product_channels',
-            'code' => '#sylius_product_code',
-            'images' => '#sylius_product_images',
-            'main_taxon' => '#sylius_product_mainTaxon',
-            'name' => '#sylius_product_translations_en_US_name',
-            'options' => '#sylius_product_options',
-            'price' => '#sylius_product_variant_price',
-            'search' => '.ui.fluid.search.selection.dropdown',
-            'search_item_selected' => 'div.menu > div.item.selected',
-            'tab' => '.menu [data-tab="%name%"]',
-            'taxonomy' => 'a[data-tab="taxonomy"]',
-        ]);
+        return array_merge(
+            parent::getDefinedElements(),
+            [
+                'channel_checkbox' => '.checkbox:contains("%channel%") input',
+                'channels' => '#sylius_product_channels',
+                'code' => '#sylius_product_code',
+                'images' => '#sylius_product_images',
+                'main_taxon' => '#sylius_product_mainTaxon',
+                'name' => '#sylius_product_translations_en_US_name',
+                'options' => '#sylius_product_options',
+                'price' => '#sylius_product_variant_price',
+                'search' => '.ui.fluid.search.selection.dropdown',
+                'search_item_selected' => 'div.menu > div.item.selected',
+                'tab' => '.menu [data-tab="%name%"]',
+                'taxonomy' => 'a[data-tab="taxonomy"]',
+            ],
+            $this->getDefinedFormElements(),
+        );
     }
 
     private function openTaxonBookmarks(): void

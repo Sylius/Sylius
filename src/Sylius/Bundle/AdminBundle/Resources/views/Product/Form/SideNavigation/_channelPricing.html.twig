@@ -1,7 +1,14 @@
 {% set product = hookable_data.resource %}
 
 {% if product.isSimple %}
-    <button type="button" class="list-group-item list-group-item-action {% if hookable_configuration.active|default(false) %}active{% endif %}" data-bs-toggle="tab" data-bs-target="#product-channel-pricing" role="tab">
+    <button
+        type="button"
+        class="list-group-item list-group-item-action {% if hookable_configuration.active|default(false) %}active{% endif %}"
+        data-bs-toggle="tab"
+        data-bs-target="#product-channel-pricing"
+        role="tab"
+        {{ sylius_test_html_attribute('side-navigation-tab', 'channel-pricing') }}
+    >
         {{ 'sylius.ui.channel_pricings'|trans }}
     </button>
 {% endif %}

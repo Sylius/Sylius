@@ -4,12 +4,24 @@
     <div class="bg-white mb-3">
         {% set body %}
             {% verbatim %}
-                <div class="row" data-controller="slug" data-slug-url-value="{{ path('sylius_admin_ajax_generate_product_slug') }}" data-slug-locale-value="{{ locale }}">
+                <div class="row"">
                     <div class="col-12 col-md-6">
-                        {{ form_row(translationForm.name, { attr: { 'data-slug-target': 'sluggable', 'data-action': 'input->slug#generateSlug' } }) }}
+                        {{ form_row(translationForm.name) }}
                     </div>
                     <div class="col-12 col-md-6">
-                        {{ form_row(translationForm.slug, { attr: { 'data-slug-target': 'slug' } }) }}
+                        {{ form_label(translationForm.slug) }}
+                        <div class="input-group mb-3">
+                            {{ form_widget(translationForm.slug) }}
+                            <button
+                                class="btn btn-outline-secondary"
+                                type="button"
+                                data-action="live#action"
+                                data-action-name="debounce(300)|generateProductSlug(localeCode={{ locale }})"
+                                {{ sylius_test_html_attribute('generate-product-slug-button', locale) }}
+                            >
+                                ⚡️
+                            </button>
+                        </div>
                     </div>
                     <div class="col-12">
                         {{ form_row(translationForm.description) }}

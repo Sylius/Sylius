@@ -19,6 +19,7 @@ class SyliusAdmin {
       .setOutputPath('public/build/admin/')
       .setPublicPath('/build/admin')
       .addEntry('admin-entry', path.resolve(__dirname, 'Resources/assets/entrypoint.js'))
+      .addEntry('admin-product-entry', path.resolve(__dirname, 'Resources/assets/product-entrypoint.js'))
       .disableSingleRuntimeChunk()
       .cleanupOutputBeforeBuild()
       .enableSourceMaps(!Encore.isProduction())

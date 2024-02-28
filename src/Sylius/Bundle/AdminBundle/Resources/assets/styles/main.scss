@@ -16,6 +16,12 @@
 //@import "@tabler/core/src/scss/tabler-flags.scss";
 @import "_flags.scss";
 
+body {
+    --bs-body-bg: #{$body-bg};
+    --bs-tertiary-bg: #{$body-bg};
+    --bs-body-color: #{$body-color};
+}
+
 @import "alert";
 @import "avatar";
 @import "collapse";
@@ -27,3 +33,13 @@
 @import "tree";
 
 @import "body";
+
+.focus .ts-control {
+    box-shadow: none;
+}
+
+.sylius-admin-product-attribute-autocomplete {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 0.5rem;
+}

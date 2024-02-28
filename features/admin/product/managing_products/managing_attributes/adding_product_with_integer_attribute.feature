@@ -10,22 +10,24 @@ Feature: Adding a new product with an integer attribute
         And the store has a non-translatable integer product attribute "Weight"
         And I am logged in as an administrator
 
-    @todo @ui @mink:chromedriver @api
+    @ui @mink:chromedriver @api
     Scenario: Adding an integer attribute to product
         When I want to create a new configurable product
         And I specify its code as "44_MAGNUM"
         And I name it "44 Magnum" in "English (United States)"
-        And I set its "Production year" attribute to 1955 in "English (United States)"
+        And I add the "Production year" attribute to it
+        And I set the "Production year" attribute value to 1955 in "English (United States)"
         And I add it
         Then I should be notified that it has been successfully created
         And the product "44 Magnum" should appear in the store
         And attribute "Production year" of product "44 Magnum" should be 1955
 
-    @todo @ui @mink:chromedriver @api
+    @ui @mink:chromedriver @api
     Scenario: Adding an integer non-translatable attribute to product
         When I want to create a new configurable product
         And I specify its code as "44_MAGNUM"
         And I name it "44 Magnum" in "English (United States)"
+        And I add the "Weight" attribute to it
         And I set its non-translatable "Weight" attribute to 10
         And I add it
         Then I should be notified that it has been successfully created

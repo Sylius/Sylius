@@ -9,11 +9,12 @@ Feature: Adding a new product with a float attribute
         And the store has a non-translatable float product attribute "Display Size"
         And I am logged in as an administrator
 
-    @todo @ui @javascript @api
+    @ui @mink:chromedriver @api
     Scenario: Adding a float attribute to a product
         When I want to create a new configurable product
         And I specify its code as "display_size"
         And I name it "Smartphone" in "English (United States)"
+        And I add the "Display Size" attribute to it
         And I set its non-translatable "Display Size" attribute to 12.5
         And I add it
         Then I should be notified that it has been successfully created

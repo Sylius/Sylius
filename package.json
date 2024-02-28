@@ -21,6 +21,7 @@
     "lightbox2": "^2.9.0",
     "semantic-ui-css": "^2.2.0",
     "slick-carousel": "^1.8.1",
+    "@symfony/ux-autocomplete": "file:vendor/symfony/ux-autocomplete/assets",
     "@symfony/ux-live-component": "file:vendor/symfony/ux-live-component/assets"
   },
   "devDependencies": {
@@ -39,6 +40,7 @@
     "eslint-plugin-import": "^2.26.0",
     "sass": "^1.54.8",
     "sass-loader": "^13.0.0",
+    "tom-select": "^2.2.2",
     "yargs": "^17.5.1"
   },
   "engines": {
