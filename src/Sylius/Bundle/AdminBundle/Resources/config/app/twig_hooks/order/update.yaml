@@ -11,9 +11,9 @@ twig_hooks:
 
         sylius_admin.order.update.content.form:
             billing_address:
-                template: '@SyliusAdmin/Order/Form/_billingAddress.html.twig'
+                template: '@SyliusAdmin/Order/Form/billingAddress.html.twig'
             shipping_address:
-                template: '@SyliusAdmin/Order/Form/_shippingAddress.html.twig'
+                template: '@SyliusAdmin/Order/Form/shippingAddress.html.twig'
 
         sylius_admin.order.update.content.form.billing_address:
             company:
