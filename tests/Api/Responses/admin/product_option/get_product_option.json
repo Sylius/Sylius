@@ -6,7 +6,8 @@
     "code": "COLOR",
     "position": 0,
     "values": [
-        "\/api\/v2\/admin\/product-option-values\/CHANGED_COLOR"
+        "\/api\/v2\/admin\/product-option-values\/COLOR_BLUE",
+        "\/api\/v2\/admin\/product-option-values\/COLOR_RED"
     ],
     "createdAt": @datetime@,
     "updatedAt": @datetime@,
