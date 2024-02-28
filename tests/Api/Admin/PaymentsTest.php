@@ -50,6 +50,30 @@ final class PaymentsTest extends JsonApiTestCase
     }
 
     /** @test */
+    public function it_gets_payments_filtered_by_state(): void
+    {
+        $this->setUpDefaultGetHeaders();
+
+        $this->loadFixturesFromFiles([
+            'authentication/api_administrator.yaml',
+            'channel.yaml',
+            'cart.yaml',
+            'country.yaml',
+            'shipping_method.yaml',
+            'payment_method.yaml',
+        ]);
+
+        $order = $this->placeOrder('paidOrder');
+        $this->payOrder($order);
+
+        $this->placeOrder('unpaidOrder');
+
+        $this->requestGet(uri: '/api/v2/admin/payments', queryParameters: ['state' => 'new']);
+
+        $this->assertResponseSuccessful('admin/payment/get_payments_filtered_by_state_response');
+    }
+
+    /** @test */
     public function it_gets_payments_of_the_specific_order(): void
     {
         $this->setUpDefaultGetHeaders();
@@ -110,7 +134,7 @@ final class PaymentsTest extends JsonApiTestCase
 
         $order = $this->placeOrder('nAWw2jewpA');
 
-        $this->requestPatch(uri: sprintf('/api/v2/admin/payments/%s/complete', $order->getPayments()->first()->getId()));
+        $this->payOrder($order);
         $this->requestPatch(uri: sprintf('/api/v2/admin/payments/%s/complete', $order->getPayments()->first()->getId()));
 
         $this->assertResponseUnprocessableEntity('admin/payment/patch_not_complete_payment_response');
