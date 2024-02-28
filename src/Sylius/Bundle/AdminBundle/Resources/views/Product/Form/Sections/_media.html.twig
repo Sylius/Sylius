@@ -8,21 +8,27 @@
             </h2>
         </div>
         <div class="card-body">
-            {% for imageForm in form.images %}
-                <div class="row mb-4">
-                    <div class="col-auto">
-                        <span class="avatar avatar-xl" style="background-image: url('{{ imageForm.vars.value.path|imagine_filter('sylius_small') }}')"></span>
-                    </div>
-                    <div class="col">
-                        <div class="mb-3">
-                            {{ form_row(imageForm.type) }}
+            <div class="row">
+                {% for imageForm in form.images %}
+                    <div class="col-12 col-md-6 row mb-4">
+                        <div class="col-auto">
+                            {% if imageForm.vars.value.path is not null %}
+                                <span class="avatar avatar-xl" style="background-image: url('{{ imageForm.vars.value.path|imagine_filter('sylius_small') }}')"></span>
+                            {% else %}
+                                <span class="avatar avatar-xl"></span>
+                            {% endif %}
                         </div>
-                        <div class="mb-3">
-                            {{ form_row(imageForm.file) }}
+                        <div class="col">
+                            <div class="mb-3">
+                                {{ form_row(imageForm.type) }}
+                            </div>
+                            <div class="mb-3">
+                                {{ form_row(imageForm.file) }}
+                            </div>
                         </div>
                     </div>
-                </div>
-            {% endfor %}
+                {% endfor %}
+            </div>
 
             <div class="d-grid gap-2">
                 {{ form_widget(form.images.vars.button_add, {label: 'sylius.ui.add_image'|trans, attr: {class: 'btn btn-outline-primary '}}) }}
