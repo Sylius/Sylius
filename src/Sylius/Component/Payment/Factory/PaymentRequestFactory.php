@@ -27,7 +27,7 @@ final class PaymentRequestFactory implements PaymentRequestFactoryInterface
     {
         if (!is_a($className, PaymentRequestInterface::class, true)) {
             throw new \DomainException(sprintf(
-                'This factory requires %s or its descend to be used as resource',
+                'This factory requires %s or its descendant to be used as resource',
                 PaymentRequestInterface::class,
             ));
         }
