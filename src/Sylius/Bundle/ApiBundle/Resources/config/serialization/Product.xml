@@ -157,10 +157,15 @@
             <group>sylius:admin:product:index</group>
             <group>admin:product:show</group>
             <group>sylius:admin:product:show</group>
+        </attribute>
+        <attribute name="acceptedReviews" serialized-name="reviews">
             <group>shop:product:index</group>
             <group>sylius:shop:product:index</group>
             <group>shop:product:show</group>
             <group>sylius:shop:product:show</group>
+            <normalization_context>
+                <entry name="collection_values">true</entry>
+            </normalization_context>
         </attribute>
         <attribute name="averageRating">
             <group>admin:product:index</group>

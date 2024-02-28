@@ -15,7 +15,7 @@ Sylius\Component\Core\Model\Promotion:
     promotion_1_off:
         code: 'dollar_off'
         name: '1 dollar off each item'
-        description: 'Get 1 dollar off every item when buying more than 10'
+        description: 'Get 1 dollar off every item'
         channels: ['@channel_web', '@channel_mobile']
         priority: 2
         exclusive: false
@@ -66,3 +66,11 @@ Sylius\Component\Core\Model\PromotionCoupon:
         reusableFromCancelledOrders: false
         promotion: '@promotion_1_off'
         expiresAt: <dateTimeBetween('now', '+20 days')>
+
+Sylius\Component\Promotion\Model\PromotionAction:
+    10_percent_order_discount:
+        type: "unit_fixed_discount"
+        promotion: "@promotion_1_off"
+        configuration:
+            WEB:
+                amount: 100

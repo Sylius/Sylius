@@ -38,12 +38,20 @@ sylius:
             subject: 'Inscription utilisateur'
             welcome_to_our_store: 'Bienvenue dans notre boutique !'
             you_have_just_been_registered: 'Vous venez d''être enregistré(e). Merci'
+        #deprecated since Sylius 1.13 and will be removed in 2.0, use user.verification instead
         verification_token:
             hello: 'Bonjour'
             message: 'Vérifiez votre compte avec le jeton : '
             subject: 'Vérification de l''adresse e-mail'
             to_verify_your_email_address: 'Pour vérifier votre adresse e-mail - cliquez sur le lien ci-dessous'
             verify_your_email_address: 'Vérifiez votre adresse e-mail'
+        user:
+            account_verification:
+                greeting: 'Bonjour'
+                message: 'Vérifiez votre compte avec le jeton : '
+                statement: 'Vérifiez votre adresse e-mail'
+                strategy: 'Pour vérifier votre adresse e-mail - cliquez sur le lien ci-dessous'
+                subject: 'Vérification de l''adresse e-mail'
     form:
         block:
             body: Corps

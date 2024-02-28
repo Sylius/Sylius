@@ -79,12 +79,13 @@ trait OrderPlacerTrait
         string $productVariantCode = 'MUG_BLUE',
         int $quantity = 3,
         ?\DateTimeImmutable $checkoutCompletedAt = null,
+        ?string $couponCode = null,
     ): OrderInterface {
         $this->checkSetUpOrderPlacerCalled();
 
         $this->pickUpCart($tokenValue);
         $this->addItemToCart($productVariantCode, $quantity, $tokenValue);
-        $cart = $this->updateCartWithAddress($tokenValue, $email);
+        $cart = $this->updateCartWithAddressAndCouponCode($tokenValue, $email, $couponCode);
         $this->dispatchShippingMethodChooseCommand(
             $tokenValue,
             'UPS',
@@ -201,8 +202,18 @@ trait OrderPlacerTrait
         return $tokenValue;
     }
 
-    protected function updateCartWithAddress(string $tokenValue, string $email = 'sylius@example.com'): OrderInterface
-    {
+    protected function updateCartWithAddress(
+        string $tokenValue,
+        string $email = 'sylius@example.com',
+    ): OrderInterface {
+        return $this->updateCartWithAddressAndCouponCode($tokenValue, $email);
+    }
+
+    protected function updateCartWithAddressAndCouponCode(
+        string $tokenValue,
+        string $email = 'sylius@example.com',
+        ?string $couponCode = null,
+    ): OrderInterface {
         $address = new Address();
         $address->setFirstName('John');
         $address->setLastName('Doe');
@@ -211,7 +222,7 @@ trait OrderPlacerTrait
         $address->setCountryCode('US');
         $address->setPostcode('90000');
 
-        $updateCartCommand = new UpdateCart(email: $email, billingAddress: $address);
+        $updateCartCommand = new UpdateCart(email: $email, billingAddress: $address, couponCode: $couponCode);
         $updateCartCommand->setOrderTokenValue($tokenValue);
 
         $envelope = $this->commandBus->dispatch($updateCartCommand);
