@@ -18,7 +18,7 @@
     <services>
         <defaults public="true" />
 
-        <service id="Sylius\Bundle\CoreBundle\PaymentRequest\Payum\Checker\PayumRequirementsCheckerInterface" class="Sylius\Bundle\CoreBundle\PaymentRequest\Payum\Checker\PayumRequirementsChecker">
+        <service id="Sylius\Bundle\CoreBundle\PaymentRequest\Payum\Checker\DoctrineProxyObjectResolverInterface" class="Sylius\Bundle\CoreBundle\PaymentRequest\Payum\Checker\DoctrineProxyObjectResolver">
             <argument type="service" id="doctrine.orm.entity_manager" />
         </service>
 

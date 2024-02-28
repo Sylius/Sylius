@@ -18,17 +18,16 @@ use Doctrine\Persistence\Proxy;
 use Sylius\Component\Core\Model\PaymentInterface;
 use Sylius\Component\Payment\Model\PaymentRequestInterface;
 
-final class PayumRequirementsChecker implements PayumRequirementsCheckerInterface
+final class DoctrineProxyObjectResolver implements DoctrineProxyObjectResolverInterface
 {
     public function __construct(
         private EntityManagerInterface $entityManager,
     ) {
     }
 
-    public function check(PaymentRequestInterface $paymentRequest): void
+    public function resolve(PaymentRequestInterface $paymentRequest): void
     {
-        // Needed to get a real object to give to Payum which is not handling
-        // Proxy class from Doctrine when a token is created for ex.
+        // Resolve doctrine proxy object to 'real" one to be able to use it in Payum.
         $payment = $paymentRequest->getPayment();
         if ($payment instanceof Proxy) {
             $this->entityManager->detach($payment);

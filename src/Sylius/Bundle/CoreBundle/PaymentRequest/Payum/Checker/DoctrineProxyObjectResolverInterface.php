@@ -15,7 +15,7 @@ namespace Sylius\Bundle\CoreBundle\PaymentRequest\Payum\Checker;
 
 use Sylius\Component\Payment\Model\PaymentRequestInterface;
 
-interface PayumRequirementsCheckerInterface
+interface DoctrineProxyObjectResolverInterface
 {
-    public function check(PaymentRequestInterface $paymentRequest): void;
+    public function resolve(PaymentRequestInterface $paymentRequest): void;
 }

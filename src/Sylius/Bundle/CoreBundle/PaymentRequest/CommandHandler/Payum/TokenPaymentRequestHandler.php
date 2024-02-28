@@ -15,7 +15,7 @@ namespace Sylius\Bundle\CoreBundle\PaymentRequest\CommandHandler\Payum;
 
 use Sylius\Bundle\CoreBundle\PaymentRequest\Checker\PaymentRequestIntegrityCheckerInterface;
 use Sylius\Bundle\CoreBundle\PaymentRequest\Command\PaymentRequestHashAwareInterface;
-use Sylius\Bundle\CoreBundle\PaymentRequest\Payum\Checker\PayumRequirementsCheckerInterface;
+use Sylius\Bundle\CoreBundle\PaymentRequest\Payum\Checker\DoctrineProxyObjectResolverInterface;
 use Sylius\Bundle\CoreBundle\PaymentRequest\Payum\Factory\PayumTokenFactoryInterface;
 use Sylius\Bundle\CoreBundle\PaymentRequest\Processor\Payum\AfterTokenRequestProcessorInterface;
 use Sylius\Bundle\CoreBundle\PaymentRequest\Processor\Payum\RequestProcessorInterface;
@@ -27,7 +27,7 @@ final class TokenPaymentRequestHandler implements MessageHandlerInterface
 {
     public function __construct(
         private PaymentRequestIntegrityCheckerInterface $paymentRequestIntegrityChecker,
-        private PayumRequirementsCheckerInterface $payumRequirementsChecker,
+        private DoctrineProxyObjectResolverInterface $doctrineProxyObjectResolver,
         private PayumTokenFactoryInterface $payumTokenFactory,
         private RequestProcessorInterface $requestProcessor,
         private AfterTokenRequestProcessorInterface $afterTokenRequestProcessor,
@@ -38,7 +38,7 @@ final class TokenPaymentRequestHandler implements MessageHandlerInterface
     public function __invoke(PaymentRequestHashAwareInterface $command): void
     {
         $paymentRequest = $this->paymentRequestIntegrityChecker->check($command);
-        $this->payumRequirementsChecker->check($paymentRequest);
+        $this->doctrineProxyObjectResolver->resolve($paymentRequest);
 
         $token = $this->payumTokenFactory->createNew($paymentRequest);
         $request = $this->payumRequestFactory->createNewWithToken($token);
