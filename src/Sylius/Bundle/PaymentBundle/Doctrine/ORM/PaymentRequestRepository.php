@@ -24,9 +24,10 @@ use Sylius\Component\Payment\Repository\PaymentRequestRepositoryInterface;
  */
 class PaymentRequestRepository extends EntityRepository implements PaymentRequestRepositoryInterface
 {
-    public function findOtherExisting(PaymentRequestInterface $paymentRequest): array
+    public function duplicateExists(PaymentRequestInterface $paymentRequest): bool
     {
-        return $this->createQueryBuilder('o')
+        /** @var PaymentRequestInterface[] $paymentRequests */
+        $paymentRequests = $this->createQueryBuilder('o')
             ->innerJoin('o.payment', 'payment')
             ->innerJoin('o.method', 'method')
             ->where('o != :paymentRequest')
@@ -42,6 +43,8 @@ class PaymentRequestRepository extends EntityRepository implements PaymentReques
             ->getQuery()
             ->getResult()
         ;
+
+        return count($paymentRequests) > 0;
     }
 
     public function findOneByHash(string $hash): ?PaymentRequestInterface
