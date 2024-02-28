@@ -51,7 +51,6 @@
     "paymentState": "cart",
     "shippingState": "cart",
     "tokenValue": "nAWw2jewpA",
-    "id": @integer@,
     "items": [
         {
             "@id": "\/api\/v2\/shop\/order-items\/@integer@",

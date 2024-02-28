@@ -87,7 +87,7 @@ final class OrdersTest extends JsonApiTestCase
 
         $this->assertResponse(
             $this->client->getResponse(),
-            'admin/order/gets_orders_for_customer_response',
+            'admin/order/get_orders_for_customer_response',
             Response::HTTP_OK,
         );
     }
