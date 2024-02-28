@@ -17,7 +17,6 @@ use SM\Factory\FactoryInterface as StateMachineFactoryInterface;
 use Sylius\Abstraction\StateMachine\StateMachineInterface;
 use Sylius\Component\Payment\Model\PaymentRequestInterface;
 use Sylius\Component\Payment\PaymentTransitions;
-use Webmozart\Assert\Assert;
 
 final class AfterCaptureProcessor implements AfterCaptureProcessorInterface
 {
@@ -40,7 +39,6 @@ final class AfterCaptureProcessor implements AfterCaptureProcessorInterface
     public function process(PaymentRequestInterface $paymentRequest): void
     {
         $payment = $paymentRequest->getPayment();
-        Assert::notNull($payment);
 
         $stateMachine = $this->stateMachineFactory->get($payment, PaymentTransitions::GRAPH);
         if ($paymentRequest->getResponseData()['paid']) {

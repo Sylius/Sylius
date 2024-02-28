@@ -19,7 +19,6 @@ use Sylius\Bundle\CoreBundle\PaymentRequest\Payum\Checker\PayumRequirementsCheck
 use Sylius\Bundle\CoreBundle\PaymentRequest\Processor\Payum\RequestProcessorInterface;
 use Sylius\Bundle\PayumBundle\Factory\GetStatusFactoryInterface;
 use Sylius\Bundle\PayumBundle\Model\GatewayConfigInterface;
-use Sylius\Component\Core\Model\PaymentInterface;
 use Sylius\Component\Core\Model\PaymentMethodInterface;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 
@@ -38,7 +37,6 @@ final class ModelPaymentRequestHandler implements MessageHandlerInterface
         $paymentRequest = $this->paymentRequestIntegrityChecker->check($command);
         $this->payumRequirementsChecker->check($paymentRequest);
 
-        /** @var PaymentInterface $payment */
         $payment = $paymentRequest->getPayment();
         $request = $this->factory->createNewWithModel($payment);
 

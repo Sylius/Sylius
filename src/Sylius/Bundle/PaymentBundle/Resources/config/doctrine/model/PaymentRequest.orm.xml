@@ -21,11 +21,11 @@
         </id>
 
         <many-to-one field="method" target-entity="Sylius\Component\Payment\Model\PaymentMethodInterface">
-            <join-column name="method_id" referenced-column-name="id" nullable="true" on-delete="CASCADE" />
+            <join-column name="method_id" referenced-column-name="id" nullable="false" on-delete="CASCADE" />
         </many-to-one>
 
         <many-to-one field="payment" target-entity="Sylius\Component\Payment\Model\PaymentInterface">
-            <join-column name="payment_id" referenced-column-name="id" nullable="true" on-delete="SET NULL" />
+            <join-column name="payment_id" referenced-column-name="id" nullable="false" />
         </many-to-one>
 
         <field name="state" column="state" type="string" />

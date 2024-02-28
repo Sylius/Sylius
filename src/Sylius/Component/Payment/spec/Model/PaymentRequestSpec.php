@@ -21,6 +21,11 @@ use Sylius\Component\Payment\Model\PaymentRequestInterface;
 
 final class PaymentRequestSpec extends ObjectBehavior
 {
+    function let(PaymentInterface $payment, PaymentMethodInterface $method): void
+    {
+        $this->beConstructedWith($payment, $method);
+    }
+
     function it_implements_sylius_payment_request_interface(): void
     {
         $this->shouldImplement(PaymentRequestInterface::class);
@@ -31,20 +36,20 @@ final class PaymentRequestSpec extends ObjectBehavior
         $this->getId()->shouldReturn(null);
     }
 
-    function it_has_no_payment_method_by_default(): void
+    function it_has_a_payment_by_default(): void
     {
-        $this->getMethod()->shouldReturn(null);
+        $this->getPayment()->shouldReturnAnInstanceOf(PaymentInterface::class);
+    }
+
+    function it_has_a_payment_method_by_default(): void
+    {
+        $this->getMethod()->shouldReturnAnInstanceOf(PaymentMethodInterface::class);
     }
 
     function its_payment_method_is_mutable(PaymentMethodInterface $method): void
     {
         $this->setMethod($method);
         $this->getMethod()->shouldReturn($method);
-    }
-
-    function it_has_no_payment_by_default(): void
-    {
-        $this->getPayment()->shouldReturn(null);
     }
 
     function its_payment_is_mutable(PaymentInterface $payment): void
@@ -75,24 +80,24 @@ final class PaymentRequestSpec extends ObjectBehavior
         $this->getAction()->shouldReturn('test_action');
     }
 
-    function it_has_null_data_by_default(): void
+    function it_has_null_payload_by_default(): void
     {
         $this->getPayload()->shouldReturn(null);
     }
 
-    function its_data_is_mutable(): void
+    function its_payload_is_mutable(): void
     {
         $stdClass = new stdClass();
         $this->setPayload($stdClass);
         $this->getPayload()->shouldReturn($stdClass);
     }
 
-    function it_has_empty_array_details_by_default(): void
+    function it_has_empty_array_response_data_by_default(): void
     {
         $this->getResponseData()->shouldReturn([]);
     }
 
-    function its_details_are_mutable(): void
+    function its_response_data_are_mutable(): void
     {
         $this->setResponseData(['foo', 'bar']);
         $this->getResponseData()->shouldReturn(['foo', 'bar']);
