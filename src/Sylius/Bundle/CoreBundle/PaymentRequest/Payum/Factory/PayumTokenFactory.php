@@ -48,12 +48,12 @@ final class PayumTokenFactory implements PayumTokenFactoryInterface
         Assert::notNull($payload, 'The request payload need to be not null');
 
         $targetPath = $payload['target_path'] ?? null;
-        Assert::notNull($targetPath, 'The request payload must have a "target_path" field not null.');
+        Assert::notNull($targetPath, 'The request payload must have a "target_path" field not null');
 
         $targetPathParameters = $payload['target_path_parameters'] ?? [];
 
         $afterPath = $payload['after_path'] ?? null;
-        Assert::notNull($afterPath, 'The request payload must have an "after_path" field!');
+        Assert::notNull($afterPath, 'The request payload must have an "after_path" field not null');
 
         $afterPathParameters = $payload['after_path_parameters'] ?? [];
 
