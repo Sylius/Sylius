@@ -4,10 +4,10 @@
     "@type": "hydra:Collection",
     "hydra:member": [
         {
-            "@id": "\/api\/v2\/admin\/orders\/token",
+            "@id": "\/api\/v2\/admin\/orders\/secondToken",
             "@type": "Order",
             "customer": "\/api\/v2\/admin\/customers\/@integer@",
-            "channel": "\/api\/v2\/admin\/channels\/WEB",
+            "channel": "\/api\/v2\/admin\/channels\/MOBILE",
             "billingAddress": {
                 "@id": "\/api\/v2\/admin\/addresses\/@integer@",
                 "@type": "Address",
@@ -38,15 +38,15 @@
             "shipments": [],
             "currencyCode": "USD",
             "localeCode": "en_US",
-            "checkoutState": "fulfilled",
+            "checkoutState": "completed",
             "paymentState": "paid",
             "shippingState": "ready",
-            "tokenValue": "token",
+            "tokenValue": "secondToken",
             "id": @integer@,
             "items": [],
             "itemsTotal": 0,
             "total": 0,
-            "state": "fulfilled",
+            "state": "new",
             "itemsSubtotal": 0,
             "taxTotal": 0,
             "shippingTaxTotal": 0,
@@ -59,7 +59,7 @@
     ],
     "hydra:totalItems": 1,
     "hydra:view": {
-        "@id": "\/api\/v2\/admin\/orders?customer.id=@integer@",
+        "@id": "\/api\/v2\/admin\/orders?channel.code=MOBILE",
         "@type": "hydra:PartialCollectionView"
     },
     "hydra:search": {
