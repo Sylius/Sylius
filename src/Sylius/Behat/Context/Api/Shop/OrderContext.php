@@ -366,7 +366,7 @@ final class OrderContext implements Context
     {
         $paymentMethodIri = $this
             ->responseChecker
-            ->getValue($this->shopClient->getLastResponse(), 'payments')[0]['method']['@id']
+            ->getValue($this->shopClient->getLastResponse(), 'payments')[0]['method']
         ;
 
         Assert::same($this->iriConverter->getResourceFromIri($paymentMethodIri)->getCode(), $paymentMethod->getCode());
