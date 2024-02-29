@@ -20,7 +20,7 @@
 
         <service id="Sylius\Bundle\CoreBundle\PaymentRequest\CommandHandler\Payum\TokenPaymentRequestHandler" abstract="true">
             <argument type="service" id="Sylius\Bundle\CoreBundle\PaymentRequest\Checker\PaymentRequestIntegrityCheckerInterface" />
-            <argument type="service" id="Sylius\Bundle\CoreBundle\PaymentRequest\Payum\Checker\DoctrineProxyObjectResolverInterface" />
+            <argument type="service" id="Sylius\Bundle\CoreBundle\PaymentRequest\Payum\Resolver\DoctrineProxyObjectResolverInterface" />
             <argument type="service" id="Sylius\Bundle\CoreBundle\PaymentRequest\Payum\Factory\PayumTokenFactoryInterface" />
             <argument type="service" id="Sylius\Bundle\CoreBundle\PaymentRequest\Processor\Payum\RequestProcessorInterface" />
             <argument type="service" id="Sylius\Bundle\CoreBundle\PaymentRequest\Processor\Payum\AfterTokenRequestProcessorInterface" />
@@ -40,7 +40,7 @@
 
         <service id="Sylius\Bundle\CoreBundle\PaymentRequest\CommandHandler\Payum\ModelPaymentRequestHandler" abstract="true">
             <argument type="service" id="Sylius\Bundle\CoreBundle\PaymentRequest\Checker\PaymentRequestIntegrityCheckerInterface" />
-            <argument type="service" id="Sylius\Bundle\CoreBundle\PaymentRequest\Payum\Checker\DoctrineProxyObjectResolverInterface" />
+            <argument type="service" id="Sylius\Bundle\CoreBundle\PaymentRequest\Payum\Resolver\DoctrineProxyObjectResolverInterface" />
             <argument type="service" id="Sylius\Bundle\CoreBundle\PaymentRequest\Processor\Payum\RequestProcessorInterface" />
         </service>
 
