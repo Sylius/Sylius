@@ -20,7 +20,7 @@
             <group>admin:address:log_entry:show</group>
             <group>sylius:admin:address:log_entry:show</group>
         </attribute>
-        <attribute name="logged_at">
+        <attribute name="loggedAt">
             <group>admin:address:log_entry:show</group>
             <group>sylius:admin:address:log_entry:show</group>
         </attribute>
