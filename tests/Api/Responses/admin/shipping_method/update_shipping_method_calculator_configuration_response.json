@@ -9,8 +9,8 @@
     "id": @integer@,
     "code": "UPS",
     "position": 0,
-    "calculator": "per_unit_rate",
-    "configuration": {
+    "shippingChargesCalculator": "per_unit_rate",
+    "shippingChargesCalculatorConfiguration": {
         "WEB": {
             "amount": 500
         },

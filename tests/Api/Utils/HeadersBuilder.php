@@ -97,6 +97,7 @@ class HeadersBuilder
         return $this;
     }
 
+    /** @return array<string, string> */
     public function build(): array
     {
         return $this->headers;

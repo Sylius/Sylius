@@ -113,7 +113,7 @@
             <group>sylius:admin:shipping_method:update</group>
         </attribute>
 
-        <attribute name="calculator">
+        <attribute name="calculator" serialized-name="shippingChargesCalculator">
             <group>admin:shipping_method:create</group>
             <group>sylius:admin:shipping_method:create</group>
             <group>admin:shipping_method:index</group>
@@ -124,7 +124,7 @@
             <group>sylius:admin:shipping_method:update</group>
         </attribute>
 
-        <attribute name="configuration">
+        <attribute name="configuration" serialized-name="shippingChargesCalculatorConfiguration">
             <group>admin:shipping_method:create</group>
             <group>sylius:admin:shipping_method:create</group>
             <group>admin:shipping_method:index</group>

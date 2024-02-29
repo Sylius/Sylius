@@ -68,6 +68,9 @@
         </service>
 
         <service id="Sylius\Bundle\ApiBundle\OpenApi\Documentation\ShippingMethodDocumentationModifier">
+            <argument>%sylius.security.new_api_route%</argument>
+            <argument>%sylius.shipping_method_rules%</argument>
+            <argument>%sylius.shipping_calculators%</argument>
             <tag name="sylius.open_api.modifier" />
         </service>
 

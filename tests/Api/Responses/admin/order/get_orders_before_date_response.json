@@ -4,62 +4,90 @@
     "@type": "hydra:Collection",
     "hydra:member": [
         {
-            "@id": "\/api\/v2\/admin\/orders\/token",
+            "@id": "\/api\/v2\/admin\/orders\/firstOrderToken",
             "@type": "Order",
             "customer": "\/api\/v2\/admin\/customers\/@integer@",
             "channel": "\/api\/v2\/admin\/channels\/WEB",
-            "billingAddress": {
-                "@id": "\/api\/v2\/admin\/addresses\/@integer@",
-                "@type": "Address",
-                "firstName": "Andrzej",
-                "lastName": "Legs",
-                "phoneNumber": "111999222",
-                "company": "Polmotors office",
-                "countryCode": "PL",
-                "provinceName": "kujawsko-pomorskie",
-                "street": "Moniuszki 16\/20",
-                "city": "Pabianice",
-                "postcode": "31-999"
-            },
             "shippingAddress": {
                 "@id": "\/api\/v2\/admin\/addresses\/@integer@",
                 "@type": "Address",
-                "firstName": "Andrzej",
-                "lastName": "Legs",
-                "phoneNumber": "111999222",
-                "company": "Polmotors manufactory",
-                "countryCode": "PL",
-                "provinceName": "kujawsko-pomorskie",
-                "street": "Moniuszki 16\/20",
-                "city": "Pabianice",
-                "postcode": "31-999"
+                "firstName": "John",
+                "lastName": "Doe",
+                "countryCode": "US",
+                "street": "Avenue",
+                "city": "New York",
+                "postcode": "90000"
             },
-            "payments": [],
-            "shipments": [],
+            "billingAddress": {
+                "@id": "\/api\/v2\/admin\/addresses\/@integer@",
+                "@type": "Address",
+                "firstName": "John",
+                "lastName": "Doe",
+                "countryCode": "US",
+                "street": "Avenue",
+                "city": "New York",
+                "postcode": "90000"
+            },
+            "payments": [
+                {
+                    "@id": "\/api\/v2\/admin\/payments\/@integer@",
+                    "@type": "Payment",
+                    "id": @integer@,
+                    "method": "\/api\/v2\/admin\/payment-methods\/CASH_ON_DELIVERY"
+                }
+            ],
+            "shipments": [
+                {
+                    "@id": "\/api\/v2\/admin\/shipments\/@integer@",
+                    "@type": "Shipment",
+                    "id": @integer@,
+                    "method": "\/api\/v2\/admin\/shipping-methods\/UPS"
+                }
+            ],
             "currencyCode": "USD",
             "localeCode": "en_US",
-            "checkoutState": "fulfilled",
-            "paymentState": "paid",
+            "checkoutState": "completed",
+            "paymentState": "awaiting_payment",
             "shippingState": "ready",
-            "tokenValue": "token",
+            "tokenValue": "firstOrderToken",
             "id": @integer@,
-            "items": [],
-            "itemsTotal": 0,
-            "total": 0,
-            "state": "fulfilled",
-            "itemsSubtotal": 0,
+            "number": @string@,
+            "items": [
+                {
+                    "@id": "\/api\/v2\/admin\/order-items\/@integer@",
+                    "@type": "OrderItem",
+                    "variant": "\/api\/v2\/admin\/product-variants\/MUG_BLUE",
+                    "productName": "Mug",
+                    "id": @integer@,
+                    "quantity": 3,
+                    "unitPrice": 2000,
+                    "originalUnitPrice": 2000,
+                    "total": 6000,
+                    "units": [
+                        "\/api\/v2\/admin\/order-item-units\/@integer@",
+                        "\/api\/v2\/admin\/order-item-units\/@integer@",
+                        "\/api\/v2\/admin\/order-item-units\/@integer@"
+                    ],
+                    "fullDiscountedUnitPrice": 2000,
+                    "subtotal": 6000
+                }
+            ],
+            "itemsTotal": 6000,
+            "total": 6500,
+            "state": "new",
+            "itemsSubtotal": 6000,
             "taxTotal": 0,
-            "shippingTaxTotal": 0,
+            "shippingTaxTotal": 500,
             "taxExcludedTotal": 0,
             "taxIncludedTotal": 0,
-            "shippingTotal": 0,
+            "shippingTotal": 500,
             "orderPromotionTotal": 0,
             "shippingPromotionTotal": 0
         }
     ],
     "hydra:totalItems": 1,
     "hydra:view": {
-        "@id": "\/api\/v2\/admin\/orders?customer.id=@integer@",
+        "@id": "\/api\/v2\/admin\/orders?checkoutCompletedAt%5Bbefore%5D=@string@",
         "@type": "hydra:PartialCollectionView"
     },
     "hydra:search": {

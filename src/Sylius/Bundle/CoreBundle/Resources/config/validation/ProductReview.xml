@@ -16,5 +16,13 @@
         <constraint name="Sylius\Bundle\CoreBundle\Validator\Constraints\UniqueReviewerEmail" >
             <option name="groups">sylius_review</option>
         </constraint>
+        <property name="rating">
+            <constraint name="Range">
+                <option name="min">1</option>
+                <option name="max">5</option>
+                <option name="notInRangeMessage">sylius.review.rating.not_in_range</option>
+                <option name="groups">sylius</option>
+            </constraint>
+        </property>
     </class>
 </constraint-mapping>
