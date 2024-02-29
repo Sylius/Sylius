@@ -311,4 +311,24 @@ final class CustomersTest extends JsonApiTestCase
             Response::HTTP_UNPROCESSABLE_ENTITY,
         );
     }
+
+    /** @test */
+    public function it_deletes_shop_user(): void
+    {
+        $this->setUpAdminContext();
+        $this->setUpDefaultGetHeaders();
+
+        $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'customer.yaml']);
+        $customer = $fixtures['customer_tony'];
+
+        $this->requestDelete(
+            sprintf('/api/v2/admin/customers/%s/user' , $customer->getId()),
+        );
+
+        $this->assertResponseCode($this->client->getResponse(), Response::HTTP_NO_CONTENT);
+
+        $this->requestGet('/api/v2/admin/customers/' . $customer->getId());
+
+        $this->assertResponseSuccessful('admin/customer/get_customer_without_shop_user_response');
+    }
 }
