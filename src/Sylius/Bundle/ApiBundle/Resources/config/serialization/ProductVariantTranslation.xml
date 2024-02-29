@@ -25,12 +25,6 @@
             <group>sylius:admin:order:index</group>
             <group>admin:order:show</group>
             <group>sylius:admin:order:show</group>
-            <group>shop:product_variant:index</group>
-            <group>sylius:shop:product_variant:index</group>
-            <group>shop:product_variant:show</group>
-            <group>sylius:shop:product_variant:show</group>
-            <group>shop:order:account:show</group>
-            <group>sylius:shop:order:account:show</group>
         </attribute>
         <attribute name="name">
             <group>admin:product_variant:index</group>
@@ -45,12 +39,6 @@
             <group>sylius:admin:order:index</group>
             <group>admin:order:show</group>
             <group>sylius:admin:order:show</group>
-            <group>shop:product_variant:index</group>
-            <group>sylius:shop:product_variant:index</group>
-            <group>shop:product_variant:show</group>
-            <group>sylius:shop:product_variant:show</group>
-            <group>shop:order:account:show</group>
-            <group>sylius:shop:order:account:show</group>
         </attribute>
         <attribute name="locale">
             <group>admin:product_variant:create</group>
