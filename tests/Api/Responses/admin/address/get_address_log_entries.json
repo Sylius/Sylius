@@ -19,7 +19,7 @@
                 "provinceCode": null,
                 "provinceName": null
             },
-            "logged_at": @date@
+            "loggedAt": @date@
         }
     ],
     "hydra:totalItems": 1
