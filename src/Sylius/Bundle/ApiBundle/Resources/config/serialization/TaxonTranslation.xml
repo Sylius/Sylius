@@ -21,28 +21,16 @@
             <group>sylius:admin:taxon:index</group>
             <group>admin:taxon:show</group>
             <group>sylius:admin:taxon:show</group>
-            <group>shop:taxon:index</group>
-            <group>sylius:shop:taxon:index</group>
-            <group>shop:taxon:show</group>
-            <group>sylius:shop:taxon:show</group>
             <group>admin:taxon_translation:show</group>
             <group>sylius:admin:taxon_translation:show</group>
-            <group>shop:taxon_translation:show</group>
-            <group>sylius:shop:taxon_translation:show</group>
         </attribute>
         <attribute name="name">
             <group>admin:taxon:index</group>
             <group>sylius:admin:taxon:index</group>
             <group>admin:taxon:show</group>
             <group>sylius:admin:taxon:show</group>
-            <group>shop:taxon:index</group>
-            <group>sylius:shop:taxon:index</group>
-            <group>shop:taxon:show</group>
-            <group>sylius:shop:taxon:show</group>
             <group>admin:taxon_translation:show</group>
             <group>sylius:admin:taxon_translation:show</group>
-            <group>shop:taxon_translation:show</group>
-            <group>sylius:shop:taxon_translation:show</group>
             <group>admin:taxon:create</group>
             <group>sylius:admin:taxon:create</group>
             <group>admin:taxon:update</group>
@@ -53,14 +41,8 @@
             <group>sylius:admin:taxon:index</group>
             <group>admin:taxon:show</group>
             <group>sylius:admin:taxon:show</group>
-            <group>shop:taxon:index</group>
-            <group>sylius:shop:taxon:index</group>
-            <group>shop:taxon:show</group>
-            <group>sylius:shop:taxon:show</group>
             <group>admin:taxon_translation:show</group>
             <group>sylius:admin:taxon_translation:show</group>
-            <group>shop:taxon_translation:show</group>
-            <group>sylius:shop:taxon_translation:show</group>
             <group>admin:taxon:create</group>
             <group>sylius:admin:taxon:create</group>
             <group>admin:taxon:update</group>
@@ -77,14 +59,8 @@
             <group>sylius:admin:taxon:index</group>
             <group>admin:taxon:show</group>
             <group>sylius:admin:taxon:show</group>
-            <group>shop:taxon:index</group>
-            <group>sylius:shop:taxon:index</group>
-            <group>shop:taxon:show</group>
-            <group>sylius:shop:taxon:show</group>
             <group>admin:taxon_translation:show</group>
             <group>sylius:admin:taxon_translation:show</group>
-            <group>shop:taxon_translation:show</group>
-            <group>sylius:shop:taxon_translation:show</group>
             <group>admin:taxon:create</group>
             <group>sylius:admin:taxon:create</group>
             <group>admin:taxon:update</group>
