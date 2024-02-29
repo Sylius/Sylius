@@ -190,7 +190,7 @@ final class ProductAssociationTypesTest extends JsonApiTestCase
     public function it_gets_product_association_type_translation(): void
     {
         $this->setUpAdminContext();
-        $this->setUpDefaultHeaders();
+        $this->setUpDefaultGetHeaders();
 
         $fixtures = $this->loadFixturesFromFiles(['product/product_with_many_locales.yaml', 'authentication/api_administrator.yaml']);
 
