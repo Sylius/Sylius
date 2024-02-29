@@ -159,7 +159,7 @@ final class ProductReviewsTest extends JsonApiTestCase
                 [
                     'propertyPath' => 'rating',
                     'message' => 'Review rating must be between 1 and 5.',
-                ]
+                ],
             ],
         );
     }

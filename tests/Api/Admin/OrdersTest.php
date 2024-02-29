@@ -30,7 +30,7 @@ final class OrdersTest extends JsonApiTestCase
     {
         $this->setUpOrderPlacer();
         $this->setUpAdminContext();
-        $this->setUpDefaultHeaders();
+        $this->setUpDefaultGetHeaders();
 
         parent::setUp();
     }

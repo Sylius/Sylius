@@ -142,8 +142,8 @@ final class ProductReviewsTest extends JsonApiTestCase
                 [
                     'propertyPath' => 'email',
                     'message' => 'Please enter your email.',
-                ]
-            ]
+                ],
+            ],
         );
     }
 
