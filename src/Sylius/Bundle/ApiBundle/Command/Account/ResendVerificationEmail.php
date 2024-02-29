@@ -19,24 +19,18 @@ use Sylius\Bundle\ApiBundle\Command\LocaleCodeAwareInterface;
 use Sylius\Bundle\ApiBundle\Command\ShopUserIdAwareInterface;
 
 /** @experimental */
-class ResendVerificationEmail implements ShopUserIdAwareInterface, ChannelCodeAwareInterface, LocaleCodeAwareInterface, IriToIdentifierConversionAwareInterface
+class ResendVerificationEmail implements
+    ShopUserIdAwareInterface,
+    ChannelCodeAwareInterface,
+    LocaleCodeAwareInterface,
+    IriToIdentifierConversionAwareInterface
 {
     /** @var string|int|null */
     public $shopUserId;
 
-    /**
-     * @immutable
-     *
-     * @var string|null
-     */
-    public $channelCode;
+    public ?string $channelCode = null;
 
-    /**
-     * @immutable
-     *
-     * @var string|null
-     */
-    public $localeCode;
+    public ?string $localeCode = null;
 
     public function getChannelCode(): string
     {

@@ -120,6 +120,24 @@ final class ProductsTest extends JsonApiTestCase
     }
 
     /** @test */
+    public function it_returns_products_with_reviews(): void
+    {
+        $this->loadFixturesFromFiles(['channel.yaml', 'product/product.yaml']);
+
+        $this->client->request(
+            method: 'GET',
+            uri: '/api/v2/shop/products',
+            server: $this->headerBuilder()->withJsonLdContentType()->withJsonLdAccept()->build(),
+        );
+
+        $this->assertResponse(
+            $this->client->getResponse(),
+            'shop/product/get_products_with_reviews',
+            Response::HTTP_OK,
+        );
+    }
+
+    /** @test */
     public function it_returns_product_item_with_only_available_associations(): void
     {
         $this->loadFixturesFromFile('product/products_with_associations.yaml');

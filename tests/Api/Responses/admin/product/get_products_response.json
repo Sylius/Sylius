@@ -65,6 +65,7 @@
             ],
             "reviews": [
                 "\/api\/v2\/admin\/product-reviews\/@integer@",
+                "\/api\/v2\/admin\/product-reviews\/@integer@",
                 "\/api\/v2\/admin\/product-reviews\/@integer@"
             ],
             "associations": [

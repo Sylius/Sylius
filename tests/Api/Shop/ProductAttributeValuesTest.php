@@ -32,7 +32,7 @@ final class ProductAttributeValuesTest extends JsonApiTestCase
 
         $this->assertResponse(
             $this->client->getResponse(),
-            'shop/product/get_product_attribute_value',
+            'shop/product_attribute/get_product_attribute_value',
             Response::HTTP_OK,
         );
     }

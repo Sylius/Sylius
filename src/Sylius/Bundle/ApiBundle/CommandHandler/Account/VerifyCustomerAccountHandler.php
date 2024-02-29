@@ -19,7 +19,6 @@ use Sylius\Bundle\ApiBundle\Command\Account\VerifyCustomerAccount;
 use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\Clock\ClockInterface;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Messenger\Stamp\DispatchAfterCurrentBusStamp;
@@ -34,13 +33,13 @@ final class VerifyCustomerAccountHandler implements MessageHandlerInterface
     ) {
     }
 
-    public function __invoke(VerifyCustomerAccount $command): JsonResponse
+    public function __invoke(VerifyCustomerAccount $command): void
     {
         /** @var ShopUserInterface|null $user */
         $user = $this->shopUserRepository->findOneBy(['emailVerificationToken' => $command->token]);
         if (null === $user) {
             throw new InvalidArgumentException(
-                sprintf('There is no shop user with %s email verification token', $command->token),
+                sprintf('There is no shop user with "%s" email verification token', $command->token),
             );
         }
 
@@ -52,7 +51,5 @@ final class VerifyCustomerAccountHandler implements MessageHandlerInterface
             new SendAccountRegistrationEmail($user->getEmail(), $command->getLocaleCode(), $command->getChannelCode()),
             [new DispatchAfterCurrentBusStamp()],
         );
-
-        return new JsonResponse([]);
     }
 }
