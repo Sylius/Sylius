@@ -707,7 +707,7 @@ final class ProductAttributesTest extends JsonApiTestCase
     public function it_gets_a_product_attribute_translation(): void
     {
         $this->setUpAdminContext();
-        $this->setUpDefaultHeaders();
+        $this->setUpDefaultGetHeaders();
 
         $fixtures = $this->loadFixturesFromFiles([
             'authentication/api_administrator.yaml',
