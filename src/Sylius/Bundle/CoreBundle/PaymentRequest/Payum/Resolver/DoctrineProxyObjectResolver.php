@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\CoreBundle\PaymentRequest\Payum\Checker;
+namespace Sylius\Bundle\CoreBundle\PaymentRequest\Payum\Resolver;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\Proxy;
