@@ -23,7 +23,7 @@ To ease the update process, we have grouped the changes into the following categ
 
 1. The constructor of `Sylius\Bundle\AdminBundle\Controller\NotificationController` has been changed:
 
-    ```diff
+    ```php
         public function __construct(
     -       private ClientInterface $client,
     -       private MessageFactory $messageFactory,
@@ -32,9 +32,7 @@ To ease the update process, we have grouped the changes into the following categ
             private string $hubUri,
             private string $environment,
     +       private ?StreamFactoryInterface $streamFactory = null,
-        ) {
-            ...
-        }
+        )
     ```
 
 1. The constructor of `Sylius\Component\Addressing\Matcher\ZoneMatcher` has been changed:
@@ -48,21 +46,91 @@ To ease the update process, we have grouped the changes into the following categ
         )
     ```
 
-1. Not passing an `$entityManager` and passing a `$doctrineRegistry`
-   to `Sylius\Bundle\CoreBundle\Installer\Provider\DatabaseSetupCommandsProvider` constructor is deprecated and will be
-   prohibited in Sylius 2.0.
+1. Passing `Doctrine\Bundle\DoctrineBundle\Registry $doctrineRegistry`
+   to `Sylius\Bundle\CoreBundle\Installer\Provider\DatabaseSetupCommandsProvider` constructor is deprecated.
+   Pass `Doctrine\ORM\EntityManagerInterface $entityManager` instead. This will be mandatory in Sylius 2.0.
 
-1. Not passing a `$fileLocator` to `Sylius\Bundle\CoreBundle\Fixture\Factory\ProductExampleFactory` constructor is
-   deprecated and will be prohibited in Sylius 2.0.
+1. Not passing `Symfony\Component\Config\FileLocatorInterface $fileLocator`
+   to `Sylius\Bundle\CoreBundle\Fixture\Factory\ProductExampleFactory`
+   constructor is deprecated and will be prohibited in Sylius 2.0.
 
-1. Change in the `Sylius\Bundle\CoreBundle\Fixture\Factory\PromotionExampleFactory` constructor:
-   Added the `$localeRepository` argument to the constructor of the `PromotionExampleFactory` class. Not passing an
-   instance of `RepositoryInterface` for the `locale` entity repository in `$localeRepository` was marked as deprecated
-   and will be prohibited in Sylius 2.0.
+1. Not passing `Sylius\Component\Resource\Repository\RepositoryInterface $localeRepository`
+   as the sixth argument to `Sylius\Bundle\CoreBundle\Fixture\Factory\PromotionExampleFactory` 
+   is deprecated and will be prohibited in Sylius 2.0.
 
-1. The first parameter of the constructor in the `Sylius\Component\Core\Promotion\Checker\Rule\ItemTotalRuleChecker`
+1. The first parameter `Sylius\Component\Promotion\Checker\Rule\RuleCheckerInterface $itemTotalRuleChecker` of the
+   constructor in the `Sylius\Component\Core\Promotion\Checker\Rule\ItemTotalRuleChecker`
    class has been deprecated and will be removed in Sylius 2.0.
 
+1. Passing `Symfony\Component\Messenger\MessageBusInterface $eventBus`
+   to `Sylius\Bundle\CoreBundle\CatalogPromotion\Processor\CatalogPromotionRemovalProcessor`
+   as a second and third argument is deprecated.
+
+1. Passing `Sylius\Bundle\AdminBundle\EmailManager\OrderEmailManagerInterface`
+   to `Sylius\Bundle\AdminBundle\Action\ResendOrderConfirmationEmailAction`
+   as the second constructor argument is deprecated,
+   use `Sylius\Bundle\CoreBundle\MessageDispatcher\ResendOrderConfirmationEmailDispatcherInterface` instead.
+
+1. Passing `Sylius\Bundle\AdminBundle\EmailManager\ShipmentEmailManagerInterface`
+   to `Sylius\Bundle\AdminBundle\Action\ResendShipmentConfirmationEmailAction` as the second constructor argument is
+   deprecated,
+   use `Sylius\Bundle\CoreBundle\MessageDispatcher\ResendShipmentConfirmationEmailDispatcherInterface` instead.
+
+1. Passing `Sylius\Bundle\AdminBundle\EmailManager\ShipmentEmailManagerInterface`
+   to `Sylius\Bundle\AdminBundle\EventListener\ShipmentShipListener` as the first constructor argument is deprecated,
+   use `Sylius\Bundle\CoreBundle\Mailer\ShipmentEmailManagerInterface` instead.
+
+1. Passing `Sylius\Bundle\ShopBundle\EmailManager\OrderEmailManagerInterface`
+   to `Sylius\Bundle\ShopBundle\EventListener\OrderCompleteListener` as the first constructor argument is deprecated,
+   use `Sylius\Bundle\CoreBundle\Mailer\OrderEmailManagerInterface` instead.
+
+1. Passing `Sylius\Bundle\ShopBundle\EmailManager\ContactEmailManagerInterface $contactEmailManager`
+   to `Sylius\Bundle\ShopBundle\Controller\ContactController` as the seventh constructor argument is deprecated,
+   use `Sylius\Bundle\CoreBundle\Mailer\ContactEmailManagerInterface` instead.
+
+1. Not passing `Sylius\Bundle\CoreBundle\CatalogPromotion\Announcer\CatalogPromotionRemovalAnnouncerInterface`
+   to `Sylius\Bundle\CoreBundle\CatalogPromotion\Processor\CatalogPromotionRemovalProcessor`
+   as the second constructor argument is deprecated.
+
+1. Not passing `Doctrine\Persistence\ObjectManager` to `Sylius\Component\Core\Updater\UnpaidOrdersStateUpdater`
+   as the fifth constructor argument is deprecated.
+
+1. Not passing `Symfony\Component\Filesystem\Filesystem` as fourth argument and parameters file path as fifth
+   to `Sylius\Bundle\CoreBundle\Installer\Setup\LocaleSetup` is deprecated and will be prohibited in Sylius 2.0.
+
+1. Not passing `Sylius\Component\Core\Checker\ProductVariantLowestPriceDisplayCheckerInterface`
+   to `Sylius\Component\Core\Calculator\ProductVariantPriceCalculator`
+   as the first constructor argument is deprecated.
+
+1. Not passing an instance of `Symfony\Component\PropertyAccess\PropertyAccessorInterface`
+   to `Sylius\Bundle\CoreBundle\Validator\Constraints\HasEnabledEntityValidator`
+   as the second argument is deprecated.
+
+1. Not passing an instance of `Sylius\Component\Core\Payment\Remover\OrderPaymentsRemoverInterface`
+   and a collection of unprocessable order states to `Sylius\Component\Core\OrderProcessing\OrderPaymentProcessor`
+   as the third and fourth arguments respectively is deprecated.
+
+1. Not passing an instance of `Sylius\Component\Core\Distributor\ProportionalIntegerDistributorInterface`
+   to `Sylius\Component\Core\Taxation\Applicator\OrderItemsTaxesApplicator` and
+   to `Sylius\Component\Core\Taxation\Applicator\OrderItemUnitsTaxesApplicator`
+   as the last argument is deprecated.
+
+1. Passing an instance of `Sylius\Component\Resource\Translation\Provider\TranslationLocaleProviderInterface` as the
+   first constructor argument
+   to `Sylius\Bundle\AttributeBundle\Form\Type\AttributeType\Configuration\SelectAttributeChoicesCollectionType` has
+   been deprecated.
+
+1. Not passing a `Symfony\Component\Routing\RouterInterface $router`
+   to `Sylius\Bundle\AdminBundle\Controller\ImpersonateUserController` as the fourth argument is
+   deprecated and will be prohibited in Sylius 2.0.
+
+1. The name of the second constructor argument of `Sylius\Bundle\AdminBundle\Action\ResendOrderConfirmationEmailAction`
+   is
+   deprecated and will be renamed to `$resendOrderConfirmationEmailDispatcher`.
+
+1. The name of the second constructor argument
+   of `Sylius\Bundle\AdminBundle\Action\ResendShipmentConfirmationEmailAction` is
+   deprecated and will be renamed to `$resendShipmentConfirmationEmailDispatcher`.
 
 1. Starting with Sylius `1.13` we provided a possibility to use the Symfony Workflow as your State Machine. To allow a
    smooth transition we created a new package called `sylius/state-machine-abstraction`, which provides a configurable
@@ -181,46 +249,6 @@ To ease the update process, we have grouped the changes into the following categ
    deprecated.
    Use `Sylius\Bundle\CoreBundle\CatalogPromotion\Command\RemoveCatalogPromotion` command instead.
 
-1. Passing `Symfony\Component\Messenger\MessageBusInterface`
-   to `Sylius\Bundle\CoreBundle\CatalogPromotion\Processor\CatalogPromotionRemovalProcessor`
-   as a second and third argument is deprecated.
-
-1. Passing `Sylius\Bundle\AdminBundle\EmailManager\OrderEmailManagerInterface`
-   to `Sylius\Bundle\AdminBundle\Action\ResendOrderConfirmationEmailAction` as a second argument is deprecated,
-   use `Sylius\Bundle\CoreBundle\MessageDispatcher\ResendOrderConfirmationEmailDispatcherInterface` instead.
-
-1. The name of the second argument of `Sylius\Bundle\AdminBundle\Action\ResendOrderConfirmationEmailAction` is
-   deprecated and will be renamed to `$resendOrderConfirmationEmailDispatcher`.
-
-1. Passing `Sylius\Bundle\AdminBundle\EmailManager\ShipmentEmailManagerInterface`
-   to `Sylius\Bundle\AdminBundle\Action\ResendShipmentConfirmationEmailAction` as a second argument is deprecated,
-   use `Sylius\Bundle\CoreBundle\MessageDispatcher\ResendShipmentConfirmationEmailDispatcherInterface` instead.
-
-1. The name of the second argument of `Sylius\Bundle\AdminBundle\Action\ResendShipmentConfirmationEmailAction` is
-   deprecated and will be renamed to `$resendShipmentConfirmationEmailDispatcher`.
-
-1. Passing `Sylius\Bundle\AdminBundle\EmailManager\ShipmentEmailManagerInterface`
-   to `Sylius\Bundle\AdminBundle\EventListener\ShipmentShipListener` as a first argument is deprecated,
-   use `Sylius\Bundle\CoreBundle\Mailer\ShipmentEmailManagerInterface` instead.
-
-1. Passing `Sylius\Bundle\ShopBundle\EmailManager\OrderEmailManagerInterface`
-   to `Sylius\Bundle\ShopBundle\EventListener\OrderCompleteListener` as a first argument is deprecated,
-   use `Sylius\Bundle\CoreBundle\Mailer\OrderEmailManagerInterface` instead.
-
-1. Passing `Sylius\Bundle\ShopBundle\EmailManager\ContactEmailManagerInterface`
-   to `Sylius\Bundle\ShopBundle\Controller\ContactController` as last argument is deprecated,
-   use `Sylius\Bundle\CoreBundle\Mailer\ContactEmailManagerInterface` instead.
-
-1. Not passing `Sylius\Bundle\CoreBundle\CatalogPromotion\Announcer\CatalogPromotionRemovalAnnouncerInterface`
-   to `Sylius\Bundle\CoreBundle\CatalogPromotion\Processor\CatalogPromotionRemovalProcessor`
-   as a second argument is deprecated.
-
-1. Not passing `Doctrine\Persistence\ObjectManager` to `Sylius\Component\Core\Updater\UnpaidOrdersStateUpdater`
-   as a fifth argument is deprecated.
-
-1. Not passing `Symfony\Component\Filesystem\Filesystem` as fourth argument and parameters file path as fifth
-   to `Sylius\Bundle\CoreBundle\Installer\Setup\LocaleSetup` is deprecated and will be prohibited in Sylius 2.0.
-
 1. To ease customization we've introduced attributes for some services in `1.13`:
     - `Sylius\Bundle\OrderBundle\Attribute\AsCartContext` for cart contexts
     - `Sylius\Bundle\OrderBundle\Attribute\AsOrderProcessor` for order processors
@@ -252,23 +280,6 @@ To ease the update process, we have grouped the changes into the following categ
         }
     }
    ```
-
-1. Not passing `Sylius\Component\Core\Checker\ProductVariantLowestPriceDisplayCheckerInterface`
-   to `Sylius\Component\Core\Calculator\ProductVariantPriceCalculator`
-   as a first argument is deprecated.
-
-1. Not passing an instance of `Symfony\Component\PropertyAccess\PropertyAccessorInterface`
-   to `Sylius\Bundle\CoreBundle\Validator\Constraints\HasEnabledEntityValidator`
-   as the second argument is deprecated.
-
-1. Not passing an instance of `Sylius\Component\Core\Payment\Remover\OrderPaymentsRemoverInterface`
-   and a collection of unprocessable order states to `Sylius\Component\Core\OrderProcessing\OrderPaymentProcessor`
-   as the third and fourth arguments respectively is deprecated.
-
-1. Not passing an instance of `Sylius\Component\Core\Distributor\ProportionalIntegerDistributorInterface`
-   to `Sylius\Component\Core\Taxation\Applicator\OrderItemsTaxesApplicator` and
-   to `Sylius\Component\Core\Taxation\Applicator\OrderItemUnitsTaxesApplicator`
-   as the last argument is deprecated.
 
 1. Class `Sylius\Bundle\ShopBundle\Calculator\OrderItemsSubtotalCalculator` has been deprecated. Order items subtotal
    calculation
@@ -345,11 +356,6 @@ To ease the update process, we have grouped the changes into the following categ
    and `Sylius\Bundle\ReviewBundle\Doctrine\ORM\Subscriber\LoadMetadataSubscriber` have changed so that it does not add
    a relationship if one already exists. If you have overwritten or decorated it, there may be a need to update it.
 
-1. Passing an instance of `Sylius\Component\Resource\Translation\Provider\TranslationLocaleProviderInterface` as the
-   first argument
-   to `Sylius\Bundle\AttributeBundle\Form\Type\AttributeType\Configuration\SelectAttributeChoicesCollectionType` has
-   been deprecated.
-
 1. The `sylius_admin_ajax_taxon_move` route has been deprecated. If you're relaying on it, consider migrating to new
    `sylius_admin_ajax_taxon_move_up` and `sylius_admin_ajax_taxon_move_down` routes.
 
@@ -360,9 +366,6 @@ To ease the update process, we have grouped the changes into the following categ
 
 1. The `Sylius\Bundle\CoreBundle\Fixture\Factory\PaymentFixture` has been deprecated.
    Use `Sylius\Bundle\CoreBundle\Fixture\PaymentFixture` instead.
-
-1. Not passing a `$router` to `Sylius\Bundle\AdminBundle\Controller\ImpersonateUserController` as the fourth argument is
-   deprecated and will be prohibited in Sylius 2.0.
 
 1. The `Sylius\Bundle\CoreBundle\Provider\SessionProvider` has been deprecated and will be removed in Sylius 2.0.
 
@@ -502,7 +505,6 @@ To ease the update process, we have grouped the changes into the following categ
    `Sylius\Bundle\AddressingBundle\Repository\ZoneRepository` were added.
    If you created a custom `Zone` repository, you should update it to extend
    the `Sylius\Bundle\AddressingBundle\Repository\ZoneRepository`
-
 
 
 1. Moved classes from `Command` to `Console\Command`. The `Command` namespace is deprecated for console command classes
