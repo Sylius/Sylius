@@ -14,13 +14,13 @@ declare(strict_types=1);
 namespace Sylius\Bundle\ApiBundle\CommandHandler\Payment;
 
 use Sylius\Bundle\ApiBundle\Command\Payment\AddPaymentRequest;
-use Sylius\Bundle\CoreBundle\PaymentRequest\CommandDispatcher\PaymentRequestCommandDispatcherInterface;
 use Sylius\Component\Core\Model\PaymentInterface;
 use Sylius\Component\Core\Model\PaymentMethodInterface;
 use Sylius\Component\Core\Repository\PaymentMethodRepositoryInterface;
 use Sylius\Component\Core\Repository\PaymentRepositoryInterface;
 use Sylius\Component\Payment\Factory\PaymentRequestFactoryInterface;
 use Sylius\Component\Payment\Model\PaymentRequestInterface;
+use Sylius\Component\Payment\Repository\PaymentRequestRepositoryInterface;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 use Webmozart\Assert\Assert;
 
@@ -28,10 +28,10 @@ use Webmozart\Assert\Assert;
 final class AddPaymentRequestHandler implements MessageHandlerInterface
 {
     public function __construct(
-        private PaymentRequestFactoryInterface $paymentRequestFactory,
         private PaymentMethodRepositoryInterface $paymentMethodRepository,
         private PaymentRepositoryInterface $paymentRepository,
-        private PaymentRequestCommandDispatcherInterface $paymentRequestCommandDispatcher,
+        private PaymentRequestFactoryInterface $paymentRequestFactory,
+        private PaymentRequestRepositoryInterface $paymentRequestRepository,
     ) {
     }
 
@@ -39,7 +39,7 @@ final class AddPaymentRequestHandler implements MessageHandlerInterface
     {
         $paymentRequest = $this->createPaymentRequest($addPaymentRequest);
 
-        $this->paymentRequestCommandDispatcher->add($paymentRequest);
+        $this->paymentRequestRepository->add($paymentRequest);
 
         return $paymentRequest;
     }

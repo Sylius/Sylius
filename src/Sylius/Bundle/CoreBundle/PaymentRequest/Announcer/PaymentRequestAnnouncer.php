@@ -11,31 +11,22 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\CoreBundle\PaymentRequest\CommandDispatcher;
+namespace Sylius\Bundle\CoreBundle\PaymentRequest\Announcer;
 
 use Sylius\Bundle\CoreBundle\PaymentRequest\CommandProvider\PaymentRequestCommandProviderInterface;
 use Sylius\Bundle\PaymentBundle\Exception\PaymentRequestNotSupportedException;
 use Sylius\Component\Payment\Model\PaymentRequestInterface;
-use Sylius\Component\Payment\Repository\PaymentRequestRepositoryInterface;
 use Symfony\Component\Messenger\MessageBusInterface;
 
-final class PaymentRequestCommandDispatcher implements PaymentRequestCommandDispatcherInterface
+final class PaymentRequestAnnouncer implements PaymentRequestAnnouncerInterface
 {
     public function __construct(
-        private PaymentRequestRepositoryInterface $paymentRequestRepository,
         private PaymentRequestCommandProviderInterface $paymentRequestCommandProvider,
         private MessageBusInterface $commandBus,
     ) {
     }
 
-    public function add(PaymentRequestInterface $paymentRequest): void
-    {
-        $this->paymentRequestRepository->add($paymentRequest);
-
-        $this->update($paymentRequest);
-    }
-
-    public function update(PaymentRequestInterface $paymentRequest): void
+    public function dispatchPaymentRequestCommand(PaymentRequestInterface $paymentRequest): void
     {
         if (!$this->paymentRequestCommandProvider->supports($paymentRequest)) {
             throw new PaymentRequestNotSupportedException();
