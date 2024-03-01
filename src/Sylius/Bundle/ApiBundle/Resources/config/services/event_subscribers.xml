@@ -34,6 +34,11 @@
             <tag name="kernel.event_subscriber" />
         </service>
 
+        <service id="Sylius\Bundle\ApiBundle\EventSubscriber\PaymentRequestEventSubscriber">
+            <argument type="service" id="Sylius\Bundle\CoreBundle\PaymentRequest\Announcer\PaymentRequestAnnouncerInterface" />
+            <tag name="kernel.event_subscriber" />
+        </service>
+
         <service id="Sylius\Bundle\ApiBundle\EventSubscriber\ProductDeletionEventSubscriber">
             <argument type="service" id="Sylius\Component\Core\Promotion\Checker\ProductInPromotionRuleCheckerInterface" />
             <tag name="kernel.event_subscriber" />

@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace Sylius\Bundle\ApiBundle\CommandHandler\Payment;
 
 use Sylius\Bundle\ApiBundle\Command\Payment\UpdatePaymentRequest;
-use Sylius\Bundle\CoreBundle\PaymentRequest\CommandDispatcher\PaymentRequestCommandDispatcherInterface;
 use Sylius\Component\Payment\Model\PaymentRequestInterface;
 use Sylius\Component\Payment\Repository\PaymentRequestRepositoryInterface;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
@@ -25,7 +24,6 @@ final class UpdatePaymentRequestHandler implements MessageHandlerInterface
 {
     public function __construct(
         private PaymentRequestRepositoryInterface $paymentRequestRepository,
-        private PaymentRequestCommandDispatcherInterface $paymentRequestCommandDispatcher,
     ) {
     }
 
@@ -38,8 +36,6 @@ final class UpdatePaymentRequestHandler implements MessageHandlerInterface
         Assert::notNull($paymentRequest, sprintf('Payment request (hash "%s") not found.', $hash));
 
         $paymentRequest->setPayload($updatePaymentRequest->getPayload());
-
-        $this->paymentRequestCommandDispatcher->add($paymentRequest);
 
         return $paymentRequest;
     }
