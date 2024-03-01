@@ -18,8 +18,7 @@
     <services>
         <defaults public="true" />
 
-        <service id="Sylius\Bundle\CoreBundle\PaymentRequest\CommandDispatcher\PaymentRequestCommandDispatcherInterface" class="Sylius\Bundle\CoreBundle\PaymentRequest\CommandDispatcher\PaymentRequestCommandDispatcher">
-            <argument type="service" id="sylius.repository.payment_request" />
+        <service id="Sylius\Bundle\CoreBundle\PaymentRequest\Announcer\PaymentRequestAnnouncerInterface" class="Sylius\Bundle\CoreBundle\PaymentRequest\Announcer\PaymentRequestAnnouncer">
             <argument type="service" id="sylius.payment_request.command_provider.gateway_factory" />
             <argument type="service" id="sylius.command_bus" />
         </service>

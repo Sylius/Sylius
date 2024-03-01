@@ -14,15 +14,17 @@ declare(strict_types=1);
 namespace Sylius\Bundle\CoreBundle\PaymentRequest\Processor\Payum;
 
 use Payum\Core\Security\TokenInterface;
-use Sylius\Bundle\CoreBundle\PaymentRequest\CommandDispatcher\PaymentRequestCommandDispatcherInterface;
+use Sylius\Bundle\CoreBundle\PaymentRequest\Announcer\PaymentRequestAnnouncerInterface;
 use Sylius\Component\Payment\Factory\PaymentRequestFactoryInterface;
 use Sylius\Component\Payment\Model\PaymentRequestInterface;
+use Sylius\Component\Payment\Repository\PaymentRequestRepositoryInterface;
 
 final class AfterTokenRequestProcessor implements AfterTokenRequestProcessorInterface
 {
     public function __construct(
         private PaymentRequestFactoryInterface $paymentRequestFactory,
-        private PaymentRequestCommandDispatcherInterface $paymentRequestCommandDispatcher,
+        private PaymentRequestRepositoryInterface $paymentRequestRepository,
+        private PaymentRequestAnnouncerInterface $paymentRequestCommandDispatcher,
     ) {
     }
 
@@ -41,6 +43,8 @@ final class AfterTokenRequestProcessor implements AfterTokenRequestProcessorInte
         $newPaymentRequest = $this->paymentRequestFactory->createFromPaymentRequest($paymentRequest);
         $newPaymentRequest->setAction(PaymentRequestInterface::ACTION_STATUS);
 
-        $this->paymentRequestCommandDispatcher->add($newPaymentRequest);
+        $this->paymentRequestRepository->add($newPaymentRequest);
+
+        $this->paymentRequestCommandDispatcher->dispatchPaymentRequestCommand($newPaymentRequest);
     }
 }

@@ -11,13 +11,11 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\CoreBundle\PaymentRequest\CommandDispatcher;
+namespace Sylius\Bundle\CoreBundle\PaymentRequest\Announcer;
 
 use Sylius\Component\Payment\Model\PaymentRequestInterface;
 
-interface PaymentRequestCommandDispatcherInterface
+interface PaymentRequestAnnouncerInterface
 {
-    public function add(PaymentRequestInterface $paymentRequest): void;
-
-    public function update(PaymentRequestInterface $paymentRequest): void;
+    public function dispatchPaymentRequestCommand(PaymentRequestInterface $paymentRequest): void;
 }
