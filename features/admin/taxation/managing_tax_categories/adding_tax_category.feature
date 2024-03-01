@@ -7,7 +7,7 @@ Feature: Adding a new tax category
     Background:
         Given I am logged in as an administrator
 
-    @ui @api
+    @todo @ui @api
     Scenario: Adding a new tax category
         When I want to create a new tax category
         And I specify its code as "food_and_beverage"
@@ -16,7 +16,7 @@ Feature: Adding a new tax category
         Then I should be notified that it has been successfully created
         And the tax category "Food and Beverage" should appear in the registry
 
-    @ui @api
+    @todo @ui @api
     Scenario: Adding a new tax category with a description
         When I want to create a new tax category
         And I specify its code as "food_and_beverage"

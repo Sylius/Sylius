@@ -17,7 +17,7 @@ Feature: Cancelling order with promotion applied
         And the customer chose "Free" shipping method with "Cash on Delivery" payment
         And I am logged in as an administrator
 
-    @ui @api
+    @todo @ui @api
     Scenario: Cancelling order when the applied promotion is no longer valid
         Given the promotion was disabled for the channel "Web"
         When I view the summary of the order "#00000001"

@@ -60,6 +60,7 @@
     "Psr\\Container\\ContainerInterface",
     "Psr\\Http\\Message\\RequestFactoryInterface",
     "Psr\\Http\\Message\\StreamFactoryInterface",
+    "Sylius\\Bundle\\UiBundle\\Registry\\TemplateBlockRegistryInterface",
     "Symfony\\Component\\Security\\Core\\Encoder\\EncoderFactoryInterface"
   ],
   "php-core-extensions" : [

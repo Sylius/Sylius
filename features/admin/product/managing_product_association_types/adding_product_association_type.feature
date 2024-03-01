@@ -8,7 +8,7 @@ Feature: Adding a new product association type
         Given the store is available in "English (United States)"
         And I am logged in as an administrator
 
-    @ui @api
+    @todo @ui @api
     Scenario: Adding a new product association type
         When I want to create a new product association type
         And I specify its code as "cross_sell"

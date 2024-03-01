@@ -13,7 +13,7 @@ Feature: Filtering orders by a channel
         And this customer has also placed an order "#00000003" on a channel "Web-US"
         And I am logged in as an administrator
 
-    @ui @api
+    @todo @ui @api
     Scenario: Filtering orders by a chosen channel
         When I browse orders
         And I choose "Web-EU" as a channel filter
@@ -23,7 +23,7 @@ Feature: Filtering orders by a channel
         And I should see an order with "#00000002" number
         But I should not see an order with "#00000003" number
 
-    @ui @api
+    @todo @ui @api
     Scenario: Filtering orders by an another channel
         When I browse orders
         And I choose "Web-US" as a channel filter

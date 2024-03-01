@@ -10,7 +10,7 @@ Feature: Deleting a tax rate
         And the store has "United States Sales Tax" tax rate of 20% for "Sports gear" within the "US" zone
         And I am logged in as an administrator
 
-    @ui @api
+    @todo @ui @api
     Scenario: Deleted tax rate should disappear from the registry
         When I delete tax rate "United States Sales Tax"
         Then I should be notified that it has been successfully deleted

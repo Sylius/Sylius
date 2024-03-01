@@ -1,0 +1,9 @@
+twig_hooks:
+    hooks:
+        'sylius_admin.shared.crud.common.sidebar':
+            logo:
+                template: '@SyliusAdmin/Shared/Crud/Common/Sidebar/_logo.html.twig'
+            user_dropdown:
+                template: '@SyliusAdmin/Shared/Crud/Common/Sidebar/_userDropdown.html.twig'
+            menu:
+                template: '@SyliusAdmin/Shared/Crud/Common/Sidebar/_menu.html.twig'

@@ -1,0 +1,7 @@
+{% set main_hook = hook_name(_self) %}
+
+<aside class="navbar navbar-vertical navbar-expand-lg d-print-none" data-bs-theme="dark">
+    <div class="container-fluid">
+        {% hook main_hook with { parent_main_hook: main_hook } %}
+    </div>
+</aside>

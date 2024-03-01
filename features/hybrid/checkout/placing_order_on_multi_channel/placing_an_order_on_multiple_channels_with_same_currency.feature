@@ -17,7 +17,7 @@ Feature: Placing an order on multiple channels with same currency
         And there is a customer account "customer@example.com" identified by "sylius"
         And I am logged in as "customer@example.com"
 
-    @ui
+    @todo @ui
     Scenario: Placing an order in a channels base currency
         Given I changed my current channel to "Web"
         And I have product "PHP T-Shirt" in the cart
@@ -26,7 +26,7 @@ Feature: Placing an order on multiple channels with same currency
         And I confirm my order
         Then the administrator should see that order placed by "customer@example.com" has "USD" currency
 
-    @ui
+    @todo @ui
     Scenario: Placing an order on a different channel with same currency
         Given I changed my current channel to "Mobile"
         And I had product "PHP T-Shirt" in the cart

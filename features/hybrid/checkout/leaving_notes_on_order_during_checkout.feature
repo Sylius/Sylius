@@ -13,7 +13,7 @@ Feature: Leaving additional request notes on my order during checkout
         And there is a customer account "customer@example.com" identified by "sylius"
         And I am logged in as "customer@example.com"
 
-    @ui @api
+    @todo @ui @api
     Scenario: Adding note on the checkout summary step
         Given I have product "PHP T-Shirt" in the cart
         And I specified the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"

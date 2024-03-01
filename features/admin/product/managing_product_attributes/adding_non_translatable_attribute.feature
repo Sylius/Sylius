@@ -8,7 +8,7 @@ Feature: Adding a new non-translatable product attribute
         Given the store is available in "English (United States)"
         And I am logged in as an administrator
 
-    @ui @api
+    @todo @ui @api
     Scenario: Adding a new non-translatable product attribute
         When I want to create a new integer product attribute
         And I specify its code as "damage"

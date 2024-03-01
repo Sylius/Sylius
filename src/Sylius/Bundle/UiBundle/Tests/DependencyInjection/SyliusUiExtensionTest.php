@@ -15,8 +15,9 @@ namespace Sylius\Bundle\UiBundle\Tests\DependencyInjection;
 
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractExtensionTestCase;
 use Sylius\Bundle\UiBundle\DependencyInjection\SyliusUiExtension;
+use Sylius\Bundle\UiBundle\Registry\BlockRegistryInterface;
+use Sylius\Bundle\UiBundle\Registry\ComponentBlock;
 use Sylius\Bundle\UiBundle\Registry\TemplateBlock;
-use Sylius\Bundle\UiBundle\Registry\TemplateBlockRegistryInterface;
 use Symfony\Component\DependencyInjection\Definition;
 
 final class SyliusUiExtensionTest extends AbstractExtensionTestCase
@@ -30,6 +31,7 @@ final class SyliusUiExtensionTest extends AbstractExtensionTestCase
             'first_event' => ['blocks' => [
                 'first_block' => ['template' => 'first.html.twig', 'context' => [], 'enabled' => true, 'priority' => 0],
                 'second_block' => ['template' => 'second.html.twig', 'context' => ['foo' => 'bar'], 'enabled' => true, 'priority' => 0],
+                'third_block' => ['component' => 'component_name', 'context' => [], 'enabled' => true, 'priority' => 0],
             ]],
             'second_event' => ['blocks' => [
                 'another_block' => ['template' => 'another.html.twig', 'context' => [], 'enabled' => true, 'priority' => 0],
@@ -37,12 +39,13 @@ final class SyliusUiExtensionTest extends AbstractExtensionTestCase
         ]]);
 
         $this->assertContainerBuilderHasServiceDefinitionWithArgument(
-            TemplateBlockRegistryInterface::class,
+            BlockRegistryInterface::class,
             0,
             [
                 'first_event' => [
                     'first_block' => new Definition(TemplateBlock::class, ['first_block', 'first_event', 'first.html.twig', [], 0, true]),
                     'second_block' => new Definition(TemplateBlock::class, ['second_block', 'first_event', 'second.html.twig', ['foo' => 'bar'], 0, true]),
+                    'third_block' => new Definition(ComponentBlock::class, ['third_block', 'first_event', 'component_name', [], [], 0, true]),
                 ],
                 'second_event' => [
                     'another_block' => new Definition(TemplateBlock::class, ['another_block', 'second_event', 'another.html.twig', [], 0, true]),
@@ -66,7 +69,7 @@ final class SyliusUiExtensionTest extends AbstractExtensionTestCase
         ]]);
 
         $this->assertContainerBuilderHasServiceDefinitionWithArgument(
-            TemplateBlockRegistryInterface::class,
+            BlockRegistryInterface::class,
             0,
             ['event_name' => [
                 'first_block' => new Definition(TemplateBlock::class, ['first_block', 'event_name', 'first.html.twig', [], 5, true]),

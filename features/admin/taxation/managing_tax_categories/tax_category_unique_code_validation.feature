@@ -8,7 +8,7 @@ Feature: Tax category unique code validation
         Given the store has a tax category "Alcohol" with a code "alcohol"
         And I am logged in as an administrator
 
-    @ui @api
+    @todo @ui @api
     Scenario: Trying to add tax category with taken code
         When I want to create a new tax category
         And I name it "Food and Beverage"

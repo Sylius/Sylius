@@ -42,10 +42,32 @@ final class Configuration implements ConfigurationInterface
                                         ->ifString()
                                         ->then(static fn (?string $template): array => ['template' => $template])
                                     ->end()
+                                    ->validate()
+                                        ->ifTrue(static function (array $block): bool {
+                                            if (!array_key_exists('template', $block) || !array_key_exists('component', $block)) {
+                                                return false;
+                                            }
+
+                                            return null !== $block['template'] && [] !== $block['component'];
+                                        })
+                                        ->thenInvalid('You cannot use both "template" and "component" for a block.')
+                                    ->end()
                                     ->children()
                                         ->booleanNode('enabled')->defaultNull()->end()
                                         ->arrayNode('context')->addDefaultsIfNotSet()->ignoreExtraKeys(false)->end()
                                         ->scalarNode('template')->defaultNull()->end()
+                                        ->arrayNode('component')
+                                            ->beforeNormalization()
+                                                ->ifString()
+                                                ->then(static fn (?string $component): array => ['name' => $component])
+                                            ->end()
+                                            ->treatNullLike([])
+                                            ->addDefaultsIfNotSet()
+                                            ->children()
+                                                ->scalarNode('name')->isRequired()->end()
+                                                ->arrayNode('inputs')->ignoreExtraKeys(false)->end()
+                                            ->end()
+                                        ->end()
                                         ->integerNode('priority')->defaultNull()->end()
         ;
 

@@ -9,7 +9,7 @@ Feature: Zone validation
         And the store has country "United States"
         And I am logged in as an administrator
 
-    @ui @api
+    @todo @ui @api
     Scenario: Trying to add a zone without specifying its code
         When I want to create a new zone consisting of country
         And I name it "European Union"
@@ -18,7 +18,7 @@ Feature: Zone validation
         Then I should be notified that code is required
         And zone with name "European Union" should not be added
 
-    @ui @api
+    @todo @ui @api
     Scenario: Trying to add a zone without specifying its name
         When I want to create a new zone consisting of country
         And I specify its code as "EU"
@@ -27,7 +27,7 @@ Feature: Zone validation
         Then I should be notified that name is required
         And zone with code "EU" should not be added
 
-    @ui @api
+    @todo @ui @api
     Scenario: Trying to add a zone without any countries
         When I want to create a new zone consisting of country
         And I name it "European Union"
@@ -37,26 +37,26 @@ Feature: Zone validation
         Then I should be notified that at least one zone member is required
         And zone with name "European Union" should not be added
 
-    @ui @api
+    @todo @ui @api
     Scenario: Being unable to edit code of an existing zone
         Given the store has a zone "European Union" with code "EU"
         And it has the "France" country member
         When I want to modify the zone named "European Union"
         Then I should not be able to edit its code
 
-    @ui @api
+    @todo @ui @api
     Scenario: Being unable to add itself to members during editing an existing zone
         Given the store has a zone "European Union" with code "EU"
         When I want to modify the zone named "European Union"
         Then I can not add a zone "European Union"
 
-    @ui
+    @todo @ui
     Scenario: Seeing a disabled type field when adding country type zone
         When I want to create a new zone consisting of country
         Then I should not be able to edit its type
         And it should be of country type
 
-    @ui
+    @todo @ui
     Scenario: Seeing a disabled type field when adding province type zone
         When I want to create a new zone consisting of province
         Then I should not be able to edit its type

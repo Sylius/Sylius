@@ -35,7 +35,7 @@ class UpdatePage extends SymfonyPage implements UpdatePageInterface
 
     public function saveChanges(): void
     {
-        $this->getDocument()->pressButton('sylius_save_changes_button');
+        $this->getDocument()->find('css', '[data-test-update-changes-button]')->click();
     }
 
     public function cancelChanges(): void

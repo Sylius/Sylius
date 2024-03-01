@@ -1,2 +1,27 @@
-{% set menu = knp_menu_get('sylius.admin.product_form', [], {'product': product}) %}
-{{ knp_menu_render(menu, {'template': '@SyliusAdmin/Product/_menu.html.twig', 'form': form, 'product': product}) }}
+{# Rendered with using \Sylius\Bundle\AdminBundle\TwigComponent\Product\FormComponent #}
+
+{% form_theme form '@SyliusAdmin/Shared/form_theme.html.twig' %}
+
+{% set main_hook = hook_name(parent_main_hook, 'form') %}
+{% set fallback_hook = hook_name(parent_fallback_hook, 'form') %}
+
+<div class="container-xl" {{ attributes }}>
+    {{ form_start(form, {'attr': {'class': 'ui loadable form', 'novalidate': 'novalidate', 'id': form.vars.id}}) }}
+        <div class="row">
+            {% if hookable_configuration.method is defined %}
+                <input type="hidden" name="_method" value="{{ hookable_configuration.method }}" />
+            {% endif %}
+            {{ form_errors(form) }}
+            {{ form_widget(form._token) }}
+
+            {% hook [main_hook, fallback_hook] with {
+                parent_main_hook: main_hook,
+                parent_fallback_hook: fallback_hook,
+                mappedProductAttributes,
+                attributesToBeAdded,
+                resource,
+                form,
+            } %}
+        </div>
+    {{ form_end(form, {render_rest: hookable.configuration.render_rest|default(false)}) }}
+</div>

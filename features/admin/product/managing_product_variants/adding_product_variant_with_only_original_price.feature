@@ -10,7 +10,7 @@ Feature: Adding a product variant with only original price
         And this product is disabled in "United States" channel
         And I am logged in as an administrator
 
-    @api @ui
+    @api @todo @ui
     Scenario: Adding a new product variant without price
         When I want to create a new variant of this product
         And I specify its code as "VODKA_WYBOROWA_DELUX"

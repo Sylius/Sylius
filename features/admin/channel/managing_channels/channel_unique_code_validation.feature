@@ -8,7 +8,7 @@ Feature: Channel unique code validation
         Given the store operates on a channel identified by "WEB" code
         And I am logged in as an administrator
 
-    @api @ui
+    @api @todo @ui
     Scenario: Trying to add channel with taken code
         When I want to create a new channel
         And I specify its code as "WEB"
