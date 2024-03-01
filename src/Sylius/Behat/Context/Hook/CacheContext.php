@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Hook;
 
 use Behat\Behat\Context\Context;
-use Sylius\Component\Locale\Provider\CachedLocaleCollectionProvider;
 use Symfony\Contracts\Cache\CacheInterface;
 
 final class CacheContext implements Context
@@ -28,6 +27,6 @@ final class CacheContext implements Context
      */
     public function purgeCache(): void
     {
-        $this->cache->delete(CachedLocaleCollectionProvider::LOCALES_CACHE_KEY);
+        $this->cache->clear();
     }
 }
