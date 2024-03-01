@@ -17,6 +17,53 @@ supported Symfony versions: 5.4 and 6.4.
 
 ## Main update
 
+To ease the update process, we have grouped the changes into the following categories:
+
+### Class constructor signature changes
+
+1. The constructor of `Sylius\Bundle\AdminBundle\Controller\NotificationController` has been changed:
+
+    ```diff
+        public function __construct(
+    -       private ClientInterface $client,
+    -       private MessageFactory $messageFactory,
+    +       private ClientInterface|DeprecatedClientInterface $client,
+    +       private RequestFactoryInterface|MessageFactory $requestFactory,
+            private string $hubUri,
+            private string $environment,
+    +       private ?StreamFactoryInterface $streamFactory = null,
+        ) {
+            ...
+        }
+    ```
+
+1. The constructor of `Sylius\Component\Addressing\Matcher\ZoneMatcher` has been changed:
+    ```php
+   use Sylius\Component\Addressing\Repository\ZoneRepositoryInterface;
+   use Sylius\Component\Resource\Repository\RepositoryInterface;
+
+        public function __construct(
+    -       private RepositoryInterface $zoneRepository,
+    +       private RepositoryInterface|ZoneRepositoryInterface $zoneRepository,
+        )
+    ```
+
+1. Not passing an `$entityManager` and passing a `$doctrineRegistry`
+   to `Sylius\Bundle\CoreBundle\Installer\Provider\DatabaseSetupCommandsProvider` constructor is deprecated and will be
+   prohibited in Sylius 2.0.
+
+1. Not passing a `$fileLocator` to `Sylius\Bundle\CoreBundle\Fixture\Factory\ProductExampleFactory` constructor is
+   deprecated and will be prohibited in Sylius 2.0.
+
+1. Change in the `Sylius\Bundle\CoreBundle\Fixture\Factory\PromotionExampleFactory` constructor:
+   Added the `$localeRepository` argument to the constructor of the `PromotionExampleFactory` class. Not passing an
+   instance of `RepositoryInterface` for the `locale` entity repository in `$localeRepository` was marked as deprecated
+   and will be prohibited in Sylius 2.0.
+
+1. The first parameter of the constructor in the `Sylius\Component\Core\Promotion\Checker\Rule\ItemTotalRuleChecker`
+   class has been deprecated and will be removed in Sylius 2.0.
+
+
 1. Starting with Sylius `1.13` we provided a possibility to use the Symfony Workflow as your State Machine. To allow a
    smooth transition we created a new package called `sylius/state-machine-abstraction`, which provides a configurable
    abstraction, allowing you to define which adapter should be used (Winzou State Machine or Symfony Workflow) per
@@ -255,22 +302,6 @@ supported Symfony versions: 5.4 and 6.4.
                 class: Http\Adapter\Guzzle7\Client # for Guzzle 6 use Http\Adapter\Guzzle6\Client instead
     ```
 
-1. The constructor of `Sylius\Bundle\AdminBundle\Controller\NotificationController` has been changed:
-
-    ```diff
-        public function __construct(
-    -       private ClientInterface $client,
-    -       private MessageFactory $messageFactory,
-    +       private ClientInterface|DeprecatedClientInterface $client,
-    +       private RequestFactoryInterface|MessageFactory $requestFactory,
-            private string $hubUri,
-            private string $environment,
-    +       private ?StreamFactoryInterface $streamFactory = null,
-        ) {
-            ...
-        }
-    ```
-
 1. The `sylius.http_message_factory` service has been deprecated. Use `Psr\Http\Message\RequestFactoryInterface`
    instead.
 
@@ -290,10 +321,6 @@ supported Symfony versions: 5.4 and 6.4.
 1. PostgreSQL migration support has been introduced. If you are using PostgreSQL, we assume that you have already
    created a database schema in some way.
    All you need to do is run migrations, which will mark all migrations created before Sylius 1.13 as executed.
-
-1. Not passing an `$entityManager` and passing a `$doctrineRegistry`
-   to `Sylius\Bundle\CoreBundle\Installer\Provider\DatabaseSetupCommandsProvider` constructor is deprecated and will be
-   prohibited in Sylius 2.0.
 
 1. Product variants resolving has been refactored for better extendability.
    The tag `sylius.product_variant_resolver.default` has been removed as it was never used.
@@ -325,9 +352,6 @@ supported Symfony versions: 5.4 and 6.4.
 
 1. The `sylius_admin_ajax_taxon_move` route has been deprecated. If you're relaying on it, consider migrating to new
    `sylius_admin_ajax_taxon_move_up` and `sylius_admin_ajax_taxon_move_down` routes.
-
-1. Not passing a `$fileLocator` to `Sylius\Bundle\CoreBundle\Fixture\Factory\ProductExampleFactory` constructor is
-   deprecated and will be prohibited in Sylius 2.0.
 
 1. Interface `Sylius\Bundle\ShopBundle\Calculator\OrderItemsSubtotalCalculatorInterface` and
    class `Sylius\Bundle\ShopBundle\Twig\OrderItemsSubtotalExtension` responsible for the `sylius_order_items_subtotal`
@@ -387,11 +411,6 @@ supported Symfony versions: 5.4 and 6.4.
     +       from: [new, processing, authorized]
             to: failed
     ```
-
-1. Change in the `Sylius\Bundle\CoreBundle\Fixture\Factory\PromotionExampleFactory` constructor:
-   Added the `$localeRepository` argument to the constructor of the `PromotionExampleFactory` class. Not passing an
-   instance of `RepositoryInterface` for the `locale` entity repository in `$localeRepository` was marked as deprecated
-   and will be prohibited in Sylius 2.0.
 
 1. The `Regex` constraint has been removed from `Sylius\Component\Addressing\Model\Country` in favour of the `Country`
    constraint.
@@ -484,16 +503,7 @@ supported Symfony versions: 5.4 and 6.4.
    If you created a custom `Zone` repository, you should update it to extend
    the `Sylius\Bundle\AddressingBundle\Repository\ZoneRepository`
 
-1. The constructor of `Sylius\Component\Addressing\Matcher\ZoneMatcher` has been changed:
-    ```php
-   use Sylius\Component\Addressing\Repository\ZoneRepositoryInterface;
-   use Sylius\Component\Resource\Repository\RepositoryInterface;
 
-        public function __construct(
-    -       private RepositoryInterface $zoneRepository,
-    +       private RepositoryInterface|ZoneRepositoryInterface $zoneRepository,
-        )
-    ```
 
 1. Moved classes from `Command` to `Console\Command`. The `Command` namespace is deprecated for console command classes
    and will be removed in Sylius 2.0.
@@ -621,9 +631,6 @@ supported Symfony versions: 5.4 and 6.4.
 
 1. Class `Sylius\Component\Promotion\Checker\Rule\ItemTotalRuleChecker` has been deprecated.
    Use `Sylius\Component\Core\Promotion\Checker\Rule\ItemTotalRuleChecker` instead.
-
-1. The first parameter of the constructor in the `Sylius\Component\Core\Promotion\Checker\Rule\ItemTotalRuleChecker`
-   class has been deprecated and will be removed in Sylius 2.0.
 
 1. The service definition for `sylius.promotion_rule_checker.item_total` has been updated. The class has been changed
    from `Sylius\Component\Promotion\Checker\Rule\ItemTotalRuleChecker`
