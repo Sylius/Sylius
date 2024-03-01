@@ -33,6 +33,9 @@ abstract class JsonApiTestCase extends BaseJsonApiTestCase
     /** @var array <string, string> */
     private array $defaultGetHeaders = [];
 
+    /** @var array <string, string> */
+    private array $defaultPatchHeaders = [];
+
     /**
      * @param array<array-key, mixed> $data
      */
@@ -49,11 +52,19 @@ abstract class JsonApiTestCase extends BaseJsonApiTestCase
         $this->isAdminContext = true;
     }
 
-    protected function setUpDefaultHeaders(): void
+    protected function setUpDefaultGetHeaders(): void
     {
         $this->defaultGetHeaders = [
             'HTTP_ACCEPT' => 'application/ld+json',
             'CONTENT_TYPE' => 'application/ld+json',
+        ];
+    }
+
+    protected function setUpDefaultPatchHeaders(): void
+    {
+        $this->defaultPatchHeaders = [
+            'HTTP_ACCEPT' => 'application/ld+json',
+            'CONTENT_TYPE' => 'application/merge-patch+json',
         ];
     }
 
@@ -87,23 +98,33 @@ abstract class JsonApiTestCase extends BaseJsonApiTestCase
      */
     protected function requestGet(string $uri, array $queryParameters = [], array $headers = []): Crawler
     {
-        if ($this->isAdminContext) {
-            $headers = array_merge($this->headerBuilder()->withAdminUserAuthorization('api@example.com')->build(), $headers);
-        }
-
         if (!empty($this->defaultGetHeaders)) {
             $headers = array_merge($this->defaultGetHeaders, $headers);
         }
 
-        $queryStrings = empty($queryParameters) ? '' : http_build_query($queryParameters);
+        return $this->request('GET', $uri, $queryParameters, $headers);
+    }
 
-        $uri = $queryStrings ? $uri . '?' . $queryStrings : $uri;
+    /**
+     * @param array<string, array<string>|string> $queryParameters
+     * @param array<string, string> $headers
+     */
+    protected function requestPatch(string $uri, array $queryParameters = [], array $headers = []): Crawler
+    {
+        if (!empty($this->defaultPatchHeaders)) {
+            $headers = array_merge($this->defaultPatchHeaders, $headers);
+        }
 
-        return $this->client->request(
-            method: 'GET',
-            uri: $uri,
-            server: $headers,
-        );
+        return $this->request('PATCH', $uri, $queryParameters, $headers);
+    }
+
+    /**
+     * @param array<string, array<string>|string> $queryParameters
+     * @param array<string, string> $headers
+     */
+    protected function requestDelete(string $uri, array $queryParameters = [], array $headers = []): Crawler
+    {
+        return $this->request('DELETE', $uri, $queryParameters, $headers);
     }
 
     /** @throws \Exception */
@@ -113,6 +134,16 @@ abstract class JsonApiTestCase extends BaseJsonApiTestCase
             $this->client->getResponse(),
             $filename,
             Response::HTTP_OK,
+        );
+    }
+
+    /** @throws \Exception */
+    protected function assertResponseUnprocessableEntity(string $filename): void
+    {
+        $this->assertResponse(
+            $this->client->getResponse(),
+            $filename,
+            Response::HTTP_UNPROCESSABLE_ENTITY,
         );
     }
 
@@ -155,5 +186,26 @@ abstract class JsonApiTestCase extends BaseJsonApiTestCase
             $this->assertArrayHasKey($propertyPath, $violationMap, $responseContent);
             $this->assertContains($expectedViolation['message'], $violationMap[$propertyPath], $responseContent);
         }
+    }
+
+    /**
+     * @param array<string, array<string>|string> $queryParameters
+     * @param array<string, string> $headers
+     */
+    protected function request(string $method, string $uri, array $queryParameters = [], array $headers = []): Crawler
+    {
+        if ($this->isAdminContext) {
+            $headers = array_merge($this->headerBuilder()->withAdminUserAuthorization('api@example.com')->build(), $headers);
+        }
+
+        $queryStrings = empty($queryParameters) ? '' : http_build_query($queryParameters);
+
+        $uri = $queryStrings ? $uri . '?' . $queryStrings : $uri;
+
+        return $this->client->request(
+            method: $method,
+            uri: $uri,
+            server: $headers,
+        );
     }
 }

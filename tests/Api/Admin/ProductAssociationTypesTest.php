@@ -14,6 +14,8 @@ declare(strict_types=1);
 namespace Sylius\Tests\Api\Admin;
 
 use Sylius\Component\Product\Model\ProductAssociationTypeInterface;
+use Sylius\Component\Product\Model\ProductAssociationTypeTranslation;
+use Sylius\Component\Product\Model\ProductAssociationTypeTranslationInterface;
 use Sylius\Tests\Api\JsonApiTestCase;
 use Sylius\Tests\Api\Utils\AdminUserLoginTrait;
 use Symfony\Component\HttpFoundation\Response;
@@ -179,8 +181,24 @@ final class ProductAssociationTypesTest extends JsonApiTestCase
 
         $this->assertResponse(
             $this->client->getResponse(),
-            'admin/product_association_type/put_product_association_type_with_duplicate_locale_translation',
+            'admin/product_association_type/put_product_association_type_with_duplicate_locale_translation_response',
             Response::HTTP_UNPROCESSABLE_ENTITY,
         );
+    }
+
+    /** @test */
+    public function it_gets_product_association_type_translation(): void
+    {
+        $this->setUpAdminContext();
+        $this->setUpDefaultGetHeaders();
+
+        $fixtures = $this->loadFixturesFromFiles(['product/product_with_many_locales.yaml', 'authentication/api_administrator.yaml']);
+
+        /** @var ProductAssociationTypeTranslationInterface $productAssociationTypeTranslation */
+        $productAssociationTypeTranslation = $fixtures['product_association_type_translation'];
+
+        $this->requestGet(uri: '/api/v2/admin/product-association-type-translations/' . $productAssociationTypeTranslation->getId());
+
+        $this->assertResponseSuccessful('admin/product_association_type/get_product_association_type_translation_response');
     }
 }
