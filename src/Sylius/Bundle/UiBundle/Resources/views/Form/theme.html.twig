@@ -238,7 +238,7 @@
 {% block sylius_image_widget %}
     {% apply spaceless %}
         {{ form_row(form.type) }}
-        <div class="ui-media-upload-button">
+        <div class="ui-element-spacer">
             <label for="{{ form.file.vars.id }}" class="ui icon labeled button"><i class="cloud upload icon"></i> {{ 'sylius.ui.choose_file'|trans }}</label>
         </div>
         {% if form.vars.value.path|default(null) is not null %}
