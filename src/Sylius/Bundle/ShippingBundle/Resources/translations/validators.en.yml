@@ -33,8 +33,3 @@ sylius:
     shipment:
         shipping_method:
             not_blank: 'Please select shipping method.'
-    translation:
-        locale:
-            not_blank: 'Please enter the locale.'
-            invalid: 'This value is not a valid locale.'
-            unique: 'A translation for the {{ value }} locale code already exists.'

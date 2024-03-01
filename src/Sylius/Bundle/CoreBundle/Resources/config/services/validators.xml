@@ -38,10 +38,6 @@
         <service id="sylius.validator.has_all_variant_prices_defined" class="Sylius\Bundle\CoreBundle\Validator\Constraints\HasAllVariantPricesDefinedValidator">
             <tag name="validator.constraint_validator" alias="sylius_has_all_variant_prices_defined" />
         </service>
-        <service id="sylius.validator.translation_for_existing_locales" class="Sylius\Bundle\CoreBundle\Validator\Constraints\TranslationForExistingLocalesValidator">
-            <argument type="service" id="sylius.repository.locale" />
-            <tag name="validator.constraint_validator" alias="sylius_translation_for_existing_locales" />
-        </service>
         <service id="sylius.validator.unique_reviewer_email" class="Sylius\Bundle\CoreBundle\Validator\Constraints\UniqueReviewerEmailValidator">
             <argument type="service" id="sylius.repository.shop_user" />
             <argument type="service" id="security.token_storage" />

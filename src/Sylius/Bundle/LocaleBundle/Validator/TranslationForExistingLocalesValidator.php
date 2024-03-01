@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\CoreBundle\Validator\Constraints;
+namespace Sylius\Bundle\LocaleBundle\Validator;
 
 use Sylius\Component\Locale\Model\LocaleInterface;
 use Sylius\Component\Resource\Model\TranslatableInterface;
@@ -23,6 +23,7 @@ use Webmozart\Assert\Assert;
 
 final class TranslationForExistingLocalesValidator extends ConstraintValidator
 {
+    /** @param RepositoryInterface<LocaleInterface> $localeRepository */
     public function __construct(private RepositoryInterface $localeRepository)
     {
     }
