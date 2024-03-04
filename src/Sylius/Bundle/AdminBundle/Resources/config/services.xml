@@ -49,6 +49,11 @@
             <tag name="console.command" />
         </service>
 
+        <service id="Sylius\Bundle\AdminBundle\Console\Command\ListAdminUsersCommand">
+            <argument type="service" id="sylius.repository.admin_user" />
+            <tag name="console.command" />
+        </service>
+
         <service id="Sylius\Bundle\AdminBundle\MessageHandler\CreateAdminUserHandler">
             <argument type="service" id="sylius.repository.admin_user" />
             <argument type="service" id="sylius.factory.admin_user" />
