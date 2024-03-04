@@ -631,39 +631,11 @@ To ease the update process, we have grouped the changes into the following categ
     }
    ```
 
-1. Using Guzzle 6 has been deprecated in favor of Symfony HTTP Client. If you want to still use Guzzle 6 or Guzzle 7,
-   you need to install `composer require php-http/guzzle6-adapter` or `composer require php-http/guzzle7-adapter`
-   depending on your Guzzle version.
-   Subsequently, you need to register the adapter as a `Psr\Http\Client\ClientInterface` service as the following:
-    ```yaml
-        services:
-            Psr\Http\Client\ClientInterface:
-                class: Http\Adapter\Guzzle7\Client # for Guzzle 6 use Http\Adapter\Guzzle6\Client instead
-    ```
+### Translation changes
 
 1. Validation translation key `sylius.review.rating.range` has been replaced by `sylius.review.rating.not_in_range` in
    all places used by Sylius. The `sylius.review.rating.range` has been left for backward compatibility and will be
    removed in Sylius 2.0.
-
-1. The `payum/payum` package has been replaced by concrete packages like `payum/core`, `payum/offline`
-   or `payum/paypal-express-checkout-nvp`. If you need any other component so far provided by `payum/payum` package, you
-   need to install it explicitly.
-
-1. PostgreSQL migration support has been introduced. If you are using PostgreSQL, we assume that you have already
-   created a database schema in some way.
-   All you need to do is run migrations, which will mark all migrations created before Sylius 1.13 as executed.
-
-
-1. We have explicitly added relationships between product and reviews and between product and attributes in XML
-   mappings.
-   Because of that, the subscribers `Sylius\Bundle\AttributeBundle\Doctrine\ORM\Subscriber\LoadMetadataSubscriber`
-   and `Sylius\Bundle\ReviewBundle\Doctrine\ORM\Subscriber\LoadMetadataSubscriber` have changed so that it does not add
-   a relationship if one already exists. If you have overwritten or decorated it, there may be a need to update it.
-
-1. The behavior of the `sylius:install:setup` command has changed,
-   because `Sylius\Bundle\CoreBundle\Installer\Setup\LocaleSetup` has been updated.
-   Now, it automatically replaces the existing `locale` parameter in the configuration with the one provided for the
-   store.
 
 1. Translation keys in the `Sylius\Bundle\CoreBundle\Resources\translations\messages.en.yml` under the `sylius.email`
    key have been changed:
@@ -692,6 +664,36 @@ To ease the update process, we have grouped the changes into the following categ
                     strategy: 'To verify your email address - click the link below'
                     subject: 'Email address verification'
    ```
+
+1. Using Guzzle 6 has been deprecated in favor of Symfony HTTP Client. If you want to still use Guzzle 6 or Guzzle 7,
+   you need to install `composer require php-http/guzzle6-adapter` or `composer require php-http/guzzle7-adapter`
+   depending on your Guzzle version.
+   Subsequently, you need to register the adapter as a `Psr\Http\Client\ClientInterface` service as the following:
+    ```yaml
+        services:
+            Psr\Http\Client\ClientInterface:
+                class: Http\Adapter\Guzzle7\Client # for Guzzle 6 use Http\Adapter\Guzzle6\Client instead
+    ```
+
+1. The `payum/payum` package has been replaced by concrete packages like `payum/core`, `payum/offline`
+   or `payum/paypal-express-checkout-nvp`. If you need any other component so far provided by `payum/payum` package, you
+   need to install it explicitly.
+
+1. PostgreSQL migration support has been introduced. If you are using PostgreSQL, we assume that you have already
+   created a database schema in some way.
+   All you need to do is run migrations, which will mark all migrations created before Sylius 1.13 as executed.
+
+
+1. We have explicitly added relationships between product and reviews and between product and attributes in XML
+   mappings.
+   Because of that, the subscribers `Sylius\Bundle\AttributeBundle\Doctrine\ORM\Subscriber\LoadMetadataSubscriber`
+   and `Sylius\Bundle\ReviewBundle\Doctrine\ORM\Subscriber\LoadMetadataSubscriber` have changed so that it does not add
+   a relationship if one already exists. If you have overwritten or decorated it, there may be a need to update it.
+
+1. The behavior of the `sylius:install:setup` command has changed,
+   because `Sylius\Bundle\CoreBundle\Installer\Setup\LocaleSetup` has been updated.
+   Now, it automatically replaces the existing `locale` parameter in the configuration with the one provided for the
+   store.
 
 1 Extracted the section responsible for the `ShopBundle` from `@SyliusCore/Email/accountVerification.html.twig` and
 relocated it to `@SyliusShop/Email/verification.html.twig`.
