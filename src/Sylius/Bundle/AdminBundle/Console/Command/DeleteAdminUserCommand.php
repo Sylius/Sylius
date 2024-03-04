@@ -23,7 +23,7 @@ use Sylius\Component\User\Repository\UserRepositoryInterface;
 
 #[AsCommand(
     name: 'sylius:admin-user:delete',
-    description: 'Deletes an admin user account by the given e-mail address',
+    description: 'Deletes an admin user account by the given username',
 )]
 final class DeleteAdminUserCommand extends Command
 {
@@ -50,18 +50,18 @@ final class DeleteAdminUserCommand extends Command
 
         $this->io->title('Delete admin user');
 
-        $email = $this->io->ask('Admin E-Mail-Address');
-        $adminEmailAddress = $this->adminUserRepository->findOneByEmail($email);
+        $username = $this->io->ask('Admin username');
+        $user = $this->adminUserRepository->findOneBy(['username' => $username]);
 
-        if ($adminEmailAddress === null)
+        if ($user === null)
         {
-            $this->io->error(sprintf('Admin Account with the Email Address "%s" does not exist', $email));
+            $this->io->error(sprintf('Admin Account with the username "%s" does not exist', $username));
             return Command::INVALID;
         }
 
-        $this->adminUserRepository->remove($adminEmailAddress);
+        $this->adminUserRepository->remove($user);
 
-        $this->io->success(sprintf('Admin Account with the Email Address "%s" has been deleted successfully', $email));
+        $this->io->success(sprintf('Admin Account with the username "%s" has been deleted successfully', $username));
 
         return Command::SUCCESS;
     }
