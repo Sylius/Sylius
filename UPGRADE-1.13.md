@@ -15,6 +15,12 @@ In Sylius 1.13, the minimum supported version of Symfony 6 has been bumped up to
 long-term
 supported Symfony versions: 5.4 and 6.4.
 
+### Price History Plugin
+
+Starting with Sylius 1.13, the [SyliusPriceHistoryPlugin](https://github.com/Sylius/PriceHistoryPlugin) is included.
+If you are currently using the plugin in your project, we recommend following the upgrade guide
+located [here](UPGRADE-FROM-1.12-WITH-PRICE-HISTORY-PLUGIN-TO-1.13.md).
+
 ## Main update
 
 To ease the update process, we have grouped the changes into the following categories:
@@ -592,10 +598,6 @@ To ease the update process, we have grouped the changes into the following categ
     +       from: [new, processing, authorized]
             to: failed
     ```
-
-1. Starting with Sylius 1.13, the [SyliusPriceHistoryPlugin](https://github.com/Sylius/PriceHistoryPlugin) is included.
-   If you are currently using the plugin in your project, we recommend following the upgrade guide
-   located [here](UPGRADE-FROM-1.12-WITH-PRICE-HISTORY-PLUGIN-TO-1.13.md).
 
 1. To ease customization we've introduced attributes for some services in `1.13`:
     - `Sylius\Bundle\OrderBundle\Attribute\AsCartContext` for cart contexts
