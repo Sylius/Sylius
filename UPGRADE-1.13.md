@@ -335,27 +335,6 @@ To ease the update process, we have grouped the changes into the following categ
    from `Sylius\Component\Promotion\Checker\Rule\ItemTotalRuleChecker`
    to `Sylius\Component\Core\Promotion\Checker\Rule\ItemTotalRuleChecker`.
 
-1. Starting with Sylius `1.13` we provided a possibility to use the Symfony Workflow as your State Machine. To allow a
-   smooth transition we created a new package called `sylius/state-machine-abstraction`, which provides a configurable
-   abstraction, allowing you to define which adapter should be used (Winzou State Machine or Symfony Workflow) per
-   graph. Starting with Sylius `1.13` we configure all existing Sylius' graphs to use the Symfony Workflow. At the same
-   time, all other graphs are using Winzou State Machine as a default state machine, and must be configured manually to
-   use the Symfony Workflow.
-
-   Configuration:
-    ```yaml
-    sylius_state_machine_abstraction:
-        graphs_to_adapters_mapping:
-            <graph_name>: <adapter_name>
-            # e.g.
-            sylius_order_checkout: symfony_workflow # available adapters: symfony_workflow, winzou_state_machine
-   
-        # we can also can the default adapter
-        default_adapter: symfony_workflow # winzou_state_machine is a default value here
-    ```
-
-   > **Note!** Starting with Sylius `2.0` the Symfony Workflow will be the default state machine for all graphs.
-
 ### Configuration changes
 
 1. A new parameter has been added to specify the validation groups for a given promotion action.
@@ -558,6 +537,62 @@ To ease the update process, we have grouped the changes into the following categ
                     - 'your_custom_validation_group'
     ```
 
+# State Machine changes
+
+1. Starting with Sylius `1.13` we provided a possibility to use the Symfony Workflow as your State Machine. To allow a
+   smooth transition we created a new package called `sylius/state-machine-abstraction`, which provides a configurable
+   abstraction, allowing you to define which adapter should be used (Winzou State Machine or Symfony Workflow) per
+   graph. Starting with Sylius `1.13` we configure all existing Sylius' graphs to use the Symfony Workflow. At the same
+   time, all other graphs are using Winzou State Machine as a default state machine, and must be configured manually to
+   use the Symfony Workflow.
+
+   Configuration:
+    ```yaml
+    sylius_state_machine_abstraction:
+        graphs_to_adapters_mapping:
+            <graph_name>: <adapter_name>
+            # e.g.
+            sylius_order_checkout: symfony_workflow # available adapters: symfony_workflow, winzou_state_machine
+   
+        # we can also can the default adapter
+        default_adapter: symfony_workflow # winzou_state_machine is a default value here
+    ```
+
+   > **Note!** Starting with Sylius `2.0` the Symfony Workflow will be the default state machine for all graphs.
+
+1. In the `sylius_payment` state machine of `PaymentBundle`, there has been a change in the state name:
+    - State name change:
+        - From: `void`
+        - To: `unknown`
+
+1. In the `sylius_payment` state machine of `PaymentBundle`, a new state `authorized` has been introduced, along with a
+   new transition:
+    - Transition `authorize`:
+        - From states: [`new`, `processing`]
+        - To state: `authorized`
+
+   Due to that the following transitions have been updated:
+    - Transition `complete`:
+        - From states: [`new`, `processing`, `authorized`]
+        - To state: `completed`
+    - Transition `fail`:
+        - From states: [`new`, `processing`, `authorized`]
+        - To state: `failed`
+    - Transition `cancel`:
+        - From states: [`new`, `processing`, `authorized`]
+        - To state: `cancelled`
+    - Transition `void`:
+        - From states: [`new`, `processing`, `authorized`]
+        - To state: `unknown`
+
+1. The `sylius_payment` state machine of `CoreBundle` has been updated to allow failing an authorized payment:
+    ```diff
+        fail:
+    -       from: [new, processing]
+    +       from: [new, processing, authorized]
+            to: failed
+    ```
+
 1. Starting with Sylius 1.13, the [SyliusPriceHistoryPlugin](https://github.com/Sylius/PriceHistoryPlugin) is included.
    If you are currently using the plugin in your project, we recommend following the upgrade guide
    located [here](UPGRADE-FROM-1.12-WITH-PRICE-HISTORY-PLUGIN-TO-1.13.md).
@@ -622,39 +657,6 @@ To ease the update process, we have grouped the changes into the following categ
    Because of that, the subscribers `Sylius\Bundle\AttributeBundle\Doctrine\ORM\Subscriber\LoadMetadataSubscriber`
    and `Sylius\Bundle\ReviewBundle\Doctrine\ORM\Subscriber\LoadMetadataSubscriber` have changed so that it does not add
    a relationship if one already exists. If you have overwritten or decorated it, there may be a need to update it.
-
-1. In the `sylius_payment` state machine of `PaymentBundle`, there has been a change in the state name:
-    - State name change:
-        - From: `void`
-        - To: `unknown`
-
-1. In the `sylius_payment` state machine of `PaymentBundle`, a new state `authorized` has been introduced, along with a
-   new transition:
-    - Transition `authorize`:
-        - From states: [`new`, `processing`]
-        - To state: `authorized`
-
-   Due to that the following transitions have been updated:
-    - Transition `complete`:
-        - From states: [`new`, `processing`, `authorized`]
-        - To state: `completed`
-    - Transition `fail`:
-        - From states: [`new`, `processing`, `authorized`]
-        - To state: `failed`
-    - Transition `cancel`:
-        - From states: [`new`, `processing`, `authorized`]
-        - To state: `cancelled`
-    - Transition `void`:
-        - From states: [`new`, `processing`, `authorized`]
-        - To state: `unknown`
-
-1. The `sylius_payment` state machine of `CoreBundle` has been updated to allow failing an authorized payment:
-    ```diff
-        fail:
-    -       from: [new, processing]
-    +       from: [new, processing, authorized]
-            to: failed
-    ```
 
 1. The behavior of the `sylius:install:setup` command has changed,
    because `Sylius\Bundle\CoreBundle\Installer\Setup\LocaleSetup` has been updated.
