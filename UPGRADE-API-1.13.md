@@ -218,6 +218,8 @@ rest of the Sylius components.
 1. The keys for adjustment endpoints' responses have been changed from `order_item` to `orderItem` and `order_item_unit`
    to `orderItemUnit`.
 
+### Miscellaneous changes
+
 1. All the `:read` serialization groups are now split to `index` and `show`.
    By this change, the `:read` serialization group is now deprecated and will no more used in the future.
    There is a BC layer that will allow you to use the `:read` serialization
