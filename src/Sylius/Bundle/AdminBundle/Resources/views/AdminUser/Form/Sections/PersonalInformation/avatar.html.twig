@@ -1,0 +1,16 @@
+{% set adminUser = hookable_data.resource %}
+
+{{ form_label(hookable_data.form.avatar) }}
+
+<div class="row g-6">
+    <div class="col-auto m-0">
+        {% if adminUser.avatar is not null %}
+            <div class="avatar avatar-xl" style="background: url('{{ adminUser.avatar.path|imagine_filter('sylius_admin_admin_user_avatar') }}');"></div>
+        {% else %}
+            <div class="avatar avatar-xl"></div>
+        {% endif %}
+    </div>
+    <div class="col m-0">
+        {{ form_widget(hookable_data.form.avatar) }}
+    </div>
+</div>
