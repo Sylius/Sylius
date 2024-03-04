@@ -189,6 +189,34 @@ rest of the Sylius components.
 1. The `Sylius\Bundle\ApiBundle\Filter\Doctrine\CatalogPromotionChannelFilter` service and class has been renamed
    to `Sylius\Bundle\ApiBundle\Filter\Doctrine\ChannelsAwareChannelFilter`.
 
+### Endpoints changes
+
+1. The item operation paths for ProductVariantTranslation resource changed:
+
+    - `GET /admin/product-variant-translation/{id}` -> `GET /admin/product-variant-translations/{id}`
+    - `GET /shop/product-variant-translation/{id}` -> `GET /shop/product-variant-translations/{id}`
+
+1. The following shop endpoints for getting the translation resources have been removed:
+    * `GET `/shop/taxon-translations/{id}`
+    * `GET `/shop/product-translations/{id}`
+    * `GET `/shop/product-variant-translations/{id}`
+    * `GET `/shop/shipping-method-translations/{id}`
+
+   The fields those endpoint were exposing are available on their respective translation subject resources.
+
+1. Update in Translations Handling
+
+   The process for creating or updating translations via the API has been refined. Now, the locale for each translation
+   is determined directly from its key, making the explicit transmission of the `locale` field redundant. Although the
+   API continues to support the explicit sending of the `locale` field, it is essential that this explicitly sent locale
+   matches the key in the translation array. In cases of a mismatch between the key and an explicitly sent locale, the
+   API will respond with a `Sylius\Bundle\ApiBundle\Exception\TranslationLocaleMismatchException`.
+
+1. Disabled product and taxon editing at `/admin/product-taxons/{id}` operation to improve data integrity. To modify a
+   productTaxon, remove the existing association and create a new one.
+
+1. The keys for adjustment endpoints' responses have been changed from `order_item` to `orderItem` and `order_item_unit`
+   to `orderItemUnit`.
 
 1. All the `:read` serialization groups are now split to `index` and `show`.
    By this change, the `:read` serialization group is now deprecated and will no more used in the future.
@@ -211,11 +239,6 @@ rest of the Sylius components.
    If you extend any of the Sylius resources, you should update your serialization groups to use the new prefix.
    Non-prefix serialization groups are deprecated and will be removed in Sylius 2.0.
 
-1. The item operation paths for ProductVariantTranslation resource changed:
-
-    - `GET /admin/product-variant-translation/{id}` -> `GET /admin/product-variant-translations/{id}`
-    - `GET /shop/product-variant-translation/{id}` -> `GET /shop/product-variant-translations/{id}`
-
 1. Typo in the constraint validator's alias returned
    by `Sylius\Bundle\ApiBundle\Validator\Constraints\ChangedItemQuantityInCartValidator::validatedBy` has been fixed.
    Previously it was `sylius_api_validator_changed_item_guantity_in_cart` and now it
@@ -223,27 +246,3 @@ rest of the Sylius components.
 
 1. The `sylius.api.product_taxon_filter` filter has been removed and its functionality has been superseded by
    the `sylius.api.search_filter.taxon.code` filter. The usage stays the same.
-
-1. Update in Translations Handling
-
-   The process for creating or updating translations via the API has been refined. Now, the locale for each translation
-   is determined directly from its key, making the explicit transmission of the `locale` field redundant. Although the
-   API
-   continues to support the explicit sending of the `locale` field, it is essential that this explicitly sent locale
-   matches
-   the key in the translation array. In cases of a mismatch between the key and an explicitly sent locale, the API will
-   respond with a `Sylius\Bundle\ApiBundle\Exception\TranslationLocaleMismatchException`.
-
-1. Disabled product and taxon editing at `/admin/product-taxons/{id}` operation to improve data integrity. To modify a
-   productTaxon, remove the existing association and create a new one.
-
-1. The keys for adjustment endpoints' responses have been changed from `order_item` to `orderItem` and `order_item_unit`
-   to `orderItemUnit`.
-
-1. The following shop endpoints for getting the translation resources have been removed:
-    * `GET `/shop/taxon-translations/{id}`
-    * `GET `/shop/product-translations/{id}`
-    * `GET `/shop/product-variant-translations/{id}`
-    * `GET `/shop/shipping-method-translations/{id}`
-
-   The fields those endpoint were exposing are available on their respective translation subject resources. 
