@@ -27,6 +27,20 @@ To ease the update process, we have grouped the changes into the following categ
 
 ### Constructors signature
 
+1. The constructor of `Sylius\Bundle\CoreBundle\MessageHandler\Admin\Account\SendResetPasswordEmailHandler` has been
+   changed:
+
+    ```php
+    use Sylius\Bundle\CoreBundle\Mailer\ResetPasswordEmailManagerInterface;
+    use Sylius\Component\Mailer\Sender\SenderInterface;
+
+        public function __construct(
+            private UserRepositoryInterface $shopUserRepository,
+    -       private SenderInterface $emailSender,
+    +       private ResetPasswordEmailManagerInterface $resetPasswordEmailManager,
+        )
+    ```
+
 1. The constructor of `Sylius\Bundle\AdminBundle\Controller\NotificationController` has been changed:
 
     ```php
