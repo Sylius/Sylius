@@ -25,7 +25,7 @@ located [here](UPGRADE-FROM-1.12-WITH-PRICE-HISTORY-PLUGIN-TO-1.13.md).
 
 To ease the update process, we have grouped the changes into the following categories:
 
-### Class constructor signature changes
+### Constructors signature
 
 1. The constructor of `Sylius\Bundle\AdminBundle\Controller\NotificationController` has been changed:
 
@@ -138,7 +138,7 @@ To ease the update process, we have grouped the changes into the following categ
    of `Sylius\Bundle\AdminBundle\Action\ResendShipmentConfirmationEmailAction` is
    deprecated and will be renamed to `$resendShipmentConfirmationEmailDispatcher`.
 
-### Interfaces and Classes deprecations and changes
+### Interfaces and Classes
 
 1. Class `Sylius\Component\Core\Promotion\Updater\Rule\TotalOfItemsFromTaxonRuleUpdater` has been deprecated, as it is
    no more used.
@@ -341,7 +341,7 @@ To ease the update process, we have grouped the changes into the following categ
    from `Sylius\Component\Promotion\Checker\Rule\ItemTotalRuleChecker`
    to `Sylius\Component\Core\Promotion\Checker\Rule\ItemTotalRuleChecker`.
 
-### Configuration changes
+### Configuration
 
 1. A new parameter has been added to specify the validation groups for a given promotion action.
    If you have any custom validation groups for your promotion action, you need to add them to
@@ -543,7 +543,7 @@ To ease the update process, we have grouped the changes into the following categ
                     - 'your_custom_validation_group'
     ```
 
-# State Machine changes
+# State Machine
 
 1. Starting with Sylius `1.13` we provided a possibility to use the Symfony Workflow as your State Machine. To allow a
    smooth transition we created a new package called `sylius/state-machine-abstraction`, which provides a configurable
@@ -631,7 +631,7 @@ To ease the update process, we have grouped the changes into the following categ
     }
    ```
 
-### Translation changes
+### Translation
 
 1. Validation translation key `sylius.review.rating.range` has been replaced by `sylius.review.rating.not_in_range` in
    all places used by Sylius. The `sylius.review.rating.range` has been left for backward compatibility and will be
@@ -665,6 +665,8 @@ To ease the update process, we have grouped the changes into the following categ
                     subject: 'Email address verification'
    ```
 
+### Miscellaneous
+
 1. Using Guzzle 6 has been deprecated in favor of Symfony HTTP Client. If you want to still use Guzzle 6 or Guzzle 7,
    you need to install `composer require php-http/guzzle6-adapter` or `composer require php-http/guzzle7-adapter`
    depending on your Guzzle version.
@@ -683,7 +685,6 @@ To ease the update process, we have grouped the changes into the following categ
    created a database schema in some way.
    All you need to do is run migrations, which will mark all migrations created before Sylius 1.13 as executed.
 
-
 1. We have explicitly added relationships between product and reviews and between product and attributes in XML
    mappings.
    Because of that, the subscribers `Sylius\Bundle\AttributeBundle\Doctrine\ORM\Subscriber\LoadMetadataSubscriber`
@@ -695,5 +696,5 @@ To ease the update process, we have grouped the changes into the following categ
    Now, it automatically replaces the existing `locale` parameter in the configuration with the one provided for the
    store.
 
-1 Extracted the section responsible for the `ShopBundle` from `@SyliusCore/Email/accountVerification.html.twig` and
-relocated it to `@SyliusShop/Email/verification.html.twig`.
+1. Extracted the section responsible for the `ShopBundle` from `@SyliusCore/Email/accountVerification.html.twig` and
+   relocated it to `@SyliusShop/Email/verification.html.twig`.
