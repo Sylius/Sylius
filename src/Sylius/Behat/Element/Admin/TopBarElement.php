@@ -24,9 +24,7 @@ final class TopBarElement extends Element implements TopBarElementInterface
 
     public function hasDefaultAvatarInMainBar(): bool
     {
-        $avatarElement = $this->getDocument()->find('css', 'i.ui.avatar.user.icon');
-
-        return $avatarElement !== null;
+        return $this->getAvatarImagePath() === '';
     }
 
     private function getAvatarImagePath(): string

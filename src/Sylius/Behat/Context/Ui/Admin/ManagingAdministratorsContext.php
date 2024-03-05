@@ -315,8 +315,8 @@ final class ManagingAdministratorsContext implements Context
     {
         $avatarPath = $this->sharedStorage->get($avatar);
 
-        Assert::false($this->topBarElement->hasAvatarInMainBar($avatarPath));
-        Assert::true($this->topBarElement->hasDefaultAvatarInMainBar());
+        Assert::false($this->topBarElement->hasAvatarInMainBar($avatarPath), 'Avatar should not be present in the top bar');
+        Assert::true($this->topBarElement->hasDefaultAvatarInMainBar(), 'Default avatar should be present in the top bar');
     }
 
     /**
