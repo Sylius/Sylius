@@ -34,7 +34,7 @@
                     </attribute>
                 </attribute>
                 <attribute name="openapi_context">
-                    <attribute name="summary">Sends contact request</attribute>
+                    <attribute name="summary">Sends contact request.</attribute>
                 </attribute>
             </collectionOperation>
         </collectionOperations>

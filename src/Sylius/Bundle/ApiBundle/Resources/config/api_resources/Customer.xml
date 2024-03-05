@@ -59,7 +59,7 @@
                 <attribute name="method">POST</attribute>
                 <attribute name="path">/shop/customers</attribute>
                 <attribute name="openapi_context">
-                    <attribute name="summary">Registers a new customer</attribute>
+                    <attribute name="summary">Registers a new customer.</attribute>
                 </attribute>
                 <attribute name="denormalization_context">
                     <attribute name="groups">
@@ -148,7 +148,7 @@
                     </attribute>
                 </attribute>
                 <attribute name="openapi_context">
-                    <attribute name="summary">Change password for logged in customer</attribute>
+                    <attribute name="summary">Change password for logged in customer.</attribute>
                 </attribute>
             </itemOperation>
 

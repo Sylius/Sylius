@@ -34,7 +34,7 @@
                     </attribute>
                 </attribute>
                 <attribute name="openapi_context">
-                    <attribute name="summary">Resends verification email</attribute>
+                    <attribute name="summary">Resends verification email.</attribute>
                 </attribute>
                 <attribute name="security">is_granted("ROLE_USER")</attribute>
             </collectionOperation>
@@ -53,7 +53,7 @@
                     </attribute>
                 </attribute>
                 <attribute name="openapi_context">
-                    <attribute name="summary">Verifies Customer account</attribute>
+                    <attribute name="summary">Verifies Customer account.</attribute>
                 </attribute>
             </itemOperation>
         </itemOperations>

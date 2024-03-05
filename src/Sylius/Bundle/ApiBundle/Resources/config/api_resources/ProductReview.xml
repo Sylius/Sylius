@@ -126,7 +126,7 @@
                 <attribute name="input">false</attribute>
                 <attribute name="controller">Sylius\Bundle\ApiBundle\Applicator\ProductReviewStateMachineTransitionApplicatorInterface::accept</attribute>
                 <attribute name="openapi_context">
-                    <attribute name="summary">Accepts Product Review</attribute>
+                    <attribute name="summary">Accepts Product Review.</attribute>
                 </attribute>
                 <attribute name="normalization_context">
                     <attribute name="groups">
@@ -142,7 +142,7 @@
                 <attribute name="input">false</attribute>
                 <attribute name="controller">Sylius\Bundle\ApiBundle\Applicator\ProductReviewStateMachineTransitionApplicatorInterface::reject</attribute>
                 <attribute name="openapi_context">
-                    <attribute name="summary">Rejects Product Review</attribute>
+                    <attribute name="summary">Rejects Product Review.</attribute>
                 </attribute>
                 <attribute name="normalization_context">
                     <attribute name="groups">
