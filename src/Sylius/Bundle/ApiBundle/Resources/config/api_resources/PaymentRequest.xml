@@ -63,9 +63,7 @@
                     <attribute name="groups">sylius:shop:payment_request:update</attribute>
                 </attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">
-                        <attribute>sylius:shop:payment_request:show</attribute>
-                    </attribute>
+                    <attribute name="groups">sylius:shop:payment_request:show</attribute>
                 </attribute>
             </itemOperation>
         </itemOperations>
