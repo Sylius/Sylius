@@ -14,7 +14,7 @@ twig_hooks:
                 template: '@SyliusAdmin/Security/Login/Content/_form.html.twig'
         'sylius_admin.security.login.content.form':
             error:
-                template: '@SyliusAdmin/Security/Login/Content/Form/errors.html.twig'
+                template: '@SyliusAdmin/Security/Login/Content/Form/error.html.twig'
             username_field:
                 template: '@SyliusAdmin/Security/Login/Content/Form/_usernameField.html.twig'
             password_field:
