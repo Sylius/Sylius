@@ -12,5 +12,11 @@
 
         <service id="sylius.factory.payum_resolve_next_route" class="Sylius\Bundle\PayumBundle\Factory\ResolveNextRouteFactory" />
         <service id="Sylius\Bundle\PayumBundle\Factory\ResolveNextRouteFactoryInterface" alias="sylius.factory.payum_resolve_next_route" />
+
+        <service id="sylius.factory.payum_capture" class="Sylius\Bundle\PayumBundle\Factory\CaptureFactory" />
+        <service id="TokenAggregateRequestFactoryInterface" alias="sylius.factory.payum_capture" />
+
+        <service id="sylius.factory.payum_authorize" class="Sylius\Bundle\PayumBundle\Factory\AuthorizeFactory" />
+        <service id="Sylius\Bundle\PayumBundle\Factory\AuthorizeRequestFactoryInterface" alias="sylius.factory.payum_authorize" />
     </services>
 </container>

@@ -130,6 +130,7 @@
         "symfony/translation": "^5.4.21 || ^6.4",
         "symfony/translation-contracts": "^2.5",
         "symfony/twig-bundle": "^5.4.21 || ^6.4",
+        "symfony/uid": "^5.4.21 || ^6.4",
         "symfony/validator": "^5.4.21 || ^6.4",
         "symfony/webpack-encore-bundle": "^1.15",
         "symfony/workflow": "^5.4.21 || ^6.4",

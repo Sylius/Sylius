@@ -466,9 +466,6 @@
     "ralouphie/getallheaders": {
         "version": "3.0.3"
     },
-    "ramsey/uuid": {
-        "version": "3.8.0"
-    },
     "rector/rector": {
         "version": "0.11.52"
     },
@@ -862,6 +859,18 @@
             "config/packages/test/twig.yaml",
             "config/packages/twig.yaml",
             "templates/base.html.twig"
+        ]
+    },
+    "symfony/uid": {
+        "version": "6.4",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "main",
+            "version": "6.2",
+            "ref": "d294ad4add3e15d7eb1bae0221588ca89b38e558"
+        },
+        "files": [
+            "config/packages/uid.yaml"
         ]
     },
     "symfony/validator": {

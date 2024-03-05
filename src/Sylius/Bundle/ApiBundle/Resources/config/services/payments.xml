@@ -22,5 +22,6 @@
             <argument type="service" id="sylius.repository.payment" />
             <argument type="service" id="Sylius\Bundle\ApiBundle\Provider\CompositePaymentConfigurationProvider" />
         </service>
+
     </services>
 </container>

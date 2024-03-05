@@ -24,6 +24,9 @@ sylius:
         cannot_change_payment_method_for_cancelled_order: 'You cannot change the payment method for a cancelled order.'
         not_available: 'The payment method %name% is not available for this order. Please choose another one.'
         not_exist: 'The payment method with %code% code does not exist.'
+    payment_request:
+        action_not_available: 'The payment request (method code "%code%" and payment id "%id%") has no handler. Please choose another payment method.'
+        not_available: 'The payment request is not supporting this action (actions available are: %actions%).'
     product:
         not_exist: 'The product %productName% does not exist.'
     product_variant:
