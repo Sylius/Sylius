@@ -44,6 +44,42 @@ final class AdminAuthenticationTokenDocumentationModifier implements Documentati
             ],
         ];
 
+        $schemas['Administrator-admin.authentication-token.read.unauthorized'] = [
+            'type' => 'object',
+            'properties' => [
+                'code' => [
+                    'type' => 'integer',
+                    'readOnly' => true,
+                ],
+                'message' => [
+                    'type' => 'string',
+                    'readOnly' => true,
+                ],
+            ],
+        ];
+
+        $schemas['Administrator-admin.authentication-token.read.bad-request'] = [
+            'type' => 'object',
+            'properties' => [
+                'type' => [
+                    'type' => 'string',
+                    'readOnly' => true,
+                ],
+                'title' => [
+                    'type' => 'string',
+                    'readOnly' => true,
+                ],
+                'status' => [
+                    'type' => 'integer',
+                    'readOnly' => true,
+                ],
+                'detail' => [
+                    'type' => 'string',
+                    'readOnly' => true,
+                ],
+            ],
+        ];
+
         $schemas['Administrator-admin.authentication-token.create'] = [
             'type' => 'object',
             'properties' => [
@@ -69,7 +105,7 @@ final class AdminAuthenticationTokenDocumentationModifier implements Documentati
                     tags: ['Administrator'],
                     responses: [
                         Response::HTTP_OK => [
-                            'description' => 'JWT token',
+                            'description' => 'JWT token retrieval succeeded',
                             'content' => [
                                 'application/json' => [
                                     'schema' => [
@@ -78,10 +114,30 @@ final class AdminAuthenticationTokenDocumentationModifier implements Documentati
                                 ],
                             ],
                         ],
+                        Response::HTTP_UNAUTHORIZED => [
+                            'description' => 'JWT token retrieval failed due to invalid credentials',
+                            'content' => [
+                                'application/json' => [
+                                    'schema' => [
+                                        '$ref' => '#/components/schemas/Administrator-admin.authentication-token.read.unauthorized',
+                                    ],
+                                ],
+                            ],
+                        ],
+                        Response::HTTP_BAD_REQUEST => [
+                            'description' => 'JWT token retrieval failed due to invalid request',
+                            'content' => [
+                                'application/json' => [
+                                    'schema' => [
+                                        '$ref' => '#/components/schemas/Administrator-admin.authentication-token.read.bad-request',
+                                    ],
+                                ],
+                            ],
+                        ],
                     ],
-                    summary: 'Retrieves the JWT token to login.',
+                    summary: 'Retrieves the JWT token.',
                     requestBody: new RequestBody(
-                        description: 'Retrieves the JWT token to login.',
+                        description: 'Retrieves the JWT token.',
                         content: new \ArrayObject([
                             'application/json' => [
                                 'schema' => [
