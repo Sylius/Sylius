@@ -15,18 +15,8 @@ namespace Sylius\Behat\Page\Admin\Administrator;
 
 use Sylius\Behat\Page\Admin\Crud\UpdatePageInterface as BaseUpdatePageInterface;
 
-interface UpdatePageInterface extends BaseUpdatePageInterface
+interface UpdatePageInterface extends BaseUpdatePageInterface, FormAwareInterface
 {
-    public function attachAvatar(string $path): void;
-
-    public function changeUsername(string $username): void;
-
-    public function changeEmail(string $email): void;
-
-    public function changePassword(string $password): void;
-
-    public function changeLocale(string $localeCode): void;
-
     public function removeAvatar(): void;
 
     public function hasAvatar(string $avatarPath): bool;

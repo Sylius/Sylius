@@ -15,19 +15,6 @@ namespace Sylius\Behat\Page\Admin\Administrator;
 
 use Sylius\Behat\Page\Admin\Crud\CreatePageInterface as BaseCreatePageInterface;
 
-interface CreatePageInterface extends BaseCreatePageInterface
+interface CreatePageInterface extends BaseCreatePageInterface, FormAwareInterface
 {
-    public function isAvatarAttached(): bool;
-
-    public function attachAvatar(string $path): void;
-
-    public function enable(): void;
-
-    public function specifyUsername(string $username): void;
-
-    public function specifyEmail(string $email): void;
-
-    public function specifyPassword(string $password): void;
-
-    public function specifyLocale(string $localeCode): void;
 }

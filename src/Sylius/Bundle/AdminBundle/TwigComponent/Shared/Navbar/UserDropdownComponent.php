@@ -63,6 +63,9 @@ final class UserDropdownComponent
                 'title' => $this->translator->trans('sylius.ui.logout'),
                 'url' => $this->urlGenerator->generate('sylius_admin_logout'),
                 'icon' => 'logout',
+                'attr' => [
+                    'data-test-logout' => null,
+                ]
             ],
             [
                 'type' => 'divider',

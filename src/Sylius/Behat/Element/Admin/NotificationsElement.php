@@ -39,7 +39,7 @@ final class NotificationsElement extends Element implements NotificationsElement
             }
         }
 
-        return $flashesContainer->isVisible();
+        return false;
     }
 
     protected function getDefinedElements(): array

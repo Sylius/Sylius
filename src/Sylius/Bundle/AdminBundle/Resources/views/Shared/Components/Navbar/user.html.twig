@@ -3,7 +3,7 @@
 
 {% set dropdown_trigger %}
     <div class="d-flex lh-1 text-reset p-0 cursor-pointer">
-        {% if user.avatar.path is not defined %}
+        {% if user.avatar.path is not defined or user.avatar.path is empty %}
             {{ avatar.small() }}
         {% else %}
             {{ avatar.small(user.avatar.path|imagine_filter('sylius_admin_admin_user_avatar_thumbnail')) }}
