@@ -7,14 +7,14 @@ Feature: Adding an avatar to an administrator
     Background:
         Given I am logged in as an administrator
 
-    @todo @ui @api
+    @ui @api
     Scenario: Adding an avatar to administrator account
         Given I am editing my details
         When I upload the "troll.jpg" image as my avatar
         Then I should see the "troll.jpg" image as my avatar
         And I should see the "troll.jpg" avatar image in the top bar next to my name
 
-    @todo @ui @no-api
+    @ui @no-api
     Scenario: Avatar is not added when there is any validation error
         When I want to create a new administrator
         And I upload the "troll.jpg" image as the avatar

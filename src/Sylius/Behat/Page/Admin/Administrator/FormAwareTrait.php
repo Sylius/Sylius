@@ -92,7 +92,7 @@ trait FormAwareTrait
 
     public function isAvatarAttached(): bool
     {
-        return $this->getElement('field_avatar')->getValue() !== '';
+        return $this->getElement('avatar_image')->getAttribute('data-test-avatar-image') !== '';
     }
 
     public function attachAvatar(string $path): void

@@ -255,7 +255,7 @@ final class ManagingAdministratorsContext implements Context
      */
     public function iShouldBeNotifiedThatEmailIsNotValid()
     {
-        Assert::same($this->createPage->getValidationMessage('email'), 'This email is invalid.');
+        Assert::same($this->createPage->getValidationMessage('field_email'), 'This email is invalid.');
     }
 
     /**
