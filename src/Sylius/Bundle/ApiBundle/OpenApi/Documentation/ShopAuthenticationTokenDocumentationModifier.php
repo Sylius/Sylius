@@ -30,7 +30,7 @@ final class ShopAuthenticationTokenDocumentationModifier implements Documentatio
         $components = $docs->getComponents();
         $schemas = $components->getSchemas();
 
-        $schemas['ShopUserToken'] = [
+        $schemas['Customer'] = [
             'type' => 'object',
             'properties' => [
                 'token' => [
@@ -66,14 +66,14 @@ final class ShopAuthenticationTokenDocumentationModifier implements Documentatio
             new PathItem(
                 post: new Operation(
                     operationId: 'postCredentialsItem',
-                    tags: ['ShopUserToken'],
+                    tags: ['Customer'],
                     responses: [
                         Response::HTTP_OK => [
                             'description' => 'Get JWT token',
                             'content' => [
                                 'application/json' => [
                                     'schema' => [
-                                        '$ref' => '#/components/schemas/ShopUserToken',
+                                        '$ref' => '#/components/schemas/Customer',
                                     ],
                                 ],
                             ],
