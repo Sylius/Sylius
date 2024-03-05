@@ -21,7 +21,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 final class ShopAuthenticationTokenDocumentationModifier implements DocumentationModifierInterface
 {
-    public function __construct(private string $apiRoute)
+    public function __construct(private readonly string $apiRoute)
     {
     }
 
@@ -30,7 +30,7 @@ final class ShopAuthenticationTokenDocumentationModifier implements Documentatio
         $components = $docs->getComponents();
         $schemas = $components->getSchemas();
 
-        $schemas['Customer'] = [
+        $schemas['Customer-shop.authentication-token.read'] = [
             'type' => 'object',
             'properties' => [
                 'token' => [
@@ -44,7 +44,43 @@ final class ShopAuthenticationTokenDocumentationModifier implements Documentatio
             ],
         ];
 
-        $schemas['ShopUserCredentials'] = [
+        $schemas['Customer-shop.authentication-token.read.unauthorized'] = [
+            'type' => 'object',
+            'properties' => [
+                'code' => [
+                    'type' => 'integer',
+                    'readOnly' => true,
+                ],
+                'message' => [
+                    'type' => 'string',
+                    'readOnly' => true,
+                ],
+            ],
+        ];
+
+        $schemas['Customer-shop.authentication-token.read.bad-request'] = [
+            'type' => 'object',
+            'properties' => [
+                'type' => [
+                    'type' => 'string',
+                    'readOnly' => true,
+                ],
+                'title' => [
+                    'type' => 'string',
+                    'readOnly' => true,
+                ],
+                'status' => [
+                    'type' => 'integer',
+                    'readOnly' => true,
+                ],
+                'detail' => [
+                    'type' => 'string',
+                    'readOnly' => true,
+                ],
+            ],
+        ];
+
+        $schemas['Customer-shop.authentication-token.create'] = [
             'type' => 'object',
             'properties' => [
                 'email' => [
@@ -69,23 +105,43 @@ final class ShopAuthenticationTokenDocumentationModifier implements Documentatio
                     tags: ['Customer'],
                     responses: [
                         Response::HTTP_OK => [
-                            'description' => 'Get JWT token',
+                            'description' => 'JWT token retrieval succeeded',
                             'content' => [
                                 'application/json' => [
                                     'schema' => [
-                                        '$ref' => '#/components/schemas/Customer',
+                                        '$ref' => '#/components/schemas/Customer-shop.authentication-token.read',
+                                    ],
+                                ],
+                            ],
+                        ],
+                        Response::HTTP_UNAUTHORIZED => [
+                            'description' => 'JWT token retrieval failed due to invalid credentials',
+                            'content' => [
+                                'application/json' => [
+                                    'schema' => [
+                                        '$ref' => '#/components/schemas/Customer-shop.authentication-token.read.unauthorized',
+                                    ],
+                                ],
+                            ],
+                        ],
+                        Response::HTTP_BAD_REQUEST => [
+                            'description' => 'JWT token retrieval failed due to invalid request',
+                            'content' => [
+                                'application/json' => [
+                                    'schema' => [
+                                        '$ref' => '#/components/schemas/Customer-shop.authentication-token.read.bad-request',
                                     ],
                                 ],
                             ],
                         ],
                     ],
-                    summary: 'Get JWT token to login.',
+                    summary: 'Retrieves the JWT token.',
                     requestBody: new RequestBody(
-                        description: 'Create new JWT Token',
+                        description: 'Retrieves the JWT token.',
                         content: new \ArrayObject([
                             'application/json' => [
                                 'schema' => [
-                                    '$ref' => '#/components/schemas/ShopUserCredentials',
+                                    '$ref' => '#/components/schemas/Customer-shop.authentication-token.create',
                                 ],
                             ],
                         ]),
