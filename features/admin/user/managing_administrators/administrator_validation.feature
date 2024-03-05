@@ -7,7 +7,7 @@ Feature: Administrator validation
     Background:
         Given I am logged in as an administrator
 
-    @todo @ui @api
+    @ui @api
     Scenario: Trying to add a new administrator without email and name
         When I want to create a new administrator
         And I do not specify its email
@@ -16,14 +16,14 @@ Feature: Administrator validation
         Then I should be notified that the email is required
         And I should be notified that the name is required
 
-    @todo @ui @api
+    @ui @api
     Scenario: Trying to add a new administrator without password
         When I want to create a new administrator
         And I do not specify its password
         And I try to add it
         Then I should be notified that the password is required
 
-    @todo @ui @api
+    @ui @api
     Scenario: Trying to add a new administrator with invalid email
         When I want to create a new administrator
         And I specify its email as "Ted"

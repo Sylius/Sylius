@@ -247,7 +247,7 @@ final class ManagingAdministratorsContext implements Context
      */
     public function iShouldBeNotifiedThatFirstNameIsRequired($elementName)
     {
-        Assert::same($this->createPage->getValidationMessage($elementName), sprintf('Please enter your %s.', $elementName));
+        Assert::same($this->createPage->getValidationMessage(sprintf('%s_%s', 'field', $elementName)), sprintf('Please enter your %s.', $elementName));
     }
 
     /**
