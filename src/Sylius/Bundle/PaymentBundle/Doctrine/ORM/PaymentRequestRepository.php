@@ -46,4 +46,20 @@ class PaymentRequestRepository extends EntityRepository implements PaymentReques
 
         return count($paymentRequests) > 0;
     }
+
+    /**
+     * @return array<PaymentRequestInterface>
+     */
+
+    public function findAllByPaymentId(int|string $paymentId): array
+    {
+        return $this->createQueryBuilder('o')
+            ->addSelect('payment')
+            ->innerJoin('o.payment', 'payment')
+            ->where('payment.id = :paymentId')
+            ->setParameter('paymentId', $paymentId)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
 }

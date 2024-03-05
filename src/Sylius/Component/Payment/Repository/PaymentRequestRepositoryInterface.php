@@ -24,4 +24,9 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 interface PaymentRequestRepositoryInterface extends RepositoryInterface
 {
     public function duplicateExists(PaymentRequestInterface $paymentRequest): bool;
+
+    /**
+     * @return array<PaymentRequestInterface>
+     */
+    public function findAllByPaymentId(int|string $paymentId): array;
 }
