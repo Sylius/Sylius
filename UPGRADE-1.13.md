@@ -6,14 +6,12 @@
 
 Sylius 1.13 comes with a bump of minimum PHP version to 8.1. We strongly advice to make upgrade process step by step,
 so it is highly recommended updating your PHP version being still on Sylius 1.12. After ensuring, that previous step
-succeed,
-you may move forward to the Sylius 1.13 update.
+succeed, you may move forward to the Sylius 1.13 update.
 
 ### Symfony support
 
 In Sylius 1.13, the minimum supported version of Symfony 6 has been bumped up to 6.4. Sylius 1.13 supports both
-long-term
-supported Symfony versions: 5.4 and 6.4.
+long-term supported Symfony versions: 5.4 and 6.4.
 
 ### Price History Plugin
 
@@ -204,8 +202,7 @@ To ease the update process, we have grouped the changes into the following categ
 1. Both `getCreatedByGuest` and `setCreatedByGuest` methods were deprecated
    on `Sylius\Component\Core\Model\OrderInterface`.
    Please use `isCreatedByGuest` instead of the first one. The latter is a part of the `setCustomerWithAuthorization`
-   logic
-   and should be used only this way.
+   logic and should be used only this way.
 
 1. The `Sylius\Bundle\ShippingBundle\Provider\Calendar` and `Sylius\Bundle\ShippingBundle\Provider\DateTimeProvider`
    have been deprecated and will be removed in Sylius 2.0. Use `Symfony\Component\Clock\Clock` instead.
