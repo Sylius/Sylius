@@ -30,7 +30,7 @@ final class AdminAuthenticationTokenDocumentationModifier implements Documentati
         $components = $docs->getComponents();
         $schemas = $components->getSchemas();
 
-        $schemas['AdminUserToken'] = [
+        $schemas['Administrator'] = [
             'type' => 'object',
             'properties' => [
                 'token' => [
@@ -66,14 +66,14 @@ final class AdminAuthenticationTokenDocumentationModifier implements Documentati
             new PathItem(
                 post: new Operation(
                     operationId: 'postCredentialsItem',
-                    tags: ['AdminUserToken'],
+                    tags: ['Administrator'],
                     responses: [
                         Response::HTTP_OK => [
                             'description' => 'Get JWT token',
                             'content' => [
                                 'application/json' => [
                                     'schema' => [
-                                        '$ref' => '#/components/schemas/AdminUserToken',
+                                        '$ref' => '#/components/schemas/Administrator',
                                     ],
                                 ],
                             ],
