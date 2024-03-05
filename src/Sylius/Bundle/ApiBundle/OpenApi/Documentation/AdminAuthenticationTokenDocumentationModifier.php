@@ -21,7 +21,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 final class AdminAuthenticationTokenDocumentationModifier implements DocumentationModifierInterface
 {
-    public function __construct(private string $apiRoute)
+    public function __construct(private readonly string $apiRoute)
     {
     }
 
@@ -30,7 +30,7 @@ final class AdminAuthenticationTokenDocumentationModifier implements Documentati
         $components = $docs->getComponents();
         $schemas = $components->getSchemas();
 
-        $schemas['Administrator'] = [
+        $schemas['Administrator-admin.authentication-token.read'] = [
             'type' => 'object',
             'properties' => [
                 'token' => [
@@ -44,7 +44,7 @@ final class AdminAuthenticationTokenDocumentationModifier implements Documentati
             ],
         ];
 
-        $schemas['AdminUserCredentials'] = [
+        $schemas['Administrator-admin.authentication-token.create'] = [
             'type' => 'object',
             'properties' => [
                 'email' => [
@@ -69,23 +69,23 @@ final class AdminAuthenticationTokenDocumentationModifier implements Documentati
                     tags: ['Administrator'],
                     responses: [
                         Response::HTTP_OK => [
-                            'description' => 'Get JWT token',
+                            'description' => 'JWT token',
                             'content' => [
                                 'application/json' => [
                                     'schema' => [
-                                        '$ref' => '#/components/schemas/Administrator',
+                                        '$ref' => '#/components/schemas/Administrator-admin.authentication-token.read',
                                     ],
                                 ],
                             ],
                         ],
                     ],
-                    summary: 'Get JWT token to login.',
+                    summary: 'Retrieves the JWT token to login.',
                     requestBody: new RequestBody(
-                        description: 'Create new JWT Token',
+                        description: 'Retrieves the JWT token to login.',
                         content: new \ArrayObject([
                             'application/json' => [
                                 'schema' => [
-                                    '$ref' => '#/components/schemas/AdminUserCredentials',
+                                    '$ref' => '#/components/schemas/Administrator-admin.authentication-token.create',
                                 ],
                             ],
                         ]),
