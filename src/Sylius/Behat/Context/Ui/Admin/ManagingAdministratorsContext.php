@@ -231,7 +231,7 @@ final class ManagingAdministratorsContext implements Context
      */
     public function iShouldBeNotifiedThatEmailMustBeUnique()
     {
-        Assert::same($this->createPage->getValidationMessage('email'), 'This email is already used.');
+        Assert::same($this->createPage->getValidationMessage('field_email'), 'This email is already used.');
     }
 
     /**
@@ -239,7 +239,7 @@ final class ManagingAdministratorsContext implements Context
      */
     public function iShouldBeNotifiedThatNameMustBeUnique()
     {
-        Assert::same($this->createPage->getValidationMessage('name'), 'This username is already used.');
+        Assert::same($this->createPage->getValidationMessage('field_username'), 'This username is already used.');
     }
 
     /**
