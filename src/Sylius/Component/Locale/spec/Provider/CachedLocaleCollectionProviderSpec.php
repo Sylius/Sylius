@@ -35,7 +35,7 @@ final class CachedLocaleCollectionProviderSpec extends ObjectBehavior
         LocaleCollectionProviderInterface $decorated,
         CacheInterface $cache,
         LocaleInterface $someLocale,
-        LocaleInterface $anotherLocale
+        LocaleInterface $anotherLocale,
     ): void {
         $someLocale->getCode()->willReturn('en_US');
         $anotherLocale->getCode()->willReturn('en_GB');
