@@ -5,17 +5,18 @@
 ### PHP 8.1 support
 
 Sylius 1.13 comes with a bump of minimum PHP version to 8.1. We strongly advice to make upgrade process step by step,
-so it is highly recommended updating your PHP version being still on Sylius 1.12. After ensuring, that previous step
-succeed, you may move forward to the Sylius 1.13 update.
+so it is highly recommended to update your PHP version while being still on Sylius 1.12. After ensuring, that the
+previous step succeeds, you may move forward to the Sylius 1.13 update.
 
 ### Symfony support
 
-In Sylius 1.13, the minimum supported version of Symfony 6 has been bumped up to 6.4. Sylius 1.13 supports both
-long-term supported Symfony versions: 5.4 and 6.4.
+The minimum supported version of Symfony 6 has been bumped up to 6.4.
+Sylius 1.13 supports both long-term supported Symfony versions: 5.4 and 6.4.
 
 ### Price History Plugin
 
-Starting with Sylius 1.13, the [SyliusPriceHistoryPlugin](https://github.com/Sylius/PriceHistoryPlugin) is included.
+Starting with Sylius 1.13, the functionality of [SyliusPriceHistoryPlugin](https://github.com/Sylius/PriceHistoryPlugin)
+is included in Core.
 If you are currently using the plugin in your project, we recommend following the upgrade guide
 located [here](UPGRADE-FROM-1.12-WITH-PRICE-HISTORY-PLUGIN-TO-1.13.md).
 
@@ -28,7 +29,7 @@ To ease the update process, we have grouped the changes into the following categ
 1. The constructor of `Sylius\Bundle\CoreBundle\MessageHandler\Admin\Account\SendResetPasswordEmailHandler` has been
    changed:
 
-    ```php
+    ```diff
     use Sylius\Bundle\CoreBundle\Mailer\ResetPasswordEmailManagerInterface;
     use Sylius\Component\Mailer\Sender\SenderInterface;
 
@@ -41,7 +42,7 @@ To ease the update process, we have grouped the changes into the following categ
 
 1. The constructor of `Sylius\Bundle\AdminBundle\Controller\NotificationController` has been changed:
 
-    ```php
+    ```diff
     use GuzzleHttp\ClientInterface as DeprecatedClientInterface;
     use Http\Message\MessageFactory;
     use Psr\Http\Client\ClientInterface;
@@ -61,7 +62,7 @@ To ease the update process, we have grouped the changes into the following categ
 
 1. The constructor of `Sylius\Component\Addressing\Matcher\ZoneMatcher` has been changed:
 
-    ```php
+    ```diff
     use Sylius\Component\Addressing\Repository\ZoneRepositoryInterface;
     use Sylius\Component\Resource\Repository\RepositoryInterface;
 
@@ -631,7 +632,7 @@ To ease the update process, we have grouped the changes into the following categ
        autoconfigure_with_attributes: true
    ```
    and use one of the new attributes accordingly to the type of your class, e.g.:
-   ```php
+   ```diff
     <?php
 
     declare(strict_types=1);
