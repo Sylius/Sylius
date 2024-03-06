@@ -1,9 +1,9 @@
 Support
 =======
 
-Besides documentation we have a very friendly community which provides support for all Sylius users seeking help!
+Besides documentation, we have a very friendly community that supports all Sylius users seeking help!
 
-At Sylius we have 3 main channels for communication and support.
+At Sylius we have 2 main channels for communication and support.
 
 Slack
 -----
@@ -25,20 +25,6 @@ If you have any suggestions regarding its organization, please let us know on Sl
 Slack requires inviting new members, but this can be done automatically, just go to `sylius.com/slack <https://sylius.com/slack>`_,
 enter your email and you will get an invitation.
 If possible, please use your GitHub username - it will help us to recognize each other easily!
-
-Forum
------
-
-In response to the rapid growth of our Ecosystem, we decided it is necessary to launch a brand new platform for support
-and exchanging experience. On the contrary to Slack, our Forum is much easier to follow, on Slack unless you are a part
-of the discussion when it is happening, it might be difficult to catch up when you have been offline.
-Forum has a search engine so it is convenient to browse for what is interesting for you.
-
-The Sylius Community Forum is meant for everyone who is interested in eCommerce technology and Sylius. We invite both existing
-and new community members to join the discussion and help shape the ecosystem, products & services we are building.
-Get to know other community members, ask for support, suggest an improvement or discuss your challenge.
-
-You can register via email, Twitter & GitHub by going to `https://forum.sylius.com/ <https://forum.sylius.com/>`_ and hitting the “Sign-Up” button.
 
 StackOverflow
 -------------
