@@ -46,7 +46,7 @@ final class LocaleProviderSpec extends ObjectBehavior
 
     function it_returns_all_enabled_locales_via_collection_provider(
         LocaleCollectionProviderInterface $localeCollectionProvider,
-        LocaleInterface $locale
+        LocaleInterface $locale,
     ): void {
         $this->beConstructedWith($localeCollectionProvider, 'pl_PL');
         $localeCollectionProvider->getAll()->willReturn([$locale]);

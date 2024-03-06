@@ -21,7 +21,7 @@ final class LocaleProvider implements LocaleProviderInterface
     /**
      * @param RepositoryInterface<LocaleInterface>|LocaleCollectionProviderInterface $localeRepository
      */
-    public function __construct(private RepositoryInterface|LocaleCollectionProviderInterface $localeRepository, private string $defaultLocaleCode)
+    public function __construct(private LocaleCollectionProviderInterface|RepositoryInterface $localeRepository, private string $defaultLocaleCode)
     {
         if ($this->localeRepository instanceof RepositoryInterface) {
             trigger_deprecation(
@@ -29,7 +29,8 @@ final class LocaleProvider implements LocaleProviderInterface
                 '1.13',
                 sprintf(
                     'Passing an instance of "%s" as first argument of "%s" is deprecated. Use an instance of "%s" instead.',
-                    RepositoryInterface::class, self::class,
+                    RepositoryInterface::class,
+                    self::class,
                     LocaleCollectionProviderInterface::class,
                 ),
             );

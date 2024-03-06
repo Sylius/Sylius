@@ -33,7 +33,7 @@ final class LocaleCollectionProviderSpec extends ObjectBehavior
     function it_returns_all_locales(
         RepositoryInterface $localeRepository,
         LocaleInterface $someLocale,
-        LocaleInterface $anotherLocale
+        LocaleInterface $anotherLocale,
     ): void {
         $someLocale->getCode()->willReturn('en_US');
         $anotherLocale->getCode()->willReturn('en_GB');
