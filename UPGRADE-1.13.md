@@ -24,11 +24,86 @@ located [here](UPGRADE-FROM-1.12-WITH-PRICE-HISTORY-PLUGIN-TO-1.13.md).
 
 To ease the update process, we have grouped the changes into the following categories:
 
-### Constructors signature
+### Constructors signature changes
 
-1. The constructor of `Sylius\Bundle\CoreBundle\MessageHandler\Admin\Account\SendResetPasswordEmailHandler` has been
-   changed:
+1. The following CoreBundle constructor signatures have been changed:
 
+   `Sylius\Bundle\CoreBundle\CatalogPromotion\Processor\CatalogPromotionRemovalProcessor`
+    ```diff
+    use Sylius\Bundle\CoreBundle\CatalogPromotion\Announcer\CatalogPromotionRemovalAnnouncerInterface;
+    use Symfony\Component\Messenger\MessageBusInterface;
+
+        public function __construct(
+            private CatalogPromotionRepositoryInterface $catalogPromotionRepository,
+    +       private CatalogPromotionRemovalAnnouncerInterface $catalogPromotionRemovalAnnouncer,
+    -       private MessageBusInterface $commandBus,
+    -       private MessageBusInterface $eventBus,
+        )
+    ```
+
+   `Sylius\Bundle\CoreBundle\Fixture\Factory\ProductExampleFactory`
+    ```diff
+    use Symfony\Component\Config\FileLocatorInterface;
+   
+        public function __construct(
+            FactoryInterface $productFactory,
+            FactoryInterface $productVariantFactory,
+            FactoryInterface $channelPricingFactory,
+            ProductVariantGeneratorInterface $variantGenerator,
+            FactoryInterface $productAttributeValueFactory,
+            FactoryInterface $productImageFactory,
+            FactoryInterface $productTaxonFactory,
+            ImageUploaderInterface $imageUploader,
+            SlugGeneratorInterface $slugGenerator,
+            RepositoryInterface $taxonRepository,
+            RepositoryInterface $productAttributeRepository,
+            RepositoryInterface $productOptionRepository,
+            RepositoryInterface $channelRepository,
+            RepositoryInterface $localeRepository,
+            RepositoryInterface $taxCategoryRepository,
+    +       FileLocatorInterface $fileLocator,
+        )
+    ```
+
+   `Sylius\Bundle\CoreBundle\Fixture\Factory\PromotionExampleFactory`
+    ```diff
+    use Sylius\Component\Resource\Repository\RepositoryInterface;
+   
+        public function __construct(
+            FactoryInterface $promotionFactory,
+            ExampleFactoryInterface $promotionRuleExampleFactory,
+            ExampleFactoryInterface $promotionActionExampleFactory,
+            ChannelRepositoryInterface $channelRepository,
+            FactoryInterface $couponFactory,
+    +       RepositoryInterface $localeRepository,
+        )
+    ```
+
+   `Sylius\Bundle\CoreBundle\Installer\Provider\DatabaseSetupCommandsProvider`
+    ```diff
+    use Doctrine\Bundle\DoctrineBundle\Registry;
+    use Doctrine\ORM\EntityManagerInterface;
+
+        public function __construct(
+    -       Registry $doctrineRegistry,
+    +       EntityManagerInterface $entityManager,
+        )
+    ```
+
+   `Sylius\Bundle\CoreBundle\Installer\Setup\LocaleSetup`
+    ```diff
+    use Symfony\Component\Filesystem\Filesystem;
+
+        public function __construct(
+            RepositoryInterface $localeRepository,
+            FactoryInterface $localeFactory,
+            string $locale,
+    +       Filesystem $filesystem,
+    +       string $localeParameterFilePath,
+        )
+    ```
+
+   `Sylius\Bundle\CoreBundle\MessageHandler\Admin\Account\SendResetPasswordEmailHandler`
     ```diff
     use Sylius\Bundle\CoreBundle\Mailer\ResetPasswordEmailManagerInterface;
     use Sylius\Component\Mailer\Sender\SenderInterface;
@@ -37,6 +112,16 @@ To ease the update process, we have grouped the changes into the following categ
             private UserRepositoryInterface $shopUserRepository,
     -       private SenderInterface $emailSender,
     +       private ResetPasswordEmailManagerInterface $resetPasswordEmailManager,
+        )
+    ```
+
+   `Sylius\Bundle\CoreBundle\Validator\Constraints\HasEnabledEntityValidator`
+    ```diff
+    use Symfony\Component\PropertyAccess\PropertyAccessorInterface;
+
+        public function __construct(
+            ManagerRegistry $registry,
+    +       PropertyAccessorInterface $accessor,
         )
     ```
 
@@ -72,25 +157,10 @@ To ease the update process, we have grouped the changes into the following categ
         )
     ```
 
-1. Passing `Doctrine\Bundle\DoctrineBundle\Registry $doctrineRegistry`
-   to `Sylius\Bundle\CoreBundle\Installer\Provider\DatabaseSetupCommandsProvider` constructor is deprecated.
-   Pass `Doctrine\ORM\EntityManagerInterface $entityManager` instead. This will be mandatory in Sylius 2.0.
-
-1. Not passing `Symfony\Component\Config\FileLocatorInterface $fileLocator`
-   to `Sylius\Bundle\CoreBundle\Fixture\Factory\ProductExampleFactory`
-   constructor is deprecated and will be prohibited in Sylius 2.0.
-
-1. Not passing `Sylius\Component\Resource\Repository\RepositoryInterface $localeRepository`
-   as the sixth argument to `Sylius\Bundle\CoreBundle\Fixture\Factory\PromotionExampleFactory`
-   is deprecated and will be prohibited in Sylius 2.0.
 
 1. The first parameter `Sylius\Component\Promotion\Checker\Rule\RuleCheckerInterface $itemTotalRuleChecker` of the
    constructor in the `Sylius\Component\Core\Promotion\Checker\Rule\ItemTotalRuleChecker`
    class has been deprecated and will be removed in Sylius 2.0.
-
-1. Passing `Symfony\Component\Messenger\MessageBusInterface $eventBus`
-   to `Sylius\Bundle\CoreBundle\CatalogPromotion\Processor\CatalogPromotionRemovalProcessor`
-   as a second and third argument is deprecated.
 
 1. Passing `Sylius\Bundle\AdminBundle\EmailManager\OrderEmailManagerInterface $orderEmailManager`
    to `Sylius\Bundle\AdminBundle\Action\ResendOrderConfirmationEmailAction`
@@ -118,27 +188,15 @@ To ease the update process, we have grouped the changes into the following categ
    to `Sylius\Bundle\ShopBundle\Controller\ContactController` as the seventh constructor argument is deprecated,
    use `Sylius\Bundle\CoreBundle\Mailer\ContactEmailManagerInterface $contactEmailManager` instead.
 
-1. Not passing
-   `Sylius\Bundle\CoreBundle\CatalogPromotion\Announcer\CatalogPromotionRemovalAnnouncerInterface $catalogPromotionRemovalAnnouncer`
-   to `Sylius\Bundle\CoreBundle\CatalogPromotion\Processor\CatalogPromotionRemovalProcessor`
-   as the second constructor argument is deprecated.
-
 1. Not passing `Doctrine\Persistence\ObjectManager $orderManager`
    to `Sylius\Component\Core\Updater\UnpaidOrdersStateUpdater`
    as the fifth constructor argument is deprecated.
-
-1. Not passing `Symfony\Component\Filesystem\Filesystem` as fourth argument and parameters file path as fifth
-   to `Sylius\Bundle\CoreBundle\Installer\Setup\LocaleSetup $localeParameterFilePath` is deprecated and will be
-   prohibited in Sylius 2.0.
 
 1. Not passing
    `Sylius\Component\Core\Checker\ProductVariantLowestPriceDisplayCheckerInterface $productVariantLowestPriceDisplayChecker`
    to `Sylius\Component\Core\Calculator\ProductVariantPriceCalculator`
    as the first constructor argument is deprecated.
 
-1. Not passing an instance of `Symfony\Component\PropertyAccess\PropertyAccessorInterface $accessor`
-   to `Sylius\Bundle\CoreBundle\Validator\Constraints\HasEnabledEntityValidator`
-   as the second argument is deprecated.
 
 1. Not passing an instance
    of `Sylius\Component\Core\Payment\Remover\OrderPaymentsRemoverInterface $orderPaymentsRemover`
@@ -631,7 +689,9 @@ To ease the update process, we have grouped the changes into the following categ
    sylius_core:
        autoconfigure_with_attributes: true
    ```
-   and use one of the new attributes accordingly to the type of your class, e.g.:
+
+and use one of the new attributes accordingly to the type of your class, e.g.:
+
    ```diff
     <?php
 
