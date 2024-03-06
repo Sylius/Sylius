@@ -194,7 +194,7 @@
         "doctrine/orm": ">= 2.16.0",
         "lexik/jwt-authentication-bundle": "^2.18",
         "stof/doctrine-extensions-bundle": "1.8.0",
-        "symfony/ux-live-component": "2.15.0"
+        "symfony/ux-live-component": ">=2.15"
     },
     "require-dev": {
         "behat/behat": "^3.6.1",
