@@ -322,7 +322,7 @@ final class CustomersTest extends JsonApiTestCase
         $customer = $fixtures['customer_tony'];
 
         $this->requestDelete(
-            sprintf('/api/v2/admin/customers/%s/user' , $customer->getId()),
+            sprintf('/api/v2/admin/customers/%s/user', $customer->getId()),
         );
 
         $this->assertResponseCode($this->client->getResponse(), Response::HTTP_NO_CONTENT);

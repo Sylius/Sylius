@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace Sylius\Tests\Api\Admin;
 
 use Sylius\Component\Product\Model\ProductAssociationTypeInterface;
-use Sylius\Component\Product\Model\ProductAssociationTypeTranslation;
 use Sylius\Component\Product\Model\ProductAssociationTypeTranslationInterface;
 use Sylius\Tests\Api\JsonApiTestCase;
 use Sylius\Tests\Api\Utils\AdminUserLoginTrait;

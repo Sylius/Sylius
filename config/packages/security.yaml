@@ -58,7 +58,7 @@ security:
             stateless: true
             entry_point: jwt
             json_login:
-                check_path: "%sylius.security.new_api_shop_route%/authentication-token"
+                check_path: "%sylius.security.new_api_shop_route%/customers/token"
                 username_path: email
                 password_path: password
                 success_handler: lexik_jwt_authentication.handler.authentication_success
@@ -118,5 +118,5 @@ security:
         - { path: "%sylius.security.new_api_admin_regex%/.*", role: ROLE_API_ACCESS }
         - { path: "%sylius.security.new_api_admin_route%/administrators/token", role: PUBLIC_ACCESS }
         - { path: "%sylius.security.new_api_user_account_regex%/.*", role: ROLE_USER }
-        - { path: "%sylius.security.new_api_shop_route%/authentication-token", role: PUBLIC_ACCESS }
+        - { path: "%sylius.security.new_api_shop_route%/customers/token", role: PUBLIC_ACCESS }
         - { path: "%sylius.security.new_api_shop_regex%/.*", role: PUBLIC_ACCESS }

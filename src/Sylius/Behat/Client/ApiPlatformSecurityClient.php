@@ -19,7 +19,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 final class ApiPlatformSecurityClient implements ApiSecurityClientInterface
 {
-    /** @var array<string, string|object> $request */
+    /** @var array<string, string|object> */
     private array $request = [];
 
     public function __construct(

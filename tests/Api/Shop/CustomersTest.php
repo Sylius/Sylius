@@ -50,7 +50,7 @@ final class CustomersTest extends JsonApiTestCase
 
         $this->client->request(
             method: 'POST',
-            uri: '/api/v2/shop/authentication-token',
+            uri: '/api/v2/shop/customers/token',
             server: self::CONTENT_TYPE_HEADER,
             content: json_encode([
                 'email' => 'oliver@doe.com',

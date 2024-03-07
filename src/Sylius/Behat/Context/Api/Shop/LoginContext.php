@@ -62,7 +62,7 @@ final class LoginContext implements Context
     {
         $this->shopAuthenticationTokenClient->request(
             'POST',
-            sprintf('%s/shop/authentication-token', $this->apiUrlPrefix),
+            sprintf('%s/shop/customers/token', $this->apiUrlPrefix),
             [],
             [],
             ['CONTENT_TYPE' => 'application/json', 'HTTP_ACCEPT' => 'application/json'],
