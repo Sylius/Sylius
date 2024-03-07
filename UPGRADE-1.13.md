@@ -428,11 +428,11 @@ To ease the update process, we have grouped the changes into the following categ
 
 ### Interfaces, Classes and Services
 
-1. Class `Sylius\Component\Core\Promotion\Updater\Rule\TotalOfItemsFromTaxonRuleUpdater` has been deprecated, as it is
-   no more used.
+1. Class `Sylius\Component\Core\Promotion\Updater\Rule\TotalOfItemsFromTaxonRuleUpdater`
+   has been deprecated, as it is no more used.
 
-1. Class `Sylius\Component\Core\Promotion\Updater\Rule\ContainsProductRuleUpdater` has been deprecated, as it is no more
-   used.
+1. Class `Sylius\Component\Core\Promotion\Updater\Rule\ContainsProductRuleUpdater`
+   has been deprecated, as it is no more used.
 
 1. Class `Sylius\Bundle\AdminBundle\EmailManager\OrderEmailManager` and its
    interface `Sylius\Bundle\AdminBundle\EmailManager\OrderEmailManagerInterface`
@@ -506,22 +506,22 @@ To ease the update process, we have grouped the changes into the following categ
 
 1. The `Sylius\Bundle\CoreBundle\Provider\SessionProvider` has been deprecated and will be removed in Sylius 2.0.
 
-1. The `sylius.http_message_factory` service has been deprecated. Use `Psr\Http\Message\RequestFactoryInterface`
-   instead.
-
 1. The `Sylius\Component\Addressing\Repository\ZoneRepositoryInterface` and
    `Sylius\Bundle\AddressingBundle\Repository\ZoneRepository` were added.
    If you created a custom `Zone` repository, you should update it to extend
    the `Sylius\Bundle\AddressingBundle\Repository\ZoneRepository`
 
+1. The service definition for `sylius.promotion_rule_checker.item_total` has been updated. The class has been changed
+   from `Sylius\Component\Promotion\Checker\Rule\ItemTotalRuleChecker`
+   to `Sylius\Component\Core\Promotion\Checker\Rule\ItemTotalRuleChecker`.
+
+1. The `sylius.http_message_factory` service has been deprecated. Use `Psr\Http\Message\RequestFactoryInterface`
+   instead.
+
 1. The `sylius.http_client` has become an alias to `psr18.http_client` service.
 
 1. The `sylius.payum.http_client` has become a service ID of newly
    created `Sylius\Bundle\PayumBundle\HttpClient\HttpClient`.
-
-1. The service definition for `sylius.promotion_rule_checker.item_total` has been updated. The class has been changed
-   from `Sylius\Component\Promotion\Checker\Rule\ItemTotalRuleChecker`
-   to `Sylius\Component\Core\Promotion\Checker\Rule\ItemTotalRuleChecker`.
 
 ### Configuration
 
