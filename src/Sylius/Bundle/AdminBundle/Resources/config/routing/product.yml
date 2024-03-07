@@ -39,6 +39,9 @@ sylius_admin_product_update:
             section: admin
             permission: true
             redirect: referer
+            repository:
+                method: findOneByIdHydrated
+                arguments: $id
             template: "@SyliusAdmin/Crud/update.html.twig"
             vars:
                 subheader: sylius.ui.manage_your_product_catalog

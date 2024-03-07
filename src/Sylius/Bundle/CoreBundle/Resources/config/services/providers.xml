@@ -27,7 +27,7 @@
         </service>
 
         <service id="sylius.translation_locale_provider.admin" class="Sylius\Component\Core\Provider\TranslationLocaleProvider">
-            <argument type="service" id="sylius.repository.locale" />
+            <argument type="service" id="sylius.locale_collection_provider" />
             <argument type="string">%locale%</argument>
         </service>
 
