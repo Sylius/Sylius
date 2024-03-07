@@ -103,6 +103,17 @@ To ease the update process, we have grouped the changes into the following categ
         )
     ```
 
+1. The following AttributeBundle constructor signature has been changed:
+
+   `Sylius\Bundle\AttributeBundle\Form\Type\AttributeType\Configuration\SelectAttributeChoicesCollectionType`
+    ```diff
+    use Sylius\Component\Resource\Translation\Provider\TranslationLocaleProviderInterface;
+
+        public function __construct(
+    -       TranslationLocaleProviderInterface $localeProvider,
+        )
+    ```
+
 1. The following CoreBundle constructor signatures have been changed:
 
    `Sylius\Bundle\CoreBundle\CatalogPromotion\Processor\CatalogPromotionRemovalProcessor`
@@ -267,12 +278,6 @@ To ease the update process, we have grouped the changes into the following categ
    to `Sylius\Component\Core\Taxation\Applicator\OrderItemsTaxesApplicator` and
    to `Sylius\Component\Core\Taxation\Applicator\OrderItemUnitsTaxesApplicator`
    as the last argument is deprecated.
-
-1. Passing an instance
-   of `Sylius\Component\Resource\Translation\Provider\TranslationLocaleProviderInterface $localeProvider` as the
-   first constructor argument
-   to `Sylius\Bundle\AttributeBundle\Form\Type\AttributeType\Configuration\SelectAttributeChoicesCollectionType` has
-   been deprecated.
 
 ### Interfaces and Classes
 
