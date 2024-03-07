@@ -202,6 +202,36 @@ To ease the update process, we have grouped the changes into the following categ
         )
     ```
 
+1. The following ShopBundle constructor signatures have been changed:
+
+   `Sylius\Bundle\ShopBundle\EventListener\OrderCompleteListener`
+    ```diff
+    use Sylius\Bundle\CoreBundle\Mailer\OrderEmailManagerInterface;
+    use Sylius\Bundle\ShopBundle\EmailManager\OrderEmailManagerInterface as DeprecatedOrderEmailManagerInterface;
+    
+        public function __construct(
+    -       DeprecatedOrderEmailManagerInterface $orderEmailManager,
+    +       OrderEmailManagerInterface $orderEmailManager,
+        )
+    ```
+
+   `Sylius\Bundle\ShopBundle\Controller\ContactController`
+    ```diff
+    use Sylius\Bundle\CoreBundle\Mailer\ContactEmailManagerInterface;
+    use Sylius\Bundle\ShopBundle\EmailManager\ContactEmailManagerInterface as DeprecatedContactEmailManagerInterface;
+    
+        public function __construct(
+            RouterInterface $router,
+            FormFactoryInterface $formFactory,
+            Environment $templatingEngine,
+            ChannelContextInterface $channelContext,
+            CustomerContextInterface $customerContext,
+            LocaleContextInterface $localeContext,
+    -       DeprecatedContactEmailManagerInterface $contactEmailManager,
+    +       ContactEmailManagerInterface $contactEmailManager,
+        )
+    ```
+
 1. The constructor of `Sylius\Component\Addressing\Matcher\ZoneMatcher` has been changed:
 
     ```diff
@@ -214,18 +244,9 @@ To ease the update process, we have grouped the changes into the following categ
         )
     ```
 
-
 1. The first parameter `Sylius\Component\Promotion\Checker\Rule\RuleCheckerInterface $itemTotalRuleChecker` of the
    constructor in the `Sylius\Component\Core\Promotion\Checker\Rule\ItemTotalRuleChecker`
    class has been deprecated and will be removed in Sylius 2.0.
-
-1. Passing `Sylius\Bundle\ShopBundle\EmailManager\OrderEmailManagerInterface $orderEmailManager`
-   to `Sylius\Bundle\ShopBundle\EventListener\OrderCompleteListener` as the first constructor argument is deprecated,
-   use `Sylius\Bundle\CoreBundle\Mailer\OrderEmailManagerInterface $orderEmailManager` instead.
-
-1. Passing `Sylius\Bundle\ShopBundle\EmailManager\ContactEmailManagerInterface $contactEmailManager`
-   to `Sylius\Bundle\ShopBundle\Controller\ContactController` as the seventh constructor argument is deprecated,
-   use `Sylius\Bundle\CoreBundle\Mailer\ContactEmailManagerInterface $contactEmailManager` instead.
 
 1. Not passing `Doctrine\Persistence\ObjectManager $orderManager`
    to `Sylius\Component\Core\Updater\UnpaidOrdersStateUpdater`
@@ -235,7 +256,6 @@ To ease the update process, we have grouped the changes into the following categ
    `Sylius\Component\Core\Checker\ProductVariantLowestPriceDisplayCheckerInterface $productVariantLowestPriceDisplayChecker`
    to `Sylius\Component\Core\Calculator\ProductVariantPriceCalculator`
    as the first constructor argument is deprecated.
-
 
 1. Not passing an instance
    of `Sylius\Component\Core\Payment\Remover\OrderPaymentsRemoverInterface $orderPaymentsRemover`
