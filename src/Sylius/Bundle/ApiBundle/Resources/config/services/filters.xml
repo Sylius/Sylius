@@ -20,7 +20,6 @@
         <service id="sylius.api.search_payment_request_filter" parent="api_platform.doctrine.orm.search_filter" public="true">
             <argument type="collection">
                 <argument key="state">exact</argument>
-                <argument key="type">exact</argument>
                 <argument key="method.code">exact</argument>
             </argument>
             <tag name="api_platform.filter" />
