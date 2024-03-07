@@ -101,6 +101,9 @@ trait FormTrait
             'select' => $attributeValue->selectOption($value),
             default => throw new \InvalidArgumentException('Unsupported attribute value type'),
         };
+
+        $attributeValue->blur();
+        $this->waitForFormUpdate();
     }
 
     public function removeAttribute(string $attributeName, string $localeCode): void
@@ -155,7 +158,7 @@ trait FormTrait
     private function waitForFormUpdate(): void
     {
         $form = $this->getElement('form');
-        $form->waitFor(250, fn () => !$form->hasAttribute('busy'));
+        $form->waitFor(1500, fn () => !$form->hasAttribute('busy'));
     }
 
     private function clickButton(string $locator): void

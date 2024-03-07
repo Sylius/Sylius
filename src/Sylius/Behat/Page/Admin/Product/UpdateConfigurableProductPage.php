@@ -28,6 +28,13 @@ class UpdateConfigurableProductPage extends BaseUpdatePage implements UpdateConf
 
     private array $imageUrls = [];
 
+    public function saveChanges(): void
+    {
+        $this->waitForFormUpdate();
+
+        parent::saveChanges();
+    }
+
     public function setMetaKeywords(string $keywords, string $localeCode): void
     {
         $this->getDocument()->fillField(

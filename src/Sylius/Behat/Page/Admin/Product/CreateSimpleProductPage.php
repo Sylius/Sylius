@@ -46,6 +46,13 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
         return parent::getRouteName() . '_simple';
     }
 
+    public function create(): void
+    {
+        $this->waitForFormUpdate();
+
+        parent::create();
+    }
+
     public function specifySlugIn(?string $slug, string $locale): void
     {
         $this->activateLanguageTab($locale);

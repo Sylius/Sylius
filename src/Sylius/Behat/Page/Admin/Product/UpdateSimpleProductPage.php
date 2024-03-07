@@ -32,6 +32,13 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
 
     private array $imageUrls = [];
 
+    public function saveChanges(): void
+    {
+        $this->waitForFormUpdate();
+
+        parent::saveChanges();
+    }
+
     public function specifyPrice(ChannelInterface $channel, string $price): void
     {
         $this->getElement('price', ['%channelCode%' => $channel->getCode()])->setValue($price);
