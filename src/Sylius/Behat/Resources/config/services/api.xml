@@ -37,6 +37,7 @@
             <argument type="service" id="sylius.behat.shared_storage" />
             <argument>%sylius.security.new_api_route%</argument>
             <argument>admin</argument>
+            <argument>administrators</argument>
         </service>
 
         <service id="sylius.behat.client.shop_api_platform_security_client" class="Sylius\Behat\Client\ApiPlatformSecurityClient">
@@ -44,6 +45,7 @@
             <argument type="service" id="sylius.behat.shared_storage" />
             <argument>%sylius.security.new_api_route%</argument>
             <argument>shop</argument>
+            <argument>customers</argument>
         </service>
 
         <service id="sylius.behat.content_type_guide" class="Sylius\Behat\Client\ContentTypeGuide" />

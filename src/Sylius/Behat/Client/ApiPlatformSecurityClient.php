@@ -19,19 +19,27 @@ use Symfony\Component\HttpFoundation\Response;
 
 final class ApiPlatformSecurityClient implements ApiSecurityClientInterface
 {
+    /** @var array<string, string|object> $request */
     private array $request = [];
 
     public function __construct(
-        private AbstractBrowser $client,
-        private SharedStorageInterface $sharedStorage,
-        private string $apiUrlPrefix,
-        private string $section,
+        private readonly AbstractBrowser $client,
+        private readonly SharedStorageInterface $sharedStorage,
+        private readonly string $apiUrlPrefix,
+        private readonly string $section,
+        private readonly string $resource,
     ) {
     }
 
     public function prepareLoginRequest(): void
     {
-        $this->request['url'] = sprintf('%s/%s/authentication-token', $this->apiUrlPrefix, $this->section);
+        $this->request['url'] = sprintf(
+            '%s/%s/%s/token',
+            $this->apiUrlPrefix,
+            $this->section,
+            $this->resource,
+        );
+
         $this->request['method'] = 'POST';
     }
 

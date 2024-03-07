@@ -19,7 +19,7 @@ use ApiPlatform\OpenApi\Model\RequestBody;
 use ApiPlatform\OpenApi\OpenApi;
 use Symfony\Component\HttpFoundation\Response;
 
-final class AdminAuthenticationTokenDocumentationModifier implements DocumentationModifierInterface
+final class AdministratorDocumentationModifier implements DocumentationModifierInterface
 {
     public function __construct(private readonly string $apiRoute)
     {
@@ -30,7 +30,7 @@ final class AdminAuthenticationTokenDocumentationModifier implements Documentati
         $components = $docs->getComponents();
         $schemas = $components->getSchemas();
 
-        $schemas['Administrator-admin.authentication-token.read'] = [
+        $schemas['Administrator-admin.administrator.token.read'] = [
             'type' => 'object',
             'properties' => [
                 'token' => [
@@ -44,7 +44,7 @@ final class AdminAuthenticationTokenDocumentationModifier implements Documentati
             ],
         ];
 
-        $schemas['Administrator-admin.authentication-token.read.unauthorized'] = [
+        $schemas['Administrator-admin.administrator.token.read.unauthorized'] = [
             'type' => 'object',
             'properties' => [
                 'code' => [
@@ -58,7 +58,7 @@ final class AdminAuthenticationTokenDocumentationModifier implements Documentati
             ],
         ];
 
-        $schemas['Administrator-admin.authentication-token.read.bad-request'] = [
+        $schemas['Administrator-admin.administrator.token.read.bad-request'] = [
             'type' => 'object',
             'properties' => [
                 'type' => [
@@ -80,7 +80,7 @@ final class AdminAuthenticationTokenDocumentationModifier implements Documentati
             ],
         ];
 
-        $schemas['Administrator-admin.authentication-token.create'] = [
+        $schemas['Administrator-admin.administrator.token.create'] = [
             'type' => 'object',
             'properties' => [
                 'email' => [
@@ -98,7 +98,7 @@ final class AdminAuthenticationTokenDocumentationModifier implements Documentati
         $docs = $docs->withComponents($components);
 
         $docs->getPaths()->addPath(
-            $this->apiRoute . '/admin/authentication-token',
+            $this->apiRoute . '/admin/administrators/token',
             new PathItem(
                 post: new Operation(
                     operationId: 'postCredentialsItem',
@@ -109,7 +109,7 @@ final class AdminAuthenticationTokenDocumentationModifier implements Documentati
                             'content' => [
                                 'application/json' => [
                                     'schema' => [
-                                        '$ref' => '#/components/schemas/Administrator-admin.authentication-token.read',
+                                        '$ref' => '#/components/schemas/Administrator-admin.administrator.token.read',
                                     ],
                                 ],
                             ],
@@ -119,7 +119,7 @@ final class AdminAuthenticationTokenDocumentationModifier implements Documentati
                             'content' => [
                                 'application/json' => [
                                     'schema' => [
-                                        '$ref' => '#/components/schemas/Administrator-admin.authentication-token.read.unauthorized',
+                                        '$ref' => '#/components/schemas/Administrator-admin.administrator.token.read.unauthorized',
                                     ],
                                 ],
                             ],
@@ -129,7 +129,7 @@ final class AdminAuthenticationTokenDocumentationModifier implements Documentati
                             'content' => [
                                 'application/json' => [
                                     'schema' => [
-                                        '$ref' => '#/components/schemas/Administrator-admin.authentication-token.read.bad-request',
+                                        '$ref' => '#/components/schemas/Administrator-admin.administrator.token.read.bad-request',
                                     ],
                                 ],
                             ],
@@ -141,7 +141,7 @@ final class AdminAuthenticationTokenDocumentationModifier implements Documentati
                         content: new \ArrayObject([
                             'application/json' => [
                                 'schema' => [
-                                    '$ref' => '#/components/schemas/Administrator-admin.authentication-token.create',
+                                    '$ref' => '#/components/schemas/Administrator-admin.administrator.token.create',
                                 ],
                             ],
                         ]),

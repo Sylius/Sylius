@@ -30,7 +30,7 @@ final class AdminUsersTest extends JsonApiTestCase
 
         $this->client->request(
             method: 'POST',
-            uri: '/api/v2/admin/authentication-token',
+            uri: '/api/v2/admin/administrators/token',
             server: self::CONTENT_TYPE_HEADER,
             content: json_encode([
                 'email' => 'api@example.com',
