@@ -329,7 +329,7 @@ To ease the update process, we have grouped the changes into the following categ
         ) 
     ```
 
-### Interfaces and Classes
+### Interfaces, Classes and Services
 
 1. Class `Sylius\Component\Core\Promotion\Updater\Rule\TotalOfItemsFromTaxonRuleUpdater` has been deprecated, as it is
    no more used.
@@ -857,6 +857,8 @@ and use one of the new attributes accordingly to the type of your class, e.g.:
    ```
 
 ### Miscellaneous
+
+1. The use of `sylius/calendar` package is deprecated in favor of `symfony/clock` package globally.
 
 1. Using Guzzle 6 has been deprecated in favor of Symfony HTTP Client. If you want to still use Guzzle 6 or Guzzle 7,
    you need to install `composer require php-http/guzzle6-adapter` or `composer require php-http/guzzle7-adapter`
