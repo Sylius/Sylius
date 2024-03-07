@@ -26,16 +26,6 @@ use Sylius\Component\Payment\PaymentTransitions;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class_alias(PaymentFixture::class, '\Sylius\Bundle\CoreBundle\Fixture\Factory\PaymentFixture');
-
-trigger_deprecation(
-    'sylius/core-bundle',
-    '1.13',
-    'The "%s" class is deprecated and will be removed in Sylius 2.0. Use "%s" instead.',
-    '\Sylius\Bundle\CoreBundle\Fixture\Factory\PaymentFixture',
-    PaymentFixture::class,
-);
-
 class PaymentFixture extends AbstractFixture
 {
     private Generator $faker;
