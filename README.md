@@ -30,7 +30,7 @@ Documentation is available at [docs.sylius.com](https://docs.sylius.com).
 🤝 Community
 ------------
 
-Get Sylius support on [Slack](https://sylius.com/slack), [Forum](https://forum.sylius.com/) or [Stack Overflow](https://stackoverflow.com/questions/tagged/sylius).
+Get Sylius support on [Slack](https://sylius.com/slack) or [Stack Overflow](https://stackoverflow.com/questions/tagged/sylius).
 
 Stay updated by following our [Twitter](https://twitter.com/Sylius) and [Facebook](https://www.facebook.com/SyliusEcommerce/).
 
