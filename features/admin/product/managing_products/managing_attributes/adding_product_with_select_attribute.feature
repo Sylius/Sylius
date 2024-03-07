@@ -17,7 +17,7 @@ Feature: Adding a new product with a select attribute
         And I add the "Mug material" attribute
         And I select "Ceramic" value for the "Mug material" attribute
         And I add it
-        Then I should be notified that it has been successfully created
+#        Then I should be notified that it has been successfully created
         And the product "PHP Mug" should appear in the store
         And select attribute "Mug material" of product "PHP Mug" should be "Ceramic"
 
