@@ -243,41 +243,91 @@ To ease the update process, we have grouped the changes into the following categ
         )
     ```
 
-1. The constructor of `Sylius\Component\Addressing\Matcher\ZoneMatcher` has been changed:
+1. The following components' constructor signatures have been changed:
 
+   `Sylius\Component\Addressing\Matcher\ZoneMatcher`
     ```diff
     use Sylius\Component\Addressing\Repository\ZoneRepositoryInterface;
     use Sylius\Component\Resource\Repository\RepositoryInterface;
 
         public function __construct(
     -       private RepositoryInterface $zoneRepository,
-    +       private RepositoryInterface|ZoneRepositoryInterface $zoneRepository,
+    +       private ZoneRepositoryInterface $zoneRepository,
         )
     ```
 
-1. The first parameter `Sylius\Component\Promotion\Checker\Rule\RuleCheckerInterface $itemTotalRuleChecker` of the
-   constructor in the `Sylius\Component\Core\Promotion\Checker\Rule\ItemTotalRuleChecker`
-   class has been deprecated and will be removed in Sylius 2.0.
+   `Sylius\Component\Core\Updater\UnpaidOrdersStateUpdater`
+    ```diff
+    use Doctrine\Persistence\ObjectManager;
+    use SM\Factory\Factory;
+    use Sylius\Abstraction\StateMachine\StateMachineInterface;
 
-1. Not passing `Doctrine\Persistence\ObjectManager $orderManager`
-   to `Sylius\Component\Core\Updater\UnpaidOrdersStateUpdater`
-   as the fifth constructor argument is deprecated.
+        public function __construct(
+            OrderRepositoryInterface $orderRepository,
+    -       Factory $stateMachineFactory,
+    +       StateMachineInterface $stateMachineFactory,
+            string $expirationPeriod,
+            LoggerInterface $logger,
+    +       ObjectManager $orderManager,
+            int $batchSize = 100,
+        )
+    ```
 
-1. Not passing
-   `Sylius\Component\Core\Checker\ProductVariantLowestPriceDisplayCheckerInterface $productVariantLowestPriceDisplayChecker`
-   to `Sylius\Component\Core\Calculator\ProductVariantPriceCalculator`
-   as the first constructor argument is deprecated.
+   `Sylius\Component\Core\Calculator\ProductVariantPriceCalculator`
+    ```diff
+    use Sylius\Component\Core\Checker\ProductVariantLowestPriceDisplayCheckerInterface;
 
-1. Not passing an instance
-   of `Sylius\Component\Core\Payment\Remover\OrderPaymentsRemoverInterface $orderPaymentsRemover`
-   and a collection of unprocessable order states to `Sylius\Component\Core\OrderProcessing\OrderPaymentProcessor`
-   as the third and fourth arguments respectively is deprecated.
+        public function __construct(
+    +       ProductVariantLowestPriceDisplayCheckerInterface $productVariantLowestPriceDisplayChecker,
+        )
+    ```
 
-1. Not passing an instance
-   of `Sylius\Component\Core\Distributor\ProportionalIntegerDistributorInterface $proportionalIntegerDistributor`
-   to `Sylius\Component\Core\Taxation\Applicator\OrderItemsTaxesApplicator` and
-   to `Sylius\Component\Core\Taxation\Applicator\OrderItemUnitsTaxesApplicator`
-   as the last argument is deprecated.
+   `Sylius\Component\Core\OrderProcessing\OrderPaymentProcessor`
+    ```diff
+    use Sylius\Component\Core\Payment\Remover\OrderPaymentsRemoverInterface;
+
+        /** @param array<string> $unprocessableOrderStates */
+        public function __construct(
+            OrderPaymentProviderInterface $orderPaymentProvider,
+            string $targetState = PaymentInterface::STATE_CART,
+    +       OrderPaymentsRemoverInterface $orderPaymentsRemover,
+    +       array $unprocessableOrderStates,
+       )
+    ```
+
+   `Sylius\Component\Core\Taxation\Applicator\OrderItemsTaxesApplicator`
+    ```diff
+    use Sylius\Component\Core\Distributor\ProportionalIntegerDistributorInterface;
+
+        public function __construct(
+            CalculatorInterface $calculator,
+            AdjustmentFactoryInterface $adjustmentFactory,
+            IntegerDistributorInterface $distributor,
+            TaxRateResolverInterface $taxRateResolver,
+    +       ProportionalIntegerDistributorInterface $proportionalIntegerDistributor,
+        ) 
+    ```
+
+   `Sylius\Component\Core\Taxation\Applicator\OrderItemUnitsTaxesApplicator`
+    ```diff
+    use Sylius\Component\Core\Distributor\ProportionalIntegerDistributorInterface;
+
+        public function __construct(
+            CalculatorInterface $calculator,
+            AdjustmentFactoryInterface $adjustmentFactory,
+            TaxRateResolverInterface $taxRateResolver,
+    +       ProportionalIntegerDistributorInterface $proportionalIntegerDistributor,
+        ) 
+    ```
+
+   `Sylius\Component\Core\Taxation\Applicator\OrderItemUnitsTaxesApplicator`
+    ```diff
+    use Sylius\Component\Promotion\Checker\Rule\RuleCheckerInterface;
+
+        public function __construct(
+    -       RuleCheckerInterface $itemTotalRuleChecker,
+        ) 
+    ```
 
 ### Interfaces and Classes
 
