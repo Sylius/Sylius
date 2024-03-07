@@ -26,13 +26,13 @@ jobs:
         steps:
             -   name: "Checkout (With Branch)"
                 if: "${{ inputs.branch != '' }}"
-                uses: actions/checkout@v3
+                uses: actions/checkout@v4
                 with:
                     ref: ${{ inputs.branch }}
 
             -   name: "Checkout"
                 if: "${{ inputs.branch == '' }}"
-                uses: actions/checkout@v3
+                uses: actions/checkout@v4
 
             -   name: "Get matrix"
                 id: matrix
@@ -49,13 +49,13 @@ jobs:
         steps:
             -   name: "Checkout (With Branch)"
                 if: "${{ inputs.branch != '' }}"
-                uses: actions/checkout@v3
+                uses: actions/checkout@v4
                 with:
                     ref: ${{ inputs.branch }}
 
             -   name: "Checkout"
                 if: "${{ inputs.branch == '' }}"
-                uses: actions/checkout@v3
+                uses: actions/checkout@v4
 
             -   name: "Get matrix"
                 id: matrix
@@ -82,13 +82,13 @@ jobs:
         steps:
             -   name: "Checkout (With Branch)"
                 if: "${{ inputs.branch != '' }}"
-                uses: actions/checkout@v3
+                uses: actions/checkout@v4
                 with:
                     ref: ${{ inputs.branch }}
 
             -   name: "Checkout"
                 if: "${{ inputs.branch == '' }}"
-                uses: actions/checkout@v3
+                uses: actions/checkout@v4
 
             -   name: Setup PHP
                 uses: shivammathur/setup-php@v2
@@ -108,7 +108,7 @@ jobs:
                 run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
 
             -   name: Cache Composer
-                uses: actions/cache@v3
+                uses: actions/cache@v4
                 with:
                     path: ${{ steps.composer-cache.outputs.dir }}
                     key: "${{ github.run_id }}-${{ runner.os }}-${{ hashFiles('composer.json') }}-symfony-${{ matrix.symfony }}-"
@@ -142,13 +142,13 @@ jobs:
         steps:
             -   name: "Checkout (With Branch)"
                 if: "${{ inputs.branch != '' }}"
-                uses: actions/checkout@v3
+                uses: actions/checkout@v4
                 with:
                     ref: ${{ inputs.branch }}
 
             -   name: "Checkout"
                 if: "${{ inputs.branch == '' }}"
-                uses: actions/checkout@v3
+                uses: actions/checkout@v4
 
             -   name: Setup PHP
                 uses: shivammathur/setup-php@v2
@@ -168,7 +168,7 @@ jobs:
                 run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
 
             -   name: Cache Composer
-                uses: actions/cache@v3
+                uses: actions/cache@v4
                 with:
                     path: ${{ steps.composer-cache.outputs.dir }}
                     key: "${{ github.run_id }}-${{ runner.os }}-${{ hashFiles('composer.json') }}-symfony-${{ matrix.symfony }}-"

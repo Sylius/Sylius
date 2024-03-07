@@ -26,13 +26,13 @@ jobs:
         steps:
             -   name: "Checkout (With Branch)"
                 if: "${{ inputs.branch != '' }}"
-                uses: actions/checkout@v3
+                uses: actions/checkout@v4
                 with:
                     ref: ${{ inputs.branch }}
 
             -   name: "Checkout"
                 if: "${{ inputs.branch == '' }}"
-                uses: actions/checkout@v3
+                uses: actions/checkout@v4
 
             -
                 name: "Get matrix"
@@ -55,13 +55,13 @@ jobs:
         steps:
             -   name: "Checkout (With Branch)"
                 if: "${{ inputs.branch != '' }}"
-                uses: actions/checkout@v3
+                uses: actions/checkout@v4
                 with:
                     ref: ${{ inputs.branch }}
 
             -   name: "Checkout"
                 if: "${{ inputs.branch == '' }}"
-                uses: actions/checkout@v3
+                uses: actions/checkout@v4
 
             -   name: "Setup PHP"
                 uses: shivammathur/setup-php@v2
@@ -88,7 +88,7 @@ jobs:
                 run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
 
             -   name: "Setup cache"
-                uses: actions/cache@v3
+                uses: actions/cache@v4
                 with:
                     path: |
                         ${{ steps.composer-cache.outputs.dir }}
