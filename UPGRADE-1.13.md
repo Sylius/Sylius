@@ -411,6 +411,7 @@ To ease the update process, we have grouped the changes into the following categ
 
 1. Product variants resolving has been refactored for better extendability.
    The tag `sylius.product_variant_resolver.default` has been removed as it was never used.
+   To register a custom variant resolver use the tag `sylius.product_variant_resolver` with a fitting priority.
 
    All internal usages of service `sylius.product_variant_resolver.default` have been switched
    to `Sylius\Component\Product\Resolver\ProductVariantResolverInterface`, if you have been using the
@@ -478,10 +479,6 @@ To ease the update process, we have grouped the changes into the following categ
 1. Class `Sylius\Component\Promotion\Checker\Rule\ItemTotalRuleChecker` has been deprecated.
    Use `Sylius\Component\Core\Promotion\Checker\Rule\ItemTotalRuleChecker` instead.
 
-1. Using `parentId` query parameter to generate slug in `Sylius\Bundle\TaxonomyBundle\Controller\TaxonSlugController`
-   has been deprecated.
-   Use the `parentCode` query parameter instead.
-
 1. The `Sylius\Bundle\CoreBundle\CatalogPromotion\Command\RemoveInactiveCatalogPromotion` command and its handler
    `Sylius\Bundle\CoreBundle\CatalogPromotion\CommandHandler\RemoveInactiveCatalogPromotionHandler` have been
    deprecated.
@@ -490,10 +487,6 @@ To ease the update process, we have grouped the changes into the following categ
 1. Class `Sylius\Bundle\ShopBundle\Calculator\OrderItemsSubtotalCalculator` has been deprecated. Order items subtotal
    calculation
    is now available on the Order model `Sylius\Component\Core\Model\Order::getItemsSubtotal`.
-
-1. The `Regex` constraint has been removed from `Sylius\Component\Addressing\Model\Country` in favour of the `Country`
-   constraint.
-   Due to that, it's translation message `sylius.country.code.regex` was also removed.
 
 1. The `redirectToCartSummary` protected method of `Sylius\Bundle\OrderBundle\Controller\OrderController` has been
    deprecated as it was never used and will be removed in Sylius 2.0.
@@ -507,9 +500,6 @@ To ease the update process, we have grouped the changes into the following categ
    by `Sylius\Component\Core\Repository\OrderRepositoryInterface::createByCustomerIdCriteriaAwareQueryBuilder` for the
    same reason. Both changes affect
    `sylius_admin_order` and `sylius_admin_customer_order` grids configuration.
-
-1. The `sylius_admin_ajax_taxon_move` route has been deprecated. If you're relaying on it, consider migrating to new
-   `sylius_admin_ajax_taxon_move_up` and `sylius_admin_ajax_taxon_move_down` routes.
 
 1. The `Sylius\Bundle\CoreBundle\Fixture\Factory\PaymentFixture` has been deprecated.
    Use `Sylius\Bundle\CoreBundle\Fixture\PaymentFixture` instead.
@@ -894,3 +884,14 @@ and use one of the new attributes accordingly to the type of your class, e.g.:
 
 1. Extracted the section responsible for the `ShopBundle` from `@SyliusCore/Email/accountVerification.html.twig` and
    relocated it to `@SyliusShop/Email/verification.html.twig`.
+
+1. Using `parentId` query parameter to generate slug in `Sylius\Bundle\TaxonomyBundle\Controller\TaxonSlugController`
+   has been deprecated.
+   Use the `parentCode` query parameter instead.
+
+1. The `Regex` constraint has been removed from `Sylius\Component\Addressing\Model\Country` in favour of the `Country`
+   constraint.
+   Due to that, it's translation message `sylius.country.code.regex` was also removed.
+
+1. The `sylius_admin_ajax_taxon_move` route has been deprecated. If you're relaying on it, consider migrating to new
+   `sylius_admin_ajax_taxon_move_up` and `sylius_admin_ajax_taxon_move_down` routes.
