@@ -40,7 +40,6 @@
             <group>sylius:admin:payment_method:show</group>
             <group>admin:payment_method:update</group>
             <group>sylius:admin:payment_method:update</group>
-            <group>sylius:admin:payment_request:index</group>
             <group>sylius:admin:payment_request:show</group>
         </attribute>
 
@@ -51,7 +50,6 @@
             <group>sylius:shop:payment_method:index</group>
             <group>shop:payment_method:show</group>
             <group>sylius:shop:payment_method:show</group>
-            <group>sylius:shop:payment_request:index</group>
             <group>sylius:shop:payment_request:show</group>
         </attribute>
 
@@ -64,6 +62,7 @@
             <group>sylius:admin:payment_method:show</group>
             <group>admin:payment_method:update</group>
             <group>sylius:admin:payment_method:update</group>
+            <group>sylius:admin:payment_request:show</group>
         </attribute>
 
         <attribute name="code">
@@ -77,6 +76,7 @@
             <group>sylius:shop:payment_method:index</group>
             <group>shop:payment_method:show</group>
             <group>sylius:shop:payment_method:show</group>
+            <group>sylius:admin:payment_request:show</group>
         </attribute>
 
         <attribute name="description">
