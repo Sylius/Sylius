@@ -329,6 +329,102 @@ To ease the update process, we have grouped the changes into the following categ
         ) 
     ```
 
+### Architectural changes
+
+1. Since catalog promotion action and scope validations have been rewritten to be more inline with symfony, the previous
+   abstraction has been deprecated. This includes:
+    - `Sylius\Bundle\PromotionBundle\Validator\CatalogPromotionAction\ActionValidatorInterface`
+    - `Sylius\Bundle\PromotionBundle\Validator\CatalogPromotionScope\ScopeValidatorInterface`
+    - `Sylius\Bundle\PromotionBundle\Validator\CatalogPromotionActionValidator`
+    - `Sylius\Bundle\PromotionBundle\Validator\CatalogPromotionScopeValidator`
+
+1. The way of getting variants prices based on options has been changed,
+   as such the following services were deprecated, please use their new counterpart.
+    * instead of `Sylius\Component\Core\Provider\ProductVariantsPricesProviderInterface`
+      use `Sylius\Component\Core\Provider\ProductVariantMap\ProductVariantsMapProviderInterface`
+    * instead of `Sylius\Component\Core\Provider\ProductVariantsPricesProvider`
+      use `Sylius\Component\Core\Provider\ProductVariantMap\ProductVariantsPricesMapProvider`
+    * instead of `Sylius\Bundle\CoreBundle\Templating\Helper\ProductVariantsPricesHelper`
+      use `Sylius\Component\Core\Provider\ProductVariantMap\ProductVariantsPricesMapProvider`
+    * instead of `Sylius\Bundle\CoreBundle\Twig\ProductVariantsPricesExtension`
+      use `Sylius\Bundle\CoreBundle\Twig\ProductVariantsMapExtension`
+
+   Subsequently, the `sylius_product_variant_prices` twig function is deprecated, use `sylius_product_variants_map`
+   instead.
+
+   To add more data per variant create a service implementing
+   the `Sylius\Component\Core\Provider\ProductVariantMap\ProductVariantMapProviderInterface` and tag it
+   with `sylius.product_variant_data_map_provider`.
+
+
+1. Interface `Sylius\Component\Promotion\Generator\PromotionCouponGeneratorInstructionInterface` has been refactored and
+   is now deprecated. It now extends a new
+   interface `Sylius\Component\Promotion\Generator\PromotionCouponGeneratorInstructionReadInterface`, which contains
+   only getter methods.
+    - If your services or custom implementations previously relied
+      on `Sylius\Component\Promotion\Generator\PromotionCouponGeneratorInstructionInterface` for
+      read operations, you should now
+      use `Sylius\Component\Promotion\Generator\PromotionCouponGeneratorInstructionReadInterface` for better clarity and
+      separation of concerns.
+    - This change is backward compatible as long as your implementations or services were using only the getter methods
+      from `Sylius\Component\Promotion\Generator\PromotionCouponGeneratorInstructionInterface`. However, if you also
+      utilized setter methods, you should
+      continue using `Sylius\Component\Promotion\Generator\PromotionCouponGeneratorInstructionInterface`.
+
+1. Moved classes from `Command` to `Console\Command`. The `Command` namespace is deprecated for console command classes
+   and will be removed in Sylius 2.0.
+   List of affected classes:
+    - `Sylius\Bundle\OrderBundle\Command\RemoveExpiredCartsCommand`
+      to `Sylius\Bundle\OrderBundle\Console\Command\RemoveExpiredCartsCommand`
+    - `Sylius\Bundle\PromotionBundle\Command\GenerateCouponsCommand`
+      to `Sylius\Bundle\PromotionBundle\Console\Command\GenerateCouponsCommand`
+    - `Sylius\Bundle\UiBundle\Command\DebugTemplateEventCommand`
+      to `Sylius\Bundle\UiBundle\Console\Command\DebugTemplateEventCommand`
+    - `Sylius\Bundle\UserBundle\Command\AbstractRoleCommand`
+      to `Sylius\Bundle\UserBundle\Console\Command\AbstractRoleCommand`
+    - `Sylius\Bundle\UserBundle\Command\DemoteUserCommand`
+      to `Sylius\Bundle\UserBundle\Console\Command\DemoteUserCommand`
+    - `Sylius\Bundle\UserBundle\Command\PromoteUserCommand`
+      to `Sylius\Bundle\UserBundle\Console\Command\PromoteUserCommand`
+    - `Sylius\Bundle\CoreBundle\Command\Model\PluginInfo`
+      to `Sylius\Bundle\CoreBundle\Console\Command\Model\PluginInfo`
+    - `Sylius\Bundle\CoreBundle\Command\AbstractInstallCommand`
+      to `Sylius\Bundle\CoreBundle\Console\Command\AbstractInstallCommand`
+    - `Sylius\Bundle\CoreBundle\Command\CancelUnpaidOrdersCommand`
+      to `Sylius\Bundle\CoreBundle\Console\Command\CancelUnpaidOrdersCommand`
+    - `Sylius\Bundle\CoreBundle\Command\CheckRequirementsCommand`
+      to `Sylius\Bundle\CoreBundle\Console\Command\CheckRequirementsCommand`
+    - `Sylius\Bundle\CoreBundle\Command\InformAboutGUSCommand`
+      to `Sylius\Bundle\CoreBundle\Console\Command\InformAboutGUSCommand`
+    - `Sylius\Bundle\CoreBundle\Command\InstallAssetsCommand`
+      to `Sylius\Bundle\CoreBundle\Console\Command\InstallAssetsCommand`
+    - `Sylius\Bundle\CoreBundle\Command\InstallCommand` to `Sylius\Bundle\CoreBundle\Console\Command\InstallCommand`
+    - `Sylius\Bundle\CoreBundle\Command\InstallDatabaseCommand`
+      to `Sylius\Bundle\CoreBundle\Console\Command\InstallDatabaseCommand`
+    - `Sylius\Bundle\CoreBundle\Command\InstallSampleDataCommand`
+      to `Sylius\Bundle\CoreBundle\Console\Command\InstallSampleDataCommand`
+    - `Sylius\Bundle\CoreBundle\Command\JwtConfigurationCommand`
+      to `Sylius\Bundle\CoreBundle\Console\Command\JwtConfigurationCommand`
+    - `Sylius\Bundle\CoreBundle\Command\SetupCommand` to `Sylius\Bundle\CoreBundle\Console\Command\SetupCommand`
+    - `Sylius\Bundle\CoreBundle\Command\ShowAvailablePluginsCommand`
+      to `Sylius\Bundle\CoreBundle\Console\Command\ShowAvailablePluginsCommand`
+
+1. Product variants resolving has been refactored for better extendability.
+   The tag `sylius.product_variant_resolver.default` has been removed as it was never used.
+
+   All internal usages of service `sylius.product_variant_resolver.default` have been switched
+   to `Sylius\Component\Product\Resolver\ProductVariantResolverInterface`, if you have been using the
+   `sylius.product_variant_resolver.default` service apply this change accordingly.
+
+1. Sylius 2.0 will introduce a significant restructuring of our class system to enhance efficiency and clarity. The
+   changes are as follows:
+    - `Message` will be migrated to `Command`.
+    - `MessageDispatcher` will be migrated to `CommandDispatcher`.
+    - `MessageHandler` will be migrated to `CommandHandler`.
+    - Example: Within the `Sylius\Bundle\CoreBundle`, the `MessageHandler\ResendOrderConfirmationEmailHandler` class
+      will be migrated to `CommandHandler\ResendOrderConfirmationEmailHandler`. This pattern will be mirrored across
+      other bundles in the system.
+
 ### Interfaces, Classes and Services
 
 1. Class `Sylius\Component\Core\Promotion\Updater\Rule\TotalOfItemsFromTaxonRuleUpdater` has been deprecated, as it is
@@ -376,13 +472,6 @@ To ease the update process, we have grouped the changes into the following categ
 1. The `Sylius\Bundle\ShippingBundle\Provider\Calendar` and `Sylius\Bundle\ShippingBundle\Provider\DateTimeProvider`
    have been deprecated and will be removed in Sylius 2.0. Use `Symfony\Component\Clock\Clock` instead.
 
-1. Since catalog promotion action and scope validations have been rewritten to be more inline with symfony, the previous
-   abstraction has been deprecated. This includes:
-    - `Sylius\Bundle\PromotionBundle\Validator\CatalogPromotionAction\ActionValidatorInterface`
-    - `Sylius\Bundle\PromotionBundle\Validator\CatalogPromotionScope\ScopeValidatorInterface`
-    - `Sylius\Bundle\PromotionBundle\Validator\CatalogPromotionActionValidator`
-    - `Sylius\Bundle\PromotionBundle\Validator\CatalogPromotionScopeValidator`
-
 1. Class `Sylius\Component\Promotion\Checker\Rule\CartQuantityRuleChecker` has been deprecated.
    Use `Sylius\Component\Core\Promotion\Checker\Rule\CartQuantityRuleChecker` instead.
 
@@ -402,44 +491,12 @@ To ease the update process, we have grouped the changes into the following categ
    calculation
    is now available on the Order model `Sylius\Component\Core\Model\Order::getItemsSubtotal`.
 
-1. The way of getting variants prices based on options has been changed,
-   as such the following services were deprecated, please use their new counterpart.
-    * instead of `Sylius\Component\Core\Provider\ProductVariantsPricesProviderInterface`
-      use `Sylius\Component\Core\Provider\ProductVariantMap\ProductVariantsMapProviderInterface`
-    * instead of `Sylius\Component\Core\Provider\ProductVariantsPricesProvider`
-      use `Sylius\Component\Core\Provider\ProductVariantMap\ProductVariantsPricesMapProvider`
-    * instead of `Sylius\Bundle\CoreBundle\Templating\Helper\ProductVariantsPricesHelper`
-      use `Sylius\Component\Core\Provider\ProductVariantMap\ProductVariantsPricesMapProvider`
-    * instead of `Sylius\Bundle\CoreBundle\Twig\ProductVariantsPricesExtension`
-      use `Sylius\Bundle\CoreBundle\Twig\ProductVariantsMapExtension`
-
-   Subsequently, the `sylius_product_variant_prices` twig function is deprecated, use `sylius_product_variants_map`
-   instead.
-
-   To add more data per variant create a service implementing
-   the `Sylius\Component\Core\Provider\ProductVariantMap\ProductVariantMapProviderInterface` and tag it
-   with `sylius.product_variant_data_map_provider`.
-
 1. The `Regex` constraint has been removed from `Sylius\Component\Addressing\Model\Country` in favour of the `Country`
    constraint.
    Due to that, it's translation message `sylius.country.code.regex` was also removed.
 
 1. The `redirectToCartSummary` protected method of `Sylius\Bundle\OrderBundle\Controller\OrderController` has been
    deprecated as it was never used and will be removed in Sylius 2.0.
-
-1. Interface `Sylius\Component\Promotion\Generator\PromotionCouponGeneratorInstructionInterface` has been refactored and
-   is now deprecated. It now extends a new
-   interface `Sylius\Component\Promotion\Generator\PromotionCouponGeneratorInstructionReadInterface`, which contains
-   only getter methods.
-    - If your services or custom implementations previously relied
-      on `Sylius\Component\Promotion\Generator\PromotionCouponGeneratorInstructionInterface` for
-      read operations, you should now
-      use `Sylius\Component\Promotion\Generator\PromotionCouponGeneratorInstructionReadInterface` for better clarity and
-      separation of concerns.
-    - This change is backward compatible as long as your implementations or services were using only the getter methods
-      from `Sylius\Component\Promotion\Generator\PromotionCouponGeneratorInstructionInterface`. However, if you also
-      utilized setter methods, you should
-      continue using `Sylius\Component\Promotion\Generator\PromotionCouponGeneratorInstructionInterface`.
 
 1. Due to optimizations of the Order's grid
    the `Sylius\Component\Core\Repository\OrderRepositoryInterface::createSearchListQueryBuilder` method bas been
@@ -450,44 +507,6 @@ To ease the update process, we have grouped the changes into the following categ
    by `Sylius\Component\Core\Repository\OrderRepositoryInterface::createByCustomerIdCriteriaAwareQueryBuilder` for the
    same reason. Both changes affect
    `sylius_admin_order` and `sylius_admin_customer_order` grids configuration.
-
-1. Moved classes from `Command` to `Console\Command`. The `Command` namespace is deprecated for console command classes
-   and will be removed in Sylius 2.0.
-   List of affected classes:
-    - `Sylius\Bundle\OrderBundle\Command\RemoveExpiredCartsCommand`
-      to `Sylius\Bundle\OrderBundle\Console\Command\RemoveExpiredCartsCommand`
-    - `Sylius\Bundle\PromotionBundle\Command\GenerateCouponsCommand`
-      to `Sylius\Bundle\PromotionBundle\Console\Command\GenerateCouponsCommand`
-    - `Sylius\Bundle\UiBundle\Command\DebugTemplateEventCommand`
-      to `Sylius\Bundle\UiBundle\Console\Command\DebugTemplateEventCommand`
-    - `Sylius\Bundle\UserBundle\Command\AbstractRoleCommand`
-      to `Sylius\Bundle\UserBundle\Console\Command\AbstractRoleCommand`
-    - `Sylius\Bundle\UserBundle\Command\DemoteUserCommand`
-      to `Sylius\Bundle\UserBundle\Console\Command\DemoteUserCommand`
-    - `Sylius\Bundle\UserBundle\Command\PromoteUserCommand`
-      to `Sylius\Bundle\UserBundle\Console\Command\PromoteUserCommand`
-    - `Sylius\Bundle\CoreBundle\Command\Model\PluginInfo`
-      to `Sylius\Bundle\CoreBundle\Console\Command\Model\PluginInfo`
-    - `Sylius\Bundle\CoreBundle\Command\AbstractInstallCommand`
-      to `Sylius\Bundle\CoreBundle\Console\Command\AbstractInstallCommand`
-    - `Sylius\Bundle\CoreBundle\Command\CancelUnpaidOrdersCommand`
-      to `Sylius\Bundle\CoreBundle\Console\Command\CancelUnpaidOrdersCommand`
-    - `Sylius\Bundle\CoreBundle\Command\CheckRequirementsCommand`
-      to `Sylius\Bundle\CoreBundle\Console\Command\CheckRequirementsCommand`
-    - `Sylius\Bundle\CoreBundle\Command\InformAboutGUSCommand`
-      to `Sylius\Bundle\CoreBundle\Console\Command\InformAboutGUSCommand`
-    - `Sylius\Bundle\CoreBundle\Command\InstallAssetsCommand`
-      to `Sylius\Bundle\CoreBundle\Console\Command\InstallAssetsCommand`
-    - `Sylius\Bundle\CoreBundle\Command\InstallCommand` to `Sylius\Bundle\CoreBundle\Console\Command\InstallCommand`
-    - `Sylius\Bundle\CoreBundle\Command\InstallDatabaseCommand`
-      to `Sylius\Bundle\CoreBundle\Console\Command\InstallDatabaseCommand`
-    - `Sylius\Bundle\CoreBundle\Command\InstallSampleDataCommand`
-      to `Sylius\Bundle\CoreBundle\Console\Command\InstallSampleDataCommand`
-    - `Sylius\Bundle\CoreBundle\Command\JwtConfigurationCommand`
-      to `Sylius\Bundle\CoreBundle\Console\Command\JwtConfigurationCommand`
-    - `Sylius\Bundle\CoreBundle\Command\SetupCommand` to `Sylius\Bundle\CoreBundle\Console\Command\SetupCommand`
-    - `Sylius\Bundle\CoreBundle\Command\ShowAvailablePluginsCommand`
-      to `Sylius\Bundle\CoreBundle\Console\Command\ShowAvailablePluginsCommand`
 
 1. The `sylius_admin_ajax_taxon_move` route has been deprecated. If you're relaying on it, consider migrating to new
    `sylius_admin_ajax_taxon_move_up` and `sylius_admin_ajax_taxon_move_down` routes.
@@ -500,26 +519,10 @@ To ease the update process, we have grouped the changes into the following categ
 1. The `sylius.http_message_factory` service has been deprecated. Use `Psr\Http\Message\RequestFactoryInterface`
    instead.
 
-1. Product variants resolving has been refactored for better extendability.
-   The tag `sylius.product_variant_resolver.default` has been removed as it was never used.
-
-   All internal usages of service `sylius.product_variant_resolver.default` have been switched
-   to `Sylius\Component\Product\Resolver\ProductVariantResolverInterface`, if you have been using the
-   `sylius.product_variant_resolver.default` service apply this change accordingly.
-
 1. The `Sylius\Component\Addressing\Repository\ZoneRepositoryInterface` and
    `Sylius\Bundle\AddressingBundle\Repository\ZoneRepository` were added.
    If you created a custom `Zone` repository, you should update it to extend
    the `Sylius\Bundle\AddressingBundle\Repository\ZoneRepository`
-
-1. Sylius 2.0 will introduce a significant restructuring of our class system to enhance efficiency and clarity. The
-   changes are as follows:
-    - `Message` will be migrated to `Command`.
-    - `MessageDispatcher` will be migrated to `CommandDispatcher`.
-    - `MessageHandler` will be migrated to `CommandHandler`.
-    - Example: Within the `Sylius\Bundle\CoreBundle`, the `MessageHandler\ResendOrderConfirmationEmailHandler` class
-      will be migrated to `CommandHandler\ResendOrderConfirmationEmailHandler`. This pattern will be mirrored across
-      other bundles in the system.
 
 1. The `sylius.http_client` has become an alias to `psr18.http_client` service.
 
