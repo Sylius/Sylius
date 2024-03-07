@@ -9,7 +9,7 @@ Feature: Tax rate validation
         And the store has a tax category "Food and Beverage"
         And I am logged in as an administrator
 
-    @todo @ui @api
+    @ui @api
     Scenario: Trying to add a new tax rate without specifying its code
         When I want to create a new tax rate
         And I name it "Food and Beverage Tax Rates"
@@ -18,7 +18,7 @@ Feature: Tax rate validation
         Then I should be notified that code is required
         And tax rate with name "Food and Beverage Tax Rates" should not be added
 
-    @todo @ui @no-api
+    @ui @no-api
     Scenario: Trying to add a new tax rate without specifying its amount
         When I want to create a new tax rate
         And I name it "Food and Beverage Tax Rates"
@@ -27,7 +27,7 @@ Feature: Tax rate validation
         Then I should be notified that amount is required
         And tax rate with name "Food and Beverage Tax Rates" should not be added
 
-    @todo @ui @api
+    @ui @api
     Scenario: Trying to add a new tax rate without specifying its name
         When I want to create a new tax rate
         And I specify its code as "UNITED_STATES_SALES_TAX"
@@ -36,7 +36,7 @@ Feature: Tax rate validation
         Then I should be notified that name is required
         And tax rate with code "UNITED_STATES_SALES_TAX" should not be added
 
-    @todo @ui @api
+    @ui @api
     Scenario: Trying to add a new tax rate without specifying its zone
         Given the store does not have any zones defined
         When I want to create a new tax rate
@@ -46,7 +46,7 @@ Feature: Tax rate validation
         Then I should be notified that zone has to be selected
         And tax rate with name "Food and Beverage Tax Rates" should not be added
 
-    @todo @ui @api
+    @ui @api
     Scenario: Trying to add a new tax rate without specifying its category
         Given the store does not have any categories defined
         When I want to create a new tax rate
@@ -56,7 +56,7 @@ Feature: Tax rate validation
         Then I should be notified that category has to be selected
         And tax rate with name "Food and Beverage Tax Rates" should not be added
 
-    @todo @ui @no-api
+    @ui @no-api
     Scenario: Trying to remove amount from existing tax rate
         Given the store has "United States Sales Tax" tax rate of 20% for "Sports gear" within the "US" zone
         When I want to modify this tax rate
@@ -65,7 +65,7 @@ Feature: Tax rate validation
         Then I should be notified that amount is required
         And this tax rate amount should still be 20%
 
-    @todo @ui @api
+    @ui @api
     Scenario: Trying to remove name from existing tax rate
         Given the store has "United States Sales Tax" tax rate of 20% for "Sports gear" within the "US" zone
         When I want to modify this tax rate
@@ -74,7 +74,7 @@ Feature: Tax rate validation
         Then I should be notified that name is required
         And this tax rate should still be named "United States Sales Tax"
 
-    @todo @ui @no-api
+    @ui @no-api
     Scenario: Trying to remove zone from existing tax rate
         Given the store has "United States Sales Tax" tax rate of 20% for "Sports gear" within the "US" zone
         When I want to modify this tax rate
@@ -82,7 +82,7 @@ Feature: Tax rate validation
         And I try to save my changes
         Then I should be notified that zone has to be selected
 
-    @todo @ui @api
+    @ui @api
     Scenario: Trying to add a new tax rate with negative amount
         When I want to create a new tax rate
         And I name it "Food and Beverage Tax Rates"
@@ -91,7 +91,7 @@ Feature: Tax rate validation
         Then I should be notified that amount is invalid
         And tax rate with name "Food and Beverage Tax Rates" should not be added
 
-    @todo @ui @api
+    @ui @api
     Scenario: Trying to add a new tax rate with end date before start date
         When I want to create a new tax rate
         And I name it "Food and Beverage Tax Rates"
