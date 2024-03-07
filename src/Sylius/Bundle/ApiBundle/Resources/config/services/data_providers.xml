@@ -116,5 +116,10 @@
             <argument type="service" id="sylius.section_resolver.uri_based_section_resolver" />
             <tag name="api_platform.subresource_data_provider" priority="10" />
         </service>
+
+        <service id="Sylius\Bundle\ApiBundle\DataProvider\PaymentRequestDataProvider">
+            <argument type="service" id="sylius.repository.payment_request" />
+            <tag name="api_platform.item_data_provider" priority="10" />
+        </service>
     </services>
 </container>
