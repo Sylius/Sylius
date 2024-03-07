@@ -11,11 +11,11 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\CoreBundle\PaymentRequest\Processor\Offline;
+namespace Sylius\Bundle\ApiBundle\Checker;
 
 use Sylius\Component\Payment\Model\PaymentRequestInterface;
 
-interface AfterCaptureProcessorInterface
+interface UpdatePaymentRequestEligibilityCheckerInterface
 {
-    public function process(PaymentRequestInterface $paymentRequest): void;
+    public function isEligible(PaymentRequestInterface $paymentRequest): bool;
 }
