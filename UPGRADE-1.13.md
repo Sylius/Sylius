@@ -26,6 +26,83 @@ To ease the update process, we have grouped the changes into the following categ
 
 ### Constructors signature changes
 
+1. The following AdminBundle constructor signatures have been changed:
+
+   `Sylius\Bundle\AdminBundle\Action\ResendOrderConfirmationEmailAction`
+    ```diff
+    use Sylius\Bundle\AdminBundle\EmailManager\OrderEmailManagerInterface;
+    use Sylius\Bundle\CoreBundle\MessageDispatcher\ResendOrderConfirmationEmailDispatcherInterface;
+
+        public function __construct(
+            OrderRepositoryInterface $orderRepository,
+    -       OrderEmailManagerInterface $orderEmailManager,
+    +       ResendOrderConfirmationEmailDispatcherInterface $orderEmailManager,
+            CsrfTokenManagerInterface $csrfTokenManager,
+            RequestStack $requestStackOrSession,
+        )
+    ```
+   Starting from Sylius 2.0, the `$orderEmailManager` argument will be renamed
+   to `$resendOrderConfirmationEmailDispatcher`.
+
+   `Sylius\Bundle\AdminBundle\Action\ResendShipmentConfirmationEmailAction`
+    ```diff
+    use Sylius\Bundle\AdminBundle\EmailManager\ShipmentEmailManagerInterface;
+    use Sylius\Bundle\CoreBundle\MessageDispatcher\ResendShipmentConfirmationEmailDispatcherInterface;
+
+        public function __construct(
+            ShipmentRepositoryInterface $shipmentRepository,
+    -       ShipmentEmailManagerInterface $shipmentEmailManager,
+    +       ResendShipmentConfirmationEmailDispatcherInterface $shipmentEmailManager,
+            CsrfTokenManagerInterface $csrfTokenManager,
+            RequestStack $requestStackOrSession,
+        )
+    ```
+   Starting from Sylius 2.0, the `$shipmentEmailManager` argument will be renamed
+   to `$resendShipmentConfirmationEmailDispatcher`.
+
+   `Sylius\Bundle\AdminBundle\Controller\NotificationController`
+    ```diff
+    use GuzzleHttp\ClientInterface as DeprecatedClientInterface;
+    use Http\Message\MessageFactory;
+    use Psr\Http\Client\ClientInterface;
+    use Psr\Http\Message\RequestFactoryInterface;
+    use Psr\Http\Message\StreamFactoryInterface;   
+
+        public function __construct(
+    -       DeprecatedClientInterface $client,
+    +       ClientInterface $client,
+    -       MessageFactory $messageFactory,
+    +       RequestFactoryInterface $requestFactory,
+            string $hubUri,
+            string $environment,
+    +       StreamFactoryInterface $streamFactory,
+        )
+    ```
+
+   `Sylius\Bundle\AdminBundle\Controller\ImpersonateUserController`
+    ```diff
+    use Symfony\Component\Routing\RouterInterface;
+
+        public function __construct(
+            UserImpersonatorInterface $impersonator,
+            AuthorizationCheckerInterface $authorizationChecker,
+            UserProviderInterface $userProvider,
+    +       RouterInterface $router,
+            string $authorizationRole,
+        )
+    ```
+
+   `Sylius\Bundle\AdminBundle\EventListener\ShipmentShipListener`
+    ```diff
+    use Sylius\Bundle\AdminBundle\EmailManager\ShipmentEmailManagerInterface as DeprecatedShipmentEmailManagerInterface;
+    use Sylius\Bundle\CoreBundle\Mailer\ShipmentEmailManagerInterface;
+
+        public function __construct(
+    -       DeprecatedShipmentEmailManagerInterface $shipmentEmailManager,
+    +       ShipmentEmailManagerInterface $shipmentEmailManager,
+        )
+    ```
+
 1. The following CoreBundle constructor signatures have been changed:
 
    `Sylius\Bundle\CoreBundle\CatalogPromotion\Processor\CatalogPromotionRemovalProcessor`
@@ -125,26 +202,6 @@ To ease the update process, we have grouped the changes into the following categ
         )
     ```
 
-1. The constructor of `Sylius\Bundle\AdminBundle\Controller\NotificationController` has been changed:
-
-    ```diff
-    use GuzzleHttp\ClientInterface as DeprecatedClientInterface;
-    use Http\Message\MessageFactory;
-    use Psr\Http\Client\ClientInterface;
-    use Psr\Http\Message\RequestFactoryInterface;
-    use Psr\Http\Message\StreamFactoryInterface;   
-
-        public function __construct(
-    -       private ClientInterface $client,
-    -       private MessageFactory $messageFactory,
-    +       private ClientInterface|DeprecatedClientInterface $client,
-    +       private RequestFactoryInterface|MessageFactory $requestFactory,
-            private string $hubUri,
-            private string $environment,
-    +       private ?StreamFactoryInterface $streamFactory = null,
-        )
-    ```
-
 1. The constructor of `Sylius\Component\Addressing\Matcher\ZoneMatcher` has been changed:
 
     ```diff
@@ -161,24 +218,6 @@ To ease the update process, we have grouped the changes into the following categ
 1. The first parameter `Sylius\Component\Promotion\Checker\Rule\RuleCheckerInterface $itemTotalRuleChecker` of the
    constructor in the `Sylius\Component\Core\Promotion\Checker\Rule\ItemTotalRuleChecker`
    class has been deprecated and will be removed in Sylius 2.0.
-
-1. Passing `Sylius\Bundle\AdminBundle\EmailManager\OrderEmailManagerInterface $orderEmailManager`
-   to `Sylius\Bundle\AdminBundle\Action\ResendOrderConfirmationEmailAction`
-   as the second constructor argument is deprecated,
-   use `Sylius\Bundle\CoreBundle\MessageDispatcher\ResendOrderConfirmationEmailDispatcherInterface $orderEmailManager`
-   instead.
-   Starting from Sylius 2.0, the second argument will be renamed to `$resendOrderConfirmationEmailDispatcher`.
-
-1. Passing `Sylius\Bundle\AdminBundle\EmailManager\ShipmentEmailManagerInterface $shipmentEmailManager`
-   to `Sylius\Bundle\AdminBundle\Action\ResendShipmentConfirmationEmailAction`
-   as the second constructor argument is deprecated,
-   use `Sylius\Bundle\CoreBundle\MessageDispatcher\ResendShipmentConfirmationEmailDispatcherInterface $shipmentEmailManager`
-   instead.
-   Starting from Sylius 2.0, the second argument will be renamed to `$resendShipmentConfirmationEmailDispatcher`.
-
-1. Passing `Sylius\Bundle\AdminBundle\EmailManager\ShipmentEmailManagerInterface $shipmentEmailManager`
-   to `Sylius\Bundle\AdminBundle\EventListener\ShipmentShipListener` as the first constructor argument is deprecated,
-   use `Sylius\Bundle\CoreBundle\Mailer\ShipmentEmailManagerInterface $shipmentEmailManager` instead.
 
 1. Passing `Sylius\Bundle\ShopBundle\EmailManager\OrderEmailManagerInterface $orderEmailManager`
    to `Sylius\Bundle\ShopBundle\EventListener\OrderCompleteListener` as the first constructor argument is deprecated,
@@ -214,10 +253,6 @@ To ease the update process, we have grouped the changes into the following categ
    first constructor argument
    to `Sylius\Bundle\AttributeBundle\Form\Type\AttributeType\Configuration\SelectAttributeChoicesCollectionType` has
    been deprecated.
-
-1. Not passing a `Symfony\Component\Routing\RouterInterface $router`
-   to `Sylius\Bundle\AdminBundle\Controller\ImpersonateUserController` as the fourth argument is
-   deprecated and will be prohibited in Sylius 2.0.
 
 ### Interfaces and Classes
 
