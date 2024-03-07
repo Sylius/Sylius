@@ -26,12 +26,12 @@ jobs:
         steps:
             -   name: "Checkout (With Branch)"
                 if: "${{ inputs.branch != '' }}"
-                uses: actions/checkout@v3
+                uses: actions/checkout@v4
                 with:
                     ref: ${{ inputs.branch }}
 
             -   name: "Checkout"
-                uses: actions/checkout@v3
+                uses: actions/checkout@v4
                 if: "${{ inputs.branch == '' }}"
             -
                 name: "Get matrix"
@@ -68,13 +68,13 @@ jobs:
 
             -   name: "Checkout (With Branch)"
                 if: "${{ inputs.branch != '' }}"
-                uses: actions/checkout@v3
+                uses: actions/checkout@v4
                 with:
                     ref: ${{ inputs.branch }}
 
             -   name: "Checkout"
                 if: "${{ inputs.branch == '' }}"
-                uses: actions/checkout@v3
+                uses: actions/checkout@v4
 
             -   name: Restrict Twig
                 if: matrix.twig == '^2.12'
@@ -144,13 +144,13 @@ jobs:
 
             -   name: "Checkout (With Branch)"
                 if: "${{ inputs.branch != '' }}"
-                uses: actions/checkout@v3
+                uses: actions/checkout@v4
                 with:
                     ref: ${{ inputs.branch }}
 
             -   name: "Checkout"
                 if: "${{ inputs.branch == '' }}"
-                uses: actions/checkout@v3
+                uses: actions/checkout@v4
 
             -   name: Get Composer cache directory
                 id: composer-cache
@@ -183,7 +183,7 @@ jobs:
 
             -   name: Install Behat driver
                 run: vendor/bin/bdi detect drivers
-                
+
             -   name: Run Behat (Chromedriver)
                 run: vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="@mink:chromedriver&&~@todo&&~@cli" --suite-tags="@ui" || vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="@mink:chromedriver&&~@todo&&~@cli" --suite-tags="@ui" --rerun
 

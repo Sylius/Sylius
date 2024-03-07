@@ -5,7 +5,7 @@ on:
         -
             cron: "0 2 * * *"
     workflow_dispatch: ~
-    
+
 permissions:
     contents: write
     pull-requests: write
@@ -32,11 +32,11 @@ jobs:
 
         steps:
             -
-                uses: actions/checkout@v3
+                uses: actions/checkout@v4
                 with:
                     ref: ${{ matrix.target_branch }}
 
-            -   
+            -
                 name: Reset upmerge branch
                 run: |
                     git fetch origin ${{ matrix.base_branch }}:${{ matrix.base_branch }}
