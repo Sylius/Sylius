@@ -24,6 +24,19 @@ located [here](UPGRADE-FROM-1.12-WITH-PRICE-HISTORY-PLUGIN-TO-1.13.md).
 
 To ease the update process, we have grouped the changes into the following categories:
 
+### Dependencies
+
+1. Starting with Sylius `1.13` we provided a possibility to use the Symfony Workflow as your State Machine. To allow a
+   smooth transition we created a new package called `sylius/state-machine-abstraction`, which provides a configurable
+   abstraction, allowing you to define which adapter should be used (Winzou State Machine or Symfony Workflow) per
+   graph.
+
+1. The use of `sylius/calendar` package is deprecated in favor of `symfony/clock` package globally.
+
+1. The `payum/payum` package has been replaced by concrete packages like `payum/core`, `payum/offline`
+   or `payum/paypal-express-checkout-nvp`. If you need any other component so far provided by `payum/payum` package, you
+   need to install it explicitly.
+
 ### Constructors signature changes
 
 1. The following AdminBundle constructor signatures have been changed:
@@ -525,6 +538,40 @@ To ease the update process, we have grouped the changes into the following categ
 
 ### Configuration
 
+1. To ease customization we've introduced attributes for some services in `1.13`:
+    - `Sylius\Bundle\OrderBundle\Attribute\AsCartContext` for cart contexts
+    - `Sylius\Bundle\OrderBundle\Attribute\AsOrderProcessor` for order processors
+    - `Sylius\Bundle\ProductBundle\Attribute\AsProductVariantResolver` for product variant resolvers
+
+   By default, Sylius still configures them using interfaces, but this way you cannot define a priority.
+   If you want to define a priority, you need to set the following configuration in your `_sylius.yaml` file:
+   ```yaml
+   sylius_core:
+       autoconfigure_with_attributes: true
+   ```
+
+and use one of the new attributes accordingly to the type of your class, e.g.:
+
+   ```php
+    <?php
+
+    declare(strict_types=1);
+
+    namespace App\OrderProcessor;
+
+    use Sylius\Bundle\OrderBundle\Attribute\AsOrderProcessor;
+    use Sylius\Component\Order\Model\OrderInterface;
+    use Sylius\Component\Order\Processor\OrderProcessorInterface;
+
+    #[AsOrderProcessor(/*priority: 10*/)] //priority is optional
+    final class OrderProcessorWithAttributeStub implements OrderProcessorInterface
+    {
+        public function process(OrderInterface $order): void
+        {
+        }
+    }
+   ```
+
 1. A new parameter has been added to specify the validation groups for a given promotion action.
    If you have any custom validation groups for your promotion action, you need to add them to
    your `config/packages/_sylius.yaml` file.
@@ -692,9 +739,8 @@ To ease the update process, we have grouped the changes into the following categ
                     - 'your_custom_validation_group'
     ```
 
-1. There have been a naw parameters added to specify the validation groups for given shipping method rule and
-   calculator.
-   If you have any custom validation groups for your calculator or rules, you need to add them to
+1. New parameters have been added to specify the validation groups for a given shipping method rule and calculator.
+   If you have any custom validation groups for your calculators or rules, you need to add them to
    your `config/packages/_sylius.yaml` file.
    Also, if you have your own shipping method rule or calculator and want to add your validation groups you can add
    another key to the `validation_groups` parameter:
@@ -727,14 +773,10 @@ To ease the update process, we have grouped the changes into the following categ
 
 # State Machine
 
-1. Starting with Sylius `1.13` we provided a possibility to use the Symfony Workflow as your State Machine. To allow a
-   smooth transition we created a new package called `sylius/state-machine-abstraction`, which provides a configurable
-   abstraction, allowing you to define which adapter should be used (Winzou State Machine or Symfony Workflow) per
-   graph. Starting with Sylius `1.13` we configure all existing Sylius' graphs to use the Symfony Workflow. At the same
-   time, all other graphs are using Winzou State Machine as a default state machine, and must be configured manually to
-   use the Symfony Workflow.
+1. We have configured all existing Sylius graphs to be usable with the Symfony Workflow out of the box.
+   Winzou State Machine is still the default state machine for all graphs, but you can switch to Symfony Workflow via
+   configuration:
 
-   Configuration:
     ```yaml
     sylius_state_machine_abstraction:
         graphs_to_adapters_mapping:
@@ -745,8 +787,7 @@ To ease the update process, we have grouped the changes into the following categ
         # we can also can the default adapter
         default_adapter: symfony_workflow # winzou_state_machine is a default value here
     ```
-
-   > **Note!** Starting with Sylius `2.0` the Symfony Workflow will be the default state machine for all graphs.
+   Starting with `Sylius 2.0` Symfony Workflow will be the default state machine for all graphs.
 
 1. In the `sylius_payment` state machine of `PaymentBundle`, there has been a change in the state name:
     - State name change:
@@ -774,48 +815,11 @@ To ease the update process, we have grouped the changes into the following categ
         - To state: `unknown`
 
 1. The `sylius_payment` state machine of `CoreBundle` has been updated to allow failing an authorized payment:
-    ```diff
-        fail:
-    -       from: [new, processing]
-    +       from: [new, processing, authorized]
-            to: failed
-    ```
+    - Transition `fail`:
+        - From states: [`new`, `processing`, `authorized`]
+        - To state: `failed`
 
-1. To ease customization we've introduced attributes for some services in `1.13`:
-    - `Sylius\Bundle\OrderBundle\Attribute\AsCartContext` for cart contexts
-    - `Sylius\Bundle\OrderBundle\Attribute\AsOrderProcessor` for order processors
-    - `Sylius\Bundle\ProductBundle\Attribute\AsProductVariantResolver` for product variant resolvers
-
-   By default, Sylius still configures them using interfaces, but this way you cannot define a priority.
-   If you want to define a priority, you need to set the following configuration in your `_sylius.yaml` file:
-   ```yaml
-   sylius_core:
-       autoconfigure_with_attributes: true
-   ```
-
-and use one of the new attributes accordingly to the type of your class, e.g.:
-
-   ```diff
-    <?php
-
-    declare(strict_types=1);
-
-    namespace App\OrderProcessor;
-
-    use Sylius\Bundle\OrderBundle\Attribute\AsOrderProcessor;
-    use Sylius\Component\Order\Model\OrderInterface;
-    use Sylius\Component\Order\Processor\OrderProcessorInterface;
-
-    #[AsOrderProcessor(/*priority: 10*/)] //priority is optional
-    final class OrderProcessorWithAttributeStub implements OrderProcessorInterface
-    {
-        public function process(OrderInterface $order): void
-        {
-        }
-    }
-   ```
-
-### Translation
+### Translations
 
 1. Validation translation key `sylius.review.rating.range` has been replaced by `sylius.review.rating.not_in_range` in
    all places used by Sylius. The `sylius.review.rating.range` has been left for backward compatibility and will be
@@ -851,8 +855,6 @@ and use one of the new attributes accordingly to the type of your class, e.g.:
 
 ### Miscellaneous
 
-1. The use of `sylius/calendar` package is deprecated in favor of `symfony/clock` package globally.
-
 1. Using Guzzle 6 has been deprecated in favor of Symfony HTTP Client. If you want to still use Guzzle 6 or Guzzle 7,
    you need to install `composer require php-http/guzzle6-adapter` or `composer require php-http/guzzle7-adapter`
    depending on your Guzzle version.
@@ -863,10 +865,6 @@ and use one of the new attributes accordingly to the type of your class, e.g.:
                 class: Http\Adapter\Guzzle7\Client # for Guzzle 6 use Http\Adapter\Guzzle6\Client instead
     ```
 
-1. The `payum/payum` package has been replaced by concrete packages like `payum/core`, `payum/offline`
-   or `payum/paypal-express-checkout-nvp`. If you need any other component so far provided by `payum/payum` package, you
-   need to install it explicitly.
-
 1. PostgreSQL migration support has been introduced. If you are using PostgreSQL, we assume that you have already
    created a database schema in some way.
    All you need to do is run migrations, which will mark all migrations created before Sylius 1.13 as executed.
@@ -874,7 +872,7 @@ and use one of the new attributes accordingly to the type of your class, e.g.:
 1. We have explicitly added relationships between product and reviews and between product and attributes in XML
    mappings.
    Because of that, the subscribers `Sylius\Bundle\AttributeBundle\Doctrine\ORM\Subscriber\LoadMetadataSubscriber`
-   and `Sylius\Bundle\ReviewBundle\Doctrine\ORM\Subscriber\LoadMetadataSubscriber` have changed so that it does not add
+   and `Sylius\Bundle\ReviewBundle\Doctrine\ORM\Subscriber\LoadMetadataSubscriber` have been modified so they do not add
    a relationship if one already exists. If you have overwritten or decorated it, there may be a need to update it.
 
 1. The behavior of the `sylius:install:setup` command has changed,
