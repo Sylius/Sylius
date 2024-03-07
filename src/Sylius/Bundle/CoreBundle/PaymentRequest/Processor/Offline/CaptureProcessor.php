@@ -13,23 +13,24 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\PaymentRequest\Processor\Offline;
 
-use Sylius\Component\Payment\Model\PaymentInterface;
+use Sylius\Abstraction\StateMachine\StateMachineInterface;
 use Sylius\Component\Payment\Model\PaymentRequestInterface;
+use Sylius\Component\Payment\PaymentTransitions;
 
 final class CaptureProcessor implements CaptureProcessorInterface
 {
+    public function __construct(private readonly StateMachineInterface $stateMachine)
+    {
+    }
+
     public function process(PaymentRequestInterface $paymentRequest): void
     {
         $payment = $paymentRequest->getPayment();
 
-        $responseData = $payment->getDetails();
-        if (PaymentInterface::STATE_NEW === $payment->getState()) {
-            $responseData = [
-                'paid' => false,
-            ];
+        if ($this->stateMachine->can($payment, PaymentTransitions::GRAPH, PaymentTransitions::TRANSITION_PROCESS)) {
+            $this->stateMachine->apply($payment, PaymentTransitions::GRAPH, PaymentTransitions::TRANSITION_PROCESS);
         }
 
-        $paymentRequest->setResponseData($responseData);
         $paymentRequest->setState(PaymentRequestInterface::STATE_COMPLETED);
     }
 }

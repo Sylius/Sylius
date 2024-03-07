@@ -16,11 +16,7 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
 >
     <services>
-        <defaults public="true" />
-
-        <service id="Sylius\Bundle\CoreBundle\PaymentRequest\Processor\Offline\CaptureProcessorInterface" class="Sylius\Bundle\CoreBundle\PaymentRequest\Processor\Offline\CaptureProcessor" />
-
-        <service id="Sylius\Bundle\CoreBundle\PaymentRequest\Processor\Offline\AfterCaptureProcessorInterface" class="Sylius\Bundle\CoreBundle\PaymentRequest\Processor\Offline\AfterCaptureProcessor">
+        <service id="Sylius\Bundle\CoreBundle\PaymentRequest\Processor\Offline\CaptureProcessorInterface" class="Sylius\Bundle\CoreBundle\PaymentRequest\Processor\Offline\CaptureProcessor">
             <argument type="service" id="sylius_abstraction.state_machine" />
         </service>
 
