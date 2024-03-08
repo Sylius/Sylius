@@ -16,7 +16,6 @@ namespace Sylius\Bundle\ApiBundle\DataTransformer;
 use Sylius\Bundle\ApiBundle\Command\LocaleCodeAwareInterface;
 use Sylius\Component\Locale\Context\LocaleContextInterface;
 
-/** @experimental */
 final class LocaleCodeAwareInputCommandDataTransformer implements CommandDataTransformerInterface
 {
     public function __construct(private LocaleContextInterface $localeContext)

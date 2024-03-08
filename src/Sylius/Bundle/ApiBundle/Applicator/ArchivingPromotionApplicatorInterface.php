@@ -15,7 +15,6 @@ namespace Sylius\Bundle\ApiBundle\Applicator;
 
 use Sylius\Component\Core\Model\PromotionInterface;
 
-/** @experimental */
 interface ArchivingPromotionApplicatorInterface
 {
     public function archive(PromotionInterface $data): PromotionInterface;

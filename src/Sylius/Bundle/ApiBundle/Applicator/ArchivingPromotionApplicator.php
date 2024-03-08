@@ -16,7 +16,6 @@ namespace Sylius\Bundle\ApiBundle\Applicator;
 use Sylius\Calendar\Provider\DateTimeProviderInterface;
 use Sylius\Component\Core\Model\PromotionInterface;
 
-/** @experimental */
 final class ArchivingPromotionApplicator implements ArchivingPromotionApplicatorInterface
 {
     public function __construct(private DateTimeProviderInterface $calendar)

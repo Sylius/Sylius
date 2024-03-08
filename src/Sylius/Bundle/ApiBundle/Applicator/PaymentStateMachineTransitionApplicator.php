@@ -20,7 +20,6 @@ use Sylius\Bundle\ApiBundle\Exception\StateMachineTransitionFailedException;
 use Sylius\Component\Payment\Model\PaymentInterface;
 use Sylius\Component\Payment\PaymentTransitions;
 
-/** @experimental */
 final class PaymentStateMachineTransitionApplicator implements PaymentStateMachineTransitionApplicatorInterface
 {
     public function __construct(private StateMachineFactoryInterface|StateMachineInterface $stateMachineFactory)

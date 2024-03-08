@@ -20,7 +20,6 @@ use ApiPlatform\OpenApi\OpenApi;
 use Sylius\Calendar\Provider\DateTimeProviderInterface;
 use Symfony\Component\HttpFoundation\Response;
 
-/** @experimental */
 final class StatisticsDocumentationModifier implements DocumentationModifierInterface
 {
     private const PATH = '/admin/statistics';

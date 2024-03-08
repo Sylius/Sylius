@@ -23,7 +23,6 @@ use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Messenger\Stamp\DispatchAfterCurrentBusStamp;
 
-/** @experimental  */
 final class VerifyCustomerAccountHandler implements MessageHandlerInterface
 {
     public function __construct(

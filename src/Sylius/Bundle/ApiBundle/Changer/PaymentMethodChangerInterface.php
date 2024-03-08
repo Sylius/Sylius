@@ -15,7 +15,6 @@ namespace Sylius\Bundle\ApiBundle\Changer;
 
 use Sylius\Component\Core\Model\OrderInterface;
 
-/** @experimental */
 interface PaymentMethodChangerInterface
 {
     public function changePaymentMethod(

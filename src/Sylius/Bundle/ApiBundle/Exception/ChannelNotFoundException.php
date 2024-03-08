@@ -15,7 +15,6 @@ namespace Sylius\Bundle\ApiBundle\Exception;
 
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-/** @experimental */
 final class ChannelNotFoundException extends NotFoundHttpException
 {
     public function __construct(

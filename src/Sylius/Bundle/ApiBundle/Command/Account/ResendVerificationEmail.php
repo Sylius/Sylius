@@ -18,7 +18,6 @@ use Sylius\Bundle\ApiBundle\Command\IriToIdentifierConversionAwareInterface;
 use Sylius\Bundle\ApiBundle\Command\LocaleCodeAwareInterface;
 use Sylius\Bundle\ApiBundle\Command\ShopUserIdAwareInterface;
 
-/** @experimental */
 class ResendVerificationEmail implements
     ShopUserIdAwareInterface,
     ChannelCodeAwareInterface,

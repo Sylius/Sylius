@@ -19,7 +19,6 @@ use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\Repository\OrderItemRepositoryInterface;
 use Sylius\Component\Order\Model\AdjustmentInterface;
 
-/** @experimental */
 final class OrderItemAdjustmentsSubresourceDataProvider implements RestrictedDataProviderInterface, SubresourceDataProviderInterface
 {
     /** @param OrderItemRepositoryInterface<OrderItemInterface> $orderItemRepository */

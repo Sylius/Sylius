@@ -15,7 +15,6 @@ namespace Sylius\Bundle\ApiBundle\Exception;
 
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-/** @experimental */
 final class PromotionNotFoundException extends NotFoundHttpException
 {
     /** @param array<array-key, mixed> $headers */
