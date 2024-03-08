@@ -108,7 +108,7 @@ final class RegistrationContext implements Context
         $token = $customer->getUser()->getEmailVerificationToken();
 
         $request = $this->requestFactory->custom(
-            \sprintf('%s/shop/account-verification-requests/%s', $this->apiUrlPrefix, $token),
+            \sprintf('%s/shop/customers/verify/%s', $this->apiUrlPrefix, $token),
             HttpRequest::METHOD_PATCH,
         );
         $this->shopClient->executeCustomRequest($request);

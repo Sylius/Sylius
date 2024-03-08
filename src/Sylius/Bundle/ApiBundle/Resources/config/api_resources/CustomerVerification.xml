@@ -24,7 +24,7 @@
         <collectionOperations>
             <collectionOperation name="shop_resend_verification_email">
                 <attribute name="method">POST</attribute>
-                <attribute name="path">/account-verification-requests</attribute>
+                <attribute name="path">/customers/verify</attribute>
                 <attribute name="input">Sylius\Bundle\ApiBundle\Command\Account\ResendVerificationEmail</attribute>
                 <attribute name="status">202</attribute>
                 <attribute name="denormalization_context">
@@ -43,7 +43,7 @@
         <itemOperations>
             <itemOperation name="shop_verify_customer_account">
                 <attribute name="method">PATCH</attribute>
-                <attribute name="path">/account-verification-requests/{token}</attribute>
+                <attribute name="path">/customers/verify/{token}</attribute>
                 <attribute name="input">Sylius\Bundle\ApiBundle\Command\Account\VerifyCustomerAccount</attribute>
                 <attribute name="status">202</attribute>
                 <attribute name="denormalization_context">

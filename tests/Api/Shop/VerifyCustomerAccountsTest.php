@@ -30,7 +30,7 @@ final class VerifyCustomerAccountsTest extends JsonApiTestCase
 
         $this->client->request(
             method: 'POST',
-            uri: '/api/v2/shop/account-verification-requests',
+            uri: '/api/v2/shop/customers/verify',
             server: $header,
             content: '{}',
         );
@@ -49,7 +49,7 @@ final class VerifyCustomerAccountsTest extends JsonApiTestCase
 
         $this->client->request(
             method: 'POST',
-            uri: '/api/v2/shop/account-verification-requests',
+            uri: '/api/v2/shop/customers/verify',
             server: self::CONTENT_TYPE_HEADER,
         );
 
@@ -71,7 +71,7 @@ final class VerifyCustomerAccountsTest extends JsonApiTestCase
 
         $this->client->request(
             method: 'PATCH',
-            uri: '/api/v2/shop/account-verification-requests/token',
+            uri: '/api/v2/shop/customers/verify/token',
             server: self::PATCH_CONTENT_TYPE_HEADER,
             content: '{}',
         );
