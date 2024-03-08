@@ -11,9 +11,9 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\ApiBundle\CommandHandler\Payment;
+namespace Sylius\Bundle\PaymentBundle\CommandHandler;
 
-use Sylius\Bundle\ApiBundle\Command\Payment\UpdatePaymentRequest;
+use Sylius\Bundle\PaymentBundle\Command\UpdatePaymentRequest;
 use Sylius\Component\Payment\Model\PaymentRequestInterface;
 use Sylius\Component\Payment\Repository\PaymentRequestRepositoryInterface;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;

@@ -15,29 +15,11 @@ namespace Sylius\Bundle\ApiBundle\Command\Payment;
 
 use Sylius\Bundle\ApiBundle\Command\IriToIdentifierConversionAwareInterface;
 use Sylius\Bundle\ApiBundle\Command\PaymentRequestHashAwareInterface;
+use Sylius\Bundle\PaymentBundle\Command\UpdatePaymentRequest as BaseUpdatePaymentRequest;
 
 /** @experimental */
-class UpdatePaymentRequest implements PaymentRequestHashAwareInterface, IriToIdentifierConversionAwareInterface
+class UpdatePaymentRequest extends BaseUpdatePaymentRequest implements
+    PaymentRequestHashAwareInterface,
+    IriToIdentifierConversionAwareInterface
 {
-    protected ?string $hash = null;
-
-    public function __construct(
-        private mixed $payload = null,
-    ) {
-    }
-
-    public function getPayload(): mixed
-    {
-        return $this->payload;
-    }
-
-    public function getHash(): ?string
-    {
-        return $this->hash;
-    }
-
-    public function setHash(?string $hash): void
-    {
-        $this->hash = $hash;
-    }
 }
