@@ -19,7 +19,7 @@ class UpdatePaymentRequest
     protected ?string $hash = null;
 
     public function __construct(
-        private mixed $payload = null,
+        protected mixed $payload = null,
     ) {
     }
 

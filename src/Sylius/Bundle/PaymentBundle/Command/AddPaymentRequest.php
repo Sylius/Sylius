@@ -17,10 +17,10 @@ namespace Sylius\Bundle\PaymentBundle\Command;
 class AddPaymentRequest
 {
     public function __construct(
-        private string $paymentId,
-        private string $paymentMethodCode,
-        private string $action,
-        private mixed $payload = null,
+        protected string $paymentId,
+        protected string $paymentMethodCode,
+        protected string $action,
+        protected mixed $payload = null,
     ) {
     }
 
