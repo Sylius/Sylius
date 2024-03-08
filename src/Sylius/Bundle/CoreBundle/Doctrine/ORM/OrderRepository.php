@@ -183,7 +183,6 @@ class OrderRepository extends BaseOrderRepository implements OrderRepositoryInte
     public function countByCustomerAndCoupon(
         CustomerInterface $customer,
         PromotionCouponInterface $coupon,
-        bool $includeCancelled = false,
     ): int {
         $states = [OrderInterface::STATE_CART];
         if ($coupon->isReusableFromCancelledOrders()) {
