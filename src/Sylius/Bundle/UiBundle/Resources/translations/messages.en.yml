@@ -420,7 +420,6 @@ sylius:
         items: 'Items'
         items_total: 'Items total'
         join_slack: 'Join Slack'
-        join_forum: 'Join Forum'
         jump_to_page: 'Jump to page'
         label: 'Label'
         last_login: 'Last login'
