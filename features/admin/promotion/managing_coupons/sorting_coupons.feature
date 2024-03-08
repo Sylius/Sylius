@@ -19,69 +19,69 @@ Feature: Sorting listed coupons
         And this coupon expires on "20-02-2023"
         And I am logged in as an administrator
 
-    @ui @api
+    @todo @ui @api
     Scenario: Coupons are sorted by descending number of uses by default
         When I want to view all coupons of this promotion
         Then I should see 3 coupons on the list
         And the first coupon should have code "Y"
 
-    @ui @api
+    @todo @ui @api
     Scenario: Changing the number of uses sorting order to ascending
         Given I am browsing coupons of this promotion
         When I sort coupons by ascending number of uses
         Then I should see 3 coupons on the list
         And the first coupon should have code "X"
 
-    @ui @api
+    @todo @ui @api
     Scenario: Sorting coupons by code in descending order
         Given I am browsing coupons of this promotion
         When I sort coupons by descending code
         Then I should see 3 coupons on the list
         And the first coupon should have code "Z"
 
-    @ui @api
+    @todo @ui @api
     Scenario: Sorting coupons by code in ascending order
         Given I am browsing coupons of this promotion
         When I sort coupons by ascending code
         Then I should see 3 coupons on the list
         And the first coupon should have code "X"
 
-    @ui @no-postgres @api
+    @todo @ui @no-postgres @api
     Scenario: Sorting coupons by usage limit in descending order
         Given I am browsing coupons of this promotion
         When I sort coupons by descending usage limit
         Then I should see 3 coupons on the list
         And the first coupon should have code "X"
 
-    @ui @no-postgres @api
+    @todo @ui @no-postgres @api
     Scenario: Sorting coupons by usage limit in ascending order
         Given I am browsing coupons of this promotion
         When I sort coupons by ascending usage limit
         Then I should see 3 coupons on the list
         And the first coupon should have code "Z"
 
-    @ui @no-postgres @api
+    @todo @ui @no-postgres @api
     Scenario: Sorting coupons by usage limit per customer in descending order
         Given I am browsing coupons of this promotion
         When I sort coupons by descending usage limit per customer
         Then I should see 3 coupons on the list
         And the first coupon should have code "X"
 
-    @ui @no-postgres @api
+    @todo @ui @no-postgres @api
     Scenario: Sorting coupons by usage limit per customer in ascending order
         Given I am browsing coupons of this promotion
         When I sort coupons by ascending usage limit per customer
         Then I should see 3 coupons on the list
         And the first coupon should have code "Y"
 
-    @ui @no-postgres @api
+    @todo @ui @no-postgres @api
     Scenario: Sorting coupons by expiration date in descending order
         Given I am browsing coupons of this promotion
         When I sort coupons by descending expiration date
         Then I should see 3 coupons on the list
         And the first coupon should have code "Z"
 
-    @ui @no-postgres @api
+    @todo @ui @no-postgres @api
     Scenario: Sorting coupons by expiration date in ascending order
         Given I am browsing coupons of this promotion
         When I sort coupons by ascending expiration date

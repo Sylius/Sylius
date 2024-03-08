@@ -1,3 +1,2 @@
-{% import "@SyliusUi/Macro/flags.html.twig" as flags %}
-
-{{ flags.fromLocaleCode(data.code) }} {{ data.code }} {{ data.name }}
+<span class="flag flag-sm flag-country-{{ data.code|split('_')|last|lower }}"></span>
+{{ data }}

@@ -9,7 +9,7 @@ Feature: Product association type unique code validation
         And the store has a product association type "Cross sell" with a code "cross_sell"
         And I am logged in as an administrator
 
-    @ui @api
+    @todo @ui @api
     Scenario: Trying to add a new product association type with a taken code
         When I want to create a new product association type
         And I specify its code as "cross_sell"

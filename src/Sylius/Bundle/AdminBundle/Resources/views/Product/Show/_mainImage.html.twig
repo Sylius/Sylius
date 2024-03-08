@@ -1,9 +1,0 @@
-{% if product.imagesByType('thumbnail') is not empty %}
-    {% set path = product.imagesByType('thumbnail').first.path|imagine_filter(filter|default('sylius_admin_product_thumbnail')) %}
-{% elseif product.images.first %}
-    {% set path = product.images.first.path|imagine_filter(filter|default('sylius_admin_product_thumbnail')) %}
-{% else %}
-    {% set path = asset('build/admin/images/200x200.png', 'admin') %}
-{% endif %}
-
-<img src="{{ path }}" alt="{{ product.name }}" class="ui bordered image" />

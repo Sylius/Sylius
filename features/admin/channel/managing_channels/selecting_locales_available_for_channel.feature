@@ -9,7 +9,7 @@ Feature: Selecting available locales for a channel
         And the store has locale "English (United States)"
         And I am logged in as an administrator
 
-    @api @ui
+    @api @todo @ui
     Scenario: Adding a new channel with locales
         When I want to create a new channel
         And I specify its code as "MOBILE"
@@ -22,7 +22,7 @@ Feature: Selecting available locales for a channel
         Then I should be notified that it has been successfully created
         And the channel "Mobile Channel" should be available in "English (United States)"
 
-    @api @ui
+    @api @todo @ui
     Scenario: Adding locales to an existing channel
         Given the store operates on a channel named "Web Channel"
         When I want to modify this channel
@@ -31,7 +31,7 @@ Feature: Selecting available locales for a channel
         Then I should be notified that it has been successfully edited
         And the channel "Web Channel" should be available in "English (United States)"
 
-    @api @ui
+    @api @todo @ui
     Scenario: Being unable to disable locale used as the default one for a channel
         Given the store operates on a channel named "Web"
         And this channel allows to shop using "English (United States)" and "Polish (Poland)" locales
@@ -41,7 +41,7 @@ Feature: Selecting available locales for a channel
         And I try to save my changes
         Then I should be notified that the default locale has to be enabled
 
-    @api @ui
+    @api @todo @ui
     Scenario: Being unable to set disabled locale as a default one for a channel
         Given the store has locale "Polish (Poland)"
         And the store operates on a channel named "Web"

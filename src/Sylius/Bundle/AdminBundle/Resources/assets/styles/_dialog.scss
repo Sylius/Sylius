@@ -1,0 +1,10 @@
+dialog {
+    border: 0;
+    padding: 0;
+    background: transparent;
+}
+
+dialog::backdrop {
+    background: #000;
+    opacity: 0.75;
+}

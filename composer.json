@@ -87,6 +87,7 @@
         "sylius/resource": "^1.10",
         "sylius/resource-bundle": "^1.10",
         "sylius/theme-bundle": "^2.3",
+        "sylius/twig-hooks": "dev-main",
         "symfony/asset": "^6.4.0",
         "symfony/clock": "^6.4.0",
         "symfony/config": "^6.4.0",
@@ -125,15 +126,20 @@
         "symfony/security-http": "^6.4.0",
         "symfony/serializer": "^6.4.0",
         "symfony/service-contracts": "^2.5 || ^3.0",
+        "symfony/stimulus-bundle": "^2.12",
         "symfony/string": "^6.4.0",
         "symfony/templating": "^6.4.0",
         "symfony/translation": "^6.4.0",
         "symfony/translation-contracts": "^2.5.2",
         "symfony/twig-bundle": "^6.4.0",
+        "symfony/ux-autocomplete": "^2.15",
+        "symfony/ux-live-component": "^2.12",
+        "symfony/ux-twig-component": "^2.11.2",
         "symfony/validator": "^6.4.0",
         "symfony/webpack-encore-bundle": "^1.17.1",
         "symfony/workflow": "^6.4.0",
         "symfony/yaml": "^6.4.0",
+        "symfonycasts/dynamic-forms": "v0.1.1",
         "twig/intl-extra": "^2.12 || ^3.4",
         "twig/twig": "^2.12 || ^3.3",
         "webmozart/assert": "^1.9",
@@ -187,7 +193,8 @@
     "conflict": {
         "doctrine/orm": ">= 2.16.0",
         "lexik/jwt-authentication-bundle": "^2.18",
-        "stof/doctrine-extensions-bundle": "1.8.0"
+        "stof/doctrine-extensions-bundle": "1.8.0",
+        "symfony/ux-live-component": "2.15.0"
     },
     "require-dev": {
         "behat/behat": "^3.6.1",

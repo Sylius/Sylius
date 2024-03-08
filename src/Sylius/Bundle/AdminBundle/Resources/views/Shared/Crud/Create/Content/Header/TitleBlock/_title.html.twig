@@ -1,0 +1,18 @@
+{% import '@SyliusAdmin/Shared/Helper/header.html.twig' as _header %}
+
+{% if hookable_data.metadata is defined and hookable_data.configuration is defined %}
+    {% set configuration = hookable_data.configuration %}
+    {% set metadata = hookable_data.metadata %}
+
+    {% set singularName = hookable_configuration.resource_name|default(metadata.applicationName ~ '.ui.' ~ _context.metadata.name) %}
+    {% set header = hookable_configuration.header|default(null) %}
+{% else %}
+    {% set singularName = hookable_configuration.resource_name %}
+    {% set header = hookable_configuration.header %}
+{% endif %}
+
+<div class="col-12 col-md-6">
+    <div class="d-md-flex gap-2 align-items-center">
+        {{ _header.h1(header is not null ? header|trans : 'sylius.ui.new'|trans ~ ' ' ~ singularName|trans) }}
+    </div>
+</div>

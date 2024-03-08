@@ -1,0 +1,25 @@
+twig_hooks:
+    hooks:
+        'sylius_admin.shared.crud.show':
+            sidebar:
+                template: '@SyliusAdmin/Shared/Crud/Common/_sidebar.html.twig'
+            navbar:
+                template: '@SyliusAdmin/Shared/Crud/Common/_navbar.html.twig'
+            content:
+                template: '@SyliusAdmin/Shared/Crud/Common/_content.html.twig'
+
+        'sylius_admin.shared.crud.show.content':
+            flashes:
+                template: '@SyliusAdmin/Shared/Crud/Common/Content/_flashes.html.twig'
+            header:
+                template: '@SyliusAdmin/Shared/Crud/Common/Content/_header.html.twig'
+
+        'sylius_admin.shared.crud.show.content.header':
+            breadcrumbs:
+                template: '@SyliusAdmin/Shared/Crud/Show/Content/Header/_breadcrumbs.html.twig'
+            title_block:
+                template: '@SyliusAdmin/Shared/Crud/Common/Content/Header/_titleBlock.html.twig'
+
+        'sylius_admin.shared.crud.show.content.header.title_block':
+            title:
+                template: '@SyliusAdmin/Shared/Crud/Show/Content/Header/TitleBlock/_title.html.twig'

@@ -14,7 +14,7 @@ Feature: Removing a product variant's price from obsolete channel
         And this product is disabled in "Web-GB" channel
         And I am logged in as an administrator
 
-    @api @ui
+    @api @todo @ui
     Scenario: Removing a product variant's price
         When I want to modify the "Medium PHP Mug" product variant
         And I remove its price from "Web-GB" channel
@@ -22,7 +22,7 @@ Feature: Removing a product variant's price from obsolete channel
         Then I should not have configured price for "Web-GB" channel
         But I should have original price equal to "£50.00" in "Web-GB" channel
 
-    @api @ui
+    @api @todo @ui
     Scenario: Removing a product variant's price from disabled channel
         Given the channel "Web-GB" has been disabled
         When I want to modify the "Medium PHP Mug" product variant

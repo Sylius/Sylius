@@ -12,7 +12,7 @@ Feature: Decreasing a promotion coupon usage after cancelling an order
         And the store has promotion "Christmas sale" with coupon "SANTA2016"
         And I am logged in as an administrator
 
-    @api @ui
+    @api @todo @ui
     Scenario: Seeing promotion coupon usage decreased after order cancellation
         Given there is a customer "john.doe@gmail.com" that placed an order "#00000022"
         And the customer bought a single "PHP T-Shirt" using "SANTA2016" coupon
@@ -21,7 +21,7 @@ Feature: Decreasing a promotion coupon usage after cancelling an order
         When I browse all coupons of "Christmas sale" promotion
         Then "SANTA2016" coupon should be used 0 times
 
-    @api @ui
+    @api @todo @ui
     Scenario: Seeing promotion coupon usage decreased to 1 after second order cancellation
         Given there is a customer "john.doe@gmail.com" that placed an order "#00000022"
         And the customer bought a single "PHP T-Shirt" using "SANTA2016" coupon

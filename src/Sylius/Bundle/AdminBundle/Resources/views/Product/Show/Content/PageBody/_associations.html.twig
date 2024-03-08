@@ -1,0 +1,23 @@
+{% set product = hookable_data.resource %}
+
+<div class="card mb-3">
+    <div class="card-header">
+        <div class="card-title">
+            {{ 'sylius.ui.associations'|trans }}
+        </div>
+    </div>
+    <div class="card-body">
+        {% if product.associations is empty %}
+            {{ 'sylius.ui.no_associations_to_display'|trans }}
+        {% else %}
+            {% for association in product.associations %}
+                <strong>{{ association.type.name }}:</strong>
+                <ul>
+                    {% for associatedProduct in association.associatedProducts %}
+                        <li>{{ associatedProduct.name }}</li>
+                    {% endfor %}
+                </ul>
+            {% endfor %}
+        {% endif %}
+    </div>
+</div>

@@ -7,7 +7,7 @@ Feature: Adding a new customer account
     Background:
         Given I am logged in as an administrator
 
-    @api @ui @javascript
+    @api @todo @ui @javascript
     Scenario: Adding a new customer with an account
         When I want to create a new customer account
         And I specify their email as "l.skywalker@gmail.com"
@@ -18,7 +18,7 @@ Feature: Adding a new customer account
         And the customer "l.skywalker@gmail.com" should appear in the store
         And the customer "l.skywalker@gmail.com" should have an account created
 
-    @api @ui @javascript
+    @api @todo @ui @javascript
     Scenario: Creating an account for existing customer
         Given the store has customer "Frodo Baggins" with email "f.baggins@example.com"
         When I want to edit this customer

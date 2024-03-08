@@ -25,19 +25,19 @@ sylius_grid:
                     path: .
                     sortable: ~
                     options:
-                        template: "@SyliusAdmin/Order/Grid/Field/number.html.twig"
+                        template: "@SyliusAdmin/Shared/Grid/Field/orderNumber.html.twig"
                 channel:
                     type: twig
                     label: sylius.ui.channel
                     sortable: channel.code
                     options:
-                        template: "@SyliusAdmin/Order/Grid/Field/channel.html.twig"
+                        template: "@SyliusAdmin/Shared/Grid/Field/channel.html.twig"
                 customer:
                     type: twig
                     label: sylius.ui.customer
                     sortable: customer.lastName
                     options:
-                        template: "@SyliusAdmin/Order/Grid/Field/customer.html.twig"
+                        template: "@SyliusAdmin/Shared/Grid/Field/customer.html.twig"
                 state:
                     type: twig
                     label: sylius.ui.state
@@ -68,7 +68,7 @@ sylius_grid:
                     path: .
                     sortable: total
                     options:
-                        template: "@SyliusAdmin/Order/Grid/Field/total.html.twig"
+                        template: "@SyliusAdmin/Order/Grid/Field/orderTotal.html.twig"
                 currencyCode:
                     type: string
                     label: sylius.ui.currency

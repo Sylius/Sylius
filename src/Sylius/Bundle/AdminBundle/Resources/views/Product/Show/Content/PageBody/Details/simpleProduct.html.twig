@@ -1,0 +1,77 @@
+{% from '@SyliusAdmin/Shared/Helper/icon.html.twig' import icon as _icon %}
+{% import '@SyliusAdmin/Shared/Helper/money.html.twig' as _money %}
+
+{% set product = hookable_data.product %}
+
+{% if product.isSimple() %}
+    {% set main_hook = hook_name(hookable_data.parent_main_hook, 'simple_product') %}
+    {% set fallback_hook = hook_name(hookable_data.parent_fallback_hook, 'simple_product') %}
+    {% set variant = product.variants.first %}
+    {% set channels = hookable_data.channels %}
+
+    <table>
+        <tr class="bg-gray-400">
+            <td colspan="9" class="p-0 border-0">
+                <div class="py-3 px-5" id="product-variant-details-{{ variant.code }}">
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <div class="card-title">{{ 'sylius.ui.pricing'|trans }}</div>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table card-table table-vcenter">
+                                <thead>
+                                <tr>
+                                    <th>{{ 'sylius.ui.channel'|trans }}</th>
+                                    <th class="text-end">{{ 'sylius.ui.price'|trans }}</th>
+                                    <th class="text-end">{{ 'sylius.ui.original_price'|trans }}</th>
+                                    <th class="text-end">{{ 'sylius.ui.lowest_price_before_discount'|trans }}</th>
+                                    <th class="text-end">{{ 'sylius.ui.discounted_by'|trans }}</th>
+                                    <th></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for channelPricing in variant.channelPricings %}
+                                    {% set channel = attribute(channels, channelPricing.channelCode) %}
+                                    {% set currencyCode = channel.baseCurrency.code %}
+                                    {% set price = channelPricing.price %}
+                                    {% set originalPrice = channelPricing.originalPrice ?? 0 %}
+                                    {% set lowestPriceBeforeDiscount = channelPricing.lowestPriceBeforeDiscount %}
+
+                                    <tr {{ sylius_test_html_attribute('simple-product', "%s"|format(channel.name)) }}>
+                                        <td>
+                                            <span class="badge me-2" style="background-color: {{ channel.color }};" ></span>
+                                            {{ channel.name }}
+                                        </td>
+                                        <td class="text-end">{{ _money.format(price, currencyCode) }}</td>
+                                        <td class="text-end">{{ _money.format(originalPrice, currencyCode) }}</td>
+                                        <td class="text-end">{% if lowestPriceBeforeDiscount != null %}{{ _money.format(lowestPriceBeforeDiscount, currencyCode) }}{% else %} - {% endif %}</td>
+                                        <td class="text-end">
+                                            <ul>
+                                                {% for promotion in channelPricing.appliedPromotions %}
+                                                    <li>{{ promotion.name }}</li>
+                                                {% endfor %}
+                                            </ul>
+                                        </td>
+                                        <td class="text-end">
+                                            <a class="btn btn-primary" {{ sylius_test_html_attribute('price-history') }} href="{{ path('sylius_admin_channel_pricing_log_entry_index', { productId: product.id, variantId: variant.id, channelPricingId: channelPricing.id }) }}">
+                                                {{ 'sylius.ui.price_history'|trans }}
+                                            </a>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="card mb-3">
+                        {% hook [main_hook, fallback_hook] with hookable_data|merge({
+                            parent_main_hook: main_hook,
+                            parent_fallback_hook: fallback_hook,
+                            variant: variant
+                        }) %}
+                    </div>
+                </div>
+            </td>
+        </tr>
+    </table>
+{% endif %}

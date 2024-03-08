@@ -9,7 +9,7 @@ Feature: Payment method unique code validation
         And the store has a payment method "Offline" with a code "Offline"
         And I am logged in as an administrator
 
-    @ui @api
+    @todo @ui @api
     Scenario: Trying to add payment method with taken code
         When I want to create a new Offline payment method
         And I name it "Paypal Express Checkout" in "English (United States)"

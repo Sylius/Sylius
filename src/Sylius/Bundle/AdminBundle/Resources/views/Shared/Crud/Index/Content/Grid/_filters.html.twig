@@ -1,0 +1,32 @@
+{% import "@SyliusAdmin/Shared/Helper/accordion.html.twig" as _accordion %}
+{% import "@SyliusAdmin/Shared/Helper/button.html.twig" as _button %}
+
+{% set resources = hookable_data.resources %}
+
+{% set path = path(app.request.attributes.get('_route'), app.request.attributes.all('_route_params')) %}
+{% set areCriteriaSet = app.request.query.has('criteria') %}
+
+<div class="bg-white mb-5">
+    {% set content %}
+        <div class="mb-3">
+            <form method="get" action="{{ path }}" class="ui loadable form" novalidate>
+                <div class="sylius-filters">
+                    {% for filter in resources.definition.enabledFilters|filter(filter => filter.enabled)|sort_by('position') %}
+                        <div class="sylius-filters__field">
+                            {{ sylius_grid_render_filter(resources, filter) }}
+                        </div>
+                    {% endfor %}
+                </div>
+                <div>
+                    {{ _button.primary({ text: 'sylius.ui.filter'|trans, type: 'submit' }) }}
+                    {{ _button.default({ text: 'sylius.ui.reset'|trans, url: path }) }}
+                </div>
+            </form>
+        </div>
+    {% endset %}
+
+    {{ _accordion.default([{
+        title: 'sylius.ui.filters'|trans,
+        content: content,
+    }], areCriteriaSet) }}
+</div>

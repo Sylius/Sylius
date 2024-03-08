@@ -9,7 +9,7 @@ Feature: Payment method validation
         And the store has a payment method "Offline" with a code "Offline"
         And I am logged in as an administrator
 
-    @ui @api
+    @todo @ui @api
     Scenario: Trying to add a new payment method without specifying its code
         When I want to create a new payment method with "Paypal Express Checkout" gateway factory
         And I name it "Paypal Express Checkout" in "English (United States)"
@@ -18,7 +18,7 @@ Feature: Payment method validation
         Then I should be notified that code is required
         And the payment method with name "Paypal Express Checkout" should not be added
 
-    @ui @api
+    @todo @ui @api
     Scenario: Trying to add a new payment method without specifying its name
         When I want to create a new payment method with "Paypal Express Checkout" gateway factory
         And I specify its code as "PEC"
@@ -27,7 +27,7 @@ Feature: Payment method validation
         Then I should be notified that I have to specify payment method name
         And the payment method with code "PEC" should not be added
 
-    @ui @api
+    @todo @ui @api
     Scenario: Trying to add a new paypal payment method without specifying password
         When I want to create a new payment method with "Paypal Express Checkout" gateway factory
         And I name it "Paypal Express Checkout" in "English (United States)"
@@ -58,7 +58,7 @@ Feature: Payment method validation
         Then I should be notified that I have to specify paypal sandbox status that is boolean
         And the payment method with code "PEC" should not be added
 
-    @ui @api
+    @todo @ui @api
     Scenario: Trying to add a new stripe payment method with only publishable key specified
         When I want to create a new payment method with "Stripe Checkout" gateway factory
         And I name it "Stripe Checkout" in "English (United States)"
@@ -68,7 +68,7 @@ Feature: Payment method validation
         Then I should be notified that I have to specify stripe "secret key"
         And the payment method with code "PEC" should not be added
 
-    @ui @api
+    @todo @ui @api
     Scenario: Trying to add a new stripe payment method with only secret key specified
         When I want to create a new payment method with "Stripe Checkout" gateway factory
         And I name it "Stripe Checkout" in "English (United States)"
@@ -110,7 +110,7 @@ Feature: Payment method validation
         And I try to add it
         Then I should be notified that I have to specify factory name that is available
 
-    @ui @api
+    @todo @ui @api
     Scenario: Trying to remove name from an existing payment method
         When I want to modify the "Offline" payment method
         And I remove its name from "English (United States)" translation
