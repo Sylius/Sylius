@@ -88,7 +88,7 @@ final class LoginContext implements Context
      */
     public function iWantToResetPassword(): void
     {
-        $this->request = $this->requestFactory->create('shop', 'reset-password-requests', 'Bearer');
+        $this->request = $this->requestFactory->create('shop', 'customers/reset-password', 'Bearer');
     }
 
     /**
@@ -108,7 +108,7 @@ final class LoginContext implements Context
     public function iFollowLinkOnMyEmailToResetPassword(ShopUserInterface $user): void
     {
         $this->request = $this->requestFactory->custom(
-            sprintf('%s/shop/reset-password-requests/%s', $this->apiUrlPrefix, $user->getPasswordResetToken()),
+            sprintf('%s/shop/customers/reset-password/%s', $this->apiUrlPrefix, $user->getPasswordResetToken()),
             HttpRequest::METHOD_PATCH,
         );
     }
