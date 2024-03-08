@@ -10,15 +10,6 @@ for your custom e-commerce application.
 To create your Sylius-based application, first make sure you use PHP 8.0 or higher
 and have `Composer`_ installed.
 
-.. note::
-
-    In order to inform you about newest Sylius releases and be aware of shops based on Sylius,
-    the Core Team uses an internal statistical service called GUS.
-    The only data that is collected and stored in its database are hostname, user agent, locale,
-    environment (test, dev or prod), current Sylius version and the date of last contact.
-    If you do not want your shop to send requests to GUS, please visit :doc:`this guide </cookbook/configuration/disabling-admin-notifications>`
-    for further instructions.
-
 Initiating A New Sylius Project
 -------------------------------
 
