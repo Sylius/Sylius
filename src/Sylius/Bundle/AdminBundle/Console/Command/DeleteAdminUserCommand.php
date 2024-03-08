@@ -53,15 +53,18 @@ final class DeleteAdminUserCommand extends Command
         $username = $this->io->ask('Admin username');
         $user = $this->adminUserRepository->findOneBy(['username' => $username]);
 
-        if ($user === null)
-        {
+        if ($user === null) {
             $this->io->error(sprintf('Admin Account with the username "%s" does not exist', $username));
             return Command::INVALID;
         }
 
-        $this->adminUserRepository->remove($user);
-
-        $this->io->success(sprintf('Admin Account with the username "%s" has been deleted successfully', $username));
+        $confirmationQuestion = $this->io->confirm(sprintf('Are you sure you want to delete the admin user "%s" ?', $username), false);
+        if ($confirmationQuestion) {
+            $this->adminUserRepository->remove($user);
+            $this->io->success(sprintf('Admin Account with the username "%s" has been deleted successfully', $username));
+        } else {
+            return Command::INVALID;
+        }
 
         return Command::SUCCESS;
     }
