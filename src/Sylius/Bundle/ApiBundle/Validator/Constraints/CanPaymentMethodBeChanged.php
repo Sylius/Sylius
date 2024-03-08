@@ -15,7 +15,6 @@ namespace Sylius\Bundle\ApiBundle\Validator\Constraints;
 
 use Symfony\Component\Validator\Constraint;
 
-/** @experimental */
 final class CanPaymentMethodBeChanged extends Constraint
 {
     public const CANNOT_CHANGE_PAYMENT_METHOD_FOR_CANCELLED_ORDER = 'sylius.payment_method.cannot_change_payment_method_for_cancelled_order';

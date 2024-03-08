@@ -17,7 +17,6 @@ use Sylius\Bundle\ApiBundle\Command\SubresourceIdAwareInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Webmozart\Assert\Assert;
 
-/** @experimental */
 final class SubresourceIdAwareCommandDataTransformer implements CommandDataTransformerInterface
 {
     public function __construct(private RequestStack $requestStack)

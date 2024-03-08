@@ -21,7 +21,6 @@ use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 
-/** @experimental  */
 final class SendAccountRegistrationEmailHandler implements MessageHandlerInterface
 {
     public function __construct(

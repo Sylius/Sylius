@@ -21,7 +21,6 @@ use Symfony\Component\Serializer\NameConverter\AdvancedNameConverterInterface;
 use Symfony\Component\Serializer\Normalizer\ContextAwareDenormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 
-/** @experimental */
 final class CommandDenormalizer implements ContextAwareDenormalizerInterface
 {
     public function __construct(

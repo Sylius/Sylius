@@ -17,7 +17,6 @@ use ApiPlatform\Core\DataProvider\ItemDataProviderInterface;
 use ApiPlatform\Core\DataProvider\RestrictedDataProviderInterface;
 use Sylius\Bundle\CoreBundle\Message\Admin\Account\ResetPassword;
 
-/** @experimental */
 final class AdminResetPasswordItemDataProvider implements RestrictedDataProviderInterface, ItemDataProviderInterface
 {
     public function getItem(string $resourceClass, $id, string $operationName = null, array $context = [])

@@ -24,8 +24,6 @@ use Sylius\Bundle\ApiBundle\ApiPlatform\Metadata\Merger\MetadataMergerInterface;
 use Symfony\Component\Config\Util\XmlUtils;
 
 /**
- * @experimental
- *
  * @see XmlExtractor
  */
 final class MergingXmlExtractor extends AbstractResourceExtractor implements PropertyExtractorInterface

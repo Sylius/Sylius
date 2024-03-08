@@ -17,7 +17,6 @@ use ApiPlatform\Core\OpenApi\Model\Parameter;
 use ApiPlatform\OpenApi\OpenApi;
 use Sylius\Component\Review\Model\ReviewInterface;
 
-/** @experimental */
 final class ProductReviewDocumentationModifier implements DocumentationModifierInterface
 {
     public const PATH = '%s/admin/product-reviews';

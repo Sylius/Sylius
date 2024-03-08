@@ -17,7 +17,6 @@ use Sylius\Bundle\ApiBundle\Command\ChannelCodeAwareInterface;
 use Sylius\Bundle\ApiBundle\Command\IriToIdentifierConversionAwareInterface;
 use Sylius\Bundle\ApiBundle\Command\LocaleCodeAwareInterface;
 
-/** @experimental */
 class RequestResetPasswordToken implements
     ChannelCodeAwareInterface,
     LocaleCodeAwareInterface,

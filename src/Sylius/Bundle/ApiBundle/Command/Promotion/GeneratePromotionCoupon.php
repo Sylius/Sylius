@@ -15,7 +15,6 @@ namespace Sylius\Bundle\ApiBundle\Command\Promotion;
 
 use Sylius\Component\Promotion\Generator\ReadablePromotionCouponGeneratorInstructionInterface;
 
-/** @experimental */
 class GeneratePromotionCoupon implements ReadablePromotionCouponGeneratorInstructionInterface
 {
     public function __construct(

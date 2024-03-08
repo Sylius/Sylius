@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\Command\Account;
 
-/** @experimental */
 class ResetPassword
 {
     public function __construct(

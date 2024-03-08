@@ -21,7 +21,6 @@ use Sylius\Bundle\ApiBundle\Serializer\ContextKeys;
 use Sylius\Component\Core\Model\OrderInterface;
 use Symfony\Component\HttpFoundation\Request;
 
-/** @experimental */
 final class OrderVisitorItemExtension implements QueryItemExtensionInterface
 {
     public function __construct(

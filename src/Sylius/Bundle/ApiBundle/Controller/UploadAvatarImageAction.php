@@ -24,7 +24,6 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Webmozart\Assert\Assert;
 
-/** @experimental */
 final class UploadAvatarImageAction
 {
     public function __construct(

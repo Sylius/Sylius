@@ -17,7 +17,6 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Extension\ContextAwareQueryCollectionEx
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Util\QueryNameGeneratorInterface;
 use Doctrine\ORM\QueryBuilder;
 
-/** @experimental */
 final class HideArchivedPromotionExtension implements ContextAwareQueryCollectionExtensionInterface
 {
     public function __construct(private string $promotionClass)

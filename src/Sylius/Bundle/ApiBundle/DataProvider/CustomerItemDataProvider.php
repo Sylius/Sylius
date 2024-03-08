@@ -22,7 +22,6 @@ use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Component\Core\Repository\CustomerRepositoryInterface;
 use Symfony\Component\Security\Core\User\UserInterface as SymfonyUserInterface;
 
-/** @experimental */
 final class CustomerItemDataProvider implements RestrictedDataProviderInterface, ItemDataProviderInterface
 {
     public function __construct(

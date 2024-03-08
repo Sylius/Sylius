@@ -24,7 +24,6 @@ use Symfony\Component\Serializer\Normalizer\ContextAwareDenormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
 
-/** @experimental */
 final class ProductAttributeValueDenormalizer implements ContextAwareDenormalizerInterface, DenormalizerAwareInterface
 {
     use DenormalizerAwareTrait;

@@ -18,7 +18,6 @@ use Sylius\Component\Core\Model\AdminUserInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
-/** @experimental */
 final class PathPrefixProvider implements PathPrefixProviderInterface
 {
     public function __construct(

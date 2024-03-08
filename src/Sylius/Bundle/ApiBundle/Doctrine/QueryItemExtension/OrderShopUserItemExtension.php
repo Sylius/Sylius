@@ -22,7 +22,6 @@ use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
 use Symfony\Component\HttpFoundation\Request;
 
-/** @experimental */
 final class OrderShopUserItemExtension implements QueryItemExtensionInterface
 {
     public function __construct(

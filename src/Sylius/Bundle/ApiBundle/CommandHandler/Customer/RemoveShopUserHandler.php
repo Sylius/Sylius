@@ -18,7 +18,6 @@ use Sylius\Bundle\ApiBundle\Exception\UserNotFoundException;
 use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
 
-/** @experimental */
 final class RemoveShopUserHandler
 {
     /**
