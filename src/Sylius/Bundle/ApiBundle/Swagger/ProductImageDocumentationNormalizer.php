@@ -40,6 +40,10 @@ final class ProductImageDocumentationNormalizer implements NormalizerInterface
 
         $shopProductImagePath = $this->apiRoute . '/shop/product-images/{id}';
 
+        if (!isset($docs['paths'][$shopProductImagePath]['get'])) {
+            return $docs;
+        }
+
         foreach ($docs['paths'][$shopProductImagePath]['get']['parameters'] as &$param) {
             if ($param['in'] === 'query' && $param['name'] === 'filter') {
                 $param['schema']['enum'] = $enums;
