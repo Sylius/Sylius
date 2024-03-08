@@ -835,6 +835,7 @@ sylius:
         tax_categories: 'Tax Categories'
         tax_category: 'Tax category'
         tax_rate_details: 'Tax rate details'
+        tax_rate: 'Tax Rate'
         tax_rates: 'Tax Rates'
         tax_total: 'Tax total'
         taxation_categories: 'Taxation categories'

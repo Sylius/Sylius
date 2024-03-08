@@ -11,7 +11,7 @@ Feature: Filtering tax rates by start date
         And the store has "3 weeks tax rate" tax rate of 25% for "Clothes" within the "US" zone with dates between "2022-12-24" and "2023-01-15"
         And I am logged in as an administrator
 
-    @todo @ui @api
+    @ui @api
     Scenario: Filtering tax rates from start date
         When I browse tax rates
         And I filter tax rates by start date from "2022-12-26"
@@ -19,7 +19,7 @@ Feature: Filtering tax rates by start date
         And I should not see a tax rate with name "3 weeks tax rate"
         But I should see the tax rate "2023 tax rate" in the list
 
-    @todo @ui @api
+    @ui @api
     Scenario: Filtering catalog promotions up to start date
         When I browse tax rates
         And I filter tax rates by start date up to "2022-12-22"
@@ -27,7 +27,7 @@ Feature: Filtering tax rates by start date
         And I should not see a tax rate with name "3 weeks tax rate"
         But I should see the tax rate "2022 tax rate" in the list
 
-    @todo @ui @api
+    @ui @api
     Scenario: Filtering catalog promotions in a start date range
         When I browse tax rates
         And I filter tax rates by start date from "2022-08-20" up to "2022-12-26"
