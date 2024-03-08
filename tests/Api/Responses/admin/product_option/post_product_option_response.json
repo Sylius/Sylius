@@ -4,6 +4,7 @@
     "@type": "ProductOption",
     "id": @integer@,
     "code": "NEW_COLOR",
+    "position": 9,
     "values": [
         "\/api\/v2\/admin\/product-option-values\/NEW_COLOR_RED"
     ],

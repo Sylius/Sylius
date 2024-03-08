@@ -121,6 +121,7 @@
             <argument type="service" id="sylius.repository.product_attribute" />
             <argument type="service" id="sylius.repository.locale" />
             <argument type="service" id="sylius.form_registry.attribute_type" />
+            <argument type="service" id="sylius.form.data_transformer.locale_to_code" />
             <tag name="form.type" />
         </service>
 

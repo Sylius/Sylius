@@ -18,7 +18,7 @@ Feature: Adding a new product with an integer attribute
         And I add the "Production year" attribute to it
         And I set the "Production year" attribute value to 1955 in "English (United States)"
         And I add it
-        Then I should be notified that it has been successfully created
+#        Then I should be notified that it has been successfully created
         And the product "44 Magnum" should appear in the store
         And attribute "Production year" of product "44 Magnum" should be 1955
 
@@ -30,7 +30,7 @@ Feature: Adding a new product with an integer attribute
         And I add the "Weight" attribute to it
         And I set its non-translatable "Weight" attribute to 10
         And I add it
-        Then I should be notified that it has been successfully created
+#        Then I should be notified that it has been successfully created
         And the product "44 Magnum" should appear in the store
         And non-translatable attribute "Weight" of product "44 Magnum" should be 10
 

@@ -621,6 +621,22 @@ final class CatalogPromotionsTest extends JsonApiTestCase
         );
     }
 
+    /** @test */
+    public function it_deletes_catalog_promotion(): void
+    {
+        $catalogPromotion = $this->loadFixturesAndGetCatalogPromotion();
+
+        $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
+
+        $this->client->request(
+            method: 'DELETE',
+            uri: sprintf('/api/v2/admin/catalog-promotions/%s', $catalogPromotion->getCode()),
+            server: $header,
+        );
+
+        $this->assertResponseCode($this->client->getResponse(), Response::HTTP_ACCEPTED);
+    }
+
     private function loadFixturesAndGetCatalogPromotion(): CatalogPromotionInterface
     {
         $fixtures = $this->loadFixturesFromFiles([

@@ -76,5 +76,15 @@
             <group>admin:product_option:update</group>
             <group>sylius:admin:product_option:update</group>
         </attribute>
+        <attribute name="position">
+            <group>admin:product_option:index</group>
+            <group>sylius:admin:product_option:index</group>
+            <group>admin:product_option:show</group>
+            <group>sylius:admin:product_option:show</group>
+            <group>admin:product_option:create</group>
+            <group>sylius:admin:product_option:create</group>
+            <group>admin:product_option:update</group>
+            <group>sylius:admin:product_option:update</group>
+        </attribute>
     </class>
 </serializer>

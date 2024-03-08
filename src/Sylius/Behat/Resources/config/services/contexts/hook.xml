@@ -35,5 +35,9 @@
         <service id="sylius.behat.context.hook.mailer" class="Sylius\Behat\Context\Hook\MailerContext">
             <argument type="service" id="test.mailer_pool"/>
         </service>
+
+        <service id="sylius.behat.context.hook.cache" class="Sylius\Behat\Context\Hook\CacheContext">
+            <argument type="service" id="cache.app" />
+        </service>
     </services>
 </container>

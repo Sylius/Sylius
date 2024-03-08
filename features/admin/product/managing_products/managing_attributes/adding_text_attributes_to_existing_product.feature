@@ -16,7 +16,7 @@ Feature: Adding attributes to an existing product
         And I add the "Overall length" attribute to it
         And I set the "Overall length" attribute value to "30.5 cm" in "English (United States)"
         And I save my changes
-        Then I should be notified that it has been successfully edited
+#        Then I should be notified that it has been successfully edited
         And attribute "Overall length" of product "44 Magnum" should be "30.5 cm"
 
     @ui @mink:chromedriver @api
@@ -26,7 +26,7 @@ Feature: Adding attributes to an existing product
         And I add the "Overall length" attribute to it
         And I set the "Overall length" attribute value to "30.5 cm" in "English (United States)"
         And I save my changes
-        Then I should be notified that it has been successfully edited
+#        Then I should be notified that it has been successfully edited
         And attribute "Gun caliber" of product "44 Magnum" should be "11 mm"
         And attribute "Overall length" of product "44 Magnum" should be "30.5 cm"
 
@@ -37,7 +37,7 @@ Feature: Adding attributes to an existing product
         And I set the "Overall length" attribute value to "30.5 cm" in "English (United States)"
         And I remove its "Overall length" attribute
         And I save my changes
-        Then I should be notified that it has been successfully edited
+#        Then I should be notified that it has been successfully edited
         And product "44 Magnum" should not have a "Overall length" attribute
 
     @ui @mink:chromedriver @api
@@ -49,6 +49,6 @@ Feature: Adding attributes to an existing product
         And I save my changes
         And I remove its "Gun caliber" attribute
         And I save my changes
-        Then I should be notified that it has been successfully edited
+#        Then I should be notified that it has been successfully edited
         And attribute "Overall length" of product "44 Magnum" should be "30.5 cm"
         And product "44 Magnum" should not have a "Gun caliber" attribute

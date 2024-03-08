@@ -26,6 +26,13 @@ class CreateConfigurableProductPage extends BaseCreatePage implements CreateConf
     use FormTrait;
     use SpecifiesItsCode;
 
+    public function create(): void
+    {
+        $this->waitForFormUpdate();
+
+        parent::create();
+    }
+
     public function hasMainTaxonWithName(string $taxonName): bool
     {
         $this->openTaxonBookmarks();

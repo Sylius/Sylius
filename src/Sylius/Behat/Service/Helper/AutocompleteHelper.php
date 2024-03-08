@@ -41,7 +41,7 @@ final class AutocompleteHelper implements AutocompleteHelperInterface
         SCRIPT);
 
         $driver->wait(
-            1000,
+            2000,
             <<<SCRIPT
             (function () {
                 let element = document.evaluate("{$selector}", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;

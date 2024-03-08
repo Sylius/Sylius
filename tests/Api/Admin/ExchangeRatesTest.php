@@ -127,4 +127,24 @@ final class ExchangeRatesTest extends JsonApiTestCase
             Response::HTTP_OK,
         );
     }
+
+    /** @test */
+    public function it_deletes_an_exchange_rate(): void
+    {
+        $this->setUpAdminContext();
+        $this->setUpDefaultGetHeaders();
+
+        $fixtures = $this->loadFixturesFromFiles([
+            'authentication/api_administrator.yaml',
+            'channel.yaml',
+            'exchange_rate.yaml',
+        ]);
+
+        /** @var ExchangeRateInterface $exchangeRate */
+        $exchangeRate = $fixtures['exchange_rate_USDPLN'];
+
+        $this->requestDelete('/api/v2/admin/exchange-rates/' . $exchangeRate->getId());
+
+        $this->assertResponseCode($this->client->getResponse(), Response::HTTP_NO_CONTENT);
+    }
 }

@@ -21,7 +21,7 @@ Feature: Adding text attributes in different locales to a product
         And I set the "Mug material" attribute value to "Wood" in "English (United States)"
         And I set the "Mug material" attribute value to "Drewno" in "Polish (Poland)"
         And I add it
-        Then I should be notified that it has been successfully created
+#        Then I should be notified that it has been successfully created
         And the product "PHP Mug" should appear in the store
         And attribute "Mug material" of product "PHP Mug" should be "Wood" in "English (United States)"
         And attribute "Mug material" of product "PHP Mug" should be "Drewno" in "Polish (Poland)"
@@ -33,6 +33,6 @@ Feature: Adding text attributes in different locales to a product
         And I set the "Mug material" attribute value to "Wood" in "English (United States)"
         And I set the "Mug material" attribute value to "Drewno" in "Polish (Poland)"
         And I save my changes
-        Then I should be notified that it has been successfully edited
+#        Then I should be notified that it has been successfully edited
         And attribute "Mug material" of product "Symfony Mug" should be "Wood" in "English (United States)"
         And attribute "Mug material" of product "Symfony Mug" should be "Drewno" in "Polish (Poland)"

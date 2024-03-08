@@ -1,0 +1,13 @@
+{
+    "@context": "\/api\/v2\/contexts\/ConstraintViolationList",
+    "@type": "ConstraintViolationList",
+    "hydra:title": "An error occurred",
+    "hydra:description": "email: This email is already used.",
+    "violations": [
+        {
+            "propertyPath": "email",
+            "message": "This email is already used.",
+            "code": "23bd9dbf-6b9b-41cd-a99e-4844bcf3077f"
+        }
+    ]
+}

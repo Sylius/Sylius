@@ -45,6 +45,7 @@ trait FormTrait
         $this->getElement('field_name', ['%localeCode%' => $localeCode])->setValue($name);
 
         if (DriverHelper::isJavascript($this->getDriver())) {
+            $this->waitForFormUpdate();
             $this->getElement('generate_product_slug_button', ['%localeCode%' => $localeCode])->click();
             $this->waitForFormUpdate();
         }
@@ -100,6 +101,9 @@ trait FormTrait
             'select' => $attributeValue->selectOption($value),
             default => throw new \InvalidArgumentException('Unsupported attribute value type'),
         };
+
+        $attributeValue->blur();
+        $this->waitForFormUpdate();
     }
 
     public function removeAttribute(string $attributeName, string $localeCode): void
@@ -154,7 +158,7 @@ trait FormTrait
     private function waitForFormUpdate(): void
     {
         $form = $this->getElement('form');
-        $form->waitFor(5, fn () => !$form->hasAttribute('busy'));
+        $form->waitFor(1500, fn () => !$form->hasAttribute('busy'));
     }
 
     private function clickButton(string $locator): void

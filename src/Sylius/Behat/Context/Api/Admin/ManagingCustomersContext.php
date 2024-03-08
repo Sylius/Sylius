@@ -229,7 +229,7 @@ final class ManagingCustomersContext implements Context
     public function iDeleteAccount(ShopUserInterface $shopUser): void
     {
         $this->sharedStorage->set('customer', $shopUser->getCustomer());
-        $this->client->delete(sprintf('customer/%s', $shopUser->getCustomer()->getId()), 'user');
+        $this->client->delete(sprintf('customers/%s', $shopUser->getCustomer()->getId()), 'user');
     }
 
     /**

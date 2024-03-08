@@ -24,6 +24,7 @@ use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\OrderPaymentTransitions;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Order\OrderTransitions;
+use Sylius\Component\Payment\PaymentTransitions;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Messenger\Stamp\HandledStamp;
 use Webmozart\Assert\Assert;
@@ -99,6 +100,8 @@ trait OrderPlacerTrait
 
         $order = $this->dispatchCompleteOrderCommand($tokenValue);
 
+        $this->setCheckoutCompletedAt($order, $checkoutCompletedAt);
+
         return $order;
     }
 
@@ -161,8 +164,11 @@ trait OrderPlacerTrait
 
         $stateMachineFactory = $this->get('sm.factory');
 
-        $stateMachine = $stateMachineFactory->get($order, OrderPaymentTransitions::GRAPH);
-        $stateMachine->apply(OrderPaymentTransitions::TRANSITION_PAY);
+        $orderStateMachine = $stateMachineFactory->get($order, OrderPaymentTransitions::GRAPH);
+        $orderStateMachine->apply(OrderPaymentTransitions::TRANSITION_PAY);
+
+        $paymentStateMachine = $stateMachineFactory->get($order->getLastPayment(), PaymentTransitions::GRAPH);
+        $paymentStateMachine->apply(PaymentTransitions::TRANSITION_COMPLETE);
 
         $objectManager->flush();
 

@@ -9,8 +9,8 @@
     "id": @integer@,
     "code": "UPS",
     "position": 0,
-    "calculator": "flat_rate",
-    "configuration": {
+    "shippingChargesCalculator": "flat_rate",
+    "shippingChargesCalculatorConfiguration": {
         "WEB": {
             "amount": 500
         },

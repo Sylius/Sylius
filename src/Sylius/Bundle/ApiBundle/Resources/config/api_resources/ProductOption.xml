@@ -91,6 +91,11 @@
                     </attribute>
                 </attribute>
             </itemOperation>
+
+            <itemOperation name="admin_delete">
+                <attribute name="method">DELETE</attribute>
+                <attribute name="path">/admin/product-options/{code}</attribute>
+            </itemOperation>
         </itemOperations>
 
         <subresourceOperations>
