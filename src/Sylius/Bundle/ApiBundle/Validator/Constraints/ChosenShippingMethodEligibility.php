@@ -15,7 +15,6 @@ namespace Sylius\Bundle\ApiBundle\Validator\Constraints;
 
 use Symfony\Component\Validator\Constraint;
 
-/** @experimental */
 final class ChosenShippingMethodEligibility extends Constraint
 {
     public string $message = 'sylius.shipping_method.not_available';

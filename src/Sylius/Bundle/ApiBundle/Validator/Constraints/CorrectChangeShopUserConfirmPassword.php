@@ -15,7 +15,6 @@ namespace Sylius\Bundle\ApiBundle\Validator\Constraints;
 
 use Symfony\Component\Validator\Constraint;
 
-/** @experimental */
 final class CorrectChangeShopUserConfirmPassword extends Constraint
 {
     /** @var string */

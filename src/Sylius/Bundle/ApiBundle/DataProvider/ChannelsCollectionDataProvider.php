@@ -18,7 +18,6 @@ use ApiPlatform\Core\DataProvider\RestrictedDataProviderInterface;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 
-/** @experimental */
 final class ChannelsCollectionDataProvider implements ContextAwareCollectionDataProviderInterface, RestrictedDataProviderInterface
 {
     public function __construct(private ChannelContextInterface $channelContext)

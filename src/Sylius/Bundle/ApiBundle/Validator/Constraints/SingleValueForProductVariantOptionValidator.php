@@ -19,7 +19,6 @@ use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 use Webmozart\Assert\Assert;
 
-/** @experimental */
 final class SingleValueForProductVariantOptionValidator extends ConstraintValidator
 {
     public function validate(mixed $value, Constraint $constraint): void

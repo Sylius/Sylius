@@ -19,7 +19,6 @@ use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductTaxonInterface;
 use Symfony\Component\Messenger\MessageBusInterface;
 
-/** @experimental */
 final class ProductTaxonDataPersister implements ContextAwareDataPersisterInterface
 {
     public function __construct(

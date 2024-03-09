@@ -18,7 +18,6 @@ use Sylius\Bundle\ApiBundle\Exception\ZoneCannotBeRemoved;
 use Sylius\Component\Addressing\Checker\ZoneDeletionCheckerInterface;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 
-/** @experimental */
 final class ZoneDataPersister implements ContextAwareDataPersisterInterface
 {
     public function __construct(

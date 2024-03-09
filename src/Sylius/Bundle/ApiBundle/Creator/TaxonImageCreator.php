@@ -22,7 +22,6 @@ use Sylius\Component\Core\Uploader\ImageUploaderInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Taxonomy\Repository\TaxonRepositoryInterface;
 
-/** @experimental */
 final class TaxonImageCreator implements ImageCreatorInterface
 {
     /**

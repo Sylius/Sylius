@@ -20,7 +20,6 @@ use Sylius\Component\Core\Repository\ShipmentRepositoryInterface;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 use Webmozart\Assert\Assert;
 
-/** @experimental */
 final class SendShipmentConfirmationEmailHandler implements MessageHandlerInterface
 {
     public function __construct(

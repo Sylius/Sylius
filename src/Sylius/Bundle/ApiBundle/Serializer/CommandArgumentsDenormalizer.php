@@ -19,7 +19,6 @@ use Sylius\Bundle\ApiBundle\Converter\IriToIdentifierConverterInterface;
 use Symfony\Component\Serializer\Normalizer\ContextAwareDenormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 
-/** @experimental */
 final class CommandArgumentsDenormalizer implements ContextAwareDenormalizerInterface
 {
     public function __construct(

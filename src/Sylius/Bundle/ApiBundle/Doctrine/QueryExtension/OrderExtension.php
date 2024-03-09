@@ -22,7 +22,6 @@ use Sylius\Bundle\ApiBundle\SectionResolver\AdminApiSection;
 use Sylius\Bundle\CoreBundle\SectionResolver\SectionProviderInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 
-/** @experimental */
 final class OrderExtension implements ContextAwareQueryCollectionExtensionInterface, QueryItemExtensionInterface
 {
     /**

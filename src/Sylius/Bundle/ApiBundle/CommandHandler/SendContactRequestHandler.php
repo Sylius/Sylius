@@ -21,7 +21,6 @@ use Sylius\Component\Core\Model\ChannelInterface;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 use Webmozart\Assert\Assert;
 
-/** experimental */
 final class SendContactRequestHandler implements MessageHandlerInterface
 {
     /**

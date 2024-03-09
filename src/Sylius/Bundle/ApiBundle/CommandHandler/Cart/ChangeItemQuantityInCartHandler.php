@@ -22,7 +22,6 @@ use Sylius\Component\Order\Repository\OrderItemRepositoryInterface;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 use Webmozart\Assert\Assert;
 
-/** @experimental */
 final class ChangeItemQuantityInCartHandler implements MessageHandlerInterface
 {
     public function __construct(

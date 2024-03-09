@@ -18,7 +18,6 @@ use Doctrine\DBAL\Exception\ForeignKeyConstraintViolationException;
 use Sylius\Bundle\ApiBundle\Exception\PaymentMethodCannotBeRemoved;
 use Sylius\Component\Core\Model\PaymentMethodInterface;
 
-/** @experimental */
 final class PaymentMethodDataPersister implements ContextAwareDataPersisterInterface
 {
     public function __construct(private ContextAwareDataPersisterInterface $decoratedDataPersister)

@@ -26,12 +26,12 @@ jobs:
         steps:
             -   name: "Checkout (With Branch)"
                 if: "${{ inputs.branch != '' }}"
-                uses: actions/checkout@v3
+                uses: actions/checkout@v4
                 with:
                     ref: ${{ inputs.branch }}
 
             -   name: "Checkout"
-                uses: actions/checkout@v3
+                uses: actions/checkout@v4
                 if: "${{ inputs.branch == '' }}"
 
             -   name: "Get matrix"
@@ -69,13 +69,13 @@ jobs:
 
             -   name: "Checkout (With Branch)"
                 if: "${{ inputs.branch != '' }}"
-                uses: actions/checkout@v3
+                uses: actions/checkout@v4
                 with:
                     ref: ${{ inputs.branch }}
 
             -   name: "Checkout"
                 if: "${{ inputs.branch == '' }}"
-                uses: actions/checkout@v3
+                uses: actions/checkout@v4
                 
             -   name: Prepare manifest.json files
                 run: |

@@ -18,7 +18,6 @@ use Doctrine\DBAL\Exception\ForeignKeyConstraintViolationException;
 use Sylius\Bundle\ApiBundle\Exception\ProductAttributeCannotBeRemoved;
 use Sylius\Component\Product\Model\ProductAttributeInterface;
 
-/** @experimental */
 final class ProductAttributeDataPersister implements ContextAwareDataPersisterInterface
 {
     public function __construct(

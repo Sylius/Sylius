@@ -27,7 +27,6 @@ use Sylius\Component\Shipping\Checker\Eligibility\ShippingMethodEligibilityCheck
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 use Webmozart\Assert\Assert;
 
-/** @experimental */
 final class ChooseShippingMethodHandler implements MessageHandlerInterface
 {
     public function __construct(

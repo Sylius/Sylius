@@ -20,8 +20,6 @@ use Sylius\Bundle\ApiBundle\Provider\PathPrefixProviderInterface;
 use Symfony\Component\Routing\RouterInterface;
 
 /**
- * @experimental
- *
  * This class is based on src/Bridge/Symfony/Routing/RouteNameResolver.php, but has added logic for matching /shop, /admin prefixes
  */
 final class RouteNameResolver implements RouteNameResolverInterface

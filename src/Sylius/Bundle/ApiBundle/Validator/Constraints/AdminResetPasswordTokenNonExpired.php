@@ -15,7 +15,6 @@ namespace Sylius\Bundle\ApiBundle\Validator\Constraints;
 
 use Symfony\Component\Validator\Constraint;
 
-/** @experimental */
 final class AdminResetPasswordTokenNonExpired extends Constraint
 {
     public string $message = 'sylius.admin.expired_password_reset_token';

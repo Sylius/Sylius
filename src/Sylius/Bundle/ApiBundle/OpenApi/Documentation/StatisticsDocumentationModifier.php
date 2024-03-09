@@ -20,7 +20,6 @@ use ApiPlatform\OpenApi\OpenApi;
 use Symfony\Component\Clock\ClockInterface;
 use Symfony\Component\HttpFoundation\Response;
 
-/** @experimental */
 final class StatisticsDocumentationModifier implements DocumentationModifierInterface
 {
     private const PATH = '/admin/statistics';
