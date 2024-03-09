@@ -12,9 +12,9 @@ There are a few tips at the end of this tutorial:
 
 - if you want to share your work with the Community, check out the :doc:`Sylius Plugins</book/plugins/index>` chapter
 
-And the most important - if you want to become a part of our collectivity, join our `Slack <https://sylius.com/slack>`_,
-`Forum <https://forum.sylius.com/>`_ and follow `our repository <https://github.com/Sylius/Sylius>`_ to be always up-to-date
-with the newest Sylius releases. If you have any ideas about how to make Sylius better and want to support us on catalyzing
-trade with technology - open issues, pull requests and join discussions on Github. Sylius is only strong with the Community :)
+And the most important - if you want to become a part of our collectivity, join our `Slack <https://sylius.com/slack>`_
+and follow `our repository <https://github.com/Sylius/Sylius>`_ to be always up-to-date with the newest Sylius releases.
+If you have any ideas about how to make Sylius better and want to support us on catalyzing trade with
+technology - open issues, pull requests and join discussions on Github. Sylius is only strong with the Community :)
 
 Good luck!
