@@ -17,7 +17,6 @@
 
         <service id="sylius.twig.extension.taxes" class="Sylius\Bundle\ShopBundle\Twig\OrderTaxesTotalExtension" public="false">
             <tag name="twig.extension" />
-            <deprecated package="sylius/shop-bundle" version="1.12">The "%service_id%" is deprecated since Sylius 1.12 and will be removed in 2.0. Use methods "getTaxExcludedTotal" and "getTaxIncludedTotal" from "Sylius\Component\Core\Model\Order" instead.</deprecated>
         </service>
 
         <service id="sylius.twig.extension.subtotal" class="Sylius\Bundle\ShopBundle\Twig\OrderItemsSubtotalExtension" public="false">

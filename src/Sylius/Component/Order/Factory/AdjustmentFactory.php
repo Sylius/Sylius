@@ -16,6 +16,9 @@ namespace Sylius\Component\Order\Factory;
 use Sylius\Component\Order\Model\AdjustmentInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
+/**
+ * @implements AdjustmentFactoryInterface<AdjustmentInterface>
+ */
 class AdjustmentFactory implements AdjustmentFactoryInterface
 {
     public function __construct(private FactoryInterface $adjustmentFactory)

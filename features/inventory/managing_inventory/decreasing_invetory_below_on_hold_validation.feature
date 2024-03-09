@@ -17,7 +17,7 @@ Feature: Validation of decreasing inventory below on hold validation
         And the customer chose "Free" shipping method to "United States" with "Cash on Delivery" payment
         And I am logged in as an administrator
 
-    @ui
+    @ui @api
     Scenario: Decreasing inventory when order was placed
         When I want to modify the "Wyborowa Vodka Exquisite" product variant
         And I change its quantity of inventory to 2
@@ -25,7 +25,7 @@ Feature: Validation of decreasing inventory below on hold validation
         Then I should be notified that on hand quantity must be greater than the number of on hold units
         And this variant should have a 5 item currently in stock
 
-    @ui
+    @ui @api
     Scenario: Decreasing inventory when order was cancelled
         Given the order "#00000023" was cancelled
         When I want to modify the "Wyborowa Vodka Exquisite" product variant
@@ -34,7 +34,7 @@ Feature: Validation of decreasing inventory below on hold validation
         Then I should be notified that it has been successfully edited
         And this variant should have a 2 item currently in stock
 
-    @ui
+    @ui @api
     Scenario: Decreasing inventory when order was paid
         Given the order "#00000023" is already paid
         When I want to modify the "Wyborowa Vodka Exquisite" product variant

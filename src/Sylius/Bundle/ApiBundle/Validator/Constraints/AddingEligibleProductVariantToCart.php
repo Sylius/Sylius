@@ -15,7 +15,6 @@ namespace Sylius\Bundle\ApiBundle\Validator\Constraints;
 
 use Symfony\Component\Validator\Constraint;
 
-/** @experimental */
 final class AddingEligibleProductVariantToCart extends Constraint
 {
     public string $productNotExistMessage = 'sylius.product.not_exist';

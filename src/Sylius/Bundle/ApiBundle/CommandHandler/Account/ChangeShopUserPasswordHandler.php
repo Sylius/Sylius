@@ -20,7 +20,6 @@ use Sylius\Component\User\Security\PasswordUpdaterInterface;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 use Webmozart\Assert\Assert;
 
-/** @experimental */
 final class ChangeShopUserPasswordHandler implements MessageHandlerInterface
 {
     public function __construct(

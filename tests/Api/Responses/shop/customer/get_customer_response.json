@@ -1,0 +1,19 @@
+{
+    "@context": "/api/v2/contexts/Customer",
+    "@id": @string@,
+    "@type": "Customer",
+    "defaultAddress": null,
+    "user": {
+        "@id": @string@,
+        "@type": @string@,
+        "verified": false
+    },
+    "email": "oliver@doe.com",
+    "firstName": "oliver",
+    "lastName": "Doe",
+    "fullName": "oliver Doe",
+    "phoneNumber": null,
+    "gender": "u",
+    "birthday": @date@,
+    "subscribedToNewsletter": false
+}

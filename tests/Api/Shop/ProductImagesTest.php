@@ -24,18 +24,16 @@ final class ProductImagesTest extends JsonApiTestCase
     {
         $fixtures = $this->loadFixturesFromFiles(['product/product_image.yaml', 'authentication/api_administrator.yaml']);
         /** @var ProductImageInterface $productImage */
-        $productImage = $fixtures["product_thumbnail"];
+        $productImage = $fixtures['product_mug_thumbnail'];
 
         $this->client->request(
-            'GET',
-            sprintf('/api/v2/shop/product-images/%s', (string) $productImage->getId()),
-            [],
-            [],
-            self::CONTENT_TYPE_HEADER
+            method: 'GET',
+            uri: sprintf('/api/v2/shop/product-images/%s', (string) $productImage->getId()),
+            server: self::CONTENT_TYPE_HEADER,
         );
         $response = $this->client->getResponse();
 
-        $this->assertResponse($response, 'shop/product/get_product_image_response', Response::HTTP_OK);
+        $this->assertResponse($response, 'shop/product_image/get_product_image_response', Response::HTTP_OK);
     }
 
     /** @test */
@@ -43,17 +41,16 @@ final class ProductImagesTest extends JsonApiTestCase
     {
         $fixtures = $this->loadFixturesFromFiles(['product/product_image.yaml', 'authentication/api_administrator.yaml']);
         /** @var ProductImageInterface $productImage */
-        $productImage = $fixtures["product_thumbnail"];
+        $productImage = $fixtures['product_mug_thumbnail'];
 
         $this->client->request(
-            'GET',
-            sprintf('/api/v2/shop/product-images/%s', (string) $productImage->getId()),
-            ['filter' => 'sylius_small'],
-            [],
-            self::CONTENT_TYPE_HEADER
+            method: 'GET',
+            uri: sprintf('/api/v2/shop/product-images/%s', (string) $productImage->getId()),
+            parameters: ['filter' => 'sylius_small'],
+            server: self::CONTENT_TYPE_HEADER,
         );
         $response = $this->client->getResponse();
 
-        $this->assertResponse($response, 'shop/product/get_filtered_product_image_response', Response::HTTP_OK);
+        $this->assertResponse($response, 'shop/product_image/get_filtered_product_image_response', Response::HTTP_OK);
     }
 }

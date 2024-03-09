@@ -18,6 +18,7 @@
     <class name="Sylius\Bundle\ApiBundle\Command\Cart\ChangeItemQuantityInCart">
         <attribute name="quantity">
             <group>shop:cart:change_quantity</group>
+            <group>sylius:shop:cart:change_quantity</group>
         </attribute>
     </class>
 </serializer>

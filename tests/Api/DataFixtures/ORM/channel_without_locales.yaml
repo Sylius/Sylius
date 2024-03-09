@@ -1,0 +1,16 @@
+Sylius\Component\Core\Model\Channel:
+    channel_web:
+        code: 'WEB'
+        name: 'Web Channel'
+        hostname: 'localhost'
+        contactEmail: 'web@sylius.com'
+        description: 'Lorem ipsum'
+        baseCurrency: '@currency_usd'
+        defaultLocale: '@locale_en'
+        color: 'black'
+        enabled: true
+        taxCalculationStrategy: 'order_items_based'
+
+Sylius\Component\Currency\Model\Currency:
+    currency_usd:
+        code: 'USD'

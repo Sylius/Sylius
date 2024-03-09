@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>{% if title %}{{ title }} - {% endif %}API Platform</title>
+
+    {% block stylesheet %}
+        <link rel="stylesheet" href="{{ asset('bundles/apiplatform/fonts/open-sans/400.css', assetPackage) }}">
+        <link rel="stylesheet" href="{{ asset('bundles/apiplatform/fonts/open-sans/700.css', assetPackage) }}">
+        <link rel="stylesheet" href="{{ asset('bundles/apiplatform/swagger-ui/swagger-ui.css', assetPackage) }}">
+        <link rel="stylesheet" href="{{ asset('bundles/apiplatform/style.css', assetPackage) }}">
+    {% endblock %}
+
+    {% set oauth_data = {'oauth': swagger_data.oauth|merge({'redirectUrl' : absolute_url(asset('bundles/apiplatform/swagger-ui/oauth2-redirect.html', assetPackage)) })} %}
+    {# json_encode(65) is for JSON_UNESCAPED_SLASHES|JSON_HEX_TAG to avoid JS XSS #}
+    <script id="swagger-data" type="application/json">{{ swagger_data|merge(oauth_data)|json_encode(65)|raw }}</script>
+</head>
+
+<body>
+<svg xmlns="http://www.w3.org/2000/svg" style="position:absolute;width:0;height:0">
+    <defs>
+        <symbol viewBox="0 0 20 20" id="unlocked">
+            <path d="M15.8 8H14V5.6C14 2.703 12.665 1 10 1 7.334 1 6 2.703 6 5.6V6h2v-.801C8 3.754 8.797 3 10 3c1.203 0 2 .754 2 2.199V8H4c-.553 0-1 .646-1 1.199V17c0 .549.428 1.139.951 1.307l1.197.387C5.672 18.861 6.55 19 7.1 19h5.8c.549 0 1.428-.139 1.951-.307l1.196-.387c.524-.167.953-.757.953-1.306V9.199C17 8.646 16.352 8 15.8 8z"></path>
+        </symbol>
+
+        <symbol viewBox="0 0 20 20" id="locked">
+            <path d="M15.8 8H14V5.6C14 2.703 12.665 1 10 1 7.334 1 6 2.703 6 5.6V8H4c-.553 0-1 .646-1 1.199V17c0 .549.428 1.139.951 1.307l1.197.387C5.672 18.861 6.55 19 7.1 19h5.8c.549 0 1.428-.139 1.951-.307l1.196-.387c.524-.167.953-.757.953-1.306V9.199C17 8.646 16.352 8 15.8 8zM12 8H8V5.199C8 3.754 8.797 3 10 3c1.203 0 2 .754 2 2.199V8z"></path>
+        </symbol>
+
+        <symbol viewBox="0 0 20 20" id="close">
+            <path d="M14.348 14.849c-.469.469-1.229.469-1.697 0L10 11.819l-2.651 3.029c-.469.469-1.229.469-1.697 0-.469-.469-.469-1.229 0-1.697l2.758-3.15-2.759-3.152c-.469-.469-.469-1.228 0-1.697.469-.469 1.228-.469 1.697 0L10 8.183l2.651-3.031c.469-.469 1.228-.469 1.697 0 .469.469.469 1.229 0 1.697l-2.758 3.152 2.758 3.15c.469.469.469 1.229 0 1.698z"></path>
+        </symbol>
+
+        <symbol viewBox="0 0 20 20" id="large-arrow">
+            <path d="M13.25 10L6.109 2.58c-.268-.27-.268-.707 0-.979.268-.27.701-.27.969 0l7.83 7.908c.268.271.268.709 0 .979l-7.83 7.908c-.268.271-.701.27-.969 0-.268-.269-.268-.707 0-.979L13.25 10z"></path>
+        </symbol>
+
+        <symbol viewBox="0 0 20 20" id="large-arrow-down">
+            <path d="M17.418 6.109c.272-.268.709-.268.979 0s.271.701 0 .969l-7.908 7.83c-.27.268-.707.268-.979 0l-7.908-7.83c-.27-.268-.27-.701 0-.969.271-.268.709-.268.979 0L10 13.25l7.418-7.141z"></path>
+        </symbol>
+
+
+        <symbol viewBox="0 0 24 24" id="jump-to">
+            <path d="M19 7v4H5.83l3.58-3.59L8 6l-6 6 6 6 1.41-1.41L5.83 13H21V7z"></path>
+        </symbol>
+
+        <symbol viewBox="0 0 24 24" id="expand">
+            <path d="M10 18h4v-2h-4v2zM3 6v2h18V6H3zm3 7h12v-2H6v2z"></path>
+        </symbol>
+
+    </defs>
+</svg>
+<header>
+    <a id="logo" href="https://api-platform.com"><img src="{{ asset('bundles/apiplatform/logo-header.svg', assetPackage) }}" alt="API Platform"></a>
+</header>
+
+{% if showWebby %}
+    <div class="web"><img src="{{ asset('bundles/apiplatform/web.png', assetPackage) }}"></div>
+    <div class="webby"><img src="{{ asset('bundles/apiplatform/webby.png', assetPackage) }}"></div>
+{% endif %}
+
+<div id="swagger-ui" class="api-platform"></div>
+
+<div class="swagger-ui" id="formats">
+    <div class="information-container wrapper">
+        <div class="info">
+            Available formats:
+            {% for format in formats|keys %}
+                <a href="{{ path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')|merge({'_format': format})) }}">{{ format }}</a>
+            {% endfor %}
+            <br>
+            Other API docs:
+            {% set active_ui = app.request.get('ui', 'swagger_ui') %}
+            {% if swaggerUiEnabled and active_ui != 'swagger_ui' %}<a href="{{ path('api_doc') }}">Swagger UI</a>{% endif %}
+            {% if reDocEnabled and active_ui != 're_doc' %}<a href="{{ path('api_doc', {'ui': 're_doc'}) }}">ReDoc</a>{% endif %}
+            {# FIXME: Typo in graphql => graphQl in SwaggerUiAction #}
+            {% if not graphqlEnabled %}<a href="javascript:alert('GraphQL support is not enabled, see https://api-platform.com/docs/core/graphql/')">GraphiQL</a>{% endif %}
+            {% if graphiQlEnabled %}<a href="{{ path('api_graphql_graphiql') }}">GraphiQL</a>{% endif %}
+            {% if graphQlPlaygroundEnabled %}<a href="{{ path('api_graphql_graphql_playground') }}">GraphQL Playground</a>{% endif %}
+        </div>
+    </div>
+</div>
+
+{% block javascript %}
+{% if (reDocEnabled and not swaggerUiEnabled) or (reDocEnabled and 're_doc' == active_ui) %}
+    <script src="{{ asset('bundles/apiplatform/redoc/redoc.standalone.js', assetPackage) }}"></script>
+    <script src="{{ asset('bundles/apiplatform/init-redoc-ui.js', assetPackage) }}"></script>
+{% else %}
+    <script src="{{ asset('bundles/apiplatform/swagger-ui/swagger-ui-bundle.js', assetPackage) }}"></script>
+    <script src="{{ asset('bundles/apiplatform/swagger-ui/swagger-ui-standalone-preset.js', assetPackage) }}"></script>
+    <script src="{{ asset('bundles/apiplatform/init-swagger-ui.js', assetPackage) }}"></script>
+{% endif %}
+
+    {# > Sylius #}
+    <script>
+        class ClassWatcher {
+            constructor(targetNode, classToWatch, classAddedCallback, classRemovedCallback) {
+                this.targetNode = targetNode
+                this.classToWatch = classToWatch
+                this.classAddedCallback = classAddedCallback
+                this.classRemovedCallback = classRemovedCallback
+                this.observer = null
+                this.lastClassState = targetNode.classList.contains(this.classToWatch)
+
+                this.init()
+            }
+
+            init() {
+                this.observer = new MutationObserver(this.mutationCallback)
+                this.observe()
+            }
+
+            observe() {
+                this.observer.observe(this.targetNode, { attributes: true })
+            }
+
+            disconnect() {
+                this.observer.disconnect()
+            }
+
+            mutationCallback = mutationsList => {
+                for(let mutation of mutationsList) {
+                    if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+                        let currentClassState = mutation.target.classList.contains(this.classToWatch)
+                        if(this.lastClassState !== currentClassState) {
+                            this.lastClassState = currentClassState
+                            if(currentClassState) {
+                                this.classAddedCallback()
+                            }
+                            else {
+                                this.classRemovedCallback()
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        let tokenRequestContainer = null;
+
+        function credentialsRequestReady() {
+            const tokenRequestContainer2 = document.querySelector('#operations-AdminUserToken-postCredentialsItem').getElementsByClassName('opblock-body')[0];
+
+            const executeWrapper = tokenRequestContainer2.getElementsByClassName('execute-wrapper')[0];
+            new ClassWatcher(executeWrapper, 'btn-group', credentialsRequestFinished, () => {});
+        }
+
+        function credentialsRequestFinished() {
+            const tokenElement = JSON.parse(tokenRequestContainer.querySelector('.highlight-code').getElementsByTagName('code')[0].innerText)
+
+            const buttonLogin = document.querySelector("#swagger-ui > section > div.swagger-ui > div:nth-child(2) > div.scheme-container > section > div > button");
+
+            const mouseEvent = new MouseEvent('click', {
+                view: window,
+                bubbles: true,
+                cancelable: true
+            });
+
+            buttonLogin.dispatchEvent(mouseEvent);
+
+            const authFormField = document.querySelector("#swagger-ui > section > div.swagger-ui > div:nth-child(2) > div.scheme-container > section > div > div > div.modal-ux > div > div > div.modal-ux-content > div > form > div:nth-child(1) > div > div:nth-child(5) > section > input[type=text]");
+
+            const authorizeSubmitButton = document.querySelector("#swagger-ui > section > div.swagger-ui > div:nth-child(2) > div.scheme-container > section > div > div > div.modal-ux > div > div > div.modal-ux-content > div > form > div.auth-btn-wrapper > button.btn.modal-btn.auth.authorize.button");
+
+            const nativeInputValueSetter = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, "value").set;
+            nativeInputValueSetter.call(authFormField, `Bearer ${tokenElement.token}`);
+
+            authFormField.dispatchEvent(new Event('input', { bubbles: true }));
+
+            authorizeSubmitButton.dispatchEvent(mouseEvent);
+
+            const closeAuthFormButton = document.querySelector("#swagger-ui > section > div.swagger-ui > div:nth-child(2) > div.scheme-container > section > div > div > div.modal-ux > div > div > div.modal-ux-content > div > form > div.auth-btn-wrapper > button.btn.modal-btn.auth.btn-done.button");
+
+            closeAuthFormButton.dispatchEvent(mouseEvent);
+        }
+
+        window.addEventListener('load', event => {
+            tokenRequestContainer = document.querySelector('#operations-AdminUserToken-postCredentialsItem');
+
+            new ClassWatcher(tokenRequestContainer, 'is-open', credentialsRequestReady, function(){});
+        });
+    </script>
+    {# Sylius < #}
+{% endblock %}
+
+</body>
+</html>

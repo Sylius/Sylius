@@ -11,14 +11,14 @@ Feature: Viewing children taxons of current taxon
         And the "Clothes" taxon has children taxons "T-Shirts", "Coats" and "Trousers"
         And channel "United States" has menu taxon "Category"
 
-    @ui
+    @ui @api
     Scenario: Viewing only enabled taxons in the vertical menu
         Given the "Coats" taxon is disabled
         When I try to browse products from taxon "Clothes"
         Then I should not see "Coats" in the vertical menu
         And I should see "T-Shirts" and "Trousers" in the vertical menu
 
-    @ui
+    @ui @no-api
     Scenario: Cannot navigate to disabled parent taxon
         Given the "Clothes" taxon is disabled
         When I try to browse products from taxon "T-Shirts"

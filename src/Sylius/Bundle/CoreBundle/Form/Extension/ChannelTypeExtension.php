@@ -18,6 +18,7 @@ use Sylius\Bundle\AddressingBundle\Form\Type\ZoneChoiceType;
 use Sylius\Bundle\ChannelBundle\Form\Type\ChannelType;
 use Sylius\Bundle\CoreBundle\Form\EventSubscriber\AddBaseCurrencySubscriber;
 use Sylius\Bundle\CoreBundle\Form\EventSubscriber\ChannelFormSubscriber;
+use Sylius\Bundle\CoreBundle\Form\Type\ChannelPriceHistoryConfigType;
 use Sylius\Bundle\CoreBundle\Form\Type\ShopBillingDataType;
 use Sylius\Bundle\CoreBundle\Form\Type\TaxCalculationStrategyChoiceType;
 use Sylius\Bundle\CurrencyBundle\Form\Type\CurrencyChoiceType;
@@ -102,14 +103,13 @@ final class ChannelTypeExtension extends AbstractTypeExtension
             ->add('menuTaxon', TaxonAutocompleteChoiceType::class, [
                 'label' => 'sylius.form.channel.menu_taxon',
             ])
+            ->add('channelPriceHistoryConfig', ChannelPriceHistoryConfigType::class, [
+                'label' => false,
+                'required' => false,
+            ])
             ->addEventSubscriber(new AddBaseCurrencySubscriber())
             ->addEventSubscriber(new ChannelFormSubscriber())
         ;
-    }
-
-    public function getExtendedType(): string
-    {
-        return ChannelType::class;
     }
 
     public static function getExtendedTypes(): iterable

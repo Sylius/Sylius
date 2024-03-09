@@ -27,7 +27,7 @@ final class ShipmentAlreadyShippedValidator extends ConstraintValidator
     {
     }
 
-    public function validate($value, Constraint $constraint): void
+    public function validate(mixed $value, Constraint $constraint): void
     {
         Assert::isInstanceOf($constraint, ShipmentAlreadyShipped::class);
         Assert::isInstanceOf($value, ShipShipment::class);

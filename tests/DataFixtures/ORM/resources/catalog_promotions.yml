@@ -4,3 +4,8 @@ Sylius\Component\Core\Model\CatalogPromotion:
         name: Sale1
         enabled: true
         state: inactive
+    sale_2:
+        code: sale2
+        name: Sale2
+        enabled: true
+        state: active

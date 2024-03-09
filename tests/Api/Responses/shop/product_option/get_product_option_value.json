@@ -1,0 +1,9 @@
+{
+    "@context": "\/api\/v2\/contexts\/ProductOptionValue",
+    "@id": "\/api\/v2\/shop\/product-option-values\/COLOR_RED",
+    "@type": "ProductOptionValue",
+    "id": @integer@,
+    "code": "COLOR_RED",
+    "option": "\/api\/v2\/shop\/product-options\/COLOR",
+    "value": "Red"
+}

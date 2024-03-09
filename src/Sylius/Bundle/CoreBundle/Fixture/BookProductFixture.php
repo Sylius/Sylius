@@ -13,7 +13,11 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Fixture;
 
-@trigger_error('The "BookProductFixture" class is deprecated since Sylius 1.5 Use new product fixtures class located at "src/Sylius/Bundle/CoreBundle/Fixture/" instead.', \E_USER_DEPRECATED);
+trigger_deprecation(
+    'sylius/core-bundle',
+    '1.5',
+    'The "BookProductFixture" class is deprecated. Use new product fixtures class located at "src/Sylius/Bundle/CoreBundle/Fixture/" instead.',
+);
 
 use Faker\Factory;
 use Faker\Generator;

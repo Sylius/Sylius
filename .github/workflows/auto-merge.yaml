@@ -3,11 +3,16 @@ name: Auto-merge
 on:
     pull_request: ~
 
+permissions:
+    contents: read
+
 jobs:
     auto-merge:
+        permissions:
+            pull-requests: write
         runs-on: ubuntu-latest
         steps:
-            -   uses: actions/checkout@v3
+            -   uses: actions/checkout@v4
 
             -
                 name: Auto-merge minor dependencies upgrades

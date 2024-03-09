@@ -14,6 +14,8 @@ declare(strict_types=1);
 namespace Sylius\Bundle\ApiBundle\CommandHandler\Checkout;
 
 use SM\Factory\FactoryInterface;
+use Sylius\Abstraction\StateMachine\StateMachineInterface;
+use Sylius\Abstraction\StateMachine\WinzouStateMachineAdapter;
 use Sylius\Bundle\ApiBundle\Command\Checkout\ChooseShippingMethod;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\ShippingMethodInterface;
@@ -25,7 +27,6 @@ use Sylius\Component\Shipping\Checker\Eligibility\ShippingMethodEligibilityCheck
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 use Webmozart\Assert\Assert;
 
-/** @experimental */
 final class ChooseShippingMethodHandler implements MessageHandlerInterface
 {
     public function __construct(
@@ -33,8 +34,19 @@ final class ChooseShippingMethodHandler implements MessageHandlerInterface
         private ShippingMethodRepositoryInterface $shippingMethodRepository,
         private ShipmentRepositoryInterface $shipmentRepository,
         private ShippingMethodEligibilityCheckerInterface $eligibilityChecker,
-        private FactoryInterface $stateMachineFactory,
+        private FactoryInterface|StateMachineInterface $stateMachineFactory,
     ) {
+        if ($this->stateMachineFactory instanceof FactoryInterface) {
+            trigger_deprecation(
+                'sylius/api-bundle',
+                '1.13',
+                sprintf(
+                    'Passing an instance of "%s" as the fifth argument is deprecated. It will accept only instances of "%s" in Sylius 2.0.',
+                    FactoryInterface::class,
+                    StateMachineInterface::class,
+                ),
+            );
+        }
     }
 
     public function __invoke(ChooseShippingMethod $chooseShippingMethod): OrderInterface
@@ -44,10 +56,9 @@ final class ChooseShippingMethodHandler implements MessageHandlerInterface
 
         Assert::notNull($cart, 'Cart has not been found.');
 
-        $stateMachine = $this->stateMachineFactory->get($cart, OrderCheckoutTransitions::GRAPH);
-
+        $stateMachine = $this->getStateMachine();
         Assert::true(
-            $stateMachine->can(OrderCheckoutTransitions::TRANSITION_SELECT_SHIPPING),
+            $stateMachine->can($cart, OrderCheckoutTransitions::GRAPH, OrderCheckoutTransitions::TRANSITION_SELECT_SHIPPING),
             'Order cannot have shipment method assigned.',
         );
 
@@ -66,8 +77,17 @@ final class ChooseShippingMethodHandler implements MessageHandlerInterface
         );
 
         $shipment->setMethod($shippingMethod);
-        $stateMachine->apply(OrderCheckoutTransitions::TRANSITION_SELECT_SHIPPING);
+        $stateMachine->apply($cart, OrderCheckoutTransitions::GRAPH, OrderCheckoutTransitions::TRANSITION_SELECT_SHIPPING);
 
         return $cart;
+    }
+
+    private function getStateMachine(): StateMachineInterface
+    {
+        if ($this->stateMachineFactory instanceof FactoryInterface) {
+            return new WinzouStateMachineAdapter($this->stateMachineFactory);
+        }
+
+        return $this->stateMachineFactory;
     }
 }

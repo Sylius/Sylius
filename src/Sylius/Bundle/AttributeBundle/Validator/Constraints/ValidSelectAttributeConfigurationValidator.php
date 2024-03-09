@@ -21,7 +21,7 @@ use Webmozart\Assert\Assert;
 
 final class ValidSelectAttributeConfigurationValidator extends ConstraintValidator
 {
-    public function validate($value, Constraint $constraint): void
+    public function validate(mixed $value, Constraint $constraint): void
     {
         /** @var AttributeInterface $value */
         Assert::isInstanceOf($value, AttributeInterface::class);
@@ -49,7 +49,7 @@ final class ValidSelectAttributeConfigurationValidator extends ConstraintValidat
             return;
         }
 
-        $multiple = $value->getConfiguration()['multiple'];
+        $multiple = $value->getConfiguration()['multiple'] ?? false;
         if (!$multiple) {
             $this->context->addViolation($constraint->messageMultiple);
 

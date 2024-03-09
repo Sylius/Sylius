@@ -18,7 +18,6 @@ use Sylius\Bundle\ApiBundle\Context\UserContextInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Component\User\Model\UserInterface;
 
-/** @experimental */
 final class LoggedInShopUserIdAwareCommandDataTransformer implements CommandDataTransformerInterface
 {
     public function __construct(private UserContextInterface $userContext)

@@ -45,7 +45,10 @@
                     </attribute>
                 </attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:avatar_image:read</attribute>
+                    <attribute name="groups">
+                        <attribute>admin:avatar_image:show</attribute>
+                        <attribute>sylius:admin:avatar_image:show</attribute>
+                    </attribute>
                 </attribute>
             </collectionOperation>
         </collectionOperations>
@@ -54,7 +57,10 @@
             <itemOperation name="admin_get">
                 <attribute name="method">GET</attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:avatar_image:read</attribute>
+                    <attribute name="groups">
+                        <attribute>admin:avatar_image:show</attribute>
+                        <attribute>sylius:admin:avatar_image:show</attribute>
+                    </attribute>
                 </attribute>
             </itemOperation>
 

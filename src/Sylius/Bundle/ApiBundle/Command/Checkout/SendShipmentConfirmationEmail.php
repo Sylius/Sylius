@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\Command\Checkout;
 
-/** @experimental */
 class SendShipmentConfirmationEmail
 {
     /** @var mixed */

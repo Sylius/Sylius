@@ -13,8 +13,87 @@
 
 <constraint-mapping xmlns="http://symfony.com/schema/dic/constraint-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/constraint-mapping http://symfony.com/schema/dic/services/constraint-mapping-1.0.xsd">
     <class name="Sylius\Component\Core\Model\CatalogPromotionScope">
-        <constraint name="Sylius\Bundle\PromotionBundle\Validator\Constraints\CatalogPromotionScope">
-            <option name="groups">sylius</option>
-        </constraint>
+        <property name="configuration">
+            <constraint name="Collection">
+                <option name="groups">sylius_catalog_promotion_scope_for_products</option>
+                <option name="fields">
+                    <value key="products">
+                        <constraint name="Unique">
+                            <option name="groups">sylius_catalog_promotion_scope_for_products</option>
+                            <option name="message">sylius.catalog_promotion_scope.for_products.unique</option>
+                        </constraint>
+                        <constraint name="NotBlank">
+                            <option name="groups">sylius_catalog_promotion_scope_for_products</option>
+                            <option name="message">sylius.catalog_promotion_scope.for_products.not_empty</option>
+                        </constraint>
+                        <constraint name="All">
+                            <option name="constraints">
+                                <constraint name="NotBlank">
+                                    <option name="groups">sylius_catalog_promotion_scope_for_products</option>
+                                </constraint>
+                                <constraint name="Sylius\Bundle\CoreBundle\Validator\Constraints\ProductCodeExists">
+                                    <option name="groups">sylius_catalog_promotion_scope_for_products</option>
+                                </constraint>
+                            </option>
+                        </constraint>
+                    </value>
+                </option>
+                <option name="allowExtraFields">true</option>
+            </constraint>
+
+            <constraint name="Collection">
+                <option name="groups">sylius_catalog_promotion_scope_for_taxons</option>
+                <option name="fields">
+                    <value key="taxons">
+                        <constraint name="Unique">
+                            <option name="groups">sylius_catalog_promotion_scope_for_taxons</option>
+                            <option name="message">sylius.catalog_promotion_scope.for_taxons.unique</option>
+                        </constraint>
+                        <constraint name="NotBlank">
+                            <option name="groups">sylius_catalog_promotion_scope_for_taxons</option>
+                            <option name="message">sylius.catalog_promotion_scope.for_taxons.not_empty</option>
+                        </constraint>
+                        <constraint name="All">
+                            <option name="constraints">
+                                <constraint name="NotBlank">
+                                    <option name="groups">sylius_catalog_promotion_scope_for_taxons</option>
+                                </constraint>
+                                <constraint name="Sylius\Bundle\CoreBundle\Validator\Constraints\TaxonCodeExists">
+                                    <option name="groups">sylius_catalog_promotion_scope_for_taxons</option>
+                                </constraint>
+                            </option>
+                        </constraint>
+                    </value>
+                </option>
+                <option name="allowExtraFields">true</option>
+            </constraint>
+
+            <constraint name="Collection">
+                <option name="groups">sylius_catalog_promotion_scope_for_variants</option>
+                <option name="fields">
+                    <value key="variants">
+                        <constraint name="Unique">
+                            <option name="groups">sylius_catalog_promotion_scope_for_variants</option>
+                            <option name="message">sylius.catalog_promotion_scope.for_variants.unique</option>
+                        </constraint>
+                        <constraint name="NotBlank">
+                            <option name="groups">sylius_catalog_promotion_scope_for_variants</option>
+                            <option name="message">sylius.catalog_promotion_scope.for_variants.not_empty</option>
+                        </constraint>
+                        <constraint name="All">
+                            <option name="constraints">
+                                <constraint name="NotBlank">
+                                    <option name="groups">sylius_catalog_promotion_scope_for_variants</option>
+                                </constraint>
+                                <constraint name="Sylius\Bundle\CoreBundle\Validator\Constraints\ProductVariantCodeExists">
+                                    <option name="groups">sylius_catalog_promotion_scope_for_variants</option>
+                                </constraint>
+                            </option>
+                        </constraint>
+                    </value>
+                </option>
+                <option name="allowExtraFields">true</option>
+            </constraint>
+        </property>
     </class>
 </constraint-mapping>

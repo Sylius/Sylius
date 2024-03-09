@@ -9,8 +9,11 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Tests\Api\Shop;
 
+use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Tests\Api\JsonApiTestCase;
 use Sylius\Tests\Api\Utils\ShopUserLoginTrait;
 use Symfony\Component\HttpFoundation\Response;
@@ -22,22 +25,14 @@ final class VerifyCustomerAccountsTest extends JsonApiTestCase
     /** @test */
     public function it_resends_account_verification_token(): void
     {
-        self::getContainer();
-
         $this->loadFixturesFromFiles(['channel.yaml', 'cart.yaml', 'authentication/customer.yaml']);
-        $token = $this->logInShopUser('oliver@doe.com');
+        $header = array_merge($this->logInShopUser('oliver@doe.com'), self::CONTENT_TYPE_HEADER);
 
         $this->client->request(
-            'POST',
-            '/api/v2/shop/account-verification-requests',
-            [],
-            [],
-            [
-                'CONTENT_TYPE' => 'application/ld+json',
-                'HTTP_ACCEPT' => 'application/ld+json',
-                'HTTP_Authorization' => sprintf('Bearer %s', $token)
-            ],
-            '{}'
+            method: 'POST',
+            uri: '/api/v2/shop/account-verification-requests',
+            server: $header,
+            content: '{}',
         );
 
         $response = $this->client->getResponse();
@@ -50,25 +45,38 @@ final class VerifyCustomerAccountsTest extends JsonApiTestCase
     /** @test */
     public function it_does_not_allow_to_resend_token_for_not_logged_in_users(): void
     {
-        self::getContainer();
-
         $this->loadFixturesFromFiles(['channel.yaml', 'cart.yaml', 'authentication/customer.yaml']);
 
         $this->client->request(
-            'POST',
-            '/api/v2/shop/account-verification-requests',
-            [],
-            [],
-            [
-                'CONTENT_TYPE' => 'application/ld+json',
-                'HTTP_ACCEPT' => 'application/ld+json',
-            ],
-            '{}'
+            method: 'POST',
+            uri: '/api/v2/shop/account-verification-requests',
+            server: self::CONTENT_TYPE_HEADER,
         );
 
         $response = $this->client->getResponse();
 
         $this->assertResponseCode($response, Response::HTTP_UNAUTHORIZED);
         self::assertEmailCount(0);
+    }
+
+    /** @test */
+    public function it_verifies_customer_account(): void
+    {
+        $data = $this->loadFixturesFromFiles(['channel.yaml', 'cart.yaml', 'authentication/customer.yaml']);
+
+        /** @var ShopUserInterface $shopUser */
+        $shopUser = $data['shop_user_oliver'];
+        $shopUser->setEmailVerificationToken('token');
+        $this->getEntityManager()->flush();
+
+        $this->client->request(
+            method: 'PATCH',
+            uri: '/api/v2/shop/account-verification-requests/token',
+            server: self::PATCH_CONTENT_TYPE_HEADER,
+            content: '{}',
+        );
+
+        $this->assertResponseCode($this->client->getResponse(), Response::HTTP_ACCEPTED);
+        self::assertEmailCount(1);
     }
 }

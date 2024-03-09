@@ -21,7 +21,7 @@ Feature: Checking out as guest with a registered email
         And I confirm my order
         Then I should see the thank you page
 
-    @ui
+    @ui @api
     Scenario: Placing an order using email with mixed case
         Given I have product "PHP T-Shirt" in the cart
         When I complete addressing step with email "JOhn@example.COM" and "United States" based billing address

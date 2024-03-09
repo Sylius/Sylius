@@ -1,0 +1,121 @@
+{
+    "@context": "\/api\/v2\/contexts\/ProductVariant",
+    "@id": "\/api\/v2\/admin\/product-variants",
+    "@type": "hydra:Collection",
+    "hydra:member": [
+        {
+            "@id": "\/api\/v2\/admin\/product-variants/MUG",
+            "@type": "ProductVariant",
+            "code": "MUG",
+            "product": "\/api\/v2\/admin\/products\/MUG_SW",
+            "optionValues":[
+                "\/api\/v2\/admin\/product-option-values\/COLOR_BLUE"
+            ],
+            "channelPricings": {
+                "WEB": {
+                    "@id": "/api/v2/admin/channel-pricings/@integer@",
+                    "@type": "ChannelPricing",
+                    "price": 2000,
+                    "originalPrice": null,
+                    "lowestPriceBeforeDiscount": null,
+                    "minimumPrice": 0,
+                    "appliedPromotions": []
+                }
+            },
+            "translations": {
+                "en_US": {
+                    "@id": "\/api\/v2\/admin\/product-variant-translations\/@integer@",
+                    "@type": "ProductVariantTranslation",
+                    "id": @integer@,
+                    "name": "Mug"
+                }
+            },
+            "enabled": true,
+            "position": 1,
+            "tracked": true,
+            "onHold": 0,
+            "onHand": 10,
+            "weight": 100.5,
+            "width": 100.5,
+            "height": 100.5,
+            "depth": 100.5,
+            "taxCategory": "\/api\/v2\/admin\/tax-categories\/default",
+            "shippingCategory": "\/api\/v2\/admin\/shipping-categories\/default",
+            "shippingRequired": true,
+            "createdAt": @date@,
+            "updatedAt": @date@
+        },
+        {
+            "@id": "\/api\/v2\/admin\/product-variants/MUG_2",
+            "@type": "ProductVariant",
+            "code": "MUG_2",
+            "product": "\/api\/v2\/admin\/products\/MUG_SW",
+            "optionValues": [],
+            "channelPricings": {
+                "WEB": {
+                    "@id": "/api/v2/admin/channel-pricings/@integer@",
+                    "@type": "ChannelPricing",
+                    "price": 3000,
+                    "originalPrice": null,
+                    "lowestPriceBeforeDiscount": null,
+                    "minimumPrice": 0,
+                    "appliedPromotions": []
+                }
+            },
+            "translations": {
+                "en_US": {
+                    "@id": "\/api\/v2\/admin\/product-variant-translations\/@integer@",
+                    "@type": "ProductVariantTranslation",
+                    "id": @integer@,
+                    "name": "Mug 2"
+                }
+            },
+            "enabled": true,
+            "position": 2,
+            "tracked": false,
+            "onHold": 0,
+            "onHand": 0,
+            "weight": null,
+            "width": null,
+            "height": null,
+            "depth": null,
+            "taxCategory": null,
+            "shippingCategory": null,
+            "shippingRequired": true,
+            "createdAt": @date@,
+            "updatedAt": @date@
+        }
+    ],
+    "hydra:totalItems": 2,
+    "hydra:search": {
+        "@type": "hydra:IriTemplate",
+        "hydra:template": "\/api\/v2\/admin\/product-variants{?order[position],product,product[],catalogPromotion}",
+        "hydra:variableRepresentation": "BasicRepresentation",
+        "hydra:mapping": [
+            {
+                "@type": "IriTemplateMapping",
+                "variable": "order[position]",
+                "property": "position",
+                "required": false
+            },
+            {
+                "@type": "IriTemplateMapping",
+                "variable": "product",
+                "property": "product",
+                "required": false
+            },
+            {
+                "@type": "IriTemplateMapping",
+                "variable": "product[]",
+                "property": "product",
+                "required": false
+            },
+            {
+                "@type": "IriTemplateMapping",
+                "variable": "catalogPromotion",
+                "property": null,
+                "required": false
+            }
+        ]
+    }
+}

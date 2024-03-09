@@ -28,6 +28,5 @@ default:
                 - sylius.behat.context.domain.notification
                 - sylius.behat.context.domain.security
 
-
             filters:
                 tags: "@managing_promotion_coupons&&@domain"

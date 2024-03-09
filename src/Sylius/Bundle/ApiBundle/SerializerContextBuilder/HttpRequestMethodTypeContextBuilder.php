@@ -17,7 +17,6 @@ use ApiPlatform\Core\Serializer\SerializerContextBuilderInterface;
 use Sylius\Bundle\ApiBundle\Serializer\ContextKeys;
 use Symfony\Component\HttpFoundation\Request;
 
-/** @experimental */
 final class HttpRequestMethodTypeContextBuilder implements SerializerContextBuilderInterface
 {
     public function __construct(private SerializerContextBuilderInterface $decoratedLocaleBuilder)

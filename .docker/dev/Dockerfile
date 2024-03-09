@@ -1,6 +1,6 @@
 FROM sylius/standard:1.11-traditional
 
-RUN apt-get update && apt-get install php8.0-xdebug && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /usr/share/doc/*
+RUN apt-get update && apt-get install curl php8.0-xdebug -y && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /usr/share/doc/*
 
 RUN version=$(php -r "echo PHP_MAJOR_VERSION.PHP_MINOR_VERSION;") \
     && architecture=$(uname -m) \

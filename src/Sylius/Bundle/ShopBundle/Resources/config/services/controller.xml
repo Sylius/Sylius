@@ -22,7 +22,7 @@
             <argument type="service" id="sylius.context.channel" />
             <argument type="service" id="sylius.context.customer" />
             <argument type="service" id="sylius.context.locale" />
-            <argument type="service" id="sylius.email_manager.contact" />
+            <argument type="service" id="sylius.mailer.contact_email_manager.shop" />
         </service>
 
         <service id="sylius.controller.shop.homepage" class="Sylius\Bundle\ShopBundle\Controller\HomepageController">
@@ -45,6 +45,14 @@
 
         <service id="sylius.controller.shop.security_widget" class="Sylius\Bundle\ShopBundle\Controller\SecurityWidgetController">
             <argument type="service" id="twig" />
+        </service>
+
+        <service id="sylius.controller.shop.register_thank_you" class="Sylius\Bundle\ShopBundle\Controller\RegistrationThankYouController">
+            <argument type="service" id="twig" />
+            <argument type="service" id="sylius.context.channel" />
+            <argument type="service" id="router.default" />
+
+            <tag name="controller.service_arguments" />
         </service>
     </services>
 </container>

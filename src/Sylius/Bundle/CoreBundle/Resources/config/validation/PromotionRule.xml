@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Sylius Sp. z o.o.
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<constraint-mapping xmlns="http://symfony.com/schema/dic/constraint-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/constraint-mapping http://symfony.com/schema/dic/services/constraint-mapping-1.0.xsd">
+    <class name="Sylius\Component\Promotion\Model\PromotionRule">
+        <property name="configuration">
+            <constraint name="Collection">
+                <option name="allowExtraFields">true</option>
+                <option name="groups">sylius_promotion_rule_cart_quantity</option>
+                <option name="fields">
+                    <value key="count">
+                        <constraint name="NotBlank">
+                            <option name="groups">sylius_promotion_rule_cart_quantity</option>
+                        </constraint>
+                        <constraint name="Type">
+                            <option name="type">numeric</option>
+                            <option name="groups">sylius_promotion_rule_cart_quantity</option>
+                        </constraint>
+                    </value>
+                </option>
+            </constraint>
+
+            <constraint name="Collection">
+                <option name="allowExtraFields">true</option>
+                <option name="groups">sylius_promotion_rule_customer_group</option>
+                <option name="fields">
+                    <value key="group_code">
+                        <constraint name="NotBlank">
+                            <option name="groups">sylius_promotion_rule_customer_group</option>
+                        </constraint>
+                        <constraint name="Type">
+                            <option name="type">string</option>
+                            <option name="groups">sylius_promotion_rule_customer_group</option>
+                        </constraint>
+                        <constraint name="Sylius\Bundle\CoreBundle\Validator\Constraints\CustomerGroupCodeExists">
+                            <option name="groups">sylius_promotion_rule_customer_group</option>
+                        </constraint>
+                    </value>
+                </option>
+            </constraint>
+
+            <constraint name="Collection">
+                <option name="allowExtraFields">true</option>
+                <option name="groups">sylius_promotion_rule_nth_order</option>
+                <option name="fields">
+                    <value key="nth">
+                        <constraint name="NotBlank">
+                            <option name="groups">sylius_promotion_rule_nth_order</option>
+                        </constraint>
+                        <constraint name="Type">
+                            <option name="type">numeric</option>
+                            <option name="groups">sylius_promotion_rule_nth_order</option>
+                        </constraint>
+                    </value>
+                </option>
+            </constraint>
+
+            <constraint name="Collection">
+                <option name="allowExtraFields">true</option>
+                <option name="groups">sylius_promotion_rule_shipping_country</option>
+                <option name="fields">
+                    <value key="country">
+                        <constraint name="NotBlank">
+                            <option name="groups">sylius_promotion_rule_shipping_country</option>
+                        </constraint>
+                        <constraint name="Type">
+                            <option name="type">string</option>
+                            <option name="groups">sylius_promotion_rule_shipping_country</option>
+                        </constraint>
+                        <constraint name="Sylius\Bundle\CoreBundle\Validator\Constraints\CountryCodeExists">
+                            <option name="groups">sylius_promotion_rule_shipping_country</option>
+                        </constraint>
+                    </value>
+                </option>
+            </constraint>
+
+            <constraint name="Collection">
+                <option name="allowExtraFields">true</option>
+                <option name="groups">sylius_promotion_rule_has_taxon</option>
+                <option name="fields">
+                    <value key="taxons">
+                        <constraint name="All">
+                            <option name="groups">sylius_promotion_rule_has_taxon</option>
+                            <option name="constraints">
+                                <constraint name="NotBlank">
+                                    <option name="groups">sylius_promotion_rule_has_taxon</option>
+                                </constraint>
+                                <constraint name="Sylius\Bundle\CoreBundle\Validator\Constraints\TaxonCodeExists">
+                                    <option name="groups">sylius_promotion_rule_has_taxon</option>
+                                </constraint>
+                            </option>
+                        </constraint>
+                    </value>
+                </option>
+            </constraint>
+
+            <constraint name="Sylius\Bundle\CoreBundle\Validator\Constraints\ChannelCodeCollection">
+                <option name="allowExtraFields">true</option>
+                <option name="groups">sylius_promotion_rule_total_of_items_from_taxon</option>
+                <option name="validateAgainstAllChannels">true</option>
+                <option name="channelAwarePropertyPath">promotion</option>
+                <option name="constraints">
+                    <constraint name="Collection">
+                        <option name="allowExtraFields">true</option>
+                        <option name="groups">sylius_promotion_rule_total_of_items_from_taxon</option>
+                        <option name="fields">
+                            <value key="amount">
+                                <constraint name="NotBlank">
+                                    <option name="groups">sylius_promotion_rule_total_of_items_from_taxon</option>
+                                </constraint>
+                                <constraint name="Type">
+                                    <option name="type">numeric</option>
+                                    <option name="groups">sylius_promotion_rule_total_of_items_from_taxon</option>
+                                </constraint>
+                            </value>
+                            <value key="taxon">
+                                <constraint name="NotBlank">
+                                    <option name="groups">sylius_promotion_rule_total_of_items_from_taxon</option>
+                                </constraint>
+                                <constraint name="Sylius\Bundle\CoreBundle\Validator\Constraints\TaxonCodeExists">
+                                    <option name="groups">sylius_promotion_rule_total_of_items_from_taxon</option>
+                                </constraint>
+                            </value>
+                        </option>
+                    </constraint>
+                </option>
+            </constraint>
+
+            <constraint name="Collection">
+                <option name="allowExtraFields">true</option>
+                <option name="groups">sylius_promotion_rule_contains_product</option>
+                <option name="fields">
+                    <value key="product_code">
+                        <constraint name="NotBlank">
+                            <option name="groups">sylius_promotion_rule_contains_product</option>
+                        </constraint>
+                        <constraint name="Type">
+                            <option name="type">string</option>
+                            <option name="groups">sylius_promotion_rule_contains_product</option>
+                        </constraint>
+                        <constraint name="Sylius\Bundle\CoreBundle\Validator\Constraints\ProductCodeExists">
+                            <option name="groups">sylius_promotion_rule_contains_product</option>
+                        </constraint>
+                    </value>
+                </option>
+            </constraint>
+
+            <constraint name="Sylius\Bundle\CoreBundle\Validator\Constraints\ChannelCodeCollection">
+                <option name="allowExtraFields">true</option>
+                <option name="groups">sylius_promotion_rule_item_total</option>
+                <option name="validateAgainstAllChannels">true</option>
+                <option name="channelAwarePropertyPath">promotion</option>
+                <option name="constraints">
+                    <constraint name="Collection">
+                        <option name="allowExtraFields">true</option>
+                        <option name="groups">sylius_promotion_rule_item_total</option>
+                        <option name="fields">
+                            <value key="amount">
+                                <constraint name="NotBlank">
+                                    <option name="groups">sylius_promotion_rule_item_total</option>
+                                </constraint>
+                                <constraint name="Type">
+                                    <option name="type">numeric</option>
+                                    <option name="groups">sylius_promotion_rule_item_total</option>
+                                </constraint>
+                            </value>
+                        </option>
+                    </constraint>
+                </option>
+            </constraint>
+        </property>
+    </class>
+</constraint-mapping>

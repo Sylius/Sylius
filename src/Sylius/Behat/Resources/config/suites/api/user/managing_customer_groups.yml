@@ -14,6 +14,8 @@ default:
                 - sylius.behat.context.setup.customer_group
 
                 - sylius.behat.context.api.admin.managing_customer_groups
+                - sylius.behat.context.api.admin.response
+                - sylius.behat.context.api.admin.save
 
             filters:
                 tags: "@managing_customer_groups&&@api"

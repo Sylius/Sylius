@@ -16,6 +16,7 @@ namespace spec\Sylius\Bundle\ApiBundle\Serializer;
 use ApiPlatform\Core\DataTransformer\DataTransformerInterface;
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ApiBundle\Command\Catalog\AddProductReview;
+use Sylius\Bundle\ApiBundle\Command\IriToIdentifierConversionAwareInterface;
 use Sylius\Bundle\ApiBundle\Converter\IriToIdentifierConverterInterface;
 use Sylius\Component\Core\Model\Order;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
@@ -23,12 +24,12 @@ use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 final class CommandArgumentsDenormalizerSpec extends ObjectBehavior
 {
     function let(
-        DenormalizerInterface $objectNormalizer,
+        DenormalizerInterface $commandDenormalizer,
         IriToIdentifierConverterInterface $iriToIdentifierConverter,
         DataTransformerInterface $commandAwareInputDataTransformer,
     ): void {
         $this->beConstructedWith(
-            $objectNormalizer,
+            $commandDenormalizer,
             $iriToIdentifierConverter,
             $commandAwareInputDataTransformer,
         );
@@ -36,7 +37,7 @@ final class CommandArgumentsDenormalizerSpec extends ObjectBehavior
 
     function it_supports_denormalization_add_product_review(): void
     {
-        $context['input']['class'] = AddProductReview::class;
+        $context = ['input' => ['class' => AddProductReview::class]];
 
         $this
             ->supportsDenormalization(
@@ -51,7 +52,7 @@ final class CommandArgumentsDenormalizerSpec extends ObjectBehavior
 
     function it_does_not_support_denormalization_for_not_supported_class(): void
     {
-        $context['input']['class'] = Order::class;
+        $context = ['input' => ['class' => Order::class]];
 
         $this
             ->supportsDenormalization(
@@ -65,11 +66,11 @@ final class CommandArgumentsDenormalizerSpec extends ObjectBehavior
     }
 
     function it_denormalizes_add_product_review_and_transforms_product_field_from_iri_to_code(
-        DenormalizerInterface $objectNormalizer,
-        iriToIdentifierConverterInterface $iriToIdentifierConverter,
+        DenormalizerInterface $commandDenormalizer,
+        IriToIdentifierConverterInterface $iriToIdentifierConverter,
         DataTransformerInterface $commandAwareInputDataTransformer,
     ): void {
-        $context['input']['class'] = AddProductReview::class;
+        $context = ['input' => ['class' => AddProductReview::class]];
 
         $addProductReview = new AddProductReview('Cap', 5, 'ok', 'cap_code', 'john@example.com');
 
@@ -80,15 +81,15 @@ final class CommandArgumentsDenormalizerSpec extends ObjectBehavior
         $iriToIdentifierConverter->isIdentifier('/api/v2/shop/products/cap_code')->willReturn(true);
         $iriToIdentifierConverter->getIdentifier('/api/v2/shop/products/cap_code')->willReturn('cap_code');
 
-        $objectNormalizer
+        $commandDenormalizer
             ->denormalize(
                 [
-                'title' => 'Cap',
-                'rating' => 5,
-                'comment' => 'ok',
-                'product' => 'cap_code',
-                'email' => 'john@example.com',
-            ],
+                    'title' => 'Cap',
+                    'rating' => 5,
+                    'comment' => 'ok',
+                    'product' => 'cap_code',
+                    'email' => 'john@example.com',
+                ],
                 AddProductReview::class,
                 null,
                 $context,
@@ -108,17 +109,94 @@ final class CommandArgumentsDenormalizerSpec extends ObjectBehavior
         $this
             ->denormalize(
                 [
-                'title' => 'Cap',
-                'rating' => 5,
-                'comment' => 'ok',
-                'product' => '/api/v2/shop/products/cap_code',
-                'email' => 'john@example.com',
-            ],
+                    'title' => 'Cap',
+                    'rating' => 5,
+                    'comment' => 'ok',
+                    'product' => '/api/v2/shop/products/cap_code',
+                    'email' => 'john@example.com',
+                ],
                 AddProductReview::class,
                 null,
                 $context,
             )
             ->shouldReturn($addProductReview)
+        ;
+    }
+
+    function it_denormalizes_a_command_with_an_array_of_iris(
+        DenormalizerInterface $commandDenormalizer,
+        IriToIdentifierConverterInterface $iriToIdentifierConverter,
+        DataTransformerInterface $commandAwareInputDataTransformer,
+    ): void {
+        $command = new class() implements IriToIdentifierConversionAwareInterface {
+            public string $iri = '/api/v2/iri';
+
+            public array $arrayIris = [
+                '/api/v2/first-iri',
+                '/api/v2/second-iri',
+            ];
+
+            public array $arrayField = ['array'];
+        };
+        $context = ['input' => ['class' => $command::class]];
+
+        $iriToIdentifierConverter->isIdentifier('array')->willReturn(false);
+
+        $iriToIdentifierConverter->isIdentifier('/api/v2/iri')->willReturn(true);
+        $iriToIdentifierConverter->getIdentifier('/api/v2/iri')->willReturn('iri');
+
+        $iriToIdentifierConverter->isIdentifier('/api/v2/first-iri')->willReturn(true);
+        $iriToIdentifierConverter->getIdentifier('/api/v2/first-iri')->willReturn('first-iri');
+
+        $iriToIdentifierConverter->isIdentifier('')->willReturn(false);
+        $iriToIdentifierConverter->getIdentifier('')->shouldNotBeCalled();
+
+        $iriToIdentifierConverter->isIdentifier('/api/v2/second-iri')->willReturn(true);
+        $iriToIdentifierConverter->getIdentifier('/api/v2/second-iri')->willReturn('second-iri');
+
+        $commandDenormalizer
+            ->denormalize(
+                [
+                    'iri' => 'iri',
+                    'arrayIris' => [
+                        'first-iri',
+                        'second-iri',
+                        '',
+                    ],
+                    'arrayField' => ['array'],
+                ],
+                $command::class,
+                null,
+                $context,
+            )
+            ->willReturn($command)
+        ;
+
+        $commandAwareInputDataTransformer
+            ->supportsTransformation($command, $command::class, $context)
+            ->willReturn(false)
+        ;
+        $commandAwareInputDataTransformer
+            ->transform($command, $command::class, $context)
+            ->shouldNotBeCalled()
+        ;
+
+        $this
+            ->denormalize(
+                [
+                    'iri' => '/api/v2/iri',
+                    'arrayIris' => [
+                        '/api/v2/first-iri',
+                        '/api/v2/second-iri',
+                        '',
+                    ],
+                    'arrayField' => ['array'],
+                ],
+                $command::class,
+                null,
+                $context,
+            )
+            ->shouldReturn($command)
         ;
     }
 }

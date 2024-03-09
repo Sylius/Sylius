@@ -15,6 +15,15 @@ namespace Sylius\Bundle\AdminBundle\EmailManager;
 
 use Sylius\Component\Core\Model\ShipmentInterface;
 
+trigger_deprecation(
+    'sylius/admin-bundle',
+    '1.13',
+    'The "%s" interface is deprecated, use "%s" instead.',
+    ShipmentEmailManagerInterface::class,
+    \Sylius\Bundle\CoreBundle\Mailer\ShipmentEmailManagerInterface::class,
+);
+
+/** @deprecated since Sylius 1.13 and will be removed in Sylius 2.0. Use {@see \Sylius\Bundle\CoreBundle\Mailer\ShipmentEmailManagerInterface} instead. */
 interface ShipmentEmailManagerInterface
 {
     public function sendConfirmationEmail(ShipmentInterface $shipment): void;

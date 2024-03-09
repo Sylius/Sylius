@@ -9,13 +9,13 @@ Feature: Deleting the customer account
         And there is a user "theodore@example.com" identified by "pswd"
         And I am logged in as an administrator
 
-    @ui
+    @api @ui
     Scenario: Deleting account should not delete customer details
         When I delete the account of "theodore@example.com" user
         Then the user account should be deleted
         But the customer with this email should still exist
 
-    @ui
+    @api @ui
     Scenario: A customer with no user cannot be deleted
         Given the account of "theodore@example.com" was deleted
         Then I should not be able to delete it again

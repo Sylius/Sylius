@@ -21,5 +21,5 @@ interface PromotionCouponGeneratorInterface
     /**
      * @return array|PromotionCouponInterface[]
      */
-    public function generate(PromotionInterface $promotion, PromotionCouponGeneratorInstructionInterface $instruction): array;
+    public function generate(PromotionInterface $promotion, ReadablePromotionCouponGeneratorInstructionInterface $instruction): array;
 }

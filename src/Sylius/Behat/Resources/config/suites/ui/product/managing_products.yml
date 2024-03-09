@@ -5,6 +5,7 @@ default:
     suites:
         ui_managing_products:
             contexts:
+                - sylius.behat.context.hook.cache
                 - sylius.behat.context.hook.doctrine_orm
                 - sylius.behat.context.hook.session
 
@@ -19,6 +20,7 @@ default:
                 - sylius.behat.context.transform.product
                 - sylius.behat.context.transform.product_association_type
                 - sylius.behat.context.transform.product_option
+                - sylius.behat.context.transform.product_variant
                 - sylius.behat.context.transform.shared_storage
                 - sylius.behat.context.transform.shipping_method
                 - sylius.behat.context.transform.taxon
@@ -48,6 +50,7 @@ default:
                 - sylius.behat.context.ui.admin.managing_products
                 - sylius.behat.context.ui.admin.notification
                 - sylius.behat.context.ui.shop.browsing_product
+                - Sylius\Behat\Context\Ui\Admin\ManagingProductTaxonsContext
                 - Sylius\Behat\Context\Ui\Admin\RemovingProductContext
 
             filters:

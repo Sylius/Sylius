@@ -1,0 +1,67 @@
+Sylius\Component\Core\Model\Order:
+    order:
+        channel: "@channel_web"
+        currencyCode: "USD"
+        localeCode: "en_US"
+        state: "new"
+        tokenValue: "token"
+        customer: "@customer_tony"
+        billingAddress: "@billing_address"
+        shippingAddress: "@shipping_address"
+        items: ['@order_item']
+
+Sylius\Component\Core\Model\Address:
+    billing_address:
+        customer: "@customer_tony"
+        firstName: "Andrzej"
+        lastName: "Legs"
+        company: "Polmotors office"
+        street: "Moniuszki 16/20"
+        countryCode: "PL"
+        city: "Pabianice"
+        postcode: "31-999"
+        phoneNumber: "111999222"
+        provinceCode: "PL-PL"
+        provinceName: "kujawsko-pomorskie"
+
+    shipping_address:
+        customer: "@customer_tony"
+        firstName: "Andrzej"
+        lastName: "Legs"
+        company: "Polmotors manufactory"
+        street: "Moniuszki 16/20"
+        countryCode: "PL"
+        city: "Pabianice"
+        postcode: "31-999"
+        phoneNumber: "111999222"
+        provinceCode: "PL-PL"
+        provinceName: "kujawsko-pomorskie"
+        
+Sylius\Component\Core\Model\OrderItem:
+    order_item:
+        variant: "@product_variant"
+        order: "@order"
+        
+Sylius\Component\Core\Model\OrderItemUnit:
+    order_item_unit:
+        __construct: ['@order_item']
+        createdAt: "<(new \\DateTime())>"
+        updatedAt: "<(new \\DateTime())>"
+    
+Sylius\Component\Core\Model\Adjustment:
+    adjustment_1:
+        type: promotion
+        label: Promotion
+        amount: 1000
+        neutral: false
+        adjustable: '@order_item'
+        createdAt: "<(new \\DateTime())>"
+        updatedAt: "<(new \\DateTime())>"
+    adjustment_2:
+        type: order_promotion
+        label: New Year
+        amount: -500
+        neutral: false
+        adjustable: '@order_item_unit'
+        createdAt: "<(new \\DateTime())>"
+        updatedAt: "<(new \\DateTime())>"

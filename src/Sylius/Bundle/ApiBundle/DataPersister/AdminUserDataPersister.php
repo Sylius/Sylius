@@ -20,7 +20,6 @@ use Sylius\Component\User\Model\UserInterface;
 use Sylius\Component\User\Security\PasswordUpdaterInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
-/** @experimental */
 final class AdminUserDataPersister implements ContextAwareDataPersisterInterface
 {
     public function __construct(

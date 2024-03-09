@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Sylius Sp. z o.o.
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<constraint-mapping xmlns="http://symfony.com/schema/dic/constraint-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/constraint-mapping http://symfony.com/schema/dic/services/constraint-mapping-1.0.xsd">
+    <class name="Sylius\Component\Promotion\Model\CatalogPromotionAction">
+        <property name="configuration">
+            <constraint name="Sylius\Bundle\CoreBundle\Validator\Constraints\ChannelCodeCollection">
+                <option name="channelAwarePropertyPath">catalogPromotion</option>
+                <option name="groups">sylius_catalog_promotion_action_fixed_discount</option>
+                <option name="constraints">
+                    <constraint name="Collection">
+                        <option name="groups">sylius_catalog_promotion_action_fixed_discount</option>
+                        <option name="fields">
+                            <value key="amount">
+                                <constraint name="NotBlank">
+                                    <option name="message">sylius.catalog_promotion_action.fixed_discount.not_valid</option>
+                                    <option name="groups">sylius_catalog_promotion_action_fixed_discount</option>
+                                </constraint>
+                                <constraint name="Type">
+                                    <option name="type">numeric</option>
+                                    <option name="message">sylius.catalog_promotion_action.fixed_discount.not_valid</option>
+                                    <option name="groups">sylius_catalog_promotion_action_fixed_discount</option>
+                                </constraint>
+                            </value>
+                        </option>
+                    </constraint>
+                </option>
+                <option name="allowExtraFields">true</option>
+            </constraint>
+        </property>
+    </class>
+</constraint-mapping>

@@ -1,0 +1,31 @@
+framework:
+    workflows:
+        !php/const Sylius\Component\Core\OrderShippingTransitions::GRAPH:
+            type: state_machine
+            marking_store:
+                type: method
+                property: shippingState
+            supports:
+                - Sylius\Component\Core\Model\OrderInterface
+            initial_marking: !php/const Sylius\Component\Core\OrderShippingStates::STATE_CART
+            places:
+                - !php/const Sylius\Component\Core\OrderShippingStates::STATE_CART
+                - !php/const Sylius\Component\Core\OrderShippingStates::STATE_READY
+                - !php/const Sylius\Component\Core\OrderShippingStates::STATE_CANCELLED
+                - !php/const Sylius\Component\Core\OrderShippingStates::STATE_PARTIALLY_SHIPPED
+                - !php/const Sylius\Component\Core\OrderShippingStates::STATE_SHIPPED
+            transitions:
+                !php/const Sylius\Component\Core\OrderShippingTransitions::TRANSITION_REQUEST_SHIPPING:
+                    from: !php/const Sylius\Component\Core\OrderShippingStates::STATE_CART
+                    to: !php/const Sylius\Component\Core\OrderShippingStates::STATE_READY
+                !php/const Sylius\Component\Core\OrderShippingTransitions::TRANSITION_CANCEL:
+                    from: !php/const Sylius\Component\Core\OrderShippingStates::STATE_READY
+                    to: !php/const Sylius\Component\Core\OrderShippingStates::STATE_CANCELLED
+                !php/const Sylius\Component\Core\OrderShippingTransitions::TRANSITION_PARTIALLY_SHIP:
+                    from: !php/const Sylius\Component\Core\OrderShippingStates::STATE_READY
+                    to: !php/const Sylius\Component\Core\OrderShippingStates::STATE_PARTIALLY_SHIPPED
+                !php/const Sylius\Component\Core\OrderShippingTransitions::TRANSITION_SHIP:
+                    from: 
+                        - !php/const Sylius\Component\Core\OrderShippingStates::STATE_READY
+                        - !php/const Sylius\Component\Core\OrderShippingStates::STATE_PARTIALLY_SHIPPED
+                    to: !php/const Sylius\Component\Core\OrderShippingStates::STATE_SHIPPED

@@ -31,6 +31,7 @@ final class UserContext implements Context
         private ExampleFactoryInterface $userFactory,
         private ObjectManager $userManager,
         private MessageBusInterface $messageBus,
+        private string $passwordResetTokenTtl,
     ) {
     }
 
@@ -151,6 +152,26 @@ final class UserContext implements Context
 
         $user->setPasswordResetToken($token);
         $user->setPasswordRequestedAt(new \DateTime());
+
+        $this->userManager->flush();
+    }
+
+    /**
+     * @Given /^(I) waited too long, and the token expired$/
+     */
+    public function iWaitedTooLongAndTheTokenExpired(UserInterface $user): void
+    {
+        /** @var \DateTime $passwordRequestedAt */
+        $passwordRequestedAt = $user->getPasswordRequestedAt();
+
+        // Subtracting the ttl twice because date operations tend to be wobbly
+        // and might result in random fails due to skip years, daylight saving
+        // time date changes, etc
+        $interval = new \DateInterval($this->passwordResetTokenTtl);
+        $passwordRequestedAt->sub($interval);
+        $passwordRequestedAt->sub($interval);
+
+        $user->setPasswordRequestedAt($passwordRequestedAt);
 
         $this->userManager->flush();
     }

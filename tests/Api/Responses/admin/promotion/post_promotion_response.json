@@ -1,0 +1,189 @@
+{
+    "@context": "\/api\/v2\/contexts\/Promotion",
+    "@id": "\/api\/v2\/admin\/promotions\/tshirts_discount",
+    "@type": "Promotion",
+    "channels": [
+        "\/api\/v2\/admin\/channels\/WEB"
+    ],
+    "id":"@integer@",
+    "code": "tshirts_discount",
+    "name": "T-Shirts discount",
+    "description": "T-Shirts discount",
+    "priority": 22,
+    "exclusive": true,
+    "usageLimit": 3,
+    "used": 0,
+    "archivedAt": null,
+    "startsAt": "2023-10-04 12:30:00",
+    "endsAt": "2023-11-04 12:30:00",
+    "couponBased": true,
+    "coupons": [],
+    "rules": [
+        {
+            "@id": "\/api\/v2\/admin\/promotion-rules\/@integer@",
+            "@type": "PromotionRule",
+            "id": @integer@,
+            "type": "cart_quantity",
+            "configuration": {
+                "count": 6
+            }
+        },
+        {
+            "@id": "\/api\/v2\/admin\/promotion-rules\/@integer@",
+            "@type": "PromotionRule",
+            "id": @integer@,
+            "type": "customer_group",
+            "configuration": {
+                "group_code": "vip"
+            }
+        },
+        {
+            "@id": "\/api\/v2\/admin\/promotion-rules\/@integer@",
+            "@type": "PromotionRule",
+            "id": @integer@,
+            "type": "nth_order",
+            "configuration": {
+                "nth": 2
+            }
+        },
+        {
+            "@id": "\/api\/v2\/admin\/promotion-rules\/@integer@",
+            "@type": "PromotionRule",
+            "id": @integer@,
+            "type": "shipping_country",
+            "configuration": {
+                "country": "US"
+            }
+        },
+        {
+            "@id": "\/api\/v2\/admin\/promotion-rules\/@integer@",
+            "@type": "PromotionRule",
+            "id": @integer@,
+            "type": "has_taxon",
+            "configuration": {
+                "taxons": [
+                    "MUGS",
+                    "CAPS"
+                ]
+            }
+        },
+        {
+            "@id": "\/api\/v2\/admin\/promotion-rules\/@integer@",
+            "@type": "PromotionRule",
+            "id": @integer@,
+            "type": "total_of_items_from_taxon",
+            "configuration": {
+                "WEB": {
+                    "taxon": "MUGS",
+                    "amount": 1000
+                },
+                "MOBILE": {
+                    "taxon": "CAPS",
+                    "amount": 2000
+                }
+            }
+        },
+        {
+            "@id": "\/api\/v2\/admin\/promotion-rules\/@integer@",
+            "@type": "PromotionRule",
+            "id": @integer@,
+            "type": "contains_product",
+            "configuration": {
+                "product_code": "CAP"
+            }
+        },
+        {
+            "@id": "\/api\/v2\/admin\/promotion-rules\/@integer@",
+            "@type": "PromotionRule",
+            "id": @integer@,
+            "type": "item_total",
+            "configuration": {
+                "WEB": {
+                    "amount":  333
+                },
+                "MOBILE": {
+                    "amount":  222
+                }
+            }
+        }
+    ],
+    "actions": [
+        {
+            "@id": "\/api\/v2\/admin\/promotion-actions\/@integer@",
+            "@type": "PromotionAction",
+            "id": @integer@,
+            "type": "order_fixed_discount",
+            "configuration": {
+                "WEB": {
+                    "amount": 1000
+                },
+                "MOBILE": {
+                    "amount": 2000
+                }
+            }
+        },
+        {
+            "@id": "\/api\/v2\/admin\/promotion-actions\/@integer@",
+            "@type": "PromotionAction",
+            "id": @integer@,
+            "type": "unit_fixed_discount",
+            "configuration": {
+                "WEB": {
+                    "amount": 3000,
+                    "filters": {
+                        "price_range_filter": {
+                            "min": 1000,
+                            "max": 10000
+                        }
+                    }
+                },
+                "MOBILE": {
+                    "amount": 4000
+                }
+            }
+        },
+        {
+            "@id": "\/api\/v2\/admin\/promotion-actions\/@integer@",
+            "@type": "PromotionAction",
+            "id": @integer@,
+            "type": "order_percentage_discount",
+            "configuration": {
+                "percentage": 0.5
+            }
+        },
+        {
+            "@id": "\/api\/v2\/admin\/promotion-actions\/@integer@",
+            "@type": "PromotionAction",
+            "id": @integer@,
+            "type": "unit_percentage_discount",
+            "configuration": {
+                "WEB": {
+                    "percentage": 0.1
+                },
+                "MOBILE": {
+                    "percentage": 1
+                }
+            }
+        },
+        {
+            "@id": "\/api\/v2\/admin\/promotion-actions\/@integer@",
+            "@type": "PromotionAction",
+            "id": @integer@,
+            "type": "shipping_percentage_discount",
+            "configuration": {
+                "percentage": 0.2
+            }
+        }
+    ],
+    "appliesToDiscounted": false,
+    "createdAt": @string@,
+    "updatedAt": @string@,
+    "translations": {
+        "en_US": {
+            "@id": "\/api\/v2\/admin\/promotion-translations\/@integer@",
+            "@type": "PromotionTranslation",
+            "id": @integer@,
+            "label": "T-Shirts discount"
+        }
+    }
+}

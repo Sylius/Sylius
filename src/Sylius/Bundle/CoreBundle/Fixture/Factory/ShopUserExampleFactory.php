@@ -88,7 +88,7 @@ class ShopUserExampleFactory extends AbstractExampleFactory implements ExampleFa
             ->setAllowedTypes('birthday', ['null', 'string', \DateTimeInterface::class])
             ->setNormalizer(
                 'birthday',
-                function (Options $options, string|\DateTimeInterface|null $value) {
+                function (Options $options, \DateTimeInterface|string|null $value) {
                     if (is_string($value)) {
                         return \DateTime::createFromFormat('Y-m-d H:i:s', $value);
                     }

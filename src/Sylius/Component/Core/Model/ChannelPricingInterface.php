@@ -37,6 +37,10 @@ interface ChannelPricingInterface extends ResourceInterface
 
     public function setOriginalPrice(?int $originalPrice): void;
 
+    public function getLowestPriceBeforeDiscount(): ?int;
+
+    public function setLowestPriceBeforeDiscount(?int $lowestPriceBeforeDiscount): void;
+
     public function getMinimumPrice(): int;
 
     public function setMinimumPrice(int $minimumPrice): void;

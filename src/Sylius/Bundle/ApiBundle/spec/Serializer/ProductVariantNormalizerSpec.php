@@ -13,15 +13,14 @@ declare(strict_types=1);
 
 namespace spec\Sylius\Bundle\ApiBundle\Serializer;
 
-use ApiPlatform\Core\Api\IriConverterInterface;
+use ApiPlatform\Api\IriConverterInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\ApiBundle\SectionResolver\AdminApiSection;
 use Sylius\Bundle\ApiBundle\SectionResolver\ShopApiSection;
+use Sylius\Bundle\ApiBundle\Serializer\ContextKeys;
 use Sylius\Bundle\CoreBundle\SectionResolver\SectionProviderInterface;
-use Sylius\Component\Channel\Context\ChannelContextInterface;
-use Sylius\Component\Channel\Context\ChannelNotFoundException;
 use Sylius\Component\Core\Calculator\ProductVariantPricesCalculatorInterface;
 use Sylius\Component\Core\Exception\MissingChannelConfigurationException;
 use Sylius\Component\Core\Model\CatalogPromotionInterface;
@@ -35,12 +34,11 @@ final class ProductVariantNormalizerSpec extends ObjectBehavior
 {
     function let(
         ProductVariantPricesCalculatorInterface $pricesCalculator,
-        ChannelContextInterface $channelContext,
         AvailabilityCheckerInterface $availabilityChecker,
         SectionProviderInterface $sectionProvider,
         IriConverterInterface $iriConverter,
     ): void {
-        $this->beConstructedWith($pricesCalculator, $channelContext, $availabilityChecker, $sectionProvider, $iriConverter);
+        $this->beConstructedWith($pricesCalculator, $availabilityChecker, $sectionProvider, $iriConverter);
     }
 
     function it_supports_only_product_variant_interface(ProductVariantInterface $variant, OrderInterface $order): void
@@ -77,7 +75,6 @@ final class ProductVariantNormalizerSpec extends ObjectBehavior
 
     function it_serializes_product_variant_if_item_operation_name_is_different_that_admin_get(
         ProductVariantPricesCalculatorInterface $pricesCalculator,
-        ChannelContextInterface $channelContext,
         AvailabilityCheckerInterface $availabilityChecker,
         NormalizerInterface $normalizer,
         ChannelInterface $channel,
@@ -85,22 +82,27 @@ final class ProductVariantNormalizerSpec extends ObjectBehavior
     ): void {
         $this->setNormalizer($normalizer);
 
-        $normalizer->normalize($variant, null, ['sylius_product_variant_normalizer_already_called' => true])->willReturn([]);
+        $normalizer->normalize($variant, null, [
+            'sylius_product_variant_normalizer_already_called' => true,
+            ContextKeys::CHANNEL => $channel,
+        ])->willReturn([]);
 
-        $channelContext->getChannel()->willReturn($channel);
         $pricesCalculator->calculate($variant, ['channel' => $channel])->willReturn(1000);
         $pricesCalculator->calculateOriginal($variant, ['channel' => $channel])->willReturn(1000);
+        $pricesCalculator->calculateLowestPriceBeforeDiscount($variant, ['channel' => $channel])->willReturn(500);
 
         $variant->getAppliedPromotionsForChannel($channel)->willReturn(new ArrayCollection());
 
         $availabilityChecker->isStockAvailable($variant)->willReturn(true);
 
-        $this->normalize($variant, null, [])->shouldBeLike(['price' => 1000, 'originalPrice' => 1000, 'inStock' => true]);
+        $this
+            ->normalize($variant, null, [ContextKeys::CHANNEL => $channel])
+            ->shouldBeLike(['price' => 1000, 'originalPrice' => 1000, 'lowestPriceBeforeDiscount' => 500, 'inStock' => true])
+        ;
     }
 
     function it_returns_original_price_if_is_different_than_price(
         ProductVariantPricesCalculatorInterface $pricesCalculator,
-        ChannelContextInterface $channelContext,
         AvailabilityCheckerInterface $availabilityChecker,
         NormalizerInterface $normalizer,
         ChannelInterface $channel,
@@ -108,22 +110,27 @@ final class ProductVariantNormalizerSpec extends ObjectBehavior
     ): void {
         $this->setNormalizer($normalizer);
 
-        $normalizer->normalize($variant, null, ['sylius_product_variant_normalizer_already_called' => true])->willReturn([]);
+        $normalizer->normalize($variant, null, [
+            'sylius_product_variant_normalizer_already_called' => true,
+            ContextKeys::CHANNEL => $channel,
+        ])->willReturn([]);
 
-        $channelContext->getChannel()->willReturn($channel);
         $pricesCalculator->calculate($variant, ['channel' => $channel])->willReturn(500);
         $pricesCalculator->calculateOriginal($variant, ['channel' => $channel])->willReturn(1000);
+        $pricesCalculator->calculateLowestPriceBeforeDiscount($variant, ['channel' => $channel])->willReturn(100);
 
         $variant->getAppliedPromotionsForChannel($channel)->willReturn(new ArrayCollection());
 
         $availabilityChecker->isStockAvailable($variant)->willReturn(true);
 
-        $this->normalize($variant, null, [])->shouldBeLike(['price' => 500, 'originalPrice' => 1000, 'inStock' => true]);
+        $this
+            ->normalize($variant, null, [ContextKeys::CHANNEL => $channel])
+            ->shouldBeLike(['price' => 500, 'originalPrice' => 1000, 'lowestPriceBeforeDiscount' => 100, 'inStock' => true])
+        ;
     }
 
     function it_returns_catalog_promotions_if_applied(
         ProductVariantPricesCalculatorInterface $pricesCalculator,
-        ChannelContextInterface $channelContext,
         AvailabilityCheckerInterface $availabilityChecker,
         NormalizerInterface $normalizer,
         ChannelInterface $channel,
@@ -133,31 +140,34 @@ final class ProductVariantNormalizerSpec extends ObjectBehavior
     ): void {
         $this->setNormalizer($normalizer);
 
-        $normalizer->normalize($variant, null, ['sylius_product_variant_normalizer_already_called' => true])->willReturn([]);
+        $normalizer->normalize($variant, null, [
+            'sylius_product_variant_normalizer_already_called' => true,
+            ContextKeys::CHANNEL => $channel,
+        ])->willReturn([]);
 
-        $channelContext->getChannel()->willReturn($channel);
         $pricesCalculator->calculate($variant, ['channel' => $channel])->willReturn(500);
         $pricesCalculator->calculateOriginal($variant, ['channel' => $channel])->willReturn(1000);
+        $pricesCalculator->calculateLowestPriceBeforeDiscount($variant, ['channel' => $channel])->willReturn(100);
         $catalogPromotion->getCode()->willReturn('winter_sale');
 
         $variant->getAppliedPromotionsForChannel($channel)->willReturn(new ArrayCollection([$catalogPromotion->getWrappedObject()]));
         $availabilityChecker->isStockAvailable($variant)->willReturn(true);
-        $iriConverter->getIriFromItem($catalogPromotion)->willReturn('/api/v2/shop/catalog-promotions/winter_sale');
+        $iriConverter->getIriFromResource($catalogPromotion)->willReturn('/api/v2/shop/catalog-promotions/winter_sale');
 
         $this
-            ->normalize($variant)
+            ->normalize($variant, null, [ContextKeys::CHANNEL => $channel])
             ->shouldBeLike([
                 'price' => 500,
                 'originalPrice' => 1000,
+                'lowestPriceBeforeDiscount' => 100,
                 'appliedPromotions' => ['/api/v2/shop/catalog-promotions/winter_sale'],
                 'inStock' => true,
             ])
         ;
     }
 
-    function it_doesnt_return_prices_and_promotions_when_channel_is_not_found(
+    function it_doesnt_return_prices_and_promotions_when_channel_key_is_not_in_the_context(
         ProductVariantPricesCalculatorInterface $pricesCalculator,
-        ChannelContextInterface $channelContext,
         AvailabilityCheckerInterface $availabilityChecker,
         NormalizerInterface $normalizer,
         ProductVariantInterface $variant,
@@ -165,8 +175,6 @@ final class ProductVariantNormalizerSpec extends ObjectBehavior
         $this->setNormalizer($normalizer);
 
         $normalizer->normalize($variant, null, ['sylius_product_variant_normalizer_already_called' => true])->willReturn([]);
-
-        $channelContext->getChannel()->willThrow(ChannelNotFoundException::class);
 
         $pricesCalculator->calculate(Argument::cetera())->shouldNotBeCalled();
         $pricesCalculator->calculateOriginal(Argument::cetera())->shouldNotBeCalled();
@@ -177,9 +185,30 @@ final class ProductVariantNormalizerSpec extends ObjectBehavior
         $this->normalize($variant, null, [])->shouldReturn(['inStock' => true]);
     }
 
+    function it_doesnt_return_prices_and_promotions_when_channel_from_context_is_null(
+        ProductVariantPricesCalculatorInterface $pricesCalculator,
+        AvailabilityCheckerInterface $availabilityChecker,
+        NormalizerInterface $normalizer,
+        ProductVariantInterface $variant,
+    ): void {
+        $this->setNormalizer($normalizer);
+
+        $normalizer->normalize($variant, null, [
+            'sylius_product_variant_normalizer_already_called' => true,
+            ContextKeys::CHANNEL => null,
+        ])->willReturn([]);
+
+        $pricesCalculator->calculate(Argument::cetera())->shouldNotBeCalled();
+        $pricesCalculator->calculateOriginal(Argument::cetera())->shouldNotBeCalled();
+        $variant->getAppliedPromotionsForChannel(Argument::any())->shouldNotBeCalled();
+
+        $availabilityChecker->isStockAvailable($variant)->willReturn(true);
+
+        $this->normalize($variant, null, [ContextKeys::CHANNEL => null])->shouldReturn(['inStock' => true]);
+    }
+
     function it_doesnt_return_prices_if_channel_configuration_is_not_found(
         ProductVariantPricesCalculatorInterface $pricesCalculator,
-        ChannelContextInterface $channelContext,
         AvailabilityCheckerInterface $availabilityChecker,
         NormalizerInterface $normalizer,
         ChannelInterface $channel,
@@ -187,9 +216,11 @@ final class ProductVariantNormalizerSpec extends ObjectBehavior
     ): void {
         $this->setNormalizer($normalizer);
 
-        $normalizer->normalize($variant, null, ['sylius_product_variant_normalizer_already_called' => true])->willReturn([]);
+        $normalizer->normalize($variant, null, [
+            'sylius_product_variant_normalizer_already_called' => true,
+            ContextKeys::CHANNEL => $channel,
+        ])->willReturn([]);
 
-        $channelContext->getChannel()->willReturn($channel);
         $pricesCalculator->calculate($variant, ['channel' => $channel])->willThrow(MissingChannelConfigurationException::class);
         $pricesCalculator->calculateOriginal($variant, ['channel' => $channel])->willThrow(MissingChannelConfigurationException::class);
 
@@ -197,7 +228,7 @@ final class ProductVariantNormalizerSpec extends ObjectBehavior
 
         $availabilityChecker->isStockAvailable($variant)->willReturn(true);
 
-        $this->normalize($variant, null, [])->shouldReturn(['inStock' => true]);
+        $this->normalize($variant, null, [ContextKeys::CHANNEL => $channel])->shouldReturn(['inStock' => true]);
     }
 
     function it_throws_an_exception_if_the_normalizer_has_been_already_called(

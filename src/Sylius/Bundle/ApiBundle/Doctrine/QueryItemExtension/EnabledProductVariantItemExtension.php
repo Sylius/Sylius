@@ -19,7 +19,6 @@ use Doctrine\ORM\QueryBuilder;
 use Sylius\Bundle\ApiBundle\Context\UserContextInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 
-/** @experimental */
 final class EnabledProductVariantItemExtension implements QueryItemExtensionInterface
 {
     public function __construct(private UserContextInterface $userContext)

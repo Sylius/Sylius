@@ -15,3 +15,13 @@ sylius_admin_locale:
             index:
                 icon: translate
     type: sylius.resource
+
+sylius_admin_locale_delete:
+    path: /locales/{id}
+    methods: [DELETE]
+    defaults:
+        _controller: sylius.controller.locale::deleteAction
+        _sylius:
+            section: admin
+            redirect: referer
+            permission: true

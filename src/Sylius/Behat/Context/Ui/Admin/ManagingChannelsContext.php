@@ -14,6 +14,9 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
+use Sylius\Behat\Element\Admin\Channel\DiscountedProductsCheckingPeriodInputElementInterface;
+use Sylius\Behat\Element\Admin\Channel\ExcludeTaxonsFromShowingLowestPriceInputElementInterface;
+use Sylius\Behat\Element\Admin\Channel\LowestPriceFlagElementInterface;
 use Sylius\Behat\Element\Admin\Channel\ShippingAddressInCheckoutRequiredElementInterface;
 use Sylius\Behat\NotificationType;
 use Sylius\Behat\Page\Admin\Channel\CreatePageInterface;
@@ -23,6 +26,7 @@ use Sylius\Behat\Service\NotificationCheckerInterface;
 use Sylius\Behat\Service\Resolver\CurrentPageResolverInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\ChannelInterface;
+use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Currency\Model\CurrencyInterface;
 use Webmozart\Assert\Assert;
 
@@ -35,6 +39,9 @@ final class ManagingChannelsContext implements Context
         private ShippingAddressInCheckoutRequiredElementInterface $shippingAddressInCheckoutRequiredElement,
         private CurrentPageResolverInterface $currentPageResolver,
         private NotificationCheckerInterface $notificationChecker,
+        private DiscountedProductsCheckingPeriodInputElementInterface $discountedProductsCheckingPeriodInputElement,
+        private LowestPriceFlagElementInterface $lowestPriceFlagElement,
+        private ExcludeTaxonsFromShowingLowestPriceInputElementInterface $excludeTaxonsFromShowingLowestPriceInputElement,
     ) {
     }
 
@@ -221,6 +228,32 @@ final class ManagingChannelsContext implements Context
     }
 
     /**
+     * @When I exclude the :taxon taxon from showing the lowest price of discounted products
+     */
+    public function iExcludeTheTaxonFromShowingTheLowestPriceOfDiscountedProducts(TaxonInterface $taxon): void
+    {
+        $this->excludeTaxonsFromShowingLowestPriceInputElement->excludeTaxon($taxon);
+    }
+
+    /**
+     * @When /^I exclude the ("([^"]+)" and "([^"]+)" taxons) from showing the lowest price of discounted products$/
+     */
+    public function iExcludeTheTaxonsFromShowingTheLowestPriceOfDiscountedProducts(iterable $taxons): void
+    {
+        foreach ($taxons as $taxon) {
+            $this->excludeTaxonsFromShowingLowestPriceInputElement->excludeTaxon($taxon);
+        }
+    }
+
+    /**
+     * @When I remove the :taxon taxon from excluded taxons from showing the lowest price of discounted products
+     */
+    public function iRemoveTheTaxonFromExcludedTaxonsFromShowingTheLowestPriceOfDiscountedProducts(TaxonInterface $taxon): void
+    {
+        $this->excludeTaxonsFromShowingLowestPriceInputElement->removeExcludedTaxon($taxon);
+    }
+
+    /**
      * @Then I should be notified that at least one channel has to be defined
      */
     public function iShouldBeNotifiedThatAtLeastOneChannelHasToBeDefinedIsRequired(): void
@@ -259,6 +292,7 @@ final class ManagingChannelsContext implements Context
      * @Given I am modifying a channel :channel
      * @When I want to modify a channel :channel
      * @When /^I want to modify (this channel)$/
+     * @When I want to modify a billing data of channel :channel
      */
     public function iWantToModifyChannel(ChannelInterface $channel): void
     {
@@ -282,6 +316,7 @@ final class ManagingChannelsContext implements Context
     /**
      * @When I save my changes
      * @When I try to save my changes
+     * @When I save it
      */
     public function iSaveMyChanges(): void
     {
@@ -299,7 +334,7 @@ final class ManagingChannelsContext implements Context
     /**
      * @Then there should still be only one channel with :element :value
      */
-    public function thereShouldStillBeOnlyOneChannelWithCode(string $element, string $value)
+    public function thereShouldStillBeOnlyOneChannelWithCode(string $element, string $value): void
     {
         $this->iWantToBrowseChannels();
 
@@ -342,6 +377,7 @@ final class ManagingChannelsContext implements Context
 
     /**
      * @Then the code field should be disabled
+     * @Then I should not be able to edit its code
      */
     public function theCodeFieldShouldBeDisabled(): void
     {
@@ -428,7 +464,7 @@ final class ManagingChannelsContext implements Context
     /**
      * @Then paying in :currencyCode should be possible for the :channel channel
      */
-    public function payingInEuroShouldBePossibleForTheChannel(string $currencyCode, ChannelInterface $channel): void
+    public function payingInCurrencyShouldBePossibleForTheChannel(string $currencyCode, ChannelInterface $channel): void
     {
         $this->updatePage->open(['id' => $channel->getId()]);
 
@@ -466,6 +502,81 @@ final class ManagingChannelsContext implements Context
     }
 
     /**
+     * @When /^I specify (-?\d+) days as the lowest price for discounted products checking period$/
+     */
+    public function iSpecifyDaysAsTheLowestPriceForDiscountedProductsCheckingPeriod(int $days): void
+    {
+        $this->discountedProductsCheckingPeriodInputElement->specifyPeriod($days);
+    }
+
+    /**
+     * @Then /^the "[^"]+" channel should have the lowest price for discounted products checking period set to (\d+) days$/
+     * @Then its lowest price for discounted products checking period should be set to :days days
+     */
+    public function theChannelShouldHaveTheLowestPriceForDiscountedProductsCheckingPeriodSetToDays(int $days): void
+    {
+        $lowestPriceForDiscountedProductsCheckingPeriod = $this->discountedProductsCheckingPeriodInputElement->getPeriod();
+
+        Assert::same($days, $lowestPriceForDiscountedProductsCheckingPeriod);
+    }
+
+    /**
+     * @Then I should be notified that the lowest price for discounted products checking period must be lower
+     */
+    public function iShouldBeNotifiedThatTheLowestPriceForDiscountedProductsCheckingPeriodMustBeLower(): void
+    {
+        Assert::same(
+            'Value must be less than 2147483647',
+            $this->updatePage->getValidationMessage('discounted_products_checking_period'),
+        );
+    }
+
+    /**
+     * @When /^I (enable|disable) showing the lowest price of discounted products$/
+     */
+    public function iEnableShowingTheLowestPriceOfDiscountedProducts(string $visible): void
+    {
+        $this->lowestPriceFlagElement->$visible();
+    }
+
+    /**
+     * @Then I should be notified that the lowest price for discounted products checking period must be greater than 0
+     */
+    public function iShouldBeNotifiedThatTheLowestPriceForDiscountedProductsCheckingPeriodMustBeGreaterThanZero(): void
+    {
+        Assert::same(
+            'Value must be greater than 0',
+            $this->updatePage->getValidationMessage('discounted_products_checking_period'),
+        );
+    }
+
+    /**
+     * @Then /^the ("[^"]+" channel) should have the lowest price of discounted products prior to the current discount (enabled|disabled)$/
+     */
+    public function theChannelShouldHaveTheLowestPriceOfDiscountedProductsPriorToTheCurrentDiscountEnabledOrDisabled(
+        ChannelInterface $channel,
+        string $visible,
+    ): void {
+        Assert::same(
+            'enabled' === $visible,
+            $this->lowestPriceFlagElement->isEnabled(),
+        );
+    }
+
+    /**
+     * @Then /^this channel should have ("([^"]+)" and "([^"]+)" taxons) excluded from displaying the lowest price of discounted products$/
+     */
+    public function thisChannelShouldHaveTaxonsExcludedFromDisplayingTheLowestPriceOfDiscountedProducts(iterable $taxons): void
+    {
+        foreach ($taxons as $taxon) {
+            Assert::true(
+                $this->excludeTaxonsFromShowingLowestPriceInputElement->hasTaxonExcluded($taxon),
+                sprintf('The taxon with code %s should be excluded from displaying the lowest price of discounted products', $taxon->getCode()),
+            );
+        }
+    }
+
+    /**
      * @Then the default tax zone for the :channel channel should be :taxZone
      */
     public function theDefaultTaxZoneForTheChannelShouldBe(ChannelInterface $channel, string $taxZone): void
@@ -499,6 +610,7 @@ final class ManagingChannelsContext implements Context
 
     /**
      * @Then the base currency field should be disabled
+     * @Then I should not be able to edit its base currency
      */
     public function theBaseCurrencyFieldShouldBeDisabled(): void
     {
@@ -527,6 +639,30 @@ final class ManagingChannelsContext implements Context
         }
 
         Assert::same($this->updatePage->getMenuTaxon(), $menuTaxon);
+    }
+
+    /**
+     * @Then this channel should have :taxon taxon excluded from displaying the lowest price of discounted products
+     */
+    public function thisChannelShouldHaveTaxonExcludedFromDisplayingTheLowestPriceOfDiscountedProducts(
+        TaxonInterface $taxon,
+    ): void {
+        Assert::true(
+            $this->excludeTaxonsFromShowingLowestPriceInputElement->hasTaxonExcluded($taxon),
+            sprintf('The taxon with code %s should be excluded from displaying the lowest price of discounted products', $taxon->getCode()),
+        );
+    }
+
+    /**
+     * @Then this channel should not have :taxon taxon excluded from displaying the lowest price of discounted products
+     */
+    public function thisChannelShouldNotHaveTaxonExcludedFromDisplayingTheLowestPriceOfDiscountedProducts(
+        TaxonInterface $taxon,
+    ): void {
+        Assert::false(
+            $this->excludeTaxonsFromShowingLowestPriceInputElement->hasTaxonExcluded($taxon),
+            sprintf('The taxon with code %s should be not be excluded from displaying the lowest price of discounted products', $taxon->getCode()),
+        );
     }
 
     /**

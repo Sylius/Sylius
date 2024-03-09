@@ -14,6 +14,8 @@ declare(strict_types=1);
 namespace Sylius\Bundle\CoreBundle\Installer\Provider;
 
 use Doctrine\Bundle\DoctrineBundle\Registry;
+use Doctrine\DBAL\Exception;
+use Doctrine\DBAL\Platforms\MySQLPlatform;
 use Doctrine\DBAL\Platforms\PostgreSQLPlatform;
 use Doctrine\DBAL\Schema\AbstractSchemaManager;
 use Doctrine\ORM\EntityManagerInterface;
@@ -26,13 +28,30 @@ use Webmozart\Assert\Assert;
 
 final class DatabaseSetupCommandsProvider implements DatabaseSetupCommandsProviderInterface
 {
-    private bool $isPostgreSQLPlatform;
+    /** @var AbstractSchemaManager<PostgreSQLPlatform|MySQLPlatform>|null */
+    private ?AbstractSchemaManager $schemaManager = null;
 
-    public function __construct(private Registry $doctrineRegistry)
+    public function __construct(private EntityManagerInterface|Registry $entityManager)
     {
-        $this->isPostgreSQLPlatform = $this->isPostgreSQLPlatform();
+        if ($this->entityManager instanceof Registry) {
+            trigger_deprecation(
+                'sylius/sylius',
+                '1.13',
+                'Passing a $registry to the "%s" constructor is deprecated and will be prohibited in Sylius 2.0. Pass an instance of "%s" instead.',
+                self::class,
+                EntityManagerInterface::class,
+            );
+
+            $objectManager = $this->entityManager->getManager();
+            Assert::isInstanceOf($objectManager, EntityManagerInterface::class);
+
+            $this->entityManager = $objectManager;
+        }
     }
 
+    /**
+     * @return array<string, array>
+     */
     public function getCommands(InputInterface $input, OutputInterface $output, QuestionHelper $questionHelper): array
     {
         $outputStyle = new SymfonyStyle($input, $output);
@@ -43,7 +62,11 @@ final class DatabaseSetupCommandsProvider implements DatabaseSetupCommandsProvid
 
             $question = new ConfirmationQuestion('Do you want to drop all of them? (y/N) ', false);
             if ($questionHelper->ask($input, $output, $question)) {
-                return $this->dropSchemaAndGetMigrateOrSchemaCreateCommands($outputStyle);
+                return [
+                    'doctrine:schema:drop' => ['--force' => true],
+                    'doctrine:migrations:version' => ['--delete' => true, '--all' => true, '--no-interaction' => true],
+                    'doctrine:migrations:migrate' => ['--no-interaction' => true],
+                ];
             }
 
             return [];
@@ -54,16 +77,19 @@ final class DatabaseSetupCommandsProvider implements DatabaseSetupCommandsProvid
                 sprintf('The database <info>%s</info> already exists and it has no tables.', $this->getDatabaseName()),
             );
 
-            return $this->getCreateSchemaOrRunMigrationsCommand($outputStyle);
+            return ['doctrine:migrations:migrate' => ['--no-interaction' => true]];
         }
 
-        return $this->getCreateDatabaseWithSchemaCommands($outputStyle);
+        return [
+            'doctrine:database:create' => [],
+            'doctrine:migrations:migrate' => ['--no-interaction' => true],
+        ];
     }
 
     private function isEmptyDatabasePresent(): bool
     {
         try {
-            return 0 === count($this->getSchemaManager()->listTableNames());
+            return 0 === count($this->createSchemaManager()->listTableNames());
         } catch (\Exception) {
             return false;
         }
@@ -72,7 +98,7 @@ final class DatabaseSetupCommandsProvider implements DatabaseSetupCommandsProvid
     private function isSchemaHasAnyTable(): bool
     {
         try {
-            return 0 !== count($this->getSchemaManager()->listTableNames());
+            return 0 !== count($this->createSchemaManager()->listTableNames());
         } catch (\Exception) {
             return false;
         }
@@ -80,91 +106,20 @@ final class DatabaseSetupCommandsProvider implements DatabaseSetupCommandsProvid
 
     private function getDatabaseName(): string
     {
-        return $this->getEntityManager()->getConnection()->getDatabase();
+        return $this->entityManager->getConnection()->getDatabase();
     }
 
-    private function isPostgreSQLPlatform(): bool
+    /**
+     * @return AbstractSchemaManager<PostgreSQLPlatform|MySQLPlatform>
+     *
+     * @throws Exception
+     */
+    private function createSchemaManager(): AbstractSchemaManager
     {
-        return $this->getEntityManager()->getConnection()->getDatabasePlatform() instanceof PostgreSQLPlatform;
-    }
-
-    private function getSchemaManager(): AbstractSchemaManager
-    {
-        $connection = $this->getEntityManager()->getConnection();
-
-        if (method_exists($connection, 'createSchemaManager')) {
-            return $connection->createSchemaManager();
+        if (null === $this->schemaManager) {
+            $this->schemaManager = $this->entityManager->getConnection()->createSchemaManager();
         }
 
-        if (method_exists($connection, 'getSchemaManager')) {
-            return $connection->getSchemaManager();
-        }
-
-        throw new \RuntimeException('Unable to get schema manager.');
-    }
-
-    private function getEntityManager(): EntityManagerInterface
-    {
-        $objectManager = $this->doctrineRegistry->getManager();
-        Assert::isInstanceOf($objectManager, EntityManagerInterface::class);
-
-        return $objectManager;
-    }
-
-    private function getCreateDatabaseWithSchemaCommands(SymfonyStyle $outputStyle): array
-    {
-        if ($this->isPostgreSQLPlatform) {
-            $outputStyle->writeln([
-                'As you\'re using PostgreSQL, we will create a database and schema instead of running migrations.',
-                'They will be available starting from Sylius 1.13.',
-            ]);
-
-            return [
-                'doctrine:database:create',
-                'doctrine:schema:create',
-            ];
-        }
-
-        return [
-            'doctrine:database:create',
-            'doctrine:migrations:migrate' => ['--no-interaction' => true],
-        ];
-    }
-
-    /** To refactor in Sylius 1.13 */
-    private function getCreateSchemaOrRunMigrationsCommand(SymfonyStyle $outputStyle): array
-    {
-        if ($this->isPostgreSQLPlatform) {
-            $outputStyle->writeln([
-                'As you\'re using PostgreSQL, we will create a schema instead of running migrations.',
-                'They will be available starting from Sylius 1.13.',
-            ]);
-
-            return ['doctrine:schema:create'];
-        }
-
-        return ['doctrine:migrations:migrate' => ['--no-interaction' => true]];
-    }
-
-    /** To refactor in Sylius 1.13 */
-    private function dropSchemaAndGetMigrateOrSchemaCreateCommands(SymfonyStyle $outputStyle): array
-    {
-        if ($this->isPostgreSQLPlatform) {
-            $outputStyle->writeln([
-                'As you\'re using PostgreSQL, we will drop and create a schema instead of running migrations.',
-                'They will be available starting from Sylius 1.13.',
-            ]);
-
-            return [
-                'doctrine:schema:drop' => ['--force' => true],
-                'doctrine:schema:create',
-            ];
-        }
-
-        return [
-            'doctrine:schema:drop' => ['--force' => true],
-            'doctrine:migrations:version' => ['--delete' => true, '--all' => true, '--no-interaction' => true],
-            'doctrine:migrations:migrate' => ['--no-interaction' => true],
-        ];
+        return $this->schemaManager;
     }
 }

@@ -1,0 +1,13 @@
+{
+    "@context": "\/api\/v2\/contexts\/ConstraintViolationList",
+    "@type": "ConstraintViolationList",
+    "hydra:title": "An error occurred",
+    "hydra:description": "type: The attribute type \"foobar\" is not registered.",
+    "violations":[
+        {
+            "propertyPath": "type",
+            "message": "The attribute type \"foobar\" is not registered.",
+            "code": null
+        }
+    ]
+}

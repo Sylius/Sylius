@@ -13,8 +13,8 @@ declare(strict_types=1);
 
 namespace Sylius\Tests\Functional\app;
 
-use Symfony\Component\Config\Loader\LoaderInterface;
 use App\Kernel;
+use Symfony\Component\Config\Loader\LoaderInterface;
 
 class AppKernel extends Kernel
 {

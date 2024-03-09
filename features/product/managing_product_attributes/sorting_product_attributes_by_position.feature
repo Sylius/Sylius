@@ -10,21 +10,21 @@ Feature: Sorting listed product attributes by position
         And the store has a integer product attribute "Book pages" at position 0
         And I am logged in as an administrator
 
-    @ui
+    @ui @api
     Scenario: Product attributes are sorted by position in ascending order by default
         When I want to see all product attributes in store
         Then I should see 3 product attributes in the list
         And the first product attribute on the list should have name "Book pages"
         And the last product attribute on the list should have name "T-Shirt with cotton"
 
-    @ui
+    @ui @api
     Scenario: Product attribute added at no position gets put at the bottom of the list
         Given the store has also a text product attribute "Drive type"
         When I want to see all product attributes in store
         Then I should see 4 product attributes in the list
         And the last product attribute on the list should have name "Drive type"
 
-    @ui
+    @ui @api
     Scenario: Product attribute added at position 0 is added as the first one
         Given the store has also a text product attribute "Drive type" at position 0
         When I want to see all product attributes in store

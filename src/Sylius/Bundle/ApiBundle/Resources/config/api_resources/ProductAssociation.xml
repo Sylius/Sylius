@@ -18,15 +18,80 @@
     <resource class="%sylius.model.product_association.class%" shortName="ProductAssociation">
         <attribute name="validation_groups">sylius</attribute>
 
-        <collectionOperations />
+        <collectionOperations>
+            <collectionOperation name="admin_get">
+                <attribute name="method">GET</attribute>
+                <attribute name="path">/admin/product-associations</attribute>
+                <attribute name="filters">
+                    <attribute>sylius.api.product_association_filter</attribute>
+                </attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">
+                        <attribute>admin:product_association:index</attribute>
+                        <attribute>sylius:admin:product_association:index</attribute>
+                    </attribute>
+                </attribute>
+            </collectionOperation>
+
+            <collectionOperation name="admin_post">
+                <attribute name="method">POST</attribute>
+                <attribute name="path">/admin/product-associations</attribute>
+                <attribute name="denormalization_context">
+                    <attribute name="groups">
+                        <attribute>admin:product_association:create</attribute>
+                        <attribute>sylius:admin:product_association:create</attribute>
+                    </attribute>
+                </attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">
+                        <attribute>admin:product_association:show</attribute>
+                        <attribute>sylius:admin:product_association:show</attribute>
+                    </attribute>
+                </attribute>
+            </collectionOperation>
+        </collectionOperations>
 
         <itemOperations>
+            <itemOperation name="admin_get">
+                <attribute name="method">GET</attribute>
+                <attribute name="path">/admin/product-associations/{id}</attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">
+                        <attribute>admin:product_association:show</attribute>
+                        <attribute>sylius:admin:product_association:show</attribute>
+                    </attribute>
+                </attribute>
+            </itemOperation>
+
+            <itemOperation name="admin_put">
+                <attribute name="method">PUT</attribute>
+                <attribute name="path">/admin/product-associations/{id}</attribute>
+                <attribute name="denormalization_context">
+                    <attribute name="groups">
+                        <attribute>admin:product_association:update</attribute>
+                        <attribute>sylius:admin:product_association:update</attribute>
+                    </attribute>
+                </attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">
+                        <attribute>admin:product_association:show</attribute>
+                        <attribute>sylius:admin:product_association:show</attribute>
+                    </attribute>
+                </attribute>
+            </itemOperation>
+
+            <itemOperation name="admin_delete">
+                <attribute name="method">DELETE</attribute>
+                <attribute name="path">/admin/product-associations/{id}</attribute>
+            </itemOperation>
+
             <itemOperation name="shop_get">
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/shop/product-associations/{id}</attribute>
                 <attribute name="normalization_context">
                     <attribute name="groups">
-                        <attribute>shop:product_association:read</attribute>
+                        <attribute>shop:product_association:show</attribute>
+                        <attribute>sylius:shop:product_association:show</attribute>
                     </attribute>
                 </attribute>
             </itemOperation>
@@ -34,6 +99,7 @@
 
         <property name="id" identifier="true" writable="false" />
         <property name="type" identifier="false" required="true" />
+        <property name="owner" required="true" />
         <property name="associatedProducts" required="true" />
     </resource>
 </resources>

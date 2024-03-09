@@ -34,6 +34,14 @@
                 <option name="message">sylius.shipping_method.calculator.not_blank</option>
                 <option name="groups">sylius</option>
             </constraint>
+            <constraint name="Sylius\Bundle\ShippingBundle\Validator\Constraint\ShippingMethodCalculatorExists">
+                <option name="groups">
+                    <value>sylius</value>
+                </option>
+            </constraint>
+        </property>
+        <property name="rules">
+            <constraint name="Valid" />
         </property>
         <property name="translations">
             <constraint name="Valid" />

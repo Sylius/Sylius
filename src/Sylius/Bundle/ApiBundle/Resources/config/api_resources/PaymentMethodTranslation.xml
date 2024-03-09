@@ -1,0 +1,36 @@
+<?xml version="1.0" ?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Sylius Sp. z o.o.
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<resources xmlns="https://api-platform.com/schema/metadata"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="https://api-platform.com/schema/metadata https://api-platform.com/schema/metadata/metadata-2.0.xsd"
+>
+    <resource class="%sylius.model.payment_method_translation.class%" shortName="PaymentMethodTranslation">
+        <attribute name="validation_groups">sylius</attribute>
+
+        <collectionOperations />
+
+        <itemOperations>
+            <itemOperation name="admin_get">
+                <attribute name="method">GET</attribute>
+                <attribute name="path">/admin/payment-method-translations/{id}</attribute>
+            </itemOperation>
+        </itemOperations>
+
+        <property name="id" identifier="true" writable="false" />
+        <property name="name" identifier="false" required="true" />
+        <property name="description" identifier="false" />
+        <property name="instructions" identifier="false" />
+        <property name="locale" identifier="false" required="true" />
+    </resource>
+</resources>

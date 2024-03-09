@@ -51,11 +51,8 @@ final class Version20220407131547 extends AbstractMigration
 
     private function getExistingIndexesNames(string $tableName): array
     {
-        if (method_exists($this->connection, 'createSchemaManager')) {
-            $indexes = $this->connection->createSchemaManager()->listTableIndexes($tableName);
-        } else {
-            $indexes = $this->connection->getSchemaManager()->listTableIndexes($tableName);
-        }
+        $indexes = $this->connection->createSchemaManager()->listTableIndexes($tableName);
+
         $indexesNames = [];
 
         foreach ($indexes as $index) {

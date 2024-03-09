@@ -16,7 +16,7 @@
            xsi:schemaLocation="https://api-platform.com/schema/metadata https://api-platform.com/schema/metadata/metadata-2.0.xsd"
 >
     <resource class="%sylius.model.shipping_method.class%" shortName="ShippingMethod">
-        <attribute name="validation_groups">sylius</attribute>
+        <attribute name="validation_groups">Sylius\Bundle\ShippingBundle\Validator\GroupsGenerator\ShippingMethodConfigurationGroupsGenerator</attribute>
 
         <attribute name="order">
             <attribute name="position">ASC</attribute>
@@ -27,7 +27,10 @@
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/admin/shipping-methods/{code}</attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:shipping_method:read</attribute>
+                    <attribute name="groups">
+                        <attribute>admin:shipping_method:show</attribute>
+                        <attribute>sylius:admin:shipping_method:show</attribute>
+                    </attribute>
                 </attribute>
             </itemOperation>
 
@@ -35,18 +38,65 @@
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/shop/shipping-methods/{code}</attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">shop:shipping_method:read</attribute>
+                    <attribute name="groups">
+                        <attribute>shop:shipping_method:show</attribute>
+                        <attribute>sylius:shop:shipping_method:show</attribute>
+                    </attribute>
                 </attribute>
             </itemOperation>
 
             <itemOperation name="admin_put">
                 <attribute name="method">PUT</attribute>
                 <attribute name="path">/admin/shipping-methods/{code}</attribute>
-                <attribute name="normalization_context">
-                    <attribute name="groups">admin:shipping_method:read</attribute>
-                </attribute>
                 <attribute name="denormalization_context">
-                    <attribute name="groups">admin:shipping_method:update</attribute>
+                    <attribute name="groups">
+                        <attribute>admin:shipping_method:update</attribute>
+                        <attribute>sylius:admin:shipping_method:update</attribute>
+                    </attribute>
+                </attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">
+                        <attribute>admin:shipping_method:show</attribute>
+                        <attribute>sylius:admin:shipping_method:show</attribute>
+                    </attribute>
+                </attribute>
+                <attribute name="openapi_context">
+                    <attribute name="description">
+Example configuration for `total_weight_greater_than_or_equal` rule type:
+
+```
+{
+    "type": "total_weight_greater_than_or_equal",
+    "configuration": {
+        "weight": int
+    }
+}
+```
+
+Example configuration for `order_total_greater_than_or_equal` rule type:
+
+```
+{
+    "type": "order_total_greater_than_or_equal",
+    "configuration": {
+        "channel-code": [
+            "amount": int,
+        ]
+    }
+}
+```
+
+Example configuration for `flat_rate` shipping charges calculator:
+
+```
+"shippingChargesCalculator": "flat_rate",
+"shippingChargesCalculatorConfiguration": {
+    "channel-code": [
+        "amount": int,
+    ]
+}
+```
+                    </attribute>
                 </attribute>
             </itemOperation>
 
@@ -64,7 +114,10 @@
                     <attribute name="summary">Archives Shipping Method</attribute>
                 </attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:shipping_method:read</attribute>
+                    <attribute name="groups">
+                        <attribute>admin:shipping_method:show</attribute>
+                        <attribute>sylius:admin:shipping_method:show</attribute>
+                    </attribute>
                 </attribute>
             </itemOperation>
 
@@ -77,7 +130,10 @@
                     <attribute name="summary">Restores archived Shipping Method</attribute>
                 </attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:shipping_method:read</attribute>
+                    <attribute name="groups">
+                        <attribute>admin:shipping_method:show</attribute>
+                        <attribute>sylius:admin:shipping_method:show</attribute>
+                    </attribute>
                 </attribute>
             </itemOperation>
         </itemOperations>
@@ -92,7 +148,10 @@
                     <attribute>Sylius\Bundle\ApiBundle\Filter\Doctrine\TranslationOrderNameAndLocaleFilter</attribute>
                 </attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:shipping_method:read</attribute>
+                    <attribute name="groups">
+                        <attribute>admin:shipping_method:index</attribute>
+                        <attribute>sylius:admin:shipping_method:index</attribute>
+                    </attribute>
                 </attribute>
             </collectionOperation>
             <collectionOperation name="shop_get">
@@ -104,7 +163,8 @@
                 </attribute>
                 <attribute name="normalization_context">
                     <attribute name="groups">
-                        <attribute>shop:shipping_method:read</attribute>
+                        <attribute>shop:shipping_method:index</attribute>
+                        <attribute>sylius:shop:shipping_method:index</attribute>
                     </attribute>
                 </attribute>
             </collectionOperation>
@@ -112,11 +172,55 @@
             <collectionOperation name="admin_post">
                 <attribute name="method">POST</attribute>
                 <attribute name="path">/admin/shipping-methods</attribute>
-                <attribute name="normalization_context">
-                    <attribute name="groups">admin:shipping_method:read</attribute>
-                </attribute>
                 <attribute name="denormalization_context">
-                    <attribute name="groups">admin:shipping_method:create</attribute>
+                    <attribute name="groups">
+                        <attribute>admin:shipping_method:create</attribute>
+                        <attribute>sylius:admin:shipping_method:create</attribute>
+                    </attribute>
+                </attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">
+                        <attribute>admin:shipping_method:show</attribute>
+                        <attribute>sylius:admin:shipping_method:show</attribute>
+                    </attribute>
+                </attribute>
+                <attribute name="openapi_context">
+                    <attribute name="description">
+Example configuration for `total_weight_greater_than_or_equal` rule type:
+
+```
+{
+    "type": "total_weight_greater_than_or_equal",
+    "configuration": {
+        "weight": int
+    }
+}
+```
+
+Example configuration for `order_total_greater_than_or_equal` rule type:
+
+```
+{
+    "type": "order_total_greater_than_or_equal",
+    "configuration": {
+        "channel-code": [
+            "amount": int,
+        ]
+    }
+}
+```
+
+Example configuration for `flat_rate` shipping charges calculator:
+
+```
+"shippingChargesCalculator": "flat_rate",
+"shippingChargesCalculatorConfiguration": {
+    "channel-code": [
+        "amount": int,
+    ]
+}
+```
+                    </attribute>
                 </attribute>
             </collectionOperation>
         </collectionOperations>
@@ -133,6 +237,7 @@
         <property name="channels" writable="true" />
         <property name="calculator" writable="true" />
         <property name="configuration" writable="true" />
+        <property name="rules" readable="true" />
         <property name="translations" readable="true" writable="true">
             <attribute name="openapi_context">
                 <attribute name="type">object</attribute>
@@ -140,7 +245,6 @@
                     <attribute name="en_US">
                         <attribute name="name">string</attribute>
                         <attribute name="description">string</attribute>
-                        <attribute name="locale">string</attribute>
                     </attribute>
                 </attribute>
             </attribute>

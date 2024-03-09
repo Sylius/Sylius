@@ -16,6 +16,11 @@ namespace Sylius\Component\Payment\Repository;
 use Sylius\Component\Payment\Model\PaymentMethodInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
+/**
+ * @template T of PaymentMethodInterface
+ *
+ * @extends RepositoryInterface<T>
+ */
 interface PaymentMethodRepositoryInterface extends RepositoryInterface
 {
     /**

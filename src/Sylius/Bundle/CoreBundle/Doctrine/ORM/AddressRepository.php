@@ -18,6 +18,11 @@ use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Repository\AddressRepositoryInterface;
 
+/**
+ * @template T of AddressInterface
+ *
+ * @implements AddressRepositoryInterface<T>
+ */
 class AddressRepository extends EntityRepository implements AddressRepositoryInterface
 {
     public function findByCustomer(CustomerInterface $customer): array

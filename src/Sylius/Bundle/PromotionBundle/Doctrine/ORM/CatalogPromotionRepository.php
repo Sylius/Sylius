@@ -15,8 +15,14 @@ namespace Sylius\Bundle\PromotionBundle\Doctrine\ORM;
 
 use Sylius\Bundle\PromotionBundle\Criteria\CriteriaInterface;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
+use Sylius\Component\Promotion\Model\CatalogPromotionInterface;
 use Sylius\Component\Promotion\Repository\CatalogPromotionRepositoryInterface;
 
+/**
+ * @template T of CatalogPromotionInterface
+ *
+ * @implements CatalogPromotionRepositoryInterface<T>
+ */
 class CatalogPromotionRepository extends EntityRepository implements CatalogPromotionRepositoryInterface
 {
     public function findByCriteria(iterable $criteria): array

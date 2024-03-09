@@ -21,7 +21,7 @@ use Webmozart\Assert\Assert;
 
 final class UniqueProvinceCollectionValidator extends ConstraintValidator
 {
-    public function validate($value, Constraint $constraint): void
+    public function validate(mixed $value, Constraint $constraint): void
     {
         /** @var Collection<array-key, ProvinceInterface> $value */
         Assert::allIsInstanceOf($value, ProvinceInterface::class);

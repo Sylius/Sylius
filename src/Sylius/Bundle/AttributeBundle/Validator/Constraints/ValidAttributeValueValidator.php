@@ -26,7 +26,7 @@ final class ValidAttributeValueValidator extends ConstraintValidator
     {
     }
 
-    public function validate($value, Constraint $constraint): void
+    public function validate(mixed $value, Constraint $constraint): void
     {
         if (!$value instanceof AttributeValueInterface) {
             throw new UnexpectedTypeException($value::class, AttributeValueInterface::class);

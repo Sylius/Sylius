@@ -40,6 +40,23 @@ sylius_fixtures:
                                         configuration:
                                             FASHION_WEB:
                                                 amount: 10.00
+                            back_to_school:
+                                code: 'back_to_school'
+                                name: 'Back to school'
+                                channels:
+                                    - 'FASHION_WEB'
+                                starts_at: 'September 1 last year'
+                                ends_at: 'September 30 last year'
+                                archived_at: 'October 1 last year'
+                                rules:
+                                    -   type: 'item_total'
+                                        configuration:
+                                            FASHION_WEB:
+                                                amount: 100.00
+                                actions:
+                                    -   type: 'order_percentage_discount'
+                                        configuration:
+                                            percentage: 10
 
                 catalog_promotion:
                     options:

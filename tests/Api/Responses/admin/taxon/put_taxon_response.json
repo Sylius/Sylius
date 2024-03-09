@@ -1,0 +1,22 @@
+{
+    "@context": "\/api\/v2\/contexts\/Taxon",
+    "@id": "\/api\/v2\/admin\/taxons\/MUG",
+    "@type": "Taxon",
+    "id": @integer@,
+    "code": "MUG",
+    "parent": "\/api\/v2\/admin\/taxons\/BRAND",
+    "children": [],
+    "images": [],
+    "position": @integer@,
+    "translations": {
+        "en_US": {
+            "@id": "\/api\/v2\/admin\/taxon-translations\/@integer@",
+            "@type": "TaxonTranslation",
+            "id": @integer@,
+            "name": "Watches",
+            "slug": "watches",
+            "description": "Some description Lorem ipsum dolor sit amet."
+        }
+    },
+    "enabled": false
+}

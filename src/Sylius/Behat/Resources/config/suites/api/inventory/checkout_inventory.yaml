@@ -6,12 +6,15 @@ default:
         api_checkout_inventory:
             contexts:
                 - sylius.behat.context.hook.doctrine_orm
-                    
+
+                - sylius.behat.context.setup.admin_api_security
                 - sylius.behat.context.setup.channel
+                - sylius.behat.context.setup.order
+                - sylius.behat.context.setup.payment
                 - sylius.behat.context.setup.product
                 - sylius.behat.context.setup.shipping
-                - sylius.behat.context.setup.payment
                 - sylius.behat.context.setup.shop_api_security
+                - sylius.behat.context.setup.user
 
                 - sylius.behat.context.transform.address
                 - sylius.behat.context.transform.cart
@@ -22,9 +25,10 @@ default:
                 - sylius.behat.context.transform.product
                 - sylius.behat.context.transform.shared_storage
                 - sylius.behat.context.transform.shipping_method
-                    
+
                 - sylius.behat.context.api.shop.cart
                 - sylius.behat.context.api.shop.checkout
+                - sylius.behat.context.api.admin.managing_product_variants
 
             filters:
                 tags: "@checkout_inventory&&@api"

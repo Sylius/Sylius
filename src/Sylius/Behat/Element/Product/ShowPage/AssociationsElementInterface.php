@@ -15,5 +15,7 @@ namespace Sylius\Behat\Element\Product\ShowPage;
 
 interface AssociationsElementInterface
 {
-    public function isProductAssociated(string $associationName, string $productName): bool;
+    public function hasAssociation(string $associationName): bool;
+
+    public function isAssociatedWith(string $associationName, string $productName): bool;
 }
