@@ -20,6 +20,8 @@ use HWI\Bundle\OAuthBundle\OAuth\Response\UserResponseInterface;
 use HWI\Bundle\OAuthBundle\Security\Core\User\OAuthAwareUserProviderInterface;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Sylius\Bundle\CoreBundle\Event\UserByOAuthResponseCreatedEvent;
+use Sylius\Bundle\CoreBundle\Event\UserByOAuthResponseUpdatedEvent;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\ShopUser;
 use Sylius\Component\Core\Model\ShopUserInterface;
@@ -30,6 +32,7 @@ use Sylius\Component\User\Canonicalizer\CanonicalizerInterface;
 use Sylius\Component\User\Model\UserOAuthInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
 use SyliusLabs\Polyfill\Symfony\Security\Core\Exception\UserNotFoundException;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -44,7 +47,10 @@ final class UserProviderSpec extends ObjectBehavior
         ObjectManager $userManager,
         CanonicalizerInterface $canonicalizer,
         CustomerRepositoryInterface $customerRepository,
+        EventDispatcherInterface $eventDispatcher,
     ): void {
+        $eventDispatcher->dispatch(Argument::type(UserByOAuthResponseCreatedEvent::class))->willReturnArgument();
+        $eventDispatcher->dispatch(Argument::type(UserByOAuthResponseUpdatedEvent::class))->willReturnArgument();
         $this->beConstructedWith(
             ShopUser::class,
             $customerFactory,
@@ -55,6 +61,7 @@ final class UserProviderSpec extends ObjectBehavior
             $userManager,
             $canonicalizer,
             $customerRepository,
+            $eventDispatcher,
         );
     }
 
@@ -105,6 +112,7 @@ final class UserProviderSpec extends ObjectBehavior
         UserOAuthInterface $oauth,
         UserResponseInterface $response,
         ResourceOwnerInterface $resourceOwner,
+        EventDispatcherInterface $eventDispatcher,
     ): void {
         $resourceOwner->getName()->willReturn('google');
 
@@ -115,6 +123,8 @@ final class UserProviderSpec extends ObjectBehavior
         $oauth->getUser()->willReturn($user);
 
         $this->loadUserByOAuthUserResponse($response)->shouldReturn($user);
+
+        $eventDispatcher->dispatch(Argument::any())->shouldNotHaveBeenCalled();
     }
 
     function it_should_update_user_when_he_was_found_by_email(
@@ -126,6 +136,7 @@ final class UserProviderSpec extends ObjectBehavior
         UserResponseInterface $response,
         ResourceOwnerInterface $resourceOwner,
         UserOAuthInterface $oauth,
+        EventDispatcherInterface $eventDispatcher,
     ): void {
         $resourceOwner->getName()->willReturn('google');
 
@@ -151,6 +162,17 @@ final class UserProviderSpec extends ObjectBehavior
         $userManager->flush()->shouldBeCalled();
 
         $this->loadUserByOAuthUserResponse($response)->shouldReturn($user);
+
+        $eventDispatcher
+            ->dispatch(
+                Argument::that(
+                    static function (UserByOAuthResponseUpdatedEvent $event) use ($user): bool {
+                        return $user->getWrappedObject() === $event->getUser();
+                    }
+                )
+            )
+            ->shouldHaveBeenCalled()
+        ;
     }
 
     function it_should_create_new_user_when_none_was_found(
@@ -164,6 +186,7 @@ final class UserProviderSpec extends ObjectBehavior
         UserResponseInterface $response,
         ResourceOwnerInterface $resourceOwner,
         UserOAuthInterface $oauth,
+        EventDispatcherInterface $eventDispatcher,
     ): void {
         $resourceOwner->getName()->willReturn('google');
 
@@ -201,6 +224,17 @@ final class UserProviderSpec extends ObjectBehavior
         $userManager->flush()->shouldBeCalled();
 
         $this->loadUserByOAuthUserResponse($response)->shouldReturn($user);
+
+        $eventDispatcher
+            ->dispatch(
+                Argument::that(
+                    static function (UserByOAuthResponseCreatedEvent $event) use ($user): bool {
+                        return $user->getWrappedObject() === $event->getUser();
+                    }
+                )
+            )
+            ->shouldHaveBeenCalled()
+        ;
     }
 
     function it_should_throw_exception_when_no_email_was_provided(
