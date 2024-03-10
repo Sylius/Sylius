@@ -13,11 +13,10 @@ declare(strict_types=1);
 
 namespace spec\Sylius\Component\Core\Model;
 
-use Payum\Core\Model\GatewayConfigInterface;
 use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\PayumBundle\Model\PaymentMethod as BasePaymentMethod;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\PaymentMethodInterface;
-use Sylius\Component\Payment\Model\PaymentMethod as BasePaymentMethod;
 
 final class PaymentMethodSpec extends ObjectBehavior
 {
@@ -46,11 +45,5 @@ final class PaymentMethodSpec extends ObjectBehavior
 
         $this->removeChannel($channel);
         $this->hasChannel($channel)->shouldReturn(false);
-    }
-
-    function its_gateway_config_is_mutable(GatewayConfigInterface $gatewayConfig): void
-    {
-        $this->setGatewayConfig($gatewayConfig);
-        $this->getGatewayConfig()->shouldReturn($gatewayConfig);
     }
 }

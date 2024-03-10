@@ -14,35 +14,9 @@ declare(strict_types=1);
 namespace Sylius\Bundle\ApiBundle\Command\Payment;
 
 use Sylius\Bundle\ApiBundle\Command\IriToIdentifierConversionAwareInterface;
+use Sylius\Bundle\PaymentBundle\Command\AddPaymentRequest as BaseAddPaymentRequest;
 
 /** @experimental */
-class AddPaymentRequest implements IriToIdentifierConversionAwareInterface
+class AddPaymentRequest extends BaseAddPaymentRequest implements IriToIdentifierConversionAwareInterface
 {
-    public function __construct(
-        private string $paymentId,
-        private string $paymentMethodCode,
-        private string $action,
-        private mixed $payload = null,
-    ) {
-    }
-
-    public function getPaymentId(): string
-    {
-        return $this->paymentId;
-    }
-
-    public function getPaymentMethodCode(): string
-    {
-        return $this->paymentMethodCode;
-    }
-
-    public function getAction(): string
-    {
-        return $this->action;
-    }
-
-    public function getPayload(): mixed
-    {
-        return $this->payload;
-    }
 }

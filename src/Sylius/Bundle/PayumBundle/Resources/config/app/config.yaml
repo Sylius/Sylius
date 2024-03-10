@@ -1,0 +1,8 @@
+# This file is part of the Sylius package.
+# (c) Sylius Sp. z o.o.
+
+sylius_payment:
+    resources:
+        payment_method:
+            classes:
+                model: Sylius\Bundle\PayumBundle\Model\PaymentMethod
