@@ -17,7 +17,6 @@ use Payum\Core\Action\ActionInterface;
 use Payum\Core\Exception\RequestNotSupportedException;
 use Payum\Core\Request\RenderTemplate;
 use Sylius\Bundle\CoreBundle\PaymentRequest\Payum\PaymentRequestContextInterface;
-use Webmozart\Assert\Assert;
 
 final class SyliusRenderTemplateAction implements ActionInterface
 {
@@ -32,7 +31,6 @@ final class SyliusRenderTemplateAction implements ActionInterface
         RequestNotSupportedException::assertSupports($this, $request);
 
         $paymentRequest = $this->payumApiContext->getPaymentRequest();
-        Assert::notNull($paymentRequest);
 
         $details = $paymentRequest->getResponseData();
         $paymentRequest->setResponseData(array_merge($details, $request->getParameters()));

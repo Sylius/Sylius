@@ -16,8 +16,9 @@ namespace Sylius\Bundle\CoreBundle\PaymentRequest\Payum\Factory;
 use Payum\Core\Payum;
 use Payum\Core\Security\TokenInterface;
 use Sylius\Component\Core\Model\PaymentMethodInterface;
+use Sylius\Component\Payment\Exception\InvalidPaymentRequestPayloadException;
+use Sylius\Component\Payment\Exception\NullGatewayConfigException;
 use Sylius\Component\Payment\Model\PaymentRequestInterface;
-use Webmozart\Assert\Assert;
 
 final class PayumTokenFactory implements PayumTokenFactoryInterface
 {
@@ -33,7 +34,9 @@ final class PayumTokenFactory implements PayumTokenFactoryInterface
         $paymentMethod = $paymentRequest->getMethod();
 
         $gatewayConfig = $paymentMethod->getGatewayConfig();
-        Assert::notNull($gatewayConfig, 'Gateway config cannot be null.');
+        if (null === $gatewayConfig) {
+            throw new NullGatewayConfigException();
+        }
 
         $gatewayName = $gatewayConfig->getGatewayName();
 
@@ -45,15 +48,21 @@ final class PayumTokenFactory implements PayumTokenFactoryInterface
          * }|null $payload
          */
         $payload = $paymentRequest->getPayload();
-        Assert::notNull($payload, 'The request payload need to be not null');
+        if (null === $payload) {
+            throw new InvalidPaymentRequestPayloadException('Payload of the payment request cannot be null');
+        }
 
         $targetPath = $payload['target_path'] ?? null;
-        Assert::notNull($targetPath, 'The request payload must have a "target_path" field not null');
+        if (null === $targetPath) {
+            throw new InvalidPaymentRequestPayloadException('The target path of the payment request cannot be null.');
+        }
 
         $targetPathParameters = $payload['target_path_parameters'] ?? [];
 
         $afterPath = $payload['after_path'] ?? null;
-        Assert::notNull($afterPath, 'The request payload must have an "after_path" field not null');
+        if (null === $afterPath) {
+            throw new InvalidPaymentRequestPayloadException('The after path of the payment request cannot be null.');
+        }
 
         $afterPathParameters = $payload['after_path_parameters'] ?? [];
 

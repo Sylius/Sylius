@@ -20,8 +20,8 @@ use Sylius\Bundle\CoreBundle\PaymentRequest\Payum\Resolver\DoctrineProxyObjectRe
 use Sylius\Bundle\CoreBundle\PaymentRequest\Processor\Payum\AfterTokenRequestProcessorInterface;
 use Sylius\Bundle\CoreBundle\PaymentRequest\Processor\Payum\RequestProcessorInterface;
 use Sylius\Bundle\PayumBundle\Factory\TokenAggregateRequestFactoryInterface;
+use Sylius\Component\Payment\Exception\NullPaymentTokenException;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
-use Webmozart\Assert\Assert;
 
 final class TokenPaymentRequestHandler implements MessageHandlerInterface
 {
@@ -44,7 +44,9 @@ final class TokenPaymentRequestHandler implements MessageHandlerInterface
         $request = $this->payumRequestFactory->createNewWithToken($token);
 
         $token = $request->getToken();
-        Assert::notNull($token, 'A Payum token cannot be null.');
+        if (null === $token) {
+            throw new NullPaymentTokenException();
+        }
 
         $this->requestProcessor->process($paymentRequest, $request, $token->getGatewayName());
         $this->afterTokenRequestProcessor->process($paymentRequest, $token);

@@ -14,6 +14,8 @@ declare(strict_types=1);
 namespace Sylius\Bundle\ApiBundle\CommandHandler\Payment;
 
 use Sylius\Bundle\ApiBundle\Command\Payment\AddPaymentRequest;
+use Sylius\Bundle\ApiBundle\Exception\PaymentMethodNotFoundException;
+use Sylius\Bundle\ApiBundle\Exception\PaymentNotFoundException;
 use Sylius\Component\Core\Model\PaymentInterface;
 use Sylius\Component\Core\Model\PaymentMethodInterface;
 use Sylius\Component\Core\Repository\PaymentMethodRepositoryInterface;
@@ -22,7 +24,6 @@ use Sylius\Component\Payment\Factory\PaymentRequestFactoryInterface;
 use Sylius\Component\Payment\Model\PaymentRequestInterface;
 use Sylius\Component\Payment\Repository\PaymentRequestRepositoryInterface;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
-use Webmozart\Assert\Assert;
 
 /** @experimental */
 final class AddPaymentRequestHandler implements MessageHandlerInterface
@@ -50,16 +51,17 @@ final class AddPaymentRequestHandler implements MessageHandlerInterface
         $paymentMethod = $this->paymentMethodRepository->findOneBy([
             'code' => $addPaymentRequest->getPaymentMethodCode(),
         ]);
-        Assert::notNull($paymentMethod, sprintf(
-            'Payment method (code "%s") not found.',
-            $addPaymentRequest->getPaymentMethodCode(),
-        ));
+
+        if (null === $paymentMethod) {
+            throw new PaymentMethodNotFoundException();
+        }
+
         /** @var PaymentInterface|null $payment */
         $payment = $this->paymentRepository->find($addPaymentRequest->getPaymentId());
-        Assert::notNull(
-            $payment,
-            sprintf('Payment (id "%s") not found.', $addPaymentRequest->getPaymentId()),
-        );
+
+        if (null === $payment) {
+            throw new PaymentNotFoundException();
+        }
 
         $paymentRequest = $this->paymentRequestFactory->create($payment, $paymentMethod);
         $paymentRequest->setAction($addPaymentRequest->getAction());
