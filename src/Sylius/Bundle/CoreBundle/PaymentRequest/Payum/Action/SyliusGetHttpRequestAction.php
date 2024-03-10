@@ -17,7 +17,6 @@ use Payum\Core\Action\ActionInterface;
 use Payum\Core\Exception\RequestNotSupportedException;
 use Payum\Core\Request\GetHttpRequest;
 use Sylius\Bundle\CoreBundle\PaymentRequest\Payum\PaymentRequestContextInterface;
-use Webmozart\Assert\Assert;
 
 final class SyliusGetHttpRequestAction implements ActionInterface
 {
@@ -37,7 +36,6 @@ final class SyliusGetHttpRequestAction implements ActionInterface
     private function updateRequest(GetHttpRequest $request): void
     {
         $paymentRequest = $this->payumApiContext->getPaymentRequest();
-        Assert::notNull($paymentRequest);
 
         /** @var array{
          *     'http_request'?: array{
