@@ -29,7 +29,7 @@ final class PaymentRequestContext implements PaymentRequestContextInterface
         $this->paymentRequest = $paymentRequest;
     }
 
-    public function getPaymentRequest(): ?PaymentRequestInterface
+    public function getPaymentRequest(): PaymentRequestInterface
     {
         return $this->paymentRequest;
     }

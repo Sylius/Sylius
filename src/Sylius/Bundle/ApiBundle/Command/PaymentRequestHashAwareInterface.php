@@ -16,7 +16,7 @@ namespace Sylius\Bundle\ApiBundle\Command;
 /** @experimental */
 interface PaymentRequestHashAwareInterface extends CommandAwareDataTransformerInterface
 {
-    public function getHash(): ?string;
+    public function getHash(): string;
 
-    public function setHash(?string $hash): void;
+    public function setHash(string $hash): void;
 }

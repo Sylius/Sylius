@@ -23,5 +23,5 @@ interface PaymentRequestContextInterface
 
     public function disable(): void;
 
-    public function getPaymentRequest(): ?PaymentRequestInterface;
+    public function getPaymentRequest(): PaymentRequestInterface;
 }

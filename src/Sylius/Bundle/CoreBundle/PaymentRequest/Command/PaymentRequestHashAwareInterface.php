@@ -16,7 +16,7 @@ namespace Sylius\Bundle\CoreBundle\PaymentRequest\Command;
 /** @experimental */
 interface PaymentRequestHashAwareInterface
 {
-    public function getHash(): ?string;
+    public function getHash(): string;
 
-    public function setHash(?string $hash): void;
+    public function setHash(string $hash): void;
 }
