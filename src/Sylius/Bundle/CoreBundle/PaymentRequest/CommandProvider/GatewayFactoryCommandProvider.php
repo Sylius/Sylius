@@ -19,7 +19,6 @@ use Sylius\Bundle\PaymentBundle\Exception\PaymentRequestNotSupportedException;
 use Sylius\Component\Core\Model\PaymentMethodInterface;
 use Sylius\Component\Payment\Model\PaymentRequestInterface;
 use Symfony\Contracts\Service\ServiceProviderInterface;
-use Webmozart\Assert\Assert;
 
 final class GatewayFactoryCommandProvider implements ServiceProviderAwareCommandProviderInterface
 {
@@ -74,7 +73,6 @@ final class GatewayFactoryCommandProvider implements ServiceProviderAwareCommand
         $paymentMethod = $paymentRequest->getMethod();
 
         $factoryName = $this->gatewayFactoryNameProvider->provide($paymentMethod);
-        Assert::notNull($factoryName, 'Gateway config cannot be null.');
 
         return $factoryName;
     }
