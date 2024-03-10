@@ -32,5 +32,13 @@
             <tag name="messenger.message_handler" bus="sylius.command_bus" />
             <tag name="messenger.message_handler" bus="sylius_default.bus" />
         </service>
+
+        <service id="sylius.payment_request.offline.capture" class="Sylius\Bundle\PaymentBundle\CommandHandler\Offline\CapturePaymentRequestHandler">
+            <argument type="service" id="Sylius\Bundle\PaymentBundle\Checker\PaymentRequestIntegrityCheckerInterface" />
+            <argument type="service" id="Sylius\Bundle\PaymentBundle\Processor\Offline\CaptureProcessorInterface" />
+            <argument type="service" id="Sylius\Bundle\PaymentBundle\Processor\Offline\AfterCaptureProcessorInterface" />
+            <tag name="messenger.message_handler" bus="sylius.command_bus" />
+            <tag name="messenger.message_handler" bus="sylius_default.bus" />
+        </service>
     </services>
 </container>

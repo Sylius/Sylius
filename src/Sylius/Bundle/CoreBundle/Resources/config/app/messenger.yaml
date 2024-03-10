@@ -37,8 +37,8 @@ framework:
             'Sylius\Bundle\CoreBundle\CatalogPromotion\Command\DisableCatalogPromotion': main
             'Sylius\Bundle\CoreBundle\CatalogPromotion\Command\RemoveCatalogPromotion': catalog_promotion_removal
             'Sylius\Bundle\CoreBundle\CatalogPromotion\Command\RemoveInactiveCatalogPromotion': catalog_promotion_removal
-            'Sylius\Bundle\CoreBundle\PaymentRequest\Command\PaymentRequestHashAwareInterface': payment_request
             'Sylius\Bundle\CoreBundle\PriceHistory\Command\ApplyLowestPriceOnChannelPricings': main
+            'Sylius\Bundle\PaymentBundle\Command\PaymentRequestHashAwareInterface': payment_request
             'Sylius\Component\Promotion\Event\CatalogPromotionCreated': main
             'Sylius\Component\Promotion\Event\CatalogPromotionEnded': main
             'Sylius\Component\Promotion\Event\CatalogPromotionUpdated': main

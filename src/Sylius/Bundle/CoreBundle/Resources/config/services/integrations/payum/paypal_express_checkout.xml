@@ -18,22 +18,21 @@
     <services>
         <defaults public="true" />
 
-        <service id="sylius.payment_request.command_provider.payum.paypal_express_checkout" class="Sylius\Bundle\CoreBundle\PaymentRequest\CommandProvider\ActionsCommandProvider">
+        <service id="sylius.payment_request.command_provider.payum.paypal_express_checkout" class="Sylius\Bundle\PaymentBundle\CommandProvider\ActionsCommandProvider">
             <argument type="tagged_locator" tag="sylius.payment_request.command_provider.payum.paypal_express_checkout" index-by="type" />
             <tag name="sylius.payment_request.command_provider" gateway-factory="paypal_express_checkout" />
         </service>
 
-        <service id="sylius.payment_request.command_provider.payum.paypal_express_checkout_nvp.capture" class="Sylius\Bundle\CoreBundle\PaymentRequest\CommandProvider\Payum\CaptureCommandProvider">
+        <service id="sylius.payment_request.command_provider.payum.paypal_express_checkout_nvp.capture" class="Sylius\Bundle\PayumBundle\PaymentRequest\CommandProvider\CaptureCommandProvider">
             <tag name="sylius.payment_request.command_provider.payum.paypal_express_checkout" type="capture" />
         </service>
 
-        <service id="sylius.payment_request.command_provider.payum.paypal_express_checkout_nvp.authorize" class="Sylius\Bundle\CoreBundle\PaymentRequest\CommandProvider\Payum\AuthorizeCommandProvider">
+        <service id="sylius.payment_request.command_provider.payum.paypal_express_checkout_nvp.authorize" class="Sylius\Bundle\PayumBundle\PaymentRequest\CommandProvider\AuthorizeCommandProvider">
             <tag name="sylius.payment_request.command_provider.payum.paypal_express_checkout" type="authorize" />
         </service>
 
-        <service id="sylius.payment_request.command_provider.payum.paypal_express_checkout_nvp.status" class="Sylius\Bundle\CoreBundle\PaymentRequest\CommandProvider\Payum\StatusCommandProvider">
+        <service id="sylius.payment_request.command_provider.payum.paypal_express_checkout_nvp.status" class="Sylius\Bundle\PayumBundle\PaymentRequest\CommandProvider\StatusCommandProvider">
             <tag name="sylius.payment_request.command_provider.payum.paypal_express_checkout" type="status" />
         </service>
-
     </services>
 </container>

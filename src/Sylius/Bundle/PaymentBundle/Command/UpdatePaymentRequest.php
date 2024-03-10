@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Bundle\PaymentBundle\Command;
 
 /** @experimental */
-class UpdatePaymentRequest
+class UpdatePaymentRequest implements PaymentRequestHashAwareInterface
 {
     protected ?string $hash = null;
 

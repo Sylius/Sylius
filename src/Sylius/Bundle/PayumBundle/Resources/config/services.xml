@@ -17,7 +17,7 @@
                                http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <imports>
-        <import resource="services/**.xml" />
+        <import resource="services/**/*.xml" />
     </imports>
 
     <services>

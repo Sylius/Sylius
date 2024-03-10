@@ -13,13 +13,13 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\Command\Payment;
 
+use Sylius\Bundle\ApiBundle\Command\CommandAwareDataTransformerInterface;
 use Sylius\Bundle\ApiBundle\Command\IriToIdentifierConversionAwareInterface;
-use Sylius\Bundle\ApiBundle\Command\PaymentRequestHashAwareInterface;
 use Sylius\Bundle\PaymentBundle\Command\UpdatePaymentRequest as BaseUpdatePaymentRequest;
 
 /** @experimental */
 class UpdatePaymentRequest extends BaseUpdatePaymentRequest implements
-    PaymentRequestHashAwareInterface,
+    CommandAwareDataTransformerInterface,
     IriToIdentifierConversionAwareInterface
 {
 }
