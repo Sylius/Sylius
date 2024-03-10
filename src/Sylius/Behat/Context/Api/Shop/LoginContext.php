@@ -282,7 +282,7 @@ final class LoginContext implements Context
     {
         $response = $this->client->executeCustomRequest($this->request);
         Assert::same($response->getStatusCode(), 422);
-        Assert::same($this->responseChecker->getError($response), 'resetPasswordToken: Password reset token itotallyforgotmypassword is invalid.');
+        Assert::same($this->responseChecker->getError($response), 'token: Password reset token itotallyforgotmypassword is invalid.');
     }
 
     /**
@@ -292,6 +292,6 @@ final class LoginContext implements Context
     {
         $response = $this->client->getLastResponse();
         Assert::same($response->getStatusCode(), 422);
-        Assert::same($this->responseChecker->getError($response), 'resetPasswordToken: Password reset token has expired.');
+        Assert::same($this->responseChecker->getError($response), 'token: Password reset token has expired.');
     }
 }
