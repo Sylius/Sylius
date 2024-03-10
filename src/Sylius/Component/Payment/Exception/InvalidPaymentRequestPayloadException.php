@@ -11,13 +11,13 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\ApiBundle\Exception;
+namespace Sylius\Component\Payment\Exception;
 
 /** @experimental */
-final class PaymentNotFoundException extends \RuntimeException
+final class InvalidPaymentRequestPayloadException extends \RuntimeException
 {
     public function __construct(
-        string $message = 'Payment not found.',
+        string $message = 'Payload of the payment request is invalid.',
         int $code = 0,
         \Throwable $previous = null,
     ) {
