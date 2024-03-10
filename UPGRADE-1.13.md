@@ -539,3 +539,17 @@ List of affected classes:
    ```
 
 1 Extracted the section responsible for the `ShopBundle` from `@SyliusCore/Email/accountVerification.html.twig` and relocated it to `@SyliusShop/Email/verification.html.twig`.
+
+1. The constructor of `Sylius\Component\Core\OrderProcessing\OrderPaymentProcessor` has been changed:
+
+    ```diff
+    use Sylius\Component\Core\Payment\Remover\OrderPaymentsRemoverInterface;
+
+        public function __construct(
+            OrderPaymentProviderInterface $orderPaymentProvider,
+    -       string $targetState = PaymentInterface::STATE_CART,
+    +       string $targetState,
+            OrderPaymentsRemoverInterface $orderPaymentsRemover,
+            array $unprocessableOrderStates,
+       )
+    ```

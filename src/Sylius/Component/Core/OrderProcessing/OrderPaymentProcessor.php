@@ -31,6 +31,15 @@ final class OrderPaymentProcessor implements OrderProcessorInterface
         /** @var array<string> $unprocessableOrderStates */
         private array $unprocessableOrderStates = [],
     ) {
+        if (empty($this->targetState)) {
+            trigger_deprecation(
+                'sylius/core',
+                '1.13',
+                'Not passing a $targetState to %s constructor is deprecated and will be prohibited in Sylius 2.0.',
+                self::class,
+            );
+        }
+
         if ($this->orderPaymentsRemover === null) {
             trigger_deprecation(
                 'sylius/core',
