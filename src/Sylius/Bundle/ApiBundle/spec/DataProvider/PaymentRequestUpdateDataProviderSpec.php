@@ -21,7 +21,7 @@ use Sylius\Component\Payment\Model\PaymentRequestInterface;
 use Sylius\Component\Payment\Repository\PaymentRequestRepositoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 
-final class PaymentRequestDataProviderSpec extends ObjectBehavior
+final class PaymentRequestUpdateDataProviderSpec extends ObjectBehavior
 {
     function let(
         PaymentRequestRepositoryInterface $paymentRequestRepository,

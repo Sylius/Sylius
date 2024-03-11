@@ -117,7 +117,7 @@
             <tag name="api_platform.subresource_data_provider" priority="10" />
         </service>
 
-        <service id="Sylius\Bundle\ApiBundle\DataProvider\PaymentRequestDataProvider">
+        <service id="Sylius\Bundle\ApiBundle\DataProvider\PaymentRequestUpdateDataProvider">
             <argument type="service" id="sylius.repository.payment_request" />
             <argument type="service" id="sylius.api.checker.update_payment_request_eligibility" />
             <tag name="api_platform.item_data_provider" priority="10" />

@@ -22,7 +22,7 @@ use Sylius\Component\Payment\Repository\PaymentRequestRepositoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 
 /** @experimental */
-final class PaymentRequestDataProvider implements RestrictedDataProviderInterface, ItemDataProviderInterface
+final class PaymentRequestUpdateDataProvider implements RestrictedDataProviderInterface, ItemDataProviderInterface
 {
     /** @param PaymentRequestRepositoryInterface<PaymentRequestInterface> $paymentRequestRepository */
     public function __construct(
