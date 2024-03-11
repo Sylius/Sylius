@@ -15,6 +15,11 @@ when@test_cached:
         password_hashers:
             plaintext: plaintext
 
+when@test_cached_payumless:
+    security:
+        password_hashers:
+            plaintext: plaintext
+
 sylius_user:
     encoder: argon2i
 
