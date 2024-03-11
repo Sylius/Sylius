@@ -44,14 +44,14 @@ jobs:
     behat-no-js:
         needs: get-matrix
         runs-on: ubuntu-latest
-        name: "Non-JS, PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}, MySQL ${{ matrix.mysql }}, Twig ${{ matrix.twig }}, API Platform ${{ matrix.api-platform }}"
+        name: "Non-JS, PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }} (${{ matrix.env }}), MySQL ${{ matrix.mysql }}, Twig ${{ matrix.twig }}, API Platform ${{ matrix.api-platform }}"
         timeout-minutes: 45
         strategy:
             fail-fast: false
             matrix: ${{ fromJson(needs.get-matrix.outputs.matrix) }}
 
         env:
-            APP_ENV: test_cached
+            APP_ENV: ${{ matrix.env }}
             DATABASE_URL: "mysql://root:root@127.0.0.1/sylius?charset=utf8mb4&serverVersion=${{ matrix.mysql }}"
 
         steps:
@@ -132,14 +132,14 @@ jobs:
     behat-ui-js:
         needs: get-matrix
         runs-on: ubuntu-latest
-        name: "JS, PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}, MySQL ${{ matrix.mysql }}, Twig ${{ matrix.twig }}, API Platform ${{ matrix.api-platform }}"
+        name: "JS, PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }} (${{ matrix.env }}), MySQL ${{ matrix.mysql }}, Twig ${{ matrix.twig }}, API Platform ${{ matrix.api-platform }}"
         timeout-minutes: 45
         strategy:
             fail-fast: false
             matrix: ${{ fromJson(needs.get-matrix.outputs.matrix) }}
 
         env:
-            APP_ENV: test_cached
+            APP_ENV: ${{ matrix.env }}
             DATABASE_URL: "mysql://root:root@127.0.0.1/sylius?charset=utf8mb4&serverVersion=${{ matrix.mysql }}"
 
         steps:
