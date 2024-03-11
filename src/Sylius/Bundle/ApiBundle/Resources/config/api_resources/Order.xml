@@ -502,7 +502,7 @@
             <subresource resourceClass="%sylius.model.shipment.class%" />
         </property>
         <property name="payments" writable="false">
-            <subresource resourceClass="%sylius.model.payment.class%" />
+            <subresource resourceClass="%sylius.model.payment.class%" maxDepth="1"/>
         </property>
         <property name="state" writable="false" />
         <property name="paymentState" writable="false" />

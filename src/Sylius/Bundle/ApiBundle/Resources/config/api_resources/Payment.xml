@@ -73,6 +73,11 @@
         </itemOperations>
 
         <subresourceOperations>
+            <subresourceOperation name="payment_requests_get_subresource">
+                <attribute name="method">GET</attribute>
+                <attribute name="path">/admin/payments/{id}/payment-requests</attribute>
+            </subresourceOperation>
+
             <subresourceOperation name="api_orders_payments_get_subresource">
                 <attribute name="normalization_context">
                     <attribute name="groups">
@@ -91,5 +96,8 @@
         <property name="state" writable="false" />
         <property name="details" writable="false" />
         <property name="order" writable="false" />
+        <property name="paymentRequests" readable="true" writable="false">
+            <subresource resourceClass="%sylius.model.payment_request.class%" />
+        </property>
     </resource>
 </resources>

@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Tests\Api\Admin;
 
+use Sylius\Component\Payment\Model\PaymentInterface;
 use Sylius\Component\Payment\Model\PaymentRequestInterface;
 use Sylius\Tests\Api\JsonApiTestCase;
 
@@ -26,11 +27,11 @@ final class PaymentRequestsTest extends JsonApiTestCase
     }
 
     /** @test */
-    public function it_gets_payment_requests(): void
+    public function it_gets_payment_requests_for_payment(): void
     {
         $this->setUpDefaultGetHeaders();
 
-        $this->loadFixturesFromFiles([
+        $fixtures = $this->loadFixturesFromFiles([
             'authentication/api_administrator.yaml',
             'channel.yaml',
             'payment_method.yaml',
@@ -38,9 +39,12 @@ final class PaymentRequestsTest extends JsonApiTestCase
             'payment_request/order.yaml',
         ]);
 
-        $this->requestGet(uri: '/api/v2/admin/payment-requests');
+        /** @var PaymentInterface $payment */
+        $payment = $fixtures['payment'];
 
-        $this->assertResponseSuccessful('admin/payment_request/get_payment_requests');
+        $this->requestGet(uri: sprintf('/api/v2/admin/payments/%s/payment-requests', $payment->getId()));
+
+        $this->assertResponseSuccessful('admin/payment_request/get_payment_requests_for_payment');
     }
 
     /** @test */

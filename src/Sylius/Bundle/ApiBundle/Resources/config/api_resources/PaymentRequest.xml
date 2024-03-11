@@ -23,17 +23,6 @@
         </attribute>
 
         <collectionOperations>
-            <collectionOperation name="admin_get">
-                <attribute name="method">GET</attribute>
-                <attribute name="path">/admin/payment-requests</attribute>
-                <attribute name="filters">
-                    <attribute>sylius.api.search_payment_request_filter</attribute>
-                </attribute>
-                <attribute name="normalization_context">
-                    <attribute name="groups">sylius:admin:payment_request:index</attribute>
-                </attribute>
-            </collectionOperation>
-
             <collectionOperation name="shop_post">
                 <attribute name="method">POST</attribute>
                 <attribute name="path">/shop/payment-requests</attribute>
@@ -80,6 +69,14 @@
                 </attribute>
             </itemOperation>
         </itemOperations>
+
+        <subresourceOperations>
+            <subresourceOperation name="api_payments_payment_requests_get_subresource">
+                <attribute name="normalization_context">
+                    <attribute name="groups">sylius:admin:payment_request:index</attribute>
+                </attribute>
+            </subresourceOperation>
+        </subresourceOperations>
 
         <property name="hash" identifier="true" writable="false" />
         <property name="state" writable="false" />
