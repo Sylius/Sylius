@@ -189,6 +189,15 @@ ApiBundle is no longer experimental and is now following the same support policy
 
 ### Resources changes
 
+1. The following endpoints short names have been changed:
+
+    * `AdminResetPasswordRequest` -> `Administrator`
+    * `AccountResetPasswordRequest` -> `Customer`
+    * `ShopUserToken` -> `Customer` and `Security`
+    * `AdminUserToken` -> `Administrator` and `Security`
+    * `ContactRequest` -> `Contact`
+    * `VerifyCustomerAccount` -> `Customer`
+
 1. The item operation path for ProductVariantTranslation resource has been changed:
     - `GET` `/admin/product-variant-translation/{id}` -> `GET` `/admin/product-variant-translations/{id}`
 
@@ -199,6 +208,23 @@ ApiBundle is no longer experimental and is now following the same support policy
     * `GET` `/shop/shipping-method-translations/{id}`
 
    The fields those endpoint were exposing are available on their respective translation subject resources.
+
+1. The following endpoints regarding authentication tokens have been changed:
+    * `POST` `/admin/authentication-tokens` -> `POST` `/admin/administrators/token`
+    * `POST` `/shop/authentication-tokens` -> `POST` `/shop/customers/token`
+
+1. The following endpoints regarding password reset have been changed:
+    * `POST` `/admin/reset-password-requests` -> `POST` `/admin/administrators/reset-password`
+    * `PATCH` `/admin/reset-password-requests/{resetPasswordToken}` -> `PATCH` `/admin/administrators/reset-password/{token}`
+    * `POST` `/shop/reset-password-requests` -> `POST` `/shop/customers/reset-password`
+    * `PATCH` `/shop/reset-password-requests/{resetPasswordToken}` -> `PATCH` `/shop/customers/reset-password/{token}`
+
+1. The following endpoints regarding customer account verification have been changed:
+    * `POST` `/shop/account-verification-requests` -> `POST` `/shop/customers/verify`
+    * `PATCH` `/shop/account-verification-requests/{token}` -> `PATCH` `/shop/customers/verify/{token}`
+
+1. The following endpoints regarding contact requests have been changed:
+    * `POST` `/shop/contact-requests` -> `POST` `/shop/contact`
 
 1. Update in Translations Handling
 
