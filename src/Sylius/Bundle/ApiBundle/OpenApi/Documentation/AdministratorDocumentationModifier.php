@@ -101,7 +101,7 @@ final class AdministratorDocumentationModifier implements DocumentationModifierI
             $this->apiRoute . '/admin/administrators/token',
             new PathItem(
                 post: new Operation(
-                    operationId: 'postCredentialsItem',
+                    operationId: 'postAdministratorCredentialsItem',
                     tags: ['Administrator', 'Security'],
                     responses: [
                         Response::HTTP_OK => [

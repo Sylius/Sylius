@@ -203,7 +203,7 @@ final class CustomerDocumentationModifier implements DocumentationModifierInterf
             $this->apiRoute . '/shop/customers/token',
             new PathItem(
                 post: new Operation(
-                    operationId: 'postCredentialsItem',
+                    operationId: 'postCustomerCredentialsItem',
                     tags: ['Customer', 'Security'],
                     responses: [
                         Response::HTTP_OK => [
