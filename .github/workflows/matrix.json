@@ -38,14 +38,16 @@
           "symfony": "^5.4",
           "api-platform": "^2.7.10",
           "mysql": "8.0",
-          "twig": "^2.12"
+          "twig": "^2.12",
+          "env": "test_cached"
         },
         {
           "php": "8.2",
           "symfony": "^6.4",
           "api-platform": "^2.7.10",
           "mysql": "8.0",
-          "twig": "^3.3"
+          "twig": "^3.3",
+          "env": "test_cached_payumless"
         }
       ]
     },
@@ -109,13 +111,31 @@
       "api-platform": [ "^2.7.10" ],
       "mysql": [ "8.0" ],
       "twig": [ "^3.3" ],
+      "env": "test_cached",
       "include": [
         {
           "php": "8.1",
           "symfony": "^5.4",
           "api-platform": "^2.7.10",
           "mysql": "8.0",
-          "twig": "^2.12"
+          "twig": "^2.12",
+          "env": "test_cached"
+        },
+        {
+          "php": "8.1",
+          "symfony": "^5.4",
+          "api-platform": "^2.7.10",
+          "mysql": "8.0",
+          "twig": "^3.3",
+          "env": "test_cached_payumless"
+        },
+        {
+          "php": "8.2",
+          "symfony": "^6.4",
+          "api-platform": "^2.7.10",
+          "mysql": "8.0",
+          "twig": "^3.3",
+          "env": "test_cached_payumless"
         }
       ]
     },
