@@ -27,17 +27,15 @@ final class ApiPlatformSecurityClient implements ApiSecurityClientInterface
         private readonly SharedStorageInterface $sharedStorage,
         private readonly string $apiUrlPrefix,
         private readonly string $section,
-        private readonly string $resource,
     ) {
     }
 
     public function prepareLoginRequest(): void
     {
         $this->request['url'] = sprintf(
-            '%s/%s/%s/token',
+            '%s/%s/token',
             $this->apiUrlPrefix,
             $this->section,
-            $this->resource,
         );
 
         $this->request['method'] = 'POST';
