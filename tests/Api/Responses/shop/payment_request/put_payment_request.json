@@ -13,11 +13,7 @@
         "after_url": "https:\/\/myshop.tld\/after-path"
     },
     "payment": "\/api\/v2\/shop\/payments\/@integer@",
-    "method": {
-        "@id": "\/api\/v2\/shop\/payment-methods\/CASH_ON_DELIVERY",
-        "@type": "PaymentMethod",
-        "name": "Cash on delivery"
-    },
+    "method": "\/api\/v2\/shop\/payment-methods\/CASH_ON_DELIVERY",
     "createdAt": @datetime@,
     "updatedAt": @datetime@
 }

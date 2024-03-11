@@ -13,15 +13,7 @@
         "after_url": "https:\/\/myshop.tld\/after-path"
     },
     "payment": "\/api\/v2\/admin\/payments\/@integer@",
-    "method": {
-        "@id": "\/api\/v2\/admin\/payment-methods\/CASH_ON_DELIVERY",
-        "@type": "PaymentMethod",
-        "code": "CASH_ON_DELIVERY",
-        "enabled": true,
-        "translations": {
-            "en_US": "\/api\/v2\/admin\/payment-method-translations\/@integer@"
-        }
-    },
+    "method": "\/api\/v2\/admin\/payment-methods\/CASH_ON_DELIVERY",
     "createdAt": @datetime@,
     "updatedAt": @datetime@
 }
