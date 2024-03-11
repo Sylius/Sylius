@@ -1,6 +1,6 @@
 {
     "@context": "\/api\/v2\/contexts\/PaymentRequest",
-    "@id": "\/api\/v2\/admin\/payment-requests",
+    "@id": "\/api\/v2\/admin\/payments\/@integer@\/payment-requests",
     "@type": "hydra:Collection",
     "hydra:member": [
         {
@@ -31,36 +31,5 @@
             "method": "\/api\/v2\/admin\/payment-methods\/CASH_ON_DELIVERY"
         }
     ],
-    "hydra:totalItems": 3,
-    "hydra:search": {
-        "@type": "hydra:IriTemplate",
-        "hydra:template": "\/api\/v2\/admin\/payment-requests{?state,state[],method.code,method.code[]}",
-        "hydra:variableRepresentation": "BasicRepresentation",
-        "hydra:mapping": [
-            {
-                "@type": "IriTemplateMapping",
-                "variable": "state",
-                "property": "state",
-                "required": false
-            },
-            {
-                "@type": "IriTemplateMapping",
-                "variable": "state[]",
-                "property": "state",
-                "required": false
-            },
-            {
-                "@type": "IriTemplateMapping",
-                "variable": "method.code",
-                "property": "method.code",
-                "required": false
-            },
-            {
-                "@type": "IriTemplateMapping",
-                "variable": "method.code[]",
-                "property": "method.code",
-                "required": false
-            }
-        ]
-    }
+    "hydra:totalItems": 3
 }
