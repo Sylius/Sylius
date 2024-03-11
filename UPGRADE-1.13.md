@@ -204,6 +204,16 @@ To ease the update process, we have grouped the changes into the following categ
         )
     ```
 
+   `Sylius\Bundle\CoreBundle\Message\Admin\Account\ResetPassword`
+     ```diff
+         public function __construct( 
+     -      string $resetPasswordToken,
+     +      string $token,
+            ?string $newPassword = null,
+            ?string $confirmNewPassword = null,
+         )
+     ```
+
    `Sylius\Bundle\CoreBundle\MessageHandler\Admin\Account\SendResetPasswordEmailHandler`
     ```diff
     use Sylius\Bundle\CoreBundle\Mailer\ResetPasswordEmailManagerInterface;

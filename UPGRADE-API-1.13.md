@@ -6,7 +6,7 @@ ApiBundle is no longer experimental and is now following the same support policy
 
 1. The following Command constructor signatures have changed:
 
-    `Sylius\Bundle\ApiBundle\Command\Account\ChangeShopUserPassword`:
+   `Sylius\Bundle\ApiBundle\Command\Account\ChangeShopUserPassword`:
     ```diff
         public function __construct(
     -       public ?string $newPassword, 
@@ -18,7 +18,7 @@ ApiBundle is no longer experimental and is now following the same support policy
         )
     ```
 
-    `Sylius\Bundle\ApiBundle\Command\Catalog\AddProductReview`:
+   `Sylius\Bundle\ApiBundle\Command\Catalog\AddProductReview`:
     ```diff
         public function __construct(
     -       public ?string $title,
@@ -32,6 +32,16 @@ ApiBundle is no longer experimental and is now following the same support policy
         )
     ```
 
+   `Sylius\Bundle\ApiBundle\Command\Account\ResetPassword`
+    ```diff
+    public function __construct(
+    -      public string $resetPasswordToken,
+    +      public string $token,
+           public ?string $newPassword = null,
+           public ?string $confirmNewPassword = null,
+    )
+    ```
+
     `Sylius\Bundle\ApiBundle\Command\Account\VerifyCustomerAccount`:
     ```diff
         public function __construct(
@@ -39,9 +49,7 @@ ApiBundle is no longer experimental and is now following the same support policy
     +       public string $token,
     +       public ?string $channelCode = null,
     +       public ?string $localeCode = null,
-        ) {
-        }
-    ```
+        )
 
 1. The following Command Handlers constructor signatures have changed:
 
