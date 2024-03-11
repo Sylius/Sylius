@@ -60,5 +60,8 @@ interface PaymentInterface extends TimestampableInterface, ResourceInterface
 
     public function setDetails(array $details): void;
 
+    /**
+     * @return Collection<array-key, PaymentRequestInterface>
+     */
     public function getPaymentRequests(): Collection;
 }
