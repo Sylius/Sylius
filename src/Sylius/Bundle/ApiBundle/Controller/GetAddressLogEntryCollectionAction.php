@@ -19,7 +19,6 @@ use Sylius\Component\Addressing\Model\AddressLogEntry;
 use Symfony\Component\Messenger\HandleTrait;
 use Symfony\Component\Messenger\MessageBusInterface;
 
-/** @experimental */
 final class GetAddressLogEntryCollectionAction
 {
     use HandleTrait;

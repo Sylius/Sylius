@@ -17,7 +17,6 @@ use ApiPlatform\Core\DataPersister\ContextAwareDataPersisterInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\User\Security\PasswordUpdaterInterface;
 
-/** @experimental */
 final class CustomerDataPersister implements ContextAwareDataPersisterInterface
 {
     public function __construct(

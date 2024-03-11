@@ -20,7 +20,6 @@ use Sylius\Bundle\ApiBundle\DependencyInjection\Compiler\LegacyErrorHandlingComp
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
-/** @experimental */
 final class SyliusApiBundle extends Bundle
 {
     public function build(ContainerBuilder $container): void

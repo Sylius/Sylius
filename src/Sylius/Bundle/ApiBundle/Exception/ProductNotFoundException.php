@@ -16,7 +16,6 @@ namespace Sylius\Bundle\ApiBundle\Exception;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 
-/** @experimental */
 final class ProductNotFoundException extends HttpException
 {
     public function __construct(int $statusCode = Response::HTTP_NOT_FOUND)

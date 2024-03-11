@@ -26,7 +26,6 @@ use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Messenger\Stamp\DispatchAfterCurrentBusStamp;
 use Webmozart\Assert\Assert;
 
-/** @experimental */
 final class ShipShipmentHandler implements MessageHandlerInterface
 {
     public function __construct(

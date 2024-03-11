@@ -16,7 +16,6 @@ namespace Sylius\Bundle\ApiBundle\Applicator;
 use Psr\Clock\ClockInterface;
 use Sylius\Component\Core\Model\PromotionInterface;
 
-/** @experimental */
 final class ArchivingPromotionApplicator implements ArchivingPromotionApplicatorInterface
 {
     public function __construct(private ClockInterface $calendar)

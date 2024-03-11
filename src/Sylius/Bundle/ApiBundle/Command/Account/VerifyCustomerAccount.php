@@ -16,11 +16,7 @@ namespace Sylius\Bundle\ApiBundle\Command\Account;
 use Sylius\Bundle\ApiBundle\Command\ChannelCodeAwareInterface;
 use Sylius\Bundle\ApiBundle\Command\LocaleCodeAwareInterface;
 
-/**
- * @experimental
- *
- * @immutable
- */
+/** @immutable */
 class VerifyCustomerAccount implements ChannelCodeAwareInterface, LocaleCodeAwareInterface
 {
     public function __construct(

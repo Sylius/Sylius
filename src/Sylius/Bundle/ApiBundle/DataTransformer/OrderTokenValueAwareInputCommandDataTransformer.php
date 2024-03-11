@@ -16,7 +16,6 @@ namespace Sylius\Bundle\ApiBundle\DataTransformer;
 use Sylius\Bundle\ApiBundle\Command\OrderTokenValueAwareInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 
-/** @experimental */
 final class OrderTokenValueAwareInputCommandDataTransformer implements CommandDataTransformerInterface
 {
     public function transform($object, string $to, array $context = [])

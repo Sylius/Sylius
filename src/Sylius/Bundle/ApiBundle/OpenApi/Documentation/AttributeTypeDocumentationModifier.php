@@ -17,7 +17,6 @@ use ApiPlatform\OpenApi\OpenApi;
 use Sylius\Component\Attribute\AttributeType\AttributeTypeInterface;
 use Sylius\Component\Registry\ServiceRegistryInterface;
 
-/** @experimental */
 final class AttributeTypeDocumentationModifier implements DocumentationModifierInterface
 {
     public function __construct(

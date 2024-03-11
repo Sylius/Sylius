@@ -16,7 +16,7 @@ on:
             cron: "0 1 * * 6" # Run at 1am every Saturday
     workflow_dispatch: ~
 
-permissions: 
+permissions:
     contents: read
 
 jobs:
@@ -29,7 +29,7 @@ jobs:
 
         steps:
             -
-                uses: actions/checkout@v3
+                uses: actions/checkout@v4
 
             -
                 name: Install documentation dependencies

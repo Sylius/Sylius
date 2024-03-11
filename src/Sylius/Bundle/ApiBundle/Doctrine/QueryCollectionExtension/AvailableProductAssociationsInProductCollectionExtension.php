@@ -19,7 +19,6 @@ use Doctrine\ORM\QueryBuilder;
 use Sylius\Bundle\ApiBundle\Context\UserContextInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 
-/** @experimental */
 final class AvailableProductAssociationsInProductCollectionExtension implements ContextAwareQueryCollectionExtensionInterface
 {
     public function __construct(private UserContextInterface $userContext)

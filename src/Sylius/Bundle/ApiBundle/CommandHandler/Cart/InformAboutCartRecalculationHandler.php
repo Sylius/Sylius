@@ -17,7 +17,6 @@ use Sylius\Bundle\ApiBundle\Command\Cart\InformAboutCartRecalculation;
 use Sylius\Bundle\ApiBundle\Exception\OrderNoLongerEligibleForPromotion;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 
-/** @experimental  */
 final class InformAboutCartRecalculationHandler implements MessageHandlerInterface
 {
     public function __invoke(InformAboutCartRecalculation $command): void

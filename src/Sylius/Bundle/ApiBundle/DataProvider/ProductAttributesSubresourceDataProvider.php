@@ -22,7 +22,6 @@ use Sylius\Component\Locale\Provider\LocaleProviderInterface;
 use Sylius\Component\Product\Model\ProductAttributeValueInterface;
 use Sylius\Component\Product\Repository\ProductAttributeValueRepositoryInterface;
 
-/** @experimental */
 final class ProductAttributesSubresourceDataProvider implements RestrictedDataProviderInterface, SubresourceDataProviderInterface
 {
     public function __construct(

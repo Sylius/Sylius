@@ -32,7 +32,7 @@ jobs:
 
         steps:
             -
-                uses: actions/checkout@v3
+                uses: actions/checkout@v4
 
             -   name: Change minimum-stability to dev
                 run: |

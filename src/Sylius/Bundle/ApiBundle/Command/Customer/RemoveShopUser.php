@@ -15,7 +15,6 @@ namespace Sylius\Bundle\ApiBundle\Command\Customer;
 
 use Sylius\Bundle\ApiBundle\Command\ShopUserIdAwareInterface;
 
-/** @experimental */
 class RemoveShopUser implements ShopUserIdAwareInterface
 {
     public function __construct(private mixed $shopUserId)

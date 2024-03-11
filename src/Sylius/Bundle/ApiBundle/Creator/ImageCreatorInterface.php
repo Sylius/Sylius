@@ -15,7 +15,6 @@ namespace Sylius\Bundle\ApiBundle\Creator;
 
 use Sylius\Component\Core\Model\ImageInterface;
 
-/** @experimental */
 interface ImageCreatorInterface
 {
     /** @param array<mixed> $context */

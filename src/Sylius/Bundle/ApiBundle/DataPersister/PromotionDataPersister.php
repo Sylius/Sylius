@@ -18,7 +18,6 @@ use Doctrine\DBAL\Exception\ForeignKeyConstraintViolationException;
 use Sylius\Bundle\ApiBundle\Exception\PromotionCannotBeRemoved;
 use Sylius\Component\Core\Model\PromotionInterface;
 
-/** @experimental */
 final class PromotionDataPersister implements ContextAwareDataPersisterInterface
 {
     public function __construct(private ContextAwareDataPersisterInterface $decoratedDataPersister)

@@ -19,7 +19,6 @@ use ApiPlatform\OpenApi\Model\RequestBody;
 use ApiPlatform\OpenApi\OpenApi;
 use Symfony\Component\HttpFoundation\Response;
 
-/** @experimental */
 final class AdminAuthenticationTokenDocumentationModifier implements DocumentationModifierInterface
 {
     public function __construct(private string $apiRoute)

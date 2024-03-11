@@ -19,7 +19,6 @@ use Sylius\Bundle\ApiBundle\Query\GetAddressLogEntryCollection;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\ResourceLogEntryRepositoryInterface;
 use Sylius\Component\Addressing\Model\AddressLogEntry;
 
-/** @experimental */
 final class GetAddressLogEntryCollectionHandler
 {
     public function __construct(

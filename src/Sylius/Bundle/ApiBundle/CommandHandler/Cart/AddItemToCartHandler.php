@@ -25,7 +25,6 @@ use Sylius\Component\Order\Modifier\OrderModifierInterface;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 use Webmozart\Assert\Assert;
 
-/** @experimental */
 final class AddItemToCartHandler implements MessageHandlerInterface
 {
     public function __construct(

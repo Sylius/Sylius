@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\DataTransformer;
 
-/** @experimental */
 interface CommandDataTransformerInterface
 {
     public function transform($object, string $to, array $context = []);

@@ -24,7 +24,7 @@ jobs:
         outputs:
             matrix: ${{ steps.matrix.outputs.prop }}
         steps:
-            -   uses: actions/checkout@v3
+            -   uses: actions/checkout@v4
             -   name: "Get matrix"
                 id: matrix
                 uses: notiz-dev/github-action-json-property@release
@@ -59,13 +59,13 @@ jobs:
 
             -   name: "Checkout (With Branch)"
                 if: "${{ inputs.branch != '' }}"
-                uses: actions/checkout@v3
+                uses: actions/checkout@v4
                 with:
                     ref: ${{ inputs.branch }}
 
             -   name: "Checkout"
                 if: "${{ inputs.branch == '' }}"
-                uses: actions/checkout@v3
+                uses: actions/checkout@v4
                 
             -   name: Prepare manifest.json files
                 run: |

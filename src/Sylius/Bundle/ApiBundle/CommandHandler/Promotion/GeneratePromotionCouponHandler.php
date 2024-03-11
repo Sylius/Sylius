@@ -23,7 +23,6 @@ use Sylius\Component\Promotion\Generator\PromotionCouponGeneratorInterface;
 use Sylius\Component\Promotion\Model\PromotionCouponInterface;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 
-/** @experimental */
 final class GeneratePromotionCouponHandler implements MessageHandlerInterface
 {
     /**

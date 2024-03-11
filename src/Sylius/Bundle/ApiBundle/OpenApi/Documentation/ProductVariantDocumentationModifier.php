@@ -15,7 +15,6 @@ namespace Sylius\Bundle\ApiBundle\OpenApi\Documentation;
 
 use ApiPlatform\OpenApi\OpenApi;
 
-/** @experimental */
 final class ProductVariantDocumentationModifier implements DocumentationModifierInterface
 {
     public function modify(OpenApi $docs): OpenApi

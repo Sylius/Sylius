@@ -23,7 +23,6 @@ use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 use Webmozart\Assert\Assert;
 
-/** @experimental */
 final class ChosenShippingMethodEligibilityValidator extends ConstraintValidator
 {
     public function __construct(

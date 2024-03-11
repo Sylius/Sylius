@@ -25,7 +25,6 @@ use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 use Webmozart\Assert\Assert;
 
-/** @experimental */
 class CheckoutCompletionValidator extends ConstraintValidator
 {
     /**
