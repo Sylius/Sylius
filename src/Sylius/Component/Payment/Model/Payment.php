@@ -13,6 +13,8 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Payment\Model;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Resource\Model\TimestampableTrait;
 
 class Payment implements PaymentInterface
@@ -37,9 +39,13 @@ class Payment implements PaymentInterface
     /** @var mixed[] */
     protected $details = [];
 
+    /** @var Collection<array-key, PaymentRequestInterface> */
+    protected Collection $paymentRequests;
+
     public function __construct()
     {
         $this->createdAt = new \DateTime();
+        $this->paymentRequests = new ArrayCollection();
     }
 
     public function getId()
@@ -95,5 +101,10 @@ class Payment implements PaymentInterface
     public function setDetails(array $details): void
     {
         $this->details = $details;
+    }
+
+    public function getPaymentRequests(): Collection
+    {
+        return $this->paymentRequests;
     }
 }

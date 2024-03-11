@@ -23,6 +23,16 @@
             <join-column name="method_id" referenced-column-name="id" nullable="true" />
         </many-to-one>
 
+        <one-to-many field="paymentRequests" target-entity="Sylius\Component\Payment\Model\PaymentRequestInterface" mapped-by="payment" orphan-removal="true">
+            <cascade>
+                <cascade-all/>
+            </cascade>
+
+            <order-by>
+                <order-by-field name="id" />
+            </order-by>
+        </one-to-many>
+
         <field name="currencyCode" column="currency_code" length="3" type="string" />
         <field name="amount" column="amount" type="integer" />
         <field name="state" column="state" type="string" />
