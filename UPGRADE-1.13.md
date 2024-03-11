@@ -384,8 +384,9 @@ To ease the update process, we have grouped the changes into the following categ
       utilized setter methods, you should
       continue using `Sylius\Component\Promotion\Generator\PromotionCouponGeneratorInstructionInterface`.
 
-1. Moved classes from `Command` to `Console\Command`. The `Command` namespace is deprecated for console command classes
-   and will be removed in Sylius 2.0.
+1. All console commands have been moved from `Command` to `Console\Command`.
+   The `Command` namespace is considered deprecated for console commands
+   and will only be used for CQRS-related commands starting with Sylius 2.0.
    List of affected classes:
     - `Sylius\Bundle\OrderBundle\Command\RemoveExpiredCartsCommand`
       to `Sylius\Bundle\OrderBundle\Console\Command\RemoveExpiredCartsCommand`
