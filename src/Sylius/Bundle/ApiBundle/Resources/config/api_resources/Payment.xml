@@ -69,6 +69,12 @@
                 <attribute name="openapi_context">
                     <attribute name="summary">Completes Payment.</attribute>
                 </attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">
+                        <attribute>shop:payment:show</attribute>
+                        <attribute>sylius:shop:payment:show</attribute>
+                    </attribute>
+                </attribute>
             </itemOperation>
         </itemOperations>
 
