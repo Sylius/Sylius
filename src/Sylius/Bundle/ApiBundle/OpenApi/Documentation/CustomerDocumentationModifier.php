@@ -204,7 +204,7 @@ final class CustomerDocumentationModifier implements DocumentationModifierInterf
             new PathItem(
                 post: new Operation(
                     operationId: 'postCredentialsItem',
-                    tags: ['Customer'],
+                    tags: ['Customer', 'Security'],
                     responses: [
                         Response::HTTP_OK => [
                             'description' => 'JWT token retrieval succeeded',

@@ -179,6 +179,30 @@
 
             new ClassWatcher(tokenRequestContainer, 'is-open', credentialsRequestReady, function(){});
         });
+
+        const adjustDOMWhenReady = () => {
+            let securityBlock = document.querySelector('#operations-tag-Security').closest('span');
+            if (securityBlock) {
+                let resourceList = securityBlock.parentNode;
+                resourceList.insertBefore(securityBlock, resourceList.firstChild);
+            }
+        }
+
+        const waitForElement = (selector, callback) => {
+            const observer = new MutationObserver((mutations, me) => {
+                if (document.querySelector(selector)) {
+                    callback();
+                    me.disconnect();
+                }
+            });
+
+            observer.observe(document.documentElement, {
+                childList: true,
+                subtree: true
+            });
+        }
+
+        waitForElement('#operations-tag-Security', adjustDOMWhenReady);
     </script>
     {# Sylius < #}
 {% endblock %}

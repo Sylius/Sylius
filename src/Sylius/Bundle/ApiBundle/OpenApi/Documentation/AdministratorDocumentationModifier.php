@@ -102,7 +102,7 @@ final class AdministratorDocumentationModifier implements DocumentationModifierI
             new PathItem(
                 post: new Operation(
                     operationId: 'postCredentialsItem',
-                    tags: ['Administrator'],
+                    tags: ['Administrator', 'Security'],
                     responses: [
                         Response::HTTP_OK => [
                             'description' => 'JWT token retrieval succeeded',
