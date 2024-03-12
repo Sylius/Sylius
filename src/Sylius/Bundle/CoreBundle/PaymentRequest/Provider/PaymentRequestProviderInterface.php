@@ -11,12 +11,12 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\CoreBundle\PaymentRequest\Checker;
+namespace Sylius\Bundle\CoreBundle\PaymentRequest\Provider;
 
 use Sylius\Bundle\CoreBundle\PaymentRequest\Command\PaymentRequestHashAwareInterface;
 use Sylius\Component\Payment\Model\PaymentRequestInterface;
 
-interface PaymentRequestIntegrityCheckerInterface
+interface PaymentRequestProviderInterface
 {
-    public function check(PaymentRequestHashAwareInterface $command): PaymentRequestInterface;
+    public function provide(PaymentRequestHashAwareInterface $command): PaymentRequestInterface;
 }

@@ -20,5 +20,8 @@
 
         <service id="Sylius\Bundle\CoreBundle\PaymentRequest\Provider\GatewayFactoryNameProviderInterface" class="Sylius\Bundle\CoreBundle\PaymentRequest\Provider\GatewayFactoryNameProvider" />
 
+        <service id="Sylius\Bundle\CoreBundle\PaymentRequest\Provider\PaymentRequestProviderInterface" class="Sylius\Bundle\CoreBundle\PaymentRequest\Provider\PaymentRequestProvider">
+            <argument type="service" id="sylius.repository.payment_request" />
+        </service>
     </services>
 </container>

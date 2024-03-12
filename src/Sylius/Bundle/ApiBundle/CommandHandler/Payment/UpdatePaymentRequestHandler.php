@@ -22,6 +22,9 @@ use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 /** @experimental */
 final class UpdatePaymentRequestHandler implements MessageHandlerInterface
 {
+    /**
+     * @param PaymentRequestRepositoryInterface<PaymentRequestInterface> $paymentRequestRepository
+     */
     public function __construct(
         private PaymentRequestRepositoryInterface $paymentRequestRepository,
     ) {
