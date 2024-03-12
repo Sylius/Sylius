@@ -2,6 +2,6 @@
 
 <div class="card card-md">
     <div class="card-body">
-        {% hook main_hook with { parent_main_hook: main_hook, form: hookable_data.form } %}
+        {% hook main_hook with hookable_data|merge({ parent_main_hook: main_hook }) %}
     </div>
 </div>

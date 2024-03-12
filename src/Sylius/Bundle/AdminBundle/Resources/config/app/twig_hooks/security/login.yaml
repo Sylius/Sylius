@@ -8,9 +8,13 @@ twig_hooks:
         'sylius_admin.security.login.content':
             header:
                 template: '@SyliusAdmin/Security/Login/Content/_header.html.twig'
+            flashes:
+                template: '@SyliusAdmin/Shared/Crud/Common/Content/_flashes.html.twig'
             form:
                 template: '@SyliusAdmin/Security/Login/Content/_form.html.twig'
         'sylius_admin.security.login.content.form':
+            error:
+                template: '@SyliusAdmin/Security/Login/Content/Form/error.html.twig'
             username_field:
                 template: '@SyliusAdmin/Security/Login/Content/Form/_usernameField.html.twig'
             password_field:

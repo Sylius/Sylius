@@ -42,7 +42,7 @@
                 <hr class="dropdown-divider">
             {% else %}
                 {% set extra_class = item.class ? ' ' ~ item.class %}
-                <a class="dropdown-item{{ item.class ? extra_class }}" href="{{ item.url }}">
+                <a class="dropdown-item{{ item.class ? extra_class }}" href="{{ item.url }}" {{ sylius_test_html_attribute('user-dropdown-item', item.title) }}>
                     {{ item.icon ? icon({ icon: item.icon, class: 'icon dropdown-item-icon icon-tabler' ~ extra_class }) }}
                     {{ item.title }}
                 </a>

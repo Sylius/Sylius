@@ -3,11 +3,13 @@
 
 {% set dropdown_trigger %}
     <div class="d-flex lh-1 text-reset p-0 cursor-pointer">
-        {% if user.avatar.path is not defined %}
-            {{ avatar.small() }}
-        {% else %}
-            {{ avatar.small(user.avatar.path|imagine_filter('sylius_admin_admin_user_avatar_thumbnail')) }}
-        {% endif %}
+        <div {{ sylius_test_html_attribute('user-avatar', user.avatar.path|default(null)) }}>
+            {% if user.avatar.path is not defined or user.avatar.path is empty %}
+                {{ avatar.small() }}
+            {% else %}
+                {{ avatar.small(user.avatar.path|imagine_filter('sylius_admin_admin_user_avatar_thumbnail')) }}
+            {% endif %}
+        </div>
         <div class="d-none d-xl-block ps-2">
             <div class="mb-1 small text-muted">Hello</div>
             <div>{{ user.firstName }}</div>
