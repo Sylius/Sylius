@@ -34,7 +34,8 @@
           "symfony": "^6.4",
           "api-platform": "^2.7.10",
           "mysql": "8.0",
-          "env": "test_cached_payumless"
+          "twig": "^3.3",
+          "env": "test_cached_payum"
         }
       ]
     },
@@ -97,7 +98,7 @@
           "api-platform": "^2.7.10",
           "mysql": "8.0",
           "twig": "^3.3",
-          "env": "test_cached_payumless"
+          "env": "test_cached_payum"
         }
       ]
     },

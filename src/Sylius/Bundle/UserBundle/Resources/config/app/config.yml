@@ -15,7 +15,7 @@ when@test_cached:
         password_hashers:
             plaintext: plaintext
 
-when@test_cached_payumless:
+when@test_cached_payum:
     security:
         password_hashers:
             plaintext: plaintext
