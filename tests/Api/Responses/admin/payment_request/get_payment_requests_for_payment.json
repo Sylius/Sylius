@@ -1,0 +1,35 @@
+{
+    "@context": "\/api\/v2\/contexts\/PaymentRequest",
+    "@id": "\/api\/v2\/admin\/payments\/@integer@\/payment-requests",
+    "@type": "hydra:Collection",
+    "hydra:member": [
+        {
+            "@id": "\/api\/v2\/admin\/payment-requests\/@string@",
+            "@type": "PaymentRequest",
+            "hash": "@string@",
+            "state": "completed",
+            "action": "status",
+            "payment": "\/api\/v2\/admin\/payments\/@integer@",
+            "method": "\/api\/v2\/admin\/payment-methods\/CASH_ON_DELIVERY"
+        },
+        {
+            "@id": "\/api\/v2\/admin\/payment-requests\/@string@",
+            "@type": "PaymentRequest",
+            "hash": "@string@",
+            "state": "completed",
+            "action": "authorize",
+            "payment": "\/api\/v2\/admin\/payments\/@integer@",
+            "method": "\/api\/v2\/admin\/payment-methods\/CASH_ON_DELIVERY"
+        },
+        {
+            "@id": "\/api\/v2\/admin\/payment-requests\/@string@",
+            "@type": "PaymentRequest",
+            "hash": "@string@",
+            "state": "processing",
+            "action": "capture",
+            "payment": "\/api\/v2\/admin\/payments\/@integer@",
+            "method": "\/api\/v2\/admin\/payment-methods\/CASH_ON_DELIVERY"
+        }
+    ],
+    "hydra:totalItems": 3
+}

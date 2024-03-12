@@ -146,6 +146,9 @@
             <argument type="service" id="sylius.promotion_coupon_eligibility_checker" />
         </service>
 
+        <service id="sylius.api.checker.update_payment_request_eligibility" class="Sylius\Bundle\ApiBundle\Checker\UpdatePaymentRequestEligibilityChecker" />
+        <service id="Sylius\Bundle\ApiBundle\Checker\UpdatePaymentRequestEligibilityCheckerInterface" alias="sylius.api.checker.update_payment_request_eligibility"/>
+
         <service id="Sylius\Bundle\ApiBundle\Modifier\OrderAddressModifierInterface" class="Sylius\Bundle\ApiBundle\Modifier\OrderAddressModifier" public="true">
             <argument type="service" id="sylius_abstraction.state_machine" />
             <argument type="service" id="Sylius\Bundle\ApiBundle\Mapper\AddressMapperInterface" />
