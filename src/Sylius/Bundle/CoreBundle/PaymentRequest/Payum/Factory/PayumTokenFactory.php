@@ -17,7 +17,6 @@ use Payum\Core\Payum;
 use Payum\Core\Security\TokenInterface;
 use Sylius\Component\Core\Model\PaymentMethodInterface;
 use Sylius\Component\Payment\Exception\InvalidPaymentRequestPayloadException;
-use Sylius\Component\Payment\Exception\NullGatewayConfigException;
 use Sylius\Component\Payment\Model\PaymentRequestInterface;
 
 final class PayumTokenFactory implements PayumTokenFactoryInterface
@@ -34,10 +33,6 @@ final class PayumTokenFactory implements PayumTokenFactoryInterface
         $paymentMethod = $paymentRequest->getMethod();
 
         $gatewayConfig = $paymentMethod->getGatewayConfig();
-        if (null === $gatewayConfig) {
-            throw new NullGatewayConfigException();
-        }
-
         $gatewayName = $gatewayConfig->getGatewayName();
 
         /** @var array{

@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\PaymentBundle\Doctrine\ORM;
 
-use Doctrine\DBAL\ParameterType;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Component\Payment\Model\PaymentRequestInterface;
 use Sylius\Component\Payment\Repository\PaymentRequestRepositoryInterface;
@@ -46,19 +45,5 @@ class PaymentRequestRepository extends EntityRepository implements PaymentReques
         ;
 
         return count($paymentRequests) > 0;
-    }
-
-    public function findOneByHash(string $hash): ?PaymentRequestInterface
-    {
-        return $this->createQueryBuilder('o')
-            ->addSelect('payment')
-            ->addSelect('method')
-            ->innerJoin('o.payment', 'payment')
-            ->innerJoin('o.method', 'method')
-            ->where('o.hash = :hash')
-            ->setParameter('hash', $hash, ParameterType::BINARY)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
     }
 }
