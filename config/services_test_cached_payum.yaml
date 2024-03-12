@@ -1,3 +1,11 @@
 imports:
     - { resource: "services_test_cached.yaml" }
     - { resource: "../vendor/sylius/calendar/config/services_test.yaml" }
+
+services:
+    'sylius.payment_request.command_provider.payum.offline':
+        class: Sylius\Bundle\CoreBundle\PaymentRequest\CommandProvider\ActionsCommandProvider
+        arguments:
+            - !tagged_locator { tag: 'sylius.payment_request.command_provider.payum.offline', index_by: 'type' }
+        tags:
+            - { name: 'sylius.payment_request.command_provider', gateway-factory: 'offline', priority: -200 }
