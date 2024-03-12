@@ -85,7 +85,7 @@
                 </attribute>
                 <attribute name="openapi_context">
                     <attribute name="summary">Retrieves the collection of AddressLogEntry resources.</attribute>
-                    <attribute name="description">Retrieves the collection of AddressLogEntry resources.</attribute>
+                    <attribute name="description">Retrieves the collection of AddressLogEntry resources</attribute>
                 </attribute>
             </itemOperation>
 

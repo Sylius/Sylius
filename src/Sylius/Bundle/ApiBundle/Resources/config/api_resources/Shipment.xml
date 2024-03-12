@@ -69,7 +69,7 @@
                 <attribute name="output">false</attribute>
                 <attribute name="status">202</attribute>
                 <attribute name="openapi_context">
-                    <attribute name="summary">Ships Shipment</attribute>
+                    <attribute name="summary">Ships Shipment.</attribute>
                 </attribute>
                 <attribute name="denormalization_context">
                     <attribute name="groups">
@@ -87,7 +87,7 @@
                 <attribute name="output">false</attribute>
                 <attribute name="status">202</attribute>
                 <attribute name="openapi_context">
-                    <attribute name="summary">Resends shipment confirmation email</attribute>
+                    <attribute name="summary">Resends shipment confirmation email.</attribute>
                 </attribute>
             </itemOperation>
         </itemOperations>

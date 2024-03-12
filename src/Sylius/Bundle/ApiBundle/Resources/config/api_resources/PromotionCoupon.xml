@@ -74,7 +74,7 @@
                     </attribute>
                 </attribute>
                 <attribute name="openapi_context">
-                    <attribute name="summary">Generates promotion coupons</attribute>
+                    <attribute name="summary">Generates promotion coupons.</attribute>
                     <attribute name="description">Generates promotion coupons</attribute>
                 </attribute>
             </collectionOperation>

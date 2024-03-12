@@ -457,7 +457,7 @@ final class CustomerContext implements Context
     private function verifyAccount(string $token): void
     {
         $request = $this->requestFactory->custom(
-            \sprintf('%s/shop/account-verification-requests/%s', $this->apiUrlPrefix, $token),
+            \sprintf('%s/shop/customers/verify/%s', $this->apiUrlPrefix, $token),
             HttpRequest::METHOD_PATCH,
         );
 
@@ -480,7 +480,7 @@ final class CustomerContext implements Context
 
     private function resendVerificationEmail(string $email): void
     {
-        $request = $this->requestFactory->create('shop', 'account-verification-requests', 'Bearer');
+        $request = $this->requestFactory->create('shop', 'customers/verify', 'Bearer');
 
         $request->setContent(['email' => $email]);
 

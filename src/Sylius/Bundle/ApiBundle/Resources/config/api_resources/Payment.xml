@@ -67,7 +67,7 @@
                 <attribute name="path">/admin/payments/{id}/complete</attribute>
                 <attribute name="controller">Sylius\Bundle\ApiBundle\Applicator\PaymentStateMachineTransitionApplicatorInterface::complete</attribute>
                 <attribute name="openapi_context">
-                    <attribute name="summary">Completes Payment</attribute>
+                    <attribute name="summary">Completes Payment.</attribute>
                 </attribute>
             </itemOperation>
         </itemOperations>

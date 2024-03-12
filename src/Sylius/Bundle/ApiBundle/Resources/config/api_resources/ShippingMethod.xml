@@ -111,7 +111,7 @@ Example configuration for `flat_rate` shipping charges calculator:
                 <attribute name="input">false</attribute>
                 <attribute name="controller">Sylius\Bundle\ApiBundle\Applicator\ArchivingShippingMethodApplicatorInterface::archive</attribute>
                 <attribute name="openapi_context">
-                    <attribute name="summary">Archives Shipping Method</attribute>
+                    <attribute name="summary">Archives Shipping Method.</attribute>
                 </attribute>
                 <attribute name="normalization_context">
                     <attribute name="groups">
@@ -127,7 +127,7 @@ Example configuration for `flat_rate` shipping charges calculator:
                 <attribute name="input">false</attribute>
                 <attribute name="controller">Sylius\Bundle\ApiBundle\Applicator\ArchivingShippingMethodApplicatorInterface::restore</attribute>
                 <attribute name="openapi_context">
-                    <attribute name="summary">Restores archived Shipping Method</attribute>
+                    <attribute name="summary">Restores archived Shipping Method.</attribute>
                 </attribute>
                 <attribute name="normalization_context">
                     <attribute name="groups">

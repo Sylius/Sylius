@@ -30,7 +30,7 @@ final class AdminUsersTest extends JsonApiTestCase
 
         $this->client->request(
             method: 'POST',
-            uri: '/api/v2/admin/authentication-token',
+            uri: '/api/v2/admin/administrators/token',
             server: self::CONTENT_TYPE_HEADER,
             content: json_encode([
                 'email' => 'api@example.com',
@@ -50,7 +50,7 @@ final class AdminUsersTest extends JsonApiTestCase
 
         $this->client->request(
             method: Request::METHOD_POST,
-            uri: '/api/v2/admin/reset-password-requests',
+            uri: '/api/v2/admin/administrators/reset-password',
             server: self::CONTENT_TYPE_HEADER,
             content: json_encode([
                 'email' => 'api@example.com',
@@ -74,7 +74,7 @@ final class AdminUsersTest extends JsonApiTestCase
 
         $this->client->request(
             method: 'PATCH',
-            uri: '/api/v2/admin/reset-password-requests/token',
+            uri: '/api/v2/admin/administrators/reset-password/token',
             server: self::PATCH_CONTENT_TYPE_HEADER,
             content: json_encode([
                 'newPassword' => 'newPassword',
