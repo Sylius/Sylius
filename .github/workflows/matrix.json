@@ -47,7 +47,7 @@
           "api-platform": "^2.7.10",
           "mysql": "8.0",
           "twig": "^3.3",
-          "env": "test_cached_payumless"
+          "env": "test_cached_payum"
         }
       ]
     },
@@ -127,7 +127,7 @@
           "api-platform": "^2.7.10",
           "mysql": "8.0",
           "twig": "^3.3",
-          "env": "test_cached_payumless"
+          "env": "test_cached_payum"
         },
         {
           "php": "8.2",
@@ -135,7 +135,7 @@
           "api-platform": "^2.7.10",
           "mysql": "8.0",
           "twig": "^3.3",
-          "env": "test_cached_payumless"
+          "env": "test_cached_payum"
         }
       ]
     },
