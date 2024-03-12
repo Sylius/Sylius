@@ -13,10 +13,10 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\PaymentRequest\CommandHandler\Payum;
 
-use Sylius\Bundle\CoreBundle\PaymentRequest\Checker\PaymentRequestIntegrityCheckerInterface;
 use Sylius\Bundle\CoreBundle\PaymentRequest\Command\PaymentRequestHashAwareInterface;
 use Sylius\Bundle\CoreBundle\PaymentRequest\Payum\Resolver\DoctrineProxyObjectResolverInterface;
 use Sylius\Bundle\CoreBundle\PaymentRequest\Processor\Payum\RequestProcessorInterface;
+use Sylius\Bundle\CoreBundle\PaymentRequest\Provider\PaymentRequestProviderInterface;
 use Sylius\Bundle\PayumBundle\Factory\GetStatusFactoryInterface;
 use Sylius\Bundle\PayumBundle\Model\GatewayConfigInterface;
 use Sylius\Component\Core\Model\PaymentMethodInterface;
@@ -25,7 +25,7 @@ use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 final class ModelPaymentRequestHandler implements MessageHandlerInterface
 {
     public function __construct(
-        private PaymentRequestIntegrityCheckerInterface $paymentRequestIntegrityChecker,
+        private PaymentRequestProviderInterface $paymentRequestProvider,
         private DoctrineProxyObjectResolverInterface $doctrineProxyObjectResolver,
         private RequestProcessorInterface $requestProcessor,
         private GetStatusFactoryInterface $factory,
@@ -34,7 +34,7 @@ final class ModelPaymentRequestHandler implements MessageHandlerInterface
 
     public function __invoke(PaymentRequestHashAwareInterface $command): void
     {
-        $paymentRequest = $this->paymentRequestIntegrityChecker->check($command);
+        $paymentRequest = $this->paymentRequestProvider->provide($command);
         $this->doctrineProxyObjectResolver->resolve($paymentRequest);
 
         $payment = $paymentRequest->getPayment();

@@ -14,27 +14,27 @@ declare(strict_types=1);
 namespace spec\Sylius\Bundle\CoreBundle\PaymentRequest\CommandHandler\Offline;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\CoreBundle\PaymentRequest\Checker\PaymentRequestIntegrityCheckerInterface;
 use Sylius\Bundle\CoreBundle\PaymentRequest\Command\Offline\CapturePaymentRequest;
 use Sylius\Bundle\CoreBundle\PaymentRequest\Processor\Offline\CaptureProcessorInterface;
+use Sylius\Bundle\CoreBundle\PaymentRequest\Provider\PaymentRequestProviderInterface;
 use Sylius\Component\Payment\Model\PaymentRequestInterface;
 
 final class CapturePaymentRequestHandlerSpec extends ObjectBehavior
 {
     function let(
-        PaymentRequestIntegrityCheckerInterface $paymentRequestIntegrityChecker,
+        PaymentRequestProviderInterface $paymentRequestProvider,
         CaptureProcessorInterface $offlineCaptureProcessor
     ): void {
-        $this->beConstructedWith($paymentRequestIntegrityChecker, $offlineCaptureProcessor);
+        $this->beConstructedWith($paymentRequestProvider, $offlineCaptureProcessor);
     }
 
     function it_processes_offline_capture(
-        PaymentRequestIntegrityCheckerInterface $paymentRequestIntegrityChecker,
+        PaymentRequestProviderInterface $paymentRequestProvider,
         CaptureProcessorInterface $offlineCaptureProcessor,
         PaymentRequestInterface $paymentRequest
     ): void {
         $capturePaymentRequest = new CapturePaymentRequest('hash');
-        $paymentRequestIntegrityChecker->check($capturePaymentRequest)->willReturn($paymentRequest);
+        $paymentRequestProvider->provide($capturePaymentRequest)->willReturn($paymentRequest);
 
         $this->__invoke($capturePaymentRequest);
 

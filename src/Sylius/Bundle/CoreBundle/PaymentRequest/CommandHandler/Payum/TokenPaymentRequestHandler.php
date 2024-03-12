@@ -13,20 +13,20 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\PaymentRequest\CommandHandler\Payum;
 
-use Sylius\Bundle\CoreBundle\PaymentRequest\Checker\PaymentRequestIntegrityCheckerInterface;
 use Sylius\Bundle\CoreBundle\PaymentRequest\Command\PaymentRequestHashAwareInterface;
 use Sylius\Bundle\CoreBundle\PaymentRequest\Payum\Factory\PayumTokenFactoryInterface;
 use Sylius\Bundle\CoreBundle\PaymentRequest\Payum\Resolver\DoctrineProxyObjectResolverInterface;
 use Sylius\Bundle\CoreBundle\PaymentRequest\Processor\Payum\AfterTokenRequestProcessorInterface;
 use Sylius\Bundle\CoreBundle\PaymentRequest\Processor\Payum\RequestProcessorInterface;
+use Sylius\Bundle\CoreBundle\PaymentRequest\Provider\PaymentRequestProviderInterface;
 use Sylius\Bundle\PayumBundle\Factory\TokenAggregateRequestFactoryInterface;
-use Sylius\Component\Payment\Exception\NullPaymentTokenException;
+use Sylius\Component\Payment\Exception\NonExistingPayumTokenException;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 
 final class TokenPaymentRequestHandler implements MessageHandlerInterface
 {
     public function __construct(
-        private PaymentRequestIntegrityCheckerInterface $paymentRequestIntegrityChecker,
+        private PaymentRequestProviderInterface $paymentRequestProvider,
         private DoctrineProxyObjectResolverInterface $doctrineProxyObjectResolver,
         private PayumTokenFactoryInterface $payumTokenFactory,
         private RequestProcessorInterface $requestProcessor,
@@ -37,7 +37,7 @@ final class TokenPaymentRequestHandler implements MessageHandlerInterface
 
     public function __invoke(PaymentRequestHashAwareInterface $command): void
     {
-        $paymentRequest = $this->paymentRequestIntegrityChecker->check($command);
+        $paymentRequest = $this->paymentRequestProvider->provide($command);
         $this->doctrineProxyObjectResolver->resolve($paymentRequest);
 
         $token = $this->payumTokenFactory->createNew($paymentRequest);
@@ -45,7 +45,7 @@ final class TokenPaymentRequestHandler implements MessageHandlerInterface
 
         $token = $request->getToken();
         if (null === $token) {
-            throw new NullPaymentTokenException();
+            throw new NonExistingPayumTokenException();
         }
 
         $this->requestProcessor->process($paymentRequest, $request, $token->getGatewayName());
