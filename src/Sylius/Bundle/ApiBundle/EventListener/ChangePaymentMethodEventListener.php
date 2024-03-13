@@ -11,28 +11,18 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\ApiBundle\EventSubscriber;
+namespace Sylius\Bundle\ApiBundle\EventListener;
 
-use ApiPlatform\Core\EventListener\EventPriorities;
 use Sylius\Bundle\ApiBundle\Command\Account\ChangePaymentMethod;
 use Sylius\Bundle\ApiBundle\Command\Checkout\ChoosePaymentMethod;
 use Sylius\Component\Payment\Canceller\PaymentRequestCancellerInterface;
-use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Event\ControllerArgumentsEvent;
-use Symfony\Component\HttpKernel\KernelEvents;
 
-final class ChangePaymentMethodEventSubscriber implements EventSubscriberInterface
+final class ChangePaymentMethodEventListener
 {
     public function __construct(private PaymentRequestCancellerInterface $paymentRequestCanceller)
     {
-    }
-
-    public static function getSubscribedEvents(): array
-    {
-        return [
-            KernelEvents::CONTROLLER_ARGUMENTS => ['cancelPaymentRequestsWithDifferentPaymentMethod', EventPriorities::POST_WRITE],
-        ];
     }
 
     public function cancelPaymentRequestsWithDifferentPaymentMethod(ControllerArgumentsEvent $event): void

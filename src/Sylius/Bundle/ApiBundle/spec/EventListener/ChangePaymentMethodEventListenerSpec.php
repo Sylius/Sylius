@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 
-namespace spec\Sylius\Bundle\ApiBundle\EventSubscriber;
+namespace spec\Sylius\Bundle\ApiBundle\EventListener;
 
 use ApiPlatform\Action\PlaceholderAction;
 use PhpSpec\ObjectBehavior;
@@ -25,7 +25,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Event\ControllerArgumentsEvent;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 
-final class ChangePaymentMethodEventSubscriberSpec extends ObjectBehavior
+final class ChangePaymentMethodEventListenerSpec extends ObjectBehavior
 {
     function let(PaymentRequestCancellerInterface $paymentRequestCanceller): void
     {
