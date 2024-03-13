@@ -99,6 +99,11 @@
             <tag name="sylius.uri_based_section_resolver" priority="40" />
         </service>
 
+        <service id="Sylius\Bundle\ApiBundle\EventListener\ChangePaymentMethodEventListener">
+            <argument type="service" id="Sylius\Component\Payment\Canceller\PaymentRequestCancellerInterface" />
+            <tag name="kernel.event_listener" event="kernel.controller_arguments" method="cancelPaymentRequestsWithDifferentPaymentMethod" />
+        </service>
+
         <service id="Sylius\Bundle\ApiBundle\EventListener\ApiCartBlamerListener">
             <argument type="service" id="sylius.context.cart" />
             <argument type="service" id="sylius.section_resolver.uri_based_section_resolver" />
