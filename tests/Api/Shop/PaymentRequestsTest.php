@@ -56,17 +56,16 @@ final class PaymentRequestsTest extends JsonApiTestCase
         $this->assertResponseSuccessful('shop/payment_request/get_payment_request');
     }
 
-    /** @test */
-    public function it_creates_a_payment_request(): void
+    /**
+     * @test
+     * @dataProvider createPaymentRequestProvider
+     *
+     * @param array<string> $fixturesPaths
+     * @throws \JsonException
+     */
+    public function it_creates_a_payment_request(array $fixturesPaths, string $responsePath): void
     {
-        $this->loadFixturesFromFiles([
-            'authentication/customer.yaml',
-            'channel.yaml',
-            'cart.yaml',
-            'country.yaml',
-            'shipping_method.yaml',
-            'payment_method.yaml',
-        ]);
+        $this->loadFixturesFromFiles($fixturesPaths);
 
         $order = $this->placeOrder('nAWw2jewpA', 'oliver@doe.com');
         $payment = $order->getLastPayment();
@@ -86,12 +85,44 @@ final class PaymentRequestsTest extends JsonApiTestCase
             ], \JSON_THROW_ON_ERROR)
         );
 
-
         $this->assertResponse(
             $this->client->getResponse(),
-            'shop/payment_request/post_payment_request',
+            $responsePath,
             Response::HTTP_CREATED,
         );
+    }
+
+    public function createPaymentRequestProvider(): iterable
+    {
+        $environment = getenv('APP_ENV');
+
+        if ($environment === 'test_cached_payum') {
+            yield [
+                [
+                    'authentication/customer.yaml',
+                    'channel.yaml',
+                    'cart.yaml',
+                    'country.yaml',
+                    'shipping_method.yaml',
+                    'payment_method.yaml',
+                ],
+                'shop/payment_request/post_payment_request_payum',
+            ];
+
+            return;
+        }
+
+        yield [
+            [
+                'authentication/customer.yaml',
+                'channel.yaml',
+                'cart.yaml',
+                'country.yaml',
+                'shipping_method.yaml',
+                'payment_method.yaml',
+            ],
+            'shop/payment_request/post_payment_request',
+        ];
     }
 
     /** @test */
@@ -122,18 +153,18 @@ final class PaymentRequestsTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
-    public function it_updates_a_payment_request(): void
+    /**
+     * @test
+     * @dataProvider updatePaymentRequestProvider
+     *
+     * @param array<string> $fixturesPaths
+     * @throws \JsonException
+     */
+    public function it_updates_a_payment_request(array $fixturesPaths, string $responsePath): void
     {
         $this->setUpDefaultGetHeaders();
 
-        $fixtures = $this->loadFixturesFromFiles([
-            'authentication/customer.yaml',
-            'channel.yaml',
-            'payment_method.yaml',
-            'payment_request/payment_request.yaml',
-            'payment_request/order_with_customer.yaml',
-        ]);
+        $fixtures = $this->loadFixturesFromFiles($fixturesPaths);
 
         /** @var PaymentRequestInterface $paymentRequest */
         $paymentRequest = $fixtures['payment_request_capture'];
@@ -150,7 +181,38 @@ final class PaymentRequestsTest extends JsonApiTestCase
             ], \JSON_THROW_ON_ERROR)
         );
 
-        $this->assertResponseSuccessful('shop/payment_request/put_payment_request');
+        $this->assertResponseSuccessful($responsePath);
+    }
+
+    public function updatePaymentRequestProvider(): iterable
+    {
+        $environment = getenv('APP_ENV');
+
+        if ($environment === 'test_cached_payum') {
+            yield [
+                [
+                    'authentication/customer.yaml',
+                    'channel.yaml',
+                    'payment_method.yaml',
+                    'payment_request/payment_request_payum.yaml',
+                    'payment_request/order_with_customer.yaml',
+                ],
+                'shop/payment_request/put_payment_request_payum',
+            ];
+
+            return;
+        }
+
+        yield [
+            [
+                'authentication/customer.yaml',
+                'channel.yaml',
+                'payment_method.yaml',
+                'payment_request/payment_request.yaml',
+                'payment_request/order_with_customer.yaml',
+            ],
+            'shop/payment_request/put_payment_request',
+        ];
     }
 
     /** @test */
