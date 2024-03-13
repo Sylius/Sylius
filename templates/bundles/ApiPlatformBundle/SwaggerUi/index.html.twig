@@ -136,17 +136,15 @@
             }
         }
 
-        let tokenRequestContainer = null;
-
-        function credentialsRequestReady() {
-            const tokenRequestContainer2 = document.querySelector('#operations-AdminUserToken-postCredentialsItem').getElementsByClassName('opblock-body')[0];
+        const credentialsRequestReady = (container, selector) => {
+            const tokenRequestContainer2 = document.querySelector(selector).getElementsByClassName('opblock-body')[0];
 
             const executeWrapper = tokenRequestContainer2.getElementsByClassName('execute-wrapper')[0];
-            new ClassWatcher(executeWrapper, 'btn-group', credentialsRequestFinished, () => {});
+            new ClassWatcher(executeWrapper, 'btn-group', () => credentialsRequestFinished(container), () => {});
         }
 
-        function credentialsRequestFinished() {
-            const tokenElement = JSON.parse(tokenRequestContainer.querySelector('.highlight-code').getElementsByTagName('code')[0].innerText)
+        const credentialsRequestFinished = (container) => {
+            const tokenElement = JSON.parse(container.querySelector('.highlight-code').getElementsByTagName('code')[0].innerText)
 
             const buttonLogin = document.querySelector("#swagger-ui > section > div.swagger-ui > div:nth-child(2) > div.scheme-container > section > div > button");
 
@@ -174,11 +172,43 @@
             closeAuthFormButton.dispatchEvent(mouseEvent);
         }
 
-        window.addEventListener('load', event => {
-            tokenRequestContainer = document.querySelector('#operations-AdminUserToken-postCredentialsItem');
+        const credentialSelectors = [
+            '#operations-Administrator-postAdministratorCredentialsItem',
+            '#operations-Customer-postCustomerCredentialsItem',
+            '#operations-Security-postAdministratorCredentialsItem',
+            '#operations-Security-postCustomerCredentialsItem',
+        ];
 
-            new ClassWatcher(tokenRequestContainer, 'is-open', credentialsRequestReady, function(){});
+        window.addEventListener('load', event => {
+            credentialSelectors.forEach(selector => {
+                let tokenRequestContainer = document.querySelector(selector);
+                new ClassWatcher(tokenRequestContainer, 'is-open', () => credentialsRequestReady(tokenRequestContainer, selector), function(){});
+            });
         });
+
+        const adjustDOMWhenReady = () => {
+            let securityBlock = document.querySelector('#operations-tag-Security').closest('span');
+            if (securityBlock) {
+                let resourceList = securityBlock.parentNode;
+                resourceList.insertBefore(securityBlock, resourceList.firstChild);
+            }
+        }
+
+        const waitForElement = (selector, callback) => {
+            const observer = new MutationObserver((mutations, me) => {
+                if (document.querySelector(selector)) {
+                    callback();
+                    me.disconnect();
+                }
+            });
+
+            observer.observe(document.documentElement, {
+                childList: true,
+                subtree: true
+            });
+        }
+
+        waitForElement('#operations-tag-Security', adjustDOMWhenReady);
     </script>
     {# Sylius < #}
 {% endblock %}

@@ -64,7 +64,7 @@ final class ContactContext implements Context
     {
         $request = $this->requestFactory->create(
             'shop',
-            Resources::CONTACT_REQUESTS,
+            Resources::CONTACT,
             'Authorization',
             $this->client->getToken(),
         );

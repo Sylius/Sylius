@@ -62,7 +62,7 @@ final class LoginContext implements Context
     {
         $this->shopAuthenticationTokenClient->request(
             'POST',
-            sprintf('%s/shop/authentication-token', $this->apiUrlPrefix),
+            sprintf('%s/shop/customers/token', $this->apiUrlPrefix),
             [],
             [],
             ['CONTENT_TYPE' => 'application/json', 'HTTP_ACCEPT' => 'application/json'],
@@ -88,7 +88,7 @@ final class LoginContext implements Context
      */
     public function iWantToResetPassword(): void
     {
-        $this->request = $this->requestFactory->create('shop', 'reset-password-requests', 'Bearer');
+        $this->request = $this->requestFactory->create('shop', 'customers/reset-password', 'Bearer');
     }
 
     /**
@@ -108,7 +108,7 @@ final class LoginContext implements Context
     public function iFollowLinkOnMyEmailToResetPassword(ShopUserInterface $user): void
     {
         $this->request = $this->requestFactory->custom(
-            sprintf('%s/shop/reset-password-requests/%s', $this->apiUrlPrefix, $user->getPasswordResetToken()),
+            sprintf('%s/shop/customers/reset-password/%s', $this->apiUrlPrefix, $user->getPasswordResetToken()),
             HttpRequest::METHOD_PATCH,
         );
     }
@@ -282,7 +282,7 @@ final class LoginContext implements Context
     {
         $response = $this->client->executeCustomRequest($this->request);
         Assert::same($response->getStatusCode(), 422);
-        Assert::same($this->responseChecker->getError($response), 'resetPasswordToken: Password reset token itotallyforgotmypassword is invalid.');
+        Assert::same($this->responseChecker->getError($response), 'token: Password reset token itotallyforgotmypassword is invalid.');
     }
 
     /**
@@ -292,6 +292,6 @@ final class LoginContext implements Context
     {
         $response = $this->client->getLastResponse();
         Assert::same($response->getStatusCode(), 422);
-        Assert::same($this->responseChecker->getError($response), 'resetPasswordToken: Password reset token has expired.');
+        Assert::same($this->responseChecker->getError($response), 'token: Password reset token has expired.');
     }
 }

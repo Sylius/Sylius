@@ -186,7 +186,7 @@ final class PaymentMethodsTest extends JsonApiTestCase
         /** @var PaymentMethodInterface $paymentMethod */
         $paymentMethod = $fixtures['payment_method_cash_on_delivery'];
 
-        $this->requestDelete(uri: '/api/v2/admin/payment-methods/'. $paymentMethod->getCode());
+        $this->requestDelete(uri: '/api/v2/admin/payment-methods/' . $paymentMethod->getCode());
 
         $this->assertResponseCode($this->client->getResponse(), Response::HTTP_NO_CONTENT);
     }

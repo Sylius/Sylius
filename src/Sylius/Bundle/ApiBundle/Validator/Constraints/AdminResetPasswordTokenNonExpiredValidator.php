@@ -36,7 +36,7 @@ final class AdminResetPasswordTokenNonExpiredValidator extends ConstraintValidat
         Assert::isInstanceOf($constraint, AdminResetPasswordTokenNonExpired::class);
 
         /** @var AdminUserInterface|null $user */
-        $user = $this->adminUserRepository->findOneBy(['passwordResetToken' => $value->resetPasswordToken]);
+        $user = $this->adminUserRepository->findOneBy(['passwordResetToken' => $value->token]);
         if (null === $user) {
             return;
         }

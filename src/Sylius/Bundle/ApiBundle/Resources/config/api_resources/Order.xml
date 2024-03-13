@@ -64,7 +64,7 @@
                     </attribute>
                 </attribute>
                 <attribute name="openapi_context">
-                    <attribute name="summary">Pickups a new cart</attribute>
+                    <attribute name="summary">Pickups a new cart.</attribute>
                 </attribute>
             </collectionOperation>
 
@@ -120,7 +120,7 @@
                 <attribute name="method">DELETE</attribute>
                 <attribute name="path">/shop/orders/{tokenValue}</attribute>
                 <attribute name="openapi_context">
-                    <attribute name="summary">Deletes cart</attribute>
+                    <attribute name="summary">Deletes cart.</attribute>
                 </attribute>
                 <attribute name="normalization_context">
                     <attribute name="groups">
@@ -148,7 +148,7 @@
                     </attribute>
                 </attribute>
                 <attribute name="openapi_context">
-                    <attribute name="summary">Cancels Order</attribute>
+                    <attribute name="summary">Cancels Order.</attribute>
                 </attribute>
             </itemOperation>
 
@@ -170,7 +170,7 @@
                     </attribute>
                 </attribute>
                 <attribute name="openapi_context">
-                    <attribute name="summary">Adds Item to cart</attribute>
+                    <attribute name="summary">Adds Item to cart.</attribute>
                 </attribute>
             </itemOperation>
 
@@ -197,7 +197,7 @@
                     </attribute>
                 </attribute>
                 <attribute name="openapi_context">
-                    <attribute name="summary">Selects shipping methods for particular shipment</attribute>
+                    <attribute name="summary">Selects shipping methods for particular shipment.</attribute>
                     <attribute name="parameters">
                         <attribute>
                             <attribute name="name">tokenValue</attribute>
@@ -239,7 +239,7 @@
                     </attribute>
                 </attribute>
                 <attribute name="openapi_context">
-                    <attribute name="summary">Selects payment methods for particular payment</attribute>
+                    <attribute name="summary">Selects payment methods for particular payment.</attribute>
                     <attribute name="parameters">
                         <attribute>
                             <attribute name="name">tokenValue</attribute>
@@ -279,7 +279,7 @@
                     </attribute>
                 </attribute>
                 <attribute name="openapi_context">
-                    <attribute name="summary">Change the payment method as logged shop user</attribute>
+                    <attribute name="summary">Change the payment method as logged shop user.</attribute>
                     <attribute name="parameters">
                         <attribute>
                             <attribute name="name">tokenValue</attribute>
@@ -306,7 +306,7 @@
                 <attribute name="controller">Sylius\Bundle\ApiBundle\Controller\Payment\GetPaymentConfiguration</attribute>
                 <attribute name="path">/shop/orders/{tokenValue}/payments/{paymentId}/configuration</attribute>
                 <attribute name="openapi_context">
-                    <attribute name="summary">Retrieve payment method configuration</attribute>
+                    <attribute name="summary">Retrieve payment method configuration.</attribute>
                     <attribute name="parameters">
                         <attribute>
                             <attribute name="name">tokenValue</attribute>
@@ -352,7 +352,7 @@
                     </attribute>
                 </attribute>
                 <attribute name="openapi_context">
-                    <attribute name="summary">Completes checkout</attribute>
+                    <attribute name="summary">Completes checkout.</attribute>
                 </attribute>
             </itemOperation>
 
@@ -407,7 +407,7 @@
                     </attribute>
                 </attribute>
                 <attribute name="openapi_context">
-                    <attribute name="summary">Changes quantity of order item</attribute>
+                    <attribute name="summary">Changes quantity of order item.</attribute>
                     <attribute name="parameters">
                         <attribute>
                             <attribute name="name">tokenValue</attribute>
@@ -461,7 +461,7 @@
                 <attribute name="output">false</attribute>
                 <attribute name="status">202</attribute>
                 <attribute name="openapi_context">
-                    <attribute name="summary">Resends order confirmation email</attribute>
+                    <attribute name="summary">Resends order confirmation email.</attribute>
                 </attribute>
             </itemOperation>
         </itemOperations>

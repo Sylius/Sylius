@@ -7,7 +7,7 @@ sylius_api:
     prefix: /
 
 sylius_api_admin_authentication_token:
-    path: /admin/authentication-token
+    path: /admin/administrators/token
     methods: ['POST']
 
 sylius_api_admin_statistics:
@@ -17,5 +17,5 @@ sylius_api_admin_statistics:
         _controller: Sylius\Bundle\ApiBundle\Controller\GetStatisticsAction
 
 sylius_api_shop_authentication_token:
-    path: /shop/authentication-token
+    path: /shop/customers/token
     methods: ['POST']

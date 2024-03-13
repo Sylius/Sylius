@@ -50,7 +50,7 @@ final class CustomersTest extends JsonApiTestCase
 
         $this->client->request(
             method: 'POST',
-            uri: '/api/v2/shop/authentication-token',
+            uri: '/api/v2/shop/customers/token',
             server: self::CONTENT_TYPE_HEADER,
             content: json_encode([
                 'email' => 'oliver@doe.com',
@@ -124,7 +124,7 @@ final class CustomersTest extends JsonApiTestCase
 
         $this->client->request(
             method: 'POST',
-            uri: '/api/v2/shop/reset-password-requests',
+            uri: '/api/v2/shop/customers/reset-password',
             server: self::CONTENT_TYPE_HEADER,
             content: json_encode([
                 'email' => $customer->getEmailCanonical(),
@@ -151,7 +151,7 @@ final class CustomersTest extends JsonApiTestCase
 
         $this->client->request(
             method: 'PATCH',
-            uri: '/api/v2/shop/reset-password-requests/token',
+            uri: '/api/v2/shop/customers/reset-password/token',
             server: self::PATCH_CONTENT_TYPE_HEADER,
             content: json_encode([
                 'newPassword' => 'newPassword',

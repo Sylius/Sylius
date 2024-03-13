@@ -161,7 +161,7 @@ Example configuration for `order_fixed_discount` action type:
                 <attribute name="input">false</attribute>
                 <attribute name="controller">Sylius\Bundle\ApiBundle\Applicator\ArchivingPromotionApplicatorInterface::archive</attribute>
                 <attribute name="openapi_context">
-                    <attribute name="summary">Archives Promotion</attribute>
+                    <attribute name="summary">Archives Promotion.</attribute>
                 </attribute>
                 <attribute name="normalization_context">
                     <attribute name="groups">
@@ -176,7 +176,7 @@ Example configuration for `order_fixed_discount` action type:
                 <attribute name="input">false</attribute>
                 <attribute name="controller">Sylius\Bundle\ApiBundle\Applicator\ArchivingPromotionApplicatorInterface::restore</attribute>
                 <attribute name="openapi_context">
-                    <attribute name="summary">Restores Archived Promotion</attribute>
+                    <attribute name="summary">Restores Archived Promotion.</attribute>
                 </attribute>
                 <attribute name="normalization_context">
                     <attribute name="groups">
