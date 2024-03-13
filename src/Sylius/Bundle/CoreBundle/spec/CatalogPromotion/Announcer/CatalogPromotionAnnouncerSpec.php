@@ -17,11 +17,11 @@ use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\CoreBundle\Calculator\DelayStampCalculatorInterface;
 use Sylius\Bundle\CoreBundle\CatalogPromotion\Announcer\CatalogPromotionAnnouncerInterface;
-use Sylius\Calendar\Provider\DateTimeProviderInterface;
 use Sylius\Component\Core\Model\CatalogPromotionInterface;
 use Sylius\Component\Promotion\Event\CatalogPromotionCreated;
 use Sylius\Component\Promotion\Event\CatalogPromotionEnded;
 use Sylius\Component\Promotion\Event\CatalogPromotionUpdated;
+use Symfony\Component\Clock\ClockInterface;
 use Symfony\Component\Messenger\Envelope;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Messenger\Stamp\DelayStamp;
@@ -31,9 +31,9 @@ final class CatalogPromotionAnnouncerSpec extends ObjectBehavior
     function let(
         MessageBusInterface $eventBus,
         DelayStampCalculatorInterface $delayStampCalculator,
-        DateTimeProviderInterface $dateTimeProvider,
+        ClockInterface $clock,
     ): void {
-        $this->beConstructedWith($eventBus, $delayStampCalculator, $dateTimeProvider);
+        $this->beConstructedWith($eventBus, $delayStampCalculator, $clock);
     }
 
     function it_implements_catalog_promotion_announcer_interface(): void
@@ -44,13 +44,13 @@ final class CatalogPromotionAnnouncerSpec extends ObjectBehavior
     function it_dispatches_catalog_promotion_created_and_catalog_promotion_ended_events(
         MessageBusInterface $eventBus,
         DelayStampCalculatorInterface $delayStampCalculator,
-        DateTimeProviderInterface $dateTimeProvider,
+        ClockInterface $clock,
         CatalogPromotionInterface $catalogPromotion,
     ): void {
         $startDateTime = new \DateTime('2021-10-10');
         $endDateTime = new \DateTime('2021-10-11');
 
-        $dateTimeProvider->now()->willReturn(new \DateTime());
+        $clock->now()->willReturn(new \DateTimeImmutable());
 
         $catalogPromotion->getCode()->willReturn('SALE');
         $catalogPromotion->getStartDate()->willReturn($startDateTime);
@@ -74,12 +74,12 @@ final class CatalogPromotionAnnouncerSpec extends ObjectBehavior
     function it_does_not_dispatch_catalog_promotion_ended_when_catalog_promotion_has_no_end_date_configured(
         MessageBusInterface $eventBus,
         DelayStampCalculatorInterface $delayStampCalculator,
-        DateTimeProviderInterface $dateTimeProvider,
+        ClockInterface $clock,
         CatalogPromotionInterface $catalogPromotion,
     ): void {
         $startDateTime = new \DateTime('2021-10-10');
 
-        $dateTimeProvider->now()->willReturn(new \DateTime());
+        $clock->now()->willReturn(new \DateTimeImmutable());
 
         $catalogPromotion->getCode()->willReturn('SALE');
         $catalogPromotion->getStartDate()->willReturn($startDateTime);
@@ -101,13 +101,13 @@ final class CatalogPromotionAnnouncerSpec extends ObjectBehavior
     function it_dispatches_catalog_promotion_updated_and_catalog_promotion_ended_events(
         MessageBusInterface $eventBus,
         DelayStampCalculatorInterface $delayStampCalculator,
-        DateTimeProviderInterface $dateTimeProvider,
+        ClockInterface $clock,
         CatalogPromotionInterface $catalogPromotion,
     ): void {
         $startDateTime = new \DateTime('2021-10-10');
         $endDateTime = new \DateTime('2021-10-11');
 
-        $dateTimeProvider->now()->willReturn(new \DateTime());
+        $clock->now()->willReturn(new \DateTimeImmutable());
 
         $catalogPromotion->getCode()->willReturn('SALE');
         $catalogPromotion->getStartDate()->willReturn($startDateTime);
@@ -131,13 +131,13 @@ final class CatalogPromotionAnnouncerSpec extends ObjectBehavior
     function it_dispatches_catalog_promotion_updated_twice_if_catalog_promotion_is_updated_with_delayed_start(
         MessageBusInterface $eventBus,
         DelayStampCalculatorInterface $delayStampCalculator,
-        DateTimeProviderInterface $dateTimeProvider,
+        ClockInterface $clock,
         CatalogPromotionInterface $catalogPromotion,
     ): void {
         $startDateTime = new \DateTime('2021-10-10');
         $endDateTime = new \DateTime('2021-10-11');
 
-        $dateTimeProvider->now()->willReturn(new \DateTime('2021-10-09'));
+        $clock->now()->willReturn(new \DateTimeImmutable('2021-10-09'));
 
         $catalogPromotion->getCode()->willReturn('SALE');
         $catalogPromotion->getStartDate()->willReturn($startDateTime);
