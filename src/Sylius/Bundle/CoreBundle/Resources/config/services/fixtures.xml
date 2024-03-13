@@ -211,5 +211,12 @@
             <argument type="service" id="sylius.fixture.example_factory.address" />
             <tag name="sylius_fixtures.fixture" />
         </service>
+
+        <service id="sylius.fixture.payment" class="Sylius\Bundle\CoreBundle\Fixture\PaymentFixture">
+            <argument type="service" id="sylius.repository.payment" />
+            <argument type="service" id="sylius_abstraction.state_machine" />
+            <argument type="service" id="sylius.manager.payment" />
+            <tag name="sylius_fixtures.fixture" />
+        </service>
     </services>
 </container>

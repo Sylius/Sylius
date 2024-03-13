@@ -525,9 +525,6 @@ To ease the update process, we have grouped the changes into the following categ
    same reason. Both changes affect
    `sylius_admin_order` and `sylius_admin_customer_order` grids configuration.
 
-1. The `Sylius\Bundle\CoreBundle\Fixture\Factory\PaymentFixture` has been deprecated.
-   Use `Sylius\Bundle\CoreBundle\Fixture\PaymentFixture` instead.
-
 1. The `Sylius\Bundle\CoreBundle\Provider\SessionProvider` has been deprecated and will be removed in Sylius 2.0.
 
 1. The `Sylius\Component\Addressing\Repository\ZoneRepositoryInterface` and
