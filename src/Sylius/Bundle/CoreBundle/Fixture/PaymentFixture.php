@@ -16,25 +16,13 @@ namespace Sylius\Bundle\CoreBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Faker\Factory;
 use Faker\Generator;
-use SM\Factory\FactoryInterface as StateMachineFactoryInterface;
 use Sylius\Abstraction\StateMachine\StateMachineInterface;
-use Sylius\Abstraction\StateMachine\WinzouStateMachineAdapter;
 use Sylius\Bundle\FixturesBundle\Fixture\AbstractFixture;
 use Sylius\Component\Core\Model\PaymentInterface;
 use Sylius\Component\Core\Repository\PaymentRepositoryInterface;
 use Sylius\Component\Payment\PaymentTransitions;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-
-class_alias(PaymentFixture::class, '\Sylius\Bundle\CoreBundle\Fixture\Factory\PaymentFixture');
-
-trigger_deprecation(
-    'sylius/core-bundle',
-    '1.13',
-    'The "%s" class is deprecated and will be removed in Sylius 2.0. Use "%s" instead.',
-    '\Sylius\Bundle\CoreBundle\Fixture\Factory\PaymentFixture',
-    PaymentFixture::class,
-);
 
 class PaymentFixture extends AbstractFixture
 {
@@ -47,25 +35,13 @@ class PaymentFixture extends AbstractFixture
      */
     public function __construct(
         private PaymentRepositoryInterface $paymentRepository,
-        private StateMachineFactoryInterface|StateMachineInterface $stateMachineFactory,
+        private StateMachineInterface $stateMachine,
         private ObjectManager $paymentManager,
     ) {
         $this->faker = Factory::create();
 
         $this->optionsResolver = new OptionsResolver();
         $this->configureOptions($this->optionsResolver);
-
-        if ($this->stateMachineFactory instanceof StateMachineFactoryInterface) {
-            trigger_deprecation(
-                'sylius/core-bundle',
-                '1.13',
-                sprintf(
-                    'Passing an instance of "%s" as the second argument is deprecated. It will accept only instances of "%s" in Sylius 2.0.',
-                    StateMachineFactoryInterface::class,
-                    StateMachineInterface::class,
-                ),
-            );
-        }
     }
 
     public function getName(): string
@@ -102,7 +78,7 @@ class PaymentFixture extends AbstractFixture
 
     private function completePayment(PaymentInterface $payment): void
     {
-        $this->getStateMachine()->apply($payment, PaymentTransitions::GRAPH, PaymentTransitions::TRANSITION_COMPLETE);
+        $this->stateMachine->apply($payment, PaymentTransitions::GRAPH, PaymentTransitions::TRANSITION_COMPLETE);
 
         $this->paymentManager->persist($payment);
     }
@@ -113,14 +89,5 @@ class PaymentFixture extends AbstractFixture
             ->setDefault('percentage_completed', 0)
             ->setAllowedTypes('percentage_completed', 'int')
         ;
-    }
-
-    private function getStateMachine(): StateMachineInterface
-    {
-        if ($this->stateMachineFactory instanceof StateMachineFactoryInterface) {
-            return new WinzouStateMachineAdapter($this->stateMachineFactory);
-        }
-
-        return $this->stateMachineFactory;
     }
 }
