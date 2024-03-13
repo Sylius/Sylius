@@ -26,7 +26,9 @@ interface PaymentRequestRepositoryInterface extends RepositoryInterface
     public function duplicateExists(PaymentRequestInterface $paymentRequest): bool;
 
     /**
+     * @param array<string> $states
+     *
      * @return array<PaymentRequestInterface>
      */
-    public function findAllByPaymentId(int|string $paymentId): array;
+    public function findByStatesAndPaymentId(array $states, int|string $paymentId): array;
 }

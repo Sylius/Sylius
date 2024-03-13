@@ -16,8 +16,7 @@ namespace Sylius\Bundle\ApiBundle\EventSubscriber;
 use ApiPlatform\Core\EventListener\EventPriorities;
 use Sylius\Bundle\ApiBundle\Command\Account\ChangePaymentMethod;
 use Sylius\Bundle\ApiBundle\Command\Checkout\ChoosePaymentMethod;
-use Sylius\Component\Payment\Model\PaymentRequestInterface;
-use Sylius\Component\Payment\Repository\PaymentRequestRepositoryInterface;
+use Sylius\Component\Payment\Canceller\PaymentRequestCancellerInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Event\ControllerArgumentsEvent;
@@ -25,10 +24,7 @@ use Symfony\Component\HttpKernel\KernelEvents;
 
 final class ChangePaymentMethodEventSubscriber implements EventSubscriberInterface
 {
-    /**
-     * @param PaymentRequestRepositoryInterface<PaymentRequestInterface> $paymentRequestRepository
-     */
-    public function __construct(private PaymentRequestRepositoryInterface $paymentRequestRepository)
+    public function __construct(private PaymentRequestCancellerInterface $paymentRequestCanceller)
     {
     }
 
@@ -49,18 +45,7 @@ final class ChangePaymentMethodEventSubscriber implements EventSubscriberInterfa
                 return;
             }
 
-            $paymentRequests = $this->paymentRequestRepository->findAllByPaymentId($command->paymentId);
-
-            if ($paymentRequests === []) {
-                return;
-            }
-
-            /** @var PaymentRequestInterface $paymentRequest */
-            foreach ($paymentRequests as $paymentRequest) {
-                if ($paymentRequest->getState() === PaymentRequestInterface::STATE_NEW && $paymentRequest->getMethod()->getCode() !== $command->paymentMethodCode) {
-                    $paymentRequest->setState(PaymentRequestInterface::STATE_CANCELLED);
-                }
-            }
+            $this->paymentRequestCanceller->cancelPaymentRequests($command->paymentId, $command->paymentMethodCode);
         }
     }
 

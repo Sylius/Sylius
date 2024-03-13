@@ -48,16 +48,17 @@ class PaymentRequestRepository extends EntityRepository implements PaymentReques
     }
 
     /**
+     * @param array<string> $states
+     *
      * @return array<PaymentRequestInterface>
      */
-
-    public function findAllByPaymentId(int|string $paymentId): array
+    public function findByStatesAndPaymentId(array $states, int|string $paymentId): array
     {
         return $this->createQueryBuilder('o')
-            ->addSelect('payment')
-            ->innerJoin('o.payment', 'payment')
-            ->where('payment.id = :paymentId')
+            ->where('o.payment = :paymentId')
+            ->andWhere('o.state IN (:states)')
             ->setParameter('paymentId', $paymentId)
+            ->setParameter('states', $states)
             ->getQuery()
             ->getResult()
         ;

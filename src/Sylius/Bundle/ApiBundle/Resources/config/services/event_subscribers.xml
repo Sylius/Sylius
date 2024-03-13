@@ -29,7 +29,7 @@
         </service>
 
         <service id="Sylius\Bundle\ApiBundle\EventSubscriber\ChangePaymentMethodEventSubscriber">
-            <argument type="service" id="sylius.repository.payment_request" />
+            <argument type="service" id="Sylius\Component\Payment\Canceller\PaymentRequestCancellerInterface" />
             <tag name="kernel.event_subscriber" />
         </service>
 
