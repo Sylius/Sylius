@@ -17,7 +17,7 @@ use ApiPlatform\OpenApi\Model\Operation;
 use ApiPlatform\OpenApi\Model\Parameter;
 use ApiPlatform\OpenApi\Model\PathItem;
 use ApiPlatform\OpenApi\OpenApi;
-use Sylius\Calendar\Provider\DateTimeProviderInterface;
+use Symfony\Component\Clock\ClockInterface;
 use Symfony\Component\HttpFoundation\Response;
 
 final class StatisticsDocumentationModifier implements DocumentationModifierInterface
@@ -27,7 +27,7 @@ final class StatisticsDocumentationModifier implements DocumentationModifierInte
     /** @param array<string, array<string, string>> $intervalsMap */
     public function __construct(
         private string $apiRoute,
-        private DateTimeProviderInterface $dateTimeProvider,
+        private ClockInterface $clock,
         private array $intervalsMap,
     ) {
     }
@@ -140,7 +140,7 @@ final class StatisticsDocumentationModifier implements DocumentationModifierInte
             schema: [
                 'type' => 'string',
                 'format' => 'date-time',
-                'default' => $this->dateTimeProvider->now()->format('Y-01-01\T00:00:00'),
+                'default' => $this->clock->now()->format('Y-01-01\T00:00:00'),
             ],
         );
 
@@ -164,7 +164,7 @@ final class StatisticsDocumentationModifier implements DocumentationModifierInte
             schema: [
                 'type' => 'string',
                 'format' => 'date-time',
-                'default' => $this->dateTimeProvider->now()->format('Y-12-31\T23:59:59'),
+                'default' => $this->clock->now()->format('Y-12-31\T23:59:59'),
             ],
         );
 
