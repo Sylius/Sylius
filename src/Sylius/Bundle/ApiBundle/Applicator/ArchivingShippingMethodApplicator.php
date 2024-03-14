@@ -13,18 +13,18 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\Applicator;
 
-use Sylius\Calendar\Provider\DateTimeProviderInterface;
 use Sylius\Component\Core\Model\ShippingMethodInterface;
+use Symfony\Component\Clock\ClockInterface;
 
 final class ArchivingShippingMethodApplicator implements ArchivingShippingMethodApplicatorInterface
 {
-    public function __construct(private DateTimeProviderInterface $calendar)
+    public function __construct(private ClockInterface $clock)
     {
     }
 
     public function archive(ShippingMethodInterface $data): ShippingMethodInterface
     {
-        $data->setArchivedAt($this->calendar->now());
+        $data->setArchivedAt($this->clock->now());
 
         return $data;
     }
