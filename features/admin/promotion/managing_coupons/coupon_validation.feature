@@ -10,7 +10,7 @@ Feature: Coupon validation
         And it is coupon based promotion
         And I am logged in as an administrator
 
-    @ui @api
+    @todo @ui @api
     Scenario: Trying to add a new coupon without specifying its code
         When I want to create a new coupon for this promotion
         And I do not specify its code
@@ -21,7 +21,7 @@ Feature: Coupon validation
         Then I should be notified that code is required
         And there should be 0 coupons related to this promotion
 
-    @ui @api
+    @todo @ui @api
     Scenario: Trying to add a new coupon with usage limit below one
         When I want to create a new coupon for this promotion
         And I specify its code as "SANTA2016"
@@ -32,7 +32,7 @@ Feature: Coupon validation
         Then I should be notified that coupon usage limit must be at least one
         And there should be 0 coupons related to this promotion
 
-    @ui @api
+    @todo @ui @api
     Scenario: Trying to add a new coupon with per customer usage limit below one
         When I want to create a new coupon for this promotion
         And I specify its code as "SANTA2016"

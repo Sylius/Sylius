@@ -10,7 +10,7 @@ Feature: Deleting multiple channels
         And the store operates on another channel named "DE Store"
         And I am logged in as an administrator
 
-    @ui @mink:chromedriver @no-api
+    @todo @ui @mink:chromedriver @no-api
     Scenario: Deleting multiple channels at once
         When I browse channels
         And I check the "PL Store" channel

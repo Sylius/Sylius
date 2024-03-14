@@ -16,12 +16,14 @@ namespace Sylius\Bundle\UiBundle\Tests\Functional;
 use Sonata\BlockBundle\SonataBlockBundle;
 use Sylius\Bundle\UiBundle\SyliusUiBundle;
 use Sylius\Bundle\UiBundle\Tests\Functional\src\CustomContextProvider;
+use Sylius\Bundle\UiBundle\Tests\Functional\src\SomeTwigComponent;
 use Symfony\Bundle\FrameworkBundle\FrameworkBundle;
 use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;
 use Symfony\Bundle\SecurityBundle\SecurityBundle;
 use Symfony\Bundle\TwigBundle\TwigBundle;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Kernel as HttpKernel;
+use Symfony\UX\TwigComponent\TwigComponentBundle;
 use Symfony\WebpackEncoreBundle\WebpackEncoreBundle;
 
 final class Kernel extends HttpKernel
@@ -37,12 +39,15 @@ final class Kernel extends HttpKernel
             new SonataBlockBundle(),
             new SyliusUiBundle(),
             new WebpackEncoreBundle(),
+            new TwigComponentBundle(),
         ];
     }
 
     protected function build(ContainerBuilder $container)
     {
         $container->register(CustomContextProvider::class)->addTag('sylius.ui.template_event.context_provider');
+
+        $container->register(SomeTwigComponent::class)->addTag('twig.component', ['template' => 'blocks/twigComponent/someTwigComponent.html.twig']);
 
         $container->loadFromExtension('framework', [
             'secret' => 'S0ME_SECRET',
@@ -113,6 +118,25 @@ final class Kernel extends HttpKernel
                         'context' => [
                             'option1' => 'foo',
                             'option2' => 'bar',
+                        ],
+                    ],
+                ],
+            ],
+            'template_event' => [
+                'blocks' => [
+                    'block' => [
+                        'component' => 'SomeTwigComponent',
+                    ],
+                ],
+            ],
+            'template_event_with_context' => [
+                'blocks' => [
+                    'block' => [
+                        'component' => [
+                            'name' => 'SomeTwigComponent',
+                            'inputs' => [
+                                'context' => 'expr:context',
+                            ],
                         ],
                     ],
                 ],

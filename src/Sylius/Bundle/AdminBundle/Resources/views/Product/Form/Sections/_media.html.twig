@@ -1,0 +1,26 @@
+<div class="tab-pane" id="product-media" role="tabpanel" tabindex="0">
+    <div class="card mb-3">
+        <div class="card-header">
+            <h2 id="productMedia" class="card-title">
+                {{ 'sylius.ui.media'|trans }} <span class="badge">{{ 'sylius.ui.work_in_progress'|trans }}</span>
+            </h2>
+        </div>
+        <div class="card-body">
+            {% for imageForm in hookable_data.form.images %}
+                <div class="row mb-4">
+                    <div class="col-auto">
+                        <span class="avatar avatar-xl" style="background-image: url('{{ imageForm.vars.value.path|imagine_filter('sylius_small') }}')"></span>
+                    </div>
+                    <div class="col">
+                        <div class="mb-3">
+                            {{ form_row(imageForm.type) }}
+                        </div>
+                        <div class="mb-3">
+                            {{ form_row(imageForm.file) }}
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>

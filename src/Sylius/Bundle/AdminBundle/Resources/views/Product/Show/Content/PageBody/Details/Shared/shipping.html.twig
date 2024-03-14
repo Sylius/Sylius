@@ -1,0 +1,59 @@
+{% set variant = hookable_data.variant %}
+
+<div class="card-header">
+    <div class="card-title">{{ 'sylius.ui.shipping'|trans }}</div>
+</div>
+<div class="card-body">
+    <div class="divide-y">
+        <div class="row">
+            <div class="col-12 col-md-4 fw-bold">{{ 'sylius.ui.shipping_category'|trans }}:</div>
+            <div class="col-12 col-md-8">
+                {% if variant.shippingCategory is null %}
+                    <i>{{ 'sylius.ui.no_shipping_category'|trans }}</i>
+                {% else %}
+                    {{ variant.shippingCategory }}
+                {% endif %}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 col-md-4 fw-bold">{{ 'sylius.ui.width'|trans }}:</div>
+            <div class="col-12 col-md-8">
+                {% if variant.width is null %}
+                    <i>{{ 'sylius.ui.no_width'|trans }}</i>
+                {% else %}
+                    {{ variant.width }}
+                {% endif %}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 col-md-4 fw-bold">{{ 'sylius.ui.height'|trans }}:</div>
+            <div class="col-12 col-md-8">
+                {% if variant.height is null %}
+                    <i>{{ 'sylius.ui.no_height'|trans }}</i>
+                {% else %}
+                    {{ variant.height }}
+                {% endif %}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 col-md-4 fw-bold">{{ 'sylius.ui.depth'|trans }}:</div>
+            <div class="col-12 col-md-8">
+                {% if variant.depth is null %}
+                    <i>{{ 'sylius.ui.no_depth'|trans }}</i>
+                {% else %}
+                    {{ variant.depth }}
+                {% endif %}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 col-md-4 fw-bold">{{ 'sylius.ui.weight'|trans }}:</div>
+            <div class="col-12 col-md-8">
+                {% if variant.weight is null %}
+                    <i>{{ 'sylius.ui.no_weight'|trans }}</i>
+                {% else %}
+                    {{ variant.weight }}
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>

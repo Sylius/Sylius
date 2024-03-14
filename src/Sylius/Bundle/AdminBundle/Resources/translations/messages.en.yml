@@ -61,17 +61,41 @@ sylius:
                     find_a_partner: Find a partner
                     sylius_certification: Sylius certification
     ui:
+        account: Account
+        admin_user: Administrator
+        add_new_entry: Add a new entry
         catalog_promotion:
             dates_details: This operation is time-consuming! Please consider a 2-10 minutes delay starting from the specified dates. The delay depends on the size of the catalog.
         channel:
             account_verification_required_details: By disabling this option, it will be possible to create accounts and access them without email verification and thus potentially access order data placed as a guest.
         channel_pricing_history: 'Channel pricing history'
         channel_pricings: Channel pricings
+        create_new:
+            customer_group: 'Create a new customer group'
+        delete_avatar: 'Delete avatar'
         gateway:
             no_sca_support_notice: The chosen payment gateway does not support SCA.
+            pay_pal_express_checkout_deprecation_notice: >
+                PayPal Express Checkout is deprecated. Please, use new
+                <a href="https://github.com/Sylius/PayPalPlugin" target="_blank">PayPal Commerce Platform</a> integration.
+        ip_address: 'IP address'
+        language: 'Language'
         lowest_price_before_discount: 'Lowest price before discount'
         minimum_price_details: Minimum price - this is the pricing threshold below which the current price cannot be discounted by neither catalog nor cart promotions. Use this to guard the profitability of your sales.
+        more: 'More'
+        no_main_taxon: 'no main taxon'
+        no_depth: 'No depth'
+        no_height: 'No height'
+        no_results: No results found
+        no_results_adjust_your_search: 'Adjust your search and try again.'
+        no_weight: 'No weight'
+        no_width: 'No width'
+        order:
+            date: 'Order date'
         original_price_details: Original price - this is the price of the product variant It is displayed as crossed-out in the catalog. It is used as the base for current price calculations. If this value is not defined, Catalog Promotion logic will copy value from Price to Original Price.
+        pagination:
+            number_of_results: 'Showing %from% to %to% of %total% entries'
+        partially_refunded: 'Partially refunded'
         price_details: Price - this is the current price of the product variant displayed in the catalog. It can be modified explicitly by i.e. catalog promotions.
         price_history: Price history
         product:
@@ -79,6 +103,7 @@ sylius:
         sales_summary: Sales summary
         shipment_for_order: Shipment for order
         show_history_for_channel_pricing: 'Show history for channel pricing'
+        start_typing_to_search: 'Start typing to search'
         statistics:
             day: Day
             lifetime: Lifetime
@@ -86,3 +111,6 @@ sylius:
             week: Week
             2weeks: 2 Weeks
             year: Year
+        taxon: Taxon
+        view_in_store: 'View in store'
+        work_in_progress: Work in progress

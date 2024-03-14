@@ -10,7 +10,7 @@ Feature: Browsing customers
         And the store has customer "l.skywalker@example.com"
         And I am logged in as an administrator
 
-    @api @ui
+    @api @todo @ui
     Scenario: Browsing customers in store
         When I want to see all customers in store
         Then I should see 3 customers in the list

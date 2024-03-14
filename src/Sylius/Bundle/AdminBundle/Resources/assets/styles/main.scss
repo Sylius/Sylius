@@ -1,0 +1,45 @@
+/*!
+ * This file is part of the Sylius package.
+ *
+ * (c) Sylius Sp. z o.o.
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+@import "variables";
+
+@import "choices.js/src/styles/choices.scss";
+@import "@tabler/core/src/scss/tabler.scss";
+
+// TODO: Once https://github.com/tabler/tabler/pull/1718 merged or resolve remove the custom _flags.scss and import the tabler's one
+//@import "@tabler/core/src/scss/tabler-flags.scss";
+@import "_flags.scss";
+
+body {
+    --bs-body-bg: #{$body-bg};
+    --bs-tertiary-bg: #{$body-bg};
+    --bs-body-color: #{$body-color};
+}
+
+@import "alert";
+@import "avatar";
+@import "collapse";
+@import "dialog";
+@import "form";
+@import "layout";
+@import "loader";
+@import "navbar";
+@import "tree";
+
+@import "body";
+
+.focus .ts-control {
+    box-shadow: none;
+}
+
+.sylius-admin-product-attribute-autocomplete {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 0.5rem;
+}

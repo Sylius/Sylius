@@ -13,6 +13,7 @@ sylius_admin_ajax_product_options_by_phrase:
                     phrase: $phrase
                     locale: expr:service('sylius.context.locale').getLocaleCode()
                     limit: "!!int %sylius.ajax.product.option_autocomplete_limit%"
+                    excludes: $excludes
 
 sylius_admin_ajax_find_product_options:
     path: /options

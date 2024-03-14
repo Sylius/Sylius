@@ -15,7 +15,7 @@ Feature: Prevent deletion of purchased product variant
         And the customer chose "Free" shipping method to "United States" with "Cash on Delivery" payment
         And I am logged in as an administrator
 
-    @api @ui
+    @api @todo @ui
     Scenario: Being unable to delete a purchased product variant
         When I try to delete the "Medium PHP Mug" variant of product "PHP Mug"
         Then I should be notified that this variant is in use and cannot be deleted

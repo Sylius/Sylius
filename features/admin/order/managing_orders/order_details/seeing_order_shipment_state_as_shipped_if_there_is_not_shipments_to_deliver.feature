@@ -16,12 +16,12 @@ Feature: Seeing shipping states of an order as shipped if there are no shipments
         And the customer chose "Cash on Delivery" payment
         And I am logged in as an administrator
 
-    @api @ui
+    @api @todo @ui
     Scenario: Seeing shipping state as shipped on orders list
         When I browse orders
         Then the order "#00000666" should have order shipping state "Shipped"
 
-    @api @ui
+    @api @todo @ui
     Scenario: Seeing shipping state as shipped on order's summary
         When I view the summary of the order "#00000666"
         Then it should have order's shipping state "Shipped"

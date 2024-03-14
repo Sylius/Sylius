@@ -1,0 +1,9 @@
+{% set main_hook = hook_name(hookable_data.parent_main_hook, 'shipments') %}
+{% set fallback_hook = hook_name(hookable_data.parent_fallback_hook, 'shipments') %}
+
+<div class="card mb-3" {{ sylius_test_html_attribute('shipments') }}>
+    {% hook [main_hook, fallback_hook] with hookable_data|merge({
+        parent_main_hook: main_hook,
+        parent_fallback_hook: fallback_hook
+    }) %}
+</div>

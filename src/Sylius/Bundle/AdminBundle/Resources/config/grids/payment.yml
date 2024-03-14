@@ -21,24 +21,24 @@ sylius_grid:
                     label: sylius.ui.order
                     path: order
                     options:
-                        template: "@SyliusAdmin/Order/Grid/Field/number.html.twig"
+                        template: "@SyliusAdmin/Shared/Grid/Field/orderNumber.html.twig"
                 channel:
                     type: twig
                     label: sylius.ui.channel
                     path: order.channel
                     options:
-                        template: "@SyliusAdmin/Order/Grid/Field/channel.html.twig"
+                        template: "@SyliusAdmin/Shared/Grid/Field/channel.html.twig"
                 customer:
                     type: twig
                     label: sylius.ui.customer
                     path: order.customer
                     options:
-                        template: "@SyliusAdmin/Order/Grid/Field/customer.html.twig"
+                        template: "@SyliusAdmin/Shared/Grid/Field/customer.html.twig"
                 state:
                     type: twig
                     label: sylius.ui.state
                     options:
-                        template: "@SyliusAdmin/Common/Label/paymentState.html.twig"
+                        template: "@SyliusAdmin/Shared/Grid/Field/paymentState.html.twig"
             filters:
                 state:
                     type: select
