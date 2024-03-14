@@ -62,7 +62,7 @@ Roadmap
 -------
 
 Are you wondering about Sylius plans for the next releases? If so then you should follow our `Roadmap <https://sylius.com/roadmap>`_.
-Through our :doc:`Slack and Forum </book/support/index>` you can contribute by conversation and votes on the most desired features and improvements.
+Through our :doc:`Slack </book/support/index>` you can contribute by conversation and votes on the most desired features and improvements.
 
 Final Thoughts
 --------------

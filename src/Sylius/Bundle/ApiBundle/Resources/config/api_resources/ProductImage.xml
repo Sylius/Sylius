@@ -105,7 +105,7 @@
                         <attribute>
                             <attribute name="name">filter</attribute>
                             <attribute name="in">query</attribute>
-                            <attribute name="description">Provide one of supported image liip imagine filters.</attribute>
+                            <attribute name="description">Provide one of supported image liip imagine filters</attribute>
                             <attribute name="schema">
                                 <attribute name="type">string</attribute>
                             </attribute>

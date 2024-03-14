@@ -422,7 +422,6 @@ sylius:
         item_discount: 'Item discount'
         items: 'Items'
         items_total: 'Items total'
-        join_forum: 'Join Forum'
         join_slack: 'Join Slack'
         jump_to_page: 'Jump to page'
         label: 'Label'
