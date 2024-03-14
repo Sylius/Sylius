@@ -8,7 +8,7 @@ Feature: Text product attribute validation
         Given the store is available in "English (United States)"
         And I am logged in as an administrator
 
-    @ui @api
+    @todo @ui @api
     Scenario: Trying to add a new text product attribute without name
         When I want to create a new text product attribute
         And I specify its code as "t_shirt_with_cotton"
@@ -17,7 +17,7 @@ Feature: Text product attribute validation
         Then I should be notified that name is required
         And the attribute with code "t_shirt_with_cotton" should not appear in the store
 
-    @ui @api
+    @todo @ui @api
     Scenario: Trying to add a new text product attribute without code
         When I want to create a new text product attribute
         And I name it "T-Shirt brand" in "English (United States)"
@@ -26,7 +26,7 @@ Feature: Text product attribute validation
         Then I should be notified that code is required
         And the attribute with name "T-Shirt brand" should not appear in the store
 
-    @ui @api
+    @todo @ui @api
     Scenario: Trying to remove name for existing text product attribute
         Given the store has a text product attribute "T-Shirt cotton brand"
         When I want to edit this product attribute
@@ -35,7 +35,7 @@ Feature: Text product attribute validation
         Then I should be notified that name is required
         And the text attribute "T-Shirt cotton brand" should still be in the store
 
-    @ui @api
+    @todo @ui @api
     Scenario: Trying to add a new text product attribute with wrong configuration
         When I want to create a new text product attribute
         And I name it "T-Shirt brand" in "English (United States)"

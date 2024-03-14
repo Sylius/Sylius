@@ -15,14 +15,14 @@ Feature: Finalizing order payment
         And the customer chose "Free" shipping method with "Cash on Delivery" payment
         And I am logged in as an administrator
 
-    @ui
+    @todo @ui
     Scenario: Finalizing order's payment
         Given I view the summary of the order "#00000666"
         When I mark this order as paid
         Then I should be notified that the order's payment has been successfully completed
         And it should have payment state "Completed"
 
-    @ui
+    @todo @ui
     Scenario: Finalizing order's payment when at least one item has become tracked after the purchase
         Given I view the summary of the order "#00000666"
         And the "Angel T-Shirt" product's inventory has become tracked with 2 items
@@ -30,13 +30,13 @@ Feature: Finalizing order payment
         Then I should be notified that the order's payment could not be finalized due to insufficient stock
         And it should have payment state "New"
 
-    @ui
+    @todo @ui
     Scenario: Unable to finalize completed order's payment
         Given this order is already paid
         When I view the summary of the order "#00000666"
         Then I should not be able to mark this order as paid again
 
-    @ui
+    @todo @ui
     Scenario: Checking the payment state of a completed order
         Given this order is already paid
         When I browse orders

@@ -17,19 +17,24 @@ use Knp\Menu\FactoryInterface;
 use Knp\Menu\ItemInterface;
 use Sylius\Bundle\UiBundle\Menu\Event\MenuBuilderEvent;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Symfony\Component\Routing\RouterInterface;
 
-final class MainMenuBuilder
+final readonly class MainMenuBuilder
 {
     public const EVENT_NAME = 'sylius.menu.admin.main';
 
-    public function __construct(private FactoryInterface $factory, private EventDispatcherInterface $eventDispatcher)
-    {
+    public function __construct(
+        private FactoryInterface $factory,
+        private EventDispatcherInterface $eventDispatcher,
+        private RouterInterface $router,
+    ) {
     }
 
     public function createMenu(array $options): ItemInterface
     {
         $menu = $this->factory->createItem('root');
 
+        $this->addDashboardSubmenu($menu);
         $this->addCatalogSubMenu($menu);
         $this->addSalesSubMenu($menu);
         $this->addCustomersSubMenu($menu);
@@ -42,11 +47,22 @@ final class MainMenuBuilder
         return $menu;
     }
 
+    private function addDashboardSubmenu(ItemInterface $menu): void
+    {
+        $menu
+            ->addChild('dashboard')
+            ->setLabel('sylius.ui.dashboard')
+            ->setLabelAttribute('icon', 'dashboard')
+            ->setUri($this->router->generate('sylius_admin_dashboard'))
+        ;
+    }
+
     private function addCatalogSubMenu(ItemInterface $menu): void
     {
         $catalog = $menu
             ->addChild('catalog')
             ->setLabel('sylius.menu.admin.main.catalog.header')
+            ->setLabelAttribute('icon', 'list-details')
         ;
 
         $catalog
@@ -112,6 +128,7 @@ final class MainMenuBuilder
         $customers = $menu
             ->addChild('customers')
             ->setLabel('sylius.menu.admin.main.customers.header')
+            ->setLabelAttribute('icon', 'users')
         ;
 
         $customers
@@ -139,6 +156,7 @@ final class MainMenuBuilder
         $marketing = $menu
             ->addChild('marketing')
             ->setLabel('sylius.menu.admin.main.marketing.header')
+            ->setLabelAttribute('icon', 'percentage')
         ;
 
         $marketing
@@ -178,6 +196,7 @@ final class MainMenuBuilder
         $sales = $menu
             ->addChild('sales')
             ->setLabel('sylius.menu.admin.main.sales.header')
+            ->setLabelAttribute('icon', 'shopping-bag')
         ;
 
         $sales
@@ -210,6 +229,7 @@ final class MainMenuBuilder
         $configuration = $menu
             ->addChild('configuration')
             ->setLabel('sylius.menu.admin.main.configuration.header')
+            ->setLabelAttribute('icon', 'adjustments')
         ;
 
         $configuration

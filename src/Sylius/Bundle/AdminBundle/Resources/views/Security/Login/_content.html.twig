@@ -1,0 +1,7 @@
+{% set main_hook = hook_name(hookable_data.parent_main_hook, 'content') %}
+
+<div class="card card-md">
+    <div class="card-body">
+        {% hook main_hook with hookable_data|merge({ parent_main_hook: main_hook }) %}
+    </div>
+</div>

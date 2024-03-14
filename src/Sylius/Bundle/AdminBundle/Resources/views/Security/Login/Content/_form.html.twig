@@ -1,0 +1,9 @@
+{% set form = hookable_data.form %}
+
+{% form_theme form '@SyliusAdmin/Shared/form_theme.html.twig' %}
+{% set main_hook = hook_name(hookable_data.parent_main_hook, 'form') %}
+
+{{ form_start(form, {'action': path('sylius_admin_login_check'), 'attr': {'class': 'ui large loadable form', 'novalidate': 'novalidate'}}) }}
+    {% hook main_hook with hookable_data|merge({ parent_main_hook: main_hook }) %}
+    <input type="hidden" name="_csrf_admin_security_token" value="{{ csrf_token('admin_authenticate') }}">
+{{ form_end(form, {'render_rest': false}) }}

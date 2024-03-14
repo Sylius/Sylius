@@ -1,0 +1,14 @@
+{% set customer = hookable_data.resource.customer %}
+
+<div>
+    <strong>{{ 'sylius.ui.phone_number'|trans }}:</strong>
+</div>
+<div class="mb-3">
+    <span class="g-col-12 text-muted">
+        {% if customer.phoneNumber is not null or customer.phoneNumber is not empty %}
+            {{ customer.phoneNumber }}
+        {% else %}
+            -
+        {% endif %}
+    </span>
+</div>

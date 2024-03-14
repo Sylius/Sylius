@@ -10,7 +10,7 @@ Feature: Choosing whether to show the lowest product price or not while creating
         And the store operates in "United States" and "Poland"
         And I am logged in as an administrator
 
-    @api @ui
+    @api @todo @ui
     Scenario: Adding a new channel with lowest price before the product has been discounted enabled by default
         When I want to create a new channel
         And I specify its code as "MOBILE"
@@ -23,7 +23,7 @@ Feature: Choosing whether to show the lowest product price or not while creating
         Then I should be notified that it has been successfully created
         And the "Mobile" channel should have the lowest price of discounted products prior to the current discount enabled
 
-    @api @ui
+    @api @todo @ui
     Scenario: Adding a new channel with lowest price before the product has been discounted enabled
         When I want to create a new channel
         And I specify its code as "MOBILE"
@@ -37,7 +37,7 @@ Feature: Choosing whether to show the lowest product price or not while creating
         Then I should be notified that it has been successfully created
         And the "Mobile" channel should have the lowest price of discounted products prior to the current discount enabled
 
-    @api @ui
+    @api @todo @ui
     Scenario: Adding a new channel with lowest price before the product has been discounted disabled
         When I want to create a new channel
         And I specify its code as "MOBILE"

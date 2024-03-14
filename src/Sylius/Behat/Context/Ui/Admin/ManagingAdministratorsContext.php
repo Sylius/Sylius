@@ -75,35 +75,21 @@ final class ManagingAdministratorsContext implements Context
     /**
      * @When I specify its name as :username
      * @When I do not specify its name
+     * @When I change its name to :username
      */
     public function iSpecifyItsNameAs($username = null)
     {
-        $this->createPage->specifyUsername($username ?? '');
-    }
-
-    /**
-     * @When I change its name to :username
-     */
-    public function iChangeItsNameTo($username)
-    {
-        $this->updatePage->changeUsername($username);
+        $this->createPage->setUsername($username ?? '');
     }
 
     /**
      * @When I specify its email as :email
      * @When I do not specify its email
+     * @When I change its email to :email
      */
     public function iSpecifyItsEmailAs($email = null)
     {
-        $this->createPage->specifyEmail($email ?? '');
-    }
-
-    /**
-     * @When I change its email to :email
-     */
-    public function iChangeItsEmailTo($email)
-    {
-        $this->updatePage->changeEmail($email);
+        $this->createPage->setEmail($email ?? '');
     }
 
     /**
@@ -111,7 +97,7 @@ final class ManagingAdministratorsContext implements Context
      */
     public function iSpecifyItsLocaleAs($localeCode)
     {
-        $this->createPage->specifyLocale($localeCode);
+        $this->createPage->setLocale($localeCode);
     }
 
     /**
@@ -119,25 +105,18 @@ final class ManagingAdministratorsContext implements Context
      */
     public function iSetMyLocaleTo($localeCode)
     {
-        $this->updatePage->changeLocale($localeCode);
+        $this->updatePage->setLocale($localeCode);
         $this->updatePage->saveChanges();
     }
 
     /**
      * @When I specify its password as :password
      * @When I do not specify its password
+     * @When I change its password to :password
      */
     public function iSpecifyItsPasswordAs($password = null)
     {
-        $this->createPage->specifyPassword($password ?? '');
-    }
-
-    /**
-     * @When I change its password to :password
-     */
-    public function iChangeItsPasswordTo($password)
-    {
-        $this->updatePage->changePassword($password);
+        $this->createPage->setPassword($password ?? '');
     }
 
     /**
@@ -252,7 +231,7 @@ final class ManagingAdministratorsContext implements Context
      */
     public function iShouldBeNotifiedThatEmailMustBeUnique()
     {
-        Assert::same($this->createPage->getValidationMessage('email'), 'This email is already used.');
+        Assert::same($this->createPage->getValidationMessage('field_email'), 'This email is already used.');
     }
 
     /**
@@ -260,7 +239,7 @@ final class ManagingAdministratorsContext implements Context
      */
     public function iShouldBeNotifiedThatNameMustBeUnique()
     {
-        Assert::same($this->createPage->getValidationMessage('name'), 'This username is already used.');
+        Assert::same($this->createPage->getValidationMessage('field_username'), 'This username is already used.');
     }
 
     /**
@@ -268,7 +247,7 @@ final class ManagingAdministratorsContext implements Context
      */
     public function iShouldBeNotifiedThatFirstNameIsRequired($elementName)
     {
-        Assert::same($this->createPage->getValidationMessage($elementName), sprintf('Please enter your %s.', $elementName));
+        Assert::same($this->createPage->getValidationMessage(sprintf('%s_%s', 'field', $elementName)), sprintf('Please enter your %s.', $elementName));
     }
 
     /**
@@ -276,7 +255,7 @@ final class ManagingAdministratorsContext implements Context
      */
     public function iShouldBeNotifiedThatEmailIsNotValid()
     {
-        Assert::same($this->createPage->getValidationMessage('email'), 'This email is invalid.');
+        Assert::same($this->createPage->getValidationMessage('field_email'), 'This email is invalid.');
     }
 
     /**
@@ -336,8 +315,8 @@ final class ManagingAdministratorsContext implements Context
     {
         $avatarPath = $this->sharedStorage->get($avatar);
 
-        Assert::false($this->topBarElement->hasAvatarInMainBar($avatarPath));
-        Assert::true($this->topBarElement->hasDefaultAvatarInMainBar());
+        Assert::false($this->topBarElement->hasAvatarInMainBar($avatarPath), 'Avatar should not be present in the top bar');
+        Assert::true($this->topBarElement->hasDefaultAvatarInMainBar(), 'Default avatar should be present in the top bar');
     }
 
     /**

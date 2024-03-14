@@ -1,0 +1,11 @@
+{% set main_hook = hook_name(hookable_data.parent_main_hook, 'actions') %}
+{% set fallback_hook = hook_name(hookable_data.parent_fallback_hook, 'actions') %}
+
+<td>
+    <div class="d-flex justify-content-end">
+        {% hook [main_hook, fallback_hook] with hookable_data|merge({
+            parent_main_hook: main_hook,
+            parent_fallback_hook: fallback_hook
+        }) %}
+    </div>
+</td>

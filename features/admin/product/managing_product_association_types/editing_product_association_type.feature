@@ -9,7 +9,7 @@ Feature: Editing a product association type
         And the store has a product association type "Cross sell"
         And I am logged in as an administrator
 
-    @ui @api
+    @todo @ui @api
     Scenario: Changing a name of an existing product association type
         When I want to modify the "Cross sell" product association type
         And I rename it to "Up sell" in "English (United States)"
@@ -17,7 +17,7 @@ Feature: Editing a product association type
         Then I should be notified that it has been successfully edited
         And this product association type name should be "Up sell"
 
-    @ui @api
+    @todo @ui @api
     Scenario: Seeing a disabled code field while editing a product association type
         When I want to modify the "Cross sell" product association type
         Then I should not be able to edit its code

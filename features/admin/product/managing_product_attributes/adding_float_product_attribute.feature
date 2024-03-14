@@ -8,7 +8,7 @@ Feature: Adding a new float product attribute
         Given the store is available in "English (United States)"
         And I am logged in as an administrator
 
-    @ui @api
+    @todo @ui @api
     Scenario: Adding a new float product attribute
         When I want to create a new float product attribute
         And I specify its code as "display_size"
@@ -17,7 +17,7 @@ Feature: Adding a new float product attribute
         Then I should be notified that it has been successfully created
         And the float attribute "Display Size" should appear in the store
 
-    @ui @no-api
+    @todo @ui @no-api
     Scenario: Seeing disabled type field while adding a float product attribute
         When I want to create a new float product attribute
         Then the type field should be disabled

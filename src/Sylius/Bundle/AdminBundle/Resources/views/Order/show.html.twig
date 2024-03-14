@@ -1,9 +1,0 @@
-{% extends '@SyliusAdmin/layout.html.twig' %}
-
-{% block title %}{{ 'sylius.ui.order'|trans ~' #'~ order.number }} {{ parent() }}{% endblock %}
-
-{% set customer = order.customer %}
-
-{% block content %}
-    {{ sylius_template_event('sylius.admin.order.show.content', _context) }}
-{% endblock %}

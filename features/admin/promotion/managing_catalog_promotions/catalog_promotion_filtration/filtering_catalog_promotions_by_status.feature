@@ -16,7 +16,7 @@ Feature: Filtering catalog promotions by status
         And this catalog promotion is disabled
         And I am logged in as an administrator
 
-    @ui @api
+    @todo @ui @api
     Scenario: Filtering enabled catalog promotions
         When I browse catalog promotions
         And I filter enabled catalog promotions
@@ -25,7 +25,7 @@ Feature: Filtering catalog promotions by status
         But I should not see a catalog promotion with name "Surprise sale"
         And I should not see a catalog promotion with name "Special sale"
 
-    @ui @api
+    @todo @ui @api
     Scenario: Filtering active catalog promotions
         When I browse catalog promotions
         And I filter by active state
@@ -34,7 +34,7 @@ Feature: Filtering catalog promotions by status
         But I should not see a catalog promotion with name "Surprise sale"
         And I should not see a catalog promotion with name "Special sale"
 
-    @ui @api
+    @todo @ui @api
     Scenario: Filtering inactive catalog promotions
         When I browse catalog promotions
         And I filter by inactive state

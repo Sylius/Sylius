@@ -1,0 +1,43 @@
+{% import '@SyliusAdmin/Shared/Helper/translations.html.twig' as _translations %}
+
+<div class="tab-pane" id="product-translations" role="tabpanel" tabindex="0">
+    <div class="bg-white mb-3">
+        {% set body %}
+            {% verbatim %}
+                <div class="row"">
+                    <div class="col-12 col-md-6">
+                        {{ form_row(translationForm.name) }}
+                    </div>
+                    <div class="col-12 col-md-6">
+                        {{ form_label(translationForm.slug) }}
+                        <div class="input-group mb-3">
+                            {{ form_widget(translationForm.slug) }}
+                            <button
+                                class="btn btn-outline-secondary"
+                                type="button"
+                                data-action="live#action"
+                                data-action-name="debounce(300)|generateProductSlug(localeCode={{ locale }})"
+                                {{ sylius_test_html_attribute('generate-product-slug-button', locale) }}
+                            >
+                                ⚡️
+                            </button>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        {{ form_row(translationForm.description) }}
+                    </div>
+                    <div class="col-12 col-md-6">
+                        {{ form_row(translationForm.metaKeywords) }}
+                    </div>
+                    <div class="col-12 col-md-6">
+                        {{ form_row(translationForm.metaDescription) }}
+                    </div>
+                    <div class="col-12">
+                        {{ form_row(translationForm.shortDescription) }}
+                    </div>
+                </div>
+            {% endverbatim %}
+        {% endset %}
+        {{ _translations.default(hookable_data.form.translations, body) }}
+    </div>
+</div>

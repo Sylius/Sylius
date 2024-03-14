@@ -13,11 +13,11 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\UiBundle\ContextProvider;
 
-use Sylius\Bundle\UiBundle\Registry\TemplateBlock;
+use Sylius\Bundle\UiBundle\Registry\Block;
 
 interface ContextProviderInterface
 {
-    public function provide(array $templateContext, TemplateBlock $templateBlock): array;
+    public function provide(array $templateContext, Block $templateBlock): array;
 
-    public function supports(TemplateBlock $templateBlock): bool;
+    public function supports(Block $templateBlock): bool;
 }

@@ -113,7 +113,7 @@ final class ProductShowPageContext implements Context
     public function iAccessThePriceHistoryIndexPageOfSimpleProductForChannel(string $channelName): void
     {
         $pricingRow = $this->pricingElement->getSimpleProductPricingRowForChannel($channelName);
-        $pricingRow->clickLink('Show');
+        $pricingRow->find('css', '[data-test-price-history]')->click();
     }
 
     /**
@@ -122,7 +122,7 @@ final class ProductShowPageContext implements Context
     public function iAccessThePriceHistoryIndexPageOfVariantForChannel(string $variantName, string $channelName): void
     {
         $pricingRow = $this->pricingElement->getVariantPricingRowForChannel($variantName, $channelName);
-        $pricingRow->clickLink('Show');
+        $pricingRow->find('css', '[data-test-price-history]')->click();
     }
 
     /**
