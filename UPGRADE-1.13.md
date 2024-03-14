@@ -779,7 +779,7 @@ and use one of the new attributes accordingly to the type of your class, e.g.:
                     - 'your_custom_validation_group'
     ```
 
-# State Machine
+### State Machine
 
 1. We have configured all existing Sylius graphs to be usable with the Symfony Workflow out of the box.
    Winzou State Machine is still the default state machine for all graphs, but you can switch to Symfony Workflow via
