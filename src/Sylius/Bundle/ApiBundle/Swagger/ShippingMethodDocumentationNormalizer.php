@@ -31,6 +31,10 @@ final class ShippingMethodDocumentationNormalizer implements NormalizerInterface
     {
         $docs = $this->decoratedNormalizer->normalize($object, $format, $context);
 
+        if (!isset($docs['components']['schemas']['ShippingMethod.jsonld-shop.shipping_method.read'])) {
+            return $docs;
+        }
+
         $docs['components']['schemas']['ShippingMethod.jsonld-shop.shipping_method.read']['properties']['price'] = [
             'type' => 'integer',
             'readOnly' => true,

@@ -31,6 +31,10 @@ final class ProductVariantDocumentationNormalizer implements NormalizerInterface
     {
         $docs = $this->decoratedNormalizer->normalize($object, $format, $context);
 
+        if (!isset($docs['components']['schemas']['ProductVariant.jsonld-shop.product_variant.read'])) {
+            return $docs;
+        }
+
         $docs['components']['schemas']['ProductVariant.jsonld-shop.product_variant.read']['properties']['price'] = [
             'type' => 'integer',
             'readOnly' => true,

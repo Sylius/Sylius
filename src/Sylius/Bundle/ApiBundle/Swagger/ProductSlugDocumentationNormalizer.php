@@ -34,6 +34,11 @@ final class ProductSlugDocumentationNormalizer implements NormalizerInterface
         $docs = $this->decoratedNormalizer->normalize($object, $format, $context);
 
         $shopProductBySlugPath = $this->apiRoute . '/shop/products-by-slug/{slug}';
+
+        if (!isset($docs['paths'][$shopProductBySlugPath]['get'])) {
+            return $docs;
+        }
+
         $params = $docs['paths'][$shopProductBySlugPath]['get']['parameters'];
 
         foreach ($params as $index => $param) {
