@@ -38,6 +38,10 @@ final class ShippingMethodDocumentationModifier implements DocumentationModifier
         $components = $docs->getComponents();
         $schemas = $components->getSchemas();
 
+        if (!isset($schemas['ShippingMethod.jsonld-shop.shipping_method.read'])) {
+            return $docs;
+        }
+
         $schemas['ShippingMethod.jsonld-shop.shipping_method.read']['properties']['price'] = [
             'type' => 'integer',
             'readOnly' => true,

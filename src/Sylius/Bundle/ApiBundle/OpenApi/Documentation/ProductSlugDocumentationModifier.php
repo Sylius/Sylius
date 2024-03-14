@@ -28,7 +28,12 @@ final class ProductSlugDocumentationModifier implements DocumentationModifierInt
 
         $paths = $docs->getPaths();
         $pathItem = $paths->getPath($path);
-        $operation = $pathItem->getGet();
+        $operation = $pathItem?->getGet();
+
+        if (null === $operation) {
+            return $docs;
+        }
+
         /** @var Parameter[] $parameters */
         $parameters = $operation->getParameters();
 
