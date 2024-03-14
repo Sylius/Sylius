@@ -7,6 +7,7 @@ if [ "${1#-}" != "$1" ]; then
 fi
 
 php bin/console cache:clear
+php bin/console lexik:jwt:generate-keypair
 
 if [ "$1" = 'php-fpm' ] || [ "$1" = 'bin/console' ]; then
 	mkdir -p var/cache var/log var/sessions public/media

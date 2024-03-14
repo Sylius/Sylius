@@ -1,2 +1,3 @@
 * * * * * php /srv/sylius/bin/console sylius:remove-expired-carts
 * * * * * php /srv/sylius/bin/console sylius:cancel-unpaid-orders
+0 * * * * php /srv/sylius/bin/console sylius:fixtures:load -n
