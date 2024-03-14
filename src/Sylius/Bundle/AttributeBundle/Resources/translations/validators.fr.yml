@@ -20,8 +20,15 @@ sylius:
             not_blank: Veuillez entrer une description de l'attribut.
             min_length: La description de l'attribut doit contenir au moins 1 caractère.|La description de l'attribut doit contenir au moins {{ limit }} caractères.
             max_length: La description de l'attribut ne doit pas contenir plus de 1 caractère.|La description de l'attribut ne doit pas contenir plus de {{ limit }} caractères.
+        type:
+            unregistered: Le type d'attribut "%type%" n'est pas enregistré.
     attribute_value:
         attribute:
             not_blank: Veuillez sélectionner un attribut.
         value:
             not_blank: Veuillez entrer une valeur d'attribut.
+    translation:
+        locale:
+            not_blank: Vous devez entrer une valeur.
+            invalid: Ce paramètre régional n'est pas valide.
+            unique: Une traduction pour la locale {{ value }} existe déjà.

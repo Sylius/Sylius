@@ -25,9 +25,10 @@ final class ManagingProductTaxonsContext implements Context
     }
 
     /**
-     * @When I change that the :product product belongs to the :taxon taxon
+     * @When I add :taxon taxon to the :product product
+     * @When I assign the :taxon taxon to the :product product
      */
-    public function iChangeThatTheProductBelongsToTheTaxon(ProductInterface $product, TaxonInterface $taxon): void
+    public function iAddTaxonToTheProduct(ProductInterface $product, TaxonInterface $taxon): void
     {
         $this->updateSimpleProductPage->open(['id' => $product->getId()]);
         $this->updateSimpleProductPage->selectProductTaxon($taxon);

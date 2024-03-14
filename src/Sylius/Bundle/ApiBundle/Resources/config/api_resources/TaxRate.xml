@@ -1,0 +1,93 @@
+<?xml version="1.0" ?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Sylius Sp. z o.o.
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<resources xmlns="https://api-platform.com/schema/metadata"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="https://api-platform.com/schema/metadata https://api-platform.com/schema/metadata/metadata-2.0.xsd"
+>
+    <resource class="%sylius.model.tax_rate.class%" shortName="TaxRate">
+        <attribute name="route_prefix">admin</attribute>
+        <attribute name="validation_groups">sylius</attribute>
+
+        <itemOperations>
+            <itemOperation name="admin_get">
+                <attribute name="method">GET</attribute>
+                <attribute name="path">/tax-rates/{code}</attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">
+                        <attribute>admin:tax_rate:show</attribute>
+                        <attribute>sylius:admin:tax_rate:show</attribute>
+                    </attribute>
+                </attribute>
+            </itemOperation>
+
+            <itemOperation name="admin_put">
+                <attribute name="method">PUT</attribute>
+                <attribute name="path">/tax-rates/{code}</attribute>
+                <attribute name="denormalization_context">
+                    <attribute name="groups">
+                        <attribute>admin:tax_rate:update</attribute>
+                        <attribute>sylius:admin:tax_rate:update</attribute>
+                    </attribute>
+                </attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">
+                        <attribute>admin:tax_rate:show</attribute>
+                        <attribute>sylius:admin:tax_rate:show</attribute>
+                    </attribute>
+                </attribute>
+            </itemOperation>
+
+            <itemOperation name="admin_delete">
+                <attribute name="method">DELETE</attribute>
+                <attribute name="path">/tax-rates/{code}</attribute>
+            </itemOperation>
+        </itemOperations>
+
+        <collectionOperations>
+            <collectionOperation name="admin_get">
+                <attribute name="method">GET</attribute>
+                <attribute name="path">/tax-rates</attribute>
+                <attribute name="filters">
+                    <attribute>sylius.api.tax_rate.date_filter</attribute>
+                </attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">
+                        <attribute>admin:tax_rate:index</attribute>
+                        <attribute>sylius:admin:tax_rate:index</attribute>
+                    </attribute>
+                </attribute>
+            </collectionOperation>
+
+            <collectionOperation name="admin_post">
+                <attribute name="method">POST</attribute>
+                <attribute name="path">/tax-rates</attribute>
+                <attribute name="denormalization_context">
+                    <attribute name="groups">
+                        <attribute>admin:tax_rate:create</attribute>
+                        <attribute>sylius:admin:tax_rate:create</attribute>
+                    </attribute>
+                </attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">
+                        <attribute>admin:tax_rate:show</attribute>
+                        <attribute>sylius:admin:tax_rate:show</attribute>
+                    </attribute>
+                </attribute>
+            </collectionOperation>
+        </collectionOperations>
+
+        <property name="id" identifier="false" writable="false" />
+        <property name="code" identifier="true" required="true" />
+    </resource>
+</resources>

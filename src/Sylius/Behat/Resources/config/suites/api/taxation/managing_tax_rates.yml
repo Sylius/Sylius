@@ -1,0 +1,25 @@
+# This file is part of the Sylius package.
+# (c) Sylius Sp. z o.o.
+
+default:
+    suites:
+        api_managing_tax_rates:
+            contexts:
+                - sylius.behat.context.hook.doctrine_orm
+
+                - sylius.behat.context.transform.shared_storage
+                - sylius.behat.context.transform.tax_category
+                - sylius.behat.context.transform.tax_rate
+                - sylius.behat.context.transform.zone
+
+                - sylius.behat.context.setup.channel
+                - sylius.behat.context.setup.admin_api_security
+                - sylius.behat.context.setup.taxation
+                - sylius.behat.context.setup.zone
+
+                - sylius.behat.context.api.admin.managing_tax_rates
+                - sylius.behat.context.api.admin.response
+                - sylius.behat.context.api.admin.save
+
+            filters:
+                tags: "@managing_tax_rates&&@api"

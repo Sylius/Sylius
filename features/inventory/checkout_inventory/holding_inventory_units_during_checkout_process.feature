@@ -14,7 +14,7 @@ Feature: Holding inventory units during checkout
         And there is a customer "sylius@example.com" that placed an order "#00000022"
         And I am logged in as an administrator
 
-    @ui
+    @ui @api
     Scenario: Holding inventory units
         Given the customer bought 3 "Iron Maiden T-Shirt" products
         And the customer chose "Free" shipping method to "United States" with "Offline" payment
@@ -22,7 +22,7 @@ Feature: Holding inventory units during checkout
         Then 3 units of this product should be on hold
         And 5 units of this product should be on hand
 
-    @ui
+    @ui @api
     Scenario: Release hold units after order has been paid
         Given the customer bought 3 "Iron Maiden T-Shirt" products
         And the customer chose "Free" shipping method to "United States" with "Offline" payment

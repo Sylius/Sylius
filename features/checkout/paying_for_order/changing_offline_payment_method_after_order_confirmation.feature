@@ -11,7 +11,7 @@ Feature: Changing the offline payment method after order confirmation
         And the store has a product "PHP T-Shirt" priced at "$19.99"
         And the store ships everywhere for Free
 
-    @ui
+    @ui @api
     Scenario: Retrying the payment with different Offline payment
         Given I added product "PHP T-Shirt" to the cart
         When I complete addressing step with email "john@example.com" and "United States" based billing address

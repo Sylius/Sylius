@@ -16,11 +16,18 @@ sylius:
         state:
             processing: La promotion du catalogue ne peut pas être modifiée car elle est en cours de traitement.
     catalog_promotion_action:
+        type:
+            not_blank: Veuillez choisir un type d'action.
+            invalid: Le type d'action de promotion catalogue n'est pas valide. Les types disponibles sont {{ available_action_types }}.
         invalid_type: Le type d'action de la promotion catalogue n'est pas valide. Veuillez choisir un type d'action valide.
         percentage_discount:
             not_in_range: Le montant de la remise en pourcentage doit être compris entre 0% et 100%.
             not_number_or_empty: Le montant de la remise en pourcentage doit être un nombre et ne peut pas être vide.
             not_valid: Le montant de la remise en pourcentage doit être configuré.
+    catalog_promotion_scope:
+        type:
+            not_blank: Veuillez choisir un type de périmètre.
+            invalid: Le type de périmètre de promotion catalogue n'est pas valide. Les types disponibles sont {{ available_scope_types }}.
     promotion:
         code:
             unique: Ce code de promotion existe déjà.
@@ -37,8 +44,11 @@ sylius:
             min_length: Le nom de la promotion doit contenir au moins 1 caractère.|Le nom de la promotion doit contenir au moins {{ limit }} caractères.
             not_blank: Veuillez saisir le nom de la promotion.
     promotion_action:
+        invalid_type: Le type d'action de promotion n'est pas valide. Les types d'action disponibles sont {{ available_action_types }}.
         percentage_discount_configuration:
             not_in_range: Le pourcentage de remise doit être compris entre 0% et 100%.
+    promotion_rule:
+        invalid_type: Le type de règle de promotion n'est pas valide. Les types de règles disponibles sont {{ available_rule_types }}.
     promotion_coupon:
         code:
             max_length: Le code promo ne doit pas contenir plus d'un caractère.|Le code promo ne doit pas dépasser les {{ limit }} caractères.
@@ -47,6 +57,9 @@ sylius:
             regex: Le code de promotion peut uniquement être constitué de lettres, chiffres, tirets et traits de soulignement.
             unique: Cette promotion existe déjà.
         is_invalid: Ce code promo n'est pas valide.
+        promotion:
+            not_blank: Veuillez fournir une promotion pour ce coupon.
+            not_coupon_based: Seules les promotions basées sur les coupons peuvent avoir des coupons.
         usage_limit:
             min: La limite d'utilisation de coupon doit être au moins de {{ limit }}.
     promotion_coupon_generator_instruction:
@@ -61,3 +74,8 @@ sylius:
         possible_generation_amount: Longueur de code ou nombre de bons de réduction invalide. Il n'est pas possible de générer %expectedAmount% coupons uniques avec la longueur de code %codeLength%. Le nombre possible à générer est de %possibleAmount%.
         usage_limit:
             min: La limite d'utilisation du code promo généré doit être au moins de {{ limit }}.
+    translation:
+        locale:
+            not_blank: Vous devez entrer une valeur.
+            invalid: Ce paramètre régional n'est pas valide.
+            unique: Une traduction pour la locale {{ value }} existe déjà.

@@ -25,10 +25,43 @@
         <parameter key="sylius.ajax.product.autocomplete_limit">25</parameter>
         <parameter key="sylius.ajax.product.variant_autocomplete_limit">25</parameter>
         <parameter key="sylius.ajax.product.option_autocomplete_limit">10</parameter>
+        <parameter key="sylius.ajax.customer_group.autocomplete_limit">25</parameter>
+        <parameter key="sylius.message.admin_user_create.validation_groups" type="collection">
+            <parameter>sylius</parameter>
+            <parameter>sylius_user_create</parameter>
+        </parameter>
     </parameters>
 
     <services>
         <defaults public="true" />
+
+        <service id="Sylius\Bundle\AdminBundle\Console\Command\CreateAdminUserCommand">
+            <argument type="service" id="sylius.command_bus" />
+            <argument>%sylius_locale.locale%</argument>
+            <argument type="service" id="sylius.console.command_factory.question" />
+            <tag name="console.command" />
+        </service>
+
+        <service id="Sylius\Bundle\AdminBundle\Console\Command\ChangeAdminUserPasswordCommand">
+            <argument type="service" id="sylius.repository.admin_user" />
+            <argument type="service" id="sylius.security.password_updater" />
+            <argument type="service" id="sylius.console.command_factory.question" />
+            <tag name="console.command" />
+        </service>
+
+        <service id="Sylius\Bundle\AdminBundle\MessageHandler\CreateAdminUserHandler">
+            <argument type="service" id="sylius.repository.admin_user" />
+            <argument type="service" id="sylius.factory.admin_user" />
+            <argument type="service" id="sylius.canonicalizer" />
+            <argument type="service" id="validator" />
+            <argument>%sylius.message.admin_user_create.validation_groups%</argument>
+            <tag name="messenger.message_handler" bus="sylius.command_bus" />
+            <tag name="messenger.message_handler" bus="sylius_default.bus" />
+        </service>
+
+        <service id="sylius.console.command_factory.question" class="Sylius\Bundle\AdminBundle\Console\Command\Factory\QuestionFactory" />
+
+        <service id="Sylius\Bundle\AdminBundle\Console\Command\Factory\QuestionFactoryInterface" alias="sylius.console.command_factory.question" />
 
         <service id="sylius.context.locale.admin_based" class="Sylius\Bundle\AdminBundle\Context\AdminBasedLocaleContext">
             <argument type="service" id="security.token_storage" />
@@ -62,7 +95,9 @@
             <tag name="twig.extension" />
         </service>
 
-        <service id="sylius.http_client" class="GuzzleHttp\Client" public="false" />
-        <service id="sylius.http_message_factory" class="Http\Message\MessageFactory\GuzzleMessageFactory" public="false" />
+        <service id="sylius.http_client" alias="Psr\Http\Client\ClientInterface" public="false" />
+        <service id="sylius.http_message_factory" class="Http\Message\MessageFactory\GuzzleMessageFactory" public="false">
+            <deprecated package="sylius/admin-bundle" version="1.13">The "%service_id%" service is deprecated since 1.13 and will be removed in 2.0. Use "Psr\Http\Message\RequestFactoryInterface" instead.</deprecated>
+        </service>
     </services>
 </container>

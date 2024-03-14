@@ -1,0 +1,13 @@
+{
+    "@context": "\/api\/v2\/contexts\/ConstraintViolationList",
+    "@type": "ConstraintViolationList",
+    "hydra:title": "An error occurred",
+    "hydra:description": "The product variant with code \"CAP_YELLOW\" does not belong to the product with code \"MUG\", which is the owner of the image.",
+    "violations": [
+        {
+            "propertyPath": "",
+            "message": "The product variant with code \"CAP_YELLOW\" does not belong to the product with code \"MUG\", which is the owner of the image.",
+            "code": null
+        }
+    ]
+}

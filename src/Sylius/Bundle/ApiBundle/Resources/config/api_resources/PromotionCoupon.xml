@@ -1,0 +1,140 @@
+<?xml version="1.0" ?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Sylius Sp. z o.o.
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<resources xmlns="https://api-platform.com/schema/metadata"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="https://api-platform.com/schema/metadata https://api-platform.com/schema/metadata/metadata-2.0.xsd"
+>
+    <resource class="%sylius.model.promotion_coupon.class%" shortName="PromotionCoupon">
+        <attribute name="route_prefix">admin</attribute>
+
+        <attribute name="validation_groups">sylius</attribute>
+
+        <collectionOperations>
+            <collectionOperation name="admin_get">
+                <attribute name="method">GET</attribute>
+                <attribute name="path">/promotion-coupons</attribute>
+                <attribute name="filters">
+                    <attribute>sylius.api.promotion_coupon_order_filter</attribute>
+                    <attribute>Sylius\Bundle\ApiBundle\Filter\Doctrine\PromotionCouponPromotionFilter</attribute>
+                </attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">
+                        <attribute>admin:promotion_coupon:index</attribute>
+                        <attribute>sylius:admin:promotion_coupon:index</attribute>
+                    </attribute>
+                </attribute>
+                <attribute name="order">
+                    <attribute name="used">DESC</attribute>
+                </attribute>
+            </collectionOperation>
+
+            <collectionOperation name="admin_post">
+                <attribute name="method">POST</attribute>
+                <attribute name="path">/promotion-coupons</attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">
+                        <attribute>admin:promotion_coupon:show</attribute>
+                        <attribute>sylius:admin:promotion_coupon:show</attribute>
+                    </attribute>
+                </attribute>
+                <attribute name="denormalization_context">
+                    <attribute name="groups">
+                        <attribute>admin:promotion_coupon:create</attribute>
+                        <attribute>sylius:admin:promotion_coupon:create</attribute>
+                    </attribute>
+                </attribute>
+            </collectionOperation>
+
+            <collectionOperation name="admin_generate">
+                <attribute name="method">POST</attribute>
+                <attribute name="messenger">input</attribute>
+                <attribute name="path">/promotion-coupons/generate</attribute>
+                <attribute name="input">Sylius\Bundle\ApiBundle\Command\Promotion\GeneratePromotionCoupon</attribute>
+                <attribute name="denormalization_context">
+                    <attribute name="groups">
+                        <attribute>admin:promotion_coupon:generate</attribute>
+                        <attribute>sylius:admin:promotion_coupon:generate</attribute>
+                    </attribute>
+                </attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">
+                        <attribute>admin:promotion_coupon:show</attribute>
+                        <attribute>sylius:admin:promotion_coupon:show</attribute>
+                    </attribute>
+                </attribute>
+                <attribute name="openapi_context">
+                    <attribute name="summary">Generates promotion coupons.</attribute>
+                    <attribute name="description">Generates promotion coupons</attribute>
+                </attribute>
+            </collectionOperation>
+        </collectionOperations>
+
+        <itemOperations>
+            <itemOperation name="admin_get">
+                <attribute name="method">GET</attribute>
+                <attribute name="path">/promotion-coupons/{code}</attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">
+                        <attribute>admin:promotion_coupon:show</attribute>
+                        <attribute>sylius:admin:promotion_coupon:show</attribute>
+                    </attribute>
+                </attribute>
+            </itemOperation>
+
+            <itemOperation name="admin_put">
+                <attribute name="method">PUT</attribute>
+                <attribute name="path">/promotion-coupons/{code}</attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">
+                        <attribute>admin:promotion_coupon:show</attribute>
+                        <attribute>sylius:admin:promotion_coupon:show</attribute>
+                    </attribute>
+                </attribute>
+                <attribute name="denormalization_context">
+                    <attribute name="groups">
+                        <attribute>admin:promotion_coupon:update</attribute>
+                        <attribute>sylius:admin:promotion_coupon:update</attribute>
+                    </attribute>
+                </attribute>
+            </itemOperation>
+
+            <itemOperation name="admin_delete">
+                <attribute name="method">DELETE</attribute>
+                <attribute name="path">/promotion-coupons/{code}</attribute>
+            </itemOperation>
+        </itemOperations>
+
+        <subresourceOperations>
+            <subresourceOperation name="api_promotions_coupons_get_subresource">
+                <attribute name="normalization_context">
+                    <attribute name="groups">
+                        <attribute>admin:promotion_coupon:show</attribute>
+                        <attribute>sylius:admin:promotion_coupon:show</attribute>
+                    </attribute>
+                </attribute>
+            </subresourceOperation>
+        </subresourceOperations>
+
+        <property name="id" identifier="false" writable="false" />
+        <property name="code" identifier="true" readable="true" />
+        <property name="usageLimit" readable="true" />
+        <property name="perCustomerUsageLimit" readable="true" />
+        <property name="used" readable="true" />
+        <property name="reusableFromCancelledOrders" readable="true" />
+        <property name="promotion" readable="true" />
+        <property name="expiresAt" readable="true" />
+        <property name="createdAt" readable="true" />
+        <property name="updatedAt" readable="true" />
+    </resource>
+</resources>

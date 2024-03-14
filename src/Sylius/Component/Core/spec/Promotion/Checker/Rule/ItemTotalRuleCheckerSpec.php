@@ -31,17 +31,37 @@ final class ItemTotalRuleCheckerSpec extends ObjectBehavior
         $this->shouldImplement(RuleCheckerInterface::class);
     }
 
-    function it_uses_decorated_checker_to_check_eligibility_for_order_channel(
+    function it_recognizes_a_subject_as_not_eligible_if_the_subject_total_is_less_than_configured(
         ChannelInterface $channel,
         OrderInterface $order,
-        RuleCheckerInterface $itemTotalRuleChecker,
     ): void {
         $order->getChannel()->willReturn($channel);
         $channel->getCode()->willReturn('WEB_US');
+        $order->getPromotionSubjectTotal()->willReturn(400);
 
-        $itemTotalRuleChecker->isEligible($order, ['amount' => 1000])->willReturn(true);
+        $this->isEligible($order, ['WEB_US' => ['amount' => 500]])->shouldReturn(false);
+    }
 
-        $this->isEligible($order, ['WEB_US' => ['amount' => 1000]])->shouldReturn(true);
+    function it_recognizes_a_subject_as_eligible_if_the_subject_total_is_greater_than_configured(
+        ChannelInterface $channel,
+        OrderInterface $order,
+    ): void {
+        $order->getChannel()->willReturn($channel);
+        $channel->getCode()->willReturn('WEB_US');
+        $order->getPromotionSubjectTotal()->willReturn(600);
+
+        $this->isEligible($order, ['WEB_US' => ['amount' => 500]])->shouldReturn(true);
+    }
+
+    function it_recognizes_a_subject_as_eligible_if_the_subject_total_is_equal_with_configured(
+        ChannelInterface $channel,
+        OrderInterface $order,
+    ): void {
+        $order->getChannel()->willReturn($channel);
+        $channel->getCode()->willReturn('WEB_US');
+        $order->getPromotionSubjectTotal()->willReturn(500);
+
+        $this->isEligible($order, ['WEB_US' => ['amount' => 500]])->shouldReturn(true);
     }
 
     function it_returns_false_if_there_is_no_configuration_for_order_channel(

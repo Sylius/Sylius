@@ -21,7 +21,7 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Reference;
 
-class CompositeRequestResolverPassTest extends AbstractCompilerPassTestCase
+final class CompositeRequestResolverPassTest extends AbstractCompilerPassTestCase
 {
     /**
      * @test

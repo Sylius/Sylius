@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Sylius Sp. z o.o.
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd"
+>
+
+    <mapped-superclass name="Sylius\Component\Core\Model\ChannelPricingLogEntry" table="sylius_channel_pricing_log_entry">
+        <id name="id" column="id" type="integer">
+            <generator />
+        </id>
+
+        <field name="price" column="price" type="integer" />
+        <field name="originalPrice" column="original_price" type="integer" nullable="true" />
+        <field name="loggedAt" column="logged_at" type="datetime" />
+
+        <many-to-one field="channelPricing" target-entity="Sylius\Component\Core\Model\ChannelPricingInterface">
+            <join-column name="channel_pricing_id" nullable="false" on-delete="CASCADE" />
+            <cascade>
+                <cascade-persist />
+            </cascade>
+        </many-to-one>
+    </mapped-superclass>
+</doctrine-mapping>

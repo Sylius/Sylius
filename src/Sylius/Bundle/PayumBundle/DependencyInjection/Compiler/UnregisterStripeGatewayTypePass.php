@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\PayumBundle\DependencyInjection\Compiler;
 
-use Stripe\Stripe;
+use Payum\Stripe\StripeCheckoutGatewayFactory;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
@@ -21,9 +21,9 @@ final class UnregisterStripeGatewayTypePass implements CompilerPassInterface
 {
     private const STRIPE_GATEWAY_TYPE_SERVICE_ID = 'sylius.form.type.gateway_configuration.stripe';
 
-    public function process(ContainerBuilder $container)
+    public function process(ContainerBuilder $container): void
     {
-        if (class_exists(Stripe::class)) {
+        if (class_exists(StripeCheckoutGatewayFactory::class)) {
             return;
         }
 

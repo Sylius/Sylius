@@ -15,6 +15,7 @@ namespace spec\Sylius\Bundle\ApiBundle\CommandHandler\Catalog;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ApiBundle\Command\Catalog\AddProductReview;
+use Sylius\Bundle\ApiBundle\Exception\ProductNotFoundException;
 use Sylius\Bundle\CoreBundle\Resolver\CustomerResolverInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\ProductInterface;
@@ -81,6 +82,23 @@ final class AddProductReviewHandlerSpec extends ObjectBehavior
 
         $this
             ->shouldThrow(\InvalidArgumentException::class)
+            ->during('__invoke', [
+                new AddProductReview(
+                    'Good stuff',
+                    5,
+                    'Really good stuff',
+                    'winter_cap',
+                ),
+            ])
+        ;
+    }
+
+    function it_throws_an_exception_if_product_has_not_been_found(ProductRepositoryInterface $productRepository): void
+    {
+        $productRepository->findOneByCode('winter_cap')->willReturn(null);
+
+        $this
+            ->shouldThrow(ProductNotFoundException::class)
             ->during('__invoke', [
                 new AddProductReview(
                     'Good stuff',

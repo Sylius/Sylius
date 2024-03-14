@@ -30,7 +30,10 @@
                     <attribute>sylius.api.search_payment_filter</attribute>
                 </attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:payment:read</attribute>
+                    <attribute name="groups">
+                        <attribute>admin:payment:index</attribute>
+                        <attribute>sylius:admin:payment:index</attribute>
+                    </attribute>
                 </attribute>
             </collectionOperation>
         </collectionOperations>
@@ -40,7 +43,10 @@
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/admin/payments/{id}</attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:payment:read</attribute>
+                    <attribute name="groups">
+                        <attribute>admin:payment:show</attribute>
+                        <attribute>sylius:admin:payment:show</attribute>
+                    </attribute>
                 </attribute>
             </itemOperation>
 
@@ -48,7 +54,10 @@
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/shop/payments/{id}</attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">shop:payment:read</attribute>
+                    <attribute name="groups">
+                        <attribute>shop:payment:show</attribute>
+                        <attribute>sylius:shop:payment:show</attribute>
+                    </attribute>
                 </attribute>
             </itemOperation>
 
@@ -58,10 +67,21 @@
                 <attribute name="path">/admin/payments/{id}/complete</attribute>
                 <attribute name="controller">Sylius\Bundle\ApiBundle\Applicator\PaymentStateMachineTransitionApplicatorInterface::complete</attribute>
                 <attribute name="openapi_context">
-                    <attribute name="summary">Completes Payment</attribute>
+                    <attribute name="summary">Completes Payment.</attribute>
                 </attribute>
             </itemOperation>
         </itemOperations>
+
+        <subresourceOperations>
+            <subresourceOperation name="api_orders_payments_get_subresource">
+                <attribute name="normalization_context">
+                    <attribute name="groups">
+                        <attribute>admin:payment:show</attribute>
+                        <attribute>sylius:admin:payment:show</attribute>
+                    </attribute>
+                </attribute>
+            </subresourceOperation>
+        </subresourceOperations>
 
         <property name="id" identifier="true" writable="false" />
         <property name="createdAt" writable="false" />

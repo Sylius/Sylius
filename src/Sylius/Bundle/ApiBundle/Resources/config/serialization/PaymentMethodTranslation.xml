@@ -1,0 +1,70 @@
+<?xml version="1.0" ?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Sylius Sp. z o.o.
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<serializer xmlns="http://symfony.com/schema/dic/serializer-mapping"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xsi:schemaLocation="http://symfony.com/schema/dic/serializer-mapping https://symfony.com/schema/dic/serializer-mapping/serializer-mapping-1.0.xsd"
+>
+    <class name="Sylius\Component\Payment\Model\PaymentMethodTranslation">
+        <attribute name="id">
+            <group>admin:payment_method:index</group>
+            <group>sylius:admin:payment_method:index</group>
+            <group>admin:payment_method:show</group>
+            <group>sylius:admin:payment_method:show</group>
+        </attribute>
+
+        <attribute name="name">
+            <group>admin:payment:index</group>
+            <group>sylius:admin:payment:index</group>
+            <group>admin:payment:show</group>
+            <group>sylius:admin:payment:show</group>
+            <group>admin:payment_method:create</group>
+            <group>sylius:admin:payment_method:create</group>
+            <group>admin:payment_method:index</group>
+            <group>sylius:admin:payment_method:index</group>
+            <group>admin:payment_method:show</group>
+            <group>sylius:admin:payment_method:show</group>
+            <group>admin:payment_method:update</group>
+            <group>sylius:admin:payment_method:update</group>
+        </attribute>
+
+        <attribute name="description">
+            <group>admin:payment_method:create</group>
+            <group>sylius:admin:payment_method:create</group>
+            <group>admin:payment_method:index</group>
+            <group>sylius:admin:payment_method:index</group>
+            <group>admin:payment_method:show</group>
+            <group>sylius:admin:payment_method:show</group>
+            <group>admin:payment_method:update</group>
+            <group>sylius:admin:payment_method:update</group>
+        </attribute>
+
+        <attribute name="instructions">
+            <group>admin:payment_method:create</group>
+            <group>sylius:admin:payment_method:create</group>
+            <group>admin:payment_method:index</group>
+            <group>sylius:admin:payment_method:index</group>
+            <group>admin:payment_method:show</group>
+            <group>sylius:admin:payment_method:show</group>
+            <group>admin:payment_method:update</group>
+            <group>sylius:admin:payment_method:update</group>
+        </attribute>
+
+        <attribute name="locale">
+            <group>admin:payment_method:create</group>
+            <group>sylius:admin:payment_method:create</group>
+            <group>admin:payment_method:update</group>
+            <group>sylius:admin:payment_method:update</group>
+        </attribute>
+    </class>
+</serializer>

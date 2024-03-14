@@ -1,0 +1,56 @@
+<?xml version="1.0" ?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Sylius Sp. z o.o.
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<resources xmlns="https://api-platform.com/schema/metadata"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="https://api-platform.com/schema/metadata https://api-platform.com/schema/metadata/metadata-2.0.xsd"
+>
+    <resource class="%sylius.model.channel_price_history_config.class%" shortName="ChannelPriceHistoryConfig">
+        <attribute name="route_prefix">admin</attribute>
+        <attribute name="validation_groups">sylius</attribute>
+
+        <collectionOperations />
+
+        <itemOperations>
+            <itemOperation name="admin_get">
+                <attribute name="method">GET</attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">
+                        <attribute>admin:channel_price_history_config:show</attribute>
+                        <attribute>sylius:admin:channel_price_history_config:show</attribute>
+                    </attribute>
+                </attribute>
+            </itemOperation>
+            <itemOperation name="admin_put">
+                <attribute name="method">PUT</attribute>
+                <attribute name="denormalization_context">
+                    <attribute name="groups">
+                        <attribute>admin:channel_price_history_config:update</attribute>
+                        <attribute>sylius:admin:channel_price_history_config:update</attribute>
+                    </attribute>
+                </attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">
+                        <attribute>admin:channel_price_history_config:show</attribute>
+                        <attribute>sylius:admin:channel_price_history_config:show</attribute>
+                    </attribute>
+                </attribute>
+            </itemOperation>
+        </itemOperations>
+
+        <property name="id" identifier="true" writable="false" />
+        <property name="lowestPriceForDiscountedProductsCheckingPeriod" readable="true" writable="true" />
+        <property name="lowestPriceForDiscountedProductsVisible" readable="true" writable="true" />
+        <property name="taxonsExcludedFromShowingLowestPrice" readable="true" writable="true" />
+    </resource>
+</resources>

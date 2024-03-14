@@ -1,0 +1,7 @@
+{
+    "@context": "\/api\/v2\/contexts\/Currency",
+    "@id": "\/api\/v2\/admin\/currencies\/GBP",
+    "@type": "Currency",
+    "code": "GBP",
+    "name": "British Pound"
+}

@@ -22,15 +22,12 @@ use Webmozart\Assert\Assert;
 
 final class TaxCalculationStrategy implements TaxCalculationStrategyInterface
 {
-    /** @var array|OrderTaxesApplicatorInterface[] */
-    private array $applicators;
+    /** @var iterable|OrderTaxesApplicatorInterface[] */
+    private iterable $applicators;
 
-    /**
-     * @param array|OrderTaxesApplicatorInterface[] $applicators
-     */
-    public function __construct(private string $type, array $applicators)
+    public function __construct(private string $type, iterable $applicators)
     {
-        $this->assertApplicatorsHaveCorrectType($applicators);
+        Assert::allIsInstanceOf($applicators, OrderTaxesApplicatorInterface::class);
         $this->applicators = $applicators;
     }
 
@@ -57,19 +54,5 @@ final class TaxCalculationStrategy implements TaxCalculationStrategyInterface
     public function getType(): string
     {
         return $this->type;
-    }
-
-    /**
-     * @param array|OrderTaxesApplicatorInterface[] $applicators
-     *
-     * @throws \InvalidArgumentException
-     */
-    private function assertApplicatorsHaveCorrectType(array $applicators): void
-    {
-        Assert::allIsInstanceOf(
-            $applicators,
-            OrderTaxesApplicatorInterface::class,
-            'Order taxes applicator should have type "%2$s". Got: %s',
-        );
     }
 }

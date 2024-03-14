@@ -25,7 +25,6 @@ use Sylius\Component\Core\Model\ShopUserInterface;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\Security\Core\User\UserInterface;
 
-/** @experimental */
 final class AddressItemExtension implements QueryItemExtensionInterface
 {
     public function __construct(private UserContextInterface $userContext)

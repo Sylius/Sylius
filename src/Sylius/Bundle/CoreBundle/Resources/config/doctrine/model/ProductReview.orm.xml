@@ -13,6 +13,17 @@
 
 <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping">
 
-    <mapped-superclass name="Sylius\Component\Core\Model\ProductReview" table="sylius_product_review" />
+    <mapped-superclass name="Sylius\Component\Core\Model\ProductReview" table="sylius_product_review">
+        <many-to-one field="reviewSubject" target-entity="Sylius\Component\Product\Model\ProductInterface" inversed-by="reviews">
+            <join-column name="product_id" referenced-column-name="id" nullable="false" on-delete="CASCADE" />
+        </many-to-one>
+
+        <many-to-one field="author" target-entity="Sylius\Component\Customer\Model\CustomerInterface">
+            <join-column name="author_id" referenced-column-name="id" nullable="false" on-delete="CASCADE" />
+            <cascade>
+                <cascade-persist />
+            </cascade>
+        </many-to-one>
+    </mapped-superclass>
 
 </doctrine-mapping>

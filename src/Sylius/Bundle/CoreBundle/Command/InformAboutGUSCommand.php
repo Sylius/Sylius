@@ -13,39 +13,18 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Command;
 
-use Symfony\Component\Console\Command\Command;
-use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Console\Style\SymfonyStyle;
+trigger_deprecation(
+    'sylius/core-bundle',
+    '1.13',
+    'The "%s" class is deprecated and will be removed in Sylius 2.0. Use "%s" instead.',
+    InformAboutGUSCommand::class,
+    \Sylius\Bundle\CoreBundle\Console\Command\InformAboutGUSCommand::class,
+);
 
-final class InformAboutGUSCommand extends Command
-{
-    protected static $defaultName = 'sylius:inform-about-gus';
+class_exists(\Sylius\Bundle\CoreBundle\Console\Command\InformAboutGUSCommand::class);
 
-    protected function configure(): void
+if (false) {
+    final class InformAboutGUSCommand
     {
-        $this->setDescription('Informs about Sylius internal statistical service');
-    }
-
-    protected function execute(InputInterface $input, OutputInterface $output): int
-    {
-        $style = new SymfonyStyle($input, $output);
-
-        $style->note(
-            [
-                'For purely statistical purposes and in order to inform you about important updates and security patches, Sylius might send non-sensitive data to our servers. We send:',
-                '* Hostname',
-                '* User-agent',
-                '* Locale',
-                '* Environment (test, dev or prod)',
-                '* Currently used Sylius version',
-                '* Date of the last contact',
-                'If you do not consent please follow this cookbook article:',
-                'https://docs.sylius.com/en/latest/cookbook/configuration/disabling-admin-notifications.html',
-                'That being said, every time we get a notification about a new site deployed with Sylius, it brings a huge smile to our face and motivates us to continue our Open Source work.',
-            ],
-        );
-
-        return 0;
     }
 }

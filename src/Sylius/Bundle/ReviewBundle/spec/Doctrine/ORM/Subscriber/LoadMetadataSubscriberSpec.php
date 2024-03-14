@@ -66,7 +66,10 @@ final class LoadMetadataSubscriberSpec extends ObjectBehavior
         $classMetadataInfo->fieldMappings = ['id' => ['columnName' => 'id']];
         $metadataFactory->getMetadataFor('AcmeBundle\Entity\ReviewableModel')->willReturn($classMetadataInfo);
         $metadataFactory->getMetadataFor('AcmeBundle\Entity\ReviewerModel')->willReturn($classMetadataInfo);
+
         $metadata->getName()->willReturn('AcmeBundle\Entity\ReviewModel');
+        $metadata->hasAssociation('reviewSubject')->willReturn(false);
+        $metadata->hasAssociation('author')->willReturn(false);
 
         $metadata->mapManyToOne([
             'fieldName' => 'reviewSubject',
@@ -95,6 +98,25 @@ final class LoadMetadataSubscriberSpec extends ObjectBehavior
         $this->loadClassMetadata($eventArguments);
     }
 
+    function it_does_not_map_relation_for_review_model_if_the_relation_already_exists(
+        ClassMetadataFactory $metadataFactory,
+        ClassMetadata $metadata,
+        EntityManager $entityManager,
+        LoadClassMetadataEventArgs $eventArguments,
+    ): void {
+        $eventArguments->getClassMetadata()->willReturn($metadata);
+        $eventArguments->getEntityManager()->willReturn($entityManager);
+        $entityManager->getMetadataFactory()->willReturn($metadataFactory);
+
+        $metadata->getName()->willReturn('AcmeBundle\Entity\ReviewModel');
+        $metadata->hasAssociation('reviewSubject')->willReturn(true);
+        $metadata->hasAssociation('author')->willReturn(true);
+
+        $metadata->mapManyToOne(Argument::any())->shouldNotBeCalled();
+
+        $this->loadClassMetadata($eventArguments);
+    }
+
     function it_maps_proper_relations_for_reviewable_model(
         ClassMetadataFactory $metadataFactory,
         ClassMetadata $metadata,
@@ -104,7 +126,9 @@ final class LoadMetadataSubscriberSpec extends ObjectBehavior
         $eventArguments->getClassMetadata()->willReturn($metadata);
         $eventArguments->getEntityManager()->willReturn($entityManager);
         $entityManager->getMetadataFactory()->willReturn($metadataFactory);
+
         $metadata->getName()->willReturn('AcmeBundle\Entity\ReviewableModel');
+        $metadata->hasAssociation('reviews')->willReturn(false);
 
         $metadata->mapOneToMany([
             'fieldName' => 'reviews',
@@ -116,7 +140,25 @@ final class LoadMetadataSubscriberSpec extends ObjectBehavior
         $this->loadClassMetadata($eventArguments);
     }
 
-    function it_skips_mapping_configuration_if_metadata_name_is_not_different(
+    function it_does_not_map_relations_for_reviewable_model_if_the_relation_already_exists(
+        ClassMetadataFactory $metadataFactory,
+        ClassMetadata $metadata,
+        EntityManager $entityManager,
+        LoadClassMetadataEventArgs $eventArguments,
+    ): void {
+        $eventArguments->getClassMetadata()->willReturn($metadata);
+        $eventArguments->getEntityManager()->willReturn($entityManager);
+        $entityManager->getMetadataFactory()->willReturn($metadataFactory);
+
+        $metadata->getName()->willReturn('AcmeBundle\Entity\ReviewableModel');
+        $metadata->hasAssociation('reviews')->willReturn(true);
+
+        $metadata->mapOneToMany(Argument::any())->shouldNotBeCalled();
+
+        $this->loadClassMetadata($eventArguments);
+    }
+
+    function it_skips_mapping_configuration_if_metadata_name_is_different(
         ClassMetadataFactory $metadataFactory,
         ClassMetadata $metadata,
         EntityManager $entityManager,

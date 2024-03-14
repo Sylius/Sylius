@@ -24,8 +24,6 @@ use Symfony\Component\DependencyInjection\Reference;
 
 /**
  * This extension disables javascript session when running api scenarios
- *
- * @experimental
  */
 final class SyliusApiBundleExtension implements Extension
 {

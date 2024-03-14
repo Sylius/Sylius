@@ -27,5 +27,11 @@
             <argument type="service" id="kernel" />
             <argument type="service" id="sylius.repository.order" />
         </service>
+
+        <service id="sylius.behat.context.cli.change_admin_password" class="Sylius\Behat\Context\Cli\ChangeAdminPasswordContext">
+            <argument type="service" id="kernel" />
+            <argument type="service" id="sylius.repository.admin_user" />
+            <argument type="service" id="sylius.security.password_hasher" />
+        </service>
     </services>
 </container>

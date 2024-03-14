@@ -1,6 +1,6 @@
 {% import "@SyliusShop/Common/Macro/money.html.twig" as money %}
 
-{% set itemsSubtotal = sylius_order_items_subtotal(cart) %}
+{% set itemsSubtotal = cart.getItemsSubtotal() %}
 {% set taxIncluded = cart.getTaxIncludedTotal() %}
 {% set taxExcluded = cart.getTaxExcludedTotal() %}
 

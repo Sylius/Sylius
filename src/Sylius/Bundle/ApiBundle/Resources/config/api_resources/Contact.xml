@@ -1,0 +1,47 @@
+<?xml version="1.0" ?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Sylius Sp. z o.o.
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<resources xmlns="https://api-platform.com/schema/metadata"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="https://api-platform.com/schema/metadata https://api-platform.com/schema/metadata/metadata-2.0.xsd"
+>
+    <resource class="Sylius\Bundle\ApiBundle\Command\SendContactRequest" shortName="Contact">
+        <attribute name="route_prefix">shop</attribute>
+        <attribute name="messenger">input</attribute>
+        <attribute name="validation_groups">sylius</attribute>
+        <attribute name="output">false</attribute>
+
+        <collectionOperations>
+            <collectionOperation name="shop_contact">
+                <attribute name="method">POST</attribute>
+                <attribute name="path">/contact</attribute>
+                <attribute name="input">Sylius\Bundle\ApiBundle\Command\SendContactRequest</attribute>
+                <attribute name="status">202</attribute>
+                <attribute name="denormalization_context">
+                    <attribute name="groups">
+                        <attribute>shop:contact_request:create</attribute>
+                        <attribute>sylius:shop:contact_request:create</attribute>
+                    </attribute>
+                </attribute>
+                <attribute name="openapi_context">
+                    <attribute name="summary">Sends contact request.</attribute>
+                </attribute>
+            </collectionOperation>
+        </collectionOperations>
+
+        <itemOperations />
+
+        <property name="email" />
+        <property name="message" />
+    </resource>
+</resources>

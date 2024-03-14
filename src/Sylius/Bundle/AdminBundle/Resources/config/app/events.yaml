@@ -608,24 +608,24 @@ sylius_ui:
                 customer:
                     template: "@SyliusAdmin/Order/Show/_customer.html.twig"
                     priority: 50
-                before_addresses_legacy:
-                    template: "@SyliusUi/Block/_legacySonataEvent.html.twig"
-                    priority: 45
-                    context:
-                        event: sylius.admin.order.show.before_addresses
-                addresses:
-                    template: "@SyliusAdmin/Order/Show/_addresses.html.twig"
-                    priority: 40
                 before_payments_legacy:
                     template: "@SyliusUi/Block/_legacySonataEvent.html.twig"
-                    priority: 35
+                    priority: 45
                     context:
                         event: sylius.admin.order.show.before_payments
                 payments:
                     template: "@SyliusAdmin/Order/Show/_payments.html.twig"
-                    priority: 30
+                    priority: 40
                 shipments:
                     template: "@SyliusAdmin/Order/Show/_shipments.html.twig"
+                    priority: 35
+                before_addresses_legacy:
+                    template: "@SyliusUi/Block/_legacySonataEvent.html.twig"
+                    priority: 30
+                    context:
+                        event: sylius.admin.order.show.before_addresses
+                addresses:
+                    template: "@SyliusAdmin/Order/Show/_addresses.html.twig"
                     priority: 20
                 resend_email:
                     template: "@SyliusAdmin/Order/Show/_resendEmail.html.twig"
@@ -986,7 +986,7 @@ sylius_ui:
                     priority: 20
                 content:
                     template: "@SyliusAdmin/Crud/Index/_content.html.twig"
-                    priority: 10 
+                    priority: 10
 
         sylius.admin.catalog_promotion.product_variant.index.header.content:
             blocks:
@@ -1119,6 +1119,9 @@ sylius_ui:
                 look_and_feel:
                     template: '@SyliusAdmin/Channel/Form/_lookAndFeel.html.twig'
                     priority: 10
+                price_history:
+                    template: '@SyliusAdmin/Channel/Form/_priceHistoryConfig.html.twig'
+                    priority: 0
 
         sylius.admin.customer.form:
             blocks:

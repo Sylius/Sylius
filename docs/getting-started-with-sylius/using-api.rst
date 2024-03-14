@@ -36,7 +36,7 @@ To get this token, lets create a simple login request:
 .. code-block:: bash
 
     curl -X 'POST' \
-        'https://master.demo.sylius.com/api/v2/shop/authentication-token' \
+        'https://master.demo.sylius.com/api/v2/shop/customers/token' \
         -H 'accept: application/json' \
         -H 'Content-Type: application/json' \
         -d '{
@@ -127,7 +127,7 @@ and let's take first variant `@id` from list:
       ],
       "translations": {
         "en_US": {
-          "@id": "/api/v2/shop/product-variant-translation/123889",
+          "@id": "/api/v2/shop/product-variant-translations/123889",
           "@type": "ProductVariantTranslation",
           "id": 123889,
           "name": "S",

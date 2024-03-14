@@ -15,7 +15,7 @@ Feature: Choosing an address from address book
         And I have an address "Lucifer Morningstar", "Seaside Fwy", "90802", "Los Angeles", "United States", "Arkansas" in my address book
         And I have an address "Fletcher Ren", "Upper Barkly Street", "3377", "Ararat", "Australia", "Victoria" in my address book
 
-    @ui @javascript @api
+    @ui @mink:chromedriver @api
     Scenario: Choosing billing address from address book
         Given I have product "PHP T-Shirt" in the cart
         And I am at the checkout addressing step
@@ -36,7 +36,7 @@ Feature: Choosing an address from address book
         When I choose "Upper Barkly Street" street for billing address
         Then address "Fletcher Ren", "Upper Barkly Street", "3377", "Ararat", "Australia", "Victoria" should be filled as billing address
 
-    @ui @javascript @api
+    @ui @mink:chromedriver @api
     Scenario: Choosing billing address from address book and proceed to the next step
         Given I have product "PHP T-Shirt" in the cart
         And I am at the checkout addressing step

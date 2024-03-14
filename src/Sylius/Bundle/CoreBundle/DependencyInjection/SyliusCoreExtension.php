@@ -13,11 +13,20 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\DependencyInjection;
 
-use InvalidArgumentException;
+use Sylius\Bundle\CoreBundle\Attribute\AsCatalogPromotionApplicatorCriteria;
+use Sylius\Bundle\CoreBundle\Attribute\AsCatalogPromotionPriceCalculator;
+use Sylius\Bundle\CoreBundle\Attribute\AsEntityObserver;
+use Sylius\Bundle\CoreBundle\Attribute\AsOrderItemsTaxesApplicator;
+use Sylius\Bundle\CoreBundle\Attribute\AsOrderItemUnitsTaxesApplicator;
+use Sylius\Bundle\CoreBundle\Attribute\AsOrdersTotalsProvider;
+use Sylius\Bundle\CoreBundle\Attribute\AsProductVariantMapProvider;
+use Sylius\Bundle\CoreBundle\Attribute\AsTaxCalculationStrategy;
+use Sylius\Bundle\CoreBundle\Attribute\AsUriBasedSectionResolver;
 use Sylius\Bundle\ResourceBundle\DependencyInjection\Extension\AbstractResourceExtension;
 use Sylius\Component\Core\Filesystem\Adapter\FilesystemAdapterInterface;
 use Sylius\Component\Core\Filesystem\Adapter\FlysystemFilesystemAdapter;
 use Symfony\Component\Config\FileLocator;
+use Symfony\Component\DependencyInjection\ChildDefinition;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
@@ -62,6 +71,8 @@ final class SyliusCoreExtension extends AbstractResourceExtension implements Pre
         $container->setParameter('sylius_core.taxation.shipping_address_based_taxation', $config['shipping_address_based_taxation']);
         $container->setParameter('sylius_core.order_by_identifier', $config['order_by_identifier']);
         $container->setParameter('sylius_core.catalog_promotions.batch_size', $config['catalog_promotions']['batch_size']);
+        $container->setParameter('sylius_core.price_history.batch_size', $config['price_history']['batch_size']);
+        $container->setParameter('sylius_core.orders_statistics.intervals_map', $config['orders_statistics']['intervals_map'] ?? []);
 
         /** @var string $env */
         $env = $container->getParameter('kernel.environment');
@@ -81,12 +92,14 @@ final class SyliusCoreExtension extends AbstractResourceExtension implements Pre
             match ($config['filesystem']['adapter']) {
                 'default', 'flysystem' => FlysystemFilesystemAdapter::class,
                 'gaufrette' => 'Sylius\Component\Core\Filesystem\Adapter\GaufretteFilesystemAdapter',
-                default => throw new InvalidArgumentException(sprintf(
+                default => throw new \InvalidArgumentException(sprintf(
                     'Invalid filesystem adapter "%s" provided.',
                     $config['filesystem']['adapter'],
                 )),
             },
         );
+
+        $this->registerAutoconfiguration($container);
     }
 
     public function prepend(ContainerBuilder $container): void
@@ -98,6 +111,7 @@ final class SyliusCoreExtension extends AbstractResourceExtension implements Pre
         $this->prependHwiOauth($container);
         $this->prependDoctrineMigrations($container);
         $this->prependJmsSerializerIfAdminApiBundleIsNotPresent($container);
+        $this->prependSyliusOrderBundle($container, $config);
     }
 
     protected function getMigrationsNamespace(): string
@@ -166,10 +180,21 @@ final class SyliusCoreExtension extends AbstractResourceExtension implements Pre
         ]);
     }
 
+    private function prependSyliusOrderBundle(ContainerBuilder $container, array $config): void
+    {
+        if (!$container->hasExtension('sylius_order')) {
+            return;
+        }
+
+        $container->prependExtensionConfig('sylius_order', [
+            'autoconfigure_with_attributes' => $config['autoconfigure_with_attributes'] ?? false,
+        ]);
+    }
+
     private function switchOrderProcessorsPriorities(
         Definition $firstServiceDefinition,
         Definition $secondServiceDefinition,
-    ) {
+    ): void {
         $firstServicePriority = $firstServiceDefinition->getTag('sylius.order_processor')[0]['priority'];
         $secondServicePriority = $secondServiceDefinition->getTag('sylius.order_processor')[0]['priority'];
 
@@ -183,6 +208,76 @@ final class SyliusCoreExtension extends AbstractResourceExtension implements Pre
         $secondServiceDefinition->addTag(
             'sylius.order_processor',
             ['priority' => $firstServicePriority],
+        );
+    }
+
+    private function registerAutoconfiguration(ContainerBuilder $container): void
+    {
+        $container->registerAttributeForAutoconfiguration(
+            AsCatalogPromotionApplicatorCriteria::class,
+            static function (ChildDefinition $definition, AsCatalogPromotionApplicatorCriteria $attribute): void {
+                $definition->addTag(AsCatalogPromotionApplicatorCriteria::SERVICE_TAG, ['priority' => $attribute->getPriority()]);
+            },
+        );
+
+        $container->registerAttributeForAutoconfiguration(
+            AsCatalogPromotionPriceCalculator::class,
+            static function (ChildDefinition $definition, AsCatalogPromotionPriceCalculator $attribute): void {
+                $definition->addTag(AsCatalogPromotionPriceCalculator::SERVICE_TAG, ['priority' => $attribute->getPriority()]);
+            },
+        );
+
+        $container->registerAttributeForAutoconfiguration(
+            AsEntityObserver::class,
+            static function (ChildDefinition $definition, AsEntityObserver $attribute): void {
+                $definition->addTag(AsEntityObserver::SERVICE_TAG, ['priority' => $attribute->getPriority()]);
+            },
+        );
+
+        $container->registerAttributeForAutoconfiguration(
+            AsOrderItemsTaxesApplicator::class,
+            static function (ChildDefinition $definition, AsOrderItemsTaxesApplicator $attribute): void {
+                $definition->addTag(AsOrderItemsTaxesApplicator::SERVICE_TAG, ['priority' => $attribute->getPriority()]);
+            },
+        );
+
+        $container->registerAttributeForAutoconfiguration(
+            AsOrderItemUnitsTaxesApplicator::class,
+            static function (ChildDefinition $definition, AsOrderItemUnitsTaxesApplicator $attribute): void {
+                $definition->addTag(AsOrderItemUnitsTaxesApplicator::SERVICE_TAG, ['priority' => $attribute->getPriority()]);
+            },
+        );
+
+        $container->registerAttributeForAutoconfiguration(
+            AsProductVariantMapProvider::class,
+            static function (ChildDefinition $definition, AsProductVariantMapProvider $attribute): void {
+                $definition->addTag(AsProductVariantMapProvider::SERVICE_TAG, ['priority' => $attribute->getPriority()]);
+            },
+        );
+
+        $container->registerAttributeForAutoconfiguration(
+            AsTaxCalculationStrategy::class,
+            static function (ChildDefinition $definition, AsTaxCalculationStrategy $attribute): void {
+                $definition->addTag(AsTaxCalculationStrategy::SERVICE_TAG, [
+                    'type' => $attribute->getType(),
+                    'label' => $attribute->getLabel(),
+                    'priority' => $attribute->getPriority(),
+                ]);
+            },
+        );
+
+        $container->registerAttributeForAutoconfiguration(
+            AsUriBasedSectionResolver::class,
+            static function (ChildDefinition $definition, AsUriBasedSectionResolver $attribute): void {
+                $definition->addTag(AsUriBasedSectionResolver::SERVICE_TAG, ['priority' => $attribute->getPriority()]);
+            },
+        );
+
+        $container->registerAttributeForAutoconfiguration(
+            AsOrdersTotalsProvider::class,
+            static function (ChildDefinition $definition, AsOrdersTotalsProvider $attribute): void {
+                $definition->addTag(AsOrdersTotalsProvider::SERVICE_TAG, ['type' => $attribute->getType()]);
+            },
         );
     }
 }

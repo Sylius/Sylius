@@ -24,7 +24,7 @@ final class JsonApiGenericRequestValidationTestCase extends JsonApiTestCase
             method: 'POST',
             uri: '/api/v2/shop/orders',
             server: self::CONTENT_TYPE_HEADER,
-            content: 'Malformed JSON: the provided JSON payload is not properly formatted.'
+            content: 'Malformed JSON: the provided JSON payload is not properly formatted.',
         );
 
         $this->assertResponse(

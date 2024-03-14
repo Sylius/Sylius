@@ -140,6 +140,8 @@ final class ProductAssociationContext implements Context
         $product->addAssociation($productAssociation);
 
         $this->productAssociationRepository->add($productAssociation);
+
+        $this->sharedStorage->set('product_association', $productAssociation);
     }
 
     private function addProductAssociationTypeTranslation(

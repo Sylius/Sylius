@@ -15,19 +15,14 @@ namespace Sylius\Tests\Functional;
 
 use Fidry\AliceDataFixtures\LoaderInterface;
 use Fidry\AliceDataFixtures\Persistence\PurgeMode;
-use Sylius\Bundle\PromotionBundle\Criteria\DateRange;
 use Sylius\Bundle\PromotionBundle\Provider\EligibleCatalogPromotionsProvider;
-use Sylius\Component\Core\Dashboard\Interval;
-use Sylius\Component\Core\Dashboard\SalesSummary;
 use Sylius\Component\Core\Model\CatalogPromotionInterface;
-use Sylius\Component\Core\Model\OrderInterface;
-use Sylius\Component\Order\Processor\OrderProcessorInterface;
+use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
-class EligibleCatalogPromotionsProcessorTest extends WebTestCase
+final class EligibleCatalogPromotionsProcessorTest extends WebTestCase
 {
-    /** @var Client */
-    private static $client;
+    private static KernelBrowser $client;
 
     protected function setUp(): void
     {
@@ -58,7 +53,7 @@ class EligibleCatalogPromotionsProcessorTest extends WebTestCase
 
         $actualDateTimes = array_map(
             fn (CatalogPromotionInterface $eligibleCatalogPromotion) => $eligibleCatalogPromotion->getStartDate(),
-            $eligibleCatalogPromotions
+            $eligibleCatalogPromotions,
         );
 
         foreach ($actualDateTimes as $actualDateTime) {

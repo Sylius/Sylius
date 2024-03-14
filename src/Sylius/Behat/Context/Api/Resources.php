@@ -17,15 +17,21 @@ final class Resources
 {
     public const ADDRESSES = 'addresses';
 
+    public const ADJUSTMENTS = 'adjustments';
+
     public const ADMINISTRATORS = 'administrators';
 
     public const AVATAR_IMAGES = 'avatar-images';
 
     public const CATALOG_PROMOTIONS = 'catalog-promotions';
 
+    public const CHANNEL_PRICE_HISTORY_CONFIGS = 'channel-price-history-configs';
+
+    public const CHANNEL_PRICING_LOG_ENTRIES = 'channel-pricing-log-entries';
+
     public const CHANNELS = 'channels';
 
-    public const CONTACT_REQUESTS = 'contact-requests';
+    public const CONTACT = 'contact';
 
     public const COUNTRIES = 'countries';
 
@@ -41,7 +47,7 @@ final class Resources
 
     public const ORDER_ITEM_UNITS = 'order-item-units';
 
-    public const ORDER_ITEMS = 'order-item-units';
+    public const ORDER_ITEMS = 'order-items';
 
     public const ORDERS = 'orders';
 
@@ -51,15 +57,25 @@ final class Resources
 
     public const PRODUCT_ASSOCIATION_TYPES = 'product-association-types';
 
+    public const PRODUCT_ASSOCIATIONS = 'product-associations';
+
+    public const PRODUCT_ATTRIBUTES = 'product-attributes';
+
+    public const PRODUCT_IMAGES = 'product-images';
+
     public const PRODUCT_OPTIONS = 'product-options';
 
     public const PRODUCT_REVIEWS = 'product-reviews';
+
+    public const PRODUCT_TAXONS = 'product-taxons';
 
     public const PRODUCT_VARIANTS = 'product-variants';
 
     public const PRODUCTS = 'products';
 
     public const PROMOTIONS = 'promotions';
+
+    public const PROMOTION_COUPONS = 'promotion-coupons';
 
     public const PROVINCES = 'provinces';
 
@@ -69,7 +85,13 @@ final class Resources
 
     public const SHIPPING_METHODS = 'shipping-methods';
 
+    public const TAXON_IMAGES = 'taxon-images';
+
+    public const TAXONS = 'taxons';
+
     public const TAX_CATEGORIES = 'tax-categories';
+
+    public const TAX_RATES = 'tax-rates';
 
     public const ZONES = 'zones';
 

@@ -17,6 +17,11 @@ use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
+/**
+ * @template T of AddressInterface
+ *
+ * @extends FactoryInterface<T>
+ */
 interface AddressFactoryInterface extends FactoryInterface
 {
     public function createForCustomer(CustomerInterface $customer): AddressInterface;

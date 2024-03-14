@@ -17,5 +17,6 @@ use Sylius\Component\Core\Model\ChannelInterface;
 
 interface StatisticsDataProviderInterface
 {
+    /** @return array<array-key, array<array-key, mixed>> */
     public function getRawData(ChannelInterface $channel, \DateTimeInterface $startDate, \DateTimeInterface $endDate, string $interval): array;
 }

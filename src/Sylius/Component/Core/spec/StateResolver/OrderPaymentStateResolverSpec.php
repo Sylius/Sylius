@@ -16,7 +16,8 @@ namespace spec\Sylius\Component\Core\StateResolver;
 use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
 use SM\Factory\FactoryInterface;
-use SM\StateMachine\StateMachineInterface;
+use SM\StateMachine\StateMachineInterface as WinzouStateMachineInterface;
+use Sylius\Abstraction\StateMachine\StateMachineInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\PaymentInterface;
 use Sylius\Component\Core\OrderPaymentTransitions;
@@ -36,7 +37,7 @@ final class OrderPaymentStateResolverSpec extends ObjectBehavior
 
     function it_marks_an_order_as_refunded_if_all_its_payments_are_refunded(
         FactoryInterface $stateMachineFactory,
-        StateMachineInterface $stateMachine,
+        WinzouStateMachineInterface $stateMachine,
         OrderInterface $order,
         PaymentInterface $firstPayment,
         PaymentInterface $secondPayment,
@@ -59,9 +60,34 @@ final class OrderPaymentStateResolverSpec extends ObjectBehavior
         $this->resolve($order);
     }
 
+    function it_uses_the_new_state_machine_if_passed(
+        StateMachineInterface $stateMachine,
+        OrderInterface $order,
+        PaymentInterface $firstPayment,
+        PaymentInterface $secondPayment,
+    ): void {
+        $this->beConstructedWith($stateMachine);
+
+        $firstPayment->getAmount()->willReturn(6000);
+        $firstPayment->getState()->willReturn(PaymentInterface::STATE_REFUNDED);
+        $secondPayment->getAmount()->willReturn(4000);
+        $secondPayment->getState()->willReturn(PaymentInterface::STATE_REFUNDED);
+
+        $order
+            ->getPayments()
+            ->willReturn(new ArrayCollection([$firstPayment->getWrappedObject(), $secondPayment->getWrappedObject()]))
+        ;
+        $order->getTotal()->willReturn(10000);
+
+        $stateMachine->can($order, OrderPaymentTransitions::GRAPH, OrderPaymentTransitions::TRANSITION_REFUND)->willReturn(true);
+        $stateMachine->apply($order, OrderPaymentTransitions::GRAPH, OrderPaymentTransitions::TRANSITION_REFUND)->shouldBeCalled();
+
+        $this->resolve($order);
+    }
+
     function it_marks_an_order_as_refunded_if_its_payments_are_refunded_or_failed_but_at_least_one_is_refunded(
         FactoryInterface $stateMachineFactory,
-        StateMachineInterface $stateMachine,
+        WinzouStateMachineInterface $stateMachine,
         OrderInterface $order,
         PaymentInterface $firstPayment,
         PaymentInterface $secondPayment,
@@ -86,7 +112,7 @@ final class OrderPaymentStateResolverSpec extends ObjectBehavior
 
     function it_marks_an_order_as_paid_if_fully_paid(
         FactoryInterface $stateMachineFactory,
-        StateMachineInterface $stateMachine,
+        WinzouStateMachineInterface $stateMachine,
         OrderInterface $order,
         PaymentInterface $payment,
     ): void {
@@ -107,7 +133,7 @@ final class OrderPaymentStateResolverSpec extends ObjectBehavior
 
     function it_marks_an_order_as_paid_if_it_does_not_have_any_payments(
         FactoryInterface $stateMachineFactory,
-        StateMachineInterface $stateMachine,
+        WinzouStateMachineInterface $stateMachine,
         OrderInterface $order,
     ) {
         $order->getPayments()->willReturn(new ArrayCollection([]));
@@ -122,7 +148,7 @@ final class OrderPaymentStateResolverSpec extends ObjectBehavior
 
     function it_marks_an_order_as_paid_if_fully_paid_even_if_previous_payment_was_failed(
         FactoryInterface $stateMachineFactory,
-        StateMachineInterface $stateMachine,
+        WinzouStateMachineInterface $stateMachine,
         OrderInterface $order,
         PaymentInterface $firstPayment,
         PaymentInterface $secondPayment,
@@ -146,7 +172,7 @@ final class OrderPaymentStateResolverSpec extends ObjectBehavior
 
     function it_marks_an_order_as_partially_refunded_if_one_of_the_payment_is_refunded(
         FactoryInterface $stateMachineFactory,
-        StateMachineInterface $stateMachine,
+        WinzouStateMachineInterface $stateMachine,
         OrderInterface $order,
         PaymentInterface $firstPayment,
         PaymentInterface $secondPayment,
@@ -171,7 +197,7 @@ final class OrderPaymentStateResolverSpec extends ObjectBehavior
 
     function it_marks_an_order_as_completed_if_fully_paid_multiple_payments(
         FactoryInterface $stateMachineFactory,
-        StateMachineInterface $stateMachine,
+        WinzouStateMachineInterface $stateMachine,
         OrderInterface $order,
         PaymentInterface $firstPayment,
         PaymentInterface $secondPayment,
@@ -196,7 +222,7 @@ final class OrderPaymentStateResolverSpec extends ObjectBehavior
 
     function it_marks_an_order_as_partially_paid_if_one_of_the_payment_is_processing(
         FactoryInterface $stateMachineFactory,
-        StateMachineInterface $stateMachine,
+        WinzouStateMachineInterface $stateMachine,
         OrderInterface $order,
         PaymentInterface $firstPayment,
         PaymentInterface $secondPayment,
@@ -221,7 +247,7 @@ final class OrderPaymentStateResolverSpec extends ObjectBehavior
 
     function it_marks_an_order_as_authorized_if_all_its_payments_are_authorized(
         FactoryInterface $stateMachineFactory,
-        StateMachineInterface $stateMachine,
+        WinzouStateMachineInterface $stateMachine,
         OrderInterface $order,
         PaymentInterface $firstPayment,
         PaymentInterface $secondPayment,
@@ -246,7 +272,7 @@ final class OrderPaymentStateResolverSpec extends ObjectBehavior
 
     function it_marks_an_order_as_partially_authorized_if_one_of_the_payments_is_processing_and_one_of_the_payments_is_authorized(
         FactoryInterface $stateMachineFactory,
-        StateMachineInterface $stateMachine,
+        WinzouStateMachineInterface $stateMachine,
         OrderInterface $order,
         PaymentInterface $firstPayment,
         PaymentInterface $secondPayment,
@@ -271,7 +297,7 @@ final class OrderPaymentStateResolverSpec extends ObjectBehavior
 
     function it_marks_an_order_as_awaiting_payment_if_payments_is_processing(
         FactoryInterface $stateMachineFactory,
-        StateMachineInterface $stateMachine,
+        WinzouStateMachineInterface $stateMachine,
         OrderInterface $order,
         PaymentInterface $firstPayment,
     ): void {

@@ -14,12 +14,12 @@ declare(strict_types=1);
 namespace spec\Sylius\Bundle\PromotionBundle\Validator;
 
 use PhpSpec\ObjectBehavior;
+use Prophecy\Argument;
 use Sylius\Bundle\PromotionBundle\Validator\CatalogPromotionScope\ScopeValidatorInterface;
 use Sylius\Bundle\PromotionBundle\Validator\Constraints\CatalogPromotionScope;
 use Sylius\Component\Promotion\Model\CatalogPromotionScopeInterface;
 use Symfony\Component\Validator\ConstraintValidator;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
-use Symfony\Component\Validator\Violation\ConstraintViolationBuilderInterface;
 
 final class CatalogPromotionScopeValidatorSpec extends ObjectBehavior
 {
@@ -47,16 +47,13 @@ final class CatalogPromotionScopeValidatorSpec extends ObjectBehavior
         $this->shouldHaveType(ConstraintValidator::class);
     }
 
-    function it_adds_violation_if_catalog_promotion_scope_has_invalid_type(
+    function it_does_nothing_when_passed_scope_type_has_no_validators(
         ExecutionContextInterface $executionContext,
-        ConstraintViolationBuilderInterface $constraintViolationBuilder,
         CatalogPromotionScopeInterface $scope,
     ): void {
-        $scope->getType()->willReturn('wrong_type');
+        $scope->getType()->willReturn('custom');
 
-        $executionContext->buildViolation('sylius.catalog_promotion_scope.invalid_type')->willReturn($constraintViolationBuilder);
-        $constraintViolationBuilder->atPath('type')->willReturn($constraintViolationBuilder);
-        $constraintViolationBuilder->addViolation()->shouldBeCalled();
+        $executionContext->buildViolation(Argument::any())->shouldNotBeCalled();
 
         $this->validate($scope, new CatalogPromotionScope());
     }

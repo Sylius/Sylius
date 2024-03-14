@@ -15,7 +15,6 @@ namespace Sylius\Bundle\ApiBundle\Validator\Constraints;
 
 use Symfony\Component\Validator\Constraint;
 
-/** @experimental */
 final class OrderItemAvailability extends Constraint
 {
     public string $message = 'sylius.product_variant.product_variant_with_name_not_sufficient';

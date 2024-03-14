@@ -15,7 +15,6 @@ namespace Sylius\Bundle\ApiBundle\Validator\Constraints;
 
 use Symfony\Component\Validator\Constraint;
 
-/** @experimental */
 final class OrderProductEligibility extends Constraint
 {
     public string $message = 'sylius.order.product_eligibility';

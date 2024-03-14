@@ -1,4 +1,4 @@
-@modifying_address
+@modifying_placed_order_address
 Feature: Modifying a customer's billing address validation
     In order to avoid making mistakes when modifying a customer's billing address
     As an Administrator
@@ -16,12 +16,12 @@ Feature: Modifying a customer's billing address validation
         And the customer chose "Free" shipping method with "Cash on Delivery" payment
         And I am logged in as an administrator
 
-    @ui
-    Scenario: Address an order without name, city and street
+    @api @ui
+    Scenario: Attempt to save an order with incomplete billing address
         When I view the summary of the order "#00000001"
         And I want to modify a customer's billing address of this order
-        And I clear old billing address information
+        And I clear the billing address information
         But I do not specify new information
         And I try to save my changes
-        Then I should be notified that the "first name", the "last name", the "city" and the "street" in billing details are required
-        And this order bill should still be shipped to "Mike Ross", "350 5th Ave", "10118", "New York", "United States"
+        Then I should be notified that all mandatory billing address details are incomplete
+        And this order should still have "Mike Ross", "350 5th Ave", "10118", "New York", "United States" as its billing address

@@ -1,0 +1,55 @@
+<?xml version="1.0" ?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Sylius Sp. z o.o.
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<resources xmlns="https://api-platform.com/schema/metadata"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="https://api-platform.com/schema/metadata https://api-platform.com/schema/metadata/metadata-2.0.xsd"
+>
+    <resource class="%sylius.model.gateway_config.class%" shortName="GatewayConfig">
+        <attribute name="route_prefix">admin</attribute>
+
+        <attribute name="validation_groups">
+            <attribute>sylius</attribute>
+        </attribute>
+
+        <collectionOperations />
+
+        <itemOperations>
+            <itemOperation name="admin_get">
+                <attribute name="method">GET</attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">
+                        <attribute>admin:gateway_config:show</attribute>
+                        <attribute>sylius:admin:gateway_config:show</attribute>
+                    </attribute>
+                </attribute>
+            </itemOperation>
+        </itemOperations>
+
+        <subresourceOperations>
+            <subresourceOperation name="api_payment_methods_gateway_config_get_subresource">
+                <attribute name="normalization_context">
+                    <attribute name="groups">
+                        <attribute>admin:gateway_config:show</attribute>
+                        <attribute>sylius:admin:gateway_config:show</attribute>
+                    </attribute>
+                </attribute>
+            </subresourceOperation>
+        </subresourceOperations>
+
+        <property name="id" identifier="true" writable="false" />
+        <property name="config" writable="true" readable="true" />
+        <property name="gatewayName" writable="true" readable="true" />
+        <property name="factoryName" writable="true" readable="true" />
+    </resource>
+</resources>

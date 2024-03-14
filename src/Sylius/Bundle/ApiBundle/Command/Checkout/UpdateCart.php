@@ -18,7 +18,6 @@ use Sylius\Bundle\ApiBundle\Command\LocaleCodeAwareInterface;
 use Sylius\Bundle\ApiBundle\Command\OrderTokenValueAwareInterface;
 use Sylius\Component\Addressing\Model\AddressInterface;
 
-/** @experimental */
 class UpdateCart implements OrderTokenValueAwareInterface, CustomerEmailAwareInterface, LocaleCodeAwareInterface
 {
     public ?string $orderTokenValue = null;

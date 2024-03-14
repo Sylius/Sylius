@@ -21,7 +21,7 @@ use Webmozart\Assert\Assert;
 final class FlashBagProvider
 {
     public static function getFlashBag(
-        RequestStack|SessionInterface|FlashBagInterface $requestStackSessionOrFlashBag,
+        FlashBagInterface|RequestStack|SessionInterface $requestStackSessionOrFlashBag,
     ): FlashBagInterface {
         if ($requestStackSessionOrFlashBag instanceof FlashBagInterface) {
             return $requestStackSessionOrFlashBag;

@@ -1,2 +1,20 @@
+parameters:
+    test_default_state_machine_adapter: 'symfony_workflow'
+    test_sylius_state_machine_adapter: '%env(string:default:test_default_state_machine_adapter:TEST_SYLIUS_STATE_MACHINE_ADAPTER)%'
+
+sylius_user:
+    encoder: plaintext
+
 sylius_api:
     enabled: true
+
+sylius_state_machine_abstraction:
+    graphs_to_adapters_mapping:
+        sylius_catalog_promotion: '%test_sylius_state_machine_adapter%'
+        sylius_order: '%test_sylius_state_machine_adapter%'
+        sylius_order_checkout: '%test_sylius_state_machine_adapter%'
+        sylius_order_payment: '%test_sylius_state_machine_adapter%'
+        sylius_order_shipping: '%test_sylius_state_machine_adapter%'
+        sylius_payment: '%test_sylius_state_machine_adapter%'
+        sylius_product_review: '%test_sylius_state_machine_adapter%'
+        sylius_shipment: '%test_sylius_state_machine_adapter%'

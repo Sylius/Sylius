@@ -16,7 +16,6 @@ namespace Sylius\Bundle\ApiBundle\DataTransformer;
 use Sylius\Bundle\ApiBundle\Command\ChannelCodeAwareInterface;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
 
-/** @experimental */
 final class ChannelCodeAwareInputCommandDataTransformer implements CommandDataTransformerInterface
 {
     public function __construct(private ChannelContextInterface $channelContext)

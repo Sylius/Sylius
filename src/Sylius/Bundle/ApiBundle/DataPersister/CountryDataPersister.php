@@ -18,7 +18,6 @@ use Sylius\Bundle\ApiBundle\Exception\ProvinceCannotBeRemoved;
 use Sylius\Component\Addressing\Checker\CountryProvincesDeletionCheckerInterface;
 use Sylius\Component\Addressing\Model\CountryInterface;
 
-/** @experimental */
 final class CountryDataPersister implements ContextAwareDataPersisterInterface
 {
     public function __construct(

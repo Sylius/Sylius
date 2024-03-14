@@ -5,3 +5,13 @@ Sylius\Component\Addressing\Model\Country:
         code: 'FR'
     country_DE:
         code: 'DE'
+
+Sylius\Component\Addressing\Model\Province:
+    province_US_WY:
+        code: US-WY
+        name: Wyoming
+        country: "@country_US"
+    province_US_MI:
+        code: US-MI
+        name: Minnesota
+        country: "@country_US"

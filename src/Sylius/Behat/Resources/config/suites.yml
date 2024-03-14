@@ -9,6 +9,7 @@ imports:
     - suites/api/account/login.yml
     - suites/api/addressing/managing_countries.yml
     - suites/api/addressing/managing_zones.yml
+    - suites/api/admin/dashboard.yaml
     - suites/api/admin/login.yml
     - suites/api/admin/security.yml
     - suites/api/cart/accessing_cart.yml
@@ -25,24 +26,33 @@ imports:
     - suites/api/homepage/viewing_products.yml
     - suites/api/inventory/cart_inventory.yml
     - suites/api/inventory/checkout_inventory.yaml
+    - suites/api/inventory/managing_inventory.yaml
     - suites/api/locale/locales.yaml
     - suites/api/locale/managing_locales.yml
     - suites/api/order/managing_orders.yml
+    - suites/api/order/modifying_placed_order_address.yaml
+    - suites/api/order/order_history.yaml
+    - suites/api/payment/managing_payment_methods.yaml
     - suites/api/payment/managing_payments.yml
     - suites/api/product/adding_product_review.yml
     - suites/api/product/managing_product_association_types.yml
+    - suites/api/product/managing_product_attributes.yml
     - suites/api/product/managing_product_options.yml
     - suites/api/product/managing_product_reviews.yml
     - suites/api/product/managing_product_variants.yml
     - suites/api/product/managing_product_variants_ajax.yml
     - suites/api/product/managing_products.yml
-    - suites/api/product/viewing_products.yml
+    - suites/api/product/viewing_price_history.yml
+    - suites/api/product/viewing_price_history_after_catalog_promotions.yml
+    - suites/api/product/viewing_product_in_admin_panel.yaml
     - suites/api/product/viewing_product_reviews.yml
     - suites/api/product/viewing_product_variants.yml
+    - suites/api/product/viewing_products.yml
     - suites/api/promotion/applying_catalog_promotions.yml
     - suites/api/promotion/applying_promotion_coupon.yml
     - suites/api/promotion/applying_promotion_rules.yml
     - suites/api/promotion/managing_catalog_promotions.yml
+    - suites/api/promotion/managing_promotion_coupons.yml
     - suites/api/promotion/managing_promotions.yml
     - suites/api/promotion/receiving_discount.yml
     - suites/api/promotion/removing_catalog_promotions.yml
@@ -53,11 +63,16 @@ imports:
     - suites/api/shipping/managing_shipping_methods.yml
     - suites/api/taxation/applying_taxes.yml
     - suites/api/taxation/managing_tax_categories.yml
+    - suites/api/taxation/managing_tax_rates.yml
     - suites/api/taxon/managing_taxons.yml
+    - suites/api/taxon/managing_taxons_ajax.yml
     - suites/api/user/managing_administrators.yml
     - suites/api/user/managing_customer_groups.yml
+    - suites/api/user/managing_customers.yml
+    - suites/api/user/managing_users.yml
 
     - suites/cli/canceling_unpaid_orders.yml
+    - suites/cli/change_admin_password.yml
     - suites/cli/installer.yml
     - suites/cli/showing_available_plugins.yml
 
@@ -65,6 +80,7 @@ imports:
 
     - suites/domain/cart/shopping_cart.yml
     - suites/domain/order/managing_orders.yml
+    - suites/domain/product/managing_price_history.yml
     - suites/domain/product/managing_product_variants.yml
     - suites/domain/product/managing_products.yml
     - suites/domain/promotion/managing_promotion_coupons.yml
@@ -78,7 +94,7 @@ imports:
     - suites/ui/account/login.yml
     - suites/ui/addressing/managing_countries.yml
     - suites/ui/addressing/managing_zones.yml
-    - suites/ui/admin/dashboard.yml
+    - suites/ui/admin/dashboard.yaml
     - suites/ui/admin/impersonating_customers.yml
     - suites/ui/admin/locale.yml
     - suites/ui/admin/login.yml
@@ -103,11 +119,12 @@ imports:
     - suites/ui/locale/locales.yml
     - suites/ui/locale/managing_locales.yml
     - suites/ui/order/managing_orders.yml
-    - suites/ui/order/modifying_address.yml
+    - suites/ui/order/modifying_placed_order_address.yaml
     - suites/ui/order/order_history.yml
     - suites/ui/payment/managing_payment_methods.yml
     - suites/ui/payment/managing_payments.yml
     - suites/ui/product/accessing_edit_page_from_product_show_page.yml
+    - suites/ui/product/accessing_price_history.yml
     - suites/ui/product/adding_product_review.yml
     - suites/ui/product/managing_product_association_types.yml
     - suites/ui/product/managing_product_attributes.yml
@@ -115,8 +132,11 @@ imports:
     - suites/ui/product/managing_product_reviews.yml
     - suites/ui/product/managing_product_variants.yml
     - suites/ui/product/managing_products.yml
+    - suites/ui/product/viewing_product_in_admin_panel.yaml
     - suites/ui/product/viewing_product_reviews.yml
     - suites/ui/product/viewing_products.yml
+    - suites/ui/product/viewing_price_history.yaml
+    - suites/ui/product/viewing_price_history_after_catalog_promotions.yaml
     - suites/ui/promotion/applying_catalog_promotions.yml
     - suites/ui/promotion/applying_promotion_coupon.yml
     - suites/ui/promotion/applying_promotion_rules.yml

@@ -45,7 +45,12 @@ class ShippingMethodExampleFactory extends AbstractExampleFactory implements Exa
         private ?RepositoryInterface $taxCategoryRepository = null,
     ) {
         if ($this->taxCategoryRepository === null) {
-            @trigger_error(sprintf('Not passing a $taxCategoryRepository to %s constructor is deprecated since Sylius 1.4 and will be removed in Sylius 2.0.', self::class), \E_USER_DEPRECATED);
+            trigger_deprecation(
+                'sylius/core-bundle',
+                '1.4',
+                'Not passing a $taxCategoryRepository to %s constructor is deprecated and will be removed in Sylius 2.0.',
+                self::class,
+            );
         }
 
         $this->faker = Factory::create();

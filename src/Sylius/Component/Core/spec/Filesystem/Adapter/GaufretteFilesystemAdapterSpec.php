@@ -30,11 +30,6 @@ final class GaufretteFilesystemAdapterSpec extends ObjectBehavior
         $this->shouldImplement(FilesystemAdapterInterface::class);
     }
 
-    function it_triggers_deprecated_warning_during_instantiation(): void
-    {
-        $this->shouldTrigger(\E_USER_DEPRECATED)->duringInstantiation();
-    }
-
     function it_returns_true_if_the_file_exists(FilesystemInterface $filesystem): void
     {
         $filesystem->has('/path/to/some-file')->willReturn(true);

@@ -17,6 +17,11 @@ use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Product\Model\ProductVariantInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
+/**
+ * @template T of ProductVariantInterface
+ *
+ * @extends FactoryInterface<T>
+ */
 interface ProductVariantFactoryInterface extends FactoryInterface
 {
     public function createForProduct(ProductInterface $product): ProductVariantInterface;

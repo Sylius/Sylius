@@ -28,11 +28,6 @@ final class OrderTypeExtension extends AbstractTypeExtension
         ;
     }
 
-    public function getExtendedType(): string
-    {
-        return OrderType::class;
-    }
-
     public static function getExtendedTypes(): iterable
     {
         return [OrderType::class];

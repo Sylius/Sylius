@@ -1,0 +1,73 @@
+name: Upmerge PR
+
+on:
+    schedule:
+        -
+            cron: "0 2 * * *"
+    workflow_dispatch: ~
+
+permissions:
+    contents: write
+    pull-requests: write
+
+jobs:
+    upmerge:
+        runs-on: ubuntu-latest
+        if: github.repository == 'Sylius/Sylius'
+        name: "Upmerge PR"
+        timeout-minutes: 5
+        strategy:
+            fail-fast: false
+            matrix:
+                include:
+                    -
+                        base_branch: "1.12"
+                        target_branch: "1.13"
+                    -
+                        base_branch: "1.13"
+                        target_branch: "2.0"
+                    -
+                        base_branch: "2.0"
+                        target_branch: "bootstrap-admin-panel"
+
+        steps:
+            -
+                uses: actions/checkout@v4
+                with:
+                    ref: ${{ matrix.target_branch }}
+
+            -
+                name: Reset upmerge branch
+                run: |
+                    git fetch origin ${{ matrix.base_branch }}:${{ matrix.base_branch }}
+                    git reset --hard ${{ matrix.base_branch }}
+
+            -
+                name: Create Pull Request
+                uses: peter-evans/create-pull-request@v4
+                with:
+                    token: ${{ secrets.SYLIUS_BOT_PAT }}
+                    title: '[UPMERGE] ${{ matrix.base_branch }} -> ${{ matrix.target_branch }}'
+                    body: |
+                        This PR has been generated automatically.
+                        For more details see [upmerge_pr.yaml](/Sylius/Sylius/blob/1.13/.github/workflows/upmerge_pr.yaml).
+                        
+                        **Remember!** The upmerge should always be merged with using `Merge pull request` button.
+                        
+                        In case of conflicts, please resolve them manually with usign the following commands:
+                        ```
+                        git fetch upstream
+                        gh pr checkout <this-pr-number>
+                        git merge upstream/${{ matrix.target_branch }} -m "Resolve conflicts between ${{ matrix.base_branch }} and ${{ matrix.target_branch }}"
+                        ```
+                        
+                        If you use other name for the upstream remote, please replace `upstream` with the name of your remote pointing to the `Sylius/Sylius` repository.
+                        
+                        Once the conflicts are resolved, please run `git merge --continue` and change the commit title to
+                        ```
+                        Resolve conflicts between ${{ matrix.base_branch }} and ${{ matrix.target_branch }}
+                        ```
+                    branch: "upmerge/${{ matrix.base_branch }}_${{ matrix.target_branch }}"
+                    delete-branch: true
+                    branch-suffix: "short-commit-hash"
+                    base: ${{ matrix.target_branch }}

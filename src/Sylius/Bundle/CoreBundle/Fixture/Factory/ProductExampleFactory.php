@@ -66,7 +66,21 @@ class ProductExampleFactory extends AbstractExampleFactory implements ExampleFac
         private ?FileLocatorInterface $fileLocator = null,
     ) {
         if ($this->taxCategoryRepository === null) {
-            @trigger_error(sprintf('Not passing a $taxCategoryRepository to %s constructor is deprecated since Sylius 1.6 and will be removed in Sylius 2.0.', self::class), \E_USER_DEPRECATED);
+            trigger_deprecation(
+                'sylius/core-bundle',
+                '1.6',
+                'Not passing a $taxCategoryRepository to %s constructor is deprecated and will be prohibited in Sylius 2.0.',
+                self::class,
+            );
+        }
+
+        if ($this->fileLocator === null) {
+            trigger_deprecation(
+                'sylius/core-bundle',
+                '1.13',
+                'Not passing a $fileLocator to %s constructor is deprecated and will be removed in Sylius 2.0.',
+                self::class,
+            );
         }
 
         $this->faker = Factory::create();
@@ -237,10 +251,10 @@ class ProductExampleFactory extends AbstractExampleFactory implements ExampleFac
     {
         foreach ($options['images'] as $image) {
             if (!array_key_exists('path', $image)) {
-                @trigger_error(
-                    'It is deprecated since Sylius 1.3 to pass indexed array as an image definition. ' .
-                    'Please use associative array with "path" and "type" keys instead.',
-                    \E_USER_DEPRECATED,
+                trigger_deprecation(
+                    'sylius/core-bundle',
+                    '1.3',
+                    'It is deprecated to pass indexed array as an image definition. Please use associative array with "path" and "type" keys instead.',
                 );
 
                 $imagePath = array_shift($image);

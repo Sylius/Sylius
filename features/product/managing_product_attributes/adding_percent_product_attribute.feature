@@ -8,7 +8,7 @@ Feature: Adding a new percent product attribute
         Given the store is available in "English (United States)"
         And I am logged in as an administrator
 
-    @ui
+    @ui @api
     Scenario: Adding a new percent product attribute
         When I want to create a new percent product attribute
         And I specify its code as "t_shirt_cotton_content"
@@ -17,7 +17,7 @@ Feature: Adding a new percent product attribute
         Then I should be notified that it has been successfully created
         And the percent attribute "T-Shirt cotton content" should appear in the store
 
-    @ui
+    @ui @no-api
     Scenario: Seeing disabled type field while adding a percent product attribute
         When I want to create a new percent product attribute
         Then the type field should be disabled
