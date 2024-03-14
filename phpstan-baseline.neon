@@ -5671,11 +5671,6 @@ parameters:
 			path: src/Sylius/Component/Core/Provider/ProductVariantMap/ProductVariantsMapProviderInterface.php
 
 		-
-			message: "#^Method Sylius\\\\Component\\\\Core\\\\Provider\\\\TranslationLocaleProvider\\:\\:__construct\\(\\) has parameter \\$localeRepository with generic interface Sylius\\\\Component\\\\Resource\\\\Repository\\\\RepositoryInterface but does not specify its types\\: T$#"
-			count: 1
-			path: src/Sylius/Component/Core/Provider/TranslationLocaleProvider.php
-
-		-
 			message: "#^Method Sylius\\\\Component\\\\Core\\\\Repository\\\\OrderItemRepositoryInterface\\:\\:findOneByIdAndCustomer\\(\\) has parameter \\$id with no type specified\\.$#"
 			count: 1
 			path: src/Sylius/Component/Core/Repository/OrderItemRepositoryInterface.php
@@ -5989,11 +5984,6 @@ parameters:
 			message: "#^Method Sylius\\\\Component\\\\Locale\\\\Context\\\\LocaleNotFoundException\\:\\:notAvailable\\(\\) has parameter \\$availableLocalesCodes with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Sylius/Component/Locale/Context/LocaleNotFoundException.php
-
-		-
-			message: "#^Method Sylius\\\\Component\\\\Locale\\\\Provider\\\\LocaleProvider\\:\\:__construct\\(\\) has parameter \\$localeRepository with generic interface Sylius\\\\Component\\\\Resource\\\\Repository\\\\RepositoryInterface but does not specify its types\\: T$#"
-			count: 1
-			path: src/Sylius/Component/Locale/Provider/LocaleProvider.php
 
 		-
 			message: "#^Method Sylius\\\\Component\\\\Order\\\\Aggregator\\\\AdjustmentsAggregatorInterface\\:\\:aggregate\\(\\) return type has no value type specified in iterable type array\\.$#"
