@@ -178,6 +178,29 @@ final class AddressesTest extends JsonApiTestCase
     }
 
     /** @test */
+    public function it_does_not_create_a_new_address_with_invalid_data(): void
+    {
+        $fixtures = $this->loadFixturesFromFiles(['authentication/customer.yaml', 'country.yaml']);
+        /** @var CustomerInterface $customer */
+        $customer = $fixtures['customer_oliver'];
+
+        $header = array_merge($this->logInShopUser($customer->getEmailCanonical()), self::CONTENT_TYPE_HEADER);
+
+        $this->client->request(
+            method: 'POST',
+            uri: '/api/v2/shop/addresses',
+            server: $header,
+            content: json_encode($this->createBodyRequest('INVALID_COUNTRY_CODE'), \JSON_THROW_ON_ERROR),
+        );
+
+        $this->assertResponse(
+            $this->client->getResponse(),
+            'shop/address/post_address_with_invalid_data',
+            Response::HTTP_UNPROCESSABLE_ENTITY,
+        );
+    }
+
+    /** @test */
     public function it_updates_an_address(): void
     {
         $fixtures = $this->loadFixturesFromFiles(['address_with_customer.yaml']);
@@ -202,7 +225,7 @@ final class AddressesTest extends JsonApiTestCase
                 'city' => 'Malibu',
                 'postcode' => '90265',
                 'phoneNumber' => '123456789',
-            ]),
+            ], \JSON_THROW_ON_ERROR),
         );
 
         $this->assertResponse(

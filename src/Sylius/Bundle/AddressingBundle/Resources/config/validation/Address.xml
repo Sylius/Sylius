@@ -66,6 +66,9 @@
                     <value>sylius</value>
                 </option>
             </constraint>
+            <constraint name="Country">
+                <option name="groups">sylius</option>
+            </constraint>
         </property>
         <property name="street">
             <constraint name="NotBlank">

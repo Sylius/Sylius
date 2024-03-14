@@ -56,20 +56,51 @@ final class AddressesTest extends JsonApiTestCase
                 'firstName' => 'Finley',
                 'lastName' => 'Ward',
                 'company' => 'Company',
-                'countryCode' => 'UK',
+                'countryCode' => 'US',
                 'street' => 'New Henry St',
                 'city' => 'Neath',
                 'postcode' => 'SA11 1PH',
                 'phoneNumber' => '01639 644902',
-                'provinceName' => 'West Glamorgan',
                 'provinceCode' => 'WGM',
             ], \JSON_THROW_ON_ERROR),
         );
 
         $this->assertResponse(
             $this->client->getResponse(),
-            'admin/address/update_address',
+            'admin/address/put_address',
             Response::HTTP_OK,
+        );
+    }
+
+    /** @test */
+    public function it_updates_address_with_invalid_data(): void
+    {
+        $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'address_with_customer.yaml']);
+
+        /** @var AddressInterface $address */
+        $address = $fixtures['address'];
+
+        $this->client->request(
+            method: 'PUT',
+            uri: sprintf('/api/v2/admin/addresses/%d', $address->getId()),
+            server: $this->headerBuilder()->withJsonLdContentType()->withJsonLdAccept()->withAdminUserAuthorization('api@example.com')->build(),
+            content: json_encode([
+                'firstName' => 'Finley',
+                'lastName' => 'Ward',
+                'company' => 'Company',
+                'countryCode' => 'INVALID_COUNTRY_CODE',
+                'street' => 'New Henry St',
+                'city' => 'Neath',
+                'postcode' => 'SA11 1PH',
+                'phoneNumber' => '01639 644902',
+                'provinceCode' => 'WGM',
+            ], \JSON_THROW_ON_ERROR),
+        );
+
+        $this->assertResponse(
+            $this->client->getResponse(),
+            'admin/address/put_address_with_invalid_data',
+            Response::HTTP_UNPROCESSABLE_ENTITY,
         );
     }
 
