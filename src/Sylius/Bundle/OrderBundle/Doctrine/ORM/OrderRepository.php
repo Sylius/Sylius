@@ -96,19 +96,6 @@ class OrderRepository extends EntityRepository implements OrderRepositoryInterfa
         ;
     }
 
-    /** @deprecated since Sylius 1.9 and  will be removed in Sylius 2.0, use src/Sylius/Bundle/CoreBundle/Doctrine/ORM/OrderRepositoryInterface instead */
-    public function findCartByTokenValue(string $tokenValue): ?OrderInterface
-    {
-        return $this->createQueryBuilder('o')
-            ->andWhere('o.state = :state')
-            ->andWhere('o.tokenValue = :tokenValue')
-            ->setParameter('state', OrderInterface::STATE_CART)
-            ->setParameter('tokenValue', $tokenValue)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
-
     public function findCartById($id): ?OrderInterface
     {
         return $this->createQueryBuilder('o')
