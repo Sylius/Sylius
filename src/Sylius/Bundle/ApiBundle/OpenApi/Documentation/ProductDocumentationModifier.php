@@ -22,6 +22,10 @@ final class ProductDocumentationModifier implements DocumentationModifierInterfa
         $components = $docs->getComponents();
         $schemas = $components->getSchemas();
 
+        if (!isset($schemas['Product.jsonld-shop.product.read'])) {
+            return $docs;
+        }
+
         $schemas['Product.jsonld-shop.product.read']['properties']['defaultVariant'] = [
             'type' => 'string',
             'format' => 'iri-reference',
