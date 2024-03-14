@@ -22,6 +22,10 @@ final class ProductVariantDocumentationModifier implements DocumentationModifier
         $components = $docs->getComponents();
         $schemas = $components->getSchemas();
 
+        if (!isset($schemas['ProductVariant.jsonld-shop.product_variant.read'])) {
+            return $docs;
+        }
+
         $schemas['ProductVariant.jsonld-shop.product_variant.read']['properties']['price'] = [
             'type' => 'integer',
             'readOnly' => true,
