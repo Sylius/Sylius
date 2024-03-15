@@ -167,7 +167,7 @@
     ],
     "hydra:totalItems": 3,
     "hydra:view": {
-        "@id": "\/api\/v2\/admin\/products?image_filter=sylius_small",
+        "@id": "\/api\/v2\/admin\/products?imageFilter=sylius_small",
         "@type": "hydra:PartialCollectionView"
     },
     "hydra:search": {

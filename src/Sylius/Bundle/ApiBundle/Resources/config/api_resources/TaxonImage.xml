@@ -20,7 +20,7 @@
                 <attribute name="openapi_context">
                     <attribute name="parameters">
                         <attribute>
-                            <attribute name="name">image_filter</attribute>
+                            <attribute name="name">imageFilter</attribute>
                             <attribute name="in">query</attribute>
                             <attribute name="description">Provide one of supported image liip imagine filters</attribute>
                             <attribute name="schema">
@@ -88,7 +88,7 @@
                 <attribute name="openapi_context">
                     <attribute name="parameters">
                         <attribute>
-                            <attribute name="name">image_filter</attribute>
+                            <attribute name="name">imageFilter</attribute>
                             <attribute name="in">query</attribute>
                             <attribute name="description">Provide one of supported image liip imagine filters</attribute>
                             <attribute name="schema">

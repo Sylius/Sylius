@@ -27,7 +27,7 @@ class ImageNormalizer implements ContextAwareNormalizerInterface, NormalizerAwar
 {
     use NormalizerAwareTrait;
 
-    public const FILTER_QUERY_PARAMETER = 'image_filter';
+    public const FILTER_QUERY_PARAMETER = 'imageFilter';
 
     private const ALREADY_CALLED = 'sylius_image_normalizer_already_called';
 

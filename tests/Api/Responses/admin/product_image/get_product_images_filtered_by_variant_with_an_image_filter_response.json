@@ -15,7 +15,7 @@
     ],
     "hydra:totalItems": 1,
     "hydra:view": {
-        "@id": "\/api\/v2\/admin\/product-images?image_filter=sylius_small&productVariants=MUG_BLUE",
+        "@id": "\/api\/v2\/admin\/product-images?imageFilter=sylius_small&productVariants=MUG_BLUE",
         "@type": "hydra:PartialCollectionView"
     },
     "hydra:search": {

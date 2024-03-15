@@ -17,7 +17,7 @@
     ],
     "hydra:totalItems": 1,
     "hydra:view": {
-        "@id": "\/api\/v2\/admin\/products\/MUG\/images?image_filter=sylius_small",
+        "@id": "\/api\/v2\/admin\/products\/MUG\/images?imageFilter=sylius_small",
         "@type": "hydra:PartialCollectionView"
     }
 }

@@ -42,7 +42,7 @@
                 <attribute name="openapi_context">
                     <attribute name="parameters">
                         <attribute>
-                            <attribute name="name">image_filter</attribute>
+                            <attribute name="name">imageFilter</attribute>
                             <attribute name="in">query</attribute>
                             <attribute name="description">Provide one of supported image liip imagine filters</attribute>
                             <attribute name="schema">
@@ -73,7 +73,7 @@
                 <attribute name="openapi_context">
                     <attribute name="parameters">
                         <attribute>
-                            <attribute name="name">image_filter</attribute>
+                            <attribute name="name">imageFilter</attribute>
                             <attribute name="in">query</attribute>
                             <attribute name="description">Provide one of supported image liip imagine filters</attribute>
                             <attribute name="schema">
@@ -118,7 +118,7 @@
                 <attribute name="openapi_context">
                     <attribute name="parameters">
                         <attribute>
-                            <attribute name="name">image_filter</attribute>
+                            <attribute name="name">imageFilter</attribute>
                             <attribute name="in">query</attribute>
                             <attribute name="description">Provide one of supported image liip imagine filters</attribute>
                             <attribute name="schema">
@@ -144,7 +144,7 @@
                 <attribute name="openapi_context">
                     <attribute name="parameters">
                         <attribute>
-                            <attribute name="name">image_filter</attribute>
+                            <attribute name="name">imageFilter</attribute>
                             <attribute name="in">query</attribute>
                             <attribute name="description">Provide one of supported image liip imagine filters</attribute>
                             <attribute name="schema">
@@ -166,14 +166,13 @@
                         <attribute>
                             <attribute name="name">slug</attribute>
                             <attribute name="in">path</attribute>
-<!--                            <attribute name="description">Use slug to retrieve a product resource.</attribute>-->
                             <attribute name="required">true</attribute>
                             <attribute name="schema">
                                 <attribute name="type">string</attribute>
                             </attribute>
                         </attribute>
                         <attribute>
-                            <attribute name="name">image_filter</attribute>
+                            <attribute name="name">imageFilter</attribute>
                             <attribute name="in">query</attribute>
                             <attribute name="description">Provide one of supported image liip imagine filters</attribute>
                             <attribute name="schema">
@@ -220,7 +219,7 @@
                 <attribute name="openapi_context">
                     <attribute name="parameters">
                         <attribute>
-                            <attribute name="name">image_filter</attribute>
+                            <attribute name="name">imageFilter</attribute>
                             <attribute name="in">query</attribute>
                             <attribute name="description">Provide one of supported image liip imagine filters</attribute>
                             <attribute name="schema">
