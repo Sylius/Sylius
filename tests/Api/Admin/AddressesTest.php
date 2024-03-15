@@ -92,16 +92,22 @@ final class AddressesTest extends JsonApiTestCase
                 'street' => 'New Henry St',
                 'city' => 'Neath',
                 'postcode' => 'SA11 1PH',
-                'phoneNumber' => '01639 644902',
+                'phoneNumber' => str_repeat('1', 256),
                 'provinceCode' => 'WGM',
             ], \JSON_THROW_ON_ERROR),
         );
 
-        $this->assertResponse(
-            $this->client->getResponse(),
-            'admin/address/put_address_with_invalid_data',
-            Response::HTTP_UNPROCESSABLE_ENTITY,
-        );
+        $this->assertResponseStatusCodeSame(Response::HTTP_UNPROCESSABLE_ENTITY);
+        $this->assertJsonResponseViolations($this->client->getResponse(), [
+            [
+                'propertyPath' => 'countryCode',
+                'message' => 'This value is not a valid country.',
+            ],
+            [
+                'propertyPath' => 'phoneNumber',
+                'message' => 'This value is too long. It should have 255 characters or less.',
+            ],
+        ]);
     }
 
     /** @test */

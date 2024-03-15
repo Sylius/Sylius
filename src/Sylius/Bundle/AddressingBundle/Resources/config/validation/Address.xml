@@ -67,7 +67,10 @@
                 </option>
             </constraint>
             <constraint name="Country">
-                <option name="groups">sylius</option>
+                <option name="groups">
+                    <value>sylius_shipping_address_update</value>
+                    <value>sylius</value>
+                </option>
             </constraint>
         </property>
         <property name="street">
@@ -121,6 +124,15 @@
                 <option name="max">255</option>
                 <option name="minMessage">sylius.address.postcode.min_length</option>
                 <option name="maxMessage">sylius.address.postcode.max_length</option>
+                <option name="groups">
+                    <value>sylius_shipping_address_update</value>
+                    <value>sylius</value>
+                </option>
+            </constraint>
+        </property>
+        <property name="phoneNumber">
+            <constraint name="Length">
+                <option name="max">255</option>
                 <option name="groups">
                     <value>sylius_shipping_address_update</value>
                     <value>sylius</value>

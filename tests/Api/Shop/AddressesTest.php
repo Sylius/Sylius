@@ -190,14 +190,29 @@ final class AddressesTest extends JsonApiTestCase
             method: 'POST',
             uri: '/api/v2/shop/addresses',
             server: $header,
-            content: json_encode($this->createBodyRequest('INVALID_COUNTRY_CODE'), \JSON_THROW_ON_ERROR),
+            content: json_encode([
+                'firstName' => 'Tony',
+                'lastName' => 'Stark',
+                'company' => 'Stark Industries',
+                'countryCode' => 'INVALID_COUNTRY_CODE',
+                'street' => '10880 Malibu Point',
+                'city' => 'Malibu',
+                'postcode' => '90265',
+                'phoneNumber' => str_repeat('1', 256),
+            ], \JSON_THROW_ON_ERROR),
         );
 
-        $this->assertResponse(
-            $this->client->getResponse(),
-            'shop/address/post_address_with_invalid_data',
-            Response::HTTP_UNPROCESSABLE_ENTITY,
-        );
+        $this->assertResponseStatusCodeSame(Response::HTTP_UNPROCESSABLE_ENTITY);
+        $this->assertJsonResponseViolations($this->client->getResponse(), [
+            [
+                'propertyPath' => 'countryCode',
+                'message' => 'This value is not a valid country.',
+            ],
+            [
+                'propertyPath' => 'phoneNumber',
+                'message' => 'This value is too long. It should have 255 characters or less.',
+            ],
+        ]);
     }
 
     /** @test */
