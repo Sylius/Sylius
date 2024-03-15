@@ -39,6 +39,18 @@
                         <attribute>sylius:admin:product:index</attribute>
                     </attribute>
                 </attribute>
+                <attribute name="openapi_context">
+                    <attribute name="parameters">
+                        <attribute>
+                            <attribute name="name">image_filter</attribute>
+                            <attribute name="in">query</attribute>
+                            <attribute name="description">Provide one of supported image liip imagine filters</attribute>
+                            <attribute name="schema">
+                                <attribute name="type">string</attribute>
+                            </attribute>
+                        </attribute>
+                    </attribute>
+                </attribute>
             </collectionOperation>
 
             <collectionOperation name="shop_get">
@@ -56,6 +68,18 @@
                     <attribute name="groups">
                         <attribute>shop:product:index</attribute>
                         <attribute>sylius:shop:product:index</attribute>
+                    </attribute>
+                </attribute>
+                <attribute name="openapi_context">
+                    <attribute name="parameters">
+                        <attribute>
+                            <attribute name="name">image_filter</attribute>
+                            <attribute name="in">query</attribute>
+                            <attribute name="description">Provide one of supported image liip imagine filters</attribute>
+                            <attribute name="schema">
+                                <attribute name="type">string</attribute>
+                            </attribute>
+                        </attribute>
                     </attribute>
                 </attribute>
             </collectionOperation>
@@ -91,6 +115,18 @@
                         <attribute>sylius:admin:product:show</attribute>
                     </attribute>
                 </attribute>
+                <attribute name="openapi_context">
+                    <attribute name="parameters">
+                        <attribute>
+                            <attribute name="name">image_filter</attribute>
+                            <attribute name="in">query</attribute>
+                            <attribute name="description">Provide one of supported image liip imagine filters</attribute>
+                            <attribute name="schema">
+                                <attribute name="type">string</attribute>
+                            </attribute>
+                        </attribute>
+                    </attribute>
+                </attribute>
             </itemOperation>
 
             <itemOperation name="shop_get">
@@ -103,6 +139,18 @@
                     <attribute name="groups">
                         <attribute>shop:product:show</attribute>
                         <attribute>sylius:shop:product:show</attribute>
+                    </attribute>
+                </attribute>
+                <attribute name="openapi_context">
+                    <attribute name="parameters">
+                        <attribute>
+                            <attribute name="name">image_filter</attribute>
+                            <attribute name="in">query</attribute>
+                            <attribute name="description">Provide one of supported image liip imagine filters</attribute>
+                            <attribute name="schema">
+                                <attribute name="type">string</attribute>
+                            </attribute>
+                        </attribute>
                     </attribute>
                 </attribute>
             </itemOperation>
@@ -118,7 +166,16 @@
                         <attribute>
                             <attribute name="name">slug</attribute>
                             <attribute name="in">path</attribute>
+<!--                            <attribute name="description">Use slug to retrieve a product resource.</attribute>-->
                             <attribute name="required">true</attribute>
+                            <attribute name="schema">
+                                <attribute name="type">string</attribute>
+                            </attribute>
+                        </attribute>
+                        <attribute>
+                            <attribute name="name">image_filter</attribute>
+                            <attribute name="in">query</attribute>
+                            <attribute name="description">Provide one of supported image liip imagine filters</attribute>
                             <attribute name="schema">
                                 <attribute name="type">string</attribute>
                             </attribute>
@@ -160,6 +217,18 @@
             <subresourceOperation name="images_get_subresource">
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/admin/products/{code}/images</attribute>
+                <attribute name="openapi_context">
+                    <attribute name="parameters">
+                        <attribute>
+                            <attribute name="name">image_filter</attribute>
+                            <attribute name="in">query</attribute>
+                            <attribute name="description">Provide one of supported image liip imagine filters</attribute>
+                            <attribute name="schema">
+                                <attribute name="type">string</attribute>
+                            </attribute>
+                        </attribute>
+                    </attribute>
+                </attribute>
             </subresourceOperation>
 
             <subresourceOperation name="attributes_get_subresource">
