@@ -3,6 +3,6 @@
     "@id": "/api/v2/admin/avatar-images/@integer@",
     "@type": "AvatarImage",
     "id": @integer@,
-    "path": "@string@\/ford.jpg",
+    "path": "@string@.contains('sylius_original').endsWith('ford.jpg')",
     "owner": "\/api\/v2\/admin\/administrators/@integer@"
 }

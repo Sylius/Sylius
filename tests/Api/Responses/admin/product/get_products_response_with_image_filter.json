@@ -96,7 +96,7 @@
                     "@type": "ProductImage",
                     "id": @integer@,
                     "type": "thumbnail",
-                    "path": "@string@.contains('sylius_original').endsWith('product.jpg')",
+                    "path": "@string@.contains('sylius_small').endsWith('product.jpg')",
                     "productVariants": []
                 }
             ],
@@ -166,6 +166,10 @@
         }
     ],
     "hydra:totalItems": 3,
+    "hydra:view": {
+        "@id": "\/api\/v2\/admin\/products?image_filter=sylius_small",
+        "@type": "hydra:PartialCollectionView"
+    },
     "hydra:search": {
         "@type": "hydra:IriTemplate",
         "hydra:template": "\/api\/v2\/admin\/products{?translations.name,order[code],order[createdAt],productTaxons.taxon.code,productTaxons.taxon.code[],channel,order[translation.name],localeCode for order[translation.name]}",

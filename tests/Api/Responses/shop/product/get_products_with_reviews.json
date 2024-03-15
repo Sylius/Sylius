@@ -42,7 +42,7 @@
                     "@type": "ProductImage",
                     "id": @integer@,
                     "type": "thumbnail",
-                    "path": "\/media\/image\/product.jpg"
+                    "path": "@string@.contains('sylius_original').endsWith('product.jpg')"
                 }
             ],
             "id": @integer@,
