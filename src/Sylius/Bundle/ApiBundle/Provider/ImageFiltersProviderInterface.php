@@ -13,9 +13,8 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\Provider;
 
-interface ProductImageFilterProviderInterface
+interface ImageFiltersProviderInterface
 {
-    public function provideAllFilters(): array;
-
-    public function provideShopFilters(): array;
+    /** @return array<string> */
+    public function getFilters(): array;
 }

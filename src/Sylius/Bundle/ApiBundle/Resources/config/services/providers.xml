@@ -23,7 +23,7 @@
             <argument>%sylius.security.new_api_route%</argument>
         </service>
 
-        <service id="Sylius\Bundle\ApiBundle\Provider\ProductImageFilterProviderInterface" class="Sylius\Bundle\ApiBundle\Provider\LiipProductImageFilterProvider">
+        <service id="Sylius\Bundle\ApiBundle\Provider\ImageFiltersProviderInterface" class="Sylius\Bundle\ApiBundle\Provider\LiipImageFiltersProvider">
             <argument>%liip_imagine.filter_sets%</argument>
         </service>
     </services>
