@@ -56,12 +56,12 @@ final class AddressesTest extends JsonApiTestCase
                 'firstName' => 'Finley',
                 'lastName' => 'Ward',
                 'company' => 'Company',
-                'countryCode' => 'US',
+                'countryCode' => 'GB',
                 'street' => 'New Henry St',
                 'city' => 'Neath',
                 'postcode' => 'SA11 1PH',
                 'phoneNumber' => '01639 644902',
-                'provinceCode' => 'WGM',
+                'provinceName' => 'West Glamorgan',
             ], \JSON_THROW_ON_ERROR),
         );
 
@@ -87,13 +87,13 @@ final class AddressesTest extends JsonApiTestCase
             content: json_encode([
                 'firstName' => 'Finley',
                 'lastName' => 'Ward',
-                'company' => 'Company',
+                'company' => str_repeat('1', 256),
                 'countryCode' => 'INVALID_COUNTRY_CODE',
                 'street' => 'New Henry St',
                 'city' => 'Neath',
                 'postcode' => 'SA11 1PH',
                 'phoneNumber' => str_repeat('1', 256),
-                'provinceCode' => 'WGM',
+                'provinceName' => 'West Glamorgan',
             ], \JSON_THROW_ON_ERROR),
         );
 
@@ -105,6 +105,10 @@ final class AddressesTest extends JsonApiTestCase
             ],
             [
                 'propertyPath' => 'phoneNumber',
+                'message' => 'This value is too long. It should have 255 characters or less.',
+            ],
+            [
+                'propertyPath' => 'company',
                 'message' => 'This value is too long. It should have 255 characters or less.',
             ],
         ]);

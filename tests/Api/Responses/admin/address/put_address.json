@@ -8,9 +8,9 @@
     "lastName": "Ward",
     "phoneNumber": "01639 644902",
     "company": "Company",
-    "countryCode": "US",
-    "provinceCode": "WGM",
-    "provinceName": null,
+    "countryCode": "GB",
+    "provinceCode": null,
+    "provinceName": "West Glamorgan",
     "street": "New Henry St",
     "city": "Neath",
     "postcode": "SA11 1PH"

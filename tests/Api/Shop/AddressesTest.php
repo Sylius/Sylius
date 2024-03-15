@@ -193,7 +193,7 @@ final class AddressesTest extends JsonApiTestCase
             content: json_encode([
                 'firstName' => 'Tony',
                 'lastName' => 'Stark',
-                'company' => 'Stark Industries',
+                'company' => str_repeat('1', 256),
                 'countryCode' => 'INVALID_COUNTRY_CODE',
                 'street' => '10880 Malibu Point',
                 'city' => 'Malibu',
@@ -212,6 +212,10 @@ final class AddressesTest extends JsonApiTestCase
                 'propertyPath' => 'phoneNumber',
                 'message' => 'This value is too long. It should have 255 characters or less.',
             ],
+            [
+                'propertyPath' => 'company',
+                'message' => 'This value is too long. It should have 255 characters or less.',
+            ]
         ]);
     }
 

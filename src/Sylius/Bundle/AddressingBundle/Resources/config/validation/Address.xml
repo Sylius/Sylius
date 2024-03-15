@@ -139,5 +139,14 @@
                 </option>
             </constraint>
         </property>
+        <property name="company">
+            <constraint name="Length">
+                <option name="max">255</option>
+                <option name="groups">
+                    <value>sylius_shipping_address_update</value>
+                    <value>sylius</value>
+                </option>
+            </constraint>
+        </property>
     </class>
 </constraint-mapping>
