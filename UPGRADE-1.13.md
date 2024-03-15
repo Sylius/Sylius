@@ -904,3 +904,28 @@ and use one of the new attributes accordingly to the type of your class, e.g.:
 
 1. Check if the `countryCode` is set has been removed from the `Sylius\Component\Addressing\ModelAddress::setProvinceCode` 
    method. The adequate check is ensured by validation.
+
+1. The migration changing the type of the `DC2TYPE:array` to `JSON` has been added to the following fields in tables:
+    - `data` => `sylius_address_log_entries`
+    - `roles` => `sylius_admin_user`
+    - `configuration` => `sylius_catalog_promotion_action`
+    - `configuration` => `sylius_catalog_promotion_scope`
+    - `configuration` => `sylius_product_attribute`
+    - `configuration` => `sylius_promotion_action`
+    - `configuration` => `sylius_promotion_rule`
+    - `configuration` => `sylius_shipping_method`
+    - `configuration` => `sylius_shipping_method_rule`
+    - `roles` => `sylius_shop_user`
+
+   If you prefer skipping this migration and applying the changes yourself you can do it by executing the following commands:
+
+   For MySQL migration:
+    ```bash
+      bin/console doctrine:migrations:version --add Sylius\\Bundle\\CoreBundle\\Migrations\\Version20240315112656
+    ```
+   For PostgresSQL migration:
+    ```bash
+      bin/console doctrine:migrations:version --add Sylius\\Bundle\\CoreBundle\\Migrations\\Version20240318094743
+    ```
+
+   Along with this change, the `data` field in the `sylius_address_log_entries` table is now nullable within our database schema, aligning with the nullable nature of the corresponding field in Gedmo's LogEntry.
