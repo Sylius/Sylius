@@ -20,7 +20,6 @@ use Sylius\Tests\Api\JsonApiTestCase;
 use Sylius\Tests\Api\Utils\FilterTypes;
 use Sylius\Tests\Api\Utils\OrderPlacerTrait;
 use Symfony\Component\HttpFoundation\Response;
-use Webmozart\Assert\Assert;
 
 final class OrdersTest extends JsonApiTestCase
 {
@@ -267,41 +266,6 @@ final class OrdersTest extends JsonApiTestCase
     }
 
     /** @test */
-    public function it_prevents_customer_update_in_billing_address_of_placed_order(): void
-    {
-        $fixtures = $this->loadFixturesFromFiles([
-            'authentication/api_administrator.yaml',
-            'channel.yaml',
-            'order/new.yaml',
-            'order/customer.yaml',
-        ]);
-
-        /** @var AddressInterface $billingAddress */
-        $billingAddress = $fixtures['first_order_billing_address'];
-
-        /** @var CustomerInterface $customerTony */
-        $customerTony = $fixtures['customer_tony'];
-
-        /** @var CustomerInterface $customerDave */
-        $customerDave = $fixtures['customer_dave'];
-
-        $this->client->request(
-            method: 'PUT',
-            uri: '/api/v2/admin/addresses/' . $billingAddress->getId(),
-            server: $this->buildHeaders('api@example.com'),
-            content: json_encode([
-                'customer' => '/api/v2/admin/customers/' . $customerDave->getId(),
-            ]),
-        );
-
-        $content = $this->client->getResponse()->getContent();
-        Assert::notFalse($content, 'Address response content should not be empty.');
-
-        $this->assertResponseCode($this->client->getResponse(), Response::HTTP_OK);
-        $this->assertSame('/api/v2/admin/customers/' . $customerTony->getId(), json_decode($content)->customer);
-    }
-
-    /** @test */
     public function it_gets_a_shipping_address_of_placed_order(): void
     {
         $fixtures = $this->loadFixturesFromFiles([
@@ -351,41 +315,6 @@ final class OrdersTest extends JsonApiTestCase
         );
 
         $this->assertResponseSuccessful('admin/order/put_shipping_address_of_placed_order_response');
-    }
-
-    /** @test */
-    public function it_prevents_customer_update_in_shipping_address_of_placed_order(): void
-    {
-        $fixtures = $this->loadFixturesFromFiles([
-            'authentication/api_administrator.yaml',
-            'channel.yaml',
-            'order/customer.yaml',
-            'order/new.yaml',
-        ]);
-
-        /** @var AddressInterface $shippingAddress */
-        $shippingAddress = $fixtures['first_order_shipping_address'];
-
-        /** @var CustomerInterface $customerTony */
-        $customerTony = $fixtures['customer_tony'];
-
-        /** @var CustomerInterface $customerDave */
-        $customerDave = $fixtures['customer_dave'];
-
-        $this->client->request(
-            method: 'PUT',
-            uri: '/api/v2/admin/addresses/' . $shippingAddress->getId(),
-            server: $this->buildHeaders('api@example.com'),
-            content: json_encode([
-                'customer' => '/api/v2/admin/customers/' . $customerDave->getId(),
-            ]),
-        );
-
-        $content = $this->client->getResponse()->getContent();
-        Assert::notFalse($content, 'Address response content should not be empty.');
-
-        $this->assertResponseCode($this->client->getResponse(), Response::HTTP_OK);
-        $this->assertSame('/api/v2/admin/customers/' . $customerTony->getId(), json_decode($content)->customer);
     }
 
     /** @test */

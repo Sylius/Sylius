@@ -26,12 +26,6 @@
             <group>shop:address:show</group>
             <group>sylius:shop:address:show</group>
         </attribute>
-        <attribute name="customer">
-            <group>admin:address:index</group>
-            <group>sylius:admin:address:index</group>
-            <group>admin:address:show</group>
-            <group>sylius:admin:address:show</group>
-        </attribute>
         <attribute name="firstName">
             <group>admin:address:index</group>
             <group>sylius:admin:address:index</group>

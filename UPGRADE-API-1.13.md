@@ -258,6 +258,8 @@ ApiBundle is no longer experimental and is now following the same support policy
     }
     ```
 
+1. The `customer` key has been removed from admin address endpoints' responses.
+
 ### Miscellaneous
 
 1. All the `:read` serialization groups are now split to `index` and `show`.
