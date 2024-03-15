@@ -128,10 +128,6 @@ class Address implements AddressInterface
 
     public function setProvinceCode(?string $provinceCode): void
     {
-        if (null === $this->countryCode) {
-            return;
-        }
-
         $this->provinceCode = $provinceCode;
     }
 
