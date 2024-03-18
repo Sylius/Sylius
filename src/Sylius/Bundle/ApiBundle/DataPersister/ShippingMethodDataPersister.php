@@ -14,11 +14,12 @@ declare(strict_types=1);
 namespace Sylius\Bundle\ApiBundle\DataPersister;
 
 use ApiPlatform\Core\DataPersister\ContextAwareDataPersisterInterface;
+use ApiPlatform\Core\DataPersister\ResumableDataPersisterInterface;
 use Doctrine\DBAL\Exception\ForeignKeyConstraintViolationException;
 use Sylius\Bundle\ApiBundle\Exception\ShippingMethodCannotBeRemoved;
 use Sylius\Component\Core\Model\ShippingMethodInterface;
 
-final class ShippingMethodDataPersister implements ContextAwareDataPersisterInterface
+final class ShippingMethodDataPersister implements ContextAwareDataPersisterInterface, ResumableDataPersisterInterface
 {
     public function __construct(private ContextAwareDataPersisterInterface $decoratedDataPersister)
     {
@@ -41,5 +42,11 @@ final class ShippingMethodDataPersister implements ContextAwareDataPersisterInte
         } catch (ForeignKeyConstraintViolationException) {
             throw new ShippingMethodCannotBeRemoved();
         }
+    }
+
+    /** @param array<string, mixed> $context */
+    public function resumable(array $context = []): bool
+    {
+        return true;
     }
 }
