@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace spec\Sylius\Bundle\ApiBundle\DataPersister;
 
 use ApiPlatform\Core\DataPersister\ContextAwareDataPersisterInterface;
+use ApiPlatform\Core\DataPersister\ResumableDataPersisterInterface;
 use Lexik\Bundle\JWTAuthenticationBundle\Exception\MissingTokenException;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
@@ -30,6 +31,11 @@ final class AddressDataPersisterSpec extends ObjectBehavior
         UserContextInterface $userContext,
     ): void {
         $this->beConstructedWith($decoratedDataPersister, $userContext);
+    }
+
+    function it_is_a_resumable_data_persister(): void
+    {
+        $this->shouldImplement(ResumableDataPersisterInterface::class);
     }
 
     function it_supports_only_address_entity(AddressInterface $address, ResourceInterface $resource): void
@@ -122,5 +128,10 @@ final class AddressDataPersisterSpec extends ObjectBehavior
         $decoratedDataPersister->remove($address, [])->shouldNotBeCalled();
 
         $this->shouldThrow(MissingTokenException::class)->during('remove', [$address]);
+    }
+
+    function it_is_resumable(): void
+    {
+        $this->resumable()->shouldReturn(true);
     }
 }
