@@ -14,11 +14,12 @@ declare(strict_types=1);
 namespace Sylius\Bundle\ApiBundle\DataPersister;
 
 use ApiPlatform\Core\DataPersister\ContextAwareDataPersisterInterface;
+use ApiPlatform\Core\DataPersister\ResumableDataPersisterInterface;
 use Doctrine\DBAL\Exception\ForeignKeyConstraintViolationException;
 use Sylius\Bundle\ApiBundle\Exception\ProductCannotBeRemoved;
 use Sylius\Component\Core\Model\ProductInterface;
 
-final class ProductDataPersister implements ContextAwareDataPersisterInterface
+final class ProductDataPersister implements ContextAwareDataPersisterInterface, ResumableDataPersisterInterface
 {
     public function __construct(
         private ContextAwareDataPersisterInterface $decoratedDataPersister,
@@ -45,5 +46,11 @@ final class ProductDataPersister implements ContextAwareDataPersisterInterface
         } catch (ForeignKeyConstraintViolationException) {
             throw new ProductCannotBeRemoved();
         }
+    }
+
+    /** @param array<string, mixed> $context */
+    public function resumable(array $context = []): bool
+    {
+        return true;
     }
 }
