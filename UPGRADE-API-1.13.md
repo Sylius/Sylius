@@ -288,3 +288,10 @@ ApiBundle is no longer experimental and is now following the same support policy
 
 1. The `sylius.api.product_taxon_filter` filter has been removed and its functionality has been superseded by
    the `sylius.api.search_filter.taxon.code` filter. The usage stays the same.
+
+1. Added `ApiPlatform\Core\DataPersister\ResumableDataPersisterInterface` with a `resumable` method returning `true` to the following classes: 
+    - `Sylius\Bundle\ApiBundle\DataPersister\AddressDataPersister`
+    - `Sylius\Bundle\ApiBundle\DataPersister\AdminUserDataPersister`
+    - `Sylius\Bundle\ApiBundle\DataPersister\CountryDataPersister`
+    - `Sylius\Bundle\ApiBundle\DataPersister\ShippingMethodDataPersister`
+    - `Sylius\Bundle\ApiBundle\DataPersister\ZoneDataPersister`
