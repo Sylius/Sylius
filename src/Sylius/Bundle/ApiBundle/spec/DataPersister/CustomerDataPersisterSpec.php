@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace spec\Sylius\Bundle\ApiBundle\DataPersister;
 
 use ApiPlatform\Core\DataPersister\ContextAwareDataPersisterInterface;
+use ApiPlatform\Core\DataPersister\ResumableDataPersisterInterface;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Component\Core\Model\CustomerInterface;
@@ -28,6 +29,11 @@ final class CustomerDataPersisterSpec extends ObjectBehavior
         PasswordUpdaterInterface $passwordUpdater,
     ): void {
         $this->beConstructedWith($decoratedDataPersister, $passwordUpdater);
+    }
+
+    function it_is_a_resumable_data_persister(): void
+    {
+        $this->shouldImplement(ResumableDataPersisterInterface::class);
     }
 
     function it_supports_only_customer_entity(CustomerInterface $customer, ProductInterface $product): void
@@ -86,5 +92,10 @@ final class CustomerDataPersisterSpec extends ObjectBehavior
         $decoratedDataPersister->remove($customer, [])->shouldBeCalled();
 
         $this->remove($customer, []);
+    }
+
+    function it_is_resumable(): void
+    {
+        $this->resumable()->shouldReturn(true);
     }
 }

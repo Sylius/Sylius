@@ -14,10 +14,11 @@ declare(strict_types=1);
 namespace Sylius\Bundle\ApiBundle\DataPersister;
 
 use ApiPlatform\Core\DataPersister\ContextAwareDataPersisterInterface;
+use ApiPlatform\Core\DataPersister\ResumableDataPersisterInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\User\Security\PasswordUpdaterInterface;
 
-final class CustomerDataPersister implements ContextAwareDataPersisterInterface
+final class CustomerDataPersister implements ContextAwareDataPersisterInterface, ResumableDataPersisterInterface
 {
     public function __construct(
         private ContextAwareDataPersisterInterface $decoratedDataPersister,
@@ -49,5 +50,11 @@ final class CustomerDataPersister implements ContextAwareDataPersisterInterface
     public function remove($data, array $context = []): void
     {
         $this->decoratedDataPersister->remove($data, $context);
+    }
+
+    /** @param array<string, mixed> $context */
+    public function resumable(array $context = []): bool
+    {
+        return true;
     }
 }
