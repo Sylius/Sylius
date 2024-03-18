@@ -14,11 +14,12 @@ declare(strict_types=1);
 namespace Sylius\Bundle\ApiBundle\DataPersister;
 
 use ApiPlatform\Core\DataPersister\ContextAwareDataPersisterInterface;
+use ApiPlatform\Core\DataPersister\ResumableDataPersisterInterface;
 use Sylius\Bundle\ApiBundle\Exception\ProvinceCannotBeRemoved;
 use Sylius\Component\Addressing\Checker\CountryProvincesDeletionCheckerInterface;
 use Sylius\Component\Addressing\Model\CountryInterface;
 
-final class CountryDataPersister implements ContextAwareDataPersisterInterface
+final class CountryDataPersister implements ContextAwareDataPersisterInterface, ResumableDataPersisterInterface
 {
     public function __construct(
         private ContextAwareDataPersisterInterface $decoratedDataPersister,
@@ -43,5 +44,11 @@ final class CountryDataPersister implements ContextAwareDataPersisterInterface
     public function remove($data, array $context = [])
     {
         return $this->decoratedDataPersister->remove($data, $context);
+    }
+
+    /** @param array<string, mixed> $context */
+    public function resumable(array $context = []): bool
+    {
+        return true;
     }
 }

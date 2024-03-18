@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace spec\Sylius\Bundle\ApiBundle\DataPersister;
 
 use ApiPlatform\Core\DataPersister\ContextAwareDataPersisterInterface;
+use ApiPlatform\Core\DataPersister\ResumableDataPersisterInterface;
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ApiBundle\Exception\ProvinceCannotBeRemoved;
 use Sylius\Component\Addressing\Checker\CountryProvincesDeletionCheckerInterface;
@@ -27,6 +28,11 @@ final class CountryDataPersisterSpec extends ObjectBehavior
         CountryProvincesDeletionCheckerInterface $countryProvincesDeletionChecker,
     ): void {
         $this->beConstructedWith($decoratedDataPersister, $countryProvincesDeletionChecker);
+    }
+
+    function it_is_a_resumable_data_persister(): void
+    {
+        $this->shouldImplement(ResumableDataPersisterInterface::class);
     }
 
     function it_supports_only_zone_entity(CountryInterface $country, ProductInterface $product): void
@@ -69,5 +75,10 @@ final class CountryDataPersisterSpec extends ObjectBehavior
             ->shouldThrow(ProvinceCannotBeRemoved::class)
             ->during('persist', [$country, []])
         ;
+    }
+
+    function it_is_resumable(): void
+    {
+        $this->resumable()->shouldReturn(true);
     }
 }
