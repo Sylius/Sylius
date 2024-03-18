@@ -13,6 +13,8 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ProductBundle\Doctrine\ORM;
 
+use Doctrine\DBAL\Connection;
+use Doctrine\DBAL\Platforms\PostgreSQLPlatform;
 use Doctrine\ORM\QueryBuilder;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Component\Product\Model\ProductAttributeValueInterface;
@@ -27,9 +29,24 @@ class ProductAttributeValueRepository extends EntityRepository implements Produc
 {
     public function findByJsonChoiceKey(string $choiceKey): array
     {
-        return $this->createQueryBuilder('o')
-            ->andWhere('o.json LIKE :key')
-            ->setParameter('key', '%"' . $choiceKey . '"%')
+        $connection = $this->getEntityManager()->getConnection();
+        $isPostgres = $this->isPostgres($connection);
+
+        $qb = $this->createQueryBuilder('o');
+
+        if ($isPostgres) {
+            $qb
+                ->andWhere('JSONB_ARRAY_ELEMENTS_TEXT(o.json) LIKE :key')
+                ->setParameter('key', $choiceKey)
+            ;
+        } else {
+            $qb
+                ->andWhere('o.json LIKE :key')
+                ->setParameter('key', '%"' . $choiceKey . '"%')
+            ;
+        }
+
+        return $qb
             ->getQuery()
             ->getResult()
         ;
@@ -77,6 +94,14 @@ class ProductAttributeValueRepository extends EntityRepository implements Produc
             )
             ->setParameter('code', $productCode)
             ->setParameter('locale', $localeCode)
+        ;
+    }
+
+    protected function isPostgres(Connection $connection): bool
+    {
+        return
+            class_exists(PostgreSQLPlatform::class) &&
+            is_a($connection->getDatabasePlatform(), PostgreSQLPlatform::class, true)
         ;
     }
 }
