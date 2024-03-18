@@ -901,3 +901,6 @@ and use one of the new attributes accordingly to the type of your class, e.g.:
 
 1. The `sylius_admin_ajax_taxon_move` route has been deprecated. If you're relaying on it, consider migrating to new
    `sylius_admin_ajax_taxon_move_up` and `sylius_admin_ajax_taxon_move_down` routes.
+
+1. Check if the `countryCode` is set has been removed from the `Sylius\Component\Addressing\ModelAddress::setProvinceCode` 
+   method. The adequate check is ensured by validation.
