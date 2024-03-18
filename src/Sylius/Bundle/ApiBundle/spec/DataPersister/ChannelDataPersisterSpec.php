@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace spec\Sylius\Bundle\ApiBundle\DataPersister;
 
 use ApiPlatform\Core\DataPersister\ContextAwareDataPersisterInterface;
+use ApiPlatform\Core\DataPersister\ResumableDataPersisterInterface;
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ApiBundle\Exception\ChannelCannotBeRemoved;
 use Sylius\Component\Channel\Checker\ChannelDeletionCheckerInterface;
@@ -26,6 +27,11 @@ final class ChannelDataPersisterSpec extends ObjectBehavior
         ChannelDeletionCheckerInterface $channelDeletionChecker,
     ): void {
         $this->beConstructedWith($decoratedDataPersister, $channelDeletionChecker);
+    }
+
+    function it_is_a_resumable_data_persister(): void
+    {
+        $this->shouldImplement(ResumableDataPersisterInterface::class);
     }
 
     function it_supports_only_channel_entity(ChannelInterface $channel, \stdClass $object): void
@@ -64,5 +70,10 @@ final class ChannelDataPersisterSpec extends ObjectBehavior
         $decoratedDataPersister->remove($channel, [])->willReturn(null);
 
         $this->remove($channel, [])->shouldReturn(null);
+    }
+
+    function it_is_resumable(): void
+    {
+        $this->resumable()->shouldReturn(true);
     }
 }

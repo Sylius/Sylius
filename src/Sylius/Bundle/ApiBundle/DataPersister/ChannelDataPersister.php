@@ -14,11 +14,12 @@ declare(strict_types=1);
 namespace Sylius\Bundle\ApiBundle\DataPersister;
 
 use ApiPlatform\Core\DataPersister\ContextAwareDataPersisterInterface;
+use ApiPlatform\Core\DataPersister\ResumableDataPersisterInterface;
 use Sylius\Bundle\ApiBundle\Exception\ChannelCannotBeRemoved;
 use Sylius\Component\Channel\Checker\ChannelDeletionCheckerInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 
-final class ChannelDataPersister implements ContextAwareDataPersisterInterface
+final class ChannelDataPersister implements ContextAwareDataPersisterInterface, ResumableDataPersisterInterface
 {
     public function __construct(
         private ContextAwareDataPersisterInterface $decoratedDataPersister,
@@ -52,5 +53,11 @@ final class ChannelDataPersister implements ContextAwareDataPersisterInterface
         }
 
         $this->decoratedDataPersister->remove($data, $context);
+    }
+
+    /** @param array<string, mixed> $context */
+    public function resumable(array $context = []): bool
+    {
+        return true;
     }
 }
