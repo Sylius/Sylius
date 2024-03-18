@@ -1,0 +1,10 @@
+Sylius\Component\Addressing\Model\ZoneMember:
+    member_{NL, BE}:
+        code: <current()>
+
+Sylius\Component\Addressing\Model\Zone:
+    zone_eu:
+        code: EU
+        name: European Union
+        type: country
+        members: ["@member_NL", "@member_BE"]

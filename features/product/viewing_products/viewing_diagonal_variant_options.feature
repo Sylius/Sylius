@@ -17,16 +17,23 @@ Feature: Viewing diagonal variants options
         But the "Small" size / "Blue" color variant of product "Extra Cool T-Shirt" is disabled
         And the "Large" size / "Yellow" color variant of product "Extra Cool T-Shirt" is disabled
 
-    @ui
+    @api @ui
     Scenario: Viewing both values for both options when diagonal variants are available
         When I view product "Extra Cool T-Shirt"
-        Then I should be able to select the "Yellow" and "Blue" color option values
-        And I should be able to select the "Small" and "Large" size option values
+        Then I should be able to select the "Yellow" and "Blue" Color option values
+        And I should be able to select the "Small" and "Large" Size option values
 
-    @ui @javascript
+    @ui @javascript @no-api
     Scenario: Viewing an "Unavailable" message when selecting an unavailable combination
         When I view product "Extra Cool T-Shirt"
         And I select its color as "Blue"
         And I select its size as "Small"
         Then I should see that the combination is "Unavailable"
         And I should be unable to add it to the cart
+
+    @api @no-ui
+    Scenario: Not seeing unavailable variants
+        When I view variants of the "Extra Cool T-Shirt" product
+        And I filter them by "Blue" option value
+        And I filter them by "Small" option value
+        Then I should not see any variants

@@ -17,8 +17,8 @@ use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractCompilerPassTestCase
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\DefinitionHasMethodCallConstraint;
 use PHPUnit\Framework\Constraint\LogicalNot;
 use Sylius\Bundle\OrderBundle\DependencyInjection\Compiler\RegisterProcessorsPass;
-use Sylius\Component\Core\OrderProcessing\OrderAdjustmentsClearer;
 use Sylius\Component\Order\Processor\CompositeOrderProcessor;
+use Sylius\Component\Order\Processor\OrderProcessorInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Reference;
@@ -33,7 +33,7 @@ final class RegisterOrderProcessorPassTest extends AbstractCompilerPassTestCase
         $compositeOrderProcessorDefinition = new Definition(CompositeOrderProcessor::class);
         $this->setDefinition('sylius.order_processing.order_processor.composite', $compositeOrderProcessorDefinition);
 
-        $orderAdjustmentClearerDefinition = new Definition(OrderAdjustmentsClearer::class);
+        $orderAdjustmentClearerDefinition = new Definition(OrderProcessorInterface::class);
         $orderAdjustmentClearerDefinition->addTag('sylius.order_processor');
 
         $this->setDefinition('sylius.order_processing.order_adjustments_clearer', $orderAdjustmentClearerDefinition);
@@ -58,7 +58,7 @@ final class RegisterOrderProcessorPassTest extends AbstractCompilerPassTestCase
         $compositeOrderProcessorDefinition = new Definition(CompositeOrderProcessor::class);
         $this->setDefinition('sylius.order_processing.order_processor.composite', $compositeOrderProcessorDefinition);
 
-        $orderAdjustmentClearerDefinition = new Definition(OrderAdjustmentsClearer::class);
+        $orderAdjustmentClearerDefinition = new Definition(OrderProcessorInterface::class);
         $orderAdjustmentClearerDefinition->addTag('sylius.order_processor', ['priority' => 10]);
 
         $this->setDefinition('sylius.order_processing.order_adjustments_clearer', $orderAdjustmentClearerDefinition);

@@ -29,6 +29,8 @@ default:
                 - sylius.behat.context.transform.zone
 
                 - sylius.behat.context.api.admin.managing_shipping_methods
+                - sylius.behat.context.api.admin.response
+                - sylius.behat.context.api.admin.save
 
             filters:
                 tags: "@managing_shipping_methods&&@api"

@@ -1,0 +1,11 @@
+{
+    "@context": "\/api\/v2\/contexts\/PaymentMethodTranslation",
+    "@id": "\/api\/v2\/admin\/payment-method-translations\/@integer@",
+    "@type": "PaymentMethodTranslation",
+    "id": @integer@,
+    "name": "Cash on delivery",
+    "description": @string@,
+    "instructions": null,
+    "locale": "en_US",
+    "translatable": "\/api\/v2\/admin\/payment-methods\/CASH_ON_DELIVERY"
+}

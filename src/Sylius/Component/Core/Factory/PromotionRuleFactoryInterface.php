@@ -16,6 +16,11 @@ namespace Sylius\Component\Core\Factory;
 use Sylius\Component\Promotion\Model\PromotionRuleInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
+/**
+ * @template T of PromotionRuleInterface
+ *
+ * @extends FactoryInterface<T>
+ */
 interface PromotionRuleFactoryInterface extends FactoryInterface
 {
     public function createCartQuantity(int $count): PromotionRuleInterface;

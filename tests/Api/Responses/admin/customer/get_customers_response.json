@@ -1,0 +1,93 @@
+{
+    "@context": "\/api\/v2\/contexts\/Customer",
+    "@id": "\/api\/v2\/admin\/customers",
+    "@type": "hydra:Collection",
+    "hydra:member": [
+        {
+            "@id": "\/api\/v2\/admin\/customers\/@string@",
+            "@type": "Customer",
+            "defaultAddress": null,
+            "user": {
+                "@id": "\/api\/v2\/admin\/shop-users\/@string@",
+                "@type": "ShopUser",
+                "enabled": true,
+                "verified": false
+            },
+            "id": @integer@,
+            "email": "oliver@doe.com",
+            "firstName": "oliver",
+            "lastName": "Doe",
+            "birthday": @date@,
+            "gender": "u",
+            "group": "\/api\/v2\/admin\/customer-groups\/premium",
+            "phoneNumber": null,
+            "subscribedToNewsletter": false,
+            "createdAt": @date@,
+            "fullName": "oliver Doe"
+        },
+        {
+            "@id": "\/api\/v2\/admin\/customers\/@string@",
+            "@type": "Customer",
+            "defaultAddress": null,
+            "user": {
+                "@id": "\/api\/v2\/admin\/shop-users\/@string@",
+                "@type": "ShopUser",
+                "enabled": false,
+                "verified": false
+            },
+            "id": @integer@,
+            "email": "dave@doe.com",
+            "firstName": "dave",
+            "lastName": "Doe",
+            "birthday": @date@,
+            "gender": "u",
+            "group": "\/api\/v2\/admin\/customer-groups\/premium",
+            "phoneNumber": null,
+            "subscribedToNewsletter": false,
+            "createdAt": @date@,
+            "fullName": "dave Doe"
+        },
+        {
+            "@id": "\/api\/v2\/admin\/customers\/@string@",
+            "@type": "Customer",
+            "defaultAddress": "\/api\/v2\/admin\/addresses\/@string@",
+            "user": {
+                "@id": "\/api\/v2\/admin\/shop-users\/@string@",
+                "@type": "ShopUser",
+                "enabled": true,
+                "verified": true
+            },
+            "id": @integer@,
+            "email": "tony@doe.com",
+            "firstName": "tony",
+            "lastName": "Doe",
+            "birthday": @date@,
+            "gender": "u",
+            "group": null,
+            "phoneNumber": null,
+            "subscribedToNewsletter": false,
+            "createdAt": @date@,
+            "fullName": "tony Doe"
+        }
+    ],
+    "hydra:totalItems": 3,
+    "hydra:search": {
+        "@type": "hydra:IriTemplate",
+        "hydra:template": "\/api\/v2\/admin\/customers{?group.name,group.name[]}",
+        "hydra:variableRepresentation": "BasicRepresentation",
+        "hydra:mapping": [
+            {
+                "@type": "IriTemplateMapping",
+                "variable": "group.name",
+                "property": "group.name",
+                "required": false
+            },
+            {
+                "@type": "IriTemplateMapping",
+                "variable": "group.name[]",
+                "property": "group.name",
+                "required": false
+            }
+        ]
+    }
+}

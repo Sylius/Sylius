@@ -1,0 +1,11 @@
+{
+    "@context": "\/api\/v2\/contexts\/TaxCategory",
+    "@id": "\/api\/v2\/admin\/tax-categories\/special",
+    "@type": "TaxCategory",
+    "id": "@integer@",
+    "code": "special",
+    "name": "Special",
+    "description": "For peculiar places",
+    "createdAt": @date@,
+    "updatedAt": @date@
+}

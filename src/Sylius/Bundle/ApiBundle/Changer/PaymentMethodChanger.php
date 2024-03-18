@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\Changer;
 
+use Sylius\Bundle\ApiBundle\Exception\PaymentMethodCannotBeChangedException;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\PaymentMethodInterface;
 use Sylius\Component\Core\Repository\PaymentMethodRepositoryInterface;
@@ -20,7 +21,6 @@ use Sylius\Component\Core\Repository\PaymentRepositoryInterface;
 use Sylius\Component\Payment\Model\PaymentInterface;
 use Webmozart\Assert\Assert;
 
-/** @experimental */
 final class PaymentMethodChanger implements PaymentMethodChangerInterface
 {
     public function __construct(
@@ -54,6 +54,6 @@ final class PaymentMethodChanger implements PaymentMethodChangerInterface
             return $order;
         }
 
-        throw new \InvalidArgumentException('Payment method can not be set');
+        throw new PaymentMethodCannotBeChangedException();
     }
 }

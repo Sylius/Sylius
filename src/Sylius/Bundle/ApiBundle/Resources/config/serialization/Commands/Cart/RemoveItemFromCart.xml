@@ -18,6 +18,7 @@
     <class name="Sylius\Bundle\ApiBundle\Command\Cart\RemoveItemFromCart">
         <attribute name="orderItemId">
             <group>shop:cart:remove_item</group>
+            <group>sylius:shop:cart:remove_item</group>
         </attribute>
     </class>
 </serializer>

@@ -16,9 +16,6 @@ namespace Sylius\Bundle\PromotionBundle\Form\Type\Action;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\PercentType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Validator\Constraints\NotBlank;
-use Symfony\Component\Validator\Constraints\Range;
-use Symfony\Component\Validator\Constraints\Type;
 
 final class PercentageDiscountConfigurationType extends AbstractType
 {
@@ -29,16 +26,6 @@ final class PercentageDiscountConfigurationType extends AbstractType
                 'label' => 'sylius.form.promotion_action.percentage_discount_configuration.percentage',
                 'html5' => true,
                 'scale' => 2,
-                'constraints' => [
-                    new NotBlank(['groups' => ['sylius']]),
-                    new Type(['type' => 'numeric', 'groups' => ['sylius']]),
-                    new Range([
-                        'min' => 0,
-                        'max' => 1,
-                        'notInRangeMessage' => 'sylius.promotion_action.percentage_discount_configuration.not_in_range',
-                        'groups' => ['sylius'],
-                    ]),
-                ],
             ])
         ;
     }

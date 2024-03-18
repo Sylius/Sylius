@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Setup;
 
 use Behat\Behat\Context\Context;
-use SM\Factory\FactoryInterface as StateMachineFactoryInterface;
+use Sylius\Abstraction\StateMachine\StateMachineInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\ProductInterface;
@@ -29,7 +29,7 @@ final class ProductReviewContext implements Context
         private SharedStorageInterface $sharedStorage,
         private FactoryInterface $productReviewFactory,
         private RepositoryInterface $productReviewRepository,
-        private StateMachineFactoryInterface $stateMachineFactory,
+        private StateMachineInterface $stateMachine,
     ) {
     }
 
@@ -150,8 +150,7 @@ final class ProductReviewContext implements Context
         $product->addReview($review);
 
         if (null !== $transition) {
-            $stateMachine = $this->stateMachineFactory->get($review, ProductReviewTransitions::GRAPH);
-            $stateMachine->apply($transition);
+            $this->stateMachine->apply($review, ProductReviewTransitions::GRAPH, $transition);
         }
 
         $this->sharedStorage->set('product_review', $review);

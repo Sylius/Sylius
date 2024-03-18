@@ -23,7 +23,6 @@ use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Repository\ProductRepositoryInterface;
 use Webmozart\Assert\Assert;
 
-/** @experimental */
 final class ProductItemDataProvider implements RestrictedDataProviderInterface, ItemDataProviderInterface
 {
     public function __construct(
@@ -45,7 +44,7 @@ final class ProductItemDataProvider implements RestrictedDataProviderInterface, 
         /** @var ChannelInterface $channel */
         $channel = $context[ContextKeys::CHANNEL];
 
-        return $this->productRepository->findOneByChannelAndCode($channel, $id);
+        return $this->productRepository->findOneByChannelAndCodeWithAvailableAssociations($channel, $id);
     }
 
     public function supports(string $resourceClass, string $operationName = null, array $context = []): bool

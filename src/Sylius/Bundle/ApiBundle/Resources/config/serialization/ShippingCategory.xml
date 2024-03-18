@@ -17,27 +17,50 @@
 >
     <class name="Sylius\Component\Shipping\Model\ShippingCategory">
         <attribute name="id">
-            <group>admin:shipping_category:read</group>
+            <group>admin:shipping_category:index</group>
+            <group>sylius:admin:shipping_category:index</group>
+            <group>admin:shipping_category:show</group>
+            <group>sylius:admin:shipping_category:show</group>
         </attribute>
         <attribute name="code">
-            <group>admin:shipping_category:read</group>
+            <group>admin:shipping_category:index</group>
+            <group>sylius:admin:shipping_category:index</group>
+            <group>admin:shipping_category:show</group>
+            <group>sylius:admin:shipping_category:show</group>
             <group>admin:shipping_category:create</group>
+            <group>sylius:admin:shipping_category:create</group>
         </attribute>
         <attribute name="name">
-            <group>admin:shipping_category:read</group>
+            <group>admin:shipping_category:index</group>
+            <group>sylius:admin:shipping_category:index</group>
+            <group>admin:shipping_category:show</group>
+            <group>sylius:admin:shipping_category:show</group>
             <group>admin:shipping_category:update</group>
+            <group>sylius:admin:shipping_category:update</group>
             <group>admin:shipping_category:create</group>
+            <group>sylius:admin:shipping_category:create</group>
         </attribute>
         <attribute name="description">
-            <group>admin:shipping_category:read</group>
+            <group>admin:shipping_category:index</group>
+            <group>sylius:admin:shipping_category:index</group>
+            <group>admin:shipping_category:show</group>
+            <group>sylius:admin:shipping_category:show</group>
             <group>admin:shipping_category:update</group>
+            <group>sylius:admin:shipping_category:update</group>
             <group>admin:shipping_category:create</group>
+            <group>sylius:admin:shipping_category:create</group>
         </attribute>
         <attribute name="createdAt">
-            <group>admin:shipping_category:read</group>
+            <group>admin:shipping_category:index</group>
+            <group>sylius:admin:shipping_category:index</group>
+            <group>admin:shipping_category:show</group>
+            <group>sylius:admin:shipping_category:show</group>
         </attribute>
         <attribute name="updatedAt">
-            <group>admin:shipping_category:read</group>
+            <group>admin:shipping_category:index</group>
+            <group>sylius:admin:shipping_category:index</group>
+            <group>admin:shipping_category:show</group>
+            <group>sylius:admin:shipping_category:show</group>
         </attribute>
     </class>
 </serializer>

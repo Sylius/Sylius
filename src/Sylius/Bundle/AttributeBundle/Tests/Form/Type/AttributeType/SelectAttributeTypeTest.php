@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Bundle\AttributeBundle\Tests\Form\Type\AttributeType;
 
 use PHPUnit\Framework\Assert;
+use Prophecy\PhpUnit\ProphecyTrait;
 use Prophecy\Prophecy\ObjectProphecy;
 use Sylius\Bundle\AttributeBundle\Form\Type\AttributeType\SelectAttributeType;
 use Sylius\Component\Resource\Translation\Provider\TranslationLocaleProviderInterface;
@@ -23,6 +24,8 @@ use Symfony\Component\Form\Test\TypeTestCase;
 
 final class SelectAttributeTypeTest extends TypeTestCase
 {
+    use ProphecyTrait;
+
     private ObjectProphecy $translationProvider;
 
     /**

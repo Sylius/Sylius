@@ -28,6 +28,14 @@ class SelectAttributeChoicesCollectionType extends AbstractType
     public function __construct(?TranslationLocaleProviderInterface $localeProvider = null)
     {
         if (null !== $localeProvider) {
+            trigger_deprecation(
+                'sylius/attribute-bundle',
+                '1.13',
+                'Passing an instance of %s as a constructor argument for %s is deprecated and will not be possible in Sylius 2.0.',
+                TranslationLocaleProviderInterface::class,
+                self::class,
+            );
+
             $this->defaultLocaleCode = $localeProvider->getDefaultLocaleCode();
         }
     }

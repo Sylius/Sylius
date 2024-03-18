@@ -18,18 +18,25 @@
     <class name="Sylius\Bundle\ApiBundle\Application\Entity\Foo">
         <attribute name="id">
             <group>foo:read</group>
+			<group>sylius:foo:read</group>
         </attribute>
         <attribute name="name">
             <group>foo:read</group>
+			<group>sylius:foo:read</group>
             <group>foo:create</group>
+			<group>sylius:foo:create</group>
         </attribute>
         <attribute name="owner">
             <group>foo:read</group>
+			<group>sylius:foo:read</group>
             <group>foo:create</group>
+			<group>sylius:foo:create</group>
         </attribute>
         <attribute name="fooSyliusResource">
             <group>foo:read</group>
+			<group>sylius:foo:read</group>
             <group>foo:create</group>
+			<group>sylius:foo:create</group>
         </attribute>
     </class>
 </serializer>

@@ -20,7 +20,6 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-/** @experimental */
 final class RemoveCatalogPromotionAction
 {
     public function __construct(

@@ -13,14 +13,14 @@ In order to check a product in shop in all channels it is available in
     @ui @no-api
     Scenario: Accessing product show page in shop from the product variant edit page where product is available in more than one channel
         Given this product is also available in the "Europe" channel
-        And this product has "Red" variant priced at "$220000.00" in "Europe" channel
+        And this product has "Red" variant priced at "$220,000.00" in "Europe" channel
         When I want to modify the "Bugatti" product variant
         And I choose to show this product in the "Europe" channel
         Then I should see this product in the "Europe" channel in the shop
 
     @ui @no-api
     Scenario: Accessing product show page in shop from the product variant edit page where product is available in one channel
-        Given this product has "Red" variant priced at "$220000.00" in "United States" channel
+        Given this product has "Red" variant priced at "$220,000.00" in "United States" channel
         When I want to modify the "Bugatti" product variant
         And I choose to show this product in this channel
         Then I should see this product in the "United States" channel in the shop

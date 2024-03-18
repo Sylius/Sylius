@@ -17,21 +17,15 @@
                                http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <imports>
-        <import resource="services/action.xml" />
-        <import resource="services/controller.xml" />
-        <import resource="services/extension.xml" />
-        <import resource="services/factory.xml" />
-        <import resource="services/form.xml" />
-        <import resource="services/provider.xml" />
+        <import resource="services/**.xml" />
     </imports>
 
     <services>
         <defaults public="true" />
 
-        <service id="sylius.payum.http_client" class="Payum\Core\HttpClientInterface">
-            <factory class="Payum\Core\Bridge\Guzzle\HttpClientFactory" method="create" />
+        <service id="sylius.payum.http_client" class="Sylius\Bundle\PayumBundle\HttpClient\HttpClient">
+            <argument type="service" id="Psr\Http\Client\ClientInterface" />
         </service>
-
         <service id="sylius.form_registry.payum_gateway_config" class="Sylius\Bundle\ResourceBundle\Form\Registry\FormTypeRegistry" />
     </services>
 </container>

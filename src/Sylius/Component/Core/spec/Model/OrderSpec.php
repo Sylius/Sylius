@@ -415,6 +415,22 @@ final class OrderSpec extends ObjectBehavior
         $this->getPromotionSubjectCount()->shouldReturn(7);
     }
 
+    function it_counts_items_subtotal(OrderItemInterface $item1, OrderItemInterface $item2): void
+    {
+        $item1->getSubtotal()->willReturn(420);
+        $item1->getTotal()->willReturn(420);
+        $item1->setOrder($this)->will(function () {});
+
+        $item2->getSubtotal()->willReturn(666);
+        $item2->getTotal()->willReturn(666);
+        $item2->setOrder($this)->will(function () {});
+
+        $this->addItem($item1);
+        $this->addItem($item2);
+
+        $this->getItemsSubtotal()->shouldReturn(1086);
+    }
+
     function it_adds_and_removes_promotions(PromotionInterface $promotion): void
     {
         $this->addPromotion($promotion);

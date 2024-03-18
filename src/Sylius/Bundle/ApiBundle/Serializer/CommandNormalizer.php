@@ -13,13 +13,11 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\Serializer;
 
+use Sylius\Bundle\ApiBundle\Exception\InvalidRequestArgumentException;
 use Symfony\Component\Serializer\Exception\MissingConstructorArgumentsException;
 use Symfony\Component\Serializer\Normalizer\ContextAwareNormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
-/**
- * @experimental
- */
 final class CommandNormalizer implements ContextAwareNormalizerInterface
 {
     private const ALREADY_CALLED = 'sylius_command_normalizer_already_called';
@@ -37,7 +35,7 @@ final class CommandNormalizer implements ContextAwareNormalizerInterface
         return
             is_object($data) &&
             method_exists($data, 'getClass') &&
-            $data->getClass() === MissingConstructorArgumentsException::class
+            ($data->getClass() === MissingConstructorArgumentsException::class || $data->getClass() === InvalidRequestArgumentException::class)
         ;
     }
 

@@ -32,6 +32,7 @@
                 <option name="default">0</option>
             </options>
         </field>
+        <field name="lowestPriceBeforeDiscount" column="lowest_price_before_discount" type="integer" nullable="true" />
         <field name="channelCode" column="channel_code" type="string" />
         <many-to-many field="appliedPromotions" target-entity="Sylius\Component\Promotion\Model\CatalogPromotionInterface">
             <order-by>
@@ -50,6 +51,9 @@
 
         <many-to-one field="productVariant" target-entity="Sylius\Component\Product\Model\ProductVariantInterface" inversed-by="channelPricings">
             <join-column name="product_variant_id" referenced-column-name="id" nullable="false" on-delete="CASCADE" />
+            <cascade>
+                <cascade-persist />
+            </cascade>
         </many-to-one>
     </mapped-superclass>
 

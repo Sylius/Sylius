@@ -12,7 +12,10 @@
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/admin/taxons</attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:taxon:read</attribute>
+                    <attribute name="groups">
+                        <attribute>admin:taxon:index</attribute>
+                        <attribute>sylius:admin:taxon:index</attribute>
+                    </attribute>
                 </attribute>
             </collectionOperation>
 
@@ -20,7 +23,16 @@
                 <attribute name="method">POST</attribute>
                 <attribute name="path">/admin/taxons</attribute>
                 <attribute name="denormalization_context">
-                    <attribute name="groups">admin:taxon:create</attribute>
+                    <attribute name="groups">
+                        <attribute>admin:taxon:create</attribute>
+                        <attribute>sylius:admin:taxon:create</attribute>
+                    </attribute>
+                </attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">
+                        <attribute>admin:taxon:show</attribute>
+                        <attribute>sylius:admin:taxon:show</attribute>
+                    </attribute>
                 </attribute>
             </collectionOperation>
 
@@ -28,7 +40,10 @@
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/shop/taxons</attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">shop:taxon:read</attribute>
+                    <attribute name="groups">
+                        <attribute>shop:taxon:index</attribute>
+                        <attribute>sylius:shop:taxon:index</attribute>
+                    </attribute>
                 </attribute>
             </collectionOperation>
         </collectionOperations>
@@ -38,7 +53,10 @@
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/admin/taxons/{code}</attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:taxon:read</attribute>
+                    <attribute name="groups">
+                        <attribute>admin:taxon:show</attribute>
+                        <attribute>sylius:admin:taxon:show</attribute>
+                    </attribute>
                 </attribute>
             </itemOperation>
 
@@ -46,25 +64,68 @@
                 <attribute name="method">PUT</attribute>
                 <attribute name="path">/admin/taxons/{code}</attribute>
                 <attribute name="denormalization_context">
-                    <attribute name="groups">admin:taxon:update</attribute>
+                    <attribute name="groups">
+                        <attribute>admin:taxon:update</attribute>
+                        <attribute>sylius:admin:taxon:update</attribute>
+                    </attribute>
                 </attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">
+                        <attribute>admin:taxon:show</attribute>
+                        <attribute>sylius:admin:taxon:show</attribute>
+                    </attribute>
+                </attribute>
+            </itemOperation>
+
+            <itemOperation name="admin_delete">
+                <attribute name="method">DELETE</attribute>
+                <attribute name="path">/admin/taxons/{code}</attribute>
             </itemOperation>
 
             <itemOperation name="shop_get">
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/shop/taxons/{code}</attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">shop:taxon:read</attribute>
+                    <attribute name="groups">
+                        <attribute>shop:taxon:show</attribute>
+                        <attribute>sylius:shop:taxon:show</attribute>
+                    </attribute>
                 </attribute>
             </itemOperation>
         </itemOperations>
+
+        <subresourceOperations>
+            <subresourceOperation name="images_get_subresource">
+                <attribute name="method">GET</attribute>
+                <attribute name="path">/admin/taxons/{code}/images</attribute>
+                <attribute name="openapi_context">
+                    <attribute name="summary">Retrieves the collection of TaxonImage resources for a given Taxon.</attribute>
+                </attribute>
+            </subresourceOperation>
+        </subresourceOperations>
 
         <property name="id" identifier="false" writable="false" />
         <property name="code" identifier="true" required="true" />
         <property name="name" required="true" />
         <property name="slug" required="true" />
         <property name="description" required="true" />
+        <property name="parent" readableLink="false" writableLink="false" />
         <property name="children" readableLink="false" />
-        <property name="translations" readable="true" writable="true" />
+        <property name="position" writable="true" />
+        <property name="translations" readable="true" writable="true">
+            <attribute name="openapi_context">
+                <attribute name="type">object</attribute>
+                <attribute name="example">
+                    <attribute name="en_US">
+                        <attribute name="name">string</attribute>
+                        <attribute name="description">string</attribute>
+                        <attribute name="slug">string</attribute>
+                    </attribute>
+                </attribute>
+            </attribute>
+        </property>
+        <property name="images" writable="false" required="false">
+            <subresource resourceClass="%sylius.model.taxon_image.class%" collection="true" />
+        </property>
     </resource>
 </resources>

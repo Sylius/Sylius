@@ -1,0 +1,12 @@
+{
+    "@context": "\/api\/v2\/contexts\/ChannelPriceHistoryConfig",
+    "@id": "\/api\/v2\/admin\/channel-price-history-configs\/@integer@",
+    "@type": "ChannelPriceHistoryConfig",
+    "id": "@integer@",
+    "lowestPriceForDiscountedProductsVisible": false,
+    "lowestPriceForDiscountedProductsCheckingPeriod": 25,
+    "taxonsExcludedFromShowingLowestPrice": [
+        "\/api\/v2\/admin\/taxons\/MUG",
+        "\/api\/v2\/admin\/taxons\/HAT"
+    ]
+}

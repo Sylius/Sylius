@@ -41,4 +41,16 @@ class Adjustment extends BaseAdjustment implements AdjustmentInterface
             $this->setAdjustable($this->shipment->getOrder());
         }
     }
+
+    public static function getAdjustmentTypeChoices(): array
+    {
+        return [
+            self::ORDER_ITEM_PROMOTION_ADJUSTMENT,
+            self::ORDER_PROMOTION_ADJUSTMENT,
+            self::ORDER_SHIPPING_PROMOTION_ADJUSTMENT,
+            self::ORDER_UNIT_PROMOTION_ADJUSTMENT,
+            self::SHIPPING_ADJUSTMENT,
+            self::TAX_ADJUSTMENT,
+        ];
+    }
 }

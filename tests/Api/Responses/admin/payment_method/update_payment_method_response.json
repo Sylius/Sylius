@@ -1,0 +1,23 @@
+{
+    "@context": "\/api\/v2\/contexts\/PaymentMethod",
+    "@id": "\/api\/v2\/admin\/payment-methods\/PAYPAL",
+    "@type": "PaymentMethod",
+    "channels": [
+        "\/api\/v2\/admin\/channels\/MOBILE"
+    ],
+    "gatewayConfig": "\/api\/v2\/admin\/gateway-configs\/@integer@",
+    "id": @integer@,
+    "code": "PAYPAL",
+    "position": 1,
+    "enabled": false,
+    "translations": {
+        "en_US": {
+            "@id": "\/api\/v2\/admin\/payment-method-translations\/@integer@",
+            "@type": "PaymentMethodTranslation",
+            "id": @integer@,
+            "name": "Different name",
+            "description": "Different description",
+            "instructions": "Different instructions"
+        }
+    }
+}

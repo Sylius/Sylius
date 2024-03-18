@@ -15,7 +15,6 @@ namespace Sylius\Bundle\ApiBundle\Applicator;
 
 use Sylius\Component\Core\Model\OrderInterface;
 
-/** @experimental */
 interface OrderStateMachineTransitionApplicatorInterface
 {
     public function cancel(OrderInterface $data): OrderInterface;

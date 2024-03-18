@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Tests\Api\Shop;
 
 use Sylius\Component\Core\Model\CustomerInterface;
@@ -23,23 +25,16 @@ final class SendContactRequestTest extends JsonApiTestCase
     /** @test */
     public function it_sends_contact_request(): void
     {
-        self::getContainer();
-
         $this->loadFixturesFromFiles(['channel.yaml']);
 
         $this->client->request(
-            'POST',
-            '/api/v2/shop/contact-requests',
-            [],
-            [],
-            [
-                'CONTENT_TYPE' => 'application/ld+json',
-                'HTTP_ACCEPT' => 'application/ld+json',
-            ],
-            json_encode([
+            method: 'POST',
+            uri: '/api/v2/shop/contact',
+            server: self::CONTENT_TYPE_HEADER,
+            content: json_encode([
                 'email' => 'customer@email.com',
-                'message' => 'Example of message'
-            ])
+                'message' => 'Example of message',
+            ], \JSON_THROW_ON_ERROR),
         );
 
         $response = $this->client->getResponse();
@@ -52,25 +47,19 @@ final class SendContactRequestTest extends JsonApiTestCase
     /** @test */
     public function it_sends_contact_request_as_logged_in_user(): void
     {
-        self::getContainer();
-
         $fixtures = $this->loadFixturesFromFiles(['channel.yaml', 'authentication/customer.yaml']);
-
         /** @var CustomerInterface $customer */
         $customer = $fixtures['customer_oliver'];
 
-        $authorizationHeader = $this->getAuthorizationHeaderAsCustomer($customer->getEmailCanonical(), 'sylius');
+        $header = array_merge($this->logInShopUser($customer->getEmailCanonical()), self::CONTENT_TYPE_HEADER);
 
         $this->client->request(
-            'POST',
-            '/api/v2/shop/contact-requests',
-            [],
-            [],
-            array_merge($authorizationHeader, self::CONTENT_TYPE_HEADER),
-            json_encode([
-                'email' => 'customer@email.com',
-                'message' => 'Example of message'
-            ])
+            method: 'POST',
+            uri: '/api/v2/shop/contact',
+            server: $header,
+            content: json_encode([
+                'message' => 'Example of message',
+            ], \JSON_THROW_ON_ERROR),
         );
 
         $response = $this->client->getResponse();

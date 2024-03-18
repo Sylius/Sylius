@@ -85,6 +85,20 @@ final class ValidSelectAttributeConfigurationValidatorSpec extends ObjectBehavio
         $this->validate($attribute, $constraint);
     }
 
+    function it_adds_a_violation_if_multiple_is_not_set_when_min_or_max_entries_values_are_specified(
+        ExecutionContextInterface $context,
+        AttributeInterface $attribute,
+    ): void {
+        $constraint = new ValidSelectAttributeConfiguration();
+
+        $attribute->getType()->willReturn(SelectAttributeType::TYPE);
+        $attribute->getConfiguration()->willReturn(['min' => 4, 'max' => 6]);
+
+        $context->addViolation(Argument::any())->shouldBeCalled();
+
+        $this->validate($attribute, $constraint);
+    }
+
     function it_does_nothing_if_an_attribute_is_not_a_select_type(
         ExecutionContextInterface $context,
         AttributeInterface $attribute,

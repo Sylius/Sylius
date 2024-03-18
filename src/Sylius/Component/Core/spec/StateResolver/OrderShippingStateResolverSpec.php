@@ -16,7 +16,8 @@ namespace spec\Sylius\Component\Core\StateResolver;
 use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
 use SM\Factory\FactoryInterface;
-use SM\StateMachine\StateMachineInterface;
+use SM\StateMachine\StateMachineInterface as WinzouStateMachineInterface;
+use Sylius\Abstraction\StateMachine\StateMachineInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\ShipmentInterface;
 use Sylius\Component\Core\OrderShippingStates;
@@ -40,7 +41,7 @@ final class OrderShippingStateResolverSpec extends ObjectBehavior
         OrderInterface $order,
         ShipmentInterface $shipment1,
         ShipmentInterface $shipment2,
-        StateMachineInterface $orderStateMachine,
+        WinzouStateMachineInterface $orderStateMachine,
     ): void {
         $shipments = new ArrayCollection();
         $shipments->add($shipment1->getWrappedObject());
@@ -58,10 +59,33 @@ final class OrderShippingStateResolverSpec extends ObjectBehavior
         $this->resolve($order);
     }
 
+    function it_uses_the_new_state_machine_abstraction_if_passed(
+        StateMachineInterface $orderStateMachine,
+        OrderInterface $order,
+        ShipmentInterface $shipment1,
+        ShipmentInterface $shipment2,
+    ): void {
+        $this->beConstructedWith($orderStateMachine);
+
+        $shipments = new ArrayCollection();
+        $shipments->add($shipment1->getWrappedObject());
+        $shipments->add($shipment2->getWrappedObject());
+
+        $order->getShipments()->willReturn($shipments);
+        $order->getShippingState()->willReturn(OrderShippingStates::STATE_READY);
+
+        $shipment1->getState()->willReturn(ShipmentInterface::STATE_SHIPPED);
+        $shipment2->getState()->willReturn(ShipmentInterface::STATE_SHIPPED);
+
+        $orderStateMachine->apply($order, OrderShippingTransitions::GRAPH, OrderShippingTransitions::TRANSITION_SHIP)->shouldBeCalled();
+
+        $this->resolve($order);
+    }
+
     function it_marks_an_order_as_shipped_if_there_are_no_shipments_to_deliver(
         FactoryInterface $stateMachineFactory,
         OrderInterface $order,
-        StateMachineInterface $orderStateMachine,
+        WinzouStateMachineInterface $orderStateMachine,
     ): void {
         $order->getShipments()->willReturn(new ArrayCollection());
         $order->getShippingState()->willReturn(OrderShippingStates::STATE_READY);
@@ -77,7 +101,7 @@ final class OrderShippingStateResolverSpec extends ObjectBehavior
         OrderInterface $order,
         ShipmentInterface $shipment1,
         ShipmentInterface $shipment2,
-        StateMachineInterface $orderStateMachine,
+        WinzouStateMachineInterface $orderStateMachine,
     ): void {
         $shipments = new ArrayCollection();
         $shipments->add($shipment1->getWrappedObject());
@@ -100,7 +124,7 @@ final class OrderShippingStateResolverSpec extends ObjectBehavior
         OrderInterface $order,
         ShipmentInterface $shipment1,
         ShipmentInterface $shipment2,
-        StateMachineInterface $orderStateMachine,
+        WinzouStateMachineInterface $orderStateMachine,
     ): void {
         $shipments = new ArrayCollection();
         $shipments->add($shipment1->getWrappedObject());

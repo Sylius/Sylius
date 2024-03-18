@@ -2,28 +2,117 @@ Sylius\Component\Core\Model\Product:
     product:
         fallbackLocale: en_US
         currentLocale: en
-        code: MUG_SW
+        code: 'MUG_SW'
 
 Sylius\Component\Product\Model\ProductVariantTranslation:
     product_variant_translation:
         name: 'Mug'
         locale: en_US
         translatable: '@product_variant'
+    product_variant_2_translation:
+        name: 'Mug 2'
+        locale: en_US
+        translatable: '@product_variant_2'
 
 Sylius\Component\Core\Model\ProductVariant:
     product_variant:
-        code: MUG
+        code: 'MUG'
         version: 1
         product: '@product'
         fallbackLocale: en_US
         currentLocale: en
         position: 1
+        optionValues: ['@product_option_value_color_blue']
         channelPricings:
             channel_web: '@product_variant_channel_web_pricing'
         translations:
             - '@product_variant_translation'
+        enabled: true
+        tracked: true
+        onHold: 0
+        onHand: 10
+        weight: 100.50
+        width: 100.50
+        height: 100.50
+        depth: 100.50
+        taxCategory: '@tax_category_default'
+        shippingCategory: '@shipping_category_default'
+        shippingRequired: true
+    product_variant_2:
+        code: 'MUG_2'
+        product: '@product'
+        fallbackLocale: en_US
+        currentLocale: en
+        position: 2
+        channelPricings:
+            channel_web: '@product_variant_2_channel_web_pricing'
+        translations:
+            - '@product_variant_2_translation'
 
 Sylius\Component\Core\Model\ChannelPricing:
     product_variant_channel_web_pricing:
         channelCode: 'WEB'
         price: 2000
+    product_variant_2_channel_web_pricing:
+        channelCode: 'WEB'
+        price: 3000
+
+Sylius\Component\Product\Model\ProductOption:
+    product_option_color:
+        code: 'COLOR'
+        currentLocale: 'en_US'
+        translations:
+            - '@product_option_translation_en_EN'
+
+Sylius\Component\Product\Model\ProductOptionTranslation:
+    product_option_translation_en_EN:
+        locale: 'en_US'
+        name: 'Color'
+        translatable: '@product_option_color'
+
+Sylius\Component\Product\Model\ProductOptionValue:
+    product_option_value_color_blue:
+        code: 'COLOR_BLUE'
+        currentLocale: 'en_US'
+        fallbackLocale: 'en_US'
+        option: '@product_option_color'
+        translations:
+            - '@product_option_value_translation_blue'
+    product_option_value_color_red:
+        code: 'COLOR_RED'
+        currentLocale: 'en_US'
+        fallbackLocale: 'en_US'
+        option: '@product_option_color'
+        translations:
+            - '@product_option_value_translation_red'
+
+Sylius\Component\Product\Model\ProductOptionValueTranslation:
+    product_option_value_translation_blue:
+        locale: 'en_US'
+        value: 'Blue'
+        translatable: '@product_option_value_color_blue'
+    product_option_value_translation_red:
+        locale: 'en_US'
+        value: 'Red'
+        translatable: '@product_option_value_color_red'
+
+Sylius\Component\Core\Model\Customer:
+    customer:
+        firstName: 'John'
+        lastName: 'Doe'
+        email: 'john.doe@example.com'
+        emailCanonical: 'john.doe@example.com'
+
+Sylius\Component\Core\Model\Order:
+    cart:
+        channel: '@channel_web'
+        items: ['@order_item']
+        currencyCode: 'USD'
+        localeCode: 'en_US'
+        customer: '@customer'
+        state: 'cart'
+
+Sylius\Component\Core\Model\OrderItem:
+    order_item:
+        variant: '@product_variant'
+        order: '@cart'

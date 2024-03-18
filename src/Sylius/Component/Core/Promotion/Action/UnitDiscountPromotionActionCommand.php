@@ -47,6 +47,7 @@ abstract class UnitDiscountPromotionActionCommand implements PromotionActionComm
 
     protected function removeUnitsAdjustment(OrderItemInterface $item, PromotionInterface $promotion): void
     {
+        /** @var OrderItemUnitInterface $unit */
         foreach ($item->getUnits() as $unit) {
             $this->removeUnitOrderItemAdjustments($unit, $promotion);
         }

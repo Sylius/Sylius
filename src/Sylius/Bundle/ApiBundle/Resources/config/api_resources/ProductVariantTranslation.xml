@@ -12,12 +12,7 @@
         <itemOperations>
             <itemOperation name="admin_get">
                 <attribute name="method">GET</attribute>
-                <attribute name="path">/admin/product-variant-translation/{id}</attribute>
-            </itemOperation>
-
-            <itemOperation name="shop_get">
-                <attribute name="method">GET</attribute>
-                <attribute name="path">/shop/product-variant-translation/{id}</attribute>
+                <attribute name="path">/admin/product-variant-translations/{id}</attribute>
             </itemOperation>
         </itemOperations>
 

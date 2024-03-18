@@ -19,7 +19,6 @@ use Sylius\Component\Locale\Context\LocaleContextInterface;
 use Sylius\Component\Locale\Context\LocaleNotFoundException;
 use Symfony\Component\HttpFoundation\Request;
 
-/** @experimental */
 final class LocaleContextBuilder implements SerializerContextBuilderInterface
 {
     public function __construct(

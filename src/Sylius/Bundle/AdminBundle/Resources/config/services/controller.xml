@@ -44,14 +44,14 @@
 
         <service id="Sylius\Bundle\AdminBundle\Action\ResendOrderConfirmationEmailAction" public="true">
             <argument type='service' id="sylius.repository.order" />
-            <argument type="service" id="Sylius\Bundle\AdminBundle\EmailManager\OrderEmailManagerInterface" />
+            <argument type="service" id="Sylius\Bundle\CoreBundle\MessageDispatcher\ResendOrderConfirmationEmailDispatcherInterface" />
             <argument type="service" id="security.csrf.token_manager" />
             <argument type="service" id="request_stack" />
         </service>
 
         <service id="Sylius\Bundle\AdminBundle\Action\ResendShipmentConfirmationEmailAction" public="true">
             <argument type='service' id="sylius.repository.shipment" />
-            <argument type="service" id="Sylius\Bundle\AdminBundle\EmailManager\ShipmentEmailManagerInterface" />
+            <argument type="service" id="Sylius\Bundle\CoreBundle\MessageDispatcher\ResendShipmentConfirmationEmailDispatcher" />
             <argument type="service" id="security.csrf.token_manager" />
             <argument type="service" id="request_stack" />
         </service>
@@ -73,7 +73,6 @@
             <argument type="service" id="sylius.repository.channel" />
             <argument type="service" id="twig" />
             <argument type="service" id="router" />
-            <argument type="service" id="Sylius\Component\Core\Dashboard\SalesDataProviderInterface" />
             <argument type="service" id="Sylius\Bundle\AdminBundle\Provider\StatisticsDataProviderInterface" />
         </service>
 
@@ -90,9 +89,10 @@
 
         <service id="sylius.controller.admin.notification" class="Sylius\Bundle\AdminBundle\Controller\NotificationController" public="true">
             <argument type="service" id="sylius.http_client" />
-            <argument type="service" id="sylius.http_message_factory" />
+            <argument type="service" id="Psr\Http\Message\RequestFactoryInterface" />
             <argument type="string">%sylius.admin.notification.uri%</argument>
             <argument type="string">%kernel.environment%</argument>
+            <argument type="service" id="Psr\Http\Message\StreamFactoryInterface" />
         </service>
 
         <service id="Sylius\Bundle\AdminBundle\Controller\RemoveCatalogPromotionAction" public="true">

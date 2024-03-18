@@ -14,9 +14,7 @@
 <container xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://symfony.com/schema/dic/services"
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <imports>
-        <import resource="services/checker.xml"/>
-        <import resource="services/form.xml"/>
-        <import resource="services/registry.xml"/>
+        <import resource="services/**.xml"/>
     </imports>
 
     <parameters>
@@ -73,9 +71,7 @@
                  label="sylius.form.shipping_calculator.per_unit_rate_configuration.label"/>
         </service>
 
-        <service id="sylius.calendar" class="Sylius\Bundle\ShippingBundle\Provider\Calendar">
-            <deprecated package="sylius/sylius" version="1.11">The "%service_id%" is deprecated since Sylius 1.11 and will be removed in 2.0. Use "Sylius\Calendar\Provider\DateTimeProviderInterface" instead.</deprecated>
-        </service>
+        <service id="sylius.calendar" class="Sylius\Bundle\ShippingBundle\Provider\Calendar"/>
 
         <service id="sylius.shipping_date_assigner" class="Sylius\Bundle\ShippingBundle\Assigner\ShippingDateAssigner">
             <argument type="service" id="Sylius\Calendar\Provider\DateTimeProviderInterface"/>

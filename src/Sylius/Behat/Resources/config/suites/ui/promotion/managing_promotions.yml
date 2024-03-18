@@ -13,6 +13,7 @@ default:
                 - sylius.behat.context.transform.customer
                 - sylius.behat.context.transform.date_time
                 - sylius.behat.context.transform.lexical
+                - sylius.behat.context.transform.locale
                 - sylius.behat.context.transform.payment
                 - sylius.behat.context.transform.product
                 - sylius.behat.context.transform.promotion
@@ -23,6 +24,7 @@ default:
                 - sylius.behat.context.setup.channel
                 - sylius.behat.context.setup.customer_group
                 - sylius.behat.context.setup.currency
+                - sylius.behat.context.setup.locale
                 - sylius.behat.context.setup.order
                 - sylius.behat.context.setup.payment
                 - sylius.behat.context.setup.product

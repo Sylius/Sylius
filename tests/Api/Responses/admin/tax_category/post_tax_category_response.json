@@ -1,0 +1,11 @@
+{
+    "@context": "\/api\/v2\/contexts\/TaxCategory",
+    "@id": "\/api\/v2\/admin\/tax-categories\/ultra",
+    "@type": "TaxCategory",
+    "id": "@integer@",
+    "code": "ultra",
+    "name": "Ultra",
+    "description": null,
+    "createdAt": @date@,
+    "updatedAt": @date@
+}

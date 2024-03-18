@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Sylius Sp. z o.o.
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <service id="Sylius\Bundle\CoreBundle\EventListener\Workflow\OrderCheckout\ProcessCartListener">
+            <argument type="service" id="sylius.order_processing.order_processor" />
+            <tag name="kernel.event_listener" event="workflow.sylius_order_checkout.completed.address" priority="200"/>
+            <tag name="kernel.event_listener" event="workflow.sylius_order_checkout.completed.select_shipping"  priority="200"/>
+            <tag name="kernel.event_listener" event="workflow.sylius_order_checkout.completed.skip_shipping" priority="200"/>
+            <tag name="kernel.event_listener" event="workflow.sylius_order_checkout.completed.select_payment" priority="200"/>
+            <tag name="kernel.event_listener" event="workflow.sylius_order_checkout.completed.skip_payment" priority="200"/>
+        </service>
+
+        <service id="Sylius\Bundle\CoreBundle\EventListener\Workflow\OrderCheckout\ApplyCreateTransitionOnOrderListener">
+            <argument type="service" id="sylius_abstraction.state_machine" />
+            <tag name="kernel.event_listener" event="workflow.sylius_order_checkout.completed.complete" priority="400"/>
+        </service>
+
+        <service id="Sylius\Bundle\CoreBundle\EventListener\Workflow\OrderCheckout\SaveCheckoutCompletionDateListener">
+            <tag name="kernel.event_listener" event="workflow.sylius_order_checkout.completed.complete" priority="300"/>
+        </service>
+
+        <service id="Sylius\Bundle\CoreBundle\EventListener\Workflow\OrderCheckout\ResolveOrderCheckoutStateListener">
+            <argument type="service" id="sylius.state_resolver.order_checkout" />
+            <tag name="kernel.event_listener" event="workflow.sylius_order_checkout.completed.address" priority="100"/>
+            <tag name="kernel.event_listener" event="workflow.sylius_order_checkout.completed.select_shipping" priority="100"/>
+        </service>
+
+        <service id="Sylius\Bundle\CoreBundle\EventListener\Workflow\OrderCheckout\ResolveOrderPaymentStateListener">
+            <argument type="service" id="sylius.state_resolver.order_payment" />
+            <tag name="kernel.event_listener" event="workflow.sylius_order_checkout.completed.complete" priority="200"/>
+        </service>
+
+        <service id="Sylius\Bundle\CoreBundle\EventListener\Workflow\OrderCheckout\ResolveOrderShippingStateListener">
+            <argument type="service" id="sylius.state_resolver.order_shipping" />
+            <tag name="kernel.event_listener" event="workflow.sylius_order_checkout.completed.complete" priority="100"/>
+        </service>
+    </services>
+</container>

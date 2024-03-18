@@ -22,7 +22,6 @@ use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Component\Core\Repository\OrderItemRepositoryInterface;
 
-/** @experimental */
 final class OrderItemItemDataProvider implements ItemDataProviderInterface, RestrictedDataProviderInterface
 {
     public function __construct(

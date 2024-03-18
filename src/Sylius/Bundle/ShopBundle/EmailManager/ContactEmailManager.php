@@ -17,6 +17,15 @@ use Sylius\Bundle\CoreBundle\Mailer\Emails;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Mailer\Sender\SenderInterface;
 
+trigger_deprecation(
+    'sylius/shop-bundle',
+    '1.13',
+    'The "%s" class is deprecated, use "%s" instead.',
+    ContactEmailManager::class,
+    \Sylius\Bundle\CoreBundle\Mailer\ContactEmailManager::class,
+);
+
+/** @deprecated since Sylius 1.13 and will be removed in Sylius 2.0. Use {@see \Sylius\Bundle\CoreBundle\Mailer\ContactEmailManager} instead. */
 final class ContactEmailManager implements ContactEmailManagerInterface
 {
     public function __construct(private SenderInterface $emailSender)
@@ -30,15 +39,21 @@ final class ContactEmailManager implements ContactEmailManagerInterface
         ?string $localeCode = null,
     ): void {
         if ($channel === null) {
-            @trigger_error(
-                sprintf('Not passing channel into %s::%s is deprecated since Sylius 1.7', __CLASS__, __METHOD__),
-                \E_USER_DEPRECATED,
+            trigger_deprecation(
+                'sylius/shop-bundle',
+                '1.7',
+                'Not passing a $channel into %s::%s is deprecated.',
+                __CLASS__,
+                __METHOD__,
             );
         }
         if ($localeCode === null) {
-            @trigger_error(
-                sprintf('Not passing locale code into %s::%s is deprecated since Sylius 1.7', __CLASS__, __METHOD__),
-                \E_USER_DEPRECATED,
+            trigger_deprecation(
+                'sylius/shop-bundle',
+                '1.7',
+                'Not passing a $localeCode into %s::%s is deprecated.',
+                __CLASS__,
+                __METHOD__,
             );
         }
 

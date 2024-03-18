@@ -15,7 +15,8 @@ namespace spec\Sylius\Component\Core\StateResolver;
 
 use PhpSpec\ObjectBehavior;
 use SM\Factory\FactoryInterface;
-use SM\StateMachine\StateMachineInterface;
+use SM\StateMachine\StateMachineInterface as WinzouStateMachineInterface;
+use Sylius\Abstraction\StateMachine\StateMachineInterface;
 use Sylius\Component\Core\Checker\OrderPaymentMethodSelectionRequirementCheckerInterface;
 use Sylius\Component\Core\Checker\OrderShippingMethodSelectionRequirementCheckerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
@@ -46,7 +47,7 @@ final class CheckoutStateResolverSpec extends ObjectBehavior
         OrderInterface $order,
         OrderPaymentMethodSelectionRequirementCheckerInterface $orderPaymentMethodSelectionRequirementChecker,
         OrderShippingMethodSelectionRequirementCheckerInterface $orderShippingMethodSelectionRequirementChecker,
-        StateMachineInterface $stateMachine,
+        WinzouStateMachineInterface $stateMachine,
     ): void {
         $orderPaymentMethodSelectionRequirementChecker->isPaymentMethodSelectionRequired($order)->willReturn(false);
 
@@ -63,12 +64,33 @@ final class CheckoutStateResolverSpec extends ObjectBehavior
         $this->resolve($order);
     }
 
+    function it_uses_the_new_state_machine_abstraction_if_passed(
+        StateMachineInterface $stateMachine,
+        OrderPaymentMethodSelectionRequirementCheckerInterface $orderPaymentMethodSelectionRequirementChecker,
+        OrderShippingMethodSelectionRequirementCheckerInterface $orderShippingMethodSelectionRequirementChecker,
+        OrderInterface $order,
+    ): void {
+        $this->beConstructedWith($stateMachine, $orderPaymentMethodSelectionRequirementChecker, $orderShippingMethodSelectionRequirementChecker);
+
+        $orderPaymentMethodSelectionRequirementChecker->isPaymentMethodSelectionRequired($order)->willReturn(false);
+
+        $orderShippingMethodSelectionRequirementChecker->isShippingMethodSelectionRequired($order)->willReturn(false);
+
+        $stateMachine->can($order, OrderCheckoutTransitions::GRAPH, OrderCheckoutTransitions::TRANSITION_SKIP_SHIPPING)->willReturn(true);
+        $stateMachine->apply($order, OrderCheckoutTransitions::GRAPH, OrderCheckoutTransitions::TRANSITION_SKIP_SHIPPING)->shouldBeCalled();
+
+        $stateMachine->can($order, OrderCheckoutTransitions::GRAPH, OrderCheckoutTransitions::TRANSITION_SKIP_PAYMENT)->willReturn(true);
+        $stateMachine->apply($order, OrderCheckoutTransitions::GRAPH, OrderCheckoutTransitions::TRANSITION_SKIP_PAYMENT)->shouldBeCalled();
+
+        $this->resolve($order);
+    }
+
     function it_applies_transition_skip_shipping_if_shipping_method_selection_is_not_required_and_this_transition_is_possible(
         FactoryInterface $stateMachineFactory,
         OrderInterface $order,
         OrderPaymentMethodSelectionRequirementCheckerInterface $orderPaymentMethodSelectionRequirementChecker,
         OrderShippingMethodSelectionRequirementCheckerInterface $orderShippingMethodSelectionRequirementChecker,
-        StateMachineInterface $stateMachine,
+        WinzouStateMachineInterface $stateMachine,
     ): void {
         $orderPaymentMethodSelectionRequirementChecker->isPaymentMethodSelectionRequired($order)->willReturn(true);
 
@@ -90,7 +112,7 @@ final class CheckoutStateResolverSpec extends ObjectBehavior
         OrderInterface $order,
         OrderPaymentMethodSelectionRequirementCheckerInterface $orderPaymentMethodSelectionRequirementChecker,
         OrderShippingMethodSelectionRequirementCheckerInterface $orderShippingMethodSelectionRequirementChecker,
-        StateMachineInterface $stateMachine,
+        WinzouStateMachineInterface $stateMachine,
     ): void {
         $orderPaymentMethodSelectionRequirementChecker->isPaymentMethodSelectionRequired($order)->willReturn(true);
 
@@ -112,7 +134,7 @@ final class CheckoutStateResolverSpec extends ObjectBehavior
         OrderInterface $order,
         OrderPaymentMethodSelectionRequirementCheckerInterface $orderPaymentMethodSelectionRequirementChecker,
         OrderShippingMethodSelectionRequirementCheckerInterface $orderShippingMethodSelectionRequirementChecker,
-        StateMachineInterface $stateMachine,
+        WinzouStateMachineInterface $stateMachine,
     ): void {
         $orderPaymentMethodSelectionRequirementChecker->isPaymentMethodSelectionRequired($order)->willReturn(true);
 
@@ -134,7 +156,7 @@ final class CheckoutStateResolverSpec extends ObjectBehavior
         OrderInterface $order,
         OrderPaymentMethodSelectionRequirementCheckerInterface $orderPaymentMethodSelectionRequirementChecker,
         OrderShippingMethodSelectionRequirementCheckerInterface $orderShippingMethodSelectionRequirementChecker,
-        StateMachineInterface $stateMachine,
+        WinzouStateMachineInterface $stateMachine,
     ): void {
         $orderPaymentMethodSelectionRequirementChecker->isPaymentMethodSelectionRequired($order)->willReturn(false);
 
@@ -156,7 +178,7 @@ final class CheckoutStateResolverSpec extends ObjectBehavior
         OrderInterface $order,
         OrderPaymentMethodSelectionRequirementCheckerInterface $orderPaymentMethodSelectionRequirementChecker,
         OrderShippingMethodSelectionRequirementCheckerInterface $orderShippingMethodSelectionRequirementChecker,
-        StateMachineInterface $stateMachine,
+        WinzouStateMachineInterface $stateMachine,
     ): void {
         $orderPaymentMethodSelectionRequirementChecker->isPaymentMethodSelectionRequired($order)->willReturn(true);
 
@@ -178,7 +200,7 @@ final class CheckoutStateResolverSpec extends ObjectBehavior
         OrderInterface $order,
         OrderPaymentMethodSelectionRequirementCheckerInterface $orderPaymentMethodSelectionRequirementChecker,
         OrderShippingMethodSelectionRequirementCheckerInterface $orderShippingMethodSelectionRequirementChecker,
-        StateMachineInterface $stateMachine,
+        WinzouStateMachineInterface $stateMachine,
     ): void {
         $orderPaymentMethodSelectionRequirementChecker->isPaymentMethodSelectionRequired($order)->willReturn(true);
 

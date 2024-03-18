@@ -39,6 +39,9 @@ sylius_admin_product_update:
             section: admin
             permission: true
             redirect: referer
+            repository:
+                method: findOneByIdHydrated
+                arguments: $id
             template: "@SyliusAdmin/Crud/update.html.twig"
             vars:
                 subheader: sylius.ui.manage_your_product_catalog
@@ -106,3 +109,21 @@ sylius_admin_product_show:
             section: admin
             permission: true
             template: "@SyliusAdmin/Product/show.html.twig"
+
+sylius_admin_channel_pricing_log_entry_index:
+    path: products/{productId}/variants/{variantId}/channel-pricing/{channelPricingId}/channel-pricing-log-entries
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.channel_pricing_log_entry::indexAction
+        _sylius:
+            section: admin
+            permission: true
+            template: '@SyliusAdmin/Crud/index.html.twig'
+            grid: sylius_admin_channel_pricing_log_entry
+            vars:
+                icon: book
+                templates:
+                    breadcrumb: "@SyliusAdmin/ChannelPricingLogEntry/Index/_breadcrumb.html.twig"
+                header: sylius.ui.channel_pricing_history
+                subheader: sylius.ui.show_history_for_channel_pricing
+                product_variant: "expr:service('sylius.repository.product_variant').find($variantId)"

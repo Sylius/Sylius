@@ -17,7 +17,6 @@ use Sylius\Bundle\MoneyBundle\Form\Type\MoneyType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Validator\Constraints\Type;
 
 final class FixedDiscountActionConfigurationType extends AbstractType
 {
@@ -26,9 +25,6 @@ final class FixedDiscountActionConfigurationType extends AbstractType
         $builder
             ->add('amount', MoneyType::class, [
                 'label' => 'sylius.ui.amount',
-                'constraints' => [
-                    new Type(['type' => 'numeric', 'groups' => ['sylius']]),
-                ],
                 'currency' => $options['currency'],
             ])
         ;

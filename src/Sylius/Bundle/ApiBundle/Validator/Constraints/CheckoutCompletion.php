@@ -15,7 +15,6 @@ namespace Sylius\Bundle\ApiBundle\Validator\Constraints;
 
 use Symfony\Component\Validator\Constraint;
 
-/** @experimental */
 class CheckoutCompletion extends Constraint
 {
     public string $message = 'sylius.order.invalid_state_transition';

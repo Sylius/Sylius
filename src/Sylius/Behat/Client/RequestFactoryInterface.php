@@ -22,11 +22,15 @@ interface RequestFactoryInterface
         ?string $token = null,
     ): RequestInterface;
 
+    /**
+     * @param array<string, mixed> $queryParameters
+     */
     public function subResourceIndex(
         string $section,
         string $resource,
         string $id,
         string $subResource,
+        array $queryParameters = [],
     ): RequestInterface;
 
     public function show(

@@ -10,7 +10,7 @@ Feature: Editing a product
         And I am logged in as an administrator
 
     @ui @api
-    Scenario: Seeing disabled code field when editing product
+    Scenario: Being unable to change code of an existing product
         When I want to modify the "Dice Brewing" product
         Then I should not be able to edit its code
 
@@ -58,7 +58,7 @@ Feature: Editing a product
         Then I should be notified that it has been successfully edited
         And this product name should be "Sobieski Vodka"
 
-    @ui
+    @ui @api
     Scenario: Renaming a configurable product with option
         Given the store has a "Wyborowa Vodka" configurable product
         And the store has a product option "Bottle size" with a code "bottle_size"
@@ -81,23 +81,24 @@ Feature: Editing a product
         Then I should be notified that it has been successfully edited
         And this product should have a "T-Shirt color" option
 
-    @ui
-    Scenario: Seeing disabled option field when editing product
+    @ui @api
+    Scenario: Being unable to change options of an existing product
         Given the store has a "Marvel's T-Shirt" configurable product
         And the store has a product option "T-Shirt size" with a code "t_shirt_size"
         And this product has this product option
+        And the store has also a product option "T-Shirt color"
         And the product "Marvel's T-Shirt" has "Iron Man T-Shirt" variant priced at "$40.00"
         When I want to modify the "Marvel's T-Shirt" product
-        Then the option field should be disabled
+        Then I should not be able to edit its options
 
-    @ui
+    @ui @api
     Scenario: Enabling product in channel when all its variants already have specified price in this channel
         Given the store operates on another channel named "Mobile"
         And the store has a "7 Wonders" configurable product
-        And this product has "7 Wonders: Cities" variant priced at "$30" in "United States" channel
-        And this variant is also priced at "$25" in "Mobile" channel
-        And this product has "7 Wonders: Leaders" variant priced at "$20" in "United States" channel
-        And this variant is also priced at "$20" in "Mobile" channel
+        And this product has "7 Wonders: Cities" variant priced at "$30.00" in "United States" channel
+        And this variant is also priced at "$25.00" in "Mobile" channel
+        And this product has "7 Wonders: Leaders" variant priced at "$20.00" in "United States" channel
+        And this variant is also priced at "$20.00" in "Mobile" channel
         When I want to modify the "7 Wonders" product
         And I assign it to channel "Mobile"
         And I save my changes

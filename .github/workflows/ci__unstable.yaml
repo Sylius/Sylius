@@ -19,6 +19,9 @@ concurrency:
     group: ci-${{ github.workflow }}-${{ github.ref }}-unstable
     cancel-in-progress: true
 
+permissions:
+    contents: read
+
 jobs:
     e2e-unstable:
         name: End-to-end tests (Unstable)

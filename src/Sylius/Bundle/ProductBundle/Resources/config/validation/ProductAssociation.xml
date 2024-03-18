@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Sylius Sp. z o.o.
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<constraint-mapping xmlns="http://symfony.com/schema/dic/constraint-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/constraint-mapping http://symfony.com/schema/dic/services/constraint-mapping-1.0.xsd">
+    <class name="Sylius\Component\Product\Model\ProductAssociation">
+        <constraint name="Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity">
+            <option name="fields">
+                <value>owner</value>
+                <value>type</value>
+            </option>
+            <option name="errorPath">owner</option>
+            <option name="message">sylius.association.unique</option>
+            <option name="groups">sylius</option>
+        </constraint>
+        <property name="type">
+            <constraint name="NotBlank">
+                <option name="message">sylius.association.type.not_blank</option>
+                <option name="groups">sylius</option>
+            </constraint>
+        </property>
+        <property name="owner">
+            <constraint name="NotBlank">
+                <option name="message">sylius.association.owner.not_blank</option>
+                <option name="groups">sylius</option>
+            </constraint>
+        </property>
+    </class>
+</constraint-mapping>

@@ -114,6 +114,13 @@ final class Request implements RequestInterface
     private function mergeArraysUniquely(array $firstArray, array $secondArray): array
     {
         foreach ($secondArray as $key => $value) {
+            if (is_string($key) && str_ends_with($key, '[]')) {
+                $key = substr($key, 0, -2);
+                $firstArray[$key][] = $value;
+
+                continue;
+            }
+
             if (is_array($value) && is_array(@$firstArray[$key])) {
                 $value = $this->mergeArraysUniquely($firstArray[$key], $value);
             }

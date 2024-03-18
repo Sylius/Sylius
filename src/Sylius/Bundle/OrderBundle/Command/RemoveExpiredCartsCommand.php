@@ -13,35 +13,18 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\OrderBundle\Command;
 
-use SyliusLabs\Polyfill\Symfony\FrameworkBundle\Command\ContainerAwareCommand;
-use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Output\OutputInterface;
+trigger_deprecation(
+    'sylius/order-bundle',
+    '1.13',
+    'The "%s" class is deprecated and will be removed in Sylius 2.0. Use "%s" instead.',
+    RemoveExpiredCartsCommand::class,
+    \Sylius\Bundle\OrderBundle\Console\Command\RemoveExpiredCartsCommand::class,
+);
 
-/**
- * @final
- */
-class RemoveExpiredCartsCommand extends ContainerAwareCommand
-{
-    protected static $defaultName = 'sylius:remove-expired-carts';
+class_exists(\Sylius\Bundle\OrderBundle\Console\Command\RemoveExpiredCartsCommand::class);
 
-    protected function configure(): void
+if (false) {
+    final class RemoveExpiredCartsCommand
     {
-        $this
-            ->setDescription('Removes carts that have been idle for a period set in `sylius_order.expiration.cart` configuration key.')
-        ;
-    }
-
-    protected function execute(InputInterface $input, OutputInterface $output)
-    {
-        $expirationTime = $this->getContainer()->getParameter('sylius_order.cart_expiration_period');
-        $output->writeln(sprintf(
-            'Command will remove carts that have been idle for <info>%s</info>.',
-            (string) $expirationTime,
-        ));
-
-        $expiredCartsRemover = $this->getContainer()->get('sylius.expired_carts_remover');
-        $expiredCartsRemover->remove();
-
-        return 0;
     }
 }

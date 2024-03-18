@@ -20,7 +20,6 @@ use Sylius\Component\Order\Model\OrderInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 
-/** @experimental */
 final class TokenValueBasedCartContext implements CartContextInterface
 {
     public function __construct(

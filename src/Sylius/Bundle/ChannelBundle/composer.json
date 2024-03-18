@@ -25,20 +25,20 @@
         }
     ],
     "require": {
-        "php": "^8.0",
-        "sylius/channel": "^1.12",
+        "php": "^8.1",
+        "sylius/channel": "^1.13",
         "sylius/resource-bundle": "^1.9",
-        "symfony/framework-bundle": "^5.4 || ^6.0"
+        "symfony/framework-bundle": "^5.4.21 || ^6.4"
     },
     "require-dev": {
         "doctrine/orm": "^2.13",
         "matthiasnoback/symfony-dependency-injection-test": "^4.2",
         "phpspec/phpspec": "^7.2",
-        "phpunit/phpunit": "^8.5",
+        "phpunit/phpunit": "^9.5",
         "polishsymfonycommunity/symfony-mocker-container": "^1.0",
-        "symfony/browser-kit": "^5.4 || ^6.0",
-        "symfony/dependency-injection": "^5.4 || ^6.0",
-        "symfony/form": "^5.4 || ^6.0",
+        "symfony/browser-kit": "^5.4.21 || ^6.4",
+        "symfony/dependency-injection": "^5.4.21 || ^6.4",
+        "symfony/form": "^5.4.21 || ^6.4",
         "twig/twig": "^2.12 || ^3.3"
     },
     "conflict": {
@@ -51,7 +51,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-main": "1.12-dev"
+            "dev-main": "1.13-dev"
         }
     },
     "autoload": {
@@ -61,7 +61,8 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Sylius\\Bundle\\ChannelBundle\\spec\\": "spec/"
+            "Sylius\\Bundle\\ChannelBundle\\spec\\": "spec/",
+            "Sylius\\Bundle\\ChannelBundle\\Tests\\": "Tests/"
         },
         "classmap": [
             "test/app/AppKernel.php"

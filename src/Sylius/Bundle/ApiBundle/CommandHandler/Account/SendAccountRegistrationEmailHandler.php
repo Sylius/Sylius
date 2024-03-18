@@ -14,20 +14,19 @@ declare(strict_types=1);
 namespace Sylius\Bundle\ApiBundle\CommandHandler\Account;
 
 use Sylius\Bundle\ApiBundle\Command\Account\SendAccountRegistrationEmail;
-use Sylius\Bundle\CoreBundle\Mailer\Emails;
+use Sylius\Bundle\CoreBundle\Mailer\AccountRegistrationEmailManagerInterface;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
+use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
-use Sylius\Component\Mailer\Sender\SenderInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 
-/** @experimental  */
 final class SendAccountRegistrationEmailHandler implements MessageHandlerInterface
 {
     public function __construct(
         private UserRepositoryInterface $shopUserRepository,
         private ChannelRepositoryInterface $channelRepository,
-        private SenderInterface $emailSender,
+        private AccountRegistrationEmailManagerInterface $accountRegistrationEmailManager,
     ) {
     }
 
@@ -36,12 +35,13 @@ final class SendAccountRegistrationEmailHandler implements MessageHandlerInterfa
         /** @var ShopUserInterface $shopUser */
         $shopUser = $this->shopUserRepository->findOneByEmail($command->shopUserEmail);
 
+        /** @var ChannelInterface $channel */
         $channel = $this->channelRepository->findOneByCode($command->channelCode);
 
-        $this->emailSender->send(
-            Emails::USER_REGISTRATION,
-            [$command->shopUserEmail],
-            ['user' => $shopUser, 'localeCode' => $command->localeCode, 'channel' => $channel],
-        );
+        if ($channel->isAccountVerificationRequired() && !$shopUser->isEnabled()) {
+            return;
+        }
+
+        $this->accountRegistrationEmailManager->sendAccountRegistrationEmail($shopUser, $channel, $command->localeCode);
     }
 }

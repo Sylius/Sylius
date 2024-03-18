@@ -395,7 +395,6 @@ final class ManagingCatalogPromotionsContext implements Context
     public function iEditCatalogPromotionToHaveDiscount(CatalogPromotionInterface $catalogPromotion, string $amount): void
     {
         $this->updatePage->open(['id' => $catalogPromotion->getId()]);
-        $this->formElement->addAction();
         $this->formElement->specifyLastActionDiscount($amount);
         $this->updatePage->saveChanges();
     }
@@ -494,7 +493,7 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
-     * @When I add fixed discount action without amount configured
+     * @When I add fixed discount action without amount configured for the :channel channel
      */
     public function iAddFixedDiscountActionWithoutAmountConfigured(): void
     {
@@ -701,25 +700,32 @@ final class ManagingCatalogPromotionsContext implements Context
      */
     public function iShouldBeNotifiedThatADiscountAmountShouldBeBetween0And100Percent(): void
     {
-        Assert::same($this->formElement->getValidationMessage(), 'The percentage discount amount must be between 0% and 100%.');
+        Assert::same(
+            $this->formElement->getValidationMessage(),
+            'The percentage discount amount must be between 0% and 100%.',
+        );
     }
 
     /**
-     * @Then I should be notified that a discount amount should be a number and cannot be empty
+     * @Then I should be notified that the percentage amount should be a number and cannot be empty
      */
-    public function iShouldBeNotifiedThatADiscountAmountShouldBeANumber(): void
+    public function iShouldBeNotifiedThatThePercentageAmountShouldBeANumber(): void
     {
-        Assert::same($this->formElement->getValidationMessage(), 'The percentage discount amount must be a number and can not be empty.');
+        Assert::same(
+            $this->formElement->getValidationMessage(),
+            'The percentage discount amount must be a number and can not be empty.',
+        );
     }
 
     /**
-     * @Then I should be notified that a discount amount should be configured for at least one channel
+     * @Then I should be notified that the fixed amount should be a number and cannot be empty
      */
-    public function iShouldBeNotifiedThatADiscountAmountShouldBeConfiguredForAtLeasOneChannel(): void
+    public function iShouldBeNotifiedThatTheFixedAmountShouldBeANumber(): void
     {
-        Assert::true($this->formElement->hasOnlyOneValidationMessage(
-            'Configuration for one of the required channels is not provided.',
-        ));
+        Assert::same(
+            $this->formElement->getValidationMessage(),
+            'Provided configuration contains errors. Please add the fixed discount amount that is a number greater than 0.',
+        );
     }
 
     /**
@@ -1184,7 +1190,10 @@ final class ManagingCatalogPromotionsContext implements Context
      */
     public function iShouldBeNotifiedThatNotAllChannelsAreFilled(): void
     {
-        Assert::same($this->formElement->getValidationMessage(), 'Configuration for one of the required channels is not provided.');
+        Assert::contains(
+            $this->formElement->getValidationMessage(),
+            'Provided configuration contains errors. Please add the fixed discount amount that is a number greater than 0.',
+        );
     }
 
     /**
@@ -1200,7 +1209,10 @@ final class ManagingCatalogPromotionsContext implements Context
      */
     public function iShouldSeeTheCatalogPromotionScopeConfigurationForm(): void
     {
-        Assert::true($this->createPage->checkIfScopeConfigurationFormIsVisible(), 'Catalog promotion scope configuration form is not visible.');
+        Assert::true(
+            $this->createPage->checkIfScopeConfigurationFormIsVisible(),
+            'Catalog promotion scope configuration form is not visible.',
+        );
     }
 
     /**
@@ -1208,7 +1220,10 @@ final class ManagingCatalogPromotionsContext implements Context
      */
     public function iShouldSeeTheCatalogPromotionActionConfigurationForm(): void
     {
-        Assert::true($this->createPage->checkIfActionConfigurationFormIsVisible(), 'Catalog promotion action configuration form is not visible.');
+        Assert::true(
+            $this->createPage->checkIfActionConfigurationFormIsVisible(),
+            'Catalog promotion action configuration form is not visible.',
+        );
     }
 
     /**

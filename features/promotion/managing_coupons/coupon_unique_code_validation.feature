@@ -9,7 +9,7 @@ Feature: Coupon unique code validation
         And the store has promotion "Christmas sale" with coupon "SANTA2016"
         And I am logged in as an administrator
 
-    @ui
+    @api @ui
     Scenario: Trying to add coupon with taken code
         When I want to create a new coupon for this promotion
         And I specify its code as "SANTA2016"

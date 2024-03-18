@@ -18,6 +18,11 @@ use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ShippingMethodInterface;
 use Sylius\Component\Shipping\Repository\ShippingMethodRepositoryInterface as BaseShippingMethodRepositoryInterface;
 
+/**
+ * @template T of ShippingMethodInterface
+ *
+ * @extends BaseShippingMethodRepositoryInterface<T>
+ */
 interface ShippingMethodRepositoryInterface extends BaseShippingMethodRepositoryInterface
 {
     public function createListQueryBuilder(string $locale): QueryBuilder;

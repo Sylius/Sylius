@@ -15,18 +15,31 @@ namespace Sylius\Component\Core\StateResolver;
 
 use Doctrine\Common\Collections\Collection;
 use SM\Factory\FactoryInterface;
-use SM\StateMachine\StateMachineInterface;
+use Sylius\Abstraction\StateMachine\StateMachineInterface;
+use Sylius\Abstraction\StateMachine\WinzouStateMachineAdapter;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\PaymentInterface;
 use Sylius\Component\Core\OrderPaymentTransitions;
 use Sylius\Component\Order\Model\OrderInterface as BaseOrderInterface;
 use Sylius\Component\Order\StateResolver\StateResolverInterface;
+use Sylius\Component\Payment\Model\PaymentInterface as BasePaymentInterface;
 use Webmozart\Assert\Assert;
 
 final class OrderPaymentStateResolver implements StateResolverInterface
 {
-    public function __construct(private FactoryInterface $stateMachineFactory)
+    public function __construct(private FactoryInterface|StateMachineInterface $stateMachineFactory)
     {
+        if ($this->stateMachineFactory instanceof FactoryInterface) {
+            trigger_deprecation(
+                'sylius/core',
+                '1.13',
+                sprintf(
+                    'Passing an instance of "%s" as the first argument is deprecated. It will accept only instances of "%s" in Sylius 2.0.',
+                    FactoryInterface::class,
+                    StateMachineInterface::class,
+                ),
+            );
+        }
     }
 
     public function resolve(BaseOrderInterface $order): void
@@ -34,18 +47,13 @@ final class OrderPaymentStateResolver implements StateResolverInterface
         /** @var OrderInterface $order */
         Assert::isInstanceOf($order, OrderInterface::class);
 
-        $stateMachine = $this->stateMachineFactory->get($order, OrderPaymentTransitions::GRAPH);
         $targetTransition = $this->getTargetTransition($order);
+        $stateMachine = $this->getStateMachine();
 
         if (null !== $targetTransition) {
-            $this->applyTransition($stateMachine, $targetTransition);
-        }
-    }
-
-    private function applyTransition(StateMachineInterface $stateMachine, string $transition): void
-    {
-        if ($stateMachine->can($transition)) {
-            $stateMachine->apply($transition);
+            if ($stateMachine->can($order, OrderPaymentTransitions::GRAPH, $targetTransition)) {
+                $stateMachine->apply($order, OrderPaymentTransitions::GRAPH, $targetTransition);
+            }
         }
     }
 
@@ -121,11 +129,20 @@ final class OrderPaymentStateResolver implements StateResolverInterface
     private function getPaymentsWithState(OrderInterface $order, string $state): Collection
     {
         /** @var Collection<array-key, PaymentInterface> $payments */
-        $payments = $order->getPayments()->filter(function (PaymentInterface $payment) use ($state) {
+        $payments = $order->getPayments()->filter(function (BasePaymentInterface $payment) use ($state) {
             return $state === $payment->getState();
         });
         Assert::allIsInstanceOf($payments, PaymentInterface::class);
 
         return $payments;
+    }
+
+    private function getStateMachine(): StateMachineInterface
+    {
+        if ($this->stateMachineFactory instanceof FactoryInterface) {
+            return new WinzouStateMachineAdapter($this->stateMachineFactory);
+        }
+
+        return $this->stateMachineFactory;
     }
 }

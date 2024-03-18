@@ -25,6 +25,7 @@ final class ProductAssociationTypeContext implements Context
 
     /**
      * @Transform /^association "([^"]+)"$/
+     * @Transform /^associate as "([^"]+)"$/
      * @Transform :productAssociationType
      */
     public function getProductAssociationTypeByName($productAssociationTypeName)

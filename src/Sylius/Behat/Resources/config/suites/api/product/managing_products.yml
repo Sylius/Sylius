@@ -17,7 +17,9 @@ default:
                 - sylius.behat.context.transform.payment
                 - sylius.behat.context.transform.product
                 - sylius.behat.context.transform.product_association_type
+                - sylius.behat.context.transform.product_attribute
                 - sylius.behat.context.transform.product_option
+                - sylius.behat.context.transform.product_variant
                 - sylius.behat.context.transform.shared_storage
                 - sylius.behat.context.transform.shipping_method
                 - sylius.behat.context.transform.taxon
@@ -42,7 +44,12 @@ default:
                 - sylius.behat.context.setup.taxonomy
                 - sylius.behat.context.setup.zone
 
+                - sylius.behat.context.api.admin.managing_product_associations
+                - sylius.behat.context.api.admin.managing_product_images
                 - sylius.behat.context.api.admin.managing_products
+                - sylius.behat.context.api.admin.response
+                - sylius.behat.context.api.admin.save
+                - Sylius\Behat\Context\Api\Admin\ManagingProductTaxonsContext
 
             filters:
                 tags: "@managing_products&&@api"

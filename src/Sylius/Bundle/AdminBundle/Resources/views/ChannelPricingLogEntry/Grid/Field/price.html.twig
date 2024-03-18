@@ -1,0 +1,6 @@
+{% import "@SyliusAdmin/Common/Macro/money.html.twig" as money %}
+
+{% set currencies = sylius_channels_currencies() %}
+{% set channel_code = data.channelPricing.channelCode %}
+
+{{ money.format(data.price, currencies[channel_code]) }}

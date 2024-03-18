@@ -16,6 +16,12 @@
            xsi:schemaLocation="https://api-platform.com/schema/metadata https://api-platform.com/schema/metadata/metadata-2.0.xsd"
 >
     <resource class="%sylius.model.payment_method.class%" shortName="PaymentMethod">
+        <attribute name="validation_groups">Sylius\Bundle\PayumBundle\Validator\GroupsGenerator\GatewayConfigGroupsGenerator</attribute>
+
+        <attribute name="order">
+            <attribute name="position">ASC</attribute>
+        </attribute>
+
         <collectionOperations>
             <collectionOperation name="shop_get">
                 <attribute name="method">GET</attribute>
@@ -26,7 +32,40 @@
                 </attribute>
                 <attribute name="normalization_context">
                     <attribute name="groups">
-                        <attribute>shop:payment_method:read</attribute>
+                        <attribute>shop:payment_method:index</attribute>
+                        <attribute>sylius:shop:payment_method:index</attribute>
+                    </attribute>
+                </attribute>
+            </collectionOperation>
+
+            <collectionOperation name="admin_get">
+                <attribute name="method">GET</attribute>
+                <attribute name="path">/admin/payment-methods</attribute>
+                <attribute name="filters">
+                    <attribute>sylius.api.payment_method_order_filter</attribute>
+                    <attribute>Sylius\Bundle\ApiBundle\Filter\Doctrine\TranslationOrderNameAndLocaleFilter</attribute>
+                </attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">
+                        <attribute>admin:payment_method:index</attribute>
+                        <attribute>sylius:admin:payment_method:index</attribute>
+                    </attribute>
+                </attribute>
+            </collectionOperation>
+
+            <collectionOperation name="admin_post">
+                <attribute name="method">POST</attribute>
+                <attribute name="path">/admin/payment-methods</attribute>
+                <attribute name="denormalization_context">
+                    <attribute name="groups">
+                        <attribute>admin:payment_method:create</attribute>
+                        <attribute>sylius:admin:payment_method:create</attribute>
+                    </attribute>
+                </attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">
+                        <attribute>admin:payment_method:show</attribute>
+                        <attribute>sylius:admin:payment_method:show</attribute>
                     </attribute>
                 </attribute>
             </collectionOperation>
@@ -37,21 +76,73 @@
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/admin/payment-methods/{code}</attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:payment_method:read</attribute>
+                    <attribute name="groups">
+                        <attribute>admin:payment_method:show</attribute>
+                        <attribute>sylius:admin:payment_method:show</attribute>
+                    </attribute>
                 </attribute>
+            </itemOperation>
+
+            <itemOperation name="admin_put">
+                <attribute name="method">PUT</attribute>
+                <attribute name="path">/admin/payment-methods/{code}</attribute>
+                <attribute name="denormalization_context">
+                    <attribute name="groups">
+                        <attribute>admin:payment_method:update</attribute>
+                        <attribute>sylius:admin:payment_method:update</attribute>
+                    </attribute>
+                </attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">
+                        <attribute>admin:payment_method:show</attribute>
+                        <attribute>sylius:admin:payment_method:show</attribute>
+                    </attribute>
+                </attribute>
+            </itemOperation>
+
+            <itemOperation name="admin_delete">
+                <attribute name="method">DELETE</attribute>
+                <attribute name="path">/admin/payment-methods/{code}</attribute>
             </itemOperation>
 
             <itemOperation name="shop_get">
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/shop/payment-methods/{code}</attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">shop:payment_method:read</attribute>
+                    <attribute name="groups">
+                        <attribute>shop:payment_method:show</attribute>
+                        <attribute>sylius:shop:payment_method:show</attribute>
+                    </attribute>
                 </attribute>
             </itemOperation>
         </itemOperations>
 
+        <subresourceOperations>
+            <subresourceOperation name="gateway_config_get_subresource">
+                <attribute name="method">GET</attribute>
+                <attribute name="path">/admin/payment-methods/{code}/gateway-config</attribute>
+            </subresourceOperation>
+        </subresourceOperations>
+
         <property name="id" identifier="false" writable="false" />
-        <property name="code" identifier="true" writable="false" />
+        <property name="code" identifier="true" required="true" />
         <property name="name" writable="true" />
+        <property name="channels" writable="true" />
+        <property name="enabled" writable="true" />
+        <property name="gatewayConfig" readable="true" writable="true">
+            <subresource resourceClass="%sylius.model.gateway_config.class%" collection="false" />
+        </property>
+        <property name="translations" readable="true" writable="true">
+            <attribute name="openapi_context">
+                <attribute name="type">object</attribute>
+                <attribute name="example">
+                    <attribute name="en_US">
+                        <attribute name="name">string</attribute>
+                        <attribute name="description">string</attribute>
+                        <attribute name="instructions">string</attribute>
+                    </attribute>
+                </attribute>
+            </attribute>
+        </property>
     </resource>
 </resources>

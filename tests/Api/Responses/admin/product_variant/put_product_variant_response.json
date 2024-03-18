@@ -1,0 +1,58 @@
+{
+    "@context": "\/api\/v2\/contexts\/ProductVariant",
+    "@id": "\/api\/v2\/admin\/product-variants\/MUG",
+    "@type": "ProductVariant",
+    "code": "MUG",
+    "product": "\/api\/v2\/admin\/products\/MUG_SW",
+    "optionValues":[
+        "\/api\/v2\/admin\/product-option-values\/COLOR_RED"
+    ],
+    "channelPricings": {
+        "WEB": {
+            "@id": "\/api\/v2\/admin\/channel-pricings\/@integer@",
+            "@type": "ChannelPricing",
+            "price": 3000,
+            "originalPrice": 4000,
+            "lowestPriceBeforeDiscount": 2000,
+            "minimumPrice": 500,
+            "appliedPromotions": []
+        },
+        "MOBILE": {
+            "@id": "\/api\/v2\/admin\/channel-pricings\/@integer@",
+            "@type": "ChannelPricing",
+            "price": 5000,
+            "originalPrice": 5000,
+            "lowestPriceBeforeDiscount": null,
+            "minimumPrice": 1000,
+            "appliedPromotions": []
+        }
+    },
+    "translations": {
+        "de_DE": {
+            "@id": "\/api\/v2\/admin\/product-variant-translations\/@integer@",
+            "@type": "ProductVariantTranslation",
+            "id": @integer@,
+            "name": "Rote Tasse"
+        },
+        "en_US": {
+            "@id": "\/api\/v2\/admin\/product-variant-translations\/@integer@",
+            "@type": "ProductVariantTranslation",
+            "id": @integer@,
+            "name": "Red mug"
+        }
+    },
+    "enabled": false,
+    "position": 2,
+    "tracked": false,
+    "onHold": 0,
+    "onHand": 0,
+    "weight": 50.5,
+    "width": 50.5,
+    "height": 50.5,
+    "depth": 50.5,
+    "taxCategory": "\/api\/v2\/admin\/tax-categories\/special",
+    "shippingCategory": "\/api\/v2\/admin\/shipping-categories\/special",
+    "shippingRequired": false,
+    "createdAt": @date@,
+    "updatedAt": @date@
+}

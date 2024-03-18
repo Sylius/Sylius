@@ -18,6 +18,13 @@
             <option name="message">sylius.product_variant.code.unique</option>
             <option name="groups">sylius</option>
         </constraint>
+        <constraint name="Sylius\Bundle\ProductBundle\Validator\Constraint\ProductVariantCombination">
+            <option name="groups">sylius</option>
+        </constraint>
+        <constraint name="Sylius\Bundle\ProductBundle\Validator\Constraint\ProductVariantOptionValuesConfiguration">
+            <option name="groups">sylius</option>
+        </constraint>
+
         <property name="code">
             <constraint name="NotBlank">
                 <option name="message">sylius.product_variant.code.not_blank</option>
@@ -29,8 +36,13 @@
                 <option name="groups">sylius</option>
             </constraint>
         </property>
-        <constraint name="Sylius\Bundle\ProductBundle\Validator\Constraint\ProductVariantCombination">
-            <option name="groups">sylius</option>
-        </constraint>
+        <property name="product">
+            <constraint name="NotBlank">
+                <option name="groups">sylius</option>
+            </constraint>
+        </property>
+        <property name="translations">
+            <constraint name="Valid" />
+        </property>
     </class>
 </constraint-mapping>

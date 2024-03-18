@@ -13,14 +13,11 @@ declare(strict_types=1);
 
 namespace Sylius\Tests\Controller;
 
-use ApiTestCase\JsonApiTestCase;
 use Symfony\Component\BrowserKit\Cookie;
-use Symfony\Component\HttpFoundation\Exception\SessionNotFoundException;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 
-final class AdminProductVariantAjaxTest extends SessionAwareAjaxTest
+final class AdminProductVariantAjaxTest extends SessionAwareAjaxTestCase
 {
     /** @test */
     public function it_denies_access_to_product_variants_for_not_authenticated_user(): void

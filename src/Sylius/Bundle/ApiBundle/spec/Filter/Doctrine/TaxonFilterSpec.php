@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace spec\Sylius\Bundle\ApiBundle\Filter\Doctrine;
 
-use ApiPlatform\Core\Api\IriConverterInterface;
+use ApiPlatform\Api\IriConverterInterface;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Util\QueryNameGeneratorInterface;
 use ApiPlatform\Core\Exception\InvalidArgumentException;
 use ApiPlatform\Core\Exception\ItemNotFoundException;
@@ -36,7 +36,7 @@ final class TaxonFilterSpec extends ObjectBehavior
         QueryBuilder $queryBuilder,
         QueryNameGeneratorInterface $queryNameGenerator,
     ): void {
-        $iriConverter->getItemFromIri('api/taxon')->willReturn($taxon);
+        $iriConverter->getResourceFromIri('api/taxon')->willReturn($taxon);
         $queryBuilder->getRootAliases()->willReturn(['o']);
 
         $queryBuilder->distinct()->willReturn($queryBuilder);
@@ -72,7 +72,7 @@ final class TaxonFilterSpec extends ObjectBehavior
         QueryNameGeneratorInterface $queryNameGenerator,
     ): void {
         $context['filters']['order'] = ['differentOrderParameter' => 'asc'];
-        $iriConverter->getItemFromIri('api/taxon')->willReturn($taxon);
+        $iriConverter->getResourceFromIri('api/taxon')->willReturn($taxon);
         $queryBuilder->getRootAliases()->willReturn(['o']);
 
         $queryBuilder->distinct()->willReturn($queryBuilder);
@@ -103,7 +103,7 @@ final class TaxonFilterSpec extends ObjectBehavior
         QueryBuilder $queryBuilder,
         QueryNameGeneratorInterface $queryNameGenerator,
     ): void {
-        $iriConverter->getItemFromIri('api/taxon')->willThrow(ItemNotFoundException::class);
+        $iriConverter->getResourceFromIri('api/taxon')->willThrow(ItemNotFoundException::class);
         $queryBuilder->getRootAliases()->willReturn(['o']);
 
         $queryBuilder->distinct()->willReturn($queryBuilder);
@@ -131,7 +131,7 @@ final class TaxonFilterSpec extends ObjectBehavior
         QueryBuilder $queryBuilder,
         QueryNameGeneratorInterface $queryNameGenerator,
     ): void {
-        $iriConverter->getItemFromIri('non-existing-taxon')->willThrow(InvalidArgumentException::class);
+        $iriConverter->getResourceFromIri('non-existing-taxon')->willThrow(InvalidArgumentException::class);
         $queryBuilder->getRootAliases()->willReturn(['o']);
 
         $queryBuilder->distinct()->willReturn($queryBuilder);

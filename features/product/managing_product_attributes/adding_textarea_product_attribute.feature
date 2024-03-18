@@ -8,7 +8,7 @@ Feature: Adding a new textarea product attribute
         Given the store is available in "English (United States)"
         And I am logged in as an administrator
 
-    @ui
+    @ui @api
     Scenario: Adding a new textarea product attribute
         When I want to create a new textarea product attribute
         And I specify its code as "t_shirt_details"
@@ -17,7 +17,7 @@ Feature: Adding a new textarea product attribute
         Then I should be notified that it has been successfully created
         And the textarea attribute "T-Shirt details" should appear in the store
 
-    @ui
+    @ui @no-api
     Scenario: Seeing disabled type field while adding a textarea product attribute
         When I want to create a new textarea product attribute
         Then the type field should be disabled

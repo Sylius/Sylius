@@ -33,12 +33,12 @@
         }
     ],
     "require": {
-        "php": "^8.0",
+        "php": "^8.1",
         "doctrine/collections": "^1.6",
         "sylius-labs/polyfill-symfony-security": "^1.1",
         "sylius/resource": "^1.9",
         "symfony/polyfill-mbstring": "^1.17",
-        "symfony/security-core": "^5.4 || ^6.0"
+        "symfony/security-core": "^5.4.21 || ^6.4"
     },
     "require-dev": {
         "phpspec/phpspec": "^7.2"
@@ -53,7 +53,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-main": "1.12-dev"
+            "dev-main": "1.13-dev"
         }
     },
     "autoload": {
