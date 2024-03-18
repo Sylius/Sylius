@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace spec\Sylius\Bundle\ApiBundle\DataPersister;
 
 use ApiPlatform\Core\DataPersister\ContextAwareDataPersisterInterface;
+use ApiPlatform\Core\DataPersister\ResumableDataPersisterInterface;
 use PhpSpec\ObjectBehavior;
 use stdClass;
 use Sylius\Bundle\ApiBundle\Exception\LocaleIsUsedException;
@@ -27,6 +28,11 @@ final class LocaleDataPersisterSpec extends ObjectBehavior
         LocaleUsageCheckerInterface $localeUsageChecker,
     ): void {
         $this->beConstructedWith($decoratedDataPersister, $localeUsageChecker);
+    }
+
+    function it_is_a_resumable_data_persister(): void
+    {
+        $this->shouldImplement(ResumableDataPersisterInterface::class);
     }
 
     public function it_supports_only_locale_interface(): void
@@ -73,5 +79,10 @@ final class LocaleDataPersisterSpec extends ObjectBehavior
             ->shouldThrow(LocaleIsUsedException::class)
             ->during('remove', [$locale])
         ;
+    }
+
+    function it_is_resumable(): void
+    {
+        $this->resumable()->shouldReturn(true);
     }
 }
