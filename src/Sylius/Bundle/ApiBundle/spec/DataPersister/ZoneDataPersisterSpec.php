@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace spec\Sylius\Bundle\ApiBundle\DataPersister;
 
 use ApiPlatform\Core\DataPersister\ContextAwareDataPersisterInterface;
+use ApiPlatform\Core\DataPersister\ResumableDataPersisterInterface;
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ApiBundle\Exception\ZoneCannotBeRemoved;
 use Sylius\Component\Addressing\Checker\ZoneDeletionCheckerInterface;
@@ -27,6 +28,11 @@ final class ZoneDataPersisterSpec extends ObjectBehavior
         ZoneDeletionCheckerInterface $zoneDeletionChecker,
     ): void {
         $this->beConstructedWith($decoratedDataPersister, $zoneDeletionChecker);
+    }
+
+    function it_is_a_resumable_data_persister(): void
+    {
+        $this->shouldImplement(ResumableDataPersisterInterface::class);
     }
 
     function it_supports_only_zone_entity(ZoneInterface $zone, ProductInterface $product): void
@@ -69,5 +75,10 @@ final class ZoneDataPersisterSpec extends ObjectBehavior
             ->shouldThrow(ZoneCannotBeRemoved::class)
             ->during('remove', [$zone, []])
         ;
+    }
+
+    function it_is_resumable(): void
+    {
+        $this->resumable()->shouldReturn(true);
     }
 }

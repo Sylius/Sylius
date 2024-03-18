@@ -14,11 +14,12 @@ declare(strict_types=1);
 namespace Sylius\Bundle\ApiBundle\DataPersister;
 
 use ApiPlatform\Core\DataPersister\ContextAwareDataPersisterInterface;
+use ApiPlatform\Core\DataPersister\ResumableDataPersisterInterface;
 use Sylius\Bundle\ApiBundle\Exception\ZoneCannotBeRemoved;
 use Sylius\Component\Addressing\Checker\ZoneDeletionCheckerInterface;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 
-final class ZoneDataPersister implements ContextAwareDataPersisterInterface
+final class ZoneDataPersister implements ContextAwareDataPersisterInterface, ResumableDataPersisterInterface
 {
     public function __construct(
         private ContextAwareDataPersisterInterface $decoratedDataPersister,
@@ -43,5 +44,11 @@ final class ZoneDataPersister implements ContextAwareDataPersisterInterface
         }
 
         return $this->decoratedDataPersister->remove($data, $context);
+    }
+
+    /** @param array<string, mixed> $context */
+    public function resumable(array $context = []): bool
+    {
+        return true;
     }
 }
