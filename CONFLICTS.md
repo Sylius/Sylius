@@ -68,3 +68,9 @@ references related issues.
 
     - https://github.com/stof/StofDoctrineExtensionsBundle/issues/455
     - https://github.com/doctrine-extensions/DoctrineExtensions/issues/2600
+
+
+- `api-platform/core:2.7.17`:
+
+  This version introduced class aliases, which lead to a fatal error:
+  `The autoloader expected class "ApiPlatform\Core\Bridge\Symfony\Bundle\DependencyInjection\ApiPlatformExtension" to be defined in file ".../vendor/api-platform/core/src/Core/Bridge/Symfony/Bundle/DependencyInjection/ApiPlatformExtension.php". The file was found but the class was not in it, the class name or namespace probably has a typo.`

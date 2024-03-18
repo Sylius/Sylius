@@ -179,7 +179,7 @@
         "sylius/user-bundle": "self.version"
     },
     "conflict": {
-        "api-platform/core": "2.7.0",
+        "api-platform/core": "2.7.0 || 2.7.17",
         "doctrine/doctrine-bundle": "2.3.0",
         "doctrine/migrations": "3.5.3",
         "doctrine/orm": ">= 2.16.0",

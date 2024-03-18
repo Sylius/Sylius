@@ -46,7 +46,7 @@
         "theofidry/alice-data-fixtures": "^1.4"
     },
     "conflict": {
-        "api-platform/core": "2.7.0",
+        "api-platform/core": "2.7.0 || 2.7.17",
         "doctrine/doctrine-bundle": "2.3.0",
         "lexik/jwt-authentication-bundle": "^2.18",
         "symfony/doctrine-bridge": "4.4.20 || 5.2.4 || 5.2.5"
