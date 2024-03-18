@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace spec\Sylius\Bundle\ApiBundle\DataPersister;
 
 use ApiPlatform\Core\DataPersister\ContextAwareDataPersisterInterface;
+use ApiPlatform\Core\DataPersister\ResumableDataPersisterInterface;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Event\ProductUpdated;
 use Sylius\Component\Core\Model\ProductInterface;
@@ -28,6 +29,11 @@ final class ProductTaxonDataPersisterSpec extends ObjectBehavior
         MessageBusInterface $eventBus,
     ): void {
         $this->beConstructedWith($decoratedDataPersister, $eventBus);
+    }
+
+    function it_is_a_resumable_data_persister(): void
+    {
+        $this->shouldImplement(ResumableDataPersisterInterface::class);
     }
 
     function it_supports_only_product_taxon_entity(ProductTaxonInterface $productTaxon, ProductInterface $product): void
@@ -67,5 +73,10 @@ final class ProductTaxonDataPersisterSpec extends ObjectBehavior
         $eventBus->dispatch($message)->willReturn(new Envelope($message))->shouldBeCalled();
 
         $this->persist($productTaxon, []);
+    }
+
+    function it_is_resumable(): void
+    {
+        $this->resumable()->shouldReturn(true);
     }
 }

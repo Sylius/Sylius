@@ -14,12 +14,13 @@ declare(strict_types=1);
 namespace Sylius\Bundle\ApiBundle\DataPersister;
 
 use ApiPlatform\Core\DataPersister\ContextAwareDataPersisterInterface;
+use ApiPlatform\Core\DataPersister\ResumableDataPersisterInterface;
 use Sylius\Component\Core\Event\ProductUpdated;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductTaxonInterface;
 use Symfony\Component\Messenger\MessageBusInterface;
 
-final class ProductTaxonDataPersister implements ContextAwareDataPersisterInterface
+final class ProductTaxonDataPersister implements ContextAwareDataPersisterInterface, ResumableDataPersisterInterface
 {
     public function __construct(
         private ContextAwareDataPersisterInterface $decoratedDataPersister,
@@ -49,5 +50,11 @@ final class ProductTaxonDataPersister implements ContextAwareDataPersisterInterf
         $this->decoratedDataPersister->remove($data, $context);
 
         $this->eventBus->dispatch(new ProductUpdated($data->getProduct()->getCode()));
+    }
+
+    /** @param array<string, mixed> $context */
+    public function resumable(array $context = []): bool
+    {
+        return true;
     }
 }
