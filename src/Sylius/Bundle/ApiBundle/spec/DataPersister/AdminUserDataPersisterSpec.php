@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace spec\Sylius\Bundle\ApiBundle\DataPersister;
 
 use ApiPlatform\Core\DataPersister\ContextAwareDataPersisterInterface;
+use ApiPlatform\Core\DataPersister\ResumableDataPersisterInterface;
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ApiBundle\Exception\CannotRemoveCurrentlyLoggedInUser;
 use Sylius\Component\Core\Model\AdminUserInterface;
@@ -30,6 +31,11 @@ final class AdminUserDataPersisterSpec extends ObjectBehavior
         PasswordUpdaterInterface $passwordUpdater,
     ): void {
         $this->beConstructedWith($decoratedDataPersister, $tokenStorage, $passwordUpdater);
+    }
+
+    function it_is_a_resumable_data_persister(): void
+    {
+        $this->shouldImplement(ResumableDataPersisterInterface::class);
     }
 
     function it_supports_only_admin_user_entity(AdminUserInterface $adminUser, ProductInterface $product): void
@@ -100,5 +106,10 @@ final class AdminUserDataPersisterSpec extends ObjectBehavior
         $decoratedDataPersister->remove($userToBeDeleted, [])->shouldBeCalled();
 
         $this->remove($userToBeDeleted);
+    }
+
+    function it_is_resumable(): void
+    {
+        $this->resumable()->shouldReturn(true);
     }
 }

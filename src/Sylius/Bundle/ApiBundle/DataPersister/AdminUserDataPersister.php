@@ -14,13 +14,14 @@ declare(strict_types=1);
 namespace Sylius\Bundle\ApiBundle\DataPersister;
 
 use ApiPlatform\Core\DataPersister\ContextAwareDataPersisterInterface;
+use ApiPlatform\Core\DataPersister\ResumableDataPersisterInterface;
 use Sylius\Bundle\ApiBundle\Exception\CannotRemoveCurrentlyLoggedInUser;
 use Sylius\Component\Core\Model\AdminUserInterface;
 use Sylius\Component\User\Model\UserInterface;
 use Sylius\Component\User\Security\PasswordUpdaterInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
-final class AdminUserDataPersister implements ContextAwareDataPersisterInterface
+final class AdminUserDataPersister implements ContextAwareDataPersisterInterface, ResumableDataPersisterInterface
 {
     public function __construct(
         private ContextAwareDataPersisterInterface $decoratedDataPersister,
@@ -48,6 +49,12 @@ final class AdminUserDataPersister implements ContextAwareDataPersisterInterface
         }
 
         return $this->decoratedDataPersister->remove($data, $context);
+    }
+
+    /** @param array<string, mixed> $context */
+    public function resumable(array $context = []): bool
+    {
+        return true;
     }
 
     private function isTryingToDeleteLoggedInUser(UserInterface $user): bool
