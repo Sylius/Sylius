@@ -14,11 +14,12 @@ declare(strict_types=1);
 namespace Sylius\Bundle\ApiBundle\DataPersister;
 
 use ApiPlatform\Core\DataPersister\ContextAwareDataPersisterInterface;
+use ApiPlatform\Core\DataPersister\ResumableDataPersisterInterface;
 use Doctrine\DBAL\Exception\ForeignKeyConstraintViolationException;
 use Sylius\Bundle\ApiBundle\Exception\PaymentMethodCannotBeRemoved;
 use Sylius\Component\Core\Model\PaymentMethodInterface;
 
-final class PaymentMethodDataPersister implements ContextAwareDataPersisterInterface
+final class PaymentMethodDataPersister implements ContextAwareDataPersisterInterface, ResumableDataPersisterInterface
 {
     public function __construct(private ContextAwareDataPersisterInterface $decoratedDataPersister)
     {
@@ -44,5 +45,11 @@ final class PaymentMethodDataPersister implements ContextAwareDataPersisterInter
         } catch (ForeignKeyConstraintViolationException) {
             throw new PaymentMethodCannotBeRemoved();
         }
+    }
+
+    /** @param array<string, mixed> $context */
+    public function resumable(array $context = []): bool
+    {
+        return true;
     }
 }
