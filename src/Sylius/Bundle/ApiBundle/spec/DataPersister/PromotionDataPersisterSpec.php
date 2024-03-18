@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace spec\Sylius\Bundle\ApiBundle\DataPersister;
 
 use ApiPlatform\Core\DataPersister\ContextAwareDataPersisterInterface;
+use ApiPlatform\Core\DataPersister\ResumableDataPersisterInterface;
 use Doctrine\DBAL\Exception\ForeignKeyConstraintViolationException;
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ApiBundle\Exception\PromotionCannotBeRemoved;
@@ -29,6 +30,11 @@ final class PromotionDataPersisterSpec extends ObjectBehavior
     function it_is_a_context_aware_persister(): void
     {
         $this->shouldImplement(ContextAwareDataPersisterInterface::class);
+    }
+
+    function it_is_a_resumable_data_persister(): void
+    {
+        $this->shouldImplement(ResumableDataPersisterInterface::class);
     }
 
     function it_supports_only_promotion(PromotionInterface $promotion): void
@@ -62,5 +68,10 @@ final class PromotionDataPersisterSpec extends ObjectBehavior
         $dataPersister->remove($promotion, [])->shouldBeCalled();
 
         $this->remove($promotion);
+    }
+
+    function it_is_resumable(): void
+    {
+        $this->resumable()->shouldReturn(true);
     }
 }
