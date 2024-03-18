@@ -13,17 +13,15 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ProductBundle\Doctrine\Query\Function;
 
-use Scienta\DoctrineJsonFunctions\Query\AST\Functions\Postgresql\PostgresqlJsonFunctionNode;
-
 /**
  * "JSONB_ARRAY_ELEMENTS_TEXT" "(" StringPrimary ")"
  */
-final class JsonbArrayElementsText extends PostgresqlJsonFunctionNode
+final class JsonbArrayElementsText extends AbstractPostgresqlJsonFunctionNode
 {
     public const FUNCTION_NAME = 'JSONB_ARRAY_ELEMENTS_TEXT';
 
     /** @var string[] */
-    protected $requiredArgumentTypes = [self::STRING_PRIMARY_ARG];
+    protected array $requiredArgumentTypes = [self::STRING_PRIMARY_ARG];
 
     protected function getSqlForArgs(array $arguments): string
     {
