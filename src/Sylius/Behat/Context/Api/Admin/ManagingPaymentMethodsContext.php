@@ -149,6 +149,14 @@ final class ManagingPaymentMethodsContext implements Context
     }
 
     /**
+     * @When I specify its code as :amount characters long string
+     */
+    public function iSpecifyItsCodeAsCharactersLongString(int $amount): void
+    {
+        $this->iSpecifyItsCodeAs(str_repeat('a', $amount));
+    }
+
+    /**
      * @When I describe it as :description in :localeCode
      */
     public function iDescribeItAsIn(string $description, string $localeCode): void
@@ -655,6 +663,17 @@ final class ManagingPaymentMethodsContext implements Context
         Assert::same(
             $this->responseChecker->getError($response),
             'code: The payment method with given code already exists.',
+        );
+    }
+
+    /**
+     * @Then I should be notified that the code is too long
+     */
+    public function iShouldBeNotifiedTheCodeIsTooLong(): void
+    {
+        Assert::contains(
+            $this->responseChecker->getError($this->client->getLastResponse()),
+            'Payment method code must not be longer than',
         );
     }
 
