@@ -94,6 +94,14 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
+     * @When I specify its code as :amount characters long string
+     */
+    public function iSpecifyItsCodeAsCharactersLongString(int $amount): void
+    {
+        $this->iSpecifyItsAs('code', str_repeat('a', $amount));
+    }
+
+    /**
      * @When I set its priority to :priority
      */
     public function iSetsItsPriorityTo(int $priority): void
@@ -1532,6 +1540,17 @@ final class ManagingCatalogPromotionsContext implements Context
         Assert::contains(
             $this->responseChecker->getError($this->client->getLastResponse()),
             'endDate: End date cannot be set before start date.',
+        );
+    }
+
+    /**
+     * @Then I should be notified that the code is too long
+     */
+    public function iShouldBeNotifiedThatTheCodeIsTooLong(): void
+    {
+        Assert::contains(
+            $this->responseChecker->getError($this->client->getLastResponse()),
+            'Catalog promotion code must not be longer than',
         );
     }
 

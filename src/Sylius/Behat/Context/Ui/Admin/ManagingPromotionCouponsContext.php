@@ -123,6 +123,14 @@ final class ManagingPromotionCouponsContext implements Context
     }
 
     /**
+     * @When I specify its code as :amount characters long string
+     */
+    public function iSpecifyItsCodeAsCharactersLongString(int $amount): void
+    {
+        $this->iSpecifyItsCodeAs(str_repeat('a', $amount));
+    }
+
+    /**
      * @When I limit its usage to :limit time(s)
      */
     public function iLimitItsUsageLimitTo(int $limit)
@@ -445,6 +453,20 @@ final class ManagingPromotionCouponsContext implements Context
         $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
 
         Assert::same($currentPage->getValidationMessage('usage_limit'), 'Coupon usage limit must be at least 1.');
+    }
+
+    /**
+     * @Then I should be notified that the code is too long
+     */
+    public function iShouldBeNotifiedThatTheCouponIsTooLong(): void
+    {
+        /** @var CreatePageInterface|UpdatePageInterface $currentPage */
+        $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
+
+        Assert::contains(
+            $currentPage->getValidationMessage('code'),
+            'Coupon code must not be longer than',
+        );
     }
 
     /**

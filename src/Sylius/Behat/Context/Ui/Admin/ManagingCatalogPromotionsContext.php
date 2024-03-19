@@ -102,6 +102,14 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
+     * @When I specify its code as :amount characters long string
+     */
+    public function iSpecifyItsCodeAsCharactersLongString(int $amount): void
+    {
+        $this->createPage->specifyCode(str_repeat('a', $amount));
+    }
+
+    /**
      * @When I name it :name
      */
     public function iNameIt(string $name): void
@@ -1193,6 +1201,17 @@ final class ManagingCatalogPromotionsContext implements Context
         Assert::contains(
             $this->formElement->getValidationMessage(),
             'Provided configuration contains errors. Please add the fixed discount amount that is a number greater than 0.',
+        );
+    }
+
+    /**
+     * @Then I should be notified that the code is too long
+     */
+    public function iShouldBeNotifiedThatTheCodeIsTooLong(): void
+    {
+        Assert::contains(
+            $this->createPage->getValidationMessage('code'),
+            'Catalog promotion code must not be longer than',
         );
     }
 

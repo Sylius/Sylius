@@ -106,6 +106,14 @@ final class ManagingPromotionCouponsContext implements Context
     }
 
     /**
+     * @When I specify its code as :amount characters long string
+     */
+    public function iSpecifyItsCodeAsCharactersLongString(int $amount): void
+    {
+        $this->iSpecifyItsCodeAs(str_repeat('a', $amount));
+    }
+
+    /**
      * @When I limit its usage to :times time(s)
      * @When I change its usage limit to :times
      */
@@ -507,6 +515,17 @@ final class ManagingPromotionCouponsContext implements Context
         Assert::same(
             $this->responseChecker->getError($response),
             'promotion: Please provide a promotion for this coupon.',
+        );
+    }
+
+    /**
+     * @Then I should be notified that the code is too long
+     */
+    public function iShouldBeNotifiedThatTheCodeIsTooLong(): void
+    {
+        Assert::contains(
+            $this->responseChecker->getError($this->client->getLastResponse()),
+            'Coupon code must not be longer than',
         );
     }
 

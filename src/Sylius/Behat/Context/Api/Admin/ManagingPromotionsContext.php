@@ -104,6 +104,14 @@ final class ManagingPromotionsContext implements Context
     }
 
     /**
+     * @When I specify its code as :amount characters long string
+     */
+    public function iSpecifyItsCodeAsCharactersLongString(int $amount): void
+    {
+        $this->iSpecifyItsAs('code', str_repeat('a', $amount));
+    }
+
+    /**
      * @When I set it as not applies to discounted by catalog promotion items
      */
     public function iSetItAsNotAppliesToDiscountedByCatalogPromotionItems(): void
@@ -741,6 +749,17 @@ final class ManagingPromotionsContext implements Context
         Assert::same(
             $this->responseChecker->getError($response),
             'code: The promotion with given code already exists.',
+        );
+    }
+
+    /**
+     * @Then I should be notified that the code is too long
+     */
+    public function iShouldBeNotifiedThatTheCodeIsTooLong(): void
+    {
+        Assert::contains(
+            $this->responseChecker->getError($this->client->getLastResponse()),
+            'Promotion code must not be longer than',
         );
     }
 

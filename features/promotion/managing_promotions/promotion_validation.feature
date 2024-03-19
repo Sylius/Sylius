@@ -19,6 +19,14 @@ Feature: Promotion validation
         And promotion with name "No-VAT promotion" should not be added
 
     @api @ui
+    Scenario: Trying to add a new promotion with too long code
+        Given I want to create a new promotion
+        And I name it "No-VAT promotion"
+        When I specify its code as 256 characters long string
+        And I try to add it
+        Then I should be notified that the code is too long
+
+    @api @ui
     Scenario: Trying to add a new promotion without specifying its name
         When I want to create a new promotion
         And I specify its code as "no_vat_promotion"

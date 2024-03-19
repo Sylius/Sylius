@@ -69,6 +69,14 @@ final class ManagingPromotionsContext implements Context
     }
 
     /**
+     * @When I specify its code as :amount characters long string
+     */
+    public function iSpecifyItsCodeAsCharactersLongString(int $amount): void
+    {
+        $this->iSpecifyItsCodeAs(str_repeat('a', $amount));
+    }
+
+    /**
      * @When I name it :name
      * @When I do not name it
      * @When I remove its name
@@ -585,6 +593,17 @@ final class ManagingPromotionsContext implements Context
         Assert::same(
             $this->createPage->getValidationMessageForAction(),
             'This value should not be blank.',
+        );
+    }
+
+    /**
+     * @Then I should be notified that the code is too long
+     */
+    public function iShouldBeNotifiedThatTheCodeIsTooLong(): void
+    {
+        Assert::contains(
+            $this->createPage->getValidationMessage('code'),
+            'Promotion code must not be longer than',
         );
     }
 

@@ -19,6 +19,16 @@ Feature: Validating a catalog promotion creation
         And there should be an empty list of catalog promotions
 
     @api @ui
+    Scenario: Trying to create a catalog promotion with too long code
+        Given I want to create a new catalog promotion
+        And I name it "Winter sale"
+        And I specify its label as "Winter -50%" in "English (United States)"
+        And I describe it as "This promotion gives a 50% discount on all products" in "English (United States)"
+        When I specify its code as 256 characters long string
+        And I try to add it
+        Then I should be notified that the code is too long
+
+    @api @ui
     Scenario: Trying to create a catalog promotion with taken code
         Given there is a catalog promotion with "sale" code and "Summer sale" name
         When I create a new catalog promotion with "sale" code and "Winter sale" name
