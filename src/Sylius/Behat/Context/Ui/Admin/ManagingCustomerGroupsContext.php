@@ -49,6 +49,14 @@ final class ManagingCustomerGroupsContext implements Context
     }
 
     /**
+     * @When I specify its code as :amount characters long string
+     */
+    public function iSpecifyItsCodeAsCharactersLongString(int $amount): void
+    {
+        $this->iSpecifyItsCodeAs(str_repeat('a', $amount));
+    }
+
+    /**
      * @When I specify its name as :name
      * @When I remove its name
      */
@@ -167,6 +175,17 @@ final class ManagingCustomerGroupsContext implements Context
     public function iShouldBeNotifiedThatCustomerGroupWithThisCodeAlreadyExists()
     {
         Assert::same($this->createPage->getValidationMessage('code'), 'Customer group code has to be unique.');
+    }
+
+    /**
+     * @Then I should be notified that the code is too long
+     */
+    public function iShouldBeNotifiedThatCustomerGroupCodeIsTooLong(): void
+    {
+        Assert::contains(
+            $this->createPage->getValidationMessage('code'),
+            'Customer group code must not be longer than',
+        );
     }
 
     /**
