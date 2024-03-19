@@ -32,15 +32,15 @@ class ProductAttributeValueRepository extends EntityRepository implements Produc
         $connection = $this->getEntityManager()->getConnection();
         $isPostgres = $this->isPostgres($connection);
 
-        $qb = $this->createQueryBuilder('o');
+        $queryBuilder = $this->createQueryBuilder('o');
 
         if ($isPostgres) {
-            $qb->andWhere('JSONB_ARRAY_ELEMENTS_TEXT(o.json) LIKE :key');
+            $queryBuilder->andWhere('JSONB_ARRAY_ELEMENTS_TEXT(o.json) LIKE :key');
         } else {
-            $qb->andWhere('o.json LIKE :key');
+            $queryBuilder->andWhere('o.json LIKE :key');
         }
 
-        return $qb
+        return $queryBuilder
             ->setParameter('key', '%"' . $choiceKey . '"%')
             ->getQuery()
             ->getResult()
