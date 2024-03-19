@@ -30,7 +30,7 @@ class ProductAttributeValueRepository extends EntityRepository implements Produc
     public function findByJsonChoiceKey(string $choiceKey): array
     {
         $connection = $this->getEntityManager()->getConnection();
-        $isPostgres = $this->isPostgres($connection);
+        $isPostgres = $this->isPostgreSQLPlatform($connection);
 
         $queryBuilder = $this->createQueryBuilder('o');
 
@@ -92,7 +92,7 @@ class ProductAttributeValueRepository extends EntityRepository implements Produc
         ;
     }
 
-    protected function isPostgres(Connection $connection): bool
+    protected function isPostgreSQLPlatform(Connection $connection): bool
     {
         return
             class_exists(PostgreSQLPlatform::class) &&
