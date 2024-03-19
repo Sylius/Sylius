@@ -20,6 +20,7 @@ use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\ShipmentInterface;
 use Sylius\Component\Core\Model\ShippingMethodInterface;
 use Sylius\Component\Shipping\Calculator\CalculatorInterface;
+use Sylius\Component\Shipping\Calculator\SettableTypeCalculatorInterface;
 
 final class PerUnitRateCalculatorSpec extends ObjectBehavior
 {
@@ -28,10 +29,14 @@ final class PerUnitRateCalculatorSpec extends ObjectBehavior
         $this->shouldImplement(CalculatorInterface::class);
     }
 
-    function it_returns_per_unit_rate_type(CalculatorInterface $calculator): void
+    function it_should_implement_settable_type_calculator_interface(): void
     {
-        $calculator->getType()->willReturn('per_unit_rate');
+        $this->shouldImplement(SettableTypeCalculatorInterface::class);
+    }
 
+    function it_returns_per_unit_type(): void
+    {
+        $this->setType('per_unit_rate');
         $this->getType()->shouldReturn('per_unit_rate');
     }
 

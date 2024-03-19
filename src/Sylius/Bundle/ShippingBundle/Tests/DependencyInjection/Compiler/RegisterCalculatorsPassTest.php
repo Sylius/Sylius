@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Bundle\ShippingBundle\Tests\DependencyInjection\Compiler;
 
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractCompilerPassTestCase;
+use Sylius\Bundle\ShippingBundle\Application\Calculator\Calculator;
 use Sylius\Bundle\ShippingBundle\DependencyInjection\Compiler\RegisterCalculatorsPass;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
@@ -28,7 +29,7 @@ final class RegisterCalculatorsPassTest extends AbstractCompilerPassTestCase
         $this->setDefinition('sylius.form_registry.shipping_calculator', new Definition());
         $this->setDefinition(
             'custom_calc',
-            (new Definition())
+            (new Definition(Calculator::class))
                 ->addTag('sylius.shipping_calculator', ['calculator' => 'calc1', 'label' => 'Calc 1'])
                 ->addTag('sylius.shipping_calculator', ['calculator' => 'calc2', 'label' => 'Calc 2']),
         );
@@ -54,7 +55,7 @@ final class RegisterCalculatorsPassTest extends AbstractCompilerPassTestCase
         $this->setDefinition('sylius.form_registry.shipping_calculator', new Definition());
         $this->setDefinition(
             'custom_calc',
-            (new Definition())
+            (new Definition(Calculator::class))
                 ->addTag('sylius.shipping_calculator', ['calculator' => 'calc1', 'label' => 'Calc 1'])
                 ->addTag('sylius.shipping_calculator', ['calculator' => 'calc2', 'label' => 'Calc 2', 'form_type' => 'FQCN']),
         );
@@ -75,7 +76,7 @@ final class RegisterCalculatorsPassTest extends AbstractCompilerPassTestCase
         $this->setDefinition('sylius.form_registry.shipping_calculator', new Definition());
         $this->setDefinition(
             'custom_calc',
-            (new Definition())
+            (new Definition(Calculator::class))
                 ->addTag('sylius.shipping_calculator', ['calculator' => 'calc1', 'label' => 'Calc 1'])
                 ->addTag('sylius.shipping_calculator', ['calculator' => 'calc2', 'label' => 'Calc 2']),
         );
