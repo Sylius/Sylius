@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file comes from the `scienta/doctrine-json-functions` package under the MIT license.
+ *
+ * (c) Scienta
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Sylius\Bundle\ProductBundle\Doctrine\Query\Function;
 
 use Doctrine\DBAL\Exception;
@@ -12,6 +21,9 @@ use Doctrine\ORM\Query\Parser;
 use Doctrine\ORM\Query\QueryException;
 use Doctrine\ORM\Query\SqlWalker;
 
+/**
+ * @see https://github.com/ScientaNL/DoctrineJsonFunctions/blob/master/src/Query/AST/Functions/AbstractJsonFunctionNode.php
+ */
 abstract class AbstractJsonFunctionNode extends FunctionNode
 {
     /** @var string|null */

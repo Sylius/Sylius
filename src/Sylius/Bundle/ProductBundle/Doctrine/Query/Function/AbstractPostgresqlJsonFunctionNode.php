@@ -1,9 +1,9 @@
 <?php
 
 /*
- * This file is part of the Sylius package.
+ * This file comes from the `scienta/doctrine-json-functions` package under the MIT license.
  *
- * (c) Sylius Sp. z o.o.
+ * (c) Scienta
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -17,6 +17,10 @@ use Doctrine\DBAL\Exception;
 use Doctrine\DBAL\Platforms\PostgreSQLPlatform;
 use Doctrine\ORM\Query\SqlWalker;
 
+
+/**
+ * @see https://github.com/ScientaNL/DoctrineJsonFunctions/blob/master/src/Query/AST/Functions/Postgresql/PostgresqlJsonFunctionNode.php
+ */
 abstract class AbstractPostgresqlJsonFunctionNode extends AbstractJsonFunctionNode
 {
     /**
