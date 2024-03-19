@@ -47,6 +47,14 @@ final class ManagingLocalesContext implements Context
     }
 
     /**
+     * @When I set its code to :amount characters long string
+     */
+    public function iSetItsCodeToCharactersLongString(int $amount): void
+    {
+        $this->iChoose(sprintf('PL-%s', str_repeat('A', $amount - 3)));
+    }
+
+    /**
      * @When I (try to) add it
      */
     public function iAddIt(): void
@@ -123,6 +131,18 @@ final class ManagingLocalesContext implements Context
             'Locale has been created successfully, but it should not',
         );
         Assert::same($this->responseChecker->getError($response), 'code: This value is not a valid locale code.');
+    }
+
+    /**
+     * @Then I should be notified that the code is too long
+     */
+    public function iShouldBeNotifiedThatTheCodeIsTooLong(): void
+    {
+        $response = $this->client->getLastResponse();
+        Assert::contains(
+            $this->responseChecker->getError($response),
+            'Locale code cannot be longer than',
+        );
     }
 
     /**
