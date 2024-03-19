@@ -249,6 +249,14 @@ final class ManagingCountriesContext implements Context
     }
 
     /**
+     * @When I specify its code as :amount characters long string
+     */
+    public function iSpecifyItsCodeAsCharactersLongString(int $amount): void
+    {
+        $this->iSpecifyTheProvinceCode(sprintf('US-%s', str_repeat('A', $amount - 3)));
+    }
+
+    /**
      * @Then I should be notified that :element is required
      */
     public function iShouldBeNotifiedThatElementIsRequired($element)
@@ -290,6 +298,14 @@ final class ManagingCountriesContext implements Context
     public function iShouldBeNotifiedThatNameOfTheProvinceIsRequired(): void
     {
         Assert::same($this->updatePage->getValidationMessage('name'), 'Please enter province name.');
+    }
+
+    /**
+     * @Then I should be notified that the code is too long
+     */
+    public function iShouldBeNotifiedThatTheCodeIsTooLong(): void
+    {
+        Assert::contains($this->updatePage->getValidationMessage('code'), 'Province code must not be longer than');
     }
 
     /**

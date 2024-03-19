@@ -17,6 +17,15 @@ Feature: Province validation
         Then I should be notified that code is required
         And province with name "Scotland" should not be added in this country
 
+    @ui @mink:chromedriver @api
+    Scenario: Trying to add a new province with too long code
+        Given I want to create a new province in country "United Kingdom"
+        And I name the province "Scotland"
+        When I specify its code as 256 characters long string
+        And I try to save my changes
+        Then I should be notified that the code is too long
+        And province with name "Scotland" should not be added in this country
+
     @ui @javascript @api
     Scenario: Trying to add a new province without specifying its name
         When I want to create a new province in country "United Kingdom"

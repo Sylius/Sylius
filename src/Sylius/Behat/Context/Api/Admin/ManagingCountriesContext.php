@@ -116,6 +116,14 @@ final class ManagingCountriesContext implements Context
     }
 
     /**
+     * @When I specify its code as :amount characters long string
+     */
+    public function iSpecifyItsCodeAsCharactersLongString(int $amount): void
+    {
+        $this->iSpecifyTheProvinceCodeAs(sprintf('XX-%s', str_repeat('A', $amount - 3)));
+    }
+
+    /**
      * @When I add the :provinceName province with :provinceCode code
      */
     public function iAddTheProvinceWithCode(string $provinceName, string $provinceCode): void
@@ -355,6 +363,17 @@ final class ManagingCountriesContext implements Context
         Assert::contains(
             $this->responseChecker->getError($this->client->getLastResponse()),
             'Please enter province name.',
+        );
+    }
+
+    /**
+     * @Then I should be notified that the code is too long
+     */
+    public function iShouldBeNotifiedThatTheCodeIsTooLong(): void
+    {
+        Assert::contains(
+            $this->responseChecker->getError($this->client->getLastResponse()),
+            'Province code must not be longer than',
         );
     }
 

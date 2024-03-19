@@ -62,6 +62,15 @@ final class ManagingZonesContext implements Context
         $this->client->addRequestData('code', $code);
     }
 
+
+    /**
+     * @When I specify its code as :amount characters long string
+     */
+    public function iSpecifyItsCodeAsCharactersLongString(int $amount): void
+    {
+        $this->iSpecifyItsCodeAs(str_repeat('a', $amount));
+    }
+
     /**
      * @When I do not specify its :type
      * @When I do not add a country member
@@ -98,6 +107,16 @@ final class ManagingZonesContext implements Context
     {
         $this->client->addSubResourceData('members', [
             'code' => $zone->getCode(),
+        ]);
+    }
+
+    /**
+     * @When I specify its zone member code as :amount characters long string
+     */
+    public function iSpecifyItsZoneMemberCodeAsCharactersLongString(int $amount): void
+    {
+        $this->client->addSubResourceData('members', [
+            'code' => str_repeat('a', $amount),
         ]);
     }
 
@@ -444,6 +463,28 @@ final class ManagingZonesContext implements Context
         Assert::contains(
             $this->responseChecker->getError($this->client->getLastResponse()),
             'members: Please add at least 1 zone member.',
+        );
+    }
+
+    /**
+     * @Then I should be notified that the code is too long
+     */
+    public function iShouldBeNotifiedThatTheCodeIsTooLong(): void
+    {
+        Assert::contains(
+            $this->responseChecker->getError($this->client->getLastResponse()),
+            'Zone code must not be longer than',
+        );
+    }
+
+    /**
+     * @Then I should be notified that the zone member code is too long
+     */
+    public function iShouldBeNotifiedThatTheZoneMemberCodeIsTooLong(): void
+    {
+        Assert::contains(
+            $this->responseChecker->getError($this->client->getLastResponse()),
+            'Zone member code must not be longer than',
         );
     }
 

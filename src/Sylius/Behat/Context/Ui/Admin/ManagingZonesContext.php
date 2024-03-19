@@ -45,6 +45,14 @@ final class ManagingZonesContext implements Context
     }
 
     /**
+     * @When I specify its code as :amount characters long string
+     */
+    public function iSpecifyItsCodeAsCharactersLongString(int $amount): void
+    {
+        $this->createPage->specifyCode(str_repeat('a', $amount));
+    }
+
+    /**
      * @When I browse zones
      * @When I want to see all zones in store
      */
@@ -333,6 +341,17 @@ final class ManagingZonesContext implements Context
     public function iShouldBeNotifiedThatThisZoneCannotBeDeleted(): void
     {
         $this->notificationChecker->checkNotification('Error Cannot delete, the zone is in use.', NotificationType::failure());
+    }
+
+    /**
+     * @Then I should be notified that the code is too long
+     */
+    public function iShouldBeNotifiedThatTheCodeIsTooLong(): void
+    {
+        /** @var CreatePageInterface|UpdatePageInterface $currentPage */
+        $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
+
+        Assert::contains($currentPage->getValidationMessage('code'), 'Zone code must not be longer than');
     }
 
     /**
