@@ -1,9 +1,9 @@
 <?php
 
 /*
- * This file comes from the `scienta/doctrine-json-functions` package under the MIT license.
+ * This file is part of the Sylius package.
  *
- * (c) Scienta
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\ProductBundle\Doctrine\Query\Function;
+namespace Sylius\Bundle\ProductBundle\Doctrine\ORM\Query\AST\Function;
 
 use Doctrine\DBAL\Exception;
 use Doctrine\DBAL\Platforms\PostgreSQLPlatform;

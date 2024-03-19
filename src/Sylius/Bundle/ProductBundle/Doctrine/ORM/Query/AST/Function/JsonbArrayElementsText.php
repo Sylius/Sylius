@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\ProductBundle\Doctrine\Query\Function;
+namespace Sylius\Bundle\ProductBundle\Doctrine\ORM\Query\AST\Function;
 
 /**
  * "JSONB_ARRAY_ELEMENTS_TEXT" "(" StringPrimary ")"
