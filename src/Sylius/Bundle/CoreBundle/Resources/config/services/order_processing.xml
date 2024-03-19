@@ -70,6 +70,7 @@
 
         <service id="sylius.order_processing.order_payment_processor.checkout" class="Sylius\Component\Core\OrderProcessing\OrderPaymentProcessor">
             <argument type="service" id="sylius.order_payment_provider" />
+            <argument type="service" id="sylius.order_payment_refresher" />
             <argument>cart</argument>
             <argument type="service" id="Sylius\Component\Core\Payment\Remover\OrderPaymentsRemoverInterface" />
             <argument>%sylius.order_payment_processor.checkout.unsupported_states%</argument>
@@ -77,6 +78,7 @@
         </service>
         <service id="sylius.order_processing.order_payment_processor.after_checkout" class="Sylius\Component\Core\OrderProcessing\OrderPaymentProcessor">
             <argument type="service" id="sylius.order_payment_provider" />
+            <argument type="service" id="sylius.order_payment_refresher" />
             <argument>new</argument>
             <argument type="service" id="Sylius\Component\Core\Payment\Remover\OrderPaymentsRemoverInterface" />
             <argument>%sylius.order_payment_processor.after_checkout.unsupported_states%</argument>

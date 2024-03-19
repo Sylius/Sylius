@@ -16,6 +16,7 @@ namespace Sylius\Component\Core\OrderProcessing;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Payment\Exception\NotProvidedOrderPaymentException;
 use Sylius\Component\Core\Payment\Provider\OrderPaymentProviderInterface;
+use Sylius\Component\Core\Payment\Refresher\OrderPaymentRefresherInterface;
 use Sylius\Component\Core\Payment\Remover\OrderPaymentsRemoverInterface;
 use Sylius\Component\Order\Model\OrderInterface as BaseOrderInterface;
 use Sylius\Component\Order\Processor\OrderProcessorInterface;
@@ -26,6 +27,7 @@ final class OrderPaymentProcessor implements OrderProcessorInterface
 {
     public function __construct(
         private OrderPaymentProviderInterface $orderPaymentProvider,
+        private OrderPaymentRefresherInterface $orderPaymentsRefresher,
         private string $targetState = PaymentInterface::STATE_CART,
         private ?OrderPaymentsRemoverInterface $orderPaymentsRemover = null,
         /** @var array<string> $unprocessableOrderStates */
@@ -44,6 +46,12 @@ final class OrderPaymentProcessor implements OrderProcessorInterface
 
         if ($this->canPaymentsBeRemoved($order)) {
             $this->removePayments($order);
+
+            return;
+        }
+
+        if ($this->orderPaymentsRefresher->isPaymentRefreshingNeeded($order)) {
+            $this->orderPaymentsRefresher->refreshPayments($order, $this->targetState);
 
             return;
         }
