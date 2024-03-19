@@ -20,7 +20,6 @@ use Doctrine\ORM\Query\SqlWalker;
 abstract class AbstractPostgresqlJsonFunctionNode extends AbstractJsonFunctionNode
 {
     /**
-     * @param SqlWalker $sqlWalker
      * @throws Exception
      */
     protected function validatePlatform(SqlWalker$sqlWalker): void
@@ -30,9 +29,6 @@ abstract class AbstractPostgresqlJsonFunctionNode extends AbstractJsonFunctionNo
         }
     }
 
-    /**
-     * @return string
-     */
     protected function getSQLFunction(): string
     {
         return strtolower(static::FUNCTION_NAME);

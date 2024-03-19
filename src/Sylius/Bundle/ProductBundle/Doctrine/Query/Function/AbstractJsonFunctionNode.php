@@ -51,8 +51,6 @@ abstract class AbstractJsonFunctionNode extends FunctionNode
     }
 
     /**
-     * @param Parser $parser
-     * @param bool $argumentParsed
      * @throws QueryException
      */
     protected function parseOptionalArguments(Parser $parser, bool $argumentParsed): void
@@ -105,8 +103,6 @@ abstract class AbstractJsonFunctionNode extends FunctionNode
     }
 
     /**
-     * @param Parser $parser
-     * @return Literal
      * @throws QueryException
      */
     protected function parseAlphaNumericLiteral(Parser $parser): Literal
@@ -169,7 +165,6 @@ abstract class AbstractJsonFunctionNode extends FunctionNode
     }
 
     /**
-     * @param SqlWalker $sqlWalker
      * @throws Exception
      */
     abstract protected function validatePlatform(SqlWalker $sqlWalker): void;
