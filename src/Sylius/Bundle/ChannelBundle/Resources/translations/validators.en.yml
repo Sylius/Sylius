@@ -1,6 +1,7 @@
 sylius:
     channel:
         code:
+            max_length: Channel code must not be longer than {{ limit }} character.|Channel code must not be longer than {{ limit }} characters.
             not_blank: Please enter channel code.
             regex: Channel code can only be comprised of letters, numbers, dashes and underscores.
             unique: Channel code has to be unique.

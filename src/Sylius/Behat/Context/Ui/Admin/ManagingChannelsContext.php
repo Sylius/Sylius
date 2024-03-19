@@ -63,6 +63,14 @@ final class ManagingChannelsContext implements Context
     }
 
     /**
+     * @When I specify its code as :amount characters long string
+     */
+    public function iSpecifyItsCodeAsCharactersLongString(int $amount): void
+    {
+        $this->iSpecifyItsCodeAs(str_repeat('a', $amount));
+    }
+
+    /**
      * @When I name it :name
      * @When I rename it to :name
      * @When I do not name it
@@ -568,6 +576,17 @@ final class ManagingChannelsContext implements Context
         Assert::same(
             'Value must be less than 2147483647',
             $this->updatePage->getValidationMessage('discounted_products_checking_period'),
+        );
+    }
+
+    /**
+     * @Then I should be notified that the code is too long
+     */
+    public function iShouldBeNotifiedThatTheCodeIsTooLong(): void
+    {
+        Assert::contains(
+            $this->updatePage->getValidationMessage('code'),
+            'Channel code must not be longer than',
         );
     }
 
