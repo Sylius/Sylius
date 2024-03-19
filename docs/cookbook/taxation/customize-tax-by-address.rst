@@ -7,7 +7,7 @@ as from 1st July 2021 the new taxation rules will be applied.
 
 .. note::
 
-    You can learn more about new EU taxation rules `here <https://ec.europa.eu/taxation_customs/business/vat/modernising-vat-cross-border-ecommerce_en>`_.
+    You can learn more about new EU taxation rules `here <https://european-union.europa.eu/priorities-and-actions/actions-topic/taxation_en>`_.
 
 To change the way how the taxes are calculated: by billing or by shipping address, you need to add a parameter to your config:
 
