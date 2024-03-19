@@ -19,16 +19,21 @@
     </parameters>
 
     <services>
-        <defaults public="true" />
+        <defaults public="false" />
 
-        <service id="sylius.behat.page.admin.channel.create" class="%sylius.behat.page.admin.channel.create.class%" parent="sylius.behat.page.admin.crud.create" public="false">
+        <service id="sylius.behat.page.admin.channel.create" class="%sylius.behat.page.admin.channel.create.class%" parent="sylius.behat.page.admin.crud.create">
             <argument type="string">sylius_admin_channel_create</argument>
         </service>
-        <service id="sylius.behat.page.admin.channel.index" class="%sylius.behat.page.admin.channel.index.class%" parent="sylius.behat.page.admin.crud.index" public="false">
+        <service id="Sylius\Behat\Page\Admin\Channel\CreatePageInterface" alias="sylius.behat.page.admin.channel.create" />
+
+        <service id="sylius.behat.page.admin.channel.index" class="%sylius.behat.page.admin.channel.index.class%" parent="sylius.behat.page.admin.crud.index">
             <argument type="string">sylius_admin_channel_index</argument>
         </service>
-        <service id="sylius.behat.page.admin.channel.update" class="%sylius.behat.page.admin.channel.update.class%" parent="sylius.behat.page.admin.crud.update" public="false">
+        <service id="Sylius\Behat\Page\Admin\Channel\IndexPageInterface" alias="sylius.behat.page.admin.channel.index" />
+
+        <service id="sylius.behat.page.admin.channel.update" class="%sylius.behat.page.admin.channel.update.class%" parent="sylius.behat.page.admin.crud.update">
             <argument type="string">sylius_admin_channel_update</argument>
         </service>
+        <service id="Sylius\Behat\Page\Admin\Channel\UpdatePageInterface" alias="sylius.behat.page.admin.channel.update" />
     </services>
 </container>

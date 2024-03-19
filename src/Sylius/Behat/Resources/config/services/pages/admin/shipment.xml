@@ -18,12 +18,14 @@
     </parameters>
 
     <services>
-        <defaults public="true" />
+        <defaults public="false" />
 
-        <service id="sylius.behat.page.admin.shipment.index" class="%sylius.behat.page.admin.shipment.index.class%" parent="sylius.behat.page.admin.crud.index" public="false">
+        <service id="sylius.behat.page.admin.shipment.index" class="%sylius.behat.page.admin.shipment.index.class%" parent="sylius.behat.page.admin.crud.index">
             <argument type="string">sylius_admin_shipment_index</argument>
         </service>
+        <service id="Sylius\Behat\Page\Admin\Shipment\IndexPageInterface" alias="sylius.behat.page.admin.shipment.index" />
 
-        <service id="sylius.behat.page.admin.shipment.show" class="%sylius.behat.page.admin.shipment.show.class%" parent="sylius.behat.symfony_page" public="false" />
+        <service id="sylius.behat.page.admin.shipment.show" class="%sylius.behat.page.admin.shipment.show.class%" parent="sylius.behat.symfony_page" />
+        <service id="Sylius\Behat\Page\Admin\Shipment\ShowPageInterface" alias="sylius.behat.page.admin.shipment.show" />
     </services>
 </container>

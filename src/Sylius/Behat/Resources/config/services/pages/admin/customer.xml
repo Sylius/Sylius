@@ -21,20 +21,29 @@
     </parameters>
 
     <services>
-        <defaults public="true" />
+        <defaults public="false" />
 
-        <service id="sylius.behat.page.admin.customer.create" class="%sylius.behat.page.admin.customer.create.class%" parent="sylius.behat.page.admin.crud.create" public="false">
+        <service id="sylius.behat.page.admin.customer.create" class="%sylius.behat.page.admin.customer.create.class%" parent="sylius.behat.page.admin.crud.create">
             <argument type="string">sylius_admin_customer_create</argument>
         </service>
-        <service id="sylius.behat.page.admin.customer.index" class="%sylius.behat.page.admin.customer.index.class%" parent="sylius.behat.page.admin.crud.index" public="false">
+        <service id="Sylius\Behat\Page\Admin\Customer\CreatePageInterface" alias="sylius.behat.page.admin.customer.create" />
+
+        <service id="sylius.behat.page.admin.customer.index" class="%sylius.behat.page.admin.customer.index.class%" parent="sylius.behat.page.admin.crud.index">
             <argument type="string">sylius_admin_customer_index</argument>
         </service>
-        <service id="sylius.behat.page.admin.customer.order_index" class="%sylius.behat.page.admin.customer.order_index.class%" parent="sylius.behat.page.admin.crud.index" public="false">
+        <service id="Sylius\Behat\Page\Admin\Customer\IndexPageInterface" alias="sylius.behat.page.admin.customer.index" />
+
+        <service id="sylius.behat.page.admin.customer.order_index" class="%sylius.behat.page.admin.customer.order_index.class%" parent="sylius.behat.page.admin.crud.index">
             <argument type="string">sylius_admin_customer_order_index</argument>
         </service>
-        <service id="sylius.behat.page.admin.customer.update" class="%sylius.behat.page.admin.customer.update.class%" parent="sylius.behat.page.admin.crud.update" public="false">
+        <service id="Sylius\Behat\Page\Admin\Customer\OrderIndexPageInterface" alias="sylius.behat.page.admin.customer.order_index" />
+
+        <service id="sylius.behat.page.admin.customer.update" class="%sylius.behat.page.admin.customer.update.class%" parent="sylius.behat.page.admin.crud.update">
             <argument type="string">sylius_admin_customer_update</argument>
         </service>
-        <service id="sylius.behat.page.admin.customer.show" class="%sylius.behat.page.admin.customer.show.class%" parent="sylius.behat.symfony_page" public="false" />
+        <service id="Sylius\Behat\Page\Admin\Customer\UpdatePageInterface" alias="sylius.behat.page.admin.customer.update" />
+
+        <service id="sylius.behat.page.admin.customer.show" class="%sylius.behat.page.admin.customer.show.class%" parent="sylius.behat.symfony_page" />
+        <service id="Sylius\Behat\Page\Admin\Customer\ShowPageInterface" alias="sylius.behat.page.admin.customer.show" />
     </services>
 </container>

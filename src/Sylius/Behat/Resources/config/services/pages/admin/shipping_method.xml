@@ -19,16 +19,21 @@
     </parameters>
 
     <services>
-        <defaults public="true" />
+        <defaults public="false" />
 
-        <service id="sylius.behat.page.admin.shipping_method.create" class="%sylius.behat.page.admin.shipping_method.create.class%" parent="sylius.behat.page.admin.crud.create" public="false">
+        <service id="sylius.behat.page.admin.shipping_method.create" class="%sylius.behat.page.admin.shipping_method.create.class%" parent="sylius.behat.page.admin.crud.create">
             <argument type="string">sylius_admin_shipping_method_create</argument>
         </service>
-        <service id="sylius.behat.page.admin.shipping_method.index" class="%sylius.behat.page.admin.shipping_method.index.class%" parent="sylius.behat.page.admin.crud.index" public="false">
+        <service id="Sylius\Behat\Page\Admin\ShippingMethod\CreatePageInterface" alias="sylius.behat.page.admin.shipping_method.create" />
+
+        <service id="sylius.behat.page.admin.shipping_method.index" class="%sylius.behat.page.admin.shipping_method.index.class%" parent="sylius.behat.page.admin.crud.index">
             <argument type="string">sylius_admin_shipping_method_index</argument>
         </service>
-        <service id="sylius.behat.page.admin.shipping_method.update" class="%sylius.behat.page.admin.shipping_method.update.class%" parent="sylius.behat.page.admin.crud.update" public="false">
+        <service id="Sylius\Behat\Page\Admin\ShippingMethod\IndexPageInterface" alias="sylius.behat.page.admin.shipping_method.index" />
+
+        <service id="sylius.behat.page.admin.shipping_method.update" class="%sylius.behat.page.admin.shipping_method.update.class%" parent="sylius.behat.page.admin.crud.update">
             <argument type="string">sylius_admin_shipping_method_update</argument>
         </service>
+        <service id="Sylius\Behat\Page\Admin\ShippingMethod\UpdatePageInterface" alias="sylius.behat.page.admin.shipping_method.update" />
     </services>
 </container>

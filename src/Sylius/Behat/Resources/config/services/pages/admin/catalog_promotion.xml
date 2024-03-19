@@ -17,7 +17,7 @@
 >
     <parameters>
         <parameter key="sylius.behat.page.admin.catalog_promotion.create.class">Sylius\Behat\Page\Admin\CatalogPromotion\CreatePage</parameter>
-        <parameter key="sylius.behat.page.admin.catalog_promotion.index.class">%sylius.behat.page.admin.crud.index.class%</parameter>
+        <parameter key="sylius.behat.page.admin.catalog_promotion.index.class">Sylius\Behat\Page\Admin\CatalogPromotion\IndexPage</parameter>
         <parameter key="sylius.behat.page.admin.catalog_promotion.show.class">Sylius\Behat\Page\Admin\CatalogPromotion\ShowPage</parameter>
         <parameter key="sylius.behat.page.admin.catalog_promotion.product_variant.index.class">Sylius\Behat\Page\Admin\CatalogPromotion\ProductVariant\IndexPage</parameter>
         <parameter key="sylius.behat.page.admin.catalog_promotion.update.class">Sylius\Behat\Page\Admin\CatalogPromotion\UpdatePage</parameter>
@@ -31,6 +31,7 @@
         >
             <argument type="string">sylius_admin_catalog_promotion_create</argument>
         </service>
+        <service id="Sylius\Behat\Page\Admin\CatalogPromotion\CreatePageInterface" alias="sylius.behat.page.admin.catalog_promotion.create" />
 
         <service
             id="sylius.behat.page.admin.catalog_promotion.index"
@@ -39,6 +40,7 @@
         >
             <argument type="string">sylius_admin_catalog_promotion_index</argument>
         </service>
+        <service id="Sylius\Behat\Page\Admin\CatalogPromotion\ProductVariant\IndexPageInterface" alias="sylius.behat.page.admin.catalog_promotion.index" />
 
         <service
             id="sylius.behat.page.admin.catalog_promotion.product_variant.index"
@@ -47,6 +49,7 @@
         >
             <argument type="string">sylius_admin_catalog_promotion_product_variant_index</argument>
         </service>
+        <service id="Sylius\Behat\Page\Admin\CatalogPromotion\IndexPageInterface" alias="sylius.behat.page.admin.catalog_promotion.product_variant.index" />
 
         <service
             id="sylius.behat.page.admin.catalog_promotion.update"
@@ -55,11 +58,13 @@
         >
             <argument type="string">sylius_admin_catalog_promotion_update</argument>
         </service>
+        <service id="Sylius\Behat\Page\Admin\CatalogPromotion\UpdatePageInterface" alias="sylius.behat.page.admin.catalog_promotion.update" />
 
         <service
             id="sylius.behat.page.admin.catalog_promotion.show"
             class="%sylius.behat.page.admin.catalog_promotion.show.class%"
             parent="sylius.behat.symfony_page"
         />
+        <service id="Sylius\Behat\Page\Admin\CatalogPromotion\ShowPageInterface" alias="sylius.behat.page.admin.catalog_promotion.show" />
     </services>
 </container>
