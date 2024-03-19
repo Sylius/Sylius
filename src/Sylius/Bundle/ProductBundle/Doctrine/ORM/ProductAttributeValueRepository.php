@@ -94,9 +94,6 @@ class ProductAttributeValueRepository extends EntityRepository implements Produc
 
     protected function isPostgreSQLPlatform(Connection $connection): bool
     {
-        return
-            class_exists(PostgreSQLPlatform::class) &&
-            is_a($connection->getDatabasePlatform(), PostgreSQLPlatform::class, true)
-        ;
+        return is_a($connection->getDatabasePlatform(), PostgreSQLPlatform::class, true);
     }
 }
