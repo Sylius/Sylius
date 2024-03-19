@@ -6554,3 +6554,128 @@ parameters:
 			message: "#^Method Sylius\\\\Component\\\\User\\\\Security\\\\Checker\\\\TokenUniquenessChecker\\:\\:__construct\\(\\) has parameter \\$repository with generic interface Sylius\\\\Component\\\\Resource\\\\Repository\\\\RepositoryInterface but does not specify its types\\: T$#"
 			count: 1
 			path: src/Sylius/Component/User/Security/Checker/TokenUniquenessChecker.php
+
+		-
+			message: "#^Method Sylius\\\\Bundle\\\\ApiBundle\\\\DataPersister\\\\AddressDataPersister\\:\\:persist\\(\\) has parameter \\$data with no type specified\\.$#"
+			count: 1
+			path: src/Sylius/Bundle/ApiBundle/DataPersister/AddressDataPersister.php
+
+		-
+			message: "#^Method Sylius\\\\Bundle\\\\ApiBundle\\\\DataPersister\\\\AddressDataPersister\\:\\:remove\\(\\) has parameter \\$data with no type specified\\.$#"
+			count: 1
+			path: src/Sylius/Bundle/ApiBundle/DataPersister/AddressDataPersister.php
+
+		-
+			message: "#^Method Sylius\\\\Bundle\\\\ApiBundle\\\\DataPersister\\\\AddressDataPersister\\:\\:supports\\(\\) has parameter \\$data with no type specified\\.$#"
+			count: 1
+			path: src/Sylius/Bundle/ApiBundle/DataPersister/AddressDataPersister.php
+
+		-
+			message: "#^Method Sylius\\\\Bundle\\\\ApiBundle\\\\DataPersister\\\\AdminUserDataPersister\\:\\:persist\\(\\) has parameter \\$data with no type specified\\.$#"
+			count: 1
+			path: src/Sylius/Bundle/ApiBundle/DataPersister/AdminUserDataPersister.php
+
+		-
+			message: "#^Method Sylius\\\\Bundle\\\\ApiBundle\\\\DataPersister\\\\AdminUserDataPersister\\:\\:remove\\(\\) has parameter \\$data with no type specified\\.$#"
+			count: 1
+			path: src/Sylius/Bundle/ApiBundle/DataPersister/AdminUserDataPersister.php
+
+		-
+			message: "#^Method Sylius\\\\Bundle\\\\ApiBundle\\\\DataPersister\\\\AdminUserDataPersister\\:\\:supports\\(\\) has parameter \\$data with no type specified\\.$#"
+			count: 1
+			path: src/Sylius/Bundle/ApiBundle/DataPersister/AdminUserDataPersister.php
+
+		-
+			message: "#^Method Sylius\\\\Bundle\\\\ApiBundle\\\\DataPersister\\\\CountryDataPersister\\:\\:persist\\(\\) has parameter \\$data with no type specified\\.$#"
+			count: 1
+			path: src/Sylius/Bundle/ApiBundle/DataPersister/CountryDataPersister.php
+
+		-
+			message: "#^Method Sylius\\\\Bundle\\\\ApiBundle\\\\DataPersister\\\\CountryDataPersister\\:\\:remove\\(\\) has parameter \\$data with no type specified\\.$#"
+			count: 1
+			path: src/Sylius/Bundle/ApiBundle/DataPersister/CountryDataPersister.php
+
+		-
+			message: "#^Method Sylius\\\\Bundle\\\\ApiBundle\\\\DataPersister\\\\CountryDataPersister\\:\\:supports\\(\\) has parameter \\$data with no type specified\\.$#"
+			count: 1
+			path: src/Sylius/Bundle/ApiBundle/DataPersister/CountryDataPersister.php
+
+		-
+			message: "#^Method Sylius\\\\Bundle\\\\ApiBundle\\\\DataPersister\\\\MessengerDataPersister\\:\\:persist\\(\\) has parameter \\$data with no type specified\\.$#"
+			count: 1
+			path: src/Sylius/Bundle/ApiBundle/DataPersister/MessengerDataPersister.php
+
+		-
+			message: "#^Method Sylius\\\\Bundle\\\\ApiBundle\\\\DataPersister\\\\MessengerDataPersister\\:\\:remove\\(\\) has parameter \\$data with no type specified\\.$#"
+			count: 1
+			path: src/Sylius/Bundle/ApiBundle/DataPersister/MessengerDataPersister.php
+
+		-
+			message: "#^Method Sylius\\\\Bundle\\\\ApiBundle\\\\DataPersister\\\\MessengerDataPersister\\:\\:supports\\(\\) has parameter \\$data with no type specified\\.$#"
+			count: 1
+			path: src/Sylius/Bundle/ApiBundle/DataPersister/MessengerDataPersister.php
+
+		-
+			message: "#^Method Sylius\\\\Bundle\\\\ApiBundle\\\\DataPersister\\\\ShippingMethodDataPersister\\:\\:persist\\(\\) has parameter \\$data with no type specified\\.$#"
+			count: 1
+			path: src/Sylius/Bundle/ApiBundle/DataPersister/ShippingMethodDataPersister.php
+
+		-
+			message: "#^Method Sylius\\\\Bundle\\\\ApiBundle\\\\DataPersister\\\\ShippingMethodDataPersister\\:\\:remove\\(\\) has parameter \\$data with no type specified\\.$#"
+			count: 1
+			path: src/Sylius/Bundle/ApiBundle/DataPersister/ShippingMethodDataPersister.php
+
+		-
+			message: "#^Method Sylius\\\\Bundle\\\\ApiBundle\\\\DataPersister\\\\ShippingMethodDataPersister\\:\\:supports\\(\\) has parameter \\$data with no type specified\\.$#"
+			count: 1
+			path: src/Sylius/Bundle/ApiBundle/DataPersister/ShippingMethodDataPersister.php
+
+		-
+			message: "#^Method Sylius\\\\Bundle\\\\ApiBundle\\\\DataPersister\\\\ZoneDataPersister\\:\\:persist\\(\\) has parameter \\$data with no type specified\\.$#"
+			count: 1
+			path: src/Sylius/Bundle/ApiBundle/DataPersister/ZoneDataPersister.php
+
+		-
+			message: "#^Method Sylius\\\\Bundle\\\\ApiBundle\\\\DataPersister\\\\ZoneDataPersister\\:\\:remove\\(\\) has parameter \\$data with no type specified\\.$#"
+			count: 1
+			path: src/Sylius/Bundle/ApiBundle/DataPersister/ZoneDataPersister.php
+
+		-
+			message: "#^Method Sylius\\\\Bundle\\\\ApiBundle\\\\DataPersister\\\\ZoneDataPersister\\:\\:supports\\(\\) has parameter \\$data with no type specified\\.$#"
+			count: 1
+			path: src/Sylius/Bundle/ApiBundle/DataPersister/ZoneDataPersister.php
+
+		-
+			message: "#^Method Sylius\\\\Bundle\\\\ApiBundle\\\\Filter\\\\Doctrine\\\\CatalogPromotionChannelFilter\\:\\:filterProperty\\(\\) has parameter \\$value with no type specified\\.$#"
+			count: 1
+			path: src/Sylius/Bundle/ApiBundle/Filter/Doctrine/CatalogPromotionChannelFilter.php
+
+		-
+			message: "#^Method Sylius\\\\Bundle\\\\ApiBundle\\\\Filter\\\\Doctrine\\\\ExchangeRateFilter\\:\\:filterProperty\\(\\) has parameter \\$value with no type specified\\.$#"
+			count: 1
+			path: src/Sylius/Bundle/ApiBundle/Filter/Doctrine/ExchangeRateFilter.php
+
+		-
+			message: "#^Method Sylius\\\\Bundle\\\\ApiBundle\\\\Filter\\\\Doctrine\\\\ProductPriceOrderFilter\\:\\:filterProperty\\(\\) has parameter \\$value with no type specified\\.$#"
+			count: 1
+			path: src/Sylius/Bundle/ApiBundle/Filter/Doctrine/ProductPriceOrderFilter.php
+
+		-
+			message: "#^Method Sylius\\\\Bundle\\\\ApiBundle\\\\Filter\\\\Doctrine\\\\ProductVariantCatalogPromotionFilter\\:\\:filterProperty\\(\\) has parameter \\$value with no type specified\\.$#"
+			count: 1
+			path: src/Sylius/Bundle/ApiBundle/Filter/Doctrine/ProductVariantCatalogPromotionFilter.php
+
+		-
+			message: "#^Method Sylius\\\\Bundle\\\\ApiBundle\\\\Filter\\\\Doctrine\\\\ProductVariantOptionValueFilter\\:\\:filterProperty\\(\\) has parameter \\$value with no type specified\\.$#"
+			count: 1
+			path: src/Sylius/Bundle/ApiBundle/Filter/Doctrine/ProductVariantOptionValueFilter.php
+
+		-
+			message: "#^Method Sylius\\\\Bundle\\\\ApiBundle\\\\Filter\\\\Doctrine\\\\TaxonFilter\\:\\:filterProperty\\(\\) has parameter \\$value with no type specified\\.$#"
+			count: 1
+			path: src/Sylius/Bundle/ApiBundle/Filter/Doctrine/TaxonFilter.php
+
+		-
+			message: "#^Method Sylius\\\\Bundle\\\\ApiBundle\\\\Filter\\\\Doctrine\\\\TranslationOrderNameAndLocaleFilter\\:\\:filterProperty\\(\\) has parameter \\$value with no type specified\\.$#"
+			count: 1
+			path: src/Sylius/Bundle/ApiBundle/Filter/Doctrine/TranslationOrderNameAndLocaleFilter.php
