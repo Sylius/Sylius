@@ -18,13 +18,14 @@
     </parameters>
 
     <services>
-        <defaults public="true" />
-
-        <service id="sylius.behat.page.admin.product_review.index" class="%sylius.behat.page.admin.product_review.index.class%" parent="sylius.behat.page.admin.crud.index" public="false">
+        <service id="sylius.behat.page.admin.product_review.index" class="%sylius.behat.page.admin.product_review.index.class%" parent="sylius.behat.page.admin.crud.index">
             <argument type="string">sylius_admin_product_review_index</argument>
         </service>
-        <service id="sylius.behat.page.admin.product_review.update" class="%sylius.behat.page.admin.product_review.update.class%" parent="sylius.behat.page.admin.crud.update" public="false">
+        <service id="Sylius\Behat\Page\Admin\ProductReview\IndexPageInterface" alias="sylius.behat.page.admin.product_review.index" />
+
+        <service id="sylius.behat.page.admin.product_review.update" class="%sylius.behat.page.admin.product_review.update.class%" parent="sylius.behat.page.admin.crud.update">
             <argument type="string">sylius_admin_product_review_update</argument>
         </service>
+        <service id="Sylius\Behat\Page\Admin\ProductReview\UpdatePageInterface" alias="sylius.behat.page.admin.product_review.update" />
     </services>
 </container>

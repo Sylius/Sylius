@@ -17,8 +17,9 @@
     </parameters>
 
     <services>
-        <defaults public="true" />
+        <defaults public="false" />
 
-        <service id="sylius.behat.page.shop.contact" class="%sylius.behat.page.shop.contact.class%" parent="sylius.behat.symfony_page" public="false" />
+        <service id="sylius.behat.page.shop.contact" class="%sylius.behat.page.shop.contact.class%" parent="sylius.behat.symfony_page" />
+        <service id="Sylius\Behat\Page\Shop\Contact\ContactPageInterface" alias="sylius.behat.page.shop.contact" />
     </services>
 </container>

@@ -19,16 +19,19 @@
     </parameters>
 
     <services>
-        <defaults public="true" />
-
-        <service id="sylius.behat.page.admin.shipping_category.create" class="%sylius.behat.page.admin.shipping_category.create.class%" parent="sylius.behat.page.admin.crud.create" public="false">
+        <service id="sylius.behat.page.admin.shipping_category.create" class="%sylius.behat.page.admin.shipping_category.create.class%" parent="sylius.behat.page.admin.crud.create">
             <argument type="string">sylius_admin_shipping_category_create</argument>
         </service>
-        <service id="sylius.behat.page.admin.shipping_category.index" class="%sylius.behat.page.admin.shipping_category.index.class%" parent="sylius.behat.page.admin.crud.index" public="false">
+        <service id="Sylius\Behat\Page\Admin\ShippingCategory\CreatePageInterface" alias="sylius.behat.page.admin.shipping_category.create" />
+
+        <service id="sylius.behat.page.admin.shipping_category.index" class="%sylius.behat.page.admin.shipping_category.index.class%" parent="sylius.behat.page.admin.crud.index">
             <argument type="string">sylius_admin_shipping_category_index</argument>
         </service>
-        <service id="sylius.behat.page.admin.shipping_category.update" class="%sylius.behat.page.admin.shipping_category.update.class%" parent="sylius.behat.page.admin.crud.update" public="false">
+        <service id="Sylius\Behat\Page\Admin\ShippingCategory\IndexPageInterface" alias="sylius.behat.page.admin.shipping_category.index" />
+
+        <service id="sylius.behat.page.admin.shipping_category.update" class="%sylius.behat.page.admin.shipping_category.update.class%" parent="sylius.behat.page.admin.crud.update">
             <argument type="string">sylius_admin_shipping_category_update</argument>
         </service>
+        <service id="Sylius\Behat\Page\Admin\ShippingCategory\UpdatePageInterface" alias="sylius.behat.page.admin.shipping_category.update" />
     </services>
 </container>

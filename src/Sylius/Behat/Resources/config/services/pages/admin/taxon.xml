@@ -19,16 +19,19 @@
     </parameters>
 
     <services>
-        <defaults public="true" />
+        <service id="sylius.behat.page.admin.taxon.create" class="%sylius.behat.page.admin.taxon.create.class%" parent="sylius.behat.page.admin.crud.create">
+            <argument type="string">sylius_admin_taxon_create</argument>
+        </service>
+        <service id="Sylius\Behat\Page\Admin\Taxon\CreatePageInterface" alias="sylius.behat.page.admin.taxon.create" />
 
-        <service id="sylius.behat.page.admin.taxon.create" class="%sylius.behat.page.admin.taxon.create.class%" parent="sylius.behat.page.admin.crud.create" public="false">
+        <service id="sylius.behat.page.admin.taxon.create_for_parent" class="%sylius.behat.page.admin.taxon.create_for_parent.class%" parent="sylius.behat.page.admin.taxon.create">
             <argument type="string">sylius_admin_taxon_create</argument>
         </service>
-        <service id="sylius.behat.page.admin.taxon.create_for_parent" class="%sylius.behat.page.admin.taxon.create_for_parent.class%" parent="sylius.behat.page.admin.taxon.create" public="false">
-            <argument type="string">sylius_admin_taxon_create</argument>
-        </service>
-        <service id="sylius.behat.page.admin.taxon.update" class="%sylius.behat.page.admin.taxon.update.class%" parent="sylius.behat.page.admin.crud.update" public="false">
+        <service id="Sylius\Behat\Page\Admin\Taxon\CreateForParentPageInterface" alias="sylius.behat.page.admin.taxon.create_for_parent" />
+
+        <service id="sylius.behat.page.admin.taxon.update" class="%sylius.behat.page.admin.taxon.update.class%" parent="sylius.behat.page.admin.crud.update">
             <argument type="string">sylius_admin_taxon_update</argument>
         </service>
+        <service id="Sylius\Behat\Page\Admin\Taxon\UpdatePageInterface" alias="sylius.behat.page.admin.taxon.update" />
     </services>
 </container>

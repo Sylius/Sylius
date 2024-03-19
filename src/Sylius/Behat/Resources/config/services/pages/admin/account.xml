@@ -17,12 +17,13 @@
     </parameters>
 
     <services>
-        <defaults public="true" />
+        <service id="sylius.behat.page.admin.login" class="Sylius\Behat\Page\Admin\Account\LoginPage" parent="sylius.behat.symfony_page" />
+        <service id="Sylius\Behat\Page\Admin\Account\LoginPageInterface" alias="sylius.behat.page.admin.login" />
 
-        <service id="sylius.behat.page.admin.login" class="Sylius\Behat\Page\Admin\Account\LoginPage" parent="sylius.behat.symfony_page" public="false" />
+        <service id="sylius.behat.page.admin.request_password_reset" class="Sylius\Behat\Page\Admin\Account\RequestPasswordResetPage" parent="sylius.behat.symfony_page" />
+        <service id="Sylius\Behat\Page\Admin\Account\RequestPasswordResetPageInterface" alias="sylius.behat.page.admin.request_password_reset" />
 
-        <service id="sylius.behat.page.admin.request_password_reset" class="Sylius\Behat\Page\Admin\Account\RequestPasswordResetPage" parent="sylius.behat.symfony_page" public="false" />
-
-        <service id="sylius.behat.page.admin.reset_password" class="%sylius.behat.page.admin.reset_password%" parent="sylius.behat.symfony_page" public="false" />
+        <service id="sylius.behat.page.admin.reset_password" class="%sylius.behat.page.admin.reset_password%" parent="sylius.behat.symfony_page" />
+        <service id="Sylius\Behat\Page\Admin\Account\ResetPasswordPageInterface" alias="sylius.behat.page.admin.reset_password" />
     </services>
 </container>
