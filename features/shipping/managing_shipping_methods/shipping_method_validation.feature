@@ -20,6 +20,14 @@ Feature: Shipping method validation
         And shipping method with name "FedEx Carrier" should not be added
 
     @ui @api
+    Scenario: Trying to add a new shipping method with too long code
+        Given I want to create a new shipping method
+        And I name it "FedEx Carrier" in "English (United States)"
+        When I specify its code as 256 characters long string
+        And I try to add it
+        Then I should be notified that the code is too long
+
+    @ui @api
     Scenario: Trying to add a new shipping method without specifying its name
         When I want to create a new shipping method
         And I specify its code as "FED_EX"

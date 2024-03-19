@@ -83,12 +83,31 @@ class ManagingShippingCategoriesContext implements Context
     }
 
     /**
+     * @Then I should be notified that the code is too long
+     */
+    public function iShouldBeNotifiedThatTheCodeIsTooLong(): void
+    {
+        Assert::contains(
+            $this->createPage->getValidationMessage('code'),
+            'Category code must not be longer than',
+        );
+    }
+
+    /**
      * @When I do not specify its code
      * @When I specify its code as :shippingCategoryCode
      */
     public function iSpecifyItsCodeAs($shippingCategoryCode = null)
     {
         $this->createPage->specifyCode($shippingCategoryCode ?? '');
+    }
+
+    /**
+     * @When I specify its code as :amount characters long string
+     */
+    public function iSpecifyItsCodeAsCharactersLongString(int $amount): void
+    {
+        $this->iSpecifyItsCodeAs(str_repeat('a', $amount));
     }
 
     /**

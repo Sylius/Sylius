@@ -80,6 +80,14 @@ final class ManagingShippingCategoriesContext implements Context
     }
 
     /**
+     * @When I specify its code as :amount characters long string
+     */
+    public function iSpecifyItsCodeAsCharactersLongString(int $amount): void
+    {
+        $this->iSpecifyItsCodeAs(str_repeat('a', $amount));
+    }
+
+    /**
      * @When I name it :name
      * @When I do not specify its name
      * @When I rename it to :name
@@ -126,6 +134,17 @@ final class ManagingShippingCategoriesContext implements Context
         Assert::same(
             $this->responseChecker->getError($this->client->getLastResponse()),
             sprintf('%s: Please enter shipping category %s.', $element, $element),
+        );
+    }
+
+    /**
+     * @Then I should be notified that the code is too long
+     */
+    public function iShouldBeNotifiedThatTheCodeIsTooLong(): void
+    {
+        Assert::contains(
+            $this->responseChecker->getError($this->client->getLastResponse()),
+            'Category code must not be longer than',
         );
     }
 

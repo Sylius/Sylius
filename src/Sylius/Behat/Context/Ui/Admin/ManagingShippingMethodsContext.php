@@ -52,6 +52,14 @@ final class ManagingShippingMethodsContext implements Context
     }
 
     /**
+     * @When I specify its code as :amount characters long string
+     */
+    public function iSpecifyItsCodeAsCharactersLongString(int $amount): void
+    {
+        $this->iSpecifyItsCodeAs(str_repeat('a', $amount));
+    }
+
+    /**
      * @When I specify its position as :position
      */
     public function iSpecifyItsPositionAs(int $position = null)
@@ -240,6 +248,17 @@ final class ManagingShippingMethodsContext implements Context
     public function iShouldBeNotifiedThatIsRequired($element)
     {
         $this->assertFieldValidationMessage($element, sprintf('Please enter shipping method %s.', $element));
+    }
+
+    /**
+     * @Then I should be notified that the code is too long
+     */
+    public function iShouldBeNotifiedThatTheCodeIsTooLong(): void
+    {
+        /** @var CreatePageInterface|UpdatePageInterface $currentPage */
+        $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
+
+        Assert::contains($currentPage->getValidationMessage('code'), 'Shipping method code must not be longer than');
     }
 
     /**

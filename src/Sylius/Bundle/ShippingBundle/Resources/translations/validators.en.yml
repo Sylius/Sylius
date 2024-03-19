@@ -8,6 +8,7 @@ sylius:
             min_length: 'Category name must be at least {{ limit }} characters long.'
             not_blank: 'Please enter shipping category name.'
         code:
+            max_length: 'Category code must not be longer than {{ limit }} characters.'
             not_blank: 'Please enter shipping category code.'
             regex: 'Shipping category code can only be comprised of letters, numbers, dashes and underscores.'
             unique: 'The shipping category with given code already exists.'
@@ -22,6 +23,7 @@ sylius:
             min_length: 'Shipping method name must be at least {{ limit }} characters long.'
             not_blank: 'Please enter shipping method name.'
         code:
+            max_length: 'Shipping method code must not be longer than {{ limit }} characters.'
             not_blank: 'Please enter shipping method code.'
             regex: 'Shipping method code can only be comprised of letters, numbers, dashes and underscores.'
             unique: 'The shipping method with given code already exists.'

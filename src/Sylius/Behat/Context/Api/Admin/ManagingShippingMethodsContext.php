@@ -250,6 +250,14 @@ final class ManagingShippingMethodsContext implements Context
     }
 
     /**
+     * @When I specify its code as :amount characters long string
+     */
+    public function iSpecifyItsCodeAsCharactersLongString(int $amount): void
+    {
+        $this->iSpecifyItsCodeAs(str_repeat('a', $amount));
+    }
+
+    /**
      * @When I specify its position as :position
      */
     public function iSpecifyItsPositionAs(int $position): void
@@ -625,6 +633,17 @@ final class ManagingShippingMethodsContext implements Context
         Assert::contains(
             $this->responseChecker->getError($this->client->getLastResponse()),
             sprintf('%s: Please enter shipping method %s.', $element, $element),
+        );
+    }
+
+    /**
+     * @Then I should be notified that the code is too long
+     */
+    public function iShouldBeNotifiedThatTheCodeIsTooLong(): void
+    {
+        Assert::contains(
+            $this->responseChecker->getError($this->client->getLastResponse()),
+            'Shipping method code must not be longer than',
         );
     }
 
