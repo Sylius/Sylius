@@ -28,7 +28,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
 
     public function specifyPosition(?int $position): void
     {
-        $this->getDocument()->fillField('Position', $position);
+        $this->getDocument()->fillField('Position', (string) $position);
     }
 
     public function nameIt(string $name, string $language): void

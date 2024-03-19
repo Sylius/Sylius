@@ -43,7 +43,7 @@ class IndexPage extends BaseIndexPage implements IndexPageInterface
 
         $productVariantPosition = $productVariantsRow->find('css', '.sylius-product-variant-position');
         Assert::notNull($productVariantPosition, 'There are no position field in given row!');
-        $productVariantPosition->setValue($position);
+        $productVariantPosition->setValue((string) $position);
     }
 
     public function savePositions(): void
