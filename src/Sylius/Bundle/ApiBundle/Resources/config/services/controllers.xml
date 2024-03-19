@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Sylius Sp. z o.o.
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
+>
+    <services>
+        <defaults public="true" />
+
+        <service id="Sylius\Bundle\ApiBundle\Controller\DeleteOrderItemAction">
+            <argument type="service" id="sylius.command_bus" />
+            <argument type="service" id="sylius.repository.order_item" />
+        </service>
+
+        <service id="Sylius\Bundle\ApiBundle\Controller\GetCustomerStatisticsAction">
+            <argument type="service" id="sylius.query_bus" />
+            <tag name="controller.service_arguments" />
+        </service>
+
+        <service id="Sylius\Bundle\ApiBundle\Controller\GetProductBySlugAction">
+            <argument type="service" id="sylius.context.channel" />
+            <argument type="service" id="sylius.context.locale" />
+            <argument type="service" id="sylius.repository.product" />
+            <argument type="service" id="api_platform.symfony.iri_converter" />
+            <argument type="service" id="request_stack" />
+        </service>
+
+        <service id="Sylius\Bundle\ApiBundle\Controller\RemoveCatalogPromotionAction">
+            <argument type="service" id="Sylius\Bundle\CoreBundle\CatalogPromotion\Processor\CatalogPromotionRemovalProcessorInterface" />
+        </service>
+
+        <service id="Sylius\Bundle\ApiBundle\Controller\UploadAvatarImageAction">
+            <argument type="service" id="sylius.factory.avatar_image" />
+            <argument type="service" id="sylius.repository.avatar_image" />
+            <argument type="service" id="sylius.image_uploader" />
+            <argument type="service" id="api_platform.symfony.iri_converter" />
+        </service>
+
+        <service id="Sylius\Bundle\ApiBundle\Controller\UploadProductImageAction">
+            <argument type="service" id="Sylius\Bundle\ApiBundle\Creator\ProductImageCreator" />
+        </service>
+
+        <service id="Sylius\Bundle\ApiBundle\Controller\UploadTaxonImageAction">
+            <argument type="service" id="Sylius\Bundle\ApiBundle\Creator\TaxonImageCreator" />
+        </service>
+
+        <service id="Sylius\Bundle\ApiBundle\Controller\GetAddressLogEntryCollectionAction">
+            <argument type="service" id="sylius.query_bus" />
+            <tag name="controller.service_arguments" />
+        </service>
+
+        <service id="Sylius\Bundle\ApiBundle\Controller\RemoveCustomerShopUserAction">
+            <argument type="service" id="sylius.command_bus" />
+            <argument type="service" id="sylius.repository.shop_user" />
+        </service>
+
+        <service id="Sylius\Bundle\ApiBundle\Controller\GetStatisticsAction">
+            <argument type="service" id="sylius.query_bus" />
+            <argument type="service" id="serializer" />
+            <argument type="service" id="validator" />
+            <argument>%sylius_core.orders_statistics.intervals_map%</argument>
+        </service>
+    </services>
+</container>

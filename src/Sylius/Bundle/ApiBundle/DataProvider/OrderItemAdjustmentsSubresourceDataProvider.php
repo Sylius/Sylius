@@ -16,17 +16,17 @@ namespace Sylius\Bundle\ApiBundle\DataProvider;
 use ApiPlatform\Core\DataProvider\RestrictedDataProviderInterface;
 use ApiPlatform\Core\DataProvider\SubresourceDataProviderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
+use Sylius\Component\Core\Repository\OrderItemRepositoryInterface;
 use Sylius\Component\Order\Model\AdjustmentInterface;
-use Sylius\Component\Order\Repository\OrderItemRepositoryInterface;
-use Webmozart\Assert\Assert;
 
-/** @experimental */
 final class OrderItemAdjustmentsSubresourceDataProvider implements RestrictedDataProviderInterface, SubresourceDataProviderInterface
 {
-    public function __construct(private OrderItemRepositoryInterface $orderItemRepository)
+    /** @param OrderItemRepositoryInterface<OrderItemInterface> $orderItemRepository */
+    public function __construct(private readonly OrderItemRepositoryInterface $orderItemRepository)
     {
     }
 
+    /** @param array<array-key, mixed> $context */
     public function supports(string $resourceClass, string $operationName = null, array $context = []): bool
     {
         $subresourceIdentifiers = $context['subresource_identifiers'] ?? null;
@@ -37,13 +37,23 @@ final class OrderItemAdjustmentsSubresourceDataProvider implements RestrictedDat
         ;
     }
 
-    public function getSubresource(string $resourceClass, array $identifiers, array $context, string $operationName = null)
+    /**
+     * @param array<array-key, mixed> $identifiers
+     * @param array<array-key, mixed> $context
+     *
+     * @return iterable<AdjustmentInterface>
+     */
+    public function getSubresource(string $resourceClass, array $identifiers, array $context, string $operationName = null): iterable
     {
         $subresourceIdentifiers = $context['subresource_identifiers'];
 
-        /** @var OrderItemInterface|null $orderItem */
-        $orderItem = $this->orderItemRepository->find($subresourceIdentifiers['items']);
-        Assert::notNull($orderItem);
+        $orderItem = $this->orderItemRepository->findOneByIdAndOrderTokenValue(
+            (int) $subresourceIdentifiers['items'],
+            $subresourceIdentifiers['tokenValue'],
+        );
+        if (null === $orderItem) {
+            return [];
+        }
 
         return $orderItem->getAdjustmentsRecursively();
     }

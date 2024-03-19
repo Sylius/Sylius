@@ -17,3 +17,21 @@ sylius_shipping:
         shipping_category:
             classes:
                 repository: Sylius\Bundle\CoreBundle\Doctrine\ORM\ShippingCategoryRepository
+
+    shipping_method_calculator:
+        validation_groups:
+            flat_rate:
+                - 'sylius'
+                - 'sylius_shipping_method_calculator_rate'
+            per_unit_rate:
+                - 'sylius'
+                - 'sylius_shipping_method_calculator_rate'
+
+    shipping_method_rule:
+        validation_groups:
+            order_total_greater_than_or_equal:
+                - 'sylius'
+                - 'sylius_shipping_method_rule_order_total'
+            order_total_less_than_or_equal:
+                - 'sylius'
+                - 'sylius_shipping_method_rule_order_total'

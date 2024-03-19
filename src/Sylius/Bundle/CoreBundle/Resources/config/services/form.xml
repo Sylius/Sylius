@@ -51,6 +51,9 @@
         <parameter key="sylius.form.type.product_image.validation_groups" type="collection">
             <parameter>sylius</parameter>
         </parameter>
+        <parameter key="sylius.form.type.channel_price_history_config.validation_groups" type="collection">
+            <parameter>sylius</parameter>
+        </parameter>
         <parameter key="sylius.catalog_promotion.action.fixed_discount" type="constant">Sylius\Bundle\CoreBundle\CatalogPromotion\Calculator\FixedDiscountPriceCalculator::TYPE</parameter>
         <parameter key="sylius.catalog_promotion.action.percentage_discount" type="constant">Sylius\Bundle\CoreBundle\CatalogPromotion\Calculator\PercentageDiscountPriceCalculator::TYPE</parameter>
         <parameter key="sylius.catalog_promotion.scope.for_products" type="constant">Sylius\Bundle\CoreBundle\CatalogPromotion\Checker\InForProductScopeVariantChecker::TYPE</parameter>
@@ -69,7 +72,6 @@
             <tag name="form.type_extension" extended-type="Sylius\Bundle\AddressingBundle\Form\Type\CountryType" priority="100" />
         </service>
         <service id="sylius.form.extension.type.channel" class="Sylius\Bundle\CoreBundle\Form\Extension\ChannelTypeExtension">
-            <argument type="service" id="sylius.repository.channel" />
             <tag name="form.type_extension" extended-type="Sylius\Bundle\ChannelBundle\Form\Type\ChannelType" priority="100" />
         </service>
         <service id="sylius.form.extension.type.locale" class="Sylius\Bundle\CoreBundle\Form\Extension\LocaleTypeExtension">
@@ -89,6 +91,7 @@
             <tag name="form.type_extension" extended-type="Sylius\Bundle\PromotionBundle\Form\Type\CatalogPromotionType" priority="100" />
         </service>
         <service id="sylius.form.extension.type.payment_method" class="Sylius\Bundle\CoreBundle\Form\Extension\PaymentMethodTypeExtension">
+            <argument type="service" id="Sylius\Bundle\PayumBundle\Validator\GroupsGenerator\GatewayConfigGroupsGenerator" />
             <tag name="form.type_extension" extended-type="Sylius\Bundle\PaymentBundle\Form\Type\PaymentMethodType" priority="100" />
         </service>
         <service id="sylius.form.extension.type.tax_rate" class="Sylius\Bundle\CoreBundle\Form\Extension\TaxRateTypeExtension">
@@ -110,6 +113,7 @@
             <tag name="form.type_extension" extended-type="Sylius\Bundle\PromotionBundle\Form\Type\PromotionFilterCollectionType" priority="100" />
         </service>
         <service id="sylius.form.extension.type.shipping_method" class="Sylius\Bundle\CoreBundle\Form\Extension\ShippingMethodTypeExtension">
+            <argument type="service" id="Sylius\Bundle\ShippingBundle\Validator\GroupsGenerator\ShippingMethodConfigurationGroupsGenerator" />
             <tag name="form.type_extension" extended-type="Sylius\Bundle\ShippingBundle\Form\Type\ShippingMethodType" priority="100" />
         </service>
         <service id="sylius.form.extension.type.product" class="Sylius\Bundle\CoreBundle\Form\Extension\ProductTypeExtension">
@@ -298,6 +302,15 @@
             <argument>%sylius.model.catalog_promotion_scope.class%</argument>
             <argument>%sylius.form.type.catalog_promotion.validation_groups%</argument>
             <argument type="tagged_iterator" tag="sylius.catalog_promotion.scope_configuration_type" index-by="key" />
+            <tag name="form.type" />
+        </service>
+
+        <service id="sylius.form.type.channel_price_history_config" class="Sylius\Bundle\CoreBundle\Form\Type\ChannelPriceHistoryConfigType">
+            <argument type="service">
+                <service class="\Symfony\Component\Form\Extension\Core\DataMapper\DataMapper" />
+            </argument>
+            <argument>%sylius.model.channel_price_history_config.class%</argument>
+            <argument>%sylius.form.type.channel_price_history_config.validation_groups%</argument>
             <tag name="form.type" />
         </service>
     </services>

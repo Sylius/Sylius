@@ -13,19 +13,22 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Api\Shop;
 
-use ApiPlatform\Core\Api\IriConverterInterface;
+use ApiPlatform\Api\IriConverterInterface;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ApiSecurityClientInterface;
 use Sylius\Behat\Client\RequestFactoryInterface;
 use Sylius\Behat\Client\RequestInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
+use Sylius\Behat\Context\Api\Resources;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Component\Locale\Model\LocaleInterface;
 use Symfony\Component\BrowserKit\AbstractBrowser;
+use Symfony\Component\BrowserKit\Exception\BadMethodCallException;
 use Symfony\Component\HttpFoundation\Request as HTTPRequest;
+use Symfony\Component\HttpFoundation\Response;
 use Webmozart\Assert\Assert;
 
 final class LoginContext implements Context
@@ -59,7 +62,7 @@ final class LoginContext implements Context
     {
         $this->shopAuthenticationTokenClient->request(
             'POST',
-            sprintf('%s/shop/authentication-token', $this->apiUrlPrefix),
+            sprintf('%s/shop/customers/token', $this->apiUrlPrefix),
             [],
             [],
             ['CONTENT_TYPE' => 'application/json', 'HTTP_ACCEPT' => 'application/json'],
@@ -85,7 +88,7 @@ final class LoginContext implements Context
      */
     public function iWantToResetPassword(): void
     {
-        $this->request = $this->requestFactory->create('shop', 'reset-password-requests', 'Bearer');
+        $this->request = $this->requestFactory->create('shop', 'customers/reset-password', 'Bearer');
     }
 
     /**
@@ -105,7 +108,7 @@ final class LoginContext implements Context
     public function iFollowLinkOnMyEmailToResetPassword(ShopUserInterface $user): void
     {
         $this->request = $this->requestFactory->custom(
-            sprintf('%s/shop/reset-password-requests/%s', $this->apiUrlPrefix, $user->getPasswordResetToken()),
+            sprintf('%s/shop/customers/reset-password/%s', $this->apiUrlPrefix, $user->getPasswordResetToken()),
             HttpRequest::METHOD_PATCH,
         );
     }
@@ -204,7 +207,17 @@ final class LoginContext implements Context
      */
     public function iShouldNotBeLoggedIn(): void
     {
-        Assert::false($this->apiSecurityClient->isLoggedIn(), 'Shop user should not be logged in, but they are.');
+        try {
+            $isLoggedIn = $this->apiSecurityClient->isLoggedIn();
+        } catch (BadMethodCallException) {
+            /** @var ShopUserInterface $shopUser */
+            $shopUser = $this->sharedStorage->get('user');
+            $this->client->show(Resources::CUSTOMERS, (string) $shopUser->getCustomer()->getId());
+
+            $isLoggedIn = $this->client->getLastResponse()->getStatusCode() !== Response::HTTP_UNAUTHORIZED;
+        }
+
+        Assert::false($isLoggedIn, 'Shop user should not be logged in, but they are.');
     }
 
     /**
@@ -258,7 +271,7 @@ final class LoginContext implements Context
                 $this->shopAuthenticationTokenClient->getResponse(),
                 'customer',
             ),
-            $this->iriConverter->getIriFromItem($customer),
+            $this->iriConverter->getIriFromResource($customer),
         );
     }
 
@@ -267,11 +280,18 @@ final class LoginContext implements Context
      */
     public function iShouldNotBeAbleToChangeMyPasswordAgainWithTheSameToken(): void
     {
-        $this->client->executeCustomRequest($this->request);
+        $response = $this->client->executeCustomRequest($this->request);
+        Assert::same($response->getStatusCode(), 422);
+        Assert::same($this->responseChecker->getError($response), 'token: Password reset token itotallyforgotmypassword is invalid.');
+    }
 
-        // token is removed when used
-        Assert::same($this->client->getLastResponse()->getStatusCode(), 500);
-        $message = $this->responseChecker->getError($this->client->getLastResponse());
-        Assert::startsWith($message, 'Internal Server Error');
+    /**
+     * @Then I should not be able to change my password with this token
+     */
+    public function iShouldNotBeAbleToChangeMyPasswordWithThisToken(): void
+    {
+        $response = $this->client->getLastResponse();
+        Assert::same($response->getStatusCode(), 422);
+        Assert::same($this->responseChecker->getError($response), 'token: Password reset token has expired.');
     }
 }

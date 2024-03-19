@@ -1,0 +1,13 @@
+{
+    "@context": "\/api\/v2\/contexts\/ConstraintViolationList",
+    "@type": "ConstraintViolationList",
+    "hydra:title": "An error occurred",
+    "hydra:description": "translations[pl_PL].locale: A translation for the \"pl_PL\" locale code already exists.",
+    "violations": [
+        {
+            "propertyPath": "translations[pl_PL].locale",
+            "message": "A translation for the \"pl_PL\" locale code already exists.",
+            "code": @string@
+        }
+    ]
+}

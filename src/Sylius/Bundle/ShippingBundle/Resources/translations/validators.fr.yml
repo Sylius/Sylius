@@ -15,6 +15,7 @@ sylius:
         calculator:
             min: 'Les frais de port ne peuvent pas être inférieurs à 0.'
             not_blank: 'Veuillez sélectionner une méthode de calcul pour la livraison.'
+            invalid: 'Calculateur invalide. Les calculateurs disponibles sont {{ available_calculators }}.'
         name:
             max_length: 'Le nom de la méthode de livraison ne peut dépasser les {{ limit }} caractères.'
             min_length: 'Le nom de la méthode de livraison doit contenir au moins {{ limit }} caractères.'
@@ -25,6 +26,13 @@ sylius:
             unique: 'Ce code de mode de livraison existe déjà.'
         zone:
             not_blank: 'S''il vous plaît sélectionnez zone de méthode de livraison.'
+        rule:
+            invalid_type: 'Le type de règle n''est pas valide. Les types de règles disponibles sont {{ available_rule_types }}.'
     shipment:
         shipping_method:
             not_blank: 'Veuillez sélectionner un mode de livraison.'
+    translation:
+        locale:
+            not_blank: 'Vous devez entrer une valeur.'
+            invalid: 'Ce paramètre régional n''est pas valide.'
+            unique: 'Une traduction pour la locale {{ value }} existe déjà.'

@@ -16,7 +16,7 @@ namespace Sylius\Bundle\CoreBundle\Message\Admin\Account;
 class ResetPassword
 {
     public function __construct(
-        public string $resetPasswordToken,
+        public string $token,
         public ?string $newPassword = null,
         public ?string $confirmNewPassword = null,
     ) {

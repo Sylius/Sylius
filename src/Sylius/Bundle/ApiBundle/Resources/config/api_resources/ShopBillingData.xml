@@ -26,10 +26,24 @@
             <itemOperation name="admin_get">
                 <attribute name="method">GET</attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:shop_billing_data:read</attribute>
+                    <attribute name="groups">
+                        <attribute>admin:shop_billing_data:show</attribute>
+                        <attribute>sylius:admin:shop_billing_data:show</attribute>
+                    </attribute>
                 </attribute>
             </itemOperation>
         </itemOperations>
+
+        <subresourceOperations>
+            <subresourceOperation name="api_channels_shop_billing_data_get_subresource">
+                <attribute name="normalization_context">
+                    <attribute name="groups">
+                        <attribute>admin:shop_billing_data:read</attribute>
+                        <attribute>sylius:admin:shop_billing_data:show</attribute>
+                    </attribute>
+                </attribute>
+            </subresourceOperation>
+        </subresourceOperations>
 
         <property name="id" identifier="true" writable="false" />
         <property name="company" writable="true" readable="true" />

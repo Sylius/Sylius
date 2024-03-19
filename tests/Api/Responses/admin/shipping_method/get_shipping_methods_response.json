@@ -1,0 +1,105 @@
+{
+    "@context": "\/api\/v2\/contexts\/ShippingMethod",
+    "@id": "\/api\/v2\/admin\/shipping-methods",
+    "@type": "hydra:Collection",
+    "hydra:member": [
+        {
+            "@id": "\/api\/v2\/admin\/shipping-methods\/UPS",
+            "@type": "ShippingMethod",
+            "id": "@integer@",
+            "code": "UPS",
+            "position": 0,
+            "shippingChargesCalculator": "flat_rate",
+            "enabled": true,
+            "createdAt": @date@,
+            "updatedAt": @date@,
+            "shippingChargesCalculatorConfiguration": {
+                "WEB": {
+                    "amount": 500
+                },
+                "MOBILE": {
+                    "amount": 1000
+                }
+            },
+            "rules": [],
+            "zone": "\/api\/v2\/admin\/zones\/WORLD",
+            "channels": [
+                "\/api\/v2\/admin\/channels\/WEB"
+            ],
+            "translations": {
+                "en_US": {
+                    "@id": "\/api\/v2\/admin\/shipping-method-translations\/@integer@",
+                    "@type": "ShippingMethodTranslation",
+                    "id": @integer@,
+                    "name": "UPS",
+                    "description": @string@
+                }
+            }
+        },
+        {
+            "@id": "\/api\/v2\/admin\/shipping-methods\/DHL",
+            "@type": "ShippingMethod",
+            "id": "@integer@",
+            "code": "DHL",
+            "position": 1,
+            "shippingChargesCalculator": "flat_rate",
+            "enabled": true,
+            "createdAt": @date@,
+            "updatedAt": @date@,
+            "shippingChargesCalculatorConfiguration": {
+                "WEB": {
+                    "amount": 1000
+                },
+                "MOBILE": {
+                    "amount": 2000
+                }
+            },
+            "rules": [],
+            "zone": "\/api\/v2\/admin\/zones\/WORLD",
+            "channels": [
+                "\/api\/v2\/admin\/channels\/WEB"
+            ],
+            "translations": {
+                "en_US": {
+                    "@id": "\/api\/v2\/admin\/shipping-method-translations\/@integer@",
+                    "@type": "ShippingMethodTranslation",
+                    "id": @integer@,
+                    "name": "DHL",
+                    "description": @string@
+                }
+            }
+        }
+    ],
+    "hydra:totalItems": 2,
+    "hydra:search": {
+        "@type": "hydra:IriTemplate",
+        "hydra:template": "\/api\/v2\/admin\/shipping-methods{?exists[archivedAt],order[code],order[translation.name],localeCode for order[translation.name]}",
+        "hydra:variableRepresentation": "BasicRepresentation",
+        "hydra:mapping": [
+            {
+                "@type": "IriTemplateMapping",
+                "variable": "exists[archivedAt]",
+                "property": "archivedAt",
+                "required": false
+            },
+            {
+                "@type": "IriTemplateMapping",
+                "variable": "order[code]",
+                "property": "code",
+                "required": false
+            },
+            {
+                "@type": "IriTemplateMapping",
+                "variable": "order[translation.name]",
+                "property": "translation",
+                "required": false
+            },
+            {
+                "@type": "IriTemplateMapping",
+                "variable": "localeCode for order[translation.name]",
+                "property": "localeCode",
+                "required": false
+            }
+        ]
+    }
+}

@@ -1,5 +1,13 @@
 # UPGRADE FROM `v1.X.X` TO `v2.0.0`
 
+1. Non-prefix serialization groups in Sylius resources have been removed. 
+   If you have extended any of them, you must prefix them with `sylius:`, for example:
+
+    ```diff
+    - #[Groups(['admin:product:index'])]
+    + #[Groups(['sylius:admin:product:index'])]
+    ```
+
 ## Codebase
 
 * Doctrine MongoDB and PHPCR is not longer supported in ResourceBundle and GridBundle:

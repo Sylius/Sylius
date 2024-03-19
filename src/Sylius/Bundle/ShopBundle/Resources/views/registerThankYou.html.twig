@@ -1,0 +1,18 @@
+{% extends '@SyliusShop/layout.html.twig' %}
+
+{% block title %}{{ 'sylius.ui.register_in_the_store'|trans }} | {{ parent() }}{% endblock %}
+
+{% block content %}
+    <div class="ui hidden divider"></div>
+    <div class="ui grid">
+        <div class="center aligned sixteen wide column">
+            <h1 class="ui icon header">
+                <i class="circular smile icon"></i>
+                <div class="content">
+                    {{ 'sylius.ui.thank_you_for_registration'|trans }}
+                    <div class="sub header">{{ 'sylius.ui.verify_email_address'|trans }}</div>
+                </div>
+            </h1>
+        </div>
+    </div>
+{% endblock %}

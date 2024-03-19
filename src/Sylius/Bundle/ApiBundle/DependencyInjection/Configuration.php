@@ -17,7 +17,6 @@ use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 
-/** @experimental */
 final class Configuration implements ConfigurationInterface
 {
     public function getConfigTreeBuilder(): TreeBuilder
@@ -34,6 +33,24 @@ final class Configuration implements ConfigurationInterface
                 ->end()
                 ->booleanNode('legacy_error_handling')
                     ->defaultFalse()
+                ->end()
+            ->end()
+            ->children()
+                ->arrayNode('order_states_to_filter_out')
+                    ->scalarPrototype()->end()
+                ->end()
+            ->end()
+            ->children()
+                ->arrayNode('serialization_groups')
+                ->addDefaultsIfNotSet()
+                    ->children()
+                        ->booleanNode('skip_adding_read_group')
+                            ->defaultFalse()
+                        ->end()
+                        ->booleanNode('skip_adding_index_and_show_groups')
+                            ->defaultFalse()
+                        ->end()
+                    ->end()
                 ->end()
             ->end()
             ->children()

@@ -1,0 +1,32 @@
+Sylius\Component\Core\Model\Product:
+    product:
+        fallbackLocale: en_US
+        currentLocale: en
+        code: 'MUG'
+
+Sylius\Component\Product\Model\ProductVariantTranslation:
+    product_variant_translation:
+        name: 'Mug'
+        locale: en_US
+        translatable: '@product_variant'
+
+Sylius\Component\Core\Model\ProductVariant:
+    product_variant:
+        code: 'MUG'
+        product: '@product'
+        fallbackLocale: en_US
+        currentLocale: en
+        position: 1
+        channelPricings:
+            channel_web: '@product_variant_channel_web_pricing'
+        translations:
+            - '@product_variant_translation'
+
+Sylius\Component\Core\Model\ChannelPricing:
+    product_variant_channel_web_pricing:
+        channelCode: 'WEB'
+        price: 2500
+        originalPrice: 3000
+        productVariant: '@product_variant'
+        appliedPromotions: 
+            - '@catalog_promotion'

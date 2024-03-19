@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Tests\Mailer;
 
+use Prophecy\PhpUnit\ProphecyTrait;
 use Prophecy\Prophecy\ObjectProphecy;
 use Sylius\Bundle\CoreBundle\Mailer\OrderEmailManagerInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
@@ -25,6 +26,7 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 final class OrderEmailManagerTest extends KernelTestCase
 {
+    use ProphecyTrait;
     use SwiftmailerAssertionTrait;
 
     private const RECIPIENT_EMAIL = 'test@example.com';
@@ -36,7 +38,7 @@ final class OrderEmailManagerTest extends KernelTestCase
     /** @test */
     public function it_sends_order_confirmation_email_with_symfony_mailer_if_swift_mailer_is_not_present(): void
     {
-        if ($this->isItSwiftmailerTestEnv()) {
+        if (self::isSwiftmailerTestEnv()) {
             $this->markTestSkipped('This test should be executed only outside of test_with_swiftmailer environment');
         }
 
@@ -80,7 +82,7 @@ final class OrderEmailManagerTest extends KernelTestCase
     /** @test */
     public function it_sends_order_confirmation_email_with_swift_mailer_by_default_if_is_present(): void
     {
-        if (!$this->isItSwiftmailerTestEnv()) {
+        if (!self::isSwiftmailerTestEnv()) {
             $this->markTestSkipped('This test should be executed only in test_with_swiftmailer environment');
         }
 
@@ -123,12 +125,5 @@ final class OrderEmailManagerTest extends KernelTestCase
             ),
             self::RECIPIENT_EMAIL,
         );
-    }
-
-    private function isItSwiftmailerTestEnv(): bool
-    {
-        $env = self::getContainer()->getParameter('kernel.environment');
-
-        return $env === 'test_with_swiftmailer';
     }
 }

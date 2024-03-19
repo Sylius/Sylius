@@ -97,14 +97,6 @@ final class CustomerContext implements Context
     }
 
     /**
-     * @When I (try to) save my changes
-     */
-    public function iSaveMyChanges(): void
-    {
-        $this->client->update();
-    }
-
-    /**
      * @When I specify the current password as :password
      */
     public function iSpecifyTheCurrentPasswordAs(string $password): void
@@ -203,14 +195,6 @@ final class CustomerContext implements Context
     {
         $this->registerAccount($email, $password);
         $this->loginContext->iLogInAsWithPassword($email, $password);
-    }
-
-    /**
-     * @Then I should be notified that it has been successfully edited
-     */
-    public function iShouldBeNotifiedThatItHasBeenSuccessfullyEdited(): void
-    {
-        Assert::true($this->responseChecker->isUpdateSuccessful($this->client->getLastResponse()));
     }
 
     /**
@@ -473,7 +457,7 @@ final class CustomerContext implements Context
     private function verifyAccount(string $token): void
     {
         $request = $this->requestFactory->custom(
-            \sprintf('%s/shop/account-verification-requests/%s', $this->apiUrlPrefix, $token),
+            \sprintf('%s/shop/customers/verify/%s', $this->apiUrlPrefix, $token),
             HttpRequest::METHOD_PATCH,
         );
 
@@ -496,7 +480,7 @@ final class CustomerContext implements Context
 
     private function resendVerificationEmail(string $email): void
     {
-        $request = $this->requestFactory->create('shop', 'account-verification-requests', 'Bearer');
+        $request = $this->requestFactory->create('shop', 'customers/verify', 'Bearer');
 
         $request->setContent(['email' => $email]);
 

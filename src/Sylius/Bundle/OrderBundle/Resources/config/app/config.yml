@@ -1,9 +1,18 @@
 # This file is part of the Sylius package.
 # (c) Sylius Sp. z o.o.
 
+parameters:
+    sylius_order.resend_order_confirmation_email.order_states:
+        - !php/const Sylius\Component\Order\Model\OrderInterface::STATE_NEW
+
 jms_serializer:
     metadata:
         directories:
             sylius-order:
                 namespace_prefix: "Sylius\\Component\\Order"
                 path: "@SyliusOrderBundle/Resources/config/serializer"
+
+twig:
+    globals:
+        sylius_order_states_that_allows_to_resend_order_confirmation_email: "%sylius_order.resend_order_confirmation_email.order_states%"
+

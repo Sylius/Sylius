@@ -19,6 +19,10 @@
             <option name="groups">sylius</option>
         </constraint>
         <property name="code">
+            <constraint name="Country">
+                <option name="message">sylius.country.code.invalid</option>
+                <option name="groups">sylius</option>
+            </constraint>
             <constraint name="NotBlank">
                 <option name="message">sylius.country.code.not_blank</option>
                 <option name="groups">sylius</option>
@@ -27,11 +31,6 @@
                 <option name="min">2</option>
                 <option name="max">2</option>
                 <option name="exactMessage">sylius.country.code.exact_length</option>
-                <option name="groups">sylius</option>
-            </constraint>
-            <constraint name="Regex">
-                <option name="message">sylius.country.code.regex</option>
-                <option name="pattern">/^[\w-]*$/</option>
                 <option name="groups">sylius</option>
             </constraint>
         </property>

@@ -23,7 +23,6 @@ use Sylius\Component\Core\Model\AdminUserInterface;
 use Sylius\Component\Currency\Model\ExchangeRate;
 use Webmozart\Assert\Assert;
 
-/** @experimental */
 final class ExchangeRateExtension implements ContextAwareQueryCollectionExtensionInterface, QueryItemExtensionInterface
 {
     public function __construct(private UserContextInterface $userContext)

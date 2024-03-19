@@ -1,0 +1,21 @@
+{
+    "@context": "\/api\/v2\/contexts\/Zone",
+    "@id": "\/api\/v2\/admin\/zones",
+    "@type": "hydra:Collection",
+    "hydra:member": [
+        {
+            "@id": "\/api\/v2\/admin\/zones\/EU",
+            "@type": "Zone",
+            "id": @integer@,
+            "code": "EU",
+            "name": "European Union",
+            "type": "country",
+            "scope": "all",
+            "members": [
+                "\/api\/v2\/admin\/zone-members\/@integer@",
+                "\/api\/v2\/admin\/zone-members\/@integer@"
+            ]
+        }
+    ],
+    "hydra:totalItems": 1
+}

@@ -6,22 +6,36 @@ sylius:
         is_verified: 'Account with email %email% is currently verified.'
     address:
         without_country: 'The address without country cannot exist'
+    code:
+        not_blank: 'Please enter a code.'
+        invalid: 'The code should contain only letters, numbers, dashes ("-" symbol) and underscores ("_" symbol).'
     contact_request:
         email_is_invalid: 'The provided email is invalid.'
     country:
         not_exist: 'The country %countryCode% does not exist.'
+    date_interval:
+        empty: 'The date interval cannot be empty.'
+        invalid: 'The date interval is not valid ISO 8601 interval.'
+    date_time:
+        invalid: 'The date time is not valid ISO 8601 date time in Y-m-d\TH:i:s format.'
     order:
         not_empty: 'An empty order cannot be completed.'
     payment_method:
+        cannot_change_payment_method_for_cancelled_order: 'You cannot change the payment method for a cancelled order.'
         not_available: 'The payment method %name% is not available for this order. Please choose another one.'
         not_exist: 'The payment method with %code% code does not exist.'
     product:
         not_exist: 'The product %productName% does not exist.'
     product_variant:
-        not_exist: 'The product variant with %productVariantCode% does not exist.'
+        not_exist: 'The product variant %productVariantCode% does not exist.'
         not_longer_available: 'The product variant with name %productVariantName% does not exist.'
         not_sufficient: 'The product variant with %productVariantCode% code does not have sufficient stock.'
         product_variant_with_name_not_sufficient: 'The product variant with %productVariantName% name does not have sufficient stock.'
+        option_values:
+            single_value: 'The product variant can have only one value configured for a single option.'
+    reset_password:
+        invalid_token: 'Password reset token %token% is invalid.'
+        token_expired: 'Password reset token has expired.'
     shipment:
         not_found: 'The shipment does not exist.'
         shipped: 'You cannot ship a shipment that was shipped before.'
@@ -29,3 +43,6 @@ sylius:
         not_found: 'The shipping method with %code% code does not exist.'
         not_available: 'The shipping method %name% is not available for this order. Please reselect your shipping method.'
         shipping_address_not_found: 'Order should be addressed first.'
+    statistics:
+        end_date:
+            invalid: 'The start date must be earlier than the end date.'

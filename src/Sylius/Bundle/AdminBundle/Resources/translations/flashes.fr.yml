@@ -13,3 +13,7 @@ sylius:
         shipment_confirmation_resent: 'La confirmation d''expédition a été renvoyée avec succès au client.'
     product_variant:
         cannot_generate_variants: 'Impossible de générer des variantes pour un produit sans options.'
+    locale:
+        delete:
+            is_used: 'Impossible de supprimer la langue, car elle est utilisée par au moins une traduction.'
+            success: 'La langue a été supprimée avec succès.'

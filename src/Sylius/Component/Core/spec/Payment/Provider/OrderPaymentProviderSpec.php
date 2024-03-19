@@ -16,6 +16,7 @@ namespace spec\Sylius\Component\Core\Payment\Provider;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use SM\Factory\FactoryInterface as StateMachineFactoryInterface;
+use Sylius\Abstraction\StateMachine\StateMachineInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\PaymentInterface;
 use Sylius\Component\Core\Model\PaymentMethodInterface;
@@ -25,7 +26,6 @@ use Sylius\Component\Payment\Exception\UnresolvedDefaultPaymentMethodException;
 use Sylius\Component\Payment\Factory\PaymentFactoryInterface;
 use Sylius\Component\Payment\PaymentTransitions;
 use Sylius\Component\Payment\Resolver\DefaultPaymentMethodResolverInterface;
-use Sylius\Component\Resource\StateMachine\StateMachineInterface;
 
 final class OrderPaymentProviderSpec extends ObjectBehavior
 {
@@ -54,8 +54,18 @@ final class OrderPaymentProviderSpec extends ObjectBehavior
         PaymentInterface $newPayment,
         PaymentMethodInterface $paymentMethod,
         StateMachineFactoryInterface $stateMachineFactory,
-        StateMachineInterface $stateMachine,
+        WinzouStateMachineStub $stateMachine,
     ): void {
+        $stateMachine->can(PaymentTransitions::TRANSITION_CREATE)->willReturn(true);
+        $this->setPropertyValue($stateMachine, 'config', [
+            'transitions' => [
+                PaymentTransitions::TRANSITION_CREATE => [
+                    'from' => [PaymentInterface::STATE_CART],
+                    'to' => PaymentInterface::STATE_NEW,
+                ],
+            ],
+        ]);
+
         $order->getTotal()->willReturn(1000);
         $order->getCurrencyCode()->willReturn('USD');
         $order->getLastPayment(PaymentInterface::STATE_CANCELLED)->willReturn($lastCancelledPayment);
@@ -70,8 +80,41 @@ final class OrderPaymentProviderSpec extends ObjectBehavior
         $newPayment->setOrder($order)->shouldBeCalled();
 
         $stateMachineFactory->get($newPayment, PaymentTransitions::GRAPH)->willReturn($stateMachine);
-        $stateMachine->getTransitionToState(PaymentInterface::STATE_NEW)->willReturn(PaymentTransitions::TRANSITION_CREATE);
         $stateMachine->apply(PaymentTransitions::TRANSITION_CREATE)->shouldBeCalled();
+
+        $this->provideOrderPayment($order, PaymentInterface::STATE_NEW)->shouldReturn($newPayment);
+    }
+
+    function it_uses_the_new_state_machine_abstraction_if_passed(
+        DefaultPaymentMethodResolverInterface $defaultPaymentMethodResolver,
+        PaymentFactoryInterface $paymentFactory,
+        StateMachineInterface $stateMachine,
+        OrderInterface $order,
+        PaymentInterface $lastCancelledPayment,
+        PaymentInterface $newPayment,
+        PaymentMethodInterface $paymentMethod,
+    ): void {
+        $this->beConstructedWith(
+            $defaultPaymentMethodResolver,
+            $paymentFactory,
+            $stateMachine,
+        );
+
+        $order->getTotal()->willReturn(1000);
+        $order->getCurrencyCode()->willReturn('USD');
+        $order->getLastPayment(PaymentInterface::STATE_CANCELLED)->willReturn($lastCancelledPayment);
+
+        $lastCancelledPayment->getMethod()->willReturn($paymentMethod);
+
+        $paymentFactory->createWithAmountAndCurrencyCode(1000, 'USD')->willReturn($newPayment);
+        $defaultPaymentMethodResolver->getDefaultPaymentMethod($newPayment)->willReturn($paymentMethod);
+
+        $newPayment->setMethod($paymentMethod)->shouldBeCalled();
+        $newPayment->getState()->willReturn(PaymentInterface::STATE_CART);
+        $newPayment->setOrder($order)->shouldBeCalled();
+
+        $stateMachine->getTransitionToState($newPayment, PaymentTransitions::GRAPH, PaymentInterface::STATE_NEW)->willReturn(PaymentTransitions::TRANSITION_CREATE);
+        $stateMachine->apply($newPayment, PaymentTransitions::GRAPH, PaymentTransitions::TRANSITION_CREATE)->shouldBeCalled();
 
         $this->provideOrderPayment($order, PaymentInterface::STATE_NEW)->shouldReturn($newPayment);
     }
@@ -84,8 +127,18 @@ final class OrderPaymentProviderSpec extends ObjectBehavior
         PaymentInterface $newPayment,
         PaymentMethodInterface $paymentMethod,
         StateMachineFactoryInterface $stateMachineFactory,
-        StateMachineInterface $stateMachine,
+        WinzouStateMachineStub $stateMachine,
     ): void {
+        $stateMachine->can(PaymentTransitions::TRANSITION_CREATE)->willReturn(true);
+        $this->setPropertyValue($stateMachine, 'config', [
+            'transitions' => [
+                PaymentTransitions::TRANSITION_CREATE => [
+                    'from' => [PaymentInterface::STATE_CART],
+                    'to' => PaymentInterface::STATE_NEW,
+                ],
+            ],
+        ]);
+
         $order->getTotal()->willReturn(1000);
         $order->getCurrencyCode()->willReturn('USD');
         $order->getLastPayment(PaymentInterface::STATE_CANCELLED)->willReturn(null);
@@ -101,7 +154,6 @@ final class OrderPaymentProviderSpec extends ObjectBehavior
         $newPayment->setOrder($order)->shouldBeCalled();
 
         $stateMachineFactory->get($newPayment, PaymentTransitions::GRAPH)->willReturn($stateMachine);
-        $stateMachine->getTransitionToState(PaymentInterface::STATE_NEW)->willReturn(PaymentTransitions::TRANSITION_CREATE);
         $stateMachine->apply(PaymentTransitions::TRANSITION_CREATE)->shouldBeCalled();
 
         $this->provideOrderPayment($order, PaymentInterface::STATE_NEW)->shouldReturn($newPayment);
@@ -114,8 +166,18 @@ final class OrderPaymentProviderSpec extends ObjectBehavior
         PaymentInterface $newPayment,
         PaymentMethodInterface $paymentMethod,
         StateMachineFactoryInterface $stateMachineFactory,
-        StateMachineInterface $stateMachine,
+        WinzouStateMachineStub $stateMachine,
     ): void {
+        $stateMachine->can(PaymentTransitions::TRANSITION_CREATE)->willReturn(true);
+        $this->setPropertyValue($stateMachine, 'config', [
+            'transitions' => [
+                PaymentTransitions::TRANSITION_CREATE => [
+                    'from' => [PaymentInterface::STATE_CART],
+                    'to' => PaymentInterface::STATE_NEW,
+                ],
+            ],
+        ]);
+
         $order->getTotal()->willReturn(1000);
         $order->getCurrencyCode()->willReturn('USD');
         $order->getLastPayment(PaymentInterface::STATE_CANCELLED)->willReturn(null);
@@ -130,7 +192,6 @@ final class OrderPaymentProviderSpec extends ObjectBehavior
         $newPayment->getState()->willReturn(PaymentInterface::STATE_CART);
 
         $stateMachineFactory->get($newPayment, PaymentTransitions::GRAPH)->willReturn($stateMachine);
-        $stateMachine->getTransitionToState(PaymentInterface::STATE_NEW)->willReturn(PaymentTransitions::TRANSITION_CREATE);
         $stateMachine->apply(PaymentTransitions::TRANSITION_CREATE)->shouldBeCalled();
 
         $this->provideOrderPayment($order, PaymentInterface::STATE_NEW)->shouldReturn($newPayment);
@@ -191,5 +252,13 @@ final class OrderPaymentProviderSpec extends ObjectBehavior
             ->shouldThrow(NotProvidedOrderPaymentException::class)
             ->during('provideOrderPayment', [$order, PaymentInterface::STATE_NEW])
         ;
+    }
+
+    private function setPropertyValue(object $object, string $property, mixed $value): void
+    {
+        $reflection = new \ReflectionClass(WinzouStateMachineStub::class);
+        $reflectionProperty = $reflection->getProperty($property);
+        $reflectionProperty->setAccessible(true);
+        $reflectionProperty->setValue($object, $value);
     }
 }

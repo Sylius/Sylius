@@ -4,6 +4,11 @@ on:
     workflow_dispatch: ~
     workflow_call:
         inputs:
+            branch:
+                description: "Branch"
+                required: false
+                type: string
+                default: ""
             type:
                 description: "Type of the build"
                 required: true
@@ -16,13 +21,22 @@ jobs:
         outputs:
             matrix: ${{ steps.matrix.outputs.prop }}
         steps:
-            -   uses: actions/checkout@v3
-            -   name: "Get matrix"
+            -   name: "Checkout (With Branch)"
+                if: "${{ inputs.branch != '' }}"
+                uses: actions/checkout@v4
+                with:
+                    ref: ${{ inputs.branch }}
+
+            -   name: "Checkout"
+                uses: actions/checkout@v4
+                if: "${{ inputs.branch == '' }}"
+            -
+                name: "Get matrix"
                 id: matrix
                 uses: notiz-dev/github-action-json-property@release
                 with:
                     path: '.github/workflows/matrix.json'
-                    prop_path: '${{ inputs.type }}.frontend'
+                    prop_path: '${{ inputs.type }}.e2e-mysql'
 
     frontend:
         needs: get-matrix
@@ -37,8 +51,26 @@ jobs:
             DATABASE_URL: "mysql://root:root@127.0.0.1/sylius?charset=utf8mb4&serverVersion=8.0"
 
         steps:
-            -
-                uses: actions/checkout@v3
+            -   name: Set variables
+                shell: bash
+                env:
+                    BRANCH: ${{ inputs.branch }}
+                run: |
+                    if [ "$BRANCH" == "1.12" ]; then
+                        echo "USE_LEGACY_POSTGRES_SETUP=yes" >> $GITHUB_ENV
+                    else
+                        echo "USE_LEGACY_POSTGRES_SETUP=no" >> $GITHUB_ENV
+                    fi
+
+            -   name: "Checkout (With Branch)"
+                if: "${{ inputs.branch != '' }}"
+                uses: actions/checkout@v4
+                with:
+                    ref: ${{ inputs.branch }}
+
+            -   name: "Checkout"
+                if: "${{ inputs.branch == '' }}"
+                uses: actions/checkout@v4
 
             -   name: Build application
                 uses: SyliusLabs/BuildTestAppAction@v2.0
@@ -47,5 +79,5 @@ jobs:
                     e2e_js: "yes"
                     database_version: "8.0"
                     php_version: "8.1"
-                    symfony_version: "6.4.*"
+                    symfony_version: "^6.4"
                     node_version: ${{ matrix.node }}

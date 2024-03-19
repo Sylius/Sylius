@@ -108,7 +108,7 @@ final class RegistrationContext implements Context
         $token = $customer->getUser()->getEmailVerificationToken();
 
         $request = $this->requestFactory->custom(
-            \sprintf('%s/shop/account-verification-requests/%s', $this->apiUrlPrefix, $token),
+            \sprintf('%s/shop/customers/verify/%s', $this->apiUrlPrefix, $token),
             HttpRequest::METHOD_PATCH,
         );
         $this->shopClient->executeCustomRequest($request);
@@ -249,6 +249,14 @@ final class RegistrationContext implements Context
         $response = $this->shopClient->show(Resources::CUSTOMERS, (string) $customer->getId());
 
         Assert::true($this->responseChecker->getResponseContent($response)['subscribedToNewsletter']);
+    }
+
+    /**
+     * @Then I should be on my account dashboard
+     * @Then I should be on registration thank you page
+     */
+    public function intentionallyLeftBlank(): void
+    {
     }
 
     private function assertFieldValidationMessage(string $path, string $message): void

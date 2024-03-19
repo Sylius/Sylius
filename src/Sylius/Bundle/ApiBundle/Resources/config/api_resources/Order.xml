@@ -22,8 +22,25 @@
             <collectionOperation name="admin_get">
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/admin/orders</attribute>
+                <attribute name="filters">
+                    <attribute>sylius.api.order_channel_filter</attribute>
+                    <attribute>sylius.api.order_currency_filter</attribute>
+                    <attribute>sylius.api.order_customer_filter</attribute>
+                    <attribute>sylius.api.order_date_filter</attribute>
+                    <attribute>sylius.api.order_number_filter</attribute>
+                    <attribute>sylius.api.order_product_filter</attribute>
+                    <attribute>sylius.api.order_shipping_method_filter</attribute>
+                    <attribute>sylius.api.order_total_filter</attribute>
+                    <attribute>sylius.api.order_variants_filter</attribute>
+                </attribute>
+                <attribute name="order">
+                    <attribute name="number">DESC</attribute>
+                </attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:order:read</attribute>
+                    <attribute name="groups">
+                        <attribute>admin:order:index</attribute>
+                        <attribute>sylius:admin:order:index</attribute>
+                    </attribute>
                 </attribute>
             </collectionOperation>
 
@@ -32,17 +49,22 @@
                 <attribute name="path">/shop/orders</attribute>
                 <attribute name="messenger">input</attribute>
                 <attribute name="input">Sylius\Bundle\ApiBundle\Command\Cart\PickupCart</attribute>
-                <attribute name="normalization_context">
+                <attribute name="denormalization_context">
                     <attribute name="groups">
-                        <attribute>shop:order:read</attribute>
-                        <attribute>shop:cart:read</attribute>
+                        <attribute>shop:order:create</attribute>
+                        <attribute>sylius:shop:order:create</attribute>
                     </attribute>
                 </attribute>
-                <attribute name="denormalization_context">
-                    <attribute name="groups">shop:order:create</attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">
+                        <attribute>shop:order:show</attribute>
+                        <attribute>sylius:shop:order:show</attribute>
+                        <attribute>shop:cart:show</attribute>
+                        <attribute>sylius:shop:cart:show</attribute>
+                    </attribute>
                 </attribute>
                 <attribute name="openapi_context">
-                    <attribute name="summary">Pickups a new cart</attribute>
+                    <attribute name="summary">Pickups a new cart.</attribute>
                 </attribute>
             </collectionOperation>
 
@@ -51,7 +73,8 @@
                 <attribute name="path">/shop/orders</attribute>
                 <attribute name="normalization_context">
                     <attribute name="groups">
-                        <attribute>shop:order:read</attribute>
+                        <attribute>shop:order:index</attribute>
+                        <attribute>sylius:shop:order:index</attribute>
                     </attribute>
                 </attribute>
             </collectionOperation>
@@ -62,7 +85,23 @@
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/admin/orders/{tokenValue}</attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:order:read</attribute>
+                    <attribute name="groups">
+                        <attribute>admin:order:show</attribute>
+                        <attribute>sylius:admin:order:show</attribute>
+                    </attribute>
+                </attribute>
+            </itemOperation>
+
+            <itemOperation name="admin_adjustments">
+                <attribute name="method">GET</attribute>
+                <attribute name="path">/admin/orders/{tokenValue}/adjustments</attribute>
+                <attribute name="controller">Sylius\Bundle\ApiBundle\Controller\GetOrderAdjustmentsAction</attribute>
+                <attribute name="write">false</attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">
+                        <attribute>admin:adjustment:show</attribute>
+                        <attribute>sylius:admin:adjustment:show</attribute>
+                    </attribute>
                 </attribute>
             </itemOperation>
 
@@ -70,7 +109,10 @@
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/shop/orders/{tokenValue}</attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">shop:cart:read</attribute>
+                    <attribute name="groups">
+                        <attribute>shop:cart:show</attribute>
+                        <attribute>sylius:shop:cart:show</attribute>
+                    </attribute>
                 </attribute>
             </itemOperation>
 
@@ -78,10 +120,13 @@
                 <attribute name="method">DELETE</attribute>
                 <attribute name="path">/shop/orders/{tokenValue}</attribute>
                 <attribute name="openapi_context">
-                    <attribute name="summary">Deletes cart</attribute>
+                    <attribute name="summary">Deletes cart.</attribute>
                 </attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">shop:order:read</attribute>
+                    <attribute name="groups">
+                        <attribute>shop:order:show</attribute>
+                        <attribute>sylius:shop:order:show</attribute>
+                    </attribute>
                 </attribute>
             </itemOperation>
 
@@ -90,16 +135,20 @@
                 <attribute name="path">/admin/orders/{tokenValue}/cancel</attribute>
                 <attribute name="input">false</attribute>
                 <attribute name="controller">Sylius\Bundle\ApiBundle\Applicator\OrderStateMachineTransitionApplicatorInterface::cancel</attribute>
-                <attribute name="normalization_context">
+                <attribute name="denormalization_context">
                     <attribute name="groups">
-                        <attribute>admin:order:read</attribute>
+                        <attribute>admin:order:update</attribute>
+                        <attribute>sylius:admin:order:update</attribute>
                     </attribute>
                 </attribute>
-                <attribute name="denormalization_context">
-                    <attribute name="groups">admin:order:update</attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">
+                        <attribute>admin:order:show</attribute>
+                        <attribute>sylius:admin:order:show</attribute>
+                    </attribute>
                 </attribute>
                 <attribute name="openapi_context">
-                    <attribute name="summary">Cancels Order</attribute>
+                    <attribute name="summary">Cancels Order.</attribute>
                 </attribute>
             </itemOperation>
 
@@ -110,14 +159,18 @@
                 <attribute name="input">Sylius\Bundle\ApiBundle\Command\Cart\AddItemToCart</attribute>
                 <attribute name="normalization_context">
                     <attribute name="groups">
-                        <attribute>shop:cart:read</attribute>
+                        <attribute>shop:cart:show</attribute>
+                        <attribute>sylius:shop:cart:show</attribute>
                     </attribute>
                 </attribute>
                 <attribute name="denormalization_context">
-                    <attribute name="groups">shop:cart:add_item</attribute>
+                    <attribute name="groups">
+                        <attribute>shop:cart:add_item</attribute>
+                        <attribute>sylius:shop:cart:add_item</attribute>
+                    </attribute>
                 </attribute>
                 <attribute name="openapi_context">
-                    <attribute name="summary">Adds Item to cart</attribute>
+                    <attribute name="summary">Adds Item to cart.</attribute>
                 </attribute>
             </itemOperation>
 
@@ -130,16 +183,21 @@
                 <attribute name="messenger">input</attribute>
                 <attribute name="input">Sylius\Bundle\ApiBundle\Command\Checkout\ChooseShippingMethod</attribute>
                 <attribute name="denormalization_context">
-                    <attribute name="groups">shop:cart:select_shipping_method</attribute>
+                    <attribute name="groups">
+                        <attribute>shop:cart:select_shipping_method</attribute>
+                        <attribute>sylius:shop:cart:select_shipping_method</attribute>
+                    </attribute>
                 </attribute>
                 <attribute name="normalization_context">
                     <attribute name="groups">
-                        <attribute>shop:order:read</attribute>
-                        <attribute>shop:cart:read</attribute>
+                        <attribute>shop:order:show</attribute>
+                        <attribute>sylius:shop:order:show</attribute>
+                        <attribute>shop:cart:show</attribute>
+                        <attribute>sylius:shop:cart:show</attribute>
                     </attribute>
                 </attribute>
                 <attribute name="openapi_context">
-                    <attribute name="summary">Selects shipping methods for particular shipment</attribute>
+                    <attribute name="summary">Selects shipping methods for particular shipment.</attribute>
                     <attribute name="parameters">
                         <attribute>
                             <attribute name="name">tokenValue</attribute>
@@ -167,16 +225,21 @@
                 <attribute name="messenger">input</attribute>
                 <attribute name="input">Sylius\Bundle\ApiBundle\Command\Checkout\ChoosePaymentMethod</attribute>
                 <attribute name="denormalization_context">
-                    <attribute name="groups">shop:cart:select_payment_method</attribute>
+                    <attribute name="groups">
+                        <attribute>shop:cart:select_payment_method</attribute>
+                        <attribute>sylius:shop:cart:select_payment_method</attribute>
+                    </attribute>
                 </attribute>
                 <attribute name="normalization_context">
                     <attribute name="groups">
-                        <attribute>shop:order:read</attribute>
-                        <attribute>shop:cart:read</attribute>
+                        <attribute>shop:order:show</attribute>
+                        <attribute>sylius:shop:order:show</attribute>
+                        <attribute>shop:cart:show</attribute>
+                        <attribute>sylius:shop:cart:show</attribute>
                     </attribute>
                 </attribute>
                 <attribute name="openapi_context">
-                    <attribute name="summary">Selects payment methods for particular payment</attribute>
+                    <attribute name="summary">Selects payment methods for particular payment.</attribute>
                     <attribute name="parameters">
                         <attribute>
                             <attribute name="name">tokenValue</attribute>
@@ -204,13 +267,19 @@
                 <attribute name="messenger">input</attribute>
                 <attribute name="input">Sylius\Bundle\ApiBundle\Command\Account\ChangePaymentMethod</attribute>
                 <attribute name="denormalization_context">
-                    <attribute name="groups">shop:order:account:change_payment_method</attribute>
+                    <attribute name="groups">
+                        <attribute>shop:order:account:change_payment_method</attribute>
+                        <attribute>sylius:shop:order:account:change_payment_method</attribute>
+                    </attribute>
                 </attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">shop:order:account:read</attribute>
+                    <attribute name="groups">
+                        <attribute>shop:order:account:show</attribute>
+                        <attribute>sylius:shop:order:account:show</attribute>
+                    </attribute>
                 </attribute>
                 <attribute name="openapi_context">
-                    <attribute name="summary">Change the payment method as logged shop user</attribute>
+                    <attribute name="summary">Change the payment method as logged shop user.</attribute>
                     <attribute name="parameters">
                         <attribute>
                             <attribute name="name">tokenValue</attribute>
@@ -237,7 +306,7 @@
                 <attribute name="controller">Sylius\Bundle\ApiBundle\Controller\Payment\GetPaymentConfiguration</attribute>
                 <attribute name="path">/shop/orders/{tokenValue}/payments/{paymentId}/configuration</attribute>
                 <attribute name="openapi_context">
-                    <attribute name="summary">Retrieve payment method configuration</attribute>
+                    <attribute name="summary">Retrieve payment method configuration.</attribute>
                     <attribute name="parameters">
                         <attribute>
                             <attribute name="name">tokenValue</attribute>
@@ -269,16 +338,21 @@
                 <attribute name="messenger">input</attribute>
                 <attribute name="input">Sylius\Bundle\ApiBundle\Command\Checkout\CompleteOrder</attribute>
                 <attribute name="denormalization_context">
-                    <attribute name="groups">shop:cart:complete</attribute>
+                    <attribute name="groups">
+                        <attribute>shop:cart:complete</attribute>
+                        <attribute>sylius:shop:cart:complete</attribute>
+                    </attribute>
                 </attribute>
                 <attribute name="normalization_context">
                     <attribute name="groups">
-                        <attribute>shop:order:read</attribute>
-                        <attribute>shop:cart:read</attribute>
+                        <attribute>shop:order:show</attribute>
+                        <attribute>sylius:shop:order:show</attribute>
+                        <attribute>shop:cart:show</attribute>
+                        <attribute>sylius:shop:cart:show</attribute>
                     </attribute>
                 </attribute>
                 <attribute name="openapi_context">
-                    <attribute name="summary">Completes checkout</attribute>
+                    <attribute name="summary">Completes checkout.</attribute>
                 </attribute>
             </itemOperation>
 
@@ -288,7 +362,10 @@
                 <attribute name="controller">Sylius\Bundle\ApiBundle\Controller\DeleteOrderItemAction</attribute>
                 <attribute name="write">false</attribute>
                 <attribute name="denormalization_context">
-                    <attribute name="groups">shop:cart:remove_item</attribute>
+                    <attribute name="groups">
+                        <attribute>shop:cart:remove_item</attribute>
+                        <attribute>sylius:shop:cart:remove_item</attribute>
+                    </attribute>
                 </attribute>
                 <attribute name="openapi_context">
                     <attribute name="parameters">
@@ -317,14 +394,20 @@
                 <attribute name="path">/shop/orders/{tokenValue}/items/{orderItemId}</attribute>
                 <attribute name="messenger">input</attribute>
                 <attribute name="input">Sylius\Bundle\ApiBundle\Command\Cart\ChangeItemQuantityInCart</attribute>
-                <attribute name="normalization_context">
-                    <attribute name="groups">shop:cart:read</attribute>
-                </attribute>
                 <attribute name="denormalization_context">
-                    <attribute name="groups">shop:cart:change_quantity</attribute>
+                    <attribute name="groups">
+                        <attribute>shop:cart:change_quantity</attribute>
+                        <attribute>sylius:shop:cart:change_quantity</attribute>
+                    </attribute>
+                </attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">
+                        <attribute>shop:cart:show</attribute>
+                        <attribute>sylius:shop:cart:show</attribute>
+                    </attribute>
                 </attribute>
                 <attribute name="openapi_context">
-                    <attribute name="summary">Changes quantity of order item</attribute>
+                    <attribute name="summary">Changes quantity of order item.</attribute>
                     <attribute name="parameters">
                         <attribute>
                             <attribute name="name">tokenValue</attribute>
@@ -352,16 +435,33 @@
                 <attribute name="messenger">input</attribute>
                 <attribute name="input">Sylius\Bundle\ApiBundle\Command\Checkout\UpdateCart</attribute>
                 <attribute name="denormalization_context">
-                    <attribute name="groups">shop:cart:update</attribute>
+                    <attribute name="groups">
+                        <attribute>shop:cart:update</attribute>
+                        <attribute>sylius:shop:cart:update</attribute>
+                    </attribute>
                 </attribute>
                 <attribute name="normalization_context">
                     <attribute name="groups">
-                        <attribute>shop:order:read</attribute>
-                        <attribute>shop:cart:read</attribute>
+                        <attribute>shop:order:show</attribute>
+                        <attribute>sylius:shop:order:show</attribute>
+                        <attribute>shop:cart:show</attribute>
+                        <attribute>sylius:shop:cart:show</attribute>
                     </attribute>
                 </attribute>
                 <attribute name="openapi_context">
                     <attribute name="summary">Addresses cart to given location, logged in Customer does not have to provide an email. Applies coupon to cart.</attribute>
+                </attribute>
+            </itemOperation>
+
+            <itemOperation name="admin_resend_confirmation">
+                <attribute name="method">POST</attribute>
+                <attribute name="path">/admin/orders/{tokenValue}/resend-confirmation-email</attribute>
+                <attribute name="messenger">input</attribute>
+                <attribute name="input">Sylius\Bundle\ApiBundle\Command\ResendOrderConfirmationEmail</attribute>
+                <attribute name="output">false</attribute>
+                <attribute name="status">202</attribute>
+                <attribute name="openapi_context">
+                    <attribute name="summary">Resends order confirmation email.</attribute>
                 </attribute>
             </itemOperation>
         </itemOperations>
@@ -409,12 +509,14 @@
         <property name="shippingState" writable="false" />
         <property name="total" writable="false" />
         <property name="orderPromotionTotal" writable="false" />
+        <property name="shippingPromotionTotal" writable="false" />
         <property name="items" readable="true" writable="true">
             <subresource resourceClass="%sylius.model.order_item.class%" />
         </property>
         <property name="notes" writable="true" />
         <property name="itemsTotal" readable="true" />
         <property name="taxTotal" readable="true"/>
+        <property name="shippingTaxTotal" readable="true"/>
         <property name="taxExcludedTotal" readable="true"/>
         <property name="taxIncludedTotal" readable="true"/>
         <property name="adjustments" writable="false">

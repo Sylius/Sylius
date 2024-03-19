@@ -1,0 +1,16 @@
+{
+    "@context": "\/api\/v2\/contexts\/Address",
+    "@id": "\/api\/v2\/admin\/addresses\/@integer@",
+    "@type": "Address",
+    "id": @integer@,
+    "firstName": "John",
+    "lastName": "Doe",
+    "phoneNumber": "123456789",
+    "company": "CocaCola",
+    "countryCode": "US",
+    "provinceCode": null,
+    "provinceName": null,
+    "street": "Green Avenue",
+    "city": "New York",
+    "postcode": "00000"
+}

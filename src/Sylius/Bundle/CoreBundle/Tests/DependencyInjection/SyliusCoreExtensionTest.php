@@ -16,11 +16,31 @@ namespace Sylius\Bundle\CoreBundle\Tests\DependencyInjection;
 use Doctrine\Bundle\MigrationsBundle\DependencyInjection\DoctrineMigrationsExtension;
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractExtensionTestCase;
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\DefinitionHasTagConstraint;
+use Sylius\Bundle\CoreBundle\Attribute\AsCatalogPromotionApplicatorCriteria;
+use Sylius\Bundle\CoreBundle\Attribute\AsCatalogPromotionPriceCalculator;
+use Sylius\Bundle\CoreBundle\Attribute\AsEntityObserver;
+use Sylius\Bundle\CoreBundle\Attribute\AsOrderItemsTaxesApplicator;
+use Sylius\Bundle\CoreBundle\Attribute\AsOrderItemUnitsTaxesApplicator;
+use Sylius\Bundle\CoreBundle\Attribute\AsOrdersTotalsProvider;
+use Sylius\Bundle\CoreBundle\Attribute\AsProductVariantMapProvider;
+use Sylius\Bundle\CoreBundle\Attribute\AsTaxCalculationStrategy;
+use Sylius\Bundle\CoreBundle\Attribute\AsUriBasedSectionResolver;
 use Sylius\Bundle\CoreBundle\DependencyInjection\SyliusCoreExtension;
+use Sylius\Bundle\CoreBundle\Tests\Stub\CatalogPromotionApplicatorCriteriaStub;
+use Sylius\Bundle\CoreBundle\Tests\Stub\CatalogPromotionPriceCalculatorStub;
+use Sylius\Bundle\CoreBundle\Tests\Stub\EntityObserverStub;
+use Sylius\Bundle\CoreBundle\Tests\Stub\OrderItemsTaxesApplicatorStub;
+use Sylius\Bundle\CoreBundle\Tests\Stub\OrderItemUnitsTaxesApplicatorStub;
+use Sylius\Bundle\CoreBundle\Tests\Stub\OrdersTotalsProviderStub;
+use Sylius\Bundle\CoreBundle\Tests\Stub\ProductVariantMapProviderStub;
+use Sylius\Bundle\CoreBundle\Tests\Stub\TaxCalculationStrategyStub;
+use Sylius\Bundle\CoreBundle\Tests\Stub\UriBasedSectionResolverStub;
+use Sylius\Bundle\OrderBundle\DependencyInjection\SyliusOrderExtension;
 use Sylius\Component\Core\Filesystem\Adapter\FilesystemAdapterInterface;
 use Sylius\Component\Core\Filesystem\Adapter\FlysystemFilesystemAdapter;
 use Sylius\Component\Core\Filesystem\Adapter\GaufretteFilesystemAdapter;
 use SyliusLabs\DoctrineMigrationsExtraBundle\DependencyInjection\SyliusLabsDoctrineMigrationsExtraExtension;
+use Symfony\Component\DependencyInjection\Definition;
 
 final class SyliusCoreExtensionTest extends AbstractExtensionTestCase
 {
@@ -68,6 +88,34 @@ final class SyliusCoreExtensionTest extends AbstractExtensionTestCase
     public function it_autoconfigures_prepending_doctrine_migrations_with_proper_migrations_path_for_dev_env(): void
     {
         $this->testPrependingDoctrineMigrations('dev');
+    }
+
+    /**
+     * @test
+     *
+     * @dataProvider provideAutoconfigureWithAttributesData
+     */
+    public function it_prepends_sylius_order_bundle_configuration_with_proper_values(bool $value, bool $orderBundleValue): void
+    {
+        $this->container->setParameter('kernel.environment', 'dev');
+        $this->container->registerExtension(new SyliusOrderExtension());
+        $this->container->loadFromExtension('sylius_core', [
+            'autoconfigure_with_attributes' => $value,
+        ]);
+        $this->container->loadFromExtension('sylius_order', [
+            'autoconfigure_with_attributes' => $orderBundleValue,
+        ]);
+
+        $this->load();
+
+        $syliusOrderConfig = $this->container->getExtensionConfig('sylius_order');
+        $this->assertEquals($value, $syliusOrderConfig[0]['autoconfigure_with_attributes']);
+    }
+
+    public static function provideAutoconfigureWithAttributesData(): iterable
+    {
+        yield [true, false];
+        yield [false, true];
     }
 
     /** @test */
@@ -158,6 +206,230 @@ final class SyliusCoreExtensionTest extends AbstractExtensionTestCase
         $this->load(['filesystem' => ['adapter' => 'gaufrette']]);
 
         $this->assertContainerBuilderHasAlias(FilesystemAdapterInterface::class, GaufretteFilesystemAdapter::class);
+    }
+
+    /** @test */
+    public function it_autoconfigures_catalog_promotion_applicator_criteria_with_attribute(): void
+    {
+        $this->container->setParameter('kernel.environment', 'prod');
+        $this->container->setDefinition(
+            'acme.catalog_promotion_applicator_criteria_with_attribute',
+            (new Definition())
+                ->setClass(CatalogPromotionApplicatorCriteriaStub::class)
+                ->setAutoconfigured(true),
+        );
+
+        $this->load();
+        $this->compile();
+
+        $this->assertContainerBuilderHasServiceDefinitionWithTag(
+            'acme.catalog_promotion_applicator_criteria_with_attribute',
+            AsCatalogPromotionApplicatorCriteria::SERVICE_TAG,
+            ['priority' => 20],
+        );
+    }
+
+    /** @test */
+    public function it_autoconfigures_catalog_promotion_price_calculator_with_attribute(): void
+    {
+        $this->container->setParameter('kernel.environment', 'prod');
+        $this->container->setDefinition(
+            'acme.catalog_promotion_price_calculator_with_attribute',
+            (new Definition())
+                ->setClass(CatalogPromotionPriceCalculatorStub::class)
+                ->setAutoconfigured(true),
+        );
+
+        $this->load();
+        $this->compile();
+
+        $this->assertContainerBuilderHasServiceDefinitionWithTag(
+            'acme.catalog_promotion_price_calculator_with_attribute',
+            AsCatalogPromotionPriceCalculator::SERVICE_TAG,
+            ['priority' => 9],
+        );
+    }
+
+    /** @test */
+    public function it_autoconfigures_entity_observer_with_attribute(): void
+    {
+        $this->container->setParameter('kernel.environment', 'prod');
+        $this->container->setDefinition(
+            'acme.entity_observer_with_attribute',
+            (new Definition())
+                ->setClass(EntityObserverStub::class)
+                ->setAutoconfigured(true),
+        );
+
+        $this->load();
+        $this->compile();
+
+        $this->assertContainerBuilderHasServiceDefinitionWithTag(
+            'acme.entity_observer_with_attribute',
+            AsEntityObserver::SERVICE_TAG,
+            ['priority' => 5],
+        );
+    }
+
+    /** @test */
+    public function it_autoconfigures_order_items_taxes_applicator_with_attribute(): void
+    {
+        $this->container->setParameter('kernel.environment', 'prod');
+        $this->container->setDefinition(
+            'acme.order_items_taxes_applicator_with_attribute',
+            (new Definition())
+                ->setClass(OrderItemsTaxesApplicatorStub::class)
+                ->setAutoconfigured(true),
+        );
+
+        $this->load();
+        $this->compile();
+
+        $this->assertContainerBuilderHasServiceDefinitionWithTag(
+            'acme.order_items_taxes_applicator_with_attribute',
+            AsOrderItemsTaxesApplicator::SERVICE_TAG,
+            ['priority' => 15],
+        );
+    }
+
+    /** @test */
+    public function it_autoconfigures_order_item_units_taxes_applicator_with_attribute(): void
+    {
+        $this->container->setParameter('kernel.environment', 'prod');
+        $this->container->setDefinition(
+            'acme.order_item_units_taxes_applicator_with_attribute',
+            (new Definition())
+                ->setClass(OrderItemUnitsTaxesApplicatorStub::class)
+                ->setAutoconfigured(true),
+        );
+
+        $this->load();
+        $this->compile();
+
+        $this->assertContainerBuilderHasServiceDefinitionWithTag(
+            'acme.order_item_units_taxes_applicator_with_attribute',
+            AsOrderItemUnitsTaxesApplicator::SERVICE_TAG,
+            ['priority' => 15],
+        );
+    }
+
+    /** @test */
+    public function it_autoconfigures_product_variant_map_provider_with_attribute(): void
+    {
+        $this->container->setParameter('kernel.environment', 'prod');
+        $this->container->setDefinition(
+            'acme.product_variant_map_provider_with_attribute',
+            (new Definition())
+                ->setClass(ProductVariantMapProviderStub::class)
+                ->setAutoconfigured(true),
+        );
+
+        $this->load();
+        $this->compile();
+
+        $this->assertContainerBuilderHasServiceDefinitionWithTag(
+            'acme.product_variant_map_provider_with_attribute',
+            AsProductVariantMapProvider::SERVICE_TAG,
+            ['priority' => 4],
+        );
+    }
+
+    /** @test */
+    public function it_autoconfigures_tax_calculation_strategy_with_attribute(): void
+    {
+        $this->container->setParameter('kernel.environment', 'prod');
+        $this->container->setDefinition(
+            'acme.tax_calculation_strategy_with_attribute',
+            (new Definition())
+                ->setClass(TaxCalculationStrategyStub::class)
+                ->setAutoconfigured(true),
+        );
+
+        $this->load();
+        $this->compile();
+
+        $this->assertContainerBuilderHasServiceDefinitionWithTag(
+            'acme.tax_calculation_strategy_with_attribute',
+            AsTaxCalculationStrategy::SERVICE_TAG,
+            [
+                'type' => 'test',
+                'label' => 'Test',
+                'priority' => 15,
+            ],
+        );
+    }
+
+    /** @test */
+    public function it_autoconfigures_uri_based_section_resolver_with_attribute(): void
+    {
+        $this->container->setParameter('kernel.environment', 'prod');
+        $this->container->setDefinition(
+            'acme.uri_based_section_resolver_with_attribute',
+            (new Definition())
+                ->setClass(UriBasedSectionResolverStub::class)
+                ->setAutoconfigured(true),
+        );
+
+        $this->load();
+        $this->compile();
+
+        $this->assertContainerBuilderHasServiceDefinitionWithTag(
+            'acme.uri_based_section_resolver_with_attribute',
+            AsUriBasedSectionResolver::SERVICE_TAG,
+            ['priority' => 20],
+        );
+    }
+
+    /** @test */
+    public function it_autoconfigures_orders_totals_provider_with_attribute(): void
+    {
+        $this->container->setParameter('kernel.environment', 'prod');
+        $this->container->setDefinition(
+            'acme.orders_totals_provider',
+            (new Definition())
+                ->setClass(OrdersTotalsProviderStub::class)
+                ->setAutoconfigured(true),
+        );
+
+        $this->load();
+        $this->compile();
+
+        $this->assertContainerBuilderHasServiceDefinitionWithTag(
+            'acme.orders_totals_provider',
+            AsOrdersTotalsProvider::SERVICE_TAG,
+            ['type' => 'stub'],
+        );
+    }
+
+    /** @test */
+    public function it_sets_the_orders_statistics_intervals_map_parameter(): void
+    {
+        $this->container->setParameter('kernel.environment', 'prod');
+        $this->load([
+            'orders_statistics' => [
+                'intervals_map' => [
+                    'day' => [
+                        'interval' => 'P1D',
+                        'period_format' => 'YYYY-MM-DD',
+                    ],
+                    'month' => [
+                        'interval' => 'P1M',
+                        'period_format' => 'YYYY-MM',
+                    ],
+                ],
+            ],
+        ]);
+
+        $this->assertContainerBuilderHasParameter('sylius_core.orders_statistics.intervals_map', [
+            'day' => [
+                'interval' => 'P1D',
+                'period_format' => 'YYYY-MM-DD',
+            ],
+            'month' => [
+                'interval' => 'P1M',
+                'period_format' => 'YYYY-MM',
+            ],
+        ]);
     }
 
     protected function getContainerExtensions(): array

@@ -22,7 +22,6 @@ use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 use Webmozart\Assert\Assert;
 
-/** @experimental */
 final class OrderItemAvailabilityValidator extends ConstraintValidator
 {
     public function __construct(
@@ -31,7 +30,7 @@ final class OrderItemAvailabilityValidator extends ConstraintValidator
     ) {
     }
 
-    public function validate($value, Constraint $constraint)
+    public function validate(mixed $value, Constraint $constraint): void
     {
         Assert::isInstanceOf($value, OrderTokenValueAwareInterface::class);
 

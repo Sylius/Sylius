@@ -16,9 +16,6 @@ namespace Sylius\Bundle\CoreBundle\Migrations;
 use Doctrine\DBAL\Schema\Schema;
 use Sylius\Bundle\CoreBundle\Doctrine\Migrations\AbstractMigration;
 
-/**
- * Auto-generated Migration: Please modify to your needs!
- */
 final class Version20220210135918 extends AbstractMigration
 {
     public function getDescription(): string

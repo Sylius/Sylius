@@ -15,7 +15,8 @@ namespace spec\Sylius\Bundle\ApiBundle\CommandHandler\Checkout;
 
 use PhpSpec\ObjectBehavior;
 use SM\Factory\FactoryInterface;
-use SM\StateMachine\StateMachineInterface;
+use SM\StateMachine\StateMachineInterface as WinzouStateMachineInterface;
+use Sylius\Abstraction\StateMachine\StateMachineInterface;
 use Sylius\Bundle\ApiBundle\Command\Checkout\SendShipmentConfirmationEmail;
 use Sylius\Bundle\ApiBundle\Command\Checkout\ShipShipment;
 use Sylius\Component\Core\Model\ShipmentInterface;
@@ -37,7 +38,7 @@ final class ShipShipmentHandlerSpec extends ObjectBehavior
 
     function it_handles_shipping_without_tracking_number(
         ShipmentRepositoryInterface $shipmentRepository,
-        StateMachineInterface $stateMachine,
+        WinzouStateMachineInterface $stateMachine,
         ShipmentInterface $shipment,
         FactoryInterface $stateMachineFactory,
         MessageBusInterface $eventBus,
@@ -67,7 +68,7 @@ final class ShipShipmentHandlerSpec extends ObjectBehavior
 
     function it_handles_shipping_with_tracking_number(
         ShipmentRepositoryInterface $shipmentRepository,
-        StateMachineInterface $stateMachine,
+        WinzouStateMachineInterface $stateMachine,
         ShipmentInterface $shipment,
         FactoryInterface $stateMachineFactory,
         MessageBusInterface $eventBus,
@@ -83,6 +84,35 @@ final class ShipShipmentHandlerSpec extends ObjectBehavior
         $stateMachine->can(ShipmentTransitions::TRANSITION_SHIP)->willReturn(true);
 
         $stateMachine->apply(ShipmentTransitions::TRANSITION_SHIP)->shouldBeCalled();
+
+        $sendShipmentConfirmationEmail = new SendShipmentConfirmationEmail(123);
+
+        $eventBus
+            ->dispatch($sendShipmentConfirmationEmail, [new DispatchAfterCurrentBusStamp()])
+            ->willReturn(new Envelope($sendShipmentConfirmationEmail))
+            ->shouldBeCalled()
+        ;
+
+        $this($shipShipment)->shouldReturn($shipment);
+    }
+
+    function it_uses_the_new_state_machine_abstraction_if_passed(
+        ShipmentRepositoryInterface $shipmentRepository,
+        StateMachineInterface $stateMachine,
+        MessageBusInterface $eventBus,
+        ShipmentInterface $shipment,
+    ): void {
+        $this->beConstructedWith($shipmentRepository, $stateMachine, $eventBus);
+
+        $shipShipment = new ShipShipment('TRACK');
+        $shipShipment->setShipmentId(123);
+
+        $shipmentRepository->find(123)->willReturn($shipment);
+
+        $shipment->setTracking('TRACK')->shouldBeCalled();
+
+        $stateMachine->can($shipment, ShipmentTransitions::GRAPH, ShipmentTransitions::TRANSITION_SHIP)->willReturn(true);
+        $stateMachine->apply($shipment, ShipmentTransitions::GRAPH, ShipmentTransitions::TRANSITION_SHIP)->shouldBeCalled();
 
         $sendShipmentConfirmationEmail = new SendShipmentConfirmationEmail(123);
 
@@ -111,7 +141,7 @@ final class ShipShipmentHandlerSpec extends ObjectBehavior
 
     function it_throws_an_exception_if_shipment_cannot_be_shipped(
         ShipmentRepositoryInterface $shipmentRepository,
-        StateMachineInterface $stateMachine,
+        WinzouStateMachineInterface $stateMachine,
         ShipmentInterface $shipment,
         FactoryInterface $stateMachineFactory,
     ): void {

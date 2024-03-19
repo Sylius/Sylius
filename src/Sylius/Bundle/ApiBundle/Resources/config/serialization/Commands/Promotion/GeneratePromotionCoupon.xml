@@ -1,0 +1,48 @@
+<?xml version="1.0" ?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Sylius Sp. z o.o.
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<serializer xmlns="http://symfony.com/schema/dic/serializer-mapping"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xsi:schemaLocation="http://symfony.com/schema/dic/serializer-mapping https://symfony.com/schema/dic/serializer-mapping/serializer-mapping-1.0.xsd"
+>
+    <class name="Sylius\Bundle\ApiBundle\Command\Promotion\GeneratePromotionCoupon">
+        <attribute name="promotionCode">
+            <group>admin:promotion_coupon:generate</group>
+            <group>sylius:admin:promotion_coupon:generate</group>
+        </attribute>
+        <attribute name="prefix">
+            <group>admin:promotion_coupon:generate</group>
+            <group>sylius:admin:promotion_coupon:generate</group>
+        </attribute>
+        <attribute name="codeLength">
+            <group>admin:promotion_coupon:generate</group>
+            <group>sylius:admin:promotion_coupon:generate</group>
+        </attribute>
+        <attribute name="suffix">
+            <group>admin:promotion_coupon:generate</group>
+            <group>sylius:admin:promotion_coupon:generate</group>
+        </attribute>
+        <attribute name="amount">
+            <group>admin:promotion_coupon:generate</group>
+            <group>sylius:admin:promotion_coupon:generate</group>
+        </attribute>
+        <attribute name="expiresAt">
+            <group>admin:promotion_coupon:generate</group>
+            <group>sylius:admin:promotion_coupon:generate</group>
+        </attribute>
+        <attribute name="usageLimit">
+            <group>admin:promotion_coupon:generate</group>
+            <group>sylius:admin:promotion_coupon:generate</group>
+        </attribute>
+    </class>
+</serializer>

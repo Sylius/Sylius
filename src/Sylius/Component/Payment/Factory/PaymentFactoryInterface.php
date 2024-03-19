@@ -16,6 +16,11 @@ namespace Sylius\Component\Payment\Factory;
 use Sylius\Component\Payment\Model\PaymentInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
+/**
+ * @template T of PaymentInterface
+ *
+ * @extends FactoryInterface<T>
+ */
 interface PaymentFactoryInterface extends FactoryInterface
 {
     public function createWithAmountAndCurrencyCode(int $amount, string $currency): PaymentInterface;

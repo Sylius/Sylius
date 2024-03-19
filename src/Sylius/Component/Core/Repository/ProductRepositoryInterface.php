@@ -19,6 +19,11 @@ use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Product\Repository\ProductRepositoryInterface as BaseProductRepositoryInterface;
 
+/**
+ * @template T of ProductInterface
+ *
+ * @extends BaseProductRepositoryInterface<T>
+ */
 interface ProductRepositoryInterface extends BaseProductRepositoryInterface
 {
     /** @param mixed|null $taxonId */
@@ -44,4 +49,6 @@ interface ProductRepositoryInterface extends BaseProductRepositoryInterface
     public function findOneByCode(string $code): ?ProductInterface;
 
     public function findByTaxon(TaxonInterface $taxon): array;
+
+    public function findOneByChannelAndCodeWithAvailableAssociations(ChannelInterface $channel, string $code): ?ProductInterface;
 }

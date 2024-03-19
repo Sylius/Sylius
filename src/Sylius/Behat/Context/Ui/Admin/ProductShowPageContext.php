@@ -60,9 +60,9 @@ final class ProductShowPageContext implements Context
     }
 
     /**
-     * @When I access :product product page
+     * @When I access the :product product
      */
-    public function iAccessProductPage(ProductInterface $product): void
+    public function iAccessTheProduct(ProductInterface $product): void
     {
         $this->indexPage->showProductPage($product->getName());
     }
@@ -105,6 +105,24 @@ final class ProductShowPageContext implements Context
     public function iGoToEditPageOfVariant(ProductVariantInterface $variant): void
     {
         $this->productShowPage->showVariantEditPage($variant);
+    }
+
+    /**
+     * @When I access the price history of a simple product for :channelName channel
+     */
+    public function iAccessThePriceHistoryIndexPageOfSimpleProductForChannel(string $channelName): void
+    {
+        $pricingRow = $this->pricingElement->getSimpleProductPricingRowForChannel($channelName);
+        $pricingRow->clickLink('Show');
+    }
+
+    /**
+     * @When I access the price history of a product variant :variantName for :channelName channel
+     */
+    public function iAccessThePriceHistoryIndexPageOfVariantForChannel(string $variantName, string $channelName): void
+    {
+        $pricingRow = $this->pricingElement->getVariantPricingRowForChannel($variantName, $channelName);
+        $pricingRow->clickLink('Show');
     }
 
     /**
@@ -153,6 +171,53 @@ final class ProductShowPageContext implements Context
     public function iShouldSeePriceForChannel(string $price, string $channelName): void
     {
         Assert::same($this->pricingElement->getPriceForChannel($channelName), $price);
+    }
+
+    /**
+     * @Then I should see :lowestPriceBeforeDiscount as its lowest price before the discount in :channelName channel
+     */
+    public function iShouldSeeAsItsLowestPriceBeforeTheDiscountInChannel(
+        string $lowestPriceBeforeDiscount,
+        string $channelName,
+    ): void {
+        Assert::same($this->pricingElement->getLowestPriceBeforeDiscountForChannel($channelName), $lowestPriceBeforeDiscount);
+    }
+
+    /**
+     * @Then I should not see the lowest price before the discount in :channelName channel
+     */
+    public function iShouldNotSeeTheLowestPriceBeforeTheDiscountInChannel(string $channelName): void
+    {
+        Assert::same($this->pricingElement->getLowestPriceBeforeDiscountForChannel($channelName), '-');
+    }
+
+    /**
+     * @Then I should see the lowest price before the discount of :lowestPriceBeforeDiscount for :variantName variant in :channelName channel
+     */
+    public function iShouldSeeVariantWithTheLowestPriceBeforeTheDiscountOfInChannel(
+        string $lowestPriceBeforeDiscount,
+        string $variantName,
+        string $channelName,
+    ): void {
+        Assert::true($this->variantsElement->hasProductVariantWithLowestPriceBeforeDiscountInChannel(
+            $variantName,
+            $lowestPriceBeforeDiscount,
+            $channelName,
+        ));
+    }
+
+    /**
+     * @Then I should not see the lowest price before the discount for :variantName variant in :channelName channel
+     */
+    public function iShouldNotSeeTheLowestPriceBeforeTheDiscountForVariantInChannel(
+        string $variantName,
+        string $channelName,
+    ): void {
+        Assert::true($this->variantsElement->hasProductVariantWithLowestPriceBeforeDiscountInChannel(
+            $variantName,
+            '-',
+            $channelName,
+        ));
     }
 
     /**
@@ -220,9 +285,9 @@ final class ProductShowPageContext implements Context
     }
 
     /**
-     * @Then I should see product taxon is :taxonName
+     * @Then I should see product taxon :taxonName
      */
-    public function iShouldSeeProductTaxonIs(string $taxonName): void
+    public function iShouldSeeProductTaxon(string $taxonName): void
     {
         Assert::true($this->taxonomyElement->hasProductTaxon($taxonName));
     }
@@ -320,7 +385,15 @@ final class ProductShowPageContext implements Context
      */
     public function iShouldSeeProductAssociationWith(string $association, string $productName): void
     {
-        Assert::true($this->associationsElement->isProductAssociated($association, $productName));
+        Assert::true($this->associationsElement->isAssociatedWith($association, $productName));
+    }
+
+    /**
+     * @Then I should see product association type :association
+     */
+    public function iShouldSeeProductAssociationType(string $association): void
+    {
+        Assert::true($this->associationsElement->hasAssociation($association));
     }
 
     /**
@@ -359,6 +432,14 @@ final class ProductShowPageContext implements Context
     }
 
     /**
+     * @Then I should see the :variantName variant
+     */
+    public function iShouldSeeTheVariant(string $variantName): void
+    {
+        Assert::true($this->variantsElement->hasProductVariant($variantName));
+    }
+
+    /**
      * @Then I should see attribute :attribute with value :value in :nameOfLocale locale
      */
     public function iShouldSeeAttributeWithValueInLocale(string $attribute, string $value, string $nameOfLocale): void
@@ -367,7 +448,7 @@ final class ProductShowPageContext implements Context
     }
 
     /**
-     * @Then I should see non-translatable attribute :attribute with value :value
+     * @Then /^I should see non-translatable attribute "([^"]+)" with value ([^"]+)%$/
      */
     public function iShouldSeeNonTranslatableAttributeWithValue(string $attribute, string $value): void
     {

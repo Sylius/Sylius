@@ -16,6 +16,11 @@ namespace Sylius\Component\Order\Repository;
 use Sylius\Component\Order\Model\OrderItemInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
+/**
+ * @template T of OrderItemInterface
+ *
+ * @extends RepositoryInterface<T>
+ */
 interface OrderItemRepositoryInterface extends RepositoryInterface
 {
     public function findOneByIdAndCartId($id, $cartId): ?OrderItemInterface;

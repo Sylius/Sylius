@@ -1,0 +1,9 @@
+{
+    "@context": "\/api\/v2\/contexts\/ProductTaxon",
+    "@id": "\/api\/v2\/admin\/product-taxons\/@integer@",
+    "@type": "ProductTaxon",
+    "id": @integer@,
+    "product": "\/api\/v2\/admin\/products\/MUG",
+    "taxon": "\/api\/v2\/admin\/taxons\/CAPS",
+    "position": 10
+}

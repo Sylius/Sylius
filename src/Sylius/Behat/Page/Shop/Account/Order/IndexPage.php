@@ -51,6 +51,11 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
         $link->click();
     }
 
+    public function hasFlashMessage(string $message): bool
+    {
+        return str_contains($this->getElement('flash_message')->getText(), $message);
+    }
+
     public function isOrderWithNumberInTheList($number): bool
     {
         try {
@@ -74,6 +79,7 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
     {
         return array_merge(parent::getDefinedElements(), [
             'customer_orders' => '[data-test-grid-table]',
+            'flash_message' => '[data-test-flash-message]',
             'last_order' => '[data-test-grid-table-body] [data-test-row]:last-child [data-test-actions]',
         ]);
     }

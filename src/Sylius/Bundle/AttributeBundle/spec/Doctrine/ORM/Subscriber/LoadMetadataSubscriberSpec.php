@@ -58,23 +58,6 @@ final class LoadMetadataSubscriberSpec extends ObjectBehavior
         $this->getSubscribedEvents()->shouldReturn(['loadClassMetadata']);
     }
 
-    function it_does_not_add_a_many_to_one_mapping_if_the_class_is_not_a_configured_attribute_value_model(
-        LoadClassMetadataEventArgs $eventArgs,
-        ClassMetadataInfo $metadata,
-        EntityManager $entityManager,
-        ClassMetadataFactory $classMetadataFactory,
-    ): void {
-        $eventArgs->getEntityManager()->willReturn($entityManager);
-        $entityManager->getMetadataFactory()->willReturn($classMetadataFactory);
-
-        $eventArgs->getClassMetadata()->willReturn($metadata);
-        $metadata->getName()->willReturn('KeepMoving\ThisClass\DoesNot\Concern\You');
-
-        $metadata->mapManyToOne(Argument::any())->shouldNotBeCalled();
-
-        $this->loadClassMetadata($eventArgs);
-    }
-
     function it_maps_many_to_one_associations_from_the_attribute_value_model_to_the_subject_model_and_the_attribute_model(
         LoadClassMetadataEventArgs $eventArgs,
         ClassMetadataInfo $metadata,
@@ -82,6 +65,7 @@ final class LoadMetadataSubscriberSpec extends ObjectBehavior
         ClassMetadataFactory $classMetadataFactory,
         ClassMetadataInfo $classMetadataInfo,
     ): void {
+        $eventArgs->getClassMetadata()->willReturn($metadata);
         $eventArgs->getEntityManager()->willReturn($entityManager);
         $entityManager->getMetadataFactory()->willReturn($classMetadataFactory);
         $classMetadataInfo->fieldMappings = [
@@ -92,9 +76,9 @@ final class LoadMetadataSubscriberSpec extends ObjectBehavior
         $classMetadataFactory->getMetadataFor('Some\App\Product\Entity\Product')->willReturn($classMetadataInfo);
         $classMetadataFactory->getMetadataFor('Some\App\Product\Entity\Attribute')->willReturn($classMetadataInfo);
 
-        $eventArgs->getClassMetadata()->willReturn($metadata);
-        $eventArgs->getClassMetadata()->willReturn($metadata);
         $metadata->getName()->willReturn('Some\App\Product\Entity\AttributeValue');
+        $metadata->hasAssociation('subject')->willReturn(false);
+        $metadata->hasAssociation('attribute')->willReturn(false);
 
         $subjectMapping = [
             'fieldName' => 'subject',
@@ -120,6 +104,42 @@ final class LoadMetadataSubscriberSpec extends ObjectBehavior
 
         $metadata->mapManyToOne($subjectMapping)->shouldBeCalled();
         $metadata->mapManyToOne($attributeMapping)->shouldBeCalled();
+
+        $this->loadClassMetadata($eventArgs);
+    }
+
+    function it_does_not_map_relations_for_attribute_value_model_if_the_relations_already_exist(
+        LoadClassMetadataEventArgs $eventArgs,
+        ClassMetadataInfo $metadata,
+        EntityManager $entityManager,
+        ClassMetadataFactory $classMetadataFactory,
+    ): void {
+        $eventArgs->getClassMetadata()->willReturn($metadata);
+        $eventArgs->getEntityManager()->willReturn($entityManager);
+        $entityManager->getMetadataFactory()->willReturn($classMetadataFactory);
+
+        $metadata->getName()->willReturn('Some\App\Product\Entity\AttributeValue');
+        $metadata->hasAssociation('subject')->willReturn(true);
+        $metadata->hasAssociation('attribute')->willReturn(true);
+
+        $metadata->mapManyToOne(Argument::any())->shouldNotBeCalled();
+
+        $this->loadClassMetadata($eventArgs);
+    }
+
+    function it_does_not_add_a_many_to_one_mapping_if_the_class_is_not_a_configured_attribute_value_model(
+        LoadClassMetadataEventArgs $eventArgs,
+        ClassMetadataInfo $metadata,
+        EntityManager $entityManager,
+        ClassMetadataFactory $classMetadataFactory,
+    ): void {
+        $eventArgs->getEntityManager()->willReturn($entityManager);
+        $entityManager->getMetadataFactory()->willReturn($classMetadataFactory);
+
+        $eventArgs->getClassMetadata()->willReturn($metadata);
+        $metadata->getName()->willReturn('KeepMoving\ThisClass\DoesNot\Concern\You');
+
+        $metadata->mapManyToOne(Argument::any())->shouldNotBeCalled();
 
         $this->loadClassMetadata($eventArgs);
     }

@@ -9,7 +9,7 @@ Feature: Preventing from removing products that are used in promotion rules
         And the store has "Mug" and "Cup" products
         And I am logged in as an administrator
 
-    @ui @api
+    @api @ui
     Scenario: Being prevented from removing a product that is in use by a promotion rule
         Given there is a promotion "Christmas sale" with "Contains product" rule with product "Mug"
         When I try to delete the "Mug" product

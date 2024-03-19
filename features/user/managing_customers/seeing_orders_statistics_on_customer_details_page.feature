@@ -7,8 +7,8 @@ Feature: Seeing customer's orders' statistics
     Background:
         Given the store operates on a channel named "Web-US" in "USD" currency
         And the store also operates on another channel named "Web-UK" in "GBP" currency
-        And the store has a product "Onion" priced at "$200" in "Web-US" channel
-        And this product is also priced at "£100" in "Web-UK" channel
+        And the store has a product "Onion" priced at "$200.00" in "Web-US" channel
+        And this product is also priced at "£100.00" in "Web-UK" channel
         And the store has customer "lirael.clayr@abhorsen.ok"
         And I am logged in as an administrator
 

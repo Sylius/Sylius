@@ -17,7 +17,7 @@ use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractCompilerPassTestCase
 use Sylius\Bundle\CoreBundle\DependencyInjection\Compiler\BackwardsCompatibility\CancelOrderStateMachineCallbackPass;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
-class CancelOrderStateMachineCallbackPassTest extends AbstractCompilerPassTestCase
+final class CancelOrderStateMachineCallbackPassTest extends AbstractCompilerPassTestCase
 {
     public array $smConfigs = [
         'sylius_order' => [
@@ -75,25 +75,9 @@ class CancelOrderStateMachineCallbackPassTest extends AbstractCompilerPassTestCa
     ];
 
     /** @test */
-    public function it_triggers_deprecation_error_when_old_callback_name_is_used(): void
-    {
-        $this->setParameter('sm.configs', $this->smConfigs);
-
-        $this->expectDeprecation();
-        $this->expectDeprecationMessage(sprintf(
-            'Callback "%s" was renamed to "%s". The old name will be removed in Sylius 2.0, use the new name to override it.',
-            'winzou_state_machine.sylius_order.callbacks.after.sylis_cancel_order',
-            'winzou_state_machine.sylius_order.callbacks.after.sylius_cancel_order',
-        ));
-
-        $this->compile();
-    }
-
-    /** @test */
     public function it_converts_from_old_name_to_new_name(): void
     {
         $this->setParameter('sm.configs', $this->smConfigs);
-        $this->expectDeprecation();
         $this->compile();
 
         $smConfigs = $this->container->getParameter('sm.configs');

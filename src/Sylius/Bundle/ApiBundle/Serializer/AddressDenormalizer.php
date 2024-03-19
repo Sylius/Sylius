@@ -16,7 +16,6 @@ namespace Sylius\Bundle\ApiBundle\Serializer;
 use Symfony\Component\Serializer\Normalizer\ContextAwareDenormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 
-/** @experimental */
 final class AddressDenormalizer implements ContextAwareDenormalizerInterface
 {
     public function __construct(

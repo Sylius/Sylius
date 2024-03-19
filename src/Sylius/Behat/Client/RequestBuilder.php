@@ -17,10 +17,6 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 final class RequestBuilder
 {
-    private string $uri;
-
-    private string $method;
-
     private array $parameters = [];
 
     private array $headers = [];
@@ -29,10 +25,10 @@ final class RequestBuilder
 
     private array $files = [];
 
-    private function __construct(string $uri, string $method)
-    {
-        $this->uri = $uri;
-        $this->method = $method;
+    private function __construct(
+        private string $uri,
+        private string $method,
+    ) {
     }
 
     public static function create(string $uri, string $method): self
@@ -61,7 +57,7 @@ final class RequestBuilder
         return $this;
     }
 
-    public function withParameter(string $key, string $value): self
+    public function withParameter(string $key, array|string $value): self
     {
         $this->parameters[$key] = $value;
 

@@ -24,16 +24,27 @@
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/admin/locales</attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:locale:read</attribute>
+                    <attribute name="groups">
+                        <attribute>admin:locale:index</attribute>
+                        <attribute>sylius:admin:locale:index</attribute>
+                    </attribute>
                 </attribute>
-
             </collectionOperation>
 
             <collectionOperation name="admin_post">
                 <attribute name="method">POST</attribute>
                 <attribute name="path">/admin/locales</attribute>
                 <attribute name="denormalization_context">
-                    <attribute name="groups">admin:locale:create</attribute>
+                    <attribute name="groups">
+                        <attribute>admin:locale:create</attribute>
+                        <attribute>sylius:admin:locale:create</attribute>
+                    </attribute>
+                </attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">
+                        <attribute>admin:locale:show</attribute>
+                        <attribute>sylius:admin:locale:show</attribute>
+                    </attribute>
                 </attribute>
             </collectionOperation>
 
@@ -41,7 +52,10 @@
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/shop/locales</attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">shop:locale:read</attribute>
+                    <attribute name="groups">
+                        <attribute>shop:locale:index</attribute>
+                        <attribute>sylius:shop:locale:index</attribute>
+                    </attribute>
                 </attribute>
             </collectionOperation>
         </collectionOperations>
@@ -51,15 +65,26 @@
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/admin/locales/{code}</attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:locale:read</attribute>
+                    <attribute name="groups">
+                        <attribute>admin:locale:show</attribute>
+                        <attribute>sylius:admin:locale:show</attribute>
+                    </attribute>
                 </attribute>
+            </itemOperation>
+
+            <itemOperation name="admin_delete">
+                <attribute name="method">DELETE</attribute>
+                <attribute name="path">admin/locales/{code}</attribute>
             </itemOperation>
 
             <itemOperation name="shop_get">
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/shop/locales/{code}</attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">shop:locale:read</attribute>
+                    <attribute name="groups">
+                        <attribute>shop:locale:show</attribute>
+                        <attribute>sylius:shop:locale:show</attribute>
+                    </attribute>
                 </attribute>
             </itemOperation>
         </itemOperations>

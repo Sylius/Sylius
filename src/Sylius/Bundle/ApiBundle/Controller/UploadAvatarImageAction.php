@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\Controller;
 
-use ApiPlatform\Core\Api\IriConverterInterface;
+use ApiPlatform\Api\IriConverterInterface;
 use Sylius\Component\Core\Model\AdminUserInterface;
 use Sylius\Component\Core\Model\ImageInterface;
 use Sylius\Component\Core\Repository\AvatarImageRepositoryInterface;
@@ -24,7 +24,6 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Webmozart\Assert\Assert;
 
-/** @experimental */
 final class UploadAvatarImageAction
 {
     public function __construct(
@@ -49,7 +48,7 @@ final class UploadAvatarImageAction
         Assert::notEmpty($ownerIri);
 
         /** @var ResourceInterface|AdminUserInterface $owner */
-        $owner = $this->iriConverter->getItemFromIri($ownerIri);
+        $owner = $this->iriConverter->getResourceFromIri($ownerIri);
         Assert::isInstanceOf($owner, AdminUserInterface::class);
 
         $oldImage = $owner->getImage();

@@ -7,6 +7,7 @@ imports:
     - { resource: "@SyliusAdminBundle/Resources/config/grids/admin_user.yml" }
     - { resource: "@SyliusAdminBundle/Resources/config/grids/catalog_promotion.yaml" }
     - { resource: "@SyliusAdminBundle/Resources/config/grids/channel.yml" }
+    - { resource: "@SyliusAdminBundle/Resources/config/grids/channel_pricing_log_entry.yml" }
     - { resource: "@SyliusAdminBundle/Resources/config/grids/country.yml" }
     - { resource: "@SyliusAdminBundle/Resources/config/grids/currency.yml" }
     - { resource: "@SyliusAdminBundle/Resources/config/grids/customer.yml" }

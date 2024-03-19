@@ -1,0 +1,35 @@
+{
+    "@context": "\/api\/v2\/contexts\/Adjustment",
+    "@id": "\/api\/v2\/shop\/orders\/token\/items\/@integer@\/adjustments",
+    "@type": "hydra:Collection",
+    "hydra:member": [
+        {
+            "@id": "\/api\/v2\/shop\/adjustments\/@integer@",
+            "@type": "Adjustment",
+            "id": @integer@,
+            "type": "order_promotion",
+            "label": "50% Off on your first order",
+            "amount": -1000,
+            "neutral": false
+        },
+        {
+            "@id": "\/api\/v2\/shop\/adjustments\/@integer@",
+            "@type": "Adjustment",
+            "id": @integer@,
+            "type": "order_promotion",
+            "label": "50% Off on your first order",
+            "amount": -1000,
+            "neutral": false
+        },
+        {
+            "@id": "\/api\/v2\/shop\/adjustments\/@integer@",
+            "@type": "Adjustment",
+            "id": @integer@,
+            "type": "order_promotion",
+            "label": "50% Off on your first order",
+            "amount": -1000,
+            "neutral": false
+        }
+    ],
+    "hydra:totalItems": 3
+}

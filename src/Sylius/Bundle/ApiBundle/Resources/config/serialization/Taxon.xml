@@ -1,34 +1,114 @@
 <?xml version="1.0" ?>
 
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Sylius Sp. z o.o.
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
 <serializer xmlns="http://symfony.com/schema/dic/serializer-mapping"
             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
             xsi:schemaLocation="http://symfony.com/schema/dic/serializer-mapping https://symfony.com/schema/dic/serializer-mapping/serializer-mapping-1.0.xsd"
 >
     <class name="Sylius\Component\Core\Model\Taxon">
         <attribute name="id">
-            <group>admin:taxon:read</group>
-            <group>shop:taxon:read</group>
+            <group>admin:taxon:index</group>
+            <group>sylius:admin:taxon:index</group>
+            <group>admin:taxon:show</group>
+            <group>sylius:admin:taxon:show</group>
+            <group>shop:taxon:index</group>
+            <group>sylius:shop:taxon:index</group>
+            <group>shop:taxon:show</group>
+            <group>sylius:shop:taxon:show</group>
         </attribute>
         <attribute name="code">
-            <group>admin:taxon:read</group>
-            <group>shop:taxon:read</group>
+            <group>admin:taxon:index</group>
+            <group>sylius:admin:taxon:index</group>
+            <group>admin:taxon:show</group>
+            <group>sylius:admin:taxon:show</group>
+            <group>shop:taxon:index</group>
+            <group>sylius:shop:taxon:index</group>
+            <group>shop:taxon:show</group>
+            <group>sylius:shop:taxon:show</group>
             <group>admin:taxon:create</group>
-            <group>admin:taxon:update</group>
+            <group>sylius:admin:taxon:create</group>
         </attribute>
         <attribute name="name">
-            <group>shop:taxon:read</group>
+            <group>shop:taxon:index</group>
+            <group>sylius:shop:taxon:index</group>
+            <group>shop:taxon:show</group>
+            <group>sylius:shop:taxon:show</group>
         </attribute>
         <attribute name="slug">
-            <group>shop:taxon:read</group>
+            <group>shop:taxon:index</group>
+            <group>sylius:shop:taxon:index</group>
+            <group>shop:taxon:show</group>
+            <group>sylius:shop:taxon:show</group>
         </attribute>
         <attribute name="description">
-            <group>shop:taxon:read</group>
+            <group>shop:taxon:index</group>
+            <group>sylius:shop:taxon:index</group>
+            <group>shop:taxon:show</group>
+            <group>sylius:shop:taxon:show</group>
         </attribute>
         <attribute name="translations">
-            <group>admin:taxon:read</group>
+            <group>admin:taxon:index</group>
+            <group>sylius:admin:taxon:index</group>
+            <group>admin:taxon:show</group>
+            <group>sylius:admin:taxon:show</group>
+            <group>admin:taxon:create</group>
+            <group>sylius:admin:taxon:create</group>
+            <group>admin:taxon:update</group>
+            <group>sylius:admin:taxon:update</group>
+        </attribute>
+        <attribute name="parent">
+            <group>admin:taxon:index</group>
+            <group>sylius:admin:taxon:index</group>
+            <group>admin:taxon:show</group>
+            <group>sylius:admin:taxon:show</group>
+            <group>admin:taxon:create</group>
+            <group>sylius:admin:taxon:create</group>
+            <group>admin:taxon:update</group>
+            <group>sylius:admin:taxon:update</group>
         </attribute>
         <attribute name="children">
-            <group>shop:taxon:read</group>
+            <group>admin:taxon:index</group>
+            <group>sylius:admin:taxon:index</group>
+            <group>admin:taxon:show</group>
+            <group>sylius:admin:taxon:show</group>
+            <group>shop:taxon:index</group>
+            <group>sylius:shop:taxon:index</group>
+            <group>shop:taxon:show</group>
+            <group>sylius:shop:taxon:show</group>
+        </attribute>
+        <attribute name="enabled">
+            <group>admin:taxon:index</group>
+            <group>sylius:admin:taxon:index</group>
+            <group>admin:taxon:show</group>
+            <group>sylius:admin:taxon:show</group>
+            <group>admin:taxon:create</group>
+            <group>sylius:admin:taxon:create</group>
+            <group>admin:taxon:update</group>
+            <group>sylius:admin:taxon:update</group>
+        </attribute>
+        <attribute name="position">
+            <group>admin:taxon:index</group>
+            <group>sylius:admin:taxon:index</group>
+            <group>admin:taxon:show</group>
+            <group>sylius:admin:taxon:show</group>
+            <group>admin:taxon:update</group>
+            <group>sylius:admin:taxon:update</group>
+        </attribute>
+        <attribute name="images">
+            <group>admin:taxon:index</group>
+            <group>sylius:admin:taxon:index</group>
+            <group>admin:taxon:show</group>
+            <group>sylius:admin:taxon:show</group>
         </attribute>
     </class>
 </serializer>

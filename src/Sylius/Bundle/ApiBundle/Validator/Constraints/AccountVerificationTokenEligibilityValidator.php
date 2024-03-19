@@ -20,15 +20,13 @@ use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 use Webmozart\Assert\Assert;
 
-/** @experimental */
 final class AccountVerificationTokenEligibilityValidator extends ConstraintValidator
 {
     public function __construct(private RepositoryInterface $shopUserRepository)
     {
     }
 
-    /** @param VerifyCustomerAccount|mixed $value */
-    public function validate($value, Constraint $constraint)
+    public function validate(mixed $value, Constraint $constraint): void
     {
         Assert::isInstanceOf($value, VerifyCustomerAccount::class);
 

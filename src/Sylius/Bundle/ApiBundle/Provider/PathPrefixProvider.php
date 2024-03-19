@@ -18,7 +18,6 @@ use Sylius\Component\Core\Model\AdminUserInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
-/** @experimental */
 final class PathPrefixProvider implements PathPrefixProviderInterface
 {
     public function __construct(
@@ -33,6 +32,7 @@ final class PathPrefixProvider implements PathPrefixProviderInterface
             return null;
         }
 
+        /** @var array<int, string> $pathElements */
         $pathElements = array_values(array_filter(explode('/', str_replace($this->apiRoute, '', $path))));
 
         if ($pathElements[0] === PathPrefixes::SHOP_PREFIX) {

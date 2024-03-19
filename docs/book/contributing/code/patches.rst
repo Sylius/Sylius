@@ -14,7 +14,7 @@ Before working on Sylius, set a Symfony friendly environment up with the followi
 software:
 
 * Git
-* PHP version 8.0 or above
+* PHP version 8.1 or above
 * MySQL
 
 Configure Git
