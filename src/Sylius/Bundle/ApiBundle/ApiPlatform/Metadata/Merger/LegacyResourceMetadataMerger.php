@@ -23,6 +23,10 @@ final class LegacyResourceMetadataMerger implements MetadataMergerInterface
 
         foreach ($newMetadata as $key => $value) {
             if ('properties' === $key) {
+                foreach ($value as $keyProperty => $property) {
+                    $oldMetadata[$key][$keyProperty] = $property;
+                }
+
                 continue;
             }
 
