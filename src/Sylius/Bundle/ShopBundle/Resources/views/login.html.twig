@@ -9,16 +9,7 @@
 
     {{ sylius_template_event('sylius.shop.login.after_content_header') }}
 
-    <div class="ui padded segment">
-        <div class="ui two column very relaxed stackable grid">
-            <div class="column">
-                {{ sylius_template_event('sylius.shop.login.main_column', _context) }}
-            </div>
-            <div class="ui hidden vertical divider">
-            </div>
-            <div class="column">
-                {{ sylius_template_event('sylius.shop.login.register_column', _context) }}
-            </div>
-        </div>
-    </div>
+    {{ sylius_template_event('sylius.shop.login.main_column', _context) }}
+
+    {{ sylius_template_event('sylius.shop.login.register_column', _context) }}
 {% endblock %}

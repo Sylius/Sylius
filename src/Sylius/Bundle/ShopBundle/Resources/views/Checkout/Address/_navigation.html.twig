@@ -1,8 +1,12 @@
-<div class="ui two column grid">
-    <div class="column">
-        <a href="{{ path('sylius_shop_homepage') }}" class="ui large icon labeled button"><i class="arrow left icon"></i> {{ 'sylius.ui.back_to_store'|trans }}</a>
+<div>
+    <div>
+        <a href="{{ path('sylius_shop_homepage') }}">
+            {{ 'sylius.ui.back_to_store'|trans }}
+        </a>
     </div>
-    <div class="right aligned column">
-        <button type="submit" id="next-step" class="ui large primary icon labeled button" {{ sylius_test_html_attribute('next-step') }}><i class="arrow right icon"></i> {{ 'sylius.ui.next'|trans }}</button>
+    <div>
+        <button type="submit" {{ sylius_test_html_attribute('next-step') }}>
+            {{ 'sylius.ui.next'|trans }}
+        </button>
     </div>
 </div>

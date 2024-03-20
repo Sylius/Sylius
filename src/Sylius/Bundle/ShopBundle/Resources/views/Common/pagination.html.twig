@@ -1,0 +1,18 @@
+{% macro simple(paginator, options) %}
+    {% if paginator.haveToPaginate() %}
+        {{ pagerfanta(paginator, 'twig', options|default({'template': '@BabDevPagerfanta/semantic_ui.html.twig'})) }}
+    {% endif %}
+{% endmacro %}
+
+{% macro perPage(paginator, paginationLimits) %}
+    <div class="ui simple fluid dropdown item">
+        {{ 'sylius.ui.show'|trans }} {{ paginator.maxPerPage }}
+        <i class="dropdown icon"></i>
+        <div class="menu">
+        {% for limit in paginationLimits|filter(limit => limit != paginator.maxPerPage) %}
+            {% set path = path(app.request.attributes.get('_route'), app.request.attributes.all('_route_params')|merge(app.request.query)|merge({'limit': limit})) %}
+            <a class="item" href="{{ path }}">{{ limit }}</a>
+        {% endfor %}
+        </div>
+    </div>
+{% endmacro %}

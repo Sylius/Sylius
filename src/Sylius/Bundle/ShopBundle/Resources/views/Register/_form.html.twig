@@ -1,11 +1,10 @@
-<h4 class="ui dividing header">{{ 'sylius.ui.personal_information'|trans }}</h4>
-<div class="two fields">
-    {{ form_row(form.firstName, sylius_test_form_attribute('first-name')) }}
-    {{ form_row(form.lastName, sylius_test_form_attribute('last-name')) }}
-</div>
+<h4>{{ 'sylius.ui.personal_information'|trans }}</h4>
+{{ form_row(form.firstName, sylius_test_form_attribute('first-name')) }}
+{{ form_row(form.lastName, sylius_test_form_attribute('last-name')) }}
 {{ form_row(form.email, sylius_test_form_attribute('email')) }}
 {{ form_row(form.phoneNumber, sylius_test_form_attribute('phone-number')) }}
 {{ form_row(form.subscribedToNewsletter, sylius_test_form_attribute('subscribed-to-newsletter')) }}
-<h4 class="ui dividing header">{{ 'sylius.ui.account_credentials'|trans }}</h4>
+
+<h4>{{ 'sylius.ui.account_credentials'|trans }}</h4>
 {{ form_row(form.user.plainPassword.first, sylius_test_form_attribute('password-first')) }}
 {{ form_row(form.user.plainPassword.second, sylius_test_form_attribute('password-second')) }}

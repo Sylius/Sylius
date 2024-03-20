@@ -5,13 +5,13 @@
     {% include '@SyliusShop/Product/Show/_catalogPromotionLabels.html.twig' with {'appliedPromotions': appliedPromotions, 'withDescription': true} %}
 {% endif %}
 
-<div class="ui stackable grid" {{ sylius_test_html_attribute('product-price-content') }}>
-    <div class="seven wide column">
+<div {{ sylius_test_html_attribute('product-price-content') }}>
+    <div>
         {% if not product.enabledVariants.empty() %}
             {% include '@SyliusShop/Product/Show/_price.html.twig' %}
         {% endif %}
     </div>
-    <div class="nine wide right aligned column">
-        <span class="ui sub header">{{ product.code }}</span>
+    <div>
+        {{ product.code }}
     </div>
 </div>

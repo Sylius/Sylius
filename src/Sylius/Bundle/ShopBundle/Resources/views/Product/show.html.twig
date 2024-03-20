@@ -3,27 +3,16 @@
 {% block title %}{{ product.name }} | {{ parent() }}{% endblock %}
 
 {% block content %}
-{% include '@SyliusShop/Product/Show/_breadcrumb.html.twig' %}
-<div class="ui hidden divider"></div>
+    {% include '@SyliusShop/Product/Show/_breadcrumb.html.twig' %}
 
-<div class="ui two column stackable grid">
-    <div class="column">
-        {{ sylius_template_event('sylius.shop.product.show.left_sidebar', _context) }}
+    <div>
+        <div>
+            {{ sylius_template_event('sylius.shop.product.show.left_sidebar', _context) }}
+        </div>
+        <div {{ sylius_test_html_attribute('product-box') }}>
+            {{ sylius_template_event('sylius.shop.product.show.right_sidebar', _context) }}
+        </div>
     </div>
-    <div class="column" {{ sylius_test_html_attribute('product-box') }}>
-        {{ sylius_template_event('sylius.shop.product.show.right_sidebar', _context) }}
-    </div>
-</div>
 
-{{ sylius_template_event('sylius.shop.product.show.content', _context) }}
-{% endblock %}
-
-{% block javascripts %}
-{{ parent() }}
-
-<script type="text/javascript">
-    lightbox.option({
-        'albumLabel': '{{ 'sylius.lightbox.image_album_label'|trans|escape('js') }}'
-    });
-</script>
+    {{ sylius_template_event('sylius.shop.product.show.content', _context) }}
 {% endblock %}
