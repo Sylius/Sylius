@@ -140,6 +140,7 @@ abstract class AbstractJsonFunctionNode extends FunctionNode
     private function matchStringLiteral(Parser $parser, Lexer $lexer): Literal
     {
         $parser->match(Lexer::T_STRING);
+
         return new Literal(Literal::STRING, $lexer->token->value);
     }
 
@@ -160,6 +161,7 @@ abstract class AbstractJsonFunctionNode extends FunctionNode
                 $args[] = $parsedArgument->dispatch($sqlWalker);
             }
         }
+
         return $this->getSqlForArgs($args);
     }
 

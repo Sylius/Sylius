@@ -29,12 +29,9 @@ class ProductAttributeValueRepository extends EntityRepository implements Produc
 {
     public function findByJsonChoiceKey(string $choiceKey): array
     {
-        $connection = $this->getEntityManager()->getConnection();
-        $isPostgres = $this->isPostgreSQLPlatform($connection);
-
         $queryBuilder = $this->createQueryBuilder('o');
 
-        if ($isPostgres) {
+        if ($this->isPostgreSQLPlatform()) {
             $queryBuilder->andWhere('JSONB_ARRAY_ELEMENTS_TEXT(o.json) LIKE :key');
         } else {
             $queryBuilder->andWhere('o.json LIKE :key');
@@ -92,8 +89,10 @@ class ProductAttributeValueRepository extends EntityRepository implements Produc
         ;
     }
 
-    protected function isPostgreSQLPlatform(Connection $connection): bool
+    protected function isPostgreSQLPlatform(): bool
     {
+        $connection = $this->getEntityManager()->getConnection();
+
         return is_a($connection->getDatabasePlatform(), PostgreSQLPlatform::class, true);
     }
 }

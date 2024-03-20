@@ -25,7 +25,6 @@ final class JsonbArrayElementsText extends AbstractPostgresqlJsonFunctionNode
 
     protected function getSqlForArgs(array $arguments): string
     {
-        [$leftArg] = $arguments;
-        return sprintf('(SELECT * FROM jsonb_array_elements_text(%s))', $leftArg);
+        return sprintf('(SELECT * FROM jsonb_array_elements_text(%s))', array_shift($arguments));
     }
 }
