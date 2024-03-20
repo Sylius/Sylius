@@ -26,6 +26,8 @@ use Webmozart\Assert\Assert;
 
 final class ManagingTaxonsContext implements Context
 {
+    private const MAX_CODE_LENGTH = 255;
+
     public function __construct(
         private ApiClientInterface $client,
         private ResponseCheckerInterface $responseChecker,
@@ -78,6 +80,14 @@ final class ManagingTaxonsContext implements Context
         if ($code !== null) {
             $this->client->addRequestData('code', $code);
         }
+    }
+
+    /**
+     * @When I specify too long code
+     */
+    public function iSpecifyTooLongCode(): void
+    {
+        $this->iSpecifyItsCodeAs(str_repeat('a', self::MAX_CODE_LENGTH + 1));
     }
 
     /**
@@ -316,6 +326,18 @@ final class ManagingTaxonsContext implements Context
         Assert::contains(
             $this->responseChecker->getError($this->client->getLastResponse()),
             sprintf('Please enter taxon %s.', $field),
+        );
+    }
+
+
+    /**
+     * @Then I should be notified that the code is too long
+     */
+    public function iShouldBeNotifiedThatTheCodeIsTooLong(): void
+    {
+        Assert::contains(
+            $this->responseChecker->getError($this->client->getLastResponse()),
+            'Taxon code must not be longer than',
         );
     }
 

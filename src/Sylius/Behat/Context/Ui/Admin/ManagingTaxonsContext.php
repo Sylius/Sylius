@@ -29,6 +29,8 @@ use Webmozart\Assert\Assert;
 
 final class ManagingTaxonsContext implements Context
 {
+    private const MAX_CODE_LENGTH = 255;
+
     public function __construct(
         private SharedStorageInterface $sharedStorage,
         private CreatePageInterface $createPage,
@@ -75,6 +77,14 @@ final class ManagingTaxonsContext implements Context
     public function iSpecifyItsCodeAs(?string $code = null)
     {
         $this->createPage->specifyCode($code ?? '');
+    }
+
+    /**
+     * @When I specify too long code
+     */
+    public function iSpecifyTooLongCode(): void
+    {
+        $this->iSpecifyItsCodeAs(str_repeat('a', self::MAX_CODE_LENGTH + 1));
     }
 
     /**
@@ -265,6 +275,16 @@ final class ManagingTaxonsContext implements Context
         $currentPage = $this->resolveCurrentPage();
 
         Assert::same($currentPage->getValidationMessage($element), sprintf('Please enter taxon %s.', $element));
+    }
+
+    /**
+     * @Then I should be notified that the code is too long
+     */
+    public function iShouldBeNotifiedThatTheCodeIsTooLong(): void
+    {
+        $currentPage = $this->resolveCurrentPage();
+
+        Assert::contains($currentPage->getValidationMessage('code'), 'Taxon code must not be longer than');
     }
 
     /**
