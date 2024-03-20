@@ -73,7 +73,7 @@ class ImageNormalizer implements ContextAwareNormalizerInterface, NormalizerAwar
 
         try {
             return $this->cacheManager->getBrowserPath(parse_url($data['path'], \PHP_URL_PATH), $filter);
-        } catch (NonExistingFilterException) {
+        } catch (NonExistingFilterException|\OutOfBoundsException) {
             throw new InvalidArgumentException(sprintf('Filter "%s" is not configured.', $filter));
         }
     }

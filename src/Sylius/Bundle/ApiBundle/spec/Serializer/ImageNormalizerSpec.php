@@ -151,6 +151,40 @@ final class ImageNormalizerSpec extends ObjectBehavior
         ;
     }
 
+    function it_throws_validation_exception_when_resolver_for_passed_filter_could_not_been_found(
+        CacheManager $cacheManager,
+        RequestStack $requestStack,
+        NormalizerInterface $normalizer,
+        Request $request,
+        ParameterBag $queryBag,
+        ImageInterface $image,
+    ): void {
+        $normalizer
+            ->normalize($image, null, ['sylius_image_normalizer_already_called' => true])
+            ->shouldBeCalled()
+            ->willReturn(['path' => 'some_path'])
+        ;
+
+        $queryBag
+            ->get(ImageNormalizer::FILTER_QUERY_PARAMETER, '')
+            ->shouldBeCalled()
+            ->willReturn('no-resolver-filter')
+        ;
+        $request->query = $queryBag;
+        $requestStack->getCurrentRequest()->willReturn($request);
+
+        $cacheManager
+            ->getBrowserPath(parse_url('some_path', \PHP_URL_PATH), 'no-resolver-filter')
+            ->shouldBeCalled()
+            ->willThrow(\OutOfBoundsException::class)
+        ;
+
+        $this
+            ->shouldThrow(InvalidArgumentException::class)
+            ->during('normalize', [$image, null, []])
+        ;
+    }
+
     function it_applies_given_image_filter(
         CacheManager $cacheManager,
         RequestStack $requestStack,
