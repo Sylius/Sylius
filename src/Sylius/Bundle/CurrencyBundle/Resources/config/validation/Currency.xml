@@ -23,10 +23,8 @@
                 <option name="message">sylius.currency.code.not_blank</option>
                 <option name="groups">sylius</option>
             </constraint>
-            <constraint name="Length">
-                <option name="min">3</option>
-                <option name="max">3</option>
-                <option name="exactMessage">sylius.currency.code.exact_length</option>
+            <constraint name="Currency">
+                <option name="message">sylius.currency.code.currency</option>
                 <option name="groups">sylius</option>
             </constraint>
             <constraint name="Regex">

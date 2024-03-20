@@ -899,6 +899,10 @@ and use one of the new attributes accordingly to the type of your class, e.g.:
    constraint.
    Due to that, it's translation message `sylius.country.code.regex` was also removed.
 
+1. The `Length` constraints has been removed from `Sylius\Component\Currency\Model\Currency`
+   in favour of the `Currency`constraint.
+   Due to that, the translation messages `sylius.currency.exact_length` was also removed.
+
 1. The `sylius_admin_ajax_taxon_move` route has been deprecated. If you're relaying on it, consider migrating to new
    `sylius_admin_ajax_taxon_move_up` and `sylius_admin_ajax_taxon_move_down` routes.
 
