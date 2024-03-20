@@ -39,15 +39,32 @@
                 <option name="message">sylius.user.username.not_blank</option>
                 <option name="groups">sylius</option>
             </constraint>
+            <constraint name="Length">
+                <option name="max">255</option>
+                <option name="maxMessage">sylius.user.username.max</option>
+                <option name="groups">sylius</option>
+            </constraint>
+        </property>
+        <property name="firstName">
+            <constraint name="Length">
+                <option name="max">255</option>
+                <option name="maxMessage">sylius.user.first_name.max</option>
+                <option name="groups">sylius</option>
+            </constraint>
+        </property>
+        <property name="lastName">
+            <constraint name="Length">
+                <option name="max">255</option>
+                <option name="maxMessage">sylius.user.last_name.max</option>
+                <option name="groups">sylius</option>
+            </constraint>
         </property>
         <property name="localeCode">
             <constraint name="NotBlank">
                 <option name="message">sylius.user.locale_code.not_blank</option>
                 <option name="groups">sylius</option>
             </constraint>
-            <constraint name="Length">
-                <option name="min">2</option>
-                <option name="max">12</option>
+            <constraint name="Locale">
                 <option name="groups">sylius</option>
             </constraint>
         </property>

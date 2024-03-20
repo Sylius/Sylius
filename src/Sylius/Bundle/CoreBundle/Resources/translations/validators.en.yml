@@ -175,5 +175,10 @@ sylius:
         username:
             unique: This username is already used.
             not_blank: Please enter your name.
+            max: Username must not be longer than {{ limit }} characters.
+        first_name:
+            max: First name must not be longer than {{ limit }} characters.
+        last_name:
+            max: Last name must not be longer than {{ limit }} characters.
         locale_code:
             not_blank: Please choose a locale.
