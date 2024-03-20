@@ -4,17 +4,14 @@
 {% endif %}
 {% for shipment in order.shipments %}
     {% set state = shipment.state %}
-    <div class="ui small icon message">
-        <i class="truck icon"></i>
-        <div class="content">
-            <div class="header" id="sylius-shipping-method" {{ sylius_test_html_attribute('shipping-method') }}>
-                {{ shipment.method }}
-            </div>
-            {% if state != 'cart' %}
-            <p id="shipment-status" {{ sylius_test_html_attribute('shipment-state') }}>
-                {% include "@SyliusShop/Common/Order/Label/ShipmentState/singleShipmentState.html.twig" with { 'state': state } %}
-            </p>
-            {% endif %}
+    <div>
+        <div {{ sylius_test_html_attribute('shipping-method') }}>
+            {{ shipment.method }}
         </div>
+        {% if state != 'cart' %}
+            <div {{ sylius_test_html_attribute('shipment-state') }}>
+                {% include "@SyliusShop/Common/Order/Label/ShipmentState/singleShipmentState.html.twig" with { 'state': state } %}
+            </div>
+        {% endif %}
     </div>
 {% endfor %}

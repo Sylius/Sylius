@@ -5,29 +5,20 @@
 {% block title %}{{ 'sylius.ui.contact_us'|trans }} | {{ parent() }}{% endblock %}
 
 {% block content %}
-    <div class="ui hidden divider"></div>
-    <div class="ui two column centered stackable grid">
-        <div class="column">
-            <h1 class="ui header">
-                <i class="circular mail icon"></i>
-                <div class="content">
-                    {{ 'sylius.ui.contact_us'|trans }}
-                    <div class="sub header">{{ 'sylius.ui.use_the_contact_form_below_to_send_us_a_message'|trans }}</div>
+    <h1>{{ 'sylius.ui.contact_us'|trans }}</h1>
+    {{ 'sylius.ui.use_the_contact_form_below_to_send_us_a_message'|trans }}
 
-                    {{ sylius_template_event('sylius.shop.contact.request.after_content_header') }}
-                </div>
-            </h1>
-            <div class="ui segment">
-                {{ form_start(form, {'action': path('sylius_shop_contact_request'), 'attr': {'class': 'ui large loadable form', 'novalidate': 'novalidate'}}) }}
-                {{ form_row(form.email, sylius_test_form_attribute('contact-email')) }}
-                {{ form_row(form.message, sylius_test_form_attribute('contact-message')) }}
+    {{ sylius_template_event('sylius.shop.contact.request.after_content_header') }}
 
-                {{ sylius_template_event('sylius.shop.contact.request.form', {'form': form}) }}
+    <div>
+        {{ form_start(form, {'action': path('sylius_shop_contact_request'), 'attr': {'novalidate': 'novalidate'}}) }}
+        {{ form_row(form.email, sylius_test_form_attribute('contact-email')) }}
+        {{ form_row(form.message, sylius_test_form_attribute('contact-message')) }}
 
-                {{ form_row(form._token) }}
-                <button type="submit" class="ui fluid large primary submit button" {{ sylius_test_html_attribute('send-button') }}>{{ 'sylius.ui.send'|trans }}</button>
-                {{ form_end(form, {'render_rest': false}) }}
-            </div>
-        </div>
+        {{ sylius_template_event('sylius.shop.contact.request.form', {'form': form}) }}
+
+        {{ form_row(form._token) }}
+        <button type="submit" {{ sylius_test_html_attribute('send-button') }}>{{ 'sylius.ui.send'|trans }}</button>
+        {{ form_end(form, {'render_rest': false}) }}
     </div>
 {% endblock %}

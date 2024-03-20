@@ -11,13 +11,12 @@
 {% block content %}
     {% if not cart.empty %}
         {{ sylius_template_event('sylius.shop.cart.header', {'header': header, 'cart': cart}) }}
-        <div class="ui stackable grid">
-            <div class="eleven wide column">
-                {{ sylius_template_event('sylius.shop.cart.items', {'cart': cart, 'form': form}) }}
-            </div>
-            <div class="five wide column">
-                {{ sylius_template_event('sylius.shop.cart.summary', {'cart': cart}) }}
-            </div>
+
+        <div>
+            {{ sylius_template_event('sylius.shop.cart.items', {'cart': cart, 'form': form}) }}
+        </div>
+        <div>
+            {{ sylius_template_event('sylius.shop.cart.summary', {'cart': cart}) }}
         </div>
         {{ sylius_template_event('sylius.shop.cart.suggestions', {'cart': cart}) }}
     {% else %}

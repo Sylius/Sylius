@@ -5,42 +5,41 @@
 {% block title %}{{ 'sylius.ui.your_profile'|trans }} | {{ parent() }}{% endblock %}
 
 {% block breadcrumb %}
-    <div class="ui breadcrumb">
-        <a href="{{ path('sylius_shop_homepage') }}" class="section">{{ 'sylius.ui.home'|trans }}</a>
-        <div class="divider"> / </div>
-        <a href="{{ path('sylius_shop_account_dashboard') }}" class="section">{{ 'sylius.ui.my_account'|trans }}</a>
-        <div class="divider"> / </div>
-        <div class="active section">{{ 'sylius.ui.personal_information'|trans }}</div>
+    <div>
+        <a href="{{ path('sylius_shop_homepage') }}">{{ 'sylius.ui.home'|trans }}</a>
+        <a href="{{ path('sylius_shop_account_dashboard') }}">{{ 'sylius.ui.my_account'|trans }}</a>
+        <div>{{ 'sylius.ui.personal_information'|trans }}</div>
     </div>
 {% endblock %}
 
 {% block subcontent %}
-    <div class="ui segment">
+    <div>
         {{ form_start(form, {'action': path('sylius_shop_account_profile_update'), 'attr': {'class': 'ui loadable form', 'novalidate': 'novalidate'}}) }}
-        <h1 class="ui dividing header">
-            {{ 'sylius.ui.your_profile'|trans }}
-            <div class="sub header">{{ 'sylius.ui.edit_your_personal_information'|trans }}</div>
-        </h1>
+        <h1>{{ 'sylius.ui.your_profile'|trans }}</h1>
+        <div>{{ 'sylius.ui.edit_your_personal_information'|trans }}</div>
 
         {{ sylius_template_event('sylius.shop.account.profile.update.after_content_header', {'customer': customer, 'form': form}) }}
 
         <input type="hidden" name="_method" value="PUT" />
 
-        <div class="two fields">
-            <div class="field">{{ form_row(form.firstName, sylius_test_form_attribute('first-name')) }}</div>
-            <div class="field">{{ form_row(form.lastName, sylius_test_form_attribute('last-name')) }}</div>
+        <div>
+            <div>{{ form_row(form.firstName, sylius_test_form_attribute('first-name')) }}</div>
+            <div>{{ form_row(form.lastName, sylius_test_form_attribute('last-name')) }}</div>
         </div>
+
         {{ form_row(form.email, sylius_test_form_attribute('email')) }}
-        <div class="two fields">
-            <div class="field">{{ form_row(form.birthday) }}</div>
-            <div class="field">{{ form_row(form.gender) }}</div>
+
+        <div>
+            <div>{{ form_row(form.birthday) }}</div>
+            <div>{{ form_row(form.gender) }}</div>
         </div>
+
         {{ form_row(form.phoneNumber) }}
         {{ form_row(form.subscribedToNewsletter, sylius_test_form_attribute('subscribe-newsletter')) }}
 
         {{ sylius_template_event('sylius.shop.account.profile.update.form', {'customer': customer, 'form': form}) }}
 
-        <button type="submit" class="ui large primary button" {{ sylius_test_html_attribute('save-changes') }}>{{ 'sylius.ui.save_changes'|trans }}</button>
+        <button type="submit" {{ sylius_test_html_attribute('save-changes') }}>{{ 'sylius.ui.save_changes'|trans }}</button>
         {{ form_row(form._token) }}
         {{ form_end(form, {'render_rest': false}) }}
     </div>

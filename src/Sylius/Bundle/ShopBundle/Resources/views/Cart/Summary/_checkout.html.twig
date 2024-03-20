@@ -2,11 +2,11 @@
     type="submit"
     name="submit-type"
     value="checkout"
-    class="ui huge primary fluid labeled icon button"
+    class=""
     form="sylius_cart"
     formaction="{{ path('sylius_shop_cart_checkout') }}"
     formmethod="post"
     {{ sylius_test_html_attribute('cart-checkout-button') }}
 >
-    <i class="check icon"></i> {{ 'sylius.ui.checkout'|trans }}
+    {{ 'sylius.ui.checkout'|trans }}
 </button>

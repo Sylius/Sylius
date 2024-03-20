@@ -1,1 +1,32 @@
-{% include '@SyliusUi/_flashes.html.twig' %}
+{% if app.session is not null and app.session.started %}
+    {% for type in ['success', 'error', 'info', 'warning'] %}
+        {% for flash in app.session.flashbag.get(type) %}
+            {% if 'error' == type %}
+                {% set result = 'negative' %}
+                {% set icon = 'remove' %}
+            {% endif %}
+            {% if 'info' == type %}
+                {% set result = 'info' %}
+                {% set icon = 'info' %}
+            {% endif %}
+
+            <div class="{{ result|default('positive') }}">
+                <i class="{{ icon|default('checkmark') }} icon"></i>
+                <div class="content">
+                    <div class="header">
+                        {% set header = 'sylius.ui.'~type %}
+                        {{ header|trans }}
+                    </div>
+                    <p {{ sylius_test_html_attribute('flash-messages') }}>
+                        {% if flash is iterable %}
+                            {{ flash.message|trans(flash.parameters, 'flashes') }}
+                        {% else %}
+                            {{ flash|trans({}, 'flashes') }}
+                        {% endif %}
+                    </p>
+                </div>
+            </div>
+
+        {% endfor %}
+    {% endfor %}
+{% endif %}

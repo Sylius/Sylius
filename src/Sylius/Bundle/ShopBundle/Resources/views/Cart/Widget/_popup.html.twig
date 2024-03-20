@@ -3,13 +3,13 @@
 {% if cart.empty %}
     {{ 'sylius.ui.your_cart_is_empty'|trans }}.
 {% else %}
-    <div class="ui list">
+    <div>
         {% for item in cart.items %}
-            <div class="item">{{ item.quantity }} x <strong>{{ item.product }}</strong> {{ money.convertAndFormat(item.unitPrice) }}</div>
+            <div>{{ item.quantity }} x <strong>{{ item.product }}</strong> {{ money.convertAndFormat(item.unitPrice) }}</div>
         {% endfor %}
-        <div class="item"><strong>{{ 'sylius.ui.subtotal'|trans }}</strong>: {{ money.convertAndFormat(cart.itemsTotal) }}</div>
+        <div><strong>{{ 'sylius.ui.subtotal'|trans }}</strong>: {{ money.convertAndFormat(cart.itemsTotal) }}</div>
     </div>
-    <a href="{{ path('sylius_shop_cart_summary') }}" id="sylius-go-to-cart" class="ui fluid basic text button">{{ 'sylius.ui.view_and_edit_cart'|trans }}</a>
-    <div class="ui divider"></div>
-    <a href="{{ path('sylius_shop_checkout_start') }}" class="ui fluid primary button">{{ 'sylius.ui.checkout'|trans }}</a>
+
+    <a href="{{ path('sylius_shop_cart_summary') }}">{{ 'sylius.ui.view_and_edit_cart'|trans }}</a>
+    <a href="{{ path('sylius_shop_checkout_start') }}">{{ 'sylius.ui.checkout'|trans }}</a>
 {% endif %}
