@@ -7,26 +7,26 @@
 {% block content %}
     {{ sylius_template_event(['sylius.shop.checkout.select_payment.steps', 'sylius.shop.checkout.steps'], _context|merge({'active': 'select_payment', 'orderTotal': order.total})) }}
 
-    <div class="ui stackable grid">
-        <div class="eleven wide column">
-            <div class="ui padded segment" id="sylius-payment-methods">
+    <div>
+        <div>
+            <div>
                 {{ sylius_template_event('sylius.shop.checkout.select_payment.before_form', {'order': order}) }}
 
-                {{ form_start(form, {'action': path('sylius_shop_checkout_select_payment'), 'attr': {'class': 'ui loadable form', 'novalidate': 'novalidate'}}) }}
-                    {{ form_errors(form) }}
-                    <input type="hidden" name="_method" value="PUT" />
+                {{ form_start(form, {'action': path('sylius_shop_checkout_select_payment'), 'attr': {'novalidate': 'novalidate'}}) }}
+                {{ form_errors(form) }}
+                <input type="hidden" name="_method" value="PUT" />
 
-                    {% include '@SyliusShop/Checkout/SelectPayment/_form.html.twig' %}
-                    <div class="ui hidden divider"></div>
+                {% include '@SyliusShop/Checkout/SelectPayment/_form.html.twig' %}
 
-                    {{ sylius_template_event('sylius.shop.checkout.select_payment.before_navigation', {'order': order}) }}
-                    {% include '@SyliusShop/Checkout/SelectPayment/_navigation.html.twig' %}
+                {{ sylius_template_event('sylius.shop.checkout.select_payment.before_navigation', {'order': order}) }}
 
-                    {{ form_row(form._token) }}
+                {% include '@SyliusShop/Checkout/SelectPayment/_navigation.html.twig' %}
+
+                {{ form_row(form._token) }}
                 {{ form_end(form, {'render_rest': false}) }}
             </div>
         </div>
-        <div class="five wide column">
+        <div>
             {{ sylius_template_event(['sylius.shop.checkout.select_payment.sidebar', 'sylius.shop.checkout.sidebar'], _context) }}
         </div>
     </div>

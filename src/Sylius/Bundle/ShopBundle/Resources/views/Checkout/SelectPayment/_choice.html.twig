@@ -1,11 +1,12 @@
-<div class="item" {{ sylius_test_html_attribute('payment-item') }}>
-    <div class="field">
-        <div class="ui radio checkbox" {{ sylius_test_html_attribute('payment-method-checkbox') }}>
-            {{ form_widget(form, sylius_test_form_attribute('payment-method-select')) }}
-        </div>
+<div {{ sylius_test_html_attribute('payment-item') }}>
+    <div {{ sylius_test_html_attribute('payment-method-checkbox') }}>
+        {{ form_widget(form, sylius_test_form_attribute('payment-method-select')) }}
     </div>
-    <div class="content">
-        <a class="header">{{ form_label(form, null, {'label_attr': {'data-test-payment-method-label': ''}}) }}</a>
-        {{ sylius_template_event('sylius.shop.checkout.select_payment.choice_item_content', {'method': method}) }}
+    <div>
+        {{ form_label(form, null, {'label_attr': {'data-test-payment-method-label': ''}}) }}
+
+        {% if method.description is not null %}
+            <div>{{ method.description }}</div>
+        {% endif %}
     </div>
 </div>

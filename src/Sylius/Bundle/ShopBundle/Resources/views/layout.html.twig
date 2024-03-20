@@ -1,64 +1,58 @@
 <!DOCTYPE html>
 
 <html lang="{{ app.request.locale|slice(0, 2) }}">
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <title>{% block title %}{{ sylius.channel.name }}{% endblock %}</title>
+        <title>{% block title %}{{ sylius.channel.name }}{% endblock %}</title>
 
-    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+        <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 
-    {% block metatags %}
-    {% endblock %}
+        {% block metatags %}
+        {% endblock %}
 
-    {% block stylesheets %}
-        {{ sylius_template_event('sylius.shop.layout.stylesheets') }}
-    {% endblock %}
+        {% block stylesheets %}
+            {{ sylius_template_event('sylius.shop.layout.stylesheets') }}
+        {% endblock %}
 
-    {{ sylius_template_event('sylius.shop.layout.head') }}
-</head>
+        {{ sylius_template_event('sylius.shop.layout.head') }}
+    </head>
 
-<body class="pushable">
-{{ sylius_template_event('sylius.shop.layout.before_body') }}
-<div class="pusher" data-route="{{ app.request.get('_route') }}">
-    {% block top %}
-        <div id="menu" class="top-menu">
-            <a href="#" class="top-menu__link">{{ 'sylius.top_bar'|trans }}</a>
-            <div class="top-bar">{{ sylius_template_event('sylius.shop.layout.topbar') }}</div>
-        </div>
-    {% endblock %}
+    <body>
+        {{ sylius_template_event('sylius.shop.layout.before_body') }}
 
-    <div class="ui container">
-        {% block header %}
-            <header>
+        <div data-route="{{ app.request.get('_route') }}">
+            {% block top %}
+                <div id="menu">
+                    <a href="#">{{ 'sylius.top_bar'|trans }}</a>
+                    {{ sylius_template_event('sylius.shop.layout.topbar') }}
+                </div>
+            {% endblock %}
+
+            {% block header %}
                 {{ sylius_template_event('sylius.shop.layout.header') }}
-            </header>
+            {% endblock %}
+
+            {% include '@SyliusShop/_flashes.html.twig' %}
+
+            {{ sylius_template_event('sylius.shop.layout.before_content') }}
+
+            {% block content %}
+            {% endblock %}
+
+            {{ sylius_template_event('sylius.shop.layout.after_content') }}
+
+            {% block footer %}
+                {% include '@SyliusShop/_footer.html.twig' %}
+            {% endblock %}
+        </div>
+
+        {% block javascripts %}
+            {{ sylius_template_event('sylius.shop.layout.javascripts') }}
         {% endblock %}
 
-        {% include '@SyliusShop/_flashes.html.twig' %}
-
-        {{ sylius_template_event('sylius.shop.layout.before_content') }}
-
-        {% block content %}
-        {% endblock %}
-
-        {{ sylius_template_event('sylius.shop.layout.after_content') }}
-    </div>
-
-    {% block footer %}
-        {% include '@SyliusShop/_footer.html.twig' %}
-    {% endblock %}
-</div>
-
-{% block javascripts %}
-    {{ sylius_template_event('sylius.shop.layout.javascripts') }}
-{% endblock %}
-
-{% include '@SyliusShop/Modal/_confirmation.html.twig' %}
-{{ sylius_template_event('sylius.shop.layout.after_body') }}
-</body>
+        {% include '@SyliusUi/Modal/_confirmation.html.twig' %}
+        {{ sylius_template_event('sylius.shop.layout.after_body') }}
+    </body>
 </html>

@@ -1,19 +1,18 @@
-<div class="field">
-    <div class="ui huge star rating" data-rating="0" data-max-rating="5"></div>
-    <br/>
+<div>
+    <div data-rating="0" data-max-rating="5"></div>
     {{ form_errors(form.rating) }}
     {{ form_widget(form.rating, sylius_test_form_attribute('rating')|sylius_merge_recursive( {'attr': {'style': 'display: none'}})) }}
 </div>
-<div class="field">
+<div>
     {{ form_widget(form.title, sylius_test_form_attribute('title')|sylius_merge_recursive( {'attr': {'placeholder': 'sylius.ui.title'|trans}})) }}
     {{ form_errors(form.title) }}
 </div>
-<div class="field">
+<div>
     {{ form_widget(form.comment, sylius_test_form_attribute('comment')|sylius_merge_recursive( {'attr': {'placeholder': 'sylius.ui.write_your_own_review'|trans}})) }}
     {{ form_errors(form.comment) }}
 </div>
 {% if not is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-    <div class="field">
+    <div>
         {{ form_widget(form.author.email, sylius_test_form_attribute('author-email')|sylius_merge_recursive( {'attr': {'placeholder': 'sylius.ui.email'|trans}})) }}
         {{ form_errors(form.author.email) }}
     </div>

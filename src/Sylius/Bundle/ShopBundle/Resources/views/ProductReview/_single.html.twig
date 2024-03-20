@@ -1,13 +1,11 @@
-<div class="comment" {{ sylius_test_html_attribute('title', review.title) }}>
-    <div class="content">
-        <a class="author">{{ review.author.firstName }}</a>
-        <div class="metadata">
-            <div class="title"><strong>{{ review.title }}</strong></div>
-            <div class="date">{{ review.createdAt|format_date }}</div>
-            <div class="rating">
-                <div class="ui star rating" data-rating="{{ review.rating }}" data-max-rating="5" style="pointer-events: none;"></div>
-            </div>
+<div {{ sylius_test_html_attribute('title', review.title) }}>
+    <div>
+        <div>{{ review.author.firstName }}</div>
+        <div>
+            <div><strong>{{ review.title }}</strong></div>
+            <div>{{ review.createdAt|format_date }}</div>
+            <div data-rating="{{ review.rating }}" data-max-rating="5" style="pointer-events: none;"></div>
         </div>
-        <div class="text">{{ review.comment }}</div>
+        <div>{{ review.comment }}</div>
     </div>
 </div>

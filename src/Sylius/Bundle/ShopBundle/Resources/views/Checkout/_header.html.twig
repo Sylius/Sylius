@@ -1,16 +1,16 @@
-<div class="ui basic segment">
-    <div class="ui large text menu">
-        <div class="ui small image">
-            <a href="{{ path('sylius_shop_homepage') }}">
-                <img src="{{ asset('build/shop/images/logo.png', 'shop') }}" />
-            </a>
-        </div>
-        <div class="right menu">
-            {% if order.customer.id|default(null) is not null %}
-                <div class="item" id="purchaser-email" {{ sylius_test_html_attribute('purchaser-name-or-email') }}>{{ 'sylius.ui.checking_out_as'|trans }} {{ app.user is null ? order.customer.email : order.customer.fullName|default(order.customer.email) }}.</div>
-            {% else %}
-                <a href="{{ path('sylius_shop_login') }}" class="item">{{ 'sylius.ui.sign_in'|trans }}</a>
-            {% endif %}
-        </div>
+<div>
+    <div>
+        <a href="{{ path('sylius_shop_homepage') }}">
+            {% include '@SyliusShop/Layout/Header/_logo.html.twig' %}
+        </a>
+    </div>
+    <div>
+        {% if order.customer.id|default(null) is not null %}
+            <div {{ sylius_test_html_attribute('purchaser-name-or-email') }}>
+                {{ 'sylius.ui.checking_out_as'|trans }} {{ app.user is null ? order.customer.email : order.customer.fullName|default(order.customer.email) }}.
+            </div>
+        {% else %}
+            <a href="{{ path('sylius_shop_login') }}">{{ 'sylius.ui.sign_in'|trans }}</a>
+        {% endif %}
     </div>
 </div>
