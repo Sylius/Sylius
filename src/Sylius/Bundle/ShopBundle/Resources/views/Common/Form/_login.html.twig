@@ -1,18 +1,13 @@
-<div class="one field" id="sylius-api-login">
+<div>
     {% set ajax_user_check_action_path = path('sylius_shop_ajax_user_check_action')  %}
     {{ form_row(form.email, sylius_test_form_attribute('login-email')|sylius_merge_recursive({'attr': {'data-url': ajax_user_check_action_path}})) }}
 
-    <div class="ui action input" id="sylius-api-login-form">
+    <div>
         <input type="password" placeholder="{{ 'sylius.ui.password'|trans }}" {{ sylius_test_html_attribute('password-input') }}>
         <input type="hidden" name="_csrf_shop_security_token" value="{{ csrf_token('shop_authenticate') }}">
-        <a class="ui blue button" href="#" id="sylius-api-login-submit" {{ sylius_test_html_attribute('login-button') }} data-url="{{ path('sylius_shop_login_check') }}">
+        <a href="#" {{ sylius_test_html_attribute('login-button') }} data-url="{{ path('sylius_shop_login_check') }}">
             {{ 'sylius.ui.sign_in'|trans }}
         </a>
     </div>
-    <div
-        class="ui red fluid top pointing basic label hidden sylius-validation-error"
-        id="sylius-api-validation-error"
-        {{ sylius_test_html_attribute('login-validation-error') }}
-    >
-    </div>
+    <div {{ sylius_test_html_attribute('login-validation-error') }}></div>
 </div>

@@ -1,19 +1,17 @@
-<div class="ui segment">
-    <form method="get" action="{{ path('sylius_shop_product_index', {'slug': app.request.attributes.get('slug')}) }}" class="ui loadable form">
-        <div class="ui stackable grid" id="searchbar">
-            <div class="column" id="searchbarTextField">
-                {% for filter in products.definition.enabledFilters %}
-                    {{ sylius_grid_render_filter(products, filter) }}
-                {% endfor %}
-            </div>
-            <div class="right aligned column" id="searchbarButtons">
-                <div class="ui buttons">
-                    <button type="submit" class="ui primary icon labeled button" {{ sylius_test_html_attribute('search') }}><i class="search icon"></i> {{ 'sylius.ui.search'|trans }}</button>
-                    <a href="{{ path('sylius_shop_product_index', {'slug': app.request.attributes.get('slug')}) }}" class="ui negative icon labeled button" {{ sylius_test_html_attribute('clear') }}>
-                        <i class="cancel icon"></i> {{ 'sylius.ui.clear'|trans }}
-                    </a>
-                </div>
+<form method="get" action="{{ path('sylius_shop_product_index', {'slug': app.request.attributes.get('slug')}) }}">
+    <div>
+        <div>
+            {% for filter in products.definition.enabledFilters %}
+                {{ sylius_grid_render_filter(products, filter) }}
+            {% endfor %}
+        </div>
+        <div>
+            <div>
+                <button type="submit" {{ sylius_test_html_attribute('search') }}>{{ 'sylius.ui.search'|trans }}</button>
+                <a href="{{ path('sylius_shop_product_index', {'slug': app.request.attributes.get('slug')}) }}" {{ sylius_test_html_attribute('clear') }}>
+                    {{ 'sylius.ui.clear'|trans }}
+                </a>
             </div>
         </div>
-    </form>
-</div>
+    </div>
+</form>

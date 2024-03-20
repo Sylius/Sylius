@@ -3,25 +3,17 @@
 {%- endmacro -%}
 
 {%- macro convertAndFormat(amount) -%}
-    {% from _self import format %}
-
-    {{- format(amount|sylius_convert_money(sylius.channel.baseCurrency.code, sylius.currencyCode), sylius.currencyCode) }}
+    {{- _self.format(amount|sylius_convert_money(sylius.channel.baseCurrency.code, sylius.currencyCode), sylius.currencyCode) }}
 {%- endmacro -%}
 
 {%- macro calculatePrice(variant) -%}
-    {% from _self import convertAndFormat %}
-
-    {{- convertAndFormat(variant|sylius_calculate_price({'channel': sylius.channel})) }}
+    {{- _self.convertAndFormat(variant|sylius_calculate_price({'channel': sylius.channel})) }}
 {%- endmacro -%}
 
 {%- macro calculateOriginalPrice(variant) -%}
-    {% from _self import convertAndFormat %}
-
-    {{- convertAndFormat(variant|sylius_calculate_original_price({'channel': sylius.channel})) }}
+    {{- _self.convertAndFormat(variant|sylius_calculate_original_price({'channel': sylius.channel})) }}
 {%- endmacro -%}
 
 {%- macro calculateLowestPrice(variant) -%}
-    {% from _self import convertAndFormat %}
-
-    {{- convertAndFormat(variant|sylius_calculate_lowest_price({'channel': sylius.channel})) -}}
+    {{- _self.convertAndFormat(variant|sylius_calculate_lowest_price({'channel': sylius.channel})) -}}
 {%- endmacro -%}
