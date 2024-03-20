@@ -60,6 +60,7 @@ final class ProductShowPageContext implements Context
     }
 
     /**
+     * @When I access :product product page
      * @When I access the :product product
      */
     public function iAccessTheProduct(ProductInterface $product): void
