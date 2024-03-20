@@ -17,6 +17,14 @@ Feature: Tax category validation
         And tax category with name "Food and Beverage" should not be added
 
     @ui @api
+    Scenario: Trying to add a new tax category with too long code
+        Given I want to create a new tax category
+        And I name it "Food and Beverage"
+        When I specify too long code
+        And I try to add it
+        Then I should be notified that the code is too long
+
+    @ui @api
     Scenario: Trying to add a new tax category without specifying its name
         When I want to create a new tax category
         And I specify its code as "food_and_beverage"

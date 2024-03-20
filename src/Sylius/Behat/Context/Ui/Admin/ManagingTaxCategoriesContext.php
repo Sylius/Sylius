@@ -23,6 +23,8 @@ use Webmozart\Assert\Assert;
 
 final class ManagingTaxCategoriesContext implements Context
 {
+    private const MAX_CODE_LENGTH = 255;
+
     public function __construct(
         private IndexPageInterface $indexPage,
         private CreatePageInterface $createPage,
@@ -63,6 +65,14 @@ final class ManagingTaxCategoriesContext implements Context
     public function iSpecifyItsCodeAs($code = null)
     {
         $this->createPage->specifyCode($code ?? '');
+    }
+
+    /**
+     * @When I specify too long code
+     */
+    public function iSpecifyTooLongCode(): void
+    {
+        $this->iSpecifyItsCodeAs(str_repeat('a', self::MAX_CODE_LENGTH + 1));
     }
 
     /**
@@ -189,6 +199,17 @@ final class ManagingTaxCategoriesContext implements Context
         $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
 
         Assert::same($currentPage->getValidationMessage($element), sprintf('Please enter tax category %s.', $element));
+    }
+
+    /**
+     * @Then I should be notified that the code is too long
+     */
+    public function iShouldBeNotifiedThatTheCodeIsTooLong(): void
+    {
+        /** @var CreatePageInterface|UpdatePageInterface $currentPage */
+        $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
+
+        Assert::contains($currentPage->getValidationMessage('code'), 'Tax category code must not be longer than');
     }
 
     /**

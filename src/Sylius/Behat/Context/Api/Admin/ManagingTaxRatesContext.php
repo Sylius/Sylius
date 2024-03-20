@@ -26,6 +26,8 @@ use Webmozart\Assert\Assert;
 
 class ManagingTaxRatesContext implements Context
 {
+    private const MAX_CODE_LENGTH = 255;
+
     public function __construct(
         private ApiClientInterface $client,
         private ResponseCheckerInterface $responseChecker,
@@ -48,6 +50,14 @@ class ManagingTaxRatesContext implements Context
     public function iSpecifyItsCodeAs(string $code): void
     {
         $this->client->addRequestData('code', $code);
+    }
+
+    /**
+     * @When I specify too long code
+     */
+    public function iSpecifyTooLongCode(): void
+    {
+        $this->iSpecifyItsCodeAs(str_repeat('a', self::MAX_CODE_LENGTH + 1));
     }
 
     /**
@@ -342,6 +352,17 @@ class ManagingTaxRatesContext implements Context
         Assert::contains(
             $this->responseChecker->getError($this->client->getLastResponse()),
             sprintf('%s: Please enter tax rate %s.', $element, $element),
+        );
+    }
+
+    /**
+     * @Then I should be notified that code is too long
+     */
+    public function iShouldBeNotifiedThatCodeIsTooLong(): void
+    {
+        Assert::contains(
+            $this->responseChecker->getError($this->client->getLastResponse()),
+            'Tax rate code must not be longer than',
         );
     }
 
