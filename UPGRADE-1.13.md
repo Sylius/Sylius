@@ -899,9 +899,9 @@ and use one of the new attributes accordingly to the type of your class, e.g.:
    in favour of the `Country` constraint.
    Due to that, their translation messages `sylius.country.code.regex` and `sylius.country.code.exact_length` were also removed.
 
-1. The `Length` constraints has been removed from `Sylius\Component\Currency\Model\Currency`
-   in favour of the `Currency`constraint.
-   Due to that, the translation messages `sylius.currency.exact_length` was also removed.
+1. The `Regex` and `Length` constraints have been removed from `Sylius\Component\Currency\Model\Currency`
+   in favour of the `Currency` constraint.
+   Due to that, their translation messages `sylius.currency.regex` and `sylius.currency.exact_length` were also removed.
 
 1. The `Regex` constraint has been removed from `Sylius\Component\Locale\Model\Locale`
    in favour of the `Locale` constraint.
