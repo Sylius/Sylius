@@ -1,0 +1,103 @@
+$prefix: bs-;
+$enable-negative-margins: true;
+$enable-cssgrid: true;
+
+// Color system
+
+$primary: #22B99A;
+
+$gray-100: #f8f9fa;
+$gray-200: #e9ecef;
+$gray-300: #dee2e6;
+$gray-400: #ced4da;
+$gray-500: #adb5bd;
+$gray-600: #6c757d;
+$gray-700: #495057;
+$gray-800: #343a40;
+$gray-900: #212529;
+
+// Body
+
+$body-color: $gray-900;
+
+// Typography
+
+$font-family-sans-serif: 'Inter', serif;
+$small-font-size: .875em;
+
+// Spacing
+
+$spacer: 1rem;
+$spacers: (
+        0: 0,
+        1: $spacer * .25,
+        2: $spacer * .5,
+        3: $spacer,
+        4: $spacer * 1.5,
+        5: $spacer * 3,
+        6: $spacer * 5,
+);
+
+// Buttons
+
+$btn-padding-y: 0.5rem;
+$btn-padding-x: 2rem;
+
+$btn-padding-y-lg: 0.7rem;
+$btn-padding-x-lg: 2.5rem;
+
+$btn-border-radius: 0.3rem;
+$btn-border-radius-sm: $btn-border-radius;
+$btn-border-radius-lg: $btn-border-radius;
+
+// Inputs
+
+$input-border-radius: $btn-border-radius;
+$input-border-radius-sm: $btn-border-radius;
+$input-border-radius-lg: $btn-border-radius;
+
+$input-focus-border-color: inherit;
+$input-focus-box-shadow: 0 0 0 0.05rem rgba(0, 0, 0, 1);
+
+// Breadcrumbs
+
+$breadcrumb-font-size: $small-font-size;
+$breadcrumb-divider-color: $gray-500;
+$breadcrumb-active-color: $gray-500;
+
+// Navs
+
+$nav-link-color: $body-color;
+
+// Navbar
+
+$navbar-nav-link-padding-x: 1.7rem;
+$navbar-light-color: $body-color;
+$navbar-light-hover-color: $primary;
+$navbar-light-active-color: $primary;
+
+// Pagination
+
+$pagination-color: $body-color;
+$pagination-border-width: 0;
+$pagination-hover-color: $primary;
+$pagination-disabled-color: $gray-500;
+$pagination-disabled-bg: transparent;
+$pagination-active-color: $primary;
+$pagination-active-bg: transparent;
+
+// Accordion
+
+$accordion-padding-y: 1rem;
+$accordion-padding-x: 1.25rem;
+$accordion-button-bg: transparent;
+$accordion-button-active-bg: transparent;
+$accordion-button-active-color: $body-color;
+$accordion-button-focus-box-shadow: none;
+$s_accordion-body-padding-top: calc($accordion-padding-y / 2);
+$s_accordion-body-padding-bottom: calc($accordion-padding-y * 1.5);
+
+
+// Tables
+
+$table-bg: transparent;
