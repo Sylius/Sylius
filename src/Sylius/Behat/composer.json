@@ -19,7 +19,7 @@
         }
     },
     "require": {
-        "php": "^8.1",
+        "php": "^8.2",
         "behat/behat": "^3.6.1",
         "behat/mink-selenium2-driver": "^1.4",
         "dbrekelmans/bdi": "^1.1",
