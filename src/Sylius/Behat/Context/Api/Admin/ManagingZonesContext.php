@@ -17,6 +17,7 @@ use ApiPlatform\Api\IriConverterInterface;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
+use Sylius\Behat\Context\Api\Admin\Helper\CodeValidationTrait;
 use Sylius\Behat\Context\Api\Resources;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Addressing\Model\CountryInterface;
@@ -27,6 +28,8 @@ use Webmozart\Assert\Assert;
 
 final class ManagingZonesContext implements Context
 {
+    use CodeValidationTrait;
+
     public function __construct(
         private ApiClientInterface $client,
         private ResponseCheckerInterface $responseChecker,
@@ -60,15 +63,6 @@ final class ManagingZonesContext implements Context
     public function iSpecifyItsCodeAs(string $code): void
     {
         $this->client->addRequestData('code', $code);
-    }
-
-
-    /**
-     * @When I specify its code as :amount characters long string
-     */
-    public function iSpecifyItsCodeAsCharactersLongString(int $amount): void
-    {
-        $this->iSpecifyItsCodeAs(str_repeat('a', $amount));
     }
 
     /**
@@ -111,12 +105,12 @@ final class ManagingZonesContext implements Context
     }
 
     /**
-     * @When I specify its zone member code as :amount characters long string
+     * @When I specify a too long zone member code
      */
-    public function iSpecifyItsZoneMemberCodeAsCharactersLongString(int $amount): void
+    public function iSpecifyATooLongZoneMemberCode(): void
     {
         $this->client->addSubResourceData('members', [
-            'code' => str_repeat('a', $amount),
+            'code' => str_repeat('a', $this->getMaxCodeLength() + 1),
         ]);
     }
 
@@ -467,24 +461,13 @@ final class ManagingZonesContext implements Context
     }
 
     /**
-     * @Then I should be notified that the code is too long
-     */
-    public function iShouldBeNotifiedThatTheCodeIsTooLong(): void
-    {
-        Assert::contains(
-            $this->responseChecker->getError($this->client->getLastResponse()),
-            'Zone code must not be longer than',
-        );
-    }
-
-    /**
      * @Then I should be notified that the zone member code is too long
      */
     public function iShouldBeNotifiedThatTheZoneMemberCodeIsTooLong(): void
     {
         Assert::contains(
             $this->responseChecker->getError($this->client->getLastResponse()),
-            'Zone member code must not be longer than',
+            'The zone member code must not be longer than',
         );
     }
 

@@ -16,12 +16,15 @@ namespace Sylius\Behat\Context\Api\Admin;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
+use Sylius\Behat\Context\Api\Admin\Helper\CodeValidationTrait;
 use Sylius\Behat\Context\Api\Resources;
 use Symfony\Component\HttpFoundation\Response;
 use Webmozart\Assert\Assert;
 
 final class ManagingLocalesContext implements Context
 {
+    use CodeValidationTrait;
+
     public function __construct(
         private ApiClientInterface $client,
         private ResponseCheckerInterface $responseChecker,
@@ -44,14 +47,6 @@ final class ManagingLocalesContext implements Context
     public function iChoose(string $localeCode = ''): void
     {
         $this->client->addRequestData('code', $localeCode);
-    }
-
-    /**
-     * @When I set its code to :amount characters long string
-     */
-    public function iSetItsCodeToCharactersLongString(int $amount): void
-    {
-        $this->iChoose(sprintf('PL-%s', str_repeat('A', $amount - 3)));
     }
 
     /**
@@ -131,18 +126,6 @@ final class ManagingLocalesContext implements Context
             'Locale has been created successfully, but it should not',
         );
         Assert::same($this->responseChecker->getError($response), 'code: This value is not a valid locale code.');
-    }
-
-    /**
-     * @Then I should be notified that the code is too long
-     */
-    public function iShouldBeNotifiedThatTheCodeIsTooLong(): void
-    {
-        $response = $this->client->getLastResponse();
-        Assert::contains(
-            $this->responseChecker->getError($response),
-            'Locale code cannot be longer than',
-        );
     }
 
     /**

@@ -14,6 +14,8 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
+use FriendsOfBehat\PageObjectExtension\Page\SymfonyPageInterface;
+use Sylius\Behat\Context\Ui\Admin\Helper\CodeValidationTrait;
 use Sylius\Behat\Element\Admin\CatalogPromotion\FilterElementInterface;
 use Sylius\Behat\Element\Admin\CatalogPromotion\FormElementInterface;
 use Sylius\Behat\NotificationType;
@@ -33,6 +35,8 @@ use Webmozart\Assert\Assert;
 
 final class ManagingCatalogPromotionsContext implements Context
 {
+    use CodeValidationTrait;
+
     public function __construct(
         private IndexPageInterface $indexPage,
         private CreatePageInterface $createPage,
@@ -96,17 +100,9 @@ final class ManagingCatalogPromotionsContext implements Context
     /**
      * @When I specify its code as :code
      */
-    public function iSpecifyItsCodeAs(string $code): void
+    public function iSpecifyItsCodeAs(?string $code = null): void
     {
-        $this->createPage->specifyCode($code);
-    }
-
-    /**
-     * @When I specify its code as :amount characters long string
-     */
-    public function iSpecifyItsCodeAsCharactersLongString(int $amount): void
-    {
-        $this->createPage->specifyCode(str_repeat('a', $amount));
+        $this->createPage->specifyCode($code ?? '');
     }
 
     /**
@@ -1205,17 +1201,6 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
-     * @Then I should be notified that the code is too long
-     */
-    public function iShouldBeNotifiedThatTheCodeIsTooLong(): void
-    {
-        Assert::contains(
-            $this->createPage->getValidationMessage('code'),
-            'Catalog promotion code must not be longer than',
-        );
-    }
-
-    /**
      * @Then its priority should be :priority
      */
     public function itsPriorityShouldBe(int $priority): void
@@ -1286,5 +1271,10 @@ final class ManagingCatalogPromotionsContext implements Context
         $this->formElement->chooseActionType('Percentage discount');
         $this->formElement->specifyLastActionDiscount($discount);
         $this->createPage->create();
+    }
+
+    protected function resolveCurrentPage(): SymfonyPageInterface
+    {
+        return $this->createPage;
     }
 }

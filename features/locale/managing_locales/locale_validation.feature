@@ -16,9 +16,9 @@ Feature: Locale validation
         Then I should be notified that a code is required
 
     @api @no-ui
-    Scenario: Trying to add a locale with too long code
+    Scenario: Trying to add a locale with a too long code
         Given I want to create a new locale
-        When I set its code to 256 characters long string
+        When I specify a too long code
         And I try to add it
         Then I should be notified that the code is too long
 

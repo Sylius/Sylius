@@ -17,6 +17,7 @@ use ApiPlatform\Api\IriConverterInterface;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
+use Sylius\Behat\Context\Api\Admin\Helper\CodeValidationTrait;
 use Sylius\Behat\Context\Api\Resources;
 use Sylius\Behat\Service\Converter\SectionAwareIriConverterInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
@@ -39,6 +40,8 @@ use Webmozart\Assert\Assert;
 
 final class ManagingPromotionsContext implements Context
 {
+    use CodeValidationTrait;
+
     public function __construct(
         private ApiClientInterface $client,
         private ResponseCheckerInterface $responseChecker,
@@ -101,14 +104,6 @@ final class ManagingPromotionsContext implements Context
         if (null !== $value) {
             $this->client->addRequestData($field, $value);
         }
-    }
-
-    /**
-     * @When I specify its code as :amount characters long string
-     */
-    public function iSpecifyItsCodeAsCharactersLongString(int $amount): void
-    {
-        $this->iSpecifyItsAs('code', str_repeat('a', $amount));
     }
 
     /**
@@ -749,17 +744,6 @@ final class ManagingPromotionsContext implements Context
         Assert::same(
             $this->responseChecker->getError($response),
             'code: The promotion with given code already exists.',
-        );
-    }
-
-    /**
-     * @Then I should be notified that the code is too long
-     */
-    public function iShouldBeNotifiedThatTheCodeIsTooLong(): void
-    {
-        Assert::contains(
-            $this->responseChecker->getError($this->client->getLastResponse()),
-            'Promotion code must not be longer than',
         );
     }
 

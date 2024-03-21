@@ -26,10 +26,10 @@ Feature: Channel validation
         And channel with code "MOBILE" should not be added
 
     @api @ui
-    Scenario: Trying to add a new channel with too long code
+    Scenario: Trying to add a new channel with a too long code
         When I want to create a new channel
         And I name it "Mobile channel"
-        And I specify its code as 256 characters long string
+        And I specify a too long code
         And I try to add it
         Then I should be notified that the code is too long
 

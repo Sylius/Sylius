@@ -14,6 +14,8 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
+use FriendsOfBehat\PageObjectExtension\Page\SymfonyPageInterface;
+use Sylius\Behat\Context\Ui\Admin\Helper\CodeValidationTrait;
 use Sylius\Behat\Page\Admin\Crud\IndexPageInterface;
 use Sylius\Behat\Page\Admin\PaymentMethod\CreatePageInterface;
 use Sylius\Behat\Page\Admin\PaymentMethod\UpdatePageInterface;
@@ -24,6 +26,8 @@ use Webmozart\Assert\Assert;
 
 final class ManagingPaymentMethodsContext implements Context
 {
+    use CodeValidationTrait;
+
     public function __construct(
         private CreatePageInterface $createPage,
         private IndexPageInterface $indexPage,
@@ -119,17 +123,9 @@ final class ManagingPaymentMethodsContext implements Context
      * @When I specify its code as :code
      * @When I do not specify its code
      */
-    public function iSpecifyItsCodeAs($code = null)
+    public function iSpecifyItsCodeAs(?string $code = null): void
     {
         $this->createPage->specifyCode($code ?? '');
-    }
-
-    /**
-     * @When I specify its code as :amount characters long string
-     */
-    public function iSpecifyItsCodeAsCharactersLongString(int $amount): void
-    {
-        $this->createPage->specifyCode(str_repeat('a', $amount));
     }
 
     /**
@@ -427,14 +423,6 @@ final class ManagingPaymentMethodsContext implements Context
     }
 
     /**
-     * @Then I should be notified that the code is too long
-     */
-    public function iShouldBeNotifiedThatTheCodeIsTooLong(): void
-    {
-        Assert::contains($this->createPage->getValidationMessage('code'), 'Payment method code must not be longer than');
-    }
-
-    /**
      * @Then there should still be only one payment method with :element :code
      */
     public function thereShouldStillBeOnlyOnePaymentMethodWith($element, $code)
@@ -503,5 +491,10 @@ final class ManagingPaymentMethodsContext implements Context
     public function iShouldBeRedirectedToThePreviousFilteredPageWithFilter(): void
     {
         Assert::true($this->indexPage->isEnabledFilterApplied());
+    }
+
+    protected function resolveCurrentPage(): SymfonyPageInterface
+    {
+        return $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
     }
 }

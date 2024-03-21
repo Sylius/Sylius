@@ -14,6 +14,8 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
+use FriendsOfBehat\PageObjectExtension\Page\SymfonyPageInterface;
+use Sylius\Behat\Context\Ui\Admin\Helper\CodeValidationTrait;
 use Sylius\Behat\Element\Admin\TaxRate\FilterElementInterface;
 use Sylius\Behat\Page\Admin\Crud\IndexPageInterface;
 use Sylius\Behat\Page\Admin\TaxRate\CreatePageInterface;
@@ -24,7 +26,7 @@ use Webmozart\Assert\Assert;
 
 final class ManagingTaxRateContext implements Context
 {
-    private const MAX_CODE_LENGTH = 255;
+    use CodeValidationTrait;
 
     public function __construct(
         private IndexPageInterface $indexPage,
@@ -47,17 +49,9 @@ final class ManagingTaxRateContext implements Context
      * @When I specify its code as :code
      * @When I do not specify its code
      */
-    public function iSpecifyItsCodeAs($code = null)
+    public function iSpecifyItsCodeAs(?string $code = null): void
     {
         $this->createPage->specifyCode($code ?? '');
-    }
-
-    /**
-     * @When I specify too long code
-     */
-    public function iSpecifyTooLongCode(): void
-    {
-        $this->iSpecifyItsCodeAs(str_repeat('a', self::MAX_CODE_LENGTH + 1));
     }
 
     /**
@@ -289,17 +283,6 @@ final class ManagingTaxRateContext implements Context
     }
 
     /**
-     * @Then I should be notified that code is too long
-     */
-    public function iShouldBeNotifiedThatCodeIsTooLong(): void
-    {
-        /** @var CreatePageInterface|UpdatePageInterface $currentPage */
-        $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
-
-        Assert::contains($currentPage->getValidationMessage('code'), 'Tax rate code must not be longer than');
-    }
-
-    /**
      * @Then I should be notified that :element is invalid
      */
     public function iShouldBeNotifiedThatIsInvalid(string $element): void
@@ -444,5 +427,10 @@ final class ManagingTaxRateContext implements Context
         $this->filterElement->specifyDateFrom($dateType, $fromDate);
         $this->filterElement->specifyDateTo($dateType, $toDate);
         $this->filterElement->filter();
+    }
+
+    protected function resolveCurrentPage(): SymfonyPageInterface
+    {
+        return $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
     }
 }

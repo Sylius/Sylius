@@ -14,6 +14,8 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
+use FriendsOfBehat\PageObjectExtension\Page\SymfonyPageInterface;
+use Sylius\Behat\Context\Ui\Admin\Helper\CodeValidationTrait;
 use Sylius\Behat\Page\Admin\Crud\IndexPageInterface;
 use Sylius\Behat\Page\Admin\CustomerGroup\CreatePageInterface;
 use Sylius\Behat\Page\Admin\CustomerGroup\UpdatePageInterface;
@@ -23,6 +25,8 @@ use Webmozart\Assert\Assert;
 
 final class ManagingCustomerGroupsContext implements Context
 {
+    use CodeValidationTrait;
+
     public function __construct(
         private CreatePageInterface $createPage,
         private IndexPageInterface $indexPage,
@@ -43,17 +47,9 @@ final class ManagingCustomerGroupsContext implements Context
      * @When I specify its code as :code
      * @When I do not specify its code
      */
-    public function iSpecifyItsCodeAs($code = null)
+    public function iSpecifyItsCodeAs(?string $code = null): void
     {
         $this->createPage->specifyCode($code ?? '');
-    }
-
-    /**
-     * @When I specify its code as :amount characters long string
-     */
-    public function iSpecifyItsCodeAsCharactersLongString(int $amount): void
-    {
-        $this->iSpecifyItsCodeAs(str_repeat('a', $amount));
     }
 
     /**
@@ -178,17 +174,6 @@ final class ManagingCustomerGroupsContext implements Context
     }
 
     /**
-     * @Then I should be notified that the code is too long
-     */
-    public function iShouldBeNotifiedThatCustomerGroupCodeIsTooLong(): void
-    {
-        Assert::contains(
-            $this->createPage->getValidationMessage('code'),
-            'Customer group code must not be longer than',
-        );
-    }
-
-    /**
      * @Then I should be informed that this form contains errors
      */
     public function iShouldBeInformedThatThisFormContainsErrors()
@@ -229,5 +214,10 @@ final class ManagingCustomerGroupsContext implements Context
                 $customerGroup->getName(),
             ),
         );
+    }
+
+    protected function resolveCurrentPage(): SymfonyPageInterface
+    {
+        return $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
     }
 }

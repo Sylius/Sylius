@@ -19,12 +19,12 @@ Feature: Tax rate validation
         And tax rate with name "Food and Beverage Tax Rates" should not be added
 
     @ui @api
-    Scenario: Trying to add a new tax rate with too long code
+    Scenario: Trying to add a new tax rate with a too long code
         Given I want to create a new tax rate
         And I name it "Food and Beverage Tax Rates"
-        When I specify too long code
+        When I specify a too long code
         And I try to add it
-        Then I should be notified that code is too long
+        Then I should be notified that the code is too long
 
     @ui @no-api
     Scenario: Trying to add a new tax rate without specifying its amount

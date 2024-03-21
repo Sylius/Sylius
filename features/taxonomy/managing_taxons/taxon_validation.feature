@@ -26,10 +26,10 @@ Feature: Taxon validation
         Then I should be notified that name is required
 
     @ui @api
-    Scenario: Trying to add a taxon with too long code
+    Scenario: Trying to add a taxon with a too long code
         Given I want to create a new taxon
         And I name it "T-Shirts" in "English (United States)"
-        When I specify too long code
+        When I specify a too long code
         And I try to add it
         Then I should be notified that the code is too long
 

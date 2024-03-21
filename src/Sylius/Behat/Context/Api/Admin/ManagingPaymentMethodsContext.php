@@ -16,6 +16,7 @@ namespace Sylius\Behat\Context\Api\Admin;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
+use Sylius\Behat\Context\Api\Admin\Helper\CodeValidationTrait;
 use Sylius\Behat\Context\Api\Resources;
 use Sylius\Behat\Service\Converter\SectionAwareIriConverter;
 use Sylius\Behat\Service\SharedStorageInterface;
@@ -27,6 +28,8 @@ use Webmozart\Assert\Assert;
 
 final class ManagingPaymentMethodsContext implements Context
 {
+    use CodeValidationTrait;
+
     public const SORT_TYPES = ['ascending' => 'asc', 'descending' => 'desc'];
 
     public function __construct(
@@ -146,14 +149,6 @@ final class ManagingPaymentMethodsContext implements Context
     public function iSpecifyItsCodeAs(string $code = null): void
     {
         $this->client->addRequestData('code', $code);
-    }
-
-    /**
-     * @When I specify its code as :amount characters long string
-     */
-    public function iSpecifyItsCodeAsCharactersLongString(int $amount): void
-    {
-        $this->iSpecifyItsCodeAs(str_repeat('a', $amount));
     }
 
     /**
@@ -663,17 +658,6 @@ final class ManagingPaymentMethodsContext implements Context
         Assert::same(
             $this->responseChecker->getError($response),
             'code: The payment method with given code already exists.',
-        );
-    }
-
-    /**
-     * @Then I should be notified that the code is too long
-     */
-    public function iShouldBeNotifiedTheCodeIsTooLong(): void
-    {
-        Assert::contains(
-            $this->responseChecker->getError($this->client->getLastResponse()),
-            'Payment method code must not be longer than',
         );
     }
 

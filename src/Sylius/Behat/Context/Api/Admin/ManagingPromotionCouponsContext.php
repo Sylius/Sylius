@@ -18,6 +18,7 @@ use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\RequestFactoryInterface;
 use Sylius\Behat\Client\RequestInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
+use Sylius\Behat\Context\Api\Admin\Helper\CodeValidationTrait;
 use Sylius\Behat\Context\Api\Resources;
 use Sylius\Behat\Context\Api\Subresources;
 use Sylius\Behat\Service\Converter\SectionAwareIriConverterInterface;
@@ -27,6 +28,8 @@ use Webmozart\Assert\Assert;
 
 final class ManagingPromotionCouponsContext implements Context
 {
+    use CodeValidationTrait;
+
     private ?RequestInterface $request = null;
 
     public function __construct(
@@ -103,14 +106,6 @@ final class ManagingPromotionCouponsContext implements Context
     public function iSpecifyItsCodeAs(string $code): void
     {
         $this->client->addRequestData('code', $code);
-    }
-
-    /**
-     * @When I specify its code as :amount characters long string
-     */
-    public function iSpecifyItsCodeAsCharactersLongString(int $amount): void
-    {
-        $this->iSpecifyItsCodeAs(str_repeat('a', $amount));
     }
 
     /**
@@ -515,17 +510,6 @@ final class ManagingPromotionCouponsContext implements Context
         Assert::same(
             $this->responseChecker->getError($response),
             'promotion: Please provide a promotion for this coupon.',
-        );
-    }
-
-    /**
-     * @Then I should be notified that the code is too long
-     */
-    public function iShouldBeNotifiedThatTheCodeIsTooLong(): void
-    {
-        Assert::contains(
-            $this->responseChecker->getError($this->client->getLastResponse()),
-            'Coupon code must not be longer than',
         );
     }
 

@@ -14,6 +14,8 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
+use FriendsOfBehat\PageObjectExtension\Page\SymfonyPageInterface;
+use Sylius\Behat\Context\Ui\Admin\Helper\CodeValidationTrait;
 use Sylius\Behat\NotificationType;
 use Sylius\Behat\Page\Admin\Product\UpdateSimpleProductPageInterface;
 use Sylius\Behat\Page\Admin\Taxon\CreateForParentPageInterface;
@@ -29,7 +31,7 @@ use Webmozart\Assert\Assert;
 
 final class ManagingTaxonsContext implements Context
 {
-    private const MAX_CODE_LENGTH = 255;
+    use CodeValidationTrait;
 
     public function __construct(
         private SharedStorageInterface $sharedStorage,
@@ -74,17 +76,9 @@ final class ManagingTaxonsContext implements Context
      * @When I specify its code as :code
      * @When I do not specify its code
      */
-    public function iSpecifyItsCodeAs(?string $code = null)
+    public function iSpecifyItsCodeAs(?string $code = null): void
     {
         $this->createPage->specifyCode($code ?? '');
-    }
-
-    /**
-     * @When I specify too long code
-     */
-    public function iSpecifyTooLongCode(): void
-    {
-        $this->iSpecifyItsCodeAs(str_repeat('a', self::MAX_CODE_LENGTH + 1));
     }
 
     /**
@@ -275,16 +269,6 @@ final class ManagingTaxonsContext implements Context
         $currentPage = $this->resolveCurrentPage();
 
         Assert::same($currentPage->getValidationMessage($element), sprintf('Please enter taxon %s.', $element));
-    }
-
-    /**
-     * @Then I should be notified that the code is too long
-     */
-    public function iShouldBeNotifiedThatTheCodeIsTooLong(): void
-    {
-        $currentPage = $this->resolveCurrentPage();
-
-        Assert::contains($currentPage->getValidationMessage('code'), 'Taxon code must not be longer than');
     }
 
     /**
@@ -492,7 +476,7 @@ final class ManagingTaxonsContext implements Context
         Assert::false($this->updatePage->isEnabled());
     }
 
-    private function resolveCurrentPage(): CreateForParentPageInterface|CreatePageInterface|UpdateConfigurableProductPageInterface|UpdatePageInterface
+    private function resolveCurrentPage(): SymfonyPageInterface|CreateForParentPageInterface|CreatePageInterface|UpdatePageInterface
     {
         return $this->currentPageResolver->getCurrentPageWithForm([
             $this->createPage,

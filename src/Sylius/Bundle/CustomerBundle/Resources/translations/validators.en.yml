@@ -19,7 +19,7 @@ sylius:
             registered: This email is already registered, please login or use forgotten password.
     customer_group:
         code:
-            max_length: Customer group code must not be longer than {{ limit }} characters.
+            max_length: The code must not be longer than {{ limit }} characters.
             regex: Customer group code can only be comprised of letters, numbers, dashes and underscores.
             unique: Customer group code has to be unique.
             not_blank: Please enter a customer group code.

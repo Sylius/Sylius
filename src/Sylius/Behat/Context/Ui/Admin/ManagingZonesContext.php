@@ -15,6 +15,8 @@ namespace Sylius\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
 use Behat\Mink\Exception\ElementNotFoundException;
+use FriendsOfBehat\PageObjectExtension\Page\SymfonyPageInterface;
+use Sylius\Behat\Context\Ui\Admin\Helper\CodeValidationTrait;
 use Sylius\Behat\NotificationType;
 use Sylius\Behat\Page\Admin\Crud\IndexPageInterface;
 use Sylius\Behat\Page\Admin\Zone\CreatePageInterface;
@@ -27,6 +29,8 @@ use Webmozart\Assert\Assert;
 
 final class ManagingZonesContext implements Context
 {
+    use CodeValidationTrait;
+
     public function __construct(
         private CreatePageInterface $createPage,
         private IndexPageInterface $indexPage,
@@ -42,14 +46,6 @@ final class ManagingZonesContext implements Context
     public function iWantToCreateANewZoneWithMembers($memberType)
     {
         $this->createPage->open(['type' => $memberType]);
-    }
-
-    /**
-     * @When I specify its code as :amount characters long string
-     */
-    public function iSpecifyItsCodeAsCharactersLongString(int $amount): void
-    {
-        $this->createPage->specifyCode(str_repeat('a', $amount));
     }
 
     /**
@@ -115,7 +111,7 @@ final class ManagingZonesContext implements Context
     /**
      * @When I specify its code as :code
      */
-    public function iSpecifyItsCodeAs($code)
+    public function iSpecifyItsCodeAs(?string $code = null): void
     {
         $this->createPage->specifyCode($code ?? '');
     }
@@ -344,17 +340,6 @@ final class ManagingZonesContext implements Context
     }
 
     /**
-     * @Then I should be notified that the code is too long
-     */
-    public function iShouldBeNotifiedThatTheCodeIsTooLong(): void
-    {
-        /** @var CreatePageInterface|UpdatePageInterface $currentPage */
-        $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
-
-        Assert::contains($currentPage->getValidationMessage('code'), 'Zone code must not be longer than');
-    }
-
-    /**
      * @throws \InvalidArgumentException
      */
     private function assertZoneAndItsMember(ZoneInterface $zone, ZoneMemberInterface $zoneMember)
@@ -382,5 +367,10 @@ final class ManagingZonesContext implements Context
         } catch (ElementNotFoundException) {
         }
         Assert::isEmpty($member);
+    }
+
+    protected function resolveCurrentPage(): SymfonyPageInterface
+    {
+        return $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
     }
 }

@@ -26,6 +26,8 @@ use Webmozart\Assert\Assert;
 
 final class ManagingCountriesContext implements Context
 {
+    private const MAX_PROVINCE_CODE_LENGTH = 255;
+
     public function __construct(
         private IndexPageInterface $indexPage,
         private CreatePageInterface $createPage,
@@ -249,11 +251,11 @@ final class ManagingCountriesContext implements Context
     }
 
     /**
-     * @When I specify its code as :amount characters long string
+     * @When I specify a too long province code
      */
-    public function iSpecifyItsCodeAsCharactersLongString(int $amount): void
+    public function iSpecifyTooLongProvinceCode(): void
     {
-        $this->iSpecifyTheProvinceCode(sprintf('US-%s', str_repeat('A', $amount - 3)));
+        $this->iSpecifyTheProvinceCode(sprintf('US-%s', str_repeat('A', self::MAX_PROVINCE_CODE_LENGTH)));
     }
 
     /**
@@ -301,11 +303,11 @@ final class ManagingCountriesContext implements Context
     }
 
     /**
-     * @Then I should be notified that the code is too long
+     * @Then I should be notified that the province code is too long
      */
     public function iShouldBeNotifiedThatTheCodeIsTooLong(): void
     {
-        Assert::contains($this->updatePage->getValidationMessage('code'), 'Province code must not be longer than');
+        Assert::contains($this->updatePage->getValidationMessage('code'), 'The code must not be longer than');
     }
 
     /**

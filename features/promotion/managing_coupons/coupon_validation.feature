@@ -22,12 +22,12 @@ Feature: Coupon validation
         And there should be 0 coupons related to this promotion
 
     @ui @api
-    Scenario: Trying to add a new coupon with too long code
+    Scenario: Trying to add a new coupon with a too long code
         Given I want to create a new coupon for this promotion
         And I limit its usage to 30 times
         And I limit its per customer usage to 40 times
         And I make it valid until "26.03.2017"
-        When I specify its code as 256 characters long string
+        When I specify a too long code
         And I try to add it
         Then I should be notified that the code is too long
 

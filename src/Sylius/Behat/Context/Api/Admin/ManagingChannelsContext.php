@@ -17,6 +17,7 @@ use ApiPlatform\Api\IriConverterInterface;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
+use Sylius\Behat\Context\Api\Admin\Helper\CodeValidationTrait;
 use Sylius\Behat\Context\Api\Resources;
 use Sylius\Behat\Service\Converter\SectionAwareIriConverterInterface;
 use Sylius\Component\Addressing\Model\CountryInterface;
@@ -30,6 +31,8 @@ use Webmozart\Assert\Assert;
 
 final class ManagingChannelsContext implements Context
 {
+    use CodeValidationTrait;
+
     private array $shopBillingData = [];
 
     public function __construct(
@@ -100,14 +103,6 @@ final class ManagingChannelsContext implements Context
     public function iSpecifyItsAs(string $field, string $value = ''): void
     {
         $this->client->addRequestData($field, $value);
-    }
-
-    /**
-     * @When I specify its code as :amount characters long string
-     */
-    public function iSpecifyItsCodeAsCharactersLongString(int $amount): void
-    {
-        $this->iSpecifyItsAs('code', str_repeat('a', $amount));
     }
 
     /**
@@ -658,17 +653,6 @@ final class ManagingChannelsContext implements Context
         Assert::contains(
             $this->responseChecker->getError($this->client->getLastResponse()),
             sprintf('%s: Please enter channel %s.', $element, $element),
-        );
-    }
-
-    /**
-     * @Then I should be notified that the code is too long
-     */
-    public function iShouldBeNotifiedThatTheCodeIsTooLong(): void
-    {
-        Assert::contains(
-            $this->responseChecker->getError($this->client->getLastResponse()),
-            'Channel code must not be longer than',
         );
     }
 

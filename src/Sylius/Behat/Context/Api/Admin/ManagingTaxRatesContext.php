@@ -17,6 +17,7 @@ use ApiPlatform\Api\IriConverterInterface;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
+use Sylius\Behat\Context\Api\Admin\Helper\CodeValidationTrait;
 use Sylius\Behat\Context\Api\Resources;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Addressing\Model\ZoneInterface;
@@ -26,7 +27,7 @@ use Webmozart\Assert\Assert;
 
 class ManagingTaxRatesContext implements Context
 {
-    private const MAX_CODE_LENGTH = 255;
+    use CodeValidationTrait;
 
     public function __construct(
         private ApiClientInterface $client,
@@ -50,14 +51,6 @@ class ManagingTaxRatesContext implements Context
     public function iSpecifyItsCodeAs(string $code): void
     {
         $this->client->addRequestData('code', $code);
-    }
-
-    /**
-     * @When I specify too long code
-     */
-    public function iSpecifyTooLongCode(): void
-    {
-        $this->iSpecifyItsCodeAs(str_repeat('a', self::MAX_CODE_LENGTH + 1));
     }
 
     /**
@@ -352,17 +345,6 @@ class ManagingTaxRatesContext implements Context
         Assert::contains(
             $this->responseChecker->getError($this->client->getLastResponse()),
             sprintf('%s: Please enter tax rate %s.', $element, $element),
-        );
-    }
-
-    /**
-     * @Then I should be notified that code is too long
-     */
-    public function iShouldBeNotifiedThatCodeIsTooLong(): void
-    {
-        Assert::contains(
-            $this->responseChecker->getError($this->client->getLastResponse()),
-            'Tax rate code must not be longer than',
         );
     }
 

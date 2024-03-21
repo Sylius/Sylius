@@ -4,7 +4,7 @@
 sylius:
     taxon:
         code:
-            max_length: Taxon code must not be longer than {{ limit }} characters.
+            max_length: The code must not be longer than {{ limit }} characters.
             not_blank: Please enter taxon code.
             regex: Taxon code can only be comprised of letters, numbers, dashes and underscores.
             unique: Taxon with given code already exists.
