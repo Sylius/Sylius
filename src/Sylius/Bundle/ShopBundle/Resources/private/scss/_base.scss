@@ -1,0 +1,26 @@
+@font-face {
+    font-family: 'Inter';
+    src: url('../fonts/inter-variable-font-slnt-wght.ttf') format('truetype-variations');
+    font-weight: 1 999;
+}
+
+html {
+    font-feature-settings: "cv03", "cv04", "cv11";
+}
+
+a {
+    text-underline-offset: 0.25em;
+
+    &.link-reset {
+        color: inherit;
+        text-decoration: none;
+
+        &:hover {
+            color: $link-hover-color;
+        }
+    }
+}
+
+.fs-7 {
+    font-size: $small-font-size;
+}

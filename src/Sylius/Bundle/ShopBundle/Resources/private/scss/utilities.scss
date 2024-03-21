@@ -1,0 +1,20 @@
+$utilities: (
+    "min-viewport-height": (
+        property: min-height,
+        responsive: true,
+        class: min-vh,
+        values: (100: 100vh)
+    ),
+    "width": (
+        property: width,
+        class: w,
+        values: (
+            1: 1%,
+            25: 25%,
+            50: 50%,
+            75: 75%,
+            100: 100%,
+            auto: auto
+        )
+    ),
+);
