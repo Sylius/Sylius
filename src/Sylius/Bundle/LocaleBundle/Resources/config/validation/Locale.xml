@@ -27,11 +27,6 @@
                 <option name="message">sylius.locale.code.locale</option>
                 <option name="groups">sylius</option>
             </constraint>
-            <constraint name="Regex">
-                <option name="message">sylius.locale.code.regex</option>
-                <option name="pattern">/^[\w-]*$/</option>
-                <option name="groups">sylius</option>
-            </constraint>
         </property>
     </class>
 </constraint-mapping>

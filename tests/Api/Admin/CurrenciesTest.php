@@ -60,6 +60,30 @@ final class CurrenciesTest extends JsonApiTestCase
     }
 
     /** @test */
+    public function it_does_not_allow_creating_a_currency_with_invalid_code(): void
+    {
+        $this->loadFixturesFromFiles(['channel.yaml', 'authentication/api_administrator.yaml']);
+        $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
+
+        $this->client->request(
+            'POST',
+            '/api/v2/admin/currencies',
+            [],
+            [],
+            $header,
+            json_encode([
+                'code' => 'lol',
+            ], \JSON_THROW_ON_ERROR),
+        );
+
+        $this->assertResponse(
+            $this->client->getResponse(),
+            'admin/currency/post_currency_with_invalid_code_response',
+            Response::HTTP_UNPROCESSABLE_ENTITY,
+        );
+    }
+
+    /** @test */
     public function it_creates_a_currency(): void
     {
         $this->loadFixturesFromFiles(['authentication/api_administrator.yaml']);

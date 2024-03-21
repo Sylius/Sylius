@@ -30,7 +30,7 @@ sylius:
         code:
             not_blank: Please enter country ISO code.
             unique: Country ISO code must be unique.
-            invalid: Country ISO code is invalid.
+            country: Country ISO code is invalid.
         unique_provinces: All provinces within this country need to have unique codes and names.
     province:
         code:

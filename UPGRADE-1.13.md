@@ -895,9 +895,17 @@ and use one of the new attributes accordingly to the type of your class, e.g.:
    has been deprecated.
    Use the `parentCode` query parameter instead.
 
-1. The `Regex` constraint has been removed from `Sylius\Component\Addressing\Model\Country` in favour of the `Country`
-   constraint.
-   Due to that, it's translation message `sylius.country.code.regex` was also removed.
+1. The `Regex` and `Length` constraints have been removed from `Sylius\Component\Addressing\Model\Country`
+   in favour of the `Country` constraint.
+   Due to that, their translation messages `sylius.country.code.regex` and `sylius.country.code.exact_length` were also removed.
+
+1. The `Regex` and `Length` constraints have been removed from `Sylius\Component\Currency\Model\Currency`
+   in favour of the `Currency` constraint.
+   Due to that, their translation messages `sylius.currency.regex` and `sylius.currency.exact_length` were also removed.
+
+1. The `Regex` constraint has been removed from `Sylius\Component\Locale\Model\Locale`
+   in favour of the `Locale` constraint.
+   Due to that, the translation message `sylius.locale.code.regex` was also removed.
 
 1. The `sylius_admin_ajax_taxon_move` route has been deprecated. If you're relaying on it, consider migrating to new
    `sylius_admin_ajax_taxon_move_up` and `sylius_admin_ajax_taxon_move_down` routes.

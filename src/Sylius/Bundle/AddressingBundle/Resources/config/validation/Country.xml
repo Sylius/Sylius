@@ -20,17 +20,11 @@
         </constraint>
         <property name="code">
             <constraint name="Country">
-                <option name="message">sylius.country.code.invalid</option>
+                <option name="message">sylius.country.code.country</option>
                 <option name="groups">sylius</option>
             </constraint>
             <constraint name="NotBlank">
                 <option name="message">sylius.country.code.not_blank</option>
-                <option name="groups">sylius</option>
-            </constraint>
-            <constraint name="Length">
-                <option name="min">2</option>
-                <option name="max">2</option>
-                <option name="exactMessage">sylius.country.code.exact_length</option>
                 <option name="groups">sylius</option>
             </constraint>
         </property>
