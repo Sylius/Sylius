@@ -1,0 +1,36 @@
+.sylius-rating {
+    display: inline-block;
+}
+
+.sylius-rating label {
+    cursor: pointer;
+}
+
+.sylius-rating label input {
+    display: none;
+}
+
+.sylius-rating svg {
+    color: var(--bs-gray-400);
+    transition: color 0.2s;
+}
+
+.sylius-rating label:has(> :checked) svg {
+    color: var(--bs-yellow);
+}
+
+.sylius-rating label:has(~ label > :checked) svg {
+    color: var(--bs-yellow);
+}
+
+.sylius-rating:hover label svg {
+    color: var(--bs-yellow);
+}
+
+.sylius-rating label:hover ~ label svg {
+    color: var(--bs-gray-400);
+}
+
+.sylius-rating span.checked svg {
+    color: var(--bs-yellow);
+}
