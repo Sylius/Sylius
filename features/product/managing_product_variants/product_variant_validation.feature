@@ -86,6 +86,14 @@ Feature: Product variant validation
         And the "Wyborowa Vodka" product should have no variants
 
     @api @ui
+    Scenario: Adding a new product variant with a too long code
+        Given I want to create a new variant of this product
+        And I set its price to "$80.00" for "United States" channel
+        When I specify a too long code
+        And I try to add it
+        Then I should be notified that the code is too long
+
+    @api @ui
     Scenario: Adding a new product variant with duplicated code
         Given this product has "Wyborowa Exquisite" variant priced at "$90.00" identified by "VODKA_WYBOROWA_PREMIUM"
         When I want to create a new variant of this product

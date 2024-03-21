@@ -19,6 +19,14 @@ Feature: Product option validation
         And the product option with name "T-Shirt size" should not be added
 
     @ui @api
+    Scenario: Trying to add a new product option with a too long code
+        Given I want to create a new product option
+        And I name it "T-Shirt size" in "English (United States)"
+        When I specify a too long code
+        And I try to add it
+        Then I should be notified that the code is too long
+
+    @ui @api
     Scenario: Trying to add a new product option without specifying its name
         When I want to create a new product option
         And I specify its code as "t_shirt_size"
