@@ -18,22 +18,16 @@ use Prophecy\Prophecy\ObjectProphecy;
 use Sylius\Bundle\CoreBundle\Mailer\ContactEmailManager;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
-use Sylius\Component\Core\Test\SwiftmailerAssertionTrait;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 final class ContactEmailManagerTest extends KernelTestCase
 {
     use ProphecyTrait;
-    use SwiftmailerAssertionTrait;
 
     /** @test */
     public function it_sends_contact_request(): void
     {
-        if (self::isSwiftmailerTestEnv()) {
-            $this->markTestSkipped('Test is relevant only for the environment without swiftmailer');
-        }
-
         $container = self::getContainer();
 
         /** @var TranslatorInterface $translator */

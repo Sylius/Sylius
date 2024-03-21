@@ -14,22 +14,22 @@ declare(strict_types=1);
 namespace spec\Sylius\Bundle\ApiBundle\Applicator;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Calendar\Provider\DateTimeProviderInterface;
+use Psr\Clock\ClockInterface;
 use Sylius\Component\Core\Model\PromotionInterface;
 
 final class ArchivingPromotionApplicatorSpec extends ObjectBehavior
 {
-    function let(DateTimeProviderInterface $calendar)
+    function let(ClockInterface $clock)
     {
-        $this->beConstructedWith($calendar);
+        $this->beConstructedWith($clock);
     }
 
     function it_archives_promotion(
-        DateTimeProviderInterface $calendar,
+        ClockInterface $clock,
         PromotionInterface $promotion,
     ): void {
-        $now = new \DateTime();
-        $calendar->now()->willReturn($now);
+        $now = new \DateTimeImmutable();
+        $clock->now()->willReturn($now);
 
         $promotion->setArchivedAt($now)->shouldBeCalledOnce();
 

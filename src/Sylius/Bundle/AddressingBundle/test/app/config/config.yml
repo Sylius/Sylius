@@ -38,3 +38,7 @@ fos_rest:
     format_listener:
         rules:
             - { path: '^/', priorities: ['json'], fallback_format: json, prefer_extension: true }
+
+sylius_addressing:
+    scopes:
+        all: sylius.form.zone.scopes.all
