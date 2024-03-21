@@ -13,6 +13,8 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ProductBundle\Doctrine\ORM;
 
+use Doctrine\DBAL\Connection;
+use Doctrine\DBAL\Platforms\PostgreSQLPlatform;
 use Doctrine\ORM\QueryBuilder;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Component\Product\Model\ProductAttributeValueInterface;
@@ -27,8 +29,15 @@ class ProductAttributeValueRepository extends EntityRepository implements Produc
 {
     public function findByJsonChoiceKey(string $choiceKey): array
     {
-        return $this->createQueryBuilder('o')
-            ->andWhere('o.json LIKE :key')
+        $queryBuilder = $this->createQueryBuilder('o');
+
+        if ($this->isPostgreSQLPlatform()) {
+            $queryBuilder->andWhere('JSONB_ARRAY_ELEMENTS_TEXT(o.json) LIKE :key');
+        } else {
+            $queryBuilder->andWhere('o.json LIKE :key');
+        }
+
+        return $queryBuilder
             ->setParameter('key', '%"' . $choiceKey . '"%')
             ->getQuery()
             ->getResult()
@@ -78,5 +87,12 @@ class ProductAttributeValueRepository extends EntityRepository implements Produc
             ->setParameter('code', $productCode)
             ->setParameter('locale', $localeCode)
         ;
+    }
+
+    protected function isPostgreSQLPlatform(): bool
+    {
+        $connection = $this->getEntityManager()->getConnection();
+
+        return is_a($connection->getDatabasePlatform(), PostgreSQLPlatform::class, true);
     }
 }

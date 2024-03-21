@@ -23,7 +23,6 @@ Sylius\Component\Core\Model\Address:
         city: "Pabianice"
         postcode: "31-999"
         phoneNumber: "111999222"
-        provinceCode: "PL-PL"
         provinceName: "kujawsko-pomorskie"
 
     shipping_address:
@@ -36,5 +35,4 @@ Sylius\Component\Core\Model\Address:
         city: "Pabianice"
         postcode: "31-999"
         phoneNumber: "111999222"
-        provinceCode: "PL-PL"
         provinceName: "kujawsko-pomorskie"

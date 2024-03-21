@@ -38,12 +38,12 @@ final class LegacyResourceMetadataMergerSpec extends ObjectBehavior
         $this->merge([], ['foo' => 'bar'])->shouldReturn(['foo' => 'bar']);
     }
 
-    function it_ignores_properties_when_merging(): void
+    function it_overrides_properties_when_merging(): void
     {
         $this->merge(
             ['properties' => ['foo' => 'bar']],
             ['properties' => ['foo' => 'baz']],
-        )->shouldReturn(['properties' => ['foo' => 'bar']]);
+        )->shouldReturn(['properties' => ['foo' => 'baz']]);
     }
 
     function it_adds_metadata_missing_from_old_metadata_as_they_are(): void
@@ -285,6 +285,14 @@ final class LegacyResourceMetadataMergerSpec extends ObjectBehavior
                 ],
             ],
             'properties' => [
+                'bar' => [
+                    'description' => 'new',
+                    'readable' => true,
+                    'writable' => true,
+                    'required' => false,
+                    'readableLink' => true,
+                    'identifier' => false,
+                ],
                 'foo' => [
                     'description' => 'old',
                     'readable' => true,

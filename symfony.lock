@@ -335,6 +335,15 @@
             "config/packages/monolog.yaml"
         ]
     },
+    "symfony/panther": {
+        "version": "2.1",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "main",
+            "version": "1.0",
+            "ref": "292a3236e81f55b545b09b9954ab097248972ab3"
+        }
+    },
     "symfony/routing": {
         "version": "6.3",
         "recipe": {
