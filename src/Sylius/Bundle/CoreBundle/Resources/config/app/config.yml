@@ -90,6 +90,7 @@ liip_imagine:
                 web_root: "%sylius_core.public_dir%"
                 cache_prefix: "media/cache"
     filter_sets:
+        sylius_original: ~
         sylius_small:
             filters:
                 thumbnail: { size: [120, 90], mode: outbound }

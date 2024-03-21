@@ -17,7 +17,7 @@
             "@type": "TaxonImage",
             "id": @integer@,
             "type": "thumbnail",
-            "path": "@string@.contains('sylius_original').endsWith('category.jpeg')"
+            "path": "@string@.contains('sylius_small').endsWith('category.jpeg')"
         }
     ],
     "translations": {

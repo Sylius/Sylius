@@ -2,7 +2,7 @@
 
 ApiBundle is no longer experimental and is now following the same support policy as the rest of Sylius.
 
-### Classes signature changes
+### Classes and services changes
 
 1. The following Command constructor signatures have changed:
 
@@ -260,6 +260,14 @@ ApiBundle is no longer experimental and is now following the same support policy
 
 1. The `customer` key has been removed from admin address endpoints' responses.
 
+1. Resolving the `path` property of every resource implementing `Sylius\Component\Core\Model\ImageInterface` has been changed to always rely on filters.
+   The default filter has been set to `sylius_original`, but can be changed via configuration:
+
+    ```yaml
+    sylius_api:
+        default_image_filter: custom_filter
+    ```
+
 ### Miscellaneous
 
 1. All the `:read` serialization groups are now split to `index` and `show`.
@@ -288,3 +296,9 @@ ApiBundle is no longer experimental and is now following the same support policy
 
 1. The `sylius.api.product_taxon_filter` filter has been removed and its functionality has been superseded by
    the `sylius.api.search_filter.taxon.code` filter. The usage stays the same.
+
+1. Due to changes with images' `path` property resolving the following services have been changed to make their context broader:
+    * `Sylius\Bundle\ApiBundle\Serializer\ProductImageNormalizer` -> `Sylius\Bundle\ApiBundle\Serializer\ImageNormalizer`
+    * `Sylius\Bundle\ApiBundle\OpenApi\Documentation\ProductImageDocumentationModifier` -> `Sylius\Bundle\ApiBundle\OpenApi\Documentation\ImageDocumentationModifier`
+    * `Sylius\Bundle\ApiBundle\Provider\ProductImageFilterProviderInterface` -> `Sylius\Bundle\ApiBundle\Provider\ImageFiltersProviderInterface`
+    * `Sylius\Bundle\ApiBundle\Provider\LiipProductImageFilterProvider` -> `Sylius\Bundle\ApiBundle\Provider\LiipImageFiltersProvider`

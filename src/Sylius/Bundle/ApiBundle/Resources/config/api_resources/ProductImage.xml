@@ -20,6 +20,18 @@
                         <attribute>sylius:admin:product_image:index</attribute>
                     </attribute>
                 </attribute>
+                <attribute name="openapi_context">
+                    <attribute name="parameters">
+                        <attribute>
+                            <attribute name="name">imageFilter</attribute>
+                            <attribute name="in">query</attribute>
+                            <attribute name="description">Provide one of supported image liip imagine filters</attribute>
+                            <attribute name="schema">
+                                <attribute name="type">string</attribute>
+                            </attribute>
+                        </attribute>
+                    </attribute>
+                </attribute>
             </collectionOperation>
 
             <collectionOperation name="admin_post">
@@ -89,6 +101,18 @@
                         <attribute>sylius:admin:product_image:show</attribute>
                     </attribute>
                 </attribute>
+                <attribute name="openapi_context">
+                    <attribute name="parameters">
+                        <attribute>
+                            <attribute name="name">imageFilter</attribute>
+                            <attribute name="in">query</attribute>
+                            <attribute name="description">Provide one of supported image liip imagine filters</attribute>
+                            <attribute name="schema">
+                                <attribute name="type">string</attribute>
+                            </attribute>
+                        </attribute>
+                    </attribute>
+                </attribute>
             </itemOperation>
 
             <itemOperation name="shop_get">
@@ -103,7 +127,7 @@
                 <attribute name="openapi_context">
                     <attribute name="parameters">
                         <attribute>
-                            <attribute name="name">filter</attribute>
+                            <attribute name="name">imageFilter</attribute>
                             <attribute name="in">query</attribute>
                             <attribute name="description">Provide one of supported image liip imagine filters</attribute>
                             <attribute name="schema">

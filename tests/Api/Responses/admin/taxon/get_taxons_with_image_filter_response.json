@@ -21,7 +21,7 @@
                     "@type": "TaxonImage",
                     "id": @integer@,
                     "type": "thumbnail",
-                    "path": "@string@.contains('sylius_original').endsWith('category.jpeg')"
+                    "path": "@string@.contains('sylius_small').endsWith('category.jpeg')"
                 }
             ],
             "translations": {
@@ -110,7 +110,7 @@
                     "@type": "TaxonImage",
                     "id": @integer@,
                     "type": "thumbnail",
-                    "path": "@string@.contains('sylius_original').endsWith('tshirt.jpeg')"
+                    "path": "@string@.contains('sylius_small').endsWith('tshirt.jpeg')"
                 }
             ],
             "translations": {
@@ -243,5 +243,9 @@
             "position": "@integer@"
         }
     ],
-    "hydra:totalItems": 8
+    "hydra:totalItems": 8,
+    "hydra:view": {
+        "@id": "\/api\/v2\/admin\/taxons?imageFilter=sylius_small",
+        "@type": "hydra:PartialCollectionView"
+    }
 }
