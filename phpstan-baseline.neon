@@ -5221,6 +5221,11 @@ parameters:
 			path: src/Sylius/Bundle/UserBundle/Provider/AbstractUserProvider.php
 
 		-
+			message: "#^Interface Sylius\\\\Bundle\\\\UserBundle\\\\Provider\\\\UserProviderInterface extends generic interface Symfony\\\\Component\\\\Security\\\\Core\\\\User\\\\UserProviderInterface but does not specify its types\\: TUser$#"
+			count: 1
+			path: src/Sylius/Bundle/UserBundle/Provider/UserProviderInterface.php
+
+		-
 			message: "#^Method Sylius\\\\Bundle\\\\UserBundle\\\\Provider\\\\UserProviderInterface\\:\\:loadUserByUsername\\(\\) has parameter \\$username with no type specified\\.$#"
 			count: 1
 			path: src/Sylius/Bundle/UserBundle/Provider/UserProviderInterface.php
