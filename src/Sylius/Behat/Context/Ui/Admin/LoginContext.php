@@ -32,7 +32,7 @@ final class LoginContext implements Context
      */
     public function iWantToLogIn()
     {
-        $this->loginPage->open();
+        $this->loginPage->tryToOpen();
     }
 
     /**

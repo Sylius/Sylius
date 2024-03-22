@@ -22,6 +22,7 @@ use Sylius\Behat\Page\Shop\Account\LoginPageInterface;
 use Sylius\Behat\Page\Shop\Account\Order\IndexPageInterface;
 use Sylius\Behat\Page\Shop\Account\Order\ShowPageInterface;
 use Sylius\Behat\Page\Shop\Account\ProfileUpdatePageInterface;
+use Sylius\Behat\Page\Shop\Account\RegisterPageInterface;
 use Sylius\Behat\Service\NotificationCheckerInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
@@ -40,6 +41,7 @@ final class AccountContext implements Context
         private LoginPageInterface $loginPage,
         private NotificationCheckerInterface $notificationChecker,
         private SharedStorageInterface $sharedStorage,
+        private RegisterPageInterface $registerPage,
     ) {
     }
 
@@ -463,6 +465,15 @@ final class AccountContext implements Context
     {
         $this->loginPage->tryToOpen();
     }
+
+    /**
+     * @When /^I want to(?:| again) register a new account$/
+     */
+    public function iWantToRegisterANewAccount(): void
+    {
+        $this->registerPage->tryToOpen();
+    }
+
 
     /**
      * @Then I should see its payment status as :paymentStatus
