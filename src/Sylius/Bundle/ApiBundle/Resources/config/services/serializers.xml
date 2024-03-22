@@ -136,7 +136,7 @@
         </service>
 
         <service id="Sylius\Bundle\ApiBundle\Serializer\CustomerDenormalizer">
-            <argument type="service" id="Sylius\Calendar\Provider\DateTimeProviderInterface" />
+            <argument type="service" id="clock" />
             <tag name="serializer.normalizer" priority="64" />
         </service>
 
