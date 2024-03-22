@@ -268,6 +268,8 @@ ApiBundle is no longer experimental and is now following the same support policy
         default_image_filter: custom_filter
     ```
 
+   Due to this change the previously used configuration node `product_image_prefix` and its corresponding parameter `sylius_api.product_image_prefix` have been removed.
+
 ### Miscellaneous
 
 1. All the `:read` serialization groups are now split to `index` and `show`.
