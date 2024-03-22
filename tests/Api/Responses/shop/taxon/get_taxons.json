@@ -9,6 +9,7 @@
             "id": "@integer@",
             "code": "MUG",
             "children": [],
+            "images": [],
             "name": "Mugs",
             "slug": "categories\/mugs",
             "description": "Some description Lorem ipsum dolor sit amet."
@@ -19,6 +20,7 @@
             "id": "@integer@",
             "code": "HAT",
             "children": [],
+            "images": [],
             "name": "Hats",
             "slug": "categories\/hats",
             "description": "Some description Lorem ipsum dolor sit amet."
@@ -30,6 +32,15 @@
             "code": "T_SHIRTS",
             "children": [
                 "\/api\/v2\/shop\/taxons\/MEN_T_SHIRTS"
+            ],
+            "images": [
+                {
+                    "@id": "\/api\/v2\/shop\/taxon-images\/@integer@",
+                    "@type": "TaxonImage",
+                    "id": @integer@,
+                    "type": "thumbnail",
+                    "path": "@string@.contains('sylius_original').endsWith('tshirt.jpeg')"
+                }
             ],
             "name": "T-Shirts",
             "slug": "categories\/t-shirts",
