@@ -28,6 +28,35 @@ Feature: Product variant validation
         And the "VODKA_WYBOROWA_PREMIUM" variant of the "Wyborowa Vodka" product should not appear in the store
 
     @api @ui
+    Scenario: Adding a new product variant with a price greater than max value allowed
+        When I want to create a new variant of this product
+        And I specify its code as "VODKA_WYBOROWA_PREMIUM"
+        And I set its price to a huge number for the "United States" channel
+        And I try to add it
+        Then I should be notified that price cannot be greater than max value allowed
+        And the "VODKA_WYBOROWA_PREMIUM" variant of the "Wyborowa Vodka" product should not appear in the store
+
+    @api @ui
+    Scenario: Adding a new product variant with an original price greater than max value allowed
+        When I want to create a new variant of this product
+        And I specify its code as "VODKA_WYBOROWA_PREMIUM"
+        And I set its price to "$80.00" for "United States" channel
+        And I set its original price to a huge number for the "United States" channel
+        And I try to add it
+        Then I should be notified that price cannot be greater than max value allowed
+        And the "VODKA_WYBOROWA_PREMIUM" variant of the "Wyborowa Vodka" product should not appear in the store
+
+    @api @ui
+    Scenario: Adding a new product variant with a minimum price greater than max value allowed
+        When I want to create a new variant of this product
+        And I specify its code as "VODKA_WYBOROWA_PREMIUM"
+        And I set its price to "$80.00" for "United States" channel
+        And I set its minimum price to a huge number for the "United States" channel
+        And I try to add it
+        Then I should be notified that price cannot be greater than max value allowed
+        And the "VODKA_WYBOROWA_PREMIUM" variant of the "Wyborowa Vodka" product should not appear in the store
+
+    @api @ui
     Scenario: Adding a new product variant without specifying its code
         When I want to create a new variant of this product
         And I set its price to "$80.00" for "United States" channel

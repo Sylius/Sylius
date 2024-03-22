@@ -29,6 +29,8 @@ use Webmozart\Assert\Assert;
 
 final class ManagingProductVariantsContext implements Context
 {
+    private const HUGE_NUMBER = '2147483647';
+
     public function __construct(
         private SharedStorageInterface $sharedStorage,
         private CreatePageInterface $createPage,
@@ -108,6 +110,30 @@ final class ManagingProductVariantsContext implements Context
     }
 
     /**
+     * @When I set its price to a huge number for the :channel channel
+     */
+    public function iSetItsPriceToHugeNumberForTheChannel(ChannelInterface $channel): void
+    {
+        $this->iSetItsPriceTo(self::HUGE_NUMBER, $channel);
+    }
+
+    /**
+     * @When I set its original price to a huge number for the :channel channel
+     */
+    public function iSetItsOriginalPriceToHugeNumberForTheChannel(ChannelInterface $channel): void
+    {
+        $this->iSetItsOriginalPriceTo(self::HUGE_NUMBER, $channel);
+    }
+
+    /**
+     * @When I set its minimum price to a huge number for the :channel channel
+     */
+    public function iSetItsMinimumPriceAsOutOfRangeValueForChannel(ChannelInterface $channel): void
+    {
+        $this->iSetItsMinimumPriceTo(self::HUGE_NUMBER, $channel);
+    }
+
+    /**
      * @When /^I set its price to "-(?:€|£|\$)([^"]+)" for ("([^"]+)" channel)$/
      */
     public function iSetItsNegativePriceTo(string $price, ChannelInterface $channel): void
@@ -134,7 +160,7 @@ final class ManagingProductVariantsContext implements Context
     /**
      * @When /^I set its original price to "(?:€|£|\$)([^"]+)" for ("([^"]+)" channel)$/
      */
-    public function iSetItsOriginalPriceTo($originalPrice, ChannelInterface $channel)
+    public function iSetItsOriginalPriceTo(string $originalPrice, ChannelInterface $channel)
     {
         $this->createPage->specifyOriginalPrice($originalPrice, $channel);
     }
@@ -481,6 +507,17 @@ final class ManagingProductVariantsContext implements Context
         $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
 
         Assert::contains($currentPage->getPricesValidationMessage(), 'Price cannot be lower than 0.');
+    }
+
+    /**
+     * @Then I should be notified that price cannot be greater than max value allowed
+     */
+    public function iShouldBeNotifiedThatPriceCannotBeGreaterThanMaxValueAllowed(): void
+    {
+        /** @var CreatePageInterface|UpdatePageInterface $currentPage */
+        $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
+
+        Assert::contains($currentPage->getPricesValidationMessage(), sprintf('Value must be less than %s.', self::HUGE_NUMBER));
     }
 
     /**
