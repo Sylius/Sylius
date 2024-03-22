@@ -19,8 +19,6 @@ use Sylius\Component\Review\Model\ReviewInterface;
 
 final class ProductReviewDocumentationModifier implements DocumentationModifierInterface
 {
-    public const PATH = '%s/admin/product-reviews';
-
     public function __construct(
         private string $apiRoute,
     ) {
@@ -28,11 +26,14 @@ final class ProductReviewDocumentationModifier implements DocumentationModifierI
 
     public function modify(OpenApi $docs): OpenApi
     {
-        $paths = $docs->getPaths();
+        $path = sprintf('%s/admin/product-reviews', $this->apiRoute);
 
-        $path = sprintf(self::PATH, $this->apiRoute);
+        $paths = $docs->getPaths();
         $pathItem = $paths->getPath($path);
-        $operation = $pathItem->getGet();
+        $operation = $pathItem?->getGet();
+        if (null === $operation) {
+            return $docs;
+        }
 
         $parameters = $operation->getParameters();
         $parameters = array_filter(
