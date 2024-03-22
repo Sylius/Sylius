@@ -49,6 +49,29 @@ The Developer's guide to leveraging the flexibility of Sylius. Here you will fin
 
 .. include:: /book/map.rst.inc
 
+Sylius Plus
+-----------
+
+`Sylius Plus <https://sylius.com/plus/?utm_source=docs&utm_medium=cta&utm_campaign=plus>`_, which is a licensed edition of Sylius, gives you all the power of Open Source and much more.
+It comes with a set of enterprise-grade features and technical support from its creators.
+As the state-of-the-art eCommerce platform, it reduces risks and increases your ROI.
+
+Documentation sections referring to Sylius Plus features are:
+
+* :doc:`/book/installation/sylius_plus_installation`
+* :doc:`/book/architecture/emails`
+* :doc:`/book/configuration/channels`
+* :doc:`/book/customers/admin_user`
+* :doc:`/book/customers/customer_pools`
+* :doc:`/book/orders/shipments`
+* :doc:`/book/orders/returns`
+* :doc:`/book/products/multi_source_inventory`
+* :doc:`/book/loyalty/loyalty_rule`
+
+.. image:: _images/sylius_plus/banner.png
+    :align: center
+    :target: https://sylius.com/plus/?utm_source=docs&utm_medium=cta&utm_campaign=plus
+
 The Customization Guide
 -----------------------
 
