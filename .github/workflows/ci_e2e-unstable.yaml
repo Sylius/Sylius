@@ -1,6 +1,7 @@
 name: End-to-End (Unstable)
 
 on:
+    workflow_dispatch: ~
     workflow_call:
         inputs:
             ignore-failure:
@@ -8,23 +9,34 @@ on:
                 required: false
                 type: boolean
                 default: false
-    workflow_dispatch: ~
 
 permissions:
     contents: read
 
 jobs:
+    get-matrix:
+        runs-on: ubuntu-latest
+        name: "Get matrix"
+        outputs:
+            matrix: ${{ steps.matrix.outputs.prop }}
+        steps:
+            -   uses: actions/checkout@v3
+            -   name: "Get matrix"
+                id: matrix
+                uses: notiz-dev/github-action-json-property@release
+                with:
+                    path: '.github/workflows/matrix.json'
+                    prop_path: 'unstable.e2e'
+
     behat-no-js-unstable:
+        needs: get-matrix
         runs-on: ubuntu-latest
         name: "Non-JS, PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}, MySQL ${{ matrix.mysql }} (Unstable Dependencies)"
         timeout-minutes: 45
         continue-on-error: true
         strategy:
             fail-fast: false
-            matrix:
-                php: [ "8.1" ]
-                symfony: [ "^6.4" ]
-                mysql: [ "8.0" ]
+            matrix: ${{ fromJson(needs.get-matrix.outputs.matrix) }}
 
         env:
             APP_ENV: test_cached
@@ -38,7 +50,7 @@ jobs:
                 run: |
                     composer config minimum-stability dev
                     composer config prefer-stable false
-                    
+
             -   name: Prepare manifest.json files
                 run: |
                     mkdir -p public/build/admin
@@ -49,7 +61,7 @@ jobs:
                     echo "{}" > public/build/shop/manifest.json
                     echo "{}" > public/build/app/admin/manifest.json
                     echo "{}" > public/build/app/shop/manifest.json
-            
+
             -   name: Build application
                 uses: SyliusLabs/BuildTestAppAction@v2.2
                 with:
