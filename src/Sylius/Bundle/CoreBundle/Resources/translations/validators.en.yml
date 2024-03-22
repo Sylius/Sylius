@@ -84,6 +84,7 @@ sylius:
     cart_item:
         not_available: '%itemName% does not have sufficient stock.'
         insufficient_stock: 'Insufficient stock'
+    max_integer: 'Value must be less than {{ compared_value }}.'
     order:
         currency_code:
             not_valid: The currency code you entered is invalid.

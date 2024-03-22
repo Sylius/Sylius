@@ -118,5 +118,10 @@
             <argument type="service" id="sylius.repository.shipment" />
             <tag name="validator.constraint_validator" alias="sylius_shipment_confirmation_with_valid_shipment_state" />
         </service>
+
+        <service id="Sylius\Bundle\CoreBundle\Validator\Constraints\MaxIntegerValidator">
+            <argument>%sylius_core.max_int_value%</argument>
+            <tag name="validator.constraint_validator" alias="sylius_max_integer" />
+        </service>
     </services>
 </container>
