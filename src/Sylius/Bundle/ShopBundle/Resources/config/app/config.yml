@@ -1036,6 +1036,16 @@ sylius_ui:
                     context:
                         event: sylius.shop.checkout.select_shipping.before_navigation
 
+        sylius.shop.checkout.select_shipping.choice_item_content:
+            blocks:
+                description:
+                    template: "@SyliusShop/Checkout/SelectShipping/_description.html.twig"
+
+        sylius.shop.checkout.select_shipping.choice_item_extra:
+            blocks:
+                shipping_fee:
+                    template: "@SyliusShop/Checkout/SelectShipping/_fee.html.twig"
+
         sylius.shop.product.show.left_sidebar:
             blocks:
                 before_legacy:

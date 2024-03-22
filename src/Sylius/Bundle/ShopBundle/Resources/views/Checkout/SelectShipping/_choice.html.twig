@@ -1,5 +1,3 @@
-{% import '@SyliusShop/Common/Macro/money.html.twig' as money %}
-
 <div class="item" {{ sylius_test_html_attribute('shipping-item') }}>
     <div class="field">
         <div class="ui radio checkbox" {{ sylius_test_html_attribute('shipping-method-checkbox') }}>
@@ -8,15 +6,9 @@
     </div>
     <div class="content">
         <a class="header" {{ sylius_test_html_attribute('shipping-method-label') }}>{{ form_label(form) }}</a>
-        {% if method.description is not null %}
-            <div class="description">
-                <p>{{ method.description }}</p>
-            </div>
-        {% endif %}
+        {{ sylius_template_event('sylius.shop.checkout.select_shipping.choice_item_content', {'method': method, 'fee': fee}) }}
     </div>
     <div class="extra">
-        <div class="ui large right floated fee label" {{ sylius_test_html_attribute('shipping-method-fee') }}>
-            {{ money.convertAndFormat(fee) }}
-        </div>
+        {{ sylius_template_event('sylius.shop.checkout.select_shipping.choice_item_extra', {'method': method, 'fee': fee}) }}
     </div>
 </div>

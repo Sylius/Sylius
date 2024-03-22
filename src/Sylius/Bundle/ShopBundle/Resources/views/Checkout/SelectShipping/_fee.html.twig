@@ -1,0 +1,5 @@
+{% import '@SyliusShop/Common/Macro/money.html.twig' as money %}
+
+<div class="ui large right floated fee label" {{ sylius_test_html_attribute('shipping-method-fee') }}>
+    {{ money.convertAndFormat(fee) }}
+</div>
