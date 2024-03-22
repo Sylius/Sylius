@@ -31,13 +31,13 @@ class CompositeStateMachine implements StateMachineInterface
         private string $defaultAdapter,
         private array $graphsToAdaptersMapping,
     ) {
-        Assert::notEmpty($stateMachineAdapters, 'At least one state machine adapter should be provided.');
-        Assert::allIsInstanceOf(
+        $validStateMachineAdapters = array_filter(
             $stateMachineAdapters,
-            StateMachineInterface::class,
-            sprintf('All state machine adapters should implement the "%s" interface.', StateMachineInterface::class),
+            fn (mixed $stateMachineAdapter) => $stateMachineAdapter instanceof StateMachineInterface,
         );
-        $this->stateMachineAdapters = $stateMachineAdapters instanceof Traversable ? iterator_to_array($stateMachineAdapters) : $stateMachineAdapters;
+
+        Assert::notEmpty($validStateMachineAdapters, 'At least one state machine adapter should be provided.');
+        $this->stateMachineAdapters = $validStateMachineAdapters;
     }
 
     /** @throws StateMachineExecutionException */
