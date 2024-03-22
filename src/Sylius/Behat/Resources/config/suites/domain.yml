@@ -1,0 +1,12 @@
+# This file is part of the Sylius package.
+# (c) Sylius Sp. z o.o.
+
+imports:
+    - domain/cart/shopping_cart.yml
+    - domain/order/managing_orders.yml
+    - domain/product/managing_price_history.yml
+    - domain/product/managing_product_variants.yml
+    - domain/product/managing_products.yml
+    - domain/promotion/managing_promotion_coupons.yml
+    - domain/promotion/managing_promotions.yml
+    - domain/shipping/managing_shipping_methods.yml
