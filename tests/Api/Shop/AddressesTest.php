@@ -124,6 +124,43 @@ final class AddressesTest extends JsonApiTestCase
     }
 
     /** @test */
+    public function it_creates_a_new_address_with_country_and_province_code_when_the_country_code_is_set_after_province_code_in_body(): void
+    {
+        $fixtures = $this->loadFixturesFromFiles(['authentication/customer.yaml', 'country.yaml']);
+        /** @var CustomerInterface $customer */
+        $customer = $fixtures['customer_oliver'];
+        /** @var CountryInterface $country */
+        $country = $fixtures['country_US'];
+        /** @var ProvinceInterface $province */
+        $province = $fixtures['province_US_MI'];
+
+        $header = array_merge($this->logInShopUser($customer->getEmailCanonical()), self::CONTENT_TYPE_HEADER);
+
+        $this->client->request(
+            method: 'POST',
+            uri: '/api/v2/shop/addresses',
+            server: $header,
+            content: json_encode([
+                'firstName' => 'TEST',
+                'lastName' => 'TEST',
+                'phoneNumber' => '666111333',
+                'company' => 'Potato Corp.',
+                'provinceCode' => $province->getCode(),
+                'countryCode' => $country->getCode(),
+                'street' => 'Top secret',
+                'city' => 'Nebraska',
+                'postcode' => '12343',
+            ], \JSON_THROW_ON_ERROR),
+        );
+
+        $this->assertResponse(
+            $this->client->getResponse(),
+            'shop/address/post_address_with_province_code_response',
+            Response::HTTP_CREATED,
+        );
+    }
+
+    /** @test */
     public function it_creates_a_new_address_with_country_and_province_name(): void
     {
         $fixtures = $this->loadFixturesFromFiles(['authentication/customer.yaml', 'country.yaml']);
@@ -178,6 +215,48 @@ final class AddressesTest extends JsonApiTestCase
     }
 
     /** @test */
+    public function it_does_not_create_a_new_address_with_invalid_data(): void
+    {
+        $fixtures = $this->loadFixturesFromFiles(['authentication/customer.yaml', 'country.yaml']);
+        /** @var CustomerInterface $customer */
+        $customer = $fixtures['customer_oliver'];
+
+        $header = array_merge($this->logInShopUser($customer->getEmailCanonical()), self::CONTENT_TYPE_HEADER);
+
+        $this->client->request(
+            method: 'POST',
+            uri: '/api/v2/shop/addresses',
+            server: $header,
+            content: json_encode([
+                'firstName' => 'Tony',
+                'lastName' => 'Stark',
+                'company' => str_repeat('1', 256),
+                'countryCode' => 'INVALID_COUNTRY_CODE',
+                'street' => '10880 Malibu Point',
+                'city' => 'Malibu',
+                'postcode' => '90265',
+                'phoneNumber' => str_repeat('1', 256),
+            ], \JSON_THROW_ON_ERROR),
+        );
+
+        $this->assertResponseStatusCodeSame(Response::HTTP_UNPROCESSABLE_ENTITY);
+        $this->assertJsonResponseViolations($this->client->getResponse(), [
+            [
+                'propertyPath' => 'countryCode',
+                'message' => 'This value is not a valid country.',
+            ],
+            [
+                'propertyPath' => 'phoneNumber',
+                'message' => 'This value is too long. It should have 255 characters or less.',
+            ],
+            [
+                'propertyPath' => 'company',
+                'message' => 'This value is too long. It should have 255 characters or less.',
+            ]
+        ]);
+    }
+
+    /** @test */
     public function it_updates_an_address(): void
     {
         $fixtures = $this->loadFixturesFromFiles(['address_with_customer.yaml']);
@@ -202,7 +281,7 @@ final class AddressesTest extends JsonApiTestCase
                 'city' => 'Malibu',
                 'postcode' => '90265',
                 'phoneNumber' => '123456789',
-            ]),
+            ], \JSON_THROW_ON_ERROR),
         );
 
         $this->assertResponse(

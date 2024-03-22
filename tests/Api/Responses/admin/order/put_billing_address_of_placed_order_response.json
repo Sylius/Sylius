@@ -2,16 +2,15 @@
     "@id": "\/api\/v2\/admin\/addresses\/@integer@",
     "@context": "\/api\/v2\/contexts\/Address",
     "@type": "Address",
-    "customer": "\/api\/v2\/admin\/customers\/@integer@",
     "id": "@integer@",
     "firstName": "Updated: Adam",
     "lastName": "Updated: Handley",
     "company": "Updated: FMŻ",
     "street": "Updated: Kościuszki 21",
-    "countryCode": "Updated: FR",
+    "countryCode": "PL",
     "city": "Updated: Bordeaux",
     "postcode": "Updated: 99-999",
     "phoneNumber": "Updated: 911213969",
-    "provinceCode": "Updated: PL-WP",
+    "provinceCode": null,
     "provinceName": "Updated: wielkopolskie"
 }
