@@ -66,13 +66,18 @@ final class ChannelTypeExtension extends AbstractTypeExtension
             ])
             ->add('taxCalculationStrategy', TaxCalculationStrategyChoiceType::class, [
                 'label' => 'sylius.form.channel.tax_calculation_strategy',
-            ])
-            ->add('themeName', ThemeNameChoiceType::class, [
+            ]);
+
+        if (class_exists('\Sylius\Bundle\ThemeBundle\Form\Type\ThemeNameChoiceType')) {
+            $builder->add('themeName', ThemeNameChoiceType::class, [
                 'label' => 'sylius.form.channel.theme',
                 'required' => false,
                 'empty_data' => null,
                 'placeholder' => 'sylius.ui.no_theme',
-            ])
+            ]);
+        }
+
+        $builder
             ->add('contactEmail', EmailType::class, [
                 'label' => 'sylius.form.channel.contact_email',
                 'required' => false,

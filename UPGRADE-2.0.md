@@ -130,7 +130,7 @@
     * `Sylius\Bundle\AttributeBundle\Doctrine\ORM\AttributeValueRepository`
       extends `Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository`
       implements `Sylius\Component\Attribute\Repository\AttributeValueRepositoryInterface`
-  
+
   Product:
 
     * `Sylius\Bundle\ProductBundle\Doctrine\ORM\ProductAssociationRepository`
@@ -169,7 +169,7 @@
     * `Sylius\Component\Product\Repository\ProductAttributeValueRepositoryInterface` extended interface changed from
       `Sylius\Component\Resource\Repository\RepositoryInterface` to
       `Sylius\Component\Attribute\Repository\AttributeValueRepositoryInterface`
-  
+
   Product:
 
     * `Sylius\Bundle\CoreBundle\Doctrine\ORM\ProductAssociationRepository` extended class changed from
@@ -181,3 +181,8 @@
 * `use_webpack` option was removed from the `sylius_ui` configuration, and the Webpack has become the only module
   bundler provided by Sylius.
 * `use_webpack` twig global variable was removed. Webpack is always used now, and there is no need to check for it.
+
+## Theming
+If you are running your shop in the headless mode the `sylius/theme-bundle` is no longer installed as it has been moved to the shop bundle.
+* The `themeName` form field has been removed from the Channel, if the shop bundle is not installed.
+* The `Sylius\Bundle\CoreBundle\Theme\ChannelBasedThemeContext` has been moved to the `Sylius\Bundle\ShopBundle\Theme\ChannelBasedThemeContext`
