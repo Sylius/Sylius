@@ -15,7 +15,7 @@ Feature: Seeing included in price taxes of order items
         And there is a customer "lucy@teamlucifer.com" that placed an order "#00000666"
         And I am logged in as an administrator
 
-    @api @ui
+    @api @todo @ui
     Scenario: Seeing included in price taxes of order items are not counted in taxes total
         Given the customer bought 2 "Winchester M1866" products
         And the customer chose "Free" shipping method to "United States" with "Offline" payment

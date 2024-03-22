@@ -22,6 +22,8 @@
 
         <service id="sylius.behat.element.admin.channel.shop_billing_data" class="Sylius\Behat\Element\Admin\Channel\ShopBillingDataElement" parent="sylius.behat.element" />
 
+        <service id="sylius.behat.element.admin.notifications" class="Sylius\Behat\Element\Admin\NotificationsElement" parent="sylius.behat.element" />
+
         <service id="sylius.behat.element.admin.top_bar" class="Sylius\Behat\Element\Admin\TopBarElement" parent="sylius.behat.element" />
 
         <service id="Sylius\Behat\Element\Admin\CatalogPromotion\FormElement" parent="sylius.behat.element" />

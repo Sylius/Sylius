@@ -1,0 +1,53 @@
+twig_hooks:
+    hooks:
+        'sylius_admin.product.create#javascripts':
+            scripts:
+                template: '@SyliusAdmin/Product/scripts.html.twig'
+        'sylius_admin.product.create.content':
+            form:
+                component: 'SyliusAdmin.Product.Form'
+                data:
+                    form: '@=form'
+                    resource: '@=resource'
+                    parentMainHook: '@=parent_main_hook'
+                    parentFallbackHook: '@=parent_fallback_hook'
+
+        'sylius_admin.product.create.content.form':
+            side_navigation:
+                template: '@SyliusAdmin/Product/Form/_sideNavigation.html.twig'
+            sections:
+                template: '@SyliusAdmin/Product/Form/_sections.html.twig'
+
+        'sylius_admin.product.create.content.form.side_navigation':
+            details:
+                template: '@SyliusAdmin/Product/Form/SideNavigation/_details.html.twig'
+                configuration:
+                    active: true
+            channel_pricing:
+                template: '@SyliusAdmin/Product/Form/SideNavigation/_channelPricing.html.twig'
+            inventory:
+                template: '@SyliusAdmin/Product/Form/SideNavigation/_inventory.html.twig'
+            translations:
+                template: '@SyliusAdmin/Product/Form/SideNavigation/_translations.html.twig'
+            taxonomy:
+                template: '@SyliusAdmin/Product/Form/SideNavigation/_taxonomy.html.twig'
+            attributes:
+                template: '@SyliusAdmin/Product/Form/SideNavigation/_attributes.html.twig'
+            associations:
+                template: '@SyliusAdmin/Product/Form/SideNavigation/_associations.html.twig'
+            media:
+                template: '@SyliusAdmin/Product/Form/SideNavigation/_media.html.twig'
+
+        'sylius_admin.product.create.content.form.sections':
+            details:
+                template: '@SyliusAdmin/Product/Form/Sections/_details.html.twig'
+            translations:
+                template: '@SyliusAdmin/Product/Form/Sections/_translations.html.twig'
+            taxonomy:
+                template: '@SyliusAdmin/Product/Form/Sections/_taxonomy.html.twig'
+            attributes:
+                template: '@SyliusAdmin/Product/Form/Sections/_attributes.html.twig'
+            associations:
+                template: '@SyliusAdmin/Product/Form/Sections/_associations.html.twig'
+            media:
+                template: '@SyliusAdmin/Product/Form/Sections/_media.html.twig'

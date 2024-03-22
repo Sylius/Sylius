@@ -1,0 +1,75 @@
+/*!
+ * This file is part of the Sylius package.
+ *
+ * (c) Sylius Sp. z o.o.
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+* {
+    --tblr-breadcrumb-item-active-color: var(--tblr-gray-500);
+    --tblr-breadcrumb-divider-color: var(--tblr-gray-300);
+}
+
+[data-bs-theme=dark] {
+    --tblr-bg-surface: #1E2433;
+}
+
+@font-face {
+    font-family: 'Inter';
+    src: url('../fonts/Inter-VariableFont_slnt,wght.ttf') format('truetype-variations');
+    font-weight: 1 999;
+}
+
+body {
+    font-feature-settings: "cv03", "cv04", "cv11";
+}
+
+a {
+    text-underline-offset: 0.25em;
+}
+
+.btn-collapse {
+    &.collapsed {
+        .icon-chevron-right {
+            display: inline-flex;
+        }
+        .icon-chevron-down {
+            display: none;
+        }
+    }
+
+    &:not(.collapsed) {
+        .icon-chevron-right {
+            display: none;
+        }
+        .icon-chevron-down {
+            display: inline-flex;
+        }
+    }
+}
+
+.breadcrumb-item a {
+    text-decoration: none;
+
+    &:hover {
+        color: $primary
+    }
+}
+
+html[data-bs-theme="light"] [data-theme-switch="light"] {
+    display: none;
+}
+
+html[data-bs-theme="dark"] [data-theme-switch="dark"] {
+    display: none;
+}
+
+.switch-collapse {
+    display: none;
+}
+
+label:has(input:checked) ~ .switch-collapse {
+    display: block;
+}

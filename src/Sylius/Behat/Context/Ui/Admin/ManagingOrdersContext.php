@@ -24,6 +24,7 @@ use Sylius\Behat\Service\NotificationCheckerInterface;
 use Sylius\Behat\Service\SharedSecurityServiceInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Addressing\Model\AddressInterface;
+use Sylius\Component\Addressing\Model\ProvinceInterface;
 use Sylius\Component\Core\Model\AdminUserInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
@@ -96,7 +97,7 @@ final class ManagingOrdersContext implements Context
     /**
      * @When specify its tracking code as :trackingCode
      */
-    public function specifyItsTrackingCodeAs($trackingCode)
+    public function specifyItsTrackingCodeAs(string $trackingCode): void
     {
         $this->showPage->specifyTrackingCode($trackingCode);
         $this->sharedStorage->set('tracking_code', $trackingCode);
@@ -105,7 +106,7 @@ final class ManagingOrdersContext implements Context
     /**
      * @When /^I ship (this order)$/
      */
-    public function iShipThisOrder(OrderInterface $order)
+    public function iShipThisOrder(OrderInterface $order): void
     {
         $this->showPage->shipOrder($order);
     }
@@ -225,6 +226,18 @@ final class ManagingOrdersContext implements Context
     }
 
     /**
+     * @When I change the :addressType country to :country
+     */
+    public function iChangeTheCountryTo(string $addressType, string $country): void
+    {
+        match($addressType) {
+            'shipping' => $this->updatePage->changeShippingCountry($country),
+            'billing' => $this->updatePage->changeBillingCountry($country),
+            default => throw new \InvalidArgumentException(sprintf('Address type "%s" is not supported.', $addressType)),
+        };
+    }
+
+    /**
      * @Then I should see a single order from customer :customer
      */
     public function iShouldSeeASingleOrderFromCustomer(CustomerInterface $customer)
@@ -317,6 +330,21 @@ final class ManagingOrdersContext implements Context
         $this->iSeeTheOrder($this->sharedStorage->get('order'));
 
         Assert::true($this->showPage->hasBillingAddress($customerName, $street, $postcode, $city, $countryName));
+    }
+
+    /**
+     * @Then I should be able to choose the :province province for the :addressType address
+     */
+    public function iShouldBeAbleToChooseTheProvinceForTheAddressType(ProvinceInterface $province, string $addressType): void
+    {
+        Assert::inArray(
+            $province->getName(),
+            match ($addressType) {
+                'billing' => $this->updatePage->getAvailableProvincesForBillingAddress(),
+                'shipping' => $this->updatePage->getAvailableProvincesForShippingAddress(),
+                default => [],
+            },
+        );
     }
 
     /**
@@ -608,7 +636,7 @@ final class ManagingOrdersContext implements Context
     public function iShouldBeNotifiedThatTheOrderHasBeenSuccessfullyShipped()
     {
         $this->notificationChecker->checkNotification(
-            'Shipment has been successfully updated.',
+            'Shipment has been successfully shipped.',
             NotificationType::success(),
         );
     }
@@ -718,9 +746,9 @@ final class ManagingOrdersContext implements Context
     /**
      * @Then it should have shipment in state :shipmentState
      */
-    public function itShouldHaveShipmentState($shipmentState)
+    public function itShouldHaveShipmentState(string $shipmentState): void
     {
-        Assert::true($this->showPage->hasShipment($shipmentState));
+        Assert::true($this->showPage->hasShipmentWithState($shipmentState));
     }
 
     /**

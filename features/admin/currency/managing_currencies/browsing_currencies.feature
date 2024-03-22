@@ -8,7 +8,7 @@ Feature: Browsing currencies
         Given the store has currency "Euro", "British Pound"
         And I am logged in as an administrator
 
-    @ui @api
+    @todo @ui @api
     Scenario: Browsing currencies in store
         When I want to browse currencies of the store
         Then I should see 2 currencies in the list

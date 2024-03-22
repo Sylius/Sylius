@@ -1,0 +1,10 @@
+{% extends '@SyliusAdmin/Shared/Crud/Update/Content/_form.html.twig' %}
+
+{% block form_content %}
+    <div class="row">
+        {{ form_errors(form) }}
+        {{ form_widget(form._token) }}
+
+        {{ parent() }}
+    </div>
+{% endblock %}

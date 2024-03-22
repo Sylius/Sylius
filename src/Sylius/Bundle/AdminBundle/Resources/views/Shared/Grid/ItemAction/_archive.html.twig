@@ -1,0 +1,15 @@
+{% set path = options.link.url|default(path(options.link.route|default(grid.requestConfiguration.getRouteName('archive')), options.link.parameters|default({'id': data.id}))) %}
+
+<form action="{{ path }}" method="POST" name="sylius_archivable">
+    <input type="hidden" name="_method" value="PATCH">
+    <input type="hidden" name="sylius_archivable[_token]" value="{{ csrf_token('sylius_archivable') }}" />
+
+    <button class="dropdown-item" type="submit" data-confirm-btn-submit>
+        <i class="{{ action.icon|default('archive') }} icon"></i>
+        {% if data.archivedAt is not null %}
+            {{ action.options.restore_label|default('sylius.ui.restore')|trans }}
+        {% else %}
+            {{ action.label|default('sylius.ui.archive')|trans }}
+        {% endif %}
+    </button>
+</form>

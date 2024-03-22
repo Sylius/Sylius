@@ -1,0 +1,37 @@
+twig_hooks:
+    hooks:
+        'sylius_admin.admin_user.create.content':
+            form:
+                template: '@SyliusAdmin/Shared/Crud/Create/Content/_form.html.twig'
+                configuration:
+                    render_rest: false
+            
+        'sylius_admin.admin_user.create.content.form':
+            sections:
+                template: '@SyliusAdmin/AdminUser/Form/sections.html.twig'
+
+        'sylius_admin.admin_user.create.content.form.sections':
+            account:
+                template: '@SyliusAdmin/AdminUser/Form/Sections/account.html.twig'
+            personal_information:
+                template: '@SyliusAdmin/AdminUser/Form/Sections/personal_information.html.twig'
+
+        'sylius_admin.admin_user.create.content.form.sections.account':
+            username:
+                template: '@SyliusAdmin/AdminUser/Form/Sections/Account/username.html.twig'
+            email:
+                template: '@SyliusAdmin/AdminUser/Form/Sections/Account/email.html.twig'
+            password:
+                template: '@SyliusAdmin/AdminUser/Form/Sections/Account/password.html.twig'
+            enabled:
+                template: '@SyliusAdmin/AdminUser/Form/Sections/Account/enabled.html.twig'
+
+        'sylius_admin.admin_user.create.content.form.sections.personal_information':
+            first_name:
+                template: '@SyliusAdmin/AdminUser/Form/Sections/PersonalInformation/first_name.html.twig'
+            last_name:
+                template: '@SyliusAdmin/AdminUser/Form/Sections/PersonalInformation/last_name.html.twig'
+            locale:
+                template: '@SyliusAdmin/AdminUser/Form/Sections/PersonalInformation/locale.html.twig'
+            avatar:
+                template: '@SyliusAdmin/AdminUser/Form/Sections/PersonalInformation/avatar.html.twig'

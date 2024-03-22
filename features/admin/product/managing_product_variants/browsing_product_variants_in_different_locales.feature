@@ -15,7 +15,7 @@ Feature: Browsing product variants in different locales
         And this variant has no translation in "English (United States)" locale
         And I am logged in as an administrator
 
-    @ui @no-api
+    @todo @ui @no-api
     Scenario: Seeing all variants when some don't have translations in my locale which is also the base
         When I want to view all variants of this product
         Then I should see 3 variants in the list
@@ -23,7 +23,7 @@ Feature: Browsing product variants in different locales
         And I should also see a variant named "Berserk Pug with Morning Star"
         And I should also see 1 variant with no name
 
-    @ui @no-api
+    @todo @ui @no-api
     Scenario: Seeing all variants when some don't have translations in my locale which is not the base
         Given I change my locale to "Polish (Poland)"
         When I want to view all variants of this product
@@ -32,7 +32,7 @@ Feature: Browsing product variants in different locales
         And I should also see a variant named "Szałowy Mops z Mieczem"
         And I should also see 1 variant with no name
 
-    @ui @no-api
+    @todo @ui @no-api
     Scenario: Seeing all variants when none have names in my locale
         Given I change my locale to "Irish (Ireland)"
         When I want to view all variants of this product

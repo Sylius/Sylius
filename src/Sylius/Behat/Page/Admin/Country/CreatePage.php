@@ -13,43 +13,58 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Page\Admin\Country;
 
-use Behat\Mink\Element\NodeElement;
-use Sylius\Behat\Behaviour\ChoosesName;
 use Sylius\Behat\Page\Admin\Crud\CreatePage as BaseCreatePage;
 use Webmozart\Assert\Assert;
 
 class CreatePage extends BaseCreatePage implements CreatePageInterface
 {
-    use ChoosesName;
-
-    public function addProvince(string $name, string $code, string $abbreviation = null): void
+    public function selectCountry(string $countryName): void
     {
-        $this->getDocument()->clickLink('Add province');
+        $this->getElement('code')->selectOption($countryName);
+    }
 
-        $provinceForm = $this->getLastProvinceElement();
+    public function addProvince(): void
+    {
+        $count = count($this->getProvinceItems());
 
-        $provinceForm->fillField('Name', $name);
-        $provinceForm->fillField('Code', $code);
+        $this->getElement('add_province')->click();
 
-        if (null !== $abbreviation) {
-            $provinceForm->fillField('Abbreviation', $abbreviation);
-        }
+        $this->getDocument()->waitFor(5, fn () => $count + 1 === count($this->getProvinceItems()));
+    }
+
+    public function specifyProvinceName(string $name): void
+    {
+        $province = $this->getElement('last_province');
+        $province->find('css', '[data-test-province-name]')->setValue($name);
+    }
+
+    public function specifyProvinceCode(string $code): void
+    {
+        $province = $this->getElement('last_province');
+        $province->find('css', '[data-test-province-code]')->setValue($code);
+    }
+
+    public function specifyProvinceAbbreviation(string $abbreviation): void
+    {
+        $province = $this->getElement('last_province');
+        $province->find('css', '[data-test-province-abbreviation]')->setValue($abbreviation);
     }
 
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
-            'provinces' => '#sylius_country_provinces',
+            'code' => '[data-test-code]',
+            'provinces' => '[data-test-provinces]',
+            'last_province' => '[data-test-provinces] [data-test-province]:last-child',
+            'add_province' => '[data-test-add-province]',
         ]);
     }
 
-    private function getLastProvinceElement(): NodeElement
+    private function getProvinceItems(): array
     {
-        $provinces = $this->getElement('provinces');
-        $items = $provinces->findAll('css', 'div[data-form-collection="item"]');
+        $items = $this->getElement('provinces')->findAll('css', '[data-test-province]');
+        Assert::isArray($items);
 
-        Assert::notEmpty($items);
-
-        return end($items);
+        return $items;
     }
 }

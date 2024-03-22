@@ -1,0 +1,39 @@
+twig_hooks:
+    hooks:
+        'sylius_admin.tax_rate.update.content':
+            form:
+                template: '@SyliusAdmin/Shared/Crud/Update/Content/_form.html.twig'
+                configuration:
+                    render_rest: false
+
+        'sylius_admin.tax_rate.update.content.form':
+            sections:
+                template: '@SyliusAdmin/TaxRate/Form/sections.html.twig'
+
+        'sylius_admin.tax_rate.update.content.form.sections':
+            details:
+                template: '@SyliusAdmin/TaxRate/Form/Sections/details.html.twig'
+            configuration:
+                template: '@SyliusAdmin/TaxRate/Form/Sections/configuration.html.twig'
+
+        'sylius_admin.tax_rate.update.content.form.sections.details':
+            _name: # has to be prefixed due to a kink in hook configuration
+                template: '@SyliusAdmin/TaxRate/Form/Sections/Details/name.html.twig'
+            code:
+                template: '@SyliusAdmin/TaxRate/Form/Sections/Details/code.html.twig'
+
+        'sylius_admin.tax_rate.update.content.form.sections.configuration':
+            category:
+                template: '@SyliusAdmin/TaxRate/Form/Sections/Configuration/category.html.twig'
+            zone:
+                template: '@SyliusAdmin/TaxRate/Form/Sections/Configuration/zone.html.twig'
+            calculator:
+                template: '@SyliusAdmin/TaxRate/Form/Sections/Configuration/calculator.html.twig'
+            amount:
+                template: '@SyliusAdmin/TaxRate/Form/Sections/Configuration/amount.html.twig'
+            included_in_price:
+                template: '@SyliusAdmin/TaxRate/Form/Sections/Configuration/included_in_price.html.twig'
+            start_date:
+                template: '@SyliusAdmin/TaxRate/Form/Sections/Configuration/start_date.html.twig'
+            end_date:
+                template: '@SyliusAdmin/TaxRate/Form/Sections/Configuration/end_date.html.twig'

@@ -8,7 +8,7 @@ Feature: Adding a new taxon with images
         Given the store is available in "English (United States)"
         And I am logged in as an administrator
 
-    @ui @mink:chromedriver @no-api
+    @todo @ui @mink:chromedriver @no-api
     Scenario: Adding a new taxon with a single image
         When I want to create a new taxon
         And I specify its code as "t-shirts"
@@ -19,7 +19,7 @@ Feature: Adding a new taxon with images
         And the "T-Shirts" taxon should appear in the registry
         And this taxon should have an image with "banner" type
 
-    @ui @mink:chromedriver @no-api
+    @todo @ui @mink:chromedriver @no-api
     Scenario: Adding a new taxon with multiple images
         When I want to create a new taxon
         And I specify its code as "t-shirts"

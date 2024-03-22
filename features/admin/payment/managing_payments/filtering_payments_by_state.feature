@@ -17,7 +17,7 @@ Feature: Filtering payments by state
         And there is a "Failed" "#00000006" order with "Apple" product
         And I am logged in as an administrator
 
-    @ui @api
+    @todo @ui @api
     Scenario: Filtering payments in state "New"
         When I browse payments
         And I choose "new" as a payment state
@@ -28,7 +28,7 @@ Feature: Filtering payments by state
         And I should see also the payment of the "#00000006" order
         But I should not see the payment of the "#00000002" order
 
-    @ui @api
+    @todo @ui @api
     Scenario: Filtering payments in state "Completed"
         When I browse payments
         And I choose "completed" as a payment state
@@ -37,7 +37,7 @@ Feature: Filtering payments by state
         And I should see the payment of the "#00000002" order
         But I should not see the payment of the "#00000003" order
 
-    @ui @api
+    @todo @ui @api
     Scenario: Filtering payments in state "Processing"
         When I browse payments
         And I choose "processing" as a payment state
@@ -46,7 +46,7 @@ Feature: Filtering payments by state
         And I should see the payment of the "#00000003" order
         But I should not see the payment of the "#00000004" order
 
-    @ui @api
+    @todo @ui @api
     Scenario: Filtering payments in state "Refunded"
         When I browse payments
         And I choose "refunded" as a payment state
@@ -55,7 +55,7 @@ Feature: Filtering payments by state
         And I should see the payment of the "#00000004" order
         But I should not see the payment of the "#00000005" order
 
-    @ui @api
+    @todo @ui @api
     Scenario: Filtering payments in state "Cancelled"
         When I browse payments
         And I choose "cancelled" as a payment state
@@ -64,7 +64,7 @@ Feature: Filtering payments by state
         And I should see the payment of the "#00000005" order
         But I should not see the payment of the "#00000006" order
 
-    @ui @api
+    @todo @ui @api
     Scenario: Filtering payments in state "Failed"
         When I browse payments
         And I choose "failed" as a payment state

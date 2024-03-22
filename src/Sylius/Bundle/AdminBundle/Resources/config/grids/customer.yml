@@ -29,15 +29,15 @@ sylius_grid:
                 enabled:
                     type: twig
                     label: sylius.ui.enabled
-                    path: .
+                    path: user?.enabled
                     options:
-                        template: "@SyliusAdmin/Customer/Grid/Field/enabled.html.twig"
+                        template: "@SyliusAdmin/Shared/Grid/Field/boolean.html.twig"
                 verified:
                     type: twig
                     label: sylius.ui.verified
-                    path: .
+                    path: user?.verified
                     options:
-                        template: "@SyliusAdmin/Customer/Grid/Field/verified.html.twig"
+                        template: "@SyliusAdmin/Shared/Grid/Field/boolean.html.twig"
             filters:
                 search:
                     type: string

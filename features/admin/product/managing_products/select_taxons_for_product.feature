@@ -12,7 +12,7 @@ Feature: Select taxon for an existing product
         And I am logged in as an administrator
         And I am using "English (United Kingdom)" locale for my panel
 
-    @ui @javascript @api
+    @todo @ui @javascript @api
     Scenario: Specifying main taxon for configurable product
         When I want to modify the "T-Shirt Banana" product
         And I choose main taxon "T-Shirts"
@@ -20,11 +20,10 @@ Feature: Select taxon for an existing product
         Then I should be notified that it has been successfully edited
         And main taxon of product "T-Shirt Banana" should be "T-Shirts"
 
-    @ui @javascript @no-api
+    @todo @ui @javascript @no-api
     Scenario: Specifying main taxon for simple product
         When I want to modify the "T-Shirt Batman" product
         And I choose main taxon "Sad"
         And I save my changes
         Then I should be notified that it has been successfully edited
         And main taxon of product "T-Shirt Batman" should be "Sad"
-

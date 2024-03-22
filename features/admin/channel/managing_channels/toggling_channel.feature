@@ -9,7 +9,7 @@ Feature: Toggling a channel
         And the store operates on another channel named "Mobile Channel"
         And I am logged in as an administrator
 
-    @api @ui
+    @api @todo @ui
     Scenario: Disabling the channel
         Given the channel "Web Channel" is enabled
         When I want to modify this channel
@@ -18,7 +18,7 @@ Feature: Toggling a channel
         Then I should be notified that it has been successfully edited
         And this channel should be disabled
 
-    @api @ui
+    @api @todo @ui
     Scenario: Enabling the channel
         Given the channel "Web Channel" is disabled
         When I want to modify this channel

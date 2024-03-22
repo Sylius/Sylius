@@ -13,19 +13,36 @@
 
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
-        <service id="Sylius\Bundle\UiBundle\Registry\TemplateBlockRegistryInterface" class="Sylius\Bundle\UiBundle\Registry\TemplateBlockRegistry">
+        <service id="sylius.ui.block_renderer.composite" class="Sylius\Bundle\UiBundle\Renderer\CompositeBlockRenderer">
+            <argument type="tagged_iterator" tag="sylius.ui.block_renderer" />
+        </service>
+
+        <service id="Sylius\Bundle\UiBundle\Registry\BlockRegistryInterface" class="Sylius\Bundle\UiBundle\Registry\BlockRegistry">
             <argument type="collection" />
         </service>
+        <service id="Sylius\Bundle\UiBundle\Registry\TemplateBlockRegistryInterface" alias="Sylius\Bundle\UiBundle\Registry\BlockRegistryInterface" />
 
-        <service id="Sylius\Bundle\UiBundle\Renderer\TemplateBlockRendererInterface" class="Sylius\Bundle\UiBundle\Renderer\TwigTemplateBlockRenderer">
+        <service id="Sylius\Bundle\UiBundle\Renderer\BlockRendererInterface" class="Sylius\Bundle\UiBundle\Renderer\TwigTemplateBlockRenderer">
             <argument type="service" id="twig" />
             <argument type="tagged_iterator" tag="sylius.ui.template_event.context_provider" />
+            <tag name="sylius.ui.block_renderer" />
+        </service>
+        <service id="Sylius\Bundle\UiBundle\Renderer\TemplateBlockRendererInterface" alias="Sylius\Bundle\UiBundle\Renderer\BlockRendererInterface" />
+
+        <service id="Sylius\Bundle\UiBundle\Renderer\TwigComponentBlockRenderer">
+            <argument type="service" id="ux.twig_component.component_renderer" />
+            <argument type="service" id="Sylius\Bundle\UiBundle\ContextProvider\ContextProviderInterface" />
+            <argument type="service">
+                <service class="Symfony\Component\ExpressionLanguage\ExpressionLanguage" />
+            </argument>
+            <tag name="sylius.ui.block_renderer" />
         </service>
 
-        <service id="Sylius\Bundle\UiBundle\Renderer\TemplateEventRendererInterface" class="Sylius\Bundle\UiBundle\Renderer\DelegatingTemplateEventRenderer">
+        <service id="Sylius\Bundle\UiBundle\Renderer\TwigEventRendererInterface" class="Sylius\Bundle\UiBundle\Renderer\DelegatingTwigEventRenderer">
             <argument type="service" id="Sylius\Bundle\UiBundle\Registry\TemplateBlockRegistryInterface" />
-            <argument type="service" id="Sylius\Bundle\UiBundle\Renderer\TemplateBlockRendererInterface" />
+            <argument type="service" id="sylius.ui.block_renderer.composite" />
         </service>
+        <service id="Sylius\Bundle\UiBundle\Renderer\TemplateEventRendererInterface" alias="Sylius\Bundle\UiBundle\Renderer\TwigEventRendererInterface" />
 
         <service id="Sylius\Bundle\UiBundle\Console\Command\DebugTemplateEventCommand">
             <argument type="service" id="Sylius\Bundle\UiBundle\Registry\TemplateBlockRegistryInterface" />
