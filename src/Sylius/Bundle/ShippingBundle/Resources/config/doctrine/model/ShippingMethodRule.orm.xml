@@ -19,7 +19,11 @@
         </id>
 
         <field name="type" type="string" />
-        <field name="configuration" type="array" />
+        <field name="configuration" type="json">
+            <options>
+                <option name="jsonb">true</option>
+            </options>
+        </field>
 
         <many-to-one field="shippingMethod" target-entity="Sylius\Component\Shipping\Model\ShippingMethodInterface" inversed-by="rules">
             <join-column name="shipping_method_id" referenced-column-name="id" nullable="true" />

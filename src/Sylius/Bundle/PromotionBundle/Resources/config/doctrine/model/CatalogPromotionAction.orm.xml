@@ -18,7 +18,11 @@
         </id>
 
         <field name="type" />
-        <field name="configuration" type="array" />
+        <field name="configuration" type="json">
+            <options>
+                <option name="jsonb">true</option>
+            </options>
+        </field>
 
         <many-to-one field="catalogPromotion" target-entity="Sylius\Component\Promotion\Model\CatalogPromotionInterface" inversed-by="actions">
             <join-column name="catalog_promotion_id" referenced-column-name="id" nullable="true" />

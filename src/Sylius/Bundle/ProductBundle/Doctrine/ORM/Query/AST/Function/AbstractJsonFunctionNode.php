@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Bundle\ProductBundle\Doctrine\ORM\Query\AST\Function;
 
 use Doctrine\DBAL\Exception;
@@ -30,8 +32,11 @@ abstract class AbstractJsonFunctionNode extends FunctionNode
     public const FUNCTION_NAME = null;
 
     protected const ALPHA_NUMERIC = 'alphaNumeric';
+
     protected const STRING_PRIMARY_ARG = 'stringPrimary';
+
     protected const STRING_ARG = 'string';
+
     protected const VALUE_ARG = 'newValue';
 
     /** @var string[] */
@@ -76,6 +81,7 @@ abstract class AbstractJsonFunctionNode extends FunctionNode
 
     /**
      * @param string[] $argumentTypes
+     *
      * @throws QueryException
      */
     protected function parseArguments(Parser $parser, array $argumentTypes, bool $argumentParsed = false): bool
@@ -128,7 +134,7 @@ abstract class AbstractJsonFunctionNode extends FunctionNode
             case Lexer::T_INTEGER:
             case Lexer::T_FLOAT:
                 $parser->match(
-                    $lexer->isNextToken(Lexer::T_INTEGER) ? Lexer::T_INTEGER : Lexer::T_FLOAT
+                    $lexer->isNextToken(Lexer::T_INTEGER) ? Lexer::T_INTEGER : Lexer::T_FLOAT,
                 );
 
                 return new Literal(Literal::NUMERIC, $lexer->token->value);
@@ -143,7 +149,6 @@ abstract class AbstractJsonFunctionNode extends FunctionNode
 
         return new Literal(Literal::STRING, $lexer->token->value);
     }
-
 
     /**
      * @throws ASTException

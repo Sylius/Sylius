@@ -5,5 +5,5 @@
     "id": "@integer@",
     "owner": "\/api\/v2\/admin\/taxons\/CATEGORY",
     "type": "thumbnail",
-    "path": "@string@\/thumbnail.jpg"
+    "path": "@string@.contains('sylius_original').endsWith('thumbnail.jpg')"
 }

@@ -17,7 +17,6 @@ use Doctrine\DBAL\Exception;
 use Doctrine\DBAL\Platforms\PostgreSQLPlatform;
 use Doctrine\ORM\Query\SqlWalker;
 
-
 /**
  * @see https://github.com/ScientaNL/DoctrineJsonFunctions/blob/master/src/Query/AST/Functions/Postgresql/PostgresqlJsonFunctionNode.php
  */
@@ -26,7 +25,7 @@ abstract class AbstractPostgresqlJsonFunctionNode extends AbstractJsonFunctionNo
     /**
      * @throws Exception
      */
-    protected function validatePlatform(SqlWalker$sqlWalker): void
+    protected function validatePlatform(SqlWalker $sqlWalker): void
     {
         if (!$sqlWalker->getConnection()->getDatabasePlatform() instanceof PostgreSQLPlatform) {
             throw Exception::notSupported(static::FUNCTION_NAME);

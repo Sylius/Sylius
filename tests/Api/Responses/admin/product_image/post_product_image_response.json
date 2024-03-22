@@ -5,6 +5,6 @@
     "id": "@integer@",
     "owner": "\/api\/v2\/admin\/products\/MUG",
     "type": null,
-    "path": "@string@\/mugs.jpg",
+    "path": "@string@.contains('sylius_original').endsWith('mugs.jpg')",
     "productVariants": []
 }

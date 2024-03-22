@@ -42,3 +42,5 @@ parameters:
         - '/Method Symfony\\Component\\Serializer\\Normalizer\\NormalizerInterface\:\:supportsNormalization\(\) invoked with 3 parameters\, 1\-2 required\./'
         - '/Symfony\\Component\\Serializer\\NameConverter\\NameConverterInterface::normalize\(\) invoked with 2 parameters, 1 required./'
         - '/Method Sylius\\Component\\(\w+)\\Model\\(\w+)\:\:getId\(\) has no return type specified./'
+        - '/Method [a-zA-z\\]+Filter\:\:filterProperty\(\) has parameter \$value with no type specified./'
+        - '/Method [a-zA-z\\]+Persister\:\:(persist|remove|supports)\(\) has parameter \$data with no type specified./'
