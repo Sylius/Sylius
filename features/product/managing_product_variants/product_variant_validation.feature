@@ -28,6 +28,26 @@ Feature: Product variant validation
         And the "VODKA_WYBOROWA_PREMIUM" variant of the "Wyborowa Vodka" product should not appear in the store
 
     @api @ui
+    Scenario: Adding a new product variant with original price below 0
+        When I want to create a new variant of this product
+        And I specify its code as "VODKA_WYBOROWA_PREMIUM"
+        And I set its price to "$60.00" for "United States" channel
+        And I set its original price to "-$60.00" for "United States" channel
+        And I try to add it
+        Then I should be notified that price cannot be lower than 0
+        And the "VODKA_WYBOROWA_PREMIUM" variant of the "Wyborowa Vodka" product should not appear in the store
+
+    @api @ui
+    Scenario: Adding a new product variant with minimum price below 0
+        When I want to create a new variant of this product
+        And I specify its code as "VODKA_WYBOROWA_PREMIUM"
+        And I set its price to "$60.00" for "United States" channel
+        And I set its minimum price to "-$60.00" for "United States" channel
+        And I try to add it
+        Then I should be notified that price cannot be lower than 0
+        And the "VODKA_WYBOROWA_PREMIUM" variant of the "Wyborowa Vodka" product should not appear in the store
+
+    @api @ui
     Scenario: Adding a new product variant with a price greater than max value allowed
         When I want to create a new variant of this product
         And I specify its code as "VODKA_WYBOROWA_PREMIUM"

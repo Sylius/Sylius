@@ -166,6 +166,22 @@ final class ManagingProductVariantsContext implements Context
     }
 
     /**
+     * @When /^I set its minimum price to "-(?:€|£|\$)([^"]+)" for ("([^"]+)" channel)$/
+     */
+    public function iSetItsNegativeMinimumPriceTo(string $price, ChannelInterface $channel): void
+    {
+        $this->createPage->specifyMinimumPrice('-' . $price, $channel);
+    }
+
+    /**
+     * @When /^I set its original price to "-(?:€|£|\$)([^"]+)" for ("([^"]+)" channel)$/
+     */
+    public function iSetItsNegativeOriginalPriceTo(string $originalPrice, ChannelInterface $channel)
+    {
+        $this->createPage->specifyOriginalPrice('-' . $originalPrice, $channel);
+    }
+
+    /**
      * @When I set its height, width, depth and weight to :number
      */
     public function iSetItsDimensionsTo($value)
