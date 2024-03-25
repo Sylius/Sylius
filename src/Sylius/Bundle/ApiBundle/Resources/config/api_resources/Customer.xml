@@ -114,7 +114,7 @@
                 </attribute>
                 <attribute name="validation_groups">
                     <attribute>sylius</attribute>
-                    <attribute>sylius_api_user_create</attribute>
+                    <attribute>sylius_api_user_update</attribute>
                 </attribute>
             </itemOperation>
 
@@ -166,6 +166,11 @@
                         <attribute>shop:customer:show</attribute>
                         <attribute>sylius:shop:customer:show</attribute>
                     </attribute>
+                </attribute>
+                <attribute name="validation_groups">
+                    <attribute>sylius</attribute>
+                    <attribute>sylius_api_user_update</attribute>
+                    <attribute>sylius_customer_profile</attribute>
                 </attribute>
             </itemOperation>
         </itemOperations>
