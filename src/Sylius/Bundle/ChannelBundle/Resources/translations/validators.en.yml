@@ -6,3 +6,8 @@ sylius:
             unique: Channel code has to be unique.
         name:
             not_blank: Please enter channel name.
+            max_length: Channel name must not be longer than {{ limit }} characters.
+        color:
+            max_length: Color must not be longer than {{ limit }} characters.
+        hostname:
+            max_length: Hostname must not be longer than {{ limit }} characters.

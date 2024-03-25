@@ -34,6 +34,25 @@
                 <option name="message">sylius.channel.name.not_blank</option>
                 <option name="groups">sylius</option>
             </constraint>
+            <constraint name="Length">
+                <option name="max">255</option>
+                <option name="maxMessage">sylius.channel.name.max_length</option>
+                <option name="groups">sylius</option>
+            </constraint>
+        </property>
+        <property name="color">
+            <constraint name="Length">
+                <option name="max">255</option>
+                <option name="maxMessage">sylius.channel.color.max_length</option>
+                <option name="groups">sylius</option>
+            </constraint>
+        </property>
+        <property name="hostname">
+            <constraint name="Length">
+                <option name="max">255</option>
+                <option name="maxMessage">sylius.channel.hostname.max_length</option>
+                <option name="groups">sylius</option>
+            </constraint>
         </property>
     </class>
 </constraint-mapping>

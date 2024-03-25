@@ -74,6 +74,14 @@ final class ManagingChannelsContext implements Context
     }
 
     /**
+     * @When I specify its name as a too long string
+     */
+    public function iSpecifyItsNameAsATooLongString(): void
+    {
+        $this->createPage->nameIt($this->getTooLongString());
+    }
+
+    /**
      * @When I choose :currency as the base currency
      * @When I do not choose base currency
      */
@@ -185,11 +193,27 @@ final class ManagingChannelsContext implements Context
     }
 
     /**
+     * @When I specify its hostname as a too long string
+     */
+    public function iSpecifyItsHostnameAsATooLongString(): void
+    {
+        $this->createPage->setHostname($this->getTooLongString());
+    }
+
+    /**
      * @When I set its contact email as :contactEmail
      */
     public function iSetItsContactEmailAs(string $contactEmail): void
     {
         $this->createPage->setContactEmail($contactEmail);
+    }
+
+    /**
+     * @When I specify its contact email as a too long string
+     */
+    public function iSpecifyItsContactEmailAsATooLongString(): void
+    {
+        $this->createPage->setContactEmail($this->getTooLongString());
     }
 
     /**
@@ -201,11 +225,27 @@ final class ManagingChannelsContext implements Context
     }
 
     /**
+     * @When I specify its contact phone number as a too long string
+     */
+    public function iSpecifyItsContactPhoneNumberAsATooLongString(): void
+    {
+        $this->createPage->setContactPhoneNumber($this->getTooLongString());
+    }
+
+    /**
      * @When I define its color as :color
      */
     public function iDefineItsColorAs(string $color): void
     {
         $this->createPage->defineColor($color);
+    }
+
+    /**
+     * @When I specify its color as a too long string
+     */
+    public function iSpecifyItsColorAsATooLongString(): void
+    {
+        $this->createPage->defineColor($this->getTooLongString());
     }
 
     /**
@@ -673,6 +713,17 @@ final class ManagingChannelsContext implements Context
         Assert::same($this->shippingAddressInCheckoutRequiredElement->getRequiredAddressTypeInCheckout(), $type);
     }
 
+    /**
+     * @Then /^I should be notified that ([^"]+) is too long$/
+     */
+    public function iShouldBeNotifiedThatFieldValueIsTooLong(string $field): void
+    {
+        Assert::contains(
+            $this->createPage->getValidationMessage(StringInflector::nameToLowercaseCode($field)),
+            'must not be longer than 255 characters.',
+        );
+    }
+
     private function assertChannelState(ChannelInterface $channel, bool $state): void
     {
         $this->iWantToBrowseChannels();
@@ -681,5 +732,10 @@ final class ManagingChannelsContext implements Context
             'nameAndDescription' => $channel->getName(),
             'enabled' => $state ? 'Enabled' : 'Disabled',
         ]));
+    }
+
+    private function getTooLongString(): string
+    {
+        return str_repeat('a@', 128);
     }
 }

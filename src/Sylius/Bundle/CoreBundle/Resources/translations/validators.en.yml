@@ -45,6 +45,13 @@ sylius:
             invalid: This email is invalid.
             max: Email must not be longer than {{ limit }} characters.
             min: Email must be at least {{ limit }} characters long.
+        contact_phone_number:
+            max_length: Contact phone number must not be longer than {{ limit }} characters.
+        theme_name:
+            max_length: Theme name must not be longer than {{ limit }} characters.
+        tax_calculation_strategy:
+            not_blank: Please enter tax calculation strategy.
+            max_length: Tax calculation strategy must not be longer than {{ limit }} characters.
     channel_price_history_config:
         lowest_price_for_discounted_products_checking_period:
             greater_than: 'Value must be greater than {{ compared_value }}'
@@ -175,5 +182,10 @@ sylius:
         username:
             unique: This username is already used.
             not_blank: Please enter your name.
+            max: Username must not be longer than {{ limit }} characters.
+        first_name:
+            max: First name must not be longer than {{ limit }} characters.
+        last_name:
+            max: Last name must not be longer than {{ limit }} characters.
         locale_code:
             not_blank: Please choose a locale.

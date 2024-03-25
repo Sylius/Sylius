@@ -21,7 +21,7 @@ use Sylius\Bundle\ApiBundle\Serializer\ImageNormalizer;
 
 final class ImageDocumentationModifier implements DocumentationModifierInterface
 {
-    /** @var array<string>  */
+    /** @var array<string> */
     private array $filters;
 
     public function __construct(

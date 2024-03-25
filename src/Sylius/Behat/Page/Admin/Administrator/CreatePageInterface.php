@@ -27,6 +27,10 @@ interface CreatePageInterface extends BaseCreatePageInterface
 
     public function specifyEmail(string $email): void;
 
+    public function specifyFirstName(string $firstName): void;
+
+    public function specifyLastName(string $lastName): void;
+
     public function specifyPassword(string $password): void;
 
     public function specifyLocale(string $localeCode): void;
