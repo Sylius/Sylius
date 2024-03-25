@@ -19,7 +19,7 @@
 {%- block form_errors -%}
     {%- if errors|length > 0 -%}
         {%- for error in errors -%}
-            <div class="ui red {% if form.parent is not empty %}pointing {% endif %}label sylius-validation-error" {{ sylius_test_html_attribute('validation-error') }} {% if form.parent is empty %} style="margin-bottom: 10px;"{% endif %}>
+            <div data-test-validation-error class="{% if form.parent is not empty %}pointing {% endif %}" {{ sylius_test_html_attribute('validation-error') }} {% if form.parent is empty %} style="margin-bottom: 10px;"{% endif %}>
                 {{ error.message }}
             </div>
         {%- endfor -%}

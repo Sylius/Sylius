@@ -24,11 +24,11 @@ final class RegisterElement extends Element implements RegisterElementInterface
         $errorLabel = $this
             ->getElement(StringInflector::nameToCode($element))
             ->getParent()
-            ->find('css', '.sylius-validation-error')
+            ->find('css', '[data-test-validation-error]')
         ;
 
         if (null === $errorLabel) {
-            throw new ElementNotFoundException($this->getSession(), 'Validation message', 'css', '.sylius-validation-error');
+            throw new ElementNotFoundException($this->getSession(), 'Validation message', 'css', '[data-test-validation-error]');
         }
 
         return $message === $errorLabel->getText();
