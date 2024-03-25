@@ -18,6 +18,9 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 
 final class PaymentFactory implements PaymentFactoryInterface
 {
+    /**
+     * @param FactoryInterface<PaymentInterface> $factory
+     */
     public function __construct(private FactoryInterface $factory)
     {
     }
@@ -29,7 +32,6 @@ final class PaymentFactory implements PaymentFactoryInterface
 
     public function createWithAmountAndCurrencyCode(int $amount, string $currency): PaymentInterface
     {
-        /** @var PaymentInterface $payment */
         $payment = $this->factory->createNew();
         $payment->setAmount($amount);
         $payment->setCurrencyCode($currency);

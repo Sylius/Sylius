@@ -50,7 +50,7 @@ final class NotificationController
             Request::METHOD_GET,
             $this->hubUri,
             $headers,
-            json_encode($content),
+            json_encode($content, JSON_THROW_ON_ERROR),
         );
 
         try {

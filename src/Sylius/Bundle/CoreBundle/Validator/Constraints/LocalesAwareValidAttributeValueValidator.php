@@ -32,7 +32,7 @@ final class LocalesAwareValidAttributeValueValidator extends ConstraintValidator
     /**
      * @throws \InvalidArgumentException
      */
-    public function validate($value, Constraint $constraint): void
+    public function validate(mixed $value, Constraint $constraint): void
     {
         Assert::isInstanceOf($value, AttributeValueInterface::class);
 

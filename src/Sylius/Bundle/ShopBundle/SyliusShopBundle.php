@@ -19,7 +19,7 @@ use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 final class SyliusShopBundle extends Bundle
 {
-    public function build(ContainerBuilder $container)
+    public function build(ContainerBuilder $container): void
     {
         $container->addCompilerPass(new LogoutListenerPass());
     }

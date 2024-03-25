@@ -60,6 +60,10 @@ abstract class AbstractMigration extends BaseAbstractMigration
         return false;
     }
 
+    /**
+     * @param class-string $className
+     * @throws \ReflectionException
+     */
     private function classExistsCaseSensitive(string $className): bool
     {
         return class_exists(strtolower($className)) && (new \ReflectionClass($className))->getName() === $className;

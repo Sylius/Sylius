@@ -27,7 +27,7 @@ final class CorrectOrderAddressValidator extends ConstraintValidator
     {
     }
 
-    public function validate($value, Constraint $constraint): void
+    public function validate(mixed $value, Constraint $constraint): void
     {
         /** @var UpdateCart $value */
         Assert::isInstanceOf($value, UpdateCart::class);

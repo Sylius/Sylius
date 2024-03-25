@@ -28,6 +28,7 @@
     "HWI\\Bundle\\OAuthBundle\\Security\\Core\\User\\OAuthAwareUserProviderInterface",
     "League\\Flysystem\\FilesystemOperator",
     "Symfony\\Component\\Security\\Core\\Encoder\\EncoderFactoryInterface",
+    "Symfony\\Component\\HttpFoundation\\Session\\FlashBagAwareSessionInterface",
     "PHPUnit\\Framework\\ExpectationFailedException",
     "Stripe\\Stripe"
   ],

@@ -16,6 +16,7 @@ namespace Sylius\Component\Order\Factory;
 use Sylius\Component\Order\Model\OrderItemInterface;
 use Sylius\Component\Order\Model\OrderItemUnitInterface;
 use Sylius\Component\Resource\Exception\UnsupportedMethodException;
+use Webmozart\Assert\Assert;
 
 class OrderItemUnitFactory implements OrderItemUnitFactoryInterface
 {
@@ -36,6 +37,9 @@ class OrderItemUnitFactory implements OrderItemUnitFactoryInterface
 
     public function createForItem(OrderItemInterface $orderItem): OrderItemUnitInterface
     {
-        return new $this->className($orderItem);
+        $orderItemUnit = new $this->className($orderItem);
+        Assert::isInstanceOf($orderItemUnit, OrderItemUnitInterface::class);
+
+        return $orderItemUnit;
     }
 }

@@ -18,6 +18,9 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 
 final class ChannelFactory implements ChannelFactoryInterface
 {
+    /**
+     * @param FactoryInterface<ChannelInterface> $defaultFactory
+     */
     public function __construct(private FactoryInterface $defaultFactory)
     {
     }
@@ -29,8 +32,7 @@ final class ChannelFactory implements ChannelFactoryInterface
 
     public function createNamed(string $name): ChannelInterface
     {
-        /** @var ChannelInterface $channel */
-        $channel = $this->defaultFactory->createNew();
+        $channel = $this->createNew();
         $channel->setName($name);
 
         return $channel;

@@ -16,10 +16,14 @@ namespace Sylius\Bundle\ApiBundle\Swagger;
 use Sylius\Component\Locale\Model\LocaleInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
+use Webmozart\Assert\Assert;
 
 /** @experimental */
 final class AcceptLanguageHeaderDocumentationNormalizer implements NormalizerInterface
 {
+    /**
+     * @param RepositoryInterface<LocaleInterface> $localeRepository
+     */
     public function __construct(
         private NormalizerInterface $decoratedNormalizer,
         private RepositoryInterface $localeRepository,
@@ -34,6 +38,7 @@ final class AcceptLanguageHeaderDocumentationNormalizer implements NormalizerInt
     public function normalize($object, $format = null, array $context = [])
     {
         $docs = $this->decoratedNormalizer->normalize($object, $format, $context);
+        Assert::isArray($docs);
 
         $acceptLanguageHeader = [
             'name' => 'Accept-Language',
@@ -52,6 +57,7 @@ final class AcceptLanguageHeaderDocumentationNormalizer implements NormalizerInt
         foreach ($docs['paths'] as $path => $methods) {
             foreach ($methods as $methodName => $methodBody) {
                 if (is_object($methodBody)) {
+                    Assert::methodExists($methodBody, 'getArrayCopy');
                     $methodBody = $methodBody->getArrayCopy();
                     $methodBody['parameters'][] = $acceptLanguageHeader;
 

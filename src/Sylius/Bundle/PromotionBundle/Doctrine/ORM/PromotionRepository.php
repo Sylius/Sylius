@@ -15,7 +15,9 @@ namespace Sylius\Bundle\PromotionBundle\Doctrine\ORM;
 
 use Doctrine\ORM\QueryBuilder;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
+use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Promotion\Repository\PromotionRepositoryInterface;
+use Webmozart\Assert\Assert;
 
 class PromotionRepository extends EntityRepository implements PromotionRepositoryInterface
 {
@@ -30,7 +32,10 @@ class PromotionRepository extends EntityRepository implements PromotionRepositor
 
     public function findByName(string $name): array
     {
-        return $this->findBy(['name' => $name]);
+        $promotion = $this->findBy(['name' => $name]);
+        Assert::allIsInstanceOf($promotion, PromotionInterface::class);
+
+        return $promotion;
     }
 
     protected function filterByActive(QueryBuilder $queryBuilder, ?\DateTimeInterface $date = null): QueryBuilder

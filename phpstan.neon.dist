@@ -7,9 +7,10 @@ includes:
     - vendor/phpstan/phpstan-symfony/rules.neon
 
 parameters:
-    level: 6
+    level: 7
 
     reportUnmatchedIgnoredErrors: false
+    treatPhpDocTypesAsCertain: false
 
     paths:
         - 'src/'
@@ -39,3 +40,10 @@ parameters:
         - '/Class Symfony\\Component\\Security\\Core\\Authentication\\Token\\UsernamePasswordToken constructor invoked with 4 parameters\, 2\-3 required./'
         - '/Method Symfony\\Component\\Serializer\\Normalizer\\NormalizerInterface\:\:supportsNormalization\(\) invoked with 3 parameters\, 1\-2 required\./'
         - '/Symfony\\Component\\Serializer\\NameConverter\\NameConverterInterface::normalize\(\) invoked with 2 parameters, 1 required./'
+
+    symfony:
+        containerXmlPath: var/cache/dev/App_KernelDevDebugContainer.xml
+
+    # Uncomment once we start using PHP configs, on Symfony 6+ it doesn't generate the below directory if no PHP config is present
+    #scanDirectories:
+    #    - var/cache/dev/Symfony/Config

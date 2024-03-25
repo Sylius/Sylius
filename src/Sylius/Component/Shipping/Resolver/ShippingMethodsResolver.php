@@ -14,11 +14,16 @@ declare(strict_types=1);
 namespace Sylius\Component\Shipping\Resolver;
 
 use Doctrine\Persistence\ObjectRepository;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\Shipping\Checker\Eligibility\ShippingMethodEligibilityCheckerInterface;
+use Sylius\Component\Shipping\Model\ShippingMethodInterface;
 use Sylius\Component\Shipping\Model\ShippingSubjectInterface;
 
 final class ShippingMethodsResolver implements ShippingMethodsResolverInterface
 {
+    /**
+     * @param RepositoryInterface<ShippingMethodInterface> $shippingMethodRepository
+     */
     public function __construct(
         private ObjectRepository $shippingMethodRepository,
         private ShippingMethodEligibilityCheckerInterface $eligibilityChecker,

@@ -17,9 +17,13 @@ use Sylius\Component\Attribute\AttributeType\AttributeTypeInterface;
 use Sylius\Component\Attribute\Model\AttributeInterface;
 use Sylius\Component\Registry\ServiceRegistryInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
+use Webmozart\Assert\Assert;
 
 final class AttributeFactory implements AttributeFactoryInterface
 {
+    /**
+     * @param FactoryInterface<AttributeInterface> $factory
+     */
     public function __construct(private FactoryInterface $factory, private ServiceRegistryInterface $attributeTypesRegistry)
     {
     }
@@ -31,11 +35,10 @@ final class AttributeFactory implements AttributeFactoryInterface
 
     public function createTyped(string $type): AttributeInterface
     {
-        /** @var AttributeTypeInterface $attributeType */
         $attributeType = $this->attributeTypesRegistry->get($type);
+        Assert::isInstanceOf($attributeType, AttributeTypeInterface::class);
 
-        /** @var AttributeInterface $attribute */
-        $attribute = $this->factory->createNew();
+        $attribute = $this->createNew();
         $attribute->setType($type);
         $attribute->setStorageType($attributeType->getStorageType());
 

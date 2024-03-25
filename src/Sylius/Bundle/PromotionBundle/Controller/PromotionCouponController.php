@@ -16,6 +16,8 @@ namespace Sylius\Bundle\PromotionBundle\Controller;
 use FOS\RestBundle\View\View;
 use Sylius\Bundle\PromotionBundle\Form\Type\PromotionCouponGeneratorInstructionType;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
+use Sylius\Component\Core\Model\PromotionInterface;
+use Sylius\Component\Core\Repository\PromotionRepositoryInterface;
 use Sylius\Component\Promotion\Generator\PromotionCouponGeneratorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -34,7 +36,10 @@ class PromotionCouponController extends ResourceController
             throw new NotFoundHttpException('No promotion id given.');
         }
 
-        if (null === $promotion = $this->container->get('sylius.repository.promotion')->find($promotionId)) {
+        /** @var PromotionRepositoryInterface $promotionRepository */
+        $promotionRepository = $this->container->get('sylius.repository.promotion');
+        $promotion = $promotionRepository->find($promotionId);
+        if (!$promotion instanceof PromotionInterface) {
             throw new NotFoundHttpException('Promotion not found.');
         }
 

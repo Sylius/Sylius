@@ -15,6 +15,7 @@ namespace Sylius\Bundle\ApiBundle\Swagger;
 
 use Sylius\Bundle\ApiBundle\Provider\ProductImageFilterProviderInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
+use Webmozart\Assert\Assert;
 
 /** @experimental */
 final class ProductImageDocumentationNormalizer implements NormalizerInterface
@@ -34,6 +35,7 @@ final class ProductImageDocumentationNormalizer implements NormalizerInterface
     public function normalize($object, $format = null, array $context = [])
     {
         $docs = $this->decoratedNormalizer->normalize($object, $format, $context);
+        Assert::isArray($docs);
 
         $enums = $this->filterProvider->provideShopFilters();
         $enums = array_keys($enums);
