@@ -74,7 +74,7 @@ final class ProductReviewsTest extends JsonApiTestCase
                 'title' => 'Greatest product!',
                 'rating' => 3,
                 'comment' => 'I\'ve never bought anything better.',
-                'email' => 'test@test.com',
+                'email' => 'john.doe@example.com',
                 'product' => '/api/v2/shop/products/' . $product->getCode(),
             ], \JSON_THROW_ON_ERROR),
         );
