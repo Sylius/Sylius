@@ -260,6 +260,22 @@ ApiBundle is no longer experimental and is now following the same support policy
 
 1. The `customer` key has been removed from admin address endpoints' responses.
 
+1. The `status` key has been removed from shop product review endpoints' responses.
+
+1. The `author` key has been changed form shop product review endpoints' responses:
+
+    ```diff
+    {
+      ...
+    - "author": "string(IRI)",
+    + "author": {
+    +   "@id": "string(IRI)",
+    +   "@type": "string",
+    +   "firstName": "string",
+    + },
+    }
+    ```
+
 1. Resolving the `path` property of every resource implementing `Sylius\Component\Core\Model\ImageInterface` has been changed to always rely on filters.
    The default filter has been set to `sylius_original`, but can be changed via configuration:
 
