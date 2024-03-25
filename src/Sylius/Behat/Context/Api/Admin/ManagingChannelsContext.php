@@ -369,6 +369,14 @@ final class ManagingChannelsContext implements Context
     }
 
     /**
+     * @When /^I specify its ([^"]+) as a too long string$/
+     */
+    public function iSpecifyItsFieldAsATooLongString(string $field): void
+    {
+        $this->client->addRequestData(StringInflector::nameToCamelCase($field), str_repeat('a@', 128));
+    }
+
+    /**
      * @Then I should be notified that it has been successfully created
      */
     public function iShouldBeNotifiedThatItHasBeenSuccessfullyCreated(): void
@@ -709,6 +717,17 @@ final class ManagingChannelsContext implements Context
         Assert::contains(
             $this->responseChecker->getError($this->client->getLastResponse()),
             'countryCode: This value is not a valid country.',
+        );
+    }
+
+    /**
+     * @Then /^I should be notified that ([^"]+) is too long$/
+     */
+    public function iShouldBeNotifiedThatFieldIsTooLong(string $field): void
+    {
+        Assert::regex(
+            $this->responseChecker->getError($this->client->getLastResponse()),
+            sprintf('/%s\: .+ must not be longer than 255 characters./', StringInflector::nameToCamelCase($field)),
         );
     }
 }

@@ -168,13 +168,18 @@ abstract class JsonApiTestCase extends BaseJsonApiTestCase
      *
      * @param array<array-key, mixed> $expectedViolations
      */
-    protected function assertJsonResponseViolations(Response $response, array $expectedViolations): void
-    {
+    protected function assertJsonResponseViolations(
+        Response $response,
+        array $expectedViolations,
+        bool $assertViolationsCount = true,
+    ): void {
         $responseContent = $response->getContent() ?: '';
         $this->assertNotEmpty($responseContent);
         $violations = json_decode($responseContent, true)['violations'] ?? [];
 
-        $this->assertCount(count($expectedViolations), $violations, $responseContent);
+        if ($assertViolationsCount) {
+            $this->assertCount(count($expectedViolations), $violations, $responseContent);
+        }
 
         $violationMap = [];
         foreach ($violations as $violation) {
