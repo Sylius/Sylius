@@ -92,6 +92,14 @@ final class ManagingAdministratorsContext implements Context
     }
 
     /**
+     * @When I specify its :field as too long string
+     */
+    public function iSpecifyItsFieldAsTooLongString(string $field): void
+    {
+        $this->client->addRequestData(StringInflector::nameToCamelCase(lcfirst(trim(ucwords($field)))), str_repeat('a', 256));
+    }
+
+    /**
      * @When I specify its password as :password
      * @When I do not specify its password
      * @When I change its password to :password
@@ -109,6 +117,14 @@ final class ManagingAdministratorsContext implements Context
     public function iSpecifyItsLocaleAs(string $localeCode): void
     {
         $this->client->addRequestData('localeCode', $localeCode);
+    }
+
+    /**
+     * @When I specify its locale as a wrong code
+     */
+    public function iSpecifyItsLocaleAsWrongCode(): void
+    {
+        $this->client->addRequestData('localeCode', 'wr_ONG');
     }
 
     /**
@@ -288,6 +304,28 @@ final class ManagingAdministratorsContext implements Context
         Assert::contains(
             $this->responseChecker->getError($this->client->getLastResponse()),
             'email: This email is invalid.',
+        );
+    }
+
+    /**
+     * @Then I should be notified that this :field is too long
+     */
+    public function iShouldBeNotifiedThatThisFieldIsTooLong(string $field): void
+    {
+        Assert::contains(
+            $this->responseChecker->getError($this->client->getLastResponse()),
+            sprintf('%s must not be longer than 255 characters.', ucfirst($field)),
+        );
+    }
+
+    /**
+     * @Then I should be notified that this value is not valid locale
+     */
+    public function iShouldBeNotifiedThatThisValueIsNotValidLocale(): void
+    {
+        Assert::contains(
+            $this->responseChecker->getError($this->client->getLastResponse()),
+            'localeCode: This value is not a valid locale.',
         );
     }
 
