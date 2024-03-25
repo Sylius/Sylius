@@ -95,7 +95,7 @@ class GeneratePage extends SymfonyPage implements GeneratePageInterface
         $foundElement = $this->getElement($element);
         $validatedField = $this->getValidatedField($foundElement);
 
-        return $message === $validatedField->find('css', '.sylius-validation-error')->getText();
+        return $message === $validatedField->find('css', '[data-test-validation-error]')->getText();
     }
 
     /**
