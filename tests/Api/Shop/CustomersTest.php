@@ -139,6 +139,26 @@ final class CustomersTest extends JsonApiTestCase
     }
 
     /** @test */
+    public function it_validates_wrong_reset_password_request(): void
+    {
+        $this->loadFixturesFromFiles(['authentication/customer.yaml', 'channel.yaml']);
+
+        $this->client->request(
+            method: 'POST',
+            uri: '/api/v2/shop/customers/reset-password',
+            server: self::CONTENT_TYPE_HEADER,
+            content: json_encode([
+                'email' => 'wrong_email',
+                'localeCode' => 'te_ST',
+            ], \JSON_THROW_ON_ERROR),
+        );
+
+        $response = $this->client->getResponse();
+
+        $this->assertResponse($response, 'shop/customer/reset_password_validation_response', Response::HTTP_UNPROCESSABLE_ENTITY);
+    }
+
+    /** @test */
     public function it_resets_account_password(): void
     {
         $loadedData = $this->loadFixturesFromFiles(['authentication/customer.yaml', 'channel.yaml']);
