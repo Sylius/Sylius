@@ -72,6 +72,9 @@ class ProductTaxonController extends ResourceController
             return $this->redirectHandler->redirectToReferer($configuration);
         }
 
+        // Add the first product taxon id to the criteria to get the retrieved the right taxon
+        $firstProductTaxonId = array_key_first($productTaxonsPositions);
+        $configuration->getParameters()->set('criteria', ['id' => $firstProductTaxonId]);
         $maxPosition = $this->getMaxPosition($configuration);
 
         try {
@@ -128,7 +131,7 @@ class ProductTaxonController extends ResourceController
         /** @var EntityRepository&RepositoryInterface $repository */
         $repository = $this->repository;
 
-        return $repository->count(['taxon' => $productTaxon->getTaxon()]) - 1;
+        return $repository->count(['taxon' => $productTaxon->getTaxon()]);
     }
 
     private function validateCsrfProtection(Request $request, RequestConfiguration $configuration): void
