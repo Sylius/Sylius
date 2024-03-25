@@ -20,7 +20,7 @@ use Symfony\Component\DependencyInjection\Reference;
 
 final class OverrideResourceControllerStateMachinePass implements CompilerPassInterface
 {
-    public function process(ContainerBuilder $container)
+    public function process(ContainerBuilder $container): void
     {
         $stateMachineDefinition = $container->register('sylius.resource_controller.state_machine', CompositeStateMachine::class);
         $stateMachineDefinition->setPublic(false);
