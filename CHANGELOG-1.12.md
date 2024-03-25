@@ -1,5 +1,48 @@
 # CHANGELOG FOR `1.12.X`
 
+## v1.12.14 (2024-03-25)
+
+#### Details
+
+- [#13777](https://github.com/Sylius/Sylius/issues/13777) [Locale] Change language negotiation to RFC 4647 based ([@gseric](https://github.com/gseric))
+- [#15435](https://github.com/Sylius/Sylius/issues/15435) [Checkout] Prevent extra fields when login in on addressing page ([@Jibbarth](https://github.com/Jibbarth))
+- [#15614](https://github.com/Sylius/Sylius/issues/15614) [Admin][UI] Fix csrf error breaking admin form ([@NoResponseMate](https://github.com/NoResponseMate))
+- [#15617](https://github.com/Sylius/Sylius/issues/15617) Switch JS session Behat driver to the Symfony Panther ([@jakubtobiasz](https://github.com/jakubtobiasz))
+- [#15620](https://github.com/Sylius/Sylius/issues/15620) Fix CI ([@jakubtobiasz](https://github.com/jakubtobiasz))
+- [#15642](https://github.com/Sylius/Sylius/issues/15642) [Admin] Add official support submenu in admin panel ([@GSadee](https://github.com/GSadee))
+- [#15656](https://github.com/Sylius/Sylius/issues/15656) [AUTO] Updated translations from Crowdin (1.12) ([@SyliusBot](https://github.com/SyliusBot))
+- [#15672](https://github.com/Sylius/Sylius/issues/15672) Typo cart-flow.rst ([@zairigimad](https://github.com/zairigimad))
+- [#15687](https://github.com/Sylius/Sylius/issues/15687) Fix Typo fixtures.rst ([@zairigimad](https://github.com/zairigimad))
+- [#15696](https://github.com/Sylius/Sylius/issues/15696) [Admin] Do not disable channel base currency when none set ([@NoResponseMate](https://github.com/NoResponseMate))
+- [#15698](https://github.com/Sylius/Sylius/issues/15698) New year 2024! 🥳 ([@TheMilek](https://github.com/TheMilek))
+- [#15718](https://github.com/Sylius/Sylius/issues/15718) [Documentation] Extend the maintenance date of 1.12 and update future releases ([@GSadee](https://github.com/GSadee))
+- [#15746](https://github.com/Sylius/Sylius/issues/15746) Add builds checking whether the frontend can be built with all supported nodejs versions ([@jakubtobiasz](https://github.com/jakubtobiasz))
+- [#15749](https://github.com/Sylius/Sylius/issues/15749) [AUTO] Updated translations from Crowdin (1.12) ()
+- [#15761](https://github.com/Sylius/Sylius/issues/15761) [Admin] Add Sylius certification to menu ([@Wojdylak](https://github.com/Wojdylak))
+- [#15796](https://github.com/Sylius/Sylius/issues/15796) Update codeowners ([@jakubtobiasz](https://github.com/jakubtobiasz))
+- [#15805](https://github.com/Sylius/Sylius/issues/15805) Update the license years for the last time ([@GSadee](https://github.com/GSadee))
+- [#15806](https://github.com/Sylius/Sylius/issues/15806) [Documentation] Fix table of supported versions ([@GSadee](https://github.com/GSadee))
+- [#15815](https://github.com/Sylius/Sylius/issues/15815) Update the branch-aliases ([@Wojdylak](https://github.com/Wojdylak))
+- [#15824](https://github.com/Sylius/Sylius/issues/15824) Bump up symfony/flex version ([@GSadee](https://github.com/GSadee))
+- [#15839](https://github.com/Sylius/Sylius/issues/15839) [FLYSYSTEM] Add directory visibility as public to local storage ([@Wojdylak](https://github.com/Wojdylak))
+- [#15853](https://github.com/Sylius/Sylius/issues/15853) [ProductAttribute] Use value of options when use "Apply to all" ([@Jibbarth](https://github.com/Jibbarth))
+- [#15859](https://github.com/Sylius/Sylius/issues/15859) FIX zoneMembers not unique ID ([@TheMilek](https://github.com/TheMilek))
+- [#15900](https://github.com/Sylius/Sylius/issues/15900) BUGFIX: #12681 add missing required class  to provincecode select input ([@crydotsnake](https://github.com/crydotsnake))
+- [#15909](https://github.com/Sylius/Sylius/issues/15909) BUGFIX: #15908 [AdminBundle] missing br tag for spacing for product media tab button ([@crydotsnake](https://github.com/crydotsnake))
+- [#15939](https://github.com/Sylius/Sylius/issues/15939) BUGFIX: #15938 [AdminBundle] add spacing between choose file button and uploaded image in image_widget ([@crydotsnake](https://github.com/crydotsnake))
+- [#15956](https://github.com/Sylius/Sylius/issues/15956) Bye Sylius Forum ☠️ ([@CoderMaggie](https://github.com/CoderMaggie))
+- [#15957](https://github.com/Sylius/Sylius/issues/15957) Update README.md remove info about forum ([@damonsson](https://github.com/damonsson))
+- [#15968](https://github.com/Sylius/Sylius/issues/15968) Remove info about forum from Admin panel and documentation ([@GSadee](https://github.com/GSadee))
+- [#15971](https://github.com/Sylius/Sylius/issues/15971) [Docs] Refactor information about GUS ([@CoderMaggie](https://github.com/CoderMaggie))
+- [#15972](https://github.com/Sylius/Sylius/issues/15972) [API] Prevent documenation failing when some endpoints are disabled ([@NoResponseMate](https://github.com/NoResponseMate))
+- [#15993](https://github.com/Sylius/Sylius/issues/15993) Bunnyshell improvements for 1.12 ([@jakubtobiasz](https://github.com/jakubtobiasz))
+- [#16000](https://github.com/Sylius/Sylius/issues/16000) Fix the CODEOWNERS file ([@jakubtobiasz](https://github.com/jakubtobiasz))
+- [#16003](https://github.com/Sylius/Sylius/issues/16003) Fix the CODEOWNERS file ([@jakubtobiasz](https://github.com/jakubtobiasz))
+- [#16011](https://github.com/Sylius/Sylius/issues/16011) [Maintenance] Add conflict with api-platform/core 2.7.17 ([@Wojdylak](https://github.com/Wojdylak))
+- [#16017](https://github.com/Sylius/Sylius/issues/16017) [Maintenance] Fix ci ([@Wojdylak](https://github.com/Wojdylak))
+- [#16026](https://github.com/Sylius/Sylius/issues/16026) [DOC] Update an access Denied link ([@lacpandore](https://github.com/lacpandore))
+- [#16038](https://github.com/Sylius/Sylius/issues/16038) [Docs] Improve visibility of Sylius Plus ([@CoderMaggie](https://github.com/CoderMaggie))
+
 ## v1.12.13 (2023-12-05)
 
 #### Details
