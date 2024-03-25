@@ -1,0 +1,67 @@
+#!/usr/bin/env php
+<?php
+
+if (!is_dir(__DIR__.'/vendor/')) {
+    echo "Missing composer dependencies. Please run \"composer install\"".PHP_EOL;
+    exit(1);
+}
+
+require __DIR__.'/vendor/symfony/filesystem/Exception/ExceptionInterface.php';
+require __DIR__.'/vendor/symfony/filesystem/Exception/IOExceptionInterface.php';
+require __DIR__.'/vendor/symfony/filesystem/Exception/IOException.php';
+require __DIR__.'/vendor/symfony/filesystem/Filesystem.php';
+
+use Symfony\Component\Filesystem\Filesystem;
+
+/**
+ * Links dependencies of a project to a local clone of the main Sylius/Sylius GitHub repository.
+ * Inspired by what Kévin Dunglas <dunglas@gmail.com> did for symfony/symfony GitHub repository.
+ *
+ * @author Florian Merle <florian.david.merle@gmail.com>
+ */
+
+$copy = false !== $k = array_search('--copy', $argv, true);
+$copy && array_splice($argv, $k, 1);
+$rollback = false !== $k = array_search('--rollback', $argv, true);
+$rollback && array_splice($argv, $k, 1);
+$pathToProject = $argv[1] ?? getcwd();
+
+if (!is_dir("$pathToProject/vendor/sylius")) {
+    echo 'Links dependencies of a project to a local clone of the main Sylius/Sylius GitHub repository.'.PHP_EOL.PHP_EOL;
+    echo "Usage: $argv[0] /path/to/the/project".PHP_EOL;
+    echo '       Use `--copy` to copy dependencies instead of symlink'.PHP_EOL.PHP_EOL;
+    echo '       Use `--rollback` to rollback'.PHP_EOL.PHP_EOL;
+    echo "The directory \"$pathToProject\" does not exist or the dependencies are not installed, did you forget to run \"composer install\" in your project?".PHP_EOL;
+    exit(1);
+}
+
+$filesystem = new Filesystem();
+$dir = "$pathToProject/vendor/sylius/sylius";
+$dependency = 'sylius/sylius';
+
+if ($rollback) {
+    $filesystem->remove($dir);
+    echo "\"$dependency\" has been rollback. Do not forget to run \"composer install\" in your project \"$pathToProject\"".PHP_EOL;
+    exit(0);
+}
+
+if (!$copy && is_link($dir)) {
+    echo "\"$dependency\" is already a symlink, skipping.".PHP_EOL;
+    exit(1);
+}
+
+$dependencyDir = ('\\' === DIRECTORY_SEPARATOR || $copy) ? __DIR__ : $filesystem->makePathRelative(__DIR__, dirname(realpath($dir)));
+
+$filesystem->remove($dir);
+
+if ($copy) {
+    $filesystem->mirror($dependencyDir, $dir);
+    echo "\"$dependency\" has been copied.".PHP_EOL;
+} else {
+    $filesystem->symlink($dependencyDir, $dir);
+    echo "\"$dependency\" has been linked to \"$dependencyDir\".".PHP_EOL;
+}
+
+foreach (glob("$pathToProject/var/cache/*", GLOB_NOSORT) as $cacheDir) {
+    $filesystem->remove($cacheDir);
+}
