@@ -10,7 +10,7 @@
                 {% set icon = 'info' %}
             {% endif %}
 
-            <div class="{{ result|default('positive') }}">
+            <div class="{{ result|default('positive') }}" data-test-flash-message>
                 <i class="{{ icon|default('checkmark') }} icon"></i>
                 <div class="content">
                     <div class="header">

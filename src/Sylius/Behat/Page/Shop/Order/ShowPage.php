@@ -70,7 +70,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
 
         foreach ($paymentMethodItems as $method) {
             if ($method->find('css', '[data-test-payment-method-select]')->hasAttribute('checked')) {
-                return $method->find('css', 'a')->getText();
+                return $method->find('css', '[data-test-payment-method-label-wrapper]')->getText();
             }
         }
 
@@ -80,7 +80,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     public function getPaymentValidationMessage(): string
     {
         $message = '';
-        $validationElements = $this->getDocument()->findAll('css', 'form .items .sylius-validation-error');
+        $validationElements = $this->getDocument()->findAll('css', '[data-test-validation-error]');
         foreach ($validationElements as $validationElement) {
             $message .= $validationElement->getText();
         }

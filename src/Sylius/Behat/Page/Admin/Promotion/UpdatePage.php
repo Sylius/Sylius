@@ -174,9 +174,9 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     {
         $foundElement = $this->getElement($element, ['%localeCode%' => $localeCode])->getParent();
 
-        $validationMessage = $foundElement->find('css', '.sylius-validation-error');
+        $validationMessage = $foundElement->find('css', '[data-test-validation-error]');
         if (null === $validationMessage) {
-            throw new ElementNotFoundException($this->getSession(), 'Validation message', 'css', '.sylius-validation-error');
+            throw new ElementNotFoundException($this->getSession(), 'Validation message', 'css', '[data-test-validation-error]');
         }
 
         return $validationMessage->getText();

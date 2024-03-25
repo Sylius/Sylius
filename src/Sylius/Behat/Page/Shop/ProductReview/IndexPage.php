@@ -24,7 +24,7 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
 
     public function countReviews(): int
     {
-        return count($this->getElement('reviews')->findAll('css', '.comment'));
+        return count($this->getElement('reviews')->findAll('css', '[data-test-comment]'));
     }
 
     public function hasReviewTitled(string $title): bool

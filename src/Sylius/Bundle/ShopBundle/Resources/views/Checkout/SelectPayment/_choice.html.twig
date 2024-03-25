@@ -3,7 +3,9 @@
         {{ form_widget(form, sylius_test_form_attribute('payment-method-select')) }}
     </div>
     <div>
-        {{ form_label(form, null, {'label_attr': {'data-test-payment-method-label': ''}}) }}
+        <div data-test-payment-method-label-wrapper>
+            {{ form_label(form, null, {'label_attr': {'data-test-payment-method-label': ''}}) }}
+        </div>
 
         {% if method.description is not null %}
             <div>{{ method.description }}</div>

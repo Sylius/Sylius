@@ -103,7 +103,7 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
     {
         $this->clickTabIfItsNotActive('attributes');
 
-        $validationError = $this->getElement('attribute')->find('css', '.sylius-validation-error');
+        $validationError = $this->getElement('attribute')->find('css', '[data-test-validation-error]');
 
         return $validationError->getText();
     }
@@ -283,7 +283,7 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
             'non_translatable_attribute_value' => '#attributesContainer [data-test-product-attribute-value-in-locale="%attributeName% "] input',
             'original_price' => '#sylius_product_variant_channelPricings_%channelCode%_originalPrice',
             'price' => '#sylius_product_variant_channelPricings_%channelCode%_price',
-            'prices_validation_message' => '#sylius_product_variant_channelPricings ~ .sylius-validation-error, #sylius_product_variant_channelPricings .sylius-validation-error',
+            'prices_validation_message' => '#sylius_product_variant_channelPricings ~ [data-test-validation-error], #sylius_product_variant_channelPricings [data-test-validation-error]',
             'price_calculator' => '#sylius_product_variant_pricingCalculator',
             'shipping_category' => '#sylius_product_variant_shippingCategory',
             'shipping_required' => '#sylius_product_variant_shippingRequired',

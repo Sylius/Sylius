@@ -156,9 +156,9 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     {
         $actionForm = $this->getLastCollectionItem('actions');
 
-        $foundElement = $actionForm->find('css', '.sylius-validation-error');
+        $foundElement = $actionForm->find('css', '[data-test-validation-error]');
         if (null === $foundElement) {
-            throw new ElementNotFoundException($this->getSession(), 'Tag', 'css', '.sylius-validation-error');
+            throw new ElementNotFoundException($this->getSession(), 'Tag', 'css', '[data-test-validation-error]');
         }
 
         return $foundElement->getText();
