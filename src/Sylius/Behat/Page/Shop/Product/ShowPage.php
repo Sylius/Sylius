@@ -246,12 +246,12 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     public function hasReviewTitled(string $title): bool
     {
         try {
-            $element = $this->getElement('reviews_comment', ['%title%' => $title]);
+            $element = $this->getElement('reviews_title', ['%title%' => $title]);
         } catch (ElementNotFoundException) {
             return false;
         }
 
-        return $title === $element->getAttribute('data-test-comment');
+        return $title === $element->getAttribute('data-test-title');
     }
 
     public function isOutOfStock(): bool
@@ -275,7 +275,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
 
     public function countReviews(): int
     {
-        return count($this->getElement('reviews')->findAll('css', '[data-test-comment]'));
+        return count($this->getElement('reviews')->findAll('css', '[data-test-title]'));
     }
 
     public function selectOption(string $optionCode, string $optionValue): void
@@ -375,7 +375,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
             'product_price_content' => '[data-test-product-price-content]',
             'quantity' => '[data-test-quantity]',
             'reviews' => '[data-test-product-reviews]',
-            'reviews_comment' => '[data-test-comment="%title%"]',
+            'reviews_title' => '[data-test-title="%title%"]',
             'selecting_variants' => '[data-test-product-selecting-variant]',
             'tab' => '[data-test-tab="%name%"]',
             'validation_errors' => '[data-test-cart-validation-error]',
