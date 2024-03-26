@@ -6,8 +6,11 @@
     "title": "Greatest product!",
     "rating": 3,
     "comment": "I have never bought anything better.",
-    "author": "\/api\/v2\/shop\/customers\/@integer@",
-    "status": "accepted",
+    "author": {
+        "@id": "\/api\/v2\/shop\/customers\/@integer@",
+        "@type": "Customer",
+        "firstName": "Oliver"
+    },
     "reviewSubject": "\/api\/v2\/shop\/products\/MUG",
     "createdAt": @date@,
     "updatedAt": @date@

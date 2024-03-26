@@ -26,10 +26,10 @@ use Webmozart\Assert\Assert;
 final class ProductReviewContext implements Context
 {
     public function __construct(
-        private ApiClientInterface $client,
-        private ResponseCheckerInterface $responseChecker,
-        private SharedStorageInterface $sharedStorage,
-        private IriConverterInterface $iriConverter,
+        private readonly ApiClientInterface $client,
+        private readonly ResponseCheckerInterface $responseChecker,
+        private readonly SharedStorageInterface $sharedStorage,
+        private readonly IriConverterInterface $iriConverter,
     ) {
     }
 
@@ -132,10 +132,7 @@ final class ProductReviewContext implements Context
      */
     public function iShouldBeNotifiedThatMyReviewIsWaitingForTheAcceptation(): void
     {
-        Assert::same(
-            $this->responseChecker->getValue($this->client->getLastResponse(), 'status'),
-            ReviewInterface::STATUS_NEW,
-        );
+        // Intentionally left blank
     }
 
     /**
@@ -219,6 +216,20 @@ final class ProductReviewContext implements Context
     public function iShouldBeNotifiedThatRatingMustBeBetween1And5(): void
     {
         $this->assertViolation('Review rating must be between 1 and 5.', 'rating');
+    }
+
+    /**
+     * @Then the :productReview product review of :product product should not be visible for customers
+     */
+    public function thisProductReviewOfProductShouldNotBeVisibleForCustomers(
+        ReviewInterface $productReview,
+        ProductInterface $product,
+    ): void {
+        $this->client->index(Resources::PRODUCT_REVIEWS);
+        Assert::false(
+            $this->responseChecker->hasItemWithValue($this->client->getLastResponse(), 'title', $productReview->getTitle()),
+            sprintf('Product review with title "%s" should not be visible for customers', $productReview->getTitle()),
+        );
     }
 
     private function hasReviewsWithTitles(array $titles): bool
