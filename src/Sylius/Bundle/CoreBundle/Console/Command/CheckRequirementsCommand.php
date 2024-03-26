@@ -48,5 +48,3 @@ EOT
         return 0;
     }
 }
-
-class_alias(CheckRequirementsCommand::class, '\Sylius\Bundle\CoreBundle\Command\CheckRequirementsCommand');

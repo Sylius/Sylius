@@ -135,5 +135,3 @@ EOT
         ;
     }
 }
-
-class_alias(InstallCommand::class, '\Sylius\Bundle\CoreBundle\Command\InstallCommand');

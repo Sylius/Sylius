@@ -213,5 +213,3 @@ EOT
         return $this->getContainer()->get('sylius.repository.admin_user');
     }
 }
-
-class_alias(SetupCommand::class, '\Sylius\Bundle\CoreBundle\Command\SetupCommand');
