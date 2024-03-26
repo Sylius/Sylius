@@ -15,7 +15,7 @@ namespace Sylius\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
 use FriendsOfBehat\PageObjectExtension\Page\SymfonyPageInterface;
-use Sylius\Behat\Context\Ui\Admin\Helper\CodeValidationTrait;
+use Sylius\Behat\Context\Ui\Admin\Helper\ValidationTrait;
 use Sylius\Behat\NotificationType;
 use Sylius\Behat\Page\Admin\Product\UpdateSimpleProductPageInterface;
 use Sylius\Behat\Page\Admin\Taxon\CreateForParentPageInterface;
@@ -31,7 +31,7 @@ use Webmozart\Assert\Assert;
 
 final class ManagingTaxonsContext implements Context
 {
-    use CodeValidationTrait;
+    use ValidationTrait;
 
     public function __construct(
         private SharedStorageInterface $sharedStorage,

@@ -15,7 +15,7 @@ namespace Sylius\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
 use FriendsOfBehat\PageObjectExtension\Page\SymfonyPageInterface;
-use Sylius\Behat\Context\Ui\Admin\Helper\CodeValidationTrait;
+use Sylius\Behat\Context\Ui\Admin\Helper\ValidationTrait;
 use Sylius\Behat\Page\Admin\Crud\IndexPageInterface;
 use Sylius\Behat\Page\Admin\ShippingCategory\CreatePageInterface;
 use Sylius\Behat\Page\Admin\ShippingCategory\UpdatePageInterface;
@@ -24,7 +24,7 @@ use Webmozart\Assert\Assert;
 
 class ManagingShippingCategoriesContext implements Context
 {
-    use CodeValidationTrait;
+    use ValidationTrait;
 
     public function __construct(
         private IndexPageInterface $indexPage,

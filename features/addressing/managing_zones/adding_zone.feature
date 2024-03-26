@@ -47,9 +47,9 @@ Feature: Adding a new zone with country type members
         When I want to create a new zone consisting of zone
         And I name it "America"
         And I specify its code as "AM"
-        And I specify a too long zone member code
+        And I provide a too long zone member code
         And I add it
-        Then I should be notified that the zone member code is too long
+        Then I should be informed that the provided zone member code is too long
 
     @ui @javascript @api
     Scenario: Adding a zone with a country type member and a shipping scope

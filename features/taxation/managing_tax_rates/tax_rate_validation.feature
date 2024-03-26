@@ -24,7 +24,7 @@ Feature: Tax rate validation
         And I name it "Food and Beverage Tax Rates"
         And I specify a too long code
         And I try to add it
-        Then I should be notified that the code is too long
+        Then I should be notified that code is too long
 
     @ui @no-api
     Scenario: Trying to add a new tax rate without specifying its amount

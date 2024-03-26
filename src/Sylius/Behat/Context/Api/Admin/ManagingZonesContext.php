@@ -17,7 +17,7 @@ use ApiPlatform\Api\IriConverterInterface;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
-use Sylius\Behat\Context\Api\Admin\Helper\CodeValidationTrait;
+use Sylius\Behat\Context\Api\Admin\Helper\ValidationTrait;
 use Sylius\Behat\Context\Api\Resources;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Addressing\Model\CountryInterface;
@@ -28,7 +28,7 @@ use Webmozart\Assert\Assert;
 
 final class ManagingZonesContext implements Context
 {
-    use CodeValidationTrait;
+    use ValidationTrait;
 
     public function __construct(
         private ApiClientInterface $client,
@@ -105,9 +105,9 @@ final class ManagingZonesContext implements Context
     }
 
     /**
-     * @When I specify a too long zone member code
+     * @When I provide a too long zone member code
      */
-    public function iSpecifyATooLongZoneMemberCode(): void
+    public function iProvideATooLongZoneMemberCode(): void
     {
         $this->client->addSubResourceData('members', [
             'code' => str_repeat('a', $this->getMaxCodeLength() + 1),
@@ -461,7 +461,7 @@ final class ManagingZonesContext implements Context
     }
 
     /**
-     * @Then I should be notified that the zone member code is too long
+     * @Then I should be informed that the provided zone member code is too long
      */
     public function iShouldBeNotifiedThatTheZoneMemberCodeIsTooLong(): void
     {

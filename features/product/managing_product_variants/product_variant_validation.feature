@@ -91,7 +91,7 @@ Feature: Product variant validation
         And I set its price to "$80.00" for "United States" channel
         And I specify a too long code
         And I try to add it
-        Then I should be notified that the code is too long
+        Then I should be notified that code is too long
 
     @api @ui
     Scenario: Adding a new product variant with duplicated code

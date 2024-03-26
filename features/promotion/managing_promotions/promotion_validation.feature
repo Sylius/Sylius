@@ -24,7 +24,7 @@ Feature: Promotion validation
         And I name it "No-VAT promotion"
         And I specify a too long code
         And I try to add it
-        Then I should be notified that the code is too long
+        Then I should be notified that code is too long
 
     @api @ui
     Scenario: Trying to add a new promotion without specifying its name

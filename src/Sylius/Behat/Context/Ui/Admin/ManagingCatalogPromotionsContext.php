@@ -15,7 +15,7 @@ namespace Sylius\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
 use FriendsOfBehat\PageObjectExtension\Page\SymfonyPageInterface;
-use Sylius\Behat\Context\Ui\Admin\Helper\CodeValidationTrait;
+use Sylius\Behat\Context\Ui\Admin\Helper\ValidationTrait;
 use Sylius\Behat\Element\Admin\CatalogPromotion\FilterElementInterface;
 use Sylius\Behat\Element\Admin\CatalogPromotion\FormElementInterface;
 use Sylius\Behat\NotificationType;
@@ -35,7 +35,7 @@ use Webmozart\Assert\Assert;
 
 final class ManagingCatalogPromotionsContext implements Context
 {
-    use CodeValidationTrait;
+    use ValidationTrait;
 
     public function __construct(
         private IndexPageInterface $indexPage,

@@ -17,7 +17,7 @@ use ApiPlatform\Api\IriConverterInterface;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
-use Sylius\Behat\Context\Api\Admin\Helper\CodeValidationTrait;
+use Sylius\Behat\Context\Api\Admin\Helper\ValidationTrait;
 use Sylius\Behat\Context\Api\Resources;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Addressing\Model\CountryInterface;
@@ -27,7 +27,7 @@ use Webmozart\Assert\Assert;
 
 final class ManagingCountriesContext implements Context
 {
-    use CodeValidationTrait;
+    use ValidationTrait;
 
     public function __construct(
         private ApiClientInterface $client,
@@ -119,9 +119,9 @@ final class ManagingCountriesContext implements Context
     }
 
     /**
-     * @When I specify a too long province code
+     * @When I provide a too long province code
      */
-    public function iSpecifyATooLongProvinceCode(): void
+    public function iProvideATooLongProvinceCode(): void
     {
         $this->iSpecifyTheProvinceCodeAs(sprintf('XX-%s', str_repeat('A', $this->getMaxCodeLength())));
     }
@@ -370,9 +370,9 @@ final class ManagingCountriesContext implements Context
     }
 
     /**
-     * @Then I should be notified that the province code is too long
+     * @Then I should be informed that the provided province code is too long
      */
-    public function iShouldBeNotifiedThatTheProvinceCodeIsTooLong(): void
+    public function iShouldBeInformedThatTheProvinceCodeIsTooLong(): void
     {
         Assert::contains(
             $this->responseChecker->getError($this->client->getLastResponse()),

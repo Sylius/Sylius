@@ -22,7 +22,7 @@ Feature: Tax category validation
         And I name it "Food and Beverage"
         And I specify a too long code
         And I try to add it
-        Then I should be notified that the code is too long
+        Then I should be notified that code is too long
 
     @ui @api
     Scenario: Trying to add a new tax category without specifying its name

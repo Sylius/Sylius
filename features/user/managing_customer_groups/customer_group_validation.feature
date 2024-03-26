@@ -30,4 +30,4 @@ Feature: Customer group validation
         And I specify its name as "Retail"
         When I specify a too long code
         And I add it
-        Then I should be notified that the code is too long
+        Then I should be notified that code is too long

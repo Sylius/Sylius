@@ -16,7 +16,7 @@ namespace Sylius\Behat\Context\Api\Admin;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
-use Sylius\Behat\Context\Api\Admin\Helper\CodeValidationTrait;
+use Sylius\Behat\Context\Api\Admin\Helper\ValidationTrait;
 use Sylius\Behat\Context\Api\Resources;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Product\Model\ProductOptionInterface;
@@ -24,7 +24,7 @@ use Webmozart\Assert\Assert;
 
 final class ManagingProductOptionsContext implements Context
 {
-    use CodeValidationTrait;
+    use ValidationTrait;
 
     public function __construct(
         private ApiClientInterface $client,

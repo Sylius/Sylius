@@ -31,7 +31,7 @@ Feature: Taxon validation
         And I name it "T-Shirts" in "English (United States)"
         And I specify a too long code
         And I try to add it
-        Then I should be notified that the code is too long
+        Then I should be notified that code is too long
 
     @ui @no-api
     Scenario: Trying to add a taxon without specifying its slug

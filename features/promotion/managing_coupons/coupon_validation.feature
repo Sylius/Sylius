@@ -29,7 +29,7 @@ Feature: Coupon validation
         And I make it valid until "26.03.2017"
         And I specify a too long code
         And I try to add it
-        Then I should be notified that the code is too long
+        Then I should be notified that code is too long
 
     @ui @api
     Scenario: Trying to add a new coupon with usage limit below one

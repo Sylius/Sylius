@@ -17,7 +17,7 @@ use ApiPlatform\Api\IriConverterInterface;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
-use Sylius\Behat\Context\Api\Admin\Helper\CodeValidationTrait;
+use Sylius\Behat\Context\Api\Admin\Helper\ValidationTrait;
 use Sylius\Behat\Context\Api\Resources;
 use Sylius\Behat\Service\Converter\SectionAwareIriConverterInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
@@ -40,7 +40,7 @@ use Webmozart\Assert\Assert;
 
 final class ManagingPromotionsContext implements Context
 {
-    use CodeValidationTrait;
+    use ValidationTrait;
 
     public function __construct(
         private ApiClientInterface $client,

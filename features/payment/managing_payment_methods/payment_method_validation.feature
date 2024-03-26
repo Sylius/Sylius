@@ -24,7 +24,7 @@ Feature: Payment method validation
         And I name it "Paypal Express Checkout" in "English (United States)"
         And I specify a too long code
         And I add it
-        Then I should be notified that the code is too long
+        Then I should be notified that code is too long
 
     @ui @api
     Scenario: Trying to add a new payment method without specifying its name

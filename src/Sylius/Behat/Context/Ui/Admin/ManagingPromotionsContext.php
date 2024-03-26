@@ -15,7 +15,7 @@ namespace Sylius\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
 use FriendsOfBehat\PageObjectExtension\Page\SymfonyPageInterface;
-use Sylius\Behat\Context\Ui\Admin\Helper\CodeValidationTrait;
+use Sylius\Behat\Context\Ui\Admin\Helper\ValidationTrait;
 use Sylius\Behat\Element\Admin\Promotion\FormElementInterface;
 use Sylius\Behat\NotificationType;
 use Sylius\Behat\Page\Admin\Crud\IndexPageInterface as IndexPageCouponInterface;
@@ -31,7 +31,7 @@ use Webmozart\Assert\Assert;
 
 final class ManagingPromotionsContext implements Context
 {
-    use CodeValidationTrait;
+    use ValidationTrait;
 
     public function __construct(
         private SharedStorageInterface $sharedStorage,

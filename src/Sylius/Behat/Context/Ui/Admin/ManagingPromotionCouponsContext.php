@@ -15,7 +15,7 @@ namespace Sylius\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
 use FriendsOfBehat\PageObjectExtension\Page\SymfonyPageInterface;
-use Sylius\Behat\Context\Ui\Admin\Helper\CodeValidationTrait;
+use Sylius\Behat\Context\Ui\Admin\Helper\ValidationTrait;
 use Sylius\Behat\NotificationType;
 use Sylius\Behat\Page\Admin\PromotionCoupon\CreatePageInterface;
 use Sylius\Behat\Page\Admin\PromotionCoupon\GeneratePageInterface;
@@ -29,7 +29,7 @@ use Webmozart\Assert\Assert;
 
 final class ManagingPromotionCouponsContext implements Context
 {
-    use CodeValidationTrait;
+    use ValidationTrait;
 
     public function __construct(
         private CreatePageInterface $createPage,

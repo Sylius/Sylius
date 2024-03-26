@@ -251,9 +251,9 @@ final class ManagingCountriesContext implements Context
     }
 
     /**
-     * @When I specify a too long province code
+     * @When I provide a too long province code
      */
-    public function iSpecifyTooLongProvinceCode(): void
+    public function iProvideTooLongProvinceCode(): void
     {
         $this->iSpecifyTheProvinceCode(sprintf('US-%s', str_repeat('A', self::MAX_PROVINCE_CODE_LENGTH)));
     }
@@ -303,9 +303,9 @@ final class ManagingCountriesContext implements Context
     }
 
     /**
-     * @Then I should be notified that the province code is too long
+     * @Then I should be informed that the provided province code is too long
      */
-    public function iShouldBeNotifiedThatTheCodeIsTooLong(): void
+    public function iShouldBeInformedThatTheCodeIsTooLong(): void
     {
         Assert::contains($this->updatePage->getValidationMessage('code'), 'The code must not be longer than');
     }

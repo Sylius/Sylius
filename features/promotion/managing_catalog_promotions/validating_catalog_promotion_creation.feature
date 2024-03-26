@@ -26,7 +26,7 @@ Feature: Validating a catalog promotion creation
         And I describe it as "This promotion gives a 50% discount on all products" in "English (United States)"
         And I specify a too long code
         And I try to add it
-        Then I should be notified that the code is too long
+        Then I should be notified that code is too long
 
     @api @ui
     Scenario: Trying to create a catalog promotion with taken code

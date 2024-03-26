@@ -31,7 +31,7 @@ Feature: Channel validation
         And I name it "Mobile channel"
         And I specify a too long code
         And I try to add it
-        Then I should be notified that the code is too long
+        Then I should be notified that code is too long
 
     @api @ui
     Scenario: Trying to add a new channel without specifying its name
@@ -66,7 +66,7 @@ Feature: Channel validation
         And I specify its code as "MOBILE"
         And I specify its theme name as a too long string
         And I try to add it
-        Then I should be notified that theme name is too long
+        Then I should be notified that "theme name" is too long
         And channel with code "MOBILE" should not be added
 
     @api @no-ui
@@ -75,7 +75,7 @@ Feature: Channel validation
         And I specify its code as "MOBILE"
         And I specify its tax calculation strategy as a too long string
         And I try to add it
-        Then I should be notified that tax calculation strategy is too long
+        Then I should be notified that "tax calculation strategy" is too long
         And channel with code "MOBILE" should not be added
 
     @api @ui
@@ -102,7 +102,7 @@ Feature: Channel validation
         And I specify its code as "MOBILE"
         And I specify its contact email as a too long string
         And I try to add it
-        Then I should be notified that contact email is too long
+        Then I should be notified that "contact email" is too long
         And channel with code "MOBILE" should not be added
 
     @api @ui
@@ -111,7 +111,7 @@ Feature: Channel validation
         And I specify its code as "MOBILE"
         And I specify its contact phone number as a too long string
         And I try to add it
-        Then I should be notified that contact phone number is too long
+        Then I should be notified that "contact phone number" is too long
         And channel with code "MOBILE" should not be added
 
     @api @ui

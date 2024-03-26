@@ -92,7 +92,7 @@ Feature: Products validation
         And I name it "Dice Brewing" in "English (United States)"
         And I specify a too long code
         And I try to add it
-        Then I should be notified that the code is too long
+        Then I should be notified that code is too long
 
     @ui @api
     Scenario: Adding a new configurable product with duplicated code

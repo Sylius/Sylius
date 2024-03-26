@@ -15,7 +15,7 @@ namespace Sylius\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
 use FriendsOfBehat\PageObjectExtension\Page\SymfonyPageInterface;
-use Sylius\Behat\Context\Ui\Admin\Helper\CodeValidationTrait;
+use Sylius\Behat\Context\Ui\Admin\Helper\ValidationTrait;
 use Sylius\Behat\Element\Admin\Channel\DiscountedProductsCheckingPeriodInputElementInterface;
 use Sylius\Behat\Element\Admin\Channel\ExcludeTaxonsFromShowingLowestPriceInputElementInterface;
 use Sylius\Behat\Element\Admin\Channel\LowestPriceFlagElementInterface;
@@ -34,7 +34,7 @@ use Webmozart\Assert\Assert;
 
 final class ManagingChannelsContext implements Context
 {
-    use CodeValidationTrait;
+    use ValidationTrait;
 
     public function __construct(
         private IndexPageInterface $indexPage,
@@ -715,17 +715,6 @@ final class ManagingChannelsContext implements Context
     public function theRequiredAddressInTheCheckoutForThisChannelShouldBe(string $type): void
     {
         Assert::same($this->shippingAddressInCheckoutRequiredElement->getRequiredAddressTypeInCheckout(), $type);
-    }
-
-    /**
-     * @Then /^I should be notified that ([^"]+) is too long$/
-     */
-    public function iShouldBeNotifiedThatFieldValueIsTooLong(string $field): void
-    {
-        Assert::contains(
-            $this->createPage->getValidationMessage(StringInflector::nameToLowercaseCode($field)),
-            'must not be longer than 255 characters.',
-        );
     }
 
     private function assertChannelState(ChannelInterface $channel, bool $state): void

@@ -20,7 +20,7 @@ Feature: Locale validation
         When I want to create a new locale
         And I specify a too long code
         And I try to add it
-        Then I should be notified that the code is too long
+        Then I should be notified that code should be no longer than 10 characters
 
     @api @no-ui
     Scenario: Trying to add a locale with an invalid code

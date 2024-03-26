@@ -15,7 +15,7 @@ namespace Sylius\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
 use FriendsOfBehat\PageObjectExtension\Page\SymfonyPageInterface;
-use Sylius\Behat\Context\Ui\Admin\Helper\CodeValidationTrait;
+use Sylius\Behat\Context\Ui\Admin\Helper\ValidationTrait;
 use Sylius\Behat\NotificationType;
 use Sylius\Behat\Page\Admin\ProductVariant\CreatePageInterface;
 use Sylius\Behat\Page\Admin\ProductVariant\GeneratePageInterface;
@@ -33,7 +33,7 @@ final class ManagingProductVariantsContext implements Context
 {
     private const HUGE_NUMBER = '2147483647';
 
-    use CodeValidationTrait;
+    use ValidationTrait;
 
     public function __construct(
         private SharedStorageInterface $sharedStorage,

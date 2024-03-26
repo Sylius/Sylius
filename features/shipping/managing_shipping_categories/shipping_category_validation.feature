@@ -23,7 +23,7 @@ Feature: Shipping category validation
         And I name it "Standard"
         And I specify a too long code
         And I try to add it
-        Then I should be notified that the code is too long
+        Then I should be notified that code is too long
 
     @ui @api
     Scenario: Trying to add a new shipping category without specifying its name
