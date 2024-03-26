@@ -543,6 +543,7 @@
         <service id="sylius.behat.context.ui.shop.product_review" class="Sylius\Behat\Context\Ui\Shop\ProductReviewContext">
             <argument type="service" id="sylius.behat.page.shop.product_reviews.create" />
             <argument type="service" id="sylius.behat.notification_checker" />
+            <argument type="service" id="sylius.behat.page.shop.product_reviews.index" />
         </service>
 
         <service id="sylius.behat.context.ui.shop.registration" class="Sylius\Behat\Context\Ui\Shop\RegistrationContext">
