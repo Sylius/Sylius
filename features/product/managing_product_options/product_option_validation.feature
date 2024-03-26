@@ -20,9 +20,9 @@ Feature: Product option validation
 
     @ui @api
     Scenario: Trying to add a new product option with a too long code
-        Given I want to create a new product option
+        When I want to create a new product option
         And I name it "T-Shirt size" in "English (United States)"
-        When I specify a too long code
+        And I specify a too long code
         And I try to add it
         Then I should be notified that the code is too long
 

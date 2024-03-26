@@ -20,9 +20,9 @@ Feature: Tax rate validation
 
     @ui @api
     Scenario: Trying to add a new tax rate with a too long code
-        Given I want to create a new tax rate
+        When I want to create a new tax rate
         And I name it "Food and Beverage Tax Rates"
-        When I specify a too long code
+        And I specify a too long code
         And I try to add it
         Then I should be notified that the code is too long
 

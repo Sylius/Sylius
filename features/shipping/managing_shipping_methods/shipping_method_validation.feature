@@ -21,9 +21,9 @@ Feature: Shipping method validation
 
     @ui @api
     Scenario: Trying to add a new shipping method with a too long code
-        Given I want to create a new shipping method
+        When I want to create a new shipping method
         And I name it "FedEx Carrier" in "English (United States)"
-        When I specify a too long code
+        And I specify a too long code
         And I try to add it
         Then I should be notified that the code is too long
 

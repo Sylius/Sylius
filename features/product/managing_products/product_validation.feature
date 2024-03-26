@@ -88,9 +88,9 @@ Feature: Products validation
 
     @ui @api
     Scenario: Adding a new configurable product with too long code
-        Given I want to create a new configurable product
+        When I want to create a new configurable product
         And I name it "Dice Brewing" in "English (United States)"
-        When I specify a too long code
+        And I specify a too long code
         And I try to add it
         Then I should be notified that the code is too long
 

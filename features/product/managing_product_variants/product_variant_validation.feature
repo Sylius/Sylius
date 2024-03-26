@@ -87,9 +87,9 @@ Feature: Product variant validation
 
     @api @ui
     Scenario: Adding a new product variant with a too long code
-        Given I want to create a new variant of this product
+        When I want to create a new variant of this product
         And I set its price to "$80.00" for "United States" channel
-        When I specify a too long code
+        And I specify a too long code
         And I try to add it
         Then I should be notified that the code is too long
 

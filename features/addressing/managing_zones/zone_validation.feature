@@ -20,9 +20,9 @@ Feature: Zone validation
 
     @ui @api
     Scenario: Trying to add a zone with a too long code
-        Given I want to create a new zone consisting of country
+        When I want to create a new zone consisting of country
         And I name it "European Union"
-        When I specify a too long code
+        And I specify a too long code
         And I try to add it
         Then I should be notified that the code is too long
 

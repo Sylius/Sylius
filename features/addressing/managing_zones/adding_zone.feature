@@ -44,10 +44,10 @@ Feature: Adding a new zone with country type members
 
     @no-ui @api
     Scenario: Adding a zone with a zone type member, but the member's code is too long
-        Given I want to create a new zone consisting of zone
+        When I want to create a new zone consisting of zone
         And I name it "America"
         And I specify its code as "AM"
-        When I specify a too long zone member code
+        And I specify a too long zone member code
         And I add it
         Then I should be notified that the zone member code is too long
 

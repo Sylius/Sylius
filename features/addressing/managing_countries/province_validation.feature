@@ -19,9 +19,9 @@ Feature: Province validation
 
     @ui @mink:chromedriver @api
     Scenario: Trying to add a new province with a too long code
-        Given I want to create a new province in country "United Kingdom"
+        When I want to create a new province in country "United Kingdom"
         And I name the province "Scotland"
-        When I specify a too long province code
+        And I specify a too long province code
         And I try to save my changes
         Then I should be notified that the province code is too long
 
