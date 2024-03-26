@@ -262,7 +262,7 @@ ApiBundle is no longer experimental and is now following the same support policy
 
 1. The `status` key has been removed from shop product review endpoints' responses.
 
-1. The `author` key has been changed form shop product review endpoints' responses:
+1. The `author` key has been changed in shop product review endpoints' responses:
 
     ```diff
     {
