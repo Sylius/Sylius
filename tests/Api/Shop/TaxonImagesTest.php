@@ -38,7 +38,7 @@ final class TaxonImagesTest extends JsonApiTestCase
 
         $this->assertResponse(
             $this->client->getResponse(),
-            'shop/taxon_image/get_taxon_image_response',
+            'shop/taxon_image/get_taxon_image',
             Response::HTTP_OK,
         );
     }
@@ -62,7 +62,7 @@ final class TaxonImagesTest extends JsonApiTestCase
 
         $this->assertResponse(
             $this->client->getResponse(),
-            'shop/taxon_image/get_taxon_image_with_image_filter_response',
+            'shop/taxon_image/get_taxon_image_with_image_filter',
             Response::HTTP_OK,
         );
     }
