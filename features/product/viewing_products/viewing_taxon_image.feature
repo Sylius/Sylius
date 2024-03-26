@@ -1,8 +1,8 @@
 @viewing_products
-Feature: Viewing a product's image on a product details page
-    In order to see images of a product
+Feature: Viewing a taxon's image on a taxon details page
+    In order to see images of a taxon
     As a Visitor
-    I want to be able to view an image of a single product
+    I want to be able to view an image of a taxon
 
     Background:
         Given the store operates on a single channel in "United States"
