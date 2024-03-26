@@ -31,7 +31,6 @@ final class ProductImagesTest extends JsonApiTestCase
     public function it_gets_a_product_image(): void
     {
         $fixtures = $this->loadFixturesFromFiles([
-            'authentication/api_administrator.yaml',
             'product/product_image.yaml',
         ]);
 
@@ -54,7 +53,6 @@ final class ProductImagesTest extends JsonApiTestCase
     public function it_gets_a_product_image_with_an_image_filter(): void
     {
         $fixtures = $this->loadFixturesFromFiles([
-            'authentication/api_administrator.yaml',
             'product/product_image.yaml',
         ]);
 
@@ -78,7 +76,6 @@ final class ProductImagesTest extends JsonApiTestCase
     public function it_prevents_getting_a_product_image_with_an_invalid_image_filter(): void
     {
         $fixtures = $this->loadFixturesFromFiles([
-            'authentication/api_administrator.yaml',
             'product/product_image.yaml',
         ]);
 
