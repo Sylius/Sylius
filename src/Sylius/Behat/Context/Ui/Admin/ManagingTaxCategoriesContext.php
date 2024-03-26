@@ -14,6 +14,8 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
+use FriendsOfBehat\PageObjectExtension\Page\SymfonyPageInterface;
+use Sylius\Behat\Context\Ui\Admin\Helper\ValidationTrait;
 use Sylius\Behat\Page\Admin\Crud\IndexPageInterface;
 use Sylius\Behat\Page\Admin\TaxCategory\CreatePageInterface;
 use Sylius\Behat\Page\Admin\TaxCategory\UpdatePageInterface;
@@ -23,6 +25,8 @@ use Webmozart\Assert\Assert;
 
 final class ManagingTaxCategoriesContext implements Context
 {
+    use ValidationTrait;
+
     public function __construct(
         private IndexPageInterface $indexPage,
         private CreatePageInterface $createPage,
@@ -60,7 +64,7 @@ final class ManagingTaxCategoriesContext implements Context
      * @When I specify its code as :code
      * @When I do not specify its code
      */
-    public function iSpecifyItsCodeAs($code = null)
+    public function iSpecifyItsCodeAs(?string $code = null): void
     {
         $this->createPage->specifyCode($code ?? '');
     }
@@ -206,5 +210,10 @@ final class ManagingTaxCategoriesContext implements Context
     public function iShouldSeeTaxCategoriesInTheList(): void
     {
         Assert::same($this->indexPage->countItems(), 1);
+    }
+
+    protected function resolveCurrentPage(): SymfonyPageInterface
+    {
+        return $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
     }
 }

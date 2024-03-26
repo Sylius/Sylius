@@ -16,6 +16,7 @@ namespace Sylius\Behat\Context\Api\Admin;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
+use Sylius\Behat\Context\Api\Admin\Helper\ValidationTrait;
 use Sylius\Behat\Context\Api\Resources;
 use Sylius\Behat\Service\Converter\SectionAwareIriConverter;
 use Sylius\Behat\Service\SharedStorageInterface;
@@ -27,6 +28,8 @@ use Webmozart\Assert\Assert;
 
 final class ManagingPaymentMethodsContext implements Context
 {
+    use ValidationTrait;
+
     public const SORT_TYPES = ['ascending' => 'asc', 'descending' => 'desc'];
 
     public function __construct(

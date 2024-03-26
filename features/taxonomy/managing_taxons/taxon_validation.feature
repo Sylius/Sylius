@@ -25,6 +25,14 @@ Feature: Taxon validation
         And I try to add it
         Then I should be notified that name is required
 
+    @ui @api
+    Scenario: Trying to add a taxon with a too long code
+        When I want to create a new taxon
+        And I name it "T-Shirts" in "English (United States)"
+        And I specify a too long code
+        And I try to add it
+        Then I should be notified that code is too long
+
     @ui @no-api
     Scenario: Trying to add a taxon without specifying its slug
         When I want to create a new taxon

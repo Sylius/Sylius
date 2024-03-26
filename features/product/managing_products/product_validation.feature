@@ -87,6 +87,14 @@ Feature: Products validation
         And product with name "Dice Brewing" should not be added
 
     @ui @api
+    Scenario: Adding a new configurable product with too long code
+        When I want to create a new configurable product
+        And I name it "Dice Brewing" in "English (United States)"
+        And I specify a too long code
+        And I try to add it
+        Then I should be notified that code is too long
+
+    @ui @api
     Scenario: Adding a new configurable product with duplicated code
         Given the store has a product "7 Wonders" with code "AWESOME_GAME"
         When I want to create a new configurable product

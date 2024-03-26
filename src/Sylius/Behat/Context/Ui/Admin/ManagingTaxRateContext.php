@@ -14,6 +14,8 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
+use FriendsOfBehat\PageObjectExtension\Page\SymfonyPageInterface;
+use Sylius\Behat\Context\Ui\Admin\Helper\ValidationTrait;
 use Sylius\Behat\Element\Admin\TaxRate\FilterElementInterface;
 use Sylius\Behat\Page\Admin\Crud\IndexPageInterface;
 use Sylius\Behat\Page\Admin\TaxRate\CreatePageInterface;
@@ -24,6 +26,8 @@ use Webmozart\Assert\Assert;
 
 final class ManagingTaxRateContext implements Context
 {
+    use ValidationTrait;
+
     public function __construct(
         private IndexPageInterface $indexPage,
         private CreatePageInterface $createPage,
@@ -45,7 +49,7 @@ final class ManagingTaxRateContext implements Context
      * @When I specify its code as :code
      * @When I do not specify its code
      */
-    public function iSpecifyItsCodeAs($code = null)
+    public function iSpecifyItsCodeAs(?string $code = null): void
     {
         $this->createPage->specifyCode($code ?? '');
     }
@@ -423,5 +427,10 @@ final class ManagingTaxRateContext implements Context
         $this->filterElement->specifyDateFrom($dateType, $fromDate);
         $this->filterElement->specifyDateTo($dateType, $toDate);
         $this->filterElement->filter();
+    }
+
+    protected function resolveCurrentPage(): SymfonyPageInterface
+    {
+        return $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
     }
 }
