@@ -101,6 +101,16 @@ liip_imagine:
             filters:
                 thumbnail: { size: [640, 480], mode: outbound }
 
+sylius_payum:
+    gateway_config:
+        validation_groups:
+            paypal_express_checkout:
+                - 'sylius'
+                - 'sylius_paypal_express_checkout'
+            stripe_checkout:
+                - 'sylius'
+                - 'sylius_stripe_checkout'
+
 payum:
     storages:
         "%sylius.model.order.class%": { doctrine: orm }
