@@ -62,6 +62,7 @@ final class Configuration implements ConfigurationInterface
                     ->setDeprecated('sylius/sylius', '1.10', 'The "%path%.%node%" parameter is deprecated and will be removed in 2.0.')
                     ->defaultFalse()
                 ->end()
+                ->integerNode('max_int_value')->defaultValue(2147483647)->end()
                 ->arrayNode('orders_statistics')
                     ->children()
                         ->arrayNode('intervals_map')

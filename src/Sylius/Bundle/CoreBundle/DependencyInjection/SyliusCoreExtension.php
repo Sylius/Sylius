@@ -72,6 +72,7 @@ final class SyliusCoreExtension extends AbstractResourceExtension implements Pre
         $container->setParameter('sylius_core.catalog_promotions.batch_size', $config['catalog_promotions']['batch_size']);
         $container->setParameter('sylius_core.price_history.batch_size', $config['price_history']['batch_size']);
         $container->setParameter('sylius_core.orders_statistics.intervals_map', $config['orders_statistics']['intervals_map'] ?? []);
+        $container->setParameter('sylius_core.max_int_value', $config['max_int_value']);
 
         /** @var string $env */
         $env = $container->getParameter('kernel.environment');
