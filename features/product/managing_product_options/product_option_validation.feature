@@ -18,6 +18,13 @@ Feature: Product option validation
         Then I should be notified that code is required
         And the product option with name "T-Shirt size" should not be added
 
+    @no-ui @api
+    Scenario: Trying to add a new product option translation in unexsting locale
+        When I want to modify the "T-Shirt color" product option
+        And I name it "T-Shirt color" in "French (France)"
+        And I try to save my changes
+        Then I should be notified that the locale is not available
+
     @ui @api
     Scenario: Trying to add a new product option with a too long code
         When I want to create a new product option

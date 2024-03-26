@@ -111,6 +111,17 @@ final class ManagingProductOptionsContext implements Context
     }
 
     /**
+     * @When I add the :value option value identified by :code in :localeCode
+     */
+    public function iAddTheOptionValueWithCodeAndValueInLocale(string $value, string $code, string $localeCode): void
+    {
+        $this->client->addSubResourceData(
+            'values',
+            ['code' => $code, 'translations' => [$localeCode => ['value' => $value]]],
+        );
+    }
+
+    /**
      * @When I do not add an option value
      */
     public function iDoNotAddAnOptionValue(): void
