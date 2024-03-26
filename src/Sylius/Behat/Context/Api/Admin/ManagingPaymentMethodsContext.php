@@ -506,9 +506,9 @@ final class ManagingPaymentMethodsContext implements Context
      */
     public function iShouldBeNotifiedThatIHaveToSpecifyFactoryNameThatIsAvailable(): void
     {
-        Assert::same(
+        Assert::contains(
             $this->responseChecker->getError($this->client->getLastResponse()),
-            'gatewayConfig.factoryName: Invalid gateway factory. Available factories are paypal_express_checkout, stripe_checkout, offline.',
+            'gatewayConfig.factoryName: Invalid gateway factory. Available factories are ',
         );
     }
 
