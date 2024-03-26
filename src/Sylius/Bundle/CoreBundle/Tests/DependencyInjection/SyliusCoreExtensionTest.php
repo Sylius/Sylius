@@ -169,6 +169,16 @@ final class SyliusCoreExtensionTest extends AbstractExtensionTestCase
     }
 
     /** @test */
+    public function it_loads_max_int_value_properly(): void
+    {
+        $this->container->setParameter('kernel.environment', 'dev');
+
+        $this->load(['max_int_value' => 200]);
+
+        $this->assertContainerBuilderHasParameter('sylius_core.max_int_value', 200);
+    }
+
+    /** @test */
     public function it_loads_default_batch_size_properly(): void
     {
         $this->container->setParameter('kernel.environment', 'dev');

@@ -23,22 +23,31 @@
         </constraint>
         <property name="price">
             <constraint name="Range">
-                <option name="min">0.00</option>
+                <option name="min">0</option>
                 <option name="minMessage">sylius.channel_pricing.price.min</option>
+                <option name="groups">sylius</option>
+            </constraint>
+            <constraint name="Sylius\Bundle\CoreBundle\Validator\Constraints\MaxInteger">
                 <option name="groups">sylius</option>
             </constraint>
         </property>
         <property name="originalPrice">
             <constraint name="Range">
-                <option name="min">0.00</option>
+                <option name="min">0</option>
                 <option name="minMessage">sylius.channel_pricing.price.min</option>
+                <option name="groups">sylius</option>
+            </constraint>
+            <constraint name="Sylius\Bundle\CoreBundle\Validator\Constraints\MaxInteger">
                 <option name="groups">sylius</option>
             </constraint>
         </property>
         <property name="minimumPrice">
             <constraint name="Range">
-                <option name="min">0.00</option>
+                <option name="min">0</option>
                 <option name="minMessage">sylius.channel_pricing.price.min</option>
+                <option name="groups">sylius</option>
+            </constraint>
+            <constraint name="Sylius\Bundle\CoreBundle\Validator\Constraints\MaxInteger">
                 <option name="groups">sylius</option>
             </constraint>
         </property>

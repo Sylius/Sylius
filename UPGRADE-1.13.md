@@ -779,6 +779,13 @@ and use one of the new attributes accordingly to the type of your class, e.g.:
                     - 'your_custom_validation_group'
     ```
 
+1. The new parameter has been added to specify the max integer value that could be used, by default the value is `2147483647` if you want to change it you need to add the following configuration to your `config/packages/_sylius.yaml` file:
+
+    ```yaml
+    sylius_core:
+        max_int_value: 9223372036854775807
+    ```
+
 ### State Machine
 
 1. We have configured all existing Sylius graphs to be usable with the Symfony Workflow out of the box.
