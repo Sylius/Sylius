@@ -79,5 +79,12 @@
                 </option>
             </constraint>
         </property>
+        <property name="phoneNumber">
+            <constraint name="Length">
+                <option name="max">255</option>
+                <option name="maxMessage">sylius.customer.phone_number.max</option>
+                <option name="groups">sylius</option>
+            </constraint>
+        </property>
     </class>
 </constraint-mapping>

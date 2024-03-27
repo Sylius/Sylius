@@ -52,7 +52,7 @@ Feature: Account registration
         Then I should be notified that the password is required
         And I should not be logged in
 
-    @ui
+    @ui @no-api
     Scenario: Trying to register a new account without confirming password
         When I want to register a new account
         And I specify the first name as "Saul"
@@ -74,7 +74,7 @@ Feature: Account registration
         Then I should be notified that the email is required
         And I should not be logged in
 
-    @api
+    @no-ui @api
     Scenario: Trying to register a new account without providing required fields
         When I want to register a new account
         And I specify the email as "goodman@gmail.com"

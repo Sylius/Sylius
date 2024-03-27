@@ -79,6 +79,30 @@ final class CustomerContext implements Context
     }
 
     /**
+     * @When I specify the :firstOrLast name as null value
+     */
+    public function iSpecifyTheFirstOrLastNameAsNull(string $firstOrLast): void
+    {
+        $this->client->addRequestData($firstOrLast . 'Name', null);
+    }
+
+    /**
+     * @When I specify the gender as a wrong value
+     */
+    public function iSpecifyTheFirstNameAsWrongValue(): void
+    {
+        $this->client->addRequestData('gender', 'wrong_value');
+    }
+
+    /**
+     * @When I specify the phone number as huge value
+     */
+    public function iSpecifyThePhoneNumberAsHugeValue(): void
+    {
+        $this->client->addRequestData('phoneNumber', str_repeat('1', 256));
+    }
+
+    /**
      * @When I specify the last name as :lastName
      * @When I remove the last name
      */
@@ -236,6 +260,32 @@ final class CustomerContext implements Context
     }
 
     /**
+     * @Then my gender should still be :gender
+     */
+    public function myGenderShouldBe(string $gender): void
+    {
+        /** @var ShopUserInterface $shopUser */
+        $shopUser = $this->sharedStorage->get('user');
+
+        $response = $this->client->show(Resources::CUSTOMERS, (string) $shopUser->getCustomer()->getId());
+
+        Assert::true($this->responseChecker->hasValue($response, 'gender', $gender));
+    }
+
+    /**
+     * @Then my phone number should still be :phoneNumber
+     */
+    public function myPhoneNumberShouldBe(string $phoneNumber): void
+    {
+        /** @var ShopUserInterface $shopUser */
+        $shopUser = $this->sharedStorage->get('user');
+
+        $response = $this->client->show(Resources::CUSTOMERS, (string) $shopUser->getCustomer()->getId());
+
+        Assert::true($this->responseChecker->hasValue($response, 'phoneNumber', $phoneNumber));
+    }
+
+    /**
      * @Then I should be notified that the first name is required
      */
     public function iShouldBeNotifiedThatFirstNameIsRequired(): void
@@ -243,6 +293,39 @@ final class CustomerContext implements Context
         Assert::true($this->isViolationWithMessageInResponse(
             $this->client->getLastResponse(),
             'First name must be at least 2 characters long.',
+        ));
+    }
+
+    /**
+     * @Then I should be (also) notified that the :firstOrLast name needs to be provided
+     */
+    public function iShouldBeNotifiedThatFirstOrLastNameNeedsToBeProvided(string $firstOrLast): void
+    {
+        Assert::true($this->isViolationWithMessageInResponse(
+            $this->client->getLastResponse(),
+            sprintf('Please enter your %s name.', $firstOrLast),
+        ));
+    }
+
+    /**
+     * @Then I should be notified that my gender is invalid
+     */
+    public function iShouldBeNotifiedThatGenderIsInvalid(): void
+    {
+        Assert::true($this->isViolationWithMessageInResponse(
+            $this->client->getLastResponse(),
+            'The value you selected is not a valid choice.',
+        ));
+    }
+
+    /**
+     * @Then I should be notified that the phone number is too long
+     */
+    public function iShouldBeNotifiedThatThePhoneNumberIsTooLong(): void
+    {
+        Assert::true($this->isViolationWithMessageInResponse(
+            $this->client->getLastResponse(),
+            'Phone number must not be longer than 255 characters.',
         ));
     }
 
@@ -282,7 +365,7 @@ final class CustomerContext implements Context
     /**
      * @Then I should be notified that the email is invalid
      */
-    public function iShouldBeNotifiedThatElementIsInvalid(): void
+    public function iShouldBeNotifiedThatEmailIsInvalid(): void
     {
         Assert::true($this->isViolationWithMessageInResponse(
             $this->client->getLastResponse(),
