@@ -3,48 +3,45 @@
 {% block title %}{{ 'sylius.ui.my_account'|trans }} | {{ parent() }}{% endblock %}
 
 {% block breadcrumb %}
-    <div class="ui breadcrumb">
-        <a href="{{ path('sylius_shop_homepage') }}" class="section">{{ 'sylius.ui.home'|trans }}</a>
-        <div class="divider"> / </div>
-        <div class="active section">{{ 'sylius.ui.my_account'|trans }}</div>
+    <div>
+        <a href="{{ path('sylius_shop_homepage') }}">{{ 'sylius.ui.home'|trans }}</a>
+        <div>{{ 'sylius.ui.my_account'|trans }}</div>
     </div>
 {% endblock %}
 
 {% block subcontent %}
-    <h1 class="ui dividing header">
-        {{ 'sylius.ui.my_account'|trans }}
-        <div class="sub header">{{ 'sylius.ui.manage_your_personal_information_and_preferences'|trans }}</div>
-    </h1>
+    <h1>{{ 'sylius.ui.my_account'|trans }}</h1>
+    <div>{{ 'sylius.ui.manage_your_personal_information_and_preferences'|trans }}</div>
 
     {{ sylius_template_event('sylius.shop.account.dashboard.after_content_header', {'customer': customer}) }}
 
-    <div class="ui large list" id="customer-information" {{ sylius_test_html_attribute('customer-information') }}>
-        <div class="item">
+    <div {{ sylius_test_html_attribute('customer-information') }}>
+        <div>
             {{ customer.fullName }}
         </div>
-        <div class="item">
+        <div>
             <strong>
                 {{ customer.email }}
             </strong>
         </div>
-        <div class="item">
+        <div>
             {% if customer.user.verified %}
-                <span class="ui icon green basic label"><i class="checkmark icon"></i> {{ 'sylius.ui.verified'|trans }}</span>
+                <span>{{ 'sylius.ui.verified'|trans }}</span>
             {% else %}
-                <span class="ui icon red basic label"><i class="remove icon"></i> {{ 'sylius.ui.not_verified'|trans }}</span>
+                <span>{{ 'sylius.ui.not_verified'|trans }}</span>
             {% endif %}
         </div>
     </div>
 
     {{ sylius_template_event('sylius.shop.account.dashboard.after_information', {'customer': customer}) }}
 
-    <div class="ui text menu">
-        <a href="{{ path('sylius_shop_account_profile_update') }}" class="item"><i class="pencil icon"></i> {{ 'sylius.ui.edit'|trans }}</a>
-        <a href="{{ path('sylius_shop_account_change_password') }}" class="item"><i class="lock icon"></i> {{ 'sylius.ui.change_password'|trans }}</a>
+    <div>
+        <a href="{{ path('sylius_shop_account_profile_update') }}">{{ 'sylius.ui.edit'|trans }}</a>
+        <a href="{{ path('sylius_shop_account_change_password') }}">{{ 'sylius.ui.change_password'|trans }}</a>
         {% if not customer.user.verified %}
-            <form class="item" id="verification-form" {{ sylius_test_html_attribute('verification-form') }} action="{{ path('sylius_shop_user_request_verification_token') }}" method="post">
-                <button type="submit" class="ui basic icon mini button" {{ sylius_test_html_attribute('verification-button') }}>
-                    <i class="checkmark icon"></i> {{ 'sylius.ui.verify'|trans }}
+            <form {{ sylius_test_html_attribute('verification-form') }} action="{{ path('sylius_shop_user_request_verification_token') }}" method="post">
+                <button type="submit" {{ sylius_test_html_attribute('verification-button') }}>
+                    {{ 'sylius.ui.verify'|trans }}
                 </button>
             </form>
         {% endif %}

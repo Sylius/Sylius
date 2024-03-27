@@ -1,0 +1,12 @@
+@include media-breakpoint-up(lg) {
+  .checkout-sidebar::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    z-index: -1;
+    width: 50vw;
+    height: 200%;
+    background: #F8F9FA;
+  }
+}

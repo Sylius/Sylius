@@ -134,13 +134,13 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
             throw new ElementNotFoundException($this->getSession(), 'Field element');
         }
 
-        $validationMessage = $element->find('css', '.sylius-validation-error');
+        $validationMessage = $element->find('css', '[data-test-validation-error]');
         if (null === $validationMessage) {
             throw new ElementNotFoundException(
                 $this->getSession(),
                 'Validation message',
                 'css',
-                '.sylius-validation-error',
+                '[data-test-validation-error]',
             );
         }
 

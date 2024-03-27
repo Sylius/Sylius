@@ -34,7 +34,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
 
     public function hasFormValidationError(string $expectedMessage): bool
     {
-        $formValidationErrors = $this->getDocument()->find('css', 'form > div.ui.red.label.sylius-validation-error');
+        $formValidationErrors = $this->getDocument()->find('css', 'form > div.ui.red.label[data-test-validation-error]');
         if (null === $formValidationErrors) {
             return false;
         }

@@ -30,9 +30,9 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
 
     public function checkValidationMessageForMembers(string $message): bool
     {
-        $membersValidationElement = $this->getElement('ui_segment')->find('css', '.sylius-validation-error');
+        $membersValidationElement = $this->getElement('ui_segment')->find('css', '[data-test-validation-error]');
         if (null === $membersValidationElement) {
-            throw new ElementNotFoundException($this->getDriver(), 'members validation box', 'css', '.sylius-validation-error');
+            throw new ElementNotFoundException($this->getDriver(), 'members validation box', 'css', '[data-test-validation-error]');
         }
 
         return $membersValidationElement->getText() === $message;

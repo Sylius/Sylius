@@ -1,0 +1,12 @@
+{% if currencies|length > 1 %}
+    <div {{ sylius_test_html_attribute('currency-selector') }}>
+        <span {{ sylius_test_html_attribute('active-currency') }}>{{ active }}</span>
+        {% for code in currencies %}
+            {% if code is not same as(active) %}
+                <a href="{{ path('sylius_shop_switch_currency', {'code': code}) }}" {{ sylius_test_html_attribute('available-currency') }}>
+                    {{ code }}
+                </a>
+            {% endif %}
+        {% endfor %}
+    </div>
+{% endif %}

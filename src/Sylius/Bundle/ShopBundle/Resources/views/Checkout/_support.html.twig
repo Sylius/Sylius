@@ -1,17 +1,6 @@
 {% if order.channel.contactPhoneNumber %}
-    <h2 class="ui center aligned icon header">
-        <i class="circular phone icon"></i>
+    <div>
         {{ order.channel.contactPhoneNumber }}
-        <span class="sub header">
-            {{ 'sylius.ui.need_assistance'|trans }} {{ 'sylius.ui.call_us'|trans }}
-        </span>
-    </h2>
+        <span>{{ 'sylius.ui.need_assistance'|trans }} {{ 'sylius.ui.call_us'|trans }}</span>
+    </div>
 {% endif %}
-
-<div class="ui divider"></div>
-
-<div class="ui center aligned basic segment">
-    <i class="huge cc mastercard icon"></i>
-    <i class="huge cc visa icon"></i>
-    <i class="huge cc paypal card icon"></i>
-</div>

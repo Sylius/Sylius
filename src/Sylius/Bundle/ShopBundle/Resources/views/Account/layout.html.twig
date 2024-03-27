@@ -4,11 +4,11 @@
     {% block breadcrumb %}
     {% endblock %}
 
-    <div class="ui stackable grid">
-        <div class="four wide column">
+    <div>
+        <div>
             {{ sylius_template_event('sylius.shop.account.layout.menu') }}
         </div>
-        <div class="twelve wide column">
+        <div>
             {{ sylius_template_event('sylius.shop.account.layout.before_subcontent') }}
 
             {% block subcontent %}

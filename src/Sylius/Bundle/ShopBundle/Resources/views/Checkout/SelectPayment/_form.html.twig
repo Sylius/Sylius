@@ -1,4 +1,4 @@
-<div class="ui unmargined segments">
+<div>
     {% for payment_form in form.payments %}
         {% include '@SyliusShop/Checkout/SelectPayment/_payment.html.twig' with {'form': payment_form} %}
     {% else %}

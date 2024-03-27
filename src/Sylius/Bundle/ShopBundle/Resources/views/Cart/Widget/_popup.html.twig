@@ -1,15 +1,39 @@
 {% import "@SyliusShop/Common/Macro/money.html.twig" as money %}
 
-{% if cart.empty %}
-    {{ 'sylius.ui.your_cart_is_empty'|trans }}.
-{% else %}
-    <div class="ui list">
-        {% for item in cart.items %}
-            <div class="item">{{ item.quantity }} x <strong>{{ item.product }}</strong> {{ money.convertAndFormat(item.unitPrice) }}</div>
-        {% endfor %}
-        <div class="item"><strong>{{ 'sylius.ui.subtotal'|trans }}</strong>: {{ money.convertAndFormat(cart.itemsTotal) }}</div>
+<div class="offCanvas offCanvas-end offCanvas-wide" tabindex="-1" id="offCanvasCart" aria-labelledby="offCanvasCartLabel">
+    <div class="offCanvas-header">
+        <h5 class="offCanvas-title" id="offCanvasCartLabel">Cart</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="offCanvas" aria-label="Close"></button>
     </div>
-    <a href="{{ path('sylius_shop_cart_summary') }}" id="sylius-go-to-cart" class="ui fluid basic text button">{{ 'sylius.ui.view_and_edit_cart'|trans }}</a>
-    <div class="ui divider"></div>
-    <a href="{{ path('sylius_shop_checkout_start') }}" class="ui fluid primary button">{{ 'sylius.ui.checkout'|trans }}</a>
-{% endif %}
+    <div class="offCanvas-body">
+        {% if cart.empty %}
+            {{ 'sylius.ui.your_cart_is_empty'|trans }}.
+        {% else %}
+            <div class="d-flex flex-column h-100">
+                <div>
+                    <table class="table table-borderless align-middle">
+                        <tbody>
+                        {% for item in cart.items %}
+                            <tr>
+                                <td>{{ item.product }}</td>
+                                <td>{{ item.quantity }}</td>
+                                <td class="text-end">{{ money.convertAndFormat(item.unitPrice) }}</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                <div class="mt-auto">
+                    <div class="d-flex justify-content-between py-4">
+                        <div class="h5">{{ 'sylius.ui.subtotal'|trans }}:</div>
+                        <div class="h5 text-end">{{ money.convertAndFormat(cart.itemsTotal) }}</div>
+                    </div>
+                    <div class="d-grid gap-2 pb-3">
+                        <a href="{{ path('sylius_shop_cart_summary') }}" class="btn btn-light" type="button">{{ 'sylius.ui.view_and_edit_cart'|trans }}</a>
+                        <a href="{{ path('sylius_shop_checkout_start') }}" class="btn btn-primary" type="button">{{ 'sylius.ui.checkout'|trans }}</a>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+    </div>
+</div>

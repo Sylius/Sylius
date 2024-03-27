@@ -55,7 +55,7 @@ class GeneratePage extends SymfonyPage implements GeneratePageInterface
         $foundElement = $this->getElement($element, ['%position%' => $position]);
         $validatedField = $this->getValidatedField($foundElement);
 
-        return $validatedField->find('css', '.sylius-validation-error')->getText();
+        return $validatedField->find('css', '[data-test-validation-error]')->getText();
     }
 
     public function getPricesValidationMessage(int $position): string
@@ -68,7 +68,7 @@ class GeneratePage extends SymfonyPage implements GeneratePageInterface
         return array_merge(parent::getDefinedElements(), [
             'code' => '#sylius_product_generate_variants_variants_%position%_code',
             'price' => '#sylius_product_generate_variants_variants_%position%_channelPricings_%channelCode% input[id*="%channelCode%"]',
-            'prices_validation_message' => 'div[data-form-collection-index="%position%"] div.tabular.menu ~ .sylius-validation-error',
+            'prices_validation_message' => 'div[data-form-collection-index="%position%"] div.tabular.menu ~ [data-test-validation-error]',
         ]);
     }
 

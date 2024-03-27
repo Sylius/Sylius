@@ -153,10 +153,10 @@ final class FormElement extends Element implements FormElementInterface
 
     public function getValidationMessage(): string
     {
-        $foundElement = $this->getDocument()->find('css', '.sylius-validation-error');
+        $foundElement = $this->getDocument()->find('css', '[data-test-validation-error]');
 
         if (null === $foundElement) {
-            throw new ElementNotFoundException($this->getSession(), 'Tag', 'css', '.sylius-validation-error');
+            throw new ElementNotFoundException($this->getSession(), 'Tag', 'css', '[data-test-validation-error]');
         }
 
         return $foundElement->getText();
@@ -164,7 +164,7 @@ final class FormElement extends Element implements FormElementInterface
 
     public function hasValidationMessage(string $message): bool
     {
-        $validationElements = $this->getDocument()->findAll('css', '.sylius-validation-error');
+        $validationElements = $this->getDocument()->findAll('css', '[data-test-validation-error]');
 
         foreach ($validationElements as $validationElement) {
             if ($validationElement->getText() === $message) {
@@ -177,7 +177,7 @@ final class FormElement extends Element implements FormElementInterface
 
     public function hasOnlyOneValidationMessage(string $message): bool
     {
-        $validationElements = $this->getDocument()->findAll('css', '.sylius-validation-error');
+        $validationElements = $this->getDocument()->findAll('css', '[data-test-validation-error]');
 
         $counter = 0;
         foreach ($validationElements as $validationElement) {

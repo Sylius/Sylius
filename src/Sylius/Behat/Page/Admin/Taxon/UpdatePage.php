@@ -169,9 +169,9 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     {
         $lastImageElement = $this->getLastImageElement();
 
-        $foundElement = $lastImageElement->find('css', '.sylius-validation-error');
+        $foundElement = $lastImageElement->find('css', '[data-test-validation-error]');
         if (null === $foundElement) {
-            throw new ElementNotFoundException($this->getSession(), 'Tag', 'css', '.sylius-validation-error');
+            throw new ElementNotFoundException($this->getSession(), 'Tag', 'css', '[data-test-validation-error]');
         }
 
         return $foundElement->getText();
@@ -181,9 +181,9 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     {
         $images = $this->getImageElements();
 
-        $foundElement = $images[$place]->find('css', '.sylius-validation-error');
+        $foundElement = $images[$place]->find('css', '[data-test-validation-error]');
         if (null === $foundElement) {
-            throw new ElementNotFoundException($this->getSession(), 'Tag', 'css', '.sylius-validation-error');
+            throw new ElementNotFoundException($this->getSession(), 'Tag', 'css', '[data-test-validation-error]');
         }
 
         return $foundElement->getText();

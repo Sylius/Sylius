@@ -8,16 +8,15 @@
     </td>
     <td>
         {% if item.unitPrice != item.discountedUnitPrice %}
-            <span class="old-price" {{ sylius_test_html_attribute('product-old-price', item.productName) }}>{{ money.convertAndFormat(item.unitPrice) }}</span>
+            <span {{ sylius_test_html_attribute('product-old-price', item.productName) }}>{{ money.convertAndFormat(item.unitPrice) }}</span>
         {% endif %}
-        <span class="sylius-unit-price" {{ sylius_test_html_attribute('product-unit-price', item.productName) }}>{{ money.convertAndFormat(item.discountedUnitPrice) }}
+        <span {{ sylius_test_html_attribute('product-unit-price', item.productName) }}>{{ money.convertAndFormat(item.discountedUnitPrice) }}
             {% if item.unitPrice != item.discountedUnitPrice %}
-            <i id="item-promotion-details" class="question circle icon unit-promotions popup-js"
-               data-html="{% for promotion in unitPromotions %}<div>{{ promotion.label }}: {{ money.convertAndFormat(promotion.amount) }}</div>{% endfor %}">
+                <i data-html="{% for promotion in unitPromotions %}<div>{{ promotion.label }}: {{ money.convertAndFormat(promotion.amount) }}</div>{% endfor %}">
             </i>
             {% endif %}
         </span>
     </td>
-    <td class="center aligned">{{ item.quantity }}</td>
-    <td class="right aligned">{{ money.convertAndFormat(item.subtotal) }}</td>
+    <td>{{ item.quantity }}</td>
+    <td>{{ money.convertAndFormat(item.subtotal) }}</td>
 </tr>
