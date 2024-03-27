@@ -1,10 +1,1 @@
-{% deprecated 'The "@SyliusShop/Email/contactRequest.html.twig" template is deprecated since Sylius 1.12 and will be removed in Sylius 2.0, use "@SyliusCore/Email/contactRequest.html.twig" instead.' %}
-{% extends '@SyliusShop/Email/layout.html.twig' %}
-
-{% block subject %}
-    {% include '@SyliusCore/Email/Blocks/ContactRequest/_subject.html.twig' %}
-{% endblock %}
-
-{% block content %}
-    {% include '@SyliusCore/Email/Blocks/ContactRequest/_content.html.twig' %}
-{% endblock %}
+{% extends '@SyliusCore/Email/contactRequest.html.twig' %}

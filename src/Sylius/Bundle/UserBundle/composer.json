@@ -37,16 +37,16 @@
         }
     ],
     "require": {
-        "php": "^8.1",
+        "php": "^8.2",
         "doctrine/orm": "^2.13",
         "egulias/email-validator": "^3.1",
         "sylius-labs/polyfill-symfony-event-dispatcher": "^1.0.1",
         "sylius-labs/polyfill-symfony-framework-bundle": "^1.0 || ^1.1",
-        "sylius/mailer-bundle": "^1.8 || ^2.0@beta",
-        "sylius/resource-bundle": "^1.9",
-        "sylius/user": "^1.13",
-        "symfony/framework-bundle": "^5.4.21 || ^6.4",
-        "symfony/password-hasher": "^5.4.21 || ^6.4",
+        "sylius/mailer-bundle": "^2.0",
+        "sylius/resource-bundle": "^1.10",
+        "sylius/user": "^2.0",
+        "symfony/framework-bundle": "^6.4.1",
+        "symfony/password-hasher": "^6.4.0",
         "webmozart/assert": "^1.9"
     },
     "conflict": {
@@ -58,9 +58,9 @@
         "matthiasnoback/symfony-dependency-injection-test": "^4.2",
         "phpspec/phpspec": "^7.2",
         "phpunit/phpunit": "^9.5",
-        "symfony/dependency-injection": "^5.4.21 || ^6.4",
-        "symfony/security-bundle": "^5.4.21 || ^6.4",
-        "symfony/mailer": "^5.4.21 || ^6.4"
+        "symfony/dependency-injection": "^6.4.1",
+        "symfony/security-bundle": "^6.4.0",
+        "symfony/mailer": "^6.4.0"
     },
     "suggest": {
         "hwi/oauth-bundle": "For OAuth integration"
@@ -73,7 +73,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-main": "1.13-dev"
+            "dev-main": "2.0-dev"
         }
     },
     "autoload": {

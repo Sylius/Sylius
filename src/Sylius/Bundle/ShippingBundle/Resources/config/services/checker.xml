@@ -33,12 +33,5 @@
         </service>
         <service id="Sylius\Component\Shipping\Checker\Eligibility\ShippingMethodEligibilityCheckerInterface"
                  alias="sylius.shipping_method_eligibility_checker"/>
-
-        <service id="sylius.shipping_eligibility_checker"
-                 class="Sylius\Component\Shipping\Checker\ShippingMethodEligibilityChecker">
-            <deprecated package="sylius/sylius" version="1.8">The "%service_id%" is deprecated since Sylius 1.8 and will be removed in 2.0. Use "sylius.shipping_method_eligibility_checker" instead</deprecated>
-        </service>
-        <service id="Sylius\Component\Shipping\Checker\ShippingMethodEligibilityCheckerInterface"
-                 alias="sylius.shipping_method_eligibility_checker"/>
     </services>
 </container>

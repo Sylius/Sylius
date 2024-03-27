@@ -13,8 +13,8 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\Serializer;
 
-use Sylius\Calendar\Provider\DateTimeProviderInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
+use Symfony\Component\Clock\ClockInterface;
 use Symfony\Component\Serializer\Normalizer\ContextAwareDenormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
@@ -25,7 +25,7 @@ final class CustomerDenormalizer implements ContextAwareDenormalizerInterface, D
 
     private const ALREADY_CALLED = 'sylius_customer_denormalizer_already_called';
 
-    public function __construct(private DateTimeProviderInterface $calendar)
+    public function __construct(private ClockInterface $clock)
     {
     }
 
@@ -45,7 +45,7 @@ final class CustomerDenormalizer implements ContextAwareDenormalizerInterface, D
 
         $user = $data['user'] ?? null;
         if (null !== $user && array_key_exists('verified', $user)) {
-            $data['user']['verified'] = true === $user['verified'] ? $this->calendar->now()->format(\DateTimeInterface::RFC3339) : null;
+            $data['user']['verified'] = true === $user['verified'] ? $this->clock->now()->format(\DateTimeInterface::RFC3339) : null;
         }
 
         return $this->denormalizer->denormalize($data, $type, $format, $context);
