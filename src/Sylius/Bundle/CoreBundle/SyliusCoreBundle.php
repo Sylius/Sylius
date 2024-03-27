@@ -30,6 +30,7 @@ use Sylius\Bundle\CoreBundle\DependencyInjection\Compiler\CircularDependencyBrea
 use Sylius\Bundle\CoreBundle\DependencyInjection\Compiler\IgnoreAnnotationsPass;
 use Sylius\Bundle\CoreBundle\DependencyInjection\Compiler\LazyCacheWarmupPass;
 use Sylius\Bundle\CoreBundle\DependencyInjection\Compiler\LiipImageFiltersPass;
+use Sylius\Bundle\CoreBundle\DependencyInjection\Compiler\OverrideResourceControllerStateMachinePass;
 use Sylius\Bundle\CoreBundle\DependencyInjection\Compiler\RegisterTaxCalculationStrategiesPass;
 use Sylius\Bundle\CoreBundle\DependencyInjection\Compiler\RegisterUriBasedSectionResolverPass;
 use Sylius\Bundle\CoreBundle\DependencyInjection\Compiler\SyliusPriceHistoryLegacyAliasesPass;
@@ -97,6 +98,7 @@ final class SyliusCoreBundle extends AbstractResourceBundle
         $container->addCompilerPass(new CancelOrderStateMachineCallbackPass());
         $container->addCompilerPass(new SyliusPriceHistoryLegacyAliasesPass());
         $container->addCompilerPass(new CheckStatisticsOrdersTotalsProviderTypePass());
+        $container->addCompilerPass(new OverrideResourceControllerStateMachinePass(), priority: -1024);
     }
 
     protected function getModelNamespace(): string
