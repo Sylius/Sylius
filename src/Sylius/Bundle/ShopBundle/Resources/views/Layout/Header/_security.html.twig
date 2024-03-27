@@ -1,6 +1,6 @@
 <div>
     {% if is_granted('ROLE_USER') %}
-        <div {{ sylius_test_html_attribute('full-name') }}>{{ 'sylius.ui.hello'|trans }} {{ app.user.customer.fullName }}!</div>
+        <span {{ sylius_test_html_attribute('full-name') }}>{{ 'sylius.ui.hello'|trans }} {{ app.user.customer.fullName }}!</span>
         <a href="{{ path('sylius_shop_account_dashboard') }}">{{ 'sylius.ui.my_account'|trans }}</a>
         <a href="{{ path('sylius_shop_logout') }}" {{ sylius_test_html_attribute('logout-button') }}>{{ 'sylius.ui.logout'|trans }}</a>
     {% else %}
