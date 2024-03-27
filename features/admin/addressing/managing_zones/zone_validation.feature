@@ -19,6 +19,14 @@ Feature: Zone validation
         And zone with name "European Union" should not be added
 
     @ui @api
+    Scenario: Trying to add a zone with a too long code
+        When I want to create a new zone consisting of country
+        And I name it "European Union"
+        And I specify a too long code
+        And I try to add it
+        Then I should be notified that code is too long
+
+    @ui @api
     Scenario: Trying to add a zone without specifying its name
         When I want to create a new zone consisting of country
         And I specify its code as "EU"

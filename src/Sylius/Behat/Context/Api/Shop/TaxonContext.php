@@ -29,12 +29,12 @@ final class TaxonContext implements Context
         private ResponseCheckerInterface $responseChecker,
         private IriConverterInterface $iriConverter,
         private ObjectManager $objectManager,
-        private string $apiUrlPrefix,
     ) {
     }
 
     /**
      * @When /^I try to browse products from (taxon "([^"]+)")$/
+     * @When /^I check the ("[^"]+" taxon)'s details$/
      */
     public function iTryToBrowseProductsFrom(TaxonInterface $taxon): void
     {
@@ -50,6 +50,17 @@ final class TaxonContext implements Context
         Assert::false(
             $this->isTaxonChildVisible($taxon),
             sprintf('Taxon %s is in the vertical menu, but it should not.', $taxon->getName()),
+        );
+    }
+
+    /**
+     * @Then I should see the taxon name :name
+     */
+    public function iShouldSeeTaxonName(string $name): void
+    {
+        Assert::true(
+            $this->responseChecker->hasValue($this->client->getLastResponse(), 'name', $name),
+            sprintf('Taxon with name %s does not exist.', $name),
         );
     }
 

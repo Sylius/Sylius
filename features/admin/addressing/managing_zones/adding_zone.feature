@@ -42,6 +42,15 @@ Feature: Adding a new zone with country type members
         Then I should be notified that it has been successfully created
         And the zone named "America" with the "North America" zone member should appear in the registry
 
+    @no-ui @api
+    Scenario: Adding a zone with a zone type member, but the member's code is too long
+        When I want to create a new zone consisting of zone
+        And I name it "America"
+        And I specify its code as "AM"
+        And I provide a too long zone member code
+        And I add it
+        Then I should be informed that the provided zone member code is too long
+
     @ui @javascript @api
     Scenario: Adding a zone with a country type member and a shipping scope
         When I want to create a new zone consisting of country

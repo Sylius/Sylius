@@ -16,7 +16,7 @@ namespace Sylius\Behat\Page\Admin\Promotion;
 use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Exception\ElementNotFoundException;
 use Sylius\Behat\Behaviour\NamesIt;
-use Sylius\Behat\Behaviour\SpecifiesItsCode;
+use Sylius\Behat\Behaviour\SpecifiesItsField;
 use Sylius\Behat\Page\Admin\Crud\CreatePage as BaseCreatePage;
 use Sylius\Behat\Service\AutocompleteHelper;
 use Sylius\Behat\Service\TabsHelper;
@@ -25,7 +25,7 @@ use Webmozart\Assert\Assert;
 class CreatePage extends BaseCreatePage implements CreatePageInterface
 {
     use NamesIt;
-    use SpecifiesItsCode;
+    use SpecifiesItsField;
 
     public function specifyLabel(string $label, string $localeCode): void
     {

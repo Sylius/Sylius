@@ -14,15 +14,16 @@ declare(strict_types=1);
 namespace spec\Sylius\Bundle\ApiBundle\Serializer;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Taxation\Model\TaxRateInterface;
+use Sylius\Component\Core\Model\TaxRateInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 
-final class TaxRateDenormalizerSpec extends ObjectBehavior
+final class NumericToStringDenormalizerSpec extends ObjectBehavior
 {
-    private const ALREADY_CALLED = 'sylius_tax_rate_denormalizer_already_called';
+    const ALREADY_CALLED = 'sylius_numeric_to_string_denormalizer_already_called_for_Sylius\Component\Core\Model\TaxRateInterface';
 
     function let(DenormalizerInterface $denormalizer): void
     {
+        $this->beConstructedWith('Sylius\Component\Core\Model\TaxRateInterface', 'amount');
         $this->setDenormalizer($denormalizer);
     }
 

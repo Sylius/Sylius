@@ -17,6 +17,7 @@ use ApiPlatform\Api\IriConverterInterface;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
+use Sylius\Behat\Context\Api\Admin\Helper\ValidationTrait;
 use Sylius\Behat\Context\Api\Resources;
 use Sylius\Behat\Service\Converter\SectionAwareIriConverterInterface;
 use Sylius\Component\Addressing\Model\CountryInterface;
@@ -30,6 +31,8 @@ use Webmozart\Assert\Assert;
 
 final class ManagingChannelsContext implements Context
 {
+    use ValidationTrait;
+
     private array $shopBillingData = [];
 
     public function __construct(
@@ -717,17 +720,6 @@ final class ManagingChannelsContext implements Context
         Assert::contains(
             $this->responseChecker->getError($this->client->getLastResponse()),
             'countryCode: This value is not a valid country.',
-        );
-    }
-
-    /**
-     * @Then /^I should be notified that ([^"]+) is too long$/
-     */
-    public function iShouldBeNotifiedThatFieldIsTooLong(string $field): void
-    {
-        Assert::regex(
-            $this->responseChecker->getError($this->client->getLastResponse()),
-            sprintf('/%s\: .+ must not be longer than 255 characters./', StringInflector::nameToCamelCase($field)),
         );
     }
 }

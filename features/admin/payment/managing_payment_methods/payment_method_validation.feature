@@ -19,6 +19,14 @@ Feature: Payment method validation
         And the payment method with name "Paypal Express Checkout" should not be added
 
     @ui @api
+    Scenario: Trying to add a new payment method with a too long code
+        When I want to create a new payment method with "Paypal Express Checkout" gateway factory
+        And I name it "Paypal Express Checkout" in "English (United States)"
+        And I specify a too long code
+        And I add it
+        Then I should be notified that code is too long
+
+    @ui @api
     Scenario: Trying to add a new payment method without specifying its name
         When I want to create a new payment method with "Paypal Express Checkout" gateway factory
         And I specify its code as "PEC"

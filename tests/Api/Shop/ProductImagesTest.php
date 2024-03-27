@@ -20,21 +20,26 @@ use Symfony\Component\HttpFoundation\Response;
 
 final class ProductImagesTest extends JsonApiTestCase
 {
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->setUpDefaultGetHeaders();
+    }
+
     /** @test */
     public function it_gets_a_product_image(): void
     {
         $fixtures = $this->loadFixturesFromFiles([
-            'authentication/api_administrator.yaml',
             'product/product_image.yaml',
         ]);
 
         /** @var ProductImageInterface $productImage */
         $productImage = $fixtures['product_mug_thumbnail'];
 
-        $this->client->request(
-            method: 'GET',
+        $this->requestGet(
             uri: sprintf('/api/v2/shop/product-images/%s', $productImage->getId()),
-            server: self::CONTENT_TYPE_HEADER,
+            headers: ['HTTPS' => true]
         );
 
         $this->assertResponse(
@@ -48,18 +53,16 @@ final class ProductImagesTest extends JsonApiTestCase
     public function it_gets_a_product_image_with_an_image_filter(): void
     {
         $fixtures = $this->loadFixturesFromFiles([
-            'authentication/api_administrator.yaml',
             'product/product_image.yaml',
         ]);
 
         /** @var ProductImageInterface $productImage */
         $productImage = $fixtures['product_mug_thumbnail'];
 
-        $this->client->request(
-            method: 'GET',
+        $this->requestGet(
             uri: sprintf('/api/v2/shop/product-images/%s', $productImage->getId()),
-            parameters: [ImageNormalizer::FILTER_QUERY_PARAMETER => 'sylius_small'],
-            server: self::CONTENT_TYPE_HEADER,
+            queryParameters: [ImageNormalizer::FILTER_QUERY_PARAMETER => 'sylius_small'],
+            headers: ['HTTPS' => true]
         );
 
         $this->assertResponse(
@@ -73,18 +76,16 @@ final class ProductImagesTest extends JsonApiTestCase
     public function it_prevents_getting_a_product_image_with_an_invalid_image_filter(): void
     {
         $fixtures = $this->loadFixturesFromFiles([
-            'authentication/api_administrator.yaml',
             'product/product_image.yaml',
         ]);
 
         /** @var ProductImageInterface $productImage */
         $productImage = $fixtures['product_mug_thumbnail'];
 
-        $this->client->request(
-            method: 'GET',
+        $this->requestGet(
             uri: sprintf('/api/v2/shop/product-images/%s', $productImage->getId()),
-            parameters: [ImageNormalizer::FILTER_QUERY_PARAMETER => 'invalid'],
-            server: self::CONTENT_TYPE_HEADER,
+            queryParameters: [ImageNormalizer::FILTER_QUERY_PARAMETER => 'invalid'],
+            headers: ['HTTPS' => true]
         );
 
         $this->assertResponse(
