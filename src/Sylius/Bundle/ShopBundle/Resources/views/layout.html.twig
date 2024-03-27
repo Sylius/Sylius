@@ -19,19 +19,20 @@
         {{ sylius_template_event('sylius.shop.layout.head') }}
     </head>
 
-    <body>
+    <body data-route="{{ app.request.get('_route') }}">
         {{ sylius_template_event('sylius.shop.layout.before_body') }}
 
-        <div data-route="{{ app.request.get('_route') }}">
+        <div class="d-flex flex-column min-vh-100">
             {% block top %}
-                <div id="menu">
-                    <a href="#">{{ 'sylius.top_bar'|trans }}</a>
-                    {{ sylius_template_event('sylius.shop.layout.topbar') }}
-                </div>
+                {{ sylius_template_event('sylius.shop.layout.topbar') }}
             {% endblock %}
 
             {% block header %}
                 {{ sylius_template_event('sylius.shop.layout.header') }}
+            {% endblock %}
+
+            {% block nav %}
+                {{ sylius_template_event('sylius.shop.layout.navbar') }}
             {% endblock %}
 
             {% include '@SyliusShop/_flashes.html.twig' %}
@@ -52,7 +53,6 @@
             {{ sylius_template_event('sylius.shop.layout.javascripts') }}
         {% endblock %}
 
-        {% include '@SyliusUi/Modal/_confirmation.html.twig' %}
         {{ sylius_template_event('sylius.shop.layout.after_body') }}
     </body>
 </html>
