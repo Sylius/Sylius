@@ -10,6 +10,15 @@ Feature: Shipping method validation
         And the store is available in "English (United States)"
         And I am logged in as an administrator
 
+
+    @no-ui @api
+    Scenario: Trying to add shipping method translation in unexisting locale
+        When I want to create a new shipping method
+        And I specify its code as "UPS"
+        And I name it "Transporteur UPS" in "French (France)"
+        And I try to save my changes
+        Then I should be notified that the locale is not available
+
     @ui @api
     Scenario: Trying to add a new shipping method without specifying its code
         When I want to create a new shipping method

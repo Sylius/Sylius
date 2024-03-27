@@ -38,6 +38,7 @@ default:
                 - sylius.behat.context.api.admin.save
                 - Sylius\Behat\Context\Api\Admin\RemovingProductContext
                 - Sylius\Behat\Context\Api\Admin\RemovingTaxonContext
+                - sylius.behat.context.api.admin.translation
 
             filters:
                 tags: "@managing_promotions&&@api"

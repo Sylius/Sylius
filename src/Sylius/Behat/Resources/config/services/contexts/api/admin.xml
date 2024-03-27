@@ -34,6 +34,11 @@
             <argument type="service" id="sylius.behat.shared_storage" />
         </service>
 
+        <service id="sylius.behat.context.api.admin.translation" class="Sylius\Behat\Context\Api\Admin\TranslationContext" >
+            <argument type="service" id="sylius.behat.api_platform_client.admin" />
+            <argument type="service" id="Sylius\Behat\Client\ResponseCheckerInterface" />
+        </service>
+
         <service id="Sylius\Behat\Context\Api\Admin\BrowsingCatalogPromotionProductVariantsContext">
             <argument type="service" id="sylius.behat.api_platform_client.admin" />
             <argument type="service" id="Sylius\Behat\Client\ResponseCheckerInterface" />

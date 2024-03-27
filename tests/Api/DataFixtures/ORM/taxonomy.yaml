@@ -6,7 +6,7 @@ Sylius\Component\Core\Model\Channel:
         description: "Lorem ipsum"
         baseCurrency: "@dolar"
         defaultLocale: "@locale_en_us"
-        locales: ["@locale_en_us", "@locale_de_de"]
+        locales: ["@locale_en_us", "@locale_de_de", "@locale_pl_pl"]
         color: "black"
         menuTaxon: '@category_taxon'
         enabled: true
@@ -30,6 +30,8 @@ Sylius\Component\Locale\Model\Locale:
         code: en_US
     locale_de_de:
         code: de_DE
+    locale_pl_pl:
+        code: pl_PL
 
 Sylius\Component\Core\Model\Taxon:
     category_taxon:

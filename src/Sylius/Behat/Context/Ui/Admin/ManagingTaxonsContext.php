@@ -476,7 +476,7 @@ final class ManagingTaxonsContext implements Context
         Assert::false($this->updatePage->isEnabled());
     }
 
-    private function resolveCurrentPage(): SymfonyPageInterface|CreateForParentPageInterface|CreatePageInterface|UpdatePageInterface
+    private function resolveCurrentPage(): CreateForParentPageInterface|CreatePageInterface|SymfonyPageInterface|UpdatePageInterface
     {
         return $this->currentPageResolver->getCurrentPageWithForm([
             $this->createPage,
