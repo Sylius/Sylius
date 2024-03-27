@@ -34,9 +34,7 @@ final class AttributeTypeDocumentationModifier implements DocumentationModifierI
 
         $schemas = $this->updateAttributeTypesSchema($schemas);
 
-        return $docs->withComponents(
-            $components->withSchemas($schemas),
-        );
+        return $docs->withComponents($components->withSchemas($schemas));
     }
 
     /**
@@ -56,6 +54,10 @@ final class AttributeTypeDocumentationModifier implements DocumentationModifierI
         ];
 
         foreach ($schemasToBeUpdated as $schemaToBeUpdated) {
+            if (!isset($schemas[$schemaToBeUpdated])) {
+                continue;
+            }
+
             $schemas[$schemaToBeUpdated]['properties']['type'] = [
                 'type' => 'string',
                 'enum' => $attributeTypes,

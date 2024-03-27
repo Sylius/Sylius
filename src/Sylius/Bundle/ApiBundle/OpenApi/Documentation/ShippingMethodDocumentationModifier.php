@@ -38,36 +38,38 @@ final class ShippingMethodDocumentationModifier implements DocumentationModifier
         $components = $docs->getComponents();
         $schemas = $components->getSchemas();
 
-        if (!isset($schemas['ShippingMethod.jsonld-shop.shipping_method.read'])) {
-            return $docs;
+        if (isset($schemas['ShippingMethod.jsonld-shop.shipping_method.read'])) {
+            $schemas['ShippingMethod.jsonld-shop.shipping_method.read']['properties']['price'] = [
+                'type' => 'integer',
+                'readOnly' => true,
+                'default' => 0,
+            ];
+
+            $components = $components->withSchemas($schemas);
+            $docs = $docs->withComponents($components);
         }
 
-        $schemas['ShippingMethod.jsonld-shop.shipping_method.read']['properties']['price'] = [
-            'type' => 'integer',
-            'readOnly' => true,
-            'default' => 0,
-        ];
-
-        $this->modifyDescription($docs);
-
-        return $docs->withComponents(
-            $components->withSchemas($schemas),
-        )->withPaths($docs->getPaths());
+        return $this->modifyDescription($docs);
     }
 
-    private function modifyDescription(OpenApi $docs): void
+    private function modifyDescription(OpenApi $docs): OpenApi
     {
         $paths = $docs->getPaths();
 
         $this->addDescription($paths, sprintf('%s%s', $this->apiRoute, self::ROUTE_ADMIN_SHIPPING_METHODS), 'Post');
         $this->addDescription($paths, sprintf('%s%s', $this->apiRoute, self::ROUTE_ADMIN_SHIPPING_METHOD), 'Put');
+
+        return $docs->withPaths($paths);
     }
 
     private function addDescription(Paths $paths, string $path, string $method): void
     {
         $pathItem = $paths->getPath($path);
         $methodGet = sprintf('get%s', $method);
-        $operation = $pathItem->$methodGet();
+        $operation = $pathItem?->$methodGet();
+        if (null === $operation) {
+            return;
+        }
 
         $description = sprintf(
             "%s\n\n Allowed rule types: `%s` \n\n Allowed calculators: `%s`",

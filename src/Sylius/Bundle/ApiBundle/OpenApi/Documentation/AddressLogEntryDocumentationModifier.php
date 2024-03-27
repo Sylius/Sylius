@@ -22,71 +22,75 @@ final class AddressLogEntryDocumentationModifier implements DocumentationModifie
         $components = $docs->getComponents();
         $schemas = $components->getSchemas();
 
-        $schemas['Address-admin.address.log_entry.read'] = [
-            'type' => 'array',
-            'items' => [
-                'type' => 'object',
-                'properties' => [
-                    'action' => [
-                        'readOnly' => true,
-                        'type' => 'string',
-                    ],
-                    'version' => [
-                        'readOnly' => true,
-                        'type' => 'integer',
-                    ],
-                    'data' => [
-                        'readOnly' => true,
-                        'type' => 'object',
-                    ],
-                    'logged_at' => [
-                        'readOnly' => true,
-                        'type' => 'string',
-                        'format' => 'date-time',
-                    ],
-                ],
-            ],
-        ];
-
-        $schemas['Address.jsonld-admin.address.log_entry.read'] = [
-            'type' => 'object',
-            'properties' => [
-                'hydra:member' => [
-                    'readOnly' => true,
-                    'type' => 'array',
-                    'items' => [
-                        'type' => 'object',
-                        'properties' => [
-                            '@type' => [
-                                'readOnly' => true,
-                                'type' => 'string',
-                            ],
-                            'action' => [
-                                'readOnly' => true,
-                                'type' => 'string',
-                            ],
-                            'version' => [
-                                'readOnly' => true,
-                                'type' => 'integer',
-                            ],
-                            'data' => [
-                                'readOnly' => true,
-                                'type' => 'object',
-                            ],
-                            'logged_at' => [
-                                'readOnly' => true,
-                                'type' => 'string',
-                                'format' => 'date-time',
-                            ],
+        if (isset($schemas['Address-admin.address.log_entry.read'])) {
+            $schemas['Address-admin.address.log_entry.read'] = [
+                'type' => 'array',
+                'items' => [
+                    'type' => 'object',
+                    'properties' => [
+                        'action' => [
+                            'readOnly' => true,
+                            'type' => 'string',
+                        ],
+                        'version' => [
+                            'readOnly' => true,
+                            'type' => 'integer',
+                        ],
+                        'data' => [
+                            'readOnly' => true,
+                            'type' => 'object',
+                        ],
+                        'logged_at' => [
+                            'readOnly' => true,
+                            'type' => 'string',
+                            'format' => 'date-time',
                         ],
                     ],
                 ],
-                'hydra:totalItems' => [
-                    'readOnly' => true,
-                    'type' => 'integer',
+            ];
+        }
+
+        if (isset($schemas['Address.jsonld-admin.address.log_entry.read'])) {
+            $schemas['Address.jsonld-admin.address.log_entry.read'] = [
+                'type' => 'object',
+                'properties' => [
+                    'hydra:member' => [
+                        'readOnly' => true,
+                        'type' => 'array',
+                        'items' => [
+                            'type' => 'object',
+                            'properties' => [
+                                '@type' => [
+                                    'readOnly' => true,
+                                    'type' => 'string',
+                                ],
+                                'action' => [
+                                    'readOnly' => true,
+                                    'type' => 'string',
+                                ],
+                                'version' => [
+                                    'readOnly' => true,
+                                    'type' => 'integer',
+                                ],
+                                'data' => [
+                                    'readOnly' => true,
+                                    'type' => 'object',
+                                ],
+                                'logged_at' => [
+                                    'readOnly' => true,
+                                    'type' => 'string',
+                                    'format' => 'date-time',
+                                ],
+                            ],
+                        ],
+                    ],
+                    'hydra:totalItems' => [
+                        'readOnly' => true,
+                        'type' => 'integer',
+                    ],
                 ],
-            ],
-        ];
+            ];
+        }
 
         $components = $components->withSchemas($schemas);
 
