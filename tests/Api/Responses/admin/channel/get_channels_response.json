@@ -58,7 +58,7 @@
             "skippingShippingStepAllowed": false,
             "skippingPaymentStepAllowed": false,
             "accountVerificationRequired": true,
-            "shippingAddressInCheckoutRequired": false,
+            "shippingAddressInCheckoutRequired": true,
             "shopBillingData": "\/api\/v2\/admin\/shop-billing-datas\/@integer@",
             "menuTaxon": null,
             "channelPriceHistoryConfig": "\/api\/v2\/admin\/channel-price-history-configs\/@integer@"
