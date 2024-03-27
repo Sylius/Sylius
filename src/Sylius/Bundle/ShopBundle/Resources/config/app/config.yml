@@ -65,30 +65,26 @@ sylius_ui:
     events:
         sylius.shop.layout.topbar:
             blocks:
+                topbar:
+                    template: "@SyliusShop/Layout/_topBar.html.twig"
+                    priority: 10
+                    
+        sylius.shop.layout.topbar.content:
+            blocks:
                 before_switchers_legacy:
                     template: "@SyliusUi/Block/_legacySonataEvent.html.twig"
-                    priority: 35
+                    priority: 45
                     context:
                         event: sylius.shop.layout.before_currency_switcher
+                info_message:
+                    template: "@SyliusShop/Layout/TopBar/_infoMessage.html.twig"
+                    priority: 40
                 currency_switcher:
-                    template: "@SyliusShop/Layout/Topbar/_currencySwitcher.html.twig"
+                    template: "@SyliusShop/Layout/TopBar/_currencySwitcher.html.twig"
                     priority: 30
                 locale_switcher:
-                    template: "@SyliusShop/Layout/Topbar/_localeSwitcher.html.twig"
+                    template: "@SyliusShop/Layout/TopBar/_localeSwitcher.html.twig"
                     priority: 20
-                before_security_widget_legacy:
-                    template: "@SyliusUi/Block/_legacySonataEvent.html.twig"
-                    priority: 15
-                    context:
-                        event: sylius.shop.layout.before_security_widget
-                security_widget:
-                    template: "@SyliusShop/Layout/Topbar/_securityWidget.html.twig"
-                    priority: 10
-                after_security_widget_legacy:
-                    template: "@SyliusUi/Block/_legacySonataEvent.html.twig"
-                    priority: 5
-                    context:
-                        event: sylius.shop.layout.after_security_widget
 
         sylius.shop.homepage:
             blocks:
@@ -704,19 +700,12 @@ sylius_ui:
                 logo:
                     template: "@SyliusShop/Layout/Header/_logo.html.twig"
                     priority: 30
-                content:
-                    template: "@SyliusShop/Layout/Header/_content.html.twig"
+                security_widget:
+                    template: "@SyliusShop/Layout/Header/_securityWidget.html.twig"
                     priority: 20
                 cart:
                     template: "@SyliusShop/Layout/Header/_cart.html.twig"
                     priority: 10
-
-        sylius.shop.layout.header.content:
-            blocks:
-                legacy:
-                    template: "@SyliusUi/Block/_legacySonataEvent.html.twig"
-                    context:
-                        event: sylius.shop.layout.header
 
         sylius.shop.login.register_column:
             blocks:
@@ -749,6 +738,12 @@ sylius_ui:
                     priority: 5
                     context:
                         event: sylius.shop.login.after_login
+                        
+        sylius.shop.logo:
+            blocks:
+                logo:
+                    template: "@SyliusShop/Shared/syliusLogo.html.twig"
+                    priority: 10
 
         sylius.shop.layout.stylesheets:
             blocks:
@@ -796,14 +791,12 @@ sylius_ui:
         sylius.shop.layout.header:
             blocks:
                 header:
-                    template: "@SyliusShop/_header.html.twig"
-                    priority: 20
-                after_header_legacy:
-                    template: "@SyliusUi/Block/_legacySonataEvent.html.twig"
-                    priority: 15
-                    context:
-                        event: sylius.shop.layout.after_header
-                menu:
+                    template: "@SyliusShop/Layout/_header.html.twig"
+                    priority: 10
+                        
+        sylius.shop.layout.navbar:
+            blocks:
+                nav:
                     template: "@SyliusShop/Layout/Header/_menu.html.twig"
                     priority: 10
 
