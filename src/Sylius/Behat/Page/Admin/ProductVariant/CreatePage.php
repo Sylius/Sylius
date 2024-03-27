@@ -14,13 +14,13 @@ declare(strict_types=1);
 namespace Sylius\Behat\Page\Admin\ProductVariant;
 
 use Behat\Mink\Exception\ElementNotFoundException;
-use Sylius\Behat\Behaviour\SpecifiesItsCode;
+use Sylius\Behat\Behaviour\SpecifiesItsField;
 use Sylius\Behat\Page\Admin\Crud\CreatePage as BaseCreatePage;
 use Sylius\Component\Core\Model\ChannelInterface;
 
 class CreatePage extends BaseCreatePage implements CreatePageInterface
 {
-    use SpecifiesItsCode;
+    use SpecifiesItsField;
 
     public function specifyPrice(string $price, ChannelInterface $channel): void
     {

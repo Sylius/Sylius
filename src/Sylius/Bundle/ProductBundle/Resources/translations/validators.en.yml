@@ -8,6 +8,7 @@ sylius:
             unique: Product slug must be unique.
             max_length: Product slug must not be longer than 1 character.|Product slug must not be longer than {{ limit }} characters.
         code:
+            max_length: The code must not be longer than {{ limit }} characters.
             not_blank: Please enter product code.
             regex: Product code can only be comprised of letters, numbers, dashes and underscores.
             unique: Product code must be unique.
@@ -22,6 +23,7 @@ sylius:
     product_variant:
         combination: Variant with this option set already exists.
         code:
+            max_length: The code must not be longer than {{ limit }} characters.
             not_blank: Please enter the code.
             regex: Product variant code can only be comprised of letters, numbers, dashes and underscores.
             unique: Product variant code must be unique.
@@ -33,6 +35,7 @@ sylius:
             unique: Simple product code must be unique among all products and product variants.
     option:
         code:
+            max_length: The code must not be longer than {{ limit }} characters.
             not_blank: Please enter option code.
             regex: Option code can only be comprised of letters, numbers, dashes and underscores.
             unique: The option with given code already exists.
@@ -44,6 +47,7 @@ sylius:
             min_count: Please add at least {{ limit }} option value.|Please add at least {{ limit }} option values.
     option_value:
         code:
+            max_length: The code must not be longer than {{ limit }} characters.
             not_blank: Please enter option value code.
             regex: Option value code can only be comprised of letters, numbers, dashes and underscores.
             unique: The option value with given code already exists.

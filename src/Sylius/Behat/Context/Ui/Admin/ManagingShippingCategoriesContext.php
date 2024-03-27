@@ -14,6 +14,8 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
+use FriendsOfBehat\PageObjectExtension\Page\SymfonyPageInterface;
+use Sylius\Behat\Context\Ui\Admin\Helper\ValidationTrait;
 use Sylius\Behat\Page\Admin\Crud\IndexPageInterface;
 use Sylius\Behat\Page\Admin\ShippingCategory\CreatePageInterface;
 use Sylius\Behat\Page\Admin\ShippingCategory\UpdatePageInterface;
@@ -22,6 +24,8 @@ use Webmozart\Assert\Assert;
 
 class ManagingShippingCategoriesContext implements Context
 {
+    use ValidationTrait;
+
     public function __construct(
         private IndexPageInterface $indexPage,
         private CreatePageInterface $createPage,
@@ -84,11 +88,11 @@ class ManagingShippingCategoriesContext implements Context
 
     /**
      * @When I do not specify its code
-     * @When I specify its code as :shippingCategoryCode
+     * @When I specify its code as :code
      */
-    public function iSpecifyItsCodeAs($shippingCategoryCode = null)
+    public function iSpecifyItsCodeAs(?string $code = null): void
     {
-        $this->createPage->specifyCode($shippingCategoryCode ?? '');
+        $this->createPage->specifyCode($code ?? '');
     }
 
     /**
@@ -220,5 +224,10 @@ class ManagingShippingCategoriesContext implements Context
         $this->iWantToBrowseShippingCategories();
 
         Assert::true($this->indexPage->isSingleResourceOnPage(['code' => $code]));
+    }
+
+    protected function resolveCurrentPage(): SymfonyPageInterface
+    {
+        return $this->createPage;
     }
 }

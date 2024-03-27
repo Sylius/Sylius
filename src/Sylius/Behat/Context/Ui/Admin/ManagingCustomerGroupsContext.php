@@ -14,6 +14,8 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
+use FriendsOfBehat\PageObjectExtension\Page\SymfonyPageInterface;
+use Sylius\Behat\Context\Ui\Admin\Helper\ValidationTrait;
 use Sylius\Behat\Page\Admin\Crud\IndexPageInterface;
 use Sylius\Behat\Page\Admin\CustomerGroup\CreatePageInterface;
 use Sylius\Behat\Page\Admin\CustomerGroup\UpdatePageInterface;
@@ -23,6 +25,8 @@ use Webmozart\Assert\Assert;
 
 final class ManagingCustomerGroupsContext implements Context
 {
+    use ValidationTrait;
+
     public function __construct(
         private CreatePageInterface $createPage,
         private IndexPageInterface $indexPage,
@@ -43,7 +47,7 @@ final class ManagingCustomerGroupsContext implements Context
      * @When I specify its code as :code
      * @When I do not specify its code
      */
-    public function iSpecifyItsCodeAs($code = null)
+    public function iSpecifyItsCodeAs(?string $code = null): void
     {
         $this->createPage->specifyCode($code ?? '');
     }
@@ -210,5 +214,10 @@ final class ManagingCustomerGroupsContext implements Context
                 $customerGroup->getName(),
             ),
         );
+    }
+
+    protected function resolveCurrentPage(): SymfonyPageInterface
+    {
+        return $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
     }
 }

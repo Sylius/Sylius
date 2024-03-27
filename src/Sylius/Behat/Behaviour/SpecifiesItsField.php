@@ -13,12 +13,17 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Behaviour;
 
-trait SpecifiesItsCode
+trait SpecifiesItsField
 {
     use DocumentAccessor;
 
     public function specifyCode(string $code): void
     {
         $this->getDocument()->fillField('Code', $code);
+    }
+
+    public function specifyField(string $field, string $value): void
+    {
+        $this->getDocument()->fillField($field, $value);
     }
 }

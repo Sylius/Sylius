@@ -16,7 +16,7 @@ namespace Sylius\Behat\Page\Admin\Channel;
 use Behat\Mink\Element\NodeElement;
 use Sylius\Behat\Behaviour\DescribesIt;
 use Sylius\Behat\Behaviour\NamesIt;
-use Sylius\Behat\Behaviour\SpecifiesItsCode;
+use Sylius\Behat\Behaviour\SpecifiesItsField;
 use Sylius\Behat\Behaviour\Toggles;
 use Sylius\Behat\Page\Admin\Crud\CreatePage as BaseCreatePage;
 use Sylius\Behat\Service\AutocompleteHelper;
@@ -24,7 +24,7 @@ use Sylius\Behat\Service\AutocompleteHelper;
 class CreatePage extends BaseCreatePage implements CreatePageInterface
 {
     use NamesIt;
-    use SpecifiesItsCode;
+    use SpecifiesItsField;
     use DescribesIt;
     use Toggles;
 

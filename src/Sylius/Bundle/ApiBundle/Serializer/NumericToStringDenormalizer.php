@@ -14,39 +14,49 @@ declare(strict_types=1);
 namespace Sylius\Bundle\ApiBundle\Serializer;
 
 use Sylius\Bundle\ApiBundle\Serializer\Exception\InvalidAmountTypeException;
-use Sylius\Component\Taxation\Model\TaxRateInterface;
 use Symfony\Component\Serializer\Normalizer\ContextAwareDenormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
 
-final class TaxRateDenormalizer implements ContextAwareDenormalizerInterface, DenormalizerAwareInterface
+final class NumericToStringDenormalizer implements ContextAwareDenormalizerInterface, DenormalizerAwareInterface
 {
     use DenormalizerAwareTrait;
 
-    private const ALREADY_CALLED = 'sylius_tax_rate_denormalizer_already_called';
+    private const ALREADY_CALLED = 'sylius_numeric_to_string_denormalizer_already_called_for_%s';
+
+    public function __construct(
+        private readonly string $resourceClass,
+        private readonly string $field,
+    ) {
+    }
 
     public function supportsDenormalization(mixed $data, string $type, string $format = null, array $context = []): bool
     {
         return
-            !isset($context[self::ALREADY_CALLED]) &&
+            is_a($type, $this->resourceClass, true) &&
+            !isset($context[self::getAlreadyCalledKey($type)]) &&
             is_array($data) &&
-            isset($data['amount']) &&
-            is_a($type, TaxRateInterface::class, true)
+            isset($data[$this->field])
         ;
     }
 
     public function denormalize(mixed $data, string $type, string $format = null, array $context = [])
     {
-        $context[self::ALREADY_CALLED] = true;
+        $context[self::getAlreadyCalledKey($type)] = true;
 
         $data = (array) $data;
 
-        if (!is_numeric($data['amount'])) {
+        if (!is_numeric($data[$this->field])) {
             throw new InvalidAmountTypeException();
         }
 
-        $data['amount'] = (string) $data['amount'];
+        $data[$this->field] = (string) $data[$this->field];
 
         return $this->denormalizer->denormalize($data, $type, $format, $context);
+    }
+
+    private static function getAlreadyCalledKey(string $class): string
+    {
+        return sprintf(self::ALREADY_CALLED, $class);
     }
 }

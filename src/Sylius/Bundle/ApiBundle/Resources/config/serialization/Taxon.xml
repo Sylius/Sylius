@@ -109,6 +109,10 @@
             <group>sylius:admin:taxon:index</group>
             <group>admin:taxon:show</group>
             <group>sylius:admin:taxon:show</group>
+            <group>shop:taxon:index</group>
+            <group>sylius:shop:taxon:index</group>
+            <group>shop:taxon:show</group>
+            <group>sylius:shop:taxon:show</group>
         </attribute>
     </class>
 </serializer>
