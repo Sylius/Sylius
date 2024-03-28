@@ -34,7 +34,7 @@ final class ProductImageType extends ImageType
     {
         parent::buildForm($builder, $options);
 
-        if (isset($options['product']) && $options['product'] instanceof ProductInterface) {
+        if (isset($options['product']) && $options['product'] instanceof ProductInterface && $options['product']->getId() !== null) {
             $builder
                 ->add('productVariants', EntityType::class, [
                     'class' => $this->productVariantClass,
