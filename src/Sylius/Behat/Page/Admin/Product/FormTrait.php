@@ -13,8 +13,10 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Page\Admin\Product;
 
+use Behat\Mink\Exception\ElementNotFoundException;
 use Sylius\Behat\Service\DriverHelper;
 use Sylius\Component\Core\Model\ChannelInterface;
+use Sylius\Component\Core\Model\ProductVariantInterface;
 
 trait FormTrait
 {
@@ -31,6 +33,10 @@ trait FormTrait
             'field_shipping_category' => '[name="sylius_product[variant][shippingCategory]"]',
             'field_shipping_required' => '[name="sylius_product[variant][shippingRequired]"]',
             'generate_product_slug_button' => '[data-test-generate-product-slug-button="%localeCode%"]',
+            'images' => '[data-test-images]',
+            'image_subform' => '[data-test-image-subform]',
+            'image_subform_with_type' => '[data-test-image-subform][data-test-type="%type%"]',
+            'images_subforms' => '[data-test-image-subforms]',
             'product_attribute_autocomplete' => '[data-test-product-attribute-autocomplete]',
             'product_attribute_delete_button' => '[data-test-product-attribute-delete-button="%attributeName%"]',
             'product_attribute_input' => 'input[name="product_attributes"]',
@@ -211,6 +217,53 @@ trait FormTrait
             $this->getElement('product_attribute_input')->getXpath(),
             $attributeName,
         );
+    }
+
+    /*
+     * Media management
+     */
+
+    public function attachImage(string $path, string $type = null, ?ProductVariantInterface $productVariant = null): void
+    {
+        $this->changeTab('media');
+        $this->clickButton('Add image');
+        $this->waitForFormUpdate();
+
+        $images = $this->getElement('images');
+        $imagesSubform = $images->findAll('css', '[data-test-image-subforms]');
+        $imageSubform = end($imagesSubform);
+
+        if (null !== $type) {
+            $imageSubform->fillField('Type', $type);
+        }
+
+        if (null !== $productVariant) {
+            $this->autocompleteHelper->select(
+                $this->getDriver(),
+                $imageSubform->find('css', '[data-test-product-variants]')->getXpath(),
+                $productVariant->getCode(),
+            );
+        }
+
+        $filesPath = $this->getParameter('files_path');
+        $imageSubform->find('css', '[data-test-file]')->attachFile($filesPath . $path);
+    }
+
+    public function hasImageWithType(string $type): bool
+    {
+        $this->changeTab('media');
+        try {
+            $imageSubform = $this->getElement('image_subform_with_type', ['%type%' => $type]);
+        } catch (ElementNotFoundException) {
+            return false;
+        }
+
+        $imageUrl = $imageSubform->getAttribute('data-test-image-url');
+        $this->getDriver()->visit($imageUrl);
+        $statusCode = $this->getDriver()->getStatusCode();
+        $this->getDriver()->back();
+
+        return in_array($statusCode, [200, 304], true);
     }
 
     /*

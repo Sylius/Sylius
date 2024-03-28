@@ -63,22 +63,6 @@ class CreateConfigurableProductPage extends BaseCreatePage implements CreateConf
         AutocompleteHelper::chooseValue($this->getSession(), $mainTaxonElement, $taxon->getName());
     }
 
-    public function attachImage(string $path, ?string $type = null): void
-    {
-        $this->clickTabIfItsNotActive('media');
-
-        $filesPath = $this->getParameter('files_path');
-
-        $this->getDocument()->clickLink('Add');
-
-        $imageForm = $this->getLastImageElement();
-        if (null !== $type) {
-            $imageForm->fillField('Type', $type);
-        }
-
-        $imageForm->find('css', 'input[type="file"]')->attachFile($filesPath . $path);
-    }
-
     public function activateLanguageTab(string $localeCode): void
     {
         if (DriverHelper::isNotJavascript($this->getDriver())) {

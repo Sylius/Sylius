@@ -943,7 +943,7 @@ final class ManagingProductsContext implements Context
     {
         $currentPage = $this->resolveCurrentPage();
 
-        Assert::true($currentPage->isImageWithTypeDisplayed($type));
+        Assert::true($currentPage->hasImageWithType($type));
     }
 
     /**
