@@ -56,6 +56,14 @@ final class RegistrationContext implements Context
     }
 
     /**
+     * @When I specify the :firstOrLast name as too long value
+     */
+    public function iSpecifyTheFirstOrLastNameAsTooLongValue(string $firstOrLast): void
+    {
+        $this->content[$firstOrLast . 'Name'] = str_repeat('a', 256);
+    }
+
+    /**
      * @When I specify the last name as :lastName
      * @When I do not specify the last name
      */
@@ -212,6 +220,14 @@ final class RegistrationContext implements Context
     public function iShouldBeNotifiedThatThePasswordIsRequired(): void
     {
         $this->assertFieldValidationMessage('password', 'Please enter your password.');
+    }
+
+    /**
+     * @Then I should be notified that the :firstOrLast name is too long
+     */
+    public function iShouldBeNotifiedThatTheFirstOrLastNameIsTooLong(string $firstOrLast): void
+    {
+        $this->assertFieldValidationMessage($firstOrLast . 'Name', sprintf('%s name must not be longer than 255 characters.', ucfirst($firstOrLast)));
     }
 
     /**
