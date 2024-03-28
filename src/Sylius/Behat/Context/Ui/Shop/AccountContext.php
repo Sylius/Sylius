@@ -161,7 +161,7 @@ final class AccountContext implements Context
     {
         Assert::true($this->profileUpdatePage->checkValidationMessageFor(
             'phone_number',
-            'Phone number must not be longer than 255 characters.'
+            'Phone number must not be longer than 255 characters.',
         ));
     }
 
