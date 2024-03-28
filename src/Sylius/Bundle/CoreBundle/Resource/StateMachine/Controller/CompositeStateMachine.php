@@ -21,7 +21,7 @@ use Webmozart\Assert\Assert;
 
 final class CompositeStateMachine implements ResourceStateMachineInterface
 {
-    public function __construct (
+    public function __construct(
         private readonly StateMachineInterface $compositeStateMachine,
     ) {
     }

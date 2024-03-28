@@ -29,8 +29,7 @@ final class CompositeStateMachineSpec extends ObjectBehavior
         StateMachineInterface $stateMachine,
         RequestConfiguration $requestConfiguration,
         ResourceInterface $resource,
-    ): void
-    {
+    ): void {
         $requestConfiguration->hasStateMachine()->willReturn(true);
         $requestConfiguration->getStateMachineGraph()->willReturn('default');
         $requestConfiguration->getStateMachineTransition()->willReturn('transition');
@@ -44,8 +43,7 @@ final class CompositeStateMachineSpec extends ObjectBehavior
         StateMachineInterface $stateMachine,
         RequestConfiguration $requestConfiguration,
         ResourceInterface $resource,
-    ): void
-    {
+    ): void {
         $requestConfiguration->hasStateMachine()->willReturn(true);
         $requestConfiguration->getStateMachineGraph()->willReturn('default');
         $requestConfiguration->getStateMachineTransition()->willReturn('transition');
