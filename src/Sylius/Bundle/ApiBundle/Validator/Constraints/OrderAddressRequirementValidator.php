@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Bundle\ApiBundle\Validator\Constraints;
 
 use Sylius\Bundle\ApiBundle\Command\Checkout\UpdateCart;
+use Sylius\Bundle\ApiBundle\Exception\ChannelNotFoundException;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
@@ -47,7 +48,9 @@ final class OrderAddressRequirementValidator extends ConstraintValidator
         /** @var OrderInterface|null $order */
         $order = $this->orderRepository->findCartByTokenValue($value->orderTokenValue);
         $channel = $order?->getChannel();
-        Assert::notNull($channel);
+        if (null === $channel) {
+            throw new ChannelNotFoundException();
+        }
 
         [$method, $addressName] = $channel->isShippingAddressInCheckoutRequired() ? ['getShippingAddress', 'shipping address'] : ['getBillingAddress', 'billing address'];
 

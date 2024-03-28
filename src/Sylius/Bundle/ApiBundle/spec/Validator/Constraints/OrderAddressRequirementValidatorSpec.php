@@ -15,6 +15,7 @@ namespace spec\Sylius\Bundle\ApiBundle\Validator\Constraints;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ApiBundle\Command\Checkout\UpdateCart;
+use Sylius\Bundle\ApiBundle\Exception\ChannelNotFoundException;
 use Sylius\Bundle\ApiBundle\Validator\Constraints\OrderAddressRequirement;
 use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
@@ -73,7 +74,7 @@ final class OrderAddressRequirementValidatorSpec extends ObjectBehavior
         $context->addViolation(self::MESSAGE, ['%addressName%' => 'shippingAddress'])->shouldNotHaveBeenCalled();
     }
 
-    function it_throw_exception_if_order_not_found(
+    function it_throws_exception_if_order_not_found(
         OrderRepositoryInterface $orderRepository,
         AddressInterface $billingAddress,
     ): void {
@@ -83,12 +84,12 @@ final class OrderAddressRequirementValidatorSpec extends ObjectBehavior
         $updateCart->setOrderTokenValue('TOKEN');
 
         $this
-            ->shouldThrow(\InvalidArgumentException::class)
+            ->shouldThrow(ChannelNotFoundException::class)
             ->during('validate', [$updateCart, new OrderAddressRequirement()])
         ;
     }
 
-    function it_throw_exception_if_order_does_not_have_channel(
+    function it_throws_exception_if_order_does_not_have_channel(
         OrderRepositoryInterface $orderRepository,
         OrderInterface $order,
         AddressInterface $billingAddress,
@@ -100,7 +101,7 @@ final class OrderAddressRequirementValidatorSpec extends ObjectBehavior
         $updateCart->setOrderTokenValue('TOKEN');
 
         $this
-            ->shouldThrow(\InvalidArgumentException::class)
+            ->shouldThrow(ChannelNotFoundException::class)
             ->during('validate', [$updateCart, new OrderAddressRequirement()])
         ;
     }
