@@ -20,6 +20,13 @@
                     <value>sylius</value>
                 </option>
             </constraint>
+            <constraint name="Length">
+                <option name="min">2</option>
+                <option name="minMessage">sylius.customer.first_name.min</option>
+                <option name="max">255</option>
+                <option name="maxMessage">sylius.customer.first_name.max</option>
+                <option name="groups">sylius</option>
+            </constraint>
         </property>
         <property name="lastName">
             <constraint name="NotBlank">
@@ -27,6 +34,13 @@
                 <option name="groups">
                     <value>sylius</value>
                 </option>
+            </constraint>
+            <constraint name="Length">
+                <option name="min">2</option>
+                <option name="minMessage">sylius.customer.last_name.min</option>
+                <option name="max">255</option>
+                <option name="maxMessage">sylius.customer.last_name.max</option>
+                <option name="groups">sylius</option>
             </constraint>
         </property>
         <property name="password">

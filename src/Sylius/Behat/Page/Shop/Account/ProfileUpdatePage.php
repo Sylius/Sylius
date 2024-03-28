@@ -39,6 +39,16 @@ class ProfileUpdatePage extends SymfonyPage implements ProfileUpdatePageInterfac
         $this->getElement('first_name')->setValue($firstName);
     }
 
+    public function specifyPhoneNumber(?string $phoneNumber): void
+    {
+        $this->getElement('phone_number')->setValue($phoneNumber);
+    }
+
+    public function getPhoneNumber(): string
+    {
+        return $this->getElement('phone_number')->getValue();
+    }
+
     public function specifyLastName(?string $lastName): void
     {
         $this->getElement('last_name')->setValue($lastName);
@@ -70,6 +80,7 @@ class ProfileUpdatePage extends SymfonyPage implements ProfileUpdatePageInterfac
             'email' => '[data-test-email]',
             'first_name' => '[data-test-first-name]',
             'last_name' => '[data-test-last-name]',
+            'phone_number' => '#sylius_customer_profile_phoneNumber',
             'save_changes_button' => '[data-test-save-changes]',
             'subscribe_newsletter' => '[data-test-subscribe-newsletter]',
         ]);

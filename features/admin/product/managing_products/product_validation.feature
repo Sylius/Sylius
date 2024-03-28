@@ -22,6 +22,13 @@ Feature: Products validation
         Then I should be notified that code is required
         And product with name "Dice Brewing" should not be added
 
+    @no-ui @api
+    Scenario: Trying to add product translation in unexisting locale
+        When I want to modify the "Symfony Mug" product
+        And I name it "Symfony tasse" in "French (France)"
+        And I try to save my changes
+        Then I should be notified that the locale is not available
+
     @ui @no-api
     Scenario: Adding a new simple product with duplicated code among products
         Given the store has a product "7 Wonders" with code "AWESOME_GAME"

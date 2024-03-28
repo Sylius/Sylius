@@ -17,6 +17,8 @@ sylius:
             invalid: This email is invalid.
             unique: This email is already used.
             registered: This email is already registered, please login or use forgotten password.
+        phone_number:
+            max: Phone number must not be longer than {{ limit }} characters.
     customer_group:
         code:
             max_length: The code must not be longer than {{ limit }} characters.
