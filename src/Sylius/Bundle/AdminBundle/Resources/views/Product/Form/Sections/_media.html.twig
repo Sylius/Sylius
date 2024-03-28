@@ -13,7 +13,7 @@
                 {% for imageForm in form.images %}
                     <div
                         class="col-12 col-md-6 row mb-4"
-                        {{ sylius_test_html_attribute('image-subform') }}
+                        {{ sylius_test_html_attribute('image-subforms') }}
                     >
                         <div class="col-auto">
                             {% if imageForm.vars.value.path is not null %}
@@ -22,17 +22,22 @@
                                 <span class="avatar avatar-xl"></span>
                             {% endif %}
                         </div>
-                        <div class="col">
+                        <div
+                            class="col"
+                            {{ sylius_test_html_attribute('image-subform')}}
+                            {{ sylius_test_html_attribute('type', imageForm.type.vars.value) }}
+                            {{ sylius_test_html_attribute('image-url', imageForm.vars.value.path ? imageForm.vars.value.path|imagine_filter('sylius_small') : null) }}
+                        >
                             <div class="mb-3">
-                                {{ form_row(imageForm.type) }}
+                                {{ form_row(imageForm.type, sylius_test_form_attribute('type')) }}
                             </div>
                             <div class="mb-3">
                                 {% if product.id is not null and 0 != product.variants|length and not product.simple %}
-                                    {{ form_row(imageForm.productVariants) }}
+                                    {{ form_row(imageForm.productVariants, sylius_test_form_attribute('product-variants')) }}
                                 {% endif %}
                             </div>
                             <div class="mb-3">
-                                {{ form_row(imageForm.file) }}
+                                {{ form_row(imageForm.file, sylius_test_form_attribute('file')) }}
                             </div>
                         </div>
                     </div>
