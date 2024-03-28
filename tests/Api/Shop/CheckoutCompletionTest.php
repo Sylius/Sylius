@@ -87,7 +87,7 @@ final class CheckoutCompletionTest extends JsonApiTestCase
         $this->assertResponseViolations(
             $this->client->getResponse(),
             [
-               ['propertyPath' => '', 'message' => 'Please provide billingAddress.'],
+               ['propertyPath' => '', 'message' => 'Please provide a billing address.'],
             ]
         );
     }
@@ -126,7 +126,7 @@ final class CheckoutCompletionTest extends JsonApiTestCase
         $this->assertResponseViolations(
             $this->client->getResponse(),
             [
-               ['propertyPath' => '', 'message' => 'Please provide shippingAddress.'],
+               ['propertyPath' => '', 'message' => 'Please provide a shipping address.'],
             ]
         );
     }

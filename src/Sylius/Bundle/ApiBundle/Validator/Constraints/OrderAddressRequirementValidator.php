@@ -49,9 +49,9 @@ final class OrderAddressRequirementValidator extends ConstraintValidator
         $channel = $order?->getChannel();
         Assert::notNull($channel);
 
-        $addressName = $channel->isShippingAddressInCheckoutRequired() ? 'shippingAddress' : 'billingAddress';
+        [$method, $addressName] = $channel->isShippingAddressInCheckoutRequired() ? ['getShippingAddress', 'shipping address'] : ['getBillingAddress', 'billing address'];
 
-        if (null === $value->$addressName) {
+        if (null === $value->$method()) {
             $this->context->addViolation($constraint->message, ['%addressName%' => $addressName]);
         }
     }

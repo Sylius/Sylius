@@ -159,7 +159,7 @@ final class OrderAddressRequirementValidatorSpec extends ObjectBehavior
 
         $this->validate($updateCart, new OrderAddressRequirement());
 
-        $context->addViolation(self::MESSAGE, ['%addressName%' => 'shippingAddress'])->shouldHaveBeenCalled();
+        $context->addViolation(self::MESSAGE, ['%addressName%' => 'shipping address'])->shouldHaveBeenCalled();
     }
 
     function it_adds_violation_if_billing_address_is_required_but_not_provided(
@@ -178,6 +178,6 @@ final class OrderAddressRequirementValidatorSpec extends ObjectBehavior
 
         $this->validate($updateCart, new OrderAddressRequirement());
 
-        $context->addViolation(self::MESSAGE, ['%addressName%' => 'billingAddress'])->shouldHaveBeenCalled();
+        $context->addViolation(self::MESSAGE, ['%addressName%' => 'billing address'])->shouldHaveBeenCalled();
     }
 }
