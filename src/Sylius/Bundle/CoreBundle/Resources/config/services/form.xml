@@ -149,6 +149,7 @@
 
         <service id="sylius.form.type.product_image" class="Sylius\Bundle\CoreBundle\Form\Type\Product\ProductImageType">
             <argument>%sylius.model.product_image.class%</argument>
+            <argument>%sylius.model.product_variant.class%</argument>
             <argument>%sylius.form.type.product_image.validation_groups%</argument>
             <tag name="form.type" />
         </service>
