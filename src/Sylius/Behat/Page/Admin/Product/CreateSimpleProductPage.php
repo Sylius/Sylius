@@ -118,22 +118,6 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
         $productTaxonsElement->setValue(implode(',', $productTaxonsCodes));
     }
 
-    public function attachImage(string $path, string $type = null): void
-    {
-        $this->clickTabIfItsNotActive('media');
-
-        $filesPath = $this->getParameter('files_path');
-
-        $this->getDocument()->clickLink('Add');
-
-        $imageForm = $this->getLastImageElement();
-        if (null !== $type) {
-            $imageForm->fillField('Type', $type);
-        }
-
-        $imageForm->find('css', 'input[type="file"]')->attachFile($filesPath . $path);
-    }
-
     public function associateProducts(ProductAssociationTypeInterface $productAssociationType, array $productsNames): void
     {
         $this->clickTab('associations');
