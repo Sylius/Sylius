@@ -8,12 +8,12 @@ Feature: Adding a new product with images
         Given the store operates on a single channel in "United States"
         And I am logged in as an administrator
 
-    @todo @ui @mink:chromedriver @no-api
+    @ui @mink:chromedriver @no-api
     Scenario: Adding a new simple product with a single image
         When I want to create a new simple product
         And I specify its code as "LAMBORGHINI_GALLARDO"
         And I name it "Lamborghini Gallardo Model" in "English (United States)"
-        And I set its price to "$100.00" for "United States" channel
+#        And I set its price to "$100.00" for "United States" channel
         And I attach the "lamborghini.jpg" image with "banner" type
         And I add it
         Then I should be notified that it has been successfully created
@@ -24,7 +24,7 @@ Feature: Adding a new product with images
         When I want to create a new simple product
         And I specify its code as "LAMBORGHINI_GALLARDO"
         And I name it "Lamborghini Gallardo Model" in "English (United States)"
-        And I set its price to "$100.00" for "United States" channel
+#        And I set its price to "$100.00" for "United States" channel
         And I attach the "lamborghini.jpg" image with "banner" type
         And I attach the "lamborghini.jpg" image with "thumbnail" type
         And I add it

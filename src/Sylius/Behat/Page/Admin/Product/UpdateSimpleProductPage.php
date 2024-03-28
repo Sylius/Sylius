@@ -203,22 +203,6 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
         return in_array($statusCode, [200, 304], true);
     }
 
-    public function attachImage(string $path, string $type = null): void
-    {
-        $this->clickTabIfItsNotActive('media');
-
-        $filesPath = $this->getParameter('files_path');
-
-        $this->getDocument()->clickLink('Add');
-
-        $imageForm = $this->getLastImageElement();
-        if (null !== $type) {
-            $imageForm->fillField('Type', $type);
-        }
-
-        $imageForm->find('css', 'input[type="file"]')->attachFile($filesPath . $path);
-    }
-
     public function changeImageWithType(string $type, string $path): void
     {
         $filesPath = $this->getParameter('files_path');

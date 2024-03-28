@@ -112,25 +112,6 @@ class UpdateConfigurableProductPage extends BaseUpdatePage implements UpdateConf
         return $productVariant->getCode() === $imageForm->find('css', 'input[type="hidden"]')->getValue();
     }
 
-    public function attachImage(string $path, string $type = null, ?ProductVariantInterface $productVariant = null): void
-    {
-        $this->clickTabIfItsNotActive('media');
-        $this->getDocument()->clickLink('Add');
-
-        $imageForm = $this->getLastImageElement();
-
-        if (null !== $type) {
-            $imageForm->fillField('Type', $type);
-        }
-
-        if (null !== $productVariant) {
-            $imageForm->find('css', 'input[type="hidden"]')->setValue($productVariant->getCode());
-        }
-
-        $filesPath = $this->getParameter('files_path');
-        $imageForm->find('css', 'input[type="file"]')->attachFile($filesPath . $path);
-    }
-
     public function changeImageWithType(string $type, string $path): void
     {
         $filesPath = $this->getParameter('files_path');
