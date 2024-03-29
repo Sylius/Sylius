@@ -35,6 +35,7 @@ trait FormTrait
             'product_attribute_delete_button' => '[data-test-product-attribute-delete-button="%attributeName%"]',
             'product_attribute_input' => 'input[name="product_attributes"]',
             'product_attribute_tab' => '[data-test-product-attribute-tab="%name%"]',
+            'product_options_autocomplete' => '[data-test-product-options-autocomplete]',
             'product_translation_accordion' => '[data-test-product-translation-accordion="%localeCode%"]',
             'side_navigation_tab' => '[data-test-side-navigation-tab="%name%"]',
         ];
@@ -96,6 +97,15 @@ trait FormTrait
     public function isShippingRequired(): bool
     {
         return $this->getElement('field_shipping_required')->isChecked();
+    }
+
+    // TODO: Move to the Configurable Product specific class
+    public function selectOption(string $optionName): void
+    {
+        $this->changeTab('details');
+        $productOptionsAutocomplete = $this->getElement('product_options_autocomplete');
+
+        $this->selectAutocompleteValue($productOptionsAutocomplete->getXpath(), $optionName);
     }
 
     /*
@@ -219,5 +229,10 @@ trait FormTrait
     private function clickButton(string $locator): void
     {
         $this->getDocument()->pressButton($locator);
+    }
+
+    private function selectAutocompleteValue(string $xpath, string $value): void
+    {
+        $this->autocompleteHelper->select($this->getDriver(), $xpath, $value);
     }
 }

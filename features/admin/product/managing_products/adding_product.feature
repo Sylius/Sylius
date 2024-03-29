@@ -81,7 +81,6 @@ Feature: Adding a new product
         And I specify its code as "WHISKEY_GENTLEMEN"
         And I name it "Gentleman Jack" in "English (United States)"
         And I add the "Bottle size" option to it
-        And I set its slug to "whiskey/gentleman-jack" in "English (United States)"
         And I add it
         Then I should be notified that it has been successfully created
         And the product "Gentleman Jack" should appear in the store

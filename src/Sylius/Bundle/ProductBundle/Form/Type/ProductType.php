@@ -33,6 +33,7 @@ final class ProductType extends AbstractResourceType
      */
     public function __construct(
         string $dataClass,
+        private string $productOptionClass,
         array $validationGroups,
         private ProductVariantResolverInterface $variantResolver,
         private FactoryInterface $attributeValueFactory,
@@ -45,7 +46,7 @@ final class ProductType extends AbstractResourceType
     {
         $builder
             ->addEventSubscriber(new AddCodeFormSubscriber())
-            ->addEventSubscriber(new ProductOptionFieldSubscriber($this->variantResolver))
+            ->addEventSubscriber(new ProductOptionFieldSubscriber($this->variantResolver, $this->productOptionClass))
             ->addEventSubscriber(new SimpleProductSubscriber())
             ->addEventSubscriber(new BuildAttributesFormSubscriber($this->attributeValueFactory, $this->localeProvider))
             ->add('enabled', CheckboxType::class, [
