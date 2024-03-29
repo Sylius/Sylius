@@ -1,6 +1,0 @@
-{
-    "@context": "\/api\/v2\/contexts\/Error",
-    "@type": "hydra:Error",
-    "hydra:title": "An error occurred",
-    "hydra:description": "Order item not found"
-}

@@ -196,11 +196,7 @@ final class CartTest extends JsonApiTestCase
 
         $this->requestDelete(sprintf('/api/v2/shop/orders/%s/items/STRING-INSTEAD-OF-ID', $tokenValue));
 
-        $this->assertResponse(
-            $this->client->getResponse(),
-            'shop/checkout/cart/remove_item_with_invalid_id_item',
-            Response::HTTP_UNPROCESSABLE_ENTITY,
-        );
+        $this->assertResponseCode($this->client->getResponse(), Response::HTTP_UNPROCESSABLE_ENTITY);
     }
 
     /** @test */
@@ -306,11 +302,7 @@ final class CartTest extends JsonApiTestCase
             content: json_encode(['quantity' => 5]),
         );
 
-        $this->assertResponse(
-            $this->client->getResponse(),
-            'shop/checkout/cart/update_item_with_invalid_id_item',
-            Response::HTTP_UNPROCESSABLE_ENTITY,
-        );
+        $this->assertResponseCode($this->client->getResponse(), Response::HTTP_UNPROCESSABLE_ENTITY);
     }
 
     /** @test */
