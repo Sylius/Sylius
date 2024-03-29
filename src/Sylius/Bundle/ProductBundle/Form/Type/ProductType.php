@@ -16,7 +16,6 @@ namespace Sylius\Bundle\ProductBundle\Form\Type;
 use Sylius\Bundle\ProductBundle\Form\EventSubscriber\BuildAttributesFormSubscriber;
 use Sylius\Bundle\ProductBundle\Form\EventSubscriber\ProductOptionFieldSubscriber;
 use Sylius\Bundle\ProductBundle\Form\EventSubscriber\SimpleProductSubscriber;
-use Sylius\Bundle\ResourceBundle\Form\EventSubscriber\AddCodeFormSubscriber;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Sylius\Bundle\ResourceBundle\Form\Type\ResourceTranslationsType;
 use Sylius\Component\Product\Resolver\ProductVariantResolverInterface;
@@ -24,7 +23,10 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Translation\Provider\TranslationLocaleProviderInterface;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
 
 final class ProductType extends AbstractResourceType
 {
@@ -45,10 +47,10 @@ final class ProductType extends AbstractResourceType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->addEventSubscriber(new AddCodeFormSubscriber())
             ->addEventSubscriber(new ProductOptionFieldSubscriber($this->variantResolver, $this->productOptionClass))
             ->addEventSubscriber(new SimpleProductSubscriber())
             ->addEventSubscriber(new BuildAttributesFormSubscriber($this->attributeValueFactory, $this->localeProvider))
+            ->addEventListener(FormEvents::PRE_SET_DATA, $this->addCodeField(...))
             ->add('enabled', CheckboxType::class, [
                 'required' => false,
                 'label' => 'sylius.form.product.enabled',
@@ -70,6 +72,20 @@ final class ProductType extends AbstractResourceType
                 'label' => false,
             ])
         ;
+    }
+
+    private function addCodeField(FormEvent $event): void
+    {
+        $product = $event->getData();
+
+        if (null === $product) {
+            return;
+        }
+
+        $event->getForm()->add('code', TextType::class, [
+            'label' => 'sylius.ui.code',
+            'disabled' => null !== $product->getId(),
+        ]);
     }
 
     public function getBlockPrefix(): string
