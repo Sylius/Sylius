@@ -9,10 +9,10 @@
 <div class="bg-white mb-5">
     {% set content %}
         <div class="mb-3">
-            <form method="get" action="{{ path }}" class="ui loadable form" novalidate>
+            <form method="get" action="{{ path }}" novalidate>
                 <div class="sylius-filters">
                     {% for filter in resources.definition.enabledFilters|filter(filter => filter.enabled)|sort_by('position') %}
-                        <div class="sylius-filters__field">
+                        <div class="sylius-filters__item">
                             {{ sylius_grid_render_filter(resources, filter) }}
                         </div>
                     {% endfor %}
