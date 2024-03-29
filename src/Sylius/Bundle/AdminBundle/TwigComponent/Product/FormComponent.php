@@ -180,7 +180,7 @@ class FormComponent
         return serialize($value);
     }
 
-    private function getDataModelValue(): ?string
+    private function getDataModelValue(): string
     {
         return 'norender|*';
     }
