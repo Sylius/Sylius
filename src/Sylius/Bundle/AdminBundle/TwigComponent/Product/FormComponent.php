@@ -43,7 +43,7 @@ final class FormComponent
     use HookableComponentTrait;
     use LiveCollectionTrait;
 
-    #[LiveProp(fieldName: 'formData')]
+    #[LiveProp(hydrateWith: 'hydrateFormData', dehydrateWith: 'dehydrateFormData', fieldName: 'formData')]
     public ?Product $resource = null;
 
     /**
@@ -168,5 +168,20 @@ final class FormComponent
     public function dehydrateAttributesToBeAdded(array $value): string
     {
         return implode(',', $value);
+    }
+
+    public function hydrateFormData(?string $value): Product
+    {
+        return unserialize($value);
+    }
+
+    public function dehydrateFormData(Product $value): string
+    {
+        return serialize($value);
+    }
+
+    private function getDataModelValue(): ?string
+    {
+        return 'norender|*';
     }
 }
