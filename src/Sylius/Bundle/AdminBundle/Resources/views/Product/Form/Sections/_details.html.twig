@@ -15,6 +15,14 @@
             <div class="mb-3">
                 {{ form_row(form.enabled) }}
             </div>
+            {% if product.isSimple %}
+                <div class="mb-3">
+                    {{ form_row(form.variant.shippingRequired) }}
+                </div>
+                <div class="d-none">
+                    {{ form_row(form.variant.translations) }}
+                </div>
+            {% endif %}
             <div class="mb-3">
                 {{ form_row(form.channels) }}
             </div>
@@ -26,11 +34,6 @@
             <div class="mb-3 {% if product.isSimple %}d-none{% endif %}">
                 {{ form_row(form.variantSelectionMethod) }}
             </div>
-            {% if product.isSimple %}
-                <div class="d-none">
-                    {{ form_row(form.variant.translations) }}
-                </div>
-            {% endif %}
         </div>
     </div>
 </div>

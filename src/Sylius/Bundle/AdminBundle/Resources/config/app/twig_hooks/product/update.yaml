@@ -36,6 +36,10 @@ twig_hooks:
                     active: true
             channel_pricing:
                 template: '@SyliusAdmin/Product/Form/SideNavigation/_channelPricing.html.twig'
+            taxes:
+                template: '@SyliusAdmin/Product/Form/SideNavigation/_taxes.html.twig'
+            shipping:
+                template: '@SyliusAdmin/Product/Form/SideNavigation/_shipping.html.twig'
             inventory:
                 template: '@SyliusAdmin/Product/Form/SideNavigation/_inventory.html.twig'
             translations:
@@ -54,6 +58,10 @@ twig_hooks:
                 template: '@SyliusAdmin/Product/Form/Sections/_details.html.twig'
             channel_pricing:
                 template: '@SyliusAdmin/Product/Form/Sections/_channelPricing.html.twig'
+            taxes:
+                template: '@SyliusAdmin/Product/Form/Sections/_taxes.html.twig'
+            shipping:
+                template: '@SyliusAdmin/Product/Form/Sections/_shipping.html.twig'
             inventory:
                 template: '@SyliusAdmin/Product/Form/Sections/_inventory.html.twig'
             translations:

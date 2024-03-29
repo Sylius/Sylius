@@ -40,7 +40,7 @@ Feature: Adding a new product
         Then I should be notified that it has been successfully created
         And the product "Dice Brewing" should appear in the store
 
-    @todo @ui @no-api
+    @ui @mink:chromedriver @no-api
     Scenario: Adding a new simple product with specific shipping category
         When I want to create a new simple product
         And I specify its code as "BOARD_DICE_BREWING"
@@ -51,7 +51,28 @@ Feature: Adding a new product
         Then I should be notified that it has been successfully created
         And the product "Dice Brewing" should appear in the store
 
-    @todo @ui @javascript @api
+    @ui @mink:chromedriver @no-api
+    Scenario: Adding a new simple product without shipping required
+        When I want to create a new simple product
+        And I specify its code as "BOARD_DICE_BREWING"
+        And I name it "Dice Brewing" in "English (United States)"
+        And I set its price to "$10.00" for "United States" channel
+        And I do not want to have shipping required for this product
+        And I add it
+        Then I should be notified that it has been successfully created
+        And the product "Dice Brewing" should not have shipping required
+        And the product "Dice Brewing" should appear in the store
+
+    @ui @mink:chromedriver @api
+    Scenario: Adding a new configurable product without options
+        When I want to create a new configurable product
+        And I specify its code as "WHISKEY_GENTLEMEN"
+        And I name it "Gentleman Jack" in "English (United States)"
+        And I add it
+        Then I should be notified that it has been successfully created
+        And the product "Gentleman Jack" should appear in the store
+
+    @ui @mink:chromedriver @api
     Scenario: Adding a new configurable product
         Given the store has a product option "Bottle size" with a code "bottle_size"
         And this product option has the "0.7" option value with code "bottle_size_medium"
@@ -64,26 +85,3 @@ Feature: Adding a new product
         And I add it
         Then I should be notified that it has been successfully created
         And the product "Gentleman Jack" should appear in the store
-
-    @todo @ui @api
-    Scenario: Adding a new configurable product without options
-        When I want to create a new configurable product
-        And I specify its code as "WHISKEY_GENTLEMEN"
-        And I name it "Gentleman Jack" in "English (United States)"
-        And I set its slug to "whiskey/gentleman-jack" in "English (United States)"
-        And I add it
-        Then I should be notified that it has been successfully created
-        And the product "Gentleman Jack" should appear in the store
-
-    @todo @ui @no-api
-    Scenario: Adding a new simple product without shipping required
-        When I want to create a new simple product
-        And I specify its code as "BOARD_DICE_BREWING"
-        And I name it "Dice Brewing" in "English (United States)"
-        And I set its slug to "dice-brewing" in "English (United States)"
-        And I set its price to "$10.00" for "United States" channel
-        And I do not want to have shipping required for this product
-        And I add it
-        Then I should be notified that it has been successfully created
-        And the product "Dice Brewing" should not have shipping required
-        And the product "Dice Brewing" should appear in the store

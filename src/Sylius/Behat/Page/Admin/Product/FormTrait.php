@@ -28,6 +28,8 @@ trait FormTrait
             'field_slug' => '[name="sylius_product[translations][%localeCode%][slug]"]',
             'field_price' => '[name="sylius_product[variant][channelPricings][%channelCode%][price]"]',
             'field_original_price' => '[name="sylius_product[variant][channelPricings][%channelCode%][originalPrice]"]',
+            'field_shipping_category' => '[name="sylius_product[variant][shippingCategory]"]',
+            'field_shipping_required' => '[name="sylius_product[variant][shippingRequired]"]',
             'generate_product_slug_button' => '[data-test-generate-product-slug-button="%localeCode%"]',
             'product_attribute_autocomplete' => '[data-test-product-attribute-autocomplete]',
             'product_attribute_delete_button' => '[data-test-product-attribute-delete-button="%attributeName%"]',
@@ -49,7 +51,6 @@ trait FormTrait
         $this->getElement('field_name', ['%localeCode%' => $localeCode])->setValue($name);
 
         if (DriverHelper::isJavascript($this->getDriver())) {
-            $this->waitForFormUpdate();
             $this->getElement('generate_product_slug_button', ['%localeCode%' => $localeCode])->click();
             $this->waitForFormUpdate();
         }
@@ -62,11 +63,39 @@ trait FormTrait
         $this->getElement('field_price', ['%channelCode%' => $channel->getCode()])->setValue($price);
     }
 
+    // TODO: Move to the Simple Product specific class
     public function specifyOriginalPrice(ChannelInterface $channel, int $originalPrice): void
     {
         $this->changeTab('channel-pricing');
         $this->changeChannelTab($channel->getCode());
         $this->getElement('field_original_price', ['%channelCode%' => $channel->getCode()])->setValue($originalPrice);
+    }
+
+    // TODO: Move to the Simple Product specific class
+    public function selectShippingCategory(string $shippingCategoryName): void
+    {
+        $this->changeTab('shipping');
+        $this->getElement('field_shipping_category')->selectOption($shippingCategoryName);
+    }
+
+    // TODO: Move to the Simple Product specific class
+    public function setShippingRequired(bool $isShippingRequired): void
+    {
+        $this->changeTab('details');
+
+        if ($isShippingRequired) {
+            $this->getElement('field_shipping_required')->check();
+
+            return;
+        }
+
+        $this->getElement('field_shipping_required')->uncheck();
+    }
+
+    // TODO: Move to the Simple Product specific class
+    public function isShippingRequired(): bool
+    {
+        return $this->getElement('field_shipping_required')->isChecked();
     }
 
     /*

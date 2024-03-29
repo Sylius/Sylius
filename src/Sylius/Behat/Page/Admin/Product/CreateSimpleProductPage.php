@@ -190,22 +190,6 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
         }
     }
 
-    public function selectShippingCategory(string $shippingCategoryName): void
-    {
-        $this->getElement('shipping_category')->selectOption($shippingCategoryName);
-    }
-
-    public function setShippingRequired(bool $isShippingRequired): void
-    {
-        if ($isShippingRequired) {
-            $this->getElement('shipping_required')->check();
-
-            return;
-        }
-
-        $this->getElement('shipping_required')->uncheck();
-    }
-
     public function getChannelPricingValidationMessage(): string
     {
         return $this->getElement('prices_validation_message')->getText();
