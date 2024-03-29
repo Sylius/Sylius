@@ -1,6 +1,6 @@
 {% form_theme form '@SyliusAdmin/Shared/form_theme.html.twig' %}
 
-<div class="input-group">
+<div class="sylius-filters__string">
     {% if form.type is defined %}
         {{ form_row(form.type, {'label': filter.label}) }}
     {% endif %}

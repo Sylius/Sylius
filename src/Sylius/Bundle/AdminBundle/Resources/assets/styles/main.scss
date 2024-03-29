@@ -9,7 +9,6 @@
 
 @import "variables";
 
-@import "choices.js/src/styles/choices.scss";
 @import "@tabler/core/src/scss/tabler.scss";
 
 // TODO: Once https://github.com/tabler/tabler/pull/1718 merged or resolve remove the custom _flags.scss and import the tabler's one
@@ -26,6 +25,7 @@ body {
 @import "avatar";
 @import "collapse";
 @import "dialog";
+@import "filters";
 @import "form";
 @import "layout";
 @import "loader";
@@ -33,6 +33,7 @@ body {
 @import "tree";
 
 @import "body";
+@import "choices";
 
 .focus .ts-control {
     box-shadow: none;
