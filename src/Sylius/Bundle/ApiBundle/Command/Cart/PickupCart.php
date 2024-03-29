@@ -17,7 +17,6 @@ use Sylius\Bundle\ApiBundle\Command\ChannelCodeAwareInterface;
 use Sylius\Bundle\ApiBundle\Command\CustomerEmailAwareInterface;
 use Sylius\Bundle\ApiBundle\Command\LocaleCodeAwareInterface;
 
-/** @experimental */
 class PickupCart implements ChannelCodeAwareInterface, CustomerEmailAwareInterface, LocaleCodeAwareInterface
 {
     /** @var string|null */

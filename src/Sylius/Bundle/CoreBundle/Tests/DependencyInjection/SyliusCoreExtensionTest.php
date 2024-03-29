@@ -20,6 +20,7 @@ use Sylius\Bundle\CoreBundle\Attribute\AsCatalogPromotionPriceCalculator;
 use Sylius\Bundle\CoreBundle\Attribute\AsEntityObserver;
 use Sylius\Bundle\CoreBundle\Attribute\AsOrderItemsTaxesApplicator;
 use Sylius\Bundle\CoreBundle\Attribute\AsOrderItemUnitsTaxesApplicator;
+use Sylius\Bundle\CoreBundle\Attribute\AsOrdersTotalsProvider;
 use Sylius\Bundle\CoreBundle\Attribute\AsProductVariantMapProvider;
 use Sylius\Bundle\CoreBundle\Attribute\AsTaxCalculationStrategy;
 use Sylius\Bundle\CoreBundle\Attribute\AsUriBasedSectionResolver;
@@ -29,6 +30,7 @@ use Sylius\Bundle\CoreBundle\Tests\Stub\CatalogPromotionPriceCalculatorStub;
 use Sylius\Bundle\CoreBundle\Tests\Stub\EntityObserverStub;
 use Sylius\Bundle\CoreBundle\Tests\Stub\OrderItemsTaxesApplicatorStub;
 use Sylius\Bundle\CoreBundle\Tests\Stub\OrderItemUnitsTaxesApplicatorStub;
+use Sylius\Bundle\CoreBundle\Tests\Stub\OrdersTotalsProviderStub;
 use Sylius\Bundle\CoreBundle\Tests\Stub\ProductVariantMapProviderStub;
 use Sylius\Bundle\CoreBundle\Tests\Stub\TaxCalculationStrategyStub;
 use Sylius\Bundle\CoreBundle\Tests\Stub\UriBasedSectionResolverStub;
@@ -134,6 +136,16 @@ final class SyliusCoreExtensionTest extends AbstractExtensionTestCase
         $this->load(['catalog_promotions' => ['batch_size' => 200]]);
 
         $this->assertContainerBuilderHasParameter('sylius_core.catalog_promotions.batch_size', 200);
+    }
+
+    /** @test */
+    public function it_loads_max_int_value_properly(): void
+    {
+        $this->container->setParameter('kernel.environment', 'dev');
+
+        $this->load(['max_int_value' => 200]);
+
+        $this->assertContainerBuilderHasParameter('sylius_core.max_int_value', 200);
     }
 
     /** @test */
@@ -336,6 +348,58 @@ final class SyliusCoreExtensionTest extends AbstractExtensionTestCase
             AsUriBasedSectionResolver::SERVICE_TAG,
             ['priority' => 20],
         );
+    }
+
+    /** @test */
+    public function it_autoconfigures_orders_totals_provider_with_attribute(): void
+    {
+        $this->container->setParameter('kernel.environment', 'prod');
+        $this->container->setDefinition(
+            'acme.orders_totals_provider',
+            (new Definition())
+                ->setClass(OrdersTotalsProviderStub::class)
+                ->setAutoconfigured(true),
+        );
+
+        $this->load();
+        $this->compile();
+
+        $this->assertContainerBuilderHasServiceDefinitionWithTag(
+            'acme.orders_totals_provider',
+            AsOrdersTotalsProvider::SERVICE_TAG,
+            ['type' => 'stub'],
+        );
+    }
+
+    /** @test */
+    public function it_sets_the_orders_statistics_intervals_map_parameter(): void
+    {
+        $this->container->setParameter('kernel.environment', 'prod');
+        $this->load([
+            'orders_statistics' => [
+                'intervals_map' => [
+                    'day' => [
+                        'interval' => 'P1D',
+                        'period_format' => 'YYYY-MM-DD',
+                    ],
+                    'month' => [
+                        'interval' => 'P1M',
+                        'period_format' => 'YYYY-MM',
+                    ],
+                ],
+            ],
+        ]);
+
+        $this->assertContainerBuilderHasParameter('sylius_core.orders_statistics.intervals_map', [
+            'day' => [
+                'interval' => 'P1D',
+                'period_format' => 'YYYY-MM-DD',
+            ],
+            'month' => [
+                'interval' => 'P1M',
+                'period_format' => 'YYYY-MM',
+            ],
+        ]);
     }
 
     protected function getContainerExtensions(): array

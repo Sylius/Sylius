@@ -3,6 +3,7 @@ sylius:
         name:
             not_blank: Please enter tax category name.
         code:
+            max_length: The code must not be longer than {{ limit }} characters.
             not_blank: Please enter tax category code.
             regex: Tax category code can only be comprised of letters, numbers, dashes and underscores.
             unique: The tax category with given code already exists.
@@ -19,6 +20,7 @@ sylius:
         zone:
             not_blank: Please select tax zone.
         code:
+            max_length: The code must not be longer than {{ limit }} characters.
             not_blank: Please enter tax rate code.
             regex: Tax rate code can only be comprised of letters, numbers, dashes and underscores.
             unique: The tax rate with given code already exists.

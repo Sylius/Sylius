@@ -63,6 +63,10 @@
     "extra": {
         "branch-alias": {
             "dev-main": "2.0-dev"
+        },
+        "symfony": {
+            "allow-contrib": false,
+            "require": "6.4.*"
         }
     },
     "autoload": {

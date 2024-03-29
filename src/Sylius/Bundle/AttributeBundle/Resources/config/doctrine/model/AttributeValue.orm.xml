@@ -29,7 +29,11 @@
         <field name="float" column="float_value" type="float" nullable="true" />
         <field name="datetime" column="datetime_value" type="datetime" nullable="true" />
         <field name="date" column="date_value" type="date" nullable="true" />
-        <field name="json" column="json_value" type="json" nullable="true" />
+        <field name="json" column="json_value" type="json" nullable="true">
+            <options>
+                <option name="jsonb">true</option>
+            </options>
+        </field>
     </mapped-superclass>
 
 </doctrine-mapping>

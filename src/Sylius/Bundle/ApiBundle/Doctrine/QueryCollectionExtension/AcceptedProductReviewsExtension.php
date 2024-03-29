@@ -19,7 +19,6 @@ use ApiPlatform\Metadata\Operation;
 use Doctrine\ORM\QueryBuilder;
 use Sylius\Component\Review\Model\ReviewInterface;
 
-/** @experimental */
 final readonly class AcceptedProductReviewsExtension implements QueryCollectionExtensionInterface
 {
     public function __construct(private string $productReviewClass)

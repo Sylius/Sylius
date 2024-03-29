@@ -14,18 +14,25 @@ declare(strict_types=1);
 namespace Sylius\Tests\Api\Admin;
 
 use Sylius\Tests\Api\JsonApiTestCase;
-use Sylius\Tests\Api\Utils\AdminUserLoginTrait;
 use Sylius\Tests\Api\Utils\OrderPlacerTrait;
-use Symfony\Component\HttpFoundation\Response;
 
 final class PaymentsTest extends JsonApiTestCase
 {
-    use AdminUserLoginTrait;
     use OrderPlacerTrait;
 
-    /** @test */
-    public function it_gets_an_order(): void
+    protected function setUp(): void
     {
+        $this->setUpOrderPlacer();
+        $this->setUpAdminContext();
+
+        parent::setUp();
+    }
+
+    /** @test */
+    public function it_gets_payments(): void
+    {
+        $this->setUpDefaultGetHeaders();
+
         $this->loadFixturesFromFiles([
             'authentication/api_administrator.yaml',
             'channel.yaml',
@@ -34,21 +41,102 @@ final class PaymentsTest extends JsonApiTestCase
             'shipping_method.yaml',
             'payment_method.yaml',
         ]);
-        $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
 
-        $tokenValue = 'nAWw2jewpA';
+        $this->placeOrder('nAWw2jewpA');
 
-        $this->placeOrder($tokenValue);
+        $this->requestGet(uri: '/api/v2/admin/payments');
 
-        $this->client->request(method: 'GET', uri: '/api/v2/admin/orders/nAWw2jewpA', server: $header);
+        $this->assertResponseSuccessful('admin/payment/get_payments_response');
+    }
+
+    /** @test */
+    public function it_gets_payments_filtered_by_state(): void
+    {
+        $this->setUpDefaultGetHeaders();
+
+        $this->loadFixturesFromFiles([
+            'authentication/api_administrator.yaml',
+            'channel.yaml',
+            'cart.yaml',
+            'country.yaml',
+            'shipping_method.yaml',
+            'payment_method.yaml',
+        ]);
+
+        $order = $this->placeOrder('paidOrder');
+        $this->payOrder($order);
+
+        $this->placeOrder('unpaidOrder');
+
+        $this->requestGet(uri: '/api/v2/admin/payments', queryParameters: ['state' => 'new']);
+
+        $this->assertResponseSuccessful('admin/payment/get_payments_filtered_by_state_response');
+    }
+
+    /** @test */
+    public function it_gets_payments_of_the_specific_order(): void
+    {
+        $this->setUpDefaultGetHeaders();
+
+        $this->loadFixturesFromFiles([
+            'authentication/api_administrator.yaml',
+            'channel.yaml',
+            'cart.yaml',
+            'country.yaml',
+            'shipping_method.yaml',
+            'payment_method.yaml',
+        ]);
+
+        $this->placeOrder('nAWw2jewpA');
+
+        $this->requestGet(uri: '/api/v2/admin/orders/nAWw2jewpA');
         $orderResponse = json_decode($this->client->getResponse()->getContent(), true);
 
-        $this->client->request(
-            method: 'GET',
-            uri: '/api/v2/admin/payments/' . $orderResponse['payments'][0]['id'],
-            server: $header,
-        );
-        $response = $this->client->getResponse();
-        $this->assertResponse($response, 'admin/get_payment_response', Response::HTTP_OK);
+        $this->requestGet(uri: '/api/v2/admin/payments/' . $orderResponse['payments'][0]['id']);
+
+        $this->assertResponseSuccessful('admin/payment/get_payment_response');
+    }
+
+    /** @test */
+    public function it_completes_payment(): void
+    {
+        $this->setUpDefaultPatchHeaders();
+
+        $this->loadFixturesFromFiles([
+            'authentication/api_administrator.yaml',
+            'channel.yaml',
+            'cart.yaml',
+            'country.yaml',
+            'shipping_method.yaml',
+            'payment_method.yaml',
+        ]);
+
+        $order = $this->placeOrder('nAWw2jewpA');
+
+        $this->requestPatch(uri: sprintf('/api/v2/admin/payments/%s/complete', $order->getPayments()->first()->getId()));
+
+        $this->assertResponseSuccessful('admin/payment/patch_complete_payment_response');
+    }
+
+    /** @test */
+    public function it_does_not_complete_payment_if_it_is_not_in_the_new_state(): void
+    {
+        $this->setUpDefaultPatchHeaders();
+
+        $this->loadFixturesFromFiles([
+            'authentication/api_administrator.yaml',
+            'channel.yaml',
+            'cart.yaml',
+            'country.yaml',
+            'shipping_method.yaml',
+            'payment_method.yaml',
+        ]);
+
+        $order = $this->placeOrder('nAWw2jewpA');
+
+        $this->payOrder($order);
+        $this->requestPatch(uri: sprintf('/api/v2/admin/payments/%s/complete', $order->getPayments()->first()->getId()));
+
+        $this->assertResponseUnprocessableEntity('admin/payment/patch_not_complete_payment_response');
     }
 }

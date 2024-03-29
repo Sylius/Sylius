@@ -76,9 +76,21 @@ final class ManagingAdministratorsContext implements Context
      * @When I specify its name as :username
      * @When I do not specify its name
      */
-    public function iSpecifyItsNameAs($username = null)
+    public function iSpecifyItsNameAs($username = null): void
     {
         $this->createPage->specifyUsername($username ?? '');
+    }
+
+    /**
+     * @When I specify its :field as too long string
+     */
+    public function iSpecifyItsFieldAsTooLongString(string $field): void
+    {
+        match ($field) {
+            'first name' => $this->createPage->specifyFirstName($this->getTooLongString()),
+            'last name' => $this->createPage->specifyLastName($this->getTooLongString()),
+            'username' => $this->createPage->specifyUsername($this->getTooLongString()),
+        };
     }
 
     /**
@@ -280,6 +292,18 @@ final class ManagingAdministratorsContext implements Context
     }
 
     /**
+     * @Then I should be notified that this :field is too long
+     */
+    public function iShouldBeNotifiedThatThisFieldIsTooLong(string $field): void
+    {
+        match ($field) {
+            'first name' => Assert::same($this->createPage->getValidationMessage('first_name'), 'First name must not be longer than 255 characters.'),
+            'last name' => Assert::same($this->createPage->getValidationMessage('last_name'), 'Last name must not be longer than 255 characters.'),
+            'username' => Assert::same($this->createPage->getValidationMessage('name'), 'Username must not be longer than 255 characters.'),
+        };
+    }
+
+    /**
      * @Then there should not be :email administrator anymore
      */
     public function thereShouldBeNoAnymore($email)
@@ -374,5 +398,10 @@ final class ManagingAdministratorsContext implements Context
         $this->updatePage->saveChanges();
 
         return $this->getPath($administrator);
+    }
+
+    private function getTooLongString(): string
+    {
+        return str_repeat('a', 256);
     }
 }

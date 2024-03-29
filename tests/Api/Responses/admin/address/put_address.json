@@ -1,0 +1,16 @@
+{
+    "@context": "\/api\/v2\/contexts\/Address",
+    "@id": "\/api\/v2\/admin\/addresses\/@integer@",
+    "@type": "Address",
+    "id": @integer@,
+    "firstName": "Finley",
+    "lastName": "Ward",
+    "phoneNumber": "01639 644902",
+    "company": "Company",
+    "countryCode": "GB",
+    "provinceCode": null,
+    "provinceName": "West Glamorgan",
+    "street": "New Henry St",
+    "city": "Neath",
+    "postcode": "SA11 1PH"
+}

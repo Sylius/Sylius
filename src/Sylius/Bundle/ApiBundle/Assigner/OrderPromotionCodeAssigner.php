@@ -19,7 +19,6 @@ use Sylius\Component\Promotion\Model\PromotionCouponInterface;
 use Sylius\Component\Promotion\Repository\PromotionCouponRepositoryInterface;
 use Webmozart\Assert\Assert;
 
-/** @experimental */
 final readonly class OrderPromotionCodeAssigner implements OrderPromotionCodeAssignerInterface
 {
     public function __construct(

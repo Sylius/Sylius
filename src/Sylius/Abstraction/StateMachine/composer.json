@@ -1,0 +1,43 @@
+{
+    "name": "sylius/state-machine-abstraction",
+    "description": "Abstraction layer for State Machine used in Sylius bundles",
+    "type": "symfony-bundle",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Jacob Tobiasz",
+            "email": "jakub.tobiasz@icloud.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Sylius\\Abstraction\\StateMachine\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\Sylius\\Abstraction\\StateMachine\\": "tests/"
+        }
+    },
+    "require": {
+        "php": "^8.2",
+        "symfony/dependency-injection": "^6.4.1",
+        "symfony/http-kernel": "^6.4.1",
+        "symfony/workflow": "^6.4.0",
+        "winzou/state-machine": "^0.4",
+        "winzou/state-machine-bundle": "^0.6"
+    },
+    "require-dev": {
+        "matthiasnoback/symfony-config-test": "^4.2",
+        "phpunit/phpunit": "^9.5",
+        "webmozart/assert": "^1.9"
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-main": "2.0-dev"
+        },
+        "symfony": {
+            "require": "^5.4.21"
+        }
+    }
+}

@@ -13,25 +13,24 @@ declare(strict_types=1);
 
 namespace Sylius\Tests\Api\Shop;
 
-use Sylius\Bundle\ApiBundle\Command\Cart\AddItemToCart;
 use Sylius\Bundle\ApiBundle\Command\Cart\PickupCart;
-use Sylius\Bundle\ApiBundle\Command\Checkout\UpdateCart;
 use Sylius\Component\Addressing\Model\CountryInterface;
-use Sylius\Component\Core\Model\Address;
-use Sylius\Component\Core\Model\AdjustmentInterface;
-use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Tests\Api\JsonApiTestCase;
 use Sylius\Tests\Api\Utils\OrderPlacerTrait;
 use Sylius\Tests\Api\Utils\ShopUserLoginTrait;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Messenger\MessageBusInterface;
 
 final class OrdersTest extends JsonApiTestCase
 {
     use ShopUserLoginTrait;
     use OrderPlacerTrait;
 
-    private MessageBusInterface $commandBus;
+    protected function setUp(): void
+    {
+        $this->setUpOrderPlacer();
+
+        parent::setUp();
+    }
 
     /** @test */
     public function it_gets_an_order(): void
@@ -51,7 +50,7 @@ final class OrdersTest extends JsonApiTestCase
         $this->client->request(method: 'GET', uri: '/api/v2/shop/orders/nAWw2jewpA', server: self::CONTENT_TYPE_HEADER);
         $response = $this->client->getResponse();
 
-        $this->assertResponse($response, 'shop/get_order_response', Response::HTTP_OK);
+        $this->assertResponse($response, 'shop/order/get_order_response', Response::HTTP_OK);
     }
 
     /** @test */
@@ -71,7 +70,7 @@ final class OrdersTest extends JsonApiTestCase
         );
         $response = $this->client->getResponse();
 
-        $this->assertResponse($response, 'shop/get_order_response', Response::HTTP_OK);
+        $this->assertResponse($response, 'shop/order/get_order_response', Response::HTTP_OK);
     }
 
     /** @test */
@@ -96,7 +95,7 @@ final class OrdersTest extends JsonApiTestCase
         );
         $response = $this->client->getResponse();
 
-        $this->assertResponse($response, 'shop/get_order_items_response', Response::HTTP_OK);
+        $this->assertResponse($response, 'shop/order/get_order_items_response', Response::HTTP_OK);
     }
 
     /** @test */
@@ -121,47 +120,7 @@ final class OrdersTest extends JsonApiTestCase
         );
         $response = $this->client->getResponse();
 
-        $this->assertResponse($response, 'shop/get_order_adjustments_response', Response::HTTP_OK);
-    }
-
-    /** @test */
-    public function it_gets_order_item_adjustments(): void
-    {
-        $this->loadFixturesFromFiles([
-            'channel.yaml',
-            'cart.yaml',
-            'country.yaml',
-            'shipping_method.yaml',
-            'payment_method.yaml',
-        ]);
-
-        $tokenValue = $this->pickUpCart();
-
-        $this->addItemToCart('MUG_BLUE', 3, $tokenValue);
-
-        /** @var OrderInterface $order */
-        $order = $this->get('sylius.repository.order')->findCartByTokenValue($tokenValue);
-        $orderItem = $order->getItems()->first();
-
-        /** @var AdjustmentInterface $adjustment */
-        $adjustment = $this->get('sylius.factory.adjustment')->createNew();
-
-        $adjustment->setType(AdjustmentInterface::ORDER_ITEM_PROMOTION_ADJUSTMENT);
-        $adjustment->setAmount(200);
-        $adjustment->setNeutral(false);
-        $adjustment->setLabel('Test Promotion Adjustment');
-
-        $orderItem->addAdjustment($adjustment);
-        $this->get('sylius.manager.order')->flush();
-
-        $this->client->request(
-            method: 'GET',
-            uri: '/api/v2/shop/orders/nAWw2jewpA/items/' . $order->getItems()->first()->getId() . '/adjustments',
-            server: self::CONTENT_TYPE_HEADER,
-        );
-        $response = $this->client->getResponse();
-
-        $this->assertResponse($response, 'shop/get_order_item_adjustments_response', Response::HTTP_OK);
+        $this->assertResponse($response, 'shop/order/get_order_adjustments_response', Response::HTTP_OK);
     }
 
     /** @test */
@@ -188,7 +147,7 @@ final class OrdersTest extends JsonApiTestCase
         );
         $response = $this->client->getResponse();
 
-        $this->assertResponse($response, 'shop/add_item_response', Response::HTTP_CREATED);
+        $this->assertResponse($response, 'shop/order/add_item_response', Response::HTTP_CREATED);
     }
 
     /** @test */
@@ -234,7 +193,7 @@ final class OrdersTest extends JsonApiTestCase
         );
         $response = $this->client->getResponse();
 
-        $this->assertResponse($response, 'shop/updated_payment_method_on_order_response', Response::HTTP_OK);
+        $this->assertResponse($response, 'shop/order/updated_payment_method_on_order_response', Response::HTTP_OK);
     }
 
     /** @test */
@@ -272,7 +231,7 @@ final class OrdersTest extends JsonApiTestCase
         );
         $response = $this->client->getResponse();
 
-        $this->assertResponse($response, 'shop/updated_payment_method_on_cancelled_order_response', Response::HTTP_UNPROCESSABLE_ENTITY);
+        $this->assertResponse($response, 'shop/order/updated_payment_method_on_cancelled_order_response', Response::HTTP_UNPROCESSABLE_ENTITY);
     }
 
     /** @test */
@@ -288,7 +247,7 @@ final class OrdersTest extends JsonApiTestCase
         );
         $response = $this->client->getResponse();
 
-        $this->assertResponse($response, 'shop/create_cart_response', Response::HTTP_CREATED);
+        $this->assertResponse($response, 'shop/order/create_cart_response', Response::HTTP_CREATED);
     }
 
     /** @test */
@@ -304,7 +263,7 @@ final class OrdersTest extends JsonApiTestCase
         );
         $response = $this->client->getResponse();
 
-        $this->assertResponse($response, 'shop/create_cart_with_default_locale_response', Response::HTTP_CREATED);
+        $this->assertResponse($response, 'shop/order/create_cart_with_default_locale_response', Response::HTTP_CREATED);
     }
 
     /** @test */
@@ -348,7 +307,7 @@ final class OrdersTest extends JsonApiTestCase
         );
         $response = $this->client->getResponse();
 
-        $this->assertResponse($response, 'shop/updated_billing_address_on_order_response', Response::HTTP_OK);
+        $this->assertResponse($response, 'shop/order/updated_billing_address_on_order_response', Response::HTTP_OK);
     }
 
     /** @test */
@@ -404,12 +363,9 @@ final class OrdersTest extends JsonApiTestCase
 
         $tokenValue = 'nAWw2jewpA';
 
-        /** @var MessageBusInterface $commandBus */
-        $commandBus = self::getContainer()->get('sylius.command_bus');
-
         $pickupCartCommand = new PickupCart($tokenValue);
         $pickupCartCommand->setChannelCode('WEB');
-        $commandBus->dispatch($pickupCartCommand);
+        $this->commandBus->dispatch($pickupCartCommand);
 
         $this->client->request(
             method: 'POST',
@@ -421,7 +377,11 @@ final class OrdersTest extends JsonApiTestCase
         );
         $response = $this->client->getResponse();
 
-        $this->assertResponseCode($response, Response::HTTP_UNPROCESSABLE_ENTITY);
+        $this->assertResponse(
+            $response,
+            'shop/order/add_item_to_cart_with_missing_product_variant',
+            Response::HTTP_BAD_REQUEST,
+        );
     }
 
     /** @test */
@@ -431,12 +391,9 @@ final class OrdersTest extends JsonApiTestCase
 
         $tokenValue = 'nAWw2jewpA';
 
-        /** @var MessageBusInterface $commandBus */
-        $commandBus = self::getContainer()->get('sylius.command_bus');
-
         $pickupCartCommand = new PickupCart($tokenValue);
         $pickupCartCommand->setChannelCode('WEB');
-        $commandBus->dispatch($pickupCartCommand);
+        $this->commandBus->dispatch($pickupCartCommand);
 
         $this->client->request(
             method: 'POST',
@@ -448,7 +405,11 @@ final class OrdersTest extends JsonApiTestCase
         );
         $response = $this->client->getResponse();
 
-        $this->assertResponseCode($response, Response::HTTP_UNPROCESSABLE_ENTITY);
+        $this->assertResponse(
+            $response,
+            'shop/order/add_item_to_cart_with_missing_quantity',
+            Response::HTTP_BAD_REQUEST,
+        );
     }
 
     /** @test */
@@ -458,12 +419,9 @@ final class OrdersTest extends JsonApiTestCase
 
         $tokenValue = 'nAWw2jewpA';
 
-        /** @var MessageBusInterface $commandBus */
-        $commandBus = self::getContainer()->get('sylius.command_bus');
-
         $pickupCartCommand = new PickupCart($tokenValue);
         $pickupCartCommand->setChannelCode('WEB');
-        $commandBus->dispatch($pickupCartCommand);
+        $this->commandBus->dispatch($pickupCartCommand);
 
         $this->client->request(
             method: 'PATCH',
@@ -473,7 +431,11 @@ final class OrdersTest extends JsonApiTestCase
         );
         $response = $this->client->getResponse();
 
-        $this->assertResponseCode($response, Response::HTTP_UNPROCESSABLE_ENTITY);
+        $this->assertResponse(
+            $response,
+            'shop/order/add_item_to_cart_with_missing_quantity',
+            Response::HTTP_BAD_REQUEST,
+        );
     }
 
     public function it_returns_unprocessable_entity_status_if_trying_to_assign_shipping_method_to_non_existing_shipment(): void
@@ -491,7 +453,7 @@ final class OrdersTest extends JsonApiTestCase
 
         $this->assertResponse(
             $this->client->getResponse(),
-            'shop/assign_shipping_method_to_non_existing_shipment_response',
+            'shop/order/assign_shipping_method_to_non_existing_shipment_response',
             Response::HTTP_UNPROCESSABLE_ENTITY,
         );
     }
@@ -526,48 +488,5 @@ final class OrdersTest extends JsonApiTestCase
         );
 
         $this->assertResponseCode($this->client->getResponse(), Response::HTTP_NOT_FOUND);
-    }
-
-    protected function setUp(): void
-    {
-        parent::setUp();
-
-        $this->commandBus = self::getContainer()->get('sylius.command_bus');
-    }
-
-    private function pickUpCart(): string
-    {
-        $tokenValue = 'nAWw2jewpA';
-
-        $pickupCartCommand = new PickupCart($tokenValue);
-        $pickupCartCommand->setChannelCode('WEB');
-
-        $this->commandBus->dispatch($pickupCartCommand);
-
-        return $tokenValue;
-    }
-
-    private function addItemToCart(string $productVariantCode, int $quantity, string $tokenValue): void
-    {
-        $addItemToCartCommand = new AddItemToCart($productVariantCode, $quantity);
-        $addItemToCartCommand->setOrderTokenValue($tokenValue);
-
-        $this->commandBus->dispatch($addItemToCartCommand);
-    }
-
-    private function updateCartWithAddress(string $tokenValue): void
-    {
-        $address = new Address();
-        $address->setFirstName('John');
-        $address->setLastName('Doe');
-        $address->setCity('New York');
-        $address->setStreet('Avenue');
-        $address->setCountryCode('US');
-        $address->setPostcode('90000');
-
-        $updateCartCommand = new UpdateCart(email: 'sylius@example.com', billingAddress: $address);
-        $updateCartCommand->setOrderTokenValue($tokenValue);
-
-        $this->commandBus->dispatch($updateCartCommand);
     }
 }

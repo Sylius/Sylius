@@ -21,7 +21,6 @@ use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 use Webmozart\Assert\Assert;
 
-/** @experimental */
 final class OrderProductEligibilityValidator extends ConstraintValidator
 {
     public function __construct(private OrderRepositoryInterface $orderRepository)

@@ -22,7 +22,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Event\ViewEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 
-/** @experimental */
 final readonly class ProductSlugEventSubscriber implements EventSubscriberInterface
 {
     public function __construct(private SlugGeneratorInterface $slugGenerator)

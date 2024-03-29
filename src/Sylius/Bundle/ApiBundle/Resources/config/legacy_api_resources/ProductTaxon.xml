@@ -1,5 +1,16 @@
 <?xml version="1.0" ?>
 
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Sylius Sp. z o.o.
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
 <resources xmlns="https://api-platform.com/schema/metadata"
            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
            xsi:schemaLocation="https://api-platform.com/schema/metadata https://api-platform.com/schema/metadata/metadata-2.0.xsd"
@@ -7,23 +18,41 @@
     <resource class="%sylius.model.product_taxon.class%" shortName="ProductTaxon">
         <attribute name="validation_groups">sylius</attribute>
 
+        <attribute name="order">
+            <attribute name="position">ASC</attribute>
+        </attribute>
+
         <collectionOperations>
             <collectionOperation name="admin_get">
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/admin/product-taxons</attribute>
-                <attribute name="normalization_context">
-                    <attribute name="groups">admin:product_taxon:read</attribute>
-                </attribute>
                 <attribute name="filters">
                     <attribute>sylius.api.search_filter.product.code</attribute>
                     <attribute>sylius.api.search_filter.taxon.code</attribute>
+                    <attribute>sylius.api.order_filter.position</attribute>
+                </attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">
+                        <attribute>admin:product_taxon:index</attribute>
+                        <attribute>sylius:admin:product_taxon:index</attribute>
+                    </attribute>
                 </attribute>
             </collectionOperation>
+
             <collectionOperation name="admin_post">
                 <attribute name="method">POST</attribute>
                 <attribute name="path">/admin/product-taxons</attribute>
                 <attribute name="denormalization_context">
-                    <attribute name="groups">admin:product_taxon:create</attribute>
+                    <attribute name="groups">
+                        <attribute>admin:product_taxon:create</attribute>
+                        <attribute>sylius:admin:product_taxon:create</attribute>
+                    </attribute>
+                </attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">
+                        <attribute>admin:product_taxon:show</attribute>
+                        <attribute>sylius:admin:product_taxon:show</attribute>
+                    </attribute>
                 </attribute>
             </collectionOperation>
         </collectionOperations>
@@ -33,21 +62,38 @@
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/admin/product-taxons/{id}</attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:product_taxon:read</attribute>
+                    <attribute name="groups">
+                        <attribute>admin:product_taxon:show</attribute>
+                        <attribute>sylius:admin:product_taxon:show</attribute>
+                    </attribute>
                 </attribute>
             </itemOperation>
+
             <itemOperation name="admin_put">
                 <attribute name="method">PUT</attribute>
                 <attribute name="path">/admin/product-taxons/{id}</attribute>
                 <attribute name="denormalization_context">
-                    <attribute name="groups">admin:product_taxon:update</attribute>
+                    <attribute name="groups">
+                        <attribute>admin:product_taxon:update</attribute>
+                        <attribute>sylius:admin:product_taxon:update</attribute>
+                    </attribute>
+                </attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">
+                        <attribute>admin:product_taxon:show</attribute>
+                        <attribute>sylius:admin:product_taxon:show</attribute>
+                    </attribute>
                 </attribute>
             </itemOperation>
+
             <itemOperation name="shop_get">
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/shop/product-taxons/{id}</attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">shop:product_taxon:read</attribute>
+                    <attribute name="groups">
+                        <attribute>shop:product_taxon:show</attribute>
+                        <attribute>sylius:shop:product_taxon:show</attribute>
+                    </attribute>
                 </attribute>
             </itemOperation>
 

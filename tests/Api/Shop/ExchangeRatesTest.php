@@ -27,7 +27,7 @@ final class ExchangeRatesTest extends JsonApiTestCase
         $this->client->request(method: 'GET', uri: '/api/v2/shop/exchange-rates', server: self::CONTENT_TYPE_HEADER);
         $response = $this->client->getResponse();
 
-        $this->assertResponse($response, 'shop/get_exchange_rates_response', Response::HTTP_OK);
+        $this->assertResponse($response, 'shop/exchange_rate/get_exchange_rates_response', Response::HTTP_OK);
     }
 
     /** @test */
@@ -45,7 +45,7 @@ final class ExchangeRatesTest extends JsonApiTestCase
         );
         $response = $this->client->getResponse();
 
-        $this->assertResponse($response, 'shop/get_exchange_rate_usdpln_response', Response::HTTP_OK);
+        $this->assertResponse($response, 'shop/exchange_rate/get_exchange_rate_usdpln_response', Response::HTTP_OK);
     }
 
     /** @test */
@@ -63,7 +63,7 @@ final class ExchangeRatesTest extends JsonApiTestCase
         );
         $response = $this->client->getResponse();
 
-        $this->assertResponse($response, 'shop/get_exchange_rate_cnyusd_response', Response::HTTP_OK);
+        $this->assertResponse($response, 'shop/exchange_rate/get_exchange_rate_cnyusd_response', Response::HTTP_OK);
     }
 
     /** @test */

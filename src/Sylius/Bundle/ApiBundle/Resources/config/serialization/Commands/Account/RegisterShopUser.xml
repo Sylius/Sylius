@@ -18,18 +18,23 @@
     <class name="Sylius\Bundle\ApiBundle\Command\Account\RegisterShopUser">
         <attribute name="firstName">
             <group>shop:customer:create</group>
+            <group>sylius:shop:customer:create</group>
         </attribute>
         <attribute name="lastName">
             <group>shop:customer:create</group>
+            <group>sylius:shop:customer:create</group>
         </attribute>
         <attribute name="email">
             <group>shop:customer:create</group>
+            <group>sylius:shop:customer:create</group>
         </attribute>
         <attribute name="password">
             <group>shop:customer:create</group>
+            <group>sylius:shop:customer:create</group>
         </attribute>
         <attribute name="subscribedToNewsletter">
             <group>shop:customer:create</group>
+            <group>sylius:shop:customer:create</group>
         </attribute>
     </class>
 </serializer>

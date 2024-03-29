@@ -40,7 +40,7 @@ final class ShippingMethodsTest extends JsonApiTestCase
         );
         $response = $this->client->getResponse();
 
-        $this->assertResponse($response, 'shop/get_shipping_methods_response', Response::HTTP_OK);
+        $this->assertResponse($response, 'shop/shipping_method/get_shipping_methods_response', Response::HTTP_OK);
     }
 
     /** @test */
@@ -62,7 +62,7 @@ final class ShippingMethodsTest extends JsonApiTestCase
         );
         $response = $this->client->getResponse();
 
-        $this->assertResponse($response, 'shop/get_order_shipping_methods_response', Response::HTTP_OK);
+        $this->assertResponse($response, 'shop/shipping_method/get_order_shipping_methods_response', Response::HTTP_OK);
     }
 
     /** @test */
@@ -94,7 +94,7 @@ final class ShippingMethodsTest extends JsonApiTestCase
         );
         $response = $this->client->getResponse();
 
-        $this->assertResponse($response, 'shop/get_order_shipping_methods_response', Response::HTTP_OK);
+        $this->assertResponse($response, 'shop/shipping_method/get_order_shipping_methods_response', Response::HTTP_OK);
     }
 
     /** @test */
@@ -129,7 +129,7 @@ final class ShippingMethodsTest extends JsonApiTestCase
         );
         $response = $this->client->getResponse();
 
-        $this->assertResponse($response, 'shop/get_order_shipping_methods_response', Response::HTTP_OK);
+        $this->assertResponse($response, 'shop/shipping_method/get_order_shipping_methods_response', Response::HTTP_OK);
     }
 
     /** @test */
@@ -150,7 +150,7 @@ final class ShippingMethodsTest extends JsonApiTestCase
         );
         $response = $this->client->getResponse();
 
-        $this->assertResponse($response, 'shop/get_empty_order_shipping_methods_response', Response::HTTP_OK);
+        $this->assertResponse($response, 'shop/shipping_method/get_empty_order_shipping_methods_response', Response::HTTP_OK);
     }
 
     /** @test */
@@ -171,7 +171,7 @@ final class ShippingMethodsTest extends JsonApiTestCase
         );
         $response = $this->client->getResponse();
 
-        $this->assertResponse($response, 'shop/get_empty_order_shipping_methods_response', Response::HTTP_OK);
+        $this->assertResponse($response, 'shop/shipping_method/get_empty_order_shipping_methods_response', Response::HTTP_OK);
     }
 
     private function getCartAndPutItemForCustomer(string $tokenValue, string $customer): void

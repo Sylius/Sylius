@@ -18,7 +18,6 @@ use Doctrine\DBAL\Exception\ForeignKeyConstraintViolationException;
 use Sylius\Bundle\ApiBundle\Exception\PromotionCouponCannotBeRemoved;
 use Sylius\Component\Core\Model\PromotionCouponInterface;
 
-/** @experimental */
 final class PromotionCouponDataPersister implements ContextAwareDataPersisterInterface
 {
     public function __construct(

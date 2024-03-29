@@ -16,7 +16,6 @@ namespace Sylius\Bundle\ApiBundle\Applicator;
 use Sylius\Component\Core\Model\ShippingMethodInterface;
 use Symfony\Component\Clock\ClockInterface;
 
-/** @experimental */
 final readonly class ArchivingShippingMethodApplicator implements ArchivingShippingMethodApplicatorInterface
 {
     public function __construct(private ClockInterface $clock)

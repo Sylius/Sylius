@@ -17,6 +17,8 @@ interface VariantsElementInterface
 {
     public function countVariantsOnPage(): int;
 
+    public function hasProductVariant(string $name): bool;
+
     public function hasProductVariantWithCodePriceAndCurrentStock(
         string $name,
         string $code,

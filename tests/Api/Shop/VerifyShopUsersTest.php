@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Tests\Api\Shop;
 
+use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Tests\Api\JsonApiTestCase;
 use Sylius\Tests\Api\Utils\ShopUserLoginTrait;
 use Symfony\Component\HttpFoundation\Response;
@@ -29,7 +30,7 @@ final class VerifyShopUsersTest extends JsonApiTestCase
 
         $this->client->request(
             method: 'POST',
-            uri: '/api/v2/shop/verify-shop-user',
+            uri: '/api/v2/shop/customers/verify',
             server: $header,
             content: '{}',
         );
@@ -48,7 +49,7 @@ final class VerifyShopUsersTest extends JsonApiTestCase
 
         $this->client->request(
             method: 'POST',
-            uri: '/api/v2/shop/verify-shop-user',
+            uri: '/api/v2/shop/customers/verify',
             server: self::CONTENT_TYPE_HEADER,
         );
 
@@ -56,5 +57,26 @@ final class VerifyShopUsersTest extends JsonApiTestCase
 
         $this->assertResponseCode($response, Response::HTTP_UNAUTHORIZED);
         self::assertEmailCount(0);
+    }
+
+    /** @test */
+    public function it_verifies_customer_account(): void
+    {
+        $data = $this->loadFixturesFromFiles(['channel.yaml', 'cart.yaml', 'authentication/customer.yaml']);
+
+        /** @var ShopUserInterface $shopUser */
+        $shopUser = $data['shop_user_oliver'];
+        $shopUser->setEmailVerificationToken('token');
+        $this->getEntityManager()->flush();
+
+        $this->client->request(
+            method: 'PATCH',
+            uri: '/api/v2/shop/customers/verify/token',
+            server: self::PATCH_CONTENT_TYPE_HEADER,
+            content: '{}',
+        );
+
+        $this->assertResponseCode($this->client->getResponse(), Response::HTTP_ACCEPTED);
+        self::assertEmailCount(1);
     }
 }

@@ -1,0 +1,66 @@
+{
+    "@context": "\/api\/v2\/contexts\/Payment",
+    "@id": "\/api\/v2\/admin\/payments",
+    "@type": "hydra:Collection",
+    "hydra:member": [
+        {
+            "@id": "\/api\/v2\/admin\/payments\/@integer@",
+            "@type": "Payment",
+            "order": "\/api\/v2\/admin\/orders\/unpaidOrder",
+            "id": @integer@,
+            "method": {
+                "@id": "\/api\/v2\/admin\/payment-methods\/CASH_ON_DELIVERY",
+                "@type": "PaymentMethod",
+                "translations": {
+                    "en_US": {
+                        "@id": "\/api\/v2\/admin\/payment-method-translations\/@integer@",
+                        "@type": "PaymentMethodTranslation",
+                        "name": "Cash on delivery"
+                    }
+                }
+            },
+            "currencyCode": "USD",
+            "amount": 6500,
+            "state": "new",
+            "details": [],
+            "createdAt": @datetime@,
+            "updatedAt": @datetime@
+        }
+    ],
+    "hydra:totalItems": 1,
+    "hydra:view": {
+        "@id": "\/api\/v2\/admin\/payments?state=new",
+        "@type": "hydra:PartialCollectionView"
+    },
+    "hydra:search": {
+        "@type": "hydra:IriTemplate",
+        "hydra:template": "\/api\/v2\/admin\/payments{?state,state[],order.channel.code,order.channel.code[]}",
+        "hydra:variableRepresentation": "BasicRepresentation",
+        "hydra:mapping": [
+            {
+                "@type": "IriTemplateMapping",
+                "variable": "state",
+                "property": "state",
+                "required": false
+            },
+            {
+                "@type": "IriTemplateMapping",
+                "variable": "state[]",
+                "property": "state",
+                "required": false
+            },
+            {
+                "@type": "IriTemplateMapping",
+                "variable": "order.channel.code",
+                "property": "order.channel.code",
+                "required": false
+            },
+            {
+                "@type": "IriTemplateMapping",
+                "variable": "order.channel.code[]",
+                "property": "order.channel.code",
+                "required": false
+            }
+        ]
+    }
+}

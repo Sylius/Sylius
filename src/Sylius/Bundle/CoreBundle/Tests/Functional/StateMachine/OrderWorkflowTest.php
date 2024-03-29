@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Functional\StateMachine;
 
-use Sylius\Bundle\CoreBundle\StateMachine\StateMachineInterface;
+use Sylius\Abstraction\StateMachine\StateMachineInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\Customer;
 use Sylius\Component\Core\Model\Order;
@@ -75,6 +75,6 @@ final class OrderWorkflowTest extends KernelTestCase
 
     private function getStateMachine(): StateMachineInterface
     {
-        return self::getContainer()->get('sylius.state_machine.adapter.symfony_workflow');
+        return self::getContainer()->get('sylius_abstraction.state_machine.adapter.symfony_workflow');
     }
 }

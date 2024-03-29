@@ -14,6 +14,8 @@ declare(strict_types=1);
 namespace Sylius\Bundle\ApiBundle\Modifier;
 
 use SM\Factory\FactoryInterface as StateMachineFactoryInterface;
+use Sylius\Abstraction\StateMachine\StateMachineInterface;
+use Sylius\Abstraction\StateMachine\WinzouStateMachineAdapter;
 use Sylius\Bundle\ApiBundle\Mapper\AddressMapperInterface;
 use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Core\Model\OrderInterface;
@@ -23,9 +25,20 @@ use Webmozart\Assert\Assert;
 final readonly class OrderAddressModifier implements OrderAddressModifierInterface
 {
     public function __construct(
-        private StateMachineFactoryInterface $stateMachineFactory,
+        private StateMachineFactoryInterface|StateMachineInterface $stateMachineFactory,
         private AddressMapperInterface $addressMapper,
     ) {
+        if ($this->stateMachineFactory instanceof StateMachineFactoryInterface) {
+            trigger_deprecation(
+                'sylius/api-bundle',
+                '1.13',
+                sprintf(
+                    'Passing an instance of "%s" as the first argument is deprecated. It will accept only instances of "%s" in Sylius 2.0.',
+                    StateMachineFactoryInterface::class,
+                    StateMachineInterface::class,
+                ),
+            );
+        }
     }
 
     public function modify(
@@ -33,10 +46,9 @@ final readonly class OrderAddressModifier implements OrderAddressModifierInterfa
         ?AddressInterface $billingAddress,
         ?AddressInterface $shippingAddress = null,
     ): OrderInterface {
-        $stateMachine = $this->stateMachineFactory->get($order, OrderCheckoutTransitions::GRAPH);
-
+        $stateMachine = $this->getStateMachine();
         Assert::true(
-            $stateMachine->can(OrderCheckoutTransitions::TRANSITION_ADDRESS),
+            $stateMachine->can($order, OrderCheckoutTransitions::GRAPH, OrderCheckoutTransitions::TRANSITION_ADDRESS),
             sprintf('Order with %s token cannot be addressed.', $order->getTokenValue()),
         );
 
@@ -59,7 +71,7 @@ final readonly class OrderAddressModifier implements OrderAddressModifierInterfa
         $this->setBillingAddress($order, $oldBillingAddress, $billingAddress);
         $this->setShippingAddress($order, $oldShippingAddress, $shippingAddress);
 
-        $stateMachine->apply(OrderCheckoutTransitions::TRANSITION_ADDRESS);
+        $stateMachine->apply($order, OrderCheckoutTransitions::GRAPH, OrderCheckoutTransitions::TRANSITION_ADDRESS);
 
         return $order;
     }
@@ -90,5 +102,14 @@ final readonly class OrderAddressModifier implements OrderAddressModifierInterfa
         }
 
         $order->setShippingAddress($shippingAddress);
+    }
+
+    private function getStateMachine(): StateMachineInterface
+    {
+        if ($this->stateMachineFactory instanceof StateMachineFactoryInterface) {
+            return new WinzouStateMachineAdapter($this->stateMachineFactory);
+        }
+
+        return $this->stateMachineFactory;
     }
 }

@@ -17,11 +17,13 @@ use Sylius\Bundle\ApiBundle\Command\ChannelCodeAwareInterface;
 use Sylius\Bundle\ApiBundle\Command\IriToIdentifierConversionAwareInterface;
 use Sylius\Bundle\ApiBundle\Command\LocaleCodeAwareInterface;
 
-/** @experimental */
-class RequestResetPasswordToken implements ChannelCodeAwareInterface, LocaleCodeAwareInterface, IriToIdentifierConversionAwareInterface
+class RequestResetPasswordToken implements
+    ChannelCodeAwareInterface,
+    LocaleCodeAwareInterface,
+    IriToIdentifierConversionAwareInterface
 {
     public function __construct(
-        protected string $email,
+        protected readonly string $email,
         protected ?string $channelCode,
         protected ?string $localeCode,
     ) {

@@ -17,7 +17,6 @@ use Sylius\Bundle\ApiBundle\Command\Account\ResetPassword;
 use Sylius\Bundle\CoreBundle\Security\UserPasswordResetterInterface;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 
-/** @experimental */
 final readonly class ResetPasswordHandler implements MessageHandlerInterface
 {
     public function __construct(private UserPasswordResetterInterface $userPasswordResetter)
@@ -26,6 +25,6 @@ final readonly class ResetPasswordHandler implements MessageHandlerInterface
 
     public function __invoke(ResetPassword $command): void
     {
-        $this->userPasswordResetter->reset($command->resetPasswordToken, $command->newPassword);
+        $this->userPasswordResetter->reset($command->token, $command->newPassword);
     }
 }

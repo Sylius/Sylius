@@ -25,6 +25,11 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 final class CreateAdminUserHandler implements MessageHandlerInterface
 {
+    /**
+     * @param UserRepositoryInterface<AdminUserInterface> $adminUserRepository
+     * @param FactoryInterface<AdminUserInterface> $adminUserFactory
+     * @param array<array-key, string> $validationGroups
+     */
     public function __construct(
         private UserRepositoryInterface $adminUserRepository,
         private FactoryInterface $adminUserFactory,
@@ -65,6 +70,7 @@ final class CreateAdminUserHandler implements MessageHandlerInterface
         return $adminUser;
     }
 
+    /** @return iterable<string> */
     private function getViolationMessages(ConstraintViolationListInterface $constraintViolationList): iterable
     {
         foreach ($constraintViolationList as $violation) {

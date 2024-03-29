@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Tests\Functional\StateMachine;
 
-use Sylius\Bundle\CoreBundle\StateMachine\StateMachineInterface;
+use Sylius\Abstraction\StateMachine\StateMachineInterface;
 use Sylius\Component\Core\Model\CatalogPromotion;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
@@ -68,6 +68,6 @@ final class CatalogPromotionWorkflowTest extends KernelTestCase
 
     private function getStateMachine(): StateMachineInterface
     {
-        return self::getContainer()->get('sylius.state_machine.adapter.symfony_workflow');
+        return self::getContainer()->get('sylius_abstraction.state_machine.adapter.symfony_workflow');
     }
 }

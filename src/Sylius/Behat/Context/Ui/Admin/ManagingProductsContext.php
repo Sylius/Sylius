@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
+use Sylius\Behat\Context\Ui\Admin\Helper\ValidationTrait;
 use Sylius\Behat\NotificationType;
 use Sylius\Behat\Page\Admin\Crud\CreatePageInterface;
 use Sylius\Behat\Page\Admin\Crud\UpdatePageInterface;
@@ -40,6 +41,8 @@ use Webmozart\Assert\Assert;
 
 final class ManagingProductsContext implements Context
 {
+    use ValidationTrait;
+
     public function __construct(
         private SharedStorageInterface $sharedStorage,
         private CreateSimpleProductPageInterface $createSimpleProductPage,
@@ -78,7 +81,7 @@ final class ManagingProductsContext implements Context
      * @When I specify its code as :code
      * @When I do not specify its code
      */
-    public function iSpecifyItsCodeAs($code = null)
+    public function iSpecifyItsCodeAs(?string $code = null): void
     {
         $currentPage = $this->resolveCurrentPage();
 
@@ -310,6 +313,7 @@ final class ManagingProductsContext implements Context
 
     /**
      * @Then the first product on the list should have :field :value
+     * @Then the first product on the list within this taxon should have :field :value
      */
     public function theFirstProductOnTheListShouldHave($field, $value)
     {
@@ -366,6 +370,7 @@ final class ManagingProductsContext implements Context
 
     /**
      * @Then the last product on the list should have :field :value
+     * @Then the last product on the list within this taxon should have :field :value
      */
     public function theLastProductOnTheListShouldHave($field, $value)
     {
@@ -398,6 +403,17 @@ final class ManagingProductsContext implements Context
     public function iSortProductsBy(string $field): void
     {
         $this->indexPage->sortBy($field);
+    }
+
+    /**
+     * @When I sort this taxon's products :sortType by :field
+     */
+    public function iSortThisTaxonsProductsBy(string $sortType, string $field): void
+    {
+        $this->indexPerTaxonPage->sortBy(
+            $field,
+            str_starts_with($sortType, 'de') ? 'desc' : 'asc',
+        );
     }
 
     /**

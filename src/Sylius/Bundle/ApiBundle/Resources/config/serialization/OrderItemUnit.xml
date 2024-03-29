@@ -17,12 +17,16 @@
 >
     <class name="Sylius\Component\Core\Model\OrderItemUnit">
         <attribute name="id">
-            <group>admin:order_item_unit:read</group>
-            <group>shop:order_item_unit:read</group>
+            <group>admin:order_item_unit:show</group>
+            <group>sylius:admin:order_item_unit:show</group>
+            <group>shop:order_item_unit:show</group>
+            <group>sylius:shop:order_item_unit:show</group>
         </attribute>
         <attribute name="shippable">
-            <group>admin:order_item_unit:read</group>
-            <group>shop:order_item_unit:read</group>
+            <group>admin:order_item_unit:show</group>
+            <group>sylius:admin:order_item_unit:show</group>
+            <group>shop:order_item_unit:show</group>
+            <group>sylius:shop:order_item_unit:show</group>
         </attribute>
     </class>
 </serializer>

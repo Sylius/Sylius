@@ -29,7 +29,7 @@ final class SendContactRequestTest extends JsonApiTestCase
 
         $this->client->request(
             method: 'POST',
-            uri: '/api/v2/shop/contact-requests',
+            uri: '/api/v2/shop/contact',
             server: self::CONTENT_TYPE_HEADER,
             content: json_encode([
                 'email' => 'customer@email.com',
@@ -55,10 +55,9 @@ final class SendContactRequestTest extends JsonApiTestCase
 
         $this->client->request(
             method: 'POST',
-            uri: '/api/v2/shop/contact-requests',
+            uri: '/api/v2/shop/contact',
             server: $header,
             content: json_encode([
-                'email' => 'customer@email.com',
                 'message' => 'Example of message',
             ], \JSON_THROW_ON_ERROR),
         );

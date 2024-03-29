@@ -39,7 +39,7 @@ final class ShopBillingDataTest extends JsonApiTestCase
 
         $this->assertResponse(
             $this->client->getResponse(),
-            'admin/get_shop_billing_data_response',
+            'admin/shop_billing_data/get_shop_billing_data_response',
             Response::HTTP_OK,
         );
     }

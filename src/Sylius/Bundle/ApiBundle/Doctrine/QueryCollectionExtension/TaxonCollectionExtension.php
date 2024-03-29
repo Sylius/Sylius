@@ -23,7 +23,6 @@ use Sylius\Component\Core\Model\AdminUserInterface;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
 use Webmozart\Assert\Assert;
 
-/** @experimental */
 final readonly class TaxonCollectionExtension implements QueryCollectionExtensionInterface
 {
     public function __construct(private UserContextInterface $userContext)

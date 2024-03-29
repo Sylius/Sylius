@@ -17,6 +17,8 @@ final class Subresources
 {
     public const PROMOTION_COUPONS = 'coupons';
 
+    public const ADDRESSES_LOG_ENTRIES = 'log-entries';
+
     private function __construct()
     {
     }

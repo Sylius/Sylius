@@ -19,7 +19,6 @@ use Symfony\Component\HttpKernel\Event\RequestEvent;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\HttpKernel\KernelEvents;
 
-/** @experimental  */
 final readonly class KernelRequestEventSubscriber implements EventSubscriberInterface
 {
     public function __construct(

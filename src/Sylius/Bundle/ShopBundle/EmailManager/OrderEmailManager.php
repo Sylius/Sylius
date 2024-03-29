@@ -19,22 +19,21 @@ use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Mailer\Sender\SenderInterface;
 use Webmozart\Assert\Assert;
 
-// This whole class needs to go
+trigger_deprecation(
+    'sylius/shop-bundle',
+    '1.13',
+    'The "%s" class is deprecated, use "%s" instead.',
+    OrderEmailManager::class,
+    \Sylius\Bundle\CoreBundle\Mailer\OrderEmailManager::class,
+);
+
+/** @deprecated since Sylius 1.13 and will be removed in Sylius 2.0. Use {@see \Sylius\Bundle\CoreBundle\Mailer\OrderEmailManager} instead. */
 final class OrderEmailManager implements OrderEmailManagerInterface
 {
     public function __construct(
         private SenderInterface $emailSender,
         private ?DecoratedOrderEmailManagerInterface $decoratedEmailManager,
     ) {
-        if ($decoratedEmailManager === null) {
-            trigger_deprecation(
-                'sylius/shop-bundle',
-                '1.8',
-                'Not passing an instance of %s to %s constructor is deprecated and will be removed in Sylius 2.0.',
-                DecoratedOrderEmailManagerInterface::class,
-                self::class,
-            );
-        }
     }
 
     public function sendConfirmationEmail(OrderInterface $order): void

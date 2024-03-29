@@ -24,7 +24,6 @@ use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
-/** @experimental */
 final readonly class OrdersByLoggedInUserExtension implements QueryCollectionExtensionInterface
 {
     public function __construct(private UserContextInterface $userContext)

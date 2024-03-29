@@ -15,10 +15,14 @@ namespace Sylius\Behat\Context\Transform;
 
 use Behat\Behat\Context\Context;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
+use Sylius\Component\Core\Model\ChannelInterface;
 use Webmozart\Assert\Assert;
 
 final class ChannelContext implements Context
 {
+    /**
+     * @param ChannelRepositoryInterface<ChannelInterface> $channelRepository
+     */
     public function __construct(private ChannelRepositoryInterface $channelRepository)
     {
     }
@@ -29,7 +33,7 @@ final class ChannelContext implements Context
      * @Transform /^channel to "([^"]+)"$/
      * @Transform :channel
      */
-    public function getChannelByName($channelName)
+    public function getChannelByName(string $channelName)
     {
         $channels = $this->channelRepository->findByName($channelName);
 
@@ -44,8 +48,10 @@ final class ChannelContext implements Context
 
     /**
      * @Transform all channels
+     *
+     * @return array<ChannelInterface>
      */
-    public function getAllChannels()
+    public function getAllChannels(): array
     {
         return $this->channelRepository->findAll();
     }

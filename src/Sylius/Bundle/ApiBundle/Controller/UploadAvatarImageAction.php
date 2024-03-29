@@ -24,7 +24,6 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 
-/** @experimental */
 final readonly class UploadAvatarImageAction
 {
     public function __construct(

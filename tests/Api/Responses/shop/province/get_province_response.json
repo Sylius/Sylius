@@ -1,0 +1,7 @@
+{
+    "@context": "\/api\/v2\/contexts\/Province",
+    "@id": "\/api\/v2\/shop\/provinces\/US-WY",
+    "@type": "Province",
+    "code": "US-WY",
+    "name": "Wyoming"
+}

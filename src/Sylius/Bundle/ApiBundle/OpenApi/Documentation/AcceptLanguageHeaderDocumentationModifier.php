@@ -19,7 +19,6 @@ use ApiPlatform\OpenApi\OpenApi;
 use Sylius\Component\Locale\Model\LocaleInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
-/** @experimental */
 final class AcceptLanguageHeaderDocumentationModifier implements DocumentationModifierInterface
 {
     /**

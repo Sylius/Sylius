@@ -23,7 +23,6 @@ use Sylius\Component\Addressing\Model\CountryInterface;
 use Sylius\Component\Core\Model\AdminUserInterface;
 use Webmozart\Assert\Assert;
 
-/** @experimental */
 final readonly class CountryCollectionExtension implements QueryCollectionExtensionInterface
 {
     public function __construct(private UserContextInterface $userContext)

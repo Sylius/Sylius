@@ -23,7 +23,6 @@ use Sylius\Component\Core\Model\AdminUserInterface;
 use Sylius\Component\Product\Model\ProductAssociationInterface;
 use Webmozart\Assert\Assert;
 
-/** @experimental */
 final readonly class EnabledProductInProductAssociationItemExtension implements QueryItemExtensionInterface
 {
     public function __construct(private UserContextInterface $userContext)

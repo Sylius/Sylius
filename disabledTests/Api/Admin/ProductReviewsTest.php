@@ -130,4 +130,43 @@ final class ProductReviewsTest extends JsonApiTestCase
             Response::HTTP_OK,
         );
     }
+
+    /**
+     * @test
+     *
+     * @dataProvider invalidRatingRangeDataProvider
+     */
+    public function it_does_not_allow_to_update_a_product_review_with_invalid_rating(int $rating): void
+    {
+        $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'product/product_review.yaml']);
+        $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
+
+        /** @var ProductReviewerInterface $review */
+        $review = $fixtures['customer_review'];
+
+        $this->client->request(
+            method: 'PUT',
+            uri: sprintf('/api/v2/admin/product-reviews/%s', $review->getId()),
+            server: $header,
+            content: json_encode([
+                'rating' => $rating,
+            ], \JSON_THROW_ON_ERROR),
+        );
+
+        $this->assertResponseViolations(
+            $this->client->getResponse(),
+            [
+                [
+                    'propertyPath' => 'rating',
+                    'message' => 'Review rating must be between 1 and 5.',
+                ],
+            ],
+        );
+    }
+
+    public function invalidRatingRangeDataProvider(): iterable
+    {
+        yield [-1];
+        yield [6];
+    }
 }

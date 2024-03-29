@@ -48,7 +48,7 @@ final class MinimumPriceDistributor implements MinimumPriceDistributorInterface
         ));
     }
 
-    private function processDistributionWithMinimumPrice(array $orderItems, int $amount, $channel, bool $appliesOnDiscounted): array
+    private function processDistributionWithMinimumPrice(array $orderItems, int $amount, ChannelInterface $channel, bool $appliesOnDiscounted): array
     {
         $totals = array_values(array_map(function (array $orderItemData) use ($appliesOnDiscounted, $channel): int {
             return $this->getTotalPrice($orderItemData['orderItem'], $appliesOnDiscounted, $channel);

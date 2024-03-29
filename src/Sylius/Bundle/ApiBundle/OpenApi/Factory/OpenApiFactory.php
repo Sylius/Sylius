@@ -18,7 +18,6 @@ use ApiPlatform\OpenApi\OpenApi;
 use Sylius\Bundle\ApiBundle\OpenApi\Documentation\DocumentationModifierInterface;
 use Webmozart\Assert\Assert;
 
-/** @experimental */
 final readonly class OpenApiFactory implements OpenApiFactoryInterface
 {
     public function __construct(

@@ -16,27 +16,45 @@
             xsi:schemaLocation="http://symfony.com/schema/dic/serializer-mapping https://symfony.com/schema/dic/serializer-mapping/serializer-mapping-1.0.xsd"
 >
     <class name="Sylius\Component\Addressing\Model\Province">
-       <attribute name="code">
-           <group>admin:province:read</group>
-           <group>admin:country:create</group>
-           <group>admin:country:update</group>
-           <group>shop:province:read</group>
-           <group>shop:country:read</group>
-       </attribute>
-       <attribute name="name">
-           <group>admin:province:read</group>
-           <group>admin:province:update</group>
-           <group>admin:country:create</group>
-           <group>admin:country:update</group>
-           <group>shop:province:read</group>
-           <group>shop:country:read</group>
-       </attribute>
-       <attribute name="abbreviation">
-           <group>admin:province:read</group>
-           <group>admin:province:update</group>
-           <group>admin:country:create</group>
-           <group>admin:country:update</group>
-           <group>shop:province:read</group>
-       </attribute>
+        <attribute name="code">
+            <group>admin:province:show</group>
+            <group>sylius:admin:province:show</group>
+            <group>admin:country:create</group>
+            <group>sylius:admin:country:create</group>
+            <group>admin:country:update</group>
+            <group>sylius:admin:country:update</group>
+            <group>shop:province:show</group>
+            <group>sylius:shop:province:show</group>
+            <group>shop:country:index</group>
+            <group>sylius:shop:country:index</group>
+            <group>shop:country:show</group>
+            <group>sylius:shop:country:show</group>
+        </attribute>
+        <attribute name="name">
+            <group>admin:province:show</group>
+            <group>sylius:admin:province:show</group>
+            <group>admin:province:update</group>
+            <group>sylius:admin:province:update</group>
+            <group>admin:country:create</group>
+            <group>sylius:admin:country:create</group>
+            <group>admin:country:update</group>
+            <group>sylius:admin:country:update</group>
+            <group>shop:province:show</group>
+            <group>sylius:shop:province:show</group>
+            <group>shop:country:index</group>
+            <group>sylius:shop:country:index</group>
+            <group>shop:country:show</group>
+            <group>sylius:shop:country:show</group>
+        </attribute>
+        <attribute name="abbreviation">
+            <group>admin:country:create</group>
+            <group>sylius:admin:country:create</group>
+            <group>admin:country:update</group>
+            <group>sylius:admin:country:update</group>
+            <group>admin:province:show</group>
+            <group>sylius:admin:province:show</group>
+            <group>admin:province:update</group>
+            <group>sylius:admin:province:update</group>
+        </attribute>
     </class>
 </serializer>

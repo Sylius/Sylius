@@ -233,6 +233,17 @@ final class ManagingOrdersContext implements Context
     }
 
     /**
+     * @Then I should not be able to resend the shipment confirmation email
+     */
+    public function iShouldNotBeAbleToResendTheShipmentConfirmationEmail(): void
+    {
+        Assert::false(
+            $this->showPage->isResendShipmentConfirmationEmailButtonVisible(),
+            'Resend shipment confirmation email button should not be visible.',
+        );
+    }
+
+    /**
      * @Then I should see a single order in the list
      */
     public function iShouldSeeASingleOrderInTheList(): void
@@ -888,11 +899,19 @@ final class ManagingOrdersContext implements Context
     }
 
     /**
-     * @Then there should be :count changes in the registry
+     * @Then there should be :count shipping address changes in the registry
      */
-    public function thereShouldBeCountChangesInTheRegistry($count)
+    public function thereShouldBeCountShippingAddressChangesInTheRegistry(int $count): void
     {
-        Assert::same($this->historyPage->countShippingAddressChanges(), (int) $count);
+        Assert::same($this->historyPage->countShippingAddressChanges(), $count);
+    }
+
+    /**
+     * @Then there should be :count billing address changes in the registry
+     */
+    public function thereShouldBeCountBillingAddressChangesInTheRegistry(int $count): void
+    {
+        Assert::same($this->historyPage->countBillingAddressChanges(), $count);
     }
 
     /**
@@ -976,6 +995,17 @@ final class ManagingOrdersContext implements Context
         $this->notificationChecker->checkNotification(
             sprintf('%s confirmation has been successfully resent to the customer.', ucfirst($type)),
             NotificationType::success(),
+        );
+    }
+
+    /**
+     * @Then I should not be able to resend the order confirmation email
+     */
+    public function iShouldNotBeAbleToResendTheOrderConfirmationEmail(): void
+    {
+        Assert::false(
+            $this->showPage->isResendOrderConfirmationEmailButtonVisible(),
+            'Resend order confirmation email button should not be visible.',
         );
     }
 

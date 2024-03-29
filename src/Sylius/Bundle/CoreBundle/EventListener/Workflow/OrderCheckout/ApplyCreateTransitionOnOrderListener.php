@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\EventListener\Workflow\OrderCheckout;
 
-use Sylius\Bundle\CoreBundle\StateMachine\StateMachineInterface;
+use Sylius\Abstraction\StateMachine\StateMachineInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Order\OrderTransitions;
 use Symfony\Component\Workflow\Event\CompletedEvent;
@@ -31,6 +31,8 @@ final class ApplyCreateTransitionOnOrderListener
         $order = $event->getSubject();
         Assert::isInstanceOf($order, OrderInterface::class);
 
-        $this->compositeStateMachine->apply($order, OrderTransitions::GRAPH, OrderTransitions::TRANSITION_CREATE);
+        if ($this->compositeStateMachine->can($order, OrderTransitions::GRAPH, OrderTransitions::TRANSITION_CREATE)) {
+            $this->compositeStateMachine->apply($order, OrderTransitions::GRAPH, OrderTransitions::TRANSITION_CREATE);
+        }
     }
 }

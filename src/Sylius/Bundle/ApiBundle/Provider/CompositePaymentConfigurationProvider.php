@@ -16,7 +16,6 @@ namespace Sylius\Bundle\ApiBundle\Provider;
 use Sylius\Component\Core\Model\PaymentInterface;
 use Sylius\Component\Core\Model\PaymentMethodInterface;
 
-/** @experimental */
 final readonly class CompositePaymentConfigurationProvider implements CompositePaymentConfigurationProviderInterface
 {
     public function __construct(private iterable $apiPaymentMethodHandlers)

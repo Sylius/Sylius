@@ -15,6 +15,7 @@ parameters:
         - "%sylius.security.new_api_route%/admin/channel-pricings/{id}"
         - "%sylius.security.new_api_route%/admin/promotion-actions/{id}"
         - "%sylius.security.new_api_route%/admin/promotion-rules/{id}"
+        - "%sylius.security.new_api_route%/admin/shipping-method-rules/{id}"
         - "%sylius.security.new_api_route%/admin/shop-users/{id}"
     sylius.security.new_api_route: "/api/v2"
     sylius.security.new_api_regex: "^%sylius.security.new_api_route%"
@@ -31,6 +32,8 @@ sylius_api:
             '%sylius.model.product.class%':
                 operations:
                     shop_get: ~
+    order_states_to_filter_out:
+        - !php/const Sylius\Component\Core\Model\OrderInterface::STATE_CART
 
 api_platform:
     patch_formats:
@@ -51,11 +54,13 @@ api_platform:
         Symfony\Component\Serializer\Exception\ExceptionInterface: 400
 
         # Sylius exception to status code mapping
-        SM\SMException: 422
+        Sylius\Abstraction\StateMachine\Exception\StateMachineExecutionException: 422
         Sylius\Bundle\ApiBundle\Exception\CannotRemoveCurrentlyLoggedInUser: 422
         Sylius\Bundle\ApiBundle\Exception\ChannelCannotBeRemoved: 422
+        Sylius\Bundle\ApiBundle\Exception\ChannelPricingChannelCodeMismatchException: 422
         Sylius\Bundle\ApiBundle\Exception\InvalidProductAttributeValueTypeException: 422
         Sylius\Bundle\ApiBundle\Exception\InvalidRequestArgumentException: 400
+        Sylius\Bundle\ApiBundle\Exception\LocaleIsUsedException: 422
         Sylius\Bundle\ApiBundle\Exception\OrderItemNotFoundException: 422
         Sylius\Bundle\ApiBundle\Exception\OrderNoLongerEligibleForPromotion: 422
         Sylius\Bundle\ApiBundle\Exception\PaymentMethodCannotBeRemoved: 422
@@ -65,18 +70,19 @@ api_platform:
         Sylius\Bundle\ApiBundle\Exception\PromotionCouponCannotBeRemoved: 422
         Sylius\Bundle\ApiBundle\Exception\ProvinceCannotBeRemoved: 422
         Sylius\Bundle\ApiBundle\Exception\ShippingMethodCannotBeRemoved: 422
+        Sylius\Bundle\ApiBundle\Exception\StateMachineTransitionFailedException: 422
         Sylius\Bundle\ApiBundle\Exception\TaxonCannotBeRemoved: 422
         Sylius\Bundle\ApiBundle\Exception\TranslationInDefaultLocaleCannotBeRemoved: 422
         Sylius\Bundle\ApiBundle\Exception\TranslationLocaleMismatchException: 422
         Sylius\Bundle\ApiBundle\Exception\ZoneCannotBeRemoved: 422
         Sylius\Bundle\ApiBundle\Exception\CannotRemoveMenuTaxonException: 409
         Sylius\Bundle\ApiBundle\Exception\PromotionCannotBeRemoved: 422
-        Sylius\Bundle\LocaleBundle\Checker\Exception\LocaleIsUsedException: 422
         Sylius\Bundle\UserBundle\Exception\UserNotFoundException: 404
         Sylius\Component\Promotion\Exception\FailedGenerationException: 422
         Symfony\Component\Serializer\Exception\UnexpectedValueException: 400
         Symfony\Component\Serializer\Exception\MissingConstructorArgumentsException: 400
         Sylius\Bundle\ApiBundle\CommandHandler\Checkout\Exception\OrderTotalHasChangedException: 409
+        Sylius\Bundle\ApiBundle\Serializer\Exception\InvalidAmountTypeException: 400
     defaults:
         normalization_context:
             skip_null_values: false
@@ -84,6 +90,6 @@ api_platform:
 
 lexik_jwt_authentication:
     api_platform:
-        check_path: "%sylius.security.new_api_route%/admin/authentication-token"
+        check_path: "%sylius.security.new_api_route%/administrators/token"
         username_path: email
         password_path: password

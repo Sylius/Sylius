@@ -4,6 +4,7 @@
 sylius:
     catalog_promotion:
         code:
+            max_length: The code must not be longer than {{ limit }} characters.
             unique: The catalog promotion with given code already exists.
             regex: Catalog promotion code can only be comprised of letters, numbers, dashes and underscores.
             not_blank: Please enter catalog promotion code.
@@ -16,13 +17,21 @@ sylius:
         state:
             processing: The catalog promotion cannot be edited as it is currently being processed.
     catalog_promotion_action:
+        type:
+            not_blank: Please choose an action type.
+            invalid: Catalog promotion action type is invalid. Available types are {{ available_action_types }}.
         invalid_type: Catalog promotion action type is invalid. Please choose a valid type.
         percentage_discount:
             not_in_range: The percentage discount amount must be between 0% and 100%.
             not_number_or_empty: The percentage discount amount must be a number and can not be empty.
             not_valid: The percentage discount amount must be configured.
+    catalog_promotion_scope:
+        type:
+            not_blank: Please choose a scope type.
+            invalid: Catalog promotion scope type is invalid. Available types are {{ available_scope_types }}.
     promotion:
         code:
+            max_length: The code must not be longer than {{ limit }} characters.
             unique: The promotion with given code already exists.
             regex: Promotion code can only be comprised of letters, numbers, dashes and underscores.
             not_blank: Please enter promotion code.
@@ -44,7 +53,7 @@ sylius:
         invalid_type: Promotion rule type is invalid. Available rule types are {{ available_rule_types }}.
     promotion_coupon:
         code:
-            max_length: Coupon code must not be longer than 1 character.|Coupon code must not be longer than {{ limit }} characters.
+            max_length: The code must not be longer than {{ limit }} characters.
             min_length: Coupon code must be at least 1 character long.|Coupon code must be at least {{ limit }} characters long.
             not_blank: Please enter coupon code.
             regex: Coupon code can only be comprised of letters, numbers, dashes and underscores.

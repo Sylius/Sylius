@@ -121,4 +121,26 @@ final class CountriesTest extends JsonApiTestCase
             Response::HTTP_OK,
         );
     }
+
+    /** @test */
+    public function it_gets_provinces_from_country(): void
+    {
+        $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'country.yaml']);
+        $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
+
+        /** @var CountryInterface $country */
+        $country = $fixtures['country_US'];
+
+        $this->client->request(
+            method: 'GET',
+            uri: sprintf('/api/v2/admin/countries/%s/provinces', $country->getCode()),
+            server: $header,
+        );
+
+        $this->assertResponse(
+            $this->client->getResponse(),
+            'admin/country/get_provinces_response',
+            Response::HTTP_OK,
+        );
+    }
 }

@@ -18,7 +18,6 @@ use ApiPlatform\Doctrine\Orm\Util\QueryNameGeneratorInterface;
 use ApiPlatform\Metadata\Operation;
 use Doctrine\ORM\QueryBuilder;
 
-/** @experimental */
 final readonly class HideArchivedShippingMethodExtension implements QueryCollectionExtensionInterface
 {
     public function __construct(private string $shippingMethodClass)

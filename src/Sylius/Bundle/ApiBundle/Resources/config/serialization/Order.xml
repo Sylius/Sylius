@@ -17,168 +17,319 @@
 >
     <class name="Sylius\Component\Core\Model\Order">
         <attribute name="id">
-            <group>admin:order:read</group>
-            <group>shop:cart:read</group>
-            <group>shop:order:account:read</group>
-            <group>shop:order:read</group>
+            <group>admin:order:index</group>
+            <group>sylius:admin:order:index</group>
+            <group>admin:order:show</group>
+            <group>sylius:admin:order:show</group>
+            <group>shop:cart:show</group>
+            <group>sylius:shop:cart:show</group>
+            <group>shop:order:account:show</group>
+            <group>sylius:shop:order:account:show</group>
+            <group>shop:order:index</group>
+            <group>sylius:shop:order:index</group>
+            <group>shop:order:show</group>
+            <group>sylius:shop:order:show</group>
         </attribute>
 
         <attribute name="number">
-            <group>admin:order:read</group>
-            <group>shop:cart:read</group>
-            <group>shop:order:account:read</group>
-            <group>shop:order:read</group>
+            <group>admin:order:index</group>
+            <group>sylius:admin:order:index</group>
+            <group>admin:order:show</group>
+            <group>sylius:admin:order:show</group>
+            <group>shop:cart:show</group>
+            <group>sylius:shop:cart:show</group>
+            <group>shop:order:account:show</group>
+            <group>sylius:shop:order:account:show</group>
+            <group>shop:order:index</group>
+            <group>sylius:shop:order:index</group>
+            <group>shop:order:show</group>
+            <group>sylius:shop:order:show</group>
         </attribute>
 
         <attribute name="currencyCode">
-            <group>admin:order:read</group>
-            <group>shop:cart:read</group>
+            <group>admin:order:index</group>
+            <group>sylius:admin:order:index</group>
+            <group>admin:order:show</group>
+            <group>sylius:admin:order:show</group>
+            <group>shop:cart:show</group>
+            <group>sylius:shop:cart:show</group>
         </attribute>
 
         <attribute name="channel">
-            <group>admin:order:read</group>
-            <group>shop:order:read</group>
+            <group>admin:order:index</group>
+            <group>sylius:admin:order:index</group>
+            <group>admin:order:show</group>
+            <group>sylius:admin:order:show</group>
+            <group>shop:order:index</group>
+            <group>sylius:shop:order:index</group>
+            <group>shop:order:show</group>
+            <group>sylius:shop:order:show</group>
         </attribute>
 
         <attribute name="customer">
-            <group>admin:order:read</group>
+            <group>admin:order:index</group>
+            <group>sylius:admin:order:index</group>
+            <group>admin:order:show</group>
+            <group>sylius:admin:order:show</group>
         </attribute>
 
         <attribute name="payments">
-            <group>admin:order:read</group>
-            <group>shop:cart:read</group>
-            <group>shop:order:account:read</group>
+            <group>admin:order:index</group>
+            <group>sylius:admin:order:index</group>
+            <group>admin:order:show</group>
+            <group>sylius:admin:order:show</group>
+            <group>shop:cart:show</group>
+            <group>sylius:shop:cart:show</group>
+            <group>shop:order:account:show</group>
+            <group>sylius:shop:order:account:show</group>
         </attribute>
 
         <attribute name="shipments">
-            <group>shop:order:account:read</group>
-            <group>shop:cart:read</group>
-            <group>admin:order:read</group>
+            <group>admin:order:index</group>
+            <group>sylius:admin:order:index</group>
+            <group>admin:order:show</group>
+            <group>sylius:admin:order:show</group>
+            <group>shop:order:account:show</group>
+            <group>sylius:shop:order:account:show</group>
+            <group>shop:cart:show</group>
+            <group>sylius:shop:cart:show</group>
         </attribute>
 
         <attribute name="checkoutState">
-            <group>shop:order:account:read</group>
-            <group>shop:cart:read</group>
-            <group>admin:order:read</group>
+            <group>admin:order:index</group>
+            <group>sylius:admin:order:index</group>
+            <group>admin:order:show</group>
+            <group>sylius:admin:order:show</group>
+            <group>shop:order:account:show</group>
+            <group>sylius:shop:order:account:show</group>
+            <group>shop:cart:show</group>
+            <group>sylius:shop:cart:show</group>
         </attribute>
 
         <attribute name="state">
-            <group>admin:order:read</group>
-            <group>shop:order:read</group>
+            <group>admin:order:index</group>
+            <group>sylius:admin:order:index</group>
+            <group>admin:order:show</group>
+            <group>sylius:admin:order:show</group>
+            <group>shop:order:index</group>
+            <group>sylius:shop:order:index</group>
+            <group>shop:order:show</group>
+            <group>sylius:shop:order:show</group>
         </attribute>
 
         <attribute name="paymentState">
-            <group>admin:order:read</group>
-            <group>shop:cart:read</group>
+            <group>admin:order:index</group>
+            <group>sylius:admin:order:index</group>
+            <group>admin:order:show</group>
+            <group>sylius:admin:order:show</group>
+            <group>shop:cart:show</group>
+            <group>sylius:shop:cart:show</group>
         </attribute>
 
         <attribute name="shippingState">
-            <group>admin:order:read</group>
-            <group>shop:cart:read</group>
+            <group>admin:order:index</group>
+            <group>sylius:admin:order:index</group>
+            <group>admin:order:show</group>
+            <group>sylius:admin:order:show</group>
+            <group>shop:cart:show</group>
+            <group>sylius:shop:cart:show</group>
         </attribute>
 
         <attribute name="total">
-            <group>admin:order:read</group>
-            <group>shop:cart:read</group>
-            <group>shop:order:account:read</group>
+            <group>admin:order:index</group>
+            <group>sylius:admin:order:index</group>
+            <group>admin:order:show</group>
+            <group>sylius:admin:order:show</group>
+            <group>shop:cart:show</group>
+            <group>sylius:shop:cart:show</group>
+            <group>shop:order:account:show</group>
+            <group>sylius:shop:order:account:show</group>
         </attribute>
 
         <attribute name="orderPromotionTotal">
-            <group>admin:order:read</group>
-            <group>shop:cart:read</group>
-            <group>shop:order:account:read</group>
+            <group>admin:order:index</group>
+            <group>sylius:admin:order:index</group>
+            <group>admin:order:show</group>
+            <group>sylius:admin:order:show</group>
+            <group>shop:cart:show</group>
+            <group>sylius:shop:cart:show</group>
+            <group>shop:order:account:show</group>
+            <group>sylius:shop:order:account:show</group>
         </attribute>
 
         <attribute name="shippingPromotionTotal">
-            <group>admin:order:read</group>
-            <group>shop:cart:read</group>
-            <group>shop:order:account:read</group>
+            <group>admin:order:index</group>
+            <group>sylius:admin:order:index</group>
+            <group>admin:order:show</group>
+            <group>sylius:admin:order:show</group>
+            <group>shop:cart:show</group>
+            <group>sylius:shop:cart:show</group>
+            <group>shop:order:account:show</group>
+            <group>sylius:shop:order:account:show</group>
         </attribute>
 
         <attribute name="tokenValue">
-            <group>admin:order:read</group>
-            <group>shop:cart:read</group>
-            <group>shop:order:account:read</group>
-            <group>shop:order:read</group>
+            <group>admin:order:index</group>
+            <group>sylius:admin:order:index</group>
+            <group>admin:order:show</group>
+            <group>sylius:admin:order:show</group>
+            <group>shop:cart:show</group>
+            <group>sylius:shop:cart:show</group>
+            <group>shop:order:account:show</group>
+            <group>sylius:shop:order:account:show</group>
+            <group>shop:order:index</group>
+            <group>sylius:shop:order:index</group>
+            <group>shop:order:show</group>
+            <group>sylius:shop:order:show</group>
         </attribute>
 
         <attribute name="items">
-            <group>admin:order:read</group>
-            <group>shop:cart:read</group>
-            <group>shop:order:account:read</group>
+            <group>admin:order:index</group>
+            <group>sylius:admin:order:index</group>
+            <group>admin:order:show</group>
+            <group>sylius:admin:order:show</group>
+            <group>shop:cart:show</group>
+            <group>sylius:shop:cart:show</group>
+            <group>shop:order:account:show</group>
+            <group>sylius:shop:order:account:show</group>
         </attribute>
 
         <attribute name="notes">
-            <group>admin:order:read</group>
+            <group>admin:order:index</group>
+            <group>sylius:admin:order:index</group>
+            <group>admin:order:show</group>
+            <group>sylius:admin:order:show</group>
         </attribute>
 
         <attribute name="itemsTotal">
-            <group>admin:order:read</group>
-            <group>shop:cart:read</group>
-            <group>shop:order:read</group>
-            <group>shop:order:account:read</group>
+            <group>admin:order:index</group>
+            <group>sylius:admin:order:index</group>
+            <group>admin:order:show</group>
+            <group>sylius:admin:order:show</group>
+            <group>shop:cart:show</group>
+            <group>sylius:shop:cart:show</group>
+            <group>shop:order:index</group>
+            <group>sylius:shop:order:index</group>
+            <group>shop:order:show</group>
+            <group>sylius:shop:order:show</group>
+            <group>shop:order:account:show</group>
+            <group>sylius:shop:order:account:show</group>
         </attribute>
 
         <attribute name="itemsSubtotal">
-            <group>admin:order:read</group>
-            <group>shop:cart:read</group>
-            <group>shop:order:read</group>
-            <group>shop:order:account:read</group>
+            <group>admin:order:index</group>
+            <group>sylius:admin:order:index</group>
+            <group>admin:order:show</group>
+            <group>sylius:admin:order:show</group>
+            <group>shop:cart:show</group>
+            <group>sylius:shop:cart:show</group>
+            <group>shop:order:index</group>
+            <group>sylius:shop:order:index</group>
+            <group>shop:order:show</group>
+            <group>sylius:shop:order:show</group>
+            <group>shop:order:account:show</group>
+            <group>sylius:shop:order:account:show</group>
         </attribute>
 
         <attribute name="taxTotal">
-            <group>admin:order:read</group>
-            <group>shop:cart:read</group>
-            <group>shop:order:account:read</group>
+            <group>admin:order:index</group>
+            <group>sylius:admin:order:index</group>
+            <group>admin:order:show</group>
+            <group>sylius:admin:order:show</group>
+            <group>shop:cart:show</group>
+            <group>sylius:shop:cart:show</group>
+            <group>shop:order:account:show</group>
+            <group>sylius:shop:order:account:show</group>
         </attribute>
 
         <attribute name="shippingTaxTotal">
-            <group>admin:order:read</group>
-            <group>shop:cart:read</group>
-            <group>shop:order:account:read</group>
+            <group>admin:order:index</group>
+            <group>sylius:admin:order:index</group>
+            <group>admin:order:show</group>
+            <group>sylius:admin:order:show</group>
+            <group>shop:cart:show</group>
+            <group>sylius:shop:cart:show</group>
+            <group>shop:order:account:show</group>
+            <group>sylius:shop:order:account:show</group>
         </attribute>
 
         <attribute name="taxExcludedTotal">
-            <group>admin:order:read</group>
-            <group>shop:cart:read</group>
-            <group>shop:order:account:read</group>
+            <group>admin:order:index</group>
+            <group>sylius:admin:order:index</group>
+            <group>admin:order:show</group>
+            <group>sylius:admin:order:show</group>
+            <group>shop:cart:show</group>
+            <group>sylius:shop:cart:show</group>
+            <group>shop:order:account:show</group>
+            <group>sylius:shop:order:account:show</group>
         </attribute>
 
         <attribute name="taxIncludedTotal">
-            <group>admin:order:read</group>
-            <group>shop:cart:read</group>
-            <group>shop:order:account:read</group>
+            <group>admin:order:index</group>
+            <group>sylius:admin:order:index</group>
+            <group>admin:order:show</group>
+            <group>sylius:admin:order:show</group>
+            <group>shop:cart:show</group>
+            <group>sylius:shop:cart:show</group>
+            <group>shop:order:account:show</group>
+            <group>sylius:shop:order:account:show</group>
         </attribute>
 
         <attribute name="itemsSubtotal">
-            <group>admin:order:read</group>
-            <group>shop:cart:read</group>
-            <group>shop:order:account:read</group>
+            <group>admin:order:index</group>
+            <group>sylius:admin:order:index</group>
+            <group>admin:order:show</group>
+            <group>sylius:admin:order:show</group>
+            <group>shop:cart:show</group>
+            <group>sylius:shop:cart:show</group>
+            <group>shop:order:account:show</group>
+            <group>sylius:shop:order:account:show</group>
         </attribute>
 
         <attribute name="localeCode">
+            <group>admin:order:index</group>
+            <group>sylius:admin:order:index</group>
+            <group>admin:order:show</group>
+            <group>sylius:admin:order:show</group>
             <group>admin:cart:update</group>
-            <group>admin:order:read</group>
-            <group>shop:cart:read</group>
-            <group>shop:order:account:read</group>
+            <group>sylius:admin:cart:update</group>
+            <group>shop:cart:show</group>
+            <group>sylius:shop:cart:show</group>
+            <group>shop:order:account:show</group>
+            <group>sylius:shop:order:account:show</group>
         </attribute>
 
         <attribute name="shippingTotal">
-            <group>admin:order:read</group>
-            <group>shop:cart:read</group>
-            <group>shop:order:account:read</group>
+            <group>admin:order:index</group>
+            <group>sylius:admin:order:index</group>
+            <group>admin:order:show</group>
+            <group>sylius:admin:order:show</group>
+            <group>shop:cart:show</group>
+            <group>sylius:shop:cart:show</group>
+            <group>shop:order:account:show</group>
+            <group>sylius:shop:order:account:show</group>
         </attribute>
 
         <attribute name="shippingAddress">
-            <group>admin:order:read</group>
-            <group>shop:cart:read</group>
-            <group>shop:order:account:read</group>
+            <group>admin:order:index</group>
+            <group>sylius:admin:order:index</group>
+            <group>admin:order:show</group>
+            <group>sylius:admin:order:show</group>
+            <group>shop:cart:show</group>
+            <group>sylius:shop:cart:show</group>
+            <group>shop:order:account:show</group>
+            <group>sylius:shop:order:account:show</group>
         </attribute>
 
         <attribute name="billingAddress">
-            <group>admin:order:read</group>
-            <group>shop:cart:read</group>
-            <group>shop:order:account:read</group>
+            <group>admin:order:index</group>
+            <group>sylius:admin:order:index</group>
+            <group>admin:order:show</group>
+            <group>sylius:admin:order:show</group>
+            <group>shop:cart:show</group>
+            <group>sylius:shop:cart:show</group>
+            <group>shop:order:account:show</group>
+            <group>sylius:shop:order:account:show</group>
         </attribute>
     </class>
 </serializer>

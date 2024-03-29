@@ -5,6 +5,7 @@ default:
     suites:
         ui_managing_customers:
             contexts:
+                - sylius.behat.context.hook.cache
                 - sylius.behat.context.hook.doctrine_orm
                 - sylius.behat.context.hook.session
 

@@ -3,6 +3,17 @@
 
 sylius:
     email:
+        admin_password_reset:
+            hello: 'Bonjour'
+            subject: 'Réinitialisation du mot de passe de l''administrateur'
+            reset_your_password: 'Réinitialiser votre mot de passe'
+            to_reset_your_password: 'Pour réinitialiser votre mot de passe, cliquez sur le lien ci-dessous'
+            to_reset_your_password_token: 'Pour réinitialiser votre mot de passe, utilisez le jeton ci-dessous'
+            token: 'Votre jeton de réinitialisation de mot de passe est'
+        contact_request:
+            content: 'Message'
+            message_from: 'Message de'
+            subject: 'Demande de contact'
         order_confirmation:
             has_been_successfully_placed: 'a été passée avec succès.'
             subject: 'Confirmation de commande'
@@ -27,12 +38,20 @@ sylius:
             subject: 'Inscription utilisateur'
             welcome_to_our_store: 'Bienvenue dans notre boutique !'
             you_have_just_been_registered: 'Vous venez d''être enregistré(e). Merci'
+        #deprecated since Sylius 1.13 and will be removed in 2.0, use user.verification instead
         verification_token:
             hello: 'Bonjour'
             message: 'Vérifiez votre compte avec le jeton : '
             subject: 'Vérification de l''adresse e-mail'
             to_verify_your_email_address: 'Pour vérifier votre adresse e-mail - cliquez sur le lien ci-dessous'
             verify_your_email_address: 'Vérifiez votre adresse e-mail'
+        user:
+            account_verification:
+                greeting: 'Bonjour'
+                message: 'Vérifiez votre compte avec le jeton : '
+                statement: 'Vérifiez votre adresse e-mail'
+                strategy: 'Pour vérifier votre adresse e-mail - cliquez sur le lien ci-dessous'
+                subject: 'Vérification de l''adresse e-mail'
     form:
         block:
             body: Corps
@@ -43,6 +62,7 @@ sylius:
         catalog_promotion:
             channels: Canaux
             scope:
+                for_products: Pour les produits
                 for_taxons: Pour les taxonomies
                 for_variants: Pour les variantes
         checkout:
@@ -81,6 +101,7 @@ sylius:
             locales: Paramètres régionaux
             menu_taxon: Taxonomie de menu
             payment_methods: Moyens de paiement
+            shipping_address_in_checkout_required: Adresse requise durant le tunnel d'achat
             shipping_methods: Modes de livraison
             shop_billing_data: Données de facturation du magasin
             skipping_shipping_step_allowed: Ignorez l’étape expédition si un seul mode de livraison est disponible ?
@@ -212,8 +233,8 @@ sylius:
             intl: Intl
             json_encode: JSON
             mbstring: Chaîne de caractères multi-octets
-            off: false
-            on: true
+            off: off
+            on: on
             pcre: PCRE
             pdo: PDO
             php_xml: PHP-XML
@@ -243,8 +264,8 @@ sylius:
             detect_unicode_help: Définir 'detect_unicode = Off' dans votre fichier php.ini
             magic_quotes_gpc: magic_quotes_gpc
             non_deprecated: Non obsolète
-            off: false
-            on: true
+            off: off
+            on: on
             register_globals: register_globals
             session:
                 auto_start: session.auto_start

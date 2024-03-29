@@ -5,6 +5,7 @@ sylius:
     form:
         catalog_promotion:
             action:
+                fixed_discount: Remise fixe
                 percentage_discount: Pourcentage de remise
             description: Description
             enabled: Activée
@@ -18,10 +19,13 @@ sylius:
             actions: Actions
             add_action: Ajouter une action
             add_rule: Ajouter une règle
+            applies_to_discounted: S'applique aux articles déjà remisés
+            applies_to_discounted_details: Avec cette option, la promotion du panier sera appliquée aux articles déjà remisés par la ou les promotion(s) du catalogue.
             coupon_based: Comprend des coupons
             description: Description
             ends_at: Se termine le
             exclusive: Exclusif
+            label: Libellé
             name: Nom
             priority: Priorité
             rules: Règles
@@ -33,6 +37,7 @@ sylius:
             order_fixed_discount: Remise sur la commande
             order_percentage_discount: Rabais en pourcentage commande
             shipping_percentage_discount: Rabais en pourcentage expédition
+            filters: Filtres
             fixed_discount_configuration:
                 amount: Montant
             percentage_discount_configuration:

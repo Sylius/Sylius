@@ -1,8 +1,0 @@
-{
-    "@context": "\/api\/v2\/contexts\/AvatarImage",
-    "@id": "\/api\/v2\/admin\/administrators\/@integer@\/avatar-image",
-    "@type": "AvatarImage",
-    "id": @integer@,
-    "path": "@string@\/ford.jpg",
-    "owner": "\/api\/v2\/admin\/administrators\/@integer@"
-}

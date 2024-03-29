@@ -31,6 +31,20 @@ imports:
 parameters:
     sylius_core.public_dir: "%kernel.project_dir%/web"
     sylius_core.images_dir: "%sylius_core.public_dir%/media/image"
+    locale: en_US
+
+sylius_core:
+    orders_statistics:
+        intervals_map:
+            day:
+                interval: P1D
+                period_format: Y-m-d
+            month:
+                interval: P1M
+                period_format: Y-m
+            year:
+                interval: P1Y
+                period_format: Y
 
 doctrine:
     orm:
@@ -53,6 +67,7 @@ flysystem:
             adapter: 'local'
             options:
                 directory: '%sylius_core.images_dir%'
+            directory_visibility: 'public'
 
 knp_gaufrette:
     adapters:
@@ -77,6 +92,7 @@ liip_imagine:
                 web_root: "%sylius_core.public_dir%"
                 cache_prefix: "media/cache"
     filter_sets:
+        sylius_original: ~
         sylius_small:
             filters:
                 thumbnail: { size: [120, 90], mode: outbound }

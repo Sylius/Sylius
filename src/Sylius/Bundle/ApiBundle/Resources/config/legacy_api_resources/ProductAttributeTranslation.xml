@@ -26,8 +26,10 @@
                 <attribute name="path">/admin/product-attribute-translations/{id}</attribute>
                 <attribute name="normalization_context">
                     <attribute name="groups">
-                        <attribute>admin:product_attribute:read</attribute>
-                        <attribute>admin:product_attribute_translation:read</attribute>
+                        <attribute>admin:product_attribute:show</attribute>
+                        <attribute>sylius:admin:product_attribute:show</attribute>
+                        <attribute>admin:product_attribute_translation:show</attribute>
+                        <attribute>sylius:admin:product_attribute_translation:show</attribute>
                     </attribute>
                 </attribute>
             </itemOperation>

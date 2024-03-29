@@ -25,7 +25,6 @@ use Sylius\Component\Core\Model\ShopUserInterface;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Webmozart\Assert\Assert;
 
-/** @experimental */
 final readonly class OrdersByChannelExtension implements QueryCollectionExtensionInterface
 {
     public function __construct(private UserContextInterface $userContext)

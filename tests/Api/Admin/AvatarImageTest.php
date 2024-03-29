@@ -11,9 +11,11 @@
 
 declare(strict_types=1);
 
-namespace Api\Admin;
+namespace Sylius\Tests\Api\Admin;
 
+use Sylius\Bundle\ApiBundle\Serializer\ImageNormalizer;
 use Sylius\Component\Core\Model\AdminUserInterface;
+use Sylius\Component\Core\Model\AvatarImageInterface;
 use Sylius\Tests\Api\JsonApiTestCase;
 use Sylius\Tests\Api\Utils\AdminUserLoginTrait;
 use Symfony\Component\HttpFoundation\Response;
@@ -41,6 +43,52 @@ final class AvatarImageTest extends JsonApiTestCase
             $this->client->getResponse(),
             'admin/avatar_image/get_avatar_image',
             Response::HTTP_OK,
+        );
+    }
+
+    /** @test */
+    public function it_gets_an_avatar_image_with_an_image_filter(): void
+    {
+        $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'avatar_image.yaml']);
+        $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
+
+        /** @var AvatarImageInterface $avatarImage */
+        $avatarImage = $fixtures['avatar_image'];
+
+        $this->client->request(
+            method: 'GET',
+            uri: sprintf('/api/v2/admin/avatar-images/%s', $avatarImage->getId()),
+            parameters: [ImageNormalizer::FILTER_QUERY_PARAMETER => 'sylius_small'],
+            server: $header,
+        );
+
+        $this->assertResponse(
+            $this->client->getResponse(),
+            'admin/avatar_image/get_an_avatar_image_with_an_image_filter',
+            Response::HTTP_OK,
+        );
+    }
+
+    /** @test */
+    public function it_prevents_getting_an_avatar_image_with_an_invalid_image_filter(): void
+    {
+        $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'avatar_image.yaml']);
+        $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
+
+        /** @var AvatarImageInterface $avatarImage */
+        $avatarImage = $fixtures['avatar_image'];
+
+        $this->client->request(
+            method: 'GET',
+            uri: sprintf('/api/v2/admin/avatar-images/%s', $avatarImage->getId()),
+            parameters: [ImageNormalizer::FILTER_QUERY_PARAMETER => 'invalid'],
+            server: $header,
+        );
+
+        $this->assertResponse(
+            $this->client->getResponse(),
+            'common/image/invalid_filter',
+            Response::HTTP_BAD_REQUEST,
         );
     }
 

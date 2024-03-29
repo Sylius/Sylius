@@ -17,93 +17,215 @@
 >
     <class name="Sylius\Component\Core\Model\Product">
         <attribute name="id">
-            <group>admin:product:read</group>
-            <group>shop:product:read</group>
+            <group>admin:product:index</group>
+            <group>sylius:admin:product:index</group>
+            <group>admin:product:show</group>
+            <group>sylius:admin:product:show</group>
+            <group>shop:product:index</group>
+            <group>sylius:shop:product:index</group>
+            <group>shop:product:show</group>
+            <group>sylius:shop:product:show</group>
         </attribute>
         <attribute name="code">
-            <group>admin:product:read</group>
+            <group>admin:product:index</group>
+            <group>sylius:admin:product:index</group>
+            <group>admin:product:show</group>
+            <group>sylius:admin:product:show</group>
             <group>admin:product:create</group>
-            <group>shop:product:read</group>
+            <group>sylius:admin:product:create</group>
+            <group>shop:product:index</group>
+            <group>sylius:shop:product:index</group>
+            <group>shop:product:show</group>
+            <group>sylius:shop:product:show</group>
         </attribute>
         <attribute name="variantSelectionMethod">
-            <group>admin:product:read</group>
+            <group>admin:product:index</group>
+            <group>sylius:admin:product:index</group>
+            <group>admin:product:show</group>
+            <group>sylius:admin:product:show</group>
             <group>admin:product:create</group>
+            <group>sylius:admin:product:create</group>
         </attribute>
         <attribute name="enabled">
-            <group>admin:product:read</group>
+            <group>admin:product:index</group>
+            <group>sylius:admin:product:index</group>
+            <group>admin:product:show</group>
+            <group>sylius:admin:product:show</group>
             <group>admin:product:create</group>
+            <group>sylius:admin:product:create</group>
             <group>admin:product:update</group>
+            <group>sylius:admin:product:update</group>
         </attribute>
         <attribute name="name">
-            <group>shop:product:read</group>
+            <group>shop:product:index</group>
+            <group>sylius:shop:product:index</group>
+            <group>shop:product:show</group>
+            <group>sylius:shop:product:show</group>
         </attribute>
         <attribute name="description">
-            <group>shop:product:read</group>
+            <group>shop:product:index</group>
+            <group>sylius:shop:product:index</group>
+            <group>shop:product:show</group>
+            <group>sylius:shop:product:show</group>
         </attribute>
         <attribute name="slug">
-            <group>shop:product:read</group>
+            <group>shop:product:index</group>
+            <group>sylius:shop:product:index</group>
+            <group>shop:product:show</group>
+            <group>sylius:shop:product:show</group>
         </attribute>
         <attribute name="shortDescription">
-            <group>shop:product:read</group>
+            <group>shop:product:index</group>
+            <group>sylius:shop:product:index</group>
+            <group>shop:product:show</group>
+            <group>sylius:shop:product:show</group>
         </attribute>
         <attribute name="translations">
-            <group>admin:product:read</group>
+            <group>admin:product:index</group>
+            <group>sylius:admin:product:index</group>
+            <group>admin:product:show</group>
+            <group>sylius:admin:product:show</group>
             <group>admin:product:create</group>
+            <group>sylius:admin:product:create</group>
             <group>admin:product:update</group>
+            <group>sylius:admin:product:update</group>
         </attribute>
         <attribute name="mainTaxon">
-            <group>admin:product:read</group>
+            <group>admin:product:index</group>
+            <group>sylius:admin:product:index</group>
+            <group>admin:product:show</group>
+            <group>sylius:admin:product:show</group>
             <group>admin:product:create</group>
+            <group>sylius:admin:product:create</group>
             <group>admin:product:update</group>
-            <group>shop:product:read</group>
+            <group>sylius:admin:product:update</group>
+            <group>shop:product:index</group>
+            <group>sylius:shop:product:index</group>
+            <group>shop:product:show</group>
+            <group>sylius:shop:product:show</group>
         </attribute>
         <attribute name="productTaxons">
-            <group>admin:product:read</group>
-            <group>shop:product:read</group>
+            <group>admin:product:index</group>
+            <group>sylius:admin:product:index</group>
+            <group>admin:product:show</group>
+            <group>sylius:admin:product:show</group>
+            <group>shop:product:index</group>
+            <group>sylius:shop:product:index</group>
+            <group>shop:product:show</group>
+            <group>sylius:shop:product:show</group>
         </attribute>
         <attribute name="options">
-            <group>admin:product:read</group>
+            <group>admin:product:index</group>
+            <group>sylius:admin:product:index</group>
+            <group>admin:product:show</group>
+            <group>sylius:admin:product:show</group>
             <group>admin:product:create</group>
+            <group>sylius:admin:product:create</group>
             <group>admin:product:update</group>
-            <group>shop:product:read</group>
+            <group>sylius:admin:product:update</group>
+            <group>shop:product:index</group>
+            <group>sylius:shop:product:index</group>
+            <group>shop:product:show</group>
+            <group>sylius:shop:product:show</group>
         </attribute>
         <attribute name="variants">
-            <group>admin:product:read</group>
-            <group>shop:product:read</group>
+            <group>admin:product:index</group>
+            <group>sylius:admin:product:index</group>
+            <group>admin:product:show</group>
+            <group>sylius:admin:product:show</group>
+            <group>shop:product:index</group>
+            <group>sylius:shop:product:index</group>
+            <group>shop:product:show</group>
+            <group>sylius:shop:product:show</group>
         </attribute>
         <attribute name="images">
-            <group>admin:product:read</group>
+            <group>admin:product:index</group>
+            <group>sylius:admin:product:index</group>
+            <group>admin:product:show</group>
+            <group>sylius:admin:product:show</group>
             <group>admin:product:create</group>
+            <group>sylius:admin:product:create</group>
             <group>admin:product:update</group>
-            <group>shop:product:read</group>
+            <group>sylius:admin:product:update</group>
+            <group>shop:product:index</group>
+            <group>sylius:shop:product:index</group>
+            <group>shop:product:show</group>
+            <group>sylius:shop:product:show</group>
         </attribute>
         <attribute name="reviews">
-            <group>admin:product:read</group>
-            <group>shop:product:read</group>
+            <group>admin:product:index</group>
+            <group>sylius:admin:product:index</group>
+            <group>admin:product:show</group>
+            <group>sylius:admin:product:show</group>
+        </attribute>
+        <attribute name="acceptedReviews" serialized-name="reviews">
+            <group>shop:product:index</group>
+            <group>sylius:shop:product:index</group>
+            <group>shop:product:show</group>
+            <group>sylius:shop:product:show</group>
+            <normalization_context>
+                <entry name="collection_values">true</entry>
+            </normalization_context>
         </attribute>
         <attribute name="averageRating">
-            <group>shop:product:read</group>
+            <group>admin:product:index</group>
+            <group>sylius:admin:product:index</group>
+            <group>admin:product:show</group>
+            <group>sylius:admin:product:show</group>
+            <group>shop:product:index</group>
+            <group>sylius:shop:product:index</group>
+            <group>shop:product:show</group>
+            <group>sylius:shop:product:show</group>
         </attribute>
         <attribute name="associations">
-            <group>shop:product:read</group>
+            <group>admin:product:index</group>
+            <group>sylius:admin:product:index</group>
+            <group>admin:product:show</group>
+            <group>sylius:admin:product:show</group>
+            <group>shop:product:index</group>
+            <group>sylius:shop:product:index</group>
+            <group>shop:product:show</group>
+            <group>sylius:shop:product:show</group>
         </attribute>
         <attribute name="attributes">
-            <group>admin:product:read</group>
+            <group>admin:product:index</group>
+            <group>sylius:admin:product:index</group>
+            <group>admin:product:show</group>
+            <group>sylius:admin:product:show</group>
             <group>admin:product:create</group>
+            <group>sylius:admin:product:create</group>
             <group>admin:product:update</group>
+            <group>sylius:admin:product:update</group>
         </attribute>
         <attribute name="channels">
-            <group>admin:product:read</group>
+            <group>admin:product:index</group>
+            <group>sylius:admin:product:index</group>
+            <group>admin:product:show</group>
+            <group>sylius:admin:product:show</group>
             <group>admin:product:create</group>
+            <group>sylius:admin:product:create</group>
             <group>admin:product:update</group>
+            <group>sylius:admin:product:update</group>
         </attribute>
         <attribute name="createdAt">
-            <group>admin:product:read</group>
-            <group>shop:product:read</group>
+            <group>admin:product:index</group>
+            <group>sylius:admin:product:index</group>
+            <group>admin:product:show</group>
+            <group>sylius:admin:product:show</group>
+            <group>shop:product:index</group>
+            <group>sylius:shop:product:index</group>
+            <group>shop:product:show</group>
+            <group>sylius:shop:product:show</group>
         </attribute>
         <attribute name="updatedAt">
-            <group>admin:product:read</group>
-            <group>shop:product:read</group>
+            <group>admin:product:index</group>
+            <group>sylius:admin:product:index</group>
+            <group>admin:product:show</group>
+            <group>sylius:admin:product:show</group>
+            <group>shop:product:index</group>
+            <group>sylius:shop:product:index</group>
+            <group>shop:product:show</group>
+            <group>sylius:shop:product:show</group>
         </attribute>
     </class>
 </serializer>

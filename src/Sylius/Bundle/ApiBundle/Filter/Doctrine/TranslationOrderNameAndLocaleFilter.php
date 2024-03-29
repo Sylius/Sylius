@@ -19,7 +19,6 @@ use ApiPlatform\Doctrine\Orm\Util\QueryNameGeneratorInterface;
 use ApiPlatform\Metadata\Operation;
 use Doctrine\ORM\QueryBuilder;
 
-/** @experimental */
 final class TranslationOrderNameAndLocaleFilter extends AbstractFilter
 {
     protected function filterProperty(
@@ -44,7 +43,7 @@ final class TranslationOrderNameAndLocaleFilter extends AbstractFilter
 
                 $queryBuilder
                     ->addSelect('translation')
-                    ->innerJoin(
+                    ->leftJoin(
                         sprintf('%s.translations', $rootAlias),
                         'translation',
                         'WITH',

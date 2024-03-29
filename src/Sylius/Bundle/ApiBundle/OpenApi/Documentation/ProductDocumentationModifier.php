@@ -15,13 +15,16 @@ namespace Sylius\Bundle\ApiBundle\OpenApi\Documentation;
 
 use ApiPlatform\OpenApi\OpenApi;
 
-/** @experimental */
 final class ProductDocumentationModifier implements DocumentationModifierInterface
 {
     public function modify(OpenApi $docs): OpenApi
     {
         $components = $docs->getComponents();
         $schemas = $components->getSchemas();
+
+        if (!isset($schemas['Product.jsonld-shop.product.read'])) {
+            return $docs;
+        }
 
         $schemas['Product.jsonld-shop.product.read']['properties']['defaultVariant'] = [
             'type' => 'string',

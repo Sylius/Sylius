@@ -20,26 +20,12 @@ use Symfony\Component\HttpFoundation\Response;
 final class CurrenciesTest extends JsonApiTestCase
 {
     /** @test */
-    public function it_gets_currencies(): void
-    {
-        $this->loadFixturesFromFiles(['channel.yaml', 'currency.yaml']);
-
-        $this->client->request(method: 'GET', uri: '/api/v2/shop/currencies', server: self::CONTENT_TYPE_HEADER);
-
-        $this->assertResponse(
-            $this->client->getResponse(),
-            'shop/currency/get_currencies_response',
-            Response::HTTP_OK,
-        );
-    }
-
-    /** @test */
     public function it_gets_a_currency(): void
     {
-        $fixtures = $this->loadFixturesFromFiles(['channel.yaml', 'currency.yaml']);
+        $fixtures = $this->loadFixturesFromFiles(['currency.yaml']);
 
         /** @var CurrencyInterface $currency */
-        $currency = $fixtures['currency_usd'];
+        $currency = $fixtures['currency_gbp'];
 
         $this->client->request(
             method: 'GET',
@@ -55,19 +41,16 @@ final class CurrenciesTest extends JsonApiTestCase
     }
 
     /** @test */
-    public function it_cannot_get_currency_that_is_not_related_to_the_channel(): void
+    public function it_gets_currencies(): void
     {
-        $fixtures = $this->loadFixturesFromFiles(['channel.yaml', 'currency.yaml']);
+        $this->loadFixturesFromFiles(['channel.yaml', 'currency.yaml']);
 
-        /** @var CurrencyInterface $currency */
-        $currency = $fixtures['currency_gbp'];
+        $this->client->request(method: 'GET', uri: '/api/v2/shop/currencies', server: self::CONTENT_TYPE_HEADER);
 
-        $this->client->request(
-            method: 'GET',
-            uri: sprintf('/api/v2/shop/currencies/%s', $currency->getCode()),
-            server: self::CONTENT_TYPE_HEADER,
+        $this->assertResponse(
+            $this->client->getResponse(),
+            'shop/currency/get_currencies_response',
+            Response::HTTP_OK,
         );
-
-        $this->assertResponseCode($this->client->getResponse(), Response::HTTP_NOT_FOUND);
     }
 }

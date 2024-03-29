@@ -84,6 +84,7 @@
     "Payum\\Paypal\\ExpressCheckout\\Nvp\\PaypalExpressCheckoutGatewayFactory",
     "Payum\\Stripe\\StripeCheckoutGatewayFactory",
     "PHPUnit\\Framework\\ExpectationFailedException",
+    "Psr\\Clock\\ClockInterface",
     "Psr\\Container\\ContainerInterface",
     "Psr\\Http\\Message\\RequestFactoryInterface",
     "Psr\\Http\\Message\\StreamFactoryInterface",

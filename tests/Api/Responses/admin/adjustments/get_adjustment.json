@@ -1,0 +1,15 @@
+{
+    "@context": "\/api\/v2\/contexts\/Adjustment",
+    "@id": "\/api\/v2\/admin\/adjustments\/@integer@",
+    "@type": "Adjustment",
+    "id": @integer@,
+    "order": "\/api\/v2\/admin\/orders\/token",
+    "orderItem": null,
+    "orderItemUnit": null,
+    "shipment": "\/api\/v2\/admin\/shipments\/@integer@",
+    "type": "shipping",
+    "label": "UPS",
+    "amount": 500,
+    "neutral": false,
+    "locked": false
+}

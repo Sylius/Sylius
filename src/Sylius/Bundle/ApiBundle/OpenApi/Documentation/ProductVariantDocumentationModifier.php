@@ -15,13 +15,16 @@ namespace Sylius\Bundle\ApiBundle\OpenApi\Documentation;
 
 use ApiPlatform\OpenApi\OpenApi;
 
-/** @experimental */
 final class ProductVariantDocumentationModifier implements DocumentationModifierInterface
 {
     public function modify(OpenApi $docs): OpenApi
     {
         $components = $docs->getComponents();
         $schemas = $components->getSchemas();
+
+        if (!isset($schemas['ProductVariant.jsonld-shop.product_variant.read'])) {
+            return $docs;
+        }
 
         $schemas['ProductVariant.jsonld-shop.product_variant.read']['properties']['price'] = [
             'type' => 'integer',

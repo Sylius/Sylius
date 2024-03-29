@@ -29,6 +29,7 @@
         "php": "^8.2",
         "sylius/locale": "^2.0",
         "sylius/resource-bundle": "^1.10",
+        "symfony/cache-contracts": "^2.5 || ^3.0",
         "symfony/framework-bundle": "^6.4.1",
         "symfony/templating": "^6.4.0"
     },

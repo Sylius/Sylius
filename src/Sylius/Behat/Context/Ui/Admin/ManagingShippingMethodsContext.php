@@ -14,6 +14,8 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
+use FriendsOfBehat\PageObjectExtension\Page\SymfonyPageInterface;
+use Sylius\Behat\Context\Ui\Admin\Helper\ValidationTrait;
 use Sylius\Behat\Page\Admin\ShippingMethod\CreatePageInterface;
 use Sylius\Behat\Page\Admin\ShippingMethod\IndexPageInterface;
 use Sylius\Behat\Page\Admin\ShippingMethod\UpdatePageInterface;
@@ -25,6 +27,8 @@ use Webmozart\Assert\Assert;
 
 final class ManagingShippingMethodsContext implements Context
 {
+    use ValidationTrait;
+
     public function __construct(
         private IndexPageInterface $indexPage,
         private CreatePageInterface $createPage,
@@ -46,7 +50,7 @@ final class ManagingShippingMethodsContext implements Context
      * @When I specify its code as :code
      * @When I do not specify its code
      */
-    public function iSpecifyItsCodeAs($code = null)
+    public function iSpecifyItsCodeAs(?string $code = null): void
     {
         $this->createPage->specifyCode($code ?? '');
     }
@@ -147,6 +151,16 @@ final class ManagingShippingMethodsContext implements Context
     }
 
     /**
+     * @Then the shipping method :shipmentMethodName should not appear in the registry
+     */
+    public function theShipmentMethodShouldNotAppearInTheRegistry(string $shipmentMethodName): void
+    {
+        $this->iWantToBrowseShippingMethods();
+
+        Assert::false($this->indexPage->isSingleResourceOnPage(['name' => $shipmentMethodName]));
+    }
+
+    /**
      * @Given /^(this shipping method) should still be in the registry$/
      */
     public function thisShippingMethodShouldStillBeInTheRegistry(ShippingMethodInterface $shippingMethod)
@@ -235,7 +249,7 @@ final class ManagingShippingMethodsContext implements Context
     /**
      * @Then I should be notified that code needs to contain only specific symbols
      */
-    public function iShouldBeNotifiedThatCodeShouldContain()
+    public function iShouldBeNotifiedThatCodeNeedsToContainOnlySpecificSymbols(): void
     {
         $this->assertFieldValidationMessage(
             'code',
@@ -324,8 +338,9 @@ final class ManagingShippingMethodsContext implements Context
 
     /**
      * @Then I should be notified that :element has to be selected
+     * @Then I should be notified that the :element is required
      */
-    public function iShouldBeNotifiedThatElementHasToBeSelected($element)
+    public function iShouldBeNotifiedThatElementHasToBeSelected(string $element): void
     {
         $this->assertFieldValidationMessage($element, sprintf('Please select shipping method %s.', $element));
     }
@@ -485,6 +500,15 @@ final class ManagingShippingMethodsContext implements Context
     }
 
     /**
+     * @When I add the "Total weight greater than or equal" rule configured with invalid data
+     */
+    public function iAddTheTotalWeightGreaterThanOrEqualRuleConfiguredWithInvalidData(): void
+    {
+        $this->createPage->addRule('Total weight greater than or equal');
+        $this->createPage->fillRuleOption('Weight', 'invalid data');
+    }
+
+    /**
      * @When I add the "Total weight less than or equal" rule configured with :weight
      */
     public function iAddTheTotalWeightLessThanOrEqualRuleConfiguredWith(int $weight): void
@@ -494,21 +518,21 @@ final class ManagingShippingMethodsContext implements Context
     }
 
     /**
-     * @When /^I add the "Items total greater than or equal" rule configured with (?:€|£|\$)([^"]+) for ("[^"]+" channel)$/
+     * @When /^I add the "([^"]+)" rule configured with (?:€|£|\$)([^"]+) for ("[^"]+" channel)$/
      */
-    public function iAddTheItemsTotalGreaterThanOrEqualRuleConfiguredWith($value, ChannelInterface $channel): void
+    public function iAddTheItemsTotalLessThanOrEqualRuleConfiguredWith(string $rule, mixed $value, ChannelInterface $channel): void
     {
-        $this->createPage->addRule('Items total greater than or equal');
+        $this->createPage->addRule($rule);
         $this->createPage->fillRuleOptionForChannel($channel->getCode(), 'Amount', (string) $value);
     }
 
     /**
-     * @When /^I add the "Items total less than or equal" rule configured with (?:€|£|\$)([^"]+) for ("[^"]+" channel)$/
+     * @When /^I add the "Items total less than or equal" rule configured with invalid data for ("[^"]+" channel)$/
      */
-    public function iAddTheItemsTotalLessThanOrEqualRuleConfiguredWith($value, ChannelInterface $channel): void
+    public function iAddTheItemsTotalLessThanOrEqualRuleConfiguredWithInvalidData(ChannelInterface $channel): void
     {
         $this->createPage->addRule('Items total less than or equal');
-        $this->createPage->fillRuleOptionForChannel($channel->getCode(), 'Amount', (string) $value);
+        $this->createPage->fillRuleOptionForChannel($channel->getCode(), 'Amount', 'Invalid data');
     }
 
     /**
@@ -529,6 +553,28 @@ final class ManagingShippingMethodsContext implements Context
         Assert::same(
             $this->updatePage->getShippingChargesValidationErrorsCount($channel->getCode()),
             $count,
+        );
+    }
+
+    /**
+     * @Then I should be notified that the weight rule has an invalid configuration
+     */
+    public function iShouldBeNotifiedThatTheWeightRuleHasAnInvalidConfiguration(): void
+    {
+        $this->assertFieldValidationMessage('weight', 'Please enter a number.');
+    }
+
+    /**
+     * @Then I should be notified that the amount rule has an invalid configuration in :channel channel
+     */
+    public function iShouldBeNotifiedThatTheAmountRuleHasAnInvalidConfigurationInChannel(ChannelInterface $channel): void
+    {
+        /** @var CreatePageInterface|UpdatePageInterface $currentPage */
+        $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
+
+        Assert::same(
+            $currentPage->getValidationMessageForRuleAmount($channel->getCode()),
+            'Please enter a valid money amount.',
         );
     }
 
@@ -555,5 +601,10 @@ final class ManagingShippingMethodsContext implements Context
             'name' => $shippingMethod->getName(),
             'enabled' => $state ? 'Enabled' : 'Disabled',
         ]));
+    }
+
+    protected function resolveCurrentPage(): SymfonyPageInterface
+    {
+        return $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
     }
 }

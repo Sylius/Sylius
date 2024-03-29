@@ -16,7 +16,6 @@ namespace Sylius\Bundle\ApiBundle\Payment;
 use Sylius\Component\Core\Model\PaymentInterface;
 use Sylius\Component\Core\Model\PaymentMethodInterface;
 
-/** @experimental */
 interface PaymentConfigurationProviderInterface
 {
     public function supports(PaymentMethodInterface $paymentMethod): bool;

@@ -18,7 +18,6 @@ use Sylius\Bundle\ApiBundle\Command\OrderTokenValueAwareInterface;
 use Sylius\Bundle\ApiBundle\Command\PaymentMethodCodeAwareInterface;
 use Sylius\Bundle\ApiBundle\Command\SubresourceIdAwareInterface;
 
-/** @experimental */
 class ChoosePaymentMethod implements OrderTokenValueAwareInterface, SubresourceIdAwareInterface, PaymentMethodCodeAwareInterface, IriToIdentifierConversionAwareInterface
 {
     /** @var string|null */

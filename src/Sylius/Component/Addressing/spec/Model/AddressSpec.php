@@ -111,11 +111,11 @@ final class AddressSpec extends ObjectBehavior
         $this->getProvinceCode()->shouldReturn(null);
     }
 
-    function it_ignores_province_code_when_there_is_no_country_code(): void
+    function it_sets_province_code_even_if_there_is_no_country_code(): void
     {
         $this->setCountryCode(null);
         $this->setProvinceCode('DU');
-        $this->getProvinceCode()->shouldReturn(null);
+        $this->getProvinceCode()->shouldReturn('DU');
     }
 
     function its_province_code_is_mutable(): void

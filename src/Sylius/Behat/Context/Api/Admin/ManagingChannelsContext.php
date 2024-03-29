@@ -17,6 +17,7 @@ use ApiPlatform\Api\IriConverterInterface;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
+use Sylius\Behat\Context\Api\Admin\Helper\ValidationTrait;
 use Sylius\Behat\Context\Api\Resources;
 use Sylius\Behat\Service\Converter\SectionAwareIriConverterInterface;
 use Sylius\Component\Addressing\Model\CountryInterface;
@@ -30,6 +31,8 @@ use Webmozart\Assert\Assert;
 
 final class ManagingChannelsContext implements Context
 {
+    use ValidationTrait;
+
     private array $shopBillingData = [];
 
     public function __construct(
@@ -366,6 +369,14 @@ final class ManagingChannelsContext implements Context
             'channelPriceHistoryConfig',
             ['lowestPriceForDiscountedProductsCheckingPeriod' => $days],
         );
+    }
+
+    /**
+     * @When /^I specify its ([^"]+) as a too long string$/
+     */
+    public function iSpecifyItsFieldAsATooLongString(string $field): void
+    {
+        $this->client->addRequestData(StringInflector::nameToCamelCase($field), str_repeat('a@', 128));
     }
 
     /**

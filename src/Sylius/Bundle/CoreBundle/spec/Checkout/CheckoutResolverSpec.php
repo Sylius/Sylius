@@ -16,7 +16,8 @@ namespace spec\Sylius\Bundle\CoreBundle\Checkout;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use SM\Factory\FactoryInterface;
-use SM\StateMachine\StateMachineInterface;
+use SM\StateMachine\StateMachineInterface as WinzouStateMachineInterface;
+use Sylius\Abstraction\StateMachine\StateMachineInterface;
 use Sylius\Bundle\CoreBundle\Checkout\CheckoutStateUrlGeneratorInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Order\Context\CartContextInterface;
@@ -160,7 +161,7 @@ final class CheckoutResolverSpec extends ObjectBehavior
         CartContextInterface $cartContext,
         OrderInterface $order,
         FactoryInterface $stateMachineFactory,
-        StateMachineInterface $stateMachine,
+        WinzouStateMachineInterface $stateMachine,
     ): void {
         $request = new Request([], [], [
             '_sylius' => ['state_machine' => ['graph' => 'test_graph', 'transition' => 'test_transition']],
@@ -183,7 +184,7 @@ final class CheckoutResolverSpec extends ObjectBehavior
         CartContextInterface $cartContext,
         OrderInterface $order,
         FactoryInterface $stateMachineFactory,
-        StateMachineInterface $stateMachine,
+        WinzouStateMachineInterface $stateMachine,
         CheckoutStateUrlGeneratorInterface $urlGenerator,
     ): void {
         $request = new Request([], [], [
@@ -196,6 +197,31 @@ final class CheckoutResolverSpec extends ObjectBehavior
         $order->isEmpty()->willReturn(false);
         $stateMachineFactory->get($order, 'test_graph')->willReturn($stateMachine);
         $stateMachine->can('test_transition')->willReturn(false);
+        $urlGenerator->generateForOrderCheckoutState($order)->willReturn('/target-url');
+        $event->setResponse(Argument::type(RedirectResponse::class))->shouldBeCalled();
+
+        $this->onKernelRequest($event);
+    }
+
+    function it_uses_the_new_state_machine_abstraction_if_passed(
+        CartContextInterface $cartContext,
+        CheckoutStateUrlGeneratorInterface $urlGenerator,
+        RequestMatcherInterface $requestMatcher,
+        StateMachineInterface $stateMachine,
+        RequestEvent $event,
+        OrderInterface $order,
+    ): void {
+        $this->beConstructedWith($cartContext, $urlGenerator, $requestMatcher, $stateMachine);
+
+        $request = new Request([], [], [
+            '_sylius' => ['state_machine' => ['graph' => 'test_graph', 'transition' => 'test_transition']],
+        ]);
+        $event->isMainRequest()->willReturn(true);
+        $event->getRequest()->willReturn($request);
+        $requestMatcher->matches($request)->willReturn(true);
+        $cartContext->getCart()->willReturn($order);
+        $order->isEmpty()->willReturn(false);
+        $stateMachine->can($order, 'test_graph', 'test_transition')->willReturn(false);
         $urlGenerator->generateForOrderCheckoutState($order)->willReturn('/target-url');
         $event->setResponse(Argument::type(RedirectResponse::class))->shouldBeCalled();
 

@@ -16,13 +16,19 @@ namespace Sylius\Bundle\CoreBundle\Form\Extension;
 use Sylius\Bundle\AddressingBundle\Form\Type\ZoneChoiceType;
 use Sylius\Bundle\ChannelBundle\Form\Type\ChannelChoiceType;
 use Sylius\Bundle\ShippingBundle\Form\Type\ShippingMethodType;
+use Sylius\Bundle\ShippingBundle\Validator\GroupsGenerator\ShippingMethodConfigurationGroupsGenerator;
 use Sylius\Bundle\TaxationBundle\Form\Type\TaxCategoryChoiceType;
 use Sylius\Component\Core\Model\Scope;
 use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class ShippingMethodTypeExtension extends AbstractTypeExtension
 {
+    public function __construct(private ShippingMethodConfigurationGroupsGenerator $configurationGroupsGenerator)
+    {
+    }
+
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
@@ -43,9 +49,11 @@ final class ShippingMethodTypeExtension extends AbstractTypeExtension
         ;
     }
 
-    public function getExtendedType(): string
+    public function configureOptions(OptionsResolver $resolver): void
     {
-        return ShippingMethodType::class;
+        $resolver->setDefaults([
+            'validation_groups' => $this->configurationGroupsGenerator,
+        ]);
     }
 
     public static function getExtendedTypes(): iterable

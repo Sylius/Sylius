@@ -325,7 +325,7 @@ final class MainMenuBuilder
     {
         $configuration = $menu
             ->addChild('official_support')
-            ->setLabel('sylius.menu.admin.main.official_support.header' )
+            ->setLabel('sylius.menu.admin.main.official_support.header')
         ;
 
         $configuration
@@ -358,6 +358,14 @@ final class MainMenuBuilder
             ->setLinkAttribute('target', '_blank')
             ->setLabel('sylius.menu.admin.main.official_support.find_a_partner')
             ->setLabelAttribute('icon', 'handshake')
+        ;
+
+        $configuration
+            ->addChild('sylius_certification')
+            ->setUri('https://sylius.com/certification/')
+            ->setLinkAttribute('target', '_blank')
+            ->setLabel('sylius.menu.admin.main.official_support.sylius_certification')
+            ->setLabelAttribute('icon', 'certificate')
         ;
     }
 }

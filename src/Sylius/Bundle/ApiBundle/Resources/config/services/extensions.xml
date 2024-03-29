@@ -130,9 +130,21 @@
             <tag name="api_platform.doctrine.orm.query_extension.item" />
         </service>
 
+<!--        <service id="Sylius\Bundle\ApiBundle\Doctrine\QueryExtension\OrderExtension">-->
+<!--            <argument type="service" id="Sylius\Bundle\CoreBundle\SectionResolver\SectionProviderInterface" />-->
+<!--            <argument>%sylius_api.order_states_to_filter_out%</argument>-->
+<!--            <tag name="api_platform.doctrine.orm.query_extension.collection" />-->
+<!--            <tag name="api_platform.doctrine.orm.query_extension.item" />-->
+<!--        </service>-->
+
 <!--        <service id="Sylius\Bundle\ApiBundle\Doctrine\QueryItemExtension\TaxonItemExtension">-->
 <!--            <argument type="service" id="Sylius\Bundle\ApiBundle\Context\UserContextInterface" />-->
 <!--            <tag name="api_platform.doctrine.orm.query_extension.item" />-->
+<!--        </service>-->
+
+<!--        <service id="Sylius\Bundle\ApiBundle\Doctrine\QueryCollectionExtension\HideArchivedPromotionExtension">-->
+<!--            <argument>%sylius.model.promotion.class%</argument>-->
+<!--            <tag name="api_platform.doctrine.orm.query_extension.collection" />-->
 <!--        </service>-->
     </services>
 </container>

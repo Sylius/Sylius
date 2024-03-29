@@ -13,27 +13,20 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\Applicator;
 
-use SM\Factory\FactoryInterface as StateMachineFactoryInterface;
+use Sylius\Abstraction\StateMachine\StateMachineInterface;
 use Sylius\Component\Payment\Model\PaymentInterface;
 use Sylius\Component\Payment\PaymentTransitions;
 
-/** @experimental */
 final readonly class PaymentStateMachineTransitionApplicator implements PaymentStateMachineTransitionApplicatorInterface
 {
-    public function __construct(private StateMachineFactoryInterface $stateMachineFactory)
+    public function __construct(private StateMachineInterface $stateMachineFactory)
     {
     }
 
     public function complete(PaymentInterface $data): PaymentInterface
     {
-        $this->applyTransition($data, PaymentTransitions::TRANSITION_COMPLETE);
+        $this->stateMachineFactory->apply($data, PaymentTransitions::GRAPH, PaymentTransitions::TRANSITION_COMPLETE);
 
         return $data;
-    }
-
-    private function applyTransition(PaymentInterface $payment, string $transition): void
-    {
-        $stateMachine = $this->stateMachineFactory->get($payment, PaymentTransitions::GRAPH);
-        $stateMachine->apply($transition);
     }
 }

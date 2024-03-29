@@ -1,0 +1,131 @@
+name: Continuous Integration 1.12 (Full)
+
+on:
+    schedule:
+        -
+            cron: "0 1 * * *" # Run every day at 1am
+    workflow_dispatch: ~
+
+concurrency:
+    group: ci-${{ github.workflow }}-${{ github.ref }}-1_12-full
+    cancel-in-progress: true
+
+permissions: 
+    contents: read
+
+jobs:
+    static-checks:
+        strategy:
+            matrix:
+                branch: [ "1.12" ]
+        name: "[${{ matrix.branch }}] Static checks"
+        uses: ./.github/workflows/ci_static-checks.yaml
+        with:
+            branch: ${{ matrix.branch }}
+            type: full
+    e2e-mariadb:
+        strategy:
+            matrix:
+                branch: [ "1.12" ]
+        name: "[${{ matrix.branch }}] End-to-end tests (MariaDB)"
+        needs: static-checks
+        uses: ./.github/workflows/ci_e2e-mariadb.yaml
+        with:
+            branch: ${{ matrix.branch }}
+            type: full
+    e2e-mysql:
+        strategy:
+            matrix:
+                branch: [ "1.12" ]
+        name: "[${{ matrix.branch }}] End-to-end tests (MySQL)"
+        needs: static-checks
+        uses: ./.github/workflows/ci_e2e-mysql.yaml
+        with:
+            branch: ${{ matrix.branch }}
+            type: full
+    e2e-pgsql:
+        strategy:
+            matrix:
+                branch: [ "1.12" ]
+        name: "[${{ matrix.branch }}] End-to-end tests (PostgreSQL)"
+        needs: static-checks
+        uses: ./.github/workflows/ci_e2e-pgsql.yaml
+        with:
+            branch: ${{ matrix.branch }}
+            type: full
+    e2e-custom:
+        strategy:
+            matrix:
+                branch: [ "1.12" ]
+        name: "[${{ matrix.branch }}] End-to-end tests (Custom)"
+        needs: static-checks
+        uses: ./.github/workflows/ci_e2e-custom.yaml
+        with:
+            branch: ${{ matrix.branch }}
+    frontend:
+        name: Frontend
+        needs: static-checks
+        uses: ./.github/workflows/ci_frontend.yaml
+        with:
+            branch: ${{ matrix.branch }}
+            type: full
+    packages:
+        strategy:
+            matrix:
+                branch: [ "1.12" ]
+        name: "[${{ matrix.branch }}] Packages"
+        needs: static-checks
+        uses: ./.github/workflows/ci_packages.yaml
+        with:
+            branch: ${{ matrix.branch }}
+            type: full
+    unstable:
+        name: Unstable
+        needs: static-checks
+        uses: ./.github/workflows/ci__unstable.yaml
+        with:
+            ignore-failure: false
+    notify-about-build-status:
+        if: ${{ always() }}
+        name: "Notify about build status"
+        needs: [static-checks, e2e-mariadb, e2e-mysql, e2e-pgsql, e2e-custom, packages, unstable]
+        runs-on: ubuntu-latest
+        timeout-minutes: 5
+
+        steps:
+            -   name: "Process data"
+                id: process-data
+                shell: bash
+                run: |
+                    echo "branch=$(echo ${{ github.ref }} | sed 's/refs\/heads\///g' | sed 's/refs\/tags\///g')" >> $GITHUB_OUTPUT
+                    echo "sha=$(echo ${{ github.sha }} | cut -c 1-12)" >> $GITHUB_OUTPUT
+
+            -   name: "Notify on Slack"
+                uses: edge/simple-slack-notify@master
+                env:
+                    SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+                if: env.SLACK_WEBHOOK_URL != null
+                with:
+                    channel: "#daily-build"
+                    username: "GitHub Actions"
+                    text: |
+                        *<https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }} | ${{ github.workflow }} #${{ github.run_number }} build on ${{ github.repository }} repository has failed for ${{ steps.process-data.outputs.branch }} branch.>*
+
+                        ${{ needs.static-checks.result == 'success' && ':+1:' || ':x:' }} Static Checks
+                        ${{ needs.e2e-mariadb.result == 'success' && ':+1:' || ':x:' }} End-to-End (MariaDB)
+                        ${{ needs.e2e-mysql.result == 'success' && ':+1:' || ':x:' }} End-to-End (MySQL)
+                        ${{ needs.e2e-pgsql.result == 'success' && ':+1:' || ':x:' }} End-to-End (PostgreSQL)
+                        ${{ needs.e2e-custom.result == 'success' && ':+1:' || ':x:' }} End-to-End (Custom)
+                        ${{ needs.packages.result == 'success' && ':+1:' || ':x:' }} Packages
+                        ${{ needs.unstable.result == 'success' && ':+1:' || ':x:' }} Unstable
+
+                        _ _ _ _ _ _ _
+                    color: "danger"
+                    fields: |
+                        [
+                            { "title": "Repository", "value": "<https://github.com/${{ github.repository }} | ${{ github.repository }}>", "short": true },
+                            { "title": "Action", "value": "<https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }} | ${{ github.workflow }} #${{ github.run_number }}>", "short": true },
+                            { "title": "Reference", "value": "<https://github.com/${{ github.repository }}/tree/${{ steps.process-data.outputs.branch }} | ${{ steps.process-data.outputs.branch }}>", "short": true },
+                            { "title": "Commit", "value": "<https://github.com/${{ github.repository }}/commit/${{ github.sha }} | ${{ steps.process-data.outputs.sha }}>", "short": true },
+                            { "title": "Event", "value": "${{ github.event_name }}", "short": true }
+                        ]

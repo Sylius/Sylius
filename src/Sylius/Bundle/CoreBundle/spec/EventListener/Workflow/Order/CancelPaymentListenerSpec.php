@@ -15,7 +15,7 @@ namespace spec\Sylius\Bundle\CoreBundle\EventListener\Workflow\Order;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\CoreBundle\StateMachine\StateMachineInterface;
+use Sylius\Abstraction\StateMachine\StateMachineInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\PaymentInterface;
 use Sylius\Component\Payment\PaymentTransitions;
@@ -36,7 +36,27 @@ final class CancelPaymentListenerSpec extends ObjectBehavior
             ->during('__invoke', [new CompletedEvent($callback->getWrappedObject(), new Marking())]);
     }
 
-    function it_cancels_payments(
+    function it_does_nothing_if_payment_cannot_be_cancelled(
+        StateMachineInterface $compositeStateMachine,
+        OrderInterface $order,
+        PaymentInterface $payment,
+    ): void {
+        $event = new CompletedEvent($order->getWrappedObject(), new Marking());
+        $order->getPayments()->willReturn(new ArrayCollection([$payment->getWrappedObject()]));
+        $compositeStateMachine
+            ->can($payment, PaymentTransitions::GRAPH, PaymentTransitions::TRANSITION_CANCEL)
+            ->willReturn(false)
+        ;
+
+        $this($event);
+
+        $compositeStateMachine
+            ->apply($payment, PaymentTransitions::GRAPH, PaymentTransitions::TRANSITION_CANCEL)
+            ->shouldNotHaveBeenCalled()
+        ;
+    }
+
+    function it_applies_transition_cancel_on_payments(
         StateMachineInterface $compositeStateMachine,
         OrderInterface $order,
         PaymentInterface $payment1,
@@ -44,6 +64,16 @@ final class CancelPaymentListenerSpec extends ObjectBehavior
     ): void {
         $event = new CompletedEvent($order->getWrappedObject(), new Marking());
         $order->getPayments()->willReturn(new ArrayCollection([$payment1->getWrappedObject(), $payment2->getWrappedObject()]));
+
+        $compositeStateMachine
+            ->can($payment1, PaymentTransitions::GRAPH, PaymentTransitions::TRANSITION_CANCEL)
+            ->willReturn(true)
+        ;
+
+        $compositeStateMachine
+            ->can($payment2, PaymentTransitions::GRAPH, PaymentTransitions::TRANSITION_CANCEL)
+            ->willReturn(true)
+        ;
 
         $this($event);
 

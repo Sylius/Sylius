@@ -36,9 +36,9 @@ default:
                 - sylius.behat.context.transform.shared_storage
 
                 - sylius.behat.context.api.admin.managing_orders
+                - sylius.behat.context.api.admin.managing_placed_order_addresses
                 - sylius.behat.context.api.admin.response
                 - sylius.behat.context.api.admin.save
-                - Sylius\Behat\Context\Api\Admin\ManagingPlacedOrderAddressesContext
 
             filters:
                 tags: "@modifying_placed_order_address&&@api"

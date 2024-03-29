@@ -13,14 +13,13 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\Applicator;
 
-use SM\Factory\FactoryInterface as StateMachineFactoryInterface;
+use Sylius\Abstraction\StateMachine\StateMachineInterface;
 use Sylius\Component\Core\ProductReviewTransitions;
 use Sylius\Component\Review\Model\ReviewInterface;
 
-/** @experimental */
 final readonly class ProductReviewStateMachineTransitionApplicator implements ProductReviewStateMachineTransitionApplicatorInterface
 {
-    public function __construct(private StateMachineFactoryInterface $stateMachineFactory)
+    public function __construct(private StateMachineInterface $stateMachineFactory)
     {
     }
 
@@ -40,7 +39,6 @@ final readonly class ProductReviewStateMachineTransitionApplicator implements Pr
 
     private function applyTransition(ReviewInterface $review, string $transition): void
     {
-        $stateMachine = $this->stateMachineFactory->get($review, ProductReviewTransitions::GRAPH);
-        $stateMachine->apply($transition);
+        $this->stateMachineFactory->apply($review, ProductReviewTransitions::GRAPH, $transition);
     }
 }

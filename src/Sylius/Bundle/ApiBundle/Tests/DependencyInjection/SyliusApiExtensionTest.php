@@ -21,6 +21,7 @@ use Sylius\Bundle\ApiBundle\DependencyInjection\SyliusApiExtension;
 use Sylius\Bundle\ApiBundle\Tests\Stub\CommandDataTransformerStub;
 use Sylius\Bundle\ApiBundle\Tests\Stub\DocumentationModifierStub;
 use Sylius\Bundle\ApiBundle\Tests\Stub\PaymentConfigurationProviderStub;
+use Sylius\Component\Core\Model\OrderInterface;
 use Symfony\Component\DependencyInjection\Definition;
 
 final class SyliusApiExtensionTest extends AbstractExtensionTestCase
@@ -84,6 +85,46 @@ final class SyliusApiExtensionTest extends AbstractExtensionTestCase
                     ],
                 ],
             ],
+        );
+    }
+
+    /** @test */
+    public function it_loads_order_states_to_filter_out_parameter_properly(): void
+    {
+        $this->container->setParameter('kernel.bundles_metadata', ['SyliusApiBundle' => ['path' => __DIR__ . '../..']]);
+
+        $this->load([
+            'order_states_to_filter_out' => [
+                OrderInterface::STATE_CART,
+                OrderInterface::STATE_NEW,
+            ],
+        ]);
+
+        $this->assertContainerBuilderHasParameter(
+            'sylius_api.order_states_to_filter_out',
+            [OrderInterface::STATE_CART, OrderInterface::STATE_NEW],
+        );
+    }
+
+    /** @test */
+    public function it_loads_skip_read_and_skip_index_and_show_serialization_groups_parameters_properly(): void
+    {
+        $this->container->setParameter('kernel.bundles_metadata', ['SyliusApiBundle' => ['path' => __DIR__ . '../..']]);
+
+        $this->load([
+            'serialization_groups' => [
+                'skip_adding_read_group' => true,
+                'skip_adding_index_and_show_groups' => false,
+            ],
+        ]);
+
+        $this->assertContainerBuilderHasParameter(
+            'sylius_api.serialization_groups.skip_adding_read_group',
+            true,
+        );
+        $this->assertContainerBuilderHasParameter(
+            'sylius_api.serialization_groups.skip_adding_index_and_show_groups',
+            false,
         );
     }
 

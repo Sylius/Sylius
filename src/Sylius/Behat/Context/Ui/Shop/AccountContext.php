@@ -61,6 +61,14 @@ final class AccountContext implements Context
     }
 
     /**
+     * @When I specify the phone number as huge value
+     */
+    public function iSpecifyThePhoneNumberAsHugeValue(): void
+    {
+        $this->profileUpdatePage->specifyPhoneNumber(str_repeat('1', 256));
+    }
+
+    /**
      * @When I specify the last name as :lastName
      * @When I remove the last name
      */
@@ -115,6 +123,16 @@ final class AccountContext implements Context
     }
 
     /**
+     * @Then my phone number should still be :phoneNumber
+     */
+    public function myPhoneNumberShouldBe(string $phoneNumber): void
+    {
+        $this->profileUpdatePage->open();
+
+        Assert::same($this->profileUpdatePage->getPhoneNumber(), $phoneNumber, 'Phone number should be equal to %s, but is not.');
+    }
+
+    /**
      * @Then my email should be :email
      * @Then my email should still be :email
      */
@@ -133,6 +151,17 @@ final class AccountContext implements Context
         Assert::true($this->profileUpdatePage->checkValidationMessageFor(
             StringInflector::nameToCode($element),
             sprintf('Please enter your %s.', $element),
+        ));
+    }
+
+    /**
+     * @Then I should be notified that the phone number is too long
+     */
+    public function iShouldBeNotifiedThatPhoneNumberIsTooLong(): void
+    {
+        Assert::true($this->profileUpdatePage->checkValidationMessageFor(
+            'phone_number',
+            'Phone number must not be longer than 255 characters.',
         ));
     }
 

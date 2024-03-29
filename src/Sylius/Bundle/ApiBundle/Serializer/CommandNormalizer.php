@@ -18,9 +18,6 @@ use Symfony\Component\Serializer\Exception\MissingConstructorArgumentsException;
 use Symfony\Component\Serializer\Normalizer\ContextAwareNormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
-/**
- * @experimental
- */
 final class CommandNormalizer implements ContextAwareNormalizerInterface
 {
     private const ALREADY_CALLED = 'sylius_command_normalizer_already_called';

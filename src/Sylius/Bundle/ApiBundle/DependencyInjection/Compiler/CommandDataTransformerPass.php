@@ -19,7 +19,6 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Reference;
 
-/** @experimental */
 final readonly class CommandDataTransformerPass implements CompilerPassInterface
 {
     public function process(ContainerBuilder $container): void

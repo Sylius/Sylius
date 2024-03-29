@@ -16,6 +16,7 @@ namespace Sylius\Behat\Context\Api\Admin;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
+use Sylius\Behat\Context\Api\Admin\Helper\ValidationTrait;
 use Sylius\Behat\Context\Api\Resources;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Product\Model\ProductOptionInterface;
@@ -23,6 +24,8 @@ use Webmozart\Assert\Assert;
 
 final class ManagingProductOptionsContext implements Context
 {
+    use ValidationTrait;
+
     public function __construct(
         private ApiClientInterface $client,
         private ResponseCheckerInterface $responseChecker,
@@ -104,6 +107,17 @@ final class ManagingProductOptionsContext implements Context
         $this->client->addSubResourceData(
             'values',
             ['code' => $code, 'translations' => ['en_US' => ['value' => $value]]],
+        );
+    }
+
+    /**
+     * @When I add the :value option value identified by :code in :localeCode
+     */
+    public function iAddTheOptionValueWithCodeAndValueInLocale(string $value, string $code, string $localeCode): void
+    {
+        $this->client->addSubResourceData(
+            'values',
+            ['code' => $code, 'translations' => [$localeCode => ['value' => $value]]],
         );
     }
 

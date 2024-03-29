@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\EventListener\Workflow\Order;
 
-use Sylius\Bundle\CoreBundle\StateMachine\StateMachineInterface;
+use Sylius\Abstraction\StateMachine\StateMachineInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Payment\PaymentTransitions;
 use Symfony\Component\Workflow\Event\CompletedEvent;
@@ -34,7 +34,9 @@ final class CancelPaymentListener
         $payments = $order->getPayments();
 
         foreach ($payments as $payment) {
-            $this->compositeOrderStateMachine->apply($payment, PaymentTransitions::GRAPH, PaymentTransitions::TRANSITION_CANCEL);
+            if ($this->compositeOrderStateMachine->can($payment, PaymentTransitions::GRAPH, PaymentTransitions::TRANSITION_CANCEL)) {
+                $this->compositeOrderStateMachine->apply($payment, PaymentTransitions::GRAPH, PaymentTransitions::TRANSITION_CANCEL);
+            }
         }
     }
 }

@@ -19,12 +19,10 @@ use Sylius\Bundle\ApiBundle\Command\Account\VerifyShopUser;
 use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\Clock\ClockInterface;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Messenger\Stamp\DispatchAfterCurrentBusStamp;
 
-/** @experimental  */
 final class VerifyShopUserHandler implements MessageHandlerInterface
 {
     /** @param RepositoryInterface<ShopUserInterface> $shopUserRepository */
@@ -35,7 +33,7 @@ final class VerifyShopUserHandler implements MessageHandlerInterface
     ) {
     }
 
-    public function __invoke(VerifyShopUser $command): JsonResponse
+    public function __invoke(VerifyShopUser $command): void
     {
         /** @var ShopUserInterface|null $user */
         $user = $this->shopUserRepository->findOneBy(['emailVerificationToken' => $command->getToken()]);
@@ -53,7 +51,5 @@ final class VerifyShopUserHandler implements MessageHandlerInterface
             new SendAccountRegistrationEmail($user->getEmail(), $command->getLocaleCode(), $command->getChannelCode()),
             [new DispatchAfterCurrentBusStamp()],
         );
-
-        return new JsonResponse([]);
     }
 }

@@ -18,7 +18,6 @@ use ApiPlatform\Doctrine\Orm\Util\QueryNameGeneratorInterface;
 use ApiPlatform\Metadata\Operation;
 use Doctrine\ORM\QueryBuilder;
 
-/** @experimental */
 final class ExchangeRateFilter extends AbstractFilter
 {
     protected function filterProperty(

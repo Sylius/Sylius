@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\Provider;
 
-/** @experimental */
 final readonly class PathPrefixProvider implements PathPrefixProviderInterface
 {
     public function __construct(private string $apiRoute, private array $pathPrefixes)

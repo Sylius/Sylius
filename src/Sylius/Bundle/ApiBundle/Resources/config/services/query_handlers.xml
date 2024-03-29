@@ -24,5 +24,14 @@
             <argument type="service" id="sylius.repository.customer" />
             <argument type="service" id="sylius.customer_statistics_provider" />
         </service>
+
+        <service id="Sylius\Bundle\ApiBundle\QueryHandler\GetStatisticsHandler">
+            <argument type="service" id="Sylius\Component\Core\Statistics\Provider\StatisticsProviderInterface" />
+            <argument type="service" id="sylius.repository.channel" />
+        </service>
+
+        <service id="Sylius\Bundle\ApiBundle\QueryHandler\GetAddressLogEntryCollectionHandler">
+            <argument type="service" id="sylius.repository.address_log_entry" />
+        </service>
     </services>
 </container>

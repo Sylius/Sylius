@@ -101,4 +101,16 @@ interface OrderRepositoryInterface extends BaseOrderRepositoryInterface
     public function findCartByTokenValue(string $tokenValue): ?BaseOrderInterface;
 
     public function findCartByTokenValueAndChannel(string $tokenValue, ChannelInterface $channel): ?BaseOrderInterface;
+
+    /**
+     * @param array<string, string> $groupBy
+     *
+     * @return array<array{total: int, year: int, month: int, day: int}>
+     */
+    public function getGroupedTotalPaidSalesForChannelInPeriod(
+        ChannelInterface $channel,
+        \DateTimeInterface $startDate,
+        \DateTimeInterface $endDate,
+        array $groupBy,
+    ): array;
 }

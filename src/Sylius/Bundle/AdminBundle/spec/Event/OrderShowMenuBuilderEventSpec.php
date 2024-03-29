@@ -16,7 +16,8 @@ namespace spec\Sylius\Bundle\AdminBundle\Event;
 use Knp\Menu\FactoryInterface;
 use Knp\Menu\ItemInterface;
 use PhpSpec\ObjectBehavior;
-use SM\StateMachine\StateMachineInterface;
+use SM\StateMachine\StateMachineInterface as WinzouStateMachineInterface;
+use Sylius\Abstraction\StateMachine\StateMachineInterface;
 use Sylius\Bundle\UiBundle\Menu\Event\MenuBuilderEvent;
 use Sylius\Component\Core\Model\OrderInterface;
 
@@ -26,7 +27,7 @@ final class OrderShowMenuBuilderEventSpec extends ObjectBehavior
         FactoryInterface $factory,
         ItemInterface $menu,
         OrderInterface $order,
-        StateMachineInterface $stateMachine,
+        WinzouStateMachineInterface $stateMachine,
     ): void {
         $this->beConstructedWith($factory, $menu, $order, $stateMachine);
     }
@@ -41,8 +42,18 @@ final class OrderShowMenuBuilderEventSpec extends ObjectBehavior
         $this->getOrder()->shouldReturn($order);
     }
 
-    function it_has_a_state_machine(StateMachineInterface $stateMachine): void
+    function it_has_a_state_machine(WinzouStateMachineInterface $stateMachine): void
     {
         $this->getStateMachine()->shouldReturn($stateMachine);
+    }
+
+    function it_allows_to_pass_the_new_state_machine_abstraction(
+        FactoryInterface $factory,
+        ItemInterface $menu,
+        OrderInterface $order,
+        StateMachineInterface $newStateMachineAbstraction,
+    ): void {
+        $this->beConstructedWith($factory, $menu, $order, $newStateMachineAbstraction);
+        $this->getStateMachine()->shouldReturn($newStateMachineAbstraction);
     }
 }

@@ -19,7 +19,6 @@ use Symfony\Component\Serializer\Normalizer\ContextAwareDenormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
 
-/** @experimental */
 final class TranslatableLocaleKeyDenormalizer implements ContextAwareDenormalizerInterface, DenormalizerAwareInterface
 {
     use DenormalizerAwareTrait;
@@ -35,9 +34,7 @@ final class TranslatableLocaleKeyDenormalizer implements ContextAwareDenormalize
         ;
     }
 
-    /**
-     * @param array<string, array{ translations: array<mixed> }> $data
-     */
+    /** @param array<string, array{ translations: array<array-key, mixed> }> $data */
     public function denormalize(mixed $data, string $type, string $format = null, array $context = [])
     {
         $context[self::getAlreadyCalledKey($type)] = true;

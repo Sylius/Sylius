@@ -8,7 +8,7 @@
         <defaults public="true" />
 
         <service id="sylius.payum_extension.update_payment_state" class="Sylius\Bundle\PayumBundle\Extension\UpdatePaymentStateExtension">
-            <argument type="service" id="sm.factory" />
+            <argument type="service" id="sylius_abstraction.state_machine" />
             <tag name="payum.extension" all="true" prepend="true" />
         </service>
     </services>

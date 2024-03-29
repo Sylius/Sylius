@@ -23,7 +23,6 @@ use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Serializer\NameConverter\NameConverterInterface;
 
-/** @experimental */
 final class ProductVariantOptionValueFilter extends AbstractFilter
 {
     public function __construct(

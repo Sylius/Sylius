@@ -23,7 +23,6 @@ use Sylius\Component\Core\Model\AdminUserInterface;
 use Sylius\Component\Locale\Model\LocaleInterface;
 use Webmozart\Assert\Assert;
 
-/** @experimental */
 final readonly class LocaleCollectionExtension implements QueryCollectionExtensionInterface
 {
     public function __construct(private UserContextInterface $userContext)

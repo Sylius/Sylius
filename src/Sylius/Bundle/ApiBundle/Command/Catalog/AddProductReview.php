@@ -16,14 +16,13 @@ namespace Sylius\Bundle\ApiBundle\Command\Catalog;
 use Sylius\Bundle\ApiBundle\Command\CustomerEmailAwareInterface;
 use Sylius\Bundle\ApiBundle\Command\IriToIdentifierConversionAwareInterface;
 
-/** @experimental */
 class AddProductReview implements IriToIdentifierConversionAwareInterface, CustomerEmailAwareInterface
 {
     public function __construct(
-        public ?string $title,
-        public ?int $rating,
-        public ?string $comment,
-        public ?string $productCode,
+        public string $title,
+        public int $rating,
+        public string $comment,
+        public string $productCode,
         public ?string $email = null,
     ) {
     }

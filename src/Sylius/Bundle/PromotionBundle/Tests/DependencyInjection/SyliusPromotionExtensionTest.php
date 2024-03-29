@@ -47,6 +47,7 @@ final class SyliusPromotionExtensionTest extends AbstractExtensionTestCase
             [
                 'type' => 'test',
                 'label' => 'Test',
+                'form-type' => 'SomeFormType',
                 'priority' => 10,
             ],
         );
@@ -124,14 +125,25 @@ final class SyliusPromotionExtensionTest extends AbstractExtensionTestCase
             'promotion_action' => [
                 'validation_groups' => [
                     'order_percentage_discount' => ['sylius', 'order_percentage_discount'],
-                    'order_fixed_discount' => ['sylius', 'order_fixed_discount']
-                ]
-            ]
+                    'order_fixed_discount' => ['sylius', 'order_fixed_discount'],
+                ],
+            ],
         ]);
 
         $this->assertContainerBuilderHasParameter(
             'sylius.promotion.promotion_action.validation_groups',
-            ['order_percentage_discount' => ['sylius', 'order_percentage_discount'], 'order_fixed_discount' => ['sylius', 'order_fixed_discount']]
+            ['order_percentage_discount' => ['sylius', 'order_percentage_discount'], 'order_fixed_discount' => ['sylius', 'order_fixed_discount']],
+        );
+    }
+
+    /** @test */
+    public function it_loads_empty_promotion_action_validation_groups_parameter_value(): void
+    {
+        $this->load();
+
+        $this->assertContainerBuilderHasParameter(
+            'sylius.promotion.promotion_action.validation_groups',
+            [],
         );
     }
 
@@ -142,14 +154,83 @@ final class SyliusPromotionExtensionTest extends AbstractExtensionTestCase
             'promotion_rule' => [
                 'validation_groups' => [
                     'cart_quantity' => ['sylius', 'cart_quantity'],
-                    'nth_order' => ['sylius', 'nth_order']
-                ]
-            ]
+                    'nth_order' => ['sylius', 'nth_order'],
+                ],
+            ],
         ]);
 
         $this->assertContainerBuilderHasParameter(
             'sylius.promotion.promotion_rule.validation_groups',
-            ['cart_quantity' => ['sylius', 'cart_quantity'], 'nth_order' => ['sylius', 'nth_order']]
+            ['cart_quantity' => ['sylius', 'cart_quantity'], 'nth_order' => ['sylius', 'nth_order']],
+        );
+    }
+
+    /** @test */
+    public function it_loads_empty_promotion_rule_validation_groups_parameter_value(): void
+    {
+        $this->load();
+
+        $this->assertContainerBuilderHasParameter(
+            'sylius.promotion.promotion_rule.validation_groups',
+            [],
+        );
+    }
+
+    /** @test */
+    public function it_loads_catalog_promotion_action_validation_groups_parameter_value_properly(): void
+    {
+        $this->load([
+            'catalog_promotion_action' => [
+                'validation_groups' => [
+                    'something' => ['sylius', 'something'],
+                    'test' => ['sylius', 'test'],
+                ],
+            ],
+        ]);
+
+        $this->assertContainerBuilderHasParameter(
+            'sylius.promotion.catalog_promotion_action.validation_groups',
+            ['something' => ['sylius', 'something'], 'test' => ['sylius', 'test']],
+        );
+    }
+
+    /** @test */
+    public function it_loads_empty_catalog_promotion_action_validation_groups_parameter_value(): void
+    {
+        $this->load();
+
+        $this->assertContainerBuilderHasParameter(
+            'sylius.promotion.catalog_promotion_action.validation_groups',
+            [],
+        );
+    }
+
+    /** @test */
+    public function it_loads_catalog_promotion_scope_validation_groups_parameter_value_properly(): void
+    {
+        $this->load([
+            'catalog_promotion_scope' => [
+                'validation_groups' => [
+                    'something' => ['sylius', 'something'],
+                    'test' => ['sylius', 'test'],
+                ],
+            ],
+        ]);
+
+        $this->assertContainerBuilderHasParameter(
+            'sylius.promotion.catalog_promotion_scope.validation_groups',
+            ['something' => ['sylius', 'something'], 'test' => ['sylius', 'test']],
+        );
+    }
+
+    /** @test */
+    public function it_loads_empty_catalog_promotion_scope_validation_groups_parameter_value(): void
+    {
+        $this->load();
+
+        $this->assertContainerBuilderHasParameter(
+            'sylius.promotion.catalog_promotion_scope.validation_groups',
+            [],
         );
     }
 

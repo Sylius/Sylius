@@ -40,7 +40,7 @@ final class ResettingPasswordContext implements Context
      */
     public function iWantToResetPassword(): void
     {
-        $this->request = $this->requestFactory->create('admin', 'reset-password', 'Bearer');
+        $this->request = $this->requestFactory->create('admin', 'administrators/reset-password', 'Bearer');
     }
 
     /**
@@ -67,7 +67,7 @@ final class ResettingPasswordContext implements Context
     public function iFollowTheInstructionsToResetMyPassword(AdminUserInterface $admin): void
     {
         $this->request = $this->requestFactory->custom(
-            sprintf('%s/admin/reset-password/%s', $this->apiUrlPrefix, $admin->getPasswordResetToken()),
+            sprintf('%s/admin/administrators/reset-password/%s', $this->apiUrlPrefix, $admin->getPasswordResetToken()),
             HttpRequest::METHOD_PATCH,
         );
     }

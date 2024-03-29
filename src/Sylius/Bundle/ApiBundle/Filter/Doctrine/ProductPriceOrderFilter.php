@@ -22,7 +22,6 @@ use Sylius\Bundle\ApiBundle\Serializer\ContextKeys;
 use Sylius\Component\Core\Model\ProductInterface;
 use Webmozart\Assert\Assert;
 
-/** @experimental */
 final class ProductPriceOrderFilter extends AbstractFilter
 {
     protected function filterProperty(

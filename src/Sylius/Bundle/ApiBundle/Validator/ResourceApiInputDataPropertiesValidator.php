@@ -17,7 +17,6 @@ use ApiPlatform\Symfony\Validator\Exception\ValidationException;
 use Sylius\Component\Resource\Model\ResourceInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
-/** @experimental */
 final readonly class ResourceApiInputDataPropertiesValidator implements ResourceInputDataPropertiesValidatorInterface
 {
     public function __construct(private ValidatorInterface $validator)

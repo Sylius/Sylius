@@ -23,6 +23,13 @@ final class PaymentsTest extends JsonApiTestCase
     use ShopUserLoginTrait;
     use OrderPlacerTrait;
 
+    protected function setUp(): void
+    {
+        $this->setUpOrderPlacer();
+
+        parent::setUp();
+    }
+
     /** @test */
     public function it_gets_payment_from_placed_order(): void
     {
@@ -50,6 +57,6 @@ final class PaymentsTest extends JsonApiTestCase
             server: $header,
         );
         $response = $this->client->getResponse();
-        $this->assertResponse($response, 'shop/get_payment_response', Response::HTTP_OK);
+        $this->assertResponse($response, 'shop/payment/get_payment_response', Response::HTTP_OK);
     }
 }

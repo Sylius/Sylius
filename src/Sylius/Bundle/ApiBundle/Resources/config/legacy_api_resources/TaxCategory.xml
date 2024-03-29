@@ -23,18 +23,29 @@
         <collectionOperations>
             <collectionOperation name="admin_get">
                 <attribute name="method">GET</attribute>
+                <attribute name="path">/tax-categories</attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:tax_category:read</attribute>
+                    <attribute name="groups">
+                        <attribute>admin:tax_category:index</attribute>
+                        <attribute>sylius:admin:tax_category:index</attribute>
+                    </attribute>
                 </attribute>
             </collectionOperation>
 
             <collectionOperation name="admin_post">
                 <attribute name="method">POST</attribute>
+                <attribute name="path">/tax-categories</attribute>
                 <attribute name="denormalization_context">
-                    <attribute name="groups">admin:tax_category:create</attribute>
+                    <attribute name="groups">
+                        <attribute>admin:tax_category:create</attribute>
+                        <attribute>sylius:admin:tax_category:create</attribute>
+                    </attribute>
                 </attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:tax_category:read</attribute>
+                    <attribute name="groups">
+                        <attribute>admin:tax_category:show</attribute>
+                        <attribute>sylius:admin:tax_category:show</attribute>
+                    </attribute>
                 </attribute>
             </collectionOperation>
         </collectionOperations>
@@ -42,23 +53,35 @@
         <itemOperations>
             <itemOperation name="admin_get">
                 <attribute name="method">GET</attribute>
+                <attribute name="path">/tax-categories/{code}</attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:tax_category:read</attribute>
+                    <attribute name="groups">
+                        <attribute>admin:tax_category:show</attribute>
+                        <attribute>sylius:admin:tax_category:show</attribute>
+                    </attribute>
                 </attribute>
             </itemOperation>
 
             <itemOperation name="admin_put">
                 <attribute name="method">PUT</attribute>
+                <attribute name="path">/tax-categories/{code}</attribute>
                 <attribute name="denormalization_context">
-                    <attribute name="groups">admin:tax_category:update</attribute>
+                    <attribute name="groups">
+                        <attribute>admin:tax_category:update</attribute>
+                        <attribute>sylius:admin:tax_category:update</attribute>
+                    </attribute>
                 </attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:tax_category:read</attribute>
+                    <attribute name="groups">
+                        <attribute>admin:tax_category:show</attribute>
+                        <attribute>sylius:admin:tax_category:show</attribute>
+                    </attribute>
                 </attribute>
             </itemOperation>
 
             <itemOperation name="admin_delete">
                 <attribute name="method">DELETE</attribute>
+                <attribute name="path">/tax-categories/{code}</attribute>
             </itemOperation>
         </itemOperations>
 

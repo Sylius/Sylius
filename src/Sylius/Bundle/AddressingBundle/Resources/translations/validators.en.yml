@@ -30,11 +30,11 @@ sylius:
         code:
             not_blank: Please enter country ISO code.
             unique: Country ISO code must be unique.
-            invalid: Country ISO code is invalid.
+            country: Country ISO code is invalid.
         unique_provinces: All provinces within this country need to have unique codes and names.
     province:
         code:
-            min_length: Province code must be at least 5 characters long.|Province code must be at least 5 characters long.
+            max_length: The code must not be longer than {{ limit }} characters.
             not_blank: Please enter province code.
             regex: Province code should have the following format XX-XX (e.g. US-FL).
             unique: Province code must be unique.
@@ -47,6 +47,7 @@ sylius:
         scope:
             not_blank: Please enter the scope.
         code:
+            max_length: The code must not be longer than {{ limit }} characters.
             not_blank: Please enter zone code.
             regex: Zone code can only be comprised of letters, numbers, dashes and underscores.
             unique: Zone code must be unique.
@@ -59,6 +60,7 @@ sylius:
     zone_member:
         cannot_be_the_same_as_zone: Zone member cannot be the same as a zone.
         code:
+            max_length: The zone member code must not be longer than {{ limit }} characters.
             not_blank: Please choose a zone member.
             regex: Zone member code can only be comprised of letters, numbers, dashes and underscores.
         unique: Chosen zone member is already in this zone.

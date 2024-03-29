@@ -16,7 +16,7 @@ namespace Sylius\Bundle\CoreBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Faker\Factory;
 use Faker\Generator;
-use SM\Factory\FactoryInterface as StateMachineFactoryInterface;
+use Sylius\Abstraction\StateMachine\StateMachineInterface;
 use Sylius\Bundle\FixturesBundle\Fixture\AbstractFixture;
 use Sylius\Component\Core\Model\PaymentInterface;
 use Sylius\Component\Core\Repository\PaymentRepositoryInterface;
@@ -35,7 +35,7 @@ class PaymentFixture extends AbstractFixture
      */
     public function __construct(
         private PaymentRepositoryInterface $paymentRepository,
-        private StateMachineFactoryInterface $stateMachineFactory,
+        private StateMachineInterface $stateMachine,
         private ObjectManager $paymentManager,
     ) {
         $this->faker = Factory::create();
@@ -78,11 +78,7 @@ class PaymentFixture extends AbstractFixture
 
     private function completePayment(PaymentInterface $payment): void
     {
-        $this
-            ->stateMachineFactory
-            ->get($payment, PaymentTransitions::GRAPH)
-            ->apply(PaymentTransitions::TRANSITION_COMPLETE)
-        ;
+        $this->stateMachine->apply($payment, PaymentTransitions::GRAPH, PaymentTransitions::TRANSITION_COMPLETE);
 
         $this->paymentManager->persist($payment);
     }

@@ -31,7 +31,7 @@ final class Resources
 
     public const CHANNELS = 'channels';
 
-    public const CONTACT_REQUESTS = 'contact-requests';
+    public const CONTACT = 'contact';
 
     public const COUNTRIES = 'countries';
 
@@ -56,6 +56,8 @@ final class Resources
     public const PAYMENTS = 'payments';
 
     public const PRODUCT_ASSOCIATION_TYPES = 'product-association-types';
+
+    public const PRODUCT_ASSOCIATIONS = 'product-associations';
 
     public const PRODUCT_ATTRIBUTES = 'product-attributes';
 

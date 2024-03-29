@@ -20,7 +20,11 @@
         <field name="code" column="code" type="string" unique="true" />
         <field name="type" column="type" type="string" />
         <field name="storageType" column="storage_type" type="string" />
-        <field name="configuration" column="configuration" type="array" />
+        <field name="configuration" column="configuration" type="json">
+            <options>
+                <option name="jsonb">true</option>
+            </options>
+        </field>
 
         <field name="createdAt" column="created_at" type="datetime">
             <gedmo:timestampable on="create"/>

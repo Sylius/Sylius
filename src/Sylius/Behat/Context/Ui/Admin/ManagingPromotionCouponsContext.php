@@ -14,6 +14,8 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
+use FriendsOfBehat\PageObjectExtension\Page\SymfonyPageInterface;
+use Sylius\Behat\Context\Ui\Admin\Helper\ValidationTrait;
 use Sylius\Behat\NotificationType;
 use Sylius\Behat\Page\Admin\PromotionCoupon\CreatePageInterface;
 use Sylius\Behat\Page\Admin\PromotionCoupon\GeneratePageInterface;
@@ -27,6 +29,8 @@ use Webmozart\Assert\Assert;
 
 final class ManagingPromotionCouponsContext implements Context
 {
+    use ValidationTrait;
+
     public function __construct(
         private CreatePageInterface $createPage,
         private GeneratePageInterface $generatePage,
@@ -117,7 +121,7 @@ final class ManagingPromotionCouponsContext implements Context
      * @When I specify its code as :code
      * @When I do not specify its code
      */
-    public function iSpecifyItsCodeAs($code = null)
+    public function iSpecifyItsCodeAs(?string $code = null): void
     {
         $this->createPage->specifyCode($code ?? '');
     }
@@ -532,5 +536,10 @@ final class ManagingPromotionCouponsContext implements Context
     private function sortBy(string $order, string $field): void
     {
         $this->indexPage->sortBy($field, str_starts_with($order, 'de') ? 'desc' : 'asc');
+    }
+
+    protected function resolveCurrentPage(): SymfonyPageInterface
+    {
+        return $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage, $this->generatePage]);
     }
 }

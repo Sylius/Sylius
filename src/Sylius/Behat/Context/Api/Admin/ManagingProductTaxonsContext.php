@@ -16,7 +16,9 @@ namespace Sylius\Behat\Context\Api\Admin;
 use ApiPlatform\Api\IriConverterInterface;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
+use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Context\Api\Resources;
+use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductTaxonInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
@@ -24,8 +26,47 @@ use Webmozart\Assert\Assert;
 
 final class ManagingProductTaxonsContext implements Context
 {
-    public function __construct(private ApiClientInterface $client, private IriConverterInterface $iriConverter)
+    public function __construct(
+        private ApiClientInterface $client,
+        private IriConverterInterface $iriConverter,
+        private ResponseCheckerInterface $responseChecker,
+        private SharedStorageInterface $sharedStorage,
+    ) {
+    }
+
+    /**
+     * @When /^I am browsing the (\d+)(?:st|nd|rd|th) page of products from ("([^"]+)" taxon)$/
+     * @When /^I go to the (\d+)(?:st|nd|rd|th) page of products from ("([^"]+)" taxon)$/
+     */
+    public function iAmBrowsingThePageOfProductsFromTaxon(int $page, TaxonInterface $taxon): void
     {
+        $this->iAmBrowsingProductsFromTaxon($taxon);
+        $this->client->addFilter('page', $page);
+        $this->client->filter();
+
+        $this->sharedStorage->set('response', $this->client->getLastResponse());
+    }
+
+    /**
+     * @When /^I am browsing products from ("([^"]+)" taxon)$/
+     */
+    public function iAmBrowsingProductsFromTaxon(TaxonInterface $taxon): void
+    {
+        $this->client->index(Resources::PRODUCT_TAXONS);
+        $this->client->addFilter('taxon.code', $taxon->getCode());
+        $this->client->addFilter('itemsPerPage', 10);
+        $this->client->filter();
+
+        $this->sharedStorage->set('response', $this->client->getLastResponse());
+    }
+
+    /**
+     * @When I set the position of :product to :position
+     */
+    public function iSetThePositionOfProductTo(ProductInterface $product, int|string $position): void
+    {
+        $this->client->buildUpdateRequest(Resources::PRODUCT_TAXONS, (string) $product->getProductTaxons()->current()->getId());
+        $this->client->updateRequestData(['position' => is_numeric($position) ? (int) $position : $position]);
     }
 
     /**
@@ -85,6 +126,38 @@ final class ManagingProductTaxonsContext implements Context
     }
 
     /**
+     * @When I sort this taxon's products :order by :field
+     */
+    public function iSortProductsBy(string $order, string $field): void
+    {
+        $this->client->sort([$field => ManagingProductsContext::SORT_TYPES[$order]]);
+        $this->sharedStorage->set('response', $this->client->getLastResponse());
+    }
+
+    /**
+     * @When I save my new configuration
+     */
+    public function iSaveMyNewConfiguration(): void
+    {
+        $this->client->update();
+        $this->sharedStorage->set('response', $this->client->getLastResponse());
+    }
+
+    /**
+     * @Then /^the (first|last) product on the list within this taxon should have name "([^"]+)"$/
+     */
+    public function theLastProductOnTheListWithinThisTaxonShouldHaveName(string $position, string $name): void
+    {
+        $productTaxons = $this->responseChecker->getCollection($this->sharedStorage->get('response'));
+        $productTaxon = $position === 'last' ? end($productTaxons) : reset($productTaxons);
+
+        /** @var ProductInterface $product */
+        $product = $this->iriConverter->getResourceFromIri($productTaxon['product']);
+
+        Assert::same($product->getTranslation()->getName(), $name);
+    }
+
+    /**
      * @Then I should be notified that specifying a :part is required
      */
     public function iShouldBeNotifiedThatSpecifyingAIsRequired(string $part): void
@@ -103,6 +176,17 @@ final class ManagingProductTaxonsContext implements Context
         Assert::contains(
             $this->client->getLastResponse()->getContent(),
             'Product taxons cannot be duplicated.',
+        );
+    }
+
+    /**
+     * @Then I should be notified that the position :position is invalid
+     */
+    public function iShouldBeNotifiedThatThePositionIsInvalid(): void
+    {
+        Assert::contains(
+            (string) $this->responseChecker->getError($this->client->getLastResponse()),
+            'The type of the "position" attribute must be "int", "string" given.',
         );
     }
 }

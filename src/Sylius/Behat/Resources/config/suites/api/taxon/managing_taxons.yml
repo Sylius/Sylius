@@ -24,6 +24,8 @@ default:
                 - sylius.behat.context.api.admin.managing_taxons
                 - sylius.behat.context.api.admin.response
                 - sylius.behat.context.api.admin.save
+                - sylius.behat.context.api.admin.translation
+
             filters:
                 tags: "@managing_taxons&&@api"
             javascript: false

@@ -16,7 +16,6 @@ namespace Sylius\Bundle\ApiBundle\OpenApi\Documentation;
 use ApiPlatform\Core\OpenApi\Model\Parameter;
 use ApiPlatform\OpenApi\OpenApi;
 
-/** @experimental */
 final class OrderAdjustmentsTypeDocumentationModifier implements DocumentationModifierInterface
 {
     public const PATH = '%s/admin/orders/{tokenValue}/adjustments';

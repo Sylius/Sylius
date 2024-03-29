@@ -15,7 +15,6 @@ namespace Sylius\Bundle\ApiBundle\Provider;
 
 use Sylius\Component\Core\Model\PaymentInterface;
 
-/** @experimental */
 interface CompositePaymentConfigurationProviderInterface
 {
     public function provide(PaymentInterface $payment): array;

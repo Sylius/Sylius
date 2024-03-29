@@ -15,6 +15,15 @@ namespace Sylius\Bundle\AdminBundle\EmailManager;
 
 use Sylius\Component\Core\Model\OrderInterface;
 
+trigger_deprecation(
+    'sylius/admin-bundle',
+    '1.13',
+    'The "%s" interface is deprecated, use "%s" instead.',
+    OrderEmailManagerInterface::class,
+    \Sylius\Bundle\CoreBundle\Mailer\OrderEmailManagerInterface::class,
+);
+
+/** @deprecated since Sylius 1.13 and will be removed in Sylius 2.0. Use {@see \Sylius\Bundle\CoreBundle\Mailer\OrderEmailManagerInterface} instead. */
 interface OrderEmailManagerInterface
 {
     public function sendConfirmationEmail(OrderInterface $order): void;

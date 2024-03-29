@@ -18,8 +18,6 @@ use Sylius\Behat\Page\Admin\Crud\IndexPageInterface;
 use Sylius\Behat\Page\Admin\ProductAttribute\CreatePageInterface;
 use Sylius\Behat\Page\Admin\ProductAttribute\UpdatePageInterface;
 use Sylius\Behat\Service\Resolver\CurrentPageResolverInterface;
-use Sylius\Behat\Service\SharedSecurityServiceInterface;
-use Sylius\Component\Core\Model\AdminUserInterface;
 use Sylius\Component\Product\Model\ProductAttributeInterface;
 use Webmozart\Assert\Assert;
 
@@ -30,7 +28,6 @@ final class ManagingProductAttributesContext implements Context
         private IndexPageInterface $indexPage,
         private UpdatePageInterface $updatePage,
         private CurrentPageResolverInterface $currentPageResolver,
-        private SharedSecurityServiceInterface $sharedSecurityService,
     ) {
     }
 
@@ -234,25 +231,6 @@ final class ManagingProductAttributesContext implements Context
     }
 
     /**
-     * @When /^(the administrator) changes (this product attribute)'s value "([^"]*)" to "([^"]*)"$/
-     */
-    public function theAdministratorChangesThisProductAttributesValueTo(
-        AdminUserInterface $user,
-        ProductAttributeInterface $productAttribute,
-        string $oldValue,
-        string $newValue,
-    ): void {
-        $this->sharedSecurityService->performActionAsAdminUser(
-            $user,
-            function () use ($productAttribute, $oldValue, $newValue) {
-                $this->iWantToEditThisAttribute($productAttribute);
-                $this->iChangeItsValueTo($oldValue, $newValue);
-                $this->iSaveMyChanges();
-            },
-        );
-    }
-
-    /**
      * @When I specify its min length as :min
      * @When I specify its min entries value as :min
      */
@@ -284,24 +262,6 @@ final class ManagingProductAttributesContext implements Context
     public function iDoNotCheckMultipleOption(): void
     {
         // Intentionally left blank to fulfill context expectation
-    }
-
-    /**
-     * @When /^(the administrator) deletes the value "([^"]+)" from (this product attribute)$/
-     */
-    public function theAdministratorDeletesTheValueFromThisProductAttribute(
-        AdminUserInterface $user,
-        string $value,
-        ProductAttributeInterface $productAttribute,
-    ): void {
-        $this->sharedSecurityService->performActionAsAdminUser(
-            $user,
-            function () use ($productAttribute, $value) {
-                $this->iWantToEditThisAttribute($productAttribute);
-                $this->iDeleteValue($value);
-                $this->iSaveMyChanges();
-            },
-        );
     }
 
     /**

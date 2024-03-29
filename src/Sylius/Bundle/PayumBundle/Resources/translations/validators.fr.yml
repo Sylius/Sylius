@@ -3,13 +3,20 @@
 
 sylius:
     gateway_config:
+        invalid_gateway_factory: Usine de passerelle invalide. Les usines disponibles sont {{ available_factories }}.
+        gateway_name:
+            not_blank: Veuillez entrer le nom de la passerelle.
+        factory_name:
+            not_blank: Veuillez entrer le nom de l'usine de passerelle.
         paypal:
             password:
                 not_blank: Veuillez entrer votre mot de passe PayPal.
             signature:
-                not_blank: Veuillez entrer la signature PayPal.
+                not_blank: Veuillez entrer la signature Paypal.
             username:
                 not_blank: Veuillez entrer votre nom d'utilisateur PayPal.
+            sandbox:
+                not_null: Veuillez définir le statut de votre sandbox paypal.
         stripe:
             secret_key:
                 not_blank: Veuillez entrer votre clé secrète Stripe.

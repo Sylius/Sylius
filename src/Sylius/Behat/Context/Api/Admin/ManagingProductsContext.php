@@ -17,6 +17,7 @@ use ApiPlatform\Api\IriConverterInterface;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
+use Sylius\Behat\Context\Api\Admin\Helper\ValidationTrait;
 use Sylius\Behat\Context\Api\Resources;
 use Sylius\Behat\Service\Converter\SectionAwareIriConverterInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
@@ -24,7 +25,12 @@ use Sylius\Component\Attribute\Model\AttributeValueInterface;
 use Sylius\Component\Core\Model\AdminUserInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ProductInterface;
+use Sylius\Component\Core\Model\ProductTaxonInterface;
+use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
+use Sylius\Component\Locale\Model\LocaleInterface;
+use Sylius\Component\Product\Model\ProductAssociationInterface;
+use Sylius\Component\Product\Model\ProductAssociationTypeInterface;
 use Sylius\Component\Product\Model\ProductAttributeInterface;
 use Sylius\Component\Product\Model\ProductOptionInterface;
 use Symfony\Component\HttpFoundation\Response;
@@ -32,6 +38,8 @@ use Webmozart\Assert\Assert;
 
 final class ManagingProductsContext implements Context
 {
+    use ValidationTrait;
+
     public const SORT_TYPES = ['ascending' => 'asc', 'descending' => 'desc'];
 
     public function __construct(
@@ -396,11 +404,19 @@ final class ManagingProductsContext implements Context
     }
 
     /**
-     * @When I access :product product page
+     * @When I access the :product product
      */
-    public function iAccessProductPage(ProductInterface $product): void
+    public function iAccessTheProduct(ProductInterface $product): void
     {
         $this->client->show(Resources::PRODUCTS, $product->getCode());
+    }
+
+    /**
+     * @When I choose :channel as a channel filter
+     */
+    public function iChooseChannelAsAChannelFilter(ChannelInterface $channel): void
+    {
+        $this->client->addFilter('channel', $this->iriConverter->getIriFromResource($channel));
     }
 
     /**
@@ -409,6 +425,125 @@ final class ManagingProductsContext implements Context
     public function iSaveMyChangesToTheImages(): void
     {
         // Intentionally left blank
+    }
+
+    /**
+     * @When I filter
+     */
+    public function iFilter(): void
+    {
+        $this->client->filter();
+
+        $this->sharedStorage->set('response', $this->client->getLastResponse());
+    }
+
+    /**
+     * @Then I should see main taxon is :taxon
+     */
+    public function iShouldSeeMainTaxonIs(TaxonInterface $taxon): void
+    {
+        Assert::same(
+            $this->responseChecker->getValue($this->client->getLastResponse(), 'mainTaxon'),
+            $this->sectionAwareIriConverter->getIriFromResourceInSection($taxon, 'admin'),
+        );
+    }
+
+    /**
+     * @Then I should see product taxon :taxon
+     */
+    public function iShouldSeeProductTaxon(TaxonInterface $taxon): void
+    {
+        $product = $this->sharedStorage->get('product');
+        Assert::isInstanceOf($product, ProductInterface::class);
+        $productTaxon = $product->getProductTaxons()->filter(
+            fn (ProductTaxonInterface $productTaxon) => $productTaxon->getTaxon()->getCode() === $taxon->getCode(),
+        )->first();
+        Assert::isInstanceOf($productTaxon, ProductTaxonInterface::class);
+
+        Assert::true($this->responseChecker->hasValueInCollection(
+            $this->client->getLastResponse(),
+            'productTaxons',
+            $this->sectionAwareIriConverter->getIriFromResourceInSection($productTaxon, 'admin'),
+        ));
+    }
+
+    /**
+     * @Then I should see option :productOption
+     */
+    public function iShouldSeeOption(ProductOptionInterface $productOption): void
+    {
+        Assert::true($this->responseChecker->hasValueInCollection(
+            $this->client->getLastResponse(),
+            'options',
+            $this->sectionAwareIriConverter->getIriFromResourceInSection($productOption, 'admin'),
+        ));
+    }
+
+    /**
+     * @Then I should see :count variants
+     */
+    public function iShouldSeeVariants(int $count): void
+    {
+        Assert::count(
+            $this->responseChecker->getResponseContent($this->client->getLastResponse())['variants'] ?? [],
+            $count,
+        );
+    }
+
+    /**
+     * @Then I should see the :variant variant
+     */
+    public function iShouldSeeTheVariant(ProductVariantInterface $variant): void
+    {
+        Assert::true($this->responseChecker->hasValueInCollection(
+            $this->client->getLastResponse(),
+            'variants',
+            $this->sectionAwareIriConverter->getIriFromResourceInSection($variant, 'admin'),
+        ));
+    }
+
+    /**
+     * @Then I should see product :field is :value
+     * @Then I should see product's :field is :value
+     */
+    public function iShouldSeeProductFieldIs(string $field, string $value): void
+    {
+        $this->assertResponseHasTranslationFieldWithValue($field, $value);
+    }
+
+    /**
+     * @Then I should see product's meta keyword(s) is/are :metaKeywords
+     */
+    public function iShouldSeeProductMetaKeywordsAre(string $metaKeywords): void
+    {
+        $this->assertResponseHasTranslationFieldWithValue('metaKeywords', $metaKeywords);
+    }
+
+    /**
+     * @Then I should see product's short description is :shortDescription
+     */
+    public function iShouldSeeProductShortDescriptionIs(string $shortDescription): void
+    {
+        $this->assertResponseHasTranslationFieldWithValue('shortDescription', $shortDescription);
+    }
+
+    /**
+     * @Then I should see product association type :productAssociationType
+     */
+    public function iShouldSeeProductAssociationType(ProductAssociationTypeInterface $productAssociationType): void
+    {
+        $associations = $this->responseChecker->getValue($this->client->getLastResponse(), 'associations');
+        foreach ($associations as $associationIri) {
+            /** @var ProductAssociationInterface $association */
+            $association = $this->iriConverter->getResourceFromIri($associationIri);
+            if ($association->getType()->getCode() === $productAssociationType->getCode()) {
+                return;
+            }
+        }
+
+        throw new \InvalidArgumentException(
+            sprintf('Product association type "%s" not found.', $productAssociationType->getCode()),
+        );
     }
 
     /**
@@ -486,9 +621,10 @@ final class ManagingProductsContext implements Context
     }
 
     /**
+     * @Then I should see a single product in the list
      * @Then I should see :count products in the list
      */
-    public function iShouldSeeProductsInTheList(int $count): void
+    public function iShouldSeeProductsInTheList(int $count = 1): void
     {
         Assert::count($this->responseChecker->getCollection($this->client->getLastResponse()), $count);
     }
@@ -562,7 +698,7 @@ final class ManagingProductsContext implements Context
             $this->responseChecker->hasItemWithValues($this->client->getLastResponse(), [
                 'product' => $this->sectionAwareIriConverter->getIriFromResourceInSection($product, 'admin'),
                 'taxon' => $this->sectionAwareIriConverter->getIriFromResourceInSection($taxon, 'admin'),
-            ])
+            ]),
         );
     }
 
@@ -612,11 +748,31 @@ final class ManagingProductsContext implements Context
      */
     public function theFirstProductOnTheListShouldHave(string $field, string $value): void
     {
-        $response = $this->getLastResponse();
+        $products = $this->responseChecker->getCollection($this->getLastResponse());
 
-        $products = $this->responseChecker->getCollection($response);
+        Assert::same($this->getFieldValueOfProduct($products[0], $field), $value);
+    }
 
-        Assert::same($this->getFieldValueOfFirstProduct($products[0], $field), $value);
+    /**
+     * @Then the last product on the list should have name :name
+     */
+    public function theLastProductOnTheListShouldHaveName(string $name): void
+    {
+        $products = $this->responseChecker->getCollection($this->getLastResponse());
+
+        Assert::same($this->getFieldValueOfProduct(end($products), 'name'), $name);
+    }
+
+    /**
+     * @Then /^the (first|last) product on the list shouldn't have a name$/
+     */
+    public function theProductOnTheListShouldNotHaveAName(string $position): void
+    {
+        $products = $this->responseChecker->getCollection($this->getLastResponse());
+
+        $product = $position === 'last' ? end($products) : reset($products);
+
+        Assert::null($this->getFieldValueOfProduct($product, 'name'));
     }
 
     /**
@@ -820,6 +976,17 @@ final class ManagingProductsContext implements Context
         Assert::notEmpty($this->responseChecker->getValue($this->client->getLastResponse(), 'images'));
     }
 
+    /**
+     * @Then I should see attribute :attribute with value :value in :locale locale
+     */
+    public function iShouldSeeAttributeWithValueInLocale(
+        ProductAttributeInterface $attribute,
+        string $value,
+        LocaleInterface $locale,
+    ): void {
+        $this->hasAttributeWithValueInLastResponse($attribute, $value, $locale->getCode());
+    }
+
     private function getAdminLocaleCode(): string
     {
         /** @var AdminUserInterface $adminUser */
@@ -830,14 +997,14 @@ final class ManagingProductsContext implements Context
         return $this->responseChecker->getValue($response, 'localeCode');
     }
 
-    private function getFieldValueOfFirstProduct(array $product, string $field): ?string
+    private function getFieldValueOfProduct(array $product, string $field): ?string
     {
         if ($field === 'code') {
             return $product['code'];
         }
 
         if ($field === 'name') {
-            return $product['translations'][$this->getAdminLocaleCode()]['name'];
+            return $product['translations'][$this->getAdminLocaleCode()]['name'] ?? null;
         }
 
         return null;
@@ -933,5 +1100,13 @@ final class ManagingProductsContext implements Context
         }
 
         Assert::same((string) $value, $expectedValue);
+    }
+
+    private function assertResponseHasTranslationFieldWithValue(string $field, string $value): void
+    {
+        Assert::same(
+            $this->responseChecker->getTranslationValue($this->client->getLastResponse(), $field),
+            $value,
+        );
     }
 }
