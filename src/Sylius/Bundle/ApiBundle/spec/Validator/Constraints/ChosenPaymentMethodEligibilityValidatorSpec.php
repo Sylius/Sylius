@@ -89,6 +89,28 @@ final class ChosenPaymentMethodEligibilityValidatorSpec extends ObjectBehavior
         $this->validate($command, new ChosenPaymentMethodEligibility());
     }
 
+    function it_adds_violation_if_payment_does_not_exist(
+        PaymentRepositoryInterface $paymentRepository,
+        PaymentMethodRepositoryInterface $paymentMethodRepository,
+        PaymentMethodInterface $paymentMethod,
+        ExecutionContextInterface $executionContext,
+    ): void {
+        $command = new ChoosePaymentMethod('PAYMENT_METHOD_CODE');
+        $command->setOrderTokenValue('ORDER_TOKEN');
+        $command->setSubresourceId('123');
+
+        $paymentMethodRepository->findOneBy(['code' => 'PAYMENT_METHOD_CODE'])->willReturn($paymentMethod);
+
+        $paymentRepository->find('123')->willReturn(null);
+
+        $executionContext
+            ->addViolation('sylius.payment.not_found')
+            ->shouldBeCalled()
+        ;
+
+        $this->validate($command, new ChosenPaymentMethodEligibility());
+    }
+
     function it_adds_violation_if_payment_method_does_not_exist(
         PaymentMethodRepositoryInterface $paymentMethodRepository,
         ExecutionContextInterface $executionContext,

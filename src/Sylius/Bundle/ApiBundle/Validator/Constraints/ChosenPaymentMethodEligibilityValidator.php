@@ -50,7 +50,12 @@ final class ChosenPaymentMethodEligibilityValidator extends ConstraintValidator
 
         /** @var PaymentInterface $payment */
         $payment = $this->paymentRepository->find($value->paymentId);
-        Assert::notNull($payment);
+
+        if (null === $payment) {
+            $this->context->addViolation($constraint->paymentNotFound);
+
+            return;
+        }
 
         if (!in_array($paymentMethod, $this->paymentMethodsResolver->getSupportedMethods($payment), true)) {
             $this->context->addViolation($constraint->notAvailable, ['%name%' => $paymentMethod->getName()]);
