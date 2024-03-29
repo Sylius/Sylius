@@ -9,35 +9,32 @@ Feature: Adding a new product
         And the store has "Standard" shipping category
         And I am logged in as an administrator
 
-    @todo @ui @no-api
+    @ui @mink:chromedriver @no-api
     Scenario: Adding a new simple product with price
         When I want to create a new simple product
         And I specify its code as "BOARD_DICE_BREWING"
         And I name it "Dice Brewing" in "English (United States)"
-        And I set its slug to "dice-brewing" in "English (United States)"
         And I set its price to "$10.00" for "United States" channel
         And I add it
         Then I should be notified that it has been successfully created
         And the product "Dice Brewing" should appear in the store
 
-    @todo @ui @no-api
+    @ui @mink:chromedriver @no-api
     Scenario: Adding a new simple product with discounted price
         When I want to create a new simple product
         And I specify its code as "BOARD_DICE_BREWING"
         And I name it "Dice Brewing" in "English (United States)"
-        And I set its slug to "dice-brewing" in "English (United States)"
         And I set its price to "$10.00" for "United States" channel
         And I set its original price to "$20.00" for "United States" channel
         And I add it
         Then I should be notified that it has been successfully created
         And the product "Dice Brewing" should appear in the store
 
-    @todo @ui @no-api
+    @ui @mink:chromedriver @no-api
     Scenario: Adding a new simple Free product
         When I want to create a new simple product
         And I specify its code as "BOARD_DICE_BREWING"
         And I name it "Dice Brewing" in "English (United States)"
-        And I set its slug to "dice-brewing" in "English (United States)"
         And I set its price to "$0.00" for "United States" channel
         And I add it
         Then I should be notified that it has been successfully created
@@ -49,7 +46,6 @@ Feature: Adding a new product
         And I specify its code as "BOARD_DICE_BREWING"
         And I name it "Dice Brewing" in "English (United States)"
         And I set its price to "$10.00" for "United States" channel
-        And I set its slug to "dice-brewing" in "English (United States)"
         And I set its shipping category as "Standard"
         And I add it
         Then I should be notified that it has been successfully created

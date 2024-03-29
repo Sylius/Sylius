@@ -20,7 +20,6 @@ use Sylius\Behat\Page\Admin\Crud\CreatePage as BaseCreatePage;
 use Sylius\Behat\Service\AutocompleteHelper;
 use Sylius\Behat\Service\DriverHelper;
 use Sylius\Behat\Service\Helper\AutocompleteHelperInterface;
-use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Product\Model\ProductAssociationTypeInterface;
 use Symfony\Component\Routing\RouterInterface;
@@ -58,16 +57,6 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
         $this->activateLanguageTab($locale);
 
         $this->getElement('slug', ['%locale%' => $locale])->setValue($slug);
-    }
-
-    public function specifyPrice(ChannelInterface $channel, string $price): void
-    {
-        $this->getElement('price', ['%channelCode%' => $channel->getCode()])->setValue($price);
-    }
-
-    public function specifyOriginalPrice(ChannelInterface $channel, int $originalPrice): void
-    {
-        $this->getElement('original_price', ['%channelCode%' => $channel->getCode()])->setValue($originalPrice);
     }
 
     public function addNonTranslatableAttribute(string $attributeName, string $value): void

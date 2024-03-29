@@ -29,44 +29,31 @@
             <div class="card-header">
                 <ul class="nav nav-tabs card-header-tabs" data-bs-toggle="tabs" role="tablist">
                     {% for channelCode, channelPricing in variantForm.channelPricings %}
-                        {% if loop.index0 == 0 %}
-                            <li class="nav-item">
-                                <a class="nav-link active" data-bs-toggle="tab" href="#{{ channelCode }}" role="tab">
-                                    {{ channelPricing.vars.label }}
-                                </a>
-                            </li>
-                        {% else %}
-                            <li class="nav-item">
-                                <a class="nav-link" data-bs-toggle="tab" href="#{{ channelCode }}" role="tab">
-                                    {{ channelPricing.vars.label }}
-                                </a>
-                            </li>
-                        {% endif %}
+                        <li class="nav-item">
+                            <a
+                                class="nav-link {% if loop.index0 == 0 %}active{% endif %}"
+                                data-bs-toggle="tab"
+                                href="#{{ channelCode }}"
+                                role="tab"
+                                {{ sylius_test_html_attribute('channel-tab', channelCode) }}
+                            >
+                                {{ channelPricing.vars.label }}
+                            </a>
+                        </li>
                     {% endfor %}
                 </ul>
             </div>
             <div class="card-body">
                 <div class="tab-content">
                     {% for channelCode, channelPricing in variantForm.channelPricings %}
-                        {% if loop.index0 == 0 %}
-                            <div class="tab-pane fade show active" id="{{ channelCode }}" role="tabpanel">
-                                {% if channelCode not in product.channels|map(channel => channel.code) %}
-                                    <div class="alert alert-info">
-                                        {{ 'sylius.ui.product.product_not_active_in_channel'|trans }}
-                                    </div>
-                                {% endif %}
-                                {{ form_row(channelPricing, {'label': false}) }}
-                            </div>
-                        {% else %}
-                            <div class="tab-pane fade" id="{{ channelCode }}" role="tabpanel">
-                                {% if channelCode not in product.channels|map(channel => channel.code) %}
-                                    <div class="alert alert-info">
-                                        {{ 'sylius.ui.product.product_not_active_in_channel'|trans }}
-                                    </div>
-                                {% endif %}
-                                {{ form_row(channelPricing, {'label': false}) }}
-                            </div>
-                        {% endif %}
+                        <div class="tab-pane fade {% if loop.index0 == 0 %}show{% endif %} active" id="{{ channelCode }}" role="tabpanel">
+                            {% if channelCode not in product.channels|map(channel => channel.code) %}
+                                <div class="alert alert-info">
+                                    {{ 'sylius.ui.product.product_not_active_in_channel'|trans }}
+                                </div>
+                            {% endif %}
+                            {{ form_row(channelPricing, {'label': false}) }}
+                        </div>
                     {% endfor %}
                 </div>
             </div>
