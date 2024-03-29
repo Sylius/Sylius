@@ -23,7 +23,7 @@ Feature: Adding select attributes in different locales to a product
         And I select "Ceramic" value in "English (United States)" for the "Mug material" attribute
         And I select "Ceramika" value in "Polish (Poland)" for the "Mug material" attribute
         And I add it
-#        Then I should be notified that it has been successfully created
+        Then I should be notified that it has been successfully created
         And the product "PHP Mug" should appear in the store
         And select attribute "Mug material" of product "PHP Mug" should be "Ceramic" in "English (United States)"
         And select attribute "Mug material" of product "PHP Mug" should be "Ceramika" in "Polish (Poland)"

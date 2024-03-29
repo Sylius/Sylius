@@ -18,7 +18,7 @@ Feature: Adding a new product with a percent attribute
         And I add the "Awesomeness rating" attribute to it
         And I set the "Awesomeness rating" attribute value to 80 in "English (United States)"
         And I add it
-#        Then I should be notified that it has been successfully created
+        Then I should be notified that it has been successfully created
         And the product "44 Magnum" should appear in the store
         And attribute "Awesomeness rating" of product "44 Magnum" should be 80
 
@@ -30,7 +30,7 @@ Feature: Adding a new product with a percent attribute
         And I add the "Accuracy" attribute to it
         And I set its non-translatable "Accuracy" attribute to 95
         And I add it
-#        Then I should be notified that it has been successfully created
+        Then I should be notified that it has been successfully created
         And the product "44 Magnum" should appear in the store
         And non-translatable attribute "Accuracy" of product "44 Magnum" should be 95
 
