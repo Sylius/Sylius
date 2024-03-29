@@ -48,7 +48,7 @@ final class ChosenPaymentMethodEligibilityValidator extends ConstraintValidator
             return;
         }
 
-        /** @var PaymentInterface $payment */
+        /** @var PaymentInterface|null $payment */
         $payment = $this->paymentRepository->find($value->paymentId);
 
         if (null === $payment) {
