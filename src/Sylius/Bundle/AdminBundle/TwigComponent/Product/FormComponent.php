@@ -15,6 +15,7 @@ namespace Sylius\Bundle\AdminBundle\TwigComponent\Product;
 
 use Sylius\Bundle\AdminBundle\TwigComponent\HookableComponentTrait;
 use Sylius\Component\Core\Model\Product;
+use Sylius\Component\Product\Factory\ProductFactoryInterface;
 use Sylius\Component\Product\Generator\SlugGeneratorInterface;
 use Sylius\Component\Product\Model\ProductAttributeInterface;
 use Sylius\Component\Product\Model\ProductAttributeValueInterface;
@@ -43,7 +44,7 @@ class FormComponent
     use HookableComponentTrait;
     use LiveCollectionTrait;
 
-    #[LiveProp(hydrateWith: 'hydrateFormData', dehydrateWith: 'dehydrateFormData', fieldName: 'formData')]
+    #[LiveProp(dehydrateWith: 'dehydrateFormData', fieldName: 'formData')]
     public ?Product $resource = null;
 
     /**
@@ -51,6 +52,9 @@ class FormComponent
      */
     #[LiveProp(writable: true, hydrateWith: 'hydrateAttributesToBeAdded', dehydrateWith: 'dehydrateAttributesToBeAdded')]
     public array $attributesToBeAdded = [];
+
+    #[LiveProp(writable: false)]
+    public bool $isSimple = false;
 
     /**
      * @param class-string $formClass
@@ -61,11 +65,18 @@ class FormComponent
         private readonly string $formClass,
         private readonly SlugGeneratorInterface $slugGenerator,
         private readonly RepositoryInterface $productAttributeRepository,
+        private readonly ProductFactoryInterface $productFactory,
     ) {
     }
 
     protected function instantiateForm(): FormInterface
     {
+        if (null === $this->resource) {
+            /** @var Product $product */
+            $product = $this->isSimple ? $this->productFactory->createWithVariant() : $this->productFactory->createNew();
+            $this->resource = $product;
+        }
+
         return $this->formFactory->create($this->formClass, $this->resource);
     }
 
@@ -170,14 +181,9 @@ class FormComponent
         return implode(',', $value);
     }
 
-    public function hydrateFormData(?string $value): Product
+    public function dehydrateFormData(): ?int
     {
-        return unserialize($value);
-    }
-
-    public function dehydrateFormData(Product $value): string
-    {
-        return serialize($value);
+        return $this->resource?->getId();
     }
 
     private function getDataModelValue(): string

@@ -11,6 +11,7 @@ twig_hooks:
                     resource: '@=resource'
                     parentMainHook: '@=parent_main_hook'
                     parentFallbackHook: '@=parent_fallback_hook'
+                    isSimple: '@=resource.isSimple()'
 
         'sylius_admin.product.create.content.form':
             side_navigation:
