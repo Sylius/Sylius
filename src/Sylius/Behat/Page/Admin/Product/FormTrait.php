@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Page\Admin\Product;
 
+use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Exception\ElementNotFoundException;
 use Sylius\Behat\Service\DriverHelper;
 use Sylius\Component\Core\Model\ChannelInterface;
@@ -238,14 +239,21 @@ trait FormTrait
         }
 
         if (null !== $productVariant) {
-            $this->autocompleteHelper->select(
-                $this->getDriver(),
+            $this->selectAutocompleteValue(
                 $imageSubform->find('css', '[data-test-product-variant]')->getXpath(),
                 $productVariant->getCode(),
             );
         }
 
         $filesPath = $this->getParameter('files_path');
+        $imageSubform->find('css', '[data-test-file]')->attachFile($filesPath . $path);
+    }
+
+    public function changeImageWithType(string $type, string $path): void
+    {
+        $filesPath = $this->getParameter('files_path');
+
+        $imageSubform = $this->getElement('image_subform_with_type', ['%type%' => $type]);
         $imageSubform->find('css', '[data-test-file]')->attachFile($filesPath . $path);
     }
 
@@ -261,8 +269,8 @@ trait FormTrait
     public function removeFirstImage(): void
     {
         $this->changeTab('media');
-        $imagesSubforms = $this->getElement('images_subforms');
-        $imagesSubforms->findAll('css', '[data-test-image-delete]')[0]->click();
+        $firstSubform = $this->getFirstImageSubform();
+        $firstSubform->findAll('css', '[data-test-image-delete]')[0]->click();
     }
 
     public function hasImageWithType(string $type): bool
@@ -296,6 +304,34 @@ trait FormTrait
         $imageSubforms = $images->findAll('css', '[data-test-image-subform]');
 
         return count($imageSubforms);
+    }
+
+    public function modifyFirstImageType(string $type): void
+    {
+        $this->changeTab('media');
+
+        $firstImageSubform = $this->getFirstImageSubform();
+
+        $firstImageSubform->find('css', 'input[data-test-type]')->setValue($type);
+    }
+
+    public function selectVariantForFirstImage(ProductVariantInterface $productVariant): void
+    {
+        $this->changeTab('media');
+
+        $imageSubform = $this->getFirstImageSubform();
+        $this->selectAutocompleteValue(
+            $imageSubform->find('css', '[data-test-product-variant]')->getXpath(),
+            $productVariant->getCode(),
+        );
+    }
+
+    private function getFirstImageSubform(): NodeElement
+    {
+        $images = $this->getElement('images');
+        $imageSubforms = $images->findAll('css', '[data-test-image-subform]');
+
+        return reset($imageSubforms);
     }
 
     /*
