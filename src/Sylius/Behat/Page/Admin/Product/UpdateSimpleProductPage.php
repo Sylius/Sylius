@@ -211,35 +211,6 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
         $imageForm->find('css', 'input[type="file"]')->attachFile($filesPath . $path);
     }
 
-    public function removeImageWithType(string $type): void
-    {
-        $this->clickTabIfItsNotActive('media');
-
-        $imageElement = $this->getImageElementByType($type);
-        $imageSourceElement = $imageElement->find('css', 'img');
-        if (null !== $imageSourceElement) {
-            $this->saveImageUrlForType($type, $imageSourceElement->getAttribute('src'));
-        }
-
-        $imageElement->clickLink('Delete');
-    }
-
-    public function removeFirstImage(): void
-    {
-        $this->clickTabIfItsNotActive('media');
-        $imageElement = $this->getFirstImageElement();
-        $imageTypeElement = $imageElement->find('css', 'input[type=text]');
-        $imageSourceElement = $imageElement->find('css', 'img');
-
-        if (null !== $imageTypeElement && null !== $imageSourceElement) {
-            $this->saveImageUrlForType(
-                $imageTypeElement->getValue(),
-                $imageSourceElement->getAttribute('src'),
-            );
-        }
-        $imageElement->clickLink('Delete');
-    }
-
     public function modifyFirstImageType(string $type): void
     {
         $this->clickTabIfItsNotActive('media');

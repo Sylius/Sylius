@@ -28,6 +28,8 @@ interface CreateConfigurableProductPageInterface extends BaseCreatePageInterface
 
     public function selectMainTaxon(TaxonInterface $taxon): void;
 
+    public function hasImageWithType(string $type): bool;
+
     public function attachImage(string $path, ?string $type = null): void;
 
     public function activateLanguageTab(string $localeCode): void;
