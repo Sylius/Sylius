@@ -248,13 +248,6 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
         $this->setImageType($firstImage, $type);
     }
 
-    public function countImages(): int
-    {
-        $imageElements = $this->getImageElements();
-
-        return count($imageElements);
-    }
-
     public function isSlugReadonlyIn(string $locale): bool
     {
         return SlugGenerationHelper::isSlugReadonly(

@@ -8,7 +8,7 @@ Feature: Adding images to an existing product
         Given the store operates on a single channel in "United States"
         And I am logged in as an administrator
 
-    @todo @ui @mink:chromedriver @api
+    @ui @mink:chromedriver @api
     Scenario: Adding a single image to an existing product
         Given the store has a product "Lamborghini Gallardo Model"
         When I want to modify this product
@@ -17,7 +17,7 @@ Feature: Adding images to an existing product
         Then I should be notified that it has been successfully uploaded
         And the product "Lamborghini Gallardo Model" should have an image with "banner" type
 
-    @todo @ui @mink:chromedriver @api
+    @ui @mink:chromedriver @api
     Scenario: Adding multiple images to an existing product
         Given the store has a product "Lamborghini Gallardo Model"
         When I want to modify this product
@@ -28,7 +28,7 @@ Feature: Adding images to an existing product
         And the product "Lamborghini Gallardo Model" should have an image with "banner" type
         And it should also have an image with "thumbnail" type
 
-    @todo @ui @javascript @api
+    @ui @javascript @api
     Scenario: Adding multiple images of the same type to an existing product
         Given the store has a product "Lamborghini Ford Model"
         When I want to modify this product
@@ -38,7 +38,7 @@ Feature: Adding images to an existing product
         Then I should be notified that it has been successfully uploaded
         And this product should have 2 images
 
-    @todo @ui @mink:chromedriver @api
+    @ui @mink:chromedriver @api
     Scenario: Adding a single image to an existing configurable product
         Given the store has a "Lamborghini Gallardo Model" configurable product
         When I want to modify this product
@@ -47,7 +47,7 @@ Feature: Adding images to an existing product
         Then I should be notified that it has been successfully uploaded
         And the product "Lamborghini Gallardo Model" should have an image with "banner" type
 
-    @todo @ui @javascript @api
+    @ui @javascript @api
     Scenario: Adding multiple images of the same type to an existing configurable product
         Given the store has a "Lamborghini Ford Model" configurable product
         When I want to modify this product
@@ -57,7 +57,7 @@ Feature: Adding images to an existing product
         Then I should be notified that it has been successfully uploaded
         And this product should have 2 images
 
-    @todo @ui @javascript @api
+    @ui @javascript @api
     Scenario: Adding an image to an existing product without providing its type
         Given the store has a product "Lamborghini Gallardo Model"
         When I want to modify this product
@@ -66,7 +66,7 @@ Feature: Adding images to an existing product
         Then I should be notified that it has been successfully uploaded
         And this product should have only one image
 
-    @todo @ui @javascript @api
+    @ui @javascript @api
     Scenario: Adding an image to an existing configurable product without providing its type
         Given the store has a "Lamborghini Gallardo Model" configurable product
         When I want to modify this product
@@ -75,7 +75,7 @@ Feature: Adding images to an existing product
         Then I should be notified that it has been successfully uploaded
         And this product should have only one image
 
-    @todo @ui @mink:chromedriver @api
+    @ui @mink:chromedriver
     Scenario: Adding an image to an existing configurable product with selecting a variant
         Given the store has a "Lamborghini Gallardo Model" configurable product
         And this product has "Blue" and "Yellow" variants

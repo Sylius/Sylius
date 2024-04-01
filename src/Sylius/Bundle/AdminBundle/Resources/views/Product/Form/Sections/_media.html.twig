@@ -33,7 +33,7 @@
                             </div>
                             <div class="mb-3">
                                 {% if product.id is not null and 0 != product.variants|length and not product.simple %}
-                                    {{ form_row(imageForm.productVariants, sylius_test_form_attribute('product-variants')) }}
+                                    {{ form_row(imageForm.productVariants, sylius_test_form_attribute('product-variant', imageForm.productVariants.vars.value|join(','))) }}
                                 {% endif %}
                             </div>
                             <div class="mb-3">
