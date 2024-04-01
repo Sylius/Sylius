@@ -63,7 +63,26 @@ final class AutocompleteHelper implements AutocompleteHelperInterface
         SCRIPT);
     }
 
-    public function select(DriverInterface $driver, string $selector, string $value): void
+    public function selectByName(DriverInterface $driver, string $selector, string $value): void
+    {
+        $selector = str_replace('"', "'", $selector);
+        $foundItems = array_flip($this->search($driver, $selector, $value));
+
+        if (!array_key_exists($value, $foundItems)) {
+            throw new \InvalidArgumentException(sprintf('Could not find "%s" in the autocomplete', $value));
+        }
+
+        $driver->executeScript(<<<SCRIPT
+            (function () {
+                let element = document.evaluate("{$selector}", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
+
+                element.tomselect.addItem('{$foundItems[$value]}');
+                element.tomselect.refreshOptions();
+            })();
+        SCRIPT);
+    }
+
+    public function selectByValue(DriverInterface $driver, string $selector, string $value): void
     {
         $selector = str_replace('"', "'", $selector);
         $foundItems = $this->search($driver, $selector, $value);
