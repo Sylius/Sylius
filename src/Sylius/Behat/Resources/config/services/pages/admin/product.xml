@@ -42,6 +42,7 @@
         </service>
         <service id="sylius.behat.page.admin.product.update_configurable" class="%sylius.behat.page.admin.product.update_configurable.class%" parent="sylius.behat.page.admin.crud.update" public="false">
             <argument type="string">sylius_admin_product_update</argument>
+            <argument type="service" id="Sylius\Behat\Service\Helper\AutocompleteHelperInterface" />
         </service>
         <service id="sylius.behat.page.admin.product.update_simple" class="%sylius.behat.page.admin.product.update_simple.class%" parent="sylius.behat.page.admin.crud.update" public="false">
             <argument type="string">sylius_admin_product_update</argument>

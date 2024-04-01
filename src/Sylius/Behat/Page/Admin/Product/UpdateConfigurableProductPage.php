@@ -14,17 +14,30 @@ declare(strict_types=1);
 namespace Sylius\Behat\Page\Admin\Product;
 
 use Behat\Mink\Element\NodeElement;
+use Behat\Mink\Session;
 use Sylius\Behat\Behaviour\ChecksCodeImmutability;
 use Sylius\Behat\Page\Admin\Crud\UpdatePage as BaseUpdatePage;
 use Sylius\Behat\Service\AutocompleteHelper;
+use Sylius\Behat\Service\Helper\AutocompleteHelperInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
+use Symfony\Component\Routing\RouterInterface;
 use Webmozart\Assert\Assert;
 
 class UpdateConfigurableProductPage extends BaseUpdatePage implements UpdateConfigurableProductPageInterface
 {
     use ChecksCodeImmutability;
     use FormTrait;
+
+    public function __construct(
+        Session $session,
+        $minkParameters,
+        RouterInterface $router,
+        string $routeName,
+        private AutocompleteHelperInterface $autocompleteHelper,
+    ) {
+        parent::__construct($session, $minkParameters, $router, $routeName);
+    }
 
     private array $imageUrls = [];
 
@@ -105,11 +118,7 @@ class UpdateConfigurableProductPage extends BaseUpdatePage implements UpdateConf
 
     public function hasLastImageAVariant(ProductVariantInterface $productVariant): bool
     {
-        $this->clickTabIfItsNotActive('media');
-
-        $imageForm = $this->getLastImageElement();
-
-        return $productVariant->getCode() === $imageForm->find('css', 'input[type="hidden"]')->getValue();
+        return $this->hasImageWithVariant($productVariant);
     }
 
     public function changeImageWithType(string $type, string $path): void
@@ -164,13 +173,6 @@ class UpdateConfigurableProductPage extends BaseUpdatePage implements UpdateConf
 
         $imageElement = $this->getFirstImageElement();
         $imageElement->find('css', 'input[type="hidden"]')->setValue($productVariant->getCode());
-    }
-
-    public function countImages(): int
-    {
-        $imageElements = $this->getImageElements();
-
-        return count($imageElements);
     }
 
     public function goToVariantsList(): void

@@ -240,7 +240,7 @@ trait FormTrait
         if (null !== $productVariant) {
             $this->autocompleteHelper->select(
                 $this->getDriver(),
-                $imageSubform->find('css', '[data-test-product-variants]')->getXpath(),
+                $imageSubform->find('css', '[data-test-product-variant]')->getXpath(),
                 $productVariant->getCode(),
             );
         }
@@ -264,6 +264,22 @@ trait FormTrait
         $this->getDriver()->back();
 
         return in_array($statusCode, [200, 304], true);
+    }
+
+    public function hasImageWithVariant(ProductVariantInterface $productVariant): bool
+    {
+        $this->changeTab('media');
+        $images = $this->getElement('images');
+
+        return $images->has('css', sprintf('[data-test-product-variant="%s"]', $productVariant->getCode()));
+    }
+
+    public function countImages(): int
+    {
+        $images = $this->getElement('images');
+        $imageSubforms = $images->findAll('css', '[data-test-image-subform]');
+
+        return count($imageSubforms);
     }
 
     /*
