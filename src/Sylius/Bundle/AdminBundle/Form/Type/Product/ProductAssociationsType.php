@@ -11,22 +11,21 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\ProductBundle\Form\Type;
+namespace Sylius\Bundle\AdminBundle\Form\Type\Product;
 
 use Sylius\Bundle\ResourceBundle\Form\Type\FixedCollectionType;
 use Sylius\Component\Product\Model\ProductAssociationTypeInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\DataTransformerInterface;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class ProductAssociationsType extends AbstractType
 {
     public function __construct(
-        private RepositoryInterface $productAssociationTypeRepository,
-        private DataTransformerInterface $productsToProductAssociationsTransformer,
+        private readonly RepositoryInterface $productAssociationTypeRepository,
+        private readonly DataTransformerInterface $productsToProductAssociationsTransformer,
     ) {
     }
 
@@ -39,10 +38,11 @@ final class ProductAssociationsType extends AbstractType
     {
         $resolver->setDefaults([
             'entries' => $this->productAssociationTypeRepository->findAll(),
-            'entry_type' => TextType::class,
             'entry_name' => fn (ProductAssociationTypeInterface $productAssociationType) => $productAssociationType->getCode(),
+            'entry_type' => ProductAutocompleteChoiceType::class,
             'entry_options' => fn (ProductAssociationTypeInterface $productAssociationType) => [
                 'label' => $productAssociationType->getName(),
+                'multiple' => true,
             ],
         ]);
     }
@@ -54,6 +54,6 @@ final class ProductAssociationsType extends AbstractType
 
     public function getBlockPrefix(): string
     {
-        return 'sylius_product_associations';
+        return 'sylius_admin_product_associations';
     }
 }

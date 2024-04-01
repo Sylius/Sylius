@@ -18,19 +18,19 @@
             <tag name="ux.entity_autocompleter" alias="product_attribute" />
         </service>
 
-        <service id="sylius_admin.autocompleter.product" class="Sylius\Bundle\AdminBundle\Autocompleter\ProductAutocompleter">
+        <service id="sylius_admin.autocompeter.product" class="Sylius\Bundle\AdminBundle\Autocompleter\ProductAutocompleter">
             <argument>%sylius.model.product.class%</argument>
             <tag name="ux.entity_autocompleter" alias="product_autocomplete_choice_type" />
-        </service>
-
-        <service id="sylius_admin.autocompleter.taxon" class="Sylius\Bundle\AdminBundle\Autocompleter\TaxonAutocompleter">
-            <argument>%sylius.model.taxon.class%</argument>
-            <tag name="ux.entity_autocompleter" alias="taxon_autocomplete_choice_type" />
         </service>
 
         <service id="sylius_admin.autocompleter.product_variant" class="Sylius\Bundle\AdminBundle\Autocompleter\ProductVariantAutocompleter">
             <argument>%sylius.model.product_variant.class%</argument>
             <tag name="ux.entity_autocompleter" alias="product_variant_autocomplete_choice_type" />
+        </service>
+
+        <service id="sylius_admin.autocompleter.taxon" class="Sylius\Bundle\AdminBundle\Autocompleter\TaxonAutocompleter">
+            <argument>%sylius.model.taxon.class%</argument>
+            <tag name="ux.entity_autocompleter" alias="taxon_autocomplete_choice_type" />
         </service>
     </services>
 </container>
