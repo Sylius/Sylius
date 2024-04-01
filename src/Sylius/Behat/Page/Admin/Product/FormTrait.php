@@ -112,7 +112,7 @@ trait FormTrait
         $this->changeTab('details');
         $productOptionsAutocomplete = $this->getElement('product_options_autocomplete');
 
-        $this->selectAutocompleteValue($productOptionsAutocomplete->getXpath(), $optionName);
+        $this->autocompleteHelper->selectByName($this->getDriver(), $productOptionsAutocomplete->getXpath(), $optionName);
     }
 
     /*
@@ -213,7 +213,7 @@ trait FormTrait
     private function selectAttributeToBeAdded(string $attributeName): void
     {
         $driver = $this->getDriver();
-        $this->autocompleteHelper->select(
+        $this->autocompleteHelper->selectByName(
             $driver,
             $this->getElement('product_attribute_input')->getXpath(),
             $attributeName,
@@ -239,7 +239,8 @@ trait FormTrait
         }
 
         if (null !== $productVariant) {
-            $this->selectAutocompleteValue(
+            $this->autocompleteHelper->selectByValue(
+                $this->getDriver(),
                 $imageSubform->find('css', '[data-test-product-variant]')->getXpath(),
                 $productVariant->getCode(),
             );
@@ -320,7 +321,8 @@ trait FormTrait
         $this->changeTab('media');
 
         $imageSubform = $this->getFirstImageSubform();
-        $this->selectAutocompleteValue(
+        $this->autocompleteHelper->selectByValue(
+            $this->getDriver(),
             $imageSubform->find('css', '[data-test-product-variant]')->getXpath(),
             $productVariant->getCode(),
         );
@@ -350,10 +352,5 @@ trait FormTrait
     private function clickButton(string $locator): void
     {
         $this->getDocument()->pressButton($locator);
-    }
-
-    private function selectAutocompleteValue(string $xpath, string $value): void
-    {
-        $this->autocompleteHelper->select($this->getDriver(), $xpath, $value);
     }
 }
