@@ -69,5 +69,4 @@ jobs:
                         ```
                     branch: "upmerge/${{ matrix.base_branch }}_${{ matrix.target_branch }}"
                     delete-branch: true
-                    branch-suffix: "short-commit-hash"
                     base: ${{ matrix.target_branch }}
