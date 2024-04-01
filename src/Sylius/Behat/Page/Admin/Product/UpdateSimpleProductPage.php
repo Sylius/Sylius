@@ -203,22 +203,6 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
         return in_array($statusCode, [200, 304], true);
     }
 
-    public function changeImageWithType(string $type, string $path): void
-    {
-        $filesPath = $this->getParameter('files_path');
-
-        $imageForm = $this->getImageElementByType($type);
-        $imageForm->find('css', 'input[type="file"]')->attachFile($filesPath . $path);
-    }
-
-    public function modifyFirstImageType(string $type): void
-    {
-        $this->clickTabIfItsNotActive('media');
-
-        $firstImage = $this->getFirstImageElement();
-        $this->setImageType($firstImage, $type);
-    }
-
     public function isSlugReadonlyIn(string $locale): bool
     {
         return SlugGenerationHelper::isSlugReadonly(
