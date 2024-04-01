@@ -230,7 +230,7 @@ trait FormTrait
         $this->waitForFormUpdate();
 
         $images = $this->getElement('images');
-        $imagesSubform = $images->findAll('css', '[data-test-image-subforms]');
+        $imagesSubform = $images->findAll('css', '[data-test-image-subform]');
         $imageSubform = end($imagesSubform);
 
         if (null !== $type) {
@@ -247,6 +247,22 @@ trait FormTrait
 
         $filesPath = $this->getParameter('files_path');
         $imageSubform->find('css', '[data-test-file]')->attachFile($filesPath . $path);
+    }
+
+    public function removeImageWithType(string $type): void
+    {
+        $this->changeTab('media');
+
+        $imageSubform = $this->getElement('image_subform_with_type', ['%type%' => $type]);
+        $imageSubform->find('css', '[data-test-image-delete]')->click();
+        $this->waitForFormUpdate();
+    }
+
+    public function removeFirstImage(): void
+    {
+        $this->changeTab('media');
+        $imagesSubforms = $this->getElement('images_subforms');
+        $imagesSubforms->findAll('css', '[data-test-image-delete]')[0]->click();
     }
 
     public function hasImageWithType(string $type): bool

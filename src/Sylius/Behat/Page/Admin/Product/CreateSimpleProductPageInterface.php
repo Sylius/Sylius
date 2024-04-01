@@ -50,6 +50,8 @@ interface CreateSimpleProductPageInterface extends BaseCreatePageInterface
 
     public function checkProductTaxon(TaxonInterface $taxon): void;
 
+    public function hasImageWithType(string $type): bool;
+
     public function attachImage(string $path, ?string $type = null): void;
 
     /**
