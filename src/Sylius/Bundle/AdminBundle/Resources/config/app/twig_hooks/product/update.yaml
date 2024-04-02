@@ -73,3 +73,7 @@ twig_hooks:
                 template: '@SyliusAdmin/product/form/sections/associations.html.twig'
             media:
                 template: '@SyliusAdmin/product/form/sections/media.html.twig'
+                
+        'sylius_admin.product.update.content.form.sections.associations':
+            associations:
+                template: '@SyliusAdmin/Product/Form/Sections/Associations/associations.html.twig'
