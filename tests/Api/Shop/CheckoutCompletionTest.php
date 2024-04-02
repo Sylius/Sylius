@@ -30,7 +30,7 @@ final class CheckoutCompletionTest extends JsonApiTestCase
     }
 
     /** @test */
-    public function it_does_not_allow_update_without_items(): void
+    public function it_does_not_allow_updating_without_items(): void
     {
         $this->loadFixturesFromFiles(['channel.yaml', 'cart.yaml']);
 
@@ -48,13 +48,13 @@ final class CheckoutCompletionTest extends JsonApiTestCase
         $this->assertResponseViolations(
             $this->client->getResponse(),
             [
-                ['propertyPath' => '', 'message' => 'An empty order cannot be completed.'],
+                ['propertyPath' => '', 'message' => 'An empty order cannot be processed.'],
             ],
         );
     }
 
     /** @test */
-    public function it_does_not_allow_update_without_require_billing_address(): void
+    public function it_does_not_allow_updating_without_require_billing_address(): void
     {
         $this->loadFixturesFromFiles([
             'channel.yaml',
@@ -93,7 +93,7 @@ final class CheckoutCompletionTest extends JsonApiTestCase
     }
 
     /** @test */
-    public function it_does_not_allow_update_without_require_shipping_address(): void
+    public function it_does_not_allow_updating_without_require_shipping_address(): void
     {
         $this->loadFixturesFromFiles([
             'channel.yaml',

@@ -37,7 +37,7 @@ final class OrderAddressRequirementValidatorSpec extends ObjectBehavior
         $this->initialize($context);
     }
 
-    function it_throws_exception_if_constraint_is_not_an_instance_of_order_address_requirement(
+    function it_throws_an_exception_if_constraint_is_not_an_instance_of_order_address_requirement(
         Constraint $constraint,
     ): void {
         $this
@@ -46,7 +46,7 @@ final class OrderAddressRequirementValidatorSpec extends ObjectBehavior
         ;
     }
 
-    function it_throws_exception_if_value_is_not_an_instance_of_update_cart(
+    function it_throws_an_exception_if_value_is_not_an_instance_of_update_cart(
         OrderInterface $order,
     ): void {
         $this
@@ -56,17 +56,11 @@ final class OrderAddressRequirementValidatorSpec extends ObjectBehavior
     }
 
     function it_does_nothing_if_billing_and_shipping_addresses_are_not_provided(
-        OrderRepositoryInterface $orderRepository,
+        ExecutionContextInterface $context,
         OrderInterface $order,
         ChannelInterface $channel,
-        ExecutionContextInterface $context,
     ): void {
-        $orderRepository->findCartByTokenValue('TOKEN')->willReturn($order);
-        $order->getChannel()->willReturn($channel);
-        $channel->isShippingAddressInCheckoutRequired()->willReturn(false);
-
         $updateCart = new UpdateCart();
-        $updateCart->setOrderTokenValue('TOKEN');
 
         $this->validate($updateCart, new OrderAddressRequirement());
 
@@ -74,7 +68,7 @@ final class OrderAddressRequirementValidatorSpec extends ObjectBehavior
         $context->addViolation(self::MESSAGE, ['%addressName%' => 'shippingAddress'])->shouldNotHaveBeenCalled();
     }
 
-    function it_throws_exception_if_order_not_found(
+    function it_throws_an_exception_if_order_is_not_found(
         OrderRepositoryInterface $orderRepository,
         AddressInterface $billingAddress,
     ): void {
@@ -89,7 +83,7 @@ final class OrderAddressRequirementValidatorSpec extends ObjectBehavior
         ;
     }
 
-    function it_throws_exception_if_order_does_not_have_channel(
+    function it_throws_an_exception_if_order_does_not_have_channel(
         OrderRepositoryInterface $orderRepository,
         OrderInterface $order,
         AddressInterface $billingAddress,
@@ -108,10 +102,10 @@ final class OrderAddressRequirementValidatorSpec extends ObjectBehavior
 
     function it_does_nothing_if_shipping_address_is_required_and_provided(
         OrderRepositoryInterface $orderRepository,
+        ExecutionContextInterface $context,
         OrderInterface $order,
         ChannelInterface $channel,
         AddressInterface $shippingAddress,
-        ExecutionContextInterface $context,
     ): void {
         $orderRepository->findCartByTokenValue('TOKEN')->willReturn($order);
         $order->getChannel()->willReturn($channel);
@@ -127,10 +121,10 @@ final class OrderAddressRequirementValidatorSpec extends ObjectBehavior
 
     function it_does_nothing_if_billing_address_is_required_and_provided(
         OrderRepositoryInterface $orderRepository,
+        ExecutionContextInterface $context,
         OrderInterface $order,
         ChannelInterface $channel,
         AddressInterface $billingAddress,
-        ExecutionContextInterface $context,
     ): void {
         $orderRepository->findCartByTokenValue('TOKEN')->willReturn($order);
         $order->getChannel()->willReturn($channel);
@@ -146,10 +140,10 @@ final class OrderAddressRequirementValidatorSpec extends ObjectBehavior
 
     function it_adds_violation_if_shipping_address_is_required_but_not_provided(
         OrderRepositoryInterface $orderRepository,
+        ExecutionContextInterface $context,
         OrderInterface $order,
         AddressInterface $billingAddress,
         ChannelInterface $channel,
-        ExecutionContextInterface $context,
     ): void {
         $orderRepository->findCartByTokenValue('TOKEN')->willReturn($order);
         $order->getChannel()->willReturn($channel);
@@ -165,10 +159,10 @@ final class OrderAddressRequirementValidatorSpec extends ObjectBehavior
 
     function it_adds_violation_if_billing_address_is_required_but_not_provided(
         OrderRepositoryInterface $orderRepository,
+        ExecutionContextInterface $context,
         OrderInterface $order,
         AddressInterface $shippingAddress,
         ChannelInterface $channel,
-        ExecutionContextInterface $context,
     ): void {
         $orderRepository->findCartByTokenValue('TOKEN')->willReturn($order);
         $order->getChannel()->willReturn($channel);

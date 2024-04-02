@@ -189,7 +189,7 @@
             <argument type="service" id="Sylius\Bundle\CoreBundle\SectionResolver\SectionProviderInterface" />
         </service>
 
-        <service id="sylius.validator.order_address_eligibility" class="Sylius\Bundle\ApiBundle\Validator\Constraints\OrderAddressRequirementValidator">
+        <service id="sylius.validator.order_address_requirement" class="Sylius\Bundle\ApiBundle\Validator\Constraints\OrderAddressRequirementValidator">
             <argument type="service" id="sylius.repository.order" />
             <tag name="validator.constraint_validator" alias="sylius_order_address_requirement_validator" />
         </service>

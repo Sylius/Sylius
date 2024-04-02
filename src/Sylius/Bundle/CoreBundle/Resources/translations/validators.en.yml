@@ -93,10 +93,10 @@ sylius:
         insufficient_stock: 'Insufficient stock'
     max_integer: 'Value must be less than {{ compared_value }}.'
     order:
+        address_requirement: 'Please provide a %addressName%.'
         currency_code:
             not_valid: The currency code you entered is invalid.
         invalid_state_transition: 'Cannot complete as order is in a wrong state. Current: %currentState%. Possible transitions: %possibleTransitions%.'
-        address_requirement: 'Please provide a %addressName%.'
         payment_method_eligibility: 'This payment method %paymentMethodName% has been disabled. Please reselect your payment method.'
         product_eligibility: 'This product %productName% has been disabled.'
         shipping_method_eligibility: 'Product does not fit requirements for %shippingMethodName% shipping method. Please reselect your shipping method.'
