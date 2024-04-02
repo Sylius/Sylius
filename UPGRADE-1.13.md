@@ -790,7 +790,7 @@ and use one of the new attributes accordingly to the type of your class, e.g.:
         max_int_value: 9223372036854775807
     ```
 
-1. The `sylius_inventory.checker` parameter has been deprecated and will be removed in 2.0.
+1. The `sylius_inventory.checker` configuration node has been deprecated and will be removed in 2.0.
 
 ### State Machine
 
