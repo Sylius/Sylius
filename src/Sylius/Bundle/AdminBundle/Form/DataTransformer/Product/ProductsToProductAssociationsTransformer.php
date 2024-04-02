@@ -24,19 +24,26 @@ use Symfony\Component\Form\DataTransformerInterface;
 use Webmozart\Assert\Assert;
 
 /**
- * @implements DataTransformerInterface<Collection<ProductAssociationInterface>, Collection<ProductInterface>>
+ * @implements DataTransformerInterface<Collection<array-key, ProductAssociationInterface>, array<string, Collection<array-key, ProductInterface>>>
  */
 final class ProductsToProductAssociationsTransformer implements DataTransformerInterface
 {
     /** @var Collection<array-key, ProductAssociationInterface>|null */
     private ?Collection $productAssociations = null;
 
+    /**
+     * @param FactoryInterface<ProductAssociationInterface> $productAssociationFactory
+     * @param RepositoryInterface<ProductAssociationTypeInterface> $productAssociationTypeRepository
+     */
     public function __construct(
         private readonly FactoryInterface $productAssociationFactory,
         private readonly RepositoryInterface $productAssociationTypeRepository,
     ) {
     }
 
+    /**
+     * @return array<string, Collection<array-key, ProductInterface>>
+     */
     public function transform(mixed $value): array
     {
         $this->setProductAssociations($value);
@@ -64,7 +71,7 @@ final class ProductsToProductAssociationsTransformer implements DataTransformerI
         /** @var Collection<array-key, ProductAssociationInterface> $productAssociations */
         $productAssociations = new ArrayCollection();
         foreach ($value as $productAssociationTypeCode => $products) {
-            if (null === $products || [] === $products) {
+            if ($products->isEmpty()) {
                 continue;
             }
 
@@ -99,7 +106,7 @@ final class ProductsToProductAssociationsTransformer implements DataTransformerI
     }
 
     /**
-     * @param Collection<ProductInterface> $products
+     * @param Collection<array-key, ProductInterface> $products
      */
     private function linkProductsToAssociation(
         ProductAssociationInterface $productAssociation,
@@ -112,6 +119,9 @@ final class ProductsToProductAssociationsTransformer implements DataTransformerI
         }
     }
 
+    /**
+     * @param Collection<array-key, ProductAssociationInterface>|null $productAssociations
+     */
     private function setProductAssociations(?Collection $productAssociations): void
     {
         $this->productAssociations = $productAssociations instanceof Collection ? $productAssociations : new ArrayCollection();
