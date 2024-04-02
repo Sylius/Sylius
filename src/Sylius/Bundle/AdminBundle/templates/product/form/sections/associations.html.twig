@@ -1,4 +1,5 @@
-{% set form = hookable_data.form %}
+{% set main_hook = hook_name(hookable_data.parent_main_hook, 'associations') %}
+{% set fallback_hook = hook_name(hookable_data.parent_fallback_hook, 'associations') %}
 
 <div class="tab-pane" id="product-associations" role="tabpanel" tabindex="0">
     <div class="card mb-3">
@@ -9,7 +10,10 @@
         </div>
         <div class="card-body">
             <div class="row">
-                {{ form_row(form.associations) }}
+                {% hook [main_hook, fallback_hook] with hookable_data|merge({
+                    parent_main_hook: main_hook,
+                    parent_fallback_hook: fallback_hook,
+                }) %}
             </div>
         </div>
     </div>
