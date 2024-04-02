@@ -15,6 +15,7 @@ namespace Sylius\Behat\Page\Admin\Product;
 
 use Sylius\Behat\Page\Admin\Crud\CreatePageInterface as BaseCreatePageInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
+use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Product\Model\ProductAssociationTypeInterface;
 
@@ -59,7 +60,7 @@ interface CreateSimpleProductPageInterface extends BaseCreatePageInterface
      */
     public function associateProducts(ProductAssociationTypeInterface $productAssociationType, array $productsNames): void;
 
-    public function removeAssociatedProduct(string $productName, ProductAssociationTypeInterface $productAssociationType): void;
+    public function removeAssociatedProduct(ProductInterface $product, ProductAssociationTypeInterface $productAssociationType): void;
 
     public function activateLanguageTab(string $locale): void;
 

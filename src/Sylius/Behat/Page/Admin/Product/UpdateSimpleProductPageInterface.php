@@ -93,7 +93,7 @@ interface UpdateSimpleProductPageInterface extends BaseUpdatePageInterface
 
     public function hasAssociatedProduct(ProductInterface $product, ProductAssociationTypeInterface $productAssociationType): bool;
 
-    public function removeAssociatedProduct(string $productName, ProductAssociationTypeInterface $productAssociationType): void;
+    public function removeAssociatedProduct(ProductInterface $product, ProductAssociationTypeInterface $productAssociationType): void;
 
     public function getPricingConfigurationForChannelAndCurrencyCalculator(ChannelInterface $channel, CurrencyInterface $currency): string;
 

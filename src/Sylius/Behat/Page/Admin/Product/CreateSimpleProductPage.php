@@ -21,7 +21,6 @@ use Sylius\Behat\Service\AutocompleteHelper;
 use Sylius\Behat\Service\DriverHelper;
 use Sylius\Behat\Service\Helper\AutocompleteHelperInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
-use Sylius\Component\Product\Model\ProductAssociationTypeInterface;
 use Symfony\Component\Routing\RouterInterface;
 use Webmozart\Assert\Assert;
 
@@ -116,17 +115,6 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
         $productTaxonsCodes[] = $taxon->getCode();
 
         $productTaxonsElement->setValue(implode(',', $productTaxonsCodes));
-    }
-
-    public function removeAssociatedProduct(string $productName, ProductAssociationTypeInterface $productAssociationType): void
-    {
-        $this->clickTabIfItsNotActive('associations');
-
-        $item = $this->getElement('association_dropdown_item_selected', [
-            '%association%' => $productAssociationType->getName(),
-            '%item%' => $productName,
-        ]);
-        $item->find('css', 'i.delete')->click();
     }
 
     public function choosePricingCalculator(string $name): void
