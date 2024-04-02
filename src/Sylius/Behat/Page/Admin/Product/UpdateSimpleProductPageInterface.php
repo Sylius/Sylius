@@ -15,6 +15,7 @@ namespace Sylius\Behat\Page\Admin\Product;
 
 use Sylius\Behat\Page\Admin\Crud\UpdatePageInterface as BaseUpdatePageInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
+use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Currency\Model\CurrencyInterface;
 use Sylius\Component\Product\Model\ProductAssociationTypeInterface;
@@ -90,7 +91,7 @@ interface UpdateSimpleProductPageInterface extends BaseUpdatePageInterface
      */
     public function associateProducts(ProductAssociationTypeInterface $productAssociationType, array $productsNames): void;
 
-    public function hasAssociatedProduct(string $productName, ProductAssociationTypeInterface $productAssociationType): bool;
+    public function hasAssociatedProduct(ProductInterface $product, ProductAssociationTypeInterface $productAssociationType): bool;
 
     public function removeAssociatedProduct(string $productName, ProductAssociationTypeInterface $productAssociationType): void;
 

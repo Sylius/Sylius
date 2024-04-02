@@ -14,21 +14,34 @@ declare(strict_types=1);
 namespace Sylius\Behat\Page\Admin\Product;
 
 use Behat\Mink\Element\NodeElement;
+use Behat\Mink\Session;
 use Sylius\Behat\Behaviour\ChecksCodeImmutability;
 use Sylius\Behat\Page\Admin\Crud\UpdatePage as BaseUpdatePage;
 use Sylius\Behat\Service\AutocompleteHelper;
 use Sylius\Behat\Service\DriverHelper;
+use Sylius\Behat\Service\Helper\AutocompleteHelperInterface;
 use Sylius\Behat\Service\SlugGenerationHelper;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Currency\Model\CurrencyInterface;
 use Sylius\Component\Product\Model\ProductAssociationTypeInterface;
+use Symfony\Component\Routing\RouterInterface;
 use Webmozart\Assert\Assert;
 
 class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProductPageInterface
 {
     use ChecksCodeImmutability;
     use FormTrait;
+
+    public function __construct(
+        Session $session,
+        $minkParameters,
+        RouterInterface $router,
+        string $routeName,
+        private readonly AutocompleteHelperInterface $autocompleteHelper,
+    ) {
+        parent::__construct($session, $minkParameters, $router, $routeName);
+    }
 
     private array $imageUrls = [];
 
@@ -209,39 +222,6 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
             $this->getSession(),
             $this->getElement('slug', ['%locale%' => $locale]),
         );
-    }
-
-    public function associateProducts(ProductAssociationTypeInterface $productAssociationType, array $productsNames): void
-    {
-        $this->clickTab('associations');
-
-        $dropdown = $this->getElement('association_dropdown', [
-            '%association%' => $productAssociationType->getName(),
-        ]);
-        $dropdown->click();
-
-        foreach ($productsNames as $productName) {
-            $dropdown->waitFor(5, fn () => $this->hasElement('association_dropdown_item', [
-                '%association%' => $productAssociationType->getName(),
-                '%item%' => $productName,
-            ]));
-
-            $item = $this->getElement('association_dropdown_item', [
-                '%association%' => $productAssociationType->getName(),
-                '%item%' => $productName,
-            ]);
-            $item->click();
-        }
-    }
-
-    public function hasAssociatedProduct(string $productName, ProductAssociationTypeInterface $productAssociationType): bool
-    {
-        $this->clickTabIfItsNotActive('associations');
-
-        return $this->hasElement('association_dropdown_item', [
-            '%association%' => $productAssociationType->getName(),
-            '%item%' => $productName,
-        ]);
     }
 
     public function removeAssociatedProduct(string $productName, ProductAssociationTypeInterface $productAssociationType): void

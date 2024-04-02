@@ -17,6 +17,8 @@ use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Exception\ElementNotFoundException;
 use Sylius\Behat\Service\DriverHelper;
 use Sylius\Component\Core\Model\ChannelInterface;
+use Sylius\Component\Core\Model\ProductInterface;
+use Sylius\Component\Product\Model\ProductAssociationTypeInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 
 trait FormTrait
@@ -27,6 +29,7 @@ trait FormTrait
             'attribute_value' => '[data-test-attribute-value][data-test-locale-code="%localeCode%"][data-test-attribute-name="%attributeName%"]',
             'channel_tab' => '[data-test-channel-tab="%channelCode%"]',
             'form' => '[data-live-name-value="SyliusAdmin.Product.Form"]',
+            'field_associations' => '[name="sylius_product[associations][%association%][]"]',
             'field_name' => '[name="sylius_product[translations][%localeCode%][name]"]',
             'field_slug' => '[name="sylius_product[translations][%localeCode%][slug]"]',
             'field_price' => '[name="sylius_product[variant][channelPricings][%channelCode%][price]"]',
@@ -218,6 +221,33 @@ trait FormTrait
             $this->getElement('product_attribute_input')->getXpath(),
             $attributeName,
         );
+    }
+
+    /*
+     * Associations management
+     */
+
+    public function associateProducts(ProductAssociationTypeInterface $productAssociationType, array $productsNames): void
+    {
+        $this->changeTab('associations');
+        $associationField = $this->getElement('field_associations', ['%association%' => $productAssociationType->getCode()]);
+
+        foreach ($productsNames as $productName) {
+            $this->autocompleteHelper->select(
+                $this->getDriver(),
+                $associationField->getXpath(),
+                $productName,
+            );
+            $this->waitForFormUpdate();
+        }
+    }
+
+    public function hasAssociatedProduct(ProductInterface $product, ProductAssociationTypeInterface $productAssociationType): bool
+    {
+        $this->changeTab('associations');
+        $associationField = $this->getElement('field_associations', ['%association%' => $productAssociationType->getCode()]);
+
+        return in_array($product->getCode(), $associationField->getValue(), true);
     }
 
     /*
