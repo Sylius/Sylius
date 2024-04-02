@@ -118,29 +118,6 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
         $productTaxonsElement->setValue(implode(',', $productTaxonsCodes));
     }
 
-    public function associateProducts(ProductAssociationTypeInterface $productAssociationType, array $productsNames): void
-    {
-        $this->clickTab('associations');
-
-        $dropdown = $this->getElement('association_dropdown', [
-            '%association%' => $productAssociationType->getName(),
-        ]);
-        $dropdown->click();
-
-        foreach ($productsNames as $productName) {
-            $dropdown->waitFor(5, fn () => $this->hasElement('association_dropdown_item', [
-                '%association%' => $productAssociationType->getName(),
-                '%item%' => $productName,
-            ]));
-
-            $item = $this->getElement('association_dropdown_item', [
-                '%association%' => $productAssociationType->getName(),
-                '%item%' => $productName,
-            ]);
-            $item->click();
-        }
-    }
-
     public function removeAssociatedProduct(string $productName, ProductAssociationTypeInterface $productAssociationType): void
     {
         $this->clickTabIfItsNotActive('associations');

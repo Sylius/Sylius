@@ -1047,22 +1047,34 @@ final class ManagingProductsContext implements Context
     }
 
     /**
-     * @Then this product should( also) have an association :productAssociationType with product :productName
-     * @Then this product should( also) have an association :productAssociationType with products :firstProductName and :secondProductName
+     * @Then this product should( also) have an association :productAssociationType with product :product
      */
     public function theProductShouldHaveAnAssociationWithProducts(
         ProductAssociationTypeInterface $productAssociationType,
-        ...$productsNames,
+        ProductInterface $product,
     ) {
-        foreach ($productsNames as $productName) {
-            Assert::true(
-                $this->updateSimpleProductPage->hasAssociatedProduct($productName, $productAssociationType),
-                sprintf(
-                    'This product should have an association %s with product %s.',
-                    $productAssociationType->getName(),
-                    $productName,
-                ),
-            );
+        Assert::true(
+            $this->updateSimpleProductPage->hasAssociatedProduct($product, $productAssociationType),
+            sprintf(
+                'This product should have an association %s with product %s.',
+                $productAssociationType->getName(),
+                $product->getName(),
+            ),
+        );
+    }
+
+    /**
+     * @Then /^this product should have an (association "[^"]+") with (products "[^"]+" and "[^"]+")$/
+     *
+     * @param array<ProductInterface> $products
+     */
+    public function theProductsShouldHaveAnAssociationWithProducts(
+        ProductAssociationTypeInterface $productAssociationType,
+        array $products,
+    ): void
+    {
+        foreach ($products as $product) {
+            $this->theProductShouldHaveAnAssociationWithProducts($productAssociationType, $product);
         }
     }
 
