@@ -1,0 +1,12 @@
+# This file is part of the Sylius package.
+# (c) Sylius Sp. z o.o.
+
+sylius_payum:
+    gateway_config:
+        validation_groups:
+            paypal_express_checkout:
+                - 'sylius'
+                - 'sylius_paypal_express_checkout'
+            stripe_checkout:
+                - 'sylius'
+                - 'sylius_stripe_checkout'
