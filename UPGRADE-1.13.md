@@ -544,6 +544,10 @@ To ease the update process, we have grouped the changes into the following categ
 1. The `sylius.payum.http_client` has become a service ID of newly
    created `Sylius\Bundle\PayumBundle\HttpClient\HttpClient`.
 
+1. The argument of `Sylius\Bundle\CoreBundle\EventListener\PaymentPreCompleteListener` has been changed
+   from `Sylius\Component\Inventory\Checker\AvailabilityCheckerInterface` to `sylius.availability_checker`.
+   This is the alias to the same service.
+
 ### Configuration
 
 1. To ease customization we've introduced attributes for some services in `1.13`:
