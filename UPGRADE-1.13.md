@@ -790,6 +790,8 @@ and use one of the new attributes accordingly to the type of your class, e.g.:
         max_int_value: 9223372036854775807
     ```
 
+1. The `sylius_inventory.checker` parameter has been deprecated and will be removed in 2.0.
+
 ### State Machine
 
 1. We have configured all existing Sylius graphs to be usable with the Symfony Workflow out of the box.
