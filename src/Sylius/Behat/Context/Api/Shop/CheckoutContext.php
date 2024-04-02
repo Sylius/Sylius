@@ -817,7 +817,7 @@ final class CheckoutContext implements Context
         $this->iConfirmMyOrder();
 
         $response = $this->client->getLastResponse();
-        Assert::same($this->responseChecker->getError($response), 'An empty order cannot be completed.');
+        Assert::same($this->responseChecker->getError($response), 'An empty order cannot be processed.');
     }
 
     /**

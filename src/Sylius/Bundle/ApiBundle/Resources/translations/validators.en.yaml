@@ -19,7 +19,7 @@ sylius:
     date_time:
         invalid: 'The date time is not valid ISO 8601 date time in Y-m-d\TH:i:s format.'
     order:
-        not_empty: 'An empty order cannot be completed.'
+        not_empty: 'An empty order cannot be processed.'
     payment_method:
         cannot_change_payment_method_for_cancelled_order: 'You cannot change the payment method for a cancelled order.'
         not_available: 'The payment method %name% is not available for this order. Please choose another one.'
