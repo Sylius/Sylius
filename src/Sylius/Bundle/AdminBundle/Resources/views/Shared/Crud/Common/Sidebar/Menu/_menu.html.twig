@@ -18,7 +18,7 @@
     {# building the class of the item #}
     {%- set classes = item.attribute('class') is not empty ? [item.attribute('class')] : [] %}
     {%- if matcher.isCurrent(item) %}
-        {%- set classes = classes|merge([options.currentClass])|merge(['japierdolexd']) %}
+        {%- set classes = classes|merge([options.currentClass]) %}
     {%- elseif matcher.isAncestor(item, options.matchingDepth) %}
         {%- set classes = classes|merge([options.ancestorClass]) %}
     {%- endif %}
@@ -82,6 +82,7 @@
 
 {% block childItem %}
     {%- set classes = item.attribute('class') is not empty ? [item.attribute('class')] : [] %}
+    {%- set target = item.linkAttributes and item.linkAttributes['target'] ? item.linkAttributes['target'] : '_self' %}
     {%- if matcher.isCurrent(item) %}
         {%- set classes = classes|merge([options.currentClass]) %}
     {%- endif %}
@@ -92,8 +93,8 @@
 
     {% set isActive = matcher.isCurrent(item) %}
 
-    <a class="dropdown-item {{ isActive ? '' : 'text-muted' }} {% if attributes.class is defined %}{{ attributes.class }}{% endif %}" href="{{ item.uri }}">
-        {{ item.label|trans }}
+    <a class="dropdown-item {{ isActive ? '' : 'text-muted' }} {% if attributes.class is defined %}{{ attributes.class }}{% endif %}" href="{{ item.uri }}" target="{{ target }}">
+        {{ item.label|trans }}{% if target == '_blank' %}{{ icon({ icon: 'external-link', class: 'icon icon-tabler icon-sm ms-1 mb-2 opacity-75' }) }}{% endif %}
     </a>
 {% endblock %}
 
