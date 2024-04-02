@@ -11,6 +11,7 @@ imports:
     - { resource: "@SyliusLocaleBundle/Resources/config/app/config.yml" }
     - { resource: "@SyliusOrderBundle/Resources/config/app/config.yml" }
     - { resource: "@SyliusPaymentBundle/Resources/config/app/config.yml" }
+    - { resource: "@SyliusPayumBundle/Resources/config/app/config.yaml" }
     - { resource: "@SyliusProductBundle/Resources/config/app/config.yml" }
     - { resource: "@SyliusPromotionBundle/Resources/config/app/config.yml" }
     - { resource: "@SyliusShippingBundle/Resources/config/app/config.yml" }
@@ -100,16 +101,6 @@ liip_imagine:
         sylius_large:
             filters:
                 thumbnail: { size: [640, 480], mode: outbound }
-
-sylius_payum:
-    gateway_config:
-        validation_groups:
-            paypal_express_checkout:
-                - 'sylius'
-                - 'sylius_paypal_express_checkout'
-            stripe_checkout:
-                - 'sylius'
-                - 'sylius_stripe_checkout'
 
 payum:
     storages:
