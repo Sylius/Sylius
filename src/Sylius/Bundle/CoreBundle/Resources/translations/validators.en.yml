@@ -93,6 +93,7 @@ sylius:
         insufficient_stock: 'Insufficient stock'
     max_integer: 'Value must be less than {{ compared_value }}.'
     order:
+        address_requirement: 'Please provide a %addressName%.'
         currency_code:
             not_valid: The currency code you entered is invalid.
         invalid_state_transition: 'Cannot complete as order is in a wrong state. Current: %currentState%. Possible transitions: %possibleTransitions%.'

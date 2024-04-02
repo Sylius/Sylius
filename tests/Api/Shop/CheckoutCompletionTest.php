@@ -30,6 +30,108 @@ final class CheckoutCompletionTest extends JsonApiTestCase
     }
 
     /** @test */
+    public function it_does_not_allow_updating_without_items(): void
+    {
+        $this->loadFixturesFromFiles(['channel.yaml', 'cart.yaml']);
+
+        $tokenValue = $this->pickUpCart();
+
+        $this->client->request(
+            method: 'PUT',
+            uri: sprintf('/api/v2/shop/orders/%s', $tokenValue),
+            server: self::CONTENT_TYPE_HEADER,
+            content: json_encode([
+                'email' => 'oliver@doe.com',
+            ], \JSON_THROW_ON_ERROR),
+        );
+
+        $this->assertResponseViolations(
+            $this->client->getResponse(),
+            [
+                ['propertyPath' => '', 'message' => 'An empty order cannot be processed.'],
+            ],
+        );
+    }
+
+    /** @test */
+    public function it_does_not_allow_updating_without_require_billing_address(): void
+    {
+        $this->loadFixturesFromFiles([
+            'channel.yaml',
+            'cart.yaml',
+            'country.yaml',
+        ]);
+
+        $tokenValue = $this->pickUpCart();
+        $this->addItemToCart('MUG_BLUE', 3, $tokenValue);
+
+        $this->client->request(
+            method: 'PUT',
+            uri: sprintf('/api/v2/shop/orders/%s', $tokenValue),
+            server: self::CONTENT_TYPE_HEADER,
+            content: json_encode([
+                'email' => 'oliver@doe.com',
+                'shippingAddress' => [
+                    'firstName' => 'Oliver',
+                    'lastName' => 'Doe',
+                    'phoneNumber' => '123456789',
+                    'countryCode' => 'US',
+                    'provinceCode' => 'US-MI',
+                    'city' => 'New York',
+                    'street' => 'Broadway',
+                    'postcode' => '10001',
+                ],
+            ], \JSON_THROW_ON_ERROR),
+        );
+
+        $this->assertResponseViolations(
+            $this->client->getResponse(),
+            [
+               ['propertyPath' => '', 'message' => 'Please provide a billing address.'],
+            ]
+        );
+    }
+
+    /** @test */
+    public function it_does_not_allow_updating_without_require_shipping_address(): void
+    {
+        $this->loadFixturesFromFiles([
+            'channel.yaml',
+            'cart.yaml',
+            'country.yaml',
+        ]);
+
+        $tokenValue = $this->pickUpCart(channelCode: 'MOBILE');
+        $this->addItemToCart('MUG_BLUE', 3, $tokenValue);
+
+        $this->client->request(
+            method: 'PUT',
+            uri: sprintf('/api/v2/shop/orders/%s', $tokenValue),
+            server: self::CONTENT_TYPE_HEADER,
+            content: json_encode([
+                'email' => 'oliver@doe.com',
+                'billingAddress' => [
+                    'firstName' => 'Oliver',
+                    'lastName' => 'Doe',
+                    'phoneNumber' => '123456789',
+                    'countryCode' => 'US',
+                    'provinceCode' => 'US-MI',
+                    'city' => 'New York',
+                    'street' => 'Broadway',
+                    'postcode' => '10001',
+                ],
+            ], \JSON_THROW_ON_ERROR),
+        );
+
+        $this->assertResponseViolations(
+            $this->client->getResponse(),
+            [
+               ['propertyPath' => '', 'message' => 'Please provide a shipping address.'],
+            ]
+        );
+    }
+
+    /** @test */
     public function it_prevents_from_order_completion_if_order_is_in_the_cart_state(): void
     {
         $this->loadFixturesFromFiles(['channel.yaml', 'cart.yaml']);
