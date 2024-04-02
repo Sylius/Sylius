@@ -326,23 +326,23 @@ final class CartTest extends JsonApiTestCase
             content: json_encode([
                 'email' => 'oliver@doe.com',
                 'billingAddress' => [
-                    'firstName' => 'Oliver',
-                    'lastName' => 'Doe',
+                    'firstName' => 'Updated: Jane',
+                    'lastName' => 'Updated: Doe',
                     'phoneNumber' => '123456789',
                     'countryCode' => 'US',
                     'provinceCode' => 'US-MI',
-                    'city' => 'New York',
-                    'street' => 'Broadway',
+                    'city' => 'Updated: Nebraska',
+                    'street' => 'Updated: Top secret',
                     'postcode' => '10001',
                 ],
                 'shippingAddress' => [
-                    'firstName' => 'Oliver',
-                    'lastName' => 'Doe',
+                    'firstName' => 'Updated: Jane',
+                    'lastName' => 'Updated: Doe',
                     'phoneNumber' => '123456789',
                     'countryCode' => 'US',
                     'provinceCode' => 'US-MI',
-                    'city' => 'New York',
-                    'street' => 'New Street',
+                    'city' => 'Updated: Nebraska',
+                    'street' => 'Updated: Top secret',
                     'postcode' => '121212',
                 ],
             ], \JSON_THROW_ON_ERROR),
@@ -373,13 +373,13 @@ final class CartTest extends JsonApiTestCase
         $this->assertResponseViolations(
             $this->client->getResponse(),
             [
-                ['propertyPath' => '', 'message' => 'An empty order cannot be completed.'],
+                ['propertyPath' => '', 'message' => 'An empty order cannot be processed.'],
             ],
         );
     }
 
     /** @test */
-    public function it_does_not_allow_update_without_require_billing_address(): void
+    public function it_does_not_allow_update_without_required_billing_address(): void
     {
         $this->loadFixturesFromFiles([
             'channel.yaml',
@@ -418,7 +418,7 @@ final class CartTest extends JsonApiTestCase
     }
 
     /** @test */
-    public function it_does_not_allow_update_without_require_shipping_address(): void
+    public function it_does_not_allow_update_without_required_shipping_address(): void
     {
         $this->loadFixturesFromFiles([
             'channel.yaml',
@@ -457,7 +457,7 @@ final class CartTest extends JsonApiTestCase
     }
 
     /** @test */
-    public function it_does_not_allow_update_without_invalid_data(): void
+    public function it_does_not_allow_update_with_invalid_data(): void
     {
         $this->loadFixturesFromFiles([
             'channel.yaml',

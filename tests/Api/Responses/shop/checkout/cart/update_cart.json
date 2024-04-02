@@ -6,25 +6,25 @@
     "shippingAddress": {
         "@id": "\/api\/v2\/shop\/addresses\/@integer@",
         "@type": "Address",
-        "firstName": "Oliver",
-        "lastName": "Doe",
+        "firstName": "Updated: Jane",
+        "lastName": "Updated: Doe",
         "phoneNumber": "123456789",
         "countryCode": "US",
         "provinceCode": "US-MI",
-        "street": "New Street",
-        "city": "New York",
+        "street": "Updated: Top secret",
+        "city": "Updated: Nebraska",
         "postcode": "121212"
     },
     "billingAddress": {
         "@id": "\/api\/v2\/shop\/addresses\/@integer@",
         "@type": "Address",
-        "firstName": "Oliver",
-        "lastName": "Doe",
+        "firstName": "Updated: Jane",
+        "lastName": "Updated: Doe",
         "phoneNumber": "123456789",
         "countryCode": "US",
         "provinceCode": "US-MI",
-        "street": "Broadway",
-        "city": "New York",
+        "street": "Updated: Top secret",
+        "city": "Updated: Nebraska",
         "postcode": "10001"
     },
     "payments": [
