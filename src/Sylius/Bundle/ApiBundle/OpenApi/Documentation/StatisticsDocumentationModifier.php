@@ -22,8 +22,6 @@ use Symfony\Component\HttpFoundation\Response;
 
 final class StatisticsDocumentationModifier implements DocumentationModifierInterface
 {
-    private const PATH = '/admin/statistics';
-
     /** @param array<string, array<string, string>> $intervalsMap */
     public function __construct(
         private string $apiRoute,
@@ -82,7 +80,7 @@ final class StatisticsDocumentationModifier implements DocumentationModifierInte
             ],
         ];
 
-        $path = $this->apiRoute . self::PATH;
+        $path = sprintf('%s/admin/statistics', $this->apiRoute);
         $paths = $docs->getPaths();
         $paths->addPath($path, $this->getPathItem());
 
