@@ -78,7 +78,7 @@ class RegistrationContext implements Context
      */
     public function iSpecifyFirstOrLastNameAsTooLongValue(string $firstOrLast): void
     {
-        match($firstOrLast) {
+        match ($firstOrLast) {
             'first' => $this->registerElement->specifyFirstName(str_repeat('a', 256)),
             'last' => $this->registerElement->specifyLastName(str_repeat('a', 256)),
         };
