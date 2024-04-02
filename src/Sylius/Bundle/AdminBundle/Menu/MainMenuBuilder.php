@@ -346,6 +346,7 @@ final readonly class MainMenuBuilder
         $configuration = $menu
             ->addChild('official_support')
             ->setLabel('sylius.menu.admin.main.official_support.header')
+            ->setLabelAttribute('icon', 'info-circle')
         ;
 
         $configuration
