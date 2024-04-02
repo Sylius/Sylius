@@ -242,6 +242,18 @@ trait FormTrait
         }
     }
 
+    public function removeAssociatedProduct(ProductInterface $product, ProductAssociationTypeInterface $productAssociationType): void
+    {
+        $this->changeTab('associations');
+        $associationField = $this->getElement('field_associations', ['%association%' => $productAssociationType->getCode()]);
+
+        $this->autocompleteHelper->remove(
+            $this->getDriver(),
+            $associationField->getXpath(),
+            $product->getCode(),
+        );
+    }
+
     public function hasAssociatedProduct(ProductInterface $product, ProductAssociationTypeInterface $productAssociationType): bool
     {
         $this->changeTab('associations');

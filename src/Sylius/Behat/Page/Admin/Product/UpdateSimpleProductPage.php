@@ -24,7 +24,6 @@ use Sylius\Behat\Service\SlugGenerationHelper;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Currency\Model\CurrencyInterface;
-use Sylius\Component\Product\Model\ProductAssociationTypeInterface;
 use Symfony\Component\Routing\RouterInterface;
 use Webmozart\Assert\Assert;
 
@@ -222,20 +221,6 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
             $this->getSession(),
             $this->getElement('slug', ['%locale%' => $locale]),
         );
-    }
-
-    public function removeAssociatedProduct(string $productName, ProductAssociationTypeInterface $productAssociationType): void
-    {
-        $this->clickTabIfItsNotActive('associations');
-
-        $item = $this->getElement('association_dropdown_item_selected', [
-            '%association%' => $productAssociationType->getName(),
-            '%item%' => $productName,
-        ]);
-
-        $deleteIcon = $item->find('css', 'i.delete');
-        Assert::notNull($deleteIcon);
-        $deleteIcon->click();
     }
 
     public function getPricingConfigurationForChannelAndCurrencyCalculator(ChannelInterface $channel, CurrencyInterface $currency): string

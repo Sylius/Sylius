@@ -901,15 +901,15 @@ final class ManagingProductsContext implements Context
     }
 
     /**
-     * @When I remove an associated product :productName from :productAssociationType
+     * @When I remove an associated product :product from :productAssociationType
      */
     public function iRemoveAnAssociatedProductFromProductAssociation(
-        $productName,
+        ProductInterface $product,
         ProductAssociationTypeInterface $productAssociationType,
     ) {
         $currentPage = $this->resolveCurrentPage();
 
-        $currentPage->removeAssociatedProduct($productName, $productAssociationType);
+        $currentPage->removeAssociatedProduct($product, $productAssociationType);
     }
 
     /**
@@ -1065,6 +1065,7 @@ final class ManagingProductsContext implements Context
 
     /**
      * @Then /^this product should have an (association "[^"]+") with (products "[^"]+" and "[^"]+")$/
+     * @Then /^this product should also have an (association "[^"]+") with (products "[^"]+" and "[^"]+")$/
      *
      * @param array<ProductInterface> $products
      */
@@ -1079,13 +1080,13 @@ final class ManagingProductsContext implements Context
     }
 
     /**
-     * @Then this product should not have an association :productAssociationType with product :productName
+     * @Then this product should not have an association :productAssociationType with product :product
      */
     public function theProductShouldNotHaveAnAssociationWithProduct(
         ProductAssociationTypeInterface $productAssociationType,
-        $productName,
-    ) {
-        Assert::false($this->updateSimpleProductPage->hasAssociatedProduct($productName, $productAssociationType));
+        ProductInterface $product,
+    ): void {
+        Assert::false($this->updateSimpleProductPage->hasAssociatedProduct($product, $productAssociationType));
     }
 
     /**
