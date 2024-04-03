@@ -40,11 +40,12 @@
     ],
     "currencyCode": "USD",
     "localeCode": "en_US",
-    "checkoutState": "addressed",
-    "paymentState": "cart",
-    "shippingState": "cart",
+    "checkoutState": "completed",
+    "paymentState": "awaiting_payment",
+    "shippingState": "ready",
     "tokenValue": "nAWw2jewpA",
     "id": @integer@,
+    "number": "000000001",
     "items": [
         {
             "@id": "\/api\/v2\/shop\/order-items\/@integer@",
@@ -56,8 +57,8 @@
             "unitPrice": 2000,
             "originalUnitPrice": 2000,
             "total": 6000,
-            "subtotal": 6000,
-            "discountedUnitPrice": 2000
+            "discountedUnitPrice": 2000,
+            "subtotal": 6000
         }
     ],
     "itemsTotal": 6000,

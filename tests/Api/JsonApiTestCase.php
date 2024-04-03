@@ -124,6 +124,10 @@ abstract class JsonApiTestCase extends BaseJsonApiTestCase
      */
     protected function requestDelete(string $uri, array $queryParameters = [], array $headers = []): Crawler
     {
+        if (!empty($this->defaultGetHeaders)) {
+            $headers = array_merge($this->defaultGetHeaders, $headers);
+        }
+
         return $this->request('DELETE', $uri, $queryParameters, $headers);
     }
 
