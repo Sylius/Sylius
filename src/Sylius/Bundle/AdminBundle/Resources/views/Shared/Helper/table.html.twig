@@ -38,7 +38,7 @@
                         {{ sylius_grid_render_item_action(grid, action, row) }}
                     {% endfor %}
                 {% endset %}
-                {{ dropdown.default({ content: actions, button: { text: 'Actions' } }) }}
+                {{ dropdown.default({ content: actions, direction: 'down-end', button: { text: 'Actions', class: 'dropdown-static' } }) }}
             </td>
         {% endif %}
     </tr>

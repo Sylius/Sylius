@@ -18,10 +18,9 @@ import './scripts/statistics_chart';
 import './scripts/sticky-header';
 import './scripts/tree';
 
-import * as bootstrap from 'bootstrap'
+import './scripts/bootstrap';
+
 import './images/loader.gif';
 import './images/no_data.svg';
 import './images/sylius-logo.svg';
 import './images/sylius-logo-dark-text.png';
-
-window.bootstrap = bootstrap;
