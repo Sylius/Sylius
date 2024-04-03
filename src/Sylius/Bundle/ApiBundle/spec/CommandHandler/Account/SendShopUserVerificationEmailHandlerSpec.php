@@ -15,7 +15,7 @@ namespace spec\Sylius\Bundle\ApiBundle\CommandHandler\Account;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Bundle\ApiBundle\Command\Account\SendAccountVerificationEmail;
+use Sylius\Bundle\ApiBundle\Command\Account\SendShopUserVerificationEmail;
 use Sylius\Bundle\ApiBundle\Exception\ChannelNotFoundException;
 use Sylius\Bundle\ApiBundle\Exception\UserNotFoundException;
 use Sylius\Bundle\CoreBundle\Mailer\AccountVerificationEmailManagerInterface;
@@ -24,7 +24,7 @@ use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
 
-final class SendAccountVerificationEmailHandlerSpec extends ObjectBehavior
+final class SendShopUserVerificationEmailHandlerSpec extends ObjectBehavior
 {
     function let(
         UserRepositoryInterface $shopUserRepository,
@@ -51,7 +51,7 @@ final class SendAccountVerificationEmailHandlerSpec extends ObjectBehavior
             ->shouldBeCalled()
         ;
 
-        $this(new SendAccountVerificationEmail('shop@example.com', 'en_US', 'WEB'));
+        $this(new SendShopUserVerificationEmail('shop@example.com', 'en_US', 'WEB'));
     }
 
     function it_throws_an_exception_if_user_has_not_been_found(
@@ -67,7 +67,7 @@ final class SendAccountVerificationEmailHandlerSpec extends ObjectBehavior
             ->shouldThrow(UserNotFoundException::class)
             ->during(
                 '__invoke',
-                [new SendAccountVerificationEmail('shop@example.com', 'en_US', 'WEB')],
+                [new SendShopUserVerificationEmail('shop@example.com', 'en_US', 'WEB')],
             );
     }
 
@@ -85,7 +85,7 @@ final class SendAccountVerificationEmailHandlerSpec extends ObjectBehavior
             ->shouldThrow(ChannelNotFoundException::class)
             ->during(
                 '__invoke',
-                [new SendAccountVerificationEmail('shop@example.com', 'en_US', 'WEB')],
+                [new SendShopUserVerificationEmail('shop@example.com', 'en_US', 'WEB')],
             );
     }
 }
