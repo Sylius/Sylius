@@ -6,28 +6,26 @@
     "shippingAddress": {
         "@id": "\/api\/v2\/shop\/addresses\/@integer@",
         "@type": "Address",
-        "firstName": "Jane",
-        "lastName": "Doe",
-        "phoneNumber": "666111333",
-        "company": "Potato Corp.",
+        "firstName": "Updated: Jane",
+        "lastName": "Updated: Doe",
+        "phoneNumber": "123456789",
         "countryCode": "US",
         "provinceCode": "US-MI",
-        "street": "Top secret",
-        "city": "Nebraska",
-        "postcode": "12343"
+        "street": "Updated: Top secret",
+        "city": "Updated: Nebraska",
+        "postcode": "121212"
     },
     "billingAddress": {
         "@id": "\/api\/v2\/shop\/addresses\/@integer@",
         "@type": "Address",
-        "firstName": "Jane",
-        "lastName": "Doe",
-        "phoneNumber": "666111333",
-        "company": "Potato Corp.",
+        "firstName": "Updated: Jane",
+        "lastName": "Updated: Doe",
+        "phoneNumber": "123456789",
         "countryCode": "US",
         "provinceCode": "US-MI",
-        "street": "Top secret",
-        "city": "Nebraska",
-        "postcode": "12343"
+        "street": "Updated: Top secret",
+        "city": "Updated: Nebraska",
+        "postcode": "10001"
     },
     "payments": [
         {

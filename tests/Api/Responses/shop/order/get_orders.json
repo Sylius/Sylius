@@ -1,0 +1,30 @@
+{
+    "@context": "\/api\/v2\/contexts\/Order",
+    "@id": "\/api\/v2\/shop\/orders",
+    "@type": "hydra:Collection",
+    "hydra:member": [
+        {
+            "@id": "\/api\/v2\/shop\/orders\/nAWw2jewpA",
+            "@type": "Order",
+            "channel": "\/api\/v2\/shop\/channels\/WEB",
+            "tokenValue": "nAWw2jewpA",
+            "id": @integer@,
+            "number": "000000001",
+            "itemsTotal": 6000,
+            "state": "new",
+            "itemsSubtotal": 6000
+        },
+        {
+            "@id": "\/api\/v2\/shop\/orders\/nAWw2jewpB",
+            "@type": "Order",
+            "channel": "\/api\/v2\/shop\/channels\/WEB",
+            "tokenValue": "nAWw2jewpB",
+            "id": @integer@,
+            "number": "000000002",
+            "itemsTotal": 6000,
+            "state": "new",
+            "itemsSubtotal": 6000
+        }
+    ],
+    "hydra:totalItems": 2
+}

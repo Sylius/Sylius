@@ -1,0 +1,64 @@
+{
+    "@context": "\/api\/v2\/contexts\/Order",
+    "@id": "\/api\/v2\/shop\/orders\/nAWw2jewpA",
+    "@type": "Order",
+    "shippingAddress": {
+        "@id": "\/api\/v2\/shop\/addresses\/@integer@",
+        "@type": "Address",
+        "firstName": "John",
+        "lastName": "Doe",
+        "countryCode": "US",
+        "street": "Avenue",
+        "city": "New York",
+        "postcode": "90000"
+    },
+    "billingAddress": {
+        "@id": "\/api\/v2\/shop\/addresses\/@integer@",
+        "@type": "Address",
+        "firstName": "John",
+        "lastName": "Doe",
+        "countryCode": "US",
+        "street": "Avenue",
+        "city": "New York",
+        "postcode": "90000"
+    },
+    "payments": [
+        {
+            "@id": "\/api\/v2\/shop\/payments\/@integer@",
+            "@type": "Payment",
+            "method": "\/api\/v2\/shop\/payment-methods\/BANK_TRANSFER"
+        }
+    ],
+    "shipments": [
+        {
+            "@id": "\/api\/v2\/shop\/shipments\/@integer@",
+            "@type": "Shipment",
+            "method": "\/api\/v2\/shop\/shipping-methods\/UPS"
+        }
+    ],
+    "localeCode": "en_US",
+    "checkoutState": "completed",
+    "tokenValue": "nAWw2jewpA",
+    "id": @integer@,
+    "number": "000000001",
+    "items": [
+        {
+            "@id": "\/api\/v2\/shop\/order-items\/@integer@",
+            "@type": "OrderItem",
+            "variant": "\/api\/v2\/shop\/product-variants\/MUG_BLUE",
+            "productName": "Mug",
+            "id": @integer@,
+            "quantity": 3
+        }
+    ],
+    "itemsTotal": 6000,
+    "total": 6500,
+    "itemsSubtotal": 6000,
+    "taxTotal": 0,
+    "shippingTaxTotal": 500,
+    "taxExcludedTotal": 0,
+    "taxIncludedTotal": 0,
+    "shippingTotal": 500,
+    "orderPromotionTotal": 0,
+    "shippingPromotionTotal": 0
+}
