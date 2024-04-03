@@ -11,6 +11,7 @@ How to install Sylius Plus modules?
 Sylius Plus modules are the Sylius plugins (so the Symfony bundles), which need to be defined in your composer.json file as described below:
 
 .. code-block:: json
+
     {
         "require": {
             "sylius/customer-service-plugin": "^0.2.0",
@@ -32,13 +33,14 @@ Sylius Plus modules are the Sylius plugins (so the Symfony bundles), which need 
 
 Since all Sylius Plus modules are private packages, you need to configure the private packagist repository. You'll receive the repository URL from our sales.
 
-Enabling Sylius Plus token on Platform.sh
------------------------------------------
+Enabling Sylius Plus token on Sylius Cloud
+------------------------------------------
 
-Along with the repository URL you'll receive an authentication token, which is needed to be configured in your Platform.sh environment. It can't be hardcoded into `composer.json` file
+Along with the repository URL you'll receive an authentication token, which is needed to be configured in your Sylius Cloud environment. It can't be hardcoded into `composer.json` file
 as it is a very sensitive information. The best way is to configure it by creating an environment variable, which is automatically read by composer:
 
 .. code-block:: bash
+
     platform variable:create --level project --name env:COMPOSER_AUTH \
         --json true --visible-runtime false --sensitive true --visible-build true \
         --value '{"http-basic": {"repo.packagist.com": {"username": "token", "password": "<YOUR_TOKEN>"}}'
