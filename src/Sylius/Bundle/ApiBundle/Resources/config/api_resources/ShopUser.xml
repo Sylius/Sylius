@@ -21,7 +21,6 @@
         <itemOperations>
             <itemOperation name="admin_get">
                 <attribute name="method">GET</attribute>
-                <attribute name="enabled">false</attribute>
                 <attribute name="controller">ApiPlatform\Core\Action\NotFoundAction</attribute>
                 <attribute name="read">false</attribute>
                 <attribute name="output">false</attribute>
