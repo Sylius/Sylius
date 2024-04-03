@@ -18,7 +18,6 @@ use ApiPlatform\OpenApi\OpenApi;
 
 final class OrderAdjustmentsTypeDocumentationModifier implements DocumentationModifierInterface
 {
-
     public function __construct(private string $apiRoute, private string $adjustmentResourceClass)
     {
     }
