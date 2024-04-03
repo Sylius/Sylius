@@ -13,7 +13,8 @@ declare(strict_types=1);
 
 namespace spec\Sylius\Bundle\ApiBundle\Doctrine\QueryExtension;
 
-use ApiPlatform\Core\Bridge\Doctrine\Orm\Util\QueryNameGeneratorInterface;
+use ApiPlatform\Doctrine\Orm\Util\QueryNameGeneratorInterface;
+use ApiPlatform\Metadata\Get;
 use Doctrine\DBAL\ArrayParameterType;
 use Doctrine\ORM\Query\Expr;
 use Doctrine\ORM\QueryBuilder;
@@ -45,8 +46,7 @@ final class OrderExtensionSpec extends ObjectBehavior
             $queryBuilder,
             $queryNameGenerator,
             OrderInterface::class,
-            Request::METHOD_GET,
-            [],
+            new Get(name: Request::METHOD_GET),
         );
     }
 
@@ -65,8 +65,7 @@ final class OrderExtensionSpec extends ObjectBehavior
             $queryNameGenerator,
             OrderInterface::class,
             [],
-            Request::METHOD_GET,
-            [],
+            new Get(name: Request::METHOD_GET),
         );
     }
 
@@ -93,7 +92,7 @@ final class OrderExtensionSpec extends ObjectBehavior
             $queryBuilder,
             $queryNameGenerator,
             OrderInterface::class,
-            Request::METHOD_GET,
+            new Get(name: Request::METHOD_GET),
         );
     }
 
@@ -123,7 +122,7 @@ final class OrderExtensionSpec extends ObjectBehavior
             $queryNameGenerator,
             OrderInterface::class,
             [],
-            Request::METHOD_GET,
+            new Get(name: Request::METHOD_GET),
         );
     }
 }
