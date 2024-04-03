@@ -3,19 +3,6 @@ The Cookbook
 
 The Sylius Cookbook is a collection of solution articles helping you with some specific, narrow problems.
 
-<<<<<<< Updated upstream
-=======
-CLI
----
-
-.. toctree::
-    :hidden:
-
-    cli/handle-multiple-channels-in-cli
-
-.. include:: /cookbook/cli/map.rst.inc
-
->>>>>>> Stashed changes
 Entities
 --------
 
@@ -197,16 +184,18 @@ API
 
 .. include:: /cookbook/api/map.rst.inc
 
-Sylius Cloud on Platform.sh
----
+Sylius Cloud
+------------
 
 .. toctree::
     :hidden:
 
-    platform-sh-cloud/introduction-to-sylius-cloud-on-platform-sh
-    platform-sh-cloud/basic-project-setup
-    platform-sh-cloud/sylius-plus
-    platform-sh-cloud/environment-configuration
-    platform-sh-cloud/cloud-management-basics
+    sylius-cloud/introduction-to-sylius-cloud
+    sylius-cloud/dictionary
+    sylius-cloud/basic-project-setup
+    sylius-cloud/sylius-plus
+    sylius-cloud/environment-configuration
+    sylius-cloud/cloud-management-basics
+    sylius-cloud/troubleshooting
 
-.. include:: /cookbook/platform-sh-cloud/map.rst.inc
+.. include:: /cookbook/sylius-cloud/map.rst.inc
