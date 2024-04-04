@@ -2,16 +2,18 @@
     {% import _self as macros %}
 
     {% if taxon.enabledChildren|length > 0 %}
-        <div {{ sylius_test_html_attribute('menu-item', taxon.name) }}>
-            <span>{{ taxon.name }}</span>
-            <div>
+        <div class="nav-item dropdown" {{ sylius_test_html_attribute('menu-item', taxon.name) }}>
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                {{ taxon.name }}
+            </a>
+            <div class="dropdown-menu">
                 {% for childTaxon in taxon.enabledChildren %}
                     {{ macros.item(childTaxon) }}
                 {% endfor %}
             </div>
         </div>
     {% else %}
-        <a href="{{ path('sylius_shop_product_index', {'slug': taxon.slug, '_locale': taxon.translation.locale}) }}" {{ sylius_test_html_attribute('menu-item', taxon.name) }}>
+        <a class="nav-link" href="{{ path('sylius_shop_product_index', {'slug': taxon.slug, '_locale': taxon.translation.locale}) }}" {{ sylius_test_html_attribute('menu-item', taxon.name) }}>
             {{ taxon.name }}
         </a>
     {% endif %}
@@ -20,9 +22,18 @@
 {% import _self as macros %}
 
 {% if taxons|length > 0 %}
-    <div {{ sylius_test_html_attribute('menu') }}>
-        {% for taxon in taxons %}
-            {{ macros.item(taxon) }}
-        {% endfor %}
-    </div>
+    <nav class="navbar navbar-expand-lg p-0">
+        <div class="container">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+                <div class="navbar-nav" {{ sylius_test_html_attribute('menu') }}>
+                    {% for taxon in taxons %}
+                        {{ macros.item(taxon) }}
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </nav>
 {% endif %}
