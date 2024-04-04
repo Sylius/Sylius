@@ -2,10 +2,14 @@ twig_hooks:
     hooks:
         'sylius_admin.shipping_method.update.content':
             form:
-                template: '@SyliusAdmin/ShippingMethod/form.html.twig'
+                component: 'SyliusAdmin.ShippingMethod.Form'
+                data:
+                    form: '@=form'
+                    resource: '@=resource'
+                    parentMainHook: '@=parent_main_hook'
+                    parentFallbackHook: '@=parent_fallback_hook'
                 configuration:
                     method: PUT
-                    render_rest: false
 
         'sylius_admin.shipping_method.update.content.form#left':
             details:
