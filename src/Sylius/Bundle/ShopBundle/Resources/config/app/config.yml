@@ -675,25 +675,14 @@ sylius_ui:
 
         sylius.shop.layout.footer:
             blocks:
-                grid:
-                    template: "@SyliusShop/Layout/Footer/_grid.html.twig"
-                    priority: 20
                 content:
-                    template: "@SyliusShop/Layout/Footer/_content.html.twig"
+                    template: "@SyliusShop/Layout/_footer.html.twig"
                     priority: 10
                 after_legacy:
                     template: "@SyliusUi/Block/_legacySonataEvent.html.twig"
                     priority: 5
                     context:
                         event: sylius.shop.layout.after_footer
-
-        sylius.shop.layout.footer.grid:
-            blocks:
-                before_legacy:
-                    template: "@SyliusUi/Block/_legacySonataEvent.html.twig"
-                    priority: 45
-                    context:
-                        event: sylius.shop.layout.before_footer
 
         sylius.shop.layout.header.grid:
             blocks:
