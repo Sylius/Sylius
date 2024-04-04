@@ -45,7 +45,7 @@
             {{ sylius_template_event('sylius.shop.layout.after_content') }}
 
             {% block footer %}
-                {% include '@SyliusShop/_footer.html.twig' %}
+                {{ sylius_template_event('sylius.shop.layout.footer') }}
             {% endblock %}
         </div>
 
