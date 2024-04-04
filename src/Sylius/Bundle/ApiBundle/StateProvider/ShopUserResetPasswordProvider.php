@@ -34,7 +34,7 @@ final readonly class ShopUserResetPasswordProvider implements ProviderInterface
         Assert::same($operation->getClass(), ResetPassword::class);
 
         if ($operation instanceof Patch) {
-            return new ResetPassword($uriVariables['resetPasswordToken']);
+            return new ResetPassword($uriVariables['token']);
         }
 
         throw new \RuntimeException('Only PATCH operation is supported.');
