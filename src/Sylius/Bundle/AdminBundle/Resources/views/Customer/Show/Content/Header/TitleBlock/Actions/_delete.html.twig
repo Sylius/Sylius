@@ -1,0 +1,11 @@
+{% from '@SyliusAdmin/Shared/Helper/icon.html.twig' import icon as _icon %}
+
+{% if hookable_data.user != null %}
+    <form action="{{ path('sylius_admin_shop_user_delete', {'id': hookable_data.user.id}) }}" method="POST">
+        <input type="hidden" name="_method" value="DELETE" />
+        <button type="submit" class="dropdown-item">
+            {{ _icon({ icon: 'trash-x', class: 'icon dropdown-item-icon icon-tabler' }) }}
+            {{ 'sylius.ui.delete'|trans }}
+        </button>
+    </form>
+{% endif %}

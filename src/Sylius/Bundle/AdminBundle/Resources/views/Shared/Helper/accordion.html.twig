@@ -1,8 +1,8 @@
-{% macro default(items, open = false, autoClose = null) %}
+{% macro default(items, open = false, autoClose = null, flush = false) %}
     {% set autoClose = autoClose|default(true) %}
     {% set id = id|default(random()) %}
 
-    <div class="accordion" id="{{ id }}">
+    <div class="accordion{% if flush %} accordion-flush{% endif %}" id="{{ id }}">
         {% for item in items %}
             {% set item = {
                 'open': open,

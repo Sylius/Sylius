@@ -1,0 +1,8 @@
+{% from '@SyliusAdmin/Shared/Helper/icon.html.twig' import icon as _icon %}
+
+{% if hookable_data.user != null %}
+    <a class="dropdown-item" href="{{ path('sylius_admin_impersonate_user', {'username': hookable_data.user.username}) }}">
+        {{ _icon({ icon: 'spy', class: 'icon dropdown-item-icon icon-tabler' }) }}
+        {{ 'sylius.ui.impersonate'|trans }}
+    </a>
+{% endif %}

@@ -12,6 +12,7 @@
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
         <defaults autoconfigure="true" />
+
         <service id="Sylius\Bundle\AdminBundle\TwigComponent\Dashboard\StatisticsComponent">
             <argument type="service" id="sylius.repository.channel" />
             <argument type="service" id="Sylius\Bundle\AdminBundle\Provider\StatisticsDataProviderInterface" />
@@ -74,6 +75,11 @@
         <service id="Sylius\Bundle\AdminBundle\TwigComponent\Order\OrderType">
             <argument type="service" id="form.factory" />
             <argument>Sylius\Bundle\OrderBundle\Form\Type\OrderType</argument>
+        </service>
+
+        <service id="Sylius\Bundle\AdminBundle\TwigComponent\Customer\OrderStatistics">
+            <argument type="service" id="sylius.repository.customer" />
+            <argument type="service" id="sylius.customer_statistics_provider" />
         </service>
     </services>
 </container>

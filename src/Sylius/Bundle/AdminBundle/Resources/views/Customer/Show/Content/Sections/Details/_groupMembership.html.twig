@@ -1,0 +1,10 @@
+<div class="row">
+    <div class="col-12 col-md-4 fw-bold">{{ 'sylius.ui.group_membership'|trans }}</div>
+    <div class="col-12 col-md-8">
+        {% if hookable_data.customer.group is not empty %}
+            {{ hookable_data.customer.group.name }}
+        {% else %}
+            -
+        {% endif %}
+    </div>
+</div>
