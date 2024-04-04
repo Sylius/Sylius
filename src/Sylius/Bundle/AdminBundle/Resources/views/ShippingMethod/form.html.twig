@@ -1,0 +1,36 @@
+{% set main_hook = hook_name(hookable_data.parent_main_hook, 'form') %}
+{% set fallback_hook = hook_name(hookable_data.parent_fallback_hook, 'form') %}
+{% set form = hookable_data.form %}
+
+{% form_theme form '@SyliusAdmin/Shared/form_theme.html.twig' %}
+
+<div class="container-xl">
+    {{ form_start(form, {'attr': {'class': 'ui loadable form', 'novalidate': 'novalidate', 'id': form.vars.id}}) }}
+    <div class="row">
+        {% if hookable_configuration.method is defined %}
+            <input type="hidden" name="_method" value="{{ hookable_configuration.method }}" />
+        {% endif %}
+        {{ form_errors(form) }}
+        {{ form_widget(form._token) }}
+
+        {% hook [main_hook, fallback_hook] with hookable_data|merge({
+            parent_main_hook: main_hook,
+            parent_fallback_hook: fallback_hook,
+        }) %}
+    </div>
+    <div class="row">
+        <div class="col-6">
+            {% hook [main_hook ~ '#left', fallback_hook] with hookable_data|merge({
+                parent_main_hook: main_hook,
+                parent_fallback_hook: fallback_hook,
+            }) %}
+        </div>
+        <div class="col-6">
+            {% hook [main_hook ~ '#right', fallback_hook] with hookable_data|merge({
+                parent_main_hook: main_hook,
+                parent_fallback_hook: fallback_hook,
+            }) %}
+        </div>
+    </div>
+    {{ form_end(form, {render_rest: hookable.configuration.render_rest|default(false)}) }}
+</div>

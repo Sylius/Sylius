@@ -1,0 +1,60 @@
+twig_hooks:
+    hooks:
+        'sylius_admin.shipping_method.update.content':
+            form:
+                template: '@SyliusAdmin/ShippingMethod/form.html.twig'
+                configuration:
+                    method: PUT
+                    render_rest: false
+
+        'sylius_admin.shipping_method.update.content.form#left':
+            details:
+                template: '@SyliusAdmin/ShippingMethod/Form/details.html.twig'
+            availability:
+                template: '@SyliusAdmin/ShippingMethod/Form/availability.html.twig'
+            category_requirements:
+                template: '@SyliusAdmin/ShippingMethod/Form/category_requirements.html.twig'
+            taxes:
+                template: '@SyliusAdmin/ShippingMethod/Form/taxes.html.twig'
+            shipping_charges:
+                template: '@SyliusAdmin/ShippingMethod/Form/shipping_charges.html.twig'
+            rules:
+                template: '@SyliusAdmin/ShippingMethod/Form/rules.html.twig'
+
+        'sylius_admin.shipping_method.update.content.form#right':
+            translations:
+                template: '@SyliusAdmin/ShippingMethod/Form/translations.html.twig'
+
+        'sylius_admin.shipping_method.update.content.form.details':
+            code:
+                template: '@SyliusAdmin/ShippingMethod/Form/Details/code.html.twig'
+            zone:
+                template: '@SyliusAdmin/ShippingMethod/Form/Details/zone.html.twig'
+            position:
+                template: '@SyliusAdmin/ShippingMethod/Form/Details/position.html.twig'
+            enabled:
+                template: '@SyliusAdmin/ShippingMethod/Form/Details/enabled.html.twig'
+
+        'sylius_admin.shipping_method.update.content.form.availability':
+            channels:
+                template: '@SyliusAdmin/ShippingMethod/Form/Availability/channels.html.twig'
+
+        'sylius_admin.shipping_method.update.content.form.category_requirements':
+            category:
+                template: '@SyliusAdmin/ShippingMethod/Form/CategoryRequirements/category.html.twig'
+            category_requirement:
+                template: '@SyliusAdmin/ShippingMethod/Form/CategoryRequirements/category_requirement.html.twig'
+                
+        'sylius_admin.shipping_method.update.content.form.taxes':
+            tax_category:
+                template: '@SyliusAdmin/ShippingMethod/Form/Taxes/tax_category.html.twig'
+                
+        'sylius_admin.shipping_method.update.content.form.shipping_charges':
+            calculator:
+                template: '@SyliusAdmin/ShippingMethod/Form/ShippingCharges/calculator.html.twig'
+            configuration:
+                template: '@SyliusAdmin/ShippingMethod/Form/ShippingCharges/configuration.html.twig'
+        
+        'sylius_admin.shipping_method.update.content.form.rules':
+            rules:
+                template: '@SyliusAdmin/ShippingMethod/Form/Rules/rules.html.twig' 
