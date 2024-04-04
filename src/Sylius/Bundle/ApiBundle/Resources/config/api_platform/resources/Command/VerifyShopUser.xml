@@ -36,7 +36,7 @@
             <operation
                 name="shop_request_shop_user_verification"
                 class="ApiPlatform\Metadata\Post"
-                uriTemplate="/shop/verify-shop-user"
+                uriTemplate="/shop/customers/verify"
                 input="Sylius\Bundle\ApiBundle\Command\Account\RequestShopUserVerification"
                 security="is_granted('ROLE_USER')"
             >
@@ -44,7 +44,7 @@
                     <values>
                         <value name="groups">
                             <values>
-                                <value>shop:shop_user_verification:create</value>
+                                <value>sylius:shop:shop_user_verification:create</value>
                             </values>
                         </value>
                     </values>
@@ -59,7 +59,7 @@
             <operation
                 name="shop_verify_shop_user"
                 class="ApiPlatform\Metadata\Patch"
-                uriTemplate="/shop/verify-shop-user/{token}"
+                uriTemplate="/shop/customers/verify/{token}"
                 input="Sylius\Bundle\ApiBundle\Command\Account\VerifyShopUser"
                 provider="Sylius\Bundle\ApiBundle\StateProvider\Input\VerifyShopUserStateProvider"
             >
@@ -67,7 +67,7 @@
                     <values>
                         <value name="groups">
                             <values>
-                                <value>shop:shop_user_verification:update</value>
+                                <value>sylius:shop:shop_user_verification:update</value>
                             </values>
                         </value>
                     </values>

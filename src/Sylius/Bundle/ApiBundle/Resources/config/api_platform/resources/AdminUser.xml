@@ -36,7 +36,7 @@
                     <values>
                         <value name="groups">
                             <values>
-                                <value>admin:admin_user:read</value>
+                                <value>sylius:admin:admin_user:show</value>
                             </values>
                         </value>
                     </values>

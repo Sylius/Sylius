@@ -68,10 +68,10 @@
 <!--            <tag name="api_platform.doctrine.orm.query_extension.collection" />-->
 <!--        </service>-->
 
-<!--        <service id="Sylius\Bundle\ApiBundle\Doctrine\QueryCollectionExtension\CountryCollectionExtension">-->
-<!--            <argument type="service" id="Sylius\Bundle\ApiBundle\Context\UserContextInterface" />-->
-<!--            <tag name="api_platform.doctrine.orm.query_extension.collection" />-->
-<!--        </service>-->
+        <service id="Sylius\Bundle\ApiBundle\Doctrine\QueryCollectionExtension\CountryCollectionExtension">
+            <argument type="service" id="Sylius\Bundle\ApiBundle\Context\UserContextInterface" />
+            <tag name="api_platform.doctrine.orm.query_extension.collection" />
+        </service>
 
 <!--        <service id="Sylius\Bundle\ApiBundle\Doctrine\QueryCollectionExtension\TaxonCollectionExtension">-->
 <!--            <argument type="service" id="Sylius\Bundle\ApiBundle\Context\UserContextInterface" />-->

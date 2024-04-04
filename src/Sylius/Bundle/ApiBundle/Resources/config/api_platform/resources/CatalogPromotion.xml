@@ -33,7 +33,7 @@
                     <values>
                         <value name="groups">
                             <values>
-                                <value>admin:catalog_promotion:read</value>
+                                <value>sylius:admin:catalog_promotion:show</value>
                             </values>
                         </value>
                     </values>
@@ -45,7 +45,7 @@
                     <values>
                         <value name="groups">
                             <values>
-                                <value>admin:catalog_promotion:read</value>
+                                <value>sylius:admin:catalog_promotion:index</value>
                             </values>
                         </value>
                     </values>
@@ -69,7 +69,7 @@
                     <values>
                         <value name="groups">
                             <values>
-                                <value>admin:catalog_promotion:create</value>
+                                <value>sylius:admin:catalog_promotion:create</value>
                             </values>
                         </value>
                     </values>
@@ -78,7 +78,7 @@
                     <values>
                         <value name="groups">
                             <values>
-                                <value>admin:catalog_promotion:read</value>
+                                <value>sylius:admin:catalog_promotion:show</value>
                             </values>
                         </value>
                     </values>
@@ -119,7 +119,7 @@ Example configuration for `percentage_discount` action type:
                     <values>
                         <value name="groups">
                             <values>
-                                <value>admin:catalog_promotion:update</value>
+                                <value>sylius:admin:catalog_promotion:update</value>
                             </values>
                         </value>
                     </values>
@@ -128,7 +128,7 @@ Example configuration for `percentage_discount` action type:
                     <values>
                         <value name="groups">
                             <values>
-                                <value>admin:catalog_promotion:read</value>
+                                <value>sylius:admin:catalog_promotion:show</value>
                             </values>
                         </value>
                     </values>
@@ -182,7 +182,7 @@ Example configuration for `percentage_discount` action type:
                     <values>
                         <value name="groups">
                             <values>
-                                <value>shop:catalog_promotion:read</value>
+                                <value>sylius:shop:catalog_promotion:show</value>
                             </values>
                         </value>
                     </values>

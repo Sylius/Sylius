@@ -33,7 +33,7 @@
                     <values>
                         <value name="groups">
                             <values>
-                                <value>admin:channel:read</value>
+                                <value>sylius:admin:channel:show</value>
                             </values>
                         </value>
                     </values>

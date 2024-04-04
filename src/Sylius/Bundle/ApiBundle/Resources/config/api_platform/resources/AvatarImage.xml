@@ -37,7 +37,7 @@
                     <values>
                         <value name="groups">
                             <values>
-                                <value>admin:avatar_image:read</value>
+                                <value>sylius:admin:avatar_image:show</value>
                             </values>
                         </value>
                     </values>
@@ -53,7 +53,7 @@
                     <values>
                         <value name="groups">
                             <values>
-                                <value>admin:avatar_image:read</value>
+                                <value>sylius:admin:avatar_image:show</value>
                             </values>
                         </value>
                     </values>
