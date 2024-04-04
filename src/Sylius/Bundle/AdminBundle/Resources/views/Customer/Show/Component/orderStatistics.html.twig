@@ -29,7 +29,7 @@
                                         </div>
                                         <div class="col">
                                             <div>{{ 'sylius.ui.orders'|trans }}</div>
-                                            <div class="h2 mb-0 me-2">{{ channelStatistics.ordersCount }}</div>
+                                            <div class="h2 mb-0 me-2" {{ sylius_test_html_attribute('customer-statistics-' ~ channel.code ~ '-orders-count') }}>{{ channelStatistics.ordersCount }}</div>
                                         </div>
                                     </div>
                                 </div>
@@ -46,7 +46,7 @@
                                         </div>
                                         <div class="col">
                                             <div>{{ 'sylius.ui.total_value_of_orders'|trans }}</div>
-                                            <div class="h2 mb-0 me-2">{{ _money(channelStatistics.ordersValue, channel.baseCurrency.code) }}</div>
+                                            <div class="h2 mb-0 me-2" {{ sylius_test_html_attribute('customer-statistics-' ~ channel.code ~ '-orders-total') }}>{{ _money(channelStatistics.ordersValue, channel.baseCurrency.code) }}</div>
                                         </div>
                                     </div>
                                 </div>
@@ -63,7 +63,7 @@
                                         </div>
                                         <div class="col">
                                             <div>{{ 'sylius.ui.average_order_value'|trans }}</div>
-                                            <div class="h2 mb-0 me-2">{{ _money(channelStatistics.averageOrderValue, channel.baseCurrency.code) }}</div>
+                                            <div class="h2 mb-0 me-2" {{ sylius_test_html_attribute('customer-statistics-' ~ channel.code ~ '-orders-average') }}>{{ _money(channelStatistics.averageOrderValue, channel.baseCurrency.code) }}</div>
                                         </div>
                                     </div>
                                 </div>
@@ -79,7 +79,7 @@
             {% if items is not empty %}
                 {{ _accordion(items, false, null, true) }}
             {% else %}
-                <div class="h3 text-muted">{{ 'sylius.ui.there_are_no_orders_for_this_customer_to_display'|trans }}</div>
+                <div class="h3 text-muted" {{ sylius_test_html_attribute('customer-statistics-no-orders') }}>{{ 'sylius.ui.there_are_no_orders_for_this_customer_to_display'|trans }}</div>
             {% endif %}
         </div>
     </div>

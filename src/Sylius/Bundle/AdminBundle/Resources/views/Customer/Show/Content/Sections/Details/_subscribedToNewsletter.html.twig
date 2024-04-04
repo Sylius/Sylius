@@ -2,7 +2,7 @@
 
 <div class="row">
     <div class="col-12 col-md-4 fw-bold">{{ 'sylius.ui.subscribed_to_newsletter'|trans }}</div>
-    <div class="col-12 col-md-8">
+    <div class="col-12 col-md-8" {{ sylius_test_html_attribute('customer-subscribed-to-newsletter') }}>
         <span>
             {% if hookable_data.customer.subscribedToNewsletter %}
                 {{ _icon({icon: 'check', class: 'icon text-green'}) }}

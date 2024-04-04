@@ -326,6 +326,7 @@
             <argument type="service" id="sylius.behat.page.admin.dashboard" />
             <argument type="service" id="sylius.behat.page.shop.home" />
             <argument type="service" id="sylius.behat.page.admin.impersonate_user" />
+            <argument type="service" id="sylius.behat.notification_checker.admin" />
         </service>
 
         <service id="Sylius\Behat\Context\Ui\Admin\RemovingProductContext">
