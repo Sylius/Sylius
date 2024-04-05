@@ -14,12 +14,12 @@ Feature: Managing themes per channel
         When I create a new channel "Poland"
         Then that channel should not use any theme
 
-    @todo @ui @no-api
+    @ui @no-api
     Scenario: Setting a theme on a channel
         When I set "United States" channel theme to "maverick/meerkat"
         Then that channel should use that theme
 
-    @todo @ui @no-api
+    @ui @no-api
     Scenario: Unsetting a channel theme
         Given channel "United States" uses "maverick/meerkat" theme
         When I unset theme on that channel
