@@ -41,7 +41,7 @@ final class AdminOrderItemAdjustmentsSubresourceDataProviderSpec extends ObjectB
         ;
     }
 
-    function it_does_not_support_in_shop_api_section(
+    function it_does_not_support_shop_api_section(
         SectionProviderInterface $sectionProvider,
         ShopApiSection $shopApiSection,
     ): void {
@@ -84,7 +84,7 @@ final class AdminOrderItemAdjustmentsSubresourceDataProviderSpec extends ObjectB
         ;
     }
 
-    function it_providers_empty_array_if_order_item_does_not_exist(
+    function it_provides_empty_array_if_order_item_does_not_exist(
         OrderItemRepositoryInterface $orderItemRepository,
     ): void {
         $context['subresource_identifiers'] = ['id' => '11'];
