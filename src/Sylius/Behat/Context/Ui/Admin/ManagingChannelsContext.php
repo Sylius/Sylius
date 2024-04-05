@@ -721,10 +721,10 @@ final class ManagingChannelsContext implements Context
     {
         $this->iWantToBrowseChannels();
 
-        Assert::true($this->indexPage->isSingleResourceOnPage([
-            'nameAndDescription' => $channel->getName(),
-            'enabled' => $state ? 'Enabled' : 'Disabled',
-        ]));
+        Assert::true($this->indexPage->isSingleResourceWithSpecificElementOnPage(
+            ['nameAndDescription' => $channel->getName()],
+            $state ? '[data-test-status-enabled]': '[data-test-status-disabled]',
+        ));
     }
 
     private function getTooLongString(): string

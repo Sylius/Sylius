@@ -8,7 +8,7 @@ Feature: Toggling a channel
         Given the store operates on a channel named "Web Channel"
         And I am logged in as an administrator
 
-    @api @todo @ui
+    @api @ui
     Scenario: Disabling the last available channel
         Given the channel "Web Channel" is enabled
         When I want to modify this channel

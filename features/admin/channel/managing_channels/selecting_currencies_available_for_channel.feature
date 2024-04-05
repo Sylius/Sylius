@@ -24,7 +24,7 @@ Feature: Selecting available currencies for a channel
         Then I should be notified that it has been successfully created
         And paying in Euro should be possible for the "Mobile store" channel
 
-    @api @todo @ui
+    @api @ui
     Scenario: Adding currencies to an existing channel
         Given the store operates on a channel named "Web store"
         When I want to modify this channel

@@ -22,7 +22,7 @@ Feature: Choosing a required address in the checkout for a channel
         Then I should be notified that it has been successfully created
         And the required address in the checkout for this channel should be shipping
 
-    @api @todo @ui
+    @api @ui
     Scenario: Changing a required address in the checkout for an existing channel
         Given the store operates on a channel named "Web Store"
         When I want to modify this channel
