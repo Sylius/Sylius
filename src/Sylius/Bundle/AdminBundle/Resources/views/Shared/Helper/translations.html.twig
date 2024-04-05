@@ -1,8 +1,4 @@
 {% macro default(translationFields, body = null, options = {}) %}
-    {% set options = {
-        accordionId: 'product-translations'
-    }|merge(options) %}
-
     <div class="accordion" id="{{ options.accordionId }}">
         {% for locale, translationForm in translationFields %}
             <div class="accordion-item">
@@ -14,13 +10,13 @@
                         data-bs-target="#translation-{{ locale }}"
                         aria-expanded="{% if loop.first %}true{% else %}false{% endif %}"
                         aria-controls="translation-{{ locale }}"
-                        {{ sylius_test_html_attribute('product-translation-accordion', locale) }}
+                        {{ sylius_test_html_attribute(options.accordionId ~ '-accordion', locale) }}
                     >
                         <span class="flag flag-sm flag-country-{{ locale|lower|split('_')|last }} me-3"></span>
                         {{ locale|sylius_locale_name }}
                     </button>
                 </h2>
-                <div id="translation-{{ locale }}" class="accordion-collapse collapse {% if loop.first %}show{% endif %}" data-bs-parent="#product-translations">
+                <div id="translation-{{ locale }}" class="accordion-collapse collapse {% if loop.first %}show{% endif %}" data-bs-parent="#{{ options.accordionId }}">
                     <div class="accordion-body">
                         {% if body is not null %}
                             {{ include(template_from_string(body), { locale: locale, translationForm: translationForm }) }}

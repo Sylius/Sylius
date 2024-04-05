@@ -684,6 +684,7 @@ sylius:
         products_categorized_under_taxon_taxon: 'Products <small>Categorized under "%taxon%" taxon</small>'
         products_index_of_all_products_in_your_store: 'Products <small>Index of all products in your store</small>'
         profile: 'Profile'
+        promotion: 'Cart promotion'
         promotion_configuration: 'Promotion configuration'
         promotion_coupons: 'Coupons'
         promotion_details: 'Promotion details'
