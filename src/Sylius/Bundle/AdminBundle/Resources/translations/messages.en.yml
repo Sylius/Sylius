@@ -90,6 +90,7 @@ sylius:
         no_results_adjust_your_search: 'Adjust your search and try again.'
         no_weight: 'No weight'
         no_width: 'No width'
+        omnibus: Omnibus
         order:
             date: 'Order date'
         original_price_details: Original price - this is the price of the product variant It is displayed as crossed-out in the catalog. It is used as the base for current price calculations. If this value is not defined, Catalog Promotion logic will copy value from Price to Original Price.
