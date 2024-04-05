@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace Sylius\Tests\Api\Shop;
 
 use Sylius\Tests\Api\JsonApiTestCase;
-use Sylius\Tests\Api\Utils\ContentType;
 use Sylius\Tests\Api\Utils\ShopUserLoginTrait;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -51,7 +50,7 @@ final class ShopUsersTest extends JsonApiTestCase
         $this->client->request(
             method: Request::METHOD_PATCH,
             uri: sprintf('/api/v2/shop/reset-password/%s', $validToken),
-            server: ContentType::APPLICATION_JSON_MERGE_PATCH,
+            server: self::CONTENT_TYPE_HEADER,
             content: json_encode([
                 'newPassword' => 'newPassword',
                 'confirmNewPassword' => 'newPassword',
@@ -73,7 +72,7 @@ final class ShopUsersTest extends JsonApiTestCase
         $this->client->request(
             method: Request::METHOD_PATCH,
             uri: sprintf('/api/v2/shop/reset-password/%s', $validToken),
-            server: ContentType::APPLICATION_JSON_MERGE_PATCH,
+            server: self::CONTENT_TYPE_HEADER,
             content: json_encode([
                 'newPassword' => 'newPassword',
                 'confirmNewPassword' => 'newPassword',
@@ -95,7 +94,7 @@ final class ShopUsersTest extends JsonApiTestCase
         $this->client->request(
             method: Request::METHOD_PATCH,
             uri: sprintf('/api/v2/shop/reset-password/%s', $validToken),
-            server: ContentType::APPLICATION_JSON_MERGE_PATCH,
+            server: self::CONTENT_TYPE_HEADER,
             content: json_encode([
                 'newPassword' => 'newPassword',
                 'confirmNewPassword' => 'newPassword',

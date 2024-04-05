@@ -41,7 +41,7 @@ final class AvatarImageTest extends JsonApiTestCase
 
         $this->assertResponse(
             $this->client->getResponse(),
-            'admin/avatar_image/get_avatar_image',
+            'admin/avatar_image/get_an_avatar_image',
             Response::HTTP_OK,
         );
     }

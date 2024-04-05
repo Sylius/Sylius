@@ -13,49 +13,46 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\Doctrine\QueryExtension;
 
-use ApiPlatform\Core\Bridge\Doctrine\Orm\Extension\ContextAwareQueryCollectionExtensionInterface;
-use ApiPlatform\Core\Bridge\Doctrine\Orm\Extension\QueryItemExtensionInterface;
-use ApiPlatform\Core\Bridge\Doctrine\Orm\Util\QueryNameGeneratorInterface;
+use ApiPlatform\Doctrine\Orm\Extension\QueryCollectionExtensionInterface;
+use ApiPlatform\Doctrine\Orm\Extension\QueryItemExtensionInterface;
+use ApiPlatform\Doctrine\Orm\Util\QueryNameGeneratorInterface;
+use ApiPlatform\Metadata\Operation;
 use Doctrine\DBAL\ArrayParameterType;
 use Doctrine\ORM\QueryBuilder;
 use Sylius\Bundle\ApiBundle\SectionResolver\AdminApiSection;
 use Sylius\Bundle\CoreBundle\SectionResolver\SectionProviderInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 
-final class OrderExtension implements ContextAwareQueryCollectionExtensionInterface, QueryItemExtensionInterface
+final readonly class OrderExtension implements QueryCollectionExtensionInterface, QueryItemExtensionInterface
 {
-    /**
-     * @param array<string> $orderStatesToFilterOut
-     */
+    /** @param array<string> $orderStatesToFilterOut */
     public function __construct(
         private SectionProviderInterface $sectionProvider,
         private array $orderStatesToFilterOut,
     ) {
     }
 
-    /**
-     * @param array<mixed> $context
-     */
+    /** @param array<array-key, mixed> $context */
     public function applyToCollection(
         QueryBuilder $queryBuilder,
         QueryNameGeneratorInterface $queryNameGenerator,
         string $resourceClass,
-        string $operationName = null,
+        Operation $operation = null,
         array $context = [],
     ): void {
         $this->filterOutOrders($queryBuilder, $queryNameGenerator, $resourceClass);
     }
 
     /**
-     * @param array<mixed> $context
      * @param array<mixed> $identifiers
+     * @param array<mixed> $context
      */
     public function applyToItem(
         QueryBuilder $queryBuilder,
         QueryNameGeneratorInterface $queryNameGenerator,
         string $resourceClass,
         array $identifiers,
-        string $operationName = null,
+        Operation $operation = null,
         array $context = [],
     ): void {
         $this->filterOutOrders($queryBuilder, $queryNameGenerator, $resourceClass);

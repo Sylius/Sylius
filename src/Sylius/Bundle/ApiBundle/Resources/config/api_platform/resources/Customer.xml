@@ -39,7 +39,7 @@
                     <values>
                         <value name="groups">
                             <values>
-                                <value>shop:customer:create</value>
+                                <value>sylius:shop:customer:create</value>
                             </values>
                         </value>
                     </values>
@@ -59,7 +59,7 @@
                     <values>
                         <value name="groups">
                             <values>
-                                <value>shop:customer:read</value>
+                                <value>sylius:shop:customer:show</value>
                             </values>
                         </value>
                     </values>

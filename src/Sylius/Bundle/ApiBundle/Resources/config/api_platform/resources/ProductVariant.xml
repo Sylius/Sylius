@@ -33,7 +33,7 @@
                     <values>
                         <value name="groups">
                             <values>
-                                <value>admin:product_variant:read</value>
+                                <value>sylius:admin:product_variant:index</value>
                             </values>
                         </value>
                     </values>
@@ -48,7 +48,7 @@
                     <values>
                         <value name="groups">
                             <values>
-                                <value>shop:product_variant:read</value>
+                                <value>sylius:shop:product_variant:show</value>
                             </values>
                         </value>
                     </values>

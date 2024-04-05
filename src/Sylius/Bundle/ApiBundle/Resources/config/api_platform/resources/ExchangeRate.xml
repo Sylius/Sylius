@@ -32,7 +32,7 @@
                     <values>
                         <value name="groups">
                             <values>
-                                <value>admin:exchange_rate:read</value>
+                                <value>sylius:admin:exchange_rate:show</value>
                             </values>
                         </value>
                     </values>
@@ -44,7 +44,7 @@
                     <values>
                         <value name="groups">
                             <values>
-                                <value>admin:exchange_rate:read</value>
+                                <value>sylius:admin:exchange_rate:index</value>
                             </values>
                         </value>
                     </values>
@@ -59,7 +59,7 @@
                     <values>
                         <value name="groups">
                             <values>
-                                <value>admin:exchange_rate:create</value>
+                                <value>sylius:admin:exchange_rate:create</value>
                             </values>
                         </value>
                     </values>
@@ -68,7 +68,7 @@
                     <values>
                         <value name="groups">
                             <values>
-                                <value>admin:exchange_rate:read</value>
+                                <value>sylius:admin:exchange_rate:show</value>
                             </values>
                         </value>
                     </values>
@@ -80,7 +80,7 @@
                     <values>
                         <value name="groups">
                             <values>
-                                <value>admin:exchange_rate:update</value>
+                                <value>sylius:admin:exchange_rate:update</value>
                             </values>
                         </value>
                     </values>
@@ -89,7 +89,7 @@
                     <values>
                         <value name="groups">
                             <values>
-                                <value>admin:exchange_rate:read</value>
+                                <value>sylius:admin:exchange_rate:show</value>
                             </values>
                         </value>
                     </values>
@@ -104,7 +104,7 @@
                     <values>
                         <value name="groups">
                             <values>
-                                <value>shop:exchange_rate:read</value>
+                                <value>sylius:shop:exchange_rate:show</value>
                             </values>
                         </value>
                     </values>
@@ -116,7 +116,7 @@
                     <values>
                         <value name="groups">
                             <values>
-                                <value>shop:exchange_rate:read</value>
+                                <value>sylius:shop:exchange_rate:index</value>
                             </values>
                         </value>
                     </values>

@@ -19,6 +19,7 @@
         <attribute name="code">
             <group>admin:province:show</group>
             <group>sylius:admin:province:show</group>
+            <group>sylius:admin:province:index</group>
             <group>admin:country:create</group>
             <group>sylius:admin:country:create</group>
             <group>admin:country:update</group>
@@ -33,6 +34,7 @@
         <attribute name="name">
             <group>admin:province:show</group>
             <group>sylius:admin:province:show</group>
+            <group>sylius:admin:province:index</group>
             <group>admin:province:update</group>
             <group>sylius:admin:province:update</group>
             <group>admin:country:create</group>
@@ -53,6 +55,7 @@
             <group>sylius:admin:country:update</group>
             <group>admin:province:show</group>
             <group>sylius:admin:province:show</group>
+            <group>sylius:admin:province:index</group>
             <group>admin:province:update</group>
             <group>sylius:admin:province:update</group>
         </attribute>

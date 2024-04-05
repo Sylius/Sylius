@@ -13,14 +13,16 @@ declare(strict_types=1);
 
 namespace spec\Sylius\Bundle\ApiBundle\Doctrine\QueryCollectionExtension;
 
-use ApiPlatform\Core\Bridge\Doctrine\Orm\Util\QueryNameGeneratorInterface;
+use ApiPlatform\Doctrine\Orm\Util\QueryNameGeneratorInterface;
+use ApiPlatform\Metadata\Get;
 use Doctrine\ORM\Query\Expr;
 use Doctrine\ORM\QueryBuilder;
 use PhpSpec\ObjectBehavior;
+use Symfony\Component\HttpFoundation\Request;
 
 final class HideArchivedPromotionExtensionSpec extends ObjectBehavior
 {
-    function let()
+    function let(): void
     {
         $this->beConstructedWith('promotionClass');
     }
@@ -32,7 +34,12 @@ final class HideArchivedPromotionExtensionSpec extends ObjectBehavior
         $queryBuilder->getRootAliases()->shouldNotBeCalled();
         $queryBuilder->andWhere()->shouldNotBeCalled();
 
-        $this->applyToCollection($queryBuilder, $queryNameGenerator, 'taxonClass', 'get', []);
+        $this->applyToCollection(
+            $queryBuilder,
+            $queryNameGenerator,
+            'taxonClass',
+            new Get(name: Request::METHOD_GET),
+        );
     }
 
     function it_does_nothing_if_archived_at_filter_is_already_applied(
@@ -42,7 +49,13 @@ final class HideArchivedPromotionExtensionSpec extends ObjectBehavior
         $queryBuilder->getRootAliases()->shouldNotBeCalled();
         $queryBuilder->andWhere()->shouldNotBeCalled();
 
-        $this->applyToCollection($queryBuilder, $queryNameGenerator, 'promotionClass', 'get', ['filters' => ['exists' => ['archivedAt' => 'true']]]);
+        $this->applyToCollection(
+            $queryBuilder,
+            $queryNameGenerator,
+            'promotionClass',
+            new Get(name: Request::METHOD_GET),
+            ['filters' => ['exists' => ['archivedAt' => 'true']]],
+        );
     }
 
     function it_filters_archived_promotions(
@@ -56,6 +69,11 @@ final class HideArchivedPromotionExtensionSpec extends ObjectBehavior
         $queryBuilder->expr()->willReturn($expr);
         $queryBuilder->andWhere('o.archivedAt IS NULL')->shouldBeCalled();
 
-        $this->applyToCollection($queryBuilder, $queryNameGenerator, 'promotionClass', 'get', []);
+        $this->applyToCollection(
+            $queryBuilder,
+            $queryNameGenerator,
+            'promotionClass',
+            new Get(name: Request::METHOD_GET),
+        );
     }
 }

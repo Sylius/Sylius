@@ -25,7 +25,7 @@ final class ResetPasswordProviderSpec extends ObjectBehavior
         $operation = new Patch(class: ResetPassword::class);
 
         $this
-            ->provide($operation, ['resetPasswordToken' => 'resetToken'])
+            ->provide($operation, ['token' => 'resetToken'])
             ->shouldBeLike(new ResetPassword('resetToken'))
         ;
     }

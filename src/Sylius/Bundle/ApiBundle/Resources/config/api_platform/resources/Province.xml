@@ -33,7 +33,7 @@
                     <values>
                         <value name="groups">
                             <values>
-                                <value>admin:province:read</value>
+                                <value>sylius:admin:province:show</value>
                             </values>
                         </value>
                     </values>
@@ -45,7 +45,7 @@
                     <values>
                         <value name="groups">
                             <values>
-                                <value>admin:province:update</value>
+                                <value>sylius:admin:province:update</value>
                             </values>
                         </value>
                     </values>
@@ -54,7 +54,7 @@
                     <values>
                         <value name="groups">
                             <values>
-                                <value>admin:province:read</value>
+                                <value>sylius:admin:province:show</value>
                             </values>
                         </value>
                     </values>
@@ -66,7 +66,7 @@
                     <values>
                         <value name="groups">
                             <values>
-                                <value>shop:province:read</value>
+                                <value>sylius:shop:province:show</value>
                             </values>
                         </value>
                     </values>
@@ -80,7 +80,17 @@
             <uriVariable parameterName="code" fromClass="Sylius\Component\Addressing\Model\Country" fromProperty="provinces"/>
         </uriVariables>
         <operations>
-            <operation class="ApiPlatform\Metadata\GetCollection"/>
+            <operation class="ApiPlatform\Metadata\GetCollection">
+                <normalizationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius:admin:province:index</value>
+                            </values>
+                        </value>
+                    </values>
+                </normalizationContext>
+            </operation>
         </operations>
     </resource>
 </resources>

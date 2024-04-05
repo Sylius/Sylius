@@ -18,19 +18,19 @@
     <services>
         <defaults public="true" />
 
-        <service id="Sylius\Bundle\ApiBundle\Serializer\AddressDenormalizer">
-            <argument type="service" id="serializer.normalizer.object" />
-            <argument type="string">%sylius.model.address.class%</argument>
-            <argument type="string">%sylius.model.address.interface%</argument>
-            <tag name="serializer.normalizer" priority="64" />
-        </service>
+<!--        <service id="Sylius\Bundle\ApiBundle\Serializer\AddressDenormalizer">-->
+<!--            <argument type="service" id="serializer.normalizer.object" />-->
+<!--            <argument type="string">%sylius.model.address.class%</argument>-->
+<!--            <argument type="string">%sylius.model.address.interface%</argument>-->
+<!--            <tag name="serializer.normalizer" priority="64" />-->
+<!--        </service>-->
 
-        <service id="Sylius\Bundle\ApiBundle\Serializer\CommandArgumentsDenormalizer">
-            <argument type="service" id="Sylius\Bundle\ApiBundle\Serializer\CommandDenormalizer" />
-            <argument type="service" id="Sylius\Bundle\ApiBundle\Converter\IriToIdentifierConverterInterface" />
-            <argument type="service" id="sylius.api.data_transformer.command_aware_input_data_transformer" />
-            <tag name="serializer.normalizer" priority="128" />
-        </service>
+<!--        <service id="Sylius\Bundle\ApiBundle\Serializer\CommandArgumentsDenormalizer">-->
+<!--            <argument type="service" id="Sylius\Bundle\ApiBundle\Serializer\CommandDenormalizer" />-->
+<!--            <argument type="service" id="Sylius\Bundle\ApiBundle\Converter\IriToIdentifierConverterInterface" />-->
+<!--            <argument type="service" id="sylius.api.data_transformer.command_aware_input_data_transformer" />-->
+<!--            <tag name="serializer.normalizer" priority="128" />-->
+<!--        </service>-->
 
         <service id="Sylius\Bundle\ApiBundle\Serializer\CommandDenormalizer">
             <argument type="service" id="api_platform.serializer.normalizer.item" />
@@ -137,20 +137,20 @@
 <!--            <tag name="serializer.normalizer" priority="64" />-->
 <!--        </service>-->
 
-<!--        <service id="sylius.api.denormalizer.numeric_to_string.exchange_rate" class="Sylius\Bundle\ApiBundle\Serializer\NumericToStringDenormalizer">-->
-<!--            <argument type="string">%sylius.model.exchange_rate.class%</argument>-->
-<!--            <argument type="string">ratio</argument>-->
-<!--            <tag name="serializer.normalizer" priority="64" />-->
-<!--        </service>-->
+        <service id="sylius.api.denormalizer.numeric_to_string.exchange_rate" class="Sylius\Bundle\ApiBundle\Serializer\NumericToStringDenormalizer">
+            <argument type="string">%sylius.model.exchange_rate.class%</argument>
+            <argument type="string">ratio</argument>
+            <tag name="serializer.normalizer" priority="64" />
+        </service>
 
 <!--        <service id="Sylius\Bundle\ApiBundle\Serializer\CustomerDenormalizer">-->
 <!--            <argument type="service" id="clock" />-->
 <!--            <tag name="serializer.normalizer" priority="64" />-->
 <!--        </service>-->
 
-<!--        <service id="Sylius\Bundle\ApiBundle\Serializer\TranslatableLocaleKeyDenormalizer">-->
-<!--            <tag name="serializer.normalizer" priority="96" />-->
-<!--        </service>-->
+        <service id="Sylius\Bundle\ApiBundle\Serializer\TranslatableLocaleKeyDenormalizer">
+            <tag name="serializer.normalizer" priority="96" />
+        </service>
 
 <!--        <service id="Sylius\Bundle\ApiBundle\Serializer\ProductVariantChannelPricingsChannelCodeKeyDenormalizer">-->
 <!--            <tag name="serializer.normalizer" priority="96" />-->

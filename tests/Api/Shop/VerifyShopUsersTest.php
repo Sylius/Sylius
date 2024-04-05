@@ -22,7 +22,7 @@ final class VerifyShopUsersTest extends JsonApiTestCase
 {
     use ShopUserLoginTrait;
 
-    /** #test / temporarily disabled as validation triggers before processors */
+    /** @test */
     public function it_resends_account_verification_token(): void
     {
         $this->loadFixturesFromFiles(['channel.yaml', 'cart.yaml', 'authentication/shop_user.yaml']);
@@ -62,7 +62,7 @@ final class VerifyShopUsersTest extends JsonApiTestCase
     /** @test */
     public function it_verifies_customer_account(): void
     {
-        $data = $this->loadFixturesFromFiles(['channel.yaml', 'cart.yaml', 'authentication/customer.yaml']);
+        $data = $this->loadFixturesFromFiles(['channel.yaml', 'cart.yaml', 'authentication/shop_user.yaml']);
 
         /** @var ShopUserInterface $shopUser */
         $shopUser = $data['shop_user_oliver'];

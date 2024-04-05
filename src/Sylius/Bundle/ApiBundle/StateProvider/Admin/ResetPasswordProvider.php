@@ -27,7 +27,7 @@ final class ResetPasswordProvider implements ProviderInterface
         Assert::true(is_a($operation->getClass(), ResetPassword::class, true));
 
         if ($operation instanceof Patch) {
-            return new ResetPassword($uriVariables['resetPasswordToken']);
+            return new ResetPassword($uriVariables['token']);
         }
 
         throw new \RuntimeException('Only PATCH operation is supported.');

@@ -33,7 +33,7 @@ final class ShopUserResetPasswordProviderSpec extends ObjectBehavior
     function it_provides_reset_password_object_if_operation_is_patch(): void
     {
         $operation = new Patch(class: ResetPassword::class);
-        $uriVariables = ['resetPasswordToken' => 'TOKEN'];
+        $uriVariables = ['token' => 'TOKEN'];
 
         $this
             ->provide($operation, $uriVariables)
@@ -43,7 +43,7 @@ final class ShopUserResetPasswordProviderSpec extends ObjectBehavior
     function it_throws_an_exception_if_operation_is_different_than_patch(): void
     {
         $operation = new Get(class: ResetPassword::class);
-        $uriVariables = ['resetPasswordToken' => 'TOKEN'];
+        $uriVariables = ['token' => 'TOKEN'];
 
         $this
             ->shouldThrow(\RuntimeException::class)
