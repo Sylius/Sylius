@@ -23,6 +23,7 @@
             <parameter>sylius</parameter>
         </parameter>
     </parameters>
+
     <services>
         <service id="Sylius\Bundle\AdminBundle\Form\Extension\CatalogPromotionActionTypeExtension">
             <argument type="tagged_iterator" tag="sylius.catalog_promotion.action_configuration_type" index-by="key" />
@@ -55,6 +56,17 @@
             <tag name="form.type_extension" />
         </service>
 
+        <service id="sylius_admin.form.extension.type.channel" class="Sylius\Bundle\AdminBundle\Form\Extension\ChannelTypeExtension">
+            <tag name="form.type_extension" extended-type="Sylius\Bundle\ChannelBundle\Form\Type\ChannelType" priority="50" />
+        </service>
+
+        <service id="sylius_admin.form.extension.type.channel_price_history_config" class="Sylius\Bundle\AdminBundle\Form\Extension\ChannelPriceHistoryConfigTypeExtension">
+            <argument type="service">
+                <service class="\Symfony\Component\Form\Extension\Core\DataMapper\DataMapper" />
+            </argument>
+            <tag name="form.type_extension" extended-type="Sylius\Bundle\CoreBundle\Form\Type\ChannelPriceHistoryConfigType" priority="100" />
+        </service>
+
         <service id="Sylius\Bundle\AdminBundle\Form\RequestPasswordResetType">
             <argument>%sylius.form.type.admin.password_reset_request.validation_groups%</argument>
             <tag name="form.type" />
@@ -62,6 +74,11 @@
 
         <service id="Sylius\Bundle\AdminBundle\Form\Type\ResetPasswordType">
             <argument>%sylius.form.type.admin.reset_password.validation_groups%</argument>
+            <tag name="form.type" />
+        </service>
+
+        <service id="sylius_admin.form.type.taxon_autocomplete_choice" class="Sylius\Bundle\AdminBundle\Form\Type\TaxonAutocompleteChoiceType">
+            <argument>%sylius.model.taxon.class%</argument>
             <tag name="form.type" />
         </service>
     </services>

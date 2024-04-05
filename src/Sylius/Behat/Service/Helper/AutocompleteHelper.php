@@ -100,4 +100,22 @@ final class AutocompleteHelper implements AutocompleteHelperInterface
             })();
         SCRIPT);
     }
+
+    public function remove(DriverInterface $driver, string $selector, string $value): void
+    {
+        $foundItems = $this->getSelectedItems($driver, $selector);
+
+        if (!in_array($value, $foundItems)) {
+            throw new \InvalidArgumentException(sprintf('Could not find "%s" in the autocomplete selected items', $value));
+        }
+
+        $driver->executeScript(<<<SCRIPT
+            (function () {
+                let element = document.evaluate("{$selector}", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
+
+                element.tomselect.removeItem('{$foundItems[$value]}');
+                element.tomselect.refreshOptions();
+            })();
+        SCRIPT);
+    }
 }

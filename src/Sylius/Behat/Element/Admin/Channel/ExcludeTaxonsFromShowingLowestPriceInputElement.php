@@ -13,31 +13,48 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Element\Admin\Channel;
 
+use Behat\Mink\Session;
 use FriendsOfBehat\PageObjectExtension\Element\Element;
-use Sylius\Behat\Service\AutocompleteHelper;
+use FriendsOfBehat\SymfonyExtension\Mink\MinkParameters;
+use Sylius\Behat\Service\Helper\AutocompleteHelperInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
+use Webmozart\Assert\Assert;
 
 final class ExcludeTaxonsFromShowingLowestPriceInputElement extends Element implements ExcludeTaxonsFromShowingLowestPriceInputElementInterface
 {
+    public function __construct(
+        Session $session,
+        MinkParameters|array $minkParameters = [],
+        private AutocompleteHelperInterface $autocompleteHelper, // TODO: make it static fcs //
+    ) {
+        parent::__construct($session, $minkParameters);
+    }
+
     public function excludeTaxon(TaxonInterface $taxon): void
     {
         $excludeTaxonElement = $this->getElement('taxons_excluded_from_showing_lowest_price')->getParent();
 
-        AutocompleteHelper::chooseValue($this->getSession(), $excludeTaxonElement, $taxon->getName());
+        $this->autocompleteHelper->select($this->getDriver(), $excludeTaxonElement->getXpath(), $taxon->getName());
     }
 
     public function removeExcludedTaxon(TaxonInterface $taxon): void
     {
         $excludeTaxonElement = $this->getElement('taxons_excluded_from_showing_lowest_price')->getParent();
 
-        AutocompleteHelper::removeValue($this->getSession(), $excludeTaxonElement, $taxon->getName());
+        $this->autocompleteHelper->remove($this->getDriver(), $excludeTaxonElement->getXpath(), $taxon->getName());
     }
 
     public function hasTaxonExcluded(TaxonInterface $taxon): bool
     {
-        $excludedTaxons = $this->getElement('taxons_excluded_from_showing_lowest_price')->getValue();
+        $code = $taxon->getCode();
+        Assert::notNull($code);
 
-        return str_contains($excludedTaxons, $taxon->getCode());
+        $excludedTaxons = $this->getElement('taxons_excluded_from_showing_lowest_price')->getParent();
+
+        return in_array(
+            $code,
+            $this->autocompleteHelper->getSelectedItems($this->getDriver(), $excludedTaxons->getXpath()),
+        );
     }
 
     protected function getDefinedElements(): array

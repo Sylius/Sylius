@@ -48,7 +48,9 @@
             id="Sylius\Behat\Element\Admin\Channel\ExcludeTaxonsFromShowingLowestPriceInputElementInterface"
             class="Sylius\Behat\Element\Admin\Channel\ExcludeTaxonsFromShowingLowestPriceInputElement"
             parent="sylius.behat.element"
-        />
+        >
+            <argument type="service" id="Sylius\Behat\Service\Helper\AutocompleteHelperInterface" />
+        </service>
 
         <service
             id="Sylius\Behat\Element\Admin\Promotion\FormElementInterface"
