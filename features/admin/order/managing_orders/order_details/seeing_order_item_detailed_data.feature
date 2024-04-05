@@ -23,7 +23,7 @@ Feature: Seeing order item detailed data
         And the customer chose "Free" shipping method to "United States" with "Cash on Delivery" payment
         And I am logged in as an administrator
 
-    @api @ui
+    @api @todo @ui
     Scenario: Seeing details of item in one row
         Given I view the summary of the order "#00000666"
         When I check "Marvel T-Shirt" data

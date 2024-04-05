@@ -2,8 +2,8 @@ sylius_admin_customer:
     resource: |
         alias: sylius.customer
         section: admin
-        templates: "@SyliusAdmin\\Crud"
-        except: ['show', 'delete']
+        templates: "@SyliusAdmin\\Shared\\Crud"
+        except: ['delete']
         redirect: update
         grid: sylius_admin_customer
         permission: true
@@ -15,15 +15,6 @@ sylius_admin_customer:
             index:
                 icon: users
     type: sylius.resource
-
-sylius_admin_customer_show:
-    path: /customers/{id}
-    defaults:
-        _controller: sylius.controller.customer::showAction
-        _sylius:
-            section: admin
-            template: "@SyliusAdmin/Customer/show.html.twig"
-            permission: true
 
 sylius_admin_customer_order_index:
     path: /customers/{id}/orders

@@ -30,6 +30,7 @@
         </service>
         <service id="sylius.behat.page.admin.product.create_simple" class="%sylius.behat.page.admin.product.create_simple.class%" parent="sylius.behat.page.admin.crud.create" public="false">
             <argument type="string">sylius_admin_product_create</argument>
+            <argument type="service" id="Sylius\Behat\Service\Helper\AutocompleteHelperInterface" />
         </service>
         <service id="sylius.behat.page.admin.product.index" class="%sylius.behat.page.admin.product.index.class%" parent="sylius.behat.page.admin.crud.index" public="false">
             <argument type="string">sylius_admin_product_index</argument>

@@ -1,4 +1,0 @@
-<div class="ui segment" id="shipping-state">
-    {% include '@SyliusAdmin/Order/Label/ShippingState/' ~ order.shippingState ~ '.html.twig' with { 'value': 'sylius.ui.' ~ order.shippingState, 'attached': true } %}
-    {{ sylius_template_event('sylius.admin.order.show.shipments_content', _context) }}
-</div>

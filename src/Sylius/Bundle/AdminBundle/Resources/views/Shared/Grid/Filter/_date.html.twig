@@ -1,0 +1,6 @@
+{% form_theme form '@SyliusAdmin/Shared/form_theme.html.twig' %}
+
+<div class="sylius-filters__date">
+    {{ form_row(form.from, { attr: {'class': 'input-group'}, 'label': 'sylius.ui.date_filter', 'label_translation_parameters': {'%label%': filter.label|trans, '%altLabel%': form.from.vars.label|trans} }) }}
+    {{ form_row(form.to, { attr: {'class': 'input-group'} }) }}
+</div>

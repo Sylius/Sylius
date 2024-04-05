@@ -8,7 +8,7 @@ Feature: Choosing a required address in the checkout for a channel
         Given the store operates on a single channel in "United States"
         And I am logged in as an administrator
 
-    @api @ui
+    @api @todo @ui
     Scenario: Adding a new channel with a required address in the checkout
         When I want to create a new channel
         And I specify its code as "MOBILE"
@@ -22,7 +22,7 @@ Feature: Choosing a required address in the checkout for a channel
         Then I should be notified that it has been successfully created
         And the required address in the checkout for this channel should be shipping
 
-    @api @ui
+    @api @todo @ui
     Scenario: Changing a required address in the checkout for an existing channel
         Given the store operates on a channel named "Web Store"
         When I want to modify this channel

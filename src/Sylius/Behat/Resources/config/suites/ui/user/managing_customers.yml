@@ -10,6 +10,7 @@ default:
                 - sylius.behat.context.hook.session
 
                 - sylius.behat.context.transform.address
+                - sylius.behat.context.transform.channel
                 - sylius.behat.context.transform.customer
                 - sylius.behat.context.transform.customer_group
                 - sylius.behat.context.transform.payment

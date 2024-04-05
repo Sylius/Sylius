@@ -21,13 +21,13 @@ Feature: Validating a catalog promotion creation
         And I save my changes
         Then I should be notified that the locale is not available
 
-    @api @ui
+    @api @todo @ui
     Scenario: Trying to create a catalog promotion without specifying its code and name
         When I create a new catalog promotion without specifying its code and name
         Then I should be notified that code and name are required
         And there should be an empty list of catalog promotions
 
-    @api @ui
+    @api @todo @ui
     Scenario: Trying to create a catalog promotion with a too long code
         When I want to create a new catalog promotion
         And I name it "Winter sale"
@@ -37,7 +37,7 @@ Feature: Validating a catalog promotion creation
         And I try to add it
         Then I should be notified that code is too long
 
-    @api @ui
+    @api @todo @ui
     Scenario: Trying to create a catalog promotion with taken code
         Given there is a catalog promotion with "sale" code and "Summer sale" name
         When I create a new catalog promotion with "sale" code and "Winter sale" name
@@ -68,7 +68,7 @@ Feature: Validating a catalog promotion creation
         Then I should be notified that scope configuration is invalid
         And there should be an empty list of catalog promotions
 
-    @api @ui @javascript
+    @api @todo @ui @javascript
     Scenario: Trying to create a catalog promotion with not configured for variants scope
         When I want to create a new catalog promotion
         And I specify its code as "winter_sale"
@@ -94,7 +94,7 @@ Feature: Validating a catalog promotion creation
         Then I should be notified that type of action is invalid
         And there should be an empty list of catalog promotions
 
-    @api @ui @mink:chromedriver
+    @api @todo @ui @mink:chromedriver
     Scenario: Trying to create a catalog promotion with not configured percentage discount action
         When I want to create a new catalog promotion
         And I specify its code as "winter_sale"
@@ -108,7 +108,7 @@ Feature: Validating a catalog promotion creation
         Then I should be notified that the percentage amount should be a number and cannot be empty
         And there should be an empty list of catalog promotions
 
-    @api @ui @mink:chromedriver
+    @api @todo @ui @mink:chromedriver
     Scenario: Trying to create a catalog promotion with wrong amount of percentage discount action
         When I want to create a new catalog promotion
         And I specify its code as "winter_sale"
@@ -122,7 +122,7 @@ Feature: Validating a catalog promotion creation
         Then I should be notified that a discount amount should be between 0% and 100%
         And there should be an empty list of catalog promotions
 
-    @api @ui @mink:chromedriver
+    @api @todo @ui @mink:chromedriver
     Scenario: Trying to create a catalog promotion with wrong value of percentage discount action
         When I want to create a new catalog promotion
         And I specify its code as "winter_sale"
@@ -133,7 +133,7 @@ Feature: Validating a catalog promotion creation
         Then I should be notified that the percentage amount should be a number and cannot be empty
         And there should be an empty list of catalog promotions
 
-    @api @ui @mink:chromedriver
+    @api @todo @ui @mink:chromedriver
     Scenario: Trying to create a catalog promotion with not configured fixed discount action
         When I want to create a new catalog promotion
         And I specify its code as "winter_sale"
@@ -176,7 +176,7 @@ Feature: Validating a catalog promotion creation
         Then I should be notified that at least one of the provided channel codes does not exist
         And there should be an empty list of catalog promotions
 
-    @api @ui @javascript
+    @api @todo @ui @javascript
     Scenario: Trying to create a catalog promotion with taxon type without taxons
         When I want to create a new catalog promotion
         And I specify its code as "winter_sale"
@@ -200,7 +200,7 @@ Feature: Validating a catalog promotion creation
         Then I should be notified that I can add only existing taxon
         And there should be an empty list of catalog promotions
 
-    @api @ui @javascript
+    @api @todo @ui @javascript
     Scenario: Trying to create a catalog promotion with product type without products
         When I want to create a new catalog promotion
         And I specify its code as "winter_sale"

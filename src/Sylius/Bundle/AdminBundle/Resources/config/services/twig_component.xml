@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  ~ This file is part of the Sylius package.
+  ~
+  ~ (c) Sylius Sp. z o.o.
+  ~
+  ~ For the full copyright and license information, please view the LICENSE
+  ~ file that was distributed with this source code.
+  -->
+
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <defaults autoconfigure="true" />
+
+        <service id="Sylius\Bundle\AdminBundle\TwigComponent\Dashboard\StatisticsComponent">
+            <argument type="service" id="sylius.repository.channel" />
+            <argument type="service" id="Sylius\Bundle\AdminBundle\Provider\StatisticsDataProviderInterface" />
+        </service>
+
+        <service id="Sylius\Bundle\AdminBundle\TwigComponent\Dashboard\NewCustomersComponent">
+            <argument type="service" id="sylius.repository.customer" />
+            <tag name="twig.component" key="SyliusAdmin.Dashboard.NewCustomers" template="@SyliusAdmin/Dashboard/Index/Component/newCustomers.html.twig" />
+        </service>
+
+        <service id="Sylius\Bundle\AdminBundle\TwigComponent\Dashboard\NewOrdersComponent">
+            <argument type="service" id="sylius.repository.order" />
+            <tag name="twig.component" key="SyliusAdmin.Dashboard.NewOrders" template="@SyliusAdmin/Dashboard/Index/Component/newOrders.html.twig" />
+        </service>
+
+        <service id="Sylius\Bundle\AdminBundle\TwigComponent\Shared\Navbar\NotificationsComponent">
+            <tag name="twig.component" key="SyliusAdminNavbarNotifications" template="@SyliusAdmin/Shared/Components/Navbar/notifications.html.twig" />
+        </service>
+
+        <service id="Sylius\Bundle\AdminBundle\TwigComponent\Shared\Navbar\UserDropdownComponent">
+            <argument type="service" id="router" />
+            <argument type="service" id="translator" />
+            <argument type="service" id="security.helper" />
+
+            <tag name="twig.component" key="SyliusAdminUserDropdown" template="@SyliusAdmin/Shared/Components/Navbar/user.html.twig" />
+        </service>
+
+        <service id="Sylius\Bundle\AdminBundle\TwigComponent\Taxon\TaxonTreeComponent">
+            <argument type="service" id="sylius.repository.taxon" />
+            <argument type="service" id="sylius.manager.taxon" />
+        </service>
+
+        <service id="Sylius\Bundle\AdminBundle\TwigComponent\Country\CountryType">
+            <argument type="service" id="form.factory" />
+            <argument>Sylius\Bundle\AddressingBundle\Form\Type\CountryType</argument>
+        </service>
+
+        <service id="Sylius\Bundle\AdminBundle\TwigComponent\Shipment\ShipType">
+            <argument type="service" id="form.factory" />
+            <argument>Sylius\Bundle\ShippingBundle\Form\Type\ShipmentShipType</argument>
+        </service>
+
+        <service id="Sylius\Bundle\AdminBundle\TwigComponent\Product\FormComponent">
+            <argument type="service" id="form.factory" />
+            <argument>Sylius\Bundle\ProductBundle\Form\Type\ProductType</argument>
+            <argument type="service" id="sylius.generator.slug" />
+            <argument type="service" id="sylius.repository.product_attribute" />
+            <call method="setLiveResponder">
+                <argument type="service" id="ux.live_component.live_responder"/>
+            </call>
+        </service>
+
+        <service id="Sylius\Bundle\AdminBundle\TwigComponent\Product\ProductAttributeAutocompleteComponent">
+            <argument type="service" id="ux.autocomplete.checksum_calculator" />
+            <call method="setLiveResponder">
+                <argument type="service" id="ux.live_component.live_responder"/>
+            </call>
+        </service>
+
+        <service id="Sylius\Bundle\AdminBundle\TwigComponent\Order\OrderType">
+            <argument type="service" id="form.factory" />
+            <argument>Sylius\Bundle\OrderBundle\Form\Type\OrderType</argument>
+        </service>
+
+        <service id="Sylius\Bundle\AdminBundle\TwigComponent\Customer\OrderStatistics">
+            <argument type="service" id="sylius.repository.customer" />
+            <argument type="service" id="sylius.customer_statistics_provider" />
+        </service>
+    </services>
+</container>

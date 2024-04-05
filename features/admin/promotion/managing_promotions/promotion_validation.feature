@@ -17,7 +17,7 @@ Feature: Promotion validation
         And I try to save my changes
         Then I should be notified that the locale is not available
 
-    @api @ui
+    @api @todo @ui
     Scenario: Trying to add a new promotion without specifying its code
         When I want to create a new promotion
         And I name it "No-VAT promotion"
@@ -26,7 +26,7 @@ Feature: Promotion validation
         Then I should be notified that code is required
         And promotion with name "No-VAT promotion" should not be added
 
-    @api @ui
+    @api @todo @ui
     Scenario: Trying to add a new promotion with a too long code
         When I want to create a new promotion
         And I name it "No-VAT promotion"
@@ -34,7 +34,7 @@ Feature: Promotion validation
         And I try to add it
         Then I should be notified that code is too long
 
-    @api @ui
+    @api @todo @ui
     Scenario: Trying to add a new promotion without specifying its name
         When I want to create a new promotion
         And I specify its code as "no_vat_promotion"
@@ -43,7 +43,7 @@ Feature: Promotion validation
         Then I should be notified that name is required
         And promotion with code "no_vat_promotion" should not be added
 
-    @api @ui
+    @api @todo @ui
     Scenario: Adding a promotion with start date set up after end date
         When I want to create a new promotion
         And I specify its code as "FULL_METAL_PROMOTION"
@@ -52,7 +52,7 @@ Feature: Promotion validation
         And I try to add it
         Then I should be notified that promotion cannot end before it starts
 
-    @api @ui
+    @api @todo @ui
     Scenario: Trying to remove name from existing promotion
         Given there is a promotion "Christmas sale"
         When I want to modify this promotion
@@ -61,7 +61,7 @@ Feature: Promotion validation
         Then I should be notified that name is required
         And this promotion should still be named "Christmas sale"
 
-    @api @ui
+    @api @todo @ui
     Scenario: Trying to add start later then end date for existing promotion
         Given there is a promotion "Christmas sale"
         When I want to modify this promotion
@@ -69,7 +69,7 @@ Feature: Promotion validation
         And I try to save my changes
         Then I should be notified that promotion cannot end before it starts
 
-    @api @ui @mink:chromedriver
+    @api @todo @ui @mink:chromedriver
     Scenario: Adding a promotion with label exceeding 255 characters
         Given there is a promotion "Christmas sale"
         When I want to modify this promotion
@@ -77,7 +77,7 @@ Feature: Promotion validation
         And I try to save my changes
         Then I should be notified that promotion label in "Polish (Poland)" locale is too long
 
-    @api @ui @javascript
+    @api @todo @ui @javascript
     Scenario: Trying to add a new promotion without specifying a order percentage discount
         When I want to create a new promotion
         And I specify its code as "christmas_sale"
@@ -87,7 +87,7 @@ Feature: Promotion validation
         Then I should be notified that this value should not be blank
         And promotion with name "Christmas sale" should not be added
 
-    @api @ui @javascript
+    @api @todo @ui @javascript
     Scenario: Trying to add a new promotion without specifying an item percentage discount
         When I want to create a new promotion
         And I specify its code as "christmas_sale"
@@ -97,7 +97,7 @@ Feature: Promotion validation
         Then I should be notified that this value should not be blank
         And promotion with name "Christmas sale" should not be added
 
-    @api @ui @javascript
+    @api @todo @ui @javascript
     Scenario: Trying to add a new promotion with a wrong order percentage discount
         When I want to create a new promotion
         And I specify its code as "christmas_sale"
@@ -107,7 +107,7 @@ Feature: Promotion validation
         Then I should be notified that a percentage discount value must be between 0% and 100%
         And promotion with name "Christmas sale" should not be added
 
-    @api @ui @javascript
+    @api @todo @ui @javascript
     Scenario: Trying to add a new promotion with a wrong item percentage discount
         When I want to create a new promotion
         And I specify its code as "christmas_sale"

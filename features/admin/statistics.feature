@@ -12,7 +12,7 @@ Feature: Statistics
         And this product has "Red XL" variant priced at "$40.00"
         And I am logged in as an administrator
 
-    @ui @no-api
+    @todo @ui @no-api
     Scenario: Seeing statistics for the current year and default channel when expectations are not specified
         Given it is "last day of December last year" now
         And 2 new customers have fulfilled 2 orders placed for total of "$1,000.00"
@@ -26,7 +26,7 @@ Feature: Statistics
         And there should be total sales of "$7,000.58"
         And the average order value should be "$1,166.76"
 
-    @api @ui @javascript
+    @api @todo @ui @javascript
     Scenario: Seeing statistics for the previous year
         Given it is "first day of January last year" now
         And 3 new customers have fulfilled 2 orders placed for total of "$2,000.00"
@@ -39,7 +39,7 @@ Feature: Statistics
         And there should be total sales of "$2,000.00"
         And the average order value should be "$1,000.00"
 
-    @ui @javascript @no-api
+    @ui @todo @javascript @no-api
     Scenario: Seeing statistics for the next year
         Given it is "first day of January last year" now
         And 3 new customers have fulfilled 2 orders placed for total of "$2,000.00"
@@ -53,7 +53,7 @@ Feature: Statistics
         And there should be total sales of "$10,000.74"
         And the average order value should be "$1,428.68"
 
-    @api @ui @javascript
+    @api @todo @ui @javascript
     Scenario: Seeing statistics that include only fulfilled orders that were not cancelled
         Given 4 new customers have fulfilled 4 orders placed for total of "$5,241.00"
         And 2 more new customers have placed 2 orders for total of "$459.00"

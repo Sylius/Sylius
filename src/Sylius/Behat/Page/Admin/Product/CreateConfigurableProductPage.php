@@ -18,27 +18,19 @@ use Sylius\Behat\Behaviour\SpecifiesItsField;
 use Sylius\Behat\Page\Admin\Crud\CreatePage as BaseCreatePage;
 use Sylius\Behat\Service\AutocompleteHelper;
 use Sylius\Behat\Service\DriverHelper;
-use Sylius\Behat\Service\SlugGenerationHelper;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Webmozart\Assert\Assert;
 
 class CreateConfigurableProductPage extends BaseCreatePage implements CreateConfigurableProductPageInterface
 {
     use SpecifiesItsField;
+    use FormTrait;
 
-    public function nameItIn(string $name, string $localeCode): void
+    public function create(): void
     {
-        $this->clickTabIfItsNotActive('details');
-        $this->activateLanguageTab($localeCode);
+        $this->waitForFormUpdate();
 
-        $this->getDocument()->fillField(
-            sprintf('sylius_product_translations_%s_name', $localeCode),
-            $name,
-        );
-
-        if (DriverHelper::isJavascript($this->getDriver())) {
-            SlugGenerationHelper::waitForSlugGeneration($this->getSession(), $this->getElement('slug'));
-        }
+        parent::create();
     }
 
     public function hasMainTaxonWithName(string $taxonName): bool
@@ -104,20 +96,24 @@ class CreateConfigurableProductPage extends BaseCreatePage implements CreateConf
 
     protected function getDefinedElements(): array
     {
-        return array_merge(parent::getDefinedElements(), [
-            'attribute' => '.attribute',
-            'code' => '#sylius_product_code',
-            'images' => '#sylius_product_images',
-            'language_tab' => '[data-locale="%localeCode%"] .title',
-            'main_taxon' => '#sylius_product_mainTaxon',
-            'name' => '#sylius_product_translations_en_US_name',
-            'options_choice' => '#sylius_product_options',
-            'search' => '.ui.fluid.search.selection.dropdown',
-            'search_item_selected' => 'div.menu > div.item.selected',
-            'slug' => '#sylius_product_translations_en_US_slug',
-            'tab' => '.menu [data-tab="%name%"]',
-            'taxonomy' => 'a[data-tab="taxonomy"]',
-        ]);
+        return array_merge(
+            parent::getDefinedElements(),
+            [
+                'attribute' => '.attribute',
+                'code' => '#sylius_product_code',
+                'images' => '#sylius_product_images',
+                'language_tab' => '[data-locale="%localeCode%"] .title',
+                'main_taxon' => '#sylius_product_mainTaxon',
+                'name' => '#sylius_product_translations_en_US_name',
+                'options_choice' => '#sylius_product_options',
+                'search' => '.ui.fluid.search.selection.dropdown',
+                'search_item_selected' => 'div.menu > div.item.selected',
+                'slug' => '#sylius_product_translations_en_US_slug',
+                'tab' => '.menu [data-tab="%name%"]',
+                'taxonomy' => 'a[data-tab="taxonomy"]',
+            ],
+            $this->getDefinedFormElements(),
+        );
     }
 
     private function openTaxonBookmarks(): void

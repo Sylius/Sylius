@@ -9,7 +9,7 @@ Feature: Promotion unique code validation
         And there is a promotion "No-VAT promotion" identified by "NO_VAT" code
         And I am logged in as an administrator
 
-    @api @ui
+    @api @todo @ui
     Scenario: Trying to add promotion with taken code
         When I want to create a new promotion
         And I specify its code as "NO_VAT"

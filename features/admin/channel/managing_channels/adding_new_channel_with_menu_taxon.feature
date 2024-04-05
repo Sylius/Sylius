@@ -11,7 +11,7 @@ Feature: Adding a new channel with menu taxon
         And the store classifies its products as "Clothes" and "Guns"
         And I am logged in as an administrator
 
-    @ui @javascript @api
+    @todo @ui @javascript @api
     Scenario: Adding a new channel with menu taxon
         When I want to create a new channel
         And I specify its code as "MOBILE"

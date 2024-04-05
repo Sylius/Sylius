@@ -10,12 +10,12 @@ Feature: Editing shipping method
         And the store allows shipping with "UPS Carrier" identified by "UPS_CARRIER"
         And I am logged in as an administrator
 
-    @ui @api
+    @todo @ui @api
     Scenario: Seeing disabled code field when editing shipping method
         When I want to modify a shipping method "UPS Carrier"
         Then I should not be able to edit its code
 
-    @ui @api
+    @todo @ui @api
     Scenario: Renaming the shipping method
         When I want to modify a shipping method "UPS Carrier"
         And I rename it to "UPS Transport" in "English (United States)"

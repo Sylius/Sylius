@@ -20,6 +20,7 @@ use Sylius\Behat\Page\Admin\Customer\IndexPageInterface as CustomerIndexPageInte
 use Sylius\Behat\Page\Admin\Customer\ShowPageInterface;
 use Sylius\Behat\Page\Admin\Customer\UpdatePageInterface;
 use Sylius\Behat\Service\Resolver\CurrentPageResolverInterface;
+use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Webmozart\Assert\Assert;
 
@@ -436,14 +437,6 @@ final class ManagingCustomersContext implements Context
     }
 
     /**
-     * @Then /^(?:their|his) default address should be "([^"]+)"$/
-     */
-    public function hisShippingAddressShouldBe(string $defaultAddress): void
-    {
-        Assert::same($this->showPage->getDefaultAddress(), str_replace(',', '', $defaultAddress));
-    }
-
-    /**
      * @Then their default address should be :firstName :lastName, :street, :postcode :city, :country
      */
     public function theirSDefaultAddressShouldBe(
@@ -456,7 +449,7 @@ final class ManagingCustomersContext implements Context
     ): void {
         Assert::same(
             $this->showPage->getDefaultAddress(),
-            sprintf('%s %s %s %s %s %s', $firstName, $lastName, $street, $city, strtoupper($country), $postcode),
+            sprintf('%s %s, %s, %s %s, %s', $firstName, $lastName, $street, $postcode, $city, ucwords($country)),
         );
     }
 
@@ -465,7 +458,7 @@ final class ManagingCustomersContext implements Context
      */
     public function iShouldSeeInformationAboutNoExistingAccountForThisCustomer()
     {
-        Assert::true($this->showPage->hasAccount());
+        Assert::false($this->showPage->hasAccount());
     }
 
     /**
@@ -645,26 +638,26 @@ final class ManagingCustomersContext implements Context
     }
 
     /**
-     * @Then /^I should see that they have placed (\d+) orders? in the "([^"]+)" channel$/
+     * @Then /^I should see that they have placed (\d+) orders? in the ("[^"]+" channel)$/
      */
-    public function iShouldSeeThatTheyHavePlacedOrdersInTheChannel($ordersCount, $channelName)
+    public function iShouldSeeThatTheyHavePlacedOrdersInTheChannel($ordersCount, ChannelInterface $channel)
     {
-        Assert::same($this->showPage->getOrdersCountInChannel($channelName), (int) $ordersCount);
+        Assert::same($this->showPage->getOrdersCountInChannel($channel->getCode()), (int) $ordersCount);
     }
 
     /**
-     * @Then /^I should see that the overall total value of all their orders in the "([^"]+)" channel is "([^"]+)"$/
+     * @Then /^I should see that the overall total value of all their orders in the ("[^"]+" channel) is "([^"]+)"$/
      */
-    public function iShouldSeeThatTheOverallTotalValueOfAllTheirOrdersInTheChannelIs($channelName, $ordersValue)
+    public function iShouldSeeThatTheOverallTotalValueOfAllTheirOrdersInTheChannelIs(ChannelInterface $channel, $ordersValue)
     {
-        Assert::same($this->showPage->getOrdersTotalInChannel($channelName), $ordersValue);
+        Assert::same($this->showPage->getOrdersTotalInChannel($channel->getCode()), $ordersValue);
     }
 
     /**
-     * @Then /^I should see that the average total value of their order in the "([^"]+)" channel is "([^"]+)"$/
+     * @Then /^I should see that the average total value of their order in the ("[^"]+" channel) is "([^"]+)"$/
      */
-    public function iShouldSeeThatTheAverageTotalValueOfTheirOrderInTheChannelIs($channelName, $ordersValue)
+    public function iShouldSeeThatTheAverageTotalValueOfTheirOrderInTheChannelIs(ChannelInterface $channel, $ordersValue)
     {
-        Assert::same($this->showPage->getOrdersTotalInChannel($channelName), $ordersValue);
+        Assert::same($this->showPage->getAverageTotalInChannel($channel->getCode()), $ordersValue);
     }
 }

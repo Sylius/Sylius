@@ -1,0 +1,50 @@
+/*!
+ * This file is part of the Sylius package.
+ *
+ * (c) Sylius Sp. z o.o.
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+ul.tree {
+    margin: 0;
+    padding: 0;
+    position: relative;
+}
+
+ul.tree li {
+    margin: 0;
+    padding: 3px 0;
+    list-style-type: none;
+}
+
+ul.tree .tree-header-btn:hover {
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+ul.tree .tree-header .tree-icon-down,
+ul.tree .tree-header .tree-icon-right {
+    display: none;
+}
+
+ul.tree .tree-header.expanded .tree-icon-down {
+    display: inline-block;
+}
+
+ul.tree .tree-header.collapsed .tree-icon-right {
+    display: inline-block;
+}
+
+ul.tree .tree-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: start;
+    width: 15px;
+    height: 20px;
+}
+
+ul.tree .tree-icon svg {
+    stroke-width: 1px;
+}

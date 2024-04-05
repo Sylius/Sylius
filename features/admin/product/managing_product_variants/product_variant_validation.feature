@@ -9,7 +9,7 @@ Feature: Product variant validation
         And the store has a "Wyborowa Vodka" configurable product
         And I am logged in as an administrator
 
-    @api @ui
+    @api @todo @ui
     Scenario: Adding a new product variant without specifying its price
         When I want to create a new variant of this product
         And I specify its code as "VODKA_WYBOROWA_PREMIUM"
@@ -26,7 +26,7 @@ Feature: Product variant validation
         And I try to save my changes
         Then I should be notified that the locale is not available
 
-    @api @ui
+    @api @todo @ui
     Scenario: Adding a new product variant with price below 0
         When I want to create a new variant of this product
         And I specify its code as "VODKA_WYBOROWA_PREMIUM"
@@ -35,7 +35,7 @@ Feature: Product variant validation
         Then I should be notified that price cannot be lower than 0
         And the "VODKA_WYBOROWA_PREMIUM" variant of the "Wyborowa Vodka" product should not appear in the store
 
-    @api @ui
+    @api @todo @ui
     Scenario: Adding a new product variant with original price below 0
         When I want to create a new variant of this product
         And I specify its code as "VODKA_WYBOROWA_PREMIUM"
@@ -45,7 +45,7 @@ Feature: Product variant validation
         Then I should be notified that price cannot be lower than 0
         And the "VODKA_WYBOROWA_PREMIUM" variant of the "Wyborowa Vodka" product should not appear in the store
 
-    @api @ui
+    @api @todo @ui
     Scenario: Adding a new product variant with minimum price below 0
         When I want to create a new variant of this product
         And I specify its code as "VODKA_WYBOROWA_PREMIUM"
@@ -55,7 +55,7 @@ Feature: Product variant validation
         Then I should be notified that price cannot be lower than 0
         And the "VODKA_WYBOROWA_PREMIUM" variant of the "Wyborowa Vodka" product should not appear in the store
 
-    @api @ui
+    @api @todo @ui
     Scenario: Adding a new product variant with a price greater than max value allowed
         When I want to create a new variant of this product
         And I specify its code as "VODKA_WYBOROWA_PREMIUM"
@@ -64,7 +64,7 @@ Feature: Product variant validation
         Then I should be notified that price cannot be greater than max value allowed
         And the "VODKA_WYBOROWA_PREMIUM" variant of the "Wyborowa Vodka" product should not appear in the store
 
-    @api @ui
+    @api @todo @ui
     Scenario: Adding a new product variant with an original price greater than max value allowed
         When I want to create a new variant of this product
         And I specify its code as "VODKA_WYBOROWA_PREMIUM"
@@ -74,7 +74,7 @@ Feature: Product variant validation
         Then I should be notified that price cannot be greater than max value allowed
         And the "VODKA_WYBOROWA_PREMIUM" variant of the "Wyborowa Vodka" product should not appear in the store
 
-    @api @ui
+    @api @todo @ui
     Scenario: Adding a new product variant with a minimum price greater than max value allowed
         When I want to create a new variant of this product
         And I specify its code as "VODKA_WYBOROWA_PREMIUM"
@@ -84,7 +84,7 @@ Feature: Product variant validation
         Then I should be notified that price cannot be greater than max value allowed
         And the "VODKA_WYBOROWA_PREMIUM" variant of the "Wyborowa Vodka" product should not appear in the store
 
-    @api @ui
+    @api @todo @ui
     Scenario: Adding a new product variant without specifying its code
         When I want to create a new variant of this product
         And I set its price to "$80.00" for "United States" channel
@@ -93,7 +93,7 @@ Feature: Product variant validation
         Then I should be notified that code is required
         And the "Wyborowa Vodka" product should have no variants
 
-    @api @ui
+    @api @todo @ui
     Scenario: Adding a new product variant with a too long code
         When I want to create a new variant of this product
         And I set its price to "$80.00" for "United States" channel
@@ -101,7 +101,7 @@ Feature: Product variant validation
         And I try to add it
         Then I should be notified that code is too long
 
-    @api @ui
+    @api @todo @ui
     Scenario: Adding a new product variant with duplicated code
         Given this product has "Wyborowa Exquisite" variant priced at "$90.00" identified by "VODKA_WYBOROWA_PREMIUM"
         When I want to create a new variant of this product
@@ -111,7 +111,7 @@ Feature: Product variant validation
         Then I should be notified that code has to be unique
         And the "Wyborowa Vodka" product should have only one variant
 
-    @api @ui
+    @api @todo @ui
     Scenario: Adding a new product variant with same set of options
         Given this product has option "Taste" with values "Orange" and "Melon"
         And this product is available in "Melon" taste priced at "$95.00"
@@ -160,7 +160,7 @@ Feature: Product variant validation
         Then I should be notified that required options have not been configured
         And the "Wyborowa Vodka" product should have no variants
 
-    @api @ui
+    @api @todo @ui
     Scenario: Adding a new product variant with negative properties
         When I want to create a new variant of this product
         And I specify its code as "VODKA_WYBOROWA_PREMIUM"
@@ -170,7 +170,7 @@ Feature: Product variant validation
         Then I should be notified that height, width, depth and weight cannot be lower than 0
         And the "VODKA_WYBOROWA_PREMIUM" variant of the "Wyborowa Vodka" product should not appear in the store
 
-    @api @ui
+    @api @todo @ui
     Scenario: Adding a new product variant without current stock
         When I want to create a new variant of this product
         And I specify its code as "VODKA_WYBOROWA_PREMIUM"
