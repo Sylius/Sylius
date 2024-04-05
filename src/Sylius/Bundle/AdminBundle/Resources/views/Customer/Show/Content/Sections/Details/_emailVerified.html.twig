@@ -1,0 +1,14 @@
+{% from '@SyliusAdmin/Shared/Helper/icon.html.twig' import icon as _icon %}
+
+<div class="row">
+    <div class="col-12 col-md-4 fw-bold">{{ 'sylius.ui.email_verified'|trans }}</div>
+    <div class="col-12 col-md-8" {{ sylius_test_html_attribute('customer-verified-email') }}>
+        <span>
+            {% if hookable_data.user != null and hookable_data.user.verifiedAt != null %}
+                {{ _icon({icon: 'check', class: 'icon text-green'}) }}
+            {% else %}
+                {{ _icon({icon: 'x', class: 'icon icon-sm text-secondary'}) }}
+            {% endif %}
+        </span>
+    </div>
+</div>

@@ -646,6 +646,7 @@ sylius:
         percentage_discount: 'Percentage discount'
         permissions: 'Permissions'
         personal_information: 'Personal information'
+        phone: 'Phone'
         phone_number: 'Phone number'
         place_order: 'Place order'
         placed_an_order: 'You have successfully placed an order.'
