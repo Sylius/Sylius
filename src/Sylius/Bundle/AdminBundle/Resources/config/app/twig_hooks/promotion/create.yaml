@@ -1,0 +1,55 @@
+twig_hooks:
+    hooks:
+        'sylius_admin.promotion.create.content':
+            form:
+                template: '@SyliusAdmin/Shared/Crud/Create/Content/_form.html.twig'
+                configuration:
+                    render_rest: false
+        
+        'sylius_admin.promotion.create.content.form':
+            sections:
+                template: '@SyliusAdmin/Promotion/Form/_sections.html.twig'
+        
+        'sylius_admin.promotion.create.content.form.sections':
+            general:
+                template: '@SyliusAdmin/Promotion/Form/Sections/_general.html.twig'
+            configuration:
+                template: '@SyliusAdmin/Promotion/Form/Sections/_configuration.html.twig'
+            translations:
+                template: '@SyliusAdmin/Promotion/Form/Sections/_translations.html.twig'
+        
+        'sylius_admin.promotion.create.content.form.sections.general':
+            _name:
+                template: '@SyliusAdmin/Promotion/Form/Sections/General/_name.html.twig'
+            code:
+                template: '@SyliusAdmin/Promotion/Form/Sections/General/_code.html.twig'
+            description:
+                template: '@SyliusAdmin/Promotion/Form/Sections/General/_description.html.twig'
+            channels:
+                template: '@SyliusAdmin/Promotion/Form/Sections/General/_channels.html.twig'
+        
+        'sylius_admin.promotion.create.content.form.sections.configuration':
+            left:
+                template: '@SyliusAdmin/Promotion/Form/Sections/Configuration/_left.html.twig'
+            right:
+                template: '@SyliusAdmin/Promotion/Form/Sections/Configuration/_right.html.twig'
+        
+        'sylius_admin.promotion.create.content.form.sections.configuration.left':
+            usage_limit:
+                template: '@SyliusAdmin/Promotion/Form/Sections/Configuration/Left/_usageLimit.html.twig'
+            priority:
+                template: '@SyliusAdmin/Promotion/Form/Sections/Configuration/Left/_priority.html.twig'
+            starts_at:
+                template: '@SyliusAdmin/Promotion/Form/Sections/Configuration/Left/_startsAt.html.twig'
+            ends_at:
+                template: '@SyliusAdmin/Promotion/Form/Sections/Configuration/Left/_endsAt.html.twig'
+        
+        'sylius_admin.promotion.create.content.form.sections.configuration.right':
+            header:
+                template: '@SyliusAdmin/Promotion/Form/Sections/Configuration/Right/_header.html.twig'
+            coupon_based:
+                template: '@SyliusAdmin/Promotion/Form/Sections/Configuration/Right/_couponBased.html.twig'
+            exclusive:
+                template: '@SyliusAdmin/Promotion/Form/Sections/Configuration/Right/_exclusive.html.twig'
+            applies_to_discounted:
+                template: '@SyliusAdmin/Promotion/Form/Sections/Configuration/Right/_appliesToDiscounted.html.twig'
