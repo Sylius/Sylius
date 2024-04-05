@@ -8,6 +8,14 @@ Feature: Text product attribute validation
         Given the store is available in "English (United States)"
         And I am logged in as an administrator
 
+    @no-ui @api
+    Scenario: Trying to add product attribute translation in unexisting locale
+        When I want to create a new text product attribute
+        And I specify its code as "t_shirt_with_cotton"
+        And I name it "Marque de jeans en coton" in "French (France)"
+        And I save my changes
+        Then I should be notified that the locale is not available
+
     @todo @ui @api
     Scenario: Trying to add a new text product attribute without name
         When I want to create a new text product attribute

@@ -37,6 +37,11 @@
                 <option name="pattern">/^[A-Z]{2}-[A-Z0-9]{1,}$/</option>
                 <option name="groups">sylius</option>
             </constraint>
+            <constraint name="Length">
+                <option name="max">255</option>
+                <option name="maxMessage">sylius.province.code.max_length</option>
+                <option name="groups">sylius</option>
+            </constraint>
         </property>
         <property name="name">
             <constraint name="NotBlank">

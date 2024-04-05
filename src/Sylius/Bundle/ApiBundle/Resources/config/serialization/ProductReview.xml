@@ -97,10 +97,6 @@
             <group>sylius:admin:product_review:index</group>
             <group>admin:product_review:show</group>
             <group>sylius:admin:product_review:show</group>
-            <group>shop:product_review:index</group>
-            <group>sylius:shop:product_review:index</group>
-            <group>shop:product_review:show</group>
-            <group>sylius:shop:product_review:show</group>
         </attribute>
         <attribute name="reviewSubject">
             <group>admin:product_review:index</group>

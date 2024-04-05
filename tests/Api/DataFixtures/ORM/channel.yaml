@@ -27,6 +27,7 @@ Sylius\Component\Core\Model\Channel:
         taxCalculationStrategy: 'order_items_based'
         channelPriceHistoryConfig: '@mobile_price_history_config'
         shopBillingData: '@billing_data'
+        shippingAddressInCheckoutRequired: true
 
 Sylius\Component\Core\Model\ChannelPriceHistoryConfig:
     web_price_history_config:

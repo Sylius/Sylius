@@ -112,6 +112,8 @@ trait FormAwareTrait
             'field_avatar' => '#sylius_admin_user_avatar_file',
             'field_email' => '#sylius_admin_user_email',
             'field_enabled' => '#sylius_admin_user_enabled',
+            'field_first_name' => '#sylius_admin_user_firstName',
+            'field_last_name' => '#sylius_admin_user_lastName',
             'field_locale_code' => '#sylius_admin_user_localeCode',
             'field_name' => '#sylius_admin_user_username',
             'field_password' => '#sylius_admin_user_plainPassword',

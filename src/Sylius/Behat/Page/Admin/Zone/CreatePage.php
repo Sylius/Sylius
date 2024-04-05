@@ -15,13 +15,13 @@ namespace Sylius\Behat\Page\Admin\Zone;
 
 use Behat\Mink\Exception\ElementNotFoundException;
 use Sylius\Behat\Behaviour\NamesIt;
-use Sylius\Behat\Behaviour\SpecifiesItsCode;
+use Sylius\Behat\Behaviour\SpecifiesItsField;
 use Sylius\Behat\Page\Admin\Crud\CreatePage as BaseCreatePage;
 
 class CreatePage extends BaseCreatePage implements CreatePageInterface
 {
     use NamesIt;
-    use SpecifiesItsCode;
+    use SpecifiesItsField;
 
     public function addMember(): void
     {

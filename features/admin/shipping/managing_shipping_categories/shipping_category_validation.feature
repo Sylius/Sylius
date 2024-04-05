@@ -18,6 +18,14 @@ Feature: Shipping category validation
         And shipping category with name "Standard" should not be added
 
     @todo @ui @api
+    Scenario: Trying to add a new shipping category with a too long code
+        When I want to create a new shipping category
+        And I name it "Standard"
+        And I specify a too long code
+        And I try to add it
+        Then I should be notified that code is too long
+
+    @todo @ui @api
     Scenario: Trying to add a new shipping category without specifying its name
         When I want to create a new shipping category
         And I specify its code as "STANDARD"

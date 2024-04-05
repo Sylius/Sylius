@@ -9,6 +9,14 @@ Feature: Promotion validation
         And that channel allows to shop using "English (United States)" and "Polish (Poland)" locales
         And I am logged in as an administrator
 
+    @api @no-ui
+    Scenario: Trying to add promotion with translation in unexisting locale
+        Given there is a promotion "Christmas sale"
+        When I want to modify this promotion
+        And I specify its label as "Vente de Noël" in "French (France)" locale
+        And I try to save my changes
+        Then I should be notified that the locale is not available
+
     @api @todo @ui
     Scenario: Trying to add a new promotion without specifying its code
         When I want to create a new promotion
@@ -17,6 +25,14 @@ Feature: Promotion validation
         And I try to add it
         Then I should be notified that code is required
         And promotion with name "No-VAT promotion" should not be added
+
+    @api @todo @ui
+    Scenario: Trying to add a new promotion with a too long code
+        When I want to create a new promotion
+        And I name it "No-VAT promotion"
+        And I specify a too long code
+        And I try to add it
+        Then I should be notified that code is too long
 
     @api @todo @ui
     Scenario: Trying to add a new promotion without specifying its name

@@ -17,6 +17,18 @@
                         <attribute>sylius:admin:taxon:index</attribute>
                     </attribute>
                 </attribute>
+                <attribute name="openapi_context">
+                    <attribute name="parameters">
+                        <attribute>
+                            <attribute name="name">imageFilter</attribute>
+                            <attribute name="in">query</attribute>
+                            <attribute name="description">Provide one of supported image liip imagine filters</attribute>
+                            <attribute name="schema">
+                                <attribute name="type">string</attribute>
+                            </attribute>
+                        </attribute>
+                    </attribute>
+                </attribute>
             </collectionOperation>
 
             <collectionOperation name="admin_post">
@@ -45,6 +57,18 @@
                         <attribute>sylius:shop:taxon:index</attribute>
                     </attribute>
                 </attribute>
+                <attribute name="openapi_context">
+                    <attribute name="parameters">
+                        <attribute>
+                            <attribute name="name">imageFilter</attribute>
+                            <attribute name="in">query</attribute>
+                            <attribute name="description">Provide one of supported image liip imagine filters</attribute>
+                            <attribute name="schema">
+                                <attribute name="type">string</attribute>
+                            </attribute>
+                        </attribute>
+                    </attribute>
+                </attribute>
             </collectionOperation>
         </collectionOperations>
 
@@ -56,6 +80,18 @@
                     <attribute name="groups">
                         <attribute>admin:taxon:show</attribute>
                         <attribute>sylius:admin:taxon:show</attribute>
+                    </attribute>
+                </attribute>
+                <attribute name="openapi_context">
+                    <attribute name="parameters">
+                        <attribute>
+                            <attribute name="name">imageFilter</attribute>
+                            <attribute name="in">query</attribute>
+                            <attribute name="description">Provide one of supported image liip imagine filters</attribute>
+                            <attribute name="schema">
+                                <attribute name="type">string</attribute>
+                            </attribute>
+                        </attribute>
                     </attribute>
                 </attribute>
             </itemOperation>
@@ -91,6 +127,18 @@
                         <attribute>sylius:shop:taxon:show</attribute>
                     </attribute>
                 </attribute>
+                <attribute name="openapi_context">
+                    <attribute name="parameters">
+                        <attribute>
+                            <attribute name="name">imageFilter</attribute>
+                            <attribute name="in">query</attribute>
+                            <attribute name="description">Provide one of supported image liip imagine filters</attribute>
+                            <attribute name="schema">
+                                <attribute name="type">string</attribute>
+                            </attribute>
+                        </attribute>
+                    </attribute>
+                </attribute>
             </itemOperation>
         </itemOperations>
 
@@ -99,7 +147,19 @@
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/admin/taxons/{code}/images</attribute>
                 <attribute name="openapi_context">
-                    <attribute name="summary">Retrieves the collection of TaxonImage resources for a given Taxon.</attribute>
+                    <attribute name="summary">Retrieves the collection of TaxonImage resources for a given Taxon.
+                    </attribute>
+                    <attribute name="parameters">
+                        <attribute>
+                            <attribute name="name">imageFilter</attribute>
+                            <attribute name="in">query</attribute>
+                            <attribute name="description">Provide one of supported image liip imagine filters
+                            </attribute>
+                            <attribute name="schema">
+                                <attribute name="type">string</attribute>
+                            </attribute>
+                        </attribute>
+                    </attribute>
                 </attribute>
             </subresourceOperation>
         </subresourceOperations>

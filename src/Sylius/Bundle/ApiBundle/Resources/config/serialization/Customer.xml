@@ -51,6 +51,10 @@
             <group>sylius:shop:customer:show</group>
             <group>shop:customer:update</group>
             <group>sylius:shop:customer:update</group>
+            <group>shop:product_review:index</group>
+            <group>sylius:shop:product_review:index</group>
+            <group>shop:product_review:show</group>
+            <group>sylius:shop:product_review:show</group>
         </attribute>
 
         <attribute name="lastName">

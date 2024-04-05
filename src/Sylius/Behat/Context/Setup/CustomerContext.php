@@ -226,6 +226,8 @@ final class CustomerContext implements Context
         $customer->setFirstName($firstName);
         $customer->setLastName($lastName);
         $customer->setEmail($email);
+        $customer->setPhoneNumber('123456789');
+        $customer->setGender('m');
 
         $user->setUsername($email);
         $user->setPlainPassword($password);

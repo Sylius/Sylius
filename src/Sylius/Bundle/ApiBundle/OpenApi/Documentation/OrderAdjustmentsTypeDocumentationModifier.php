@@ -18,19 +18,20 @@ use ApiPlatform\OpenApi\OpenApi;
 
 final class OrderAdjustmentsTypeDocumentationModifier implements DocumentationModifierInterface
 {
-    public const PATH = '%s/admin/orders/{tokenValue}/adjustments';
-
     public function __construct(private string $apiRoute, private string $adjustmentResourceClass)
     {
     }
 
     public function modify(OpenApi $docs): OpenApi
     {
-        $paths = $docs->getPaths();
+        $path = sprintf('%s/admin/orders/{tokenValue}/adjustments', $this->apiRoute);
 
-        $path = sprintf(self::PATH, $this->apiRoute);
+        $paths = $docs->getPaths();
         $pathItem = $paths->getPath($path);
-        $operation = $pathItem->getGet();
+        $operation = $pathItem?->getGet();
+        if (null === $operation) {
+            return $docs;
+        }
 
         $parameters = $operation->getParameters();
         $parameters[] = new Parameter(

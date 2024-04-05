@@ -4,5 +4,5 @@
   "@type": "ProductImage",
   "id": "@integer@",
   "type": "thumbnail",
-  "path": "\/media\/image\/uo\/thumbnail.jpg"
+  "path": "@string@.startsWith('https').contains('sylius_original').endsWith('thumbnail.jpg')"
 }

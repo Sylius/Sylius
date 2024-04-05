@@ -86,7 +86,7 @@ final class ExchangeRatesTest extends JsonApiTestCase
             uri: '/api/v2/admin/exchange-rates',
             server: $header,
             content: json_encode([
-                'ratio' => '3.2',
+                'ratio' => 3.2,
                 'sourceCurrency' => '/api/v2/admin/currencies/CNY',
                 'targetCurrency' => '/api/v2/admin/currencies/PLN',
             ], \JSON_THROW_ON_ERROR),
@@ -117,7 +117,7 @@ final class ExchangeRatesTest extends JsonApiTestCase
             uri: '/api/v2/admin/exchange-rates/' . $exchangeRate->getId(),
             server: $header,
             content: json_encode([
-                'ratio' => '0.25',
+                'ratio' => 0.25,
             ], \JSON_THROW_ON_ERROR),
         );
 

@@ -15,7 +15,7 @@ namespace Sylius\Behat\Page\Admin\Product;
 
 use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Session;
-use Sylius\Behat\Behaviour\SpecifiesItsCode;
+use Sylius\Behat\Behaviour\SpecifiesItsField;
 use Sylius\Behat\Page\Admin\Crud\CreatePage as BaseCreatePage;
 use Sylius\Behat\Service\AutocompleteHelper;
 use Sylius\Behat\Service\DriverHelper;
@@ -29,7 +29,7 @@ use Webmozart\Assert\Assert;
 class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProductPageInterface
 {
     use FormTrait;
-    use SpecifiesItsCode;
+    use SpecifiesItsField;
 
     public function __construct(
         Session $session,

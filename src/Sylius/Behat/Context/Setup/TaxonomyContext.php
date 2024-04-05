@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Setup;
 
 use Behat\Behat\Context\Context;
-use Behat\Mink\Element\NodeElement;
 use Doctrine\Persistence\ObjectManager;
 use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\ImageInterface;
@@ -189,12 +188,7 @@ final class TaxonomyContext implements Context
         return $taxon;
     }
 
-    /**
-     * @param string $name
-     *
-     * @return NodeElement
-     */
-    private function getParameter($name)
+    private function getParameter(string $name): ?string
     {
         return $this->minkParameters[$name] ?? null;
     }

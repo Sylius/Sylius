@@ -22,7 +22,11 @@
         <field name="objectId" column="object_id" length="64" nullable="true" />
         <field name="objectClass" column="object_class" type="string" />
         <field name="version" column="version" type="integer" />
-        <field name="data" column="data" type="array" />
+        <field name="data" column="data" type="json" nullable="true">
+            <options>
+                <option name="jsonb">true</option>
+            </options>
+        </field>
         <field name="username" column="username" type="string" nullable="true" />
     </mapped-superclass>
 </doctrine-mapping>

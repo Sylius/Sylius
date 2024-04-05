@@ -49,6 +49,6 @@ final class OrderItemUnitsTest extends JsonApiTestCase
 
         $response = $this->client->getResponse();
 
-        $this->assertResponse($response, 'shop/order/get_order_item_unit_response', Response::HTTP_OK);
+        $this->assertResponse($response, 'shop/order_item/get_order_item_unit');
     }
 }

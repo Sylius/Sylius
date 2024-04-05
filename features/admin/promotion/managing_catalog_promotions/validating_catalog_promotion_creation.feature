@@ -12,11 +12,30 @@ Feature: Validating a catalog promotion creation
         And this product has "Python T-Shirt" variant priced at "$40.00"
         And I am logged in as an administrator
 
+    @api @no-ui
+    Scenario: Trying to add catalog promotion with translation in unexisting locale
+        When I want to create a new catalog promotion
+        And I specify its code as "winter_sale"
+        And I name it "Winter sale"
+        And I specify its label as "Vente -50%" in "French (France)"
+        And I save my changes
+        Then I should be notified that the locale is not available
+
     @api @todo @ui
     Scenario: Trying to create a catalog promotion without specifying its code and name
         When I create a new catalog promotion without specifying its code and name
         Then I should be notified that code and name are required
         And there should be an empty list of catalog promotions
+
+    @api @todo @ui
+    Scenario: Trying to create a catalog promotion with a too long code
+        When I want to create a new catalog promotion
+        And I name it "Winter sale"
+        And I specify its label as "Winter -50%" in "English (United States)"
+        And I describe it as "This promotion gives a 50% discount on all products" in "English (United States)"
+        And I specify a too long code
+        And I try to add it
+        Then I should be notified that code is too long
 
     @api @todo @ui
     Scenario: Trying to create a catalog promotion with taken code

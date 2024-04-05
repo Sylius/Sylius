@@ -18,6 +18,21 @@ Feature: Payment method validation
         Then I should be notified that code is required
         And the payment method with name "Paypal Express Checkout" should not be added
 
+    @no-ui @api
+    Scenario: Trying to add a new payment method translation in unexisting language
+        When I want to modify the "Offline" payment method
+        And I name it "Offline" in "French (France)"
+        And I try to save my changes
+        Then I should be notified that the locale is not available
+
+    @todo @ui @api
+    Scenario: Trying to add a new payment method with a too long code
+        When I want to create a new payment method with "Paypal Express Checkout" gateway factory
+        And I name it "Paypal Express Checkout" in "English (United States)"
+        And I specify a too long code
+        And I add it
+        Then I should be notified that code is too long
+
     @todo @ui @api
     Scenario: Trying to add a new payment method without specifying its name
         When I want to create a new payment method with "Paypal Express Checkout" gateway factory

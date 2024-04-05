@@ -17,6 +17,7 @@ use ApiPlatform\Api\IriConverterInterface;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
+use Sylius\Behat\Context\Api\Admin\Helper\ValidationTrait;
 use Sylius\Behat\Context\Api\Resources;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Addressing\Model\CountryInterface;
@@ -27,6 +28,8 @@ use Webmozart\Assert\Assert;
 
 final class ManagingZonesContext implements Context
 {
+    use ValidationTrait;
+
     public function __construct(
         private ApiClientInterface $client,
         private ResponseCheckerInterface $responseChecker,
@@ -98,6 +101,16 @@ final class ManagingZonesContext implements Context
     {
         $this->client->addSubResourceData('members', [
             'code' => $zone->getCode(),
+        ]);
+    }
+
+    /**
+     * @When I provide a too long zone member code
+     */
+    public function iProvideATooLongZoneMemberCode(): void
+    {
+        $this->client->addSubResourceData('members', [
+            'code' => str_repeat('a', $this->getMaxCodeLength() + 1),
         ]);
     }
 
@@ -444,6 +457,17 @@ final class ManagingZonesContext implements Context
         Assert::contains(
             $this->responseChecker->getError($this->client->getLastResponse()),
             'members: Please add at least 1 zone member.',
+        );
+    }
+
+    /**
+     * @Then I should be informed that the provided zone member code is too long
+     */
+    public function iShouldBeNotifiedThatTheZoneMemberCodeIsTooLong(): void
+    {
+        Assert::contains(
+            $this->responseChecker->getError($this->client->getLastResponse()),
+            'The zone member code must not be longer than',
         );
     }
 

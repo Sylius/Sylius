@@ -17,6 +17,7 @@ use ApiPlatform\Api\IriConverterInterface;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
+use Sylius\Behat\Context\Api\Admin\Helper\ValidationTrait;
 use Sylius\Behat\Context\Api\Resources;
 use Sylius\Behat\Service\Converter\SectionAwareIriConverterInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
@@ -31,7 +32,11 @@ use Webmozart\Assert\Assert;
 
 final class ManagingProductVariantsContext implements Context
 {
+    use ValidationTrait;
+
     private const FIRST_COLLECTION_ITEM = 0;
+
+    private const HUGE_NUMBER = 2147483647;
 
     public function __construct(
         private ProductVariantResolverInterface $variantResolver,
@@ -82,6 +87,30 @@ final class ManagingProductVariantsContext implements Context
                 'channelCode' => $channel->getCode(),
             ],
         ]);
+    }
+
+    /**
+     * @When I set its price to a huge number for the :channel channel
+     */
+    public function iSetItsPriceToHugeNumberForTheChannel(ChannelInterface $channel): void
+    {
+        $this->iSetItsPriceToForChannel(self::HUGE_NUMBER, $channel);
+    }
+
+    /**
+     * @When I set its original price to a huge number for the :channel channel
+     */
+    public function iSetItsOriginalPriceToHugeNumberForTheChannel(ChannelInterface $channel): void
+    {
+        $this->iSetItsOriginalPriceToForChannel(self::HUGE_NUMBER, $channel);
+    }
+
+    /**
+     * @When I set its minimum price to a huge number for the :channel channel
+     */
+    public function iSetItsMinimumPriceAsOutOfRangeValueForChannel(ChannelInterface $channel): void
+    {
+        $this->iSetItsMinimumPriceToForChannel(self::HUGE_NUMBER, $channel);
     }
 
     /**
@@ -556,6 +585,17 @@ final class ManagingProductVariantsContext implements Context
         Assert::contains(
             $this->responseChecker->getError($this->client->getLastResponse()),
             'Price cannot be lower than 0.',
+        );
+    }
+
+    /**
+     * @Then I should be notified that price cannot be greater than max value allowed
+     */
+    public function iShouldBeNotifiedThatPriceCannotBeGreaterThanMaxValueAllowed(): void
+    {
+        Assert::contains(
+            $this->responseChecker->getError($this->client->getLastResponse()),
+            sprintf('Value must be less than %s.', self::HUGE_NUMBER),
         );
     }
 

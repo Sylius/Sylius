@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Tests\Api\Admin;
 
+use Sylius\Bundle\ApiBundle\Serializer\ImageNormalizer;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Tests\Api\JsonApiTestCase;
 use Sylius\Tests\Api\Utils\AdminUserLoginTrait;
@@ -45,6 +46,29 @@ final class TaxonsTest extends JsonApiTestCase
     }
 
     /** @test */
+    public function it_gets_a_taxon_with_an_image_filter(): void
+    {
+        $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'taxonomy.yaml']);
+        $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
+
+        /** @var TaxonInterface $taxon */
+        $taxon = $fixtures['category_taxon'];
+
+        $this->client->request(
+            method: 'GET',
+            uri: sprintf('/api/v2/admin/taxons/%s', $taxon->getCode()),
+            parameters: [ImageNormalizer::FILTER_QUERY_PARAMETER => 'sylius_small'],
+            server: $header,
+        );
+
+        $this->assertResponse(
+            $this->client->getResponse(),
+            'admin/taxon/get_taxon_with_image_filter_response',
+            Response::HTTP_OK,
+        );
+    }
+
+    /** @test */
     public function it_gets_taxons(): void
     {
         $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'taxonomy.yaml']);
@@ -55,6 +79,26 @@ final class TaxonsTest extends JsonApiTestCase
         $this->assertResponse(
             $this->client->getResponse(),
             'admin/taxon/get_taxons_response',
+            Response::HTTP_OK,
+        );
+    }
+
+    /** @test */
+    public function it_gets_taxons_with_an_image_filter(): void
+    {
+        $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'taxonomy.yaml']);
+        $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
+
+        $this->client->request(
+            method: 'GET',
+            uri: '/api/v2/admin/taxons',
+            parameters: [ImageNormalizer::FILTER_QUERY_PARAMETER => 'sylius_small'],
+            server: $header,
+        );
+
+        $this->assertResponse(
+            $this->client->getResponse(),
+            'admin/taxon/get_taxons_with_image_filter_response',
             Response::HTTP_OK,
         );
     }

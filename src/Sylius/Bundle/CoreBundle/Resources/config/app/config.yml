@@ -11,6 +11,7 @@ imports:
     - { resource: "@SyliusLocaleBundle/Resources/config/app/config.yml" }
     - { resource: "@SyliusOrderBundle/Resources/config/app/config.yml" }
     - { resource: "@SyliusPaymentBundle/Resources/config/app/config.yml" }
+    - { resource: "@SyliusPayumBundle/Resources/config/app/config.yaml" }
     - { resource: "@SyliusProductBundle/Resources/config/app/config.yml" }
     - { resource: "@SyliusPromotionBundle/Resources/config/app/config.yml" }
     - { resource: "@SyliusShippingBundle/Resources/config/app/config.yml" }
@@ -92,6 +93,7 @@ liip_imagine:
                 web_root: "%sylius_core.public_dir%"
                 cache_prefix: "media/cache"
     filter_sets:
+        sylius_original: ~
         sylius_small:
             filters:
                 thumbnail: { size: [120, 90], mode: outbound }
@@ -159,14 +161,3 @@ sonata_block:
                 resources: ~
                 statistics: ~
                 taxon: ~
-
-sylius_state_machine_abstraction:
-    graphs_to_adapters_mapping:
-        sylius_catalog_promotion: symfony_workflow
-        sylius_order: symfony_workflow
-        sylius_order_checkout: symfony_workflow
-        sylius_order_payment: symfony_workflow
-        sylius_order_shipping: symfony_workflow
-        sylius_payment: symfony_workflow
-        sylius_product_review: symfony_workflow
-        sylius_shipment: symfony_workflow

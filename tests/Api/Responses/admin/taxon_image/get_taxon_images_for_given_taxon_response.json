@@ -9,7 +9,7 @@
             "id": "@integer@",
             "owner": "\/api\/v2\/admin\/taxons\/CATEGORY",
             "type": "thumbnail",
-            "path": "@string@\/thumbnail.jpg"
+            "path": "@string@.contains('sylius_original').endsWith('thumbnail.jpg')"
         },
         {
             "@id": "\/api\/v2\/admin\/taxon-images\/@integer@",
@@ -17,7 +17,7 @@
             "id": "@integer@",
             "owner": "\/api\/v2\/admin\/taxons\/CATEGORY",
             "type": "banner",
-            "path": "@string@\/banner.jpg"
+            "path": "@string@.contains('sylius_original').endsWith('banner.jpg')"
         }
     ],
     "hydra:totalItems": 2
