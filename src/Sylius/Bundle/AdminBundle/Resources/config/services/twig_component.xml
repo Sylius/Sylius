@@ -82,5 +82,10 @@
             <argument type="service" id="sylius.repository.customer" />
             <argument type="service" id="sylius.customer_statistics_provider" />
         </service>
+
+        <service id="Sylius\Bundle\AdminBundle\TwigComponent\Channel\ChannelType">
+            <argument type="service" id="form.factory" />
+            <argument>Sylius\Bundle\ChannelBundle\Form\Type\ChannelType</argument>
+        </service>
     </services>
 </container>
