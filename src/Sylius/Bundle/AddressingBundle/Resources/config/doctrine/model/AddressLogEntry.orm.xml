@@ -28,5 +28,10 @@
             </options>
         </field>
         <field name="username" column="username" type="string" nullable="true" />
+
+        <indexes>
+            <index name="object_id_index" columns="object_id" />
+            <index name="object_class_index" columns="object_class" />
+        </indexes>
     </mapped-superclass>
 </doctrine-mapping>
