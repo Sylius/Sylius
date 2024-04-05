@@ -7,7 +7,7 @@ Feature: Channel validation
     Background:
         Given I am logged in as an administrator
 
-    @api @todo @ui
+    @api @ui
     Scenario: Trying to add a new channel without specifying its code
         When I want to create a new channel
         And I name it "Mobile channel"
@@ -16,7 +16,7 @@ Feature: Channel validation
         Then I should be notified that code is required
         And channel with name "Mobile channel" should not be added
 
-    @api @todo @ui
+    @api @ui
     Scenario: Trying to add a new channel with a too long name
         When I want to create a new channel
         And I specify its code as "MOBILE"
@@ -25,7 +25,7 @@ Feature: Channel validation
         Then I should be notified that name is too long
         And channel with code "MOBILE" should not be added
 
-    @api @todo @ui
+    @api @ui
     Scenario: Trying to add a new channel with a too long code
         When I want to create a new channel
         And I name it "Mobile channel"
@@ -33,7 +33,7 @@ Feature: Channel validation
         And I try to add it
         Then I should be notified that code is too long
 
-    @api @todo @ui
+    @api @ui
     Scenario: Trying to add a new channel without specifying its name
         When I want to create a new channel
         And I specify its code as "MOBILE"
@@ -42,7 +42,7 @@ Feature: Channel validation
         Then I should be notified that name is required
         And channel with code "MOBILE" should not be added
 
-    @api @todo @ui
+    @api @ui
     Scenario: Trying to add a new channel with too long color
         When I want to create a new channel
         And I specify its code as "MOBILE"
@@ -51,7 +51,7 @@ Feature: Channel validation
         Then I should be notified that color is too long
         And channel with code "MOBILE" should not be added
 
-    @api @todo @ui
+    @api @ui
     Scenario: Trying to add a new channel with too long hostname
         When I want to create a new channel
         And I specify its code as "MOBILE"
@@ -78,7 +78,7 @@ Feature: Channel validation
         Then I should be notified that "tax calculation strategy" is too long
         And channel with code "MOBILE" should not be added
 
-    @api @todo @ui
+    @api @ui
     Scenario: Trying to add a new channel without base currency
         When I want to create a new channel
         And I specify its code as "MOBILE"
@@ -87,7 +87,7 @@ Feature: Channel validation
         Then I should be notified that base currency is required
         And channel with code "MOBILE" should not be added
 
-    @api @todo @ui
+    @api @ui
     Scenario: Trying to add a new channel without default locale
         When I want to create a new channel
         And I specify its code as "MOBILE"
@@ -96,7 +96,7 @@ Feature: Channel validation
         Then I should be notified that default locale is required
         And channel with code "MOBILE" should not be added
 
-    @api @todo @ui
+    @api @ui
     Scenario: Trying to add a new channel with too long contact email
         When I want to create a new channel
         And I specify its code as "MOBILE"
@@ -105,7 +105,7 @@ Feature: Channel validation
         Then I should be notified that "contact email" is too long
         And channel with code "MOBILE" should not be added
 
-    @api @todo @ui
+    @api @ui
     Scenario: Trying to add a new channel with too long contact phone number
         When I want to create a new channel
         And I specify its code as "MOBILE"
@@ -114,7 +114,7 @@ Feature: Channel validation
         Then I should be notified that "contact phone number" is too long
         And channel with code "MOBILE" should not be added
 
-    @api @todo @ui
+    @api @ui
     Scenario: Trying to remove name from existing channel
         Given the store operates on a channel named "Web Channel"
         When I want to modify this channel

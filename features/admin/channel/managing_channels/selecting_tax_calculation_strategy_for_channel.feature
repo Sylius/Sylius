@@ -9,7 +9,7 @@ Feature: Selecting tax calculation strategy for a channel
         And the store has locale "English (United States)"
         And I am logged in as an administrator
 
-    @todo @ui
+    @ui
     Scenario: Adding a new channel with implicitly selected tax calculation strategy
         When I want to create a new channel
         And I specify its code as "MOBILE"

@@ -9,7 +9,7 @@ Feature: Not being able to add a disabled channel when no other exist
         And the store has locale "English (United States)"
         And I am logged in as an administrator
 
-    @api @todo @ui
+    @api @ui
     Scenario: Trying to add a new disabled channel when no other exist
         When I want to create a new channel
         And I specify its code as "MOBILE"

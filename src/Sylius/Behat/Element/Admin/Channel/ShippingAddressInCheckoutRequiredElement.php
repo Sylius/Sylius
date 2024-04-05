@@ -17,14 +17,17 @@ use FriendsOfBehat\PageObjectExtension\Element\Element;
 
 final class ShippingAddressInCheckoutRequiredElement extends Element implements ShippingAddressInCheckoutRequiredElementInterface
 {
+    private const BILLING_RADIO_VALUE = '0';
+    private const SHIPPING_RADIO_VALUE = '1';
+
     public function requireShippingAddressInCheckout(): void
     {
-        $this->getElement('shipping_address_in_checkout_required')->check();
+        $this->getElement('shipping_address_in_checkout_required')->selectOption(self::SHIPPING_RADIO_VALUE);
     }
 
     public function requireBillingAddressInCheckout(): void
     {
-        $this->getElement('shipping_address_in_checkout_required')->uncheck();
+        $this->getElement('shipping_address_in_checkout_required')->selectOption(self::BILLING_RADIO_VALUE);
     }
 
     public function requireAddressTypeInCheckout(string $type): void
@@ -40,7 +43,7 @@ final class ShippingAddressInCheckoutRequiredElement extends Element implements 
 
     public function isShippingAddressInCheckoutRequired(): bool
     {
-        return $this->getElement('shipping_address_in_checkout_required')->isChecked();
+        return $this->getElement('shipping_address_in_checkout_required')->getValue() == self::SHIPPING_RADIO_VALUE;
     }
 
     public function getRequiredAddressTypeInCheckout(): string
@@ -55,7 +58,7 @@ final class ShippingAddressInCheckoutRequiredElement extends Element implements 
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
-            'shipping_address_in_checkout_required' => '#sylius_channel_shippingAddressInCheckoutRequired',
+            'shipping_address_in_checkout_required' => '[name="sylius_channel[shippingAddressInCheckoutRequired]"]',
         ]);
     }
 }
