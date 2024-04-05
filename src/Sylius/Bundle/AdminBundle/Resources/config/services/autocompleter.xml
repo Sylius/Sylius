@@ -17,5 +17,10 @@
             <argument>%sylius.model.product_attribute.class%</argument>
             <tag name="ux.entity_autocompleter" alias="product_attribute" />
         </service>
+
+        <service id="sylius_admin.autocompleter.taxon" class="Sylius\Bundle\AdminBundle\Autocompleter\TaxonAutocompleter">
+            <argument>%sylius.model.taxon.class%</argument>
+            <tag name="ux.entity_autocompleter" alias="taxon_autocomplete_choice_type" />
+        </service>
     </services>
 </container>
