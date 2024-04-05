@@ -9,7 +9,7 @@ Feature: Selecting available locales for a channel
         And the store has locale "English (United States)"
         And I am logged in as an administrator
 
-    @api @todo @ui
+    @api @ui
     Scenario: Adding a new channel with locales
         When I want to create a new channel
         And I specify its code as "MOBILE"
