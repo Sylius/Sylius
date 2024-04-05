@@ -47,8 +47,7 @@
         "theofidry/alice-data-fixtures": "^1.4"
     },
     "conflict": {
-        "doctrine/doctrine-bundle": "2.3.0",
-        "lexik/jwt-authentication-bundle": "^2.18"
+        "doctrine/doctrine-bundle": "2.3.0"
     },
     "config": {
         "allow-plugins": {
