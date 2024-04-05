@@ -7,9 +7,11 @@
     </div>
 
     <div class="card-body">
-        {% hook [main_hook, fallback_hook] with hookable_data|merge({
-            parent_main_hook: main_hook,
-            parent_fallback_hook: fallback_hook,
-        }) %}
+        <div class="row">
+            {% hook [main_hook, fallback_hook] with hookable_data|merge({
+                parent_main_hook: main_hook,
+                parent_fallback_hook: fallback_hook,
+            }) %}
+        </div>
     </div>
 </div>
