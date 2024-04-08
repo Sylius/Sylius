@@ -42,7 +42,7 @@ final class OrderItemAdjustmentsSubresourceDataProviderSpec extends ObjectBehavi
         ;
     }
 
-    function it_providers_empty_array_if_order_item_does_not_exist(
+    function it_provides_empty_array_if_order_item_does_not_exist(
         OrderItemRepositoryInterface $orderItemRepository,
     ): void {
         $context['subresource_identifiers'] = ['tokenValue' => 'TOKEN', 'items' => '11'];
