@@ -1,10 +1,18 @@
+{% from '@SyliusShop/Shared/icon.html.twig' import icon as icon %}
+
 <div>
     {% if is_granted('ROLE_USER') %}
         <span {{ sylius_test_html_attribute('full-name') }}>{{ 'sylius.ui.hello'|trans }} {{ app.user.customer.fullName }}!</span>
         <a href="{{ path('sylius_shop_account_dashboard') }}">{{ 'sylius.ui.my_account'|trans }}</a>
         <a href="{{ path('sylius_shop_logout') }}" {{ sylius_test_html_attribute('logout-button') }}>{{ 'sylius.ui.logout'|trans }}</a>
     {% else %}
-        <a href="{{ path('sylius_shop_login') }}">{{ 'sylius.ui.login'|trans }}</a>
-        <a href="{{ path('sylius_shop_register') }}">{{ 'sylius.ui.register'|trans }}</a>
+        <div class="d-flex align-items-center px-2">
+            {{ icon('user') }}
+            <div class="d-none d-lg-block ps-2">
+                <a class="link-reset" href="{{ path('sylius_shop_login') }}">{{ 'sylius.ui.login'|trans }}</a>
+                <small class="text-black-50 px-1">|</small>
+                <a class="link-reset" href="{{ path('sylius_shop_register') }}">{{ 'sylius.ui.register'|trans }}</a>
+            </div>
+        </div>
     {% endif %}
 </div>
