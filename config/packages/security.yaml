@@ -93,6 +93,10 @@ security:
                 target: sylius_shop_homepage
                 invalidate_session: false
 
+        image_resolver:
+            pattern: ^/media/cache/resolve
+            security: false
+
         dev:
             pattern:  ^/(_(profiler|wdt)|css|images|js)/
             security: false
