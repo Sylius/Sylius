@@ -380,12 +380,12 @@ final class ManagingPromotionsContext implements Context
     /**
      * @When I set its usage limit to :usageLimit
      */
-    public function iSetItsUsageLimitTo($usageLimit)
+    public function iSetItsUsageLimitTo(int $usageLimit): void
     {
         /** @var CreatePageInterface|UpdatePageInterface $currentPage */
         $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
 
-        $currentPage->fillUsageLimit($usageLimit);
+        $currentPage->setUsageLimit($usageLimit);
     }
 
     /**
@@ -439,12 +439,12 @@ final class ManagingPromotionsContext implements Context
     /**
      * @When I make it coupon based
      */
-    public function iMakeItCouponBased()
+    public function iMakeItCouponBased(): void
     {
         /** @var CreatePageInterface|UpdatePageInterface $currentPage */
         $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
 
-        $currentPage->checkCouponBased();
+        $currentPage->makeCouponBased();
     }
 
     /**

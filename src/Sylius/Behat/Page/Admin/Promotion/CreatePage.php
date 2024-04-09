@@ -24,6 +24,7 @@ use Webmozart\Assert\Assert;
 
 class CreatePage extends BaseCreatePage implements CreatePageInterface
 {
+    use FormTrait;
     use NamesIt;
     use SpecifiesItsField;
 
@@ -111,46 +112,6 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
         $lastAction->fillField($option, $value);
     }
 
-    public function fillUsageLimit(string $limit): void
-    {
-        $this->getDocument()->fillField('Usage limit', $limit);
-    }
-
-    public function makeExclusive(): void
-    {
-        $this->getDocument()->checkField('Exclusive');
-    }
-
-    public function makeNotAppliesToDiscountedItem(): void
-    {
-        $this->getDocument()->unCheckField('Applies to already discounted order items');
-    }
-
-    public function checkCouponBased(): void
-    {
-        $this->getDocument()->checkField('Coupon based');
-    }
-
-    public function checkChannel(string $name): void
-    {
-        $this->getDocument()->checkField($name);
-    }
-
-    public function setStartsAt(\DateTimeInterface $dateTime): void
-    {
-        $timestamp = $dateTime->getTimestamp();
-
-        $this->getDocument()->fillField('sylius_promotion_startsAt_date', date('Y-m-d', $timestamp));
-        $this->getDocument()->fillField('sylius_promotion_startsAt_time', date('H:i', $timestamp));
-    }
-
-    public function setEndsAt(\DateTimeInterface $dateTime): void
-    {
-        $timestamp = $dateTime->getTimestamp();
-
-        $this->getDocument()->fillField('sylius_promotion_endsAt_date', date('Y-m-d', $timestamp));
-        $this->getDocument()->fillField('sylius_promotion_endsAt_time', date('H:i', $timestamp));
-    }
 
     public function getValidationMessageForAction(): string
     {
@@ -207,18 +168,15 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
 
     protected function getDefinedElements(): array
     {
-        return [
+        return array_merge(parent::getDefinedElements(), $this->getDefinedFormElements(), [
             'actions' => '#sylius_promotion_actions',
             'code' => '#sylius_promotion_code',
-            'ends_at' => '#sylius_promotion_endsAt',
             'minimum' => '#sylius_promotion_actions_0_configuration_WEB-US_filters_price_range_filter_min',
             'maximum' => '#sylius_promotion_actions_0_configuration_WEB-US_filters_price_range_filter_max',
-            'name' => '#sylius_promotion_name',
             'rules' => '#sylius_promotion_rules',
-            'starts_at' => '#sylius_promotion_startsAt',
             'count' => '#sylius_promotion_rules_0_configuration_count',
             'amount' => '#sylius_promotion_actions_0_configuration_WEB-US_amount',
-        ];
+        ]);
     }
 
     private function getChannelConfigurationOfLastAction(string $channelCode): NodeElement
