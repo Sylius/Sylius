@@ -391,7 +391,7 @@ final class ManagingPromotionsContext implements Context
     /**
      * @Then the :promotion promotion should be available to be used only :usageLimit times
      */
-    public function thePromotionShouldBeAvailableToUseOnlyTimes(PromotionInterface $promotion, $usageLimit)
+    public function thePromotionShouldBeAvailableToUseOnlyTimes(PromotionInterface $promotion, int $usageLimit): void
     {
         $this->iWantToModifyAPromotion($promotion);
 

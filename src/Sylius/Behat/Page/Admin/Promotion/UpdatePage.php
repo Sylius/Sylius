@@ -24,6 +24,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
 {
     use ChecksCodeImmutability;
     use CountsChannelBasedErrors;
+    use FormTrait;
     use NamesIt;
 
     public function setPriority(?int $priority): void
@@ -41,42 +42,6 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
         $field = $this->getDocument()->findField($channelName);
 
         return (bool) $field->getValue();
-    }
-
-    public function fillUsageLimit(string $limit): void
-    {
-        $this->getDocument()->fillField('Usage limit', $limit);
-    }
-
-    public function makeExclusive(): void
-    {
-        $this->getDocument()->checkField('Exclusive');
-    }
-
-    public function checkCouponBased(): void
-    {
-        $this->getDocument()->checkField('Coupon based');
-    }
-
-    public function checkChannel(string $name): void
-    {
-        $this->getDocument()->checkField($name);
-    }
-
-    public function setStartsAt(\DateTimeInterface $dateTime): void
-    {
-        $timestamp = $dateTime->getTimestamp();
-
-        $this->getDocument()->fillField('sylius_promotion_startsAt_date', date('Y-m-d', $timestamp));
-        $this->getDocument()->fillField('sylius_promotion_startsAt_time', date('H:i', $timestamp));
-    }
-
-    public function setEndsAt(\DateTimeInterface $dateTime): void
-    {
-        $timestamp = $dateTime->getTimestamp();
-
-        $this->getDocument()->fillField('sylius_promotion_endsAt_date', date('Y-m-d', $timestamp));
-        $this->getDocument()->fillField('sylius_promotion_endsAt_time', date('H:i', $timestamp));
     }
 
     public function hasStartsAt(\DateTimeInterface $dateTime): bool
@@ -189,16 +154,13 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
 
     protected function getDefinedElements(): array
     {
-        return [
+        return array_merge(parent::getDefinedElements(), $this->getDefinedFormElements(), [
             'action_field' => '[id^="sylius_promotion_actions_"][id$="_configuration_%channelCode%_%field%"]',
             'actions' => '#actions',
-            'applies_to_discounted' => '#sylius_promotion_appliesToDiscounted',
             'code' => '#sylius_promotion_code',
-            'coupon_based' => '#sylius_promotion_couponBased',
             'ends_at' => '#sylius_promotion_endsAt',
             'ends_at_date' => '#sylius_promotion_endsAt_date',
             'ends_at_time' => '#sylius_promotion_endsAt_time',
-            'exclusive' => '#sylius_promotion_exclusive',
             'label' => '#sylius_promotion_translations_%localeCode%_label',
             'name' => '#sylius_promotion_name',
             'order_percentage_action_field' => '[id^="sylius_promotion_actions_"][id$="_configuration_percentage"]',
@@ -208,7 +170,6 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
             'starts_at' => '#sylius_promotion_startsAt',
             'starts_at_date' => '#sylius_promotion_startsAt_date',
             'starts_at_time' => '#sylius_promotion_startsAt_time',
-            'usage_limit' => '#sylius_promotion_usageLimit',
-        ];
+        ]);
     }
 }

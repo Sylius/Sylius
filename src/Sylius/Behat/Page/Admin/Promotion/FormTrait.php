@@ -10,36 +10,36 @@ trait FormTrait
     {
         $timestamp = $dateTime->getTimestamp();
 
-        $this->getElement('field_starts_at_date')->setValue(date('Y-m-d', $timestamp));
-        $this->getElement('field_starts_at_time')->setValue(date('H:i', $timestamp));
+        $this->getElement('starts_at_date')->setValue(date('Y-m-d', $timestamp));
+        $this->getElement('starts_at_time')->setValue(date('H:i', $timestamp));
     }
 
     public function setEndsAt(\DateTimeInterface $dateTime): void
     {
         $timestamp = $dateTime->getTimestamp();
 
-        $this->getElement('field_ends_at_date')->setValue(date('Y-m-d', $timestamp));
-        $this->getElement('field_ends_at_time')->setValue(date('H:i', $timestamp));
+        $this->getElement('ends_at_date')->setValue(date('Y-m-d', $timestamp));
+        $this->getElement('ends_at_time')->setValue(date('H:i', $timestamp));
     }
 
     public function setUsageLimit(int $limit): void
     {
-        $this->getElement('field_usage_limit')->setValue($limit);
+        $this->getElement('usage_limit')->setValue($limit);
     }
 
     public function makeExclusive(): void
     {
-        $this->getElement('field_exclusive')->check();
+        $this->getElement('exclusive')->check();
     }
 
     public function makeNotAppliesToDiscountedItem(): void
     {
-        $this->getElement('field_applies_to_discounted')->uncheck();
+        $this->getElement('applies_to_discounted')->uncheck();
     }
 
     public function makeCouponBased(): void
     {
-        $this->getElement('field_coupon_based')->check();
+        $this->getElement('coupon_based')->check();
     }
 
     public function checkChannel(string $name): void
@@ -49,12 +49,12 @@ trait FormTrait
 
     public function specifyLabel(string $label, string $localeCode): void
     {
-        $this->getElement('field_label', ['%locale_code%' => $localeCode])->setValue($label);
+        $this->getElement('label', ['%locale_code%' => $localeCode])->setValue($label);
     }
 
     public function hasLabel(string $label, string $localeCode): bool
     {
-        return $label === $this->getElement('field_label', ['%locale_code%' => $localeCode])->getValue();
+        return $label === $this->getElement('label', ['%locale_code%' => $localeCode])->getValue();
     }
 
     /** @return array<string, string> */
@@ -62,16 +62,16 @@ trait FormTrait
     {
         return [
             'channels' => '#sylius_promotion_channels',
-            'field_applies_to_discounted' => '#sylius_promotion_appliesToDiscounted',
-            'field_coupon_based' => '#sylius_promotion_couponBased',
-            'field_ends_at_date' => '#sylius_promotion_endsAt_date',
-            'field_ends_at_time' => '#sylius_promotion_endsAt_time',
-            'field_exclusive' => '#sylius_promotion_exclusive',
-            'field_label' => '[name="sylius_promotion[translations][%locale_code%][label]"]',
-            'field_name' => '#sylius_promotion_name',
-            'field_usage_limit' => '#sylius_promotion_usageLimit',
-            'field_starts_at_date' => '#sylius_promotion_startsAt_date',
-            'field_starts_at_time' => '#sylius_promotion_startsAt_time',
+            'applies_to_discounted' => '#sylius_promotion_appliesToDiscounted',
+            'coupon_based' => '#sylius_promotion_couponBased',
+            'ends_at_date' => '#sylius_promotion_endsAt_date',
+            'ends_at_time' => '#sylius_promotion_endsAt_time',
+            'exclusive' => '#sylius_promotion_exclusive',
+            'label' => '[name="sylius_promotion[translations][%locale_code%][label]"]',
+            'name' => '#sylius_promotion_name',
+            'usage_limit' => '#sylius_promotion_usageLimit',
+            'starts_at_date' => '#sylius_promotion_startsAt_date',
+            'starts_at_time' => '#sylius_promotion_startsAt_time',
         ];
     }
 }
