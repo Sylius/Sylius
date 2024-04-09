@@ -16,7 +16,7 @@ namespace Sylius\Behat\Page\Admin\Promotion;
 use Behat\Mink\Exception\ElementNotFoundException;
 use Sylius\Behat\Page\Admin\Crud\CreatePageInterface as BaseCreatePageInterface;
 
-interface CreatePageInterface extends BaseCreatePageInterface
+interface CreatePageInterface extends BaseCreatePageInterface, FormAwareInterface
 {
     public function specifyCode(string $code): void;
 
@@ -44,20 +44,6 @@ interface CreatePageInterface extends BaseCreatePageInterface
     public function fillActionOption(string $option, string $value): void;
 
     public function fillActionOptionForChannel(string $channelCode, string $option, string $value): void;
-
-    public function fillUsageLimit(string $limit): void;
-
-    public function makeExclusive(): void;
-
-    public function makeNotAppliesToDiscountedItem(): void;
-
-    public function checkCouponBased(): void;
-
-    public function checkChannel(string $name): void;
-
-    public function setStartsAt(\DateTimeInterface $dateTime): void;
-
-    public function setEndsAt(\DateTimeInterface $dateTime): void;
 
     /**
      * @throws ElementNotFoundException
