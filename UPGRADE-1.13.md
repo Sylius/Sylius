@@ -562,7 +562,7 @@ To ease the update process, we have grouped the changes into the following categ
        autoconfigure_with_attributes: true
    ```
 
-and use one of the new attributes accordingly to the type of your class, e.g.:
+    and use one of the new attributes accordingly to the type of your class, e.g.:
 
    ```php
     <?php
@@ -791,6 +791,44 @@ and use one of the new attributes accordingly to the type of your class, e.g.:
     ```
 
 1. The `sylius_inventory.checker` configuration node has been deprecated and will be removed in 2.0.
+
+1. Due to changes in API paths, the `security` configuration has been changed:
+    ```yaml
+    security:
+       ...
+       firewalls:
+          new_api_admin_user:
+             json_login:
+    -           check_path: "%sylius.security.new_api_admin_route%/authentication-token"
+    +           check_path: "%sylius.security.new_api_admin_route%/administrators/token"
+          ...
+          new_api_shop_user:
+             json_login:
+    -           check_path: "%sylius.security.new_api_shop_route%/authentication-token"
+    +           check_path: "%sylius.security.new_api_shop_route%/customers/token"
+       ...
+       access_control:
+       ...
+    -     - { path: "%sylius.security.new_api_admin_route%/reset-password-requests", role: PUBLIC_ACCESS }
+    +     - { path: "%sylius.security.new_api_admin_route%/administrators/reset-password", role: PUBLIC_ACCESS }
+    -     - { path: "%sylius.security.new_api_admin_route%/authentication-token", role: PUBLIC_ACCESS }
+    +     - { path: "%sylius.security.new_api_admin_route%/administrators/token", role: PUBLIC_ACCESS }
+    -     - { path: "%sylius.security.new_api_shop_route%/authentication-token", role: PUBLIC_ACCESS }
+    +     - { path: "%sylius.security.new_api_shop_route%/customers/token", role: PUBLIC_ACCESS }
+    ```
+
+1. A new firewall has been added to the `security` configuration:
+    ```yaml
+    security:
+       ...
+       firewalls:
+          ...
+          image_resolver:
+            pattern: ^/media/cache/resolve
+            security: false
+          ...
+       ...
+    ```
 
 ### State Machine
 
