@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\AdminBundle\Form\Extension;
 
+use Sylius\Bundle\PromotionBundle\Form\Type\PromotionActionType;
 use Sylius\Bundle\PromotionBundle\Form\Type\PromotionRuleType;
 use Sylius\Bundle\PromotionBundle\Form\Type\PromotionType;
 use Symfony\Component\Form\AbstractTypeExtension;
@@ -32,6 +33,15 @@ final class PromotionTypeExtension extends AbstractTypeExtension
                 'by_reference' => false,
                 'button_add_options' => [
                     'label' => 'sylius.ui.add_rule',
+                ],
+            ])
+            ->add('actions', LiveCollectionType::class, [
+                'entry_type' => PromotionActionType::class,
+                'allow_add' => true,
+                'allow_delete' => true,
+                'by_reference' => false,
+                'button_add_options' => [
+                    'label' => 'sylius.ui.add_action',
                 ],
             ])
         ;

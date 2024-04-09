@@ -22,8 +22,8 @@ twig_hooks:
                 template: '@SyliusAdmin/Promotion/Form/Sections/_configuration.html.twig'
             translations:
                 template: '@SyliusAdmin/Promotion/Form/Sections/_translations.html.twig'
-            rules:
-                template: '@SyliusAdmin/Promotion/Form/Sections/_rules.html.twig'
+            rules_and_actions:
+                template: '@SyliusAdmin/Promotion/Form/Sections/_rulesAndActions.html.twig'
         
         'sylius_admin.promotion.update.content.form.sections.general':
             _name:
@@ -60,3 +60,9 @@ twig_hooks:
                 template: '@SyliusAdmin/Promotion/Form/Sections/Configuration/Right/_exclusive.html.twig'
             applies_to_discounted:
                 template: '@SyliusAdmin/Promotion/Form/Sections/Configuration/Right/_appliesToDiscounted.html.twig'
+        
+        'sylius_admin.promotion.update.content.form.sections.rules_and_actions':
+            rules:
+                template: '@SyliusAdmin/Promotion/Form/Sections/RulesAndActions/_rules.html.twig'
+            actions:
+                template: '@SyliusAdmin/Promotion/Form/Sections/RulesAndActions/_actions.html.twig'
