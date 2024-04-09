@@ -371,11 +371,6 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
         return $this->getElement('original_price', ['%channelCode%' => $channel->getCode()])->getValue();
     }
 
-    public function isShippingRequired(): bool
-    {
-        return $this->getElement('shipping_required')->isChecked();
-    }
-
     public function goToVariantsList(): void
     {
         $this->getDocument()->clickLink('List variants');

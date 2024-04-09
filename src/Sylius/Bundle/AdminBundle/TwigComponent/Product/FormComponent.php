@@ -15,6 +15,7 @@ namespace Sylius\Bundle\AdminBundle\TwigComponent\Product;
 
 use Sylius\Bundle\AdminBundle\TwigComponent\HookableComponentTrait;
 use Sylius\Component\Core\Model\Product;
+use Sylius\Component\Product\Factory\ProductFactoryInterface;
 use Sylius\Component\Product\Generator\SlugGeneratorInterface;
 use Sylius\Component\Product\Model\ProductAttributeInterface;
 use Sylius\Component\Product\Model\ProductAttributeValueInterface;
@@ -32,7 +33,7 @@ use Symfony\UX\LiveComponent\LiveCollectionTrait;
 use Symfony\UX\TwigComponent\Attribute\ExposeInTemplate;
 
 #[AsLiveComponent(name: 'SyliusAdmin.Product.Form', template: '@SyliusAdmin/Product/_form.html.twig')]
-final class FormComponent
+class FormComponent
 {
     public const ATTRIBUTE_REMOVED_EVENT = 'sylius_admin:product:form:attributed_deleted';
 
@@ -43,7 +44,7 @@ final class FormComponent
     use HookableComponentTrait;
     use LiveCollectionTrait;
 
-    #[LiveProp(fieldName: 'formData')]
+    #[LiveProp(dehydrateWith: 'dehydrateFormData', fieldName: 'formData')]
     public ?Product $resource = null;
 
     /**
@@ -51,6 +52,9 @@ final class FormComponent
      */
     #[LiveProp(writable: true, hydrateWith: 'hydrateAttributesToBeAdded', dehydrateWith: 'dehydrateAttributesToBeAdded')]
     public array $attributesToBeAdded = [];
+
+    #[LiveProp(writable: false)]
+    public bool $isSimple = false;
 
     /**
      * @param class-string $formClass
@@ -61,11 +65,18 @@ final class FormComponent
         private readonly string $formClass,
         private readonly SlugGeneratorInterface $slugGenerator,
         private readonly RepositoryInterface $productAttributeRepository,
+        private readonly ProductFactoryInterface $productFactory,
     ) {
     }
 
     protected function instantiateForm(): FormInterface
     {
+        if (null === $this->resource) {
+            /** @var Product $product */
+            $product = $this->isSimple ? $this->productFactory->createWithVariant() : $this->productFactory->createNew();
+            $this->resource = $product;
+        }
+
         return $this->formFactory->create($this->formClass, $this->resource);
     }
 
@@ -168,5 +179,15 @@ final class FormComponent
     public function dehydrateAttributesToBeAdded(array $value): string
     {
         return implode(',', $value);
+    }
+
+    public function dehydrateFormData(): ?int
+    {
+        return $this->resource?->getId();
+    }
+
+    private function getDataModelValue(): string
+    {
+        return 'norender|*';
     }
 }

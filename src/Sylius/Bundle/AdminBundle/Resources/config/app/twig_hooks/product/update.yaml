@@ -11,6 +11,7 @@ twig_hooks:
                     resource: '@=resource'
                     parentMainHook: '@=parent_main_hook'
                     parentFallbackHook: '@=parent_fallback_hook'
+                    isSimple: '@=resource.isSimple()'
                 configuration:
                     method: 'PUT'
         
@@ -36,6 +37,10 @@ twig_hooks:
                     active: true
             channel_pricing:
                 template: '@SyliusAdmin/Product/Form/SideNavigation/_channelPricing.html.twig'
+            taxes:
+                template: '@SyliusAdmin/Product/Form/SideNavigation/_taxes.html.twig'
+            shipping:
+                template: '@SyliusAdmin/Product/Form/SideNavigation/_shipping.html.twig'
             inventory:
                 template: '@SyliusAdmin/Product/Form/SideNavigation/_inventory.html.twig'
             translations:
@@ -52,6 +57,14 @@ twig_hooks:
         'sylius_admin.product.update.content.form.sections':
             details:
                 template: '@SyliusAdmin/Product/Form/Sections/_details.html.twig'
+            channel_pricing:
+                template: '@SyliusAdmin/Product/Form/Sections/_channelPricing.html.twig'
+            taxes:
+                template: '@SyliusAdmin/Product/Form/Sections/_taxes.html.twig'
+            shipping:
+                template: '@SyliusAdmin/Product/Form/Sections/_shipping.html.twig'
+            inventory:
+                template: '@SyliusAdmin/Product/Form/Sections/_inventory.html.twig'
             translations:
                 template: '@SyliusAdmin/Product/Form/Sections/_translations.html.twig'
             taxonomy:

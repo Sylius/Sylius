@@ -17,7 +17,7 @@ Feature: Adding a new product with a float attribute
         And I add the "Display Size" attribute to it
         And I set its non-translatable "Display Size" attribute to 12.5
         And I add it
-#        Then I should be notified that it has been successfully created
+        Then I should be notified that it has been successfully created
         And the product "Smartphone" should appear in the store
         And non-translatable attribute "Display Size" of product "Smartphone" should be 12.5
 

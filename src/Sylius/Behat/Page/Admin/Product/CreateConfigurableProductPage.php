@@ -14,17 +14,30 @@ declare(strict_types=1);
 namespace Sylius\Behat\Page\Admin\Product;
 
 use Behat\Mink\Element\NodeElement;
+use Behat\Mink\Session;
 use Sylius\Behat\Behaviour\SpecifiesItsField;
 use Sylius\Behat\Page\Admin\Crud\CreatePage as BaseCreatePage;
 use Sylius\Behat\Service\AutocompleteHelper;
 use Sylius\Behat\Service\DriverHelper;
+use Sylius\Behat\Service\Helper\AutocompleteHelperInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
+use Symfony\Component\Routing\RouterInterface;
 use Webmozart\Assert\Assert;
 
 class CreateConfigurableProductPage extends BaseCreatePage implements CreateConfigurableProductPageInterface
 {
     use SpecifiesItsField;
     use FormTrait;
+
+    public function __construct(
+        Session $session,
+        $minkParameters,
+        RouterInterface $router,
+        string $routeName,
+        private readonly AutocompleteHelperInterface $autocompleteHelper,
+    ) {
+        parent::__construct($session, $minkParameters, $router, $routeName);
+    }
 
     public function create(): void
     {
@@ -48,13 +61,6 @@ class CreateConfigurableProductPage extends BaseCreatePage implements CreateConf
         $mainTaxonElement = $this->getElement('main_taxon')->getParent();
 
         AutocompleteHelper::chooseValue($this->getSession(), $mainTaxonElement, $taxon->getName());
-    }
-
-    public function selectOption(string $optionName): void
-    {
-        $option = $this->getElement('options_choice')->getParent();
-
-        AutocompleteHelper::chooseValue($this->getSession(), $option, $optionName);
     }
 
     public function attachImage(string $path, ?string $type = null): void

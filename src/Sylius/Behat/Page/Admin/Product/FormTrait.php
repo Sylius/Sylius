@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Behat\Page\Admin\Product;
 
 use Sylius\Behat\Service\DriverHelper;
+use Sylius\Component\Core\Model\ChannelInterface;
 
 trait FormTrait
 {
@@ -21,14 +22,20 @@ trait FormTrait
     {
         return [
             'attribute_value' => '[data-test-attribute-value][data-test-locale-code="%localeCode%"][data-test-attribute-name="%attributeName%"]',
+            'channel_tab' => '[data-test-channel-tab="%channelCode%"]',
             'form' => '[data-live-name-value="SyliusAdmin.Product.Form"]',
             'field_name' => '[name="sylius_product[translations][%localeCode%][name]"]',
             'field_slug' => '[name="sylius_product[translations][%localeCode%][slug]"]',
+            'field_price' => '[name="sylius_product[variant][channelPricings][%channelCode%][price]"]',
+            'field_original_price' => '[name="sylius_product[variant][channelPricings][%channelCode%][originalPrice]"]',
+            'field_shipping_category' => '[name="sylius_product[variant][shippingCategory]"]',
+            'field_shipping_required' => '[name="sylius_product[variant][shippingRequired]"]',
             'generate_product_slug_button' => '[data-test-generate-product-slug-button="%localeCode%"]',
             'product_attribute_autocomplete' => '[data-test-product-attribute-autocomplete]',
             'product_attribute_delete_button' => '[data-test-product-attribute-delete-button="%attributeName%"]',
             'product_attribute_input' => 'input[name="product_attributes"]',
             'product_attribute_tab' => '[data-test-product-attribute-tab="%name%"]',
+            'product_options_autocomplete' => '[data-test-product-options-autocomplete]',
             'product_translation_accordion' => '[data-test-product-translation-accordion="%localeCode%"]',
             'side_navigation_tab' => '[data-test-side-navigation-tab="%name%"]',
         ];
@@ -45,10 +52,60 @@ trait FormTrait
         $this->getElement('field_name', ['%localeCode%' => $localeCode])->setValue($name);
 
         if (DriverHelper::isJavascript($this->getDriver())) {
-            $this->waitForFormUpdate();
             $this->getElement('generate_product_slug_button', ['%localeCode%' => $localeCode])->click();
             $this->waitForFormUpdate();
         }
+    }
+
+    public function specifyPrice(ChannelInterface $channel, string $price): void
+    {
+        $this->changeTab('channel-pricing');
+        $this->changeChannelTab($channel->getCode());
+        $this->getElement('field_price', ['%channelCode%' => $channel->getCode()])->setValue($price);
+    }
+
+    // TODO: Move to the Simple Product specific class
+    public function specifyOriginalPrice(ChannelInterface $channel, int $originalPrice): void
+    {
+        $this->changeTab('channel-pricing');
+        $this->changeChannelTab($channel->getCode());
+        $this->getElement('field_original_price', ['%channelCode%' => $channel->getCode()])->setValue($originalPrice);
+    }
+
+    // TODO: Move to the Simple Product specific class
+    public function selectShippingCategory(string $shippingCategoryName): void
+    {
+        $this->changeTab('shipping');
+        $this->getElement('field_shipping_category')->selectOption($shippingCategoryName);
+    }
+
+    // TODO: Move to the Simple Product specific class
+    public function setShippingRequired(bool $isShippingRequired): void
+    {
+        $this->changeTab('details');
+
+        if ($isShippingRequired) {
+            $this->getElement('field_shipping_required')->check();
+
+            return;
+        }
+
+        $this->getElement('field_shipping_required')->uncheck();
+    }
+
+    // TODO: Move to the Simple Product specific class
+    public function isShippingRequired(): bool
+    {
+        return $this->getElement('field_shipping_required')->isChecked();
+    }
+
+    // TODO: Move to the Configurable Product specific class
+    public function selectOption(string $optionName): void
+    {
+        $this->changeTab('details');
+        $productOptionsAutocomplete = $this->getElement('product_options_autocomplete');
+
+        $this->selectAutocompleteValue($productOptionsAutocomplete->getXpath(), $optionName);
     }
 
     /*
@@ -58,6 +115,11 @@ trait FormTrait
     private function changeTab(string $tabName): void
     {
         $this->getElement('side_navigation_tab', ['%name%' => $tabName])->click();
+    }
+
+    private function changeChannelTab(string $channelCode): void
+    {
+        $this->getElement('channel_tab', ['%channelCode%' => $channelCode])->click();
     }
 
     private function changeAttributeTab(string $attributeName): void
@@ -158,11 +220,19 @@ trait FormTrait
     private function waitForFormUpdate(): void
     {
         $form = $this->getElement('form');
-        $form->waitFor(1500, fn () => !$form->hasAttribute('busy'));
+        sleep(1); // we need to sleep, as sometimes the check below is executed faster than the form sets the busy attribute
+        $form->waitFor(1500, function () use ($form) {
+            return !$form->hasAttribute('busy');
+        });
     }
 
     private function clickButton(string $locator): void
     {
         $this->getDocument()->pressButton($locator);
+    }
+
+    private function selectAutocompleteValue(string $xpath, string $value): void
+    {
+        $this->autocompleteHelper->select($this->getDriver(), $xpath, $value);
     }
 }
