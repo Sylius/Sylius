@@ -44,7 +44,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     {
         $foundElement = $this->getElement('amount', ['%channelCode%' => $channelCode]);
 
-        return $foundElement->find('css', '.sylius-validation-error')->getText();
+        return $foundElement->find('css', '[data-test-validation-error]')->getText();
     }
 
     public function getShippingChargesValidationErrorsCount(string $channelCode): int

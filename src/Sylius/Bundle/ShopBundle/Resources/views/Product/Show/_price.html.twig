@@ -3,24 +3,24 @@
 {% set variant = product|sylius_resolve_variant %}
 {% set hasDiscount = variant|sylius_has_discount({'channel': sylius.channel}) %}
 
-<span class="ui header" id="product-original-price"{% if not hasDiscount %} style="display: none;"{% endif %} {{ sylius_test_html_attribute('product-original-price', money.calculateOriginalPrice(variant)) }}>
+<span{% if not hasDiscount %} class="d-none" data-test-product-original-price-hidden{% endif %} {{ sylius_test_html_attribute('product-original-price', money.calculateOriginalPrice(variant)) }}>
     {% if hasDiscount %}
         <del>{{ money.calculateOriginalPrice(variant) }}</del>
     {% endif %}
 </span>
 
-<span class="ui huge header" id="product-price" {{ sylius_test_html_attribute('product-price', money.calculatePrice(variant)) }}>
+<span {{ sylius_test_html_attribute('product-price', money.calculatePrice(variant)) }}>
     {{ money.calculatePrice(variant) }}
 </span>
 
 {% set days = sylius.channel.channelPriceHistoryConfig.lowestPriceForDiscountedProductsCheckingPeriod %}
 {% set hasLowestPrice = variant|sylius_has_lowest_price({'channel': sylius.channel})%}
 
-<div class="ui mini label" id="lowest-price-before-discount"
+<div data-test-lowest-price-before-discount
     {% if hasDiscount and hasLowestPrice %}
-        style="white-space: nowrap"
+        class="text-nowrap"
     {% else %}
-        style="display: none;"
+        class="d-none"
     {% endif %}
 >
     {% if hasDiscount and hasLowestPrice %}

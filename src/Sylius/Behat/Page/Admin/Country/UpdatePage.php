@@ -107,7 +107,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
 
     public function getFormValidationErrors(): array
     {
-        $errors = $this->getElement('form')->findAll('css', '.sylius-validation-error:not(.pointing)');
+        $errors = $this->getElement('form')->findAll('css', '[data-test-validation-error]:not(.pointing)');
 
         return array_map(fn (NodeElement $element) => $element->getText(), $errors);
     }
@@ -116,9 +116,9 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     {
         $provinceForm = $this->getLastProvinceElement();
 
-        $foundElement = $provinceForm->find('css', '.sylius-validation-error');
+        $foundElement = $provinceForm->find('css', '[data-test-validation-error]');
         if (null === $foundElement) {
-            throw new ElementNotFoundException($this->getSession(), 'Tag', 'css', '.sylius-validation-error');
+            throw new ElementNotFoundException($this->getSession(), 'Tag', 'css', '[data-test-validation-error]');
         }
 
         return $foundElement->getText();

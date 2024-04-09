@@ -76,9 +76,9 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
             throw new ElementNotFoundException($this->getSession(), 'Field element');
         }
 
-        $validationMessage = $formElement->find('css', '.sylius-validation-error');
+        $validationMessage = $formElement->find('css', '[data-test-validation-error]');
         if (null === $validationMessage) {
-            throw new ElementNotFoundException($this->getSession(), 'Validation message', 'css', '.sylius-validation-error');
+            throw new ElementNotFoundException($this->getSession(), 'Validation message', 'css', '[data-test-validation-error]');
         }
 
         return $validationMessage->getText();
@@ -120,7 +120,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
             'shipping_required' => '#sylius_product_variant_shippingRequired',
             'original_price' => '#sylius_product_variant_channelPricings_%channelCode%_originalPrice',
             'price' => '#sylius_product_variant_channelPricings_%channelCode%_price',
-            'prices_validation_message' => '#sylius_product_variant_channelPricings ~ .sylius-validation-error, #sylius_product_variant_channelPricings .sylius-validation-error',
+            'prices_validation_message' => '#sylius_product_variant_channelPricings ~ [data-test-validation-error], #sylius_product_variant_channelPricings [data-test-validation-error]',
             'weight' => '#sylius_product_variant_weight',
             'width' => '#sylius_product_variant_width',
         ]);

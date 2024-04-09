@@ -1,6 +1,4 @@
-<h1 class="ui header">
-    {{ 'sylius.ui.order_history'|trans }}
-    <div class="sub header">{{ 'sylius.ui.browse_your_orders_from_the_past'|trans }}</div>
+<h1>{{ 'sylius.ui.order_history'|trans }}</h1>
+<div>{{ 'sylius.ui.browse_your_orders_from_the_past'|trans }}</div>
 
-    {{ sylius_template_event('sylius.shop.account.order.index.header.content', {'orders': orders}) }}
-</h1>
+{{ sylius_template_event('sylius.shop.account.order.index.header.content', {'orders': orders}) }}

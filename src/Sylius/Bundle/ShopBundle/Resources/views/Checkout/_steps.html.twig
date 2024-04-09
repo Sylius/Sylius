@@ -27,22 +27,22 @@
         </div>
     </a>
     {% if order_requires_shipping %}
-    <a class="{{ steps['select_shipping'] }} step" href="{{ path('sylius_shop_checkout_select_shipping') }}" {{ sylius_test_html_attribute('step-shipping') }}>
-        <i class="truck icon"></i>
-        <div class="content">
-            <div class="title">{{ 'sylius.ui.shipping'|trans }}</div>
-            <div class="description">{{ 'sylius.ui.choose_how_your_goods_will_be_delivered'|trans }}</div>
-        </div>
-    </a>
+        <a class="{{ steps['select_shipping'] }} step" href="{{ path('sylius_shop_checkout_select_shipping') }}" {{ sylius_test_html_attribute('step-shipping') }}>
+            <i class="truck icon"></i>
+            <div class="content">
+                <div class="title">{{ 'sylius.ui.shipping'|trans }}</div>
+                <div class="description">{{ 'sylius.ui.choose_how_your_goods_will_be_delivered'|trans }}</div>
+            </div>
+        </a>
     {% endif %}
     {% if order_requires_payment %}
-    <a class="{{ steps['select_payment'] }} step" href="{{ path('sylius_shop_checkout_select_payment') }}" {{ sylius_test_html_attribute('step-payment') }}>
-        <i class="payment icon"></i>
-        <div class="content">
-            <div class="title">{{ 'sylius.ui.payment'|trans }}</div>
-            <div class="description">{{ 'sylius.ui.choose_how_you_will_pay'|trans }}</div>
-        </div>
-    </a>
+        <a class="{{ steps['select_payment'] }} step" href="{{ path('sylius_shop_checkout_select_payment') }}" {{ sylius_test_html_attribute('step-payment') }}>
+            <i class="payment icon"></i>
+            <div class="content">
+                <div class="title">{{ 'sylius.ui.payment'|trans }}</div>
+                <div class="description">{{ 'sylius.ui.choose_how_you_will_pay'|trans }}</div>
+            </div>
+        </a>
     {% endif %}
     <div class="{{ steps['complete'] }} step" href="{{ path('sylius_shop_checkout_complete') }}">
         <i class="checkered flag icon"></i>

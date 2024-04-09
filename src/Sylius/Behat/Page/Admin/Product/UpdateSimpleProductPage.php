@@ -96,7 +96,7 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
     {
         $this->clickTabIfItsNotActive('attributes');
 
-        $validationError = $this->getElement('attribute_element')->find('css', '.sylius-validation-error');
+        $validationError = $this->getElement('attribute_element')->find('css', '[data-test-validation-error]');
 
         return $validationError->getText();
     }

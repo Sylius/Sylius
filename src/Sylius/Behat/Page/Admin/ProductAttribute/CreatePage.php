@@ -68,9 +68,9 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
 
     public function getValidationErrors(): string
     {
-        $validationMessage = $this->getDocument()->find('css', '.sylius-validation-error');
+        $validationMessage = $this->getDocument()->find('css', '[data-test-validation-error]');
         if (null === $validationMessage) {
-            throw new ElementNotFoundException($this->getSession(), 'Validation message', 'css', '.sylius-validation-error');
+            throw new ElementNotFoundException($this->getSession(), 'Validation message', 'css', '[data-test-validation-error]');
         }
 
         return $validationMessage->getText();

@@ -97,7 +97,7 @@ class CreateConfigurableProductPage extends BaseCreatePage implements CreateConf
     {
         $this->clickTabIfItsNotActive('attributes');
 
-        $validationError = $this->getElement('attribute')->find('css', '.sylius-validation-error');
+        $validationError = $this->getElement('attribute')->find('css', '[data-test-validation-error]');
 
         return $validationError->getText();
     }

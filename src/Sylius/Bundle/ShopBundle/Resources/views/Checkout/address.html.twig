@@ -7,27 +7,26 @@
 {% block content %}
     {{ sylius_template_event(['sylius.shop.checkout.address.steps', 'sylius.shop.checkout.steps'], _context) }}
 
-    <div class="ui stackable grid">
-        <div class="eleven wide column">
-            <div class="ui segment">
+    <div>
+        <div>
+            <div>
                 {{ sylius_template_event('sylius.shop.checkout.address.before_form', {'order': order}) }}
 
-                {{ form_start(form, {'action': path('sylius_shop_checkout_address'), 'attr': {'class': 'ui loadable form', 'novalidate': 'novalidate'}}) }}
-                    {{ form_errors(form) }}
-                    <input type="hidden" name="_method" value="PUT" />
+                {{ form_start(form, {'action': path('sylius_shop_checkout_address'), 'attr': {'novalidate': 'novalidate'}}) }}
+                {{ form_errors(form) }}
+                <input type="hidden" name="_method" value="PUT" />
 
-                    {% include '@SyliusShop/Checkout/Address/_form.html.twig' %}
-                    <div class="ui hidden divider"></div>
+                {% include '@SyliusShop/Checkout/Address/_form.html.twig' %}
 
-                    {{ sylius_template_event('sylius.shop.checkout.address.before_navigation', {'order': order}) }}
+                {{ sylius_template_event('sylius.shop.checkout.address.before_navigation', {'order': order}) }}
 
-                    {% include '@SyliusShop/Checkout/Address/_navigation.html.twig' %}
+                {% include '@SyliusShop/Checkout/Address/_navigation.html.twig' %}
 
-                    {{ form_row(form._token) }}
+                {{ form_row(form._token) }}
                 {{ form_end(form, {'render_rest': false}) }}
             </div>
         </div>
-        <div class="five wide column">
+        <div>
             {{ sylius_template_event(['sylius.shop.checkout.address.sidebar', 'sylius.shop.checkout.sidebar'], _context) }}
         </div>
     </div>
