@@ -2,10 +2,15 @@ twig_hooks:
     hooks:
         'sylius_admin.promotion.create.content':
             form:
-                template: '@SyliusAdmin/Shared/Crud/Create/Content/_form.html.twig'
+                component: 'SyliusAdmin.Promotion.Form'
+                data:
+                    resource: '@=resource'
+                    form: '@=form'
+                    parentMainHook: '@=parent_main_hook'
+                    parentFallbackHook: '@=parent_fallback_hook'
                 configuration:
                     render_rest: false
-        
+
         'sylius_admin.promotion.create.content.form':
             sections:
                 template: '@SyliusAdmin/Promotion/Form/_sections.html.twig'
@@ -17,6 +22,8 @@ twig_hooks:
                 template: '@SyliusAdmin/Promotion/Form/Sections/_configuration.html.twig'
             translations:
                 template: '@SyliusAdmin/Promotion/Form/Sections/_translations.html.twig'
+            rules_and_actions:
+                template: '@SyliusAdmin/Promotion/Form/Sections/_rulesAndActions.html.twig'
         
         'sylius_admin.promotion.create.content.form.sections.general':
             _name:
@@ -53,3 +60,9 @@ twig_hooks:
                 template: '@SyliusAdmin/Promotion/Form/Sections/Configuration/Right/_exclusive.html.twig'
             applies_to_discounted:
                 template: '@SyliusAdmin/Promotion/Form/Sections/Configuration/Right/_appliesToDiscounted.html.twig'
+        
+        'sylius_admin.promotion.create.content.form.sections.rules_and_actions':
+            rules:
+                template: '@SyliusAdmin/Promotion/Form/Sections/RulesAndActions/_rules.html.twig'
+            actions:
+                template: '@SyliusAdmin/Promotion/Form/Sections/RulesAndActions/_actions.html.twig'
