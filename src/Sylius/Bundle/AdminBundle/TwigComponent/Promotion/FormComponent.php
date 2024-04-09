@@ -40,6 +40,7 @@ final class FormComponent
         private readonly FormFactoryInterface $formFactory,
         private readonly string $formClass,
         private readonly array $rules,
+        private readonly array $actions,
     ) {
     }
 
@@ -60,15 +61,29 @@ final class FormComponent
         }
 
         $index = [] !== $data ? max(array_keys($data)) + 1 : 0;
+
         $propertyAccessor->setValue(
             $this->formValues,
             $propertyPath."[$index]",
-            ['type' => array_key_first($this->rules)],
+            ['type' => $this->provideItemType($name)],
         );
     }
 
     protected function instantiateForm(): FormInterface
     {
         return $this->formFactory->create($this->formClass, $this->resource);
+    }
+
+    private function provideItemType(string $name): string
+    {
+        if (str_contains($name, 'rules')) {
+            return array_key_first($this->rules);
+        }
+
+        if (str_contains($name, 'actions')) {
+            return array_key_first($this->actions);
+        }
+
+        return '';
     }
 }
