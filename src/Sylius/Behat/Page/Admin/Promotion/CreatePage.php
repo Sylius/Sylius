@@ -24,7 +24,6 @@ use Webmozart\Assert\Assert;
 
 class CreatePage extends BaseCreatePage implements CreatePageInterface
 {
-    use FormTrait;
     use NamesIt;
     use SpecifiesItsField;
 
@@ -149,7 +148,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
 
     protected function getDefinedElements(): array
     {
-        return array_merge(parent::getDefinedElements(), $this->getDefinedFormElements(), [
+        return array_merge(parent::getDefinedElements(), [
             'actions' => '#sylius_promotion_actions',
             'code' => '#sylius_promotion_code',
             'minimum' => '#sylius_promotion_actions_0_configuration_WEB-US_filters_price_range_filter_min',

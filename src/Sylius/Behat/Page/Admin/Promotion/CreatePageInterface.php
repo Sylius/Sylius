@@ -16,7 +16,7 @@ namespace Sylius\Behat\Page\Admin\Promotion;
 use Behat\Mink\Exception\ElementNotFoundException;
 use Sylius\Behat\Page\Admin\Crud\CreatePageInterface as BaseCreatePageInterface;
 
-interface CreatePageInterface extends BaseCreatePageInterface, FormAwareInterface
+interface CreatePageInterface extends BaseCreatePageInterface
 {
     public function specifyCode(string $code): void;
 

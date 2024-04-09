@@ -24,7 +24,6 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
 {
     use ChecksCodeImmutability;
     use CountsChannelBasedErrors;
-    use FormTrait;
     use NamesIt;
 
     public function setPriority(?int $priority): void
@@ -154,19 +153,23 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
 
     protected function getDefinedElements(): array
     {
-        return array_merge(parent::getDefinedElements(), $this->getDefinedFormElements(), [
+        return array_merge(parent::getDefinedElements(), [
             'action_field' => '[id^="sylius_promotion_actions_"][id$="_configuration_%channelCode%_%field%"]',
             'actions' => '#actions',
+            'applies_to_discounted' => '#sylius_promotion_appliesToDiscounted',
             'code' => '#sylius_promotion_code',
             'ends_at' => '#sylius_promotion_endsAt',
             'ends_at_date' => '#sylius_promotion_endsAt_date',
             'ends_at_time' => '#sylius_promotion_endsAt_time',
+            'exclusive' => '#sylius_promotion_exclusive',
+            'coupon_based' => '#sylius_promotion_couponBased',
             'label' => '#sylius_promotion_translations_%localeCode%_label',
             'name' => '#sylius_promotion_name',
             'order_percentage_action_field' => '[id^="sylius_promotion_actions_"][id$="_configuration_percentage"]',
             'priority' => '#sylius_promotion_priority',
             'rule_amount' => '[id^="sylius_promotion_rules_"][id$="_configuration_%channelCode%_amount"]',
             'rules' => '#rules',
+            'usage_limit' => '#sylius_promotion_usageLimit',
             'starts_at' => '#sylius_promotion_startsAt',
             'starts_at_date' => '#sylius_promotion_startsAt_date',
             'starts_at_time' => '#sylius_promotion_startsAt_time',

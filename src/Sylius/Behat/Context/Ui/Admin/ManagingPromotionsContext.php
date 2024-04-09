@@ -58,7 +58,7 @@ final class ManagingPromotionsContext implements Context
      * @When I want to browse promotions
      * @When I browse promotions
      */
-    public function iWantToBrowsePromotions()
+    public function iWantToBrowsePromotions(): void
     {
         $this->indexPage->open();
     }
@@ -118,7 +118,7 @@ final class ManagingPromotionsContext implements Context
      */
     public function iSpecifyItsLabelInLocaleCode(string $label, string $localeCode): void
     {
-        $this->createPage->specifyLabel($label, $localeCode);
+        $this->formElement->setLabel($label, $localeCode);
     }
 
     /**
@@ -126,7 +126,7 @@ final class ManagingPromotionsContext implements Context
      */
     public function iSpecifyItsLabelWithAStringExceedingTheLimitInLocale(string $localeCode): void
     {
-        $this->createPage->specifyLabel(str_repeat('a', 256), $localeCode);
+        $this->formElement->setLabel(str_repeat('a', 256), $localeCode);
     }
 
     /**
@@ -135,7 +135,7 @@ final class ManagingPromotionsContext implements Context
     public function thePromotionShouldHaveLabelInLocale(PromotionInterface $promotion, string $label, string $localeCode): void
     {
         $this->updatePage->open(['id' => $promotion->getId()]);
-        $this->createPage->hasLabel($label, $localeCode);
+        $this->formElement->hasLabel($label, $localeCode);
     }
 
     /**
@@ -382,10 +382,7 @@ final class ManagingPromotionsContext implements Context
      */
     public function iSetItsUsageLimitTo(int $usageLimit): void
     {
-        /** @var CreatePageInterface|UpdatePageInterface $currentPage */
-        $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
-
-        $currentPage->setUsageLimit($usageLimit);
+        $this->formElement->setUsageLimit($usageLimit);
     }
 
     /**
@@ -403,10 +400,7 @@ final class ManagingPromotionsContext implements Context
      */
     public function iSetItAsExclusive(): void
     {
-        /** @var CreatePageInterface|UpdatePageInterface $currentPage */
-        $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
-
-        $currentPage->makeExclusive();
+        $this->formElement->makeExclusive();
     }
 
     /**
@@ -414,16 +408,13 @@ final class ManagingPromotionsContext implements Context
      */
     public function iSetItAsNotAppliesToDiscountedByCatalogPromotionItems(): void
     {
-        /** @var CreatePageInterface|UpdatePageInterface $currentPage */
-        $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
-
-        $currentPage->makeNotAppliesToDiscountedItem();
+        $this->formElement->makeNotAppliesToDiscountedItem();
     }
 
     /**
      * @Then the :promotion promotion should be exclusive
      */
-    public function thePromotionShouldBeExclusive(PromotionInterface $promotion)
+    public function thePromotionShouldBeExclusive(PromotionInterface $promotion): void
     {
         $this->assertIfFieldIsTrue($promotion, 'exclusive');
     }
@@ -441,16 +432,13 @@ final class ManagingPromotionsContext implements Context
      */
     public function iMakeItCouponBased(): void
     {
-        /** @var CreatePageInterface|UpdatePageInterface $currentPage */
-        $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
-
-        $currentPage->makeCouponBased();
+        $this->formElement->makeCouponBased();
     }
 
     /**
      * @Then the :promotion promotion should be coupon based
      */
-    public function thePromotionShouldBeCouponBased(PromotionInterface $promotion)
+    public function thePromotionShouldBeCouponBased(PromotionInterface $promotion): void
     {
         $this->assertIfFieldIsTrue($promotion, 'coupon_based');
     }
@@ -458,18 +446,15 @@ final class ManagingPromotionsContext implements Context
     /**
      * @When I make it applicable for the :channelName channel
      */
-    public function iMakeItApplicableForTheChannel($channelName)
+    public function iMakeItApplicableForTheChannel(string $channelName): void
     {
-        /** @var CreatePageInterface|UpdatePageInterface $currentPage */
-        $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
-
-        $currentPage->checkChannel($channelName);
+        $this->formElement->checkChannel($channelName);
     }
 
     /**
      * @Then the :promotion promotion should be applicable for the :channelName channel
      */
-    public function thePromotionShouldBeApplicableForTheChannel(PromotionInterface $promotion, $channelName)
+    public function thePromotionShouldBeApplicableForTheChannel(PromotionInterface $promotion, string $channelName): void
     {
         $this->iWantToModifyAPromotion($promotion);
 
@@ -549,13 +534,10 @@ final class ManagingPromotionsContext implements Context
     /**
      * @When I make it available from :startsDate to :endsDate
      */
-    public function iMakeItAvailableFromTo(\DateTimeInterface $startsDate, \DateTimeInterface $endsDate)
+    public function iMakeItAvailableFromTo(\DateTimeInterface $startsDate, \DateTimeInterface $endsDate): void
     {
-        /** @var CreatePageInterface|UpdatePageInterface $currentPage */
-        $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
-
-        $currentPage->setStartsAt($startsDate);
-        $currentPage->setEndsAt($endsDate);
+        $this->formElement->setStartsAt($startsDate);
+        $this->formElement->setEndsAt($endsDate);
     }
 
     /**
@@ -566,7 +548,6 @@ final class ManagingPromotionsContext implements Context
         $this->iWantToModifyAPromotion($promotion);
 
         Assert::true($this->updatePage->hasStartsAt($startsDate));
-
         Assert::true($this->updatePage->hasEndsAt($endsDate));
     }
 
@@ -584,7 +565,7 @@ final class ManagingPromotionsContext implements Context
     /**
      * @Then I should be notified that this value should not be blank
      */
-    public function iShouldBeNotifiedThatThisValueShouldNotBeBlank()
+    public function iShouldBeNotifiedThatThisValueShouldNotBeBlank(): void
     {
         Assert::same(
             $this->createPage->getValidationMessageForAction(),
