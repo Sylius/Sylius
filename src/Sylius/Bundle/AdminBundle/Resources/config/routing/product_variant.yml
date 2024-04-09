@@ -4,7 +4,7 @@ sylius_admin_product_variant_index:
     defaults:
         _controller: sylius.controller.product_variant::indexAction
         _sylius:
-            template: "@SyliusAdmin/ProductVariant/index.html.twig"
+            template: "@SyliusAdmin/ProductVariant/Index/index.html.twig"
             grid: sylius_admin_product_variant
             section: admin
             permission: true
@@ -12,8 +12,6 @@ sylius_admin_product_variant_index:
                 route:
                     parameters:
                         productId: $productId
-                templates:
-                    breadcrumb: "@SyliusAdmin/ProductVariant/Index/_breadcrumb.html.twig"
                 icon: cubes
                 subheader: sylius.ui.manage_variants
 

@@ -1,0 +1,7 @@
+twig_hooks:
+    hooks:
+        'sylius_admin.product_variant.index.content.header.title_block':
+            title:
+                template: '@SyliusAdmin/Shared/Crud/Common/Content/Header/TitleBlock/_title.html.twig'
+                configuration:
+                    title: 'sylius.ui.product_variant'
