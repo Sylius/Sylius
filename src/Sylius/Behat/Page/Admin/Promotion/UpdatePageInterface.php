@@ -16,7 +16,7 @@ namespace Sylius\Behat\Page\Admin\Promotion;
 use Behat\Mink\Exception\ElementNotFoundException;
 use Sylius\Behat\Page\Admin\Crud\UpdatePageInterface as BaseUpdatePageInterface;
 
-interface UpdatePageInterface extends BaseUpdatePageInterface, FormAwareInterface
+interface UpdatePageInterface extends BaseUpdatePageInterface
 {
     public function setPriority(?int $priority): void;
 
