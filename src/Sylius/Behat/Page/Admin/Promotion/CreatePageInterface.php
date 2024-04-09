@@ -20,8 +20,6 @@ interface CreatePageInterface extends BaseCreatePageInterface, FormAwareInterfac
 {
     public function specifyCode(string $code): void;
 
-    public function specifyLabel(string $label, string $localeCode): void;
-
     public function nameIt(string $name): void;
 
     public function addRule(?string $ruleName): void;
@@ -58,6 +56,4 @@ interface CreatePageInterface extends BaseCreatePageInterface, FormAwareInterfac
     public function checkIfRuleConfigurationFormIsVisible(): bool;
 
     public function checkIfActionConfigurationFormIsVisible(): bool;
-
-    public function hasLabel(string $label, string $localeCode): bool;
 }

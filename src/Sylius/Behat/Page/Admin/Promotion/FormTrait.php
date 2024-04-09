@@ -47,6 +47,16 @@ trait FormTrait
         $this->getElement('channels')->checkField($name);
     }
 
+    public function specifyLabel(string $label, string $localeCode): void
+    {
+        $this->getElement('field_label', ['%locale_code%' => $localeCode])->setValue($label);
+    }
+
+    public function hasLabel(string $label, string $localeCode): bool
+    {
+        return $label === $this->getElement('field_label', ['%locale_code%' => $localeCode])->getValue();
+    }
+
     /** @return array<string, string> */
     protected function getDefinedFormElements(): array
     {
@@ -57,7 +67,7 @@ trait FormTrait
             'field_ends_at_date' => '#sylius_promotion_endsAt_date',
             'field_ends_at_time' => '#sylius_promotion_endsAt_time',
             'field_exclusive' => '#sylius_promotion_exclusive',
-            'field_label' => '[name="sylius_promotion[translations][%localeCode%][label]"]',
+            'field_label' => '[name="sylius_promotion[translations][%locale_code%][label]"]',
             'field_name' => '#sylius_promotion_name',
             'field_usage_limit' => '#sylius_promotion_usageLimit',
             'field_starts_at_date' => '#sylius_promotion_startsAt_date',

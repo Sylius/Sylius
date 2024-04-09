@@ -19,4 +19,8 @@ interface FormAwareInterface
     public function makeCouponBased(): void;
 
     public function checkChannel(string $name): void;
+
+    public function specifyLabel(string $label, string $localeCode): void;
+
+    public function hasLabel(string $label, string $localeCode): bool;
 }
