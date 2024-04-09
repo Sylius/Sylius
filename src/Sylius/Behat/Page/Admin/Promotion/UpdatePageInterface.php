@@ -16,7 +16,7 @@ namespace Sylius\Behat\Page\Admin\Promotion;
 use Behat\Mink\Exception\ElementNotFoundException;
 use Sylius\Behat\Page\Admin\Crud\UpdatePageInterface as BaseUpdatePageInterface;
 
-interface UpdatePageInterface extends BaseUpdatePageInterface
+interface UpdatePageInterface extends BaseUpdatePageInterface, FormAwareInterface
 {
     public function setPriority(?int $priority): void;
 
@@ -27,18 +27,6 @@ interface UpdatePageInterface extends BaseUpdatePageInterface
     public function checkChannelsState(string $channelName): bool;
 
     public function isCodeDisabled(): bool;
-
-    public function fillUsageLimit(string $limit): void;
-
-    public function makeExclusive(): void;
-
-    public function checkCouponBased(): void;
-
-    public function checkChannel(string $name): void;
-
-    public function setStartsAt(\DateTimeInterface $dateTime): void;
-
-    public function setEndsAt(\DateTimeInterface $dateTime): void;
 
     public function hasStartsAt(\DateTimeInterface $dateTime): bool;
 
