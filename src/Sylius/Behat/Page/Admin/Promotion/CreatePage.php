@@ -18,63 +18,12 @@ use Behat\Mink\Exception\ElementNotFoundException;
 use Sylius\Behat\Behaviour\NamesIt;
 use Sylius\Behat\Behaviour\SpecifiesItsField;
 use Sylius\Behat\Page\Admin\Crud\CreatePage as BaseCreatePage;
-use Sylius\Behat\Service\AutocompleteHelper;
-use Sylius\Behat\Service\TabsHelper;
 use Webmozart\Assert\Assert;
 
 class CreatePage extends BaseCreatePage implements CreatePageInterface
 {
     use NamesIt;
     use SpecifiesItsField;
-
-    public function addRule(?string $ruleName): void
-    {
-        $count = count($this->getCollectionItems('rules'));
-
-        $this->getDocument()->clickLink('Add rule');
-
-        $this->getDocument()->waitFor(5, fn () => $count + 1 === count($this->getCollectionItems('rules')));
-
-        if (null !== $ruleName) {
-            $this->selectRuleOption('Type', $ruleName);
-        }
-    }
-
-    public function selectRuleOption(string $option, string $value, bool $multiple = false): void
-    {
-        $this->getLastCollectionItem('rules')->find('named', ['select', $option])->selectOption($value, $multiple);
-    }
-
-    public function selectAutocompleteRuleOption(string $option, $value, bool $multiple = false): void
-    {
-        $option = strtolower(str_replace(' ', '_', $option));
-
-        $ruleAutocomplete = $this
-            ->getLastCollectionItem('rules')
-            ->find('css', sprintf('input[type="hidden"][name*="[%s]"]', $option))
-            ->getParent()
-        ;
-
-        if ($multiple && is_array($value)) {
-            AutocompleteHelper::chooseValues($this->getSession(), $ruleAutocomplete, $value);
-
-            return;
-        }
-
-        AutocompleteHelper::chooseValue($this->getSession(), $ruleAutocomplete, $value);
-    }
-
-    public function fillRuleOption(string $option, string $value): void
-    {
-        $this->getLastCollectionItem('rules')->fillField($option, $value);
-    }
-
-    public function fillRuleOptionForChannel(string $channelCode, string $option, string $value): void
-    {
-        $lastAction = $this->getChannelConfigurationOfLastRule($channelCode);
-        $lastAction->fillField($option, $value);
-    }
-
 
     public function getValidationMessageForAction(): string
     {
@@ -86,25 +35,6 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
         }
 
         return $foundElement->getText();
-    }
-
-    public function selectAutoCompleteFilterOption(string $option, $value, bool $multiple = false): void
-    {
-        $option = strtolower(str_replace(' ', '_', $option));
-
-        $filterAutocomplete = $this
-            ->getLastCollectionItem('actions')
-            ->find('css', sprintf('input[type="hidden"][name*="[%s_filter]"]', $option))
-            ->getParent()
-        ;
-
-        if ($multiple && is_array($value)) {
-            AutocompleteHelper::chooseValues($this->getSession(), $filterAutocomplete, $value);
-
-            return;
-        }
-
-        AutocompleteHelper::chooseValue($this->getSession(), $filterAutocomplete, $value);
     }
 
     public function checkIfRuleConfigurationFormIsVisible(): bool
@@ -128,17 +58,6 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
             'count' => '#sylius_promotion_rules_0_configuration_count',
             'amount' => '#sylius_promotion_actions_0_configuration_WEB-US_amount',
         ]);
-    }
-
-    private function getChannelConfigurationOfLastRule(string $channelCode): NodeElement
-    {
-        $lastRule = $this->getLastCollectionItem('rules');
-
-        TabsHelper::switchTab($this->getSession(), $lastRule, $channelCode);
-
-        return $lastRule
-            ->find('css', sprintf('[id^="sylius_promotion_rules_"][id$="_configuration_%s"]', $channelCode))
-        ;
     }
 
     private function getLastCollectionItem(string $collection): NodeElement

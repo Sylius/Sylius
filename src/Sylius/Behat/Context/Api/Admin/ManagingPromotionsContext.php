@@ -321,25 +321,27 @@ final class ManagingPromotionsContext implements Context
     }
 
     /**
-     * @When I specify that this action should be applied to items from :taxon category
+     * @When I specify that this action should be applied to items from :taxon category for :channel channel
      */
-    public function iSpecifyThatThisActionShouldBeAppliedToItemsFromCategory(TaxonInterface $taxon): void
-    {
+    public function iSpecifyThatThisActionShouldBeAppliedToItemsFromCategory(
+        TaxonInterface $taxon,
+        ChannelInterface $channel,
+    ): void {
         $actions = $this->getActions();
-        $channelCode = key($actions[0]['configuration']);
-        $actions[0]['configuration'][$channelCode]['filters']['taxons_filter']['taxons'] = [$taxon->getCode()];
+        $actions[0]['configuration'][$channel->getCode()]['filters']['taxons_filter']['taxons'] = [$taxon->getCode()];
 
         $this->client->addRequestData('actions', $actions);
     }
 
     /**
-     * @When I specify that this action should be applied to the :product product
+     * @When I specify that this action should be applied to the :product product for :channel channel
      */
-    public function iSpecifyThatThisActionShouldBeAppliedToTheProduct(ProductInterface $product): void
-    {
+    public function iSpecifyThatThisActionShouldBeAppliedToTheProduct(
+        ProductInterface $product,
+        ChannelInterface $channel,
+    ): void {
         $actions = $this->getActions();
-        $channelCode = key($actions[0]['configuration']);
-        $actions[0]['configuration'][$channelCode]['filters']['products_filter']['products'] = [$product->getCode()];
+        $actions[0]['configuration'][$channel->getCode()]['filters']['products_filter']['products'] = [$product->getCode()];
 
         $this->client->addRequestData('actions', $actions);
     }

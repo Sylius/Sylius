@@ -22,24 +22,8 @@ interface CreatePageInterface extends BaseCreatePageInterface
 
     public function nameIt(string $name): void;
 
-    public function addRule(?string $ruleName): void;
-
-    public function selectRuleOption(string $option, string $value, bool $multiple = false): void;
-
-    /**
-     * @param string|string[] $value
-     */
-    public function selectAutocompleteRuleOption(string $option, array|string $value, bool $multiple = false): void;
-
-    public function fillRuleOption(string $option, string $value): void;
-
-    public function fillRuleOptionForChannel(string $channelCode, string $option, string $value): void;
-
     /** @throws ElementNotFoundException */
     public function getValidationMessageForAction(): string;
-
-    /** @param string|string[] $value */
-    public function selectAutoCompleteFilterOption(string $option, array|string $value, bool $multiple = false): void;
 
     public function checkIfRuleConfigurationFormIsVisible(): bool;
 

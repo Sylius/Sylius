@@ -56,6 +56,8 @@
             id="Sylius\Behat\Element\Admin\Promotion\FormElementInterface"
             class="Sylius\Behat\Element\Admin\Promotion\FormElement"
             parent="sylius.behat.element"
-        />
+        >
+            <argument type="service" id="Sylius\Behat\Service\Helper\AutocompleteHelperInterface" />
+        </service>
     </services>
 </container>
