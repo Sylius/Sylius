@@ -29,7 +29,7 @@
            class="{{ buttonClass }}"
             {% if p.disabled %}aria-disabled="true"{% endif %}
             {% if p.dropdown %}data-bs-toggle="dropdown"{% endif %}
-            {{ p.attr is iterable ? block('attributes') : p.attr }}>
+            {{ p.attr is iterable ? block('attributes') : (p.attr ? ' ' ~ p.attr) }}>
             {{ p.icon ? i({ icon: p.icon }) }}
             {{ not p.iconOnly ? p.text }}
         </a>
@@ -40,7 +40,7 @@
                 class="{{ buttonClass }}"
             {% if p.disabled %}disabled{% endif %}
             {% if p.dropdown %}data-bs-toggle="dropdown"{% endif %}
-            {{ p.attr is iterable ? block('attributes') : p.attr }}>
+            {{ p.attr is iterable ? block('attributes') : (p.attr ? ' ' ~ p.attr ) }}>
             {{ p.icon ? i({ icon: p.icon }) }}
             {{ not p.iconOnly ? p.text }}
         </button>
