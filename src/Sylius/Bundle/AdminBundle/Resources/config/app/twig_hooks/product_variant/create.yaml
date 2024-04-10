@@ -6,7 +6,7 @@ twig_hooks:
                     
         'sylius_admin.product_variant.create.content.header':
             breadcrumbs:
-                template: '@SyliusAdmin/ProductVariant/Form/Content/Header/breadcrumbs.html.twig'
+                template: '@SyliusAdmin/ProductVariant/Form/Content/Create/Header/breadcrumbs.html.twig'
 
         'sylius_admin.product_variant.create.content.form':
             side_navigation:
