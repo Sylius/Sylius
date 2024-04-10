@@ -16,7 +16,8 @@
                                 class="btn btn-outline-secondary"
                                 type="button"
                                 data-action="live#action"
-                                data-action-name="debounce(300)|generateProductSlug(localeCode={{ locale }})"
+                                data-live-action-param="debounce(300)|generateProductSlug"
+                                data-live-locale-code-param="{{ locale }}"
                                 {{ sylius_test_html_attribute('generate-product-slug-button', locale) }}
                             >
                                 ⚡️
