@@ -556,7 +556,7 @@ final class ManagingPromotionsContext implements Context
      */
     public function iShouldBeNotifiedThatPromotionCannotEndBeforeItsEvenStarts(): void
     {
-        Assert::same($this->formElement->getValidationMessage('ends_at'), 'End date cannot be set prior start date.');
+        Assert::same($this->formElement->getValidationMessage('ends_at_date'), 'End date cannot be set prior start date.');
     }
 
     /**
@@ -565,7 +565,7 @@ final class ManagingPromotionsContext implements Context
     public function iShouldBeNotifiedThatThisValueShouldNotBeBlank(): void
     {
         Assert::same(
-            $this->createPage->getValidationMessageForAction(),
+            $this->formElement->getValidationMessageForAction(),
             'This value should not be blank.',
         );
     }
@@ -578,7 +578,7 @@ final class ManagingPromotionsContext implements Context
     public function iShouldBeNotifiedThatPercentageDiscountShouldBeBetween(): void
     {
         Assert::same(
-            $this->createPage->getValidationMessageForAction(),
+            $this->formElement->getValidationMessageForAction(),
             'The percentage discount must be between 0% and 100%.',
         );
     }
@@ -828,11 +828,8 @@ final class ManagingPromotionsContext implements Context
      */
     public function iShouldBeNotifiedThatPromotionLabelIsTooLong(string $localeCode): void
     {
-        /** @var CreatePageInterface|UpdatePageInterface $currentPage */
-        $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
-
         Assert::same(
-            $currentPage->getValidationMessageForTranslation('label', $localeCode),
+            $this->formElement->getValidationMessageForTranslation('label', $localeCode),
             'This value is too long. It should have 255 characters or less.',
         );
     }

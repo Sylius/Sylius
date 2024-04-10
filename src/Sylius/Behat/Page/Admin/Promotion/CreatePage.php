@@ -25,16 +25,19 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     use NamesIt;
     use SpecifiesItsField;
 
-    public function getValidationMessageForAction(): string
+    public function getValidationMessage(string $element): string
     {
-        $actionForm = $this->getLastCollectionItem('actions');
-
-        $foundElement = $actionForm->find('css', '.sylius-validation-error');
+        $foundElement = $this->getFieldElement($element);
         if (null === $foundElement) {
-            throw new ElementNotFoundException($this->getSession(), 'Tag', 'css', '.sylius-validation-error');
+            throw new ElementNotFoundException($this->getSession(), 'Field element');
         }
 
-        return $foundElement->getText();
+        $validationMessage = $foundElement->find('css', '.invalid-feedback');
+        if (null === $validationMessage) {
+            throw new ElementNotFoundException($this->getSession(), 'Validation message', 'css', '.invalid-feedback');
+        }
+
+        return $validationMessage->getText();
     }
 
     public function checkIfRuleConfigurationFormIsVisible(): bool
@@ -77,5 +80,16 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
         Assert::isArray($items);
 
         return $items;
+    }
+
+    /** @throws ElementNotFoundException */
+    private function getFieldElement(string $element): ?NodeElement
+    {
+        $element = $this->getElement($element);
+        while (null !== $element && !$element->hasClass('field')) {
+            $element = $element->getParent();
+        }
+
+        return $element;
     }
 }
