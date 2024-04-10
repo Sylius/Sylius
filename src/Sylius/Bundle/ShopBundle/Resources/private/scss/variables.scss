@@ -38,9 +38,12 @@ $spacers: (
         6: $spacer * 5,
 );
 
+// Buttons + Inputs
+
+$input-btn-padding-y: 0.5rem;
+
 // Buttons
 
-$btn-padding-y: 0.5rem;
 $btn-padding-x: 2rem;
 
 $btn-padding-y-lg: 0.7rem;
@@ -96,7 +99,6 @@ $accordion-button-active-color: $body-color;
 $accordion-button-focus-box-shadow: none;
 $s_accordion-body-padding-top: calc($accordion-padding-y / 2);
 $s_accordion-body-padding-bottom: calc($accordion-padding-y * 1.5);
-
 
 // Tables
 

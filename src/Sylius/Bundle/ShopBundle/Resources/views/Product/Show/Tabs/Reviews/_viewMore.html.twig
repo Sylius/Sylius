@@ -1,5 +1,0 @@
-{% if product.acceptedReviews.count > 0 %}
-    <a href="{{ path('sylius_shop_product_review_index', {'slug': product.slug, '_locale': product.translation.locale}) }}">
-        {{ 'sylius.ui.view_more'|trans }}
-    </a>
-{% endif %}

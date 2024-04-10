@@ -1,0 +1,7 @@
+{% embed '@SyliusShop/Shared/Accordion/accordion.html.twig' %}
+
+    {% block accordion_content %}
+        {{ sylius_template_event('sylius.shop.product.show.accordion', _context) }}
+    {% endblock %}
+
+{% endembed %}
