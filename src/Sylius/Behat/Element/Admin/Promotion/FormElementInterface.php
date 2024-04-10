@@ -56,4 +56,8 @@ interface FormElementInterface
     public function selectAutocompleteFilterOptions(array $values, string $channelCode, string $filterType): void;
 
     public function getValidationMessage(string $element): string;
+
+    public function getValidationMessageForAction(): string;
+
+    public function getValidationMessageForTranslation(string $element, string $localeCode): string;
 }

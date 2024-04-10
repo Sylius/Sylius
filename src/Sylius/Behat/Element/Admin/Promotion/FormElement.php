@@ -79,6 +79,7 @@ final class FormElement extends Element implements FormElementInterface
 
     public function setLabel(string $label, string $localeCode): void
     {
+        $this->getElement('translation_tab', ['%locale_code%' => $localeCode])->press();
         $this->getElement('label', ['%locale_code%' => $localeCode])->setValue($label);
     }
 
@@ -189,6 +190,31 @@ final class FormElement extends Element implements FormElementInterface
         return $validationMessage->getText();
     }
 
+    public function getValidationMessageForAction(): string
+    {
+        $actionForm = $this->getLastAction();
+
+        $foundElement = $actionForm->find('css', '.invalid-feedback');
+        if (null === $foundElement) {
+            throw new ElementNotFoundException($this->getSession(), 'Tag', 'css', '.invalid-feedback');
+        }
+
+        return $foundElement->getText();
+    }
+
+    public function getValidationMessageForTranslation(string $element, string $localeCode): string
+    {
+        $this->getElement('translation_tab', ['%locale_code%' => $localeCode])->press();
+        $foundElement = $this->getElement($element, ['%locale_code%' => $localeCode])->getParent();
+
+        $validationMessage = $foundElement->find('css', '.invalid-feedback');
+        if (null === $validationMessage) {
+            throw new ElementNotFoundException($this->getSession(), 'Validation message', 'css', '.invalid-feedback');
+        }
+
+        return $validationMessage->getText();
+    }
+
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
@@ -197,6 +223,7 @@ final class FormElement extends Element implements FormElementInterface
             'add_rule_button' => '#sylius_promotion_rules_add',
             'applies_to_discounted' => '#sylius_promotion_appliesToDiscounted',
             'channels' => '#sylius_promotion_channels',
+            'code' => '#sylius_promotion_code',
             'coupon_based' => '#sylius_promotion_couponBased',
             'ends_at_date' => '#sylius_promotion_endsAt_date',
             'ends_at_time' => '#sylius_promotion_endsAt_time',
@@ -208,9 +235,10 @@ final class FormElement extends Element implements FormElementInterface
             'name' => '#sylius_promotion_name',
             'priority' => '#sylius_promotion_priority',
             'rules' => '#sylius_promotion_rules',
-            'usage_limit' => '#sylius_promotion_usageLimit',
             'starts_at_date' => '#sylius_promotion_startsAt_date',
             'starts_at_time' => '#sylius_promotion_startsAt_time',
+            'translation_tab' => '[data-test-promotion-translations-accordion="%locale_code%"]',
+            'usage_limit' => '#sylius_promotion_usageLimit',
         ]);
     }
 

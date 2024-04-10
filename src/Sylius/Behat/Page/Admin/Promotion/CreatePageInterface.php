@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Page\Admin\Promotion;
 
-use Behat\Mink\Exception\ElementNotFoundException;
 use Sylius\Behat\Page\Admin\Crud\CreatePageInterface as BaseCreatePageInterface;
 
 interface CreatePageInterface extends BaseCreatePageInterface
@@ -22,8 +21,7 @@ interface CreatePageInterface extends BaseCreatePageInterface
 
     public function nameIt(string $name): void;
 
-    /** @throws ElementNotFoundException */
-    public function getValidationMessageForAction(): string;
+    public function getValidationMessage(string $element): string;
 
     public function checkIfRuleConfigurationFormIsVisible(): bool;
 
