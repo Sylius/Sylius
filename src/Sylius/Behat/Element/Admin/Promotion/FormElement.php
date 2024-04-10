@@ -14,12 +14,23 @@ declare(strict_types=1);
 namespace Sylius\Behat\Element\Admin\Promotion;
 
 use Behat\Mink\Element\NodeElement;
+use Behat\Mink\Exception\ElementNotFoundException;
+use Behat\Mink\Session;
 use FriendsOfBehat\PageObjectExtension\Element\Element;
+use Sylius\Behat\Service\Helper\AutocompleteHelperInterface;
 use Sylius\Behat\Service\TabsHelper;
 use Webmozart\Assert\Assert;
 
 final class FormElement extends Element implements FormElementInterface
 {
+    public function __construct(
+        Session $session,
+        $minkParameters,
+        private readonly AutocompleteHelperInterface $autocompleteHelper,
+    ) {
+        parent::__construct($session, $minkParameters);
+    }
+
     public function prioritizeIt(?int $priority): void
     {
         $this->getElement('priority')->setValue($priority);
@@ -103,11 +114,87 @@ final class FormElement extends Element implements FormElementInterface
         $this->getLastAction()->find('named', ['select', $option])->selectOption($value, $multiple);
     }
 
+    public function addRule(?string $ruleName): void
+    {
+        $this->getElement('add_rule_button')->press();
+        $this->waitForFormUpdate();
+
+        if (null !== $ruleName) {
+            $this->selectRuleOption('Type', $ruleName);
+            $this->waitForFormUpdate();
+        }
+    }
+
+    public function selectRuleOption(string $option, string $value, bool $multiple = false): void
+    {
+        $this->getLastRule()->find('named', ['select', $option])->selectOption($value, $multiple);
+    }
+
+    public function fillRuleOption(string $option, string $value): void
+    {
+        $this->getLastRule()->fillField($option, $value);
+    }
+
+    public function fillRuleOptionForChannel(string $channelCode, string $option, string $value): void
+    {
+        $lastRule = $this->getChannelConfigurationOfLastRule($channelCode);
+        $lastRule->fillField($option, $value);
+    }
+
+    public function selectAutocompleteRuleOptions(array $values, ?string $channelCode = null): void
+    {
+        $count = count($this->getElement('rules')->findAll('css', '[data-test-promotion-rule]'));
+        $locator = $channelCode ?
+            sprintf('#sylius_promotion_rules_%d_configuration_%s select', $count - 1, $channelCode) :
+            sprintf('#sylius_promotion_rules_%d_configuration select', $count - 1)
+        ;
+        foreach ($values as $value) {
+            $this->autocompleteHelper->selectByName(
+                $this->getDriver(),
+                $this->getLastRule()->find('css', $locator)->getXpath(),
+                $value,
+            );
+        }
+
+        $this->waitForFormUpdate();
+    }
+
+    public function selectAutocompleteFilterOptions(array $values, string $channelCode, string $filterType): void
+    {
+        $count = count($this->getElement('actions')->findAll('css', '[data-test-promotion-action]'));
+        $locator = sprintf('#sylius_promotion_actions_%d_configuration_%s_filters_%s_filter select', $count - 1, $channelCode, $filterType);
+        foreach ($values as $value) {
+            $this->autocompleteHelper->selectByName(
+                $this->getDriver(),
+                $this->getLastAction()->find('css', $locator)->getXpath(),
+                $value,
+            );
+        }
+
+        $this->waitForFormUpdate();
+    }
+
+    public function getValidationMessage(string $element): string
+    {
+        $foundElement = $this->getFieldElement($element);
+        if (null === $foundElement) {
+            throw new ElementNotFoundException($this->getSession(), 'Field element');
+        }
+
+        $validationMessage = $foundElement->find('css', '.invalid-feedback');
+        if (null === $validationMessage) {
+            throw new ElementNotFoundException($this->getSession(), 'Validation message', 'css', '.invalid-feedback');
+        }
+
+        return $validationMessage->getText();
+    }
+
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
             'actions' => '#sylius_promotion_actions',
             'add_action_button' => '#sylius_promotion_actions_add',
+            'add_rule_button' => '#sylius_promotion_rules_add',
             'applies_to_discounted' => '#sylius_promotion_appliesToDiscounted',
             'channels' => '#sylius_promotion_channels',
             'coupon_based' => '#sylius_promotion_couponBased',
@@ -118,6 +205,7 @@ final class FormElement extends Element implements FormElementInterface
             'label' => '[name="sylius_promotion[translations][%locale_code%][label]"]',
             'name' => '#sylius_promotion_name',
             'priority' => '#sylius_promotion_priority',
+            'rules' => '#sylius_promotion_rules',
             'usage_limit' => '#sylius_promotion_usageLimit',
             'starts_at_date' => '#sylius_promotion_startsAt_date',
             'starts_at_time' => '#sylius_promotion_startsAt_time',
@@ -141,6 +229,36 @@ final class FormElement extends Element implements FormElementInterface
         return $lastAction
             ->find('css', sprintf('[id^="sylius_promotion_actions_"][id$="_configuration_%s"]', $channelCode))
         ;
+    }
+
+    private function getLastRule(): NodeElement
+    {
+        $items = $this->getElement('rules')->findAll('css', '[data-test-promotion-rule]');
+        Assert::notEmpty($items);
+
+        return end($items);
+    }
+
+    private function getChannelConfigurationOfLastRule(string $channelCode): NodeElement
+    {
+        $lastRule = $this->getLastRule();
+
+        TabsHelper::switchTab($this->getSession(), $lastRule, $channelCode);
+
+        return $lastRule
+            ->find('css', sprintf('[id^="sylius_promotion_rules_"][id$="_configuration_%s"]', $channelCode))
+        ;
+    }
+
+    /** @throws ElementNotFoundException */
+    private function getFieldElement(string $element): ?NodeElement
+    {
+        $element = $this->getElement($element);
+        while (null !== $element && !$element->hasClass('field')) {
+            $element = $element->getParent();
+        }
+
+        return $element;
     }
 
     private function waitForFormUpdate(): void

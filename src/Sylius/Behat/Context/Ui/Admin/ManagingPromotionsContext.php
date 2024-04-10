@@ -144,19 +144,19 @@ final class ManagingPromotionsContext implements Context
      */
     public function iAddTheHasTaxonRuleConfiguredWith(string ...$taxons): void
     {
-        $this->createPage->addRule('Has at least one from taxons');
+        $this->formElement->addRule('Has at least one from taxons');
 
-        $this->createPage->selectAutocompleteRuleOption('Taxons', $taxons, true);
+        $this->formElement->selectAutocompleteRuleOptions($taxons);
     }
 
     /**
      * @When /^I add the "Total price of items from taxon" rule configured with "([^"]+)" taxon and "(?:€|£|\$)([^"]+)" amount for ("[^"]+" channel)$/
      */
-    public function iAddTheRuleConfiguredWith($taxonName, $amount, ChannelInterface $channel)
+    public function iAddTheRuleConfiguredWith(string $taxonName, $amount, ChannelInterface $channel): void
     {
-        $this->createPage->addRule('Total price of items from taxon');
-        $this->createPage->selectAutocompleteRuleOption('Taxon', $taxonName);
-        $this->createPage->fillRuleOptionForChannel($channel->getCode(), 'Amount', $amount);
+        $this->formElement->addRule('Total price of items from taxon');
+        $this->formElement->selectAutocompleteRuleOptions([$taxonName], $channel->getCode());
+        $this->formElement->fillRuleOptionForChannel($channel->getCode(), 'Amount', $amount);
     }
 
     /**
@@ -168,9 +168,9 @@ final class ManagingPromotionsContext implements Context
         $secondAmount,
         ChannelInterface $secondChannel,
     ) {
-        $this->createPage->addRule('Item total');
-        $this->createPage->fillRuleOptionForChannel($firstChannel->getCode(), 'Amount', $firstAmount);
-        $this->createPage->fillRuleOptionForChannel($secondChannel->getCode(), 'Amount', $secondAmount);
+        $this->formElement->addRule('Item total');
+        $this->formElement->fillRuleOptionForChannel($firstChannel->getCode(), 'Amount', $firstAmount);
+        $this->formElement->fillRuleOptionForChannel($secondChannel->getCode(), 'Amount', $secondAmount);
     }
 
     /**
@@ -216,11 +216,11 @@ final class ManagingPromotionsContext implements Context
     }
 
     /**
-     * @When I specify that this action should be applied to items from :taxonName category
+     * @When I specify that this action should be applied to items from :taxonName category for :channel channel
      */
-    public function iSpecifyThatThisActionShouldBeAppliedToItemsFromCategory($taxonName)
+    public function iSpecifyThatThisActionShouldBeAppliedToItemsFromCategory(string $taxonName, ChannelInterface $channel): void
     {
-        $this->createPage->selectAutoCompleteFilterOption('Taxons', $taxonName);
+        $this->formElement->selectAutocompleteFilterOptions([$taxonName], $channel->getCode(), 'taxons');
     }
 
     /**
@@ -261,8 +261,8 @@ final class ManagingPromotionsContext implements Context
      */
     public function iAddTheCustomerGroupRuleConfiguredForGroup($customerGroupName)
     {
-        $this->createPage->addRule('Customer group');
-        $this->createPage->selectRuleOption('Customer group', $customerGroupName);
+        $this->formElement->addRule('Customer group');
+        $this->formElement->selectRuleOption('Customer group', $customerGroupName);
     }
 
     /**
@@ -602,18 +602,18 @@ final class ManagingPromotionsContext implements Context
     /**
      * @When I add the "Contains product" rule configured with the :productName product
      */
-    public function iAddTheRuleConfiguredWithTheProduct($productName)
+    public function iAddTheRuleConfiguredWithTheProduct(string $productName): void
     {
-        $this->createPage->addRule('Contains product');
-        $this->createPage->selectAutocompleteRuleOption('Product code', $productName);
+        $this->formElement->addRule('Contains product');
+        $this->formElement->selectAutocompleteRuleOptions([$productName]);
     }
 
     /**
-     * @When I specify that this action should be applied to the :productName product
+     * @When I specify that this action should be applied to the :productName product for :channel channel
      */
-    public function iSpecifyThatThisActionShouldBeAppliedToTheProduct($productName)
+    public function iSpecifyThatThisActionShouldBeAppliedToTheProduct(string $productName, ChannelInterface $channel): void
     {
-        $this->createPage->selectAutoCompleteFilterOption('Products', $productName);
+        $this->formElement->selectAutocompleteFilterOptions([$productName], $channel->getCode(), 'products');
     }
 
     /**
@@ -740,7 +740,7 @@ final class ManagingPromotionsContext implements Context
      */
     public function iAddANewRule()
     {
-        $this->createPage->addRule(null);
+        $this->formElement->addRule(null);
     }
 
     /**
