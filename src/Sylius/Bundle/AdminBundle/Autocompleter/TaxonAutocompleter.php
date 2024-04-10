@@ -38,7 +38,7 @@ final class TaxonAutocompleter implements OptionsAwareEntityAutocompleterInterfa
 
     public function getLabel(object $entity): string
     {
-        return $entity->getFullName();
+        return $entity->getFullname();
     }
 
     public function getValue(object $entity): mixed
