@@ -50,8 +50,7 @@
         "webmozart/assert": "^1.9"
     },
     "conflict": {
-        "doctrine/orm": "2.15.2",
-        "twig/twig": "^3.0"
+        "doctrine/orm": "2.15.2"
     },
     "require-dev": {
         "hwi/oauth-bundle": "^1.1 || ^2.0@beta",
