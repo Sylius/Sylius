@@ -1,13 +1,17 @@
 {% import "@SyliusShop/Common/Macro/money.html.twig" as money %}
 
 <div {{ sylius_test_html_attribute('product') }}>
-    <a href="{{ path('sylius_shop_product_show', {'slug': product.slug, '_locale': product.translation.locale}) }}">
-        {{ 'sylius.ui.view_more'|trans }}
-        {% include '@SyliusShop/Product/_mainImage.html.twig' with {'product': product} %}
+    <a class="link-reset" href="{{ path('sylius_shop_product_show', {'slug': product.slug, '_locale': product.translation.locale}) }}" {{ sylius_test_html_attribute('product-content') }}>
+        <div class="mb-4">
+            <div class="overflow-auto bg-light rounded-3" style="aspect-ratio: 3/4; ">
+                {% include '@SyliusShop/Product/_mainImage.html.twig' with {'product': product, class: 'w-100 h-100 object-fit-cover'} %}
+            </div>
+        </div>
+        <div class="h6" {{ sylius_test_html_attribute('product-name', product.name) }}>
+            {{ product.name }}
+        </div>
     </a>
-    <div {{ sylius_test_html_attribute('product-content') }}>
-        <a href="{{ path('sylius_shop_product_show', {'slug': product.slug, '_locale': product.translation.locale}) }}" {{ sylius_test_html_attribute('product-name', product.name) }}>{{ product.name }}</a>
-
+    <div>
         {% if not product.enabledVariants.empty() %}
             {% set variant = product|sylius_resolve_variant %}
             {% set price = money.calculatePrice(variant) %}
@@ -17,9 +21,9 @@
             {% include '@SyliusShop/Product/Show/_catalogPromotionLabels.html.twig' with {'appliedPromotions': appliedPromotions, 'withDescription': false} %}
 
             {% if variant|sylius_has_discount({'channel': sylius.channel}) %}
-                <div {{ sylius_test_html_attribute('product-original-price') }}><del>{{ originalPrice }}</del></div>
+                <span {{ sylius_test_html_attribute('product-original-price') }}><del>{{ originalPrice }}</del></span>
             {% endif %}
-            <div {{ sylius_test_html_attribute('product-price') }}>{{ price }}</div>
+            <span {{ sylius_test_html_attribute('product-price') }}>{{ price }}</span>
         {% endif %}
     </div>
 </div>
