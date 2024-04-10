@@ -44,8 +44,7 @@
         "webmozart/assert": "^1.9"
     },
     "conflict": {
-        "doctrine/orm": ">= 2.16.0",
-        "twig/twig": "^3.0"
+        "doctrine/orm": ">= 2.16.0"
     },
     "require-dev": {
         "phpspec/phpspec": "^7.2",

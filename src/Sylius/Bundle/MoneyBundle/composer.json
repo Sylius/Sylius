@@ -33,8 +33,7 @@
         "webmozart/assert": "^1.9"
     },
     "conflict": {
-        "doctrine/orm": ">= 2.16.0",
-        "twig/twig": "^1.0"
+        "doctrine/orm": ">= 2.16.0"
     },
     "require-dev": {
         "doctrine/orm": "^2.13",

@@ -45,9 +45,6 @@
         "symfony/webpack-encore-bundle": "^1.17.1",
         "laminas/laminas-stdlib": "^3.3.1"
     },
-    "conflict": {
-        "twig/twig": "^1.0"
-    },
     "require-dev": {
         "matthiasnoback/symfony-config-test": "^4.2",
         "matthiasnoback/symfony-dependency-injection-test": "^4.2",
