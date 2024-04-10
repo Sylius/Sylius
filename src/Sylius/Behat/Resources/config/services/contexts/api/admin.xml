@@ -326,7 +326,7 @@
         <service id="Sylius\Behat\Context\Api\Admin\DashboardContext">
             <argument type="service" id="sylius.behat.api_platform_client.admin" />
             <argument type="service" id="Sylius\Behat\Client\ResponseCheckerInterface" />
-            <argument type="service" id="Sylius\Calendar\Provider\DateTimeProviderInterface" />
+            <argument type="service" id="sylius.behat.clock" />
         </service>
     </services>
 </container>

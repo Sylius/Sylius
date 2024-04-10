@@ -81,12 +81,14 @@ knp_gaufrette:
             adapter: "%sylius.uploader.filesystem%"
 
 liip_imagine:
+    cache: sylius_image
+    data_loader: sylius_image
     loaders:
-        default:
+        sylius_image:
             filesystem:
                 data_root: "%sylius_core.images_dir%"
     resolvers:
-        default:
+        sylius_image:
             web_path:
                 web_root: "%sylius_core.public_dir%"
                 cache_prefix: "media/cache"

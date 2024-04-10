@@ -21,7 +21,6 @@ use Doctrine\Inflector\Rules\Substitutions;
 use Doctrine\Inflector\Rules\Transformations;
 use Doctrine\Inflector\Rules\Word;
 use Doctrine\ORM\Query;
-use Sylius\Bundle\CoreBundle\DependencyInjection\Compiler\BackwardsCompatibility\CancelOrderStateMachineCallbackPass;
 use Sylius\Bundle\CoreBundle\DependencyInjection\Compiler\BackwardsCompatibility\ResolveShopUserTargetEntityPass;
 use Sylius\Bundle\CoreBundle\DependencyInjection\Compiler\BackwardsCompatibility\Symfony5AuthenticationManagerPass;
 use Sylius\Bundle\CoreBundle\DependencyInjection\Compiler\BackwardsCompatibility\Symfony6PrivateServicesPass;
@@ -33,7 +32,6 @@ use Sylius\Bundle\CoreBundle\DependencyInjection\Compiler\LiipImageFiltersPass;
 use Sylius\Bundle\CoreBundle\DependencyInjection\Compiler\OverrideResourceControllerStateMachinePass;
 use Sylius\Bundle\CoreBundle\DependencyInjection\Compiler\RegisterTaxCalculationStrategiesPass;
 use Sylius\Bundle\CoreBundle\DependencyInjection\Compiler\RegisterUriBasedSectionResolverPass;
-use Sylius\Bundle\CoreBundle\DependencyInjection\Compiler\SyliusPriceHistoryLegacyAliasesPass;
 use Sylius\Bundle\CoreBundle\DependencyInjection\Compiler\TranslatableEntityLocalePass;
 use Sylius\Bundle\CoreBundle\Doctrine\ORM\SqlWalker\OrderByIdentifierSqlWalker;
 use Sylius\Bundle\ResourceBundle\AbstractResourceBundle;
@@ -43,13 +41,13 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 final class SyliusCoreBundle extends AbstractResourceBundle
 {
-    public const VERSION = '1.13.0-DEV';
+    public const VERSION = '2.0.0-DEV';
 
-    public const VERSION_ID = '11300';
+    public const VERSION_ID = '20000';
 
-    public const MAJOR_VERSION = '1';
+    public const MAJOR_VERSION = '2';
 
-    public const MINOR_VERSION = '13';
+    public const MINOR_VERSION = '0';
 
     public const RELEASE_VERSION = '0';
 
@@ -95,8 +93,6 @@ final class SyliusCoreBundle extends AbstractResourceBundle
         $container->addCompilerPass(new Symfony5AuthenticationManagerPass());
         $container->addCompilerPass(new Symfony6PrivateServicesPass());
         $container->addCompilerPass(new TranslatableEntityLocalePass());
-        $container->addCompilerPass(new CancelOrderStateMachineCallbackPass());
-        $container->addCompilerPass(new SyliusPriceHistoryLegacyAliasesPass());
         $container->addCompilerPass(new CheckStatisticsOrdersTotalsProviderTypePass());
         $container->addCompilerPass(new OverrideResourceControllerStateMachinePass(), priority: -1024);
     }

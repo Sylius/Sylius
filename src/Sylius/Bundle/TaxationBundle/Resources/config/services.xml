@@ -47,7 +47,7 @@
         <service id="Sylius\Component\Taxation\Resolver\TaxRateResolverInterface" alias="sylius.tax_rate_resolver" />
 
         <service id="sylius.tax_rate_date_eligibility_checker" class="Sylius\Component\Taxation\Checker\TaxRateDateEligibilityChecker">
-            <argument type="service" id="Sylius\Calendar\Provider\DateTimeProviderInterface" />
+            <argument type="service" id="clock" />
         </service>
         <service id="Sylius\Component\Taxation\Checker\TaxRateDateEligibilityCheckerInterface" alias="sylius.tax_rate_date_eligibility_checker" />
     </services>

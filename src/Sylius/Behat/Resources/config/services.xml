@@ -13,12 +13,15 @@
 
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <imports>
-        <import resource="services/_calendar_services.php" />
         <import resource="services/api.xml" />
         <import resource="services/contexts.xml" />
         <import resource="services/elements.xml" />
         <import resource="services/pages.xml" />
     </imports>
+
+    <parameters>
+        <parameter key="sylius.behat.clock.date_file">%kernel.project_dir%/var/date.txt</parameter>
+    </parameters>
 
     <services>
         <defaults public="true" />
@@ -115,6 +118,14 @@
             <argument type="service" id="test.mailer_pool" />
             <tag name="kernel.event_subscriber" />
         </service>
+
+        <service id="sylius.behat.clock" class="Sylius\Behat\Service\Clock">
+            <argument>%sylius.behat.clock.date_file%</argument>
+        </service>
+        <service id="clock" alias="sylius.behat.clock" />
+        <service id="Symfony\Component\Clock\ClockInterface" alias="sylius.behat.clock" />
+        <service id="Psr\Clock\ClockInterface" alias="sylius.behat.clock" />
+        <service id="argument_resolver.datetime" alias="sylius.behat.clock" />
 
         <service id="sylius.behat.section_iri_converter" class="Sylius\Behat\Service\Converter\SectionAwareIriConverter" public="false">
             <argument type="service" id="api_platform.route_name_resolver" />
