@@ -46,6 +46,15 @@
             <tag name="form.type_extension" extended-type="Sylius\Bundle\AddressingBundle\Form\Type\CountryType" priority="100" />
         </service>
 
+        <service id="sylius_admin.form.extension.type.product" class="Sylius\Bundle\AdminBundle\Form\Extension\ProductTypeExtension">
+            <tag name="form.type_extension" />
+        </service>
+
+        <service id="sylius.form.extension.type.product_image" class="Sylius\Bundle\AdminBundle\Form\Extension\ProductImageTypeExtension">
+            <argument>%sylius.model.product_variant.class%</argument>
+            <tag name="form.type_extension" />
+        </service>
+
         <service id="Sylius\Bundle\AdminBundle\Form\RequestPasswordResetType">
             <argument>%sylius.form.type.admin.password_reset_request.validation_groups%</argument>
             <tag name="form.type" />

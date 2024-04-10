@@ -11,29 +11,24 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\CoreBundle\Form\Type\Product;
+namespace Sylius\Bundle\AdminBundle\Form\Extension;
 
 use Doctrine\ORM\QueryBuilder;
-use Sylius\Bundle\CoreBundle\Form\Type\ImageType;
+use Sylius\Bundle\CoreBundle\Form\Type\Product\ProductImageType;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Component\Core\Model\ProductInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Form\FormInterface;
-use Symfony\Component\Form\FormView;
-use Symfony\Component\OptionsResolver\OptionsResolver;
 
-final class ProductImageType extends ImageType
+final class ProductImageTypeExtension extends AbstractTypeExtension
 {
-    public function __construct(string $dataClass, private string $productVariantClass, array $validationGroups = [])
+    public function __construct(private readonly string $productVariantClass)
     {
-        parent::__construct($dataClass, $validationGroups);
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
-        parent::buildForm($builder, $options);
-
         if (isset($options['product']) && $options['product'] instanceof ProductInterface && $options['product']->getId() !== null) {
             $builder
                 ->add('productVariants', EntityType::class, [
@@ -47,30 +42,17 @@ final class ProductImageType extends ImageType
                         return $er->createQueryBuilder('o')
                             ->where('o.product = :product')
                             ->setParameter('product', $options['product'])
-                        ;
+                            ;
                     },
+                    'autocomplete' => true,
                 ])
             ;
         }
     }
 
-    public function buildView(FormView $view, FormInterface $form, array $options): void
+    public static function getExtendedTypes(): iterable
     {
-        parent::buildView($view, $form, $options);
-
-        $view->vars['product'] = $options['product'];
+        return [ProductImageType::class];
     }
 
-    public function configureOptions(OptionsResolver $resolver): void
-    {
-        parent::configureOptions($resolver);
-
-        $resolver->setDefined('product');
-        $resolver->setAllowedTypes('product', ProductInterface::class);
-    }
-
-    public function getBlockPrefix(): string
-    {
-        return 'sylius_product_image';
-    }
 }
