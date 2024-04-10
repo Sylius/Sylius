@@ -132,9 +132,9 @@
         "symfony/translation": "^6.4.0",
         "symfony/translation-contracts": "^2.5.2",
         "symfony/twig-bundle": "^6.4.0",
-        "symfony/ux-autocomplete": "^2.15",
-        "symfony/ux-live-component": "^2.12",
-        "symfony/ux-twig-component": "^2.11.2",
+        "symfony/ux-autocomplete": "^2.16",
+        "symfony/ux-live-component": "^2.16",
+        "symfony/ux-twig-component": "^2.16",
         "symfony/validator": "^6.4.0",
         "symfony/webpack-encore-bundle": "^1.17.1",
         "symfony/workflow": "^6.4.0",
@@ -194,8 +194,7 @@
         "api-platform/core": "2.7.17",
         "doctrine/orm": ">= 2.16.0",
         "lexik/jwt-authentication-bundle": "^2.18",
-        "stof/doctrine-extensions-bundle": "1.8.0",
-        "symfony/ux-live-component": ">=2.15"
+        "stof/doctrine-extensions-bundle": "1.8.0"
     },
     "require-dev": {
         "behat/behat": "^3.6.1",

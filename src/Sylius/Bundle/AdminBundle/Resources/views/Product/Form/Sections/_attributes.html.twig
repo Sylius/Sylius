@@ -11,7 +11,7 @@
         <div class="card-body py-4 border-bottom">
             <div class="sylius-admin-product-attribute-autocomplete">
                 <twig:SyliusAdmin.Product.ProductAttributeAutocomplete data-model="attributesToBeAdded:selectedAttributeCodes" :excludedAttributeCodes="productAttributes|keys" />
-                <button type="button" class="btn btn-primary" data-action="live#action" data-action-name="prevent|addAttributes()">
+                <button type="button" class="btn btn-primary" data-action="live#action" data-live-action-param="prevent|addAttributes">
                     {{ 'sylius.ui.add'|trans }}
                 </button>
             </div>
@@ -37,7 +37,8 @@
                                             type="button"
                                             class="btn btn-sm border-0 shadow-none"
                                             data-action="live#action:stop"
-                                            data-action-name="prevent|removeAttribute(attributeCode={{ productAttributeCode }})"
+                                            data-live-action-param="prevent|removeAttribute"
+                                            data-live-attribute-code-param="{{ productAttributeCode }}"
                                             {{ sylius_test_html_attribute('product-attribute-delete-button', productAttributeName) }}
                                         >
                                             <svg xmlns="http://www.w3.org/2000/svg" class="text-muted" width="12" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -79,7 +80,7 @@
                                                     <button
                                                         class="btn btn-secondary btn-sm"
                                                         data-action="live#action"
-                                                        data-action-name="prevent|applyToAll(attributeCode={{ productAttributeCode }},localeCode={{ productAttributeValue.vars.data.localeCode }})"
+                                                        data-live-action-param="prevent|applyToAll(attributeCode={{ productAttributeCode }},localeCode={{ productAttributeValue.vars.data.localeCode }})"
                                                     >
                                                         {{ 'sylius.ui.apply_to_all'|trans }}
                                                     </button>

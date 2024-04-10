@@ -11,13 +11,40 @@
     <div class="card-body">
         <div class="d-flex justify-content-end">
             <div class="btn-group" role="group">
-                <button type="button" class="btn btn-sm {% if rangeName == '2weeks' %}btn-secondary{% else %}btn-outline-secondary{% endif %}"  data-action="live#action" data-action-name="prevent|changeRange(name=2weeks, range=day, startDate=2 weeks ago, endDate=today)">
+                <button
+                    type="button"
+                    class="btn btn-sm {% if rangeName == '2weeks' %}btn-secondary{% else %}btn-outline-secondary{% endif %}"
+                    data-action="live#action"
+                    data-live-action-param="prevent|changeRange"
+                    data-live-name-param="2weeks"
+                    data-live-range-param="day"
+                    data-live-start-date-param="2 weeks ago"
+                    data-live-end-date-param="today"
+                >
                     {{ 'sylius.ui.statistics.2weeks'|trans }}
                 </button>
-                <button type="button" class="btn btn-sm {% if rangeName == 'month' %}btn-secondary{% else %}btn-outline-secondary{% endif %}" data-action="live#action" data-action-name="prevent|changeRange(name=month, range=day, startDate=1 month ago, endDate=today)">
+                <button
+                    type="button"
+                    class="btn btn-sm {% if rangeName == 'month' %}btn-secondary{% else %}btn-outline-secondary{% endif %}"
+                    data-action="live#action"
+                    data-live-action-param="prevent|changeRange"
+                    data-live-name-param="month"
+                    data-live-range-param="day"
+                    data-live-start-date-param="1 month ago"
+                    data-live-end-date-param="today"
+                >
                     {{ 'sylius.ui.statistics.month'|trans }}
                 </button>
-                <button type="button" class="btn btn-sm {% if rangeName == 'year' %}btn-secondary{% else %}btn-outline-secondary{% endif %}" data-action="live#action" data-action-name="prevent|changeRange(name=year, range=month, startDate=first day of january this year, endDate=first day of january next year)">
+                <button
+                    type="button"
+                    class="btn btn-sm {% if rangeName == 'year' %}btn-secondary{% else %}btn-outline-secondary{% endif %}"
+                    data-action="live#action"
+                    data-live-action-param="prevent|changeRange"
+                    data-live-name-param="year"
+                    data-live-range-param="month"
+                    data-live-start-date-param="first day of january this year"
+                    data-live-end-date-param="first day of january next year"
+                >
                     {{ 'sylius.ui.statistics.year'|trans }}
                 </button>
             </div>
