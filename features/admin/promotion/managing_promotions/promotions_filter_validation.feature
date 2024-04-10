@@ -8,7 +8,7 @@ Feature: Promotion filters validation
         Given the store operates on a single channel in "United States"
         And I am logged in as an administrator
 
-    @api @todo @ui @javascript
+    @api @ui @javascript
     Scenario: Adding a promotion with wrong minimum price on price range filter
         When I want to create a new promotion
         And I specify its code as "10_for_all_products_over_10"
@@ -19,7 +19,7 @@ Feature: Promotion filters validation
         Then I should be notified that a minimum value should be a numeric value
         And promotion with name "$10 discount for all products over $10!" should not be added
 
-    @api @todo @ui @javascript
+    @api @ui @javascript
     Scenario: Adding a promotion with wrong maximum price on price range filter
         When I want to create a new promotion
         And I specify its code as "10_for_all_products_over_10"
