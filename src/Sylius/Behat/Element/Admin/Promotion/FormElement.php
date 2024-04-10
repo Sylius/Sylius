@@ -203,6 +203,8 @@ final class FormElement extends Element implements FormElementInterface
             'exclusive' => '#sylius_promotion_exclusive',
             'form' => '[data-live-name-value="SyliusAdmin.Promotion.Form"]',
             'label' => '[name="sylius_promotion[translations][%locale_code%][label]"]',
+            'minimum' => '#sylius_promotion_actions_0_configuration_WEB-US_filters_price_range_filter_min',
+            'maximum' => '#sylius_promotion_actions_0_configuration_WEB-US_filters_price_range_filter_max',
             'name' => '#sylius_promotion_name',
             'priority' => '#sylius_promotion_priority',
             'rules' => '#sylius_promotion_rules',

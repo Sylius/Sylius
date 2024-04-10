@@ -52,8 +52,6 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
         return array_merge(parent::getDefinedElements(), [
             'code' => '#sylius_promotion_code',
             'form' => '[data-live-name-value="SyliusAdmin.Promotion.Form"]',
-            'minimum' => '#sylius_promotion_actions_0_configuration_WEB-US_filters_price_range_filter_min',
-            'maximum' => '#sylius_promotion_actions_0_configuration_WEB-US_filters_price_range_filter_max',
             'rules' => '#sylius_promotion_rules',
             'count' => '#sylius_promotion_rules_0_configuration_count',
             'amount' => '#sylius_promotion_actions_0_configuration_WEB-US_amount',

@@ -354,7 +354,7 @@ final class ManagingPromotionsContext implements Context
      */
     public function iShouldBeNotifiedThatPromotionWithThisCodeAlreadyExists()
     {
-        Assert::same($this->createPage->getValidationMessage('code'), 'The promotion with given code already exists.');
+        Assert::same($this->formElement->getValidationMessage('code'), 'The promotion with given code already exists.');
     }
 
     /**
@@ -556,10 +556,7 @@ final class ManagingPromotionsContext implements Context
      */
     public function iShouldBeNotifiedThatPromotionCannotEndBeforeItsEvenStarts(): void
     {
-        /** @var CreatePageInterface|UpdatePageInterface $currentPage */
-        $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
-
-        Assert::same($currentPage->getValidationMessage('ends_at'), 'End date cannot be set prior start date.');
+        Assert::same($this->formElement->getValidationMessage('ends_at'), 'End date cannot be set prior start date.');
     }
 
     /**
@@ -866,10 +863,7 @@ final class ManagingPromotionsContext implements Context
 
     private function assertFieldValidationMessage(string $element, string $expectedMessage)
     {
-        /** @var CreatePageInterface|UpdatePageInterface $currentPage */
-        $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
-
-        Assert::same($currentPage->getValidationMessage($element), $expectedMessage);
+        Assert::same($this->formElement->getValidationMessage($element), $expectedMessage);
     }
 
     /**
