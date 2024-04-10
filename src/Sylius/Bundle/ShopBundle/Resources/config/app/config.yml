@@ -451,25 +451,6 @@ sylius_ui:
                     context:
                         event: sylius.shop.product.index.after_vertical_menu
 
-        sylius.shop.taxon.header:
-            blocks:
-                breadcrumb:
-                    template: "@SyliusShop/Taxon/_breadcrumb.html.twig"
-                    priority: 20
-                before_header_legacy:
-                    template: "@SyliusUi/Block/_legacySonataEvent.html.twig"
-                    priority: 15
-                    context:
-                        event: sylius.shop.taxon.header.before
-                header:
-                    template: "@SyliusShop/Taxon/Header/_content.html.twig"
-                    priority: 10
-                after_header_legacy:
-                    template: "@SyliusUi/Block/_legacySonataEvent.html.twig"
-                    priority: 5
-                    context:
-                        event: sylius.shop.taxon.header.after
-
         sylius.shop.product_review.index.product_box:
             blocks:
                 before_legacy:
@@ -519,8 +500,20 @@ sylius_ui:
                     template: "@SyliusUi/Block/_legacySonataEvent.html.twig"
                     priority: 5
                     context:
-                        event: sylius.shop.product_review.create.after_product_box
-
+                        event: sylius.shop.product_review.create.after_product_box                
+    
+        sylius.shop.product.show.accordion:
+            blocks:
+                details:
+                    template: "@SyliusShop/Product/Show/Accordion/_details.html.twig"
+                    priority: 30
+                attributes:
+                    template: "@SyliusShop/Product/Show/Accordion/_attributes.html.twig"
+                    priority: 20
+                reviews:
+                    template: "@SyliusShop/Product/Show/Accordion/_reviews.html.twig"
+                    priority: 10
+            
         sylius.shop.product.show.tab_reviews:
             blocks:
                 legacy:
@@ -574,42 +567,30 @@ sylius_ui:
                     context:
                         event: sylius.shop.product.show.before_add_to_cart
 
-        sylius.shop.product.index.before_list:
+        sylius.shop.product.index.top:
             blocks:
-                legacy:
-                    template: "@SyliusUi/Block/_legacySonataEvent.html.twig"
-                    context:
-                        event: sylius.shop.product.index.before_list
-
-        sylius.shop.product.index.before_pagination:
-            blocks:
-                legacy:
-                    template: "@SyliusUi/Block/_legacySonataEvent.html.twig"
-                    context:
-                        event: sylius.shop.product.index.before_pagination
-
-        sylius.shop.product.index.search:
-            blocks:
-                before_search_legacy:
-                    template: "@SyliusUi/Block/_legacySonataEvent.html.twig"
-                    priority: 35
-                    context:
-                        event: sylius.shop.product.index.before_search
-                search:
-                    template: "@SyliusShop/Product/Index/_search.html.twig"
-                    priority: 30
-                after_search_legacy:
-                    template: "@SyliusUi/Block/_legacySonataEvent.html.twig"
-                    priority: 25
-                    context:
-                        event: sylius.shop.product.index.after_search
-                pagination:
-                    template: "@SyliusShop/Product/Index/_pagination.html.twig"
-                    priority: 20
-                sorting:
-                    template: "@SyliusShop/Product/Index/_sorting.html.twig"
+                breadcrumb:
+                    template: "@SyliusShop/Product/Index/_breadcrumb.html.twig"
                     priority: 10
-
+                    
+        sylius.shop.product.index.sidebar:
+            blocks:
+                content:
+                    template: "@SyliusShop/Product/Index/_sidebar.html.twig"
+                    priority: 10
+                    
+        sylius.shop.product.index.main:
+            blocks:
+                header:
+                    template: "@SyliusShop/Product/Index/_header.html.twig"
+                    priority: 50
+                list:
+                    template: "@SyliusShop/Product/Index/_list.html.twig"
+                    priority: 20
+                footer:
+                    template: "@SyliusShop/Product/Index/_pagination.html.twig"
+                    priority: 10
+            
         sylius.shop.order.thank_you.after_message:
             blocks:
                 legacy:
@@ -990,11 +971,6 @@ sylius_ui:
                     context:
                         event: sylius.shop.checkout.select_payment.before_navigation
 
-        sylius.shop.checkout.select_payment.choice_item_content:
-            blocks:
-                description:
-                    template: "@SyliusShop/Checkout/SelectPayment/_description.html.twig"
-
         sylius.shop.checkout.select_shipping.before_navigation:
             blocks:
                 legacy:
@@ -1002,90 +978,41 @@ sylius_ui:
                     context:
                         event: sylius.shop.checkout.select_shipping.before_navigation
 
-        sylius.shop.checkout.select_shipping.choice_item_content:
+        sylius.shop.product.show.top:
             blocks:
-                description:
-                    template: "@SyliusShop/Checkout/SelectShipping/_description.html.twig"
-
-        sylius.shop.checkout.select_shipping.choice_item_extra:
-            blocks:
-                shipping_fee:
-                    template: "@SyliusShop/Checkout/SelectShipping/_fee.html.twig"
-
-        sylius.shop.product.show.left_sidebar:
-            blocks:
-                before_legacy:
-                    template: "@SyliusUi/Block/_legacySonataEvent.html.twig"
-                    priority: 15
-                    context:
-                        event: sylius.shop.product.show.before_images
-                content:
-                    template: "@SyliusShop/Product/Show/_images.html.twig"
+                breadcrumb:
+                    template: "@SyliusShop/Product/Show/_breadcrumb.html.twig"
                     priority: 10
-                after_legacy:
-                    template: "@SyliusUi/Block/_legacySonataEvent.html.twig"
-                    priority: 5
-                    context:
-                        event: sylius.shop.product.show.after_images
-
-        sylius.shop.product.show.right_sidebar:
+                    
+        sylius.shop.product.show.summary:
             blocks:
                 header:
                     template: "@SyliusShop/Product/Show/_header.html.twig"
                     priority: 50
-                after_product_header_legacy:
-                    template: "@SyliusUi/Block/_legacySonataEvent.html.twig"
-                    priority: 45
-                    context:
-                        event: sylius.shop.product.show.after_product_header
                 reviews:
                     template: "@SyliusShop/Product/Show/_reviews.html.twig"
                     priority: 40
-                after_reviews_legacy:
-                    template: "@SyliusUi/Block/_legacySonataEvent.html.twig"
-                    priority: 35
-                    context:
-                        event: sylius.shop.product.show.after_reviews
                 price_widget:
                     template: "@SyliusShop/Product/Show/_priceWidget.html.twig"
                     priority: 30
-                after_price_legacy:
-                    template: "@SyliusUi/Block/_legacySonataEvent.html.twig"
-                    priority: 25
-                    context:
-                        event: sylius.shop.product.show.after_price
                 short_description:
                     template: "@SyliusShop/Product/Show/_shortDescription.html.twig"
                     priority: 20
-                after_description_legacy:
-                    template: "@SyliusUi/Block/_legacySonataEvent.html.twig"
-                    priority: 15
-                    context:
-                        event: sylius.shop.product.show.after_description
                 variant_selection:
                     template: "@SyliusShop/Product/Show/_variantSelection.html.twig"
                     priority: 10
-                after_add_to_cart_legacy:
-                    template: "@SyliusUi/Block/_legacySonataEvent.html.twig"
-                    priority: 5
-                    context:
-                        event: sylius.shop.product.show.after_add_to_cart
 
         sylius.shop.product.show.content:
             blocks:
-                before_tabs_legacy:
-                    template: "@SyliusUi/Block/_legacySonataEvent.html.twig"
-                    priority: 25
-                    context:
-                        event: sylius.shop.product.show.before_tabs
+                images:
+                    template: "@SyliusShop/Product/Show/_images.html.twig"
+                    priority: 30
                 tabs:
-                    template: "@SyliusShop/Product/Show/_tabs.html.twig"
+                    template: "@SyliusShop/Product/Show/Accordion/_accordion.html.twig"
                     priority: 20
-                before_associations_legacy:
-                    template: "@SyliusUi/Block/_legacySonataEvent.html.twig"
-                    priority: 15
-                    context:
-                        event: sylius.shop.product.show.before_associations
+                
+        sylius.shop.product.show.bottom:
+            blocks:
                 associations:
                     template: "@SyliusShop/Product/Show/_associations.html.twig"
                     priority: 10

@@ -3,16 +3,22 @@
 {% block title %}{{ product.name }} | {{ parent() }}{% endblock %}
 
 {% block content %}
-    {% include '@SyliusShop/Product/Show/_breadcrumb.html.twig' %}
+    <div class="container">
+        {{ sylius_template_event('sylius.shop.product.show.top', _context) }}
 
-    <div>
-        <div>
-            {{ sylius_template_event('sylius.shop.product.show.left_sidebar', _context) }}
+        <div class="row g-lg-5 g-xl-6 mb-6">
+            <div class="col-12 col-lg-4 order-lg-1">
+                <div class="sticky-top pt-2" style="top: 3rem;" {{ sylius_test_html_attribute('product-box') }}>
+                    {{ sylius_template_event('sylius.shop.product.show.summary', _context) }}
+                </div>
+            </div>
+            <div class="col-12 col-lg-8">
+                {{ sylius_template_event('sylius.shop.product.show.content', _context) }}
+            </div>
         </div>
-        <div {{ sylius_test_html_attribute('product-box') }}>
-            {{ sylius_template_event('sylius.shop.product.show.right_sidebar', _context) }}
+
+        <div class="mb-6">
+            {{ sylius_template_event('sylius.shop.product.show.bottom', _context) }}
         </div>
     </div>
-
-    {{ sylius_template_event('sylius.shop.product.show.content', _context) }}
 {% endblock %}

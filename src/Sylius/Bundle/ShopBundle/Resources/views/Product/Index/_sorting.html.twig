@@ -29,19 +29,18 @@
         {% set current_sorting_label = 'sylius.ui.most_expensive_first'|trans|lower %}
     {% endif %}
 
-    <div>
-        {{ 'sylius.ui.sort'|trans }}
-        <div>
-            <div>{{ current_sorting_label }}</div>
-            <div>
-                <a href="{{ default_path }}" data-text="{{ 'sylius.ui.by_position'|trans|lower }}">{{ 'sylius.ui.by_position'|trans }}</a>
-                <a href="{{ from_a_to_z_path }}" data-text="{{ 'sylius.ui.from_a_to_z'|trans|lower }}">{{ 'sylius.ui.from_a_to_z'|trans }}</a>
-                <a href="{{ from_z_to_a_path }}" data-text="{{ 'sylius.ui.from_z_to_a'|trans|lower }}">{{ 'sylius.ui.from_z_to_a'|trans }}</a>
-                <a href="{{ newest_first_path }}" data-text="{{ 'sylius.ui.newest_first'|trans|lower }}">{{ 'sylius.ui.newest_first'|trans }}</a>
-                <a href="{{ oldest_first_path }}" data-text="{{ 'sylius.ui.oldest_first'|trans|lower }}">{{ 'sylius.ui.oldest_first'|trans }}</a>
-                <a href="{{ cheapest_first_path }}" data-text="{{ 'sylius.ui.cheapest_first'|trans|lower }}">{{ 'sylius.ui.cheapest_first'|trans }}</a>
-                <a href="{{ most_expensive_first_path }}" data-text="{{ 'sylius.ui.most_expensive_first'|trans|lower }}">{{ 'sylius.ui.most_expensive_first'|trans }}</a>
-            </div>
+    <div class="dropdown">
+        <button type="button" class="btn btn-sm dropdown-toggle" data-bs-toggle="dropdown">
+            <span class="text-black-50">{{ 'sylius.ui.sort'|trans }}: </span>{{ current_sorting_label }}
+        </button>
+        <div class="dropdown-menu dropdown-menu-end ">
+            <a class="dropdown-item" href="{{ default_path }}" data-text="{{ 'sylius.ui.by_position'|trans|lower }}">{{ 'sylius.ui.by_position'|trans }}</a>
+            <a class="dropdown-item" href="{{ from_a_to_z_path }}" data-text="{{ 'sylius.ui.from_a_to_z'|trans|lower }}">{{ 'sylius.ui.from_a_to_z'|trans }}</a>
+            <a class="dropdown-item" href="{{ from_z_to_a_path }}" data-text="{{ 'sylius.ui.from_z_to_a'|trans|lower }}">{{ 'sylius.ui.from_z_to_a'|trans }}</a>
+            <a class="dropdown-item" href="{{ newest_first_path }}" data-text="{{ 'sylius.ui.newest_first'|trans|lower }}">{{ 'sylius.ui.newest_first'|trans }}</a>
+            <a class="dropdown-item" href="{{ oldest_first_path }}" data-text="{{ 'sylius.ui.oldest_first'|trans|lower }}">{{ 'sylius.ui.oldest_first'|trans }}</a>
+            <a class="dropdown-item" href="{{ cheapest_first_path }}" data-text="{{ 'sylius.ui.cheapest_first'|trans|lower }}">{{ 'sylius.ui.cheapest_first'|trans }}</a>
+            <a class="dropdown-item" href="{{ most_expensive_first_path }}" data-text="{{ 'sylius.ui.most_expensive_first'|trans|lower }}">{{ 'sylius.ui.most_expensive_first'|trans }}</a>
         </div>
     </div>
 {% endif %}

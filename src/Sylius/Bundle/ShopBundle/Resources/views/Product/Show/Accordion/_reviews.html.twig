@@ -1,0 +1,11 @@
+{% embed '@SyliusShop/Shared/Accordion/accordionItem.html.twig' with { accordion_item_id: 'reviews' } %}
+
+    {% block accordion_item_title %}
+        {{ 'sylius.ui.reviews'|trans }} ({{ product.acceptedReviews|length }})
+    {% endblock %}
+
+    {% block accordion_item_content %}
+        {% include '@SyliusShop/Product/Show/Content/_latestReviews.html.twig' %}
+    {% endblock %}
+
+{% endembed %}
