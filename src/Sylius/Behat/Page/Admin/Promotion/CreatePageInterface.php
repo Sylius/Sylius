@@ -35,22 +35,10 @@ interface CreatePageInterface extends BaseCreatePageInterface
 
     public function fillRuleOptionForChannel(string $channelCode, string $option, string $value): void;
 
-    public function addAction(?string $actionName): void;
-
-    public function selectActionOption(string $option, string $value, bool $multiple = false): void;
-
-    public function fillActionOption(string $option, string $value): void;
-
-    public function fillActionOptionForChannel(string $channelCode, string $option, string $value): void;
-
-    /**
-     * @throws ElementNotFoundException
-     */
+    /** @throws ElementNotFoundException */
     public function getValidationMessageForAction(): string;
 
-    /**
-     * @param string|string[] $value
-     */
+    /** @param string|string[] $value */
     public function selectAutoCompleteFilterOption(string $option, array|string $value, bool $multiple = false): void;
 
     public function checkIfRuleConfigurationFormIsVisible(): bool;

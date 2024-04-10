@@ -75,35 +75,6 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
         $lastAction->fillField($option, $value);
     }
 
-    public function addAction(?string $actionName): void
-    {
-        $count = count($this->getCollectionItems('actions'));
-
-        $this->getDocument()->clickLink('Add action');
-
-        $this->getDocument()->waitFor(5, fn () => $count + 1 === count($this->getCollectionItems('actions')));
-
-        if (null !== $actionName) {
-            $this->selectActionOption('Type', $actionName);
-        }
-    }
-
-    public function selectActionOption(string $option, string $value, bool $multiple = false): void
-    {
-        $this->getLastCollectionItem('actions')->find('named', ['select', $option])->selectOption($value, $multiple);
-    }
-
-    public function fillActionOption(string $option, string $value): void
-    {
-        $this->getLastCollectionItem('actions')->fillField($option, $value);
-    }
-
-    public function fillActionOptionForChannel(string $channelCode, string $option, string $value): void
-    {
-        $lastAction = $this->getChannelConfigurationOfLastAction($channelCode);
-        $lastAction->fillField($option, $value);
-    }
-
 
     public function getValidationMessageForAction(): string
     {
@@ -149,25 +120,14 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
-            'actions' => '#sylius_promotion_actions',
             'code' => '#sylius_promotion_code',
+            'form' => '[data-live-name-value="SyliusAdmin.Promotion.Form"]',
             'minimum' => '#sylius_promotion_actions_0_configuration_WEB-US_filters_price_range_filter_min',
             'maximum' => '#sylius_promotion_actions_0_configuration_WEB-US_filters_price_range_filter_max',
             'rules' => '#sylius_promotion_rules',
             'count' => '#sylius_promotion_rules_0_configuration_count',
             'amount' => '#sylius_promotion_actions_0_configuration_WEB-US_amount',
         ]);
-    }
-
-    private function getChannelConfigurationOfLastAction(string $channelCode): NodeElement
-    {
-        $lastAction = $this->getLastCollectionItem('actions');
-
-        TabsHelper::switchTab($this->getSession(), $lastAction, $channelCode);
-
-        return $lastAction
-            ->find('css', sprintf('[id^="sylius_promotion_actions_"][id$="_configuration_%s"]', $channelCode))
-        ;
     }
 
     private function getChannelConfigurationOfLastRule(string $channelCode): NodeElement
