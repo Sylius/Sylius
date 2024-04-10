@@ -34,4 +34,12 @@ interface FormElementInterface
     public function setLabel(string $label, string $localeCode): void;
 
     public function hasLabel(string $label, string $localeCode): bool;
+
+    public function addAction(?string $actionName): void;
+
+    public function fillActionOption(string $option, string $value): void;
+
+    public function fillActionOptionForChannel(string $channelCode, string $option, string $value): void;
+
+    public function selectActionOption(string $option, string $value, bool $multiple = false): void;
 }

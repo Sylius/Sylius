@@ -178,8 +178,8 @@ final class ManagingPromotionsContext implements Context
      */
     public function iAddTheActionConfiguredWithAmountForChannel($actionType, $amount, ChannelInterface $channel)
     {
-        $this->createPage->addAction($actionType);
-        $this->createPage->fillActionOptionForChannel($channel->getCode(), 'Amount', $amount);
+        $this->formElement->addAction($actionType);
+        $this->formElement->fillActionOptionForChannel($channel->getCode(), 'Amount', $amount);
     }
 
     /**
@@ -187,7 +187,7 @@ final class ManagingPromotionsContext implements Context
      */
     public function itIsConfiguredWithAmountForChannel($amount, ChannelInterface $channel)
     {
-        $this->createPage->fillActionOptionForChannel($channel->getCode(), 'Amount', $amount);
+        $this->formElement->fillActionOptionForChannel($channel->getCode(), 'Amount', $amount);
     }
 
     /**
@@ -195,7 +195,7 @@ final class ManagingPromotionsContext implements Context
      */
     public function iAddAMinPriceFilterRangeForChannel(ChannelInterface $channel, $minimum)
     {
-        $this->createPage->fillActionOptionForChannel($channel->getCode(), 'Min', $minimum);
+        $this->formElement->fillActionOptionForChannel($channel->getCode(), 'Min', $minimum);
     }
 
     /**
@@ -203,7 +203,7 @@ final class ManagingPromotionsContext implements Context
      */
     public function iAddAMaxPriceFilterRangeForChannel(ChannelInterface $channel, $maximum)
     {
-        $this->createPage->fillActionOptionForChannel($channel->getCode(), 'Max', $maximum);
+        $this->formElement->fillActionOptionForChannel($channel->getCode(), 'Max', $maximum);
     }
 
     /**
@@ -231,8 +231,8 @@ final class ManagingPromotionsContext implements Context
         string $percentage,
         ChannelInterface $channel,
     ): void {
-        $this->createPage->addAction($actionType);
-        $this->createPage->fillActionOptionForChannel($channel->getCode(), 'Percentage', $percentage);
+        $this->formElement->addAction($actionType);
+        $this->formElement->fillActionOptionForChannel($channel->getCode(), 'Percentage', $percentage);
     }
 
     /**
@@ -242,8 +242,8 @@ final class ManagingPromotionsContext implements Context
         string $actionType,
         ChannelInterface $channel,
     ): void {
-        $this->createPage->addAction($actionType);
-        $this->createPage->fillActionOptionForChannel($channel->getCode(), 'Percentage', '');
+        $this->formElement->addAction($actionType);
+        $this->formElement->fillActionOptionForChannel($channel->getCode(), 'Percentage', '');
     }
 
     /**
@@ -252,8 +252,8 @@ final class ManagingPromotionsContext implements Context
      */
     public function iAddTheActionConfiguredWithAPercentageValue($actionType, $percentage = null)
     {
-        $this->createPage->addAction($actionType);
-        $this->createPage->fillActionOption('Percentage', $percentage ?? '');
+        $this->formElement->addAction($actionType);
+        $this->formElement->fillActionOption('Percentage', $percentage ?? '');
     }
 
     /**
@@ -746,9 +746,9 @@ final class ManagingPromotionsContext implements Context
     /**
      * @When I add a new action
      */
-    public function iAddANewAction()
+    public function iAddANewAction(): void
     {
-        $this->createPage->addAction(null);
+        $this->formElement->addAction(null);
     }
 
     /**

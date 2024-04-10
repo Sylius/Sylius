@@ -25,6 +25,16 @@
     </div>
 {% endblock %}
 
+{% block sylius_promotion_action_row %}
+    <div{% with {attr: row_attr|merge({class: row_attr.class|default('mb-3 card')|trim})} %}{{ block('attributes') }}{% endwith %}>
+        <div class="card-body" {{ sylius_test_html_attribute('promotion-action') }}>
+            {{- form_label(form) -}}
+            {{- form_widget(form) -}}
+            {{- form_errors(form) -}}
+        </div>
+    </div>
+{% endblock %}
+
 {% block sylius_channel_collection_row %}
     <div{% with {attr: row_attr|merge({class: row_attr.class|default('mb-3 card')|trim})} %}{{ block('attributes') }}{% endwith %}>
         <div class="card-header">
@@ -36,6 +46,7 @@
                             data-bs-toggle="tab"
                             href="#{{ channelCode }}"
                             role="tab"
+                            {{ sylius_test_html_attribute('tab', channelCode) }}
                         >
                             {{ channelConfiguration.vars.label }}
                         </a>
@@ -47,7 +58,7 @@
             <div class="tab-content">
                 {% for channelCode, channelConfiguration in form %}
                     <div class="tab-pane fade {% if loop.index0 == 0 %}show active{% endif %}" id="{{ channelCode }}" role="tabpanel">
-                        {{ form_row(channelConfiguration, {'label': false}) }}
+                        {{ form_row(channelConfiguration, sylius_test_form_attribute('tab-content')|merge({'label': false})) }}
                     </div>
                 {% endfor %}
             </div>
