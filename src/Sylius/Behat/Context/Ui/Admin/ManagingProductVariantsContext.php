@@ -220,7 +220,7 @@ final class ManagingProductVariantsContext implements Context
     /**
      * @When I set the position of :name to :position
      */
-    public function iSetThePositionOfTo($name, int $position)
+    public function iSetThePositionOfTo(string $name, int $position): void
     {
         $this->indexPage->setPosition($name, $position);
     }
@@ -228,7 +228,7 @@ final class ManagingProductVariantsContext implements Context
     /**
      * @When I save my new configuration
      */
-    public function iSaveMyNewConfiguration()
+    public function iSaveMyNewConfiguration(): void
     {
         $this->indexPage->savePositions();
     }
