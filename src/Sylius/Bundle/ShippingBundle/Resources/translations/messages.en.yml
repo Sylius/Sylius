@@ -46,6 +46,7 @@ sylius:
             rules_help: Use rules to decide whether this shipping method can be applied to a given order.
                 If a rule is true this shipping method can be applied. Notice that if you add multiple rules,
                 all rules has to be true.
+            select_calculator: Select a calculator
             tax_category: Tax category
             translations: Translations
         shipping_method_rule:

@@ -70,6 +70,7 @@ final class ShippingMethodType extends AbstractResourceType
             ])
             ->add('calculator', CalculatorChoiceType::class, [
                 'label' => 'sylius.form.shipping_method.calculator',
+                'placeholder' => 'sylius.form.shipping_method.select_calculator',
             ])
             ->add('enabled', CheckboxType::class, [
                 'label' => 'sylius.form.locale.enabled',
@@ -130,6 +131,10 @@ final class ShippingMethodType extends AbstractResourceType
 
     private function addConfigurationField(FormInterface $form, string $calculatorName): void
     {
+        if ($calculatorName === '') {
+            return;
+        }
+
         /** @var CalculatorInterface $calculator */
         $calculator = $this->calculatorRegistry->get($calculatorName);
 
