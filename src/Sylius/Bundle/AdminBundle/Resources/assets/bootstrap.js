@@ -13,6 +13,7 @@ import '@symfony/ux-live-component/styles/live.css';
 import SlugController from "./controllers/SlugController";
 import TaxonSlugController from "./controllers/TaxonSlugController";
 import ProductAttributeAutocomplete from "./controllers/ProductAttributeAutocomplete";
+import MovePositionsController from "./controllers/MovePositionsController";
 
 // Registers Stimulus controllers from controllers.json and in the controllers/ directory
 export const app = startStimulusApp(require.context(
@@ -25,3 +26,4 @@ app.register('live', LiveController);
 app.register('slug', SlugController);
 app.register('taxon-slug', TaxonSlugController);
 app.register('product-attribute-autocomplete', ProductAttributeAutocomplete);
+app.register('move-positions', MovePositionsController);
