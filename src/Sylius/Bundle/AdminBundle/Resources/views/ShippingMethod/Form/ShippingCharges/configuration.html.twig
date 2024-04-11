@@ -1,31 +1,16 @@
 {% set form = hookable_data.form %}
 
-<div class="col-12">
-    <div class="card mb-3">
-        <div class="card-header">
-            <ul class="nav nav-tabs card-header-tabs" data-bs-toggle="tabs" role="tablist">
-                {% for channelCode, channelConfiguration in form.configuration %}
-                    <li class="nav-item">
-                        <a
-                            class="nav-link {% if loop.index0 == 0 %}active{% endif %}"
-                            data-bs-toggle="tab"
-                            href="#{{ channelCode }}"
-                            role="tab"
-                        >
-                            {{ channelConfiguration.vars.label }}
-                        </a>
-                    </li>
-                {% endfor %}
-            </ul>
-        </div>
-        <div class="card-body">
-            <div class="tab-content">
-                {% for channelCode, channelConfiguration in form.configuration %}
-                    <div class="tab-pane fade {% if loop.index0 == 0 %}show active{% endif %}" id="{{ channelCode }}" role="tabpanel">
-                        {{ form_row(channelConfiguration, {'label': false}) }}
-                    </div>
-                {% endfor %}
-            </div>
-        </div>
+{% if form.calculator.vars.value is not empty %}
+    <div class="col-12">
+        {% if form.configuration is defined %}
+            {{ form_widget(form.configuration) }}
+        {% else %}
+            {% for name, calculatorConfigurationPrototype in form.vars.prototypes %}
+                {% set chosenCalculator = 'calculators_' ~ form.calculator.vars.value %}
+                {% if chosenCalculator == name %}
+                    {{ form_widget(calculatorConfigurationPrototype) }}
+                {% endif %}
+            {% endfor %}
+        {% endif %}
     </div>
-</div>
+{% endif %}

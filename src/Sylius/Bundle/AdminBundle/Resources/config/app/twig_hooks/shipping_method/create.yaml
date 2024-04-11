@@ -59,6 +59,6 @@ twig_hooks:
             configuration:
                 template: '@SyliusAdmin/ShippingMethod/Form/ShippingCharges/configuration.html.twig'
         
-        'sylius_admin.shipping_method.update.content.form.rules':
+        'sylius_admin.shipping_method.create.content.form.rules':
             rules:
                 template: '@SyliusAdmin/ShippingMethod/Form/Rules/rules.html.twig' 
