@@ -57,3 +57,4 @@ sylius:
             total_weight_less_than_or_equal: Total weight less than or equal
             weight: Weight
             amount: Amount
+            select: Select a rule type

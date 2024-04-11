@@ -43,6 +43,10 @@
             <tag name="form.type_extension" extended-type="Sylius\Bundle\AddressingBundle\Form\Type\CountryType" priority="100" />
         </service>
 
+        <service id="sylius_admin.form.extension.shipping_method_type" class="Sylius\Bundle\AdminBundle\Form\Extension\ShippingMethodTypeExtension">
+            <tag name="form.type_extension" />
+        </service>
+
         <service id="sylius_admin.form.extension.type.product" class="Sylius\Bundle\AdminBundle\Form\Extension\ProductTypeExtension">
             <tag name="form.type_extension" />
         </service>
