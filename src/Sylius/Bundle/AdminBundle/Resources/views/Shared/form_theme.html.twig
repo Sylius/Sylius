@@ -37,7 +37,7 @@
 
 {% block sylius_promotion_rule_row %}
     <div{% with {attr: row_attr|merge({class: row_attr.class|default('mb-3 card')|trim})} %}{{ block('attributes') }}{% endwith %}>
-        <div class="card-body" {{ sylius_test_html_attribute('promotion-rule') }}>
+        <div class="card-body" data-skip-morph {{ sylius_test_html_attribute('promotion-rule') }}>
             {{- form_label(form) -}}
             {{- form_widget(form) -}}
             {{- form_errors(form) -}}
