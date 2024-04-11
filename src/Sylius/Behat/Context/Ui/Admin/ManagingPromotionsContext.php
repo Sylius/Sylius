@@ -88,7 +88,7 @@ final class ManagingPromotionsContext implements Context
      */
     public function iRemoveItsPriority(?int $priority = null): void
     {
-        $this->formElement->prioritizeIt($priority);
+        $this->formElement->setPriority($priority);
     }
 
     /**
@@ -664,7 +664,7 @@ final class ManagingPromotionsContext implements Context
     {
         $this->iWantToModifyAPromotion($promotion);
 
-        Assert::same($this->updatePage->getPriority(), $priority);
+        Assert::same($this->formElement->getPriority(), $priority);
     }
 
     /**
@@ -767,9 +767,9 @@ final class ManagingPromotionsContext implements Context
     /**
      * @Then I should see the rule configuration form
      */
-    public function iShouldSeeTheRuleConfigurationForm()
+    public function iShouldSeeTheRuleConfigurationForm(): void
     {
-        Assert::true($this->createPage->checkIfRuleConfigurationFormIsVisible(), 'Cart promotion rule configuration form is not visible.');
+        Assert::true($this->formElement->checkIfRuleConfigurationFormIsVisible(), 'Cart promotion rule configuration form is not visible.');
     }
 
     /**
@@ -793,7 +793,7 @@ final class ManagingPromotionsContext implements Context
      */
     public function iShouldSeeTheActionConfigurationForm()
     {
-        Assert::true($this->createPage->checkIfActionConfigurationFormIsVisible(), 'Cart promotion action configuration form is not visible.');
+        Assert::true($this->formElement->checkIfActionConfigurationFormIsVisible(), 'Cart promotion action configuration form is not visible.');
     }
 
     /**

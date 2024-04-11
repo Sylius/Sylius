@@ -15,7 +15,9 @@ namespace Sylius\Behat\Element\Admin\Promotion;
 
 interface FormElementInterface
 {
-    public function prioritizeIt(?int $priority): void;
+    public function setPriority(?int $priority): void;
+
+    public function getPriority(): int;
 
     public function setStartsAt(\DateTimeInterface $dateTime): void;
 
@@ -54,6 +56,10 @@ interface FormElementInterface
     public function selectAutocompleteRuleOptions(array $values, ?string $channelCode = null): void;
 
     public function selectAutocompleteFilterOptions(array $values, string $channelCode, string $filterType): void;
+
+    public function checkIfRuleConfigurationFormIsVisible(): bool;
+
+    public function checkIfActionConfigurationFormIsVisible(): bool;
 
     public function getValidationMessage(string $element): string;
 
