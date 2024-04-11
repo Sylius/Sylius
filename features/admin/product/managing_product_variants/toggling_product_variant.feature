@@ -10,7 +10,7 @@ Feature: Toggling the product variant
         And the product "Wyborowa Vodka" has a "Wyborowa Vodka Exquisite" variant priced at "$40.00"
         And I am logged in as an administrator
 
-    @api @todo @ui
+    @api @ui
     Scenario: Disabling the product variant
         Given the "Wyborowa Vodka Exquisite" product variant is enabled
         When I want to modify the "Wyborowa Vodka Exquisite" product variant
@@ -19,7 +19,7 @@ Feature: Toggling the product variant
         Then I should be notified that it has been successfully edited
         And this variant should be disabled
 
-    @api @todo @ui
+    @api @ui
     Scenario: Enabling the product variant
         Given the "Wyborowa Vodka Exquisite" product variant is disabled
         When I want to modify the "Wyborowa Vodka Exquisite" product variant

@@ -14,7 +14,7 @@ Feature: Editing a product variant
         And this product is named "Idź" in the "Polish (Poland)" locale
         And I am logged in as an administrator
 
-    @api @todo @ui
+    @api @ui
     Scenario: Changing product variant name
         When I want to modify the "Go" product variant
         And I name it "Java" in "English (United States)"
@@ -24,7 +24,7 @@ Feature: Editing a product variant
         And the variant with code "GO" should be named "Java" in "English (United States)" locale
         And the variant with code "GO" should be named "Kawa" in "Polish (Poland)" locale
 
-    @api @todo @ui
+    @api @ui
     Scenario: Changing product variant option values
         When I want to modify the "Go" product variant
         And I change its "Size" option to "L"

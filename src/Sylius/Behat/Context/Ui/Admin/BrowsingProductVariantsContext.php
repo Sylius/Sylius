@@ -268,10 +268,10 @@ final class BrowsingProductVariantsContext implements Context
      */
     public function iShouldSeeThatTheVariantIsEnabled(ProductVariantInterface $productVariant): void
     {
-        Assert::true($this->indexPage->isSingleResourceOnPage([
-            'name' => $productVariant->getName(),
-            'enabled' => 'Enabled',
-        ]));
+        Assert::true($this->indexPage->isSingleResourceWithSpecificElementOnPage(
+            ['name' => $productVariant->getName()],
+            '[data-test-status-enabled]',
+        ));
     }
 
     /**
