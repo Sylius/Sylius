@@ -16,6 +16,7 @@ namespace Sylius\Bundle\AdminBundle\Form\Extension\Promotion\Rule;
 use Sylius\Bundle\AdminBundle\Form\Type\TaxonAutocompleteChoiceType;
 use Sylius\Bundle\CoreBundle\Form\Type\Promotion\Rule\TotalOfItemsFromTaxonConfigurationType;
 use Sylius\Bundle\ResourceBundle\Form\DataTransformer\ResourceToIdentifierTransformer;
+use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Taxonomy\Repository\TaxonRepositoryInterface;
 use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -23,6 +24,7 @@ use Symfony\Component\Form\ReversedTransformer;
 
 final class TotalOfItemsFromTaxonConfigurationTypeExtension extends AbstractTypeExtension
 {
+    /** @param TaxonRepositoryInterface<TaxonInterface> $taxonRepository */
     public function __construct(private readonly TaxonRepositoryInterface $taxonRepository)
     {
     }
