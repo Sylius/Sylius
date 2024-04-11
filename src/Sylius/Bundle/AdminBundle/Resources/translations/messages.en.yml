@@ -100,6 +100,7 @@ sylius:
         price_history: Price history
         product:
             product_not_active_in_channel: The product is not yet activated in this channel.
+        product_variant: Product variant
         sales_summary: Sales summary
         shipment_for_order: Shipment for order
         show_history_for_channel_pricing: 'Show history for channel pricing'

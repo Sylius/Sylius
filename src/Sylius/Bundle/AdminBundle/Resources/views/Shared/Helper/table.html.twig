@@ -33,12 +33,21 @@
         {% endfor %}
         {% if definition.actionGroups.item is defined and definition.getEnabledActions('item')|length > 0 %}
             <td {{ sylius_test_html_attribute('actions') }}>
-                {% set actions %}
-                    {% for action in definition.getEnabledActions('item')|sort_by('position') %}
-                        {{ sylius_grid_render_item_action(grid, action, row) }}
-                    {% endfor %}
-                {% endset %}
-                {{ dropdown.default({ content: actions, direction: 'down-end', button: { text: 'Actions', class: 'dropdown-static' } }) }}
+                <div class="d-block p-2">
+                    {% set actions %}
+                        {% for action in definition.getEnabledActions('item')|sort_by('position') %}
+                            {{ sylius_grid_render_item_action(grid, action, row) }}
+                        {% endfor %}
+                    {% endset %}
+                    {{ dropdown.default({ content: actions, direction: 'down-end', button: { text: 'Actions', class: 'dropdown-static' } }) }}
+                </div>
+                <div class="d-block p-2">
+                    {% if definition.actionGroups.subitem is defined and definition.getEnabledActions('subitem')|length > 0 %}
+                        {% for action in definition.getEnabledActions('subitem')|sort_by('position') %}
+                            {{ sylius_grid_render_action(grid, action, row) }}
+                        {% endfor %}
+                    {% endif %}
+                </div>
             </td>
         {% endif %}
     </tr>

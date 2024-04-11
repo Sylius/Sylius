@@ -1,0 +1,36 @@
+{% macro default(channelPricingForms, product_variant, body = null, options = {}) %}
+    {% set options = {
+        accordionId: 'product-channel-pricings'
+    }|merge(options) %}
+
+    <div class="accordion" id="{{ options.accordionId }}">
+        {% for channelCode, channelPricingForm in channelPricingForms %}
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button
+                        class="accordion-button {% if loop.first == false %}collapsed{% endif %}"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#channel-pricing-{{ channelCode }}"
+                        aria-expanded="{% if loop.first %}true{% else %}false{% endif %}"
+                        aria-controls="channel-pricing-{{ channelCode }}"
+                        {{ sylius_test_html_attribute('product-channel-pricings-accordion', channelCode) }}
+                    >
+                        {{ channelPricingForm.vars.label }}
+                    </button>
+                </h2>
+                <div id="channel-pricing-{{ channelCode }}" class="accordion-collapse collapse {% if loop.first %}show{% endif %}" data-bs-parent="#product-translations">
+                    <div class="accordion-body" {{ sylius_test_html_attribute('product-channel-pricings-accordion-body') }}>
+                        {% if body is not null %}
+                            {{ include(template_from_string(body), { channelCode: channelCode, channelPricingForm: channelPricingForm, product_variant: product_variant}) }}
+                        {% else %}
+                            {% for field in channelPricingForm %}
+                                {{ form_row(field) }}
+                            {% endfor %}
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endmacro %}
