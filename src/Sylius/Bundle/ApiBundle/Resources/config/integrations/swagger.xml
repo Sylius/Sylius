@@ -85,7 +85,7 @@
             <tag name="sylius.open_api.modifier" />
         </service>
 
-        <service id="Sylius\Bundle\ApiBundle\OpenApi\Documentation\PromotionDocumentatisrc/Sylius/Bundle/AdminBundle/Resources/config/services/form.xmlonModifier">
+        <service id="Sylius\Bundle\ApiBundle\OpenApi\Documentation\PromotionDocumentationModifier">
             <argument>%sylius.security.new_api_route%</argument>
             <argument>%sylius.promotion_actions%</argument>
             <argument>%sylius.promotion_rules%</argument>

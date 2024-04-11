@@ -15,12 +15,14 @@ namespace Sylius\Bundle\AdminBundle\Form\Extension\Promotion\Filter;
 
 use Sylius\Bundle\AdminBundle\Form\Type\ProductAutocompleteChoiceType;
 use Sylius\Bundle\CoreBundle\Form\Type\Promotion\Filter\ProductFilterConfigurationType;
+use Sylius\Component\Core\Model\ProductInterface;
 use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\Form\DataTransformerInterface;
 use Symfony\Component\Form\FormBuilderInterface;
 
 final class ProductFilterConfigurationTypeExtension extends AbstractTypeExtension
 {
+    /** @param DataTransformerInterface<ProductInterface, string|null> $productsToCodesTransformer */
     public function __construct(private readonly DataTransformerInterface $productsToCodesTransformer)
     {
     }

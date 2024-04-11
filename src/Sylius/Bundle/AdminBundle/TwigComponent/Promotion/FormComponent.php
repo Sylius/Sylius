@@ -35,12 +35,16 @@ final class FormComponent
     #[LiveProp(dehydrateWith: 'dehydrateResource', fieldName: 'resource')]
     public ?Promotion $resource = null;
 
-    /** @param class-string $formClass */
+    /**
+     * @param class-string $formClass
+     * @param array<string, string> $ruleTypes
+     * @param array<string, string> $actionTypes
+     */
     public function __construct(
         private readonly FormFactoryInterface $formFactory,
         private readonly string $formClass,
-        private readonly array $rules,
-        private readonly array $actions,
+        private readonly array $ruleTypes,
+        private readonly array $actionTypes,
     ) {
     }
 
@@ -77,11 +81,11 @@ final class FormComponent
     private function provideItemType(string $name): string
     {
         if (str_contains($name, 'rules')) {
-            return array_key_first($this->rules);
+            return array_key_first($this->ruleTypes);
         }
 
         if (str_contains($name, 'actions')) {
-            return array_key_first($this->actions);
+            return array_key_first($this->actionTypes);
         }
 
         return '';
