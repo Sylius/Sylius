@@ -13,15 +13,10 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Page\Admin\Promotion;
 
-use Behat\Mink\Exception\ElementNotFoundException;
 use Sylius\Behat\Page\Admin\Crud\UpdatePageInterface as BaseUpdatePageInterface;
 
 interface UpdatePageInterface extends BaseUpdatePageInterface
 {
-    public function setPriority(?int $priority): void;
-
-    public function getPriority(): int;
-
     public function nameIt(string $name): void;
 
     public function checkChannelsState(string $channelName): bool;
@@ -53,9 +48,4 @@ interface UpdatePageInterface extends BaseUpdatePageInterface
     public function getActionValidationErrorsCount(string $channelCode): int;
 
     public function getRuleValidationErrorsCount(string $channelCode): int;
-
-    /**
-     * @throws ElementNotFoundException
-     */
-    public function getValidationMessageForTranslation(string $element, string $localeCode): string;
 }

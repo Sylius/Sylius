@@ -22,8 +22,4 @@ interface CreatePageInterface extends BaseCreatePageInterface
     public function nameIt(string $name): void;
 
     public function getValidationMessage(string $element): string;
-
-    public function checkIfRuleConfigurationFormIsVisible(): bool;
-
-    public function checkIfActionConfigurationFormIsVisible(): bool;
 }

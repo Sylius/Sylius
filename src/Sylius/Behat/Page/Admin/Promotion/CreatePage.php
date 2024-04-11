@@ -18,7 +18,6 @@ use Behat\Mink\Exception\ElementNotFoundException;
 use Sylius\Behat\Behaviour\NamesIt;
 use Sylius\Behat\Behaviour\SpecifiesItsField;
 use Sylius\Behat\Page\Admin\Crud\CreatePage as BaseCreatePage;
-use Webmozart\Assert\Assert;
 
 class CreatePage extends BaseCreatePage implements CreatePageInterface
 {
@@ -40,46 +39,13 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
         return $validationMessage->getText();
     }
 
-    public function checkIfRuleConfigurationFormIsVisible(): bool
-    {
-        return $this->hasElement('count');
-    }
-
-    public function checkIfActionConfigurationFormIsVisible(): bool
-    {
-        return $this->hasElement('amount');
-    }
-
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
             'code' => '#sylius_promotion_code',
             'form' => '[data-live-name-value="SyliusAdmin.Promotion.Form"]',
             'rules' => '#sylius_promotion_rules',
-            'count' => '#sylius_promotion_rules_0_configuration_count',
-            'amount' => '#sylius_promotion_actions_0_configuration_WEB-US_amount',
         ]);
-    }
-
-    private function getLastCollectionItem(string $collection): NodeElement
-    {
-        $items = $this->getCollectionItems($collection);
-
-        Assert::notEmpty($items);
-
-        return end($items);
-    }
-
-    /**
-     * @return NodeElement[]
-     */
-    private function getCollectionItems(string $collection): array
-    {
-        $items = $this->getElement($collection)->findAll('css', 'div[data-form-collection="item"]');
-
-        Assert::isArray($items);
-
-        return $items;
     }
 
     /** @throws ElementNotFoundException */

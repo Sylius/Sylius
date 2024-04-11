@@ -31,7 +31,12 @@ final class FormElement extends Element implements FormElementInterface
         parent::__construct($session, $minkParameters);
     }
 
-    public function prioritizeIt(?int $priority): void
+    public function getPriority(): int
+    {
+        return (int) $this->getElement('priority')->getValue();
+    }
+
+    public function setPriority(?int $priority): void
     {
         $this->getElement('priority')->setValue($priority);
     }
@@ -175,6 +180,16 @@ final class FormElement extends Element implements FormElementInterface
         $this->waitForFormUpdate();
     }
 
+    public function checkIfRuleConfigurationFormIsVisible(): bool
+    {
+        return $this->hasElement('rule_count');
+    }
+
+    public function checkIfActionConfigurationFormIsVisible(): bool
+    {
+        return $this->hasElement('action_amount');
+    }
+
     public function getValidationMessage(string $element): string
     {
         $foundElement = $this->getFieldElement($element);
@@ -218,6 +233,7 @@ final class FormElement extends Element implements FormElementInterface
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
+            'action_amount' => '#sylius_promotion_actions_0_configuration_WEB-US_amount',
             'actions' => '#sylius_promotion_actions',
             'add_action_button' => '#sylius_promotion_actions_add',
             'add_rule_button' => '#sylius_promotion_rules_add',
@@ -234,6 +250,7 @@ final class FormElement extends Element implements FormElementInterface
             'maximum' => '#sylius_promotion_actions_0_configuration_WEB-US_filters_price_range_filter_max',
             'name' => '#sylius_promotion_name',
             'priority' => '#sylius_promotion_priority',
+            'rule_count' => '#sylius_promotion_rules_0_configuration_count',
             'rules' => '#sylius_promotion_rules',
             'starts_at_date' => '#sylius_promotion_startsAt_date',
             'starts_at_time' => '#sylius_promotion_startsAt_time',
