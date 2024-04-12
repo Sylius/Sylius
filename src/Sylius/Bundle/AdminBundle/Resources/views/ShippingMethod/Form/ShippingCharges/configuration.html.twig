@@ -1,7 +1,7 @@
 {% set form = hookable_data.form %}
 
 {% if form.calculator.vars.value is not empty %}
-    <div class="col-12">
+    <div class="col-12" {{ sylius_test_html_attribute('calculator-configuration') }}>
         {% if form.configuration is defined %}
             {{ form_widget(form.configuration) }}
         {% else %}

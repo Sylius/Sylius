@@ -90,6 +90,7 @@
                             href="#{{ channelCode }}"
                             role="tab"
                             {{ sylius_test_html_attribute('tab', channelCode) }}
+                            {{ sylius_test_html_attribute('channel-tab', channelCode) }}
                         >
                             <span>{{- channelConfiguration.vars.label -}}</span>
                             {% if channelErrorCount > 0 %}

@@ -16,11 +16,12 @@ namespace Sylius\Behat\Context\Ui\Admin;
 use Behat\Behat\Context\Context;
 use FriendsOfBehat\PageObjectExtension\Page\SymfonyPageInterface;
 use Sylius\Behat\Context\Ui\Admin\Helper\ValidationTrait;
+use Sylius\Behat\Element\Admin\ShippingMethod\FormElementInterface;
 use Sylius\Behat\Page\Admin\ShippingMethod\CreatePageInterface;
 use Sylius\Behat\Page\Admin\ShippingMethod\IndexPageInterface;
 use Sylius\Behat\Page\Admin\ShippingMethod\UpdatePageInterface;
-use Sylius\Behat\Service\NotificationCheckerInterface;
 use Sylius\Behat\Service\Resolver\CurrentPageResolverInterface;
+use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Channel\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ShippingMethodInterface;
 use Webmozart\Assert\Assert;
@@ -34,14 +35,14 @@ final class ManagingShippingMethodsContext implements Context
         private CreatePageInterface $createPage,
         private UpdatePageInterface $updatePage,
         private CurrentPageResolverInterface $currentPageResolver,
-        private NotificationCheckerInterface $notificationChecker,
+        private FormElementInterface $shippingMethodForm,
     ) {
     }
 
     /**
      * @When I want to create a new shipping method
      */
-    public function iWantToCreateANewShippingMethod()
+    public function iWantToCreateANewShippingMethod(): void
     {
         $this->createPage->open();
     }
@@ -52,56 +53,56 @@ final class ManagingShippingMethodsContext implements Context
      */
     public function iSpecifyItsCodeAs(?string $code = null): void
     {
-        $this->createPage->specifyCode($code ?? '');
+        $this->shippingMethodForm->setCode($code ?? '');
     }
 
     /**
      * @When I specify its position as :position
      */
-    public function iSpecifyItsPositionAs(?int $position = null)
+    public function iSpecifyItsPositionAs(int $position): void
     {
-        $this->createPage->specifyPosition($position);
+        $this->shippingMethodForm->setPosition($position);
     }
 
     /**
      * @When I name it :name in :language
      * @When I rename it to :name in :language
      */
-    public function iNameItIn($name, $language)
+    public function iNameItIn(string $name, string $language): void
     {
-        $this->createPage->nameIt($name, $language);
+        $this->shippingMethodForm->setName($name, $language);
     }
 
     /**
      * @When I describe it as :description in :language
      */
-    public function iDescribeItAsIn($description, $language)
+    public function iDescribeItAsIn(string $description, string $language): void
     {
-        $this->createPage->describeIt($description, $language);
+        $this->shippingMethodForm->setDescription($description, $language);
     }
 
     /**
-     * @When I define it for the zone named :zoneName
+     * @When I define it for the zone named :zone
      */
-    public function iDefineItForTheZone(string $zoneName): void
+    public function iDefineItForTheZone(ZoneInterface $zone): void
     {
-        $this->createPage->chooseZone($zoneName);
+        $this->shippingMethodForm->setZoneCode($zone->getCode());
+    }
+
+    /**
+     * @When I make it available in channel :channel
+     */
+    public function iMakeItAvailableInChannel(ChannelInterface $channel): void
+    {
+        $this->shippingMethodForm->checkChannel($channel->getCode());
     }
 
     /**
      * @When I specify its amount as :amount for :channel channel
      */
-    public function iSpecifyItsAmountForChannel($amount, ChannelInterface $channel)
+    public function iSpecifyItsAmountForChannel(int $amount, ChannelInterface $channel): void
     {
-        $this->createPage->specifyAmountForChannel($channel->getCode(), $amount);
-    }
-
-    /**
-     * @When I make it available in channel :channelName
-     */
-    public function iMakeItAvailableInChannel($channelName)
-    {
-        $this->createPage->checkChannel($channelName);
+        $this->shippingMethodForm->setCalculatorConfigurationAmountForChannel($channel->getCode(), $amount);
     }
 
     /**
@@ -117,9 +118,9 @@ final class ManagingShippingMethodsContext implements Context
      * @When I choose :calculatorName calculator
      * @When I do not specify amount for :calculatorName calculator
      */
-    public function iChooseCalculator($calculatorName)
+    public function iChooseCalculator(string $calculatorName): void
     {
-        $this->createPage->chooseCalculator($calculatorName);
+        $this->shippingMethodForm->chooseCalculator($calculatorName);
     }
 
     /**
@@ -169,15 +170,22 @@ final class ManagingShippingMethodsContext implements Context
     }
 
     /**
-     * @Then the shipping method :shippingMethod should be available in channel :channelName
+     * @Then the shipping method :shippingMethod should be available in channel :channel
      */
     public function theShippingMethodShouldBeAvailableInChannel(
         ShippingMethodInterface $shippingMethod,
-        $channelName,
-    ) {
+        ChannelInterface $channel,
+    ): void {
         $this->iWantToModifyAShippingMethod($shippingMethod);
 
-        Assert::true($this->updatePage->isAvailableInChannel($channelName));
+        Assert::true(
+            $this->shippingMethodForm->hasCheckedChannel($channel->getCode()),
+            sprintf(
+                'Shipping method %s should be available in channel %s, but it is not.',
+                $shippingMethod->getName(),
+                $channel->getCode(),
+            )
+        );
     }
 
     /**
