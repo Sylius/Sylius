@@ -10,7 +10,7 @@
         </div>
         <div class="card-body">
             <div class="row align-items-center">
-                {{ form_row(hookable_data.form.actions) }}
+                {{ form_row(hookable_data.form.actions, {label: false}) }}
 
                 {% hook [main_hook, fallback_hook] with hookable_data|merge({
                     parent_main_hook: main_hook,
