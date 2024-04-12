@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\AdminBundle\TwigComponent\Channel;
+namespace Sylius\Bundle\AdminBundle\Twig\Component\Channel;
 
 use Sylius\Bundle\AdminBundle\TwigComponent\HookableComponentTrait;
 use Sylius\Component\Core\Model\Channel;
@@ -14,7 +14,7 @@ use Symfony\UX\LiveComponent\ComponentWithFormTrait;
 use Symfony\UX\LiveComponent\DefaultActionTrait;
 
 #[AsLiveComponent(name: 'SyliusAdmin.Channel.ChannelType', template: '@SyliusAdmin/Channel/_form.html.twig')]
-final class ChannelType
+final class FormComponent
 {
     use DefaultActionTrait;
     use HookableComponentTrait;
