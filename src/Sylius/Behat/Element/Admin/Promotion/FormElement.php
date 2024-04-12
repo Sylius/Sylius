@@ -84,7 +84,6 @@ final class FormElement extends BaseFormElement implements FormElementInterface
 
     public function setLabel(string $label, string $localeCode): void
     {
-        $this->getElement('translation_tab', ['%locale_code%' => $localeCode])->press();
         $this->getElement('label', ['%locale_code%' => $localeCode])->setValue($label);
     }
 
@@ -160,9 +159,8 @@ final class FormElement extends BaseFormElement implements FormElementInterface
                 $this->getLastRule()->find('css', $locator)->getXpath(),
                 $value,
             );
+            $this->waitForFormUpdate();
         }
-
-        $this->waitForFormUpdate();
     }
 
     public function selectAutocompleteFilterOptions(array $values, string $channelCode, string $filterType): void
@@ -204,7 +202,6 @@ final class FormElement extends BaseFormElement implements FormElementInterface
 
     public function getValidationMessageForTranslation(string $element, string $localeCode): string
     {
-        $this->getElement('translation_tab', ['%locale_code%' => $localeCode])->press();
         $foundElement = $this->getElement($element, ['%locale_code%' => $localeCode])->getParent();
 
         $validationMessage = $foundElement->find('css', '.invalid-feedback');
@@ -276,10 +273,12 @@ final class FormElement extends BaseFormElement implements FormElementInterface
         $lastRule = $this->getLastRule();
 
         TabsHelper::switchTab($this->getSession(), $lastRule, $channelCode);
+//        $this->waitForFormUpdate();
 
-        return $lastRule
-            ->find('css', sprintf('[id^="sylius_promotion_rules_"][id$="_configuration_%s"]', $channelCode))
-        ;
+        return $lastRule->find(
+            'css',
+            sprintf('[id^="sylius_promotion_rules_"][id$="_configuration_%s"]', $channelCode),
+        );
     }
 
     private function waitForFormUpdate(): void
