@@ -115,3 +115,4 @@ sylius:
         taxon: Taxon
         view_in_store: 'View in store'
         work_in_progress: Work in progress
+        empty_date: empty
