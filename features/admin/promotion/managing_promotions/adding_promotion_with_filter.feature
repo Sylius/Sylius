@@ -30,7 +30,7 @@ Feature: Adding promotion with filter
         Then I should be notified that it has been successfully created
         And the "$10 discount for (almost) all products!" promotion should appear in the registry
 
-    @api @ui @javascript
+    @api @ui @mink:chromedriver
     Scenario: Adding a promotion with fixed discount for all t-shirts
         Given the store classifies its products as "T-Shirts" and "Mugs"
         When I want to create a new promotion
@@ -42,7 +42,7 @@ Feature: Adding promotion with filter
         Then I should be notified that it has been successfully created
         And the "$10 discount for all T-Shirts!" promotion should appear in the registry
 
-    @api @ui @javascript
+    @api @ui @mink:chromedriver
     Scenario: Adding a promotion with fixed discount for PHP T-Shirt
         Given the store has a product "PHP T-Shirt" priced at "$100.00"
         When I want to create a new promotion
@@ -76,7 +76,7 @@ Feature: Adding promotion with filter
         Then I should be notified that it has been successfully created
         And the "$10 discount for (almost) all products!" promotion should appear in the registry
 
-    @api @ui @javascript
+    @api @ui @mink:chromedriver
     Scenario: Adding a promotion with 10% percentage discount for all t-shirts
         Given the store classifies its products as "T-Shirts" and "Mugs"
         When I want to create a new promotion
@@ -88,7 +88,7 @@ Feature: Adding promotion with filter
         Then I should be notified that it has been successfully created
         And the "$10 discount for all T-Shirts!" promotion should appear in the registry
 
-    @api @ui @javascript
+    @api @ui @mink:chromedriver
     Scenario: Adding a promotion with 10% percentage discount for PHP T-Shirt
         Given the store has a product "PHP T-Shirt" priced at "$100.00"
         When I want to create a new promotion
