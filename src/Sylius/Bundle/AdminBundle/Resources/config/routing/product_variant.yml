@@ -9,6 +9,7 @@ sylius_admin_product_variant_index:
             section: admin
             permission: true
             vars:
+                product: "expr:service('sylius.repository.product').find($productId)"
                 route:
                     parameters:
                         productId: $productId
