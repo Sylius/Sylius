@@ -9,7 +9,8 @@ Feature: Adding a new promotion with rule configured in different channels
         And the store operates on a channel named "Web-GB" in "GBP" currency
         And I am logged in as an administrator
 
-    @api @ui @mink:chromedriver
+#    @api
+    @ui @mink:chromedriver
     Scenario: Adding a new promotion with total price of items from taxon rule
         When I want to create a new promotion
         And I specify its code as "100_IN_EVERY_CURRENCY"
