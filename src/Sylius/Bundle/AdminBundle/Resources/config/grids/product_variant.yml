@@ -53,8 +53,8 @@ sylius_grid:
 #                        type: generate_variants
 #                        options:
 #                            product: expr:service('sylius.repository.product').find($productId)
-#                    update_positions:
-#                        type: update_product_variant_positions
+                    update_positions:
+                        type: update_product_variant_positions
                     create:
                         type: create
                         options:

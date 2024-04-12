@@ -63,7 +63,7 @@ class IndexPage extends BaseIndexPage implements IndexPageInterface
         return array_merge(parent::getDefinedElements(), [
             'on_hand_quantity' => '.onHand[data-product-variant-id="%id%"]',
             'on_hold_quantity' => '.onHold[data-product-variant-id="%id%"]',
-            'save_configuration_button' => '.sylius-save-position',
+            'save_configuration_button' => '[data-test-save-configuration-button]',
         ]);
     }
 }

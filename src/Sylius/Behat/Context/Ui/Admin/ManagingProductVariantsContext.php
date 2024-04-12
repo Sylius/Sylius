@@ -220,15 +220,15 @@ final class ManagingProductVariantsContext implements Context
     /**
      * @When I set the position of :name to :position
      */
-    public function iSetThePositionOfTo($name, int $position)
+    public function iSetThePositionOfTo(string $name, int $position): void
     {
         $this->indexPage->setPosition($name, $position);
     }
 
     /**
-     * @When I save my new configuration
+     * @When I save my new elements order
      */
-    public function iSaveMyNewConfiguration()
+    public function iSaveMyNewElementsOrder(): void
     {
         $this->indexPage->savePositions();
     }
