@@ -91,7 +91,9 @@ final class ManagingChannelsContext implements Context
      */
     public function iChooseAsABaseCurrency(?CurrencyInterface $currency = null): void
     {
-        $this->createPage->chooseBaseCurrency($currency ? $currency->getName() : null);
+        if (null !== $currency) {
+            $this->createPage->chooseBaseCurrency($currency->getName());
+        }
     }
 
     /**
@@ -100,7 +102,9 @@ final class ManagingChannelsContext implements Context
      */
     public function iChooseAsADefaultLocale(string $defaultLocaleName = null): void
     {
-        $this->createPage->chooseDefaultLocale($defaultLocaleName);
+        if (null !== $defaultLocaleName) {
+            $this->createPage->chooseDefaultLocale($defaultLocaleName);
+        }
     }
 
     /**
@@ -113,18 +117,11 @@ final class ManagingChannelsContext implements Context
 
     /**
      * @When I specify menu taxon as :menuTaxon
+     * @When I change its menu taxon to :menuTaxon
      */
     public function iSpecifyMenuTaxonAs(string $menuTaxon): void
     {
-        $this->createPage->specifyMenuTaxon($menuTaxon);
-    }
-
-    /**
-     * @When I change its menu taxon to :menuTaxon
-     */
-    public function iChangeItsMenuTaxonTo(string $menuTaxon): void
-    {
-        $this->updatePage->changeMenuTaxon($menuTaxon);
+        $this->resolveCurrentPage()->specifyMenuTaxon($menuTaxon);
     }
 
     /**
@@ -491,7 +488,7 @@ final class ManagingChannelsContext implements Context
     {
         $this->updatePage->open(['id' => $channel->getId()]);
 
-        Assert::true($this->updatePage->isLocaleChosen($nameOfLocale));
+        Assert::inArray($nameOfLocale, $this->updatePage->getLocales());
     }
 
     /**
@@ -506,13 +503,13 @@ final class ManagingChannelsContext implements Context
     }
 
     /**
-     * @Then paying in :currencyCode should be possible for the :channel channel
+     * @Then paying in :currency should be possible for the :channel channel
      */
-    public function payingInCurrencyShouldBePossibleForTheChannel(string $currencyCode, ChannelInterface $channel): void
+    public function payingInCurrencyShouldBePossibleForTheChannel(CurrencyInterface $currency, ChannelInterface $channel): void
     {
         $this->updatePage->open(['id' => $channel->getId()]);
 
-        Assert::true($this->updatePage->isCurrencyChosen($currencyCode));
+        Assert::inArray($currency->getName(), $this->updatePage->getCurrencies());
     }
 
     /**
@@ -627,17 +624,17 @@ final class ManagingChannelsContext implements Context
     {
         $this->updatePage->open(['id' => $channel->getId()]);
 
-        Assert::true($this->updatePage->isDefaultTaxZoneChosen($taxZone));
+        Assert::same($this->updatePage->getDefaultTaxZone(), $taxZone);
     }
 
     /**
-     * @Given channel :channel should not have default tax zone
+     * @Then channel :channel should not have default tax zone
      */
     public function channelShouldNotHaveDefaultTaxZone(ChannelInterface $channel): void
     {
         $this->updatePage->open(['id' => $channel->getId()]);
 
-        Assert::false($this->updatePage->isAnyDefaultTaxZoneChosen());
+        Assert::isEmpty($this->updatePage->getDefaultTaxZone());
     }
 
     /**
@@ -649,7 +646,10 @@ final class ManagingChannelsContext implements Context
     ): void {
         $this->updatePage->open(['id' => $channel->getId()]);
 
-        Assert::true($this->updatePage->isTaxCalculationStrategyChosen($taxCalculationStrategy));
+        Assert::same(
+            $this->updatePage->getTaxCalculationStrategy(),
+            $taxCalculationStrategy,
+        );
     }
 
     /**

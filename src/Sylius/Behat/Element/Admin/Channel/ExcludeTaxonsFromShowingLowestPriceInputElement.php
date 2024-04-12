@@ -18,49 +18,63 @@ use FriendsOfBehat\PageObjectExtension\Element\Element;
 use FriendsOfBehat\SymfonyExtension\Mink\MinkParameters;
 use Sylius\Behat\Service\Helper\AutocompleteHelperInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
-use Webmozart\Assert\Assert;
 
 final class ExcludeTaxonsFromShowingLowestPriceInputElement extends Element implements ExcludeTaxonsFromShowingLowestPriceInputElementInterface
 {
     public function __construct(
         Session $session,
         MinkParameters|array $minkParameters = [],
-        private AutocompleteHelperInterface $autocompleteHelper, // TODO: make it static fcs //
+        private AutocompleteHelperInterface $autocompleteHelper,
     ) {
         parent::__construct($session, $minkParameters);
     }
 
     public function excludeTaxon(TaxonInterface $taxon): void
     {
-        $excludeTaxonElement = $this->getElement('taxons_excluded_from_showing_lowest_price')->getParent();
+        $excludeTaxonElement = $this->getElement('taxons_excluded_from_showing_lowest_price');
 
-        $this->autocompleteHelper->select($this->getDriver(), $excludeTaxonElement->getXpath(), $taxon->getName());
+        $this->autocompleteHelper->selectByValue(
+            $this->getDriver(),
+            $excludeTaxonElement->getXpath(),
+            $taxon->getCode(),
+        );
+        $this->waitForFormUpdate();
     }
 
     public function removeExcludedTaxon(TaxonInterface $taxon): void
     {
-        $excludeTaxonElement = $this->getElement('taxons_excluded_from_showing_lowest_price')->getParent();
+        $excludeTaxonElement = $this->getElement('taxons_excluded_from_showing_lowest_price');
 
-        $this->autocompleteHelper->remove($this->getDriver(), $excludeTaxonElement->getXpath(), $taxon->getName());
+        $this->autocompleteHelper->removeByValue(
+            $this->getDriver(),
+            $excludeTaxonElement->getXpath(),
+            $taxon->getCode(),
+        );
+        $this->waitForFormUpdate();
     }
 
     public function hasTaxonExcluded(TaxonInterface $taxon): bool
     {
-        $code = $taxon->getCode();
-        Assert::notNull($code);
-
-        $excludedTaxons = $this->getElement('taxons_excluded_from_showing_lowest_price')->getParent();
-
-        return in_array(
-            $code,
-            $this->autocompleteHelper->getSelectedItems($this->getDriver(), $excludedTaxons->getXpath()),
-        );
+        return null !== $this
+            ->getElement('taxons_excluded_from_showing_lowest_price')
+            ->find('css', sprintf('option:selected:contains("%s")', $taxon->getName()))
+        ;
     }
 
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
-            'taxons_excluded_from_showing_lowest_price' => '#sylius_channel_channelPriceHistoryConfig_taxonsExcludedFromShowingLowestPrice',
+            'form' => 'form',
+            'taxons_excluded_from_showing_lowest_price' => '[data-test-taxons-excluded-from-showing-lowest-price]',
         ]);
+    }
+
+    private function waitForFormUpdate(): void
+    {
+        $form = $this->getElement('form');
+        sleep(1); // we need to sleep, as sometimes the check below is executed faster than the form sets the busy attribute
+        $form->waitFor(1500, function () use ($form) {
+            return !$form->hasAttribute('busy');
+        });
     }
 }
