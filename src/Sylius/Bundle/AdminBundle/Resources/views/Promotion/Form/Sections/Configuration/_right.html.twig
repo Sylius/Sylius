@@ -1,9 +1,0 @@
-{% set main_hook = hook_name(hookable_data.parent_main_hook, 'right') %}
-{% set fallback_hook = hook_name(hookable_data.parent_fallback_hook, 'right') %}
-
-<div class="col-12 col-md-6">
-    {% hook [main_hook, fallback_hook] with hookable_data|merge({
-        parent_main_hook: main_hook,
-        parent_fallback_hook: fallback_hook,
-    }) %}
-</div>
