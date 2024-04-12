@@ -16,12 +16,12 @@ namespace Sylius\Behat\Element\Admin\Promotion;
 use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Exception\ElementNotFoundException;
 use Behat\Mink\Session;
-use FriendsOfBehat\PageObjectExtension\Element\Element;
+use Sylius\Behat\Element\Admin\Crud\FormElement as BaseFormElement;
 use Sylius\Behat\Service\Helper\AutocompleteHelperInterface;
 use Sylius\Behat\Service\TabsHelper;
 use Webmozart\Assert\Assert;
 
-final class FormElement extends Element implements FormElementInterface
+final class FormElement extends BaseFormElement implements FormElementInterface
 {
     public function __construct(
         Session $session,
@@ -190,21 +190,6 @@ final class FormElement extends Element implements FormElementInterface
         return $this->hasElement('action_amount');
     }
 
-    public function getValidationMessage(string $element): string
-    {
-        $foundElement = $this->getFieldElement($element);
-        if (null === $foundElement) {
-            throw new ElementNotFoundException($this->getSession(), 'Field element');
-        }
-
-        $validationMessage = $foundElement->find('css', '.invalid-feedback');
-        if (null === $validationMessage) {
-            throw new ElementNotFoundException($this->getSession(), 'Validation message', 'css', '.invalid-feedback');
-        }
-
-        return $validationMessage->getText();
-    }
-
     public function getValidationMessageForAction(): string
     {
         $actionForm = $this->getLastAction();
@@ -295,17 +280,6 @@ final class FormElement extends Element implements FormElementInterface
         return $lastRule
             ->find('css', sprintf('[id^="sylius_promotion_rules_"][id$="_configuration_%s"]', $channelCode))
         ;
-    }
-
-    /** @throws ElementNotFoundException */
-    private function getFieldElement(string $element): ?NodeElement
-    {
-        $element = $this->getElement($element);
-        while (null !== $element && !$element->hasClass('field')) {
-            $element = $element->getParent();
-        }
-
-        return $element;
     }
 
     private function waitForFormUpdate(): void

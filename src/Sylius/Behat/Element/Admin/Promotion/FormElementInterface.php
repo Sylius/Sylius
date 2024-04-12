@@ -13,7 +13,9 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Element\Admin\Promotion;
 
-interface FormElementInterface
+use Sylius\Behat\Element\Admin\Crud\FormElementInterface as BaseFormElementInterface;
+
+interface FormElementInterface extends BaseFormElementInterface
 {
     public function setPriority(?int $priority): void;
 
@@ -60,8 +62,6 @@ interface FormElementInterface
     public function checkIfRuleConfigurationFormIsVisible(): bool;
 
     public function checkIfActionConfigurationFormIsVisible(): bool;
-
-    public function getValidationMessage(string $element): string;
 
     public function getValidationMessageForAction(): string;
 
