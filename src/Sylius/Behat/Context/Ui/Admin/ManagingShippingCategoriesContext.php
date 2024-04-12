@@ -194,7 +194,7 @@ class ManagingShippingCategoriesContext implements Context
      */
     public function iShouldNotBeAbleToEditItsCode(): void
     {
-        Assert::true($this->updatePage->isCodeDisabled());
+        Assert::true($this->updatePage->isCodeDisabled(), 'Shipping category code should be disabled');
     }
 
     /**
