@@ -1,20 +1,22 @@
 twig_hooks:
     hooks:
-        'sylius_admin.product_variant.create.content':
+        'sylius_admin.product_variant.update.content':
             form:
                 template: '@SyliusAdmin/ProductVariant/_form.html.twig'
-                    
-        'sylius_admin.product_variant.create.content.header':
-            breadcrumbs:
-                template: '@SyliusAdmin/ProductVariant/Form/Content/Create/Header/breadcrumbs.html.twig'
+                configuration:
+                    method: 'PUT'
 
-        'sylius_admin.product_variant.create.content.form':
+        'sylius_admin.product_variant.update.content.header':
+            breadcrumbs:
+                template: '@SyliusAdmin/ProductVariant/Form/Content/Update/Header/breadcrumbs.html.twig'
+
+        'sylius_admin.product_variant.update.content.form':
             side_navigation:
                 template: '@SyliusAdmin/ProductVariant/Form/_sideNavigation.html.twig'
             sections:
                 template: '@SyliusAdmin/ProductVariant/Form/_sections.html.twig'
 
-        'sylius_admin.product_variant.create.content.form.side_navigation':
+        'sylius_admin.product_variant.update.content.form.side_navigation':
             details:
                 template: '@SyliusAdmin/ProductVariant/Form/SideNavigation/_details.html.twig'
                 configuration:
@@ -28,7 +30,7 @@ twig_hooks:
             taxes:
                 template: '@SyliusAdmin/ProductVariant/Form/SideNavigation/_taxes.html.twig'
 
-        'sylius_admin.product_variant.create.content.form.sections':
+        'sylius_admin.product_variant.update.content.form.sections':
             details:
                 template: '@SyliusAdmin/ProductVariant/Form/Sections/_details.html.twig'
             channel_pricing:

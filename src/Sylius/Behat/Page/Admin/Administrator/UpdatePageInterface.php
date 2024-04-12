@@ -20,4 +20,6 @@ interface UpdatePageInterface extends BaseUpdatePageInterface, FormAwareInterfac
     public function removeAvatar(): void;
 
     public function hasAvatar(string $avatarPath): bool;
+
+    public function changeLocale(string $localeCode): void;
 }

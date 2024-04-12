@@ -55,7 +55,7 @@ class IndexPage extends BaseIndexPage implements IndexPageInterface
 
     public function countItemsWithNoName(): int
     {
-        return count($this->getElement('table')->findAll('css', '[data-test-missing-translation-paragraph]'));
+        return count($this->getElement('table')->findAll('css', '[data-test-missing-translation]'));
     }
 
     protected function getDefinedElements(): array

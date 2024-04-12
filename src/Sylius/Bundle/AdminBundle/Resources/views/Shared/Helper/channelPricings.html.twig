@@ -19,7 +19,7 @@
                         {{ channelPricingForm.vars.label }}
                     </button>
                 </h2>
-                <div id="channel-pricing-{{ channelCode }}" class="accordion-collapse collapse {% if loop.first %}show{% endif %}" data-bs-parent="#product-translations">
+                <div id="channel-pricing-{{ channelCode }}" class="accordion-collapse collapse {% if loop.first %}show{% endif %}" data-bs-parent="#product-channel-pricings">
                     <div class="accordion-body" {{ sylius_test_html_attribute('product-channel-pricings-accordion-body') }}>
                         {% if body is not null %}
                             {{ include(template_from_string(body), { channelCode: channelCode, channelPricingForm: channelPricingForm, product_variant: product_variant}) }}

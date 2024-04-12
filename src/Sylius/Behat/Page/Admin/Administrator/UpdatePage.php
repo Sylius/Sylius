@@ -31,10 +31,16 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
         return str_contains($srcPath, $avatarPath);
     }
 
+    public function changeLocale(string $localeCode): void
+    {
+        $this->getElement('locale-switch')->selectOption($localeCode);
+    }
+
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), $this->getDefinedFormElements(), [
             'button_delete_avatar' => '[data-test-delete-avatar-button]',
+            'locale-switch' => '[data-test-admin-locale-switch]',
         ]);
     }
 

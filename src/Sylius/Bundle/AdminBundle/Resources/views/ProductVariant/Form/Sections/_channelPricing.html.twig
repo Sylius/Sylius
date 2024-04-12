@@ -3,16 +3,15 @@
 
 <div class="tab-pane" id="product-variant-channel-pricing" role="tabpanel" tabindex="0">
     <div class="bg-white mb-3">
+        <div class="alert alert-info">
+            <p>{{ 'sylius.ui.price_details'|trans }}</p>
+            <p>{{ 'sylius.ui.original_price_details'|trans }}</p>
+            <p>{{ 'sylius.ui.minimum_price_details'|trans }}</p>
+        </div>
         {% set body %}
             {% verbatim %}
                 <div class="row"">
                     <div class="col-12 col-md-6">
-                        <div class="alert alert-info">
-                            <p>{{ 'sylius.ui.price_details'|trans }}</p>
-                            <p>{{ 'sylius.ui.original_price_details'|trans }}</p>
-                            <p>{{ 'sylius.ui.minimum_price_details'|trans }}</p>
-                        </div>
-
                         {% set isChannelPricingInvalid = channelPricingForm.vars.errors.form.parent.errors is not empty %}
 
                         {% if isChannelPricingInvalid %}
@@ -35,8 +34,16 @@
                                 {{ 'sylius.ui.product.product_not_active_in_channel'|trans }}
                             </div>
                         {% endif %}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm">
                         {{ form_row(channelPricingForm.price) }}
+                    </div>
+                    <div class="col-sm">
                         {{ form_row(channelPricingForm.originalPrice) }}
+                    </div>
+                    <div class="col-sm">
                         {{ form_row(channelPricingForm.minimumPrice) }}
                     </div>
                 </div>

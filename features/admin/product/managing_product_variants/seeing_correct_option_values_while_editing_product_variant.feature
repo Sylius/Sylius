@@ -12,13 +12,13 @@ Feature: Seeing correct option values while editing product variant
         And this product has option "Type" with values "Clear" and "Color"
         And I am logged in as an administrator
 
-    @todo @ui @no-api
+    @ui @no-api
     Scenario: Seeing default option values while editing product variant in store
         When I want to modify the "Wyborowa Vodka Exquisite" product variant
         And I should see the "Type" option as "Clear"
         And I should see the "Taste" option as "Orange"
 
-    @todo @ui @no-api
+    @ui @no-api
     Scenario: Seeing changed option values while editing product variant in store
         When I want to modify the "Wyborowa Vodka Exquisite" product variant
         And I change its "Taste" option to "Melon"
