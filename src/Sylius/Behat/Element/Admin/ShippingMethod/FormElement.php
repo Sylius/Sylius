@@ -47,6 +47,11 @@ final class FormElement extends Element implements FormElementInterface
         $this->getElement('code')->setValue($code);
     }
 
+    public function isCodeDisabled(): bool
+    {
+        return $this->getElement('code')->hasAttribute('disabled');
+    }
+
     public function getName(string $localeCode = 'en_US')
     {
         return $this->getElement('name', ['%localeCode%' => $localeCode])->getValue();

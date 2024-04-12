@@ -220,7 +220,7 @@ final class ManagingShippingMethodsContext implements Context
      */
     public function theCodeFieldShouldBeDisabled()
     {
-        Assert::true($this->updatePage->isCodeDisabled());
+        Assert::true($this->shippingMethodForm->isCodeDisabled());
     }
 
     /**

@@ -19,6 +19,8 @@ interface FormElementInterface
 
     public function setCode(string $code): void;
 
+    public function isCodeDisabled(): bool;
+
     public function getName(string $localeCode = 'en_US');
 
     public function setName(string $name, string $localeCode = 'en_US'): void;
