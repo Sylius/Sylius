@@ -14,7 +14,7 @@ Feature: Filtering catalog promotions by end date
         And this catalog promotion operates between "2021-07-01" and "2022-05-04"
         And I am logged in as an administrator
 
-    @todo @ui @api
+    @ui @api
     Scenario: Filtering catalog promotions from end date
         When I browse catalog promotions
         And I filter by end date from "2022-05-01"
@@ -22,7 +22,7 @@ Feature: Filtering catalog promotions by end date
         And I should see a catalog promotion with name "Spring sale"
         But I should not see a catalog promotion with name "Winter sale"
 
-    @todo @ui @api
+    @ui @api
     Scenario: Filtering catalog promotions up to end date
         When I browse catalog promotions
         And I filter by end date up to "2022-05-01"
@@ -30,7 +30,7 @@ Feature: Filtering catalog promotions by end date
         And I should see a catalog promotion with name "Winter sale"
         But I should not see a catalog promotion with name "Surprise sale"
 
-    @todo @ui @api
+    @ui @api
     Scenario: Filtering catalog promotions in an end date range
         When I browse catalog promotions
         And I filter by end date from "2022-04-02" up to "2022-05-03"
