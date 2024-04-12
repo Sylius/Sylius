@@ -13,7 +13,7 @@ use Symfony\UX\LiveComponent\Attribute\LiveProp;
 use Symfony\UX\LiveComponent\ComponentWithFormTrait;
 use Symfony\UX\LiveComponent\DefaultActionTrait;
 
-#[AsLiveComponent(name: 'SyliusAdmin.Channel.ChannelType', template: '@SyliusAdmin/Channel/_form.html.twig')]
+#[AsLiveComponent(name: 'sylius_admin:channel:form', template: '@SyliusAdmin/channel/form.html.twig')]
 final class FormComponent
 {
     use DefaultActionTrait;

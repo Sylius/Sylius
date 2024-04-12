@@ -2,7 +2,7 @@ twig_hooks:
     hooks:
         'sylius_admin.channel.update.content':
             form:
-                component: 'SyliusAdmin.Channel.ChannelType'
+                component: 'sylius_admin:channel:form'
                 data:
                     channel: '@=resource'
                     form: '@=form'
@@ -13,86 +13,86 @@ twig_hooks:
 
         'sylius_admin.channel.update.content.form':
             sections:
-                template: '@SyliusAdmin/Channel/Form/_sections.html.twig'
+                template: '@SyliusAdmin/channel/form/sections.html.twig'
 
         'sylius_admin.channel.update.content.form.sections':
             general:
-                template: '@SyliusAdmin/Channel/Form/Sections/_general.html.twig'
+                template: '@SyliusAdmin/channel/form/sections/general.html.twig'
             money:
-                template: '@SyliusAdmin/Channel/Form/Sections/_money.html.twig'
+                template: '@SyliusAdmin/channel/form/sections/money.html.twig'
             shop_billing_data:
-                template: '@SyliusAdmin/Channel/Form/Sections/_shopBillingData.html.twig'
+                template: '@SyliusAdmin/channel/form/sections/shop_billing_data.html.twig'
             omnibus:
-                template: '@SyliusAdmin/Channel/Form/Sections/_omnibus.html.twig'
+                template: '@SyliusAdmin/channel/form/sections/omnibus.html.twig'
             look_and_feel:
-                template: '@SyliusAdmin/Channel/Form/Sections/_lookAndFeel.html.twig'
+                template: '@SyliusAdmin/channel/form/sections/look_and_feel.html.twig'
 
         'sylius_admin.channel.update.content.form.sections.general':
             code:
-                template: '@SyliusAdmin/Channel/Form/Sections/General/_code.html.twig'
+                template: '@SyliusAdmin/channel/form/sections/general/code.html.twig'
             enabled:
-                template: '@SyliusAdmin/Channel/Form/Sections/General/_enabled.html.twig'
+                template: '@SyliusAdmin/channel/form/sections/general/enabled.html.twig'
             channel_name:
-                template: '@SyliusAdmin/Channel/Form/Sections/General/_name.html.twig'
+                template: '@SyliusAdmin/channel/form/sections/general/name.html.twig'
             color:
-                template: '@SyliusAdmin/Channel/Form/Sections/General/_color.html.twig'
+                template: '@SyliusAdmin/channel/form/sections/general/color.html.twig'
             hostname:
-                template: '@SyliusAdmin/Channel/Form/Sections/General/_hostname.html.twig'
+                template: '@SyliusAdmin/channel/form/sections/general/hostname.html.twig'
             contact_email:
-                template: '@SyliusAdmin/Channel/Form/Sections/General/_contactEmail.html.twig'
+                template: '@SyliusAdmin/channel/form/sections/general/contact_email.html.twig'
             contact_phone_number:
-                template: '@SyliusAdmin/Channel/Form/Sections/General/_contactPhoneNumber.html.twig'
+                template: '@SyliusAdmin/channel/form/sections/general/contact_phone_number.html.twig'
             description:
-                template: '@SyliusAdmin/Channel/Form/Sections/General/_description.html.twig'
+                template: '@SyliusAdmin/channel/form/sections/general/description.html.twig'
             countries:
-                template: '@SyliusAdmin/Channel/Form/Sections/General/_countries.html.twig'
+                template: '@SyliusAdmin/channel/form/sections/general/countries.html.twig'
             address_required_in_checkout:
-                template: '@SyliusAdmin/Channel/Form/Sections/General/_addressRequiredInCheckout.html.twig'
+                template: '@SyliusAdmin/channel/form/sections/general/address_required_in_checkout.html.twig'
             skip_shipping_step:
-                template: '@SyliusAdmin/Channel/Form/Sections/General/_skipShippingStep.html.twig'
+                template: '@SyliusAdmin/channel/form/sections/general/skip_shipping_step.html.twig'
             skip_payment_step:
-                template: '@SyliusAdmin/Channel/Form/Sections/General/_skipPaymentStep.html.twig'
+                template: '@SyliusAdmin/channel/form/sections/general/skip_payment_step.html.twig'
             account_verification_required:
-                template: '@SyliusAdmin/Channel/Form/Sections/General/_accountVerificationRequired.html.twig'
+                template: '@SyliusAdmin/channel/form/sections/general/account_verification_required.html.twig'
 
         'sylius_admin.channel.update.content.form.sections.money':
             base_currency:
-                template: '@SyliusAdmin/Channel/Form/Sections/Money/_baseCurrency.html.twig'
+                template: '@SyliusAdmin/channel/form/sections/money/base_currency.html.twig'
             currencies:
-                template: '@SyliusAdmin/Channel/Form/Sections/Money/_currencies.html.twig'
+                template: '@SyliusAdmin/channel/form/sections/money/currencies.html.twig'
             default_tax_zone:
-                template: '@SyliusAdmin/Channel/Form/Sections/Money/_defaultTaxZone.html.twig'
+                template: '@SyliusAdmin/channel/form/sections/money/default_tax_zone.html.twig'
             tax_calculation_strategy:
-                template: '@SyliusAdmin/Channel/Form/Sections/Money/_taxCalculationStrategy.html.twig'
+                template: '@SyliusAdmin/channel/form/sections/money/tax_calculation_strategy.html.twig'
 
         'sylius_admin.channel.update.content.form.sections.shop_billing_data':
             company:
-                template: '@SyliusAdmin/Channel/Form/Sections/ShopBillingData/_company.html.twig'
+                template: '@SyliusAdmin/channel/form/sections/shop_billing_data/company.html.twig'
             country:
-                template: '@SyliusAdmin/Channel/Form/Sections/ShopBillingData/_country.html.twig'
+                template: '@SyliusAdmin/channel/form/sections/shop_billing_data/country.html.twig'
             city:
-                template: '@SyliusAdmin/Channel/Form/Sections/ShopBillingData/_city.html.twig'
+                template: '@SyliusAdmin/channel/form/sections/shop_billing_data/city.html.twig'
             tax_id:
-                template: '@SyliusAdmin/Channel/Form/Sections/ShopBillingData/_taxId.html.twig'
+                template: '@SyliusAdmin/channel/form/sections/shop_billing_data/tax_id.html.twig'
             street:
-                template: '@SyliusAdmin/Channel/Form/Sections/ShopBillingData/_street.html.twig'
+                template: '@SyliusAdmin/channel/form/sections/shop_billing_data/street.html.twig'
             postcode:
-                template: '@SyliusAdmin/Channel/Form/Sections/ShopBillingData/_postcode.html.twig'
+                template: '@SyliusAdmin/channel/form/sections/shop_billing_data/postcode.html.twig'
 
         'sylius_admin.channel.update.content.form.sections.omnibus':
             show_lowest_price:
-                template: '@SyliusAdmin/Channel/Form/Sections/Omnibus/_showLowestPrice.html.twig'
+                template: '@SyliusAdmin/channel/form/sections/omnibus/show_lowest_price.html.twig'
             lowest_price_checking_period:
-                template: '@SyliusAdmin/Channel/Form/Sections/Omnibus/_lowestPriceCheckingPeriod.html.twig'
+                template: '@SyliusAdmin/channel/form/sections/omnibus/lowest_price_checking_period.html.twig'
             taxons_excluded_from_showing_lowest_price:
-                template: '@SyliusAdmin/Channel/Form/Sections/Omnibus/_taxonsExcludedFromShowingLowestPrice.html.twig'
+                template: '@SyliusAdmin/channel/form/sections/omnibus/taxons_excluded_from_showing_lowest_price.html.twig'
 
         'sylius_admin.channel.update.content.form.sections.look_and_feel':
             theme:
-                template: '@SyliusAdmin/Channel/Form/Sections/LookAndFeel/_theme.html.twig'
+                template: '@SyliusAdmin/channel/form/sections/look_and_feel/theme.html.twig'
             menu_taxon:
-                template: '@SyliusAdmin/Channel/Form/Sections/LookAndFeel/_menuTaxon.html.twig'
+                template: '@SyliusAdmin/channel/form/sections/look_and_feel/menu_taxon.html.twig'
             default_locale:
-                template: '@SyliusAdmin/Channel/Form/Sections/LookAndFeel/_defaultLocale.html.twig'
+                template: '@SyliusAdmin/channel/form/sections/look_and_feel/default_locale.html.twig'
             locales:
-                template: '@SyliusAdmin/Channel/Form/Sections/LookAndFeel/_locales.html.twig'
+                template: '@SyliusAdmin/channel/form/sections/look_and_feel/locales.html.twig'
