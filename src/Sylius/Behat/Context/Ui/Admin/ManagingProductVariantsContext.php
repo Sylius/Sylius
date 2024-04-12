@@ -226,9 +226,9 @@ final class ManagingProductVariantsContext implements Context
     }
 
     /**
-     * @When I save my new configuration
+     * @When I save my new elements order
      */
-    public function iSaveMyNewConfiguration(): void
+    public function iSaveMyNewElementsOrder(): void
     {
         $this->indexPage->savePositions();
     }
