@@ -17,17 +17,17 @@ sylius_grid:
                     label: sylius.ui.name
                     sortable: ~
                 startDate:
-                    type: datetime
+                    type: twig
                     label: sylius.ui.start_date
                     sortable: ~
                     options:
-                        format: Y-m-d H:i
+                        template: '@SyliusAdmin/CatalogPromotion/Grid/Field/date.html.twig'
                 endDate:
-                    type: datetime
+                    type: twig
                     label: sylius.ui.end_date
                     sortable: ~
                     options:
-                        format: Y-m-d H:i
+                        template: '@SyliusAdmin/CatalogPromotion/Grid/Field/date.html.twig'
                 priority:
                     type: twig
                     label: sylius.ui.priority
