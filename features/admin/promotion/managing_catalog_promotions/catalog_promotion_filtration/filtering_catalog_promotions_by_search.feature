@@ -11,7 +11,7 @@ Feature: Filtering catalog promotions by search
         And there is a catalog promotion with "surprise-sale-12" code and "Surprise sale" name
         And I am logged in as an administrator
 
-    @todo @ui @api
+    @ui @api
     Scenario: Filtering catalog promotions by full name
         When I browse catalog promotions
         And I search by "Surprise sale" name
@@ -19,7 +19,7 @@ Feature: Filtering catalog promotions by search
         But I should not see a catalog promotion with name "Hunter sale"
         And I should not see a catalog promotion with name "Winter sale"
 
-    @todo @ui @api
+    @ui @api
     Scenario: Filtering catalog promotions by partial name
         When I browse catalog promotions
         And I search by "ter sale" name
@@ -27,7 +27,7 @@ Feature: Filtering catalog promotions by search
         And I should see a catalog promotion with name "Winter sale"
         But I should not see a catalog promotion with name "Surprise sale"
 
-    @todo @ui @api
+    @ui @api
     Scenario: Filtering catalog promotions by full code
         When I browse catalog promotions
         And I search by "surprise-sale" code
@@ -35,7 +35,7 @@ Feature: Filtering catalog promotions by search
         But I should not see a catalog promotion with name "Hunter sale"
         And I should not see a catalog promotion with name "Winter sale"
 
-    @todo @ui @api
+    @ui @api
     Scenario: Filtering catalog promotions by partial code
         When I browse catalog promotions
         And I search by "sale-1" code

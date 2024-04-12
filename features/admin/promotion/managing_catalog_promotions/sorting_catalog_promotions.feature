@@ -16,69 +16,69 @@ Feature: Sorting listed catalog promotion
         And its priority is 2
         And I am logged in as an administrator
 
-    @api @todo @ui
+    @api @ui
     Scenario: Catalog promotions are sorted by ascending code by default
         When I browse catalog promotions
         Then I should see 3 catalog promotions on the list
         And the first catalog promotion should have code "a"
 
-    @api @todo @ui
+    @api @ui
     Scenario: Changing the code sorting order to descending
         When I browse catalog promotions
         And I sort catalog promotions by descending code
         Then I should see 3 catalog promotions on the list
         And the first catalog promotion should have code "not-b"
 
-    @api @todo @ui
+    @api @ui
     Scenario: Sorting catalog promotions by name in ascending order
         When I browse catalog promotions
         And I sort catalog promotions by ascending name
         Then I should see 3 catalog promotions on the list
         And the first catalog promotion should have code "a"
 
-    @api @todo @ui
+    @api @ui
     Scenario: Sorting catalog promotion by name in descending order
         When I browse catalog promotions
         And I sort catalog promotions by descending name
         Then I should see 3 catalog promotions on the list
         And the first catalog promotion should have code "c"
 
-    @api @todo @ui @no-postgres
+    @api @ui @no-postgres
     Scenario: Sorting catalog promotion by start date in ascending order
         When I browse catalog promotions
         And I sort catalog promotions by ascending "start date"
         Then I should see 3 catalog promotions on the list
         And the first catalog promotion should have code "not-b"
 
-    @api @todo @ui @no-postgres
+    @api @ui @no-postgres
     Scenario: Sorting catalog promotion by start date in descending order
         When I browse catalog promotions
         And I sort catalog promotions by descending "start date"
         Then I should see 3 catalog promotions on the list
         And the first catalog promotion should have code "a"
 
-    @api @todo @ui @no-postgres
+    @api @ui @no-postgres
     Scenario: Sorting catalog promotion by end date in ascending order
         When I browse catalog promotions
         And I sort catalog promotions by ascending "end date"
         Then I should see 3 catalog promotions on the list
         And the first catalog promotion should have code "a"
 
-    @api @todo @ui @no-postgres
+    @api @ui @no-postgres
     Scenario: Sorting catalog promotion by end date in descending order
         When I browse catalog promotions
         And I sort catalog promotions by descending "end date"
         Then I should see 3 catalog promotions on the list
         And the first catalog promotion should have code "c"
 
-    @api @todo @ui
+    @api @ui
     Scenario: Sorting catalog promotion by priority in ascending order
         When I browse catalog promotions
         And I sort catalog promotions by ascending priority
         Then I should see 3 catalog promotions on the list
         And the first catalog promotion should have code "not-b"
 
-    @api @todo @ui
+    @api @ui
     Scenario: Sorting catalog promotion by priority in descending order
         When I browse catalog promotions
         And I sort catalog promotions by descending priority
