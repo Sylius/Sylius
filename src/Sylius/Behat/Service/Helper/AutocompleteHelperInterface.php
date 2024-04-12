@@ -26,7 +26,9 @@ interface AutocompleteHelperInterface
 
     public function selectByName(DriverInterface $driver, string $selector, string $name): void;
 
+    public function removeByName(DriverInterface $driver, string $selector, string $name): void;
+
     public function selectByValue(DriverInterface $driver, string $selector, string $value): void;
 
-    public function remove(DriverInterface $driver, string $selector, string $value): void;
+    public function removeByValue(DriverInterface $driver, string $selector, string $value): void;
 }
