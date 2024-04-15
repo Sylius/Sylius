@@ -25,7 +25,7 @@ use Symfony\UX\LiveComponent\Attribute\LiveProp;
 use Symfony\UX\LiveComponent\DefaultActionTrait;
 use Symfony\UX\LiveComponent\LiveCollectionTrait;
 
-#[AsLiveComponent(name: 'SyliusAdmin.Promotion.Form', template: '@SyliusAdmin/Promotion/form.html.twig')]
+#[AsLiveComponent(name: 'sylius_admin:promotion:form', template: '@SyliusAdmin/Promotion/form.html.twig')]
 final class FormComponent
 {
     use DefaultActionTrait;
