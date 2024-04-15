@@ -31,6 +31,7 @@
             {{- form_label(form) -}}
             {{- form_widget(form) -}}
             {{- form_errors(form) -}}
+            {{- form_row(button_delete, sylius_test_form_attribute('delete-action')) -}}
         </div>
     </div>
 {% endblock %}
@@ -41,6 +42,7 @@
             {{- form_label(form) -}}
             {{- form_widget(form) -}}
             {{- form_errors(form) -}}
+            {{- form_row(button_delete, sylius_test_form_attribute('delete-rule')) -}}
         </div>
     </div>
 {% endblock %}

@@ -103,6 +103,12 @@ final class FormElement extends BaseFormElement implements FormElementInterface
         }
     }
 
+    public function removeLastAction(): void
+    {
+        $this->getLastAction()->find('css', 'button[data-test-delete-action]')->press();
+        $this->waitForFormUpdate();
+    }
+
     public function fillActionOption(string $option, string $value): void
     {
         $this->getLastAction()->fillField($option, $value);
@@ -128,6 +134,12 @@ final class FormElement extends BaseFormElement implements FormElementInterface
             $this->selectRuleOption('Type', $ruleName);
             $this->waitForFormUpdate();
         }
+    }
+
+    public function removeLastRule(): void
+    {
+        $this->getLastRule()->find('css', 'button[data-test-delete-rule]')->press();
+        $this->waitForFormUpdate();
     }
 
     public function selectRuleOption(string $option, string $value, bool $multiple = false): void
@@ -273,7 +285,6 @@ final class FormElement extends BaseFormElement implements FormElementInterface
         $lastRule = $this->getLastRule();
 
         TabsHelper::switchTab($this->getSession(), $lastRule, $channelCode);
-//        $this->waitForFormUpdate();
 
         return $lastRule->find(
             'css',

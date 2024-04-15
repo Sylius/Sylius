@@ -41,6 +41,8 @@ interface FormElementInterface extends BaseFormElementInterface
 
     public function addAction(?string $actionName): void;
 
+    public function removeLastAction(): void;
+
     public function fillActionOption(string $option, string $value): void;
 
     public function fillActionOptionForChannel(string $channelCode, string $option, string $value): void;
@@ -48,6 +50,8 @@ interface FormElementInterface extends BaseFormElementInterface
     public function selectActionOption(string $option, string $value, bool $multiple = false): void;
 
     public function addRule(?string $ruleName): void;
+
+    public function removeLastRule(): void;
 
     public function selectRuleOption(string $option, string $value, bool $multiple = false): void;
 

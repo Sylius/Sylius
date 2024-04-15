@@ -75,3 +75,11 @@ Feature: Adding a new promotion
         And I add it
         Then I should be notified that it has been successfully created
         And the "Full metal promotion" promotion should not applies to discounted items
+
+    @ui @javascript @no-api
+    Scenario: Seeing rule and action configuration forms
+        When I want to create a new promotion
+        And I add a new rule
+        And I add a new action
+        Then I should see the rule configuration form
+        And I should see the action configuration form
