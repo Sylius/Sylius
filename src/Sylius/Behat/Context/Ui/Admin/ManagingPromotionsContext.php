@@ -274,6 +274,22 @@ final class ManagingPromotionsContext implements Context
     }
 
     /**
+     * @When I remove its last rule
+     */
+    public function iRemoveItsLastRule(): void
+    {
+        $this->formElement->removeLastRule();
+    }
+
+    /**
+     * @When I remove its last action
+     */
+    public function iRemoveItsLastAction(): void
+    {
+        $this->formElement->removeLastAction();
+    }
+
+    /**
      * @When I delete them
      */
     public function iDeleteThem(): void
@@ -773,6 +789,14 @@ final class ManagingPromotionsContext implements Context
     }
 
     /**
+     * @Then I should not see the rule configuration form
+     */
+    public function iShouldNotSeeTheRuleConfigurationForm(): void
+    {
+        Assert::false($this->formElement->checkIfRuleConfigurationFormIsVisible(), 'Cart promotion rule configuration form is visible.');
+    }
+
+    /**
      * @Then it should have :amount of order percentage discount
      */
     public function itShouldHaveOfOrderPercentageDiscount(string $amount): void
@@ -791,9 +815,17 @@ final class ManagingPromotionsContext implements Context
     /**
      * @Then I should see the action configuration form
      */
-    public function iShouldSeeTheActionConfigurationForm()
+    public function iShouldSeeTheActionConfigurationForm(): void
     {
         Assert::true($this->formElement->checkIfActionConfigurationFormIsVisible(), 'Cart promotion action configuration form is not visible.');
+    }
+
+    /**
+     * @Then I should not see the action configuration form
+     */
+    public function iShouldNotSeeTheActionConfigurationForm(): void
+    {
+        Assert::false($this->formElement->checkIfActionConfigurationFormIsVisible(), 'Cart promotion action configuration form is visible.');
     }
 
     /**

@@ -50,11 +50,3 @@ Feature: Adding a new promotion with rule
         And I add it
         Then I should be notified that it has been successfully created
         And the "Wholesale promotion" promotion should appear in the registry
-
-    @ui @javascript @no-api
-    Scenario: Adding a new promotion of default type with one action
-        When I want to create a new promotion
-        And I add a new rule
-        And I add a new action
-        Then I should see the rule configuration form
-        And I should see the action configuration form
