@@ -28,6 +28,7 @@ final class FormElement extends Element implements FormElementInterface
             'amount' => '#sylius_shipping_method_configuration_%channelCode%_amount',
             'calculator' => '#sylius_shipping_method_calculator',
             'calculator_configuration_channel_tab' => '[data-test-calculator-configuration] [data-test-channel-tab="%channelCode%"]',
+            'calculator_configuration_channel_tab_content' => '[data-test-calculator-configuration] [data-test-channel-tab-content="%channelCode%"]',
             'channel' => '[name="sylius_shipping_method[channels][]"][value="%channelCode%"]',
             'code' => '#sylius_shipping_method_code',
             'description' => '#sylius_shipping_method_translations_%localeCode%_description',
@@ -151,6 +152,15 @@ final class FormElement extends Element implements FormElementInterface
         $lastRule->fillField($fieldName, $value);
 
         $this->waitForLiveComponentUpdate();
+    }
+
+    public function getShippingChargesValidationErrorsCount(string $channelCode): int
+    {
+        return count(
+            $this
+                ->getElement('calculator_configuration_channel_tab_content', ['%channelCode%' => $channelCode])
+                ->findAll('css', '.invalid-feedback')
+        );
     }
 
     private function selectCalculatorConfigurationChannelTab(string $channelCode): void
