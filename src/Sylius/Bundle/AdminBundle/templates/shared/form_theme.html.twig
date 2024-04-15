@@ -26,7 +26,7 @@
 {% endblock %}
 
 {% block sylius_shipping_method_rule_row %}
-    <div{% with {attr: row_attr|merge({class: row_attr.class|default('mb-3 card')|trim})} %}{{ block('attributes') }}{% endwith %}>
+    <div{% with {attr: row_attr|merge({class: row_attr.class|default('mb-3 card')|trim})} %}{{ block('attributes') }}{% endwith %} {{ sylius_test_html_attribute('rule') }}>
         <div class="card-body">
             {{- form_label(form) -}}
             {{- form_widget(form) -}}

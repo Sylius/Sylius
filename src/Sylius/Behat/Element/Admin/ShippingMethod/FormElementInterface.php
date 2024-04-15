@@ -44,4 +44,10 @@ interface FormElementInterface
     public function chooseCalculator(string $calculatorName): void;
 
     public function setCalculatorConfigurationAmountForChannel(string $channelCode, int $amount): void;
+
+    public function addRule(string $ruleName): void;
+
+    public function fillLastRuleOption(string $fieldName, string $value): void;
+
+    public function fillLastRuleOptionForChannel(string $channelCode, string $fieldName, string $value): void;
 }
