@@ -26,8 +26,8 @@ final class FormElement extends Element implements FormElementInterface
     protected function getDefinedElements(): array
     {
         return [
-            'amount' => '#sylius_shipping_method_configuration_%channelCode%_amount',
             'calculator' => '#sylius_shipping_method_calculator',
+            'calculator_configuration_amount' => '#sylius_shipping_method_configuration_%channelCode%_amount',
             'calculator_configuration_channel_tab' => '[data-test-calculator-configuration] [data-test-channel-tab="%channelCode%"]',
             'calculator_configuration_channel_tab_content' => '[data-test-calculator-configuration] [data-test-channel-tab-content="%channelCode%"]',
             'channel' => '[name="sylius_shipping_method[channels][]"][value="%channelCode%"]',
@@ -37,6 +37,8 @@ final class FormElement extends Element implements FormElementInterface
             'name' => '#sylius_shipping_method_translations_%localeCode%_name',
             'position' => '#sylius_shipping_method_position',
             'rules_wrapper' => '#sylius_shipping_method_rules',
+            'rule_configuration_amount' => '#sylius_shipping_method_rules_%position%_configuration_%channelCode%_amount',
+            'rule_configuration_weight' => '#sylius_shipping_method_rules_%position%_configuration_weight',
             'shipping_method_rule_add_button' => '#sylius_shipping_method_rules_add',
             'zone' => '#sylius_shipping_method_zone',
         ];
@@ -111,7 +113,7 @@ final class FormElement extends Element implements FormElementInterface
     {
         $this->selectCalculatorConfigurationChannelTab($channelCode);
 
-        $this->getElement('amount', ['%channelCode%' => $channelCode])->setValue($amount);
+        $this->getElement('calculator_configuration_amount', ['%channelCode%' => $channelCode])->setValue($amount);
     }
 
     public function chooseCalculator(string $calculatorName): void
@@ -164,9 +166,12 @@ final class FormElement extends Element implements FormElementInterface
         );
     }
 
-    public function getValidationMessage(string $element): string
+    /**
+     * @param array<string, string> $parameters
+     */
+    public function getValidationMessage(string $element, array $parameters = []): string
     {
-        $foundElement = $this->getFieldElement($element);
+        $foundElement = $this->getFieldElement($element, $parameters);
         if (null === $foundElement) {
             throw new ElementNotFoundException($this->getSession(), 'Field element');
         }
@@ -179,9 +184,25 @@ final class FormElement extends Element implements FormElementInterface
         return $validationMessage->getText();
     }
 
-    public function getValidationMessageForConfiguration(string $element, string $channelCode): string
+    public function getValidationMessageForCalculatorConfiguration(string $element, string $channelCode): string
     {
-        $field = $this->getFieldElement($element, ['%channelCode%' => $channelCode]);
+        $field = $this->getFieldElement(sprintf('calculator_configuration_%s', $element), ['%channelCode%' => $channelCode])->getParent();
+
+        return $this->getValidationMessageForElement($field);
+    }
+
+    public function getValidationMessageForLastRuleConfiguration(string $element, ?string $channelCode = null): string
+    {
+        $numberOfRules = count($this->getDocument()->findAll('css', '[data-test-rule]'));
+
+        if (null === $channelCode) {
+            $field = $this->getFieldElement(sprintf('rule_configuration_%s', $element), ['%position%' => $numberOfRules - 1]);
+        } else {
+            $field = $this->getFieldElement(
+                sprintf('rule_configuration_%s', $element),
+                ['%position%' => $numberOfRules - 1, '%channelCode%' => $channelCode],
+            );
+        }
 
         return $this->getValidationMessageForElement($field);
     }
