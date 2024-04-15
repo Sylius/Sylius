@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Element\Admin\ShippingMethod;
 
+use Behat\Mink\Element\NodeElement;
 use FriendsOfBehat\PageObjectExtension\Element\Element;
 use Sylius\Behat\Service\DriverHelper;
 
@@ -33,6 +34,8 @@ final class FormElement extends Element implements FormElementInterface
             'live_component' => '[data-controller="live"]',
             'name' => '#sylius_shipping_method_translations_%localeCode%_name',
             'position' => '#sylius_shipping_method_position',
+            'rules_wrapper' => '#sylius_shipping_method_rules',
+            'shipping_method_rule_add_button' => '#sylius_shipping_method_rules_add',
             'zone' => '#sylius_shipping_method_zone',
         ];
     }
@@ -112,6 +115,41 @@ final class FormElement extends Element implements FormElementInterface
     public function chooseCalculator(string $calculatorName): void
     {
         $this->getElement('calculator')->selectOption($calculatorName);
+        $this->waitForLiveComponentUpdate();
+    }
+
+    public function addRule(string $ruleName): void
+    {
+        $this->getElement('shipping_method_rule_add_button')->click();
+        $this->waitForLiveComponentUpdate();
+
+        $rules = $this->getElement('rules_wrapper')->findAll('css', 'div[data-test-rule]');
+        /** @var NodeElement $lastRule */
+        $lastRule = end($rules);
+        $lastRule->selectFieldOption('Type', $ruleName);
+        $this->waitForLiveComponentUpdate();
+    }
+
+    public function fillLastRuleOption(string $fieldName, string $value): void
+    {
+        $rules = $this->getElement('rules_wrapper')->findAll('css', 'div[data-test-rule]');
+        /** @var NodeElement $lastRule */
+        $lastRule = end($rules);
+
+        $lastRule->fillField($fieldName, $value);
+
+        $this->waitForLiveComponentUpdate();
+    }
+
+    public function fillLastRuleOptionForChannel(string $channelCode, string $fieldName, string $value): void
+    {
+        $rules = $this->getElement('rules_wrapper')->findAll('css', 'div[data-test-rule]');
+        /** @var NodeElement $lastRule */
+        $lastRule = end($rules);
+
+        $lastRule->find('css', sprintf('[data-test-channel-tab="%s"]', $channelCode))->click();
+        $lastRule->fillField($fieldName, $value);
+
         $this->waitForLiveComponentUpdate();
     }
 

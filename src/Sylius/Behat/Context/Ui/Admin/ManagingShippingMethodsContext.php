@@ -503,8 +503,8 @@ final class ManagingShippingMethodsContext implements Context
      */
     public function iAddTheTotalWeightGreaterThanOrEqualRuleConfiguredWith(int $weight): void
     {
-        $this->createPage->addRule('Total weight greater than or equal');
-        $this->createPage->fillRuleOption('Weight', (string) $weight);
+        $this->shippingMethodForm->addRule('Total weight greater than or equal');
+        $this->shippingMethodForm->fillLastRuleOption('Weight', (string) $weight);
     }
 
     /**
@@ -512,8 +512,8 @@ final class ManagingShippingMethodsContext implements Context
      */
     public function iAddTheTotalWeightGreaterThanOrEqualRuleConfiguredWithInvalidData(): void
     {
-        $this->createPage->addRule('Total weight greater than or equal');
-        $this->createPage->fillRuleOption('Weight', 'invalid data');
+        $this->shippingMethodForm->addRule('Total weight greater than or equal');
+        $this->shippingMethodForm->fillLastRuleOption('Weight', 'invalid data');
     }
 
     /**
@@ -521,8 +521,8 @@ final class ManagingShippingMethodsContext implements Context
      */
     public function iAddTheTotalWeightLessThanOrEqualRuleConfiguredWith(int $weight): void
     {
-        $this->createPage->addRule('Total weight less than or equal');
-        $this->createPage->fillRuleOption('Weight', (string) $weight);
+        $this->shippingMethodForm->addRule('Total weight less than or equal');
+        $this->shippingMethodForm->fillLastRuleOption('Weight', (string) $weight);
     }
 
     /**
@@ -530,8 +530,8 @@ final class ManagingShippingMethodsContext implements Context
      */
     public function iAddTheItemsTotalLessThanOrEqualRuleConfiguredWith(string $rule, mixed $value, ChannelInterface $channel): void
     {
-        $this->createPage->addRule($rule);
-        $this->createPage->fillRuleOptionForChannel($channel->getCode(), 'Amount', (string) $value);
+        $this->shippingMethodForm->addRule($rule);
+        $this->shippingMethodForm->fillLastRuleOptionForChannel($channel->getCode(), 'Amount', (string) $value);
     }
 
     /**
