@@ -220,7 +220,7 @@ final class ManagingPromotionsContext implements Context
      */
     public function iSpecifyThatThisActionShouldBeAppliedToItemsFromCategory(string $taxonName, ChannelInterface $channel): void
     {
-        $this->formElement->selectAutocompleteFilterOptions([$taxonName], $channel->getCode(), 'taxons');
+        $this->formElement->selectAutocompleteActionFilterOptions([$taxonName], $channel->getCode(), 'taxons');
     }
 
     /**
@@ -626,7 +626,7 @@ final class ManagingPromotionsContext implements Context
      */
     public function iSpecifyThatThisActionShouldBeAppliedToTheProduct(string $productName, ChannelInterface $channel): void
     {
-        $this->formElement->selectAutocompleteFilterOptions([$productName], $channel->getCode(), 'products');
+        $this->formElement->selectAutocompleteActionFilterOptions([$productName], $channel->getCode(), 'products');
     }
 
     /**

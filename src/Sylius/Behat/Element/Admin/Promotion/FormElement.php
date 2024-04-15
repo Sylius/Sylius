@@ -175,7 +175,7 @@ final class FormElement extends BaseFormElement implements FormElementInterface
         }
     }
 
-    public function selectAutocompleteFilterOptions(array $values, string $channelCode, string $filterType): void
+    public function selectAutocompleteActionFilterOptions(array $values, string $channelCode, string $filterType): void
     {
         $count = count($this->getElement('actions')->findAll('css', '[data-test-promotion-action]'));
         $locator = sprintf('#sylius_promotion_actions_%d_configuration_%s_filters_%s_filter select', $count - 1, $channelCode, $filterType);
@@ -238,7 +238,7 @@ final class FormElement extends BaseFormElement implements FormElementInterface
             'ends_at_date' => '#sylius_promotion_endsAt_date',
             'ends_at_time' => '#sylius_promotion_endsAt_time',
             'exclusive' => '#sylius_promotion_exclusive',
-            'form' => '[data-live-name-value="SyliusAdmin.Promotion.Form"]',
+            'form' => '[data-live-name-value="sylius_admin:promotion:form"]',
             'label' => '[name="sylius_promotion[translations][%locale_code%][label]"]',
             'minimum' => '#sylius_promotion_actions_0_configuration_WEB-US_filters_price_range_filter_min',
             'maximum' => '#sylius_promotion_actions_0_configuration_WEB-US_filters_price_range_filter_max',

@@ -32,7 +32,7 @@ final class FormComponent
     use HookableComponentTrait;
     use LiveCollectionTrait;
 
-    #[LiveProp(dehydrateWith: 'dehydrateResource', fieldName: 'resource')]
+    #[LiveProp(fieldName: 'resource')]
     public ?Promotion $resource = null;
 
     /**
@@ -46,11 +46,6 @@ final class FormComponent
         private readonly array $ruleTypes,
         private readonly array $actionTypes,
     ) {
-    }
-
-    public function dehydrateResource(): ?int
-    {
-        return $this->resource?->getId();
     }
 
     #[LiveAction]
