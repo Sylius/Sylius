@@ -179,12 +179,36 @@ final class FormElement extends Element implements FormElementInterface
         return $validationMessage->getText();
     }
 
+    public function getValidationMessageForConfiguration(string $element, string $channelCode): string
+    {
+        $field = $this->getFieldElement($element, ['%channelCode%' => $channelCode]);
+
+        return $this->getValidationMessageForElement($field);
+    }
+
+    private function getValidationMessageForElement(NodeElement $element): string
+    {
+        $validationMessage = $element->find('css', '.invalid-feedback');
+        if (null === $validationMessage) {
+            throw new ElementNotFoundException(
+                $this->getSession(),
+                'Validation message',
+                'css',
+                '.invalid-feedback',
+            );
+        }
+
+        return $validationMessage->getText();
+    }
+
     /**
+     * @param array<string, string> $parameters
+     *
      * @throws ElementNotFoundException
      */
-    private function getFieldElement(string $element): ?NodeElement
+    private function getFieldElement(string $element, array $parameters = []): ?NodeElement
     {
-        $element = $this->getElement($element);
+        $element = $this->getElement($element, $parameters);
         while (null !== $element && !$element->hasClass('field')) {
             $element = $element->getParent();
         }

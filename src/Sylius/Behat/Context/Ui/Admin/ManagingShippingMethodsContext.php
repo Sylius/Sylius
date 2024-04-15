@@ -475,11 +475,8 @@ final class ManagingShippingMethodsContext implements Context
      */
     public function iShouldBeNotifiedThatAmountForChannelShouldNotBeBlank(ChannelInterface $channel)
     {
-        /** @var CreatePageInterface|UpdatePageInterface $currentPage */
-        $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
-
         Assert::same(
-            $currentPage->getValidationMessageForAmount($channel->getCode()),
+            $this->shippingMethodForm->getValidationMessageForConfiguration('amount', $channel->getCode()),
             'This value should not be blank.',
         );
     }
@@ -489,11 +486,8 @@ final class ManagingShippingMethodsContext implements Context
      */
     public function iShouldBeNotifiedThatShippingChargeForChannelCannotBeLowerThan0(ChannelInterface $channel): void
     {
-        /** @var CreatePageInterface|UpdatePageInterface $currentPage */
-        $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
-
         Assert::same(
-            $currentPage->getValidationMessageForAmount($channel->getCode()),
+            $this->shippingMethodForm->getValidationMessageForConfiguration('amount', $channel->getCode()),
             'Shipping charge cannot be lower than 0.',
         );
     }
