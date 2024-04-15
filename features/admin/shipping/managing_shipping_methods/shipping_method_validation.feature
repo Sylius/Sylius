@@ -18,7 +18,7 @@ Feature: Shipping method validation
         And I try to save my changes
         Then I should be notified that the locale is not available
 
-    @todo @ui @api
+    @ui @api
     Scenario: Trying to add a new shipping method without specifying its code
         When I want to create a new shipping method
         And I name it "FedEx Carrier" in "English (United States)"
@@ -35,7 +35,7 @@ Feature: Shipping method validation
         And I try to add it
         Then I should be notified that code is too long
 
-    @todo @ui @api
+    @ui @api
     Scenario: Trying to add a new shipping method without specifying its name
         When I want to create a new shipping method
         And I specify its code as "FED_EX"
@@ -44,7 +44,7 @@ Feature: Shipping method validation
         Then I should be notified that name is required
         And shipping method with code "FED_EX" should not be added
 
-    @todo @ui @api
+    @ui @api
     Scenario: Trying to add a new shipping method without specifying its zone
         Given the store does not have any zones defined
         When I want to create a new shipping method
@@ -54,7 +54,7 @@ Feature: Shipping method validation
         Then I should be notified that zone has to be selected
         And shipping method with name "Food and Beverage Tax Rates" should not be added
 
-    @todo @ui @api
+    @ui @api
     Scenario: Trying to remove name from existing shipping method
         Given the store allows shipping with "UPS Ground"
         When I want to modify this shipping method
@@ -63,7 +63,7 @@ Feature: Shipping method validation
         Then I should be notified that name is required
         And this shipping method should still be named "UPS Ground"
 
-    @todo @ui @api
+    @ui @api
     Scenario: Trying to remove zone from existing shipping method
         Given the store allows shipping with "UPS Ground"
         When I want to modify this shipping method
@@ -71,7 +71,7 @@ Feature: Shipping method validation
         And I try to save my changes
         Then I should be notified that the zone is required
 
-    @todo @ui @mink:chromedriver @api
+    @ui @mink:chromedriver @api
     Scenario: Adding a new shipping method with order total greater than or equal rule that contains invalid data
         When I want to create a new shipping method
         And I specify its code as "FED_EX_CARRIER"
@@ -85,7 +85,7 @@ Feature: Shipping method validation
         Then I should be notified that the weight rule has an invalid configuration
         And the shipping method "FedEx Carrier" should not appear in the registry
 
-    @todo @ui @mink:chromedriver @api
+    @ui @mink:chromedriver @api
     Scenario: Adding a new shipping method with order total less than or equal rule that contains invalid data
         When I want to create a new shipping method
         And I specify its code as "FED_EX_CARRIER"

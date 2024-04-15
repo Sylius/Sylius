@@ -53,7 +53,12 @@ interface FormElementInterface
 
     public function getShippingChargesValidationErrorsCount(string $channelCode): int;
 
-    public function getValidationMessage(string $element): string;
+    /**
+     * @param array<string, string> $parameters
+     */
+    public function getValidationMessage(string $element, array $parameters = []): string;
 
-    public function getValidationMessageForConfiguration(string $element, string $channelCode): string;
+    public function getValidationMessageForCalculatorConfiguration(string $element, string $channelCode): string;
+
+    public function getValidationMessageForLastRuleConfiguration(string $element, ?string $channelCode = null): string;
 }

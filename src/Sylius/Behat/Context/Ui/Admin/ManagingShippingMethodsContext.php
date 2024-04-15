@@ -21,6 +21,7 @@ use Sylius\Behat\Page\Admin\ShippingMethod\CreatePageInterface;
 use Sylius\Behat\Page\Admin\ShippingMethod\IndexPageInterface;
 use Sylius\Behat\Page\Admin\ShippingMethod\UpdatePageInterface;
 use Sylius\Behat\Service\Resolver\CurrentPageResolverInterface;
+use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Channel\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ShippingMethodInterface;
@@ -36,6 +37,7 @@ final class ManagingShippingMethodsContext implements Context
         private UpdatePageInterface $updatePage,
         private CurrentPageResolverInterface $currentPageResolver,
         private FormElementInterface $shippingMethodForm,
+        private readonly SharedStorageInterface $sharedStorage,
     ) {
     }
 
@@ -247,11 +249,25 @@ final class ManagingShippingMethodsContext implements Context
     }
 
     /**
-     * @Then I should be notified that :element is required
+     * @Then /^I should be notified that (code) is required$/
      */
-    public function iShouldBeNotifiedThatIsRequired($element)
+    public function iShouldBeNotifiedThatCodeIsRequired(string $field): void
     {
-        $this->assertFieldValidationMessage($element, sprintf('Please enter shipping method %s.', $element));
+        Assert::same(
+            $this->shippingMethodForm->getValidationMessage($field),
+            sprintf('Please enter shipping method %s.', $field),
+        );
+    }
+
+    /**
+     * @Then I should be notified that name is required
+     */
+    public function iShouldBeNotifiedThatNameIsRequired($localeCode = 'en_US'): void
+    {
+        Assert::same(
+            $this->shippingMethodForm->getValidationMessage('name', ['%localeCode%' => $localeCode]),
+            'Please enter shipping method name.',
+        );
     }
 
     /**
@@ -476,7 +492,7 @@ final class ManagingShippingMethodsContext implements Context
     public function iShouldBeNotifiedThatAmountForChannelShouldNotBeBlank(ChannelInterface $channel)
     {
         Assert::same(
-            $this->shippingMethodForm->getValidationMessageForConfiguration('amount', $channel->getCode()),
+            $this->shippingMethodForm->getValidationMessageForCalculatorConfiguration('amount', $channel->getCode()),
             'This value should not be blank.',
         );
     }
@@ -487,7 +503,7 @@ final class ManagingShippingMethodsContext implements Context
     public function iShouldBeNotifiedThatShippingChargeForChannelCannotBeLowerThan0(ChannelInterface $channel): void
     {
         Assert::same(
-            $this->shippingMethodForm->getValidationMessageForConfiguration('amount', $channel->getCode()),
+            $this->shippingMethodForm->getValidationMessageForCalculatorConfiguration('amount', $channel->getCode()),
             'Shipping charge cannot be lower than 0.',
         );
     }
@@ -533,8 +549,8 @@ final class ManagingShippingMethodsContext implements Context
      */
     public function iAddTheItemsTotalLessThanOrEqualRuleConfiguredWithInvalidData(ChannelInterface $channel): void
     {
-        $this->createPage->addRule('Items total less than or equal');
-        $this->createPage->fillRuleOptionForChannel($channel->getCode(), 'Amount', 'Invalid data');
+        $this->shippingMethodForm->addRule('Items total less than or equal');
+        $this->shippingMethodForm->fillLastRuleOptionForChannel($channel->getCode(), 'Amount', 'Invalid data');
     }
 
     /**
@@ -563,7 +579,11 @@ final class ManagingShippingMethodsContext implements Context
      */
     public function iShouldBeNotifiedThatTheWeightRuleHasAnInvalidConfiguration(): void
     {
-        $this->assertFieldValidationMessage('weight', 'Please enter a number.');
+        $channel = $this->sharedStorage->get('channel');
+        Assert::same(
+            $this->shippingMethodForm->getValidationMessageForLastRuleConfiguration('weight'),
+            'Please enter a number.',
+        );
     }
 
     /**
@@ -571,25 +591,15 @@ final class ManagingShippingMethodsContext implements Context
      */
     public function iShouldBeNotifiedThatTheAmountRuleHasAnInvalidConfigurationInChannel(ChannelInterface $channel): void
     {
-        /** @var CreatePageInterface|UpdatePageInterface $currentPage */
-        $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
-
         Assert::same(
-            $currentPage->getValidationMessageForRuleAmount($channel->getCode()),
+            $this->shippingMethodForm->getValidationMessageForLastRuleConfiguration('amount', $channel->getCode()),
             'Please enter a valid money amount.',
         );
     }
 
-    /**
-     * @param string $element
-     * @param string $expectedMessage
-     */
-    private function assertFieldValidationMessage($element, $expectedMessage)
+    private function assertFieldValidationMessage(string $element, string $expectedMessage): void
     {
-        /** @var CreatePageInterface|UpdatePageInterface $currentPage */
-        $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
-
-        Assert::same($currentPage->getValidationMessage($element), $expectedMessage);
+        Assert::same($this->shippingMethodForm->getValidationMessage($element), $expectedMessage);
     }
 
     /**
