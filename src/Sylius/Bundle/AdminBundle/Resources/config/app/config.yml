@@ -58,7 +58,7 @@ sylius_admin:
             show: '@SyliusAdmin/Shared/Grid/ItemAction/_show.html.twig'
             update: '@SyliusAdmin/Shared/Grid/ItemAction/_update.html.twig'
             ship_with_tracking_code: '@SyliusAdmin/Shipment/Grid/Action/shipWithTrackingCode.html.twig'
-            delete_catalog_promotion: "@SyliusAdmin/Promotion/Grid/Action/deleteCatalogPromotion.html.twig"
+            delete_catalog_promotion: "@SyliusAdmin/CatalogPromotion/Grid/Action/deleteCatalogPromotion.html.twig"
 
 sylius_grid:
     templates:

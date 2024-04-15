@@ -13,50 +13,50 @@ twig_hooks:
 
         'sylius_admin.promotion.update.content.form':
             sections:
-                template: '@SyliusAdmin/Promotion/Form/sections.html.twig'
+                template: '@SyliusAdmin/promotion/form/sections.html.twig'
         
         'sylius_admin.promotion.update.content.form.sections':
             general:
-                template: '@SyliusAdmin/Promotion/Form/Sections/general.html.twig'
+                template: '@SyliusAdmin/promotion/form/sections/general.html.twig'
             configuration:
-                template: '@SyliusAdmin/Promotion/Form/Sections/configuration.html.twig'
+                template: '@SyliusAdmin/promotion/form/sections/configuration.html.twig'
             translations:
-                template: '@SyliusAdmin/Promotion/Form/Sections/translations.html.twig'
+                template: '@SyliusAdmin/promotion/form/sections/translations.html.twig'
             rules_and_actions:
-                template: '@SyliusAdmin/Promotion/Form/Sections/rules_and_actions.html.twig'
+                template: '@SyliusAdmin/promotion/form/sections/rules_and_actions.html.twig'
         
         'sylius_admin.promotion.update.content.form.sections.general':
             _name:
-                template: '@SyliusAdmin/Promotion/Form/Sections/General/name.html.twig'
+                template: '@SyliusAdmin/promotion/form/sections/general/name.html.twig'
             code:
-                template: '@SyliusAdmin/Promotion/Form/Sections/General/code.html.twig'
+                template: '@SyliusAdmin/promotion/form/sections/general/code.html.twig'
             description:
-                template: '@SyliusAdmin/Promotion/Form/Sections/General/description.html.twig'
+                template: '@SyliusAdmin/promotion/form/sections/general/description.html.twig'
             channels:
-                template: '@SyliusAdmin/Promotion/Form/Sections/General/channels.html.twig'
+                template: '@SyliusAdmin/promotion/form/sections/general/channels.html.twig'
         
         'sylius_admin.promotion.update.content.form.sections.configuration#left':
             usage_limit:
-                template: '@SyliusAdmin/Promotion/Form/Sections/Configuration/usage_limit.html.twig'
+                template: '@SyliusAdmin/promotion/form/sections/configuration/usage_limit.html.twig'
             priority:
-                template: '@SyliusAdmin/Promotion/Form/Sections/Configuration/priority.html.twig'
+                template: '@SyliusAdmin/promotion/form/sections/configuration/priority.html.twig'
             starts_at:
-                template: '@SyliusAdmin/Promotion/Form/Sections/Configuration/starts_at.html.twig'
+                template: '@SyliusAdmin/promotion/form/sections/configuration/starts_at.html.twig'
             ends_at:
-                template: '@SyliusAdmin/Promotion/Form/Sections/Configuration/ends_at.html.twig'
+                template: '@SyliusAdmin/promotion/form/sections/configuration/ends_at.html.twig'
         
         'sylius_admin.promotion.update.content.form.sections.configuration#right':
             header:
-                template: '@SyliusAdmin/Promotion/Form/Sections/Configuration/header.html.twig'
+                template: '@SyliusAdmin/promotion/form/sections/configuration/header.html.twig'
             coupon_based:
-                template: '@SyliusAdmin/Promotion/Form/Sections/Configuration/coupon_based.html.twig'
+                template: '@SyliusAdmin/promotion/form/sections/configuration/coupon_based.html.twig'
             exclusive:
-                template: '@SyliusAdmin/Promotion/Form/Sections/Configuration/exclusive.html.twig'
+                template: '@SyliusAdmin/promotion/form/sections/configuration/exclusive.html.twig'
             applies_to_discounted:
-                template: '@SyliusAdmin/Promotion/Form/Sections/Configuration/applies_to_discounted.html.twig'
+                template: '@SyliusAdmin/promotion/form/sections/configuration/applies_to_discounted.html.twig'
         
         'sylius_admin.promotion.update.content.form.sections.rules_and_actions':
             rules:
-                template: '@SyliusAdmin/Promotion/Form/Sections/RulesAndActions/rules.html.twig'
+                template: '@SyliusAdmin/promotion/form/sections/rules_and_actions/rules.html.twig'
             actions:
-                template: '@SyliusAdmin/Promotion/Form/Sections/RulesAndActions/actions.html.twig'
+                template: '@SyliusAdmin/promotion/form/sections/rules_and_actions/actions.html.twig'

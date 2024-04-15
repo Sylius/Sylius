@@ -44,7 +44,7 @@ sylius_grid:
                     label: sylius.ui.state
                     path: state
                     options:
-                        template: '@SyliusAdmin/Promotion/Grid/Field/state.html.twig'
+                        template: '@SyliusAdmin/CatalogPromotion/Grid/Field/state.html.twig'
                 enabled:
                     type: twig
                     label: sylius.ui.enabled

@@ -13,7 +13,7 @@ sylius_grid:
                     label: sylius.ui.priority
                     sortable: ~
                     options:
-                        template: "@SyliusAdmin/Promotion/Grid/Field/priority.html.twig"
+                        template: "@SyliusAdmin/promotion/grid/field/priority.html.twig"
                 code:
                     type: string
                     label: sylius.ui.code
@@ -36,7 +36,7 @@ sylius_grid:
                     path: .
                     sortable: used
                     options:
-                        template: "@SyliusAdmin/Promotion/Grid/Field/usage.html.twig"
+                        template: "@SyliusAdmin/promotion/grid/field/usage.html.twig"
             filters:
                 search:
                     type: string
