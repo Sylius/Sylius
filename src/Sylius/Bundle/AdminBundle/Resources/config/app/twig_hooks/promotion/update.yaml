@@ -2,7 +2,7 @@ twig_hooks:
     hooks:
         'sylius_admin.promotion.update.content':
             form:
-                component: 'SyliusAdmin.Promotion.Form'
+                component: 'sylius_admin:promotion:form'
                 data:
                     resource: '@=resource'
                     form: '@=form'
