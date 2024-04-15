@@ -75,6 +75,6 @@ final readonly class NotificationContext implements Context
      */
     public function iShouldBeNotifiedThatItIsInUse(): void
     {
-        Assert::true($this->notificationsElement->hasNotification((string) NotificationType::failure(), 'Cannot delete'));
+        Assert::true($this->notificationsElement->hasNotification((string) NotificationType::error(), 'Cannot delete'));
     }
 }
