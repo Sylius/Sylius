@@ -67,11 +67,7 @@
             <tag name="form.type_extension" extended-type="Sylius\Bundle\CoreBundle\Form\Type\ChannelPriceHistoryConfigType" priority="100" />
         </service>
 
-        <service id="sylius_admin.form.extension.promotion_type" class="Sylius\Bundle\AdminBundle\Form\Extension\PromotionTypeExtension">
-            <tag name="form.type_extension" />
-        </service>
-
-        <service id="sylius_admin.form.extension.promotion" class="Sylius\Bundle\AdminBundle\Form\Extension\PromotionTypeExtension">
+        <service id="sylius_admin.form.extension.type.promotion" class="Sylius\Bundle\AdminBundle\Form\Extension\PromotionTypeExtension">
             <tag name="form.type_extension" />
         </service>
 

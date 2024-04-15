@@ -34,12 +34,6 @@ final class PromotionTypeExtension extends AbstractTypeExtension
                 'button_add_options' => [
                     'label' => 'sylius.ui.add_rule',
                 ],
-                'button_delete_options' => [
-                    'label' => 'sylius.ui.delete',
-//                    'attr' => [
-//                        'class' => 'btn btn-outline-danger',
-//                    ],
-                ]
             ])
             ->add('actions', LiveCollectionType::class, [
                 'entry_type' => PromotionActionType::class,

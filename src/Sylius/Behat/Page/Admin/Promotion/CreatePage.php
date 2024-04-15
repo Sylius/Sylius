@@ -43,7 +43,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     {
         return array_merge(parent::getDefinedElements(), [
             'code' => '#sylius_promotion_code',
-            'form' => '[data-live-name-value="SyliusAdmin.Promotion.Form"]',
+            'form' => '[data-live-name-value="sylius_admin:promotion:form"]',
             'rules' => '#sylius_promotion_rules',
         ]);
     }
