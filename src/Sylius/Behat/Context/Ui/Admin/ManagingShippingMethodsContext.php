@@ -193,7 +193,7 @@ final class ManagingShippingMethodsContext implements Context
      */
     public function iShouldBeNotifiedThatShippingMethodWithThisCodeAlreadyExists()
     {
-        Assert::same($this->createPage->getValidationMessage('code'), 'The shipping method with given code already exists.');
+        Assert::same($this->shippingMethodForm->getValidationMessage('code'), 'The shipping method with given code already exists.');
     }
 
     /**
