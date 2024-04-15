@@ -50,4 +50,6 @@ interface FormElementInterface
     public function fillLastRuleOption(string $fieldName, string $value): void;
 
     public function fillLastRuleOptionForChannel(string $channelCode, string $fieldName, string $value): void;
+
+    public function getShippingChargesValidationErrorsCount(string $channelCode): int;
 }
