@@ -27,7 +27,7 @@ final class RestrictingFilterEagerLoadingExtension implements ContextAwareQueryC
     {
     }
 
-    public function applyToCollection(QueryBuilder $queryBuilder, QueryNameGeneratorInterface $queryNameGenerator, string $resourceClass, string $operationName = null, array $context = []): void
+    public function applyToCollection(QueryBuilder $queryBuilder, QueryNameGeneratorInterface $queryNameGenerator, string $resourceClass, ?string $operationName = null, array $context = []): void
     {
         if ($this->isOperationRestricted($resourceClass, $operationName)) {
             return;

@@ -33,7 +33,7 @@ final class ProductAttributesSubresourceDataProvider implements RestrictedDataPr
     ) {
     }
 
-    public function supports(string $resourceClass, string $operationName = null, array $context = []): bool
+    public function supports(string $resourceClass, ?string $operationName = null, array $context = []): bool
     {
         $subresourceIdentifiers = $context['subresource_identifiers'] ?? null;
 
@@ -43,7 +43,7 @@ final class ProductAttributesSubresourceDataProvider implements RestrictedDataPr
         ;
     }
 
-    public function getSubresource(string $resourceClass, array $identifiers, array $context, string $operationName = null)
+    public function getSubresource(string $resourceClass, array $identifiers, array $context, ?string $operationName = null)
     {
         $subresourceIdentifiers = $context['subresource_identifiers'];
 

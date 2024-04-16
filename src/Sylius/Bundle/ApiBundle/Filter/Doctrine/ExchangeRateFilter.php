@@ -25,7 +25,7 @@ final class ExchangeRateFilter extends AbstractContextAwareFilter
         QueryBuilder $queryBuilder,
         QueryNameGeneratorInterface $queryNameGenerator,
         string $resourceClass,
-        string $operationName = null,
+        ?string $operationName = null,
     ) {
         if ($property === 'currencyCode') {
             $rootAlias = $queryBuilder->getRootAliases()[0];

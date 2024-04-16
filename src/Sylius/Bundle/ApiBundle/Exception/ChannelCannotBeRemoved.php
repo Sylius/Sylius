@@ -18,7 +18,7 @@ final class ChannelCannotBeRemoved extends \RuntimeException
     public function __construct(
         string $message = 'Cannot remove, the channel is in use.',
         int $code = 0,
-        \Throwable $previous = null,
+        ?\Throwable $previous = null,
     ) {
         parent::__construct($message, $code, $previous);
     }

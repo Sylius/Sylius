@@ -286,7 +286,7 @@ final class ManagingShippingMethodsContext implements Context
      * @When /^I define it for the (zone named "[^"]+")$/
      * @When I do not specify its zone
      */
-    public function iDefineItForTheZone(ZoneInterface $zone = null): void
+    public function iDefineItForTheZone(?ZoneInterface $zone = null): void
     {
         if (null !== $zone) {
             $this->client->addRequestData('zone', $this->iriConverter->getIriFromResource($zone));

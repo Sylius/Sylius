@@ -72,7 +72,7 @@ final class ManagingChannelsContext implements Context
      * @When I do not name it
      * @When I remove its name
      */
-    public function iNameIt(string $name = null): void
+    public function iNameIt(?string $name = null): void
     {
         $this->createPage->nameIt($name ?? '');
     }
@@ -100,7 +100,7 @@ final class ManagingChannelsContext implements Context
      * @When I choose :defaultLocaleName as a default locale
      * @When I do not choose default locale
      */
-    public function iChooseAsADefaultLocale(string $defaultLocaleName = null): void
+    public function iChooseAsADefaultLocale(?string $defaultLocaleName = null): void
     {
         if (null !== $defaultLocaleName) {
             $this->createPage->chooseDefaultLocale($defaultLocaleName);
