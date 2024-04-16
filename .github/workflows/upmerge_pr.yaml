@@ -29,6 +29,9 @@ jobs:
                     -
                         base_branch: "2.0"
                         target_branch: "bootstrap-admin-panel"
+                    -
+                        base_branch: "2.0"
+                        target_branch: "api-platform-3"
 
         steps:
             -
