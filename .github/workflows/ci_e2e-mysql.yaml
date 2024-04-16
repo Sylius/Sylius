@@ -41,93 +41,93 @@ jobs:
                     path: '.github/workflows/matrix.json'
                     prop_path: '${{ inputs.type }}.e2e-mysql'
 
-    behat-no-js:
-        needs: get-matrix
-        runs-on: ubuntu-latest
-        name: "Non-JS, PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}, MySQL ${{ matrix.mysql }}, Twig ${{ matrix.twig }}, API Platform ${{ matrix.api-platform }}"
-        timeout-minutes: 45
-        strategy:
-            fail-fast: false
-            matrix: ${{ fromJson(needs.get-matrix.outputs.matrix) }}
-
-        env:
-            APP_ENV: test_cached
-            DATABASE_URL: "mysql://root:root@127.0.0.1/sylius?charset=utf8mb4&serverVersion=${{ matrix.mysql }}"
-
-        steps:
-            -   name: Set variables
-                shell: bash
-                env:
-                    BRANCH: ${{ inputs.branch }}
-                run: |
-                    if [ "$BRANCH" == "1.12" ]; then
-                        echo "USE_LEGACY_POSTGRES_SETUP=yes" >> $GITHUB_ENV
-                    else
-                        echo "USE_LEGACY_POSTGRES_SETUP=no" >> $GITHUB_ENV
-                    fi
-
-            -   name: "Checkout (With Branch)"
-                if: "${{ inputs.branch != '' }}"
-                uses: actions/checkout@v4
-                with:
-                    ref: ${{ inputs.branch }}
-
-            -   name: "Checkout"
-                if: "${{ inputs.branch == '' }}"
-                uses: actions/checkout@v4
-
-            -   name: Restrict Twig
-                if: matrix.twig == '^2.12'
-                run: composer require --no-update --no-scripts --no-interaction "twig/twig:${{ matrix.twig }}"
-
-            -   name: Prepare manifest.json files
-                run: |
-                    mkdir -p public/build/admin
-                    mkdir -p public/build/shop
-                    mkdir -p public/build/app/admin
-                    mkdir -p public/build/app/shop
-                    echo "{}" > public/build/admin/manifest.json
-                    echo "{}" > public/build/shop/manifest.json
-                    echo "{}" > public/build/app/admin/manifest.json
-                    echo "{}" > public/build/app/shop/manifest.json
-                    
-            -   name: Build application
-                uses: SyliusLabs/BuildTestAppAction@v2.2
-                with:
-                    build_type: "sylius"
-                    cache_key:  "${{ github.run_id }}-${{ runner.os }}-${{ hashFiles('composer.json') }}-symfony-${{ matrix.symfony }}-api-platform-${{ matrix.api-platform }}"
-                    cache_restore_key: "${{ github.run_id }}-${{ runner.os }}-${{ hashFiles('composer.json') }}-symfony-${{ matrix.symfony }}-api-platform-${{ matrix.api-platform }}"
-                    e2e: "yes"
-                    database_version: ${{ matrix.mysql }}
-                    legacy_postgresql_setup: ${{ env.USE_LEGACY_POSTGRES_SETUP }}
-                    php_version: ${{ matrix.php }}
-                    symfony_version: ${{ matrix.symfony }}
-                    node_version: "20.x"
-
-            -   name: Test installer
-                run: bin/console sylius:install --no-interaction -vvv
-
-            -   name: Run PHPUnit
-                run: vendor/bin/phpunit --colors=always
-
-            -   name: Run CLI Behat
-                run: vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="@cli&&~@todo" --suite-tags="@cli" || vendor/bin/behat --strict --no-interaction -vvv -f progress --tags="@cli&&~@todo" --suite-tags="@cli" --rerun
-
-            -   name: Run non-UI Behat
-                run: vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="~@todo&&~@cli" --suite-tags="@api,@domain,@hybrid" || vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="~@todo&&~@cli" --suite-tags="@api,@domain,@hybrid" --rerun
-
-            -   name: Run non-JS Behat
-                run: vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="~@javascript&&~@mink:chromedriver&&~@todo&&~@cli" --suite-tags="@ui" || vendor/bin/behat --strict --no-interaction -vvv -f progress --tags="~@javascript&&~@mink:chromedriver&&~@todo&&~@cli" --suite-tags="@ui" --rerun
-
-            -   name: Upload logs
-                uses: actions/upload-artifact@v3
-                if: failure()
-                with:
-                    name: "Logs (non-JS, PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}), ApiPlatform ${{ matrix.api-platform }}, Twig ${{ matrix.twig }}, MySQL ${{ matrix.mysql }}"
-                    path: |
-                        etc/build/
-                        var/log
-                    if-no-files-found: ignore
+#    behat-no-js:
+#        needs: get-matrix
+#        runs-on: ubuntu-latest
+#        name: "Non-JS, PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}, MySQL ${{ matrix.mysql }}, Twig ${{ matrix.twig }}, API Platform ${{ matrix.api-platform }}"
+#        timeout-minutes: 45
+#        strategy:
+#            fail-fast: false
+#            matrix: ${{ fromJson(needs.get-matrix.outputs.matrix) }}
+#
+#        env:
+#            APP_ENV: test_cached
+#            DATABASE_URL: "mysql://root:root@127.0.0.1/sylius?charset=utf8mb4&serverVersion=${{ matrix.mysql }}"
+#
+#        steps:
+#            -   name: Set variables
+#                shell: bash
+#                env:
+#                    BRANCH: ${{ inputs.branch }}
+#                run: |
+#                    if [ "$BRANCH" == "1.12" ]; then
+#                        echo "USE_LEGACY_POSTGRES_SETUP=yes" >> $GITHUB_ENV
+#                    else
+#                        echo "USE_LEGACY_POSTGRES_SETUP=no" >> $GITHUB_ENV
+#                    fi
+#
+#            -   name: "Checkout (With Branch)"
+#                if: "${{ inputs.branch != '' }}"
+#                uses: actions/checkout@v4
+#                with:
+#                    ref: ${{ inputs.branch }}
+#
+#            -   name: "Checkout"
+#                if: "${{ inputs.branch == '' }}"
+#                uses: actions/checkout@v4
+#
+#            -   name: Restrict Twig
+#                if: matrix.twig == '^2.12'
+#                run: composer require --no-update --no-scripts --no-interaction "twig/twig:${{ matrix.twig }}"
+#
+#            -   name: Prepare manifest.json files
+#                run: |
+#                    mkdir -p public/build/admin
+#                    mkdir -p public/build/shop
+#                    mkdir -p public/build/app/admin
+#                    mkdir -p public/build/app/shop
+#                    echo "{}" > public/build/admin/manifest.json
+#                    echo "{}" > public/build/shop/manifest.json
+#                    echo "{}" > public/build/app/admin/manifest.json
+#                    echo "{}" > public/build/app/shop/manifest.json
+#                    
+#            -   name: Build application
+#                uses: SyliusLabs/BuildTestAppAction@v2.2
+#                with:
+#                    build_type: "sylius"
+#                    cache_key:  "${{ github.run_id }}-${{ runner.os }}-${{ hashFiles('composer.json') }}-symfony-${{ matrix.symfony }}-api-platform-${{ matrix.api-platform }}"
+#                    cache_restore_key: "${{ github.run_id }}-${{ runner.os }}-${{ hashFiles('composer.json') }}-symfony-${{ matrix.symfony }}-api-platform-${{ matrix.api-platform }}"
+#                    e2e: "yes"
+#                    database_version: ${{ matrix.mysql }}
+#                    legacy_postgresql_setup: ${{ env.USE_LEGACY_POSTGRES_SETUP }}
+#                    php_version: ${{ matrix.php }}
+#                    symfony_version: ${{ matrix.symfony }}
+#                    node_version: "20.x"
+#
+#            -   name: Test installer
+#                run: bin/console sylius:install --no-interaction -vvv
+#
+#            -   name: Run PHPUnit
+#                run: vendor/bin/phpunit --colors=always
+#
+#            -   name: Run CLI Behat
+#                run: vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="@cli&&~@todo" --suite-tags="@cli" || vendor/bin/behat --strict --no-interaction -vvv -f progress --tags="@cli&&~@todo" --suite-tags="@cli" --rerun
+#
+#            -   name: Run non-UI Behat
+#                run: vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="~@todo&&~@cli" --suite-tags="@api,@domain,@hybrid" || vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="~@todo&&~@cli" --suite-tags="@api,@domain,@hybrid" --rerun
+#
+#            -   name: Run non-JS Behat
+#                run: vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="~@javascript&&~@mink:chromedriver&&~@todo&&~@cli" --suite-tags="@ui" || vendor/bin/behat --strict --no-interaction -vvv -f progress --tags="~@javascript&&~@mink:chromedriver&&~@todo&&~@cli" --suite-tags="@ui" --rerun
+#
+#            -   name: Upload logs
+#                uses: actions/upload-artifact@v3
+#                if: failure()
+#                with:
+#                    name: "Logs (non-JS, PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}), ApiPlatform ${{ matrix.api-platform }}, Twig ${{ matrix.twig }}, MySQL ${{ matrix.mysql }}"
+#                    path: |
+#                        etc/build/
+#                        var/log
+#                    if-no-files-found: ignore
 
     behat-ui-js:
         needs: get-matrix

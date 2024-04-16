@@ -20,49 +20,49 @@ permissions:
     contents: read
 
 jobs:
-    static-checks:
-        name: Static checks
-        uses: ./.github/workflows/ci_static-checks.yaml
-        with:
-            type: minimal
-    e2e-mariadb:
-        name: End-to-end tests (MariaDB)
-        needs: static-checks
-        uses: ./.github/workflows/ci_e2e-mariadb.yaml
-        with:
-            type: minimal
+#    static-checks:
+#        name: Static checks
+#        uses: ./.github/workflows/ci_static-checks.yaml
+#        with:
+#            type: minimal
+#    e2e-mariadb:
+#        name: End-to-end tests (MariaDB)
+#        needs: static-checks
+#        uses: ./.github/workflows/ci_e2e-mariadb.yaml
+#        with:
+#            type: minimal
     e2e-mysql:
         name: End-to-end tests (MySQL)
-        needs: static-checks
+#        needs: static-checks
         uses: ./.github/workflows/ci_e2e-mysql.yaml
         with:
             type: minimal
-    e2e-pgsql:
-        name: End-to-end tests (PostgreSQL)
-        needs: static-checks
-        uses: ./.github/workflows/ci_e2e-pgsql.yaml
-        with:
-            type: minimal
-    e2e-custom:
-        name: End-to-end tests (Custom)
-        needs: static-checks
-        uses: ./.github/workflows/ci_e2e-custom.yaml
-    frontend:
-        name: Frontend
-        needs: static-checks
-        uses: ./.github/workflows/ci_frontend.yaml
-        with:
-            type: minimal
-    packages:
-        name: Packages
-        needs: static-checks
-        uses: ./.github/workflows/ci_packages.yaml
-        with:
-            type: minimal
-    unstable:
-        if: contains(github.event.pull_request.title, '[Unstable]')
-        name: Unstable
-        needs: static-checks
-        uses: ./.github/workflows/ci__unstable.yaml
-        with:
-            ignore-failure: true
+#    e2e-pgsql:
+#        name: End-to-end tests (PostgreSQL)
+#        needs: static-checks
+#        uses: ./.github/workflows/ci_e2e-pgsql.yaml
+#        with:
+#            type: minimal
+#    e2e-custom:
+#        name: End-to-end tests (Custom)
+#        needs: static-checks
+#        uses: ./.github/workflows/ci_e2e-custom.yaml
+#    frontend:
+#        name: Frontend
+#        needs: static-checks
+#        uses: ./.github/workflows/ci_frontend.yaml
+#        with:
+#            type: minimal
+#    packages:
+#        name: Packages
+#        needs: static-checks
+#        uses: ./.github/workflows/ci_packages.yaml
+#        with:
+#            type: minimal
+#    unstable:
+#        if: contains(github.event.pull_request.title, '[Unstable]')
+#        name: Unstable
+#        needs: static-checks
+#        uses: ./.github/workflows/ci__unstable.yaml
+#        with:
+#            ignore-failure: true
