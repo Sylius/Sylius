@@ -1,5 +1,23 @@
 # CHANGELOG FOR `1.13.X`
 
+## v1.13.0-RC.1 (2024-04-16)
+
+#### Details
+
+- [#16073](https://github.com/Sylius/Sylius/issues/16073) [API][Shop] Improve Order and Checkout tests ([@Wojdylak](https://github.com/Wojdylak))
+- [#16076](https://github.com/Sylius/Sylius/issues/16076) BUGFIX: [AdminBundle] #16031 wrap long text in notes section ([@crydotsnake](https://github.com/crydotsnake))
+- [#16086](https://github.com/Sylius/Sylius/issues/16086) [API][Maintenance] Remove unnecessary enabled option ([@Wojdylak](https://github.com/Wojdylak))
+- [#16085](https://github.com/Sylius/Sylius/issues/16085) [CS][DX] Refactor
+- [#16092](https://github.com/Sylius/Sylius/issues/16092) Minor correction of names ([@Wojdylak](https://github.com/Wojdylak))
+- [#16099](https://github.com/Sylius/Sylius/issues/16099) BUGFIX: [ShopBundle] #16068 wrap long text in product description ([@crydotsnake](https://github.com/crydotsnake))
+- [#16100](https://github.com/Sylius/Sylius/issues/16100) [Maintenance] Add firewall for image resolver ([@Wojdylak](https://github.com/Wojdylak))
+- [#16103](https://github.com/Sylius/Sylius/issues/16103) [Maintenance] Deprecate `SyliusLocaleEvents` ([@NoResponseMate](https://github.com/NoResponseMate))
+- [#16105](https://github.com/Sylius/Sylius/issues/16105) [Maintenance] Update upgrade file ([@Wojdylak](https://github.com/Wojdylak))
+- [#15510](https://github.com/Sylius/Sylius/issues/15510) [Documentation] Update docs/book/architecture/state_machine.rst ([@benbd5](https://github.com/benbd5), [@GSadee](https://github.com/GSadee))
+- [#15443](https://github.com/Sylius/Sylius/issues/15443) Use SyliusShop macros instead of SyliusUi in shop templates ([@maximehuran](https://github.com/maximehuran))
+- [#15876](https://github.com/Sylius/Sylius/issues/15876) [ECS] Add The Nullable Type Declaration For Default Null Value Fixer Rule ([@Rafikooo](https://github.com/Rafikooo))
+- [#16125](https://github.com/Sylius/Sylius/issues/16125) [Documentation] Update release dates for 1.13 and 2.0 versions ([@GSadee](https://github.com/GSadee))
+
 ## v1.13.0-BETA.1 (2024-04-02)
 
 #### Details
