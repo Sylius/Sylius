@@ -47,7 +47,7 @@ Having states configured we can have a transition between the ``cart`` state to 
        sylius_order_checkout:
            transitions:
                address:
-                   from: [cart, addressed, shipping_selected, shipping_skipped, payment_selected, payment_skipped]  # here you specify which state is the initial 
+                   from: [cart, addressed, shipping_selected, shipping_skipped, payment_selected, payment_skipped]  # here you specify which state is the initial
                    to: addressed                                                                                    # there you specify which state is final for that transition
 
 Callbacks
@@ -123,10 +123,6 @@ would become ``shipping_selected``.
            callbacks:
            # callbacks may be called before or after specified transitions, in the checkout state machine we've got callbacks only after transitions
                after:
-                   sylius_process_cart:
-                       on: ["address", "select_shipping", "select_payment"]
-                       do: ["@sylius.order_processing.order_processor", "process"]
-                       args: ["object"]
                     sylius_process_cart:
                         on: ["select_shipping", "address", "select_payment", "skip_shipping", "skip_payment"]
                         do: ["@sylius.order_processing.order_processor", "process"]
