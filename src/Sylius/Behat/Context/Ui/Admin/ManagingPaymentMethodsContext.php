@@ -14,12 +14,13 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
+use Behat\Mink\Exception\ElementNotFoundException;
 use FriendsOfBehat\PageObjectExtension\Page\SymfonyPageInterface;
+use FriendsOfBehat\PageObjectExtension\Page\UnexpectedPageException;
 use Sylius\Behat\Context\Ui\Admin\Helper\ValidationTrait;
 use Sylius\Behat\Page\Admin\Crud\IndexPageInterface;
 use Sylius\Behat\Page\Admin\PaymentMethod\CreatePageInterface;
 use Sylius\Behat\Page\Admin\PaymentMethod\UpdatePageInterface;
-use Sylius\Behat\Service\NotificationCheckerInterface;
 use Sylius\Behat\Service\Resolver\CurrentPageResolverInterface;
 use Sylius\Component\Payment\Model\PaymentMethodInterface;
 use Webmozart\Assert\Assert;
@@ -28,18 +29,22 @@ final class ManagingPaymentMethodsContext implements Context
 {
     use ValidationTrait;
 
+    /**
+     * @param string[] $gatewayFactories
+     */
     public function __construct(
-        private CreatePageInterface $createPage,
-        private IndexPageInterface $indexPage,
-        private UpdatePageInterface $updatePage,
-        private CurrentPageResolverInterface $currentPageResolver,
-        private NotificationCheckerInterface $notificationChecker,
-        private array $gatewayFactories,
+        private readonly CreatePageInterface $createPage,
+        private readonly IndexPageInterface $indexPage,
+        private readonly UpdatePageInterface $updatePage,
+        private readonly CurrentPageResolverInterface $currentPageResolver,
+        private readonly array $gatewayFactories,
     ) {
     }
 
     /**
      * @When I want to modify the :paymentMethod payment method
+     *
+     * @throws UnexpectedPageException
      */
     public function iWantToModifyAPaymentMethod(PaymentMethodInterface $paymentMethod): void
     {
@@ -62,7 +67,7 @@ final class ManagingPaymentMethodsContext implements Context
     /**
      * @When I do not name it
      */
-    public function iDoNotNameIt()
+    public function iDoNotNameIt(): void
     {
         // Intentionally left blank to fulfill context expectation
     }
@@ -70,7 +75,7 @@ final class ManagingPaymentMethodsContext implements Context
     /**
      * @When I enable it
      */
-    public function iEnableIt()
+    public function iEnableIt(): void
     {
         $this->updatePage->enable();
     }
@@ -78,7 +83,7 @@ final class ManagingPaymentMethodsContext implements Context
     /**
      * @When I disable it
      */
-    public function iDisableIt()
+    public function iDisableIt(): void
     {
         $this->updatePage->disable();
     }
@@ -87,7 +92,7 @@ final class ManagingPaymentMethodsContext implements Context
      * @When I save my changes
      * @When I try to save my changes
      */
-    public function iSaveMyChanges()
+    public function iSaveMyChanges(): void
     {
         $this->updatePage->saveChanges();
     }
@@ -95,8 +100,10 @@ final class ManagingPaymentMethodsContext implements Context
     /**
      * @When I delete the :paymentMethod payment method
      * @When I try to delete the :paymentMethod payment method
+     *
+     * @throws UnexpectedPageException
      */
-    public function iDeletePaymentMethod(PaymentMethodInterface $paymentMethod)
+    public function iDeletePaymentMethod(PaymentMethodInterface $paymentMethod): void
     {
         $this->indexPage->open();
         $this->indexPage->deleteResourceOnPage(['code' => $paymentMethod->getCode(), 'name' => $paymentMethod->getName()]);
@@ -105,7 +112,7 @@ final class ManagingPaymentMethodsContext implements Context
     /**
      * @Then this payment method :element should be :value
      */
-    public function thisPaymentMethodElementShouldBe($element, $value)
+    public function thisPaymentMethodElementShouldBe(string $element, string $value): void
     {
         Assert::true($this->updatePage->hasResourceValues([$element => $value]));
     }
@@ -113,8 +120,10 @@ final class ManagingPaymentMethodsContext implements Context
     /**
      * @When I want to create a new offline payment method
      * @When I want to create a new payment method with :factory gateway factory
+     *
+     * @throws UnexpectedPageException
      */
-    public function iWantToCreateANewPaymentMethod($factory = 'Offline')
+    public function iWantToCreateANewPaymentMethod(string $factory = 'Offline'): void
     {
         $this->createPage->open(['factory' => array_search($factory, $this->gatewayFactories, true)]);
     }
@@ -131,7 +140,7 @@ final class ManagingPaymentMethodsContext implements Context
     /**
      * @When I describe it as :description in :language
      */
-    public function iDescribeItAsIn($description, $language)
+    public function iDescribeItAsIn(string $description, string $language): void
     {
         $this->createPage->describeIt($description, $language);
     }
@@ -139,7 +148,7 @@ final class ManagingPaymentMethodsContext implements Context
     /**
      * @When make it available in channel :channel
      */
-    public function iMakeItAvailableInChannel($channel)
+    public function iMakeItAvailableInChannel(string $channel): void
     {
         $this->createPage->checkChannel($channel);
     }
@@ -147,7 +156,7 @@ final class ManagingPaymentMethodsContext implements Context
     /**
      * @Given I set its instruction as :instructions in :language
      */
-    public function iSetItsInstructionAsIn($instructions, $language)
+    public function iSetItsInstructionAsIn(string $instructions, string $language): void
     {
         $this->createPage->setInstructions($instructions, $language);
     }
@@ -155,8 +164,10 @@ final class ManagingPaymentMethodsContext implements Context
     /**
      * @When I add it
      * @When I try to add it
+     *
+     * @throws ElementNotFoundException
      */
-    public function iAddIt()
+    public function iAddIt(): void
     {
         $this->createPage->create();
     }
@@ -189,6 +200,8 @@ final class ManagingPaymentMethodsContext implements Context
      * @Then the payment method :paymentMethodName should appear in the registry
      * @Then the payment method :paymentMethodName should be in the registry
      * @Then I should see the payment method :paymentMethodName in the list
+     *
+     * @throws UnexpectedPageException
      */
     public function thePaymentMethodShouldAppearInTheRegistry(string $paymentMethodName): void
     {
@@ -199,8 +212,10 @@ final class ManagingPaymentMethodsContext implements Context
 
     /**
      * @Given /^(this payment method) should still be in the registry$/
+     *
+     * @throws UnexpectedPageException
      */
-    public function thisPaymentMethodShouldStillBeInTheRegistry(PaymentMethodInterface $paymentMethod)
+    public function thisPaymentMethodShouldStillBeInTheRegistry(PaymentMethodInterface $paymentMethod): void
     {
         $this->thePaymentMethodShouldAppearInTheRegistry($paymentMethod->getName());
     }
@@ -208,8 +223,10 @@ final class ManagingPaymentMethodsContext implements Context
     /**
      * @Given I am browsing payment methods
      * @When I browse payment methods
+     *
+     * @throws UnexpectedPageException
      */
-    public function iBrowsePaymentMethods()
+    public function iBrowsePaymentMethods(): void
     {
         $this->indexPage->open();
     }
@@ -233,7 +250,7 @@ final class ManagingPaymentMethodsContext implements Context
     /**
      * @Then the first payment method on the list should have :field :value
      */
-    public function theFirstPaymentMethodOnTheListShouldHave($field, $value)
+    public function theFirstPaymentMethodOnTheListShouldHave(string $field, string $value): void
     {
         Assert::same($this->indexPage->getColumnFields($field)[0], $value);
     }
@@ -241,7 +258,7 @@ final class ManagingPaymentMethodsContext implements Context
     /**
      * @Then the last payment method on the list should have :field :value
      */
-    public function theLastPaymentMethodOnTheListShouldHave($field, $value)
+    public function theLastPaymentMethodOnTheListShouldHave(string $field, string $value): void
     {
         $values = $this->indexPage->getColumnFields($field);
 
@@ -254,7 +271,7 @@ final class ManagingPaymentMethodsContext implements Context
      * @When I switch the way payment methods are sorted to descending by :field
      * @Given the payment methods are already sorted by :field
      */
-    public function iSortPaymentMethodsBy($field)
+    public function iSortPaymentMethodsBy(string $field): void
     {
         $this->indexPage->sortBy($field);
     }
@@ -271,16 +288,20 @@ final class ManagingPaymentMethodsContext implements Context
     /**
      * @Then I should be notified that :element is required
      * @Then I should be notified that I have to specify payment method :element
+     *
+     * @throws ElementNotFoundException
      */
-    public function iShouldBeNotifiedThatIsRequired($element)
+    public function iShouldBeNotifiedThatIsRequired(string $element): void
     {
         $this->assertFieldValidationMessage($element, sprintf('Please enter payment method %s.', $element));
     }
 
     /**
      * @Then I should be notified that I have to specify paypal :element
+     *
+     * @throws ElementNotFoundException
      */
-    public function iShouldBeNotifiedThatIHaveToSpecifyPaypal($element)
+    public function iShouldBeNotifiedThatIHaveToSpecifyPaypal(string $element): void
     {
         Assert::same(
             $this->createPage->getValidationMessage('paypal_' . $element),
@@ -290,6 +311,8 @@ final class ManagingPaymentMethodsContext implements Context
 
     /**
      * @Then I should be notified that I have to specify stripe :element
+     *
+     * @throws ElementNotFoundException
      */
     public function iShouldBeNotifiedThatIHaveToSpecifyStripe(string $element): void
     {
@@ -301,8 +324,10 @@ final class ManagingPaymentMethodsContext implements Context
 
     /**
      * @Then I should be notified that gateway name should contain only letters and underscores
+     *
+     * @throws ElementNotFoundException
      */
-    public function iShouldBeNotifiedThatGatewayNameShouldContainOnlyLettersAndUnderscores()
+    public function iShouldBeNotifiedThatGatewayNameShouldContainOnlyLettersAndUnderscores(): void
     {
         Assert::same(
             $this->createPage->getValidationMessage('gateway_name'),
@@ -312,8 +337,10 @@ final class ManagingPaymentMethodsContext implements Context
 
     /**
      * @Then the payment method with :element :value should not be added
+     *
+     * @throws UnexpectedPageException
      */
-    public function thePaymentMethodWithElementValueShouldNotBeAdded($element, $value)
+    public function thePaymentMethodWithElementValueShouldNotBeAdded(string $element, string $value): void
     {
         $this->iBrowsePaymentMethods();
 
@@ -322,8 +349,10 @@ final class ManagingPaymentMethodsContext implements Context
 
     /**
      * @Then /^(this payment method) should still be named "([^"]+)"$/
+     *
+     * @throws UnexpectedPageException
      */
-    public function thisShippingMethodNameShouldBe(PaymentMethodInterface $paymentMethod, $paymentMethodName)
+    public function thisShippingMethodNameShouldBe(PaymentMethodInterface $paymentMethod, string $paymentMethodName): void
     {
         $this->iBrowsePaymentMethods();
 
@@ -334,10 +363,9 @@ final class ManagingPaymentMethodsContext implements Context
     }
 
     /**
-     * @param string $element
-     * @param string $expectedMessage
+     * @throws ElementNotFoundException
      */
-    private function assertFieldValidationMessage($element, $expectedMessage)
+    private function assertFieldValidationMessage(string $element, string $expectedMessage): void
     {
         /** @var CreatePageInterface|UpdatePageInterface $currentPage */
         $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
@@ -349,7 +377,7 @@ final class ManagingPaymentMethodsContext implements Context
      * @Then the code field should be disabled
      * @Then I should not be able to edit its code
      */
-    public function theCodeFieldShouldBeDisabled()
+    public function theCodeFieldShouldBeDisabled(): void
     {
         Assert::true($this->updatePage->isCodeDisabled());
     }
@@ -357,7 +385,7 @@ final class ManagingPaymentMethodsContext implements Context
     /**
      * @Then the factory name field should be disabled
      */
-    public function theFactoryNameFieldShouldBeDisabled()
+    public function theFactoryNameFieldShouldBeDisabled(): void
     {
         Assert::true($this->updatePage->isFactoryNameFieldDisabled());
     }
@@ -365,7 +393,7 @@ final class ManagingPaymentMethodsContext implements Context
     /**
      * @Then this payment method should be enabled
      */
-    public function thisPaymentMethodShouldBeEnabled()
+    public function thisPaymentMethodShouldBeEnabled(): void
     {
         Assert::true($this->updatePage->isPaymentMethodEnabled());
     }
@@ -373,19 +401,21 @@ final class ManagingPaymentMethodsContext implements Context
     /**
      * @Then this payment method should be disabled
      */
-    public function thisPaymentMethodShouldBeDisabled()
+    public function thisPaymentMethodShouldBeDisabled(): void
     {
         Assert::false($this->updatePage->isPaymentMethodEnabled());
     }
 
     /**
      * @Given the payment method :paymentMethod should have instructions :instructions in :language
+     *
+     * @throws UnexpectedPageException
      */
     public function thePaymentMethodShouldHaveInstructionsIn(
         PaymentMethodInterface $paymentMethod,
-        $instructions,
-        $language,
-    ) {
+        string $instructions,
+        string $language,
+    ): void {
         $this->iWantToModifyAPaymentMethod($paymentMethod);
 
         Assert::same($this->updatePage->getPaymentMethodInstructions($language), $instructions);
@@ -393,11 +423,13 @@ final class ManagingPaymentMethodsContext implements Context
 
     /**
      * @Then the payment method :paymentMethod should be available in channel :channelName
+     *
+     * @throws UnexpectedPageException
      */
     public function thePaymentMethodShouldBeAvailableInChannel(
         PaymentMethodInterface $paymentMethod,
-        $channelName,
-    ) {
+        string $channelName,
+    ): void {
         $this->iWantToModifyAPaymentMethod($paymentMethod);
 
         Assert::true($this->updatePage->isAvailableInChannel($channelName));
@@ -406,7 +438,7 @@ final class ManagingPaymentMethodsContext implements Context
     /**
      * @Then /^(this payment method) should no longer exist in the registry$/
      */
-    public function thisPaymentMethodShouldNoLongerExistInTheRegistry(PaymentMethodInterface $paymentMethod)
+    public function thisPaymentMethodShouldNoLongerExistInTheRegistry(PaymentMethodInterface $paymentMethod): void
     {
         Assert::false($this->indexPage->isSingleResourceOnPage([
             'code' => $paymentMethod->getCode(),
@@ -416,16 +448,20 @@ final class ManagingPaymentMethodsContext implements Context
 
     /**
      * @Then I should be notified that payment method with this code already exists
+     *
+     * @throws ElementNotFoundException
      */
-    public function iShouldBeNotifiedThatPaymentMethodWithThisCodeAlreadyExists()
+    public function iShouldBeNotifiedThatPaymentMethodWithThisCodeAlreadyExists(): void
     {
         Assert::same($this->createPage->getValidationMessage('code'), 'The payment method with given code already exists.');
     }
 
     /**
      * @Then there should still be only one payment method with :element :code
+     *
+     * @throws UnexpectedPageException
      */
-    public function thereShouldStillBeOnlyOnePaymentMethodWith($element, $code)
+    public function thereShouldStillBeOnlyOnePaymentMethodWith(string $element, string $code): void
     {
         $this->iBrowsePaymentMethods();
 
@@ -435,7 +471,7 @@ final class ManagingPaymentMethodsContext implements Context
     /**
      * @When I configure it with test paypal credentials
      */
-    public function iConfigureItWithTestPaypalCredentials()
+    public function iConfigureItWithTestPaypalCredentials(): void
     {
         /** @var CreatePageInterface|UpdatePageInterface $currentPage */
         $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
@@ -448,7 +484,7 @@ final class ManagingPaymentMethodsContext implements Context
     /**
      * @When I configure it for username :username with :signature signature
      */
-    public function iConfigureItForUsernameWithSignature($username, $signature)
+    public function iConfigureItForUsernameWithSignature(string $username, string $signature): void
     {
         /** @var CreatePageInterface|UpdatePageInterface $currentPage */
         $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
@@ -460,7 +496,7 @@ final class ManagingPaymentMethodsContext implements Context
     /**
      * @When I do not specify configuration password
      */
-    public function iDoNotSpecifyConfigurationPassword()
+    public function iDoNotSpecifyConfigurationPassword(): void
     {
         // Intentionally left blank to fulfill context expectation
     }
@@ -468,7 +504,7 @@ final class ManagingPaymentMethodsContext implements Context
     /**
      * @When I configure it with test stripe gateway data
      */
-    public function iConfigureItWithTestStripeGatewayData()
+    public function iConfigureItWithTestStripeGatewayData(): void
     {
         $this->createPage->setStripeSecretKey('TEST');
         $this->createPage->setStripePublishableKey('TEST');
@@ -482,6 +518,7 @@ final class ManagingPaymentMethodsContext implements Context
         match ($element) {
             'publishable key' => $this->createPage->setStripePublishableKey('TEST'),
             'secret key' => $this->createPage->setStripeSecretKey('TEST'),
+            default => throw new \InvalidArgumentException(sprintf('There is no configuration for "%s" element.', $element)),
         };
     }
 
