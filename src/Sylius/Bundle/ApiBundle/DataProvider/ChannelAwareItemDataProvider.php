@@ -26,7 +26,7 @@ final class ChannelAwareItemDataProvider implements ItemDataProviderInterface
     ) {
     }
 
-    public function getItem(string $resourceClass, $id, string $operationName = null, array $context = []): ?object
+    public function getItem(string $resourceClass, $id, ?string $operationName = null, array $context = []): ?object
     {
         return $this->itemDataProvider->getItem($resourceClass, $id, $operationName, $this->processContext($context));
     }

@@ -1039,8 +1039,8 @@ final class PromotionContext implements Context
         ?array $rules = null,
         ?array $actions = null,
         array $coupons = [],
-        int $priority = null,
-        int $usageLimit = null,
+        ?int $priority = null,
+        ?int $usageLimit = null,
         bool $couponBased = false,
         bool $exclusive = false,
         bool $appliesToDiscounted = true,
@@ -1081,7 +1081,7 @@ final class PromotionContext implements Context
         PromotionInterface $promotion,
         int $discount,
         array $configuration = [],
-        PromotionRuleInterface $rule = null,
+        ?PromotionRuleInterface $rule = null,
     ): void {
         $channelCode = $this->getChannelCode();
 
@@ -1097,7 +1097,7 @@ final class PromotionContext implements Context
         PromotionInterface $promotion,
         float $discount,
         array $configuration = [],
-        PromotionRuleInterface $rule = null,
+        ?PromotionRuleInterface $rule = null,
     ): void {
         $channelCode = $this->getChannelCode();
 
@@ -1113,8 +1113,8 @@ final class PromotionContext implements Context
         PromotionInterface $promotion,
         int $discount,
         array $configuration = [],
-        PromotionRuleInterface $rule = null,
-        ChannelInterface $channel = null,
+        ?PromotionRuleInterface $rule = null,
+        ?ChannelInterface $channel = null,
     ): void {
         $channelCode = (null !== $channel) ? $channel->getCode() : $this->sharedStorage->get('channel')->getCode();
 
@@ -1125,7 +1125,7 @@ final class PromotionContext implements Context
         PromotionInterface $promotion,
         float $discount,
         array $configuration = [],
-        PromotionRuleInterface $rule = null,
+        ?PromotionRuleInterface $rule = null,
     ): void {
         $this->persistPromotion($promotion, $this->actionFactory->createPercentageDiscount($discount), $configuration, $rule);
     }
@@ -1134,7 +1134,7 @@ final class PromotionContext implements Context
         PromotionInterface $promotion,
         PromotionActionInterface $action,
         array $configuration,
-        PromotionRuleInterface $rule = null,
+        ?PromotionRuleInterface $rule = null,
     ): void {
         $configuration = array_merge_recursive($action->getConfiguration(), $configuration);
         $action->setConfiguration($configuration);

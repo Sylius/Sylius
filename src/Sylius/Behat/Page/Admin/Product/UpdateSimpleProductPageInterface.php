@@ -71,7 +71,7 @@ interface UpdateSimpleProductPageInterface extends BaseUpdatePageInterface
 
     public function isImageWithTypeDisplayed(string $type): bool;
 
-    public function attachImage(string $path, string $type = null): void;
+    public function attachImage(string $path, ?string $type = null): void;
 
     public function changeImageWithType(string $type, string $path): void;
 

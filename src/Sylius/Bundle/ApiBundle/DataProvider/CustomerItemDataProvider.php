@@ -30,7 +30,7 @@ final class CustomerItemDataProvider implements RestrictedDataProviderInterface,
     ) {
     }
 
-    public function getItem(string $resourceClass, $id, string $operationName = null, array $context = [])
+    public function getItem(string $resourceClass, $id, ?string $operationName = null, array $context = [])
     {
         /** @var ShopUserInterface|null $user */
         $user = $this->userContext->getUser();
@@ -53,7 +53,7 @@ final class CustomerItemDataProvider implements RestrictedDataProviderInterface,
         return null;
     }
 
-    public function supports(string $resourceClass, string $operationName = null, array $context = []): bool
+    public function supports(string $resourceClass, ?string $operationName = null, array $context = []): bool
     {
         return is_a($resourceClass, CustomerInterface::class, true);
     }

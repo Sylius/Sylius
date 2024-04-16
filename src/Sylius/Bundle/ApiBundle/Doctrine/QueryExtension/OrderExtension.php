@@ -40,7 +40,7 @@ final class OrderExtension implements ContextAwareQueryCollectionExtensionInterf
         QueryBuilder $queryBuilder,
         QueryNameGeneratorInterface $queryNameGenerator,
         string $resourceClass,
-        string $operationName = null,
+        ?string $operationName = null,
         array $context = [],
     ): void {
         $this->filterOutOrders($queryBuilder, $queryNameGenerator, $resourceClass);
@@ -55,7 +55,7 @@ final class OrderExtension implements ContextAwareQueryCollectionExtensionInterf
         QueryNameGeneratorInterface $queryNameGenerator,
         string $resourceClass,
         array $identifiers,
-        string $operationName = null,
+        ?string $operationName = null,
         array $context = [],
     ): void {
         $this->filterOutOrders($queryBuilder, $queryNameGenerator, $resourceClass);

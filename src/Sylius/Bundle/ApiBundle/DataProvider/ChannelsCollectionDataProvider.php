@@ -24,12 +24,12 @@ final class ChannelsCollectionDataProvider implements ContextAwareCollectionData
     {
     }
 
-    public function getCollection(string $resourceClass, string $operationName = null, array $context = []): array
+    public function getCollection(string $resourceClass, ?string $operationName = null, array $context = []): array
     {
         return [$this->channelContext->getChannel()];
     }
 
-    public function supports(string $resourceClass, string $operationName = null, array $context = []): bool
+    public function supports(string $resourceClass, ?string $operationName = null, array $context = []): bool
     {
         return is_a($resourceClass, ChannelInterface::class, true) && $this->isShopGetCollectionOperation($context);
     }

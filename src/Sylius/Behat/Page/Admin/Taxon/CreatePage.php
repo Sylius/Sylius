@@ -91,7 +91,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
         $this->getDocument()->fillField(sprintf('sylius_taxon_translations_%s_slug', $languageCode), $slug);
     }
 
-    public function attachImage(string $path, string $type = null): void
+    public function attachImage(string $path, ?string $type = null): void
     {
         $filesPath = $this->getParameter('files_path');
 
@@ -102,7 +102,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
         $imageForm->find('css', 'input[type="file"]')->attachFile($filesPath . $path);
     }
 
-    public function getLeaves(TaxonInterface $parentTaxon = null): array
+    public function getLeaves(?TaxonInterface $parentTaxon = null): array
     {
         return $this->getDocument()->findAll('css', '.sylius-tree__item');
     }

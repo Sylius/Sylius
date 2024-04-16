@@ -15,7 +15,7 @@ namespace Sylius\Component\Core\Exception;
 
 class CustomerNotFoundException extends \RuntimeException
 {
-    public function __construct(?string $message = null, \Exception $previousException = null)
+    public function __construct(?string $message = null, ?\Exception $previousException = null)
     {
         parent::__construct($message ?: 'Customer could not be found.', 0, $previousException);
     }

@@ -35,7 +35,7 @@ final class MergingXmlExtractor extends AbstractResourceExtractor implements Pro
      */
     public function __construct(
         array $paths,
-        ContainerInterface $container = null,
+        ?ContainerInterface $container = null,
         private ?MetadataMergerInterface $merger = null,
     ) {
         parent::__construct($paths, $container);
