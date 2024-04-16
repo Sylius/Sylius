@@ -1,0 +1,18 @@
+<div class="mb-4">
+    {{ render(url('sylius_shop_partial_taxon_show_by_slug', {
+        'slug': app.request.attributes.get('slug'),
+        'template': '@SyliusShop/Product/index/main/header_taxonomy.html.twig'
+    })) }}
+</div>
+
+<div class="row align-items-end mb-5">
+    <div class="col">
+        {% include '@SyliusShop/Product/index/main/search.html.twig' %}
+    </div>
+    <div class="col-auto">
+        {% include '@SyliusShop/Product/index/main/limit.html.twig' %}
+    </div>
+    <div class="col-auto">
+        {% include '@SyliusShop/Product/index/main/sorting.html.twig' %}
+    </div>
+</div>

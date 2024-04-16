@@ -1,0 +1,11 @@
+{% import '@SyliusShop/Common/messages.html.twig' as messages %}
+
+{% if resources.data|length > 0 %}
+    <div class="products-grid" {{ sylius_test_html_attribute('products') }}>
+        {% for product in resources.data %}
+            <div>{% include '@SyliusShop/Product/card.html.twig' %}</div>
+        {% endfor %}
+    </div>
+{% else %}
+    {{ messages.info('sylius.ui.no_results_to_display') }}
+{% endif %}
