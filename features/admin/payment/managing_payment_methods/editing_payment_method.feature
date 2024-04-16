@@ -9,7 +9,7 @@ Feature: Editing payment methods
         And the store has a payment method "Offline" with a code "Offline"
         And I am logged in as an administrator
 
-    @todo @ui @api
+    @ui @api
     Scenario: Renaming the payment method
         When I want to modify the "Offline" payment method
         And I rename it to "Cash on delivery" in "English (United States)"
@@ -17,7 +17,7 @@ Feature: Editing payment methods
         Then I should be notified that it has been successfully edited
         And this payment method name should be "Cash on delivery"
 
-    @todo @ui @api
+    @ui @api
     Scenario: Disabling payment method
         When I want to modify the "Offline" payment method
         And I disable it
@@ -25,7 +25,7 @@ Feature: Editing payment methods
         Then I should be notified that it has been successfully edited
         And this payment method should be disabled
 
-    @todo @ui @api
+    @ui @api
     Scenario: Enabling payment method
         Given the payment method "Offline" is disabled
         When I want to modify the "Offline" payment method
@@ -34,12 +34,12 @@ Feature: Editing payment methods
         Then I should be notified that it has been successfully edited
         And this payment method should be enabled
 
-    @todo @ui @api
+    @ui @api
     Scenario: Being unable to edit code of an existing payment method
         When I want to modify the "Offline" payment method
         Then I should not be able to edit its code
 
-    @todo @ui @api
+    @ui @api
     Scenario: Being unable to edit gateway factory field of existing payment method
         When I want to modify the "Offline" payment method
         Then the factory name field should be disabled
