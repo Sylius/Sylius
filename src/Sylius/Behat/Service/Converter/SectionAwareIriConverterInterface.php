@@ -15,5 +15,5 @@ namespace Sylius\Behat\Service\Converter;
 
 interface SectionAwareIriConverterInterface
 {
-    public function getIriFromResourceInSection(object $item, string $section, int $referenceType = null): string;
+    public function getIriFromResourceInSection(object $item, string $section, ?int $referenceType = null): string;
 }

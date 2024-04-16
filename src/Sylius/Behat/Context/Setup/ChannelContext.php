@@ -122,10 +122,10 @@ final class ChannelContext implements Context
      * @Given the store operates on a channel identified by :channelCode code
      */
     public function theStoreOperatesOnAChannelNamed(
-        string $channelName = null,
-        string $currencyCode = null,
-        string $hostname = null,
-        string $channelCode = null,
+        ?string $channelName = null,
+        ?string $currencyCode = null,
+        ?string $hostname = null,
+        ?string $channelCode = null,
     ): void {
         $channelCode = $channelCode ?? StringInflector::nameToLowercaseCode($channelName);
         $channelName = $channelName ?? $channelCode;

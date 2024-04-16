@@ -29,7 +29,7 @@ final class ProductPriceOrderFilter extends AbstractContextAwareFilter
         QueryBuilder $queryBuilder,
         QueryNameGeneratorInterface $queryNameGenerator,
         string $resourceClass,
-        string $operationName = null,
+        ?string $operationName = null,
         array $context = [],
     ): void {
         if ('order' !== $property || !isset($value['price'])) {

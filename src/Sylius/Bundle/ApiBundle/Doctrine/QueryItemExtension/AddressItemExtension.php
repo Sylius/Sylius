@@ -36,7 +36,7 @@ final class AddressItemExtension implements QueryItemExtensionInterface
         QueryNameGeneratorInterface $queryNameGenerator,
         string $resourceClass,
         array $identifiers,
-        string $operationName = null,
+        ?string $operationName = null,
         array $context = [],
     ) {
         if (!is_a($resourceClass, AddressInterface::class, true)) {

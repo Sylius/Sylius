@@ -27,7 +27,7 @@ final class OrderItemAdjustmentsSubresourceDataProvider implements RestrictedDat
     }
 
     /** @param array<array-key, mixed> $context */
-    public function supports(string $resourceClass, string $operationName = null, array $context = []): bool
+    public function supports(string $resourceClass, ?string $operationName = null, array $context = []): bool
     {
         $subresourceIdentifiers = $context['subresource_identifiers'] ?? null;
 
@@ -43,7 +43,7 @@ final class OrderItemAdjustmentsSubresourceDataProvider implements RestrictedDat
      *
      * @return iterable<AdjustmentInterface>
      */
-    public function getSubresource(string $resourceClass, array $identifiers, array $context, string $operationName = null): iterable
+    public function getSubresource(string $resourceClass, array $identifiers, array $context, ?string $operationName = null): iterable
     {
         $subresourceIdentifiers = $context['subresource_identifiers'];
 

@@ -30,12 +30,12 @@ final class ShipmentItemDataProvider implements ItemDataProviderInterface, Restr
     ) {
     }
 
-    public function supports(string $resourceClass, string $operationName = null, array $context = []): bool
+    public function supports(string $resourceClass, ?string $operationName = null, array $context = []): bool
     {
         return is_a($resourceClass, ShipmentInterface::class, true);
     }
 
-    public function getItem(string $resourceClass, $id, string $operationName = null, array $context = [])
+    public function getItem(string $resourceClass, $id, ?string $operationName = null, array $context = [])
     {
         $user = $this->userContext->getUser();
 

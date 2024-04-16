@@ -34,7 +34,7 @@ final class OrdersByChannelExtension implements ContextAwareQueryCollectionExten
         QueryBuilder $queryBuilder,
         QueryNameGeneratorInterface $queryNameGenerator,
         string $resourceClass,
-        string $operationName = null,
+        ?string $operationName = null,
         array $context = [],
     ): void {
         if (!is_a($resourceClass, OrderInterface::class, true)) {

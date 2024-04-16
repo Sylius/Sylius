@@ -29,7 +29,7 @@ final class AvailableProductAssociationsInProductCollectionExtension implements 
         QueryBuilder $queryBuilder,
         QueryNameGeneratorInterface $queryNameGenerator,
         string $resourceClass,
-        string $operationName = null,
+        ?string $operationName = null,
         array $context = [],
     ): void {
         if (!is_a($resourceClass, ProductInterface::class, true)) {

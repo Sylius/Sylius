@@ -22,7 +22,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
 {
     use ChoosesName;
 
-    public function addProvince(string $name, string $code, string $abbreviation = null): void
+    public function addProvince(string $name, string $code, ?string $abbreviation = null): void
     {
         $this->getDocument()->clickLink('Add province');
 

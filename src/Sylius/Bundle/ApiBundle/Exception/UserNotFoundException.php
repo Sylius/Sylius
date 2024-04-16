@@ -20,7 +20,7 @@ final class UserNotFoundException extends NotFoundHttpException
     /** @param array<array-key, mixed> $headers */
     public function __construct(
         string $message = 'User not found.',
-        \Throwable $previous = null,
+        ?\Throwable $previous = null,
         int $code = 0,
         array $headers = [],
     ) {
