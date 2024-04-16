@@ -1,0 +1,46 @@
+---------------------------------------------------------------------------
+
+by diimpp at 2023-10-20T18:51:56Z
+
+Hello @maximehuran , can you please tell more why this change is necessary and what kind of issue it's solving?
+
+---------------------------------------------------------------------------
+
+by maximehuran at 2023-10-21T10:56:06Z
+
+Sometimes you change the markup for frontend and it breaks the admin display
+Shop and Admin must be separated and extends the Ui templates.
+It's already done for some templates in Sylius but not all.
+
+---------------------------------------------------------------------------
+
+by maximehuran at 2023-11-02T10:54:50Z
+
+I changed the templates you mentioned
+
+---------------------------------------------------------------------------
+
+by github-actions[bot] at 2024-04-16T08:35:34Z
+
+### [Bunnyshell](https://www.bunnyshell.com) Preview Environment deployed
+
+**It will be automatically stopped in 4 hours.**
+
+Use the command `/bns:start` to start it if it's stopped.
+
+|Component|Endpoints|
+|---------|---------|
+|mailhog|https://mailhog-hq3kcw.bunnyenv.com/|
+|php|https://store-hq3kcw.bunnyenv.com/|
+
+Available commands:
+- `/bns:stop` to stop the environment
+- `/bns:deploy` to redeploy the environment
+- `/bns:delete` to remove the environment
+<!-- thollander/actions-comment-pull-request "bunnyshell-preview-env" -->
+
+---------------------------------------------------------------------------
+
+by GSadee at 2024-04-16T09:25:57Z
+
+Thanks, Maxime! :1st_place_medal:
