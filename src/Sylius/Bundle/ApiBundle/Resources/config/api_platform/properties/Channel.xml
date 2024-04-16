@@ -15,6 +15,70 @@
             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
             xsi:schemaLocation="https://api-platform.com/schema/metadata/properties-3.0 https://api-platform.com/schema/metadata/properties-3.0.xsd"
 >
-    <property resource="Sylius\Component\Core\Model\Channel" name="id" identifier="false"/>
-    <property resource="Sylius\Component\Core\Model\Channel" name="code" identifier="true"/>
+    <property resource="Sylius\Component\Core\Model\Channel" name="id" identifier="false" writable="false" />
+    <property resource="Sylius\Component\Core\Model\Channel" name="code" identifier="true" required="true"/>
+    <property resource="Sylius\Component\Core\Model\Channel" name="name" writable="true" readable="true" />
+    <property resource="Sylius\Component\Core\Model\Channel" name="enabled" writable="true" readable="true" />
+    <property resource="Sylius\Component\Core\Model\Channel" name="description" writable="true" readable="true" />
+    <property resource="Sylius\Component\Core\Model\Channel" name="hostname" writable="true" readable="true" />
+    <property resource="Sylius\Component\Core\Model\Channel" name="color" writable="true" readable="true" />
+    <property resource="Sylius\Component\Core\Model\Channel" name="baseCurrency" writable="true" readable="true" >
+        <openapiContext>
+            <values>
+                <value name="example">/api/v2/admin/currencies/USD</value>
+            </values>
+        </openapiContext>
+    </property>
+    <property resource="Sylius\Component\Core\Model\Channel" name="defaultLocale" writable="true" readable="true" >
+        <openapiContext>
+            <values>
+                <value name="example">/api/v2/admin/locales/en_US</value>
+            </values>
+        </openapiContext>
+    </property>
+    <property resource="Sylius\Component\Core\Model\Channel" name="defaultTaxZone" writable="true" readable="true" />
+    <property resource="Sylius\Component\Core\Model\Channel" name="taxCalculationStrategy" writable="true" readable="true" />
+    <property resource="Sylius\Component\Core\Model\Channel" name="currencies" writable="true" readable="true">
+        <openapiContext>
+            <values>
+                <value name="example">
+                    <values>
+                        <value>/api/v2/admin/currencies/USD</value>
+                    </values>
+                </value>
+            </values>
+        </openapiContext>
+    </property>
+    <property resource="Sylius\Component\Core\Model\Channel" name="locales" writable="true" readable="true">
+        <openapiContext>
+            <values>
+                <value name="example">
+                    <values>
+                        <value>/api/v2/admin/locales/en_US</value>
+                    </values>
+                </value>
+            </values>
+        </openapiContext>
+    </property>
+    <property resource="Sylius\Component\Core\Model\Channel" name="countries" writable="true" readable="true">
+        <openapiContext>
+            <values>
+                <value name="example">
+                    <values>
+                        <value>/api/v2/admin/countries/US</value>
+                    </values>
+                </value>
+            </values>
+        </openapiContext>
+    </property>
+    <property resource="Sylius\Component\Core\Model\Channel" name="themeName" writable="true" readable="true" />
+    <property resource="Sylius\Component\Core\Model\Channel" name="contactEmail" writable="true" readable="true" />
+    <property resource="Sylius\Component\Core\Model\Channel" name="contactPhoneNumber" writable="true" readable="true" />
+    <property resource="Sylius\Component\Core\Model\Channel" name="skippingShippingStepAllowed" writable="true" readable="true" />
+    <property resource="Sylius\Component\Core\Model\Channel" name="skippingPaymentStepAllowed" writable="true" readable="true" />
+    <property resource="Sylius\Component\Core\Model\Channel" name="accountVerificationRequired" writable="true" readable="true" />
+    <property resource="Sylius\Component\Core\Model\Channel" name="shippingAddressInCheckoutRequired" writable="true" readable="true" />
+    <property resource="Sylius\Component\Core\Model\Channel" name="shopBillingData" writable="true"/>
+    <property resource="Sylius\Component\Core\Model\Channel" name="menuTaxon" writable="true" readable="true" />
+    <property resource="Sylius\Component\Core\Model\Channel" name="channelPriceHistoryConfig" readable="true" />
 </properties>
