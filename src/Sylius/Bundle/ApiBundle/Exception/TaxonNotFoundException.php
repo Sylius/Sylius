@@ -20,7 +20,7 @@ final class TaxonNotFoundException extends NotFoundHttpException
     /** @param array<array-key, mixed> $headers */
     public function __construct(
         string $message = 'Taxon not found.',
-        \Throwable $previous = null,
+        ?\Throwable $previous = null,
         int $code = 0,
         array $headers = [],
     ) {

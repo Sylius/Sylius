@@ -34,7 +34,7 @@ final readonly class EnabledProductInProductAssociationItemExtension implements 
         QueryNameGeneratorInterface $queryNameGenerator,
         string $resourceClass,
         array $identifiers,
-        Operation $operation = null,
+        ?Operation $operation = null,
         array $context = [],
     ): void {
         if (!is_a($resourceClass, ProductAssociationInterface::class, true)) {

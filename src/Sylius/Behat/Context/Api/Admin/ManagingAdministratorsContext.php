@@ -68,7 +68,7 @@ final class ManagingAdministratorsContext implements Context
      * @When I do not specify its email
      * @When I change its email to :email
      */
-    public function iSpecifyItsEmailAs(string $email = null): void
+    public function iSpecifyItsEmailAs(?string $email = null): void
     {
         if ($email !== null) {
             $this->client->addRequestData('email', $email);
@@ -80,7 +80,7 @@ final class ManagingAdministratorsContext implements Context
      * @When I do not specify its name
      * @When I change its name to :username
      */
-    public function iSpecifyItsNameAs(string $username = null): void
+    public function iSpecifyItsNameAs(?string $username = null): void
     {
         if ($username !== null) {
             $this->client->addRequestData('username', $username);
@@ -100,7 +100,7 @@ final class ManagingAdministratorsContext implements Context
      * @When I do not specify its password
      * @When I change its password to :password
      */
-    public function iSpecifyItsPasswordAs(string $password = null): void
+    public function iSpecifyItsPasswordAs(?string $password = null): void
     {
         if ($password !== null) {
             $this->client->addRequestData('plainPassword', $password);

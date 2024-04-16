@@ -294,8 +294,8 @@ final class ShippingContext implements Context
         string $shippingMethodName,
         int $firstFee,
         ChannelInterface $firstChannel,
-        int $secondFee = null,
-        ChannelInterface $secondChannel = null,
+        ?int $secondFee = null,
+        ?ChannelInterface $secondChannel = null,
     ): void {
         $configuration = [];
         $channels = [];

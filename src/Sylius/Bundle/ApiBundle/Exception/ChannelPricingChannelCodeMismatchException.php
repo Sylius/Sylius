@@ -18,7 +18,7 @@ final class ChannelPricingChannelCodeMismatchException extends \RuntimeException
     public function __construct(
         string $message = 'The channelCode of channelPricing does not match the key.',
         int $code = 0,
-        \Throwable $previous = null,
+        ?\Throwable $previous = null,
     ) {
         parent::__construct($message, $code, $previous);
     }

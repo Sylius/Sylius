@@ -36,7 +36,7 @@ final readonly class LocaleCollectionExtension implements QueryCollectionExtensi
         QueryBuilder $queryBuilder,
         QueryNameGeneratorInterface $queryNameGenerator,
         string $resourceClass,
-        Operation $operation = null,
+        ?Operation $operation = null,
         array $context = [],
     ): void {
         if (!is_a($resourceClass, LocaleInterface::class, true)) {

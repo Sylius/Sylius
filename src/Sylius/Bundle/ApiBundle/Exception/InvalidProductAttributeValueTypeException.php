@@ -18,7 +18,7 @@ final class InvalidProductAttributeValueTypeException extends \RuntimeException
     public function __construct(
         string $message = 'The value of attribute has an invalid type.',
         int $code = 0,
-        \Throwable $previous = null,
+        ?\Throwable $previous = null,
     ) {
         parent::__construct($message, $code, $previous);
     }

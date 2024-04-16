@@ -36,7 +36,7 @@ final readonly class OrderShopUserItemExtension implements QueryItemExtensionInt
         QueryNameGeneratorInterface $queryNameGenerator,
         string $resourceClass,
         array $identifiers,
-        Operation $operation = null,
+        ?Operation $operation = null,
         array $context = [],
     ): void {
         if (!is_a($resourceClass, OrderInterface::class, true)) {

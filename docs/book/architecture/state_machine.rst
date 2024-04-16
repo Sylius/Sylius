@@ -27,6 +27,8 @@ How to configure states? Let's see on the example from **Checkout** state machin
                cart: ~
                addressed: ~
                shipping_selected: ~
+               shipping_skipped: ~
+               payment_skipped: ~
                payment_selected: ~
                completed: ~
 
@@ -45,8 +47,8 @@ Having states configured we can have a transition between the ``cart`` state to 
        sylius_order_checkout:
            transitions:
                address:
-                   from: [cart, addressed, shipping_selected, payment_selected]  # here you specify which state is the initial 
-                   to: addressed                                                 # there you specify which state is final for that transition
+                   from: [cart, addressed, shipping_selected, shipping_skipped, payment_selected, payment_skipped]  # here you specify which state is the initial
+                   to: addressed                                                                                    # there you specify which state is final for that transition
 
 Callbacks
 ---------
@@ -65,9 +67,10 @@ Having a configured transition, you can attach a callback to it either before or
                   # callbacks may be called before or after specified transitions, in the checkout state machine we've got callbacks only after transitions
                   after:
                        sylius_process_cart:
-                           on: ["address", "select_shipping", "select_payment"]
+                           on: ["select_shipping", "address", "select_payment", "skip_shipping", "skip_payment"]
                            do: ["@sylius.order_processing.order_processor", "process"]
                            args: ["object"]
+                           priority: -200
 
 Configuration
 -------------
@@ -76,8 +79,8 @@ In order to use a state machine, you have to define a graph beforehand.
 A graph is a definition of states, transitions and optionally callbacks - all attached on an object from your domain.
 Multiple graphs may be attached to the same object.
 
-In **Sylius** the best example of a state machine is the one from checkout. It has five states available:
-``cart``, ``addressed``, ``shipping_selected``, ``payment_selected`` and ``completed`` - which can be achieved by applying some transitions to the entity.
+In **Sylius** the best example of a state machine is the one from checkout. It has seven states available:
+``cart``, ``addressed``, ``shipping_selected``, ``shipping_skipped``, ``payment_skipped``, ``payment_selected`` and ``completed`` - which can be achieved by applying some transitions to the entity.
 For example, when selecting a shipping method during the shipping step of checkout we should apply the ``select_shipping`` transition, and after that the state
 would become ``shipping_selected``.
 
@@ -95,42 +98,66 @@ would become ``shipping_selected``.
                cart: ~
                addressed: ~
                shipping_selected: ~
+               shipping_skipped: ~
+               payment_skipped: ~
                payment_selected: ~
                completed: ~
            # list of all possible transitions:
            transitions:
                address:
-                   from: [cart, addressed, shipping_selected, payment_selected] # here you specify which state is the initial
-                   to: addressed                                                # there you specify which state is final for that transition
+                   from: [cart, addressed, shipping_selected, shipping_skipped, payment_selected, payment_skipped] # here you specify which state is the initial
+                   to: addressed                                                                                   # there you specify which state is final for that transition
                select_shipping:
-                   from: [addressed, shipping_selected, payment_selected]
+                   from: [addressed, shipping_selected, payment_selected, payment_skipped]
                    to: shipping_selected
+                skip_payment:
+                    from: [shipping_selected, shipping_skipped]
+                    to: payment_skipped
                select_payment:
-                   from: [payment_selected, shipping_selected]
+                   from: [payment_selected, shipping_skipped, shipping_selected]
                    to: payment_selected
                complete:
-                   from: [payment_selected]
+                   from: [payment_selected, payment_skipped]
                    to: completed
            # list of all callbacks:
            callbacks:
            # callbacks may be called before or after specified transitions, in the checkout state machine we've got callbacks only after transitions
                after:
-                   sylius_process_cart:
-                       on: ["address", "select_shipping", "select_payment"]
-                       do: ["@sylius.order_processing.order_processor", "process"]
-                       args: ["object"]
-                   sylius_create_order:
-                       on: ["complete"]
-                       do: ["@sm.callback.cascade_transition", "apply"]
-                       args: ["object", "event", "'create'", "'sylius_order'"]
-                   sylius_hold_inventory:
-                       on: ["complete"]
-                       do: ["@sylius.inventory.order_inventory_operator", "hold"]
-                       args: ["object"]
-                   sylius_assign_token:
-                       on: ["complete"]
-                       do: ["@sylius.unique_id_based_order_token_assigner", "assignTokenValueIfNotSet"]
-                       args: ["object"]
+                    sylius_process_cart:
+                        on: ["select_shipping", "address", "select_payment", "skip_shipping", "skip_payment"]
+                        do: ["@sylius.order_processing.order_processor", "process"]
+                        args: ["object"]
+                        priority: -200
+                    sylius_create_order:
+                        on: ["complete"]
+                        do: ["@sm.callback.cascade_transition", "apply"]
+                        args: ["object", "event", "'create'", "'sylius_order'"]
+                        priority: -400
+                    sylius_save_checkout_completion_date:
+                        on: ["complete"]
+                        do: ["object", "completeCheckout"]
+                        args: ["object"]
+                        priority: -300
+                    sylius_skip_shipping:
+                        on: ["address"]
+                        do: ["@sylius.state_resolver.order_checkout", "resolve"]
+                        args: ["object"]
+                        priority: -100
+                    sylius_skip_payment:
+                        on: ["select_shipping"]
+                        do: ["@sylius.state_resolver.order_checkout", "resolve"]
+                        args: ["object"]
+                        priority: -100
+                    sylius_control_payment_state:
+                        on: ["complete"]
+                        do: ["@sylius.state_resolver.order_payment", "resolve"]
+                        args: ["object"]
+                        priority: -200
+                    sylius_control_shipping_state:
+                        on: ["complete"]
+                        do: ["@sylius.state_resolver.order_shipping", "resolve"]
+                        args: ["object"]
+                        priority: -100
 
 Learn more
 ----------

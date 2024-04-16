@@ -29,9 +29,9 @@ final class ProductVariantOptionValueFilter extends AbstractFilter
         private readonly IriConverterInterface $iriConverter,
         ManagerRegistry $managerRegistry,
         ?RequestStack $requestStack = null,
-        LoggerInterface $logger = null,
-        array $properties = null,
-        NameConverterInterface $nameConverter = null,
+        ?LoggerInterface $logger = null,
+        ?array $properties = null,
+        ?NameConverterInterface $nameConverter = null,
     ) {
         parent::__construct($managerRegistry, $requestStack, $logger, $properties, $nameConverter);
     }
@@ -42,7 +42,7 @@ final class ProductVariantOptionValueFilter extends AbstractFilter
         QueryBuilder $queryBuilder,
         QueryNameGeneratorInterface $queryNameGenerator,
         string $resourceClass,
-        Operation $operation = null,
+        ?Operation $operation = null,
         array $context = [],
     ): void {
         if ($property !== 'optionValues') {

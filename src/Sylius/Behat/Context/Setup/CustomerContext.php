@@ -180,7 +180,7 @@ final class CustomerContext implements Context
         $email,
         $firstName = null,
         $lastName = null,
-        \DateTimeInterface $createdAt = null,
+        ?\DateTimeInterface $createdAt = null,
         $phoneNumber = null,
     ) {
         /** @var CustomerInterface $customer */

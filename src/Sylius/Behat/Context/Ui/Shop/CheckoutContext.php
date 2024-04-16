@@ -118,7 +118,7 @@ final class CheckoutContext implements Context
      * @When /^I proceed selecting ("[^"]+" as billing country) with "([^"]+)" method$/
      */
     public function iProceedSelectingBillingCountryAndShippingMethod(
-        CountryInterface $shippingCountry = null,
+        ?CountryInterface $shippingCountry = null,
         ?string $shippingMethodName = null,
     ): void {
         $this->addressingContext->iProceedSelectingBillingCountry($shippingCountry);

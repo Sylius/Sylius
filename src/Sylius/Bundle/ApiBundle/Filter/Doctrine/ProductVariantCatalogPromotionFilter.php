@@ -30,9 +30,9 @@ final class ProductVariantCatalogPromotionFilter extends AbstractFilter
         private IriConverterInterface $iriConverter,
         ManagerRegistry $managerRegistry,
         ?RequestStack $requestStack = null,
-        LoggerInterface $logger = null,
-        array $properties = null,
-        NameConverterInterface $nameConverter = null,
+        ?LoggerInterface $logger = null,
+        ?array $properties = null,
+        ?NameConverterInterface $nameConverter = null,
     ) {
         parent::__construct($managerRegistry, $requestStack, $logger, $properties, $nameConverter);
     }
@@ -43,7 +43,7 @@ final class ProductVariantCatalogPromotionFilter extends AbstractFilter
         QueryBuilder $queryBuilder,
         QueryNameGeneratorInterface $queryNameGenerator,
         string $resourceClass,
-        Operation $operation = null,
+        ?Operation $operation = null,
         array $context = [],
     ): void {
         if ('catalogPromotion' !== $property) {
