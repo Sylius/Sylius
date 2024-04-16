@@ -31,12 +31,6 @@
             <tag name="api_platform.data_persister" />
         </service>
 
-        <service id="Sylius\Bundle\ApiBundle\DataPersister\ChannelDataPersister">
-            <argument type="service" id="api_platform.doctrine.orm.data_persister" />
-            <argument type="service" id="sylius.checker.channel_deletion" />
-            <tag name="api_platform.data_persister" />
-        </service>
-
         <service id="Sylius\Bundle\ApiBundle\DataPersister\MessengerDataPersister">
             <argument type="service" id="api_platform.messenger.data_persister" />
             <tag name="api_platform.data_persister" />

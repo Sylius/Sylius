@@ -22,5 +22,12 @@
             <argument type="service" id="Sylius\Component\Addressing\Checker\CountryProvincesDeletionCheckerInterface" />
             <tag name="api_platform.state_processor" />
         </service>
+
+        <service id="sylius_api.state_processor.shop.channel" class="Sylius\Bundle\ApiBundle\StateProcessor\ChannelProcessor">
+            <argument type="service" id="api_platform.doctrine.orm.state.persist_processor" />
+            <argument type="service" id="api_platform.doctrine.orm.state.remove_processor" />
+            <argument type="service" id="Sylius\Component\Channel\Checker\ChannelDeletionCheckerInterface" />
+            <tag name="api_platform.state_processor" />
+        </service>
     </services>
 </container>
