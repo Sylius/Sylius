@@ -7,29 +7,20 @@
 {% set product = product_review.reviewSubject %}
 
 {% block content %}
-    <div>
-        <div>
-            {{ sylius_template_event('sylius.shop.product_review.create.product_box', _context) }}
-        </div>
-        <div>
-            <div>
-                {{ 'sylius.ui.write_your_own_review'|trans }}
-                {{ 'sylius.ui.you_are_reviewing'|trans }}
-                <strong>{{ product.name }}</strong>.
+    <div class="container">
+        <div class="row">
+            <div class="col-12 col-md-5 col-lg-4">
+                {{ sylius_template_event('sylius.shop.product_review.create.sidebar', _context) }}
             </div>
+            <div class="col-12 col-md-7 col-lg-8">
+                <div>
+                    {{ 'sylius.ui.write_your_own_review'|trans }}
+                    {{ 'sylius.ui.you_are_reviewing'|trans }}
+                    <strong>{{ product.name }}</strong>.
+                </div>
 
-            {{ sylius_template_event('sylius.shop.product_review.create.before_form', {'product_review': product_review}) }}
-
-            {{ form_start(form, {'action': path('sylius_shop_product_review_create', {'slug': product.slug, '_locale': product.translation.locale}), 'attr': {'novalidate': 'novalidate'}}) }}
-            {% include '@SyliusShop/ProductReview/_form.html.twig' %}
-
-            {{ sylius_template_event('sylius.shop.product_review.create.form', {'product_review': product_review, 'form': form}) }}
-
-            {{ form_row(form._token) }}
-            <button type="submit" {{ sylius_test_html_attribute('add') }}>
-                {{ 'sylius.ui.add'|trans }}
-            </button>
-            {{ form_end(form, {'render_rest': false}) }}
+                {{ sylius_template_event('sylius.shop.product_review.create.main', _context) }}
+            </div>
         </div>
     </div>
 {% endblock %}

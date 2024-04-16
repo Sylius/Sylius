@@ -4,7 +4,7 @@
 
 {% block content %}
     <div class="container">
-        {{ sylius_template_event('sylius.shop.product.show.top', _context) }}
+        {{ sylius_template_event('sylius.shop.product.show.header', _context) }}
 
         <div class="row g-lg-5 g-xl-6 mb-6">
             <div class="col-12 col-lg-4 order-lg-1">
@@ -13,12 +13,12 @@
                 </div>
             </div>
             <div class="col-12 col-lg-8">
-                {{ sylius_template_event('sylius.shop.product.show.content', _context) }}
+                {{ sylius_template_event('sylius.shop.product.show.main', _context) }}
             </div>
         </div>
 
         <div class="mb-6">
-            {{ sylius_template_event('sylius.shop.product.show.bottom', _context) }}
+            {{ sylius_template_event('sylius.shop.product.show.footer', _context) }}
         </div>
     </div>
 {% endblock %}
