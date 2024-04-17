@@ -37,13 +37,29 @@
 {% endblock %}
 
 {% block sylius_promotion_rule_row %}
-    <div{% with {attr: row_attr|merge({class: row_attr.class|default('mb-3 card')|trim})} %}{{ block('attributes') }}{% endwith %}>
-        <div class="card-body" data-skip-morph {{ sylius_test_html_attribute('promotion-rule') }}>
+    <div {% with {attr: row_attr|merge({class: row_attr.class|default('mb-3 card')|trim})} %}{{ block('attributes') }}{% endwith %}>
+        <div class="card-body" {{ sylius_test_html_attribute('promotion-rule') }}>
             {{- form_label(form) -}}
             {{- form_widget(form) -}}
             {{- form_errors(form) -}}
             {{- form_row(button_delete, sylius_test_form_attribute('delete-rule')) -}}
         </div>
+    </div>
+{% endblock %}
+
+{% block sylius_promotion_rule_has_taxon_configuration_row %}
+    <div data-skip-morph {% with {attr: row_attr|merge({class: row_attr.class|default()|trim})} %}{{ block('attributes') }}{% endwith %}>
+        {{- form_label(form) -}}
+        {{- form_widget(form) -}}
+        {{- form_errors(form) -}}
+    </div>
+{% endblock %}
+
+{% block sylius_promotion_rule_contains_product_configuration_row %}
+    <div data-skip-morph {% with {attr: row_attr|merge({class: row_attr.class|default()|trim})} %}{{ block('attributes') }}{% endwith %}>
+        {{- form_label(form) -}}
+        {{- form_widget(form) -}}
+        {{- form_errors(form) -}}
     </div>
 {% endblock %}
 
