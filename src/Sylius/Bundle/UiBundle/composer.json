@@ -44,7 +44,7 @@
         "laminas/laminas-stdlib": "^3.3.1"
     },
     "conflict": {
-        "twig/twig": "^1.0"
+        "twig/twig": "^1.0 || 3.9.0"
     },
     "require-dev": {
         "matthiasnoback/symfony-config-test": "^4.2",
