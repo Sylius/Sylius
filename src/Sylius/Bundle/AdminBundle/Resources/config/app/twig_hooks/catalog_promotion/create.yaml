@@ -1,0 +1,54 @@
+twig_hooks:
+    hooks:
+        'sylius_admin.catalog_promotion.create.content':
+            form:
+                component: 'sylius_admin:catalog_promotion:form'
+                data:
+                    resource: '@=resource'
+                    form: '@=form'
+                    parentMainHook: '@=parent_main_hook'
+                    parentFallbackHook: '@=parent_fallback_hook'
+
+        'sylius_admin.catalog_promotion.create.content.form':
+            sections:
+                template: '@SyliusAdmin/catalog_promotion/form/sections.html.twig'
+
+        'sylius_admin.catalog_promotion.create.content.form.sections':
+            general:
+                template: '@SyliusAdmin/catalog_promotion/form/sections/general.html.twig'
+            configuration:
+                template: '@SyliusAdmin/catalog_promotion/form/sections/configuration.html.twig'
+            translations:
+                template: '@SyliusAdmin/catalog_promotion/form/sections/translations.html.twig'
+            scopes_and_actions:
+                template: '@SyliusAdmin/catalog_promotion/form/sections/scopes_and_actions.html.twig'
+
+        'sylius_admin.catalog_promotion.create.content.form.sections.general':
+            _name:
+                template: '@SyliusAdmin/catalog_promotion/form/sections/general/name.html.twig'
+            code:
+                template: '@SyliusAdmin/catalog_promotion/form/sections/general/code.html.twig'
+            channels:
+                template: '@SyliusAdmin/catalog_promotion/form/sections/general/channels.html.twig'
+            
+        'sylius_admin.catalog_promotion.create.content.form.sections.configuration#left':
+            priority:
+                template: '@SyliusAdmin/catalog_promotion/form/sections/configuration/priority.html.twig'
+            start_date:
+                template: '@SyliusAdmin/catalog_promotion/form/sections/configuration/start_date.html.twig'
+            end_date:
+                template: '@SyliusAdmin/catalog_promotion/form/sections/configuration/end_date.html.twig'
+
+        'sylius_admin.catalog_promotion.create.content.form.sections.configuration#right':
+            header:
+                template: '@SyliusAdmin/catalog_promotion/form/sections/configuration/header.html.twig'
+            coupon_based:
+                template: '@SyliusAdmin/catalog_promotion/form/sections/configuration/enabled.html.twig'
+            exclusive:
+                template: '@SyliusAdmin/catalog_promotion/form/sections/configuration/exclusive.html.twig'
+
+        'sylius_admin.catalog_promotion.create.content.form.sections.scopes_and_actions':
+            scopes:
+                template: '@SyliusAdmin/catalog_promotion/form/sections/scopes_and_actions/scopes.html.twig'
+            actions:
+                template: '@SyliusAdmin/catalog_promotion/form/sections/scopes_and_actions/actions.html.twig'

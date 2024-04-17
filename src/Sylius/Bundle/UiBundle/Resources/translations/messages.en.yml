@@ -38,6 +38,7 @@ sylius:
         add_new_role: 'Add new role'
         add_province: 'Add province'
         add_rule: 'Add rule'
+        add_scope: 'Add scope'
         add_to_cart: 'Add to cart'
         add_value: 'Add value'
         add_your_review: 'Add your review'
