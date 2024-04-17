@@ -1,25 +1,28 @@
-<div>
-    <a href="{{ path('sylius_shop_homepage') }}" class="section">{{ 'sylius.ui.home'|trans }}</a>
+{% from '@SyliusShop/Shared/breadcrumbs.html.twig' import breadcrumbs as breadcrumbs %}
 
-    {% if product.mainTaxon is not null %}
-        {% set taxon = product.mainTaxon %}
-        {% set ancestors = taxon.ancestors|reverse %}
+{% set items = [] %}
 
-        {% for ancestor in ancestors %}
-            {% if ancestor.isRoot()  or not ancestor.enabled %}
-                <div class="section">{{ ancestor.name }}</div>
-            {% else %}
-                <a href="{{ path('sylius_shop_product_index', {'slug': ancestor.slug, '_locale': ancestor.translation.locale}) }}" class="section">{{ ancestor.name }}</a>
-            {% endif %}
-            <div class="divider"> / </div>
-        {% endfor %}
+{% set items = items|merge([{ path: path('sylius_shop_homepage'), label: 'sylius.ui.home'|trans }]) %}
 
-        {% if taxon.enabled %}
-            <a href="{{ path('sylius_shop_product_index', {'slug': taxon.slug, '_locale': taxon.translation.locale}) }}" class="section">{{ taxon.name }}</a>
+{% if product.mainTaxon is not null %}
+    {% set taxon = product.mainTaxon %}
+    {% set ancestors = taxon.ancestors|reverse %}
+
+    {% for ancestor in ancestors %}
+        {% if ancestor.isRoot()  or not ancestor.enabled %}
+            {% set items = items|merge([{ label: ancestor.name }]) %}
         {% else %}
-            <div class="section">{{ taxon.name }}</div>
+            {% set items = items|merge([{ path: path('sylius_shop_product_index', {'slug': ancestor.slug, '_locale': ancestor.translation.locale}), label: ancestor.name }]) %}
         {% endif %}
-        <div class="divider"> / </div>
+    {% endfor %}
+
+    {% if taxon.enabled %}
+        {% set items = items|merge([{ path: path('sylius_shop_product_index', {'slug': taxon.slug, '_locale': taxon.translation.locale}), label: taxon.name }]) %}
+    {% else %}
+        {% set items = items|merge([{ label: taxon.name }]) %}
     {% endif %}
-    <div class="active section">{{ product.name }}</div>
-</div>
+{% endif %}
+
+{% set items = items|merge([{ label: product.name, active: true }]) %}
+
+{{ breadcrumbs(items) }}
