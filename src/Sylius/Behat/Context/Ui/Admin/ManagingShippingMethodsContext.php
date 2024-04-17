@@ -455,7 +455,7 @@ final class ManagingShippingMethodsContext implements Context
      */
     public function thisShippingMethodShouldBeDisabled(ShippingMethodInterface $shippingMethod)
     {
-        $this->assertShippingMethodState($shippingMethod, false);
+        Assert::true($this->indexPage->isShippingMethodDisabled($shippingMethod));
     }
 
     /**
@@ -463,7 +463,7 @@ final class ManagingShippingMethodsContext implements Context
      */
     public function thisShippingMethodShouldBeEnabled(ShippingMethodInterface $shippingMethod)
     {
-        $this->assertShippingMethodState($shippingMethod, true);
+        Assert::true($this->indexPage->isShippingMethodEnabled($shippingMethod));
     }
 
     /**
@@ -597,19 +597,6 @@ final class ManagingShippingMethodsContext implements Context
     private function assertFieldValidationMessage(string $element, string $expectedMessage): void
     {
         Assert::same($this->shippingMethodForm->getValidationMessage($element), $expectedMessage);
-    }
-
-    /**
-     * @param bool $state
-     */
-    private function assertShippingMethodState(ShippingMethodInterface $shippingMethod, $state)
-    {
-        $this->iWantToBrowseShippingMethods();
-
-        Assert::true($this->indexPage->isSingleResourceOnPage([
-            'name' => $shippingMethod->getName(),
-            'enabled' => $state ? 'Enabled' : 'Disabled',
-        ]));
     }
 
     protected function resolveCurrentPage(): SymfonyPageInterface
