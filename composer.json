@@ -188,7 +188,9 @@
         "api-platform/core": "2.7.17",
         "doctrine/orm": ">= 2.16.0",
         "lexik/jwt-authentication-bundle": "^2.18",
-        "stof/doctrine-extensions-bundle": "1.8.0"
+        "stof/doctrine-extensions-bundle": "1.8.0",
+        "twig/twig": "3.9.0",
+        "twig/intl-extra": "3.9.0"
     },
     "require-dev": {
         "behat/behat": "^3.6.1",
