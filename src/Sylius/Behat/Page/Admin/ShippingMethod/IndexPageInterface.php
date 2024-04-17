@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Behat\Page\Admin\ShippingMethod;
 
 use Sylius\Behat\Page\Admin\Crud\IndexPageInterface as BaseIndexPageInterface;
+use Sylius\Component\Core\Model\ShippingMethodInterface;
 
 interface IndexPageInterface extends BaseIndexPageInterface
 {
@@ -26,4 +27,8 @@ interface IndexPageInterface extends BaseIndexPageInterface
     public function deleteShippingMethod(string $name): void;
 
     public function restoreShippingMethod(string $name): void;
+
+    public function isShippingMethodEnabled(ShippingMethodInterface $shippingMethod): bool;
+
+    public function isShippingMethodDisabled(ShippingMethodInterface $shippingMethod): bool;
 }
