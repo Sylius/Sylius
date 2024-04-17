@@ -92,12 +92,18 @@ sylius_ui:
 
         sylius.shop.homepage:
             blocks:
-                latest_products:
-                    template: "@SyliusShop/Homepage/_latestProducts.html.twig"
-                    priority: 50
-                products_grid:
-                    template: "@SyliusShop/Homepage/_productsGrid.html.twig"
+                banner:
+                    template: "@SyliusShop/Homepage/banner.html.twig"
+                    priority: 40
+                latest_deals:
+                    template: "@SyliusShop/Homepage/latest_deals.html.twig"
+                    priority: 30
+                new_collection:
+                    template: "@SyliusShop/Homepage/new_collection.html.twig"
                     priority: 20
+                latest_products:
+                    template: "@SyliusShop/Homepage/latest_products.html.twig"
+                    priority: 10
 
         sylius.shop.cart.widget.button:
             blocks:
