@@ -61,6 +61,7 @@
         </service>
 
         <service id="sylius_admin.form.extension.type.channel_price_history_config" class="Sylius\Bundle\AdminBundle\Form\Extension\ChannelPriceHistoryConfigTypeExtension">
+            <argument type="service" id="sylius.repository.taxon" />
             <argument type="service">
                 <service class="\Symfony\Component\Form\Extension\Core\DataMapper\DataMapper" />
             </argument>
