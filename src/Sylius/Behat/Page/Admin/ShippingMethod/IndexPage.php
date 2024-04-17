@@ -40,6 +40,12 @@ class IndexPage extends BaseIndexPage implements IndexPageInterface
         $this->getElement('confirm_action_button')->press();
     }
 
+    public function deleteShippingMethod(string $name): void
+    {
+        $this->deleteResourceOnPage(['name' => $name]);
+        $this->getElement('confirm_action_button')->press();
+    }
+
     public function restoreShippingMethod(string $name): void
     {
         $actions = $this->getActionsForResource(['name' => $name]);
