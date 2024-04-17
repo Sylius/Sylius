@@ -40,6 +40,8 @@ sylius:
         banner_content: 'Brace yourself! Winter is coming'
         banner_button: 'Check out the new collection'
         carousel_header: 'Featured products'
+        latest_deals: 'Latest deals'
+        new_collection: 'New collection'
         newsletter: 'Newsletter'
         newsletter_description: 'Subscribe to our newsletter to see new offers that are waiting for you! (<i>You can modify this content by overriding "sylius.homepage.newsletter_description" key in your translation file</i>)'
         subscribe: 'Subscribe'
