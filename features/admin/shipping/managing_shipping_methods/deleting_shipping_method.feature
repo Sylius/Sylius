@@ -9,8 +9,9 @@ Feature: Deleting a shipping method
         And the store allows shipping with "UPS Ground"
         And I am logged in as an administrator
 
-    @todo @ui @api
+    @ui @javascript @api
     Scenario: Deleted shipping method should disappear from the registry
-        When I delete shipping method "UPS Ground"
+        When I browse shipping methods
+        And I delete shipping method "UPS Ground"
         Then I should be notified that it has been successfully deleted
         Then this shipping method should no longer exist in the registry

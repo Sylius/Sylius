@@ -23,5 +23,7 @@ interface IndexPageInterface extends BaseIndexPageInterface
 
     public function archiveShippingMethod(string $name): void;
 
+    public function deleteShippingMethod(string $name): void;
+
     public function restoreShippingMethod(string $name): void;
 }
