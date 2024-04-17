@@ -129,6 +129,22 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
         $this->getElement('filter')->press();
     }
 
+    protected function toggleFilters(): void
+    {
+        $filtersToggle = $this->getElement('filters_toggle');
+        $filtersToggle->click();
+        $this->getDocument()->waitFor(1, function () use ($filtersToggle) {
+            $accordionCollapse = $filtersToggle->find('css', '.accordion-collapse');
+
+            return null !== $accordionCollapse && !$accordionCollapse->hasClass('collapsing');
+        });
+    }
+
+    protected function areFiltersVisible(): bool
+    {
+        return !$this->getElement('filters_toggle')->hasClass('collapsed');
+    }
+
     public function bulkDelete(): void
     {
         $this->getElement('bulk_actions')->pressButton('Delete');
@@ -167,6 +183,7 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
             'confirmation_button' => '#confirmation-button',
             'enabled_filter' => '#criteria_enabled',
             'filter' => '[data-test-filter]',
+            'filters_toggle' => '.accordion-button',
             'table' => '.table',
         ]);
     }

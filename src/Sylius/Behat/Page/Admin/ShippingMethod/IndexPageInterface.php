@@ -20,4 +20,8 @@ interface IndexPageInterface extends BaseIndexPageInterface
     public function chooseArchival(string $isArchival): void;
 
     public function isArchivalFilterEnabled(): bool;
+
+    public function archiveShippingMethod(string $name): void;
+
+    public function restoreShippingMethod(string $name): void;
 }
