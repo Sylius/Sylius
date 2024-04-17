@@ -43,6 +43,9 @@
         "phpunit/phpunit": "^8.5",
         "symfony/dependency-injection": "^5.4 || ^6.0"
     },
+    "conflict": {
+        "twig/twig": "3.9.0"
+    },
     "config": {
         "allow-plugins": {
             "symfony/flex": true

@@ -47,6 +47,9 @@
         "symfony/dotenv": "^5.4 || ^6.0",
         "php-http/message-factory": "^1.0"
     },
+    "conflict": {
+        "twig/twig": "3.9.0"
+    },
     "config": {
         "allow-plugins": {
             "symfony/flex": true
