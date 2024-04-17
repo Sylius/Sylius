@@ -94,5 +94,10 @@
             <argument type="service" id="form.factory" />
             <argument>Sylius\Bundle\ChannelBundle\Form\Type\ChannelType</argument>
         </service>
+
+        <service id="Sylius\Bundle\AdminBundle\Twig\Component\CatalogPromotion\FormComponent">
+            <argument type="service" id="form.factory" />
+            <argument>Sylius\Bundle\PromotionBundle\Form\Type\CatalogPromotionType</argument>
+        </service>
     </services>
 </container>
