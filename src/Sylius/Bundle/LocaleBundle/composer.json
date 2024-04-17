@@ -34,7 +34,7 @@
     },
     "conflict": {
         "doctrine/orm": ">= 2.16.0",
-        "twig/twig": "^1.0"
+        "twig/twig": "^1.0 || 3.9.0"
     },
     "require-dev": {
         "doctrine/orm": "^2.13",

@@ -74,3 +74,13 @@ references related issues.
 
   This version introduced class aliases, which lead to a fatal error:
   `The autoloader expected class "ApiPlatform\Core\Bridge\Symfony\Bundle\DependencyInjection\ApiPlatformExtension" to be defined in file ".../vendor/api-platform/core/src/Core/Bridge/Symfony/Bundle/DependencyInjection/ApiPlatformExtension.php". The file was found but the class was not in it, the class name or namespace probably has a typo.`
+
+- `twig/twig:3.9.0`:
+
+  This version has a bug, which lead to a fatal error:
+  `An exception has been thrown during the rendering of a template ("Warning: Undefined variable $blocks").`
+
+- `twig/intl-extra:3.9.0`:
+
+  This version call function `dateConverter` which is only available in `twig/twig:3.9.0`, that leads to a fatal error:
+  `An exception has been thrown during the rendering of a template ("Call to undefined method Twig\Extension\CoreExtension::dateConverter()").`
