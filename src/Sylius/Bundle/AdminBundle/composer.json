@@ -53,6 +53,10 @@
         "symfony/dependency-injection": "^6.4.1",
         "symfony/dotenv": "^6.4.0"
     },
+    "conflict": {
+        "twig/twig": "3.9.0",
+        "twig/intl-extra": "3.9.0"
+    },
     "config": {
         "allow-plugins": {
             "symfony/flex": true
