@@ -9,20 +9,20 @@ Feature: Archiving obsolete shipping methods
         And the store allows shipping with "UPS Carrier" and "FedEx Carrier"
         And I am logged in as an administrator
 
-    @todo @ui @api
+    @ui @javascript @api
     Scenario: Archiving a shipping method
         Given I am browsing shipping methods
         When I archive the "UPS Carrier" shipping method
         Then the only shipping method on the list should be "FedEx Carrier"
 
-    @todo @ui @api
+    @ui @javascript @api
     Scenario: Seeing only archived shipping methods
         Given the shipping method "UPS Carrier" is archival
         And I am browsing shipping methods
         When I filter archival shipping methods
         Then the only shipping method on the list should be "UPS Carrier"
 
-    @todo @ui @api
+    @ui @javascript @api
     Scenario: Restoring an archival shipping method
         Given the shipping method "UPS Carrier" is archival
         And I am browsing archival shipping methods

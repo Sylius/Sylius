@@ -284,19 +284,17 @@ final class ManagingShippingMethodsContext implements Context
     /**
      * @When I archive the :name shipping method
      */
-    public function iArchiveTheShippingMethod($name)
+    public function iArchiveTheShippingMethod(string $name): void
     {
-        $actions = $this->indexPage->getActionsForResource(['name' => $name]);
-        $actions->pressButton('Archive');
+        $this->indexPage->archiveShippingMethod($name);
     }
 
     /**
      * @When I restore the :name shipping method
      */
-    public function iRestoreTheShippingMethod($name)
+    public function iRestoreTheShippingMethod(string $name): void
     {
-        $actions = $this->indexPage->getActionsForResource(['name' => $name]);
-        $actions->pressButton('Restore');
+        $this->indexPage->restoreShippingMethod($name);
     }
 
     /**

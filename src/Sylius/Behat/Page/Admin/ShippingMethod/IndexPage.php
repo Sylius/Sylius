@@ -19,6 +19,10 @@ class IndexPage extends BaseIndexPage implements IndexPageInterface
 {
     public function chooseArchival(string $isArchival): void
     {
+        if (!$this->areFiltersVisible()) {
+            $this->toggleFilters();
+        }
+
         $this->getElement('filter_archival')->selectOption($isArchival);
     }
 
@@ -29,9 +33,24 @@ class IndexPage extends BaseIndexPage implements IndexPageInterface
         return null !== $archival;
     }
 
+    public function archiveShippingMethod(string $name): void
+    {
+        $actions = $this->getActionsForResource(['name' => $name]);
+        $actions->pressButton('Archive');
+        $this->getElement('confirm_action_button')->press();
+    }
+
+    public function restoreShippingMethod(string $name): void
+    {
+        $actions = $this->getActionsForResource(['name' => $name]);
+        $actions->pressButton('Restore');
+        $this->getElement('confirm_action_button')->press();
+    }
+
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
+            'confirm_action_button' => '[data-confirm-btn-true]',
             'filter_archival' => '#criteria_archival',
         ]);
     }
