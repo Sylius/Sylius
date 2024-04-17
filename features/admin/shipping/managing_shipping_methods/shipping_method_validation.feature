@@ -27,7 +27,7 @@ Feature: Shipping method validation
         Then I should be notified that code is required
         And shipping method with name "FedEx Carrier" should not be added
 
-    @todo @ui @api
+    @ui @api
     Scenario: Trying to add a new shipping method with a too long code
         When I want to create a new shipping method
         And I name it "FedEx Carrier" in "English (United States)"
