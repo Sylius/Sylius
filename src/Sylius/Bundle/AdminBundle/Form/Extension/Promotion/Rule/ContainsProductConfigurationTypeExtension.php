@@ -35,6 +35,9 @@ final class ContainsProductConfigurationTypeExtension extends AbstractTypeExtens
         $builder
             ->add('product_code', ProductAutocompleteChoiceType::class, [
                 'label' => 'sylius.form.promotion_action.add_product_configuration.product',
+                'row_attr' => [
+                    'data-skip-morph' => '',
+                ],
             ])
             ->get('product_code')->addModelTransformer(
                 new ReversedTransformer(new ResourceToIdentifierTransformer($this->productRepository, 'code')),

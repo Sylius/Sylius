@@ -34,6 +34,9 @@ final class HasTaxonConfigurationTypeExtension extends AbstractTypeExtension
             ->add('taxons', TaxonAutocompleteChoiceType::class, [
                 'label' => 'sylius.form.promotion_rule.has_taxon.taxons',
                 'multiple' => true,
+                'row_attr' => [
+                    'data-skip-morph' => '',
+                ],
             ])
             ->get('taxons')->addModelTransformer($this->taxonsToCodesTransformer)
         ;

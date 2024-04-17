@@ -47,22 +47,6 @@
     </div>
 {% endblock %}
 
-{% block sylius_promotion_rule_has_taxon_configuration_row %}
-    <div data-skip-morph {% with {attr: row_attr|merge({class: row_attr.class|default()|trim})} %}{{ block('attributes') }}{% endwith %}>
-        {{- form_label(form) -}}
-        {{- form_widget(form) -}}
-        {{- form_errors(form) -}}
-    </div>
-{% endblock %}
-
-{% block sylius_promotion_rule_contains_product_configuration_row %}
-    <div data-skip-morph {% with {attr: row_attr|merge({class: row_attr.class|default()|trim})} %}{{ block('attributes') }}{% endwith %}>
-        {{- form_label(form) -}}
-        {{- form_widget(form) -}}
-        {{- form_errors(form) -}}
-    </div>
-{% endblock %}
-
 {% block sylius_channel_collection_row %}
     <div{% with {attr: row_attr|merge({class: row_attr.class|default('mb-3 card')|trim})} %}{{ block('attributes') }}{% endwith %}>
         <div class="card-header">
