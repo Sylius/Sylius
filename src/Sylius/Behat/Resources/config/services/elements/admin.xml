@@ -35,6 +35,12 @@
         <service id="Sylius\Behat\Element\Admin\TaxRate\FilterElement" parent="sylius.behat.element" />
 
         <service
+            id="sylius.behat.element.admin.product_association_type.form"
+            class="Sylius\Behat\Element\Admin\ProductAssociationType\FormElement"
+            parent="sylius.behat.element.admin.crud.form"
+        />
+
+        <service
             id="Sylius\Behat\Element\Admin\Channel\DiscountedProductsCheckingPeriodInputElementInterface"
             class="Sylius\Behat\Element\Admin\Channel\DiscountedProductsCheckingPeriodInputElement"
             parent="sylius.behat.element"
