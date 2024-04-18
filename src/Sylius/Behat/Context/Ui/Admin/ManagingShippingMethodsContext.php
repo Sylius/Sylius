@@ -594,6 +594,13 @@ final class ManagingShippingMethodsContext implements Context
         );
     }
 
+    /**
+     * @Then the :shippingMethod shipping method should be successfully created
+     */
+    public function theShippingMethodShouldBeSuccessfullyCreated(ShippingMethodInterface $shippingMethod): void
+    {
+    }
+
     private function assertFieldValidationMessage(string $element, string $expectedMessage): void
     {
         Assert::same($this->shippingMethodForm->getValidationMessage($element), $expectedMessage);

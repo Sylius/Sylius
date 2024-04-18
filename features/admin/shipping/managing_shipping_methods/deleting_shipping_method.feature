@@ -14,4 +14,4 @@ Feature: Deleting a shipping method
         When I browse shipping methods
         And I delete shipping method "UPS Ground"
         Then I should be notified that it has been successfully deleted
-        Then this shipping method should no longer exist in the registry
+        And this shipping method should no longer exist in the registry

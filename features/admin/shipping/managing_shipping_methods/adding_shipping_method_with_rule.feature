@@ -21,8 +21,7 @@ Feature: Adding a new shipping method with rule
         And I specify its amount as 50 for "Web-US" channel
         And I add the "Total weight greater than or equal" rule configured with "20"
         And I add it
-        Then I should be notified that it has been successfully created
-        And the shipping method "FedEx Carrier" should appear in the registry
+        Then the "FedEx Carrier" shipping method should be successfully created
 
     @ui @mink:chromedriver @api
     Scenario: Adding a new shipping method with total weight less than or equal rule
@@ -35,8 +34,7 @@ Feature: Adding a new shipping method with rule
         And I specify its amount as 50 for "Web-US" channel
         And I add the "Total weight less than or equal" rule configured with "20"
         And I add it
-        Then I should be notified that it has been successfully created
-        And the shipping method "FedEx Carrier" should appear in the registry
+        Then the "FedEx Carrier" shipping method should be successfully created
 
     @ui @mink:chromedriver @api
     Scenario: Adding a new shipping method with order total greater than or equal rule
@@ -49,8 +47,7 @@ Feature: Adding a new shipping method with rule
         And I specify its amount as 50 for "Web-US" channel
         And I add the "Items total greater than or equal" rule configured with $200 for "Web-US" channel
         And I add it
-        Then I should be notified that it has been successfully created
-        And the shipping method "FedEx Carrier" should appear in the registry
+        Then the "FedEx Carrier" shipping method should be successfully created
 
     @ui @mink:chromedriver @api
     Scenario: Adding a new shipping method with order total less than or equal rule
@@ -63,5 +60,4 @@ Feature: Adding a new shipping method with rule
         And I specify its amount as 50 for "Web-US" channel
         And I add the "Items total less than or equal" rule configured with $200 for "Web-US" channel
         And I add it
-        Then I should be notified that it has been successfully created
-        And the shipping method "FedEx Carrier" should appear in the registry
+        Then the "FedEx Carrier" shipping method should be successfully created
