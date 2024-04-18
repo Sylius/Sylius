@@ -13,13 +13,12 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Api\Admin;
 
-use ApiPlatform\Api\IriConverterInterface;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Context\Api\Admin\Helper\ValidationTrait;
 use Sylius\Behat\Context\Api\Resources;
-use Sylius\Behat\Service\Converter\SectionAwareIriConverterInterface;
+use Sylius\Behat\Service\Converter\IriConverterInterface;
 use Sylius\Component\Addressing\Model\CountryInterface;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
@@ -39,7 +38,6 @@ final class ManagingChannelsContext implements Context
         private ApiClientInterface $client,
         private ResponseCheckerInterface $responseChecker,
         private IriConverterInterface $iriConverter,
-        private SectionAwareIriConverterInterface $sectionAwareIriConverter,
     ) {
     }
 
@@ -90,7 +88,7 @@ final class ManagingChannelsContext implements Context
      */
     public function iChangeItsMenuTaxonTo(TaxonInterface $taxon): void
     {
-        $this->client->addRequestData('menuTaxon', $this->sectionAwareIriConverter->getIriFromResourceInSection($taxon, 'admin'));
+        $this->client->addRequestData('menuTaxon', $this->iriConverter->getIriFromResourceInSection($taxon, 'admin'));
     }
 
     /**
@@ -111,10 +109,9 @@ final class ManagingChannelsContext implements Context
      */
     public function iChooseAsTheBaseCurrency(?CurrencyInterface $currency = null): void
     {
-        $this->client->addRequestData(
-            'baseCurrency',
-            null === $currency ? $currency : $this->sectionAwareIriConverter->getIriFromResourceInSection($currency, 'admin'),
-        );
+        if ($currency !== null) {
+            $this->client->addRequestData('baseCurrency', $this->iriConverter->getIriFromResource($currency));
+        }
     }
 
     /**
@@ -146,7 +143,7 @@ final class ManagingChannelsContext implements Context
      */
     public function iMakeItAvailableInLocale(LocaleInterface $locale): void
     {
-        $this->client->addRequestData('locales', [$this->sectionAwareIriConverter->getIriFromResourceInSection($locale, 'admin')]);
+        $this->client->addRequestData('locales', [$this->iriConverter->getIriFromResourceInSection($locale, 'admin')]);
     }
 
     /**
@@ -154,7 +151,7 @@ final class ManagingChannelsContext implements Context
      */
     public function iMakeItAvailableOnlyInLocale(LocaleInterface $locale): void
     {
-        $this->client->replaceRequestData('locales', [$this->sectionAwareIriConverter->getIriFromResourceInSection($locale, 'admin')]);
+        $this->client->replaceRequestData('locales', [$this->iriConverter->getIriFromResourceInSection($locale, 'admin')]);
     }
 
     /**
@@ -163,10 +160,11 @@ final class ManagingChannelsContext implements Context
      */
     public function iChooseAsADefaultLocale(?LocaleInterface $locale = null): void
     {
-        $this->client->addRequestData(
-            'defaultLocale',
-            null === $locale ? $locale : $this->sectionAwareIriConverter->getIriFromResourceInSection($locale, 'admin'),
-        );
+        if ($locale !== null) {
+            $this->client->addRequestData(
+                'defaultLocale', $this->iriConverter->getIriFromResourceInSection($locale, 'admin'),
+            );
+        }
     }
 
     /**
@@ -199,8 +197,8 @@ final class ManagingChannelsContext implements Context
     public function iChooseAndAsOperatingCountries(CountryInterface $country, CountryInterface $otherCountry): void
     {
         $this->client->addRequestData('countries', [
-            $this->sectionAwareIriConverter->getIriFromResourceInSection($country, 'admin'),
-            $this->sectionAwareIriConverter->getIriFromResourceInSection($otherCountry, 'admin'),
+            $this->iriConverter->getIriFromResourceInSection($country, 'admin'),
+            $this->iriConverter->getIriFromResourceInSection($otherCountry, 'admin'),
         ]);
     }
 
@@ -225,7 +223,7 @@ final class ManagingChannelsContext implements Context
      */
     public function iSpecifyMenuTaxonAs(TaxonInterface $taxon): void
     {
-        $this->client->addRequestData('menuTaxon', $this->sectionAwareIriConverter->getIriFromResourceInSection($taxon, 'admin'));
+        $this->client->addRequestData('menuTaxon', $this->iriConverter->getIriFromResourceInSection($taxon, 'admin'));
     }
 
     /**
@@ -409,7 +407,7 @@ final class ManagingChannelsContext implements Context
     {
         Assert::same(
             $this->responseChecker->getValue($this->client->show(Resources::CHANNELS, $channel->getCode()), 'menuTaxon'),
-            $this->sectionAwareIriConverter->getIriFromResourceInSection($taxon, 'admin'),
+            $this->iriConverter->getIriFromResourceInSection($taxon, 'admin'),
             sprintf('Channel %s does not have %s menu taxon', $channel->getName(), $taxon->getName()),
         );
     }
@@ -477,7 +475,7 @@ final class ManagingChannelsContext implements Context
                     $channel->getCode(),
                 ),
                 'menuTaxon',
-                $this->sectionAwareIriConverter->getIriFromResourceInSection($taxon, 'admin'),
+                $this->iriConverter->getIriFromResourceInSection($taxon, 'admin'),
             ),
         );
     }
@@ -557,7 +555,7 @@ final class ManagingChannelsContext implements Context
             'currencies',
         );
 
-        Assert::true(in_array($this->sectionAwareIriConverter->getIriFromResourceInSection($currency, 'admin'), $currencies));
+        Assert::true(in_array($this->iriConverter->getIriFromResourceInSection($currency, 'admin'), $currencies));
     }
 
     /**
@@ -579,7 +577,7 @@ final class ManagingChannelsContext implements Context
     {
         Assert::same(
             $this->responseChecker->getValue($this->client->show(Resources::CHANNELS, $channel->getCode()), 'defaultTaxZone'),
-            $this->sectionAwareIriConverter->getIriFromResourceInSection($zone, 'admin'),
+            $this->iriConverter->getIriFromResourceInSection($zone, 'admin'),
             sprintf('Channel %s does not have %s default tax zone', $channel->getName(), $zone),
         );
     }
@@ -594,7 +592,7 @@ final class ManagingChannelsContext implements Context
             'locales',
         );
 
-        Assert::true(in_array($this->sectionAwareIriConverter->getIriFromResourceInSection($locale, 'admin'), $locales));
+        Assert::true(in_array($this->iriConverter->getIriFromResourceInSection($locale, 'admin'), $locales));
     }
 
     /**
@@ -652,7 +650,7 @@ final class ManagingChannelsContext implements Context
     {
         Assert::contains(
             $this->responseChecker->getError($this->client->getLastResponse()),
-            sprintf('%s: Please enter channel %s.', $element, $element),
+            sprintf('%s: Please enter channel %s.', StringInflector::nameToCamelCase($element), $element),
         );
     }
 
@@ -663,7 +661,7 @@ final class ManagingChannelsContext implements Context
     {
         Assert::contains(
             $this->responseChecker->getError($this->client->getLastResponse()),
-            'Expected IRI or nested document for attribute "baseCurrency", "NULL" given.',
+            'baseCurrency: Please enter channel base currency',
         );
     }
 
@@ -674,7 +672,7 @@ final class ManagingChannelsContext implements Context
     {
         Assert::contains(
             $this->responseChecker->getError($this->client->getLastResponse()),
-            'Expected IRI or nested document for attribute "defaultLocale", "NULL" given.',
+            'defaultLocale: Please enter channel default locale',
         );
     }
 
