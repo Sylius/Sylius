@@ -18,8 +18,8 @@ use Behat\Mink\Exception\ElementNotFoundException;
 use Sylius\Behat\Service\DriverHelper;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ProductInterface;
-use Sylius\Component\Product\Model\ProductAssociationTypeInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
+use Sylius\Component\Product\Model\ProductAssociationTypeInterface;
 
 trait FormTrait
 {
@@ -233,7 +233,7 @@ trait FormTrait
         $associationField = $this->getElement('field_associations', ['%association%' => $productAssociationType->getCode()]);
 
         foreach ($productsNames as $productName) {
-            $this->autocompleteHelper->select(
+            $this->autocompleteHelper->selectByName(
                 $this->getDriver(),
                 $associationField->getXpath(),
                 $productName,
@@ -247,7 +247,7 @@ trait FormTrait
         $this->changeTab('associations');
         $associationField = $this->getElement('field_associations', ['%association%' => $productAssociationType->getCode()]);
 
-        $this->autocompleteHelper->remove(
+        $this->autocompleteHelper->removeByValue(
             $this->getDriver(),
             $associationField->getXpath(),
             $product->getCode(),
