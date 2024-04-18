@@ -668,6 +668,7 @@ sylius:
         product: 'Product'
         product_association_index: 'Association'
         product_association_type_index: 'Association type'
+        product_association_type: 'Product association type'
         product_association_types: 'Product association types'
         product_associations: 'Product associations'
         product_attributes: 'Product attributes'
