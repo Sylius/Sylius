@@ -27,7 +27,7 @@ use Sylius\Component\Channel\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ShippingMethodInterface;
 use Webmozart\Assert\Assert;
 
-final class ManagingShippingMethodsContext implements Context
+final readonly class ManagingShippingMethodsContext implements Context
 {
     use ValidationTrait;
 
@@ -37,7 +37,7 @@ final class ManagingShippingMethodsContext implements Context
         private UpdatePageInterface $updatePage,
         private CurrentPageResolverInterface $currentPageResolver,
         private FormElementInterface $shippingMethodForm,
-        private readonly SharedStorageInterface $sharedStorage,
+        private SharedStorageInterface $sharedStorage,
     ) {
     }
 
@@ -353,9 +353,9 @@ final class ManagingShippingMethodsContext implements Context
     /**
      * @When I remove its zone
      */
-    public function iRemoveItsZone()
+    public function iRemoveItsZone(): void
     {
-        $this->updatePage->removeZone();
+        $this->shippingMethodForm->setZoneCode('');
     }
 
     /**
@@ -370,9 +370,9 @@ final class ManagingShippingMethodsContext implements Context
     /**
      * @When I remove its name from :language translation
      */
-    public function iRemoveItsNameFromTranslation($language)
+    public function iRemoveItsNameFromTranslation(string $language): void
     {
-        $this->createPage->nameIt('', $language);
+        $this->shippingMethodForm->setName('', $language);
     }
 
     /**
@@ -439,7 +439,7 @@ final class ManagingShippingMethodsContext implements Context
      */
     public function iEnableIt()
     {
-        $this->updatePage->enable();
+        $this->shippingMethodForm->enable();
     }
 
     /**
@@ -447,7 +447,7 @@ final class ManagingShippingMethodsContext implements Context
      */
     public function iDisableIt()
     {
-        $this->updatePage->disable();
+        $this->shippingMethodForm->disable();
     }
 
     /**
@@ -555,7 +555,7 @@ final class ManagingShippingMethodsContext implements Context
      */
     public function iRemoveTheShippingChargesOfChannel(ChannelInterface $channel): void
     {
-        $this->updatePage->removeShippingChargesAmount($channel->getCode());
+        $this->shippingMethodForm->setCalculatorConfigurationAmountForChannel($channel->getCode(), 0);
     }
 
     /**

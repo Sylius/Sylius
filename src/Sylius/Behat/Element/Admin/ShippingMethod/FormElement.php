@@ -33,6 +33,7 @@ final class FormElement extends Element implements FormElementInterface
             'channel' => '[name="sylius_shipping_method[channels][]"][value="%channelCode%"]',
             'code' => '#sylius_shipping_method_code',
             'description' => '#sylius_shipping_method_translations_%localeCode%_description',
+            'enabled' => '#sylius_shipping_method_enabled',
             'live_component' => '[data-controller="live"]',
             'name' => '#sylius_shipping_method_translations_%localeCode%_name',
             'position' => '#sylius_shipping_method_position',
@@ -97,6 +98,16 @@ final class FormElement extends Element implements FormElementInterface
     public function setZoneCode(string $code): void
     {
         $this->getElement('zone')->setValue($code);
+    }
+
+    public function disable(): void
+    {
+        $this->getElement('enabled')->uncheck();
+    }
+
+    public function enable(): void
+    {
+        $this->getElement('enabled')->check();
     }
 
     public function checkChannel(string $channelCode): void
