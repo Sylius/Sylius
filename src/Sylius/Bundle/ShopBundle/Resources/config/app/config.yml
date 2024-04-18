@@ -158,54 +158,24 @@ sylius_ui:
                 header:
                     template: "@SyliusShop/Cart/Summary/_header.html.twig"
                     priority: 10
-                after_legacy:
-                    template: "@SyliusUi/Block/_legacySonataEvent.html.twig"
-                    priority: 5
-                    context:
-                        event: sylius.shop.cart.summary.after_content_header
 
         sylius.shop.cart.items:
             blocks:
-                before_legacy:
-                    template: "@SyliusUi/Block/_legacySonataEvent.html.twig"
-                    priority: 15
-                    context:
-                        event: sylius.shop.cart.summary.before_items
                 content:
                     template: "@SyliusShop/Cart/Summary/_items.html.twig"
                     priority: 10
-                after_legacy:
-                    template: "@SyliusUi/Block/_legacySonataEvent.html.twig"
-                    priority: 5
-                    context:
-                        event: sylius.shop.cart.summary.after_items
 
         sylius.shop.cart.suggestions:
             blocks:
-                before_legacy:
-                    template: "@SyliusUi/Block/_legacySonataEvent.html.twig"
-                    priority: 10
-                    context:
-                        event: sylius.shop.cart.summary.before_suggestions
                 content:
                     template: "@SyliusShop/Cart/Summary/_suggestions.html.twig"
                     priority: 5
 
         sylius.shop.cart.summary:
             blocks:
-                before_totals_legacy:
-                    template: "@SyliusUi/Block/_legacySonataEvent.html.twig"
-                    priority: 25
-                    context:
-                        event: sylius.shop.cart.summary.before_totals
                 totals:
                     template: "@SyliusShop/Cart/Summary/_totals.html.twig"
                     priority: 20
-                after_totals_legacy:
-                    template: "@SyliusUi/Block/_legacySonataEvent.html.twig"
-                    priority: 15
-                    context:
-                        event: sylius.shop.cart.summary.after_totals
                 checkout:
                     template: "@SyliusShop/Cart/Summary/_checkout.html.twig"
                     priority: 10

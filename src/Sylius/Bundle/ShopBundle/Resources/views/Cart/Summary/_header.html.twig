@@ -1,12 +1,6 @@
 {% import '@SyliusUi/Macro/headers.html.twig' as headers %}
-<div>
-    {{ header|trans }}
-    {{ 'sylius.ui.edit_your_items_apply_coupon_or_proceed_to_the_checkout'|trans }}
+
+<div class="mb-5">
+    <h1>{{ header|trans }}</h1>
+    <div>{{ 'sylius.ui.edit_your_items_apply_coupon_or_proceed_to_the_checkout'|trans }}</div>
 </div>
-<form method="post" action="{{ path('sylius_shop_cart_clear') }}" >
-    <input type="hidden" name="_method" value="DELETE" />
-    <input type="hidden" name="_csrf_token" value="{{ csrf_token(cart.id) }}" />
-    <button type="submit" {{ sylius_test_html_attribute('cart-clear-button') }}>
-        {{ 'sylius.ui.clear_cart'|trans }}
-    </button>
-</form>
