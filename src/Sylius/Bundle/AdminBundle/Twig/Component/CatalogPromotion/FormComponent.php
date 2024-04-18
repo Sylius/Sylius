@@ -53,12 +53,21 @@ class FormComponent
             $data = [];
         }
 
-        $index = [] !== $data ? max(array_keys($data)) + 1 : 0;
-        $propertyAccessor->setValue($this->formValues, $propertyPath . "[$index]", ['type' => $type]);
+        $propertyAccessor->setValue(
+            $this->formValues,
+            sprintf('%s.[%s]', $propertyPath, $this->resolveItemIndex($data)),
+            ['type' => $type],
+        );
     }
 
     protected function instantiateForm(): FormInterface
     {
         return $this->formFactory->create($this->formClass, $this->resource);
+    }
+
+    /** @param array<array-key, array<string, mixed>> $data */
+    private function resolveItemIndex(array $data): int
+    {
+        return [] !== $data ? max(array_keys($data)) + 1 : 0;
     }
 }
