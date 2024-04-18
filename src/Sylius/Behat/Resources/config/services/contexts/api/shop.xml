@@ -25,12 +25,12 @@
 <!--            <argument type="service" id="sylius.behat.shared_storage" />-->
 <!--        </service>-->
 
-<!--        <service id="sylius.behat.context.api.shop.channel" class="Sylius\Behat\Context\Api\Shop\ChannelContext">-->
-<!--            <argument type="service" id="sylius.behat.api_platform_client.shop" />-->
-<!--            <argument type="service" id="Sylius\Behat\Client\ResponseCheckerInterface" />-->
-<!--            <argument type="service" id="sylius.behat.shared_storage" />-->
-<!--            <argument>%sylius.security.new_api_route%</argument>-->
-<!--        </service>-->
+        <service id="sylius.behat.context.api.shop.channel" class="Sylius\Behat\Context\Api\Shop\ChannelContext">
+            <argument type="service" id="sylius.behat.api_platform_client.shop" />
+            <argument type="service" id="Sylius\Behat\Client\ResponseCheckerInterface" />
+            <argument type="service" id="sylius.behat.shared_storage" />
+            <argument>%sylius.security.new_api_route%</argument>
+        </service>
 
 <!--        <service id="sylius.behat.context.api.shop.currency" class="Sylius\Behat\Context\Api\Shop\CurrencyContext">-->
 <!--            <argument type="service" id="sylius.behat.api_platform_client.shop" />-->
@@ -85,13 +85,13 @@
 <!--            <argument>%sylius.model.shipping_method.class%</argument>-->
 <!--        </service>-->
 
-<!--        <service id="sylius.behat.context.api.shop.homepage" class="Sylius\Behat\Context\Api\Shop\HomepageContext">-->
-<!--            <argument type="service" id="sylius.behat.api_platform_client.shop" />-->
-<!--            <argument type="service" id="Sylius\Behat\Client\ResponseCheckerInterface" />-->
-<!--            <argument type="service" id="api_platform.iri_converter" />-->
-<!--            <argument type="service" id="doctrine.orm.entity_manager" />-->
-<!--            <argument>%sylius.security.new_api_route%</argument>-->
-<!--        </service>-->
+        <service id="sylius.behat.context.api.shop.homepage" class="Sylius\Behat\Context\Api\Shop\HomepageContext">
+            <argument type="service" id="sylius.behat.api_platform_client.shop" />
+            <argument type="service" id="Sylius\Behat\Client\ResponseCheckerInterface" />
+            <argument type="service" id="api_platform.iri_converter" />
+            <argument type="service" id="doctrine.orm.entity_manager" />
+            <argument>%sylius.security.new_api_route%</argument>
+        </service>
 
         <service id="sylius.behat.context.api.shop.login" class="Sylius\Behat\Context\Api\Shop\LoginContext">
             <argument type="service" id="sylius.behat.client.shop_api_platform_security_client" />

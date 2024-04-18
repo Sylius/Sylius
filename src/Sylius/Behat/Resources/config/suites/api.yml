@@ -14,8 +14,8 @@ imports:
 #    - api/admin/security.yml
 #    - api/cart/accessing_cart.yml
 #    - api/cart/shopping_cart.yml
-#    - api/channel/channels.yml
-#    - api/channel/managing_channels.yml
+    - api/channel/channels.yml
+    - api/channel/managing_channels.yml
 #    - api/checkout/checkout.yml
 #    - api/checkout/paying_for_order.yml
     - api/contact/requesting_contact.yml
