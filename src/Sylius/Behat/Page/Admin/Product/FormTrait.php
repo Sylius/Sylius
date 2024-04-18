@@ -43,7 +43,7 @@ trait FormTrait
             'product_attribute_input' => 'input[name="product_attributes"]',
             'product_attribute_tab' => '[data-test-product-attribute-tab="%name%"]',
             'product_options_autocomplete' => '[data-test-product-options-autocomplete]',
-            'product_translation_accordion' => '[data-test-product-translation-accordion="%localeCode%"]',
+            'product_translation_accordion' => '[data-test-product-translations-accordion="%localeCode%"]',
             'side_navigation_tab' => '[data-test-side-navigation-tab="%name%"]',
         ];
     }

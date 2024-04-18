@@ -73,6 +73,13 @@
             </call>
         </service>
 
+        <service id="Sylius\Bundle\AdminBundle\TwigComponent\Promotion\FormComponent">
+            <argument type="service" id="form.factory" />
+            <argument>Sylius\Bundle\PromotionBundle\Form\Type\PromotionType</argument>
+            <argument>%sylius.promotion_rules%</argument>
+            <argument>%sylius.promotion_actions%</argument>
+        </service>
+
         <service id="Sylius\Bundle\AdminBundle\TwigComponent\Order\OrderType">
             <argument type="service" id="form.factory" />
             <argument>Sylius\Bundle\OrderBundle\Form\Type\OrderType</argument>
