@@ -59,11 +59,9 @@ final class FormComponent
             $data = [];
         }
 
-        $index = [] !== $data ? max(array_keys($data)) + 1 : 0;
-
         $propertyAccessor->setValue(
             $this->formValues,
-            $propertyPath."[$index]",
+            sprintf('%s[%d]', $propertyPath, $this->resolveItemIndex($data)),
             ['type' => $this->provideItemType($name)],
         );
     }
@@ -84,5 +82,11 @@ final class FormComponent
         }
 
         return '';
+    }
+
+    /** @param array<array-key, array<string, mixed>> $data */
+    private function resolveItemIndex(array $data): int
+    {
+        return [] !== $data ? max(array_keys($data)) + 1 : 0;
     }
 }
