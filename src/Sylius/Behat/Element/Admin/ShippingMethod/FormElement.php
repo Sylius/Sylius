@@ -120,7 +120,7 @@ final class FormElement extends Element implements FormElementInterface
         return $this->getElement('channel', ['%channelCode%' => $channelCode])->isChecked();
     }
 
-    public function setCalculatorConfigurationAmountForChannel(string $channelCode, int $amount): void
+    public function setCalculatorConfigurationAmountForChannel(string $channelCode, ?int $amount): void
     {
         $this->selectCalculatorConfigurationChannelTab($channelCode);
 
@@ -216,6 +216,11 @@ final class FormElement extends Element implements FormElementInterface
         }
 
         return $this->getValidationMessageForElement($field);
+    }
+
+    public function setField(string $field, string $value): void
+    {
+        $this->getDocument()->fillField($field, $value);
     }
 
     private function getValidationMessageForElement(NodeElement $element): string

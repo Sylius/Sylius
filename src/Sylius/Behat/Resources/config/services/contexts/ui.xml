@@ -272,7 +272,6 @@
             <argument type="service" id="sylius.behat.page.admin.shipping_method.index" />
             <argument type="service" id="sylius.behat.page.admin.shipping_method.create" />
             <argument type="service" id="sylius.behat.page.admin.shipping_method.update" />
-            <argument type="service" id="sylius.behat.current_page_resolver" />
             <argument type="service" id="sylius.behat.element.admin.shipping_method.form" />
             <argument type="service" id="sylius.behat.shared_storage" />
         </service>
