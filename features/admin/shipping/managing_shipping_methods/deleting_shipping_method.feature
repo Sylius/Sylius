@@ -9,7 +9,7 @@ Feature: Deleting a shipping method
         And the store allows shipping with "UPS Ground"
         And I am logged in as an administrator
 
-    @ui @javascript @api
+    @ui @mink:chromedriver @api
     Scenario: Deleted shipping method should disappear from the registry
         When I browse shipping methods
         And I delete shipping method "UPS Ground"

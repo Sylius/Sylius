@@ -113,7 +113,7 @@ final class FormElement extends Element implements FormElementInterface
     {
         $this->selectCalculatorConfigurationChannelTab($channelCode);
 
-        $this->getElement('calculator_configuration_amount', ['%channelCode%' => $channelCode])->setValue($amount);
+        $this->getElement('calculator_configuration_amount', ['%channelCode%' => $channelCode])->setValue((string) $amount);
     }
 
     public function chooseCalculator(string $calculatorName): void
