@@ -565,6 +565,15 @@ final class ManagingPromotionsContext implements Context
     }
 
     /**
+     * @Then the :promotionName promotion should be successfully created
+     */
+    public function thePromotionShouldBeSuccessfullyCreated(string $promotionName): void
+    {
+        $this->iShouldBeNotifiedThatItHasBeenSuccessfullyCreated();
+        $this->thePromotionShouldAppearInTheRegistry($promotionName);
+    }
+
+    /**
      * @Then I should be notified that it has been successfully created
      */
     public function iShouldBeNotifiedThatItHasBeenSuccessfullyCreated(): void

@@ -16,5 +16,4 @@ Feature: Adding a new promotion with rule configured in different channels
         And I name it "100 in every currency"
         And I add the "Item total" rule configured with "€100.00" amount for "United States" channel and "£100.00" amount for "Web-GB" channel
         And I add it
-        Then I should be notified that it has been successfully created
-        And the "100 in every currency" promotion should appear in the registry
+        Then the "100 in every currency" promotion should be successfully created

@@ -890,6 +890,14 @@ final class ManagingPromotionsContext implements Context
         Assert::false($this->indexPage->isArchivalFilterEnabled());
     }
 
+    /**
+     * @Then the :promotion promotion should be successfully created
+     */
+    public function thePromotionShouldBeSuccessfullyCreated(PromotionInterface $promotion): void
+    {
+        $this->updatePage->verify(['id' => $promotion->getId()]);
+    }
+
     private function assertFieldValidationMessage(string $element, string $expectedMessage)
     {
         Assert::same($this->formElement->getValidationMessage($element), $expectedMessage);

@@ -16,8 +16,7 @@ Feature: Adding promotion with filter
         And I add the "Item fixed discount" action configured with amount of "$10.00" for "United States" channel
         And I specify that on "United States" channel this action should be applied to items with price greater than "$10.00"
         And I add it
-        Then I should be notified that it has been successfully created
-        And the "$10 discount for all products over $10!" promotion should appear in the registry
+        Then the "$10 discount for all products over $10!" promotion should be successfully created
 
     @api @ui @javascript
     Scenario: Adding a promotion with item fixed discount only for products between 10 and 100
