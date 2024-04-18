@@ -80,11 +80,6 @@
             <tag name="api_platform.collection_data_provider" priority="10" />
         </service>
 
-        <service id="Sylius\Bundle\ApiBundle\DataProvider\ChannelsCollectionDataProvider">
-            <argument type="service" id="sylius.context.channel" />
-            <tag name="api_platform.collection_data_provider" priority="10" />
-        </service>
-
         <service id="Sylius\Bundle\ApiBundle\DataProvider\OrderAdjustmentsSubresourceDataProvider">
             <argument type="service" id="sylius.repository.order" />
             <tag name="api_platform.subresource_data_provider" priority="10" />

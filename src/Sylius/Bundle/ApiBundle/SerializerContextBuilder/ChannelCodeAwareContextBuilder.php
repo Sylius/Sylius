@@ -34,7 +34,7 @@ final readonly class ChannelCodeAwareContextBuilder implements SerializerContext
      *
      * @return array<string, mixed>
      */
-    public function createFromRequest(Request $request, bool $normalization, array $extractedAttributes = null): array
+    public function createFromRequest(Request $request, bool $normalization, ?array $extractedAttributes = null): array
     {
         $context = $this->decoratedContextBuilder->createFromRequest($request, $normalization, $extractedAttributes);
         $inputClass = $this->getInputClassFromContext($context);
