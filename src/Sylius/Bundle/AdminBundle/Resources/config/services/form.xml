@@ -25,7 +25,7 @@
     </parameters>
 
     <services>
-        <service id="sylius.form.extension.type.catalog_promotion_action" class="Sylius\Bundle\AdminBundle\Form\Extension\CatalogPromotionActionTypeExtension">
+        <service id="sylius.form.extension.catalog_promotion_action" class="Sylius\Bundle\AdminBundle\Form\Extension\CatalogPromotionActionTypeExtension">
             <tag name="form.type_extension" extended-type="Sylius\Bundle\PromotionBundle\Form\Type\CatalogPromotionActionType" priority="100" />
         </service>
 
@@ -34,11 +34,11 @@
             <tag name="form.type_extension" extended-type="Sylius\Bundle\AddressingBundle\Form\Type\AddressType" priority="100" />
         </service>
 
-        <service id="sylius.form.extension.type.catalog_promotion_scope" class="Sylius\Bundle\AdminBundle\Form\Extension\CatalogPromotionScopeTypeExtension">
+        <service id="sylius.form.extension.catalog_promotion_scope" class="Sylius\Bundle\AdminBundle\Form\Extension\CatalogPromotionScopeTypeExtension">
             <tag name="form.type_extension" extended-type="Sylius\Bundle\PromotionBundle\Form\Type\CatalogPromotionScopeType" priority="100" />
         </service>
 
-        <service id="sylius.form.extension.type.country" class="Sylius\Bundle\AdminBundle\Form\Extension\CountryTypeExtension">
+        <service id="sylius.form.extension.country" class="Sylius\Bundle\AdminBundle\Form\Extension\CountryTypeExtension">
             <argument type="service" id="sylius.repository.country" />
             <tag name="form.type_extension" extended-type="Sylius\Bundle\AddressingBundle\Form\Type\CountryType" priority="100" />
         </service>
