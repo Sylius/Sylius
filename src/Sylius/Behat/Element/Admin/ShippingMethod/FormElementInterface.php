@@ -65,4 +65,6 @@ interface FormElementInterface
     public function getValidationMessageForCalculatorConfiguration(string $element, string $channelCode): string;
 
     public function getValidationMessageForLastRuleConfiguration(string $element, ?string $channelCode = null): string;
+
+    public function setField(string $field, string $value): void;
 }

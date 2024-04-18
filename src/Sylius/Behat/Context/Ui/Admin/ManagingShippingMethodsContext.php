@@ -14,28 +14,23 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
-use FriendsOfBehat\PageObjectExtension\Page\SymfonyPageInterface;
-use Sylius\Behat\Context\Ui\Admin\Helper\ValidationTrait;
 use Sylius\Behat\Element\Admin\ShippingMethod\FormElementInterface;
 use Sylius\Behat\Page\Admin\ShippingMethod\CreatePageInterface;
 use Sylius\Behat\Page\Admin\ShippingMethod\IndexPageInterface;
 use Sylius\Behat\Page\Admin\ShippingMethod\UpdatePageInterface;
-use Sylius\Behat\Service\Resolver\CurrentPageResolverInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Channel\Model\ChannelInterface;
+use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\ShippingMethodInterface;
 use Webmozart\Assert\Assert;
 
 final readonly class ManagingShippingMethodsContext implements Context
 {
-    use ValidationTrait;
-
     public function __construct(
         private IndexPageInterface $indexPage,
         private CreatePageInterface $createPage,
         private UpdatePageInterface $updatePage,
-        private CurrentPageResolverInterface $currentPageResolver,
         private FormElementInterface $shippingMethodForm,
         private SharedStorageInterface $sharedStorage,
     ) {
@@ -451,6 +446,14 @@ final readonly class ManagingShippingMethodsContext implements Context
     }
 
     /**
+     * @When I specify a too long :field
+     */
+    public function iSpecifyATooLong(string $field): void
+    {
+        $this->shippingMethodForm->setField(ucwords($field), str_repeat('a', 256));
+    }
+
+    /**
      * @Then /^(this shipping method) should be disabled$/
      */
     public function thisShippingMethodShouldBeDisabled(ShippingMethodInterface $shippingMethod)
@@ -555,7 +558,7 @@ final readonly class ManagingShippingMethodsContext implements Context
      */
     public function iRemoveTheShippingChargesOfChannel(ChannelInterface $channel): void
     {
-        $this->shippingMethodForm->setCalculatorConfigurationAmountForChannel($channel->getCode(), 0);
+        $this->shippingMethodForm->setCalculatorConfigurationAmountForChannel($channel->getCode(), null);
     }
 
     /**
@@ -595,19 +598,21 @@ final readonly class ManagingShippingMethodsContext implements Context
     }
 
     /**
-     * @Then the :shippingMethod shipping method should be successfully created
+     * @Then I should be notified that :field is too long
+     * @Then I should be notified that :field should be no longer than :maxLength characters
      */
-    public function theShippingMethodShouldBeSuccessfullyCreated(ShippingMethodInterface $shippingMethod): void
+    public function iShouldBeNotifiedThatFieldValueIsTooLong(string $field, int $maxLength = 255): void
     {
+        $validationMessage = $this->shippingMethodForm->getValidationMessage(StringInflector::nameToLowercaseCode($field));
+
+        Assert::contains(
+            $validationMessage,
+            sprintf('must not be longer than %d characters.', $maxLength),
+        );
     }
 
     private function assertFieldValidationMessage(string $element, string $expectedMessage): void
     {
         Assert::same($this->shippingMethodForm->getValidationMessage($element), $expectedMessage);
-    }
-
-    protected function resolveCurrentPage(): SymfonyPageInterface
-    {
-        return $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
     }
 }
