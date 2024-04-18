@@ -37,6 +37,10 @@ interface FormElementInterface
 
     public function setZoneCode(string $code): void;
 
+    public function enable(): void;
+
+    public function disable(): void;
+
     public function checkChannel(string $channelCode): void;
 
     public function hasCheckedChannel(string $channelCode): bool;
