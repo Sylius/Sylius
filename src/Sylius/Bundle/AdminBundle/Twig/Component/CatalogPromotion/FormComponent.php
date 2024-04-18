@@ -55,7 +55,7 @@ class FormComponent
 
         $propertyAccessor->setValue(
             $this->formValues,
-            sprintf('%s.[%s]', $propertyPath, $this->resolveItemIndex($data)),
+            sprintf('%s[%s]', $propertyPath, $this->resolveItemIndex($data)),
             ['type' => $type],
         );
     }
