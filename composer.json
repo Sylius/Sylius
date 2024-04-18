@@ -190,8 +190,7 @@
         "symfony/framework-bundle": "5.4.5 || 6.2.8",
         "symfony/validator": "5.4.25 || 6.2.12 || 6.3.1",
         "liip/imagine-bundle": "2.7.0",
-        "twig/twig": "3.9.0",
-        "twig/intl-extra": "3.9.0"
+        "twig/twig": "3.9.0"
     },
     "require-dev": {
         "behat/behat": "^3.6.1",
