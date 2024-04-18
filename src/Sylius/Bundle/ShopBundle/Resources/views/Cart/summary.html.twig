@@ -9,17 +9,14 @@
 {% block title %}{{ header|trans }} | {{ parent() }}{% endblock %}
 
 {% block content %}
-    {% if not cart.empty %}
-        {{ sylius_template_event('sylius.shop.cart.header', {'header': header, 'cart': cart}) }}
-
-        <div>
+    <div class="container">
+        {% if not cart.empty %}
+            {{ sylius_template_event('sylius.shop.cart.header', {'header': header, 'cart': cart}) }}
             {{ sylius_template_event('sylius.shop.cart.items', {'cart': cart, 'form': form}) }}
-        </div>
-        <div>
             {{ sylius_template_event('sylius.shop.cart.summary', {'cart': cart}) }}
-        </div>
-        {{ sylius_template_event('sylius.shop.cart.suggestions', {'cart': cart}) }}
-    {% else %}
-        {{ messages.info('sylius.ui.your_cart_is_empty') }}
-    {% endif %}
+            {{ sylius_template_event('sylius.shop.cart.suggestions', {'cart': cart}) }}
+        {% else %}
+            {{ messages.info('sylius.ui.your_cart_is_empty') }}
+        {% endif %}
+    </div>
 {% endblock %}
