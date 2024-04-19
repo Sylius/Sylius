@@ -80,7 +80,9 @@ class ZoneRepository extends EntityRepository implements ZoneRepositoryInterface
             $queryBuilder->setParameter('provinceCode', $address->getProvinceCode());
         }
 
-        $queryBuilder->andWhere($queryBuilder->expr()->orX(...$orConditions));
+        if ($orConditions !== []) {
+            $queryBuilder->andWhere($queryBuilder->expr()->orX(...$orConditions));
+        }
 
         return $queryBuilder;
     }
