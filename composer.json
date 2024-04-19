@@ -191,8 +191,7 @@
         "lexik/jwt-authentication-bundle": "^2.18",
         "stof/doctrine-extensions-bundle": "1.8.0",
         "symfony/validator": "5.4.25",
-        "twig/twig": "3.9.0",
-        "twig/intl-extra": "3.9.0"
+        "twig/twig": "3.9.0"
     },
     "require-dev": {
         "behat/behat": "^3.6.1",

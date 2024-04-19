@@ -28,7 +28,6 @@ references related issues.
     - https://github.com/stof/StofDoctrineExtensionsBundle/issues/455
     - https://github.com/doctrine-extensions/DoctrineExtensions/issues/2600
 
-
 - `api-platform/core:2.7.17`:
 
   This version introduced class aliases, which lead to a fatal error:
@@ -38,8 +37,3 @@ references related issues.
 
   This version has a bug, which lead to a fatal error:
   `An exception has been thrown during the rendering of a template ("Warning: Undefined variable $blocks").`
-
-- `twig/intl-extra:3.9.0`:
-
-  This version call function `dateConverter` which is only available in `twig/twig:3.9.0`, that leads to a fatal error:
-  `An exception has been thrown during the rendering of a template ("Call to undefined method Twig\Extension\CoreExtension::dateConverter()").`
