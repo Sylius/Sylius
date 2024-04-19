@@ -30,6 +30,9 @@ jobs:
                     -
                         branch: "1.13"
                         php: "8.1"
+                    -
+                        branch: "2.0"
+                        php: "8.2"
 
         steps:
             -
