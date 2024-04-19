@@ -32,8 +32,8 @@
         "symfony/framework-bundle": "^6.4.1",
         "symfony/security-bundle": "^6.4.0",
         "symfony/webpack-encore-bundle": "^1.17.1",
-        "twig/intl-extra": "^3.9.2",
-        "twig/twig": "^3.9.3"
+        "twig/intl-extra": "~3.8.0",
+        "twig/twig": "~3.8.0"
     },
     "require-dev": {
         "matthiasnoback/symfony-config-test": "^4.2",
