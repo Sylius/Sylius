@@ -41,8 +41,8 @@
         "symfony/ux-autocomplete": "^2.16",
         "symfony/ux-live-component": "^2.16",
         "symfony/webpack-encore-bundle": "^1.17.1",
-        "twig/intl-extra": "^2.12 || ^3.4",
-        "twig/twig": "^2.12 || ^3.3"
+        "twig/intl-extra": "^3.9.2",
+        "twig/twig": "^3.9.3"
     },
     "require-dev": {
         "matthiasnoback/symfony-dependency-injection-test": "^4.2",
@@ -52,9 +52,6 @@
         "phpunit/phpunit": "^9.5",
         "symfony/dependency-injection": "^6.4.1",
         "symfony/dotenv": "^6.4.0"
-    },
-    "conflict": {
-        "twig/twig": "3.9.0"
     },
     "config": {
         "allow-plugins": {

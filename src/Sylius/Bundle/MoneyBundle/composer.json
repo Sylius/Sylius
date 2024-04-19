@@ -45,7 +45,7 @@
         "symfony/browser-kit": "^6.4.0",
         "symfony/dependency-injection": "^6.4.1",
         "symfony/form": "^6.4.1",
-        "twig/twig": "^2.12 || ^3.3"
+        "twig/twig": "^3.9.3"
     },
     "config": {
         "allow-plugins": {

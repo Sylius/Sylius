@@ -140,8 +140,8 @@
         "symfony/workflow": "^6.4.0",
         "symfony/yaml": "^6.4.0",
         "symfonycasts/dynamic-forms": "v0.1.1",
-        "twig/intl-extra": "^2.12 || ^3.4",
-        "twig/twig": "^2.12 || ^3.3",
+        "twig/intl-extra": "^3.9.2",
+        "twig/twig": "^3.9.3",
         "webmozart/assert": "^1.9",
         "willdurand/hateoas": "^3.0",
         "willdurand/hateoas-bundle": "^2.0",
@@ -194,8 +194,7 @@
         "api-platform/core": "2.7.17",
         "doctrine/orm": ">= 2.16.0",
         "lexik/jwt-authentication-bundle": "^2.18",
-        "stof/doctrine-extensions-bundle": "1.8.0",
-        "twig/twig": "3.9.0"
+        "stof/doctrine-extensions-bundle": "1.8.0"
     },
     "require-dev": {
         "behat/behat": "^3.6.1",
