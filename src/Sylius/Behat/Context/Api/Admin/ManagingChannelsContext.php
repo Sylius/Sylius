@@ -109,9 +109,10 @@ final class ManagingChannelsContext implements Context
      */
     public function iChooseAsTheBaseCurrency(?CurrencyInterface $currency = null): void
     {
-        if ($currency !== null) {
-            $this->client->addRequestData('baseCurrency', $this->iriConverter->getIriFromResource($currency));
-        }
+        $this->client->addRequestData(
+            'baseCurrency',
+            null === $currency ? $currency : $this->iriConverter->getIriFromResourceInSection($currency, 'admin'),
+        );
     }
 
     /**
@@ -160,11 +161,10 @@ final class ManagingChannelsContext implements Context
      */
     public function iChooseAsADefaultLocale(?LocaleInterface $locale = null): void
     {
-        if ($locale !== null) {
-            $this->client->addRequestData(
-                'defaultLocale', $this->iriConverter->getIriFromResourceInSection($locale, 'admin'),
-            );
-        }
+        $this->client->addRequestData(
+            'defaultLocale',
+            null === $locale ? $locale : $this->iriConverter->getIriFromResourceInSection($locale, 'admin'),
+        );
     }
 
     /**
@@ -661,7 +661,7 @@ final class ManagingChannelsContext implements Context
     {
         Assert::contains(
             $this->responseChecker->getError($this->client->getLastResponse()),
-            'baseCurrency: Please enter channel base currency',
+            'The type of the "baseCurrency" attribute must be "array" (nested document) or "string" (IRI), "NULL" given.',
         );
     }
 
@@ -672,7 +672,7 @@ final class ManagingChannelsContext implements Context
     {
         Assert::contains(
             $this->responseChecker->getError($this->client->getLastResponse()),
-            'defaultLocale: Please enter channel default locale',
+            'The type of the "defaultLocale" attribute must be "array" (nested document) or "string" (IRI), "NULL" given.',
         );
     }
 
