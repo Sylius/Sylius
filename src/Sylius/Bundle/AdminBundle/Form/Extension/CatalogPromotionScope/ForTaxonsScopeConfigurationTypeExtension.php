@@ -30,9 +30,9 @@ final class ForTaxonsScopeConfigurationTypeExtension extends AbstractTypeExtensi
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder->add('taxons', TaxonAutocompleteChoiceType::class, [
-            'label' => 'sylius.ui.taxons',
-            'multiple' => true,
-            'required' => false,
+                'label' => 'sylius.ui.taxons',
+                'multiple' => true,
+                'required' => false,
             ])
             ->get('taxons')->addModelTransformer($this->taxonsToCodesTransformer)
         ;
@@ -40,6 +40,6 @@ final class ForTaxonsScopeConfigurationTypeExtension extends AbstractTypeExtensi
 
     public static function getExtendedTypes(): iterable
     {
-        yield  ForTaxonsScopeConfigurationType::class;
+        yield ForTaxonsScopeConfigurationType::class;
     }
 }

@@ -30,9 +30,9 @@ final class ForVariantsScopeConfigurationTypeExtension extends AbstractTypeExten
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder->add('variants', ProductVariantAutocompleteChoiceType::class, [
-            'label' => 'sylius.ui.variants',
-            'multiple' => true,
-            'required' => false,
+                'label' => 'sylius.ui.variants',
+                'multiple' => true,
+                'required' => false,
             ])
             ->get('variants')->addModelTransformer($this->productVariantsToCodesTransformer)
         ;
@@ -40,6 +40,6 @@ final class ForVariantsScopeConfigurationTypeExtension extends AbstractTypeExten
 
     public static function getExtendedTypes(): iterable
     {
-        yield  ForVariantsScopeConfigurationType::class;
+        yield ForVariantsScopeConfigurationType::class;
     }
 }

@@ -202,22 +202,22 @@ final class FormElement extends BaseFormElement implements FormElementInterface
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
-            'form' => '[data-live-name-value="sylius_admin:catalog_promotion:form"]',
-            'add_scope_button' => '[data-test-scopes] [data-test-add-%type%]',
-            'last_scope' => '[data-test-scopes] [data-test-entry-row]:last-child',
             'add_action_button' => '[data-test-actions] [data-test-add-%type%]',
-            'last_action' => '[data-test-actions] [data-test-entry-row]:last-child',
-            'name' => '#sylius_catalog_promotion_name',
+            'add_scope_button' => '[data-test-scopes] [data-test-add-%type%]',
             'channels' => '#sylius_catalog_promotion_channels',
+            'description' => '[name="sylius_catalog_promotion[translations][%locale_code%][description]"]',
             'enabled' => '#sylius_catalog_promotion_enabled',
-            'exclusive' => '#sylius_catalog_promotion_exclusive',
-            'start_date_date' => '#sylius_catalog_promotion_startDate_date',
-            'start_date_time' => '#sylius_catalog_promotion_startDate_time',
             'end_date_date' => '#sylius_catalog_promotion_endDate_date',
             'end_date_time' => '#sylius_catalog_promotion_endDate_time',
+            'exclusive' => '#sylius_catalog_promotion_exclusive',
+            'form' => '[data-live-name-value="sylius_admin:catalog_promotion:form"]',
             'label' => '[name="sylius_catalog_promotion[translations][%locale_code%][label]"]',
-            'description' => '[name="sylius_catalog_promotion[translations][%locale_code%][description]"]',
+            'last_action' => '[data-test-actions] [data-test-entry-row]:last-child',
+            'last_scope' => '[data-test-scopes] [data-test-entry-row]:last-child',
+            'name' => '#sylius_catalog_promotion_name',
             'priority' => '#sylius_catalog_promotion_priority',
+            'start_date_date' => '#sylius_catalog_promotion_startDate_date',
+            'start_date_time' => '#sylius_catalog_promotion_startDate_time',
         ]);
     }
 
