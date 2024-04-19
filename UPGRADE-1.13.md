@@ -550,6 +550,8 @@ To ease the update process, we have grouped the changes into the following categ
 
 1. The interface `Sylius\Component\Core\SyliusLocaleEvents` has been deprecated and will be removed in Sylius 2.0.
 
+1. The `Sylius\Bundle\CoreBundle\EventListener\CustomerReviewsDeleteListener` has been removed as it was not used.
+
 ### Configuration
 
 1. To ease customization we've introduced attributes for some services in `1.13`:
