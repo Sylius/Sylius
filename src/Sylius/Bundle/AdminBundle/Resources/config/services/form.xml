@@ -117,9 +117,9 @@
             <tag name="form.type" />
         </service>
 
-        <service id="sylius_admin.form.type.taxon_autocomplete_choice" class="Sylius\Bundle\AdminBundle\Form\Type\TaxonAutocompleteChoiceType">
-            <argument>%sylius.model.taxon.class%</argument>
+        <service id="sylius.form.type.grid_filter.ux_autocomplete" class="Sylius\Bundle\AdminBundle\Form\Type\Grid\Filter\UxAutocompleteFilterType">
             <tag name="form.type" />
+            <tag name="ux.entity_autocomplete_field" />
         </service>
     </services>
 </container>
