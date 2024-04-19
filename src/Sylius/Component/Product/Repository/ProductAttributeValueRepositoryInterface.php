@@ -14,8 +14,8 @@ declare(strict_types=1);
 namespace Sylius\Component\Product\Repository;
 
 use Doctrine\ORM\QueryBuilder;
-use Sylius\Component\Product\Model\ProductAttributeValueInterface;
 use Sylius\Component\Attribute\Repository\AttributeValueRepositoryInterface as BaseAttributeValueRepositoryInterface;
+use Sylius\Component\Product\Model\ProductAttributeValueInterface;
 
 /**
  * @template T of ProductAttributeValueInterface
