@@ -20,6 +20,7 @@ use Sylius\Behat\Page\Admin\Customer\IndexPageInterface as CustomerIndexPageInte
 use Sylius\Behat\Page\Admin\Customer\ShowPageInterface;
 use Sylius\Behat\Page\Admin\Customer\UpdatePageInterface;
 use Sylius\Behat\Service\Resolver\CurrentPageResolverInterface;
+use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Webmozart\Assert\Assert;
@@ -202,6 +203,22 @@ final class ManagingCustomersContext implements Context
     }
 
     /**
+     * @When /^I sort customers by (ascending|descending) registration date$/
+     */
+    public function iSortCustomersByRegistrationDate(string $order): void
+    {
+        $this->sortBy($order, 'createdAt');
+    }
+
+    /**
+     * @When /^I sort customers by (ascending|descending) (email|first name|last name)$/
+     */
+    public function iSortCustomersByField(string $order, string $field): void
+    {
+        $this->sortBy($order, StringInflector::nameToCamelCase($field));
+    }
+
+    /**
      * @Then /^I should see (\d+) customers (?:in|on) the list$/
      * @Then /^I should see a single customer on the list$/
      */
@@ -217,6 +234,19 @@ final class ManagingCustomersContext implements Context
     public function iShouldSeeTheCustomerInTheList($email)
     {
         Assert::true($this->indexPage->isSingleResourceOnPage(['email' => $email]));
+    }
+
+    /**
+     * @Then /^the (first|last) customer should be "([^"]+)"$/
+     */
+    public function theFirstLastCustomerShouldBe(string $placement, string $email): void
+    {
+        $index = 'first' === $placement ? 0 : $this->indexPage->countItems() - 1;
+
+        Assert::same(
+            $this->indexPage->getColumnFields('email')[$index],
+            $email,
+        );
     }
 
     /**
@@ -669,5 +699,10 @@ final class ManagingCustomersContext implements Context
     public function iShouldSeeThatTheAverageTotalValueOfTheirOrderInTheChannelIs(ChannelInterface $channel, $ordersValue)
     {
         Assert::same($this->showPage->getAverageTotalInChannel($channel->getCode()), $ordersValue);
+    }
+
+    private function sortBy(string $order, string $field): void
+    {
+        $this->indexPage->sortBy($field, str_starts_with($order, 'de') ? 'desc' : 'asc');
     }
 }
