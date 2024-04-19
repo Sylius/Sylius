@@ -170,6 +170,21 @@ final class LegacyResourceMetadataMergerSpec extends ObjectBehavior
         ]);
     }
 
+    function it_keeps_existing_subresource_operations_when_the_new_one_doesnt_have_them(): void
+    {
+        $this->merge([
+            'subresourceOperations' => [
+                'get' => ['foo' => 'bar'],
+            ],
+        ], [
+            'subresourceOperations' => null,
+        ])->shouldReturn([
+            'subresourceOperations' => [
+                'get' => ['foo' => 'bar'],
+            ],
+        ]);
+    }
+
     function it_merges_complex_metadata(): void
     {
         $this->merge([
