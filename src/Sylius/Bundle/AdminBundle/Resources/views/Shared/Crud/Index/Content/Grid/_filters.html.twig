@@ -9,7 +9,7 @@
 <div class="bg-white mb-5">
     {% set content %}
         <div class="mb-3">
-            <form method="get" action="{{ path }}" novalidate>
+            <form method="get" action="{{ path }}" novalidate {{ sylius_test_html_attribute('filters-form') }}>
                 <div class="sylius-filters">
                     {% for filter in resources.definition.enabledFilters|filter(filter => filter.enabled)|sort_by('position') %}
                         <div class="sylius-filters__item">
@@ -18,8 +18,8 @@
                     {% endfor %}
                 </div>
                 <div>
-                    {{ _button.primary({ text: 'sylius.ui.filter'|trans, type: 'submit' }) }}
-                    {{ _button.default({ text: 'sylius.ui.reset'|trans, url: path }) }}
+                    {{ _button.primary({ text: 'sylius.ui.filter'|trans, type: 'submit', attr: sylius_test_html_attribute('filter') }) }}
+                    {{ _button.default({ text: 'sylius.ui.reset'|trans, url: path, attr: sylius_test_html_attribute('reset') }) }}
                 </div>
             </form>
         </div>

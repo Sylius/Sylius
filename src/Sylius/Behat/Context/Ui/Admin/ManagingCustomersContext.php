@@ -92,13 +92,22 @@ final class ManagingCustomersContext implements Context
     }
 
     /**
+     * @When I search for customer by :phrase
+     */
+    public function iSearchForCustomersWith(string $phrase): void
+    {
+        $this->indexPage->setFilterSearch($phrase);
+        $this->indexPage->filter();
+    }
+
+    /**
      * @When I filter by group :groupName
      * @When I filter by groups :firstGroup and :secondGroup
      */
     public function iFilterByGroup(string ...$groupsNames): void
     {
         foreach ($groupsNames as $groupName) {
-            $this->indexPage->specifyFilterGroup($groupName);
+            $this->indexPage->setFilterGroup($groupName);
         }
 
         $this->indexPage->filter();
@@ -193,7 +202,7 @@ final class ManagingCustomersContext implements Context
     }
 
     /**
-     * @Then /^I should see (\d+) customers in the list$/
+     * @Then /^I should see (\d+) customers (?:in|on) the list$/
      * @Then /^I should see a single customer on the list$/
      */
     public function iShouldSeeCustomersInTheList($amountOfCustomers = 1)
@@ -203,6 +212,7 @@ final class ManagingCustomersContext implements Context
 
     /**
      * @Then I should see the customer :email in the list
+     * @Then I should see the customer :email on the list
      */
     public function iShouldSeeTheCustomerInTheList($email)
     {
