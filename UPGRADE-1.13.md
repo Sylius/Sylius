@@ -832,6 +832,8 @@ To ease the update process, we have grouped the changes into the following categ
        ...
     ```
 
+1. All instances of `options` node have been deprecated in all resource and translation configurations.
+
 ### State Machine
 
 1. We have configured all existing Sylius graphs to be usable with the Symfony Workflow out of the box.
