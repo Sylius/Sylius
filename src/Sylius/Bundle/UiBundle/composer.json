@@ -55,7 +55,7 @@
         "phpunit/phpunit": "^9.5",
         "symfony/dependency-injection": "^6.4.1",
         "symfony/form": "^6.4.1",
-        "twig/twig": "^2.12 || ^3.3"
+        "twig/twig": "~3.8.0"
     },
     "config": {
         "allow-plugins": {
