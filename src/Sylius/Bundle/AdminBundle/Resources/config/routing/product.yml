@@ -45,6 +45,26 @@ sylius_admin_product_create_simple:
                 route:
                     name: sylius_admin_product_create_simple
 
+sylius_admin_product_variant_generate:
+    path: products/{productId}/variants/generate
+    methods: [GET, POST]
+    defaults:
+        _controller: sylius.controller.product::updateAction
+        _sylius:
+            template: "@SyliusAdmin/Product/generate_variants.html.twig"
+            section: admin
+            permission: true
+            redirect:
+                route: sylius_admin_product_variant_index
+                parameters: { productId: $productId }
+            form:
+                type: Sylius\Bundle\ProductBundle\Form\Type\ProductGenerateVariantsType
+            repository:
+                method: find
+                arguments: [$productId]
+            flash: sylius.product_variant.generate
+
+
 sylius_admin_channel_pricing_log_entry_index:
     path: products/{productId}/variants/{variantId}/channel-pricing/{channelPricingId}/channel-pricing-log-entries
     methods: [GET]
