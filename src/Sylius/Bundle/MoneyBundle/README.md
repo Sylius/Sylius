@@ -6,7 +6,15 @@ SyliusMoneyBundle
 Sylius
 ------
 
-![Sylius](https://demo.sylius.com/assets/shop/img/logo.png)
+<p align="center">
+    <a href="https://sylius.com" target="_blank">
+        <picture>
+          <source media="(prefers-color-scheme: dark)" srcset="https://media.sylius.com/sylius-logo-800-dark.png">
+          <source media="(prefers-color-scheme: light)" srcset="https://media.sylius.com/sylius-logo-800.png">
+          <img alt="Sylius Logo." src="https://media.sylius.com/sylius-logo-800.png">
+        </picture>
+    </a>
+</p>
 
 Sylius is an Open Source eCommerce solution built from decoupled components with powerful API and the highest quality code. [Read more on sylius.com](https://sylius.com).
 
