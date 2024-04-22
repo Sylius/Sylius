@@ -88,22 +88,3 @@ sylius_admin_product_variant_delete:
                 arguments:
                     id: $id
                     productId: $productId
-
-sylius_admin_product_variant_generate:
-    path: /generate
-    methods: [GET, POST]
-    defaults:
-        _controller: sylius.controller.product::updateAction
-        _sylius:
-            template: "@SyliusAdmin/ProductVariant/generate.html.twig"
-            section: admin
-            permission: true
-            redirect:
-                route: sylius_admin_product_variant_index
-                parameters: { productId: $productId }
-            form:
-                type: Sylius\Bundle\ProductBundle\Form\Type\ProductGenerateVariantsType
-            repository:
-                method: find
-                arguments: [$productId]
-            flash: sylius.product_variant.generate
