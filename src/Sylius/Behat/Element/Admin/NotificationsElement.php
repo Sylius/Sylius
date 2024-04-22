@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Element\Admin;
 
-
 use Behat\Mink\Element\NodeElement;
 use FriendsOfBehat\PageObjectExtension\Element\Element;
 use Sylius\Behat\Service\DriverHelper;

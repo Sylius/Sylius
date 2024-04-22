@@ -21,7 +21,7 @@ use Symfony\UX\Autocomplete\Form\BaseEntityAutocompleteType;
 #[AsEntityAutocompleteField(route: 'sylius_admin_entity_autocomplete_admin')]
 final class ProductAutocompleteChoiceType extends AbstractType
 {
-    public function __construct (
+    public function __construct(
         private readonly string $productClass,
     ) {
     }

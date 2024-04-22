@@ -723,7 +723,7 @@ final class ManagingChannelsContext implements Context
 
         Assert::true($this->indexPage->isSingleResourceWithSpecificElementOnPage(
             ['nameAndDescription' => $channel->getName()],
-            $state ? '[data-test-status-enabled]': '[data-test-status-disabled]',
+            $state ? '[data-test-status-enabled]' : '[data-test-status-disabled]',
         ));
     }
 

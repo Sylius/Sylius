@@ -54,7 +54,6 @@ abstract class AbstractConfigurablePromotionElementType extends AbstractResource
                 $data = $event->getData();
 
                 if (!isset($data['type']) || $data['type'] === '') {
-
                     return;
                 }
 

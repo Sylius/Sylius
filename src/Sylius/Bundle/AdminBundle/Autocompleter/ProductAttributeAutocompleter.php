@@ -21,12 +21,10 @@ use Symfony\UX\Autocomplete\OptionsAwareEntityAutocompleterInterface;
 
 final class ProductAttributeAutocompleter implements OptionsAwareEntityAutocompleterInterface
 {
-    /**
-     * @var array<string, mixed>
-     */
+    /** @var array<string, mixed> */
     private array $options = [];
 
-    public function __construct (
+    public function __construct(
         private readonly string $productAttributeClass,
     ) {
     }
@@ -49,7 +47,7 @@ final class ProductAttributeAutocompleter implements OptionsAwareEntityAutocompl
             ->leftJoin('o.translations', 'translation')
             ->andWhere($qb->expr()->orX(
                 $qb->expr()->like('o.code', ':query'),
-                $qb->expr()->like('translation.name', ':query')
+                $qb->expr()->like('translation.name', ':query'),
             ))
             ->setParameter('query', '%' . $query . '%')
         ;

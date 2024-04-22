@@ -23,22 +23,18 @@ use Symfony\UX\TwigComponent\Attribute\ExposeInTemplate;
 #[AsLiveComponent(name: 'SyliusAdmin.Product.ProductAttributeAutocomplete', template: '@SyliusAdmin/Product/_productAttributeAutocomplete.html.twig')]
 final class ProductAttributeAutocompleteComponent
 {
-    /**
-     * @var array<string>
-     */
+    /** @var array<string> */
     #[LiveProp(writable: true, hydrateWith: 'hydrateSelectedAttributeCodes', dehydrateWith: 'dehydrateSelectedAttributeCodes', updateFromParent: true)]
     public array $selectedAttributeCodes = [];
 
-    /**
-     * @var array<string>
-     */
+    /** @var array<string> */
     #[LiveProp(updateFromParent: true)]
     public array $excludedAttributeCodes = [];
 
     use ComponentToolsTrait;
     use DefaultActionTrait;
 
-    public function __construct (
+    public function __construct(
         private readonly ChecksumCalculator $checksumCalculator,
     ) {
     }
@@ -50,7 +46,7 @@ final class ProductAttributeAutocompleteComponent
             [
                 'attributeCodes' => $this->excludedAttributeCodes,
                 '@checksum' => $this->checksumCalculator->calculateForArray(['attributeCodes' => $this->excludedAttributeCodes]),
-            ]
+            ],
         ));
     }
 

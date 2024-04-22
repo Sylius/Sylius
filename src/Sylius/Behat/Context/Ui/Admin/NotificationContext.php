@@ -52,8 +52,8 @@ final class NotificationContext implements Context
         Assert::true(
             $this->notificationsElement->hasNotification(
                 (string) NotificationType::success(),
-                sprintf('%s been successfully deleted.',$hasHave),
-            )
+                sprintf('%s been successfully deleted.', $hasHave),
+            ),
         );
     }
 
@@ -66,7 +66,7 @@ final class NotificationContext implements Context
             $this->notificationsElement->hasNotification(
                 (string) NotificationType::success(),
                 'has been requested. This process can take a while depending on the number of affected products.',
-            )
+            ),
         );
     }
 

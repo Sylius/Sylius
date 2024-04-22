@@ -66,7 +66,7 @@ final class ManagingCountriesContext implements Context
      * @When I add the :provinceName province with :provinceCode code
      * @When I add the :provinceName province with :provinceCode code and :provinceAbbreviation abbreviation
      */
-    public function iAddProvinceWithCode(string $provinceName, string $provinceCode, string $provinceAbbreviation = null): void
+    public function iAddProvinceWithCode(string $provinceName, string $provinceCode, ?string $provinceAbbreviation = null): void
     {
         /** @var CreatePageInterface|UpdatePageInterface $currentPage */
         $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);

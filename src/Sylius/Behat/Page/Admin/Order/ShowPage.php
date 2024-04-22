@@ -75,11 +75,12 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
 
     public function hasShipmentWithState(string $state): bool
     {
-        foreach ($this->getElement('shipments')->findAll('css' , '[data-test-shipment-state]') as $shipmentState) {
+        foreach ($this->getElement('shipments')->findAll('css', '[data-test-shipment-state]') as $shipmentState) {
             if (0 === strcasecmp($state, $shipmentState->getText())) {
                 return true;
             }
         }
+
         return false;
     }
 

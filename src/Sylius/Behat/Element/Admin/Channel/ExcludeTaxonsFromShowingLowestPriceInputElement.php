@@ -23,7 +23,7 @@ final class ExcludeTaxonsFromShowingLowestPriceInputElement extends Element impl
 {
     public function __construct(
         Session $session,
-        MinkParameters|array $minkParameters = [],
+        array|MinkParameters $minkParameters = [],
         private AutocompleteHelperInterface $autocompleteHelper,
     ) {
         parent::__construct($session, $minkParameters);

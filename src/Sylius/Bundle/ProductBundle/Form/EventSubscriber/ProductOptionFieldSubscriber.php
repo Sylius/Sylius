@@ -26,8 +26,7 @@ final readonly class ProductOptionFieldSubscriber implements EventSubscriberInte
     public function __construct(
         private ProductVariantResolverInterface $variantResolver,
         private string $productOptionClass,
-    )
-    {
+    ) {
     }
 
     public static function getSubscribedEvents(): array

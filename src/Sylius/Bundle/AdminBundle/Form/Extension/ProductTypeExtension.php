@@ -40,5 +40,4 @@ final class ProductTypeExtension extends AbstractTypeExtension
     {
         return [ProductType::class];
     }
-
 }

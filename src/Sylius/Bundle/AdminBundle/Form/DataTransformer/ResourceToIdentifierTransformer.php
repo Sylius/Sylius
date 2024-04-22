@@ -22,6 +22,7 @@ use Webmozart\Assert\Assert;
 
 /**
  * @see \Sylius\Bundle\ResourceBundle\Form\DataTransformer\ResourceToIdentifierTransformer
+ *
  * @implements DataTransformerInterface<ResourceInterface, int|string|ResourceInterface>
  */
 final readonly class ResourceToIdentifierTransformer implements DataTransformerInterface

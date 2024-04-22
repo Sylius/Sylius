@@ -20,6 +20,7 @@ use Webmozart\Assert\Assert;
 final class ShippingAddressInCheckoutRequiredElement extends Element implements ShippingAddressInCheckoutRequiredElementInterface
 {
     private const ADDRESS_TYPE_BILLING = 'billing';
+
     private const ADDRESS_TYPE_SHIPPING = 'shipping';
 
     public function requireShippingAddressInCheckout(): void

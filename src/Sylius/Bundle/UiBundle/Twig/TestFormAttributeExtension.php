@@ -48,8 +48,8 @@ final class TestFormAttributeExtension extends AbstractExtension
 
                     return ['attr' => $result];
                 },
-                ['is_safe' => ['html']]
-            )
+                ['is_safe' => ['html']],
+            ),
         ];
     }
 

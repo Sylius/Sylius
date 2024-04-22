@@ -65,7 +65,7 @@ final class UserDropdownComponent
                 'icon' => 'logout',
                 'attr' => [
                     'data-test-logout' => null,
-                ]
+                ],
             ],
             [
                 'type' => 'divider',
