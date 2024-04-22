@@ -35,21 +35,15 @@ final class FormComponent
     #[LiveProp(fieldName: 'resource')]
     public ?Promotion $resource = null;
 
-    /**
-     * @param class-string $formClass
-     * @param array<string, string> $ruleTypes
-     * @param array<string, string> $actionTypes
-     */
+    /** @param class-string $formClass */
     public function __construct(
         private readonly FormFactoryInterface $formFactory,
         private readonly string $formClass,
-        private readonly array $ruleTypes,
-        private readonly array $actionTypes,
     ) {
     }
 
     #[LiveAction]
-    public function addCollectionItem(PropertyAccessorInterface $propertyAccessor, #[LiveArg] string $name): void
+    public function addCollectionItem(PropertyAccessorInterface $propertyAccessor, #[LiveArg] string $name, #[LiveArg] string $type): void
     {
         $propertyPath = $this->fieldNameToPropertyPath($name, $this->formName);
         $data = $propertyAccessor->getValue($this->formValues, $propertyPath);
@@ -61,27 +55,14 @@ final class FormComponent
 
         $propertyAccessor->setValue(
             $this->formValues,
-            sprintf('%s[%d]', $propertyPath, $this->resolveItemIndex($data)),
-            ['type' => $this->provideItemType($name)],
+            sprintf('%s[%s]', $propertyPath, $this->resolveItemIndex($data)),
+            ['type' => $type],
         );
     }
 
     protected function instantiateForm(): FormInterface
     {
         return $this->formFactory->create($this->formClass, $this->resource);
-    }
-
-    private function provideItemType(string $name): string
-    {
-        if (str_contains($name, 'rules')) {
-            return array_key_first($this->ruleTypes);
-        }
-
-        if (str_contains($name, 'actions')) {
-            return array_key_first($this->actionTypes);
-        }
-
-        return '';
     }
 
     /** @param array<array-key, array<string, mixed>> $data */

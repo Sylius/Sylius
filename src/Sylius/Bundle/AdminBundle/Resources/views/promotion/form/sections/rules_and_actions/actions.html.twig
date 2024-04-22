@@ -2,7 +2,7 @@
 {% set fallback_hook = hook_name(hookable_data.parent_fallback_hook, 'actions') %}
 
 <div class="col-12 col-md-6 mb-3">
-    <div class="card">
+    <div class="card" {{ sylius_test_html_attribute('actions') }}>
         <div class="card-header">
             <div class="card-title">
                 {{ 'sylius.ui.actions'|trans }}
@@ -17,6 +17,9 @@
                     parent_fallback_hook: fallback_hook,
                 }) %}
             </div>
+        </div>
+        <div class="card-footer">
+            {{ form_row(hookable_data.form.actions.vars.button_add) }}
         </div>
     </div>
 </div>
