@@ -103,6 +103,11 @@
             <tag name="form.type" />
         </service>
 
+        <service id="sylius_admin.form.type.taxon_autocomplete_choice" class="Sylius\Bundle\AdminBundle\Form\Type\TaxonAutocompleteChoiceType">
+            <argument>%sylius.model.taxon.class%</argument>
+            <tag name="form.type" />
+        </service>
+
         <service id="Sylius\Bundle\AdminBundle\Form\RequestPasswordResetType">
             <argument>%sylius.form.type.admin.password_reset_request.validation_groups%</argument>
             <tag name="form.type" />
