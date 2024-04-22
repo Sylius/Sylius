@@ -45,17 +45,19 @@ sylius_grid:
                     options:
                         fields: [email, firstName, lastName]
                 group:
-                    type: resource_autocomplete
+                    type: ux_autocomplete
                     label: sylius.ui.customer_groups
                     form_options:
-                        resource: sylius.customer_group
-                        choice_name: name
-                        choice_value: code
                         multiple: true
-                        remote_path: sylius_admin_ajax_customer_groups_by_phrase
-                        load_edit_path: sylius_admin_ajax_customer_group_by_code
+                        extra_options:
+                            class: '%sylius.model.customer_group.class%'
+#                        TODO: these options won't work until a new tag of symfony ux is available
+#                        choice_label: name
+#                        choice_value: code
                     options:
-                        fields: [group.code]
+                        fields: [group.id]
+#                        TODO: same case
+#                        fields: [group.code]
             actions:
                 main:
                     create:

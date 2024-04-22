@@ -89,6 +89,7 @@ sylius_grid:
             resource_autocomplete: '@SyliusAdmin/Shared/Grid/Filter/_resourceAutocomplete.html.twig'
             select: '@SyliusAdmin/Shared/Grid/Filter/_select.html.twig'
             string: '@SyliusAdmin/Shared/Grid/Filter/_string.html.twig'
+            ux_autocomplete: '@SyliusAdmin/Shared/Grid/Filter/_uxAutocomplete.html.twig'
 
 liip_imagine:
     filter_sets:

@@ -166,7 +166,7 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
             'bulk_actions' => '.sylius-grid-nav__bulk',
             'confirmation_button' => '#confirmation-button',
             'enabled_filter' => '#criteria_enabled',
-            'filter' => 'button:contains("Filter")',
+            'filter' => '[data-test-filter]',
             'table' => '.table',
         ]);
     }
