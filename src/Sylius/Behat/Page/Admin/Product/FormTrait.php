@@ -224,7 +224,7 @@ trait FormTrait
      * Media management
      */
 
-    public function attachImage(string $path, string $type = null, ?ProductVariantInterface $productVariant = null): void
+    public function attachImage(string $path, ?string $type = null, ?ProductVariantInterface $productVariant = null): void
     {
         $this->changeTab('media');
         $this->clickButton('Add image');
@@ -277,6 +277,7 @@ trait FormTrait
     public function hasImageWithType(string $type): bool
     {
         $this->changeTab('media');
+
         try {
             $imageSubform = $this->getElement('image_subform_with_type', ['%type%' => $type]);
         } catch (ElementNotFoundException) {

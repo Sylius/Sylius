@@ -230,7 +230,7 @@ final class ManagingOrdersContext implements Context
      */
     public function iChangeTheCountryTo(string $addressType, string $country): void
     {
-        match($addressType) {
+        match ($addressType) {
             'shipping' => $this->updatePage->changeShippingCountry($country),
             'billing' => $this->updatePage->changeBillingCountry($country),
             default => throw new \InvalidArgumentException(sprintf('Address type "%s" is not supported.', $addressType)),

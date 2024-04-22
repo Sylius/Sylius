@@ -42,7 +42,7 @@ final class ProductImageTypeExtension extends AbstractTypeExtension
                         return $er->createQueryBuilder('o')
                             ->where('o.product = :product')
                             ->setParameter('product', $options['product'])
-                            ;
+                        ;
                     },
                     'autocomplete' => true,
                 ])
@@ -54,5 +54,4 @@ final class ProductImageTypeExtension extends AbstractTypeExtension
     {
         return [ProductImageType::class];
     }
-
 }

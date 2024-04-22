@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Page\Admin\Channel;
 
-use Behat\Mink\Exception\ElementNotFoundException;
 use Sylius\Behat\Page\Admin\Crud\UpdatePageInterface as BaseUpdatePageInterface;
 
 interface UpdatePageInterface extends BaseUpdatePageInterface

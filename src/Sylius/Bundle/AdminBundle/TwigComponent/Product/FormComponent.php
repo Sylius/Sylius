@@ -47,9 +47,7 @@ class FormComponent
     #[LiveProp(dehydrateWith: 'dehydrateFormData', fieldName: 'formData')]
     public ?Product $resource = null;
 
-    /**
-     * @var array<string>
-     */
+    /** @var array<string> */
     #[LiveProp(writable: true, hydrateWith: 'hydrateAttributesToBeAdded', dehydrateWith: 'dehydrateAttributesToBeAdded')]
     public array $attributesToBeAdded = [];
 
@@ -105,7 +103,7 @@ class FormComponent
     {
         $matchingAttributes = array_filter(
             $this->formValues['attributes'],
-            fn (array $value) => $value['attribute'] === $attributeCode && $value['localeCode'] === $localeCode
+            fn (array $value) => $value['attribute'] === $attributeCode && $value['localeCode'] === $localeCode,
         );
         $currentValue = array_pop($matchingAttributes)['value'];
 
@@ -122,7 +120,7 @@ class FormComponent
     {
         $this->formValues['attributes'] = array_filter(
             $this->formValues['attributes'],
-            fn (array $value) => $value['attribute'] !== $attributeCode
+            fn (array $value) => $value['attribute'] !== $attributeCode,
         );
         $this->dispatchBrowserEvent(self::ATTRIBUTE_REMOVED_EVENT, ['attributeCode' => $attributeCode]);
     }
