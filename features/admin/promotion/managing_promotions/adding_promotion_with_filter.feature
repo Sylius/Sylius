@@ -18,7 +18,7 @@ Feature: Adding promotion with filter
         And I add it
         Then the "$10 discount for all products over $10!" promotion should be successfully created
 
-    @api @ui @javascript
+    @api @ui @mink:chromedriver
     Scenario: Adding a promotion with item fixed discount only for products between 10 and 100
         When I want to create a new promotion
         And I specify its code as "10_for_all_products_over_10"
@@ -53,7 +53,7 @@ Feature: Adding promotion with filter
         Then I should be notified that it has been successfully created
         And the "$10 discount for PHP T-Shirts!" promotion should appear in the registry
 
-    @api @ui @javascript
+    @api @ui @mink:chromedriver
     Scenario: Adding a promotion with item percentage discount only for products over 10
         When I want to create a new promotion
         And I specify its code as "10_for_all_products_over_10"
@@ -64,7 +64,7 @@ Feature: Adding promotion with filter
         Then I should be notified that it has been successfully created
         And the "$10 discount for all products over $10!" promotion should appear in the registry
 
-    @api @ui @javascript
+    @api @ui @mink:chromedriver
     Scenario: Adding a promotion with item percentage discount only for products between 10 and 100
         When I want to create a new promotion
         And I specify its code as "10_for_all_products_over_10"
