@@ -2,10 +2,10 @@
 
 {% if visible %}
     <div class="dropdown">
-        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+        <button class="btn btn-secondary dropdown-static dropdown-toggle" type="button" id="dropdownLinks" data-bs-toggle="dropdown" aria-expanded="false">
             {{ action.label|trans }}
         </button>
-        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+        <ul class="dropdown-menu" aria-labelledby="dropdownLinks">
             {% if options.header is defined %}
                 <li><h6 class="dropdown-header">{{ options.header.label|trans }}</h6></li>
             {% endif %}
