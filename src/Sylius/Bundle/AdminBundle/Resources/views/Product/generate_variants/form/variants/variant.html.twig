@@ -1,0 +1,34 @@
+{% set form = hookable_data.form %}
+{% set main_hook = hook_name(hookable_data.parent_main_hook, 'variant') %}
+{% set fallback_hook = hook_name(hookable_data.parent_fallback_hook, 'variant') %}
+
+<div class="card mb-3" id="{{ form.vars.id }}">
+    <div class="card-header d-flex justify-content-between">
+        <div>
+            {% for optionValue in form.optionValues  %}
+                {{ optionValue.vars.label|trans }}: <span class="fw-bold me-1">{{ optionValue.vars.value }}</span>
+            {% endfor %}
+        </div>
+        {{- form_row(form.vars.button_delete, sylius_test_form_attribute('delete-button')|sylius_merge_recursive({'attr': {'class': 'btn-close'}})) -}}
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-12 col-md-6">
+                {% hook [main_hook ~ '#left', fallback_hook] with hookable_data|merge({
+                    parent_main_hook: main_hook,
+                    parent_fallback_hook: fallback_hook,
+                }) %}
+            </div>
+
+            <div class="col-12 col-md-6">
+                {% hook [main_hook ~ '#right', fallback_hook] with hookable_data|merge({
+                    parent_main_hook: main_hook,
+                    parent_fallback_hook: fallback_hook,
+                }) %}
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

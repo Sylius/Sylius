@@ -153,5 +153,9 @@
             <argument type="service" id="sylius.form.type.data_transformer.product_variants_to_codes" />
             <tag name="form.type_extension" />
         </service>
+
+        <service id="sylius_admin.form.extension.product_generate_variants" class="Sylius\Bundle\AdminBundle\Form\Extension\ProductGenerateVariantsTypeExtension">
+            <tag name="form.type_extension" />
+        </service>
     </services>
 </container>
