@@ -39,7 +39,7 @@ final class ProductImagesTest extends JsonApiTestCase
 
         $this->requestGet(
             uri: sprintf('/api/v2/shop/product-images/%s', $productImage->getId()),
-            headers: ['HTTPS' => true]
+            headers: ['HTTPS' => true],
         );
 
         $this->assertResponse(
@@ -62,7 +62,7 @@ final class ProductImagesTest extends JsonApiTestCase
         $this->requestGet(
             uri: sprintf('/api/v2/shop/product-images/%s', $productImage->getId()),
             queryParameters: [ImageNormalizer::FILTER_QUERY_PARAMETER => 'sylius_small'],
-            headers: ['HTTPS' => true]
+            headers: ['HTTPS' => true],
         );
 
         $this->assertResponse(
@@ -85,7 +85,7 @@ final class ProductImagesTest extends JsonApiTestCase
         $this->requestGet(
             uri: sprintf('/api/v2/shop/product-images/%s', $productImage->getId()),
             queryParameters: [ImageNormalizer::FILTER_QUERY_PARAMETER => 'invalid'],
-            headers: ['HTTPS' => true]
+            headers: ['HTTPS' => true],
         );
 
         $this->assertResponse(

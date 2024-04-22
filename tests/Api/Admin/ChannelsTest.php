@@ -105,6 +105,7 @@ final class ChannelsTest extends JsonApiTestCase
 
     /**
      * @test
+     *
      * @dataProvider getBlankFieldsData
      * @dataProvider getTooLongFieldsData
      */

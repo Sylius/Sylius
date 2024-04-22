@@ -252,7 +252,7 @@ final class AddressesTest extends JsonApiTestCase
             [
                 'propertyPath' => 'company',
                 'message' => 'This value is too long. It should have 255 characters or less.',
-            ]
+            ],
         ]);
     }
 
