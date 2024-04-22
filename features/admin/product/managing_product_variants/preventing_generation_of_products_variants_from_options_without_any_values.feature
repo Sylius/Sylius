@@ -10,7 +10,7 @@ Feature: Preventing the generation of product variants from options without any 
         And this product has an option "Taste" without any values
         And I am logged in as an administrator
 
-    @todo @ui @no-api
+    @ui @no-api
     Scenario: Trying to generate a product variant for a product without options values
         When I try to generate new variants for this product
         Then I should be notified that variants cannot be generated from options without any values
