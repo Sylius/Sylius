@@ -320,7 +320,7 @@ final class ManagingProductVariantsContext implements Context
         ChannelInterface $channel,
     ): void {
         $this->generatePage->specifyCode($nthVariant - 1, $code);
-        $this->generatePage->specifyPrice($nthVariant - 1, $price, $channel);
+        $this->generatePage->specifyPrice($nthVariant - 1, $price, $channel->getCode());
     }
 
     /**
@@ -336,7 +336,7 @@ final class ManagingProductVariantsContext implements Context
      */
     public function iSpecifyThereAreVariantsWithCost(int $nthVariant, int $price, ChannelInterface $channel): void
     {
-        $this->generatePage->specifyPrice($nthVariant - 1, $price, $channel);
+        $this->generatePage->specifyPrice($nthVariant - 1, $price, $channel->getCode());
     }
 
     /**
@@ -565,10 +565,10 @@ final class ManagingProductVariantsContext implements Context
     /**
      * @Then /^I should be notified that prices in all channels must be defined for the (\d)(?:st|nd|rd|th) variant$/
      */
-    public function iShouldBeNotifiedThatPricesInAllChannelsMustBeDefinedForTheVariant($position)
+    public function iShouldBeNotifiedThatPricesInAllChannelsMustBeDefinedForTheVariant($position): void
     {
         Assert::same(
-            $this->generatePage->getPricesValidationMessage($position - 1),
+            $this->generatePage->getValidationMessage('channel_pricings', $position - 1),
             'You must define price for every enabled channel.',
         );
     }
