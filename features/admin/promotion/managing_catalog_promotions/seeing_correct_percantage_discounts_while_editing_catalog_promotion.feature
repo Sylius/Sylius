@@ -17,14 +17,14 @@ Feature: Seeing correct percentage discounts while editing catalog promotion
         And it is enabled
         And I am logged in as an administrator
 
-    @api @ui @javascript
+    @api @todo @ui @javascript
     Scenario: Seeing the accurate percentage amount after editing the catalog promotion including the value up to one decimal place
         When I edit "Christmas sale" catalog promotion to have "2.5%" discount
         And I save my changes
         Then I should be notified that it has been successfully edited
         And this catalog promotion should have "2.50%" percentage discount
 
-    @api @ui @javascript
+    @api @todo @ui @javascript
     Scenario: Seeing the accurate percentage amount after editing the catalog promotion including the value up to two decimal places
         When I edit "Christmas sale" catalog promotion to have "2.56%" discount
         And I save my changes

@@ -1,0 +1,15 @@
+{% import '@SyliusAdmin/Shared/Helper/breadcrumbs.html.twig' as _breadcrumbs %}
+
+{% set configuration = hookable_data.resources.requestConfiguration %}
+
+{% set product_variant = configuration.vars.product_variant %}
+{% set product = configuration.vars.product_variant.product %}
+
+{{ _breadcrumbs.default([
+    { name: 'Dashboard', url: path('sylius_admin_dashboard'), active: false },
+    { name: 'sylius.ui.products'|trans, url: path('sylius_admin_product_index'), active: false },
+    { name: product.name|default(product.code), url: path('sylius_admin_product_show', {'id': product.id }), active: false },
+    { name: 'sylius.ui.variants'|trans, url: path('sylius_admin_product_variant_index', {'productId': product.id }), active: false },
+    { name: product_variant.name|default(product_variant.code), url: path('sylius_admin_product_variant_update', {'id': product_variant.id, 'productId': product.id }), active: false },
+    { name: 'sylius.ui.price_history'|trans, active: true }
+]) }}

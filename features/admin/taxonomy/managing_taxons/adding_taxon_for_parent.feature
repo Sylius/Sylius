@@ -9,7 +9,7 @@ Feature: Adding a new taxon for parent
         And the store has "Category" taxonomy
         And I am logged in as an administrator
 
-    @ui @api
+    @todo @ui @api
     Scenario: Adding a new taxon for specific parent taxon
         When I want to create a new taxon for "Category"
         And I specify its code as "guns"

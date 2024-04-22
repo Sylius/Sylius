@@ -1,1 +1,9 @@
-{% if data is not null %}{{ data.name }}{% endif %}
+{% if data.name is defined %}
+    {{ data.name }}
+{% else %}
+    {% from '@SyliusAdmin/Shared/Helper/icon.html.twig' import icon as _icon %}
+
+    <span class="text-danger">
+        {{ _icon({ icon: 'exclamation-circle' }) }} <i>{{ 'sylius.ui.no_main_taxon'|trans }}</i>
+    </span>
+{% endif %}

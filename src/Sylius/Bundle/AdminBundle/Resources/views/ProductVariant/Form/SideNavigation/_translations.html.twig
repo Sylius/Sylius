@@ -1,0 +1,10 @@
+<button
+    type="button"
+    class="list-group-item list-group-item-action {% if hookable_configuration.active|default(false) %}active{% endif %}"
+    data-bs-toggle="tab"
+    data-bs-target="#product-variant-translations"
+    role="tab"
+    {{ sylius_test_html_attribute('side-navigation-tab', 'translations') }}
+>
+    {{ 'sylius.ui.translations'|trans }}
+</button>

@@ -1,0 +1,5 @@
+{% if data is null %}
+    <span class="text-secondary fst-italic">{{ 'sylius.ui.empty_date'|trans }}</span>
+{% else %}
+    {{ data|date('Y-m-d H:i') }}
+{% endif %}

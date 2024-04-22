@@ -1,9 +1,0 @@
-<div class="middle aligned column">
-    <div class="ui right floated buttons">
-        {% if definition.actionGroups.main is defined %}
-            {% for action in definition.getEnabledActions('main') %}
-                {{ sylius_grid_render_action(resources, action, null) }}
-            {% endfor %}
-        {% endif %}
-    </div>
-</div>

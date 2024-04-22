@@ -20,6 +20,8 @@ use Sylius\Behat\Page\Admin\Customer\IndexPageInterface as CustomerIndexPageInte
 use Sylius\Behat\Page\Admin\Customer\ShowPageInterface;
 use Sylius\Behat\Page\Admin\Customer\UpdatePageInterface;
 use Sylius\Behat\Service\Resolver\CurrentPageResolverInterface;
+use Sylius\Component\Core\Formatter\StringInflector;
+use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Webmozart\Assert\Assert;
 
@@ -91,13 +93,22 @@ final class ManagingCustomersContext implements Context
     }
 
     /**
+     * @When I search for customer by :phrase
+     */
+    public function iSearchForCustomersWith(string $phrase): void
+    {
+        $this->indexPage->setFilterSearch($phrase);
+        $this->indexPage->filter();
+    }
+
+    /**
      * @When I filter by group :groupName
      * @When I filter by groups :firstGroup and :secondGroup
      */
     public function iFilterByGroup(string ...$groupsNames): void
     {
         foreach ($groupsNames as $groupName) {
-            $this->indexPage->specifyFilterGroup($groupName);
+            $this->indexPage->setFilterGroup($groupName);
         }
 
         $this->indexPage->filter();
@@ -192,7 +203,23 @@ final class ManagingCustomersContext implements Context
     }
 
     /**
-     * @Then /^I should see (\d+) customers in the list$/
+     * @When /^I sort customers by (ascending|descending) registration date$/
+     */
+    public function iSortCustomersByRegistrationDate(string $order): void
+    {
+        $this->sortBy($order, 'createdAt');
+    }
+
+    /**
+     * @When /^I sort customers by (ascending|descending) (email|first name|last name)$/
+     */
+    public function iSortCustomersByField(string $order, string $field): void
+    {
+        $this->sortBy($order, StringInflector::nameToCamelCase($field));
+    }
+
+    /**
+     * @Then /^I should see (\d+) customers (?:in|on) the list$/
      * @Then /^I should see a single customer on the list$/
      */
     public function iShouldSeeCustomersInTheList($amountOfCustomers = 1)
@@ -202,10 +229,24 @@ final class ManagingCustomersContext implements Context
 
     /**
      * @Then I should see the customer :email in the list
+     * @Then I should see the customer :email on the list
      */
     public function iShouldSeeTheCustomerInTheList($email)
     {
         Assert::true($this->indexPage->isSingleResourceOnPage(['email' => $email]));
+    }
+
+    /**
+     * @Then /^the (first|last) customer should be "([^"]+)"$/
+     */
+    public function theFirstLastCustomerShouldBe(string $placement, string $email): void
+    {
+        $index = 'first' === $placement ? 0 : $this->indexPage->countItems() - 1;
+
+        Assert::same(
+            $this->indexPage->getColumnFields('email')[$index],
+            $email,
+        );
     }
 
     /**
@@ -436,14 +477,6 @@ final class ManagingCustomersContext implements Context
     }
 
     /**
-     * @Then /^(?:their|his) default address should be "([^"]+)"$/
-     */
-    public function hisShippingAddressShouldBe(string $defaultAddress): void
-    {
-        Assert::same($this->showPage->getDefaultAddress(), str_replace(',', '', $defaultAddress));
-    }
-
-    /**
      * @Then their default address should be :firstName :lastName, :street, :postcode :city, :country
      */
     public function theirSDefaultAddressShouldBe(
@@ -456,7 +489,7 @@ final class ManagingCustomersContext implements Context
     ): void {
         Assert::same(
             $this->showPage->getDefaultAddress(),
-            sprintf('%s %s %s %s %s %s', $firstName, $lastName, $street, $city, strtoupper($country), $postcode),
+            sprintf('%s %s, %s, %s %s, %s', $firstName, $lastName, $street, $postcode, $city, ucwords($country)),
         );
     }
 
@@ -465,7 +498,7 @@ final class ManagingCustomersContext implements Context
      */
     public function iShouldSeeInformationAboutNoExistingAccountForThisCustomer()
     {
-        Assert::true($this->showPage->hasAccount());
+        Assert::false($this->showPage->hasAccount());
     }
 
     /**
@@ -645,26 +678,31 @@ final class ManagingCustomersContext implements Context
     }
 
     /**
-     * @Then /^I should see that they have placed (\d+) orders? in the "([^"]+)" channel$/
+     * @Then /^I should see that they have placed (\d+) orders? in the ("[^"]+" channel)$/
      */
-    public function iShouldSeeThatTheyHavePlacedOrdersInTheChannel($ordersCount, $channelName)
+    public function iShouldSeeThatTheyHavePlacedOrdersInTheChannel($ordersCount, ChannelInterface $channel)
     {
-        Assert::same($this->showPage->getOrdersCountInChannel($channelName), (int) $ordersCount);
+        Assert::same($this->showPage->getOrdersCountInChannel($channel->getCode()), (int) $ordersCount);
     }
 
     /**
-     * @Then /^I should see that the overall total value of all their orders in the "([^"]+)" channel is "([^"]+)"$/
+     * @Then /^I should see that the overall total value of all their orders in the ("[^"]+" channel) is "([^"]+)"$/
      */
-    public function iShouldSeeThatTheOverallTotalValueOfAllTheirOrdersInTheChannelIs($channelName, $ordersValue)
+    public function iShouldSeeThatTheOverallTotalValueOfAllTheirOrdersInTheChannelIs(ChannelInterface $channel, $ordersValue)
     {
-        Assert::same($this->showPage->getOrdersTotalInChannel($channelName), $ordersValue);
+        Assert::same($this->showPage->getOrdersTotalInChannel($channel->getCode()), $ordersValue);
     }
 
     /**
-     * @Then /^I should see that the average total value of their order in the "([^"]+)" channel is "([^"]+)"$/
+     * @Then /^I should see that the average total value of their order in the ("[^"]+" channel) is "([^"]+)"$/
      */
-    public function iShouldSeeThatTheAverageTotalValueOfTheirOrderInTheChannelIs($channelName, $ordersValue)
+    public function iShouldSeeThatTheAverageTotalValueOfTheirOrderInTheChannelIs(ChannelInterface $channel, $ordersValue)
     {
-        Assert::same($this->showPage->getOrdersTotalInChannel($channelName), $ordersValue);
+        Assert::same($this->showPage->getAverageTotalInChannel($channel->getCode()), $ordersValue);
+    }
+
+    private function sortBy(string $order, string $field): void
+    {
+        $this->indexPage->sortBy($field, str_starts_with($order, 'de') ? 'desc' : 'asc');
     }
 }

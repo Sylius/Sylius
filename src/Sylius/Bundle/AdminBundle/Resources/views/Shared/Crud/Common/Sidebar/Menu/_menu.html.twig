@@ -1,0 +1,104 @@
+{% extends 'knp_menu.html.twig' %}
+
+{% from '@SyliusAdmin/Shared/Helper/icon.html.twig' import icon %}
+
+{% block root %}
+    <ul class="navbar-nav pt-lg-3">
+        {{ parent() }}
+    </ul>
+{% endblock %}
+
+{% block list %}
+    {% for item in item.children %}
+        {{ block('item') }}
+    {% endfor %}
+{% endblock %}
+
+{% block item %}
+    {# building the class of the item #}
+    {%- set classes = item.attribute('class') is not empty ? [item.attribute('class')] : [] %}
+    {%- if matcher.isCurrent(item) %}
+        {%- set classes = classes|merge([options.currentClass]) %}
+    {%- elseif matcher.isAncestor(item, options.matchingDepth) %}
+        {%- set classes = classes|merge([options.ancestorClass]) %}
+    {%- endif %}
+    {%- if item.actsLikeFirst %}
+        {%- set classes = classes|merge([options.firstClass]) %}
+    {%- endif %}
+    {%- if item.actsLikeLast %}
+        {%- set classes = classes|merge([options.lastClass]) %}
+    {%- endif %}
+
+    {% set isActive = matcher.isCurrent(item) or matcher.isAncestor(item, options.matchingDepth) %}
+
+    {# Mark item as "leaf" (no children) or as "branch" (has children that are displayed) #}
+    {% if item.hasChildren and options.depth is not same as(0) %}
+        {% if options.branch_class is not empty and item.displayChildren %}
+            {%- set classes = classes|merge([options.branch_class]) %}
+        {% endif %}
+    {% elseif options.leaf_class is not empty %}
+        {%- set classes = classes|merge([options.leaf_class]) %}
+    {%- endif %}
+
+    {%- set attributes = item.attributes %}
+    {%- if classes is not empty %}
+        {%- set attributes = attributes|merge({'class': classes|join(' ')}) %}
+    {%- endif %}
+    {% if item.hasChildren %}
+        <li class="nav-item {% if attributes.class is defined %}{{ attributes.class }}{% endif %}">
+            <a class="nav-link dropdown-toggle {{ isActive ? 'show' : '' }}" href="#navbar-{{ item.name }}" data-bs-toggle="dropdown" data-bs-auto-close="false" role="button" aria-expanded="{{ isActive ? 'true' : 'false' }}">
+                <span class="nav-link-icon d-md-none d-lg-inline-block">
+                    {{ block('icon') }}
+                </span>
+                <span class="nav-link-title">{{ item.label|trans }}</span>
+            </a>
+            <div class="dropdown-menu {{ isActive ? 'show' : '' }}">
+                <div class="dropdown-menu-columns">
+                    <div class="dropdown-menu-column">
+                        {{ block('childrenList') }}
+                    </div>
+                </div>
+            </div>
+        </li>
+    {% else %}
+        <li class="nav-item">
+            <a class="nav-link" href="{{ item.uri }}">
+                <span class="nav-link-icon d-md-none d-lg-inline-block">
+                    {{ block('icon') }}
+                </span>
+                <span class="nav-link-title">
+                    {{ item.label|trans }}
+                </span>
+            </a>
+        </li>
+    {% endif %}
+{% endblock %}
+
+{% block childrenList %}
+    {% for item in item.children %}
+        {{ block('childItem') }}
+    {% endfor %}
+{% endblock %}
+
+{% block childItem %}
+    {%- set classes = item.attribute('class') is not empty ? [item.attribute('class')] : [] %}
+    {%- set target = item.linkAttributes and item.linkAttributes['target'] ? item.linkAttributes['target'] : '_self' %}
+    {%- if matcher.isCurrent(item) %}
+        {%- set classes = classes|merge([options.currentClass]) %}
+    {%- endif %}
+
+    {%- if classes is not empty %}
+        {%- set attributes = attributes|merge({'class': classes|join(' ')}) %}
+    {%- endif %}
+
+    {% set isActive = matcher.isCurrent(item) %}
+
+    <a class="dropdown-item {{ isActive ? '' : 'text-muted' }} {% if attributes.class is defined %}{{ attributes.class }}{% endif %}" href="{{ item.uri }}" target="{{ target }}">
+        {{ item.label|trans }}{% if target == '_blank' %}{{ icon({ icon: 'external-link', class: 'icon icon-tabler icon-sm ms-1 mb-2 opacity-75' }) }}{% endif %}
+    </a>
+{% endblock %}
+
+{% block icon %}
+    {% set iconName = item.labelAttribute('icon') %}
+    {% if iconName %}{{ icon({ icon: iconName }) }}{% endif %}
+{% endblock %}

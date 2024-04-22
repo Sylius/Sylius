@@ -24,7 +24,7 @@ sylius_grid:
                     type: twig
                     label: sylius.ui.enabled
                     options:
-                        template: "@SyliusUi/Grid/Field/enabled.html.twig"
+                        template: "@SyliusAdmin/Shared/Grid/Field/boolean.html.twig"
                 inventory:
                     type: twig
                     path: .
@@ -49,10 +49,10 @@ sylius_grid:
                         fields: [translation.name]
             actions:
                 main:
-                    generate:
-                        type: generate_variants
-                        options:
-                            product: expr:service('sylius.repository.product').find($productId)
+#                    generate:
+#                        type: generate_variants
+#                        options:
+#                            product: expr:service('sylius.repository.product').find($productId)
                     update_positions:
                         type: update_product_variant_positions
                     create:

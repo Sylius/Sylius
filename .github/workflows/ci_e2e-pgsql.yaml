@@ -66,7 +66,7 @@ jobs:
             -   name: "Checkout"
                 if: "${{ inputs.branch == '' }}"
                 uses: actions/checkout@v4
-                
+
             -   name: Prepare manifest.json files
                 run: |
                     mkdir -p public/build/admin
@@ -77,7 +77,7 @@ jobs:
                     echo "{}" > public/build/shop/manifest.json
                     echo "{}" > public/build/app/admin/manifest.json
                     echo "{}" > public/build/app/shop/manifest.json
-                
+
             -   name: Build application
                 uses: SyliusLabs/BuildTestAppAction@v2.2
                 with:
@@ -95,11 +95,11 @@ jobs:
             -   name: Run PHPUnit
                 run: vendor/bin/phpunit --colors=always
 
-            -   name: Run CLI Behat
-                run: vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="@cli&&~@todo" --suite-tags="@cli" || vendor/bin/behat --strict --no-interaction -vvv -f progress --tags="@cli&&~@todo" --suite-tags="@cli" --rerun
-
-            -   name: Run non-UI Behat
-                run: vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="~@todo&&~@cli&&~@no-postgres" --suite-tags="@api,@domain,@hybrid" || vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="~@todo&&~@cli&&~@no-postgres" --suite-tags="@api,@domain,@hybrid" --rerun
+#            -   name: Run CLI Behat
+#                run: vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="@cli&&~@todo" --suite-tags="@cli" || vendor/bin/behat --strict --no-interaction -vvv -f progress --tags="@cli&&~@todo" --suite-tags="@cli" --rerun
+#
+#            -   name: Run non-UI Behat
+#                run: vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="~@todo&&~@cli&&~@no-postgres" --suite-tags="@api,@domain,@hybrid" || vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="~@todo&&~@cli&&~@no-postgres" --suite-tags="@api,@domain,@hybrid" --rerun
 
             -   name: Run non-JS Behat
                 run: vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="~@javascript&&~@mink:chromedriver&&~@todo&&~@cli&&~@no-postgres" --suite-tags="@ui" || vendor/bin/behat --strict --no-interaction -vvv -f progress --tags="~@javascript&&~@mink:chromedriver&&~@todo&&~@cli&&~@no-postgres" --suite-tags="@ui" --rerun

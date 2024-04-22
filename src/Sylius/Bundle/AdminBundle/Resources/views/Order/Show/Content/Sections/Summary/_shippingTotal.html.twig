@@ -1,0 +1,17 @@
+{% import '@SyliusAdmin/Shared/Helper/money.html.twig' as _money %}
+
+{% set order = hookable_data.resource %}
+
+<tr>
+    <td>
+        <div class="d-md-flex justify-content-between">
+            <div><strong>{{ 'sylius.ui.shipping_total'|trans }}:</strong></div>
+            <div class="text-muted text-md-end">
+                <div>
+                    {{ order.adjustments('shipping')|map(s => "#{s.label}: #{_money.format(s.amount, order.currencyCode)}")|join(", ") }}
+                </div>
+            </div>
+        </div>
+    </td>
+    <td class="text-end">{{ _money.format(order.shippingTotal, order.currencyCode) }}</td>
+</tr>

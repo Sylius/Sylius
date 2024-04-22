@@ -1,0 +1,62 @@
+{% set product = hookable_data.resource %}
+
+{% if product.isSimple %}
+    <div class="tab-pane" id="product-channel-pricing" role="tabpanel" tabindex="0">
+        {% set variantForm = hookable_data.form.variant %}
+
+        {% set isChannelPricingInvalid = variantForm.channelPricings.vars.errors is not empty %}
+
+        {% if isChannelPricingInvalid %}
+            {% from '@SyliusAdmin/Shared/Helper/icon.html.twig' import icon as _icon %}
+
+            <div class="alert alert-danger" role="alert">
+                <div class="d-flex">
+                    <div>
+                        {{ _icon({ 'icon': 'danger', 'class': 'alert-icon' }) }}
+                    </div>
+                    <div>
+                        {% set firstError = variantForm.channelPricings.vars.errors|first %}
+                        {{ firstError.messageTemplate|trans({}, 'validators') }}
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+
+        <div class="card mb-3">
+            {% if isChannelPricingInvalid %}
+                <div class="card-status-top bg-danger"></div>
+            {% endif %}
+            <div class="card-header">
+                <ul class="nav nav-tabs card-header-tabs" data-bs-toggle="tabs" role="tablist">
+                    {% for channelCode, channelPricing in variantForm.channelPricings %}
+                        <li class="nav-item">
+                            <a
+                                class="nav-link {% if loop.index0 == 0 %}active{% endif %}"
+                                data-bs-toggle="tab"
+                                href="#{{ channelCode }}"
+                                role="tab"
+                                {{ sylius_test_html_attribute('channel-tab', channelCode) }}
+                            >
+                                {{ channelPricing.vars.label }}
+                            </a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="card-body">
+                <div class="tab-content">
+                    {% for channelCode, channelPricing in variantForm.channelPricings %}
+                        <div class="tab-pane fade {% if loop.index0 == 0 %}show{% endif %} active" id="{{ channelCode }}" role="tabpanel">
+                            {% if channelCode not in product.channels|map(channel => channel.code) %}
+                                <div class="alert alert-info">
+                                    {{ 'sylius.ui.product.product_not_active_in_channel'|trans }}
+                                </div>
+                            {% endif %}
+                            {{ form_row(channelPricing, {'label': false}) }}
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endif %}

@@ -67,10 +67,6 @@
         <service id="sylius.form.extension.type.address" class="Sylius\Bundle\CoreBundle\Form\Extension\AddressTypeExtension">
             <tag name="form.type_extension" extended-type="Sylius\Bundle\AddressingBundle\Form\Type\AddressType" priority="100" />
         </service>
-        <service id="sylius.form.extension.type.country" class="Sylius\Bundle\CoreBundle\Form\Extension\CountryTypeExtension">
-            <argument type="service" id="sylius.repository.country" />
-            <tag name="form.type_extension" extended-type="Sylius\Bundle\AddressingBundle\Form\Type\CountryType" priority="100" />
-        </service>
         <service id="sylius.form.extension.type.channel" class="Sylius\Bundle\CoreBundle\Form\Extension\ChannelTypeExtension">
             <tag name="form.type_extension" extended-type="Sylius\Bundle\ChannelBundle\Form\Type\ChannelType" priority="100" />
         </service>
@@ -153,6 +149,7 @@
 
         <service id="sylius.form.type.product_image" class="Sylius\Bundle\CoreBundle\Form\Type\Product\ProductImageType">
             <argument>%sylius.model.product_image.class%</argument>
+            <argument>%sylius.model.product_variant.class%</argument>
             <argument>%sylius.form.type.product_image.validation_groups%</argument>
             <tag name="form.type" />
         </service>

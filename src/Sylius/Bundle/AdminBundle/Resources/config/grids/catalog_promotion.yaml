@@ -1,7 +1,4 @@
 sylius_grid:
-    templates:
-        action:
-            delete_catalog_promotion: "@SyliusAdmin/Grid/deleteCatalogPromotion.html.twig"
     grids:
         sylius_admin_catalog_promotion:
             driver:
@@ -20,37 +17,40 @@ sylius_grid:
                     label: sylius.ui.name
                     sortable: ~
                 startDate:
-                    type: datetime
+                    type: twig
                     label: sylius.ui.start_date
                     sortable: ~
                     options:
-                        format: Y-m-d H:i
+                        template: '@SyliusAdmin/CatalogPromotion/Grid/Field/date.html.twig'
                 endDate:
-                    type: datetime
+                    type: twig
                     label: sylius.ui.end_date
                     sortable: ~
                     options:
-                        format: Y-m-d H:i
+                        template: '@SyliusAdmin/CatalogPromotion/Grid/Field/date.html.twig'
                 priority:
-                    type: string
+                    type: twig
                     label: sylius.ui.priority
                     sortable: ~
+                    options:
+                        template: '@SyliusAdmin/CatalogPromotion/Grid/Field/priority.html.twig'
                 channels:
                     type: twig
                     label: sylius.ui.channels
                     options:
-                        template: '@SyliusAdmin/Grid/Field/_channels.html.twig'
+                        template: '@SyliusAdmin/Shared/Grid/Field/channels.html.twig'
                 state:
                     type: twig
                     label: sylius.ui.state
+                    path: state
                     options:
-                        template: '@SyliusAdmin/Common/Label/catalogPromotionState.html.twig'
+                        template: '@SyliusAdmin/CatalogPromotion/Grid/Field/state.html.twig'
                 enabled:
                     type: twig
                     label: sylius.ui.enabled
                     sortable: ~
                     options:
-                        template: "@SyliusUi/Grid/Field/enabled.html.twig"
+                        template: "@SyliusAdmin/Shared/Grid/Field/boolean.html.twig"
             filters:
                 search:
                     type: string

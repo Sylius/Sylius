@@ -19,33 +19,26 @@ use Sylius\Behat\Page\Admin\Crud\UpdatePage as BaseUpdatePage;
 
 class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
 {
+    use FormAwareTrait;
     use ChecksCodeImmutability;
 
     public function removeZone(): void
     {
-        $this->getDocument()->selectFieldOption('Zone', 'Select');
+        $this->getElement('field_zone')->setValue('');
     }
 
     public function isIncludedInPrice(): bool
     {
-        return (bool) $this->getElement('included_in_price')->getValue();
+        return $this->getElement('field_included_in_price')->isChecked();
     }
 
     protected function getCodeElement(): NodeElement
     {
-        return $this->getElement('code');
+        return $this->getElement('field_code');
     }
 
     protected function getDefinedElements(): array
     {
-        return array_merge(parent::getDefinedElements(), [
-            'amount' => '#sylius_tax_rate_amount',
-            'calculator' => '#sylius_tax_rate_calculator',
-            'category' => '#sylius_tax_rate_category',
-            'code' => '#sylius_tax_rate_code',
-            'name' => '#sylius_tax_rate_name',
-            'zone' => '#sylius_tax_rate_zone',
-            'included_in_price' => '#sylius_tax_rate_includedInPrice',
-        ]);
+        return array_merge(parent::getDefinedElements(), $this->getDefinedFormElements());
     }
 }

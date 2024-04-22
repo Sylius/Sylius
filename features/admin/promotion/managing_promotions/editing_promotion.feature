@@ -62,7 +62,7 @@ Feature: Editing promotion
         Then I should be able to modify a "Christmas sale" promotion
 
     @ui @no-api
-    Scenario: Remove priority from existing promotion
+    Scenario: Removing priority from existing promotion
         When I want to modify a "Christmas sale" promotion
         And I remove its priority
         And I save my changes
@@ -76,3 +76,13 @@ Feature: Editing promotion
         And I save my changes
         Then I should be notified that it has been successfully edited
         And the "Christmas sale" promotion should have priority 1
+
+    @ui @javascript
+    Scenario: Removing rule and action from existing promotion
+        Given the promotion gives "$10.00" discount to every order with quantity at least 1
+        When I want to modify a "Holiday sale" promotion
+        And I remove its last rule
+        And I remove its last action
+        And I save my changes
+        Then I should not see the rule configuration form
+        And I should not see the action configuration form

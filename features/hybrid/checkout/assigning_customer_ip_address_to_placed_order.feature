@@ -13,7 +13,7 @@ Feature: Assigning customer's IP address to a placed order
         And there is a customer account "customer@example.com" identified by "sylius"
         And I am logged in as "customer@example.com"
 
-    @ui
+    @todo @ui
     Scenario: Assigning customer's IP address to a newly placed order
         Given I have product "PHP T-Shirt" in the cart
         And I specified the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"

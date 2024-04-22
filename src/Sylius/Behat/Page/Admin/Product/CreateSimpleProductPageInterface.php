@@ -34,9 +34,9 @@ interface CreateSimpleProductPageInterface extends BaseCreatePageInterface
 
     public function specifySlugIn(?string $slug, string $locale): void;
 
-    public function addAttribute(string $attributeName, string $value, string $localeCode): void;
+    public function addAttribute(string $attributeName): void;
 
-    public function selectAttributeValue(string $attributeName, string $value, string $localeCode): void;
+    public function updateAttribute(string $attributeName, string $value, string $localeCode): void;
 
     public function addNonTranslatableAttribute(string $attributeName, string $value): void;
 
@@ -49,6 +49,8 @@ interface CreateSimpleProductPageInterface extends BaseCreatePageInterface
     public function selectMainTaxon(TaxonInterface $taxon): void;
 
     public function checkProductTaxon(TaxonInterface $taxon): void;
+
+    public function hasImageWithType(string $type): bool;
 
     public function attachImage(string $path, ?string $type = null): void;
 

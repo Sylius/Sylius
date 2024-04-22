@@ -8,7 +8,10 @@
             {{ translation.name }}
         </span>
     {% else %}
-        {% include '@SyliusAdmin/Common/_missingTranslation.html.twig' %}
+        <span class="text-danger" {{ sylius_test_html_attribute('missing-translation') }} >
+            {% from '@SyliusAdmin/Shared/Helper/icon.html.twig' import icon as _icon %}
+            {{ _icon({ icon: 'exclamation-circle' }) }} <i>{{ 'sylius.ui.missing_translation'|trans }}</i>
+        </span>
     {% endif %}
 {% else %}
     <span class="ui small header">

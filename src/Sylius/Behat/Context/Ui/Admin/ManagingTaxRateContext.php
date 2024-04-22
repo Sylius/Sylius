@@ -237,7 +237,7 @@ final class ManagingTaxRateContext implements Context
      */
     public function iShouldBeNotifiedThatTaxRateWithThisCodeAlreadyExists()
     {
-        Assert::same($this->createPage->getValidationMessage('code'), 'The tax rate with given code already exists.');
+        $this->assertFieldValidationMessage('code', 'The tax rate with given code already exists.');
     }
 
     /**
@@ -357,35 +357,6 @@ final class ManagingTaxRateContext implements Context
     }
 
     /**
-     * @param string $element
-     * @param string $taxRateElement
-     */
-    private function assertFieldValue(TaxRateInterface $taxRate, $element, $taxRateElement)
-    {
-        $this->indexPage->open();
-
-        Assert::true(
-            $this->indexPage->isSingleResourceOnPage([
-                    'code' => $taxRate->getCode(),
-                    $element => $taxRateElement,
-            ]),
-            sprintf('Tax rate %s %s has not been assigned properly.', $element, $taxRateElement),
-        );
-    }
-
-    /**
-     * @param string $element
-     * @param string $expectedMessage
-     */
-    private function assertFieldValidationMessage($element, $expectedMessage)
-    {
-        /** @var CreatePageInterface|UpdatePageInterface $currentPage */
-        $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
-
-        Assert::same($currentPage->getValidationMessage($element), $expectedMessage);
-    }
-
-    /**
      * @Given I choose "Included in price" option
      */
     public function iChooseOption()
@@ -429,8 +400,29 @@ final class ManagingTaxRateContext implements Context
         $this->filterElement->filter();
     }
 
+    private function assertFieldValue(TaxRateInterface $taxRate, string $element, string $taxRateElement): void
+    {
+        $this->indexPage->open();
+
+        Assert::true(
+            $this->indexPage->isSingleResourceOnPage([
+                'code' => $taxRate->getCode(),
+                $element => $taxRateElement,
+            ]),
+            sprintf('Tax rate %s %s has not been assigned properly.', $element, $taxRateElement),
+        );
+    }
+
     protected function resolveCurrentPage(): SymfonyPageInterface
     {
         return $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
+    }
+
+    private function assertFieldValidationMessage(string $element, string $expectedMessage): void
+    {
+        /** @var CreatePageInterface|UpdatePageInterface $currentPage */
+        $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
+
+        Assert::same($currentPage->getValidationMessage('field_' . $element), $expectedMessage);
     }
 }

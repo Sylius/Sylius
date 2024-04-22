@@ -1,0 +1,8 @@
+{% set order = hookable_data.resource %}
+
+<div>
+    <div>
+        <strong>{{ 'sylius.ui.currency'|trans }}:</strong>
+    </div>
+    <div class="mb-3">{{ order.currencyCode }}</div>
+</div>

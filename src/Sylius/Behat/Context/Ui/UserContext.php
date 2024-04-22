@@ -62,6 +62,6 @@ final class UserContext implements Context
 
         $this->customerShowPage->open(['id' => $deletedUser->getCustomer()->getId()]);
 
-        Assert::false($this->customerShowPage->isRegistered());
+        Assert::false($this->customerShowPage->hasAccount());
     }
 }

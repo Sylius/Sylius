@@ -1,0 +1,31 @@
+{
+  "name": "@sylius-ui/admin",
+  "version": "1.0.0",
+  "license": "MIT",
+  "author": "Sylius Sp. z o.o.",
+  "dependencies": {
+    "@hotwired/stimulus": "^3.0.0",
+    "@popperjs/core": "^2.11.8",
+    "@symfony/stimulus-bridge": "^3.2.0",
+    "@symfony/webpack-encore": "^3.1.0",
+    "@tabler/core": "tabler/tabler#dev",
+    "apexcharts": "^3.41.0",
+    "bootstrap": "^5.3.0",
+    "choices.js": "^10.2.0",
+    "slugify": "^1.6",
+    "stimulus-use": "^0.52"
+  },
+  "devDependencies": {
+    "sass": "^1.54.8",
+    "sass-loader": "^13.0.0"
+  },
+  "engines": {
+    "node": "^18 || ^20"
+  },
+  "engineStrict": true,
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Sylius/SyliusAdminBundle.git"
+  }
+}

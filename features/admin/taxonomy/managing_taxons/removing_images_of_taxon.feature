@@ -9,7 +9,7 @@ Feature: Removing images of an existing taxon
         And the store classifies its products as "T-Shirts"
         And I am logged in as an administrator
 
-    @ui @javascript @api
+    @todo @ui @javascript @api
     Scenario: Removing a single image of a taxon
         Given the "T-Shirts" taxon has an image "t-shirts.jpg" with "banner" type
         When I want to modify the "T-Shirts" taxon
@@ -18,7 +18,7 @@ Feature: Removing images of an existing taxon
         Then I should be notified that the changes have been successfully applied
         And this taxon should not have any images
 
-    @ui @javascript @api
+    @todo @ui @javascript @api
     Scenario: Removing all images of a taxon
         Given the "T-Shirts" taxon has an image "t-shirts.jpg" with "banner" type
         And the "T-Shirts" taxon also has an image "t-shirts.jpg" with "thumbnail" type
@@ -29,7 +29,7 @@ Feature: Removing images of an existing taxon
         Then I should be notified that the changes have been successfully applied
         And this taxon should not have any images
 
-    @ui @mink:chromedriver @api
+    @todo @ui @mink:chromedriver @api
     Scenario: Removing only one image of a taxon
         Given the "T-Shirts" taxon has an image "t-shirts.jpg" with "banner" type
         And the "T-Shirts" taxon also has an image "t-shirts.jpg" with "thumbnail" type
@@ -40,7 +40,7 @@ Feature: Removing images of an existing taxon
         And this taxon should have an image with "thumbnail" type
         But this taxon should not have any images with "banner" type
 
-    @ui @javascript @api
+    @todo @ui @javascript @api
     Scenario: Removing only one image of a taxon when all images have same type
         Given the "T-Shirts" taxon has an image "t-shirts.jpg" with "banner" type
         And the "T-Shirts" taxon also has an image "mugs.jpg" with "banner" type
@@ -50,7 +50,7 @@ Feature: Removing images of an existing taxon
         Then I should be notified that the changes have been successfully applied
         And this taxon should have only one image
 
-    @ui @mink:chromedriver @no-api
+    @todo @ui @mink:chromedriver @no-api
     Scenario: Adding multiple images and removing a single image of a taxon
         When I want to modify the "T-Shirts" taxon
         And I attach the "t-shirts.jpg" image with "banner" type

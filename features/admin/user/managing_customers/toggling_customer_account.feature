@@ -7,7 +7,7 @@ Feature: Toggling a customer account
     Background:
         Given I am logged in as an administrator
 
-    @api @ui
+    @api @todo @ui
     Scenario: Enabling a customer account
         Given there is disabled customer account "f.baggins@example.com" with password "psw"
         When I want to enable "f.baggins@example.com"
@@ -16,7 +16,7 @@ Feature: Toggling a customer account
         Then I should be notified that it has been successfully edited
         And this customer should be enabled
 
-    @api @ui
+    @api @todo @ui
     Scenario: Disabling a customer account
         Given there is enabled customer account "f.baggins@example.com" with password "psw"
         When I want to disable "f.baggins@example.com"

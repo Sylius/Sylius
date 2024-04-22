@@ -73,19 +73,29 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
         return stripos($shipmentsText, $shippingDetails) !== false;
     }
 
+    public function hasShipmentWithState(string $state): bool
+    {
+        foreach ($this->getElement('shipments')->findAll('css' , '[data-test-shipment-state]') as $shipmentState) {
+            if (0 === strcasecmp($state, $shipmentState->getText())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public function specifyTrackingCode(string $code): void
     {
-        $this->getDocument()->fillField('sylius_shipment_ship_tracking', $code);
+        $this->getElement('shipment_tracking')->setValue($code);
     }
 
     public function canShipOrder(OrderInterface $order): bool
     {
-        return $this->getLastOrderShipmentElement($order)->hasButton('Ship');
+        return $this->hasElement('shipment_ship_button');
     }
 
     public function shipOrder(OrderInterface $order): void
     {
-        $this->getLastOrderShipmentElement($order)->pressButton('Ship');
+        $this->getElement('shipment_ship_button')->press();
     }
 
     public function hasPayment(string $paymentDetails): bool
@@ -405,7 +415,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
-            'billing_address' => '#billing-address',
+            'billing_address' => '[data-test-billing-address]',
             'currency' => '#sylius-order-currency',
             'customer' => '#customer',
             'ip_address' => '#ipAddress',
@@ -417,20 +427,22 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
             'payments' => '#sylius-payments',
             'promotion_discounts' => '#promotion-discounts',
             'promotion_shipping_discounts' => '#shipping-discount-value',
-            'promotion_total' => '#promotion-total',
+            'promotion_total' => '[data-test-promotion-total]',
             'resend_order_confirmation_email' => '[data-test-resend-order-confirmation-email]',
             'resend_shipment_confirmation_email' => '[data-test-resend-shipment-confirmation-email]',
             'shipment_shipped_at_date' => '#sylius-shipments .shipped-at-date',
-            'shipments' => '#sylius-shipments',
-            'shipping_address' => '#shipping-address',
+            'shipments' => '[data-test-shipments]',
+            'shipment_tracking' => '[data-test-shipment-tracking]',
+            'shipment_ship_button' => '[data-test-shipment-ship-button]',
+            'shipping_address' => '[data-test-shipping-address]',
             'shipping_adjustment_name' => '#shipping-adjustment-label',
             'shipping_charges' => '#shipping-base-value',
             'shipping_tax' => '#shipping-tax-value',
             'shipping_total' => '#shipping-total',
             'table' => '.table',
-            'tax_total' => '#tax-total',
+            'tax_total' => '[data-test-tax-total]',
             'taxes' => '#taxes',
-            'total' => '#total',
+            'total' => '[data-test-total]',
         ]);
     }
 
@@ -472,16 +484,6 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
         $paymentStateElement = end($paymentStateElements);
 
         return $paymentStateElement->getParent()->getParent();
-    }
-
-    protected function getLastOrderShipmentElement(OrderInterface $order): ?NodeElement
-    {
-        $shipment = $order->getShipments()->last();
-
-        $shipmentStateElements = $this->getElement('shipments')->findAll('css', sprintf('span.ui.label:contains(\'%s\')', ucfirst($shipment->getState())));
-        $shipmentStateElement = end($shipmentStateElements);
-
-        return $shipmentStateElement->getParent()->getParent();
     }
 
     protected function getFormattedMoney(int $orderPromotionTotal): string

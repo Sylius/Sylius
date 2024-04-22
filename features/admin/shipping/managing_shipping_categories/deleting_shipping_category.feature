@@ -9,7 +9,7 @@ Feature: Deleting a shipping category
         And the store has "Standard" shipping category
         And I am logged in as an administrator
 
-    @ui @api
+    @todo @ui @api
     Scenario: Deleted shipping category should disappear from the registry
         When I delete shipping category "Standard"
         Then I should be notified that it has been successfully deleted

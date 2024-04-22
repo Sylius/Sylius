@@ -17,38 +17,11 @@ use Sylius\Behat\Page\Admin\Crud\UpdatePage as BaseUpdatePage;
 
 class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
 {
-    public function attachAvatar(string $path): void
-    {
-        $filesPath = $this->getParameter('files_path');
-
-        $imageForm = $this->getElement('add_avatar')->find('css', 'input[type="file"]');
-
-        $imageForm->attachFile($filesPath . $path);
-    }
-
-    public function changeUsername(string $username): void
-    {
-        $this->getElement('username')->setValue($username);
-    }
-
-    public function changeEmail(string $email): void
-    {
-        $this->getElement('email')->setValue($email);
-    }
-
-    public function changePassword(string $password): void
-    {
-        $this->getElement('password')->setValue($password);
-    }
-
-    public function changeLocale(string $localeCode): void
-    {
-        $this->getElement('locale_code')->selectOption($localeCode);
-    }
+    use FormAwareTrait;
 
     public function removeAvatar(): void
     {
-        $this->getElement('remove_avatar')->click();
+        $this->getElement('button_delete_avatar')->click();
     }
 
     public function hasAvatar(string $avatarPath): bool
@@ -58,27 +31,28 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
         return str_contains($srcPath, $avatarPath);
     }
 
+    public function changeLocale(string $localeCode): void
+    {
+        $this->getElement('locale-switch')->selectOption($localeCode);
+    }
+
     protected function getDefinedElements(): array
     {
-        return array_merge(parent::getDefinedElements(), [
-            'add_avatar' => '#add-avatar',
-            'email' => '#sylius_admin_user_email',
-            'enabled' => '#sylius_admin_user_enabled',
-            'locale_code' => '#sylius_admin_user_localeCode',
-            'password' => '#sylius_admin_user_plainPassword',
-            'remove_avatar' => '.ui.icon.red.labeled.button',
-            'username' => '#sylius_admin_user_username',
+        return array_merge(parent::getDefinedElements(), $this->getDefinedFormElements(), [
+            'button_delete_avatar' => '[data-test-delete-avatar-button]',
+            'locale-switch' => '[data-test-admin-locale-switch]',
         ]);
     }
 
     private function getAvatarImagePath(): string
     {
-        $image = $this->getElement('add_avatar')->find('css', 'img');
+        $avatarImage = $this->getElement('avatar_image');
+        $imagePath = $avatarImage->getAttribute('data-test-avatar-image');
 
-        if (null === $image) {
+        if (null === $imagePath) {
             return '';
         }
 
-        return $image->getAttribute('src');
+        return $imagePath;
     }
 }

@@ -14,37 +14,42 @@ declare(strict_types=1);
 namespace Sylius\Behat\Page\Admin\Product;
 
 use Behat\Mink\Element\NodeElement;
+use Behat\Mink\Session;
 use Sylius\Behat\Behaviour\SpecifiesItsField;
 use Sylius\Behat\Page\Admin\Crud\CreatePage as BaseCreatePage;
 use Sylius\Behat\Service\AutocompleteHelper;
 use Sylius\Behat\Service\DriverHelper;
-use Sylius\Behat\Service\SlugGenerationHelper;
-use Sylius\Component\Core\Model\ChannelInterface;
+use Sylius\Behat\Service\Helper\AutocompleteHelperInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Product\Model\ProductAssociationTypeInterface;
+use Symfony\Component\Routing\RouterInterface;
 use Webmozart\Assert\Assert;
 
 class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProductPageInterface
 {
+    use FormTrait;
     use SpecifiesItsField;
+
+    public function __construct(
+        Session $session,
+        $minkParameters,
+        RouterInterface $router,
+        string $routeName,
+        private readonly AutocompleteHelperInterface $autocompleteHelper,
+    ) {
+        parent::__construct($session, $minkParameters, $router, $routeName);
+    }
 
     public function getRouteName(): string
     {
         return parent::getRouteName() . '_simple';
     }
 
-    public function nameItIn(string $name, string $localeCode): void
+    public function create(): void
     {
-        $this->clickTabIfItsNotActive('details');
-        $this->activateLanguageTab($localeCode);
-        $this->getElement('name', ['%locale%' => $localeCode])->setValue($name);
+        $this->waitForFormUpdate();
 
-        if (DriverHelper::isJavascript($this->getDriver())) {
-            SlugGenerationHelper::waitForSlugGeneration(
-                $this->getSession(),
-                $this->getElement('slug', ['%locale%' => $localeCode]),
-            );
-        }
+        parent::create();
     }
 
     public function specifySlugIn(?string $slug, string $locale): void
@@ -52,38 +57,6 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
         $this->activateLanguageTab($locale);
 
         $this->getElement('slug', ['%locale%' => $locale])->setValue($slug);
-    }
-
-    public function specifyPrice(ChannelInterface $channel, string $price): void
-    {
-        $this->getElement('price', ['%channelCode%' => $channel->getCode()])->setValue($price);
-    }
-
-    public function specifyOriginalPrice(ChannelInterface $channel, int $originalPrice): void
-    {
-        $this->getElement('original_price', ['%channelCode%' => $channel->getCode()])->setValue($originalPrice);
-    }
-
-    public function addAttribute(string $attributeName, string $value, string $localeCode): void
-    {
-        $this->clickTabIfItsNotActive('attributes');
-
-        $attributeOption = $this->getElement('attributes_choice')->find('css', sprintf('option:contains("%s")', $attributeName));
-        $this->selectElementFromAttributesDropdown($attributeOption->getAttribute('value'));
-
-        $this->getDocument()->pressButton('Add attributes');
-        $this->waitForFormElement();
-
-        if ('' === $value) {
-            return;
-        }
-
-        $this->getElement('attribute_value', ['%attributeName%' => $attributeName, '%localeCode%' => $localeCode])->setValue($value);
-    }
-
-    public function selectAttributeValue(string $attributeName, string $value, string $localeCode): void
-    {
-        $this->getElement('attribute_value_select', ['%attributeName%' => $attributeName, '%localeCode%' => $localeCode])->selectOption($value);
     }
 
     public function addNonTranslatableAttribute(string $attributeName, string $value): void
@@ -106,13 +79,6 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
         $validationError = $this->getElement('attribute')->find('css', '.sylius-validation-error');
 
         return $validationError->getText();
-    }
-
-    public function removeAttribute(string $attributeName, string $localeCode): void
-    {
-        $this->clickTabIfItsNotActive('attributes');
-
-        $this->getElement('attribute_delete_button', ['%attributeName%' => $attributeName, '%localeCode%' => $localeCode])->press();
     }
 
     public function checkAttributeErrors($attributeName, $localeCode): void
@@ -150,22 +116,6 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
         $productTaxonsCodes[] = $taxon->getCode();
 
         $productTaxonsElement->setValue(implode(',', $productTaxonsCodes));
-    }
-
-    public function attachImage(string $path, ?string $type = null): void
-    {
-        $this->clickTabIfItsNotActive('media');
-
-        $filesPath = $this->getParameter('files_path');
-
-        $this->getDocument()->clickLink('Add');
-
-        $imageForm = $this->getLastImageElement();
-        if (null !== $type) {
-            $imageForm->fillField('Type', $type);
-        }
-
-        $imageForm->find('css', 'input[type="file"]')->attachFile($filesPath . $path);
     }
 
     public function associateProducts(ProductAssociationTypeInterface $productAssociationType, array $productsNames): void
@@ -224,22 +174,6 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
         }
     }
 
-    public function selectShippingCategory(string $shippingCategoryName): void
-    {
-        $this->getElement('shipping_category')->selectOption($shippingCategoryName);
-    }
-
-    public function setShippingRequired(bool $isShippingRequired): void
-    {
-        if ($isShippingRequired) {
-            $this->getElement('shipping_required')->check();
-
-            return;
-        }
-
-        $this->getElement('shipping_required')->uncheck();
-    }
-
     public function getChannelPricingValidationMessage(): string
     {
         return $this->getElement('prices_validation_message')->getText();
@@ -261,37 +195,41 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
 
     protected function getDefinedElements(): array
     {
-        return array_merge(parent::getDefinedElements(), [
-            'association_dropdown' => '.field > label:contains("%association%") ~ .product-select',
-            'association_dropdown_item' => '.field > label:contains("%association%") ~ .product-select > div.menu > div.item:contains("%item%")',
-            'association_dropdown_item_selected' => '.field > label:contains("%association%") ~ .product-select > a.label:contains("%item%")',
-            'attribute' => '.attribute',
-            'attribute_delete_button' => '#attributesContainer .attributes-group .attributes-header:contains("%attributeName%") button',
-            'attribute_value' => '#attributesContainer [data-test-product-attribute-value-in-locale="%attributeName% %localeCode%"] input',
-            'attribute_value_select' => '#attributesContainer [data-test-product-attribute-value-in-locale="%attributeName% %localeCode%"] select',
-            'attributes_choice' => '#sylius_product_attribute_choice',
-            'cancel_button' => '[data-test-cancel-changes-button]',
-            'channel_checkbox' => '.checkbox:contains("%channelName%") input',
-            'code' => '#sylius_product_code',
-            'form' => 'form[name="sylius_product"]',
-            'images' => '#sylius_product_images',
-            'language_tab' => '[data-locale="%locale%"] .title',
-            'locale_tab' => '#attributesContainer .menu [data-tab="%localeCode%"]',
-            'main_taxon' => '#sylius_product_mainTaxon',
-            'product_taxons' => '#sylius_product_productTaxons',
-            'name' => '#sylius_product_translations_%locale%_name',
-            'non_translatable_attribute_value' => '#attributesContainer [data-test-product-attribute-value-in-locale="%attributeName% "] input',
-            'original_price' => '#sylius_product_variant_channelPricings_%channelCode%_originalPrice',
-            'price' => '#sylius_product_variant_channelPricings_%channelCode%_price',
-            'prices_validation_message' => '#sylius_product_variant_channelPricings ~ .sylius-validation-error, #sylius_product_variant_channelPricings .sylius-validation-error',
-            'price_calculator' => '#sylius_product_variant_pricingCalculator',
-            'shipping_category' => '#sylius_product_variant_shippingCategory',
-            'shipping_required' => '#sylius_product_variant_shippingRequired',
-            'slug' => '#sylius_product_translations_%locale%_slug',
-            'tab' => '.menu [data-tab="%name%"]',
-            'taxonomy' => 'a[data-tab="taxonomy"]',
-            'toggle_slug_modification_button' => '.toggle-product-slug-modification',
-        ]);
+        return array_merge(
+            parent::getDefinedElements(),
+            [
+                'association_dropdown' => '.field > label:contains("%association%") ~ .product-select',
+                'association_dropdown_item' => '.field > label:contains("%association%") ~ .product-select > div.menu > div.item:contains("%item%")',
+                'association_dropdown_item_selected' => '.field > label:contains("%association%") ~ .product-select > a.label:contains("%item%")',
+                'attribute' => '.attribute',
+                'attribute_delete_button' => '#attributesContainer .attributes-group .attributes-header:contains("%attributeName%") button',
+                'attribute_value' => '#attributesContainer [data-test-product-attribute-value-in-locale="%attributeName% %localeCode%"] input',
+                'attribute_value_select' => '#attributesContainer [data-test-product-attribute-value-in-locale="%attributeName% %localeCode%"] select',
+                'attributes_choice' => '#sylius_product_attribute_choice',
+                'cancel_button' => '[data-test-cancel-changes-button]',
+                'channel_checkbox' => '.checkbox:contains("%channelName%") input',
+                'code' => '#sylius_product_code',
+                'form' => 'form[name="sylius_product"]',
+                'images' => '#sylius_product_images',
+                'language_tab' => '[data-locale="%locale%"] .title',
+                'locale_tab' => '#attributesContainer .menu [data-tab="%localeCode%"]',
+                'main_taxon' => '#sylius_product_mainTaxon',
+                'product_taxons' => '#sylius_product_productTaxons',
+                'name' => '#sylius_product_translations_%locale%_name',
+                'non_translatable_attribute_value' => '#attributesContainer [data-test-product-attribute-value-in-locale="%attributeName% "] input',
+                'original_price' => '#sylius_product_variant_channelPricings_%channelCode%_originalPrice',
+                'price' => '#sylius_product_variant_channelPricings_%channelCode%_price',
+                'prices_validation_message' => '#sylius_product_variant_channelPricings ~ .sylius-validation-error, #sylius_product_variant_channelPricings .sylius-validation-error',
+                'price_calculator' => '#sylius_product_variant_pricingCalculator',
+                'shipping_category' => '#sylius_product_variant_shippingCategory',
+                'shipping_required' => '#sylius_product_variant_shippingRequired',
+                'slug' => '#sylius_product_translations_%locale%_slug',
+                'tab' => '.menu [data-tab="%name%"]',
+                'taxonomy' => 'a[data-tab="taxonomy"]',
+                'toggle_slug_modification_button' => '.toggle-product-slug-modification',
+            ],
+            $this->getDefinedFormElements(),
+        );
     }
 
     private function openTaxonBookmarks(): void

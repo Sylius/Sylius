@@ -22,5 +22,7 @@ interface IndexPageInterface extends BaseIndexPageInterface
 
     public function isCustomerVerified(CustomerInterface $customer): bool;
 
-    public function specifyFilterGroup(string $groupName): void;
+    public function setFilterGroup(string $groupName): void;
+
+    public function setFilterSearch(string $phrase): void;
 }

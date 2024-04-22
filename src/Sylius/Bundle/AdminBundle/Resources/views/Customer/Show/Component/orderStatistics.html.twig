@@ -1,0 +1,86 @@
+{% from '@SyliusAdmin/Shared/Helper/accordion.html.twig' import default as _accordion %}
+{% from '@SyliusAdmin/Shared/Helper/icon.html.twig' import icon as _icon %}
+{% from '@SyliusAdmin/Shared/Helper/money.html.twig' import format as _money %}
+
+{% set items = [] %}
+<div class="mb-2">
+    <div class="card">
+        <div class="card-body">
+            {% for channelStatistics in this.statistics %}
+                {% set channel = channelStatistics.channel %}
+
+                {% set title %}
+                    <div class="h3">
+                        <span class="badge me-2" style="background-color: {{ channel.color|default('#000') }}"></span>
+                        {{ channel.name }}
+                    </div>
+                {% endset %}
+
+                {% set content %}
+                    <div class="row">
+                        <div class="col-sm-12 col-md-4 mb-3">
+                            <div class="card card-sm">
+                                <div class="card-body">
+                                    <div class="row align-items-center">
+                                        <div class="col-auto">
+                                            <span class="bg-gray text-muted avatar">
+                                                {{ _icon({icon: 'shopping-bag'}) }}
+                                            </span>
+                                        </div>
+                                        <div class="col">
+                                            <div>{{ 'sylius.ui.orders'|trans }}</div>
+                                            <div class="h2 mb-0 me-2" {{ sylius_test_html_attribute('customer-statistics-' ~ channel.code ~ '-orders-count') }}>{{ channelStatistics.ordersCount }}</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-4 mb-3">
+                            <div class="card card-sm">
+                                <div class="card-body">
+                                    <div class="row align-items-center">
+                                        <div class="col-auto">
+                                            <span class="bg-gray text-muted avatar">
+                                                {{ _icon({icon: 'coins'}) }}
+                                            </span>
+                                        </div>
+                                        <div class="col">
+                                            <div>{{ 'sylius.ui.total_value_of_orders'|trans }}</div>
+                                            <div class="h2 mb-0 me-2" {{ sylius_test_html_attribute('customer-statistics-' ~ channel.code ~ '-orders-total') }}>{{ _money(channelStatistics.ordersValue, channel.baseCurrency.code) }}</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-4 mb-3">
+                            <div class="card card-sm">
+                                <div class="card-body">
+                                    <div class="row align-items-center">
+                                        <div class="col-auto">
+                                            <span class="bg-gray text-muted avatar">
+                                                {{ _icon({icon: 'slash'}) }}
+                                            </span>
+                                        </div>
+                                        <div class="col">
+                                            <div>{{ 'sylius.ui.average_order_value'|trans }}</div>
+                                            <div class="h2 mb-0 me-2" {{ sylius_test_html_attribute('customer-statistics-' ~ channel.code ~ '-orders-average') }}>{{ _money(channelStatistics.averageOrderValue, channel.baseCurrency.code) }}</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endset %}
+
+                {% set open = loop.first ? true : false %}
+                {% set items = items|merge([{title: title, content: content, open: open}]) %}
+            {% endfor %}
+
+            {% if items is not empty %}
+                {{ _accordion(items, false, null, true) }}
+            {% else %}
+                <div class="h3 text-muted" {{ sylius_test_html_attribute('customer-statistics-no-orders') }}>{{ 'sylius.ui.there_are_no_orders_for_this_customer_to_display'|trans }}</div>
+            {% endif %}
+        </div>
+    </div>
+</div>

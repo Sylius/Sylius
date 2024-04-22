@@ -1,0 +1,43 @@
+twig_hooks:
+    hooks:
+        'sylius_admin.product_variant.update.content':
+            form:
+                template: '@SyliusAdmin/ProductVariant/_form.html.twig'
+                configuration:
+                    method: 'PUT'
+
+        'sylius_admin.product_variant.update.content.header':
+            breadcrumbs:
+                template: '@SyliusAdmin/ProductVariant/Form/Content/Update/Header/breadcrumbs.html.twig'
+
+        'sylius_admin.product_variant.update.content.form':
+            side_navigation:
+                template: '@SyliusAdmin/ProductVariant/Form/_sideNavigation.html.twig'
+            sections:
+                template: '@SyliusAdmin/ProductVariant/Form/_sections.html.twig'
+
+        'sylius_admin.product_variant.update.content.form.side_navigation':
+            details:
+                template: '@SyliusAdmin/ProductVariant/Form/SideNavigation/_details.html.twig'
+                configuration:
+                    active: true
+            channel_pricing:
+                template: '@SyliusAdmin/ProductVariant/Form/SideNavigation/_channelPricing.html.twig'
+            inventory:
+                template: '@SyliusAdmin/ProductVariant/Form/SideNavigation/_inventory.html.twig'
+            translations:
+                template: '@SyliusAdmin/ProductVariant/Form/SideNavigation/_translations.html.twig'
+            taxes:
+                template: '@SyliusAdmin/ProductVariant/Form/SideNavigation/_taxes.html.twig'
+
+        'sylius_admin.product_variant.update.content.form.sections':
+            details:
+                template: '@SyliusAdmin/ProductVariant/Form/Sections/_details.html.twig'
+            channel_pricing:
+                template: '@SyliusAdmin/ProductVariant/Form/Sections/_channelPricing.html.twig'
+            inventory:
+                template: '@SyliusAdmin/ProductVariant/Form/Sections/_inventory.html.twig'
+            translations:
+                template: '@SyliusAdmin/ProductVariant/Form/Sections/_translations.html.twig'
+            taxes:
+                template: '@SyliusAdmin/ProductVariant/Form/Sections/_taxes.html.twig'

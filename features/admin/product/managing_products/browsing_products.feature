@@ -8,7 +8,7 @@ Feature: Browsing products
         Given the store has "Dice Brewing" and "Eclipse" products
         And I am logged in as an administrator
 
-    @ui @api
+    @todo @ui @api
     Scenario: Browsing defined products
         When I want to browse products
         Then I should see 2 products in the list

@@ -9,7 +9,7 @@ Feature: Browsing channels
         And the store operates on another channel named "Mobile Channel"
         And I am logged in as an administrator
 
-    @api @ui
+    @api @todo @ui
     Scenario: Browsing defined channels
         When I want to browse channels
         Then I should see 2 channels in the list

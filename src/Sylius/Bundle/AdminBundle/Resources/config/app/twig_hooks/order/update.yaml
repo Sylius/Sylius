@@ -1,0 +1,56 @@
+twig_hooks:
+    hooks:
+        sylius_admin.order.update.content:
+            form:
+                component: 'SyliusAdmin.Order.OrderType'
+                data:
+                    order: '@=resource'
+                    form: '@=form'
+                    parentMainHook: '@=parent_main_hook'
+                    parentFallbackHook: '@=parent_fallback_hook'
+
+        sylius_admin.order.update.content.form:
+            billing_address:
+                template: '@SyliusAdmin/Order/Form/billingAddress.html.twig'
+            shipping_address:
+                template: '@SyliusAdmin/Order/Form/shippingAddress.html.twig'
+
+        sylius_admin.order.update.content.form.billing_address:
+            company:
+                template: '@SyliusAdmin/Order/Form/Common/company.html.twig'
+            first_name:
+                template: '@SyliusAdmin/Order/Form/Common/first_name.html.twig'
+            last_name:
+                template: '@SyliusAdmin/Order/Form/Common/last_name.html.twig'
+            country:
+                template: '@SyliusAdmin/Order/Form/Common/country.html.twig'
+            phone_number:
+                template: '@SyliusAdmin/Order/Form/Common/phone_number.html.twig'
+            street_address:
+                template: '@SyliusAdmin/Order/Form/Common/street_address.html.twig'
+            city:
+                template: '@SyliusAdmin/Order/Form/Common/city.html.twig'
+            postcode:
+                template: '@SyliusAdmin/Order/Form/Common/postcode.html.twig'
+            province:
+                template: '@SyliusAdmin/Order/Form/Common/province.html.twig'
+
+        sylius_admin.order.update.content.form.shipping_address:
+            company:
+                template: '@SyliusAdmin/Order/Form/Common/company.html.twig'
+            first_name:
+                template: '@SyliusAdmin/Order/Form/Common/first_name.html.twig'
+            last_name:
+                template: '@SyliusAdmin/Order/Form/Common/last_name.html.twig'
+            country:
+                template: '@SyliusAdmin/Order/Form/Common/country.html.twig'
+            phone_number:
+                template: '@SyliusAdmin/Order/Form/Common/phone_number.html.twig'
+            street_address:
+                template: '@SyliusAdmin/Order/Form/Common/street_address.html.twig'
+            city:
+                template: '@SyliusAdmin/Order/Form/Common/city.html.twig'
+            postcode:
+                template: '@SyliusAdmin/Order/Form/Common/postcode.html.twig'
+            province:
+                template: '@SyliusAdmin/Order/Form/Common/province.html.twig'

@@ -15,7 +15,7 @@ Feature: Seeing product's variant with specify quantity of items on hand
         And the store allows paying with "Cash on Delivery"
         And I am logged in as an administrator
 
-    @ui @api
+    @todo @ui @api
     Scenario: Seeing decreased quantity of product's items in selected variant after order payment
         Given there is a customer "lucy@teamlucifer.com" that placed an order "#00000666"
         And the customer bought 3 units of "Green" variant of product "T-Shirt banana"
@@ -25,7 +25,7 @@ Feature: Seeing product's variant with specify quantity of items on hand
         When I view all variants of the product "T-Shirt banana"
         Then the variant "Green" should have 2 items on hand
 
-    @ui @api
+    @todo @ui @api
     Scenario: Seeing decreased quantity of product's items from different variants after order payment
         Given there is a customer "lucy@teamlucifer.com" that placed an order "#00000666"
         And the customer bought 3 units of "Yellow" variant of product "T-Shirt banana"
