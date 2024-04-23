@@ -22,18 +22,21 @@ twig_hooks:
                 template: '@SyliusAdmin/payment_method/form/sections/gateway_configuration.html.twig'
             translations:
                 template: '@SyliusAdmin/payment_method/form/sections/translations.html.twig'
+
         'sylius_admin.payment_method.update.content.form.sections.general':
             code:
                 template: '@SyliusAdmin/payment_method/form/sections/general/code.html.twig'
-            enabled:
-                template: '@SyliusAdmin/payment_method/form/sections/general/enabled.html.twig'
             position:
                 template: '@SyliusAdmin/payment_method/form/sections/general/position.html.twig'
+            enabled:
+                template: '@SyliusAdmin/payment_method/form/sections/general/enabled.html.twig'
             channels:
                 template: '@SyliusAdmin/payment_method/form/sections/general/channels.html.twig'
+
         'sylius_admin.payment_method.update.content.form.sections.gateway_configuration':
             type:
                 template: '@SyliusAdmin/payment_method/form/sections/gateway_configuration/type.html.twig'
+
         'sylius_admin.payment_method.update.content.form.sections.translations':
             type:
                 template: '@SyliusAdmin/payment_method/form/sections/translations/translations.html.twig'
