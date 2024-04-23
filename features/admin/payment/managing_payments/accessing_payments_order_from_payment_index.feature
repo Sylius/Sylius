@@ -12,7 +12,7 @@ Feature: Accessing payment's order from the payment index
         And there is an "#00000001" order with "Apple" product
         And I am logged in as an administrator
 
-    @todo @ui @api
+    @ui @api
     Scenario: Accessing payment's order from the payment
         Given I am browsing payments
         When I go to the details of the first payment's order
