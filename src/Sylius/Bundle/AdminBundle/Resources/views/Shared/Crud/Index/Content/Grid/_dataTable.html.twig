@@ -1,7 +1,9 @@
 {% import '@SyliusAdmin/Shared/Helper/table.html.twig' as _table %}
 {% import '@SyliusAdmin/Shared/Helper/pagination.html.twig' as _pagination %}
 
-{% set resources = hookable_data.resources %}
+{% set hookable_context = get_hookable_context() %}
+
+{% set resources = hookable_context.resources %}
 {% set data = resources.data %}
 {% set definition = resources.definition %}
 

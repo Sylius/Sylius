@@ -1,13 +1,16 @@
 {% import '@SyliusAdmin/Shared/Helper/breadcrumbs.html.twig' as _breadcrumbs %}
 
-{% set configuration = hookable_data.configuration %}
-{% if hookable_data.metadata is defined %}
-    {% set metadata = hookable_data.metadata %}
+{% set hookable_context = get_hookable_context() %}
+{% set hookable_configuration = get_hookable_configuration() %}
+
+{% if hookable_context.metadata is defined %}
+    {% set metadata = hookable_context.metadata %}
     {% set resourceName = hookable_configuration.resource_name|default(metadata.applicationName~'.ui.'~metadata.pluralName) %}
 {% else %}
     {% set resourceName = hookable_configuration.resource_name %}
 {% endif %}
 
+{% set configuration = hookable_context.configuration %}
 {% set index_url = path(
     configuration.vars.index.route.name|default(configuration.getRouteName('index')),
     configuration.vars.index.route.parameters|default(configuration.vars.route.parameters|default({}))

@@ -1,15 +1,11 @@
-{% set main_hook = hook_name(hookable_data.parent_main_hook, 'no_results') %}
-{% set fallback_hook = hook_name(hookable_data.parent_fallback_hook, 'no_results') %}
+{% set hookable_context = get_hookable_context() %}
 
-{% set resources = hookable_data.resources %}
+{% set resources = hookable_context.resources %}
 
 {% if resources.data|length == 0 %}
     <div class="card">
         <div class="empty">
-            {% hook [main_hook, fallback_hook] with hookable_data|merge({
-                parent_main_hook: main_hook,
-                parent_fallback_hook: fallback_hook,
-            }) %}
+            {% hook 'no_results' %}
         </div>
     </div>
 {% endif %}

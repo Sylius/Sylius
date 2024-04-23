@@ -4,10 +4,10 @@
 {% set hookable_configuration = get_hookable_configuration() %}
 
 {% if hookable_context.has("metadata") %}
-    {% set metadata = hookable_context.get("metadata") %}
-    {% set header = hookable_configuration.get('title')|default(metadata.applicationName~'.ui.'~metadata.pluralName) %}
+    {% set metadata = hookable_context.metadata %}
+    {% set header = hookable_configuration.title|default(metadata.applicationName~'.ui.'~metadata.pluralName) %}
 {% else %}
-    {% set header = hookable_configuration.get('title') %}
+    {% set header = hookable_configuration.title %}
 {% endif %}
 
 

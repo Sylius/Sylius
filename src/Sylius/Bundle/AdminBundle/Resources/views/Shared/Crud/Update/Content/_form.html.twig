@@ -1,11 +1,11 @@
 {% import '@SyliusAdmin/Shared/Helper/button.html.twig' as _button %}
 
-{% set main_hook = hook_name(hookable_data.parent_main_hook, 'form') %}
-{% set fallback_hook = hook_name(hookable_data.parent_fallback_hook, 'form') %}
+{% set hookable_context = get_hookable_context() %}
+{% set hookable_configuration = get_hookable_configuration() %}
 
-{% set resource = hookable_data.resource %}
-{% set configuration = hookable_data.configuration %}
-{% set form = hookable_data.form %}
+{% set resource = hookable_context.resource %}
+{% set configuration = hookable_context.configuration %}
+{% set form = hookable_context.form %}
 
 {% set route = configuration.vars.route|default(null) %}
 {% set indexRoute = configuration.vars.index.route|default(null) %}
@@ -29,10 +29,7 @@
             {% block form_content %}
                 <input type="hidden" name="_method" value="PUT"/>
 
-                {% hook [main_hook, fallback_hook] with hookable_data|merge({
-                    parent_main_hook: main_hook,
-                    parent_fallback_hook: fallback_hook,
-                }) %}
+                {% hook 'form' %}
             {% endblock %}
             {{ form_end(form, {'render_rest': renderRest}) }}
             {% if renderRest %}

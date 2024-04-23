@@ -1,7 +1,5 @@
-{% set main_hook = hook_name(_self) %}
-
 <header class="navbar navbar-expand-md d-none d-lg-flex d-print-none">
     <div class="container-xl">
-        {% hook main_hook with { parent_main_hook: main_hook } %}
+        {% hook 'sylius_admin.common.component.navbar' with { _prefixes: [] } %}
     </div>
 </header>
