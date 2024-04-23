@@ -14,9 +14,9 @@ declare(strict_types=1);
 namespace Sylius\Bundle\AdminBundle\TwigComponent\Dashboard;
 
 use Sylius\Bundle\AdminBundle\Provider\StatisticsDataProviderInterface;
-use Sylius\Bundle\AdminBundle\TwigComponent\HookableComponentTrait;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
+use Sylius\TwigHooks\Twig\Component\HookableComponentTrait;
 use Symfony\UX\LiveComponent\Attribute\AsLiveComponent;
 use Symfony\UX\LiveComponent\Attribute\LiveAction;
 use Symfony\UX\LiveComponent\Attribute\LiveArg;
