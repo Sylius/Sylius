@@ -39,7 +39,7 @@ interface FormElementInterface extends BaseFormElementInterface
 
     public function hasLabel(string $label, string $localeCode): bool;
 
-    public function addAction(?string $actionName): void;
+    public function addAction(string $type): void;
 
     public function removeLastAction(): void;
 
@@ -49,7 +49,7 @@ interface FormElementInterface extends BaseFormElementInterface
 
     public function selectActionOption(string $option, string $value, bool $multiple = false): void;
 
-    public function addRule(?string $ruleName): void;
+    public function addRule(string $type): void;
 
     public function removeLastRule(): void;
 

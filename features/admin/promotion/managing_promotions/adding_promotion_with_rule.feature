@@ -40,7 +40,7 @@ Feature: Adding a new promotion with rule
         Then I should be notified that it has been successfully created
         And the "PHP T-Shirt promotion" promotion should appear in the registry
 
-    @api @ui @javascript
+    @api @ui @mink:chromedriver
     Scenario: Adding a new group based promotion
         Given the store has a customer group "Wholesale"
         When I want to create a new promotion

@@ -77,7 +77,7 @@ Feature: Editing promotion
         Then I should be notified that it has been successfully edited
         And the "Christmas sale" promotion should have priority 1
 
-    @ui @javascript
+    @ui @mink:chromedriver
     Scenario: Removing rule and action from existing promotion
         Given the promotion gives "$10.00" discount to every order with quantity at least 1
         When I want to modify a "Holiday sale" promotion

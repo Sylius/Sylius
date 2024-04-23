@@ -103,6 +103,12 @@
             <tag name="twig.extension" />
         </service>
 
+        <service id="sylius_admin.twig.extension.promotion_labels" class="Sylius\Bundle\AdminBundle\Twig\PromotionLabelsExtension">
+            <argument>%sylius.promotion_rules%</argument>
+            <argument>%sylius.promotion_actions%</argument>
+            <tag name="twig.extension" />
+        </service>
+
         <service id="sylius.http_client" alias="Psr\Http\Client\ClientInterface" public="false" />
     </services>
 </container>

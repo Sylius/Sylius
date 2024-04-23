@@ -65,6 +65,16 @@
         </service>
 
         <service id="sylius_admin.form.extension.promotion" class="Sylius\Bundle\AdminBundle\Form\Extension\PromotionTypeExtension">
+            <argument>%sylius.promotion_rules%</argument>
+            <argument>%sylius.promotion_actions%</argument>
+            <tag name="form.type_extension" />
+        </service>
+
+        <service id="sylius_admin.form.extension.promotion_rule" class="Sylius\Bundle\AdminBundle\Form\Extension\Promotion\PromotionRuleTypeExtension">
+            <tag name="form.type_extension" />
+        </service>
+
+        <service id="sylius_admin.form.extension.promotion_action" class="Sylius\Bundle\AdminBundle\Form\Extension\Promotion\PromotionActionTypeExtension">
             <tag name="form.type_extension" />
         </service>
 

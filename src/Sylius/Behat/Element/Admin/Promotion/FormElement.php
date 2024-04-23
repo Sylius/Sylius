@@ -19,7 +19,6 @@ use Behat\Mink\Session;
 use Sylius\Behat\Element\Admin\Crud\FormElement as BaseFormElement;
 use Sylius\Behat\Service\Helper\AutocompleteHelperInterface;
 use Sylius\Behat\Service\TabsHelper;
-use Webmozart\Assert\Assert;
 
 final class FormElement extends BaseFormElement implements FormElementInterface
 {
@@ -92,20 +91,15 @@ final class FormElement extends BaseFormElement implements FormElementInterface
         return $label === $this->getElement('label', ['%locale_code%' => $localeCode])->getValue();
     }
 
-    public function addAction(?string $actionName): void
+    public function addAction(string $type): void
     {
-        $this->getElement('add_action_button')->press();
+        $this->getElement('add_action_button', ['%type%' => $type])->press();
         $this->waitForFormUpdate();
-
-        if (null !== $actionName) {
-            $this->selectActionOption('Type', $actionName);
-            $this->waitForFormUpdate();
-        }
     }
 
     public function removeLastAction(): void
     {
-        $this->getLastAction()->find('css', 'button[data-test-delete-action]')->press();
+        $this->getLastAction()->find('css', 'button[data-test-delete]')->press();
         $this->waitForFormUpdate();
     }
 
@@ -125,20 +119,15 @@ final class FormElement extends BaseFormElement implements FormElementInterface
         $this->getLastAction()->find('named', ['select', $option])->selectOption($value, $multiple);
     }
 
-    public function addRule(?string $ruleName): void
+    public function addRule(string $type): void
     {
-        $this->getElement('add_rule_button')->press();
+        $this->getElement('add_rule_button', ['%type%' => $type])->press();
         $this->waitForFormUpdate();
-
-        if (null !== $ruleName) {
-            $this->selectRuleOption('Type', $ruleName);
-            $this->waitForFormUpdate();
-        }
     }
 
     public function removeLastRule(): void
     {
-        $this->getLastRule()->find('css', 'button[data-test-delete-rule]')->press();
+        $this->getLastRule()->find('css', 'button[data-test-delete]')->press();
         $this->waitForFormUpdate();
     }
 
@@ -160,7 +149,7 @@ final class FormElement extends BaseFormElement implements FormElementInterface
 
     public function selectAutocompleteRuleOptions(array $values, ?string $channelCode = null): void
     {
-        $count = count($this->getElement('rules')->findAll('css', '[data-test-promotion-rule]'));
+        $count = count($this->getElement('rules')->findAll('css', '[data-test-entry-row]'));
         $locator = $channelCode ?
             sprintf('#sylius_promotion_rules_%d_configuration_%s select', $count - 1, $channelCode) :
             sprintf('#sylius_promotion_rules_%d_configuration select', $count - 1)
@@ -171,13 +160,14 @@ final class FormElement extends BaseFormElement implements FormElementInterface
                 $this->getLastRule()->find('css', $locator)->getXpath(),
                 $value,
             );
-            $this->waitForFormUpdate();
         }
+
+        $this->waitForFormUpdate();
     }
 
     public function selectAutocompleteActionFilterOptions(array $values, string $channelCode, string $filterType): void
     {
-        $count = count($this->getElement('actions')->findAll('css', '[data-test-promotion-action]'));
+        $count = count($this->getElement('actions')->findAll('css', '[data-test-entry-row]'));
         $locator = sprintf('#sylius_promotion_actions_%d_configuration_%s_filters_%s_filter select', $count - 1, $channelCode, $filterType);
         foreach ($values as $value) {
             $this->autocompleteHelper->selectByName(
@@ -229,8 +219,8 @@ final class FormElement extends BaseFormElement implements FormElementInterface
         return array_merge(parent::getDefinedElements(), [
             'action_amount' => '#sylius_promotion_actions_0_configuration_WEB-US_amount',
             'actions' => '#sylius_promotion_actions',
-            'add_action_button' => '#sylius_promotion_actions_add',
-            'add_rule_button' => '#sylius_promotion_rules_add',
+            'add_action_button' => '[data-test-actions] [data-test-add-%type%]',
+            'add_rule_button' => '[data-test-rules] [data-test-add-%type%]',
             'applies_to_discounted' => '#sylius_promotion_appliesToDiscounted',
             'channels' => '#sylius_promotion_channels',
             'code' => '#sylius_promotion_code',
@@ -240,6 +230,8 @@ final class FormElement extends BaseFormElement implements FormElementInterface
             'exclusive' => '#sylius_promotion_exclusive',
             'form' => '[data-live-name-value="sylius_admin:promotion:form"]',
             'label' => '[name="sylius_promotion[translations][%locale_code%][label]"]',
+            'last_action' => '[data-test-actions] [data-test-entry-row]:last-child',
+            'last_rule' => '[data-test-rules] [data-test-entry-row]:last-child',
             'minimum' => '#sylius_promotion_actions_0_configuration_WEB-US_filters_price_range_filter_min',
             'maximum' => '#sylius_promotion_actions_0_configuration_WEB-US_filters_price_range_filter_max',
             'name' => '#sylius_promotion_name',
@@ -255,10 +247,7 @@ final class FormElement extends BaseFormElement implements FormElementInterface
 
     private function getLastAction(): NodeElement
     {
-        $items = $this->getElement('actions')->findAll('css', '[data-test-promotion-action]');
-        Assert::notEmpty($items);
-
-        return end($items);
+        return $this->getElement('last_action');
     }
 
     private function getChannelConfigurationOfLastAction(string $channelCode): NodeElement
@@ -274,10 +263,7 @@ final class FormElement extends BaseFormElement implements FormElementInterface
 
     private function getLastRule(): NodeElement
     {
-        $items = $this->getElement('rules')->findAll('css', '[data-test-promotion-rule]');
-        Assert::notEmpty($items);
-
-        return end($items);
+        return $this->getElement('last_rule');
     }
 
     private function getChannelConfigurationOfLastRule(string $channelCode): NodeElement

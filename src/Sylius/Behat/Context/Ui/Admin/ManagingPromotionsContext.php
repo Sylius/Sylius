@@ -27,6 +27,16 @@ use Sylius\Behat\Service\Resolver\CurrentPageResolverInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\PromotionInterface;
+use Sylius\Component\Core\Promotion\Action\FixedDiscountPromotionActionCommand;
+use Sylius\Component\Core\Promotion\Action\PercentageDiscountPromotionActionCommand;
+use Sylius\Component\Core\Promotion\Action\UnitFixedDiscountPromotionActionCommand;
+use Sylius\Component\Core\Promotion\Action\UnitPercentageDiscountPromotionActionCommand;
+use Sylius\Component\Core\Promotion\Checker\Rule\CartQuantityRuleChecker;
+use Sylius\Component\Core\Promotion\Checker\Rule\ContainsProductRuleChecker;
+use Sylius\Component\Core\Promotion\Checker\Rule\CustomerGroupRuleChecker;
+use Sylius\Component\Core\Promotion\Checker\Rule\HasTaxonRuleChecker;
+use Sylius\Component\Core\Promotion\Checker\Rule\ItemTotalRuleChecker;
+use Sylius\Component\Core\Promotion\Checker\Rule\TotalOfItemsFromTaxonRuleChecker;
 use Webmozart\Assert\Assert;
 
 final class ManagingPromotionsContext implements Context
@@ -144,7 +154,7 @@ final class ManagingPromotionsContext implements Context
      */
     public function iAddTheHasTaxonRuleConfiguredWith(string ...$taxons): void
     {
-        $this->formElement->addRule('Has at least one from taxons');
+        $this->formElement->addRule(HasTaxonRuleChecker::TYPE);
 
         $this->formElement->selectAutocompleteRuleOptions($taxons);
     }
@@ -154,7 +164,7 @@ final class ManagingPromotionsContext implements Context
      */
     public function iAddTheRuleConfiguredWith(string $taxonName, $amount, ChannelInterface $channel): void
     {
-        $this->formElement->addRule('Total price of items from taxon');
+        $this->formElement->addRule(TotalOfItemsFromTaxonRuleChecker::TYPE);
         $this->formElement->selectAutocompleteRuleOptions([$taxonName], $channel->getCode());
         $this->formElement->fillRuleOptionForChannel($channel->getCode(), 'Amount', $amount);
     }
@@ -168,17 +178,26 @@ final class ManagingPromotionsContext implements Context
         $secondAmount,
         ChannelInterface $secondChannel,
     ) {
-        $this->formElement->addRule('Item total');
+        $this->formElement->addRule(ItemTotalRuleChecker::TYPE);
         $this->formElement->fillRuleOptionForChannel($firstChannel->getCode(), 'Amount', $firstAmount);
         $this->formElement->fillRuleOptionForChannel($secondChannel->getCode(), 'Amount', $secondAmount);
     }
 
     /**
-     * @When /^I add the "([^"]+)" action configured with amount of "(?:€|£|\$)([^"]+)" for ("[^"]+" channel)$/
+     * @When /^I add the "Order fixed discount" action configured with amount of "(?:€|£|\$)([^"]+)" for ("[^"]+" channel)$/
      */
-    public function iAddTheActionConfiguredWithAmountForChannel($actionType, $amount, ChannelInterface $channel)
+    public function iAddTheOrderFixedDiscountActionConfiguredWithAmountForChannel($amount, ChannelInterface $channel): void
     {
-        $this->formElement->addAction($actionType);
+        $this->formElement->addAction(FixedDiscountPromotionActionCommand::TYPE);
+        $this->formElement->fillActionOptionForChannel($channel->getCode(), 'Amount', $amount);
+    }
+
+    /**
+     * @When /^I add the "Item fixed discount" action configured with amount of "(?:€|£|\$)([^"]+)" for ("[^"]+" channel)$/
+     */
+    public function iAddTheItemFixedDiscountActionConfiguredWithAmountForChannel($amount, ChannelInterface $channel): void
+    {
+        $this->formElement->addAction(UnitFixedDiscountPromotionActionCommand::TYPE);
         $this->formElement->fillActionOptionForChannel($channel->getCode(), 'Amount', $amount);
     }
 
@@ -224,35 +243,64 @@ final class ManagingPromotionsContext implements Context
     }
 
     /**
-     * @When /^I add the "([^"]+)" action configured with a percentage value of "(?:|-)([^"]+)%" for ("[^"]+" channel)$/
+     * @When /^I add the "Item percentage discount" action configured with a percentage value of "(?:|-)([^"]+)%" for ("[^"]+" channel)$/
      */
-    public function iAddTheActionConfiguredWithAPercentageValueForChannel(
-        string $actionType,
+    public function iAddTheItemPercentageDiscountActionConfiguredWithAPercentageValueForChannel(
         string $percentage,
         ChannelInterface $channel,
     ): void {
-        $this->formElement->addAction($actionType);
+        $this->formElement->addAction(UnitPercentageDiscountPromotionActionCommand::TYPE);
         $this->formElement->fillActionOptionForChannel($channel->getCode(), 'Percentage', $percentage);
     }
 
     /**
-     * @When I add the :actionType action configured without a percentage value for :channel channel
+     * @When /^I add the "Order percentage discount" action configured with a percentage value of "(?:|-)([^"]+)%" for ("[^"]+" channel)$/
      */
-    public function iAddTheActionConfiguredWithoutAPercentageValueForChannel(
-        string $actionType,
+    public function iAddTheOrderPercentageDiscountActionConfiguredWithAPercentageValueForChannel(
+        string $percentage,
         ChannelInterface $channel,
     ): void {
-        $this->formElement->addAction($actionType);
+        $this->formElement->addAction(PercentageDiscountPromotionActionCommand::TYPE);
+        $this->formElement->fillActionOptionForChannel($channel->getCode(), 'Percentage', $percentage);
+    }
+
+    /**
+     * @When I add the "Order percentage discount" action configured without a percentage value for :channel channel
+     */
+    public function iAddTheOrderPercentageDiscountActionConfiguredWithoutAPercentageValueForChannel(
+        ChannelInterface $channel,
+    ): void {
+        $this->formElement->addAction(PercentageDiscountPromotionActionCommand::TYPE);
         $this->formElement->fillActionOptionForChannel($channel->getCode(), 'Percentage', '');
     }
 
     /**
-     * @When /^I add the "([^"]+)" action configured with a percentage value of "(?:|-)([^"]+)%"$/
-     * @When I add the :actionType action configured without a percentage value
+     * @When I add the "Item percentage discount" action configured without a percentage value for :channel channel
      */
-    public function iAddTheActionConfiguredWithAPercentageValue($actionType, $percentage = null)
+    public function iAddTheItemPercentageDiscountActionConfiguredWithoutAPercentageValueForChannel(
+        ChannelInterface $channel,
+    ): void {
+        $this->formElement->addAction(UnitPercentageDiscountPromotionActionCommand::TYPE);
+        $this->formElement->fillActionOptionForChannel($channel->getCode(), 'Percentage', '');
+    }
+
+    /**
+     * @When /^I add the "Order percentage discount" action configured with a percentage value of "(?:|-)([^"]+)%"$/
+     * @When I add the "Order percentage discount" action configured without a percentage value
+     */
+    public function iAddTheOrderPercentageDiscountActionConfiguredWithAPercentageValue($percentage = null)
     {
-        $this->formElement->addAction($actionType);
+        $this->formElement->addAction(PercentageDiscountPromotionActionCommand::TYPE);
+        $this->formElement->fillActionOption('Percentage', $percentage ?? '');
+    }
+
+    /**
+     * @When /^I add the "Item percentage discount" action configured with a percentage value of "(?:|-)([^"]+)%"$/
+     * @When I add the "Item percentage discount" action configured without a percentage value
+     */
+    public function iAddTheItemPercentageDiscountActionConfiguredWithAPercentageValue($percentage = null)
+    {
+        $this->formElement->addAction(UnitPercentageDiscountPromotionActionCommand::TYPE);
         $this->formElement->fillActionOption('Percentage', $percentage ?? '');
     }
 
@@ -261,7 +309,7 @@ final class ManagingPromotionsContext implements Context
      */
     public function iAddTheCustomerGroupRuleConfiguredForGroup($customerGroupName)
     {
-        $this->formElement->addRule('Customer group');
+        $this->formElement->addRule(CustomerGroupRuleChecker::TYPE);
         $this->formElement->selectRuleOption('Customer group', $customerGroupName);
     }
 
@@ -617,7 +665,7 @@ final class ManagingPromotionsContext implements Context
      */
     public function iAddTheRuleConfiguredWithTheProduct(string $productName): void
     {
-        $this->formElement->addRule('Contains product');
+        $this->formElement->addRule(ContainsProductRuleChecker::TYPE);
         $this->formElement->selectAutocompleteRuleOptions([$productName]);
     }
 
@@ -751,9 +799,9 @@ final class ManagingPromotionsContext implements Context
     /**
      * @When I add a new rule
      */
-    public function iAddANewRule()
+    public function iAddANewRule(): void
     {
-        $this->formElement->addRule(null);
+        $this->formElement->addRule(CartQuantityRuleChecker::TYPE);
     }
 
     /**
@@ -761,7 +809,7 @@ final class ManagingPromotionsContext implements Context
      */
     public function iAddANewAction(): void
     {
-        $this->formElement->addAction(null);
+        $this->formElement->addAction(FixedDiscountPromotionActionCommand::TYPE);
     }
 
     /**

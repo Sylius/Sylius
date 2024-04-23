@@ -35,9 +35,6 @@ final class TotalOfItemsFromTaxonConfigurationTypeExtension extends AbstractType
         $builder
             ->add('taxon', TaxonAutocompleteChoiceType::class, [
                 'label' => 'sylius.form.promotion_rule.total_of_items_from_taxon.taxon',
-                'row_attr' => [
-                    'data-skip-morph' => '',
-                ],
             ])
             ->get('taxon')->addModelTransformer(
                 new ReversedTransformer(new ResourceToIdentifierTransformer($this->taxonRepository, 'code')),
