@@ -9,7 +9,9 @@
                 {{ optionValue.vars.label|trans }}: <span class="fw-bold me-1">{{ optionValue.vars.value }}</span>
             {% endfor %}
         </div>
-        {{- form_row(form.vars.button_delete, sylius_test_form_attribute('delete-button')|sylius_merge_recursive({'attr': {'class': 'btn-close'}})) -}}
+        {% if form.vars.value.id is null %}
+            {{- form_row(form.vars.button_delete, sylius_test_form_attribute('delete-button')|sylius_merge_recursive({'attr': {'class': 'btn-close'}})) -}}
+        {% endif %}
     </div>
     <div class="card-body">
         <div class="row">
