@@ -13,8 +13,9 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\Doctrine\QueryItemExtension;
 
-use ApiPlatform\Core\Bridge\Doctrine\Orm\Extension\QueryItemExtensionInterface;
-use ApiPlatform\Core\Bridge\Doctrine\Orm\Util\QueryNameGeneratorInterface;
+use ApiPlatform\Doctrine\Orm\Extension\QueryItemExtensionInterface;
+use ApiPlatform\Doctrine\Orm\Util\QueryNameGeneratorInterface;
+use ApiPlatform\Metadata\Operation;
 use Doctrine\ORM\QueryBuilder;
 use Sylius\Bundle\ApiBundle\Context\UserContextInterface;
 use Sylius\Bundle\ApiBundle\Serializer\ContextKeys;
@@ -22,7 +23,7 @@ use Sylius\Component\Core\Model\AdminUserInterface;
 use Sylius\Component\Product\Model\ProductAssociationInterface;
 use Webmozart\Assert\Assert;
 
-final class EnabledProductInProductAssociationItemExtension implements QueryItemExtensionInterface
+final readonly class EnabledProductInProductAssociationItemExtension implements QueryItemExtensionInterface
 {
     public function __construct(private UserContextInterface $userContext)
     {
@@ -33,9 +34,9 @@ final class EnabledProductInProductAssociationItemExtension implements QueryItem
         QueryNameGeneratorInterface $queryNameGenerator,
         string $resourceClass,
         array $identifiers,
-        ?string $operationName = null,
+        ?Operation $operation = null,
         array $context = [],
-    ) {
+    ): void {
         if (!is_a($resourceClass, ProductAssociationInterface::class, true)) {
             return;
         }

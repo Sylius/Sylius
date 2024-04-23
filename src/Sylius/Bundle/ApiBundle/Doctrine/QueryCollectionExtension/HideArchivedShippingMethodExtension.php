@@ -13,21 +13,25 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\Doctrine\QueryCollectionExtension;
 
-use ApiPlatform\Core\Bridge\Doctrine\Orm\Extension\ContextAwareQueryCollectionExtensionInterface;
-use ApiPlatform\Core\Bridge\Doctrine\Orm\Util\QueryNameGeneratorInterface;
+use ApiPlatform\Doctrine\Orm\Extension\QueryCollectionExtensionInterface;
+use ApiPlatform\Doctrine\Orm\Util\QueryNameGeneratorInterface;
+use ApiPlatform\Metadata\Operation;
 use Doctrine\ORM\QueryBuilder;
 
-final class HideArchivedShippingMethodExtension implements ContextAwareQueryCollectionExtensionInterface
+final readonly class HideArchivedShippingMethodExtension implements QueryCollectionExtensionInterface
 {
     public function __construct(private string $shippingMethodClass)
     {
     }
 
+    /**
+     * @param array<array-key, mixed> $context
+     */
     public function applyToCollection(
         QueryBuilder $queryBuilder,
         QueryNameGeneratorInterface $queryNameGenerator,
         string $resourceClass,
-        ?string $operationName = null,
+        ?Operation $operation = null,
         array $context = [],
     ): void {
         if ($this->shippingMethodClass !== $resourceClass) {

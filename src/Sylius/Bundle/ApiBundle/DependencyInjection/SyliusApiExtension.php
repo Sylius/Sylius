@@ -63,7 +63,7 @@ final class SyliusApiExtension extends Extension implements PrependExtensionInte
         /** @var array<string, array<string, string>> $metadata */
         $metadata = $container->getParameter('kernel.bundles_metadata');
 
-        $path = $metadata['SyliusApiBundle']['path'] . '/Resources/config/api_resources';
+        $path = $metadata['SyliusApiBundle']['path'] . '/Resources/config/api_platform';
 
         $container->prependExtensionConfig('api_platform', ['mapping' => ['paths' => [$path]]]);
     }

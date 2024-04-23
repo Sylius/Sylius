@@ -13,7 +13,8 @@ declare(strict_types=1);
 
 namespace spec\Sylius\Bundle\ApiBundle\Doctrine\QueryCollectionExtension;
 
-use ApiPlatform\Core\Bridge\Doctrine\Orm\Util\QueryNameGeneratorInterface;
+use ApiPlatform\Doctrine\Orm\Util\QueryNameGeneratorInterface;
+use ApiPlatform\Metadata\Get;
 use Doctrine\ORM\QueryBuilder;
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ApiBundle\Context\UserContextInterface;
@@ -38,7 +39,7 @@ final class TaxonCollectionExtensionSpec extends ObjectBehavior
     ): void {
         $this
             ->shouldThrow(\InvalidArgumentException::class)
-            ->during('applyToCollection', [$queryBuilder, $queryNameGenerator, TaxonInterface::class, 'get_from_menu_taxon', []])
+            ->during('applyToCollection', [$queryBuilder, $queryNameGenerator, TaxonInterface::class, new Get()])
         ;
     }
 
@@ -78,7 +79,7 @@ final class TaxonCollectionExtensionSpec extends ObjectBehavior
             $queryBuilder->getWrappedObject(),
             $queryNameGenerator->getWrappedObject(),
             TaxonInterface::class,
-            Request::METHOD_GET,
+            new Get(),
             [
                 ContextKeys::CHANNEL => $channel->getWrappedObject(),
                 ContextKeys::HTTP_REQUEST_METHOD_TYPE => Request::METHOD_GET,
@@ -121,7 +122,7 @@ final class TaxonCollectionExtensionSpec extends ObjectBehavior
             $queryBuilder->getWrappedObject(),
             $queryNameGenerator->getWrappedObject(),
             TaxonInterface::class,
-            Request::METHOD_GET,
+            new Get(),
             [
                 ContextKeys::CHANNEL => $channel->getWrappedObject(),
                 ContextKeys::HTTP_REQUEST_METHOD_TYPE => Request::METHOD_GET,
@@ -154,7 +155,7 @@ final class TaxonCollectionExtensionSpec extends ObjectBehavior
             $queryBuilder->getWrappedObject(),
             $queryNameGenerator->getWrappedObject(),
             TaxonInterface::class,
-            Request::METHOD_GET,
+            new Get(),
             [
                 ContextKeys::CHANNEL => $channel->getWrappedObject(),
                 ContextKeys::HTTP_REQUEST_METHOD_TYPE => Request::METHOD_GET,

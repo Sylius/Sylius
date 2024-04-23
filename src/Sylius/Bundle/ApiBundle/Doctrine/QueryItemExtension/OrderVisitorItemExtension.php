@@ -13,15 +13,16 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\Doctrine\QueryItemExtension;
 
-use ApiPlatform\Core\Bridge\Doctrine\Orm\Extension\QueryItemExtensionInterface;
-use ApiPlatform\Core\Bridge\Doctrine\Orm\Util\QueryNameGeneratorInterface;
+use ApiPlatform\Doctrine\Orm\Extension\QueryItemExtensionInterface;
+use ApiPlatform\Doctrine\Orm\Util\QueryNameGeneratorInterface;
+use ApiPlatform\Metadata\Operation;
 use Doctrine\ORM\QueryBuilder;
 use Sylius\Bundle\ApiBundle\Context\UserContextInterface;
 use Sylius\Bundle\ApiBundle\Serializer\ContextKeys;
 use Sylius\Component\Core\Model\OrderInterface;
 use Symfony\Component\HttpFoundation\Request;
 
-final class OrderVisitorItemExtension implements QueryItemExtensionInterface
+final readonly class OrderVisitorItemExtension implements QueryItemExtensionInterface
 {
     public function __construct(
         private UserContextInterface $userContext,
@@ -34,9 +35,9 @@ final class OrderVisitorItemExtension implements QueryItemExtensionInterface
         QueryNameGeneratorInterface $queryNameGenerator,
         string $resourceClass,
         array $identifiers,
-        ?string $operationName = null,
+        ?Operation $operation = null,
         array $context = [],
-    ) {
+    ): void {
         if (!is_a($resourceClass, OrderInterface::class, true)) {
             return;
         }
@@ -63,7 +64,7 @@ final class OrderVisitorItemExtension implements QueryItemExtensionInterface
 
         $httpRequestMethodType = $context[ContextKeys::HTTP_REQUEST_METHOD_TYPE];
 
-        if ($httpRequestMethodType === Request::METHOD_GET || in_array($operationName, $this->nonFilteredCartAllowedOperations, true)) {
+        if ($httpRequestMethodType === Request::METHOD_GET || in_array($operation->getName(), $this->nonFilteredCartAllowedOperations, true)) {
             return;
         }
 

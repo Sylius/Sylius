@@ -21,7 +21,7 @@ use Sylius\Component\Core\Repository\PaymentRepositoryInterface;
 use Sylius\Component\Payment\Model\PaymentInterface;
 use Webmozart\Assert\Assert;
 
-final class PaymentMethodChanger implements PaymentMethodChangerInterface
+final readonly class PaymentMethodChanger implements PaymentMethodChangerInterface
 {
     public function __construct(
         private PaymentRepositoryInterface $paymentRepository,

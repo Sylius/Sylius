@@ -13,11 +13,9 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Api\Admin;
 
-use ApiPlatform\Api\IriConverterInterface;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\RequestBuilder;
-use Sylius\Behat\Client\RequestFactoryInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Context\Api\Resources;
 use Sylius\Behat\Service\SharedStorageInterface;
@@ -32,10 +30,8 @@ final class ManagingAdministratorsContext implements Context
     public function __construct(
         private ApiClientInterface $client,
         private ResponseCheckerInterface $responseChecker,
-        private IriConverterInterface $iriConverter,
         private SharedStorageInterface $sharedStorage,
         private \ArrayAccess $minkParameters,
-        private RequestFactoryInterface $requestFactory,
     ) {
     }
 
@@ -157,13 +153,12 @@ final class ManagingAdministratorsContext implements Context
     public function iUploadTheImageAsMyAvatar(string $avatar, AdminUserInterface $administrator): void
     {
         $builder = RequestBuilder::create(
-            sprintf('/api/v2/%s/%s', 'admin', Resources::AVATAR_IMAGES),
+            sprintf('/api/v2/admin/%s/%s/%s', Resources::ADMINISTRATORS, $administrator->getId(), Resources::AVATAR_IMAGE),
             Request::METHOD_POST,
         );
         $builder->withHeader('CONTENT_TYPE', 'multipart/form-data');
         $builder->withHeader('HTTP_ACCEPT', 'application/ld+json');
         $builder->withHeader('HTTP_Authorization', 'Bearer ' . $this->sharedStorage->get('token'));
-        $builder->withParameter('owner', $this->iriConverter->getIriFromResource($administrator));
         $builder->withFile('file', new UploadedFile($this->minkParameters['files_path'] . $avatar, basename($avatar)));
 
         $response = $this->client->request($builder->build());
@@ -181,7 +176,10 @@ final class ManagingAdministratorsContext implements Context
         $avatar = $administrator->getAvatar();
         Assert::notNull($avatar);
 
-        $this->client->delete(Resources::AVATAR_IMAGES, (string) $avatar->getId());
+        $this->client->customAction(
+            sprintf('/api/v2/admin/administrators/%s/%s', $administrator->getId(), Resources::AVATAR_IMAGE),
+            Request::METHOD_DELETE,
+        );
     }
 
     /**

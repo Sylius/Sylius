@@ -13,7 +13,8 @@ declare(strict_types=1);
 
 namespace spec\Sylius\Bundle\ApiBundle\Doctrine\QueryCollectionExtension;
 
-use ApiPlatform\Core\Bridge\Doctrine\Orm\Util\QueryNameGeneratorInterface;
+use ApiPlatform\Doctrine\Orm\Util\QueryNameGeneratorInterface;
+use ApiPlatform\Metadata\Get;
 use Doctrine\ORM\QueryBuilder;
 use Lexik\Bundle\JWTAuthenticationBundle\Exception\MissingTokenException;
 use PhpSpec\ObjectBehavior;
@@ -54,8 +55,7 @@ final class AddressesExtensionSpec extends ObjectBehavior
             $queryBuilder,
             $queryNameGenerator,
             AddressInterface::class,
-            Request::METHOD_GET,
-            [],
+            new Get(name: Request::METHOD_GET),
         );
     }
 
@@ -74,8 +74,7 @@ final class AddressesExtensionSpec extends ObjectBehavior
             $queryBuilder,
             $queryNameGenerator,
             AddressInterface::class,
-            Request::METHOD_GET,
-            [],
+            new Get(name: Request::METHOD_GET),
         );
     }
 
@@ -96,8 +95,7 @@ final class AddressesExtensionSpec extends ObjectBehavior
                     $queryBuilder,
                     $queryNameGenerator,
                     AddressInterface::class,
-                    Request::METHOD_GET,
-                    [],
+                    new Get(name: Request::METHOD_GET),
                 ],
             )
         ;
@@ -122,8 +120,7 @@ final class AddressesExtensionSpec extends ObjectBehavior
                     $queryBuilder,
                     $queryNameGenerator,
                     AddressInterface::class,
-                    Request::METHOD_GET,
-                    [],
+                    new Get(name: Request::METHOD_GET),
                 ],
             )
         ;

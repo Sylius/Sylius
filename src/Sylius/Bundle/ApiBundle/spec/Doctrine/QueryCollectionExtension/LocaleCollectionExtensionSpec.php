@@ -13,7 +13,8 @@ declare(strict_types=1);
 
 namespace spec\Sylius\Bundle\ApiBundle\Doctrine\QueryCollectionExtension;
 
-use ApiPlatform\Core\Bridge\Doctrine\Orm\Util\QueryNameGeneratorInterface;
+use ApiPlatform\Doctrine\Orm\Util\QueryNameGeneratorInterface;
+use ApiPlatform\Metadata\Get;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\QueryBuilder;
 use PhpSpec\ObjectBehavior;
@@ -37,7 +38,7 @@ final class LocaleCollectionExtensionSpec extends ObjectBehavior
     ): void {
         $this
             ->shouldThrow(\InvalidArgumentException::class)
-            ->during('applyToCollection', [$queryBuilder, $queryNameGenerator, LocaleInterface::class, 'get', []])
+            ->during('applyToCollection', [$queryBuilder, $queryNameGenerator, LocaleInterface::class, new Get()])
         ;
     }
 
@@ -60,7 +61,7 @@ final class LocaleCollectionExtensionSpec extends ObjectBehavior
             $queryBuilder,
             $queryNameGenerator,
             LocaleInterface::class,
-            Request::METHOD_GET,
+            new Get(),
             [
                 ContextKeys::CHANNEL => $channel->getWrappedObject(),
                 ContextKeys::HTTP_REQUEST_METHOD_TYPE => Request::METHOD_GET,
@@ -92,7 +93,7 @@ final class LocaleCollectionExtensionSpec extends ObjectBehavior
             $queryBuilder,
             $queryNameGenerator,
             LocaleInterface::class,
-            Request::METHOD_GET,
+            new Get(),
             [
                 ContextKeys::CHANNEL => $channel->getWrappedObject(),
                 ContextKeys::HTTP_REQUEST_METHOD_TYPE => Request::METHOD_GET,

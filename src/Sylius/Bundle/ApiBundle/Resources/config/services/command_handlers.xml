@@ -29,125 +29,125 @@
             <tag name="messenger.message_handler" bus="sylius_default.bus" />
         </service>
 
-        <service id="Sylius\Bundle\ApiBundle\CommandHandler\Cart\PickupCartHandler">
-            <argument type="service" id="sylius.factory.order" />
-            <argument type="service" id="sylius.repository.order" />
-            <argument type="service" id="sylius.repository.channel" />
-            <argument type="service" id="sylius.manager.order" />
-            <argument type="service" id="sylius.random_generator" />
-            <argument type="service" id="sylius.repository.customer" />
-            <tag name="messenger.message_handler" bus="sylius.command_bus" />
-            <tag name="messenger.message_handler" bus="sylius_default.bus"/>
-        </service>
+<!--        <service id="Sylius\Bundle\ApiBundle\CommandHandler\Cart\PickupCartHandler">-->
+<!--            <argument type="service" id="sylius.factory.order" />-->
+<!--            <argument type="service" id="sylius.repository.order" />-->
+<!--            <argument type="service" id="sylius.repository.channel" />-->
+<!--            <argument type="service" id="sylius.manager.order" />-->
+<!--            <argument type="service" id="sylius.random_generator" />-->
+<!--            <argument type="service" id="sylius.repository.customer" />-->
+<!--            <tag name="messenger.message_handler" bus="sylius.command_bus" />-->
+<!--            <tag name="messenger.message_handler" bus="sylius_default.bus"/>-->
+<!--        </service>-->
 
-        <service id="Sylius\Bundle\ApiBundle\CommandHandler\Cart\AddItemToCartHandler">
-            <argument type="service" id="sylius.repository.order" />
-            <argument type="service" id="sylius.repository.product_variant" />
-            <argument type="service" id="sylius.order_modifier" />
-            <argument type="service" id="sylius.factory.order_item" />
-            <argument type="service" id="sylius.order_item_quantity_modifier" />
-            <tag name="messenger.message_handler" bus="sylius.command_bus" />
-            <tag name="messenger.message_handler" bus="sylius_default.bus" />
-        </service>
+<!--        <service id="Sylius\Bundle\ApiBundle\CommandHandler\Cart\AddItemToCartHandler">-->
+<!--            <argument type="service" id="sylius.repository.order" />-->
+<!--            <argument type="service" id="sylius.repository.product_variant" />-->
+<!--            <argument type="service" id="sylius.order_modifier" />-->
+<!--            <argument type="service" id="sylius.factory.order_item" />-->
+<!--            <argument type="service" id="sylius.order_item_quantity_modifier" />-->
+<!--            <tag name="messenger.message_handler" bus="sylius.command_bus" />-->
+<!--            <tag name="messenger.message_handler" bus="sylius_default.bus" />-->
+<!--        </service>-->
 
-        <service id="Sylius\Bundle\ApiBundle\CommandHandler\Cart\RemoveItemFromCartHandler">
-            <argument type="service" id="sylius.repository.order_item" />
-            <argument type="service" id="sylius.order_modifier" />
-            <tag name="messenger.message_handler" bus="sylius.command_bus" />
-            <tag name="messenger.message_handler" bus="sylius_default.bus" />
-        </service>
+<!--        <service id="Sylius\Bundle\ApiBundle\CommandHandler\Cart\RemoveItemFromCartHandler">-->
+<!--            <argument type="service" id="sylius.repository.order_item" />-->
+<!--            <argument type="service" id="sylius.order_modifier" />-->
+<!--            <tag name="messenger.message_handler" bus="sylius.command_bus" />-->
+<!--            <tag name="messenger.message_handler" bus="sylius_default.bus" />-->
+<!--        </service>-->
 
-        <service id="Sylius\Bundle\ApiBundle\CommandHandler\Cart\InformAboutCartRecalculationHandler">
-            <tag name="messenger.message_handler" bus="sylius.command_bus" />
-            <tag name="messenger.message_handler" bus="sylius_default.bus" />
-        </service>
+<!--        <service id="Sylius\Bundle\ApiBundle\CommandHandler\Cart\InformAboutCartRecalculationHandler">-->
+<!--            <tag name="messenger.message_handler" bus="sylius.command_bus" />-->
+<!--            <tag name="messenger.message_handler" bus="sylius_default.bus" />-->
+<!--        </service>-->
 
-        <service id="Sylius\Bundle\ApiBundle\CommandHandler\Checkout\UpdateCartHandler">
-            <argument type="service" id="sylius.repository.order" />
-            <argument type="service" id="Sylius\Bundle\ApiBundle\Modifier\OrderAddressModifierInterface"/>
-            <argument type="service" id="Sylius\Bundle\ApiBundle\Assigner\OrderPromotionCodeAssignerInterface" />
-            <argument type="service" id="Sylius\Bundle\CoreBundle\Resolver\CustomerResolverInterface" />
-            <argument type="service" id="Sylius\Bundle\ApiBundle\Context\UserContextInterface" />
-            <tag name="messenger.message_handler" bus="sylius.command_bus" />
-            <tag name="messenger.message_handler" bus="sylius_default.bus" />
-        </service>
+<!--        <service id="Sylius\Bundle\ApiBundle\CommandHandler\Checkout\UpdateCartHandler">-->
+<!--            <argument type="service" id="sylius.repository.order" />-->
+<!--            <argument type="service" id="Sylius\Bundle\ApiBundle\Modifier\OrderAddressModifierInterface"/>-->
+<!--            <argument type="service" id="Sylius\Bundle\ApiBundle\Assigner\OrderPromotionCodeAssignerInterface" />-->
+<!--            <argument type="service" id="Sylius\Bundle\CoreBundle\Resolver\CustomerResolverInterface" />-->
+<!--            <argument type="service" id="Sylius\Bundle\ApiBundle\Context\UserContextInterface" />-->
+<!--            <tag name="messenger.message_handler" bus="sylius.command_bus" />-->
+<!--            <tag name="messenger.message_handler" bus="sylius_default.bus" />-->
+<!--        </service>-->
 
-        <service id="Sylius\Bundle\ApiBundle\CommandHandler\Checkout\ChooseShippingMethodHandler">
-            <argument type="service" id="sylius.repository.order" />
-            <argument type="service" id="sylius.repository.shipping_method" />
-            <argument type="service" id="sylius.repository.shipment" />
-            <argument type="service" id="sylius.shipping_method_eligibility_checker" />
-            <argument type="service" id="sylius_abstraction.state_machine" />
-            <tag name="messenger.message_handler" bus="sylius.command_bus" />
-            <tag name="messenger.message_handler" bus="sylius_default.bus" />
-        </service>
+<!--        <service id="Sylius\Bundle\ApiBundle\CommandHandler\Checkout\ChooseShippingMethodHandler">-->
+<!--            <argument type="service" id="sylius.repository.order" />-->
+<!--            <argument type="service" id="sylius.repository.shipping_method" />-->
+<!--            <argument type="service" id="sylius.repository.shipment" />-->
+<!--            <argument type="service" id="sylius.shipping_method_eligibility_checker" />-->
+<!--            <argument type="service" id="sylius_abstraction.state_machine" />-->
+<!--            <tag name="messenger.message_handler" bus="sylius.command_bus" />-->
+<!--            <tag name="messenger.message_handler" bus="sylius_default.bus" />-->
+<!--        </service>-->
 
-        <service id="Sylius\Bundle\ApiBundle\CommandHandler\Checkout\ChoosePaymentMethodHandler">
-            <argument type="service" id="sylius.repository.order" />
-            <argument type="service" id="sylius.repository.payment_method" />
-            <argument type="service" id="sylius.repository.payment" />
-            <argument type="service" id="sylius_abstraction.state_machine" />
-            <argument type="service" id="Sylius\Bundle\ApiBundle\Changer\PaymentMethodChangerInterface" />
-            <tag name="messenger.message_handler" bus="sylius.command_bus" />
-            <tag name="messenger.message_handler" bus="sylius_default.bus" />
-        </service>
+<!--        <service id="Sylius\Bundle\ApiBundle\CommandHandler\Checkout\ChoosePaymentMethodHandler">-->
+<!--            <argument type="service" id="sylius.repository.order" />-->
+<!--            <argument type="service" id="sylius.repository.payment_method" />-->
+<!--            <argument type="service" id="sylius.repository.payment" />-->
+<!--            <argument type="service" id="sylius_abstraction.state_machine" />-->
+<!--            <argument type="service" id="Sylius\Bundle\ApiBundle\Changer\PaymentMethodChangerInterface" />-->
+<!--            <tag name="messenger.message_handler" bus="sylius.command_bus" />-->
+<!--            <tag name="messenger.message_handler" bus="sylius_default.bus" />-->
+<!--        </service>-->
 
-        <service id="Sylius\Bundle\ApiBundle\CommandHandler\Checkout\CompleteOrderHandler">
-            <argument type="service" id="sylius.repository.order" />
-            <argument type="service" id="sylius_abstraction.state_machine" />
-            <argument type="service" id="sylius.command_bus" />
-            <argument type="service" id="sylius.event_bus" />
-            <argument type="service" id="Sylius\Bundle\CoreBundle\Order\Checker\OrderPromotionsIntegrityCheckerInterface" />
-            <tag name="messenger.message_handler" bus="sylius.command_bus" />
-            <tag name="messenger.message_handler" bus="sylius_default.bus" />
-        </service>
+<!--        <service id="Sylius\Bundle\ApiBundle\CommandHandler\Checkout\CompleteOrderHandler">-->
+<!--            <argument type="service" id="sylius.repository.order" />-->
+<!--            <argument type="service" id="sylius_abstraction.state_machine" />-->
+<!--            <argument type="service" id="sylius.command_bus" />-->
+<!--            <argument type="service" id="sylius.event_bus" />-->
+<!--            <argument type="service" id="Sylius\Bundle\CoreBundle\Order\Checker\OrderPromotionsIntegrityCheckerInterface" />-->
+<!--            <tag name="messenger.message_handler" bus="sylius.command_bus" />-->
+<!--            <tag name="messenger.message_handler" bus="sylius_default.bus" />-->
+<!--        </service>-->
 
-        <service id="Sylius\Bundle\ApiBundle\CommandHandler\Checkout\ShipShipmentHandler">
-            <argument type="service" id="sylius.repository.shipment" />
-            <argument type="service" id="sylius_abstraction.state_machine" />
-            <argument type="service" id="sylius.command_bus" />
-            <tag name="messenger.message_handler" bus="sylius.command_bus" />
-            <tag name="messenger.message_handler" bus="sylius_default.bus" />
-        </service>
+<!--        <service id="Sylius\Bundle\ApiBundle\CommandHandler\Checkout\ShipShipmentHandler">-->
+<!--            <argument type="service" id="sylius.repository.shipment" />-->
+<!--            <argument type="service" id="sylius_abstraction.state_machine" />-->
+<!--            <argument type="service" id="sylius.command_bus" />-->
+<!--            <tag name="messenger.message_handler" bus="sylius.command_bus" />-->
+<!--            <tag name="messenger.message_handler" bus="sylius_default.bus" />-->
+<!--        </service>-->
 
-        <service id="Sylius\Bundle\ApiBundle\CommandHandler\Account\ChangePaymentMethodHandler">
-            <argument type="service" id="Sylius\Bundle\ApiBundle\Changer\PaymentMethodChangerInterface" />
-            <argument type="service" id="sylius.repository.order"/>
-            <tag name="messenger.message_handler" bus="sylius.command_bus" />
-            <tag name="messenger.message_handler" bus="sylius_default.bus" />
-        </service>
+<!--        <service id="Sylius\Bundle\ApiBundle\CommandHandler\Account\ChangePaymentMethodHandler">-->
+<!--            <argument type="service" id="Sylius\Bundle\ApiBundle\Changer\PaymentMethodChangerInterface" />-->
+<!--            <argument type="service" id="sylius.repository.order"/>-->
+<!--            <tag name="messenger.message_handler" bus="sylius.command_bus" />-->
+<!--            <tag name="messenger.message_handler" bus="sylius_default.bus" />-->
+<!--        </service>-->
 
-        <service id="Sylius\Bundle\ApiBundle\CommandHandler\Cart\ChangeItemQuantityInCartHandler">
-            <argument type="service" id="sylius.repository.order_item" />
-            <argument type="service" id="sylius.order_item_quantity_modifier" />
-            <argument type="service" id="sylius.order_processing.order_processor" />
-            <tag name="messenger.message_handler" bus="sylius.command_bus" />
-            <tag name="messenger.message_handler" bus="sylius_default.bus" />
-        </service>
+<!--        <service id="Sylius\Bundle\ApiBundle\CommandHandler\Cart\ChangeItemQuantityInCartHandler">-->
+<!--            <argument type="service" id="sylius.repository.order_item" />-->
+<!--            <argument type="service" id="sylius.order_item_quantity_modifier" />-->
+<!--            <argument type="service" id="sylius.order_processing.order_processor" />-->
+<!--            <tag name="messenger.message_handler" bus="sylius.command_bus" />-->
+<!--            <tag name="messenger.message_handler" bus="sylius_default.bus" />-->
+<!--        </service>-->
 
-        <service id="Sylius\Bundle\ApiBundle\CommandHandler\Catalog\AddProductReviewHandler">
-            <argument type="service" id="sylius.factory.product_review" />
-            <argument type="service" id="sylius.repository.product_review" />
-            <argument type="service" id="sylius.repository.product" />
-            <argument type="service" id="Sylius\Bundle\CoreBundle\Resolver\CustomerResolverInterface" />
-            <tag name="messenger.message_handler" bus="sylius.command_bus"/>
-            <tag name="messenger.message_handler" bus="sylius_default.bus" />
-        </service>
+<!--        <service id="Sylius\Bundle\ApiBundle\CommandHandler\Catalog\AddProductReviewHandler">-->
+<!--            <argument type="service" id="sylius.factory.product_review" />-->
+<!--            <argument type="service" id="sylius.repository.product_review" />-->
+<!--            <argument type="service" id="sylius.repository.product" />-->
+<!--            <argument type="service" id="Sylius\Bundle\CoreBundle\Resolver\CustomerResolverInterface" />-->
+<!--            <tag name="messenger.message_handler" bus="sylius.command_bus"/>-->
+<!--            <tag name="messenger.message_handler" bus="sylius_default.bus" />-->
+<!--        </service>-->
 
-        <service id="Sylius\Bundle\ApiBundle\CommandHandler\Cart\BlameCartHandler">
-            <argument type="service" id="sylius.repository.shop_user" />
-            <argument type="service" id="sylius.repository.order" />
-            <argument type="service" id="sylius.order_processing.order_processor" />
-            <tag name="messenger.message_handler" bus="sylius.command_bus"/>
-            <tag name="messenger.message_handler" bus="sylius_default.bus" />
-        </service>
+<!--        <service id="Sylius\Bundle\ApiBundle\CommandHandler\Cart\BlameCartHandler">-->
+<!--            <argument type="service" id="sylius.repository.shop_user" />-->
+<!--            <argument type="service" id="sylius.repository.order" />-->
+<!--            <argument type="service" id="sylius.order_processing.order_processor" />-->
+<!--            <tag name="messenger.message_handler" bus="sylius.command_bus"/>-->
+<!--            <tag name="messenger.message_handler" bus="sylius_default.bus" />-->
+<!--        </service>-->
 
-        <service id="Sylius\Bundle\ApiBundle\CommandHandler\Account\ChangeShopUserPasswordHandler">
-            <argument type="service" id="sylius.security.password_updater" />
-            <argument type="service" id="sylius.repository.shop_user" />
-            <tag name="messenger.message_handler" bus="sylius.command_bus" />
-            <tag name="messenger.message_handler" bus="sylius_default.bus" />
-        </service>
+<!--        <service id="Sylius\Bundle\ApiBundle\CommandHandler\Account\ChangeShopUserPasswordHandler">-->
+<!--            <argument type="service" id="sylius.security.password_updater" />-->
+<!--            <argument type="service" id="sylius.repository.shop_user" />-->
+<!--            <tag name="messenger.message_handler" bus="sylius.command_bus" />-->
+<!--            <tag name="messenger.message_handler" bus="sylius_default.bus" />-->
+<!--        </service>-->
 
         <service id="Sylius\Bundle\ApiBundle\CommandHandler\Account\RequestResetPasswordTokenHandler">
             <argument type="service" id="sylius.repository.shop_user" />
@@ -158,7 +158,7 @@
             <tag name="messenger.message_handler" bus="sylius_default.bus" />
         </service>
 
-        <service id="Sylius\Bundle\ApiBundle\CommandHandler\Account\ResendVerificationEmailHandler">
+        <service id="Sylius\Bundle\ApiBundle\CommandHandler\Account\RequestShopUserVerificationHandler">
             <argument type="service" id="sylius.repository.shop_user" />
             <argument type="service" id="sylius.shop_user.token_generator.email_verification" />
             <argument type="service" id="sylius.command_bus" />
@@ -180,7 +180,7 @@
             <tag name="messenger.message_handler" bus="sylius_default.bus" />
         </service>
 
-        <service id="Sylius\Bundle\ApiBundle\CommandHandler\Account\SendAccountVerificationEmailHandler">
+        <service id="Sylius\Bundle\ApiBundle\CommandHandler\Account\SendShopUserVerificationEmailHandler">
             <argument type="service" id="sylius.repository.shop_user" />
             <argument type="service" id="sylius.repository.channel" />
             <argument type="service" id="Sylius\Bundle\CoreBundle\Mailer\AccountVerificationEmailManagerInterface" />
@@ -188,12 +188,12 @@
             <tag name="messenger.message_handler" bus="sylius_default.bus" />
         </service>
 
-        <service id="Sylius\Bundle\ApiBundle\CommandHandler\Checkout\SendOrderConfirmationHandler">
-            <argument type="service" id="sylius.repository.order" />
-            <argument type="service" id="Sylius\Bundle\CoreBundle\Mailer\OrderEmailManagerInterface" />
-            <tag name="messenger.message_handler" bus="sylius.command_bus" />
-            <tag name="messenger.message_handler" bus="sylius_default.bus" />
-        </service>
+<!--        <service id="Sylius\Bundle\ApiBundle\CommandHandler\Checkout\SendOrderConfirmationHandler">-->
+<!--            <argument type="service" id="sylius.repository.order" />-->
+<!--            <argument type="service" id="Sylius\Bundle\CoreBundle\Mailer\OrderEmailManagerInterface" />-->
+<!--            <tag name="messenger.message_handler" bus="sylius.command_bus" />-->
+<!--            <tag name="messenger.message_handler" bus="sylius_default.bus" />-->
+<!--        </service>-->
 
         <service id="Sylius\Bundle\ApiBundle\CommandHandler\Account\SendResetPasswordEmailHandler">
             <argument type="service" id="sylius.repository.channel" />
@@ -203,14 +203,14 @@
             <tag name="messenger.message_handler" bus="sylius_default.bus" />
         </service>
 
-        <service id="Sylius\Bundle\ApiBundle\CommandHandler\Checkout\SendShipmentConfirmationEmailHandler">
-            <argument type="service" id="sylius.repository.shipment" />
-            <argument type="service" id="Sylius\Bundle\CoreBundle\Mailer\ShipmentEmailManagerInterface" />
-            <tag name="messenger.message_handler" bus="sylius.command_bus" />
-            <tag name="messenger.message_handler" bus="sylius_default.bus" />
-        </service>
+<!--        <service id="Sylius\Bundle\ApiBundle\CommandHandler\Checkout\SendShipmentConfirmationEmailHandler">-->
+<!--            <argument type="service" id="sylius.repository.shipment" />-->
+<!--            <argument type="service" id="Sylius\Bundle\CoreBundle\Mailer\ShipmentEmailManagerInterface" />-->
+<!--            <tag name="messenger.message_handler" bus="sylius.command_bus" />-->
+<!--            <tag name="messenger.message_handler" bus="sylius_default.bus" />-->
+<!--        </service>-->
 
-        <service id="Sylius\Bundle\ApiBundle\CommandHandler\Account\VerifyCustomerAccountHandler">
+        <service id="Sylius\Bundle\ApiBundle\CommandHandler\Account\VerifyShopUserHandler">
             <argument type="service" id="sylius.repository.shop_user" />
             <argument type="service" id="clock" />
             <argument type="service" id="sylius.command_bus" />

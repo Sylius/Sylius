@@ -23,22 +23,22 @@ use Sylius\Component\Core\Model\CatalogPromotionInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Inventory\Checker\AvailabilityCheckerInterface;
-use Symfony\Component\Serializer\Normalizer\ContextAwareNormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareTrait;
+use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 use Webmozart\Assert\Assert;
 
-final class ProductVariantNormalizer implements ContextAwareNormalizerInterface, NormalizerAwareInterface
+final class ProductVariantNormalizer implements NormalizerInterface, NormalizerAwareInterface
 {
     use NormalizerAwareTrait;
 
     private const ALREADY_CALLED = 'sylius_product_variant_normalizer_already_called';
 
     public function __construct(
-        private ProductVariantPricesCalculatorInterface $priceCalculator,
-        private AvailabilityCheckerInterface $availabilityChecker,
-        private SectionProviderInterface $uriBasedSectionContext,
-        private IriConverterInterface $iriConverter,
+        private readonly ProductVariantPricesCalculatorInterface $priceCalculator,
+        private readonly AvailabilityCheckerInterface $availabilityChecker,
+        private readonly SectionProviderInterface $uriBasedSectionContext,
+        private readonly IriConverterInterface $iriConverter,
     ) {
     }
 
@@ -73,7 +73,10 @@ final class ProductVariantNormalizer implements ContextAwareNormalizerInterface,
         $appliedPromotions = $object->getAppliedPromotionsForChannel($channel);
         if (!$appliedPromotions->isEmpty()) {
             $data['appliedPromotions'] = array_map(
-                fn (CatalogPromotionInterface $catalogPromotion) => $this->iriConverter->getIriFromResource($catalogPromotion),
+                fn (CatalogPromotionInterface $catalogPromotion) => $this->iriConverter->getIriFromResource(
+                    resource: $catalogPromotion,
+                    context: $context,
+                ),
                 $appliedPromotions->toArray(),
             );
         }

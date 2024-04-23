@@ -13,7 +13,10 @@ declare(strict_types=1);
 
 namespace spec\Sylius\Bundle\ApiBundle\Doctrine\QueryItemExtension;
 
-use ApiPlatform\Core\Bridge\Doctrine\Orm\Util\QueryNameGeneratorInterface;
+use ApiPlatform\Doctrine\Orm\Util\QueryNameGeneratorInterface;
+use ApiPlatform\Metadata\Delete;
+use ApiPlatform\Metadata\Get;
+use ApiPlatform\Metadata\Put;
 use Doctrine\ORM\Query\Expr;
 use Doctrine\ORM\QueryBuilder;
 use PhpSpec\ObjectBehavior;
@@ -101,7 +104,7 @@ final class OrderVisitorItemExtensionSpec extends ObjectBehavior
             $queryNameGenerator,
             OrderInterface::class,
             ['tokenValue' => 'xaza-tt_fee'],
-            Request::METHOD_DELETE,
+            new Delete(),
             [ContextKeys::HTTP_REQUEST_METHOD_TYPE => Request::METHOD_POST],
         );
 
@@ -110,7 +113,7 @@ final class OrderVisitorItemExtensionSpec extends ObjectBehavior
             $queryNameGenerator,
             OrderInterface::class,
             ['tokenValue' => 'xaza-tt_fee'],
-            Request::METHOD_DELETE,
+            new Delete(),
             [ContextKeys::HTTP_REQUEST_METHOD_TYPE => Request::METHOD_PATCH],
         );
 
@@ -119,7 +122,7 @@ final class OrderVisitorItemExtensionSpec extends ObjectBehavior
             $queryNameGenerator,
             OrderInterface::class,
             ['tokenValue' => 'xaza-tt_fee'],
-            Request::METHOD_DELETE,
+            new Delete(),
             [ContextKeys::HTTP_REQUEST_METHOD_TYPE => Request::METHOD_PUT],
         );
 
@@ -128,7 +131,7 @@ final class OrderVisitorItemExtensionSpec extends ObjectBehavior
             $queryNameGenerator,
             OrderInterface::class,
             ['tokenValue' => 'xaza-tt_fee'],
-            Request::METHOD_DELETE,
+            new Delete(),
             [ContextKeys::HTTP_REQUEST_METHOD_TYPE => Request::METHOD_DELETE],
         );
     }
@@ -190,7 +193,7 @@ final class OrderVisitorItemExtensionSpec extends ObjectBehavior
             $queryNameGenerator,
             OrderInterface::class,
             ['tokenValue' => 'xaza-tt_fee'],
-            Request::METHOD_GET,
+            new Get(),
             [ContextKeys::HTTP_REQUEST_METHOD_TYPE => Request::METHOD_GET],
         );
 
@@ -199,7 +202,7 @@ final class OrderVisitorItemExtensionSpec extends ObjectBehavior
             $queryNameGenerator,
             OrderInterface::class,
             ['tokenValue' => 'xaza-tt_fee'],
-            'shop_select_payment_method',
+            new Put(name: 'shop_select_payment_method'),
             [ContextKeys::HTTP_REQUEST_METHOD_TYPE => Request::METHOD_PATCH],
         );
     }
@@ -224,7 +227,7 @@ final class OrderVisitorItemExtensionSpec extends ObjectBehavior
             $queryNameGenerator,
             OrderInterface::class,
             ['tokenValue' => 'xaza-tt_fee'],
-            Request::METHOD_PUT,
+            new Put(),
             [ContextKeys::HTTP_REQUEST_METHOD_TYPE => Request::METHOD_PUT],
         );
     }
@@ -243,7 +246,7 @@ final class OrderVisitorItemExtensionSpec extends ObjectBehavior
             $queryNameGenerator,
             \stdClass::class,
             ['tokenValue' => 'xaza-tt_fee'],
-            Request::METHOD_PUT,
+            new Put(),
             [ContextKeys::HTTP_REQUEST_METHOD_TYPE => Request::METHOD_PUT],
         );
     }

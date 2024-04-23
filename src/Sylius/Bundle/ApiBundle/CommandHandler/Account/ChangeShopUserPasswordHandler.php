@@ -30,7 +30,7 @@ final class ChangeShopUserPasswordHandler implements MessageHandlerInterface
 
     public function __invoke(ChangeShopUserPassword $changeShopUserPassword): void
     {
-        if ($changeShopUserPassword->confirmNewPassword !== $changeShopUserPassword->newPassword) {
+        if ($changeShopUserPassword->getConfirmNewPassword() !== $changeShopUserPassword->getNewPassword()) {
             throw new \InvalidArgumentException('Passwords do not match.');
         }
 
@@ -39,7 +39,7 @@ final class ChangeShopUserPasswordHandler implements MessageHandlerInterface
 
         Assert::notNull($user);
 
-        $user->setPlainPassword($changeShopUserPassword->newPassword);
+        $user->setPlainPassword($changeShopUserPassword->getNewPassword());
 
         $this->passwordUpdater->updatePassword($user);
     }

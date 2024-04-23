@@ -17,7 +17,7 @@ use ApiPlatform\Api\IriConverterInterface;
 use Lexik\Bundle\JWTAuthenticationBundle\Event\AuthenticationSuccessEvent;
 use Sylius\Component\Core\Model\AdminUserInterface;
 
-final class AdminAuthenticationSuccessListener
+final readonly class AdminAuthenticationSuccessListener
 {
     public function __construct(private IriConverterInterface $iriConverter)
     {

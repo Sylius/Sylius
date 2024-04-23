@@ -13,13 +13,12 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Api\Admin;
 
-use ApiPlatform\Api\IriConverterInterface;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Context\Api\Admin\Helper\ValidationTrait;
 use Sylius\Behat\Context\Api\Resources;
-use Sylius\Behat\Service\Converter\SectionAwareIriConverterInterface;
+use Sylius\Behat\Service\Converter\IriConverterInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Bundle\CoreBundle\CatalogPromotion\Calculator\FixedDiscountPriceCalculator;
 use Sylius\Bundle\CoreBundle\CatalogPromotion\Calculator\PercentageDiscountPriceCalculator;
@@ -34,7 +33,7 @@ use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Webmozart\Assert\Assert;
 
-final class ManagingCatalogPromotionsContext implements Context
+final readonly class ManagingCatalogPromotionsContext implements Context
 {
     use ValidationTrait;
 
@@ -42,7 +41,6 @@ final class ManagingCatalogPromotionsContext implements Context
         private ApiClientInterface $client,
         private ResponseCheckerInterface $responseChecker,
         private IriConverterInterface $iriConverter,
-        private SectionAwareIriConverterInterface $sectionAwareIriConverter,
         private SharedStorageInterface $sharedStorage,
     ) {
     }
@@ -146,7 +144,7 @@ final class ManagingCatalogPromotionsContext implements Context
      */
     public function iMakeItAvailableInChannel(ChannelInterface $channel): void
     {
-        $this->client->addRequestData('channels', [$this->sectionAwareIriConverter->getIriFromResourceInSection($channel, 'admin')]);
+        $this->client->addRequestData('channels', [$this->iriConverter->getIriFromResourceInSection($channel, 'admin')]);
     }
 
     /**
@@ -156,7 +154,7 @@ final class ManagingCatalogPromotionsContext implements Context
     {
         $channels = $this->responseChecker->getValue($this->client->show(Resources::CATALOG_PROMOTIONS, $catalogPromotion->getCode()), 'channels');
 
-        foreach (array_keys($channels, $this->sectionAwareIriConverter->getIriFromResourceInSection($channel, 'admin')) as $key) {
+        foreach (array_keys($channels, $this->iriConverter->getIriFromResourceInSection($channel, 'admin')) as $key) {
             unset($channels[$key]);
         }
 
@@ -1175,7 +1173,7 @@ final class ManagingCatalogPromotionsContext implements Context
             $this->responseChecker->hasValueInCollection(
                 $this->client->show(Resources::CATALOG_PROMOTIONS, $catalogPromotion->getCode()),
                 'channels',
-                $this->sectionAwareIriConverter->getIriFromResourceInSection($channel, 'admin'),
+                $this->iriConverter->getIriFromResourceInSection($channel, 'admin'),
             ),
             sprintf('Catalog promotion is not assigned to %s channel', $channel->getName()),
         );
@@ -1194,7 +1192,7 @@ final class ManagingCatalogPromotionsContext implements Context
             $this->responseChecker->hasValueInCollection(
                 $this->client->show(Resources::CATALOG_PROMOTIONS, $catalogPromotion->getCode()),
                 'channels',
-                $this->sectionAwareIriConverter->getIriFromResourceInSection($channel, 'admin'),
+                $this->iriConverter->getIriFromResourceInSection($channel, 'admin'),
             ),
             sprintf('Catalog promotion is assigned to %s channel', $channel->getName()),
         );

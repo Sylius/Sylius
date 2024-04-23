@@ -18,6 +18,10 @@
     <services>
         <defaults public="false" />
 
+        <service id="Sylius\Bundle\ApiBundle\Context\UserContextInterface" class="Sylius\Bundle\ApiBundle\Context\TokenBasedUserContext">
+            <argument type="service" id="security.token_storage" />
+        </service>
+
         <service id="Sylius\Bundle\ApiBundle\Context\TokenValueBasedCartContext">
             <argument type="service" id="request_stack" />
             <argument type="service" id="sylius.repository.order" />

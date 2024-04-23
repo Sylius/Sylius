@@ -13,7 +13,8 @@ declare(strict_types=1);
 
 namespace spec\Sylius\Bundle\ApiBundle\Doctrine\QueryCollectionExtension;
 
-use ApiPlatform\Core\Bridge\Doctrine\Orm\Util\QueryNameGeneratorInterface;
+use ApiPlatform\Doctrine\Orm\Util\QueryNameGeneratorInterface;
+use ApiPlatform\Metadata\Get;
 use Doctrine\ORM\QueryBuilder;
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ApiBundle\Context\UserContextInterface;
@@ -39,7 +40,7 @@ final class ProductsByChannelAndLocaleCodeExtensionSpec extends ObjectBehavior
         $queryBuilder->getRootAliases()->shouldNotBeCalled();
         $queryBuilder->addSelect('translation')->shouldNotBeCalled();
 
-        $this->applyToCollection($queryBuilder, $queryNameGenerator, TaxonInterface::class, 'get', []);
+        $this->applyToCollection($queryBuilder, $queryNameGenerator, TaxonInterface::class, new Get());
     }
 
     function it_throws_an_exception_if_context_has_no_channel_for_shop_user(
@@ -53,7 +54,7 @@ final class ProductsByChannelAndLocaleCodeExtensionSpec extends ObjectBehavior
 
         $this
             ->shouldThrow(\InvalidArgumentException::class)
-            ->during('applyToCollection', [$queryBuilder, $queryNameGenerator, ProductInterface::class, 'get', []])
+            ->during('applyToCollection', [$queryBuilder, $queryNameGenerator, ProductInterface::class, new Get()])
         ;
     }
 
@@ -69,7 +70,10 @@ final class ProductsByChannelAndLocaleCodeExtensionSpec extends ObjectBehavior
 
         $this
             ->shouldThrow(\InvalidArgumentException::class)
-            ->during('applyToCollection', [$queryBuilder, $queryNameGenerator, ProductInterface::class, 'get', [ContextKeys::CHANNEL => $channel]])
+            ->during(
+                'applyToCollection',
+                [$queryBuilder, $queryNameGenerator, ProductInterface::class, new Get(), [ContextKeys::CHANNEL => $channel]],
+            )
         ;
     }
 
@@ -85,7 +89,7 @@ final class ProductsByChannelAndLocaleCodeExtensionSpec extends ObjectBehavior
         $queryBuilder->getRootAliases()->shouldNotBeCalled();
         $queryBuilder->addSelect('translation')->shouldNotBeCalled();
 
-        $this->applyToCollection($queryBuilder, $queryNameGenerator, ProductInterface::class, 'get', []);
+        $this->applyToCollection($queryBuilder, $queryNameGenerator, ProductInterface::class, new Get());
     }
 
     function it_filters_products_by_channel_and_locale_code_for_shop_user(
@@ -103,11 +107,21 @@ final class ProductsByChannelAndLocaleCodeExtensionSpec extends ObjectBehavior
 
         $queryBuilder->getRootAliases()->willReturn(['o']);
         $queryBuilder->addSelect('translation')->shouldBeCalled()->willReturn($queryBuilder);
-        $queryBuilder->innerJoin('o.translations', 'translation', 'WITH', 'translation.locale = :localeCode')->shouldBeCalled()->willReturn($queryBuilder);
+        $queryBuilder
+            ->innerJoin('o.translations', 'translation', 'WITH', 'translation.locale = :localeCode')
+            ->shouldBeCalled()
+            ->willReturn($queryBuilder)
+        ;
         $queryBuilder->andWhere(':channel MEMBER OF o.channels')->shouldBeCalled()->willReturn($queryBuilder);
         $queryBuilder->setParameter('channel', $channel)->shouldBeCalled()->willReturn($queryBuilder);
         $queryBuilder->setParameter('localeCode', 'en_US')->shouldBeCalled()->willReturn($queryBuilder);
 
-        $this->applyToCollection($queryBuilder, $queryNameGenerator, ProductInterface::class, 'get', [ContextKeys::CHANNEL => $channel, ContextKeys::LOCALE_CODE => 'en_US']);
+        $this->applyToCollection(
+            $queryBuilder,
+            $queryNameGenerator,
+            ProductInterface::class,
+            new Get(),
+            [ContextKeys::CHANNEL => $channel, ContextKeys::LOCALE_CODE => 'en_US'],
+        );
     }
 }

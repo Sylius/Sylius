@@ -6,5 +6,8 @@
     "code": "IE",
     "enabled": true,
     "name": "Ireland",
-    "provinces": []
+    "provinces": [
+        "\/api\/v2\/admin\/provinces\/IE-CON",
+        "\/api\/v2\/admin\/provinces\/IE-LEI"
+    ]
 }

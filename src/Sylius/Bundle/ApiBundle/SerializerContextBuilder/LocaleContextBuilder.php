@@ -13,13 +13,13 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\SerializerContextBuilder;
 
-use ApiPlatform\Core\Serializer\SerializerContextBuilderInterface;
+use ApiPlatform\Serializer\SerializerContextBuilderInterface;
 use Sylius\Bundle\ApiBundle\Serializer\ContextKeys;
 use Sylius\Component\Locale\Context\LocaleContextInterface;
 use Sylius\Component\Locale\Context\LocaleNotFoundException;
 use Symfony\Component\HttpFoundation\Request;
 
-final class LocaleContextBuilder implements SerializerContextBuilderInterface
+final readonly class LocaleContextBuilder implements SerializerContextBuilderInterface
 {
     public function __construct(
         private SerializerContextBuilderInterface $decoratedLocaleBuilder,
@@ -27,7 +27,7 @@ final class LocaleContextBuilder implements SerializerContextBuilderInterface
     ) {
     }
 
-    public function createFromRequest(Request $request, bool $normalization, ?array $extractedAttributes = null): array
+    public function createFromRequest(Request $request, bool $normalization, array $extractedAttributes = null): array
     {
         $context = $this->decoratedLocaleBuilder->createFromRequest($request, $normalization, $extractedAttributes);
 

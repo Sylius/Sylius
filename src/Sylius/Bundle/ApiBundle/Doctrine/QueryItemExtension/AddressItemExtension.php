@@ -13,8 +13,9 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\Doctrine\QueryItemExtension;
 
-use ApiPlatform\Core\Bridge\Doctrine\Orm\Extension\QueryItemExtensionInterface;
-use ApiPlatform\Core\Bridge\Doctrine\Orm\Util\QueryNameGeneratorInterface;
+use ApiPlatform\Doctrine\Orm\Extension\QueryItemExtensionInterface;
+use ApiPlatform\Doctrine\Orm\Util\QueryNameGeneratorInterface;
+use ApiPlatform\Metadata\Operation;
 use Doctrine\ORM\QueryBuilder;
 use Lexik\Bundle\JWTAuthenticationBundle\Exception\MissingTokenException;
 use Sylius\Bundle\ApiBundle\Context\UserContextInterface;
@@ -25,7 +26,8 @@ use Sylius\Component\Core\Model\ShopUserInterface;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\Security\Core\User\UserInterface;
 
-final class AddressItemExtension implements QueryItemExtensionInterface
+/** @experimental */
+final readonly class AddressItemExtension implements QueryItemExtensionInterface
 {
     public function __construct(private UserContextInterface $userContext)
     {
@@ -36,9 +38,9 @@ final class AddressItemExtension implements QueryItemExtensionInterface
         QueryNameGeneratorInterface $queryNameGenerator,
         string $resourceClass,
         array $identifiers,
-        ?string $operationName = null,
+        ?Operation $operation = null,
         array $context = [],
-    ) {
+    ): void {
         if (!is_a($resourceClass, AddressInterface::class, true)) {
             return;
         }

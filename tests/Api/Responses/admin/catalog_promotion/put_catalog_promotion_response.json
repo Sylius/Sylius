@@ -15,7 +15,7 @@
     "scopes": [
         {
             "@type": "CatalogPromotionScope",
-            "@id": @string@,
+            "@id": "\/api\/v2\/admin\/catalog-promotion-scopes\/@integer@",
             "id": @integer@,
             "type": "for_variants",
             "configuration": {
@@ -28,7 +28,7 @@
     "actions": [
         {
             "@type": "CatalogPromotionAction",
-            "@id": @string@,
+            "@id": "\/api\/v2\/admin\/catalog-promotion-actions\/@integer@",
             "id": @integer@,
             "type": "percentage_discount",
             "configuration": {

@@ -13,7 +13,8 @@ declare(strict_types=1);
 
 namespace spec\Sylius\Bundle\ApiBundle\Doctrine\QueryItemExtension;
 
-use ApiPlatform\Core\Bridge\Doctrine\Orm\Util\QueryNameGeneratorInterface;
+use ApiPlatform\Doctrine\Orm\Util\QueryNameGeneratorInterface;
+use ApiPlatform\Metadata\Get;
 use Doctrine\ORM\QueryBuilder;
 use Lexik\Bundle\JWTAuthenticationBundle\Exception\MissingTokenException;
 use PhpSpec\ObjectBehavior;
@@ -51,7 +52,7 @@ final class AddressItemExtensionSpec extends ObjectBehavior
             $queryNameGenerator,
             AddressInterface::class,
             ['tokenValue' => 'xaza-tt_fee'],
-            Request::METHOD_GET,
+            new Get(),
             [ContextKeys::HTTP_REQUEST_METHOD_TYPE => Request::METHOD_GET],
         );
     }
@@ -79,7 +80,7 @@ final class AddressItemExtensionSpec extends ObjectBehavior
             $queryNameGenerator,
             AddressInterface::class,
             ['tokenValue' => 'xaza-tt_fee'],
-            Request::METHOD_GET,
+            new Get(),
             [ContextKeys::HTTP_REQUEST_METHOD_TYPE => Request::METHOD_GET],
         );
     }
@@ -102,7 +103,7 @@ final class AddressItemExtensionSpec extends ObjectBehavior
                     $queryNameGenerator,
                     AddressInterface::class,
                     ['tokenValue' => 'xaza-tt_fee'],
-                    Request::METHOD_GET,
+                    new Get(),
                     [ContextKeys::HTTP_REQUEST_METHOD_TYPE => Request::METHOD_GET],
                 ],
             )

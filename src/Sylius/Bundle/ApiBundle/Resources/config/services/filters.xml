@@ -9,198 +9,198 @@
 
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
-        <service id="sylius.api.search_payment_filter" parent="api_platform.doctrine.orm.search_filter" public="true">
-            <argument type="collection">
-                <argument key="state">exact</argument>
-                <argument key="order.channel.code">exact</argument>
-            </argument>
-            <tag name="api_platform.filter" />
-        </service>
+<!--        <service id="sylius.api.search_payment_filter" parent="api_platform.doctrine.orm.search_filter" public="true">-->
+<!--            <argument type="collection">-->
+<!--                <argument key="state">exact</argument>-->
+<!--                <argument key="order.channel.code">exact</argument>-->
+<!--            </argument>-->
+<!--            <tag name="api_platform.filter" />-->
+<!--        </service>-->
 
-        <service id="sylius.api.search_shipment_filter" parent="api_platform.doctrine.orm.search_filter" public="true">
-            <argument type="collection">
-                <argument key="state">exact</argument>
-                <argument key="order.channel.code">exact</argument>
-                <argument key="method.code">exact</argument>
-            </argument>
-            <tag name="api_platform.filter" />
-        </service>
+<!--        <service id="sylius.api.search_shipment_filter" parent="api_platform.doctrine.orm.search_filter" public="true">-->
+<!--            <argument type="collection">-->
+<!--                <argument key="state">exact</argument>-->
+<!--                <argument key="order.channel.code">exact</argument>-->
+<!--                <argument key="method.code">exact</argument>-->
+<!--            </argument>-->
+<!--            <tag name="api_platform.filter" />-->
+<!--        </service>-->
 
-        <service id="sylius.api.archived_shipping_methods_filter" parent="api_platform.doctrine.orm.exists_filter" public="true">
-            <argument type="collection">
-                <argument key="archivedAt">false</argument>
-            </argument>
-            <tag name="api_platform.filter" />
-        </service>
+<!--        <service id="sylius.api.archived_shipping_methods_filter" parent="api_platform.doctrine.orm.exists_filter" public="true">-->
+<!--            <argument type="collection">-->
+<!--                <argument key="archivedAt">false</argument>-->
+<!--            </argument>-->
+<!--            <tag name="api_platform.filter" />-->
+<!--        </service>-->
 
-        <service id="sylius.api.product_association_filter" parent="api_platform.doctrine.orm.search_filter" public="true">
-            <argument type="collection">
-                <argument key="owner.code">partial</argument>
-                <argument key="type.code">partial</argument>
-            </argument>
-            <tag name="api_platform.filter" />
-        </service>
+<!--        <service id="sylius.api.product_association_filter" parent="api_platform.doctrine.orm.search_filter" public="true">-->
+<!--            <argument type="collection">-->
+<!--                <argument key="owner.code">partial</argument>-->
+<!--                <argument key="type.code">partial</argument>-->
+<!--            </argument>-->
+<!--            <tag name="api_platform.filter" />-->
+<!--        </service>-->
 
-        <service id="sylius.api.product_taxon_code_filter" parent="api_platform.doctrine.orm.search_filter" public="true">
-            <argument type="collection">
-                <argument key="productTaxons.taxon.code">exact</argument>
-            </argument>
-            <tag name="api_platform.filter" />
-        </service>
+<!--        <service id="sylius.api.product_taxon_code_filter" parent="api_platform.doctrine.orm.search_filter" public="true">-->
+<!--            <argument type="collection">-->
+<!--                <argument key="productTaxons.taxon.code">exact</argument>-->
+<!--            </argument>-->
+<!--            <tag name="api_platform.filter" />-->
+<!--        </service>-->
 
-        <service id="Sylius\Bundle\ApiBundle\Filter\Doctrine\TaxonFilter" public="true">
-            <argument type="service" id="doctrine" />
-            <argument type="service" id="api_platform.symfony.iri_converter" />
-            <tag name="api_platform.filter" />
-        </service>
+<!--        <service id="Sylius\Bundle\ApiBundle\Filter\Doctrine\TaxonFilter" public="true">-->
+<!--            <argument type="service" id="doctrine" />-->
+<!--            <argument type="service" id="api_platform.symfony.iri_converter" />-->
+<!--            <tag name="api_platform.filter" />-->
+<!--        </service>-->
 
-        <service id="Sylius\Bundle\ApiBundle\Filter\ShippingMethodFilter" public="true">
-            <tag name="api_platform.filter" />
-        </service>
+<!--        <service id="Sylius\Bundle\ApiBundle\Filter\ShippingMethodFilter" public="true">-->
+<!--            <tag name="api_platform.filter" />-->
+<!--        </service>-->
 
-        <service id="sylius.api.product_image_product_variants_filter" parent="api_platform.doctrine.orm.search_filter" public="true">
-            <argument type="collection">
-                <argument key="productVariants">exact</argument>
-            </argument>
-            <tag name="api_platform.filter" />
-        </service>
+<!--        <service id="sylius.api.product_image_product_variants_filter" parent="api_platform.doctrine.orm.search_filter" public="true">-->
+<!--            <argument type="collection">-->
+<!--                <argument key="productVariants">exact</argument>-->
+<!--            </argument>-->
+<!--            <tag name="api_platform.filter" />-->
+<!--        </service>-->
 
-        <service id="sylius.api.product_name_filter" parent="api_platform.doctrine.orm.search_filter" public="true">
-            <argument type="collection">
-                <argument key="translations.name">partial</argument>
-            </argument>
-            <tag name="api_platform.filter" />
-        </service>
+<!--        <service id="sylius.api.product_name_filter" parent="api_platform.doctrine.orm.search_filter" public="true">-->
+<!--            <argument type="collection">-->
+<!--                <argument key="translations.name">partial</argument>-->
+<!--            </argument>-->
+<!--            <tag name="api_platform.filter" />-->
+<!--        </service>-->
 
-        <service id="sylius.api.product_price_filter" parent="api_platform.doctrine.orm.order_filter" public="true">
-            <argument type="collection">
-                <argument key="price" />
-            </argument>
-            <tag name="api_platform.filter" />
-        </service>
+<!--        <service id="sylius.api.product_price_filter" parent="api_platform.doctrine.orm.order_filter" public="true">-->
+<!--            <argument type="collection">-->
+<!--                <argument key="price" />-->
+<!--            </argument>-->
+<!--            <tag name="api_platform.filter" />-->
+<!--        </service>-->
 
-        <service id="sylius.api.order_filter.position" parent="api_platform.doctrine.orm.order_filter" public="true">
-            <argument type="collection">
-                <argument key="position" />
-            </argument>
-            <tag name="api_platform.filter" />
-        </service>
+<!--        <service id="sylius.api.order_filter.position" parent="api_platform.doctrine.orm.order_filter" public="true">-->
+<!--            <argument type="collection">-->
+<!--                <argument key="position" />-->
+<!--            </argument>-->
+<!--            <tag name="api_platform.filter" />-->
+<!--        </service>-->
 
-        <service id="sylius.api.product_variant_product_filter" parent="api_platform.doctrine.orm.search_filter" public="true">
-            <argument type="collection">
-                <argument key="product">exact</argument>
-            </argument>
-            <tag name="api_platform.filter" />
-        </service>
+<!--        <service id="sylius.api.product_variant_product_filter" parent="api_platform.doctrine.orm.search_filter" public="true">-->
+<!--            <argument type="collection">-->
+<!--                <argument key="product">exact</argument>-->
+<!--            </argument>-->
+<!--            <tag name="api_platform.filter" />-->
+<!--        </service>-->
 
-        <service id="sylius.api.product_review_product_filter" parent="api_platform.doctrine.orm.search_filter" public="true">
-            <argument type="collection">
-                <argument key="reviewSubject">exact</argument>
-            </argument>
-            <tag name="api_platform.filter" />
-        </service>
+<!--        <service id="sylius.api.product_review_product_filter" parent="api_platform.doctrine.orm.search_filter" public="true">-->
+<!--            <argument type="collection">-->
+<!--                <argument key="reviewSubject">exact</argument>-->
+<!--            </argument>-->
+<!--            <tag name="api_platform.filter" />-->
+<!--        </service>-->
 
-        <service id="sylius.api.product_review_date_filter" parent="api_platform.doctrine.orm.order_filter" public="true">
-            <argument type="collection">
-                <argument key="createdAt" />
-            </argument>
-            <tag name="api_platform.filter" />
-        </service>
+<!--        <service id="sylius.api.product_review_date_filter" parent="api_platform.doctrine.orm.order_filter" public="true">-->
+<!--            <argument type="collection">-->
+<!--                <argument key="createdAt" />-->
+<!--            </argument>-->
+<!--            <tag name="api_platform.filter" />-->
+<!--        </service>-->
 
-        <service id="sylius.api.order_date_filter" parent="api_platform.doctrine.orm.date_filter" public="true">
-            <argument type="collection">
-                <argument key="checkoutCompletedAt">exclude_null</argument>
-            </argument>
-            <tag name="api_platform.filter" />
-        </service>
+<!--        <service id="sylius.api.order_date_filter" parent="api_platform.doctrine.orm.date_filter" public="true">-->
+<!--            <argument type="collection">-->
+<!--                <argument key="checkoutCompletedAt">exclude_null</argument>-->
+<!--            </argument>-->
+<!--            <tag name="api_platform.filter" />-->
+<!--        </service>-->
 
-        <service id="sylius.api.order_product_filter" parent="api_platform.doctrine.orm.search_filter" public="true">
-            <argument type="collection">
-                <argument key="items.productName">exact</argument>
-            </argument>
-            <tag name="api_platform.filter" />
-        </service>
+<!--        <service id="sylius.api.order_product_filter" parent="api_platform.doctrine.orm.search_filter" public="true">-->
+<!--            <argument type="collection">-->
+<!--                <argument key="items.productName">exact</argument>-->
+<!--            </argument>-->
+<!--            <tag name="api_platform.filter" />-->
+<!--        </service>-->
 
-        <service id="sylius.api.order_shipping_method_filter" parent="api_platform.doctrine.orm.search_filter" public="true">
-            <argument type="collection">
-                <argument key="shipments.method.code">exact</argument>
-            </argument>
-            <tag name="api_platform.filter" />
-        </service>
+<!--        <service id="sylius.api.order_shipping_method_filter" parent="api_platform.doctrine.orm.search_filter" public="true">-->
+<!--            <argument type="collection">-->
+<!--                <argument key="shipments.method.code">exact</argument>-->
+<!--            </argument>-->
+<!--            <tag name="api_platform.filter" />-->
+<!--        </service>-->
 
-        <service id="sylius.api.order_variants_filter" parent="api_platform.doctrine.orm.search_filter" public="true">
-            <argument type="collection">
-                <argument key="items.variant.translations.name">exact</argument>
-            </argument>
-            <tag name="api_platform.filter" />
-        </service>
+<!--        <service id="sylius.api.order_variants_filter" parent="api_platform.doctrine.orm.search_filter" public="true">-->
+<!--            <argument type="collection">-->
+<!--                <argument key="items.variant.translations.name">exact</argument>-->
+<!--            </argument>-->
+<!--            <tag name="api_platform.filter" />-->
+<!--        </service>-->
 
-        <service id="sylius.api.order_currency_filter" parent="api_platform.doctrine.orm.search_filter" public="true">
-            <argument type="collection">
-                <argument key="currencyCode">exact</argument>
-            </argument>
-            <tag name="api_platform.filter" />
-        </service>
+<!--        <service id="sylius.api.order_currency_filter" parent="api_platform.doctrine.orm.search_filter" public="true">-->
+<!--            <argument type="collection">-->
+<!--                <argument key="currencyCode">exact</argument>-->
+<!--            </argument>-->
+<!--            <tag name="api_platform.filter" />-->
+<!--        </service>-->
 
-        <service id="sylius.api.order_total_filter" parent="api_platform.doctrine.orm.range_filter" public="true">
-            <argument type="collection">
-                <argument key="total">exact</argument>
-            </argument>
-            <tag name="api_platform.filter" />
-        </service>
+<!--        <service id="sylius.api.order_total_filter" parent="api_platform.doctrine.orm.range_filter" public="true">-->
+<!--            <argument type="collection">-->
+<!--                <argument key="total">exact</argument>-->
+<!--            </argument>-->
+<!--            <tag name="api_platform.filter" />-->
+<!--        </service>-->
 
-        <service id="sylius.api.order_channel_filter" parent="api_platform.doctrine.orm.search_filter" public="true">
-            <argument type="collection">
-                <argument key="channel.code" />
-            </argument>
-            <tag name="api_platform.filter" />
-        </service>
+<!--        <service id="sylius.api.order_channel_filter" parent="api_platform.doctrine.orm.search_filter" public="true">-->
+<!--            <argument type="collection">-->
+<!--                <argument key="channel.code" />-->
+<!--            </argument>-->
+<!--            <tag name="api_platform.filter" />-->
+<!--        </service>-->
 
-        <service id="sylius.api.product_order_filter" parent="api_platform.doctrine.orm.order_filter" public="true">
-            <argument type="collection">
-                <argument key="code" />
-                <argument key="createdAt" />
-            </argument>
-            <tag name="api_platform.filter" />
-        </service>
+<!--        <service id="sylius.api.product_order_filter" parent="api_platform.doctrine.orm.order_filter" public="true">-->
+<!--            <argument type="collection">-->
+<!--                <argument key="code" />-->
+<!--                <argument key="createdAt" />-->
+<!--            </argument>-->
+<!--            <tag name="api_platform.filter" />-->
+<!--        </service>-->
 
-        <service id="sylius.api.shipping_method_order_filter" parent="api_platform.doctrine.orm.order_filter" public="true">
-            <argument type="collection">
-                <argument key="code" />
-            </argument>
-            <tag name="api_platform.filter" />
-        </service>
+<!--        <service id="sylius.api.shipping_method_order_filter" parent="api_platform.doctrine.orm.order_filter" public="true">-->
+<!--            <argument type="collection">-->
+<!--                <argument key="code" />-->
+<!--            </argument>-->
+<!--            <tag name="api_platform.filter" />-->
+<!--        </service>-->
 
-        <service id="sylius.api.payment_method_order_filter" parent="api_platform.doctrine.orm.order_filter" public="true">
-            <argument type="collection">
-                <argument key="code" />
-            </argument>
-            <tag name="api_platform.filter" />
-        </service>
+<!--        <service id="sylius.api.payment_method_order_filter" parent="api_platform.doctrine.orm.order_filter" public="true">-->
+<!--            <argument type="collection">-->
+<!--                <argument key="code" />-->
+<!--            </argument>-->
+<!--            <tag name="api_platform.filter" />-->
+<!--        </service>-->
 
-        <service id="sylius.api.product_association_type_filter" parent="api_platform.doctrine.orm.search_filter" public="true">
-            <argument type="collection">
-                <argument key="translations.name">partial</argument>
-                <argument key="code">partial</argument>
-            </argument>
-            <tag name="api_platform.filter" />
-        </service>
+<!--        <service id="sylius.api.product_association_type_filter" parent="api_platform.doctrine.orm.search_filter" public="true">-->
+<!--            <argument type="collection">-->
+<!--                <argument key="translations.name">partial</argument>-->
+<!--                <argument key="code">partial</argument>-->
+<!--            </argument>-->
+<!--            <tag name="api_platform.filter" />-->
+<!--        </service>-->
 
         <service id="Sylius\Bundle\ApiBundle\Filter\Doctrine\ExchangeRateFilter" public="true">
             <argument type="service" id="doctrine" />
             <tag name="api_platform.filter" />
         </service>
 
-        <service id="Sylius\Bundle\ApiBundle\Filter\Doctrine\TranslationOrderNameAndLocaleFilter" public="true">
-            <argument type="service" id="doctrine" />
-            <tag name="api_platform.filter" />
-        </service>
+<!--        <service id="Sylius\Bundle\ApiBundle\Filter\Doctrine\TranslationOrderNameAndLocaleFilter" public="true">-->
+<!--            <argument type="service" id="doctrine" />-->
+<!--            <tag name="api_platform.filter" />-->
+<!--        </service>-->
 
-        <service id="Sylius\Bundle\ApiBundle\Filter\Doctrine\ProductVariantOptionValueFilter" public="true">
-            <argument type="service" id="api_platform.symfony.iri_converter" />
-            <argument type="service" id="doctrine" />
-            <tag name="api_platform.filter" />
-        </service>
+<!--        <service id="Sylius\Bundle\ApiBundle\Filter\Doctrine\ProductVariantOptionValueFilter" public="true">-->
+<!--            <argument type="service" id="api_platform.symfony.iri_converter" />-->
+<!--            <argument type="service" id="doctrine" />-->
+<!--            <tag name="api_platform.filter" />-->
+<!--        </service>-->
 
         <service id="Sylius\Bundle\ApiBundle\Filter\Doctrine\ProductVariantCatalogPromotionFilter" public="true">
             <argument type="service" id="api_platform.symfony.iri_converter" />
@@ -208,14 +208,14 @@
             <tag name="api_platform.filter" />
         </service>
 
-        <service id="Sylius\Bundle\ApiBundle\Filter\Doctrine\ProductPriceOrderFilter" public="true">
-            <argument type="service" id="doctrine" />
-            <tag name="api_platform.filter" />
-        </service>
+<!--        <service id="Sylius\Bundle\ApiBundle\Filter\Doctrine\ProductPriceOrderFilter" public="true">-->
+<!--            <argument type="service" id="doctrine" />-->
+<!--            <tag name="api_platform.filter" />-->
+<!--        </service>-->
 
-        <service id="Sylius\Bundle\ApiBundle\Filter\PaymentMethodFilter" public="true">
-            <tag name="api_platform.filter" />
-        </service>
+<!--        <service id="Sylius\Bundle\ApiBundle\Filter\PaymentMethodFilter" public="true">-->
+<!--            <tag name="api_platform.filter" />-->
+<!--        </service>-->
 
         <service id="sylius.api.catalog_promotion_search_filter" parent="api_platform.doctrine.orm.search_filter" public="true">
             <argument type="collection">
@@ -247,19 +247,19 @@
             <tag name="api_platform.filter" />
         </service>
 
-        <service id="sylius.api.tax_rates_start_date_filter" parent="api_platform.doctrine.orm.date_filter" public="true">
-            <argument type="collection">
-                <argument key="startDate">exclude_null</argument>
-            </argument>
-            <tag name="api_platform.filter" />
-        </service>
+<!--        <service id="sylius.api.tax_rates_start_date_filter" parent="api_platform.doctrine.orm.date_filter" public="true">-->
+<!--            <argument type="collection">-->
+<!--                <argument key="startDate">exclude_null</argument>-->
+<!--            </argument>-->
+<!--            <tag name="api_platform.filter" />-->
+<!--        </service>-->
 
-        <service id="sylius.api.tax_rates_end_date_filter" parent="api_platform.doctrine.orm.date_filter" public="true">
-            <argument type="collection">
-                <argument key="endDate">exclude_null</argument>
-            </argument>
-            <tag name="api_platform.filter" />
-        </service>
+<!--        <service id="sylius.api.tax_rates_end_date_filter" parent="api_platform.doctrine.orm.date_filter" public="true">-->
+<!--            <argument type="collection">-->
+<!--                <argument key="endDate">exclude_null</argument>-->
+<!--            </argument>-->
+<!--            <tag name="api_platform.filter" />-->
+<!--        </service>-->
 
         <service id="Sylius\Bundle\ApiBundle\Filter\Doctrine\ChannelsAwareChannelFilter" public="true">
             <argument type="service" id="api_platform.symfony.iri_converter" />
@@ -267,93 +267,93 @@
             <tag name="api_platform.filter" />
         </service>
 
-        <service id="sylius.api.tax_rate.date_filter" parent="ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\DateFilter" public="true">
-            <argument type="collection">
-                <argument key="startDate"/>
-                <argument key="endDate"/>
-            </argument>
-            <tag name="api_platform.filter" />
-        </service>
+<!--        <service id="sylius.api.tax_rate.date_filter" parent="ApiPlatform\Doctrine\Orm\Filter\DateFilter" public="true">-->
+<!--            <argument type="collection">-->
+<!--                <argument key="startDate"/>-->
+<!--                <argument key="endDate"/>-->
+<!--            </argument>-->
+<!--            <tag name="api_platform.filter" />-->
+<!--        </service>-->
 
-        <service id="sylius.api.channel_pricing_channel_filter" parent="api_platform.doctrine.orm.search_filter" public="true">
-            <argument type="collection">
-                <argument key="channelPricing.channelCode">exact</argument>
-            </argument>
-            <tag name="api_platform.filter" />
-        </service>
+<!--        <service id="sylius.api.channel_pricing_channel_filter" parent="api_platform.doctrine.orm.search_filter" public="true">-->
+<!--            <argument type="collection">-->
+<!--                <argument key="channelPricing.channelCode">exact</argument>-->
+<!--            </argument>-->
+<!--            <tag name="api_platform.filter" />-->
+<!--        </service>-->
 
-        <service id="sylius.api.channel_pricing_product_variant_filter" parent="api_platform.doctrine.orm.search_filter" public="true">
-            <argument type="collection">
-                <argument key="channelPricing.productVariant.code">exact</argument>
-            </argument>
-            <tag name="api_platform.filter" />
-        </service>
+<!--        <service id="sylius.api.channel_pricing_product_variant_filter" parent="api_platform.doctrine.orm.search_filter" public="true">-->
+<!--            <argument type="collection">-->
+<!--                <argument key="channelPricing.productVariant.code">exact</argument>-->
+<!--            </argument>-->
+<!--            <tag name="api_platform.filter" />-->
+<!--        </service>-->
 
-        <service id="sylius.api.order_number_filter" parent="api_platform.doctrine.orm.order_filter" public="true">
-            <argument type="collection">
-                <argument key="number" />
-            </argument>
-            <tag name="api_platform.filter" />
-        </service>
+<!--        <service id="sylius.api.order_number_filter" parent="api_platform.doctrine.orm.order_filter" public="true">-->
+<!--            <argument type="collection">-->
+<!--                <argument key="number" />-->
+<!--            </argument>-->
+<!--            <tag name="api_platform.filter" />-->
+<!--        </service>-->
 
-        <service id="sylius.api.customer_group_filter" parent="api_platform.doctrine.orm.search_filter" public="true">
-            <argument type="collection">
-                <argument key="group.name">exact</argument>
-            </argument>
-            <tag name="api_platform.filter" />
-        </service>
+<!--        <service id="sylius.api.customer_group_filter" parent="api_platform.doctrine.orm.search_filter" public="true">-->
+<!--            <argument type="collection">-->
+<!--                <argument key="group.name">exact</argument>-->
+<!--            </argument>-->
+<!--            <tag name="api_platform.filter" />-->
+<!--        </service>-->
 
-        <service id="sylius.api.order_customer_filter" parent="api_platform.doctrine.orm.search_filter" public="true">
-            <argument type="collection">
-                <argument key="customer.id">exact</argument>
-            </argument>
-            <tag name="api_platform.filter" />
-        </service>
+<!--        <service id="sylius.api.order_customer_filter" parent="api_platform.doctrine.orm.search_filter" public="true">-->
+<!--            <argument type="collection">-->
+<!--                <argument key="customer.id">exact</argument>-->
+<!--            </argument>-->
+<!--            <tag name="api_platform.filter" />-->
+<!--        </service>-->
 
-        <service id="sylius.api.promotion_coupon_search_filter" parent="api_platform.doctrine.orm.search_filter" public="true">
-            <argument type="collection">
-                <argument key="coupons.code">exact</argument>
-            </argument>
-            <tag name="api_platform.filter" />
-        </service>
+<!--        <service id="sylius.api.promotion_coupon_search_filter" parent="api_platform.doctrine.orm.search_filter" public="true">-->
+<!--            <argument type="collection">-->
+<!--                <argument key="coupons.code">exact</argument>-->
+<!--            </argument>-->
+<!--            <tag name="api_platform.filter" />-->
+<!--        </service>-->
 
-        <service id="sylius.api.promotion_order_filter" parent="api_platform.doctrine.orm.order_filter" public="true">
-            <argument type="collection">
-                <argument key="priority" />
-            </argument>
-            <tag name="api_platform.filter" />
-        </service>
+<!--        <service id="sylius.api.promotion_order_filter" parent="api_platform.doctrine.orm.order_filter" public="true">-->
+<!--            <argument type="collection">-->
+<!--                <argument key="priority" />-->
+<!--            </argument>-->
+<!--            <tag name="api_platform.filter" />-->
+<!--        </service>-->
 
-        <service id="sylius.api.promotion_coupon_order_filter" parent="api_platform.doctrine.orm.order_filter" public="true">
-            <argument type="collection">
-                <argument key="code" />
-                <argument key="expiresAt" />
-                <argument key="usageLimit" />
-                <argument key="perCustomerUsageLimit" />
-                <argument key="used" />
-            </argument>
-            <tag name="api_platform.filter" />
-        </service>
+<!--        <service id="sylius.api.promotion_coupon_order_filter" parent="api_platform.doctrine.orm.order_filter" public="true">-->
+<!--            <argument type="collection">-->
+<!--                <argument key="code" />-->
+<!--                <argument key="expiresAt" />-->
+<!--                <argument key="usageLimit" />-->
+<!--                <argument key="perCustomerUsageLimit" />-->
+<!--                <argument key="used" />-->
+<!--            </argument>-->
+<!--            <tag name="api_platform.filter" />-->
+<!--        </service>-->
 
-        <service id="Sylius\Bundle\ApiBundle\Filter\Doctrine\PromotionCouponPromotionFilter" public="true">
-            <argument type="service" id="api_platform.symfony.iri_converter" />
-            <argument type="service" id="doctrine" />
-            <tag name="api_platform.filter" />
-        </service>
+<!--        <service id="Sylius\Bundle\ApiBundle\Filter\Doctrine\PromotionCouponPromotionFilter" public="true">-->
+<!--            <argument type="service" id="api_platform.symfony.iri_converter" />-->
+<!--            <argument type="service" id="doctrine" />-->
+<!--            <tag name="api_platform.filter" />-->
+<!--        </service>-->
 
-        <service id="sylius.api.search_filter.product.code" parent="api_platform.doctrine.orm.search_filter" public="true">
-            <argument type="collection">
-                <argument key="product.code">exact</argument>
-            </argument>
-            <tag name="api_platform.filter" />
-        </service>
+<!--        <service id="sylius.api.search_filter.product.code" parent="api_platform.doctrine.orm.search_filter" public="true">-->
+<!--            <argument type="collection">-->
+<!--                <argument key="product.code">exact</argument>-->
+<!--            </argument>-->
+<!--            <tag name="api_platform.filter" />-->
+<!--        </service>-->
 
-        <service id="sylius.api.search_filter.taxon.code" parent="api_platform.doctrine.orm.search_filter" public="true">
-            <argument type="collection">
-                <argument key="taxon.code">exact</argument>
-            </argument>
-            <tag name="api_platform.filter" />
-        </service>
+<!--        <service id="sylius.api.search_filter.taxon.code" parent="api_platform.doctrine.orm.search_filter" public="true">-->
+<!--            <argument type="collection">-->
+<!--                <argument key="taxon.code">exact</argument>-->
+<!--            </argument>-->
+<!--            <tag name="api_platform.filter" />-->
+<!--        </service>-->
 
         <service id="sylius.api.order_filter.code" parent="api_platform.doctrine.orm.order_filter" public="true">
             <argument type="collection">

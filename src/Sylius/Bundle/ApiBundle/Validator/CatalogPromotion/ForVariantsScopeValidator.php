@@ -21,7 +21,7 @@ use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
 use Webmozart\Assert\Assert;
 
-final class ForVariantsScopeValidator implements ScopeValidatorInterface
+final readonly class ForVariantsScopeValidator implements ScopeValidatorInterface
 {
     public function __construct(
         private ScopeValidatorInterface $baseScopeValidator,

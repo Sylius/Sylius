@@ -13,7 +13,8 @@ declare(strict_types=1);
 
 namespace spec\Sylius\Bundle\ApiBundle\Doctrine\QueryCollectionExtension;
 
-use ApiPlatform\Core\Bridge\Doctrine\Orm\Util\QueryNameGeneratorInterface;
+use ApiPlatform\Doctrine\Orm\Util\QueryNameGeneratorInterface;
+use ApiPlatform\Metadata\Get;
 use Doctrine\ORM\QueryBuilder;
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ApiBundle\Context\UserContextInterface;
@@ -40,7 +41,7 @@ final class OrdersByLoggedInUserExtensionSpec extends ObjectBehavior
         $userContext->getUser()->shouldNotBeCalled();
         $queryBuilder->getRootAliases()->shouldNotBeCalled();
 
-        $this->applyToCollection($queryBuilder, $queryNameGenerator, ResourceInterface::class, 'get', []);
+        $this->applyToCollection($queryBuilder, $queryNameGenerator, ResourceInterface::class, new Get());
     }
 
     function it_filters_out_carts_for_all_users(
@@ -57,7 +58,7 @@ final class OrdersByLoggedInUserExtensionSpec extends ObjectBehavior
         $queryBuilder->andWhere('o.state != :state')->shouldBeCalled()->willReturn($queryBuilder);
         $queryBuilder->setParameter('state', OrderInterface::STATE_CART)->shouldBeCalled()->willReturn($queryBuilder);
 
-        $this->applyToCollection($queryBuilder, $queryNameGenerator, OrderInterface::class, 'get', []);
+        $this->applyToCollection($queryBuilder, $queryNameGenerator, OrderInterface::class, new Get());
     }
 
     function it_filters_orders_for_shop_user(
@@ -79,7 +80,7 @@ final class OrdersByLoggedInUserExtensionSpec extends ObjectBehavior
         $queryBuilder->setParameter('state', OrderInterface::STATE_CART)->shouldBeCalled()->willReturn($queryBuilder);
         $queryBuilder->setParameter('customer', $customer)->shouldBeCalled()->willReturn($queryBuilder);
 
-        $this->applyToCollection($queryBuilder, $queryNameGenerator, OrderInterface::class, 'get', []);
+        $this->applyToCollection($queryBuilder, $queryNameGenerator, OrderInterface::class, new Get());
     }
 
     function it_throws_an_access_denied_exception_if_user_is_not_recognised(
@@ -104,8 +105,7 @@ final class OrdersByLoggedInUserExtensionSpec extends ObjectBehavior
                     $queryBuilder,
                     $queryNameGenerator,
                     OrderInterface::class,
-                    'get',
-                    [],
+                    new Get(),
                 ],
             )
         ;

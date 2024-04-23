@@ -18,7 +18,7 @@ use Lexik\Bundle\JWTAuthenticationBundle\Event\AuthenticationSuccessEvent;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
 
-final class AuthenticationSuccessListener
+final readonly class AuthenticationSuccessListener
 {
     public function __construct(private IriConverterInterface $iriConverter)
     {

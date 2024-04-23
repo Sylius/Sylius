@@ -7,7 +7,7 @@ Feature: Changing an administrator's avatar
     Background:
         Given I am logged in as an administrator
 
-    @ui @api
+    @ui @api @avatar # temporarily enabled to test only the avatar
     Scenario: Changing an avatar of an administrator
         Given I have the "ford.jpg" image as my avatar
         And I am editing my details
