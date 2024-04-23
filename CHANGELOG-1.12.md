@@ -1,5 +1,18 @@
 # CHANGELOG FOR `1.12.X`
 
+## v1.12.15 (2024-04-23)
+
+#### Details
+
+- [#16076](https://github.com/Sylius/Sylius/issues/16076) BUGFIX: [AdminBundle] #16031 wrap long text in notes section ([@crydotsnake](https://github.com/crydotsnake))
+- [#16099](https://github.com/Sylius/Sylius/issues/16099) BUGFIX: [ShopBundle] #16068 wrap long text in product description ([@crydotsnake](https://github.com/crydotsnake))
+- [#15510](https://github.com/Sylius/Sylius/issues/15510) [Documentation] Update docs/book/architecture/state_machine.rst ([@benbd5](https://github.com/benbd5), [@GSadee](https://github.com/GSadee))
+- [#16125](https://github.com/Sylius/Sylius/issues/16125) [Documentation] Update release dates for 1.13 and 2.0 versions ([@GSadee](https://github.com/GSadee))
+- [#16128](https://github.com/Sylius/Sylius/issues/16128) Add twig 3.9.0 conflict ([@mpysiak](https://github.com/mpysiak))
+- [#16131](https://github.com/Sylius/Sylius/issues/16131) Revert conflict to twig/intl-extra ([@GSadee](https://github.com/GSadee))
+- [#16134](https://github.com/Sylius/Sylius/issues/16134) Fix Sylius logo in READMEs of Bundles & Components ([@mpysiak](https://github.com/mpysiak))
+- [#16158](https://github.com/Sylius/Sylius/issues/16158) Update dead link in drivers.rst ([@binhuq](https://github.com/binhuq))
+
 ## v1.12.14 (2024-03-25)
 
 #### Details
