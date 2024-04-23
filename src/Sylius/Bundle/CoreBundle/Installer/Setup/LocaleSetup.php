@@ -117,7 +117,8 @@ final class LocaleSetup implements LocaleSetupInterface
         if (
             $this->localeParameterFilePath === null ||
             $this->filesystem === null ||
-            !$this->filesystem->exists($this->localeParameterFilePath)
+            !$this->filesystem->exists($this->localeParameterFilePath) ||
+            !is_writable($this->localeParameterFilePath)
         ) {
             $output->writeln('<info>You may also need to add this locale into config/parameters.yaml configuration.</info>');
 
