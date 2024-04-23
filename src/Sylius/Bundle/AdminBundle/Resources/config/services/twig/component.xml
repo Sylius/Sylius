@@ -102,5 +102,10 @@
             <argument type="service" id="form.factory" />
             <argument>Sylius\Bundle\ProductBundle\Form\Type\ProductGenerateVariantsType</argument>
         </service>
+
+        <service id="Sylius\Bundle\AdminBundle\Twig\Component\PaymentMethod\FormComponent">
+            <argument type="service" id="form.factory" />
+            <argument>Sylius\Bundle\PaymentBundle\Form\Type\PaymentMethodType</argument>
+        </service>
     </services>
 </container>

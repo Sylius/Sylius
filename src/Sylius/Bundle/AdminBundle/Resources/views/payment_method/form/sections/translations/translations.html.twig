@@ -1,0 +1,14 @@
+{% import '@SyliusAdmin/Shared/Helper/translations.html.twig' as _translations %}
+
+{% set body %}
+    {% verbatim %}
+        <div class="row"">
+            <div class="col-12">
+                {{ form_row(translationForm.name) }}
+                {{ form_row(translationForm.description) }}
+                {{ form_row(translationForm.instructions) }}
+            </div>
+        </div>
+    {% endverbatim %}
+{% endset %}
+{{ _translations.default(hookable_data.form.translations, body) }}

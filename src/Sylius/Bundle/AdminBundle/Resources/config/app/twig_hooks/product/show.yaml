@@ -17,17 +17,17 @@ twig_hooks:
                 template: '@SyliusAdmin/Product/Show/Content/PageBody/_taxonomy.html.twig'
             associations:
                 template: '@SyliusAdmin/Product/Show/Content/PageBody/_associations.html.twig'
-                
+
         'sylius_admin.product.show.content.page_body.details':
             simple_product:
                 template: '@SyliusAdmin/Product/Show/Content/PageBody/Details/simpleProduct.html.twig'
             configurable_product:
                 template: '@SyliusAdmin/Product/Show/Content/PageBody/Details/configurableProduct.html.twig'
-                
+
         'sylius_admin.product.show.content.page_body.details.simple_product':
             shipping:
                 template: '@SyliusAdmin/Product/Show/Content/PageBody/Details/Shared/shipping.html.twig'
-                
+
         'sylius_admin.product.show.content.page_body.details.configurable_product':
             shipping:
                 template: '@SyliusAdmin/Product/Show/Content/PageBody/Details/Shared/shipping.html.twig'

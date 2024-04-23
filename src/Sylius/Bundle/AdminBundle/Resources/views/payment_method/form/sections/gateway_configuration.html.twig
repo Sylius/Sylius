@@ -1,0 +1,24 @@
+{% set main_hook = hook_name(hookable_data.parent_main_hook, 'gateway_configuration') %}
+{% set fallback_hook = hook_name(hookable_data.parent_fallback_hook, 'gateway_configuration') %}
+
+{% set gatewayType = hookable_data.form.vars.data.gatewayConfig.factoryName %}
+
+<div class="card mb-3">
+    <div class="card-header">
+        <div class="card-title">{{ 'sylius.ui.gateway_configuration'|trans }}</div>
+    </div>
+
+    <div class="card-body">
+        <div class="row">
+            {% hook [main_hook, fallback_hook] with hookable_data|merge({
+                parent_main_hook: main_hook,
+                parent_fallback_hook: fallback_hook,
+            }) %}
+
+            {% hook [main_hook ~ '.' ~ gatewayType, fallback_hook ~ '.' ~ gatewayType] with hookable_data|merge({
+                parent_main_hook: main_hook ~ '.' ~ gatewayType,
+                parent_fallback_hook: fallback_hook ~ '.' ~ gatewayType,
+            }) %}
+        </div>
+    </div>
+</div>
