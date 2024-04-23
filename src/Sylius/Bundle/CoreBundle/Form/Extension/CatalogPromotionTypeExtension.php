@@ -32,11 +32,6 @@ final class CatalogPromotionTypeExtension extends AbstractTypeExtension
         ;
     }
 
-    public function getExtendedType(): string
-    {
-        return CatalogPromotionType::class;
-    }
-
     public static function getExtendedTypes(): iterable
     {
         return [CatalogPromotionType::class];

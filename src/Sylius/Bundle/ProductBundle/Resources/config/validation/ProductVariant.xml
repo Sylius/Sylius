@@ -21,6 +21,10 @@
         <constraint name="Sylius\Bundle\ProductBundle\Validator\Constraint\ProductVariantCombination">
             <option name="groups">sylius</option>
         </constraint>
+        <constraint name="Sylius\Bundle\ProductBundle\Validator\Constraint\ProductVariantOptionValuesConfiguration">
+            <option name="groups">sylius</option>
+        </constraint>
+
         <property name="code">
             <constraint name="NotBlank">
                 <option name="message">sylius.product_variant.code.not_blank</option>
@@ -29,6 +33,11 @@
             <constraint name="Regex">
                 <option name="message">sylius.product_variant.code.regex</option>
                 <option name="pattern">/^[\w-]*$/</option>
+                <option name="groups">sylius</option>
+            </constraint>
+            <constraint name="Length">
+                <option name="max">255</option>
+                <option name="maxMessage">sylius.product_variant.code.max_length</option>
                 <option name="groups">sylius</option>
             </constraint>
         </property>

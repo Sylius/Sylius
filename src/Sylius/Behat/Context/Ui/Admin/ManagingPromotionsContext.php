@@ -14,6 +14,8 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
+use FriendsOfBehat\PageObjectExtension\Page\SymfonyPageInterface;
+use Sylius\Behat\Context\Ui\Admin\Helper\ValidationTrait;
 use Sylius\Behat\Element\Admin\Promotion\FormElementInterface;
 use Sylius\Behat\NotificationType;
 use Sylius\Behat\Page\Admin\Crud\IndexPageInterface as IndexPageCouponInterface;
@@ -29,6 +31,8 @@ use Webmozart\Assert\Assert;
 
 final class ManagingPromotionsContext implements Context
 {
+    use ValidationTrait;
+
     public function __construct(
         private SharedStorageInterface $sharedStorage,
         private IndexPageInterface $indexPage,
@@ -63,7 +67,7 @@ final class ManagingPromotionsContext implements Context
      * @When I specify its code as :code
      * @When I do not specify its code
      */
-    public function iSpecifyItsCodeAs($code = null)
+    public function iSpecifyItsCodeAs(?string $code = null): void
     {
         $this->createPage->specifyCode($code ?? '');
     }
@@ -88,7 +92,6 @@ final class ManagingPromotionsContext implements Context
     }
 
     /**
-     * @Then I should see the promotion :promotionName in the list
      * @Then the :promotionName promotion should appear in the registry
      * @Then the :promotionName promotion should exist in the registry
      * @Then this promotion should still be named :promotionName
@@ -276,6 +279,33 @@ final class ManagingPromotionsContext implements Context
     public function iDeleteThem(): void
     {
         $this->indexPage->bulkDelete();
+    }
+
+    /**
+     * @When I archive the :promotionName promotion
+     */
+    public function iArchiveThePromotion(string $promotionName): void
+    {
+        $actions = $this->indexPage->getActionsForResource(['name' => $promotionName]);
+        $actions->pressButton('Archive');
+    }
+
+    /**
+     * @When I restore the :promotionName promotion
+     */
+    public function iRestoreThePromotion(string $promotionName): void
+    {
+        $actions = $this->indexPage->getActionsForResource(['name' => $promotionName]);
+        $actions->pressButton('Restore');
+    }
+
+    /**
+     * @When I filter archival promotions
+     */
+    public function iFilterArchivalPromotions(): void
+    {
+        $this->indexPage->chooseArchival('Yes');
+        $this->indexPage->filter();
     }
 
     /**
@@ -829,6 +859,30 @@ final class ManagingPromotionsContext implements Context
         );
     }
 
+    /**
+     * @Then I should see the promotion :promotionName in the list
+     */
+    public function iShouldSeeThePromotionInTheList(string $promotionName): void
+    {
+        Assert::true($this->indexPage->isSingleResourceOnPage(['name' => $promotionName]));
+    }
+
+    /**
+     * @Then I should not see the promotion :promotionName in the list
+     */
+    public function iShouldNotSeeThePromotionInTheList(string $promotionName): void
+    {
+        Assert::false($this->indexPage->isSingleResourceOnPage(['name' => $promotionName]));
+    }
+
+    /**
+     * @Then I should be viewing non archival promotions
+     */
+    public function iShouldBeViewingNonArchivalPromotions(): void
+    {
+        Assert::false($this->indexPage->isArchivalFilterEnabled());
+    }
+
     private function assertFieldValidationMessage(string $element, string $expectedMessage)
     {
         /** @var CreatePageInterface|UpdatePageInterface $currentPage */
@@ -852,5 +906,10 @@ final class ManagingPromotionsContext implements Context
         $this->iWantToModifyAPromotion($promotion);
 
         Assert::false($this->updatePage->hasResourceValues([$field => 1]));
+    }
+
+    protected function resolveCurrentPage(): SymfonyPageInterface
+    {
+        return $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
     }
 }

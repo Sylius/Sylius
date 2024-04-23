@@ -16,7 +16,6 @@ namespace Sylius\Bundle\ApiBundle\OpenApi\Documentation;
 use ApiPlatform\OpenApi\Model\Paths;
 use ApiPlatform\OpenApi\OpenApi;
 
-/** @experimental */
 final class PromotionDocumentationModifier implements DocumentationModifierInterface
 {
     public const ROUTE_ADMIN_PROMOTIONS = '/admin/promotions';
@@ -48,7 +47,10 @@ final class PromotionDocumentationModifier implements DocumentationModifierInter
     {
         $pathItem = $paths->getPath($path);
         $methodGet = sprintf('get%s', $method);
-        $operation = $pathItem->$methodGet();
+        $operation = $pathItem?->$methodGet();
+        if (null === $operation) {
+            return;
+        }
 
         $description = sprintf(
             "%s\n\n Allowed rule types: `%s` \n\n Allowed action types: `%s`",

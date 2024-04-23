@@ -15,13 +15,14 @@ namespace Sylius\Component\Promotion\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Sylius\Component\Resource\Model\ArchivableTrait;
 use Sylius\Component\Resource\Model\TimestampableTrait;
 use Sylius\Component\Resource\Model\TranslatableTrait;
 use Sylius\Component\Resource\Model\TranslationInterface;
 
 class Promotion implements PromotionInterface
 {
-    use TimestampableTrait, TranslatableTrait {
+    use ArchivableTrait, TimestampableTrait, TranslatableTrait {
         __construct as private initializeTranslationsCollection;
         getTranslation as private doGetTranslation;
     }

@@ -16,7 +16,8 @@ namespace spec\Sylius\Bundle\ApiBundle\Validator\Constraints;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use SM\Factory\FactoryInterface;
-use SM\StateMachine\StateMachineInterface;
+use Sylius\Abstraction\StateMachine\StateMachineInterface;
+use Sylius\Abstraction\StateMachine\Transition;
 use Sylius\Bundle\ApiBundle\Command\OrderTokenValueAwareInterface;
 use Sylius\Bundle\ApiBundle\Validator\Constraints\CheckoutCompletion;
 use Sylius\Component\Core\Model\OrderInterface;
@@ -79,7 +80,7 @@ final class CheckoutCompletionValidatorSpec extends ObjectBehavior
         ExecutionContextInterface $executionContext,
         OrderInterface $order,
         OrderTokenValueAwareInterface $orderTokenValueAware,
-        StateMachineInterface $stateMachine,
+        WinzouStateMachineStub $stateMachine,
     ): void {
         $this->initialize($executionContext);
 
@@ -105,8 +106,27 @@ final class CheckoutCompletionValidatorSpec extends ObjectBehavior
         ExecutionContextInterface $executionContext,
         OrderInterface $order,
         OrderTokenValueAwareInterface $orderTokenValueAware,
-        StateMachineInterface $stateMachine,
+        WinzouStateMachineStub $stateMachine,
     ): void {
+        $stateMachine->can('some_possible_transition')->willReturn(true);
+        $stateMachine->can('another_possible_transition')->willReturn(true);
+        $stateMachine->can('yet_another_possible_transition')->willReturn(false);
+        $this->setPropertyValue($stateMachine, 'config', [
+            'transitions' => [
+                'some_possible_transition' => [
+                    'from' => [],
+                    'to' => '',
+                ],
+                'another_possible_transition' => [
+                    'from' => [],
+                    'to' => '',
+                ],
+                'yet_another_possible_transition' => [
+                    'from' => [],
+                    'to' => '',
+                ],
+            ],
+        ]);
         $this->initialize($executionContext);
 
         $orderTokenValueAware->getOrderTokenValue()->willReturn('xxx');
@@ -114,8 +134,8 @@ final class CheckoutCompletionValidatorSpec extends ObjectBehavior
 
         $stateMachineFactory->get($order, 'sylius_order_checkout')->willReturn($stateMachine);
         $stateMachine->can(OrderCheckoutTransitions::TRANSITION_COMPLETE)->willReturn(false);
-        $stateMachine->getState()->willReturn('some_state_that_does_not_allow_to_complete_order');
-        $stateMachine->getPossibleTransitions()->willReturn(['some_possible_transition', 'another_possible_transition']);
+
+        $order->getCheckoutState()->willReturn('some_state_that_does_not_allow_to_complete_order');
 
         $executionContext
             ->addViolation(
@@ -129,5 +149,49 @@ final class CheckoutCompletionValidatorSpec extends ObjectBehavior
         ;
 
         $this->validate($orderTokenValueAware, new CheckoutCompletion());
+    }
+
+    function it_uses_the_new_state_machine_abstraction_if_passed(
+        OrderRepositoryInterface $orderRepository,
+        StateMachineInterface $stateMachine,
+        ExecutionContextInterface $executionContext,
+        OrderInterface $order,
+        OrderTokenValueAwareInterface $orderTokenValueAware,
+    ): void {
+        $this->beConstructedWith($orderRepository, $stateMachine);
+
+        $this->initialize($executionContext);
+
+        $orderTokenValueAware->getOrderTokenValue()->willReturn('xxx');
+        $orderRepository->findOneBy(['tokenValue' => 'xxx'])->willReturn($order);
+
+        $stateMachine->can($order, 'sylius_order_checkout', OrderCheckoutTransitions::TRANSITION_COMPLETE)->willReturn(false);
+        $stateMachine
+            ->getEnabledTransitions($order, 'sylius_order_checkout')
+            ->willReturn([new Transition('some_possible_transition', null, null), new Transition('another_possible_transition', null, null)])
+        ;
+
+        $order->getCheckoutState()->willReturn('some_state_that_does_not_allow_to_complete_order');
+
+        $executionContext
+            ->addViolation(
+                'sylius.order.invalid_state_transition',
+                [
+                    '%currentState%' => 'some_state_that_does_not_allow_to_complete_order',
+                    '%possibleTransitions%' => 'some_possible_transition, another_possible_transition',
+                ],
+            )
+            ->shouldBeCalled()
+        ;
+
+        $this->validate($orderTokenValueAware, new CheckoutCompletion());
+    }
+
+    private function setPropertyValue(object $object, string $property, mixed $value): void
+    {
+        $reflection = new \ReflectionClass(WinzouStateMachineStub::class);
+        $reflectionProperty = $reflection->getProperty($property);
+        $reflectionProperty->setAccessible(true);
+        $reflectionProperty->setValue($object, $value);
     }
 }

@@ -219,6 +219,31 @@ class ProductRepository extends BaseProductRepository implements ProductReposito
         ;
     }
 
+    public function findOneByIdHydrated(mixed $id): ?ProductInterface
+    {
+        $product = $this->createQueryBuilder('o')
+            ->where('o.id = :id')
+            ->setParameter('id', $id)
+            ->getQuery()
+            ->getOneOrNullResult()
+        ;
+
+        $this->associationHydrator->hydrateAssociations($product, [
+            'images',
+            'options',
+            'options.translations',
+            'variants',
+            'variants.channelPricings',
+            'variants.optionValues',
+            'variants.optionValues.translations',
+            'attributes',
+            'attributes.attribute',
+            'attributes.attribute.translations',
+        ]);
+
+        return $product;
+    }
+
     public function findByTaxon(TaxonInterface $taxon): array
     {
         return $this

@@ -25,7 +25,7 @@ Feature: Filtering orders by products
         And I should see an order with "#0000001" number
         And I should see an order with "#0000003" number
 
-    @ui @api @javascript
+    @ui @api @mink:chromedriver
     Scenario: Filtering orders by multiple products
         When I browse orders
         And I filter by products "Galaxy T-Shirt" and "Space Dress"

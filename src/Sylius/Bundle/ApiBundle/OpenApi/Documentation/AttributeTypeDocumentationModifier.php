@@ -17,7 +17,6 @@ use ApiPlatform\OpenApi\OpenApi;
 use Sylius\Component\Attribute\AttributeType\AttributeTypeInterface;
 use Sylius\Component\Registry\ServiceRegistryInterface;
 
-/** @experimental */
 final class AttributeTypeDocumentationModifier implements DocumentationModifierInterface
 {
     public function __construct(
@@ -35,9 +34,7 @@ final class AttributeTypeDocumentationModifier implements DocumentationModifierI
 
         $schemas = $this->updateAttributeTypesSchema($schemas);
 
-        return $docs->withComponents(
-            $components->withSchemas($schemas),
-        );
+        return $docs->withComponents($components->withSchemas($schemas));
     }
 
     /**
@@ -57,6 +54,10 @@ final class AttributeTypeDocumentationModifier implements DocumentationModifierI
         ];
 
         foreach ($schemasToBeUpdated as $schemaToBeUpdated) {
+            if (!isset($schemas[$schemaToBeUpdated])) {
+                continue;
+            }
+
             $schemas[$schemaToBeUpdated]['properties']['type'] = [
                 'type' => 'string',
                 'enum' => $attributeTypes,

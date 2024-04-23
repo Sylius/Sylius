@@ -1029,6 +1029,11 @@ sylius_ui:
                     context:
                         event: sylius.shop.checkout.select_payment.before_navigation
 
+        sylius.shop.checkout.select_payment.choice_item_content:
+            blocks:
+                description:
+                    template: "@SyliusShop/Checkout/SelectPayment/_description.html.twig"
+
         sylius.shop.checkout.select_shipping.before_navigation:
             blocks:
                 legacy:

@@ -15,7 +15,6 @@ namespace spec\Sylius\Bundle\ApiBundle\Validator\Constraints;
 
 use Doctrine\Common\Collections\Collection;
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Sylius\Bundle\ApiBundle\Command\Cart\AddItemToCart;
 use Sylius\Bundle\ApiBundle\Command\Checkout\CompleteOrder;
 use Sylius\Bundle\ApiBundle\Validator\Constraints\AddingEligibleProductVariantToCart;
@@ -132,37 +131,6 @@ final class AddingEligibleProductVariantToCartValidatorSpec extends ObjectBehavi
 
         $this->validate(
             new AddItemToCart('productVariantCode', 1),
-            new AddingEligibleProductVariantToCart(),
-        );
-    }
-
-    function it_does_nothing_if_product_variant_is_not_provided(
-        ProductVariantRepositoryInterface $productVariantRepository,
-        OrderRepositoryInterface $orderRepository,
-        AvailabilityCheckerInterface $availabilityChecker,
-        AddItemToCart $addItemToCart,
-        ExecutionContextInterface $executionContext,
-        ProductInterface $product,
-        ProductVariantInterface $productVariant,
-    ): void {
-        $this->initialize($executionContext);
-
-        $productVariantRepository->findOneBy(['code' => null])->shouldNotBeCalled();
-        $productVariant->getProduct()->shouldNotBeCalled();
-        $product->isEnabled()->shouldNotBeCalled();
-
-        $addItemToCart->getOrderTokenValue()->willReturn('TOKEN');
-        $orderRepository->findCartByTokenValue('TOKEN')->shouldNotBeCalled();
-
-        $availabilityChecker->isStockSufficient($productVariant, 1)->shouldNotBeCalled();
-
-        $executionContext
-            ->addViolation(Argument::any())
-            ->shouldNotBeCalled()
-        ;
-
-        $this->validate(
-            new AddItemToCart(null, 1),
             new AddingEligibleProductVariantToCart(),
         );
     }

@@ -14,6 +14,9 @@ on:
                 required: true
                 type: string
 
+permissions:
+    contents: read
+
 jobs:
     get-matrix:
         runs-on: ubuntu-latest
@@ -21,7 +24,7 @@ jobs:
         outputs:
             matrix: ${{ steps.matrix.outputs.prop }}
         steps:
-            -   uses: actions/checkout@v3
+            -   uses: actions/checkout@v4
             -   name: "Get matrix"
                 id: matrix
                 uses: notiz-dev/github-action-json-property@release
@@ -56,13 +59,13 @@ jobs:
 
             -   name: "Checkout (With Branch)"
                 if: "${{ inputs.branch != '' }}"
-                uses: actions/checkout@v3
+                uses: actions/checkout@v4
                 with:
                     ref: ${{ inputs.branch }}
 
             -   name: "Checkout"
                 if: "${{ inputs.branch == '' }}"
-                uses: actions/checkout@v3
+                uses: actions/checkout@v4
 
             -   name: Build application
                 uses: SyliusLabs/BuildTestAppAction@v2.2
@@ -87,7 +90,7 @@ jobs:
                 run: vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="~@todo&&~@cli&&~@no-postgres" --suite-tags="@api,@domain,@hybrid" || vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="~@todo&&~@cli&&~@no-postgres" --suite-tags="@api,@domain,@hybrid" --rerun
 
             -   name: Run non-JS Behat
-                run: vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="~@javascript&&~@todo&&~@cli&&~@no-postgres" --suite-tags="@ui" || vendor/bin/behat --strict --no-interaction -vvv -f progress --tags="~@javascript&&~@todo&&~@cli&&~@no-postgres" --suite-tags="@ui" --rerun
+                run: vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="~@javascript&&~@mink:chromedriver&&~@todo&&~@cli&&~@no-postgres" --suite-tags="@ui" || vendor/bin/behat --strict --no-interaction -vvv -f progress --tags="~@javascript&&~@mink:chromedriver&&~@todo&&~@cli&&~@no-postgres" --suite-tags="@ui" --rerun
 
             -   name: Upload logs
                 uses: actions/upload-artifact@v3

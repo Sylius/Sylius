@@ -13,13 +13,12 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\Exception;
 
-/** @experimental */
 final class InvalidRequestArgumentException extends \RuntimeException
 {
     public function __construct(
         string $message = 'Request argument is invalid.',
         int $code = 0,
-        \Throwable $previous = null,
+        ?\Throwable $previous = null,
     ) {
         parent::__construct($message, $code, $previous);
     }

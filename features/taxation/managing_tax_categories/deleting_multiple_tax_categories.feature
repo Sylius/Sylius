@@ -8,7 +8,7 @@ Feature: Deleting multiple tax categories
         Given the store has tax categories "Alcohol", "Food" and "Books"
         And I am logged in as an administrator
 
-    @ui @javascript @no-api
+    @ui @mink:chromedriver @no-api
     Scenario: Deleting multiple tax categories at once
         When I browse tax categories
         And I check the "Alcohol" tax category

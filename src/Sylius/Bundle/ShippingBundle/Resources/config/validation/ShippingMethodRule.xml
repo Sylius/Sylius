@@ -33,25 +33,6 @@
                 </option>
                 <option name="allowExtraFields">true</option>
             </constraint>
-
-            <constraint name="Sylius\Bundle\CoreBundle\Validator\Constraints\ChannelCodeCollection">
-                <option name="groups">sylius_shipping_method_rule_order_total</option>
-                <option name="constraints">
-                    <constraint name="Collection">
-                        <option name="fields">
-                            <value key="amount">
-                                <constraint name="Required">
-                                    <constraint name="Type">
-                                        <option name="groups">sylius_shipping_method_rule_order_total</option>
-                                        <option name="type">numeric</option>
-                                    </constraint>
-                                </constraint>
-                            </value>
-                        </option>
-                    </constraint>
-                </option>
-                <option name="allowExtraFields">true</option>
-            </constraint>
         </property>
     </class>
 </constraint-mapping>

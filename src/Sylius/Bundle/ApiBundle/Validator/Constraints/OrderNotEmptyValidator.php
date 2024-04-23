@@ -20,7 +20,6 @@ use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 use Webmozart\Assert\Assert;
 
-/** @experimental */
 final class OrderNotEmptyValidator extends ConstraintValidator
 {
     public function __construct(private OrderRepositoryInterface $orderRepository)

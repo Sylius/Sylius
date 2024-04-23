@@ -26,7 +26,10 @@
                     <attribute>Sylius\Bundle\ApiBundle\Filter\Doctrine\ExchangeRateFilter</attribute>
                 </attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:exchange_rate:read</attribute>
+                    <attribute name="groups">
+                        <attribute>admin:exchange_rate:index</attribute>
+                        <attribute>sylius:admin:exchange_rate:index</attribute>
+                    </attribute>
                 </attribute>
             </collectionOperation>
 
@@ -34,7 +37,10 @@
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/shop/exchange-rates</attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">shop:exchange_rate:read</attribute>
+                    <attribute name="groups">
+                        <attribute>shop:exchange_rate:index</attribute>
+                        <attribute>sylius:shop:exchange_rate:index</attribute>
+                    </attribute>
                 </attribute>
             </collectionOperation>
 
@@ -42,10 +48,16 @@
                 <attribute name="method">POST</attribute>
                 <attribute name="path">/admin/exchange-rates</attribute>
                 <attribute name="denormalization_context">
-                    <attribute name="groups">admin:exchange_rate:create</attribute>
+                    <attribute name="groups">
+                        <attribute>admin:exchange_rate:create</attribute>
+                        <attribute>sylius:admin:exchange_rate:create</attribute>
+                    </attribute>
                 </attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:exchange_rate:read</attribute>
+                    <attribute name="groups">
+                        <attribute>admin:exchange_rate:show</attribute>
+                        <attribute>sylius:admin:exchange_rate:show</attribute>
+                    </attribute>
                 </attribute>
             </collectionOperation>
         </collectionOperations>
@@ -55,7 +67,10 @@
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/admin/exchange-rates/{id}</attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:exchange_rate:read</attribute>
+                    <attribute name="groups">
+                        <attribute>admin:exchange_rate:show</attribute>
+                        <attribute>sylius:admin:exchange_rate:show</attribute>
+                    </attribute>
                 </attribute>
             </itemOperation>
 
@@ -63,7 +78,10 @@
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/shop/exchange-rates/{id}</attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">shop:exchange_rate:read</attribute>
+                    <attribute name="groups">
+                        <attribute>shop:exchange_rate:show</attribute>
+                        <attribute>sylius:shop:exchange_rate:show</attribute>
+                    </attribute>
                 </attribute>
             </itemOperation>
 
@@ -71,10 +89,16 @@
                 <attribute name="method">PUT</attribute>
                 <attribute name="path">/admin/exchange-rates/{id}</attribute>
                 <attribute name="denormalization_context">
-                    <attribute name="groups">admin:exchange_rate:update</attribute>
+                    <attribute name="groups">
+                        <attribute>admin:exchange_rate:update</attribute>
+                        <attribute>sylius:admin:exchange_rate:update</attribute>
+                    </attribute>
                 </attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:exchange_rate:read</attribute>
+                    <attribute name="groups">
+                        <attribute>admin:exchange_rate:show</attribute>
+                        <attribute>sylius:admin:exchange_rate:show</attribute>
+                    </attribute>
                 </attribute>
             </itemOperation>
 

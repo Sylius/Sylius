@@ -24,7 +24,6 @@ use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 use Webmozart\Assert\Assert;
 
-/** @experimental */
 final class AddingEligibleProductVariantToCartValidator extends ConstraintValidator
 {
     public function __construct(
@@ -40,10 +39,6 @@ final class AddingEligibleProductVariantToCartValidator extends ConstraintValida
 
         /** @var AddingEligibleProductVariantToCart $constraint */
         Assert::isInstanceOf($constraint, AddingEligibleProductVariantToCart::class);
-
-        if ($value->productVariantCode === null) {
-            return;
-        }
 
         /** @var ProductVariantInterface|null $productVariant */
         $productVariant = $this->productVariantRepository->findOneBy(['code' => $value->productVariantCode]);

@@ -155,7 +155,10 @@ final class ManagingShipmentsContext implements Context
      */
     public function iShouldBeNotifiedThatTheShipmentHasBeenSuccessfullyShipped(): void
     {
-        Assert::same($this->responseChecker->getValue($this->client->getLastResponse(), 'state'), 'shipped', 'Shipment is not shipped');
+        Assert::true(
+            $this->responseChecker->isAccepted($this->client->getLastResponse()),
+            'Shipment was not successfully shipped',
+        );
     }
 
     /**
@@ -220,7 +223,7 @@ final class ManagingShipmentsContext implements Context
         string $orderNumber,
         string $shippingState,
         CustomerInterface $customer,
-        ChannelInterface $channel = null,
+        ?ChannelInterface $channel = null,
     ): void {
         $this->client->index(Resources::SHIPMENTS);
 

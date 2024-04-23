@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Bundle\AdminBundle\Action;
 
 use Sylius\Bundle\AdminBundle\EmailManager\OrderEmailManagerInterface;
+use Sylius\Bundle\CoreBundle\MessageDispatcher\ResendOrderConfirmationEmailDispatcherInterface;
 use Sylius\Bundle\CoreBundle\Provider\FlashBagProvider;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
@@ -31,7 +32,7 @@ final class ResendOrderConfirmationEmailAction
 {
     public function __construct(
         private OrderRepositoryInterface $orderRepository,
-        private OrderEmailManagerInterface $orderEmailManager,
+        private OrderEmailManagerInterface|ResendOrderConfirmationEmailDispatcherInterface $orderEmailManager,
         private CsrfTokenManagerInterface $csrfTokenManager,
         private RequestStack|SessionInterface $requestStackOrSession,
     ) {
@@ -43,6 +44,23 @@ final class ResendOrderConfirmationEmailAction
                 SessionInterface::class,
                 self::class,
                 RequestStack::class,
+            );
+        }
+
+        if ($this->orderEmailManager instanceof OrderEmailManagerInterface) {
+            trigger_deprecation(
+                'sylius/admin-bundle',
+                '1.13',
+                'Passing an instance of %s as constructor argument for %s is deprecated and will be removed in Sylius 2.0. Pass an instance of %s instead.',
+                OrderEmailManagerInterface::class,
+                self::class,
+                ResendOrderConfirmationEmailDispatcherInterface::class,
+            );
+
+            trigger_deprecation(
+                'sylius/admin-bundle',
+                '1.13',
+                'The argument name $orderEmailManager is deprecated and will be renamed to $resendOrderConfirmationEmailDispatcher in Sylius 2.0.',
             );
         }
     }
@@ -63,7 +81,7 @@ final class ResendOrderConfirmationEmailAction
             throw new NotFoundHttpException(sprintf('The order with id %s has not been found', $orderId));
         }
 
-        $this->orderEmailManager->sendConfirmationEmail($order);
+        $this->sendConfirmationEmailOrDispatchResendOrderConfirmation($order);
 
         FlashBagProvider
             ::getFlashBag($this->requestStackOrSession)
@@ -71,5 +89,14 @@ final class ResendOrderConfirmationEmailAction
         ;
 
         return new RedirectResponse($request->headers->get('referer'));
+    }
+
+    private function sendConfirmationEmailOrDispatchResendOrderConfirmation(OrderInterface $order): void
+    {
+        if ($this->orderEmailManager instanceof OrderEmailManagerInterface) {
+            $this->orderEmailManager->sendConfirmationEmail($order);
+        } else {
+            $this->orderEmailManager->dispatch($order);
+        }
     }
 }

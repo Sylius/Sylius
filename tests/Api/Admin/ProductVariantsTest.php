@@ -106,12 +106,13 @@ final class ProductVariantsTest extends JsonApiTestCase
                 'code' => 'MUG_RED',
                 'product' => '/api/v2/admin/products/MUG_SW',
                 'optionValues' => ['/api/v2/admin/product-option-values/COLOR_RED'],
-                'channelPricings' => ['WEB' => [
-                    'channelCode' => 'WEB',
-                    'price' => 4000,
-                    'originalPrice' => 5000,
-                    'minimumPrice' => 2000,
-                ]],
+                'channelPricings' => [
+                    'WEB' => [
+                        'price' => 4000,
+                        'originalPrice' => 5000,
+                        'minimumPrice' => 2000,
+                    ],
+                ],
                 'translations' => [
                     'en_US' => [
                         'name' => 'Red mug',
@@ -158,10 +159,11 @@ final class ProductVariantsTest extends JsonApiTestCase
             content: json_encode([
                 'code' => 'MUG_3',
                 'product' => '/api/v2/admin/products/MUG_SW',
-                'channelPricings' => ['WEB' => [
-                    'channelCode' => 'WEB',
-                    'price' => 4000,
-                ]],
+                'channelPricings' => [
+                    'WEB' => [
+                        'price' => 4000,
+                    ],
+                ],
             ], \JSON_THROW_ON_ERROR),
         );
 
@@ -191,18 +193,27 @@ final class ProductVariantsTest extends JsonApiTestCase
             content: json_encode([
                 'code' => 'CUP',
                 'product' => '/api/v2/admin/products/MUG_SW',
-                'channelPricings' => ['NON-EXISTING-CHANNEL' => [
-                    'channelCode' => 'NON-EXISTING-CHANNEL',
-                    'price' => 4000,
-                ]],
+                'channelPricings' => [
+                    'NON-EXISTING-CHANNEL' => [
+                        'price' => 4000,
+                    ],
+                ],
             ], \JSON_THROW_ON_ERROR),
         );
 
-        $this->assertResponseCode($this->client->getResponse(), Response::HTTP_UNPROCESSABLE_ENTITY);
+        $this->assertResponseViolations(
+            $this->client->getResponse(),
+            [
+                [
+                    'propertyPath' => 'channelPricings[NON-EXISTING-CHANNEL].channelCode',
+                    'message' => 'Channel with code NON-EXISTING-CHANNEL does not exist.',
+                ],
+            ],
+        );
     }
 
     /** @test */
-    public function it_does_not_allow_to_create_product_variant_without_channel_code(): void
+    public function it_does_not_allow_to_create_product_variant_with_empty_channel_code(): void
     {
         $this->loadFixturesFromFiles([
             'authentication/api_administrator.yaml',
@@ -221,12 +232,57 @@ final class ProductVariantsTest extends JsonApiTestCase
                 'code' => 'CUP',
                 'product' => '/api/v2/admin/products/MUG_SW',
                 'channelPricings' => [
-                    'NON-EXISTING-CHANNEL' => ['price' => 4000],
+                    '' => [
+                        'price' => 4000,
+                    ],
                 ],
             ], \JSON_THROW_ON_ERROR),
         );
 
-        $this->assertResponseCode($this->client->getResponse(), Response::HTTP_UNPROCESSABLE_ENTITY);
+        $this->assertResponseViolations(
+            $this->client->getResponse(),
+            [
+                [
+                    'propertyPath' => 'channelPricings[].channelCode',
+                    'message' => 'Please set channel code.',
+                ],
+            ],
+        );
+    }
+
+    /** @test */
+    public function it_does_not_allow_to_create_product_variant_when_channel_code_differs_from_key(): void
+    {
+        $this->loadFixturesFromFiles([
+            'authentication/api_administrator.yaml',
+            'channel.yaml',
+            'tax_category.yaml',
+            'shipping_category.yaml',
+            'product/product_variant.yaml',
+        ]);
+        $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
+
+        $this->client->request(
+            method: 'POST',
+            uri: '/api/v2/admin/product-variants',
+            server: $header,
+            content: json_encode([
+                'code' => 'CUP',
+                'product' => '/api/v2/admin/products/MUG_SW',
+                'channelPricings' => [
+                    'WEB' => [
+                        'price' => 4000,
+                        'channelCode' => 'MOBILE',
+                    ],
+                ],
+            ], \JSON_THROW_ON_ERROR),
+        );
+
+        $this->assertResponse(
+            $this->client->getResponse(),
+            'admin/product_variant/post_product_variant_when_channel_code_differs_from_key',
+            Response::HTTP_UNPROCESSABLE_ENTITY,
+        );
     }
 
     /** @test */
@@ -247,14 +303,23 @@ final class ProductVariantsTest extends JsonApiTestCase
             server: $header,
             content: json_encode([
                 'code' => 'CUP',
-                'channelPricings' => ['WEB' => [
-                    'channelCode' => 'WEB',
-                    'price' => 4000,
-                ]],
+                'channelPricings' => [
+                    'WEB' => [
+                        'price' => 4000,
+                    ],
+                ],
             ], \JSON_THROW_ON_ERROR),
         );
 
-        $this->assertResponseCode($this->client->getResponse(), Response::HTTP_UNPROCESSABLE_ENTITY);
+        $this->assertResponseViolations(
+            $this->client->getResponse(),
+            [
+                [
+                    'propertyPath' => 'product',
+                    'message' => 'This value should not be blank.',
+                ],
+            ],
+        );
     }
 
     /** @test */
@@ -276,12 +341,13 @@ final class ProductVariantsTest extends JsonApiTestCase
             content: json_encode([
                 'code' => 'CUP',
                 'product' => '/api/v2/admin/products/MUG_SW',
-                'channelPricings' => ['WEB' => [
-                    'channelCode' => 'WEB',
-                    'price' => 4000,
-                    'originalPrice' => 5000,
-                    'minimumPrice' => 2000,
-                ]],
+                'channelPricings' => [
+                    'WEB' => [
+                        'price' => 4000,
+                        'originalPrice' => 5000,
+                        'minimumPrice' => 2000,
+                    ],
+                ],
                 'translations' => [
                     'NON-EXISTING-LOCALE-CODE' => [
                         'name' => 'Yellow mug',
@@ -290,7 +356,19 @@ final class ProductVariantsTest extends JsonApiTestCase
             ], \JSON_THROW_ON_ERROR),
         );
 
-        $this->assertResponseCode($this->client->getResponse(), Response::HTTP_UNPROCESSABLE_ENTITY);
+        $this->assertResponseViolations(
+            $this->client->getResponse(),
+            [
+                [
+                    'propertyPath' => 'translations[NON-EXISTING-LOCALE-CODE]',
+                    'message' => 'Please choose one of the available locales: en_US, pl_PL, de_DE',
+                ],
+                [
+                    'propertyPath' => 'translations[NON-EXISTING-LOCALE-CODE].locale',
+                    'message' => 'This value is not a valid locale.',
+                ],
+            ],
+        );
     }
 
     /** @test */
@@ -316,12 +394,19 @@ final class ProductVariantsTest extends JsonApiTestCase
             server: $header,
             content: json_encode([
                 'optionValues' => ['/api/v2/admin/product-option-values/COLOR_RED'],
-                'channelPricings' => ['WEB' => [
-                    '@id' => sprintf('/api/v2/admin/channel-pricings/%s', $productVariant->getChannelPricingForChannel($channel)->getId()),
-                    'price' => 3000,
-                    'originalPrice' => 4000,
-                    'minimumPrice' => 500,
-                ]],
+                'channelPricings' => [
+                    'WEB' => [
+                        '@id' => sprintf('/api/v2/admin/channel-pricings/%s', $productVariant->getChannelPricingForChannel($channel)->getId()),
+                        'price' => 3000,
+                        'originalPrice' => 4000,
+                        'minimumPrice' => 500,
+                    ],
+                    'MOBILE' => [
+                        'price' => 5000,
+                        'originalPrice' => 5000,
+                        'minimumPrice' => 1000,
+                    ],
+                ],
                 'translations' => [
                     'en_US' => [
                         '@id' => sprintf('/api/v2/admin/product-variant-translations/%s', $productVariant->getTranslation('en_US')->getId()),
@@ -373,13 +458,6 @@ final class ProductVariantsTest extends JsonApiTestCase
             uri: sprintf('/api/v2/admin/product-variants/%s', $productVariant->getCode()),
             server: $header,
             content: json_encode([
-                'code' => 'CUP',
-                'channelPricings' => ['WEB' => [
-                    'channelCode' => 'WEB',
-                    'price' => 4000,
-                    'originalPrice' => 5000,
-                    'minimumPrice' => 2000,
-                ]],
                 'translations' => [
                     'NON-EXISTING-LOCALE-CODE' => [
                         'name' => 'Yellow mug',
@@ -388,7 +466,19 @@ final class ProductVariantsTest extends JsonApiTestCase
             ], \JSON_THROW_ON_ERROR),
         );
 
-        $this->assertResponseCode($this->client->getResponse(), Response::HTTP_UNPROCESSABLE_ENTITY);
+        $this->assertResponseViolations(
+            $this->client->getResponse(),
+            [
+                [
+                    'propertyPath' => 'translations[NON-EXISTING-LOCALE-CODE]',
+                    'message' => 'Please choose one of the available locales: en_US, pl_PL, de_DE',
+                ],
+                [
+                    'propertyPath' => 'translations[NON-EXISTING-LOCALE-CODE].locale',
+                    'message' => 'This value is not a valid locale.',
+                ],
+            ],
+        );
     }
 
     /** @test */
@@ -454,10 +544,55 @@ final class ProductVariantsTest extends JsonApiTestCase
             ], \JSON_THROW_ON_ERROR),
         );
 
-        $this->assertResponse(
+        $this->assertResponseViolations(
             $this->client->getResponse(),
-            'admin/product_variant/put_product_variant_with_duplicate_locale_translation',
-            Response::HTTP_UNPROCESSABLE_ENTITY,
+            [
+                [
+                    'propertyPath' => 'translations[en_US].locale',
+                    'message' => 'A translation for the "en_US" locale code already exists.',
+                ],
+            ],
+        );
+    }
+
+    /** @test */
+    public function it_does_not_update_product_variant_with_duplicate_channel_code_channel_pricings(): void
+    {
+        $fixtures = $this->loadFixturesFromFiles([
+            'authentication/api_administrator.yaml',
+            'channel.yaml',
+            'tax_category.yaml',
+            'shipping_category.yaml',
+            'product/product_variant.yaml',
+        ]);
+        $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
+
+        /** @var ProductVariantInterface $productVariant */
+        $productVariant = $fixtures['product_variant'];
+
+        $this->client->request(
+            method: 'PUT',
+            uri: sprintf('/api/v2/admin/product-variants/%s', $productVariant->getCode()),
+            server: $header,
+            content: json_encode([
+                'channelPricings' => [
+                    'WEB' => [
+                        'price' => 4000,
+                        'originalPrice' => 5000,
+                        'minimumPrice' => 2000,
+                    ],
+                ],
+            ], \JSON_THROW_ON_ERROR),
+        );
+
+        $this->assertResponseViolations(
+            $this->client->getResponse(),
+            [
+                [
+                    'propertyPath' => 'channelPricings[WEB].channelCode',
+                    'message' => 'This channel already has a price for this product variant.',
+                ],
+            ],
         );
     }
 

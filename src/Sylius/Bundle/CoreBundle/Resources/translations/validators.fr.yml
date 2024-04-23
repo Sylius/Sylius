@@ -29,12 +29,15 @@ sylius:
         for_products:
             invalid_products: La configuration fournie contient des erreurs. Veuillez ajouter uniquement des produits existants.
             not_empty: La configuration fournie contient des erreurs. Veuillez ajouter au moins 1 produit.
+            unique: La configuration fournie contient des erreurs. Veuillez ajouter uniquement des produits uniques.
         for_variants:
             invalid_variants: La configuration fournie contient des erreurs. Veuillez ajouter uniquement des variantes existantes.
             not_empty: Veuillez ajouter au moins une variante.
+            unique: La configuration fournie contient des erreurs. Veuillez ajouter uniquement des variantes uniques.
         for_taxons:
             invalid_taxons: La configuration fournie contient des erreurs. Veuillez ajouter uniquement des taxonomies existantes.
             not_empty: La configuration fournie contient des erreurs. Veuillez ajouter au moins 1 taxonomie.
+            unique: La configuration fournie contient des erreurs. Veuillez ajouter uniquement des taxonomies uniques.
     channel:
         base_currency:
             not_blank: Saisissez la devise de référence du canal.
@@ -50,10 +53,15 @@ sylius:
             greater_than: 'La valeur doit être supérieure à {{ compared_value }}'
             less_than: 'La valeur doit être inférieure à {{ compared_value }}'
     channel_pricing:
+        channel_code:
+            not_blank: Veuillez définir le code du canal.
+            unique: Ce canal a déjà un prix pour cette variante de produit.
         price:
             min: Le prix ne peut pas être inférieur à 0.
             not_blank: Veuillez saisir un prix.
     checkout:
+        addressing:
+            csrf_error: Veuillez soumettre à nouveau le formulaire complet.
         shipping_method:
             not_blank: Veuillez sélectionner un mode de livraison.
         email:
@@ -64,12 +72,18 @@ sylius:
             not_blank: Veuillez saisir votre adresse email.
         message:
             not_blank: Veuillez saisir votre message.
+    country:
+        code:
+            not_exist: Le pays avec le code {{ code }} n'existe pas.
     currency:
         enabled:
             cannot_disable_base: La devise de base ne peut pas être désactivée.
     customer:
         currency_code:
             not_valid: Le code de devise que vous avez entré n’est pas valide.
+    customer_group:
+        code:
+            not_exist: Le groupe de clients avec le code {{ code }} n'existe pas.
     cart_item:
         not_available: '%itemName% est en rupture de stock.'
         insufficient_stock: 'Stock insuffisant'
@@ -81,18 +95,26 @@ sylius:
         product_eligibility: 'Le produit %productName% a été désactivé.'
         shipping_method_eligibility: 'Ce produit n''est pas éligible au mode de livraison %shippingMethodName%. Veuillez sélectionner une nouvelle fois votre mode de livraison.'
         shipping_method_not_available: 'Le mode d''expédition "%shippingMethodName%" n''est pas disponible. Veuillez sélectionner à nouveau votre mode de livraison.'
+    resend_order_confirmation_email:
+        invalid_order_state: 'Impossible de renvoyer l''e-mail de confirmation de commande pour la commande avec le statut %state%.'
+    resend_shipment_confirmation_email:
+        invalid_shipment_state: 'Impossible de renvoyer l''e-mail de confirmation d''expédition pour l''expédition dans l''état %state%.'
     locale:
         enabled:
             cannot_disable_base: La base locale ne peut pas être désactivée.
     product:
         variants:
             all_prices_defined: Vous devez d’abord définir le prix des variantes de produit pour les canaux nouvellement affectés.
+        code:
+            not_exist: Le produit avec le code {{ code }} n'existe pas.
     product_attribute:
         invalid: La position doit être un entier positif.
     product_image:
         file:
             max_size: L'image est trop grande - {{ size }}{{ suffix }}. La taille maximum autorisée est de {{ limit }}{{ suffix }}.
             upload_ini_size: L'image est trop grande. La taille maximum autorisée est de {{ limit }}{{ suffix }}.
+        product_variant:
+            not_belong_to_owner: 'La variante de produit avec le code "%productVariantCode%" n''appartient pas au produit avec le code "%ownerCode%", qui est le propriétaire de l''image.'
     product_taxon:
         unique: Les taxons de produits ne peuvent pas être dupliqués.
         product:
@@ -100,6 +122,8 @@ sylius:
         taxon:
             not_blank: Veuillez sélectionner un taxon.
     product_variant:
+        code:
+            not_exist: La variante de produit avec le code {{ code }} n'existe pas.
         onHand:
             min: Le stock disponible doit être plus grand que {{ limit }}.
             not_blank: Veuillez saisir le stock disponible.
@@ -135,6 +159,9 @@ sylius:
         rating:
             range: La note de l'avis doit être un entier entre 1 et 5.
             not_in_range: L'évaluation doit être comprise entre {{ min }} et {{ max }}.
+    taxon:
+        code:
+            not_exist: La taxonomie avec le code {{ code }} n'existe pas.
     taxon_image:
         file:
             max_size: L'image est trop grande - {{ size }}{{ suffix }}. La taille maximum autorisée est de {{ limit }}{{ suffix }}.

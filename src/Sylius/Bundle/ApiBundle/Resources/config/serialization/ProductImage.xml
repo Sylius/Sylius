@@ -17,31 +17,72 @@
 >
     <class name="Sylius\Component\Core\Model\ProductImage">
         <attribute name="id">
-            <group>admin:product_image:read</group>
-            <group>shop:product_image:read</group>
-            <group>admin:product:read</group>
-            <group>shop:product:read</group>
+            <group>admin:product_image:index</group>
+            <group>sylius:admin:product_image:index</group>
+            <group>admin:product_image:show</group>
+            <group>sylius:admin:product_image:show</group>
+            <group>shop:product_image:show</group>
+            <group>sylius:shop:product_image:show</group>
+            <group>admin:product:index</group>
+            <group>sylius:admin:product:index</group>
+            <group>admin:product:show</group>
+            <group>sylius:admin:product:show</group>
+            <group>shop:product:index</group>
+            <group>sylius:shop:product:index</group>
+            <group>shop:product:show</group>
+            <group>sylius:shop:product:show</group>
         </attribute>
         <attribute name="path">
-            <group>admin:product_image:read</group>
-            <group>shop:product_image:read</group>
-            <group>admin:product:read</group>
-            <group>shop:product:read</group>
+            <group>admin:product_image:index</group>
+            <group>sylius:admin:product_image:index</group>
+            <group>admin:product_image:show</group>
+            <group>sylius:admin:product_image:show</group>
+            <group>shop:product_image:show</group>
+            <group>sylius:shop:product_image:show</group>
+            <group>admin:product:index</group>
+            <group>sylius:admin:product:index</group>
+            <group>admin:product:show</group>
+            <group>sylius:admin:product:show</group>
+            <group>shop:product:index</group>
+            <group>sylius:shop:product:index</group>
+            <group>shop:product:show</group>
+            <group>sylius:shop:product:show</group>
         </attribute>
         <attribute name="owner">
-            <group>admin:product_image:read</group>
+            <group>admin:product_image:index</group>
+            <group>sylius:admin:product_image:index</group>
+            <group>admin:product_image:show</group>
+            <group>sylius:admin:product_image:show</group>
         </attribute>
         <attribute name="type">
-            <group>admin:product_image:read</group>
+            <group>admin:product_image:index</group>
+            <group>sylius:admin:product_image:index</group>
+            <group>admin:product_image:show</group>
+            <group>sylius:admin:product_image:show</group>
             <group>admin:product_image:update</group>
-            <group>shop:product_image:read</group>
-            <group>admin:product:read</group>
-            <group>shop:product:read</group>
+            <group>sylius:admin:product_image:update</group>
+            <group>shop:product_image:show</group>
+            <group>sylius:shop:product_image:show</group>
+            <group>admin:product:index</group>
+            <group>sylius:admin:product:index</group>
+            <group>admin:product:show</group>
+            <group>sylius:admin:product:show</group>
+            <group>shop:product:index</group>
+            <group>sylius:shop:product:index</group>
+            <group>shop:product:show</group>
+            <group>sylius:shop:product:show</group>
         </attribute>
         <attribute name="productVariants">
-            <group>admin:product_image:read</group>
+            <group>admin:product_image:index</group>
+            <group>sylius:admin:product_image:index</group>
+            <group>admin:product_image:show</group>
+            <group>sylius:admin:product_image:show</group>
             <group>admin:product_image:update</group>
-            <group>admin:product:read</group>
+            <group>sylius:admin:product_image:update</group>
+            <group>admin:product:index</group>
+            <group>sylius:admin:product:index</group>
+            <group>admin:product:show</group>
+            <group>sylius:admin:product:show</group>
         </attribute>
     </class>
 </serializer>

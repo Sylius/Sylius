@@ -31,6 +31,7 @@ default:
                 - sylius.behat.context.api.admin.managing_shipping_methods
                 - sylius.behat.context.api.admin.response
                 - sylius.behat.context.api.admin.save
+                - sylius.behat.context.api.admin.translation
 
             filters:
                 tags: "@managing_shipping_methods&&@api"

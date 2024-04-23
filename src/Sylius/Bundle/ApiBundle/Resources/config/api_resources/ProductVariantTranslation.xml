@@ -14,11 +14,6 @@
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/admin/product-variant-translations/{id}</attribute>
             </itemOperation>
-
-            <itemOperation name="shop_get">
-                <attribute name="method">GET</attribute>
-                <attribute name="path">/shop/product-variant-translations/{id}</attribute>
-            </itemOperation>
         </itemOperations>
 
         <property name="id" identifier="true" writable="false" />

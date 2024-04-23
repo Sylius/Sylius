@@ -33,11 +33,18 @@ final class SyliusPromotionExtension extends AbstractResourceExtension
         $loader->load('services.xml');
         $loader->load(sprintf('services/integrations/%s.xml', $config['driver']));
 
-        $container->setParameter('sylius.promotion.promotion_action.validation_groups', $config['promotion_action']['validation_groups']);
-        $container->setParameter('sylius.promotion.promotion_rule.validation_groups', $config['promotion_rule']['validation_groups']);
-
         $this->registerResources('sylius', $config['driver'], $config['resources'], $container);
+        $this->registerValidationParameters($container, $config);
         $this->registerAutoconfiguration($container);
+    }
+
+    /** @param array<string, array<string, array<array-key, string,>>> $configuration */
+    private function registerValidationParameters(ContainerBuilder $container, array $configuration): void
+    {
+        $container->setParameter('sylius.promotion.promotion_action.validation_groups', $configuration['promotion_action']['validation_groups']);
+        $container->setParameter('sylius.promotion.promotion_rule.validation_groups', $configuration['promotion_rule']['validation_groups']);
+        $container->setParameter('sylius.promotion.catalog_promotion_action.validation_groups', $configuration['catalog_promotion_action']['validation_groups']);
+        $container->setParameter('sylius.promotion.catalog_promotion_scope.validation_groups', $configuration['catalog_promotion_scope']['validation_groups']);
     }
 
     private function registerAutoconfiguration(ContainerBuilder $container): void
@@ -48,6 +55,7 @@ final class SyliusPromotionExtension extends AbstractResourceExtension
                 $definition->addTag(AsPromotionAction::SERVICE_TAG, [
                     'type' => $attribute->getType(),
                     'label' => $attribute->getLabel(),
+                    'form-type' => $attribute->getFormType(),
                     'priority' => $attribute->getPriority(),
                 ]);
             },

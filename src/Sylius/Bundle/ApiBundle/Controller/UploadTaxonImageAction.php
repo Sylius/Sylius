@@ -17,7 +17,6 @@ use Sylius\Bundle\ApiBundle\Creator\ImageCreatorInterface;
 use Sylius\Component\Core\Model\ImageInterface;
 use Symfony\Component\HttpFoundation\Request;
 
-/** @experimental */
 final class UploadTaxonImageAction
 {
     public function __construct(private ImageCreatorInterface $taxonImageCreator)

@@ -22,6 +22,13 @@ Feature: Products validation
         Then I should be notified that code is required
         And product with name "Dice Brewing" should not be added
 
+    @no-ui @api
+    Scenario: Trying to add product translation in unexisting locale
+        When I want to modify the "Symfony Mug" product
+        And I name it "Symfony tasse" in "French (France)"
+        And I try to save my changes
+        Then I should be notified that the locale is not available
+
     @ui @no-api
     Scenario: Adding a new simple product with duplicated code among products
         Given the store has a product "7 Wonders" with code "AWESOME_GAME"
@@ -85,6 +92,14 @@ Feature: Products validation
         And I try to add it
         Then I should be notified that code is required
         And product with name "Dice Brewing" should not be added
+
+    @ui @api
+    Scenario: Adding a new configurable product with too long code
+        When I want to create a new configurable product
+        And I name it "Dice Brewing" in "English (United States)"
+        And I specify a too long code
+        And I try to add it
+        Then I should be notified that code is too long
 
     @ui @api
     Scenario: Adding a new configurable product with duplicated code
@@ -152,7 +167,7 @@ Feature: Products validation
         Then I should be notified that slug has to be unique
         And product with code "7-WONDERS-BABEL" should not be added
 
-    @ui @javascript @api
+    @ui @mink:chromedriver @api
     Scenario: Trying to add a new product with a text attribute without specifying its value in default locale
         When I want to create a new configurable product
         And I specify its code as "X-18-MUG"
@@ -163,7 +178,7 @@ Feature: Products validation
         Then I should be notified that I have to define the "Mug material" attribute in "English (United States)"
         And product with code "X-18-MUG" should not be added
 
-    @ui @javascript @api
+    @ui @mink:chromedriver @api
     Scenario: Trying to add a new product with a text attribute without specifying its value in additional locale with proper length
         When I want to create a new configurable product
         And I specify its code as "X-18-MUG"

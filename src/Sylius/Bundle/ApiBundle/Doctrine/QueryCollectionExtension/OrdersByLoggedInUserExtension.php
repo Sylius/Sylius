@@ -23,7 +23,6 @@ use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
-/** @experimental */
 final class OrdersByLoggedInUserExtension implements ContextAwareQueryCollectionExtensionInterface
 {
     public function __construct(private UserContextInterface $userContext)
@@ -34,7 +33,7 @@ final class OrdersByLoggedInUserExtension implements ContextAwareQueryCollection
         QueryBuilder $queryBuilder,
         QueryNameGeneratorInterface $queryNameGenerator,
         string $resourceClass,
-        string $operationName = null,
+        ?string $operationName = null,
         array $context = [],
     ): void {
         if (!is_a($resourceClass, OrderInterface::class, true)) {

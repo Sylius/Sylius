@@ -26,11 +26,6 @@ final class CustomerTypeExtension extends AbstractTypeExtension
         $builder->addEventSubscriber(new AddUserFormSubscriber(ShopUserType::class));
     }
 
-    public function getExtendedType(): string
-    {
-        return CustomerType::class;
-    }
-
     public static function getExtendedTypes(): iterable
     {
         return [CustomerType::class];

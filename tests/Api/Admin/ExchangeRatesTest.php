@@ -86,7 +86,7 @@ final class ExchangeRatesTest extends JsonApiTestCase
             uri: '/api/v2/admin/exchange-rates',
             server: $header,
             content: json_encode([
-                'ratio' => '3.2',
+                'ratio' => 3.2,
                 'sourceCurrency' => '/api/v2/admin/currencies/CNY',
                 'targetCurrency' => '/api/v2/admin/currencies/PLN',
             ], \JSON_THROW_ON_ERROR),
@@ -117,7 +117,7 @@ final class ExchangeRatesTest extends JsonApiTestCase
             uri: '/api/v2/admin/exchange-rates/' . $exchangeRate->getId(),
             server: $header,
             content: json_encode([
-                'ratio' => '0.25',
+                'ratio' => 0.25,
             ], \JSON_THROW_ON_ERROR),
         );
 
@@ -126,5 +126,25 @@ final class ExchangeRatesTest extends JsonApiTestCase
             'admin/exchange_rate/put_exchange_rate_response',
             Response::HTTP_OK,
         );
+    }
+
+    /** @test */
+    public function it_deletes_an_exchange_rate(): void
+    {
+        $this->setUpAdminContext();
+        $this->setUpDefaultGetHeaders();
+
+        $fixtures = $this->loadFixturesFromFiles([
+            'authentication/api_administrator.yaml',
+            'channel.yaml',
+            'exchange_rate.yaml',
+        ]);
+
+        /** @var ExchangeRateInterface $exchangeRate */
+        $exchangeRate = $fixtures['exchange_rate_USDPLN'];
+
+        $this->requestDelete('/api/v2/admin/exchange-rates/' . $exchangeRate->getId());
+
+        $this->assertResponseCode($this->client->getResponse(), Response::HTTP_NO_CONTENT);
     }
 }

@@ -18,4 +18,6 @@ use Sylius\Component\Core\Model\OrderInterface;
 interface OrderEmailManagerInterface
 {
     public function sendConfirmationEmail(OrderInterface $order): void;
+
+    public function resendConfirmationEmail(OrderInterface $order): void;
 }

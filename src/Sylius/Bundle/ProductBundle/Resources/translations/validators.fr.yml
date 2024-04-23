@@ -29,6 +29,8 @@ sylius:
             regex: Le code de la variante du produit peut uniquement être constitué de lettres, chiffres, tirets et tirets bas.
             unique: Le code de la variante du produit doit être unique.
             within_product_unique: Ce code doit être unique au sein de ce produit.
+        option_values:
+            not_configured: 'La variante du produit doit avoir des valeurs configurées pour toutes les options choisies sur le produit.'
     simple_product:
         code:
             unique: Le code d'un simple produit doit être unique parmi tous les produits et les variantes de produit.
@@ -50,6 +52,12 @@ sylius:
             unique: La valeur de l'option existe déjà.
         value:
             not_blank: Veuillez saisir la valeur de l'option.
+    association:
+        unique: Une association avec ce propriétaire et ce type existe déjà.
+        type:
+            not_blank: Veuillez entrer un type d'association.
+        owner:
+            not_blank: Veuillez entrer le propriétaire de l'association.
     association_type:
         name:
             not_blank: Entrez le nom du type d'association.
@@ -63,3 +71,4 @@ sylius:
         locale:
             not_blank: Vous devez entrer une valeur.
             invalid: Ce paramètre régional n'est pas valide.
+            unique: Une traduction pour la locale {{ value }} existe déjà.

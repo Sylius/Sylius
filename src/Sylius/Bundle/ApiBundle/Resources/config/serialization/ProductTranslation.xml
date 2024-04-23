@@ -17,48 +17,76 @@
 >
     <class name="Sylius\Component\Product\Model\ProductTranslation">
         <attribute name="id">
-            <group>admin:product:read</group>
-            <group>shop:product:read</group>
+            <group>admin:product:index</group>
+            <group>sylius:admin:product:index</group>
+            <group>admin:product:show</group>
+            <group>sylius:admin:product:show</group>
         </attribute>
         <attribute name="locale">
             <group>admin:product:create</group>
+            <group>sylius:admin:product:create</group>
             <group>admin:product:update</group>
+            <group>sylius:admin:product:update</group>
         </attribute>
         <attribute name="name">
-            <group>admin:product:read</group>
+            <group>admin:product:index</group>
+            <group>sylius:admin:product:index</group>
+            <group>admin:product:show</group>
+            <group>sylius:admin:product:show</group>
             <group>admin:product:create</group>
+            <group>sylius:admin:product:create</group>
             <group>admin:product:update</group>
-            <group>shop:product:read</group>
+            <group>sylius:admin:product:update</group>
         </attribute>
         <attribute name="slug">
-            <group>admin:product:read</group>
+            <group>admin:product:index</group>
+            <group>sylius:admin:product:index</group>
+            <group>admin:product:show</group>
+            <group>sylius:admin:product:show</group>
             <group>admin:product:create</group>
+            <group>sylius:admin:product:create</group>
             <group>admin:product:update</group>
-            <group>shop:product:read</group>
+            <group>sylius:admin:product:update</group>
         </attribute>
         <attribute name="description">
-            <group>admin:product:read</group>
+            <group>admin:product:index</group>
+            <group>sylius:admin:product:index</group>
+            <group>admin:product:show</group>
+            <group>sylius:admin:product:show</group>
             <group>admin:product:create</group>
+            <group>sylius:admin:product:create</group>
             <group>admin:product:update</group>
-            <group>shop:product:read</group>
+            <group>sylius:admin:product:update</group>
         </attribute>
         <attribute name="shortDescription">
-            <group>admin:product:read</group>
+            <group>admin:product:index</group>
+            <group>sylius:admin:product:index</group>
+            <group>admin:product:show</group>
+            <group>sylius:admin:product:show</group>
             <group>admin:product:create</group>
+            <group>sylius:admin:product:create</group>
             <group>admin:product:update</group>
-            <group>shop:product:read</group>
+            <group>sylius:admin:product:update</group>
         </attribute>
         <attribute name="metaKeywords">
-            <group>admin:product:read</group>
+            <group>admin:product:index</group>
+            <group>sylius:admin:product:index</group>
+            <group>admin:product:show</group>
+            <group>sylius:admin:product:show</group>
             <group>admin:product:create</group>
+            <group>sylius:admin:product:create</group>
             <group>admin:product:update</group>
-            <group>shop:product:read</group>
+            <group>sylius:admin:product:update</group>
         </attribute>
         <attribute name="metaDescription">
-            <group>admin:product:read</group>
+            <group>admin:product:index</group>
+            <group>sylius:admin:product:index</group>
+            <group>admin:product:show</group>
+            <group>sylius:admin:product:show</group>
             <group>admin:product:create</group>
+            <group>sylius:admin:product:create</group>
             <group>admin:product:update</group>
-            <group>shop:product:read</group>
+            <group>sylius:admin:product:update</group>
         </attribute>
     </class>
 </serializer>

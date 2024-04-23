@@ -74,6 +74,17 @@ class RegistrationContext implements Context
     }
 
     /**
+     * @When I specify the :firstOrLast name as too long value
+     */
+    public function iSpecifyFirstOrLastNameAsTooLongValue(string $firstOrLast): void
+    {
+        match ($firstOrLast) {
+            'first' => $this->registerElement->specifyFirstName(str_repeat('a', 256)),
+            'last' => $this->registerElement->specifyLastName(str_repeat('a', 256)),
+        };
+    }
+
+    /**
      * @When I specify the email as :email
      * @When I do not specify the email
      */
@@ -142,6 +153,14 @@ class RegistrationContext implements Context
     public function iShouldBeNotifiedThatElementIsRequired(string $element): void
     {
         $this->assertFieldValidationMessage($element, sprintf('Please enter your %s.', $element));
+    }
+
+    /**
+     * @Then I should be notified that the :firstOrLast name is too long
+     */
+    public function iShouldBeNotifiedThatFirstOrLastNameIsTooLong(string $firstOrLast): void
+    {
+        $this->assertFieldValidationMessage($firstOrLast . '_name', sprintf('%s name must not be longer than 255 characters.', ucfirst($firstOrLast)));
     }
 
     /**

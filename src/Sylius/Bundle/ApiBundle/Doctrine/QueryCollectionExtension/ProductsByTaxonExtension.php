@@ -19,7 +19,6 @@ use Doctrine\ORM\QueryBuilder;
 use Sylius\Bundle\ApiBundle\Context\UserContextInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 
-/** @experimental */
 final class ProductsByTaxonExtension implements ContextAwareQueryCollectionExtensionInterface
 {
     public function __construct(
@@ -31,7 +30,7 @@ final class ProductsByTaxonExtension implements ContextAwareQueryCollectionExten
         QueryBuilder $queryBuilder,
         QueryNameGeneratorInterface $queryNameGenerator,
         string $resourceClass,
-        string $operationName = null,
+        ?string $operationName = null,
         array $context = [],
     ): void {
         if (!is_a($resourceClass, ProductInterface::class, true)) {

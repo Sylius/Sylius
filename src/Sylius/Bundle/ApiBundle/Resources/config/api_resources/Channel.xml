@@ -21,7 +21,10 @@
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/admin/channels</attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:channel:read</attribute>
+                    <attribute name="groups">
+                        <attribute>admin:channel:index</attribute>
+                        <attribute>sylius:admin:channel:index</attribute>
+                    </attribute>
                 </attribute>
             </collectionOperation>
 
@@ -29,7 +32,10 @@
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/shop/channels</attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">shop:channel:read</attribute>
+                    <attribute name="groups">
+                        <attribute>shop:channel:index</attribute>
+                        <attribute>sylius:shop:channel:index</attribute>
+                    </attribute>
                 </attribute>
             </collectionOperation>
 
@@ -37,10 +43,16 @@
                 <attribute name="method">POST</attribute>
                 <attribute name="path">/admin/channels</attribute>
                 <attribute name="denormalization_context">
-                    <attribute name="groups">admin:channel:create</attribute>
+                    <attribute name="groups">
+                        <attribute>admin:channel:create</attribute>
+                        <attribute>sylius:admin:channel:create</attribute>
+                    </attribute>
                 </attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:channel:read</attribute>
+                    <attribute name="groups">
+                        <attribute>admin:channel:show</attribute>
+                        <attribute>sylius:admin:channel:show</attribute>
+                    </attribute>
                 </attribute>
                 <attribute name="validation_groups">sylius</attribute>
             </collectionOperation>
@@ -54,7 +66,10 @@
                     <attribute name="summary">Use $code to retrieve a channel resource.</attribute>
                 </attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:channel:read</attribute>
+                    <attribute name="groups">
+                        <attribute>admin:channel:show</attribute>
+                        <attribute>sylius:admin:channel:show</attribute>
+                    </attribute>
                 </attribute>
             </itemOperation>
 
@@ -62,7 +77,10 @@
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/shop/channels/{code}</attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">shop:channel:read</attribute>
+                    <attribute name="groups">
+                        <attribute>shop:channel:show</attribute>
+                        <attribute>sylius:shop:channel:show</attribute>
+                    </attribute>
                 </attribute>
                 <attribute name="openapi_context">
                     <attribute name="summary">Use $code to retrieve a channel resource.</attribute>
@@ -73,10 +91,16 @@
                 <attribute name="method">PUT</attribute>
                 <attribute name="path">/admin/channels/{code}</attribute>
                 <attribute name="denormalization_context">
-                    <attribute name="groups">admin:channel:update</attribute>
+                    <attribute name="groups">
+                        <attribute>admin:channel:update</attribute>
+                        <attribute>sylius:admin:channel:update</attribute>
+                    </attribute>
                 </attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:channel:read</attribute>
+                    <attribute name="groups">
+                        <attribute>admin:channel:show</attribute>
+                        <attribute>sylius:admin:channel:show</attribute>
+                    </attribute>
                 </attribute>
                 <attribute name="validation_groups">sylius</attribute>
             </itemOperation>
@@ -91,9 +115,6 @@
             <subresourceOperation name="shop_billing_data_get_subresource">
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/admin/channels/{code}/shop-billing-data</attribute>
-                <attribute name="normalization_context">
-                    <attribute name="groups">admin:shop_billing_data:read</attribute>
-                </attribute>
             </subresourceOperation>
         </subresourceOperations>
 

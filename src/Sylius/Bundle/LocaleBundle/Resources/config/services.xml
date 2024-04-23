@@ -27,6 +27,10 @@
             <tag name="form.type" />
         </service>
 
+        <service id="sylius.form.data_transformer.locale_to_code" class="Sylius\Bundle\LocaleBundle\Form\DataTransformer\LocaleToCodeTransformer">
+            <argument type="service" id="sylius.locale_collection_provider" />
+        </service>
+
         <service id="sylius.form.type.locale_choice" class="Sylius\Bundle\LocaleBundle\Form\Type\LocaleChoiceType">
             <argument type="service" id="sylius.repository.locale" />
             <tag name="form.type" />
@@ -45,8 +49,17 @@
             <tag name="sylius.context.locale" priority="32" />
         </service>
 
-        <service id="sylius.locale_provider" class="Sylius\Component\Locale\Provider\LocaleProvider">
+        <service id="sylius.locale_collection_provider" class="Sylius\Component\Locale\Provider\LocaleCollectionProvider">
             <argument type="service" id="sylius.repository.locale" />
+        </service>
+
+        <service id="sylius.locale_collection_provider.cached" class="Sylius\Component\Locale\Provider\CachedLocaleCollectionProvider" decorates="sylius.locale_collection_provider">
+            <argument type="service" id=".inner" />
+            <argument type="service" id="cache.app" />
+        </service>
+
+        <service id="sylius.locale_provider" class="Sylius\Component\Locale\Provider\LocaleProvider">
+            <argument type="service" id="sylius.locale_collection_provider" />
             <argument>%sylius_locale.locale%</argument>
         </service>
         <service id="Sylius\Component\Locale\Provider\LocaleProviderInterface" alias="sylius.locale_provider" />
@@ -75,6 +88,13 @@
             <argument type="service" id="sylius.repository.locale" />
             <argument type="service" id="sylius.resource_registry" />
             <argument type="service" id="doctrine.orm.entity_manager" />
+        </service>
+
+        <service id="Sylius\Bundle\LocaleBundle\Doctrine\EventListener\LocaleModificationListener">
+            <argument type="service" id="cache.app" />
+            <tag name="doctrine.orm.entity_listener" event="postPersist" entity="Sylius\Component\Locale\Model\Locale" method="invalidateCachedLocales" />
+            <tag name="doctrine.orm.entity_listener" event="postUpdate" entity="Sylius\Component\Locale\Model\Locale" method="invalidateCachedLocales" />
+            <tag name="doctrine.orm.entity_listener" event="postRemove" entity="Sylius\Component\Locale\Model\Locale" method="invalidateCachedLocales" />
         </service>
     </services>
 </container>

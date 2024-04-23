@@ -1,0 +1,22 @@
+{
+    "@context": "\/api\/v2\/contexts\/Taxon",
+    "@id": "\/api\/v2\/shop\/taxons\/T_SHIRTS",
+    "@type": "Taxon",
+    "id": "@integer@",
+    "code": "T_SHIRTS",
+    "children": [
+        "\/api\/v2\/shop\/taxons\/MEN_T_SHIRTS"
+    ],
+    "images": [
+        {
+            "@id": "\/api\/v2\/shop\/taxon-images\/@integer@",
+            "@type": "TaxonImage",
+            "id": @integer@,
+            "type": "thumbnail",
+            "path": "@string@.contains('sylius_original').endsWith('tshirt.jpeg')"
+        }
+    ],
+    "name": "T-Shirts",
+    "slug": "categories\/t-shirts",
+    "description": "Some description Lorem ipsum dolor sit amet."
+}

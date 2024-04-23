@@ -55,5 +55,10 @@
                  class="Sylius\Component\Promotion\Checker\Eligibility\CompositePromotionEligibilityChecker">
             <argument type="collection" />
         </service>
+        <service id="sylius.promotion_archival_eligibility_checker"
+                 class="Sylius\Component\Promotion\Checker\Eligibility\PromotionArchivalEligibilityChecker"
+                 public="false">
+            <tag name="sylius.promotion_eligibility_checker" />
+        </service>
     </services>
 </container>

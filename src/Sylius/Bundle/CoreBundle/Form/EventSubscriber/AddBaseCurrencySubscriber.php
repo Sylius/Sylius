@@ -48,7 +48,7 @@ final class AddBaseCurrencySubscriber implements EventSubscriberInterface
     private function getDisabledOption($resource): bool
     {
         if ($resource instanceof ChannelInterface) {
-            return null !== $resource->getId();
+            return null !== $resource->getId() && null !== $resource->getBaseCurrency();
         }
 
         if (null === $resource) {

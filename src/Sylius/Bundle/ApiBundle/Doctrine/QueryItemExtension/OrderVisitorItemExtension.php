@@ -21,7 +21,6 @@ use Sylius\Bundle\ApiBundle\Serializer\ContextKeys;
 use Sylius\Component\Core\Model\OrderInterface;
 use Symfony\Component\HttpFoundation\Request;
 
-/** @experimental */
 final class OrderVisitorItemExtension implements QueryItemExtensionInterface
 {
     public function __construct(
@@ -35,7 +34,7 @@ final class OrderVisitorItemExtension implements QueryItemExtensionInterface
         QueryNameGeneratorInterface $queryNameGenerator,
         string $resourceClass,
         array $identifiers,
-        string $operationName = null,
+        ?string $operationName = null,
         array $context = [],
     ) {
         if (!is_a($resourceClass, OrderInterface::class, true)) {

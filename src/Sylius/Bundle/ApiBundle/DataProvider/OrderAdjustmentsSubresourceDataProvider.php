@@ -20,14 +20,13 @@ use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Order\Model\AdjustmentInterface;
 use Webmozart\Assert\Assert;
 
-/** @experimental */
 final class OrderAdjustmentsSubresourceDataProvider implements RestrictedDataProviderInterface, SubresourceDataProviderInterface
 {
     public function __construct(private OrderRepositoryInterface $orderRepository)
     {
     }
 
-    public function supports(string $resourceClass, string $operationName = null, array $context = []): bool
+    public function supports(string $resourceClass, ?string $operationName = null, array $context = []): bool
     {
         $subresourceIdentifiers = $context['subresource_identifiers'] ?? null;
 
@@ -38,7 +37,7 @@ final class OrderAdjustmentsSubresourceDataProvider implements RestrictedDataPro
         ;
     }
 
-    public function getSubresource(string $resourceClass, array $identifiers, array $context, string $operationName = null)
+    public function getSubresource(string $resourceClass, array $identifiers, array $context, ?string $operationName = null)
     {
         $subresourceIdentifiers = $context['subresource_identifiers'];
 

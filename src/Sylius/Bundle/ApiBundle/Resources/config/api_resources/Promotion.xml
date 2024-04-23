@@ -31,10 +31,18 @@
             <collectionOperation name="admin_post">
                 <attribute name="method">POST</attribute>
                 <attribute name="denormalization_context">
-                    <attribute name="groups">admin:promotion:create</attribute>
+                    <attribute name="groups">
+                        <attribute>admin:promotion:create</attribute>
+                        <attribute>sylius:admin:promotion:create</attribute>
+                    </attribute>
                 </attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:promotion:read</attribute>
+                    <attribute name="groups">
+                        <attribute>admin:promotion:show</attribute>
+                        <attribute>sylius:admin:promotion:show</attribute>
+                    </attribute>
+                    <!-- It auto-turned on when adding PATCH itemOperations: https://github.com/api-platform/core/issues/3600 -->
+                    <attribute name="skip_null_values">false</attribute>
                 </attribute>
                 <attribute name="openapi_context">
                     <attribute name="description">
@@ -71,11 +79,17 @@ Example configuration for `order_fixed_discount` action type:
             <collectionOperation name="admin_get">
                 <attribute name="method">GET</attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:promotion:read</attribute>
+                    <attribute name="groups">
+                        <attribute>admin:promotion:index</attribute>
+                        <attribute>sylius:admin:promotion:index</attribute>
+                    </attribute>
+                    <!-- It auto-turned on when adding PATCH itemOperations: https://github.com/api-platform/core/issues/3600 -->
+                    <attribute name="skip_null_values">false</attribute>
                 </attribute>
                 <attribute name="filters">
                     <attribute>sylius.api.promotion_coupon_search_filter</attribute>
                     <attribute>sylius.api.promotion_order_filter</attribute>
+                    <attribute>sylius.api.exists_filter.archived_at</attribute>
                 </attribute>
             </collectionOperation>
         </collectionOperations>
@@ -84,17 +98,30 @@ Example configuration for `order_fixed_discount` action type:
             <itemOperation name="admin_get">
                 <attribute name="method">GET</attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:promotion:read</attribute>
+                    <attribute name="groups">
+                        <attribute>admin:promotion:show</attribute>
+                        <attribute>sylius:admin:promotion:show</attribute>
+                    </attribute>
+                    <!-- It auto-turned on when adding PATCH itemOperations: https://github.com/api-platform/core/issues/3600 -->
+                    <attribute name="skip_null_values">false</attribute>
                 </attribute>
             </itemOperation>
 
             <itemOperation name="admin_put">
                 <attribute name="method">PUT</attribute>
                 <attribute name="denormalization_context">
-                    <attribute name="groups">admin:promotion:update</attribute>
+                    <attribute name="groups">
+                        <attribute>admin:promotion:update</attribute>
+                        <attribute>sylius:admin:promotion:update</attribute>
+                    </attribute>
                 </attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:promotion:read</attribute>
+                    <attribute name="groups">
+                        <attribute>admin:promotion:show</attribute>
+                        <attribute>sylius:admin:promotion:show</attribute>
+                    </attribute>
+                    <!-- It auto-turned on when adding PATCH itemOperations: https://github.com/api-platform/core/issues/3600 -->
+                    <attribute name="skip_null_values">false</attribute>
                 </attribute>
                 <attribute name="openapi_context">
                     <attribute name="description">
@@ -124,6 +151,37 @@ Example configuration for `order_fixed_discount` action type:
     }
 }
 ```
+                    </attribute>
+                </attribute>
+            </itemOperation>
+
+            <itemOperation name="admin_archive">
+                <attribute name="method">PATCH</attribute>
+                <attribute name="path">/promotions/{code}/archive</attribute>
+                <attribute name="input">false</attribute>
+                <attribute name="controller">Sylius\Bundle\ApiBundle\Applicator\ArchivingPromotionApplicatorInterface::archive</attribute>
+                <attribute name="openapi_context">
+                    <attribute name="summary">Archives Promotion.</attribute>
+                </attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">
+                        <attribute>admin:promotion:read</attribute>
+                        <attribute>sylius:admin:promotion:read</attribute>
+                    </attribute>
+                </attribute>
+            </itemOperation>
+            <itemOperation name="admin_restore">
+                <attribute name="method">PATCH</attribute>
+                <attribute name="path">/promotions/{code}/restore</attribute>
+                <attribute name="input">false</attribute>
+                <attribute name="controller">Sylius\Bundle\ApiBundle\Applicator\ArchivingPromotionApplicatorInterface::restore</attribute>
+                <attribute name="openapi_context">
+                    <attribute name="summary">Restores Archived Promotion.</attribute>
+                </attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">
+                        <attribute>admin:promotion:read</attribute>
+                        <attribute>sylius:admin:promotion:read</attribute>
                     </attribute>
                 </attribute>
             </itemOperation>

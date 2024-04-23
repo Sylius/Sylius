@@ -22,7 +22,6 @@ use Sylius\Component\Core\Model\AdminUserInterface;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
 use Webmozart\Assert\Assert;
 
-/** @experimental */
 final class TaxonCollectionExtension implements ContextAwareQueryCollectionExtensionInterface
 {
     public function __construct(private UserContextInterface $userContext)
@@ -33,7 +32,7 @@ final class TaxonCollectionExtension implements ContextAwareQueryCollectionExten
         QueryBuilder $queryBuilder,
         QueryNameGeneratorInterface $queryNameGenerator,
         string $resourceClass,
-        string $operationName = null,
+        ?string $operationName = null,
         array $context = [],
     ): void {
         if (!is_a($resourceClass, TaxonInterface::class, true)) {

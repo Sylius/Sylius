@@ -52,11 +52,6 @@
 </svg>
 <header>
     <a id="logo" href="https://api-platform.com"><img src="{{ asset('bundles/apiplatform/logo-header.svg', assetPackage) }}" alt="API Platform"></a>
-    {# > Sylius #}
-    <a href="https://docs.sylius.com/en/latest/book/api/introduction.html">
-        <div style="align-items: center; display: flex; height: 70px; font-size: 14px; color: #fff; font-weight: 700; font-family: sans-serif; padding: 10px 40px; position: fixed; top: 0; left: 0; background: #ed6a5a; z-index: 103;"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-alert-circle" style="margin-right: 10px;"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>EXPERIMENTAL</div>
-    </a>
-    {# Sylius < #}
 </header>
 
 {% if showWebby %}
@@ -141,17 +136,15 @@
             }
         }
 
-        let tokenRequestContainer = null;
-
-        function credentialsRequestReady() {
-            const tokenRequestContainer2 = document.querySelector('#operations-AdminUserToken-postCredentialsItem').getElementsByClassName('opblock-body')[0];
+        const credentialsRequestReady = (container, selector) => {
+            const tokenRequestContainer2 = document.querySelector(selector).getElementsByClassName('opblock-body')[0];
 
             const executeWrapper = tokenRequestContainer2.getElementsByClassName('execute-wrapper')[0];
-            new ClassWatcher(executeWrapper, 'btn-group', credentialsRequestFinished, () => {});
+            new ClassWatcher(executeWrapper, 'btn-group', () => credentialsRequestFinished(container), () => {});
         }
 
-        function credentialsRequestFinished() {
-            const tokenElement = JSON.parse(tokenRequestContainer.querySelector('.highlight-code').getElementsByTagName('code')[0].innerText)
+        const credentialsRequestFinished = (container) => {
+            const tokenElement = JSON.parse(container.querySelector('.highlight-code').getElementsByTagName('code')[0].innerText)
 
             const buttonLogin = document.querySelector("#swagger-ui > section > div.swagger-ui > div:nth-child(2) > div.scheme-container > section > div > button");
 
@@ -179,11 +172,43 @@
             closeAuthFormButton.dispatchEvent(mouseEvent);
         }
 
-        window.addEventListener('load', event => {
-            tokenRequestContainer = document.querySelector('#operations-AdminUserToken-postCredentialsItem');
+        const credentialSelectors = [
+            '#operations-Administrator-postAdministratorCredentialsItem',
+            '#operations-Customer-postCustomerCredentialsItem',
+            '#operations-Security-postAdministratorCredentialsItem',
+            '#operations-Security-postCustomerCredentialsItem',
+        ];
 
-            new ClassWatcher(tokenRequestContainer, 'is-open', credentialsRequestReady, function(){});
+        window.addEventListener('load', event => {
+            credentialSelectors.forEach(selector => {
+                let tokenRequestContainer = document.querySelector(selector);
+                new ClassWatcher(tokenRequestContainer, 'is-open', () => credentialsRequestReady(tokenRequestContainer, selector), function(){});
+            });
         });
+
+        const adjustDOMWhenReady = () => {
+            let securityBlock = document.querySelector('#operations-tag-Security').closest('span');
+            if (securityBlock) {
+                let resourceList = securityBlock.parentNode;
+                resourceList.insertBefore(securityBlock, resourceList.firstChild);
+            }
+        }
+
+        const waitForElement = (selector, callback) => {
+            const observer = new MutationObserver((mutations, me) => {
+                if (document.querySelector(selector)) {
+                    callback();
+                    me.disconnect();
+                }
+            });
+
+            observer.observe(document.documentElement, {
+                childList: true,
+                subtree: true
+            });
+        }
+
+        waitForElement('#operations-tag-Security', adjustDOMWhenReady);
     </script>
     {# Sylius < #}
 {% endblock %}

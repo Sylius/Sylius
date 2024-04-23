@@ -121,7 +121,7 @@
             <argument type="service" id="sylius.factory.product_review" />
             <argument type="service" id="sylius.repository.product" />
             <argument type="service" id="sylius.repository.customer" />
-            <argument type="service" id="sm.factory" />
+            <argument type="service" id="sylius_abstraction.state_machine" />
         </service>
 
         <service id="sylius.fixture.example_factory.tax_category" class="Sylius\Bundle\CoreBundle\Fixture\Factory\TaxCategoryExampleFactory">
@@ -178,18 +178,9 @@
             <argument type="service" id="sylius.repository.payment_method" />
             <argument type="service" id="sylius.repository.shipping_method" />
             <argument type="service" id="sylius.factory.address" />
-            <argument type="service" id="sm.factory" />
+            <argument type="service" id="sylius_abstraction.state_machine" />
             <argument type="service" id="sylius.checker.order_shipping_method_selection_requirement" />
             <argument type="service" id="sylius.checker.order_payment_method_selection_requirement" />
         </service>
-
-        <service id="Sylius\Bundle\CoreBundle\Fixture\PaymentFixture">
-            <argument type="service" id="sylius.repository.payment" />
-            <argument type="service" id="sm.factory" />
-            <argument type="service" id="sylius.manager.payment" />
-            <tag name="sylius_fixtures.fixture" />
-        </service>
-
-        <service id="Sylius\Bundle\CoreBundle\Fixture\Factory\PaymentFixture" alias="Sylius\Bundle\CoreBundle\Fixture\PaymentFixture" />
     </services>
 </container>

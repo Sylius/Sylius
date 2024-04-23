@@ -15,14 +15,13 @@ namespace Sylius\Bundle\ApiBundle\Exception;
 
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-/** @experimental */
 final class PromotionNotFoundException extends NotFoundHttpException
 {
     /** @param array<array-key, mixed> $headers */
     public function __construct(
         string $promotionCode,
         string $message = 'Promotion with the "%s" code not found.',
-        \Throwable $previous = null,
+        ?\Throwable $previous = null,
         int $code = 0,
         array $headers = [],
     ) {

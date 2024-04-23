@@ -23,3 +23,11 @@ Feature: Customer group validation
         Then I should be notified that name is required
         And I should be informed that this form contains errors
         And this customer group should still be named "Retail"
+
+    @ui @api
+    Scenario: Adding a new customer group with a too long code
+        Given I want to create a new customer group
+        And I specify its name as "Retail"
+        When I specify a too long code
+        And I add it
+        Then I should be notified that code is too long

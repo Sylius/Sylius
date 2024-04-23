@@ -1,0 +1,25 @@
+Sylius\Component\Core\Model\Product:
+    product:
+        code: 'PRODUCT'
+        channels: ['@channel_web']
+        translations:
+            en_US: '@product_translation'
+
+Sylius\Component\Core\Model\ProductTranslation:
+    product_translation:
+        slug: 'product'
+        locale: 'en_US'
+        name: 'Product'
+
+Sylius\Component\Core\Model\ProductVariant:
+    product_variant_that_costs_1000:
+        code: 'product_variant_that_costs_1000'
+        product: '@product'
+        currentLocale: 'en_US'
+        channelPricings:
+            WEB: '@channel_pricing_product_variant_that_costs_1000_web'
+
+Sylius\Component\Core\Model\ChannelPricing:
+    channel_pricing_product_variant_that_costs_1000_web:
+        channelCode: 'WEB'
+        price: 1000

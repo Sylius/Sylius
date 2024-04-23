@@ -22,7 +22,6 @@ use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
 use Symfony\Component\HttpFoundation\Request;
 
-/** @experimental */
 final class OrderShopUserItemExtension implements QueryItemExtensionInterface
 {
     public function __construct(
@@ -36,7 +35,7 @@ final class OrderShopUserItemExtension implements QueryItemExtensionInterface
         QueryNameGeneratorInterface $queryNameGenerator,
         string $resourceClass,
         array $identifiers,
-        string $operationName = null,
+        ?string $operationName = null,
         array $context = [],
     ) {
         if (!is_a($resourceClass, OrderInterface::class, true)) {

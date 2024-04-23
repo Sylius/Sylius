@@ -23,15 +23,29 @@
         <collectionOperations>
             <collectionOperation name="admin_get">
                 <attribute name="method">GET</attribute>
+                <attribute name="path">/zones</attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:zone:read</attribute>
+                    <attribute name="groups">
+                        <attribute>admin:zone:index</attribute>
+                        <attribute>sylius:admin:zone:index</attribute>
+                    </attribute>
                 </attribute>
             </collectionOperation>
 
             <collectionOperation name="admin_post">
                 <attribute name="method">POST</attribute>
+                <attribute name="path">/zones</attribute>
                 <attribute name="denormalization_context">
-                    <attribute name="groups">admin:zone:create</attribute>
+                    <attribute name="groups">
+                        <attribute>admin:zone:create</attribute>
+                        <attribute>sylius:admin:zone:create</attribute>
+                    </attribute>
+                </attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">
+                        <attribute>admin:zone:show</attribute>
+                        <attribute>sylius:admin:zone:show</attribute>
+                    </attribute>
                 </attribute>
             </collectionOperation>
         </collectionOperations>
@@ -39,22 +53,43 @@
         <itemOperations>
             <itemOperation name="admin_get">
                 <attribute name="method">GET</attribute>
+                <attribute name="path">/zones/{code}</attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:zone:read</attribute>
+                    <attribute name="groups">
+                        <attribute>admin:zone:show</attribute>
+                        <attribute>sylius:admin:zone:show</attribute>
+                    </attribute>
                 </attribute>
             </itemOperation>
 
             <itemOperation name="admin_put">
                 <attribute name="method">PUT</attribute>
+                <attribute name="path">/zones/{code}</attribute>
                 <attribute name="denormalization_context">
-                    <attribute name="groups">admin:zone:update</attribute>
+                    <attribute name="groups">
+                        <attribute>admin:zone:update</attribute>
+                        <attribute>sylius:admin:zone:update</attribute>
+                    </attribute>
+                </attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">
+                        <attribute>admin:zone:show</attribute>
+                        <attribute>sylius:admin:zone:show</attribute>
+                    </attribute>
                 </attribute>
             </itemOperation>
 
             <itemOperation name="admin_delete">
                 <attribute name="method">DELETE</attribute>
+                <attribute name="path">/zones/{code}</attribute>
             </itemOperation>
         </itemOperations>
+
+        <subresourceOperations>
+            <subresourceOperation name="members_get_subresource">
+                <attribute name="method">GET</attribute>
+            </subresourceOperation>
+        </subresourceOperations>
 
         <property name="id" identifier="false" writable="false" />
         <property name="createdAt" writable="false" />

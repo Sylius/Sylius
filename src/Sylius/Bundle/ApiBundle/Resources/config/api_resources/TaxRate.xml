@@ -22,55 +22,66 @@
         <itemOperations>
             <itemOperation name="admin_get">
                 <attribute name="method">GET</attribute>
+                <attribute name="path">/tax-rates/{code}</attribute>
                 <attribute name="normalization_context">
                     <attribute name="groups">
-                        <attribute>admin:tax_rate:read</attribute>
+                        <attribute>admin:tax_rate:show</attribute>
+                        <attribute>sylius:admin:tax_rate:show</attribute>
                     </attribute>
                 </attribute>
             </itemOperation>
 
             <itemOperation name="admin_put">
                 <attribute name="method">PUT</attribute>
+                <attribute name="path">/tax-rates/{code}</attribute>
                 <attribute name="denormalization_context">
                     <attribute name="groups">
                         <attribute>admin:tax_rate:update</attribute>
+                        <attribute>sylius:admin:tax_rate:update</attribute>
                     </attribute>
                 </attribute>
                 <attribute name="normalization_context">
                     <attribute name="groups">
-                        <attribute>admin:tax_rate:read</attribute>
+                        <attribute>admin:tax_rate:show</attribute>
+                        <attribute>sylius:admin:tax_rate:show</attribute>
                     </attribute>
                 </attribute>
             </itemOperation>
 
             <itemOperation name="admin_delete">
                 <attribute name="method">DELETE</attribute>
+                <attribute name="path">/tax-rates/{code}</attribute>
             </itemOperation>
         </itemOperations>
 
         <collectionOperations>
             <collectionOperation name="admin_get">
                 <attribute name="method">GET</attribute>
+                <attribute name="path">/tax-rates</attribute>
                 <attribute name="filters">
                     <attribute>sylius.api.tax_rate.date_filter</attribute>
                 </attribute>
                 <attribute name="normalization_context">
                     <attribute name="groups">
-                        <attribute>admin:tax_rate:read</attribute>
+                        <attribute>admin:tax_rate:index</attribute>
+                        <attribute>sylius:admin:tax_rate:index</attribute>
                     </attribute>
                 </attribute>
             </collectionOperation>
 
             <collectionOperation name="admin_post">
                 <attribute name="method">POST</attribute>
+                <attribute name="path">/tax-rates</attribute>
                 <attribute name="denormalization_context">
                     <attribute name="groups">
                         <attribute>admin:tax_rate:create</attribute>
+                        <attribute>sylius:admin:tax_rate:create</attribute>
                     </attribute>
                 </attribute>
                 <attribute name="normalization_context">
                     <attribute name="groups">
-                        <attribute>admin:tax_rate:read</attribute>
+                        <attribute>admin:tax_rate:show</attribute>
+                        <attribute>sylius:admin:tax_rate:show</attribute>
                     </attribute>
                 </attribute>
             </collectionOperation>

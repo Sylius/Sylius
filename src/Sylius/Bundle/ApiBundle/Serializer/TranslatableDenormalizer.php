@@ -20,7 +20,6 @@ use Symfony\Component\Serializer\Normalizer\ContextAwareDenormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
 
-/** @experimental */
 final class TranslatableDenormalizer implements ContextAwareDenormalizerInterface, DenormalizerAwareInterface
 {
     use DenormalizerAwareTrait;
@@ -32,7 +31,7 @@ final class TranslatableDenormalizer implements ContextAwareDenormalizerInterfac
     ) {
     }
 
-    public function denormalize(mixed $data, string $type, string $format = null, array $context = [])
+    public function denormalize(mixed $data, string $type, ?string $format = null, array $context = [])
     {
         $context[self::getAlreadyCalledKey($type)] = true;
 
@@ -47,7 +46,7 @@ final class TranslatableDenormalizer implements ContextAwareDenormalizerInterfac
         return $this->denormalizer->denormalize($data, $type, $format, $context);
     }
 
-    public function supportsDenormalization(mixed $data, string $type, string $format = null, array $context = []): bool
+    public function supportsDenormalization(mixed $data, string $type, ?string $format = null, array $context = []): bool
     {
         return
             Request::METHOD_POST === ($context[ContextKeys::HTTP_REQUEST_METHOD_TYPE] ?? null) &&

@@ -48,14 +48,14 @@ Feature: Editing catalog promotion
         When I want to modify a catalog promotion "Christmas sale"
         Then I should not be able to edit its code
 
-    @api @ui @javascript
+    @api @ui @mink:chromedriver
     Scenario: Editing catalog promotion variant scope
         When I edit "Christmas sale" catalog promotion to be applied on "Kotlin T-Shirt" variant
         Then I should be notified that it has been successfully edited
         And this catalog promotion should be applied on "Kotlin T-Shirt" variant
         And this catalog promotion should not be applied on "PHP T-Shirt" variant
 
-    @api @ui @javascript
+    @api @ui @mink:chromedriver
     Scenario: Editing catalog promotion taxon scope
         When I edit "Christmas sale" catalog promotion to be applied on "Clothes" taxon
         Then I should be notified that it has been successfully edited
@@ -63,14 +63,14 @@ Feature: Editing catalog promotion
         And this catalog promotion should not be applied on "Kotlin T-Shirt" variant
         And this catalog promotion should not be applied on "PHP T-Shirt" variant
 
-    @api @ui @javascript
+    @api @ui @mink:chromedriver
     Scenario: Editing catalog promotion product scope
         When I edit "Christmas sale" catalog promotion to be applied on "T-Shirt" product
         Then I should be notified that it has been successfully edited
         And this catalog promotion should be applied on "T-Shirt" product
         And this catalog promotion should not be applied on "PHP T-Shirt" variant
 
-    @api @ui @javascript
+    @api @ui
     Scenario: Editing catalog promotion action
         When I edit "Christmas sale" catalog promotion to have "40%" discount
         Then I should be notified that it has been successfully edited
@@ -97,7 +97,7 @@ Feature: Editing catalog promotion
         And I save my changes
         Then I should get information that the end date cannot be set before start date
 
-    @api @ui @javascript
+    @api @ui @mink:chromedriver
     Scenario: Receiving error message after not filling price for all channels
         Given the store operates on another channel named "Poland"
         When I want to modify a catalog promotion "Christmas sale"
@@ -106,12 +106,12 @@ Feature: Editing catalog promotion
         And I save my changes
         Then I should be notified that not all channels are filled
 
-    @api @ui @javascript
+    @api @ui
     Scenario: Receiving error message after not filling percentage value for percentage discount
         When I want to modify a catalog promotion "Christmas sale"
         And I edit it to have empty amount of percentage discount
         And I save my changes
-        Then I should be notified that a discount amount should be a number and cannot be empty
+        Then I should be notified that the percentage amount should be a number and cannot be empty
 
     @api @ui @javascript
     Scenario: Editing catalog promotion action to be a percentage discount and not filling amount
@@ -119,11 +119,11 @@ Feature: Editing catalog promotion
         When I want to modify a catalog promotion "Christmas sale"
         And I edit it to have empty amount of percentage discount
         And I save my changes
-        Then I should be notified that a discount amount should be a number and cannot be empty
+        Then I should be notified that the percentage amount should be a number and cannot be empty
 
     @api @ui @javascript
     Scenario: Editing catalog promotion action to be a fixed discount and not filling amount
         When I want to modify a catalog promotion "Christmas sale"
         And I edit it to have empty amount of fixed discount in the "United States" channel
         And I save my changes
-        Then I should be notified that a discount amount should be configured for at least one channel
+        Then I should be notified that the fixed amount should be a number and cannot be empty

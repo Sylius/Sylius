@@ -7,3 +7,9 @@ jms_serializer:
             sylius-product:
                 namespace_prefix: "Sylius\\Component\\Product"
                 path: "@SyliusProductBundle/Resources/config/serializer"
+
+doctrine:
+    orm:
+        dql:
+            string_functions:
+                JSONB_ARRAY_ELEMENTS_TEXT: Sylius\Bundle\ProductBundle\Doctrine\ORM\Query\AST\Function\JsonbArrayElementsText

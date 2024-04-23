@@ -50,7 +50,7 @@ final class ManagingShipmentsContext implements Context
         string $orderNumber,
         string $shippingState,
         CustomerInterface $customer,
-        Channel $channel = null,
+        ?Channel $channel = null,
     ): void {
         $parameters = [
             'number' => $orderNumber,

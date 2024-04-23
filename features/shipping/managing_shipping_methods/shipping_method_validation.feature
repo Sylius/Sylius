@@ -10,6 +10,15 @@ Feature: Shipping method validation
         And the store is available in "English (United States)"
         And I am logged in as an administrator
 
+
+    @no-ui @api
+    Scenario: Trying to add shipping method translation in unexisting locale
+        When I want to create a new shipping method
+        And I specify its code as "UPS"
+        And I name it "Transporteur UPS" in "French (France)"
+        And I try to save my changes
+        Then I should be notified that the locale is not available
+
     @ui @api
     Scenario: Trying to add a new shipping method without specifying its code
         When I want to create a new shipping method
@@ -18,6 +27,14 @@ Feature: Shipping method validation
         And I try to add it
         Then I should be notified that code is required
         And shipping method with name "FedEx Carrier" should not be added
+
+    @ui @api
+    Scenario: Trying to add a new shipping method with a too long code
+        When I want to create a new shipping method
+        And I name it "FedEx Carrier" in "English (United States)"
+        And I specify a too long code
+        And I try to add it
+        Then I should be notified that code is too long
 
     @ui @api
     Scenario: Trying to add a new shipping method without specifying its name
@@ -55,7 +72,7 @@ Feature: Shipping method validation
         And I try to save my changes
         Then I should be notified that the zone is required
 
-    @ui @javascript @api
+    @ui @mink:chromedriver @api
     Scenario: Adding a new shipping method with order total greater than or equal rule that contains invalid data
         When I want to create a new shipping method
         And I specify its code as "FED_EX_CARRIER"
@@ -69,7 +86,7 @@ Feature: Shipping method validation
         Then I should be notified that the weight rule has an invalid configuration
         And the shipping method "FedEx Carrier" should not appear in the registry
 
-    @ui @javascript @api
+    @ui @mink:chromedriver @api
     Scenario: Adding a new shipping method with order total less than or equal rule that contains invalid data
         When I want to create a new shipping method
         And I specify its code as "FED_EX_CARRIER"

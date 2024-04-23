@@ -145,7 +145,7 @@ Here you will learn basics about the theming concept of sylius. How to change th
 Sylius Plus
 -----------
 
-`Sylius Plus <https://sylius.com/plus/>`_, which is a licensed edition of Sylius, gives you all the power of Open Source and much more.
+`Sylius Plus <https://sylius.com/plus/?utm_source=docs&utm_medium=cta&utm_campaign=plus>`_, which is a licensed edition of Sylius, gives you all the power of Open Source and much more.
 It comes with a set of enterprise-grade features and technical support from its creators.
 As the state-of-the-art eCommerce platform, it reduces risks and increases your ROI.
 
@@ -167,7 +167,7 @@ Documentation sections of The Book referring to Sylius Plus features are:
 
 .. image:: ../_images/sylius_plus/banner.png
     :align: center
-    :target: https://sylius.com/plus/?utm_source=docs
+    :target: https://sylius.com/plus/?utm_source=docs&utm_medium=cta&utm_campaign=plus
 
 Sylius Plugins
 --------------

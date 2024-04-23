@@ -15,7 +15,6 @@ namespace Sylius\Bundle\ApiBundle\Applicator;
 
 use Sylius\Component\Payment\Model\PaymentInterface;
 
-/** @experimental */
 interface PaymentStateMachineTransitionApplicatorInterface
 {
     public function complete(PaymentInterface $data): PaymentInterface;

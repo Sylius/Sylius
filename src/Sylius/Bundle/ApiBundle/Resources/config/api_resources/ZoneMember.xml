@@ -25,14 +25,29 @@
         <itemOperations>
             <itemOperation name="admin_get">
                 <attribute name="method">GET</attribute>
+                <attribute name="path">/zone-members/{id}</attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:zone_member:read</attribute>
+                    <attribute name="groups">
+                        <attribute>admin:zone_member:show</attribute>
+                        <attribute>sylius:admin:zone_member:show</attribute>
+                    </attribute>
                 </attribute>
             </itemOperation>
         </itemOperations>
 
-        <property name="id" identifier="false" writable="false" />
-        <property name="code" identifier="true" required="true" />
+        <subresourceOperations>
+            <subresourceOperation name="api_zones_members_get_subresource">
+                <attribute name="normalization_context">
+                    <attribute name="groups">
+                        <attribute>admin:zone_member:show</attribute>
+                        <attribute>sylius:admin:zone_member:show</attribute>
+                    </attribute>
+                </attribute>
+            </subresourceOperation>
+        </subresourceOperations>
+
+        <property name="id" identifier="true" writable="false" />
+        <property name="code" required="true" readable="true" />
         <property name="belongsTo" readable="true" writable="true" />
     </resource>
 </resources>

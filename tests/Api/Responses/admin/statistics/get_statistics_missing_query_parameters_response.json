@@ -1,0 +1,18 @@
+[
+    {
+        "propertyPath": "channelCode",
+        "message": "Parameter \"channelCode\" is required."
+    },
+    {
+        "propertyPath": "startDate",
+        "message": "Parameter \"startDate\" is required."
+    },
+    {
+        "propertyPath": "dateInterval",
+        "message": "Parameter \"dateInterval\" is required."
+    },
+    {
+        "propertyPath": "endDate",
+        "message": "Parameter \"endDate\" is required."
+    }
+]

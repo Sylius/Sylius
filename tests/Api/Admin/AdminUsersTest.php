@@ -30,7 +30,7 @@ final class AdminUsersTest extends JsonApiTestCase
 
         $this->client->request(
             method: 'POST',
-            uri: '/api/v2/admin/authentication-token',
+            uri: '/api/v2/admin/administrators/token',
             server: self::CONTENT_TYPE_HEADER,
             content: json_encode([
                 'email' => 'api@example.com',
@@ -40,7 +40,7 @@ final class AdminUsersTest extends JsonApiTestCase
 
         $response = $this->client->getResponse();
 
-        $this->assertResponse($response, 'admin/log_in_admin_response', Response::HTTP_OK);
+        $this->assertResponse($response, 'admin/admin_user/log_in_admin_response', Response::HTTP_OK);
     }
 
     /** @test */
@@ -50,10 +50,35 @@ final class AdminUsersTest extends JsonApiTestCase
 
         $this->client->request(
             method: Request::METHOD_POST,
-            uri: '/api/v2/admin/reset-password-requests',
+            uri: '/api/v2/admin/administrators/reset-password',
             server: self::CONTENT_TYPE_HEADER,
             content: json_encode([
                 'email' => 'api@example.com',
+            ], \JSON_THROW_ON_ERROR),
+        );
+
+        $response = $this->client->getResponse();
+        $this->assertResponseCode($response, Response::HTTP_ACCEPTED);
+    }
+
+    /** @test */
+    public function it_resets_administrator_password(): void
+    {
+        $loadedData = $this->loadFixturesFromFile('authentication/api_administrator.yaml');
+
+        /** @var AdminUserInterface $adminUser */
+        $adminUser = $loadedData['admin'];
+        $adminUser->setPasswordResetToken('token');
+        $adminUser->setPasswordRequestedAt(new \DateTime('now'));
+        $this->getEntityManager()->flush();
+
+        $this->client->request(
+            method: 'PATCH',
+            uri: '/api/v2/admin/administrators/reset-password/token',
+            server: self::PATCH_CONTENT_TYPE_HEADER,
+            content: json_encode([
+                'newPassword' => 'newPassword',
+                'confirmNewPassword' => 'newPassword',
             ], \JSON_THROW_ON_ERROR),
         );
 
@@ -71,7 +96,7 @@ final class AdminUsersTest extends JsonApiTestCase
 
         $this->assertResponse(
             $this->client->getResponse(),
-            'admin/administrator/get_administrators_response',
+            'admin/admin_user/get_administrators_response',
             Response::HTTP_OK,
         );
     }
@@ -93,7 +118,7 @@ final class AdminUsersTest extends JsonApiTestCase
 
         $this->assertResponse(
             $this->client->getResponse(),
-            'admin/administrator/get_administrator_response',
+            'admin/admin_user/get_administrator_response',
             Response::HTTP_OK,
         );
     }
@@ -121,7 +146,7 @@ final class AdminUsersTest extends JsonApiTestCase
 
         $this->assertResponse(
             $this->client->getResponse(),
-            'admin/administrator/create_administrator_response',
+            'admin/admin_user/create_administrator_response',
             Response::HTTP_CREATED,
         );
     }
@@ -152,7 +177,7 @@ final class AdminUsersTest extends JsonApiTestCase
 
         $this->assertResponse(
             $this->client->getResponse(),
-            'admin/administrator/put_administrator_response',
+            'admin/admin_user/put_administrator_response',
             Response::HTTP_OK,
         );
     }

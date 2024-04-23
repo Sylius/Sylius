@@ -17,6 +17,7 @@ use ApiPlatform\Api\IriConverterInterface;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
+use Sylius\Behat\Context\Api\Admin\Helper\ValidationTrait;
 use Sylius\Behat\Context\Api\Resources;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Addressing\Model\ZoneInterface;
@@ -26,6 +27,8 @@ use Webmozart\Assert\Assert;
 
 class ManagingTaxRatesContext implements Context
 {
+    use ValidationTrait;
+
     public function __construct(
         private ApiClientInterface $client,
         private ResponseCheckerInterface $responseChecker,

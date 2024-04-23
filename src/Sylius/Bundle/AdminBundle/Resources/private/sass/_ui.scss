@@ -48,6 +48,10 @@ a {
     padding-left: .2em;
 }
 
+.ui-element-spacer {
+    margin-bottom: 1em;
+}
+
 // ----------------------------------
 // ------------ Forms
 // ----------------------------------
@@ -357,4 +361,12 @@ div[id^="sylius_catalog_promotion_actions"] {
         position: sticky !important;
         top: 60px;
     }
+}
+
+// ----------------------------------
+// ------------ Order Notes Info
+// ----------------------------------
+
+.text-break {
+    word-break: break-word;
 }

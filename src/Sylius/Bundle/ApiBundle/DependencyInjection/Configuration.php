@@ -17,7 +17,6 @@ use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 
-/** @experimental */
 final class Configuration implements ConfigurationInterface
 {
     public function getConfigTreeBuilder(): TreeBuilder
@@ -42,8 +41,21 @@ final class Configuration implements ConfigurationInterface
                 ->end()
             ->end()
             ->children()
-                ->variableNode('product_image_prefix')
-                    ->defaultValue('media/image')
+                ->arrayNode('serialization_groups')
+                ->addDefaultsIfNotSet()
+                    ->children()
+                        ->booleanNode('skip_adding_read_group')
+                            ->defaultFalse()
+                        ->end()
+                        ->booleanNode('skip_adding_index_and_show_groups')
+                            ->defaultFalse()
+                        ->end()
+                    ->end()
+                ->end()
+            ->end()
+            ->children()
+                ->variableNode('default_image_filter')
+                    ->defaultValue('sylius_original')
                 ->end()
             ->end()
             ->children()

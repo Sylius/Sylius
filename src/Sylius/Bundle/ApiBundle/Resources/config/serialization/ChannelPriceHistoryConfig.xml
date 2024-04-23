@@ -17,22 +17,32 @@
 >
     <class name="Sylius\Component\Core\Model\ChannelPriceHistoryConfig">
         <attribute name="id">
-            <group>admin:channel_price_history_config:read</group>
+            <group>admin:channel_price_history_config:show</group>
+            <group>sylius:admin:channel_price_history_config:show</group>
         </attribute>
         <attribute name="lowestPriceForDiscountedProductsVisible">
             <group>admin:channel:create</group>
+            <group>sylius:admin:channel:create</group>
             <group>admin:channel_price_history_config:update</group>
-            <group>admin:channel_price_history_config:read</group>
+            <group>sylius:admin:channel_price_history_config:update</group>
+            <group>admin:channel_price_history_config:show</group>
+            <group>sylius:admin:channel_price_history_config:show</group>
         </attribute>
         <attribute name="lowestPriceForDiscountedProductsCheckingPeriod">
             <group>admin:channel:create</group>
+            <group>sylius:admin:channel:create</group>
             <group>admin:channel_price_history_config:update</group>
-            <group>admin:channel_price_history_config:read</group>
+            <group>sylius:admin:channel_price_history_config:update</group>
+            <group>admin:channel_price_history_config:show</group>
+            <group>sylius:admin:channel_price_history_config:show</group>
         </attribute>
         <attribute name="taxonsExcludedFromShowingLowestPrice">
             <group>admin:channel:create</group>
+            <group>sylius:admin:channel:create</group>
             <group>admin:channel_price_history_config:update</group>
-            <group>admin:channel_price_history_config:read</group>
+            <group>sylius:admin:channel_price_history_config:update</group>
+            <group>admin:channel_price_history_config:show</group>
+            <group>sylius:admin:channel_price_history_config:show</group>
         </attribute>
     </class>
 </serializer>

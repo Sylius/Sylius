@@ -1,0 +1,8 @@
+# This file is part of the Sylius package.
+# (c) Sylius Sp. z o.o.
+
+imports:
+    - cli/canceling_unpaid_orders.yml
+    - cli/change_admin_password.yml
+    - cli/installer.yml
+    - cli/showing_available_plugins.yml

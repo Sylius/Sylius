@@ -22,7 +22,6 @@ use Sylius\Component\Core\Model\AdminUserInterface;
 use Sylius\Component\Locale\Model\LocaleInterface;
 use Webmozart\Assert\Assert;
 
-/** @experimental */
 final class LocaleCollectionExtension implements ContextAwareQueryCollectionExtensionInterface
 {
     public function __construct(private UserContextInterface $userContext)
@@ -33,7 +32,7 @@ final class LocaleCollectionExtension implements ContextAwareQueryCollectionExte
         QueryBuilder $queryBuilder,
         QueryNameGeneratorInterface $queryNameGenerator,
         string $resourceClass,
-        string $operationName = null,
+        ?string $operationName = null,
         array $context = [],
     ): void {
         if (!is_a($resourceClass, LocaleInterface::class, true)) {

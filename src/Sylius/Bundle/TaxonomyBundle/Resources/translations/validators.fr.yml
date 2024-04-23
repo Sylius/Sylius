@@ -21,3 +21,4 @@ sylius:
         locale:
             not_blank: Vous devez entrer une valeur.
             invalid: Ce paramètre régional n'est pas valide.
+            unique: Une traduction pour la locale {{ value }} existe déjà.

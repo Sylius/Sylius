@@ -17,6 +17,7 @@ use ApiPlatform\Api\IriConverterInterface;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
+use Sylius\Behat\Context\Api\Admin\Helper\ValidationTrait;
 use Sylius\Behat\Context\Api\Resources;
 use Sylius\Behat\Service\Converter\SectionAwareIriConverterInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
@@ -33,10 +34,14 @@ use Sylius\Component\Core\Promotion\Checker\Rule\CustomerGroupRuleChecker;
 use Sylius\Component\Core\Promotion\Checker\Rule\HasTaxonRuleChecker;
 use Sylius\Component\Core\Promotion\Checker\Rule\TotalOfItemsFromTaxonRuleChecker;
 use Sylius\Component\Customer\Model\CustomerGroupInterface;
+use Sylius\Component\Promotion\Checker\Rule\ItemTotalRuleChecker;
+use Symfony\Component\HttpFoundation\Request;
 use Webmozart\Assert\Assert;
 
 final class ManagingPromotionsContext implements Context
 {
+    use ValidationTrait;
+
     public function __construct(
         private ApiClientInterface $client,
         private ResponseCheckerInterface $responseChecker,
@@ -70,6 +75,23 @@ final class ManagingPromotionsContext implements Context
     public function iWantToModifyAPromotion(PromotionInterface $promotion): void
     {
         $this->client->buildUpdateRequest(Resources::PROMOTIONS, $promotion->getCode());
+    }
+
+    /**
+     * @When I archive the :promotion promotion
+     */
+    public function iArchiveThePromotion(PromotionInterface $promotion): void
+    {
+        $this->client->customItemAction(Resources::PROMOTIONS, $promotion->getCode(), Request::METHOD_PATCH, 'archive');
+        $this->client->index(Resources::PROMOTIONS);
+    }
+
+    /**
+     * @When I restore the :promotion promotion
+     */
+    public function iRestoreThePromotion(PromotionInterface $promotion): void
+    {
+        $this->client->customItemAction(Resources::PROMOTIONS, $promotion->getCode(), Request::METHOD_PATCH, 'restore');
     }
 
     /**
@@ -362,7 +384,7 @@ final class ManagingPromotionsContext implements Context
         ChannelInterface $secondChannel,
     ): void {
         $this->addToRequestRule(
-            TotalOfItemsFromTaxonRuleChecker::TYPE,
+            ItemTotalRuleChecker::TYPE,
             [
                 $firstChannel->getCode() => [
                     'amount' => $firstAmount,
@@ -410,6 +432,15 @@ final class ManagingPromotionsContext implements Context
     }
 
     /**
+     * @When I filter archival promotions
+     */
+    public function iFilterArchivalPromotions(): void
+    {
+        $this->client->addFilter('exists[archivedAt]', true);
+        $this->client->filter();
+    }
+
+    /**
      * @When I add it
      * @When I try to add it
      */
@@ -450,6 +481,17 @@ final class ManagingPromotionsContext implements Context
     public function iShouldSeeThePromotionInTheList(string $promotionName): void
     {
         Assert::true(
+            $this->responseChecker->hasItemWithValue($this->client->getLastResponse(), 'name', $promotionName),
+            sprintf('Promotion with name %s does not exist', $promotionName),
+        );
+    }
+
+    /**
+     * @Then I should not see the promotion :promotionName in the list
+     */
+    public function iShouldNotSeeThePromotionInTheList(string $promotionName): void
+    {
+        Assert::false(
             $this->responseChecker->hasItemWithValue($this->client->getLastResponse(), 'name', $promotionName),
             sprintf('Promotion with name %s does not exist', $promotionName),
         );
@@ -844,6 +886,14 @@ final class ManagingPromotionsContext implements Context
             $usage,
             sprintf('The promotion %s has been used %s times', $promotion->getName(), $returnedPromotion['used']),
         );
+    }
+
+    /**
+     * @Then I should be viewing non archival promotions
+     */
+    public function iShouldBeViewingNonArchivalPromotions(): void
+    {
+        $this->client->index(Resources::PROMOTIONS);
     }
 
     private function addToRequestAction(string $type, array $configuration): void

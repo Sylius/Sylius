@@ -17,6 +17,7 @@ use Doctrine\Persistence\ObjectManager;
 use Faker\Factory;
 use Faker\Generator;
 use SM\Factory\FactoryInterface as StateMachineFactoryInterface;
+use Sylius\Abstraction\StateMachine\StateMachineInterface;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\OrderExampleFactory;
 use Sylius\Bundle\FixturesBundle\Fixture\AbstractFixture;
 use Sylius\Component\Core\Checker\OrderPaymentMethodSelectionRequirementCheckerInterface;
@@ -52,10 +53,10 @@ class OrderFixture extends AbstractFixture
         PaymentMethodRepositoryInterface $paymentMethodRepository,
         ShippingMethodRepositoryInterface $shippingMethodRepository,
         FactoryInterface $addressFactory,
-        StateMachineFactoryInterface $stateMachineFactory,
+        StateMachineFactoryInterface|StateMachineInterface $stateMachineFactory,
         OrderShippingMethodSelectionRequirementCheckerInterface $orderShippingMethodSelectionRequirementChecker,
         OrderPaymentMethodSelectionRequirementCheckerInterface $orderPaymentMethodSelectionRequirementChecker,
-        OrderExampleFactory $orderExampleFactory = null,
+        ?OrderExampleFactory $orderExampleFactory = null,
     ) {
         if ($orderExampleFactory === null) {
             Assert::isInstanceOf($productRepository, ProductRepositoryInterface::class);

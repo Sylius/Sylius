@@ -28,7 +28,7 @@
             <tag name="sylius.open_api.modifier" />
         </service>
 
-        <service id="Sylius\Bundle\ApiBundle\OpenApi\Documentation\AdminAuthenticationTokenDocumentationModifier">
+        <service id="Sylius\Bundle\ApiBundle\OpenApi\Documentation\AdministratorDocumentationModifier">
             <argument>%sylius.security.new_api_route%</argument>
             <tag name="sylius.open_api.modifier" />
         </service>
@@ -47,9 +47,8 @@
             <tag name="sylius.open_api.modifier" />
         </service>
 
-        <service id="Sylius\Bundle\ApiBundle\OpenApi\Documentation\ProductImageDocumentationModifier">
-            <argument type="service" id="Sylius\Bundle\ApiBundle\Provider\ProductImageFilterProviderInterface" />
-            <argument>%sylius.security.new_api_route%</argument>
+        <service id="Sylius\Bundle\ApiBundle\OpenApi\Documentation\ImageDocumentationModifier">
+            <argument type="service" id="Sylius\Bundle\ApiBundle\Provider\ImageFiltersProviderInterface" />
             <tag name="sylius.open_api.modifier" />
         </service>
 
@@ -68,15 +67,21 @@
         </service>
 
         <service id="Sylius\Bundle\ApiBundle\OpenApi\Documentation\ShippingMethodDocumentationModifier">
-            <tag name="sylius.open_api.modifier" />
-        </service>
-
-        <service id="Sylius\Bundle\ApiBundle\OpenApi\Documentation\ShopAuthenticationTokenDocumentationModifier">
             <argument>%sylius.security.new_api_route%</argument>
+            <argument>%sylius.shipping_method_rules%</argument>
+            <argument>%sylius.shipping_calculators%</argument>
             <tag name="sylius.open_api.modifier" />
         </service>
 
         <service id="Sylius\Bundle\ApiBundle\OpenApi\Documentation\CustomerDocumentationModifier">
+            <argument>%sylius.security.new_api_route%</argument>
+            <tag name="sylius.open_api.modifier" />
+        </service>
+
+        <service id="Sylius\Bundle\ApiBundle\OpenApi\Documentation\StatisticsDocumentationModifier">
+            <argument>%sylius.security.new_api_route%</argument>
+            <argument type="service" id="Sylius\Calendar\Provider\DateTimeProviderInterface" />
+            <argument>%sylius_core.orders_statistics.intervals_map%</argument>
             <tag name="sylius.open_api.modifier" />
         </service>
 

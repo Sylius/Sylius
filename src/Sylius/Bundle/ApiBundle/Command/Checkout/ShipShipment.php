@@ -15,7 +15,6 @@ namespace Sylius\Bundle\ApiBundle\Command\Checkout;
 
 use Sylius\Bundle\ApiBundle\Command\ShipmentIdAwareInterface;
 
-/** @experimental */
 class ShipShipment implements ShipmentIdAwareInterface
 {
     /** @var int|null */

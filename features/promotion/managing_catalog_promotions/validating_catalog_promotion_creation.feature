@@ -12,11 +12,30 @@ Feature: Validating a catalog promotion creation
         And this product has "Python T-Shirt" variant priced at "$40.00"
         And I am logged in as an administrator
 
+    @api @no-ui
+    Scenario: Trying to add catalog promotion with translation in unexisting locale
+        When I want to create a new catalog promotion
+        And I specify its code as "winter_sale"
+        And I name it "Winter sale"
+        And I specify its label as "Vente -50%" in "French (France)"
+        And I save my changes
+        Then I should be notified that the locale is not available
+
     @api @ui
     Scenario: Trying to create a catalog promotion without specifying its code and name
         When I create a new catalog promotion without specifying its code and name
         Then I should be notified that code and name are required
         And there should be an empty list of catalog promotions
+
+    @api @ui
+    Scenario: Trying to create a catalog promotion with a too long code
+        When I want to create a new catalog promotion
+        And I name it "Winter sale"
+        And I specify its label as "Winter -50%" in "English (United States)"
+        And I describe it as "This promotion gives a 50% discount on all products" in "English (United States)"
+        And I specify a too long code
+        And I try to add it
+        Then I should be notified that code is too long
 
     @api @ui
     Scenario: Trying to create a catalog promotion with taken code
@@ -75,7 +94,7 @@ Feature: Validating a catalog promotion creation
         Then I should be notified that type of action is invalid
         And there should be an empty list of catalog promotions
 
-    @api @ui @javascript
+    @api @ui @mink:chromedriver
     Scenario: Trying to create a catalog promotion with not configured percentage discount action
         When I want to create a new catalog promotion
         And I specify its code as "winter_sale"
@@ -86,10 +105,10 @@ Feature: Validating a catalog promotion creation
         And I add scope that applies on variants "PHP T-Shirt" variant and "Kotlin T-Shirt" variant
         And I add percentage discount action without amount configured
         And I try to add it
-        Then I should be notified that a discount amount should be a number and cannot be empty
+        Then I should be notified that the percentage amount should be a number and cannot be empty
         And there should be an empty list of catalog promotions
 
-    @api @ui @javascript
+    @api @ui @mink:chromedriver
     Scenario: Trying to create a catalog promotion with wrong amount of percentage discount action
         When I want to create a new catalog promotion
         And I specify its code as "winter_sale"
@@ -103,7 +122,7 @@ Feature: Validating a catalog promotion creation
         Then I should be notified that a discount amount should be between 0% and 100%
         And there should be an empty list of catalog promotions
 
-    @api @ui @javascript
+    @api @ui @mink:chromedriver
     Scenario: Trying to create a catalog promotion with wrong value of percentage discount action
         When I want to create a new catalog promotion
         And I specify its code as "winter_sale"
@@ -111,10 +130,10 @@ Feature: Validating a catalog promotion creation
         And I add scope that applies on variants "PHP T-Shirt" variant and "Kotlin T-Shirt" variant
         And I add invalid percentage discount action with non number in amount
         And I try to add it
-        Then I should be notified that a discount amount should be a number and cannot be empty
+        Then I should be notified that the percentage amount should be a number and cannot be empty
         And there should be an empty list of catalog promotions
 
-    @api @ui @javascript
+    @api @ui @mink:chromedriver
     Scenario: Trying to create a catalog promotion with not configured fixed discount action
         When I want to create a new catalog promotion
         And I specify its code as "winter_sale"
@@ -123,9 +142,9 @@ Feature: Validating a catalog promotion creation
         And I specify its label as "Winter -50%" in "English (United States)"
         And I describe it as "This promotion gives a $10.00 discount on every product" in "English (United States)"
         And I add scope that applies on variants "PHP T-Shirt" variant and "Kotlin T-Shirt" variant
-        And I add fixed discount action without amount configured
+        And I add fixed discount action without amount configured for the "United States" channel
         And I try to add it
-        Then I should be notified that a discount amount should be configured for at least one channel
+        Then I should be notified that the fixed amount should be a number and cannot be empty
         And there should be an empty list of catalog promotions
 
     @api
@@ -139,7 +158,7 @@ Feature: Validating a catalog promotion creation
         And I add scope that applies on variants "PHP T-Shirt" variant and "Kotlin T-Shirt" variant
         And I add invalid fixed discount action with non number in amount for the "United States" channel
         And I try to add it
-        Then I should be notified that a discount amount should be configured for at least one channel
+        Then I should be notified that the fixed amount should be a number and cannot be empty
         And there should be an empty list of catalog promotions
 
     @api

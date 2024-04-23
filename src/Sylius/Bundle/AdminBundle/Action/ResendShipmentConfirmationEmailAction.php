@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Bundle\AdminBundle\Action;
 
 use Sylius\Bundle\AdminBundle\EmailManager\ShipmentEmailManagerInterface;
+use Sylius\Bundle\CoreBundle\MessageDispatcher\ResendShipmentConfirmationEmailDispatcherInterface;
 use Sylius\Bundle\CoreBundle\Provider\FlashBagProvider;
 use Sylius\Component\Core\Model\ShipmentInterface;
 use Sylius\Component\Core\Repository\ShipmentRepositoryInterface;
@@ -31,7 +32,7 @@ final class ResendShipmentConfirmationEmailAction
 {
     public function __construct(
         private ShipmentRepositoryInterface $shipmentRepository,
-        private ShipmentEmailManagerInterface $shipmentEmailManager,
+        private ResendShipmentConfirmationEmailDispatcherInterface|ShipmentEmailManagerInterface $shipmentEmailManager,
         private CsrfTokenManagerInterface $csrfTokenManager,
         private RequestStack|SessionInterface $requestStackOrSession,
     ) {
@@ -43,6 +44,24 @@ final class ResendShipmentConfirmationEmailAction
                 SessionInterface::class,
                 self::class,
                 RequestStack::class,
+            );
+        }
+
+        if ($this->shipmentEmailManager instanceof ShipmentEmailManagerInterface) {
+            trigger_deprecation(
+                'sylius/admin-bundle',
+                '1.13',
+                'Passing an instance of %s as constructor argument for %s is deprecated and will be removed in Sylius 2.0. Pass an instance of %s instead.',
+                ShipmentEmailManagerInterface::class,
+                self::class,
+                ResendShipmentConfirmationEmailDispatcherInterface::class,
+            );
+
+            trigger_deprecation(
+                'sylius/admin-bundle',
+                '1.13',
+                'The argument name $shipmentEmailManager in the constructor of %s is deprecated and will be renamed to $resendShipmentConfirmationDispatcher in Sylius 2.0.',
+                self::class,
             );
         }
     }
@@ -63,7 +82,7 @@ final class ResendShipmentConfirmationEmailAction
             throw new NotFoundHttpException(sprintf('The shipment with id %s has not been found', $shipmentId));
         }
 
-        $this->shipmentEmailManager->sendConfirmationEmail($shipment);
+        $this->sendConfirmationEmailOrDispatchResendShipmentConfirmation($shipment);
 
         FlashBagProvider
             ::getFlashBag($this->requestStackOrSession)
@@ -71,5 +90,14 @@ final class ResendShipmentConfirmationEmailAction
         ;
 
         return new RedirectResponse($request->headers->get('referer'));
+    }
+
+    private function sendConfirmationEmailOrDispatchResendShipmentConfirmation(ShipmentInterface $shipment): void
+    {
+        if ($this->shipmentEmailManager instanceof ShipmentEmailManagerInterface) {
+            $this->shipmentEmailManager->sendConfirmationEmail($shipment);
+        } else {
+            $this->shipmentEmailManager->dispatch($shipment);
+        }
     }
 }

@@ -15,7 +15,8 @@ namespace spec\Sylius\Bundle\ApiBundle\CommandHandler\Checkout;
 
 use PhpSpec\ObjectBehavior;
 use SM\Factory\FactoryInterface;
-use SM\StateMachine\StateMachineInterface;
+use SM\StateMachine\StateMachineInterface as WinzouStateMachineInterface;
+use Sylius\Abstraction\StateMachine\StateMachineInterface;
 use Sylius\Bundle\ApiBundle\Command\Cart\InformAboutCartRecalculation;
 use Sylius\Bundle\ApiBundle\Command\Checkout\CompleteOrder;
 use Sylius\Bundle\ApiBundle\CommandHandler\Checkout\Exception\OrderTotalHasChangedException;
@@ -47,7 +48,7 @@ final class CompleteOrderHandlerSpec extends ObjectBehavior
         FactoryInterface $stateMachineFactory,
         MessageBusInterface $eventBus,
         OrderPromotionsIntegrityCheckerInterface $orderPromotionsIntegrityChecker,
-        StateMachineInterface $stateMachine,
+        WinzouStateMachineInterface $stateMachine,
         OrderInterface $order,
         CustomerInterface $customer,
     ): void {
@@ -80,12 +81,51 @@ final class CompleteOrderHandlerSpec extends ObjectBehavior
         $this($completeOrder)->shouldReturn($order);
     }
 
+    function it_uses_the_new_state_machine_abstraction_if_passed(
+        OrderRepositoryInterface $orderRepository,
+        StateMachineInterface $stateMachine,
+        MessageBusInterface $commandBus,
+        MessageBusInterface $eventBus,
+        OrderPromotionsIntegrityCheckerInterface $orderPromotionsIntegrityChecker,
+        OrderInterface $order,
+        CustomerInterface $customer,
+    ): void {
+        $this->beConstructedWith($orderRepository, $stateMachine, $commandBus, $eventBus, $orderPromotionsIntegrityChecker);
+
+        $completeOrder = new CompleteOrder();
+        $completeOrder->setOrderTokenValue('ORDERTOKEN');
+
+        $orderRepository->findOneBy(['tokenValue' => 'ORDERTOKEN'])->willReturn($order);
+
+        $order->getCustomer()->willReturn($customer);
+        $order->getTotal()->willReturn(1500);
+
+        $order->setNotes(null)->shouldNotBeCalled();
+
+        $orderPromotionsIntegrityChecker->check($order)->willReturn(null);
+
+        $stateMachine->can($order, OrderCheckoutTransitions::GRAPH, 'complete')->willReturn(true);
+        $order->getTokenValue()->willReturn('COMPLETED_ORDER_TOKEN');
+
+        $stateMachine->apply($order, OrderCheckoutTransitions::GRAPH, 'complete')->shouldBeCalled();
+
+        $orderCompleted = new OrderCompleted('COMPLETED_ORDER_TOKEN');
+
+        $eventBus
+            ->dispatch($orderCompleted, [new DispatchAfterCurrentBusStamp()])
+            ->willReturn(new Envelope($orderCompleted))
+            ->shouldBeCalled()
+        ;
+
+        $this($completeOrder)->shouldReturn($order);
+    }
+
     function it_handles_order_completion_with_notes(
         OrderRepositoryInterface $orderRepository,
         FactoryInterface $stateMachineFactory,
         MessageBusInterface $eventBus,
         OrderPromotionsIntegrityCheckerInterface $orderPromotionsIntegrityChecker,
-        StateMachineInterface $stateMachine,
+        WinzouStateMachineInterface $stateMachine,
         OrderInterface $order,
         CustomerInterface $customer,
     ): void {
@@ -190,7 +230,7 @@ final class CompleteOrderHandlerSpec extends ObjectBehavior
         OrderRepositoryInterface $orderRepository,
         FactoryInterface $stateMachineFactory,
         OrderPromotionsIntegrityCheckerInterface $orderPromotionsIntegrityChecker,
-        StateMachineInterface $stateMachine,
+        WinzouStateMachineInterface $stateMachine,
         OrderInterface $order,
         CustomerInterface $customer,
     ): void {

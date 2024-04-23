@@ -25,9 +25,9 @@
         }
     ],
     "require": {
-        "php": "^8.0",
+        "php": "^8.1",
         "sylius/resource": "^1.9",
-        "symfony/intl": "^5.4.21 || ^6.0",
+        "symfony/intl": "^5.4.21 || ^6.4",
         "laminas/laminas-stdlib": "^3.3.1"
     },
     "require-dev": {
@@ -40,7 +40,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "1.12-dev"
+            "dev-main": "1.13-dev"
         }
     },
     "autoload": {

@@ -31,7 +31,7 @@ final class Resources
 
     public const CHANNELS = 'channels';
 
-    public const CONTACT_REQUESTS = 'contact-requests';
+    public const CONTACT = 'contact';
 
     public const COUNTRIES = 'countries';
 

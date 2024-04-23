@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Bundle\ApiBundle\DataPersister;
 
 use ApiPlatform\Core\DataPersister\ContextAwareDataPersisterInterface;
-use Sylius\Bundle\LocaleBundle\Checker\Exception\LocaleIsUsedException;
+use Sylius\Bundle\ApiBundle\Exception\LocaleIsUsedException;
 use Sylius\Bundle\LocaleBundle\Checker\LocaleUsageCheckerInterface;
 use Sylius\Component\Locale\Model\LocaleInterface;
 

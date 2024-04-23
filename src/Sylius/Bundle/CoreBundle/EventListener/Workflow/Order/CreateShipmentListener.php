@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\EventListener\Workflow\Order;
 
-use Sylius\Bundle\CoreBundle\StateMachine\StateMachineInterface;
+use Sylius\Abstraction\StateMachine\StateMachineInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Shipping\ShipmentTransitions;
 use Symfony\Component\Workflow\Event\CompletedEvent;
@@ -34,7 +34,9 @@ final class CreateShipmentListener
         $shipments = $order->getShipments();
 
         foreach ($shipments as $shipment) {
-            $this->compositeStateMachine->apply($shipment, ShipmentTransitions::GRAPH, ShipmentTransitions::TRANSITION_CREATE);
+            if ($this->compositeStateMachine->can($shipment, ShipmentTransitions::GRAPH, ShipmentTransitions::TRANSITION_CREATE)) {
+                $this->compositeStateMachine->apply($shipment, ShipmentTransitions::GRAPH, ShipmentTransitions::TRANSITION_CREATE);
+            }
         }
     }
 }

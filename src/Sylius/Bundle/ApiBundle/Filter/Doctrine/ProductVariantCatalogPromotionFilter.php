@@ -23,16 +23,15 @@ use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Serializer\NameConverter\NameConverterInterface;
 
-/** @experimental */
 final class ProductVariantCatalogPromotionFilter extends AbstractContextAwareFilter
 {
     public function __construct(
         private IriConverterInterface $iriConverter,
         ManagerRegistry $managerRegistry,
         ?RequestStack $requestStack = null,
-        LoggerInterface $logger = null,
-        array $properties = null,
-        NameConverterInterface $nameConverter = null,
+        ?LoggerInterface $logger = null,
+        ?array $properties = null,
+        ?NameConverterInterface $nameConverter = null,
     ) {
         parent::__construct($managerRegistry, $requestStack, $logger, $properties, $nameConverter);
     }
@@ -43,7 +42,7 @@ final class ProductVariantCatalogPromotionFilter extends AbstractContextAwareFil
         QueryBuilder $queryBuilder,
         QueryNameGeneratorInterface $queryNameGenerator,
         string $resourceClass,
-        string $operationName = null,
+        ?string $operationName = null,
     ): void {
         if ('catalogPromotion' !== $property) {
             return;

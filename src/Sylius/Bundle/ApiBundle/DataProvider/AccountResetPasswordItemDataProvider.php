@@ -17,15 +17,14 @@ use ApiPlatform\Core\DataProvider\ItemDataProviderInterface;
 use ApiPlatform\Core\DataProvider\RestrictedDataProviderInterface;
 use Sylius\Bundle\ApiBundle\Command\Account\ResetPassword;
 
-/** @experimental */
 final class AccountResetPasswordItemDataProvider implements RestrictedDataProviderInterface, ItemDataProviderInterface
 {
-    public function getItem(string $resourceClass, $id, string $operationName = null, array $context = [])
+    public function getItem(string $resourceClass, $id, ?string $operationName = null, array $context = [])
     {
         return new ResetPassword($id);
     }
 
-    public function supports(string $resourceClass, string $operationName = null, array $context = []): bool
+    public function supports(string $resourceClass, ?string $operationName = null, array $context = []): bool
     {
         return is_a($resourceClass, ResetPassword::class, true);
     }

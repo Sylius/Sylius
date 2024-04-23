@@ -1,0 +1,13 @@
+{
+    "@context": "\/api\/v2\/contexts\/ConstraintViolationList",
+    "@type": "ConstraintViolationList",
+    "hydra:title": "An error occurred",
+    "hydra:description": "code: This value is not a valid currency code.",
+    "violations": [
+        {
+            "propertyPath": "code",
+            "message": "This value is not a valid currency code.",
+            "code": @string@
+        }
+    ]
+}

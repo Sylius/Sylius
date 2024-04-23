@@ -21,7 +21,6 @@ use Sylius\Bundle\ApiBundle\Serializer\ContextKeys;
 use Sylius\Component\Core\Model\ProductInterface;
 use Webmozart\Assert\Assert;
 
-/** @experimental */
 final class ProductPriceOrderFilter extends AbstractContextAwareFilter
 {
     protected function filterProperty(
@@ -30,7 +29,7 @@ final class ProductPriceOrderFilter extends AbstractContextAwareFilter
         QueryBuilder $queryBuilder,
         QueryNameGeneratorInterface $queryNameGenerator,
         string $resourceClass,
-        string $operationName = null,
+        ?string $operationName = null,
         array $context = [],
     ): void {
         if ('order' !== $property || !isset($value['price'])) {

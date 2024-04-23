@@ -23,7 +23,6 @@ use Sylius\Component\Core\Model\AdminUserInterface;
 use Sylius\Component\Currency\Model\ExchangeRate;
 use Webmozart\Assert\Assert;
 
-/** @experimental */
 final class ExchangeRateExtension implements ContextAwareQueryCollectionExtensionInterface, QueryItemExtensionInterface
 {
     public function __construct(private UserContextInterface $userContext)
@@ -34,7 +33,7 @@ final class ExchangeRateExtension implements ContextAwareQueryCollectionExtensio
         QueryBuilder $queryBuilder,
         QueryNameGeneratorInterface $queryNameGenerator,
         string $resourceClass,
-        string $operationName = null,
+        ?string $operationName = null,
         array $context = [],
     ): void {
         if (!is_a($resourceClass, ExchangeRate::class, true)) {
@@ -63,7 +62,7 @@ final class ExchangeRateExtension implements ContextAwareQueryCollectionExtensio
         ;
     }
 
-    public function applyToItem(QueryBuilder $queryBuilder, QueryNameGeneratorInterface $queryNameGenerator, string $resourceClass, array $identifiers, string $operationName = null, array $context = [])
+    public function applyToItem(QueryBuilder $queryBuilder, QueryNameGeneratorInterface $queryNameGenerator, string $resourceClass, array $identifiers, ?string $operationName = null, array $context = [])
     {
         $this->applyToCollection($queryBuilder, $queryNameGenerator, $resourceClass, $operationName, $context);
     }

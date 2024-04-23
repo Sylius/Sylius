@@ -14,6 +14,8 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
+use FriendsOfBehat\PageObjectExtension\Page\SymfonyPageInterface;
+use Sylius\Behat\Context\Ui\Admin\Helper\ValidationTrait;
 use Sylius\Behat\NotificationType;
 use Sylius\Behat\Page\Admin\ProductVariant\CreatePageInterface;
 use Sylius\Behat\Page\Admin\ProductVariant\GeneratePageInterface;
@@ -29,6 +31,10 @@ use Webmozart\Assert\Assert;
 
 final class ManagingProductVariantsContext implements Context
 {
+    private const HUGE_NUMBER = '2147483647';
+
+    use ValidationTrait;
+
     public function __construct(
         private SharedStorageInterface $sharedStorage,
         private CreatePageInterface $createPage,
@@ -52,7 +58,7 @@ final class ManagingProductVariantsContext implements Context
      * @When I specify its code as :code
      * @When I do not specify its code
      */
-    public function iSpecifyItsCodeAs($code = null)
+    public function iSpecifyItsCodeAs(?string $code = null): void
     {
         $this->createPage->specifyCode($code ?? '');
     }
@@ -108,6 +114,30 @@ final class ManagingProductVariantsContext implements Context
     }
 
     /**
+     * @When I set its price to a huge number for the :channel channel
+     */
+    public function iSetItsPriceToHugeNumberForTheChannel(ChannelInterface $channel): void
+    {
+        $this->iSetItsPriceTo(self::HUGE_NUMBER, $channel);
+    }
+
+    /**
+     * @When I set its original price to a huge number for the :channel channel
+     */
+    public function iSetItsOriginalPriceToHugeNumberForTheChannel(ChannelInterface $channel): void
+    {
+        $this->iSetItsOriginalPriceTo(self::HUGE_NUMBER, $channel);
+    }
+
+    /**
+     * @When I set its minimum price to a huge number for the :channel channel
+     */
+    public function iSetItsMinimumPriceAsOutOfRangeValueForChannel(ChannelInterface $channel): void
+    {
+        $this->iSetItsMinimumPriceTo(self::HUGE_NUMBER, $channel);
+    }
+
+    /**
      * @When /^I set its price to "-(?:€|£|\$)([^"]+)" for ("([^"]+)" channel)$/
      */
     public function iSetItsNegativePriceTo(string $price, ChannelInterface $channel): void
@@ -134,9 +164,25 @@ final class ManagingProductVariantsContext implements Context
     /**
      * @When /^I set its original price to "(?:€|£|\$)([^"]+)" for ("([^"]+)" channel)$/
      */
-    public function iSetItsOriginalPriceTo($originalPrice, ChannelInterface $channel)
+    public function iSetItsOriginalPriceTo(string $originalPrice, ChannelInterface $channel)
     {
         $this->createPage->specifyOriginalPrice($originalPrice, $channel);
+    }
+
+    /**
+     * @When /^I set its minimum price to "-(?:€|£|\$)([^"]+)" for ("([^"]+)" channel)$/
+     */
+    public function iSetItsNegativeMinimumPriceTo(string $price, ChannelInterface $channel): void
+    {
+        $this->createPage->specifyMinimumPrice('-' . $price, $channel);
+    }
+
+    /**
+     * @When /^I set its original price to "-(?:€|£|\$)([^"]+)" for ("([^"]+)" channel)$/
+     */
+    public function iSetItsNegativeOriginalPriceTo(string $originalPrice, ChannelInterface $channel)
+    {
+        $this->createPage->specifyOriginalPrice('-' . $originalPrice, $channel);
     }
 
     /**
@@ -484,6 +530,17 @@ final class ManagingProductVariantsContext implements Context
     }
 
     /**
+     * @Then I should be notified that price cannot be greater than max value allowed
+     */
+    public function iShouldBeNotifiedThatPriceCannotBeGreaterThanMaxValueAllowed(): void
+    {
+        /** @var CreatePageInterface|UpdatePageInterface $currentPage */
+        $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
+
+        Assert::contains($currentPage->getPricesValidationMessage(), sprintf('Value must be less than %s.', self::HUGE_NUMBER));
+    }
+
+    /**
      * @Then I should be notified that this variant already exists
      */
     public function iShouldBeNotifiedThatThisVariantAlreadyExists()
@@ -704,5 +761,10 @@ final class ManagingProductVariantsContext implements Context
         $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
 
         Assert::same($currentPage->getValidationMessage($element), $message);
+    }
+
+    protected function resolveCurrentPage(): SymfonyPageInterface
+    {
+        return $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
     }
 }

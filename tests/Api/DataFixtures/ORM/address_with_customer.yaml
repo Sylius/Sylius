@@ -9,8 +9,6 @@ Sylius\Component\Core\Model\Address:
         city: "New York"
         postcode: "00000"
         phoneNumber: "123456789"
-        provinceCode: "999"
-        provinceName: "east"
 
 Sylius\Component\Core\Model\ShopUser:
     shop_user_{tony}:

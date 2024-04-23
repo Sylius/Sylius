@@ -17,6 +17,7 @@ use ApiPlatform\Api\IriConverterInterface;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
+use Sylius\Behat\Context\Api\Admin\Helper\ValidationTrait;
 use Sylius\Behat\Context\Api\Resources;
 use Sylius\Behat\Service\Converter\SectionAwareIriConverterInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
@@ -31,6 +32,8 @@ use Webmozart\Assert\Assert;
 
 final class ManagingShippingMethodsContext implements Context
 {
+    use ValidationTrait;
+
     public const SORT_TYPES = ['ascending' => 'asc', 'descending' => 'desc'];
 
     public function __construct(
@@ -283,7 +286,7 @@ final class ManagingShippingMethodsContext implements Context
      * @When /^I define it for the (zone named "[^"]+")$/
      * @When I do not specify its zone
      */
-    public function iDefineItForTheZone(ZoneInterface $zone = null): void
+    public function iDefineItForTheZone(?ZoneInterface $zone = null): void
     {
         if (null !== $zone) {
             $this->client->addRequestData('zone', $this->iriConverter->getIriFromResource($zone));

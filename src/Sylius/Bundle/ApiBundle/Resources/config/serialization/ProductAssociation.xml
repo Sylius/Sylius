@@ -17,22 +17,38 @@
 >
     <class name="Sylius\Component\Product\Model\ProductAssociation">
         <attribute name="id">
-            <group>shop:product_association:read</group>
+            <group>shop:product_association:show</group>
+            <group>sylius:shop:product_association:show</group>
         </attribute>
         <attribute name="type">
-            <group>admin:product_association:read</group>
+            <group>admin:product_association:index</group>
+            <group>sylius:admin:product_association:index</group>
+            <group>admin:product_association:show</group>
+            <group>sylius:admin:product_association:show</group>
             <group>admin:product_association:create</group>
-            <group>shop:product_association:read</group>
+            <group>sylius:admin:product_association:create</group>
+            <group>shop:product_association:show</group>
+            <group>sylius:shop:product_association:show</group>
         </attribute>
         <attribute name="owner">
-            <group>admin:product_association:read</group>
+            <group>admin:product_association:index</group>
+            <group>sylius:admin:product_association:index</group>
+            <group>admin:product_association:show</group>
+            <group>sylius:admin:product_association:show</group>
             <group>admin:product_association:create</group>
+            <group>sylius:admin:product_association:create</group>
         </attribute>
         <attribute name="associatedProducts">
-            <group>admin:product_association:read</group>
+            <group>admin:product_association:index</group>
+            <group>sylius:admin:product_association:index</group>
+            <group>admin:product_association:show</group>
+            <group>sylius:admin:product_association:show</group>
             <group>admin:product_association:create</group>
+            <group>sylius:admin:product_association:create</group>
             <group>admin:product_association:update</group>
-            <group>shop:product_association:read</group>
+            <group>sylius:admin:product_association:update</group>
+            <group>shop:product_association:show</group>
+            <group>sylius:shop:product_association:show</group>
         </attribute>
     </class>
 </serializer>

@@ -26,7 +26,7 @@ final class ChannelsTest extends JsonApiTestCase
         $this->client->request(method: 'GET', uri: '/api/v2/shop/channels', server: self::CONTENT_TYPE_HEADER);
         $response = $this->client->getResponse();
 
-        $this->assertResponse($response, 'shop/get_channels_response', Response::HTTP_OK);
+        $this->assertResponse($response, 'shop/channel/get_channels_response', Response::HTTP_OK);
     }
 
     /** @test */
@@ -46,6 +46,6 @@ final class ChannelsTest extends JsonApiTestCase
         $this->client->request(method: 'GET', uri: '/api/v2/shop/channels/WEB', server: self::CONTENT_TYPE_HEADER);
         $response = $this->client->getResponse();
 
-        $this->assertResponse($response, 'shop/get_channel_by_code_response', Response::HTTP_OK);
+        $this->assertResponse($response, 'shop/channel/get_channel_by_code_response', Response::HTTP_OK);
     }
 }

@@ -15,6 +15,7 @@ default:
 
     extensions:
         DMore\ChromeExtension\Behat\ServiceContainer\ChromeExtension: ~
+        Robertfausk\Behat\PantherExtension: ~
 
         FriendsOfBehat\MinkDebugExtension:
             directory: etc/build
@@ -25,11 +26,11 @@ default:
             files_path: "%paths.base%/src/Sylius/Behat/Resources/fixtures/"
             base_url: "https://127.0.0.1:8080/"
             default_session: symfony
-            javascript_session: chrome_headless
+            javascript_session: panther
             sessions:
                 symfony:
                     symfony: ~
-                chrome_headless:
+                chromedriver:
                     chrome:
                         api_url: http://127.0.0.1:9222
                         validate_certificate: false
@@ -37,28 +38,18 @@ default:
                     chrome:
                         api_url: http://127.0.0.1:9222
                         validate_certificate: false
-                chrome:
-                    selenium2:
-                        browser: chrome
-                        capabilities:
-                            browserName: chrome
-                            browser: chrome
-                            version: ""
-                            marionette: null # https://github.com/Behat/MinkExtension/pull/311
-                            chrome:
-                                switches:
-                                    - "start-fullscreen"
-                                    - "start-maximized"
-                                    - "no-sandbox"
-                            extra_capabilities:
+                panther:
+                    panther:
+                        manager_options:
+                            connection_timeout_in_ms: 5000
+                            request_timeout_in_ms: 120000
+                            chromedriver_arguments:
+                                - --log-path=etc/build/chromedriver.log
+                                - --verbose
+                            capabilities:
                                 acceptSslCerts: true
                                 acceptInsecureCerts: true
                                 unexpectedAlertBehaviour: accept
-                                goog:chromeOptions:
-                                    w3c: false # https://github.com/Sylius/Sylius/issues/10561
-                firefox:
-                    selenium2:
-                        browser: firefox
             show_auto: false
 
         FriendsOfBehat\SymfonyExtension: ~

@@ -15,7 +15,7 @@ namespace Sylius\Behat\Context\Setup;
 
 use Behat\Behat\Context\Context;
 use Doctrine\ORM\EntityManagerInterface;
-use SM\Factory\FactoryInterface as StateMachineFactoryInterface;
+use Sylius\Abstraction\StateMachine\StateMachineInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Bundle\CoreBundle\CatalogPromotion\Calculator\FixedDiscountPriceCalculator;
 use Sylius\Bundle\CoreBundle\CatalogPromotion\Calculator\PercentageDiscountPriceCalculator;
@@ -47,7 +47,7 @@ final class CatalogPromotionContext implements Context
         private FactoryInterface $catalogPromotionActionFactory,
         private EntityManagerInterface $entityManager,
         private ChannelRepositoryInterface $channelRepository,
-        private StateMachineFactoryInterface $stateMachineFactory,
+        private StateMachineInterface $stateMachine,
         private MessageBusInterface $eventBus,
         private SharedStorageInterface $sharedStorage,
     ) {
@@ -755,9 +755,8 @@ final class CatalogPromotionContext implements Context
             return;
         }
 
-        $stateMachine = $this->stateMachineFactory->get($catalogPromotion, CatalogPromotionTransitions::GRAPH);
-        $stateMachine->apply(CatalogPromotionTransitions::TRANSITION_PROCESS);
-        $stateMachine->apply(CatalogPromotionTransitions::TRANSITION_ACTIVATE);
+        $this->stateMachine->apply($catalogPromotion, CatalogPromotionTransitions::GRAPH, CatalogPromotionTransitions::TRANSITION_PROCESS);
+        $this->stateMachine->apply($catalogPromotion, CatalogPromotionTransitions::GRAPH, CatalogPromotionTransitions::TRANSITION_ACTIVATE);
 
         $this->entityManager->flush();
     }
@@ -767,8 +766,7 @@ final class CatalogPromotionContext implements Context
      */
     public function theCatalogPromotionIsCurrentlyBeingProcessed(CatalogPromotionInterface $catalogPromotion): void
     {
-        $stateMachine = $this->stateMachineFactory->get($catalogPromotion, CatalogPromotionTransitions::GRAPH);
-        $stateMachine->apply(CatalogPromotionTransitions::TRANSITION_PROCESS);
+        $this->stateMachine->apply($catalogPromotion, CatalogPromotionTransitions::GRAPH, CatalogPromotionTransitions::TRANSITION_PROCESS);
 
         $this->entityManager->flush();
     }
@@ -857,7 +855,7 @@ final class CatalogPromotionContext implements Context
         array $channels = [],
         array $scopes = [],
         array $actions = [],
-        int $priority = null,
+        ?int $priority = null,
         bool $exclusive = false,
         ?string $startDate = null,
         ?string $endDate = null,

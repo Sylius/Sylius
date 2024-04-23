@@ -22,7 +22,6 @@ use Sylius\Component\Core\Model\AdminUserInterface;
 use Sylius\Component\Product\Model\ProductAssociationInterface;
 use Webmozart\Assert\Assert;
 
-/** @experimental */
 final class EnabledProductInProductAssociationItemExtension implements QueryItemExtensionInterface
 {
     public function __construct(private UserContextInterface $userContext)
@@ -34,7 +33,7 @@ final class EnabledProductInProductAssociationItemExtension implements QueryItem
         QueryNameGeneratorInterface $queryNameGenerator,
         string $resourceClass,
         array $identifiers,
-        string $operationName = null,
+        ?string $operationName = null,
         array $context = [],
     ) {
         if (!is_a($resourceClass, ProductAssociationInterface::class, true)) {

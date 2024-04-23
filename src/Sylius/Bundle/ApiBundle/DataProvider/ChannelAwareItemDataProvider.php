@@ -18,7 +18,6 @@ use Sylius\Bundle\ApiBundle\Serializer\ContextKeys;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Sylius\Component\Channel\Context\ChannelNotFoundException;
 
-/** @experimental */
 final class ChannelAwareItemDataProvider implements ItemDataProviderInterface
 {
     public function __construct(
@@ -27,7 +26,7 @@ final class ChannelAwareItemDataProvider implements ItemDataProviderInterface
     ) {
     }
 
-    public function getItem(string $resourceClass, $id, string $operationName = null, array $context = []): ?object
+    public function getItem(string $resourceClass, $id, ?string $operationName = null, array $context = []): ?object
     {
         return $this->itemDataProvider->getItem($resourceClass, $id, $operationName, $this->processContext($context));
     }

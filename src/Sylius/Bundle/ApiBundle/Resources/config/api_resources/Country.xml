@@ -23,7 +23,10 @@
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/admin/countries</attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:country:read</attribute>
+                    <attribute name="groups">
+                        <attribute>admin:country:index</attribute>
+                        <attribute>sylius:admin:country:index</attribute>
+                    </attribute>
                 </attribute>
             </collectionOperation>
 
@@ -31,7 +34,10 @@
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/shop/countries</attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">shop:country:read</attribute>
+                    <attribute name="groups">
+                        <attribute>shop:country:index</attribute>
+                        <attribute>sylius:shop:country:index</attribute>
+                    </attribute>
                 </attribute>
             </collectionOperation>
 
@@ -39,10 +45,16 @@
                 <attribute name="method">POST</attribute>
                 <attribute name="path">/admin/countries</attribute>
                 <attribute name="denormalization_context">
-                    <attribute name="groups">admin:country:create</attribute>
+                    <attribute name="groups">
+                        <attribute>admin:country:create</attribute>
+                        <attribute>sylius:admin:country:create</attribute>
+                    </attribute>
                 </attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:country:read</attribute>
+                    <attribute name="groups">
+                        <attribute>admin:country:show</attribute>
+                        <attribute>sylius:admin:country:show</attribute>
+                    </attribute>
                 </attribute>
             </collectionOperation>
         </collectionOperations>
@@ -52,14 +64,20 @@
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/admin/countries/{code}</attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:country:read</attribute>
+                    <attribute name="groups">
+                        <attribute>admin:country:show</attribute>
+                        <attribute>sylius:admin:country:show</attribute>
+                    </attribute>
                 </attribute>
             </itemOperation>
             <itemOperation name="shop_get">
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/shop/countries/{code}</attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">shop:country:read</attribute>
+                    <attribute name="groups">
+                        <attribute>shop:country:show</attribute>
+                        <attribute>sylius:shop:country:show</attribute>
+                    </attribute>
                 </attribute>
             </itemOperation>
 
@@ -67,10 +85,16 @@
                 <attribute name="method">PUT</attribute>
                 <attribute name="path">/admin/countries/{code}</attribute>
                 <attribute name="denormalization_context">
-                    <attribute name="groups">admin:country:update</attribute>
+                    <attribute name="groups">
+                        <attribute>admin:country:update</attribute>
+                        <attribute>sylius:admin:country:update</attribute>
+                    </attribute>
                 </attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:country:read</attribute>
+                    <attribute name="groups">
+                        <attribute>admin:country:show</attribute>
+                        <attribute>sylius:admin:country:show</attribute>
+                    </attribute>
                 </attribute>
             </itemOperation>
         </itemOperations>

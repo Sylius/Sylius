@@ -23,13 +23,13 @@
         }
     ],
     "require": {
-        "php": "^8.0",
+        "php": "^8.1",
         "doctrine/dbal": "^3.0",
         "api-platform/core": "^2.7.10",
         "enshrined/svg-sanitize": "^0.16",
         "lexik/jwt-authentication-bundle": "^2.11",
-        "sylius/core-bundle": "^1.12",
-        "symfony/messenger": "^5.4.21 || ^6.0"
+        "sylius/core-bundle": "^1.13",
+        "symfony/messenger": "^5.4.21 || ^6.4"
     },
     "require-dev": {
         "ext-sqlite3": "*",
@@ -40,16 +40,16 @@
         "phpspec/phpspec": "^7.2",
         "phpspec/prophecy-phpunit": "^2.0",
         "phpunit/phpunit": "^9.5",
-        "symfony/browser-kit": "^5.4.21 || ^6.0",
-        "symfony/debug-bundle": "^5.4.21 || ^6.0",
-        "symfony/dotenv": "^5.4.21 || ^6.0",
+        "symfony/browser-kit": "^5.4.21 || ^6.4",
+        "symfony/debug-bundle": "^5.4.21 || ^6.4",
+        "symfony/dotenv": "^5.4.21 || ^6.4",
         "symfony/webpack-encore-bundle": "^1.15",
         "theofidry/alice-data-fixtures": "^1.4"
     },
     "conflict": {
+        "api-platform/core": "2.7.17",
         "doctrine/doctrine-bundle": "2.3.0",
-        "lexik/jwt-authentication-bundle": "^2.18",
-        "symfony/doctrine-bridge": "4.4.20 || 5.2.4 || 5.2.5"
+        "lexik/jwt-authentication-bundle": "^2.18"
     },
     "config": {
         "allow-plugins": {
@@ -58,7 +58,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "1.12-dev"
+            "dev-main": "1.13-dev"
         }
     },
     "autoload": {
@@ -72,8 +72,8 @@
     },
     "autoload-dev": {
         "psr-4": {
+            "spec\\Sylius\\Bundle\\ApiBundle\\": "spec/",
             "Sylius\\Bundle\\ApiBundle\\Application\\": "Tests/Application/src/",
-            "Sylius\\Bundle\\ApiBundle\\spec\\": "spec/",
             "Sylius\\Bundle\\ApiBundle\\Tests\\": "Tests/"
         }
     },

@@ -22,7 +22,6 @@ use Sylius\Component\Core\Model\AdminUserInterface;
 use Sylius\Component\Currency\Model\CurrencyInterface;
 use Webmozart\Assert\Assert;
 
-/** @experimental */
 final class CurrencyCollectionExtension implements ContextAwareQueryCollectionExtensionInterface
 {
     public function __construct(private UserContextInterface $userContext)
@@ -33,7 +32,7 @@ final class CurrencyCollectionExtension implements ContextAwareQueryCollectionEx
         QueryBuilder $queryBuilder,
         QueryNameGeneratorInterface $queryNameGenerator,
         string $resourceClass,
-        string $operationName = null,
+        ?string $operationName = null,
         array $context = [],
     ): void {
         if (!is_a($resourceClass, CurrencyInterface::class, true)) {

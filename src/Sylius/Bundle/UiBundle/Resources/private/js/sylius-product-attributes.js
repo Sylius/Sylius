@@ -85,7 +85,8 @@ const copyValueToAllLanguages = function copyValueToAllLanguages() {
           input.checked = $masterAttributeInputs[i].checked;
         } else if (input.nodeName === 'SELECT') {
           for (let x = 0; x < $inputs[i].length; x++) {
-            input[x].selected = $masterAttributeInputs[i][x].selected;
+            const masterOption = Array.from($masterAttributeInputs[i].options).find((option) => option.value === input[x].value);
+            input[x].selected = masterOption ? masterOption.selected : false;
           }
         } else {
           input.value = $masterAttributeInputs[i].value;

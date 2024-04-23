@@ -17,7 +17,6 @@ use ApiPlatform\OpenApi\Model\PathItem;
 use ApiPlatform\OpenApi\Model\Paths;
 use ApiPlatform\OpenApi\OpenApi;
 
-/** @experimental */
 final class PathHiderDocumentationModifier implements DocumentationModifierInterface
 {
     /**

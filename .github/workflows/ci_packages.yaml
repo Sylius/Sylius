@@ -14,6 +14,9 @@ on:
                 required: true
                 type: string
 
+permissions:
+    contents: read
+
 jobs:
     get-matrix:
         runs-on: ubuntu-latest
@@ -23,13 +26,13 @@ jobs:
         steps:
             -   name: "Checkout (With Branch)"
                 if: "${{ inputs.branch != '' }}"
-                uses: actions/checkout@v3
+                uses: actions/checkout@v4
                 with:
                     ref: ${{ inputs.branch }}
 
             -   name: "Checkout"
                 if: "${{ inputs.branch == '' }}"
-                uses: actions/checkout@v3
+                uses: actions/checkout@v4
 
             -   name: "Get matrix"
                 id: matrix
@@ -46,13 +49,13 @@ jobs:
         steps:
             -   name: "Checkout (With Branch)"
                 if: "${{ inputs.branch != '' }}"
-                uses: actions/checkout@v3
+                uses: actions/checkout@v4
                 with:
                     ref: ${{ inputs.branch }}
 
             -   name: "Checkout"
                 if: "${{ inputs.branch == '' }}"
-                uses: actions/checkout@v3
+                uses: actions/checkout@v4
 
             -   name: "Get matrix"
                 id: matrix
@@ -72,20 +75,20 @@ jobs:
             matrix: ${{ fromJson(needs.get-matrix.outputs.matrix) }}
 
         env:
-            COMPOSER_ROOT_VERSION: "dev-master"
+            COMPOSER_ROOT_VERSION: "dev-main"
             SYMFONY_VERSION: "${{ matrix.symfony }}"
             UNSTABLE: "no"
 
         steps:
             -   name: "Checkout (With Branch)"
                 if: "${{ inputs.branch != '' }}"
-                uses: actions/checkout@v3
+                uses: actions/checkout@v4
                 with:
                     ref: ${{ inputs.branch }}
 
             -   name: "Checkout"
                 if: "${{ inputs.branch == '' }}"
-                uses: actions/checkout@v3
+                uses: actions/checkout@v4
 
             -   name: Setup PHP
                 uses: shivammathur/setup-php@v2
@@ -97,7 +100,7 @@ jobs:
                 if: matrix.symfony != ''
                 run: |
                     composer global config --no-plugins allow-plugins.symfony/flex true
-                    composer global require --no-progress --no-scripts --no-plugins "symfony/flex:1.18.5"
+                    composer global require --no-progress --no-scripts --no-plugins "symfony/flex:^2.4"
                     composer config extra.symfony.require "${{ matrix.symfony }}"
 
             -   name: Get Composer cache directory
@@ -105,7 +108,7 @@ jobs:
                 run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
 
             -   name: Cache Composer
-                uses: actions/cache@v3
+                uses: actions/cache@v4
                 with:
                     path: ${{ steps.composer-cache.outputs.dir }}
                     key: "${{ github.run_id }}-${{ runner.os }}-${{ hashFiles('composer.json') }}-symfony-${{ matrix.symfony }}-"
@@ -130,7 +133,7 @@ jobs:
 
         env:
             APP_ENV: "test_with_swiftmailer"
-            COMPOSER_ROOT_VERSION: "dev-master"
+            COMPOSER_ROOT_VERSION: "dev-main"
             SYMFONY_VERSION: "${{ matrix.symfony }}"
             USE_SWIFTMAILER: "yes"
             UNSTABLE: "no"
@@ -139,13 +142,13 @@ jobs:
         steps:
             -   name: "Checkout (With Branch)"
                 if: "${{ inputs.branch != '' }}"
-                uses: actions/checkout@v3
+                uses: actions/checkout@v4
                 with:
                     ref: ${{ inputs.branch }}
 
             -   name: "Checkout"
                 if: "${{ inputs.branch == '' }}"
-                uses: actions/checkout@v3
+                uses: actions/checkout@v4
 
             -   name: Setup PHP
                 uses: shivammathur/setup-php@v2
@@ -157,7 +160,7 @@ jobs:
                 if: matrix.symfony != ''
                 run: |
                     composer global config --no-plugins allow-plugins.symfony/flex true
-                    composer global require --no-progress --no-scripts --no-plugins "symfony/flex:1.18.5"
+                    composer global require --no-progress --no-scripts --no-plugins "symfony/flex:^2.4"
                     composer config extra.symfony.require "${{ matrix.symfony }}"
 
             -   name: Get Composer cache directory
@@ -165,7 +168,7 @@ jobs:
                 run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
 
             -   name: Cache Composer
-                uses: actions/cache@v3
+                uses: actions/cache@v4
                 with:
                     path: ${{ steps.composer-cache.outputs.dir }}
                     key: "${{ github.run_id }}-${{ runner.os }}-${{ hashFiles('composer.json') }}-symfony-${{ matrix.symfony }}-"

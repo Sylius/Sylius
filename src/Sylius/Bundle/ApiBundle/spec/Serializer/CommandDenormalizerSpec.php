@@ -30,52 +30,6 @@ final class CommandDenormalizerSpec extends ObjectBehavior
         $this->beConstructedWith($baseNormalizer, $nameConverter);
     }
 
-    function it_throws_exception_if_not_all_required_parameters_are_present_in_the_context(
-        DenormalizerInterface $baseNormalizer,
-    ): void {
-        $exception = new MissingConstructorArgumentsException('Missing constructor arguments', 400, null, ['firstName', 'lastName']);
-        $context = ['input' => ['class' => RegisterShopUser::class]];
-        $data = ['email' => 'test@example.com', 'password' => 'pa$$word'];
-        $baseNormalizer->denormalize($data, '', null, $context)->willThrow($exception);
-
-        $this
-            ->shouldThrow(new MissingConstructorArgumentsException(
-                'Request does not have the following required fields specified: firstName, lastName.',
-            ))
-            ->during('denormalize', [$data, '', null, $context]);
-    }
-
-    function it_throws_exception_for_mismatched_argument_type(
-        DenormalizerInterface $baseNormalizer,
-        AdvancedNameConverterInterface $nameConverter,
-    ): void {
-        $nameConverter->normalize('firstName', class: RegisterShopUser::class)->willReturn('first_name');
-        $previousException = NotNormalizableValueException::createForUnexpectedDataType('Not normalizable value', 1, ['string'], 'firstName');
-        $exception = new UnexpectedValueException('Unexpected value', 400, $previousException);
-        $context = ['input' => ['class' => RegisterShopUser::class]];
-        $data = ['firstName' => 1];
-        $baseNormalizer->denormalize($data, '', null, $context)->willThrow($exception);
-
-        $this
-            ->shouldThrow(new InvalidRequestArgumentException(
-                'Request field "first_name" should be of type "string".',
-            ))
-            ->during('denormalize', [$data, '', null, $context]);
-    }
-
-    function it_throws_the_same_exception_if_previous_exception_is_not_not_normalizable_value_exception(
-        DenormalizerInterface $baseNormalizer,
-    ): void {
-        $exception = new UnexpectedValueException('Unexpected value');
-        $context = ['input' => ['class' => RegisterShopUser::class]];
-        $data = ['firstName' => '1'];
-        $baseNormalizer->denormalize($data, '', null, $context)->willThrow($exception);
-
-        $this
-            ->shouldThrow(new UnexpectedValueException('Unexpected value'))
-            ->during('denormalize', [$data, '', null, $context]);
-    }
-
     function it_implements_context_aware_denormalizer_interface(): void
     {
         $this->shouldImplement(ContextAwareDenormalizerInterface::class);
@@ -83,11 +37,68 @@ final class CommandDenormalizerSpec extends ObjectBehavior
 
     function it_supports_denormalization_for_specified_input_class(): void
     {
-        $this->supportsDenormalization(null, '', null, ['input' => ['class' => 'Class']])->shouldReturn(true);
+        $this->supportsDenormalization(null, '', context: ['input' => ['class' => 'Class']])->shouldReturn(true);
     }
 
     function it_does_not_support_denormalization_for_not_specified_input_class(): void
     {
-        $this->supportsDenormalization(null, '', null, [])->shouldReturn(false);
+        $this->supportsDenormalization(null, '')->shouldReturn(false);
+    }
+
+    function it_throws_exception_if_not_all_required_parameters_are_present_in_the_context(
+        DenormalizerInterface $baseNormalizer,
+        AdvancedNameConverterInterface $nameConverter,
+    ): void {
+        $exception = new MissingConstructorArgumentsException('', 400, null, ['firstName', 'lastName']);
+        $context = ['input' => ['class' => RegisterShopUser::class]];
+        $data = ['email' => 'test@example.com', 'password' => 'pa$$word'];
+
+        $nameConverter->normalize('firstName', class: RegisterShopUser::class)->willReturn('first_name');
+        $nameConverter->normalize('lastName', class: RegisterShopUser::class)->willReturn('lastName');
+
+        $baseNormalizer->denormalize($data, '', null, $context)->willThrow($exception);
+
+        $this
+            ->shouldThrow(new MissingConstructorArgumentsException(
+                'Request does not have the following required fields specified: first_name, lastName.',
+            ))
+            ->during('denormalize', [$data, '', null, $context])
+        ;
+    }
+
+    function it_throws_exception_for_mismatched_argument_type(
+        DenormalizerInterface $baseNormalizer,
+        AdvancedNameConverterInterface $nameConverter,
+    ): void {
+        $previousException = NotNormalizableValueException::createForUnexpectedDataType('', 1, ['string'], 'firstName');
+        $exception = new UnexpectedValueException('', 400, $previousException);
+        $context = ['input' => ['class' => RegisterShopUser::class]];
+        $data = ['firstName' => 1];
+
+        $nameConverter->normalize('firstName', class: RegisterShopUser::class)->willReturn('first_name');
+
+        $baseNormalizer->denormalize($data, '', null, $context)->willThrow($exception);
+
+        $this
+            ->shouldThrow(new InvalidRequestArgumentException(
+                'Request field "first_name" should be of type "string".',
+            ))
+            ->during('denormalize', [$data, '', null, $context])
+        ;
+    }
+
+    function it_throws_the_same_exception_if_previous_exception_is_not_normalizable_value_exception(
+        DenormalizerInterface $baseNormalizer,
+    ): void {
+        $exception = new UnexpectedValueException('Unexpected value');
+        $context = ['input' => ['class' => RegisterShopUser::class]];
+        $data = ['firstName' => '1'];
+
+        $baseNormalizer->denormalize($data, '', null, $context)->willThrow($exception);
+
+        $this
+            ->shouldThrow(new UnexpectedValueException('Unexpected value'))
+            ->during('denormalize', [$data, '', null, $context])
+        ;
     }
 }

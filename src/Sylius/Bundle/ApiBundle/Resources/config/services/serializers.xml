@@ -65,10 +65,10 @@
             <tag name="serializer.normalizer" priority="64" />
         </service>
 
-        <service id="Sylius\Bundle\ApiBundle\Serializer\ProductImageNormalizer">
+        <service id="Sylius\Bundle\ApiBundle\Serializer\ImageNormalizer">
             <argument type="service" id="liip_imagine.cache.manager" />
             <argument type="service" id="request_stack" />
-            <argument type="string">%sylius_api.product_image_prefix%</argument>
+            <argument type="string">%sylius_api.default_image_filter%</argument>
             <tag name="serializer.normalizer" priority="64" />
         </service>
 
@@ -131,7 +131,15 @@
             <tag name="serializer.normalizer" priority="64" />
         </service>
 
-        <service id="Sylius\Bundle\ApiBundle\Serializer\TaxRateDenormalizer">
+        <service id="sylius.api.denormalizer.numeric_to_string.tax_rate" class="Sylius\Bundle\ApiBundle\Serializer\NumericToStringDenormalizer">
+            <argument type="string">%sylius.model.tax_rate.class%</argument>
+            <argument type="string">amount</argument>
+            <tag name="serializer.normalizer" priority="64" />
+        </service>
+
+        <service id="sylius.api.denormalizer.numeric_to_string.exchange_rate" class="Sylius\Bundle\ApiBundle\Serializer\NumericToStringDenormalizer">
+            <argument type="string">%sylius.model.exchange_rate.class%</argument>
+            <argument type="string">ratio</argument>
             <tag name="serializer.normalizer" priority="64" />
         </service>
 
@@ -142,6 +150,14 @@
 
         <service id="Sylius\Bundle\ApiBundle\Serializer\TranslatableLocaleKeyDenormalizer">
             <tag name="serializer.normalizer" priority="96" />
+        </service>
+
+        <service id="Sylius\Bundle\ApiBundle\Serializer\ProductVariantChannelPricingsChannelCodeKeyDenormalizer">
+            <tag name="serializer.normalizer" priority="96" />
+        </service>
+
+        <service id="Sylius\Bundle\ApiBundle\Serializer\DoctrineCollectionValuesNormalizer">
+            <tag name="serializer.normalizer" priority="64" />
         </service>
     </services>
 </container>

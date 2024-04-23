@@ -17,14 +17,13 @@ use ApiPlatform\Core\Serializer\SerializerContextBuilderInterface;
 use Sylius\Bundle\ApiBundle\Serializer\ContextKeys;
 use Symfony\Component\HttpFoundation\Request;
 
-/** @experimental */
 final class HttpRequestMethodTypeContextBuilder implements SerializerContextBuilderInterface
 {
     public function __construct(private SerializerContextBuilderInterface $decoratedLocaleBuilder)
     {
     }
 
-    public function createFromRequest(Request $request, bool $normalization, array $extractedAttributes = null): array
+    public function createFromRequest(Request $request, bool $normalization, ?array $extractedAttributes = null): array
     {
         $context = $this->decoratedLocaleBuilder->createFromRequest($request, $normalization, $extractedAttributes);
 

@@ -15,7 +15,6 @@ namespace Sylius\Bundle\ApiBundle\Command\Cart;
 
 use Sylius\Bundle\ApiBundle\Command\OrderTokenValueAwareInterface;
 
-/** @experimental */
 class RemoveItemFromCart implements OrderTokenValueAwareInterface
 {
     public function __construct(public ?string $orderTokenValue, public string $itemId)

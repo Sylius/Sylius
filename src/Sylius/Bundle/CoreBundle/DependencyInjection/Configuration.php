@@ -62,6 +62,36 @@ final class Configuration implements ConfigurationInterface
                     ->setDeprecated('sylius/sylius', '1.10', 'The "%path%.%node%" parameter is deprecated and will be removed in 2.0.')
                     ->defaultFalse()
                 ->end()
+                ->integerNode('max_int_value')->defaultValue(2147483647)->end()
+                ->arrayNode('orders_statistics')
+                    ->children()
+                        ->arrayNode('intervals_map')
+                            ->useAttributeAsKey('type')
+                            ->arrayPrototype()
+                                ->children()
+                                    ->scalarNode('interval')
+                                        ->cannotBeEmpty()
+                                        ->validate()
+                                            ->ifTrue(
+                                                function (mixed $interval) {
+                                                    try {
+                                                        new \DateInterval($interval);
+
+                                                        return false;
+                                                    } catch (\Exception $e) {
+                                                        return true;
+                                                    }
+                                                },
+                                            )
+                                            ->thenInvalid('Invalid format for interval "%s". Expected a string compatible with DateInterval.')
+                                        ->end()
+                                    ->end()
+                                    ->scalarNode('period_format')->cannotBeEmpty()->end()
+                                ->end()
+                            ->end()
+                        ->end()
+                    ->end()
+                ->end()
                 ->arrayNode('catalog_promotions')
                     ->addDefaultsIfNotSet()
                     ->children()

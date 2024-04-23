@@ -17,8 +17,8 @@ use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\Model\ProductInterface;
+use Sylius\Component\Core\Repository\OrderItemRepositoryInterface;
 use Sylius\Component\Order\Model\AdjustmentInterface;
-use Sylius\Component\Order\Repository\OrderItemRepositoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 
 final class OrderItemAdjustmentsSubresourceDataProviderSpec extends ObjectBehavior
@@ -42,21 +42,15 @@ final class OrderItemAdjustmentsSubresourceDataProviderSpec extends ObjectBehavi
         ;
     }
 
-    function it_throws_an_exception_if_order_item_with_given_id_does_not_exist(
+    function it_provides_empty_array_if_order_item_does_not_exist(
         OrderItemRepositoryInterface $orderItemRepository,
     ): void {
-        $context['subresource_identifiers'] = ['tokenValue' => 'TOKEN', 'items' => 11];
-        $orderItemRepository->find(11)->willReturn(null);
+        $context['subresource_identifiers'] = ['tokenValue' => 'TOKEN', 'items' => '11'];
+        $orderItemRepository->findOneByIdAndOrderTokenValue(11, 'TOKEN')->willReturn(null);
 
         $this
-            ->shouldThrow(\InvalidArgumentException::class)
-            ->during('getSubresource', [
-                AdjustmentInterface::class,
-                [],
-                $context,
-                Request::METHOD_GET,
-            ])
-        ;
+            ->getSubresource(AdjustmentInterface::class, [], $context, Request::METHOD_GET)
+            ->shouldReturn([]);
     }
 
     function it_returns_order_adjustments(
@@ -64,8 +58,8 @@ final class OrderItemAdjustmentsSubresourceDataProviderSpec extends ObjectBehavi
         OrderItemInterface $orderItem,
         AdjustmentInterface $adjustment,
     ): void {
-        $context['subresource_identifiers'] = ['tokenValue' => 'TOKEN', 'items' => 11];
-        $orderItemRepository->find(11)->willReturn($orderItem);
+        $context['subresource_identifiers'] = ['tokenValue' => 'TOKEN', 'items' => '11'];
+        $orderItemRepository->findOneByIdAndOrderTokenValue(11, 'TOKEN')->willReturn($orderItem);
 
         $orderItem->getAdjustmentsRecursively()->willReturn(new ArrayCollection([$adjustment->getWrappedObject()]));
 

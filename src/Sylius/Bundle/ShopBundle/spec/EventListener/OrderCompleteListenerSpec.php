@@ -14,7 +14,8 @@ declare(strict_types=1);
 namespace spec\Sylius\Bundle\ShopBundle\EventListener;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\ShopBundle\EmailManager\OrderEmailManagerInterface;
+use Sylius\Bundle\CoreBundle\Mailer\OrderEmailManagerInterface;
+use Sylius\Bundle\ShopBundle\EmailManager\OrderEmailManagerInterface as DeprecatedOrderEmailManagerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
@@ -30,6 +31,20 @@ final class OrderCompleteListenerSpec extends ObjectBehavior
         GenericEvent $event,
         OrderInterface $order,
     ): void {
+        $event->getSubject()->willReturn($order);
+
+        $orderEmailManager->sendConfirmationEmail($order)->shouldBeCalled();
+
+        $this->sendConfirmationEmail($event);
+    }
+
+    function it_sends_a_confirmation_email_by_deprecated_manager(
+        DeprecatedOrderEmailManagerInterface $orderEmailManager,
+        GenericEvent $event,
+        OrderInterface $order,
+    ): void {
+        $this->beConstructedWith($orderEmailManager);
+
         $event->getSubject()->willReturn($order);
 
         $orderEmailManager->sendConfirmationEmail($order)->shouldBeCalled();

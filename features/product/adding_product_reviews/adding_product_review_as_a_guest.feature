@@ -15,3 +15,4 @@ Feature: Adding product review as a guest
         And I rate it with 1 point
         And I add it
         Then I should be notified that my review is waiting for the acceptation
+        And the "Never again" product review of "Necronomicon" product should not be visible for customers

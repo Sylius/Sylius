@@ -27,7 +27,8 @@
                 </attribute>
                 <attribute name="normalization_context">
                     <attribute name="groups">
-                        <attribute>admin:product_association:read</attribute>
+                        <attribute>admin:product_association:index</attribute>
+                        <attribute>sylius:admin:product_association:index</attribute>
                     </attribute>
                 </attribute>
             </collectionOperation>
@@ -38,11 +39,13 @@
                 <attribute name="denormalization_context">
                     <attribute name="groups">
                         <attribute>admin:product_association:create</attribute>
+                        <attribute>sylius:admin:product_association:create</attribute>
                     </attribute>
                 </attribute>
                 <attribute name="normalization_context">
                     <attribute name="groups">
-                        <attribute>admin:product_association:read</attribute>
+                        <attribute>admin:product_association:show</attribute>
+                        <attribute>sylius:admin:product_association:show</attribute>
                     </attribute>
                 </attribute>
             </collectionOperation>
@@ -54,7 +57,8 @@
                 <attribute name="path">/admin/product-associations/{id}</attribute>
                 <attribute name="normalization_context">
                     <attribute name="groups">
-                        <attribute>admin:product_association:read</attribute>
+                        <attribute>admin:product_association:show</attribute>
+                        <attribute>sylius:admin:product_association:show</attribute>
                     </attribute>
                 </attribute>
             </itemOperation>
@@ -65,11 +69,13 @@
                 <attribute name="denormalization_context">
                     <attribute name="groups">
                         <attribute>admin:product_association:update</attribute>
+                        <attribute>sylius:admin:product_association:update</attribute>
                     </attribute>
                 </attribute>
                 <attribute name="normalization_context">
                     <attribute name="groups">
-                        <attribute>admin:product_association:read</attribute>
+                        <attribute>admin:product_association:show</attribute>
+                        <attribute>sylius:admin:product_association:show</attribute>
                     </attribute>
                 </attribute>
             </itemOperation>
@@ -84,7 +90,8 @@
                 <attribute name="path">/shop/product-associations/{id}</attribute>
                 <attribute name="normalization_context">
                     <attribute name="groups">
-                        <attribute>shop:product_association:read</attribute>
+                        <attribute>shop:product_association:show</attribute>
+                        <attribute>sylius:shop:product_association:show</attribute>
                     </attribute>
                 </attribute>
             </itemOperation>

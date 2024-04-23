@@ -14,7 +14,8 @@ declare(strict_types=1);
 namespace spec\Sylius\Bundle\AdminBundle\EventListener;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\AdminBundle\EmailManager\ShipmentEmailManagerInterface;
+use Sylius\Bundle\AdminBundle\EmailManager\ShipmentEmailManagerInterface as DeprecatedShipmentEmailManagerInterface;
+use Sylius\Bundle\CoreBundle\Mailer\ShipmentEmailManagerInterface;
 use Sylius\Component\Core\Model\ShipmentInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
@@ -30,6 +31,20 @@ final class ShipmentShipListenerSpec extends ObjectBehavior
         GenericEvent $event,
         ShipmentInterface $shipment,
     ): void {
+        $event->getSubject()->willReturn($shipment);
+
+        $shipmentEmailManager->sendConfirmationEmail($shipment)->shouldBeCalled();
+
+        $this->sendConfirmationEmail($event);
+    }
+
+    function it_sends_a_confirmation_email_by_deprecated_manager(
+        DeprecatedShipmentEmailManagerInterface $shipmentEmailManager,
+        GenericEvent $event,
+        ShipmentInterface $shipment,
+    ): void {
+        $this->beConstructedWith($shipmentEmailManager);
+
         $event->getSubject()->willReturn($shipment);
 
         $shipmentEmailManager->sendConfirmationEmail($shipment)->shouldBeCalled();

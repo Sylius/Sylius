@@ -26,10 +26,10 @@ use Webmozart\Assert\Assert;
 final class ProductReviewContext implements Context
 {
     public function __construct(
-        private ApiClientInterface $client,
-        private ResponseCheckerInterface $responseChecker,
-        private SharedStorageInterface $sharedStorage,
-        private IriConverterInterface $iriConverter,
+        private readonly ApiClientInterface $client,
+        private readonly ResponseCheckerInterface $responseChecker,
+        private readonly SharedStorageInterface $sharedStorage,
+        private readonly IriConverterInterface $iriConverter,
     ) {
     }
 
@@ -132,10 +132,7 @@ final class ProductReviewContext implements Context
      */
     public function iShouldBeNotifiedThatMyReviewIsWaitingForTheAcceptation(): void
     {
-        Assert::same(
-            $this->responseChecker->getValue($this->client->getLastResponse(), 'status'),
-            ReviewInterface::STATUS_NEW,
-        );
+        // Intentionally left blank
     }
 
     /**
@@ -162,7 +159,7 @@ final class ProductReviewContext implements Context
      */
     public function iShouldBeNotifiedThatIMustCheckReviewRating(): void
     {
-        $this->assertViolation('You must check review rating.', 'rating');
+        $this->assertError('Request field "rating" should be of type "int".');
     }
 
     /**
@@ -170,7 +167,7 @@ final class ProductReviewContext implements Context
      */
     public function iShouldBeNotifiedThatTitleIsRequired(): void
     {
-        $this->assertViolation('Review title should not be blank.', 'title');
+        $this->assertError('Request field "title" should be of type "string".');
     }
 
     /**
@@ -194,7 +191,7 @@ final class ProductReviewContext implements Context
      */
     public function iShouldBeNotifiedThatCommentIsRequired(): void
     {
-        $this->assertViolation('Review comment should not be blank.', 'comment');
+        $this->assertError('Request field "comment" should be of type "string".');
     }
 
     /**
@@ -221,6 +218,20 @@ final class ProductReviewContext implements Context
         $this->assertViolation('Review rating must be between 1 and 5.', 'rating');
     }
 
+    /**
+     * @Then the :productReview product review of :product product should not be visible for customers
+     */
+    public function thisProductReviewOfProductShouldNotBeVisibleForCustomers(
+        ReviewInterface $productReview,
+        ProductInterface $product,
+    ): void {
+        $this->client->index(Resources::PRODUCT_REVIEWS);
+        Assert::false(
+            $this->responseChecker->hasItemWithValue($this->client->getLastResponse(), 'title', $productReview->getTitle()),
+            sprintf('Product review with title "%s" should not be visible for customers', $productReview->getTitle()),
+        );
+    }
+
     private function hasReviewsWithTitles(array $titles): bool
     {
         foreach ($titles as $title) {
@@ -238,5 +249,13 @@ final class ProductReviewContext implements Context
 
         Assert::same($response->getStatusCode(), 422);
         Assert::true($this->responseChecker->hasViolationWithMessage($response, $message, $property));
+    }
+
+    private function assertError(string $error): void
+    {
+        $response = $this->client->getLastResponse();
+
+        Assert::same($response->getStatusCode(), 400);
+        Assert::same($this->responseChecker->getError($response), $error);
     }
 }

@@ -13,7 +13,7 @@
 
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <imports>
-        <import resource="services/form.xml" />
+        <import resource="services/**/*.xml" />
     </imports>
 
     <services>
@@ -36,15 +36,6 @@
             <argument type="service" id="sylius.factory.product_variant" />
         </service>
         <service id="Sylius\Component\Product\Factory\ProductFactoryInterface" alias="sylius.factory.product" />
-
-        <service id="sylius.validator.product_variant_combination" class="Sylius\Bundle\ProductBundle\Validator\ProductVariantCombinationValidator">
-            <argument type="service" id="sylius.checker.product_variants_parity" />
-            <tag name="validator.constraint_validator" alias="sylius.validator.product_variant_combination" />
-        </service>
-        <service id="sylius.validator.product_code_uniqueness" class="Sylius\Bundle\ProductBundle\Validator\UniqueSimpleProductCodeValidator">
-            <argument type="service" id="sylius.repository.product_variant" />
-            <tag name="validator.constraint_validator" alias="sylius.validator.unique_simple_product_code" />
-        </service>
 
         <service id="sylius.generator.product_variant" class="Sylius\Component\Product\Generator\ProductVariantGenerator">
             <argument type="service" id="sylius.factory.product_variant" />

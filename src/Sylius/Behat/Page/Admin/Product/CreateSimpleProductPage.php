@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Behat\Page\Admin\Product;
 
 use Behat\Mink\Element\NodeElement;
-use Sylius\Behat\Behaviour\SpecifiesItsCode;
+use Sylius\Behat\Behaviour\SpecifiesItsField;
 use Sylius\Behat\Page\Admin\Crud\CreatePage as BaseCreatePage;
 use Sylius\Behat\Service\AutocompleteHelper;
 use Sylius\Behat\Service\DriverHelper;
@@ -26,7 +26,7 @@ use Webmozart\Assert\Assert;
 
 class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProductPageInterface
 {
-    use SpecifiesItsCode;
+    use SpecifiesItsField;
 
     public function getRouteName(): string
     {
@@ -152,7 +152,7 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
         $productTaxonsElement->setValue(implode(',', $productTaxonsCodes));
     }
 
-    public function attachImage(string $path, string $type = null): void
+    public function attachImage(string $path, ?string $type = null): void
     {
         $this->clickTabIfItsNotActive('media');
 

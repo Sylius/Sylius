@@ -23,18 +23,29 @@
         <collectionOperations>
             <collectionOperation name="admin_get">
                 <attribute name="method">GET</attribute>
+                <attribute name="path">/shipping-categories</attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:shipping_category:read</attribute>
+                    <attribute name="groups">
+                        <attribute>admin:shipping_category:index</attribute>
+                        <attribute>sylius:admin:shipping_category:index</attribute>
+                    </attribute>
                 </attribute>
             </collectionOperation>
 
             <collectionOperation name="admin_post">
                 <attribute name="method">POST</attribute>
+                <attribute name="path">/shipping-categories</attribute>
                 <attribute name="denormalization_context">
-                    <attribute name="groups">admin:shipping_category:create</attribute>
+                    <attribute name="groups">
+                        <attribute>admin:shipping_category:create</attribute>
+                        <attribute>sylius:admin:shipping_category:create</attribute>
+                    </attribute>
                 </attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:shipping_category:read</attribute>
+                    <attribute name="groups">
+                        <attribute>admin:shipping_category:show</attribute>
+                        <attribute>sylius:admin:shipping_category:show</attribute>
+                    </attribute>
                 </attribute>
             </collectionOperation>
         </collectionOperations>
@@ -42,22 +53,34 @@
         <itemOperations>
             <itemOperation name="admin_get">
                 <attribute name="method">GET</attribute>
+                <attribute name="path">/shipping-categories/{code}</attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:shipping_category:read</attribute>
+                    <attribute name="groups">
+                        <attribute>admin:shipping_category:show</attribute>
+                        <attribute>sylius:admin:shipping_category:show</attribute>
+                    </attribute>
                 </attribute>
             </itemOperation>
 
             <itemOperation name="admin_put">
                 <attribute name="method">PUT</attribute>
+                <attribute name="path">/shipping-categories/{code}</attribute>
                 <attribute name="denormalization_context">
-                    <attribute name="groups">admin:shipping_category:update</attribute>
+                    <attribute name="groups">
+                        <attribute>admin:shipping_category:update</attribute>
+                        <attribute>sylius:admin:shipping_category:update</attribute>
+                    </attribute>
                 </attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:shipping_category:read</attribute>
+                    <attribute name="groups">
+                        <attribute>admin:shipping_category:show</attribute>
+                        <attribute>sylius:admin:shipping_category:show</attribute>
+                    </attribute>
                 </attribute>
             </itemOperation>
 
             <itemOperation name="admin_delete">
+                <attribute name="path">/shipping-categories/{code}</attribute>
                 <attribute name="method">DELETE</attribute>
             </itemOperation>
         </itemOperations>

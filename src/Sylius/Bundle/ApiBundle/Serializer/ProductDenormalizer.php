@@ -20,14 +20,13 @@ use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
 use Webmozart\Assert\Assert;
 
-/** @experimental */
 final class ProductDenormalizer implements ContextAwareDenormalizerInterface, DenormalizerAwareInterface
 {
     use DenormalizerAwareTrait;
 
     private const ALREADY_CALLED = 'sylius_product_denormalizer_already_called';
 
-    public function supportsDenormalization(mixed $data, string $type, string $format = null, array $context = []): bool
+    public function supportsDenormalization(mixed $data, string $type, ?string $format = null, array $context = []): bool
     {
         return
             !isset($context[self::ALREADY_CALLED]) &&
@@ -36,7 +35,7 @@ final class ProductDenormalizer implements ContextAwareDenormalizerInterface, De
         ;
     }
 
-    public function denormalize(mixed $data, string $type, string $format = null, array $context = [])
+    public function denormalize(mixed $data, string $type, ?string $format = null, array $context = [])
     {
         $context[self::ALREADY_CALLED] = true;
         $data = (array) $data;

@@ -30,7 +30,7 @@ final class CatalogPromotionsTest extends JsonApiTestCase
     /** @test */
     public function it_gets_catalog_promotions(): void
     {
-        $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel.yaml', 'catalog_promotion.yaml']);
+        $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel.yaml', 'catalog_promotion/catalog_promotion.yaml']);
         $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
 
         $this->client->request(
@@ -147,7 +147,7 @@ final class CatalogPromotionsTest extends JsonApiTestCase
     /** @test */
     public function it_does_not_create_a_catalog_promotion_with_taken_code(): void
     {
-        $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel.yaml', 'catalog_promotion.yaml']);
+        $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel.yaml', 'catalog_promotion/catalog_promotion.yaml']);
         $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
 
         $this->client->request(
@@ -170,7 +170,7 @@ final class CatalogPromotionsTest extends JsonApiTestCase
     /** @test */
     public function it_does_not_create_a_catalog_promotion_with_end_date_earlier_than_start_date(): void
     {
-        $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel.yaml', 'catalog_promotion.yaml']);
+        $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel.yaml', 'catalog_promotion/catalog_promotion.yaml']);
         $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
 
         $this->client->request(
@@ -201,6 +201,7 @@ final class CatalogPromotionsTest extends JsonApiTestCase
             'tax_category.yaml',
             'shipping_category.yaml',
             'product/product_variant.yaml',
+            'taxon_image.yaml',
         ]);
         $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
 
@@ -239,7 +240,18 @@ final class CatalogPromotionsTest extends JsonApiTestCase
                     ], [
                         'type' => InForVariantsScopeVariantChecker::TYPE,
                         'configuration' => [
-                            'variants' => ['invalid_variant'],
+                            'variants' => [
+                                'MUG',
+                                'MUG',
+                            ],
+                        ],
+                    ], [
+                        'type' => InForVariantsScopeVariantChecker::TYPE,
+                        'configuration' => [
+                            'variants' => [
+                                '',
+                                'invalid_variant',
+                            ],
                         ],
                     ], [
                         'type' => InForProductScopeVariantChecker::TYPE,
@@ -249,10 +261,21 @@ final class CatalogPromotionsTest extends JsonApiTestCase
                         'configuration' => [
                             'products' => [],
                         ],
+                    ],  [
+                        'type' => InForProductScopeVariantChecker::TYPE,
+                        'configuration' => [
+                            'products' => [
+                                'MUG_SW',
+                                'MUG_SW',
+                            ],
+                        ],
                     ], [
                         'type' => InForProductScopeVariantChecker::TYPE,
                         'configuration' => [
-                            'products' => ['invalid_product'],
+                            'products' => [
+                                '',
+                                'invalid_product',
+                            ],
                         ],
                     ], [
                         'type' => InForTaxonsScopeVariantChecker::TYPE,
@@ -262,10 +285,21 @@ final class CatalogPromotionsTest extends JsonApiTestCase
                         'configuration' => [
                             'taxons' => [],
                         ],
+                    ],  [
+                        'type' => InForTaxonsScopeVariantChecker::TYPE,
+                        'configuration' => [
+                            'taxons' => [
+                                'CATEGORY',
+                                'CATEGORY',
+                            ],
+                        ],
                     ], [
                         'type' => InForTaxonsScopeVariantChecker::TYPE,
                         'configuration' => [
-                            'taxons' => ['invalid_taxon'],
+                            'taxons' => [
+                                '',
+                                'invalid_taxon',
+                            ],
                         ],
                     ],
                 ],
@@ -278,11 +312,72 @@ final class CatalogPromotionsTest extends JsonApiTestCase
             ], \JSON_THROW_ON_ERROR),
         );
 
-        $this->assertResponse(
-            $this->client->getResponse(),
-            'admin/catalog_promotion/post_catalog_promotion_with_invalid_scopes_response',
-            Response::HTTP_UNPROCESSABLE_ENTITY,
-        );
+        $this->assertJsonResponseViolations($this->client->getResponse(), [
+            [
+                'propertyPath' => 'scopes[0].type',
+                'message' => 'Catalog promotion scope type is invalid. Available types are for_products, for_taxons, for_variants.',
+            ],
+            [
+                'propertyPath' => 'scopes[1].configuration[variants]',
+                'message' => 'This field is missing.',
+            ],
+            [
+                'propertyPath' => 'scopes[2].configuration[variants]',
+                'message' => 'Please add at least 1 variant.',
+            ],
+            [
+                'propertyPath' => 'scopes[3].configuration[variants]',
+                'message' => 'Provided configuration contains errors. Please add only unique variants.',
+            ],
+            [
+                'propertyPath' => 'scopes[4].configuration[variants][0]',
+                'message' => 'This value should not be blank.',
+            ],
+            [
+                'propertyPath' => 'scopes[4].configuration[variants][1]',
+                'message' => 'Product variant with code invalid_variant does not exist.',
+            ],
+            [
+                'propertyPath' => 'scopes[5].configuration[products]',
+                'message' => 'This field is missing.',
+            ],
+            [
+                'propertyPath' => 'scopes[6].configuration[products]',
+                'message' => 'Provided configuration contains errors. Please add at least 1 product.',
+            ],
+            [
+                'propertyPath' => 'scopes[7].configuration[products]',
+                'message' => 'Provided configuration contains errors. Please add only unique products.',
+            ],
+            [
+                'propertyPath' => 'scopes[8].configuration[products][0]',
+                'message' => 'This value should not be blank.',
+            ],
+            [
+                'propertyPath' => 'scopes[8].configuration[products][1]',
+                'message' => 'Product with code invalid_product does not exist.',
+            ],
+            [
+                'propertyPath' => 'scopes[9].configuration[taxons]',
+                'message' => 'This field is missing.',
+            ],
+            [
+                'propertyPath' => 'scopes[10].configuration[taxons]',
+                'message' => 'Provided configuration contains errors. Please add at least 1 taxon.',
+            ],
+            [
+                'propertyPath' => 'scopes[11].configuration[taxons]',
+                'message' => 'Provided configuration contains errors. Please add only unique taxons.',
+            ],
+            [
+                'propertyPath' => 'scopes[12].configuration[taxons][0]',
+                'message' => 'This value should not be blank.',
+            ],
+            [
+                'propertyPath' => 'scopes[12].configuration[taxons][1]',
+                'message' => 'Taxon with code invalid_taxon does not exist.',
+            ],
+        ]);
     }
 
     /** @test */
@@ -309,6 +404,12 @@ final class CatalogPromotionsTest extends JsonApiTestCase
                 ],
                 'actions' => [
                     [
+                        'type' => '',
+                        'configuration' => [
+                            'amount' => 0.5,
+                        ],
+                    ],
+                    [
                         'type' => 'invalid_type',
                         'configuration' => [
                             'amount' => 0.5,
@@ -317,6 +418,12 @@ final class CatalogPromotionsTest extends JsonApiTestCase
                     [
                         'type' => PercentageDiscountPriceCalculator::TYPE,
                         'configuration' => [],
+                    ],
+                    [
+                        'type' => PercentageDiscountPriceCalculator::TYPE,
+                        'configuration' => [
+                            'amount' => null,
+                        ],
                     ],
                     [
                         'type' => PercentageDiscountPriceCalculator::TYPE,
@@ -337,14 +444,22 @@ final class CatalogPromotionsTest extends JsonApiTestCase
                     [
                         'type' => FixedDiscountPriceCalculator::TYPE,
                         'configuration' => [
+                            'invalid_channel' => [
+                                'amount' => 1000,
+                            ],
+                        ],
+                    ],
+                    [
+                        'type' => FixedDiscountPriceCalculator::TYPE,
+                        'configuration' => [
                             'WEB' => [],
                         ],
                     ],
                     [
                         'type' => FixedDiscountPriceCalculator::TYPE,
                         'configuration' => [
-                            'invalid_channel' => [
-                                'amount' => 1000,
+                            'WEB' => [
+                                'amount' => null,
                             ],
                         ],
                     ],
@@ -376,11 +491,56 @@ final class CatalogPromotionsTest extends JsonApiTestCase
             ], \JSON_THROW_ON_ERROR),
         );
 
-        $this->assertResponse(
-            $this->client->getResponse(),
-            'admin/catalog_promotion/post_catalog_promotion_with_invalid_actions_response',
-            Response::HTTP_UNPROCESSABLE_ENTITY,
-        );
+        $this->assertJsonResponseViolations($this->client->getResponse(), [
+            [
+                'propertyPath' => 'actions[0].type',
+                'message' => 'Please choose an action type.',
+            ],
+            [
+                'propertyPath' => 'actions[1].type',
+                'message' => 'Catalog promotion action type is invalid. Available types are fixed_discount, percentage_discount.',
+            ],
+            [
+                'propertyPath' => 'actions[2].configuration[amount]',
+                'message' => 'This field is missing.',
+            ],
+            [
+                'propertyPath' => 'actions[3].configuration[amount]',
+                'message' => 'The percentage discount amount must be a number and can not be empty.',
+            ],
+            [
+                'propertyPath' => 'actions[4].configuration[amount]',
+                'message' => 'The percentage discount amount must be between 0% and 100%.',
+            ],
+            [
+                'propertyPath' => 'actions[5].configuration[amount]',
+                'message' => 'The percentage discount amount must be a number and can not be empty.',
+            ],
+            [
+                'propertyPath' => 'actions[5].configuration[amount]',
+                'message' => 'This value should be a valid number.',
+            ],
+            [
+                'propertyPath' => 'actions[6].configuration[WEB]',
+                'message' => 'This field is missing.',
+            ],
+            [
+                'propertyPath' => 'actions[7].configuration[WEB]',
+                'message' => 'This field is missing.',
+            ],
+            [
+                'propertyPath' => 'actions[8].configuration[WEB][amount]',
+                'message' => 'This field is missing.',
+            ],
+            [
+                'propertyPath' => 'actions[9].configuration[WEB][amount]',
+                'message' => 'Provided configuration contains errors. Please add the fixed discount amount that is a number greater than 0.',
+            ],
+            [
+                'propertyPath' => 'actions[10].configuration[WEB][amount]',
+                'message' => 'Provided configuration contains errors. Please add the fixed discount amount that is a number greater than 0.',
+            ],
+        ]);
     }
 
     /** @test */
@@ -461,6 +621,22 @@ final class CatalogPromotionsTest extends JsonApiTestCase
         );
     }
 
+    /** @test */
+    public function it_deletes_catalog_promotion(): void
+    {
+        $catalogPromotion = $this->loadFixturesAndGetCatalogPromotion();
+
+        $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
+
+        $this->client->request(
+            method: 'DELETE',
+            uri: sprintf('/api/v2/admin/catalog-promotions/%s', $catalogPromotion->getCode()),
+            server: $header,
+        );
+
+        $this->assertResponseCode($this->client->getResponse(), Response::HTTP_ACCEPTED);
+    }
+
     private function loadFixturesAndGetCatalogPromotion(): CatalogPromotionInterface
     {
         $fixtures = $this->loadFixturesFromFiles([
@@ -469,7 +645,7 @@ final class CatalogPromotionsTest extends JsonApiTestCase
             'tax_category.yaml',
             'shipping_category.yaml',
             'product/product_variant.yaml',
-            'catalog_promotion.yaml',
+            'catalog_promotion/catalog_promotion.yaml',
         ]);
 
         /** @var CatalogPromotionInterface $catalogPromotion */

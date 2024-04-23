@@ -14,6 +14,7 @@ declare(strict_types=1);
 use PhpCsFixer\Fixer\ClassNotation\OrderedTypesFixer;
 use PhpCsFixer\Fixer\ClassNotation\VisibilityRequiredFixer;
 use PhpCsFixer\Fixer\Comment\HeaderCommentFixer;
+use PhpCsFixer\Fixer\FunctionNotation\NullableTypeDeclarationForDefaultNullValueFixer;
 use PhpCsFixer\Fixer\LanguageConstruct\ErrorSuppressionFixer;
 use PhpCsFixer\Fixer\Phpdoc\PhpdocSeparationFixer;
 use SlevomatCodingStandard\Sniffs\Commenting\InlineDocCommentDeclarationSniff;
@@ -33,6 +34,7 @@ return static function (ECSConfig $config): void {
     ]);
     $config->ruleWithConfiguration(PhpdocSeparationFixer::class, ['groups' => [['Given', 'When', 'Then']]]);
     $config->ruleWithConfiguration(OrderedTypesFixer::class, ['null_adjustment' => 'always_last']);
+    $config->ruleWithConfiguration(NullableTypeDeclarationForDefaultNullValueFixer::class, ['use_nullable_type_declaration' => true]);
     $config->ruleWithConfiguration(
         HeaderCommentFixer::class,
         [

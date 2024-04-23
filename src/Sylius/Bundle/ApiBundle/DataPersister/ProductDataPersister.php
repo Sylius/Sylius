@@ -18,7 +18,6 @@ use Doctrine\DBAL\Exception\ForeignKeyConstraintViolationException;
 use Sylius\Bundle\ApiBundle\Exception\ProductCannotBeRemoved;
 use Sylius\Component\Core\Model\ProductInterface;
 
-/** @experimental */
 final class ProductDataPersister implements ContextAwareDataPersisterInterface
 {
     public function __construct(

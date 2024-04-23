@@ -25,7 +25,6 @@ use Sylius\Component\Core\Repository\PaymentMethodRepositoryInterface;
 use Sylius\Component\Core\Repository\PaymentRepositoryInterface;
 use Sylius\Component\Payment\Resolver\PaymentMethodsResolverInterface;
 
-/** @experimental */
 final class PaymentMethodsCollectionDataProvider implements ContextAwareCollectionDataProviderInterface, RestrictedDataProviderInterface
 {
     public function __construct(
@@ -37,7 +36,7 @@ final class PaymentMethodsCollectionDataProvider implements ContextAwareCollecti
     ) {
     }
 
-    public function getCollection(string $resourceClass, string $operationName = null, array $context = [])
+    public function getCollection(string $resourceClass, ?string $operationName = null, array $context = [])
     {
         /** @var ChannelInterface $channel */
         $channel = $this->channelContext->getChannel();
@@ -67,7 +66,7 @@ final class PaymentMethodsCollectionDataProvider implements ContextAwareCollecti
         return $this->paymentMethodsResolver->getSupportedMethods($payment);
     }
 
-    public function supports(string $resourceClass, string $operationName = null, array $context = []): bool
+    public function supports(string $resourceClass, ?string $operationName = null, array $context = []): bool
     {
         return is_a($resourceClass, PaymentMethodInterface::class, true) && $this->isShopGetCollectionOperation($context);
     }

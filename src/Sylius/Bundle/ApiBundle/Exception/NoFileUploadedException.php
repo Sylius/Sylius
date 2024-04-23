@@ -15,13 +15,12 @@ namespace Sylius\Bundle\ApiBundle\Exception;
 
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
-/** @experimental */
 final class NoFileUploadedException extends BadRequestHttpException
 {
     /** @param array<array-key, mixed> $headers */
     public function __construct(
         string $message = 'No file was uploaded.',
-        \Throwable $previous = null,
+        ?\Throwable $previous = null,
         int $code = 0,
         array $headers = [],
     ) {

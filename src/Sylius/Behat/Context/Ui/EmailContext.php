@@ -92,7 +92,7 @@ final class EmailContext implements Context
     public function aVerificationEmailShouldHaveBeenSentTo(string $recipient): void
     {
         $this->assertEmailContainsMessageTo(
-            $this->translator->trans('sylius.email.verification_token.to_verify_your_email_address'),
+            $this->translator->trans('sylius.email.user.account_verification.strategy'),
             $recipient,
         );
     }
@@ -118,6 +118,25 @@ final class EmailContext implements Context
         string $localeCode = 'en_US',
     ): void {
         $this->assertEmailContainsMessageTo(
+            sprintf(
+                '%s %s %s',
+                $this->translator->trans('sylius.email.order_confirmation.your_order_number', [], null, $localeCode),
+                $order->getNumber(),
+                $this->translator->trans('sylius.email.order_confirmation.has_been_successfully_placed', [], null, $localeCode),
+            ),
+            $recipient,
+        );
+    }
+
+    /**
+     * @Then an email with the confirmation of the order :order should not be sent to :email
+     */
+    public function anEmailWithTheConfirmationOfTheOrderShouldNotBeSentTo(
+        OrderInterface $order,
+        string $recipient,
+        string $localeCode = 'en_US',
+    ): void {
+        $this->assertEmailDoesNotContainMessageTo(
             sprintf(
                 '%s %s %s',
                 $this->translator->trans('sylius.email.order_confirmation.your_order_number', [], null, $localeCode),

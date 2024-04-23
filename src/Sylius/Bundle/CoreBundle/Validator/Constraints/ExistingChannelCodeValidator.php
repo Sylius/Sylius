@@ -29,13 +29,12 @@ final class ExistingChannelCodeValidator extends ConstraintValidator
         Assert::nullOrString($value);
         Assert::isInstanceOf($constraint, ExistingChannelCode::class);
 
-        if ($value === null) {
+        if ($value === null || $value === '') {
             return;
         }
 
         if ($this->channelRepository->findOneByCode($value) === null) {
             $this->context->buildViolation($constraint->message)
-                ->atPath('channelPricings')
                 ->setParameter('{{ channelCode }}', $value)
                 ->addViolation()
             ;

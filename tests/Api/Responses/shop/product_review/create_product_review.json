@@ -1,0 +1,17 @@
+{
+    "@context": "\/api\/v2\/contexts\/ProductReview",
+    "@id": "\/api\/v2\/shop\/product-reviews\/@integer@",
+    "@type": "ProductReview",
+    "id": @integer@,
+    "title": "Greatest product!",
+    "rating": 3,
+    "comment": "I've never bought anything better.",
+    "author": {
+        "@id": "\/api\/v2\/shop\/customers\/@integer@",
+        "@type": "Customer",
+        "firstName": "John"
+    },
+    "reviewSubject": "\/api\/v2\/shop\/products\/MUG_SW",
+    "createdAt": @date@,
+    "updatedAt": @date@
+}

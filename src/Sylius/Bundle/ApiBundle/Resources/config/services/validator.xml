@@ -48,7 +48,7 @@
 
         <service id="Sylius\Bundle\ApiBundle\Validator\Constraints\CheckoutCompletionValidator">
             <argument type="service" id="sylius.repository.order" />
-            <argument type="service" id="sm.factory" />
+            <argument type="service" id="sylius_abstraction.state_machine" />
             <tag name="validator.constraint_validator" alias="sylius_api_validator_checkout_completion" />
         </service>
 
@@ -187,6 +187,11 @@
         >
             <argument type="service" id="Sylius\Bundle\ApiBundle\Validator\CatalogPromotion\ForVariantsScopeValidator.inner" />
             <argument type="service" id="Sylius\Bundle\CoreBundle\SectionResolver\SectionProviderInterface" />
+        </service>
+
+        <service id="sylius.validator.order_address_requirement" class="Sylius\Bundle\ApiBundle\Validator\Constraints\OrderAddressRequirementValidator">
+            <argument type="service" id="sylius.repository.order" />
+            <tag name="validator.constraint_validator" alias="sylius_order_address_requirement_validator" />
         </service>
     </services>
 </container>

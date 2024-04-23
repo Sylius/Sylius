@@ -17,7 +17,6 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Extension\ContextAwareQueryCollectionEx
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Util\QueryNameGeneratorInterface;
 use Doctrine\ORM\QueryBuilder;
 
-/** @experimental */
 final class HideArchivedShippingMethodExtension implements ContextAwareQueryCollectionExtensionInterface
 {
     public function __construct(private string $shippingMethodClass)
@@ -28,7 +27,7 @@ final class HideArchivedShippingMethodExtension implements ContextAwareQueryColl
         QueryBuilder $queryBuilder,
         QueryNameGeneratorInterface $queryNameGenerator,
         string $resourceClass,
-        string $operationName = null,
+        ?string $operationName = null,
         array $context = [],
     ): void {
         if ($this->shippingMethodClass !== $resourceClass) {

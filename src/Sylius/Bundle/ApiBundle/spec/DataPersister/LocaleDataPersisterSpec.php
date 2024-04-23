@@ -16,7 +16,7 @@ namespace spec\Sylius\Bundle\ApiBundle\DataPersister;
 use ApiPlatform\Core\DataPersister\ContextAwareDataPersisterInterface;
 use PhpSpec\ObjectBehavior;
 use stdClass;
-use Sylius\Bundle\LocaleBundle\Checker\Exception\LocaleIsUsedException;
+use Sylius\Bundle\ApiBundle\Exception\LocaleIsUsedException;
 use Sylius\Bundle\LocaleBundle\Checker\LocaleUsageCheckerInterface;
 use Sylius\Component\Locale\Model\Locale;
 

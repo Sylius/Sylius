@@ -61,7 +61,7 @@ $.fn.extend({
                 .replace('option value="" selected="selected"', 'option value=""')
                 .replace(`option ${provinceSelectValue}`, `option ${provinceSelectValue}" selected="selected"`)
             ));
-
+            provinceContainer.addClass('required');
             provinceContainer.removeAttr('data-loading');
 
             provinceContainer.fadeIn('fast', () => {
