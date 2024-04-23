@@ -7,13 +7,6 @@ sylius_admin_catalog_promotion:
         redirect: update
         grid: sylius_admin_catalog_promotion
         permission: true
-        vars:
-            all:
-                subheader: sylius.ui.manage_discounts_on_product_catalog
-                templates:
-                    form: "@SyliusAdmin/CatalogPromotion/_form.html.twig"
-            index:
-                icon: bookmark
     type: sylius.resource
 
 sylius_admin_catalog_promotion_product_variant_index:

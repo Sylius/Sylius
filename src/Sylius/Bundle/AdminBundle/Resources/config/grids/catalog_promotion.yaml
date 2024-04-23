@@ -21,19 +21,19 @@ sylius_grid:
                     label: sylius.ui.start_date
                     sortable: ~
                     options:
-                        template: '@SyliusAdmin/CatalogPromotion/Grid/Field/date.html.twig'
+                        template: '@SyliusAdmin/catalog_promotion/grid/field/date.html.twig'
                 endDate:
                     type: twig
                     label: sylius.ui.end_date
                     sortable: ~
                     options:
-                        template: '@SyliusAdmin/CatalogPromotion/Grid/Field/date.html.twig'
+                        template: '@SyliusAdmin/catalog_promotion/grid/field/date.html.twig'
                 priority:
                     type: twig
                     label: sylius.ui.priority
                     sortable: ~
                     options:
-                        template: '@SyliusAdmin/CatalogPromotion/Grid/Field/priority.html.twig'
+                        template: '@SyliusAdmin/catalog_promotion/grid/field/priority.html.twig'
                 channels:
                     type: twig
                     label: sylius.ui.channels
@@ -44,7 +44,7 @@ sylius_grid:
                     label: sylius.ui.state
                     path: state
                     options:
-                        template: '@SyliusAdmin/CatalogPromotion/Grid/Field/state.html.twig'
+                        template: '@SyliusAdmin/catalog_promotion/grid/field/state.html.twig'
                 enabled:
                     type: twig
                     label: sylius.ui.enabled

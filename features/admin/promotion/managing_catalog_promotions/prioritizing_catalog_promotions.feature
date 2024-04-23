@@ -11,7 +11,7 @@ Feature: Prioritizing a catalog promotion
         And there is a catalog promotion "Spring sale" with priority 40
         And I am logged in as an administrator
 
-    @api @todo @ui
+    @api @ui
     Scenario: Adding a catalog promotion with a priority higher than all existing catalog promotions does not change priority values
         When I create a new catalog promotion with "collection_sale" code and "Collection sale" name and 50 priority
         Then there should be 4 catalog promotions on the list
@@ -20,7 +20,7 @@ Feature: Prioritizing a catalog promotion
         And the catalog promotion named "Spring sale" should have priority 40
         And the catalog promotion named "Collection sale" should have priority 50
 
-    @api @todo @ui
+    @api @ui
     Scenario: Adding a catalog promotion with a priority lower than all existing ones
               increases the priority value of other catalog promotions by 1
         When I create a new catalog promotion with "collection_sale" code and "Collection sale" name and 10 priority
@@ -30,7 +30,7 @@ Feature: Prioritizing a catalog promotion
         And the catalog promotion named "Spring sale" should have priority 41
         And the catalog promotion named "Collection sale" should have priority 10
 
-    @api @todo @ui
+    @api @ui
     Scenario: Adding a catalog promotion with a priority equal to one of the existing catalog promotions
               increases the priority value of all catalog promotions with a priority greater equal than created catalog promotion by 1,
               but has no effect on the others
@@ -41,7 +41,7 @@ Feature: Prioritizing a catalog promotion
         And the catalog promotion named "Spring sale" should have priority 41
         And the catalog promotion named "Collection sale" should have priority 30
 
-    @api @todo @ui
+    @api @ui
     Scenario: Adding a catalog promotion with a priority equal -1
               sets a priority value of the created promotion one greater than the current highest value
         When I create a new catalog promotion with "collection_sale" code and "Collection sale" name and -1 priority
@@ -51,7 +51,7 @@ Feature: Prioritizing a catalog promotion
         And the catalog promotion named "Spring sale" should have priority 40
         And the catalog promotion named "Collection sale" should have priority 41
 
-    @api @todo @ui
+    @api @ui
     Scenario: Adding a catalog promotion with some negative priority lower than -1
               determines the position of the created catalog promotion starting count backward and if calculated index
               is already taken increases the priority value of all catalog promotions with a priority greater equal than
@@ -63,7 +63,7 @@ Feature: Prioritizing a catalog promotion
         And the catalog promotion named "Spring sale" should have priority 41
         And the catalog promotion named "Collection sale" should have priority 27
 
-    @api @todo @ui
+    @api @ui
     Scenario: Updating a catalog promotion priority to one of the existing catalog promotions decreases its priority value by 1
         When I want to modify a catalog promotion "Winter sale"
         And I set its priority to 30

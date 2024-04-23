@@ -15,44 +15,18 @@ namespace Sylius\Bundle\AdminBundle\Form\Extension;
 
 use Sylius\Bundle\PromotionBundle\Form\Type\CatalogPromotionScopeType;
 use Symfony\Component\Form\AbstractTypeExtension;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Twig\Environment;
 
 final class CatalogPromotionScopeTypeExtension extends AbstractTypeExtension
 {
-    private array $scopeTypes = [];
-
-    private array $scopeConfigurationTypes;
-
-    public function __construct(iterable $scopeConfigurationTypes, private Environment $twig)
-    {
-        foreach ($scopeConfigurationTypes as $type => $formType) {
-            $this->scopeConfigurationTypes[$type] = $formType::class;
-            $this->scopeTypes['sylius.form.catalog_promotion.scope.' . $type] = $type;
-        }
-    }
-
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
-        $builder
-            ->add('type', ChoiceType::class, [
-                'label' => 'sylius.ui.type',
-                'choices' => $this->scopeTypes,
-                'choice_attr' => function (?string $type) use ($builder): array {
-                    return [
-                        'data-configuration' => $this->twig->render(
-                            '@SyliusAdmin/CatalogPromotion/Scope/' . $type . '.html.twig',
-                            ['field' => $builder->create('configuration', $this->scopeConfigurationTypes[$type])->getForm()->createView()],
-                        ),
-                    ];
-                },
-            ])
-        ;
+        $builder->add('type', HiddenType::class);
     }
 
     public static function getExtendedTypes(): iterable
     {
-        return [CatalogPromotionScopeType::class];
+        yield CatalogPromotionScopeType::class;
     }
 }
