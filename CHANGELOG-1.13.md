@@ -1,5 +1,21 @@
 # CHANGELOG FOR `1.13.X`
 
+## v1.13.0 (2024-04-23)
+
+#### Details
+
+- [#16128](https://github.com/Sylius/Sylius/issues/16128) Add twig 3.9.0 conflict ([@mpysiak](https://github.com/mpysiak))
+- [#16131](https://github.com/Sylius/Sylius/issues/16131) Revert conflict to twig/intl-extra ([@GSadee](https://github.com/GSadee))
+- [#16135](https://github.com/Sylius/Sylius/issues/16135) Add empty array check in ZoneRepository ([@mpysiak](https://github.com/mpysiak))
+- [#16143](https://github.com/Sylius/Sylius/issues/16143) [Maintenance] Add branch 2.0 to refactor build ([@Wojdylak](https://github.com/Wojdylak))
+- [#16134](https://github.com/Sylius/Sylius/issues/16134) Fix Sylius logo in READMEs of Bundles & Components ([@mpysiak](https://github.com/mpysiak))
+- [#16158](https://github.com/Sylius/Sylius/issues/16158) Update dead link in drivers.rst ([@binhuq](https://github.com/binhuq))
+- [#16147](https://github.com/Sylius/Sylius/issues/16147) [Maintenance] Remove unused reviews listener ([@NoResponseMate](https://github.com/NoResponseMate))
+- [#15384](https://github.com/Sylius/Sylius/issues/15384) [DX] Dispatch ui event to allow customize every choice in payment method selection ([@Jibbarth](https://github.com/Jibbarth))
+- [#15417](https://github.com/Sylius/Sylius/issues/15417) [DX][Checkout][ShippingMethod] Dispatch new ui events ([@Jibbarth](https://github.com/Jibbarth), [@GSadee](https://github.com/GSadee))
+- [#16157](https://github.com/Sylius/Sylius/issues/16157) [Maintenance][Configuration] Deprecate unused `options` configuration nodes ([@NoResponseMate](https://github.com/NoResponseMate))
+- [#16168](https://github.com/Sylius/Sylius/issues/16168) Fix setup command locale parameter update ([@TheMilek](https://github.com/TheMilek))
+
 ## v1.13.0-RC.1 (2024-04-16)
 
 #### Details
