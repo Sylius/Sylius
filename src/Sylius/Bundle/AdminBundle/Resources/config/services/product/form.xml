@@ -19,11 +19,6 @@
             <tag name="form.type" />
         </service>
 
-        <service id="sylius_admin.form.type.product_autocomplete_choice" class="Sylius\Bundle\AdminBundle\Form\Type\Product\ProductAutocompleteChoiceType">
-            <argument>%sylius.model.product.class%</argument>
-            <tag name="form.type" />
-        </service>
-
         <service id="sylius_admin.form.type.data_transformer.products_to_product_associations" class="Sylius\Bundle\AdminBundle\Form\DataTransformer\Product\ProductsToProductAssociationsTransformer">
             <argument type="service" id="sylius.factory.product_association" />
             <argument type="service" id="sylius.repository.product_association_type" />
