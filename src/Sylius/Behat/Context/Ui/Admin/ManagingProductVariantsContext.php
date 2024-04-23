@@ -752,6 +752,22 @@ final class ManagingProductVariantsContext implements Context
     }
 
     /**
+     * @Then /^I should not be able to remove (\d)(?:st|nd|rd|th) product variant$/
+     */
+    public function iShouldNotBeAbleToRemove(int $nthVariant): void
+    {
+        Assert::false($this->generatePage->isProductVariantRemovable($nthVariant - 1));
+    }
+
+    /**
+     * @Then /^I should be able to remove (\d)(?:st|nd|rd|th) product variant$/
+     */
+    public function iShouldBeAbleToRemove(int $nthVariant): void
+    {
+        Assert::true($this->generatePage->isProductVariantRemovable($nthVariant - 1));
+    }
+
+    /**
      * @param string $element
      * @param string $message
      */

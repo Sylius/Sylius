@@ -70,6 +70,11 @@ class GeneratePage extends SymfonyPage implements GeneratePageInterface
         return !$this->getElement('generate_button')->hasAttribute('disabled');
     }
 
+    public function isProductVariantRemovable(int $nth): bool
+    {
+        return $this->hasElement('delete_button', ['%position%' => $nth]);
+    }
+
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
