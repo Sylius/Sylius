@@ -32,7 +32,7 @@ Feature: Browsing payments
         And I should see payment for the "#00000001" order as 2nd in the list
 
     @ui @api-todo
-    Scenario: Payments are sorted by date in ascending order
+    Scenario: Sorting payments by date in ascending order
         Given there is an "#00000002" order with "Apple" product ordered later
         When I browse payments
         And I sort payments by date in ascending order
@@ -40,7 +40,7 @@ Feature: Browsing payments
         And I should see payment for the "#00000002" order as 2nd in the list
 
     @ui @api-todo
-    Scenario: Payments are sorted by date in descending order again
+    Scenario: Sorting payments by date in descending order again
         Given there is an "#00000002" order with "Apple" product ordered later
         When I browse payments
         And I sort payments by date in descending order
