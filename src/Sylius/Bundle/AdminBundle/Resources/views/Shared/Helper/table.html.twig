@@ -1,5 +1,5 @@
 {% macro headers(grid, definition, requestAttributes) %}
-    {% import '@SyliusUi/Macro/sorting.html.twig' as sorting %}
+    {% import '@SyliusAdmin/Shared/Helper/sorting.html.twig' as sorting %}
 
     {% if definition.actionGroups.bulk is defined and definition.getEnabledActions('bulk')|length > 0 %}
         <th class="center aligned">
@@ -12,12 +12,12 @@
             {% if field.isSortable %}
                 {{ sorting.tableHeader(grid, field, requestAttributes) }}
             {% else %}
-                <th class="sylius-table-column-{{ field.name }}">{{ field.label|trans }}</th>
+                <th class="text-body sylius-table-column-{{ field.name }}">{{ field.label|trans }}</th>
             {% endif %}
         {% endif %}
     {% endfor %}
     {% if definition.actionGroups.item is defined and definition.getEnabledActions('item')|length > 0 %}
-        <th class="sylius-table-column-actions">{{ 'sylius.ui.actions'|trans }}</th>
+        <th class="text-body text-center sylius-table-column-actions">{{ 'sylius.ui.actions'|trans }}</th>
     {% endif %}
 {% endmacro %}
 

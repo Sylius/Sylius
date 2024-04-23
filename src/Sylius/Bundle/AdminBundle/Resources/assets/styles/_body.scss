@@ -30,6 +30,10 @@ a {
     text-underline-offset: 0.25em;
 }
 
+a.link-reset {
+    text-decoration: none;
+}
+
 .btn-collapse {
     &.collapsed {
         .icon-chevron-right {
