@@ -1,8 +1,8 @@
 @managing_payments
-Feature: Browsing payments
+Feature: Sorting payments
     In order to manage all payments regardlessly of orders
     As an Administrator
-    I want to browse all payments in the system
+    I want to sort payments by date
 
     Background:
         Given the store operates on a single channel in "United States"
@@ -10,23 +10,19 @@ Feature: Browsing payments
         And the store has a product "Apple"
         And the store allows paying with "Cash on Delivery"
         And there is an "#00000001" order with "Apple" product
+        And there is an "#00000002" order with "Apple" product ordered later
         And I am logged in as an administrator
 
-    @ui @api
-    Scenario: Browsing payments and their states
+    @ui @api-todo
+    Scenario: Sorting payments by date in ascending order
         When I browse payments
-        Then I should see a single payment in the list
-        And the payment of the "#00000001" order should be "New" for "amba@fatima.org"
+        And I sort payments by date in ascending order
+        Then I should see payment for the "#00000001" order as 1st in the list
+        And I should see payment for the "#00000002" order as 2nd in the list
 
-    @ui @api
-    Scenario: Not seeing payments in cart state
-        Given the customer "customer@example.com" added "Apple" product to the cart
+    @ui @api-todo
+    Scenario: Sorting payments by date in descending order again
         When I browse payments
-        Then I should see a single payment in the list
-
-    @ui @api
-    Scenario: Payments are sorted by newest as default
-        Given there is an "#00000002" order with "Apple" product ordered later
-        When I browse payments
+        And I sort payments by date in descending order
         Then I should see payment for the "#00000002" order as 1st in the list
         And I should see payment for the "#00000001" order as 2nd in the list
