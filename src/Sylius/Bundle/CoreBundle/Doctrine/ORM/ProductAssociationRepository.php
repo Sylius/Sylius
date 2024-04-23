@@ -22,6 +22,7 @@ use Sylius\Component\Product\Model\ProductAssociationInterface;
  * @template T of ProductAssociationInterface
  *
  * @extends BaseProductAssociationRepository<T>
+ *
  * @implements ProductAssociationRepositoryInterface<T>
  */
 class ProductAssociationRepository extends BaseProductAssociationRepository implements ProductAssociationRepositoryInterface

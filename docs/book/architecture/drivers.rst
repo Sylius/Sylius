@@ -47,7 +47,7 @@ Sylius, by default, uses the Doctrine ORM for managing all entities. Doctrine is
 The most important are the object-relational mapper (ORM) and the database abstraction layer (DBAL).
 One of Doctrine's key features is the possibility to write database queries in Doctrine Query Language (DQL) - an object-oriented dialect of SQL.
 
-For deeper understanding of how Doctrine works, please refer to the `excellent documentation on their official website <http://doctrine-orm.readthedocs.org/en/latest/>`_.
+For deeper understanding of how Doctrine works, please refer to the `excellent documentation on their official website <https://www.doctrine-project.org/projects/doctrine-orm/en/3.1/index.html>`_.
 
 **Twig**
 
@@ -57,7 +57,7 @@ For deeper understanding of how Doctrine works, please refer to the `excellent d
 
 Twig is a modern template engine for PHP that is really fast, secure and flexible. Twig is being used by Symfony.
 
-To read more about Twig, `go here <http://twig.sensiolabs.org/>`_.
+To read more about Twig, `go here <https://twig.symfony.com/>`_.
 
 **API Platform**
 
@@ -82,7 +82,7 @@ Functional requirements
 -----------------------
 
 All of the functionality provided by default with Sylius is described as user stories using Behat scenarios. Take a look
-`here <https://github.com/Sylius/Sylius/tree/1.11/features>`_ to browse them.
+`here <https://github.com/Sylius/Sylius/tree/1.12/features>`_ to browse them.
 
 Quality attributes
 ------------------
@@ -101,10 +101,10 @@ and business-specific functionalities.
 **Question to be asked:** is it possible to easily add new, more advanced functionality to the module/class/service I implement?
 **Examples:**
 
-* promotions `actions <https://github.com/Sylius/Sylius/blob/1.11/src/Sylius/Bundle/CoreBundle/Resources/config/services/promotion.xml#L65>`_ and
-  `rules <https://github.com/Sylius/Sylius/blob/1.11/src/Sylius/Bundle/PromotionBundle/Resources/config/services.xml#L39>`_ registered with tags
-* state machine `callbacks <https://github.com/Sylius/Sylius/blob/1.11/src/Sylius/Bundle/CoreBundle/Resources/config/app/state_machine/sylius_order.yml#L22>`_
-* resource `events <https://github.com/Sylius/SyliusResourceBundle/blob/1.10/src/Bundle/Controller/ResourceController.php#L175>`_
+* promotions `actions <https://github.com/Sylius/Sylius/blob/1.12/src/Sylius/Bundle/CoreBundle/Resources/config/services/promotion.xml#L65>`_ and
+  `rules <https://github.com/Sylius/Sylius/blob/1.12/src/Sylius/Bundle/PromotionBundle/Resources/config/services.xml#L39>`_ registered with tags
+* state machine `callbacks <https://github.com/Sylius/Sylius/blob/1.12/src/Sylius/Bundle/CoreBundle/Resources/config/app/state_machine/sylius_order.yml#L22>`_
+* resource `events <https://github.com/Sylius/SyliusResourceBundle/blob/1.12/src/Bundle/Controller/ResourceController.php#L175>`_
 
 
 Customizability
@@ -118,7 +118,7 @@ Customizability should be kept on all levels - from the single service, to the w
 **Question to be asked:** is it possible to replace this functionality and do not break the whole process?
 **Examples:**
 
-* service for `calculating variant price <https://github.com/Sylius/Sylius/blob/1.11/src/Sylius/Component/Core/Calculator/ProductVariantPriceCalculator.php>`_ that
+* service for `calculating variant price <https://github.com/Sylius/Sylius/blob/1.12/src/Sylius/Component/Core/Calculator/ProductVariantPriceCalculator.php>`_ that
   can be overridden to provide more advances pricing strategies
 * `resource configuration <https://github.com/Sylius/SyliusResourceBundle/blob/1.10/docs/reference.md#configuration-reference>`_, that gives possibility to configure
   any service as resource-specific controller/factory/repository etc.
