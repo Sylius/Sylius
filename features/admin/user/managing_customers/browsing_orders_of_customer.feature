@@ -17,14 +17,14 @@ Feature: Browsing orders of a customer
         And the customer chose "Free" shipping method to "United States" with "Cash on Delivery" payment
         And I am logged in as an administrator
 
-    @api @todo @ui
+    @api @ui
     Scenario: Browsing orders of a specific customer in the list
         When I browse orders of a customer "logan@wolverine.com"
         Then I should see a single order in the list
         And I should see the order with number "#00000007" in the list
         And I should not see the order with number "#00000008" in the list
 
-    @api @todo @ui
+    @api @ui
     Scenario: Sorting orders of customer by channel
         When I browse orders of a customer "logan@wolverine.com"
         And I sort the orders ascending by channel

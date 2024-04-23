@@ -24,17 +24,8 @@ sylius_admin_customer_order_index:
         _sylius:
             section: admin
             permission: true
-            template: "@SyliusAdmin/Crud/index.html.twig"
+            template: "@SyliusAdmin/Shared/Crud/index.html.twig"
             grid: sylius_admin_customer_order
-            vars:
-                route:
-                    parameters:
-                        $customerId: $id
-                templates:
-                    breadcrumb: '@SyliusAdmin/Customer/Order/Index/_breadcrumb.html.twig'
-                    header_title: '@SyliusAdmin/Customer/Order/Index/_headerTitle.html.twig'
-                subheader: sylius.ui.process_your_orders
-                icon: cart
 
 sylius_admin_customer_orders_statistics:
     path: /orders-statistics
