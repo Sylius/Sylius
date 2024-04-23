@@ -82,7 +82,7 @@ class GeneratePage extends SymfonyPage implements GeneratePageInterface
             'delete_button' => '#sylius_product_generate_variants_variants_%position% [data-test-delete-button]',
             'code' => '#sylius_product_generate_variants_variants_%position% [data-test-code]',
             'channel_pricings' => '#sylius_product_generate_variants_variants_%position% [data-test-channel-pricings]',
-            'form' => '[data-live-name-value="sylius_admin.product.generate_variants_form"]',
+            'form' => '[data-live-name-value="sylius_admin:product:generate_variants_form"]',
         ]);
     }
 
