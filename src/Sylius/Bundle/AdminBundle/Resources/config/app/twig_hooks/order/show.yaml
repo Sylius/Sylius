@@ -55,8 +55,8 @@ twig_hooks:
         'sylius_admin.order.show.content.sections#left.shipments.item.actions':
             ship:
                 component: 'SyliusAdmin.Shipment.ShipType'
-                data:
-                    shipment: '@=shipment'
+                props:
+                    shipment: '@=_context.shipment'
             resend_confirmation:
                 template: '@SyliusAdmin/Order/Show/Content/Sections/Shipments/Item/Actions/_resendConfirmation.html.twig'
             show:

@@ -6,12 +6,12 @@ twig_hooks:
         'sylius_admin.product.create.content':
             form:
                 component: 'SyliusAdmin.Product.Form'
-                data:
-                    form: '@=form'
-                    resource: '@=resource'
-                    parentMainHook: '@=parent_main_hook'
-                    parentFallbackHook: '@=parent_fallback_hook'
-                    isSimple: '@=resource.isSimple()'
+                props:
+                    form: '@=_context.form'
+                    resource: '@=_context.resource'
+                    parentMainHook: '@=_context.parent_main_hook'
+                    parentFallbackHook: '@=_context.parent_fallback_hook'
+                    isSimple: '@=_context.resource.isSimple()'
 
         'sylius_admin.product.create.content.form':
             side_navigation:

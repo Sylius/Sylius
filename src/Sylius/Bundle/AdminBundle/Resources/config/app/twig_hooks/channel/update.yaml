@@ -3,11 +3,11 @@ twig_hooks:
         'sylius_admin.channel.update.content':
             form:
                 component: 'sylius_admin:channel:form'
-                data:
-                    channel: '@=resource'
-                    form: '@=form'
-                    parentMainHook: '@=parent_main_hook'
-                    parentFallbackHook: '@=parent_fallback_hook'
+                props:
+                    channel: '@=_context.resource'
+                    form: '@=_context.form'
+                    parentMainHook: '@=_context.parent_main_hook'
+                    parentFallbackHook: '@=_context.parent_fallback_hook'
                 configuration:
                     method: 'PUT'
 
