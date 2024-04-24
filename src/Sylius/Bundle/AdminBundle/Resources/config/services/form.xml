@@ -153,9 +153,5 @@
             <argument type="service" id="sylius.form.type.data_transformer.product_variants_to_codes" />
             <tag name="form.type_extension" />
         </service>
-
-        <service id="sylius_admin.form.type.catalog_promotion.add_button" class="Sylius\Bundle\AdminBundle\Form\Type\CatalogPromotion\AddButtonType">
-            <tag name="form.type" />
-        </service>
     </services>
 </container>

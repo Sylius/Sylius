@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\AdminBundle\Form\Extension;
 
-use Sylius\Bundle\AdminBundle\Form\Type\CatalogPromotion\AddButtonType;
+use Sylius\Bundle\AdminBundle\Form\Type\AddButtonType;
 use Sylius\Bundle\PromotionBundle\Form\Type\CatalogPromotionActionType;
 use Sylius\Bundle\PromotionBundle\Form\Type\CatalogPromotionScopeType;
 use Sylius\Bundle\PromotionBundle\Form\Type\CatalogPromotionType;
