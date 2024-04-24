@@ -7,36 +7,38 @@
  * file that was distributed with this source code.
  */
 
-(function() {
-  const dialog = document.querySelector('[data-confirm-dialog]');
+/* global document */
 
-  if (dialog) {
-    const confirmButton = dialog.querySelector('[data-confirm-btn-true]');
-    const cancelButton = dialog.querySelector('[data-confirm-btn-false]');
-    const submitButton = document.querySelectorAll('[data-confirm-btn-submit]');
+(function () {
+    const dialog = document.querySelector('[data-confirm-dialog]');
 
-    submitButton.forEach((btn) => {
-      const confirm = () => {
-        dialog.close();
-        confirmButton.removeEventListener('click', confirm);
-        cancelButton.removeEventListener('click', cancel);
-        btn.closest('form').submit();
-      };
+    if (dialog) {
+        const confirmButton = dialog.querySelector('[data-confirm-btn-true]');
+        const cancelButton = dialog.querySelector('[data-confirm-btn-false]');
+        const submitButton = document.querySelectorAll('[data-confirm-btn-submit]');
 
-      const cancel = () => {
-        dialog.close();
-        confirmButton.removeEventListener('click', confirm);
-        cancelButton.removeEventListener('click', cancel);
-      };
+        submitButton.forEach((btn) => {
+            const confirm = () => {
+                dialog.close();
+                confirmButton.removeEventListener('click', confirm);
+                cancelButton.removeEventListener('click', cancel);
+                btn.closest('form').requestSubmit();
+            };
 
-      btn.addEventListener('click', (e) => {
-        e.preventDefault();
+            const cancel = () => {
+                dialog.close();
+                confirmButton.removeEventListener('click', confirm);
+                cancelButton.removeEventListener('click', cancel);
+            };
 
-        confirmButton.addEventListener('click', confirm);
-        cancelButton.addEventListener('click', cancel);
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
 
-        dialog.showModal();
-      });
-    });
-  }
-})();
+                confirmButton.addEventListener('click', confirm);
+                cancelButton.addEventListener('click', cancel);
+
+                dialog.showModal();
+            });
+        });
+    }
+}());
