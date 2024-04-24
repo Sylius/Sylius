@@ -14,7 +14,7 @@ twig_hooks:
             header:
                 template: '@SyliusAdmin/Shared/Crud/Common/Content/_header.html.twig'
             form:
-                component: 'sylius_admin:product:generate_variants_form'
+                component: 'sylius_admin:product:generate_product_variants_form'
                 data:
                     resource: '@=resource'
                     form: '@=form'
