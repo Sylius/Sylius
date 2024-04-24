@@ -7,7 +7,8 @@
     {% set metadata = hookable_context.metadata %}
     {% set title = hookable_configuration.title|default(metadata.applicationName~'.ui.'~metadata.pluralName) %}
 {% else %}
-    {% set title = hookable_configuration.title %}
+{#    {% set title = hookable_configuration.title %}#}
+    {% set title = 'test' %}
 {% endif %}
 
 {{ _breadcrumbs.default([

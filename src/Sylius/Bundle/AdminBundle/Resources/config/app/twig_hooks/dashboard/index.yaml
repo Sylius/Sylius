@@ -11,10 +11,12 @@ twig_hooks:
         'sylius_admin.dashboard.index.content':
             header:
                 template: '@SyliusAdmin/Shared/Crud/Common/Content/_header.html.twig'
+            grid:
+                enabled: false
             statistics:
                 component: 'SyliusAdmin.Dashboard.Statistics'
                 props:
-                    channelCode: '@=_context.get("channelCode")'
+                    channelCode: '@=_context.channelCode'
             latest_statistics:
                 template: '@SyliusAdmin/Dashboard/Index/Content/_latestStatistics.html.twig'
 
@@ -27,6 +29,8 @@ twig_hooks:
                 template: '@SyliusAdmin/Shared/Crud/Common/Content/Header/TitleBlock/_title.html.twig'
                 configuration:
                     title: sylius.ui.dashboard
+            actions:
+                enabled: false
 
         'sylius_admin.dashboard.index.content.statistics':
             statistics_grid:

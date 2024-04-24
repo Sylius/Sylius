@@ -1,7 +1,7 @@
 {% set hookable_context = get_hookable_context() %}
 
-{% set statisticsData = hookable_context.get("statisticsData") %}
-{% set rangeName = hookable_context.get("range") %}
+{% set statisticsData = hookable_context.statisticsData %}
+{% set rangeName = hookable_context.range %}
 
 <div class="card mb-3">
     <div data-loading>
