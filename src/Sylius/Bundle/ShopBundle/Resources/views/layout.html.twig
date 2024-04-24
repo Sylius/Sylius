@@ -35,7 +35,9 @@
                 {{ sylius_template_event('sylius.shop.layout.navbar') }}
             {% endblock %}
 
-            {% include '@SyliusShop/_flashes.html.twig' %}
+            <div class="container mb-4">
+                {% include '@SyliusShop/Shared/flashes.html.twig' %}
+            </div>
 
             {{ sylius_template_event('sylius.shop.layout.before_content') }}
 
