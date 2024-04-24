@@ -98,7 +98,7 @@
             <argument>Sylius\Bundle\PromotionBundle\Form\Type\CatalogPromotionType</argument>
         </service>
 
-        <service id="Sylius\Bundle\AdminBundle\Twig\Component\Product\GenerateVariantsFormComponent">
+        <service id="Sylius\Bundle\AdminBundle\Twig\Component\Product\GenerateProductVariantsFormComponent">
             <argument type="service" id="form.factory" />
             <argument>Sylius\Bundle\ProductBundle\Form\Type\ProductGenerateVariantsType</argument>
         </service>
