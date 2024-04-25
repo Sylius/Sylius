@@ -1,12 +1,10 @@
 {% from '@SyliusAdmin/Shared/Helper/icon.html.twig' import icon as _icon %}
 {% import '@SyliusAdmin/Shared/Helper/money.html.twig' as _money %}
 
-{% set product = hookable_data.product %}
+{% set product = hookable_metadata.context.product %}
 
 {% if product.isConfigurable() %}
-    {% set main_hook = hook_name(hookable_data.parent_main_hook, 'configurable_product') %}
-    {% set fallback_hook = hook_name(hookable_data.parent_fallback_hook, 'configurable_product') %}
-    {% set channels = hookable_data.channels %}
+    {% set channels = hookable_metadata.context.channels %}
 
     <div class="table-responsive">
         <table class="table table-vcenter">
@@ -136,11 +134,7 @@
                                 </div>
                             </div>
                             <div class="card mb-3">
-                                {% hook [main_hook, fallback_hook] with hookable_data|merge({
-                                    parent_main_hook: main_hook,
-                                    parent_fallback_hook: fallback_hook,
-                                    variant: variant
-                                }) %}
+                                {% hook 'configurable_product' with { variant } %}
                             </div>
                         </div>
                     </td>

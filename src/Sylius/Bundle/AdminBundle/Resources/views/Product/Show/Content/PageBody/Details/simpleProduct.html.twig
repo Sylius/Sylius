@@ -1,13 +1,11 @@
 {% from '@SyliusAdmin/Shared/Helper/icon.html.twig' import icon as _icon %}
 {% import '@SyliusAdmin/Shared/Helper/money.html.twig' as _money %}
 
-{% set product = hookable_data.product %}
+{% set product = hookable_metadata.context.product %}
 
 {% if product.isSimple() %}
-    {% set main_hook = hook_name(hookable_data.parent_main_hook, 'simple_product') %}
-    {% set fallback_hook = hook_name(hookable_data.parent_fallback_hook, 'simple_product') %}
     {% set variant = product.variants.first %}
-    {% set channels = hookable_data.channels %}
+    {% set channels = hookable_metadata.context.channels %}
 
     <table>
         <tr class="bg-gray-400">
@@ -64,11 +62,7 @@
                         </div>
                     </div>
                     <div class="card mb-3">
-                        {% hook [main_hook, fallback_hook] with hookable_data|merge({
-                            parent_main_hook: main_hook,
-                            parent_fallback_hook: fallback_hook,
-                            variant: variant
-                        }) %}
+                        {% hook 'simple_product' with { variant } %}
                     </div>
                 </div>
             </td>

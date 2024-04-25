@@ -1,9 +1,9 @@
-{% set product = hookable_data.resource %}
+{% set product = hookable_metadata.context.resource %}
 
 {% if product.isSimple %}
     <button
         type="button"
-        class="list-group-item list-group-item-action {% if hookable_configuration.active|default(false) %}active{% endif %}"
+        class="list-group-item list-group-item-action {% if hookable_metadata.configuration.active|default(false) %}active{% endif %}"
         data-bs-toggle="tab"
         data-bs-target="#taxes"
         role="tab"

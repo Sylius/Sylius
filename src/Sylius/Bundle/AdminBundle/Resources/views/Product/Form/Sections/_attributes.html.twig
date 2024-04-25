@@ -1,5 +1,5 @@
-{% set productAttributes = hookable_data.mappedProductAttributes %}
-{% set attributesToBeAdded = hookable_data.attributesToBeAdded %}
+{% set productAttributes = hookable_metadata.context.mappedProductAttributes %}
+{% set attributesToBeAdded = hookable_metadata.context.attributesToBeAdded %}
 
 <div class="tab-pane" id="product-attributes" role="tabpanel" tabindex="0">
     <div class="card mb-3">

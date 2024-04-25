@@ -1,6 +1,4 @@
-{% set main_hook = hook_name(hookable_data.parent_main_hook, 'details') %}
-{% set fallback_hook = hook_name(hookable_data.parent_fallback_hook, 'details') %}
-{% set product = hookable_data.resource %}
+{% set product = hookable_metadata.context.resource %}
 {% set channels = [] %}
 {% for channel in product.channels %}
     {% set channels = channels|merge({ (channel.code): channel }) %}
@@ -12,10 +10,5 @@
             {{ 'sylius.ui.details'|trans }}
         </div>
     </div>
-    {% hook [main_hook, fallback_hook] with hookable_data|merge({
-        parent_main_hook: main_hook,
-        parent_fallback_hook: fallback_hook,
-        product: product,
-        channels: channels
-    }) %}
+    {% hook 'details' with { product, channels } %}
 </div>
