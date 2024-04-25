@@ -15,7 +15,7 @@
                         <tbody>
                         {% for item in cart.items %}
                             <tr>
-                                <td>{{ item.product }}</td>
+                                <td>{% include '@SyliusShop/Product/info.html.twig' with {'variant': item.variant} %}</td>
                                 <td>{{ item.quantity }}</td>
                                 <td class="text-end">{{ money.convertAndFormat(item.unitPrice) }}</td>
                             </tr>

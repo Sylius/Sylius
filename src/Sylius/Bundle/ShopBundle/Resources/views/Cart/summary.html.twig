@@ -11,10 +11,20 @@
 {% block content %}
     <div class="container">
         {% if not cart.empty %}
-            {{ sylius_template_event('sylius.shop.cart.header', {'header': header, 'cart': cart}) }}
-            {{ sylius_template_event('sylius.shop.cart.items', {'cart': cart, 'form': form}) }}
-            {{ sylius_template_event('sylius.shop.cart.summary', {'cart': cart}) }}
-            {{ sylius_template_event('sylius.shop.cart.suggestions', {'cart': cart}) }}
+            <div>
+                {{ sylius_template_event('sylius.shop.cart.header', {'header': header, 'cart': cart}) }}
+            </div>
+            <div class="row mb-6">
+                <div class="col-12 col-lg-8 mb-4">
+                    {{ sylius_template_event('sylius.shop.cart.items', {'cart': cart, 'form': form}) }}
+                </div>
+                <div class="col-12 col-lg-4 ps-lg-5 mb-4">
+                    {{ sylius_template_event('sylius.shop.cart.summary', {'cart': cart}) }}
+                </div>
+            </div>
+            <div>
+                {{ sylius_template_event('sylius.shop.cart.footer', {'cart': cart}) }}
+            </div>
         {% else %}
             {{ messages.info('sylius.ui.your_cart_is_empty') }}
         {% endif %}

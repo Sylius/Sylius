@@ -1,0 +1,7 @@
+<div class="p-4 bg-light">
+    <div class="input-group" {{ sylius_test_html_attribute('cart-promotion-coupon') }}>
+        {{ form_widget(form.promotionCoupon, sylius_test_form_attribute('cart-promotion-coupon-input')|sylius_merge_recursive({'attr': {'form': main_form, 'placeholder': 'sylius.ui.enter_your_code'|trans~'...'}})) }}
+        <button class="btn btn-outline-gray" type="submit" {{ sylius_test_html_attribute('apply-coupon-button') }} form="{{ main_form }}">{{ 'sylius.ui.apply_coupon'|trans }}</button>
+        {{ form_errors(form.promotionCoupon) }}
+    </div>
+</div>
