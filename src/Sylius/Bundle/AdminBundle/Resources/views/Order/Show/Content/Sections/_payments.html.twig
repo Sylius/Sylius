@@ -1,9 +1,9 @@
 {% import '@SyliusAdmin/Shared/Helper/money.html.twig' as _money %}
 
-{% set main_hook = hook_name(hookable_data.parent_main_hook, 'payments') %}
-{% set fallback_hook = hook_name(hookable_data.parent_fallback_hook, 'payments') %}
+{% set main_hook = hook_name(hookable_metadata.context.parent_main_hook, 'payments') %}
+{% set fallback_hook = hook_name(hookable_metadata.context.parent_fallback_hook, 'payments') %}
 
-{% set order = hookable_data.resource %}
+{% set order = hookable_metadata.context.resource %}
 
 <div class="card mb-3">
     <div class="card-header">
@@ -30,11 +30,7 @@
                             {{ _money.format(payment.amount, order.currencyCode) }}
                         </td>
                         <td class="w-1 text-end">
-                            {% hook [main_hook ~ '#actions', fallback_hook ~ '#actions'] with hookable_data|merge({
-                                parent_main_hook: main_hook ~ '#actions',
-                                parent_fallback_hook: fallback_hook ~ '#actions',
-                                payment,
-                            }) %}
+                            {% hook 'payments#actions' %}
                         </td>
                     </tr>
                 {% endfor %}

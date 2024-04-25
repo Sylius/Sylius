@@ -1,4 +1,4 @@
-{% set shipment = hookable_data.shipment %}
+{% set shipment = hookable_metadata.context.shipment %}
 
 {% if shipment.state == 'shipped' %}
     {% set resendPath = path('sylius_admin_shipment_resend_confirmation_email', {'id': shipment.id, '_csrf_token': csrf_token(shipment.id)}) %}

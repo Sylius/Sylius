@@ -1,5 +1,5 @@
-{% set order = hookable_data.resource %}
-{% set payment = hookable_data.payment %}
+{% set order = hookable_metadata.context.resource %}
+{% set payment = hookable_metadata.context.payment %}
 
 {% if sm_can(payment, 'complete', 'sylius_payment') %}
     {% from '@SyliusAdmin/Shared/Helper/icon.html.twig' import icon as _icon %}
