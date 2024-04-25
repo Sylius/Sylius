@@ -93,7 +93,7 @@
             <argument>Sylius\Bundle\ChannelBundle\Form\Type\ChannelType</argument>
         </service>
 
-        <service id="sylius_admin.twig_component.shipping_method.form" class="Sylius\Bundle\AdminBundle\TwigComponent\ShippingMethod\FormComponent">
+        <service id="sylius_admin.twig_component.shipping_method.form" class="Sylius\Bundle\AdminBundle\Twig\Component\ShippingMethod\FormComponent">
             <argument type="service" id="form.factory" />
             <argument>Sylius\Bundle\ShippingBundle\Form\Type\ShippingMethodType</argument>
         </service>
