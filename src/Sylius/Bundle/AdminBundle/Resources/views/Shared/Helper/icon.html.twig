@@ -276,10 +276,22 @@
 
         {% if icon == 'arrows-shuffle' %}
             <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-            <path d="M18 4l3 3l-3 3" ></path>
-            <path d="M18 20l3 -3l-3 -3" ></path>
-            <path d="M3 7h3a5 5 0 0 1 5 5a5 5 0 0 0 5 5h5" ></path>
-            <path d="M21 7h-5a4.978 4.978 0 0 0 -3 1m-4 8a4.984 4.984 0 0 1 -3 1h-3" ></path>
+            <path d="M18 4l3 3l-3 3"></path>
+            <path d="M18 20l3 -3l-3 -3"></path>
+            <path d="M3 7h3a5 5 0 0 1 5 5a5 5 0 0 0 5 5h5"></path>
+            <path d="M21 7h-5a4.978 4.978 0 0 0 -3 1m-4 8a4.984 4.984 0 0 1 -3 1h-3"></path>
+        {% endif %}
+
+        {% if icon == 'history' %}
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+            <path d="M12 8l0 4l2 2"></path>
+            <path d="M3.05 11a9 9 0 1 1 .5 4m-.5 5v-5h5"></path>
+        {% endif %}
+
+        {% if icon == 'arrow-back-up' %}
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+            <path d="M9 14l-4 -4l4 -4"></path>
+            <path d="M5 10h11a4 4 0 1 1 0 8h-1"></path>
         {% endif %}
     </svg>
 {% endmacro %}

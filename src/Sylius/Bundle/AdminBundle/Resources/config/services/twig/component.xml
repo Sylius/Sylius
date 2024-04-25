@@ -107,5 +107,9 @@
             <argument type="service" id="form.factory" />
             <argument>Sylius\Bundle\PaymentBundle\Form\Type\PaymentMethodType</argument>
         </service>
+
+        <service id="Sylius\Bundle\AdminBundle\Twig\Component\Order\AddressHistoryComponent">
+            <argument type="service" id="sylius.repository.address_log_entry" />
+        </service>
     </services>
 </container>

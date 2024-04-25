@@ -5,6 +5,6 @@
 {{ breadcrumbs.default([
     { name: 'sylius.ui.dashboard'|trans, url: path('sylius_admin_dashboard'), active: false },
     { name: 'sylius.ui.orders'|trans, url: path('sylius_admin_order_index'), active: false },
-    { name: '#' ~ order.number, active: true },
-    { name: 'sylius.ui.show'|trans, active: false }
+    { name: '#' ~ order.number, url: path('sylius_admin_order_show', {'id': order.id}), active: false },
+    { name: 'sylius.ui.history'|trans, active: true }
 ]) }}

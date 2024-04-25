@@ -1,0 +1,9 @@
+{% extends '@SyliusAdmin/Shared/Layout/base.html.twig' %}
+
+{% block title %}
+    {{ 'sylius.ui.history'|trans }} | {{ parent() }}
+{% endblock %}
+
+{% block body %}
+    {% hook 'sylius_admin.order.history' with { resource, metadata, configuration } %}
+{% endblock %}

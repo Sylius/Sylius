@@ -1,0 +1,47 @@
+{% from '@SyliusAdmin/Order/history/macro/action_label.html.twig' import label %}
+
+<div class="col-12 col-md-6">
+    <div class="card mb-3">
+        <div class="card-header">
+            <div class="card-title">{{ (header|default('sylius.ui.address'))|trans }}</div>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-vcenter table-bordered card-table">
+                <thead>
+                <tr>
+                    <th>{{ 'sylius.ui.actions'|trans }}</th>
+                    <th>{{ 'sylius.ui.logged_at'|trans }}</th>
+                    <th>{{ 'sylius.ui.changes'|trans }}</th>
+                </tr>
+                </thead>
+                <tbody>
+                {%- for log in addressLogs -%}
+                    <tr>
+                        <td>{{ label(log) }}</td>
+                        <td>
+                            {{ log.loggedAt|date('Y-m-d') }}<br>
+                            {{ log.loggedAt|date('H:i:s') }}
+                        </td>
+                        <td>
+                            <div class="table-responsive">
+                                <table class="table table-sm table-vcenter">
+                                    <tbody>
+                                    {%- for field, data in log.data -%}
+                                        {%- if data is not empty -%}
+                                            <tr>
+                                                <td><strong>{{ field|title }}</strong></td>
+                                                <td><span>{{ data }}</span></td>
+                                            </tr>
+                                        {%- endif -%}
+                                    {%- endfor -%}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </td>
+                    </tr>
+                {%- endfor -%}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

@@ -48,6 +48,7 @@ sylius:
         additional_information: 'Additional information'
         address: 'Address'
         address_book: 'Address book'
+        addresses: 'Addresses'
         addressing: 'Addressing'
         addressing_step: 'Addressing step'
         adjustments: 'Adjustments'
