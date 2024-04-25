@@ -19,12 +19,6 @@
             "homepage": "https://github.com/Sylius/Sylius/contributors"
         }
     ],
-    "repositories": [
-        {
-            "type": "path",
-            "url": "/packages/twig-hooks"
-        }
-    ],
     "require": {
         "php": "^8.2",
         "ext-dom": "*",
@@ -93,7 +87,7 @@
         "sylius/resource": "^1.10",
         "sylius/resource-bundle": "^1.10",
         "sylius/theme-bundle": "^2.3",
-        "sylius/twig-hooks": "^0.1",
+        "sylius/twig-hooks": "dev-main",
         "symfony/asset": "^6.4.0",
         "symfony/clock": "^6.4.0",
         "symfony/config": "^6.4.0",
