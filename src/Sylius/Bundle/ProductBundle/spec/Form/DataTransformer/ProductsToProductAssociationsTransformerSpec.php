@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 
-namespace spec\Sylius\Bundle\AdminBundle\Form\DataTransformer\Product;
+namespace spec\Sylius\Bundle\ProductBundle\Form\DataTransformer;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;

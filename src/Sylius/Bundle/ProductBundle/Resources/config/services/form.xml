@@ -203,5 +203,16 @@
             <argument type="service" id="sylius.available_product_option_values_resolver" />
             <tag name="form.type" />
         </service>
+
+        <service id="sylius.form.type.sylius_product_associations" class="Sylius\Bundle\ProductBundle\Form\Type\ProductAssociationsType">
+            <argument type="service" id="sylius.repository.product_association_type" />
+            <argument type="service" id="sylius.form.type.data_transformer.products_to_product_associations" />
+            <tag name="form.type" />
+        </service>
+
+        <service id="sylius.form.type.data_transformer.products_to_product_associations" class="Sylius\Bundle\ProductBundle\Form\DataTransformer\ProductsToProductAssociationsTransformer">
+            <argument type="service" id="sylius.factory.product_association" />
+            <argument type="service" id="sylius.repository.product_association_type" />
+        </service>
     </services>
 </container>
