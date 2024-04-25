@@ -19,6 +19,12 @@
             "homepage": "https://github.com/Sylius/Sylius/contributors"
         }
     ],
+    "repositories": [
+        {
+            "type": "path",
+            "url": "/packages/twig-hooks"
+        }
+    ],
     "require": {
         "php": "^8.2",
         "ext-dom": "*",
