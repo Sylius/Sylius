@@ -37,6 +37,22 @@ twig_hooks:
             type:
                 template: '@SyliusAdmin/payment_method/form/sections/gateway_configuration/type.html.twig'
 
+        'sylius_admin.payment_method.update.content.form.sections.gateway_configuration.paypal_express_checkout':
+            username:
+                template: '@SyliusAdmin/payment_method/form/sections/gateway_configuration/paypal/username.html.twig'
+            password:
+                template: '@SyliusAdmin/payment_method/form/sections/gateway_configuration/paypal/password.html.twig'
+            signature:
+                template: '@SyliusAdmin/payment_method/form/sections/gateway_configuration/paypal/signature.html.twig'
+            sandbox:
+                template: '@SyliusAdmin/payment_method/form/sections/gateway_configuration/paypal/sandbox.html.twig'
+
+        'sylius_admin.payment_method.update.content.form.sections.gateway_configuration.stripe_checkout':
+            publishable_key:
+                template: '@SyliusAdmin/payment_method/form/sections/gateway_configuration/stripe/publishable_key.html.twig'
+            secret_key:
+                template: '@SyliusAdmin/payment_method/form/sections/gateway_configuration/stripe/secret_key.html.twig'
+
         'sylius_admin.payment_method.update.content.form.sections.translations':
             type:
                 template: '@SyliusAdmin/payment_method/form/sections/translations/translations.html.twig'
