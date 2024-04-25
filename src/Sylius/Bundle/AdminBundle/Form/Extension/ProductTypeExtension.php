@@ -13,8 +13,8 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\AdminBundle\Form\Extension;
 
-use Sylius\Bundle\AdminBundle\Form\Type\Product\ProductAssociationsType;
 use Sylius\Bundle\CoreBundle\Form\Type\Product\ProductImageType;
+use Sylius\Bundle\ProductBundle\Form\Type\ProductAssociationsType;
 use Sylius\Bundle\ProductBundle\Form\Type\ProductType;
 use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\Form\FormBuilderInterface;

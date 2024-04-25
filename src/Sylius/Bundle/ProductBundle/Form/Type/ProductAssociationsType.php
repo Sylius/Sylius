@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\AdminBundle\Form\Type\Product;
+namespace Sylius\Bundle\ProductBundle\Form\Type;
 
 use Doctrine\Common\Collections\Collection;
 use Sylius\Bundle\AdminBundle\Form\Type\ProductAutocompleteChoiceType;

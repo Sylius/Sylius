@@ -18,7 +18,7 @@
             <tag name="ux.entity_autocompleter" alias="product_attribute" />
         </service>
 
-        <service id="sylius_admin.autocompeter.product" class="Sylius\Bundle\AdminBundle\Autocompleter\ProductAutocompleter">
+        <service id="sylius_admin.autocompleter.product" class="Sylius\Bundle\AdminBundle\Autocompleter\ProductAutocompleter">
             <argument>%sylius.model.product.class%</argument>
             <tag name="ux.entity_autocompleter" alias="product_autocomplete_choice_type" />
         </service>

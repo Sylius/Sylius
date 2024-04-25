@@ -13,17 +13,6 @@
 
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
-        <service id="sylius_admin.form.type.sylius_product_associations" class="Sylius\Bundle\AdminBundle\Form\Type\Product\ProductAssociationsType">
-            <argument type="service" id="sylius.repository.product_association_type" />
-            <argument type="service" id="sylius_admin.form.type.data_transformer.products_to_product_associations" />
-            <tag name="form.type" />
-        </service>
-
-        <service id="sylius_admin.form.type.data_transformer.products_to_product_associations" class="Sylius\Bundle\AdminBundle\Form\DataTransformer\Product\ProductsToProductAssociationsTransformer">
-            <argument type="service" id="sylius.factory.product_association" />
-            <argument type="service" id="sylius.repository.product_association_type" />
-        </service>
-
         <service id="sylius_admin.form.extension.product_type" class="Sylius\Bundle\AdminBundle\Form\Extension\ProductTypeExtension">
             <tag name="form.type_extension" />
         </service>
