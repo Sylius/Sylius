@@ -1,0 +1,15 @@
+twig_hooks:
+    hooks:
+        'sylius_admin.common.component.navbar':
+            items:
+                template: '@SyliusAdmin/Shared/Crud/Common/Navbar/_items.html.twig'
+            menu:
+                template: '@SyliusAdmin/Shared/Crud/Common/Navbar/_menu.html.twig'
+        'sylius_admin.common.component.navbar.items':
+            notifications:
+                component: 'SyliusAdminNavbarNotifications'
+            user_dropdown:
+                template: '@SyliusAdmin/Shared/Crud/Common/Navbar/Items/_userDropdown.html.twig'
+        'sylius_admin.common.component.navbar.menu':
+            search:
+                template: '@SyliusAdmin/Shared/Crud/Common/Navbar/Menu/_search.html.twig'
