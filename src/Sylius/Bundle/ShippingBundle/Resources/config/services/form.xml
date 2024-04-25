@@ -67,6 +67,11 @@
             <tag name="form.type" />
         </service>
 
+        <service id="sylius.form.type.shipping_method_rule.collection" class="Sylius\Bundle\ShippingBundle\Form\Type\ShippingMethodRuleCollectionType">
+            <argument type="service" id="sylius.registry.shipping_method_rule_checker" />
+            <tag name="form.type" />
+        </service>
+
         <service id="sylius.form.type.shipping_method_rule_choice" class="Sylius\Bundle\ShippingBundle\Form\Type\ShippingMethodRuleChoiceType">
             <argument>%sylius.shipping_method_rules%</argument>
             <tag name="form.type" />
