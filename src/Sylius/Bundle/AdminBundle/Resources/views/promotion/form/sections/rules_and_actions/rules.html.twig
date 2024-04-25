@@ -1,5 +1,5 @@
-{% set main_hook = hook_name(hookable_data.parent_main_hook, 'rules') %}
-{% set fallback_hook = hook_name(hookable_data.parent_fallback_hook, 'rules') %}
+{% set main_hook = hook_name(hookable_metadata.context.parent_main_hook, 'rules') %}
+{% set fallback_hook = hook_name(hookable_metadata.context.parent_fallback_hook, 'rules') %}
 
 <div class="col-12 col-md-6 mb-3">
     <div class="card" {{ sylius_test_html_attribute('rules') }}>
@@ -10,16 +10,13 @@
         </div>
         <div class="card-body">
             <div class="row align-items-center">
-                {{ form_row(hookable_data.form.rules, {label: false}) }}
+                {{ form_row(hookable_metadata.context.form.rules, {label: false}) }}
 
-                {% hook [main_hook, fallback_hook] with hookable_data|merge({
-                    parent_main_hook: main_hook,
-                    parent_fallback_hook: fallback_hook,
-                }) %}
+                {% hook 'rules' %}
             </div>
         </div>
         <div class="card-footer">
-            {{ form_row(hookable_data.form.rules.vars.button_add) }}
+            {{ form_row(hookable_metadata.context.form.rules.vars.button_add) }}
         </div>
     </div>
 </div>
