@@ -160,7 +160,7 @@ final readonly class ManagingPaymentMethodsContext implements Context
     }
 
     /**
-     * @Then /^its gateway configuration "([^"]+)" should be "([^"]+)"$/
+     * @Then /^(?:this payment method|its gateway configuration) "([^"]+)" should be "([^"]+)"$/
      */
     public function itsGatewayConfigurationShouldBe(string $element, string $value): void
     {

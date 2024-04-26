@@ -720,7 +720,7 @@ final readonly class ManagingPaymentMethodsContext implements Context
         string $element,
         string $value,
     ): void {
-        if ($element === 'name') {
+        if ($element === 'Name') {
             Assert::inArray(
                 $value,
                 $this->getPaymentMethodNamesFromCollection(),
