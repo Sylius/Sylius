@@ -174,7 +174,7 @@ final class CartContext implements Context
             'shop',
             Resources::ORDERS,
             $tokenValue,
-            HttpRequest::METHOD_POST,
+            HttpRequest::METHOD_PATCH,
             'items',
         );
         $request->updateContent([
@@ -833,7 +833,7 @@ final class CartContext implements Context
             'shop',
             Resources::ORDERS,
             $tokenValue,
-            HttpRequest::METHOD_POST,
+            HttpRequest::METHOD_PATCH,
             'items',
         );
         $request->updateContent([
@@ -852,7 +852,7 @@ final class CartContext implements Context
             'shop',
             Resources::ORDERS,
             $tokenValue,
-            HttpRequest::METHOD_POST,
+            HttpRequest::METHOD_PATCH,
             'items',
         );
         $request->updateContent([
