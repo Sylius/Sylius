@@ -553,8 +553,6 @@ final readonly class ManagingPaymentMethodsContext implements Context
         $this->createPage->setStripePublishableKey('TEST');
     }
 
-
-
     /**
      * @Then I should be redirected to the previous page of only enabled payment methods
      */

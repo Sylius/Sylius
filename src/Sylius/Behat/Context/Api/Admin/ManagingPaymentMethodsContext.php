@@ -651,8 +651,7 @@ final readonly class ManagingPaymentMethodsContext implements Context
         PaymentMethodInterface $paymentMethod,
         string $instructions,
         string $localeCode,
-    ): void
-    {
+    ): void {
         $translations = $this->responseChecker->getValue($this->client->show(Resources::PAYMENT_METHODS, $paymentMethod->getCode()), 'translations');
 
         Assert::same(
@@ -668,8 +667,7 @@ final readonly class ManagingPaymentMethodsContext implements Context
     public function thePaymentMethodShouldBeAvailableInChannel(
         PaymentMethodInterface $paymentMethod,
         ChannelInterface $channel,
-    ): void
-    {
+    ): void {
         $this->client->show(Resources::PAYMENT_METHODS, $paymentMethod->getCode());
         $channelsArray = $this->responseChecker->getValue($this->client->getLastResponse(), 'channels');
 
@@ -828,7 +826,7 @@ final readonly class ManagingPaymentMethodsContext implements Context
         /** @var AdminUserInterface $adminUser */
         $adminUser = $this->sharedStorage->get('administrator');
 
-        $response = $this->client->show(Resources::ADMINISTRATORS, (string)$adminUser->getId());
+        $response = $this->client->show(Resources::ADMINISTRATORS, (string) $adminUser->getId());
 
         return $this->responseChecker->getValue($response, 'localeCode');
     }
@@ -856,7 +854,7 @@ final readonly class ManagingPaymentMethodsContext implements Context
     {
         $paymentMethods = $this->responseChecker->getCollection($this->client->index(Resources::PAYMENT_METHODS));
 
-        return array_map(fn(array $paymentMethod) => $paymentMethod['translations']['en_US']['name'], $paymentMethods);
+        return array_map(fn (array $paymentMethod) => $paymentMethod['translations']['en_US']['name'], $paymentMethods);
     }
 
     /**
@@ -867,7 +865,8 @@ final readonly class ManagingPaymentMethodsContext implements Context
         /** @var PaymentMethodInterface $paymentMethod */
         $paymentMethod = $this->sharedStorage->get('payment_method');
         $gatewayConfigurationIri = $this->sectionAwareIriConverter->getIriFromResourceInSection(
-            $paymentMethod->getGatewayConfig(), 'admin'
+            $paymentMethod->getGatewayConfig(),
+            'admin',
         );
 
         $this->client->addRequestData(

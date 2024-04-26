@@ -45,7 +45,7 @@ interface ResponseCheckerInterface
 
     public function hasCollection(Response $response): bool;
 
-    public function hasValue(Response $response, string $key, int|string|bool $value): bool;
+    public function hasValue(Response $response, string $key, bool|int|string $value): bool;
 
     public function hasValueInCollection(Response $response, string $key, int|string $value): bool;
 
@@ -69,7 +69,7 @@ interface ResponseCheckerInterface
         Response $response,
         string $subResource,
         string $key,
-        int|string|bool $expectedValue,
+        bool|int|string $expectedValue,
     ): bool;
 
     public function hasItemOnPositionWithValue(Response $response, int $position, string $key, array|string $value): bool;

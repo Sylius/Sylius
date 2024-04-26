@@ -41,15 +41,14 @@ final readonly class PaymentContext implements Context
         private FactoryInterface $paymentMethodTranslationFactory,
         private ObjectManager $paymentMethodManager,
         private array $gatewayFactories,
-    )
-    {
+    ) {
     }
 
     /**
      * @Given the store (also )allows paying (with ):paymentMethodName
      * @Given the store (also )allows paying with :paymentMethodName at position :position
      */
-    public function storeAllowsPaying(string $paymentMethodName, int $position = null): void
+    public function storeAllowsPaying(string $paymentMethodName, ?int $position = null): void
     {
         $this->createPaymentMethod($paymentMethodName, 'PM_' . StringInflector::nameToCode($paymentMethodName), 'Offline', 'Payment method', true, $position);
     }
@@ -202,8 +201,7 @@ final readonly class PaymentContext implements Context
         string $description = '',
         bool $addForCurrentChannel = true,
         ?int $position = null,
-    ): PaymentMethodInterface
-    {
+    ): PaymentMethodInterface {
         $gatewayFactory = array_search($gatewayFactory, $this->gatewayFactories);
 
         /** @var PaymentMethodInterface $paymentMethod */
