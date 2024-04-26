@@ -43,7 +43,7 @@
         "doctrine/migrations": "^3.5.5",
         "doctrine/orm": "^2.13",
         "doctrine/persistence": "^2.3 || ^3.0",
-        "egulias/email-validator": "^3.1",
+        "egulias/email-validator": "^4.0",
         "enshrined/svg-sanitize": "^0.16",
         "fakerphp/faker": "^1.10",
         "friendsofphp/proxy-manager-lts": "^1.0.7",
