@@ -27,7 +27,7 @@ final class ResponseChecker implements ResponseCheckerInterface
 
     public function countTotalCollectionItems(Response $response): int
     {
-        return (int) $this->getResponseContentValue($response, 'hydra:totalItems');
+        return (int)$this->getResponseContentValue($response, 'hydra:totalItems');
     }
 
     public function getCollection(Response $response): array
@@ -37,7 +37,7 @@ final class ResponseChecker implements ResponseCheckerInterface
 
     public function getCollectionItemsWithValue(Response $response, string $key, string $value): array
     {
-        $items = array_filter($this->getCollection($response), fn (array $item): bool => $item[$key] === $value);
+        $items = array_filter($this->getCollection($response), fn(array $item): bool => $item[$key] === $value);
 
         return $items;
     }
@@ -108,14 +108,12 @@ final class ResponseChecker implements ResponseCheckerInterface
         return $response->getStatusCode() === Response::HTTP_OK;
     }
 
-    /** @param string|int $value */
-    public function hasValue(Response $response, string $key, $value): bool
+    public function hasValue(Response $response, string $key, int|string|bool $value): bool
     {
         return $this->getResponseContentValue($response, $key) === $value;
     }
 
-    /** @param string|int $value */
-    public function hasValueInCollection(Response $response, string $key, $value): bool
+    public function hasValueInCollection(Response $response, string $key, int|string|bool $value): bool
     {
         return in_array($value, $this->getResponseContentValue($response, $key), true);
     }
@@ -136,7 +134,8 @@ final class ResponseChecker implements ResponseCheckerInterface
         Response $response,
         string $subResource,
         array $expectedValues,
-    ): bool {
+    ): bool
+    {
         $resourceCollection = $this->getResponseContentValue($response, $subResource);
 
         $this->assertIsArray($resourceCollection);
@@ -160,7 +159,8 @@ final class ResponseChecker implements ResponseCheckerInterface
         Response $response,
         string $subResource,
         array $expectedValues,
-    ): bool {
+    ): bool
+    {
         $resource = $this->getResponseContentValue($response, $subResource);
 
         $this->assertIsArray($resource);
@@ -174,6 +174,15 @@ final class ResponseChecker implements ResponseCheckerInterface
         }
 
         return true;
+    }
+
+    public function hasValueInSubresourceObject(Response $response, string $subResource, string $key, int|string|bool $expectedValue): bool
+    {
+        $resource = $this->getResponseContentValue($response, $subResource);
+
+        $this->assertIsArray($resource);
+
+        return $resource[$key] === $expectedValue;
     }
 
     /** @param string|array $value */
