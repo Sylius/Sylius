@@ -78,9 +78,9 @@ Feature: Payment method validation
         When I want to create a new payment method with "Stripe Checkout" gateway factory
         And I name it "Stripe Checkout" in "English (United States)"
         And I specify its code as "SC"
-        And I configure it with only "publishable key"
+        And I configure it with only "Publishable key"
         And I add it
-        Then I should be notified that I have to specify stripe "secret key"
+        Then I should be notified that I have to specify stripe "Secret key"
         And the payment method with code "PEC" should not be added
 
     @ui @api
@@ -88,9 +88,9 @@ Feature: Payment method validation
         When I want to create a new payment method with "Stripe Checkout" gateway factory
         And I name it "Stripe Checkout" in "English (United States)"
         And I specify its code as "SC"
-        And I configure it with only "secret key"
+        And I configure it with only "Secret key"
         And I add it
-        Then I should be notified that I have to specify stripe "publishable key"
+        Then I should be notified that I have to specify stripe "Publishable key"
         And the payment method with code "PEC" should not be added
 
     @no-ui @api

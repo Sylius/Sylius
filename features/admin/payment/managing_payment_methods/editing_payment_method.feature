@@ -15,7 +15,7 @@ Feature: Editing payment methods
         And I rename it to "Cash on delivery" in "English (United States)"
         And I save my changes
         Then I should be notified that it has been successfully edited
-        And this payment method name should be "Cash on delivery"
+        And this payment method "Name" should be "Cash on delivery"
 
     @ui @api
     Scenario: Disabling payment method

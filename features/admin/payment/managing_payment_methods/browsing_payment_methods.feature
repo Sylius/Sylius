@@ -10,7 +10,7 @@ Feature: Browsing payment methods
     @todo @ui @api
     Scenario: Browsing defined payment methods
         Given the store has a payment method "Offline" with a code "OFF"
-        And the store has a payment method "PayPal Express Checkout" with a code "PAYPAL" and Paypal Express Checkout gateway
+        And the store has a payment method "PayPal Express Checkout" with a code "PAYPAL" and "Paypal Express Checkout" gateway
         When I browse payment methods
         Then I should see 2 payment methods in the list
         And the payment method "PayPal Express Checkout" should be in the registry
