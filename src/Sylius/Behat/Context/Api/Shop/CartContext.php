@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Api\Shop;
 
-use ApiPlatform\Api\IriConverterInterface;
+use ApiPlatform\Core\Api\IriConverterInterface;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\RequestFactoryInterface;
@@ -116,7 +116,6 @@ final class CartContext implements Context
     /**
      * @When /^I add ("[^"]+" variant) of (this product) to the (cart)$/
      * @When /^I add ("[^"]+" variant) of (product "[^"]+") to the (cart)$/
-     * @When /^I have ("[^"]+" variant) of (product "[^"]+") in the (cart)$/
      */
     public function iAddVariantOfThisProductToTheCart(
         ProductVariantInterface $productVariant,
@@ -124,7 +123,6 @@ final class CartContext implements Context
         ?string $tokenValue,
     ): void {
         $this->putProductVariantToCart($productVariant, $tokenValue, 1);
-        $this->sharedStorage->set('variant', $productVariant);
     }
 
     /**
@@ -187,25 +185,19 @@ final class CartContext implements Context
     }
 
     /**
-     * @Given /^I change (product "[^"]+") quantity to (\d+)$/
-     * @Given I change :productName quantity to :quantity
      * @When /^I change (product "[^"]+") quantity to (\d+) in my (cart)$/
+     * @Given I change :productName quantity to :quantity
      * @When /^the (?:visitor|customer) change (product "[^"]+") quantity to (\d+) in his (cart)$/
      * @When /^the visitor try to change (product "[^"]+") quantity to (\d+) in the customer (cart)$/
      * @When /^I try to change (product "[^"]+") quantity to (\d+) in my (cart)$/
      */
-    public function iChangeQuantityToInMyCart(ProductInterface $product, int $quantity, ?string $tokenValue = null): void
+    public function iChangeQuantityToInMyCart(ProductInterface $product, int $quantity, string $tokenValue): void
     {
-        if (null === $tokenValue && $this->sharedStorage->has('cart_token')) {
-            $tokenValue = $this->sharedStorage->get('cart_token');
-        }
-
         $itemResponse = $this->getOrderItemResponseFromProductInCart($product, $tokenValue);
         $this->changeQuantityOfOrderItem((string) $itemResponse['id'], $quantity, $tokenValue);
     }
 
     /**
-     * @Given /^I removed (product "[^"]+") from the (cart)$/
      * @When /^I remove (product "[^"]+") from the (cart)$/
      */
     public function iRemoveProductFromTheCart(ProductInterface $product, string $tokenValue): void
@@ -343,20 +335,6 @@ final class CartContext implements Context
     }
 
     /**
-     * @Then /^my (cart) items total should be ("[^"]+")$/
-     */
-    public function myCartItemsTotalShouldBe(string $tokenValue, int $total): void
-    {
-        $response = $this->shopClient->show(Resources::ORDERS, $tokenValue);
-        $responseTotal = $this->responseChecker->getValue(
-            $response,
-            'itemsSubtotal',
-        );
-
-        Assert::same($total, (int) $responseTotal, 'Expected items totals are not the same. Received message:' . $response->getContent());
-    }
-
-    /**
      * @Then /^my included in price taxes should be ("[^"]+")$/
      */
     public function myIncludedInPriceTaxesShouldBe(int $taxTotal): void
@@ -372,7 +350,6 @@ final class CartContext implements Context
 
     /**
      * @Then /^my (cart) should be empty$/
-     * @Then /^(cart) should be empty with no value$/
      */
     public function myCartShouldBeEmpty(string $tokenValue): void
     {
@@ -412,7 +389,7 @@ final class CartContext implements Context
     {
         $response = $this->shopClient->getLastResponse();
         Assert::true(
-            $this->responseChecker->isCreationSuccessful($response),
+            $this->responseChecker->isShowSuccessful($response),
             SprintfResponseEscaper::provideMessageWithEscapedResponseContent('Item has not been added.', $response),
         );
     }
@@ -672,17 +649,6 @@ final class CartContext implements Context
     }
 
     /**
-     * @Then /^my cart included in price taxes should be ("[^"]+")$/
-     */
-    public function myCartTaxesIncludedInPriceShouldBe(int $taxTotal): void
-    {
-        Assert::same(
-            $this->responseChecker->getValue($this->shopClient->getLastResponse(), 'taxIncludedTotal'),
-            $taxTotal,
-        );
-    }
-
-    /**
      * @Then /^my cart should have (\d+) items of (product "([^"]+)")$/
      * @Then /^my cart should have quantity of (\d+) items of (product "([^"]+)")$/
      */
@@ -697,8 +663,6 @@ final class CartContext implements Context
      * @Then /^my cart shipping total should be ("[^"]+")$/
      * @Then I should not see shipping total for my cart
      * @Then /^my cart estimated shipping cost should be ("[^"]+")$/
-     * @Then there should be no shipping fee
-     * @Then my cart shipping should be for Free
      */
     public function myCartShippingFeeShouldBe(int $shippingTotal = 0): void
     {
@@ -744,31 +708,31 @@ final class CartContext implements Context
     }
 
     /**
-     * @Then /^this product should have ([^"]+) "([^"]+)"$/
+     * @Then /^(this product) should have ([^"]+) "([^"]+)"$/
      */
-    public function thisItemShouldHaveOptionValue(string $expectedOptionName, string $expectedOptionValueValue): void
+    public function thisItemShouldHaveOptionValue(ProductInterface $product, string $optionName, string $optionValue): void
     {
         $item = $this->sharedStorage->get('item');
 
-        $optionValues = $this->responseChecker->getValue($this->shopClient->showByIri($item['variant']), 'optionValues');
+        $variantData = json_decode($this->shopClient->showByIri(urldecode($item['variant']))->getContent(), true, 512, \JSON_THROW_ON_ERROR);
 
-        foreach ($optionValues as $optionValueIri) {
-            $optionValue = $this->responseChecker->getResponseContent($this->shopClient->showByIri($optionValueIri));
+        foreach ($variantData['optionValues'] as $valueIri) {
+            $optionValueData = json_decode($this->shopClient->showByIri($valueIri)->getContent(), true, 512, \JSON_THROW_ON_ERROR);
 
-            if ($optionValue['value'] !== $expectedOptionValueValue) {
+            if ($optionValueData['value'] !== $optionValue) {
                 continue;
             }
 
-            $option = $this->responseChecker->getResponseContent($this->shopClient->showByIri($optionValue['option']));
+            $optionData = json_decode($this->shopClient->showByIri($optionValueData['option'])->getContent(), true, 512, \JSON_THROW_ON_ERROR);
 
-            if ($option['name'] === $expectedOptionName) {
-                return;
+            if ($optionData['name'] !== $optionName) {
+                continue;
             }
+
+            return;
         }
 
-        throw new \DomainException(
-            sprintf('Could not find item with option "%s" set to "%s"', $expectedOptionName, $expectedOptionValueValue),
-        );
+        throw new \DomainException(sprintf('Could not find item with option "%s" set to "%s"', $optionName, $optionValue));
     }
 
     /**
@@ -837,7 +801,7 @@ final class CartContext implements Context
             'items',
         );
         $request->updateContent([
-            'productVariant' => $this->iriConverter->getIriFromResource($this->productVariantResolver->getVariant($product)),
+            'productVariant' => $this->iriConverter->getIriFromItem($this->productVariantResolver->getVariant($product)),
             'quantity' => $quantity,
         ]);
 
@@ -856,7 +820,7 @@ final class CartContext implements Context
             'items',
         );
         $request->updateContent([
-            'productVariant' => $this->iriConverter->getIriFromResource($productVariant),
+            'productVariant' => $this->iriConverter->getIriFromItem($productVariant),
             'quantity' => $quantity,
         ]);
 
