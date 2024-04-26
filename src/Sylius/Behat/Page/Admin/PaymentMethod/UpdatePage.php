@@ -24,25 +24,16 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     use ChecksCodeImmutability;
     use Toggles;
 
-    /**
-     * @throws ElementNotFoundException
-     */
     public function setPaypalGatewayUsername(string $username): void
     {
         $this->getDocument()->fillField('Username', $username);
     }
 
-    /**
-     * @throws ElementNotFoundException
-     */
     public function setPaypalGatewayPassword(string $password): void
     {
         $this->getDocument()->fillField('Password', $password);
     }
 
-    /**
-     * @throws ElementNotFoundException
-     */
     public function setPaypalGatewaySignature(string $signature): void
     {
         $this->getDocument()->fillField('Signature', $signature);
@@ -58,9 +49,6 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
         $this->getDocument()->fillField('Publishable key', $publishableKey);
     }
 
-    /**
-     * @throws ElementNotFoundException
-     */
     public function nameIt(string $name, string $languageCode): void
     {
         $this->getDocument()->fillField(sprintf('sylius_payment_method_translations_%s_name', $languageCode), $name);
@@ -71,9 +59,6 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
         $this->getElement('sandbox')->check();
     }
 
-    /**
-     * @throws ElementNotFoundException
-     */
     public function isPaymentMethodEnabled(): bool
     {
         return (bool) $this->getToggleableElement()->getValue();
@@ -84,41 +69,26 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
         return $this->getElement('sandbox')->hasAttribute('checked');
     }
 
-    /**
-     * @throws ElementNotFoundException
-     */
     public function isFactoryNameFieldDisabled(): bool
     {
         return 'disabled' === $this->getElement('factory_name')->getAttribute('disabled');
     }
 
-    /**
-     * @throws ElementNotFoundException
-     */
     public function isAvailableInChannel(string $channelName): bool
     {
         return $this->getElement('channel', ['%channel%' => $channelName])->hasAttribute('checked');
     }
 
-    /**
-     * @throws ElementNotFoundException
-     */
     public function getPaymentMethodInstructions(string $language): string
     {
         return $this->getElement('instructions', ['%language%' => $language])->getText();
     }
 
-    /**
-     * @throws ElementNotFoundException
-     */
     protected function getCodeElement(): NodeElement
     {
         return $this->getElement('code');
     }
 
-    /**
-     * @throws ElementNotFoundException
-     */
     protected function getToggleableElement(): NodeElement
     {
         return $this->getElement('enabled');

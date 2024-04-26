@@ -16,7 +16,6 @@ namespace Sylius\Behat\Context\Ui\Admin;
 use Behat\Behat\Context\Context;
 use Behat\Mink\Exception\ElementNotFoundException;
 use FriendsOfBehat\PageObjectExtension\Page\SymfonyPageInterface;
-use FriendsOfBehat\PageObjectExtension\Page\UnexpectedPageException;
 use Sylius\Behat\Context\Ui\Admin\Helper\ValidationTrait;
 use Sylius\Behat\Page\Admin\Crud\IndexPageInterface;
 use Sylius\Behat\Page\Admin\PaymentMethod\CreatePageInterface;
@@ -44,8 +43,6 @@ final readonly class ManagingPaymentMethodsContext implements Context
 
     /**
      * @When I want to modify the :paymentMethod payment method
-     *
-     * @throws UnexpectedPageException
      */
     public function iWantToModifyAPaymentMethod(PaymentMethodInterface $paymentMethod): void
     {
@@ -184,8 +181,6 @@ final readonly class ManagingPaymentMethodsContext implements Context
     /**
      * @When I want to create a new offline payment method
      * @When I want to create a new payment method with :factory gateway factory
-     *
-     * @throws UnexpectedPageException
      */
     public function iWantToCreateANewPaymentMethod(string $factory = 'Offline'): void
     {
@@ -264,8 +259,6 @@ final readonly class ManagingPaymentMethodsContext implements Context
      * @Then the payment method :paymentMethodName should appear in the registry
      * @Then the payment method :paymentMethodName should be in the registry
      * @Then I should see the payment method :paymentMethodName in the list
-     *
-     * @throws UnexpectedPageException
      */
     public function thePaymentMethodShouldAppearInTheRegistry(string $paymentMethodName): void
     {
@@ -276,8 +269,6 @@ final readonly class ManagingPaymentMethodsContext implements Context
 
     /**
      * @Given /^(this payment method) should still be in the registry$/
-     *
-     * @throws UnexpectedPageException
      */
     public function thisPaymentMethodShouldStillBeInTheRegistry(PaymentMethodInterface $paymentMethod): void
     {
@@ -287,8 +278,6 @@ final readonly class ManagingPaymentMethodsContext implements Context
     /**
      * @Given I am browsing payment methods
      * @When I browse payment methods
-     *
-     * @throws UnexpectedPageException
      */
     public function iBrowsePaymentMethods(): void
     {
@@ -401,8 +390,6 @@ final readonly class ManagingPaymentMethodsContext implements Context
 
     /**
      * @Then the payment method with :element :value should not be added
-     *
-     * @throws UnexpectedPageException
      */
     public function thePaymentMethodWithElementValueShouldNotBeAdded(string $element, string $value): void
     {
@@ -413,8 +400,6 @@ final readonly class ManagingPaymentMethodsContext implements Context
 
     /**
      * @Then /^(this payment method) should still be named "([^"]+)"$/
-     *
-     * @throws UnexpectedPageException
      */
     public function thisShippingMethodNameShouldBe(PaymentMethodInterface $paymentMethod, string $paymentMethodName): void
     {
@@ -472,8 +457,6 @@ final readonly class ManagingPaymentMethodsContext implements Context
 
     /**
      * @Given the payment method :paymentMethod should have instructions :instructions in :language
-     *
-     * @throws UnexpectedPageException
      */
     public function thePaymentMethodShouldHaveInstructionsIn(
         PaymentMethodInterface $paymentMethod,
@@ -487,8 +470,6 @@ final readonly class ManagingPaymentMethodsContext implements Context
 
     /**
      * @Then the payment method :paymentMethod should be available in channel :channelName
-     *
-     * @throws UnexpectedPageException
      */
     public function thePaymentMethodShouldBeAvailableInChannel(
         PaymentMethodInterface $paymentMethod,
@@ -522,8 +503,6 @@ final readonly class ManagingPaymentMethodsContext implements Context
 
     /**
      * @Then there should still be only one payment method with :element :code
-     *
-     * @throws UnexpectedPageException
      */
     public function thereShouldStillBeOnlyOnePaymentMethodWith(string $element, string $code): void
     {
