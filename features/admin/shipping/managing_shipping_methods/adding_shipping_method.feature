@@ -34,7 +34,7 @@ Feature: Adding a new shipping method
         And I add it
         Then the "FedEx Carrier" shipping method should be successfully created
 
-    @ui @javascript @api
+    @ui @mink:chromedriver @api
     Scenario: Adding a new shipping method with flat rate per unit
         When I want to create a new shipping method
         And I specify its code as "FED_EX_CARRIER"
@@ -45,7 +45,7 @@ Feature: Adding a new shipping method
         And I add it
         Then the "FedEx Carrier" shipping method should be successfully created
 
-    @ui @javascript @api
+    @ui @mink:chromedriver @api
     Scenario: Adding a new shipping method for channel
         When I want to create a new shipping method
         And I specify its code as "FED_EX_CARRIER"

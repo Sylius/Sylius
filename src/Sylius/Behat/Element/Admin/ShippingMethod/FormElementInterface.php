@@ -13,7 +13,9 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Element\Admin\ShippingMethod;
 
-interface FormElementInterface
+use Sylius\Behat\Element\Admin\Crud\FormElementInterface as BaseFormElementInterface;
+
+interface FormElementInterface extends BaseFormElementInterface
 {
     public function getCode(): string;
 
@@ -49,22 +51,13 @@ interface FormElementInterface
 
     public function setCalculatorConfigurationAmountForChannel(string $channelCode, int $amount): void;
 
-    public function addRule(string $ruleName): void;
+    public function addRule(string $type): void;
 
     public function fillLastRuleOption(string $fieldName, string $value): void;
 
     public function fillLastRuleOptionForChannel(string $channelCode, string $fieldName, string $value): void;
 
     public function getShippingChargesValidationErrorsCount(string $channelCode): int;
-
-    /**
-     * @param array<string, string> $parameters
-     */
-    public function getValidationMessage(string $element, array $parameters = []): string;
-
-    public function getValidationMessageForCalculatorConfiguration(string $element, string $channelCode): string;
-
-    public function getValidationMessageForLastRuleConfiguration(string $element, ?string $channelCode = null): string;
 
     public function setField(string $field, string $value): void;
 }

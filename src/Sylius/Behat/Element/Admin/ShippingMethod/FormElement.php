@@ -13,38 +13,12 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Element\Admin\ShippingMethod;
 
-use Behat\Mink\Element\NodeElement;
-use Behat\Mink\Exception\ElementNotFoundException;
-use FriendsOfBehat\PageObjectExtension\Element\Element;
+use Sylius\Behat\Element\Admin\Crud\FormElement as BaseFormElement;
 use Sylius\Behat\Service\DriverHelper;
+use Sylius\Behat\Service\TabsHelper;
 
-final class FormElement extends Element implements FormElementInterface
+final class FormElement extends BaseFormElement implements FormElementInterface
 {
-    /**
-     * @return array<string, string>
-     */
-    protected function getDefinedElements(): array
-    {
-        return [
-            'calculator' => '#sylius_shipping_method_calculator',
-            'calculator_configuration_amount' => '#sylius_shipping_method_configuration_%channelCode%_amount',
-            'calculator_configuration_channel_tab' => '[data-test-calculator-configuration] [data-test-channel-tab="%channelCode%"]',
-            'calculator_configuration_channel_tab_content' => '[data-test-calculator-configuration] [data-test-channel-tab-content="%channelCode%"]',
-            'channel' => '[name="sylius_shipping_method[channels][]"][value="%channelCode%"]',
-            'code' => '#sylius_shipping_method_code',
-            'description' => '#sylius_shipping_method_translations_%localeCode%_description',
-            'enabled' => '#sylius_shipping_method_enabled',
-            'live_component' => '[data-controller="live"]',
-            'name' => '#sylius_shipping_method_translations_%localeCode%_name',
-            'position' => '#sylius_shipping_method_position',
-            'rules_wrapper' => '#sylius_shipping_method_rules',
-            'rule_configuration_amount' => '#sylius_shipping_method_rules_%position%_configuration_%channelCode%_amount',
-            'rule_configuration_weight' => '#sylius_shipping_method_rules_%position%_configuration_weight',
-            'shipping_method_rule_add_button' => '#sylius_shipping_method_rules_add',
-            'zone' => '#sylius_shipping_method_zone',
-        ];
-    }
-
     public function getCode(): string
     {
         return $this->getElement('code')->getValue();
@@ -130,42 +104,29 @@ final class FormElement extends Element implements FormElementInterface
     public function chooseCalculator(string $calculatorName): void
     {
         $this->getElement('calculator')->selectOption($calculatorName);
-        $this->waitForLiveComponentUpdate();
+        $this->waitForFormUpdate();
     }
 
-    public function addRule(string $ruleName): void
+    public function addRule(string $type): void
     {
-        $this->getElement('shipping_method_rule_add_button')->click();
-        $this->waitForLiveComponentUpdate();
-
-        $rules = $this->getElement('rules_wrapper')->findAll('css', 'div[data-test-rule]');
-        /** @var NodeElement $lastRule */
-        $lastRule = end($rules);
-        $lastRule->selectFieldOption('Type', $ruleName);
-        $this->waitForLiveComponentUpdate();
+        $this->getElement('add_rule_button', ['%type%' => $type])->press();
+        $this->waitForFormUpdate();
     }
 
     public function fillLastRuleOption(string $fieldName, string $value): void
     {
-        $rules = $this->getElement('rules_wrapper')->findAll('css', 'div[data-test-rule]');
-        /** @var NodeElement $lastRule */
-        $lastRule = end($rules);
+        $lastRule = $this->getElement('last_rule');
 
         $lastRule->fillField($fieldName, $value);
-
-        $this->waitForLiveComponentUpdate();
     }
 
     public function fillLastRuleOptionForChannel(string $channelCode, string $fieldName, string $value): void
     {
-        $rules = $this->getElement('rules_wrapper')->findAll('css', 'div[data-test-rule]');
-        /** @var NodeElement $lastRule */
-        $lastRule = end($rules);
+        $lastRule = $this->getElement('last_rule');
 
-        $lastRule->find('css', sprintf('[data-test-channel-tab="%s"]', $channelCode))->click();
-        $lastRule->fillField($fieldName, $value);
+        TabsHelper::switchTab($this->getSession(), $lastRule, $channelCode);
 
-        $this->waitForLiveComponentUpdate();
+        $lastRule->find('css', sprintf('[id$="_configuration_%s"]', $channelCode))->fillField($fieldName, $value);
     }
 
     public function getShippingChargesValidationErrorsCount(string $channelCode): int
@@ -173,49 +134,8 @@ final class FormElement extends Element implements FormElementInterface
         return count(
             $this
                 ->getElement('calculator_configuration_channel_tab_content', ['%channelCode%' => $channelCode])
-                ->findAll('css', '.invalid-feedback')
+                ->findAll('css', '.invalid-feedback'),
         );
-    }
-
-    /**
-     * @param array<string, string> $parameters
-     */
-    public function getValidationMessage(string $element, array $parameters = []): string
-    {
-        $foundElement = $this->getFieldElement($element, $parameters);
-        if (null === $foundElement) {
-            throw new ElementNotFoundException($this->getSession(), 'Field element');
-        }
-
-        $validationMessage = $foundElement->find('css', '.invalid-feedback');
-        if (null === $validationMessage) {
-            throw new ElementNotFoundException($this->getSession(), 'Validation message', 'css', '.invalid-feedback');
-        }
-
-        return $validationMessage->getText();
-    }
-
-    public function getValidationMessageForCalculatorConfiguration(string $element, string $channelCode): string
-    {
-        $field = $this->getFieldElement(sprintf('calculator_configuration_%s', $element), ['%channelCode%' => $channelCode])->getParent();
-
-        return $this->getValidationMessageForElement($field);
-    }
-
-    public function getValidationMessageForLastRuleConfiguration(string $element, ?string $channelCode = null): string
-    {
-        $numberOfRules = count($this->getDocument()->findAll('css', '[data-test-rule]'));
-
-        if (null === $channelCode) {
-            $field = $this->getFieldElement(sprintf('rule_configuration_%s', $element), ['%position%' => $numberOfRules - 1]);
-        } else {
-            $field = $this->getFieldElement(
-                sprintf('rule_configuration_%s', $element),
-                ['%position%' => $numberOfRules - 1, '%channelCode%' => $channelCode],
-            );
-        }
-
-        return $this->getValidationMessageForElement($field);
     }
 
     public function setField(string $field, string $value): void
@@ -223,34 +143,29 @@ final class FormElement extends Element implements FormElementInterface
         $this->getDocument()->fillField($field, $value);
     }
 
-    private function getValidationMessageForElement(NodeElement $element): string
-    {
-        $validationMessage = $element->find('css', '.invalid-feedback');
-        if (null === $validationMessage) {
-            throw new ElementNotFoundException(
-                $this->getSession(),
-                'Validation message',
-                'css',
-                '.invalid-feedback',
-            );
-        }
-
-        return $validationMessage->getText();
-    }
-
     /**
-     * @param array<string, string> $parameters
-     *
-     * @throws ElementNotFoundException
+     * @return array<string, string>
      */
-    private function getFieldElement(string $element, array $parameters = []): ?NodeElement
+    protected function getDefinedElements(): array
     {
-        $element = $this->getElement($element, $parameters);
-        while (null !== $element && !$element->hasClass('field')) {
-            $element = $element->getParent();
-        }
-
-        return $element;
+        return [
+            'add_rule_button' => '[data-test-rules] [data-test-add-%type%]',
+            'calculator' => '#sylius_shipping_method_calculator',
+            'calculator_configuration_amount' => '#sylius_shipping_method_configuration_%channelCode%_amount',
+            'calculator_configuration_channel_tab' => '[data-test-calculator-configuration] [data-test-channel-tab="%channelCode%"]',
+            'calculator_configuration_channel_tab_content' => '[data-test-calculator-configuration] [data-test-channel-tab-content="%channelCode%"]',
+            'channel' => '[name="sylius_shipping_method[channels][]"][value="%channelCode%"]',
+            'code' => '#sylius_shipping_method_code',
+            'description' => '#sylius_shipping_method_translations_%localeCode%_description',
+            'enabled' => '#sylius_shipping_method_enabled',
+            'form' => '[data-live-name-value="sylius_admin:shipping_method:form"]',
+            'last_rule' => '[data-test-rules] [data-test-entry-row]:last-child',
+            'last_rule_amount' => '[data-test-rules] [data-test-entry-row]:last-child [id$="_configuration_%channelCode%_amount"]',
+            'last_rule_weight' => '[data-test-rules] [data-test-entry-row]:last-child [id$="_configuration_weight"]',
+            'name' => '#sylius_shipping_method_translations_%localeCode%_name',
+            'position' => '#sylius_shipping_method_position',
+            'zone' => '#sylius_shipping_method_zone',
+        ];
     }
 
     private function selectCalculatorConfigurationChannelTab(string $channelCode): void
@@ -262,9 +177,9 @@ final class FormElement extends Element implements FormElementInterface
         $this->getElement('calculator_configuration_channel_tab', ['%channelCode%' => $channelCode])->click();
     }
 
-    private function waitForLiveComponentUpdate(): void
+    private function waitForFormUpdate(): void
     {
-        $form = $this->getElement('live_component');
+        $form = $this->getElement('form');
         usleep(500000);
         $form->waitFor(1500, fn () => !$form->hasAttribute('busy'));
     }

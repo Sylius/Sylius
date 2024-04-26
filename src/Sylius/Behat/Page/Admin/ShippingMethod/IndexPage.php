@@ -81,7 +81,7 @@ class IndexPage extends BaseIndexPage implements IndexPageInterface
         return array_merge(parent::getDefinedElements(), [
             'confirm_action_button' => '[data-confirm-btn-true]',
             'filter_archival' => '#criteria_archival',
-            'row' => '[data-test-row][data-test-resource-id="%resourceId%"]'
+            'row' => '[data-test-row][data-test-resource-id="%resourceId%"]',
         ]);
     }
 }

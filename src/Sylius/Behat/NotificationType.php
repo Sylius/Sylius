@@ -28,6 +28,7 @@ final class NotificationType implements \Stringable
 
     /**
      * @deprecated Use ::error() instead
+     *
      * @todo remove and replace all usages with ::error() in 2.0
      */
     public static function failure(): self

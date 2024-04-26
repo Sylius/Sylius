@@ -23,6 +23,10 @@ use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Channel\Model\ChannelInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\ShippingMethodInterface;
+use Sylius\Component\Core\Shipping\Checker\Rule\OrderTotalGreaterThanOrEqualRuleChecker;
+use Sylius\Component\Core\Shipping\Checker\Rule\OrderTotalLessThanOrEqualRuleChecker;
+use Sylius\Component\Shipping\Checker\Rule\TotalWeightGreaterThanOrEqualRuleChecker;
+use Sylius\Component\Shipping\Checker\Rule\TotalWeightLessThanOrEqualRuleChecker;
 use Webmozart\Assert\Assert;
 
 final readonly class ManagingShippingMethodsContext implements Context
@@ -181,7 +185,7 @@ final readonly class ManagingShippingMethodsContext implements Context
                 'Shipping method %s should be available in channel %s, but it is not.',
                 $shippingMethod->getName(),
                 $channel->getCode(),
-            )
+            ),
         );
     }
 
@@ -492,7 +496,7 @@ final readonly class ManagingShippingMethodsContext implements Context
     public function iShouldBeNotifiedThatAmountForChannelShouldNotBeBlank(ChannelInterface $channel)
     {
         Assert::same(
-            $this->shippingMethodForm->getValidationMessageForCalculatorConfiguration('amount', $channel->getCode()),
+            $this->shippingMethodForm->getValidationMessage('calculator_configuration_amount', ['%channelCode%' => $channel->getCode()]),
             'This value should not be blank.',
         );
     }
@@ -503,7 +507,7 @@ final readonly class ManagingShippingMethodsContext implements Context
     public function iShouldBeNotifiedThatShippingChargeForChannelCannotBeLowerThan0(ChannelInterface $channel): void
     {
         Assert::same(
-            $this->shippingMethodForm->getValidationMessageForCalculatorConfiguration('amount', $channel->getCode()),
+            $this->shippingMethodForm->getValidationMessage('calculator_configuration_amount', ['%channelCode%' => $channel->getCode()]),
             'Shipping charge cannot be lower than 0.',
         );
     }
@@ -513,7 +517,7 @@ final readonly class ManagingShippingMethodsContext implements Context
      */
     public function iAddTheTotalWeightGreaterThanOrEqualRuleConfiguredWith(int $weight): void
     {
-        $this->shippingMethodForm->addRule('Total weight greater than or equal');
+        $this->shippingMethodForm->addRule(TotalWeightGreaterThanOrEqualRuleChecker::TYPE);
         $this->shippingMethodForm->fillLastRuleOption('Weight', (string) $weight);
     }
 
@@ -522,7 +526,7 @@ final readonly class ManagingShippingMethodsContext implements Context
      */
     public function iAddTheTotalWeightGreaterThanOrEqualRuleConfiguredWithInvalidData(): void
     {
-        $this->shippingMethodForm->addRule('Total weight greater than or equal');
+        $this->shippingMethodForm->addRule(TotalWeightGreaterThanOrEqualRuleChecker::TYPE);
         $this->shippingMethodForm->fillLastRuleOption('Weight', 'invalid data');
     }
 
@@ -531,7 +535,7 @@ final readonly class ManagingShippingMethodsContext implements Context
      */
     public function iAddTheTotalWeightLessThanOrEqualRuleConfiguredWith(int $weight): void
     {
-        $this->shippingMethodForm->addRule('Total weight less than or equal');
+        $this->shippingMethodForm->addRule(TotalWeightLessThanOrEqualRuleChecker::TYPE);
         $this->shippingMethodForm->fillLastRuleOption('Weight', (string) $weight);
     }
 
@@ -540,7 +544,12 @@ final readonly class ManagingShippingMethodsContext implements Context
      */
     public function iAddTheItemsTotalLessThanOrEqualRuleConfiguredWith(string $rule, mixed $value, ChannelInterface $channel): void
     {
-        $this->shippingMethodForm->addRule($rule);
+        $ruleTypes = [
+            'Items total less than or equal' => OrderTotalLessThanOrEqualRuleChecker::TYPE,
+            'Items total greater than or equal' => OrderTotalGreaterThanOrEqualRuleChecker::TYPE,
+        ];
+
+        $this->shippingMethodForm->addRule($ruleTypes[$rule]);
         $this->shippingMethodForm->fillLastRuleOptionForChannel($channel->getCode(), 'Amount', (string) $value);
     }
 
@@ -549,7 +558,7 @@ final readonly class ManagingShippingMethodsContext implements Context
      */
     public function iAddTheItemsTotalLessThanOrEqualRuleConfiguredWithInvalidData(ChannelInterface $channel): void
     {
-        $this->shippingMethodForm->addRule('Items total less than or equal');
+        $this->shippingMethodForm->addRule(OrderTotalLessThanOrEqualRuleChecker::TYPE);
         $this->shippingMethodForm->fillLastRuleOptionForChannel($channel->getCode(), 'Amount', 'Invalid data');
     }
 
@@ -581,7 +590,7 @@ final readonly class ManagingShippingMethodsContext implements Context
     {
         $channel = $this->sharedStorage->get('channel');
         Assert::same(
-            $this->shippingMethodForm->getValidationMessageForLastRuleConfiguration('weight'),
+            $this->shippingMethodForm->getValidationMessage('last_rule_weight'),
             'Please enter a number.',
         );
     }
@@ -592,7 +601,7 @@ final readonly class ManagingShippingMethodsContext implements Context
     public function iShouldBeNotifiedThatTheAmountRuleHasAnInvalidConfigurationInChannel(ChannelInterface $channel): void
     {
         Assert::same(
-            $this->shippingMethodForm->getValidationMessageForLastRuleConfiguration('amount', $channel->getCode()),
+            $this->shippingMethodForm->getValidationMessage('last_rule_amount', ['%channelCode%' => $channel->getCode()]),
             'Please enter a valid money amount.',
         );
     }
