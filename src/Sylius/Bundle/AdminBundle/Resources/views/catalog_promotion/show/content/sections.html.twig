@@ -1,0 +1,21 @@
+{% set main_hook = hook_name(hookable_data.parent_main_hook, 'sections') %}
+{% set fallback_hook = hook_name(hookable_data.parent_fallback_hook, 'sections') %}
+
+<div class="page-body">
+    <div class="container-xl">
+        <div class="row">
+            <div class="col-12 col-lg-6">
+                {% hook [main_hook ~ '#left', fallback_hook] with hookable_data|merge({
+                    parent_main_hook: main_hook,
+                    parent_fallback_hook: fallback_hook,
+                }) %}
+            </div>
+            <div class="col-12 col-lg-6">
+                {% hook [main_hook ~ '#right', fallback_hook] with hookable_data|merge({
+                    parent_main_hook: main_hook,
+                    parent_fallback_hook: fallback_hook,
+                }) %}
+            </div>
+        </div>
+    </div>
+</div>

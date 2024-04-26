@@ -1,0 +1,16 @@
+{% set main_hook = hook_name(hookable_data.parent_main_hook, 'action') %}
+{% set fallback_hook = hook_name(hookable_data.parent_fallback_hook, 'action') %}
+
+{% for action in hookable_data.resource.actions %}
+    <div class="card mb-3">
+        <div class="card-body">
+            <div class="divide-y">
+                {% hook [main_hook ~ "#" ~ action.type, fallback_hook] with hookable_data|merge({
+                    parent_main_hook: main_hook,
+                    parent_fallback_hook: fallback_hook,
+                    action,
+                }) %}
+            </div>
+        </div>
+    </div>
+{% endfor %}
