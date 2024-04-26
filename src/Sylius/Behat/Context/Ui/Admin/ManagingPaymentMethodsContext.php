@@ -22,10 +22,11 @@ use Sylius\Behat\Page\Admin\Crud\IndexPageInterface;
 use Sylius\Behat\Page\Admin\PaymentMethod\CreatePageInterface;
 use Sylius\Behat\Page\Admin\PaymentMethod\UpdatePageInterface;
 use Sylius\Behat\Service\Resolver\CurrentPageResolverInterface;
+use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Payment\Model\PaymentMethodInterface;
 use Webmozart\Assert\Assert;
 
-final class ManagingPaymentMethodsContext implements Context
+final readonly class ManagingPaymentMethodsContext implements Context
 {
     use ValidationTrait;
 
@@ -33,11 +34,11 @@ final class ManagingPaymentMethodsContext implements Context
      * @param string[] $gatewayFactories
      */
     public function __construct(
-        private readonly CreatePageInterface $createPage,
-        private readonly IndexPageInterface $indexPage,
-        private readonly UpdatePageInterface $updatePage,
-        private readonly CurrentPageResolverInterface $currentPageResolver,
-        private readonly array $gatewayFactories,
+        private CreatePageInterface $createPage,
+        private IndexPageInterface $indexPage,
+        private UpdatePageInterface $updatePage,
+        private CurrentPageResolverInterface $currentPageResolver,
+        private array $gatewayFactories,
     ) {
     }
 
@@ -62,6 +63,60 @@ final class ManagingPaymentMethodsContext implements Context
         $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
 
         $currentPage->nameIt($name ?? '', $language);
+    }
+
+    /**
+     * @When I update its :field with :value
+     */
+    public function iUpdateItsWith(string $field, string $value): void
+    {
+        match ($field) {
+            'Publishable key' => $this->updatePage->setStripePublishableKey($value),
+            'Secret key' => $this->updatePage->setStripeSecretKey($value),
+            'Username' => $this->updatePage->setPaypalGatewayUsername($value),
+            'Password' => $this->updatePage->setPaypalGatewayPassword($value),
+            'Signature' => $this->updatePage->setPaypalGatewaySignature($value),
+            default => throw new \InvalidArgumentException(sprintf('There is no configuration for "%s" field.', $field)),
+        };
+    }
+
+    /**
+     * @When I configure it with( only) :element
+     */
+    public function iConfigureItWith(string $element): void
+    {
+        match ($element) {
+            'Publishable key' => $this->createPage->setStripePublishableKey('TEST'),
+            'Secret key' => $this->createPage->setStripeSecretKey('TEST'),
+            default => throw new \InvalidArgumentException(sprintf('There is no configuration for "%s" element.', $element)),
+        };
+    }
+
+    /**
+     * @When /^I set its "Username" as "([^"]+)", "Password" as "([^"]+)" and "Signature" as "([^"]+)"$/
+     */
+    public function iSetItsUsernameAsPasswordAsAndSignatureAs(string $username, string $password, string $signature): void
+    {
+        $this->updatePage->setPaypalGatewayUsername($username);
+        $this->updatePage->setPaypalGatewayPassword($password);
+        $this->updatePage->setPaypalGatewaySignature($signature);
+    }
+
+    /**
+     * @When /^I set its "Publishable key" as "([^"]+)" and "Secret key" as "([^"]+)"$/
+     */
+    public function iSetItsPublishableKeyAsAndSecretKeyAs(string $publishableKey, string $secretKey): void
+    {
+        $this->updatePage->setStripePublishableKey($publishableKey);
+        $this->updatePage->setStripeSecretKey($secretKey);
+    }
+
+    /**
+     * @When I enable sandbox mode
+     */
+    public function iEnableSandboxMode(): void
+    {
+        $this->updatePage->enableSandboxMode();
     }
 
     /**
@@ -100,8 +155,6 @@ final class ManagingPaymentMethodsContext implements Context
     /**
      * @When I delete the :paymentMethod payment method
      * @When I try to delete the :paymentMethod payment method
-     *
-     * @throws UnexpectedPageException
      */
     public function iDeletePaymentMethod(PaymentMethodInterface $paymentMethod): void
     {
@@ -110,11 +163,22 @@ final class ManagingPaymentMethodsContext implements Context
     }
 
     /**
-     * @Then this payment method :element should be :value
+     * @Then /^its gateway configuration "([^"]+)" should be "([^"]+)"$/
      */
-    public function thisPaymentMethodElementShouldBe(string $element, string $value): void
+    public function itsGatewayConfigurationShouldBe(string $element, string $value): void
     {
-        Assert::true($this->updatePage->hasResourceValues([$element => $value]));
+        Assert::true(
+            $this->updatePage->hasResourceValues([StringInflector::nameToLowercaseCode($element) => $value]),
+            sprintf('Expected "%s" to be "%s", but it is not.', StringInflector::nameToLowercaseCode($element), $value),
+        );
+    }
+
+    /**
+     * @Then this payment method should be in sandbox mode
+     */
+    public function thisPaymentMethodShouldBeInSandboxMode(): void
+    {
+        Assert::true($this->updatePage->isPaymentMethodInSandboxMode());
     }
 
     /**
@@ -317,8 +381,8 @@ final class ManagingPaymentMethodsContext implements Context
     public function iShouldBeNotifiedThatIHaveToSpecifyStripe(string $element): void
     {
         Assert::same(
-            $this->createPage->getValidationMessage('stripe_' . str_replace(' ', '_', $element)),
-            sprintf('Please enter stripe %s.', $element),
+            $this->createPage->getValidationMessage('stripe_' . str_replace(' ', '_', strtolower($element))),
+            sprintf('Please enter stripe %s.', strtolower($element)),
         );
     }
 
@@ -510,17 +574,7 @@ final class ManagingPaymentMethodsContext implements Context
         $this->createPage->setStripePublishableKey('TEST');
     }
 
-    /**
-     * @When I configure it with only :element
-     */
-    public function iConfigureItWithOnly(string $element): void
-    {
-        match ($element) {
-            'publishable key' => $this->createPage->setStripePublishableKey('TEST'),
-            'secret key' => $this->createPage->setStripeSecretKey('TEST'),
-            default => throw new \InvalidArgumentException(sprintf('There is no configuration for "%s" element.', $element)),
-        };
-    }
+
 
     /**
      * @Then I should be redirected to the previous page of only enabled payment methods

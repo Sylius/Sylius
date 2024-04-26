@@ -48,6 +48,16 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
         $this->getDocument()->fillField('Signature', $signature);
     }
 
+    public function setStripeSecretKey(string $secretKey): void
+    {
+        $this->getDocument()->fillField('Secret key', $secretKey);
+    }
+
+    public function setStripePublishableKey(string $publishableKey): void
+    {
+        $this->getDocument()->fillField('Publishable key', $publishableKey);
+    }
+
     /**
      * @throws ElementNotFoundException
      */
@@ -56,12 +66,22 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
         $this->getDocument()->fillField(sprintf('sylius_payment_method_translations_%s_name', $languageCode), $name);
     }
 
+    public function enableSandboxMode(): void
+    {
+        $this->getElement('sandbox')->check();
+    }
+
     /**
      * @throws ElementNotFoundException
      */
     public function isPaymentMethodEnabled(): bool
     {
         return (bool) $this->getToggleableElement()->getValue();
+    }
+
+    public function isPaymentMethodInSandboxMode(): bool
+    {
+        return $this->getElement('sandbox')->hasAttribute('checked');
     }
 
     /**
@@ -116,6 +136,12 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
             'factory_name' => '[data-test-factory-name]',
             'instructions' => '#sylius_payment_method_translations_%language%_instructions',
             'name' => '#sylius_payment_method_translations_en_US_name',
+            'password' => '[data-test-password]',
+            'publishable_key' => '[data-test-publishable-key]',
+            'sandbox' => '[data-test-sandbox]',
+            'secret_key' => '[data-test-secret-key]',
+            'signature' => '[data-test-signature]',
+            'username' => '[data-test-username]',
         ]);
     }
 }
