@@ -1,5 +1,4 @@
-{% set main_hook = hook_name(hookable_data.parent_main_hook, 'translations') %}
-{% set fallback_hook = hook_name(hookable_data.parent_fallback_hook, 'translations') %}
+{% import '@SyliusAdmin/Shared/Helper/translations.html.twig' as _translations %}
 
 <div class="card mb-3">
     <div class="card-header">
@@ -8,10 +7,18 @@
 
     <div class="card-body">
         <div class="row">
-            {% hook [main_hook, fallback_hook] with hookable_data|merge({
-                parent_main_hook: main_hook,
-                parent_fallback_hook: fallback_hook,
-            }) %}
+            {% set body %}
+                {% verbatim %}
+                    <div class="row"">
+                        <div class="col-12">
+                            {{ form_row(translationForm.name) }}
+                            {{ form_row(translationForm.description) }}
+                            {{ form_row(translationForm.instructions) }}
+                        </div>
+                    </div>
+                {% endverbatim %}
+            {% endset %}
+            {{ _translations.default(hookable_data.form.translations, body) }}
         </div>
     </div>
 </div>
