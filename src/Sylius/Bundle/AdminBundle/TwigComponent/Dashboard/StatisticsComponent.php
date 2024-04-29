@@ -16,7 +16,7 @@ namespace Sylius\Bundle\AdminBundle\TwigComponent\Dashboard;
 use Sylius\Bundle\AdminBundle\Provider\StatisticsDataProviderInterface;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
-use Sylius\TwigHooks\Twig\Component\HookableComponentTrait;
+use Sylius\TwigHooks\LiveComponent\HookableLiveComponentTrait;
 use Symfony\UX\LiveComponent\Attribute\AsLiveComponent;
 use Symfony\UX\LiveComponent\Attribute\LiveAction;
 use Symfony\UX\LiveComponent\Attribute\LiveArg;
@@ -30,7 +30,7 @@ final class StatisticsComponent
 {
     use ComponentToolsTrait;
     use DefaultActionTrait;
-    use HookableComponentTrait;
+    use HookableLiveComponentTrait;
 
     #[LiveProp]
     public string $channelCode;

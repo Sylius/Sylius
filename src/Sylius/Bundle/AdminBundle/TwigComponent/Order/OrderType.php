@@ -13,8 +13,8 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\AdminBundle\TwigComponent\Order;
 
-use Sylius\Bundle\AdminBundle\TwigComponent\HookableComponentTrait;
 use Sylius\Component\Core\Model\Order;
+use Sylius\TwigHooks\LiveComponent\HookableLiveComponentTrait;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\UX\LiveComponent\Attribute\AsLiveComponent;
@@ -27,7 +27,7 @@ final class OrderType
 {
     use ComponentWithFormTrait;
     use DefaultActionTrait;
-    use HookableComponentTrait;
+    use HookableLiveComponentTrait;
 
     #[LiveProp]
     public ?Order $order = null;

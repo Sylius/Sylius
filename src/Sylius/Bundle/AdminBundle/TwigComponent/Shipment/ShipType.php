@@ -13,8 +13,8 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\AdminBundle\TwigComponent\Shipment;
 
-use Sylius\Bundle\AdminBundle\TwigComponent\HookableComponentTrait;
 use Sylius\Component\Core\Model\Shipment;
+use Sylius\TwigHooks\LiveComponent\HookableLiveComponentTrait;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\UX\LiveComponent\Attribute\AsLiveComponent;
@@ -26,7 +26,7 @@ use Symfony\UX\LiveComponent\DefaultActionTrait;
 final class ShipType
 {
     use DefaultActionTrait;
-    use HookableComponentTrait;
+    use HookableLiveComponentTrait;
     use ComponentWithFormTrait;
 
     #[LiveProp]

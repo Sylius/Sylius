@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Bundle\AdminBundle\Twig\Component\CatalogPromotion;
 
 use Sylius\Component\Core\Model\CatalogPromotion;
-use Sylius\TwigHooks\Twig\Component\HookableComponentTrait;
+use Sylius\TwigHooks\LiveComponent\HookableLiveComponentTrait;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\PropertyAccess\PropertyAccessorInterface;
@@ -29,7 +29,7 @@ use Symfony\UX\LiveComponent\LiveCollectionTrait;
 class FormComponent
 {
     use DefaultActionTrait;
-    use HookableComponentTrait;
+    use HookableLiveComponentTrait;
     use LiveCollectionTrait;
 
     #[LiveProp(fieldName: 'resource')]
