@@ -24,14 +24,14 @@ Feature: Reordering taxons
         And I should see the taxon named "Watches" in the list
         But the first taxon on the list should be "Watches"
 
-    @todo @ui @javascript @no-api
+    @todo @ui @mink:chromedriver @no-api
     Scenario: Moving up the first taxon on list
         When I want to see all taxons in store
         And I move up "T-Shirts" taxon
         Then I should see 4 taxons on the list
         And the first taxon on the list should be "T-Shirts"
 
-    @todo @ui @javascript @no-api
+    @todo @ui @mink:chromedriver @no-api
     Scenario: Moving down the last taxon on list
         When I want to see all taxons in store
         And I move down "Wallets" taxon
