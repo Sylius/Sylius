@@ -15,11 +15,11 @@ twig_hooks:
                 template: '@SyliusAdmin/Shared/Crud/Common/Content/_header.html.twig'
             form:
                 component: 'sylius_admin:product:generate_product_variants_form'
-                data:
-                    resource: '@=resource'
-                    form: '@=form'
-                    parentMainHook: '@=parent_main_hook'
-                    parentFallbackHook: '@=parent_fallback_hook'
+                props:
+                    resource: '@=_context.resource'
+                    form: '@=_context.form'
+                    parentMainHook: '@=_context.parent_main_hook'
+                    parentFallbackHook: '@=_context.parent_fallback_hook'
 
         'sylius_admin.product.generate_variants.content.header':
             breadcrumbs:
@@ -50,7 +50,7 @@ twig_hooks:
         'sylius_admin.product.generate_variants.content.form.variants.variant#left':
             code:
                 template: '@SyliusAdmin/Product/generate_variants/form/variants/variant/code.html.twig'
-            _name:
+            name:
                 template: '@SyliusAdmin/Product/generate_variants/form/variants/variant/name.html.twig'
 
         'sylius_admin.product.generate_variants.content.form.variants.variant#right':

@@ -1,4 +1,4 @@
-{% set product_variant = hookable_data.form.vars.data%}
+{% set product_variant = hookable_metadata.context.form.vars.data%}
 {% import '@SyliusAdmin/Shared/Helper/channelPricings.html.twig' as _channelPricings %}
 
 <div class="tab-pane" id="product-variant-channel-pricing" role="tabpanel" tabindex="0">
@@ -49,6 +49,6 @@
                 </div>
             {% endverbatim %}
         {% endset %}
-        {{ _channelPricings.default(hookable_data.form.channelPricings, product_variant, body) }}
+        {{ _channelPricings.default(hookable_metadata.context.form.channelPricings, product_variant, body) }}
     </div>
 </div>

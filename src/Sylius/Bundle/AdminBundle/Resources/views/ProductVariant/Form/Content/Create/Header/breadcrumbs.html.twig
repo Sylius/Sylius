@@ -1,6 +1,6 @@
 {% import '@SyliusAdmin/Shared/Helper/breadcrumbs.html.twig' as _breadcrumbs %}
 
-{% set product_variant = hookable_data.resource %}
+{% set product_variant = hookable_metadata.context.resource %}
 {% set product = product_variant.product %}
 
 {{ _breadcrumbs.default([

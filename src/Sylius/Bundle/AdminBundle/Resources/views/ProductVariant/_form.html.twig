@@ -1,3 +1,6 @@
+{% if form is not defined %}
+    {% set form = hookable_metadata.context.form %}
+{% endif %}
 {% form_theme form '@SyliusAdmin/Shared/form_theme.html.twig' %}
 
 <div class="container-xl">
