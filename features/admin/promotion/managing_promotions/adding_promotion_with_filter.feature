@@ -73,6 +73,7 @@ Feature: Adding promotion with filter
         And I specify that on "United States" channel this action should be applied to items with price between "$10.00" and "$100.00"
         And I add it
         Then I should be notified that it has been successfully created
+        Then the "$10 discount for (almost) all products!" promotion should be successfully created
         And the "$10 discount for (almost) all products!" promotion should appear in the registry
 
     @api @ui @mink:chromedriver
