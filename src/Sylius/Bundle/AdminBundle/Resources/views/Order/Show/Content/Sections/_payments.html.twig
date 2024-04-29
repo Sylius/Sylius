@@ -1,8 +1,5 @@
 {% import '@SyliusAdmin/Shared/Helper/money.html.twig' as _money %}
 
-{% set main_hook = hook_name(hookable_metadata.context.parent_main_hook, 'payments') %}
-{% set fallback_hook = hook_name(hookable_metadata.context.parent_fallback_hook, 'payments') %}
-
 {% set order = hookable_metadata.context.resource %}
 
 <div class="card mb-3">

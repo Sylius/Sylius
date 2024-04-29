@@ -4,7 +4,7 @@
     </div>
     <div class="card-body">
         <div class="row">
-            {% hook 'billing_address' with { form hookable_metadata.context.form.billingAddress } %}
+            {% hook 'billing_address' with { form, billingAddress: hookable_metadata.context.form.billingAddress } %}
         </div>
     </div>
 </div>

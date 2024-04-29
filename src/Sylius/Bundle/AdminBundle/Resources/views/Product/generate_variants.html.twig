@@ -1,19 +1,9 @@
 {% extends '@SyliusAdmin/Shared/Layout/base.html.twig' %}
 
-{% set fallback_hook = hook_name(_self) %}
-{% set main_hook = fallback_hook %}
-
 {% block title %}
     {{ 'sylius.ui.generate_variants'|trans }} {{ parent() }}
 {% endblock %}
 
 {% block body %}
-    {% hook main_hook with {
-        parent_main_hook: main_hook,
-        parent_fallback_hook: fallback_hook,
-        resource,
-        metadata,
-        configuration,
-        form,
-    } %}
+    {% hook 'sylius_admin.product.generate_variants' with { resource, metadata, configuration, form } %}
 {% endblock %}
