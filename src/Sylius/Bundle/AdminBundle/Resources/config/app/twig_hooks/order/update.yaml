@@ -6,8 +6,6 @@ twig_hooks:
                 props:
                     order: '@=_context.resource'
                     form: '@=_context.form'
-                    parentMainHook: '@=_context.parent_main_hook'
-                    parentFallbackHook: '@=_context.parent_fallback_hook'
 
         sylius_admin.order.update.content.form:
             billing_address:

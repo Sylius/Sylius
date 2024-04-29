@@ -6,8 +6,6 @@ twig_hooks:
                 props:
                     resource: '@=_context.resource'
                     form: '@=_context.form'
-                    parentMainHook: '@=_context.parent_main_hook'
-                    parentFallbackHook: '@=_context.parent_fallback_hook'
 
         'sylius_admin.catalog_promotion.create.content.form':
             sections:

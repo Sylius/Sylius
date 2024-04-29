@@ -9,8 +9,6 @@ twig_hooks:
                 props:
                     form: '@=_context.form'
                     resource: '@=_context.resource'
-                    parentMainHook: '@=_context.parent_main_hook'
-                    parentFallbackHook: '@=_context.parent_fallback_hook'
                     isSimple: '@=_context.resource.isSimple()'
 
         'sylius_admin.product.create.content.form':
