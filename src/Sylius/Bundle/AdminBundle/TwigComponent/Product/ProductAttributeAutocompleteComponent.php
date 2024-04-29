@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\AdminBundle\TwigComponent\Product;
 
-use Sylius\TwigHooks\LiveComponent\HookableLiveComponentTrait;
 use Symfony\UX\Autocomplete\Checksum\ChecksumCalculator;
 use Symfony\UX\LiveComponent\Attribute\AsLiveComponent;
 use Symfony\UX\LiveComponent\Attribute\LiveProp;
@@ -34,7 +33,6 @@ final class ProductAttributeAutocompleteComponent
 
     use ComponentToolsTrait;
     use DefaultActionTrait;
-    use HookableLiveComponentTrait;
 
     public function __construct(
         private readonly ChecksumCalculator $checksumCalculator,

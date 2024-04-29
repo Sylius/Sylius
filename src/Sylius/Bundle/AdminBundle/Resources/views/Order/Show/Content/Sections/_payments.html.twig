@@ -27,7 +27,7 @@
                             {{ _money.format(payment.amount, order.currencyCode) }}
                         </td>
                         <td class="w-1 text-end">
-                            {% hook 'payments#actions' %}
+                            {% hook 'payments#actions' with { payment } %}
                         </td>
                     </tr>
                 {% endfor %}
