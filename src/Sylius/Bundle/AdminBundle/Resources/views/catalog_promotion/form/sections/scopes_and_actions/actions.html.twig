@@ -1,5 +1,3 @@
-{% set hookable_context = get_hookable_context() %}
-
 <div class="col-12 col-md-6 mb-3">
     <div class="card" {{ sylius_test_html_attribute('actions') }}>
         <div class="card-header">
@@ -9,13 +7,13 @@
         </div>
         <div class="card-body">
             <div class="row align-items-center">
-                {{ form_row(hookable_context.form.actions, {label: false}) }}
+                {{ form_row(hookable_metadata.context.form.actions, {label: false}) }}
 
                 {% hook 'actions' %}
             </div>
         </div>
         <div class="card-footer">
-            {{ form_row(hookable_context.form.actions.vars.button_add) }}
+            {{ form_row(hookable_metadata.context.form.actions.vars.button_add) }}
         </div>
     </div>
 </div>

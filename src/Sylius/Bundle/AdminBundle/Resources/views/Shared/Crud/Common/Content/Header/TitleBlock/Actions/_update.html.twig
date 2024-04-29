@@ -4,6 +4,6 @@
     sylius_test_form_attribute('update-changes-button')|merge({
         text: 'sylius.ui.update'|trans,
         type: 'submit',
-        form: get_hookable_context().form.vars.id
+        form: hookable_metadata.context.form.vars.id
     })
 ) }}

@@ -5,7 +5,7 @@
 
     <div class="card-body">
         <div class="row">
-            {% hook 'shop_billing_data' with { form: get_hookable_context().form.shopBillingData } %}
+            {% hook 'shop_billing_data' with { form: hookable_metadata.context.form.shopBillingData } %}
         </div>
     </div>
 </div>

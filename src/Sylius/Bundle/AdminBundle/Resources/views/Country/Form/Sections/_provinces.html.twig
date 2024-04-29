@@ -1,11 +1,11 @@
 <div class="card mb-3">
     <div class="card-body">
 
-        {{ form_label(get_hookable_context().form.provinces) }}
-        {{ form_errors(get_hookable_context().form.provinces) }}
+        {{ form_label(hookable_metadata.context.form.provinces) }}
+        {{ form_errors(hookable_metadata.context.form.provinces) }}
 
         <div {{ sylius_test_html_attribute('provinces') }}>
-            {% for key, provinceForm in get_hookable_context().form.provinces %}
+            {% for key, provinceForm in hookable_metadata.context.form.provinces %}
                 <div class="card mb-3" {{ sylius_test_html_attribute('province') }}>
                     <div class="card-body">
                         <div class="row">
@@ -45,6 +45,6 @@
             {% endfor %}
         </div>
 
-        {{ form_widget(get_hookable_context().form.provinces.vars.button_add, sylius_test_form_attribute('add-province')) }}
+        {{ form_widget(hookable_metadata.context.form.provinces.vars.button_add, sylius_test_form_attribute('add-province')) }}
     </div>
 </div>

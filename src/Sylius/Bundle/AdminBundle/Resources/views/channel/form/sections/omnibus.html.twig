@@ -5,7 +5,7 @@
 
     <div class="card-body">
         <div class="row">
-            {% hook 'omnibus' with { form: get_hookable_context().form.channelPriceHistoryConfig } %}
+            {% hook 'omnibus' with { form: hookable_metadata.context.form.channelPriceHistoryConfig } %}
         </div>
     </div>
 </div>

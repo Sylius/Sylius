@@ -1,8 +1,6 @@
 {% import '@SyliusAdmin/Shared/Helper/dropdown.html.twig' as _dropdown %}
 
-{% set hookable_context = get_hookable_context() %}
-
-{% set resources = hookable_context.resources %}
+{% set resources = hookable_metadata.context.resources %}
 
 <div class="col-12 col-md-auto ms-auto d-print-none">
     <div class="btn-list">

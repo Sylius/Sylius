@@ -1,13 +1,10 @@
 {% import '@SyliusAdmin/Shared/Helper/header.html.twig' as _header %}
 
-{% set hookable_context = get_hookable_context() %}
-{% set hookable_configuration = get_hookable_configuration() %}
-
-{% if hookable_context.has("metadata") %}
-    {% set metadata = hookable_context.metadata %}
-    {% set header = hookable_configuration.title|default(metadata.applicationName~'.ui.'~metadata.pluralName) %}
+{% if hookable_metadata.context.has("metadata") %}
+    {% set metadata = hookable_metadata.context.metadata %}
+    {% set header = hookable_metadata.configuration.title|default(metadata.applicationName~'.ui.'~metadata.pluralName) %}
 {% else %}
-    {% set header = hookable_configuration.title %}
+    {% set header = hookable_metadata.configuration.title %}
 {% endif %}
 
 

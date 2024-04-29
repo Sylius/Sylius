@@ -1,4 +1,4 @@
-{% set form = get_hookable_context().form %}
+{% set form = hookable_metadata.context.form %}
 
 {% form_theme form '@SyliusAdmin/Shared/form_theme.html.twig' %}
 

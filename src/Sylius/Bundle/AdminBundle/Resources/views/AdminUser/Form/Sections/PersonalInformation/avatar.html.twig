@@ -1,10 +1,8 @@
 {% from '@SyliusAdmin/Shared/Helper/icon.html.twig' import icon as _icon %}
 
-{% set hookable_context = get_hookable_context() %}
+{% set adminUser = hookable_metadata.context.resource %}
 
-{% set adminUser = hookable_context.resource %}
-
-{{ form_label(hookable_context.form.avatar) }}
+{{ form_label(hookable_metadata.context.form.avatar) }}
 
 <div class="row g-6">
     <div class="col-auto m-0">
@@ -19,7 +17,7 @@
         {% endif %}
     </div>
     <div class="col m-0">
-        {{ form_widget(hookable_context.form.avatar) }}
+        {{ form_widget(hookable_metadata.context.form.avatar) }}
         {% if adminUser.id is not null and adminUser.avatar is not null and adminUser.avatar.path is not empty %}
             <button
                 formaction="{{ path('sylius_admin_admin_user_remove_avatar', {'id': adminUser.id, '_csrf_token': csrf_token(adminUser.id)}) }}"

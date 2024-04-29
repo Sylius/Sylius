@@ -1,6 +1,4 @@
-{% set hookable_context = get_hookable_context() %}
-
-{% set resources = hookable_context.resources %}
+{% set resources = hookable_metadata.context.resources %}
 
 {% if resources.data|length == 0 %}
     <div class="card">

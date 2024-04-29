@@ -1,5 +1,5 @@
 <div class="row">
     {% hook 'sections' %}
 
-    {{ form_row(get_hookable_context().form._token) }}
+    {{ form_row(hookable_metadata.context.form._token) }}
 </div>

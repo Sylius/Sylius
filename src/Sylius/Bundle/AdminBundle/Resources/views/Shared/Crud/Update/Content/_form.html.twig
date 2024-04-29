@@ -1,11 +1,8 @@
 {% import '@SyliusAdmin/Shared/Helper/button.html.twig' as _button %}
 
-{% set hookable_context = get_hookable_context() %}
-{% set hookable_configuration = get_hookable_configuration() %}
-
-{% set resource = hookable_context.resource %}
-{% set configuration = hookable_context.configuration %}
-{% set form = hookable_context.form %}
+{% set resource = hookable_metadata.context.resource %}
+{% set configuration = hookable_metadata.context.configuration %}
+{% set form = hookable_metadata.context.form %}
 
 {% set route = configuration.vars.route|default(null) %}
 {% set indexRoute = configuration.vars.index.route|default(null) %}
@@ -19,7 +16,7 @@
 <div class="page-body">
     <div class="container-xl">
         {% block content %}
-            {% set renderRest = hookable_configuration.render_rest %}
+            {% set renderRest = hookable_metadata.configuration.render_rest %}
 
             {% if renderRest %}
                 <div class="card">
