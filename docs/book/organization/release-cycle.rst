@@ -47,23 +47,21 @@ Maintenance
 Each minor Sylius version is maintained for a fixed period of time after its release.
 This maintenance is divided into:
 
-* *Bug fixes and security fixes*: During this period, being *eight months* long,
-  all issues can be fixed. The end of this period is referenced as being the
-  *end of maintenance* of a release.
+* *Bug fixes and security fixes*: During this period all issues can be fixed.
+  The end of this period is referenced as being the *end of maintenance* of a release.
 
-* *Security fixes only*: During this period, being *sixteen months* long,
-  only security related issues can be fixed. The end of this period is referenced
-  as being the *end of life* of a release.
+* *Security fixes only*: During this period, only security related issues can be fixed.
+  The end of this period is referenced as being the *end of life* of a release.
 
-Future release
---------------
+Planned releases
+----------------
 
 +---------+----------------------+------------------------+--------------------+
 | Version | Development starts   | Stabilization starts   | Release date       |
 +=========+======================+========================+====================+
 | 2.0     | Sep 15, 2023         | Q2 2024                | Q3 2024            |
 +---------+----------------------+------------------------+--------------------+
-| 1.13    | Oct 31, 2022         | Feb 15, 2024           | Apr 23, 2024       |
+| 1.14    | Apr 26, 2024         | Q2 2024                | Q3 2024            |
 +---------+----------------------+------------------------+--------------------+
 
 Supported versions
@@ -72,6 +70,8 @@ Supported versions
 +---------+--------------------+--------------------+--------------------+-----------------------+
 | Version | Release date       | End of maintenance | End of life        | Status                |
 +=========+====================+====================+====================+=======================+
+| 1.13    | Apr 23, 2024       | Oct 23, 2024       | Apr 23, 2025       | Fully supported       |
++---------+--------------------+--------------------+--------------------+-----------------------+
 | 1.12    | Oct 31, 2022       | Jun 30, 2024       | Dec 31, 2024       | Fully supported       |
 +---------+--------------------+--------------------+--------------------+-----------------------+
 
