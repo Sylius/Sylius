@@ -1,0 +1,14 @@
+<div class="d-grid">
+    <button
+        type="submit"
+        name="submit-type"
+        value="checkout"
+        class="btn btn-primary"
+        form="sylius_cart"
+        formaction="{{ path('sylius_shop_cart_checkout') }}"
+        formmethod="post"
+        {{ sylius_test_html_attribute('cart-checkout-button') }}
+    >
+        {{ 'sylius.ui.checkout'|trans }}
+    </button>
+</div>

@@ -1,0 +1,24 @@
+.table-list {
+    tr {
+        > {
+            *:first-child {
+                padding-left: 0;
+            }
+
+            *:last-child {
+                padding-right: 0;
+            }
+        }
+
+        &:last-child > * {
+            border: 0;
+        }
+    }
+}
+
+.table-lg {
+    > :not(caption) > * > * {
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+    }
+}

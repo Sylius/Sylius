@@ -1,10 +1,8 @@
 {% extends '@SyliusShop/layout.html.twig' %}
 
 {% block content %}
-    <h2 class="ui center aligned icon header">
-        <img src="{{ asset('build/shop/images/logo.png', 'shop') }}" alt="Sylius logo" class="ui small image" />
-        <br/><br/>
+    <h2>
+        <img src="{{ asset('build/shop/images/logo.png', 'shop') }}" alt="Sylius logo" />
         {{ 'sylius.ui.server_has_encountered_some_errors'|trans }}
     </h2>
-
 {% endblock %}

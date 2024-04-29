@@ -1,120 +1,16 @@
-@import "theme";
+@import "variables";
+@import "utilities";
 
-body {
-  background-color: #F9FAFB;
-}
+@import "bootstrap/scss/bootstrap";
 
-#menu {
-  border-radius: 0;
-}
-
-#footer {
-  padding: 4em;
-  margin-top: 4em;
-}
-
-.pusher {
-  display: flex;
-  min-height: 100vh;
-  flex-direction: column;
-}
-
-.pusher > #footer {
-  flex: 1;
-}
-
-.cart.popup {
-  min-width: 300px;
-}
-
-.ui.monster.header {
-  font-size: 3em;
-}
-.ui.unmargined.segments {
-  margin: 0;
-}
-
-#searchbar {
-    display: flex;
-}
-
-#searchbarTextField {
-    flex-grow: 100;
-}
-
-#searchbarButtons {
-    width: fit-content;
-    width: -moz-fit-content;
-}
-
-.old-price {
-    font-size: 80%;
-    color: #a0a0a0;
-    text-decoration: line-through;
-}
-
-.tax-disabled {
-    color: #a0a0a0;
-}
-
-.homepage .carousel-wrapper {
-    position: relative;
-}
-
-.homepage .carousel-nav .carousel-left,
-.homepage .carousel-nav .carousel-right {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-}
-
-.homepage .carousel-nav .carousel-left {
-    left: 30px;
-}
-
-.homepage .carousel-nav .carousel-right {
-    right: 30px;
-}
-
-.homepage .carousel {
-    margin: 0 -1em;
-}
-
-.homepage .carousel-item {
-    padding: 5px 1em;
-}
-
-@media (min-width: 992px) {
-    .homepage .featured.column .card .content {
-        text-align: center;
-        padding-top: 41px;
-    }
-
-    .homepage .featured.column .card .content .header {
-        font-size: 26px;
-    }
-
-    .homepage .featured.column .cards,
-    .homepage .featured.column .cards .ui.fluid.card {
-        height: 100%;
-    }
-}
-
-@media (max-width: 991px) {
-    .homepage .odd.doubling > .card:first-child {
-        width: calc(100% - 2em) !important;
-    }
-}
-
-.newsletter .ui.form {
-    display: flex !important;
-}
-
-.newsletter .ui.form .newsletter-input,
-.newsletter .ui.form .newsletter-button {
-    margin: 5px;
-}
-
-.newsletter .ui.form .newsletter-input {
-    flex-grow: 1;
-}
+@import "base";
+@import "accordion";
+@import "buttons";
+@import "checkout";
+@import "lists";
+@import "offcanvas";
+@import "photo-grid";
+@import "products";
+@import "rating";
+@import "steps";
+@import "tables";

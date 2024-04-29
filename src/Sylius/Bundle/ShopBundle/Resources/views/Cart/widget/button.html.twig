@@ -1,0 +1,15 @@
+{% import "@SyliusShop/Common/Macro/money.html.twig" as money %}
+{% from '@SyliusShop/Shared/icon.html.twig' import icon as icon %}
+
+<button class="btn btn-icon btn-transparent px-2 position-relative" data-bs-toggle="offcanvas" data-bs-target="#offcanvasCart">
+    {{ icon('bag') }}
+    <span class="d-none d-lg-block ps-1" {{ sylius_test_html_attribute('cart-total') }}>
+        {{- money.convertAndFormat(cart.itemsTotal) -}}
+        {{- 'sylius.ui.item.choice'|trans({'%count%': cart.totalQuantity}) }}
+    </span>
+    {% if cart.totalQuantity > 0 %}
+        <span class="position-absolute top-0 start-0 badge rounded-pill bg-primary">
+            {{ cart.totalQuantity }}
+        </span>
+    {% endif %}
+</button>

@@ -1,13 +1,17 @@
 {% extends '@SyliusShop/layout.html.twig' %}
 
 {% block content %}
-{% include '@SyliusShop/Product/Index/_header.html.twig' %}
-<div class="ui stackable grid">
-    <div class="four wide column">
-        {% include '@SyliusShop/Product/Index/_sidebar.html.twig' %}
+    <div class="container">
+        {{ sylius_template_event('sylius.shop.product.index.header', _context) }}
+
+        <div class="row">
+            <div class="col-12 col-lg-3">
+                {{ sylius_template_event('sylius.shop.product.index.sidebar', _context) }}
+            </div>
+
+            <div class="col-12 col-lg-9">
+                {{ sylius_template_event('sylius.shop.product.index.main', _context) }}
+            </div>
+        </div>
     </div>
-    <div class="twelve wide column">
-        {% include '@SyliusShop/Product/Index/_main.html.twig' %}
-    </div>
-</div>
 {% endblock %}

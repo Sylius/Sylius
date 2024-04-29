@@ -3,38 +3,32 @@
 {% block title %}{{ 'sylius.ui.thank_you'|trans }} | {{ parent() }}{% endblock %}
 
 {% block content %}
-    <div class="ui hidden divider"></div>
-    <div class="ui grid">
-        <div class="center aligned sixteen wide column">
-            <h1 class="ui icon header">
-                {% set lastPayment = order.payments.last() %}
-                <i class="circular rocket icon"></i>
-                <div class="content" id="sylius-thank-you" {{ sylius_test_html_attribute('thank-you') }}>
-                    {{ 'sylius.ui.thank_you'|trans }}
-                    <div class="sub header">{{ 'sylius.ui.placed_an_order'|trans }}</div>
+    <div>
+        {% set lastPayment = order.payments.last() %}
+        <h1 {{ sylius_test_html_attribute('thank-you') }}>{{ 'sylius.ui.thank_you'|trans }}</h1>
+        {{ 'sylius.ui.placed_an_order'|trans }}
+
+        {{ sylius_template_event('sylius.shop.order.thank_you.after_message', {'order': order}) }}
+
+        {% if lastPayment != false %}
+            {%  if lastPayment.method.instructions is not null %}
+                <div {{ sylius_test_html_attribute('payment-method-instructions') }}>
+                    {{ lastPayment.method.instructions }}
                 </div>
-            </h1>
-
-            {{ sylius_template_event('sylius.shop.order.thank_you.after_message', {'order': order}) }}
-
-            {% if lastPayment != false %}
-                {%  if lastPayment.method.instructions is not null %}
-                    <div id="sylius-payment-method-instructions" class="ui segment" {{ sylius_test_html_attribute('payment-method-instructions') }}>
-                        {{ lastPayment.method.instructions }}
-                    </div>
-                {% endif %}
-                <div class="ui hidden divider"></div>
             {% endif %}
+        {% endif %}
 
-            {% if order.customer.user is not null %}
-                <a href="{{ path('sylius_shop_account_order_show', {'number': order.number}) }}" id="sylius-show-order-in-account" class="ui large blue button" {{ sylius_test_html_attribute('show-order-in-account') }}>{{ 'sylius.ui.view_order'|trans }}</a>
-            {% else %}
-                <a href="{{ path('sylius_shop_order_show', {'tokenValue': order.tokenValue}) }}" id="payment-method-page" class="ui large blue button" {{ sylius_test_html_attribute('payment-method-page') }}>{{ 'sylius.ui.change_payment_method'|trans }}</a>
-                <a href="{{ path('sylius_shop_register_after_checkout', {'tokenValue': order.tokenValue}) }}" class="ui large green button" {{ sylius_test_html_attribute('create-an-account') }}>
-                    <i class="signup icon"></i>
-                    {{ 'sylius.ui.create_an_account'|trans }}
-                </a>
-            {% endif %}
-        </div>
+        {% if order.customer.user is not null %}
+            <a href="{{ path('sylius_shop_account_order_show', {'number': order.number}) }}" {{ sylius_test_html_attribute('show-order-in-account') }}>
+                {{ 'sylius.ui.view_order'|trans }}
+            </a>
+        {% else %}
+            <a href="{{ path('sylius_shop_order_show', {'tokenValue': order.tokenValue}) }}" {{ sylius_test_html_attribute('payment-method-page') }}>
+                {{ 'sylius.ui.change_payment_method'|trans }}
+            </a>
+            <a href="{{ path('sylius_shop_register_after_checkout', {'tokenValue': order.tokenValue}) }}" {{ sylius_test_html_attribute('create-an-account') }}>
+                {{ 'sylius.ui.create_an_account'|trans }}
+            </a>
+        {% endif %}
     </div>
 {% endblock %}

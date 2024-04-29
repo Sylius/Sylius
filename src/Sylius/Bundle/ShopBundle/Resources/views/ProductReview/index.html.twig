@@ -1,14 +1,13 @@
 {% extends '@SyliusShop/layout.html.twig' %}
 
 {% block content %}
-    <div class="ui hidden divider"></div>
-    <div class="ui stackable grid" id="reviews">
-        <div class="four wide column">
-            {{ sylius_template_event('sylius.shop.product_review.index.product_box', _context) }}
-        </div>
-        <div class="twelve wide column">
-            <div class="ui segment" id="sylius-product-reviews" {{ sylius_test_html_attribute('product-reviews') }}>
-                {{ sylius_template_event('sylius.shop.product_review.index.list', _context) }}
+    <div class="container">
+        <div class="row">
+            <div class="col-12 col-md-5 col-lg-4">
+                {{ sylius_template_event('sylius.shop.product_review.index.sidebar', _context) }}
+            </div>
+            <div class="col-12 col-md-7 col-lg-8" {{ sylius_test_html_attribute('product-reviews') }}>
+                {{ sylius_template_event('sylius.shop.product_review.index.main', _context) }}
             </div>
         </div>
     </div>

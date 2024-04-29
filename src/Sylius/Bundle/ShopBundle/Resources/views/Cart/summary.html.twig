@@ -2,25 +2,31 @@
 
 {% form_theme form '@SyliusShop/Form/theme.html.twig' %}
 
-{% import '@SyliusShop/Macro/messages.html.twig' as messages %}
+{% import '@SyliusShop/Common/messages.html.twig' as messages %}
 
 {% set header = 'sylius.ui.your_shopping_cart' %}
 
 {% block title %}{{ header|trans }} | {{ parent() }}{% endblock %}
 
 {% block content %}
-    {% if not cart.empty %}
-        {{ sylius_template_event('sylius.shop.cart.header', {'header': header, 'cart': cart}) }}
-        <div class="ui stackable grid">
-            <div class="eleven wide column">
-                {{ sylius_template_event('sylius.shop.cart.items', {'cart': cart, 'form': form}) }}
+    <div class="container">
+        {% if not cart.empty %}
+            <div>
+                {{ sylius_template_event('sylius.shop.cart.header', {'header': header, 'cart': cart}) }}
             </div>
-            <div class="five wide column">
-                {{ sylius_template_event('sylius.shop.cart.summary', {'cart': cart}) }}
+            <div class="row mb-6">
+                <div class="col-12 col-lg-8 mb-4">
+                    {{ sylius_template_event('sylius.shop.cart.items', {'cart': cart, 'form': form}) }}
+                </div>
+                <div class="col-12 col-lg-4 ps-lg-5 mb-4">
+                    {{ sylius_template_event('sylius.shop.cart.summary', {'cart': cart}) }}
+                </div>
             </div>
-        </div>
-        {{ sylius_template_event('sylius.shop.cart.suggestions', {'cart': cart}) }}
-    {% else %}
-        {{ messages.info('sylius.ui.your_cart_is_empty') }}
-    {% endif %}
+            <div>
+                {{ sylius_template_event('sylius.shop.cart.footer', {'cart': cart}) }}
+            </div>
+        {% else %}
+            {{ messages.info('sylius.ui.your_cart_is_empty') }}
+        {% endif %}
+    </div>
 {% endblock %}

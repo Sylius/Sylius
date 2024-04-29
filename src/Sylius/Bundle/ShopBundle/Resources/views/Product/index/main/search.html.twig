@@ -1,0 +1,15 @@
+{% from '@SyliusShop/Shared/icon.html.twig' import icon as icon %}
+
+<form method="get" action="{{ path('sylius_shop_product_index', {'slug': app.request.attributes.get('slug')}) }}">
+    <div class="input-group">
+        {% for filter in products.definition.enabledFilters %}
+            {{ sylius_grid_render_filter(products, filter) }}
+        {% endfor %}
+        <button class="btn btn btn-outline-secondary btn-sm" type="submit" {{ sylius_test_html_attribute('search') }}>
+            {{ icon('search') }}
+        </button>
+        <a class="btn btn btn-outline-secondary btn-sm" href="{{ path('sylius_shop_product_index', {'slug': app.request.attributes.get('slug')}) }}" {{ sylius_test_html_attribute('clear') }}>
+            {{ icon('x') }}
+        </a>
+    </div>
+</form>

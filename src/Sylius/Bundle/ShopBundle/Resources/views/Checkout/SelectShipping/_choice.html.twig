@@ -1,14 +1,18 @@
-<div class="item" {{ sylius_test_html_attribute('shipping-item') }}>
-    <div class="field">
-        <div class="ui radio checkbox" {{ sylius_test_html_attribute('shipping-method-checkbox') }}>
+{% import '@SyliusShop/Common/Macro/money.html.twig' as money %}
+
+<div {{ sylius_test_html_attribute('shipping-item') }}>
+    <div>
+        <div {{ sylius_test_html_attribute('shipping-method-checkbox') }}>
             {{ form_widget(form, sylius_test_form_attribute('shipping-method-select')) }}
         </div>
     </div>
-    <div class="content">
-        <a class="header" {{ sylius_test_html_attribute('shipping-method-label') }}>{{ form_label(form) }}</a>
-        {{ sylius_template_event('sylius.shop.checkout.select_shipping.choice_item_content', {'method': method, 'fee': fee}) }}
+    <div>
+        <div {{ sylius_test_html_attribute('shipping-method-label') }}>{{ form_label(form) }}</div>
+        {% if method.description is not null %}
+            <div>{{ method.description }}</div>
+        {% endif %}
     </div>
-    <div class="extra">
-        {{ sylius_template_event('sylius.shop.checkout.select_shipping.choice_item_extra', {'method': method, 'fee': fee}) }}
+    <div {{ sylius_test_html_attribute('shipping-method-fee') }}>
+        {{ money.convertAndFormat(fee) }}
     </div>
 </div>

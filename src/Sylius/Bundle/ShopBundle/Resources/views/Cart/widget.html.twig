@@ -1,0 +1,6 @@
+<div {{ sylius_test_html_attribute('cart-button') }}>
+    {{ sylius_template_event('sylius.shop.cart.widget.button', {'cart': cart}) }}
+</div>
+<div>
+    {{ sylius_template_event('sylius.shop.cart.widget.popup', {'cart': cart}) }}
+</div>

@@ -1,7 +1,4 @@
-<div class="ui icon message" id="sylius-order-cannot-be-paid" {{ sylius_test_html_attribute('order-cannot-be-paid') }}>
-    <i class="warning sign icon"></i>
-    <div class="content">
-        <div class="header">{{ 'sylius.ui.warning'|trans }}</div>
-        <p>{{ 'sylius.ui.no_payment_methods_available'|trans }}.</p>
-    </div>
+<div {{ sylius_test_html_attribute('order-cannot-be-paid') }}>
+    <div>{{ 'sylius.ui.warning'|trans }}</div>
+    <div>{{ 'sylius.ui.no_payment_methods_available'|trans }}.</div>
 </div>

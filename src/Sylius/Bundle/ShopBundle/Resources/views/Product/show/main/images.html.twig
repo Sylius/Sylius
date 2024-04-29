@@ -1,0 +1,35 @@
+{% if product.imagesByType('main') is not empty %}
+    {% set source_path = product.imagesByType('main').first.path %}
+    {% set original_path = source_path|imagine_filter('sylius_shop_product_original') %}
+    {% set path = source_path|imagine_filter(filter|default('sylius_shop_product_large_thumbnail')) %}
+{% elseif product.images.first %}
+    {% set source_path = product.images.first.path %}
+    {% set original_path = source_path|imagine_filter('sylius_shop_product_original') %}
+    {% set path = source_path|imagine_filter(filter|default('sylius_shop_product_large_thumbnail')) %}
+{% else %}
+    {% set original_path = asset('build/shop/images/400x300.png', 'shop') %}
+    {% set path = original_path %}
+{% endif %}
+
+<div class="mb-5">
+    <div data-product-image="{{ path }}" data-product-link="{{ original_path }}"></div>
+    <a href="{{ original_path }}">
+        <img src="{{ path }}" alt="{{ product.name }}" {{ sylius_test_html_attribute('main-image') }} />
+    </a>
+    {% if product.images|length > 1 %}
+
+        <div>
+            {% for image in product.images %}
+                {% set path = image.path is not null ? image.path|imagine_filter('sylius_shop_product_small_thumbnail') : asset('build/shop/images/200x200.png') %}
+                <div>
+                    {% if product.isConfigurable() and product.enabledVariants|length > 0 %}
+                        {% include '@SyliusShop/Product/show/image_variants.html.twig' %}
+                    {% endif %}
+                    <a href="{{ image.path|imagine_filter('sylius_shop_product_original') }}">
+                        <img src="{{ path }}" data-large-thumbnail="{{ image.path|imagine_filter('sylius_shop_product_large_thumbnail') }}" alt="{{ product.name }}" />
+                    </a>
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+</div>

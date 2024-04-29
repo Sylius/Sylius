@@ -5,28 +5,26 @@
 {% block title %}{{ 'sylius.ui.add_address'|trans }} | {{ parent() }}{% endblock %}
 
 {% block subcontent %}
-    <div class="ui segment">
-        <h1 class="ui dividing header">
-            {{ 'sylius.ui.address_book'|trans }}
-            <div class="sub header">{{ 'sylius.ui.add_address'|trans }}</div>
-        </h1>
+    <div>
+        <h1>{{ 'sylius.ui.address_book'|trans }}</h1>
+        <div>{{ 'sylius.ui.add_address'|trans }}</div>
 
         {{ sylius_template_event('sylius.shop.account.address_book.create.after_content_header', {'address': address}) }}
 
-        {{ form_start(form, {'action': path('sylius_shop_account_address_book_create'), 'attr': {'class': 'ui loadable form', 'novalidate': 'novalidate'}}) }}
-            {% include '@SyliusShop/Common/Form/_address.html.twig' with {'form': form} %}
-            <div class="ui two column grid">
-                <div class="column">
-                    <a href="{{ path('sylius_shop_account_address_book_index') }}" class="ui large icon labeled button">
-                        <i class="left arrow icon"></i> {{ 'sylius.ui.cancel'|trans }}
-                    </a>
-                </div>
-                <div class="right aligned column">
-                    <button type="submit" class="ui large icon labeled blue button" {{ sylius_test_html_attribute('add-address') }}>
-                        <i class="icon plus"></i> {{ 'sylius.ui.add'|trans }}
-                    </button>
-                </div>
+        {{ form_start(form, {'action': path('sylius_shop_account_address_book_create'), 'attr': {'novalidate': 'novalidate'}}) }}
+        {% include '@SyliusShop/Common/Form/_address.html.twig' with {'form': form} %}
+        <div>
+            <div>
+                <a href="{{ path('sylius_shop_account_address_book_index') }}">
+                    {{ 'sylius.ui.cancel'|trans }}
+                </a>
             </div>
+            <div>
+                <button type="submit" {{ sylius_test_html_attribute('add-address') }}>
+                    {{ 'sylius.ui.add'|trans }}
+                </button>
+            </div>
+        </div>
 
         {{ sylius_template_event('sylius.shop.account.address_book.create.form', {'address': address}) }}
 

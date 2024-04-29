@@ -128,7 +128,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
 
     public function hasCatalogPromotionApplied(string $name): bool
     {
-        $catalogPromotions = $this->getDocument()->findAll('css', '.column .promotion_label');
+        $catalogPromotions = $this->getDocument()->findAll('css', '[data-test-promotion-label]');
         foreach ($catalogPromotions as $catalogPromotion) {
             if (explode(' - ', $catalogPromotion->getText())[0] === $name) {
                 return true;
@@ -143,7 +143,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
         $catalogPromotions = [];
 
         /** @var NodeElement $catalogPromotion */
-        foreach ($this->getElement('product_box')->findAll('css', '.promotion_label') as $catalogPromotion) {
+        foreach ($this->getElement('product_box')->findAll('css', '[data-test-promotion-label]') as $catalogPromotion) {
             $catalogPromotions[] = explode(' - ', $catalogPromotion->getText())[0];
         }
 
@@ -184,10 +184,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     {
         $originalPrice = $this->getElement('product_original_price');
 
-        if (
-            $originalPrice->getAttribute('style') !== null &&
-            str_contains($originalPrice->getAttribute('style'), 'display: none')
-        ) {
+        if ($originalPrice->getAttribute('data-test-product-original-price-hidden') !== null) {
             return null;
         }
 
@@ -361,7 +358,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
             'attributes' => '[data-test-product-attributes]',
             'average_rating' => '[data-test-average-rating]',
             'breadcrumb' => '.breadcrumb',
-            'catalog_promotion' => '.promotion_label',
+            'catalog_promotion' => '[data-test-promotion-label]',
             'current_variant_input' => '[data-test-product-variants] td input:checked',
             'details' => '[data-tab="details"]',
             'main_image' => '[data-test-main-image]',

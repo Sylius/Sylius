@@ -1,1 +1,261 @@
-{% extends '@SyliusUi/Form/theme.html.twig' %}
+{% extends 'bootstrap_5_layout.html.twig' %}
+
+{% block form_row -%}
+    {% set row_attr=row_attr|merge({'class': row_attr.class|default ~ ' field'}) %}
+    {% if required %}
+        {% set row_attr=row_attr|merge({'class': row_attr.class|default ~ ' required'}) %}
+    {% endif %}
+    {% if (not compound or force_error|default(false)) and not valid %}
+        {% set row_attr=row_attr|merge({'class': row_attr.class|default ~ ' error'}) %}
+    {% endif %}
+    <div {% with {attr: row_attr} %}{{ block('attributes') }}{% endwith %}>
+        {{- form_label(form) -}}
+        {{- form_widget(form) -}}
+        {{- form_help(form) -}}
+        {{- form_errors(form) -}}
+    </div>
+{%- endblock form_row %}
+
+{%- block form_errors -%}
+    {%- if errors|length > 0 -%}
+        {%- for error in errors -%}
+            <div data-test-validation-error class="{% if form.parent is not empty %}pointing {% endif %}" {{ sylius_test_html_attribute('validation-error') }} {% if form.parent is empty %} style="margin-bottom: 10px;"{% endif %}>
+                {{ error.message }}
+            </div>
+        {%- endfor -%}
+    {%- endif -%}
+{%- endblock form_errors -%}
+
+{% block checkbox_row -%}
+    <div class="{% if required %}required {% endif %}field{% if (not compound or force_error|default(false)) and not valid %} error{% endif %}">
+        <div class="ui toggle checkbox">
+            {{- form_widget(form) -}}
+            {{- form_label(form) -}}
+            {{- form_errors(form) -}}
+        </div>
+    </div>
+{%- endblock checkbox_row %}
+
+{% block radio_row -%}
+    <div class="field{% if (not compound or force_error|default(false)) and not valid %} error{% endif %}">
+        <div class="ui radio checkbox">
+            {{- form_label(form) -}}
+            {{- form_widget(form) -}}
+            {{- form_errors(form) -}}
+        </div>
+    </div>
+{%- endblock radio_row %}
+
+{% block money_widget -%}
+    <div class="ui labeled input">
+        <div class="ui label">{{ currency|sylius_currency_symbol }}</div>
+        {{- form_widget(form) -}}
+    </div>
+{%- endblock money_widget %}
+
+{% block choice_row -%}
+    <div class="{% if required %}required {% endif %}field{% if (not compound or force_error|default(false)) and not valid %} error{% endif %}">
+        {{- form_label(form) -}}
+        {% set attr = attr|merge({'class': attr.class|default ~ ' ui dropdown'}) %}
+        {{- form_widget(form, {'attr': attr}) -}}
+        {{- form_errors(form) -}}
+    </div>
+{%- endblock choice_row %}
+
+{%- block choice_widget_expanded -%}
+    <div {{ block('widget_container_attributes') }}>
+        <div class="{% if required %}required {% endif %}grouped fields">
+            {%- for child in form %}
+                <div class="field">
+                    <div class="ui toggle checkbox">
+                        {{- form_widget(child, sylius_test_form_attribute('option')) -}}
+                        {{- form_label(child, null, {translation_domain: choice_translation_domain}) -}}
+                    </div>
+                </div>
+            {% endfor -%}
+        </div>
+    </div>
+{%- endblock choice_widget_expanded -%}
+
+{% block percent_widget -%}
+    <div class="ui right labeled input">
+        {{- form_widget(form) -}}
+        <div class="ui basic label">%</div>
+    </div>
+{%- endblock percent_widget %}
+
+{% block collection_widget -%}
+    {% from '@SyliusResource/Macros/notification.html.twig' import error %}
+    {% import _self as self %}
+    {% set attr = attr|merge({'class': attr.class|default ~ ' controls collection-widget'}) %}
+
+    {% apply spaceless %}
+        <div data-form-type="collection" {{ block('widget_container_attributes') }}
+            {% if prototype is defined and allow_add %}
+                data-prototype='{{ self.collection_item(prototype, allow_delete, button_delete_label, prototype.vars.name)|e }}'
+                data-prototype-name='{{ prototype.vars.name }}'
+            {%- endif -%}
+        >
+            {{ error(form.vars.errors) }}
+
+            {% if prototypes|default is iterable %}
+                {% for key, subPrototype in prototypes %}
+                    <input type="hidden" data-form-prototype="{{ key }}"
+                           value="{{ self.collection_item(subPrototype, allow_delete, button_delete_label, subPrototype.vars.name)|e }}"
+                           data-subprototype-name="{{ subPrototype.vars.name }}"
+                    />
+                {% endfor %}
+            {% endif %}
+
+            <div data-form-collection="list">
+                {% for child in form %}
+                    {{ self.collection_item(child, allow_delete, button_delete_label, loop.index0) }}
+                {% endfor %}
+            </div>
+
+            {% if prototype is defined and allow_add %}
+                <a href="#" class="ui labeled icon button" data-form-collection="add">
+                    <i class="plus square outline icon"></i>
+                    {{ button_add_label|trans }}
+                </a>
+            {% endif %}
+        </div>
+    {% endapply %}
+{%- endblock collection_widget %}
+
+{% macro collection_item(form, allow_delete, button_delete_label, index) %}
+    {% apply spaceless %}
+        <div data-form-collection="item" data-form-collection-index="{{ index }}">
+            {{ form_widget(form) }}
+            {% if allow_delete %}
+                <a href="#" data-form-collection="delete" class="ui red labeled icon button" style="margin-bottom: 1em;">
+                    <i class="trash icon"></i>
+                    {{ button_delete_label|trans }}
+                </a>
+            {% endif %}
+        </div>
+    {% endapply %}
+{% endmacro %}
+
+{% block sylius_province_widget %}
+    <div class="ui compact segment">
+        <div class="inline fields">
+            {{ form_row(form.code) }}
+            {{ form_row(form.name) }}
+            {{ form_row(form.abbreviation) }}
+        </div>
+    </div>
+{% endblock %}
+
+{% block sylius_zone_member_widget %}
+    <div class="ui compact segment">
+        <div class="inline fields">
+            {{ form_row(form.code) }}
+        </div>
+    </div>
+{% endblock %}
+
+{% block sylius_promotion_rule_widget %}
+    <div class="ui segment">
+        {{ block('form_widget') }}
+    </div>
+{% endblock %}
+
+{% block sylius_promotion_action_widget %}
+    <div class="ui segment">
+        {{ block('form_widget') }}
+    </div>
+{% endblock %}
+
+{% block sylius_promotion_configuration_widget %}
+    <div class="configuration">
+        {% for child in form %}
+            <hr/>{{ form_row(child) }}<hr/>
+        {% endfor %}
+    </div>
+{% endblock %}
+
+{% block sylius_product_option_value_widget %}
+    <div class="ui segment">
+        {{ form_row(form.code) }}
+        <div class="five fields">
+            {% for locale, translationForm in form.translations %}
+            {{ form_row(translationForm.value, {'label': locale|sylius_locale_name}) }}
+            {% if 0 == loop.index % 5 %}
+        </div>
+        <div class="five fields">
+            {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
+
+{% block sylius_translations_row -%}
+    <h4 class="ui dividing header">{{ form_label(form) }}</h4>
+    <div class="ui grid">
+        {% for translation in form %}
+            <div class="four wide column">
+                {{ form_label(translation, translation.vars.name|sylius_locale_name) }}
+            </div>
+            <div class="twelve wide column">
+                {{ form_widget(translation) }}
+            </div>
+            {{- form_errors(form) -}}
+        {% endfor %}
+    </div>
+{%- endblock sylius_translations_row %}
+
+{% block sylius_resource_autocomplete_choice_row %}
+    <div class="{% if required %}required {% endif %}{% if disabled %}disabled {% endif %}field{% if (not compound or force_error|default(false)) and not valid %} error{% endif %}">
+        {{- form_label(form) -}}
+        <div
+            class="sylius-autocomplete ui fluid search selection dropdown {% if multiple %}multiple{% endif %}"
+            data-url="{{ remote_url }}"
+            data-choice-name="{{ choice_name }}"
+            data-choice-value="{{ choice_value }}"
+            data-criteria-type="{{ remote_criteria_type }}"
+            data-criteria-name="{{ remote_criteria_name }}"
+            data-load-edit-url="{{ load_edit_url }}"
+        >
+            {{- form_widget(form, {'attr': {'class' : 'autocomplete'}}) -}}
+            <i class="dropdown icon"></i>
+            <div class="default text">{% if placeholder is defined %} {{ placeholder|trans }} {% endif %}</div>
+            <div class="menu"></div>
+        </div>
+        {{- form_errors(form) -}}
+    </div>
+{% endblock %}
+
+{% block sylius_product_variant_generation_widget %}
+    <div class="ui segment">
+        <div class="ui two column stackable grid">
+            <div class="column">
+                {{ form_row(form.optionValues, {'label': false}) }}
+            </div>
+            <div class="column">
+                {{ form_row(form.code) }}
+                {{ form_row(form.name) }}
+            </div>
+        </div>
+        <h4 class="ui dividing header">{{ 'sylius.ui.pricing'|trans }}</h4>
+        {{ form_row(form.channelPricings, {'label': false}) }}
+    </div>
+{% endblock %}
+
+{% block sylius_image_widget %}
+    {% apply spaceless %}
+        {{ form_row(form.type) }}
+        <div class="ui-element-spacer">
+            <label for="{{ form.file.vars.id }}" class="ui icon labeled button"><i class="cloud upload icon"></i> {{ 'sylius.ui.choose_file'|trans }}</label>
+        </div>
+        {% if form.vars.value.path|default(null) is not null %}
+            <img class="ui small bordered image" src="{{ form.vars.value.path|imagine_filter('sylius_small') }}" alt="{{ form.vars.value.type }}" />
+        {% endif %}
+        <div class="ui hidden element">
+            {{ form_widget(form.file) }}
+        </div>
+        <div class="ui element">
+            {{- form_errors(form.file) -}}
+        </div>
+    {% endapply %}
+{% endblock %}

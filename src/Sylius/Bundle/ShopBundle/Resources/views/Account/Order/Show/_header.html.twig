@@ -1,30 +1,21 @@
-{% import '@SyliusShop/Macro/buttons.html.twig' as buttons %}
-{% import '@SyliusShop/Macro/flags.html.twig' as flags %}
+{% import '@SyliusShop/Common/buttons.html.twig' as buttons %}
 
-<h1 class="ui header">
-    <i class="circular cart icon"></i>
-    <div class="content">
-        {{ 'sylius.ui.order'|trans }} #{{ order.number }}
-        <div class="sub header">
-            <div class="ui horizontal divided list">
-                <div class="item">
-                    {{ order.checkoutCompletedAt|format_date }}
-                </div>
-                <div class="item">
-                    {% include [('@SyliusShop/Account/Order/Label/State' ~ '/' ~ order.state ~ '.html.twig'), '@SyliusShop/Label/_default.html.twig'] with {'value': ('sylius.ui.' ~ order.state)|trans} %}
-                </div>
-                <div class="item">
-                    {{ order.currencyCode }}
-                </div>
-                <div class="item">
-                    {{ flags.fromLocaleCode(order.localeCode) }}{{ order.localeCode|sylius_locale_name }}
-                </div>
-            </div>
+<div>
+    <h1>{{ 'sylius.ui.order'|trans }} #{{ order.number }}</h1>
+    <div>
+        <div>
+            {{ order.checkoutCompletedAt|format_date }}
+        </div>
+        <div>
+            {% include [('@SyliusShop/Account/Order/Label/State' ~ '/' ~ order.state ~ '.html.twig'), '@SyliusUi/Label/_default.html.twig'] with {'value': ('sylius.ui.' ~ order.state)|trans} %}
+        </div>
+        <div>
+            {{ order.currencyCode }}
         </div>
     </div>
-</h1>
+</div>
 
-<div style="text-align: right">
+<div>
     {% if order.paymentState in ['awaiting_payment'] %}
         {{ buttons.default(path('sylius_shop_order_show', {'tokenValue': order.tokenValue}), 'sylius.ui.pay', null, 'credit card alternative', 'green') }}
     {% endif %}
