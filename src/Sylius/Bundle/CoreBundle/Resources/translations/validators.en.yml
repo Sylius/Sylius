@@ -118,7 +118,7 @@ sylius:
         author:
             not_blank: Please enter your email.
         rating:
-            range: Review rating must be an integer in the range 1-5.
+            not_in_range: Review rating must be between {{ min }} and {{ max }}.
     taxon_image:
         file:
             max_size: The image is too big - {{ size }}{{ suffix }}. Maximum allowed size is {{ limit }}{{ suffix }}.
