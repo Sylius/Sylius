@@ -1,3 +1,5 @@
+{% set form = hookable_metadata.context.form %}
+
 <div class="col-12 col-md-6">
-    {{ form_row(hookable_data.form.position, sylius_test_form_attribute('position')) }}
+    {{ form_row(form.position, sylius_test_form_attribute('position')) }}
 </div>

@@ -1,3 +1,5 @@
+{% set form = hookable_metadata.context.form %}
+
 <div class="col-12 col-md-12">
-    {{ form_row(hookable_data.form.enabled, sylius_test_form_attribute('enabled')|merge({ label_attr: { class: 'checkbox-switch' } })) }}
+    {{ form_row(form.enabled, sylius_test_form_attribute('enabled')|merge({ label_attr: { class: 'checkbox-switch' } })) }}
 </div>

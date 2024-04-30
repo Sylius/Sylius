@@ -3,11 +3,9 @@ twig_hooks:
         'sylius_admin.payment_method.create.content':
             form:
                 component: 'sylius_admin:payment_method:form'
-                data:
-                    payment_method: '@=resource'
-                    form: '@=form'
-                    parentMainHook: '@=parent_main_hook'
-                    parentFallbackHook: '@=parent_fallback_hook'
+                props:
+                    resource: '@=_context.resource'
+                    form: '@=_context.form'
 
         'sylius_admin.payment_method.create.content.form':
             sections:
