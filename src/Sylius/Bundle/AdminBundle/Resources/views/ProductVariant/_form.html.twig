@@ -1,6 +1,7 @@
 {% if form is not defined %}
     {% set form = hookable_metadata.context.form %}
 {% endif %}
+
 {% form_theme form '@SyliusAdmin/Shared/form_theme.html.twig' %}
 
 <div class="container-xl">
@@ -12,7 +13,7 @@
         {{ form_errors(form, sylius_test_form_attribute('form-validation-errors')) }}
         {{ form_widget(form._token) }}
 
-        {% hook 'form' %}
+        {% hook 'form' with { form } %}
     </div>
     {{ form_end(form, {render_rest: hookable.configuration.render_rest|default(false)}) }}
 </div>
