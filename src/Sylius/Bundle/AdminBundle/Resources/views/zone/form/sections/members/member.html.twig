@@ -1,0 +1,12 @@
+<div class="card mb-3">
+    <div class="card-body">
+        <div class="row align-items-end" {{  sylius_test_html_attribute('zone-member') }} >
+            <div class="col">
+                {{ form_widget(hookable_data.member_form, sylius_test_form_attribute('member')) }}
+            </div>
+            <div class="col-auto">
+                {{ form_row(hookable_data.member_form.vars.button_delete, sylius_test_form_attribute('delete-zone-member')) }}
+            </div>
+        </div>
+    </div>
+</div>

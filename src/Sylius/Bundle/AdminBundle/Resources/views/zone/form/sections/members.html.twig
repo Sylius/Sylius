@@ -1,0 +1,24 @@
+{% set main_hook = hook_name(hookable_data.parent_main_hook, 'members') %}
+{% set fallback_hook = hook_name(hookable_data.parent_fallback_hook, 'members') %}
+
+<div class="card mb-3">
+    <div class="card-header">
+        <div class="card-title">{{ form_label(hookable_data.form.members) }}</div>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            {{ form_errors(hookable_data.form.members) }}
+
+            <div {{ sylius_test_html_attribute('members') }} >
+                {% for key, member_form in hookable_data.form.members %}
+                    {% hook [main_hook, fallback_hook] with hookable_data|merge({
+                        parent_main_hook: main_hook,
+                        parent_fallback_hook: fallback_hook,
+                        member_form: member_form,
+                    }) %}
+                {% endfor %}
+                {{ form_row(hookable_data.form.members.vars.button_add, sylius_test_form_attribute('add-member')) }}
+            </div>
+        </div>
+    </div>
+</div>
