@@ -120,8 +120,6 @@ sylius:
     review:
         author:
             not_blank: Veuillez saisir votre adresse email.
-        rating:
-            range: La note de l'avis doit être un entier entre 1 et 5.
     taxon_image:
         file:
             max_size: L'image est trop grande - {{ size }}{{ suffix }}. La taille maximum autorisée est de {{ limit }}{{ suffix }}.

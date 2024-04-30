@@ -214,11 +214,11 @@ final class ProductReviewContext implements Context
     }
 
     /**
-     * @Then I should be notified that rate must be an integer in the range 1-5
+     * @Then I should be notified that rating must be between 1 and 5
      */
-    public function iShouldBeNotifiedThatRateMustBeAnIntegerInTheRange15(): void
+    public function iShouldBeNotifiedThatRatingMustBeBetween1And5(): void
     {
-        $this->assertViolation('Review rating must be an integer in the range 1-5.', 'rating');
+        $this->assertViolation('Review rating must be between 1 and 5.', 'rating');
     }
 
     private function hasReviewsWithTitles(array $titles): bool
