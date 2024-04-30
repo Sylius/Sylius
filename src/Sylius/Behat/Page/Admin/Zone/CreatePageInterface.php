@@ -21,7 +21,7 @@ interface CreatePageInterface extends BaseCreatePageInterface
 
     public function checkValidationMessageForMembers(string $message): bool;
 
-    public function chooseMember(string $name): void;
+    public function chooseMember(string $name, string $memberType): void;
 
     public function selectScope(string $scope): void;
 

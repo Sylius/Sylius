@@ -141,12 +141,12 @@ final class ManagingZonesContext implements Context
     }
 
     /**
-     * @When /^I add a(?: country| province| zone) "([^"]+)"$/
+     * @When /^I add a ([^"]+) "([^"]+)"$/
      */
-    public function iAddAZoneMember($name)
+    public function iAddAZoneMember(string $memberType, string $name): void
     {
         $this->createPage->addMember();
-        $this->createPage->chooseMember($name);
+        $this->createPage->chooseMember($name, ucfirst($memberType));
     }
 
     /**
@@ -356,14 +356,14 @@ final class ManagingZonesContext implements Context
     }
 
     /**
-     * @Then /^I can not add a(?: country| province| zone) "([^"]+)"$/
+     * @Then /^I can not add a ([^"]+) "([^"]+)"$/
      */
-    public function iCanNotAddAZoneMember($name)
+    public function iCanNotAddAZoneMember(string $zoneType, string $name): void
     {
         $member = null;
 
         try {
-            $member = $this->createPage->chooseMember($name);
+            $member = $this->createPage->chooseMember($name, ucfirst($zoneType));
         } catch (ElementNotFoundException) {
         }
         Assert::isEmpty($member);

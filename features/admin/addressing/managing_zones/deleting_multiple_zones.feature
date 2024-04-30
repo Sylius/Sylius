@@ -8,7 +8,7 @@ Feature: Deleting multiple zones
         Given the store has zones "North America", "South America" and "Europe"
         And I am logged in as an administrator
 
-    @todo @ui @mink:chromedriver @no-api
+    @ui @mink:chromedriver @no-api
     Scenario: Deleting multiple zones at once
         When I browse zones
         And I check the "North America" zone

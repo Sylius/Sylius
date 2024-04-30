@@ -117,7 +117,7 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
         $table = $this->getElement('table');
 
         $resourceRow = $tableAccessor->getRowWithFields($table, $parameters);
-        $bulkCheckbox = $resourceRow->find('css', '.bulk-select-checkbox');
+        $bulkCheckbox = $resourceRow->find('css', '.form-check-input');
 
         Assert::notNull($bulkCheckbox);
 
@@ -164,7 +164,7 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
     {
         return array_merge(parent::getDefinedElements(), [
             'bulk_actions' => '.sylius-grid-nav__bulk',
-            'confirmation_button' => '#confirmation-button',
+            'confirmation_button' => '[data-confirm-btn-true]',
             'enabled_filter' => '#criteria_enabled',
             'filter' => '[data-test-filter]',
             'table' => '.table',

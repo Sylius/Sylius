@@ -53,7 +53,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     public function removeMember(ZoneMemberInterface $zoneMember): void
     {
         $zoneMembers = $this->getElement('zone_members');
-        $items = $zoneMembers->findAll('css', 'div[data-form-collection="item"]');
+        $items = $zoneMembers->findAll('css', '[data-test-zone-member]');
 
         /** @var NodeElement $item */
         foreach ($items as $item) {
@@ -87,7 +87,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
             'name' => '#sylius_zone_name',
             'scope' => '#sylius_zone_scope',
             'type' => '#sylius_zone_type',
-            'zone_members' => '#sylius_zone_members',
+            'zone_members' => '[data-test-members]',
         ]);
     }
 
@@ -96,9 +96,9 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
      */
     private function getDeleteButtonForCollectionItem(NodeElement $item): NodeElement
     {
-        $deleteButton = $item->find('css', 'a[data-form-collection="delete"]');
+        $deleteButton = $item->find('css', '[data-test-delete-zone-member]');
         if (null === $deleteButton) {
-            throw new ElementNotFoundException($this->getDriver(), 'link', 'css', 'a[data-form-collection="delete"]');
+            throw new ElementNotFoundException($this->getDriver(), 'link', 'css', '[data-test-delete-zone-member]');
         }
 
         return $deleteButton;

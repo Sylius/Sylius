@@ -25,29 +25,35 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
 
     public function addMember(): void
     {
-        $this->getDocument()->clickLink('Add member');
+        $this->getElement('add_member')->click();
     }
 
     public function checkValidationMessageForMembers(string $message): bool
     {
-        $membersValidationElement = $this->getElement('ui_segment')->find('css', '.sylius-validation-error');
+        $membersValidationElement = $this->getDocument()->find('css', '.alert-danger.d-block');
         if (null === $membersValidationElement) {
-            throw new ElementNotFoundException($this->getDriver(), 'members validation box', 'css', '.sylius-validation-error');
+            throw new ElementNotFoundException($this->getDriver(), 'members validation box', 'css', '.alert-danger.d-block');
         }
 
         return $membersValidationElement->getText() === $message;
     }
 
-    public function chooseMember(string $name): void
+    public function chooseMember(string $name, $memberType): void
     {
-        $selectItems = $this->getDocument()->waitFor(2, fn () => $this->getDocument()->findAll('css', 'div[data-form-type="collection"] select'));
-        $lastSelectItem = end($selectItems);
+        $this->waitForElement(5, 'member');
+        $members = $this->getDocument()->findAll('css', '[data-test-member]');
+        $member = end($members);
 
-        if (false === $lastSelectItem) {
-            throw new ElementNotFoundException($this->getSession(), 'select', 'css', 'div[data-form-type="collection"] select');
+        if (false === $member) {
+            throw new ElementNotFoundException($this->getSession(), 'select', 'css', '[data-test-member]');
         }
 
-        $lastSelectItem->selectOption($name);
+        $member->selectFieldOption($memberType, $name);
+    }
+
+    private function waitForElement(int $timeout, string $elementName): bool
+    {
+        return $this->getDocument()->waitFor($timeout, fn () => $this->hasElement($elementName));
     }
 
     public function selectScope(string $scope): void
@@ -75,6 +81,8 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
             'name' => '#sylius_zone_name',
             'type' => '#sylius_zone_type',
             'ui_segment' => '.ui.segment',
+            'member' => '[data-test-member]',
+            'add_member' => '[data-test-add-member]',
         ]);
     }
 }
