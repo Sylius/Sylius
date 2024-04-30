@@ -1,7 +1,4 @@
-{% set main_hook = hook_name(hookable_data.parent_main_hook, 'item') %}
-{% set fallback_hook = hook_name(hookable_data.parent_fallback_hook, 'item') %}
-
-{% set order = hookable_data.resource %}
+{% set order = hookable_metadata.context.resource %}
 
 <div class="py-3">
     {% if order.hasShipments %}
@@ -9,11 +6,7 @@
             <tbody>
             <tr {{ sylius_test_html_attribute('shipment') }}>
                 {% for shipment in order.shipments %}
-                    {% hook [main_hook, fallback_hook] with hookable_data|merge({
-                        parent_main_hook: main_hook,
-                        parent_fallback_hook: fallback_hook,
-                        shipment,
-                    }) %}
+                    {% hook 'item' with { shipment } %}
                 {% endfor %}
             </tr>
             </tbody>

@@ -1,17 +1,10 @@
-{% set main_hook = hook_name(hookable_data.parent_main_hook, 'actions') %}
-{% set fallback_hook = hook_name(hookable_data.parent_fallback_hook, 'actions') %}
-
 <div class="col-12 col-md-auto ms-auto">
     <div class="dropdown">
         <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
             {{ 'sylius.ui.actions'|trans }}
         </button>
         <div class="dropdown-menu">
-            {% hook [main_hook, fallback_hook] with hookable_data|merge({
-                parent_main_hook: main_hook,
-                parent_fallback_hook: fallback_hook,
-                user: hookable_data.resource.user|default(null)
-            }) %}
+            {% hook 'actions' %}
         </div>
     </div>
 </div>

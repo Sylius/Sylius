@@ -1,6 +1,6 @@
 {% import '@SyliusAdmin/Shared/Helper/address.html.twig' as _address %}
 
-{% set order = hookable_data.resource %}
+{% set order = hookable_metadata.context.resource %}
 
 <div>
     <strong>{{ 'sylius.ui.billing_address'|trans }}</strong>

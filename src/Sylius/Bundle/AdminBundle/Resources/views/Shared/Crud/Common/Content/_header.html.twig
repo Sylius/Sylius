@@ -1,11 +1,5 @@
-{% set main_hook = hook_name(hookable_data.parent_main_hook, 'header') %}
-{% set fallback_hook = hook_name(hookable_data.parent_fallback_hook, 'header') %}
-
 <div class="page-header" {% if hookable_configuration.sticky_header|default(true) %}data-sticky-header{% endif %}>
     <div class="container-xl">
-        {% hook [main_hook, fallback_hook] with hookable_data|merge({
-            parent_main_hook: main_hook,
-            parent_fallback_hook: fallback_hook,
-        }) %}
+        {% hook 'header' %}
     </div>
 </div>

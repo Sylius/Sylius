@@ -8,6 +8,7 @@ Feature: Toggling catalog promotion
         Given the store operates on a single channel in "United States"
         And the store has a "T-Shirt" configurable product
         And this product has "PHP T-Shirt" variant priced at "$20.00"
+        And this product has "PHPers T-Shirt" variant priced at "$25.00"
         And there is a catalog promotion "Christmas sale" that reduces price by "30%" and applies on "PHP T-Shirt" variant
         And I am logged in as an administrator
 

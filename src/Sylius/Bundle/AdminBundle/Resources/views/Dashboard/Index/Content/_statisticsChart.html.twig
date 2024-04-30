@@ -1,5 +1,5 @@
-{% set rangeName = hookable_data.range %}
-{% set statisticsData = hookable_data.statisticsData %}
+{% set statisticsData = hookable_metadata.context.statisticsData %}
+{% set rangeName = hookable_metadata.context.range %}
 
 <div class="card mb-3">
     <div data-loading>

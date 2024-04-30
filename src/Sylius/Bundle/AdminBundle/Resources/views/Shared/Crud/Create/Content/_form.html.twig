@@ -1,11 +1,8 @@
 {% import '@SyliusAdmin/Shared/Helper/button.html.twig' as _button %}
 
-{% set main_hook = hook_name(hookable_data.parent_main_hook, 'form') %}
-{% set fallback_hook = hook_name(hookable_data.parent_fallback_hook, 'form') %}
-
-{% set resource = hookable_data.resource %}
-{% set configuration = hookable_data.configuration %}
-{% set form = hookable_data.form %}
+{% set resource = hookable_metadata.context.resource %}
+{% set configuration = hookable_metadata.context.configuration %}
+{% set form = hookable_metadata.context.form %}
 
 {% set route = configuration.vars.route|default(null) %}
 {% set indexRoute = configuration.vars.index.route|default(null) %}
@@ -20,7 +17,7 @@
 <div class="page-body">
     <div class="container-xl">
         {% block content %}
-            {% set renderRest = hookable_configuration.render_rest %}
+            {% set renderRest = hookable_metadata.configuration.render_rest %}
 
             {% if renderRest %}
                 <div class="card">
@@ -28,10 +25,7 @@
             {% endif %}
             {{ form_start(form, {'action': path(configuration.vars.route.name|default(configuration.getRouteName('create')), configuration.vars.route.parameters|default({})), 'attr': {'class': 'ui loadable form', 'novalidate': 'novalidate', 'id': form.vars.id}}) }}
                 {% block form_content %}
-                    {% hook [main_hook, fallback_hook] with hookable_data|merge({
-                        parent_main_hook: main_hook,
-                        parent_fallback_hook: fallback_hook,
-                    }) %}
+                    {% hook 'form' with { form } %}
                 {% endblock %}
             {{ form_end(form, {'render_rest': renderRest}) }}
             {% if renderRest %}

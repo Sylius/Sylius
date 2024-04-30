@@ -1,3 +1,9 @@
 {% import '@SyliusAdmin/Shared/Helper/button.html.twig' as _button %}
 
-{{ _button.primary(sylius_test_form_attribute('update-changes-button')|merge({ text: 'sylius.ui.update'|trans, type: 'submit', form: hookable_data.form.vars.id })) }}
+{{ _button.primary(
+    sylius_test_form_attribute('update-changes-button')|merge({
+        text: 'sylius.ui.update'|trans,
+        type: 'submit',
+        form: hookable_metadata.context.form.vars.id
+    })
+) }}

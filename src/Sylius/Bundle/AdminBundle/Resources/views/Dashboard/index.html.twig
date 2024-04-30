@@ -1,21 +1,11 @@
 {% extends '@SyliusAdmin/Shared/Layout/base.html.twig' %}
 
-{#
-    # As it's a fully custom page there's no fallback event.
-    # The fallback_hook is the same as the main_hook to avoid any issues
-    # with hookables expecting a fallback hook to be present.
-#}
-{% set fallback_hook = hook_name(_self) %}
-{% set main_hook = fallback_hook %}
-
 {% block title %}
-    {{ (hookable_configuration.title|default('sylius.ui.dashboard'))|trans }} {{ parent() }}
+    {{ 'sylius.ui.dashboard'|trans }} {{ parent() }}
 {% endblock %}
 
 {% block body %}
-    {% hook main_hook with {
-        parent_main_hook: main_hook,
-        parent_fallback_hook: fallback_hook,
-        channelCode: _context.channel.code,
+    {% hook ['sylius_admin.dashboard.index', 'sylius_admin.common.index'] with {
+        channelCode: channel.code,
     } %}
 {% endblock %}

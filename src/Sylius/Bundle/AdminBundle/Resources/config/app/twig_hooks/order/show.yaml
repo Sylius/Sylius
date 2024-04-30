@@ -22,7 +22,7 @@ twig_hooks:
             shipments:
                 template: '@SyliusAdmin/Order/Show/Content/Sections/_shipments.html.twig'
 
-        'sylius_admin.order.show.content.sections#left.summary':
+        'sylius_admin.order.show.content.sections.summary':
             items_total:
                 template: '@SyliusAdmin/Order/Show/Content/Sections/Summary/_itemsTotal.html.twig'
             tax_total:
@@ -32,19 +32,19 @@ twig_hooks:
             promotion_total:
                 template: '@SyliusAdmin/Order/Show/Content/Sections/Summary/_promotionTotal.html.twig'
 
-        'sylius_admin.order.show.content.sections#left.shipments':
+        'sylius_admin.order.show.content.sections.shipments':
             header:
                 template: '@SyliusAdmin/Order/Show/Content/Sections/Shipments/_header.html.twig'
             items:
                 template: '@SyliusAdmin/Order/Show/Content/Sections/Shipments/_items.html.twig'
 
-        'sylius_admin.order.show.content.sections#left.shipments.header':
+        'sylius_admin.order.show.content.sections.shipments.header':
             title:
                 template: '@SyliusAdmin/Order/Show/Content/Sections/Shipments/Header/_title.html.twig'
             state:
                 template: '@SyliusAdmin/Order/Show/Content/Sections/Shipments/Header/_state.html.twig'
 
-        'sylius_admin.order.show.content.sections#left.shipments.item':
+        'sylius_admin.order.show.content.sections.shipments.item':
             state:
                 template: '@SyliusAdmin/Order/Show/Content/Sections/Shipments/Item/_state.html.twig'
             details:
@@ -52,16 +52,16 @@ twig_hooks:
             actions:
                 template: '@SyliusAdmin/Order/Show/Content/Sections/Shipments/Item/_actions.html.twig'
 
-        'sylius_admin.order.show.content.sections#left.shipments.item.actions':
+        'sylius_admin.order.show.content.sections.shipments.item.actions':
             ship:
                 component: 'SyliusAdmin.Shipment.ShipType'
-                data:
-                    shipment: '@=shipment'
+                props:
+                    shipment: '@=_context.shipment'
             resend_confirmation:
                 template: '@SyliusAdmin/Order/Show/Content/Sections/Shipments/Item/Actions/_resendConfirmation.html.twig'
             show:
                 template: '@SyliusAdmin/Order/Show/Content/Sections/Shipments/Item/Actions/_show.html.twig'
-        'sylius_admin.order.show.content.sections#left.payments#actions':
+        'sylius_admin.order.show.content.sections.payments#actions':
             complete:
                 template: '@SyliusAdmin/Order/Show/Content/Sections/Payments/Actions/_complete.html.twig'
 
@@ -71,7 +71,7 @@ twig_hooks:
             customer:
                 template: '@SyliusAdmin/Order/Show/Content/Sections/_customer.html.twig'
 
-        'sylius_admin.order.show.content.sections#right.details':
+        'sylius_admin.order.show.content.sections.details':
             order_date:
                 template: '@SyliusAdmin/Order/Show/Content/Sections/Details/_orderDate.html.twig'
             currency:
@@ -81,7 +81,7 @@ twig_hooks:
             channel:
                 template: '@SyliusAdmin/Order/Show/Content/Sections/Details/_channel.html.twig'
 
-        'sylius_admin.order.show.content.sections#right.customer':
+        'sylius_admin.order.show.content.sections.customer':
             full_name:
                 template: '@SyliusAdmin/Order/Show/Content/Sections/Customer/_fullName.html.twig'
             customer_since:

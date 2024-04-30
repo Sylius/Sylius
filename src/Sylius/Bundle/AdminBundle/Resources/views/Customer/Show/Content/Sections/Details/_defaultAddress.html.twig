@@ -1,8 +1,8 @@
 <div class="row">
     <div class="col-12 col-md-4 fw-bold">{{ 'sylius.ui.default_address'|trans }}</div>
     <div class="col-12 col-md-8" {{ sylius_test_html_attribute('customer-default-address') }}>
-        {% if hookable_data.customer.defaultAddress is not empty %}
-            {% set address = hookable_data.customer.defaultAddress %}
+        {% if hookable_metadata.context.customer.defaultAddress is not empty %}
+            {% set address = hookable_metadata.context.customer.defaultAddress %}
             <span>
                 {{ address.fullname }},
                 {{ address.street }},

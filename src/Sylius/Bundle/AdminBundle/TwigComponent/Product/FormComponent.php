@@ -13,13 +13,13 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\AdminBundle\TwigComponent\Product;
 
-use Sylius\Bundle\AdminBundle\TwigComponent\HookableComponentTrait;
 use Sylius\Component\Core\Model\Product;
 use Sylius\Component\Product\Factory\ProductFactoryInterface;
 use Sylius\Component\Product\Generator\SlugGeneratorInterface;
 use Sylius\Component\Product\Model\ProductAttributeInterface;
 use Sylius\Component\Product\Model\ProductAttributeValueInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\TwigHooks\LiveComponent\HookableLiveComponentTrait;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
@@ -41,7 +41,7 @@ class FormComponent
 
     use ComponentToolsTrait;
     use DefaultActionTrait;
-    use HookableComponentTrait;
+    use HookableLiveComponentTrait;
     use LiveCollectionTrait;
 
     #[LiveProp(dehydrateWith: 'dehydrateFormData', fieldName: 'formData')]

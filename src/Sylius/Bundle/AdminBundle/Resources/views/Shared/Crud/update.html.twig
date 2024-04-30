@@ -1,29 +1,24 @@
 {% extends '@SyliusAdmin/Shared/Layout/base.html.twig' %}
 
-{% set fallback_hook = hook_name(_self) %}
-{% set main_hook = fallback_hook|replace({'shared.crud': resource_name|default(metadata.name)}) %}
+{% set prefixes = [
+    'sylius_admin.%resource_name%'|replace({'%resource_name%': resource_name|default(metadata.name)}),
+    'sylius_admin.common'
+] %}
 
-{% set header = hookable_configuration.header.text|default(metadata.applicationName ~ '.ui.' ~ metadata.pluralName) %}
+{% set header = metadata.applicationName ~ '.ui.' ~ metadata.pluralName %}
 
 {% block title %}{{ header|trans }} | {{ parent() }}{% endblock %}
 
 {% block body %}
-    {% hook [main_hook, fallback_hook] with {
-        parent_main_hook: main_hook,
-        parent_fallback_hook: fallback_hook,
-        resource,
-        metadata,
-        configuration,
-        form,
-    } %}
+    {% hook 'update' with { _prefixes: prefixes, resource, metadata, configuration, form } %}
 {% endblock %}
 
 {% block stylesheets %}
     {{ parent() }}
-    {% hook [main_hook ~ '#stylesheets', fallback_hook ~ '#stylesheets'] %}
+    {% hook 'update#stylesheets' with { _prefixes: prefixes } %}
 {% endblock %}
 
 {% block javascripts %}
     {{ parent() }}
-    {% hook [main_hook ~ '#javascripts', fallback_hook ~ '#javascripts'] %}
+    {% hook 'update#javascripts' with { _prefixes: prefixes } %}
 {% endblock %}

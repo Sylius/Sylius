@@ -3,11 +3,9 @@ twig_hooks:
         'sylius_admin.country.create.content':
             form:
                 component: 'SyliusAdmin.Country.CountryType'
-                data:
-                    country: '@=resource'
-                    form: '@=form'
-                    parentMainHook: '@=parent_main_hook'
-                    parentFallbackHook: '@=parent_fallback_hook'
+                props:
+                    country: '@=_context.resource'
+                    form: '@=_context.form'
 
         'sylius_admin.country.create.content.form':
             sections:

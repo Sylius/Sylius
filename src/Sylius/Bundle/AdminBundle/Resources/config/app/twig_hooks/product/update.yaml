@@ -6,12 +6,10 @@ twig_hooks:
         'sylius_admin.product.update.content':
             form:
                 component: 'SyliusAdmin.Product.Form'
-                data:
-                    form: '@=form'
-                    resource: '@=resource'
-                    parentMainHook: '@=parent_main_hook'
-                    parentFallbackHook: '@=parent_fallback_hook'
-                    isSimple: '@=resource.isSimple()'
+                props:
+                    form: '@=_context.form'
+                    resource: '@=_context.resource'
+                    isSimple: '@=_context.resource.isSimple()'
                 configuration:
                     method: 'PUT'
         

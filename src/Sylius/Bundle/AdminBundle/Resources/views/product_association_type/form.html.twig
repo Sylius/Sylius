@@ -1,25 +1,19 @@
-{% set form = hookable_data.form %}
+{% set form = hookable_metadata.context.form %}
 
 {% form_theme form '@SyliusAdmin/Shared/form_theme.html.twig' %}
-
-{% set main_hook = hook_name(hookable_data.parent_main_hook, 'form') %}
-{% set fallback_hook = hook_name(hookable_data.parent_fallback_hook, 'form') %}
 
 <div class="container-xl">
     <div class="card">
         <div class="card-body">
             {{ form_start(form, {'attr': {'class': 'ui loadable form', 'novalidate': 'novalidate', 'id': form.vars.id}}) }}
-            {% if hookable_configuration.method is defined %}
-                <input type="hidden" name="_method" value="{{ hookable_configuration.method }}" />
+            {% if hookable_metadata.configuration.method is defined %}
+                <input type="hidden" name="_method" value="{{ hookable_metadata.configuration.method }}" />
             {% endif %}
             {{ form_errors(form) }}
             {{ form_widget(form._token) }}
 
-            {% hook [main_hook, fallback_hook] with {
-                parent_main_hook: main_hook,
-                parent_fallback_hook: fallback_hook,
-                form,
-            } %}
+            {% hook 'form' with { form } %}
+
             {{ form_end(form, {render_rest: false}) }}
         </div>
     </div>

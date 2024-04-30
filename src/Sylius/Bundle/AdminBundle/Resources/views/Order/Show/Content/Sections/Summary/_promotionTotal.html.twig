@@ -1,6 +1,6 @@
 {% import '@SyliusAdmin/Shared/Helper/money.html.twig' as _money %}
 
-{% set order = hookable_data.resource %}
+{% set order = hookable_metadata.context.resource %}
 
 {% set orderPromotionAdjustment = constant('Sylius\\Component\\Core\\Model\\AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT') %}
 {% set unitPromotionAdjustment = constant('Sylius\\Component\\Core\\Model\\AdjustmentInterface::ORDER_UNIT_PROMOTION_ADJUSTMENT') %}

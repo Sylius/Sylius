@@ -1,10 +1,10 @@
 {% import '@SyliusAdmin/Shared/Helper/header.html.twig' as _header %}
 
-{% if hookable_data.metadata is defined %}
-    {% set metadata = hookable_data.metadata %}
-    {% set header = hookable_configuration.title|default(metadata.applicationName~'.ui.'~metadata.pluralName) %}
+{% if hookable_metadata.context.has("metadata") %}
+    {% set metadata = hookable_metadata.context.metadata %}
+    {% set header = hookable_metadata.configuration.title|default(metadata.applicationName~'.ui.'~metadata.pluralName) %}
 {% else %}
-    {% set header = hookable_configuration.title %}
+    {% set header = hookable_metadata.configuration.title %}
 {% endif %}
 
 

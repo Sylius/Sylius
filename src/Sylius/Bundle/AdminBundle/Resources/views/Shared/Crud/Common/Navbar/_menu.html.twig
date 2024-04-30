@@ -1,5 +1,3 @@
-{% set main_hook = hook_name(hookable_data.parent_main_hook, 'menu') %}
-
 <div class="collapse navbar-collapse" id="navbar-menu">
-    {% hook main_hook with { parent_main_hook: main_hook } %}
+    {% hook 'menu' %}
 </div>

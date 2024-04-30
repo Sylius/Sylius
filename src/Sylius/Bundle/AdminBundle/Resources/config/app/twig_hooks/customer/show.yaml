@@ -27,10 +27,8 @@ twig_hooks:
         'sylius_admin.customer.show.content.sections':
             order_statistics:
                 component: 'SyliusAdmin.Customer.Show.OrderStatistics'
-                data:
-                    customerId: '@=resource.getId()'
-                    parentMainHook: '@=parent_main_hook'
-                    parentFallbackHook: '@=parent_fallback_hook'
+                props:
+                    customerId: '@=_context.resource.getId()'
             details:
                 template: '@SyliusAdmin/Customer/Show/Content/Sections/_details.html.twig'
 

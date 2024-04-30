@@ -1,6 +1,6 @@
 {% import '@SyliusAdmin/Shared/Helper/money.html.twig' as _money %}
 
-{% set order = hookable_data.resource %}
+{% set order = hookable_metadata.context.resource %}
 
 <tr>
     <td>

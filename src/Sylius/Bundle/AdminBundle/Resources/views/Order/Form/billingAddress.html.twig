@@ -1,17 +1,10 @@
-{% set main_hook = hook_name(hookable_data.parent_main_hook, 'billing_address') %}
-{% set fallback_hook = hook_name(hookable_data.parent_fallback_hook, 'billing_address') %}
-
 <div class="card mb-3">
     <div class="card-header">
         {{ 'sylius.ui.billing_address'|trans }}
     </div>
     <div class="card-body">
         <div class="row">
-            {% hook [main_hook, fallback_hook] with hookable_data|merge({
-                parent_main_hook: main_hook,
-                parent_fallback_hook: fallback_hook,
-                form: hookable_data.form.billingAddress,
-            }) %}
+            {% hook 'billing_address' with { form: hookable_metadata.context.form.billingAddress } %}
         </div>
     </div>
 </div>

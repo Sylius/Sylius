@@ -1,6 +1,6 @@
 {% import '@SyliusAdmin/Shared/Helper/breadcrumbs.html.twig' as _breadcrumbs %}
 
-{% set product = hookable_data.resource %}
+{% set product = hookable_metadata.context.resource %}
 
 {{ _breadcrumbs.default([
     { name: 'sylius.ui.dashboard'|trans, url: path('sylius_admin_dashboard'), active: false },

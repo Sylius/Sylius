@@ -1,6 +1,4 @@
-{% set form = hookable_data.form %}
-{% set main_hook = hook_name(hookable_data.parent_main_hook, 'variants') %}
-{% set fallback_hook = hook_name(hookable_data.parent_fallback_hook, 'variants') %}
+{% set form = hookable_metadata.context.form %}
 
 <div class="card mb-3">
     <div class="card-header">
@@ -8,11 +6,7 @@
     </div>
     <div class="card-body">
         {% for variant in form.variants %}
-            {% hook [main_hook, fallback_hook] with hookable_data|merge({
-                parent_main_hook: main_hook,
-                parent_fallback_hook: fallback_hook,
-                form: variant
-            }) %}
+            {% hook 'variants' with { form: variant } %}
         {% endfor %}
     </div>
 </div>

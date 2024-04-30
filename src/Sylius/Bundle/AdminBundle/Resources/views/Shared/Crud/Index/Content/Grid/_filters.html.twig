@@ -1,7 +1,7 @@
 {% import "@SyliusAdmin/Shared/Helper/accordion.html.twig" as _accordion %}
 {% import "@SyliusAdmin/Shared/Helper/button.html.twig" as _button %}
 
-{% set resources = hookable_data.resources %}
+{% set resources = hookable_metadata.context.resources %}
 
 {% set path = path(app.request.attributes.get('_route'), app.request.attributes.all('_route_params')) %}
 {% set areCriteriaSet = app.request.query.has('criteria') %}

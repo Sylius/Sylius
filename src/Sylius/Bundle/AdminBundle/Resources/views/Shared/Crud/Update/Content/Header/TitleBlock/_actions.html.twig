@@ -1,13 +1,7 @@
 {% import '@SyliusAdmin/Shared/Helper/button.html.twig' as _button %}
 
-{% set main_hook = hook_name(hookable_data.parent_main_hook, 'actions') %}
-{% set fallback_hook = hook_name(hookable_data.parent_fallback_hook, 'actions') %}
-
 <div class="col-12 col-md-auto ms-auto d-print-none">
     <div class="btn-list">
-        {% hook [main_hook, fallback_hook] with hookable_data|merge({
-            parent_main_hook: main_hook,
-            parent_fallback_hook: fallback_hook,
-        }) %}
+        {% hook 'actions' %}
     </div>
 </div>

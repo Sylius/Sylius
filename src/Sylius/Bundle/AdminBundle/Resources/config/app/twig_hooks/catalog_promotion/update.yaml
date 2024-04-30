@@ -3,11 +3,9 @@ twig_hooks:
         'sylius_admin.catalog_promotion.update.content':
             form:
                 component: 'sylius_admin:catalog_promotion:form'
-                data:
-                    resource: '@=resource'
-                    form: '@=form'
-                    parentMainHook: '@=parent_main_hook'
-                    parentFallbackHook: '@=parent_fallback_hook'
+                props:
+                    resource: '@=_context.resource'
+                    form: '@=_context.form'
                 configuration:
                     method: 'PUT'
 
@@ -26,7 +24,7 @@ twig_hooks:
                 template: '@SyliusAdmin/catalog_promotion/form/sections/scopes_and_actions.html.twig'
 
         'sylius_admin.catalog_promotion.update.content.form.sections.general':
-            _name:
+            name:
                 template: '@SyliusAdmin/catalog_promotion/form/sections/general/name.html.twig'
             code:
                 template: '@SyliusAdmin/catalog_promotion/form/sections/general/code.html.twig'

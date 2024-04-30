@@ -16,7 +16,7 @@ Feature: Adding a new promotion with rule
         And I name it "Holiday sale"
         And I add the "Has at least one from taxons" rule configured with "T-Shirts" taxon and "Mugs" taxon
         And I add it
-        Then I should be notified that it has been successfully created
+        Then the "Holiday sale" promotion should be successfully created
         And the "Holiday sale" promotion should appear in the registry
 
     @api @ui @mink:chromedriver

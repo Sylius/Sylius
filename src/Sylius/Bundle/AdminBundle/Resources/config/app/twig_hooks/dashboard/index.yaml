@@ -11,24 +11,28 @@ twig_hooks:
         'sylius_admin.dashboard.index.content':
             header:
                 template: '@SyliusAdmin/Shared/Crud/Common/Content/_header.html.twig'
+            grid:
+                enabled: false
             statistics:
                 component: 'SyliusAdmin.Dashboard.Statistics'
-                data:
-                    channelCode: '@=channelCode'
-                    parentMainHook: '@=parent_main_hook'
-                    parentFallbackHook: '@=parent_fallback_hook'
+                props:
+                    channelCode: '@=_context.channelCode'
             latest_statistics:
                 template: '@SyliusAdmin/Dashboard/Index/Content/_latestStatistics.html.twig'
 
         'sylius_admin.dashboard.index.content.header':
             title_block:
                 template: '@SyliusAdmin/Shared/Crud/Common/Content/Header/_titleBlock.html.twig'
+            breadcrumbs:
+                template: '@SyliusAdmin/Dashboard/Index/Content/Header/breadcrumbs.html.twig'
 
         'sylius_admin.dashboard.index.content.header.title_block':
             title:
                 template: '@SyliusAdmin/Shared/Crud/Common/Content/Header/TitleBlock/_title.html.twig'
                 configuration:
                     title: sylius.ui.dashboard
+            actions:
+                enabled: false
 
         'sylius_admin.dashboard.index.content.statistics':
             statistics_grid:

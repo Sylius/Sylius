@@ -1,9 +1,6 @@
 {% import '@SyliusAdmin/Shared/Helper/money.html.twig' as _money %}
 
-{% set main_hook = hook_name(hookable_data.parent_main_hook, 'summary') %}
-{% set fallback_hook = hook_name(hookable_data.parent_fallback_hook, 'summary') %}
-
-{% set order = hookable_data.resource %}
+{% set order = hookable_metadata.context.resource %}
 
 <div class="card mb-3">
     <div class="card-header">
@@ -14,10 +11,7 @@
             <table class="table table-sm table-hover table-borderless card-table">
                 {% block table %}
                     <tbody>
-                        {% hook [main_hook, fallback_hook] with hookable_data|merge({
-                            parent_main_hook: main_hook,
-                            parent_fallback_hook: fallback_hook,
-                        }) %}
+                        {% hook 'summary' %}
                     </tbody>
                 {% endblock %}
             </table>

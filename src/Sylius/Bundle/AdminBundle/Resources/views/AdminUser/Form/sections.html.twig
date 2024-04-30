@@ -1,11 +1,5 @@
-{% set main_hook = hook_name(hookable_data.parent_main_hook, 'sections') %}
-{% set fallback_hook = hook_name(hookable_data.parent_fallback_hook, 'sections') %}
-
 <div class="row">
-    {% hook [main_hook, fallback_hook] with hookable_data|merge({
-        parent_main_hook: main_hook,
-        parent_fallback_hook: fallback_hook,
-    }) %}
+    {% hook 'sections' %}
 
-    {{ form_row(hookable_data.form._token) }}
+    {{ form_row(hookable_metadata.context.form._token) }}
 </div>

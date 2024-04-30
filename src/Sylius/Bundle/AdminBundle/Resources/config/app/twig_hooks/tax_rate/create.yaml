@@ -17,7 +17,7 @@ twig_hooks:
                 template: '@SyliusAdmin/TaxRate/Form/Sections/configuration.html.twig'
 
         'sylius_admin.tax_rate.create.content.form.sections.details':
-            _name: # has to be prefixed due to a kink in hook configuration
+            name:
                 template: '@SyliusAdmin/TaxRate/Form/Sections/Details/name.html.twig'
             code:
                 template: '@SyliusAdmin/TaxRate/Form/Sections/Details/code.html.twig'

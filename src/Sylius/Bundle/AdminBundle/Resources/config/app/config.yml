@@ -115,3 +115,7 @@ liip_imagine:
 
 sonata_block:
     default_contexts: ~
+    
+twig_hooks:
+    enable_autoprefixing: true
+    hook_name_section_separator: '#'
