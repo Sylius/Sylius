@@ -1,3 +1,9 @@
-<div class="col-12 col-md-9">
-    {{ form_row(hookable_data.form.channels, sylius_test_form_attribute('channels')|merge({ label_attr: { class: 'checkbox-switch' } })) }}
+{% set channels = hookable_data.form.channels %}
+
+<div class="col-12 col-md-12">
+    {{ form_label(channels) }}
+
+    {% for channel in channels %}
+        {{ form_row(channel, sylius_test_form_attribute('channel-name', channel.vars.label)|merge({ label_attr: { class: 'checkbox-switch' } })) }}
+    {% endfor %}
 </div>

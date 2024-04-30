@@ -17,6 +17,7 @@ use Behat\Mink\Element\NodeElement;
 use Sylius\Behat\Behaviour\ChecksCodeImmutability;
 use Sylius\Behat\Behaviour\Toggles;
 use Sylius\Behat\Page\Admin\Crud\UpdatePage as BaseUpdatePage;
+use Sylius\Component\Core\Formatter\StringInflector;
 
 class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
 {
@@ -75,7 +76,10 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
 
     public function isAvailableInChannel(string $channelName): bool
     {
-        return $this->getElement('channel', ['%channel%' => $channelName])->hasAttribute('checked');
+        return $this
+            ->getElement('channel', ['%channel_name%' => $channelName])
+            ->hasAttribute('checked')
+        ;
     }
 
     public function getPaymentMethodInstructions(string $language): string
@@ -99,7 +103,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
-            'channel' => '[data-test-channels] .form-switch:contains("%channel%") input',
+            'channel' => '[data-test-channel-name="%channel_name%"]',
             'code' => '[data-test-code]',
             'enabled' => '[data-test-enabled]',
             'factory_name' => '[data-test-factory-name]',
