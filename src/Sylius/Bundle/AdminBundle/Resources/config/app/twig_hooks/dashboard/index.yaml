@@ -23,6 +23,8 @@ twig_hooks:
         'sylius_admin.dashboard.index.content.header':
             title_block:
                 template: '@SyliusAdmin/Shared/Crud/Common/Content/Header/_titleBlock.html.twig'
+            breadcrumbs:
+                template: '@SyliusAdmin/Dashboard/Index/Content/Header/breadcrumbs.html.twig'
 
         'sylius_admin.dashboard.index.content.header.title_block':
             title:
