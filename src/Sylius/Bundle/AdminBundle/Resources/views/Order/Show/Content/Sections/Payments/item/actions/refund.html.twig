@@ -1,0 +1,14 @@
+{% set order = hookable_metadata.context.resource %}
+{% set payment = hookable_metadata.context.payment %}
+
+{% if sm_can(payment, constant('Sylius\\Component\\Payment\\PaymentTransitions::TRANSITION_REFUND'), constant('Sylius\\Component\\Payment\\PaymentTransitions::GRAPH')) %}
+    {% from '@SyliusAdmin/Shared/Helper/icon.html.twig' import icon as icon %}
+
+    <form action="{{ path('sylius_admin_order_payment_refund', {'orderId': order.id, 'id': payment.id}) }}" method="POST" novalidate>
+        <input type="hidden" name="_method" value="PUT">
+        <input type="hidden" name="_csrf_token" value="{{ csrf_token(payment.id) }}" />
+        <button type="submit" class="btn btn-primary">
+            {{ icon({ icon: 'arrow-back-up-double' }) }} {{ 'sylius.ui.refund'|trans }}
+        </button>
+    </form>
+{% endif %}
