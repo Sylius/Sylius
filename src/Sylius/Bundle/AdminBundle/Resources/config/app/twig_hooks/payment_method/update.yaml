@@ -50,3 +50,11 @@ twig_hooks:
                 template: '@SyliusAdmin/payment_method/form/sections/gateway_configuration/stripe/publishable_key.html.twig'
             secret_key:
                 template: '@SyliusAdmin/payment_method/form/sections/gateway_configuration/stripe/secret_key.html.twig'
+
+        'sylius_admin.payment_method.update.content.form.sections.translations':
+            name:
+                template: '@SyliusAdmin/payment_method/form/sections/translations/name.html.twig'
+            description:
+                template: '@SyliusAdmin/payment_method/form/sections/translations/description.html.twig'
+            instructions:
+                template: '@SyliusAdmin/payment_method/form/sections/translations/instructions.html.twig'

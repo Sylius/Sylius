@@ -1,6 +1,7 @@
 {% import '@SyliusAdmin/Shared/Helper/translations.html.twig' as _translations %}
 
 {% set form = hookable_metadata.context.form %}
+{% set prefixes = hookable_metadata.prefixes %}
 
 <div class="card mb-3">
     <div class="card-header">
@@ -9,18 +10,7 @@
 
     <div class="card-body">
         <div class="row">
-            {% set body %}
-                {% verbatim %}
-                    <div class="row"">
-                        <div class="col-12">
-                            {{ form_row(translationForm.name) }}
-                            {{ form_row(translationForm.description) }}
-                            {{ form_row(translationForm.instructions) }}
-                        </div>
-                    </div>
-                {% endverbatim %}
-            {% endset %}
-            {{ _translations.default(form.translations, body) }}
+            {{ _translations.with_hook(form.translations, prefixes) }}
         </div>
     </div>
 </div>
