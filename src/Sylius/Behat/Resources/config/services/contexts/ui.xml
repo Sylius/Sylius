@@ -129,10 +129,13 @@
             <argument type="service" id="sylius.behat.page.admin.order.index" />
             <argument type="service" id="sylius.behat.page.admin.order.show" />
             <argument type="service" id="sylius.behat.page.admin.order.update" />
-            <argument type="service" id="sylius.behat.page.admin.order.history" />
             <argument type="service" id="sylius.behat.page.error" />
             <argument type="service" id="sylius.behat.notification_checker.admin" />
             <argument type="service" id="sylius.behat.shared_security" />
+        </service>
+
+        <service id="sylius.behat.context.ui.admin.order_history" class="Sylius\Behat\Context\Ui\Admin\OrderHistoryContext">
+            <argument type="service" id="sylius.behat.page.admin.order.history" />
         </service>
 
         <service id="sylius.behat.context.ui.admin.managing_payments" class="Sylius\Behat\Context\Ui\Admin\ManagingPaymentsContext">

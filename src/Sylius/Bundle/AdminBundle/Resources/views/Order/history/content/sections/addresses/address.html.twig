@@ -1,9 +1,11 @@
 {% from '@SyliusAdmin/Order/history/macro/action_label.html.twig' import label %}
 
-<div class="col-12 col-md-6">
+{% set header = (header|default('sylius.ui.address'))|trans %}
+
+<div class="col-12 col-md-6" {{ sylius_test_html_attribute('address-type', header) }}>
     <div class="card mb-3">
         <div class="card-header">
-            <div class="card-title">{{ (header|default('sylius.ui.address'))|trans }}</div>
+            <div class="card-title">{{ header }}</div>
         </div>
         <div class="table-responsive">
             <table class="table table-vcenter table-bordered card-table">
@@ -16,7 +18,7 @@
                 </thead>
                 <tbody>
                 {%- for log in addressLogs -%}
-                    <tr>
+                    <tr {{ sylius_test_html_attribute('address-log') }}>
                         <td>{{ label(log) }}</td>
                         <td>
                             {{ log.loggedAt|date('Y-m-d') }}<br>
