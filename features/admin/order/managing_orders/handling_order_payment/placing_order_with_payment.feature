@@ -15,12 +15,12 @@ Feature: Payments are in the state "new" after checkout
         And the customer chose "Free" shipping method with "Cash on Delivery" payment
         And I am logged in as an administrator
 
-    @todo @ui
+    @ui
     Scenario: Checking payment state of a placed order
         When I view the summary of the order "#00000666"
         Then it should have payment state "New"
 
-    @todo @ui
+    @ui
     Scenario: Checking order payment state of a placed order
         When I browse orders
         Then the order "#00000666" should have order payment state "Awaiting payment"
