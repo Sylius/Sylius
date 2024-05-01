@@ -284,18 +284,14 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
 
     public function getPaymentAmount(): string
     {
-        $paymentsPrice = $this->getElement('payments')->find('css', '.description');
+        $paymentsPrice = $this->getElement('payments')->find('css', '[data-test-payment-amount]');
 
         return $paymentsPrice->getText();
     }
 
     public function getPaymentsCount(): int
     {
-        try {
-            $payments = $this->getElement('payments')->findAll('css', '.item');
-        } catch (ElementNotFoundException) {
-            return 0;
-        }
+        $payments = $this->getElement('payments')->findAll('css', '[data-test-payment]');
 
         return count($payments);
     }
@@ -313,7 +309,12 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
 
     public function hasCancelButton(): bool
     {
-        return $this->getDocument()->hasButton('Cancel');
+        return $this->hasElement('cancel_order');
+    }
+
+    public function cancelOrder(): void
+    {
+        $this->getElement('cancel_order')->click();
     }
 
     public function getOrderState(): string
@@ -329,11 +330,6 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     public function getShippingState(): string
     {
         return $this->getElement('order_shipping_state')->getText();
-    }
-
-    public function cancelOrder(): void
-    {
-        $this->getDocument()->pressButton('Cancel');
     }
 
     public function deleteOrder(): void
@@ -421,6 +417,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     {
         return array_merge(parent::getDefinedElements(), [
             'billing_address' => '[data-test-billing-address]',
+            'cancel_order' => '[data-test-cancel-order]',
             'currency' => '#sylius-order-currency',
             'customer' => '#customer',
             'ip_address' => '#ipAddress',
@@ -428,7 +425,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
             'order_notes' => '#sylius-order-notes',
             'order_payment_state' => '[data-test-order-payment-state]',
             'order_shipping_state' => '#shipping-state > span',
-            'order_state' => '#sylius-order-state',
+            'order_state' => '[data-test-order-state]',
             'payments' => '[data-test-payments]',
             'payment_complete' => '[data-test-complete-payment="%paymentId%"]',
             'payment_refund' => '[data-test-refund-payment="%paymentId%"]',

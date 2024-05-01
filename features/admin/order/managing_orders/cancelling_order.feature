@@ -14,7 +14,7 @@ Feature: Cancelling orders
         And the customer chose "Free" shipping method to "United States" with "Cash on Delivery" payment
         And I am logged in as an administrator
 
-    @todo @ui @api
+    @ui @api
     Scenario: Cancelling an order
         When I view the summary of the order "#00000022"
         And I cancel this order
@@ -24,13 +24,13 @@ Feature: Cancelling orders
         And it should have payment state "Cancelled"
         And there should be only 1 payment
 
-    @todo @ui @api
+    @ui @api
     Scenario: Cannot cancel an order, which is already cancelled
         Given the customer cancelled this order
         When I view the summary of the order "#00000022"
         Then I should not be able to cancel this order
 
-    @todo @ui @api
+    @ui @api
     Scenario: Checking order payment state of a cancelled order
         Given this order was cancelled
         When I browse orders
