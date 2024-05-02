@@ -3,15 +3,13 @@ twig_hooks:
         'sylius_admin.zone.update.content':
             form:
                 component: 'sylius_admin:zone:form'
-                data:
-                    zone: '@=resource'
-                    type: '@=resource.getType()'
-                    form: '@=form'
-                    parentMainHook: '@=parent_main_hook'
-                    parentFallbackHook: '@=parent_fallback_hook'
+                props:
+                    zone: '@=_context.resource'
+                    type: '@=_context.resource.getType()'
+                    form: '@=_context.form'
                 configuration:
                     method: 'PUT'
-                    
+
         'sylius_admin.zone.update.content.form':
             sections:
                 template: '@SyliusAdmin/zone/form/sections.html.twig'
@@ -21,25 +19,17 @@ twig_hooks:
                 template: '@SyliusAdmin/zone/form/sections/details.html.twig'
             members:
                 template: '@SyliusAdmin/zone/form/sections/members.html.twig'
-                
+
         'sylius_admin.zone.update.content.form.sections.members':
             member:
                 template: '@SyliusAdmin/zone/form/sections/members/member.html.twig'
 
         'sylius_admin.zone.update.content.form.sections.details':
-            top:
-                template: '@SyliusAdmin/zone/form/sections/details/top.html.twig'
-            bottom:
-                template: '@SyliusAdmin/zone/form/sections/details/bottom.html.twig'
-        
-        'sylius_admin.zone.update.content.form.sections.details.top':
             type:
-                template: '@SyliusAdmin/zone/form/sections/details/top/type.html.twig'
+                template: '@SyliusAdmin/zone/form/sections/details/type.html.twig'
             code:
-                template: '@SyliusAdmin/zone/form/sections/details/top/code.html.twig'
-        
-        'sylius_admin.zone.update.content.form.sections.details.bottom':
-            _name:
-                template: '@SyliusAdmin/zone/form/sections/details/bottom/name.html.twig'
+                template: '@SyliusAdmin/zone/form/sections/details/code.html.twig'
+            name:
+                template: '@SyliusAdmin/zone/form/sections/details/name.html.twig'
             scope:
-                template: '@SyliusAdmin/zone/form/sections/details/bottom/scope.html.twig'
+                template: '@SyliusAdmin/zone/form/sections/details/scope.html.twig'
