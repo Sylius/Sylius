@@ -16,7 +16,7 @@ sylius_grid:
                     label: sylius.ui.image
                     path: .
                     options:
-                        template: "@SyliusAdmin/Product/Grid/Field/productImage.html.twig"
+                        template: "@SyliusAdmin/product/grid/field/product_image.html.twig"
                 code:
                     type: string
                     label: sylius.ui.code
@@ -26,17 +26,17 @@ sylius_grid:
                     label: sylius.ui.name
                     sortable: translation.name
                     options:
-                        template: "@SyliusAdmin/Product/Grid/Field/name.html.twig"
+                        template: "@SyliusAdmin/product/grid/field/name.html.twig"
                 mainTaxon:
                     type: twig
                     label: sylius.ui.main_taxon
                     options:
-                        template: "@SyliusAdmin/Product/Grid/Field/mainTaxon.html.twig"
+                        template: "@SyliusAdmin/product/grid/field/main_taxon.html.twig"
                 enabled:
                     type: twig
                     label: sylius.ui.enabled
                     options:
-                        template: "@SyliusAdmin/Shared/Grid/Field/boolean.html.twig"
+                        template: "@SyliusAdmin/shared/grid/field/boolean.html.twig"
             filters:
                 search:
                     type: string

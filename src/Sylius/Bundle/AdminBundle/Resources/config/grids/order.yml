@@ -25,19 +25,19 @@ sylius_grid:
                     path: .
                     sortable: ~
                     options:
-                        template: "@SyliusAdmin/Shared/Grid/Field/orderNumber.html.twig"
+                        template: "@SyliusAdmin/shared/grid/field/order_number.html.twig"
                 channel:
                     type: twig
                     label: sylius.ui.channel
                     sortable: channel.code
                     options:
-                        template: "@SyliusAdmin/Shared/Grid/Field/channel.html.twig"
+                        template: "@SyliusAdmin/shared/grid/field/channel.html.twig"
                 customer:
                     type: twig
                     label: sylius.ui.customer
                     sortable: customer.lastName
                     options:
-                        template: "@SyliusAdmin/Shared/Grid/Field/customer.html.twig"
+                        template: "@SyliusAdmin/shared/grid/field/customer.html.twig"
                 state:
                     type: twig
                     label: sylius.ui.state
@@ -45,7 +45,7 @@ sylius_grid:
                     options:
                         template: "@SyliusUi/Grid/Field/state.html.twig"
                         vars:
-                            labels: "@SyliusAdmin/Order/Label/State"
+                            labels: "@SyliusAdmin/order/label/state"
                 paymentState:
                     type: twig
                     label: sylius.ui.payment_state
@@ -53,7 +53,7 @@ sylius_grid:
                     options:
                         template: "@SyliusUi/Grid/Field/state.html.twig"
                         vars:
-                            labels: "@SyliusAdmin/Order/Label/PaymentState"
+                            labels: "@SyliusAdmin/order/label/payment_state"
                 shippingState:
                     type: twig
                     label: sylius.ui.shipping_state
@@ -61,14 +61,14 @@ sylius_grid:
                     options:
                         template: "@SyliusUi/Grid/Field/state.html.twig"
                         vars:
-                            labels: "@SyliusAdmin/Order/Label/ShippingState"
+                            labels: "@SyliusAdmin/order/label/shipping_state"
                 total:
                     type: twig
                     label: sylius.ui.total
                     path: .
                     sortable: total
                     options:
-                        template: "@SyliusAdmin/Order/Grid/Field/orderTotal.html.twig"
+                        template: "@SyliusAdmin/order/grid/field/order_total.html.twig"
                 currencyCode:
                     type: string
                     label: sylius.ui.currency

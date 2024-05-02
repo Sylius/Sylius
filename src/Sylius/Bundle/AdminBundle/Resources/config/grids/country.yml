@@ -18,13 +18,13 @@ sylius_grid:
                     path: .
                     sortable: code
                     options:
-                        template: "@SyliusAdmin/Country/Grid/Field/name.html.twig"
+                        template: "@SyliusAdmin/country/grid/field/name.html.twig"
                 enabled:
                     type: twig
                     label: sylius.ui.enabled
                     sortable: ~
                     options:
-                        template: "@SyliusAdmin/Shared/Grid/Field/boolean.html.twig"
+                        template: "@SyliusAdmin/shared/grid/field/boolean.html.twig"
             filters:
                 code:
                     type: string
