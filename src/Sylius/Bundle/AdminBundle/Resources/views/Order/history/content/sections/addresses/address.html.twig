@@ -21,20 +21,18 @@
                     <tr {{ sylius_test_html_attribute('address-log') }}>
                         <td>{{ label(log) }}</td>
                         <td>
-                            {{ log.loggedAt|date('Y-m-d') }}<br>
-                            {{ log.loggedAt|date('H:i:s') }}
+                            <span class="text-nowrap">{{ log.loggedAt|date('Y-m-d') }}</span><br>
+                            <span class="text-nowrap">{{ log.loggedAt|date('H:i:s') }}</span>
                         </td>
                         <td>
                             <div class="table-responsive">
                                 <table class="table table-sm table-vcenter">
                                     <tbody>
-                                    {%- for field, data in log.data -%}
-                                        {%- if data is not empty -%}
-                                            <tr>
-                                                <td><strong>{{ field|title }}</strong></td>
-                                                <td><span>{{ data }}</span></td>
-                                            </tr>
-                                        {%- endif -%}
+                                    {%- for field, data in log.data|filter(data => not data is empty) -%}
+                                        <tr{% if loop.last %} style="border-bottom: hidden;"{% endif %}>
+                                            <td class="col-5"><strong>{{ ('sylius.ui.' ~ field|u.snake)|trans }}</strong></td>
+                                            <td class="col-7"><span>{{ data }}</span></td>
+                                        </tr>
                                     {%- endfor -%}
                                     </tbody>
                                 </table>
