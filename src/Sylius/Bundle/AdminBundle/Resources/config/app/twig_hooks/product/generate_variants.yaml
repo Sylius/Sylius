@@ -18,6 +18,8 @@ twig_hooks:
                 props:
                     resource: '@=_context.resource'
                     form: '@=_context.form'
+            footer:
+                template: '@SyliusAdmin/shared/crud/common/content/footer.html.twig'
 
         'sylius_admin.product.generate_variants.content.header':
             breadcrumbs:
