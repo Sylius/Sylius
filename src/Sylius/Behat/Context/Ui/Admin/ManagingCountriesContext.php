@@ -320,6 +320,9 @@ final class ManagingCountriesContext implements Context
      */
     public function iShouldBeNotifiedThatProvincesThatAreInUseCannotBeDeleted(): void
     {
-        $this->notificationChecker->checkNotification('Error Cannot delete, the province is in use.', NotificationType::failure());
+        $this->notificationChecker->checkNotification(
+            'Error Cannot delete, the Province is in use.',
+            NotificationType::failure(),
+        );
     }
 }
