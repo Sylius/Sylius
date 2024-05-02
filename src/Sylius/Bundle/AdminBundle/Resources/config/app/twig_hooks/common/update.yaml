@@ -18,7 +18,8 @@ twig_hooks:
                 configuration:
                     render_rest: true
             footer:
-                template: '@SyliusAdmin/Shared/Crud/Common/Content/footer.html.twig'
+                template: '@SyliusAdmin/shared/crud/common/content/footer.html.twig'
+                priority: -100
 
         'sylius_admin.common.update.content.header':
             breadcrumbs:
