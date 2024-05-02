@@ -16,14 +16,14 @@ Feature: Resending an order confirmation email for a chosen order
         And the customer chose "Free" shipping method with "Cash on Delivery" payment
         And I am logged in as an administrator
 
-    @todo @ui @email @api
+    @ui @email @api
     Scenario: Resending a confirmation email for an order
         When I view the summary of the order "#00000666"
         And I resend the order confirmation email
         Then I should be notified that the order confirmation email has been successfully resent to the customer
         And an email with the confirmation of the order "#00000666" should be sent to "lucy@teamlucifer.com"
 
-    @todo @ui @email @api
+    @ui @email @api
     Scenario: Resending a confirmation email for an order in different locale than the default one
         Given the order "#00000666" has been placed in "Polish (Poland)" locale
         When I view the summary of the order "#00000666"
@@ -31,7 +31,7 @@ Feature: Resending an order confirmation email for a chosen order
         Then I should be notified that the order confirmation email has been successfully resent to the customer
         And an email with the confirmation of the order "#00000666" should be sent to "lucy@teamlucifer.com" in "Polish (Poland)" locale
 
-    @todo @ui @email @api
+    @ui @email @api
     Scenario: Not being able to resend a confirmation email for an order with wrong state
         When I view the summary of the order "#00000666"
         And I cancel this order
