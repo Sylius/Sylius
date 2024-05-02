@@ -17,6 +17,8 @@ twig_hooks:
                 template: '@SyliusAdmin/shared/crud/update/content/form.html.twig'
                 configuration:
                     render_rest: true
+            footer:
+                template: '@SyliusAdmin/Shared/Crud/Common/Content/footer.html.twig'
 
         'sylius_admin.common.update.content.header':
             breadcrumbs:
