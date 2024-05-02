@@ -15,4 +15,8 @@
 
 declare(strict_types=1);
 
-@trigger_error('Importing files from Sylius/Sylius\'s "app/config" directory is deprecated since Sylius 1.3.', \E_USER_DEPRECATED);
+trigger_deprecation(
+    'sylius/sylius',
+    '1.3',
+    'Importing files from Sylius/Sylius\'s "app/config" directory is deprecated.',
+);

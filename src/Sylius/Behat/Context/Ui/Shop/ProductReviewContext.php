@@ -16,15 +16,18 @@ namespace Sylius\Behat\Context\Ui\Shop;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\NotificationType;
 use Sylius\Behat\Page\Shop\ProductReview\CreatePageInterface;
+use Sylius\Behat\Page\Shop\ProductReview\IndexPageInterface;
 use Sylius\Behat\Service\NotificationCheckerInterface;
 use Sylius\Component\Core\Model\ProductInterface;
+use Sylius\Component\Review\Model\ReviewInterface;
 use Webmozart\Assert\Assert;
 
 final class ProductReviewContext implements Context
 {
     public function __construct(
-        private CreatePageInterface $createPage,
-        private NotificationCheckerInterface $notificationChecker,
+        private readonly CreatePageInterface $createPage,
+        private readonly NotificationCheckerInterface $notificationChecker,
+        private readonly IndexPageInterface $indexPage,
     ) {
     }
 
@@ -153,6 +156,17 @@ final class ProductReviewContext implements Context
             $this->createPage->getAuthorValidationMessage(),
             'This email is already registered, please login or use forgotten password.',
         );
+    }
+
+    /**
+     * @Then the :productReview product review of :product product should not be visible for customers
+     */
+    public function thisProductReviewOfProductShouldNotBeVisibleForCustomers(
+        ReviewInterface $productReview,
+        ProductInterface $product,
+    ): void {
+        $this->indexPage->open(['slug' => $product->getSlug()]);
+        Assert::false($this->indexPage->hasReviewTitled($productReview->getTitle()));
     }
 
     private function getVeryLongTitle(): string

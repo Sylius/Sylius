@@ -20,7 +20,6 @@ use ApiPlatform\Core\Metadata\Resource\ResourceMetadata;
 use Sylius\Bundle\ApiBundle\ApiPlatform\ResourceMetadataPropertyValueResolver;
 
 /**
- * @experimental
  * This class is overwriting ApiPlatform ExtractorResourceMetadataFactory to allow yaml files to be merged into api platform config
  */
 final class MergingExtractorResourceMetadataFactory implements ResourceMetadataFactoryInterface

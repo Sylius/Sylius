@@ -57,14 +57,32 @@ final class Configuration implements ConfigurationInterface
                                     ->scalarNode('templates')->defaultValue('SyliusUserBundle:User')->end()
                                     ->scalarNode('encoder')->defaultNull()->end()
                                     ->scalarNode('login_tracking_interval')->defaultNull()->end()
-                                    ->variableNode('options')->end()
+                                    ->variableNode('options')
+                                        ->setDeprecated('sylius/user-bundle', '1.13', 'The "%node%" node at "%path%" is deprecated and will be removed in 2.0.')
+                                    ->end()
                                     ->arrayNode('resetting')
                                         ->addDefaultsIfNotSet()
                                         ->children()
                                             ->arrayNode('token')
                                                 ->addDefaultsIfNotSet()
                                                 ->children()
-                                                    ->scalarNode('ttl')->defaultValue('P1D')->end()
+                                                    ->scalarNode('ttl')
+                                                        ->defaultValue('P1D')
+                                                        ->validate()
+                                                        ->ifTrue(
+                                                            function (mixed $ttl) {
+                                                                try {
+                                                                    new \DateInterval($ttl);
+
+                                                                    return false;
+                                                                } catch (\Exception) {
+                                                                    return true;
+                                                                }
+                                                            },
+                                                        )
+                                                            ->thenInvalid('Invalid format for TTL "%s". Expected a string compatible with DateInterval.')
+                                                        ->end()
+                                                    ->end()
                                                     ->integerNode('length')
                                                         ->defaultValue(16)
                                                         ->min(1)->max(40)

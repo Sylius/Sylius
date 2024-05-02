@@ -28,12 +28,25 @@
                 <option name="pattern">/^[\w-]*$/</option>
                 <option name="groups">sylius</option>
             </constraint>
+            <constraint name="Length">
+                <option name="max">255</option>
+                <option name="maxMessage">sylius.shipping_method.code.max_length</option>
+                <option name="groups">sylius</option>
+            </constraint>
         </property>
         <property name="calculator">
             <constraint name="NotBlank">
                 <option name="message">sylius.shipping_method.calculator.not_blank</option>
                 <option name="groups">sylius</option>
             </constraint>
+            <constraint name="Sylius\Bundle\ShippingBundle\Validator\Constraint\ShippingMethodCalculatorExists">
+                <option name="groups">
+                    <value>sylius</value>
+                </option>
+            </constraint>
+        </property>
+        <property name="rules">
+            <constraint name="Valid" />
         </property>
         <property name="translations">
             <constraint name="Valid" />

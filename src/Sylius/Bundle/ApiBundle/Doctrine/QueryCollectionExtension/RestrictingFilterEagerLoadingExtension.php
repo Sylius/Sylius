@@ -18,7 +18,6 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Util\QueryNameGeneratorInterface;
 use Doctrine\ORM\QueryBuilder;
 
 /**
- * @experimental
  * This class decorates api_platform.doctrine.orm.query_extension.filter_eager_loading.
  * It is a workaround for https://github.com/api-platform/core/issues/2253.
  */
@@ -28,7 +27,7 @@ final class RestrictingFilterEagerLoadingExtension implements ContextAwareQueryC
     {
     }
 
-    public function applyToCollection(QueryBuilder $queryBuilder, QueryNameGeneratorInterface $queryNameGenerator, string $resourceClass, string $operationName = null, array $context = []): void
+    public function applyToCollection(QueryBuilder $queryBuilder, QueryNameGeneratorInterface $queryNameGenerator, string $resourceClass, ?string $operationName = null, array $context = []): void
     {
         if ($this->isOperationRestricted($resourceClass, $operationName)) {
             return;

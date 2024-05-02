@@ -27,13 +27,17 @@
     <services>
         <defaults public="true" />
 
-        <service id="Sylius\Bundle\UserBundle\Command\DemoteUserCommand">
+        <service id="Sylius\Bundle\UserBundle\Console\Command\DemoteUserCommand">
             <tag name="console.command" />
         </service>
 
-        <service id="Sylius\Bundle\UserBundle\Command\PromoteUserCommand">
+        <service id="Sylius\Bundle\UserBundle\Command\DemoteUserCommand" alias="Sylius\Bundle\UserBundle\Console\Command\DemoteUserCommand" />
+
+        <service id="Sylius\Bundle\UserBundle\Console\Command\PromoteUserCommand">
             <tag name="console.command" />
         </service>
+
+        <service id="Sylius\Bundle\UserBundle\Command\PromoteUserCommand" alias="Sylius\Bundle\UserBundle\Console\Command\PromoteUserCommand" />
 
         <service id="sylius.authentication.success_handler" class="Sylius\Bundle\UserBundle\Authentication\AuthenticationSuccessHandler" parent="security.authentication.success_handler" public="false" />
 

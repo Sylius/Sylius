@@ -14,12 +14,12 @@ declare(strict_types=1);
 namespace Sylius\Behat\Page\Admin\CustomerGroup;
 
 use Sylius\Behat\Behaviour\NamesIt;
-use Sylius\Behat\Behaviour\SpecifiesItsCode;
+use Sylius\Behat\Behaviour\SpecifiesItsField;
 use Sylius\Behat\Page\Admin\Crud\CreatePage as BaseCreatePage;
 
 class CreatePage extends BaseCreatePage implements CreatePageInterface
 {
-    use SpecifiesItsCode;
+    use SpecifiesItsField;
     use NamesIt;
 
     protected function getDefinedElements(): array

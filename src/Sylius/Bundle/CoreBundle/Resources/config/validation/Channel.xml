@@ -31,8 +31,21 @@
                 <option name="groups">sylius</option>
             </constraint>
         </property>
+        <property name="themeName">
+            <constraint name="Length">
+                <option name="max">255</option>
+                <option name="maxMessage">sylius.channel.theme_name.max_length</option>
+                <option name="groups">sylius</option>
+            </constraint>
+        </property>
         <property name="taxCalculationStrategy">
             <constraint name="NotBlank">
+                <option name="message">sylius.channel.tax_calculation_strategy.not_blank</option>
+                <option name="groups">sylius</option>
+            </constraint>
+            <constraint name="Length">
+                <option name="max">255</option>
+                <option name="maxMessage">sylius.channel.tax_calculation_strategy.max_length</option>
                 <option name="groups">sylius</option>
             </constraint>
         </property>
@@ -40,19 +53,25 @@
             <constraint name="Length">
                 <option name="min">2</option>
                 <option name="minMessage">sylius.channel.contact_email.min</option>
-                <option name="max">254</option>
+                <option name="max">255</option>
                 <option name="maxMessage">sylius.channel.contact_email.max</option>
-                <option name="groups">
-                    <value>sylius</value>
-                </option>
+                <option name="groups">sylius</option>
             </constraint>
             <constraint name="Email">
                 <option name="message">sylius.channel.contact_email.invalid</option>
                 <option name="mode">strict</option>
-                <option name="groups">
-                    <value>sylius</value>
-                </option>
+                <option name="groups">sylius</option>
             </constraint>
+        </property>
+        <property name="contactPhoneNumber">
+            <constraint name="Length">
+                <option name="max">255</option>
+                <option name="maxMessage">sylius.channel.contact_phone_number.max_length</option>
+                <option name="groups">sylius</option>
+            </constraint>
+        </property>
+        <property name="channelPriceHistoryConfig">
+            <constraint name="Valid" />
         </property>
     </class>
 </constraint-mapping>

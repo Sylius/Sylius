@@ -1,0 +1,6 @@
+{
+    "@context": "\/api\/v2\/contexts\/Error",
+    "@type": "hydra:Error",
+    "hydra:title": "An error occurred",
+    "hydra:description": "The channelCode of channelPricing does not match the key. Key: \"WEB\", channelCode: \"MOBILE\""
+}

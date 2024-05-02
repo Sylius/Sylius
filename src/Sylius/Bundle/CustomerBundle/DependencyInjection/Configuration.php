@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CustomerBundle\DependencyInjection;
 
+use Sylius\Bundle\CustomerBundle\Doctrine\ORM\CustomerGroupRepository;
 use Sylius\Bundle\CustomerBundle\Form\Type\CustomerGroupType;
 use Sylius\Bundle\CustomerBundle\Form\Type\CustomerType;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
@@ -55,7 +56,9 @@ final class Configuration implements ConfigurationInterface
                         ->arrayNode('customer')
                             ->addDefaultsIfNotSet()
                             ->children()
-                                ->variableNode('options')->end()
+                                ->variableNode('options')
+                                    ->setDeprecated('sylius/customer-bundle', '1.13', 'The "%node%" node at "%path%" is deprecated and will be removed in 2.0.')
+                                ->end()
                                 ->arrayNode('classes')
                                     ->addDefaultsIfNotSet()
                                     ->children()
@@ -72,14 +75,16 @@ final class Configuration implements ConfigurationInterface
                         ->arrayNode('customer_group')
                             ->addDefaultsIfNotSet()
                             ->children()
-                                ->variableNode('options')->end()
+                                ->variableNode('options')
+                                    ->setDeprecated('sylius/customer-bundle', '1.13', 'The "%node%" node at "%path%" is deprecated and will be removed in 2.0.')
+                                ->end()
                                 ->arrayNode('classes')
                                     ->addDefaultsIfNotSet()
                                     ->children()
                                         ->scalarNode('model')->defaultValue(CustomerGroup::class)->cannotBeEmpty()->end()
                                         ->scalarNode('interface')->defaultValue(CustomerGroupInterface::class)->cannotBeEmpty()->end()
                                         ->scalarNode('controller')->defaultValue(ResourceController::class)->cannotBeEmpty()->end()
-                                        ->scalarNode('repository')->cannotBeEmpty()->end()
+                                        ->scalarNode('repository')->defaultValue(CustomerGroupRepository::class)->cannotBeEmpty()->end()
                                         ->scalarNode('factory')->defaultValue(Factory::class)->end()
                                         ->scalarNode('form')->defaultValue(CustomerGroupType::class)->cannotBeEmpty()->end()
                                     ->end()

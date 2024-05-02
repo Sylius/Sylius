@@ -25,6 +25,8 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class OrderController extends ResourceController
@@ -36,6 +38,13 @@ class OrderController extends ResourceController
         $cart = $this->getCurrentCart();
         if (null !== $cart->getId()) {
             $cart = $this->getOrderRepository()->findCartById($cart->getId());
+        }
+
+        $this->getEventDispatcher()->dispatch(new GenericEvent($cart), SyliusCartEvents::CART_SUMMARY);
+        $event = $this->eventDispatcher->dispatch(ResourceActions::SHOW, $configuration, $cart);
+        $eventResponse = $event->getResponse();
+        if (null !== $eventResponse) {
+            return $eventResponse;
         }
 
         if (!$configuration->isHtmlRequest()) {
@@ -114,6 +123,7 @@ class OrderController extends ResourceController
 
         if ($form->isSubmitted() && !$form->isValid()) {
             $this->resetChangesOnCart($resource);
+            $this->addFlash('error', 'sylius.cart.not_recalculated');
         }
 
         if (!$configuration->isHtmlRequest()) {
@@ -129,6 +139,15 @@ class OrderController extends ResourceController
                 'cart' => $resource,
             ],
         );
+    }
+
+    protected function addFlash(string $type, $message): void
+    {
+        /** @var SessionInterface $session */
+        $session = $this->get('request_stack')->getSession();
+        /** @var FlashBagInterface $flashBag */
+        $flashBag = $session->getBag('flashes');
+        $flashBag->add($type, $message);
     }
 
     private function resetChangesOnCart(OrderInterface $cart): void
@@ -179,6 +198,12 @@ class OrderController extends ResourceController
 
     protected function redirectToCartSummary(RequestConfiguration $configuration): Response
     {
+        trigger_deprecation(
+            'sylius/order-bundle',
+            '1.13',
+            'The %s::redirectToCartSummary() method is deprecated and will be removed in Sylius 2.0.',
+            self::class,
+        );
         if (null === $configuration->getParameters()->get('redirect')) {
             return $this->redirectHandler->redirectToRoute($configuration, $this->getCartSummaryRoute());
         }

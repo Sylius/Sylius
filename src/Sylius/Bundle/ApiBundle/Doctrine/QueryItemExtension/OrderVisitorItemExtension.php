@@ -21,11 +21,12 @@ use Sylius\Bundle\ApiBundle\Serializer\ContextKeys;
 use Sylius\Component\Core\Model\OrderInterface;
 use Symfony\Component\HttpFoundation\Request;
 
-/** @experimental */
 final class OrderVisitorItemExtension implements QueryItemExtensionInterface
 {
-    public function __construct(private UserContextInterface $userContext)
-    {
+    public function __construct(
+        private UserContextInterface $userContext,
+        private array $nonFilteredCartAllowedOperations = [],
+    ) {
     }
 
     public function applyToItem(
@@ -33,7 +34,7 @@ final class OrderVisitorItemExtension implements QueryItemExtensionInterface
         QueryNameGeneratorInterface $queryNameGenerator,
         string $resourceClass,
         array $identifiers,
-        string $operationName = null,
+        ?string $operationName = null,
         array $context = [],
     ) {
         if (!is_a($resourceClass, OrderInterface::class, true)) {
@@ -62,7 +63,7 @@ final class OrderVisitorItemExtension implements QueryItemExtensionInterface
 
         $httpRequestMethodType = $context[ContextKeys::HTTP_REQUEST_METHOD_TYPE];
 
-        if ($httpRequestMethodType === Request::METHOD_GET || $operationName === 'shop_select_payment_method') {
+        if ($httpRequestMethodType === Request::METHOD_GET || in_array($operationName, $this->nonFilteredCartAllowedOperations, true)) {
             return;
         }
 

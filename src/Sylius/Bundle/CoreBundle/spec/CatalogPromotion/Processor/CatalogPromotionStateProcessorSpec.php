@@ -15,7 +15,8 @@ namespace spec\Sylius\Bundle\CoreBundle\CatalogPromotion\Processor;
 
 use PhpSpec\ObjectBehavior;
 use SM\Factory\FactoryInterface;
-use SM\StateMachine\StateMachineInterface;
+use SM\StateMachine\StateMachineInterface as WinzouStateMachineInterface;
+use Sylius\Abstraction\StateMachine\StateMachineInterface;
 use Sylius\Bundle\CoreBundle\CatalogPromotion\Checker\CatalogPromotionEligibilityCheckerInterface;
 use Sylius\Bundle\CoreBundle\CatalogPromotion\Processor\CatalogPromotionStateProcessorInterface;
 use Sylius\Component\Core\Model\CatalogPromotionInterface;
@@ -39,7 +40,7 @@ final class CatalogPromotionStateProcessorSpec extends ObjectBehavior
         CatalogPromotionEligibilityCheckerInterface $catalogPromotionEligibilityChecker,
         CatalogPromotionInterface $catalogPromotion,
         FactoryInterface $stateMachineFactory,
-        StateMachineInterface $stateMachine,
+        WinzouStateMachineInterface $stateMachine,
     ): void {
         $stateMachineFactory->get($catalogPromotion, CatalogPromotionTransitions::GRAPH)->willReturn($stateMachine);
 
@@ -54,11 +55,29 @@ final class CatalogPromotionStateProcessorSpec extends ObjectBehavior
         $this->process($catalogPromotion);
     }
 
+    function it_uses_the_new_state_machine_adapter_if_passed(
+        CatalogPromotionEligibilityCheckerInterface $catalogPromotionEligibilityChecker,
+        CatalogPromotionInterface $catalogPromotion,
+        StateMachineInterface $stateMachine,
+    ): void {
+        $this->beConstructedWith($catalogPromotionEligibilityChecker, $stateMachine);
+
+        $catalogPromotionEligibilityChecker->isCatalogPromotionEligible($catalogPromotion)->willReturn(true);
+
+        $stateMachine->can($catalogPromotion, CatalogPromotionTransitions::GRAPH, CatalogPromotionTransitions::TRANSITION_PROCESS)->willReturn(true);
+        $stateMachine->apply($catalogPromotion, CatalogPromotionTransitions::GRAPH, CatalogPromotionTransitions::TRANSITION_PROCESS)->shouldBeCalled();
+
+        $stateMachine->apply($catalogPromotion, CatalogPromotionTransitions::GRAPH, CatalogPromotionTransitions::TRANSITION_ACTIVATE)->shouldNotBeCalled();
+        $stateMachine->apply($catalogPromotion, CatalogPromotionTransitions::GRAPH, CatalogPromotionTransitions::TRANSITION_DEACTIVATE)->shouldNotBeCalled();
+
+        $this->process($catalogPromotion);
+    }
+
     function it_activates_a_catalog_promotion(
         CatalogPromotionEligibilityCheckerInterface $catalogPromotionEligibilityChecker,
         CatalogPromotionInterface $catalogPromotion,
         FactoryInterface $stateMachineFactory,
-        StateMachineInterface $stateMachine,
+        WinzouStateMachineInterface $stateMachine,
     ): void {
         $stateMachineFactory->get($catalogPromotion, CatalogPromotionTransitions::GRAPH)->willReturn($stateMachine);
 
@@ -78,7 +97,7 @@ final class CatalogPromotionStateProcessorSpec extends ObjectBehavior
         CatalogPromotionEligibilityCheckerInterface $catalogPromotionEligibilityChecker,
         CatalogPromotionInterface $catalogPromotion,
         FactoryInterface $stateMachineFactory,
-        StateMachineInterface $stateMachine,
+        WinzouStateMachineInterface $stateMachine,
     ): void {
         $stateMachineFactory->get($catalogPromotion, CatalogPromotionTransitions::GRAPH)->willReturn($stateMachine);
 

@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Sylius Sp. z o.o.
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 declare(strict_types=1);
 
 namespace Sylius\Tests\Functional;
@@ -9,7 +18,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Query;
 use Sylius\Bundle\CoreBundle\Doctrine\ORM\SqlWalker\OrderByIdentifierSqlWalker;
 
-class OrderByIdentifierSqlWalkerTest extends AbstractOrmTestCase
+final class OrderByIdentifierSqlWalkerTest extends AbstractOrmTestCase
 {
     private EntityManagerInterface $entityManager;
 
@@ -25,22 +34,22 @@ class OrderByIdentifierSqlWalkerTest extends AbstractOrmTestCase
         self::assertStringEndsWith(
             'ORDER BY m0_.id ASC',
             $this->generateSql(
-                'select u from Sylius\Tests\Functional\Doctrine\Dump\Model u'
-            )
+                'select u from Sylius\Tests\Functional\Doctrine\Dump\Model u',
+            ),
         );
 
         self::assertStringEndsWith(
             'ORDER BY m0_.email DESC, m0_.id ASC',
             $this->generateSql(
-                'select u from Sylius\Tests\Functional\Doctrine\Dump\Model u order by u.email desc'
-            )
+                'select u from Sylius\Tests\Functional\Doctrine\Dump\Model u order by u.email desc',
+            ),
         );
 
         self::assertStringEndsWith(
             'ORDER BY m0_.email DESC, m0_.id ASC',
             $this->generateSql(
-                'select u.id, (CASE WHEN u.id = 1 THEN \'yolo\' ELSE u.email END) AS HIDDEN yoloOrEmail from Sylius\Tests\Functional\Doctrine\Dump\Model u order by u.email desc'
-            )
+                'select u.id, (CASE WHEN u.id = 1 THEN \'yolo\' ELSE u.email END) AS HIDDEN yoloOrEmail from Sylius\Tests\Functional\Doctrine\Dump\Model u order by u.email desc',
+            ),
         );
     }
 
@@ -50,22 +59,22 @@ class OrderByIdentifierSqlWalkerTest extends AbstractOrmTestCase
         self::assertStringEndsWith(
             'ORDER BY c0_.email ASC, c0_.organization_name ASC',
             $this->generateSql(
-                'select u from Sylius\Tests\Functional\Doctrine\Dump\CompositeKeysModel u'
-            )
+                'select u from Sylius\Tests\Functional\Doctrine\Dump\CompositeKeysModel u',
+            ),
         );
 
         self::assertStringEndsWith(
             'ORDER BY c0_.description DESC, c0_.email ASC, c0_.organization_name ASC',
             $this->generateSql(
-                'select u from Sylius\Tests\Functional\Doctrine\Dump\CompositeKeysModel u order by u.description desc'
-            )
+                'select u from Sylius\Tests\Functional\Doctrine\Dump\CompositeKeysModel u order by u.description desc',
+            ),
         );
 
         self::assertStringEndsWith(
             'ORDER BY c0_.description DESC, c0_.email ASC, c0_.organization_name ASC',
             $this->generateSql(
-                'select (CASE WHEN u.email = \'admin@example.com\' THEN \'yolo\' ELSE u.email END) AS HIDDEN yoloOrEmail from Sylius\Tests\Functional\Doctrine\Dump\CompositeKeysModel u order by u.description desc'
-            )
+                'select (CASE WHEN u.email = \'admin@example.com\' THEN \'yolo\' ELSE u.email END) AS HIDDEN yoloOrEmail from Sylius\Tests\Functional\Doctrine\Dump\CompositeKeysModel u order by u.description desc',
+            ),
         );
     }
 
@@ -75,8 +84,8 @@ class OrderByIdentifierSqlWalkerTest extends AbstractOrmTestCase
         self::assertStringEndsWith(
             'GROUP BY m0_.email',
             $this->generateSql(
-                'select u from Sylius\Tests\Functional\Doctrine\Dump\Model u group by u.email'
-            )
+                'select u from Sylius\Tests\Functional\Doctrine\Dump\Model u group by u.email',
+            ),
         );
     }
 
@@ -86,8 +95,8 @@ class OrderByIdentifierSqlWalkerTest extends AbstractOrmTestCase
         self::assertStringEndsWith(
             'FROM model m0_',
             $this->generateSql(
-                'select max(u) from Sylius\Tests\Functional\Doctrine\Dump\Model u'
-            )
+                'select max(u) from Sylius\Tests\Functional\Doctrine\Dump\Model u',
+            ),
         );
     }
 

@@ -20,7 +20,6 @@ use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Component\User\Model\UserInterface;
 use Webmozart\Assert\Assert;
 
-/** @experimental */
 final class LoggedInCustomerEmailAwareCommandDataTransformer implements CommandDataTransformerInterface
 {
     public function __construct(private UserContextInterface $userContext)

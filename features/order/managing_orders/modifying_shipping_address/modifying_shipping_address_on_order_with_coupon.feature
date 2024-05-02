@@ -1,4 +1,4 @@
-@modifying_address
+@modifying_placed_order_address
 Feature: Modifying a customer's shipping address on an order with an applied coupon
     In order to ship an order to a correct place
     As an Administrator
@@ -20,7 +20,7 @@ Feature: Modifying a customer's shipping address on an order with an applied cou
         And the customer chose "Free" shipping method with "Cash on Delivery" payment
         And I am logged in as an administrator
 
-    @ui
+    @api @ui
     Scenario: Modifying a customer's shipping address when the applied coupon is no longer valid
         Given the coupon "HOLIDAY" was used up to its usage limit
         When I view the summary of the order "#00000001"

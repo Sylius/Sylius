@@ -20,7 +20,6 @@ use Sylius\Component\Core\Repository\PaymentRepositoryInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 
-/** @experimental */
 final class GetPaymentConfiguration
 {
     public function __construct(

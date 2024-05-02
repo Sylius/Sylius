@@ -1,0 +1,10 @@
+{% import "@SyliusAdmin/Common/Macro/money.html.twig" as money %}
+
+{% set currencies = sylius_channels_currencies() %}
+{% set channel_code = data.channelPricing.channelCode %}
+
+{% if data.originalPrice %}
+    {{ money.format(data.originalPrice, currencies[channel_code]) }}
+{% else %}
+    <span class="gray text">-</span>
+{% endif %}

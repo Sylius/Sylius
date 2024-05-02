@@ -14,6 +14,8 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
+use FriendsOfBehat\PageObjectExtension\Page\SymfonyPageInterface;
+use Sylius\Behat\Context\Ui\Admin\Helper\ValidationTrait;
 use Sylius\Behat\Element\Admin\CatalogPromotion\FilterElementInterface;
 use Sylius\Behat\Element\Admin\CatalogPromotion\FormElementInterface;
 use Sylius\Behat\NotificationType;
@@ -33,6 +35,8 @@ use Webmozart\Assert\Assert;
 
 final class ManagingCatalogPromotionsContext implements Context
 {
+    use ValidationTrait;
+
     public function __construct(
         private IndexPageInterface $indexPage,
         private CreatePageInterface $createPage,
@@ -96,9 +100,9 @@ final class ManagingCatalogPromotionsContext implements Context
     /**
      * @When I specify its code as :code
      */
-    public function iSpecifyItsCodeAs(string $code): void
+    public function iSpecifyItsCodeAs(?string $code = null): void
     {
-        $this->createPage->specifyCode($code);
+        $this->createPage->specifyCode($code ?? '');
     }
 
     /**
@@ -395,7 +399,6 @@ final class ManagingCatalogPromotionsContext implements Context
     public function iEditCatalogPromotionToHaveDiscount(CatalogPromotionInterface $catalogPromotion, string $amount): void
     {
         $this->updatePage->open(['id' => $catalogPromotion->getId()]);
-        $this->formElement->addAction();
         $this->formElement->specifyLastActionDiscount($amount);
         $this->updatePage->saveChanges();
     }
@@ -494,7 +497,7 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
-     * @When I add fixed discount action without amount configured
+     * @When I add fixed discount action without amount configured for the :channel channel
      */
     public function iAddFixedDiscountActionWithoutAmountConfigured(): void
     {
@@ -701,25 +704,32 @@ final class ManagingCatalogPromotionsContext implements Context
      */
     public function iShouldBeNotifiedThatADiscountAmountShouldBeBetween0And100Percent(): void
     {
-        Assert::same($this->formElement->getValidationMessage(), 'The percentage discount amount must be between 0% and 100%.');
+        Assert::same(
+            $this->formElement->getValidationMessage(),
+            'The percentage discount amount must be between 0% and 100%.',
+        );
     }
 
     /**
-     * @Then I should be notified that a discount amount should be a number and cannot be empty
+     * @Then I should be notified that the percentage amount should be a number and cannot be empty
      */
-    public function iShouldBeNotifiedThatADiscountAmountShouldBeANumber(): void
+    public function iShouldBeNotifiedThatThePercentageAmountShouldBeANumber(): void
     {
-        Assert::same($this->formElement->getValidationMessage(), 'The percentage discount amount must be a number and can not be empty.');
+        Assert::same(
+            $this->formElement->getValidationMessage(),
+            'The percentage discount amount must be a number and can not be empty.',
+        );
     }
 
     /**
-     * @Then I should be notified that a discount amount should be configured for at least one channel
+     * @Then I should be notified that the fixed amount should be a number and cannot be empty
      */
-    public function iShouldBeNotifiedThatADiscountAmountShouldBeConfiguredForAtLeasOneChannel(): void
+    public function iShouldBeNotifiedThatTheFixedAmountShouldBeANumber(): void
     {
-        Assert::true($this->formElement->hasOnlyOneValidationMessage(
-            'Configuration for one of the required channels is not provided.',
-        ));
+        Assert::same(
+            $this->formElement->getValidationMessage(),
+            'Provided configuration contains errors. Please add the fixed discount amount that is a number greater than 0.',
+        );
     }
 
     /**
@@ -1184,7 +1194,10 @@ final class ManagingCatalogPromotionsContext implements Context
      */
     public function iShouldBeNotifiedThatNotAllChannelsAreFilled(): void
     {
-        Assert::same($this->formElement->getValidationMessage(), 'Configuration for one of the required channels is not provided.');
+        Assert::contains(
+            $this->formElement->getValidationMessage(),
+            'Provided configuration contains errors. Please add the fixed discount amount that is a number greater than 0.',
+        );
     }
 
     /**
@@ -1200,7 +1213,10 @@ final class ManagingCatalogPromotionsContext implements Context
      */
     public function iShouldSeeTheCatalogPromotionScopeConfigurationForm(): void
     {
-        Assert::true($this->createPage->checkIfScopeConfigurationFormIsVisible(), 'Catalog promotion scope configuration form is not visible.');
+        Assert::true(
+            $this->createPage->checkIfScopeConfigurationFormIsVisible(),
+            'Catalog promotion scope configuration form is not visible.',
+        );
     }
 
     /**
@@ -1208,7 +1224,10 @@ final class ManagingCatalogPromotionsContext implements Context
      */
     public function iShouldSeeTheCatalogPromotionActionConfigurationForm(): void
     {
-        Assert::true($this->createPage->checkIfActionConfigurationFormIsVisible(), 'Catalog promotion action configuration form is not visible.');
+        Assert::true(
+            $this->createPage->checkIfActionConfigurationFormIsVisible(),
+            'Catalog promotion action configuration form is not visible.',
+        );
     }
 
     /**
@@ -1252,5 +1271,10 @@ final class ManagingCatalogPromotionsContext implements Context
         $this->formElement->chooseActionType('Percentage discount');
         $this->formElement->specifyLastActionDiscount($discount);
         $this->createPage->create();
+    }
+
+    protected function resolveCurrentPage(): SymfonyPageInterface
+    {
+        return $this->createPage;
     }
 }

@@ -18,19 +18,18 @@ use ApiPlatform\Core\DataProvider\RestrictedDataProviderInterface;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 
-/** @experimental */
 final class ChannelsCollectionDataProvider implements ContextAwareCollectionDataProviderInterface, RestrictedDataProviderInterface
 {
     public function __construct(private ChannelContextInterface $channelContext)
     {
     }
 
-    public function getCollection(string $resourceClass, string $operationName = null, array $context = []): array
+    public function getCollection(string $resourceClass, ?string $operationName = null, array $context = []): array
     {
         return [$this->channelContext->getChannel()];
     }
 
-    public function supports(string $resourceClass, string $operationName = null, array $context = []): bool
+    public function supports(string $resourceClass, ?string $operationName = null, array $context = []): bool
     {
         return is_a($resourceClass, ChannelInterface::class, true) && $this->isShopGetCollectionOperation($context);
     }

@@ -23,11 +23,18 @@ interface Emails
 
     public const SHIPMENT_CONFIRMATION = 'shipment_confirmation';
 
+    public const SHIPMENT_CONFIRMATION_RESENT = 'shipment_confirmation_resent';
+
     public const USER_REGISTRATION = 'user_registration';
 
     public const PASSWORD_RESET = 'password_reset';
 
     public const ADMIN_PASSWORD_RESET = 'admin_password_reset';
 
+    /**
+     * @deprecated Since Sylius 1.13 and will be removed in Sylius 2.0. Use ACCOUNT_VERIFICATION instead.
+     */
     public const ACCOUNT_VERIFICATION_TOKEN = 'account_verification_token';
+
+    public const ACCOUNT_VERIFICATION = 'account_verification';
 }

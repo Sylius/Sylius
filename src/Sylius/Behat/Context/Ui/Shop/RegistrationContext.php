@@ -20,12 +20,14 @@ use Sylius\Behat\Page\Shop\Account\DashboardPageInterface;
 use Sylius\Behat\Page\Shop\Account\LoginPageInterface;
 use Sylius\Behat\Page\Shop\Account\ProfileUpdatePageInterface;
 use Sylius\Behat\Page\Shop\Account\RegisterPageInterface;
+use Sylius\Behat\Page\Shop\Account\RegisterThankYouPageInterface;
 use Sylius\Behat\Page\Shop\Account\VerificationPageInterface;
 use Sylius\Behat\Page\Shop\HomePageInterface;
 use Sylius\Behat\Service\NotificationCheckerInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
+use Sylius\Component\Core\Repository\CustomerRepositoryInterface;
 use Webmozart\Assert\Assert;
 
 class RegistrationContext implements Context
@@ -36,10 +38,12 @@ class RegistrationContext implements Context
         private HomePageInterface $homePage,
         private LoginPageInterface $loginPage,
         private RegisterPageInterface $registerPage,
+        private RegisterThankYouPageInterface $registerThankYouPage,
         private VerificationPageInterface $verificationPage,
         private ProfileUpdatePageInterface $profileUpdatePage,
         private RegisterElementInterface $registerElement,
         private NotificationCheckerInterface $notificationChecker,
+        private CustomerRepositoryInterface $customerRepository,
     ) {
     }
 
@@ -67,6 +71,17 @@ class RegistrationContext implements Context
     public function iSpecifyTheLastName(?string $lastName = null): void
     {
         $this->registerElement->specifyLastName($lastName);
+    }
+
+    /**
+     * @When I specify the :firstOrLast name as too long value
+     */
+    public function iSpecifyFirstOrLastNameAsTooLongValue(string $firstOrLast): void
+    {
+        match ($firstOrLast) {
+            'first' => $this->registerElement->specifyFirstName(str_repeat('a', 256)),
+            'last' => $this->registerElement->specifyLastName(str_repeat('a', 256)),
+        };
     }
 
     /**
@@ -138,6 +153,14 @@ class RegistrationContext implements Context
     public function iShouldBeNotifiedThatElementIsRequired(string $element): void
     {
         $this->assertFieldValidationMessage($element, sprintf('Please enter your %s.', $element));
+    }
+
+    /**
+     * @Then I should be notified that the :firstOrLast name is too long
+     */
+    public function iShouldBeNotifiedThatFirstOrLastNameIsTooLong(string $firstOrLast): void
+    {
+        $this->assertFieldValidationMessage($firstOrLast . '_name', sprintf('%s name must not be longer than 255 characters.', ucfirst($firstOrLast)));
     }
 
     /**
@@ -346,6 +369,23 @@ class RegistrationContext implements Context
         $this->profileUpdatePage->open();
 
         Assert::true($this->profileUpdatePage->isSubscribedToTheNewsletter());
+    }
+
+    /**
+     * @Then I should be on registration thank you page
+     */
+    public function iShouldBeOnRegistrationThankYouPage(): void
+    {
+        $registeredCustomer = $this->customerRepository->findLatest(1)[0];
+        Assert::true($this->registerThankYouPage->isOpen(['id' => $registeredCustomer->getId()]));
+    }
+
+    /**
+     * @Then I should be on my account dashboard
+     */
+    public function iShouldBeOnMyAccountDashboard(): void
+    {
+        Assert::true($this->dashboardPage->isOpen());
     }
 
     private function assertFieldValidationMessage(string $element, string $expectedMessage): void

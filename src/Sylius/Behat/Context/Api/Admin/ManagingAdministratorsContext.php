@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Api\Admin;
 
-use ApiPlatform\Core\Api\IriConverterInterface;
+use ApiPlatform\Api\IriConverterInterface;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\RequestBuilder;
@@ -72,7 +72,7 @@ final class ManagingAdministratorsContext implements Context
      * @When I do not specify its email
      * @When I change its email to :email
      */
-    public function iSpecifyItsEmailAs(string $email = null): void
+    public function iSpecifyItsEmailAs(?string $email = null): void
     {
         if ($email !== null) {
             $this->client->addRequestData('email', $email);
@@ -84,7 +84,7 @@ final class ManagingAdministratorsContext implements Context
      * @When I do not specify its name
      * @When I change its name to :username
      */
-    public function iSpecifyItsNameAs(string $username = null): void
+    public function iSpecifyItsNameAs(?string $username = null): void
     {
         if ($username !== null) {
             $this->client->addRequestData('username', $username);
@@ -92,11 +92,19 @@ final class ManagingAdministratorsContext implements Context
     }
 
     /**
+     * @When I specify its :field as too long string
+     */
+    public function iSpecifyItsFieldAsTooLongString(string $field): void
+    {
+        $this->client->addRequestData(StringInflector::nameToCamelCase(lcfirst(trim(ucwords($field)))), str_repeat('a', 256));
+    }
+
+    /**
      * @When I specify its password as :password
      * @When I do not specify its password
      * @When I change its password to :password
      */
-    public function iSpecifyItsPasswordAs(string $password = null): void
+    public function iSpecifyItsPasswordAs(?string $password = null): void
     {
         if ($password !== null) {
             $this->client->addRequestData('plainPassword', $password);
@@ -109,6 +117,14 @@ final class ManagingAdministratorsContext implements Context
     public function iSpecifyItsLocaleAs(string $localeCode): void
     {
         $this->client->addRequestData('localeCode', $localeCode);
+    }
+
+    /**
+     * @When I specify its locale as a wrong code
+     */
+    public function iSpecifyItsLocaleAsWrongCode(): void
+    {
+        $this->client->addRequestData('localeCode', 'wr_ONG');
     }
 
     /**
@@ -125,15 +141,6 @@ final class ManagingAdministratorsContext implements Context
     public function iAddIt(): void
     {
         $this->client->create();
-    }
-
-    /**
-     * @When I save my changes
-     */
-    public function iSaveMyChanges(): void
-    {
-        $response = $this->client->update();
-        $this->responseChecker->isUpdateSuccessful($response);
     }
 
     /**
@@ -156,7 +163,7 @@ final class ManagingAdministratorsContext implements Context
         $builder->withHeader('CONTENT_TYPE', 'multipart/form-data');
         $builder->withHeader('HTTP_ACCEPT', 'application/ld+json');
         $builder->withHeader('HTTP_Authorization', 'Bearer ' . $this->sharedStorage->get('token'));
-        $builder->withParameter('owner', $this->iriConverter->getIriFromItem($administrator));
+        $builder->withParameter('owner', $this->iriConverter->getIriFromResource($administrator));
         $builder->withFile('file', new UploadedFile($this->minkParameters['files_path'] . $avatar, basename($avatar)));
 
         $response = $this->client->request($builder->build());
@@ -246,17 +253,6 @@ final class ManagingAdministratorsContext implements Context
     }
 
     /**
-     * @Then I should be notified that it has been successfully edited
-     */
-    public function iShouldBeNotifiedThatItHasBeenSuccessfullyEdited(): void
-    {
-        Assert::true(
-            $this->responseChecker->isUpdateSuccessful($this->client->getLastResponse()),
-            'Administrator could not be edited',
-        );
-    }
-
-    /**
      * @Then I should be notified that it has been successfully deleted
      */
     public function iShouldBeNotifiedThatItHasBeenSuccessfullyDeleted(): void
@@ -308,6 +304,28 @@ final class ManagingAdministratorsContext implements Context
         Assert::contains(
             $this->responseChecker->getError($this->client->getLastResponse()),
             'email: This email is invalid.',
+        );
+    }
+
+    /**
+     * @Then I should be notified that this :field is too long
+     */
+    public function iShouldBeNotifiedThatThisFieldIsTooLong(string $field): void
+    {
+        Assert::contains(
+            $this->responseChecker->getError($this->client->getLastResponse()),
+            sprintf('%s must not be longer than 255 characters.', ucfirst($field)),
+        );
+    }
+
+    /**
+     * @Then I should be notified that this value is not valid locale
+     */
+    public function iShouldBeNotifiedThatThisValueIsNotValidLocale(): void
+    {
+        Assert::contains(
+            $this->responseChecker->getError($this->client->getLastResponse()),
+            'localeCode: This value is not a valid locale.',
         );
     }
 

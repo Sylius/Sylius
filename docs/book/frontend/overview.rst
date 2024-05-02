@@ -8,7 +8,7 @@ Overview
 Requirements
 ------------
 
-We recommend using Node.js ``16.x`` as it is the current LTS version. However, Sylius frontend is also compatible with Node.js ``14.x`` and ``18.x``.
+We recommend using Node.js ``20.x`` as it is the current LTS version. However, Sylius frontend is also compatible with Node.js ``18.x``.
 
 In Sylius, we use ``yarn`` as a package manager, but there are no obstacles to using ``npm``.
 

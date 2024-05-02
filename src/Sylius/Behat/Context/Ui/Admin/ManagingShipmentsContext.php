@@ -50,7 +50,7 @@ final class ManagingShipmentsContext implements Context
         string $orderNumber,
         string $shippingState,
         CustomerInterface $customer,
-        Channel $channel = null,
+        ?Channel $channel = null,
     ): void {
         $parameters = [
             'number' => $orderNumber,
@@ -172,6 +172,7 @@ final class ManagingShipmentsContext implements Context
 
     /**
      * @Then I should see order page with details of order :order
+     * @Then I should see the details of order :order
      */
     public function iShouldSeeOrderPageWithDetailsOfOrder(OrderInterface $order): void
     {

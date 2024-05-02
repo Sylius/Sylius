@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Sylius Sp. z o.o.
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+<services>
+    <defaults public="true" />
+
+    <service id="sylius.listener.user_mailer_listener" class="Sylius\Bundle\CoreBundle\EventListener\MailerListener" public="false">
+        <argument type="service" id="sylius.email_sender" />
+        <argument type="service" id="sylius.context.channel" />
+        <argument type="service" id="sylius.context.locale" />
+        <tag name="kernel.event_listener" event="sylius.user.password_reset.request.pin" method="sendResetPasswordPinEmail" />
+        <tag name="kernel.event_listener" event="sylius.user.password_reset.request.token" method="sendResetPasswordTokenEmail" />
+        <tag name="kernel.event_listener" event="sylius.user.email_verification.token" method="sendVerificationTokenEmail" />
+        <tag name="kernel.event_listener" event="sylius.user.post_email_verification" method="sendVerificationSuccessEmail" />
+        <tag name="kernel.event_listener" event="sylius.customer.post_register" method="sendUserRegistrationEmail" />
+    </service>
+
+    <service id="sylius.mailer.contact_email_manager" class="Sylius\Bundle\CoreBundle\Mailer\ContactEmailManager">
+        <argument type="service" id="sylius.email_sender" />
+    </service>
+    <service id="Sylius\Bundle\CoreBundle\Mailer\ContactEmailManagerInterface" alias="sylius.mailer.contact_email_manager" />
+
+    <service id="sylius.mailer.order_email_manager" class="Sylius\Bundle\CoreBundle\Mailer\OrderEmailManager">
+        <argument type="service" id="sylius.email_sender" />
+    </service>
+    <service id="Sylius\Bundle\CoreBundle\Mailer\OrderEmailManagerInterface" alias="sylius.mailer.order_email_manager" />
+
+    <service id="sylius.mailer.shipment_email_manager" class="Sylius\Bundle\CoreBundle\Mailer\ShipmentEmailManager">
+        <argument type="service" id="sylius.email_sender" />
+    </service>
+    <service id="Sylius\Bundle\CoreBundle\Mailer\ShipmentEmailManagerInterface" alias="sylius.mailer.shipment_email_manager" />
+
+    <service id="sylius.mailer.reset_password_email_manager" class="Sylius\Bundle\CoreBundle\Mailer\ResetPasswordEmailManager">
+        <argument type="service" id="sylius.email_sender" />
+    </service>
+    <service id="Sylius\Bundle\CoreBundle\Mailer\ResetPasswordEmailManagerInterface" alias="sylius.mailer.reset_password_email_manager" />
+
+    <service id="sylius.mailer.account_registration_email_manager"
+             class="Sylius\Bundle\CoreBundle\Mailer\AccountRegistrationEmailManager"
+    >
+        <argument type="service" id="sylius.email_sender" />
+    </service>
+    <service id="Sylius\Bundle\CoreBundle\Mailer\AccountRegistrationEmailManagerInterface" alias="sylius.mailer.account_registration_email_manager" />
+
+    <service id="sylius.mailer.account_verification_email_manager"
+             class="Sylius\Bundle\CoreBundle\Mailer\AccountVerificationEmailManager"
+    >
+        <argument type="service" id="sylius.email_sender" />
+    </service>
+    <service id="Sylius\Bundle\CoreBundle\Mailer\AccountVerificationEmailManagerInterface" alias="sylius.mailer.account_verification_email_manager" />
+</services>
+</container>

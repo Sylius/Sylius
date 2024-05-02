@@ -20,6 +20,10 @@ interface ProfileUpdatePageInterface extends PageInterface
 {
     public function specifyFirstName(?string $firstName): void;
 
+    public function specifyPhoneNumber(?string $phoneNumber): void;
+
+    public function getPhoneNumber(): string;
+
     public function specifyLastName(?string $lastName): void;
 
     public function specifyEmail(?string $email): void;

@@ -1,6 +1,6 @@
 <h1 align="center">
     <a href="https://sylius.com/github-readme/link/" target="_blank">
-        <img src="https://sylius.com/assets/github-readme.png?sylius-days" />
+        <img src="https://sylius.com/assets/github-readme.png?course" />
     </a>
 </h1>
 
@@ -27,10 +27,22 @@ Follow the [Getting started with Sylius tutorial](https://docs.sylius.com/en/lat
  
 Documentation is available at [docs.sylius.com](https://docs.sylius.com).
 
+➕ Sylius Plus
+--------------
+
+<a href="https://sylius.com/plus/" target="_blank">
+    <img src="https://sylius.com/assets/readme/readme-plus.png" />
+</a>
+
+[Sylius Plus](https://sylius.com/plus/) offers modular features like **OnePageCheckout** and a **B2B suite**, alongside advanced capabilities such as 
+multi-store management, partial order fulfillment, smooth returns handling, a loyalty system and multi-source inventory. 
+Pick and choose the modules you need to supercharge your eCommerce projects effortlessly.
+
 🤝 Community
 ------------
 
-Get Sylius support on [Slack](https://sylius.com/slack) or [Stack Overflow](https://stackoverflow.com/questions/tagged/sylius).
+Get Sylius support on [Slack](https://sylius.com/slack) or [Stack Overflow](https://stackoverflow.com/questions/tagged/sylius)
+or get professional **SLA-backed support and Project Success Assistance** with Sylius Plus license! [Learn more.](https://sylius.com/plus/)
 
 Stay updated by following our [Twitter](https://twitter.com/Sylius) and [Facebook](https://www.facebook.com/SyliusEcommerce/).
 
@@ -52,24 +64,6 @@ Instead, all security issues must be sent to `security@sylius.com`.
 You can find Sylius plugins on [our Sylius Store](https://sylius.com/plugins/) which is a Marketplace with Sylius extensions. 
 
 Or search for [packages marked as *sylius-plugin*](https://packagist.org/explore/?type=sylius-plugin) on Packagist.
-
-➕ Sylius Plus
---------------
-
-<a href="https://sylius.com/plus/" target="_blank">
-    <img src="https://sylius.com/assets/readme/readme-plus.png" />
-</a>
-
-Sylius Plus gives you all the power of Open Source and much more. It comes with the following set of enterprise-grade features:
-
-- Advanced Multi-store
-- Returns Management
-- Multi-source Inventory
-- Advanced Users Permissions
-- Partial Order Fulfillment
-- Loyalty
-
-What is more, Sylius Plus means SLA-backed support and Project Success Assistance from its creators. [Learn more.](https://sylius.com/plus/)
 
 📃 License
 ----------

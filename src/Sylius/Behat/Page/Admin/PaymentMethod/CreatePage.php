@@ -15,7 +15,7 @@ namespace Sylius\Behat\Page\Admin\PaymentMethod;
 
 use Behat\Mink\Element\NodeElement;
 use Sylius\Behat\Behaviour\ChecksCodeImmutability;
-use Sylius\Behat\Behaviour\SpecifiesItsCode;
+use Sylius\Behat\Behaviour\SpecifiesItsField;
 use Sylius\Behat\Behaviour\Toggles;
 use Sylius\Behat\Page\Admin\Crud\CreatePage as BaseCreatePage;
 
@@ -23,7 +23,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
 {
     use ChecksCodeImmutability;
     use Toggles;
-    use SpecifiesItsCode;
+    use SpecifiesItsField;
 
     public function nameIt(string $name, string $languageCode): void
     {
@@ -108,6 +108,8 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
             'gateway_name' => '#sylius_payment_method_gatewayConfig_gatewayName',
             'name' => '#sylius_payment_method_translations_en_US_name',
             'paypal_password' => '#sylius_payment_method_gatewayConfig_config_password',
+            'stripe_secret_key' => '#sylius_payment_method_gatewayConfig_config_secret_key',
+            'stripe_publishable_key' => '#sylius_payment_method_gatewayConfig_config_publishable_key',
         ]);
     }
 }

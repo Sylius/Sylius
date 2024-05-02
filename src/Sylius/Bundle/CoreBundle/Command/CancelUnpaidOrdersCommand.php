@@ -13,41 +13,18 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Command;
 
-use SyliusLabs\Polyfill\Symfony\FrameworkBundle\Command\ContainerAwareCommand;
-use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Output\OutputInterface;
+trigger_deprecation(
+    'sylius/core-bundle',
+    '1.13',
+    'The "%s" class is deprecated and will be removed in Sylius 2.0. Use "%s" instead.',
+    CancelUnpaidOrdersCommand::class,
+    \Sylius\Bundle\CoreBundle\Console\Command\CancelUnpaidOrdersCommand::class,
+);
 
-/**
- * @final
- */
-class CancelUnpaidOrdersCommand extends ContainerAwareCommand
-{
-    protected static $defaultName = 'sylius:cancel-unpaid-orders';
+class_exists(\Sylius\Bundle\CoreBundle\Console\Command\CancelUnpaidOrdersCommand::class);
 
-    protected function configure(): void
+if (false) {
+    final class CancelUnpaidOrdersCommand
     {
-        $this
-            ->setDescription(
-                'Removes order that have been unpaid for a configured period. Configuration parameter - sylius_order.order_expiration_period.',
-            )
-        ;
-    }
-
-    protected function execute(InputInterface $input, OutputInterface $output): int
-    {
-        $expirationTime = $this->getContainer()->getParameter('sylius_order.order_expiration_period');
-        $output->writeln(sprintf(
-            'Command will cancel orders that have been unpaid for <info>%s</info>.',
-            (string) $expirationTime,
-        ));
-
-        $unpaidCartsStateUpdater = $this->getContainer()->get('sylius.unpaid_orders_state_updater');
-        $unpaidCartsStateUpdater->cancel();
-
-        $this->getContainer()->get('sylius.manager.order')->flush();
-
-        $output->writeln('<info>Unpaid orders have been canceled</info>');
-
-        return 0;
     }
 }

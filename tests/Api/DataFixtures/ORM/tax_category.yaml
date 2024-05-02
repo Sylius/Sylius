@@ -1,0 +1,8 @@
+Sylius\Component\Taxation\Model\TaxCategory:
+    tax_category_default:
+        code: 'default'
+        name: 'Default'
+    tax_category_special:
+        code: 'special'
+        name: 'Special'
+        description: 'For peculiar places'

@@ -45,8 +45,10 @@ final class ManagingCurrenciesContext implements Context
 
     /**
      * @When I choose :currencyCode
+     * @When I set code to :code
+     * @When I do not choose a code
      */
-    public function iChoose(string $currencyCode): void
+    public function iChoose(string $currencyCode = ''): void
     {
         $this->client->addRequestData('code', $currencyCode);
     }
@@ -105,6 +107,32 @@ final class ManagingCurrenciesContext implements Context
             'Currency has been created successfully, but it should not',
         );
         Assert::same($this->responseChecker->getError($response), 'code: Currency code must be unique.');
+    }
+
+    /**
+     * @Then I should be notified that a code is required
+     */
+    public function iShouldBeNotifiedThatACodeIsRequired(): void
+    {
+        $response = $this->client->getLastResponse();
+        Assert::false(
+            $this->responseChecker->isCreationSuccessful($response),
+            'Currency has been created successfully, but it should not',
+        );
+        Assert::same($this->responseChecker->getError($response), 'code: Please choose currency code.');
+    }
+
+    /**
+     * @Then I should be notified that the code is invalid
+     */
+    public function iShouldBeNotifiedThatTheCodeIsInvalid(): void
+    {
+        $response = $this->client->getLastResponse();
+        Assert::false(
+            $this->responseChecker->isCreationSuccessful($response),
+            'Currency has been created successfully, but it should not',
+        );
+        Assert::same($this->responseChecker->getError($response), 'code: This value is not a valid currency code.');
     }
 
     /**

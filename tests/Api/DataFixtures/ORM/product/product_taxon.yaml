@@ -1,0 +1,25 @@
+Sylius\Component\Core\Model\Product:
+    product_mug:
+        code: 'MUG'
+        channels: ['@channel_web']
+        currentLocale: 'en_US'
+    product_cap:
+        code: 'CAP'
+        channels: ['@channel_web']
+        currentLocale: 'en_US'
+
+Sylius\Component\Core\Model\Taxon:
+    taxon_mugs:
+        code: 'MUGS'
+    taxon_caps:
+        code: 'CAPS'
+
+Sylius\Component\Core\Model\ProductTaxon:
+    product_mug_taxon_mugs:
+        product: '@product_mug'
+        taxon: '@taxon_mugs'
+        position: 1
+    product_cap_taxon_caps:
+        product: '@product_cap'
+        taxon: '@taxon_caps'
+        position: 2

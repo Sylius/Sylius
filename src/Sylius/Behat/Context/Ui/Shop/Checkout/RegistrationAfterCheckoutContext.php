@@ -15,12 +15,15 @@ namespace Sylius\Behat\Context\Ui\Shop\Checkout;
 
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Element\Shop\Account\RegisterElementInterface;
+use Sylius\Behat\Page\Shop\Account\DashboardPageInterface;
 use Sylius\Behat\Page\Shop\Account\LoginPageInterface;
+use Sylius\Behat\Page\Shop\Account\RegisterThankYouPageInterface;
 use Sylius\Behat\Page\Shop\Account\VerificationPageInterface;
 use Sylius\Behat\Page\Shop\HomePageInterface;
 use Sylius\Behat\Page\Shop\Order\ThankYouPageInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
+use Sylius\Component\Core\Repository\CustomerRepositoryInterface;
 use Webmozart\Assert\Assert;
 
 final class RegistrationAfterCheckoutContext implements Context
@@ -31,7 +34,10 @@ final class RegistrationAfterCheckoutContext implements Context
         private ThankYouPageInterface $thankYouPage,
         private HomePageInterface $homePage,
         private VerificationPageInterface $verificationPage,
+        private RegisterThankYouPageInterface $registerThankYouPage,
+        private DashboardPageInterface $dashboardPage,
         private RegisterElementInterface $registerElement,
+        private CustomerRepositoryInterface $customerRepository,
     ) {
     }
 
@@ -92,5 +98,22 @@ final class RegistrationAfterCheckoutContext implements Context
         $this->loginPage->logIn();
 
         Assert::true($this->homePage->hasLogoutButton());
+    }
+
+    /**
+     * @Then I should be on registration thank you page
+     */
+    public function iShouldBeOnRegistrationThankYouPage(): void
+    {
+        $registeredCustomer = $this->customerRepository->findLatest(1)[0];
+        Assert::true($this->registerThankYouPage->isOpen(['id' => $registeredCustomer->getId()]));
+    }
+
+    /**
+     * @Then I should be on my account dashboard
+     */
+    public function iShouldBeOnMyAccountDashboard(): void
+    {
+        Assert::true($this->dashboardPage->isOpen());
     }
 }

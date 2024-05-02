@@ -91,6 +91,7 @@ final class CheckoutContext implements Context
      * @Given I have proceeded through checkout process in the :localeCode locale with email :email
      * @Given I have proceeded through checkout process
      * @When I proceed through checkout process
+     * @When I proceeded through checkout process
      * @When I proceed through checkout process in the :localeCode locale
      * @When I proceed through checkout process in the :localeCode locale with email :email
      */
@@ -117,7 +118,7 @@ final class CheckoutContext implements Context
      * @When /^I proceed selecting ("[^"]+" as billing country) with "([^"]+)" method$/
      */
     public function iProceedSelectingBillingCountryAndShippingMethod(
-        CountryInterface $shippingCountry = null,
+        ?CountryInterface $shippingCountry = null,
         ?string $shippingMethodName = null,
     ): void {
         $this->addressingContext->iProceedSelectingBillingCountry($shippingCountry);

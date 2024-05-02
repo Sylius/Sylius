@@ -18,7 +18,6 @@ use Doctrine\DBAL\Exception\ForeignKeyConstraintViolationException;
 use Sylius\Bundle\ApiBundle\Exception\ShippingMethodCannotBeRemoved;
 use Sylius\Component\Core\Model\ShippingMethodInterface;
 
-/** @experimental */
 final class ShippingMethodDataPersister implements ContextAwareDataPersisterInterface
 {
     public function __construct(private ContextAwareDataPersisterInterface $decoratedDataPersister)

@@ -47,7 +47,11 @@ interface UpdateSimpleProductPageInterface extends BaseUpdatePageInterface
 
     public function hasNonTranslatableAttributeWithValue(string $attributeName, string $value): bool;
 
-    public function isMainTaxonChosen(string $taxonName): bool;
+    public function hasMainTaxon(): bool;
+
+    public function hasMainTaxonWithName(string $taxonName): bool;
+
+    public function isTaxonChosen(string $taxonName): bool;
 
     public function selectMainTaxon(TaxonInterface $taxon): void;
 
@@ -67,7 +71,7 @@ interface UpdateSimpleProductPageInterface extends BaseUpdatePageInterface
 
     public function isImageWithTypeDisplayed(string $type): bool;
 
-    public function attachImage(string $path, string $type = null): void;
+    public function attachImage(string $path, ?string $type = null): void;
 
     public function changeImageWithType(string $type, string $path): void;
 

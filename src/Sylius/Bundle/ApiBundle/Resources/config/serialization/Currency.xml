@@ -16,17 +16,27 @@
             xsi:schemaLocation="http://symfony.com/schema/dic/serializer-mapping https://symfony.com/schema/dic/serializer-mapping/serializer-mapping-1.0.xsd"
 >
     <class name="Sylius\Component\Currency\Model\Currency">
-        <attribute name="id">
-            <group>admin:currency:read</group>
-            <group>shop:currency:read</group>
+        <attribute name="code">
+            <group>admin:currency:index</group>
+            <group>sylius:admin:currency:index</group>
+            <group>admin:currency:show</group>
+            <group>sylius:admin:currency:show</group>
+            <group>admin:currency:create</group>
+            <group>sylius:admin:currency:create</group>
+            <group>shop:currency:index</group>
+            <group>sylius:shop:currency:index</group>
+            <group>shop:currency:show</group>
+            <group>sylius:shop:currency:show</group>
         </attribute>
-       <attribute name="code">
-           <group>admin:currency:read</group>
-           <group>shop:currency:read</group>
-       </attribute>
         <attribute name="name">
-            <group>admin:currency:read</group>
-            <group>shop:currency:read</group>
+            <group>admin:currency:index</group>
+            <group>sylius:admin:currency:index</group>
+            <group>admin:currency:show</group>
+            <group>sylius:admin:currency:show</group>
+            <group>shop:currency:index</group>
+            <group>sylius:shop:currency:index</group>
+            <group>shop:currency:show</group>
+            <group>sylius:shop:currency:show</group>
         </attribute>
     </class>
 </serializer>

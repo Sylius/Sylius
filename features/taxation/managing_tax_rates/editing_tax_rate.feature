@@ -10,20 +10,12 @@ Feature: Editing tax rate
         And the store has "United States Sales Tax" tax rate of 20% for "Sports gear" within the "US" zone
         And I am logged in as an administrator
 
-    @todo
-    Scenario: Trying to change tax rate code
+    @ui @api
+    Scenario: Inability of changing the code of an existing tax rate
         When I want to modify a tax rate "United States Sales Tax"
-        And I change its code to "us_vat"
-        And I save my changes
-        Then I should be notified that code cannot be changed
-        And tax rate "United States Sales Tax" should still have code "united_states_sales_tax"
+        Then I should not be able to edit its code
 
-    @ui
-    Scenario: Seeing disabled code field when editing tax rate
-        When I want to modify a tax rate "United States Sales Tax"
-        Then the code field should be disabled
-
-    @ui
+    @ui @api
     Scenario: Renaming the tax rate
         When I want to modify a tax rate "United States Sales Tax"
         And I rename it to "US VAT"
@@ -31,7 +23,7 @@ Feature: Editing tax rate
         Then I should be notified that it has been successfully edited
         And this tax rate name should be "US VAT"
 
-    @ui
+    @ui @api
     Scenario: Changing the tax rate amount
         When I want to modify a tax rate "United States Sales Tax"
         And I specify its amount as 16%
@@ -39,7 +31,7 @@ Feature: Editing tax rate
         Then I should be notified that it has been successfully edited
         And this tax rate amount should be 16%
 
-    @ui
+    @ui @api
     Scenario: Changing related tax category
         Given the store has a tax category "Food and Beverage" also
         When I want to modify a tax rate "United States Sales Tax"
@@ -48,7 +40,7 @@ Feature: Editing tax rate
         Then I should be notified that it has been successfully edited
         And this tax rate should be applicable for the "Food and Beverage" tax category
 
-    @ui
+    @ui @api
     Scenario: Changing related zone
         Given there is a zone "The Rest of the World" containing all other countries
         When I want to modify a tax rate "United States Sales Tax"

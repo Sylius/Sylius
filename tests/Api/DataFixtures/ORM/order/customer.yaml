@@ -1,0 +1,7 @@
+Sylius\Component\Core\Model\Customer:
+    customer_{tony, dave}:
+        firstName: "<current()>"
+        lastName: "Doe"
+        email: "<current()>\\@doe.com"
+        emailCanonical: "<current()>\\@doe.com"
+        birthday: "<(new \\DateTime())>"

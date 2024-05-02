@@ -32,6 +32,11 @@
                 <option name="pattern">/^[\w-]*$/</option>
                 <option name="groups">sylius</option>
             </constraint>
+            <constraint name="Length">
+                <option name="max">255</option>
+                <option name="maxMessage">sylius.promotion.code.max_length</option>
+                <option name="groups">sylius</option>
+            </constraint>
         </property>
         <property name="name">
             <constraint name="NotBlank">
@@ -59,6 +64,9 @@
             <constraint name="Valid" />
         </property>
         <property name="rules">
+            <constraint name="Valid" />
+        </property>
+        <property name="translations">
             <constraint name="Valid" />
         </property>
     </class>

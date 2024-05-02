@@ -18,11 +18,9 @@ use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 use Webmozart\Assert\Assert;
 
-/** @experimental */
 final class CorrectChangeShopUserConfirmPasswordValidator extends ConstraintValidator
 {
-    /** @param ChangeShopUserPassword|mixed $value */
-    public function validate($value, Constraint $constraint): void
+    public function validate(mixed $value, Constraint $constraint): void
     {
         Assert::isInstanceOf($value, ChangeShopUserPassword::class);
 

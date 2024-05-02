@@ -13,6 +13,7 @@
 
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <imports>
+        <import resource="services/_calendar_services.php" />
         <import resource="services/api.xml" />
         <import resource="services/contexts.xml" />
         <import resource="services/elements.xml" />
@@ -60,6 +61,10 @@
             <argument type="service" id="sylius.behat.admin_security" />
         </service>
 
+        <service id="sylius.behat.api.shared_security" class="Sylius\Behat\Service\SharedSecurityService" public="false">
+            <argument type="service" id="sylius.behat.api_security" />
+        </service>
+
         <service id="sylius.behat.table_accessor" class="Sylius\Behat\Service\Accessor\TableAccessor" public="false" />
 
         <service id="sylius.behat.checker.image_existence" class="Sylius\Behat\Service\Checker\ImageExistenceChecker">
@@ -94,11 +99,15 @@
         <service id="sylius.behat.shared_storage" class="Sylius\Behat\Service\SharedStorage" public="false"/>
 
         <service id="sylius.behat.java_script_test_helper" class="Sylius\Behat\Service\Helper\JavaScriptTestHelper" >
-            <argument>100000</argument>
+            <argument>1000000</argument>
             <argument>7</argument>
         </service>
 
         <service id="sylius.behat.email_checker" class="Sylius\Behat\Service\Checker\EmailChecker">
+            <argument type="service" id="Sylius\Behat\Service\Provider\EmailMessagesProviderInterface" />
+        </service>
+
+        <service id="Sylius\Behat\Service\Provider\EmailMessagesProviderInterface" class="Sylius\Behat\Service\Provider\EmailMessagesProvider">
             <argument type="service" id="test.mailer_pool" />
         </service>
 
@@ -107,18 +116,20 @@
             <tag name="kernel.event_subscriber" />
         </service>
 
-        <service id="api_platform.iri_converter" class="Sylius\Behat\Service\Converter\IriConverter" public="false">
-            <argument type="service" id="api_platform.metadata.property.name_collection_factory" />
-            <argument type="service" id="api_platform.metadata.property.metadata_factory" />
-            <argument type="service" id="api_platform.item_data_provider" />
+        <service id="sylius.behat.section_iri_converter" class="Sylius\Behat\Service\Converter\SectionAwareIriConverter" public="false">
             <argument type="service" id="api_platform.route_name_resolver" />
             <argument type="service" id="api_platform.router" />
+            <argument type="service" id="api_platform.metadata.property.name_collection_factory" />
+            <argument type="service" id="api_platform.metadata.property.metadata_factory" />
             <argument type="service" id="api_platform.property_accessor" />
             <argument type="service" id="api_platform.identifiers_extractor.cached" />
-            <argument type="service" id="api_platform.subresource_data_provider" on-invalid="ignore" />
-            <argument type="service" id="api_platform.identifier.converter" on-invalid="ignore" />
             <argument type="service" id="api_platform.resource_class_resolver" />
             <argument type="service" id="api_platform.metadata.resource.metadata_factory" />
+        </service>
+
+        <service id="api_platform.iri_converter" class="Sylius\Behat\Service\Converter\IriConverter">
+            <argument type="service" id="api_platform.iri_converter.legacy" />
+            <argument type="service" id="api_platform.symfony.iri_converter" />
         </service>
     </services>
 </container>

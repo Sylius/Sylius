@@ -22,7 +22,6 @@ use Sylius\Component\Core\Model\AdminUserInterface;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
 use Webmozart\Assert\Assert;
 
-/** @experimental */
 final class TaxonCollectionExtension implements ContextAwareQueryCollectionExtensionInterface
 {
     public function __construct(private UserContextInterface $userContext)
@@ -33,20 +32,20 @@ final class TaxonCollectionExtension implements ContextAwareQueryCollectionExten
         QueryBuilder $queryBuilder,
         QueryNameGeneratorInterface $queryNameGenerator,
         string $resourceClass,
-        string $operationName = null,
+        ?string $operationName = null,
         array $context = [],
     ): void {
         if (!is_a($resourceClass, TaxonInterface::class, true)) {
             return;
         }
 
-        Assert::keyExists($context, ContextKeys::CHANNEL);
-        $channelMenuTaxon = $context[ContextKeys::CHANNEL]->getMenuTaxon();
-
         $user = $this->userContext->getUser();
         if ($user instanceof AdminUserInterface && in_array('ROLE_API_ACCESS', $user->getRoles(), true)) {
             return;
         }
+
+        Assert::keyExists($context, ContextKeys::CHANNEL);
+        $channelMenuTaxon = $context[ContextKeys::CHANNEL]->getMenuTaxon();
 
         $enabledParameterName = $queryNameGenerator->generateParameterName('enabled');
         $parentCodeParameterName = $queryNameGenerator->generateParameterName('parentCode');
@@ -55,7 +54,7 @@ final class TaxonCollectionExtension implements ContextAwareQueryCollectionExten
         $queryBuilder
             ->addSelect('child')
             ->innerJoin(sprintf('%s.parent', $rootAlias), 'parent')
-            ->leftJoin(sprintf('%s.children', $rootAlias), 'child')
+            ->leftJoin(sprintf('%s.children', $rootAlias), 'child', 'WITH', 'child.enabled = true')
             ->andWhere(sprintf('%s.enabled = :%s', $rootAlias, $enabledParameterName))
             ->andWhere(sprintf('parent.code = :%s', $parentCodeParameterName))
             ->addOrderBy(sprintf('%s.position', $rootAlias))

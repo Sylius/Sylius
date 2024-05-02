@@ -1,0 +1,27 @@
+sylius_admin_ajax_customer_groups_by_phrase:
+    path: /search-phrase
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.customer_group::indexAction
+        _format: json
+        _sylius:
+            serialization_groups: [Autocomplete]
+            permission: true
+            repository:
+                method: findByPhrase
+                arguments:
+                    phrase: $phrase
+                    limit: "!!int %sylius.ajax.customer_group.autocomplete_limit%"
+
+sylius_admin_ajax_customer_group_by_code:
+    path: /code
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.customer_group::indexAction
+        _format: json
+        _sylius:
+            serialization_groups: [Autocomplete]
+            permission: true
+            repository:
+                method: findBy
+                arguments: [code: $code]

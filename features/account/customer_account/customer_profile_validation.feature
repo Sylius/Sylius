@@ -18,6 +18,32 @@ Feature: Customer profile validation
         Then I should be notified that the first name is required
         And my name should still be "Francis Underwood"
 
+    @no-ui @api
+    Scenario: Trying to change my first and last name to null
+        When I want to modify my profile
+        And I specify the first name as null value
+        And I specify the last name as null value
+        And I try to save my changes
+        Then I should be notified that the first name needs to be provided
+        And I should be also notified that the last name needs to be provided
+        And my name should still be "Francis Underwood"
+
+    @no-ui @api
+    Scenario: Trying to change gender to wrong value
+        When I want to modify my profile
+        And I specify the gender as a wrong value
+        And I try to save my changes
+        Then I should be notified that my gender is invalid
+        And my gender should still be "m"
+
+    @ui @api
+    Scenario: Trying to change phone number to too long value
+        When I want to modify my profile
+        And I specify the phone number as huge value
+        And I try to save my changes
+        Then I should be notified that the phone number is too long
+        And my phone number should still be "123456789"
+
     @ui @api
     Scenario: Trying to remove my last name
         When I want to modify my profile

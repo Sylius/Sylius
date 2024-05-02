@@ -15,7 +15,7 @@ namespace Sylius\Behat\Context\Setup;
 
 use Behat\Behat\Context\Context;
 use Doctrine\ORM\EntityManagerInterface;
-use SM\Factory\FactoryInterface as StateMachineFactoryInterface;
+use Sylius\Abstraction\StateMachine\StateMachineInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Bundle\CoreBundle\CatalogPromotion\Calculator\FixedDiscountPriceCalculator;
 use Sylius\Bundle\CoreBundle\CatalogPromotion\Calculator\PercentageDiscountPriceCalculator;
@@ -47,7 +47,7 @@ final class CatalogPromotionContext implements Context
         private FactoryInterface $catalogPromotionActionFactory,
         private EntityManagerInterface $entityManager,
         private ChannelRepositoryInterface $channelRepository,
-        private StateMachineFactoryInterface $stateMachineFactory,
+        private StateMachineInterface $stateMachine,
         private MessageBusInterface $eventBus,
         private SharedStorageInterface $sharedStorage,
     ) {
@@ -755,9 +755,8 @@ final class CatalogPromotionContext implements Context
             return;
         }
 
-        $stateMachine = $this->stateMachineFactory->get($catalogPromotion, CatalogPromotionTransitions::GRAPH);
-        $stateMachine->apply(CatalogPromotionTransitions::TRANSITION_PROCESS);
-        $stateMachine->apply(CatalogPromotionTransitions::TRANSITION_ACTIVATE);
+        $this->stateMachine->apply($catalogPromotion, CatalogPromotionTransitions::GRAPH, CatalogPromotionTransitions::TRANSITION_PROCESS);
+        $this->stateMachine->apply($catalogPromotion, CatalogPromotionTransitions::GRAPH, CatalogPromotionTransitions::TRANSITION_ACTIVATE);
 
         $this->entityManager->flush();
     }
@@ -767,10 +766,87 @@ final class CatalogPromotionContext implements Context
      */
     public function theCatalogPromotionIsCurrentlyBeingProcessed(CatalogPromotionInterface $catalogPromotion): void
     {
-        $stateMachine = $this->stateMachineFactory->get($catalogPromotion, CatalogPromotionTransitions::GRAPH);
-        $stateMachine->apply(CatalogPromotionTransitions::TRANSITION_PROCESS);
+        $this->stateMachine->apply($catalogPromotion, CatalogPromotionTransitions::GRAPH, CatalogPromotionTransitions::TRANSITION_PROCESS);
 
         $this->entityManager->flush();
+    }
+
+    /**
+     * @Given the :catalogPromotion catalog promotion is enabled
+     */
+    public function theCatalogPromotionIsEnabled(CatalogPromotionInterface $catalogPromotion): void
+    {
+        $catalogPromotion->setEnabled(true);
+        $this->entityManager->flush();
+
+        $this->eventBus->dispatch(new CatalogPromotionUpdated($catalogPromotion->getCode()));
+    }
+
+    /**
+     * @Given there is disabled catalog promotion named :name
+     */
+    public function thereIsCatalogPromotionsNamed(string $name): void
+    {
+        $this->createCatalogPromotion(name: $name, enabled: false);
+
+        $this->entityManager->flush();
+    }
+
+    /**
+     * @Given /^there is a catalog promotion "([^"]+)" with priority ([^"]+) that reduces price by ("[^"]+") and applies on ("[^"]+" product)$/
+     */
+    public function thereIsACatalogPromotionWithPriorityThatReducesPriceByAndAppliesOnProduct(
+        string $name,
+        int $priority,
+        float $discount,
+        ProductInterface $product,
+    ): void {
+        $catalogPromotion = $this->createCatalogPromotion(
+            name: $name,
+            scopes: [[
+                'type' => InForProductScopeVariantChecker::TYPE,
+                'configuration' => ['products' => [$product->getCode()]],
+            ]],
+            actions: [[
+                'type' => PercentageDiscountPriceCalculator::TYPE,
+                'configuration' => ['amount' => $discount],
+            ]],
+            priority: $priority,
+        );
+
+        $this->entityManager->flush();
+
+        $this->eventBus->dispatch(new CatalogPromotionUpdated($catalogPromotion->getCode()));
+    }
+
+    /**
+     * @Given /^there is disabled catalog promotion "([^"]+)" with priority ([^"]+) that reduces price by fixed ("[^"]+") in the ("[^"]+" channel) and applies on ("[^"]+" product)$/
+     */
+    public function thereIsDisabledCatalogPromotionWithPriorityThatReducesPriceByFixedInTheChannelAndAppliesOnProduct(
+        string $name,
+        int $priority,
+        int $discount,
+        ChannelInterface $channel,
+        ProductInterface $product,
+    ): void {
+        $catalogPromotion = $this->createCatalogPromotion(
+            name: $name,
+            channels: [$channel],
+            scopes: [[
+                'type' => InForProductScopeVariantChecker::TYPE,
+                'configuration' => ['products' => [$product->getCode()]],
+            ]],
+            actions: [[
+                'type' => FixedDiscountPriceCalculator::TYPE,
+                'configuration' => [$channel->getCode() => ['amount' => $discount / 100]],
+            ]],
+            priority: $priority,
+            enabled: false,
+        );
+
+        $this->entityManager->flush();
+
+        $this->eventBus->dispatch(new CatalogPromotionUpdated($catalogPromotion->getCode()));
     }
 
     private function createCatalogPromotion(
@@ -779,7 +855,7 @@ final class CatalogPromotionContext implements Context
         array $channels = [],
         array $scopes = [],
         array $actions = [],
-        int $priority = null,
+        ?int $priority = null,
         bool $exclusive = false,
         ?string $startDate = null,
         ?string $endDate = null,

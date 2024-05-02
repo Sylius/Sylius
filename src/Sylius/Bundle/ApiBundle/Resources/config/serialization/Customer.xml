@@ -17,51 +17,170 @@
 >
     <class name="Sylius\Component\Core\Model\Customer">
         <attribute name="id">
-            <group>admin:customer:read</group>
+            <group>admin:customer:index</group>
+            <group>sylius:admin:customer:index</group>
+            <group>admin:customer:show</group>
+            <group>sylius:admin:customer:show</group>
         </attribute>
 
         <attribute name="email">
-            <group>admin:customer:read</group>
-            <group>shop:customer:read</group>
+            <group>admin:customer:create</group>
+            <group>sylius:admin:customer:create</group>
+            <group>admin:customer:index</group>
+            <group>sylius:admin:customer:index</group>
+            <group>admin:customer:show</group>
+            <group>sylius:admin:customer:show</group>
+            <group>admin:customer:update</group>
+            <group>sylius:admin:customer:update</group>
+            <group>shop:customer:show</group>
+            <group>sylius:shop:customer:show</group>
             <group>shop:customer:update</group>
+            <group>sylius:shop:customer:update</group>
         </attribute>
 
         <attribute name="firstName">
-            <group>admin:customer:read</group>
-            <group>shop:customer:read</group>
+            <group>admin:customer:create</group>
+            <group>sylius:admin:customer:create</group>
+            <group>admin:customer:index</group>
+            <group>sylius:admin:customer:index</group>
+            <group>admin:customer:show</group>
+            <group>sylius:admin:customer:show</group>
+            <group>admin:customer:update</group>
+            <group>sylius:admin:customer:update</group>
+            <group>shop:customer:show</group>
+            <group>sylius:shop:customer:show</group>
             <group>shop:customer:update</group>
+            <group>sylius:shop:customer:update</group>
+            <group>shop:product_review:index</group>
+            <group>sylius:shop:product_review:index</group>
+            <group>shop:product_review:show</group>
+            <group>sylius:shop:product_review:show</group>
         </attribute>
 
         <attribute name="lastName">
-            <group>admin:customer:read</group>
-            <group>shop:customer:read</group>
+            <group>admin:customer:create</group>
+            <group>sylius:admin:customer:create</group>
+            <group>admin:customer:index</group>
+            <group>sylius:admin:customer:index</group>
+            <group>admin:customer:show</group>
+            <group>sylius:admin:customer:show</group>
+            <group>admin:customer:update</group>
+            <group>sylius:admin:customer:update</group>
+            <group>shop:customer:show</group>
+            <group>sylius:shop:customer:show</group>
             <group>shop:customer:update</group>
+            <group>sylius:shop:customer:update</group>
         </attribute>
 
         <attribute name="fullName">
-            <group>admin:customer:read</group>
-            <group>shop:customer:read</group>
+            <group>admin:customer:index</group>
+            <group>sylius:admin:customer:index</group>
+            <group>admin:customer:show</group>
+            <group>sylius:admin:customer:show</group>
+            <group>shop:customer:show</group>
+            <group>sylius:shop:customer:show</group>
         </attribute>
 
         <attribute name="defaultAddress">
-            <group>admin:customer:read</group>
-            <group>shop:customer:read</group>
+            <group>admin:customer:index</group>
+            <group>sylius:admin:customer:index</group>
+            <group>admin:customer:show</group>
+            <group>sylius:admin:customer:show</group>
+            <group>shop:customer:show</group>
+            <group>sylius:shop:customer:show</group>
             <group>shop:customer:update</group>
-        </attribute>
-
-        <attribute name="subscribedToNewsletter">
-            <group>shop:customer:read</group>
-            <group>shop:customer:update</group>
+            <group>sylius:shop:customer:update</group>
         </attribute>
 
         <attribute name="user">
-            <group>shop:customer:read</group>
+            <group>admin:customer:create</group>
+            <group>sylius:admin:customer:create</group>
+            <group>admin:customer:update</group>
+            <group>sylius:admin:customer:update</group>
+            <group>admin:customer:index</group>
+            <group>sylius:admin:customer:index</group>
+            <group>admin:customer:show</group>
+            <group>sylius:admin:customer:show</group>
+            <group>shop:customer:show</group>
+            <group>sylius:shop:customer:show</group>
+        </attribute>
+
+        <attribute name="group">
+            <group>admin:customer:create</group>
+            <group>sylius:admin:customer:create</group>
+            <group>admin:customer:update</group>
+            <group>sylius:admin:customer:update</group>
+            <group>admin:customer:index</group>
+            <group>sylius:admin:customer:index</group>
+            <group>admin:customer:show</group>
+            <group>sylius:admin:customer:show</group>
         </attribute>
 
         <attribute name="gender">
-            <group>admin:customer:read</group>
-            <group>shop:customer:read</group>
+            <group>admin:customer:create</group>
+            <group>sylius:admin:customer:create</group>
+            <group>admin:customer:index</group>
+            <group>sylius:admin:customer:index</group>
+            <group>admin:customer:show</group>
+            <group>sylius:admin:customer:show</group>
+            <group>admin:customer:update</group>
+            <group>sylius:admin:customer:update</group>
+            <group>shop:customer:show</group>
+            <group>sylius:shop:customer:show</group>
             <group>shop:customer:update</group>
+            <group>sylius:shop:customer:update</group>
+        </attribute>
+
+        <attribute name="birthday">
+            <group>admin:customer:create</group>
+            <group>sylius:admin:customer:create</group>
+            <group>admin:customer:index</group>
+            <group>sylius:admin:customer:index</group>
+            <group>admin:customer:show</group>
+            <group>sylius:admin:customer:show</group>
+            <group>admin:customer:update</group>
+            <group>sylius:admin:customer:update</group>
+            <group>shop:customer:show</group>
+            <group>sylius:shop:customer:show</group>
+            <group>shop:customer:update</group>
+            <group>sylius:shop:customer:update</group>
+        </attribute>
+
+        <attribute name="phoneNumber">
+            <group>admin:customer:create</group>
+            <group>sylius:admin:customer:create</group>
+            <group>admin:customer:index</group>
+            <group>sylius:admin:customer:index</group>
+            <group>admin:customer:show</group>
+            <group>sylius:admin:customer:show</group>
+            <group>admin:customer:update</group>
+            <group>sylius:admin:customer:update</group>
+            <group>shop:customer:show</group>
+            <group>sylius:shop:customer:show</group>
+            <group>shop:customer:update</group>
+            <group>sylius:shop:customer:update</group>
+        </attribute>
+
+        <attribute name="subscribedToNewsletter">
+            <group>admin:customer:create</group>
+            <group>sylius:admin:customer:create</group>
+            <group>admin:customer:index</group>
+            <group>sylius:admin:customer:index</group>
+            <group>admin:customer:show</group>
+            <group>sylius:admin:customer:show</group>
+            <group>admin:customer:update</group>
+            <group>sylius:admin:customer:update</group>
+            <group>shop:customer:show</group>
+            <group>sylius:shop:customer:show</group>
+            <group>shop:customer:update</group>
+            <group>sylius:shop:customer:update</group>
+        </attribute>
+
+        <attribute name="createdAt">
+            <group>admin:customer:index</group>
+            <group>sylius:admin:customer:index</group>
+            <group>admin:customer:show</group>
+            <group>sylius:admin:customer:show</group>
         </attribute>
     </class>
 </serializer>

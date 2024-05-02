@@ -16,14 +16,20 @@
             <collectionOperation name="get">
                 <attribute name="method">GET</attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">foo:read</attribute>
+                    <attribute name="groups">
+                        <attribute>foo:read</attribute>
+                        <attribute>sylius:foo:read</attribute>
+                    </attribute>
                 </attribute>
             </collectionOperation>
 
             <collectionOperation name="post">
                 <attribute name="method">POST</attribute>
                 <attribute name="denormalization_context">
-                    <attribute name="groups">foo:create</attribute>
+                    <attribute name="groups">
+                        <attribute>foo:create</attribute>
+                        <attribute>sylius:foo:create</attribute>
+                    </attribute>
                 </attribute>
             </collectionOperation>
 
@@ -34,7 +40,10 @@
                 <attribute name="input">Sylius\Bundle\ApiBundle\Application\Command\FooCommand</attribute>
                 <attribute name="output">false</attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">foo:read</attribute>
+                    <attribute name="groups">
+                        <attribute>foo:read</attribute>
+                        <attribute>sylius:foo:read</attribute>
+                    </attribute>
                 </attribute>
             </collectionOperation>
         </collectionOperations>
@@ -43,7 +52,10 @@
             <itemOperation name="get">
                 <attribute name="method">GET</attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">foo:read</attribute>
+                    <attribute name="groups">
+                        <attribute>foo:read</attribute>
+                        <attribute>sylius:foo:read</attribute>
+                    </attribute>
                 </attribute>
             </itemOperation>
 
@@ -51,7 +63,10 @@
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/admin/foos/{id}</attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">foo:read</attribute>
+                    <attribute name="groups">
+                        <attribute>foo:read</attribute>
+                        <attribute>sylius:foo:read</attribute>
+                    </attribute>
                 </attribute>
             </itemOperation>
         </itemOperations>

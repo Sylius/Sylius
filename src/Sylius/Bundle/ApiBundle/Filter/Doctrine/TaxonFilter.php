@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\Filter\Doctrine;
 
-use ApiPlatform\Core\Api\IriConverterInterface;
+use ApiPlatform\Api\IriConverterInterface;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\AbstractContextAwareFilter;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Util\QueryNameGeneratorInterface;
 use ApiPlatform\Core\Exception\InvalidArgumentException;
@@ -37,7 +37,7 @@ final class TaxonFilter extends AbstractContextAwareFilter
         QueryBuilder $queryBuilder,
         QueryNameGeneratorInterface $queryNameGenerator,
         string $resourceClass,
-        string $operationName = null,
+        ?string $operationName = null,
         array $context = [],
     ) {
         if ($property !== 'taxon') {
@@ -48,7 +48,7 @@ final class TaxonFilter extends AbstractContextAwareFilter
 
         try {
             /** @var TaxonInterface $taxon */
-            $taxon = $this->iriConverter->getItemFromIri($value);
+            $taxon = $this->iriConverter->getResourceFromIri($value);
             $taxonRoot = $taxon->getRoot();
         } catch (InvalidArgumentException|ItemNotFoundException $argumentException) {
             $taxonRoot = null;

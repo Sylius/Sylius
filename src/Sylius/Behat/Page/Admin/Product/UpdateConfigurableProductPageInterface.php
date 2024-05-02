@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Behat\Page\Admin\Product;
 
 use Sylius\Behat\Page\Admin\Crud\UpdatePageInterface;
+use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
 
 interface UpdateConfigurableProductPageInterface extends UpdatePageInterface
@@ -30,7 +31,7 @@ interface UpdateConfigurableProductPageInterface extends UpdatePageInterface
 
     public function isProductOptionsDisabled(): bool;
 
-    public function isMainTaxonChosen(string $taxonName): bool;
+    public function hasMainTaxonWithName(string $taxonName): bool;
 
     public function selectMainTaxon(TaxonInterface $taxon): void;
 
@@ -38,7 +39,9 @@ interface UpdateConfigurableProductPageInterface extends UpdatePageInterface
 
     public function isImageWithTypeDisplayed(string $type): bool;
 
-    public function attachImage(string $path, string $type = null): void;
+    public function hasLastImageAVariant(ProductVariantInterface $productVariant): bool;
+
+    public function attachImage(string $path, ?string $type = null, ?ProductVariantInterface $productVariant = null): void;
 
     public function changeImageWithType(string $type, string $path): void;
 
@@ -47,6 +50,8 @@ interface UpdateConfigurableProductPageInterface extends UpdatePageInterface
     public function removeFirstImage(): void;
 
     public function modifyFirstImageType(string $type): void;
+
+    public function selectVariantForFirstImage(ProductVariantInterface $productVariant): void;
 
     public function countImages(): int;
 

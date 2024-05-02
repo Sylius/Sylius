@@ -45,7 +45,10 @@
                     </attribute>
                 </attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:avatar_image:read</attribute>
+                    <attribute name="groups">
+                        <attribute>admin:avatar_image:show</attribute>
+                        <attribute>sylius:admin:avatar_image:show</attribute>
+                    </attribute>
                 </attribute>
             </collectionOperation>
         </collectionOperations>
@@ -54,7 +57,22 @@
             <itemOperation name="admin_get">
                 <attribute name="method">GET</attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:avatar_image:read</attribute>
+                    <attribute name="groups">
+                        <attribute>admin:avatar_image:show</attribute>
+                        <attribute>sylius:admin:avatar_image:show</attribute>
+                    </attribute>
+                </attribute>
+                <attribute name="openapi_context">
+                    <attribute name="parameters">
+                        <attribute>
+                            <attribute name="name">imageFilter</attribute>
+                            <attribute name="in">query</attribute>
+                            <attribute name="description">Provide one of supported image liip imagine filters</attribute>
+                            <attribute name="schema">
+                                <attribute name="type">string</attribute>
+                            </attribute>
+                        </attribute>
+                    </attribute>
                 </attribute>
             </itemOperation>
 

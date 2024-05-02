@@ -1029,12 +1029,27 @@ sylius_ui:
                     context:
                         event: sylius.shop.checkout.select_payment.before_navigation
 
+        sylius.shop.checkout.select_payment.choice_item_content:
+            blocks:
+                description:
+                    template: "@SyliusShop/Checkout/SelectPayment/_description.html.twig"
+
         sylius.shop.checkout.select_shipping.before_navigation:
             blocks:
                 legacy:
                     template: "@SyliusUi/Block/_legacySonataEvent.html.twig"
                     context:
                         event: sylius.shop.checkout.select_shipping.before_navigation
+
+        sylius.shop.checkout.select_shipping.choice_item_content:
+            blocks:
+                description:
+                    template: "@SyliusShop/Checkout/SelectShipping/_description.html.twig"
+
+        sylius.shop.checkout.select_shipping.choice_item_extra:
+            blocks:
+                shipping_fee:
+                    template: "@SyliusShop/Checkout/SelectShipping/_fee.html.twig"
 
         sylius.shop.product.show.left_sidebar:
             blocks:

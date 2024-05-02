@@ -1,0 +1,85 @@
+<?xml version="1.0" ?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Sylius Sp. z o.o.
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<serializer xmlns="http://symfony.com/schema/dic/serializer-mapping"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xsi:schemaLocation="http://symfony.com/schema/dic/serializer-mapping https://symfony.com/schema/dic/serializer-mapping/serializer-mapping-1.0.xsd"
+>
+    <class name="Sylius\Component\Core\Model\TaxonImage">
+        <attribute name="id">
+            <group>admin:taxon_image:index</group>
+            <group>sylius:admin:taxon_image:index</group>
+            <group>admin:taxon_image:show</group>
+            <group>sylius:admin:taxon_image:show</group>
+            <group>shop:taxon_image:index</group>
+            <group>sylius:shop:taxon_image:index</group>
+            <group>shop:taxon_image:show</group>
+            <group>sylius:shop:taxon_image:show</group>
+            <group>admin:taxon:index</group>
+            <group>sylius:admin:taxon:index</group>
+            <group>admin:taxon:show</group>
+            <group>sylius:admin:taxon:show</group>
+            <group>shop:taxon:index</group>
+            <group>sylius:shop:taxon:index</group>
+            <group>shop:taxon:show</group>
+            <group>sylius:shop:taxon:show</group>
+        </attribute>
+
+        <attribute name="path">
+            <group>admin:taxon_image:index</group>
+            <group>sylius:admin:taxon_image:index</group>
+            <group>admin:taxon_image:show</group>
+            <group>sylius:admin:taxon_image:show</group>
+            <group>shop:taxon_image:index</group>
+            <group>sylius:shop:taxon_image:index</group>
+            <group>shop:taxon_image:show</group>
+            <group>sylius:shop:taxon_image:show</group>
+            <group>admin:taxon:index</group>
+            <group>sylius:admin:taxon:index</group>
+            <group>admin:taxon:show</group>
+            <group>sylius:admin:taxon:show</group>
+            <group>shop:taxon:index</group>
+            <group>sylius:shop:taxon:index</group>
+            <group>shop:taxon:show</group>
+            <group>sylius:shop:taxon:show</group>
+        </attribute>
+
+        <attribute name="owner">
+            <group>admin:taxon_image:index</group>
+            <group>sylius:admin:taxon_image:index</group>
+            <group>admin:taxon_image:show</group>
+            <group>sylius:admin:taxon_image:show</group>
+        </attribute>
+
+        <attribute name="type">
+            <group>admin:taxon_image:index</group>
+            <group>sylius:admin:taxon_image:index</group>
+            <group>admin:taxon_image:show</group>
+            <group>sylius:admin:taxon_image:show</group>
+            <group>admin:taxon_image:update</group>
+            <group>sylius:admin:taxon_image:update</group>
+            <group>shop:taxon_image:index</group>
+            <group>sylius:shop:taxon_image:index</group>
+            <group>shop:taxon_image:show</group>
+            <group>sylius:shop:taxon_image:show</group>
+            <group>admin:taxon:index</group>
+            <group>sylius:admin:taxon:index</group>
+            <group>admin:taxon:show</group>
+            <group>sylius:admin:taxon:show</group>
+            <group>shop:taxon:index</group>
+            <group>sylius:shop:taxon:index</group>
+            <group>shop:taxon:show</group>
+            <group>sylius:shop:taxon:show</group>
+        </attribute>
+    </class>
+</serializer>

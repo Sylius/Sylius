@@ -25,15 +25,19 @@
         <field name="encoderName" column="encoder_name" type="string" nullable="true" />
 
         <field name="lastLogin" column="last_login" type="datetime" nullable="true" />
-        <field name="passwordResetToken" column="password_reset_token" type="string" nullable="true" />
+        <field name="passwordResetToken" column="password_reset_token" type="string" unique="true" nullable="true" />
         <field name="passwordRequestedAt" column="password_requested_at" type="datetime" nullable="true" />
-        <field name="emailVerificationToken" column="email_verification_token" type="string" nullable="true" />
+        <field name="emailVerificationToken" column="email_verification_token" type="string" unique="true" nullable="true" />
         <field name="verifiedAt" column="verified_at" type="datetime" nullable="true" />
 
         <field name="locked" column="locked" type="boolean" nullable="false" />
         <field name="expiresAt" column="expires_at" type="datetime" nullable="true" />
         <field name="credentialsExpireAt" column="credentials_expire_at" type="datetime" nullable="true" />
-        <field name="roles" column="roles" type="array" nullable="false" />
+        <field name="roles" column="roles" type="json" nullable="false">
+            <options>
+                <option name="jsonb">true</option>
+            </options>
+        </field>
         <field name="email" column="email" type="string" nullable="true" />
         <field name="emailCanonical" column="email_canonical" type="string" nullable="true" />
         <field name="createdAt" column="created_at" type="datetime">

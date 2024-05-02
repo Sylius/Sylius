@@ -3,8 +3,12 @@ name: Refactor
 on:
     schedule:
         -
-            cron: "0 2 * * MON" # Run at 2am every Monday
+            cron: "0 2 * * *" # Run every day at 2am
     workflow_dispatch: ~
+
+permissions:
+    contents: write
+    pull-requests: write
 
 jobs:
     coding-standard:
@@ -19,11 +23,20 @@ jobs:
         strategy:
             fail-fast: false
             matrix:
-                branch: ["1.11", "1.12", "1.13"]
+                include:
+                    -
+                        branch: "1.12"
+                        php: "8.0"
+                    -
+                        branch: "1.13"
+                        php: "8.1"
+                    -
+                        branch: "2.0"
+                        php: "8.2"
 
         steps:
             -
-                uses: actions/checkout@v3
+                uses: actions/checkout@v4
                 with:
                     ref: ${{ matrix.branch }}
 
@@ -31,7 +44,7 @@ jobs:
                 name: Setup PHP
                 uses: shivammathur/setup-php@v2
                 with:
-                    php-version: 8.0 # the lowest PHP version working with ECS
+                    php-version: ${{ matrix.php }}
 
             -
                 name: Install PHP dependencies

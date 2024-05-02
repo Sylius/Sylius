@@ -13,7 +13,6 @@
 
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <imports>
-        <import resource="admin/dashboard.xml" />
         <import resource="admin/account.xml" />
         <import resource="admin/admin_user.xml" />
         <import resource="admin/catalog_promotion.xml" />
@@ -22,13 +21,15 @@
         <import resource="admin/currency.xml" />
         <import resource="admin/customer.xml" />
         <import resource="admin/customer_group.xml" />
+        <import resource="admin/dashboard.xml" />
         <import resource="admin/exchange_rate.xml" />
-        <import resource="admin/inventory.xml" />
         <import resource="admin/impersonate_user.xml" />
+        <import resource="admin/inventory.xml" />
         <import resource="admin/locale.xml" />
         <import resource="admin/order.xml" />
         <import resource="admin/payment.xml" />
         <import resource="admin/payment_method.xml" />
+        <import resource="admin/price_history.xml" />
         <import resource="admin/product.xml" />
         <import resource="admin/product_association_type.xml" />
         <import resource="admin/product_attribute.xml" />

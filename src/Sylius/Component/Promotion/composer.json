@@ -25,7 +25,7 @@
         }
     ],
     "require": {
-        "php": "^8.0",
+        "php": "^8.1",
         "doctrine/orm": "^2.13",
         "sylius/registry": "^1.5",
         "sylius/resource": "^1.9"
@@ -43,7 +43,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-main": "1.12-dev"
+            "dev-main": "1.13-dev"
         }
     },
     "autoload": {

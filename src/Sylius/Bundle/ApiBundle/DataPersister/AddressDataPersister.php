@@ -20,7 +20,6 @@ use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
 
-/** @experimental */
 final class AddressDataPersister implements ContextAwareDataPersisterInterface
 {
     public function __construct(

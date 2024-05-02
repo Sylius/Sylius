@@ -20,7 +20,11 @@ class ChannelNotFoundException extends \RuntimeException
         $message = 'Channel could not be found! Tip: You can use the Web Debug Toolbar to switch between channels in development.';
 
         if ($messageOrPreviousException instanceof \Throwable) {
-            @trigger_error('Passing previous exception as the first argument is deprecated since 1.2 and will be prohibited since 2.0.', \E_USER_DEPRECATED);
+            trigger_deprecation(
+                'sylius/channel',
+                '1.2',
+                'Passing previous exception as the first argument is deprecated and will be prohibited since Sylius 2.0.',
+            );
             $previousException = $messageOrPreviousException;
         }
 

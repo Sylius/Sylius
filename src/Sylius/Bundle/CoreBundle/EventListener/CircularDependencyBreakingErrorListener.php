@@ -56,7 +56,7 @@ final class CircularDependencyBreakingErrorListener extends ErrorListener
         $this->decoratedListener->logKernelException($event);
     }
 
-    public function onKernelException(ExceptionEvent $event, string $eventName = null, EventDispatcherInterface $eventDispatcher = null): void
+    public function onKernelException(ExceptionEvent $event, ?string $eventName = null, ?EventDispatcherInterface $eventDispatcher = null): void
     {
         try {
             /** @phpstan-ignore-next-line */

@@ -40,7 +40,7 @@ final class ResettingPasswordContext implements Context
      */
     public function iWantToResetPassword(): void
     {
-        $this->request = $this->requestFactory->create('admin', 'reset-password-requests', 'Bearer');
+        $this->request = $this->requestFactory->create('admin', 'administrators/reset-password', 'Bearer');
     }
 
     /**
@@ -67,7 +67,7 @@ final class ResettingPasswordContext implements Context
     public function iFollowTheInstructionsToResetMyPassword(AdminUserInterface $admin): void
     {
         $this->request = $this->requestFactory->custom(
-            sprintf('%s/admin/reset-password-requests/%s', $this->apiUrlPrefix, $admin->getPasswordResetToken()),
+            sprintf('%s/admin/administrators/reset-password/%s', $this->apiUrlPrefix, $admin->getPasswordResetToken()),
             HttpRequest::METHOD_PATCH,
         );
     }
@@ -115,9 +115,9 @@ final class ResettingPasswordContext implements Context
 
         $lastResponse = $this->client->getLastResponse();
 
-        Assert::same($lastResponse->getStatusCode(), Response::HTTP_INTERNAL_SERVER_ERROR);
+        Assert::same($lastResponse->getStatusCode(), Response::HTTP_NOT_FOUND);
         $message = $this->responseChecker->getError($lastResponse);
-        Assert::startsWith($message, 'Internal Server Error');
+        Assert::startsWith($message, 'No user found with reset token:');
     }
 
     /**

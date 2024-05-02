@@ -40,6 +40,7 @@ class PromotionFixture extends AbstractResourceFixture
                 ->end()
                 ->scalarNode('starts_at')->cannotBeEmpty()->end()
                 ->scalarNode('ends_at')->cannotBeEmpty()->end()
+                ->scalarNode('archived_at')->defaultNull()->end()
                 ->arrayNode('rules')
                     ->requiresAtLeastOneElement()
                     ->arrayPrototype()

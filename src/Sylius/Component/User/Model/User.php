@@ -38,7 +38,7 @@ class User implements UserInterface, \Stringable
     /**
      * Random data that is used as an additional input to a function that hashes a password.
      *
-     * @var string
+     * @var string|null
      */
     protected $salt;
 
@@ -175,7 +175,7 @@ class User implements UserInterface, \Stringable
         return (string) $this->usernameCanonical;
     }
 
-    public function getSalt(): string
+    public function getSalt(): ?string
     {
         return $this->salt;
     }
@@ -403,7 +403,7 @@ class User implements UserInterface, \Stringable
     /**
      * @internal
      *
-     * @deprecated since 1.11 and will be removed in Sylius 2.0, use \Sylius\Component\User\Model\User::__serialize() or \serialize($user) in PHP 8.1 instead
+     * @deprecated since Sylius 1.11 and will be removed in Sylius 2.0, use \Sylius\Component\User\Model\User::__serialize() or \serialize($user) in PHP 8.1 instead
      */
     public function serialize(): string
     {
@@ -433,7 +433,7 @@ class User implements UserInterface, \Stringable
      *
      * @internal
      *
-     * @deprecated since 1.11 and will be removed in Sylius 2.0, use \Sylius\Component\User\Model\User::__unserialize() or \unserialize($serialized) in PHP 8.1 instead
+     * @deprecated since Sylius 1.11 and will be removed in Sylius 2.0, use \Sylius\Component\User\Model\User::__unserialize() or \unserialize($serialized) in PHP 8.1 instead
      */
     public function unserialize($serialized): void
     {

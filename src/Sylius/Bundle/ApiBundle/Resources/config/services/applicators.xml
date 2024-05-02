@@ -23,15 +23,20 @@
         </service>
 
         <service id="Sylius\Bundle\ApiBundle\Applicator\OrderStateMachineTransitionApplicatorInterface" class="Sylius\Bundle\ApiBundle\Applicator\OrderStateMachineTransitionApplicator">
-            <argument id="sm.factory" type="service" />
+            <argument type="service" id="sylius_abstraction.state_machine" />
         </service>
 
         <service id="Sylius\Bundle\ApiBundle\Applicator\PaymentStateMachineTransitionApplicatorInterface" class="Sylius\Bundle\ApiBundle\Applicator\PaymentStateMachineTransitionApplicator">
-            <argument id="sm.factory" type="service" />
+            <argument type="service" id="sylius_abstraction.state_machine" />
         </service>
 
         <service id="Sylius\Bundle\ApiBundle\Applicator\ProductReviewStateMachineTransitionApplicatorInterface" class="Sylius\Bundle\ApiBundle\Applicator\ProductReviewStateMachineTransitionApplicator">
-            <argument id="sm.factory" type="service" />
+            <argument type="service" id="sylius_abstraction.state_machine" />
         </service>
+
+        <service id="sylius.api.applicator.archiving_promotion" class="Sylius\Bundle\ApiBundle\Applicator\ArchivingPromotionApplicator">
+            <argument type="service" id="Sylius\Calendar\Provider\DateTimeProviderInterface" />
+        </service>
+        <service id="Sylius\Bundle\ApiBundle\Applicator\ArchivingPromotionApplicatorInterface" alias="sylius.api.applicator.archiving_promotion" />
     </services>
 </container>

@@ -34,3 +34,10 @@ Feature: Product association type validation
         And I try to save my changes
         Then I should be notified that name is required
         And this product association type should still be named "Cross sell"
+
+    @no-ui @api
+    Scenario: Trying to add product association type translation in unexisting locale
+        When I want to modify the "Cross sell" product association type
+        And I name it "Vente croisée" in "French (France)"
+        And I save my changes
+        Then I should be notified that the locale is not available

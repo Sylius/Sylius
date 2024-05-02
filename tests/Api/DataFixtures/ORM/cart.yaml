@@ -32,6 +32,7 @@ Sylius\Component\Core\Model\ProductVariant:
         optionValues: ['@product_option_value_color_blue']
         channelPricings:
             WEB: '@channel_pricing_product_variant_mug_blue_web'
+            MOBILE: '@channel_pricing_product_variant_mug_blue_mobile'
     product_variant_mug_nft:
         channelPricings:
             WEB: '@channel_pricing_product_variant_mug_nft_web'
@@ -77,6 +78,9 @@ Sylius\Component\Core\Model\ChannelPricing:
     channel_pricing_product_variant_free_mug_nft_web:
         channelCode: 'WEB'
         price: 0
+    channel_pricing_product_variant_mug_blue_mobile:
+        channelCode: 'MOBILE'
+        price: 2000
 
 Sylius\Component\Product\Model\ProductOption:
     product_option_color:

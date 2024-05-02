@@ -139,6 +139,7 @@ final class CustomerContext implements Context
 
     /**
      * @Given /^(the customer) belongs to (group "([^"]+)")$/
+     * @Given /^(this customer) belongs to (group "([^"]+)")$/
      */
     public function theCustomerBelongsToGroup(CustomerInterface $customer, CustomerGroupInterface $customerGroup)
     {
@@ -179,7 +180,7 @@ final class CustomerContext implements Context
         $email,
         $firstName = null,
         $lastName = null,
-        \DateTimeInterface $createdAt = null,
+        ?\DateTimeInterface $createdAt = null,
         $phoneNumber = null,
     ) {
         /** @var CustomerInterface $customer */
@@ -225,6 +226,8 @@ final class CustomerContext implements Context
         $customer->setFirstName($firstName);
         $customer->setLastName($lastName);
         $customer->setEmail($email);
+        $customer->setPhoneNumber('123456789');
+        $customer->setGender('m');
 
         $user->setUsername($email);
         $user->setPlainPassword($password);

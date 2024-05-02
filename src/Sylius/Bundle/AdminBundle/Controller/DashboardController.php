@@ -15,7 +15,6 @@ namespace Sylius\Bundle\AdminBundle\Controller;
 
 use Sylius\Bundle\AdminBundle\Provider\StatisticsDataProviderInterface;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
-use Sylius\Component\Core\Dashboard\SalesDataProviderInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -31,7 +30,6 @@ final class DashboardController
         private ChannelRepositoryInterface $channelRepository,
         private Environment $templatingEngine,
         private RouterInterface $router,
-        private ?SalesDataProviderInterface $salesDataProvider = null, /** @phpstan-ignore-line */
         private ?StatisticsDataProviderInterface $statisticsDataProvider = null,
     ) {
     }

@@ -15,7 +15,7 @@ namespace Sylius\Bundle\CoreBundle\CatalogPromotion\Processor;
 
 use Sylius\Bundle\CoreBundle\CatalogPromotion\CommandDispatcher\ApplyCatalogPromotionsOnVariantsCommandDispatcherInterface;
 use Sylius\Component\Core\Model\ProductInterface;
-use Sylius\Component\Core\Model\ProductVariantInterface;
+use Sylius\Component\Product\Model\ProductVariantInterface;
 
 final class ProductCatalogPromotionsProcessor implements ProductCatalogPromotionsProcessorInterface
 {

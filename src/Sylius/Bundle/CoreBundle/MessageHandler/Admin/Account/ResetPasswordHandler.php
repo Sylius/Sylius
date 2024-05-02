@@ -25,6 +25,6 @@ final class ResetPasswordHandler implements MessageHandlerInterface
 
     public function __invoke(ResetPassword $command): void
     {
-        $this->userPasswordResetter->reset($command->resetPasswordToken, $command->newPassword);
+        $this->userPasswordResetter->reset($command->token, $command->newPassword);
     }
 }

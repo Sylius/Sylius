@@ -20,16 +20,17 @@ final class FilesystemRequirements extends RequirementCollection
     /**
      * @param string $rootDir Deprecated.
      */
-    public function __construct(TranslatorInterface $translator, string $cacheDir, string $logsDir, string $rootDir = null)
+    public function __construct(TranslatorInterface $translator, string $cacheDir, string $logsDir, ?string $rootDir = null)
     {
         parent::__construct($translator->trans('sylius.installer.filesystem.header', []));
 
         if (func_num_args() >= 4) {
-            @trigger_error(sprintf(
-                'Passing root directory to "%s" constructor as the second argument is deprecated since 1.2 ' .
-                'and this argument will be removed in 2.0.',
+            trigger_deprecation(
+                'sylius/core-bundle',
+                '1.2',
+                'Passing root directory to "%s" constructor as the second argument is deprecated and this argument will be removed in Sylius 2.0.',
                 self::class,
-            ), \E_USER_DEPRECATED);
+            );
 
             [$rootDir, $cacheDir, $logsDir] = [$cacheDir, $logsDir, $rootDir];
         }

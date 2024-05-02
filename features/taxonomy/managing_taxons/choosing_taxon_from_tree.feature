@@ -1,4 +1,4 @@
-@managing_taxons
+@managing_taxons_ajax
 Feature: Browsing taxons tree
     In order to see all taxons in the store
     As an Administrator

@@ -15,11 +15,16 @@ namespace Sylius\Bundle\PromotionBundle\Validator;
 
 use Sylius\Bundle\PromotionBundle\Validator\CatalogPromotionScope\ScopeValidatorInterface;
 use Sylius\Bundle\PromotionBundle\Validator\Constraints\CatalogPromotionScope;
-use Sylius\Component\Promotion\Model\CatalogPromotionScopeInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 use Webmozart\Assert\Assert;
 
+trigger_deprecation(
+    'sylius/promotion-bundle',
+    '1.13',
+    'The "%s" class is deprecated and will be removed in Sylius 2.0, use the usual symfony logic for validation.',
+    CatalogPromotionScopeValidator::class,
+);
 final class CatalogPromotionScopeValidator extends ConstraintValidator
 {
     private array $scopeValidators;
@@ -29,17 +34,10 @@ final class CatalogPromotionScopeValidator extends ConstraintValidator
         $this->scopeValidators = $scopeValidators instanceof \Traversable ? iterator_to_array($scopeValidators) : $scopeValidators;
     }
 
-    public function validate($value, Constraint $constraint): void
+    public function validate(mixed $value, Constraint $constraint): void
     {
         /** @var CatalogPromotionScope $constraint */
         Assert::isInstanceOf($constraint, CatalogPromotionScope::class);
-
-        /** @var CatalogPromotionScopeInterface $value */
-        if (!in_array($value->getType(), $this->scopeTypes, true)) {
-            $this->context->buildViolation($constraint->invalidType)->atPath('type')->addViolation();
-
-            return;
-        }
 
         $type = $value->getType();
         if (!array_key_exists($type, $this->scopeValidators)) {

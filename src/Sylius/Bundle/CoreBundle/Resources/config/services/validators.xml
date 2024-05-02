@@ -17,6 +17,7 @@
 
         <service id="sylius.validator.has_enabled_entity" class="Sylius\Bundle\CoreBundle\Validator\Constraints\HasEnabledEntityValidator">
             <argument type="service" id="doctrine" />
+            <argument type="service" id="property_accessor" />
             <tag name="validator.constraint_validator" alias="sylius_has_enabled_entity" />
         </service>
         <service id="sylius.validator.customer_initializer" class="Sylius\Bundle\CoreBundle\Validator\Initializer\CustomerInitializer">
@@ -36,6 +37,10 @@
         </service>
         <service id="sylius.validator.has_all_variant_prices_defined" class="Sylius\Bundle\CoreBundle\Validator\Constraints\HasAllVariantPricesDefinedValidator">
             <tag name="validator.constraint_validator" alias="sylius_has_all_variant_prices_defined" />
+        </service>
+        <service id="sylius.validator.translation_for_existing_locales" class="Sylius\Bundle\CoreBundle\Validator\Constraints\TranslationForExistingLocalesValidator">
+            <argument type="service" id="sylius.repository.locale" />
+            <tag name="validator.constraint_validator" alias="sylius_translation_for_existing_locales" />
         </service>
         <service id="sylius.validator.unique_reviewer_email" class="Sylius\Bundle\CoreBundle\Validator\Constraints\UniqueReviewerEmailValidator">
             <argument type="service" id="sylius.repository.shop_user" />
@@ -61,6 +66,62 @@
         </service>
         <service id="sylius.validator.channel_default_locale_enabled" class="Sylius\Bundle\CoreBundle\Validator\Constraints\ChannelDefaultLocaleEnabledValidator">
             <tag name="validator.constraint_validator" alias="sylius_channel_default_locale_enabled" />
+        </service>
+
+        <service id="sylius.validator.channel_code_among_existing_ones" class="Sylius\Bundle\CoreBundle\Validator\Constraints\ExistingChannelCodeValidator">
+            <argument type="service" id="sylius.repository.channel" />
+            <tag name="validator.constraint_validator" alias="sylius_channel_code_among_existing_ones" />
+        </service>
+
+        <service id="sylius.validator.channel_code_collection" class="Sylius\Bundle\CoreBundle\Validator\Constraints\ChannelCodeCollectionValidator">
+            <argument type="service" id="sylius.repository.channel" />
+            <argument type="service" id="property_accessor" />
+            <tag name="validator.constraint_validator" alias="sylius_channel_code_collection" />
+        </service>
+
+        <service id="sylius.validator.customer_group_code_exists" class="Sylius\Bundle\CoreBundle\Validator\Constraints\CustomerGroupCodeExistsValidator">
+            <argument type="service" id="sylius.repository.customer_group" />
+            <tag name="validator.constraint_validator" alias="sylius_customer_group_code_exists" />
+        </service>
+
+        <service id="sylius.validator.country_code_exists" class="Sylius\Bundle\CoreBundle\Validator\Constraints\CountryCodeExistsValidator">
+            <argument type="service" id="sylius.repository.country" />
+            <tag name="validator.constraint_validator" alias="sylius_country_code_exists" />
+        </service>
+
+        <service id="sylius.validator.taxon_code_exists" class="Sylius\Bundle\CoreBundle\Validator\Constraints\TaxonCodeExistsValidator">
+            <argument type="service" id="sylius.repository.taxon" />
+            <tag name="validator.constraint_validator" alias="sylius_taxon_code_exists" />
+        </service>
+
+        <service id="sylius.validator.product_code_exists" class="Sylius\Bundle\CoreBundle\Validator\Constraints\ProductCodeExistsValidator">
+            <argument type="service" id="sylius.repository.product" />
+            <tag name="validator.constraint_validator" alias="sylius_product_code_exists" />
+        </service>
+
+        <service id="sylius.validator.product_variant_code_exists" class="Sylius\Bundle\CoreBundle\Validator\Constraints\ProductVariantCodeExistsValidator">
+            <argument type="service" id="sylius.repository.product_variant" />
+            <tag name="validator.constraint_validator" alias="sylius_product_variant_code_exists" />
+        </service>
+
+        <service id="sylius.validator.order_confirmation_with_valid_order_state" class="Sylius\Bundle\CoreBundle\Validator\Constraints\ResendOrderConfirmationEmailWithValidOrderStateValidator">
+            <argument type="service" id="sylius.repository.order" />
+            <argument>%sylius_order.resend_order_confirmation_email.order_states%</argument>
+            <tag name="validator.constraint_validator" alias="sylius_order_confirmation_with_valid_order_state" />
+        </service>
+
+        <service id="sylius.validator.product_image_variants_belong_to_owner" class="Sylius\Bundle\CoreBundle\Validator\Constraints\ProductImageVariantsBelongToOwnerValidator">
+            <tag name="validator.constraint_validator" alias="sylius_product_image_variants_belong_to_owner" />
+        </service>
+
+        <service id="sylius.validator.shipment_confirmation_with_valid_order_state" class="Sylius\Bundle\CoreBundle\Validator\Constraints\ResendShipmentConfirmationEmailWithValidShipmentStateValidator">
+            <argument type="service" id="sylius.repository.shipment" />
+            <tag name="validator.constraint_validator" alias="sylius_shipment_confirmation_with_valid_shipment_state" />
+        </service>
+
+        <service id="Sylius\Bundle\CoreBundle\Validator\Constraints\MaxIntegerValidator">
+            <argument>%sylius_core.max_int_value%</argument>
+            <tag name="validator.constraint_validator" alias="sylius_max_integer" />
         </service>
     </services>
 </container>

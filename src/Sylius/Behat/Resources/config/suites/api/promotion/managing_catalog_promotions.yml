@@ -25,8 +25,11 @@ default:
                 - Sylius\Behat\Context\Setup\CatalogPromotionContext
 
                 - sylius.behat.context.api.admin.managing_catalog_promotions
+                - sylius.behat.context.api.admin.response
+                - sylius.behat.context.api.admin.save
                 - sylius.behat.context.api.shop.product_variant
                 - Sylius\Behat\Context\Api\Admin\BrowsingCatalogPromotionProductVariantsContext
+                - sylius.behat.context.api.admin.translation
 
             filters:
                 tags: "@managing_catalog_promotions&&@api"

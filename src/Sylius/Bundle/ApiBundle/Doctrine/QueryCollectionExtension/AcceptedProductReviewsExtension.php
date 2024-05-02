@@ -18,7 +18,6 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Util\QueryNameGeneratorInterface;
 use Doctrine\ORM\QueryBuilder;
 use Sylius\Component\Review\Model\ReviewInterface;
 
-/** @experimental */
 final class AcceptedProductReviewsExtension implements ContextAwareQueryCollectionExtensionInterface
 {
     public function __construct(private string $productReviewClass)
@@ -29,7 +28,7 @@ final class AcceptedProductReviewsExtension implements ContextAwareQueryCollecti
         QueryBuilder $queryBuilder,
         QueryNameGeneratorInterface $queryNameGenerator,
         string $resourceClass,
-        string $operationName = null,
+        ?string $operationName = null,
         array $context = [],
     ): void {
         if ($this->productReviewClass !== $resourceClass) {

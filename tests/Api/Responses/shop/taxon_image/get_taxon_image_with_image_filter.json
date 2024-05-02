@@ -1,0 +1,8 @@
+{
+  "@context": "\/api\/v2\/contexts\/TaxonImage",
+  "@id": "\/api\/v2\/shop\/taxon-images\/@integer@",
+  "@type": "TaxonImage",
+  "id": "@integer@",
+  "type": "thumbnail",
+  "path": "@string@.contains('sylius_small').endsWith('thumbnail.jpg')"
+}

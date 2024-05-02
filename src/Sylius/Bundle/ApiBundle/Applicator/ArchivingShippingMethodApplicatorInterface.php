@@ -15,7 +15,6 @@ namespace Sylius\Bundle\ApiBundle\Applicator;
 
 use Sylius\Component\Core\Model\ShippingMethodInterface;
 
-/** @experimental */
 interface ArchivingShippingMethodApplicatorInterface
 {
     public function archive(ShippingMethodInterface $data): ShippingMethodInterface;

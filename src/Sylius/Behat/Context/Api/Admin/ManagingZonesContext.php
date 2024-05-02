@@ -13,10 +13,11 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Api\Admin;
 
-use ApiPlatform\Core\Api\IriConverterInterface;
+use ApiPlatform\Api\IriConverterInterface;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
+use Sylius\Behat\Context\Api\Admin\Helper\ValidationTrait;
 use Sylius\Behat\Context\Api\Resources;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Addressing\Model\CountryInterface;
@@ -27,6 +28,8 @@ use Webmozart\Assert\Assert;
 
 final class ManagingZonesContext implements Context
 {
+    use ValidationTrait;
+
     public function __construct(
         private ApiClientInterface $client,
         private ResponseCheckerInterface $responseChecker,
@@ -102,6 +105,16 @@ final class ManagingZonesContext implements Context
     }
 
     /**
+     * @When I provide a too long zone member code
+     */
+    public function iProvideATooLongZoneMemberCode(): void
+    {
+        $this->client->addSubResourceData('members', [
+            'code' => str_repeat('a', $this->getMaxCodeLength() + 1),
+        ]);
+    }
+
+    /**
      * @When I select its scope as :scope
      */
     public function iSelectItsScopeAs(string $scope): void
@@ -132,29 +145,6 @@ final class ManagingZonesContext implements Context
     public function iDeleteZoneNamed(ZoneInterface $zone): void
     {
         $this->client->delete(Resources::ZONES, $zone->getCode());
-    }
-
-    /**
-     * @When I check (also) the :zone zone
-     */
-    public function iCheckTheZone(ZoneInterface $zone): void
-    {
-        $ZoneToDelete = [];
-        if ($this->sharedStorage->has('zone_to_delete')) {
-            $ZoneToDelete = $this->sharedStorage->get('zone_to_delete');
-        }
-        $ZoneToDelete[] = $zone->getCode();
-        $this->sharedStorage->set('zone_to_delete', $ZoneToDelete);
-    }
-
-    /**
-     * @When I delete them
-     */
-    public function iDeleteThem(): void
-    {
-        foreach ($this->sharedStorage->get('zone_to_delete') as $code) {
-            $this->client->delete(Resources::ZONES, $code);
-        }
     }
 
     /**
@@ -199,14 +189,6 @@ final class ManagingZonesContext implements Context
     public function iRemoveTheZoneMember(ZoneInterface $zone): void
     {
         $this->removeZoneMember($zone);
-    }
-
-    /**
-     * @When I save my changes
-     */
-    public function iSaveMyChanges(): void
-    {
-        $this->client->update();
     }
 
     /**
@@ -421,19 +403,7 @@ final class ManagingZonesContext implements Context
     }
 
     /**
-     * @Then I should be notified that it has been successfully edited
-     */
-    public function iShouldBeNotifiedThatItHasBeenSuccessfullyEdited(): void
-    {
-        Assert::true(
-            $this->responseChecker->isUpdateSuccessful($this->client->getLastResponse()),
-            'Zone could not be edited',
-        );
-    }
-
-    /**
      * @Then I should be notified that it has been successfully deleted
-     * @Then I should be notified that they have been successfully deleted
      */
     public function iShouldBeNotifiedThatItHasBeenSuccessfullyDeleted(): void
     {
@@ -487,6 +457,17 @@ final class ManagingZonesContext implements Context
         Assert::contains(
             $this->responseChecker->getError($this->client->getLastResponse()),
             'members: Please add at least 1 zone member.',
+        );
+    }
+
+    /**
+     * @Then I should be informed that the provided zone member code is too long
+     */
+    public function iShouldBeNotifiedThatTheZoneMemberCodeIsTooLong(): void
+    {
+        Assert::contains(
+            $this->responseChecker->getError($this->client->getLastResponse()),
+            'The zone member code must not be longer than',
         );
     }
 

@@ -14,12 +14,12 @@ declare(strict_types=1);
 namespace spec\Sylius\Component\Promotion\Exception;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Promotion\Generator\PromotionCouponGeneratorInstructionInterface;
+use Sylius\Component\Promotion\Generator\ReadablePromotionCouponGeneratorInstructionInterface;
 
 final class FailedGenerationExceptionSpec extends ObjectBehavior
 {
     function let(
-        PromotionCouponGeneratorInstructionInterface $instruction,
+        ReadablePromotionCouponGeneratorInstructionInterface $instruction,
         \InvalidArgumentException $previousException,
     ): void {
         $instruction->getAmount()->willReturn(17);

@@ -1,0 +1,13 @@
+{
+    "@context": "\/api\/v2\/contexts\/ProductImage",
+    "@id": "\/api\/v2\/admin\/product-images\/@integer@",
+    "@type": "ProductImage",
+    "id": "@integer@",
+    "owner": "\/api\/v2\/admin\/products\/MUG",
+    "type": "logo",
+    "path": "@string@.contains('sylius_original').endsWith('thumbnail.jpg')",
+    "productVariants": [
+        "\/api\/v2\/admin\/product-variants\/MUG_BLUE",
+        "\/api\/v2\/admin\/product-variants\/MUG_RED"
+    ]
+}

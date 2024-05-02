@@ -43,7 +43,7 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
     {
         return array_merge(parent::getDefinedElements(), [
             'reviews' => '[data-test-product-reviews]',
-            'title' => '[data-test-product-reviews] [data-test-comment="%title%"]',
+            'title' => '[data-test-product-reviews] [data-test-title="%title%"]',
         ]);
     }
 }

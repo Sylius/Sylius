@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Sylius Sp. z o.o.
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <defaults public="false" />
+
+        <service id="Sylius\Bundle\CoreBundle\EventListener\Workflow\Payment\ProcessOrderListener">
+            <argument type="service" id="sylius.order_processing.order_payment_processor.after_checkout" />
+            <tag name="kernel.event_listener" event="workflow.sylius_payment.completed.fail" priority="100" />
+            <tag name="kernel.event_listener" event="workflow.sylius_payment.completed.cancel" priority="100" />
+        </service>
+
+        <service id="Sylius\Bundle\CoreBundle\EventListener\Workflow\Payment\ResolveOrderPaymentStateListener">
+            <argument type="service" id="sylius.state_resolver.order_payment" />
+            <tag name="kernel.event_listener" event="workflow.sylius_payment.completed.complete" priority="100" />
+            <tag name="kernel.event_listener" event="workflow.sylius_payment.completed.process" priority="100" />
+            <tag name="kernel.event_listener" event="workflow.sylius_payment.completed.refund" priority="100" />
+            <tag name="kernel.event_listener" event="workflow.sylius_payment.completed.authorize" priority="100" />
+        </service>
+    </services>
+</container>

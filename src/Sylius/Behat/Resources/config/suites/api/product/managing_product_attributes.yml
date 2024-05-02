@@ -1,0 +1,26 @@
+# This file is part of the Sylius package.
+# (c) Sylius Sp. z o.o.
+
+default:
+    suites:
+        api_managing_product_attributes:
+            contexts:
+                - sylius.behat.context.hook.doctrine_orm
+
+                - sylius.behat.context.transform.locale
+                - sylius.behat.context.transform.shared_storage
+
+                - sylius.behat.context.setup.admin_api_security
+                - sylius.behat.context.setup.channel
+                - sylius.behat.context.setup.locale
+                - sylius.behat.context.setup.product
+                - sylius.behat.context.setup.product_attribute
+
+                - sylius.behat.context.api.admin.managing_product_attributes
+                - sylius.behat.context.api.admin.response
+                - sylius.behat.context.api.admin.save
+                - sylius.behat.context.api.admin.translation
+
+            filters:
+                tags: "@managing_product_attributes&&@api"
+            javascript: false

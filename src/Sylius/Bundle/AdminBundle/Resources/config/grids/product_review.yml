@@ -41,6 +41,14 @@ sylius_grid:
                 title:
                     type: string
                     label: sylius.ui.title
+                status:
+                    type: select
+                    label: sylius.ui.status
+                    form_options:
+                        choices:
+                            sylius.ui.new: new
+                            sylius.ui.accepted: accepted
+                            sylius.ui.rejected: rejected
             actions:
                 item:
                     update:

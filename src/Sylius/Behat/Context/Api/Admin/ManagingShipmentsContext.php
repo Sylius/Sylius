@@ -13,11 +13,12 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Api\Admin;
 
-use ApiPlatform\Core\Api\IriConverterInterface;
+use ApiPlatform\Api\IriConverterInterface;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Context\Api\Resources;
+use Sylius\Behat\Service\Converter\SectionAwareIriConverterInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Channel\Model\ChannelInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
@@ -36,6 +37,7 @@ final class ManagingShipmentsContext implements Context
         private ApiClientInterface $client,
         private ResponseCheckerInterface $responseChecker,
         private IriConverterInterface $iriConverter,
+        private SectionAwareIriConverterInterface $sectionAwareIriConverter,
         private SharedStorageInterface $sharedStorage,
         private string $apiUrlPrefix,
     ) {
@@ -55,6 +57,19 @@ final class ManagingShipmentsContext implements Context
     public function iChooseShipmentState(string $state): void
     {
         $this->client->addFilter('state', $state);
+    }
+
+    /**
+     * @When I move to the details of first shipment's order
+     */
+    public function iMoveToDetailsOfFirstShipment(): void
+    {
+        $firstShipment = $this->responseChecker->getCollection($this->client->getLastResponse())[0];
+
+        /** @var OrderInterface $order */
+        $order = $this->iriConverter->getResourceFromIri($firstShipment['order']);
+
+        $this->client->customItemAction(Resources::ORDERS, $order->getTokenValue(), HttpRequest::METHOD_GET, 'shipments');
     }
 
     /**
@@ -140,7 +155,10 @@ final class ManagingShipmentsContext implements Context
      */
     public function iShouldBeNotifiedThatTheShipmentHasBeenSuccessfullyShipped(): void
     {
-        Assert::same($this->responseChecker->getValue($this->client->getLastResponse(), 'state'), 'shipped', 'Shipment is not shipped');
+        Assert::true(
+            $this->responseChecker->isAccepted($this->client->getLastResponse()),
+            'Shipment was not successfully shipped',
+        );
     }
 
     /**
@@ -162,7 +180,7 @@ final class ManagingShipmentsContext implements Context
     {
         Assert::true(
             $this->responseChecker->hasItemWithValues($this->client->index(Resources::SHIPMENTS), [
-                'order' => $this->iriConverter->getIriFromItemInSection($order, 'admin'),
+                'order' => $this->sectionAwareIriConverter->getIriFromResourceInSection($order, 'admin'),
                 'state' => strtolower($shippingState),
             ]),
             sprintf('Shipment for order %s with state %s does not exist', $order->getNumber(), $shippingState),
@@ -179,7 +197,7 @@ final class ManagingShipmentsContext implements Context
                 $this->client->getLastResponse(),
                 --$position,
                 'order',
-                $this->iriConverter->getIriFromItem($order),
+                $this->iriConverter->getIriFromResource($order),
             ),
             sprintf('On position %s there is no shipment for order %s', $position, $order->getNumber()),
         );
@@ -205,7 +223,7 @@ final class ManagingShipmentsContext implements Context
         string $orderNumber,
         string $shippingState,
         CustomerInterface $customer,
-        ChannelInterface $channel = null,
+        ?ChannelInterface $channel = null,
     ): void {
         $this->client->index(Resources::SHIPMENTS);
 
@@ -288,12 +306,27 @@ final class ManagingShipmentsContext implements Context
         Assert::same($productUnitsCounter, $amount);
     }
 
+    /**
+     * @Then I should see the details of order :order
+     */
+    public function iShouldSeeOrderWithDetails(OrderInterface $order): void
+    {
+        Assert::true(
+            $this->responseChecker->hasItemWithValue(
+                $this->client->getLastResponse(),
+                'order',
+                $this->sectionAwareIriConverter->getIriFromResourceInSection($order, 'admin'),
+            ),
+            sprintf('Order with number %s does not exist', $order->getNumber()),
+        );
+    }
+
     private function isShipmentForOrder(OrderInterface $order): bool
     {
         return $this->responseChecker->hasItemWithValue(
             $this->client->getLastResponse(),
             'order',
-            $this->iriConverter->getIriFromItemInSection($order, 'admin'),
+            $this->sectionAwareIriConverter->getIriFromResourceInSection($order, 'admin'),
         );
     }
 }

@@ -16,30 +16,13 @@ namespace Sylius\Bundle\ApiBundle\Command\Cart;
 use Sylius\Bundle\ApiBundle\Command\IriToIdentifierConversionAwareInterface;
 use Sylius\Bundle\ApiBundle\Command\OrderTokenValueAwareInterface;
 
-/** @experimental */
 class AddItemToCart implements OrderTokenValueAwareInterface, IriToIdentifierConversionAwareInterface
 {
     /** @var string|null */
     public $orderTokenValue;
 
-    /**
-     * @immutable
-     *
-     * @var string
-     */
-    public $productVariantCode;
-
-    /**
-     * @immutable
-     *
-     * @var int
-     */
-    public $quantity;
-
-    public function __construct(string $productVariantCode, int $quantity)
+    public function __construct(public string $productVariantCode, public int $quantity)
     {
-        $this->productVariantCode = $productVariantCode;
-        $this->quantity = $quantity;
     }
 
     public static function createFromData(string $tokenValue, string $productVariantCode, int $quantity): self

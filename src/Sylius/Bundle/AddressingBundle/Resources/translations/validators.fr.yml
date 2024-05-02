@@ -32,8 +32,8 @@ sylius:
     country:
         code:
             not_blank: Veuillez entrer le code ISO du pays.
-            regex: Le code du pays peut uniquement être constitué de lettres, chiffres, tirets et de tirets bas.
             unique: Le code ISO du pays doit être unique.
+            invalid: Code pays non valide
         unique_provinces: Toutes les provinces de ce pays doivent avoir des codes et des noms uniques.
     province:
         code:

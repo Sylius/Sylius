@@ -37,6 +37,12 @@ sylius:
                 min_range: Percent fee cannot be lower than {{ limit }}.
                 not_blank: Please enter the fee percent.
         code:
+            max_length: The code must not be longer than {{ limit }} characters.
             not_blank: 'Please enter payment method code.'
             regex: 'Payment method code can only be comprised of letters, numbers, dashes and underscores.'
             unique: 'The payment method with given code already exists.'
+    translation:
+        locale:
+            not_blank: Please enter the locale.
+            invalid: This value is not a valid locale.
+            unique: A translation for the {{ value }} locale code already exists.

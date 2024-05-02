@@ -14,7 +14,8 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
-use Sylius\Behat\NotificationType;
+use FriendsOfBehat\PageObjectExtension\Page\SymfonyPageInterface;
+use Sylius\Behat\Context\Ui\Admin\Helper\ValidationTrait;
 use Sylius\Behat\Page\Admin\Crud\IndexPageInterface;
 use Sylius\Behat\Page\Admin\PaymentMethod\CreatePageInterface;
 use Sylius\Behat\Page\Admin\PaymentMethod\UpdatePageInterface;
@@ -25,6 +26,8 @@ use Webmozart\Assert\Assert;
 
 final class ManagingPaymentMethodsContext implements Context
 {
+    use ValidationTrait;
+
     public function __construct(
         private CreatePageInterface $createPage,
         private IndexPageInterface $indexPage,
@@ -38,7 +41,7 @@ final class ManagingPaymentMethodsContext implements Context
     /**
      * @When I want to modify the :paymentMethod payment method
      */
-    public function iWantToModifyAPaymentMethod(PaymentMethodInterface $paymentMethod)
+    public function iWantToModifyAPaymentMethod(PaymentMethodInterface $paymentMethod): void
     {
         $this->updatePage->open(['id' => $paymentMethod->getId()]);
     }
@@ -100,14 +103,6 @@ final class ManagingPaymentMethodsContext implements Context
     }
 
     /**
-     * @Then I should be notified that it is in use
-     */
-    public function iShouldBeNotifiedThatItIsInUse()
-    {
-        $this->notificationChecker->checkNotification('Cannot delete, the Payment method is in use.', NotificationType::failure());
-    }
-
-    /**
      * @Then this payment method :element should be :value
      */
     public function thisPaymentMethodElementShouldBe($element, $value)
@@ -128,7 +123,7 @@ final class ManagingPaymentMethodsContext implements Context
      * @When I specify its code as :code
      * @When I do not specify its code
      */
-    public function iSpecifyItsCodeAs($code = null)
+    public function iSpecifyItsCodeAs(?string $code = null): void
     {
         $this->createPage->specifyCode($code ?? '');
     }
@@ -256,6 +251,7 @@ final class ManagingPaymentMethodsContext implements Context
     /**
      * @When I switch the way payment methods are sorted by :field
      * @When I start sorting payment methods by :field
+     * @When I switch the way payment methods are sorted to descending by :field
      * @Given the payment methods are already sorted by :field
      */
     public function iSortPaymentMethodsBy($field)
@@ -274,6 +270,7 @@ final class ManagingPaymentMethodsContext implements Context
 
     /**
      * @Then I should be notified that :element is required
+     * @Then I should be notified that I have to specify payment method :element
      */
     public function iShouldBeNotifiedThatIsRequired($element)
     {
@@ -288,6 +285,17 @@ final class ManagingPaymentMethodsContext implements Context
         Assert::same(
             $this->createPage->getValidationMessage('paypal_' . $element),
             sprintf('Please enter paypal %s.', $element),
+        );
+    }
+
+    /**
+     * @Then I should be notified that I have to specify stripe :element
+     */
+    public function iShouldBeNotifiedThatIHaveToSpecifyStripe(string $element): void
+    {
+        Assert::same(
+            $this->createPage->getValidationMessage('stripe_' . str_replace(' ', '_', $element)),
+            sprintf('Please enter stripe %s.', $element),
         );
     }
 
@@ -339,6 +347,7 @@ final class ManagingPaymentMethodsContext implements Context
 
     /**
      * @Then the code field should be disabled
+     * @Then I should not be able to edit its code
      */
     public function theCodeFieldShouldBeDisabled()
     {
@@ -466,10 +475,26 @@ final class ManagingPaymentMethodsContext implements Context
     }
 
     /**
+     * @When I configure it with only :element
+     */
+    public function iConfigureItWithOnly(string $element): void
+    {
+        match ($element) {
+            'publishable key' => $this->createPage->setStripePublishableKey('TEST'),
+            'secret key' => $this->createPage->setStripeSecretKey('TEST'),
+        };
+    }
+
+    /**
      * @Then I should be redirected to the previous page of only enabled payment methods
      */
     public function iShouldBeRedirectedToThePreviousFilteredPageWithFilter(): void
     {
         Assert::true($this->indexPage->isEnabledFilterApplied());
+    }
+
+    protected function resolveCurrentPage(): SymfonyPageInterface
+    {
+        return $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
     }
 }
