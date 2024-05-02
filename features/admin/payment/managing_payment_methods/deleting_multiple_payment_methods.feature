@@ -7,7 +7,7 @@ Feature: Deleting multiple payment methods
     Background:
         Given the store has a payment method "Offline" with a code "Offline"
         And the store has also a payment method "Bank transfer" with a code "transfer"
-        And the store has also a payment method "PayPal Express Checkout" with a code "paypal" and Paypal Express Checkout gateway
+        And the store has also a payment method "PayPal Express Checkout" with a code "paypal" and "Paypal Express Checkout" gateway
         And I am logged in as an administrator
 
     @todo @ui @mink:chromedriver @no-api

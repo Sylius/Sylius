@@ -153,7 +153,6 @@
             <argument type="service" id="sylius.behat.page.admin.payment_method.index" />
             <argument type="service" id="sylius.behat.page.admin.payment_method.update" />
             <argument type="service" id="sylius.behat.current_page_resolver" />
-            <argument type="service" id="sylius.behat.notification_checker.admin" />
             <argument type="collection">
                 <argument key="offline">Offline</argument>
                 <argument key="paypal_express_checkout">Paypal Express Checkout</argument>

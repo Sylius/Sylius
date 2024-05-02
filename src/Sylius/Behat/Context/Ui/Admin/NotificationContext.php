@@ -18,10 +18,10 @@ use Sylius\Behat\Element\Admin\NotificationsElementInterface;
 use Sylius\Behat\NotificationType;
 use Webmozart\Assert\Assert;
 
-final class NotificationContext implements Context
+final readonly class NotificationContext implements Context
 {
     public function __construct(
-        private readonly NotificationsElementInterface $notificationsElement,
+        private NotificationsElementInterface $notificationsElement,
     ) {
     }
 

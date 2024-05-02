@@ -28,7 +28,7 @@ sylius:
                 refunded: Refunded
         payment_method:
             description: Description
-            enabled: Enabled?
+            enabled: Enabled
             instructions: Instructions
             name: Name
             position: Position
