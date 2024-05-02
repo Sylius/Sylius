@@ -1,0 +1,24 @@
+{% import '@SyliusAdmin/common/helper/breadcrumbs.html.twig' as _breadcrumbs %}
+
+{% set configuration = hookable_metadata.context.configuration %}
+{% set resource = hookable_metadata.context.resource %}
+
+{% if hookable_metadata.context.metadata is defined %}
+    {% set metadata = hookable_metadata.context.metadata %}
+    {% set resourceName = hookable_metadata.configuration.resource_name|default(metadata.applicationName~'.ui.'~metadata.pluralName) %}
+{% else %}
+    {% set resourceName = hookable_metadata.configuration.resource_name %}
+{% endif %}
+
+{% set index_url = path(
+    configuration.vars.index.route.name|default(configuration.getRouteName('index')),
+    configuration.vars.index.route.parameters|default(configuration.vars.route.parameters|default({}))
+)
+%}
+
+{{ _breadcrumbs.default([
+    { name: 'Dashboard', url: path('sylius_admin_dashboard'), active: false },
+    { name: metadata.applicationName~'.ui.'~metadata.pluralName, url: index_url, active: false },
+    { name: resource.name|default(resource.code|default(resource.id)), active: true },
+    { name: 'sylius.ui.show'|trans, active: false }
+]) }}

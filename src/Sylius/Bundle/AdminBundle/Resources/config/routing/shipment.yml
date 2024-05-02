@@ -2,7 +2,7 @@ sylius_admin_shipment:
     resource: |
         alias: sylius.shipment
         section: admin
-        templates: "@SyliusAdmin\\Shared\\Crud"
+        templates: "@SyliusAdmin\\common"
         only: ['index', 'show']
         grid: sylius_admin_shipment
         permission: true

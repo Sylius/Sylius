@@ -26,7 +26,7 @@ trait FormTrait
         return [
             'attribute_value' => '[data-test-attribute-value][data-test-locale-code="%localeCode%"][data-test-attribute-name="%attributeName%"]',
             'channel_tab' => '[data-test-channel-tab="%channelCode%"]',
-            'form' => '[data-live-name-value="SyliusAdmin.Product.Form"]',
+            'form' => '[data-live-name-value="sylius_admin:product:form"]',
             'field_name' => '[name="sylius_product[translations][%localeCode%][name]"]',
             'field_slug' => '[name="sylius_product[translations][%localeCode%][slug]"]',
             'field_price' => '[name="sylius_product[variant][channelPricings][%channelCode%][price]"]',

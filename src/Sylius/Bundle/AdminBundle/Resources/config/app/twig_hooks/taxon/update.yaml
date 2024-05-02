@@ -2,28 +2,28 @@ twig_hooks:
     hooks:
         'sylius_admin.taxon.update.content':
             form:
-                template: '@SyliusAdmin/Taxon/Update/_form.html.twig'
+                template: '@SyliusAdmin/taxon/update/form.html.twig'
                 configuration:
                     render_rest: false
 
         'sylius_admin.taxon.update.content.form':
             tree:
-                component: 'SyliusAdmin.Taxon.TaxonTree'
+                component: 'sylius_admin:taxon:tree'
             sections:
-                template: '@SyliusAdmin/Taxon/Form/_sections.html.twig'
+                template: '@SyliusAdmin/taxon/form/sections.html.twig'
 
         'sylius_admin.taxon.update.content.form.sections':
             details:
-                template: '@SyliusAdmin/Taxon/Form/Sections/_details.html.twig'
+                template: '@SyliusAdmin/taxon/form/sections/details.html.twig'
             translations:
-                template: '@SyliusAdmin/Taxon/Form/Sections/_translations.html.twig'
+                template: '@SyliusAdmin/taxon/form/sections/translations.html.twig'
             media:
-                template: '@SyliusAdmin/Taxon/Form/Sections/_media.html.twig'
+                template: '@SyliusAdmin/taxon/form/sections/media.html.twig'
 
         'sylius_admin.taxon.update.content.form.sections.details':
             code:
-                template: '@SyliusAdmin/Taxon/Form/Sections/Details/_code.html.twig'
+                template: '@SyliusAdmin/taxon/form/sections/details/code.html.twig'
             parent:
-                template: '@SyliusAdmin/Taxon/Form/Sections/Details/_parent.html.twig'
+                template: '@SyliusAdmin/taxon/form/sections/details/parent.html.twig'
             enabled:
-                template: '@SyliusAdmin/Taxon/Form/Sections/Details/_enabled.html.twig'
+                template: '@SyliusAdmin/taxon/form/sections/details/enabled.html.twig'

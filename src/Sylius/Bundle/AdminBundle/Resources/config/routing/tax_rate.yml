@@ -2,7 +2,7 @@ sylius_admin_tax_rate:
     resource: |
         alias: sylius.tax_rate
         section: admin
-        templates: "@SyliusAdmin\\Shared\\Crud"
+        templates: "@SyliusAdmin\\common"
         except: ['show']
         redirect: update
         grid: sylius_admin_tax_rate
@@ -11,7 +11,7 @@ sylius_admin_tax_rate:
             all:
                 subheader: sylius.ui.manage_taxation_of_your_products
                 templates:
-                    form: "@SyliusAdmin/TaxRate/_form.html.twig"
+                    form: "@SyliusAdmin/tax_rate/form.html.twig"
             index:
                 icon: money
     type: sylius.resource

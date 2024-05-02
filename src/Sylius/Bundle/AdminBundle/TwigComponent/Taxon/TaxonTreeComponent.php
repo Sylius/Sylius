@@ -23,7 +23,7 @@ use Symfony\UX\LiveComponent\Attribute\LiveArg;
 use Symfony\UX\LiveComponent\DefaultActionTrait;
 use Symfony\UX\TwigComponent\Attribute\ExposeInTemplate;
 
-#[AsLiveComponent(name: 'SyliusAdmin.Taxon.TaxonTree', template: '@SyliusAdmin/Taxon/Component/taxonTree.html.twig')]
+#[AsLiveComponent(name: 'sylius_admin:taxon:tree', template: '@SyliusAdmin/taxon/component/taxon_tree.html.twig')]
 final class TaxonTreeComponent
 {
     use DefaultActionTrait;

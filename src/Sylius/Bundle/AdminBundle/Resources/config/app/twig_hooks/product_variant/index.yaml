@@ -2,4 +2,4 @@ twig_hooks:
     hooks:
         'sylius_admin.product_variant.index.content.header':
             breadcrumbs:
-                template: '@SyliusAdmin/ProductVariant/index/content/header/breadcrumbs.html.twig'
+                template: '@SyliusAdmin/product_variant/index/content/header/breadcrumbs.html.twig'

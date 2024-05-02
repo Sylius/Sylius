@@ -1,0 +1,13 @@
+{% from '@SyliusAdmin/common/helper/icon.html.twig' import icon %}
+
+{% set path = options.link.url|default(path(options.link.route|default(grid.requestConfiguration.getRouteName('show')), options.link.parameters|default({'id': data.id}))) %}
+
+{% set message = action.label %}
+{% if message is empty %}
+    {% set message = 'sylius.ui.show' %}
+{% endif %}
+
+<a href="{{ path }}" class="dropdown-item">
+    {{ icon({ icon: action.icon ?? 'eye', class: 'icon icon-tabler dropdown-item-icon' }) }}
+    {{ message|trans }}
+</a>

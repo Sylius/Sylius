@@ -2,7 +2,7 @@ sylius_admin_taxon:
     resource: |
         alias: sylius.taxon
         section: admin
-        templates: "@SyliusAdmin\\Shared\\Crud"
+        templates: "@SyliusAdmin\\common"
         except: ['show', 'index']
         redirect: update
         permission: true
@@ -10,7 +10,7 @@ sylius_admin_taxon:
             all:
                 subheader: sylius.ui.manage_categorization_of_your_products
                 templates:
-                    form: "@SyliusAdmin/Taxon/_form.html.twig"
+                    form: "@SyliusAdmin/taxon/form.html.twig"
     type: sylius.resource
 
 sylius_admin_taxon_index:
@@ -29,7 +29,7 @@ sylius_admin_taxon_create_for_parent:
         _sylius:
             section: admin
             permission: true
-            template: '@SyliusAdmin/Shared/Crud/create.html.twig'
+            template: '@SyliusAdmin/common/create.html.twig'
             redirect: sylius_admin_taxon_update
             factory:
                 method: createForParent

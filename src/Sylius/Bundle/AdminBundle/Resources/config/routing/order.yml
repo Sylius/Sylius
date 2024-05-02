@@ -2,7 +2,7 @@ sylius_admin_order:
     resource: |
         alias: sylius.order
         section: admin
-        templates: "@SyliusAdmin\\Shared\\Crud"
+        templates: "@SyliusAdmin\\common"
         only: ['index']
         grid: sylius_admin_order
         permission: true
@@ -21,11 +21,11 @@ sylius_admin_order_show:
         _sylius:
             section: admin
             repository:
-              method: findOrderById
-              arguments:
+            method: findOrderById
+            arguments:
                 - '$id'
             permission: true
-            template: "@SyliusAdmin/Shared/Crud/show.html.twig"
+            template: "@SyliusAdmin/common/show.html.twig"
 
 sylius_admin_order_history:
     path: /orders/{id}/history
@@ -35,11 +35,11 @@ sylius_admin_order_history:
         _sylius:
             section: admin
             repository:
-              method: findOrderById
-              arguments:
+            method: findOrderById
+            arguments:
                 - '$id'
             permission: true
-            template: "@SyliusAdmin/Order/history.html.twig"
+            template: "@SyliusAdmin/order/history.html.twig"
 
 sylius_admin_order_update:
     path: /orders/{id}/edit
@@ -49,11 +49,11 @@ sylius_admin_order_update:
         _sylius:
             section: admin
             repository:
-              method: findOrderById
-              arguments:
+            method: findOrderById
+            arguments:
                 - '$id'
             permission: true
-            template: "@SyliusAdmin/Shared/Crud/update.html.twig"
+            template: "@SyliusAdmin/common/update.html.twig"
             form:
                 options:
                     validation_groups:
@@ -66,8 +66,8 @@ sylius_admin_order_cancel:
         _controller: sylius.controller.order::applyStateMachineTransitionAction
         _sylius:
             repository:
-              method: findOrderById
-              arguments:
+            method: findOrderById
+            arguments:
                 - '$id'
             permission: true
             state_machine:

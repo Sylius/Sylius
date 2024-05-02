@@ -2,7 +2,7 @@
 {% set payment = hookable_metadata.context.payment %}
 
 {% if sm_can(payment, 'complete', 'sylius_payment') %}
-    {% from '@SyliusAdmin/Shared/Helper/icon.html.twig' import icon as _icon %}
+    {% from '@SyliusAdmin/common/helper/icon.html.twig' import icon as _icon %}
 
     <div class="ui segment">
         <form

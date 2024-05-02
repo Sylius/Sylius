@@ -1,0 +1,25 @@
+{% set form = hookable_metadata.context.form %}
+
+<div class="card mb-3" id="{{ form.vars.id }}">
+    <div class="card-header d-flex justify-content-between">
+        <div>
+            {% for optionValue in form.optionValues  %}
+                {{ optionValue.vars.label|trans }}: <span class="fw-bold me-1">{{ optionValue.vars.value }}</span>
+            {% endfor %}
+        </div>
+        {% if form.vars.value.id is null %}
+            {{- form_row(form.vars.button_delete, sylius_test_form_attribute('delete-button')|sylius_merge_recursive({'attr': {'class': 'btn-close'}})) -}}
+        {% endif %}
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-12 col-md-6">
+                {% hook 'variant#left' %}
+            </div>
+
+            <div class="col-12 col-md-6">
+                {% hook 'variant#right' %}
+            </div>
+        </div>
+    </div>
+</div>

@@ -3,7 +3,7 @@ sylius_admin_admin_user:
         alias: sylius.admin_user
         section: admin
         path: users
-        templates: "@SyliusAdmin\\Shared\\Crud"
+        templates: "@SyliusAdmin\\common"
         except: ['show']
         redirect: index
         grid: sylius_admin_admin_user
@@ -12,7 +12,7 @@ sylius_admin_admin_user:
             all:
                 subheader: sylius.ui.manage_users_able_to_access_administration_panel
                 templates:
-                    form: "@SyliusAdmin/AdminUser/_form.html.twig"
+                    form: "@SyliusAdmin/admin_user/form.html.twig"
             index:
                 icon: lock
     type: sylius.resource

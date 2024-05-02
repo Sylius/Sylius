@@ -2,7 +2,7 @@ sylius_admin_product:
     resource: |
         alias: sylius.product
         section: admin
-        templates: "@SyliusAdmin\\Shared\\Crud"
+        templates: "@SyliusAdmin\\common"
         redirect: update
         grid: sylius_admin_product
         permission: true
@@ -10,7 +10,7 @@ sylius_admin_product:
             all:
                 subheader: sylius.ui.manage_your_product_catalog
                 templates:
-                    form: "@SyliusAdmin/Product/_form.html.twig"
+                    form: "@SyliusAdmin/product/form.html.twig"
             index:
                 icon: cube
     type: sylius.resource
@@ -24,7 +24,7 @@ sylius_admin_product_per_taxon_index:
             section: admin
             permission: true
             grid: sylius_admin_product_from_taxon
-            template: "@SyliusAdmin/Product/index.html.twig"
+            template: "@SyliusAdmin/product/index.html.twig"
             vars:
                 subheader: sylius.ui.manage_your_product_catalog
                 icon: cube
@@ -39,7 +39,7 @@ sylius_admin_product_create_simple:
             permission: true
             factory:
                 method: createWithVariant
-            template: "@SyliusAdmin/Shared/Crud/create.html.twig"
+            template: "@SyliusAdmin/common/create.html.twig"
             redirect: sylius_admin_product_update
             vars:
                 route:
@@ -51,7 +51,7 @@ sylius_admin_product_variant_generate:
     defaults:
         _controller: sylius.controller.product::updateAction
         _sylius:
-            template: "@SyliusAdmin/Product/generate_variants.html.twig"
+            template: "@SyliusAdmin/product/generate_variants.html.twig"
             section: admin
             permission: true
             redirect:
@@ -73,7 +73,7 @@ sylius_admin_channel_pricing_log_entry_index:
         _sylius:
             section: admin
             permission: true
-            template: "@SyliusAdmin/ChannelPricingLogEntry/Index/index.html.twig"
+            template: "@SyliusAdmin/channel_pricing_log_entry/index.html.twig"
             grid: sylius_admin_channel_pricing_log_entry
             vars:
                 product_variant: "expr:service('sylius.repository.product_variant').find($variantId)"

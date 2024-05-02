@@ -2,24 +2,24 @@ twig_hooks:
     hooks:
         'sylius_admin.common.show':
             sidebar:
-                template: '@SyliusAdmin/Shared/Crud/Common/_sidebar.html.twig'
+                template: '@SyliusAdmin/common/shared/sidebar.html.twig'
             navbar:
-                template: '@SyliusAdmin/Shared/Crud/Common/_navbar.html.twig'
+                template: '@SyliusAdmin/common/shared/navbar.html.twig'
             content:
-                template: '@SyliusAdmin/Shared/Crud/Common/_content.html.twig'
+                template: '@SyliusAdmin/common/shared/content.html.twig'
 
         'sylius_admin.common.show.content':
             flashes:
-                template: '@SyliusAdmin/Shared/Crud/Common/Content/_flashes.html.twig'
+                template: '@SyliusAdmin/common/shared/content/flashes.html.twig'
             header:
-                template: '@SyliusAdmin/Shared/Crud/Common/Content/_header.html.twig'
+                template: '@SyliusAdmin/common/shared/content/header.html.twig'
 
         'sylius_admin.common.show.content.header':
             breadcrumbs:
-                template: '@SyliusAdmin/Shared/Crud/Show/Content/Header/_breadcrumbs.html.twig'
+                template: '@SyliusAdmin/common/show/content/header/breadcrumbs.html.twig'
             title_block:
-                template: '@SyliusAdmin/Shared/Crud/Common/Content/Header/_titleBlock.html.twig'
+                template: '@SyliusAdmin/common/shared/content/header/title_block.html.twig'
 
         'sylius_admin.common.show.content.header.title_block':
             title:
-                template: '@SyliusAdmin/Shared/Crud/Show/Content/Header/TitleBlock/_title.html.twig'
+                template: '@SyliusAdmin/common/show/content/header/title_block/title.html.twig'

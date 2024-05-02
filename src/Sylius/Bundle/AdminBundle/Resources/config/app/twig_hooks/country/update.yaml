@@ -2,7 +2,7 @@ twig_hooks:
     hooks:
         'sylius_admin.country.update.content':
             form:
-                component: 'SyliusAdmin.Country.CountryType'
+                component: 'sylius_admin:country:form'
                 props:
                     country: '@=_context.resource'
                     form: '@=_context.form'
@@ -11,16 +11,16 @@ twig_hooks:
         
         'sylius_admin.country.update.content.form':
             sections:
-                template: '@SyliusAdmin/Country/Form/_sections.html.twig'
+                template: '@SyliusAdmin/country/form/sections.html.twig'
         
         'sylius_admin.country.update.content.form.sections':
             details:
-                template: '@SyliusAdmin/Country/Form/Sections/_details.html.twig'
+                template: '@SyliusAdmin/country/form/sections/details.html.twig'
             provinces:
-                template: '@SyliusAdmin/Country/Form/Sections/_provinces.html.twig'
+                template: '@SyliusAdmin/country/form/sections/provinces.html.twig'
         
         'sylius_admin.country.update.content.form.sections.details':
             code:
-                template: '@SyliusAdmin/Country/Form/Sections/Details/_code.html.twig'
+                template: '@SyliusAdmin/country/form/sections/details/code.html.twig'
             enabled:
-                template: '@SyliusAdmin/Country/Form/Sections/Details/_enabled.html.twig'
+                template: '@SyliusAdmin/country/form/sections/details/enabled.html.twig'

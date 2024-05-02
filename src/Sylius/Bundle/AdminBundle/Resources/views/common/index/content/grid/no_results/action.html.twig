@@ -1,0 +1,10 @@
+{% from '@SyliusAdmin/common/helper/icon.html.twig' import icon as _icon %}
+
+{% if _context.route is defined and (_context.hidden is not defined or _context.hidden == false) %}
+    <div class="empty-action">
+        <a href="{{ path(_context.route) }}" class="btn btn-primary">
+            {{ _icon({ icon: _context.icon|default('plus') }) }}
+            {{ _context.translation_key|default('sylius.ui.add_new_entry')|trans }}
+        </a>
+    </div>
+{% endif %}

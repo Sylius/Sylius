@@ -29,7 +29,7 @@ final class StatisticsController
     public function renderStatistics(ChannelInterface $channel): Response
     {
         return new Response($this->templatingEngine->render(
-            '@SyliusAdmin/Dashboard/Statistics/_template.html.twig',
+            '@SyliusAdmin/dashboard/statistics/template.html.twig',
             $this->statisticsDataProvider->getRawData(
                 $channel,
                 (new \DateTime('first day of january this year')),

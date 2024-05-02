@@ -2,17 +2,17 @@ twig_hooks:
     hooks:
         'sylius_admin.product.generate_variants':
             sidebar:
-                template: '@SyliusAdmin/Shared/Crud/Common/_sidebar.html.twig'
+                template: '@SyliusAdmin/common/shared/sidebar.html.twig'
             navbar:
-                template: '@SyliusAdmin/Shared/Crud/Common/_navbar.html.twig'
+                template: '@SyliusAdmin/common/shared/navbar.html.twig'
             content:
-                template: '@SyliusAdmin/Shared/Crud/Common/_content.html.twig'
+                template: '@SyliusAdmin/common/shared/content.html.twig'
 
         'sylius_admin.product.generate_variants.content':
             flashes:
-                template: '@SyliusAdmin/Shared/Crud/Common/Content/_flashes.html.twig'
+                template: '@SyliusAdmin/common/shared/content/flashes.html.twig'
             header:
-                template: '@SyliusAdmin/Shared/Crud/Common/Content/_header.html.twig'
+                template: '@SyliusAdmin/common/shared/content/header.html.twig'
             form:
                 component: 'sylius_admin:product:generate_product_variants_form'
                 props:
@@ -21,36 +21,36 @@ twig_hooks:
 
         'sylius_admin.product.generate_variants.content.header':
             breadcrumbs:
-                template: '@SyliusAdmin/Product/generate_variants/header/breadcrumbs.html.twig'
+                template: '@SyliusAdmin/product/generate_variants/header/breadcrumbs.html.twig'
             title_block:
-                template: '@SyliusAdmin/Shared/Crud/Common/Content/Header/_titleBlock.html.twig'
+                template: '@SyliusAdmin/common/shared/content/header/title_block.html.twig'
 
         'sylius_admin.product.generate_variants.content.header.title_block':
             title:
-                template: '@SyliusAdmin/Product/generate_variants/header/title_block/title.html.twig'
+                template: '@SyliusAdmin/product/generate_variants/header/title_block/title.html.twig'
             actions:
-                template: '@SyliusAdmin/Shared/Crud/Update/Content/Header/TitleBlock/_actions.html.twig'
+                template: '@SyliusAdmin/common/update/content/header/title_block/actions.html.twig'
 
         'sylius_admin.product.generate_variants.content.header.title_block.actions':
             cancel:
-                template: '@SyliusAdmin/Shared/Crud/Common/Content/Header/TitleBlock/Actions/_cancel.html.twig'
+                template: '@SyliusAdmin/common/shared/content/header/title_block/actions/cancel.html.twig'
             generate:
-                template: '@SyliusAdmin/Product/generate_variants/header/title_block/actions/generate.html.twig'
+                template: '@SyliusAdmin/product/generate_variants/header/title_block/actions/generate.html.twig'
 
         'sylius_admin.product.generate_variants.content.form':
             variants:
-                template: '@SyliusAdmin/Product/generate_variants/form/variants.html.twig'
+                template: '@SyliusAdmin/product/generate_variants/form/variants.html.twig'
 
         'sylius_admin.product.generate_variants.content.form.variants':
             variant:
-                template: '@SyliusAdmin/Product/generate_variants/form/variants/variant.html.twig'
+                template: '@SyliusAdmin/product/generate_variants/form/variants/variant.html.twig'
 
         'sylius_admin.product.generate_variants.content.form.variants.variant#left':
             code:
-                template: '@SyliusAdmin/Product/generate_variants/form/variants/variant/code.html.twig'
+                template: '@SyliusAdmin/product/generate_variants/form/variants/variant/code.html.twig'
             name:
-                template: '@SyliusAdmin/Product/generate_variants/form/variants/variant/name.html.twig'
+                template: '@SyliusAdmin/product/generate_variants/form/variants/variant/name.html.twig'
 
         'sylius_admin.product.generate_variants.content.form.variants.variant#right':
             channel_pricing:
-                template: '@SyliusAdmin/Product/generate_variants/form/variants/variant/channel_pricings.html.twig'
+                template: '@SyliusAdmin/product/generate_variants/form/variants/variant/channel_pricings.html.twig'

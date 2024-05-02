@@ -4,7 +4,7 @@ sylius_admin_product_variant_index:
     defaults:
         _controller: sylius.controller.product_variant::indexAction
         _sylius:
-            template: "@SyliusAdmin/Shared/Crud/index.html.twig"
+            template: "@SyliusAdmin/common/index.html.twig"
             grid: sylius_admin_product_variant
             section: admin
             permission: true
@@ -25,7 +25,7 @@ sylius_admin_product_variant_create:
                 method: createForProduct
                 arguments:
                     - expr:notFoundOnNull(service('sylius.repository.product').find($productId))
-            template: "@SyliusAdmin/Shared/Crud/create.html.twig"
+            template: "@SyliusAdmin/common/create.html.twig"
             grid: sylius_admin_product_variant
             section: admin
             redirect:
@@ -43,7 +43,7 @@ sylius_admin_product_variant_update:
     defaults:
         _controller: sylius.controller.product_variant::updateAction
         _sylius:
-            template: "@SyliusAdmin/Shared/Crud/update.html.twig"
+            template: "@SyliusAdmin/common/update.html.twig"
             grid: sylius_admin_product_variant
             section: admin
             redirect:

@@ -20,7 +20,7 @@ use Symfony\UX\LiveComponent\ComponentToolsTrait;
 use Symfony\UX\LiveComponent\DefaultActionTrait;
 use Symfony\UX\TwigComponent\Attribute\ExposeInTemplate;
 
-#[AsLiveComponent(name: 'SyliusAdmin.Product.ProductAttributeAutocomplete', template: '@SyliusAdmin/Product/_productAttributeAutocomplete.html.twig')]
+#[AsLiveComponent(name: 'sylius_admin:product:attribute_autocomplete', template: '@SyliusAdmin/product/product_attribute_autocomplete.html.twig')]
 final class ProductAttributeAutocompleteComponent
 {
     /** @var array<string> */

@@ -2,7 +2,7 @@ sylius_admin_catalog_promotion:
     resource: |
         alias: sylius.catalog_promotion
         section: admin
-        templates: "@SyliusAdmin\\Shared\\Crud"
+        templates: "@SyliusAdmin\\common"
         except: ['delete']
         redirect: update
         grid: sylius_admin_catalog_promotion
@@ -17,7 +17,7 @@ sylius_admin_catalog_promotion_product_variant_index:
         _sylius:
             section: admin
             grid: sylius_admin_product_variant_with_catalog_promotion
-            template: "@SyliusAdmin/CatalogPromotion/ProductVariant/index.html.twig"
+            template: "@SyliusAdmin/catalog_promotion/product_variant/index.html.twig"
             permission: true
             vars:
                 subheader: sylius.ui.manage_discounts_on_product_catalog

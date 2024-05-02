@@ -2,53 +2,53 @@ twig_hooks:
     hooks:
         sylius_admin.order.update.content:
             form:
-                component: 'SyliusAdmin.Order.OrderType'
+                component: 'sylius_admin:order:form'
                 props:
                     order: '@=_context.resource'
                     form: '@=_context.form'
 
         sylius_admin.order.update.content.form:
             billing_address:
-                template: '@SyliusAdmin/Order/Form/billingAddress.html.twig'
+                template: '@SyliusAdmin/order/form/billing_address.html.twig'
             shipping_address:
-                template: '@SyliusAdmin/Order/Form/shippingAddress.html.twig'
+                template: '@SyliusAdmin/order/form/shipping_address.html.twig'
 
         sylius_admin.order.update.content.form.billing_address:
             company:
-                template: '@SyliusAdmin/Order/Form/Common/company.html.twig'
+                template: '@SyliusAdmin/order/form/common/company.html.twig'
             first_name:
-                template: '@SyliusAdmin/Order/Form/Common/first_name.html.twig'
+                template: '@SyliusAdmin/order/form/common/first_name.html.twig'
             last_name:
-                template: '@SyliusAdmin/Order/Form/Common/last_name.html.twig'
+                template: '@SyliusAdmin/order/form/common/last_name.html.twig'
             country:
-                template: '@SyliusAdmin/Order/Form/Common/country.html.twig'
+                template: '@SyliusAdmin/order/form/common/country.html.twig'
             phone_number:
-                template: '@SyliusAdmin/Order/Form/Common/phone_number.html.twig'
+                template: '@SyliusAdmin/order/form/common/phone_number.html.twig'
             street_address:
-                template: '@SyliusAdmin/Order/Form/Common/street_address.html.twig'
+                template: '@SyliusAdmin/order/form/common/street_address.html.twig'
             city:
-                template: '@SyliusAdmin/Order/Form/Common/city.html.twig'
+                template: '@SyliusAdmin/order/form/common/city.html.twig'
             postcode:
-                template: '@SyliusAdmin/Order/Form/Common/postcode.html.twig'
+                template: '@SyliusAdmin/order/form/common/postcode.html.twig'
             province:
-                template: '@SyliusAdmin/Order/Form/Common/province.html.twig'
+                template: '@SyliusAdmin/order/form/common/province.html.twig'
 
         sylius_admin.order.update.content.form.shipping_address:
             company:
-                template: '@SyliusAdmin/Order/Form/Common/company.html.twig'
+                template: '@SyliusAdmin/order/form/common/company.html.twig'
             first_name:
-                template: '@SyliusAdmin/Order/Form/Common/first_name.html.twig'
+                template: '@SyliusAdmin/order/form/common/first_name.html.twig'
             last_name:
-                template: '@SyliusAdmin/Order/Form/Common/last_name.html.twig'
+                template: '@SyliusAdmin/order/form/common/last_name.html.twig'
             country:
-                template: '@SyliusAdmin/Order/Form/Common/country.html.twig'
+                template: '@SyliusAdmin/order/form/common/country.html.twig'
             phone_number:
-                template: '@SyliusAdmin/Order/Form/Common/phone_number.html.twig'
+                template: '@SyliusAdmin/order/form/common/phone_number.html.twig'
             street_address:
-                template: '@SyliusAdmin/Order/Form/Common/street_address.html.twig'
+                template: '@SyliusAdmin/order/form/common/street_address.html.twig'
             city:
-                template: '@SyliusAdmin/Order/Form/Common/city.html.twig'
+                template: '@SyliusAdmin/order/form/common/city.html.twig'
             postcode:
-                template: '@SyliusAdmin/Order/Form/Common/postcode.html.twig'
+                template: '@SyliusAdmin/order/form/common/postcode.html.twig'
             province:
-                template: '@SyliusAdmin/Order/Form/Common/province.html.twig'
+                template: '@SyliusAdmin/order/form/common/province.html.twig'

@@ -2,7 +2,7 @@ sylius_admin_locale:
     resource: |
         alias: sylius.locale
         section: admin
-        templates: "@SyliusAdmin\\Shared\\Crud"
+        templates: "@SyliusAdmin\\common"
         except: ['show', 'delete']
         redirect: index
         grid: sylius_admin_locale
@@ -11,7 +11,7 @@ sylius_admin_locale:
             all:
                 subheader: sylius.ui.manage_languages_available_in_the_store
                 templates:
-                    form: "@SyliusAdmin/Locale/_form.html.twig"
+                    form: "@SyliusAdmin/locale/form.html.twig"
             index:
                 icon: translate
     type: sylius.resource

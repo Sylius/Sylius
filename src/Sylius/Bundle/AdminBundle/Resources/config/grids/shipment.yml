@@ -27,18 +27,18 @@ sylius_grid:
                     label: sylius.ui.order
                     path: order
                     options:
-                        template: "@SyliusAdmin/shared/grid/field/order_number.html.twig"
+                        template: "@SyliusAdmin/common/grid/field/order_number.html.twig"
                 channel:
                     type: twig
                     label: sylius.ui.channel
                     path: order.channel
                     options:
-                        template: "@SyliusAdmin/shared/grid/field/channel.html.twig"
+                        template: "@SyliusAdmin/common/grid/field/channel.html.twig"
                 state:
                     type: twig
                     label: sylius.ui.state
                     options:
-                        template: "@SyliusAdmin/shared/grid/field/shipment_state.html.twig"
+                        template: "@SyliusAdmin/common/grid/field/shipment_state.html.twig"
             filters:
                 state:
                     type: select

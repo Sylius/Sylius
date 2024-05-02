@@ -1,0 +1,25 @@
+twig_hooks:
+    hooks:
+        'sylius_admin.common.shared.navbar':
+            items:
+                template: '@SyliusAdmin/common/shared/navbar/items.html.twig'
+            menu:
+                template: '@SyliusAdmin/common/shared/navbar/menu.html.twig'
+
+        'sylius_admin.common.shared.navbar.items':
+            notifications:
+                component: 'sylius_admin:navbar:notifications'
+            user:
+                component: 'sylius_admin:navbar:user'
+
+        'sylius_admin.common.shared.navbar.menu':
+            search:
+                template: '@SyliusAdmin/common/shared/navbar/menu/search.html.twig'
+
+        'sylius_admin.common.shared.sidebar':
+            logo:
+                template: '@SyliusAdmin/common/shared/sidebar/logo.html.twig'
+            user_dropdown:
+                template: '@SyliusAdmin/common/shared/sidebar/user.html.twig'
+            menu:
+                template: '@SyliusAdmin/common/shared/sidebar/menu.html.twig'

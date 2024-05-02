@@ -2,7 +2,7 @@ sylius_admin_payment_method:
     resource: |
         alias: sylius.payment_method
         section: admin
-        templates: "@SyliusAdmin\\Shared\\Crud"
+        templates: "@SyliusAdmin\\common"
         except: ['show']
         redirect: update
         grid: sylius_admin_payment_method
@@ -11,7 +11,7 @@ sylius_admin_payment_method:
             all:
                 subheader: sylius.ui.manage_payment_methods_available_to_your_customers
                 templates:
-                    form: "@SyliusAdmin/PaymentMethod/_form.html.twig"
+                    form: "@SyliusAdmin/payment_method/form.html.twig"
             index:
                 icon: payment
     type: sylius.resource
@@ -27,13 +27,13 @@ sylius_admin_payment_method_create:
                 method: createWithGateway
                 arguments:
                     gatewayFactory: $factory
-            template: "@SyliusAdmin/Shared/Crud/create.html.twig"
+            template: "@SyliusAdmin/common/create.html.twig"
             redirect: sylius_admin_payment_method_update
             permission: true
             vars:
                 subheader: sylius.ui.manage_payment_methods_available_to_your_customers
                 templates:
-                    form: "@SyliusAdmin/PaymentMethod/_form.html.twig"
+                    form: "@SyliusAdmin/payment_method/form.html.twig"
                 route:
                     parameters:
                         factory: $factory

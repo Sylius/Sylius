@@ -24,8 +24,8 @@ use Symfony\UX\LiveComponent\DefaultActionTrait;
 use Symfony\UX\TwigComponent\Attribute\ExposeInTemplate;
 
 #[AsLiveComponent(
-    name: 'SyliusAdmin.Customer.Show.OrderStatistics',
-    template: '@SyliusAdmin/Customer/Show/Component/orderStatistics.html.twig',
+    name: 'sylius_admin:customer:show:statistics',
+    template: '@SyliusAdmin/customer/show/component/order_statistics.html.twig',
 )]
 final class OrderStatistics
 {

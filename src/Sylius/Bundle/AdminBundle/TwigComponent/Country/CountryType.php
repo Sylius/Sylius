@@ -22,7 +22,7 @@ use Symfony\UX\LiveComponent\Attribute\LiveProp;
 use Symfony\UX\LiveComponent\DefaultActionTrait;
 use Symfony\UX\LiveComponent\LiveCollectionTrait;
 
-#[AsLiveComponent(name: 'SyliusAdmin.Country.CountryType', template: '@SyliusAdmin/Country/_form.html.twig')]
+#[AsLiveComponent(name: 'sylius_admin:country:form', template: '@SyliusAdmin/country/form.html.twig')]
 final class CountryType
 {
     use DefaultActionTrait;

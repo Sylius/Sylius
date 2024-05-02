@@ -1,0 +1,24 @@
+{% extends '@SyliusAdmin/common/empty_page.html.twig' %}
+
+{% set prefixes = [
+    'sylius_admin.%resource_name%'|replace({'%resource_name%': resource_name|default(metadata.name)}),
+    'sylius_admin.common'
+] %}
+
+{% set header = metadata.applicationName ~ '.ui.' ~ metadata.pluralName %}
+
+{% block title %}{{ header|trans }} | {{ parent() }}{% endblock %}
+
+{% block body %}
+    {% hook 'show' with { _prefixes: prefixes, resource, metadata, configuration } %}
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {% hook 'show#stylesheets' with { _prefixes: prefixes } %}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {% hook 'show#javascripts' with { _prefixes: prefixes } %}
+{% endblock %}

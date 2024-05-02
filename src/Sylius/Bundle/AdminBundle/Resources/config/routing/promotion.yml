@@ -2,7 +2,7 @@ sylius_admin_promotion:
     resource: |
         alias: sylius.promotion
         section: admin
-        templates: "@SyliusAdmin\\Shared\\Crud"
+        templates: "@SyliusAdmin\\common"
         except: ['show']
         redirect: update
         grid: sylius_admin_promotion
@@ -11,13 +11,13 @@ sylius_admin_promotion:
             all:
                 subheader: sylius.ui.manage_discounts_and_promotional_campaigns
                 templates:
-                    form: "@SyliusAdmin/Promotion/_form.html.twig"
+                    form: "@SyliusAdmin/promotion/form.html.twig"
             index:
                 icon: in cart
             update:
                 templates:
-                    form: "@SyliusAdmin/Promotion/_form.html.twig"
-                    toolbar: "@SyliusAdmin/Promotion/_toolbar.html.twig"
+                    form: "@SyliusAdmin/promotion/form.html.twig"
+                    toolbar: "@SyliusAdmin/promotion/toolbar.html.twig"
     type: sylius.resource
 
 sylius_admin_promotion_archive:

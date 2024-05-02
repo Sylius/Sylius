@@ -2,42 +2,42 @@ twig_hooks:
     hooks:
         'sylius_admin.product_variant.update.content':
             form:
-                template: '@SyliusAdmin/ProductVariant/_form.html.twig'
+                template: '@SyliusAdmin/product_variant/form.html.twig'
                 configuration:
                     method: 'PUT'
 
         'sylius_admin.product_variant.update.content.header':
             breadcrumbs:
-                template: '@SyliusAdmin/ProductVariant/Form/Content/Update/Header/breadcrumbs.html.twig'
+                template: '@SyliusAdmin/product_variant/form/content/update/header/breadcrumbs.html.twig'
 
         'sylius_admin.product_variant.update.content.form':
             side_navigation:
-                template: '@SyliusAdmin/ProductVariant/Form/_sideNavigation.html.twig'
+                template: '@SyliusAdmin/product_variant/form/side_navigation.html.twig'
             sections:
-                template: '@SyliusAdmin/ProductVariant/Form/_sections.html.twig'
+                template: '@SyliusAdmin/product_variant/form/sections.html.twig'
 
         'sylius_admin.product_variant.update.content.form.side_navigation':
             details:
-                template: '@SyliusAdmin/ProductVariant/Form/SideNavigation/_details.html.twig'
+                template: '@SyliusAdmin/product_variant/form/side_navigation/details.html.twig'
                 configuration:
                     active: true
             channel_pricing:
-                template: '@SyliusAdmin/ProductVariant/Form/SideNavigation/_channelPricing.html.twig'
+                template: '@SyliusAdmin/product_variant/form/side_navigation/channel_pricing.html.twig'
             inventory:
-                template: '@SyliusAdmin/ProductVariant/Form/SideNavigation/_inventory.html.twig'
+                template: '@SyliusAdmin/product_variant/form/side_navigation/inventory.html.twig'
             translations:
-                template: '@SyliusAdmin/ProductVariant/Form/SideNavigation/_translations.html.twig'
+                template: '@SyliusAdmin/product_variant/form/side_navigation/translations.html.twig'
             taxes:
-                template: '@SyliusAdmin/ProductVariant/Form/SideNavigation/_taxes.html.twig'
+                template: '@SyliusAdmin/product_variant/form/side_navigation/taxes.html.twig'
 
         'sylius_admin.product_variant.update.content.form.sections':
             details:
-                template: '@SyliusAdmin/ProductVariant/Form/Sections/_details.html.twig'
+                template: '@SyliusAdmin/product_variant/form/sections/details.html.twig'
             channel_pricing:
-                template: '@SyliusAdmin/ProductVariant/Form/Sections/_channelPricing.html.twig'
+                template: '@SyliusAdmin/product_variant/form/sections/channel_pricing.html.twig'
             inventory:
-                template: '@SyliusAdmin/ProductVariant/Form/Sections/_inventory.html.twig'
+                template: '@SyliusAdmin/product_variant/form/sections/inventory.html.twig'
             translations:
-                template: '@SyliusAdmin/ProductVariant/Form/Sections/_translations.html.twig'
+                template: '@SyliusAdmin/product_variant/form/sections/translations.html.twig'
             taxes:
-                template: '@SyliusAdmin/ProductVariant/Form/Sections/_taxes.html.twig'
+                template: '@SyliusAdmin/product_variant/form/sections/taxes.html.twig'

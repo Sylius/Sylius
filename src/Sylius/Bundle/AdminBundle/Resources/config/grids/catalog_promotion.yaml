@@ -38,7 +38,7 @@ sylius_grid:
                     type: twig
                     label: sylius.ui.channels
                     options:
-                        template: '@SyliusAdmin/shared/grid/field/channels.html.twig'
+                        template: '@SyliusAdmin/common/grid/field/channels.html.twig'
                 state:
                     type: twig
                     label: sylius.ui.state
@@ -50,7 +50,7 @@ sylius_grid:
                     label: sylius.ui.enabled
                     sortable: ~
                     options:
-                        template: "@SyliusAdmin/shared/grid/field/boolean.html.twig"
+                        template: "@SyliusAdmin/common/grid/field/boolean.html.twig"
             filters:
                 search:
                     type: string

@@ -1,0 +1,15 @@
+{% import '@SyliusAdmin/common/helper/breadcrumbs.html.twig' as _breadcrumbs %}
+
+{% set title_from_context = hookable_metadata.context.title|default(null) %}
+{% set resource_metadata = hookable_metadata.context.metadata|default(null) %}
+
+{% if title_from_context is not null or resource_metadata is not null %}
+    {% set title = title_from_context|default(resource_metadata.applicationName~'.ui.'~resource_metadata.pluralName) %}
+{% else %}
+    {% set title = hookable_metadata.configuration.title %}
+{% endif %}
+
+{{ _breadcrumbs.default([
+    { 'name': 'Dashboard', 'url': path('sylius_admin_dashboard'), 'active': false },
+    { 'name': title, 'active': true },
+]) }}

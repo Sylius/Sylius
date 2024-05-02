@@ -20,16 +20,16 @@
 
         <service id="Sylius\Bundle\AdminBundle\TwigComponent\Dashboard\NewCustomersComponent">
             <argument type="service" id="sylius.repository.customer" />
-            <tag name="twig.component" key="SyliusAdmin.Dashboard.NewCustomers" template="@SyliusAdmin/Dashboard/Index/Component/newCustomers.html.twig" />
+            <tag name="twig.component" key="SyliusAdmin.Dashboard.NewCustomers" template="@SyliusAdmin/dashboard/index/component/new_customers.html.twig" />
         </service>
 
         <service id="Sylius\Bundle\AdminBundle\TwigComponent\Dashboard\NewOrdersComponent">
             <argument type="service" id="sylius.repository.order" />
-            <tag name="twig.component" key="SyliusAdmin.Dashboard.NewOrders" template="@SyliusAdmin/Dashboard/Index/Component/newOrders.html.twig" />
+            <tag name="twig.component" key="SyliusAdmin.Dashboard.NewOrders" template="@SyliusAdmin/dashboard/index/component/new_orders.html.twig" />
         </service>
 
         <service id="Sylius\Bundle\AdminBundle\TwigComponent\Shared\Navbar\NotificationsComponent">
-            <tag name="twig.component" key="SyliusAdminNavbarNotifications" template="@SyliusAdmin/Shared/Components/Navbar/notifications.html.twig" />
+            <tag name="twig.component" key="sylius_admin:navbar:notifications" template="@SyliusAdmin/common/shared/navbar/items/notifications.html.twig" />
         </service>
 
         <service id="Sylius\Bundle\AdminBundle\TwigComponent\Shared\Navbar\UserDropdownComponent">
@@ -37,7 +37,7 @@
             <argument type="service" id="translator" />
             <argument type="service" id="security.helper" />
 
-            <tag name="twig.component" key="SyliusAdminUserDropdown" template="@SyliusAdmin/Shared/Components/Navbar/user.html.twig" />
+            <tag name="twig.component" key="sylius_admin:navbar:user" template="@SyliusAdmin/common/shared/navbar/items/user.html.twig" />
         </service>
 
         <service id="Sylius\Bundle\AdminBundle\TwigComponent\Taxon\TaxonTreeComponent">

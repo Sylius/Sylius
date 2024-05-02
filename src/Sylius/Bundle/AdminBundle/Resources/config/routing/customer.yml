@@ -2,7 +2,7 @@ sylius_admin_customer:
     resource: |
         alias: sylius.customer
         section: admin
-        templates: "@SyliusAdmin\\Shared\\Crud"
+        templates: "@SyliusAdmin\\common"
         except: ['delete']
         redirect: update
         grid: sylius_admin_customer
@@ -11,7 +11,7 @@ sylius_admin_customer:
             all:
                 subheader: sylius.ui.manage_your_customers
                 templates:
-                    form: "@SyliusAdmin/Customer/_form.html.twig"
+                    form: "@SyliusAdmin/customer/form.html.twig"
             index:
                 icon: users
     type: sylius.resource
@@ -24,7 +24,7 @@ sylius_admin_customer_order_index:
         _sylius:
             section: admin
             permission: true
-            template: "@SyliusAdmin/Shared/Crud/index.html.twig"
+            template: "@SyliusAdmin/common/index.html.twig"
             grid: sylius_admin_customer_order
 
 sylius_admin_customer_orders_statistics:

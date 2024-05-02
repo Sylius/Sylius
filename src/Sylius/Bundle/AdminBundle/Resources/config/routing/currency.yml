@@ -2,7 +2,7 @@ sylius_admin_currency:
     resource: |
         alias: sylius.currency
         section: admin
-        templates: "@SyliusAdmin\\Shared\\Crud"
+        templates: "@SyliusAdmin\\common"
         only: ['index', 'create']
         redirect: index
         grid: sylius_admin_currency

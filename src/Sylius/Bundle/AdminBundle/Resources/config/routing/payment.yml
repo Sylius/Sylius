@@ -2,7 +2,7 @@ sylius_admin_payment:
     resource: |
         alias: sylius.payment
         section: admin
-        templates: "@SyliusAdmin\\Shared\\Crud"
+        templates: "@SyliusAdmin\\common"
         only: ['index']
         grid: sylius_admin_payment
         permission: true

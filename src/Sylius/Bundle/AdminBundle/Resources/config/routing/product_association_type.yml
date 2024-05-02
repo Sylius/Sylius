@@ -3,7 +3,7 @@ sylius_admin_product_association_type:
         alias: sylius.product_association_type
         section: admin
         permission: true
-        templates: "@SyliusAdmin\\Shared\\Crud"
+        templates: "@SyliusAdmin\\common"
         except: ['show']
         redirect: update
         grid: sylius_admin_product_association_type
@@ -11,7 +11,7 @@ sylius_admin_product_association_type:
             all:
                 subheader: sylius.ui.manage_association_types_of_your_products
                 templates:
-                    form: "@SyliusAdmin/ProductAssociationType/_form.html.twig"
+                    form: "@SyliusAdmin/product_association_type/form.html.twig"
             index:
                 icon: tasks
     type: sylius.resource

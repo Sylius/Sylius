@@ -43,7 +43,7 @@ final class DashboardController
             return new RedirectResponse($this->router->generate('sylius_admin_channel_create'));
         }
 
-        return new Response($this->templatingEngine->render('@SyliusAdmin/Dashboard/index.html.twig', [
+        return new Response($this->templatingEngine->render('@SyliusAdmin/dashboard/index.html.twig', [
             'channel' => $channel,
         ]));
     }
