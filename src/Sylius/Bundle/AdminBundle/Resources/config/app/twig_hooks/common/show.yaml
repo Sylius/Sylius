@@ -13,6 +13,8 @@ twig_hooks:
                 template: '@SyliusAdmin/shared/crud/common/content/flashes.html.twig'
             header:
                 template: '@SyliusAdmin/shared/crud/common/content/header.html.twig'
+            footer:
+                template: '@SyliusAdmin/shared/crud/common/content/footer.html.twig'
 
         'sylius_admin.common.show.content.header':
             breadcrumbs:
