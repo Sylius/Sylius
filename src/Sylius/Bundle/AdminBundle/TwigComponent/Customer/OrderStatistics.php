@@ -25,7 +25,7 @@ use Symfony\UX\TwigComponent\Attribute\ExposeInTemplate;
 
 #[AsLiveComponent(
     name: 'SyliusAdmin.Customer.Show.OrderStatistics',
-    template: '@SyliusAdmin/Customer/Show/Component/orderStatistics.html.twig',
+    template: '@SyliusAdmin/customer/show/component/order_statistics.html.twig',
 )]
 final class OrderStatistics
 {

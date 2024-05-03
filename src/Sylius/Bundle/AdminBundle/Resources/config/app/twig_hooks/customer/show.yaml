@@ -2,27 +2,27 @@ twig_hooks:
     hooks:
         'sylius_admin.customer.show.content':
             sections:
-                template: '@SyliusAdmin/Customer/Show/Content/_sections.html.twig'
+                template: '@SyliusAdmin/customer/show/content/sections.html.twig'
 
         'sylius_admin.customer.show.content.header':
             breadcrumbs:
-                template: '@SyliusAdmin/Customer/Show/Content/Header/_breadcrumbs.html.twig'
+                template: '@SyliusAdmin/customer/show/content/header/breadcrumbs.html.twig'
 
         'sylius_admin.customer.show.content.header.title_block':
             title:
-                template: '@SyliusAdmin/Customer/Show/Content/Header/TitleBlock/_title.html.twig'
+                template: '@SyliusAdmin/customer/show/content/header/title_block/title.html.twig'
             actions:
-                template: '@SyliusAdmin/Customer/Show/Content/Header/TitleBlock/_actions.html.twig'
+                template: '@SyliusAdmin/customer/show/content/header/title_block/actions.html.twig'
 
         'sylius_admin.customer.show.content.header.title_block.actions':
             impersonate:
-                template: '@SyliusAdmin/Customer/Show/Content/Header/TitleBlock/Actions/_impersonate.html.twig'
+                template: '@SyliusAdmin/customer/show/content/header/title_block/actions/impersonate.html.twig'
             show_orders:
-                template: '@SyliusAdmin/Customer/Show/Content/Header/TitleBlock/Actions/_showOrders.html.twig'
+                template: '@SyliusAdmin/customer/show/content/header/title_block/actions/show_orders.html.twig'
             edit:
-                template: '@SyliusAdmin/Customer/Show/Content/Header/TitleBlock/Actions/_edit.html.twig'
+                template: '@SyliusAdmin/customer/show/content/header/title_block/actions/edit.html.twig'
             delete:
-                template: '@SyliusAdmin/Customer/Show/Content/Header/TitleBlock/Actions/_delete.html.twig'
+                template: '@SyliusAdmin/customer/show/content/header/title_block/actions/delete.html.twig'
 
         'sylius_admin.customer.show.content.sections':
             order_statistics:
@@ -30,24 +30,24 @@ twig_hooks:
                 props:
                     customerId: '@=_context.resource.getId()'
             details:
-                template: '@SyliusAdmin/Customer/Show/Content/Sections/_details.html.twig'
+                template: '@SyliusAdmin/customer/show/content/sections/details.html.twig'
 
         'sylius_admin.customer.show.content.sections.details':
             first_name:
-                template: '@SyliusAdmin/Customer/Show/Content/Sections/Details/_firstName.html.twig'
+                template: '@SyliusAdmin/customer/show/content/sections/details/first_name.html.twig'
             last_name:
-                template: '@SyliusAdmin/Customer/Show/Content/Sections/Details/_lastName.html.twig'
+                template: '@SyliusAdmin/customer/show/content/sections/details/last_name.html.twig'
             customer_since:
-                template: '@SyliusAdmin/Customer/Show/Content/Sections/Details/_customerSince.html.twig'
+                template: '@SyliusAdmin/customer/show/content/sections/details/customer_since.html.twig'
             group_membership:
-                template: '@SyliusAdmin/Customer/Show/Content/Sections/Details/_groupMembership.html.twig'
+                template: '@SyliusAdmin/customer/show/content/sections/details/group_membership.html.twig'
             subscribed_to_newsletter:
-                template: '@SyliusAdmin/Customer/Show/Content/Sections/Details/_subscribedToNewsletter.html.twig'
+                template: '@SyliusAdmin/customer/show/content/sections/details/subscribed_to_newsletter.html.twig'
             email_verified:
-                template: '@SyliusAdmin/Customer/Show/Content/Sections/Details/_emailVerified.html.twig'
+                template: '@SyliusAdmin/customer/show/content/sections/details/email_verified.html.twig'
             email:
-                template: '@SyliusAdmin/Customer/Show/Content/Sections/Details/_email.html.twig'
+                template: '@SyliusAdmin/customer/show/content/sections/details/email.html.twig'
             phone:
-                template: '@SyliusAdmin/Customer/Show/Content/Sections/Details/_phone.html.twig'
+                template: '@SyliusAdmin/customer/show/content/sections/details/phone.html.twig'
             default_address:
-                template: '@SyliusAdmin/Customer/Show/Content/Sections/Details/_defaultAddress.html.twig'
+                template: '@SyliusAdmin/customer/show/content/sections/details/default_address.html.twig'
