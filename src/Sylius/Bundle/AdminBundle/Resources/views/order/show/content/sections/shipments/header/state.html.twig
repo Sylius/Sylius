@@ -1,5 +1,5 @@
 {% set order = hookable_metadata.context.resource %}
 
 <span class="ms-2">
-    {{ include('@SyliusAdmin/Order/_Shared/Label/ShippingState/' ~ order.shippingState ~ '.html.twig') }}
+    {{ include('@SyliusAdmin/order/common/label/shipping_state/' ~ order.shippingState ~ '.html.twig') }}
 </span>
