@@ -4,7 +4,7 @@ sylius_admin_inventory_index:
     defaults:
         _controller: sylius.controller.product_variant::indexAction
         _sylius:
-            template: "@SyliusAdmin/Inventory/index.html.twig"
+            template: "@SyliusAdmin/inventory/index.html.twig"
             grid: sylius_admin_inventory
             section: admin
             permission: true
