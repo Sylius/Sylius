@@ -14,27 +14,27 @@ twig_hooks:
             header:
                 template: '@SyliusAdmin/Shared/Crud/Common/Content/_header.html.twig'
             sections:
-                template: '@SyliusAdmin/Order/history/content/sections.html.twig'
+                template: '@SyliusAdmin/order/history/content/sections.html.twig'
 
         'sylius_admin.order.history.content.header':
             title_block:
                 template: '@SyliusAdmin/Shared/Crud/Common/Content/Header/_titleBlock.html.twig'
             breadcrumbs:
-                template: '@SyliusAdmin/Order/history/content/header/breadcrumbs.html.twig'
+                template: '@SyliusAdmin/order/history/content/header/breadcrumbs.html.twig'
 
         'sylius_admin.order.history.content.header.title_block':
             title:
-                template: '@SyliusAdmin/Order/history/content/header/title_block/title.html.twig'
+                template: '@SyliusAdmin/order/history/content/header/title_block/title.html.twig'
             actions:
-                template: '@SyliusAdmin/Order/history/content/header/title_block/actions.html.twig'
+                template: '@SyliusAdmin/order/history/content/header/title_block/actions.html.twig'
 
         'sylius_admin.order.history.content.header.title_block.actions':
             back:
-                template: '@SyliusAdmin/Order/history/content/header/title_block/actions/back.html.twig'
+                template: '@SyliusAdmin/order/history/content/header/title_block/actions/back.html.twig'
 
         'sylius_admin.order.history.content.sections':
             addresses:
-                template: '@SyliusAdmin/Order/history/content/sections/addresses.html.twig'
+                template: '@SyliusAdmin/order/history/content/sections/addresses.html.twig'
 
         'sylius_admin.order.history.content.sections.addresses':
             billing_address:
