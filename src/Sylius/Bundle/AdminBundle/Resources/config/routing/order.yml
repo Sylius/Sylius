@@ -39,7 +39,7 @@ sylius_admin_order_history:
               arguments:
                 - '$id'
             permission: true
-            template: "@SyliusAdmin/Order/history.html.twig"
+            template: "@SyliusAdmin/order/history.html.twig"
 
 sylius_admin_order_update:
     path: /orders/{id}/edit
