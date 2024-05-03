@@ -18,13 +18,13 @@ twig_hooks:
                 props:
                     channelCode: '@=_context.channelCode'
             latest_statistics:
-                template: '@SyliusAdmin/Dashboard/Index/Content/_latestStatistics.html.twig'
+                template: '@SyliusAdmin/dashboard/index/content/latest_statistics.html.twig'
 
         'sylius_admin.dashboard.index.content.header':
             title_block:
                 template: '@SyliusAdmin/Shared/Crud/Common/Content/Header/_titleBlock.html.twig'
             breadcrumbs:
-                template: '@SyliusAdmin/Dashboard/Index/Content/Header/breadcrumbs.html.twig'
+                template: '@SyliusAdmin/dashboard/index/content/header/breadcrumbs.html.twig'
 
         'sylius_admin.dashboard.index.content.header.title_block':
             title:
@@ -36,19 +36,19 @@ twig_hooks:
 
         'sylius_admin.dashboard.index.content.statistics':
             statistics_grid:
-                template: '@SyliusAdmin/Dashboard/Index/Content/_statisticsGrid.html.twig'
+                template: '@SyliusAdmin/dashboard/index/content/statistics_grid.html.twig'
             statistics_chart:
-                template: '@SyliusAdmin/Dashboard/Index/Content/_statisticsChart.html.twig'
+                template: '@SyliusAdmin/dashboard/index/content/statistics_chart.html.twig'
 
         'sylius_admin.dashboard.index.content.statistics.statistics_grid':
             sales:
-                template: '@SyliusAdmin/Dashboard/Index/Content/StatisticsGrid/_sales.html.twig'
+                template: '@SyliusAdmin/dashboard/index/content/statistics_grid/sales.html.twig'
             paid_orders:
-                template: '@SyliusAdmin/Dashboard/Index/Content/StatisticsGrid/_paidOrders.html.twig'
+                template: '@SyliusAdmin/dashboard/index/content/statistics_grid/paid_orders.html.twig'
             customers:
-                template: '@SyliusAdmin/Dashboard/Index/Content/StatisticsGrid/_customers.html.twig'
+                template: '@SyliusAdmin/dashboard/index/content/statistics_grid/customers.html.twig'
             average_order_value:
-                template: '@SyliusAdmin/Dashboard/Index/Content/StatisticsGrid/_averageOrderValue.html.twig'
+                template: '@SyliusAdmin/dashboard/index/content/statistics_grid/average_order_value.html.twig'
 
         'sylius_admin.dashboard.index.content.latest_statistics':
             new_customers:

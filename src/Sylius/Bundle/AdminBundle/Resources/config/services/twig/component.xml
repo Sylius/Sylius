@@ -20,12 +20,12 @@
 
         <service id="Sylius\Bundle\AdminBundle\TwigComponent\Dashboard\NewCustomersComponent">
             <argument type="service" id="sylius.repository.customer" />
-            <tag name="twig.component" key="SyliusAdmin.Dashboard.NewCustomers" template="@SyliusAdmin/Dashboard/Index/Component/newCustomers.html.twig" />
+            <tag name="twig.component" key="SyliusAdmin.Dashboard.NewCustomers" template="@SyliusAdmin/dashboard/index/component/new_customers.html.twig" />
         </service>
 
         <service id="Sylius\Bundle\AdminBundle\TwigComponent\Dashboard\NewOrdersComponent">
             <argument type="service" id="sylius.repository.order" />
-            <tag name="twig.component" key="SyliusAdmin.Dashboard.NewOrders" template="@SyliusAdmin/Dashboard/Index/Component/newOrders.html.twig" />
+            <tag name="twig.component" key="SyliusAdmin.Dashboard.NewOrders" template="@SyliusAdmin/dashboard/index/component/new_orders.html.twig" />
         </service>
 
         <service id="Sylius\Bundle\AdminBundle\TwigComponent\Shared\Navbar\NotificationsComponent">
