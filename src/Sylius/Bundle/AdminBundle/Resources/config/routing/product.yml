@@ -73,7 +73,7 @@ sylius_admin_channel_pricing_log_entry_index:
         _sylius:
             section: admin
             permission: true
-            template: "@SyliusAdmin/ChannelPricingLogEntry/Index/index.html.twig"
+            template: "@SyliusAdmin/channel_pricing_log_entry/index.html.twig"
             grid: sylius_admin_channel_pricing_log_entry
             vars:
                 product_variant: "expr:service('sylius.repository.product_variant').find($variantId)"
