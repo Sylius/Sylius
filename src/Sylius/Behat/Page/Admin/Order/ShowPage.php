@@ -18,7 +18,6 @@ use Behat\Mink\Exception\ElementNotFoundException;
 use Behat\Mink\Session;
 use FriendsOfBehat\PageObjectExtension\Page\SymfonyPage;
 use Sylius\Behat\Service\Accessor\TableAccessorInterface;
-use Sylius\Bundle\MoneyBundle\Formatter\MoneyFormatterInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Symfony\Component\Routing\RouterInterface;
 
@@ -29,7 +28,6 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
         $minkParameters,
         RouterInterface $router,
         private TableAccessorInterface $tableAccessor,
-        private MoneyFormatterInterface $moneyFormatter,
     ) {
         parent::__construct($session, $minkParameters, $router);
     }
@@ -66,11 +64,11 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
         return $this->hasAddress($billingAddressText, $customerName, $street, $postcode, $city, $countryName);
     }
 
-    public function hasShipment(string $shippingDetails): bool
+    public function hasShipment(string $shippingMethodName): bool
     {
         $shipmentsText = $this->getElement('shipments')->getText();
 
-        return stripos($shipmentsText, $shippingDetails) !== false;
+        return stripos($shipmentsText, $shippingMethodName) !== false;
     }
 
     public function hasShipmentWithState(string $state): bool
@@ -99,26 +97,32 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
         $this->getElement('shipment_ship_button')->press();
     }
 
-    public function hasPayment(string $paymentDetails): bool
+    public function hasPayment(string $paymentMethodName): bool
     {
         $paymentsText = $this->getElement('payments')->getText();
 
-        return stripos($paymentsText, $paymentDetails) !== false;
+        return stripos($paymentsText, $paymentMethodName) !== false;
     }
 
     public function canCompleteOrderLastPayment(OrderInterface $order): bool
     {
-        return $this->getLastOrderPaymentElement($order)->hasButton('Complete');
+        $lastPayment = $order->getLastPayment();
+
+        return $this->hasElement('payment_complete', ['%paymentId%' => $lastPayment->getId()]);
     }
 
     public function completeOrderLastPayment(OrderInterface $order): void
     {
-        $this->getLastOrderPaymentElement($order)->pressButton('Complete');
+        $lastPayment = $order->getLastPayment();
+
+        $this->getElement('payment_complete', ['%paymentId%' => $lastPayment->getId()])->submit();
     }
 
     public function refundOrderLastPayment(OrderInterface $order): void
     {
-        $this->getLastOrderPaymentElement($order)->pressButton('Refund');
+        $lastPayment = $order->getLastPayment();
+
+        $this->getElement('payment_refund', ['%paymentId%' => $lastPayment->getId()])->submit();
     }
 
     public function countItems(): int
@@ -422,10 +426,12 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
             'ip_address' => '#ipAddress',
             'items_total' => '#items-total',
             'order_notes' => '#sylius-order-notes',
-            'order_payment_state' => '#payment-state > span',
+            'order_payment_state' => '[data-test-order-payment-state]',
             'order_shipping_state' => '#shipping-state > span',
             'order_state' => '#sylius-order-state',
-            'payments' => '#sylius-payments',
+            'payments' => '[data-test-payments]',
+            'payment_complete' => '[data-test-complete-payment="%paymentId%"]',
+            'payment_refund' => '[data-test-refund-payment="%paymentId%"]',
             'promotion_discounts' => '#promotion-discounts',
             'promotion_shipping_discounts' => '#shipping-discount-value',
             'promotion_total' => '[data-test-promotion-total]',
@@ -475,20 +481,5 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     protected function getRowWithItem(string $itemName): ?NodeElement
     {
         return $this->tableAccessor->getRowWithFields($this->getElement('table'), ['item' => $itemName]);
-    }
-
-    protected function getLastOrderPaymentElement(OrderInterface $order): ?NodeElement
-    {
-        $payment = $order->getPayments()->last();
-
-        $paymentStateElements = $this->getElement('payments')->findAll('css', sprintf('span.ui.label:contains(\'%s\')', ucfirst($payment->getState())));
-        $paymentStateElement = end($paymentStateElements);
-
-        return $paymentStateElement->getParent()->getParent();
-    }
-
-    protected function getFormattedMoney(int $orderPromotionTotal): string
-    {
-        return $this->moneyFormatter->format($orderPromotionTotal, $this->getDocument()->find('css', '#sylius-order-currency')->getText());
     }
 }

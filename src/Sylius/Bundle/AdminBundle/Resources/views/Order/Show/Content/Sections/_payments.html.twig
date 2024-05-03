@@ -2,39 +2,6 @@
 
 {% set order = hookable_metadata.context.resource %}
 
-<div class="card mb-3">
-    <div class="card-header">
-        <div class="card-title">
-            {{ 'sylius.ui.payments'|trans }}
-            <span class="ms-2">
-                {{ include('@SyliusAdmin/Order/_Shared/Label/PaymentState/' ~ order.paymentState ~ '.html.twig') }}
-            </span>
-        </div>
-    </div>
-    <div class="py-3">
-        {% if order.hasPayments() %}
-            <table class="table table-vcenter table-borderless table-sm card-table">
-                <tbody>
-                {% for payment in order.payments %}
-                    <tr>
-                        <td class="w-1">
-                            <div class="text-success">{{ payment.state|upper }}</div>
-                        </td>
-                        <td class="px-3">
-                            <strong>{{ payment.method.name }}</strong>
-                        </td>
-                        <td class="text-end">
-                            {{ _money.format(payment.amount, order.currencyCode) }}
-                        </td>
-                        <td class="w-1 text-end">
-                            {% hook 'payments#actions' with { payment } %}
-                        </td>
-                    </tr>
-                {% endfor %}
-                </tbody>
-            </table>
-        {% else %}
-            <span class="px-3 text-secondary italic">{{ 'sylius.ui.no_payments'|trans }}</span>
-        {% endif %}
-    </div>
+<div class="card mb-3" {{ sylius_test_html_attribute('payments') }}>
+    {% hook 'payments' %}
 </div>

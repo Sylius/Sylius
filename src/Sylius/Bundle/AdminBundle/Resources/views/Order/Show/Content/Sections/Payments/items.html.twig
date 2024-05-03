@@ -1,0 +1,17 @@
+{% set order = hookable_metadata.context.resource %}
+
+<div class="py-3">
+    {% if order.hasPayments %}
+        <table class="table table-vcenter table-borderless table-sm card-table">
+            <tbody>
+            <tr {{ sylius_test_html_attribute('payment') }}>
+                {% for payment in order.payments %}
+                    {% hook 'item' with { resource: order, payment } %}
+                {% endfor %}
+            </tr>
+            </tbody>
+        </table>
+    {% else %}
+        <span class="px-3 text-secondary italic">{{ 'sylius.ui.no_payments'|trans }}</span>
+    {% endif %}
+</div>

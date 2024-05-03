@@ -67,9 +67,34 @@ twig_hooks:
                 template: '@SyliusAdmin/Order/Show/Content/Sections/Shipments/Item/Actions/_resendConfirmation.html.twig'
             show:
                 template: '@SyliusAdmin/Order/Show/Content/Sections/Shipments/Item/Actions/_show.html.twig'
-        'sylius_admin.order.show.content.sections.payments#actions':
+
+        'sylius_admin.order.show.content.sections.payments':
+            header:
+                template: '@SyliusAdmin/Order/Show/Content/Sections/Payments/header.html.twig'
+            items:
+                template: '@SyliusAdmin/Order/Show/Content/Sections/Payments/items.html.twig'
+
+        'sylius_admin.order.show.content.sections.payments.header':
+            title:
+                template: '@SyliusAdmin/Order/Show/Content/Sections/Payments/header/title.html.twig'
+            state:
+                template: '@SyliusAdmin/Order/Show/Content/Sections/Payments/header/state.html.twig'
+
+        'sylius_admin.order.show.content.sections.payments.item':
+            state:
+                template: '@SyliusAdmin/Order/Show/Content/Sections/Payments/item/state.html.twig'
+            name:
+                template: '@SyliusAdmin/Order/Show/Content/Sections/Payments/item/name.html.twig'
+            amount:
+                template: '@SyliusAdmin/Order/Show/Content/Sections/Payments/item/amount.html.twig'
+            actions:
+                template: '@SyliusAdmin/Order/Show/Content/Sections/Payments/item/actions.html.twig'
+
+        'sylius_admin.order.show.content.sections.payments.item.actions':
             complete:
-                template: '@SyliusAdmin/Order/Show/Content/Sections/Payments/Actions/_complete.html.twig'
+                template: '@SyliusAdmin/Order/Show/Content/Sections/Payments/item/actions/complete.html.twig'
+            refund:
+                template: '@SyliusAdmin/Order/Show/Content/Sections/Payments/item/actions/refund.html.twig'
 
         'sylius_admin.order.show.content.sections#right':
             details:
