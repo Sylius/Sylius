@@ -18,7 +18,7 @@ sylius_grid:
                     path: .
                     sortable: code
                     options:
-                        template: "@SyliusAdmin/Locale/Grid/Field/name.html.twig"
+                        template: "@SyliusAdmin/locale/grid/field/name.html.twig"
             filters:
                 code:
                     type: string
