@@ -15,7 +15,6 @@ namespace Sylius\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
 use Sylius\Behat\NotificationType;
-use Sylius\Behat\Page\Admin\Order\HistoryPageInterface;
 use Sylius\Behat\Page\Admin\Order\IndexPageInterface;
 use Sylius\Behat\Page\Admin\Order\ShowPageInterface;
 use Sylius\Behat\Page\Admin\Order\UpdatePageInterface;
@@ -37,7 +36,6 @@ final class ManagingOrdersContext implements Context
         private IndexPageInterface $indexPage,
         private ShowPageInterface $showPage,
         private UpdatePageInterface $updatePage,
-        private HistoryPageInterface $historyPage,
         private ErrorPageInterface $errorPage,
         private NotificationCheckerInterface $notificationChecker,
         private SharedSecurityServiceInterface $sharedSecurityService,
@@ -51,14 +49,6 @@ final class ManagingOrdersContext implements Context
     public function iBrowseOrders()
     {
         $this->indexPage->open();
-    }
-
-    /**
-     * @When I browse order's :order history
-     */
-    public function iBrowseOrderHistory(OrderInterface $order)
-    {
-        $this->historyPage->open(['id' => $order->getId()]);
     }
 
     /**
@@ -924,22 +914,6 @@ final class ManagingOrdersContext implements Context
 
             Assert::true($this->indexPage->isSingleResourceOnPage(['total' => $total]));
         });
-    }
-
-    /**
-     * @Then there should be :count shipping address changes in the registry
-     */
-    public function thereShouldBeCountShippingAddressChangesInTheRegistry(int $count): void
-    {
-        Assert::same($this->historyPage->countShippingAddressChanges(), $count);
-    }
-
-    /**
-     * @Then there should be :count billing address changes in the registry
-     */
-    public function thereShouldBeCountBillingAddressChangesInTheRegistry(int $count): void
-    {
-        Assert::same($this->historyPage->countBillingAddressChanges(), $count);
     }
 
     /**

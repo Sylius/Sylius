@@ -775,15 +775,6 @@
     "symfony/proxy-manager-bridge": {
         "version": "v4.4.13"
     },
-    "symfony/panther": {
-        "version": "2.1",
-        "recipe": {
-            "repo": "github.com/symfony/recipes",
-            "branch": "main",
-            "version": "1.0",
-            "ref": "292a3236e81f55b545b09b9954ab097248972ab3"
-        }
-    },
     "symfony/routing": {
         "version": "4.2",
         "recipe": {
@@ -994,8 +985,8 @@
     "theseer/tokenizer": {
         "version": "1.2.0"
     },
-    "twig/intl-extra": {
-        "version": "v2.13.1"
+    "twig/extra-bundle": {
+        "version": "v3.9.3"
     },
     "twig/twig": {
         "version": "v2.13.1"

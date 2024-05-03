@@ -11,6 +11,12 @@ twig_hooks:
         'sylius_admin.order.show.content.header.title_block':
             title:
                 template: '@SyliusAdmin/Order/Show/Content/Header/TitleBlock/_title.html.twig'
+            actions:
+                template: '@SyliusAdmin/Order/Show/Content/Header/TitleBlock/actions.html.twig'
+
+        'sylius_admin.order.show.content.header.title_block.actions':
+            history:
+                template: '@SyliusAdmin/Order/Show/Content/Header/TitleBlock/actions/history.html.twig'
 
         'sylius_admin.order.show.content.sections#left':
             items:
