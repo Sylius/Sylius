@@ -111,7 +111,7 @@
         <service id="Sylius\Bundle\AdminBundle\Twig\Component\Order\AddressHistoryComponent">
             <argument type="service" id="sylius.repository.address_log_entry" />
 
-            <tag name="twig.component" key="sylius_admin:order:history:address" template="@SyliusAdmin/Order/history/content/sections/addresses/address.html.twig" />
+            <tag name="twig.component" key="sylius_admin:order:history:address" template="@SyliusAdmin/order/history/content/sections/addresses/address.html.twig" />
         </service>
     </services>
 </container>

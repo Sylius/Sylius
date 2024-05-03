@@ -22,7 +22,7 @@ use Symfony\UX\LiveComponent\Attribute\LiveProp;
 use Symfony\UX\LiveComponent\ComponentWithFormTrait;
 use Symfony\UX\LiveComponent\DefaultActionTrait;
 
-#[AsLiveComponent(name: 'SyliusAdmin.Order.OrderType', template: '@SyliusAdmin/Order/form.html.twig')]
+#[AsLiveComponent(name: 'SyliusAdmin.Order.OrderType', template: '@SyliusAdmin/order/form.html.twig')]
 final class OrderType
 {
     use ComponentWithFormTrait;
