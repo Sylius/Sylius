@@ -66,9 +66,9 @@ twig_hooks:
                 props:
                     shipment: '@=_context.shipment'
             resend_confirmation:
-                template: '@SyliusAdmin/order/show/content/sections/shipments/item/Actions/resend_confirmation.html.twig'
+                template: '@SyliusAdmin/order/show/content/sections/shipments/item/actions/resend_confirmation.html.twig'
             show:
-                template: '@SyliusAdmin/order/show/content/sections/shipments/item/Actions/show.html.twig'
+                template: '@SyliusAdmin/order/show/content/sections/shipments/item/actions/show.html.twig'
 
         'sylius_admin.order.show.content.sections.payments':
             header:
