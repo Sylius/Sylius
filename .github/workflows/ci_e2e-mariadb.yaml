@@ -51,7 +51,7 @@ jobs:
             matrix: ${{ fromJson(needs.get-matrix.outputs.matrix) }}
 
         env:
-            APP_ENV: test
+            APP_ENV: test_cached
             DATABASE_URL: "mysql://root:root@127.0.0.1/sylius?charset=utf8mb4&serverVersion=mariadb-${{ matrix.mariadb }}"
             TEST_SYLIUS_STATE_MACHINE_ADAPTER: "${{ matrix.state_machine_adapter }}"
 
@@ -122,5 +122,4 @@ jobs:
                     path: |
                         etc/build/
                         var/log
-                        src/Sylius/Bundle/AdminBundle/Resources/views
                     if-no-files-found: ignore
