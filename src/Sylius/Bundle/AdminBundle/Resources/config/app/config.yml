@@ -73,9 +73,9 @@ sylius_grid:
             update: '@SyliusAdmin/Shared/Grid/Action/_update.html.twig'
             create_payment_method: "@SyliusAdmin/payment_method/grid/action/create.html.twig"
             create_product_attribute: "@SyliusAdmin/product_attribute/grid/action/create.html.twig"
-            generate_variants: "@SyliusAdmin/Product/Grid/action/generate_variants.html.twig"
+            generate_variants: "@SyliusAdmin/product/grid/action/generate_variants.html.twig"
             ship_with_tracking_code: "@SyliusAdmin/shipment/grid/action/ship_with_tracking_code.html.twig"
-            update_product_positions: "@SyliusAdmin/Product/Grid/Action/updatePositions.html.twig"
+            update_product_positions: "@SyliusAdmin/product/grid/action/update_positions.html.twig"
             update_product_variant_positions: "@SyliusAdmin/product_variant/grid/action/update_positions.html.twig"
         bulk_action:
             delete: '@SyliusAdmin/Shared/Grid/BulkAction/_delete.html.twig'

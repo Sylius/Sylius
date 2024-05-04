@@ -2,52 +2,52 @@ twig_hooks:
     hooks:
         'sylius_admin.product.show.content':
             page_body:
-                template: '@SyliusAdmin/Product/Show/Content/_pageBody.html.twig'
+                template: '@SyliusAdmin/product/show/content/page_body.html.twig'
 
         'sylius_admin.product.show.content.header.title_block':
             title:
-                template: '@SyliusAdmin/Product/Show/Content/Header/TitleBlock/_title.html.twig'
+                template: '@SyliusAdmin/product/show/content/header/title_block/title.html.twig'
 
         'sylius_admin.product.show.content.page_body':
             details:
-                template: '@SyliusAdmin/Product/Show/Content/PageBody/_details.html.twig'
+                template: '@SyliusAdmin/product/show/content/page_body/details.html.twig'
             translations:
-                template: '@SyliusAdmin/Product/Show/Content/PageBody/_translations.html.twig'
+                template: '@SyliusAdmin/product/show/content/page_body/translations.html.twig'
             taxonomy:
-                template: '@SyliusAdmin/Product/Show/Content/PageBody/_taxonomy.html.twig'
+                template: '@SyliusAdmin/product/show/content/page_body/taxonomy.html.twig'
             associations:
-                template: '@SyliusAdmin/Product/Show/Content/PageBody/_associations.html.twig'
+                template: '@SyliusAdmin/product/show/content/page_body/associations.html.twig'
 
         'sylius_admin.product.show.content.page_body.details':
             simple_product:
-                template: '@SyliusAdmin/Product/Show/Content/PageBody/Details/simpleProduct.html.twig'
+                template: '@SyliusAdmin/product/show/content/page_body/details/simple_product.html.twig'
             configurable_product:
-                template: '@SyliusAdmin/Product/Show/Content/PageBody/Details/configurableProduct.html.twig'
+                template: '@SyliusAdmin/product/show/content/page_body/details/configurable_product.html.twig'
 
         'sylius_admin.product.show.content.page_body.details.simple_product':
             shipping:
-                template: '@SyliusAdmin/Product/Show/Content/PageBody/Details/Shared/shipping.html.twig'
+                template: '@SyliusAdmin/product/show/content/page_body/details/shared/shipping.html.twig'
 
         'sylius_admin.product.show.content.page_body.details.configurable_product':
             shipping:
-                template: '@SyliusAdmin/Product/Show/Content/PageBody/Details/Shared/shipping.html.twig'
+                template: '@SyliusAdmin/product/show/content/page_body/details/shared/shipping.html.twig'
 
         'sylius_admin.product.show.content.page_body.translations':
             product_name:
-                template: '@SyliusAdmin/Product/Show/Content/PageBody/TranslationContent/_productName.html.twig'
+                template: '@SyliusAdmin/product/show/content/page_body/translation_content/product_name.html.twig'
             slug:
-                template: '@SyliusAdmin/Product/Show/Content/PageBody/TranslationContent/_slug.html.twig'
+                template: '@SyliusAdmin/product/show/content/page_body/translation_content/slug.html.twig'
             description:
-                template: '@SyliusAdmin/Product/Show/Content/PageBody/TranslationContent/_description.html.twig'
+                template: '@SyliusAdmin/product/show/content/page_body/translation_content/description.html.twig'
             short_description:
-                template: '@SyliusAdmin/Product/Show/Content/PageBody/TranslationContent/_shortDescription.html.twig'
+                template: '@SyliusAdmin/product/show/content/page_body/translation_content/short_description.html.twig'
             meta_keywords:
-                template: '@SyliusAdmin/Product/Show/Content/PageBody/TranslationContent/_metaKeywords.html.twig'
+                template: '@SyliusAdmin/product/show/content/page_body/translation_content/meta_keywords.html.twig'
             meta_description:
-                template: '@SyliusAdmin/Product/Show/Content/PageBody/TranslationContent/_metaDescription.html.twig'
+                template: '@SyliusAdmin/product/show/content/page_body/translation_content/meta_description.html.twig'
 
         'sylius_admin.product.show.content.page_body.taxonomy':
             main_taxon:
-                template: '@SyliusAdmin/Product/Show/Content/PageBody/Taxonomy/_mainTaxon.html.twig'
+                template: '@SyliusAdmin/product/show/content/page_body/taxonomy/main_taxon.html.twig'
             product_taxons:
-                template: '@SyliusAdmin/Product/Show/Content/PageBody/Taxonomy/_productTaxons.html.twig'
+                template: '@SyliusAdmin/product/show/content/page_body/taxonomy/product_taxons.html.twig'
