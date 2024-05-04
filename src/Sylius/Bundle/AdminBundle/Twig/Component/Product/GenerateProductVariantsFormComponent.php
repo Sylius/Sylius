@@ -22,7 +22,7 @@ use Symfony\UX\LiveComponent\Attribute\LiveProp;
 use Symfony\UX\LiveComponent\DefaultActionTrait;
 use Symfony\UX\LiveComponent\LiveCollectionTrait;
 
-#[AsLiveComponent(name: 'sylius_admin:product:generate_product_variants_form', template: '@SyliusAdmin/Product/generate_variants/form.html.twig')]
+#[AsLiveComponent(name: 'sylius_admin:product:generate_product_variants_form', template: '@SyliusAdmin/product/generate_variants/form.html.twig')]
 final class GenerateProductVariantsFormComponent
 {
     use DefaultActionTrait;

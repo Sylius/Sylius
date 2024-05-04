@@ -11,7 +11,7 @@ sylius_grid:
                     path: .
                     sortable: productTaxon.position
                     options:
-                        template: "@SyliusAdmin/Product/Grid/Field/position.html.twig"
+                        template: "@SyliusAdmin/product/grid/field/position.html.twig"
             actions:
                 main:
                     update_positions:
