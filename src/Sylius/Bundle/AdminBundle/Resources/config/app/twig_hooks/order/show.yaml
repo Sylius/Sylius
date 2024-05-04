@@ -17,6 +17,8 @@ twig_hooks:
         'sylius_admin.order.show.content.header.title_block.actions':
             history:
                 template: '@SyliusAdmin/Order/Show/Content/Header/TitleBlock/actions/history.html.twig'
+            cancel:
+                template: '@SyliusAdmin/Order/Show/Content/Header/TitleBlock/actions/cancel.html.twig'
 
         'sylius_admin.order.show.content.sections#left':
             items:
