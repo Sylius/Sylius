@@ -22,7 +22,7 @@ use Symfony\UX\LiveComponent\Attribute\LiveProp;
 use Symfony\UX\LiveComponent\ComponentWithFormTrait;
 use Symfony\UX\LiveComponent\DefaultActionTrait;
 
-#[AsLiveComponent(name: 'SyliusAdmin.Shipment.ShipType', template: '@SyliusAdmin/Shipment/Component/ship.html.twig')]
+#[AsLiveComponent(name: 'SyliusAdmin.Shipment.ShipType', template: '@SyliusAdmin/shipment/component/ship.html.twig')]
 final class ShipType
 {
     use DefaultActionTrait;

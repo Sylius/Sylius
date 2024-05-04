@@ -57,7 +57,7 @@ sylius_admin:
             links: '@SyliusAdmin/Shared/Grid/ItemAction/_links.html.twig'
             show: '@SyliusAdmin/Shared/Grid/ItemAction/_show.html.twig'
             update: '@SyliusAdmin/Shared/Grid/ItemAction/_update.html.twig'
-            ship_with_tracking_code: '@SyliusAdmin/Shipment/Grid/Action/shipWithTrackingCode.html.twig'
+            ship_with_tracking_code: '@SyliusAdmin/shipment/grid/action/ship_with_tracking_code.html.twig'
             delete_catalog_promotion: "@SyliusAdmin/catalog_promotion/grid/action/delete.html.twig"
 
 sylius_grid:
@@ -74,7 +74,7 @@ sylius_grid:
             create_payment_method: "@SyliusAdmin/payment_method/grid/action/create.html.twig"
             create_product_attribute: "@SyliusAdmin/product_attribute/grid/action/create.html.twig"
             generate_variants: "@SyliusAdmin/Product/Grid/action/generate_variants.html.twig"
-            ship_with_tracking_code: "@SyliusAdmin/Shipment/Grid/Action/shipWithTrackingCode.html.twig"
+            ship_with_tracking_code: "@SyliusAdmin/shipment/grid/action/ship_with_tracking_code.html.twig"
             update_product_positions: "@SyliusAdmin/Product/Grid/Action/updatePositions.html.twig"
             update_product_variant_positions: "@SyliusAdmin/ProductVariant/Grid/Action/updatePositions.html.twig"
         bulk_action:
