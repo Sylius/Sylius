@@ -99,7 +99,7 @@
 {% endmacro %}
 
 {% macro render(taxons, nested = false) %}
-    {% import '@SyliusAdmin/Taxon/Helper/taxonTree.html.twig' as _self %}
+    {% import '@SyliusAdmin/taxon/helper/taxon_tree.html.twig' as _self %}
 
     <ul class="{% if nested %}tree-items{% else %}tree{% endif %}">
         {% if nested == false %}
