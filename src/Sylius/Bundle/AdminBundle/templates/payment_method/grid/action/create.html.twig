@@ -2,7 +2,7 @@
 
 {{ _dropdown.list(
     {
-        button: { text: 'sylius.ui.create'|trans, class: 'btn-secondary' }
+        button: { text: 'sylius.ui.create'|trans, class: 'btn-primary' }
     },
     sylius_admin_get_payment_gateways()|map((gatewayName, gatewayServiceId) => {
         title: gatewayName|trans,
