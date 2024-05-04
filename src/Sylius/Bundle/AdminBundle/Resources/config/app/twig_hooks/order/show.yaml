@@ -19,6 +19,8 @@ twig_hooks:
                 template: '@SyliusAdmin/order/show/content/header/title_block/actions/history.html.twig'
             cancel:
                 template: '@SyliusAdmin/order/show/content/header/title_block/actions/cancel.html.twig'
+            resend_confirmation_email:
+                template: '@SyliusAdmin/order/show/content/header/title_block/actions/resend_confirmation_email.html.twig'
 
         'sylius_admin.order.show.content.sections#left':
             items:

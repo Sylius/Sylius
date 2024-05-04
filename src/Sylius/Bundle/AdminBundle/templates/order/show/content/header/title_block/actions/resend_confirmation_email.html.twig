@@ -1,0 +1,11 @@
+{% from '@SyliusAdmin/Shared/Helper/icon.html.twig' import icon %}
+
+{% set order = hookable_metadata.context.resource %}
+
+{% if order.state in sylius_order_states_that_allows_to_resend_order_confirmation_email %}
+    {% set path = path('sylius_admin_order_resend_confirmation_email', {'id': order.id, '_csrf_token': csrf_token(order.id)}) %}
+    <a class="dropdown-item" href="{{ path }}" {{ sylius_test_html_attribute('resend-order-confirmation-email') }}>
+        {{ icon({ icon: 'send', class: 'icon dropdown-item-icon icon-tabler' }) }}
+        {{ 'sylius.ui.resend_the_order_confirmation_email'|trans }}
+    </a>
+{% endif %}
