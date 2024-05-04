@@ -2,24 +2,26 @@ twig_hooks:
     hooks:
         'sylius_admin.security.login':
             logo:
-                template: '@SyliusAdmin/Security/Login/_logo.html.twig'
+                template: '@SyliusAdmin/security/login/logo.html.twig'
             content:
-                template: '@SyliusAdmin/Security/Login/_content.html.twig'
+                template: '@SyliusAdmin/security/login/content.html.twig'
+
         'sylius_admin.security.login.content':
             header:
-                template: '@SyliusAdmin/Security/Login/Content/_header.html.twig'
+                template: '@SyliusAdmin/security/login/content/header.html.twig'
             flashes:
                 template: '@SyliusAdmin/Shared/Crud/Common/Content/_flashes.html.twig'
             form:
-                template: '@SyliusAdmin/Security/Login/Content/_form.html.twig'
+                template: '@SyliusAdmin/security/login/content/form.html.twig'
+
         'sylius_admin.security.login.content.form':
             error:
-                template: '@SyliusAdmin/Security/Login/Content/Form/error.html.twig'
-            username_field:
-                template: '@SyliusAdmin/Security/Login/Content/Form/_usernameField.html.twig'
-            password_field:
-                template: '@SyliusAdmin/Security/Login/Content/Form/_passwordField.html.twig'
-            remember_me_field:
-                template: '@SyliusAdmin/Security/Login/Content/Form/_rememberMeField.html.twig'
-            submit_button:
-                template: '@SyliusAdmin/Security/Login/Content/Form/_submitButton.html.twig'
+                template: '@SyliusAdmin/security/login/content/form/error.html.twig'
+            username:
+                template: '@SyliusAdmin/security/login/content/form/username.html.twig'
+            password:
+                template: '@SyliusAdmin/security/login/content/form/password.html.twig'
+            remember_me:
+                template: '@SyliusAdmin/security/login/content/form/remember_Me.html.twig'
+            submit:
+                template: '@SyliusAdmin/security/login/content/form/submit.html.twig'
