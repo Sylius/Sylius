@@ -8,7 +8,7 @@ twig_hooks:
 
         'sylius_admin.product_variant.update.content.header':
             breadcrumbs:
-                template: '@SyliusAdmin/product_variant/form/Content/Update/Header/breadcrumbs.html.twig'
+                template: '@SyliusAdmin/product_variant/form/content/update/header/breadcrumbs.html.twig'
 
         'sylius_admin.product_variant.update.content.form':
             side_navigation:

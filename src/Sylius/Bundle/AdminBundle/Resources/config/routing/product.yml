@@ -51,7 +51,7 @@ sylius_admin_product_variant_generate:
     defaults:
         _controller: sylius.controller.product::updateAction
         _sylius:
-            template: "@SyliusAdmin/Product/generate_variants.html.twig"
+            template: "@SyliusAdmin/product/generate_variants.html.twig"
             section: admin
             permission: true
             redirect:

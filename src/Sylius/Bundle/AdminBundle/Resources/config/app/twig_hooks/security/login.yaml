@@ -22,6 +22,6 @@ twig_hooks:
             password:
                 template: '@SyliusAdmin/security/login/content/form/password.html.twig'
             remember_me:
-                template: '@SyliusAdmin/security/login/content/form/remember_Me.html.twig'
+                template: '@SyliusAdmin/security/login/content/form/remember_me.html.twig'
             submit:
                 template: '@SyliusAdmin/security/login/content/form/submit.html.twig'
