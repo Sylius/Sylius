@@ -76,7 +76,7 @@ sylius_grid:
             generate_variants: "@SyliusAdmin/Product/Grid/action/generate_variants.html.twig"
             ship_with_tracking_code: "@SyliusAdmin/shipment/grid/action/ship_with_tracking_code.html.twig"
             update_product_positions: "@SyliusAdmin/Product/Grid/Action/updatePositions.html.twig"
-            update_product_variant_positions: "@SyliusAdmin/ProductVariant/Grid/Action/updatePositions.html.twig"
+            update_product_variant_positions: "@SyliusAdmin/product_variant/grid/action/update_positions.html.twig"
         bulk_action:
             delete: '@SyliusAdmin/Shared/Grid/BulkAction/_delete.html.twig'
         filter:
