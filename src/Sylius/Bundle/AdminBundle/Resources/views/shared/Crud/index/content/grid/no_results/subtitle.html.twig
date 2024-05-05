@@ -1,0 +1,5 @@
+{% if _context.hidden is not defined or _context.hidden == false %}
+    <p class="empty-subtitle text-secondary">
+        {{ _context.translation_key|default('sylius.ui.no_results_adjust_your_search')|trans }}
+    </p>
+{% endif %}
