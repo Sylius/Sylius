@@ -1,4 +1,4 @@
-{% from '@SyliusAdmin/Order/macro/order_state_label.html.twig' import label %}
+{% from '@SyliusAdmin/order/macro/order_state_label.html.twig' import label %}
 
 {% set order = hookable_metadata.context.resource %}
 
@@ -8,10 +8,6 @@
             {{ 'sylius.ui.order'|trans }}
             #{{ order.number }}
         </h1>
-<<<<<<< HEAD
         {{ label(order.state) }}
-=======
-        {{ include('@SyliusAdmin/order/common/label/order_state/' ~ order.state ~ '.html.twig') }}
->>>>>>> 06128a0a07 (Move Order labels from the _Shared directory to the common)
     </div>
 </div>

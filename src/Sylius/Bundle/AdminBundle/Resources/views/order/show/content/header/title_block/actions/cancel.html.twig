@@ -1,7 +1,7 @@
 {% set order = hookable_metadata.context.resource %}
 
 {% if sm_can(order, constant('Sylius\\Component\\Order\\OrderTransitions::TRANSITION_CANCEL'), constant('Sylius\\Component\\Order\\OrderTransitions::GRAPH')) %}
-    {% from '@SyliusAdmin/Shared/Helper/icon.html.twig' import icon as icon %}
+    {% from '@SyliusAdmin/shared/helper/icon.html.twig' import icon as icon %}
 
     <form action="{{ path('sylius_admin_order_cancel', {'id': order.id}) }}" method="POST" novalidate>
         <input type="hidden" name="_method" value="PUT">
