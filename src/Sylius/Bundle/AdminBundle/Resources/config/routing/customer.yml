@@ -24,7 +24,7 @@ sylius_admin_customer_order_index:
         _sylius:
             section: admin
             permission: true
-            template: "@SyliusAdmin/Shared/Crud/index.html.twig"
+            template: "@SyliusAdmin/shared/crud/index.html.twig"
             grid: sylius_admin_customer_order
 
 sylius_admin_customer_orders_statistics:

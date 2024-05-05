@@ -1,0 +1,13 @@
+{% from '@SyliusAdmin/shared/helper/icon.html.twig' import icon %}
+
+{% set path = options.link.url|default(path(options.link.route|default(grid.requestConfiguration.getRouteName('update')), options.link.parameters|default({'id': data.id}))) %}
+
+{% set message = action.label %}
+{% if message is empty %}
+    {% set message = 'sylius.ui.edit' %}
+{% endif %}
+
+<a href="{{ path }}" class="dropdown-item">
+    {{ icon({ icon: action.icon ?? 'pencil', class: 'icon icon-tabler dropdown-item-icon' }) }}
+    {{ message|trans }}
+</a>

@@ -6,6 +6,6 @@ twig_hooks:
                     
         'sylius_admin.channel_pricing_log_entry.index.content.header.title_block':
             title:
-                template: '@SyliusAdmin/Shared/Crud/Common/Content/Header/TitleBlock/_title.html.twig'
+                template: '@SyliusAdmin/shared/crud/common/content/header/title_block/title.html.twig'
                 configuration:
                     title: 'sylius.ui.channel_pricing_history'

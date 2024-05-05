@@ -1,5 +1,5 @@
 {% set product_variant = hookable_metadata.context.form.vars.data%}
-{% import '@SyliusAdmin/Shared/Helper/channelPricings.html.twig' as _channelPricings %}
+{% import '@SyliusAdmin/shared/helper/channelPricings.html.twig' as _channelPricings %}
 
 <div class="tab-pane" id="product-variant-channel-pricing" role="tabpanel" tabindex="0">
     <div class="bg-white mb-3">
@@ -15,7 +15,7 @@
                         {% set isChannelPricingInvalid = channelPricingForm.vars.errors.form.parent.errors is not empty %}
 
                         {% if isChannelPricingInvalid %}
-                            {% from '@SyliusAdmin/Shared/Helper/icon.html.twig' import icon as _icon %}
+                            {% from '@SyliusAdmin/shared/helper/icon.html.twig' import icon as _icon %}
 
                             <div class="alert alert-danger" role="alert">
                                 <div class="d-flex">

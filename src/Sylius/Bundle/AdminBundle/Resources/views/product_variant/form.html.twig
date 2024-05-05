@@ -2,7 +2,7 @@
     {% set form = hookable_metadata.context.form %}
 {% endif %}
 
-{% form_theme form '@SyliusAdmin/Shared/form_theme.html.twig' %}
+{% form_theme form '@SyliusAdmin/shared/form_theme.html.twig' %}
 
 <div class="container-xl">
     {{ form_start(form, {'attr': {'class': 'ui loadable form', 'novalidate': 'novalidate', 'id': form.vars.id}}) }}

@@ -1,7 +1,7 @@
 {% if data is not null %}
     {{ data }}
 {% else %}
-    {% from '@SyliusAdmin/Shared/Helper/icon.html.twig' import icon as _icon %}
+    {% from '@SyliusAdmin/shared/helper/icon.html.twig' import icon as _icon %}
 
     <span class="text-danger">
         {{ _icon({ icon: 'exclamation-circle' }) }} <i>{{ 'sylius.ui.missing_translation'|trans }}</i>

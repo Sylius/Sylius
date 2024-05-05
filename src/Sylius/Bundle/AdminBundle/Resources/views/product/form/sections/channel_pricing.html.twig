@@ -7,7 +7,7 @@
         {% set isChannelPricingInvalid = variantForm.channelPricings.vars.errors is not empty %}
 
         {% if isChannelPricingInvalid %}
-            {% from '@SyliusAdmin/Shared/Helper/icon.html.twig' import icon as _icon %}
+            {% from '@SyliusAdmin/shared/helper/icon.html.twig' import icon as _icon %}
 
             <div class="alert alert-danger" role="alert">
                 <div class="d-flex">

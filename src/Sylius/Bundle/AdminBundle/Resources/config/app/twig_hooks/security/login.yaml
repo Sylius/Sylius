@@ -10,7 +10,7 @@ twig_hooks:
             header:
                 template: '@SyliusAdmin/security/login/content/header.html.twig'
             flashes:
-                template: '@SyliusAdmin/Shared/Crud/Common/Content/_flashes.html.twig'
+                template: '@SyliusAdmin/shared/crud/common/content/flashes.html.twig'
             form:
                 template: '@SyliusAdmin/security/login/content/form.html.twig'
 
