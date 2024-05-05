@@ -2,7 +2,7 @@ sylius_admin_customer:
     resource: |
         alias: sylius.customer
         section: admin
-        templates: "@SyliusAdmin\\Shared\\Crud"
+        templates: "@SyliusAdmin\\shared\\crud"
         except: ['delete']
         redirect: update
         grid: sylius_admin_customer

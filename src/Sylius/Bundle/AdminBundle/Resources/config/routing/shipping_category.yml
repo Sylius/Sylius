@@ -2,7 +2,7 @@ sylius_admin_shipping_category:
     resource: |
         alias: sylius.shipping_category
         section: admin
-        templates: "@SyliusAdmin\\Shared\\Crud"
+        templates: "@SyliusAdmin\\shared\\crud"
         except: ['show']
         redirect: update
         grid: sylius_admin_shipping_category

@@ -2,7 +2,7 @@ sylius_admin_taxon:
     resource: |
         alias: sylius.taxon
         section: admin
-        templates: "@SyliusAdmin\\Shared\\Crud"
+        templates: "@SyliusAdmin\\shared\\crud"
         except: ['show', 'index']
         redirect: update
         permission: true
