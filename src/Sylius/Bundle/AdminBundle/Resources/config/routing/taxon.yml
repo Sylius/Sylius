@@ -29,7 +29,7 @@ sylius_admin_taxon_create_for_parent:
         _sylius:
             section: admin
             permission: true
-            template: '@SyliusAdmin/Shared/Crud/create.html.twig'
+            template: '@SyliusAdmin/shared/crud/create.html.twig'
             redirect: sylius_admin_taxon_update
             factory:
                 method: createForParent

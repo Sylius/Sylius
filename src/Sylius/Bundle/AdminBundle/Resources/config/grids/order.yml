@@ -25,19 +25,19 @@ sylius_grid:
                     path: .
                     sortable: ~
                     options:
-                        template: "@SyliusAdmin/Shared/Grid/Field/orderNumber.html.twig"
+                        template: "@SyliusAdmin/shared/grid/field/order_number.html.twig"
                 channel:
                     type: twig
                     label: sylius.ui.channel
                     sortable: channel.code
                     options:
-                        template: "@SyliusAdmin/Shared/Grid/Field/channel.html.twig"
+                        template: "@SyliusAdmin/shared/grid/field/channel.html.twig"
                 customer:
                     type: twig
                     label: sylius.ui.customer
                     sortable: customer.lastName
                     options:
-                        template: "@SyliusAdmin/Shared/Grid/Field/customer.html.twig"
+                        template: "@SyliusAdmin/shared/grid/field/customer.html.twig"
                 state:
                     type: twig
                     label: sylius.ui.state

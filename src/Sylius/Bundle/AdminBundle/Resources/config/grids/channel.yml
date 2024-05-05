@@ -14,7 +14,7 @@ sylius_grid:
                     path: .
                     sortable: name
                     options:
-                        template: "@SyliusAdmin/Shared/Grid/Field/channel.html.twig"
+                        template: "@SyliusAdmin/shared/grid/field/channel.html.twig"
                 code:
                     type: twig
                     label: sylius.ui.code
@@ -32,7 +32,7 @@ sylius_grid:
                     label: sylius.ui.enabled
                     sortable: ~
                     options:
-                        template: "@SyliusAdmin/Shared/Grid/Field/boolean.html.twig"
+                        template: "@SyliusAdmin/shared/grid/field/boolean.html.twig"
             filters:
                 search:
                     type: string

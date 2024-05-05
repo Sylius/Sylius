@@ -39,7 +39,7 @@ sylius_admin_product_create_simple:
             permission: true
             factory:
                 method: createWithVariant
-            template: "@SyliusAdmin/Shared/Crud/create.html.twig"
+            template: "@SyliusAdmin/shared/crud/create.html.twig"
             redirect: sylius_admin_product_update
             vars:
                 route:

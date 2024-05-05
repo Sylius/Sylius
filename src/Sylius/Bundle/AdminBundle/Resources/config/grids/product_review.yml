@@ -38,7 +38,7 @@ sylius_grid:
                     type: twig
                     label: sylius.ui.customer
                     options:
-                        template: '@SyliusAdmin/Shared/Grid/Field/customer.html.twig'
+                        template: '@SyliusAdmin/shared/grid/field/customer.html.twig'
             filters:
                 title:
                     type: string

@@ -2,36 +2,36 @@ twig_hooks:
     hooks:
         'sylius_admin.common.create':
             sidebar:
-                template: '@SyliusAdmin/Shared/Crud/Common/_sidebar.html.twig'
+                template: '@SyliusAdmin/shared/crud/common/sidebar.html.twig'
             navbar:
-                template: '@SyliusAdmin/Shared/Crud/Common/_navbar.html.twig'
+                template: '@SyliusAdmin/shared/crud/common/navbar.html.twig'
             content:
-                template: '@SyliusAdmin/Shared/Crud/Common/_content.html.twig'
+                template: '@SyliusAdmin/shared/crud/common/content.html.twig'
 
         'sylius_admin.common.create.content':
             flashes:
-                template: '@SyliusAdmin/Shared/Crud/Common/Content/_flashes.html.twig'
+                template: '@SyliusAdmin/shared/crud/common/content/flashes.html.twig'
             header:
-                template: '@SyliusAdmin/Shared/Crud/Common/Content/_header.html.twig'
+                template: '@SyliusAdmin/shared/crud/common/content/header.html.twig'
             form:
-                template: '@SyliusAdmin/Shared/Crud/Create/Content/_form.html.twig'
+                template: '@SyliusAdmin/shared/crud/create/content/form.html.twig'
                 configuration:
                     render_rest: true
 
         'sylius_admin.common.create.content.header':
             breadcrumbs:
-                template: '@SyliusAdmin/Shared/Crud/Create/Content/Header/_breadcrumbs.html.twig'
+                template: '@SyliusAdmin/shared/crud/create/content/header/breadcrumbs.html.twig'
             title_block:
-                template: '@SyliusAdmin/Shared/Crud/Common/Content/Header/_titleBlock.html.twig'
+                template: '@SyliusAdmin/shared/crud/common/content/header/title_block.html.twig'
 
         'sylius_admin.common.create.content.header.title_block':
             title:
-                template: '@SyliusAdmin/Shared/Crud/Create/Content/Header/TitleBlock/_title.html.twig'
+                template: '@SyliusAdmin/shared/crud/create/content/header/title_block/title.html.twig'
             actions:
-                template: '@SyliusAdmin/Shared/Crud/Create/Content/Header/TitleBlock/_actions.html.twig'
+                template: '@SyliusAdmin/shared/crud/create/content/header/title_block/actions.html.twig'
 
         'sylius_admin.common.create.content.header.title_block.actions':
             cancel:
-                template: '@SyliusAdmin/Shared/Crud/Common/Content/Header/TitleBlock/Actions/_cancel.html.twig'
+                template: '@SyliusAdmin/shared/crud/common/content/header/title_block/actions/cancel.html.twig'
             create:
-                template: '@SyliusAdmin/Shared/Crud/Common/Content/Header/TitleBlock/Actions/_create.html.twig'
+                template: '@SyliusAdmin/shared/crud/common/content/header/title_block/actions/create.html.twig'

@@ -27,7 +27,7 @@ sylius_admin_payment_method_create:
                 method: createWithGateway
                 arguments:
                     gatewayFactory: $factory
-            template: "@SyliusAdmin/Shared/Crud/create.html.twig"
+            template: "@SyliusAdmin/shared/crud/create.html.twig"
             redirect: sylius_admin_payment_method_update
             permission: true
             vars:
