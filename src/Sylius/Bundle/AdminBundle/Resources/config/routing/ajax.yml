@@ -31,7 +31,7 @@ sylius_admin_ajax_render_province_form:
     defaults:
         _controller: sylius.controller.province::choiceOrTextFieldFormAction
         _sylius:
-            template: "@SyliusAdmin/Common/Form/_province.html.twig"
+            template: "@SyliusAdmin/common/form/province.html.twig"
 
 sylius_admin_ajax_get_version:
     path: /get-version

@@ -27,7 +27,7 @@ sylius_admin_promotion_coupon_create:
                 method: createForPromotion
                 arguments:
                     - expr:notFoundOnNull(service('sylius.repository.promotion').find($promotionId))
-            template: "@SyliusAdmin/Crud/create.html.twig"
+            template: "@SyliusAdmin/crud/create.html.twig"
             grid: sylius_admin_promotion_coupon
             section: admin
             redirect:
@@ -49,7 +49,7 @@ sylius_admin_promotion_coupon_update:
     defaults:
         _controller: sylius.controller.promotion_coupon::updateAction
         _sylius:
-            template: "@SyliusAdmin/Crud/update.html.twig"
+            template: "@SyliusAdmin/crud/update.html.twig"
             grid: sylius_admin_promotion_coupon
             section: admin
             redirect:
@@ -72,7 +72,7 @@ sylius_admin_promotion_coupon_generate:
     defaults:
         _controller: sylius.controller.promotion_coupon::generateAction
         _sylius:
-            template: "@SyliusAdmin/PromotionCoupon/generate.html.twig"
+            template: "@SyliusAdmin/promotion_coupon/generate.html.twig"
             section: admin
             redirect:
                 route: sylius_admin_promotion_coupon_index
