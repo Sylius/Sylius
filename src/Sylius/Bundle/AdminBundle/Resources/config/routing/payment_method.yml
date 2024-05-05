@@ -2,7 +2,7 @@ sylius_admin_payment_method:
     resource: |
         alias: sylius.payment_method
         section: admin
-        templates: "@SyliusAdmin\\Shared\\Crud"
+        templates: "@SyliusAdmin\\shared\\crud"
         except: ['show']
         redirect: update
         grid: sylius_admin_payment_method

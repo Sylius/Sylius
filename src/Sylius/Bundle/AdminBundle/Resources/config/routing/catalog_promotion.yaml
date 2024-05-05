@@ -2,7 +2,7 @@ sylius_admin_catalog_promotion:
     resource: |
         alias: sylius.catalog_promotion
         section: admin
-        templates: "@SyliusAdmin\\Shared\\Crud"
+        templates: "@SyliusAdmin\\shared\\crud"
         except: ['delete']
         redirect: update
         grid: sylius_admin_catalog_promotion

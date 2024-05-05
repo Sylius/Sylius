@@ -2,7 +2,7 @@ sylius_admin_order:
     resource: |
         alias: sylius.order
         section: admin
-        templates: "@SyliusAdmin\\Shared\\Crud"
+        templates: "@SyliusAdmin\\shared\\crud"
         only: ['index']
         grid: sylius_admin_order
         permission: true

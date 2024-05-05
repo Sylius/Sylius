@@ -3,7 +3,7 @@ sylius_admin_product_review:
         alias: sylius.product_review
         section: admin
         permission: true
-        templates: "@SyliusAdmin\\Shared\\Crud"
+        templates: "@SyliusAdmin\\shared\\crud"
         except: ['show', 'create']
         redirect: update
         grid: sylius_admin_product_review
