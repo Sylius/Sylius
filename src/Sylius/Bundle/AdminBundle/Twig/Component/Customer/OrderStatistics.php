@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\AdminBundle\TwigComponent\Customer;
+namespace Sylius\Bundle\AdminBundle\Twig\Component\Customer;
 
 use Sylius\Component\Core\Customer\Statistics\CustomerStatisticsProviderInterface;
 use Sylius\Component\Core\Customer\Statistics\PerChannelCustomerStatistics;

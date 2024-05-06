@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\AdminBundle\TwigComponent\Product;
+namespace Sylius\Bundle\AdminBundle\Twig\Component\Product;
 
 use Symfony\UX\Autocomplete\Checksum\ChecksumCalculator;
 use Symfony\UX\LiveComponent\Attribute\AsLiveComponent;

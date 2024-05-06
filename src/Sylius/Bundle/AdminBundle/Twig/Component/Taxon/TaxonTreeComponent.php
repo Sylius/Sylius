@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\AdminBundle\TwigComponent\Taxon;
+namespace Sylius\Bundle\AdminBundle\Twig\Component\Taxon;
 
 use Doctrine\Persistence\ObjectManager;
 use Sylius\Component\Core\Model\TaxonInterface;

@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\AdminBundle\TwigComponent\Country;
+namespace Sylius\Bundle\AdminBundle\Twig\Component\Country;
 
 use Sylius\Component\Addressing\Model\Country;
 use Sylius\TwigHooks\LiveComponent\HookableLiveComponentTrait;
