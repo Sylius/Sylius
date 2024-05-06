@@ -26,37 +26,62 @@ use Webmozart\Assert\Assert;
 
 final class ProductsToProductAssociationsTransformer implements DataTransformerInterface
 {
-    /** @var Collection<array-key, ProductAssociationInterface> */
+    /** @var Collection<array-key, ProductAssociationInterface>|null */
     private ?Collection $productAssociations = null;
 
+    /**
+     * @param FactoryInterface<ProductAssociationInterface> $productAssociationFactory
+     * @param RepositoryInterface<ProductAssociationTypeInterface> $productAssociationTypeRepository
+     */
     public function __construct(
-        private FactoryInterface $productAssociationFactory,
-        private ProductRepositoryInterface $productRepository,
-        private RepositoryInterface $productAssociationTypeRepository,
+        private readonly FactoryInterface $productAssociationFactory,
+        private readonly ?ProductRepositoryInterface $productRepository,
+        private readonly RepositoryInterface $productAssociationTypeRepository,
     ) {
+        if (null !== $productRepository) {
+            trigger_deprecation(
+                'sylius/product-bundle',
+                '1.14',
+                'Passing the second argument "%s" of the constructor is deprecated and will be removed in Sylius 2.0.',
+                ProductRepositoryInterface::class,
+            );
+        }
     }
 
-    public function transform($value)
+    /**
+     * @return array<string, Collection<array-key, ProductInterface>>|string
+     */
+    public function transform(mixed $value): array|string
     {
         $this->setProductAssociations($value);
 
-        if (null === $value) {
-            return '';
+        if ($this->productRepository !== null) {
+            if (null === $value) {
+                return '';
+            }
+        } else {
+            if ($value->isEmpty()) {
+                return [];
+            }
         }
 
         $values = [];
 
         /** @var ProductAssociationInterface $productAssociation */
         foreach ($value as $productAssociation) {
-            $productCodesAsString = $this->getCodesAsStringFromProducts($productAssociation->getAssociatedProducts());
+            if ($this->productRepository !== null) {
+                $productCodesAsString = $this->getCodesAsStringFromProducts($productAssociation->getAssociatedProducts());
 
-            $values[$productAssociation->getType()->getCode()] = $productCodesAsString;
+                $values[$productAssociation->getType()->getCode()] = $productCodesAsString;
+            } else {
+                $values[$productAssociation->getType()->getCode()] = clone $productAssociation->getAssociatedProducts();
+            }
         }
 
         return $values;
     }
 
-    public function reverseTransform($value): ?Collection
+    public function reverseTransform(mixed $value): ?Collection
     {
         if (null === $value || '' === $value || !is_array($value)) {
             return null;
@@ -64,15 +89,27 @@ final class ProductsToProductAssociationsTransformer implements DataTransformerI
 
         /** @var Collection<array-key, ProductAssociationInterface> $productAssociations */
         $productAssociations = new ArrayCollection();
-        foreach ($value as $productAssociationTypeCode => $productCodes) {
-            if (null === $productCodes) {
-                continue;
-            }
+        if ($this->productRepository !== null) {
+            foreach ($value as $productAssociationTypeCode => $productCodes) {
+                if (null === $productCodes) {
+                    continue;
+                }
 
-            /** @var ProductAssociationInterface $productAssociation */
-            $productAssociation = $this->getProductAssociationByTypeCode((string) $productAssociationTypeCode);
-            $this->setAssociatedProductsByProductCodes($productAssociation, $productCodes);
-            $productAssociations->add($productAssociation);
+                /** @var ProductAssociationInterface $productAssociation */
+                $productAssociation = $this->getProductAssociationByTypeCode((string) $productAssociationTypeCode);
+                $this->setAssociatedProductsByProductCodes($productAssociation, $productCodes);
+                $productAssociations->add($productAssociation);
+            }
+        } else {
+            foreach ($value as $productAssociationTypeCode => $products) {
+                if (null === $products || [] === $products) {
+                    continue;
+                }
+
+                $productAssociation = $this->getProductAssociationByTypeCode((string) $productAssociationTypeCode);
+                $this->linkProductsToAssociation($productAssociation, $products);
+                $productAssociations->add($productAssociation);
+            }
         }
 
         $this->setProductAssociations(null);
@@ -132,8 +169,22 @@ final class ProductsToProductAssociationsTransformer implements DataTransformerI
         }
     }
 
+    /**
+     * @param Collection<array-key, ProductInterface> $products
+     */
+    private function linkProductsToAssociation(
+        ProductAssociationInterface $productAssociation,
+        Collection $products,
+    ): void {
+        $productAssociation->clearAssociatedProducts();
+        foreach ($products as $product) {
+            Assert::isInstanceOf($product, ProductInterface::class);
+            $productAssociation->addAssociatedProduct($product);
+        }
+    }
+
     private function setProductAssociations(?Collection $productAssociations): void
     {
-        $this->productAssociations = $productAssociations;
+        $this->productAssociations = $productAssociations instanceof Collection ? $productAssociations : new ArrayCollection();
     }
 }
