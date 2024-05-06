@@ -11,26 +11,24 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\AdminBundle\Twig\Component\Country;
+namespace Sylius\Bundle\AdminBundle\Twig\Component\Order;
 
-use Sylius\Component\Addressing\Model\Country;
+use Sylius\Component\Core\Model\Order;
 use Sylius\TwigHooks\LiveComponent\HookableLiveComponentTrait;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
-use Symfony\UX\LiveComponent\Attribute\AsLiveComponent;
 use Symfony\UX\LiveComponent\Attribute\LiveProp;
+use Symfony\UX\LiveComponent\ComponentWithFormTrait;
 use Symfony\UX\LiveComponent\DefaultActionTrait;
-use Symfony\UX\LiveComponent\LiveCollectionTrait;
 
-#[AsLiveComponent(name: 'SyliusAdmin.Country.CountryType', template: '@SyliusAdmin/country/form.html.twig')]
-final class CountryType
+final class FormComponent
 {
+    use ComponentWithFormTrait;
     use DefaultActionTrait;
     use HookableLiveComponentTrait;
-    use LiveCollectionTrait;
 
-    #[LiveProp(fieldName: 'formData')]
-    public ?Country $country = null;
+    #[LiveProp]
+    public ?Order $order = null;
 
     /** @param class-string $formClass */
     public function __construct(
@@ -41,6 +39,6 @@ final class CountryType
 
     protected function instantiateForm(): FormInterface
     {
-        return $this->formFactory->create($this->formClass, $this->country);
+        return $this->formFactory->create($this->formClass, $this->order, ['add_build_address_form_subscriber' => false]);
     }
 }

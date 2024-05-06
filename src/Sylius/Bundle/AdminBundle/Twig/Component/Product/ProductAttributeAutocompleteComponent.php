@@ -14,13 +14,11 @@ declare(strict_types=1);
 namespace Sylius\Bundle\AdminBundle\Twig\Component\Product;
 
 use Symfony\UX\Autocomplete\Checksum\ChecksumCalculator;
-use Symfony\UX\LiveComponent\Attribute\AsLiveComponent;
 use Symfony\UX\LiveComponent\Attribute\LiveProp;
 use Symfony\UX\LiveComponent\ComponentToolsTrait;
 use Symfony\UX\LiveComponent\DefaultActionTrait;
 use Symfony\UX\TwigComponent\Attribute\ExposeInTemplate;
 
-#[AsLiveComponent(name: 'SyliusAdmin.Product.ProductAttributeAutocomplete', template: '@SyliusAdmin/product/product_attribute_autocomplete.html.twig')]
 final class ProductAttributeAutocompleteComponent
 {
     /** @var array<string> */

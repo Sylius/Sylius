@@ -7,7 +7,7 @@ twig_hooks:
                 template: '@SyliusAdmin/shared/crud/common/navbar/menu.html.twig'
         'sylius_admin.common.component.navbar.items':
             notifications:
-                component: 'SyliusAdminNavbarNotifications'
+                component: 'sylius_admin:navbar:notifications'
             user_dropdown:
                 template: '@SyliusAdmin/shared/crud/common/navbar/items/user.html.twig'
         'sylius_admin.common.component.navbar.menu':

@@ -8,7 +8,7 @@ twig_hooks:
 
         'sylius_admin.taxon.update.content.form':
             tree:
-                component: 'SyliusAdmin.Taxon.TaxonTree'
+                component: 'sylius_admin:taxon:tree'
             sections:
                 template: '@SyliusAdmin/taxon/form/sections.html.twig'
 

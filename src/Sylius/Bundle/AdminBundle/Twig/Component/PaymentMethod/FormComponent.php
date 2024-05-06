@@ -20,9 +20,7 @@ use Symfony\Component\Form\FormInterface;
 use Symfony\UX\LiveComponent\Attribute\LiveProp;
 use Symfony\UX\LiveComponent\ComponentWithFormTrait;
 use Symfony\UX\LiveComponent\DefaultActionTrait;
-use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
 
-#[AsTwigComponent(name: 'sylius_admin:payment_method:form', template: '@SyliusAdmin/payment_method/form.html.twig')]
 final class FormComponent
 {
     use DefaultActionTrait;

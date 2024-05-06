@@ -104,7 +104,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
             'billing_province_name' => '#sylius_order_billingAddress_provinceName',
             'billing_province_code' => '#sylius_order_billingAddress_provinceCode',
             'billing_street' => '#sylius_order_billingAddress_street',
-            'live_form' => '[data-live-name-value="SyliusAdmin.Order.OrderType"]',
+            'live_form' => '[data-live-name-value="sylius_admin:order:form"]',
             'shipping_city' => '#sylius_order_shippingAddress_city',
             'shipping_country' => '#sylius_order_shippingAddress_countryCode',
             'shipping_first_name' => '#sylius_order_shippingAddress_firstName',

@@ -10,7 +10,7 @@
         </div>
         <div class="card-body py-4 border-bottom">
             <div class="sylius-admin-product-attribute-autocomplete">
-                <twig:SyliusAdmin.Product.ProductAttributeAutocomplete data-model="attributesToBeAdded:selectedAttributeCodes" :excludedAttributeCodes="productAttributes|keys" />
+                <twig:sylius_admin:product:product_attribute_autocomplete data-model="attributesToBeAdded:selectedAttributeCodes" :excludedAttributeCodes="productAttributes|keys" />
                 <button type="button" class="btn btn-primary" data-action="live#action" data-live-action-param="prevent|addAttributes">
                     {{ 'sylius.ui.add'|trans }}
                 </button>
