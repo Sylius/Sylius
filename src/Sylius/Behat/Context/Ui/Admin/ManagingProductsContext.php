@@ -1049,7 +1049,7 @@ final class ManagingProductsContext implements Context
     /**
      * @Then this product should( also) have an association :productAssociationType with product :product
      */
-    public function theProductShouldHaveAnAssociationWithProducts(
+    public function theProductShouldHaveAnAssociationWithProduct(
         ProductAssociationTypeInterface $productAssociationType,
         ProductInterface $product,
     ) {
@@ -1072,10 +1072,9 @@ final class ManagingProductsContext implements Context
     public function theProductsShouldHaveAnAssociationWithProducts(
         ProductAssociationTypeInterface $productAssociationType,
         array $products,
-    ): void
-    {
+    ): void {
         foreach ($products as $product) {
-            $this->theProductShouldHaveAnAssociationWithProducts($productAssociationType, $product);
+            $this->theProductShouldHaveAnAssociationWithProduct($productAssociationType, $product);
         }
     }
 
