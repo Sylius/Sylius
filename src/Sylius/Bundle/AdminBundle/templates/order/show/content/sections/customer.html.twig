@@ -1,0 +1,12 @@
+<div class="card mb-3">
+    <div class="card-header">
+        <div class="card-title">
+            {{ (_context.title|default('sylius.ui.customer'))|trans }}
+        </div>
+    </div>
+    <div class="card-body">
+        <div>
+            {% hook 'customer' %}
+        </div>
+    </div>
+</div>

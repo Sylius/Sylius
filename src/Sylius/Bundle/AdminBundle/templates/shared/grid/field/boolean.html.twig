@@ -1,0 +1,7 @@
+{% from '@SyliusAdmin/shared/helper/icon.html.twig' import icon as _icon %}
+
+{% if true == data %}
+    <span {{ sylius_test_html_attribute('status-enabled') }}>{{ _icon({ icon: 'check', class: 'icon text-green' }) }}</span>
+{% else %}
+    <span {{ sylius_test_html_attribute('status-disabled') }}>{{ _icon({ icon: 'x', class: 'icon icon-sm text-secondary' }) }}</span>
+{% endif %}
