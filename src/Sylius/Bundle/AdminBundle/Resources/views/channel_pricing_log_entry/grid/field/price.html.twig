@@ -1,6 +1,0 @@
-{% import "@SyliusAdmin/shared/helper/money.html.twig" as _money %}
-
-{% set currencies = sylius_channels_currencies() %}
-{% set channel_code = data.channelPricing.channelCode %}
-
-{{ _money.format(data.price, currencies[channel_code]) }}

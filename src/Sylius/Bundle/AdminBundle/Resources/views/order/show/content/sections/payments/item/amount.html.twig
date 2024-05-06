@@ -1,7 +1,0 @@
-{% import '@SyliusAdmin/shared/helper/money.html.twig' as money %}
-
-{% set payment = hookable_metadata.context.payment %}
-
-<td class="py-2 text-end" {{ sylius_test_html_attribute('payment-amount') }}>
-    <strong>{{ money.format(payment.amount, payment.currencyCode) }}</strong>
-</td>
