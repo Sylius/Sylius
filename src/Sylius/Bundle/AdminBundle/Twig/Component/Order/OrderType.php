@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\AdminBundle\TwigComponent\Order;
+namespace Sylius\Bundle\AdminBundle\Twig\Component\Order;
 
 use Sylius\Component\Core\Model\Order;
 use Sylius\TwigHooks\LiveComponent\HookableLiveComponentTrait;

@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\AdminBundle\TwigComponent\Promotion;
+namespace Sylius\Bundle\AdminBundle\Twig\Component\Promotion;
 
 use Sylius\Component\Core\Model\Promotion;
 use Sylius\TwigHooks\LiveComponent\HookableLiveComponentTrait;

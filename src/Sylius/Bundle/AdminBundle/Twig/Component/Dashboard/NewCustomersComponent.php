@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\AdminBundle\TwigComponent\Dashboard;
+namespace Sylius\Bundle\AdminBundle\Twig\Component\Dashboard;
 
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Repository\CustomerRepositoryInterface;

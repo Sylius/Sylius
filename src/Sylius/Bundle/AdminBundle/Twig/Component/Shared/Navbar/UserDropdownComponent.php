@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\AdminBundle\TwigComponent\Shared\Navbar;
+namespace Sylius\Bundle\AdminBundle\Twig\Component\Shared\Navbar;
 
 use Sylius\Component\User\Model\UserInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
