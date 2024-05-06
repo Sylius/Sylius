@@ -1,0 +1,22 @@
+<div class="card mb-3">
+    <div class="card" {{ sylius_test_html_attribute('rules') }}>
+        <div class="card-header">
+            <div class="card-title">
+                {{ 'sylius.ui.rules'|trans }}
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="alert alert-info d-flex align-items-center" role="alert">
+                <div>
+                    {{ 'sylius.form.shipping_method.rules_help'|trans }}
+                </div>
+            </div>
+            <div class="row align-items-center">
+                {{ form_row(hookable_metadata.context.form.rules, {label: false}) }}
+            </div>
+        </div>
+        <div class="card-footer">
+            {{ form_row(hookable_metadata.context.form.rules.vars.button_add) }}
+        </div>
+    </div>
+</div>
