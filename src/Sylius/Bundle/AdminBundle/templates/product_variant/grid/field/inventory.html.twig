@@ -1,0 +1,8 @@
+{% if data.isTracked %}
+    <span class="onHand" data-product-variant-id="{{ data.id }}">{{ data.onHand }}</span> {{ 'sylius.ui.available_on_hand'|trans }}
+    {% if data.onHold > 0 %}
+        <span class="onHold" data-product-variant-id="{{ data.id }}">{{ data.onHold }}</span> {{ 'sylius.ui.reserved'|trans }}
+    {% endif %}
+{% else %}
+    {{ 'sylius.ui.not_tracked'|trans }}
+{% endif %}

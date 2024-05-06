@@ -1,0 +1,5 @@
+{% set form = hookable_metadata.context.form %}
+
+<div class="col-12 col-md-6">
+    {{ form_row(form.gatewayConfig.factoryName, sylius_test_form_attribute('factory-name')|merge({ label_attr: { class: 'checkbox-switch' } })) }}
+</div>

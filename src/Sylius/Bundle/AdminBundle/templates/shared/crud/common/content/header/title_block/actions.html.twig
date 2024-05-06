@@ -1,0 +1,13 @@
+{% import '@SyliusAdmin/shared/helper/dropdown.html.twig' as _dropdown %}
+
+{% set resources = hookable_metadata.context.resources %}
+
+<div class="col-12 col-md-auto ms-auto d-print-none">
+    <div class="btn-list">
+        {% if resources.definition.actionGroups.main is defined %}
+            {% for action in resources.definition.getEnabledActions('main') %}
+                {{ sylius_grid_render_action(resources, action, null) }}
+            {% endfor %}
+        {% endif %}
+    </div>
+</div>

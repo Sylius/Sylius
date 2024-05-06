@@ -1,0 +1,54 @@
+{% set statisticsData = hookable_metadata.context.statisticsData %}
+{% set rangeName = hookable_metadata.context.range %}
+
+<div class="card mb-3">
+    <div data-loading>
+        <div class="sylius-loader">
+            <img src="{{ asset('build/admin/images/loader.gif', 'admin') }}" alt="Loading"/>
+        </div>
+    </div>
+
+    <div class="card-body">
+        <div class="d-flex justify-content-end">
+            <div class="btn-group" role="group">
+                <button
+                    type="button"
+                    class="btn btn-sm {% if rangeName == '2weeks' %}btn-secondary{% else %}btn-outline-secondary{% endif %}"
+                    data-action="live#action"
+                    data-live-action-param="prevent|changeRange"
+                    data-live-name-param="2weeks"
+                    data-live-range-param="day"
+                    data-live-start-date-param="2 weeks ago"
+                    data-live-end-date-param="today"
+                >
+                    {{ 'sylius.ui.statistics.2weeks'|trans }}
+                </button>
+                <button
+                    type="button"
+                    class="btn btn-sm {% if rangeName == 'month' %}btn-secondary{% else %}btn-outline-secondary{% endif %}"
+                    data-action="live#action"
+                    data-live-action-param="prevent|changeRange"
+                    data-live-name-param="month"
+                    data-live-range-param="day"
+                    data-live-start-date-param="1 month ago"
+                    data-live-end-date-param="today"
+                >
+                    {{ 'sylius.ui.statistics.month'|trans }}
+                </button>
+                <button
+                    type="button"
+                    class="btn btn-sm {% if rangeName == 'year' %}btn-secondary{% else %}btn-outline-secondary{% endif %}"
+                    data-action="live#action"
+                    data-live-action-param="prevent|changeRange"
+                    data-live-name-param="year"
+                    data-live-range-param="month"
+                    data-live-start-date-param="first day of january this year"
+                    data-live-end-date-param="first day of january next year"
+                >
+                    {{ 'sylius.ui.statistics.year'|trans }}
+                </button>
+            </div>
+        </div>
+        <div id="statistics-chart" class="chart-lg" data-intervals="{{ statisticsData.sales_summary.intervals|json_encode }}" data-sales="{{ statisticsData.sales_summary.sales|json_encode }}"></div>
+    </div>
+</div>

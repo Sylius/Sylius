@@ -1,0 +1,19 @@
+{% from '@SyliusAdmin/shared/helper/icon.html.twig' import icon %}
+
+{% set labeled = options.labeled is defined ? options.labeled : true %}
+
+{% if sm_can(data, options.transition, options.graph) %}
+    <form action="{{ path(options.link.route, options.link.parameters) }}" method="post">
+        <input type="hidden" name="_csrf_token" value="{{ csrf_token(data.id) }}">
+        <input type="hidden" name="_method" value="PUT">
+        <button class="dropdown-item">
+            {% if action.icon %}{{ icon({ icon: action.icon }) }}{% endif %}
+            {% if labeled %}{{ action.label|trans }}{% endif %}
+        </button>
+    </form>
+{% else %}
+    <button class="dropdown-item disabled">
+        {% if action.icon %}{{ icon({ icon: action.icon, class: 'icon icon-tabler dropdown-item-icon' }) }}{% endif %}
+        {% if labeled %}{{ action.label|trans }}{% endif %}
+    </button>
+{% endif %}

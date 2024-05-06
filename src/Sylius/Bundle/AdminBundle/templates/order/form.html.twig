@@ -1,0 +1,14 @@
+{# Rendered with using \Sylius\Bundle\AdminBundle\TwigComponent\Address\AddressType #}
+
+{% form_theme form '@SyliusAdmin/shared/form_theme.html.twig' %}
+
+<div class="container-xl" {{ attributes }}>
+    {{ form_start(form, {'attr': {'class': 'ui loadable form', 'novalidate': 'novalidate', 'id': form.vars.id}}) }}
+    <input type="hidden" name="_method" value="PUT" />
+    {{ form_errors(form) }}
+    {{ form_widget(form._token) }}
+
+    {% hook 'form' with { form } %}
+
+    {{ form_end(form, {render_rest: false}) }}
+</div>

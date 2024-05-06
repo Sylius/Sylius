@@ -1,0 +1,8 @@
+{% from '@SyliusAdmin/shared/helper/icon.html.twig' import icon %}
+
+{% set path = options.link.url|default(path('sylius_admin_product_variant_generate', {'productId': options.product.id})) %}
+
+<a href="{{ path }}" class="btn primary">
+    {{ icon({ icon: 'arrows-shuffle', class: 'icon icon-tabler dropdown-item-icon' }) }}
+    {{ 'sylius.ui.generate'|trans }}
+</a>
