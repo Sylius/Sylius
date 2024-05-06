@@ -14,7 +14,7 @@ Feature: Seeing catalog promotion's details
         And the catalog promotion "Winter sale" operates between "2021-11-10" and "2022-01-08"
         And I am logged in as an administrator
 
-    @api @todo @ui
+    @api @ui
     Scenario: Seeing catalog promotion's details
         When I view details of the catalog promotion "Winter sale"
         Then its name should be "Winter sale"
@@ -25,7 +25,7 @@ Feature: Seeing catalog promotion's details
         And it should not be exclusive
         And it should start at "2021-11-10 00:00" and end at "2022-01-08 00:00"
 
-    @api @todo @ui
+    @api @ui
     Scenario: Seeing exclusive catalog promotion's details
         Given "Winter sale" catalog promotion is exclusive
         When I view details of the catalog promotion "Winter sale"
