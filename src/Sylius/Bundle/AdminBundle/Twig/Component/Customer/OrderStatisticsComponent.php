@@ -18,16 +18,11 @@ use Sylius\Component\Core\Customer\Statistics\PerChannelCustomerStatistics;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Repository\CustomerRepositoryInterface;
 use Sylius\TwigHooks\LiveComponent\HookableLiveComponentTrait;
-use Symfony\UX\LiveComponent\Attribute\AsLiveComponent;
 use Symfony\UX\LiveComponent\Attribute\LiveProp;
 use Symfony\UX\LiveComponent\DefaultActionTrait;
 use Symfony\UX\TwigComponent\Attribute\ExposeInTemplate;
 
-#[AsLiveComponent(
-    name: 'SyliusAdmin.Customer.Show.OrderStatistics',
-    template: '@SyliusAdmin/customer/show/component/order_statistics.html.twig',
-)]
-final class OrderStatistics
+final class OrderStatisticsComponent
 {
     use HookableLiveComponentTrait;
     use DefaultActionTrait;

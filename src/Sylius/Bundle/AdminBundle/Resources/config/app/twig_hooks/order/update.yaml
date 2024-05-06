@@ -2,7 +2,7 @@ twig_hooks:
     hooks:
         sylius_admin.order.update.content:
             form:
-                component: 'SyliusAdmin.Order.OrderType'
+                component: 'sylius_admin:order:form'
                 props:
                     order: '@=_context.resource'
                     form: '@=_context.form'

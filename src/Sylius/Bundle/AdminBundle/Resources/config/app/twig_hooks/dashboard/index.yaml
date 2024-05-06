@@ -14,7 +14,7 @@ twig_hooks:
             grid:
                 enabled: false
             statistics:
-                component: 'SyliusAdmin.Dashboard.Statistics'
+                component: 'sylius_admin:dashboard:statistics'
                 props:
                     channelCode: '@=_context.channelCode'
             latest_statistics:
@@ -52,6 +52,6 @@ twig_hooks:
 
         'sylius_admin.dashboard.index.content.latest_statistics':
             new_customers:
-                component: 'SyliusAdmin.Dashboard.NewCustomers'
+                component: 'sylius_admin:dashboard:new_customers'
             new_orders:
-                component: 'SyliusAdmin.Dashboard.NewOrders'
+                component: 'sylius_admin:dashboard:new_orders'

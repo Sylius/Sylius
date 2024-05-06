@@ -5,7 +5,7 @@ twig_hooks:
                 template: '@SyliusAdmin/product/scripts.html.twig'
         'sylius_admin.product.update.content':
             form:
-                component: 'SyliusAdmin.Product.Form'
+                component: 'sylius_admin:product:form'
                 props:
                     form: '@=_context.form'
                     resource: '@=_context.resource'

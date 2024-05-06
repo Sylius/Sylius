@@ -17,13 +17,11 @@ use Doctrine\Persistence\ObjectManager;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Taxonomy\Repository\TaxonRepositoryInterface;
 use Sylius\TwigHooks\LiveComponent\HookableLiveComponentTrait;
-use Symfony\UX\LiveComponent\Attribute\AsLiveComponent;
 use Symfony\UX\LiveComponent\Attribute\LiveAction;
 use Symfony\UX\LiveComponent\Attribute\LiveArg;
 use Symfony\UX\LiveComponent\DefaultActionTrait;
 use Symfony\UX\TwigComponent\Attribute\ExposeInTemplate;
 
-#[AsLiveComponent(name: 'SyliusAdmin.Taxon.TaxonTree', template: '@SyliusAdmin/taxon/component/taxon_tree.html.twig')]
 final class TaxonTreeComponent
 {
     use DefaultActionTrait;
