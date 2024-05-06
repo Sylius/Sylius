@@ -41,7 +41,8 @@
         "symfony/security-core": "^6.4.0",
         "symfony/security-bundle": "^6.4.0",
         "symfony/templating": "^6.4.0",
-        "symfony/ux-twig-component": "^2.16",
+        "symfony/ux-live-component": "^2.17",
+        "symfony/ux-twig-component": "^2.17",
         "symfony/webpack-encore-bundle": "^1.17.1",
         "laminas/laminas-stdlib": "^3.3.1"
     },
