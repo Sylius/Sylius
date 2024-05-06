@@ -3,11 +3,9 @@ twig_hooks:
         'sylius_admin.shipping_method.create.content':
             form:
                 component: 'sylius_admin:shipping_method:form'
-                data:
-                    form: '@=form'
-                    resource: '@=resource'
-                    parentMainHook: '@=parent_main_hook'
-                    parentFallbackHook: '@=parent_fallback_hook'
+                props:
+                    form: '@=_context.form'
+                    resource: '@=_context.resource'
 
         'sylius_admin.shipping_method.create.content.form#left':
             details:
@@ -46,11 +44,11 @@ twig_hooks:
                 template: '@SyliusAdmin/shipping_method/form/category_requirements/category.html.twig'
             category_requirement:
                 template: '@SyliusAdmin/shipping_method/form/category_requirements/category_requirement.html.twig'
-        
+
         'sylius_admin.shipping_method.create.content.form.taxes':
             tax_category:
                 template: '@SyliusAdmin/shipping_method/form/taxes/tax_category.html.twig'
-        
+
         'sylius_admin.shipping_method.create.content.form.shipping_charges':
             calculator:
                 template: '@SyliusAdmin/shipping_method/form/shipping_charges/calculator.html.twig'
