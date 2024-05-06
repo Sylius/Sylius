@@ -1,8 +1,0 @@
-{% form_theme form '@SyliusAdmin/shared/form_theme.html.twig' %}
-
-<div class="sylius-filters__string">
-    {% if form.type is defined %}
-        {{ form_row(form.type, {'label': filter.label}) }}
-    {% endif %}
-    {{ form_row(form.value, {attr: {placeholder: form.value.vars.label}, 'label': form.type is defined ? form.value.vars.label : filter.label}) }}
-</div>

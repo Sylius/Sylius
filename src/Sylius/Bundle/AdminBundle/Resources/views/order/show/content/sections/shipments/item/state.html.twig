@@ -1,5 +1,0 @@
-{% set shipment = hookable_metadata.context.shipment %}
-
-<td class="w-1" {{ sylius_test_html_attribute('shipment-state') }}>
-    <div class="text-primary strong">{{ ('sylius.ui.' ~ shipment.state)|trans|upper }}</div>
-</td>

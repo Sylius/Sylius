@@ -1,7 +1,0 @@
-{% import '@SyliusAdmin/shared/helper/money.html.twig' as _money %}
-
-{% set order = hookable_metadata.context.resource %}
-
-<div class="card mb-3" {{ sylius_test_html_attribute('payments') }}>
-    {% hook 'payments' %}
-</div>

@@ -1,8 +1,0 @@
-{% set form = hookable_metadata.context.form %}
-
-{% form_theme form '@SyliusAdmin/shared/form_theme.html.twig' %}
-
-{{ form_start(form, {'action': path('sylius_admin_login_check'), 'attr': {'class': 'ui large loadable form', 'novalidate': 'novalidate'}}) }}
-    {% hook 'form' with { form } %}
-    <input type="hidden" name="_csrf_admin_security_token" value="{{ csrf_token('admin_authenticate') }}">
-{{ form_end(form, {'render_rest': false}) }}
