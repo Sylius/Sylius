@@ -1,14 +1,1 @@
-{%
-    set viewOptions = {
-    inactive: { color: '' },
-    processing: { color: 'bg-blue-lt' },
-    active: { color: 'bg-green-lt' },
-    failed: { color: 'bg-red-lt' },
-}
-%}
-
-{% set value = 'sylius.ui.' ~ data %}
-
-<span class="badge {{ viewOptions[data]['color'] }}">
-    {{ value|trans }}
-</span>
+{{ include('@SyliusAdmin/catalog_promotion/common/label/state/' ~ data ~ '.html.twig') }}

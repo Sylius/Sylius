@@ -3,6 +3,17 @@ twig_hooks:
         'sylius_admin.catalog_promotion.show.content':
             sections:
                 template: '@SyliusAdmin/catalog_promotion/show/content/sections.html.twig'
+
+        'sylius_admin.catalog_promotion.show.content.header.title_block':
+            title:
+                template: '@SyliusAdmin/catalog_promotion/show/content/header/title_block/title.html.twig'
+            actions:
+                template: '@SyliusAdmin/catalog_promotion/show/content/header/title_block/actions.html.twig'
+
+        'sylius_admin.catalog_promotion.show.content.header.title_block.actions':
+            update:
+                template: '@SyliusAdmin/catalog_promotion/show/content/header/title_block/actions/update.html.twig'
+
         'sylius_admin.catalog_promotion.show.content.sections#left':
             details:
                 template: '@SyliusAdmin/catalog_promotion/show/content/sections/details.html.twig'
@@ -18,7 +29,7 @@ twig_hooks:
         'sylius_admin.catalog_promotion.show.content.sections.details':
             code:
                 template: '@SyliusAdmin/catalog_promotion/show/content/sections/details/code.html.twig'
-            _name:
+            name:
                 template: '@SyliusAdmin/catalog_promotion/show/content/sections/details/name.html.twig'
             enabled:
                 template: '@SyliusAdmin/catalog_promotion/show/content/sections/details/enabled.html.twig'
@@ -34,17 +45,17 @@ twig_hooks:
                 template: '@SyliusAdmin/catalog_promotion/show/content/sections/details/priority.html.twig'
             channels:
                 template: '@SyliusAdmin/catalog_promotion/show/content/sections/details/channels.html.twig'
-        
+
         'sylius_admin.catalog_promotion.show.content.sections.translations':
             label:
                 template: '@SyliusAdmin/catalog_promotion/show/content/sections/translations/label.html.twig'
             description:
                 template: '@SyliusAdmin/catalog_promotion/show/content/sections/translations/description.html.twig'
-        
+
         'sylius_admin.catalog_promotion.show.content.sections.scopes':
             scope:
                 template: '@SyliusAdmin/catalog_promotion/show/content/sections/scopes/scope.html.twig'
-        
+
         'sylius_admin.catalog_promotion.show.content.sections.scopes.scope#for_products':
             type:
                 template: '@SyliusAdmin/catalog_promotion/show/content/sections/scopes/scope/type.html.twig'
@@ -55,7 +66,7 @@ twig_hooks:
                 configuration: 
                     label: 'sylius.ui.products'
                     items_key: 'products'
-        
+
         'sylius_admin.catalog_promotion.show.content.sections.scopes.scope#for_taxons':
             type:
                 template: '@SyliusAdmin/catalog_promotion/show/content/sections/scopes/scope/type.html.twig'
@@ -66,7 +77,7 @@ twig_hooks:
                 configuration:
                     label: 'sylius.ui.taxons'
                     items_key: 'taxons'
-        
+
         'sylius_admin.catalog_promotion.show.content.sections.scopes.scope#for_variants':
             type:
                 template: '@SyliusAdmin/catalog_promotion/show/content/sections/scopes/scope/type.html.twig'
@@ -77,30 +88,23 @@ twig_hooks:
                 configuration:
                     label: 'sylius.ui.variants'
                     items_key: 'variants'
-        
+
         'sylius_admin.catalog_promotion.show.content.sections.actions':
             action:
                 template: '@SyliusAdmin/catalog_promotion/show/content/sections/actions/action.html.twig'
-        
+
         'sylius_admin.catalog_promotion.show.content.sections.actions.action#percentage_discount':
             type:
                 template: '@SyliusAdmin/catalog_promotion/show/content/sections/actions/action/type.html.twig'
                 configuration:
                     type_label: 'sylius.ui.percentage_discount'
             amount:
-                template: '@SyliusAdmin/catalog_promotion/show/content/sections/actions/action/field.html.twig'
-                configuration:
-                    label: 'sylius.ui.amount'
-                    field: 'amount'
-        
+                template: '@SyliusAdmin/catalog_promotion/show/content/sections/actions/action/amount.html.twig'
+
         'sylius_admin.catalog_promotion.show.content.sections.actions.action#fixed_discount':
             type:
                 template: '@SyliusAdmin/catalog_promotion/show/content/sections/actions/action/type.html.twig'
                 configuration:
                     type_label: 'sylius.ui.fixed_discount'
             channels_amount:
-                template: '@SyliusAdmin/catalog_promotion/show/content/sections/actions/action/channels_field.html.twig'
-                configuration:
-                    field: 'amount'
-
-                
+                template: '@SyliusAdmin/catalog_promotion/show/content/sections/actions/action/channels_amount.html.twig'
