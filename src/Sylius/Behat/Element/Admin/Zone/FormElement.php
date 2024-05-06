@@ -104,9 +104,9 @@ class FormElement extends BaseFormElement implements FormElementInterface
             'scope' => '[data-test-scope]',
             'type' => '[data-test-type]',
             'zone_member' => '[data-test-zone-member]:contains("%name%")',
+            'zone_member_added' => '[data-test-zone-member]:last-child option:not([selected="selected"])',
             'zone_member_delete' => '[data-test-zone-member]:contains("%name%") button[name$="[delete]"]',
             'zone_member_last' => '[data-test-members]:last-child',
-            'zone_member_added' => '[data-test-zone-member]:last-child option:not([selected="selected"])',
             'zone_members' => '[data-test-members]',
         ]);
     }

@@ -25,7 +25,7 @@ sylius_admin_zone_create:
                 method: createTyped
                 arguments:
                     type: $type
-            template: "@SyliusAdmin/Shared/Crud/create.html.twig"
+            template: "@SyliusAdmin/shared/crud/create.html.twig"
             redirect: sylius_admin_zone_update
             permission: true
             vars:
