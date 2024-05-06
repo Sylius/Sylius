@@ -2,7 +2,7 @@ twig_hooks:
     hooks:
         'sylius_admin.country.create.content':
             form:
-                component: 'sylius_admin.country.form'
+                component: 'sylius_admin:country:form'
                 props:
                     country: '@=_context.resource'
                     form: '@=_context.form'
