@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\AdminBundle\TwigComponent\Shipment;
+namespace Sylius\Bundle\AdminBundle\Twig\Component\Shipment;
 
 use Sylius\Component\Core\Model\Shipment;
 use Sylius\TwigHooks\LiveComponent\HookableLiveComponentTrait;
@@ -22,8 +22,8 @@ use Symfony\UX\LiveComponent\Attribute\LiveProp;
 use Symfony\UX\LiveComponent\ComponentWithFormTrait;
 use Symfony\UX\LiveComponent\DefaultActionTrait;
 
-#[AsLiveComponent(name: 'SyliusAdmin.Shipment.ShipType', template: '@SyliusAdmin/shipment/component/ship.html.twig')]
-final class ShipType
+#[AsLiveComponent(name: 'sylius_admin:shipment:ship', template: '@SyliusAdmin/shipment/component/ship.html.twig')]
+final class ShipComponent
 {
     use DefaultActionTrait;
     use HookableLiveComponentTrait;
