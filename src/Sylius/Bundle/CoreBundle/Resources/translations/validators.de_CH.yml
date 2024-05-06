@@ -100,8 +100,6 @@ sylius:
     review:
         author:
             not_blank: Bitte geben Sie Ihre E-Mail-Adresse ein.
-        rating:
-            range: Bewertung muss eine Ganzzahl im Bereich 1-5 sein.
     taxon_image:
         file:
             max_size: Das Bild ist zu groß - {{ size }}{{ suffix }}. Maximal zulässige Größe {{ limit }}{{ suffix }}.
