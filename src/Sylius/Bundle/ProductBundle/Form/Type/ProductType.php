@@ -68,6 +68,9 @@ final class ProductType extends AbstractResourceType
                 'by_reference' => false,
                 'label' => false,
             ])
+            ->add('associations', ProductAssociationsType::class, [
+                'label' => false,
+            ])
         ;
     }
 

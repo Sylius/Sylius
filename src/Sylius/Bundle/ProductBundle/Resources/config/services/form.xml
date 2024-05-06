@@ -89,6 +89,12 @@
             <tag name="form.type" />
         </service>
 
+        <service id="sylius.form.type.sylius_product_associations" class="Sylius\Bundle\ProductBundle\Form\Type\ProductAssociationsType">
+            <argument type="service" id="sylius.repository.product_association_type" />
+            <argument type="service" id="sylius.form.type.data_transformer.products_to_product_associations" />
+            <tag name="form.type" />
+        </service>
+
         <service id="sylius.form.type.product_attribute" class="Sylius\Bundle\ProductBundle\Form\Type\ProductAttributeType">
             <argument>%sylius.model.product_attribute.class%</argument>
             <argument>%sylius.form.type.product_attribute.validation_groups%</argument>
@@ -199,20 +205,14 @@
             <argument type="service" id="request_stack" />
         </service>
 
-        <service id="sylius.form.type.product_option_value_choice" class="Sylius\Bundle\ProductBundle\Form\Type\ProductOptionValueChoiceType">
-            <argument type="service" id="sylius.available_product_option_values_resolver" />
-            <tag name="form.type" />
-        </service>
-
-        <service id="sylius.form.type.sylius_product_associations" class="Sylius\Bundle\ProductBundle\Form\Type\ProductAssociationsType">
-            <argument type="service" id="sylius.repository.product_association_type" />
-            <argument type="service" id="sylius.form.type.data_transformer.products_to_product_associations" />
-            <tag name="form.type" />
-        </service>
-
         <service id="sylius.form.type.data_transformer.products_to_product_associations" class="Sylius\Bundle\ProductBundle\Form\DataTransformer\ProductsToProductAssociationsTransformer">
             <argument type="service" id="sylius.factory.product_association" />
             <argument type="service" id="sylius.repository.product_association_type" />
+        </service>
+
+        <service id="sylius.form.type.product_option_value_choice" class="Sylius\Bundle\ProductBundle\Form\Type\ProductOptionValueChoiceType">
+            <argument type="service" id="sylius.available_product_option_values_resolver" />
+            <tag name="form.type" />
         </service>
     </services>
 </container>

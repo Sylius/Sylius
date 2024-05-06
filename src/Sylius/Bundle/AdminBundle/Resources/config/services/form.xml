@@ -60,6 +60,10 @@
             <tag name="form.type_extension" />
         </service>
 
+        <service id="sylius_admin.form.extension.type.product_associations" class="Sylius\Bundle\AdminBundle\Form\Extension\ProductAssociationsTypeExtension">
+            <tag name="form.type_extension" />
+        </service>
+
         <service id="sylius.form.extension.type.product_image" class="Sylius\Bundle\AdminBundle\Form\Extension\ProductImageTypeExtension">
             <argument>%sylius.model.product_variant.class%</argument>
             <tag name="form.type_extension" />
