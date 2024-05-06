@@ -43,7 +43,7 @@
             <tag name="form.type_extension" extended-type="Sylius\Bundle\AddressingBundle\Form\Type\CountryType" priority="100" />
         </service>
 
-        <service id="sylius_admin.form.extension.shipping_method_type" class="Sylius\Bundle\AdminBundle\Form\Extension\ShippingMethodTypeExtension">
+        <service id="sylius_admin.form.extension.shipping_method" class="Sylius\Bundle\AdminBundle\Form\Extension\ShippingMethodTypeExtension">
             <argument>%sylius.shipping_method_rules%</argument>
             <tag name="form.type_extension" />
         </service>

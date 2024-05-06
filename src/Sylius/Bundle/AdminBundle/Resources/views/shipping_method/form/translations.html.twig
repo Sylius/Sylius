@@ -1,6 +1,6 @@
 {% import '@SyliusAdmin/Shared/Helper/translations.html.twig' as _translations %}
 
-{% set form = hookable_data.form %}
+{% set form = hookable_metadata.context.form %}
 
 <div class="bg-white mb-3">
     {{ _translations.default(form.translations) }}

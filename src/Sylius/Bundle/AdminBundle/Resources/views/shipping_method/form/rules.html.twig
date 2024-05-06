@@ -1,6 +1,3 @@
-{% set main_hook = hook_name(hookable_data.parent_main_hook, 'rules') %}
-{% set fallback_hook = hook_name(hookable_data.parent_fallback_hook, 'rules') %}
-
 <div class="card mb-3">
     <div class="card" {{ sylius_test_html_attribute('rules') }}>
         <div class="card-header">
@@ -15,11 +12,11 @@
                 </div>
             </div>
             <div class="row align-items-center">
-                {{ form_row(hookable_data.form.rules, {label: false}) }}
+                {{ form_row(hookable_metadata.context.form.rules, {label: false}) }}
             </div>
         </div>
         <div class="card-footer">
-            {{ form_row(hookable_data.form.rules.vars.button_add) }}
+            {{ form_row(hookable_metadata.context.form.rules.vars.button_add) }}
         </div>
     </div>
 </div>

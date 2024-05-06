@@ -1,4 +1,4 @@
-{% set form = hookable_data.form %}
+{% set form = hookable_metadata.context.form %}
 
 {% if form.calculator.vars.value is not empty %}
     <div class="col-12" {{ sylius_test_html_attribute('calculator-configuration') }}>

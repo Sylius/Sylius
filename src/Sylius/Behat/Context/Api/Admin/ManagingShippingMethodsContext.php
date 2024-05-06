@@ -407,11 +407,11 @@ final class ManagingShippingMethodsContext implements Context
      * @Then the shipping method :shippingMethod should appear in the registry
      * @Then the :shippingMethod shipping method should be successfully created
      */
-    public function theShippingMethodShouldAppearInTheRegistry(ShippingMethodInterface $shippingMethod): void
+    public function theShippingMethodShouldAppearInTheRegistry(string $name): void
     {
         Assert::true(
-            $this->responseChecker->hasItemWithTranslation($this->client->index(Resources::SHIPPING_METHODS), 'en_US', 'name', $shippingMethod->getName()),
-            sprintf('Shipping method with name %s does not exists', $shippingMethod->getName()),
+            $this->responseChecker->hasItemWithTranslation($this->client->index(Resources::SHIPPING_METHODS), 'en_US', 'name', $name),
+            sprintf('Shipping method with name %s does not exists', $name),
         );
     }
 

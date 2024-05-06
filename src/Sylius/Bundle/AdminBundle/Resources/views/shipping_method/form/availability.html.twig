@@ -1,13 +1,7 @@
-{% set main_hook = hook_name(hookable_data.parent_main_hook, 'availability') %}
-{% set fallback_hook = hook_name(hookable_data.parent_fallback_hook, 'availability') %}
-
 <div class="card mb-3">
     <div class="card-body">
         <div class="row">
-            {% hook [main_hook, fallback_hook] with hookable_data|merge({
-                parent_main_hook: main_hook,
-                parent_fallback_hook: fallback_hook,
-            }) %}
+            {% hook 'availability' %}
         </div>
     </div>
 </div>
