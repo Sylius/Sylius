@@ -10,7 +10,7 @@
 import 'semantic-ui-css/components/api';
 import 'semantic-ui-css/components/checkbox';
 import $ from 'jquery';
-import { sanitizeInput} from "./sylius-sanitizer";
+import { sanitizeInput } from "sylius/ui/sylius-sanitizer";
 
 const createRootContainer = function createRootContainer() {
   return $('<div class="ui list"></div>');
