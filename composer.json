@@ -93,7 +93,7 @@
         "symfony/config": "^5.4.21 || ^6.4",
         "symfony/console": "^5.4.21 || ^6.4",
         "symfony/dependency-injection": "^5.4.21 || ^6.4",
-        "symfony/deprecation-contracts": "^2.5",
+        "symfony/deprecation-contracts": "^3.5",
         "symfony/doctrine-bridge": "^5.4.21 || ^6.4",
         "symfony/doctrine-messenger": "^5.4.21 || ^6.4",
         "symfony/event-dispatcher": "^5.4.21 || ^6.4",
