@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace Sylius\Bundle\AdminBundle\Form\Extension;
 
 use Sylius\Bundle\CoreBundle\Form\Type\Product\ProductImageType;
-use Sylius\Bundle\ProductBundle\Form\Type\ProductAssociationsType;
 use Sylius\Bundle\ProductBundle\Form\Type\ProductType;
 use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -28,9 +27,6 @@ final class ProductTypeExtension extends AbstractTypeExtension
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('associations', ProductAssociationsType::class, [
-                'label' => false,
-            ])
             ->add('images', LiveCollectionType::class, [
                 'entry_type' => ProductImageType::class,
                 'entry_options' => ['product' => $options['data']],
