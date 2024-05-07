@@ -85,11 +85,11 @@
             <tag name="serializer.normalizer" priority="64" />
         </service>
 
-<!--        <service id="Sylius\Bundle\ApiBundle\Serializer\FlattenExceptionNormalizer" decorates="fos_rest.serializer.flatten_exception_normalizer">-->
-<!--            <argument type="service" id="Sylius\Bundle\ApiBundle\Serializer\FlattenExceptionNormalizer.inner" />-->
-<!--            <argument type="service" id="request_stack" />-->
-<!--            <argument>%sylius.security.new_api_route%</argument>-->
-<!--        </service>-->
+        <service id="Sylius\Bundle\ApiBundle\Serializer\FlattenExceptionNormalizer" decorates="fos_rest.serializer.flatten_exception_normalizer">
+            <argument type="service" id="Sylius\Bundle\ApiBundle\Serializer\FlattenExceptionNormalizer.inner" />
+            <argument type="service" id="request_stack" />
+            <argument>%sylius.security.new_api_route%</argument>
+        </service>
 
 <!--        <service id="Sylius\Bundle\ApiBundle\Serializer\ShippingMethodNormalizer">-->
 <!--            <argument type="service" id="sylius.repository.order" />-->
