@@ -10,8 +10,6 @@ sylius_admin_zone:
         vars:
             all:
                 subheader: sylius.ui.manage_geographical_zones
-                templates:
-                    form: "@SyliusAdmin/Zone/_form.html.twig"
             index:
                 icon: world
     type: sylius.resource
@@ -27,13 +25,11 @@ sylius_admin_zone_create:
                 method: createTyped
                 arguments:
                     type: $type
-            template: "@SyliusAdmin/Crud/create.html.twig"
+            template: "@SyliusAdmin/shared/crud/create.html.twig"
             redirect: sylius_admin_zone_update
             permission: true
             vars:
                 subheader: sylius.ui.manage_geographical_zones
-                templates:
-                    form: "@SyliusAdmin/Zone/_form.html.twig"
                 route:
                     parameters:
                         type: $type

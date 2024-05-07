@@ -34,6 +34,10 @@
             <tag name="form.type_extension" extended-type="Sylius\Bundle\AddressingBundle\Form\Type\AddressType" priority="100" />
         </service>
 
+        <service id="Sylius\Bundle\AdminBundle\Form\Extension\ZoneTypeExtension">
+            <tag name="form.type_extension" extended-type="Sylius\Bundle\AddressingBundle\Form\Type\ZoneType" priority="100" />
+        </service>
+
         <service id="sylius.form.extension.catalog_promotion_scope" class="Sylius\Bundle\AdminBundle\Form\Extension\CatalogPromotionScopeTypeExtension">
             <tag name="form.type_extension" extended-type="Sylius\Bundle\PromotionBundle\Form\Type\CatalogPromotionScopeType" priority="100" />
         </service>
