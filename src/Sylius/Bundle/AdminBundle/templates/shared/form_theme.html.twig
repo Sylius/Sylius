@@ -38,10 +38,11 @@
                             href="#{{ channelCode }}"
                             role="tab"
                             {{ sylius_test_html_attribute('tab', channelCode) }}
+                            {{ sylius_test_html_attribute('channel-tab', channelCode) }}
                         >
                             <span>{{- channelConfiguration.vars.label -}}</span>
                             {% if channelErrorCount > 0 %}
-                                <span class="text-white badge rounded-pill bg-danger">{{ channelErrorCount }}</span>
+                                <span class="text-white badge rounded-pill bg-danger ms-1">{{ channelErrorCount }}</span>
                             {% endif %}
                         </a>
                     </li>
@@ -51,7 +52,12 @@
         <div class="card-body">
             <div class="tab-content">
                 {% for channelCode, channelConfiguration in form %}
-                    <div class="tab-pane fade {% if loop.index0 == 0 %}show active{% endif %}" id="{{ channelCode }}" role="tabpanel">
+                    <div
+                        class="tab-pane fade {% if loop.index0 == 0 %}show active{% endif %}"
+                        id="{{ channelCode }}"
+                        role="tabpanel"
+                        {{ sylius_test_html_attribute('channel-tab-content', channelCode) }}
+                    >
                         {{ form_row(channelConfiguration, sylius_test_form_attribute('tab-content')|merge({'label': false})) }}
                     </div>
                 {% endfor %}

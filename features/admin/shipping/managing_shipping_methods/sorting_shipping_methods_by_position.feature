@@ -11,20 +11,20 @@ Feature: Sorting listed shipping methods by position
         And the store also allows shipping with "Pug Blimp" at position 1
         And I am logged in as an administrator
 
-    @todo @ui @api
+    @ui @api
     Scenario: Shipping methods are sorted by position in ascending order by default
         When I am browsing shipping methods
         Then I should see 3 shipping methods in the list
         And the first shipping method on the list should have name "Narwhal Submarine"
         And the last shipping method on the list should have name "Aardvark Stagecoach"
 
-    @todo @ui @api
+    @ui @api
     Scenario: Shipping method added at no position is added as the last one
         Given the store also allows shipping with "Yellow Submarine"
         When I want to browse shipping methods
         Then the last shipping method on the list should have name "Yellow Submarine"
 
-    @todo @ui @api
+    @ui @api
     Scenario: Shipping method added at position 0 is added as the first one
         Given the store also allows shipping with "Yellow Submarine" at position 0
         When I want to browse shipping methods

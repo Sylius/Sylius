@@ -7,13 +7,6 @@ sylius_admin_shipping_method:
         redirect: update
         grid: sylius_admin_shipping_method
         permission: true
-        vars:
-            all:
-                subheader: sylius.ui.manage_shipping_methods_for_your_store
-                templates:
-                    form: "@SyliusAdmin/ShippingMethod/_form.html.twig"
-            index:
-                icon: shipping
     type: sylius.resource
 
 sylius_admin_shipping_method_archive:
