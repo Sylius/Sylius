@@ -52,7 +52,7 @@ final class ZoneType extends AbstractResourceType
                 ->add('scope', ChoiceType::class, [
                     'choices' => array_flip($this->scopeChoices),
                     'label' => 'sylius.form.zone.scope',
-                    'placeholder' => 'sylius.form.zone.select_scope',
+                    'placeholder' => null,
                     'required' => false,
                 ])
             ;
