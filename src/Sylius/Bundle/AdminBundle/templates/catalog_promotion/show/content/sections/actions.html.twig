@@ -1,0 +1,10 @@
+<div class="card mb-3">
+    <div class="card-header">
+        <div class="card-title">
+            {{ 'sylius.ui.actions'|trans }}
+        </div>
+    </div>
+    <div class="card-body" {{ sylius_test_html_attribute('actions') }}>
+        {% hook 'actions' %}
+    </div>
+</div>
