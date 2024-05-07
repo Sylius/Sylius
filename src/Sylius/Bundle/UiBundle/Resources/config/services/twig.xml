@@ -58,5 +58,14 @@
         <service id="Sylius\Bundle\UiBundle\Storage\FilterStorage" public="false">
             <argument type="service" id="request_stack" />
         </service>
+
+        <service
+            id="sylius_ui.twig.ux.component_template_finder"
+            class="Sylius\Bundle\UiBundle\Twig\Ux\ComponentTemplateFinder"
+            decorates="ux.twig_component.component_template_finder"
+        >
+            <argument type="service" id=".inner" />
+            <argument type="service" id="twig.loader.native_filesystem" />
+        </service>
     </services>
 </container>

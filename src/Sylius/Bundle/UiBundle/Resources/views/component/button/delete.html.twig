@@ -1,0 +1,16 @@
+{% extends '@SyliusUi/component/button/submit.html.twig' %}
+
+{% props
+    text = '',
+    style = 'danger',
+    class = '',
+    dropdown = false,
+    disabled = false,
+    size = null,
+    icon = null,
+    iconOnly = false,
+    href = null,
+    hookableMetadata = null,
+%}
+
+{% set attributes = attributes.defaults({ type: 'submit' }) %}

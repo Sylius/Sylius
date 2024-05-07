@@ -1,0 +1,57 @@
+{% from '@SyliusAdmin/shared/helper/icon.html.twig' import icon as i %}
+
+{% props
+    text = '',
+    style = null,
+    class = '',
+    dropdown = false,
+    disabled = false,
+    size = null,
+    icon = null,
+    iconOnly = false,
+    href = null,
+    hookableMetadata = null,
+    testAttribute = null,
+%}
+
+{% set button_class = 'btn' ~
+    (class ? ' ' ~ class : '') ~
+    (style ? ' btn-' ~ style : '') ~
+    (dropdown ? ' dropdown-toggle' : '') ~
+    (iconOnly ? ' btn-icon' : '') ~
+    (size == 'large' ? ' btn-lg' : '') ~
+    (size == 'small' ? ' btn-sm' : '') %}
+
+{% set content %}
+    {% if text is not empty %}
+        {{ text }}
+    {% else %}
+        {{ block('content') }}
+    {% endif %}
+{% endset %}
+
+{% if href is not null %}
+    <a {{ attributes }}
+        class='{{ button_class|trim }} {{ class|trim }}'
+        href='{{ href }}'
+        {% if disabled %}aria-disabled='true'{% endif %}
+        {% if dropdown %}data-bs-toggle='dropdown'{% endif %}
+        {% if testAttribute %}{{ sylius_test_html_attribute(testAttribute) }}{% endif %}
+    >
+        {{ icon ? i({ icon }) }}
+        {% if iconOnly == false %}
+            {{ content }}
+        {% endif %}
+    </a>
+{% else %}
+    <button {{ attributes }}
+        class='{{ button_class|trim }} {{ class|trim }}'
+        {% if disabled %}disabled{% endif %}
+        {% if dropdown %}data-bs-toggle='dropdown'{% endif %}
+    >
+        {{ icon ? i({ icon }) }}
+        {% if iconOnly == false %}
+            {{ content }}
+        {% endif %}
+    </button>
+{% endif %}
