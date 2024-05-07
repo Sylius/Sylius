@@ -46,6 +46,7 @@ final class LiveComponentTagPassTest extends AbstractCompilerPassTestCase
                 'url_reference_type' => UrlGeneratorInterface::ABSOLUTE_PATH,
             ]
         );
+        $this->assertContainerBuilderHasServiceDefinitionWithTag('my_live_component', 'controller.service_arguments');
     }
 
     public function testOverridingTagAttributesWithLiveComponentTag(): void

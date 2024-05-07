@@ -26,6 +26,6 @@ final class SyliusUiBundle extends Bundle
     public function build(ContainerBuilder $container): void
     {
         $container->addCompilerPass(new LegacySonataBlockPass());
-        $container->addCompilerPass(new LiveComponentTagPass());
+        $container->addCompilerPass(new LiveComponentTagPass(), priority: 500);
     }
 }

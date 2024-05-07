@@ -37,6 +37,7 @@ final class LiveComponentTagPass implements CompilerPassInterface
                     'method' => $tag['method'] ?? 'post',
                     'url_reference_type' => $tag['url_reference_type'] ?? UrlGeneratorInterface::ABSOLUTE_PATH,
                 ]);
+                $liveComponentService->addTag('controller.service_arguments');
             }
         }
     }
