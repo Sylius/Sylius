@@ -133,7 +133,6 @@ Deployment
 
     deployment/platform-sh
     deployment/cron-jobs
-    deployment/docker
 
 .. include:: /cookbook/deployment/map.rst.inc
 
