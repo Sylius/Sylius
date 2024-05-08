@@ -1,6 +1,8 @@
 twig_hooks:
     hooks:
         'sylius_admin.product.generate_variants':
+            navbar:
+                template: '@SyliusAdmin/shared/crud/common/navbar.html.twig'
             content:
                 template: '@SyliusAdmin/shared/crud/common/content.html.twig'
 

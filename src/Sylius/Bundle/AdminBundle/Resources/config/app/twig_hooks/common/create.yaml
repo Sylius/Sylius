@@ -1,8 +1,6 @@
 twig_hooks:
     hooks:
         'sylius_admin.common.create':
-            sidebar:
-                template: '@SyliusAdmin/shared/crud/common/sidebar.html.twig'
             content:
                 template: '@SyliusAdmin/shared/crud/common/content.html.twig'
 
