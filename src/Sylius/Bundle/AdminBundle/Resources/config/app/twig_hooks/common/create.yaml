@@ -6,7 +6,7 @@ twig_hooks:
 
         'sylius_admin.common.create.content':
             flashes:
-                template: '@SyliusAdmin/shared/crud/common/content/flashes.html.twig'
+                component: 'sylius_admin:flashes'
             header:
                 template: '@SyliusAdmin/shared/crud/common/content/header.html.twig'
             form:
