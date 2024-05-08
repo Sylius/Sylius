@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\AdminBundle\Form\Extension;
 
+use Sylius\Bundle\AdminBundle\Form\Type\ProductAssociationsType;
 use Sylius\Bundle\CoreBundle\Form\Type\Product\ProductImageType;
 use Sylius\Bundle\ProductBundle\Form\Type\ProductType;
 use Symfony\Component\Form\AbstractTypeExtension;
@@ -35,6 +36,9 @@ final class ProductTypeExtension extends AbstractTypeExtension
                 'by_reference' => false,
                 'label' => 'sylius.form.product.images',
                 'block_name' => 'entry',
+            ])
+            ->add('associations', ProductAssociationsType::class, [
+                'label' => false,
             ])
         ;
     }
