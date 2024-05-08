@@ -35,6 +35,7 @@
         <import resource="services/serializers.xml" />
         <import resource="services/state_processors.xml" />
         <import resource="services/state_providers.xml" />
+        <import resource="services/query_handlers.xml" />
         <import resource="services/validator.xml" />
     </imports>
 
