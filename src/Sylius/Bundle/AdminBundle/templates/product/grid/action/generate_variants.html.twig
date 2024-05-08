@@ -2,7 +2,7 @@
 
 {% set path = options.link.url|default(path('sylius_admin_product_variant_generate', {'productId': options.product.id})) %}
 
-<a href="{{ path }}" class="btn primary">
-    {{ icon({ icon: 'arrows-shuffle', class: 'icon icon-tabler dropdown-item-icon' }) }}
+<a href="{{ path }}" class="btn">
+    {{ icon({ icon: 'arrows-split', class: 'icon icon-tabler' }) }}
     {{ 'sylius.ui.generate'|trans }}
 </a>

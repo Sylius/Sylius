@@ -7,7 +7,7 @@
     {% set message = 'sylius.ui.create' %}
 {% endif %}
 
-<a href="{{ path }}" class="btn primary">
+<a href="{{ path }}" class="btn">
     {{ icon({ icon: action.icon ?? 'plus', class: 'icon icon-tabler dropdown-item-icon' }) }}
     {{ message|trans }}
 </a>
