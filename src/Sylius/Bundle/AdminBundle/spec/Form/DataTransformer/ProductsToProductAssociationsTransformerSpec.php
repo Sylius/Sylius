@@ -11,14 +11,13 @@
 
 declare(strict_types=1);
 
-namespace spec\Sylius\Bundle\ProductBundle\Form\DataTransformer;
+namespace spec\Sylius\Bundle\AdminBundle\Form\DataTransformer;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Product\Model\ProductAssociationInterface;
 use Sylius\Component\Product\Model\ProductAssociationTypeInterface;
 use Sylius\Component\Product\Model\ProductInterface;
-use Sylius\Component\Product\Repository\ProductRepositoryInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\Form\DataTransformerInterface;
@@ -27,12 +26,10 @@ final class ProductsToProductAssociationsTransformerSpec extends ObjectBehavior
 {
     function let(
         FactoryInterface $productAssociationFactory,
-        ProductRepositoryInterface $productRepository,
         RepositoryInterface $productAssociationTypeRepository,
     ): void {
         $this->beConstructedWith(
             $productAssociationFactory,
-            $productRepository,
             $productAssociationTypeRepository,
         );
     }
@@ -42,9 +39,9 @@ final class ProductsToProductAssociationsTransformerSpec extends ObjectBehavior
         $this->shouldImplement(DataTransformerInterface::class);
     }
 
-    function it_transforms_null_to_empty_string(): void
+    function it_transforms_an_empty_collection_to_an_empty_array(): void
     {
-        $this->transform(null)->shouldReturn('');
+        $this->transform(new ArrayCollection())->shouldReturn([]);
     }
 
     function it_transforms_product_associations_to_array(
@@ -66,8 +63,11 @@ final class ProductsToProductAssociationsTransformerSpec extends ObjectBehavior
 
         $productAssociationType->getCode()->willReturn('accessories');
 
-        $this->transform(new ArrayCollection([$productAssociation->getWrappedObject()]))->shouldReturn([
-            'accessories' => 'FIRST,SECOND',
+        $this->transform(new ArrayCollection([$productAssociation->getWrappedObject()]))->shouldBeLike([
+            'accessories' => new ArrayCollection([
+                $firstAssociatedProduct->getWrappedObject(),
+                $secondAssociatedProduct->getWrappedObject(),
+            ]),
         ]);
     }
 

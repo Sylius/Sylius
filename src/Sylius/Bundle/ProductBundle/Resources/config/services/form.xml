@@ -207,6 +207,7 @@
 
         <service id="sylius.form.type.data_transformer.products_to_product_associations" class="Sylius\Bundle\ProductBundle\Form\DataTransformer\ProductsToProductAssociationsTransformer">
             <argument type="service" id="sylius.factory.product_association" />
+            <argument type="service" id="sylius.repository.product" />
             <argument type="service" id="sylius.repository.product_association_type" />
         </service>
 
