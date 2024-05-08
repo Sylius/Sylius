@@ -3,8 +3,6 @@ twig_hooks:
         'sylius_admin.common.show':
             sidebar:
                 template: '@SyliusAdmin/shared/crud/common/sidebar.html.twig'
-            navbar:
-                template: '@SyliusAdmin/shared/crud/common/navbar.html.twig'
             content:
                 template: '@SyliusAdmin/shared/crud/common/content.html.twig'
 
