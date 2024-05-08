@@ -69,6 +69,7 @@ sylius_grid:
             default: '@SyliusAdmin/shared/grid/action/default.html.twig'
             delete: '@SyliusAdmin/shared/grid/action/delete.html.twig'
             links: '@SyliusAdmin/shared/grid/action/links.html.twig'
+            list: '@SyliusAdmin/shared/grid/action/list.html.twig'
             show: '@SyliusAdmin/shared/grid/action/show.html.twig'
             update: '@SyliusAdmin/shared/grid/action/update.html.twig'
             create_payment_method: "@SyliusAdmin/payment_method/grid/action/create.html.twig"

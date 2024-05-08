@@ -22,7 +22,8 @@
 {% endmacro %}
 
 {% macro row(grid, definition, row) %}
-    {% import '@SyliusAdmin/shared/helper/dropdown.html.twig' as dropdown %}
+    {% from '@SyliusAdmin/shared/helper/dropdown.html.twig' import default as dropdown %}
+    {% from '@SyliusAdmin/shared/helper/icon.html.twig' import icon %}
 
     <tr class="item" {{ sylius_test_html_attribute('row') }} {{ sylius_test_html_attribute('resource-id', row.id) }}>
         {% if definition.actionGroups.bulk is defined and definition.getEnabledActions('bulk')|length > 0 %}
@@ -33,19 +34,25 @@
         {% endfor %}
         {% if definition.actionGroups.item is defined and definition.getEnabledActions('item')|length > 0 %}
             <td {{ sylius_test_html_attribute('actions') }}>
-                <div class="d-block p-2">
-                    {% set actions %}
-                        {% for action in definition.getEnabledActions('item')|sort_by('position') %}
-                            {{ sylius_grid_render_item_action(grid, action, row) }}
-                        {% endfor %}
-                    {% endset %}
-                    {{ dropdown.default({ content: actions, direction: 'down-end', button: { text: 'Actions', class: 'dropdown-static' } }) }}
-                </div>
-                <div class="d-block p-2">
+                <div class="d-flex gap-1 justify-content-end py-2">
+                    {% for action in definition.getEnabledActions('item')|sort_by('position') %}
+                        {{ sylius_grid_render_item_action(grid, action, row) }}
+                    {% endfor %}
+
                     {% if definition.actionGroups.subitem is defined and definition.getEnabledActions('subitem')|length > 0 %}
-                        {% for action in definition.getEnabledActions('subitem')|sort_by('position') %}
-                            {{ sylius_grid_render_action(grid, action, row) }}
-                        {% endfor %}
+                        {% set subactions %}
+                            {% for action in definition.getEnabledActions('subitem')|sort_by('position') %}
+                                {{ sylius_grid_render_action(grid, action, row) }}
+                            {% endfor %}
+                        {% endset %}
+                        {% set more_button %}
+                            <button class="btn btn-icon dropdown-static" data-bs-toggle="tooltip" data-bs-title="{{ 'sylius.ui.more'|trans }}">
+                                {{ icon({ icon: 'dots', class: 'icon icon-tabler' }) }}
+                            </button>
+                        {% endset %}
+                        {% if subactions|trim|length > 0 %}
+                            {{ dropdown({ customTrigger: more_button, content: subactions, direction: 'down-end' }) }}
+                        {% endif %}
                     {% endif %}
                 </div>
             </td>

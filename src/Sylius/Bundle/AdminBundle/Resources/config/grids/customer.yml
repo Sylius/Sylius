@@ -66,6 +66,7 @@ sylius_grid:
                     show_orders:
                         type: show
                         label: sylius.ui.show_orders
+                        icon: shopping-bag
                         options:
                             link:
                                 route: sylius_admin_customer_order_index
