@@ -1,4 +1,6 @@
 {% macro default(items, open = false, autoClose = null, flush = false) %}
+    {% from "@SyliusAdmin/shared/helper/icon.html.twig" import icon %}
+
     {% set autoClose = autoClose|default(true) %}
     {% set id = id|default(random()) %}
 
@@ -7,6 +9,7 @@
             {% set item = {
                 'open': open,
                 'flag': null,
+                'icon': null,
             }|merge(item) %}
             {% set item_id = item.id|default('collapse' ~ loop.index) %}
 
@@ -19,10 +22,15 @@
                             aria-expanded="{{ item.open == true ? 'true' : 'false' }}"
                             aria-controls="{{ item_id }}">
 
-                        {% if item.flag %}
-                            <span class="flag flag-country-{{ item.flag }} me-3"></span>
-                        {% endif %}
-                        {{ item.title|default('Title') }}
+                        <span class="d-flex gap-2">
+                            {% if item.flag %}
+                                <span class="flag flag-country-{{ item.flag }}"></span>
+                            {% endif %}
+                            {% if item.icon %}
+                                <span class="d-flex align-items-center">{{ icon({ icon: item.icon }) }}</span>
+                            {% endif %}
+                            {{ item.title|default('Title') }}
+                        </span>
                     </button>
                 </h2>
                 <div id="{{ item_id }}"
