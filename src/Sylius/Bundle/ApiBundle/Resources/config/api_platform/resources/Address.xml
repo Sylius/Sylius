@@ -28,9 +28,43 @@
         </validationContext>
 
         <operations>
+            <operation class="ApiPlatform\Metadata\Get" uriTemplate="/admin/addresses/{id}">
+                <normalizationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius:admin:address:show</value>
+                            </values>
+                        </value>
+                    </values>
+                </normalizationContext>
+            </operation>
+
+            <operation class="ApiPlatform\Metadata\Put" uriTemplate="/admin/addresses/{id}">
+                <denormalizationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius:admin:address:update</value>
+                            </values>
+                        </value>
+                    </values>
+                </denormalizationContext>
+                <normalizationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius:admin:address:show</value>
+                            </values>
+                        </value>
+                    </values>
+                </normalizationContext>
+            </operation>
+
             <operation
                 class="ApiPlatform\Metadata\Get"
-                uriTemplate="shop/addresses/{id}"
+                uriTemplate="/shop/addresses/{id}"
+                security="is_granted('SYLIUS_CUSTOMER')"
             >
                 <normalizationContext>
                     <values>
@@ -45,7 +79,8 @@
 
             <operation
                 class="ApiPlatform\Metadata\GetCollection"
-                uriTemplate="shop/addresses"
+                uriTemplate="/shop/addresses"
+                security="is_granted('SYLIUS_CUSTOMER')"
             >
                 <normalizationContext>
                     <values>
@@ -59,12 +94,11 @@
             </operation>
 
             <operation
-                class="ApiPlatform\Metadata\Delete"
-                uriTemplate="shop/addresses/{id}"
-            />
-
-            <operation class="ApiPlatform\Metadata\Post"
-                uriTemplate="shop/addresses"
+                class="ApiPlatform\Metadata\Post"
+                uriTemplate="/shop/addresses"
+                security="is_granted('SYLIUS_CUSTOMER')"
+                itemUriTemplate="/shop/addresses/{id}"
+                processor="sylius.api.state_processor.post.address"
             >
                 <denormalizationContext>
                     <values>
@@ -88,7 +122,8 @@
 
             <operation
                 class="ApiPlatform\Metadata\Put"
-                uriTemplate="shop/addresses"
+                uriTemplate="/shop/addresses/{id}"
+                security="is_granted('SYLIUS_CUSTOMER')"
             >
                 <denormalizationContext>
                     <values>
@@ -111,67 +146,10 @@
             </operation>
 
             <operation
-                class="ApiPlatform\Metadata\Get"
-                uriTemplate="admin/addresses/{id}"
-                >
-                <normalizationContext>
-                    <values>
-                        <value name="groups">
-                            <values>
-                                <value>sylius:admin:address:show</value>
-                            </values>
-                        </value>
-                    </values>
-                </normalizationContext>
-            </operation>
-
-            <operation
-                class="ApiPlatform\Metadata\Get"
-                uriTemplate="admin/addresses/{id}/log-entries"
-                controller="Sylius\Bundle\ApiBundle\Controller\GetAddressLogEntryCollectionAction"
-                deserialize="false"
-                >
-                <normalizationContext>
-                    <values>
-                        <value name="groups">
-                            <values>
-                                <value>sylius:admin:address:log_entry:show</value>
-                            </values>
-                        </value>
-                    </values>
-                </normalizationContext>
-                <openapiContext>
-                    <values>
-                        <value name="summary">Get address log entries</value>
-                        <value name="description">Get address log entries</value>
-                    </values>
-                </openapiContext>
-
-            </operation>
-
-            <operation
-                class="ApiPlatform\Metadata\Put"
-                uriTemplate="admin/addresses/{id}"
-            >
-                <denormalizationContext>
-                    <values>
-                        <value name="groups">
-                            <values>
-                                <value>sylius:admin:address:update</value>
-                            </values>
-                        </value>
-                    </values>
-                </denormalizationContext>
-                <normalizationContext>
-                    <values>
-                        <value name="groups">
-                            <values>
-                                <value>sylius:admin:address:show</value>
-                            </values>
-                        </value>
-                    </values>
-                </normalizationContext>
-            </operation>
+                class="ApiPlatform\Metadata\Delete"
+                uriTemplate="/shop/addresses/{id}"
+                security="is_granted('SYLIUS_CUSTOMER')"
+            />
         </operations>
     </resource>
 </resources>
