@@ -1,5 +1,7 @@
+{% set prefixes = is_hookable() ? hookable_metadata.prefixes|merge(['sylius_admin.common.component']) : ['sylius_admin.common.component'] %}
+
 <aside class="navbar navbar-vertical navbar-expand-lg d-print-none" data-bs-theme="dark">
     <div class="container-fluid">
-        {% hook 'sylius_admin.common.component.sidebar' with { _prefixes: [] } %}
+        {% hook 'sidebar' with { _prefixes: prefixes } %}
     </div>
 </aside>
