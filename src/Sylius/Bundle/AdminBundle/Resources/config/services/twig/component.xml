@@ -149,7 +149,7 @@
             class="Sylius\Bundle\AdminBundle\Twig\Component\Product\FormComponent"
         >
             <argument type="service" id="form.factory" />
-            <argument>Sylius\Bundle\ProductBundle\Form\Type\ProductType</argument>
+            <argument>Sylius\Bundle\AdminBundle\Form\Type\ProductType</argument>
             <argument type="service" id="sylius.generator.slug" />
             <argument type="service" id="sylius.repository.product_attribute" />
             <argument type="service" id="sylius.factory.product" />

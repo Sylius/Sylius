@@ -11,17 +11,17 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\AdminBundle\Form\Extension;
+namespace Sylius\Bundle\AdminBundle\Form\Type;
 
 use Doctrine\ORM\QueryBuilder;
-use Sylius\Bundle\CoreBundle\Form\Type\Product\ProductImageType;
+use Sylius\Bundle\CoreBundle\Form\Type\Product\ProductImageType as BaseProductImageType;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Component\Core\Model\ProductInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
-use Symfony\Component\Form\AbstractTypeExtension;
+use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 
-final class ProductImageTypeExtension extends AbstractTypeExtension
+final class ProductImageType extends AbstractType
 {
     public function __construct(private readonly string $productVariantClass)
     {
@@ -50,8 +50,8 @@ final class ProductImageTypeExtension extends AbstractTypeExtension
         }
     }
 
-    public static function getExtendedTypes(): iterable
+    public function getParent(): string
     {
-        return [ProductImageType::class];
+        return BaseProductImageType::class;
     }
 }

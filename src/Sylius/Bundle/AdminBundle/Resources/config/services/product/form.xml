@@ -13,8 +13,8 @@
 
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
-        <service id="sylius_admin.form.extension.product" class="Sylius\Bundle\AdminBundle\Form\Extension\ProductTypeExtension">
-            <tag name="form.type_extension" />
+        <service id="sylius_admin.form.type.product" class="Sylius\Bundle\AdminBundle\Form\Type\ProductType">
+            <tag name="form.type" />
         </service>
 
         <service id="sylius_admin.form.type.product_associations" class="Sylius\Bundle\AdminBundle\Form\Type\ProductAssociationsType">

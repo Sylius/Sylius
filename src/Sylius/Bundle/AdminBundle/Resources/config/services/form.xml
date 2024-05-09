@@ -56,9 +56,9 @@
             <tag name="form.type_extension" />
         </service>
 
-        <service id="sylius.form.extension.type.product_image" class="Sylius\Bundle\AdminBundle\Form\Extension\ProductImageTypeExtension">
+        <service id="sylius_admin.form.type.product_image" class="Sylius\Bundle\AdminBundle\Form\Type\ProductImageType">
             <argument>%sylius.model.product_variant.class%</argument>
-            <tag name="form.type_extension" />
+            <tag name="form.type" />
         </service>
 
         <service id="sylius_admin.form.extension.type.channel" class="Sylius\Bundle\AdminBundle\Form\Extension\ChannelTypeExtension">
