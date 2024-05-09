@@ -18,7 +18,10 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\UX\Autocomplete\Form\AsEntityAutocompleteField;
 use Symfony\UX\Autocomplete\Form\BaseEntityAutocompleteType;
 
-#[AsEntityAutocompleteField(route: 'sylius_admin_entity_autocomplete_admin')]
+#[AsEntityAutocompleteField(
+    alias: 'sylius_admin_product_variant',
+    route: 'sylius_admin_entity_autocomplete_admin',
+)]
 final class ProductVariantAutocompleteType extends AbstractType
 {
     public function __construct(

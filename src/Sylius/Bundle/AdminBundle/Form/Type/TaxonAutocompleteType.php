@@ -18,7 +18,10 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\UX\Autocomplete\Form\AsEntityAutocompleteField;
 use Symfony\UX\Autocomplete\Form\BaseEntityAutocompleteType;
 
-#[AsEntityAutocompleteField(route: 'sylius_admin_entity_autocomplete_admin')]
+#[AsEntityAutocompleteField(
+    alias: 'sylius_admin_taxon',
+    route: 'sylius_admin_entity_autocomplete_admin',
+)]
 final class TaxonAutocompleteType extends AbstractType
 {
     public function __construct(
