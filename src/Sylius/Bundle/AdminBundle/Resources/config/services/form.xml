@@ -115,16 +115,25 @@
         <service id="sylius_admin.form.type.product_autocomplete_choice" class="Sylius\Bundle\AdminBundle\Form\Type\ProductAutocompleteChoiceType">
             <argument>%sylius.model.product.class%</argument>
             <tag name="form.type" />
+            <tag name="ux.entity_autocomplete_field" />
         </service>
 
         <service id="sylius_admin.form.type.product_variant_autocomplete_choice" class="Sylius\Bundle\AdminBundle\Form\Type\ProductVariantAutocompleteChoiceType">
             <argument>%sylius.model.product_variant.class%</argument>
             <tag name="form.type" />
+            <tag name="ux.entity_autocomplete_field" />
         </service>
 
         <service id="sylius_admin.form.type.taxon_autocomplete_choice" class="Sylius\Bundle\AdminBundle\Form\Type\TaxonAutocompleteChoiceType">
             <argument>%sylius.model.taxon.class%</argument>
             <tag name="form.type" />
+            <tag name="ux.entity_autocomplete_field" />
+        </service>
+
+        <service id="sylius_admin.form.type.product_attribute_choice" class="Sylius\Bundle\AdminBundle\Form\Type\ProductAttributeAutocompleteChoiceType">
+            <argument>%sylius.model.product_attribute.class%</argument>
+            <tag name="form.type" />
+            <tag name="ux.entity_autocomplete_field" />
         </service>
 
         <service id="Sylius\Bundle\AdminBundle\Form\RequestPasswordResetType">
