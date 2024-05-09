@@ -2,7 +2,7 @@
 # (c) Sylius Sp. z o.o.
 
 imports:
-#    - api/account/address_book.yml
+    - api/account/address_book.yml
 #    - api/account/customer.yml
     - api/account/customer_registration.yml
     - api/account/email_verification.yml

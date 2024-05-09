@@ -16,7 +16,7 @@ Feature: Marking an address as default
         Then I should have 2 addresses in my address book
         And I should not have a default address
 
-    @ui @api
+    @ui @api-todo-customer
     Scenario: Setting an address as default
         When I browse my address book
         And I set the address of "Lucifer Morningstar" as default
@@ -24,7 +24,7 @@ Feature: Marking an address as default
         And I should have 2 addresses in my address book
         And address "Lucifer Morningstar", "Seaside Fwy", "90802", "Los Angeles", "United States", "Arkansas" should be set as my default address
 
-    @ui @api
+    @ui @api-to-customer
     Scenario: Only one address can be default
         Given my default address is of "Lucifer Morningstar"
         When I browse my address book
