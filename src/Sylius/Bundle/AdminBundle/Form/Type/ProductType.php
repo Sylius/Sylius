@@ -11,16 +11,15 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\AdminBundle\Form\Extension;
+namespace Sylius\Bundle\AdminBundle\Form\Type;
 
-use Sylius\Bundle\AdminBundle\Form\Type\ProductAssociationsType;
 use Sylius\Bundle\CoreBundle\Form\Type\Product\ProductImageType;
-use Sylius\Bundle\ProductBundle\Form\Type\ProductType;
-use Symfony\Component\Form\AbstractTypeExtension;
+use Sylius\Bundle\ProductBundle\Form\Type\ProductType as BaseProductType;
+use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\UX\LiveComponent\Form\Type\LiveCollectionType;
 
-final class ProductTypeExtension extends AbstractTypeExtension
+final class ProductType extends AbstractType
 {
     /**
      * @param array<string, mixed> $options
@@ -43,11 +42,8 @@ final class ProductTypeExtension extends AbstractTypeExtension
         ;
     }
 
-    /**
-     * @return iterable<class-string>
-     */
-    public static function getExtendedTypes(): iterable
+    public function getParent(): string
     {
-        return [ProductType::class];
+        return BaseProductType::class;
     }
 }
