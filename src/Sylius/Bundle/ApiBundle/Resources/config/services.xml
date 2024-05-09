@@ -32,10 +32,10 @@
         <import resource="services/providers.xml" />
         <import resource="services/resolvers.xml" />
         <import resource="services/section_resolver.xml" />
+        <import resource="services/security.xml" />
         <import resource="services/serializers.xml" />
         <import resource="services/state_processors.xml" />
         <import resource="services/state_providers.xml" />
-        <import resource="services/query_handlers.xml" />
         <import resource="services/validator.xml" />
     </imports>
 
