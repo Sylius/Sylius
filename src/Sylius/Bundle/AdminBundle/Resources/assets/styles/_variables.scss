@@ -7,6 +7,8 @@
  * file that was distributed with this source code.
  */
 
+$prefix: "tblr-";
+
 $assets-base: "/node_modules/@tabler/core/dist";
 $primary: #22B99A;
 
@@ -41,3 +43,9 @@ $pagination-active-color:           inherit;
 $pagination-active-bg:              $gray-200;
 
 $font-family-sans-serif: 'Inter', serif;
+
+$h1-font-size: 1.6rem;
+$h1-line-height: 2.1rem;
+
+// Page
+$page-title-font-size: var(--#{$prefix}font-size-h1);
