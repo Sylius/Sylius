@@ -16,7 +16,7 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="https://api-platform.com/schema/metadata/resources-3.0 https://api-platform.com/schema/metadata/resources-3.0.xsd"
 >
-    <resource class="Sylius\Component\Core\Model\Customer" shortName="Customer">
+    <resource class="Sylius\Component\Core\Model\Order">
         <validationContext>
             <values>
                 <value name="groups">
@@ -28,53 +28,24 @@
         </validationContext>
 
         <operations>
-            <operation
-                class="ApiPlatform\Metadata\Get"
-                uriTemplate="/admin/customers/{id}"
-            >
+            <operation class="ApiPlatform\Metadata\Get" uriTemplate="/admin/orders/{tokenValue}">
                 <normalizationContext>
                     <values>
                         <value name="groups">
                             <values>
-                                <value>sylius:admin:customer:show</value>
+                                <value>sylius:admin:order:show</value>
                             </values>
                         </value>
                     </values>
                 </normalizationContext>
             </operation>
 
-            <operation
-                class="ApiPlatform\Metadata\Post"
-                uriTemplate="/shop/customers"
-                messenger="input"
-                input="Sylius\Bundle\ApiBundle\Command\Account\RegisterShopUser"
-                output="false"
-            >
-                <denormalizationContext>
-                    <values>
-                        <value name="groups">
-                            <values>
-                                <value>sylius:shop:customer:create</value>
-                            </values>
-                        </value>
-                    </values>
-                </denormalizationContext>
-                <openapiContext>
-                    <values>
-                        <value name="summary">Registers a new shop user</value>
-                    </values>
-                </openapiContext>
-            </operation>
-
-            <operation
-                class="ApiPlatform\Metadata\Get"
-                uriTemplate="/shop/customers/{id}"
-            >
+            <operation class="ApiPlatform\Metadata\Get" uriTemplate="/shop/orders/{tokenValue}">
                 <normalizationContext>
                     <values>
                         <value name="groups">
                             <values>
-                                <value>sylius:shop:customer:show</value>
+                                <value>sylius:shop:order:show</value>
                             </values>
                         </value>
                     </values>

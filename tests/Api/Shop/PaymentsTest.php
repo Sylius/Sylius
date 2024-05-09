@@ -34,7 +34,7 @@ final class PaymentsTest extends JsonApiTestCase
     public function it_gets_payment_from_placed_order(): void
     {
         $this->loadFixturesFromFiles([
-            'authentication/customer.yaml',
+            'authentication/shop_user.yaml',
             'channel.yaml',
             'cart.yaml',
             'country.yaml',
@@ -46,17 +46,17 @@ final class PaymentsTest extends JsonApiTestCase
 
         $tokenValue = 'nAWw2jewpA';
 
-        $this->placeOrder($tokenValue, 'oliver@doe.com');
-
-        $this->client->request(method: 'GET', uri: '/api/v2/shop/orders/nAWw2jewpA', server: $header);
-        $orderResponse = json_decode($this->client->getResponse()->getContent(), true);
+        $order = $this->placeOrder($tokenValue, 'oliver@doe.com');
 
         $this->client->request(
             method: 'GET',
-            uri: '/api/v2/shop/payments/' . $orderResponse['payments'][0]['id'],
+            uri: sprintf('/api/v2/shop/payments/%s', $order->getLastPayment()->getId()),
             server: $header,
         );
-        $response = $this->client->getResponse();
-        $this->assertResponse($response, 'shop/payment/get_payment_response', Response::HTTP_OK);
+
+        $this->assertResponse(
+            $this->client->getResponse(),
+            'shop/payment/get_payment'
+        );
     }
 }
