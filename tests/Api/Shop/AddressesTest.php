@@ -28,12 +28,11 @@ final class AddressesTest extends JsonApiTestCase
     /** @test */
     public function it_denies_access_to_get_addresses_for_not_authenticated_user(): void
     {
-        $this->loadFixturesFromFiles(['authentication/customer.yaml']);
+        $this->loadFixturesFromFiles(['authentication/shop_user.yaml']);
 
         $this->client->request(method: 'GET', uri: '/api/v2/shop/addresses', server: self::CONTENT_TYPE_HEADER);
 
-        $response = $this->client->getResponse();
-        $this->assertSame(Response::HTTP_UNAUTHORIZED, $response->getStatusCode());
+        $this->assertResponseCode($this->client->getResponse(), Response::HTTP_UNAUTHORIZED);
     }
 
     /** @test */
@@ -49,8 +48,7 @@ final class AddressesTest extends JsonApiTestCase
 
         $this->assertResponse(
             $this->client->getResponse(),
-            'shop/address/get_addresses_response',
-            Response::HTTP_OK,
+            'shop/address/get_addresses',
         );
     }
 
@@ -61,7 +59,7 @@ final class AddressesTest extends JsonApiTestCase
         /** @var CustomerInterface $customer */
         $customer = $fixtures['customer_tony'];
         /** @var AddressInterface $address */
-        $address = $fixtures['address'];
+        $address = $fixtures['address_tony'];
 
         $header = array_merge($this->logInShopUser($customer->getEmailCanonical()), self::CONTENT_TYPE_HEADER);
 
@@ -69,15 +67,30 @@ final class AddressesTest extends JsonApiTestCase
 
         $this->assertResponse(
             $this->client->getResponse(),
-            'shop/address/get_address_response',
-            Response::HTTP_OK,
+            'shop/address/get_address',
         );
+    }
+
+    /** @test */
+    public function it_does_not_get_an_address_of_another_customer(): void
+    {
+        $fixtures = $this->loadFixturesFromFiles(['address_with_customer.yaml']);
+        /** @var CustomerInterface $customer */
+        $customer = $fixtures['customer_tony'];
+        /** @var AddressInterface $address */
+        $address = $fixtures['address_oliver'];
+
+        $header = array_merge($this->logInShopUser($customer->getEmailCanonical()), self::CONTENT_TYPE_HEADER);
+
+        $this->client->request(method: 'GET', uri: '/api/v2/shop/addresses/' . $address->getId(), server: $header);
+
+        $this->assertResponseCode($this->client->getResponse(), Response::HTTP_NOT_FOUND);
     }
 
     /** @test */
     public function it_denies_access_to_create_an_address_for_not_authenticated_user(): void
     {
-        $fixtures = $this->loadFixturesFromFiles(['authentication/customer.yaml', 'country.yaml']);
+        $fixtures = $this->loadFixturesFromFiles(['authentication/shop_user.yaml', 'country.yaml']);
         /** @var CountryInterface $country */
         $country = $fixtures['country_DE'];
 
@@ -90,14 +103,13 @@ final class AddressesTest extends JsonApiTestCase
             content: json_encode($bodyRequest, \JSON_THROW_ON_ERROR),
         );
 
-        $response = $this->client->getResponse();
-        $this->assertSame(Response::HTTP_UNAUTHORIZED, $response->getStatusCode());
+        $this->assertResponseCode($this->client->getResponse(), Response::HTTP_UNAUTHORIZED);
     }
 
     /** @test */
     public function it_creates_a_new_address_with_country_and_province_code(): void
     {
-        $fixtures = $this->loadFixturesFromFiles(['authentication/customer.yaml', 'country.yaml']);
+        $fixtures = $this->loadFixturesFromFiles(['authentication/shop_user.yaml', 'country.yaml']);
         /** @var CustomerInterface $customer */
         $customer = $fixtures['customer_oliver'];
         /** @var CountryInterface $country */
@@ -118,7 +130,7 @@ final class AddressesTest extends JsonApiTestCase
 
         $this->assertResponse(
             $this->client->getResponse(),
-            'shop/address/post_address_with_province_code_response',
+            'shop/address/post_address_with_province_code',
             Response::HTTP_CREATED,
         );
     }
@@ -126,7 +138,7 @@ final class AddressesTest extends JsonApiTestCase
     /** @test */
     public function it_creates_a_new_address_with_country_and_province_code_when_the_country_code_is_set_after_province_code_in_body(): void
     {
-        $fixtures = $this->loadFixturesFromFiles(['authentication/customer.yaml', 'country.yaml']);
+        $fixtures = $this->loadFixturesFromFiles(['authentication/shop_user.yaml', 'country.yaml']);
         /** @var CustomerInterface $customer */
         $customer = $fixtures['customer_oliver'];
         /** @var CountryInterface $country */
@@ -155,7 +167,7 @@ final class AddressesTest extends JsonApiTestCase
 
         $this->assertResponse(
             $this->client->getResponse(),
-            'shop/address/post_address_with_province_code_response',
+            'shop/address/post_address_with_province_code',
             Response::HTTP_CREATED,
         );
     }
@@ -163,7 +175,7 @@ final class AddressesTest extends JsonApiTestCase
     /** @test */
     public function it_creates_a_new_address_with_country_and_province_name(): void
     {
-        $fixtures = $this->loadFixturesFromFiles(['authentication/customer.yaml', 'country.yaml']);
+        $fixtures = $this->loadFixturesFromFiles(['authentication/shop_user.yaml', 'country.yaml']);
         /** @var CustomerInterface $customer */
         $customer = $fixtures['customer_oliver'];
         /** @var CountryInterface $country */
@@ -182,7 +194,7 @@ final class AddressesTest extends JsonApiTestCase
 
         $this->assertResponse(
             $this->client->getResponse(),
-            'shop/address/post_address_with_province_name_response',
+            'shop/address/post_address_with_province_name',
             Response::HTTP_CREATED,
         );
     }
@@ -190,7 +202,7 @@ final class AddressesTest extends JsonApiTestCase
     /** @test */
     public function it_creates_a_new_address_with_country_without_province_data(): void
     {
-        $fixtures = $this->loadFixturesFromFiles(['authentication/customer.yaml', 'country.yaml']);
+        $fixtures = $this->loadFixturesFromFiles(['authentication/shop_user.yaml', 'country.yaml']);
         /** @var CustomerInterface $customer */
         $customer = $fixtures['customer_oliver'];
         /** @var CountryInterface $country */
@@ -209,7 +221,7 @@ final class AddressesTest extends JsonApiTestCase
 
         $this->assertResponse(
             $this->client->getResponse(),
-            'shop/address/post_address_without_province_response',
+            'shop/address/post_address_without_province',
             Response::HTTP_CREATED,
         );
     }
@@ -217,7 +229,7 @@ final class AddressesTest extends JsonApiTestCase
     /** @test */
     public function it_does_not_create_a_new_address_with_invalid_data(): void
     {
-        $fixtures = $this->loadFixturesFromFiles(['authentication/customer.yaml', 'country.yaml']);
+        $fixtures = $this->loadFixturesFromFiles(['authentication/shop_user.yaml', 'country.yaml']);
         /** @var CustomerInterface $customer */
         $customer = $fixtures['customer_oliver'];
 
@@ -263,7 +275,7 @@ final class AddressesTest extends JsonApiTestCase
         /** @var CustomerInterface $customer */
         $customer = $fixtures['customer_tony'];
         /** @var AddressInterface $address */
-        $address = $fixtures['address'];
+        $address = $fixtures['address_tony'];
 
         $header = array_merge($this->logInShopUser($customer->getEmailCanonical()), self::CONTENT_TYPE_HEADER);
 
@@ -286,9 +298,69 @@ final class AddressesTest extends JsonApiTestCase
 
         $this->assertResponse(
             $this->client->getResponse(),
-            'shop/address/put_address_response',
-            Response::HTTP_OK,
+            'shop/address/put_address',
         );
+    }
+
+    /** @test */
+    public function it_does_not_update_an_address_of_another_customer(): void
+    {
+        $fixtures = $this->loadFixturesFromFiles(['address_with_customer.yaml']);
+        /** @var CustomerInterface $customer */
+        $customer = $fixtures['customer_tony'];
+        /** @var AddressInterface $address */
+        $address = $fixtures['address_oliver'];
+
+        $header = array_merge($this->logInShopUser($customer->getEmailCanonical()), self::CONTENT_TYPE_HEADER);
+
+        $this->client->request(
+            method: 'PUT',
+            uri: '/api/v2/shop/addresses/' . $address->getId(),
+            server: $header,
+            content: json_encode([
+                'firstName' => 'Tony',
+            ], \JSON_THROW_ON_ERROR),
+        );
+
+        $this->assertResponseCode($this->client->getResponse(), Response::HTTP_NOT_FOUND);
+    }
+
+    /** @test */
+    public function it_deletes_an_address(): void
+    {
+        $fixtures = $this->loadFixturesFromFiles(['address_with_customer.yaml']);
+        /** @var CustomerInterface $customer */
+        $customer = $fixtures['customer_tony'];
+        /** @var AddressInterface $address */
+        $address = $fixtures['address_tony'];
+
+        $headers = array_merge($this->logInShopUser($customer->getEmailCanonical()), self::CONTENT_TYPE_HEADER);
+
+        $this->requestDelete(
+            uri: '/api/v2/shop/addresses/' . $address->getId(),
+            headers: $headers,
+        );
+
+        $this->assertResponseCode($this->client->getResponse(), Response::HTTP_NO_CONTENT);
+    }
+
+    /** @test */
+    public function it_does_not_delete_an_address_of_another_customer(): void
+    {
+        $fixtures = $this->loadFixturesFromFiles(['address_with_customer.yaml']);
+        /** @var CustomerInterface $customer */
+        $customer = $fixtures['customer_tony'];
+        /** @var AddressInterface $address */
+        $address = $fixtures['address_oliver'];
+
+        $headers = array_merge($this->logInShopUser($customer->getEmailCanonical()), self::CONTENT_TYPE_HEADER);
+
+        $this->requestDelete(
+            uri: '/api/v2/shop/addresses/' . $address->getId(),
+            headers: $headers,
+        );
+
+        $this->assertResponseCode($this->client->getResponse(), Response::HTTP_NOT_FOUND);
     }
 
     private function createBodyRequest(
