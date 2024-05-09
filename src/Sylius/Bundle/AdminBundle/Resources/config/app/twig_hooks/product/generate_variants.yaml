@@ -10,7 +10,7 @@ twig_hooks:
             flashes:
                 component: 'sylius_admin:flashes'
             header:
-                template: '@SyliusAdmin/shared/crud/common/content/header.html.twig'
+                component: 'sylius_admin:header'
             form:
                 component: 'sylius_admin:product:generate_product_variants_form'
                 props:
@@ -21,7 +21,7 @@ twig_hooks:
             breadcrumbs:
                 template: '@SyliusAdmin/product/generate_variants/header/breadcrumbs.html.twig'
             title_block:
-                template: '@SyliusAdmin/shared/crud/common/content/header/title_block.html.twig'
+                template: '@SyliusAdmin/shared/components/header/title_block.html.twig'
 
         'sylius_admin.product.generate_variants.content.header.title_block':
             title:
@@ -31,7 +31,7 @@ twig_hooks:
 
         'sylius_admin.product.generate_variants.content.header.title_block.actions':
             cancel:
-                template: '@SyliusAdmin/shared/crud/common/content/header/title_block/actions/cancel.html.twig'
+                template: '@SyliusAdmin/shared/components/header/title_block/actions/cancel.html.twig'
             generate:
                 template: '@SyliusAdmin/product/generate_variants/header/title_block/actions/generate.html.twig'
 

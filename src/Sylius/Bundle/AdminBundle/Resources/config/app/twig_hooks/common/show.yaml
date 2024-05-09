@@ -8,13 +8,13 @@ twig_hooks:
             flashes:
                 component: 'sylius_admin:flashes'
             header:
-                template: '@SyliusAdmin/shared/crud/common/content/header.html.twig'
+                component: 'sylius_admin:header'
 
         'sylius_admin.common.show.content.header':
             breadcrumbs:
                 template: '@SyliusAdmin/shared/crud/show/content/header/breadcrumbs.html.twig'
             title_block:
-                template: '@SyliusAdmin/shared/crud/common/content/header/title_block.html.twig'
+                template: '@SyliusAdmin/shared/components/header/title_block.html.twig'
 
         'sylius_admin.common.show.content.header.title_block':
             title:

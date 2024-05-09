@@ -8,6 +8,6 @@ twig_hooks:
 
         'sylius_admin.inventory.index.content.header.title_block':
             title:
-                template: '@SyliusAdmin/shared/crud/common/content/header/title_block/title.html.twig'
+                template: '@SyliusAdmin/shared/components/header/title_block/title.html.twig'
                 configuration:
                     title: 'sylius.ui.inventory'

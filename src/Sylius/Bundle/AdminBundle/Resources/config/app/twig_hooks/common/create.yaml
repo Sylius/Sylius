@@ -8,7 +8,7 @@ twig_hooks:
             flashes:
                 component: 'sylius_admin:flashes'
             header:
-                template: '@SyliusAdmin/shared/crud/common/content/header.html.twig'
+                component: 'sylius_admin:header'
             form:
                 template: '@SyliusAdmin/shared/crud/create/content/form.html.twig'
                 configuration:
@@ -18,7 +18,7 @@ twig_hooks:
             breadcrumbs:
                 template: '@SyliusAdmin/shared/crud/create/content/header/breadcrumbs.html.twig'
             title_block:
-                template: '@SyliusAdmin/shared/crud/common/content/header/title_block.html.twig'
+                template: '@SyliusAdmin/shared/components/header/title_block.html.twig'
 
         'sylius_admin.common.create.content.header.title_block':
             title:
@@ -28,6 +28,6 @@ twig_hooks:
 
         'sylius_admin.common.create.content.header.title_block.actions':
             cancel:
-                template: '@SyliusAdmin/shared/crud/common/content/header/title_block/actions/cancel.html.twig'
+                template: '@SyliusAdmin/shared/components/header/title_block/actions/cancel.html.twig'
             create:
-                template: '@SyliusAdmin/shared/crud/common/content/header/title_block/actions/create.html.twig'
+                template: '@SyliusAdmin/shared/components/header/title_block/actions/create.html.twig'

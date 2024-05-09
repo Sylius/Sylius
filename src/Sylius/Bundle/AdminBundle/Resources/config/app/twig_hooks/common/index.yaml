@@ -8,7 +8,7 @@ twig_hooks:
             flashes:
                 component: 'sylius_admin:flashes'
             header:
-                template: '@SyliusAdmin/shared/crud/common/content/header.html.twig'
+                component: 'sylius_admin:header'
             grid:
                 template: '@SyliusAdmin/shared/crud/index/content/grid.html.twig'
 
@@ -16,13 +16,13 @@ twig_hooks:
             breadcrumbs:
                 template: '@SyliusAdmin/shared/crud/index/content/header/breadcrumbs.html.twig'
             title_block:
-                template: '@SyliusAdmin/shared/crud/common/content/header/title_block.html.twig'
+                template: '@SyliusAdmin/shared/components/header/title_block.html.twig'
 
         'sylius_admin.common.index.content.header.title_block':
             title:
-                template: '@SyliusAdmin/shared/crud/common/content/header/title_block/title.html.twig'
+                template: '@SyliusAdmin/shared/components/header/title_block/title.html.twig'
             actions:
-                template: '@SyliusAdmin/shared/crud/common/content/header/title_block/actions.html.twig'
+                template: '@SyliusAdmin/shared/components/header/title_block/actions.html.twig'
         
         'sylius_admin.common.index.content.grid':
             filters:
