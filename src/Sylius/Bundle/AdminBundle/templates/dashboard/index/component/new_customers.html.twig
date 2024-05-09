@@ -1,3 +1,5 @@
+{% from '@SyliusAdmin/shared/helper/icon.html.twig' import icon %}
+
 <div class="col-12 col-md-6">
     <div class="card mb-3">
         <div class="card-header">
@@ -27,7 +29,11 @@
                                     </div>
                                 </div>
                             </td>
-                            <td class="text-end"><a href="{{ path('sylius_admin_customer_show', { id: customer.id }) }}">{{ 'sylius.ui.show'|trans }}</a></td>
+                            <td class="text-end">
+                                <a href="{{ path('sylius_admin_customer_show', { id: customer.id }) }}" class="btn btn-icon" data-bs-toggle="tooltip" data-bs-title="{{ 'sylius.ui.show'|trans }}">
+                                    {{ icon({ icon: action.icon|default('eye'), class: 'icon icon-tabler' }) }}
+                                </a>
+                            </td>
                         </tr>
                     {% endfor %}
                 </tbody>
