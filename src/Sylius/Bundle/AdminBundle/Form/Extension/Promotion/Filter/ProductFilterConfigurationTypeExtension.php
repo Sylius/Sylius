@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\AdminBundle\Form\Extension\Promotion\Filter;
 
-use Sylius\Bundle\AdminBundle\Form\Type\ProductAutocompleteChoiceType;
+use Sylius\Bundle\AdminBundle\Form\Type\ProductAutocompleteType;
 use Sylius\Bundle\CoreBundle\Form\Type\Promotion\Filter\ProductFilterConfigurationType;
 use Sylius\Component\Core\Model\ProductInterface;
 use Symfony\Component\Form\AbstractTypeExtension;
@@ -31,7 +31,7 @@ final class ProductFilterConfigurationTypeExtension extends AbstractTypeExtensio
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('products', ProductAutocompleteChoiceType::class, [
+            ->add('products', ProductAutocompleteType::class, [
                 'label' => 'sylius.form.promotion_filter.products',
                 'multiple' => true,
             ])

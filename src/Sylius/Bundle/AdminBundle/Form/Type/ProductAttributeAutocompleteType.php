@@ -19,26 +19,25 @@ use Symfony\UX\Autocomplete\Form\AsEntityAutocompleteField;
 use Symfony\UX\Autocomplete\Form\BaseEntityAutocompleteType;
 
 #[AsEntityAutocompleteField(route: 'sylius_admin_entity_autocomplete_admin')]
-final class ProductVariantAutocompleteChoiceType extends AbstractType
+final class ProductAttributeAutocompleteType extends AbstractType
 {
     public function __construct(
-        private readonly string $productVariantClass,
+        private readonly string $productAttributeClass,
     ) {
     }
 
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'class' => $this->productVariantClass,
-            'choice_name' => 'descriptor',
+            'class' => $this->productAttributeClass,
+            'choice_name' => 'name',
             'choice_value' => 'code',
-            'searchable_fields' => ['code'],
         ]);
     }
 
     public function getBlockPrefix(): string
     {
-        return 'sylius_admin_product_variant_autocomplete_choice';
+        return 'sylius_admin_product_attribute_autocomplete';
     }
 
     public function getParent(): string

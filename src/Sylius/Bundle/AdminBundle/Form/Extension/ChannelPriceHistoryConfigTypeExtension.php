@@ -15,7 +15,7 @@ namespace Sylius\Bundle\AdminBundle\Form\Extension;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Sylius\Bundle\AdminBundle\Form\DataTransformer\ResourceToIdentifierTransformer;
-use Sylius\Bundle\AdminBundle\Form\Type\TaxonAutocompleteChoiceType;
+use Sylius\Bundle\AdminBundle\Form\Type\TaxonAutocompleteType;
 use Sylius\Bundle\CoreBundle\Form\Type\ChannelPriceHistoryConfigType;
 use Sylius\Bundle\ResourceBundle\Form\DataTransformer\RecursiveTransformer;
 use Sylius\Component\Core\Model\ChannelPriceHistoryConfigInterface;
@@ -40,7 +40,7 @@ final class ChannelPriceHistoryConfigTypeExtension extends AbstractTypeExtension
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('taxonsExcludedFromShowingLowestPrice', TaxonAutocompleteChoiceType::class, [
+            ->add('taxonsExcludedFromShowingLowestPrice', TaxonAutocompleteType::class, [
                 'label' => 'sylius.ui.taxons_for_which_the_lowest_price_is_not_displayed',
                 'required' => false,
                 'multiple' => true,

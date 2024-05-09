@@ -112,25 +112,25 @@
             <tag name="form.type_extension" />
         </service>
 
-        <service id="sylius_admin.form.type.product_autocomplete_choice" class="Sylius\Bundle\AdminBundle\Form\Type\ProductAutocompleteChoiceType">
+        <service id="sylius_admin.form.type.product_autocomplete" class="Sylius\Bundle\AdminBundle\Form\Type\ProductAutocompleteType">
             <argument>%sylius.model.product.class%</argument>
             <tag name="form.type" />
             <tag name="ux.entity_autocomplete_field" />
         </service>
 
-        <service id="sylius_admin.form.type.product_variant_autocomplete_choice" class="Sylius\Bundle\AdminBundle\Form\Type\ProductVariantAutocompleteChoiceType">
+        <service id="sylius_admin.form.type.product_variant_autocomplete" class="Sylius\Bundle\AdminBundle\Form\Type\ProductVariantAutocompleteType">
             <argument>%sylius.model.product_variant.class%</argument>
             <tag name="form.type" />
             <tag name="ux.entity_autocomplete_field" />
         </service>
 
-        <service id="sylius_admin.form.type.taxon_autocomplete_choice" class="Sylius\Bundle\AdminBundle\Form\Type\TaxonAutocompleteChoiceType">
+        <service id="sylius_admin.form.type.taxon_autocomplete" class="Sylius\Bundle\AdminBundle\Form\Type\TaxonAutocompleteType">
             <argument>%sylius.model.taxon.class%</argument>
             <tag name="form.type" />
             <tag name="ux.entity_autocomplete_field" />
         </service>
 
-        <service id="sylius_admin.form.type.product_attribute_choice" class="Sylius\Bundle\AdminBundle\Form\Type\ProductAttributeAutocompleteChoiceType">
+        <service id="sylius_admin.form.type.product_attribute_autocomplete" class="Sylius\Bundle\AdminBundle\Form\Type\ProductAttributeAutocompleteType">
             <argument>%sylius.model.product_attribute.class%</argument>
             <tag name="form.type" />
             <tag name="ux.entity_autocomplete_field" />

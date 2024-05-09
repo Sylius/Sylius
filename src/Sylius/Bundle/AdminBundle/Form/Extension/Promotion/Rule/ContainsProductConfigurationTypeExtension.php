@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\AdminBundle\Form\Extension\Promotion\Rule;
 
-use Sylius\Bundle\AdminBundle\Form\Type\ProductAutocompleteChoiceType;
+use Sylius\Bundle\AdminBundle\Form\Type\ProductAutocompleteType;
 use Sylius\Bundle\CoreBundle\Form\Type\Promotion\Rule\ContainsProductConfigurationType;
 use Sylius\Bundle\ResourceBundle\Form\DataTransformer\ResourceToIdentifierTransformer;
 use Sylius\Component\Core\Model\ProductInterface;
@@ -33,7 +33,7 @@ final class ContainsProductConfigurationTypeExtension extends AbstractTypeExtens
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('product_code', ProductAutocompleteChoiceType::class, [
+            ->add('product_code', ProductAutocompleteType::class, [
                 'label' => 'sylius.form.promotion_action.add_product_configuration.product',
             ])
             ->get('product_code')->addModelTransformer(
