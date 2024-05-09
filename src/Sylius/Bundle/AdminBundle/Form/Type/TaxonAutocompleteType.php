@@ -35,6 +35,7 @@ final class TaxonAutocompleteType extends AbstractType
             'class' => $this->taxonClass,
             'choice_label' => 'fullname',
             'choice_value' => 'code',
+            'searchable_fields' => ['code', 'translations.name'],
         ]);
     }
 
