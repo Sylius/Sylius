@@ -35,7 +35,7 @@ final class ProductVariantAutocompleteType extends AbstractType
             'class' => $this->productVariantClass,
             'choice_name' => 'descriptor',
             'choice_value' => 'code',
-            'searchable_fields' => ['code'],
+            'searchable_fields' => ['code', 'translations.name'],
         ]);
     }
 
