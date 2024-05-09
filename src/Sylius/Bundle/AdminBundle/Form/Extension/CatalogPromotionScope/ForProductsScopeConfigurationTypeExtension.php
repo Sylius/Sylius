@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\AdminBundle\Form\Extension\CatalogPromotionScope;
 
-use Sylius\Bundle\AdminBundle\Form\Type\ProductAutocompleteChoiceType;
+use Sylius\Bundle\AdminBundle\Form\Type\ProductAutocompleteType;
 use Sylius\Bundle\CoreBundle\Form\Type\CatalogPromotionScope\ForProductsScopeConfigurationType;
 use Sylius\Component\Core\Model\ProductInterface;
 use Symfony\Component\Form\AbstractTypeExtension;
@@ -29,7 +29,7 @@ final class ForProductsScopeConfigurationTypeExtension extends AbstractTypeExten
 
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
-        $builder->add('products', ProductAutocompleteChoiceType::class, [
+        $builder->add('products', ProductAutocompleteType::class, [
                 'label' => 'sylius.ui.products',
                 'multiple' => true,
                 'required' => false,

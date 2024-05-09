@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\AdminBundle\Form\Extension\Promotion\Rule;
 
-use Sylius\Bundle\AdminBundle\Form\Type\TaxonAutocompleteChoiceType;
+use Sylius\Bundle\AdminBundle\Form\Type\TaxonAutocompleteType;
 use Sylius\Bundle\CoreBundle\Form\Type\Promotion\Rule\TotalOfItemsFromTaxonConfigurationType;
 use Sylius\Bundle\ResourceBundle\Form\DataTransformer\ResourceToIdentifierTransformer;
 use Sylius\Component\Core\Model\TaxonInterface;
@@ -33,7 +33,7 @@ final class TotalOfItemsFromTaxonConfigurationTypeExtension extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('taxon', TaxonAutocompleteChoiceType::class, [
+            ->add('taxon', TaxonAutocompleteType::class, [
                 'label' => 'sylius.form.promotion_rule.total_of_items_from_taxon.taxon',
             ])
             ->get('taxon')->addModelTransformer(

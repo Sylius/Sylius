@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\AdminBundle\Form\Extension\CatalogPromotionScope;
 
-use Sylius\Bundle\AdminBundle\Form\Type\TaxonAutocompleteChoiceType;
+use Sylius\Bundle\AdminBundle\Form\Type\TaxonAutocompleteType;
 use Sylius\Bundle\CoreBundle\Form\Type\CatalogPromotionScope\ForTaxonsScopeConfigurationType;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Symfony\Component\Form\AbstractTypeExtension;
@@ -29,7 +29,7 @@ final class ForTaxonsScopeConfigurationTypeExtension extends AbstractTypeExtensi
 
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
-        $builder->add('taxons', TaxonAutocompleteChoiceType::class, [
+        $builder->add('taxons', TaxonAutocompleteType::class, [
                 'label' => 'sylius.ui.taxons',
                 'multiple' => true,
                 'required' => false,
