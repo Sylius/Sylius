@@ -1,7 +1,5 @@
-<div class="channel">
-    <span class="text-nowrap">
-        {% for channel in data %}
-            {% include('@SyliusAdmin/shared/grid/field/channel.html.twig') with { data: channel } %}
-        {% endfor %}
-    </span>
+<div>
+    {% for channel in data %}
+        <div>{% include('@SyliusAdmin/shared/grid/field/channel.html.twig') with { data: channel } %}</div>
+    {% endfor %}
 </div>

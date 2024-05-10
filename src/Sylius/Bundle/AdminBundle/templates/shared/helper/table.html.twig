@@ -2,7 +2,7 @@
     {% import '@SyliusAdmin/shared/helper/sorting.html.twig' as sorting %}
 
     {% if definition.actionGroups.bulk is defined and definition.getEnabledActions('bulk')|length > 0 %}
-        <th class="center aligned">
+        <th class="w-1 {{ field.options.vars.th_class|default('') }}">
             <input data-check-all="index" type="checkbox" class="form-check-input">
         </th>
     {% endif %}
@@ -12,12 +12,12 @@
             {% if field.isSortable %}
                 {{ sorting.tableHeader(grid, field, requestAttributes) }}
             {% else %}
-                <th class="text-body sylius-table-column-{{ field.name }}">{{ field.label|trans }}</th>
+                <th class="text-body sylius-table-column-{{ field.name }} {{ field.options.vars.th_class|default('') }}">{{ field.label|trans }}</th>
             {% endif %}
         {% endif %}
     {% endfor %}
     {% if definition.actionGroups.item is defined and definition.getEnabledActions('item')|length > 0 %}
-        <th class="text-body text-center sylius-table-column-actions">{{ 'sylius.ui.actions'|trans }}</th>
+        <th class="w-1 text-body text-center sylius-table-column-actions {{ field.options.vars.th_class|default('') }}">{{ 'sylius.ui.actions'|trans }}</th>
     {% endif %}
 {% endmacro %}
 
@@ -30,11 +30,13 @@
             <td class="center aligned"><input data-check-all-group="index" class="form-check-input" type="checkbox" value="{{ row.id }}" /></td>
         {% endif %}
         {% for field in definition.enabledFields|sort_by('position') %}
-            <td>{{ sylius_grid_render_field(grid, field, row) }}</td>
+            <td{% if field.options.vars.td_class is defined %} class="{{ field.options.vars.td_class }}"{% endif %}>
+                {{ sylius_grid_render_field(grid, field, row) }}
+            </td>
         {% endfor %}
         {% if definition.actionGroups.item is defined and definition.getEnabledActions('item')|length > 0 %}
-            <td {{ sylius_test_html_attribute('actions') }}>
-                <div class="d-flex gap-1 justify-content-end py-2">
+            <td{% if field.options.vars.td_class is defined %} class="{{ field.options.vars.td_class }}"{% endif %} {{ sylius_test_html_attribute('actions') }}>
+                <div class="d-flex gap-1 justify-content-end">
                     {% for action in definition.getEnabledActions('item')|sort_by('position') %}
                         {{ sylius_grid_render_item_action(grid, action, row) }}
                     {% endfor %}
