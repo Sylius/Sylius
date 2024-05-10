@@ -2,6 +2,7 @@
   "@context": "\/api\/v2\/contexts\/Address",
   "@id": "\/api\/v2\/shop\/addresses",
   "@type": "hydra:Collection",
+  "hydra:totalItems": 1,
   "hydra:member": [
     {
       "@id": "\/api\/v2\/shop\/addresses\/@integer@",
@@ -18,6 +19,5 @@
       "city": "New York",
       "postcode": "00000"
     }
-  ],
-  "hydra:totalItems": 1
+  ]
 }

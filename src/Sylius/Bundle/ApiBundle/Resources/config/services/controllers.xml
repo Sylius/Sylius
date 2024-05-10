@@ -55,11 +55,6 @@
             <argument type="service" id="Sylius\Bundle\ApiBundle\Creator\TaxonImageCreator" />
         </service>
 
-        <service id="Sylius\Bundle\ApiBundle\Controller\GetAddressLogEntryCollectionAction">
-            <argument type="service" id="sylius.query_bus" />
-            <tag name="controller.service_arguments" />
-        </service>
-
         <service id="Sylius\Bundle\ApiBundle\Controller\RemoveCustomerShopUserAction">
             <argument type="service" id="sylius.command_bus" />
             <argument type="service" id="sylius.repository.shop_user" />

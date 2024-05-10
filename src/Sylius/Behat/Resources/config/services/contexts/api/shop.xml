@@ -18,12 +18,12 @@
     <services>
         <defaults public="true" />
 
-<!--        <service id="sylius.behat.context.api.shop.address" class="Sylius\Behat\Context\Api\Shop\AddressContext">-->
-<!--            <argument type="service" id="sylius.behat.api_platform_client.shop" />-->
-<!--            <argument type="service" id="Sylius\Behat\Client\ResponseCheckerInterface" />-->
-<!--            <argument type="service" id="api_platform.iri_converter" />-->
-<!--            <argument type="service" id="sylius.behat.shared_storage" />-->
-<!--        </service>-->
+        <service id="sylius.behat.context.api.shop.address" class="Sylius\Behat\Context\Api\Shop\AddressContext">
+            <argument type="service" id="sylius.behat.api_platform_client.shop" />
+            <argument type="service" id="Sylius\Behat\Client\ResponseCheckerInterface" />
+            <argument type="service" id="api_platform.symfony.iri_converter" />
+            <argument type="service" id="sylius.behat.shared_storage" />
+        </service>
 
         <service id="sylius.behat.context.api.shop.channel" class="Sylius\Behat\Context\Api\Shop\ChannelContext">
             <argument type="service" id="sylius.behat.api_platform_client.shop" />

@@ -18,12 +18,6 @@
     <services>
         <defaults public="true" />
 
-        <service id="Sylius\Bundle\ApiBundle\DataPersister\AddressDataPersister">
-            <argument type="service" id="api_platform.doctrine.orm.data_persister" />
-            <argument type="service" id="Sylius\Bundle\ApiBundle\Context\UserContextInterface" />
-            <tag name="api_platform.data_persister" />
-        </service>
-
         <service id="Sylius\Bundle\ApiBundle\DataPersister\AdminUserDataPersister">
             <argument type="service" id="api_platform.doctrine.orm.data_persister" />
             <argument type="service" id="security.token_storage" />

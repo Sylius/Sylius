@@ -28,10 +28,12 @@
 <!--            <tag name="api_platform.doctrine.orm.query_extension.collection" />-->
 <!--        </service>-->
 
-<!--        <service id="Sylius\Bundle\ApiBundle\Doctrine\QueryCollectionExtension\AddressesExtension">-->
-<!--            <argument type="service" id="Sylius\Bundle\ApiBundle\Context\UserContextInterface" />-->
-<!--            <tag name="api_platform.doctrine.orm.query_extension.collection" />-->
-<!--        </service>-->
+        <service id="sylius_api.doctrine.query_extension.address" class="Sylius\Bundle\ApiBundle\Doctrine\QueryExtension\AddressExtension">
+            <argument type="service" id="sylius.section_resolver.uri_based_section_resolver" />
+            <argument type="service" id="Sylius\Bundle\ApiBundle\Context\UserContextInterface" />
+            <tag name="api_platform.doctrine.orm.query_extension.collection" />
+            <tag name="api_platform.doctrine.orm.query_extension.item" />
+        </service>
 
 <!--        <service id="Sylius\Bundle\ApiBundle\Doctrine\QueryCollectionExtension\ProductsByChannelAndLocaleCodeExtension">-->
 <!--            <argument type="service" id="Sylius\Bundle\ApiBundle\Context\UserContextInterface" />-->
@@ -95,11 +97,6 @@
 <!--        >-->
 <!--            <argument type="service" id="Sylius\Bundle\ApiBundle\Doctrine\QueryCollectionExtension\RestrictingFilterEagerLoadingExtension.inner" />-->
 <!--            <argument>%sylius_api.filter_eager_loading_extension.restricted_resources%</argument>-->
-<!--        </service>-->
-
-<!--        <service id="Sylius\Bundle\ApiBundle\Doctrine\QueryItemExtension\AddressItemExtension">-->
-<!--            <argument type="service" id="Sylius\Bundle\ApiBundle\Context\UserContextInterface" />-->
-<!--            <tag name="api_platform.doctrine.orm.query_extension.item" />-->
 <!--        </service>-->
 
 <!--        <service id="Sylius\Bundle\ApiBundle\Doctrine\QueryItemExtension\OrderShopUserItemExtension">-->
