@@ -1,5 +1,5 @@
 @checkout
-Feature: Preventing from a potential XSS attack during updating the address in the checkout
+Feature: Preventing a potential XSS attack during updating the address in the checkout
     In order to keep my information safe
     As a Visitor
     I want to be protected against the potential XSS attacks
@@ -12,7 +12,7 @@ Feature: Preventing from a potential XSS attack during updating the address in t
         And I am at the checkout addressing step
 
     @ui @javascript @no-api
-    Scenario: Preventing from a potential XSS attack during updating the address in the checkout
+    Scenario: Preventing a potential XSS attack during updating the address in the checkout
         When I specify the email as "john.doe@example.com"
         And I specify the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Doe"
         And I specify the province name manually as '<img """><script>alert("XSS")</script>">' for billing address
