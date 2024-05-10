@@ -275,6 +275,20 @@
         </service>
 
         <service
+            id="sylius_admin.twig.component.taxon.form"
+            class="Sylius\Bundle\AdminBundle\Twig\Component\Taxon\FormComponent"
+        >
+            <argument type="service" id="form.factory" />
+            <argument>Sylius\Bundle\AdminBundle\Form\Type\TaxonType</argument>
+
+            <tag
+                name="sylius.live_component"
+                key="sylius_admin:taxon:form"
+                template="@SyliusAdmin/taxon/sections/form.html.twig"
+            />
+        </service>
+
+        <service
             id="sylius_admin.twig.component.taxon.tree"
             class="Sylius\Bundle\AdminBundle\Twig\Component\Taxon\TreeComponent"
         >
@@ -284,7 +298,7 @@
             <tag
                 name="sylius.live_component"
                 key="sylius_admin:taxon:tree"
-                template="@SyliusAdmin/taxon/component/taxon_tree.html.twig"
+                template="@SyliusAdmin/taxon/sections/tree.html.twig"
             />
         </service>
 

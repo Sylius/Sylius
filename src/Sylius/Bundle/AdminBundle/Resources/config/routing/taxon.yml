@@ -6,11 +6,8 @@ sylius_admin_taxon:
         except: ['show', 'index']
         redirect: update
         permission: true
-        vars:
-            all:
-                subheader: sylius.ui.manage_categorization_of_your_products
-                templates:
-                    form: "@SyliusAdmin/Taxon/_form.html.twig"
+        form:
+            type: Sylius\Bundle\AdminBundle\Form\Type\TaxonType
     type: sylius.resource
 
 sylius_admin_taxon_index:
@@ -31,6 +28,8 @@ sylius_admin_taxon_create_for_parent:
             permission: true
             template: '@SyliusAdmin/shared/crud/create.html.twig'
             redirect: sylius_admin_taxon_update
+            form:
+                type: Sylius\Bundle\AdminBundle\Form\Type\TaxonType
             factory:
                 method: createForParent
                 arguments: ['expr:notFoundOnNull(service("sylius.repository.taxon").find($id))']

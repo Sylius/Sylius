@@ -1,0 +1,46 @@
+{% set form = hookable_metadata.context.form %}
+
+<div {{ sylius_test_html_attribute('images') }}>
+    <div class="card mb-3">
+        <div class="card-header">
+            <h2 class="card-title">
+                {{ 'sylius.ui.media'|trans }}
+            </h2>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                {% for imageForm in form.images %}
+                    <div class="col-12 col-md-6 row mb-4" {{ sylius_test_html_attribute('image')}}
+                        {{ sylius_test_html_attribute('type', imageForm.type.vars.value) }}
+                        {{ sylius_test_html_attribute('image-url', imageForm.vars.value.path ? imageForm.vars.value.path|imagine_filter('sylius_small') : null) }}
+                    >
+                        <div class="col-auto">
+                            <div>
+                                {% if imageForm.vars.value.path is not null %}
+                                    <span class="avatar avatar-xl" style="background-image: url('{{ imageForm.vars.value.path|imagine_filter('sylius_small') }}')"></span>
+                                {% else %}
+                                    <span class="avatar avatar-xl"></span>
+                                {% endif %}
+                            </div>
+                            <div class="mt-3 d-flex items-center">
+                                {{ form_widget(imageForm.vars.button_delete, sylius_test_form_attribute('delete-image')|sylius_merge_recursive({attr: { class: 'btn btn-outline-danger w-100'}})) }}
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="mb-3">
+                                {{ form_row(imageForm.type, sylius_test_form_attribute('type')) }}
+                            </div>
+                            <div class="mb-3">
+                                {{ form_row(imageForm.file, sylius_test_form_attribute('file')) }}
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+
+            <div class="d-grid gap-2">
+                {{ form_widget(form.images.vars.button_add, sylius_test_form_attribute('add-image')|sylius_merge_recursive({attr: {class: 'btn btn-outline-primary '}})) }}
+            </div>
+        </div>
+    </div>
+</div>

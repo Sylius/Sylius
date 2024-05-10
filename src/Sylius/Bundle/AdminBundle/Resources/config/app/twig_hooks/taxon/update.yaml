@@ -2,28 +2,35 @@ twig_hooks:
     hooks:
         'sylius_admin.taxon.update.content':
             form:
-                template: '@SyliusAdmin/taxon/update/form.html.twig'
-                configuration:
-                    render_rest: false
-
-        'sylius_admin.taxon.update.content.form':
+                enabled: false
+            sections:
+                template: '@SyliusAdmin/taxon/sections.html.twig'
+        
+        'sylius_admin.taxon.update.content.sections#left':
             tree:
                 component: 'sylius_admin:taxon:tree'
-            sections:
-                template: '@SyliusAdmin/taxon/form/sections.html.twig'
 
-        'sylius_admin.taxon.update.content.form.sections':
+        'sylius_admin.taxon.update.content.sections#right':
+            form:
+                component: 'sylius_admin:taxon:form'
+                props:
+                    form: '@=_context.form'
+                    resource: '@=_context.resource'
+                configuration:
+                    method: 'PUT'
+        
+        'sylius_admin.taxon.update.content.sections.form':
             details:
-                template: '@SyliusAdmin/taxon/form/sections/details.html.twig'
+                template: '@SyliusAdmin/taxon/sections/form/details.html.twig'
             translations:
-                template: '@SyliusAdmin/taxon/form/sections/translations.html.twig'
+                template: '@SyliusAdmin/taxon/sections/form/translations.html.twig'
             media:
-                template: '@SyliusAdmin/taxon/form/sections/media.html.twig'
-
-        'sylius_admin.taxon.update.content.form.sections.details':
+                template: '@SyliusAdmin/taxon/sections/form/media.html.twig'
+        
+        'sylius_admin.taxon.update.content.sections.form.details':
             code:
-                template: '@SyliusAdmin/taxon/form/sections/details/code.html.twig'
+                template: '@SyliusAdmin/taxon/sections/form/details/code.html.twig'
             parent:
-                template: '@SyliusAdmin/taxon/form/sections/details/parent.html.twig'
+                template: '@SyliusAdmin/taxon/sections/form/details/parent.html.twig'
             enabled:
-                template: '@SyliusAdmin/taxon/form/sections/details/enabled.html.twig'
+                template: '@SyliusAdmin/taxon/sections/form/details/enabled.html.twig'
