@@ -11,16 +11,16 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\AdminBundle\Form\Extension\CatalogPromotionScope;
+namespace Sylius\Bundle\AdminBundle\Form\Type\CatalogPromotionScope;
 
 use Sylius\Bundle\AdminBundle\Form\Type\ProductAutocompleteType;
-use Sylius\Bundle\CoreBundle\Form\Type\CatalogPromotionScope\ForProductsScopeConfigurationType;
+use Sylius\Bundle\CoreBundle\Form\Type\CatalogPromotionScope\ForProductsScopeConfigurationType as BaseForProductsScopeConfigurationType;
 use Sylius\Component\Core\Model\ProductInterface;
-use Symfony\Component\Form\AbstractTypeExtension;
+use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\DataTransformerInterface;
 use Symfony\Component\Form\FormBuilderInterface;
 
-final class ForProductsScopeConfigurationTypeExtension extends AbstractTypeExtension
+final class ForProductsScopeConfigurationType extends AbstractType
 {
     /** @param DataTransformerInterface<ProductInterface, string|null> $productsToCodesTransformer */
     public function __construct(private readonly DataTransformerInterface $productsToCodesTransformer)
@@ -38,8 +38,8 @@ final class ForProductsScopeConfigurationTypeExtension extends AbstractTypeExten
         ;
     }
 
-    public static function getExtendedTypes(): iterable
+    public function getParent(): string
     {
-        yield ForProductsScopeConfigurationType::class;
+        return BaseForProductsScopeConfigurationType::class;
     }
 }

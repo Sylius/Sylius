@@ -25,8 +25,8 @@
     </parameters>
 
     <services>
-        <service id="sylius.form.extension.catalog_promotion_action" class="Sylius\Bundle\AdminBundle\Form\Extension\CatalogPromotionActionTypeExtension">
-            <tag name="form.type_extension" extended-type="Sylius\Bundle\PromotionBundle\Form\Type\CatalogPromotionActionType" priority="100" />
+        <service id="sylius_admin.form.type.catalog_promotion_action" class="Sylius\Bundle\AdminBundle\Form\Type\CatalogPromotionActionType">
+            <tag name="form.type" />
         </service>
 
         <service id="Sylius\Bundle\AdminBundle\Form\Extension\AddressTypeExtension">
@@ -38,8 +38,9 @@
             <tag name="form.type_extension" extended-type="Sylius\Bundle\AddressingBundle\Form\Type\ZoneType" priority="100" />
         </service>
 
-        <service id="sylius.form.extension.catalog_promotion_scope" class="Sylius\Bundle\AdminBundle\Form\Extension\CatalogPromotionScopeTypeExtension">
-            <tag name="form.type_extension" extended-type="Sylius\Bundle\PromotionBundle\Form\Type\CatalogPromotionScopeType" priority="100" />
+        <service id="sylius_admin.form.type.catalog_promotion_scope" class="Sylius\Bundle\AdminBundle\Form\Type\CatalogPromotionScopeType">
+            <argument type="tagged_iterator" tag="sylius_admin.catalog_promotion.scope_configuration_type" index-by="key" />
+            <tag name="form.type" />
         </service>
 
         <service id="sylius.form.extension.country" class="Sylius\Bundle\AdminBundle\Form\Extension\CountryTypeExtension">
@@ -156,25 +157,28 @@
             <tag name="ux.entity_autocomplete_field" />
         </service>
 
-        <service id="sylius_admin.form.extension.catalog_promotion" class="Sylius\Bundle\AdminBundle\Form\Extension\CatalogPromotionTypeExtension">
+        <service id="sylius_admin.form.extension.catalog_promotion" class="Sylius\Bundle\AdminBundle\Form\Type\CatalogPromotionType">
             <argument>%sylius.catalog_promotion.scopes_types%</argument>
             <argument>%sylius.catalog_promotion.actions_types%</argument>
-            <tag name="form.type_extension" />
+            <tag name="form.type" />
         </service>
 
-        <service id="sylius_admin.form.extension.catalog_promotion_scope.for_products_scope_configuration" class="Sylius\Bundle\AdminBundle\Form\Extension\CatalogPromotionScope\ForProductsScopeConfigurationTypeExtension">
+        <service id="sylius_admin.form.type.catalog_promotion_scope.for_products_scope_configuration" class="Sylius\Bundle\AdminBundle\Form\Type\CatalogPromotionScope\ForProductsScopeConfigurationType">
             <argument type="service" id="sylius.form.type.data_transformer.products_to_codes" />
-            <tag name="form.type_extension" />
+            <tag name="sylius_admin.catalog_promotion.scope_configuration_type" key="%sylius.catalog_promotion.scope.for_products%" />
+            <tag name="form.type" />
         </service>
 
-        <service id="sylius_admin.form.extension.catalog_promotion_scope.for_taxons_scope_configuration" class="Sylius\Bundle\AdminBundle\Form\Extension\CatalogPromotionScope\ForTaxonsScopeConfigurationTypeExtension">
+        <service id="sylius_admin.form.type.catalog_promotion_scope.for_taxons_scope_configuration" class="Sylius\Bundle\AdminBundle\Form\Type\CatalogPromotionScope\ForTaxonsScopeConfigurationType">
             <argument type="service" id="sylius.form.type.data_transformer.taxons_to_codes" />
-            <tag name="form.type_extension" />
+            <tag name="sylius_admin.catalog_promotion.scope_configuration_type" key="%sylius.catalog_promotion.scope.for_taxons%" />
+            <tag name="form.type" />
         </service>
 
-        <service id="sylius_admin.form.extension.catalog_promotion_scope.for_variants_scope_configuration" class="Sylius\Bundle\AdminBundle\Form\Extension\CatalogPromotionScope\ForVariantsScopeConfigurationTypeExtension">
+        <service id="sylius_admin.form.type.catalog_promotion_scope.for_variants_scope_configuration" class="Sylius\Bundle\AdminBundle\Form\Type\CatalogPromotionScope\ForVariantsScopeConfigurationType">
             <argument type="service" id="sylius.form.type.data_transformer.product_variants_to_codes" />
-            <tag name="form.type_extension" />
+            <tag name="sylius_admin.catalog_promotion.scope_configuration_type" key="%sylius.catalog_promotion.scope.for_variants%" />
+            <tag name="form.type" />
         </service>
 
         <service id="sylius_admin.form.extension.product_generate_variants" class="Sylius\Bundle\AdminBundle\Form\Extension\ProductGenerateVariantsTypeExtension">
