@@ -1,7 +1,4 @@
-<div class="channel">
-    <span class="badge" style="background-color: {{ data.color|default('#000') }}"></span>
-
-    <span class="text-nowrap">
-        {{ data.name|default(data.code) }}
-    </span>
-</div>
+<span class="status status-blue status-lite">
+    <span class="status-dot" style="background-color: {{ data.color|default('#000') }}"></span>
+    <span class="text-nowrap fs-5">{{ data.name|default(data.code) }}</span>
+</span>

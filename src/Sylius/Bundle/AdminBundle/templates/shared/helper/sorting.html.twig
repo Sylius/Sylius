@@ -3,7 +3,7 @@
     {% set order = grid.getSortingOrder(field.name) %}
 
     {% if grid.isSortedBy(field.name) %}
-        <th class="sortable sorted {{ order == 'desc' ? 'descending' : 'ascending' }} sylius-table-column-{{ field.name }}">
+        <th class="sortable sorted {{ order == 'desc' ? 'descending' : 'ascending' }} sylius-table-column-{{ field.name }} {{ field.options.vars.th_class|default('') }}">
             <a class="link-reset" href="{{ link(field.name, attributes, (order == 'desc' ? 'asc' : 'desc'), grid.parameters.all) }}">
                 {{ field.label|trans }}
                 {% if order == 'desc' %}
@@ -19,7 +19,7 @@
             </a>
         </th>
     {% else %}
-        <th class="sortable sylius-table-column-{{ field.name }}">
+        <th class="sortable sylius-table-column-{{ field.name }} {{ field.options.vars.th_class|default('') }}">
             <a class="link-reset" href="{{ link(field.name, attributes, order, grid.parameters.all) }}">
                 {{ field.label|trans }}
                 <svg style="opacity: 0.7; transform: translateY(-1px)" xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" class="bi bi-chevron-expand" viewBox="0 0 16 16">
