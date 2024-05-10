@@ -66,6 +66,19 @@ final class AddressContext implements Context
         $customer = $user->getCustomer();
 
         $this->addAddressToCustomer($customer, $address);
+
+        $this->sharedStorage->set('address', $address);
+    }
+
+    /**
+     * @Given this address has province :province
+     */
+    public function thisAddressHasProvince(string $provinceName): void
+    {
+        $address = $this->sharedStorage->get('address');
+        $address->setProvinceName($provinceName);
+
+        $this->customerManager->flush();
     }
 
     /**
