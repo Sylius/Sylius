@@ -29,5 +29,7 @@ interface UpdatePageInterface extends SymfonyPageInterface
 
     public function selectCountry(string $name): void;
 
+    public function waitForFormToStopLoading(): void;
+
     public function saveChanges(): void;
 }

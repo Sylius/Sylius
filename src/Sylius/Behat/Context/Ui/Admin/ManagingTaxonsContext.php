@@ -136,6 +136,7 @@ final class ManagingTaxonsContext implements Context
     /**
      * @Given /^I set its (parent taxon to "[^"]+")$/
      * @Given /^I change its (parent taxon to "[^"]+")$/
+     * @Then /^I should be able to change its (parent taxon to "[^"]+")$/
      */
     public function iChangeItsParentTaxonTo(TaxonInterface $taxon)
     {
