@@ -281,6 +281,11 @@ class AddressPage extends SymfonyPage implements AddressPageInterface
         return $this->getOptionsFromSelect($this->getElement('billing_country'));
     }
 
+    public function waitForFormToStopLoading(): void
+    {
+        JQueryHelper::waitForFormToStopLoading($this->getDocument());
+    }
+
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
