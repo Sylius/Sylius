@@ -485,6 +485,14 @@ final class CheckoutAddressingContext implements Context
     }
 
     /**
+     * @Then I should be able to update the address without unexpected alert
+     */
+    public function iShouldBeAbleToUpdateTheAddressWithoutUnexpectedAlert(): void
+    {
+        $this->addressPage->waitForFormToStopLoading();
+    }
+
+    /**
      * @return AddressInterface
      */
     private function createDefaultAddress()

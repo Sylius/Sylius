@@ -81,4 +81,6 @@ interface AddressPageInterface extends SymfonyPageInterface
     public function isDifferentShippingAddressChecked(): bool;
 
     public function isShippingAddressVisible(): bool;
+
+    public function waitForFormToStopLoading(): void;
 }
