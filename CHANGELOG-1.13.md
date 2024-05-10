@@ -1,5 +1,16 @@
 # CHANGELOG FOR `1.13.X`
 
+## v1.13.1 (2024-05-10)
+
+#### Details
+
+- [#16176](https://github.com/Sylius/Sylius/issues/16176) [Maintenance][AbstractStateMachine] Add Sylius logo to readme ([@Wojdylak](https://github.com/Wojdylak))
+- [#16190](https://github.com/Sylius/Sylius/issues/16190) Fix products grid ([@kulczy](https://github.com/kulczy))
+- [#16196](https://github.com/Sylius/Sylius/issues/16196) Fix product review validation's notInRangeMessage ([@mpysiak](https://github.com/mpysiak))
+- [#16241](https://github.com/Sylius/Sylius/issues/16241) [Security] Fixes for potential XSS in the Checkout, Address Book and Admin Panel ([@GSadee](https://github.com/GSadee))
+- [#16232](https://github.com/Sylius/Sylius/issues/16232) [Maintenance] Update docker docs ([@Wojdylak](https://github.com/Wojdylak))
+- [#16233](https://github.com/Sylius/Sylius/issues/16233) Add wider support for deprecation contract ([@Jibbarth](https://github.com/Jibbarth))
+
 ## v1.13.0 (2024-04-23)
 
 #### Details
