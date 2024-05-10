@@ -8,36 +8,44 @@ sylius_grid:
             sorting:
                 createdAt: desc
             fields:
-                firstName:
-                    type: string
-                    label: sylius.ui.first_name
+                email:
+                    type: twig
+                    label: sylius.ui.email
                     sortable: ~
+                    options:
+                        template: "@SyliusAdmin/shared/grid/field/name.html.twig"
                 lastName:
                     type: string
                     label: sylius.ui.last_name
                     sortable: ~
-                email:
+                firstName:
                     type: string
-                    label: sylius.ui.email
+                    label: sylius.ui.first_name
                     sortable: ~
                 createdAt:
-                    type: datetime
+                    type: twig
                     label: sylius.ui.registration_date
                     sortable: ~
                     options:
-                        format: d-m-Y H:i
+                        template: "@SyliusAdmin/shared/grid/field/date.html.twig"
+                        vars:
+                            th_class: "w-1 text-center"
                 enabled:
                     type: twig
                     label: sylius.ui.enabled
                     path: user?.enabled
                     options:
                         template: "@SyliusAdmin/shared/grid/field/boolean.html.twig"
+                        vars:
+                            th_class: "w-1 text-center"
                 verified:
                     type: twig
                     label: sylius.ui.verified
                     path: user?.verified
                     options:
                         template: "@SyliusAdmin/shared/grid/field/boolean.html.twig"
+                        vars:
+                            th_class: "w-1 text-center"
             filters:
                 search:
                     type: string

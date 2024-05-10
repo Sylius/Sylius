@@ -8,10 +8,6 @@ sylius_grid:
             sorting:
                 code: asc
             fields:
-                code:
-                    type: string
-                    label: sylius.ui.code
-                    sortable: ~
                 name:
                     type: twig
                     label: sylius.ui.name
@@ -19,6 +15,12 @@ sylius_grid:
                     sortable: code
                     options:
                         template: "@SyliusAdmin/locale/grid/field/name.html.twig"
+                code:
+                    type: twig
+                    label: sylius.ui.code
+                    sortable: ~
+                    options:
+                        template: "@SyliusAdmin/shared/grid/field/code.html.twig"
             filters:
                 code:
                     type: string

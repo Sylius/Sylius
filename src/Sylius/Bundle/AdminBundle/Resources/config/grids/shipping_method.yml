@@ -12,17 +12,26 @@ sylius_grid:
                 position: asc
             fields:
                 position:
-                    type: string
+                    type: twig
                     label: sylius.ui.position
                     sortable: ~
-                code:
-                    type: string
-                    label: sylius.ui.code
-                    sortable: ~
+                    options:
+                        template: "@SyliusUi/Grid/Field/position.html.twig"
+                        vars:
+                            th_class: "w-1 text-center"
+                            td_class: "text-center"
                 name:
-                    type: string
+                    type: twig
                     label: sylius.ui.name
                     sortable: translation.name
+                    options:
+                        template: "@SyliusAdmin/shared/grid/field/name.html.twig"
+                code:
+                    type: twig
+                    label: sylius.ui.code
+                    sortable: ~
+                    options:
+                        template: "@SyliusAdmin/shared/grid/field/code.html.twig"
                 zone:
                     type: string
                     label: sylius.ui.zone

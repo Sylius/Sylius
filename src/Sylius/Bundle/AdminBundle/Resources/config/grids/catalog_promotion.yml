@@ -8,49 +8,68 @@ sylius_grid:
             sorting:
                 code: asc
             fields:
-                code:
-                    type: string
-                    label: sylius.ui.code
-                    sortable: ~
-                name:
-                    type: string
-                    label: sylius.ui.name
-                    sortable: ~
-                startDate:
-                    type: twig
-                    label: sylius.ui.start_date
-                    sortable: ~
-                    options:
-                        template: '@SyliusAdmin/catalog_promotion/grid/field/date.html.twig'
-                endDate:
-                    type: twig
-                    label: sylius.ui.end_date
-                    sortable: ~
-                    options:
-                        template: '@SyliusAdmin/catalog_promotion/grid/field/date.html.twig'
                 priority:
                     type: twig
                     label: sylius.ui.priority
                     sortable: ~
                     options:
-                        template: '@SyliusAdmin/catalog_promotion/grid/field/priority.html.twig'
+                        template: "@SyliusAdmin/catalog_promotion/grid/field/priority.html.twig"
+                        vars:
+                            th_class: "w-1 text-center"
+                            td_class: "text-center"
+                name:
+                    type: twig
+                    label: sylius.ui.name
+                    sortable: ~
+                    options:
+                        template: "@SyliusAdmin/shared/grid/field/name.html.twig"
+                code:
+                    type: twig
+                    label: sylius.ui.code
+                    sortable: ~
+                    options:
+                        template: "@SyliusAdmin/shared/grid/field/code.html.twig"
                 channels:
                     type: twig
                     label: sylius.ui.channels
                     options:
-                        template: '@SyliusAdmin/shared/grid/field/channels.html.twig'
+                        template: "@SyliusAdmin/shared/grid/field/channels.html.twig"
+                        vars:
+                            th_class: "w-1 text-center"
+                startDate:
+                    type: twig
+                    label: sylius.ui.start_date
+                    sortable: ~
+                    options:
+                        template: "@SyliusAdmin/shared/grid/field/date.html.twig"
+                        vars:
+                            th_class: "text-center"
+                endDate:
+                    type: twig
+                    label: sylius.ui.end_date
+                    sortable: ~
+                    options:
+                        template: "@SyliusAdmin/shared/grid/field/date.html.twig"
+                        vars:
+                            th_class: "text-center"
                 state:
                     type: twig
                     label: sylius.ui.state
                     path: state
                     options:
-                        template: '@SyliusAdmin/catalog_promotion/grid/field/state.html.twig'
+                        template: "@SyliusAdmin/catalog_promotion/grid/field/state.html.twig"
+                        vars:
+                            th_class: "w-1 text-center"
+                            td_class: "text-center"
                 enabled:
                     type: twig
                     label: sylius.ui.enabled
                     sortable: ~
                     options:
                         template: "@SyliusAdmin/shared/grid/field/boolean.html.twig"
+                        vars:
+                            th_class: "w-1 text-center"
+                            td_class: "text-center"
             filters:
                 search:
                     type: string
