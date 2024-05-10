@@ -41,54 +41,6 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
         $this->getDocument()->fillField(sprintf('sylius_taxon_translations_%s_description', $languageCode), $description);
     }
 
-    public function nameIt(string $name, string $languageCode): void
-    {
-        $this->activateLanguageTab($languageCode);
-        $this->getDocument()->fillField(sprintf('sylius_taxon_translations_%s_name', $languageCode), $name);
-
-        if (DriverHelper::isJavascript($this->getDriver())) {
-            SlugGenerationHelper::waitForSlugGeneration(
-                $this->getSession(),
-                $this->getElement('slug', ['%language%' => $languageCode]),
-            );
-        }
-    }
-
-    public function specifySlug(string $slug, string $languageCode): void
-    {
-        $this->getDocument()->fillField(sprintf('sylius_taxon_translations_%s_slug', $languageCode), $slug);
-    }
-
-    public function attachImage(string $path, ?string $type = null): void
-    {
-        $filesPath = $this->getParameter('files_path');
-
-        $this->getDocument()->find('css', '[data-form-collection="add"]')->click();
-
-        $imageForm = $this->getLastImageElement();
-        if (null !== $type) {
-            $imageForm->fillField('Type', $type);
-        }
-
-        $imageForm->find('css', 'input[type="file"]')->attachFile($filesPath . $path);
-    }
-
-    public function isImageWithTypeDisplayed(string $type): bool
-    {
-        $imageElement = $this->getImageElementByType($type);
-
-        $imageUrl = $imageElement ? $imageElement->find('css', 'img')->getAttribute('src') : $this->provideImageUrlForType($type);
-        if (null === $imageElement && null === $imageUrl) {
-            return false;
-        }
-
-        $this->getDriver()->visit($imageUrl);
-        $statusCode = $this->getDriver()->getStatusCode();
-        $this->getDriver()->back();
-
-        return in_array($statusCode, [200, 304], true);
-    }
-
     public function isSlugReadonly(string $languageCode = 'en_US'): bool
     {
         return SlugGenerationHelper::isSlugReadonly(
@@ -97,62 +49,12 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
         );
     }
 
-    public function removeImageWithType(string $type): void
-    {
-        $imageElement = $this->getImageElementByType($type);
-        $imageSourceElement = $imageElement->find('css', 'img');
-        if (null !== $imageSourceElement) {
-            $this->saveImageUrlForType($type, $imageSourceElement->getAttribute('src'));
-        }
-
-        $imageElement->clickLink('Delete');
-    }
-
-    public function removeFirstImage(): void
-    {
-        $imageElement = $this->getFirstImageElement();
-        $imageTypeElement = $imageElement->find('css', 'input[type=text]');
-        $imageSourceElement = $imageElement->find('css', 'img');
-
-        if (null !== $imageTypeElement && null !== $imageSourceElement) {
-            $this->saveImageUrlForType(
-                $imageTypeElement->getValue(),
-                $imageSourceElement->getAttribute('src'),
-            );
-        }
-
-        $imageElement->clickLink('Delete');
-    }
-
     public function enableSlugModification(string $languageCode = 'en_US'): void
     {
         SlugGenerationHelper::enableSlugModification(
             $this->getSession(),
             $this->getElement('toggle_taxon_slug_modification_button', ['%locale%' => $languageCode]),
         );
-    }
-
-    public function countImages(): int
-    {
-        $imageElements = $this->getImageElements();
-
-        return count($imageElements);
-    }
-
-    public function changeImageWithType(string $type, string $path): void
-    {
-        $filesPath = $this->getParameter('files_path');
-
-        $imageForm = $this->getImageElementByType($type);
-        $imageForm->find('css', 'input[type="file"]')->attachFile($filesPath . $path);
-    }
-
-    public function modifyFirstImageType(string $type): void
-    {
-        $firstImage = $this->getFirstImageElement();
-
-        $typeField = $firstImage->findField('Type');
-        $typeField->setValue($type);
     }
 
     public function getParent(): string
@@ -238,7 +140,6 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
             'code' => '#sylius_taxon_code',
             'description' => '#sylius_taxon_translations_en_US_description',
             'enabled' => '#sylius_taxon_enabled',
-            'images' => '#sylius_taxon_images',
             'language_tab' => '[data-locale="%locale%"] .title',
             'name' => '#sylius_taxon_translations_en_US_name',
             'parent' => '#sylius_taxon_parent',
@@ -256,15 +157,6 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
         return end($imageElements);
     }
 
-    private function getFirstImageElement(): NodeElement
-    {
-        $imageElements = $this->getImageElements();
-
-        Assert::notEmpty($imageElements);
-
-        return reset($imageElements);
-    }
-
     /**
      * @return NodeElement[]
      */
@@ -273,31 +165,5 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
         $images = $this->getElement('images');
 
         return $images->findAll('css', 'div[data-form-collection="item"]');
-    }
-
-    private function getImageElementByType(string $type): ?NodeElement
-    {
-        $images = $this->getElement('images');
-        $typeInput = $images->find('css', 'input[value="' . $type . '"]');
-
-        if (null === $typeInput) {
-            return null;
-        }
-
-        return $typeInput->getParent()->getParent()->getParent();
-    }
-
-    private function provideImageUrlForType(string $type): ?string
-    {
-        return $this->imageUrls[$type] ?? null;
-    }
-
-    private function saveImageUrlForType(string $type, string $imageUrl): void
-    {
-        if (str_contains($imageUrl, 'data:image/jpeg')) {
-            return;
-        }
-
-        $this->imageUrls[$type] = $imageUrl;
     }
 }
