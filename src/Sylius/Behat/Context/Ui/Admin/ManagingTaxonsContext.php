@@ -16,6 +16,7 @@ namespace Sylius\Behat\Context\Ui\Admin;
 use Behat\Behat\Context\Context;
 use FriendsOfBehat\PageObjectExtension\Page\SymfonyPageInterface;
 use Sylius\Behat\Context\Ui\Admin\Helper\ValidationTrait;
+use Sylius\Behat\Element\Admin\Taxon\FormElementInterface;
 use Sylius\Behat\NotificationType;
 use Sylius\Behat\Page\Admin\Product\UpdateSimpleProductPageInterface;
 use Sylius\Behat\Page\Admin\Taxon\CreateForParentPageInterface;
@@ -34,14 +35,15 @@ final class ManagingTaxonsContext implements Context
     use ValidationTrait;
 
     public function __construct(
-        private SharedStorageInterface $sharedStorage,
-        private CreatePageInterface $createPage,
-        private CreateForParentPageInterface $createForParentPage,
-        private UpdatePageInterface $updatePage,
-        private CurrentPageResolverInterface $currentPageResolver,
-        private NotificationCheckerInterface $notificationChecker,
-        private JavaScriptTestHelper $testHelper,
-        private UpdateSimpleProductPageInterface $updateSimpleProductPage,
+        private readonly SharedStorageInterface $sharedStorage,
+        private readonly CreatePageInterface $createPage,
+        private readonly CreateForParentPageInterface $createForParentPage,
+        private readonly UpdatePageInterface $updatePage,
+        private readonly FormElementInterface $formElement,
+        private readonly CurrentPageResolverInterface $currentPageResolver,
+        private readonly NotificationCheckerInterface $notificationChecker,
+        private readonly JavaScriptTestHelper $testHelper,
+        private readonly UpdateSimpleProductPageInterface $updateSimpleProductPage,
     ) {
     }
 
@@ -86,11 +88,9 @@ final class ManagingTaxonsContext implements Context
      * @When I rename it to :name in :language
      * @When I do not specify its name
      */
-    public function iNameItIn(?string $name = null, $language = 'en_US')
+    public function iNameItIn(?string $name = null, $language = 'en_US'): void
     {
-        $currentPage = $this->resolveCurrentPage();
-
-        $currentPage->nameIt($name ?? '', $language);
+        $this->formElement->nameIt($name ?? '', $language);
     }
 
     /**
@@ -98,11 +98,9 @@ final class ManagingTaxonsContext implements Context
      * @When I do not specify its slug
      * @When I set its slug to :slug in :language
      */
-    public function iSetItsSlugToIn(?string $slug = null, $language = 'en_US')
+    public function iSetItsSlugToIn(?string $slug = null, $language = 'en_US'): void
     {
-        $currentPage = $this->resolveCurrentPage();
-
-        $currentPage->specifySlug($slug ?? '', $language);
+        $this->formElement->slugIt($slug ?? '', $language);
     }
 
     /**
@@ -172,10 +170,10 @@ final class ManagingTaxonsContext implements Context
     /**
      * @Then /^the ("[^"]+" taxon) should appear in the registry$/
      */
-    public function theTaxonShouldAppearInTheRegistry(TaxonInterface $taxon)
+    public function theTaxonShouldAppearInTheRegistry(TaxonInterface $taxon): void
     {
         $this->updatePage->open(['id' => $taxon->getId()]);
-        Assert::true($this->updatePage->hasResourceValues(['code' => $taxon->getCode()]));
+        Assert::same($this->formElement->getCode(), $taxon->getCode());
     }
 
     /**
@@ -309,9 +307,7 @@ final class ManagingTaxonsContext implements Context
      */
     public function iAttachImageWithType(string $path, ?string $type = null): void
     {
-        $currentPage = $this->resolveCurrentPage();
-
-        $currentPage->attachImage($path, $type);
+        $this->formElement->attachImage($path, $type);
     }
 
     /**
@@ -327,7 +323,7 @@ final class ManagingTaxonsContext implements Context
      */
     public function thisTaxonShouldHaveAnImageWithType(string $type): void
     {
-        Assert::true($this->updatePage->isImageWithTypeDisplayed($type));
+        Assert::true($this->formElement->isImageWithTypeDisplayed($type));
     }
 
     /**
@@ -335,7 +331,7 @@ final class ManagingTaxonsContext implements Context
      */
     public function thisTaxonShouldNotHaveAnImageWithType($code)
     {
-        Assert::false($this->updatePage->isImageWithTypeDisplayed($code));
+        Assert::false($this->formElement->isImageWithTypeDisplayed($code));
     }
 
     /**
@@ -343,52 +339,52 @@ final class ManagingTaxonsContext implements Context
      */
     public function iRemoveAnImageWithType(string $type): void
     {
-        $this->updatePage->removeImageWithType($type);
+        $this->formElement->removeImageWithType($type);
     }
 
     /**
      * @When I remove the first image
      */
-    public function iRemoveTheFirstImage()
+    public function iRemoveTheFirstImage(): void
     {
-        $this->updatePage->removeFirstImage();
+        $this->formElement->removeFirstImage();
     }
 
     /**
      * @Then /^(this taxon) should not have any images$/
      */
-    public function thisTaxonShouldNotHaveAnyImages(TaxonInterface $taxon)
+    public function thisTaxonShouldNotHaveAnyImages(TaxonInterface $taxon): void
     {
         $this->iWantToModifyATaxon($taxon);
 
-        Assert::same($this->updatePage->countImages(), 0);
+        Assert::same($this->formElement->countImages(), 0);
     }
 
     /**
      * @When I change the image with the :type type to :path
      */
-    public function iChangeItsImageToPathForTheType($path, $type)
+    public function iChangeItsImageToPathForTheType($path, $type): void
     {
-        $this->updatePage->changeImageWithType($type, $path);
+        $this->formElement->changeImageWithType($type, $path);
     }
 
     /**
      * @When I change the first image type to :type
      */
-    public function iChangeTheFirstImageTypeTo($type)
+    public function iChangeTheFirstImageTypeTo($type): void
     {
-        $this->updatePage->modifyFirstImageType($type);
+        $this->formElement->modifyFirstImageType($type);
     }
 
     /**
      * @Then /^(this taxon) should have only one image$/
      * @Then /^(this taxon) should(?:| still) have (\d+) images?$/
      */
-    public function thereShouldStillBeOnlyOneImageInThisTaxon(TaxonInterface $taxon, $count = 1)
+    public function thereShouldStillBeOnlyOneImageInThisTaxon(TaxonInterface $taxon, $count = 1): void
     {
         $this->iWantToModifyATaxon($taxon);
 
-        Assert::same($this->updatePage->countImages(), (int) $count);
+        Assert::same($this->formElement->countImages(), (int) $count);
     }
 
     /**
