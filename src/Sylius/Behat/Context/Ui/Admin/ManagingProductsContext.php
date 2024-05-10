@@ -748,6 +748,7 @@ final class ManagingProductsContext implements Context
 
     /**
      * @When /^I choose main (taxon "[^"]+")$/
+     * @When /^I should be able to choose main taxon "([^"]+)"$/
      */
     public function iChooseMainTaxon(TaxonInterface $taxon)
     {
@@ -820,6 +821,7 @@ final class ManagingProductsContext implements Context
 
     /**
      * @When I associate as :productAssociationType the :productName product
+     * @When I should be able to associate as :productAssociationType the :productName product
      * @When I associate as :productAssociationType the :firstProductName and :secondProductName products
      */
     public function iAssociateProductsAsProductAssociation(
