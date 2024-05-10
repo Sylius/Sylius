@@ -1,5 +1,14 @@
 # CHANGELOG FOR `1.12.X`
 
+## v1.12.16 (2024-05-10)
+
+#### Details
+
+- [#16190](https://github.com/Sylius/Sylius/issues/16190) Fix products grid ([@kulczy](https://github.com/kulczy))
+- [#16196](https://github.com/Sylius/Sylius/issues/16196) Fix product review validation's notInRangeMessage ([@mpysiak](https://github.com/mpysiak))
+- [#16241](https://github.com/Sylius/Sylius/issues/16241) [Security] Fixes for potential XSS in the Checkout, Address Book and Admin Panel ([@GSadee](https://github.com/GSadee))
+- [#16232](https://github.com/Sylius/Sylius/issues/16232) [Maintenance] Update docker docs ([@Wojdylak](https://github.com/Wojdylak))
+
 ## v1.12.15 (2024-04-23)
 
 #### Details
