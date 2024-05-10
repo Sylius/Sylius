@@ -88,6 +88,7 @@ final class ManagingProductsContext implements Context
      * @When I do not name it
      * @When I name it :name in :language
      * @When I rename it to :name in :language
+     * @When I should be able to name it :name in :language
      */
     public function iRenameItToIn(?string $name = null, ?string $language = null): void
     {
