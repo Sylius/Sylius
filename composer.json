@@ -1,7 +1,7 @@
 {
     "name": "sylius/sylius",
     "type": "library",
-    "version": "v1.13.2-dev",
+    "version": "v1.14.0-dev",
     "description": "E-Commerce platform for PHP, based on Symfony framework.",
     "homepage": "https://sylius.com",
     "license": "MIT",
@@ -265,7 +265,7 @@
             "require": "^6.4"
         },
         "branch-alias": {
-            "dev-main": "1.13-dev"
+            "dev-main": "1.14-dev"
         }
     },
     "autoload": {
