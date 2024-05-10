@@ -55,9 +55,6 @@ final class DefaultChannelFactory implements DefaultChannelFactoryInterface
 
         $channel->addLocale($locale);
         $channel->setDefaultLocale($locale);
-        if ($channel->getShopBillingData() === null) {
-            $channel->setShopBillingData(new ShopBillingData());
-        }
 
         $this->channelRepository->add($channel);
 
