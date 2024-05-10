@@ -1,5 +1,5 @@
 @managing_products
-Feature: Preventing a potential XSS attack while adding new product
+Feature: Preventing a potential XSS attack while adding a new product
     In order to keep my information safe
     As an Administrator
     I want to be protected against the potential XSS attacks
@@ -19,4 +19,3 @@ Feature: Preventing a potential XSS attack while adding new product
     Scenario: Preventing a potential XSS attack while choosing main taxon for a new product
         When I want to create a new simple product
         Then I should be able to choose main taxon "No XSS"
-

@@ -1,5 +1,5 @@
 @managing_taxons
-Feature: Preventing a potential XSS attack while adding new taxon
+Feature: Preventing a potential XSS attack while adding a new taxon
     In order to keep my information safe
     As an Administrator
     I want to be protected against the potential XSS attacks
