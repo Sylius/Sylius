@@ -12,13 +12,6 @@ sylius_grid:
             sorting:
                 number: desc
             fields:
-                date:
-                    type: datetime
-                    label: sylius.ui.date
-                    path: checkoutCompletedAt
-                    sortable: checkoutCompletedAt
-                    options:
-                        format: d-m-Y H:i:s
                 number:
                     type: twig
                     label: sylius.ui.number
@@ -26,18 +19,31 @@ sylius_grid:
                     sortable: ~
                     options:
                         template: "@SyliusAdmin/shared/grid/field/order_number.html.twig"
-                channel:
+                        vars:
+                            th_class: "w-1"
+                date:
                     type: twig
-                    label: sylius.ui.channel
-                    sortable: channel.code
+                    label: sylius.ui.date
+                    path: checkoutCompletedAt
+                    sortable: checkoutCompletedAt
                     options:
-                        template: "@SyliusAdmin/shared/grid/field/channel.html.twig"
+                        template: "@SyliusAdmin/shared/grid/field/date.html.twig"
+                        vars:
+                            th_class: "w-1 text-center"
                 customer:
                     type: twig
                     label: sylius.ui.customer
                     sortable: customer.lastName
                     options:
                         template: "@SyliusAdmin/shared/grid/field/customer.html.twig"
+                        vars:
+                            th_class: "w-100"
+                channel:
+                    type: twig
+                    label: sylius.ui.channel
+                    sortable: channel.code
+                    options:
+                        template: "@SyliusAdmin/shared/grid/field/channel.html.twig"
                 state:
                     type: twig
                     label: sylius.ui.state
@@ -69,6 +75,9 @@ sylius_grid:
                     sortable: total
                     options:
                         template: "@SyliusAdmin/order/grid/field/order_total.html.twig"
+                        vars:
+                            th_class: "w-1 text-end"
+                            td_class: "text-end"
                 currencyCode:
                     type: string
                     label: sylius.ui.currency

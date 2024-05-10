@@ -10,35 +10,44 @@ sylius_grid:
             sorting:
                 createdAt: desc
             fields:
-                createdAt:
-                    type: datetime
-                    label: sylius.ui.date
-                    sortable: ~
-                    options:
-                        format: d-m-Y H:i:s
                 number:
                     type: twig
                     label: sylius.ui.order
                     path: order
                     options:
                         template: "@SyliusAdmin/shared/grid/field/order_number.html.twig"
-                channel:
+                        vars:
+                            th_class: "w-1"
+                createdAt:
                     type: twig
-                    label: sylius.ui.channel
-                    path: order.channel
+                    label: sylius.ui.date
+                    sortable: ~
                     options:
-                        template: "@SyliusAdmin/shared/grid/field/channel.html.twig"
+                        template: "@SyliusAdmin/shared/grid/field/date.html.twig"
+                        vars:
+                            th_class: "w-1 text-center"
                 customer:
                     type: twig
                     label: sylius.ui.customer
                     path: order.customer
                     options:
                         template: "@SyliusAdmin/shared/grid/field/customer.html.twig"
+                        vars:
+                            th_class: "w-100"
+                channel:
+                    type: twig
+                    label: sylius.ui.channel
+                    path: order.channel
+                    options:
+                        template: "@SyliusAdmin/shared/grid/field/channel.html.twig"
                 state:
                     type: twig
                     label: sylius.ui.state
                     options:
                         template: "@SyliusAdmin/shared/grid/field/payment_state.html.twig"
+                        vars:
+                            th_class: "w-1 text-center"
+                            td_class: "text-center"
             filters:
                 state:
                     type: select

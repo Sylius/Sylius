@@ -8,37 +8,45 @@ sylius_grid:
             sorting:
                 date: desc
             fields:
-                date:
-                    type: datetime
-                    label: sylius.ui.date
-                    path: createdAt
-                    sortable: createdAt
-                    options:
-                        format: d-m-Y H:i:s
-                title:
-                    type: string
-                    label: sylius.ui.title
-                    sortable: ~
                 rating:
                     type: twig
                     label: sylius.ui.rating
                     sortable: ~
                     options:
                         template: "@SyliusAdmin/product_review/grid/field/rating.html.twig"
+                        vars:
+                            th_class: "w-1 text-center"
+                            td_class: "text-center"
+                author:
+                    type: twig
+                    label: sylius.ui.customer
+                    options:
+                        template: '@SyliusAdmin/shared/grid/field/customer.html.twig'
+                title:
+                    type: string
+                    label: sylius.ui.title
+                    sortable: ~
+                reviewSubject:
+                    type: string
+                    label: sylius.ui.product
+                date:
+                    type: twig
+                    label: sylius.ui.date
+                    path: createdAt
+                    sortable: createdAt
+                    options:
+                        template: "@SyliusAdmin/shared/grid/field/date.html.twig"
+                        vars:
+                            th_class: "text-center"
                 status:
                     type: twig
                     label: sylius.ui.status
                     sortable: ~
                     options:
                         template: "@SyliusAdmin/product_review/grid/field/state.html.twig"
-                reviewSubject:
-                    type: string
-                    label: sylius.ui.product
-                author:
-                    type: twig
-                    label: sylius.ui.customer
-                    options:
-                        template: '@SyliusAdmin/shared/grid/field/customer.html.twig'
+                        vars:
+                            th_class: "w-1 text-center"
+                            td_class: "text-center"
             filters:
                 title:
                     type: string

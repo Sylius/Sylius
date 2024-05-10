@@ -15,9 +15,15 @@ sylius_grid:
                     label: sylius.ui.name
                     options:
                         template: "@SyliusAdmin/inventory/grid/field/name.html.twig"
+                        vars:
+                            th_class: "w-75"                
                 code:
-                    type: string
+                    type: twig
                     label: sylius.ui.code
+                    options:
+                        template: "@SyliusAdmin/shared/grid/field/code.html.twig"
+                        vars:
+                            th_class: "w-25"
                 inventory:
                     type: twig
                     path: .

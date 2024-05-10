@@ -17,16 +17,22 @@ sylius_grid:
                     path: .
                     options:
                         template: "@SyliusAdmin/product/grid/field/product_image.html.twig"
-                code:
-                    type: string
-                    label: sylius.ui.code
-                    sortable: ~
                 name:
                     type: twig
                     label: sylius.ui.name
                     sortable: translation.name
                     options:
-                        template: "@SyliusAdmin/product/grid/field/name.html.twig"
+                        template: "@SyliusAdmin/shared/grid/field/name.html.twig"
+                        vars:
+                            th_class: "w-75"
+                code:
+                    type: twig
+                    label: sylius.ui.code
+                    sortable: ~
+                    options:
+                        template: "@SyliusAdmin/shared/grid/field/code.html.twig"
+                        vars:
+                            th_class: "w-25"
                 mainTaxon:
                     type: twig
                     label: sylius.ui.main_taxon

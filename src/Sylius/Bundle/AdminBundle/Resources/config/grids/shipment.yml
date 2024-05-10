@@ -10,24 +10,30 @@ sylius_grid:
             sorting:
                 createdAt: desc
             fields:
-                createdAt:
-                    type: datetime
-                    label: sylius.ui.created_at
-                    sortable: ~
-                    options:
-                        format: d-m-Y H:i:s
-                shippedAt:
-                    type: datetime
-                    label: sylius.ui.shipped_at
-                    sortable: ~
-                    options:
-                        format: d-m-Y H:i:s
                 number:
                     type: twig
                     label: sylius.ui.order
                     path: order
                     options:
                         template: "@SyliusAdmin/shared/grid/field/order_number.html.twig"
+                        vars:
+                            th_class: "w-1"
+                createdAt:
+                    type: twig
+                    label: sylius.ui.created_at
+                    sortable: ~
+                    options:
+                        template: "@SyliusAdmin/shared/grid/field/date.html.twig"
+                        vars:
+                            th_class: "w-1 text-center"
+                shippedAt:
+                    type: twig
+                    label: sylius.ui.shipped_at
+                    sortable: ~
+                    options:
+                        template: "@SyliusAdmin/shared/grid/field/date.html.twig"
+                        vars:
+                            th_class: "w-1 text-center"
                 channel:
                     type: twig
                     label: sylius.ui.channel
@@ -39,6 +45,9 @@ sylius_grid:
                     label: sylius.ui.state
                     options:
                         template: "@SyliusAdmin/shared/grid/field/shipment_state.html.twig"
+                        vars:
+                            th_class: "w-1 text-center"
+                            td_class: "text-center"
             filters:
                 state:
                     type: select

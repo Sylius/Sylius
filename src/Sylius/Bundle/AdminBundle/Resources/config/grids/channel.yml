@@ -20,7 +20,7 @@ sylius_grid:
                     label: sylius.ui.code
                     sortable: code
                     options:
-                        template: "@SyliusAdmin/channel/grid/field/code.html.twig"
+                        template: "@SyliusAdmin/shared/grid/field/code.html.twig"
                 themeName:
                     type: twig
                     label: sylius.ui.theme
@@ -33,6 +33,8 @@ sylius_grid:
                     sortable: ~
                     options:
                         template: "@SyliusAdmin/shared/grid/field/boolean.html.twig"
+                        vars:
+                            th_class: "w-1 text-center"
             filters:
                 search:
                     type: string

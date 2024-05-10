@@ -14,10 +14,9 @@ sylius_grid:
                     sortable: ~
                     options:
                         template: "@SyliusAdmin/promotion/grid/field/priority.html.twig"
-                code:
-                    type: string
-                    label: sylius.ui.code
-                    sortable: ~
+                        vars:
+                            th_class: "w-1 text-center"
+                            td_class: "text-center"
                 name:
                     type: twig
                     label: sylius.ui.name
@@ -25,11 +24,22 @@ sylius_grid:
                     sortable: ~
                     options:
                         template: "@SyliusUi/Grid/Field/nameAndDescription.html.twig"
+                        vars:
+                            th_class: "w-100"
+                code:
+                    type: twig
+                    label: sylius.ui.code
+                    sortable: ~
+                    options:
+                        template: "@SyliusAdmin/shared/grid/field/code.html.twig"          
                 couponBased:
                     type: twig
                     label: sylius.ui.coupons
                     options:
                         template: "@SyliusAdmin/shared/grid/field/boolean.html.twig"
+                        vars:
+                            th_class: "w-1 text-center"
+                            td_class: "text-center"
                 usage:
                     type: twig
                     label: sylius.ui.usage
