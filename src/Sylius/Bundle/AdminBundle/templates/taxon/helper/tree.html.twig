@@ -27,7 +27,8 @@
                     role="button"
                     class="dropdown-item"
                     data-action="live#action"
-                    data-live-action-param="prevent|delete(taxonId={{ taxonId }})"
+                    data-live-action-param="prevent|delete"
+                    data-live-taxon-id-param="{{ taxonId }}"
                 >
                     {{ 'sylius.ui.delete'|trans }}
                 </button>
@@ -37,7 +38,8 @@
                     role="button"
                     class="dropdown-item"
                     data-action="live#action"
-                    data-live-action-param="prevent|moveUp(taxonId={{ taxonId }})"
+                    data-live-action-param="prevent|moveUp"
+                    data-live-taxon-id-param="{{ taxonId }}"
                 >
                     {{ 'sylius.ui.move_up'|trans }}
                 </button>
@@ -47,7 +49,8 @@
                     role="button"
                     class="dropdown-item"
                     data-action="live#action"
-                    data-live-action-param="prevent|moveDown(taxonId={{ taxonId }})"
+                    data-live-action-param="prevent|moveDown"
+                    data-live-taxon-id-param="{{ taxonId }}"
                 >
                     {{ 'sylius.ui.move_down'|trans }}
                 </button>
@@ -99,7 +102,7 @@
 {% endmacro %}
 
 {% macro render(taxons, nested = false) %}
-    {% import '@SyliusAdmin/taxon/helper/taxon_tree.html.twig' as _self %}
+    {% import '@SyliusAdmin/taxon/helper/tree.html.twig' as _self %}
 
     <ul class="{% if nested %}tree-items{% else %}tree{% endif %}">
         {% if nested == false %}
