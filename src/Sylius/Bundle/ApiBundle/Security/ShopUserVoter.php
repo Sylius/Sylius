@@ -17,13 +17,13 @@ use Sylius\Component\Core\Model\ShopUserInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 
-final class CustomerVoter extends Voter
+final class ShopUserVoter extends Voter
 {
-    public const SYLIUS_CUSTOMER = 'SYLIUS_CUSTOMER';
+    public const SYLIUS_SHOP_USER = 'SYLIUS_SHOP_USER';
 
     protected function supports(string $attribute, mixed $subject): bool
     {
-        if (self::SYLIUS_CUSTOMER === $attribute) {
+        if (self::SYLIUS_SHOP_USER === $attribute) {
             return true;
         }
 
@@ -32,7 +32,7 @@ final class CustomerVoter extends Voter
 
     public function supportsAttribute(string $attribute): bool
     {
-        return self::SYLIUS_CUSTOMER === $attribute;
+        return self::SYLIUS_SHOP_USER === $attribute;
     }
 
     protected function voteOnAttribute(string $attribute, mixed $subject, TokenInterface $token): bool
@@ -43,6 +43,6 @@ final class CustomerVoter extends Voter
             return false;
         }
 
-        return in_array('ROLE_USER', $user->getRoles(), true) && null !== $user->getCustomer();
+        return in_array('ROLE_USER', $user->getRoles(), true);
     }
 }

@@ -28,7 +28,7 @@
 <!--            <tag name="api_platform.doctrine.orm.query_extension.collection" />-->
 <!--        </service>-->
 
-        <service id="Sylius\Bundle\ApiBundle\Doctrine\QueryExtension\AddressExtension">
+        <service id="sylius_api.doctrine.query_extension.address" class="Sylius\Bundle\ApiBundle\Doctrine\QueryExtension\AddressExtension">
             <argument type="service" id="sylius.section_resolver.uri_based_section_resolver" />
             <argument type="service" id="Sylius\Bundle\ApiBundle\Context\UserContextInterface" />
             <tag name="api_platform.doctrine.orm.query_extension.collection" />

@@ -20,7 +20,6 @@
             <tag name="security.voter"/>
         </defaults>
 
-        <service id="sylius.api.security.voter.customer" class="Sylius\Bundle\ApiBundle\Security\CustomerVoter">
-        </service>
+        <service id="sylius_api.security.voter.shop_user" class="Sylius\Bundle\ApiBundle\Security\ShopUserVoter" />
     </services>
 </container>

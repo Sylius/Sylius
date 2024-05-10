@@ -19,7 +19,6 @@ use ApiPlatform\Doctrine\Orm\Util\QueryNameGeneratorInterface;
 use Doctrine\ORM\Query\Expr;
 use Doctrine\ORM\QueryBuilder;
 use PhpSpec\ObjectBehavior;
-use stdClass;
 use Sylius\Bundle\ApiBundle\Context\UserContextInterface;
 use Sylius\Bundle\ApiBundle\SectionResolver\AdminApiSection;
 use Sylius\Bundle\ApiBundle\SectionResolver\ShopApiSection;
@@ -48,7 +47,7 @@ final class AddressExtensionSpec extends ObjectBehavior
         QueryBuilder $queryBuilder,
         QueryNameGeneratorInterface $queryNameGenerator,
     ): void {
-        $this->applyToCollection($queryBuilder, $queryNameGenerator, stdClass::class);
+        $this->applyToCollection($queryBuilder, $queryNameGenerator, \stdClass::class);
 
         $queryBuilder->getRootAliases()->shouldNotHaveBeenCalled();
         $queryBuilder->andWhere()->shouldNotHaveBeenCalled();
@@ -58,7 +57,7 @@ final class AddressExtensionSpec extends ObjectBehavior
         QueryBuilder $queryBuilder,
         QueryNameGeneratorInterface $queryNameGenerator,
     ): void {
-        $this->applyToItem($queryBuilder, $queryNameGenerator, stdClass::class, []);
+        $this->applyToItem($queryBuilder, $queryNameGenerator, \stdClass::class, []);
 
         $queryBuilder->getRootAliases()->shouldNotHaveBeenCalled();
         $queryBuilder->andWhere()->shouldNotHaveBeenCalled();

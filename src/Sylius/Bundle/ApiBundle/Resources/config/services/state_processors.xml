@@ -30,7 +30,7 @@
             <tag name="api_platform.state_processor" />
         </service>
 
-        <service id="sylius.api.state_processor.post.address" class="Sylius\Bundle\ApiBundle\StateProcessor\Post\AddressProcessor">
+        <service id="sylius_api.state_processor.post.address" class="Sylius\Bundle\ApiBundle\StateProcessor\Post\AddressProcessor">
             <argument type="service" id="api_platform.doctrine.orm.state.persist_processor" />
             <argument type="service" id="Sylius\Bundle\ApiBundle\Context\UserContextInterface" />
             <tag name="api_platform.state_processor" />

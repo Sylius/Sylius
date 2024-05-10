@@ -64,7 +64,7 @@
             <operation
                 class="ApiPlatform\Metadata\Get"
                 uriTemplate="/shop/addresses/{id}"
-                security="is_granted('SYLIUS_CUSTOMER')"
+                security="is_granted('SYLIUS_SHOP_USER')"
             >
                 <normalizationContext>
                     <values>
@@ -80,7 +80,7 @@
             <operation
                 class="ApiPlatform\Metadata\GetCollection"
                 uriTemplate="/shop/addresses"
-                security="is_granted('SYLIUS_CUSTOMER')"
+                security="is_granted('SYLIUS_SHOP_USER')"
             >
                 <normalizationContext>
                     <values>
@@ -96,9 +96,9 @@
             <operation
                 class="ApiPlatform\Metadata\Post"
                 uriTemplate="/shop/addresses"
-                security="is_granted('SYLIUS_CUSTOMER')"
+                security="is_granted('SYLIUS_SHOP_USER')"
                 itemUriTemplate="/shop/addresses/{id}"
-                processor="sylius.api.state_processor.post.address"
+                processor="sylius_api.state_processor.post.address"
             >
                 <denormalizationContext>
                     <values>
@@ -123,7 +123,7 @@
             <operation
                 class="ApiPlatform\Metadata\Put"
                 uriTemplate="/shop/addresses/{id}"
-                security="is_granted('SYLIUS_CUSTOMER')"
+                security="is_granted('SYLIUS_SHOP_USER')"
             >
                 <denormalizationContext>
                     <values>
@@ -148,7 +148,7 @@
             <operation
                 class="ApiPlatform\Metadata\Delete"
                 uriTemplate="/shop/addresses/{id}"
-                security="is_granted('SYLIUS_CUSTOMER')"
+                security="is_granted('SYLIUS_SHOP_USER')"
             />
         </operations>
     </resource>
