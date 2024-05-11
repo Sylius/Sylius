@@ -15,7 +15,7 @@ namespace Sylius\Component\Core\Test\Services;
 
 use Sylius\Component\Channel\Factory\ChannelFactoryInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
-use Sylius\Component\Core\Model\ShopBillingData;
+use Sylius\Component\Core\Model\ShopBillingDataInterface;
 use Sylius\Component\Currency\Model\CurrencyInterface;
 use Sylius\Component\Locale\Model\LocaleInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
@@ -33,6 +33,7 @@ final class DefaultChannelFactory implements DefaultChannelFactoryInterface
         private ChannelFactoryInterface $channelFactory,
         private FactoryInterface $currencyFactory,
         private FactoryInterface $localeFactory,
+        private FactoryInterface $shopBillingDataFactory,
         private RepositoryInterface $channelRepository,
         private RepositoryInterface $currencyRepository,
         private RepositoryInterface $localeRepository,
@@ -56,7 +57,9 @@ final class DefaultChannelFactory implements DefaultChannelFactoryInterface
         $channel->addLocale($locale);
         $channel->setDefaultLocale($locale);
         if ($channel->getShopBillingData() === null) {
-            $channel->setShopBillingData(new ShopBillingData());
+            /** @var ShopBillingDataInterface $currency */
+            $shopBillingData = $this->shopBillingDataFactory->createNew();
+            $channel->setShopBillingData($shopBillingData);
         }
 
         $this->channelRepository->add($channel);

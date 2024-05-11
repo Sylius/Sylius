@@ -39,6 +39,7 @@
             <argument type="service" id="sylius.factory.channel" />
             <argument type="service" id="sylius.factory.currency" />
             <argument type="service" id="sylius.factory.locale" />
+            <argument type="service" id="sylius.factory.shop_billing_data" />
             <argument type="service" id="sylius.repository.channel" />
             <argument type="service" id="sylius.repository.currency" />
             <argument type="service" id="sylius.repository.locale" />
