@@ -286,6 +286,7 @@
     },
     "autoload-dev": {
         "psr-4": {
+            "Behat\\Testwork\\Environment\\": "src/Sylius/Behat/Testwork/Environment/",
             "Sylius\\Tests\\": "tests/",
             "spec\\Sylius\\Behat\\": "src/Sylius/Behat/spec/",
             "spec\\Sylius\\Component\\Addressing\\": "src/Sylius/Component/Addressing/spec/",
@@ -331,6 +332,9 @@
         },
         "classmap": [
             "src/Kernel.php"
+        ],
+        "exclude-from-classmap": [
+            "vendor/behat/behat/src/Behat/Testwork/Environment/EnvironmentManager.php"
         ]
     },
     "scripts": {
