@@ -92,6 +92,7 @@ final class ManagingProductsContext implements Context
      * @When I do not name it
      * @When I name it :name in :language
      * @When I rename it to :name in :language
+     * @When I should be able to name it :name in :language
      */
     public function iRenameItToIn(?string $name = null, ?string $language = null): void
     {
@@ -786,6 +787,7 @@ final class ManagingProductsContext implements Context
 
     /**
      * @When /^I choose main (taxon "[^"]+")$/
+     * @Then /^I should be able to choose main (taxon "[^"]+")$/
      */
     public function iChooseMainTaxon(TaxonInterface $taxon)
     {
@@ -890,6 +892,7 @@ final class ManagingProductsContext implements Context
     /**
      * @When I associate as :productAssociationType the :productName product
      * @When I associate as :productAssociationType the :firstProductName and :secondProductName products
+     * @Then I should be able to associate as :productAssociationType the :productName product
      */
     public function iAssociateProductsAsProductAssociation(
         ProductAssociationTypeInterface $productAssociationType,
