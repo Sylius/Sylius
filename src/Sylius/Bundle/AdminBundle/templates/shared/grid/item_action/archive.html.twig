@@ -8,12 +8,12 @@
     <input type="hidden" name="sylius_archivable[_token]" value="{{ csrf_token('sylius_archivable') }}" />
 
     {% if data.archivedAt is not null %}
-        <button class="btn" type="submit" data-confirm-btn-submit>
+        <button name="archive" class="btn" type="submit" data-confirm-btn-submit>
             {{ icon({ icon: action.icon ?? 'archive', class: 'icon icon-tabler dropdown-item-icon' }) }}
             {{ action.options.restore_label|default('sylius.ui.restore')|trans }}
         </button>
     {% else %}
-        <button class="btn btn-icon" type="submit" data-confirm-btn-submit data-bs-toggle="tooltip" data-bs-title="{{ action.label|default('sylius.ui.archive')|trans }}">
+        <button name="archive" class="btn btn-icon" type="submit" data-confirm-btn-submit data-bs-toggle="tooltip" data-bs-title="{{ action.label|default('sylius.ui.archive')|trans }}">
             {{ icon({ icon: action.icon ?? 'archive', class: 'icon icon-tabler dropdown-item-icon' }) }}
         </button>
     {% endif %}

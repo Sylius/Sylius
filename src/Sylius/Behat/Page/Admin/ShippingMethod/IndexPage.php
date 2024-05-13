@@ -39,7 +39,7 @@ class IndexPage extends BaseIndexPage implements IndexPageInterface
     public function archiveShippingMethod(string $name): void
     {
         $actions = $this->getActionsForResource(['name' => $name]);
-        $actions->pressButton('Archive');
+        $actions->pressButton('archive');
         $this->getElement('confirm_action_button')->press();
     }
 

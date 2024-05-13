@@ -3,6 +3,6 @@
 {% set path = options.link.url|default(path(options.link.route|default(grid.requestConfiguration.getRouteName('show')), options.link.parameters|default({'id': data.id}))) %}
 {% set message = action.label|default('sylius.ui.show') %}
 
-<a href="{{ path }}" class="btn btn-icon" data-bs-toggle="tooltip" data-bs-title="{{ message|trans }}">
+<a title="details" href="{{ path }}" class="btn btn-icon" data-bs-toggle="tooltip" data-bs-title="{{ message|trans }}">
     {{ icon({ icon: action.icon|default('eye'), class: 'icon icon-tabler' }) }}
 </a>
