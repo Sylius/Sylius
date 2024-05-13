@@ -64,7 +64,7 @@ twig_hooks:
 
         'sylius_admin.order.show.content.sections.shipments.item.actions':
             ship:
-                component: 'sylius_admin:shipment:ship'
+                component: 'sylius_admin:shipment:ship_form'
                 props:
                     shipment: '@=_context.shipment'
             resend_confirmation:
