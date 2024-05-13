@@ -181,8 +181,8 @@
             <tag name="form.type" />
         </service>
 
-        <service id="sylius_admin.form.extension.product_generate_variants" class="Sylius\Bundle\AdminBundle\Form\Extension\ProductGenerateVariantsTypeExtension">
-            <tag name="form.type_extension" />
+        <service id="sylius_admin.form.type.product_generate_variants" class="Sylius\Bundle\AdminBundle\Form\Type\ProductGenerateVariantsType">
+            <tag name="form.type" />
         </service>
 
         <service id="sylius_admin.form.type.address" class="Sylius\Bundle\AdminBundle\Form\Type\AddressType" >
