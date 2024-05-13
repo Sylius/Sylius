@@ -2,7 +2,7 @@ twig_hooks:
     hooks:
         'sylius_admin.admin_user.create.content':
             form:
-                template: '@SyliusAdmin/shared/crud/create/content/form.html.twig'
+                component: 'sylius_admin:form'
                 configuration:
                     render_rest: false
             

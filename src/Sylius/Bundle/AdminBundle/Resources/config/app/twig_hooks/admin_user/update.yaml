@@ -2,8 +2,9 @@ twig_hooks:
     hooks:
         'sylius_admin.admin_user.update.content':
             form:
-                template: '@SyliusAdmin/shared/crud/update/content/form.html.twig'
+                component: 'sylius_admin:form'
                 configuration:
+                    method: 'PUT'
                     render_rest: false
             
         'sylius_admin.admin_user.update.content.form':

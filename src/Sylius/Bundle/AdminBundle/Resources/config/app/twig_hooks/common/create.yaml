@@ -10,7 +10,7 @@ twig_hooks:
             header:
                 component: 'sylius_admin:header'
             form:
-                template: '@SyliusAdmin/shared/crud/create/content/form.html.twig'
+                component: 'sylius_admin:form'
                 configuration:
                     render_rest: true
 
