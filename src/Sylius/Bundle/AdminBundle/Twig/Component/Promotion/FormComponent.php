@@ -26,7 +26,7 @@ use Symfony\UX\LiveComponent\DefaultActionTrait;
 use Symfony\UX\LiveComponent\LiveCollectionTrait;
 
 #[AsLiveComponent]
-final class FormComponent
+class FormComponent
 {
     use DefaultActionTrait;
     use HookableLiveComponentTrait;

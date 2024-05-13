@@ -17,7 +17,7 @@ use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Repository\CustomerRepositoryInterface;
 use Symfony\UX\TwigComponent\Attribute\ExposeInTemplate;
 
-final class NewCustomersComponent
+class NewCustomersComponent
 {
     public const DEFAULT_LIMIT = 5;
 

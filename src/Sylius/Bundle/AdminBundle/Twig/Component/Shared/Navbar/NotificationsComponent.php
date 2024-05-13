@@ -15,7 +15,7 @@ namespace Sylius\Bundle\AdminBundle\Twig\Component\Shared\Navbar;
 
 use Symfony\UX\TwigComponent\Attribute\ExposeInTemplate;
 
-final class NotificationsComponent
+class NotificationsComponent
 {
     /**
      * @return array<string, mixed>

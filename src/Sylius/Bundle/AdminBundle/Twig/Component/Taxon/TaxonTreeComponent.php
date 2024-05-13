@@ -24,7 +24,7 @@ use Symfony\UX\LiveComponent\DefaultActionTrait;
 use Symfony\UX\TwigComponent\Attribute\ExposeInTemplate;
 
 #[AsLiveComponent]
-final class TaxonTreeComponent
+class TaxonTreeComponent
 {
     use DefaultActionTrait;
     use HookableLiveComponentTrait;

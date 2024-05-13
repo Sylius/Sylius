@@ -17,7 +17,7 @@ use Sylius\Component\Addressing\Model\AddressLogEntry;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\UX\TwigComponent\Attribute\ExposeInTemplate;
 
-final class AddressHistoryComponent
+class AddressHistoryComponent
 {
     public ?string $addressId = null;
 
