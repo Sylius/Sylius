@@ -48,13 +48,13 @@
             <tag name="form.type" />
         </service>
 
-        <service id="sylius_admin.form.extension.shipping_method" class="Sylius\Bundle\AdminBundle\Form\Extension\ShippingMethodTypeExtension">
+        <service id="sylius_admin.form.type.shipping_method" class="Sylius\Bundle\AdminBundle\Form\Type\ShippingMethodType">
             <argument>%sylius.shipping_method_rules%</argument>
-            <tag name="form.type_extension" />
+            <tag name="form.type" />
         </service>
 
-        <service id="sylius.form.extension.shipping_method_rule" class="Sylius\Bundle\AdminBundle\Form\Extension\ShippingMethodRuleTypeExtension">
-            <tag name="form.type_extension" />
+        <service id="sylius_admin.form.type.shipping_method_rule" class="Sylius\Bundle\AdminBundle\Form\Type\ShippingMethodRuleType">
+            <tag name="form.type" />
         </service>
 
         <service id="sylius_admin.form.type.product_image" class="Sylius\Bundle\AdminBundle\Form\Type\ProductImageType">

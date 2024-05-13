@@ -11,17 +11,17 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\AdminBundle\Form\Extension;
+namespace Sylius\Bundle\AdminBundle\Form\Type;
 
-use Sylius\Bundle\ShippingBundle\Form\Type\ShippingMethodRuleType;
-use Symfony\Component\Form\AbstractTypeExtension;
+use Sylius\Bundle\ShippingBundle\Form\Type\ShippingMethodRuleType as BaseShippingMethodRuleType;
+use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-final class ShippingMethodRuleTypeExtension extends AbstractTypeExtension
+final class ShippingMethodRuleType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
@@ -38,8 +38,8 @@ final class ShippingMethodRuleTypeExtension extends AbstractTypeExtension
         $resolver->setDefault('types', []);
     }
 
-    public static function getExtendedTypes(): iterable
+    public function getParent(): string
     {
-        yield ShippingMethodRuleType::class;
+        return BaseShippingMethodRuleType::class;
     }
 }

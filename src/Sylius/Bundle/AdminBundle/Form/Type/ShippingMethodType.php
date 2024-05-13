@@ -15,12 +15,40 @@ namespace Sylius\Bundle\AdminBundle\Form\Type;
 
 use Sylius\Bundle\ShippingBundle\Form\Type\ShippingMethodType as BaseShippingMethodType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\UX\LiveComponent\Form\Type\LiveCollectionType;
 
 final class ShippingMethodType extends AbstractType
 {
-    public function getBlockPrefix(): string
+    /** @param array<string, string> $types */
+    public function __construct(private readonly array $types)
     {
-        return 'sylius_admin_shipping_method';
+    }
+
+    /**
+     * @param array<string, mixed> $options
+     */
+    public function buildForm(FormBuilderInterface $builder, array $options): void
+    {
+        $builder
+            ->add('rules', LiveCollectionType::class, [
+                'entry_type' => ShippingMethodRuleType::class,
+                'entry_options' => [
+                    'types' => $this->types,
+                ],
+                'allow_add' => true,
+                'allow_delete' => true,
+                'by_reference' => false,
+                'button_add_type' => AddButtonType::class,
+                'button_add_options' => [
+                    'label' => 'sylius.ui.add_rule',
+                    'types' => $this->types,
+                ],
+                'button_delete_options' => [
+                    'label' => false,
+                ],
+            ])
+        ;
     }
 
     public function getParent(): string
