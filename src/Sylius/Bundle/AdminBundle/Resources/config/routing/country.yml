@@ -6,6 +6,8 @@ sylius_admin_country:
         except: ['show', 'delete']
         redirect: update
         grid: sylius_admin_country
+        form:
+            type: Sylius\Bundle\AdminBundle\Form\Type\CountryType
         permission: true
         vars:
             all:

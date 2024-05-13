@@ -43,9 +43,9 @@
             <tag name="form.type" />
         </service>
 
-        <service id="sylius.form.extension.country" class="Sylius\Bundle\AdminBundle\Form\Extension\CountryTypeExtension">
+        <service id="sylius_admin.form.type.country" class="Sylius\Bundle\AdminBundle\Form\Type\CountryType">
             <argument type="service" id="sylius.repository.country" />
-            <tag name="form.type_extension" extended-type="Sylius\Bundle\AddressingBundle\Form\Type\CountryType" priority="100" />
+            <tag name="form.type" />
         </service>
 
         <service id="sylius_admin.form.extension.shipping_method" class="Sylius\Bundle\AdminBundle\Form\Extension\ShippingMethodTypeExtension">
