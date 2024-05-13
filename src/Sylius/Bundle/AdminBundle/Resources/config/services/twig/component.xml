@@ -115,7 +115,7 @@
 
             <tag
                 name="twig.component"
-                key="sylius_admin:order:history:address"
+                key="sylius_admin:order:address_history"
                 template="@SyliusAdmin/order/history/content/sections/addresses/address.html.twig"
             />
         </service>
