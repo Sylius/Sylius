@@ -71,6 +71,11 @@ class UpdatePage extends SymfonyPage implements UpdatePageInterface
         JQueryHelper::waitForFormToStopLoading($this->getDocument());
     }
 
+    public function waitForFormToStopLoading(): void
+    {
+        JQueryHelper::waitForFormToStopLoading($this->getDocument());
+    }
+
     public function saveChanges(): void
     {
         JQueryHelper::waitForFormToStopLoading($this->getDocument());
