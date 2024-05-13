@@ -38,13 +38,13 @@ twig_hooks:
 
         'sylius_admin.order.history.content.sections.addresses':
             billing_address:
-                component: sylius_admin:order:history:address
+                component: sylius_admin:order:address_history
                 props:
                     addressId: '@=_context.resource.getBillingAddress().getId()'
                     header: 'sylius.ui.billing_address'
                     sort: 'desc'
             shipping_address:
-                component: sylius_admin:order:history:address
+                component: sylius_admin:order:address_history
                 props:
                     addressId: '@=_context.resource.getShippingAddress().getId()'
                     header: 'sylius.ui.shipping_address'
