@@ -177,6 +177,7 @@
         "sylius/shipping": "self.version",
         "sylius/shipping-bundle": "self.version",
         "sylius/shop-bundle": "self.version",
+        "sylius/state-machine-abstraction": "self.version",
         "sylius/taxation": "self.version",
         "sylius/taxation-bundle": "self.version",
         "sylius/taxonomy": "self.version",
