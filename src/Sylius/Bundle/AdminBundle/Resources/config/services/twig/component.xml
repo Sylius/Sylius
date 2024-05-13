@@ -206,9 +206,18 @@
             />
         </service>
 
-        <service id="Sylius\Bundle\AdminBundle\TwigComponent\Zone\FormComponent">
+        <service
+            id="sylius_admin.twig.component.zone.form"
+            class="Sylius\Bundle\AdminBundle\TwigComponent\Zone\FormComponent"
+        >
             <argument type="service" id="form.factory" />
             <argument>Sylius\Bundle\AddressingBundle\Form\Type\ZoneType</argument>
+
+            <tag
+                name="sylius.live_component"
+                key="sylius_admin:zone:form"
+                template="@SyliusAdmin/zone/form.html.twig"
+            />
         </service>
 
         <service
