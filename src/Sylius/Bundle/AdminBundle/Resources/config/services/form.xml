@@ -62,16 +62,16 @@
             <tag name="form.type" />
         </service>
 
-        <service id="sylius_admin.form.extension.type.channel" class="Sylius\Bundle\AdminBundle\Form\Extension\ChannelTypeExtension">
-            <tag name="form.type_extension" extended-type="Sylius\Bundle\ChannelBundle\Form\Type\ChannelType" priority="50" />
+        <service id="sylius_admin.form.type.channel" class="Sylius\Bundle\AdminBundle\Form\Type\ChannelType">
+            <tag name="form.type" />
         </service>
 
-        <service id="sylius_admin.form.extension.type.channel_price_history_config" class="Sylius\Bundle\AdminBundle\Form\Extension\ChannelPriceHistoryConfigTypeExtension">
+        <service id="sylius_admin.form.type.channel_price_history_config" class="Sylius\Bundle\AdminBundle\Form\Type\ChannelPriceHistoryConfigType">
             <argument type="service" id="sylius.repository.taxon" />
             <argument type="service">
                 <service class="\Symfony\Component\Form\Extension\Core\DataMapper\DataMapper" />
             </argument>
-            <tag name="form.type_extension" extended-type="Sylius\Bundle\CoreBundle\Form\Type\ChannelPriceHistoryConfigType" priority="100" />
+            <tag name="form.type" />
         </service>
 
         <service id="sylius_admin.form.extension.promotion" class="Sylius\Bundle\AdminBundle\Form\Extension\PromotionTypeExtension">

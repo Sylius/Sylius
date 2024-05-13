@@ -15,12 +15,22 @@ namespace Sylius\Bundle\AdminBundle\Form\Type;
 
 use Sylius\Bundle\ChannelBundle\Form\Type\ChannelType as BaseChannelType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\FormBuilderInterface;
 
 final class ChannelType extends AbstractType
 {
-    public function getBlockPrefix(): string
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
-        return 'sylius_admin_channel';
+        $builder
+            ->add('menuTaxon', TaxonAutocompleteType::class, [
+                'label' => 'sylius.form.channel.menu_taxon',
+                'multiple' => false,
+            ])
+            ->add('channelPriceHistoryConfig', ChannelPriceHistoryConfigType::class, [
+                'label' => false,
+                'required' => false,
+            ])
+        ;
     }
 
     public function getParent(): string
