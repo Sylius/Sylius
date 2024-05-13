@@ -5,7 +5,7 @@
 
 <form action="{{ path }}" method="post">
     <input type="hidden" name="_method" value="DELETE">
-    <button class="btn btn-icon" type="submit" data-confirm-btn-submit {{ sylius_test_html_attribute('delete-button') }} data-bs-toggle="tooltip" data-bs-title="{{ message|trans }}">
+    <button name="delete" class="btn btn-icon" type="submit" data-confirm-btn-submit {{ sylius_test_html_attribute('delete-button') }} data-bs-toggle="tooltip" data-bs-title="{{ message|trans }}">
         {{ icon({ icon: action.icon ?? 'trash-x', class: 'icon icon-tabler text-danger' }) }}
     </button>
     <input type="hidden" name="_csrf_token" value="{{ csrf_token(data.id) }}" />

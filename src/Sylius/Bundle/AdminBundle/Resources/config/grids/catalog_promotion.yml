@@ -41,7 +41,7 @@ sylius_grid:
                     label: sylius.ui.start_date
                     sortable: ~
                     options:
-                        template: "@SyliusAdmin/shared/grid/field/date.html.twig"
+                        template: "@SyliusAdmin/catalog_promotion/grid/field/date.html.twig"
                         vars:
                             th_class: "text-center"
                 endDate:
@@ -49,7 +49,7 @@ sylius_grid:
                     label: sylius.ui.end_date
                     sortable: ~
                     options:
-                        template: "@SyliusAdmin/shared/grid/field/date.html.twig"
+                        template: "@SyliusAdmin/catalog_promotion/grid/field/date.html.twig"
                         vars:
                             th_class: "text-center"
                 state:

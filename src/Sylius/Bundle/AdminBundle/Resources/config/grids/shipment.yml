@@ -10,14 +10,6 @@ sylius_grid:
             sorting:
                 createdAt: desc
             fields:
-                number:
-                    type: twig
-                    label: sylius.ui.order
-                    path: order
-                    options:
-                        template: "@SyliusAdmin/shared/grid/field/order_number.html.twig"
-                        vars:
-                            th_class: "w-1"
                 createdAt:
                     type: twig
                     label: sylius.ui.created_at
@@ -34,6 +26,14 @@ sylius_grid:
                         template: "@SyliusAdmin/shared/grid/field/date.html.twig"
                         vars:
                             th_class: "w-1 text-center"
+                number:
+                    type: twig
+                    label: sylius.ui.order
+                    path: order
+                    options:
+                        template: "@SyliusAdmin/shared/grid/field/order_number.html.twig"
+                        vars:
+                            th_class: "w-1"
                 channel:
                     type: twig
                     label: sylius.ui.channel
