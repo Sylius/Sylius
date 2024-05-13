@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Behat\Testwork\Environment;
 
+use Behat\Behat\Context\Environment\ContextEnvironment;
 use Behat\Testwork\Call\Callee;
 use Behat\Testwork\Environment\Exception\EnvironmentBuildException;
 use Behat\Testwork\Environment\Exception\EnvironmentIsolationException;
@@ -92,10 +93,14 @@ final class EnvironmentManager
      */
     public function readEnvironmentCallees(Environment $environment): array
     {
-        $suiteName = $environment->getSuite()->getName();
+        $localKey = $environment->getSuite()->getName();
 
-        if (isset($this->callees[$suiteName])) {
-            return $this->callees[$suiteName];
+        if ($environment instanceof ContextEnvironment) {
+            $localKey.= serialize($environment->getContextClasses());
+        }
+
+        if (isset($this->callees[$localKey])) {
+            return $this->callees[$localKey];
         }
         $callees = [];
 
@@ -105,7 +110,7 @@ final class EnvironmentManager
             }
         }
 
-        $this->callees[$suiteName] = $callees;
+        $this->callees[$localKey] = $callees;
 
         return $callees;
     }
