@@ -263,8 +263,8 @@
         </service>
 
         <service
-            id="sylius_admin.twig.component.taxon.tree_component"
-            class="Sylius\Bundle\AdminBundle\Twig\Component\Taxon\TaxonTreeComponent"
+            id="sylius_admin.twig.component.taxon.tree"
+            class="Sylius\Bundle\AdminBundle\Twig\Component\Taxon\TreeComponent"
         >
             <argument type="service" id="sylius.repository.taxon" />
             <argument type="service" id="sylius.manager.taxon" />
