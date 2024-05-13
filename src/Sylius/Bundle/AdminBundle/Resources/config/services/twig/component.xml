@@ -144,7 +144,10 @@
             />
         </service>
 
-        <service id="Sylius\Bundle\AdminBundle\Twig\Component\Product\FormComponent">
+        <service
+            id="sylius_admin.twig.component.product.form"
+            class="Sylius\Bundle\AdminBundle\Twig\Component\Product\FormComponent"
+        >
             <argument type="service" id="form.factory" />
             <argument>Sylius\Bundle\ProductBundle\Form\Type\ProductType</argument>
             <argument type="service" id="sylius.generator.slug" />
