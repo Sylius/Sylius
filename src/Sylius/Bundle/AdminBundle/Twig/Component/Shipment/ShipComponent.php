@@ -23,7 +23,7 @@ use Symfony\UX\LiveComponent\ComponentWithFormTrait;
 use Symfony\UX\LiveComponent\DefaultActionTrait;
 
 #[AsLiveComponent]
-final class ShipComponent
+class ShipComponent
 {
     use DefaultActionTrait;
     use HookableLiveComponentTrait;

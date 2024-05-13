@@ -17,7 +17,7 @@ use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Symfony\UX\TwigComponent\Attribute\ExposeInTemplate;
 
-final class NewOrdersComponent
+class NewOrdersComponent
 {
     public const DEFAULT_LIMIT = 5;
 

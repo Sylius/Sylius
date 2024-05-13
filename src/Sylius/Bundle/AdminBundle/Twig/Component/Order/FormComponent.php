@@ -23,7 +23,7 @@ use Symfony\UX\LiveComponent\ComponentWithFormTrait;
 use Symfony\UX\LiveComponent\DefaultActionTrait;
 
 #[AsLiveComponent]
-final class FormComponent
+class FormComponent
 {
     use ComponentWithFormTrait;
     use DefaultActionTrait;

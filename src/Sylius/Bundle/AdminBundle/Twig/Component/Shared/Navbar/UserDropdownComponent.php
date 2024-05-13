@@ -19,7 +19,7 @@ use Symfony\Component\Security\Core\Security;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Symfony\UX\TwigComponent\Attribute\ExposeInTemplate;
 
-final class UserDropdownComponent
+class UserDropdownComponent
 {
     public function __construct(
         private UrlGeneratorInterface $urlGenerator,
