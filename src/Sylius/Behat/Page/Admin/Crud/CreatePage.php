@@ -19,6 +19,7 @@ use Behat\Mink\Exception\ElementNotFoundException;
 use Behat\Mink\Session;
 use FriendsOfBehat\PageObjectExtension\Page\SymfonyPage;
 use FriendsOfBehat\PageObjectExtension\Page\UnexpectedPageException;
+use Sylius\Behat\Service\DriverHelper;
 use Symfony\Component\Routing\RouterInterface;
 
 class CreatePage extends SymfonyPage implements CreatePageInterface
@@ -34,6 +35,9 @@ class CreatePage extends SymfonyPage implements CreatePageInterface
 
     public function create(): void
     {
+        if (DriverHelper::isJavascript($this->getDriver())) {
+            $this->getDocument()->find('css', 'body')->click();
+        }
         $this->getDocument()->pressButton('Create');
     }
 
