@@ -33,7 +33,7 @@ final class PaymentPreCompleteListener
         foreach ($orderItems as $orderItem) {
             $variant = $orderItem->getVariant();
 
-            if (!$this->availabilityChecker->isStockSufficient($variant, $orderItem->getQuantity())) {
+            if (!$this->availabilityChecker->isStockSufficient($variant, $orderItem->getQuantity(), true)) {
                 $event->setMessageType('error');
                 $event->setMessage('sylius.resource.payment.cannot_be_completed');
                 $event->setMessageParameters(['%productVariantCode%' => $variant->getCode()]);
