@@ -19,5 +19,5 @@ interface AvailabilityCheckerInterface
 {
     public function isStockAvailable(StockableInterface $stockable): bool;
 
-    public function isStockSufficient(StockableInterface $stockable, int $quantity): bool;
+    public function isStockSufficient(StockableInterface $stockable, int $quantity, ?bool $deferPayment = false): bool;
 }
