@@ -22,18 +22,4 @@ interface FormElementInterface extends BaseFormElementInterface
     public function nameIt(string $name, string $localeCode): void;
 
     public function slugIt(string $slug, string $localeCode): void;
-
-    public function attachImage(string $path, ?string $type = null): void;
-
-    public function changeImageWithType(string $type, string $path): void;
-
-    public function modifyFirstImageType(string $type): void;
-
-    public function removeImageWithType(string $type): void;
-
-    public function removeFirstImage(): void;
-
-    public function isImageWithTypeDisplayed(string $type): bool;
-
-    public function countImages(): int;
 }

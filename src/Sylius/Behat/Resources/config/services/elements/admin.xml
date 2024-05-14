@@ -57,7 +57,7 @@
         <service
             id="Sylius\Behat\Element\Admin\Channel\ExcludeTaxonsFromShowingLowestPriceInputElementInterface"
             class="Sylius\Behat\Element\Admin\Channel\ExcludeTaxonsFromShowingLowestPriceInputElement"
-            parent="sylius.behat.element"
+            parent="sylius.behat.element.admin.crud.form"
         >
             <argument type="service" id="Sylius\Behat\Service\Helper\AutocompleteHelperInterface" />
         </service>
@@ -85,6 +85,12 @@
         <service
             id="sylius.behat.element.admin.taxon.form"
             class="Sylius\Behat\Element\Admin\Taxon\FormElement"
+            parent="sylius.behat.element.admin.crud.form"
+        />
+
+        <service
+            id="sylius.behat.element.admin.taxon.form_image"
+            class="Sylius\Behat\Element\Admin\Taxon\FormImageElement"
             parent="sylius.behat.element.admin.crud.form"
         />
     </services>
