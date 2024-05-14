@@ -55,6 +55,7 @@ sylius_admin_order_update:
             permission: true
             template: "@SyliusAdmin/shared/crud/update.html.twig"
             form:
+                type: Sylius\Bundle\AdminBundle\Form\Type\OrderType
                 options:
                     validation_groups:
                         - sylius_shipping_address_update

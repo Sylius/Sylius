@@ -29,9 +29,13 @@
             <tag name="form.type" />
         </service>
 
-        <service id="Sylius\Bundle\AdminBundle\Form\Extension\AddressTypeExtension">
+        <service id="sylius_admin.form.type.address" class="Sylius\Bundle\AdminBundle\Form\Type\AddressType">
             <argument type="service" id="sylius.repository.country" />
-            <tag name="form.type_extension" extended-type="Sylius\Bundle\AddressingBundle\Form\Type\AddressType" priority="100" />
+            <tag name="form.type" />
+        </service>
+
+        <service id="sylius_admin.form.type.order" class="Sylius\Bundle\AdminBundle\Form\Type\OrderType">
+            <tag name="form.type" />
         </service>
 
         <service id="sylius_admin.form.type.zone" class="Sylius\Bundle\AdminBundle\Form\Type\ZoneType">
