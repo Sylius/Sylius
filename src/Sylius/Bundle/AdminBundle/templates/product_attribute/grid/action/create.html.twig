@@ -3,7 +3,7 @@
 
 {{ _dropdown.list(
     {
-        button: { text: 'sylius.ui.create'|trans, class: 'btn-secondary' }
+        button: { text: 'sylius.ui.create'|trans, class: 'btn-primary' }
     },
     sylius_attribute_types()|map((value, key) => {
         title: ('sylius.form.attribute_type.' ~ value.type)|trans,
