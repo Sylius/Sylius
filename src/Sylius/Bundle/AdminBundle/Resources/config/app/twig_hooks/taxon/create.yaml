@@ -22,8 +22,8 @@ twig_hooks:
                 template: '@SyliusAdmin/taxon/sections/form/details.html.twig'
             translations:
                 template: '@SyliusAdmin/taxon/sections/form/translations.html.twig'
-            media:
-                template: '@SyliusAdmin/taxon/sections/form/media.html.twig'
+            images:
+                template: '@SyliusAdmin/taxon/sections/form/images.html.twig'
         
         'sylius_admin.taxon.create.content.sections.form.details':
             code:
@@ -32,3 +32,20 @@ twig_hooks:
                 template: '@SyliusAdmin/taxon/sections/form/details/parent.html.twig'
             enabled:
                 template: '@SyliusAdmin/taxon/sections/form/details/enabled.html.twig'
+        
+        'sylius_admin.taxon.create.content.sections.form.images':
+            image:
+                template: '@SyliusAdmin/taxon/sections/form/images/image.html.twig'
+        
+        'sylius_admin.taxon.create.content.sections.form.images.image#left':
+            picture:
+                template: '@SyliusAdmin/taxon/sections/form/images/image/picture.html.twig'
+            button_delete:
+                template: '@SyliusAdmin/taxon/sections/form/images/image/button_delete.html.twig'
+        
+        'sylius_admin.taxon.create.content.sections.form.images.image#right':
+            type:
+                template: '@SyliusAdmin/taxon/sections/form/images/image/type.html.twig'
+            file:
+                template: '@SyliusAdmin/taxon/sections/form/images/image/file.html.twig'
+
