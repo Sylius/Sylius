@@ -10,12 +10,12 @@ Feature: Displaying inventory tab on simple product edit page
         And the store has a "PHP T-Shirt" configurable product
         And I am logged in as an administrator
 
-    @todo @ui @no-api
+    @ui @no-api
     Scenario: Seeing inventory on simple product edit page
         When I want to modify the "PHP Mug" product
         Then I should see inventory of this product
 
-    @todo @ui @no-api
+    @ui @no-api
     Scenario: Not seeing inventory on configurable product edit page
         When I want to modify the "PHP T-Shirt" product
         Then I should not see inventory of this product

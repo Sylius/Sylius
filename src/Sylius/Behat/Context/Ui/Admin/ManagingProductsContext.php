@@ -1288,7 +1288,7 @@ final class ManagingProductsContext implements Context
      */
     public function iShouldSeeInventoryOfThisProduct(): void
     {
-        Assert::true($this->updateSimpleProductPage->hasInventoryTab());
+        Assert::true($this->updateSimpleProductPage->hasTab('inventory'));
     }
 
     /**
@@ -1296,7 +1296,7 @@ final class ManagingProductsContext implements Context
      */
     public function iShouldNotSeeInventoryOfThisProduct(): void
     {
-        Assert::false($this->updateConfigurableProductPage->hasInventoryTab());
+        Assert::false($this->updateConfigurableProductPage->hasTab('inventory'));
     }
 
     /**

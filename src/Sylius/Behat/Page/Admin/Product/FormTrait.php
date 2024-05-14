@@ -118,6 +118,11 @@ trait FormTrait
         $this->autocompleteHelper->selectByName($this->getDriver(), $productOptionsAutocomplete->getXpath(), $optionName);
     }
 
+    public function hasTab(string $name): bool
+    {
+        return $this->hasElement('side_navigation_tab', ['%name%' => $name]);
+    }
+
     /*
      * Tabs management
      */
