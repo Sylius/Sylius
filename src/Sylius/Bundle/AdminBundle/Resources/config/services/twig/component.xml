@@ -208,7 +208,7 @@
 
         <service
             id="sylius_admin.twig.component.zone.form"
-            class="Sylius\Bundle\AdminBundle\TwigComponent\Zone\FormComponent"
+            class="Sylius\Bundle\AdminBundle\Twig\Component\Zone\FormComponent"
         >
             <argument type="service" id="form.factory" />
             <argument>Sylius\Bundle\AddressingBundle\Form\Type\ZoneType</argument>

@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\AdminBundle\TwigComponent\Zone;
+namespace Sylius\Bundle\AdminBundle\Twig\Component\Zone;
 
 use Sylius\Component\Addressing\Model\Zone;
 use Sylius\TwigHooks\LiveComponent\HookableLiveComponentTrait;
