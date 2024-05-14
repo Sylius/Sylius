@@ -22,7 +22,7 @@ use Symfony\UX\LiveComponent\Attribute\LiveProp;
 use Symfony\UX\LiveComponent\DefaultActionTrait;
 use Symfony\UX\LiveComponent\LiveCollectionTrait;
 
-#[AsLiveComponent(name: 'sylius_admin:taxon:form', template: '@SyliusAdmin/taxon/sections/form.html.twig')]
+#[AsLiveComponent]
 class FormComponent
 {
     use DefaultActionTrait;
