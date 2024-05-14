@@ -176,11 +176,4 @@ final class FormElement extends BaseFormElement implements FormElementInterface
 
         $this->getElement('calculator_configuration_channel_tab', ['%channelCode%' => $channelCode])->click();
     }
-
-    private function waitForFormUpdate(): void
-    {
-        $form = $this->getElement('form');
-        usleep(500000);
-        $form->waitFor(1500, fn () => !$form->hasAttribute('busy'));
-    }
 }

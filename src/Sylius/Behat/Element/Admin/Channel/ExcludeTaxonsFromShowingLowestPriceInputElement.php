@@ -14,16 +14,16 @@ declare(strict_types=1);
 namespace Sylius\Behat\Element\Admin\Channel;
 
 use Behat\Mink\Session;
-use FriendsOfBehat\PageObjectExtension\Element\Element;
 use FriendsOfBehat\SymfonyExtension\Mink\MinkParameters;
+use Sylius\Behat\Element\Admin\Crud\FormElement as BaseFormElement;
 use Sylius\Behat\Service\Helper\AutocompleteHelperInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 
-final class ExcludeTaxonsFromShowingLowestPriceInputElement extends Element implements ExcludeTaxonsFromShowingLowestPriceInputElementInterface
+final class ExcludeTaxonsFromShowingLowestPriceInputElement extends BaseFormElement implements ExcludeTaxonsFromShowingLowestPriceInputElementInterface
 {
     public function __construct(
         Session $session,
-        array|MinkParameters $minkParameters = [],
+        array|MinkParameters $minkParameters,
         private AutocompleteHelperInterface $autocompleteHelper,
     ) {
         parent::__construct($session, $minkParameters);
@@ -67,14 +67,5 @@ final class ExcludeTaxonsFromShowingLowestPriceInputElement extends Element impl
             'form' => 'form',
             'taxons_excluded_from_showing_lowest_price' => '[data-test-taxons-excluded-from-showing-lowest-price]',
         ]);
-    }
-
-    private function waitForFormUpdate(): void
-    {
-        $form = $this->getElement('form');
-        sleep(1); // we need to sleep, as sometimes the check below is executed faster than the form sets the busy attribute
-        $form->waitFor(1500, function () use ($form) {
-            return !$form->hasAttribute('busy');
-        });
     }
 }
