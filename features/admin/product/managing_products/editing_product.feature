@@ -9,12 +9,12 @@ Feature: Editing a product
         And the store has a product "Dice Brewing"
         And I am logged in as an administrator
 
-    @todo @ui @api
+    @ui @api
     Scenario: Being unable to change code of an existing product
         When I want to modify the "Dice Brewing" product
         Then I should not be able to edit its code
 
-    @todo @ui @no-api
+    @ui @no-api
     Scenario: Renaming a simple product
         When I want to modify the "Dice Brewing" product
         And I rename it to "7 Wonders" in "English (United States)"
@@ -22,7 +22,7 @@ Feature: Editing a product
         Then I should be notified that it has been successfully edited
         And this product name should be "7 Wonders"
 
-    @todo @ui @no-api
+    @ui @no-api
     Scenario: Renaming a simple product does not change its variant name
         Given this product only variant was renamed to "Dice Brewing: The Game"
         When I want to modify this product
@@ -31,7 +31,7 @@ Feature: Editing a product
         And I want to view all variants of this product
         Then the first variant in the list should have name "Dice Brewing: The Game"
 
-    @todo @ui @no-api
+    @ui @no-api
     Scenario: Changing a simple product price
         When I want to modify the "Dice Brewing" product
         And I change its price to $15.00 for "United States" channel
@@ -39,7 +39,7 @@ Feature: Editing a product
         Then I should be notified that it has been successfully edited
         And it should be priced at $15.00 for channel "United States"
 
-    @todo @ui @no-api
+    @ui @no-api
     Scenario: Changing a simple product price
         When I want to modify the "Dice Brewing" product
         And I change its price to $7.50 for "United States" channel
@@ -49,7 +49,7 @@ Feature: Editing a product
         And it should be priced at $7.50 for channel "United States"
         And its original price should be "$15.00" for channel "United States"
 
-    @todo @ui @api
+    @ui @api
     Scenario: Renaming a configurable product
         Given the store has a "Wyborowa Vodka" configurable product
         When I want to modify this product
@@ -58,7 +58,7 @@ Feature: Editing a product
         Then I should be notified that it has been successfully edited
         And this product name should be "Sobieski Vodka"
 
-    @todo @ui @api
+    @ui @api
     Scenario: Renaming a configurable product with option
         Given the store has a "Wyborowa Vodka" configurable product
         And the store has a product option "Bottle size" with a code "bottle_size"
@@ -69,7 +69,7 @@ Feature: Editing a product
         Then I should be notified that it has been successfully edited
         And this product name should be "Sobieski Vodka"
 
-    @todo @ui @javascript @api
+    @ui @javascript @api
     Scenario: Changing options of configurable product without any variant defined
         Given the store has a "Marvel's T-Shirt" configurable product
         And the store has a product option "T-Shirt size" with a code "t_shirt_size"
@@ -81,7 +81,7 @@ Feature: Editing a product
         Then I should be notified that it has been successfully edited
         And this product should have a "T-Shirt color" option
 
-    @todo @ui @api
+    @ui @api
     Scenario: Being unable to change options of an existing product
         Given the store has a "Marvel's T-Shirt" configurable product
         And the store has a product option "T-Shirt size" with a code "t_shirt_size"
@@ -91,7 +91,7 @@ Feature: Editing a product
         When I want to modify the "Marvel's T-Shirt" product
         Then I should not be able to edit its options
 
-    @todo @ui @api
+    @ui @api
     Scenario: Enabling product in channel when all its variants already have specified price in this channel
         Given the store operates on another channel named "Mobile"
         And the store has a "7 Wonders" configurable product
