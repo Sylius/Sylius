@@ -89,4 +89,43 @@ final class AvailabilityCheckerSpec extends ObjectBehavior
         $this->isStockAvailable($stockable)->shouldReturn(true);
         $this->isStockSufficient($stockable, 42)->shouldReturn(true);
     }
+
+    function it_recognizes_stockable_as_sufficient_if_on_hand_minus_quantity_is_greater_than_zero_in_defer_payment(
+        StockableInterface $stockable,
+    ): void {
+        $stockable->isTracked()->willReturn(true);
+        $stockable->getOnHand()->willReturn(10);
+        $stockable->getOnHold()->willReturn(0);
+
+        $this->isStockSufficient($stockable, 5, true)->shouldReturn(true);
+    }
+
+    function it_recognizes_stockable_as_sufficient_if_on_hand_minus_quantity_is_equal_to_zero_in_defer_payment(
+        StockableInterface $stockable,
+    ): void {
+        $stockable->isTracked()->willReturn(true);
+        $stockable->getOnHand()->willReturn(5);
+        $stockable->getOnHold()->willReturn(0);
+
+        $this->isStockSufficient($stockable, 5, true)->shouldReturn(true);
+    }
+
+    function it_recognizes_stockable_as_insufficient_if_on_hand_minus_quantity_is_lower_to_zero_in_defer_payment(
+        StockableInterface $stockable,
+    ): void {
+        $stockable->isTracked()->willReturn(true);
+        $stockable->getOnHand()->willReturn(5);
+        $stockable->getOnHold()->willReturn(0);
+
+        $this->isStockSufficient($stockable, 10, true)->shouldReturn(false);
+    }
+
+    function it_recognizes_stockable_as_available_or_sufficent_if_it_is_not_tracked_in_defer_payment(
+        StockableInterface $stockable): void
+    {
+        $stockable->isTracked()->willReturn(false);
+
+        $this->isStockAvailable($stockable)->shouldReturn(true);
+        $this->isStockSufficient($stockable, 42, true)->shouldReturn(true);
+    }
 }
