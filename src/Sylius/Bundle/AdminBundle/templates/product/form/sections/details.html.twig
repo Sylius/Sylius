@@ -24,7 +24,11 @@
                 </div>
             {% endif %}
             <div class="mb-3">
-                {{ form_row(form.channels) }}
+                {{ form_label(form.channels) }}
+
+                {% for channel in form.channels %}
+                    {{ form_row(channel, sylius_test_form_attribute('channel-name', channel.vars.label)|merge({ label_attr: { class: 'checkbox-switch' } })) }}
+                {% endfor %}
             </div>
             {% if product.isSimple == false %}
                 <div class="mb-3">
