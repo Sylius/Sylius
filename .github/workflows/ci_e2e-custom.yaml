@@ -25,14 +25,9 @@ jobs:
                 php: [ "8.1" ]
                 symfony: [ "^6.4" ]
                 mysql: [ "8.0" ]
-                resource: ["^1.9"]
-                grid: [ "^1.11" ]
-                include:
-                    -   php: "8.1"
-                        symfony: "^6.4"
-                        mysql: "8.0"
-                        resource: "^1.11@dev"
-                        grid: "^1.13@dev"                
+                resource: ["^1.11@dev"]
+                grid: [ "^1.13@dev" ]
+          
 
         env:
             APP_ENV: test_cached
