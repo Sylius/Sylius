@@ -1,4 +1,4 @@
-{% if sm_can(payment, 'refund', 'sylius_payment') %}
+{% if sylius_sm_can(payment, 'sylius_payment', 'refund') %}
     <div class="ui segment">
         <form action="{{ path('sylius_admin_order_payment_refund', {'orderId': order.id, 'id': payment.id}) }}" method="post" novalidate>
             <input type="hidden" name="_csrf_token" value="{{ csrf_token(payment.id) }}" />
