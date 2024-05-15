@@ -6,7 +6,7 @@
   "dependencies": {
     "@hotwired/stimulus": "^3.0.0",
     "@popperjs/core": "^2.11.8",
-    "@symfony/stimulus-bridge": "^3.2.0",
+    "@symfony/stimulus-bridge": "^3.2.2",
     "@symfony/webpack-encore": "^3.1.0",
     "@tabler/core": "tabler/tabler#dev",
     "apexcharts": "^3.41.0",
