@@ -400,9 +400,9 @@ final class ManagingProductsContext implements Context
     }
 
     /**
-     * @When I assign it to channel :channel
+     * @When I enable it in channel :channel
      */
-    public function iAssignItToChannel(ChannelInterface $channel): void
+    public function iEnableItInChannel(ChannelInterface $channel): void
     {
         $this->client->addRequestData('channels', [$this->iriConverter->getIriFromResource($channel)]);
     }

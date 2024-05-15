@@ -53,12 +53,18 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
 
     public function specifyPrice(ChannelInterface $channel, string $price): void
     {
-        $this->getElement('price', ['%channelCode%' => $channel->getCode()])->setValue($price);
+        $this->changeTab('channel-pricing');
+        $this->changeChannelTab($channel->getCode());
+
+        $this->getElement('field_price', ['%channelCode%' => $channel->getCode()])->setValue($price);
     }
 
     public function specifyOriginalPrice(ChannelInterface $channel, string $originalPrice): void
     {
-        $this->getElement('original_price', ['%channelCode%' => $channel->getCode()])->setValue($originalPrice);
+        $this->changeTab('channel-pricing');
+        $this->changeChannelTab($channel->getCode());
+
+        $this->getElement('field_original_price', ['%channelCode%' => $channel->getCode()])->setValue($originalPrice);
     }
 
     public function removeAttribute(string $attributeName, string $localeCode): void
@@ -260,12 +266,12 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
 
     public function getPriceForChannel(ChannelInterface $channel): string
     {
-        return $this->getElement('price', ['%channelCode%' => $channel->getCode()])->getValue();
+        return $this->getElement('field_price', ['%channelCode%' => $channel->getCode()])->getValue();
     }
 
     public function getOriginalPriceForChannel(ChannelInterface $channel): string
     {
-        return $this->getElement('original_price', ['%channelCode%' => $channel->getCode()])->getValue();
+        return $this->getElement('field_original_price', ['%channelCode%' => $channel->getCode()])->getValue();
     }
 
     public function goToVariantsList(): void
