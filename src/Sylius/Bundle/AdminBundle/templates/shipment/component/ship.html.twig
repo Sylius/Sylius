@@ -2,7 +2,7 @@
 
 {% form_theme form '@SyliusAdmin/shared/form_theme.html.twig' %}
 
-{% if sm_can(shipment, 'ship', 'sylius_shipment') %}
+{% if sylius_sm_can(shipment, 'sylius_shipment', 'ship') %}
     <div {{ attributes }}>
         {{ form_start(form, {'action': path('sylius_admin_shipment_ship', {id: shipment.id}), 'attr': {'class': 'ui loadable form', 'novalidate': 'novalidate'}}) }}
         <input type="hidden" name="_method" value="PUT">

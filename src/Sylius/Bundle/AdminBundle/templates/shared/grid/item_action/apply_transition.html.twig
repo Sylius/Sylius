@@ -2,7 +2,7 @@
 
 {% set labeled = options.labeled is defined ? options.labeled : true %}
 
-{% if sm_can(data, options.transition, options.graph) %}
+{% if sylius_sm_can(data, options.graph, options.transition) %}
     <form action="{{ path(options.link.route, options.link.parameters) }}" method="post">
         <input type="hidden" name="_csrf_token" value="{{ csrf_token(data.id) }}">
         <input type="hidden" name="_method" value="PUT">
