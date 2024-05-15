@@ -1,0 +1,18 @@
+---------------------------------------------------------------------------
+
+by github-actions[bot] at 2024-05-13T07:15:23Z
+
+### [Bunnyshell](https://www.bunnyshell.com) Preview Environment deployment failed
+
+Check https://github.com/Sylius/Sylius/actions/runs/9058499004 for details.
+
+Available commands:
+- `/bns:deploy` to redeploy the environment
+- `/bns:delete` to remove the environment
+<!-- thollander/actions-comment-pull-request "bunnyshell-preview-env" -->
+
+---------------------------------------------------------------------------
+
+by GSadee at 2024-05-15T10:47:45Z
+
+Thanks, Karol! :tada:
