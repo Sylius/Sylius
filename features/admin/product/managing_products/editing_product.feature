@@ -69,7 +69,7 @@ Feature: Editing a product
         Then I should be notified that it has been successfully edited
         And this product name should be "Sobieski Vodka"
 
-    @ui @javascript @api
+    @ui @mink:chromedriver @api
     Scenario: Changing options of configurable product without any variant defined
         Given the store has a "Marvel's T-Shirt" configurable product
         And the store has a product option "T-Shirt size" with a code "t_shirt_size"
@@ -100,6 +100,6 @@ Feature: Editing a product
         And this product has "7 Wonders: Leaders" variant priced at "$20.00" in "United States" channel
         And this variant is also priced at "$20.00" in "Mobile" channel
         When I want to modify the "7 Wonders" product
-        And I assign it to channel "Mobile"
+        And I enable it in channel "Mobile"
         And I save my changes
         Then I should be notified that it has been successfully edited

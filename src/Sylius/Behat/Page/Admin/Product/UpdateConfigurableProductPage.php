@@ -97,7 +97,7 @@ class UpdateConfigurableProductPage extends BaseUpdatePage implements UpdateConf
 
     public function checkChannel(string $channelName): void
     {
-        $this->getElement('channel_checkbox', ['%channel%' => $channelName])->check();
+        $this->getElement('channels', ['%channel_name%' => $channelName])->check();
     }
 
     public function isImageWithTypeDisplayed(string $type): bool
@@ -146,8 +146,7 @@ class UpdateConfigurableProductPage extends BaseUpdatePage implements UpdateConf
         return array_merge(
             parent::getDefinedElements(),
             [
-                'channel_checkbox' => '.checkbox:contains("%channel%") input',
-                'channels' => '#sylius_product_channels',
+                'channels' => '[data-test-channel-name="%channel_name%"]',
                 'code' => '#sylius_product_code',
                 'images' => '#sylius_product_images',
                 'main_taxon' => '#sylius_product_mainTaxon',

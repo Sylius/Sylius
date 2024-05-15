@@ -39,7 +39,7 @@ use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Product\Model\ProductAssociationTypeInterface;
 use Webmozart\Assert\Assert;
 
-final class ManagingProductsContext implements Context
+final readonly class ManagingProductsContext implements Context
 {
     use ValidationTrait;
 
@@ -156,9 +156,9 @@ final class ManagingProductsContext implements Context
     }
 
     /**
-     * @When I assign it to channel :channel
+     * @When I enable it in channel :channel
      */
-    public function iAssignItToChannel(ChannelInterface $channel)
+    public function iEnableItInChannel(ChannelInterface $channel)
     {
         // Temporary solution until we will make current page resolver work with product pages
         $this->updateConfigurableProductPage->checkChannel($channel->getName());
