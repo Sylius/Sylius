@@ -15,7 +15,7 @@ namespace Sylius\Behat\Element\Admin\Taxon;
 
 use Sylius\Behat\Element\Admin\Crud\FormElementInterface as BaseFormElementInterface;
 
-interface FormImageElementInterface extends BaseFormElementInterface
+interface ImageFormElementInterface extends BaseFormElementInterface
 {
     public function attachImage(string $path, ?string $type = null): void;
 
