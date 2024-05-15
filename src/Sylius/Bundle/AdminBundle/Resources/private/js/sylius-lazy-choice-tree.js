@@ -10,6 +10,7 @@
 import 'semantic-ui-css/components/api';
 import 'semantic-ui-css/components/checkbox';
 import $ from 'jquery';
+import { sanitizeInput } from "sylius/ui/sylius-sanitizer";
 
 const createRootContainer = function createRootContainer() {
   return $('<div class="ui list"></div>');
@@ -81,7 +82,7 @@ $.fn.extend({
           onSuccess(response) {
             response.forEach((leafNode) => {
               leafContainerElement.append((
-                createLeafFunc(leafNode.name, leafNode.code, leafNode.hasChildren, multiple, leafNode.level)
+                createLeafFunc(sanitizeInput(leafNode.name), sanitizeInput(leafNode.code), leafNode.hasChildren, multiple, leafNode.level)
               ));
             });
             content.append(leafContainerElement);
@@ -169,7 +170,7 @@ $.fn.extend({
         const rootContainer = createRootContainer();
         response.forEach((rootNode) => {
           rootContainer.append((
-            createLeaf(rootNode.name, rootNode.code, rootNode.hasChildren, multiple, rootNode.level)
+            createLeaf(sanitizeInput(rootNode.name), sanitizeInput(rootNode.code), rootNode.hasChildren, multiple, rootNode.level)
           ));
         });
         tree.append(rootContainer);

@@ -14,7 +14,7 @@ testing, and implementation. Docker significantly reduces the delay between writ
 
 .. note::
 
-    Make sure you have `Docker <https://docs.docker.com/get-docker/>`_ installed on your local machine.
+    Make sure you have `Docker <https://docs.docker.com/get-docker/>`_ and `make <https://www.gnu.org/software/make/manual/make.html/>`_ installed on your local machine.
 
 Project Setup
 -------------
@@ -29,15 +29,12 @@ with Sylius-Standard content.
 Development
 -----------
 
-`Sylius Standard <https://github.com/Sylius/Sylius-Standard>`_ comes with the `multi-stage build <https://docs.docker.com/develop/develop-images/multistage-build/>`_.
-You can execute it via the ``docker compose up -d`` command in your favorite terminal. Please note that the speed of building images
-and initializing containers depends on your local machine and internet connection - it may take some time. Then enter ``localhost`` in your browser or execute ``open localhost`` in your terminal.
+`Sylius Standard <https://github.com/Sylius/Sylius-Standard>`_ comes with the `docker compose <https://docs.docker.com/compose/>`_ configuration.
+You can start the development environment via the ``make init`` command in your favorite terminal. Please note that the speed of building images
+and initializing containers depends on your local machine and internet connection - it may take some time.
+Then enter ``localhost`` in your browser or execute ``open http://localhost/`` in your terminal.
 
 .. code-block:: bash
 
-    docker compose up -d
-    open localhost
-
-.. tip::
-
-    :doc:`Learn how to deploy Sylius-Standard production ready Docker Compose configuration </cookbook/deployment/docker>`
+    make init
+    open http://localhost/

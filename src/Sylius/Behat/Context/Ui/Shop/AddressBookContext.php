@@ -41,8 +41,9 @@ final class AddressBookContext implements Context
 
     /**
      * @Given I am editing the address of :fullName
+     * @When I want to edit the address of :fullName
      */
-    public function iEditAddressOf($fullName)
+    public function iEditAddressOf(string $fullName): void
     {
         $this->sharedStorage->set('full_name', $fullName);
 
@@ -348,6 +349,14 @@ final class AddressBookContext implements Context
         $expectedFullName = sprintf('%s %s', $address->getFirstName(), $address->getLastName());
 
         Assert::same($actualFullName, $expectedFullName);
+    }
+
+    /**
+     * @Then I should be able to update it without unexpected alert
+     */
+    public function iShouldBeAbleToUpdateItWithoutUnexpectedAlert(): void
+    {
+        $this->addressBookUpdatePage->waitForFormToStopLoading();
     }
 
     /**

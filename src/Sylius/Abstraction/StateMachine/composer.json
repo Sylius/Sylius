@@ -27,6 +27,9 @@
         "winzou/state-machine": "^0.4",
         "winzou/state-machine-bundle": "^0.6"
     },
+    "suggest": {
+        "twig/twig": "Access the state machine in your twig templates (^2.12|^3.3)"
+    },
     "require-dev": {
         "matthiasnoback/symfony-config-test": "^4.2",
         "phpunit/phpunit": "^9.5",
