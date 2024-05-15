@@ -1,4 +1,4 @@
-{% if sm_can(data, 'ship', 'sylius_shipment') %}
+{% if sylius_sm_can(data, 'sylius_shipment', 'ship') %}
     {{ render(controller('sylius.controller.shipment::updateAction', {
         '_sylius': {
             'event': 'ship',
