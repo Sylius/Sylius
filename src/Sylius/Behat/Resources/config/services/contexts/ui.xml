@@ -299,7 +299,7 @@
             <argument type="service" id="sylius.behat.page.admin.taxon.create_for_parent" />
             <argument type="service" id="sylius.behat.page.admin.taxon.update" />
             <argument type="service" id="sylius.behat.element.admin.taxon.form" />
-            <argument type="service" id="sylius.behat.element.admin.taxon.form_image" />
+            <argument type="service" id="sylius.behat.element.admin.taxon.image_form" />
             <argument type="service" id="sylius.behat.current_page_resolver" />
             <argument type="service" id="sylius.behat.notification_checker.admin" />
             <argument type="service" id="sylius.behat.java_script_test_helper" />

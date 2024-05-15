@@ -17,7 +17,7 @@ use Behat\Behat\Context\Context;
 use FriendsOfBehat\PageObjectExtension\Page\SymfonyPageInterface;
 use Sylius\Behat\Context\Ui\Admin\Helper\ValidationTrait;
 use Sylius\Behat\Element\Admin\Taxon\FormElementInterface;
-use Sylius\Behat\Element\Admin\Taxon\FormImageElementInterface;
+use Sylius\Behat\Element\Admin\Taxon\ImageFormElementInterface;
 use Sylius\Behat\NotificationType;
 use Sylius\Behat\Page\Admin\Product\UpdateSimpleProductPageInterface;
 use Sylius\Behat\Page\Admin\Taxon\CreateForParentPageInterface;
@@ -41,7 +41,7 @@ final class ManagingTaxonsContext implements Context
         private readonly CreateForParentPageInterface $createForParentPage,
         private readonly UpdatePageInterface $updatePage,
         private readonly FormElementInterface $formElement,
-        private readonly FormImageElementInterface $formImageElement,
+        private readonly ImageFormElementInterface $imageFormElement,
         private readonly CurrentPageResolverInterface $currentPageResolver,
         private readonly NotificationCheckerInterface $notificationChecker,
         private readonly JavaScriptTestHelper $testHelper,
@@ -309,7 +309,7 @@ final class ManagingTaxonsContext implements Context
      */
     public function iAttachImageWithType(string $path, ?string $type = null): void
     {
-        $this->formImageElement->attachImage($path, $type);
+        $this->imageFormElement->attachImage($path, $type);
     }
 
     /**
@@ -325,7 +325,7 @@ final class ManagingTaxonsContext implements Context
      */
     public function thisTaxonShouldHaveAnImageWithType(string $type): void
     {
-        Assert::true($this->formImageElement->isImageWithTypeDisplayed($type));
+        Assert::true($this->imageFormElement->isImageWithTypeDisplayed($type));
     }
 
     /**
@@ -333,7 +333,7 @@ final class ManagingTaxonsContext implements Context
      */
     public function thisTaxonShouldNotHaveAnImageWithType($code)
     {
-        Assert::false($this->formImageElement->isImageWithTypeDisplayed($code));
+        Assert::false($this->imageFormElement->isImageWithTypeDisplayed($code));
     }
 
     /**
@@ -341,7 +341,7 @@ final class ManagingTaxonsContext implements Context
      */
     public function iRemoveAnImageWithType(string $type): void
     {
-        $this->formImageElement->removeImageWithType($type);
+        $this->imageFormElement->removeImageWithType($type);
     }
 
     /**
@@ -349,7 +349,7 @@ final class ManagingTaxonsContext implements Context
      */
     public function iRemoveTheFirstImage(): void
     {
-        $this->formImageElement->removeFirstImage();
+        $this->imageFormElement->removeFirstImage();
     }
 
     /**
@@ -359,7 +359,7 @@ final class ManagingTaxonsContext implements Context
     {
         $this->iWantToModifyATaxon($taxon);
 
-        Assert::same($this->formImageElement->countImages(), 0);
+        Assert::same($this->imageFormElement->countImages(), 0);
     }
 
     /**
@@ -367,7 +367,7 @@ final class ManagingTaxonsContext implements Context
      */
     public function iChangeItsImageToPathForTheType($path, $type): void
     {
-        $this->formImageElement->changeImageWithType($type, $path);
+        $this->imageFormElement->changeImageWithType($type, $path);
     }
 
     /**
@@ -375,7 +375,7 @@ final class ManagingTaxonsContext implements Context
      */
     public function iChangeTheFirstImageTypeTo($type): void
     {
-        $this->formImageElement->modifyFirstImageType($type);
+        $this->imageFormElement->modifyFirstImageType($type);
     }
 
     /**
@@ -386,7 +386,7 @@ final class ManagingTaxonsContext implements Context
     {
         $this->iWantToModifyATaxon($taxon);
 
-        Assert::same($this->formImageElement->countImages(), (int) $count);
+        Assert::same($this->imageFormElement->countImages(), (int) $count);
     }
 
     /**

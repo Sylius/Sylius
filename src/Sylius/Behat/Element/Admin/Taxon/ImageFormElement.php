@@ -16,7 +16,7 @@ namespace Sylius\Behat\Element\Admin\Taxon;
 use Behat\Mink\Exception\ElementNotFoundException;
 use Sylius\Behat\Element\Admin\Crud\FormElement as BaseFormElement;
 
-final class FormImageElement extends BaseFormElement implements FormImageElementInterface
+final class ImageFormElement extends BaseFormElement implements ImageFormElementInterface
 {
     public function attachImage(string $path, ?string $type = null): void
     {
