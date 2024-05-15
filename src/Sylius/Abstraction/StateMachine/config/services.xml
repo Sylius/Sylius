@@ -35,5 +35,10 @@
             <tag name="sylius.state_machine" key="winzou_state_machine" />
         </service>
         <service id="Sylius\Abstraction\StateMachine\StateMachineInterface $winzouStateMachine" alias="sylius_abstraction.state_machine.adapter.winzou_state_machine" />
+
+        <service id="sylius_abstraction.twig.extension.state_machine" class="Sylius\Abstraction\StateMachine\Twig\StateMachineExtension">
+            <argument type="service" id="sylius_abstraction.state_machine" />
+            <tag name="twig.extension" />
+        </service>
     </services>
 </container>
