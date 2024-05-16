@@ -1,0 +1,35 @@
+{% set variant = hookable_metadata.context.variant %}
+{% set channels = hookable_metadata.context.channels %}
+
+<div class="card mb-3">
+    <div class="card-header">
+        <div class="card-title">{{ 'sylius.ui.pricing'|trans }}</div>
+    </div>
+    <div class="table-responsive">
+        <table class="table card-table table-vcenter">
+            <thead>
+            <tr>
+                <th>{{ 'sylius.ui.channel'|trans }}</th>
+                <th class="text-end">{{ 'sylius.ui.price'|trans }}</th>
+                <th class="text-end">{{ 'sylius.ui.original_price'|trans }}</th>
+                <th class="text-end">{{ 'sylius.ui.lowest_price_before_discount'|trans }}</th>
+                <th class="text-end">{{ 'sylius.ui.discounted_by'|trans }}</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for channel_pricing in variant.channelPricings %}
+                {% set channel = attribute(channels, channel_pricing.channelCode) %}
+                {% set currency_code = channel.baseCurrency.code %}
+                {% set price = channel_pricing.price %}
+                {% set original_price = channel_pricing.originalPrice ?? 0 %}
+                {% set lowest_price_before_discount = channel_pricing.lowestPriceBeforeDiscount %}
+
+                <tr {{ sylius_test_html_attribute('variants', '%s.%s'|format(channel.name, variant.name)) }} >
+                    {% hook 'pricing' with {variant, channel, channel_pricing, currency_code, price, original_price, lowest_price_before_discount } %}
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
