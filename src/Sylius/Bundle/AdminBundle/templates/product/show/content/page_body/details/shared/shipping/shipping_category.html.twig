@@ -1,0 +1,12 @@
+{% set variant = hookable_metadata.context.variant %}
+
+<div class="row">
+    <div class="col-12 col-md-4 fw-bold">{{ 'sylius.ui.shipping_category'|trans }}:</div>
+    <div class="col-12 col-md-8">
+        {% if variant.shippingCategory is null %}
+            <i>{{ 'sylius.ui.no_shipping_category'|trans }}</i>
+        {% else %}
+            {{ variant.shippingCategory }}
+        {% endif %}
+    </div>
+</div>
