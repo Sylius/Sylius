@@ -1,0 +1,5 @@
+{% set price = hookable_metadata.context.price %}
+{% set currency_code = hookable_metadata.context.currency_code %}
+{% import '@SyliusAdmin/shared/helper/money.html.twig' as _money %}
+
+<td class="text-end">{{ _money.format(price, currency_code) }}</td>
