@@ -2,12 +2,12 @@ The Book
 ========
 
 The Developer's guide to leveraging the flexibility of Sylius. Here you will find all the concepts used in Sylius.
-The Books helps to understand how Sylius works.
+The Book will help you to understand how Sylius works.
 
 Introduction
 ------------
 
-Introduction aims to describe the philosophy of Sylius. It will also teach you about environments before you start installing it.
+Here we describe the philosophy of Sylius. It will also teach you about environments before you start installing it.
 
 .. toctree::
     :hidden:
@@ -19,8 +19,7 @@ Introduction aims to describe the philosophy of Sylius. It will also teach you a
 Installation
 ------------
 
-The installation chapter is of course a comprehensive guide to installing Sylius on your machine, but it also provides
-a general instruction on upgrading Sylius in your project.
+This chapter is a comprehensive guide on how to install and upgrade and Sylius on your machine. 
 
 .. toctree::
     :hidden:
@@ -45,7 +44,8 @@ state machines, events and general non e-commerce concepts adopted in the platfo
 Configuration
 -------------
 
-Having knowledge about basics of our architecture we will introduce the three most important concepts - Channels, Locales and Currencies.
+Once you have the knowledge of the basics of the Sylius architecture, 
+we will introduce the three most important concepts - Channels, Locales and Currencies.
 These things have to be configured before you will have a Sylius application up and running.
 
 .. toctree::
@@ -84,7 +84,7 @@ Associations, Reviews, Attributes, Taxons etc.
 Carts & Orders
 --------------
 
-In this chapter you will learn everything you need to know about orders in Sylius.
+In this chapter, you will learn everything you need to know about orders in Sylius.
 This concept comes together with a few additional ones, like promotions, payments, shipments or checkout in general.
 
 You should also have a look here if you are looking for Cart, which is in Sylius an Order in the ``cart`` state.
@@ -104,8 +104,8 @@ API
     The new, unified Sylius API is still under development, that's why the whole ``ApiBundle`` is tagged with ``@experimental``.
     This means that all code from ``ApiBundle`` is excluded from :doc:`Backward Compatibility Promise </book/organization/backward-compatibility-promise>`.
 
-This chapter will explain to you how to start with our new API, show concepts used in it, and you will inform you why we have decided to rebuild entire api from scratch.
-To use this API remember to generate JWT token. For more information, please visit `jwt package documentation <https://github.com/lexik/LexikJWTAuthenticationBundle/blob/master/Resources/doc/index.md#generate-the-ssh-keys/>`_
+This chapter will explain to you how to start with our new API, show concepts used in it, and we will inform you why we have decided to rebuild entire API from scratch.
+To use this API, remember to generate a JWT token. For more information, please visit `jwt package documentation <https://github.com/lexik/LexikJWTAuthenticationBundle/blob/master/Resources/doc/index.md#generate-the-ssh-keys/>`_.
 
 This part of the documentation is about the currently developed unified API for the Sylius platform.
 
@@ -131,7 +131,7 @@ This chapter will introduce you to the world of Sylius' frontend.
 Themes
 ------
 
-Here you will learn basics about the theming concept of sylius. How to change the theme of your shop? keep reading!
+Here you will learn the basics about the theming concept of Sylius. How to change the theme of your shop? Keep reading!
 
 .. toctree::
     :hidden:
@@ -208,7 +208,7 @@ How to get support for Sylius?
 Contributing
 ------------
 
-Guides you how to contribute to Sylius.
+Guides you on how to contribute to Sylius.
 
 .. toctree::
    :hidden:
