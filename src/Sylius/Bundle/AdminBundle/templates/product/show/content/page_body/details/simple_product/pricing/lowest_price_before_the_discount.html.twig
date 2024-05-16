@@ -1,5 +1,0 @@
-{% set currency_code = hookable_metadata.context.currency_code %}
-{% set channel_pricing = hookable_metadata.context.channel_pricing %}
-{% import '@SyliusAdmin/shared/helper/money.html.twig' as _money %}
-
-<td class="text-end">{% if channel_pricing.lowestPriceBeforeDiscount != null %}{{ _money.format(channel_pricing.lowestPriceBeforeDiscount, currency_code) }}{% else %} - {% endif %}</td>
