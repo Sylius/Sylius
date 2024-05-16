@@ -11,8 +11,8 @@ import { Controller } from '@hotwired/stimulus';
 
 /* stimulusFetch: 'lazy' */
 export default class extends Controller {
-    tabErrorBadgeClasses = 'tab-error';
-    accordionErrorBadgeClasses = 'accordion-error';
+    tabErrorBadgeClass = 'tab-error';
+    accordionErrorBadgeClass = 'accordion-error';
     observer;
 
     initialize() {
@@ -53,11 +53,11 @@ export default class extends Controller {
     }
 
     updateFormErrors() {
-        this.updateErrorBadges(this.element.querySelector('[role="tablist"]'), this.tabErrorBadgeClasses);
-        this.updateErrorBadges(this.element.querySelector('div.accordion'), this.accordionErrorBadgeClasses);
+        this.updateErrorBadges(this.element.querySelector('[role="tablist"]'), this.tabErrorBadgeClass);
+        this.updateErrorBadges(this.element.querySelector('div.accordion'), this.accordionErrorBadgeClass);
     }
 
-    updateErrorBadges(controlElementsContainer, badgeClasses) {
+    updateErrorBadges(controlElementsContainer, badgeClass) {
         if (null === controlElementsContainer) {
             return;
         }
@@ -67,7 +67,7 @@ export default class extends Controller {
             const errorsCount = this.countErrors(controlElement);
             if (errorsCount > 0) {
                 const errorElement = document.createElement('div');
-                errorElement.classList.add(...badgeClasses.split(' '));
+                errorElement.classList.add(badgeClass);
                 errorElement.innerText = errorsCount.toString();
                 controlElement.appendChild(errorElement);
             }
