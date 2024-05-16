@@ -161,7 +161,7 @@
             <tag name="ux.entity_autocomplete_field" />
         </service>
 
-        <service id="sylius_admin.form.extension.catalog_promotion" class="Sylius\Bundle\AdminBundle\Form\Type\CatalogPromotionType">
+        <service id="sylius_admin.form.type.catalog_promotion" class="Sylius\Bundle\AdminBundle\Form\Type\CatalogPromotionType">
             <argument>%sylius.catalog_promotion.scopes_types%</argument>
             <argument>%sylius.catalog_promotion.actions_types%</argument>
             <tag name="form.type" />

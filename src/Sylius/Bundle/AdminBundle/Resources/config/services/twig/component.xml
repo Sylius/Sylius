@@ -260,16 +260,6 @@
             />
         </service>
 
-        <service id="Sylius\Bundle\AdminBundle\Twig\Component\CatalogPromotion\FormComponent">
-            <argument type="service" id="form.factory" />
-            <argument>Sylius\Bundle\AdminBundle\Form\Type\CatalogPromotionType</argument>
-        </service>
-
-        <service id="Sylius\Bundle\AdminBundle\Twig\Component\Product\GenerateProductVariantsFormComponent">
-            <argument type="service" id="form.factory" />
-            <argument>Sylius\Bundle\AdminBundle\Form\Type\ProductGenerateVariantsType</argument>
-        </service>
-
         <service
             id="sylius_admin.twig.component.shipment.ship_form"
             class="Sylius\Bundle\AdminBundle\Twig\Component\Shipment\ShipFormComponent"
