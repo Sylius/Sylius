@@ -69,10 +69,10 @@ By default, the database connection is pre-configured to work with a following M
 
     You might also use any other RDBMS (like PostgreSQL), but our database migrations support MySQL only.
 
-NPM Package Manager
--------------------
+NPM and Node
+------------
 
-Sylius Frontend depends on `npm packages <https://docs.npmjs.com/about-npm>`_ for it to run you need to have Node.js installed.
+The Sylius Frontend depends on `npm packages <https://docs.npmjs.com/about-npm>`_, so you need to have Node.js and npm installed.
 Current supported versions of Node.js are:
 
 +---------------+-----------------------+
