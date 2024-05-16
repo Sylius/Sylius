@@ -1,0 +1,22 @@
+{% set variant = hookable_metadata.context.variant %}
+{% set product = hookable_metadata.context.product %}
+
+<td>
+    <div class="d-flex gap-3 align-items-center">
+        <div>
+            {% if product.imagesByType('thumbnail') is not empty %}
+                {% set path = product.imagesByType('thumbnail').first.path|imagine_filter(filter|default('sylius_admin_product_thumbnail')) %}
+            {% elseif product.images.first %}
+                {% set path = product.images.first.path|imagine_filter(filter|default('sylius_admin_product_thumbnail')) %}
+            {% else %}
+                {% set path = asset('build/admin/images/200x200.png', 'admin') %}
+            {% endif %}
+
+            <img src="{{ path }}" alt="{{ product.name }}" class="avatar" />
+        </div>
+        <div>
+            <div><strong {{ sylius_test_html_attribute('product-variant-name') }}>{{ variant.name }}</strong></div>
+            <div class="text-muted small">{{ variant.code }}</div>
+        </div>
+    </div>
+</td>

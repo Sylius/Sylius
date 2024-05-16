@@ -1,0 +1,7 @@
+{% set variant = hookable_metadata.context.variant %}
+
+<td class="text-center">
+    <span>
+        {% include '@SyliusAdmin/shared/grid/field/boolean.html.twig' with { data: variant.enabled } %}
+    </span>
+</td>
