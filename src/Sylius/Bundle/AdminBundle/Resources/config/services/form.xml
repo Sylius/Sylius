@@ -112,6 +112,11 @@
             <tag name="form.type_extension" />
         </service>
 
+        <service id="sylius_admin.form.type.translatable_autocomplete" class="Sylius\Bundle\AdminBundle\Form\Type\TranslatableAutocompleteType">
+            <argument type="service" id="sylius.context.locale" />
+            <tag name="form.type" />
+        </service>
+
         <service id="sylius_admin.form.type.product_autocomplete" class="Sylius\Bundle\AdminBundle\Form\Type\ProductAutocompleteType">
             <argument>%sylius.model.product.class%</argument>
             <tag name="form.type" />

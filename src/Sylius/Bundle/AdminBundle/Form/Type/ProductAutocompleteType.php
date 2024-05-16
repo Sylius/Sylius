@@ -16,7 +16,6 @@ namespace Sylius\Bundle\AdminBundle\Form\Type;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\UX\Autocomplete\Form\AsEntityAutocompleteField;
-use Symfony\UX\Autocomplete\Form\BaseEntityAutocompleteType;
 
 #[AsEntityAutocompleteField(
     alias: 'sylius_admin_product',
@@ -35,7 +34,6 @@ final class ProductAutocompleteType extends AbstractType
             'class' => $this->productClass,
             'choice_name' => 'name',
             'choice_value' => 'code',
-            'searchable_fields' => ['code', 'translations.name'],
         ]);
     }
 
@@ -46,6 +44,6 @@ final class ProductAutocompleteType extends AbstractType
 
     public function getParent(): string
     {
-        return BaseEntityAutocompleteType::class;
+        return TranslatableAutocompleteType::class;
     }
 }
