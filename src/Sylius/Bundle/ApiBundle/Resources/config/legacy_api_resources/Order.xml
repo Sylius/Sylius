@@ -481,16 +481,6 @@
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/admin/orders/{tokenValue}/payments</attribute>
             </subresourceOperation>
-
-            <subresourceOperation name="adjustments_get_subresource">
-                <attribute name="method">GET</attribute>
-                <attribute name="path">/shop/orders/{tokenValue}/adjustments</attribute>
-            </subresourceOperation>
-
-            <subresourceOperation name="items_adjustments_get_subresource">
-                <attribute name="method">GET</attribute>
-                <attribute name="path">/shop/orders/{tokenValue}/items/{items}/adjustments</attribute>
-            </subresourceOperation>
         </subresourceOperations>
 
         <property name="id" identifier="false" writable="false" />
