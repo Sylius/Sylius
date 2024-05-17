@@ -35,5 +35,12 @@
             <argument type="service" id="Sylius\Bundle\ApiBundle\Context\UserContextInterface" />
             <tag name="api_platform.state_processor" />
         </service>
+
+        <service id="sylius_api.state_processor.post.upload_avatar_image" class="Sylius\Bundle\ApiBundle\StateProcessor\Post\UploadAvatarImageProcessor">
+            <argument type="service" id="api_platform.doctrine.orm.state.persist_processor" />
+            <argument type="service" id="sylius_api.creator.avatar_image" />
+            <argument type="service" id="sylius.repository.avatar_image" />
+            <tag name="api_platform.state_processor" />
+        </service>
     </services>
 </container>

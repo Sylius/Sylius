@@ -46,9 +46,12 @@
 
             <operation
                 class="ApiPlatform\Metadata\Post"
-                controller="Sylius\Bundle\ApiBundle\Controller\UploadAvatarImageAction"
+                processor="sylius_api.state_processor.post.upload_avatar_image"
                 deserialize="false"
             >
+                <inputFormats>
+                    <format name="multipart">multipart/form-data</format>
+                </inputFormats>
                 <normalizationContext>
                     <values>
                         <value name="groups">
