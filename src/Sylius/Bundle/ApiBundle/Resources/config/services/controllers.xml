@@ -40,13 +40,6 @@
             <argument type="service" id="Sylius\Bundle\CoreBundle\CatalogPromotion\Processor\CatalogPromotionRemovalProcessorInterface" />
         </service>
 
-        <service id="Sylius\Bundle\ApiBundle\Controller\UploadAvatarImageAction">
-            <argument type="service" id="sylius.factory.avatar_image" />
-            <argument type="service" id="sylius.repository.avatar_image" />
-            <argument type="service" id="sylius.repository.admin_user" />
-            <argument type="service" id="sylius.image_uploader" />
-        </service>
-
         <service id="Sylius\Bundle\ApiBundle\Controller\UploadProductImageAction">
             <argument type="service" id="Sylius\Bundle\ApiBundle\Creator\ProductImageCreator" />
         </service>

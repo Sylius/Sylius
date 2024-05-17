@@ -40,13 +40,13 @@ final class ProductImageCreator implements ImageCreatorInterface
     }
 
     /** @param array<mixed> $context */
-    public function create(string $ownerCode, ?\SplFileInfo $file, ?string $type, array $context = []): ImageInterface
+    public function create(string $ownerIdentifier, ?\SplFileInfo $file, ?string $type, array $context = []): ImageInterface
     {
         if (null === $file) {
             throw new NoFileUploadedException();
         }
 
-        $owner = $this->productRepository->findOneBy(['code' => $ownerCode]);
+        $owner = $this->productRepository->findOneBy(['code' => $ownerIdentifier]);
         if (null === $owner) {
             throw new ProductNotFoundException();
         }

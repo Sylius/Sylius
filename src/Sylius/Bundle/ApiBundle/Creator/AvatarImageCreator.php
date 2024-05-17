@@ -13,24 +13,24 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\Creator;
 
+use Sylius\Bundle\ApiBundle\Exception\AdminUserNotFoundException;
 use Sylius\Bundle\ApiBundle\Exception\NoFileUploadedException;
-use Sylius\Bundle\ApiBundle\Exception\TaxonNotFoundException;
+use Sylius\Component\Core\Model\AdminUserInterface;
+use Sylius\Component\Core\Model\AvatarImageInterface;
 use Sylius\Component\Core\Model\ImageInterface;
-use Sylius\Component\Core\Model\TaxonImageInterface;
-use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Core\Uploader\ImageUploaderInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
-use Sylius\Component\Taxonomy\Repository\TaxonRepositoryInterface;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
 
-final class TaxonImageCreator implements ImageCreatorInterface
+final class AvatarImageCreator implements ImageCreatorInterface
 {
     /**
-     * @param FactoryInterface<TaxonImageInterface> $taxonImageFactory
-     * @param TaxonRepositoryInterface<TaxonInterface> $taxonRepository
+     * @param FactoryInterface<AvatarImageInterface> $avatarImageFactory
+     * @param RepositoryInterface<AdminUserInterface> $adminUserRepository
      */
     public function __construct(
-        private FactoryInterface $taxonImageFactory,
-        private TaxonRepositoryInterface $taxonRepository,
+        private FactoryInterface $avatarImageFactory,
+        private RepositoryInterface $adminUserRepository,
         private ImageUploaderInterface $imageUploader,
     ) {
     }
@@ -42,19 +42,18 @@ final class TaxonImageCreator implements ImageCreatorInterface
             throw new NoFileUploadedException();
         }
 
-        $owner = $this->taxonRepository->findOneBy(['code' => $ownerIdentifier]);
+        $owner = $this->adminUserRepository->find($ownerIdentifier);
         if (null === $owner) {
-            throw new TaxonNotFoundException();
+            throw new AdminUserNotFoundException();
         }
 
-        $taxonImage = $this->taxonImageFactory->createNew();
-        $taxonImage->setFile($file);
-        $taxonImage->setType($type);
+        $avatarImage = $this->avatarImageFactory->createNew();
+        $avatarImage->setFile($file);
 
-        $owner->addImage($taxonImage);
+        $owner->setImage($avatarImage);
 
-        $this->imageUploader->upload($taxonImage);
+        $this->imageUploader->upload($avatarImage);
 
-        return $taxonImage;
+        return $avatarImage;
     }
 }
