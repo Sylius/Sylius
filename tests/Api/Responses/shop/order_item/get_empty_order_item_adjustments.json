@@ -2,6 +2,6 @@
     "@context": "\/api\/v2\/contexts\/Adjustment",
     "@id": "\/api\/v2\/shop\/orders\/WRONG_TOKEN\/items\/@integer@\/adjustments",
     "@type": "hydra:Collection",
-    "hydra:member": [],
-    "hydra:totalItems": 0
+    "hydra:totalItems": 0,
+    "hydra:member": []
 }
