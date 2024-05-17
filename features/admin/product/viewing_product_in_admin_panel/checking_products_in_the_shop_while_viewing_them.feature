@@ -11,20 +11,20 @@ Feature: Checking products in the shop while viewing them
         And I am logged in as an administrator
         And I am browsing products
 
-    @todo @ui @no-api
+    @ui @no-api
     Scenario: Accessing product show page in shop from the product show page where product is available in more than one channel
         Given this product is available in the "Europe" channel
         When I access the "Bugatti" product
         And I show this product in the "Europe" channel
         Then I should see this product in the "Europe" channel in the shop
 
-    @todo @ui @no-api
+    @ui @no-api
     Scenario: Accessing product show page in shop from the product show page where product is available in one channel
         When I access the "Bugatti" product
         And I show this product in this channel
         Then I should see this product in the "Europe" channel in the shop
 
-    @todo @ui @no-api
+    @ui @no-api
     Scenario: Being unable to access product show page in shop when the product is disabled
         Given this product has been disabled
         When I access the "Bugatti" product
