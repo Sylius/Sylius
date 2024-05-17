@@ -1,0 +1,50 @@
+{% from '@SyliusAdmin/shared/helper/icon.html.twig' import icon as _icon %}
+
+{% set product = (hookable_metadata.context.resource) %}
+{% set enabled_channels = product.channels|filter(channel => channel.enabled == true) %}
+
+{% if sylius_bundle_loaded_checker('SyliusShopBundle') %}
+    {% if not product.enabled or enabled_channels|length < 1 %}
+        <a class="btn disabled" href="{{ (url is not defined) ? '#' : url|raw }}" target="_blank" {{ sylius_test_html_attribute('view-in-store') }}>
+            {{ _icon({ icon: 'arrow-up-right', class: 'icon icon-tabler' }) }}
+            {{ 'sylius.ui.view_in_store'|trans }}
+        </a>
+    {% elseif enabled_channels|length > 1 %}
+        <div class="dropdown">
+            <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                {{ 'sylius.ui.view_in_store'|trans }}
+            </button>
+            <ul class="dropdown-menu" {{ sylius_test_html_attribute('view-in-store') }}>
+                {% for channel in enabled_channels %}
+                    {% set product_translation = sylius_product_translation(product, channel) %}
+                    {% if product_translation is not null %}
+                        {% set url = sylius_channel_url(path('sylius_shop_product_show', {'slug': product_translation.slug, '_locale': product_translation.locale}), channel) %}
+                    {% endif %}
+
+                    <li>
+                        <a
+                            class="dropdown-item{% if url is not defined %} disabled{% endif %}"
+                            href="{{ (url is not defined) ? '#' : url|raw }}"
+                            target="_blank"
+                        >
+                            {{ _icon({ icon: 'arrow-up-right', class: 'icon dropdown-item-icon icon-tabler' }) }}
+                            {{ channel.name }} ({{ channel.code }})
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% else %}
+        {% for channel in enabled_channels %}
+            {% set product_translation = sylius_product_translation(product, channel) %}
+            {% if product_translation is not null %}
+                {% set url = sylius_channel_url(path('sylius_shop_product_show', {'slug': product_translation.slug, '_locale': product_translation.locale}), channel) %}
+            {% endif %}
+
+            <a class="btn" href="{{ (url is not defined) ? '#' : url|raw }}" target="_blank" {{ sylius_test_html_attribute('view-in-store') }}>
+                {{ _icon({ icon: 'arrow-up-right', class: 'icon icon-tabler' }) }}
+                {{ 'sylius.ui.view_in_store'|trans }}
+            </a>
+        {% endfor %}
+    {% endif %}
+{% endif %}

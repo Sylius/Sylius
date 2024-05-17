@@ -285,22 +285,22 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
 
     public function getShowProductInSingleChannelUrl(): string
     {
-        return $this->getElement('show_product_single_button')->getAttribute('href');
+        return $this->getElement('show_product_button')->getAttribute('href');
     }
 
     public function isShowInShopButtonDisabled(): bool
     {
-        return $this->getElement('show_product_single_button')->hasClass('disabled');
+        return $this->getElement('show_product_button')->hasClass('disabled');
     }
 
     public function showProductInChannel(string $channel): void
     {
-        $this->getElement('show_product_dropdown')->clickLink($channel);
+        $this->getElement('show_product_button')->clickLink($channel);
     }
 
     public function showProductInSingleChannel(): void
     {
-        $this->getElement('show_product_single_button')->click();
+        $this->getElement('show_product_button')->click();
     }
 
     public function disable(): void
@@ -365,8 +365,7 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
                 'product_taxon' => '#sylius-product-taxonomy-tree .item .header:contains("%taxonName%") input',
                 'product_taxons' => '#sylius_product_productTaxons',
                 'shipping_required' => '#sylius_product_variant_shippingRequired',
-                'show_product_dropdown' => '.scrolling.menu',
-                'show_product_single_button' => '[data-test-show-product-in-shop-page]',
+                'show_product_button' => '[data-test-view-in-store]',
                 'slug' => '#sylius_product_translations_%locale%_slug',
                 'tab' => '.menu [data-tab="%name%"]',
                 'taxonomy' => 'a[data-tab="taxonomy"]',
