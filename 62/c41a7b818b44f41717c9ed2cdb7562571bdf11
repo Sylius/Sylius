@@ -1,0 +1,27 @@
+---------------------------------------------------------------------------
+
+by github-actions[bot] at 2024-05-15T11:33:14Z
+
+### [Bunnyshell](https://www.bunnyshell.com) Preview Environment deployment failed
+
+Check https://github.com/Sylius/Sylius/actions/runs/9094119309 for details.
+
+Available commands:
+- `/bns:deploy` to redeploy the environment
+- `/bns:delete` to remove the environment
+<!-- thollander/actions-comment-pull-request "bunnyshell-preview-env" -->
+
+---------------------------------------------------------------------------
+
+by TheMilek at 2024-05-17T06:13:03Z
+
+> Some other classes were moved as well, for instance: `Sylius\Bundle\CoreBundle\Form\Type\CatalogPromotionScope\ForProductsScopeConfigurationType` These classes should be aliased and a proper upgrade note should exist.
+
+but this class wasn't moved https://github.com/Sylius/Sylius/blob/bootstrap-admin-panel/src/Sylius/Bundle/CoreBundle/Form/Type/CatalogPromotionScope/ForProductsScopeConfigurationType.php
+🤔
+
+---------------------------------------------------------------------------
+
+by GSadee at 2024-05-17T06:35:54Z
+
+Thanks, Kamil! :tada:
