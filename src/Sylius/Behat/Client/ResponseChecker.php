@@ -108,7 +108,7 @@ final class ResponseChecker implements ResponseCheckerInterface
         return $response->getStatusCode() === Response::HTTP_OK;
     }
 
-    public function hasValue(Response $response, string $key, bool|int|string $value): bool
+    public function hasValue(Response $response, string $key, bool|int|string|null $value): bool
     {
         return $this->getResponseContentValue($response, $key) === $value;
     }
