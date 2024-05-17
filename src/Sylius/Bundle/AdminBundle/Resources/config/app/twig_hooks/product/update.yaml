@@ -14,13 +14,9 @@ twig_hooks:
                     method: 'PUT'
         
         'sylius_admin.product.update.content.header.title_block.actions':
-            more:
-                template: '@SyliusAdmin/product/update/header/title_block/actions/more.html.twig'
-                priority: 32
-
-        'sylius_admin.product.update.content.header.title_block.actions.more':
             view_in_store:
-                template: '@SyliusAdmin/product/update/header/title_block/actions/more/view_in_store.html.twig'
+                template: '@SyliusAdmin/product/common/header/title_block/actions/view_in_store.html.twig'
+                priority: 32
 
         'sylius_admin.product.update.content.form':
             side_navigation:
