@@ -1,5 +1,19 @@
 {% extends 'bootstrap_5_layout.html.twig' %}
 
+{%- block form_start -%}
+    {%- do form.setMethodRendered() -%}
+    {% set method = method|upper %}
+    {%- if method in ["GET", "POST"] -%}
+        {% set form_method = method %}
+    {%- else -%}
+        {% set form_method = "POST" %}
+    {%- endif -%}
+    <form{% if name != '' %} name="{{ name }}"{% endif %} method="{{ form_method|lower }}"{% if action != '' %} action="{{ action }}"{% endif %}{{ block('attributes') }}{% if multipart %} enctype="multipart/form-data"{% endif %} {{ stimulus_controller('compound-form-errors') }}>
+    {%- if form_method != method -%}
+        <input type="hidden" name="_method" value="{{ method }}" />
+    {%- endif -%}
+{%- endblock form_start -%}
+
 {%- block form_row -%}
     {% set row_attr = row_attr|default({})|merge({ class: (row_attr.class|default('mb-3') ~ ' field')|trim }) %}
     {{ parent() }}

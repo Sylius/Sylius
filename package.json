@@ -32,7 +32,7 @@
     "@babel/register": "^7.0.0",
     "@hotwired/stimulus": "^3.0.0",
     "@semantic-ui-react/css-patch": "^1.1.2",
-    "@symfony/stimulus-bridge": "^3.2.0",
+    "@symfony/stimulus-bridge": "^3.2.2",
     "@symfony/webpack-encore": "^3.1.0",
     "eslint": "^8.23.0",
     "eslint-config-airbnb-base": "^15.0.0",

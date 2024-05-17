@@ -14,6 +14,7 @@ import SlugController from "./controllers/SlugController";
 import TaxonSlugController from "./controllers/TaxonSlugController";
 import ProductAttributeAutocomplete from "./controllers/ProductAttributeAutocomplete";
 import SavePositionsController from "./controllers/SavePositionsController";
+import CompoundFormErrorsController from "./controllers/CompoundFormErrorsController";
 
 // Registers Stimulus controllers from controllers.json and in the controllers/ directory
 export const app = startStimulusApp(require.context(
@@ -27,3 +28,4 @@ app.register('slug', SlugController);
 app.register('taxon-slug', TaxonSlugController);
 app.register('product-attribute-autocomplete', ProductAttributeAutocomplete);
 app.register('save-positions', SavePositionsController);
+app.register('compound-form-errors', CompoundFormErrorsController);
