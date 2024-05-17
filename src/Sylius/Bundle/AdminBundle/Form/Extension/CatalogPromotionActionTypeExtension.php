@@ -19,6 +19,14 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Twig\Environment;
 
+trigger_deprecation(
+    'sylius/admin-bundle',
+    '1.14',
+    'The "%s" class is deprecated and will be removed in Sylius 2.0.',
+    CatalogPromotionActionTypeExtension::class,
+);
+
+/** @deprecated since Sylius 1.14 and will be removed in Sylius 2.0. */
 final class CatalogPromotionActionTypeExtension extends AbstractTypeExtension
 {
     private array $actionTypes = [];
