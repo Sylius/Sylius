@@ -36,7 +36,6 @@ final readonly class UploadAvatarImageProcessor implements ProcessorInterface
         $image = $this->avatarImageCreator->create(
             $context['request']->attributes->getString('id'),
             $context['request']->files->get('file'),
-            null,
         );
 
         return $this->processor->process($image, $operation, $uriVariables, $context);

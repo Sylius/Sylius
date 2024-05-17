@@ -52,7 +52,7 @@ final class UploadAvatarImageProcessorSpec extends ObjectBehavior
         $request->files = $files;
 
         $avatarImageRepository->remove(Argument::any())->shouldNotBeCalled();
-        $avatarImageCreator->create('1', $file, null)->willReturn($avatarImage);
+        $avatarImageCreator->create('1', $file)->willReturn($avatarImage);
 
         $processor
             ->process($avatarImage->getWrappedObject(), $operation, [], ['request' => $request->getWrappedObject()])
@@ -82,7 +82,7 @@ final class UploadAvatarImageProcessorSpec extends ObjectBehavior
         $request->files = $files;
 
         $avatarImageRepository->remove($oldAvatarImage)->shouldBeCalled();
-        $avatarImageCreator->create('1', $file, null)->willReturn($avatarImage);
+        $avatarImageCreator->create('1', $file)->willReturn($avatarImage);
 
         $processor
             ->process($avatarImage->getWrappedObject(), $operation, [], ['request' => $request->getWrappedObject()])

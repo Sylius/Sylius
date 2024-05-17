@@ -40,7 +40,7 @@ final class ProductImageCreator implements ImageCreatorInterface
     }
 
     /** @param array<mixed> $context */
-    public function create(string $ownerIdentifier, ?\SplFileInfo $file, ?string $type, array $context = []): ImageInterface
+    public function create(string $ownerIdentifier, ?\SplFileInfo $file, ?string $type = null, array $context = []): ImageInterface
     {
         if (null === $file) {
             throw new NoFileUploadedException();
