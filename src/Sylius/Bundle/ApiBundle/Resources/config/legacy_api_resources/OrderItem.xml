@@ -43,11 +43,6 @@
         </itemOperations>
 
         <subresourceOperations>
-            <subresourceOperation name="adjustments_get_subresource">
-                <attribute name="method">GET</attribute>
-                <attribute name="path">/admin/order-items/{id}/adjustments</attribute>
-            </subresourceOperation>
-
             <subresourceOperation name="api_orders_items_get_subresource">
                 <attribute name="normalization_context">
                     <attribute name="groups">

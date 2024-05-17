@@ -79,15 +79,5 @@
             <argument type="service" id="sylius.payment_methods_resolver" />
             <tag name="api_platform.collection_data_provider" priority="10" />
         </service>
-
-        <service id="Sylius\Bundle\ApiBundle\DataProvider\OrderAdjustmentsSubresourceDataProvider">
-            <argument type="service" id="sylius.repository.order" />
-            <tag name="api_platform.subresource_data_provider" priority="10" />
-        </service>
-
-        <service id="Sylius\Bundle\ApiBundle\DataProvider\OrderItemAdjustmentsSubresourceDataProvider">
-            <argument type="service" id="sylius.repository.order_item" />
-            <tag name="api_platform.subresource_data_provider" priority="10" />
-        </service>
     </services>
 </container>
