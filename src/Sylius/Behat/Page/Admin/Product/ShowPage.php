@@ -26,7 +26,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
 
     public function isShowInShopButtonDisabled(): bool
     {
-        return $this->getElement('show_product_single_button')->hasClass('disabled');
+        return $this->getElement('show_product_button')->hasClass('disabled');
     }
 
     public function getAppliedCatalogPromotionsLinks(string $variantName, string $channelName): array
@@ -60,12 +60,12 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
 
     public function showProductInChannel(string $channel): void
     {
-        $this->getElement('show_product_dropdown')->clickLink($channel);
+        $this->getElement('show_product_button')->clickLink($channel);
     }
 
     public function showProductInSingleChannel(): void
     {
-        $this->getElement('show_product_single_button')->click();
+        $this->getElement('show_product_button')->click();
     }
 
     public function showProductEditPage(): void
@@ -85,8 +85,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
             'edit_product_button' => '#edit-product',
             'edit_variant_button' => '#variants .variants-accordion__title:contains("%variantCode%") .edit-variant',
             'product_name' => '#header h1 .content > span',
-            'show_product_dropdown' => '[data-test-view-in-store]',
-            'show_product_single_button' => '[data-test-view-in-store]',
+            'show_product_button' => '[data-test-view-in-store]',
             'variants' => '#variants',
         ]);
     }
