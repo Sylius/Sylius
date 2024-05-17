@@ -7,6 +7,8 @@ twig_hooks:
         'sylius_admin.product.show.content.header.title_block':
             title:
                 template: '@SyliusAdmin/product/show/content/header/title_block/title.html.twig'
+            actions:
+                template: '@SyliusAdmin/product/show/content/header/title_block/actions.html.twig'
                 
         'sylius_admin.product.show.content.header.title_block.actions':
             view_in_store:
