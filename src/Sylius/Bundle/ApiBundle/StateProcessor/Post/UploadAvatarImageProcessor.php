@@ -29,15 +29,15 @@ final readonly class UploadAvatarImageProcessor implements ProcessorInterface
 
     public function process(mixed $data, Operation $operation, array $uriVariables = [], array $context = [])
     {
+        if ($data !== null) {
+            $this->avatarImageRepository->remove($data);
+        }
+
         $image = $this->avatarImageCreator->create(
             $context['request']->attributes->getString('id'),
             $context['request']->files->get('file'),
             null,
         );
-
-        if ($data !== null) {
-            $this->avatarImageRepository->remove($data);
-        }
 
         return $this->processor->process($image, $operation, $uriVariables, $context);
     }

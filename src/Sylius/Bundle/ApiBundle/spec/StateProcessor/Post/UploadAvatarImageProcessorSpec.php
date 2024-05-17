@@ -16,6 +16,7 @@ namespace spec\Sylius\Bundle\ApiBundle\StateProcessor\Post;
 use ApiPlatform\Metadata\Post;
 use ApiPlatform\State\ProcessorInterface;
 use PhpSpec\ObjectBehavior;
+use Prophecy\Argument;
 use Sylius\Bundle\ApiBundle\Creator\ImageCreatorInterface;
 use Sylius\Component\Core\Model\AvatarImageInterface;
 use Sylius\Component\Core\Repository\AvatarImageRepositoryInterface;
@@ -35,6 +36,7 @@ final class UploadAvatarImageProcessorSpec extends ObjectBehavior
     function it_creates_and_processes_an_avatar_image(
         ProcessorInterface $processor,
         ImageCreatorInterface $avatarImageCreator,
+        AvatarImageRepositoryInterface $avatarImageRepository,
         Request $request,
         ParameterBag $attributes,
         ParameterBag $files,
@@ -49,6 +51,7 @@ final class UploadAvatarImageProcessorSpec extends ObjectBehavior
         $files->get('file')->willReturn($file);
         $request->files = $files;
 
+        $avatarImageRepository->remove(Argument::any())->shouldNotBeCalled();
         $avatarImageCreator->create('1', $file, null)->willReturn($avatarImage);
 
         $processor
@@ -78,8 +81,8 @@ final class UploadAvatarImageProcessorSpec extends ObjectBehavior
         $files->get('file')->willReturn($file);
         $request->files = $files;
 
-        $avatarImageCreator->create('1', $file, null)->willReturn($avatarImage);
         $avatarImageRepository->remove($oldAvatarImage)->shouldBeCalled();
+        $avatarImageCreator->create('1', $file, null)->willReturn($avatarImage);
 
         $processor
             ->process($avatarImage->getWrappedObject(), $operation, [], ['request' => $request->getWrappedObject()])
