@@ -1,20 +1,22 @@
 {
-    "@context": "/api/v2/contexts/Order",
-    "@id": "/api/v2/admin/orders",
+    "@context": "/api/v2/contexts/Adjustment",
+    "@id": "/api/v2/admin/orders/nAWw2jewpA/adjustments",
     "@type": "hydra:Collection",
+    "hydra:totalItems": 1,
     "hydra:member": [
         {
             "@id": "/api/v2/admin/adjustments/@integer@",
             "@type": "Adjustment",
-            "shipment": "/api/v2/admin/shipments/@integer@",
             "id": @integer@,
-            "order": "/api/v2/admin/orders/nAWw2jewpA",
             "type": "shipping",
             "label": "UPS",
+            "order": "/api/v2/admin/orders/nAWw2jewpA",
+            "orderItem": null,
+            "orderItemUnit": null,
+            "shipment": "/api/v2/admin/shipments/@integer@",
             "amount": 500,
             "neutral": false,
             "locked": false
         }
-    ],
-    "hydra:totalItems": 1
+    ]
 }

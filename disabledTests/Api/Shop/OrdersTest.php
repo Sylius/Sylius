@@ -135,29 +135,6 @@ final class OrdersTest extends JsonApiTestCase
     }
 
     /** @test */
-    public function it_gets_order_adjustments(): void
-    {
-        $this->setUpDefaultGetHeaders();
-        $this->loadFixturesFromFiles([
-            'channel.yaml',
-            'cart.yaml',
-            'country.yaml',
-            'shipping_method.yaml',
-            'payment_method.yaml',
-        ]);
-
-        $tokenValue = 'nAWw2jewpA';
-        $this->placeOrder($tokenValue);
-
-        $this->requestGet(sprintf('/api/v2/shop/orders/%s/adjustments', $tokenValue));
-
-        $this->assertResponse(
-            $this->client->getResponse(),
-            'shop/order/get_order_adjustments',
-        );
-    }
-
-    /** @test */
     public function it_update_payment_method_on_order(): void
     {
         $this->setUpDefaultGetHeaders();
