@@ -1,0 +1,11 @@
+{% import '@SyliusAdmin/shared/helper/money.html.twig' as _money %}
+
+{% set order = hookable_metadata.context.resource %}
+
+<tfoot>
+    <tr>
+        <td class="h3 mb-0" colspan="7">{{ 'sylius.ui.total'|trans }}</td>
+        <td class="text-end h3 mb-0">{{ _money.format(order.taxTotal, order.currencyCode) }}</td>
+        <td class="text-end h3 mb-0" {{ sylius_test_html_attribute('items-total') }}>{{ _money.format(order.itemsTotal, order.currencyCode) }}</td>
+    </tr>
+</tfoot>

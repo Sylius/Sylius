@@ -14,6 +14,13 @@
     <td>
         <div class="d-md-flex justify-content-between">
             <div><strong>{{ 'sylius.ui.promotion_total'|trans }}:</strong></div>
+            <div class="text-muted text-md-end">
+                {% for label, amount in promotionAdjustments  %}
+                    <div {{ sylius_test_html_attribute('promotion', label) }}>
+                        {{ label }}: <span {{ sylius_test_html_attribute('discount') }}>{{ _money.format(amount, order.currencyCode) }}</span>
+                    </div>
+                {% endfor %}
+            </div>
         </div>
     </td>
     <td class="text-end" {{ sylius_test_html_attribute('promotion-total') }}>

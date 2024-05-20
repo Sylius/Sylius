@@ -12,6 +12,6 @@
             </tbody>
         </table>
     {% else %}
-        <span class="px-3 text-secondary italic">{{ 'sylius.ui.no_payments'|trans }}</span>
+        <span class="px-3 text-secondary italic" {{ sylius_test_html_attribute('no-payments') }}>{{ 'sylius.ui.no_payments'|trans }}</span>
     {% endif %}
 </div>

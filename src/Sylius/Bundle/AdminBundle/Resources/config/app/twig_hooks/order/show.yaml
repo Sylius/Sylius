@@ -32,6 +32,54 @@ twig_hooks:
             shipments:
                 template: '@SyliusAdmin/order/show/content/sections/shipments.html.twig'
 
+        'sylius_admin.order.show.content.sections.items':
+            head:
+                template: '@SyliusAdmin/order/show/content/sections/items/head.html.twig'
+            body:
+                template: '@SyliusAdmin/order/show/content/sections/items/body.html.twig'
+            foot:
+                template: '@SyliusAdmin/order/show/content/sections/items/foot.html.twig'
+
+        'sylius_admin.order.show.content.sections.items.head':
+            item:
+                template: '@SyliusAdmin/order/show/content/sections/items/head/item.html.twig'
+            unit_price:
+                template: '@SyliusAdmin/order/show/content/sections/items/head/unit_price.html.twig'
+            unit_discount:
+                template: '@SyliusAdmin/order/show/content/sections/items/head/unit_discount.html.twig'
+            distributed_order_discount:
+                template: '@SyliusAdmin/order/show/content/sections/items/head/distributed_order_discount.html.twig'
+            discounted_unit_price:
+                template: '@SyliusAdmin/order/show/content/sections/items/head/discounted_unit_price.html.twig'
+            quantity:
+                template: '@SyliusAdmin/order/show/content/sections/items/head/quantity.html.twig'
+            subtotal:
+                template: '@SyliusAdmin/order/show/content/sections/items/head/subtotal.html.twig'
+            tax:
+                template: '@SyliusAdmin/order/show/content/sections/items/head/tax.html.twig'
+            total:
+                template: '@SyliusAdmin/order/show/content/sections/items/head/total.html.twig'
+
+        'sylius_admin.order.show.content.sections.items.body':
+            item:
+                template: '@SyliusAdmin/order/show/content/sections/items/body/item.html.twig'
+            unit_price:
+                template: '@SyliusAdmin/order/show/content/sections/items/body/unit_price.html.twig'
+            unit_discount:
+                template: '@SyliusAdmin/order/show/content/sections/items/body/unit_discount.html.twig'
+            distributed_order_discount:
+                template: '@SyliusAdmin/order/show/content/sections/items/body/distributed_order_discount.html.twig'
+            discounted_unit_price:
+                template: '@SyliusAdmin/order/show/content/sections/items/body/discounted_unit_price.html.twig'
+            quantity:
+                template: '@SyliusAdmin/order/show/content/sections/items/body/quantity.html.twig'
+            subtotal:
+                template: '@SyliusAdmin/order/show/content/sections/items/body/subtotal.html.twig'
+            tax:
+                template: '@SyliusAdmin/order/show/content/sections/items/body/tax.html.twig'
+            total:
+                template: '@SyliusAdmin/order/show/content/sections/items/body/total.html.twig'
+
         'sylius_admin.order.show.content.sections.summary':
             items_total:
                 template: '@SyliusAdmin/order/show/content/sections/summary/items_total.html.twig'
@@ -41,6 +89,34 @@ twig_hooks:
                 template: '@SyliusAdmin/order/show/content/sections/summary/shipping_total.html.twig'
             promotion_total:
                 template: '@SyliusAdmin/order/show/content/sections/summary/promotion_total.html.twig'
+
+        'sylius_admin.order.show.content.sections.payments':
+            header:
+                template: '@SyliusAdmin/order/show/content/sections/payments/header.html.twig'
+            items:
+                template: '@SyliusAdmin/order/show/content/sections/payments/items.html.twig'
+
+        'sylius_admin.order.show.content.sections.payments.header':
+            title:
+                template: '@SyliusAdmin/order/show/content/sections/payments/header/title.html.twig'
+            state:
+                template: '@SyliusAdmin/order/show/content/sections/payments/header/state.html.twig'
+
+        'sylius_admin.order.show.content.sections.payments.item':
+            state:
+                template: '@SyliusAdmin/order/show/content/sections/payments/item/state.html.twig'
+            name:
+                template: '@SyliusAdmin/order/show/content/sections/payments/item/name.html.twig'
+            amount:
+                template: '@SyliusAdmin/order/show/content/sections/payments/item/amount.html.twig'
+            actions:
+                template: '@SyliusAdmin/order/show/content/sections/payments/item/actions.html.twig'
+
+        'sylius_admin.order.show.content.sections.payments.item.actions':
+            complete:
+                template: '@SyliusAdmin/order/show/content/sections/payments/item/actions/complete.html.twig'
+            refund:
+                template: '@SyliusAdmin/order/show/content/sections/payments/item/actions/refund.html.twig'
 
         'sylius_admin.order.show.content.sections.shipments':
             header:
@@ -71,34 +147,6 @@ twig_hooks:
                 template: '@SyliusAdmin/order/show/content/sections/shipments/item/actions/resend_confirmation.html.twig'
             show:
                 template: '@SyliusAdmin/order/show/content/sections/shipments/item/actions/show.html.twig'
-
-        'sylius_admin.order.show.content.sections.payments':
-            header:
-                template: '@SyliusAdmin/order/show/content/sections/payments/header.html.twig'
-            items:
-                template: '@SyliusAdmin/order/show/content/sections/payments/items.html.twig'
-
-        'sylius_admin.order.show.content.sections.payments.header':
-            title:
-                template: '@SyliusAdmin/order/show/content/sections/payments/header/title.html.twig'
-            state:
-                template: '@SyliusAdmin/order/show/content/sections/payments/header/state.html.twig'
-
-        'sylius_admin.order.show.content.sections.payments.item':
-            state:
-                template: '@SyliusAdmin/order/show/content/sections/payments/item/state.html.twig'
-            name:
-                template: '@SyliusAdmin/order/show/content/sections/payments/item/name.html.twig'
-            amount:
-                template: '@SyliusAdmin/order/show/content/sections/payments/item/amount.html.twig'
-            actions:
-                template: '@SyliusAdmin/order/show/content/sections/payments/item/actions.html.twig'
-
-        'sylius_admin.order.show.content.sections.payments.item.actions':
-            complete:
-                template: '@SyliusAdmin/order/show/content/sections/payments/item/actions/complete.html.twig'
-            refund:
-                template: '@SyliusAdmin/order/show/content/sections/payments/item/actions/refund.html.twig'
 
         'sylius_admin.order.show.content.sections#right':
             details:
