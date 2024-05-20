@@ -11,7 +11,7 @@
                     <div class="col-12 col-md-6">
                         {{ form_label(translationForm.slug) }}
                         <div class="input-group mb-3">
-                            {{ form_widget(translationForm.slug) }}
+                            {{ form_widget(translationForm.slug, sylius_test_form_attribute('slug', locale)) }}
                             <button
                                 class="btn btn-outline-secondary"
                                 type="button"
