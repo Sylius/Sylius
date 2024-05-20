@@ -20,7 +20,7 @@ Feature: Seeing aggregated taxes of an order
         And there is a customer "charles.the.great@medieval.com" that placed an order "#00000001"
         And I am logged in as an administrator
 
-    @api @todo @ui
+    @api @ui
     Scenario: Seeing aggregated taxes of products and shipping
         Given the customer bought a single "Composite bow"
         And the customer chose "DHL" shipping method to "United States" with "Offline" payment
@@ -31,7 +31,7 @@ Feature: Seeing aggregated taxes of an order
         And the order's tax total should be "$25.30"
         And the order's total should be "$135.30"
 
-    @api @todo @ui
+    @api @ui
     Scenario: Seeing aggregated taxes of multiple products from different tax rates and shipping
         Given the customer bought a single "Composite bow"
         And the customer bought a "Claymore" and a "Bastard sword"

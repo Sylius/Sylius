@@ -15,7 +15,7 @@ Feature: Seeing taxes of order items
         And there is a customer "lucy@teamlucifer.com" that placed an order "#00000666"
         And I am logged in as an administrator
 
-    @api @todo @ui
+    @api @ui
     Scenario: Seeing taxes of order items
         Given the customer bought a "PHP T-Shirt" and a "Symfony2 T-Shirt"
         And the customer chose "Free" shipping method to "United States" with "Offline" payment
