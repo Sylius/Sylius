@@ -131,7 +131,9 @@ Deployment
 .. toctree::
     :hidden:
 
-    deployment/platform-sh
+    deployment/introduction-to-sylius-cloud
+    deployment/advanced-sylius-cloud-configuration
+    deployment/sylius-cloud-management-basics
     deployment/cron-jobs
 
 .. include:: /cookbook/deployment/map.rst.inc
@@ -182,19 +184,3 @@ API
     api/how_force_login_already_registered_user_during_checkout
 
 .. include:: /cookbook/api/map.rst.inc
-
-Sylius Cloud
-------------
-
-.. toctree::
-    :hidden:
-
-    sylius-cloud/introduction-to-sylius-cloud
-    sylius-cloud/dictionary
-    sylius-cloud/basic-project-setup
-    sylius-cloud/sylius-plus
-    sylius-cloud/environment-configuration
-    sylius-cloud/cloud-management-basics
-    sylius-cloud/troubleshooting
-
-.. include:: /cookbook/sylius-cloud/map.rst.inc
