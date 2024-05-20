@@ -4,7 +4,7 @@
             {{ (_context.title|default('sylius.ui.customer'))|trans }}
         </div>
     </div>
-    <div class="card-body">
+    <div class="card-body" {{ sylius_test_html_attribute('customer') }}>
         <div>
             {% hook 'customer' %}
         </div>

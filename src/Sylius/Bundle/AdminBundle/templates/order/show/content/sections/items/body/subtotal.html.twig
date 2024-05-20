@@ -1,0 +1,13 @@
+{% import '@SyliusAdmin/shared/helper/money.html.twig' as _money %}
+
+{% set orderPromotionAdjustment = constant('Sylius\\Component\\Core\\Model\\AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT') %}
+{% set unitPromotionAdjustment = constant('Sylius\\Component\\Core\\Model\\AdjustmentInterface::ORDER_UNIT_PROMOTION_ADJUSTMENT') %}
+
+{% set order = hookable_metadata.context.resource %}
+{% set item = hookable_metadata.context.item %}
+{% set aggregatedUnitPromotionAdjustments = item.getAdjustmentsTotalRecursively(unitPromotionAdjustment) + item.getAdjustmentsTotalRecursively(orderPromotionAdjustment) %}
+{% set subtotal = (item.unitPrice * item.quantity) + aggregatedUnitPromotionAdjustments %}
+
+<td class="text-end" {{ sylius_test_html_attribute('subtotal') }}>
+    {{ _money.format(subtotal, order.currencyCode) }}
+</td>
