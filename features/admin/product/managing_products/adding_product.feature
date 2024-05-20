@@ -14,6 +14,7 @@ Feature: Adding a new product
         When I want to create a new simple product
         And I specify its code as "BOARD_DICE_BREWING"
         And I name it "Dice Brewing" in "English (United States)"
+        And I generate its slug in "English (United States)"
         And I set its price to "$10.00" for "United States" channel
         And I add it
         Then I should be notified that it has been successfully created
@@ -24,6 +25,7 @@ Feature: Adding a new product
         When I want to create a new simple product
         And I specify its code as "BOARD_DICE_BREWING"
         And I name it "Dice Brewing" in "English (United States)"
+        And I generate its slug in "English (United States)"
         And I set its price to "$10.00" for "United States" channel
         And I set its original price to "$20.00" for "United States" channel
         And I add it
@@ -31,10 +33,11 @@ Feature: Adding a new product
         And the product "Dice Brewing" should appear in the store
 
     @ui @mink:chromedriver @no-api
-    Scenario: Adding a new simple Free product
+    Scenario: Adding a new simple free product
         When I want to create a new simple product
         And I specify its code as "BOARD_DICE_BREWING"
         And I name it "Dice Brewing" in "English (United States)"
+        And I generate its slug in "English (United States)"
         And I set its price to "$0.00" for "United States" channel
         And I add it
         Then I should be notified that it has been successfully created
@@ -45,6 +48,7 @@ Feature: Adding a new product
         When I want to create a new simple product
         And I specify its code as "BOARD_DICE_BREWING"
         And I name it "Dice Brewing" in "English (United States)"
+        And I generate its slug in "English (United States)"
         And I set its price to "$10.00" for "United States" channel
         And I set its shipping category as "Standard"
         And I add it
@@ -56,6 +60,7 @@ Feature: Adding a new product
         When I want to create a new simple product
         And I specify its code as "BOARD_DICE_BREWING"
         And I name it "Dice Brewing" in "English (United States)"
+        And I generate its slug in "English (United States)"
         And I set its price to "$10.00" for "United States" channel
         And I do not want to have shipping required for this product
         And I add it
@@ -68,6 +73,7 @@ Feature: Adding a new product
         When I want to create a new configurable product
         And I specify its code as "WHISKEY_GENTLEMEN"
         And I name it "Gentleman Jack" in "English (United States)"
+        And I generate its slug in "English (United States)"
         And I add it
         Then I should be notified that it has been successfully created
         And the product "Gentleman Jack" should appear in the store
@@ -80,6 +86,7 @@ Feature: Adding a new product
         When I want to create a new configurable product
         And I specify its code as "WHISKEY_GENTLEMEN"
         And I name it "Gentleman Jack" in "English (United States)"
+        And I generate its slug in "English (United States)"
         And I add the "Bottle size" option to it
         And I add it
         Then I should be notified that it has been successfully created
