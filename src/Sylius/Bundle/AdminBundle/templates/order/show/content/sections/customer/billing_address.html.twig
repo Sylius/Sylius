@@ -2,9 +2,11 @@
 
 {% set order = hookable_metadata.context.resource %}
 
-<div>
-    <strong>{{ 'sylius.ui.billing_address'|trans }}</strong>
-</div>
-<div class="mb-3" {{ sylius_test_html_attribute('billing-address') }}>
-    {{ _address.default(order.billingAddress) }}
-</div>
+{% if order.billingAddress is not null %}
+    <div>
+        <strong>{{ 'sylius.ui.billing_address'|trans }}</strong>
+    </div>
+    <div class="mb-3" {{ sylius_test_html_attribute('billing-address') }}>
+        {{ _address.default(order.billingAddress) }}
+    </div>
+{% endif %}

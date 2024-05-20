@@ -585,7 +585,7 @@ final readonly class ManagingOrdersContext implements Context
      */
     public function itShouldHavePaymentState(string $paymentState): void
     {
-        Assert::true($this->showPage->hasPayment($paymentState));
+        Assert::true($this->showPage->hasPaymentWithState($paymentState));
     }
 
     /**
