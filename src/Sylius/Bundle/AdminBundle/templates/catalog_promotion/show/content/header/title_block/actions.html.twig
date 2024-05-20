@@ -1,0 +1,7 @@
+{% set resource = hookable_metadata.context.resource %}
+
+<div class="col-12 col-md-auto ms-auto">
+    <div class="btn-list">
+        {% hook 'actions' with { resource } %}
+    </div>
+</div>

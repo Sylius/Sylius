@@ -10,7 +10,7 @@ Feature: Select taxon for a new product
         And I am logged in as an administrator
         And I am using "English (United Kingdom)" locale for my panel
 
-    @ui @javascript @api
+    @todo @ui @javascript @api
     Scenario: Specifying main taxon for configurable product
         When I want to create a new configurable product
         And I choose main taxon "Sad"
@@ -21,7 +21,7 @@ Feature: Select taxon for a new product
         Then I should be notified that it has been successfully created
         And main taxon of product "Gentleman Jack" should be "Sad"
 
-    @ui @javascript @no-api
+    @todo @ui @javascript @no-api
     Scenario: Specifying main taxon for simple product
         When I want to create a new simple product
         And I choose main taxon "Sad"

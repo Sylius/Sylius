@@ -1,0 +1,13 @@
+{% extends '@SyliusAdmin/shared/layout/base.html.twig' %}
+
+{% block title %}Sylius | {{ 'sylius.ui.administration_panel_login'|trans }}{% endblock %}
+
+{% block body_class %}d-flex flex-column{% endblock %}
+
+{% block body %}
+    <div class="page page-center">
+        <div class="container container-tight py-4">
+            {% hook 'sylius_admin.security.login' with { form, last_error, last_username } %}
+        </div>
+    </div>
+{% endblock %}

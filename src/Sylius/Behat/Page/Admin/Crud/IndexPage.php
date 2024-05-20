@@ -98,7 +98,7 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
         $deletedRow = $tableAccessor->getRowWithFields($table, $parameters);
         $actionButtons = $tableAccessor->getFieldFromRow($table, $deletedRow, 'actions');
 
-        $actionButtons->pressButton('Delete');
+        $actionButtons->pressButton('delete');
     }
 
     public function getActionsForResource(array $parameters): NodeElement
@@ -117,7 +117,7 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
         $table = $this->getElement('table');
 
         $resourceRow = $tableAccessor->getRowWithFields($table, $parameters);
-        $bulkCheckbox = $resourceRow->find('css', '.bulk-select-checkbox');
+        $bulkCheckbox = $resourceRow->find('css', '.form-check-input');
 
         Assert::notNull($bulkCheckbox);
 
@@ -160,13 +160,30 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
         return $this->tableAccessor;
     }
 
+    protected function toggleFilters(): void
+    {
+        $filtersToggle = $this->getElement('filters_toggle');
+        $filtersToggle->click();
+        $this->getDocument()->waitFor(1, function () use ($filtersToggle) {
+            $accordionCollapse = $filtersToggle->find('css', '.accordion-collapse');
+
+            return null !== $accordionCollapse && !$accordionCollapse->hasClass('collapsing');
+        });
+    }
+
+    protected function areFiltersVisible(): bool
+    {
+        return !$this->getElement('filters_toggle')->hasClass('collapsed');
+    }
+
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
             'bulk_actions' => '.sylius-grid-nav__bulk',
-            'confirmation_button' => '#confirmation-button',
+            'confirmation_button' => '[data-confirm-btn-true]',
             'enabled_filter' => '#criteria_enabled',
-            'filter' => 'button:contains("Filter")',
+            'filter' => '[data-test-filter]',
+            'filters_toggle' => '.accordion-button',
             'table' => '.table',
         ]);
     }

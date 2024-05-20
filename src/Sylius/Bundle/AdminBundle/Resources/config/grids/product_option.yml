@@ -17,14 +17,25 @@ sylius_grid:
                     sortable: ~
                     options:
                         template: "@SyliusUi/Grid/Field/position.html.twig"
-                code:
-                    type: string
-                    label: sylius.ui.code
-                    sortable: ~
+                        vars:
+                            th_class: "w-1 text-center"
+                            td_class: "text-center"
                 name:
-                    type: string
+                    type: twig
                     label: sylius.ui.name
                     sortable: translation.name
+                    options:
+                        template: "@SyliusAdmin/shared/grid/field/name.html.twig"
+                        vars:
+                            th_class: "w-75"
+                code:
+                    type: twig
+                    label: sylius.ui.code
+                    sortable: ~
+                    options:
+                        template: "@SyliusAdmin/shared/grid/field/code.html.twig"
+                        vars:
+                            th_class: "w-25"
             filters:
                 search:
                     type: string

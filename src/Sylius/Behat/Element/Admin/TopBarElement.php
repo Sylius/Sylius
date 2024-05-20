@@ -24,19 +24,23 @@ final class TopBarElement extends Element implements TopBarElementInterface
 
     public function hasDefaultAvatarInMainBar(): bool
     {
-        $avatarElement = $this->getDocument()->find('css', 'i.ui.avatar.user.icon');
-
-        return $avatarElement !== null;
+        return $this->getAvatarImagePath() === '';
     }
 
     private function getAvatarImagePath(): string
     {
-        $image = $this->getDocument()->find('css', 'img.ui.avatar.image');
+        $userAvatar = $this->getElement('user_avatar');
 
-        if (null === $image) {
-            return '';
-        }
+        return $userAvatar->getAttribute('data-test-user-avatar');
+    }
 
-        return $image->getAttribute('src');
+    /**
+     * @return array<string, string>
+     */
+    protected function getDefinedElements(): array
+    {
+        return [
+            'user_avatar' => '[data-test-user-avatar]',
+        ];
     }
 }

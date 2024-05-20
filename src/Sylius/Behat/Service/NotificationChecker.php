@@ -18,10 +18,12 @@ use Sylius\Behat\NotificationType;
 use Sylius\Behat\Service\Accessor\NotificationAccessorInterface;
 use Webmozart\Assert\Assert;
 
-final class NotificationChecker implements NotificationCheckerInterface
+final readonly class NotificationChecker implements NotificationCheckerInterface
 {
-    public function __construct(private NotificationAccessorInterface $notificationAccessor)
-    {
+    public function __construct(
+        private NotificationAccessorInterface $notificationAccessor,
+        private array $typeClassMap,
+    ) {
     }
 
     public function checkNotification(string $message, NotificationType $type): void
@@ -40,14 +42,8 @@ final class NotificationChecker implements NotificationCheckerInterface
 
     private function resolveClass(NotificationType $type): string
     {
-        $typeClassMap = [
-            'failure' => 'negative',
-            'info' => 'info',
-            'success' => 'positive',
-        ];
+        Assert::keyExists($this->typeClassMap, $type->__toString());
 
-        Assert::keyExists($typeClassMap, $type->__toString());
-
-        return $typeClassMap[$type->__toString()];
+        return $this->typeClassMap[$type->__toString()];
     }
 }

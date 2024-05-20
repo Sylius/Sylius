@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace spec\Sylius\Bundle\UiBundle\Registry;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\UiBundle\Registry\ComponentBlock;
 use Sylius\Bundle\UiBundle\Registry\TemplateBlock;
 
 final class TemplateBlockSpec extends ObjectBehavior
@@ -70,5 +71,21 @@ final class TemplateBlockSpec extends ObjectBehavior
         $this->getContext()->shouldReturn([]);
         $this->getPriority()->shouldReturn(0);
         $this->isEnabled()->shouldReturn(true);
+    }
+
+    function it_throws_an_exception_when_trying_to_override_template_block_with_component_block(): void
+    {
+        $this->beConstructedWith('block_name', 'event_name', 'block.html.twig', ['foo' => 'bar'], 10, false);
+
+        $exceptionMessage = sprintf(
+            'Trying to overwrite template block "%s" with block of different type "%s".',
+            'block_name',
+            'Sylius\Bundle\UiBundle\Registry\ComponentBlock',
+        );
+
+        $this
+            ->shouldThrow(new \DomainException($exceptionMessage))
+            ->during('overwriteWith', [new ComponentBlock('block_name', 'specific_event_name', 'MyComponent', [], [], 0, false)])
+        ;
     }
 }

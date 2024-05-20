@@ -1,0 +1,11 @@
+<div class="card mb-3">
+    <div class="card-header">
+        <div class="card-title">{{ 'sylius.form.channel.shop_billing_data'|trans }}</div>
+    </div>
+
+    <div class="card-body">
+        <div class="row">
+            {% hook 'shop_billing_data' with { form: hookable_metadata.context.form.shopBillingData } %}
+        </div>
+    </div>
+</div>

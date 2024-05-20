@@ -272,13 +272,16 @@ final readonly class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
-     * @When I remove its every action
+     * @When I remove its last action
      */
-    public function iRemoveItsEveryAction(): void
+    public function iRemoveItsLastAction(): void
     {
         $content = $this->client->getContent();
-        $content['actions'] = [];
-        $this->client->setRequestData($content);
+        $lastKey = array_key_last($content['actions']);
+        if (null !== $lastKey) {
+            unset($content['actions'][$lastKey]);
+            $this->client->setRequestData($content);
+        }
     }
 
     /**
@@ -469,13 +472,39 @@ final readonly class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
-     * @When I remove its every scope
+     * @When I remove its last scope
      */
-    public function iRemoveItsEveryScope(): void
+    public function iRemoveItsLastScope(): void
     {
         $content = $this->client->getContent();
-        $content['scopes'] = [];
+        $lastKey = array_key_last($content['scopes']);
+        if (null !== $lastKey) {
+            unset($content['scopes'][$lastKey]);
+            $this->client->setRequestData($content);
+        }
+    }
+
+    /**
+     * @When I add :productVariant variant to its scope
+     */
+    public function iAddVariantToItsScope(ProductVariantInterface $productVariant): void
+    {
+        $content = $this->client->getContent();
+        $content['scopes'][0]['configuration']['variants'][] = $productVariant->getCode();
         $this->client->setRequestData($content);
+    }
+
+    /**
+     * @When I remove :productVariant variant from its scope
+     */
+    public function iRemoveVariantFromItsScope(ProductVariantInterface $productVariant): void
+    {
+        $content = $this->client->getContent();
+        $key = array_search($productVariant->getCode(), $content['scopes'][0]['configuration']['variants'] ?? []);
+        if (false !== $key) {
+            unset($content['scopes'][0]['configuration']['variants'][$key]);
+            $this->client->setRequestData($content);
+        }
     }
 
     /**
@@ -485,38 +514,20 @@ final readonly class ManagingCatalogPromotionsContext implements Context
         CatalogPromotionInterface $catalogPromotion,
         ProductVariantInterface $productVariant,
     ): void {
+        $this->client->buildUpdateRequest(Resources::CATALOG_PROMOTIONS, $catalogPromotion->getCode());
+
+        $content = $this->client->getContent();
+        unset($content['scopes'][0]);
+        $content['scopes'][0]['type'] = $type;
+        $content['scopes'][0]['configuration'] = $configuration;
+
+        $this->client->setRequestData($content);
+
+        $this->client->update();
         $this->changeFirstScopeConfigurationTo(
             $catalogPromotion,
             InForVariantsScopeVariantChecker::TYPE,
             ['variants' => [$productVariant->getCode()]],
-        );
-    }
-
-    /**
-     * @When /^I edit ("[^"]+" catalog promotion) to be applied on ("[^"]+" taxon)$/
-     */
-    public function iEditCatalogPromotionToBeAppliedOnTaxon(
-        CatalogPromotionInterface $catalogPromotion,
-        TaxonInterface $taxon,
-    ): void {
-        $this->changeFirstScopeConfigurationTo(
-            $catalogPromotion,
-            InForTaxonsScopeVariantChecker::TYPE,
-            ['taxons' => [$taxon->getCode()]],
-        );
-    }
-
-    /**
-     * @When /^I edit ("[^"]+" catalog promotion) to be applied on ("[^"]+" product)$/
-     */
-    public function iEditCatalogPromotionToBeAppliedOnProduct(
-        CatalogPromotionInterface $catalogPromotion,
-        ProductInterface $product,
-    ): void {
-        $this->changeFirstScopeConfigurationTo(
-            $catalogPromotion,
-            InForProductScopeVariantChecker::TYPE,
-            ['products' => [$product->getCode()]],
         );
     }
 
@@ -534,43 +545,6 @@ final readonly class ManagingCatalogPromotionsContext implements Context
     public function iEnableCatalogPromotion(CatalogPromotionInterface $catalogPromotion): void
     {
         $this->toggleCatalogPromotion($catalogPromotion, true);
-    }
-
-    /**
-     * @When /^I edit ("[^"]+" catalog promotion) to have ("[^"]+") discount$/
-     */
-    public function iEditCatalogPromotionToHaveDiscount(CatalogPromotionInterface $catalogPromotion, float $amount): void
-    {
-        $this->client->buildUpdateRequest(Resources::CATALOG_PROMOTIONS, $catalogPromotion->getCode());
-        $scopes = [[
-            'type' => PercentageDiscountPriceCalculator::TYPE,
-            'configuration' => [
-                'amount' => $amount,
-            ],
-        ]];
-
-        $this->client->updateRequestData(['actions' => $scopes]);
-        $this->client->update();
-    }
-
-    /**
-     * @When /^I edit ("[^"]+" catalog promotion) to have ("[^"]+") of fixed discount in the ("[^"]+" channel)$/
-     */
-    public function iEditCatalogPromotionToHaveFixedDiscountInTheChannel(
-        CatalogPromotionInterface $catalogPromotion,
-        int $amount,
-        ChannelInterface $channel,
-    ): void {
-        $this->client->buildUpdateRequest(Resources::CATALOG_PROMOTIONS, $catalogPromotion->getCode());
-        $content = $this->client->getContent();
-
-        $content['actions'] = [[
-            'type' => FixedDiscountPriceCalculator::TYPE,
-            'configuration' => [$channel->getCode() => ['amount' => $amount]],
-        ]];
-
-        $this->client->setRequestData($content);
-        $this->client->update();
     }
 
     /**
@@ -1425,7 +1399,8 @@ final readonly class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
-     * @Then I should be notified that the fixed amount should be a number and cannot be empty
+     * @Then I should be notified that the fixed amount should be a number
+     * @Then I should be notified that the fixed amount cannot be empty
      */
     public function iShouldBeNotifiedThatTheFixedAmountShouldBeANumber(): void
     {
@@ -1611,23 +1586,6 @@ final readonly class ManagingCatalogPromotionsContext implements Context
         $this->client->update();
 
         $this->sharedStorage->set('catalog_promotion', $catalogPromotion);
-    }
-
-    private function changeFirstScopeConfigurationTo(
-        CatalogPromotionInterface $catalogPromotion,
-        string $type,
-        array $configuration,
-    ): void {
-        $this->client->buildUpdateRequest(Resources::CATALOG_PROMOTIONS, $catalogPromotion->getCode());
-
-        $content = $this->client->getContent();
-        unset($content['scopes'][0]);
-        $content['scopes'][0]['type'] = $type;
-        $content['scopes'][0]['configuration'] = $configuration;
-
-        $this->client->setRequestData($content);
-
-        $this->client->update();
     }
 
     private function createCatalogPromotion(

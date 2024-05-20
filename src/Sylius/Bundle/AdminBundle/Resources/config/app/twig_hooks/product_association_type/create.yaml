@@ -1,0 +1,11 @@
+twig_hooks:
+    hooks:
+        'sylius_admin.product_association_type.create.content':
+            form:
+                template: '@SyliusAdmin/product_association_type/form.html.twig'
+
+        'sylius_admin.product_association_type.create.content.form':
+            code:
+                template: '@SyliusAdmin/product_association_type/form/code.html.twig'
+            translations:
+                template: '@SyliusAdmin/product_association_type/form/translations.html.twig'

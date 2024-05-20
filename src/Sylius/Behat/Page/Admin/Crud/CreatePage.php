@@ -19,6 +19,7 @@ use Behat\Mink\Exception\ElementNotFoundException;
 use Behat\Mink\Session;
 use FriendsOfBehat\PageObjectExtension\Page\SymfonyPage;
 use FriendsOfBehat\PageObjectExtension\Page\UnexpectedPageException;
+use Sylius\Behat\Service\DriverHelper;
 use Symfony\Component\Routing\RouterInterface;
 
 class CreatePage extends SymfonyPage implements CreatePageInterface
@@ -34,6 +35,9 @@ class CreatePage extends SymfonyPage implements CreatePageInterface
 
     public function create(): void
     {
+        if (DriverHelper::isJavascript($this->getDriver())) {
+            $this->getDocument()->find('css', 'body')->click();
+        }
         $this->getDocument()->pressButton('Create');
     }
 
@@ -44,9 +48,9 @@ class CreatePage extends SymfonyPage implements CreatePageInterface
             throw new ElementNotFoundException($this->getSession(), 'Field element');
         }
 
-        $validationMessage = $foundElement->find('css', '.sylius-validation-error');
+        $validationMessage = $foundElement->find('css', '.invalid-feedback');
         if (null === $validationMessage) {
-            throw new ElementNotFoundException($this->getSession(), 'Validation message', 'css', '.sylius-validation-error');
+            throw new ElementNotFoundException($this->getSession(), 'Validation message', 'css', '.invalid-feedback');
         }
 
         return $validationMessage->getText();

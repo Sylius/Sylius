@@ -1,0 +1,7 @@
+{% set lastError = hookable_metadata.context.last_error|default(null) %}
+
+{% if lastError is not null %}
+    <div class="alert alert-danger" {{ sylius_test_html_attribute('invalid-credentials-message') }}>
+        {{ lastError.messageKey|trans }}
+    </div>
+{% endif %}

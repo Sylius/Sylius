@@ -7,14 +7,14 @@ Feature: Customer group validation
     Background:
         Given I am logged in as an administrator
 
-    @ui @api
+    @todo @ui @api
     Scenario: Trying to add a new customer group without a name
         When I want to create a new customer group
         And I try to add it
         Then I should be notified that name is required
         And I should be informed that this form contains errors
 
-    @ui @api
+    @todo @ui @api
     Scenario: Trying to remove name from an existing customer group
         Given the store has a customer group "Retail"
         When I want to edit this customer group

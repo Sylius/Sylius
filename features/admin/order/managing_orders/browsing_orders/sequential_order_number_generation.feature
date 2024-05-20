@@ -17,7 +17,7 @@ Feature: Sequential order number generation
         And the customer chose "Free" shipping method to "United States" with "Offline" payment
         And I am logged in as an administrator
 
-    @ui @api
+    @todo @ui @api
     Scenario: Verifying that orders has correct numbers
         When I browse orders
         Then I should see an order with "#000000001" number

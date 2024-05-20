@@ -2,30 +2,12 @@ sylius_admin_catalog_promotion:
     resource: |
         alias: sylius.catalog_promotion
         section: admin
-        templates: "@SyliusAdmin\\Crud"
-        only: ['index', 'create', 'update']
+        templates: "@SyliusAdmin\\shared\\crud"
+        except: ['delete']
         redirect: update
         grid: sylius_admin_catalog_promotion
         permission: true
-        vars:
-            all:
-                subheader: sylius.ui.manage_discounts_on_product_catalog
-                templates:
-                    form: "@SyliusAdmin/CatalogPromotion/_form.html.twig"
-            index:
-                icon: bookmark
     type: sylius.resource
-
-sylius_admin_catalog_promotion_show:
-    path: /catalog-promotions/{id}
-    methods: [GET]
-    defaults:
-        _controller: sylius.controller.catalog_promotion::showAction
-        _sylius:
-            section: admin
-            template: "@SyliusAdmin/CatalogPromotion/show.html.twig"
-            permission: true
-            alias: catalog_promotion
 
 sylius_admin_catalog_promotion_product_variant_index:
     path: /catalog-promotions/{id}/variants

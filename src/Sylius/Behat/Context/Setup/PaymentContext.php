@@ -26,8 +26,14 @@ use Sylius\Component\Payment\Repository\PaymentMethodRepositoryInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Webmozart\Assert\Assert;
 
-final class PaymentContext implements Context
+final readonly class PaymentContext implements Context
 {
+    /**
+     * @param PaymentMethodRepositoryInterface<PaymentMethodInterface> $paymentMethodRepository
+     * @param ExampleFactoryInterface<PaymentMethodInterface> $paymentMethodExampleFactory
+     * @param FactoryInterface<PaymentMethodTranslationInterface> $paymentMethodTranslationFactory
+     * @param array<string, string> $gatewayFactories
+     */
     public function __construct(
         private SharedStorageInterface $sharedStorage,
         private PaymentMethodRepositoryInterface $paymentMethodRepository,
@@ -42,7 +48,7 @@ final class PaymentContext implements Context
      * @Given the store (also )allows paying (with ):paymentMethodName
      * @Given the store (also )allows paying with :paymentMethodName at position :position
      */
-    public function storeAllowsPaying($paymentMethodName, $position = null)
+    public function storeAllowsPaying(string $paymentMethodName, ?int $position = null): void
     {
         $this->createPaymentMethod($paymentMethodName, 'PM_' . StringInflector::nameToCode($paymentMethodName), 'Offline', 'Payment method', true, $position);
     }
@@ -77,28 +83,32 @@ final class PaymentContext implements Context
     /**
      * @Given the store has (also) a payment method :paymentMethodName with a code :paymentMethodCode
      */
-    public function theStoreHasAPaymentMethodWithACode($paymentMethodName, $paymentMethodCode)
+    public function theStoreHasAPaymentMethodWithACode(string $paymentMethodName, string $paymentMethodCode): void
     {
         $this->createPaymentMethod($paymentMethodName, $paymentMethodCode, 'Offline');
     }
 
     /**
-     * @Given the store has (also) a payment method :paymentMethodName with a code :paymentMethodCode and Paypal Express Checkout gateway
+     * @Given /^the store has(?:| also) a payment method "([^"]+)" with a code "([^"]+)" and "([^"]+)" gateway$/
      */
-    public function theStoreHasPaymentMethodWithCodeAndPaypalExpressCheckoutGateway(
-        $paymentMethodName,
-        $paymentMethodCode,
-    ) {
-        $paymentMethod = $this->createPaymentMethod($paymentMethodName, $paymentMethodCode, 'Paypal Express Checkout');
-        $paymentMethod->getGatewayConfig()->setConfig([
-            'username' => 'TEST',
-            'password' => 'TEST',
-            'signature' => 'TEST',
-            'payum.http_client' => '@sylius.payum.http_client',
-            'sandbox' => true,
-        ]);
+    public function theStoreHasPaymentMethodWithCodeAndGateway(
+        string $paymentMethodName,
+        string $paymentMethodCode,
+        string $gatewayFactory,
+    ): void {
+        $paymentMethod = $this->createPaymentMethod($paymentMethodName, $paymentMethodCode, $gatewayFactory);
+
+        match ($gatewayFactory) {
+            'Paypal Express Checkout' => $this->configurePaypalExpressCheckoutGateway($paymentMethod),
+            'Stripe Checkout' => $this->configureStripeCheckoutGateway($paymentMethod),
+            default => throw new \InvalidArgumentException(
+                sprintf('Gateway factory "%s" is not supported. Available options are: %s', $gatewayFactory, implode(', ', $this->gatewayFactories)),
+            ),
+        };
 
         $this->paymentMethodManager->flush();
+
+        $this->sharedStorage->set('payment_method', $paymentMethod);
     }
 
     /**
@@ -184,24 +194,14 @@ final class PaymentContext implements Context
         Assert::eq($payment->getState(), $state);
     }
 
-    /**
-     * @param string $name
-     * @param string $code
-     * @param string $gatewayFactory
-     * @param string $description
-     * @param bool $addForCurrentChannel
-     * @param int|null $position
-     *
-     * @return PaymentMethodInterface
-     */
     private function createPaymentMethod(
-        $name,
-        $code,
-        $gatewayFactory = 'Offline',
-        $description = '',
-        $addForCurrentChannel = true,
-        $position = null,
-    ) {
+        string $name,
+        string $code,
+        string $gatewayFactory,
+        string $description = '',
+        bool $addForCurrentChannel = true,
+        ?int $position = null,
+    ): PaymentMethodInterface {
         $gatewayFactory = array_search($gatewayFactory, $this->gatewayFactories);
 
         /** @var PaymentMethodInterface $paymentMethod */
@@ -216,12 +216,31 @@ final class PaymentContext implements Context
         ]);
 
         if (null !== $position) {
-            $paymentMethod->setPosition((int) $position);
+            $paymentMethod->setPosition($position);
         }
 
         $this->sharedStorage->set('payment_method', $paymentMethod);
         $this->paymentMethodRepository->add($paymentMethod);
 
         return $paymentMethod;
+    }
+
+    private function configurePaypalExpressCheckoutGateway(PaymentMethodInterface $paymentMethod): void
+    {
+        $paymentMethod->getGatewayConfig()->setConfig([
+            'username' => 'TEST',
+            'password' => 'TEST',
+            'signature' => 'TEST',
+            'payum.http_client' => '@sylius.payum.http_client',
+            'sandbox' => true,
+        ]);
+    }
+
+    private function configureStripeCheckoutGateway(PaymentMethodInterface $paymentMethod): void
+    {
+        $paymentMethod->getGatewayConfig()->setConfig([
+            'publishable_key' => 'TEST',
+            'secret_key' => 'TEST',
+        ]);
     }
 }

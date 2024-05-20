@@ -1,0 +1,15 @@
+{% from '@SyliusAdmin/shared/helper/icon.html.twig' import icon %}
+
+<button class="btn primary"
+    {{ stimulus_controller('save-positions', {
+        url: path('sylius_admin_ajax_product_variants_update_position'),
+        csrfToken: csrf_token('update-product-variant-position'),
+        inputSelector: '.sylius-product-variant-position',
+        dataKey: 'productVariants',
+    }) }}
+    data-action="save-positions#submit"
+    {{ sylius_test_html_attribute('save-configuration-button') }}
+>
+        {{ icon({ icon: action.icon ?? 'check', class: 'icon icon-tabler dropdown-item-icon' }) }}
+        {{ 'sylius.ui.save_positions'|trans }}
+</button>

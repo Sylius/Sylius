@@ -25,27 +25,9 @@ interface UpdatePageInterface extends BaseUpdatePageInterface
 
     public function isCodeDisabled(): bool;
 
-    public function nameIt(string $name, string $languageCode): void;
-
-    public function specifySlug(string $slug, string $languageCode): void;
-
-    public function attachImage(string $path, ?string $type = null): void;
-
-    public function isImageWithTypeDisplayed(string $type): bool;
-
     public function isSlugReadonly(string $languageCode = 'en_US'): bool;
 
-    public function removeImageWithType(string $type): void;
-
-    public function removeFirstImage(): void;
-
     public function enableSlugModification(string $languageCode = 'en_US'): void;
-
-    public function countImages(): int;
-
-    public function changeImageWithType(string $type, string $path): void;
-
-    public function modifyFirstImageType(string $type): void;
 
     public function getParent(): string;
 

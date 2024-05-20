@@ -29,10 +29,15 @@ final class ProductsToProductAssociationsTransformer implements DataTransformerI
     /** @var Collection<array-key, ProductAssociationInterface> */
     private ?Collection $productAssociations = null;
 
+    /**
+     * @param FactoryInterface<ProductAssociationInterface> $productAssociationFactory
+     * @param ProductRepositoryInterface<ProductInterface> $productRepository
+     * @param RepositoryInterface<ProductAssociationTypeInterface> $productAssociationTypeRepository
+     */
     public function __construct(
-        private FactoryInterface $productAssociationFactory,
-        private ProductRepositoryInterface $productRepository,
-        private RepositoryInterface $productAssociationTypeRepository,
+        private readonly FactoryInterface $productAssociationFactory,
+        private readonly ProductRepositoryInterface $productRepository,
+        private readonly RepositoryInterface $productAssociationTypeRepository,
     ) {
     }
 

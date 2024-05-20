@@ -38,6 +38,16 @@ final class Configuration implements ConfigurationInterface
                         ->end()
                     ->end()
                 ->end()
+                ->arrayNode('templates')
+                    ->addDefaultsIfNotSet()
+                        ->children()
+                            ->arrayNode('item_action')
+                                ->useAttributeAsKey('name')
+                                ->scalarPrototype()->end()
+                            ->end()
+                        ->end()
+                    ->end()
+                ->end()
             ->end()
         ;
 

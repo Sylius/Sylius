@@ -2,7 +2,7 @@ sylius_admin_product_attribute:
     resource: |
         alias: sylius.product_attribute
         section: admin
-        templates: "@SyliusAdmin\\Crud"
+        templates: "@SyliusAdmin\\shared\\crud"
         except: ['show', 'create']
         redirect: update
         grid: sylius_admin_product_attribute
@@ -27,13 +27,11 @@ sylius_admin_product_attribute_create:
                 method: createTyped
                 arguments:
                     type: $type
-            template: "@SyliusAdmin/Crud/create.html.twig"
+            template: "@SyliusAdmin/shared/crud/create.html.twig"
             redirect: sylius_admin_product_attribute_update
             permission: true
             vars:
                 subheader: sylius.ui.manage_attributes_of_your_products
-                templates:
-                    form: "@SyliusAdmin/ProductAttribute/_form.html.twig"
                 route:
                     parameters:
                         type: $type

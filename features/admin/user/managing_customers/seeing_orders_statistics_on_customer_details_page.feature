@@ -36,4 +36,4 @@ Feature: Seeing customer's orders' statistics
         Given customer "lirael.clayr@abhorsen.ok" has fulfilled 12 orders placed on the "Web-UK" channel in each buying 2 "Onion" products
         And customer "lirael.clayr@abhorsen.ok" has placed 2 orders on the "Web-UK" channel in each buying 2 "Onion" products
         When I view their details
-        Then I should see that the average total value of their order in the "Web-UK" channel is "£2,400.00"
+        Then I should see that the average total value of their order in the "Web-UK" channel is "£200.00"

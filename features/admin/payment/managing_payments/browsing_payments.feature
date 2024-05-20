@@ -1,6 +1,6 @@
 @managing_payments
 Feature: Browsing payments
-    In order to manage all payments regardlessly of orders
+    In order to manage all payments regardless of orders
     As an Administrator
     I want to browse all payments in the system
 

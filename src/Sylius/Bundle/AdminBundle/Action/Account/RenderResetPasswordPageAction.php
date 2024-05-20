@@ -59,7 +59,7 @@ final readonly class RenderResetPasswordPageAction
         $form = $this->formFactory->create(ResetPasswordType::class);
 
         return new Response(
-            $this->twig->render('@SyliusAdmin/Security/resetPassword.html.twig', [
+            $this->twig->render('@SyliusAdmin/security/reset_password.html.twig', [
                 'form' => $form->createView(),
             ]),
         );

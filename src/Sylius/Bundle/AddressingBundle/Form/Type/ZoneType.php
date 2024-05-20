@@ -23,6 +23,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class ZoneType extends AbstractResourceType
 {
@@ -82,12 +83,25 @@ final class ZoneType extends AbstractResourceType
             ]);
         });
 
-        $builder->addEventSubscriber(new BuildZoneFormSubscriber());
+        if ($options['add_build_zone_form_subscriber']) {
+            $builder->addEventSubscriber(new BuildZoneFormSubscriber());
+        }
     }
 
     public function getBlockPrefix(): string
     {
         return 'sylius_zone';
+    }
+
+    public function configureOptions(OptionsResolver $resolver): void
+    {
+        parent::configureOptions($resolver);
+
+        $resolver
+            ->setDefaults([
+                'add_build_zone_form_subscriber' => true,
+            ])
+        ;
     }
 
     private function getZoneMemberEntryType(string $zoneMemberType): string

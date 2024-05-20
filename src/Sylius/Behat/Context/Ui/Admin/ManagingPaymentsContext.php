@@ -155,4 +155,17 @@ final class ManagingPaymentsContext implements Context
     {
         Assert::true($this->indexPage->isPaymentWithOrderNumberInPosition($orderNumber, $position));
     }
+
+    /**
+     * @When /^I sort payments by date in (ascending|descending) order$/
+     */
+    public function iSortPaymentsByRegistrationDate(string $order): void
+    {
+        $this->sortBy($order, 'createdAt');
+    }
+
+    private function sortBy(string $order, string $field): void
+    {
+        $this->indexPage->sortBy($field, str_starts_with($order, 'de') ? 'desc' : 'asc');
+    }
 }

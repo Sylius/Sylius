@@ -8,36 +8,44 @@ sylius_grid:
             sorting:
                 createdAt: desc
             fields:
-                firstName:
-                    type: string
-                    label: sylius.ui.first_name
+                email:
+                    type: twig
+                    label: sylius.ui.email
                     sortable: ~
+                    options:
+                        template: "@SyliusAdmin/shared/grid/field/name.html.twig"
                 lastName:
                     type: string
                     label: sylius.ui.last_name
                     sortable: ~
-                email:
+                firstName:
                     type: string
-                    label: sylius.ui.email
+                    label: sylius.ui.first_name
                     sortable: ~
                 createdAt:
-                    type: datetime
+                    type: twig
                     label: sylius.ui.registration_date
                     sortable: ~
                     options:
-                        format: d-m-Y H:i
+                        template: "@SyliusAdmin/shared/grid/field/date.html.twig"
+                        vars:
+                            th_class: "w-1 text-center"
                 enabled:
                     type: twig
                     label: sylius.ui.enabled
-                    path: .
+                    path: user?.enabled
                     options:
-                        template: "@SyliusAdmin/Customer/Grid/Field/enabled.html.twig"
+                        template: "@SyliusAdmin/shared/grid/field/boolean.html.twig"
+                        vars:
+                            th_class: "w-1 text-center"
                 verified:
                     type: twig
                     label: sylius.ui.verified
-                    path: .
+                    path: user?.verified
                     options:
-                        template: "@SyliusAdmin/Customer/Grid/Field/verified.html.twig"
+                        template: "@SyliusAdmin/shared/grid/field/boolean.html.twig"
+                        vars:
+                            th_class: "w-1 text-center"
             filters:
                 search:
                     type: string
@@ -45,17 +53,19 @@ sylius_grid:
                     options:
                         fields: [email, firstName, lastName]
                 group:
-                    type: resource_autocomplete
+                    type: ux_autocomplete
                     label: sylius.ui.customer_groups
                     form_options:
-                        resource: sylius.customer_group
-                        choice_name: name
-                        choice_value: code
                         multiple: true
-                        remote_path: sylius_admin_ajax_customer_groups_by_phrase
-                        load_edit_path: sylius_admin_ajax_customer_group_by_code
+                        extra_options:
+                            class: '%sylius.model.customer_group.class%'
+#                        TODO: these options won't work until a new tag of symfony ux is available
+#                        choice_label: name
+#                        choice_value: code
                     options:
-                        fields: [group.code]
+                        fields: [group.id]
+#                        TODO: same case
+#                        fields: [group.code]
             actions:
                 main:
                     create:
@@ -64,6 +74,7 @@ sylius_grid:
                     show_orders:
                         type: show
                         label: sylius.ui.show_orders
+                        icon: shopping-bag
                         options:
                             link:
                                 route: sylius_admin_customer_order_index
