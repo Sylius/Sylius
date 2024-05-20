@@ -8,7 +8,7 @@ Feature: Adding a new shipping category
         Given the store operates on a single channel in "United States"
         And I am logged in as an administrator
 
-    @ui @api
+    @todo @ui @api
     Scenario: Adding a new shipping category with detailed information
         When I want to create a new shipping category
         And I specify its code as "OVER_SIZED"

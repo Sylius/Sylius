@@ -35,7 +35,7 @@ Feature: Adding images to an existing taxon
         And this taxon should have an image with "banner" type
         And it should also have an image with "thumbnail" type
 
-    @ui @javascript @api
+    @ui @mink:chromedriver @api
     Scenario: Adding multiple images of the same type to an existing taxon
         When I want to modify the "T-Shirts" taxon
         And I attach the "t-shirts.jpg" image with "banner" type to this taxon

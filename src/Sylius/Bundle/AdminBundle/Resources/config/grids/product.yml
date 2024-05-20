@@ -16,27 +16,33 @@ sylius_grid:
                     label: sylius.ui.image
                     path: .
                     options:
-                        template: "@SyliusAdmin/Product/Grid/Field/image.html.twig"
-                code:
-                    type: string
-                    label: sylius.ui.code
-                    sortable: ~
+                        template: "@SyliusAdmin/product/grid/field/product_image.html.twig"
                 name:
                     type: twig
                     label: sylius.ui.name
                     sortable: translation.name
                     options:
-                        template: "@SyliusAdmin/Product/Grid/Field/name.html.twig"
+                        template: "@SyliusAdmin/shared/grid/field/name.html.twig"
+                        vars:
+                            th_class: "w-75"
+                code:
+                    type: twig
+                    label: sylius.ui.code
+                    sortable: ~
+                    options:
+                        template: "@SyliusAdmin/shared/grid/field/code.html.twig"
+                        vars:
+                            th_class: "w-25"
                 mainTaxon:
                     type: twig
                     label: sylius.ui.main_taxon
                     options:
-                        template: "@SyliusAdmin/Product/Grid/Field/mainTaxon.html.twig"
+                        template: "@SyliusAdmin/product/grid/field/main_taxon.html.twig"
                 enabled:
                     type: twig
                     label: sylius.ui.enabled
                     options:
-                        template: "@SyliusUi/Grid/Field/enabled.html.twig"
+                        template: "@SyliusAdmin/shared/grid/field/boolean.html.twig"
             filters:
                 search:
                     type: string
@@ -67,11 +73,9 @@ sylius_grid:
                             links:
                                 simple:
                                     label: sylius.ui.simple_product
-                                    icon: plus
                                     route: sylius_admin_product_create_simple
                                 configurable:
                                     label: sylius.ui.configurable_product
-                                    icon: plus
                                     route: sylius_admin_product_create
                 item:
                     details:
@@ -83,26 +87,22 @@ sylius_grid:
                         type: delete
                 subitem:
                     variants:
-                        type: links
-                        label: sylius.ui.manage_variants
+                        label: sylius.ui.variants
+                        type: list
                         options:
-                            icon: cubes
                             links:
                                 index:
                                     label: sylius.ui.list_variants
-                                    icon: list
                                     route: sylius_admin_product_variant_index
                                     parameters:
                                         productId: resource.id
                                 create:
                                     label: sylius.ui.create
-                                    icon: plus
                                     route: sylius_admin_product_variant_create
                                     parameters:
                                         productId: resource.id
                                 generate:
                                     label: sylius.ui.generate
-                                    icon: random
                                     route: sylius_admin_product_variant_generate
                                     visible: resource.hasOptions
                                     parameters:

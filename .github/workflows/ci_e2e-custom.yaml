@@ -56,7 +56,7 @@ jobs:
                 run: |
                     composer config minimum-stability dev
                     composer config prefer-stable true
-                    
+
             -   name: Prepare manifest.json files
                 run: |
                     mkdir -p public/build/admin

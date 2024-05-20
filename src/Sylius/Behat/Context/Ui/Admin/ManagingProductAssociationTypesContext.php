@@ -14,10 +14,12 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
-use Sylius\Behat\Page\Admin\ProductAssociationType\CreatePageInterface;
+use Sylius\Behat\Element\Admin\ProductAssociationType\FormElementInterface;
+use Sylius\Behat\Page\Admin\Crud\CreatePageInterface;
+use Sylius\Behat\Page\Admin\Crud\UpdatePageInterface;
 use Sylius\Behat\Page\Admin\ProductAssociationType\IndexPageInterface;
-use Sylius\Behat\Page\Admin\ProductAssociationType\UpdatePageInterface;
-use Sylius\Behat\Service\Resolver\CurrentPageResolverInterface;
+use Sylius\Behat\Service\SharedStorageInterface;
+use Sylius\Component\Locale\Model\LocaleInterface;
 use Sylius\Component\Product\Model\ProductAssociationTypeInterface;
 use Webmozart\Assert\Assert;
 
@@ -27,7 +29,8 @@ final class ManagingProductAssociationTypesContext implements Context
         private CreatePageInterface $createPage,
         private IndexPageInterface $indexPage,
         private UpdatePageInterface $updatePage,
-        private CurrentPageResolverInterface $currentPageResolver,
+        private FormElementInterface $formElement,
+        private SharedStorageInterface $sharedStorage,
     ) {
     }
 
@@ -61,7 +64,7 @@ final class ManagingProductAssociationTypesContext implements Context
      */
     public function iNameItIn($name, $language)
     {
-        $this->createPage->nameItIn($name, $language);
+        $this->formElement->setName($name, $language);
     }
 
     /**
@@ -76,18 +79,18 @@ final class ManagingProductAssociationTypesContext implements Context
      * @When I rename it to :name in :language
      * @When I remove its name from :language translation
      */
-    public function iRenameItToInLanguage(string $language, ?string $name = null): void
+    public function iRenameItToInLanguage(string $language, string $name = ''): void
     {
-        $this->updatePage->nameItIn($name ?? '', $language);
+        $this->formElement->setName($name, $language);
     }
 
     /**
      * @When I specify its code as :code
      * @When I do not specify its code
      */
-    public function iSpecifyItsCodeAs($code = null)
+    public function iSpecifyItsCodeAs(string $code = '')
     {
-        $this->createPage->specifyCode($code ?? '');
+        $this->formElement->setCode($code);
     }
 
     /**
@@ -199,7 +202,7 @@ final class ManagingProductAssociationTypesContext implements Context
      */
     public function iShouldNotBeAbleToEditItsCode(): void
     {
-        Assert::true($this->updatePage->isCodeDisabled());
+        Assert::true($this->formElement->isCodeDisabled());
     }
 
     /**
@@ -220,7 +223,7 @@ final class ManagingProductAssociationTypesContext implements Context
     public function iShouldBeNotifiedThatProductAssociationTypeWithThisCodeAlreadyExists()
     {
         Assert::same(
-            $this->createPage->getValidationMessage('code'),
+            $this->formElement->getValidationMessage('code'),
             'The association type with given code already exists.',
         );
     }
@@ -240,7 +243,13 @@ final class ManagingProductAssociationTypesContext implements Context
      */
     public function iShouldBeNotifiedThatIsRequired($element)
     {
-        $this->assertFieldValidationMessage($element, sprintf('Please enter association type %s.', $element));
+        /** @var LocaleInterface $locale */
+        $locale = $this->sharedStorage->get('locale');
+
+        Assert::same(
+            $this->formElement->getValidationMessage($element, ['%locale%' => $locale->getCode()]),
+            sprintf('Please enter association type %s.', $element),
+        );
     }
 
     /**
@@ -251,17 +260,5 @@ final class ManagingProductAssociationTypesContext implements Context
         $this->iWantToBrowseProductAssociationTypes();
 
         Assert::false($this->indexPage->isSingleResourceOnPage([$element => $value]));
-    }
-
-    /**
-     * @param string $element
-     * @param string $expectedMessage
-     */
-    private function assertFieldValidationMessage($element, $expectedMessage)
-    {
-        /** @var CreatePageInterface|UpdatePageInterface $currentPage */
-        $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
-
-        Assert::same($currentPage->getValidationMessage($element), $expectedMessage);
     }
 }

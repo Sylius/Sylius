@@ -8,7 +8,7 @@ Feature: Adding a new catalog promotion with fixed discount where amount is a de
         Given the store operates on a single channel in "United States"
         And I am logged in as an administrator
 
-    @ui @no-api @javascript
+    @ui @no-api @mink:chromedriver
     Scenario: Adding a new catalog promotion with fixed discount and amount with comma
         When I want to create a new catalog promotion
         And I specify its code as "winter_sale"

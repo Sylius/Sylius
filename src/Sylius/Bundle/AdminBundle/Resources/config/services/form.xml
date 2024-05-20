@@ -23,17 +23,122 @@
             <parameter>sylius</parameter>
         </parameter>
     </parameters>
+
     <services>
-        <service id="Sylius\Bundle\AdminBundle\Form\Extension\CatalogPromotionActionTypeExtension">
-            <argument type="tagged_iterator" tag="sylius.catalog_promotion.action_configuration_type" index-by="key" />
-            <argument type="service" id="twig" />
+        <service id="sylius.form.extension.catalog_promotion_action" class="Sylius\Bundle\AdminBundle\Form\Extension\CatalogPromotionActionTypeExtension">
             <tag name="form.type_extension" extended-type="Sylius\Bundle\PromotionBundle\Form\Type\CatalogPromotionActionType" priority="100" />
         </service>
 
-        <service id="Sylius\Bundle\AdminBundle\Form\Extension\CatalogPromotionScopeTypeExtension">
-            <argument type="tagged_iterator" tag="sylius.catalog_promotion.scope_configuration_type" index-by="key" />
-            <argument type="service" id="twig" />
+        <service id="Sylius\Bundle\AdminBundle\Form\Extension\AddressTypeExtension">
+            <argument type="service" id="sylius.repository.country" />
+            <tag name="form.type_extension" extended-type="Sylius\Bundle\AddressingBundle\Form\Type\AddressType" priority="100" />
+        </service>
+
+        <service id="Sylius\Bundle\AdminBundle\Form\Extension\ZoneTypeExtension">
+            <tag name="form.type_extension" extended-type="Sylius\Bundle\AddressingBundle\Form\Type\ZoneType" priority="100" />
+        </service>
+
+        <service id="sylius.form.extension.catalog_promotion_scope" class="Sylius\Bundle\AdminBundle\Form\Extension\CatalogPromotionScopeTypeExtension">
             <tag name="form.type_extension" extended-type="Sylius\Bundle\PromotionBundle\Form\Type\CatalogPromotionScopeType" priority="100" />
+        </service>
+
+        <service id="sylius.form.extension.country" class="Sylius\Bundle\AdminBundle\Form\Extension\CountryTypeExtension">
+            <argument type="service" id="sylius.repository.country" />
+            <tag name="form.type_extension" extended-type="Sylius\Bundle\AddressingBundle\Form\Type\CountryType" priority="100" />
+        </service>
+
+        <service id="sylius_admin.form.extension.shipping_method" class="Sylius\Bundle\AdminBundle\Form\Extension\ShippingMethodTypeExtension">
+            <argument>%sylius.shipping_method_rules%</argument>
+            <tag name="form.type_extension" />
+        </service>
+
+        <service id="sylius.form.extension.shipping_method_rule" class="Sylius\Bundle\AdminBundle\Form\Extension\ShippingMethodRuleTypeExtension">
+            <tag name="form.type_extension" />
+        </service>
+
+        <service id="sylius.form.extension.type.product_image" class="Sylius\Bundle\AdminBundle\Form\Extension\ProductImageTypeExtension">
+            <argument>%sylius.model.product_variant.class%</argument>
+            <tag name="form.type_extension" />
+        </service>
+
+        <service id="sylius_admin.form.extension.type.channel" class="Sylius\Bundle\AdminBundle\Form\Extension\ChannelTypeExtension">
+            <tag name="form.type_extension" extended-type="Sylius\Bundle\ChannelBundle\Form\Type\ChannelType" priority="50" />
+        </service>
+
+        <service id="sylius_admin.form.extension.type.channel_price_history_config" class="Sylius\Bundle\AdminBundle\Form\Extension\ChannelPriceHistoryConfigTypeExtension">
+            <argument type="service" id="sylius.repository.taxon" />
+            <argument type="service">
+                <service class="\Symfony\Component\Form\Extension\Core\DataMapper\DataMapper" />
+            </argument>
+            <tag name="form.type_extension" extended-type="Sylius\Bundle\CoreBundle\Form\Type\ChannelPriceHistoryConfigType" priority="100" />
+        </service>
+
+        <service id="sylius_admin.form.extension.promotion" class="Sylius\Bundle\AdminBundle\Form\Extension\PromotionTypeExtension">
+            <argument>%sylius.promotion_rules%</argument>
+            <argument>%sylius.promotion_actions%</argument>
+            <tag name="form.type_extension" />
+        </service>
+
+        <service id="sylius_admin.form.extension.promotion_rule" class="Sylius\Bundle\AdminBundle\Form\Extension\Promotion\PromotionRuleTypeExtension">
+            <tag name="form.type_extension" />
+        </service>
+
+        <service id="sylius_admin.form.extension.promotion_action" class="Sylius\Bundle\AdminBundle\Form\Extension\Promotion\PromotionActionTypeExtension">
+            <tag name="form.type_extension" />
+        </service>
+
+        <service id="sylius_admin.form.extension.promotion_action.product_filter" class="Sylius\Bundle\AdminBundle\Form\Extension\Promotion\Filter\ProductFilterConfigurationTypeExtension">
+            <argument type="service" id="sylius.form.type.data_transformer.products_to_codes" />
+            <tag name="form.type_extension" />
+        </service>
+
+        <service id="sylius_admin.form.extension.promotion_action.taxon_filter" class="Sylius\Bundle\AdminBundle\Form\Extension\Promotion\Filter\TaxonFilterConfigurationTypeExtension">
+            <argument type="service" id="sylius.form.type.data_transformer.taxons_to_codes" />
+            <tag name="form.type_extension" />
+        </service>
+
+        <service id="sylius_admin.form.extension.promotion_rule.contains_product_configuration" class="Sylius\Bundle\AdminBundle\Form\Extension\Promotion\Rule\ContainsProductConfigurationTypeExtension">
+            <argument type="service" id="sylius.repository.product" />
+            <tag name="form.type_extension" />
+        </service>
+
+        <service id="sylius_admin.form.extension.promotion_rule.has_taxon_configuration" class="Sylius\Bundle\AdminBundle\Form\Extension\Promotion\Rule\HasTaxonConfigurationTypeExtension">
+            <argument type="service" id="sylius.form.type.data_transformer.taxons_to_codes" />
+            <tag name="form.type_extension" />
+        </service>
+
+        <service id="sylius_admin.form.extension.promotion_rule.total_of_items_from_taxon_configuration" class="Sylius\Bundle\AdminBundle\Form\Extension\Promotion\Rule\TotalOfItemsFromTaxonConfigurationTypeExtension">
+            <argument type="service" id="sylius.repository.taxon" />
+            <tag name="form.type_extension" />
+        </service>
+
+        <service id="sylius_admin.form.type.translatable_autocomplete" class="Sylius\Bundle\AdminBundle\Form\Type\TranslatableAutocompleteType">
+            <argument type="service" id="sylius.context.locale" />
+            <tag name="form.type" />
+        </service>
+
+        <service id="sylius_admin.form.type.product_autocomplete" class="Sylius\Bundle\AdminBundle\Form\Type\ProductAutocompleteType">
+            <argument>%sylius.model.product.class%</argument>
+            <tag name="form.type" />
+            <tag name="ux.entity_autocomplete_field" />
+        </service>
+
+        <service id="sylius_admin.form.type.product_variant_autocomplete" class="Sylius\Bundle\AdminBundle\Form\Type\ProductVariantAutocompleteType">
+            <argument>%sylius.model.product_variant.class%</argument>
+            <tag name="form.type" />
+            <tag name="ux.entity_autocomplete_field" />
+        </service>
+
+        <service id="sylius_admin.form.type.taxon_autocomplete" class="Sylius\Bundle\AdminBundle\Form\Type\TaxonAutocompleteType">
+            <argument>%sylius.model.taxon.class%</argument>
+            <tag name="form.type" />
+            <tag name="ux.entity_autocomplete_field" />
+        </service>
+
+        <service id="sylius_admin.form.type.product_attribute_autocomplete" class="Sylius\Bundle\AdminBundle\Form\Type\ProductAttributeAutocompleteType">
+            <argument>%sylius.model.product_attribute.class%</argument>
+            <tag name="form.type" />
+            <tag name="ux.entity_autocomplete_field" />
         </service>
 
         <service id="Sylius\Bundle\AdminBundle\Form\RequestPasswordResetType">
@@ -44,6 +149,36 @@
         <service id="Sylius\Bundle\AdminBundle\Form\Type\ResetPasswordType">
             <argument>%sylius.form.type.admin.reset_password.validation_groups%</argument>
             <tag name="form.type" />
+        </service>
+
+        <service id="sylius.form.type.grid_filter.ux_autocomplete" class="Sylius\Bundle\AdminBundle\Form\Type\Grid\Filter\UxAutocompleteFilterType">
+            <tag name="form.type" />
+            <tag name="ux.entity_autocomplete_field" />
+        </service>
+
+        <service id="sylius_admin.form.extension.catalog_promotion" class="Sylius\Bundle\AdminBundle\Form\Extension\CatalogPromotionTypeExtension">
+            <argument>%sylius.catalog_promotion.scopes_types%</argument>
+            <argument>%sylius.catalog_promotion.actions_types%</argument>
+            <tag name="form.type_extension" />
+        </service>
+
+        <service id="sylius_admin.form.extension.catalog_promotion_scope.for_products_scope_configuration" class="Sylius\Bundle\AdminBundle\Form\Extension\CatalogPromotionScope\ForProductsScopeConfigurationTypeExtension">
+            <argument type="service" id="sylius.form.type.data_transformer.products_to_codes" />
+            <tag name="form.type_extension" />
+        </service>
+
+        <service id="sylius_admin.form.extension.catalog_promotion_scope.for_taxons_scope_configuration" class="Sylius\Bundle\AdminBundle\Form\Extension\CatalogPromotionScope\ForTaxonsScopeConfigurationTypeExtension">
+            <argument type="service" id="sylius.form.type.data_transformer.taxons_to_codes" />
+            <tag name="form.type_extension" />
+        </service>
+
+        <service id="sylius_admin.form.extension.catalog_promotion_scope.for_variants_scope_configuration" class="Sylius\Bundle\AdminBundle\Form\Extension\CatalogPromotionScope\ForVariantsScopeConfigurationTypeExtension">
+            <argument type="service" id="sylius.form.type.data_transformer.product_variants_to_codes" />
+            <tag name="form.type_extension" />
+        </service>
+
+        <service id="sylius_admin.form.extension.product_generate_variants" class="Sylius\Bundle\AdminBundle\Form\Extension\ProductGenerateVariantsTypeExtension">
+            <tag name="form.type_extension" />
         </service>
     </services>
 </container>

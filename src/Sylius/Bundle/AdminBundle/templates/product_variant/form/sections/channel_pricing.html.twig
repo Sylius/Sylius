@@ -1,0 +1,54 @@
+{% set product_variant = hookable_metadata.context.form.vars.data%}
+{% import '@SyliusAdmin/shared/helper/channelPricings.html.twig' as _channelPricings %}
+
+<div class="tab-pane" id="product-variant-channel-pricing" role="tabpanel" tabindex="0">
+    <div class="bg-white mb-3">
+        <div class="alert alert-info">
+            <p>{{ 'sylius.ui.price_details'|trans }}</p>
+            <p>{{ 'sylius.ui.original_price_details'|trans }}</p>
+            <p>{{ 'sylius.ui.minimum_price_details'|trans }}</p>
+        </div>
+        {% set body %}
+            {% verbatim %}
+                <div class="row">
+                    <div class="col-12 col-md-6">
+                        {% set isChannelPricingInvalid = channelPricingForm.vars.errors.form.parent.errors is not empty %}
+
+                        {% if isChannelPricingInvalid %}
+                            {% from '@SyliusAdmin/shared/helper/icon.html.twig' import icon as _icon %}
+
+                            <div class="alert alert-danger" role="alert">
+                                <div class="d-flex">
+                                    <div>
+                                        {{ _icon({ 'icon': 'danger', 'class': 'alert-icon' }) }}
+                                    </div>
+                                    <div>
+                                        {% set firstError = channelPricingForm.vars.errors.form.parent.errors|first %}
+                                        {{ firstError.messageTemplate|trans({}, 'validators') }}
+                                    </div>
+                                </div>
+                            </div>
+                        {% endif %}
+                        {% if channelCode not in product_variant.product.channels|map(channel => channel.code) %}
+                            <div class="alert alert-info">
+                                {{ 'sylius.ui.product.product_not_active_in_channel'|trans }}
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm">
+                        {{ form_row(channelPricingForm.price) }}
+                    </div>
+                    <div class="col-sm">
+                        {{ form_row(channelPricingForm.originalPrice) }}
+                    </div>
+                    <div class="col-sm">
+                        {{ form_row(channelPricingForm.minimumPrice) }}
+                    </div>
+                </div>
+            {% endverbatim %}
+        {% endset %}
+        {{ _channelPricings.default(hookable_metadata.context.form.channelPricings, product_variant, body) }}
+    </div>
+</div>

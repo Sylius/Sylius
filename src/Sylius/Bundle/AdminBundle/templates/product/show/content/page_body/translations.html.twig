@@ -1,0 +1,34 @@
+{% set product = hookable_metadata.context.resource %}
+
+<div class="bg-white mb-3">
+    <div class="accordion" id="product-translations">
+        {% for productTranslation in product.translations %}
+            {% set locale = productTranslation.locale %}
+
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#translation-{{ locale }}" aria-expanded="{% if loop.first %}true{% else %}false{% endif %}" aria-controls="translation-{{ locale }}">
+                        <span class="flag flag-sm flag-country-{{ locale|lower|split('_')|last }} me-3"></span>
+                        {{ locale|sylius_locale_name }}
+                    </button>
+                </h2>
+                <div id="translation-{{ locale }}" class="accordion-collapse collapse" data-bs-parent="#product-translations">
+                    <div class="accordion-body bg-gray-400">
+                        <div class="py-3 px-5">
+                            <div class="card mb-3">
+                                <div class="card-header">
+                                    <div class="card-title">{{ 'sylius.ui.content'|trans }}</div>
+                                </div>
+                                <div class="card-body">
+                                    <div class="divide-y">
+                                        {% hook 'translations' with { productTranslation } %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>

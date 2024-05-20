@@ -1,11 +1,11 @@
 imports:
     - { resource: "@SyliusUiBundle/Resources/config/app/config.yml" }
 
-    - { resource: "@SyliusAdminBundle/Resources/config/app/events.yaml" }
+    - { resource: 'twig_hooks/**/*.yaml' }
     - { resource: "@SyliusAdminBundle/Resources/config/app/sylius/sylius_mailer.yml" }
     - { resource: "@SyliusAdminBundle/Resources/config/grids/address_log_entry.yml" }
     - { resource: "@SyliusAdminBundle/Resources/config/grids/admin_user.yml" }
-    - { resource: "@SyliusAdminBundle/Resources/config/grids/catalog_promotion.yaml" }
+    - { resource: "@SyliusAdminBundle/Resources/config/grids/catalog_promotion.yml" }
     - { resource: "@SyliusAdminBundle/Resources/config/grids/channel.yml" }
     - { resource: "@SyliusAdminBundle/Resources/config/grids/channel_pricing_log_entry.yml" }
     - { resource: "@SyliusAdminBundle/Resources/config/grids/country.yml" }
@@ -46,22 +46,58 @@ webpack_encore:
     builds:
         admin: '%kernel.project_dir%/public/build/admin'
 
+sylius_admin:
+    templates:
+        item_action:
+            apply_transition: '@SyliusAdmin/shared/grid/item_action/apply_transition.html.twig'
+            archive: '@SyliusAdmin/shared/grid/item_action/archive.html.twig'
+            create: '@SyliusAdmin/shared/grid/item_action/create.html.twig'
+            default: '@SyliusAdmin/shared/grid/item_action/default.html.twig'
+            delete: '@SyliusAdmin/shared/grid/item_action/delete.html.twig'
+            links: '@SyliusAdmin/shared/grid/item_action/links.html.twig'
+            show: '@SyliusAdmin/shared/grid/item_action/show.html.twig'
+            update: '@SyliusAdmin/shared/grid/item_action/update.html.twig'
+            ship_with_tracking_code: '@SyliusAdmin/shipment/grid/action/ship_with_tracking_code.html.twig'
+            delete_catalog_promotion: "@SyliusAdmin/catalog_promotion/grid/action/delete.html.twig"
+
 sylius_grid:
     templates:
         action:
-            create_payment_method: "@SyliusAdmin/PaymentMethod/Grid/Action/create.html.twig"
-            create_product_attribute: "@SyliusAdmin/ProductAttribute/Grid/Action/create.html.twig"
-            generate_variants: "@SyliusAdmin/Product/Grid/Action/generateVariants.html.twig"
-            ship_with_tracking_code: "@SyliusAdmin/Shipment/Grid/Action/shipWithTrackingCode.html.twig"
-            update_product_positions: "@SyliusAdmin/Product/Grid/Action/updatePositions.html.twig"
-            update_product_variant_positions: "@SyliusAdmin/ProductVariant/Grid/Action/updatePositions.html.twig"
+            apply_transition: '@SyliusAdmin/shared/grid/action/apply_transition.html.twig'
+            archive: '@SyliusAdmin/shared/grid/action/archive.html.twig'
+            create: '@SyliusAdmin/shared/grid/action/create.html.twig'
+            default: '@SyliusAdmin/shared/grid/action/default.html.twig'
+            delete: '@SyliusAdmin/shared/grid/action/delete.html.twig'
+            links: '@SyliusAdmin/shared/grid/action/links.html.twig'
+            list: '@SyliusAdmin/shared/grid/action/list.html.twig'
+            show: '@SyliusAdmin/shared/grid/action/show.html.twig'
+            update: '@SyliusAdmin/shared/grid/action/update.html.twig'
+            create_payment_method: "@SyliusAdmin/payment_method/grid/action/create.html.twig"
+            create_product_attribute: "@SyliusAdmin/product_attribute/grid/action/create.html.twig"
+            generate_variants: "@SyliusAdmin/product/grid/action/generate_variants.html.twig"
+            ship_with_tracking_code: "@SyliusAdmin/shipment/grid/action/ship_with_tracking_code.html.twig"
+            update_product_positions: "@SyliusAdmin/product/grid/action/update_positions.html.twig"
+            update_product_variant_positions: "@SyliusAdmin/product_variant/grid/action/update_positions.html.twig"
+        bulk_action:
+            delete: '@SyliusAdmin/shared/grid/bulk_action/delete.html.twig'
         filter:
-            entities: '@SyliusUi/Grid/Filter/entities.html.twig'
-            resource_autocomplete: '@SyliusUi/Grid/Filter/resourceAutocomplete.html.twig'
+            boolean: '@SyliusAdmin/shared/grid/filter/boolean.html.twig'
+            date: '@SyliusAdmin/shared/grid/filter/date.html.twig'
+            entities: '@SyliusAdmin/shared/grid/filter/entities.html.twig'
+            entity: '@SyliusAdmin/shared/grid/filter/entity.html.twig'
+            exists: '@SyliusAdmin/shared/grid/filter/exists.html.twig'
+            money: '@SyliusAdmin/shared/grid/filter/money.html.twig'
+            resource_autocomplete: '@SyliusAdmin/shared/grid/filter/resource_autocomplete.html.twig'
+            select: '@SyliusAdmin/shared/grid/filter/select.html.twig'
+            string: '@SyliusAdmin/shared/grid/filter/string.html.twig'
+            ux_autocomplete: '@SyliusAdmin/shared/grid/filter/autocomplete.html.twig'
 
 liip_imagine:
     filter_sets:
         sylius_admin_product_original: ~
+        sylius_admin_admin_user_avatar:
+            filters:
+                thumbnail: { size: [ 80, 80 ], mode: outbound }
         sylius_admin_admin_user_avatar_thumbnail:
             filters:
                 thumbnail: { size: [50, 50], mode: outbound }
@@ -80,3 +116,7 @@ liip_imagine:
 
 sonata_block:
     default_contexts: ~
+    
+twig_hooks:
+    enable_autoprefixing: true
+    hook_name_section_separator: '#'

@@ -1,0 +1,51 @@
+twig_hooks:
+    hooks:
+        'sylius_admin.order.history':
+            sidebar:
+                template: '@SyliusAdmin/shared/crud/common/sidebar.html.twig'
+            navbar:
+                template: '@SyliusAdmin/shared/crud/common/navbar.html.twig'
+            content:
+                template: '@SyliusAdmin/shared/crud/common/content.html.twig'
+
+        'sylius_admin.order.history.content':
+            flashes:
+                template: '@SyliusAdmin/shared/crud/common/content/flashes.html.twig'
+            header:
+                template: '@SyliusAdmin/shared/crud/common/content/header.html.twig'
+            sections:
+                template: '@SyliusAdmin/order/history/content/sections.html.twig'
+
+        'sylius_admin.order.history.content.header':
+            title_block:
+                template: '@SyliusAdmin/shared/crud/common/content/header/title_block.html.twig'
+            breadcrumbs:
+                template: '@SyliusAdmin/order/history/content/header/breadcrumbs.html.twig'
+
+        'sylius_admin.order.history.content.header.title_block':
+            title:
+                template: '@SyliusAdmin/order/history/content/header/title_block/title.html.twig'
+            actions:
+                template: '@SyliusAdmin/order/history/content/header/title_block/actions.html.twig'
+
+        'sylius_admin.order.history.content.header.title_block.actions':
+            back:
+                template: '@SyliusAdmin/order/history/content/header/title_block/actions/back.html.twig'
+
+        'sylius_admin.order.history.content.sections':
+            addresses:
+                template: '@SyliusAdmin/order/history/content/sections/addresses.html.twig'
+
+        'sylius_admin.order.history.content.sections.addresses':
+            billing_address:
+                component: sylius_admin:order:address_history
+                props:
+                    addressId: '@=_context.resource.getBillingAddress().getId()'
+                    header: 'sylius.ui.billing_address'
+                    sort: 'desc'
+            shipping_address:
+                component: sylius_admin:order:address_history
+                props:
+                    addressId: '@=_context.resource.getShippingAddress().getId()'
+                    header: 'sylius.ui.shipping_address'
+                    sort: 'desc'

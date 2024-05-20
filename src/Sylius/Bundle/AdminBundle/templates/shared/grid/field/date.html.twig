@@ -1,0 +1,8 @@
+<div class="text-center fs-5">
+    {% if data is null %}
+        <span class="text-secondary">-</span>
+    {% else %}
+        <div>{{ data|date('d-m-Y') }}</div>
+        <div>{{ data|date('H:i:s') }}</div>
+    {% endif %}
+</div>

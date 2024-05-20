@@ -10,7 +10,7 @@ Feature: Shipping method flat rate per shipment calculator validation
         And the store has a zone "United States" with code "US"
         And I am logged in as an administrator
 
-    @ui @javascript @api
+    @ui @mink:chromedriver @api
     Scenario: Trying to add a new shipping method with flat rate per shipment calculator without specifying its amount
         When I want to create a new shipping method
         And I specify its code as "FED_EX_CARRIER"
@@ -21,7 +21,7 @@ Feature: Shipping method flat rate per shipment calculator validation
         Then I should be notified that amount for "Web" channel should not be blank
         And shipping method with name "FedEx Carrier" should not be added
 
-    @ui @javascript @api
+    @ui @mink:chromedriver @api
     Scenario: Trying to add a new shipping method with flat rate per shipment calculator with charge below 0
         When I want to create a new shipping method
         And I specify its code as "FED_EX_CARRIER"

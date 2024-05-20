@@ -1,0 +1,10 @@
+{% set product = hookable_metadata.context.resource %}
+
+<div class="row">
+    <div class="col-12 col-md-4 fw-bold">{{ 'sylius.ui.product_taxons'|trans }}:</div>
+    <div class="col-12 col-md-8">
+        {% for productTaxon in product.productTaxons %}
+            <div>{{ productTaxon.taxon.fullName }}</div>
+        {% endfor %}
+    </div>
+</div>

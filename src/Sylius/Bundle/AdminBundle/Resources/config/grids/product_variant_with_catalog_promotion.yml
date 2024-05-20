@@ -16,7 +16,7 @@ sylius_grid:
                     path: .
                     label: sylius.ui.name
                     options:
-                        template: "@SyliusAdmin/ProductVariant/Grid/Field/name.html.twig"
+                        template: "@SyliusAdmin/product_variant/grid/field/name.html.twig"
                 code:
                     type: string
                     label: sylius.ui.code
@@ -30,7 +30,7 @@ sylius_grid:
                     path: .
                     label: sylius.ui.inventory
                     options:
-                        template: "@SyliusAdmin/ProductVariant/Grid/Field/inventory.html.twig"
+                        template: "@SyliusAdmin/product_variant/grid/field/inventory.html.twig"
             filters:
                 code:
                     type: string

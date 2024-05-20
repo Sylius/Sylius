@@ -18,7 +18,6 @@ use Behat\Mink\Exception\ElementNotFoundException;
 use Behat\Mink\Session;
 use FriendsOfBehat\PageObjectExtension\Page\SymfonyPage;
 use Sylius\Behat\Service\Accessor\TableAccessorInterface;
-use Sylius\Bundle\MoneyBundle\Formatter\MoneyFormatterInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Symfony\Component\Routing\RouterInterface;
 
@@ -29,7 +28,6 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
         $minkParameters,
         RouterInterface $router,
         private TableAccessorInterface $tableAccessor,
-        private MoneyFormatterInterface $moneyFormatter,
     ) {
         parent::__construct($session, $minkParameters, $router);
     }
@@ -66,48 +64,65 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
         return $this->hasAddress($billingAddressText, $customerName, $street, $postcode, $city, $countryName);
     }
 
-    public function hasShipment(string $shippingDetails): bool
+    public function hasShipment(string $shippingMethodName): bool
     {
         $shipmentsText = $this->getElement('shipments')->getText();
 
-        return stripos($shipmentsText, $shippingDetails) !== false;
+        return stripos($shipmentsText, $shippingMethodName) !== false;
+    }
+
+    public function hasShipmentWithState(string $state): bool
+    {
+        foreach ($this->getElement('shipments')->findAll('css', '[data-test-shipment-state]') as $shipmentState) {
+            if (0 === strcasecmp($state, $shipmentState->getText())) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     public function specifyTrackingCode(string $code): void
     {
-        $this->getDocument()->fillField('sylius_shipment_ship_tracking', $code);
+        $this->getElement('shipment_tracking')->setValue($code);
     }
 
     public function canShipOrder(OrderInterface $order): bool
     {
-        return $this->getLastOrderShipmentElement($order)->hasButton('Ship');
+        return $this->hasElement('shipment_ship_button');
     }
 
     public function shipOrder(OrderInterface $order): void
     {
-        $this->getLastOrderShipmentElement($order)->pressButton('Ship');
+        $this->getElement('shipment_ship_button')->press();
     }
 
-    public function hasPayment(string $paymentDetails): bool
+    public function hasPayment(string $paymentMethodName): bool
     {
         $paymentsText = $this->getElement('payments')->getText();
 
-        return stripos($paymentsText, $paymentDetails) !== false;
+        return stripos($paymentsText, $paymentMethodName) !== false;
     }
 
     public function canCompleteOrderLastPayment(OrderInterface $order): bool
     {
-        return $this->getLastOrderPaymentElement($order)->hasButton('Complete');
+        $lastPayment = $order->getLastPayment();
+
+        return $this->hasElement('payment_complete', ['%paymentId%' => $lastPayment->getId()]);
     }
 
     public function completeOrderLastPayment(OrderInterface $order): void
     {
-        $this->getLastOrderPaymentElement($order)->pressButton('Complete');
+        $lastPayment = $order->getLastPayment();
+
+        $this->getElement('payment_complete', ['%paymentId%' => $lastPayment->getId()])->submit();
     }
 
     public function refundOrderLastPayment(OrderInterface $order): void
     {
-        $this->getLastOrderPaymentElement($order)->pressButton('Refund');
+        $lastPayment = $order->getLastPayment();
+
+        $this->getElement('payment_refund', ['%paymentId%' => $lastPayment->getId()])->submit();
     }
 
     public function countItems(): int
@@ -269,18 +284,14 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
 
     public function getPaymentAmount(): string
     {
-        $paymentsPrice = $this->getElement('payments')->find('css', '.description');
+        $paymentsPrice = $this->getElement('payments')->find('css', '[data-test-payment-amount]');
 
         return $paymentsPrice->getText();
     }
 
     public function getPaymentsCount(): int
     {
-        try {
-            $payments = $this->getElement('payments')->findAll('css', '.item');
-        } catch (ElementNotFoundException) {
-            return 0;
-        }
+        $payments = $this->getElement('payments')->findAll('css', '[data-test-payment]');
 
         return count($payments);
     }
@@ -298,7 +309,12 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
 
     public function hasCancelButton(): bool
     {
-        return $this->getDocument()->hasButton('Cancel');
+        return $this->hasElement('cancel_order');
+    }
+
+    public function cancelOrder(): void
+    {
+        $this->getElement('cancel_order')->click();
     }
 
     public function getOrderState(): string
@@ -314,11 +330,6 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     public function getShippingState(): string
     {
         return $this->getElement('order_shipping_state')->getText();
-    }
-
-    public function cancelOrder(): void
-    {
-        $this->getDocument()->pressButton('Cancel');
     }
 
     public function deleteOrder(): void
@@ -405,32 +416,37 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
-            'billing_address' => '#billing-address',
+            'billing_address' => '[data-test-billing-address]',
+            'cancel_order' => '[data-test-cancel-order]',
             'currency' => '#sylius-order-currency',
             'customer' => '#customer',
             'ip_address' => '#ipAddress',
             'items_total' => '#items-total',
             'order_notes' => '#sylius-order-notes',
-            'order_payment_state' => '#payment-state > span',
+            'order_payment_state' => '[data-test-order-payment-state]',
             'order_shipping_state' => '#shipping-state > span',
-            'order_state' => '#sylius-order-state',
-            'payments' => '#sylius-payments',
+            'order_state' => '[data-test-order-state]',
+            'payments' => '[data-test-payments]',
+            'payment_complete' => '[data-test-complete-payment="%paymentId%"]',
+            'payment_refund' => '[data-test-refund-payment="%paymentId%"]',
             'promotion_discounts' => '#promotion-discounts',
             'promotion_shipping_discounts' => '#shipping-discount-value',
-            'promotion_total' => '#promotion-total',
+            'promotion_total' => '[data-test-promotion-total]',
             'resend_order_confirmation_email' => '[data-test-resend-order-confirmation-email]',
             'resend_shipment_confirmation_email' => '[data-test-resend-shipment-confirmation-email]',
             'shipment_shipped_at_date' => '#sylius-shipments .shipped-at-date',
-            'shipments' => '#sylius-shipments',
-            'shipping_address' => '#shipping-address',
+            'shipments' => '[data-test-shipments]',
+            'shipment_tracking' => '[data-test-shipment-tracking]',
+            'shipment_ship_button' => '[data-test-shipment-ship-button]',
+            'shipping_address' => '[data-test-shipping-address]',
             'shipping_adjustment_name' => '#shipping-adjustment-label',
             'shipping_charges' => '#shipping-base-value',
             'shipping_tax' => '#shipping-tax-value',
             'shipping_total' => '#shipping-total',
             'table' => '.table',
-            'tax_total' => '#tax-total',
+            'tax_total' => '[data-test-tax-total]',
             'taxes' => '#taxes',
-            'total' => '#total',
+            'total' => '[data-test-total]',
         ]);
     }
 
@@ -462,30 +478,5 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     protected function getRowWithItem(string $itemName): ?NodeElement
     {
         return $this->tableAccessor->getRowWithFields($this->getElement('table'), ['item' => $itemName]);
-    }
-
-    protected function getLastOrderPaymentElement(OrderInterface $order): ?NodeElement
-    {
-        $payment = $order->getPayments()->last();
-
-        $paymentStateElements = $this->getElement('payments')->findAll('css', sprintf('span.ui.label:contains(\'%s\')', ucfirst($payment->getState())));
-        $paymentStateElement = end($paymentStateElements);
-
-        return $paymentStateElement->getParent()->getParent();
-    }
-
-    protected function getLastOrderShipmentElement(OrderInterface $order): ?NodeElement
-    {
-        $shipment = $order->getShipments()->last();
-
-        $shipmentStateElements = $this->getElement('shipments')->findAll('css', sprintf('span.ui.label:contains(\'%s\')', ucfirst($shipment->getState())));
-        $shipmentStateElement = end($shipmentStateElements);
-
-        return $shipmentStateElement->getParent()->getParent();
-    }
-
-    protected function getFormattedMoney(int $orderPromotionTotal): string
-    {
-        return $this->moneyFormatter->format($orderPromotionTotal, $this->getDocument()->find('css', '#sylius-order-currency')->getText());
     }
 }

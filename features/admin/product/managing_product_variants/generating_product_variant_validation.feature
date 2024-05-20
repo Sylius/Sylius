@@ -58,3 +58,10 @@ Feature: Generating product variant generation
         And I should be notified that code is required for the 2nd variant
         And I should be notified that prices in all channels must be defined for the 2nd variant
         And I should not see any variants in the list
+
+    @ui @no-api
+    Scenario: Trying to remove an existing product variant during generation
+        Given the product "Wyborowa Vodka" has "Wyborowa Vodka Orange" variant priced at "$40.00" configured with "Orange" option value
+        When I want to generate new variants for this product
+        Then I should not be able to remove 1st product variant
+        And I should be able to remove 2nd product variant

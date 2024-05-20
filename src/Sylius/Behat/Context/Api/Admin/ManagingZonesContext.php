@@ -232,9 +232,9 @@ final class ManagingZonesContext implements Context
     }
 
     /**
-     * @Then I can not add a zone :zone
+     * @Then /^I should not be able to add the ("[^"]+" zone) as a member$/
      */
-    public function iCanNotAddAZone(ZoneInterface $zone): void
+    public function iShouldNotBeAbleToAddZoneAsAMember(ZoneInterface $zone): void
     {
         $this->client->addSubResourceData('members', [
             'code' => $zone->getCode(),

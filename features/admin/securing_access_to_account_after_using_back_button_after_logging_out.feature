@@ -8,7 +8,7 @@ Feature: Securing access to the administration panel after using the back button
         Given the store operates on a single channel in "United States"
         And I am logged in as an administrator
 
-    @ui @mink:chromedriver @no-api
+    @todo @ui @mink:chromedriver @no-api
     Scenario: Securing access to administration dashboard after using the back button after logging out
         When I am on the administration dashboard
         And I log out

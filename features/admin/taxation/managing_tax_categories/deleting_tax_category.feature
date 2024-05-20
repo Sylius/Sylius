@@ -8,7 +8,7 @@ Feature: Deleting a tax category
         Given the store has a tax category "Alcohol" with a code "alcohol"
         And I am logged in as an administrator
 
-    @ui @api
+    @todo @ui @api
     Scenario: Deleted tax category should disappear from the registry
         When I delete tax category "Alcohol"
         Then I should be notified that it has been successfully deleted

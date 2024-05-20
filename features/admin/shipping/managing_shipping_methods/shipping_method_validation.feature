@@ -10,7 +10,6 @@ Feature: Shipping method validation
         And the store is available in "English (United States)"
         And I am logged in as an administrator
 
-
     @no-ui @api
     Scenario: Trying to add shipping method translation in unexisting locale
         When I want to create a new shipping method

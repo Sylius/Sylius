@@ -1,0 +1,26 @@
+{% import '@SyliusAdmin/shared/helper/money.html.twig' as _money %}
+
+{% set order = hookable_metadata.context.resource %}
+
+{% set orderPromotionAdjustment = constant('Sylius\\Component\\Core\\Model\\AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT') %}
+{% set unitPromotionAdjustment = constant('Sylius\\Component\\Core\\Model\\AdjustmentInterface::ORDER_UNIT_PROMOTION_ADJUSTMENT') %}
+
+{% set orderPromotionAdjustments = sylius_aggregate_adjustments(order.getAdjustmentsRecursively(orderPromotionAdjustment)) %}
+{% set unitPromotionAdjustments = sylius_aggregate_adjustments(order.getAdjustmentsRecursively(unitPromotionAdjustment)) %}
+{% set promotionAdjustments = orderPromotionAdjustments|merge(unitPromotionAdjustments) %}
+{% set totalAdjustments = promotionAdjustments|reduce((carry, v) => carry + v) %}
+
+<tr>
+    <td>
+        <div class="d-md-flex justify-content-between">
+            <div><strong>{{ 'sylius.ui.promotion_total'|trans }}:</strong></div>
+        </div>
+    </td>
+    <td class="text-end" {{ sylius_test_html_attribute('promotion-total') }}>
+        {% if totalAdjustments == 0 %}
+            <p>{{ 'sylius.ui.no_promotion'|trans }}</p>
+        {% else %}
+            {{ _money.format(totalAdjustments, order.currencyCode) }}
+        {% endif %}
+    </td>
+</tr>

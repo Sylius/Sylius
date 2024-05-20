@@ -14,25 +14,38 @@ declare(strict_types=1);
 namespace Sylius\Behat\Page\Admin\Product;
 
 use Behat\Mink\Element\NodeElement;
+use Behat\Mink\Session;
 use Sylius\Behat\Behaviour\ChecksCodeImmutability;
 use Sylius\Behat\Page\Admin\Crud\UpdatePage as BaseUpdatePage;
 use Sylius\Behat\Service\AutocompleteHelper;
+use Sylius\Behat\Service\Helper\AutocompleteHelperInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
+use Symfony\Component\Routing\RouterInterface;
 use Webmozart\Assert\Assert;
 
 class UpdateConfigurableProductPage extends BaseUpdatePage implements UpdateConfigurableProductPageInterface
 {
     use ChecksCodeImmutability;
+    use FormTrait;
+
+    public function __construct(
+        Session $session,
+        $minkParameters,
+        RouterInterface $router,
+        string $routeName,
+        private AutocompleteHelperInterface $autocompleteHelper,
+    ) {
+        parent::__construct($session, $minkParameters, $router, $routeName);
+    }
 
     private array $imageUrls = [];
 
-    public function nameItIn(string $name, string $localeCode): void
+    public function saveChanges(): void
     {
-        $this->getDocument()->fillField(
-            sprintf('sylius_product_translations_%s_name', $localeCode),
-            $name,
-        );
+        $this->waitForFormUpdate();
+
+        parent::saveChanges();
     }
 
     public function setMetaKeywords(string $keywords, string $localeCode): void
@@ -105,91 +118,7 @@ class UpdateConfigurableProductPage extends BaseUpdatePage implements UpdateConf
 
     public function hasLastImageAVariant(ProductVariantInterface $productVariant): bool
     {
-        $this->clickTabIfItsNotActive('media');
-
-        $imageForm = $this->getLastImageElement();
-
-        return $productVariant->getCode() === $imageForm->find('css', 'input[type="hidden"]')->getValue();
-    }
-
-    public function attachImage(string $path, ?string $type = null, ?ProductVariantInterface $productVariant = null): void
-    {
-        $this->clickTabIfItsNotActive('media');
-        $this->getDocument()->clickLink('Add');
-
-        $imageForm = $this->getLastImageElement();
-
-        if (null !== $type) {
-            $imageForm->fillField('Type', $type);
-        }
-
-        if (null !== $productVariant) {
-            $imageForm->find('css', 'input[type="hidden"]')->setValue($productVariant->getCode());
-        }
-
-        $filesPath = $this->getParameter('files_path');
-        $imageForm->find('css', 'input[type="file"]')->attachFile($filesPath . $path);
-    }
-
-    public function changeImageWithType(string $type, string $path): void
-    {
-        $filesPath = $this->getParameter('files_path');
-
-        $imageForm = $this->getImageElementByType($type);
-        $imageForm->find('css', 'input[type="file"]')->attachFile($filesPath . $path);
-    }
-
-    public function removeImageWithType(string $type): void
-    {
-        $this->clickTabIfItsNotActive('media');
-
-        $imageElement = $this->getImageElementByType($type);
-        $imageSourceElement = $imageElement->find('css', 'img');
-        if (null !== $imageSourceElement) {
-            $this->saveImageUrlForType($type, $imageSourceElement->getAttribute('src'));
-        }
-
-        $imageElement->clickLink('Delete');
-    }
-
-    public function removeFirstImage(): void
-    {
-        $this->clickTabIfItsNotActive('media');
-        $imageElement = $this->getFirstImageElement();
-        $imageTypeElement = $imageElement->find('css', 'input[type=text]');
-        $imageSourceElement = $imageElement->find('css', 'img');
-
-        if (null !== $imageTypeElement && null !== $imageSourceElement) {
-            $this->saveImageUrlForType(
-                $imageTypeElement->getValue(),
-                $imageSourceElement->getAttribute('src'),
-            );
-        }
-
-        $imageElement->clickLink('Delete');
-    }
-
-    public function modifyFirstImageType(string $type): void
-    {
-        $this->clickTabIfItsNotActive('media');
-
-        $firstImage = $this->getFirstImageElement();
-        $this->setImageType($firstImage, $type);
-    }
-
-    public function selectVariantForFirstImage(ProductVariantInterface $productVariant): void
-    {
-        $this->clickTabIfItsNotActive('media');
-
-        $imageElement = $this->getFirstImageElement();
-        $imageElement->find('css', 'input[type="hidden"]')->setValue($productVariant->getCode());
-    }
-
-    public function countImages(): int
-    {
-        $imageElements = $this->getImageElements();
-
-        return count($imageElements);
+        return $this->hasImageWithVariant($productVariant);
     }
 
     public function goToVariantsList(): void
@@ -207,11 +136,6 @@ class UpdateConfigurableProductPage extends BaseUpdatePage implements UpdateConf
         $this->getDocument()->clickLink('Generate');
     }
 
-    public function hasInventoryTab(): bool
-    {
-        return null !== $this->getDocument()->find('css', '.tab > h3:contains("Inventory")');
-    }
-
     protected function getCodeElement(): NodeElement
     {
         return $this->getElement('code');
@@ -219,20 +143,24 @@ class UpdateConfigurableProductPage extends BaseUpdatePage implements UpdateConf
 
     protected function getDefinedElements(): array
     {
-        return array_merge(parent::getDefinedElements(), [
-            'channel_checkbox' => '.checkbox:contains("%channel%") input',
-            'channels' => '#sylius_product_channels',
-            'code' => '#sylius_product_code',
-            'images' => '#sylius_product_images',
-            'main_taxon' => '#sylius_product_mainTaxon',
-            'name' => '#sylius_product_translations_en_US_name',
-            'options' => '#sylius_product_options',
-            'price' => '#sylius_product_variant_price',
-            'search' => '.ui.fluid.search.selection.dropdown',
-            'search_item_selected' => 'div.menu > div.item.selected',
-            'tab' => '.menu [data-tab="%name%"]',
-            'taxonomy' => 'a[data-tab="taxonomy"]',
-        ]);
+        return array_merge(
+            parent::getDefinedElements(),
+            [
+                'channel_checkbox' => '.checkbox:contains("%channel%") input',
+                'channels' => '#sylius_product_channels',
+                'code' => '#sylius_product_code',
+                'images' => '#sylius_product_images',
+                'main_taxon' => '#sylius_product_mainTaxon',
+                'name' => '#sylius_product_translations_en_US_name',
+                'options' => '#sylius_product_options',
+                'price' => '#sylius_product_variant_price',
+                'search' => '.ui.fluid.search.selection.dropdown',
+                'search_item_selected' => 'div.menu > div.item.selected',
+                'tab' => '.menu [data-tab="%name%"]',
+                'taxonomy' => 'a[data-tab="taxonomy"]',
+            ],
+            $this->getDefinedFormElements(),
+        );
     }
 
     private function openTaxonBookmarks(): void

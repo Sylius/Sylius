@@ -1,0 +1,5 @@
+{% set payment = hookable_metadata.context.payment %}
+
+<td class="w-1" {{ sylius_test_html_attribute('payment-state') }}>
+    <div class="text-primary strong me-3">{{ ('sylius.ui.' ~ payment.state)|trans|upper }}</div>
+</td>

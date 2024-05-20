@@ -1,0 +1,47 @@
+{% import '@SyliusAdmin/shared/helper/table.html.twig' as _table %}
+{% import '@SyliusAdmin/shared/helper/pagination.html.twig' as _pagination %}
+
+{% set resources = hookable_metadata.context.resources %}
+{% set data = resources.data %}
+{% set definition = resources.definition %}
+
+{% if data|length > 0 %}
+    <div class="card">
+        <div class="card-body border-bottom py-3">
+            <div class="d-flex">
+                {% if data|length > 0 and definition.actionGroups.bulk is defined and definition.getEnabledActions('bulk')|length > 0 %}
+                    <div class="sylius-grid-nav__bulk">
+                        {% for action in definition.getEnabledActions('bulk') %}
+                            {{ sylius_grid_render_bulk_action(resources, action, null) }}
+                        {% endfor %}
+                    </div>
+                {% endif %}
+                <div class="ms-auto">
+                    {{ _pagination.numberOfResultsSelector(data, definition.limits) }}
+                </div>
+            </div>
+        </div>
+        <div class="table-responsive">
+            <table class="table card-table table-vcenter text-nowrap datatable" {{ sylius_test_html_attribute('grid-table') }}>
+                <thead>
+                <tr>
+                    {{ _table.headers(resources, resources.definition, app.request.attributes) }}
+                </tr>
+                </thead>
+                <tbody {{ sylius_test_html_attribute('grid-table-body') }}>
+                {% for row in resources.data %}
+                    {{ _table.row(resources, resources.definition, row) }}
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="card-footer d-flex align-items-center">
+            <div class="text-muted">
+                {{ _pagination.resultsCount(data) }}
+            </div>
+            <div class="ms-auto">
+                {{ _pagination.simple(data) }}
+            </div>
+        </div>
+    </div>
+{% endif %}

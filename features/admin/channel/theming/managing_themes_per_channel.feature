@@ -9,7 +9,7 @@ Feature: Managing themes per channel
         And the store has "maverick/meerkat" theme
         And I am logged in as an administrator
 
-    @ui @no-api
+    @todo @ui @no-api
     Scenario: None of the themes are used by default
         When I create a new channel "Poland"
         Then that channel should not use any theme

@@ -1,0 +1,8 @@
+{% set shipment = hookable_metadata.context.shipment %}
+
+{% if shipment.state == 'shipped' %}
+    {% set resendPath = path('sylius_admin_shipment_resend_confirmation_email', {'id': shipment.id, '_csrf_token': csrf_token(shipment.id)}) %}
+    <a class="btn" href="{{ resendPath }}" {{ sylius_test_html_attribute('resend-shipment-confirmation-email') }}>
+        {{ 'sylius.ui.resend_the_shipment_confirmation_email'|trans }}
+    </a>
+{% endif %}

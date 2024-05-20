@@ -41,6 +41,8 @@ interface UpdateConfigurableProductPageInterface extends UpdatePageInterface
 
     public function hasLastImageAVariant(ProductVariantInterface $productVariant): bool;
 
+    public function hasImageWithType(string $type): bool;
+
     public function attachImage(string $path, ?string $type = null, ?ProductVariantInterface $productVariant = null): void;
 
     public function changeImageWithType(string $type, string $path): void;
@@ -61,5 +63,5 @@ interface UpdateConfigurableProductPageInterface extends UpdatePageInterface
 
     public function goToVariantGeneration(): void;
 
-    public function hasInventoryTab(): bool;
+    public function hasTab(string $name): bool;
 }

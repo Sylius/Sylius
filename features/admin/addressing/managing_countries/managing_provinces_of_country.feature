@@ -8,7 +8,7 @@ Feature: Managing provinces of a country
         Given the store has country "United Kingdom"
         And I am logged in as an administrator
 
-    @ui @javascript @api
+    @api @ui @javascript
     Scenario: Adding a province to an existing country
         When I want to edit this country
         And I add the "Scotland" province with "GB-SCT" code
@@ -16,7 +16,7 @@ Feature: Managing provinces of a country
         Then I should be notified that it has been successfully edited
         And this country should have the "Scotland" province
 
-    @ui @javascript @api
+    @api @ui @javascript
     Scenario: Removing a province from an existing country
         Given this country has the "Northern Ireland" province with "GB-NIR" code
         When I want to edit this country
@@ -25,7 +25,7 @@ Feature: Managing provinces of a country
         Then I should be notified that it has been successfully edited
         And this country should not have the "Northern Ireland" province
 
-    @ui @javascript @api
+    @api @ui @javascript
     Scenario: Removing a province that is a zone member should not be possible
         Given this country has the "Northern Ireland" province with "GB-NIR" code
         And this country also has the "Scotland" province with "GB-SCT" code
@@ -43,7 +43,7 @@ Feature: Managing provinces of a country
         And this country should still have the "Scotland" province
         And this country should still have the "England" province
 
-    @ui @javascript @api
+    @api @ui @javascript
     Scenario: Removing a province that is not a zone member anymore should be possible
         Given this country has the "Northern Ireland" province with "GB-NIR" code
         And this country also has the "Scotland" province with "GB-SCT" code
@@ -60,18 +60,18 @@ Feature: Managing provinces of a country
         And this country should not have the "England" province
         And this country should still have the "Northern Ireland" and "Scotland" provinces
 
-    @ui @javascript @api
+    @api @ui @javascript
     Scenario: Removing and adding a new province to an existing country
         Given this country has the "Northern Ireland" province with "GB-NIR" code
         When I want to edit this country
-        And I delete the "Northern Ireland" province of this country
         And I add the "Scotland" province with "GB-SCT" code
+        And I delete the "Northern Ireland" province of this country
         And I save my changes
         Then I should be notified that it has been successfully edited
         And this country should not have the "Northern Ireland" province
         And this country should have the "Scotland" province
 
-    @ui @javascript @api
+    @api @ui @javascript
     Scenario: Adding a province with an austrian province code
         When I want to edit this country
         And I add the "Wien" province with "AT-9" code

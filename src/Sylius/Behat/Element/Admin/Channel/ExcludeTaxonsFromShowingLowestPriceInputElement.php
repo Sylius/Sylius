@@ -13,37 +13,59 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Element\Admin\Channel;
 
-use FriendsOfBehat\PageObjectExtension\Element\Element;
-use Sylius\Behat\Service\AutocompleteHelper;
+use Behat\Mink\Session;
+use FriendsOfBehat\SymfonyExtension\Mink\MinkParameters;
+use Sylius\Behat\Element\Admin\Crud\FormElement as BaseFormElement;
+use Sylius\Behat\Service\Helper\AutocompleteHelperInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 
-final class ExcludeTaxonsFromShowingLowestPriceInputElement extends Element implements ExcludeTaxonsFromShowingLowestPriceInputElementInterface
+final class ExcludeTaxonsFromShowingLowestPriceInputElement extends BaseFormElement implements ExcludeTaxonsFromShowingLowestPriceInputElementInterface
 {
+    public function __construct(
+        Session $session,
+        array|MinkParameters $minkParameters,
+        private AutocompleteHelperInterface $autocompleteHelper,
+    ) {
+        parent::__construct($session, $minkParameters);
+    }
+
     public function excludeTaxon(TaxonInterface $taxon): void
     {
-        $excludeTaxonElement = $this->getElement('taxons_excluded_from_showing_lowest_price')->getParent();
+        $excludeTaxonElement = $this->getElement('taxons_excluded_from_showing_lowest_price');
 
-        AutocompleteHelper::chooseValue($this->getSession(), $excludeTaxonElement, $taxon->getName());
+        $this->autocompleteHelper->selectByValue(
+            $this->getDriver(),
+            $excludeTaxonElement->getXpath(),
+            $taxon->getCode(),
+        );
+        $this->waitForFormUpdate();
     }
 
     public function removeExcludedTaxon(TaxonInterface $taxon): void
     {
-        $excludeTaxonElement = $this->getElement('taxons_excluded_from_showing_lowest_price')->getParent();
+        $excludeTaxonElement = $this->getElement('taxons_excluded_from_showing_lowest_price');
 
-        AutocompleteHelper::removeValue($this->getSession(), $excludeTaxonElement, $taxon->getName());
+        $this->autocompleteHelper->removeByValue(
+            $this->getDriver(),
+            $excludeTaxonElement->getXpath(),
+            $taxon->getCode(),
+        );
+        $this->waitForFormUpdate();
     }
 
     public function hasTaxonExcluded(TaxonInterface $taxon): bool
     {
-        $excludedTaxons = $this->getElement('taxons_excluded_from_showing_lowest_price')->getValue();
-
-        return str_contains($excludedTaxons, $taxon->getCode());
+        return null !== $this
+            ->getElement('taxons_excluded_from_showing_lowest_price')
+            ->find('css', sprintf('option:selected:contains("%s")', $taxon->getName()))
+        ;
     }
 
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
-            'taxons_excluded_from_showing_lowest_price' => '#sylius_channel_channelPriceHistoryConfig_taxonsExcludedFromShowingLowestPrice',
+            'form' => 'form',
+            'taxons_excluded_from_showing_lowest_price' => '[data-test-taxons-excluded-from-showing-lowest-price]',
         ]);
     }
 }

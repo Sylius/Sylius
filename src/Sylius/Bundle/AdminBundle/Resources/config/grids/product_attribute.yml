@@ -8,29 +8,35 @@ sylius_grid:
             sorting:
                 position: asc
             fields:
+                name:
+                    type: twig
+                    label: sylius.ui.name
+                    options:
+                        template: "@SyliusAdmin/shared/grid/field/name.html.twig"
+                        vars:
+                            th_class: "w-75"
                 code:
-                    type: string
+                    type: twig
                     label: sylius.ui.code
                     sortable: ~
-                name:
-                    type: string
-                    label: sylius.ui.name
+                    options:
+                        template: "@SyliusAdmin/shared/grid/field/code.html.twig"
+                        vars:
+                            th_class: "w-25"
                 position:
                     type: string
                     enabled: false
                     sortable: ~
                 type:
-                    type: twig
+                    type: string
                     label: sylius.ui.type
                     sortable: ~
-                    options:
-                        template: "@SyliusUi/Grid/Field/label.html.twig"
                 translatable:
                     type: twig
                     label: sylius.ui.translatable
                     sortable: ~
                     options:
-                        template: "@SyliusUi/Grid/Field/yesNo.html.twig"
+                        template: "@SyliusAdmin/shared/grid/field/boolean.html.twig"
             filters:
                 code:
                     type: string

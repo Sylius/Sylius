@@ -27,6 +27,16 @@ use Sylius\Behat\Service\Resolver\CurrentPageResolverInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\PromotionInterface;
+use Sylius\Component\Core\Promotion\Action\FixedDiscountPromotionActionCommand;
+use Sylius\Component\Core\Promotion\Action\PercentageDiscountPromotionActionCommand;
+use Sylius\Component\Core\Promotion\Action\UnitFixedDiscountPromotionActionCommand;
+use Sylius\Component\Core\Promotion\Action\UnitPercentageDiscountPromotionActionCommand;
+use Sylius\Component\Core\Promotion\Checker\Rule\CartQuantityRuleChecker;
+use Sylius\Component\Core\Promotion\Checker\Rule\ContainsProductRuleChecker;
+use Sylius\Component\Core\Promotion\Checker\Rule\CustomerGroupRuleChecker;
+use Sylius\Component\Core\Promotion\Checker\Rule\HasTaxonRuleChecker;
+use Sylius\Component\Core\Promotion\Checker\Rule\ItemTotalRuleChecker;
+use Sylius\Component\Core\Promotion\Checker\Rule\TotalOfItemsFromTaxonRuleChecker;
 use Webmozart\Assert\Assert;
 
 final class ManagingPromotionsContext implements Context
@@ -58,7 +68,7 @@ final class ManagingPromotionsContext implements Context
      * @When I want to browse promotions
      * @When I browse promotions
      */
-    public function iWantToBrowsePromotions()
+    public function iWantToBrowsePromotions(): void
     {
         $this->indexPage->open();
     }
@@ -88,7 +98,7 @@ final class ManagingPromotionsContext implements Context
      */
     public function iRemoveItsPriority(?int $priority = null): void
     {
-        $this->formElement->prioritizeIt($priority);
+        $this->formElement->setPriority($priority);
     }
 
     /**
@@ -118,7 +128,7 @@ final class ManagingPromotionsContext implements Context
      */
     public function iSpecifyItsLabelInLocaleCode(string $label, string $localeCode): void
     {
-        $this->createPage->specifyLabel($label, $localeCode);
+        $this->formElement->setLabel($label, $localeCode);
     }
 
     /**
@@ -126,7 +136,7 @@ final class ManagingPromotionsContext implements Context
      */
     public function iSpecifyItsLabelWithAStringExceedingTheLimitInLocale(string $localeCode): void
     {
-        $this->createPage->specifyLabel(str_repeat('a', 256), $localeCode);
+        $this->formElement->setLabel(str_repeat('a', 256), $localeCode);
     }
 
     /**
@@ -135,7 +145,7 @@ final class ManagingPromotionsContext implements Context
     public function thePromotionShouldHaveLabelInLocale(PromotionInterface $promotion, string $label, string $localeCode): void
     {
         $this->updatePage->open(['id' => $promotion->getId()]);
-        $this->createPage->hasLabel($label, $localeCode);
+        $this->formElement->hasLabel($label, $localeCode);
     }
 
     /**
@@ -144,19 +154,19 @@ final class ManagingPromotionsContext implements Context
      */
     public function iAddTheHasTaxonRuleConfiguredWith(string ...$taxons): void
     {
-        $this->createPage->addRule('Has at least one from taxons');
+        $this->formElement->addRule(HasTaxonRuleChecker::TYPE);
 
-        $this->createPage->selectAutocompleteRuleOption('Taxons', $taxons, true);
+        $this->formElement->selectAutocompleteRuleOptions($taxons);
     }
 
     /**
      * @When /^I add the "Total price of items from taxon" rule configured with "([^"]+)" taxon and "(?:€|£|\$)([^"]+)" amount for ("[^"]+" channel)$/
      */
-    public function iAddTheRuleConfiguredWith($taxonName, $amount, ChannelInterface $channel)
+    public function iAddTheRuleConfiguredWith(string $taxonName, $amount, ChannelInterface $channel): void
     {
-        $this->createPage->addRule('Total price of items from taxon');
-        $this->createPage->selectAutocompleteRuleOption('Taxon', $taxonName);
-        $this->createPage->fillRuleOptionForChannel($channel->getCode(), 'Amount', $amount);
+        $this->formElement->addRule(TotalOfItemsFromTaxonRuleChecker::TYPE);
+        $this->formElement->selectAutocompleteRuleOptions([$taxonName], $channel->getCode());
+        $this->formElement->fillRuleOptionForChannel($channel->getCode(), 'Amount', $amount);
     }
 
     /**
@@ -168,18 +178,27 @@ final class ManagingPromotionsContext implements Context
         $secondAmount,
         ChannelInterface $secondChannel,
     ) {
-        $this->createPage->addRule('Item total');
-        $this->createPage->fillRuleOptionForChannel($firstChannel->getCode(), 'Amount', $firstAmount);
-        $this->createPage->fillRuleOptionForChannel($secondChannel->getCode(), 'Amount', $secondAmount);
+        $this->formElement->addRule(ItemTotalRuleChecker::TYPE);
+        $this->formElement->fillRuleOptionForChannel($firstChannel->getCode(), 'Amount', $firstAmount);
+        $this->formElement->fillRuleOptionForChannel($secondChannel->getCode(), 'Amount', $secondAmount);
     }
 
     /**
-     * @When /^I add the "([^"]+)" action configured with amount of "(?:€|£|\$)([^"]+)" for ("[^"]+" channel)$/
+     * @When /^I add the "Order fixed discount" action configured with amount of "(?:€|£|\$)([^"]+)" for ("[^"]+" channel)$/
      */
-    public function iAddTheActionConfiguredWithAmountForChannel($actionType, $amount, ChannelInterface $channel)
+    public function iAddTheOrderFixedDiscountActionConfiguredWithAmountForChannel($amount, ChannelInterface $channel): void
     {
-        $this->createPage->addAction($actionType);
-        $this->createPage->fillActionOptionForChannel($channel->getCode(), 'Amount', $amount);
+        $this->formElement->addAction(FixedDiscountPromotionActionCommand::TYPE);
+        $this->formElement->fillActionOptionForChannel($channel->getCode(), 'Amount', $amount);
+    }
+
+    /**
+     * @When /^I add the "Item fixed discount" action configured with amount of "(?:€|£|\$)([^"]+)" for ("[^"]+" channel)$/
+     */
+    public function iAddTheItemFixedDiscountActionConfiguredWithAmountForChannel($amount, ChannelInterface $channel): void
+    {
+        $this->formElement->addAction(UnitFixedDiscountPromotionActionCommand::TYPE);
+        $this->formElement->fillActionOptionForChannel($channel->getCode(), 'Amount', $amount);
     }
 
     /**
@@ -187,7 +206,7 @@ final class ManagingPromotionsContext implements Context
      */
     public function itIsConfiguredWithAmountForChannel($amount, ChannelInterface $channel)
     {
-        $this->createPage->fillActionOptionForChannel($channel->getCode(), 'Amount', $amount);
+        $this->formElement->fillActionOptionForChannel($channel->getCode(), 'Amount', $amount);
     }
 
     /**
@@ -195,7 +214,7 @@ final class ManagingPromotionsContext implements Context
      */
     public function iAddAMinPriceFilterRangeForChannel(ChannelInterface $channel, $minimum)
     {
-        $this->createPage->fillActionOptionForChannel($channel->getCode(), 'Min', $minimum);
+        $this->formElement->fillActionOptionForChannel($channel->getCode(), 'Min', $minimum);
     }
 
     /**
@@ -203,7 +222,7 @@ final class ManagingPromotionsContext implements Context
      */
     public function iAddAMaxPriceFilterRangeForChannel(ChannelInterface $channel, $maximum)
     {
-        $this->createPage->fillActionOptionForChannel($channel->getCode(), 'Max', $maximum);
+        $this->formElement->fillActionOptionForChannel($channel->getCode(), 'Max', $maximum);
     }
 
     /**
@@ -216,44 +235,73 @@ final class ManagingPromotionsContext implements Context
     }
 
     /**
-     * @When I specify that this action should be applied to items from :taxonName category
+     * @When I specify that this action should be applied to items from :taxonName category for :channel channel
      */
-    public function iSpecifyThatThisActionShouldBeAppliedToItemsFromCategory($taxonName)
+    public function iSpecifyThatThisActionShouldBeAppliedToItemsFromCategory(string $taxonName, ChannelInterface $channel): void
     {
-        $this->createPage->selectAutoCompleteFilterOption('Taxons', $taxonName);
+        $this->formElement->selectAutocompleteActionFilterOptions([$taxonName], $channel->getCode(), 'taxons');
     }
 
     /**
-     * @When /^I add the "([^"]+)" action configured with a percentage value of "(?:|-)([^"]+)%" for ("[^"]+" channel)$/
+     * @When /^I add the "Item percentage discount" action configured with a percentage value of "(?:|-)([^"]+)%" for ("[^"]+" channel)$/
      */
-    public function iAddTheActionConfiguredWithAPercentageValueForChannel(
-        string $actionType,
+    public function iAddTheItemPercentageDiscountActionConfiguredWithAPercentageValueForChannel(
         string $percentage,
         ChannelInterface $channel,
     ): void {
-        $this->createPage->addAction($actionType);
-        $this->createPage->fillActionOptionForChannel($channel->getCode(), 'Percentage', $percentage);
+        $this->formElement->addAction(UnitPercentageDiscountPromotionActionCommand::TYPE);
+        $this->formElement->fillActionOptionForChannel($channel->getCode(), 'Percentage', $percentage);
     }
 
     /**
-     * @When I add the :actionType action configured without a percentage value for :channel channel
+     * @When /^I add the "Order percentage discount" action configured with a percentage value of "(?:|-)([^"]+)%" for ("[^"]+" channel)$/
      */
-    public function iAddTheActionConfiguredWithoutAPercentageValueForChannel(
-        string $actionType,
+    public function iAddTheOrderPercentageDiscountActionConfiguredWithAPercentageValueForChannel(
+        string $percentage,
         ChannelInterface $channel,
     ): void {
-        $this->createPage->addAction($actionType);
-        $this->createPage->fillActionOptionForChannel($channel->getCode(), 'Percentage', '');
+        $this->formElement->addAction(PercentageDiscountPromotionActionCommand::TYPE);
+        $this->formElement->fillActionOptionForChannel($channel->getCode(), 'Percentage', $percentage);
     }
 
     /**
-     * @When /^I add the "([^"]+)" action configured with a percentage value of "(?:|-)([^"]+)%"$/
-     * @When I add the :actionType action configured without a percentage value
+     * @When I add the "Order percentage discount" action configured without a percentage value for :channel channel
      */
-    public function iAddTheActionConfiguredWithAPercentageValue($actionType, $percentage = null)
+    public function iAddTheOrderPercentageDiscountActionConfiguredWithoutAPercentageValueForChannel(
+        ChannelInterface $channel,
+    ): void {
+        $this->formElement->addAction(PercentageDiscountPromotionActionCommand::TYPE);
+        $this->formElement->fillActionOptionForChannel($channel->getCode(), 'Percentage', '');
+    }
+
+    /**
+     * @When I add the "Item percentage discount" action configured without a percentage value for :channel channel
+     */
+    public function iAddTheItemPercentageDiscountActionConfiguredWithoutAPercentageValueForChannel(
+        ChannelInterface $channel,
+    ): void {
+        $this->formElement->addAction(UnitPercentageDiscountPromotionActionCommand::TYPE);
+        $this->formElement->fillActionOptionForChannel($channel->getCode(), 'Percentage', '');
+    }
+
+    /**
+     * @When /^I add the "Order percentage discount" action configured with a percentage value of "(?:|-)([^"]+)%"$/
+     * @When I add the "Order percentage discount" action configured without a percentage value
+     */
+    public function iAddTheOrderPercentageDiscountActionConfiguredWithAPercentageValue($percentage = null)
     {
-        $this->createPage->addAction($actionType);
-        $this->createPage->fillActionOption('Percentage', $percentage ?? '');
+        $this->formElement->addAction(PercentageDiscountPromotionActionCommand::TYPE);
+        $this->formElement->fillActionOption('Percentage', $percentage ?? '');
+    }
+
+    /**
+     * @When /^I add the "Item percentage discount" action configured with a percentage value of "(?:|-)([^"]+)%"$/
+     * @When I add the "Item percentage discount" action configured without a percentage value
+     */
+    public function iAddTheItemPercentageDiscountActionConfiguredWithAPercentageValue($percentage = null)
+    {
+        $this->formElement->addAction(UnitPercentageDiscountPromotionActionCommand::TYPE);
+        $this->formElement->fillActionOption('Percentage', $percentage ?? '');
     }
 
     /**
@@ -261,8 +309,8 @@ final class ManagingPromotionsContext implements Context
      */
     public function iAddTheCustomerGroupRuleConfiguredForGroup($customerGroupName)
     {
-        $this->createPage->addRule('Customer group');
-        $this->createPage->selectRuleOption('Customer group', $customerGroupName);
+        $this->formElement->addRule(CustomerGroupRuleChecker::TYPE);
+        $this->formElement->selectRuleOption('Customer group', $customerGroupName);
     }
 
     /**
@@ -271,6 +319,22 @@ final class ManagingPromotionsContext implements Context
     public function iCheckThePromotion(string $promotionName): void
     {
         $this->indexPage->checkResourceOnPage(['name' => $promotionName]);
+    }
+
+    /**
+     * @When I remove its last rule
+     */
+    public function iRemoveItsLastRule(): void
+    {
+        $this->formElement->removeLastRule();
+    }
+
+    /**
+     * @When I remove its last action
+     */
+    public function iRemoveItsLastAction(): void
+    {
+        $this->formElement->removeLastAction();
     }
 
     /**
@@ -354,7 +418,7 @@ final class ManagingPromotionsContext implements Context
      */
     public function iShouldBeNotifiedThatPromotionWithThisCodeAlreadyExists()
     {
-        Assert::same($this->createPage->getValidationMessage('code'), 'The promotion with given code already exists.');
+        Assert::same($this->formElement->getValidationMessage('code'), 'The promotion with given code already exists.');
     }
 
     /**
@@ -380,18 +444,15 @@ final class ManagingPromotionsContext implements Context
     /**
      * @When I set its usage limit to :usageLimit
      */
-    public function iSetItsUsageLimitTo($usageLimit)
+    public function iSetItsUsageLimitTo(int $usageLimit): void
     {
-        /** @var CreatePageInterface|UpdatePageInterface $currentPage */
-        $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
-
-        $currentPage->fillUsageLimit($usageLimit);
+        $this->formElement->setUsageLimit($usageLimit);
     }
 
     /**
      * @Then the :promotion promotion should be available to be used only :usageLimit times
      */
-    public function thePromotionShouldBeAvailableToUseOnlyTimes(PromotionInterface $promotion, $usageLimit)
+    public function thePromotionShouldBeAvailableToUseOnlyTimes(PromotionInterface $promotion, int $usageLimit): void
     {
         $this->iWantToModifyAPromotion($promotion);
 
@@ -403,10 +464,7 @@ final class ManagingPromotionsContext implements Context
      */
     public function iSetItAsExclusive(): void
     {
-        /** @var CreatePageInterface|UpdatePageInterface $currentPage */
-        $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
-
-        $currentPage->makeExclusive();
+        $this->formElement->makeExclusive();
     }
 
     /**
@@ -414,16 +472,13 @@ final class ManagingPromotionsContext implements Context
      */
     public function iSetItAsNotAppliesToDiscountedByCatalogPromotionItems(): void
     {
-        /** @var CreatePageInterface|UpdatePageInterface $currentPage */
-        $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
-
-        $currentPage->makeNotAppliesToDiscountedItem();
+        $this->formElement->makeNotAppliesToDiscountedItem();
     }
 
     /**
      * @Then the :promotion promotion should be exclusive
      */
-    public function thePromotionShouldBeExclusive(PromotionInterface $promotion)
+    public function thePromotionShouldBeExclusive(PromotionInterface $promotion): void
     {
         $this->assertIfFieldIsTrue($promotion, 'exclusive');
     }
@@ -439,18 +494,15 @@ final class ManagingPromotionsContext implements Context
     /**
      * @When I make it coupon based
      */
-    public function iMakeItCouponBased()
+    public function iMakeItCouponBased(): void
     {
-        /** @var CreatePageInterface|UpdatePageInterface $currentPage */
-        $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
-
-        $currentPage->checkCouponBased();
+        $this->formElement->makeCouponBased();
     }
 
     /**
      * @Then the :promotion promotion should be coupon based
      */
-    public function thePromotionShouldBeCouponBased(PromotionInterface $promotion)
+    public function thePromotionShouldBeCouponBased(PromotionInterface $promotion): void
     {
         $this->assertIfFieldIsTrue($promotion, 'coupon_based');
     }
@@ -458,18 +510,15 @@ final class ManagingPromotionsContext implements Context
     /**
      * @When I make it applicable for the :channelName channel
      */
-    public function iMakeItApplicableForTheChannel($channelName)
+    public function iMakeItApplicableForTheChannel(string $channelName): void
     {
-        /** @var CreatePageInterface|UpdatePageInterface $currentPage */
-        $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
-
-        $currentPage->checkChannel($channelName);
+        $this->formElement->checkChannel($channelName);
     }
 
     /**
      * @Then the :promotion promotion should be applicable for the :channelName channel
      */
-    public function thePromotionShouldBeApplicableForTheChannel(PromotionInterface $promotion, $channelName)
+    public function thePromotionShouldBeApplicableForTheChannel(PromotionInterface $promotion, string $channelName): void
     {
         $this->iWantToModifyAPromotion($promotion);
 
@@ -549,13 +598,10 @@ final class ManagingPromotionsContext implements Context
     /**
      * @When I make it available from :startsDate to :endsDate
      */
-    public function iMakeItAvailableFromTo(\DateTimeInterface $startsDate, \DateTimeInterface $endsDate)
+    public function iMakeItAvailableFromTo(\DateTimeInterface $startsDate, \DateTimeInterface $endsDate): void
     {
-        /** @var CreatePageInterface|UpdatePageInterface $currentPage */
-        $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
-
-        $currentPage->setStartsAt($startsDate);
-        $currentPage->setEndsAt($endsDate);
+        $this->formElement->setStartsAt($startsDate);
+        $this->formElement->setEndsAt($endsDate);
     }
 
     /**
@@ -566,7 +612,6 @@ final class ManagingPromotionsContext implements Context
         $this->iWantToModifyAPromotion($promotion);
 
         Assert::true($this->updatePage->hasStartsAt($startsDate));
-
         Assert::true($this->updatePage->hasEndsAt($endsDate));
     }
 
@@ -575,19 +620,16 @@ final class ManagingPromotionsContext implements Context
      */
     public function iShouldBeNotifiedThatPromotionCannotEndBeforeItsEvenStarts(): void
     {
-        /** @var CreatePageInterface|UpdatePageInterface $currentPage */
-        $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
-
-        Assert::same($currentPage->getValidationMessage('ends_at'), 'End date cannot be set prior start date.');
+        Assert::same($this->formElement->getValidationMessage('ends_at_date'), 'End date cannot be set prior start date.');
     }
 
     /**
      * @Then I should be notified that this value should not be blank
      */
-    public function iShouldBeNotifiedThatThisValueShouldNotBeBlank()
+    public function iShouldBeNotifiedThatThisValueShouldNotBeBlank(): void
     {
         Assert::same(
-            $this->createPage->getValidationMessageForAction(),
+            $this->formElement->getValidationMessageForAction(),
             'This value should not be blank.',
         );
     }
@@ -600,7 +642,7 @@ final class ManagingPromotionsContext implements Context
     public function iShouldBeNotifiedThatPercentageDiscountShouldBeBetween(): void
     {
         Assert::same(
-            $this->createPage->getValidationMessageForAction(),
+            $this->formElement->getValidationMessageForAction(),
             'The percentage discount must be between 0% and 100%.',
         );
     }
@@ -621,18 +663,18 @@ final class ManagingPromotionsContext implements Context
     /**
      * @When I add the "Contains product" rule configured with the :productName product
      */
-    public function iAddTheRuleConfiguredWithTheProduct($productName)
+    public function iAddTheRuleConfiguredWithTheProduct(string $productName): void
     {
-        $this->createPage->addRule('Contains product');
-        $this->createPage->selectAutocompleteRuleOption('Product code', $productName);
+        $this->formElement->addRule(ContainsProductRuleChecker::TYPE);
+        $this->formElement->selectAutocompleteRuleOptions([$productName]);
     }
 
     /**
-     * @When I specify that this action should be applied to the :productName product
+     * @When I specify that this action should be applied to the :productName product for :channel channel
      */
-    public function iSpecifyThatThisActionShouldBeAppliedToTheProduct($productName)
+    public function iSpecifyThatThisActionShouldBeAppliedToTheProduct(string $productName, ChannelInterface $channel): void
     {
-        $this->createPage->selectAutoCompleteFilterOption('Products', $productName);
+        $this->formElement->selectAutocompleteActionFilterOptions([$productName], $channel->getCode(), 'products');
     }
 
     /**
@@ -686,7 +728,7 @@ final class ManagingPromotionsContext implements Context
     {
         $this->iWantToModifyAPromotion($promotion);
 
-        Assert::same($this->updatePage->getPriority(), $priority);
+        Assert::same($this->formElement->getPriority(), $priority);
     }
 
     /**
@@ -757,17 +799,17 @@ final class ManagingPromotionsContext implements Context
     /**
      * @When I add a new rule
      */
-    public function iAddANewRule()
+    public function iAddANewRule(): void
     {
-        $this->createPage->addRule(null);
+        $this->formElement->addRule(CartQuantityRuleChecker::TYPE);
     }
 
     /**
      * @When I add a new action
      */
-    public function iAddANewAction()
+    public function iAddANewAction(): void
     {
-        $this->createPage->addAction(null);
+        $this->formElement->addAction(FixedDiscountPromotionActionCommand::TYPE);
     }
 
     /**
@@ -789,9 +831,17 @@ final class ManagingPromotionsContext implements Context
     /**
      * @Then I should see the rule configuration form
      */
-    public function iShouldSeeTheRuleConfigurationForm()
+    public function iShouldSeeTheRuleConfigurationForm(): void
     {
-        Assert::true($this->createPage->checkIfRuleConfigurationFormIsVisible(), 'Cart promotion rule configuration form is not visible.');
+        Assert::true($this->formElement->checkIfRuleConfigurationFormIsVisible(), 'Cart promotion rule configuration form is not visible.');
+    }
+
+    /**
+     * @Then I should not see the rule configuration form
+     */
+    public function iShouldNotSeeTheRuleConfigurationForm(): void
+    {
+        Assert::false($this->formElement->checkIfRuleConfigurationFormIsVisible(), 'Cart promotion rule configuration form is visible.');
     }
 
     /**
@@ -813,9 +863,17 @@ final class ManagingPromotionsContext implements Context
     /**
      * @Then I should see the action configuration form
      */
-    public function iShouldSeeTheActionConfigurationForm()
+    public function iShouldSeeTheActionConfigurationForm(): void
     {
-        Assert::true($this->createPage->checkIfActionConfigurationFormIsVisible(), 'Cart promotion action configuration form is not visible.');
+        Assert::true($this->formElement->checkIfActionConfigurationFormIsVisible(), 'Cart promotion action configuration form is not visible.');
+    }
+
+    /**
+     * @Then I should not see the action configuration form
+     */
+    public function iShouldNotSeeTheActionConfigurationForm(): void
+    {
+        Assert::false($this->formElement->checkIfActionConfigurationFormIsVisible(), 'Cart promotion action configuration form is visible.');
     }
 
     /**
@@ -850,11 +908,8 @@ final class ManagingPromotionsContext implements Context
      */
     public function iShouldBeNotifiedThatPromotionLabelIsTooLong(string $localeCode): void
     {
-        /** @var CreatePageInterface|UpdatePageInterface $currentPage */
-        $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
-
         Assert::same(
-            $currentPage->getValidationMessageForTranslation('label', $localeCode),
+            $this->formElement->getValidationMessageForTranslation('label', $localeCode),
             'This value is too long. It should have 255 characters or less.',
         );
     }
@@ -883,12 +938,17 @@ final class ManagingPromotionsContext implements Context
         Assert::false($this->indexPage->isArchivalFilterEnabled());
     }
 
+    /**
+     * @Then the :promotion promotion should be successfully created
+     */
+    public function thePromotionShouldBeSuccessfullyCreated(PromotionInterface $promotion): void
+    {
+        $this->updatePage->verify(['id' => $promotion->getId()]);
+    }
+
     private function assertFieldValidationMessage(string $element, string $expectedMessage)
     {
-        /** @var CreatePageInterface|UpdatePageInterface $currentPage */
-        $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
-
-        Assert::same($currentPage->getValidationMessage($element), $expectedMessage);
+        Assert::same($this->formElement->getValidationMessage($element), $expectedMessage);
     }
 
     /**

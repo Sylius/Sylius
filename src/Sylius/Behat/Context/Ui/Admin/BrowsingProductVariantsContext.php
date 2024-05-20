@@ -133,24 +133,24 @@ final class BrowsingProductVariantsContext implements Context
     /**
      * @Then /^the variant "([^"]+)" should have (\d+) items on hand$/
      */
-    public function thisVariantShouldHaveItemsOnHand($productVariantName, $quantity)
+    public function thisVariantShouldHaveItemsOnHand($productVariantName, $quantity): void
     {
         Assert::true($this->indexPage->isSingleResourceWithSpecificElementOnPage(
             ['name' => $productVariantName],
-            sprintf('td > div.ui.label:contains("%s")', $quantity),
+            sprintf('[data-test-on-hand]:contains("%s")', $quantity),
         ));
     }
 
     /**
      * @Then /^the "([^"]+)" variant of ("[^"]+" product) should have (\d+) items on hand$/
      */
-    public function theVariantOfProductShouldHaveItemsOnHand($productVariantName, ProductInterface $product, $quantity)
+    public function theVariantOfProductShouldHaveItemsOnHand($productVariantName, ProductInterface $product, $quantity): void
     {
         $this->indexPage->open(['productId' => $product->getId()]);
 
         Assert::true($this->indexPage->isSingleResourceWithSpecificElementOnPage(
             ['name' => $productVariantName],
-            sprintf('td > div.ui.label:contains("%s")', $quantity),
+            sprintf('[data-test-on-hand]:contains("%s")', $quantity),
         ));
     }
 
@@ -268,10 +268,10 @@ final class BrowsingProductVariantsContext implements Context
      */
     public function iShouldSeeThatTheVariantIsEnabled(ProductVariantInterface $productVariant): void
     {
-        Assert::true($this->indexPage->isSingleResourceOnPage([
-            'name' => $productVariant->getName(),
-            'enabled' => 'Enabled',
-        ]));
+        Assert::true($this->indexPage->isSingleResourceWithSpecificElementOnPage(
+            ['name' => $productVariant->getName()],
+            '[data-test-status-enabled]',
+        ));
     }
 
     /**

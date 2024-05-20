@@ -9,7 +9,7 @@ Feature: Excluding chosen taxons from displaying the lowest price of discounted 
         And the store classifies its products as "T-Shirts", "Caps" and "Sweaters"
         And I am logged in as an administrator
 
-    @no-api @ui @javascript
+    @no-api @ui @mink:chromedriver
     Scenario: Excluding a singular taxon from displaying the lowest price of discounted products
         When I want to modify a channel "Poland"
         And I exclude the "T-Shirts" taxon from showing the lowest price of discounted products

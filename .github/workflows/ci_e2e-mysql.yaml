@@ -90,7 +90,7 @@ jobs:
                     echo "{}" > public/build/shop/manifest.json
                     echo "{}" > public/build/app/admin/manifest.json
                     echo "{}" > public/build/app/shop/manifest.json
-                    
+
             -   name: Build application
                 uses: SyliusLabs/BuildTestAppAction@v2.2
                 with:

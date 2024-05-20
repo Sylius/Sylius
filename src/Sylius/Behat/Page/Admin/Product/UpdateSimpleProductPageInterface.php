@@ -15,6 +15,7 @@ namespace Sylius\Behat\Page\Admin\Product;
 
 use Sylius\Behat\Page\Admin\Crud\UpdatePageInterface as BaseUpdatePageInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
+use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Currency\Model\CurrencyInterface;
 use Sylius\Component\Product\Model\ProductAssociationTypeInterface;
@@ -71,6 +72,8 @@ interface UpdateSimpleProductPageInterface extends BaseUpdatePageInterface
 
     public function isImageWithTypeDisplayed(string $type): bool;
 
+    public function hasImageWithType(string $type): bool;
+
     public function attachImage(string $path, ?string $type = null): void;
 
     public function changeImageWithType(string $type, string $path): void;
@@ -88,9 +91,9 @@ interface UpdateSimpleProductPageInterface extends BaseUpdatePageInterface
      */
     public function associateProducts(ProductAssociationTypeInterface $productAssociationType, array $productsNames): void;
 
-    public function hasAssociatedProduct(string $productName, ProductAssociationTypeInterface $productAssociationType): bool;
+    public function hasAssociatedProduct(ProductInterface $product, ProductAssociationTypeInterface $productAssociationType): bool;
 
-    public function removeAssociatedProduct(string $productName, ProductAssociationTypeInterface $productAssociationType): void;
+    public function removeAssociatedProduct(ProductInterface $product, ProductAssociationTypeInterface $productAssociationType): void;
 
     public function getPricingConfigurationForChannelAndCurrencyCalculator(ChannelInterface $channel, CurrencyInterface $currency): string;
 
@@ -112,7 +115,7 @@ interface UpdateSimpleProductPageInterface extends BaseUpdatePageInterface
 
     public function goToVariantGeneration(): void;
 
-    public function hasInventoryTab(): bool;
+    public function hasTab(string $name): bool;
 
     public function getShowProductInSingleChannelUrl(): string;
 

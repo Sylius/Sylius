@@ -1,0 +1,40 @@
+/*!
+ * This file is part of the Sylius package.
+ *
+ * (c) Sylius Sp. z o.o.
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+textarea.form-control {
+    min-height: 8rem;
+    height: 12rem;
+}
+
+.tab-error {
+    @extend .float-end;
+    @extend .badge;
+    @extend .bg-danger;
+    @extend .rounded-pill;
+    @extend .text-white;
+}
+
+.accordion-error {
+    @extend .position-absolute;
+    @extend .top-50;
+    @extend .start-0;
+    @extend .translate-middle;
+    @extend .badge;
+    @extend .rounded-pill;
+    @extend .bg-danger;
+    @extend .text-white;
+}
+
+.accordion-item:has(.accordion-error),
+.list-group-item:has(.tab-error),
+.list-group-item.active:has(.tab-error) {
+    border-left-style: solid;
+    border-left-width: 2px;
+    border-left-color: #ff0017;
+}

@@ -1,0 +1,37 @@
+twig_hooks:
+    hooks:
+        'sylius_admin.common.update':
+            sidebar:
+                template: '@SyliusAdmin/shared/crud/common/sidebar.html.twig'
+            navbar:
+                template: '@SyliusAdmin/shared/crud/common/navbar.html.twig'
+            content:
+                template: '@SyliusAdmin/shared/crud/common/content.html.twig'
+
+        'sylius_admin.common.update.content':
+            flashes:
+                template: '@SyliusAdmin/shared/crud/common/content/flashes.html.twig'
+            header:
+                template: '@SyliusAdmin/shared/crud/common/content/header.html.twig'
+            form:
+                template: '@SyliusAdmin/shared/crud/update/content/form.html.twig'
+                configuration:
+                    render_rest: true
+
+        'sylius_admin.common.update.content.header':
+            breadcrumbs:
+                template: '@SyliusAdmin/shared/crud/update/content/header/breadcrumbs.html.twig'
+            title_block:
+                template: '@SyliusAdmin/shared/crud/common/content/header/title_block.html.twig'
+
+        'sylius_admin.common.update.content.header.title_block':
+            title:
+                template: '@SyliusAdmin/shared/crud/update/content/header/title_block/title.html.twig'
+            actions:
+                template: '@SyliusAdmin/shared/crud/update/content/header/title_block/actions.html.twig'
+
+        'sylius_admin.common.update.content.header.title_block.actions':
+            cancel:
+                template: '@SyliusAdmin/shared/crud/common/content/header/title_block/actions/cancel.html.twig'
+            create:
+                template: '@SyliusAdmin/shared/crud/common/content/header/title_block/actions/update.html.twig'

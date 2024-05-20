@@ -1,0 +1,7 @@
+{% set path = options.link.url|default(path(options.link.route, options.link.parameters|default({}))) %}
+
+{% set message = action.label %}
+
+<a href="{{ path }}" class="btn">
+    {% if message %}{{ message|trans }}{% endif %}
+</a>

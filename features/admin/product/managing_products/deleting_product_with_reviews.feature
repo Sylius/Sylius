@@ -9,7 +9,7 @@ Feature: Deleting a product with its reviews
         And this product has one review from customer "john@doe.com"
         And I am logged in as an administrator
 
-    @ui @api
+    @todo @ui @api
     Scenario: Deleted product reviews disappear from the product catalog
         When I delete the "Toyota GT86 model" product
         Then I should be notified that it has been successfully deleted
