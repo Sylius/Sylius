@@ -128,6 +128,14 @@ final class ManagingProductsContext implements Context
     }
 
     /**
+     * @When I generate its slug in :localeCode
+     */
+    public function iGenerateItsSlugIn(string $localeCode): void
+    {
+        // Intentionally left blank, as this is a UI-specific action.
+    }
+
+    /**
      * @When I set its slug to :slug
      * @When I set its slug to :slug in :localeCode
      * @When I remove its slug
@@ -206,17 +214,6 @@ final class ManagingProductsContext implements Context
     public function iWantToModifyAProduct(ProductInterface $product): void
     {
         $this->client->buildUpdateRequest(Resources::PRODUCTS, $product->getCode());
-    }
-
-    /**
-     * @When I enable slug modification
-     * @When I enable slug modification in :localeCode
-     */
-    public function iEnableSlugModification(string $localeCode = 'en_US'): void
-    {
-        $data['translations'][$localeCode]['slug'] = '';
-
-        $this->client->updateRequestData($data);
     }
 
     /**

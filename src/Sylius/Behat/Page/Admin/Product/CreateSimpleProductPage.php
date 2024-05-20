@@ -53,8 +53,6 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
 
     public function specifySlugIn(?string $slug, string $locale): void
     {
-        $this->activateLanguageTab($locale);
-
         $this->getElement('slug', ['%locale%' => $locale])->setValue($slug);
     }
 

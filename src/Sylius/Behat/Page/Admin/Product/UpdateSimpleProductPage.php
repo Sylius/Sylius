@@ -240,8 +240,6 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
 
     public function getSlug(string $locale): string
     {
-        $this->activateLanguageTab($locale);
-
         return $this->getElement('slug', ['%locale%' => $locale])->getValue();
     }
 
@@ -372,7 +370,7 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
                 'product_taxons' => '#sylius_product_productTaxons',
                 'shipping_required' => '#sylius_admin_product_variant_shippingRequired',
                 'show_product_button' => '[data-test-view-in-store]',
-                'slug' => '#sylius_product_translations_%locale%_slug',
+                'slug' => '[data-test-slug="%locale%"]',
                 'tab' => '.menu [data-tab="%name%"]',
                 'taxonomy' => 'a[data-tab="taxonomy"]',
                 'tracked' => '#sylius_admin_product_variant_tracked',
