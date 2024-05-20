@@ -15,6 +15,7 @@ namespace Sylius\Behat\Page\Admin\Product;
 
 use Sylius\Behat\Page\Admin\Crud\CreatePageInterface as BaseCreatePageInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
+use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Product\Model\ProductAssociationTypeInterface;
 
@@ -34,9 +35,9 @@ interface CreateSimpleProductPageInterface extends BaseCreatePageInterface
 
     public function specifySlugIn(?string $slug, string $locale): void;
 
-    public function addAttribute(string $attributeName, string $value, string $localeCode): void;
+    public function addAttribute(string $attributeName): void;
 
-    public function selectAttributeValue(string $attributeName, string $value, string $localeCode): void;
+    public function updateAttribute(string $attributeName, string $value, string $localeCode): void;
 
     public function addNonTranslatableAttribute(string $attributeName, string $value): void;
 
@@ -50,6 +51,8 @@ interface CreateSimpleProductPageInterface extends BaseCreatePageInterface
 
     public function checkProductTaxon(TaxonInterface $taxon): void;
 
+    public function hasImageWithType(string $type): bool;
+
     public function attachImage(string $path, ?string $type = null): void;
 
     /**
@@ -57,7 +60,7 @@ interface CreateSimpleProductPageInterface extends BaseCreatePageInterface
      */
     public function associateProducts(ProductAssociationTypeInterface $productAssociationType, array $productsNames): void;
 
-    public function removeAssociatedProduct(string $productName, ProductAssociationTypeInterface $productAssociationType): void;
+    public function removeAssociatedProduct(ProductInterface $product, ProductAssociationTypeInterface $productAssociationType): void;
 
     public function activateLanguageTab(string $locale): void;
 

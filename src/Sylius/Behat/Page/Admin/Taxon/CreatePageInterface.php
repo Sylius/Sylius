@@ -30,13 +30,7 @@ interface CreatePageInterface extends BaseCreatePageInterface
 
     public function hasTaxonWithName(string $name): bool;
 
-    public function nameIt(string $name, string $languageCode): void;
-
     public function specifyCode(string $code): void;
-
-    public function specifySlug(string $slug, string $languageCode): void;
-
-    public function attachImage(string $path, ?string $type = null): void;
 
     /**
      * @return NodeElement[]

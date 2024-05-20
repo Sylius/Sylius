@@ -1,0 +1,26 @@
+twig_hooks:
+    hooks:
+        'sylius_admin.country.update.content':
+            form:
+                component: 'sylius_admin:country:form'
+                props:
+                    country: '@=_context.resource'
+                    form: '@=_context.form'
+                configuration:
+                    method: 'PUT'
+        
+        'sylius_admin.country.update.content.form':
+            sections:
+                template: '@SyliusAdmin/country/form/sections.html.twig'
+        
+        'sylius_admin.country.update.content.form.sections':
+            details:
+                template: '@SyliusAdmin/country/form/sections/details.html.twig'
+            provinces:
+                template: '@SyliusAdmin/country/form/sections/provinces.html.twig'
+        
+        'sylius_admin.country.update.content.form.sections.details':
+            code:
+                template: '@SyliusAdmin/country/form/sections/details/code.html.twig'
+            enabled:
+                template: '@SyliusAdmin/country/form/sections/details/enabled.html.twig'

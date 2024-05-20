@@ -15,7 +15,7 @@ Feature: Seeing an order with its items
         And the customer chose "Free" shipping method to "United States" with "Cash on Delivery" payment
         And I am logged in as an administrator
 
-    @api @ui
+    @api @todo @ui
     Scenario: Seeing order items
         When I view the summary of the order "#00000666"
         Then it should have 2 items

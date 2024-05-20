@@ -1,0 +1,20 @@
+{% from '@SyliusAdmin/shared/helper/icon.html.twig' import icon %}
+
+{% set path = options.link.url|default(path(options.link.route|default(grid.requestConfiguration.getRouteName('archive')), options.link.parameters|default({'id': data.id}))) %}
+{% set message = action.label|default('sylius.ui.delete') %}
+
+<form action="{{ path }}" method="POST" name="sylius_archivable">
+    <input type="hidden" name="_method" value="PATCH">
+    <input type="hidden" name="sylius_archivable[_token]" value="{{ csrf_token('sylius_archivable') }}" />
+
+    {% if data.archivedAt is not null %}
+        <button name="archive" class="btn" type="submit" data-confirm-btn-submit>
+            {{ icon({ icon: action.icon ?? 'archive', class: 'icon icon-tabler dropdown-item-icon' }) }}
+            {{ action.options.restore_label|default('sylius.ui.restore')|trans }}
+        </button>
+    {% else %}
+        <button name="archive" class="btn btn-icon" type="submit" data-confirm-btn-submit data-bs-toggle="tooltip" data-bs-title="{{ action.label|default('sylius.ui.archive')|trans }}">
+            {{ icon({ icon: action.icon ?? 'archive', class: 'icon icon-tabler dropdown-item-icon' }) }}
+        </button>
+    {% endif %}
+</form>

@@ -1,0 +1,11 @@
+{% extends '@SyliusAdmin/shared/layout/base.html.twig' %}
+
+{% block title %}
+    {{ 'sylius.ui.dashboard'|trans }} {{ parent() }}
+{% endblock %}
+
+{% block body %}
+    {% hook ['sylius_admin.dashboard.index', 'sylius_admin.common.index'] with {
+        channelCode: channel.code,
+    } %}
+{% endblock %}

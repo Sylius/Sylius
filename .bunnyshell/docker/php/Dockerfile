@@ -6,12 +6,15 @@ ARG NODE_VERSION=20
 ARG ALPINE_VERSION=3.18
 ARG COMPOSER_VERSION=2.6
 ARG PHP_EXTENSION_INSTALLER_VERSION=latest
+ARG DATABASE_URL
 
 FROM composer:${COMPOSER_VERSION} AS composer
 
 FROM mlocati/php-extension-installer:${PHP_EXTENSION_INSTALLER_VERSION} AS php_extension_installer
 
 FROM php:${PHP_VERSION}-fpm-alpine${ALPINE_VERSION} AS base
+
+ENV DATABASE_URL=${DATABASE_URL}
 
 # persistent / runtime deps
 RUN apk add --no-cache \
@@ -89,20 +92,23 @@ RUN set -eux; \
 		g++ \
 		gcc \
 		make \
+        git \
 	;
 
 # prevent the reinstallation of vendors at every changes in the source code
-COPY package.json yarn.* ./
-RUN set -eux; \
-    yarn install; \
-    yarn cache clean
+COPY package.json package-*.json ./
 
 COPY --from=base /srv/sylius/src/Sylius/Bundle/UiBundle/Resources/private       src/Sylius/Bundle/UiBundle/Resources/private/
-COPY --from=base /srv/sylius/src/Sylius/Bundle/AdminBundle/Resources/private    src/Sylius/Bundle/AdminBundle/Resources/private/
+COPY --from=base /srv/sylius/src/Sylius/Bundle/AdminBundle                      src/Sylius/Bundle/AdminBundle/
 COPY --from=base /srv/sylius/src/Sylius/Bundle/ShopBundle/Resources/private     src/Sylius/Bundle/ShopBundle/Resources/private/
+COPY --from=base /srv/sylius/vendor/symfony/ux-autocomplete/assets              vendor/symfony/ux-autocomplete/assets/
+COPY --from=base /srv/sylius/vendor/symfony/ux-live-component/assets            vendor/symfony/ux-live-component/assets/
+
+RUN set -eux; \
+    npm install;
 
 COPY webpack.config.js ./
-RUN yarn build:prod
+RUN npm run build:prod
 
 FROM base AS sylius_php_prod
 

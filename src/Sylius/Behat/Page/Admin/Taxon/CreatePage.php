@@ -73,35 +73,6 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
         return 0 !== $this->countTaxonsByName($name);
     }
 
-    public function nameIt(string $name, string $languageCode): void
-    {
-        $this->activateLanguageTab($languageCode);
-        $this->getElement('name', ['%language%' => $languageCode])->setValue($name);
-
-        if (DriverHelper::isJavascript($this->getDriver())) {
-            SlugGenerationHelper::waitForSlugGeneration(
-                $this->getSession(),
-                $this->getElement('slug', ['%language%' => $languageCode]),
-            );
-        }
-    }
-
-    public function specifySlug(string $slug, string $languageCode): void
-    {
-        $this->getDocument()->fillField(sprintf('sylius_taxon_translations_%s_slug', $languageCode), $slug);
-    }
-
-    public function attachImage(string $path, ?string $type = null): void
-    {
-        $filesPath = $this->getParameter('files_path');
-
-        $this->getDocument()->find('css', '[data-form-collection="add"]')->click();
-
-        $imageForm = $this->getLastImageElement();
-        $imageForm->fillField('Type', $type);
-        $imageForm->find('css', 'input[type="file"]')->attachFile($filesPath . $path);
-    }
-
     public function getLeaves(?TaxonInterface $parentTaxon = null): array
     {
         return $this->getDocument()->findAll('css', '.sylius-tree__item');
@@ -166,22 +137,11 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
             'code' => '#sylius_taxon_code',
             'confirmation_button' => '#confirmation-button',
             'description' => '#sylius_taxon_translations_en_US_description',
-            'images' => '#sylius_taxon_images',
             'language_tab' => '[data-locale="%locale%"] .title',
             'name' => '#sylius_taxon_translations_%language%_name',
             'slug' => '#sylius_taxon_translations_%language%_slug',
             'tree' => '.sylius-tree',
             'tree_item' => '.sylius-tree__item a:contains("%taxon%")',
         ]);
-    }
-
-    private function getLastImageElement(): NodeElement
-    {
-        $images = $this->getElement('images');
-        $items = $images->findAll('css', 'div[data-form-collection="item"]');
-
-        Assert::notEmpty($items);
-
-        return end($items);
     }
 }

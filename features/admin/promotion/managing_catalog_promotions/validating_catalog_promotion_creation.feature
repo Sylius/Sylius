@@ -44,7 +44,7 @@ Feature: Validating a catalog promotion creation
         Then I should be notified that catalog promotion with this code already exists
         And there should still be only one catalog promotion with code "sale"
 
-    @api
+    @api @no-ui
     Scenario: Trying to create a catalog promotion with invalid type of scope
         When I want to create a new catalog promotion
         And I specify its code as "winter_sale"
@@ -56,7 +56,7 @@ Feature: Validating a catalog promotion creation
         Then I should be notified that type of scope is invalid
         And there should be an empty list of catalog promotions
 
-    @api
+    @api @no-ui
     Scenario: Trying to create a catalog promotion with scope with invalid configuration
         When I want to create a new catalog promotion
         And I specify its code as "winter_sale"
@@ -68,7 +68,7 @@ Feature: Validating a catalog promotion creation
         Then I should be notified that scope configuration is invalid
         And there should be an empty list of catalog promotions
 
-    @api @ui @javascript
+    @api @ui @mink:chromedriver
     Scenario: Trying to create a catalog promotion with not configured for variants scope
         When I want to create a new catalog promotion
         And I specify its code as "winter_sale"
@@ -80,7 +80,7 @@ Feature: Validating a catalog promotion creation
         Then I should be notified that at least 1 variant is required
         And there should be an empty list of catalog promotions
 
-    @api
+    @api @no-ui
     Scenario: Trying to create a catalog promotion with invalid type of action
         When I want to create a new catalog promotion
         And I specify its code as "winter_sale"
@@ -144,10 +144,10 @@ Feature: Validating a catalog promotion creation
         And I add scope that applies on variants "PHP T-Shirt" variant and "Kotlin T-Shirt" variant
         And I add fixed discount action without amount configured for the "United States" channel
         And I try to add it
-        Then I should be notified that the fixed amount should be a number and cannot be empty
+        Then I should be notified that the fixed amount cannot be empty
         And there should be an empty list of catalog promotions
 
-    @api
+    @api @ui @mink:chromedriver
     Scenario: Trying to create a catalog promotion with wrong value of fixed discount action
         When I want to create a new catalog promotion
         And I specify its code as "winter_sale"
@@ -158,10 +158,10 @@ Feature: Validating a catalog promotion creation
         And I add scope that applies on variants "PHP T-Shirt" variant and "Kotlin T-Shirt" variant
         And I add invalid fixed discount action with non number in amount for the "United States" channel
         And I try to add it
-        Then I should be notified that the fixed amount should be a number and cannot be empty
+        Then I should be notified that the fixed amount should be a number
         And there should be an empty list of catalog promotions
 
-    @api
+    @api @no-ui
     Scenario: Trying to create a catalog promotion with fixed discount action with invalid channel
         When I want to create a new catalog promotion
         And I specify its code as "winter_sale"
@@ -176,7 +176,7 @@ Feature: Validating a catalog promotion creation
         Then I should be notified that at least one of the provided channel codes does not exist
         And there should be an empty list of catalog promotions
 
-    @api @ui @javascript
+    @api @ui @mink:chromedriver
     Scenario: Trying to create a catalog promotion with taxon type without taxons
         When I want to create a new catalog promotion
         And I specify its code as "winter_sale"
@@ -188,7 +188,7 @@ Feature: Validating a catalog promotion creation
         Then I should be notified that I must add at least one taxon
         And there should be an empty list of catalog promotions
 
-    @api
+    @api @no-ui
     Scenario: Trying to create a catalog promotion with taxon type with invalid taxons
         When I want to create a new catalog promotion
         And I specify its code as "winter_sale"
@@ -200,7 +200,7 @@ Feature: Validating a catalog promotion creation
         Then I should be notified that I can add only existing taxon
         And there should be an empty list of catalog promotions
 
-    @api @ui @javascript
+    @api @ui @mink:chromedriver
     Scenario: Trying to create a catalog promotion with product type without products
         When I want to create a new catalog promotion
         And I specify its code as "winter_sale"
@@ -212,7 +212,7 @@ Feature: Validating a catalog promotion creation
         Then I should be notified that I must add at least one product
         And there should be an empty list of catalog promotions
 
-    @api
+    @api @no-ui
     Scenario: Trying to create a catalog promotion with product type with invalid products
         When I want to create a new catalog promotion
         And I specify its code as "winter_sale"

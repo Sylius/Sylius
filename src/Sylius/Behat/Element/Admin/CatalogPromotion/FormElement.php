@@ -14,14 +14,21 @@ declare(strict_types=1);
 namespace Sylius\Behat\Element\Admin\CatalogPromotion;
 
 use Behat\Mink\Element\NodeElement;
-use Behat\Mink\Exception\ElementNotFoundException;
-use FriendsOfBehat\PageObjectExtension\Element\Element;
+use Behat\Mink\Session;
+use Sylius\Behat\Element\Admin\Crud\FormElement as BaseFormElement;
+use Sylius\Behat\Service\Helper\AutocompleteHelperInterface;
 use Sylius\Behat\Service\TabsHelper;
-use Sylius\Component\Core\Model\ChannelInterface;
-use Webmozart\Assert\Assert;
 
-final class FormElement extends Element implements FormElementInterface
+final class FormElement extends BaseFormElement implements FormElementInterface
 {
+    public function __construct(
+        Session $session,
+        $minkParameters,
+        private readonly AutocompleteHelperInterface $autocompleteHelper,
+    ) {
+        parent::__construct($session, $minkParameters);
+    }
+
     public function nameIt(string $name): void
     {
         $this->getElement('name')->setValue($name);
@@ -29,12 +36,12 @@ final class FormElement extends Element implements FormElementInterface
 
     public function labelIt(string $label, string $localeCode): void
     {
-        $this->getElement('label', ['%localeCode%' => $localeCode])->setValue($label);
+        $this->getElement('label', ['%locale_code%' => $localeCode])->setValue($label);
     }
 
     public function describeIt(string $description, string $localeCode): void
     {
-        $this->getElement('description', ['%localeCode%' => $localeCode])->setValue($description);
+        $this->getElement('description', ['%locale_code%' => $localeCode])->setValue($description);
     }
 
     public function prioritizeIt(int $priority): void
@@ -49,7 +56,7 @@ final class FormElement extends Element implements FormElementInterface
 
     public function checkChannel(string $channelName): void
     {
-        $this->getDocument()->checkField($channelName);
+        $this->getElement('channels')->checkField($channelName);
     }
 
     public function setExclusiveness(bool $isExclusive): void
@@ -59,190 +66,158 @@ final class FormElement extends Element implements FormElementInterface
 
     public function uncheckChannel(string $channelName): void
     {
-        $this->getDocument()->uncheckField($channelName);
+        $this->getElement('channels')->uncheckField($channelName);
     }
 
     public function specifyStartDate(\DateTimeInterface $startDate): void
     {
         $timestamp = $startDate->getTimestamp();
 
-        $this->getElement('start_date')->setValue(date('Y-m-d', $timestamp));
+        $this->getElement('start_date_date')->setValue(date('Y-m-d', $timestamp));
+        $this->getElement('start_date_time')->setValue(date('H:i', $timestamp));
     }
 
     public function specifyEndDate(\DateTimeInterface $endDate): void
     {
         $timestamp = $endDate->getTimestamp();
 
-        $this->getElement('end_date')->setValue(date('Y-m-d', $timestamp));
+        $this->getElement('end_date_date')->setValue(date('Y-m-d', $timestamp));
+        $this->getElement('end_date_time')->setValue(date('H:i', $timestamp));
     }
 
-    public function addScope(): void
+    public function addScope(string $type): void
     {
-        $this->addCollectionElement('scopes', 'add_scope_button');
+        $this->getElement('add_scope_button', ['%type%' => $type])->press();
+        $this->waitForFormUpdate();
     }
 
-    public function addAction(): void
+    public function addAction(string $type): void
     {
-        $this->addCollectionElement('actions', 'add_action_button');
+        $this->getElement('add_action_button', ['%type%' => $type])->press();
+        $this->waitForFormUpdate();
     }
 
-    public function chooseScopeType(string $type): void
-    {
-        $lastScope = $this->getElement('last_scope');
-
-        $lastScope->selectFieldOption('Type', $type);
-    }
-
-    public function chooseActionType(string $type): void
-    {
-        $lastAction = $this->getElement('last_action');
-
-        $lastAction->selectFieldOption('Type', $type);
-    }
-
-    public function chooseLastScopeCodes(array $codes): void
+    public function selectScopeOption(array $values): void
     {
         $lastScope = $this->getElement('last_scope');
+        foreach ($values as $value) {
+            $this->autocompleteHelper->selectByValue(
+                $this->getDriver(),
+                $lastScope->find('css', 'select')->getXpath(),
+                $value,
+            );
+        }
 
-        $lastScope->find('css', 'input[type="hidden"]')->setValue(implode(',', $codes));
+        $this->waitForFormUpdate();
     }
 
-    public function specifyLastActionDiscount(string $discount): void
+    public function fillActionOption(string $option, string $value): void
     {
         $lastAction = $this->getElement('last_action');
 
-        $lastAction->find('css', 'input')->setValue($discount);
+        $lastAction->fillField($option, $value);
     }
 
-    public function specifyLastActionDiscountForChannel(string $discount, ChannelInterface $channel): void
+    public function fillActionOptionForChannel(string $channelCode, string $option, string $value): void
     {
         $lastAction = $this->getElement('last_action');
 
-        TabsHelper::switchTab($this->getSession(), $lastAction, $channel->getCode());
+        TabsHelper::switchTab($this->getSession(), $lastAction, $channelCode);
 
-        $lastAction->find('css', sprintf('[id$="%s_amount"]', $channel->getCode()))->setValue($discount);
-    }
-
-    public function getFieldValueInLocale(string $field, string $localeCode): string
-    {
-        return $this->getElement($field, ['%localeCode%' => $localeCode])->getValue();
+        $lastAction->find('css', sprintf('[id$="_configuration_%s"]', $channelCode))->fillField($option, $value);
     }
 
     public function getLastScopeCodes(): array
     {
         $lastScope = $this->getElement('last_scope');
 
-        return explode(',', $lastScope->find('css', 'input[type="hidden"]')->getValue());
+        return array_map(
+            fn (NodeElement $element) => $element->getValue(),
+            $lastScope->findAll('css', 'option[selected="selected"]'),
+        );
     }
 
-    public function getLastActionDiscount(): string
+    public function getLastActionOption(string $option): string
     {
         $lastAction = $this->getElement('last_action');
 
-        return $lastAction->find('css', 'input')->getValue();
+        return $lastAction->findField($option)->getValue();
     }
 
-    public function getLastActionFixedDiscount(ChannelInterface $channel): string
+    public function getLastActionOptionForChannel(string $channelCode, string $option): string
     {
         $lastAction = $this->getElement('last_action');
 
-        TabsHelper::switchTab($this->getSession(), $lastAction, $channel->getCode());
+        TabsHelper::switchTab($this->getSession(), $lastAction, $channelCode);
 
-        return $lastAction->find('css', sprintf('[id$="%s_amount"]', $channel->getCode()))->getValue();
+        return $lastAction->find('css', sprintf('[id$="_configuration_%s"]', $channelCode))->findField($option)->getValue();
     }
 
-    public function getValidationMessage(): string
+    public function checkIfScopeConfigurationFormIsVisible(): bool
     {
-        $foundElement = $this->getDocument()->find('css', '[data-test-validation-error]');
-
-        if (null === $foundElement) {
-            throw new ElementNotFoundException($this->getSession(), 'Tag', 'css', '[data-test-validation-error]');
-        }
-
-        return $foundElement->getText();
+        return $this->hasElement('last_scope');
     }
 
-    public function hasValidationMessage(string $message): bool
+    public function checkIfActionConfigurationFormIsVisible(): bool
     {
-        $validationElements = $this->getDocument()->findAll('css', '[data-test-validation-error]');
-
-        foreach ($validationElements as $validationElement) {
-            if ($validationElement->getText() === $message) {
-                return true;
-            }
-        }
-
-        return false;
+        return $this->hasElement('last_action');
     }
 
-    public function hasOnlyOneValidationMessage(string $message): bool
+    public function getFieldValueInLocale(string $field, string $localeCode): string
     {
-        $validationElements = $this->getDocument()->findAll('css', '[data-test-validation-error]');
-
-        $counter = 0;
-        foreach ($validationElements as $validationElement) {
-            if ($validationElement->getText() === $message) {
-                ++$counter;
-            }
-        }
-
-        return $counter === 1;
+        return $this->getElement($field, ['%locale_code%' => $localeCode])->getValue();
     }
 
-    public function removeAllActions(): void
+    public function getValidationMessages(): array
     {
-        $deleteButtons = $this->getDocument()->findAll('css', '#actions [data-form-collection="delete"]');
+        $errors = $this->getElement('form')->findAll('css', '.alert-danger');
 
-        foreach ($deleteButtons as $deleteButton) {
-            $deleteButton->click();
-        }
+        return array_map(fn (NodeElement $element) => $element->getText(), $errors);
     }
 
-    public function removeAllScopes(): void
+    public function removeScopeOption(array $values): void
     {
-        $deleteButtons = $this->getDocument()->findAll('css', '#scopes [data-form-collection="delete"]');
-
-        foreach ($deleteButtons as $deleteButton) {
-            $deleteButton->click();
+        $lastScope = $this->getElement('last_scope');
+        foreach ($values as $value) {
+            $this->autocompleteHelper->removeByValue(
+                $this->getDriver(),
+                $lastScope->find('css', 'select')->getXpath(),
+                $value,
+            );
         }
+
+        $this->waitForFormUpdate();
+    }
+
+    public function removeLastAction(): void
+    {
+        $this->getElement('last_action')->find('css', '[data-test-delete-action]')->click();
+    }
+
+    public function removeLastScope(): void
+    {
+        $this->getElement('last_scope')->find('css', '[data-test-delete-action]')->click();
     }
 
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
-            'actions' => '#actions',
-            'add_action_button' => '#actions [data-form-collection="add"]',
-            'add_scope_button' => '#scopes [data-form-collection="add"]',
-            'description' => '#sylius_catalog_promotion_translations_%localeCode%_description',
+            'add_action_button' => '[data-test-actions] [data-test-add-%type%]',
+            'add_scope_button' => '[data-test-scopes] [data-test-add-%type%]',
+            'channels' => '#sylius_catalog_promotion_channels',
+            'description' => '[name="sylius_catalog_promotion[translations][%locale_code%][description]"]',
             'enabled' => '#sylius_catalog_promotion_enabled',
+            'end_date_date' => '#sylius_catalog_promotion_endDate_date',
+            'end_date_time' => '#sylius_catalog_promotion_endDate_time',
             'exclusive' => '#sylius_catalog_promotion_exclusive',
-            'end_date' => '#sylius_catalog_promotion_endDate_date',
-            'label' => '#sylius_catalog_promotion_translations_%localeCode%_label',
-            'last_action' => '#actions [data-form-collection="item"]:last-child',
-            'last_scope' => '#scopes [data-form-collection="item"]:last-child',
+            'form' => '[data-live-name-value="sylius_admin:catalog_promotion:form"]',
+            'label' => '[name="sylius_catalog_promotion[translations][%locale_code%][label]"]',
+            'last_action' => '[data-test-actions] [data-test-entry-row]:last-child',
+            'last_scope' => '[data-test-scopes] [data-test-entry-row]:last-child',
             'name' => '#sylius_catalog_promotion_name',
             'priority' => '#sylius_catalog_promotion_priority',
-            'scopes' => '#scopes',
-            'start_date' => '#sylius_catalog_promotion_startDate_date',
+            'start_date_date' => '#sylius_catalog_promotion_startDate_date',
+            'start_date_time' => '#sylius_catalog_promotion_startDate_time',
         ]);
-    }
-
-    private function addCollectionElement(string $collectionElement, string $buttonElement): void
-    {
-        $count = count($this->getCollectionItems($collectionElement));
-
-        $this->getElement($buttonElement)->click();
-
-        $this->getDocument()->waitFor(5, fn () => $count + 1 === count($this->getCollectionItems($collectionElement)));
-    }
-
-    /** @return NodeElement[] */
-    private function getCollectionItems(string $collection): array
-    {
-        $items = $this->getElement($collection)->findAll('css', 'div[data-form-collection="item"]');
-
-        Assert::isArray($items);
-
-        return $items;
     }
 }

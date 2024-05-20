@@ -1,0 +1,9 @@
+{% extends '@SyliusAdmin/shared/layout/base.html.twig' %}
+
+{% block title %}
+    {{ 'sylius.ui.generate_variants'|trans }} {{ parent() }}
+{% endblock %}
+
+{% block body %}
+    {% hook 'sylius_admin.product.generate_variants' with { resource, metadata, configuration, form } %}
+{% endblock %}

@@ -580,13 +580,22 @@ final class ManagingProductsContext implements Context
     }
 
     /**
+     * @When I add the :attributeName attribute
+     * @When I add the :attributeName attribute to it
+     */
+    public function iAddTheAttribute(string $attributeName): void
+    {
+        $this->createSimpleProductPage->addAttribute($attributeName);
+    }
+
+    /**
      * @When I set its :attributeName attribute to :value in :localeCode
      * @When I do not set its :attributeName attribute in :localeCode
-     * @When I add the :attributeName attribute
+     * @When I set the :attributeName attribute value to :value in :localeCode
      */
     public function iSetItsAttributeTo(string $attributeName, ?string $value = null, $localeCode = 'en_US'): void
     {
-        $this->createSimpleProductPage->addAttribute($attributeName, $value ?? '', $localeCode);
+        $this->createSimpleProductPage->updateAttribute($attributeName, $value ?? '', $localeCode);
     }
 
     /**
@@ -594,7 +603,7 @@ final class ManagingProductsContext implements Context
      */
     public function iSelectValueInLanguageForTheAttribute(string $value, string $language, string $attribute): void
     {
-        $this->createSimpleProductPage->selectAttributeValue($attribute, $value, $language);
+        $this->createSimpleProductPage->updateAttribute($attribute, $value, $language);
     }
 
     /**
@@ -602,7 +611,7 @@ final class ManagingProductsContext implements Context
      */
     public function iSelectValueForTheAttribute(string $value, string $attribute): void
     {
-        $this->createSimpleProductPage->selectAttributeValue($attribute, $value, '');
+        $this->createSimpleProductPage->updateAttribute($attribute, $value, '');
     }
 
     /**
@@ -610,7 +619,7 @@ final class ManagingProductsContext implements Context
      */
     public function iSetItsNonTranslatableAttributeTo(string $attributeName, string $value): void
     {
-        $this->createSimpleProductPage->addNonTranslatableAttribute($attributeName, $value);
+        $this->createSimpleProductPage->updateAttribute($attributeName, $value, '');
     }
 
     /**
@@ -661,7 +670,7 @@ final class ManagingProductsContext implements Context
     ): void {
         $this->updateSimpleProductPage->open(['id' => $product->getId()]);
 
-        Assert::same($this->updateSimpleProductPage->getAttributeSelectText($attributeName, $localeCode), $value);
+        Assert::same($this->updateSimpleProductPage->getAttributeValue($attributeName, $localeCode), $value);
     }
 
     /**
@@ -671,7 +680,7 @@ final class ManagingProductsContext implements Context
     {
         $this->updateSimpleProductPage->open(['id' => $product->getId()]);
 
-        Assert::same($this->updateSimpleProductPage->getNonTranslatableAttributeValue($attributeName), $value);
+        Assert::same($this->updateSimpleProductPage->getAttributeValue($attributeName, ''), $value);
     }
 
     /**
@@ -895,15 +904,15 @@ final class ManagingProductsContext implements Context
     }
 
     /**
-     * @When I remove an associated product :productName from :productAssociationType
+     * @When I remove an associated product :product from :productAssociationType
      */
     public function iRemoveAnAssociatedProductFromProductAssociation(
-        $productName,
+        ProductInterface $product,
         ProductAssociationTypeInterface $productAssociationType,
     ) {
         $currentPage = $this->resolveCurrentPage();
 
-        $currentPage->removeAssociatedProduct($productName, $productAssociationType);
+        $currentPage->removeAssociatedProduct($product, $productAssociationType);
     }
 
     /**
@@ -937,7 +946,7 @@ final class ManagingProductsContext implements Context
     {
         $currentPage = $this->resolveCurrentPage();
 
-        Assert::true($currentPage->isImageWithTypeDisplayed($type));
+        Assert::true($currentPage->hasImageWithType($type));
     }
 
     /**
@@ -963,7 +972,7 @@ final class ManagingProductsContext implements Context
     {
         $currentPage = $this->resolveCurrentPage();
 
-        Assert::false($currentPage->isImageWithTypeDisplayed($code));
+        Assert::false($currentPage->hasImageWithType($code));
     }
 
     /**
@@ -1041,33 +1050,45 @@ final class ManagingProductsContext implements Context
     }
 
     /**
-     * @Then this product should( also) have an association :productAssociationType with product :productName
-     * @Then this product should( also) have an association :productAssociationType with products :firstProductName and :secondProductName
+     * @Then this product should( also) have an association :productAssociationType with product :product
      */
-    public function theProductShouldHaveAnAssociationWithProducts(
+    public function theProductShouldHaveAnAssociationWithProduct(
         ProductAssociationTypeInterface $productAssociationType,
-        ...$productsNames,
+        ProductInterface $product,
     ) {
-        foreach ($productsNames as $productName) {
-            Assert::true(
-                $this->updateSimpleProductPage->hasAssociatedProduct($productName, $productAssociationType),
-                sprintf(
-                    'This product should have an association %s with product %s.',
-                    $productAssociationType->getName(),
-                    $productName,
-                ),
-            );
+        Assert::true(
+            $this->updateSimpleProductPage->hasAssociatedProduct($product, $productAssociationType),
+            sprintf(
+                'This product should have an association %s with product %s.',
+                $productAssociationType->getName(),
+                $product->getName(),
+            ),
+        );
+    }
+
+    /**
+     * @Then /^this product should have an (association "[^"]+") with (products "[^"]+" and "[^"]+")$/
+     * @Then /^this product should also have an (association "[^"]+") with (products "[^"]+" and "[^"]+")$/
+     *
+     * @param array<ProductInterface> $products
+     */
+    public function theProductsShouldHaveAnAssociationWithProducts(
+        ProductAssociationTypeInterface $productAssociationType,
+        array $products,
+    ): void {
+        foreach ($products as $product) {
+            $this->theProductShouldHaveAnAssociationWithProduct($productAssociationType, $product);
         }
     }
 
     /**
-     * @Then this product should not have an association :productAssociationType with product :productName
+     * @Then this product should not have an association :productAssociationType with product :product
      */
     public function theProductShouldNotHaveAnAssociationWithProduct(
         ProductAssociationTypeInterface $productAssociationType,
-        $productName,
-    ) {
-        Assert::false($this->updateSimpleProductPage->hasAssociatedProduct($productName, $productAssociationType));
+        ProductInterface $product,
+    ): void {
+        Assert::false($this->updateSimpleProductPage->hasAssociatedProduct($product, $productAssociationType));
     }
 
     /**
@@ -1267,7 +1288,7 @@ final class ManagingProductsContext implements Context
      */
     public function iShouldSeeInventoryOfThisProduct(): void
     {
-        Assert::true($this->updateSimpleProductPage->hasInventoryTab());
+        Assert::true($this->updateSimpleProductPage->hasTab('inventory'));
     }
 
     /**
@@ -1275,7 +1296,7 @@ final class ManagingProductsContext implements Context
      */
     public function iShouldNotSeeInventoryOfThisProduct(): void
     {
-        Assert::false($this->updateConfigurableProductPage->hasInventoryTab());
+        Assert::false($this->updateConfigurableProductPage->hasTab('inventory'));
     }
 
     /**

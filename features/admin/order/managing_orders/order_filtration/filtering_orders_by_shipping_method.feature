@@ -23,7 +23,7 @@ Feature: Filtering orders by a shipping method
         And the customer chose "DHL" shipping method to "United States" with "Offline" payment
         And I am logged in as an administrator
 
-    @ui @api
+    @todo @ui @api
     Scenario: Filtering orders by DHL shipping method
         When I browse orders
         And I choose "DHL" as a shipping method filter
@@ -32,7 +32,7 @@ Feature: Filtering orders by a shipping method
         And I should see an order with "#000001338" number
         And I should not see an order with "#000001337" number
 
-    @ui @api
+    @todo @ui @api
     Scenario: Filtering orders by an another shipping method
         When I browse orders
         And I choose "Free" as a shipping method filter

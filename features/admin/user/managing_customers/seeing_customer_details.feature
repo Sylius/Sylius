@@ -6,7 +6,6 @@ Feature: Seeing customer's details
 
     Background:
         Given I am logged in as an administrator
-        And the store has a customer group Retail
         And the store has customer "f.baggins@shire.me" with name "Frodo Baggins" and phone number "666777888" since "2011-01-10 21:00"
 
     @api @ui
@@ -37,7 +36,8 @@ Feature: Seeing customer's details
 
     @api @ui
     Scenario: Seeing information about customer groups
-        Given the customer belongs to group "Retail"
+        Given the store has a customer group Retail
+        And the customer belongs to group "Retail"
         When I view details of the customer "f.baggins@shire.me"
         Then this customer should have "Retail" as their group
 

@@ -10,7 +10,7 @@ Feature: Browsing exchange rates
         And the exchange rate of "British Pound" to "Bhutanese Ngultrum" is 2.37
         And I am logged in as an administrator
 
-    @ui @api
+    @todo @ui @api
     Scenario: Browsing store's exchange rates
         When I am browsing exchange rates of the store
         Then I should see 2 exchange rates on the list

@@ -14,8 +14,9 @@ declare(strict_types=1);
 namespace Sylius\Bundle\UiBundle\DependencyInjection;
 
 use Laminas\Stdlib\SplPriorityQueue;
+use Sylius\Bundle\UiBundle\Registry\BlockRegistryInterface;
+use Sylius\Bundle\UiBundle\Registry\ComponentBlock;
 use Sylius\Bundle\UiBundle\Registry\TemplateBlock;
-use Sylius\Bundle\UiBundle\Registry\TemplateBlockRegistryInterface;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
@@ -43,7 +44,7 @@ final class SyliusUiExtension extends Extension
      */
     private function loadEvents(array $eventsConfig, ContainerBuilder $container): void
     {
-        $templateBlockRegistryDefinition = $container->findDefinition(TemplateBlockRegistryInterface::class);
+        $templateBlockRegistryDefinition = $container->findDefinition(BlockRegistryInterface::class);
 
         $blocksForEvents = [];
         foreach ($eventsConfig as $eventName => $eventConfiguration) {
@@ -56,19 +57,53 @@ final class SyliusUiExtension extends Extension
                 $blocksPriorityQueue->insert($details, $details['priority'] ?? 0);
             }
 
+            /** @var array{name: string, eventName: string, template: string, component: array{name?: string, inputs?: array<string, mixed>}, context: array, priority: int, enabled: bool} $details */
             foreach ($blocksPriorityQueue->toArray() as $details) {
-                /** @var array{name: string, eventName: string, template: string, context: array, priority: int, enabled: bool} $details */
-                $blocksForEvents[$eventName][$details['name']] = new Definition(TemplateBlock::class, [
-                    $details['name'],
-                    $details['eventName'],
-                    $details['template'],
-                    $details['context'],
-                    $details['priority'],
-                    $details['enabled'],
-                ]);
+                $blockType = [] !== $details['component'] ? 'component' : 'template';
+                $blocksForEvents[$eventName][$details['name']] = match ($blockType) {
+                    'template' => $this->createTemplateBlockDefinition($details),
+                    'component' => $this->createComponentBlockDefinition($details),
+                };
             }
         }
 
         $templateBlockRegistryDefinition->setArgument(0, $blocksForEvents);
+    }
+
+    /**
+     * @param array<string, mixed> $details
+     */
+    private function createTemplateBlockDefinition(array $details): Definition
+    {
+        return new Definition(
+            TemplateBlock::class,
+            [
+                $details['name'],
+                $details['eventName'],
+                $details['template'],
+                $details['context'],
+                $details['priority'],
+                $details['enabled'],
+            ],
+        );
+    }
+
+    /**
+     * @param array<string, mixed> $details
+     */
+    private function createComponentBlockDefinition(array $details): Definition
+    {
+        return new Definition(
+            ComponentBlock::class,
+            [
+                $details['name'],
+                $details['eventName'],
+                $details['component']['name'],
+                $details['component']['inputs'] ?? [],
+                $details['context'],
+                $details['priority'],
+                $details['enabled'],
+            ],
+        );
     }
 }

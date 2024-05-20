@@ -6,6 +6,7 @@ Feature: Removing images of an existing product
 
     Background:
         Given I am logged in as an administrator
+        And the store operates on a single channel
 
     @ui @mink:chromedriver @api
     Scenario: Removing a single image of a simple product

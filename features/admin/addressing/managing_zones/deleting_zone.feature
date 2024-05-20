@@ -23,7 +23,7 @@ Feature: Deleting a zone
     @ui @api
     Scenario: Deleting zone with associated tax rates should not be possible
         When I try to delete the zone named "South America"
-        Then I should be notified that the zone is in use and cannot be deleted
+        Then I should be notified that this zone cannot be deleted
         And I should still see the zone named "South America" in the list
 
     @ui @api

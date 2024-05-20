@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace Sylius\Behat\Page\Admin\Promotion;
 
 use Behat\Mink\Element\NodeElement;
-use Behat\Mink\Exception\ElementNotFoundException;
 use Sylius\Behat\Behaviour\ChecksCodeImmutability;
 use Sylius\Behat\Behaviour\CountsChannelBasedErrors;
 use Sylius\Behat\Behaviour\NamesIt;
@@ -26,57 +25,11 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     use CountsChannelBasedErrors;
     use NamesIt;
 
-    public function setPriority(?int $priority): void
-    {
-        $this->getDocument()->fillField('Priority', $priority);
-    }
-
-    public function getPriority(): int
-    {
-        return (int) $this->getElement('priority')->getValue();
-    }
-
     public function checkChannelsState(string $channelName): bool
     {
         $field = $this->getDocument()->findField($channelName);
 
         return (bool) $field->getValue();
-    }
-
-    public function fillUsageLimit(string $limit): void
-    {
-        $this->getDocument()->fillField('Usage limit', $limit);
-    }
-
-    public function makeExclusive(): void
-    {
-        $this->getDocument()->checkField('Exclusive');
-    }
-
-    public function checkCouponBased(): void
-    {
-        $this->getDocument()->checkField('Coupon based');
-    }
-
-    public function checkChannel(string $name): void
-    {
-        $this->getDocument()->checkField($name);
-    }
-
-    public function setStartsAt(\DateTimeInterface $dateTime): void
-    {
-        $timestamp = $dateTime->getTimestamp();
-
-        $this->getDocument()->fillField('sylius_promotion_startsAt_date', date('Y-m-d', $timestamp));
-        $this->getDocument()->fillField('sylius_promotion_startsAt_time', date('H:i', $timestamp));
-    }
-
-    public function setEndsAt(\DateTimeInterface $dateTime): void
-    {
-        $timestamp = $dateTime->getTimestamp();
-
-        $this->getDocument()->fillField('sylius_promotion_endsAt_date', date('Y-m-d', $timestamp));
-        $this->getDocument()->fillField('sylius_promotion_endsAt_time', date('H:i', $timestamp));
     }
 
     public function hasStartsAt(\DateTimeInterface $dateTime): bool
@@ -167,21 +120,6 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
         return $this->countChannelErrors($this->getElement('rules'), $channelCode);
     }
 
-    /**
-     * @throws ElementNotFoundException
-     */
-    public function getValidationMessageForTranslation(string $element, string $localeCode): string
-    {
-        $foundElement = $this->getElement($element, ['%localeCode%' => $localeCode])->getParent();
-
-        $validationMessage = $foundElement->find('css', '[data-test-validation-error]');
-        if (null === $validationMessage) {
-            throw new ElementNotFoundException($this->getSession(), 'Validation message', 'css', '[data-test-validation-error]');
-        }
-
-        return $validationMessage->getText();
-    }
-
     protected function getCodeElement(): NodeElement
     {
         return $this->getElement('code');
@@ -189,26 +127,25 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
 
     protected function getDefinedElements(): array
     {
-        return [
+        return array_merge(parent::getDefinedElements(), [
             'action_field' => '[id^="sylius_promotion_actions_"][id$="_configuration_%channelCode%_%field%"]',
             'actions' => '#actions',
             'applies_to_discounted' => '#sylius_promotion_appliesToDiscounted',
             'code' => '#sylius_promotion_code',
-            'coupon_based' => '#sylius_promotion_couponBased',
             'ends_at' => '#sylius_promotion_endsAt',
             'ends_at_date' => '#sylius_promotion_endsAt_date',
             'ends_at_time' => '#sylius_promotion_endsAt_time',
             'exclusive' => '#sylius_promotion_exclusive',
-            'label' => '#sylius_promotion_translations_%localeCode%_label',
+            'coupon_based' => '#sylius_promotion_couponBased',
             'name' => '#sylius_promotion_name',
             'order_percentage_action_field' => '[id^="sylius_promotion_actions_"][id$="_configuration_percentage"]',
             'priority' => '#sylius_promotion_priority',
             'rule_amount' => '[id^="sylius_promotion_rules_"][id$="_configuration_%channelCode%_amount"]',
             'rules' => '#rules',
+            'usage_limit' => '#sylius_promotion_usageLimit',
             'starts_at' => '#sylius_promotion_startsAt',
             'starts_at_date' => '#sylius_promotion_startsAt_date',
             'starts_at_time' => '#sylius_promotion_startsAt_time',
-            'usage_limit' => '#sylius_promotion_usageLimit',
-        ];
+        ]);
     }
 }

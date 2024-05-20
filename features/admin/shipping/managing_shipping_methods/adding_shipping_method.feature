@@ -20,8 +20,7 @@ Feature: Adding a new shipping method
         And I choose "Flat rate per shipment" calculator
         And I specify its amount as 50 for "Web-US" channel
         And I add it
-        Then I should be notified that it has been successfully created
-        And the shipping method "FedEx Carrier" should appear in the registry
+        Then the "FedEx Carrier" shipping method should be successfully created
 
     @ui @mink:chromedriver @api
     Scenario: Adding a new shipping method with description and flat rate per shipment
@@ -33,10 +32,9 @@ Feature: Adding a new shipping method
         And I choose "Flat rate per shipment" calculator
         And I specify its amount as 50 for "Web-US" channel
         And I add it
-        Then I should be notified that it has been successfully created
-        And the shipping method "FedEx Carrier" should appear in the registry
+        Then the "FedEx Carrier" shipping method should be successfully created
 
-    @ui @javascript @api
+    @ui @mink:chromedriver @api
     Scenario: Adding a new shipping method with flat rate per unit
         When I want to create a new shipping method
         And I specify its code as "FED_EX_CARRIER"
@@ -45,10 +43,9 @@ Feature: Adding a new shipping method
         And I choose "Flat rate per unit" calculator
         And I specify its amount as 20 for "Web-US" channel
         And I add it
-        Then I should be notified that it has been successfully created
-        And the shipping method "FedEx Carrier" should appear in the registry
+        Then the "FedEx Carrier" shipping method should be successfully created
 
-    @ui @javascript @api
+    @ui @mink:chromedriver @api
     Scenario: Adding a new shipping method for channel
         When I want to create a new shipping method
         And I specify its code as "FED_EX_CARRIER"
@@ -59,8 +56,7 @@ Feature: Adding a new shipping method
         And I choose "Flat rate per unit" calculator
         And I specify its amount as 20 for "Web-US" channel
         And I add it
-        Then I should be notified that it has been successfully created
-        And the shipping method "FedEx Carrier" should appear in the registry
+        Then the "FedEx Carrier" shipping method should be successfully created
         And the shipping method "FedEx Carrier" should be available in channel "Web-US"
 
     @ui @mink:chromedriver @api
@@ -74,5 +70,4 @@ Feature: Adding a new shipping method
         And I specify its amount as 50 for "Web-US" channel
         And I specify its amount as 40 for "Web-GB" channel
         And I add it
-        Then I should be notified that it has been successfully created
-        And the shipping method "FedEx Carrier" should appear in the registry
+        Then the "FedEx Carrier" shipping method should be successfully created

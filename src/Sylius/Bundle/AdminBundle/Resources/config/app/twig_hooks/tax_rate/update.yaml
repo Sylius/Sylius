@@ -1,0 +1,39 @@
+twig_hooks:
+    hooks:
+        'sylius_admin.tax_rate.update.content':
+            form:
+                template: '@SyliusAdmin/shared/crud/update/content/form.html.twig'
+                configuration:
+                    render_rest: false
+
+        'sylius_admin.tax_rate.update.content.form':
+            sections:
+                template: '@SyliusAdmin/tax_rate/form/sections.html.twig'
+
+        'sylius_admin.tax_rate.update.content.form.sections':
+            details:
+                template: '@SyliusAdmin/tax_rate/form/sections/details.html.twig'
+            configuration:
+                template: '@SyliusAdmin/tax_rate/form/sections/configuration.html.twig'
+
+        'sylius_admin.tax_rate.update.content.form.sections.details':
+            name:
+                template: '@SyliusAdmin/tax_rate/form/sections/details/name.html.twig'
+            code:
+                template: '@SyliusAdmin/tax_rate/form/sections/details/code.html.twig'
+
+        'sylius_admin.tax_rate.update.content.form.sections.configuration':
+            category:
+                template: '@SyliusAdmin/tax_rate/form/sections/configuration/category.html.twig'
+            zone:
+                template: '@SyliusAdmin/tax_rate/form/sections/configuration/zone.html.twig'
+            calculator:
+                template: '@SyliusAdmin/tax_rate/form/sections/configuration/calculator.html.twig'
+            amount:
+                template: '@SyliusAdmin/tax_rate/form/sections/configuration/amount.html.twig'
+            included_in_price:
+                template: '@SyliusAdmin/tax_rate/form/sections/configuration/included_in_price.html.twig'
+            start_date:
+                template: '@SyliusAdmin/tax_rate/form/sections/configuration/start_date.html.twig'
+            end_date:
+                template: '@SyliusAdmin/tax_rate/form/sections/configuration/end_date.html.twig'

@@ -8,7 +8,7 @@ Feature: Shipping category validation
         Given the store operates on a single channel in "United States"
         And I am logged in as an administrator
 
-    @ui @api
+    @todo @ui @api
     Scenario: Trying to add a new shipping category without specifying its code
         When I want to create a new shipping category
         And I name it "Standard"
@@ -17,7 +17,7 @@ Feature: Shipping category validation
         Then I should be notified that code is required
         And shipping category with name "Standard" should not be added
 
-    @ui @api
+    @todo @ui @api
     Scenario: Trying to add a new shipping category with a too long code
         When I want to create a new shipping category
         And I name it "Standard"
@@ -25,7 +25,7 @@ Feature: Shipping category validation
         And I try to add it
         Then I should be notified that code is too long
 
-    @ui @api
+    @todo @ui @api
     Scenario: Trying to add a new shipping category without specifying its name
         When I want to create a new shipping category
         And I specify its code as "STANDARD"

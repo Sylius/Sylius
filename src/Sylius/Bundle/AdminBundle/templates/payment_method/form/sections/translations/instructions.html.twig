@@ -1,0 +1,12 @@
+{% set form = hookable_metadata.context.form %}
+{% from '@SyliusAdmin/shared/helper/icon.html.twig' import icon as _icon %}
+
+<div class="col-12 col-md-12">
+    <div class="alert alert-info">
+        <div class="d-flex">
+            <div>{{ _icon({ 'icon': 'info-circle', 'class': 'alert-icon' }) }}</div>
+            <div>{{ 'sylius.ui.the_instructions_below_will_be_displayed_to_the_customer'|trans }}</div>
+        </div>
+    </div>
+    {{ form_row(form.instructions, sylius_test_form_attribute('instructions')) }}
+</div>

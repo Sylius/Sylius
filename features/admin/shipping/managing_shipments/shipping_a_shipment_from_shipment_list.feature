@@ -38,7 +38,7 @@ Feature: Shipping a shipment from shipment list
         Then I should see the shipment of order "#00000001" as "Shipped"
         And I should see the shipment of order "#00000001" shipped at "20-02-2020 10:30:05"
 
-    @api
+    @api @no-ui
     Scenario: Shipping a shipment that has been already shipped
         Given this order has already been shipped
         When I try to ship the shipment of order "#00000001"

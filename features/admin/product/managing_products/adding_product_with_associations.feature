@@ -48,5 +48,5 @@ Feature: Adding a new product with associations
         And I associate as 123 the "LG headphones" and "LG earphones" products
         And I add it
         Then I should be notified that it has been successfully created
-        And this product should have an association 123 with products "LG headphones" and "LG earphones"
+        And this product should have an association "123" with products "LG headphones" and "LG earphones"
         And the product "LG G3" should appear in the store

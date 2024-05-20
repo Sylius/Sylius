@@ -18,7 +18,7 @@ Feature: Changing images of an existing taxon
         Then I should be notified that it has been successfully edited
         And this taxon should have an image with "banner" type
 
-    @ui @javascript @api
+    @ui @mink:chromedriver @api
     Scenario: Changing the type of image of a taxon
         Given the "T-Shirts" taxon has an image "ford.jpg" with "thumbnail" type
         And the "T-Shirts" taxon also has an image "t-shirts.jpg" with "banner" type

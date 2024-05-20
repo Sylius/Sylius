@@ -57,7 +57,7 @@ final class PricingElement extends Element implements PricingElementInterface
 
     public function getLowestPriceBeforeDiscountForChannel(string $channelName): string
     {
-        $channelPriceRow = $this->getChannelPriceRow($channelName);
+        $channelPriceRow = $this->getSimpleProductPricingRowForChannel($channelName);
 
         if (null === $channelPriceRow) {
             throw new \InvalidArgumentException(sprintf('Channel "%s" does not exist', $channelName));
@@ -84,8 +84,8 @@ final class PricingElement extends Element implements PricingElementInterface
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
-            'simple_product_pricing_row' => '#pricing tr:contains("%channelName%")',
-            'variant_pricing_row' => 'tr:contains("%variantName%") + tr:contains("%channelName%")',
+            'simple_product_pricing_row' => '[data-test-simple-product="%channelName%"]',
+            'variant_pricing_row' => '[data-test-variants="%channelName%.%variantName%"]',
         ]);
     }
 

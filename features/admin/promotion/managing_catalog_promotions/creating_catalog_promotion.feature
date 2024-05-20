@@ -140,8 +140,8 @@ Feature: Creating a catalog promotion
         Then the visitor should see that the "PHP T-Shirt" variant is discounted from "$20.00" to "$9.45" with 3 promotions
         And the visitor should see that the "Kotlin T-Shirt" variant is discounted from "$40.00" to "$30.00" with "Winter sale" promotion
 
-    @ui @javascript
-    Scenario: Adding a new catalog promotion of default type with one action
+    @ui @mink:chromedriver @no-api
+    Scenario: Adding a new catalog promotion with one scope and one action
         When I want to create a new catalog promotion
         And I add a new catalog promotion scope
         And I add a new catalog promotion action

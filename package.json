@@ -14,14 +14,15 @@
     "watch": "encore dev --watch"
   },
   "dependencies": {
-    "@popperjs/core": "^2.11.8",
-    "bootstrap": "^5.3.3",
+    "@sylius-ui/admin": "file:src/Sylius/Bundle/AdminBundle",
     "chart.js": "^3.7.1",
     "jquery": "^3.5.0",
     "jquery.dirtyforms": "^2.0.0",
     "lightbox2": "^2.9.0",
     "semantic-ui-css": "^2.2.0",
-    "slick-carousel": "^1.8.1"
+    "slick-carousel": "^1.8.1",
+    "@symfony/ux-autocomplete": "file:vendor/symfony/ux-autocomplete/assets",
+    "@symfony/ux-live-component": "file:vendor/symfony/ux-live-component/assets"
   },
   "devDependencies": {
     "@babel/core": "^7.0.0",
@@ -29,7 +30,9 @@
     "@babel/polyfill": "^7.0.0",
     "@babel/preset-env": "^7.18.10",
     "@babel/register": "^7.0.0",
+    "@hotwired/stimulus": "^3.0.0",
     "@semantic-ui-react/css-patch": "^1.1.2",
+    "@symfony/stimulus-bridge": "^3.2.2",
     "@symfony/webpack-encore": "^3.1.0",
     "eslint": "^8.23.0",
     "eslint-config-airbnb-base": "^15.0.0",
@@ -37,6 +40,7 @@
     "eslint-plugin-import": "^2.26.0",
     "sass": "^1.54.8",
     "sass-loader": "^13.0.0",
+    "tom-select": "^2.2.2",
     "yargs": "^17.5.1"
   },
   "engines": {

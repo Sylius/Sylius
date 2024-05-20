@@ -17,5 +17,4 @@ Feature: Adding a new promotion with action configured in different channels
         And I add the "Item fixed discount" action configured with amount of "$10.00" for "United States" channel
         And it is also configured with amount of "£16.00" for "Web-GB" channel
         And I add it
-        Then I should be notified that it has been successfully created
-        And the "Item fixed discount for all products!" promotion should appear in the registry
+        Then the "Item fixed discount for all products!" promotion should be successfully created

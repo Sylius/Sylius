@@ -19,6 +19,7 @@ use Behat\Mink\Exception\ElementNotFoundException;
 use Behat\Mink\Session;
 use FriendsOfBehat\PageObjectExtension\Page\SymfonyPage;
 use FriendsOfBehat\PageObjectExtension\Page\UnexpectedPageException;
+use Sylius\Behat\Service\DriverHelper;
 use Sylius\Component\Core\Formatter\StringInflector;
 use Symfony\Component\Routing\RouterInterface;
 
@@ -28,14 +29,17 @@ class UpdatePage extends SymfonyPage implements UpdatePageInterface
         Session $session,
         $minkParameters,
         RouterInterface $router,
-        private string $routeName,
+        private readonly string $routeName,
     ) {
         parent::__construct($session, $minkParameters, $router);
     }
 
     public function saveChanges(): void
     {
-        $this->getDocument()->pressButton('sylius_save_changes_button');
+        if (DriverHelper::isJavascript($this->getDriver())) {
+            $this->getDocument()->find('css', 'body')->click();
+        }
+        $this->getDocument()->find('css', '[data-test-update-changes-button]')->click();
     }
 
     public function cancelChanges(): void
@@ -58,6 +62,9 @@ class UpdatePage extends SymfonyPage implements UpdatePageInterface
         return $validationMessage->getText();
     }
 
+    /**
+     * @param array<string, string> $parameters
+     */
     public function hasResourceValues(array $parameters): bool
     {
         foreach ($parameters as $element => $value) {
@@ -100,7 +107,7 @@ class UpdatePage extends SymfonyPage implements UpdatePageInterface
     /**
      * @throws ElementNotFoundException
      */
-    private function getFieldElement(string $element): ?NodeElement
+    private function getFieldElement(string $element): NodeElement
     {
         $element = $this->getElement(StringInflector::nameToCode($element));
         while (null !== $element && !$element->hasClass('field')) {

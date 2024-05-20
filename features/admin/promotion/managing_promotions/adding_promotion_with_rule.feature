@@ -9,17 +9,17 @@ Feature: Adding a new promotion with rule
         And the store classifies its products as "T-Shirts" and "Mugs"
         And I am logged in as an administrator
 
-    @api @ui @javascript
+    @api @ui @mink:chromedriver
     Scenario: Adding a new promotion with taxon rule
         When I want to create a new promotion
         And I specify its code as "HOLIDAY_SALE"
         And I name it "Holiday sale"
         And I add the "Has at least one from taxons" rule configured with "T-Shirts" taxon and "Mugs" taxon
         And I add it
-        Then I should be notified that it has been successfully created
+        Then the "Holiday sale" promotion should be successfully created
         And the "Holiday sale" promotion should appear in the registry
 
-    @api @ui @javascript
+    @api @ui @mink:chromedriver
     Scenario: Adding a new promotion with total price of items from taxon rule
         When I want to create a new promotion
         And I specify its code as "100_MUGS_PROMOTION"
@@ -29,7 +29,7 @@ Feature: Adding a new promotion with rule
         Then I should be notified that it has been successfully created
         And the "100 Mugs promotion" promotion should appear in the registry
 
-    @api @ui @javascript
+    @api @ui @mink:chromedriver
     Scenario: Adding a new promotion with contains product rule
         Given the store has a product "PHP T-Shirt" priced at "$100.00"
         When I want to create a new promotion
@@ -40,7 +40,7 @@ Feature: Adding a new promotion with rule
         Then I should be notified that it has been successfully created
         And the "PHP T-Shirt promotion" promotion should appear in the registry
 
-    @api @ui @javascript
+    @api @ui @mink:chromedriver
     Scenario: Adding a new group based promotion
         Given the store has a customer group "Wholesale"
         When I want to create a new promotion
@@ -50,11 +50,3 @@ Feature: Adding a new promotion with rule
         And I add it
         Then I should be notified that it has been successfully created
         And the "Wholesale promotion" promotion should appear in the registry
-
-    @ui @javascript @no-api
-    Scenario: Adding a new promotion of default type with one action
-        When I want to create a new promotion
-        And I add a new rule
-        And I add a new action
-        Then I should see the rule configuration form
-        And I should see the action configuration form

@@ -1,0 +1,15 @@
+{% import '@SyliusAdmin/shared/helper/header.html.twig' as _header %}
+
+{% if hookable_metadata.context.has("metadata") %}
+    {% set metadata = hookable_metadata.context.metadata %}
+    {% set header = hookable_metadata.configuration.title|default(metadata.applicationName~'.ui.'~metadata.pluralName) %}
+{% else %}
+    {% set header = hookable_metadata.configuration.title %}
+{% endif %}
+
+
+<div class="col-12 col-md">
+    <div class="d-md-flex gap-2 align-items-center">
+        {{ _header.h1(header|trans) }}
+    </div>
+</div>

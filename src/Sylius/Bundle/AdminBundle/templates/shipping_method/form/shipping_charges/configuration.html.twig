@@ -1,0 +1,16 @@
+{% set form = hookable_metadata.context.form %}
+
+{% if form.calculator.vars.value is not empty %}
+    <div class="col-12" {{ sylius_test_html_attribute('calculator-configuration') }}>
+        {% if form.configuration is defined %}
+            {{ form_row(form.configuration) }}
+        {% else %}
+            {% for name, calculatorConfigurationPrototype in form.vars.prototypes %}
+                {% set chosenCalculator = 'calculators_' ~ form.calculator.vars.value %}
+                {% if chosenCalculator == name %}
+                    {{ form_row(calculatorConfigurationPrototype) }}
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+    </div>
+{% endif %}

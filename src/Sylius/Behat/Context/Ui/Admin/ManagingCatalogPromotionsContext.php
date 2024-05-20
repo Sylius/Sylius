@@ -25,6 +25,11 @@ use Sylius\Behat\Page\Admin\CatalogPromotion\UpdatePageInterface;
 use Sylius\Behat\Page\Admin\Crud\IndexPageInterface;
 use Sylius\Behat\Service\NotificationCheckerInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
+use Sylius\Bundle\CoreBundle\CatalogPromotion\Calculator\FixedDiscountPriceCalculator;
+use Sylius\Bundle\CoreBundle\CatalogPromotion\Calculator\PercentageDiscountPriceCalculator;
+use Sylius\Bundle\CoreBundle\CatalogPromotion\Checker\InForProductScopeVariantChecker;
+use Sylius\Bundle\CoreBundle\CatalogPromotion\Checker\InForTaxonsScopeVariantChecker;
+use Sylius\Bundle\CoreBundle\CatalogPromotion\Checker\InForVariantsScopeVariantChecker;
 use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\CatalogPromotionInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
@@ -38,14 +43,14 @@ final class ManagingCatalogPromotionsContext implements Context
     use ValidationTrait;
 
     public function __construct(
-        private IndexPageInterface $indexPage,
-        private CreatePageInterface $createPage,
-        private UpdatePageInterface $updatePage,
-        private ShowPageInterface $showPage,
-        private FormElementInterface $formElement,
-        private FilterElementInterface $filterElement,
-        private SharedStorageInterface $sharedStorage,
-        private NotificationCheckerInterface $notificationChecker,
+        private readonly IndexPageInterface $indexPage,
+        private readonly CreatePageInterface $createPage,
+        private readonly UpdatePageInterface $updatePage,
+        private readonly ShowPageInterface $showPage,
+        private readonly FormElementInterface $formElement,
+        private readonly FilterElementInterface $filterElement,
+        private readonly SharedStorageInterface $sharedStorage,
+        private readonly NotificationCheckerInterface $notificationChecker,
     ) {
     }
 
@@ -208,7 +213,7 @@ final class ManagingCatalogPromotionsContext implements Context
      */
     public function iAddANewCatalogPromotionScope(): void
     {
-        $this->formElement->addScope();
+        $this->formElement->addScope(InForProductScopeVariantChecker::TYPE);
     }
 
     /**
@@ -220,9 +225,8 @@ final class ManagingCatalogPromotionsContext implements Context
     {
         $variantCodes = array_map(fn (ProductVariantInterface $variant) => $variant->getCode(), $variants);
 
-        $this->formElement->addScope();
-        $this->formElement->chooseScopeType('For variants');
-        $this->formElement->chooseLastScopeCodes($variantCodes);
+        $this->formElement->addScope(InForVariantsScopeVariantChecker::TYPE);
+        $this->formElement->selectScopeOption($variantCodes);
     }
 
     /**
@@ -232,9 +236,8 @@ final class ManagingCatalogPromotionsContext implements Context
     {
         $taxonsCodes = array_map(fn (TaxonInterface $taxon) => $taxon->getCode(), $taxons);
 
-        $this->formElement->addScope();
-        $this->formElement->chooseScopeType('For taxons');
-        $this->formElement->chooseLastScopeCodes($taxonsCodes);
+        $this->formElement->addScope(InForTaxonsScopeVariantChecker::TYPE);
+        $this->formElement->selectScopeOption($taxonsCodes);
     }
 
     /**
@@ -242,17 +245,32 @@ final class ManagingCatalogPromotionsContext implements Context
      */
     public function iAddScopeThatAppliesOnProduct(ProductInterface $product): void
     {
-        $this->formElement->addScope();
-        $this->formElement->chooseScopeType('For product');
-        $this->formElement->chooseLastScopeCodes([$product->getCode()]);
+        $this->formElement->addScope(InForProductScopeVariantChecker::TYPE);
+        $this->formElement->selectScopeOption([$product->getCode()]);
     }
 
     /**
-     * @When I remove its every action
+     * @When I add :productVariant variant to its scope
      */
-    public function iRemoveItsEveryAction(): void
+    public function iAddVariantToItsScope(ProductVariantInterface $productVariant): void
     {
-        $this->formElement->removeAllActions();
+        $this->formElement->selectScopeOption([$productVariant->getCode()]);
+    }
+
+    /**
+     * @When I remove :productVariant variant from its scope
+     */
+    public function iRemoveVariantFromItsScope(ProductVariantInterface $productVariant): void
+    {
+        $this->formElement->removeScopeOption([$productVariant->getCode()]);
+    }
+
+    /**
+     * @When I remove its last action
+     */
+    public function iRemoveItsLastAction(): void
+    {
+        $this->formElement->removeLastAction();
     }
 
     /**
@@ -260,7 +278,7 @@ final class ManagingCatalogPromotionsContext implements Context
      */
     public function iAddANewCatalogPromotionAction(): void
     {
-        $this->formElement->addAction();
+        $this->formElement->addAction(FixedDiscountPriceCalculator::TYPE);
     }
 
     /**
@@ -269,9 +287,8 @@ final class ManagingCatalogPromotionsContext implements Context
      */
     public function iAddActionThatGivesPercentageDiscount(string $discount): void
     {
-        $this->formElement->addAction();
-        $this->formElement->chooseActionType('Percentage discount');
-        $this->formElement->specifyLastActionDiscount($discount);
+        $this->formElement->addAction(PercentageDiscountPriceCalculator::TYPE);
+        $this->formElement->fillActionOption('Amount', $discount);
     }
 
     /**
@@ -279,9 +296,8 @@ final class ManagingCatalogPromotionsContext implements Context
      */
     public function iAddActionThatGivesFixedDiscount(string $discount, ChannelInterface $channel): void
     {
-        $this->formElement->addAction();
-        $this->formElement->chooseActionType('Fixed discount');
-        $this->formElement->specifyLastActionDiscountForChannel($discount, $channel);
+        $this->formElement->addAction(FixedDiscountPriceCalculator::TYPE);
+        $this->formElement->fillActionOptionForChannel($channel->getCode(), 'Amount', $discount);
     }
 
     /**
@@ -347,87 +363,11 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
-     * @When /^I edit ("[^"]+" catalog promotion) to be applied on ("[^"]+" variant)$/
+     * @When I remove its last scope
      */
-    public function iEditCatalogPromotionToBeAppliedOnVariant(CatalogPromotionInterface $catalogPromotion, ProductVariantInterface $productVariant): void
+    public function iRemoveItsLastScope(): void
     {
-        $this->updatePage->open(['id' => $catalogPromotion->getId()]);
-
-        $this->formElement->chooseLastScopeCodes([$productVariant->getCode()]);
-        $this->updatePage->saveChanges();
-    }
-
-    /**
-     * @When /^I edit ("[^"]+" catalog promotion) to be applied on ("[^"]+" taxon)$/
-     */
-    public function iEditCatalogPromotionToBeAppliedOnTaxon(
-        CatalogPromotionInterface $catalogPromotion,
-        TaxonInterface $taxon,
-    ): void {
-        $this->updatePage->open(['id' => $catalogPromotion->getId()]);
-
-        $this->formElement->chooseScopeType('For taxons');
-        $this->formElement->chooseLastScopeCodes([$taxon->getCode()]);
-        $this->updatePage->saveChanges();
-    }
-
-    /**
-     * @When /^I edit ("[^"]+" catalog promotion) to be applied on ("[^"]+" product)$/
-     */
-    public function iEditCatalogPromotionToBeAppliedOnProduct(
-        CatalogPromotionInterface $catalogPromotion,
-        ProductInterface $product,
-    ): void {
-        $this->updatePage->open(['id' => $catalogPromotion->getId()]);
-
-        $this->formElement->chooseScopeType('For products');
-        $this->formElement->chooseLastScopeCodes([$product->getCode()]);
-        $this->updatePage->saveChanges();
-    }
-
-    /**
-     * @When I remove its every scope
-     */
-    public function iRemoveItsEveryScope(): void
-    {
-        $this->formElement->removeAllScopes();
-    }
-
-    /**
-     * @When /^I edit ("[^"]+" catalog promotion) to have "([^"]+)%" discount$/
-     */
-    public function iEditCatalogPromotionToHaveDiscount(CatalogPromotionInterface $catalogPromotion, string $amount): void
-    {
-        $this->updatePage->open(['id' => $catalogPromotion->getId()]);
-        $this->formElement->specifyLastActionDiscount($amount);
-        $this->updatePage->saveChanges();
-    }
-
-    /**
-     * @When /^I edit ("[^"]+" catalog promotion) to have "(?:€|£|\$)([^"]+)" of fixed discount in the ("[^"]+" channel)$/
-     */
-    public function iEditCatalogPromotionToHaveFixedDiscountInTheChannel(
-        CatalogPromotionInterface $catalogPromotion,
-        string $discount,
-        ChannelInterface $channel,
-    ): void {
-        $this->updatePage->open(['id' => $catalogPromotion->getId()]);
-        $this->formElement->chooseActionType('Fixed discount');
-        $this->formElement->specifyLastActionDiscountForChannel($discount, $channel);
-        $this->updatePage->saveChanges();
-
-        $this->sharedStorage->set('catalog_promotion', $catalogPromotion);
-    }
-
-    /**
-     * @When /^I edit it to have "(?:€|£|\$)([^"]+)" of fixed discount in the ("[^"]+" channel)$/
-     */
-    public function iEditItToHaveFixedDiscountInTheChannel(
-        string $discount,
-        ChannelInterface $channel,
-    ): void {
-        $this->formElement->chooseActionType('Fixed discount');
-        $this->formElement->specifyLastActionDiscountForChannel($discount, $channel);
+        $this->formElement->removeLastScope();
     }
 
     /**
@@ -457,7 +397,7 @@ final class ManagingCatalogPromotionsContext implements Context
      */
     public function iEditItsActionSoThatItReducesPriceBy(string $discount): void
     {
-        $this->formElement->specifyLastActionDiscount($discount);
+        $this->formElement->fillActionOption('Amount', $discount);
     }
 
     /**
@@ -465,8 +405,7 @@ final class ManagingCatalogPromotionsContext implements Context
      */
     public function iAddForVariantsScopeWithoutVariantsConfigured(): void
     {
-        $this->formElement->addScope();
-        $this->formElement->chooseScopeType('For variants');
+        $this->formElement->addScope(InForVariantsScopeVariantChecker::TYPE);
     }
 
     /**
@@ -474,8 +413,7 @@ final class ManagingCatalogPromotionsContext implements Context
      */
     public function iAddForTaxonScopeWithoutTaxonsConfigured(): void
     {
-        $this->formElement->addScope();
-        $this->formElement->chooseScopeType('For taxons');
+        $this->formElement->addScope(InForTaxonsScopeVariantChecker::TYPE);
     }
 
     /**
@@ -483,8 +421,7 @@ final class ManagingCatalogPromotionsContext implements Context
      */
     public function iAddCatalogPromotionScopeForProductWithoutProducts(): void
     {
-        $this->formElement->addScope();
-        $this->formElement->chooseScopeType('For products');
+        $this->formElement->addScope(InForProductScopeVariantChecker::TYPE);
     }
 
     /**
@@ -492,8 +429,7 @@ final class ManagingCatalogPromotionsContext implements Context
      */
     public function iAddPercentageDiscountActionWithoutAmountConfigured(): void
     {
-        $this->formElement->addAction();
-        $this->formElement->chooseActionType('Percentage discount');
+        $this->formElement->addAction(PercentageDiscountPriceCalculator::TYPE);
     }
 
     /**
@@ -501,8 +437,7 @@ final class ManagingCatalogPromotionsContext implements Context
      */
     public function iAddFixedDiscountActionWithoutAmountConfigured(): void
     {
-        $this->formElement->addAction();
-        $this->formElement->chooseActionType('Fixed discount');
+        $this->formElement->addAction(FixedDiscountPriceCalculator::TYPE);
     }
 
     /**
@@ -510,8 +445,8 @@ final class ManagingCatalogPromotionsContext implements Context
      */
     public function iAddInvalidPercentageDiscountActionWithNonNumberInAmount(): void
     {
-        $this->formElement->addAction();
-        $this->formElement->specifyLastActionDiscount('alot');
+        $this->formElement->addAction(PercentageDiscountPriceCalculator::TYPE);
+        $this->formElement->fillActionOption('Amount', 'alot');
     }
 
     /**
@@ -520,9 +455,8 @@ final class ManagingCatalogPromotionsContext implements Context
     public function iAddInvalidFixedDiscountActionWithNonNumberInAmountForTheChannel(
         ChannelInterface $channel,
     ): void {
-        $this->formElement->addAction();
-        $this->formElement->chooseActionType('Fixed discount');
-        $this->formElement->specifyLastActionDiscountForChannel('wrong value', $channel);
+        $this->formElement->addAction(FixedDiscountPriceCalculator::TYPE);
+        $this->formElement->fillActionOptionForChannel($channel->getCode(), 'Amount', 'wrong value');
     }
 
     /**
@@ -585,8 +519,7 @@ final class ManagingCatalogPromotionsContext implements Context
      */
     public function iEditItToHaveEmptyPercentageDiscount(): void
     {
-        $this->formElement->chooseActionType('Percentage discount');
-        $this->formElement->specifyLastActionDiscount('');
+        $this->formElement->fillActionOption('Amount', '');
     }
 
     /**
@@ -594,8 +527,7 @@ final class ManagingCatalogPromotionsContext implements Context
      */
     public function iEditItToHaveEmptyFixedDiscountInChannel(ChannelInterface $channel): void
     {
-        $this->formElement->chooseActionType('Fixed discount');
-        $this->formElement->specifyLastActionDiscountForChannel('', $channel);
+        $this->formElement->fillActionOptionForChannel($channel->getCode(), 'Amount', '');
     }
 
     /**
@@ -705,7 +637,7 @@ final class ManagingCatalogPromotionsContext implements Context
     public function iShouldBeNotifiedThatADiscountAmountShouldBeBetween0And100Percent(): void
     {
         Assert::same(
-            $this->formElement->getValidationMessage(),
+            $this->formElement->getValidationMessage('last_action'),
             'The percentage discount amount must be between 0% and 100%.',
         );
     }
@@ -716,19 +648,30 @@ final class ManagingCatalogPromotionsContext implements Context
     public function iShouldBeNotifiedThatThePercentageAmountShouldBeANumber(): void
     {
         Assert::same(
-            $this->formElement->getValidationMessage(),
+            $this->formElement->getValidationMessage('last_action'),
             'The percentage discount amount must be a number and can not be empty.',
         );
     }
 
     /**
-     * @Then I should be notified that the fixed amount should be a number and cannot be empty
+     * @Then I should be notified that the fixed amount cannot be empty
+     */
+    public function iShouldBeNotifiedThatTheFixedAmountShouldCannotBeEmpty(): void
+    {
+        Assert::same(
+            $this->formElement->getValidationMessage('last_action'),
+            'Provided configuration contains errors. Please add the fixed discount amount that is a number greater than 0.',
+        );
+    }
+
+    /**
+     * @Then I should be notified that the fixed amount should be a number
      */
     public function iShouldBeNotifiedThatTheFixedAmountShouldBeANumber(): void
     {
         Assert::same(
-            $this->formElement->getValidationMessage(),
-            'Provided configuration contains errors. Please add the fixed discount amount that is a number greater than 0.',
+            $this->formElement->getValidationMessage('last_action'),
+            'Please enter a valid money amount.',
         );
     }
 
@@ -915,7 +858,7 @@ final class ManagingCatalogPromotionsContext implements Context
      */
     public function itShouldHaveDiscount(string $amount): void
     {
-        Assert::same($this->formElement->getLastActionDiscount(), $amount);
+        Assert::same($this->formElement->getLastActionOption('Amount'), $amount);
     }
 
     /**
@@ -929,7 +872,7 @@ final class ManagingCatalogPromotionsContext implements Context
     ): void {
         $this->updatePage->open(['id' => $catalogPromotion->getId()]);
 
-        Assert::same($this->formElement->getLastActionFixedDiscount($channel), $amount);
+        Assert::same($this->formElement->getLastActionOptionForChannel($channel->getCode(), 'Amount'), $amount);
     }
 
     /**
@@ -1091,7 +1034,7 @@ final class ManagingCatalogPromotionsContext implements Context
      */
     public function iShouldBeNotifiedThatAtLeast1VariantIsRequired(): void
     {
-        Assert::same($this->formElement->getValidationMessage(), 'Please add at least 1 variant.');
+        Assert::same($this->formElement->getValidationMessage('last_scope'), 'Please add at least 1 variant.');
     }
 
     /**
@@ -1100,7 +1043,7 @@ final class ManagingCatalogPromotionsContext implements Context
     public function iShouldBeNotifiedThatIMustAddAtLeastOne(string $entity): void
     {
         Assert::same(
-            $this->formElement->getValidationMessage(),
+            $this->formElement->getValidationMessage('last_scope'),
             sprintf('Provided configuration contains errors. Please add at least 1 %s.', $entity),
         );
     }
@@ -1110,9 +1053,9 @@ final class ManagingCatalogPromotionsContext implements Context
      */
     public function iShouldNotBeAbleToEditItDueToWrongState(): void
     {
-        Assert::same(
-            $this->formElement->getValidationMessage(),
+        Assert::inArray(
             'The catalog promotion cannot be edited as it is currently being processed.',
+            $this->formElement->getValidationMessages(),
         );
     }
 
@@ -1186,7 +1129,7 @@ final class ManagingCatalogPromotionsContext implements Context
      */
     public function iShouldGetInformationThatTheEndDateCannotBeSetBeforeStartDate(): void
     {
-        Assert::same($this->createPage->getValidationMessage('endDate'), 'End date cannot be set before start date.');
+        Assert::same($this->formElement->getValidationMessage('end_date_date'), 'End date cannot be set before start date.');
     }
 
     /**
@@ -1195,7 +1138,7 @@ final class ManagingCatalogPromotionsContext implements Context
     public function iShouldBeNotifiedThatNotAllChannelsAreFilled(): void
     {
         Assert::contains(
-            $this->formElement->getValidationMessage(),
+            $this->formElement->getValidationMessage('last_action'),
             'Provided configuration contains errors. Please add the fixed discount amount that is a number greater than 0.',
         );
     }
@@ -1214,7 +1157,7 @@ final class ManagingCatalogPromotionsContext implements Context
     public function iShouldSeeTheCatalogPromotionScopeConfigurationForm(): void
     {
         Assert::true(
-            $this->createPage->checkIfScopeConfigurationFormIsVisible(),
+            $this->formElement->checkIfScopeConfigurationFormIsVisible(),
             'Catalog promotion scope configuration form is not visible.',
         );
     }
@@ -1225,7 +1168,7 @@ final class ManagingCatalogPromotionsContext implements Context
     public function iShouldSeeTheCatalogPromotionActionConfigurationForm(): void
     {
         Assert::true(
-            $this->createPage->checkIfActionConfigurationFormIsVisible(),
+            $this->formElement->checkIfActionConfigurationFormIsVisible(),
             'Catalog promotion action configuration form is not visible.',
         );
     }
@@ -1264,12 +1207,10 @@ final class ManagingCatalogPromotionsContext implements Context
         $this->formElement->prioritizeIt($priority);
         $this->formElement->setExclusiveness($exclusive);
         $this->formElement->checkChannel($channel);
-        $this->formElement->addScope();
-        $this->formElement->chooseScopeType('For product');
-        $this->formElement->chooseLastScopeCodes([$product->getCode()]);
-        $this->formElement->addAction();
-        $this->formElement->chooseActionType('Percentage discount');
-        $this->formElement->specifyLastActionDiscount($discount);
+        $this->formElement->addScope(InForProductScopeVariantChecker::TYPE);
+        $this->formElement->selectScopeOption([$product->getCode()]);
+        $this->formElement->addAction(PercentageDiscountPriceCalculator::TYPE);
+        $this->formElement->fillActionOption('Amount', $discount);
         $this->createPage->create();
     }
 

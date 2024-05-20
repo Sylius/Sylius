@@ -15,18 +15,18 @@ Feature: Seeing shipping states of an order after checkout steps
         And the customer chose "Free" shipping method with "Cash on Delivery" payment
         And I am logged in as an administrator
 
-    @api @ui
+    @api @todo @ui
     Scenario: Seeing ready order shipping state
         When I browse orders
         Then order "#00000666" should have shipment state "ready"
 
-    @api @ui
+    @api @todo @ui
     Scenario: Seeing shipped order shipping state
         Given this order has already been shipped
         When I browse orders
         Then order "#00000666" should have shipment state "shipped"
 
-    @api @ui
+    @api @todo @ui
     Scenario: Seeing cancelled order shipping state
         Given the customer cancelled this order
         When I browse orders

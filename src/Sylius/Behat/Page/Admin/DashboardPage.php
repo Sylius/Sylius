@@ -138,7 +138,7 @@ class DashboardPage extends SymfonyPage implements DashboardPageInterface
             'channel_choosing_link' => 'a:contains("%channelName%")',
             'customer_list' => '#customers',
             'dropdown' => 'i.dropdown',
-            'logout' => '#sylius-logout-button',
+            'logout' => '[data-test-user-dropdown-item="Logout"]',
             'month_split_by_days_statistics_button' => 'button[data-stats-button="month"]',
             'navigation_next' => '#navigation-next',
             'navigation_previous' => '#navigation-prev',

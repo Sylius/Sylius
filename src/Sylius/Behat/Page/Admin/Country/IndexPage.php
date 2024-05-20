@@ -20,12 +20,12 @@ class IndexPage extends BaseIndexPage implements IndexPageInterface
 {
     public function isCountryDisabled(CountryInterface $country): bool
     {
-        return $this->checkCountryStatus($country, 'Disabled');
+        return $this->checkCountryStatus($country, 'disabled');
     }
 
     public function isCountryEnabled(CountryInterface $country): bool
     {
-        return $this->checkCountryStatus($country, 'Enabled');
+        return $this->checkCountryStatus($country, 'enabled');
     }
 
     private function checkCountryStatus(CountryInterface $country, string $status): bool
@@ -36,6 +36,6 @@ class IndexPage extends BaseIndexPage implements IndexPageInterface
         $row = $tableAccessor->getRowWithFields($table, ['code' => $country->getCode()]);
         $enabledField = $tableAccessor->getFieldFromRow($table, $row, 'enabled');
 
-        return $enabledField->getText() === $status;
+        return $enabledField->has('css', sprintf('[data-test-status-%s]', $status));
     }
 }

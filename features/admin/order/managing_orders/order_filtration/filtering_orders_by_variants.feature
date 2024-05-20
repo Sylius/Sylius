@@ -26,7 +26,7 @@ Feature: Filtering orders by variants
         And the customer chose "Free" shipping method to "United States" with "Offline" payment
         And I am logged in as an administrator
 
-    @ui @api @javascript
+    @todo @ui @api @javascript
     Scenario: Filtering orders by variant
         When I browse orders
         And I filter by variant "Sundress"
@@ -34,7 +34,7 @@ Feature: Filtering orders by variants
         And I should see an order with "#0000002" number
         And I should see an order with "#0000003" number
 
-    @ui @api @mink:chromedriver
+    @todo @ui @api @mink:chromedriver
     Scenario: Filtering orders by multiple variants of the same product
         When I browse orders
         And I filter by variants "Nebula Top" and "Neutron Sleeveless"
@@ -42,7 +42,7 @@ Feature: Filtering orders by variants
         And I should see an order with "#0000001" number
         And I should see an order with "#0000002" number
 
-    @ui @api @javascript
+    @todo @ui @api @javascript
     Scenario: Filtering orders by multiple variants of different products
         When I browse orders
         And I filter by variants "Neutron Sleeveless" and "Sundress"

@@ -32,8 +32,7 @@
         "symfony/framework-bundle": "^6.4.1"
     },
     "conflict": {
-        "doctrine/orm": "2.15.2",
-        "twig/twig": "^3.0"
+        "doctrine/orm": "2.15.2"
     },
     "require-dev": {
         "doctrine/orm": "^2.13",

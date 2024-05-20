@@ -39,8 +39,7 @@
     },
     "conflict": {
         "doctrine/orm": "2.15.2",
-        "stof/doctrine-extensions-bundle": "1.8.0",
-        "twig/twig": "^3.0"
+        "stof/doctrine-extensions-bundle": "1.8.0"
     },
     "require-dev": {
         "doctrine/orm": "^2.13",

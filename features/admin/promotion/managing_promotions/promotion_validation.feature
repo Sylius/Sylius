@@ -69,7 +69,7 @@ Feature: Promotion validation
         And I try to save my changes
         Then I should be notified that promotion cannot end before it starts
 
-    @api @ui @mink:chromedriver
+    @api @ui
     Scenario: Adding a promotion with label exceeding 255 characters
         Given there is a promotion "Christmas sale"
         When I want to modify this promotion
@@ -77,7 +77,7 @@ Feature: Promotion validation
         And I try to save my changes
         Then I should be notified that promotion label in "Polish (Poland)" locale is too long
 
-    @api @ui @javascript
+    @api @ui @mink:chromedriver
     Scenario: Trying to add a new promotion without specifying a order percentage discount
         When I want to create a new promotion
         And I specify its code as "christmas_sale"
@@ -87,7 +87,7 @@ Feature: Promotion validation
         Then I should be notified that this value should not be blank
         And promotion with name "Christmas sale" should not be added
 
-    @api @ui @javascript
+    @api @ui @mink:chromedriver
     Scenario: Trying to add a new promotion without specifying an item percentage discount
         When I want to create a new promotion
         And I specify its code as "christmas_sale"
@@ -97,7 +97,7 @@ Feature: Promotion validation
         Then I should be notified that this value should not be blank
         And promotion with name "Christmas sale" should not be added
 
-    @api @ui @javascript
+    @api @ui @mink:chromedriver
     Scenario: Trying to add a new promotion with a wrong order percentage discount
         When I want to create a new promotion
         And I specify its code as "christmas_sale"
@@ -107,7 +107,7 @@ Feature: Promotion validation
         Then I should be notified that a percentage discount value must be between 0% and 100%
         And promotion with name "Christmas sale" should not be added
 
-    @api @ui @javascript
+    @api @ui @mink:chromedriver
     Scenario: Trying to add a new promotion with a wrong item percentage discount
         When I want to create a new promotion
         And I specify its code as "christmas_sale"

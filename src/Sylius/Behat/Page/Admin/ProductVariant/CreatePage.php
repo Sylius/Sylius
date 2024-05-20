@@ -71,14 +71,10 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
 
     public function getValidationMessageForForm(): string
     {
-        $formElement = $this->getDocument()->find('css', 'form[name="sylius_product_variant"]');
-        if (null === $formElement) {
-            throw new ElementNotFoundException($this->getSession(), 'Field element');
-        }
+        $validationMessage = $this->getDocument()->find('css', '.alert.alert-danger.d-block');
 
-        $validationMessage = $formElement->find('css', '[data-test-validation-error]');
         if (null === $validationMessage) {
-            throw new ElementNotFoundException($this->getSession(), 'Validation message', 'css', '[data-test-validation-error]');
+            throw new ElementNotFoundException($this->getSession(), 'Validation message', 'css', '.alert.alert-danger.d-block');
         }
 
         return $validationMessage->getText();
@@ -91,7 +87,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
 
     public function getPricesValidationMessage(): string
     {
-        return $this->getElement('prices_validation_message')->getText();
+        return $this->getElement('prices-body')->getText();
     }
 
     public function setShippingRequired(bool $isShippingRequired): void
@@ -120,7 +116,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
             'shipping_required' => '#sylius_product_variant_shippingRequired',
             'original_price' => '#sylius_product_variant_channelPricings_%channelCode%_originalPrice',
             'price' => '#sylius_product_variant_channelPricings_%channelCode%_price',
-            'prices_validation_message' => '#sylius_product_variant_channelPricings ~ [data-test-validation-error], #sylius_product_variant_channelPricings [data-test-validation-error]',
+            'prices-body' => '[data-test-product-channel-pricings-accordion-body]',
             'weight' => '#sylius_product_variant_weight',
             'width' => '#sylius_product_variant_width',
         ]);

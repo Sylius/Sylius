@@ -26,11 +26,6 @@ parameters:
 			path: src/Sylius/Bundle/AddressingBundle/Form/Type/ProvinceCodeChoiceType.php
 
 		-
-			message: "#^Method Sylius\\\\Bundle\\\\AddressingBundle\\\\Form\\\\Type\\\\ZoneChoiceType\\:\\:__construct\\(\\) has parameter \\$scopeTypes with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Sylius/Bundle/AddressingBundle/Form/Type/ZoneChoiceType.php
-
-		-
 			message: "#^Method Sylius\\\\Bundle\\\\AddressingBundle\\\\Form\\\\Type\\\\ZoneChoiceType\\:\\:__construct\\(\\) has parameter \\$zoneRepository with generic interface Sylius\\\\Component\\\\Resource\\\\Repository\\\\RepositoryInterface but does not specify its types\\: T$#"
 			count: 1
 			path: src/Sylius/Bundle/AddressingBundle/Form/Type/ZoneChoiceType.php
@@ -2463,11 +2458,6 @@ parameters:
 		-
 			message: "#^If condition is always false\\.$#"
 			count: 1
-			path: src/Sylius/Bundle/CoreBundle/Command/AbstractInstallCommand.php
-
-		-
-			message: "#^If condition is always false\\.$#"
-			count: 1
 			path: src/Sylius/Bundle/CoreBundle/Command/CancelUnpaidOrdersCommand.php
 
 		-
@@ -3631,11 +3621,6 @@ parameters:
 			path: src/Sylius/Bundle/CoreBundle/Form/EventSubscriber/CustomerRegistrationFormSubscriber.php
 
 		-
-			message: "#^Method Sylius\\\\Bundle\\\\CoreBundle\\\\Form\\\\Extension\\\\CountryTypeExtension\\:\\:__construct\\(\\) has parameter \\$countryRepository with generic interface Sylius\\\\Component\\\\Resource\\\\Repository\\\\RepositoryInterface but does not specify its types\\: T$#"
-			count: 1
-			path: src/Sylius/Bundle/CoreBundle/Form/Extension/CountryTypeExtension.php
-
-		-
 			message: "#^Method Sylius\\\\Bundle\\\\CoreBundle\\\\Form\\\\Extension\\\\LocaleTypeExtension\\:\\:__construct\\(\\) has parameter \\$localeRepository with generic interface Sylius\\\\Component\\\\Resource\\\\Repository\\\\RepositoryInterface but does not specify its types\\: T$#"
 			count: 1
 			path: src/Sylius/Bundle/CoreBundle/Form/Extension/LocaleTypeExtension.php
@@ -3849,11 +3834,6 @@ parameters:
 			message: "#^Method Sylius\\\\Bundle\\\\CoreBundle\\\\MessageHandler\\\\Admin\\\\Account\\\\RequestResetPasswordEmailHandler\\:\\:__invoke\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/Sylius/Bundle/CoreBundle/MessageHandler/Admin/Account/RequestResetPasswordEmailHandler.php
-
-		-
-			message: "#^Method Sylius\\\\Bundle\\\\CoreBundle\\\\MessageHandler\\\\Admin\\\\Account\\\\SendResetPasswordEmailHandler\\:\\:__construct\\(\\) has parameter \\$userRepository with generic interface Sylius\\\\Component\\\\User\\\\Repository\\\\UserRepositoryInterface but does not specify its types\\: T$#"
-			count: 1
-			path: src/Sylius/Bundle/CoreBundle/MessageHandler/Admin/Account/SendResetPasswordEmailHandler.php
 
 		-
 			message: "#^Method Sylius\\\\Bundle\\\\CoreBundle\\\\Migrations\\\\Version20171003103916\\:\\:getProductAttributes\\(\\) return type has no value type specified in iterable type array\\.$#"
@@ -4179,11 +4159,6 @@ parameters:
 			message: "#^Method Sylius\\\\Bundle\\\\LocaleBundle\\\\SyliusLocaleBundle\\:\\:getSupportedDrivers\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Sylius/Bundle/LocaleBundle/SyliusLocaleBundle.php
-
-		-
-			message: "#^If condition is always false\\.$#"
-			count: 1
-			path: src/Sylius/Bundle/OrderBundle/Command/RemoveExpiredCartsCommand.php
 
 		-
 			message: "#^Method Sylius\\\\Bundle\\\\OrderBundle\\\\Context\\\\SessionBasedCartContext\\:\\:__construct\\(\\) has parameter \\$orderRepository with generic interface Sylius\\\\Component\\\\Order\\\\Repository\\\\OrderRepositoryInterface but does not specify its types\\: T$#"
@@ -4906,51 +4881,6 @@ parameters:
 			path: src/Sylius/Bundle/UiBundle/DataCollector/TemplateBlockDataCollector.php
 
 		-
-			message: "#^Method Sylius\\\\Bundle\\\\UiBundle\\\\DataCollector\\\\TemplateBlockRenderingHistory\\:\\:getRenderedEvents\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Sylius/Bundle/UiBundle/DataCollector/TemplateBlockRenderingHistory.php
-
-		-
-			message: "#^Method Sylius\\\\Bundle\\\\UiBundle\\\\DataCollector\\\\TemplateBlockRenderingHistory\\:\\:startRenderingBlock\\(\\) has parameter \\$context with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Sylius/Bundle/UiBundle/DataCollector/TemplateBlockRenderingHistory.php
-
-		-
-			message: "#^Method Sylius\\\\Bundle\\\\UiBundle\\\\DataCollector\\\\TemplateBlockRenderingHistory\\:\\:startRenderingEvent\\(\\) has parameter \\$context with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Sylius/Bundle/UiBundle/DataCollector/TemplateBlockRenderingHistory.php
-
-		-
-			message: "#^Method Sylius\\\\Bundle\\\\UiBundle\\\\DataCollector\\\\TemplateBlockRenderingHistory\\:\\:startRenderingEvent\\(\\) has parameter \\$eventNames with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Sylius/Bundle/UiBundle/DataCollector/TemplateBlockRenderingHistory.php
-
-		-
-			message: "#^Method Sylius\\\\Bundle\\\\UiBundle\\\\DataCollector\\\\TemplateBlockRenderingHistory\\:\\:stopRenderingBlock\\(\\) has parameter \\$context with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Sylius/Bundle/UiBundle/DataCollector/TemplateBlockRenderingHistory.php
-
-		-
-			message: "#^Method Sylius\\\\Bundle\\\\UiBundle\\\\DataCollector\\\\TemplateBlockRenderingHistory\\:\\:stopRenderingEvent\\(\\) has parameter \\$context with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Sylius/Bundle/UiBundle/DataCollector/TemplateBlockRenderingHistory.php
-
-		-
-			message: "#^Method Sylius\\\\Bundle\\\\UiBundle\\\\DataCollector\\\\TemplateBlockRenderingHistory\\:\\:stopRenderingEvent\\(\\) has parameter \\$eventNames with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Sylius/Bundle/UiBundle/DataCollector/TemplateBlockRenderingHistory.php
-
-		-
-			message: "#^Method Sylius\\\\Bundle\\\\UiBundle\\\\DataCollector\\\\TraceableTemplateBlockRenderer\\:\\:render\\(\\) has parameter \\$context with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Sylius/Bundle/UiBundle/DataCollector/TraceableTemplateBlockRenderer.php
-
-		-
-			message: "#^Method Sylius\\\\Bundle\\\\UiBundle\\\\DataCollector\\\\TraceableTemplateEventRenderer\\:\\:render\\(\\) has parameter \\$context with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Sylius/Bundle/UiBundle/DataCollector/TraceableTemplateEventRenderer.php
-
-		-
 			message: "#^Method Sylius\\\\Bundle\\\\UiBundle\\\\DependencyInjection\\\\SyliusUiExtension\\:\\:loadEvents\\(\\) has parameter \\$eventsConfig with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Sylius/Bundle/UiBundle/DependencyInjection/SyliusUiExtension.php
@@ -4959,56 +4889,6 @@ parameters:
 			message: "#^PHPDoc tag @var for variable \\$details has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Sylius/Bundle/UiBundle/DependencyInjection/SyliusUiExtension.php
-
-		-
-			message: "#^Method Sylius\\\\Bundle\\\\UiBundle\\\\Registry\\\\TemplateBlock\\:\\:__construct\\(\\) has parameter \\$context with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Sylius/Bundle/UiBundle/Registry/TemplateBlock.php
-
-		-
-			message: "#^Method Sylius\\\\Bundle\\\\UiBundle\\\\Registry\\\\TemplateBlock\\:\\:getContext\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Sylius/Bundle/UiBundle/Registry/TemplateBlock.php
-
-		-
-			message: "#^Method Sylius\\\\Bundle\\\\UiBundle\\\\Registry\\\\TemplateBlockRegistry\\:\\:__construct\\(\\) has parameter \\$eventsToTemplateBlocks with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Sylius/Bundle/UiBundle/Registry/TemplateBlockRegistry.php
-
-		-
-			message: "#^Method Sylius\\\\Bundle\\\\UiBundle\\\\Renderer\\\\DelegatingTemplateEventRenderer\\:\\:render\\(\\) has parameter \\$context with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Sylius/Bundle/UiBundle/Renderer/DelegatingTemplateEventRenderer.php
-
-		-
-			message: "#^Method Sylius\\\\Bundle\\\\UiBundle\\\\Renderer\\\\HtmlDebugTemplateBlockRenderer\\:\\:render\\(\\) has parameter \\$context with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Sylius/Bundle/UiBundle/Renderer/HtmlDebugTemplateBlockRenderer.php
-
-		-
-			message: "#^Method Sylius\\\\Bundle\\\\UiBundle\\\\Renderer\\\\HtmlDebugTemplateEventRenderer\\:\\:render\\(\\) has parameter \\$context with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Sylius/Bundle/UiBundle/Renderer/HtmlDebugTemplateEventRenderer.php
-
-		-
-			message: "#^Method Sylius\\\\Bundle\\\\UiBundle\\\\Renderer\\\\TemplateBlockRendererInterface\\:\\:render\\(\\) has parameter \\$context with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Sylius/Bundle/UiBundle/Renderer/TemplateBlockRendererInterface.php
-
-		-
-			message: "#^Method Sylius\\\\Bundle\\\\UiBundle\\\\Renderer\\\\TemplateEventRendererInterface\\:\\:render\\(\\) has parameter \\$context with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Sylius/Bundle/UiBundle/Renderer/TemplateEventRendererInterface.php
-
-		-
-			message: "#^Method Sylius\\\\Bundle\\\\UiBundle\\\\Renderer\\\\TwigTemplateBlockRenderer\\:\\:__construct\\(\\) has parameter \\$contextProviders with no value type specified in iterable type iterable\\.$#"
-			count: 1
-			path: src/Sylius/Bundle/UiBundle/Renderer/TwigTemplateBlockRenderer.php
-
-		-
-			message: "#^Method Sylius\\\\Bundle\\\\UiBundle\\\\Renderer\\\\TwigTemplateBlockRenderer\\:\\:render\\(\\) has parameter \\$context with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Sylius/Bundle/UiBundle/Renderer/TwigTemplateBlockRenderer.php
 
 		-
 			message: "#^Method Sylius\\\\Bundle\\\\UiBundle\\\\Storage\\\\FilterStorage\\:\\:all\\(\\) return type has no value type specified in iterable type array\\.$#"
@@ -6039,26 +5919,6 @@ parameters:
 			message: "#^Method Sylius\\\\Component\\\\Core\\\\Provider\\\\ProductVariantMap\\\\ProductVariantsMapProviderInterface\\:\\:provide\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Sylius/Component/Core/Provider/ProductVariantMap/ProductVariantsMapProviderInterface.php
-
-		-
-			message: "#^Method Sylius\\\\Component\\\\Core\\\\Provider\\\\ProductVariantsPricesProvider\\:\\:constructOptionsMap\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Sylius/Component/Core/Provider/ProductVariantsPricesProvider.php
-
-		-
-			message: "#^Method Sylius\\\\Component\\\\Core\\\\Provider\\\\ProductVariantsPricesProvider\\:\\:provideVariantsPrices\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Sylius/Component/Core/Provider/ProductVariantsPricesProvider.php
-
-		-
-			message: "#^PHPDoc tag @var for variable \\$appliedPromotions contains generic class Doctrine\\\\Common\\\\Collections\\\\ArrayCollection but does not specify its types\\: TKey, T$#"
-			count: 1
-			path: src/Sylius/Component/Core/Provider/ProductVariantsPricesProvider.php
-
-		-
-			message: "#^Method Sylius\\\\Component\\\\Core\\\\Provider\\\\ProductVariantsPricesProviderInterface\\:\\:provideVariantsPrices\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Sylius/Component/Core/Provider/ProductVariantsPricesProviderInterface.php
 
 		-
 			message: "#^Method Sylius\\\\Component\\\\Core\\\\Repository\\\\OrderItemRepositoryInterface\\:\\:findOneByIdAndCustomer\\(\\) has parameter \\$id with no type specified\\.$#"

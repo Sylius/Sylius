@@ -220,15 +220,15 @@ final class ManagingProductVariantsContext implements Context
     /**
      * @When I set the position of :name to :position
      */
-    public function iSetThePositionOfTo($name, int $position)
+    public function iSetThePositionOfTo(string $name, int $position): void
     {
         $this->indexPage->setPosition($name, $position);
     }
 
     /**
-     * @When I save my new configuration
+     * @When I save my new elements order
      */
-    public function iSaveMyNewConfiguration()
+    public function iSaveMyNewElementsOrder(): void
     {
         $this->indexPage->savePositions();
     }
@@ -320,7 +320,7 @@ final class ManagingProductVariantsContext implements Context
         ChannelInterface $channel,
     ): void {
         $this->generatePage->specifyCode($nthVariant - 1, $code);
-        $this->generatePage->specifyPrice($nthVariant - 1, $price, $channel);
+        $this->generatePage->specifyPrice($nthVariant - 1, $price, $channel->getCode());
     }
 
     /**
@@ -336,7 +336,7 @@ final class ManagingProductVariantsContext implements Context
      */
     public function iSpecifyThereAreVariantsWithCost(int $nthVariant, int $price, ChannelInterface $channel): void
     {
-        $this->generatePage->specifyPrice($nthVariant - 1, $price, $channel);
+        $this->generatePage->specifyPrice($nthVariant - 1, $price, $channel->getCode());
     }
 
     /**
@@ -565,10 +565,10 @@ final class ManagingProductVariantsContext implements Context
     /**
      * @Then /^I should be notified that prices in all channels must be defined for the (\d)(?:st|nd|rd|th) variant$/
      */
-    public function iShouldBeNotifiedThatPricesInAllChannelsMustBeDefinedForTheVariant($position)
+    public function iShouldBeNotifiedThatPricesInAllChannelsMustBeDefinedForTheVariant($position): void
     {
         Assert::same(
-            $this->generatePage->getPricesValidationMessage($position - 1),
+            $this->generatePage->getValidationMessage('channel_pricings', $position - 1),
             'You must define price for every enabled channel.',
         );
     }
@@ -749,6 +749,22 @@ final class ManagingProductVariantsContext implements Context
         $this->updatePage->open(['id' => $productVariant->getId(), 'productId' => $productVariant->getProduct()->getId()]);
 
         Assert::true($this->updatePage->isSelectedOptionValueOnPage($optionName, $optionValue));
+    }
+
+    /**
+     * @Then /^I should not be able to remove (\d)(?:st|nd|rd|th) product variant$/
+     */
+    public function iShouldNotBeAbleToRemove(int $nthVariant): void
+    {
+        Assert::false($this->generatePage->isProductVariantRemovable($nthVariant - 1));
+    }
+
+    /**
+     * @Then /^I should be able to remove (\d)(?:st|nd|rd|th) product variant$/
+     */
+    public function iShouldBeAbleToRemove(int $nthVariant): void
+    {
+        Assert::true($this->generatePage->isProductVariantRemovable($nthVariant - 1));
     }
 
     /**

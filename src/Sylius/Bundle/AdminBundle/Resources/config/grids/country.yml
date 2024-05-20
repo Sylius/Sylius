@@ -8,23 +8,27 @@ sylius_grid:
             sorting:
                 code: asc
             fields:
-                code:
-                    type: string
-                    label: sylius.ui.code
-                    sortable: ~
                 name:
                     type: twig
                     label: sylius.ui.name
                     path: .
                     sortable: code
                     options:
-                        template: "@SyliusAdmin/Country/Grid/Field/name.html.twig"
+                        template: "@SyliusAdmin/country/grid/field/name.html.twig"
+                code:
+                    type: twig
+                    label: sylius.ui.code
+                    sortable: ~
+                    options:
+                        template: "@SyliusAdmin/shared/grid/field/code.html.twig"
                 enabled:
                     type: twig
                     label: sylius.ui.enabled
                     sortable: ~
                     options:
-                        template: "@SyliusUi/Grid/Field/enabled.html.twig"
+                        template: "@SyliusAdmin/shared/grid/field/boolean.html.twig"
+                        vars:
+                            th_class: "w-1 text-center"
             filters:
                 code:
                     type: string

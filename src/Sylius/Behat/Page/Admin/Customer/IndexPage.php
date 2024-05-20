@@ -13,12 +13,26 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Page\Admin\Customer;
 
+use Behat\Mink\Session;
 use Sylius\Behat\Page\Admin\Crud\IndexPage as BaseIndexPage;
-use Sylius\Behat\Service\AutocompleteHelper;
+use Sylius\Behat\Service\Accessor\TableAccessorInterface;
+use Sylius\Behat\Service\Helper\AutocompleteHelperInterface;
 use Sylius\Component\Customer\Model\CustomerInterface;
+use Symfony\Component\Routing\RouterInterface;
 
 class IndexPage extends BaseIndexPage implements IndexPageInterface
 {
+    public function __construct(
+        Session $session,
+        $minkParameters,
+        RouterInterface $router,
+        TableAccessorInterface $tableAccessor,
+        string $routeName,
+        private AutocompleteHelperInterface $autocompleteHelper,
+    ) {
+        parent::__construct($session, $minkParameters, $router, $tableAccessor, $routeName);
+    }
+
     public function getCustomerAccountStatus(CustomerInterface $customer): string
     {
         $tableAccessor = $this->getTableAccessor();
@@ -39,17 +53,37 @@ class IndexPage extends BaseIndexPage implements IndexPageInterface
         return $tableAccessor->getFieldFromRow($table, $row, 'verified')->getText() === 'Yes';
     }
 
-    public function specifyFilterGroup(string $groupName): void
+    public function setFilterGroup(string $groupName): void
     {
-        $groupFilterElement = $this->getElement('filter_group')->getParent();
+        $this->autocompleteHelper->selectByName(
+            $this->getDriver(),
+            $this->getElement('filter_group')->getXpath(),
+            $groupName,
+        );
 
-        AutocompleteHelper::chooseValue($this->getSession(), $groupFilterElement, $groupName);
+        $this->waitForFormUpdate();
+    }
+
+    public function setFilterSearch(string $phrase): void
+    {
+        $this->getElement('filter_search')->setValue($phrase);
     }
 
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
             'filter_group' => '#criteria_group',
+            'filter_search' => '#criteria_search_value',
+            'filters_form' => '[data-test-filters-form]',
         ]);
+    }
+
+    private function waitForFormUpdate(): void
+    {
+        $form = $this->getElement('filters_form');
+        sleep(1); // we need to sleep, as sometimes the check below is executed faster than the form sets the busy attribute
+        $form->waitFor(1500, function () use ($form) {
+            return !$form->hasAttribute('busy');
+        });
     }
 }

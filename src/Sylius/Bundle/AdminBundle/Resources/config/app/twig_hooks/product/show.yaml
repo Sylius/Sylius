@@ -1,0 +1,59 @@
+twig_hooks:
+    hooks:
+        'sylius_admin.product.show.content':
+            page_body:
+                template: '@SyliusAdmin/product/show/content/page_body.html.twig'
+
+        'sylius_admin.product.show.content.header.title_block':
+            title:
+                template: '@SyliusAdmin/product/show/content/header/title_block/title.html.twig'
+            actions:
+                template: '@SyliusAdmin/product/show/content/header/title_block/actions.html.twig'
+                
+        'sylius_admin.product.show.content.header.title_block.actions':
+            view_in_store:
+                template: '@SyliusAdmin/product/common/header/title_block/actions/view_in_store.html.twig'
+
+        'sylius_admin.product.show.content.page_body':
+            details:
+                template: '@SyliusAdmin/product/show/content/page_body/details.html.twig'
+            translations:
+                template: '@SyliusAdmin/product/show/content/page_body/translations.html.twig'
+            taxonomy:
+                template: '@SyliusAdmin/product/show/content/page_body/taxonomy.html.twig'
+            associations:
+                template: '@SyliusAdmin/product/show/content/page_body/associations.html.twig'
+
+        'sylius_admin.product.show.content.page_body.details':
+            simple_product:
+                template: '@SyliusAdmin/product/show/content/page_body/details/simple_product.html.twig'
+            configurable_product:
+                template: '@SyliusAdmin/product/show/content/page_body/details/configurable_product.html.twig'
+
+        'sylius_admin.product.show.content.page_body.details.simple_product':
+            shipping:
+                template: '@SyliusAdmin/product/show/content/page_body/details/shared/shipping.html.twig'
+
+        'sylius_admin.product.show.content.page_body.details.configurable_product':
+            shipping:
+                template: '@SyliusAdmin/product/show/content/page_body/details/shared/shipping.html.twig'
+
+        'sylius_admin.product.show.content.page_body.translations':
+            product_name:
+                template: '@SyliusAdmin/product/show/content/page_body/translation_content/product_name.html.twig'
+            slug:
+                template: '@SyliusAdmin/product/show/content/page_body/translation_content/slug.html.twig'
+            description:
+                template: '@SyliusAdmin/product/show/content/page_body/translation_content/description.html.twig'
+            short_description:
+                template: '@SyliusAdmin/product/show/content/page_body/translation_content/short_description.html.twig'
+            meta_keywords:
+                template: '@SyliusAdmin/product/show/content/page_body/translation_content/meta_keywords.html.twig'
+            meta_description:
+                template: '@SyliusAdmin/product/show/content/page_body/translation_content/meta_description.html.twig'
+
+        'sylius_admin.product.show.content.page_body.taxonomy':
+            main_taxon:
+                template: '@SyliusAdmin/product/show/content/page_body/taxonomy/main_taxon.html.twig'
+            product_taxons:
+                template: '@SyliusAdmin/product/show/content/page_body/taxonomy/product_taxons.html.twig'
