@@ -1,0 +1,8 @@
+---------------------------------------------------------------------------
+
+by github-actions[bot] at 2024-05-17T13:07:53Z
+
+### Bunnyshell Preview Environment automatic creation skipped due to restricted files changes.
+
+Add a comment containing `/bns:deploy` to approve the creation of the environment.
+<!-- thollander/actions-comment-pull-request "bunnyshell-preview-env" -->
