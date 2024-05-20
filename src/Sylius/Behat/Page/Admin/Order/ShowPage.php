@@ -101,9 +101,19 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
 
     public function hasPayment(string $paymentMethodName): bool
     {
-
         foreach ($this->getElement('payments')->findAll('css', '[data-test-payment-method]') as $paymentMethod) {
             if (0 === strcasecmp($paymentMethodName, $paymentMethod->getText())) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public function hasPaymentWithState(string $state): bool
+    {
+        foreach ($this->getElement('payments')->findAll('css', '[data-test-payment-state]') as $paymentState) {
+            if (0 === strcasecmp($state, $paymentState->getText())) {
                 return true;
             }
         }
@@ -187,7 +197,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     {
         $promotion = $this->getElement('promotion', ['%name%' => $promotionName]);
 
-        return 0 === strcasecmp($promotionAmount, $promotion->find('css', '[data-test-unit-discount]')->getText());
+        return 0 === strcasecmp($promotionAmount, $promotion->find('css', '[data-test-discount]')->getText());
     }
 
     public function hasTax(string $tax): bool

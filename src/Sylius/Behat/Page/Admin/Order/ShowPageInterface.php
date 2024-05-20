@@ -38,6 +38,8 @@ interface ShowPageInterface extends SymfonyPageInterface
 
     public function hasPayment(string $paymentMethodName): bool;
 
+    public function hasPaymentWithState(string $state);
+
     public function canCompleteOrderLastPayment(OrderInterface $order): bool;
 
     public function completeOrderLastPayment(OrderInterface $order): void;
