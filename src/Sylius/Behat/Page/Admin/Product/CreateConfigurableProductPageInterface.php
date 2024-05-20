@@ -34,5 +34,7 @@ interface CreateConfigurableProductPageInterface extends BaseCreatePageInterface
 
     public function activateLanguageTab(string $localeCode): void;
 
+    public function generateSlug(string $language): void;
+
     public function getAttributeValidationErrors(string $attributeName, string $localeCode): string;
 }

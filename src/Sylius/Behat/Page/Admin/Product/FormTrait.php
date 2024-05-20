@@ -60,11 +60,6 @@ trait FormTrait
         $this->changeTab('translations');
         $this->expandTranslationAccordion($localeCode);
         $this->getElement('field_name', ['%localeCode%' => $localeCode])->setValue($name);
-
-        if (DriverHelper::isJavascript($this->getDriver())) {
-            $this->getElement('generate_product_slug_button', ['%localeCode%' => $localeCode])->click();
-            $this->waitForFormUpdate();
-        }
     }
 
     public function specifyPrice(ChannelInterface $channel, string $price): void
@@ -116,6 +111,12 @@ trait FormTrait
         $productOptionsAutocomplete = $this->getElement('product_options_autocomplete');
 
         $this->autocompleteHelper->selectByName($this->getDriver(), $productOptionsAutocomplete->getXpath(), $optionName);
+    }
+
+    public function generateSlug(string $localeCode): void
+    {
+        $this->getElement('generate_product_slug_button', ['%localeCode%' => $localeCode])->click();
+        $this->waitForFormUpdate();
     }
 
     public function hasTab(string $name): bool

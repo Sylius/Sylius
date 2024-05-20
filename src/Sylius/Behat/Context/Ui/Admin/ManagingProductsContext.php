@@ -104,6 +104,14 @@ final readonly class ManagingProductsContext implements Context
     }
 
     /**
+     * @When I generate its slug in :localeCode
+     */
+    public function iGenerateItsSlugIn(string $localeCode): void
+    {
+        $this->createConfigurableProductPage->generateSlug($localeCode);
+    }
+
+    /**
      * @When I add it
      * @When I try to add it
      */
@@ -196,16 +204,6 @@ final readonly class ManagingProductsContext implements Context
     public function iChooseToShowThisProductInThisChannel(): void
     {
         $this->updateSimpleProductPage->showProductInSingleChannel();
-    }
-
-    /**
-     * @When I enable slug modification
-     * @When I enable slug modification in :localeCode
-     */
-    public function iEnableSlugModification($localeCode = 'en_US')
-    {
-        $this->updateSimpleProductPage->activateLanguageTab($localeCode);
-        $this->updateSimpleProductPage->enableSlugModification($localeCode);
     }
 
     /**
@@ -585,9 +583,9 @@ final readonly class ManagingProductsContext implements Context
     /**
      * @When /^I change its original price to "(?:€|£|\$)([^"]+)" for ("([^"]+)" channel)$/
      */
-    public function iChangeItsOriginalPriceTo(string $price, ChannelInterface $channel)
+    public function iChangeItsOriginalPriceTo(string $originalPrice, ChannelInterface $channel)
     {
-        $this->updateSimpleProductPage->specifyOriginalPrice($channel, $price);
+        $this->updateSimpleProductPage->specifyOriginalPrice($channel, $originalPrice);
     }
 
     /**
