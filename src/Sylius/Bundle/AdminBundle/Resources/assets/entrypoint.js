@@ -15,6 +15,7 @@ import './scripts/bulk-delete';
 import './scripts/check-all';
 import './scripts/choices';
 import './scripts/confirm';
+import './scripts/infinite-tree';
 import './scripts/statistics_chart';
 import './scripts/sticky-header';
 import './scripts/tree';

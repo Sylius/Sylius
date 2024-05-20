@@ -1,11 +1,130 @@
+{% set exampleData = [
+    {
+        id: '495',
+        name: 'Category',
+        children: []
+    },
+    {
+        id: '496',
+        name: 'Home Category',
+        state: {
+        indeterminate: true
+    },
+        children: [
+        {
+            id: '508',
+            name: 'Chairs',
+            children: [],
+            state: {
+            checked: true
+        }
+        },
+        {
+            id: '509',
+            name: 'Lamps',
+            children: []
+        },
+        {
+            id: '510',
+            name: 'Mugs',
+            children: []
+        },
+        {
+            id: '511',
+            name: 'Plants',
+            children: []
+        }
+    ]
+    },
+    {
+        id: '497',
+        name: 'Fashion Category',
+        children: [
+        {
+            id: '498',
+            name: 'Caps',
+            children: [
+            {
+                id: '499',
+                name: 'Simple',
+                children: []
+            },
+            {
+                id: '500',
+                name: 'With pompons',
+                children: []
+            }
+        ]
+        },
+        {
+            id: '501',
+            name: 'Dresses',
+            children: []
+        },
+        {
+            id: '502',
+            name: 'Jeans',
+            children: [
+            {
+                id: '503',
+                name: 'Men',
+                children: []
+            },
+            {
+                id: '504',
+                name: 'Women',
+                children: []
+            }
+        ]
+        },
+        {
+            id: '505',
+            name: 'T-Shirts',
+            children: [
+            {
+                id: '506',
+                name: 'Men',
+                children: []
+            },
+            {
+                id: '507',
+                name: 'Women',
+                children: []
+            }
+        ]
+        }
+    ]
+    }
+] %}
+
 <div class="tab-pane" id="product-taxonomy" role="tabpanel" tabindex="0">
-    <div class="card mb-3">
+    <div class="card mb-3 pb-2">
         <div class="card-header">
             <h2 id="product-taxonomy" class="card-title">{{ 'sylius.ui.taxonomy'|trans }}</h2>
         </div>
         <div class="card-body">
-            {{ form_row(hookable_metadata.context.form.mainTaxon, { 'search_url': path('sylius_admin_ajax_taxon_by_name_phrase'), 'init_load_url': path('sylius_admin_ajax_taxon_by_code') }) }}
+            <div class="mb-5">
+                {{ form_row(hookable_metadata.context.form.mainTaxon, { 'search_url': path('sylius_admin_ajax_taxon_by_name_phrase'), 'init_load_url': path('sylius_admin_ajax_taxon_by_code') }) }}
+            </div>
+
+            <label for="sylius_product_taxon_filter" class="form-label">{{ 'sylius.ui.taxonomy'|trans }}</label>
+            <div class="card">
+                <div class="p-3 pb-5">
+                    <div class="d-flex align-items-center mb-4">
+                        <div class="input-group input-group-flat">
+                            <input type="text" id="sylius_product_taxon_filter" class="form-control" placeholder="{{ 'sylius.ui.filter'|trans }}" autocomplete="off" data-infinite-tree-filter />
+                            <span class="input-group-text">
+                                <a href="#" class="input-group-link link-reset" data-infinite-tree-clear>{{ 'sylius.ui.clear'|trans }}</a>
+                            </span>
+                        </div>
+                        <div class="d-flex gap-3 align-items-center ms-4 me-2">
+                            <a href="#" class="fs-5 text-nowrap link-reset" data-infinite-tree-check-all>Check all</a>
+                            <a href="#" class="fs-5 text-nowrap link-reset" data-infinite-tree-uncheck-all>Uncheck all</a>
+                        </div>
+                    </div>
+                    <div data-infinite-tree="{{ exampleData|json_encode }}"></div>
+                </div>
+            </div>
         </div>
     </div>
-
 </div>
