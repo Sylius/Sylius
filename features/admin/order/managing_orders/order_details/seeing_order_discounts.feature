@@ -15,7 +15,7 @@ Feature: Seeing discounts of an order
         And there is a customer "lucy@teamlucifer.com" that placed an order "#00000666"
         And I am logged in as an administrator
 
-    @api @todo @ui
+    @api @ui
     Scenario: Seeing promotion discount on order while buying at least 3 items
         Given the promotion gives "$15.00" discount to every order with quantity at least 3
         And the customer bought 4 "Angel T-Shirt" products
@@ -26,7 +26,7 @@ Feature: Seeing discounts of an order
         And the order's promotion discount should be "-$15.00" from "Holiday promotion" promotion
         And the order's total should be "$141.00"
 
-    @api @todo @ui
+    @api @ui
     Scenario: Seeing promotion discount on order's items while buying a product from a promoted taxon
         Given the promotion gives "$10.00" off on every product classified as "T-Shirts"
         And the customer bought a single "Angel T-Shirt"

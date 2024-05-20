@@ -18,7 +18,7 @@ use Sylius\Component\Core\Model\OrderInterface;
 
 interface ShowPageInterface extends SymfonyPageInterface
 {
-    public function hasCustomer(string $customerName): bool;
+    public function hasCustomer(string $customerEmail): bool;
 
     public function hasShippingAddress(string $customerName, string $street, string $postcode, string $city, string $countryName): bool;
 
