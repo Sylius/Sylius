@@ -63,3 +63,11 @@ Sylius\Component\Core\Model\Adjustment:
         adjustable: '@order_item_unit'
         createdAt: "<(new \\DateTime())>"
         updatedAt: "<(new \\DateTime())>"
+    adjustment_3:
+        type: shipping
+        label: UPS
+        amount: 500
+        neutral: false
+        adjustable: '@order'
+        createdAt: "<(new \\DateTime())>"
+        updatedAt: "<(new \\DateTime())>"

@@ -11,31 +11,30 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Tests\Api\Admin;
+namespace Sylius\Tests\Api\Shop;
 
+use Sylius\Component\Customer\Model\CustomerInterface;
 use Sylius\Tests\Api\JsonApiTestCase;
 use Sylius\Tests\Api\Utils\OrderPlacerTrait;
+use Sylius\Tests\Api\Utils\ShopUserLoginTrait;
+use Symfony\Component\HttpFoundation\Response;
 
 final class OrdersTest extends JsonApiTestCase
 {
     use OrderPlacerTrait;
-
-    private const TEST_TOKEN_VALUE = 'nAWw2jewpA';
+    use ShopUserLoginTrait;
 
     protected function setUp(): void
     {
         $this->setUpOrderPlacer();
-        $this->setUpAdminContext();
-        $this->setUpDefaultGetHeaders();
 
         parent::setUp();
     }
 
     /** @test */
-    public function it_gets_adjustments_for_order(): void
+    public function it_gets_order_adjustments(): void
     {
         $this->loadFixturesFromFiles([
-            'authentication/api_administrator.yaml',
             'channel.yaml',
             'cart.yaml',
             'country.yaml',
@@ -44,10 +43,15 @@ final class OrdersTest extends JsonApiTestCase
             'cart/promotion.yaml',
         ]);
 
-        $this->placeOrder(self::TEST_TOKEN_VALUE);
+        $this->placeOrder('TOKEN');
 
-        $this->requestGet(uri: sprintf('/api/v2/admin/orders/%s/adjustments', self::TEST_TOKEN_VALUE));
+        $this->client->request(
+            method: 'GET',
+            uri: '/api/v2/shop/orders/TOKEN/adjustments',
+            server: self::CONTENT_TYPE_HEADER,
+        );
+        $response = $this->client->getResponse();
 
-        $this->assertResponseSuccessful('admin/order/get_adjustments_for_a_given_order');
+        $this->assertResponse($response, 'shop/order/get_order_adjustments', Response::HTTP_OK);
     }
 }
