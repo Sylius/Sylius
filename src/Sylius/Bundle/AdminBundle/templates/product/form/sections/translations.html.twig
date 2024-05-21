@@ -9,19 +9,24 @@
                         {{ form_row(translationForm.name) }}
                     </div>
                     <div class="col-12 col-md-6">
-                        {{ form_label(translationForm.slug) }}
-                        <div class="input-group mb-3">
-                            {{ form_widget(translationForm.slug, sylius_test_form_attribute('slug', locale)) }}
-                            <button
-                                class="btn btn-outline-secondary"
-                                type="button"
-                                data-action="live#action"
-                                data-live-action-param="debounce(300)|generateProductSlug"
-                                data-live-locale-code-param="{{ locale }}"
-                                {{ sylius_test_html_attribute('generate-product-slug-button', locale) }}
-                            >
-                                ⚡️
-                            </button>
+                        <div class="mb-3 field">
+                            {{ form_label(translationForm.slug) }}
+                            <div class="input-group mb-3">
+                                {{ form_widget(translationForm.slug, sylius_test_form_attribute('slug', locale)) }}
+                                <button
+                                    class="btn btn-outline-secondary"
+                                    type="button"
+                                    data-action="live#action"
+                                    data-live-action-param="debounce(300)|generateProductSlug"
+                                    data-live-locale-code-param="{{ locale }}"
+                                    {{ sylius_test_html_attribute('generate-product-slug-button', locale) }}
+                                >
+                                    ⚡️
+                                </button>
+                            </div>
+                            <div class="invalid-feedback d-block">
+                                 {{ form_errors(translationForm.slug) }}
+                            </div>
                         </div>
                     </div>
                     <div class="col-12">

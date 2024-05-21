@@ -14,7 +14,7 @@
                     <div>
                         {{ _icon({ 'icon': 'danger', 'class': 'alert-icon' }) }}
                     </div>
-                    <div>
+                    <div {{ sylius_test_html_attribute('missing-channel-price') }}>
                         {% set first_error = variant_form.channelPricings.vars.errors|first %}
                         {{ first_error.messageTemplate|trans({}, 'validators') }}
                     </div>
