@@ -1,7 +1,9 @@
+{% import "@SyliusAdmin/shared/helper/field/boolean.html.twig" as boolean %}
+
 {% set variant = hookable_metadata.context.variant %}
 
 <td class="text-center">
     <span>
-        {% include '@SyliusAdmin/shared/field/boolean.html.twig' with { data: variant.shippingRequired } %}
+        {{ boolean.default(variant.shippingRequired) }}
     </span>
 </td>
