@@ -45,5 +45,121 @@
             <argument>%sylius.form.type.admin.reset_password.validation_groups%</argument>
             <tag name="form.type" />
         </service>
+
+        <service id="sylius_admin.form.type.address" class="Sylius\Bundle\AdminBundle\Form\Type\AddressType" >
+            <tag name="form.type" />
+        </service>
+
+        <service id="sylius_admin.form.type.admin_user" class="Sylius\Bundle\AdminBundle\Form\Type\AdminUserType" >
+            <tag name="form.type" />
+        </service>
+
+        <service id="sylius_admin.form.type.catalog_promotion_action" class="Sylius\Bundle\AdminBundle\Form\Type\CatalogPromotionActionType" >
+            <argument type="tagged_iterator" tag="sylius.catalog_promotion.action_configuration_type" index-by="key" />
+            <argument type="service" id="twig" />
+            <tag name="form.type" />
+        </service>
+
+        <service id="sylius_admin.form.type.catalog_promotion_scope" class="Sylius\Bundle\AdminBundle\Form\Type\CatalogPromotionScopeType" >
+            <argument type="tagged_iterator" tag="sylius.catalog_promotion.scope_configuration_type" index-by="key" />
+            <argument type="service" id="twig" />
+            <tag name="form.type" />
+        </service>
+
+        <service id="sylius_admin.form.type.catalog_promotion_type" class="Sylius\Bundle\AdminBundle\Form\Type\CatalogPromotionType" >
+            <tag name="form.type" />
+        </service>
+
+        <service id="sylius_admin.form.type.channel" class="Sylius\Bundle\AdminBundle\Form\Type\ChannelType" >
+            <tag name="form.type" />
+        </service>
+
+        <service id="sylius_admin.form.type.country" class="Sylius\Bundle\AdminBundle\Form\Type\CountryType" >
+            <tag name="form.type" />
+        </service>
+
+        <service id="sylius_admin.form.type.currency" class="Sylius\Bundle\AdminBundle\Form\Type\CurrencyType" >
+            <tag name="form.type" />
+        </service>
+
+        <service id="sylius_admin.form.type.customer" class="Sylius\Bundle\AdminBundle\Form\Type\CustomerType" >
+            <tag name="form.type" />
+        </service>
+
+        <service id="sylius_admin.form.type.customer_group" class="Sylius\Bundle\AdminBundle\Form\Type\CustomerGroupType" >
+            <tag name="form.type" />
+        </service>
+
+        <service id="sylius_admin.form.type.exchange_rate" class="Sylius\Bundle\AdminBundle\Form\Type\ExchangeRateType" >
+            <tag name="form.type" />
+        </service>
+
+        <service id="sylius_admin.form.type.locale" class="Sylius\Bundle\AdminBundle\Form\Type\LocaleType" >
+            <tag name="form.type" />
+        </service>
+
+        <service id="sylius_admin.form.type.order" class="Sylius\Bundle\AdminBundle\Form\Type\OrderType" >
+            <tag name="form.type" />
+        </service>
+
+        <service id="sylius_admin.form.type.payment_method" class="Sylius\Bundle\AdminBundle\Form\Type\PaymentMethodType" >
+            <tag name="form.type" />
+        </service>
+
+        <service id="sylius_admin.form.type.product" class="Sylius\Bundle\AdminBundle\Form\Type\ProductType" >
+            <tag name="form.type" />
+        </service>
+
+        <service id="sylius_admin.form.type.product_association_type" class="Sylius\Bundle\AdminBundle\Form\Type\ProductAssociationTypeType" >
+            <tag name="form.type" />
+        </service>
+
+        <service id="sylius_admin.form.type.product_attribute" class="Sylius\Bundle\AdminBundle\Form\Type\ProductAttributeType" >
+            <tag name="form.type" />
+        </service>
+
+        <service id="sylius_admin.form.type.product_generate_variants" class="Sylius\Bundle\AdminBundle\Form\Type\ProductGenerateVariantsType" >
+            <tag name="form.type" />
+        </service>
+
+        <service id="sylius_admin.form.type.product_option" class="Sylius\Bundle\AdminBundle\Form\Type\ProductOptionType" >
+            <tag name="form.type" />
+        </service>
+
+        <service id="sylius_admin.form.type.product_review" class="Sylius\Bundle\AdminBundle\Form\Type\ProductReviewType" >
+            <tag name="form.type" />
+        </service>
+
+        <service id="sylius_admin.form.type.product_variant" class="Sylius\Bundle\AdminBundle\Form\Type\ProductVariantType" >
+            <tag name="form.type" />
+        </service>
+
+        <service id="sylius_admin.form.type.promotion" class="Sylius\Bundle\AdminBundle\Form\Type\PromotionType" >
+            <tag name="form.type" />
+        </service>
+
+        <service id="sylius_admin.form.type.promotion_coupon" class="Sylius\Bundle\AdminBundle\Form\Type\PromotionCouponType" >
+            <tag name="form.type" />
+        </service>
+
+        <service id="sylius_admin.form.type.shipping_category" class="Sylius\Bundle\AdminBundle\Form\Type\ShippingCategoryType" >
+            <tag name="form.type" />
+        </service>
+
+        <service id="sylius_admin.form.type.shipping_method" class="Sylius\Bundle\AdminBundle\Form\Type\ShippingMethodType" >
+            <tag name="form.type" />
+        </service>
+
+        <service id="sylius_admin.form.type.tax_category" class="Sylius\Bundle\AdminBundle\Form\Type\TaxCategoryType" >
+            <tag name="form.type" />
+        </service>
+
+        <service id="sylius_admin.form.type.taxon" class="Sylius\Bundle\AdminBundle\Form\Type\TaxonType" >
+            <tag name="form.type" />
+        </service>
+
+        <service id="sylius_admin.form.type.tax_rate" class="Sylius\Bundle\AdminBundle\Form\Type\TaxRateType" >
+            <tag name="form.type" />
+        </service>
     </services>
 </container>
