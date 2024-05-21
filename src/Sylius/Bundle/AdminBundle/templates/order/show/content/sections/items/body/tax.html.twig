@@ -3,13 +3,13 @@
 {% set order = hookable_metadata.context.resource %}
 {% set item = hookable_metadata.context.item %}
 
-{% set taxIncluded = sylius_admin_order_unit_tax_included(item) %}
-{% set taxExcluded = sylius_admin_order_unit_tax_excluded(item) %}
+{% set tax_included = sylius_admin_order_unit_tax_included(item) %}
+{% set tax_excluded = sylius_admin_order_unit_tax_excluded(item) %}
 
 <td class="text-end">
-    <div {{ sylius_test_html_attribute('tax-excluded') }}>{{ _money.format(taxExcluded, order.currencyCode) }}</div>
+    <div {{ sylius_test_html_attribute('tax-excluded') }}>{{ _money.format(tax_excluded, order.currencyCode) }}</div>
     <div class="text-secondary">
-        <div {{ sylius_test_html_attribute('tax-included') }}> {{ _money.format(taxIncluded, order.currencyCode) }}</div>
+        <div {{ sylius_test_html_attribute('tax-included') }}> {{ _money.format(tax_included, order.currencyCode) }}</div>
         <small>({{ 'sylius.ui.included_in_price'|trans }})</small>
     </div>
 </td>
