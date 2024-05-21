@@ -2,8 +2,4 @@
 
 {% set order = hookable_metadata.context.resource %}
 
-<tfoot>
-    <tr>
-        {% hook 'foot' %}
-    </tr>
-</tfoot>
+<td class="text-end h3 mb-0">{{ _money.format(order.taxTotal, order.currencyCode) }}</td>
