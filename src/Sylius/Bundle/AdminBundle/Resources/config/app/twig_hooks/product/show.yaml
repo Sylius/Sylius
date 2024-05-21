@@ -84,7 +84,7 @@ twig_hooks:
 
         'sylius_admin.product.show.content.page_body.details.configurable_product#tab':
             details_button:
-                template: '@SyliusAdmin/product/show/content/page_body/details/configurable_product/tab/details_button.html.twig'
+                template: '@SyliusAdmin/product/show/content/page_body/details/configurable_product/details_button.html.twig'
             product:
                 template: '@SyliusAdmin/product/show/content/page_body/details/configurable_product/tab/product.html.twig'
             enabled:
