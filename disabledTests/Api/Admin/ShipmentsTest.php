@@ -126,32 +126,6 @@ final class ShipmentsTest extends JsonApiTestCase
         $this->assertEmailCount(1);
     }
 
-    /** @test */
-    public function it_gets_adjustments_for_a_shipment(): void
-    {
-        $this->loadFixturesFromFiles([
-            'authentication/api_administrator.yaml',
-            'channel.yaml',
-            'cart.yaml',
-            'country.yaml',
-            'shipping_method.yaml',
-            'payment_method.yaml',
-        ]);
-
-        $order = $this->placeOrder('token');
-        $shipment = $order->getShipments()->first();
-
-        $this->client->request(
-            method: 'GET',
-            uri: '/api/v2/admin/shipments/' . $shipment->getId() . '/adjustments',
-            server: $this->buildHeadersWithJsonLd('api@example.com'),
-        );
-
-        $response = $this->client->getResponse();
-
-        $this->assertResponse($response, 'admin/shipment/get_shipment_adjustments', Response::HTTP_OK);
-    }
-
     /** @return array<string, string> */
     private function buildHeadersWithMergePatchJson(string $adminEmail): array
     {

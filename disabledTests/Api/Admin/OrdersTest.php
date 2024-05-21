@@ -200,20 +200,6 @@ final class OrdersTest extends JsonApiTestCase
     }
 
     /** @test */
-    public function it_gets_adjustments_for_order(): void
-    {
-        $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel.yaml', 'cart.yaml', 'country.yaml', 'shipping_method.yaml', 'payment_method.yaml']);
-
-        $tokenValue = 'nAWw2jewpA';
-
-        $this->placeOrder($tokenValue);
-
-        $this->requestGet(uri: '/api/v2/admin/orders/nAWw2jewpA/adjustments');
-
-        $this->assertResponseSuccessful('admin/order/get_adjustments_for_a_given_order_response');
-    }
-
-    /** @test */
     public function it_gets_a_billing_address_of_placed_order(): void
     {
         $fixtures = $this->loadFixturesFromFiles([

@@ -38,6 +38,7 @@ final class ShipmentsTest extends JsonApiTestCase
             'country.yaml',
             'shipping_method.yaml',
             'payment_method.yaml',
+            'cart/promotion.yaml',
         ]);
 
         $order = $this->placeOrder('token');
