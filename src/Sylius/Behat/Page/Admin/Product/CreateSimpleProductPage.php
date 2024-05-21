@@ -122,7 +122,7 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
 
     public function checkChannel(string $channelName): void
     {
-        $this->getElement('channel_checkbox', ['%channelName%' => $channelName])->check();
+        $this->getElement('channel', ['%channel_name%' => $channelName])->check();
     }
 
     public function activateLanguageTab(string $locale): void
@@ -170,7 +170,7 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
                 'attribute_value_select' => '#attributesContainer [data-test-product-attribute-value-in-locale="%attributeName% %localeCode%"] select',
                 'attributes_choice' => '#sylius_product_attribute_choice',
                 'cancel_button' => '[data-test-cancel-changes-button]',
-                'channel_checkbox' => '.checkbox:contains("%channelName%") input',
+                'channel' => '[data-test-channel-name="%channel_name%"]',
                 'code' => '#sylius_product_code',
                 'form' => 'form[name="sylius_product"]',
                 'images' => '#sylius_product_images',
@@ -180,12 +180,12 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
                 'product_taxons' => '#sylius_product_productTaxons',
                 'name' => '#sylius_product_translations_%locale%_name',
                 'non_translatable_attribute_value' => '#attributesContainer [data-test-product-attribute-value-in-locale="%attributeName% "] input',
-                'original_price' => '#sylius_admin_product_variant_channelPricings_%channelCode%_originalPrice',
-                'price' => '#sylius_admin_product_variant_channelPricings_%channelCode%_price',
-                'prices_validation_message' => '#sylius_admin_product_variant_channelPricings ~ .sylius-validation-error, #sylius_admin_product_variant_channelPricings .sylius-validation-error',
-                'price_calculator' => '#sylius_admin_product_variant_pricingCalculator',
-                'shipping_category' => '#sylius_admin_product_variant_shippingCategory',
-                'shipping_required' => '#sylius_admin_product_variant_shippingRequired',
+                'original_price' => '#sylius_product_variant_channelPricings_%channelCode%_originalPrice',
+                'price' => '#sylius_product_variant_channelPricings_%channelCode%_price',
+                'prices_validation_message' => '[data-test-missing-channel-price]',
+                'price_calculator' => '#sylius_product_variant_pricingCalculator',
+                'shipping_category' => '#sylius_product_variant_shippingCategory',
+                'shipping_required' => '#sylius_product_variant_shippingRequired',
                 'slug' => '#sylius_product_translations_%locale%_slug',
                 'tab' => '.menu [data-tab="%name%"]',
                 'taxonomy' => 'a[data-tab="taxonomy"]',
