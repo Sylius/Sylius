@@ -80,6 +80,14 @@ twig_hooks:
             total:
                 template: '@SyliusAdmin/order/show/content/sections/items/body/total.html.twig'
 
+        'sylius_admin.order.show.content.sections.items.foot':
+            label:
+                template: '@SyliusAdmin/order/show/content/sections/items/foot/label.html.twig'
+            tax_total:
+                template: '@SyliusAdmin/order/show/content/sections/items/foot/tax_total.html.twig'
+            total:
+                template: '@SyliusAdmin/order/show/content/sections/items/foot/total.html.twig'
+
         'sylius_admin.order.show.content.sections.summary':
             items_total:
                 template: '@SyliusAdmin/order/show/content/sections/summary/items_total.html.twig'
