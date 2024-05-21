@@ -34,9 +34,9 @@ For the convenience the environment name should be same as your main application
 
 After the project is created, you'll be able to access the information like:
 
-- \- Project ID
-- \- Production environment URL
-- \- Git URL
+* Project ID
+* Production environment URL
+* Git URL
 
 If you create the project using Console, you'll need to switch to it with your CLI:
 
@@ -180,9 +180,9 @@ PHP-FPM helps improve your app’s performance by maintaining pools of workers t
 Sylius Cloud doesn't allow to manage all PHP-FPM configuration keys. By default, Sylius Cloud automatically sets a maximum number of PHP-FPM workers for your Sylius platform.
 The number of workers is calculated based on three parameters:
 
-- \- **The container memory**: the amount of memory you can allot for PHP processing depending on app size.
-- \- **The request memory**: the amount of memory an average PHP request is expected to require.
-- \- **The reserved memory**: the amount of memory you need to reserve for tasks that aren’t related to requests.
+* **The container memory**: the amount of memory you can allot for PHP processing depending on app size.
+* **The request memory**: the amount of memory an average PHP request is expected to require.
+* **The reserved memory**: the amount of memory you need to reserve for tasks that aren’t related to requests.
 
 The value is calculated by the rule:
 

@@ -1,18 +1,11 @@
 Sylius Cloud by Platform.sh management basics
 =============================================
 
-Creating a new project and environment
---------------------------------------
+Creating new environments
+-------------------------
 
 Every new environment needs to be created in the Sylius Cloud Console or by using the CLI.
-But first before creating an environment you need to create the project. When you're creating a new project from the Console,
-to use the Sylius Cloud potential, please choose the "Create from scratch" option, as selected on the screenshot below:
-
-.. image:: ../../_images/cookbook/sylius-cloud/create-from-scratch.png
-    :align: center
-    :scale: 50%
-
-|
+But first before creating an environment you need to have the project created.
 
 During creating a new project you'll automatically create a new environment, which is connected to your git branch (please read the information on screenshot below):
 
@@ -22,14 +15,16 @@ During creating a new project you'll automatically create a new environment, whi
 
 |
 
-When you've created the project, you're ready to create new environments. Please note that your project already have the first (production) environment just after project is being created.
-Regarding of creating new environment, we assume you're a developer, so it will be more convenient for you to use the CLI command:
+When you've created the project, you're ready to create new environments. Please note that your project already has
+the first (production) environment just after project gts created.
+In order to create a new environment, assuming you're a developer, you can use the CLI command:
 
 .. code-block:: bash
 
     platform environment:create
 
-This command will prompt you to specify various options for the new environment, such as its name, type, parent environment, and more. Follow the prompts to configure the new environment according to your requirements.
+This command will prompt you to specify various options for the new environment, such as its name, type, parent environment,
+and more. Follow the prompts to configure the new environment according to your requirements.
 Once the environment is created, you can deploy your application to it using the following command:
 
 .. code-block:: bash
@@ -43,51 +38,39 @@ After the deployment is complete, you can access your new environment using its 
 
     <ENVIRONMENT_NAME>-<PROJECT_ID>.<REGION>.platformsh.site
 
-That's it! You've now created a new environment in your Sylius Cloud project and deployed your application to it. You can repeat these steps to create additional environments as needed for development, testing, or other purposes.
-
-Developing application with Sylius Cloud
-----------------------------------------
-
-As described in previous section, you're able to create new environments by using the CLI command. Working with multiple environments is a very good point of development. It gives you a lot of advantages, like:
-
-- \- You're able to create an environment for all your features and test how they behave on the real infrastructure.
-- \- Your team mates test the features independently of other developers. They're able to create their own environment and work there.
-- \- When you're using Git Flow, you're able to test how your features integrate with other functionalities, i.e., with other microservices.
-- \- You and your team mates don't need to be DevOps. They only need to know a few commands in git.
-
-Using the CLI command from offers also other positive aspects for developers and DevOps teams. It provides a streamlined and efficient way
-to manage Sylius Cloud projects, environments, and deployments directly from the command line interface. With the CLI command, users can easily create,
-configure, and deploy applications, reducing manual intervention and saving time. Additionally, the command provides access to a wide range of Sylius Cloud
-features, including environment management, scaling, backups, and monitoring, empowering teams to efficiently manage their application lifecycle from development
-to production.
-
-Overall, the platform command enhances productivity, simplifies workflows, and enables seamless collaboration across development teams.
+That's it! You've now created a new environment in your Sylius Cloud project and deployed your application to it.
+You can repeat these steps to create additional environments as needed for development, testing, staging or other purposes.
 
 You're ready to go live
 -----------------------
 
 The main advantage of Sylius Cloud is to go live with your Sylius platform.
-Going live with the project is a straightforward process that ensures seamless deployment and reliability. Once development and testing are complete,
-deploying to production involves using Sylius Cloud's Git-based workflow to push changes to the main branch. Sylius Cloud automatically builds and deploys
-the code to the production environment, ensuring zero downtime with its built-in rolling deployment strategy.
+Going live with the project is a straightforward process that ensures seamless deployment and reliability.
+Once development and testing are complete, deploying to production involves using Sylius Cloud's Git-based workflow to
+push changes to the main branch. Sylius Cloud automatically builds and deploys the code to the production environment,
+ensuring zero downtime with its built-in rolling deployment strategy.
 
-Sylius Cloud provides a comprehensive metrics dashboard where you can monitor various performance metrics of your applications and infrastructure in real-time.
-The dashboard includes information such as CPU usage, memory usage, network traffic, response times, and more.
+Sylius Cloud provides a comprehensive metrics dashboard where you can monitor various performance metrics of your
+applications and infrastructure in real-time. The dashboard includes information such as CPU usage, memory usage,
+network traffic, response times, and more.
 
-It also allows you to set up alerts based on predefined thresholds for different metrics. You can configure alerts to notify you via email, Slack,
-or other communication channels when certain metrics exceed specified thresholds, helping you proactively identify and address performance issues.
+It also allows you to set up alerts based on predefined thresholds for different metrics. You can configure alerts to
+notify you via email, Slack, or other communication channels when certain metrics exceed specified thresholds,
+helping you proactively identify and address performance issues.
 
-You can also aggregate logs from all your application containers and services into a centralized logging system. You can view, search, and analyze
-logs in real-time using the Sylius CLoud dashboard or export them to external logging services for further analysis and long-term storage.
+You can also aggregate logs from all your application containers and services into a centralized logging system.
+You can view, search, and analyze logs in real-time using the Sylius CLoud dashboard or export them to external logging
+services for further analysis and long-term storage.
 
-Once your environments are up, you may need some tools to manage them. Sylius Cloud offers a lot of environment commands which may help you in your application maintenance.
-Please meet the most commonly used commands of the CLI.
+Once your environments are up, you may need some tools to manage them. Sylius Cloud offers a lot of environment commands
+which may help you in your application maintenance. Please meet the most commonly used commands of the CLI.
 
 SSH access
 ----------
 
-On Sylius Cloud, connecting to an SSH session allows you to access your application's environment for administrative tasks, debugging, and troubleshooting.
-The recommended method for connecting to SSH on Sylius Cloud is through the CLI, as on the example below:
+On Sylius Cloud, connecting to an SSH session allows you to access your application's environment for administrative tasks,
+debugging, and troubleshooting. The recommended method for connecting to SSH on Sylius Cloud is through the CLI, as on
+the example below:
 
 .. code-block:: bash
 
@@ -97,8 +80,8 @@ Alternatively, you can access the SSH URL provided in the Sylius Cloud dashboard
 This URL typically follows the format ssh.<ENVIRONMENT_ID>.<PROJECT_ID>@ssh.<region>.platform.sh.
 
 To authenticate with SSH on Sylius Cloud, you'll need to use SSH keys.
-Ensure that you have SSH keys configured on your local machine and that your public SSH key is added to your Sylius Cloud account.
-You can manage SSH keys through the Sylius Cloud Console or CLI.
+Ensure that you have SSH keys configured on your local machine and that your public SSH key is added to your Sylius Cloud
+account. You can manage SSH keys through the Sylius Cloud Console or CLI.
 
 Database access
 ---------------
@@ -164,7 +147,8 @@ To prepare the backup you can use the command:
     platform backup:create <ENVIRONMENT_ID>
 
 This command creates a backup of the environment's database and stores it securely in Sylius Cloud backup system.
-You can optionally specify additional options, such as `--no-wait`, to perform the backup asynchronously without waiting for it to complete.
+You can optionally specify additional options, such as `--no-wait`, to perform the backup asynchronously without waiting
+for it to complete.
 
 If you wish to create backup without any downtime, you can use the `--live` command.
 
@@ -184,11 +168,12 @@ You can obtain the backup ID from the Sylius Cloud dashboard or by listing avail
 Synchronizing environments
 --------------------------
 
-Sylius Cloud offers the environment synchronization command. It synchronizes the following components between the source and target environments:
+Sylius Cloud offers the environment synchronization command. It synchronizes the following components between the source
+and target environments:
 
-- \- **Code**: Copies the codebase (Git repository) from the source environment to the target environment.
-- \- **Configuration**: Applies the configuration settings (defined in the `.platform.app.yaml` file) from the source environment to the target environment.
-- \- **Data**: Optionally synchronizes the database and files (if enabled) between the source and target environments.
+* **Code**: Copies the codebase (Git repository) from the source environment to the target environment.
+* **Configuration**: Applies the configuration settings (defined in the `.platform.app.yaml` file) from the source environment to the target environment.
+* **Data**: Optionally synchronizes the database and files (if enabled) between the source and target environments.
 
 To synchronize environments please use the command below:
 
@@ -198,10 +183,10 @@ To synchronize environments please use the command below:
 
 The synchronization command supports several options to customize the synchronization process, including:
 
- - **\-\-code**: Synchronizes only the codebase between environments.
- - **\-\-config**: Synchronizes only the configuration settings between environments.
- - **\-\-data**: Synchronizes the database and files between environments (if applicable).
- - **\-\-no-wait**: Performs the synchronization asynchronously without waiting for it to complete.
+* **\-\-code**: Synchronizes only the codebase between environments.
+* **\-\-config**: Synchronizes only the configuration settings between environments.
+* **\-\-data**: Synchronizes the database and files between environments (if applicable).
+* **\-\-no-wait**: Performs the synchronization asynchronously without waiting for it to complete.
 
 When you run the command without any options, the CLI will ask you whether you want to synchronize code, configuration or data between environments.
 

@@ -132,8 +132,8 @@ Deployment
     :hidden:
 
     deployment/introduction-to-sylius-cloud
-    deployment/advanced-sylius-cloud-configuration
     deployment/sylius-cloud-management-basics
+    deployment/advanced-sylius-cloud-configuration
     deployment/cron-jobs
 
 .. include:: /cookbook/deployment/map.rst.inc
