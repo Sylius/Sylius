@@ -21,12 +21,9 @@
             {% for channel_pricing in variant.channelPricings %}
                 {% set channel = attribute(channels, channel_pricing.channelCode) %}
                 {% set currency_code = channel.baseCurrency.code %}
-                {% set price = channel_pricing.price %}
-                {% set original_price = channel_pricing.originalPrice ?? 0 %}
-                {% set lowest_price_before_discount = channel_pricing.lowestPriceBeforeDiscount %}
 
-                <tr {{ sylius_test_html_attribute('simple-product', "%s"|format(channel.name)) }}>
-                    {% hook 'pricing' with {variant, channel, channel_pricing, currency_code, price, original_price, lowest_price_before_discount } %}
+                <tr {{ sylius_test_html_attribute('simple-product', "%s"|format(channel.code)) }}>
+                    {% hook 'pricing' with { variant, channel, channel_pricing, currency_code } %}
                 </tr>
             {% endfor %}
             </tbody>
