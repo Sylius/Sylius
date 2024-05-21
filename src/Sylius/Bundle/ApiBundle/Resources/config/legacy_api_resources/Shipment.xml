@@ -101,11 +101,6 @@
                     </attribute>
                 </attribute>
             </subresourceOperation>
-
-            <subresourceOperation name="adjustments_get_subresource">
-                <attribute name="method">GET</attribute>
-                <attribute name="path">/admin/shipments/{id}/adjustments</attribute>
-            </subresourceOperation>
         </subresourceOperations>
 
         <property name="id" identifier="true" />
