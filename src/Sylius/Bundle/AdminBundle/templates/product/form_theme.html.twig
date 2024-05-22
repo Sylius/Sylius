@@ -1,10 +1,10 @@
 {% extends '@SyliusAdmin/shared/form_theme.html.twig' %}
 
-{% block _sylius_product_channels_row %}
+{% block _sylius_admin_product_channels_row %}
     {{ form_label(form) }}
 
     {% for channel in form %}
-        {{ form_row(channel, sylius_test_form_attribute('channel-name', channel.vars.label)|merge({ label_attr: { class: 'checkbox-switch' } })) }}
+        {{ form_row(channel, sylius_test_form_attribute('channel-code', channel.vars.value)|merge({ label_attr: { class: 'checkbox-switch' } })) }}
     {% endfor %}
 
     {{ form_errors(form) }}
