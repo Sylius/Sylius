@@ -1,24 +1,20 @@
 twig_hooks:
     hooks:
         'sylius_admin.order.history':
-            sidebar:
-                template: '@SyliusAdmin/shared/crud/common/sidebar.html.twig'
-            navbar:
-                template: '@SyliusAdmin/shared/crud/common/navbar.html.twig'
             content:
                 template: '@SyliusAdmin/shared/crud/common/content.html.twig'
 
         'sylius_admin.order.history.content':
             flashes:
-                template: '@SyliusAdmin/shared/crud/common/content/flashes.html.twig'
+                component: 'sylius_admin:flashes'
             header:
-                template: '@SyliusAdmin/shared/crud/common/content/header.html.twig'
+                component: 'sylius_admin:header'
             sections:
                 template: '@SyliusAdmin/order/history/content/sections.html.twig'
 
         'sylius_admin.order.history.content.header':
             title_block:
-                template: '@SyliusAdmin/shared/crud/common/content/header/title_block.html.twig'
+                template: '@SyliusAdmin/shared/components/header/title_block.html.twig'
             breadcrumbs:
                 template: '@SyliusAdmin/order/history/content/header/breadcrumbs.html.twig'
 

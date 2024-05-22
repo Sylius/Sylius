@@ -1,0 +1,20 @@
+{% if (is_hookable()) %}
+    {% set testAttributes = hookable_metadata.configuration.test_attributes|default({}) %}
+    {% set testFormAttributes = hookable_metadata.configuration.test_form_attributes|default({}) %}
+{% endif %}
+
+{% props testAttributes = {}, testFormAttributes = {} %}
+
+{% set renderedTestAttributes %}
+    {% for testAttributeName, testAttributeValue in testAttributes %}
+        {{ sylius_test_html_attribute(testAttributeName, testAttributeValue) }}
+    {% endfor %}
+{% endset %}
+
+{% set mergedTestFormAttributes = {} %}
+{% for testAttributeName, testAttributeValue in testFormAttributes %}
+    {% set mergedTestFormAttributes = mergedTestFormAttributes|merge(sylius_test_form_attribute(testAttributeName, testAttributeValue)) %}
+{% endfor %}
+
+{% block content %}
+{% endblock %}

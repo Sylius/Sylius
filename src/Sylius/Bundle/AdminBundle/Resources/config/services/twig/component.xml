@@ -227,7 +227,7 @@
             <tag
                 name="twig.component"
                 key="sylius_admin:navbar:notifications"
-                template="@SyliusAdmin/shared/components/navbar/notifications.html.twig"
+                template="@SyliusAdmin/shared/components/navbar/items/notifications.html.twig"
             />
         </service>
 
@@ -242,7 +242,7 @@
             <tag
                 name="twig.component"
                 key="sylius_admin:navbar:user_dropdown"
-                template="@SyliusAdmin/shared/components/navbar/user.html.twig"
+                template="@SyliusAdmin/shared/components/navbar/items/user.html.twig"
             />
         </service>
 
@@ -301,6 +301,5 @@
                 template="@SyliusAdmin/taxon/sections/tree.html.twig"
             />
         </service>
-
     </services>
 </container>

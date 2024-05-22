@@ -1,0 +1,7 @@
+{% set prefixes = is_hookable() ? hookable_metadata.prefixes|merge(['sylius_admin.common.component']) : ['sylius_admin.common.component'] %}
+
+<div class="page-header" {% if hookable_configuration.sticky_header|default(true) %}data-sticky-header{% endif %}>
+    <div class="container-xl">
+        {% hook 'header' with { _prefixes: prefixes } %}
+    </div>
+</div>

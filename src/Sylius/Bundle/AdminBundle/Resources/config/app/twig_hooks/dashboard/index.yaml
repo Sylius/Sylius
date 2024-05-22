@@ -1,16 +1,12 @@
 twig_hooks:
     hooks:
         'sylius_admin.dashboard.index':
-            sidebar:
-                template: '@SyliusAdmin/shared/crud/common/sidebar.html.twig'
-            navbar:
-                template: '@SyliusAdmin/shared/crud/common/navbar.html.twig'
             content:
                 template: '@SyliusAdmin/shared/crud/common/content.html.twig'
 
         'sylius_admin.dashboard.index.content':
             header:
-                template: '@SyliusAdmin/shared/crud/common/content/header.html.twig'
+                component: 'sylius_admin:header'
             grid:
                 enabled: false
             statistics:
@@ -22,13 +18,13 @@ twig_hooks:
 
         'sylius_admin.dashboard.index.content.header':
             title_block:
-                template: '@SyliusAdmin/shared/crud/common/content/header/title_block.html.twig'
+                template: '@SyliusAdmin/shared/components/header/title_block.html.twig'
             breadcrumbs:
                 template: '@SyliusAdmin/dashboard/index/content/header/breadcrumbs.html.twig'
 
         'sylius_admin.dashboard.index.content.header.title_block':
             title:
-                template: '@SyliusAdmin/shared/crud/common/content/header/title_block/title.html.twig'
+                template: '@SyliusAdmin/shared/components/header/title_block/title.html.twig'
                 configuration:
                     title: sylius.ui.dashboard
             actions:

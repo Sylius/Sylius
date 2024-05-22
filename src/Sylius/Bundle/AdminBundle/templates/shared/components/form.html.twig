@@ -1,0 +1,75 @@
+{% import '@SyliusAdmin/shared/helper/button.html.twig' as _button %}
+
+{% if is_hookable() %}
+    {% set resource = hookable_metadata.context.resource %}
+    {% set resource_configuration = hookable_metadata.context.resource_configuration %}
+    {% set form = hookable_metadata.context.form %}
+
+    {% set generic_hook = 'sylius_admin.common.component' %}
+    {% set resource_based_hook = generic_hook|replace({'common': resource_configuration.metadata.name}) %}
+    {% set prefixes = hookable_metadata.prefixes|merge([resource_based_hook, generic_hook]) %}
+{% endif %}
+
+{% set route = hookable_metadata.configuration.redirect.route|default(null) %}
+{% set indexRoute = resource_configuration.vars.index.route|default(null) %}
+{% set index_url = path(
+    indexRoute.name|default(resource_configuration.getRouteName('index')),
+    indexRoute.parameters|default(route.parameters|default({}))
+)
+%}
+
+{% props resource, resource_configuration, form %}
+
+{% form_theme form '@SyliusAdmin/shared/form_theme.html.twig' %}
+
+<div class="page-body">
+    <div class="container-xl">
+        {% block content %}
+            {% set render_rest = hookable_metadata.configuration.render_rest %}
+            {% set form_content %}
+                {{ form_start(
+                    form,
+                    {
+                        'action': path(
+                            resource_configuration.vars.route.name|default(resource_configuration.getRouteName('create')),
+                            resource_configuration.vars.route.parameters|default({})
+                        ),
+                        'attr': { 'class': 'ui loadable form', 'novalidate': 'novalidate', 'id': form.vars.id },
+                    }
+                ) }}
+
+                {% if hookable_metadata.configuration.method is defined %}
+                    <input type="hidden" name="_method" value="{{ hookable_metadata.configuration.method }}">
+                {% endif %}
+
+                {% block form_content %}
+                    {% if is_hookable() %}
+                        {% hook 'form' with { _prefixes: prefixes, form } %}
+                    {% else %}
+                        {{ content }}
+                    {% endif %}
+                {% endblock %}
+                {{ form_end(form, {'render_rest': render_rest}) }}
+            {% endset %}
+
+            {% if render_rest %}
+                <div class="card">
+                    <div class="card-body">
+                        {{ form_content }}
+                    </div>
+                    <div class="card-footer">
+                        <div class="row align-items-center">
+                            <div class="col"></div>
+                            <div class="col-auto">
+                                {{ _button.cancel({ text: 'sylius.ui.cancel'|trans, url: index_url, class: 'btn btn-ghost-secondary' }) }}
+                                {{ _button.primary({ text: 'sylius.ui.create'|trans, type: 'submit', form: form.vars.id }) }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% else  %}
+                {{ form_content }}
+            {% endif %}
+        {% endblock %}
+    </div>
+</div>

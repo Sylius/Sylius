@@ -10,7 +10,15 @@
 {% block title %}{{ header|trans }} | {{ parent() }}{% endblock %}
 
 {% block body %}
-    {% hook 'update' with { _prefixes: prefixes, resource, metadata, configuration, form } %}
+    {% hook 'update' with {
+        _prefixes: prefixes,
+        resource,
+        resource_metadata: metadata,
+        resource_configuration: configuration,
+        metadata,
+        configuration,
+        form,
+    } %}
 {% endblock %}
 
 {% block stylesheets %}

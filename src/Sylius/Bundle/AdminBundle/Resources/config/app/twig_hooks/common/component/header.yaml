@@ -1,0 +1,7 @@
+twig_hooks:
+    hooks:
+        'sylius_admin.common.component.header':
+            items:
+                template: '@SyliusAdmin/shared/components/navbar/items.html.twig'
+            menu:
+                template: '@SyliusAdmin/shared/components/navbar/menu.html.twig'
