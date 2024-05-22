@@ -120,9 +120,9 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
         $this->getElement('price_calculator')->selectOption($name);
     }
 
-    public function checkChannel(string $channelName): void
+    public function checkChannel(string $channelCode): void
     {
-        $this->getElement('channel', ['%channel_name%' => $channelName])->check();
+        $this->getElement('channel', ['%channel_code%' => $channelCode])->check();
     }
 
     public function activateLanguageTab(string $locale): void
@@ -170,7 +170,7 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
                 'attribute_value_select' => '#attributesContainer [data-test-product-attribute-value-in-locale="%attributeName% %localeCode%"] select',
                 'attributes_choice' => '#sylius_product_attribute_choice',
                 'cancel_button' => '[data-test-cancel-changes-button]',
-                'channel' => '[data-test-channel-name="%channel_name%"]',
+                'channel' => '[data-test-channel-code="%channel_code%"]',
                 'code' => '#sylius_product_code',
                 'form' => 'form[name="sylius_product"]',
                 'images' => '#sylius_product_images',

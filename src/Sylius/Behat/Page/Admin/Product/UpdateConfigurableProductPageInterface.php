@@ -35,7 +35,7 @@ interface UpdateConfigurableProductPageInterface extends UpdatePageInterface
 
     public function selectMainTaxon(TaxonInterface $taxon): void;
 
-    public function checkChannel(string $channelName): void;
+    public function checkChannel(string $channelCode): void;
 
     public function isImageWithTypeDisplayed(string $type): bool;
 

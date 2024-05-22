@@ -160,7 +160,7 @@ final readonly class ManagingProductsContext implements Context
      */
     public function iMakeItAvailableInChannel(ChannelInterface $channel)
     {
-        $this->createSimpleProductPage->checkChannel($channel->getName());
+        $this->createSimpleProductPage->checkChannel($channel->getCode());
     }
 
     /**
@@ -169,7 +169,7 @@ final readonly class ManagingProductsContext implements Context
     public function iEnableItInChannel(ChannelInterface $channel)
     {
         // Temporary solution until we will make current page resolver work with product pages
-        $this->updateConfigurableProductPage->checkChannel($channel->getName());
+        $this->updateConfigurableProductPage->checkChannel($channel->getCode());
     }
 
     /**
