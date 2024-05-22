@@ -56,6 +56,31 @@ final class OrderItemsTest extends JsonApiTestCase
     }
 
     /** @test */
+    public function it_gets_order_item_adjustments_with_type_filter(): void
+    {
+        $this->loadFixturesFromFiles([
+            'channel.yaml',
+            'cart.yaml',
+            'country.yaml',
+            'shipping_method.yaml',
+            'payment_method.yaml',
+            'cart/promotion.yaml',
+        ]);
+
+        $order = $this->placeOrder('token');
+
+        $this->client->request(
+            method: 'GET',
+            uri: '/api/v2/shop/orders/token/items/' . $order->getItems()->first()->getId() . '/adjustments',
+            parameters: ['type' => 'promotion'],
+            server: self::CONTENT_TYPE_HEADER,
+        );
+        $response = $this->client->getResponse();
+
+        $this->assertResponse($response, 'shop/order_item/get_order_item_adjustments_with_type_filter', Response::HTTP_OK);
+    }
+
+    /** @test */
     public function it_gets_empty_order_item_adjustments_if_order_token_is_wrong(): void
     {
         $this->loadFixturesFromFiles([

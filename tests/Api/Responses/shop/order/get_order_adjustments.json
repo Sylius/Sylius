@@ -40,5 +40,11 @@
             "amount": -1000,
             "neutral": false
         }
-    ]
+    ],
+    "hydra:search": {
+        "@type": "hydra:IriTemplate",
+        "hydra:template": "\/api\/v2\/shop\/orders\/TOKEN\/adjustments{?}",
+        "hydra:variableRepresentation": "BasicRepresentation",
+        "hydra:mapping": []
+    }
 }

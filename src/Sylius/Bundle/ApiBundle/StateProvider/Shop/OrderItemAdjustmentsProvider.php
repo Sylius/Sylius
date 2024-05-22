@@ -35,10 +35,11 @@ final readonly class OrderItemAdjustmentsProvider implements ProviderInterface
             (int) $uriVariables['id'],
             (string) $uriVariables['tokenValue'],
         );
+
         if (null === $orderItem) {
             return [];
         }
 
-        return $orderItem->getAdjustmentsRecursively();
+        return $orderItem->getAdjustmentsRecursively($context['request']->query->get('type'));
     }
 }

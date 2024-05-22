@@ -21,6 +21,7 @@ use Prophecy\Argument;
 use Sylius\Component\Core\Model\AdjustmentInterface;
 use Sylius\Component\Core\Model\OrderItem;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Symfony\Component\HttpFoundation\Request;
 
 final class RecursiveAdjustmentsStateProviderSpec extends ObjectBehavior
 {
@@ -72,19 +73,23 @@ final class RecursiveAdjustmentsStateProviderSpec extends ObjectBehavior
 
     function it_returns_adjustments_recursively(
         RepositoryInterface $repository,
+        Request $request,
+        Request $queryRequest,
         Operation $operation,
         OrderItem $orderItem,
         AdjustmentInterface $firstAdjustment,
         AdjustmentInterface $secondAdjustment,
     ): void {
+        $request->query = $queryRequest;
+        $queryRequest->get('type')->willReturn('type');
         $adjustments = new ArrayCollection([
             $firstAdjustment->getWrappedObject(),
             $secondAdjustment->getWrappedObject(),
         ]);
 
-        $orderItem->getAdjustmentsRecursively()->willReturn($adjustments);
+        $orderItem->getAdjustmentsRecursively('type')->willReturn($adjustments);
         $repository->findOneBy([self::IDENTIFIER => 1])->willReturn($orderItem);
 
-        $this->provide($operation, [self::IDENTIFIER => 1])->shouldReturn($adjustments);
+        $this->provide($operation, [self::IDENTIFIER => 1], ['request' => $request])->shouldReturn($adjustments);
     }
 }
