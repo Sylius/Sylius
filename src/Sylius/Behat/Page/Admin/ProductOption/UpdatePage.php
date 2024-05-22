@@ -25,7 +25,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     public function nameItIn(string $name, string $language): void
     {
         $this->getDocument()->fillField(
-            sprintf('sylius_product_option_translations_%s_name', $language),
+            sprintf('sylius_admin_product_option_translations_%s_name', $language),
             $name,
         );
     }
@@ -71,9 +71,9 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
-            'code' => '#sylius_product_option_code',
-            'name' => '#sylius_product_option_translations_en_US_name',
-            'values' => '#sylius_product_option_values',
+            'code' => '#sylius_admin_product_option_code',
+            'name' => '#sylius_admin_product_option_translations_en_US_name',
+            'values' => '#sylius_admin_product_option_values',
         ]);
     }
 

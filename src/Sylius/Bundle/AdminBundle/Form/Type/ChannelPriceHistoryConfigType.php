@@ -93,4 +93,9 @@ final class ChannelPriceHistoryConfigType extends AbstractType implements DataMa
 
         $this->dataMapper->mapFormsToData(new ArrayCollection($forms), $viewData);
     }
+
+    public function getBlockPrefix(): string
+    {
+        return 'sylius_admin_channel_price_history_config';
+    }
 }

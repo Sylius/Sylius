@@ -57,9 +57,9 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
-            'code' => '#sylius_currency_code',
-            'enabled' => '#sylius_currency_enabled',
-            'exchangeRate' => '#sylius_currency_exchangeRate',
+            'code' => '#sylius_admin_currency_code',
+            'enabled' => '#sylius_admin_currency_enabled',
+            'exchangeRate' => '#sylius_admin_currency_exchangeRate',
         ]);
     }
 }

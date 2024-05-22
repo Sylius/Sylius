@@ -29,8 +29,8 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
-            'code' => '#sylius_shipping_category_code',
-            'name' => '#sylius_shipping_category_name',
+            'code' => '#sylius_admin_shipping_category_code',
+            'name' => '#sylius_admin_shipping_category_name',
         ]);
     }
 }

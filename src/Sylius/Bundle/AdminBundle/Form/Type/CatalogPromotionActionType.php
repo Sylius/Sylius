@@ -29,4 +29,9 @@ final class CatalogPromotionActionType extends AbstractType
     {
         return BaseCatalogPromotionActionType::class;
     }
+
+    public function getBlockPrefix(): string
+    {
+        return 'sylius_admin_catalog_promotion_action';
+    }
 }

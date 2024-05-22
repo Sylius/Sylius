@@ -69,4 +69,9 @@ final class CatalogPromotionScopeType extends AbstractType
         $scopeConfigurationType = $this->scopeConfigurationTypes[$dataType];
         $form->add('configuration', $scopeConfigurationType);
     }
+
+    public function getBlockPrefix(): string
+    {
+        return 'sylius_admin_catalog_promotion_scope';
+    }
 }

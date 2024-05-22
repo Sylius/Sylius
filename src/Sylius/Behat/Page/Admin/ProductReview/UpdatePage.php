@@ -53,11 +53,11 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     {
         return array_merge(parent::getDefinedElements(), [
             'checked_rating' => 'input[checked="checked"]',
-            'comment' => '#sylius_product_review_comment',
-            'rating' => '#sylius_product_review_rating_%position%',
+            'comment' => '#sylius_admin_product_review_comment',
+            'rating' => '#sylius_admin_product_review_rating_%position%',
             'customer_name' => '.sylius-customer-name',
             'product_name' => '.sylius-product-name',
-            'title' => '#sylius_product_review_title',
+            'title' => '#sylius_admin_product_review_title',
         ]);
     }
 }

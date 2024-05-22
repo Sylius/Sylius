@@ -42,4 +42,9 @@ final class ForTaxonsScopeConfigurationType extends AbstractType
     {
         return BaseForTaxonsScopeConfigurationType::class;
     }
+
+    public function getBlockPrefix(): string
+    {
+        return 'sylius_admin_catalog_promotion_scope_taxon_configuration';
+    }
 }

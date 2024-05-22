@@ -69,4 +69,9 @@ final class CatalogPromotionType extends AbstractType
     {
         return BaseCatalogPromotionType::class;
     }
+
+    public function getBlockPrefix(): string
+    {
+        return 'sylius_admin_catalog_promotion';
+    }
 }

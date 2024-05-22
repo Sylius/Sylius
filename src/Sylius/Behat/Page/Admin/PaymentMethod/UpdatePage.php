@@ -50,7 +50,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
 
     public function nameIt(string $name, string $languageCode): void
     {
-        $this->getDocument()->fillField(sprintf('sylius_payment_method_translations_%s_name', $languageCode), $name);
+        $this->getDocument()->fillField(sprintf('sylius_admin_payment_method_translations_%s_name', $languageCode), $name);
     }
 
     public function enableSandboxMode(): void
@@ -106,8 +106,8 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
             'code' => '[data-test-code]',
             'enabled' => '[data-test-enabled]',
             'factory_name' => '[data-test-factory-name]',
-            'instructions' => '#sylius_payment_method_translations_%language%_instructions',
-            'name' => '#sylius_payment_method_translations_en_US_name',
+            'instructions' => '#sylius_admin_payment_method_translations_%language%_instructions',
+            'name' => '#sylius_admin_payment_method_translations_en_US_name',
             'password' => '[data-test-password]',
             'publishable_key' => '[data-test-publishable-key]',
             'sandbox' => '[data-test-sandbox]',

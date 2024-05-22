@@ -37,4 +37,9 @@ final class ChannelType extends AbstractType
     {
         return BaseChannelType::class;
     }
+
+    public function getBlockPrefix(): string
+    {
+        return 'sylius_admin_channel';
+    }
 }

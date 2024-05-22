@@ -92,4 +92,9 @@ final class CountryType extends AbstractType
 
         return $availableCountries;
     }
+
+    public function getBlockPrefix(): string
+    {
+        return 'sylius_admin_country';
+    }
 }

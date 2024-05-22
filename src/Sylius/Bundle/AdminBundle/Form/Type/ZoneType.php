@@ -46,4 +46,9 @@ final class ZoneType extends AbstractType
     {
         return BaseZoneType::class;
     }
+
+    public function getBlockPrefix(): string
+    {
+        return 'sylius_admin_zone';
+    }
 }

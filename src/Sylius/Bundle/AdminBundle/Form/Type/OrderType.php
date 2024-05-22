@@ -43,4 +43,9 @@ final class OrderType extends AbstractType
     {
         return BaseOrderType::class;
     }
+
+    public function getBlockPrefix(): string
+    {
+        return 'sylius_admin_order';
+    }
 }

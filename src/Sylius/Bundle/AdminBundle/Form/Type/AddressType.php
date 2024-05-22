@@ -89,4 +89,9 @@ final class AddressType extends AbstractType
     {
         return BaseAddressType::class;
     }
+
+    public function getBlockPrefix(): string
+    {
+        return 'sylius_admin_address';
+    }
 }

@@ -42,4 +42,9 @@ final class ShippingMethodRuleType extends AbstractType
     {
         return BaseShippingMethodRuleType::class;
     }
+
+    public function getBlockPrefix(): string
+    {
+        return 'sylius_admin_shipping_method_rule';
+    }
 }

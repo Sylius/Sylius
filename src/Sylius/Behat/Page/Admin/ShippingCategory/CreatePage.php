@@ -30,8 +30,8 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
-            'code' => '#sylius_shipping_category_code',
-            'description' => '#sylius_shipping_category_description',
+            'code' => '#sylius_admin_shipping_category_code',
+            'description' => '#sylius_admin_shipping_category_description',
         ]);
     }
 }

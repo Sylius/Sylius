@@ -42,4 +42,9 @@ final class ForProductsScopeConfigurationType extends AbstractType
     {
         return BaseForProductsScopeConfigurationType::class;
     }
+
+    public function getBlockPrefix(): string
+    {
+        return 'sylius_catalog_promotion_scope_for_products_configuration';
+    }
 }

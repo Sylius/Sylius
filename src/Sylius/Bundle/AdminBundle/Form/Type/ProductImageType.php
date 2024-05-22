@@ -54,4 +54,9 @@ final class ProductImageType extends AbstractType
     {
         return BaseProductImageType::class;
     }
+
+    public function getBlockPrefix(): string
+    {
+        return 'sylius_admin_product_image';
+    }
 }

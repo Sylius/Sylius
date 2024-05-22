@@ -42,4 +42,9 @@ final class ForVariantsScopeConfigurationType extends AbstractType
     {
         return BaseForVariantsScopeConfigurationType::class;
     }
+
+    public function getBlockPrefix(): string
+    {
+        return 'sylius_admin_catalog_promotion_scope_variant_configuration';
+    }
 }

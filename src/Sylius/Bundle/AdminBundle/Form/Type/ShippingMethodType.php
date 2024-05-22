@@ -55,4 +55,9 @@ final class ShippingMethodType extends AbstractType
     {
         return BaseShippingMethodType::class;
     }
+
+    public function getBlockPrefix(): string
+    {
+        return 'sylius_admin_shipping_method';
+    }
 }

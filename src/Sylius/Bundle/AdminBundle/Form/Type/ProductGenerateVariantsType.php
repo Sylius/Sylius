@@ -40,4 +40,9 @@ final class ProductGenerateVariantsType extends AbstractType
     {
         return BaseProductGenerateVariantsType::class;
     }
+
+    public function getBlockPrefix(): string
+    {
+        return 'sylius_admin_product_generate_variants';
+    }
 }
