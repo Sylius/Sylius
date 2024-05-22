@@ -1031,10 +1031,6 @@ final readonly class ManagingOrdersContext implements Context
     }
 
     /**
-     * @param string $type
-     * @param string $element
-     * @param string $expectedMessage
-     *
      * @throws \InvalidArgumentException
      */
     private function assertElementValidationMessage(string $type, string $element, string $expectedMessage): void
