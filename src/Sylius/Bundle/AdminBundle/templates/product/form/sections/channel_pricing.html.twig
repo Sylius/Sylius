@@ -52,7 +52,8 @@
                                     {{ 'sylius.ui.product.product_not_active_in_channel'|trans }}
                                 </div>
                             {% endif %}
-                            {{ form_row(channel_pricing, {'label': false}) }}
+
+                            {% hook 'channel_pricing' with { channelPricing } %}
                         </div>
                     {% endfor %}
                 </div>
