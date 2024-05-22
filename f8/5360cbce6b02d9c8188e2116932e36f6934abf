@@ -1,0 +1,27 @@
+---------------------------------------------------------------------------
+
+by github-actions[bot] at 2024-05-22T10:35:46Z
+
+### Bunnyshell Preview Environment automatic creation skipped due to restricted files changes.
+
+Add a comment containing `/bns:deploy` to approve the creation of the environment.
+<!-- thollander/actions-comment-pull-request "bunnyshell-preview-env" -->
+
+---------------------------------------------------------------------------
+
+by GSadee at 2024-05-22T11:04:50Z
+
+The base of this pull-request was changed, you need fetch and reset your local branch
+if you want to add new commits to this pull request. **Reset before you pull, else commits
+may become messed-up.**
+
+Unless you added new commits (to this branch) locally that you did not push yet,
+execute `git fetch origin && git reset "patch-1"` to update your local branch.
+
+Feel free to ask for assistance when you get stuck :+1:
+
+---------------------------------------------------------------------------
+
+by GSadee at 2024-05-22T12:53:47Z
+
+Thank you, @mihaichitic! :1st_place_medal:
