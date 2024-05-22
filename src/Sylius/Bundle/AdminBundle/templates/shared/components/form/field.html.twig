@@ -1,0 +1,15 @@
+{% extends '@SyliusAdmin/shared/components/hookable_component.html.twig' %}
+
+{% block content %}
+    {% if (is_hookable()) %}
+        {% set form = hookable_metadata.context.form %}
+        {% set field = hookable_metadata.configuration.field %}
+        {% set attributes = attributes.remove('hookableMetadata').defaults(hookable_metadata.configuration.attributes|default({})) %}
+    {% endif %}
+
+    {% props form, field %}
+
+    <div {{ attributes}} {{ renderedTestAttributes }}>
+        {{ form_row(form[field], mergedTestFormAttributes) }}
+    </div>
+{% endblock %}

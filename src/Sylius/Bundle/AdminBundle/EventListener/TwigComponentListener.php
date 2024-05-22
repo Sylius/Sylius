@@ -16,11 +16,10 @@ namespace Sylius\Bundle\AdminBundle\EventListener;
 use Symfony\UX\TwigComponent\AnonymousComponent;
 use Symfony\UX\TwigComponent\Event\PreRenderEvent;
 
-final class TwigComponentRenderListener
+final class TwigComponentListener
 {
     public function onPreRender(PreRenderEvent $event): void
     {
-
         if (!str_starts_with($event->getMetadata()->getName(), 'sylius_admin:')) {
             return;
         }

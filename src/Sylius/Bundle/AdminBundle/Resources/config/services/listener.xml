@@ -42,7 +42,7 @@
             <tag name="kernel.event_subscriber" event="kernel.request" />
         </service>
 
-        <service id="sylius_admin.event_listener.twig_component_render" class="Sylius\Bundle\AdminBundle\EventListener\TwigComponentRenderListener">
+        <service id="sylius_admin.event_listener.twig_component_render" class="Sylius\Bundle\AdminBundle\EventListener\TwigComponentListener">
             <tag name="kernel.event_listener" event="Symfony\UX\TwigComponent\Event\PreRenderEvent" method="onPreRender" />
         </service>
     </services>

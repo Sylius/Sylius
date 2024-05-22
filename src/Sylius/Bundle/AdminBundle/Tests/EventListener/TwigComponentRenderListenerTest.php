@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Bundle\AdminBundle\Tests\EventListener;
 
 use PHPUnit\Framework\TestCase;
-use Sylius\Bundle\AdminBundle\EventListener\TwigComponentRenderListener;
+use Sylius\Bundle\AdminBundle\EventListener\TwigComponentListener;
 use Symfony\UX\TwigComponent\AnonymousComponent;
 use Symfony\UX\TwigComponent\ComponentAttributes;
 use Symfony\UX\TwigComponent\ComponentMetadata;
@@ -26,7 +26,7 @@ final class TwigComponentRenderListenerTest extends TestCase
     /** @test */
     public function it_replaces_camel_cased_hookable_metadata_variable_with_snake_cased_one(): void
     {
-        $listener = new TwigComponentRenderListener();
+        $listener = new TwigComponentListener();
 
         $event = new PreRenderEvent(
             new MountedComponent('sylius_admin:example', new AnonymousComponent(), new ComponentAttributes([])),
@@ -44,7 +44,7 @@ final class TwigComponentRenderListenerTest extends TestCase
     /** @test */
     public function it_does_nothing_when_the_component_name_is_not_starting_with_sylius_admin(): void
     {
-        $listener = new TwigComponentRenderListener();
+        $listener = new TwigComponentListener();
 
         $event = new PreRenderEvent(
             new MountedComponent('example', new AnonymousComponent(), new ComponentAttributes([])),
@@ -61,7 +61,7 @@ final class TwigComponentRenderListenerTest extends TestCase
     /** @test */
     public function it_does_nothing_when_the_component_is_not_an_anonymous_component(): void
     {
-        $listener = new TwigComponentRenderListener();
+        $listener = new TwigComponentListener();
 
         $event = new PreRenderEvent(
             new MountedComponent('sylius_admin:example', new \stdClass(), new ComponentAttributes([])),
@@ -78,7 +78,7 @@ final class TwigComponentRenderListenerTest extends TestCase
     /** @test */
     public function it_does_nothing_when_there_is_no_camel_cased_hookable_metadata_variable(): void
     {
-        $listener = new TwigComponentRenderListener();
+        $listener = new TwigComponentListener();
 
         $event = new PreRenderEvent(
             new MountedComponent('sylius_admin:example', new AnonymousComponent(), new ComponentAttributes([])),

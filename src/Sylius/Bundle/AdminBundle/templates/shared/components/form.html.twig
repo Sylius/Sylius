@@ -6,6 +6,7 @@
     {% set resource = hookable_metadata.context.resource %}
     {% set resource_configuration = hookable_metadata.context.resource_configuration %}
     {% set form = hookable_metadata.context.form %}
+    {% set prefixes = hookable_metadata.prefixes|merge(['sylius_admin.common.component.form']) %}
 {% endif %}
 
 {% set route = hookable_metadata.configuration.redirect.route|default(null) %}
