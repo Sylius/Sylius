@@ -6,6 +6,8 @@ sylius_admin_product_attribute:
         except: ['show', 'create']
         redirect: update
         grid: sylius_admin_product_attribute
+        form:
+            type: Sylius\Bundle\AdminBundle\Form\Type\ProductAttributeType
         permission: true
         vars:
             all:
@@ -27,6 +29,8 @@ sylius_admin_product_attribute_create:
                 method: createTyped
                 arguments:
                     type: $type
+            form:
+                type: Sylius\Bundle\AdminBundle\Form\Type\ProductAttributeType
             template: "@SyliusAdmin/shared/crud/create.html.twig"
             redirect: sylius_admin_product_attribute_update
             permission: true

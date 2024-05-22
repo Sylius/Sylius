@@ -6,6 +6,8 @@ sylius_admin_product_option:
         except: ['show']
         redirect: update
         grid: sylius_admin_product_option
+        form:
+            type: Sylius\Bundle\AdminBundle\Form\Type\ProductOptionType
         permission: true
         vars:
             all:

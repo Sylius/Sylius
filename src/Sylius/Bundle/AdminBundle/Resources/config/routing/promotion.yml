@@ -6,6 +6,8 @@ sylius_admin_promotion:
         except: ['show']
         redirect: update
         grid: sylius_admin_promotion
+        form:
+            type: Sylius\Bundle\AdminBundle\Form\Type\PromotionType
         permission: true
         vars:
             all:

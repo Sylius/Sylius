@@ -265,7 +265,7 @@
             class="Sylius\Bundle\AdminBundle\Twig\Component\Shipment\ShipFormComponent"
         >
             <argument type="service" id="form.factory" />
-            <argument>Sylius\Bundle\ShippingBundle\Form\Type\ShipmentShipType</argument>
+            <argument>Sylius\Bundle\AdminBundle\Form\Type\ShipmentShipType</argument>
 
             <tag
                 name="sylius.live_component"

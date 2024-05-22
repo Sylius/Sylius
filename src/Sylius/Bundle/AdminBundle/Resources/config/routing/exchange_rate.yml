@@ -6,6 +6,8 @@ sylius_admin_exchange_rate:
         except: ['show']
         redirect: update
         grid: sylius_admin_exchange_rate
+        form:
+            type: Sylius\Bundle\AdminBundle\Form\Type\ExchangeRateType
         permission: true
         vars:
             all:

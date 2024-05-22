@@ -6,6 +6,8 @@ sylius_admin_currency:
         only: ['index', 'create']
         redirect: index
         grid: sylius_admin_currency
+        form:
+            type: Sylius\Bundle\AdminBundle\Form\Type\CurrencyType
         permission: true
         vars:
             all:
