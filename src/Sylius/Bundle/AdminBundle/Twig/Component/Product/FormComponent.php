@@ -49,6 +49,7 @@ class FormComponent
 
     /** @var array<string> */
     #[LiveProp(writable: true, hydrateWith: 'hydrateAttributesToBeAdded', dehydrateWith: 'dehydrateAttributesToBeAdded')]
+    #[ExposeInTemplate('attributes_to_be_added')]
     public array $attributesToBeAdded = [];
 
     #[LiveProp(writable: false)]
@@ -81,7 +82,7 @@ class FormComponent
     /**
      * @return array<string, array<string, FormView>>
      */
-    #[ExposeInTemplate]
+    #[ExposeInTemplate('mapped_product_attributes')]
     public function getMappedProductAttributes(): array
     {
         $mappedAttributes = [];

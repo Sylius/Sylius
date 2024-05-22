@@ -1,9 +1,9 @@
 {% macro default(channelPricingForms, product_variant, body = null, options = {}) %}
     {% set options = {
-        accordionId: 'product-channel-pricings'
+        accordion_id: 'product-channel-pricings'
     }|merge(options) %}
 
-    <div class="accordion" id="{{ options.accordionId }}">
+    <div class="accordion" id="{{ options. accordion_id }}">
         {% for channelCode, channelPricingForm in channelPricingForms %}
             <div class="accordion-item">
                 <h2 class="accordion-header">

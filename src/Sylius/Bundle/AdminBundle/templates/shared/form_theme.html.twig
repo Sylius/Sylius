@@ -44,7 +44,7 @@
         <div class="card-header">
             <ul class="nav nav-tabs card-header-tabs" data-bs-toggle="tabs" role="tablist">
                 {% for channelCode, channelConfiguration in form %}
-                    {% set channelErrorCount = form.vars.channels_errors_count[channelCode] %}
+                    {% set channel_error_count = form.vars.channels_errors_count[channelCode] %}
                     <li class="nav-item">
                         <a
                             class="nav-link {% if loop.index0 == 0 %}active{% endif %}"
@@ -55,8 +55,8 @@
                             {{ sylius_test_html_attribute('channel-tab', channelCode) }}
                         >
                             <span>{{- channelConfiguration.vars.label -}}</span>
-                            {% if channelErrorCount > 0 %}
-                                <span class="text-white badge rounded-pill bg-danger ms-1">{{ channelErrorCount }}</span>
+                            {% if channel_error_count > 0 %}
+                                <span class="text-white badge rounded-pill bg-danger ms-1">{{ channel_error_count }}</span>
                             {% endif %}
                         </a>
                     </li>

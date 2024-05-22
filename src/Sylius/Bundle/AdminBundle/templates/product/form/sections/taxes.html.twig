@@ -1,7 +1,7 @@
 {% set product = hookable_metadata.context.resource %}
 
 {% if product.isSimple %}
-    {% set variantForm = hookable_metadata.context.form.variant %}
+    {% set variant_form = hookable_metadata.context.form.variant %}
     <div class="tab-pane" id="taxes" role="tabpanel" tabindex="0">
         <div class="card mb-3">
             <div class="card-header">
@@ -9,7 +9,7 @@
             </div>
             <div class="card-body">
                 <div class="mb-3">
-                    {{ form_row(variantForm.taxCategory) }}
+                    {{ form_row( variant_form.taxCategory) }}
                 </div>
             </div>
         </div>

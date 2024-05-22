@@ -4,7 +4,7 @@
     {% set width = params.width|default(24) %}
     {% set height = params.height|default(24) %}
     {% set stroke = params.stroke|default(2) %}
-    {% set strokeColor = params.strokeColor|default('currentColor') %}
+    {% set stroke_color = params.strokeColor|default('currentColor') %}
     {% set fill = params.fill|default('none') %}
 
     <svg xmlns="http://www.w3.org/2000/svg"
@@ -13,7 +13,7 @@
          height="{{ height }}"
          viewBox="0 0 24 24"
          stroke-width="{{ stroke }}"
-         stroke="{{ strokeColor }}"
+         stroke="{{ stroke_color }}"
          fill="{{ fill }}"
          stroke-linecap="round"
          stroke-linejoin="round">
