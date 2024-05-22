@@ -23,7 +23,7 @@ use Sylius\Component\Core\Model\OrderItem;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 
-final class RecursiveAdjustmentsStateProviderSpec extends ObjectBehavior
+final class RecursiveAdjustmentsProviderSpec extends ObjectBehavior
 {
     private const IDENTIFIER = 'id';
 
@@ -39,7 +39,7 @@ final class RecursiveAdjustmentsStateProviderSpec extends ObjectBehavior
         $this->shouldImplement(ProviderInterface::class);
     }
 
-    function it_throw_logic_exception_when_repository_is_for_not_a_not_recursive_adjustments_aware_resource(
+    function it_throws_logic_exception_when_repository_is_not_for_a_recursive_adjustments_aware_resource(
         RepositoryInterface $repository,
     ): void {
         $repository->getClassName()->willReturn(\stdClass::class);
