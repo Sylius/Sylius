@@ -125,39 +125,8 @@ trait FormTrait
     }
 
     /*
-     * Tabs management
-     */
-
-    private function changeTab(string $tabName): void
-    {
-        $this->getElement('side_navigation_tab', ['%name%' => $tabName])->click();
-    }
-
-    private function changeChannelTab(string $channelCode): void
-    {
-        $this->getElement('channel_tab', ['%channelCode%' => $channelCode])->click();
-    }
-
-    private function changeAttributeTab(string $attributeName): void
-    {
-        $this->getElement('product_attribute_tab', ['%name%' => $attributeName])->click();
-    }
-
-    private function expandTranslationAccordion(string $localeCode): void
-    {
-        $translationAccordion = $this->getElement('product_translation_accordion', ['%localeCode%' => $localeCode]);
-
-        if ($translationAccordion->getAttribute('aria-expanded') === 'true') {
-            return;
-        }
-
-        $translationAccordion->click();
-    }
-
-    /*
      * Attribute management
      */
-
     public function addAttribute(string $attributeName): void
     {
         $this->changeTab('attributes');
@@ -401,5 +370,50 @@ trait FormTrait
     private function clickButton(string $locator): void
     {
         $this->getDocument()->pressButton($locator);
+    }
+
+    /*
+     * Tabs management
+     */
+    private function changeTab(string $tabName): void
+    {
+        if (DriverHelper::isNotJavascript($this->getDriver())) {
+            return;
+        }
+
+        $this->getElement('side_navigation_tab', ['%name%' => $tabName])->click();
+    }
+
+    private function changeChannelTab(string $channelCode): void
+    {
+        if (DriverHelper::isNotJavascript($this->getDriver())) {
+            return;
+        }
+
+        $this->getElement('channel_tab', ['%channelCode%' => $channelCode])->click();
+    }
+
+    private function changeAttributeTab(string $attributeName): void
+    {
+        if (DriverHelper::isNotJavascript($this->getDriver())) {
+            return;
+        }
+
+        $this->getElement('product_attribute_tab', ['%name%' => $attributeName])->click();
+    }
+
+    private function expandTranslationAccordion(string $localeCode): void
+    {
+        if (DriverHelper::isNotJavascript($this->getDriver())) {
+            return;
+        }
+
+        $translationAccordion = $this->getElement('product_translation_accordion', ['%localeCode%' => $localeCode]);
+
+        if ($translationAccordion->getAttribute('aria-expanded') === 'true') {
+            return;
+        }
+
+        $translationAccordion->click();
     }
 }
