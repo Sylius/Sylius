@@ -21,6 +21,13 @@ use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
+trigger_deprecation(
+    'sylius/core-bundle',
+    '1.14',
+    'The "%s" class is deprecated and will be removed in Sylius 2.0.',
+    ShowAvailablePluginsCommand::class,
+);
+
 final class ShowAvailablePluginsCommand extends Command
 {
     protected static $defaultName = 'sylius:show-available-plugins';

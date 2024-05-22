@@ -13,6 +13,13 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Console\Command\Model;
 
+trigger_deprecation(
+    'sylius/core-bundle',
+    '1.14',
+    'The "%s" class is deprecated and will be removed in Sylius 2.0.',
+    PluginInfo::class,
+);
+
 final class PluginInfo
 {
     public function __construct(private string $name, private string $description, private string $url)
