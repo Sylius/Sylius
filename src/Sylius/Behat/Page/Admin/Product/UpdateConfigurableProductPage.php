@@ -95,9 +95,9 @@ class UpdateConfigurableProductPage extends BaseUpdatePage implements UpdateConf
         $itemSelected->click();
     }
 
-    public function checkChannel(string $channelName): void
+    public function checkChannel(string $channelCode): void
     {
-        $this->getElement('channel', ['%channel_name%' => $channelName])->check();
+        $this->getElement('channel', ['%channel_code%' => $channelCode])->check();
     }
 
     public function isImageWithTypeDisplayed(string $type): bool
@@ -146,7 +146,7 @@ class UpdateConfigurableProductPage extends BaseUpdatePage implements UpdateConf
         return array_merge(
             parent::getDefinedElements(),
             [
-                'channel' => '[data-test-channel-name="%channel_name%"]',
+                'channel' => '[data-test-channel-code="%channel_code%"]',
                 'channels' => '[data-test-channels]',
                 'code' => '#sylius_product_code',
                 'images' => '#sylius_product_images',
