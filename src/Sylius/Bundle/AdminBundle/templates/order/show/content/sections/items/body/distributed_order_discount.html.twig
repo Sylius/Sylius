@@ -1,4 +1,4 @@
-{% import '@SyliusAdmin/shared/helper/money.html.twig' as _money %}
+{% import '@SyliusAdmin/shared/helper/money.html.twig' as money %}
 
 {% set order_promotion_adjustment = constant('Sylius\\Component\\Core\\Model\\AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT') %}
 
@@ -6,5 +6,5 @@
 {% set item = hookable_metadata.context.item %}
 
 <td class="text-end" {{ sylius_test_html_attribute('distributed-order-discount') }}>
-    <span class="fst-italic">~ {{ _money.format(item.units.first.adjustmentsTotal(order_promotion_adjustment), order.currencyCode) }}</span>
+    <span class="fst-italic">~ {{ money.format(item.units.first.adjustmentsTotal(order_promotion_adjustment), order.currencyCode) }}</span>
 </td>
