@@ -11,30 +11,25 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\AdminBundle\Form\Extension;
+namespace Sylius\Bundle\AdminBundle\Form\Type;
 
-use Sylius\Bundle\AdminBundle\Form\Type\CatalogPromotionScopeType;
 use Sylius\Bundle\PromotionBundle\Form\Type\CatalogPromotionScopeType as BaseCatalogPromotionScopeType;
-use Symfony\Component\Form\AbstractTypeExtension;
+use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Twig\Environment;
 
-trigger_deprecation(
-    'sylius/admin-bundle',
-    '1.14',
-    'The "%s" class is deprecated and will be removed in Sylius 2.0. Starting with this version, form types will be extended using the parent form like in %s.',
-    CatalogPromotionScopeTypeExtension::class,
-    CatalogPromotionScopeType::class,
-);
-
-/** @deprecated since Sylius 1.14 and will be removed in Sylius 2.0. */
-final class CatalogPromotionScopeTypeExtension extends AbstractTypeExtension
+final class CatalogPromotionScopeType extends AbstractType
 {
+    /** @var array<string, string> */
     private array $scopeTypes = [];
 
+    /** @var array<string, string> */
     private array $scopeConfigurationTypes;
 
+    /**
+     * @param iterable<string, object> $scopeConfigurationTypes
+     */
     public function __construct(iterable $scopeConfigurationTypes, private Environment $twig)
     {
         foreach ($scopeConfigurationTypes as $type => $formType) {
@@ -61,8 +56,13 @@ final class CatalogPromotionScopeTypeExtension extends AbstractTypeExtension
         ;
     }
 
-    public static function getExtendedTypes(): iterable
+    public function getBlockPrefix(): string
     {
-        return [BaseCatalogPromotionScopeType::class];
+        return 'sylius_admin_catalog_promotion_scope';
+    }
+
+    public function getParent(): string
+    {
+        return BaseCatalogPromotionScopeType::class;
     }
 }
