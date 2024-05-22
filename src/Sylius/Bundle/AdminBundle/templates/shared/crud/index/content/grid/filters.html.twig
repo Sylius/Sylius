@@ -4,7 +4,7 @@
 {% set resources = hookable_metadata.context.resources %}
 
 {% set path = path(app.request.attributes.get('_route'), app.request.attributes.all('_route_params')) %}
-{% set areCriteriaSet = app.request.query.has('criteria') %}
+{% set are_criteria_set = app.request.query.has('criteria') %}
 
 <div class="bg-white mb-5">
     {% set content %}
@@ -29,5 +29,5 @@
         title: 'sylius.ui.filters'|trans,
         content: content,
         icon: 'adjustments',
-    }], areCriteriaSet) }}
+    }], are_criteria_set) }}
 </div>

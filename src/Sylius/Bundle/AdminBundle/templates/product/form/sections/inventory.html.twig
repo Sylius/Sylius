@@ -1,16 +1,16 @@
 {% set product = hookable_metadata.context.resource %}
 
 {% if product.isSimple %}
-    {% set variantForm = hookable_metadata.context.form.variant %}
+    {% set variant_form = hookable_metadata.context.form.variant %}
     <div class="tab-pane" id="product-inventory" role="tabpanel" tabindex="0">
         <div class="card mb-3">
             <div class="card-header">
                 <h2 id="inventory" class="card-title">{{ 'sylius.ui.inventory'|trans }}</h2>
             </div>
             <div class="card-body">
-                {{ form_row(variantForm.onHand) }}
-                {{ form_row(variantForm.tracked) }}
-                {{ form_row(variantForm.version) }}
+                {{ form_row( variant_form.onHand) }}
+                {{ form_row( variant_form.tracked) }}
+                {{ form_row( variant_form.version) }}
             </div>
         </div>
     </div>

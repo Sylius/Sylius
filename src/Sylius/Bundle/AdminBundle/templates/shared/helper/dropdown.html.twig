@@ -50,6 +50,6 @@
         {% endfor %}
     {% endset %}
 
-    {% set newParams = params|merge({ content: content }) %}
-    {{ _.default(newParams) }}
+    {% set new_params = params|merge({ content: content }) %}
+    {{ _.default(new_params) }}
 {% endmacro %}
