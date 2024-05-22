@@ -1,0 +1,52 @@
+{% set images = hookable_metadata.context.form.images %}
+{% set product = hookable_metadata.context.product %}
+
+<div
+    class="row"
+    {{ sylius_test_html_attribute('images') }}
+    {{ sylius_test_html_attribute('image-subforms') }}
+>
+    {% for imageForm in images %}
+        <div
+            class="col-12 col-md-6 row mb-4"
+            {{ sylius_test_html_attribute('image-subform')}}
+            {{ sylius_test_html_attribute('type', imageForm.type.vars.value) }}
+            {{ sylius_test_html_attribute('image-url', imageForm.vars.value.path ? imageForm.vars.value.path|imagine_filter('sylius_small') : null) }}
+        >
+            <div class="col-auto">
+                <div>
+                    {% if imageForm.vars.value.path is not null %}
+                        <span class="avatar avatar-xl" style="background-image: url('{{ imageForm.vars.value.path|imagine_filter('sylius_small') }}')"></span>
+                    {% else %}
+                        <span class="avatar avatar-xl"></span>
+                    {% endif %}
+                </div>
+                <div class="mt-3 d-flex items-center">
+                    {{ form_widget(
+                        imageForm.vars.button_delete,
+                        {
+                            label: 'sylius.ui.delete'|trans,
+                            attr: {
+                            class: 'btn btn-outline-danger w-100',
+                            'data-test-image-delete': '',
+                        }
+                        }
+                    ) }}
+                </div>
+            </div>
+            <div class="col">
+                <div class="mb-3">
+                    {{ form_row(imageForm.type, sylius_test_form_attribute('type')) }}
+                </div>
+                <div class="mb-3">
+                    {% if product.id is not null and 0 != product.variants|length and not product.simple %}
+                        {{ form_row(imageForm.productVariants, sylius_test_form_attribute('product-variant', imageForm.productVariants.vars.value|join(','))) }}
+                    {% endif %}
+                </div>
+                <div class="mb-3">
+                    {{ form_row(imageForm.file, sylius_test_form_attribute('file')) }}
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+</div>

@@ -1,0 +1,5 @@
+{% set images = hookable_metadata.context.form.images %}
+
+<div class="d-grid gap-2">
+    {{ form_widget(images.vars.button_add, {label: 'sylius.ui.add_image'|trans, attr: {class: 'btn btn-outline-primary '}}) }}
+</div>

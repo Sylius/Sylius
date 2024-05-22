@@ -62,3 +62,79 @@ twig_hooks:
                 template: '@SyliusAdmin/product/form/sections/associations.html.twig'
             media:
                 template: '@SyliusAdmin/product/form/sections/media.html.twig'
+
+        'sylius_admin.product.create.content.form.sections.details':
+            code:
+                template: '@SyliusAdmin/product/form/sections/details/code.html.twig'
+            enabled:
+                template: '@SyliusAdmin/product/form/sections/details/enabled.html.twig'
+            shipping_required:
+                template: '@SyliusAdmin/product/form/sections/details/shipping_required.html.twig'
+            channels:
+                template: '@SyliusAdmin/product/form/sections/details/channels.html.twig'
+            translations:
+                template: '@SyliusAdmin/product/form/sections/details/translations.html.twig'
+            options:
+                template: '@SyliusAdmin/product/form/sections/details/options.html.twig'
+            variant_selection_method:
+                template: '@SyliusAdmin/product/form/sections/details/variant_selection_method.html.twig'
+
+        'sylius_admin.product.create.content.form.sections.translations':
+            name:
+                template: '@SyliusAdmin/product/form/sections/translations/name.html.twig'
+            slug:
+                template: '@SyliusAdmin/product/form/sections/translations/slug.html.twig'
+            description:
+                template: '@SyliusAdmin/product/form/sections/translations/description.html.twig'
+            meta_keywords:
+                template: '@SyliusAdmin/product/form/sections/translations/meta_keywords.html.twig'
+            meta_description:
+                template: '@SyliusAdmin/product/form/sections/translations/meta_description.html.twig'
+            short_description:
+                template: '@SyliusAdmin/product/form/sections/translations/short_description.html.twig'
+
+        'sylius_admin.product.create.content.form.sections.channel_pricing':
+            price:
+                template: '@SyliusAdmin/product/form/sections/channel_pricing/price.html.twig'
+            original_price:
+                template: '@SyliusAdmin/product/form/sections/channel_pricing/original_price.html.twig'
+            minimum_price:
+                template: '@SyliusAdmin/product/form/sections/channel_pricing/minimum_price.html.twig'
+
+        'sylius_admin.product.create.content.form.sections.taxes':
+            taxes:
+                template: '@SyliusAdmin/product/form/sections/taxes/taxes.html.twig'
+
+        'sylius_admin.product.create.content.form.sections.shipping':
+            shipping_category:
+                template: '@SyliusAdmin/product/form/sections/shipping/shipping_category.html.twig'
+            width:
+                template: '@SyliusAdmin/product/form/sections/shipping/width.html.twig'
+            height:
+                template: '@SyliusAdmin/product/form/sections/shipping/height.html.twig'
+            depth:
+                template: '@SyliusAdmin/product/form/sections/shipping/depth.html.twig'
+            weight:
+                template: '@SyliusAdmin/product/form/sections/shipping/weight.html.twig'
+
+        'sylius_admin.product.create.content.form.sections.inventory':
+            on_hand:
+                template: '@SyliusAdmin/product/form/sections/inventory/on_hand.html.twig'
+            tracked:
+                template: '@SyliusAdmin/product/form/sections/inventory/tracked.html.twig'
+            version:
+                template: '@SyliusAdmin/product/form/sections/inventory/version.html.twig'
+
+        'sylius_admin.product.create.content.form.sections.taxonomy':
+            main_taxon:
+                template: '@SyliusAdmin/product/form/sections/taxonomy/main_taxon.html.twig'
+
+        'sylius_admin.product.create.content.form.sections.associations':
+            associations:
+                template: '@SyliusAdmin/product/form/sections/associations/associations.html.twig'
+
+        'sylius_admin.product.create.content.form.sections.media':
+            images:
+                template: '@SyliusAdmin/product/form/sections/media/images.html.twig'
+            add_image:
+                template: '@SyliusAdmin/product/form/sections/media/add_image.html.twig'

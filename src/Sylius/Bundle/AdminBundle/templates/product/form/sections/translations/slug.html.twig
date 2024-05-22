@@ -1,0 +1,24 @@
+{% set form = hookable_metadata.context.form %}
+{% set locale = hookable_metadata.context.locale %}
+
+<div class="col-12 col-md-6">
+    <div class="mb-3 field">
+        {{ form_label(form.slug) }}
+        <div class="input-group mb-3">
+            {{ form_widget(form.slug, sylius_test_form_attribute('slug', locale)) }}
+            <button
+                class="btn btn-outline-secondary"
+                type="button"
+                data-action="live#action"
+                data-live-action-param="debounce(300)|generateProductSlug"
+                data-live-locale-code-param="{{ locale }}"
+                {{ sylius_test_html_attribute('generate-product-slug-button', locale) }}
+            >
+                ⚡️
+            </button>
+        </div>
+        <div class="invalid-feedback d-block">
+            {{ form_errors(form.slug) }}
+        </div>
+    </div>
+</div>

@@ -7,7 +7,7 @@
         </div>
         <div class="card-body">
             <div class="row">
-                {{ form_row(hookable_metadata.context.form.associations) }}
+                {% hook 'associations' %}
             </div>
         </div>
     </div>
