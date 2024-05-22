@@ -22,7 +22,7 @@ trigger_deprecation(
     '1.14',
     'The "%s" class is deprecated and will be removed in Sylius 2.0. Use "%s" instead.',
     StateMachineExtension::class,
-    \Sylius\Abstraction\StateMachine\Twig\StateMachineExtension::class
+    \Sylius\Abstraction\StateMachine\Twig\StateMachineExtension::class,
 );
 
 final class StateMachineExtension extends AbstractExtension

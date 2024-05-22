@@ -44,7 +44,7 @@ final class LiveComponentTagPassTest extends AbstractCompilerPassTestCase
                 'route' => 'ux_live_component',
                 'method' => 'post',
                 'url_reference_type' => UrlGeneratorInterface::ABSOLUTE_PATH,
-            ]
+            ],
         );
         $this->assertContainerBuilderHasServiceDefinitionWithTag('my_live_component', 'controller.service_arguments');
     }
@@ -82,7 +82,7 @@ final class LiveComponentTagPassTest extends AbstractCompilerPassTestCase
                 'route' => 'custom_route',
                 'method' => 'get',
                 'url_reference_type' => UrlGeneratorInterface::ABSOLUTE_URL,
-            ]
+            ],
         );
     }
 
