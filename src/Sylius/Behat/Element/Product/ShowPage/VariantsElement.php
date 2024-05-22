@@ -70,12 +70,12 @@ final class VariantsElement extends Element implements VariantsElementInterface
     }
 
     public function hasProductVariantWithLowestPriceBeforeDiscountInChannel(
-        string $productVariantName,
+        string $productVariantCode,
         string $lowestPriceBeforeDiscount,
-        string $channelName,
+        string $channelCode,
     ): bool {
         /** @var NodeElement $variant */
-        $variant = $this->getDocument()->find('css', sprintf('[data-test-lowest-price-before-the-discount="%s.%s"]', $productVariantName, $channelName));
+        $variant = $this->getDocument()->find('css', sprintf('[data-test-lowest-price-before-the-discount="%s.%s"]', $productVariantCode, $channelCode));
 
         if ($variant) {
             return $variant->getText() === $lowestPriceBeforeDiscount;
