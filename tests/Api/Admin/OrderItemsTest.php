@@ -60,4 +60,36 @@ final class OrderItemsTest extends JsonApiTestCase
 
         $this->assertResponse($response, 'admin/order_item/get_order_item_adjustments', Response::HTTP_OK);
     }
+
+    /** @test */
+    public function it_gets_adjustments_for_an_order_item_with_type_filter(): void
+    {
+        $fixtures = $this->loadFixturesFromFiles([
+            'authentication/api_administrator.yaml',
+            'channel.yaml',
+            'order/order_with_item.yaml',
+            'country.yaml',
+            'shipping_method.yaml',
+            'payment_method.yaml',
+            'product/product.yaml',
+            'product/product_variant.yaml',
+            'tax_category.yaml',
+            'shipping_category.yaml',
+            'customer.yaml',
+        ]);
+
+        $orderItem = $fixtures['order_item'];
+        $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
+
+        $this->client->request(
+            method: 'GET',
+            uri: '/api/v2/admin/order-items/' . $orderItem->getId() . '/adjustments',
+            parameters: ['type' => 'order_promotion'],
+            server: $header,
+        );
+
+        $response = $this->client->getResponse();
+
+        $this->assertResponse($response, 'admin/order_item/get_order_item_adjustments_with_type_filter', Response::HTTP_OK);
+    }
 }

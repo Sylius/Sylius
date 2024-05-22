@@ -50,6 +50,9 @@
         </uriVariables>
         <operations>
             <operation class="ApiPlatform\Metadata\GetCollection" provider="sylius_api.state_provider.recursive_adjustments.order">
+                <parameters>
+                    <parameter key="type" />
+                </parameters>
                 <normalizationContext>
                     <values>
                         <value name="groups">
@@ -69,6 +72,9 @@
         </uriVariables>
         <operations>
             <operation class="ApiPlatform\Metadata\GetCollection" provider="sylius_api.state_provider.recursive_adjustments.order_item">
+                <parameters>
+                    <parameter key="type" />
+                </parameters>
                 <normalizationContext>
                     <values>
                         <value name="groups">
@@ -126,6 +132,9 @@
         </uriVariables>
         <operations>
             <operation class="ApiPlatform\Metadata\GetCollection" provider="sylius_api.state_provider.recursive_adjustments.order">
+                <parameters>
+                    <parameter key="type" />
+                </parameters>
                 <normalizationContext>
                     <values>
                         <value name="groups">
@@ -146,6 +155,9 @@
         </uriVariables>
         <operations>
             <operation class="ApiPlatform\Metadata\GetCollection" provider="sylius_api.state_provider.shop.order_item_adjustments">
+                <parameters>
+                    <parameter key="type" />
+                </parameters>
                 <normalizationContext>
                     <values>
                         <value name="groups">

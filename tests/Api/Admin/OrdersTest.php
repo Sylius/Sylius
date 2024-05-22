@@ -50,4 +50,27 @@ final class OrdersTest extends JsonApiTestCase
 
         $this->assertResponseSuccessful('admin/order/get_adjustments_for_a_given_order');
     }
+
+    /** @test */
+    public function it_gets_adjustments_for_order_with_type_filter(): void
+    {
+        $this->loadFixturesFromFiles([
+            'authentication/api_administrator.yaml',
+            'channel.yaml',
+            'cart.yaml',
+            'country.yaml',
+            'shipping_method.yaml',
+            'payment_method.yaml',
+            'cart/promotion.yaml',
+        ]);
+
+        $this->placeOrder(self::TEST_TOKEN_VALUE);
+
+        $this->requestGet(
+            uri: sprintf('/api/v2/admin/orders/%s/adjustments', self::TEST_TOKEN_VALUE),
+            queryParameters: ['type' => 'order_promotion'],
+        );
+
+        $this->assertResponseSuccessful('admin/order/get_adjustments_for_a_given_order_with_type_filter');
+    }
 }

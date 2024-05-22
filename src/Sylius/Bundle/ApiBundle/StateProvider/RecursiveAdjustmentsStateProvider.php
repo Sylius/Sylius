@@ -48,6 +48,6 @@ final readonly class RecursiveAdjustmentsStateProvider implements ProviderInterf
             throw new \RuntimeException(sprintf('Adjustable with %s="%s" not found.', $this->identifier, $identifier));
         }
 
-        return $adjustable->getAdjustmentsRecursively();
+        return $adjustable->getAdjustmentsRecursively($context['request']->query->get('type'));
     }
 }
