@@ -20,9 +20,7 @@ use Symfony\UX\LiveComponent\Form\Type\LiveCollectionType;
 
 final class ProductType extends AbstractType
 {
-    /**
-     * @param array<string, mixed> $options
-     */
+    /** @param array<string, mixed> $options */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder

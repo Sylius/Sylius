@@ -19,6 +19,7 @@ use Sylius\Component\Addressing\Model\CountryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\CountryType as SymfonyCountryType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
@@ -49,7 +50,7 @@ final class CountryType extends AbstractType
             }
 
             $form = $event->getForm();
-            $form->add('code', \Symfony\Component\Form\Extension\Core\Type\CountryType::class, $options);
+            $form->add('code', SymfonyCountryType::class, $options);
         });
 
         $builder
@@ -73,6 +74,11 @@ final class CountryType extends AbstractType
         return BaseCountryType::class;
     }
 
+    public function getBlockPrefix(): string
+    {
+        return 'sylius_admin_country';
+    }
+
     private function getCountryName(string $code): string
     {
         return Countries::getName($code);
@@ -91,10 +97,5 @@ final class CountryType extends AbstractType
         }
 
         return $availableCountries;
-    }
-
-    public function getBlockPrefix(): string
-    {
-        return 'sylius_admin_country';
     }
 }

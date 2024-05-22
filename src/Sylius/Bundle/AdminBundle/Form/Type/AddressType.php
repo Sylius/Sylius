@@ -70,7 +70,8 @@ final class AddressType extends AbstractType
                         'auto_initialize' => false,
                     ]);
                 }
-            });
+            })
+        ;
 
         $builder->addEventListener(
             FormEvents::SUBMIT,

@@ -55,23 +55,21 @@ final class CatalogPromotionScopeType extends AbstractType
         return BaseCatalogPromotionScopeType::class;
     }
 
-    private function addScopeToForm(FormEvent $event): void
-    {
-        $data = $event->getData();
-
-        if ($data === null) {
-            return;
-        }
-        $form = $event->getForm();
-
-        $dataType = $data instanceof CatalogPromotionScopeInterface ? $data->getType() : $data['type'];
-
-        $scopeConfigurationType = $this->scopeConfigurationTypes[$dataType];
-        $form->add('configuration', $scopeConfigurationType);
-    }
-
     public function getBlockPrefix(): string
     {
         return 'sylius_admin_catalog_promotion_scope';
+    }
+
+    private function addScopeToForm(FormEvent $event): void
+    {
+        $data = $event->getData();
+        if ($data === null) {
+            return;
+        }
+        $dataType = $data instanceof CatalogPromotionScopeInterface ? $data->getType() : $data['type'];
+        $scopeConfigurationType = $this->scopeConfigurationTypes[$dataType];
+
+        $form = $event->getForm();
+        $form->add('configuration', $scopeConfigurationType);
     }
 }
