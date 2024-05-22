@@ -285,6 +285,10 @@
             <tag name="form.type" />
         </service>
 
+        <service id="sylius_admin.form.type.shipment_ship" class="Sylius\Bundle\AdminBundle\Form\Type\ShipmentShipType" >
+            <tag name="form.type" />
+        </service>
+
         <service id="sylius_admin.form.type.tax_category" class="Sylius\Bundle\AdminBundle\Form\Type\TaxCategoryType" >
             <tag name="form.type" />
         </service>
