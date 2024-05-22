@@ -174,7 +174,7 @@ volumes:
     -
         name: mysql-data
         size: 1Gi
-        type: disk
+        type: network
     -
         name: public-media
         size: 1Gi
