@@ -28,8 +28,8 @@ interface VariantsElementInterface
     ): bool;
 
     public function hasProductVariantWithLowestPriceBeforeDiscountInChannel(
-        string $productVariantName,
+        string $productVariantCode,
         string $lowestPriceBeforeDiscount,
-        string $channelName,
+        string $channelCode,
     ): bool;
 }
