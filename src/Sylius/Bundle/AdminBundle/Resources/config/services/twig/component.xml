@@ -135,7 +135,7 @@
             class="Sylius\Bundle\AdminBundle\Twig\Component\PaymentMethod\FormComponent"
         >
             <argument type="service" id="form.factory" />
-            <argument>Sylius\Bundle\PaymentBundle\Form\Type\PaymentMethodType</argument>
+            <argument>Sylius\Bundle\AdminBundle\Form\Type\PaymentMethodType</argument>
 
             <tag
                 name="twig.component"
@@ -197,7 +197,7 @@
             class="Sylius\Bundle\AdminBundle\Twig\Component\Promotion\FormComponent"
         >
             <argument type="service" id="form.factory" />
-            <argument>Sylius\Bundle\PromotionBundle\Form\Type\PromotionType</argument>
+            <argument>Sylius\Bundle\AdminBundle\Form\Type\PromotionType</argument>
 
             <tag
                 name="sylius.live_component"
