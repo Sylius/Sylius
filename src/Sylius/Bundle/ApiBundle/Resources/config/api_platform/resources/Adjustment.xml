@@ -45,7 +45,7 @@
             <uriVariable parameterName="tokenValue" fromClass="Sylius\Component\Core\Model\Order" fromProperty="adjustments" />
         </uriVariables>
         <operations>
-            <operation class="ApiPlatform\Metadata\GetCollection" provider="sylius_api.state_provider.recursive_adjustments.order">
+            <operation class="ApiPlatform\Metadata\GetCollection" provider="sylius_api.state_provider.order_recursive_adjustments">
                 <parameters>
                     <parameter key="type" />
                 </parameters>
@@ -67,7 +67,7 @@
             <uriVariable parameterName="id" fromClass="Sylius\Component\Core\Model\OrderItem" fromProperty="adjustments" />
         </uriVariables>
         <operations>
-            <operation class="ApiPlatform\Metadata\GetCollection" provider="sylius_api.state_provider.recursive_adjustments.order_item">
+            <operation class="ApiPlatform\Metadata\GetCollection" provider="sylius_api.state_provider.order_item_recursive_adjustments">
                 <parameters>
                     <parameter key="type" />
                 </parameters>
@@ -127,7 +127,7 @@
             <uriVariable parameterName="tokenValue" fromClass="Sylius\Component\Core\Model\Order" fromProperty="adjustments" />
         </uriVariables>
         <operations>
-            <operation class="ApiPlatform\Metadata\GetCollection" provider="sylius_api.state_provider.recursive_adjustments.order">
+            <operation class="ApiPlatform\Metadata\GetCollection" provider="sylius_api.state_provider.order_recursive_adjustments">
                 <parameters>
                     <parameter key="type" />
                 </parameters>

@@ -16,13 +16,13 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
 >
     <services>
-        <service id="sylius_api.state_provider.recursive_adjustments.order" class="Sylius\Bundle\ApiBundle\StateProvider\RecursiveAdjustmentsStateProvider">
+        <service id="sylius_api.state_provider.order_recursive_adjustments" class="Sylius\Bundle\ApiBundle\StateProvider\RecursiveAdjustmentsProvider">
             <argument type="service" id="sylius.repository.order" />
             <argument type="string">tokenValue</argument>
             <tag name="api_platform.state_provider" />
         </service>
 
-        <service id="sylius_api.state_provider.recursive_adjustments.order_item" class="Sylius\Bundle\ApiBundle\StateProvider\RecursiveAdjustmentsStateProvider">
+        <service id="sylius_api.state_provider.order_item_recursive_adjustments" class="Sylius\Bundle\ApiBundle\StateProvider\RecursiveAdjustmentsProvider">
             <argument type="service" id="sylius.repository.order_item" />
             <argument type="string">id</argument>
             <tag name="api_platform.state_provider" />

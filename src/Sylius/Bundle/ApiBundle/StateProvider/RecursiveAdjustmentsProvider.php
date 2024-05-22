@@ -20,7 +20,7 @@ use Sylius\Component\Core\Model\AdjustmentInterface;
 use Sylius\Component\Order\Model\RecursiveAdjustmentsAwareInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
-final readonly class RecursiveAdjustmentsStateProvider implements ProviderInterface
+final readonly class RecursiveAdjustmentsProvider implements ProviderInterface
 {
     public function __construct(
         private RepositoryInterface $repository,
