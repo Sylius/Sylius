@@ -13,7 +13,8 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\AdminBundle\Form\Extension;
 
-use Sylius\Bundle\PromotionBundle\Form\Type\CatalogPromotionActionType;
+use Sylius\Bundle\AdminBundle\Form\Type\CatalogPromotionActionType;
+use Sylius\Bundle\PromotionBundle\Form\Type\CatalogPromotionActionType as BaseCatalogPromotionActionType;
 use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -21,8 +22,9 @@ use Symfony\Component\Form\FormBuilderInterface;
 trigger_deprecation(
     'sylius/admin-bundle',
     '1.14',
-    'The "%s" class is deprecated and will be removed in Sylius 2.0.',
+    'The "%s" class is deprecated and will be removed in Sylius 2.0. Starting with this version, form types will be extended using the parent form like in %s.',
     CatalogPromotionActionTypeExtension::class,
+    CatalogPromotionActionType::class,
 );
 
 /** @deprecated since Sylius 1.14 and will be removed in Sylius 2.0. */
@@ -35,6 +37,6 @@ final class CatalogPromotionActionTypeExtension extends AbstractTypeExtension
 
     public static function getExtendedTypes(): iterable
     {
-        yield CatalogPromotionActionType::class;
+        yield BaseCatalogPromotionActionType::class;
     }
 }
