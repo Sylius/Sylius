@@ -25,9 +25,9 @@ interface PricingElementInterface
 
     public function getCatalogPromotionLinksForChannel(string $channelName): array;
 
-    public function getLowestPriceBeforeDiscountForChannel(string $channelName): string;
+    public function getLowestPriceBeforeDiscountForChannel(string $channelCode): string;
 
-    public function getSimpleProductPricingRowForChannel(string $channelName): NodeElement;
+    public function getSimpleProductPricingRowForChannel(string $channelCode): NodeElement;
 
-    public function getVariantPricingRowForChannel(string $variantName, string $channelName): NodeElement;
+    public function getVariantPricingRowForChannel(string $variantCode, string $channelCode): NodeElement;
 }
