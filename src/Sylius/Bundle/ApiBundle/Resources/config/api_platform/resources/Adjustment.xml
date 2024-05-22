@@ -29,6 +29,14 @@
                     </values>
                 </normalizationContext>
             </operation>
+
+            <operation
+                class="ApiPlatform\Metadata\Get"
+                uriTemplate="/shop/adjustments/{id}"
+                controller="ApiPlatform\Action\NotFoundAction"
+                read="false"
+                output="false"
+            />
         </operations>
     </resource>
 

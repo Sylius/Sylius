@@ -18,6 +18,7 @@ parameters:
         - "%sylius.security.new_api_route%/admin/promotion-rules/{id}"
         - "%sylius.security.new_api_route%/admin/shipping-method-rules/{id}"
         - "%sylius.security.new_api_route%/admin/shop-users/{id}"
+        - "%sylius.security.new_api_route%/shop/adjustments/{id}"
     sylius.security.new_api_route: "/api/v2"
     sylius.security.new_api_regex: "^%sylius.security.new_api_route%"
     sylius.security.new_api_admin_route: "%sylius.security.new_api_route%/admin"
