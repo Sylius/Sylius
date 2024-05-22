@@ -1,4 +1,4 @@
-{% import '@SyliusAdmin/shared/helper/money.html.twig' as _money %}
+{% import '@SyliusAdmin/shared/helper/money.html.twig' as money %}
 
 {% set order = hookable_metadata.context.resource %}
 
@@ -17,7 +17,7 @@
             <div class="text-muted text-md-end">
                 {% for label, amount in promotion_adjustments  %}
                     <div {{ sylius_test_html_attribute('promotion', label) }}>
-                        {{ label }}: <span {{ sylius_test_html_attribute('discount') }}>{{ _money.format(amount, order.currencyCode) }}</span>
+                        {{ label }}: <span {{ sylius_test_html_attribute('discount') }}>{{ money.format(amount, order.currencyCode) }}</span>
                     </div>
                 {% endfor %}
             </div>
@@ -27,7 +27,7 @@
         {% if total_adjustments == 0 %}
             <p>{{ 'sylius.ui.no_promotion'|trans }}</p>
         {% else %}
-            {{ _money.format(total_adjustments, order.currencyCode) }}
+            {{ money.format(total_adjustments, order.currencyCode) }}
         {% endif %}
     </td>
 </tr>
