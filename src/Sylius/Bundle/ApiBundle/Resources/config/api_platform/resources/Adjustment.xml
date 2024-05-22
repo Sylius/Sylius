@@ -29,18 +29,6 @@
                     </values>
                 </normalizationContext>
             </operation>
-
-            <operation class="ApiPlatform\Metadata\Get" uriTemplate="/shop/adjustments/{id}">
-                <normalizationContext>
-                    <values>
-                        <value name="groups">
-                            <values>
-                                <value>sylius:shop:adjustment:show</value>
-                            </values>
-                        </value>
-                    </values>
-                </normalizationContext>
-            </operation>
         </operations>
     </resource>
 
