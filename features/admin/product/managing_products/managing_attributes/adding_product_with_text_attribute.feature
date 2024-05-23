@@ -16,6 +16,7 @@ Feature: Adding a new product with text attribute
         When I want to create a new configurable product
         And I specify its code as "44_MAGNUM"
         And I name it "44 Magnum" in "English (United States)"
+        And I generate its slug in "English (United States)"
         And I add the "Gun caliber" attribute
         And I set the "Gun caliber" attribute value to "11 mm" in "English (United States)"
         And I add it
@@ -28,6 +29,7 @@ Feature: Adding a new product with text attribute
         When I want to create a new configurable product
         And I specify its code as "44_MAGNUM"
         And I name it "44 Magnum" in "English (United States)"
+        And I generate its slug in "English (United States)"
         And I add the "Author" attribute to it
         And I set its non-translatable "Author" attribute to "Colt"
         And I add it
@@ -40,6 +42,7 @@ Feature: Adding a new product with text attribute
         When I want to create a new configurable product
         And I specify its code as "44_MAGNUM"
         And I name it "44 Magnum" in "English (United States)"
+        And I generate its slug in "English (United States)"
         And I add the "Gun caliber" attribute
         And I set the "Gun caliber" attribute value to "11 mm" in "English (United States)"
         And I add the "Overall length" attribute

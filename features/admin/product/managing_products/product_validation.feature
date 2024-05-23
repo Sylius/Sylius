@@ -35,6 +35,7 @@ Feature: Products validation
         When I want to create a new simple product
         And I specify its code as "AWESOME_GAME"
         And I name it "Dice Brewing" in "English (United States)"
+        And I generate its slug in "English (United States)"
         And I set its price to "$10.00" for "Web" channel
         And I try to add it
         Then I should be notified that code has to be unique
@@ -71,7 +72,7 @@ Feature: Products validation
         Then I should be notified that name is required
         And product with code "BOARD_DICE_BREWING" should not be added
 
-    @ui @mink:chromedriver @no-api
+    @ui @no-api
     Scenario: Adding a new simple product without specifying its price for every channel
         Given the store operates on another channel named "Web-GB"
         When I want to create a new simple product
@@ -80,7 +81,7 @@ Feature: Products validation
         And I make it available in channel "Web-GB"
         And I set its price to "$10.00" for "Web" channel
         And I name it "Dice Brewing" in "English (United States)"
-        And I generate its slug in "English (United States)"
+        And I set its slug to "dice-brewing"
         And I try to add it
         Then I should be notified that price must be defined for every channel
         And product with code "BOARD_DICE_BREWING" should not be added
@@ -168,7 +169,7 @@ Feature: Products validation
         Then I should be notified that slug has to be unique
         And product with code "7-WONDERS-BABEL" should not be added
 
-    @todo @ui @javascript @api
+    @todo @ui @mink:chromedriver @api
     Scenario: Trying to add a new product with a text attribute without specifying its value in default locale
         When I want to create a new configurable product
         And I specify its code as "X-18-MUG"
@@ -179,7 +180,7 @@ Feature: Products validation
         Then I should be notified that I have to define the "Mug material" attribute in "English (United States)"
         And product with code "X-18-MUG" should not be added
 
-    @todo @ui @javascript @api
+    @todo @ui @mink:chromedriver @api
     Scenario: Trying to add a new product with a text attribute without specifying its value in additional locale with proper length
         When I want to create a new configurable product
         And I specify its code as "X-18-MUG"

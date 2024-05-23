@@ -17,6 +17,7 @@ Feature: Adding text attributes in different locales to a product
         When I want to create a new configurable product
         And I specify its code as "mug"
         And I name it "PHP Mug" in "English (United States)"
+        And I generate its slug in "English (United States)"
         And I add the "Mug material" attribute
         And I set the "Mug material" attribute value to "Wood" in "English (United States)"
         And I set the "Mug material" attribute value to "Drewno" in "Polish (Poland)"
