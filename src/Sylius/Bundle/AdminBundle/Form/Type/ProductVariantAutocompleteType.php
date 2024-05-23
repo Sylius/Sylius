@@ -19,7 +19,7 @@ use Symfony\UX\Autocomplete\Form\AsEntityAutocompleteField;
 
 #[AsEntityAutocompleteField(
     alias: 'sylius_admin_product_variant',
-    route: 'sylius_admin_entity_autocomplete_admin',
+    route: 'sylius_admin_entity_autocomplete',
 )]
 final class ProductVariantAutocompleteType extends AbstractType
 {

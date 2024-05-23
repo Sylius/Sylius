@@ -20,7 +20,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\UX\Autocomplete\Form\AsEntityAutocompleteField;
 use Symfony\UX\Autocomplete\Form\BaseEntityAutocompleteType;
 
-#[AsEntityAutocompleteField(route: 'sylius_admin_entity_autocomplete_admin')]
+#[AsEntityAutocompleteField(route: 'sylius_admin_entity_autocomplete')]
 final class UxAutocompleteFilterType extends AbstractType
 {
     public function configureOptions(OptionsResolver $resolver): void
