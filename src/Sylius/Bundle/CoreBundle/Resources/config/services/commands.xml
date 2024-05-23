@@ -55,7 +55,7 @@
             <tag name="console.command" />
         </service>
 
-        <service id="Sylius\Bundle\CoreBundle\Command\ShowPlusInfoCommand">
+        <service id="Sylius\Bundle\CoreBundle\Console\Command\ShowPlusInfoCommand">
             <tag name="console.command" />
         </service>
     </services>
