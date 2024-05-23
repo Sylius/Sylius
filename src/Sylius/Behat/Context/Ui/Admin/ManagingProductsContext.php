@@ -292,6 +292,16 @@ final class ManagingProductsContext implements Context
     }
 
     /**
+     * @When I filter them by :taxonName main taxon
+     */
+    public function iFilterThemByMainTaxon($taxonName)
+    {
+        $this->indexPage->filterByMainTaxon($taxonName);
+
+        $this->indexPage->filter();
+    }
+
+    /**
      * @When I check (also) the :productName product
      */
     public function iCheckTheProduct(string $productName): void

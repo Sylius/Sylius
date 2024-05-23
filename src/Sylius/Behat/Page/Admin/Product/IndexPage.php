@@ -50,6 +50,17 @@ class IndexPage extends CrudIndexPage implements IndexPageInterface
         $this->waitForFormUpdate();
     }
 
+    public function filterByMainTaxon(string $taxonName): void
+    {
+        $this->autocompleteHelper->selectByName(
+            $this->getDriver(),
+            $this->getElement('main_taxon_filter')->getXpath(),
+            $taxonName,
+        );
+
+        $this->waitForFormUpdate();
+    }
+
     public function setFilterSearch(string $phrase): void
     {
         $this->getElement('search_filter')->setValue($phrase);
@@ -104,6 +115,7 @@ class IndexPage extends CrudIndexPage implements IndexPageInterface
             'enabled_filter' => '#criteria_enabled',
             'first_product' => '.table > tbody > tr:first-child',
             'last_product' => '.table > tbody > tr:last-child',
+            'main_taxon_filter' => '#criteria_main_taxon',
             'page_number' => '.sylius-grid-nav__pagination .active',
             'pagination_button' => '.sylius-grid-nav__pagination a.item:contains("%page%")',
             'pagination_buttons' => '.sylius-grid-nav__pagination',
