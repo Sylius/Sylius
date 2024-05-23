@@ -45,6 +45,6 @@ final class ForProductsScopeConfigurationType extends AbstractType
 
     public function getBlockPrefix(): string
     {
-        return 'sylius_catalog_promotion_scope_for_products_configuration';
+        return 'sylius_admin_catalog_promotion_scope_for_products_configuration';
     }
 }
