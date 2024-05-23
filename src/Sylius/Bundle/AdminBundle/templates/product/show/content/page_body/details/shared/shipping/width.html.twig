@@ -4,7 +4,7 @@
     <div class="col-12 col-md-4 fw-bold">{{ 'sylius.ui.width'|trans }}:</div>
     <div class="col-12 col-md-8">
         {% if variant.width is null %}
-            {{ 'sylius.ui.no_width'|trans }}
+            <i>{{ 'sylius.ui.no_width'|trans }}</i>
         {% else %}
             {{ variant.width }}
         {% endif %}
