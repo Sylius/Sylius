@@ -184,6 +184,7 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
             'enabled_filter' => '#criteria_enabled',
             'filter' => '[data-test-filter]',
             'filters_toggle' => '.accordion-button',
+            'filters_form' => '[data-test-filters-form]',
             'table' => '.table',
         ]);
     }

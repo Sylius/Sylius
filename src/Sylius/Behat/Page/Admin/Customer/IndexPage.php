@@ -74,7 +74,6 @@ class IndexPage extends BaseIndexPage implements IndexPageInterface
         return array_merge(parent::getDefinedElements(), [
             'filter_group' => '#criteria_group',
             'filter_search' => '#criteria_search_value',
-            'filters_form' => '[data-test-filters-form]',
         ]);
     }
 
