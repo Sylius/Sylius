@@ -61,6 +61,17 @@ sylius_grid:
                         class: "%sylius.model.channel.class%"
                     options:
                         field: "channels.id"
+                taxon:
+                    type: ux_translatable_autocomplete
+                    label: sylius.ui.taxon
+                    form_options:
+                        multiple: false
+                        extra_options:
+                            class: '%sylius.model.taxon.class%'
+                            translation_fields: [name]
+                            choice_label: fullname
+                    options:
+                        fields: [productTaxons.taxon.id]
             actions:
                 main:
                     create:

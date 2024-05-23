@@ -17,6 +17,7 @@ use Behat\Mink\Session;
 use Sylius\Behat\Page\Admin\Crud\IndexPage as CrudIndexPage;
 use Sylius\Behat\Service\Accessor\TableAccessorInterface;
 use Sylius\Behat\Service\Checker\ImageExistenceCheckerInterface;
+use Sylius\Behat\Service\Helper\AutocompleteHelperInterface;
 use Symfony\Component\Routing\RouterInterface;
 
 class IndexPage extends CrudIndexPage implements IndexPageInterface
@@ -28,6 +29,7 @@ class IndexPage extends CrudIndexPage implements IndexPageInterface
         TableAccessorInterface $tableAccessor,
         string $routeName,
         private ImageExistenceCheckerInterface $imageExistenceChecker,
+        private AutocompleteHelperInterface $autocompleteHelper,
     ) {
         parent::__construct($session, $minkParameters, $router, $tableAccessor, $routeName);
     }
@@ -39,7 +41,13 @@ class IndexPage extends CrudIndexPage implements IndexPageInterface
 
     public function filterByTaxon(string $taxonName): void
     {
-        $this->getElement('taxon_filter', ['%taxon%' => $taxonName])->click();
+        $this->autocompleteHelper->selectByName(
+            $this->getDriver(),
+            $this->getElement('taxon_filter')->getXpath(),
+            $taxonName,
+        );
+
+        $this->waitForFormUpdate();
     }
 
     public function setFilterSearch(string $phrase): void
@@ -100,7 +108,16 @@ class IndexPage extends CrudIndexPage implements IndexPageInterface
             'pagination_button' => '.sylius-grid-nav__pagination a.item:contains("%page%")',
             'pagination_buttons' => '.sylius-grid-nav__pagination',
             'search_filter' => '#criteria_search_value',
-            'taxon_filter' => '.sylius-tree__item a:contains("%taxon%")',
+            'taxon_filter' => '#criteria_taxon',
         ]);
+    }
+
+    private function waitForFormUpdate(): void
+    {
+        $form = $this->getElement('filters_form');
+        sleep(1); // we need to sleep, as sometimes the check below is executed faster than the form sets the busy attribute
+        $form->waitFor(1500, function () use ($form) {
+            return !$form->hasAttribute('busy');
+        });
     }
 }
