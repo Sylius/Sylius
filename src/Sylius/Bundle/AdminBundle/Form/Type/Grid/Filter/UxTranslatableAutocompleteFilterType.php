@@ -1,30 +1,21 @@
 <?php
 
-/*
- * This file is part of the Sylius package.
- *
- * (c) Sylius Sp. z o.o.
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
-
 declare(strict_types=1);
 
 namespace Sylius\Bundle\AdminBundle\Form\Type\Grid\Filter;
 
+use Sylius\Bundle\AdminBundle\Form\Type\TranslatableAutocompleteType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\OptionsResolver\Exception\MissingOptionsException;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\UX\Autocomplete\Form\AsEntityAutocompleteField;
-use Symfony\UX\Autocomplete\Form\BaseEntityAutocompleteType;
 
 #[AsEntityAutocompleteField(
-    alias: 'sylius_admin_grid_filter_autocomplete',
+    alias: 'sylius_admin_grid_filter_translatable_autocomplete',
     route: 'sylius_admin_entity_autocomplete',
 )]
-final class UxAutocompleteFilterType extends AbstractType
+final class UxTranslatableAutocompleteFilterType extends AbstractType
 {
     public function configureOptions(OptionsResolver $resolver): void
     {
@@ -43,12 +34,28 @@ final class UxAutocompleteFilterType extends AbstractType
             ->setDefault('choice_label', function (Options $options, $label): string {
                 return $options['extra_options']['choice_label'] ?? $label;
             })
+
+            // Translatable options passing
+            ->setDefault('entity_fields', function (Options $options, array $entityFields) {
+                $extraOptions = $options['extra_options'];
+                if (!array_key_exists('entity_fields', $extraOptions)) {
+                    return $entityFields;
+                }
+
+                return $extraOptions['entity_fields'];
+            })
+            ->setDefault('translation_fields', function (Options $options, array $translationFields) {
+                return $options['extra_options']['translation_fields'] ?? $translationFields;
+            })
+            ->setDefault('locale_code', function (Options $options, string $localeCode) {
+                return $options['extra_options']['locale_code'] ?? $localeCode;
+            })
         ;
     }
 
     public function getParent(): string
     {
-        return BaseEntityAutocompleteType::class;
+        return TranslatableAutocompleteType::class;
     }
 
     public function getBlockPrefix(): string
