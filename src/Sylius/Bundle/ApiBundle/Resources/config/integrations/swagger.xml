@@ -33,10 +33,10 @@
             <tag name="sylius.open_api.modifier" />
         </service>
 
-<!--        <service id="Sylius\Bundle\ApiBundle\OpenApi\Documentation\PathHiderDocumentationModifier">-->
-<!--            <argument>%sylius.api.paths_to_hide%</argument>-->
-<!--            <tag name="sylius.open_api.modifier" />-->
-<!--        </service>-->
+        <service id="Sylius\Bundle\ApiBundle\OpenApi\Documentation\PathHiderDocumentationModifier">
+            <argument>%sylius.api.paths_to_hide%</argument>
+            <tag name="sylius.open_api.modifier" />
+        </service>
 
 <!--        <service id="Sylius\Bundle\ApiBundle\OpenApi\Documentation\AttributeTypeDocumentationModifier">-->
 <!--            <argument type="service" id="sylius.registry.attribute_type" />-->
