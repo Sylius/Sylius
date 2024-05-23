@@ -18,5 +18,9 @@
         <service id="sylius_admin.grid_filter.ux_autocomplete" class="Sylius\Component\Grid\Filter\EntityFilter">
             <tag name="sylius.grid_filter" type="ux_autocomplete" form-type="Sylius\Bundle\AdminBundle\Form\Type\Grid\Filter\UxAutocompleteFilterType" />
         </service>
+
+        <service id="sylius_admin.grid_filter.ux_translatable_autocomplete" class="Sylius\Component\Grid\Filter\EntityFilter">
+            <tag name="sylius.grid_filter" type="ux_translatable_autocomplete" form-type="Sylius\Bundle\AdminBundle\Form\Type\Grid\Filter\UxTranslatableAutocompleteFilterType" />
+        </service>
     </services>
 </container>
