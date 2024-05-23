@@ -14,6 +14,7 @@ Feature: Adding a new product with a float attribute
         When I want to create a new configurable product
         And I specify its code as "display_size"
         And I name it "Smartphone" in "English (United States)"
+        And I generate its slug in "English (United States)"
         And I add the "Display Size" attribute to it
         And I set its non-translatable "Display Size" attribute to 12.5
         And I add it
