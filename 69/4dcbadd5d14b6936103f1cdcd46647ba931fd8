@@ -1,0 +1,34 @@
+---------------------------------------------------------------------------
+
+by github-actions[bot] at 2024-05-14T13:35:25Z
+
+### [Bunnyshell](https://www.bunnyshell.com) Preview Environment deleted
+
+Available commands:
+  - `/bns:deploy` to redeploy the environment
+<!-- thollander/actions-comment-pull-request "bunnyshell-preview-env" -->
+
+---------------------------------------------------------------------------
+
+by TheMilek at 2024-05-15T06:47:53Z
+
+> I wonder if this PR shouldn't be opened against the 2.0 branch.
+
+Why?
+This PR is only AdminBundle targeted 🤔
+
+---------------------------------------------------------------------------
+
+by Rafikooo at 2024-05-15T11:20:28Z
+
+> > I wonder if this PR shouldn't be opened against the 2.0 branch.
+>
+> Why? This PR is only AdminBundle targeted 🤔
+
+I mean, these form changes are not necessarily related to `bootstrap-admin-panel`, but this branch will be merged into `2.0` so it's not a big deal.
+
+---------------------------------------------------------------------------
+
+by GSadee at 2024-05-23T05:42:25Z
+
+Thanks, Kamil! :1st_place_medal:
