@@ -44,4 +44,9 @@ final class UxAutocompleteFilterType extends AbstractType
     {
         return BaseEntityAutocompleteType::class;
     }
+
+    public function getBlockPrefix(): string
+    {
+        return 'sylius_admin_ux_entity_autocomplete';
+    }
 }

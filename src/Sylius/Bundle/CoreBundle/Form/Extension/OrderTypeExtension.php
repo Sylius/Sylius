@@ -17,27 +17,15 @@ use Sylius\Bundle\AddressingBundle\Form\Type\AddressType;
 use Sylius\Bundle\OrderBundle\Form\Type\OrderType;
 use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class OrderTypeExtension extends AbstractTypeExtension
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('shippingAddress', AddressType::class, [
-                'add_build_address_form_subscriber' => $options['add_build_address_form_subscriber'],
-            ])
-            ->add('billingAddress', AddressType::class, [
-                'add_build_address_form_subscriber' => $options['add_build_address_form_subscriber'],
-            ])
+            ->add('shippingAddress', AddressType::class)
+            ->add('billingAddress', AddressType::class)
         ;
-    }
-
-    public function configureOptions(OptionsResolver $resolver): void
-    {
-        parent::configureOptions($resolver);
-
-        $resolver->setDefaults(['add_build_address_form_subscriber' => true]);
     }
 
     public static function getExtendedTypes(): iterable

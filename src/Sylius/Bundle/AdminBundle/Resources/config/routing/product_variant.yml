@@ -27,6 +27,8 @@ sylius_admin_product_variant_create:
                     - expr:notFoundOnNull(service('sylius.repository.product').find($productId))
             template: "@SyliusAdmin/shared/crud/create.html.twig"
             grid: sylius_admin_product_variant
+            form:
+                type: Sylius\Bundle\AdminBundle\Form\Type\ProductVariantType
             section: admin
             redirect:
                 route: sylius_admin_product_variant_index
@@ -45,6 +47,8 @@ sylius_admin_product_variant_update:
         _sylius:
             template: "@SyliusAdmin/shared/crud/update.html.twig"
             grid: sylius_admin_product_variant
+            form:
+                type: Sylius\Bundle\AdminBundle\Form\Type\ProductVariantType
             section: admin
             redirect:
                 route: sylius_admin_product_variant_index

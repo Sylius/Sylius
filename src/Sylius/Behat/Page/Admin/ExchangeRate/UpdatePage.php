@@ -40,9 +40,9 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
-            'ratio' => '#sylius_exchange_rate_ratio',
-            'sourceCurrency' => '#sylius_exchange_rate_sourceCurrency',
-            'targetCurrency' => '#sylius_exchange_rate_targetCurrency',
+            'ratio' => '#sylius_admin_exchange_rate_ratio',
+            'sourceCurrency' => '#sylius_admin_exchange_rate_sourceCurrency',
+            'targetCurrency' => '#sylius_admin_exchange_rate_targetCurrency',
         ]);
     }
 }

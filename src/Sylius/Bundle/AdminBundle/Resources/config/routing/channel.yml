@@ -6,6 +6,8 @@ sylius_admin_channel:
         except: ['show']
         redirect: update
         grid: sylius_admin_channel
+        form:
+            type: Sylius\Bundle\AdminBundle\Form\Type\ChannelType
         permission: true
         vars:
             all:

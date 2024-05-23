@@ -28,7 +28,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     public function nameIt(string $name, string $languageCode): void
     {
         $this->getDocument()->fillField(
-            sprintf('sylius_payment_method_translations_%s_name', $languageCode),
+            sprintf('sylius_admin_payment_method_translations_%s_name', $languageCode),
             $name,
         );
     }
@@ -46,7 +46,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     public function describeIt(string $description, string $languageCode): void
     {
         $this->getDocument()->fillField(
-            sprintf('sylius_payment_method_translations_%s_description', $languageCode),
+            sprintf('sylius_admin_payment_method_translations_%s_description', $languageCode),
             $description,
         );
     }
@@ -54,7 +54,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     public function setInstructions(string $instructions, string $languageCode): void
     {
         $this->getDocument()->fillField(
-            sprintf('sylius_payment_method_translations_%s_instructions', $languageCode),
+            sprintf('sylius_admin_payment_method_translations_%s_instructions', $languageCode),
             $instructions,
         );
     }
@@ -106,13 +106,13 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     {
         return array_merge(parent::getDefinedElements(), [
             'cancel_button' => '[data-test-cancel-changes-button]',
-            'code' => '#sylius_payment_method_code',
-            'enabled' => '#sylius_payment_method_enabled',
-            'gateway_name' => '#sylius_payment_method_gatewayConfig_gatewayName',
-            'name' => '#sylius_payment_method_translations_en_US_name',
-            'paypal_password' => '#sylius_payment_method_gatewayConfig_config_password',
-            'stripe_secret_key' => '#sylius_payment_method_gatewayConfig_config_secret_key',
-            'stripe_publishable_key' => '#sylius_payment_method_gatewayConfig_config_publishable_key',
+            'code' => '#sylius_admin_payment_method_code',
+            'enabled' => '#sylius_admin_payment_method_enabled',
+            'gateway_name' => '#sylius_admin_payment_method_gatewayConfig_gatewayName',
+            'name' => '#sylius_admin_payment_method_translations_en_US_name',
+            'paypal_password' => '#sylius_admin_payment_method_gatewayConfig_config_password',
+            'stripe_secret_key' => '#sylius_admin_payment_method_gatewayConfig_config_secret_key',
+            'stripe_publishable_key' => '#sylius_admin_payment_method_gatewayConfig_config_publishable_key',
         ]);
     }
 }

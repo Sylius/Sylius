@@ -6,6 +6,8 @@ sylius_admin_locale:
         except: ['show', 'delete']
         redirect: index
         grid: sylius_admin_locale
+        form:
+            type: Sylius\Bundle\AdminBundle\Form\Type\LocaleType
         permission: true
         vars:
             all:

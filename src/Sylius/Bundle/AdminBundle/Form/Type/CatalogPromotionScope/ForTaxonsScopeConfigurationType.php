@@ -11,16 +11,16 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\AdminBundle\Form\Extension\CatalogPromotionScope;
+namespace Sylius\Bundle\AdminBundle\Form\Type\CatalogPromotionScope;
 
 use Sylius\Bundle\AdminBundle\Form\Type\TaxonAutocompleteType;
-use Sylius\Bundle\CoreBundle\Form\Type\CatalogPromotionScope\ForTaxonsScopeConfigurationType;
+use Sylius\Bundle\CoreBundle\Form\Type\CatalogPromotionScope\ForTaxonsScopeConfigurationType as BaseForTaxonsScopeConfigurationType;
 use Sylius\Component\Core\Model\TaxonInterface;
-use Symfony\Component\Form\AbstractTypeExtension;
+use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\DataTransformerInterface;
 use Symfony\Component\Form\FormBuilderInterface;
 
-final class ForTaxonsScopeConfigurationTypeExtension extends AbstractTypeExtension
+final class ForTaxonsScopeConfigurationType extends AbstractType
 {
     /** @param DataTransformerInterface<TaxonInterface, string|null> $taxonsToCodesTransformer */
     public function __construct(private readonly DataTransformerInterface $taxonsToCodesTransformer)
@@ -38,8 +38,13 @@ final class ForTaxonsScopeConfigurationTypeExtension extends AbstractTypeExtensi
         ;
     }
 
-    public static function getExtendedTypes(): iterable
+    public function getParent(): string
     {
-        yield ForTaxonsScopeConfigurationType::class;
+        return BaseForTaxonsScopeConfigurationType::class;
+    }
+
+    public function getBlockPrefix(): string
+    {
+        return 'sylius_admin_catalog_promotion_scope_taxon_configuration';
     }
 }

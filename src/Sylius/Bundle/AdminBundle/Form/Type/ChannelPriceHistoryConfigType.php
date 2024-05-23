@@ -11,24 +11,23 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\AdminBundle\Form\Extension;
+namespace Sylius\Bundle\AdminBundle\Form\Type;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Sylius\Bundle\AdminBundle\Form\DataTransformer\ResourceToIdentifierTransformer;
-use Sylius\Bundle\AdminBundle\Form\Type\TaxonAutocompleteType;
-use Sylius\Bundle\CoreBundle\Form\Type\ChannelPriceHistoryConfigType;
+use Sylius\Bundle\CoreBundle\Form\Type\ChannelPriceHistoryConfigType as BaseChannelPriceHistoryConfigType;
 use Sylius\Bundle\ResourceBundle\Form\DataTransformer\RecursiveTransformer;
 use Sylius\Component\Core\Model\ChannelPriceHistoryConfigInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Taxonomy\Repository\TaxonRepositoryInterface;
-use Symfony\Component\Form\AbstractTypeExtension;
+use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\DataMapperInterface;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\ReversedTransformer;
 use Webmozart\Assert\Assert;
 
-final class ChannelPriceHistoryConfigTypeExtension extends AbstractTypeExtension implements DataMapperInterface
+final class ChannelPriceHistoryConfigType extends AbstractType implements DataMapperInterface
 {
     /** @param TaxonRepositoryInterface<TaxonInterface> $taxonRepository */
     public function __construct(
@@ -63,9 +62,9 @@ final class ChannelPriceHistoryConfigTypeExtension extends AbstractTypeExtension
         $builder->setDataMapper($this);
     }
 
-    public static function getExtendedTypes(): iterable
+    public function getParent(): string
     {
-        yield ChannelPriceHistoryConfigType::class;
+        return BaseChannelPriceHistoryConfigType::class;
     }
 
     public function mapDataToForms(mixed $viewData, \Traversable $forms): void
@@ -93,5 +92,10 @@ final class ChannelPriceHistoryConfigTypeExtension extends AbstractTypeExtension
         unset($forms['taxonsExcludedFromShowingLowestPrice']);
 
         $this->dataMapper->mapFormsToData(new ArrayCollection($forms), $viewData);
+    }
+
+    public function getBlockPrefix(): string
+    {
+        return 'sylius_admin_channel_price_history_config';
     }
 }
