@@ -5,4 +5,10 @@
 {% set channel = hookable_metadata.context.channel %}
 {% set variant = hookable_metadata.context.variant %}
 
-<td class="text-end" {{ sylius_test_html_attribute('lowest-price-before-the-discount', '%s.%s'|format(variant.code, channel.code)) }}>{% if channel_pricing.lowestPriceBeforeDiscount != null %}{{ money(channel_pricing.lowestPriceBeforeDiscount, currency_code) }}{% else %} - {% endif %}</td>
+<td class="text-end" {{ sylius_test_html_attribute('lowest-price-before-the-discount', '%s.%s'|format(variant.code, channel.code)) }}>
+    {% if channel_pricing.lowestPriceBeforeDiscount != null %}
+        {{ money(channel_pricing.lowestPriceBeforeDiscount, currency_code) }}
+    {% else %}
+        -
+    {% endif %}
+</td>

@@ -8,14 +8,9 @@
     <div class="table-responsive">
         <table class="table card-table table-vcenter">
             <thead>
-            <tr>
-                <th>{{ 'sylius.ui.channel'|trans }}</th>
-                <th class="text-end">{{ 'sylius.ui.price'|trans }}</th>
-                <th class="text-end">{{ 'sylius.ui.original_price'|trans }}</th>
-                <th class="text-end">{{ 'sylius.ui.lowest_price_before_discount'|trans }}</th>
-                <th class="text-end">{{ 'sylius.ui.discounted_by'|trans }}</th>
-                <th></th>
-            </tr>
+                <tr>
+                    {% hook 'pricing#head' %}
+                </tr>
             </thead>
             <tbody>
             {% for channel_pricing in variant.channelPricings %}
@@ -23,7 +18,7 @@
                 {% set currency_code = channel.baseCurrency.code %}
 
                 <tr {{ sylius_test_html_attribute('simple-product', "%s"|format(channel.code)) }}>
-                    {% hook 'pricing' with { variant, channel, channel_pricing, currency_code } %}
+                    {% hook 'pricing#body' with { variant, channel, channel_pricing, currency_code } %}
                 </tr>
             {% endfor %}
             </tbody>
