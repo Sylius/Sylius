@@ -7,7 +7,7 @@ sylius_grid:
                     class: "%sylius.model.product.class%"
                     repository:
                         method: createListQueryBuilder
-                        arguments: ["expr:service('sylius.context.locale').getLocaleCode()", $taxonId]
+                        arguments: ["expr:service('sylius.context.locale').getLocaleCode()"]
             sorting:
                 code: asc
             fields:
@@ -49,6 +49,8 @@ sylius_grid:
                     label: sylius.ui.search
                     options:
                         fields: [code, translation.name]
+                    form_options:
+                        type: !php/const Sylius\Component\Grid\Filter\StringFilter::TYPE_CONTAINS
                 enabled:
                     type: boolean
                     label: sylius.ui.enabled

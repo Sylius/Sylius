@@ -10,7 +10,7 @@ Feature: Browsing products
         And this product belongs to "Pugs"
         And I am logged in as an administrator
 
-    @todo @ui @api
+    @ui @api
     Scenario: Browsing all products
         Given the store has a product "Doge mascot"
         When I am browsing products
