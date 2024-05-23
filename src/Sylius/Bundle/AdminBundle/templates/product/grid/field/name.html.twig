@@ -1,9 +1,9 @@
 {% if data is not null %}
     <a href="#" class="fw-medium">{{ data }}</a>
 {% else %}
-    {% from '@SyliusAdmin/shared/helper/icon.html.twig' import icon as _icon %}
+    {% from '@SyliusAdmin/shared/helper/icon.html.twig' import icon %}
 
-    <span class="text-danger">
-        {{ _icon({ icon: 'exclamation-circle' }) }} <i>{{ 'sylius.ui.missing_translation'|trans }}</i>
+    <span class="text-danger" {{ sylius_test_html_attribute('missing-translation-paragraph') }}>
+        {{ icon({ icon: 'exclamation-circle' }) }} <i>{{ 'sylius.ui.missing_translation'|trans }}</i>
     </span>
 {% endif %}
