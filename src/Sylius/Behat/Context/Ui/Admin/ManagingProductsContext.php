@@ -287,7 +287,6 @@ final class ManagingProductsContext implements Context
     public function iFilterThemByTaxon($taxonName)
     {
         $this->indexPage->filterByTaxon($taxonName);
-
         $this->indexPage->filter();
     }
 
@@ -297,7 +296,6 @@ final class ManagingProductsContext implements Context
     public function iFilterThemByMainTaxon($taxonName)
     {
         $this->indexPage->filterByMainTaxon($taxonName);
-
         $this->indexPage->filter();
     }
 

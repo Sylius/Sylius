@@ -40,7 +40,7 @@ final class UxAutocompleteFilterType extends AbstractType
             ->setDefault('class', function (Options $options): string {
                 return $options['extra_options']['class'] ?? '';
             })
-            ->setDefault('choice_label', function (Options $options, $label): string {
+            ->setDefault('choice_label', function (Options $options, mixed $label): mixed {
                 return $options['extra_options']['choice_label'] ?? $label;
             })
         ;
@@ -53,6 +53,6 @@ final class UxAutocompleteFilterType extends AbstractType
 
     public function getBlockPrefix(): string
     {
-        return 'sylius_admin_ux_entity_autocomplete';
+        return 'sylius_admin_ux_autocomplete';
     }
 }
