@@ -57,7 +57,7 @@
         "knplabs/knp-menu": "^3.1",
         "knplabs/knp-menu-bundle": "^3.0",
         "laminas/laminas-stdlib": "^3.3.1",
-        "league/flysystem-bundle": "^2.4",
+        "league/flysystem-bundle": "^3.3",
         "lexik/jwt-authentication-bundle": "^2.11",
         "liip/imagine-bundle": "^2.10",
         "nyholm/psr7": "^1.6",
