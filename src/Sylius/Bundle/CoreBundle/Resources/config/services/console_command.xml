@@ -79,5 +79,9 @@
         </service>
 
         <service id="Sylius\Bundle\CoreBundle\Command\JwtConfigurationCommand" alias="Sylius\Bundle\CoreBundle\Console\Command\JwtConfigurationCommand" />
+
+        <service id="Sylius\Bundle\CoreBundle\Console\Command\ShowPlusInfoCommand">
+            <tag name="console.command" />
+        </service>
     </services>
 </container>
