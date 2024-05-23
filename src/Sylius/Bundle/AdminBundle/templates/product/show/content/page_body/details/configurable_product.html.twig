@@ -8,33 +8,25 @@
     <div class="table-responsive">
         <table class="table table-vcenter">
             <thead>
-            <tr>
-                <th></th>
-                <th>{{ 'sylius.ui.product'|trans }}</th>
-                <th class="text-center">{{ 'sylius.ui.enabled'|trans }}</th>
-                <th>{{ 'sylius.ui.options'|trans }}</th>
-                <th class="text-center">{{ 'sylius.ui.tracked'|trans }}</th>
-                <th class="text-center">{{ 'sylius.ui.shipping_required'|trans }}</th>
-                <th>{{ 'sylius.ui.tax_category'|trans }}</th>
-                <th class="text-center">{{ 'sylius.ui.current_stock'|trans }}</th>
-                <th></th>
-            </tr>
+                <tr>
+                    {% hook 'configurable_product#head' %}
+                </tr>
             </thead>
             <tbody>
-            {% for variant in product.variants %}
-                <tr>
-                    {% hook 'configurable_product#tab' with { variant, product } %}
-                </tr>
-                <tr class="bg-gray-400">
-                    <td colspan="9" class="p-0 border-0">
-                        <div class="py-3 px-5 collapse" id="product-variant-details-{{ variant.code }}">
-                            <div class="card mb-3">
-                                {% hook 'configurable_product#details' with { variant } %}
+                {% for variant in product.variants %}
+                    <tr>
+                        {% hook 'configurable_product#tab' with { variant, product } %}
+                    </tr>
+                    <tr class="bg-gray-400">
+                        <td colspan="9" class="p-0 border-0">
+                            <div class="py-3 px-5 collapse" id="product-variant-details-{{ variant.code }}">
+                                <div class="card mb-3">
+                                    {% hook 'configurable_product#details' with { variant } %}
+                                </div>
                             </div>
-                        </div>
-                    </td>
-                </tr>
-            {% endfor %}
+                        </td>
+                    </tr>
+                {% endfor %}
             </tbody>
         </table>
     </div>
