@@ -72,6 +72,17 @@ sylius_grid:
                             choice_label: fullname
                     options:
                         fields: [productTaxons.taxon.id]
+                main_taxon:
+                    type: ux_translatable_autocomplete
+                    label: sylius.ui.main_taxon
+                    form_options:
+                        multiple: false
+                        extra_options:
+                            class: '%sylius.model.taxon.class%'
+                            translation_fields: [name]
+                            choice_label: fullname
+                    options:
+                        fields: [mainTaxon.id]
             actions:
                 main:
                     create:
