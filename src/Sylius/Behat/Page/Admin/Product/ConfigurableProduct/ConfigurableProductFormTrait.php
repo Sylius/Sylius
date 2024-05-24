@@ -14,10 +14,8 @@ declare(strict_types=1);
 namespace Sylius\Behat\Page\Admin\Product\ConfigurableProduct;
 
 use Behat\Mink\Element\NodeElement;
-use Behat\Mink\Exception\ElementNotFoundException;
 use Sylius\Behat\Service\DriverHelper;
 use Sylius\Component\Core\Model\ProductInterface;
-use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Product\Model\ProductAssociationTypeInterface;
 
 trait ConfigurableProductFormTrait
@@ -25,7 +23,6 @@ trait ConfigurableProductFormTrait
     public function getDefinedFormElements(): array
     {
         return [
-            'add-image' => '[data-test-add-image]',
             'attribute_value' => '[data-test-attribute-value][data-test-locale-code="%localeCode%"][data-test-attribute-name="%attributeName%"]',
             'channel' => '[data-test-channel-code="%channel_code%"]',
             'channel_tab' => '[data-test-channel-tab="%channelCode%"]',
@@ -36,8 +33,6 @@ trait ConfigurableProductFormTrait
             'field_name' => '[data-test-name="%locale%"]',
             'form' => '[data-live-name-value="sylius_admin:product:form"]',
             'generate_product_slug_button' => '[data-test-generate-product-slug-button="%localeCode%"]',
-            'image_subform_with_type' => '[data-test-image-subform][data-test-type="%type%"]',
-            'images' => '[data-test-images]',
             'meta_description' => '[data-test-meta-description="%locale%"]',
             'meta_keywords' => '[data-test-meta-keywords="%locale%"]',
             'name' => '[data-test-name="%locale%"]',
@@ -201,115 +196,6 @@ trait ConfigurableProductFormTrait
         return in_array($product->getCode(), $associationField->getValue(), true);
     }
 
-    /*
-     * Media management
-     */
-
-    public function attachImage(string $path, ?string $type = null, ?ProductVariantInterface $productVariant = null): void
-    {
-        $this->changeTab('media');
-        $this->getElement('add-image')->click();
-        $this->waitForFormUpdate();
-
-        $images = $this->getElement('images');
-        $imagesSubform = $images->findAll('css', '[data-test-image-subform]');
-        $imageSubform = end($imagesSubform);
-
-        if (null !== $type) {
-            $imageSubform->fillField('Type', $type);
-        }
-
-        if (null !== $productVariant) {
-            $this->autocompleteHelper->selectByValue(
-                $this->getDriver(),
-                $imageSubform->find('css', '[data-test-product-variant]')->getXpath(),
-                $productVariant->getCode(),
-            );
-        }
-
-        $filesPath = $this->getParameter('files_path');
-        $imageSubform->find('css', '[data-test-file]')->attachFile($filesPath . $path);
-    }
-
-    public function changeImageWithType(string $type, string $path): void
-    {
-        $filesPath = $this->getParameter('files_path');
-
-        $imageSubform = $this->getElement('image_subform_with_type', ['%type%' => $type]);
-        $imageSubform->find('css', '[data-test-file]')->attachFile($filesPath . $path);
-    }
-
-    public function removeImageWithType(string $type): void
-    {
-        $this->changeTab('media');
-
-        $imageSubform = $this->getElement('image_subform_with_type', ['%type%' => $type]);
-        $imageSubform->find('css', '[data-test-image-delete]')->click();
-        $this->waitForFormUpdate();
-    }
-
-    public function removeFirstImage(): void
-    {
-        $this->changeTab('media');
-        $firstSubform = $this->getFirstImageSubform();
-        $firstSubform->findAll('css', '[data-test-image-delete]')[0]->click();
-    }
-
-    public function hasImageWithType(string $type): bool
-    {
-        $this->changeTab('media');
-
-        try {
-            $imageSubform = $this->getElement('image_subform_with_type', ['%type%' => $type]);
-        } catch (ElementNotFoundException) {
-            return false;
-        }
-
-        $imageUrl = $imageSubform->getAttribute('data-test-image-url');
-        $this->getDriver()->visit($imageUrl);
-        $statusCode = $this->getDriver()->getStatusCode();
-        $this->getDriver()->back();
-
-        return in_array($statusCode, [200, 304], true);
-    }
-
-    public function hasImageWithVariant(ProductVariantInterface $productVariant): bool
-    {
-        $this->changeTab('media');
-        $images = $this->getElement('images');
-
-        return $images->has('css', sprintf('[data-test-product-variant="%s"]', $productVariant->getCode()));
-    }
-
-    public function countImages(): int
-    {
-        $images = $this->getElement('images');
-        $imageSubforms = $images->findAll('css', '[data-test-image-subform]');
-
-        return count($imageSubforms);
-    }
-
-    public function modifyFirstImageType(string $type): void
-    {
-        $this->changeTab('media');
-
-        $firstImageSubform = $this->getFirstImageSubform();
-
-        $firstImageSubform->find('css', 'input[data-test-type]')->setValue($type);
-    }
-
-    public function selectVariantForFirstImage(ProductVariantInterface $productVariant): void
-    {
-        $this->changeTab('media');
-
-        $imageSubform = $this->getFirstImageSubform();
-        $this->autocompleteHelper->selectByValue(
-            $this->getDriver(),
-            $imageSubform->find('css', '[data-test-product-variant]')->getXpath(),
-            $productVariant->getCode(),
-        );
-    }
-
     protected function getElement(string $name, array $parameters = []): NodeElement
     {
         if (!isset($parameters['%locale%'])) {
@@ -317,14 +203,6 @@ trait ConfigurableProductFormTrait
         }
 
         return parent::getElement($name, $parameters);
-    }
-
-    private function getFirstImageSubform(): NodeElement
-    {
-        $images = $this->getElement('images');
-        $imageSubforms = $images->findAll('css', '[data-test-image-subform]');
-
-        return reset($imageSubforms);
     }
 
     /*

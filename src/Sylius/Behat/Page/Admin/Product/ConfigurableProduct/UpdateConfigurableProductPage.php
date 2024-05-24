@@ -17,9 +17,9 @@ use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Session;
 use Sylius\Behat\Behaviour\ChecksCodeImmutability;
 use Sylius\Behat\Page\Admin\Crud\UpdatePage as BaseUpdatePage;
+use Sylius\Behat\Page\Admin\Product\Common\ProductMediaTrait;
 use Sylius\Behat\Service\AutocompleteHelper;
 use Sylius\Behat\Service\Helper\AutocompleteHelperInterface;
-use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
 use Symfony\Component\Routing\RouterInterface;
 
@@ -27,6 +27,7 @@ class UpdateConfigurableProductPage extends BaseUpdatePage implements UpdateConf
 {
     use ChecksCodeImmutability;
     use ConfigurableProductFormTrait;
+    use ProductMediaTrait;
 
     /**
      * @param array<array-key, string> $minkParameters
@@ -40,9 +41,6 @@ class UpdateConfigurableProductPage extends BaseUpdatePage implements UpdateConf
     ) {
         parent::__construct($session, $minkParameters, $router, $routeName);
     }
-
-    /** @var string[] */
-    private array $imageUrls = [];
 
     public function saveChanges(): void
     {
@@ -97,27 +95,6 @@ class UpdateConfigurableProductPage extends BaseUpdatePage implements UpdateConf
         $this->getElement('channel', ['%channel_code%' => $channelCode])->check();
     }
 
-    public function isImageWithTypeDisplayed(string $type): bool
-    {
-        $imageElement = $this->getImageElementByType($type);
-
-        $imageUrl = $imageElement ? $imageElement->find('css', 'img')->getAttribute('src') : $this->provideImageUrlForType($type);
-        if (null === $imageElement && null === $imageUrl) {
-            return false;
-        }
-
-        $this->getDriver()->visit($imageUrl);
-        $statusCode = $this->getDriver()->getStatusCode();
-        $this->getDriver()->back();
-
-        return in_array($statusCode, [200, 304], true);
-    }
-
-    public function hasLastImageAVariant(ProductVariantInterface $productVariant): bool
-    {
-        return $this->hasImageWithVariant($productVariant);
-    }
-
     public function goToVariantsList(): void
     {
         $this->getDocument()->clickLink('List variants');
@@ -143,32 +120,15 @@ class UpdateConfigurableProductPage extends BaseUpdatePage implements UpdateConf
         return array_merge(
             parent::getDefinedElements(),
             [
-                'images' => '#sylius_product_images',
                 'options' => '[data-test-options]',
             ],
             $this->getDefinedFormElements(),
+            $this->getDefinedProductMediaElements(),
         );
     }
 
     private function openTaxonBookmarks(): void
     {
         $this->getElement('taxonomy')->click();
-    }
-
-    private function getImageElementByType(string $type): ?NodeElement
-    {
-        $images = $this->getElement('images');
-        $typeInput = $images->find('css', 'input[value="' . $type . '"]');
-
-        if (null === $typeInput) {
-            return null;
-        }
-
-        return $typeInput->getParent()->getParent()->getParent();
-    }
-
-    private function provideImageUrlForType(string $type): ?string
-    {
-        return $this->imageUrls[$type] ?? null;
     }
 }

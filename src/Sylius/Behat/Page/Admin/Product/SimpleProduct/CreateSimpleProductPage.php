@@ -15,6 +15,7 @@ namespace Sylius\Behat\Page\Admin\Product\SimpleProduct;
 
 use Behat\Mink\Session;
 use Sylius\Behat\Page\Admin\Crud\CreatePage as BaseCreatePage;
+use Sylius\Behat\Page\Admin\Product\Common\ProductMediaTrait;
 use Sylius\Behat\Service\AutocompleteHelper;
 use Sylius\Behat\Service\DriverHelper;
 use Sylius\Behat\Service\Helper\AutocompleteHelperInterface;
@@ -23,6 +24,7 @@ use Symfony\Component\Routing\RouterInterface;
 
 class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProductPageInterface
 {
+    use ProductMediaTrait;
     use SimpleProductFormTrait;
 
     public function __construct(
@@ -143,9 +145,9 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
             parent::getDefinedElements(),
             [
                 'attribute_value' => '#attributesContainer [data-test-product-attribute-value-in-locale="%attributeName% %localeCode%"] input',
-                'images' => '#sylius_product_images',
             ],
             $this->getDefinedFormElements(),
+            $this->getDefinedProductMediaElements(),
         );
     }
 
