@@ -1,1 +1,7 @@
-{{ form_row(hookable_metadata.context.form.rating, sylius_test_form_attribute('rating')) }}
+{% if form is not defined %}
+    {% set form = hookable_metadata.context.form.rating %}
+{% endif %}
+
+{% form_theme form '@SyliusAdmin/product_review/form_theme.html.twig' %}
+
+{{ form_row(form, sylius_test_form_attribute('rating')) }}
