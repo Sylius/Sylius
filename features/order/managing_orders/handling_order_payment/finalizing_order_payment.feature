@@ -15,14 +15,14 @@ Feature: Finalizing order's payment with untracked items
         And the customer chose "Free" shipping method with "Cash on Delivery" payment
         And I am logged in as an administrator
 
-    @ui
+    @api @ui
     Scenario: Finalizing order's payment
         Given I am viewing the summary of the order "#00000001"
         When I mark this order as paid
         Then I should be notified that the order's payment has been successfully completed
         And it should have payment state "Completed"
 
-    @ui
+    @api @ui
     Scenario: Being unable to finalize completed order's payment
         Given this order is already paid
         When I view the summary of the order "#00000001"

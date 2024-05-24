@@ -42,6 +42,7 @@ final class ManagingOrdersContext implements Context
     /**
      * @Given /^I am viewing the summary of (this order)$/
      * @When I view the summary of the order :order
+     * @Given I am viewing the summary of the order :order
      */
     public function iSeeTheOrder(OrderInterface $order): void
     {
@@ -310,5 +311,38 @@ final class ManagingOrdersContext implements Context
         $currencyCode = $this->responseChecker->getValue($this->client->show(Resources::ORDERS, $order->getTokenValue()), 'currencyCode');
 
         Assert::same($currencyCode, $currency);
+    }
+
+    /**
+     * @Then I should be notified that the order's payment has been successfully completed
+     */
+    public function iShouldBeNotifiedThatTheOrdersPaymentHasBeenSuccessfullyCompleted(): void
+    {
+        Assert::true($this->responseChecker->isUpdateSuccessful($this->client->getLastResponse()));
+    }
+
+    /**
+     * @Then /^I should not be able to mark (this order) as paid again$/
+     */
+    public function iShouldNotBeAbleToMarkThisOrderAsPaidAgain(OrderInterface $order): void
+    {
+        $this->client->applyTransition(
+            Resources::PAYMENTS,
+            (string) $order->getLastPayment()->getId(),
+            PaymentTransitions::TRANSITION_COMPLETE,
+        );
+
+        Assert::false($this->responseChecker->isUpdateSuccessful($this->client->getLastResponse()));
+    }
+
+    /**
+     * @Then I should be notified that the order's payment could not be finalized due to insufficient stock
+     */
+    public function iShouldBeNotifiedThatTheOrdersPaymentCouldNotBeFinalizedDueToInsufficientStock(): void
+    {
+        Assert::contains(
+            $this->responseChecker->getError($this->client->getLastResponse()),
+            'Not enough units to decrease on hold quantity from the inventory of a variant',
+        );
     }
 }

@@ -274,7 +274,7 @@ final class ManagingOrdersContext implements Context
         string $countryName,
     ) {
         if (null !== $order) {
-            $this->iSeeTheOrder($order);
+            $this->iViewTheSummaryOfTheOrder($order);
         }
 
         Assert::true($this->showPage->hasShippingAddress($customerName, $street, $postcode, $city, $countryName));
@@ -306,7 +306,7 @@ final class ManagingOrdersContext implements Context
         string $countryName,
     ) {
         if (null !== $order) {
-            $this->iSeeTheOrder($order);
+            $this->iViewTheSummaryOfTheOrder($order);
         }
 
         Assert::true($this->showPage->hasBillingAddress($customerName, $street, $postcode, $city, $countryName));
@@ -535,7 +535,7 @@ final class ManagingOrdersContext implements Context
     /**
      * @Then I should be notified that the order's payment could not be finalized due to insufficient stock
      */
-    public function iShouldBeNotifiedThatTheOrderSPaymentCouldNotBeFinalizedDueToInsufficientStock()
+    public function iShouldBeNotifiedThatTheOrdersPaymentCouldNotBeFinalizedDueToInsufficientStock(): void
     {
         $this->notificationChecker->checkNotification(
             'The payment cannot be completed due to insufficient stock of the',

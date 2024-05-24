@@ -15,7 +15,7 @@ Feature: Finalizing order's payment when at least one item has become tracked af
         And the customer chose "Free" shipping method with "Cash on Delivery" payment
         And I am logged in as an administrator
 
-    @ui
+    @api @ui
     Scenario: Being unable to finalize order's payment when one item has become tracked after the purchase
         Given I am viewing the summary of the order "#00000001"
         And the "PHP T-Shirt" product's inventory has become tracked with 2 items
@@ -23,7 +23,7 @@ Feature: Finalizing order's payment when at least one item has become tracked af
         Then I should be notified that the order's payment could not be finalized due to insufficient stock
         And it should have payment state "New"
 
-    @ui
+    @api @ui
     Scenario: Finalizing order's payment when one item has become tracked after the purchase
         Given I am viewing the summary of the order "#00000001"
         And the "PHP T-Shirt" product's inventory has become tracked with 6 items

@@ -16,7 +16,7 @@ Feature: Finalizing order's payment with tracked items
         And the customer chose "Free" shipping method with "Cash on Delivery" payment
         And I am logged in as an administrator
 
-    @ui
+    @api @ui
     Scenario: Finalizing order's payment
         Given I am viewing the summary of the order "#00000001"
         When I mark this order as paid
