@@ -332,15 +332,6 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
         return $this->getElement('code');
     }
 
-    protected function getElement(string $name, array $parameters = []): NodeElement
-    {
-        if (!isset($parameters['%locale%'])) {
-            $parameters['%locale%'] = 'en_US';
-        }
-
-        return parent::getElement($name, $parameters);
-    }
-
     protected function getDefinedElements(): array
     {
         return array_merge(
@@ -353,29 +344,23 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
                 'attribute_select' => '#attributesContainer [data-test-product-attribute-value-in-locale="%attributeName% %localeCode%"] select',
                 'attribute_element' => '.attribute',
                 'attribute_delete_button' => '#attributesContainer .attributes-group .attributes-header:contains("%attributeName%") button',
-                'code' => '#sylius_product_code',
                 'images' => '#sylius_product_images',
                 'language_tab' => '[data-locale="%locale%"] .title',
                 'locale_tab' => '#attributesContainer [data-test-product-attribute-value-in-locale="%attributeName% %localeCode%"]',
-                'name' => '#sylius_product_translations_%locale%_name',
                 'prices' => '#sylius_admin_product_variant_channelPricings',
                 'original_price' => '#sylius_admin_product_variant_channelPricings input[name$="[originalPrice]"][id*="%channelCode%"]',
                 'price' => '#sylius_admin_product_variant_channelPricings input[id*="%channelCode%"]',
                 'pricing_configuration' => '#sylius_calculator_container',
                 'main_taxon' => '#sylius_product_mainTaxon',
-                'meta_description' => '#sylius_product_translations_%locale%_metaDescription',
-                'meta_keywords' => '#sylius_product_translations_%locale%_metaKeywords',
                 'non_translatable_attribute' => '#attributesContainer [data-test-product-attribute-value-in-locale="%attributeName% "] input',
                 'product_taxon' => '#sylius-product-taxonomy-tree .item .header:contains("%taxonName%") input',
                 'product_taxons' => '#sylius_product_productTaxons',
                 'shipping_required' => '#sylius_admin_product_variant_shippingRequired',
                 'show_product_button' => '[data-test-view-in-store]',
-                'slug' => '[data-test-slug="%locale%"]',
                 'tab' => '.menu [data-tab="%name%"]',
                 'taxonomy' => 'a[data-tab="taxonomy"]',
                 'tracked' => '#sylius_admin_product_variant_tracked',
                 'toggle_slug_modification_button' => '[data-locale="%locale%"] .toggle-product-slug-modification',
-                'enabled' => '#sylius_product_enabled',
             ],
             $this->getDefinedFormElements(),
         );

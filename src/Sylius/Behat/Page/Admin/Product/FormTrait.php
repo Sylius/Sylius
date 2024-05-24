@@ -26,21 +26,28 @@ trait FormTrait
     public function getDefinedFormElements(): array
     {
         return [
+            'add-image' => '[data-test-add-image]',
             'attribute_value' => '[data-test-attribute-value][data-test-locale-code="%localeCode%"][data-test-attribute-name="%attributeName%"]',
+            'channel' => '[data-test-channel-code="%channel_code%"]',
             'channel_tab' => '[data-test-channel-tab="%channelCode%"]',
-            'form' => '[data-live-name-value="sylius_admin:product:form"]',
+            'channels' => '[data-test-channels]',
+            'code' => '[data-test-code]',
+            'enabled' => '[data-test-enabled]',
             'field_associations' => '[name="sylius_admin_product[associations][%association%][]"]',
             'field_name' => '[name="sylius_admin_product[translations][%localeCode%][name]"]',
-            'field_slug' => '[name="sylius_admin_product[translations][%localeCode%][slug]"]',
-            'field_price' => '[name="sylius_admin_product[variant][channelPricings][%channelCode%][price]"]',
             'field_original_price' => '[name="sylius_admin_product[variant][channelPricings][%channelCode%][originalPrice]"]',
+            'field_price' => '[name="sylius_admin_product[variant][channelPricings][%channelCode%][price]"]',
             'field_shipping_category' => '[name="sylius_admin_product[variant][shippingCategory]"]',
             'field_shipping_required' => '[name="sylius_admin_product[variant][shippingRequired]"]',
+            'form' => '[data-live-name-value="sylius_admin:product:form"]',
             'generate_product_slug_button' => '[data-test-generate-product-slug-button="%localeCode%"]',
-            'images' => '[data-test-images]',
             'image_subform' => '[data-test-image-subform]',
             'image_subform_with_type' => '[data-test-image-subform][data-test-type="%type%"]',
+            'images' => '[data-test-images]',
             'images_subforms' => '[data-test-image-subforms]',
+            'meta_description' => '[data-test-meta-description="%locale%"]',
+            'meta_keywords' => '[data-test-meta-keywords="%locale%"]',
+            'name' => '[data-test-name="%locale%"]',
             'product_attribute_autocomplete' => '[data-test-product-attribute-autocomplete]',
             'product_attribute_delete_button' => '[data-test-product-attribute-delete-button="%attributeName%"]',
             'product_attribute_input' => 'input[name="product_attributes"]',
@@ -48,6 +55,7 @@ trait FormTrait
             'product_options_autocomplete' => '[data-test-product-options-autocomplete]',
             'product_translation_accordion' => '[data-test-product-translations-accordion="%localeCode%"]',
             'side_navigation_tab' => '[data-test-side-navigation-tab="%name%"]',
+            'slug' => '[data-test-slug="%locale%"]',
         ];
     }
 
@@ -244,7 +252,7 @@ trait FormTrait
     public function attachImage(string $path, ?string $type = null, ?ProductVariantInterface $productVariant = null): void
     {
         $this->changeTab('media');
-        $this->clickButton('Add image');
+        $this->getElement('add-image')->click();
         $this->waitForFormUpdate();
 
         $images = $this->getElement('images');
@@ -346,6 +354,15 @@ trait FormTrait
         );
     }
 
+    protected function getElement(string $name, array $parameters = []): NodeElement
+    {
+        if (!isset($parameters['%locale%'])) {
+            $parameters['%locale%'] = 'en_US';
+        }
+
+        return parent::getElement($name, $parameters);
+    }
+
     private function getFirstImageSubform(): NodeElement
     {
         $images = $this->getElement('images');
@@ -369,7 +386,9 @@ trait FormTrait
 
     private function clickButton(string $locator): void
     {
-        $this->getDocument()->pressButton($locator);
+        if (DriverHelper::isJavascript($this->getDriver())) {
+            $this->getDocument()->pressButton($locator);
+        }
     }
 
     /*

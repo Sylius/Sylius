@@ -147,15 +147,6 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
         $this->getElement('cancel_button')->click();
     }
 
-    protected function getElement(string $name, array $parameters = []): NodeElement
-    {
-        if (!isset($parameters['%locale%'])) {
-            $parameters['%locale%'] = 'en_US';
-        }
-
-        return parent::getElement($name, $parameters);
-    }
-
     protected function getDefinedElements(): array
     {
         return array_merge(
@@ -170,23 +161,19 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
                 'attribute_value_select' => '#attributesContainer [data-test-product-attribute-value-in-locale="%attributeName% %localeCode%"] select',
                 'attributes_choice' => '#sylius_product_attribute_choice',
                 'cancel_button' => '[data-test-cancel-changes-button]',
-                'channel' => '[data-test-channel-code="%channel_code%"]',
-                'code' => '#sylius_product_code',
                 'form' => 'form[name="sylius_product"]',
                 'images' => '#sylius_product_images',
                 'language_tab' => '[data-locale="%locale%"] .title',
                 'locale_tab' => '#attributesContainer .menu [data-tab="%localeCode%"]',
                 'main_taxon' => '#sylius_product_mainTaxon',
                 'product_taxons' => '#sylius_product_productTaxons',
-                'name' => '#sylius_product_translations_%locale%_name',
                 'non_translatable_attribute_value' => '#attributesContainer [data-test-product-attribute-value-in-locale="%attributeName% "] input',
-                'original_price' => '#sylius_product_variant_channelPricings_%channelCode%_originalPrice',
-                'price' => '#sylius_product_variant_channelPricings_%channelCode%_price',
+                'original_price' => '[data-test-original-price-in-channel="%channelCode%"]',
+                'price' => '[data-test-price-in-channel="%channelCode%"]',
                 'prices_validation_message' => '[data-test-missing-channel-price]',
                 'price_calculator' => '#sylius_product_variant_pricingCalculator',
                 'shipping_category' => '#sylius_product_variant_shippingCategory',
                 'shipping_required' => '#sylius_product_variant_shippingRequired',
-                'slug' => '#sylius_product_translations_%locale%_slug',
                 'tab' => '.menu [data-tab="%name%"]',
                 'taxonomy' => 'a[data-tab="taxonomy"]',
                 'toggle_slug_modification_button' => '.toggle-product-slug-modification',

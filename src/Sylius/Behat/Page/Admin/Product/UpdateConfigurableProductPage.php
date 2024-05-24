@@ -50,18 +50,12 @@ class UpdateConfigurableProductPage extends BaseUpdatePage implements UpdateConf
 
     public function setMetaKeywords(string $keywords, string $localeCode): void
     {
-        $this->getDocument()->fillField(
-            sprintf('sylius_product_translations_%s_metaKeywords', $localeCode),
-            $keywords,
-        );
+        $this->getElement('meta_keywords', ['%locale%' => $localeCode])->setValue($keywords);
     }
 
     public function setMetaDescription(string $description, string $localeCode): void
     {
-        $this->getDocument()->fillField(
-            sprintf('sylius_product_translations_%s_metaDescription', $localeCode),
-            $description,
-        );
+        $this->getElement('meta_description', ['%locale%' => $localeCode])->setValue($description);
     }
 
     public function isProductOptionChosen(string $option): bool
@@ -146,13 +140,9 @@ class UpdateConfigurableProductPage extends BaseUpdatePage implements UpdateConf
         return array_merge(
             parent::getDefinedElements(),
             [
-                'channel' => '[data-test-channel-code="%channel_code%"]',
-                'channels' => '[data-test-channels]',
-                'code' => '#sylius_product_code',
                 'images' => '#sylius_product_images',
                 'main_taxon' => '#sylius_product_mainTaxon',
-                'name' => '#sylius_product_translations_en_US_name',
-                'options' => '#sylius_product_options',
+                'options' => '[data-test-options]',
                 'price' => '#sylius_admin_product_variant_price',
                 'search' => '.ui.fluid.search.selection.dropdown',
                 'search_item_selected' => 'div.menu > div.item.selected',
