@@ -1,0 +1,7 @@
+{% extends '@SyliusAdmin/shared/form_theme.html.twig' %}
+
+{% block _sylius_admin_product_review_rating_widget %}
+    {% for entry in form.children %}
+        {{ form_widget(entry, {'required': false, 'label_attr': {'class': 'radio-inline'}}) }}
+    {% endfor %}
+{% endblock %}
