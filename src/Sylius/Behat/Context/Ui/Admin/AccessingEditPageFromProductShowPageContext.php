@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
-use Sylius\Behat\Page\Admin\Product\UpdateSimpleProductPageInterface;
+use Sylius\Behat\Page\Admin\Product\SimpleProduct\UpdateSimpleProductPageInterface;
 use Sylius\Behat\Page\Admin\ProductVariant\UpdatePageInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;

@@ -11,12 +11,13 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Behat\Page\Admin\Product;
+namespace Sylius\Behat\Page\Admin\Product\SimpleProduct;
 
 use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Session;
 use Sylius\Behat\Behaviour\SpecifiesItsField;
 use Sylius\Behat\Page\Admin\Crud\CreatePage as BaseCreatePage;
+use Sylius\Behat\Page\Admin\Product\FormTrait;
 use Sylius\Behat\Service\AutocompleteHelper;
 use Sylius\Behat\Service\DriverHelper;
 use Sylius\Behat\Service\Helper\AutocompleteHelperInterface;
