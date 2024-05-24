@@ -62,9 +62,10 @@ final class ManagingOrdersContext implements Context
 
     /**
      * @Given /^I am viewing the summary of (this order)$/
+     * @Given I am viewing the summary of the order :order
      * @When I view the summary of the order :order
      */
-    public function iSeeTheOrder(OrderInterface $order)
+    public function iViewTheSummaryOfTheOrder(OrderInterface $order): void
     {
         $this->showPage->open(['id' => $order->getId()]);
     }
