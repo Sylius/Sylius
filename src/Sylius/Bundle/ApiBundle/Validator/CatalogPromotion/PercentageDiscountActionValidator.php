@@ -21,7 +21,7 @@ use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
 use Webmozart\Assert\Assert;
 
-final class PercentageDiscountActionValidator implements ActionValidatorInterface
+final readonly class PercentageDiscountActionValidator implements ActionValidatorInterface
 {
     public function __construct(private SectionProviderInterface $sectionProvider)
     {

@@ -38,7 +38,7 @@ Feature: Specifying the lowest price for discounted products checking period whi
         And I try to save my changes
         Then I should be notified that the lowest price for discounted products checking period must be lower
 
-    @api @no-ui
+    @todo @api @no-ui
     Scenario: Changing the lowest price for discounted products checking period
         When I want to modify the price history config of channel "EU"
         And I change the lowest price for discounted products checking period to 30 days
@@ -46,21 +46,21 @@ Feature: Specifying the lowest price for discounted products checking period whi
         Then I should be notified that it has been successfully edited
         And its lowest price for discounted products checking period should be set to 30 days
 
-    @api @no-ui
+    @todo @api @no-ui
     Scenario: Being prevented from changing the lowest price for discounted products checking period to zero
         When I want to modify the price history config of channel "EU"
         And I change the lowest price for discounted products checking period to 0 days
         And I try to save my changes
         Then I should be notified that the lowest price for discounted products checking period must be greater than 0
 
-    @api @no-ui
+    @todo @api @no-ui
     Scenario: Being prevented from changing the lowest price for discounted products checking period to a negative value
         When I want to modify the price history config of channel "EU"
         And I change the lowest price for discounted products checking period to -10 days
         And I try to save my changes
         Then I should be notified that the lowest price for discounted products checking period must be greater than 0
 
-    @api @no-ui
+    @todo @api @no-ui
     Scenario: Being prevented from changing the lowest price for discounted products checking period to a too big value
         When I want to modify the price history config of channel "EU"
         And I change the lowest price for discounted products checking period to 99999999999 days

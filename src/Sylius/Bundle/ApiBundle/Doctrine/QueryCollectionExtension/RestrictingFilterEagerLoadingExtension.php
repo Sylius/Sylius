@@ -13,31 +13,40 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\Doctrine\QueryCollectionExtension;
 
-use ApiPlatform\Core\Bridge\Doctrine\Orm\Extension\ContextAwareQueryCollectionExtensionInterface;
-use ApiPlatform\Core\Bridge\Doctrine\Orm\Util\QueryNameGeneratorInterface;
+use ApiPlatform\Doctrine\Orm\Extension\QueryCollectionExtensionInterface;
+use ApiPlatform\Doctrine\Orm\Util\QueryNameGeneratorInterface;
+use ApiPlatform\Metadata\Operation;
 use Doctrine\ORM\QueryBuilder;
 
 /**
  * This class decorates api_platform.doctrine.orm.query_extension.filter_eager_loading.
  * It is a workaround for https://github.com/api-platform/core/issues/2253.
  */
-final class RestrictingFilterEagerLoadingExtension implements ContextAwareQueryCollectionExtensionInterface
+final readonly class RestrictingFilterEagerLoadingExtension implements QueryCollectionExtensionInterface
 {
-    public function __construct(private ContextAwareQueryCollectionExtensionInterface $decoratedExtension, private array $restrictedResources)
+    public function __construct(private QueryCollectionExtensionInterface $decoratedExtension, private array $restrictedResources)
     {
     }
 
-    public function applyToCollection(QueryBuilder $queryBuilder, QueryNameGeneratorInterface $queryNameGenerator, string $resourceClass, ?string $operationName = null, array $context = []): void
-    {
-        if ($this->isOperationRestricted($resourceClass, $operationName)) {
+    /**
+     * @param array<array-key, mixed> $context
+     */
+    public function applyToCollection(
+        QueryBuilder $queryBuilder,
+        QueryNameGeneratorInterface $queryNameGenerator,
+        string $resourceClass,
+        ?Operation $operation = null,
+        array $context = [],
+    ): void {
+        if ($this->isOperationRestricted($resourceClass, $operation)) {
             return;
         }
 
-        $this->decoratedExtension->applyToCollection($queryBuilder, $queryNameGenerator, $resourceClass, $operationName, $context);
+        $this->decoratedExtension->applyToCollection($queryBuilder, $queryNameGenerator, $resourceClass, $operation, $context);
     }
 
-    private function isOperationRestricted(string $resourceClass, string $operationName): bool
+    private function isOperationRestricted(string $resourceClass, Operation $operation): bool
     {
-        return $this->restrictedResources[$resourceClass]['operations'][$operationName]['enabled'] ?? false;
+        return $this->restrictedResources[$resourceClass]['operations'][$operation->getName()]['enabled'] ?? false;
     }
 }

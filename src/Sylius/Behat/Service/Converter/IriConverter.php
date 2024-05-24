@@ -13,72 +13,46 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Service\Converter;
 
-use ApiPlatform\Api\IriConverterInterface;
-use ApiPlatform\Api\UrlGeneratorInterface;
-use ApiPlatform\Core\Api\IriConverterInterface as LegacyIriConverterInterface;
+use ApiPlatform\Metadata\IriConverterInterface as BaseIriConverterInterface;
 use ApiPlatform\Metadata\Operation;
+use ApiPlatform\Metadata\UrlGeneratorInterface;
+use ApiPlatform\Metadata\Util\ClassInfoTrait;
+use Sylius\Bundle\ApiBundle\Resolver\OperationResolverInterface;
 
-/**
- * Wrapper between the legacy iri converter and the new one
- *
- * @experimental
- */
-final class IriConverter implements LegacyIriConverterInterface, IriConverterInterface
+final readonly class IriConverter implements IriConverterInterface
 {
+    use ClassInfoTrait;
+
     public function __construct(
-        private LegacyIriConverterInterface $legacyIriConverter,
-        private IriConverterInterface $iriConverter,
+        private BaseIriConverterInterface $decoratedIriConverter,
+        private OperationResolverInterface $operationResolver,
     ) {
     }
 
-    public function getItemFromIri(string $iri, array $context = [])
+    public function getResourceFromIri(string $iri, array $context = [], Operation $operation = null): object
     {
-        return $this->legacyIriConverter->getItemFromIri($iri, $context);
-    }
-
-    public function getIriFromItem($item, int $referenceType = UrlGeneratorInterface::ABS_PATH): string
-    {
-        return $this->legacyIriConverter->getIriFromItem($item, $referenceType);
-    }
-
-    public function getIriFromResourceClass(
-        string $resourceClass,
-        int $referenceType = UrlGeneratorInterface::ABS_PATH,
-    ): string {
-        return $this->legacyIriConverter->getIriFromResourceClass($resourceClass, $referenceType);
-    }
-
-    public function getItemIriFromResourceClass(
-        string $resourceClass,
-        array $identifiers,
-        int $referenceType = UrlGeneratorInterface::ABS_PATH,
-    ): string {
-        return $this->legacyIriConverter->getItemIriFromResourceClass($resourceClass, $identifiers, $referenceType);
-    }
-
-    public function getSubresourceIriFromResourceClass(
-        string $resourceClass,
-        array $identifiers,
-        int $referenceType = UrlGeneratorInterface::ABS_PATH,
-    ): string {
-        return $this->legacyIriConverter->getSubresourceIriFromResourceClass(
-            $resourceClass,
-            $identifiers,
-            $referenceType,
-        );
-    }
-
-    public function getResourceFromIri(string $iri, array $context = [], ?Operation $operation = null): object
-    {
-        return $this->iriConverter->getResourceFromIri($iri, $context, $operation);
+        return $this->decoratedIriConverter->getResourceFromIri($iri, $context, $operation);
     }
 
     public function getIriFromResource(
-        $resource,
+        object|string $resource,
         int $referenceType = UrlGeneratorInterface::ABS_PATH,
-        ?Operation $operation = null,
+        Operation $operation = null,
         array $context = [],
     ): ?string {
-        return $this->iriConverter->getIriFromResource($resource, $referenceType, $operation, $context);
+        return $this->decoratedIriConverter->getIriFromResource($resource, $referenceType, $operation, $context);
+    }
+
+    public function getIriFromResourceInSection(
+        object|string $resource,
+        string $section,
+        int $referenceType = UrlGeneratorInterface::ABS_PATH,
+        Operation $operation = null,
+        array $context = [],
+    ): ?string {
+        $resourceClass = $context['force_resource_class'] ?? (\is_string($resource) ? $resource : $this->getObjectClass($resource));
+        $operation = $this->operationResolver->resolve($resourceClass, $section, $operation);
+
+        return $this->decoratedIriConverter->getIriFromResource($resource, $referenceType, $operation, $context);
     }
 }

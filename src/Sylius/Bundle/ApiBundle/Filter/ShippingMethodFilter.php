@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\Filter;
 
-use ApiPlatform\Core\Api\FilterInterface;
+use ApiPlatform\Api\FilterInterface;
 
 final class ShippingMethodFilter implements FilterInterface
 {

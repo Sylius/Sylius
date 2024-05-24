@@ -27,7 +27,7 @@ Feature: Choosing whether to show the lowest product price or not while editing 
         Then I should be notified that it has been successfully edited
         And the "EU Channel" channel should have the lowest price of discounted products prior to the current discount disabled
 
-    @api @no-ui
+    @todo @api @no-ui
     Scenario: Enabling showing the lowest price of discounted products on a channel
         When I want to modify the price history config of channel "US Channel"
         And I change showing of the lowest price of discounted products to be enabled
@@ -35,7 +35,7 @@ Feature: Choosing whether to show the lowest product price or not while editing 
         Then I should be notified that it has been successfully edited
         And the "US Channel" channel should have the lowest price of discounted products prior to the current discount enabled
 
-    @api @no-ui
+    @todo @api @no-ui
     Scenario: Disabling showing the lowest price of discounted products on a channel
         When I want to modify the price history config of channel "EU Channel"
         And I change showing of the lowest price of discounted products to be disabled

@@ -13,8 +13,9 @@ declare(strict_types=1);
 
 namespace spec\Sylius\Bundle\ApiBundle\Doctrine\QueryCollectionExtension;
 
-use ApiPlatform\Core\Bridge\Doctrine\Orm\Extension\ContextAwareQueryCollectionExtensionInterface;
-use ApiPlatform\Core\Bridge\Doctrine\Orm\Util\QueryNameGeneratorInterface;
+use ApiPlatform\Doctrine\Orm\Extension\QueryCollectionExtensionInterface;
+use ApiPlatform\Doctrine\Orm\Util\QueryNameGeneratorInterface;
+use ApiPlatform\Metadata\Get;
 use Doctrine\ORM\Query\Expr;
 use Doctrine\ORM\Query\Expr\Andx;
 use Doctrine\ORM\QueryBuilder;
@@ -34,7 +35,7 @@ final class ProductsByTaxonExtensionSpec extends ObjectBehavior
 
     public function it_is_a_constraint_validator()
     {
-        $this->shouldHaveType(ContextAwareQueryCollectionExtensionInterface::class);
+        $this->shouldHaveType(QueryCollectionExtensionInterface::class);
     }
 
     function it_does_nothing_if_current_resource_is_not_a_product(
@@ -45,7 +46,13 @@ final class ProductsByTaxonExtensionSpec extends ObjectBehavior
         $userContext->getUser()->shouldNotBeCalled();
         $queryBuilder->getRootAliases()->shouldNotBeCalled();
 
-        $this->applyToCollection($queryBuilder, $queryNameGenerator, TaxonInterface::class, 'get', ['filters' => ['productTaxons.taxon.code' => 't_shirts']]);
+        $this->applyToCollection(
+            $queryBuilder,
+            $queryNameGenerator,
+            TaxonInterface::class,
+            new Get(),
+            ['filters' => ['productTaxons.taxon.code' => 't_shirts']],
+        );
     }
 
     function it_does_nothing_if_current_user_is_an_admin_user(
@@ -59,7 +66,13 @@ final class ProductsByTaxonExtensionSpec extends ObjectBehavior
 
         $queryBuilder->getRootAliases()->shouldNotBeCalled();
 
-        $this->applyToCollection($queryBuilder, $queryNameGenerator, ProductInterface::class, 'get', ['filters' => ['productTaxons.taxon.code' => 't_shirts']]);
+        $this->applyToCollection(
+            $queryBuilder,
+            $queryNameGenerator,
+            ProductInterface::class,
+            new Get(),
+            ['filters' => ['productTaxons.taxon.code' => 't_shirts']],
+        );
     }
 
     function it_does_nothing_if_filter_is_not_set(
@@ -73,7 +86,7 @@ final class ProductsByTaxonExtensionSpec extends ObjectBehavior
 
         $queryBuilder->getRootAliases()->shouldNotBeCalled();
 
-        $this->applyToCollection($queryBuilder, $queryNameGenerator, ProductInterface::class, 'get', []);
+        $this->applyToCollection($queryBuilder, $queryNameGenerator, ProductInterface::class, new Get());
     }
 
     function it_filters_products_by_taxon(
@@ -94,15 +107,28 @@ final class ProductsByTaxonExtensionSpec extends ObjectBehavior
 
         $queryBuilder->getRootAliases()->willReturn(['o']);
         $queryBuilder->addSelect('productTaxons')->shouldBeCalled()->willReturn($queryBuilder);
-        $queryBuilder->leftJoin('o.productTaxons', 'productTaxons', 'WITH', 'productTaxons.product = o.id')->shouldBeCalled()->willReturn($queryBuilder);
+        $queryBuilder
+            ->leftJoin('o.productTaxons', 'productTaxons', 'WITH', 'productTaxons.product = o.id')
+            ->shouldBeCalled()
+            ->willReturn($queryBuilder)
+        ;
         $expr->andX(Argument::type(Expr\Comparison::class), Argument::type(Expr\Comparison::class))->willReturn($andx);
         $expr->in('taxon.code', ':taxonCode')->shouldBeCalled()->willReturn($comparison);
         $expr->eq('taxon.enabled', 'true')->shouldBeCalled()->willReturn($comparison);
         $queryBuilder->expr()->willReturn($expr->getWrappedObject());
-        $queryBuilder->leftJoin('productTaxons.taxon', 'taxon', 'WITH', Argument::type(Andx::class))->shouldBeCalled()->willReturn($queryBuilder);
+        $queryBuilder
+            ->leftJoin('productTaxons.taxon', 'taxon', 'WITH', Argument::type(Andx::class))
+            ->willReturn($queryBuilder)
+        ;
         $queryBuilder->orderBy('productTaxons.position', 'ASC')->shouldBeCalled()->willReturn($queryBuilder);
         $queryBuilder->setParameter('taxonCode', ['t_shirts'])->shouldBeCalled()->willReturn($queryBuilder);
 
-        $this->applyToCollection($queryBuilder, $queryNameGenerator, ProductInterface::class, 'get', ['filters' => ['productTaxons.taxon.code' => 't_shirts']]);
+        $this->applyToCollection(
+            $queryBuilder,
+            $queryNameGenerator,
+            ProductInterface::class,
+            new Get(),
+            ['filters' => ['productTaxons.taxon.code' => 't_shirts']],
+        );
     }
 }

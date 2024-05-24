@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Sylius Sp. z o.o.
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<resources
+    xmlns="https://api-platform.com/schema/metadata/resources-3.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="https://api-platform.com/schema/metadata/resources-3.0 https://api-platform.com/schema/metadata/resources-3.0.xsd"
+>
+    <resource class="Sylius\Component\Core\Model\CatalogPromotion" shortName="CatalogPromotion">
+        <validationContext>
+            <values>
+                <value name="groups">
+                    <values>
+                        <value>sylius</value>
+                    </values>
+                </value>
+            </values>
+        </validationContext>
+
+        <operations>
+            <operation class="ApiPlatform\Metadata\Get"  uriTemplate="/admin/catalog-promotions/{code}">
+                <normalizationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius:admin:catalog_promotion:show</value>
+                            </values>
+                        </value>
+                    </values>
+                </normalizationContext>
+            </operation>
+
+            <operation class="ApiPlatform\Metadata\GetCollection" uriTemplate="/admin/catalog-promotions">
+                <normalizationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius:admin:catalog_promotion:index</value>
+                            </values>
+                        </value>
+                    </values>
+                </normalizationContext>
+                <filters>
+                    <filter>sylius.api.catalog_promotion_search_filter</filter>
+                    <filter>sylius.api.catalog_promotion_enabled_filter</filter>
+                    <filter>sylius.api.catalog_promotion_start_date_filter</filter>
+                    <filter>sylius.api.catalog_promotion_end_date_filter</filter>
+                    <filter>Sylius\Bundle\ApiBundle\Filter\Doctrine\ChannelsAwareChannelFilter</filter>
+                    <filter>sylius.api.order_filter.code</filter>
+                    <filter>sylius.api.order_filter.name</filter>
+                    <filter>sylius.api.order_filter.start_date</filter>
+                    <filter>sylius.api.order_filter.end_date</filter>
+                    <filter>sylius.api.order_filter.priority</filter>
+                </filters>
+            </operation>
+
+            <operation class="ApiPlatform\Metadata\Post" uriTemplate="/admin/catalog-promotions" >
+                <denormalizationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius:admin:catalog_promotion:create</value>
+                            </values>
+                        </value>
+                    </values>
+                </denormalizationContext>
+                <normalizationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius:admin:catalog_promotion:show</value>
+                            </values>
+                        </value>
+                    </values>
+                </normalizationContext>
+                <openapiContext>
+                    <values>
+                        <value name="description">
+Example configuration for `for_variants` scope type:
+
+```
+{
+    "type": "for_variants",
+    "configuration": {
+        "variants": [
+            "string"
+        ]
+    }
+}
+```
+
+Example configuration for `percentage_discount` action type:
+
+```
+{
+    "type": "percentage_discount",
+    "configuration": {
+        "amount": float
+    }
+}
+```
+                        </value>
+                    </values>
+                </openapiContext>
+            </operation>
+
+            <operation class="ApiPlatform\Metadata\Put" uriTemplate="/admin/catalog-promotions/{code}">
+                <denormalizationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius:admin:catalog_promotion:update</value>
+                            </values>
+                        </value>
+                    </values>
+                </denormalizationContext>
+                <normalizationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius:admin:catalog_promotion:show</value>
+                            </values>
+                        </value>
+                    </values>
+                </normalizationContext>
+                <openapiContext>
+                    <values>
+                        <value name="description">
+Example configuration for `for_variants` scope type:
+
+```
+{
+    "type": "for_variants",
+    "configuration": {
+        "variants": [
+            "string"
+        ]
+    }
+}
+```
+
+Example configuration for `percentage_discount` action type:
+
+```
+{
+    "type": "percentage_discount",
+    "configuration": {
+        "amount": float
+    }
+}
+```
+                        </value>
+                    </values>
+                </openapiContext>
+            </operation>
+
+            <operation
+                class="ApiPlatform\Metadata\Delete"
+                uriTemplate="/admin/catalog-promotions/{code}"
+                controller="Sylius\Bundle\ApiBundle\Controller\RemoveCatalogPromotionAction"
+            >
+                <openapi>
+                    <responses>
+                        <response status="202" description="CatalogPromotion resource removal request accepted"/>
+                        <response status="400" description="Invalid CatalogPromotion state"/>
+                    </responses>
+                </openapi>
+            </operation>
+
+            <operation class="ApiPlatform\Metadata\Get"  uriTemplate="/shop/catalog-promotions/{code}">
+                <normalizationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius:shop:catalog_promotion:show</value>
+                            </values>
+                        </value>
+                    </values>
+                </normalizationContext>
+            </operation>
+        </operations>
+    </resource>
+</resources>

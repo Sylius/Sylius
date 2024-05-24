@@ -1,0 +1,26 @@
+{
+    "@context": "\/api\/v2\/contexts\/Adjustment",
+    "@id": "\/api\/v2\/admin\/order-items\/@integer@\/adjustments",
+    "@type": "hydra:Collection",
+    "hydra:member": [
+        {
+            "@id": "\/api\/v2\/admin\/adjustments\/@integer@",
+            "@type": "Adjustment",
+            "type": "order_promotion",
+            "amount": -500,
+            "neutral": false,
+            "locked": false
+        }
+    ],
+    "hydra:totalItems": 1,
+    "hydra:view": {
+        "@id": "\/api\/v2\/admin\/order-items\/@integer@\/adjustments?type=order_promotion",
+        "@type": "hydra:PartialCollectionView"
+    },
+    "hydra:search": {
+        "@type": "hydra:IriTemplate",
+        "hydra:template": "\/api\/v2\/admin\/order-items\/@integer@\/adjustments{?}",
+        "hydra:variableRepresentation": "BasicRepresentation",
+        "hydra:mapping": []
+    }
+}

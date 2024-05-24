@@ -1,17 +1,50 @@
 {
-  "@context": "\/api\/v2\/contexts\/Adjustment",
-  "@id": "/api/v2/shop/orders/nAWw2jewpA/adjustments",
-  "@type": "hydra:Collection",
-  "hydra:member": [
-    {
-      "@id": "\/api\/v2\/shop\/adjustments\/@integer@",
-      "@type": "Adjustment",
-      "id": @integer@,
-      "type": "shipping",
-      "label": "UPS",
-      "amount": 500,
-      "neutral": false
+    "@context": "/api/v2/contexts/Adjustment",
+    "@id": "/api/v2/shop/orders/TOKEN/adjustments",
+    "@type": "hydra:Collection",
+    "hydra:totalItems": 4,
+    "hydra:member": [
+        {
+            "@id": "/api/v2/shop/adjustments/@integer@",
+            "@type": "Adjustment",
+            "id": @integer@,
+            "type": "shipping",
+            "label": "UPS",
+            "amount": 500,
+            "neutral": false
+        },
+        {
+            "@id": "/api/v2/shop/adjustments/@integer@",
+            "@type": "Adjustment",
+            "id": @integer@,
+            "type": "order_promotion",
+            "label": "50% Off on your first order",
+            "amount": -1000,
+            "neutral": false
+        },
+        {
+            "@id": "/api/v2/shop/adjustments/@integer@",
+            "@type": "Adjustment",
+            "id": @integer@,
+            "type": "order_promotion",
+            "label": "50% Off on your first order",
+            "amount": -1000,
+            "neutral": false
+        },
+        {
+            "@id": "/api/v2/shop/adjustments/@integer@",
+            "@type": "Adjustment",
+            "id": @integer@,
+            "type": "order_promotion",
+            "label": "50% Off on your first order",
+            "amount": -1000,
+            "neutral": false
+        }
+    ],
+    "hydra:search": {
+        "@type": "hydra:IriTemplate",
+        "hydra:template": "\/api\/v2\/shop\/orders\/TOKEN\/adjustments{?}",
+        "hydra:variableRepresentation": "BasicRepresentation",
+        "hydra:mapping": []
     }
-  ],
-  "hydra:totalItems": 1
 }

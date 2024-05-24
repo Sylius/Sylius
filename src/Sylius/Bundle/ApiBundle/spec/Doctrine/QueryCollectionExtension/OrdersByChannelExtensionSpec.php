@@ -13,7 +13,8 @@ declare(strict_types=1);
 
 namespace spec\Sylius\Bundle\ApiBundle\Doctrine\QueryCollectionExtension;
 
-use ApiPlatform\Core\Bridge\Doctrine\Orm\Util\QueryNameGeneratorInterface;
+use ApiPlatform\Doctrine\Orm\Util\QueryNameGeneratorInterface;
+use ApiPlatform\Metadata\Get;
 use Doctrine\ORM\QueryBuilder;
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ApiBundle\Context\UserContextInterface;
@@ -40,7 +41,7 @@ final class OrdersByChannelExtensionSpec extends ObjectBehavior
     ): void {
         $userContext->getUser()->shouldNotBeCalled();
 
-        $this->applyToCollection($queryBuilder, $queryNameGenerator, ResourceInterface::class, 'get', []);
+        $this->applyToCollection($queryBuilder, $queryNameGenerator, ResourceInterface::class, new Get());
     }
 
     function it_does_nothing_when_user_is_an_admin(
@@ -51,7 +52,7 @@ final class OrdersByChannelExtensionSpec extends ObjectBehavior
     ): void {
         $userContext->getUser()->willReturn($adminUser);
 
-        $this->applyToCollection($queryBuilder, $queryNameGenerator, OrderInterface::class, 'get', []);
+        $this->applyToCollection($queryBuilder, $queryNameGenerator, OrderInterface::class, new Get());
     }
 
     function it_throws_an_exception_if_context_has_no_channel_for_shop_user(
@@ -64,7 +65,7 @@ final class OrdersByChannelExtensionSpec extends ObjectBehavior
 
         $this
             ->shouldThrow(\InvalidArgumentException::class)
-            ->during('applyToCollection', [$queryBuilder, $queryNameGenerator, OrderInterface::class, 'get', []])
+            ->during('applyToCollection', [$queryBuilder, $queryNameGenerator, OrderInterface::class, new Get()])
         ;
     }
 
@@ -83,7 +84,13 @@ final class OrdersByChannelExtensionSpec extends ObjectBehavior
         $queryBuilder->andWhere('o.channel = :channel')->shouldBeCalled()->willReturn($queryBuilder);
         $queryBuilder->setParameter('channel', $channel)->shouldBeCalled()->willReturn($queryBuilder);
 
-        $this->applyToCollection($queryBuilder, $queryNameGenerator, OrderInterface::class, 'get', [ContextKeys::CHANNEL => $channel]);
+        $this->applyToCollection(
+            $queryBuilder,
+            $queryNameGenerator,
+            OrderInterface::class,
+            new Get(),
+            [ContextKeys::CHANNEL => $channel],
+        );
     }
 
     function it_throws_an_access_denied_exception_if_user_is_not_recognised(
@@ -102,8 +109,7 @@ final class OrdersByChannelExtensionSpec extends ObjectBehavior
                     $queryBuilder,
                     $queryNameGenerator,
                     OrderInterface::class,
-                    'get',
-                    [],
+                    new Get(),
                 ],
             )
         ;

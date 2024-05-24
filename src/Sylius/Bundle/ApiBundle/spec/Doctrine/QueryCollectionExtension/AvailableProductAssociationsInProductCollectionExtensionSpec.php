@@ -13,8 +13,9 @@ declare(strict_types=1);
 
 namespace spec\Sylius\Bundle\ApiBundle\Doctrine\QueryCollectionExtension;
 
-use ApiPlatform\Core\Bridge\Doctrine\Orm\Extension\ContextAwareQueryCollectionExtensionInterface;
-use ApiPlatform\Core\Bridge\Doctrine\Orm\Util\QueryNameGeneratorInterface;
+use ApiPlatform\Doctrine\Orm\Extension\QueryCollectionExtensionInterface;
+use ApiPlatform\Doctrine\Orm\Util\QueryNameGeneratorInterface;
+use ApiPlatform\Metadata\Get;
 use Doctrine\ORM\Query\Expr;
 use Doctrine\ORM\Query\Expr\Andx;
 use Doctrine\ORM\QueryBuilder;
@@ -24,6 +25,7 @@ use Sylius\Bundle\ApiBundle\Context\UserContextInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 final class AvailableProductAssociationsInProductCollectionExtensionSpec extends ObjectBehavior
@@ -35,7 +37,7 @@ final class AvailableProductAssociationsInProductCollectionExtensionSpec extends
 
     public function it_is_a_constraint_validator()
     {
-        $this->shouldHaveType(ContextAwareQueryCollectionExtensionInterface::class);
+        $this->shouldHaveType(QueryCollectionExtensionInterface::class);
     }
 
     function it_does_nothing_if_current_resource_is_not_a_product(
@@ -46,7 +48,7 @@ final class AvailableProductAssociationsInProductCollectionExtensionSpec extends
         $userContext->getUser()->shouldNotBeCalled();
         $queryBuilder->getRootAliases()->shouldNotBeCalled();
 
-        $this->applyToCollection($queryBuilder, $queryNameGenerator, TaxonInterface::class, 'get', []);
+        $this->applyToCollection($queryBuilder, $queryNameGenerator, TaxonInterface::class, new Get(name: Request::METHOD_GET));
     }
 
     function it_does_nothing_if_current_user_is_an_admin_user(
@@ -60,7 +62,7 @@ final class AvailableProductAssociationsInProductCollectionExtensionSpec extends
 
         $queryBuilder->getRootAliases()->shouldNotBeCalled();
 
-        $this->applyToCollection($queryBuilder, $queryNameGenerator, ProductInterface::class, 'get', []);
+        $this->applyToCollection($queryBuilder, $queryNameGenerator, ProductInterface::class, new Get(name: Request::METHOD_GET));
     }
 
     function it_filters_products_by_available_associations(
@@ -97,6 +99,6 @@ final class AvailableProductAssociationsInProductCollectionExtensionSpec extends
 
         $queryBuilder->setParameter('enabled', true)->shouldBeCalled()->willReturn($queryBuilder);
 
-        $this->applyToCollection($queryBuilder, $queryNameGenerator, ProductInterface::class, 'get', []);
+        $this->applyToCollection($queryBuilder, $queryNameGenerator, ProductInterface::class, new Get(name: Request::METHOD_GET));
     }
 }

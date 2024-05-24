@@ -153,20 +153,14 @@
         <service id="Psr\Clock\ClockInterface" alias="sylius.behat.clock" />
         <service id="argument_resolver.datetime" alias="sylius.behat.clock" />
 
-        <service id="sylius.behat.section_iri_converter" class="Sylius\Behat\Service\Converter\SectionAwareIriConverter" public="false">
-            <argument type="service" id="api_platform.route_name_resolver" />
-            <argument type="service" id="api_platform.router" />
-            <argument type="service" id="api_platform.metadata.property.name_collection_factory" />
-            <argument type="service" id="api_platform.metadata.property.metadata_factory" />
-            <argument type="service" id="api_platform.property_accessor" />
-            <argument type="service" id="api_platform.identifiers_extractor.cached" />
-            <argument type="service" id="api_platform.resource_class_resolver" />
-            <argument type="service" id="api_platform.metadata.resource.metadata_factory" />
-        </service>
-
-        <service id="api_platform.iri_converter" class="Sylius\Behat\Service\Converter\IriConverter">
-            <argument type="service" id="api_platform.iri_converter.legacy" />
-            <argument type="service" id="api_platform.symfony.iri_converter" />
+        <service
+            id="Sylius\Behat\Service\Converter\IriConverter"
+            decorates="api_platform.symfony.iri_converter"
+            decoration-priority="32"
+            public="false"
+        >
+            <argument type="service" id=".inner" />
+            <argument type="service" id="Sylius\Bundle\ApiBundle\Resolver\OperationResolverInterface" />
         </service>
     </services>
 </container>

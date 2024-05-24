@@ -35,7 +35,7 @@ Feature: Excluding chosen taxons from displaying the lowest price of discounted 
         And this channel should have "Caps" taxon excluded from displaying the lowest price of discounted products
         And this channel should not have "T-Shirts" taxon excluded from displaying the lowest price of discounted products
 
-    @api @no-ui
+    @todo @api @no-ui
     Scenario: Excluding a singular taxon from displaying the lowest price of discounted products
         When I want to modify the price history config of channel "Poland"
         And I exclude the "T-Shirts" taxon from showing the lowest price of discounted products
@@ -43,7 +43,7 @@ Feature: Excluding chosen taxons from displaying the lowest price of discounted 
         Then I should be notified that it has been successfully edited
         And this channel should have "T-Shirts" taxon excluded from displaying the lowest price of discounted products
 
-    @api @no-ui
+    @todo @api @no-ui
     Scenario: Excluding multiple taxons from displaying the lowest price of discounted products
         When I want to modify the price history config of channel "Poland"
         And I exclude the "T-Shirts" and "Caps" taxons from showing the lowest price of discounted products

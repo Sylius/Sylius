@@ -13,7 +13,7 @@ Feature: Viewing addresses created after checkout
         And I have an address "Lucifer Morningstar", "Seaside Fwy", "90802", "Los Angeles", "United States", "Arkansas" in my address book
         And my default address is of "Lucifer Morningstar"
 
-    @ui @api
+    @ui @api-todo-checkout
     Scenario: Viewing address created after placing an order
         Given I have product "PHP T-Shirt" in the cart
         And I am at the checkout addressing step

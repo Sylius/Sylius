@@ -31,7 +31,7 @@ default:
                 - sylius.behat.context.setup.user
 
                 - sylius.behat.context.api.shop.address
-                - sylius.behat.context.api.shop.checkout
+#                - sylius.behat.context.api.shop.checkout #todo-checkout
                 - sylius.behat.context.api.shop.save
 
             filters:

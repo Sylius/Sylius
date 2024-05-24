@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Sylius Sp. z o.o.
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<properties xmlns="https://api-platform.com/schema/metadata/properties-3.0"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xsi:schemaLocation="https://api-platform.com/schema/metadata/properties-3.0 https://api-platform.com/schema/metadata/properties-3.0.xsd"
+>
+    <property resource="Sylius\Component\Core\Model\Customer" name="id" identifier="true" writable="false" />
+    <property resource="Sylius\Component\Core\Model\Customer" name="email" writable="true" />
+    <property resource="Sylius\Component\Core\Model\Customer" name="firstName" writable="true" />
+    <property resource="Sylius\Component\Core\Model\Customer" name="lastName" writable="true" />
+    <property resource="Sylius\Component\Core\Model\Customer" name="fullName" writable="false" />
+    <property resource="Sylius\Component\Core\Model\Customer" name="defaultAddress" writable="true" />
+    <property resource="Sylius\Component\Core\Model\Customer" name="subscribedToNewsletter" writable="true" />
+    <property resource="Sylius\Component\Core\Model\Customer" name="user" readable="true" />
+</properties>

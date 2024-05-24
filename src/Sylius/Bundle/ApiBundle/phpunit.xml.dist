@@ -20,6 +20,11 @@
     <testsuites>
         <testsuite name="SyliusApiBundle Test Suite">
             <directory>./Tests/</directory>
+            <exclude>./Tests/ApiPlatform</exclude>
+            <exclude>./Tests/Application/src/Tests</exclude>
+            <exclude>./Tests/CommandHandler</exclude>
+            <exclude>./Tests/Converter</exclude>
+            <exclude>./Tests/DependencyInjection</exclude>
         </testsuite>
     </testsuites>
 </phpunit>

@@ -22,12 +22,11 @@ class RequestResetPasswordToken implements
     LocaleCodeAwareInterface,
     IriToIdentifierConversionAwareInterface
 {
-    public ?string $channelCode = null;
-
-    public ?string $localeCode = null;
-
-    public function __construct(public readonly string $email)
-    {
+    public function __construct(
+        protected readonly string $email,
+        protected ?string $channelCode,
+        protected ?string $localeCode,
+    ) {
     }
 
     public function getEmail(): string
@@ -40,18 +39,8 @@ class RequestResetPasswordToken implements
         return $this->channelCode;
     }
 
-    public function setChannelCode(?string $channelCode): void
-    {
-        $this->channelCode = $channelCode;
-    }
-
     public function getLocaleCode(): ?string
     {
         return $this->localeCode;
-    }
-
-    public function setLocaleCode(?string $localeCode): void
-    {
-        $this->localeCode = $localeCode;
     }
 }

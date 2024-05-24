@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\EventSubscriber;
 
-use ApiPlatform\Core\EventListener\EventPriorities;
+use ApiPlatform\Symfony\EventListener\EventPriorities;
 use Sylius\Component\Core\Event\ProductVariantCreated;
 use Sylius\Component\Core\Event\ProductVariantUpdated;
 use Sylius\Component\Core\Model\ProductVariantInterface;
@@ -23,7 +23,7 @@ use Symfony\Component\HttpKernel\Event\ViewEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 use Symfony\Component\Messenger\MessageBusInterface;
 
-final class ProductVariantEventSubscriber implements EventSubscriberInterface
+final readonly class ProductVariantEventSubscriber implements EventSubscriberInterface
 {
     public function __construct(private MessageBusInterface $eventBus)
     {

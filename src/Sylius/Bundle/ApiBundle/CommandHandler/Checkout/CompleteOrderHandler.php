@@ -13,10 +13,8 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\CommandHandler\Checkout;
 
-use SM\Factory\FactoryInterface;
 use Sylius\Abstraction\StateMachine\Exception\StateMachineExecutionException;
 use Sylius\Abstraction\StateMachine\StateMachineInterface;
-use Sylius\Abstraction\StateMachine\WinzouStateMachineAdapter;
 use Sylius\Bundle\ApiBundle\Command\Cart\InformAboutCartRecalculation;
 use Sylius\Bundle\ApiBundle\Command\Checkout\CompleteOrder;
 use Sylius\Bundle\ApiBundle\CommandHandler\Checkout\Exception\OrderTotalHasChangedException;
@@ -30,26 +28,15 @@ use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Messenger\Stamp\DispatchAfterCurrentBusStamp;
 use Webmozart\Assert\Assert;
 
-final class CompleteOrderHandler implements MessageHandlerInterface
+final readonly class CompleteOrderHandler implements MessageHandlerInterface
 {
     public function __construct(
         private OrderRepositoryInterface $orderRepository,
-        private FactoryInterface|StateMachineInterface $stateMachineFactory,
+        private StateMachineInterface $stateMachineFactory,
         private MessageBusInterface $commandBus,
         private MessageBusInterface $eventBus,
         private OrderPromotionsIntegrityCheckerInterface $orderPromotionsIntegrityChecker,
     ) {
-        if ($this->stateMachineFactory instanceof FactoryInterface) {
-            trigger_deprecation(
-                'sylius/api-bundle',
-                '1.13',
-                sprintf(
-                    'Passing an instance of "%s" as the second argument is deprecated. It will accept only instances of "%s" in Sylius 2.0.',
-                    FactoryInterface::class,
-                    StateMachineInterface::class,
-                ),
-            );
-        }
     }
 
     /**
@@ -85,25 +72,15 @@ final class CompleteOrderHandler implements MessageHandlerInterface
             throw new OrderTotalHasChangedException();
         }
 
-        $stateMachine = $this->getStateMachine();
         Assert::true(
-            $stateMachine->can($cart, OrderCheckoutTransitions::GRAPH, OrderCheckoutTransitions::TRANSITION_COMPLETE),
+            $this->stateMachineFactory->can($cart, OrderCheckoutTransitions::GRAPH, OrderCheckoutTransitions::TRANSITION_COMPLETE),
             sprintf('Order with %s token cannot be completed.', $orderTokenValue),
         );
 
-        $stateMachine->apply($cart, OrderCheckoutTransitions::GRAPH, OrderCheckoutTransitions::TRANSITION_COMPLETE);
+        $this->stateMachineFactory->apply($cart, OrderCheckoutTransitions::GRAPH, OrderCheckoutTransitions::TRANSITION_COMPLETE);
 
         $this->eventBus->dispatch(new OrderCompleted($cart->getTokenValue()), [new DispatchAfterCurrentBusStamp()]);
 
         return $cart;
-    }
-
-    private function getStateMachine(): StateMachineInterface
-    {
-        if ($this->stateMachineFactory instanceof FactoryInterface) {
-            return new WinzouStateMachineAdapter($this->stateMachineFactory);
-        }
-
-        return $this->stateMachineFactory;
     }
 }

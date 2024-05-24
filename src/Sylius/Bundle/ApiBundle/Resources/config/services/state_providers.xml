@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Sylius Sp. z o.o.
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
+>
+    <services>
+        <service id="sylius_api.state_provider.order_recursive_adjustments" class="Sylius\Bundle\ApiBundle\StateProvider\RecursiveAdjustmentsProvider">
+            <argument type="service" id="sylius.repository.order" />
+            <argument type="string">tokenValue</argument>
+            <tag name="api_platform.state_provider" />
+        </service>
+
+        <service id="sylius_api.state_provider.order_item_recursive_adjustments" class="Sylius\Bundle\ApiBundle\StateProvider\RecursiveAdjustmentsProvider">
+            <argument type="service" id="sylius.repository.order_item" />
+            <argument type="string">id</argument>
+            <tag name="api_platform.state_provider" />
+        </service>
+
+        <service id="sylius_api.state_provider.shop.order_item_adjustments" class="Sylius\Bundle\ApiBundle\StateProvider\Shop\OrderItemAdjustmentsProvider">
+            <argument type="service" id="sylius.repository.order_item" />
+            <tag name="api_platform.state_provider" />
+        </service>
+
+        <service id="Sylius\Bundle\ApiBundle\StateProvider\ShopUserResetPasswordProvider">
+            <tag name="api_platform.state_provider" />
+        </service>
+
+        <service id="Sylius\Bundle\ApiBundle\StateProvider\Input\VerifyShopUserStateProvider">
+            <tag name="api_platform.state_provider" priority="10" />
+        </service>
+
+        <service id="Sylius\Bundle\ApiBundle\StateProvider\Admin\ResetPasswordProvider">
+            <tag name="api_platform.state_provider" priority="10" />
+        </service>
+
+        <service id="sylius_api.state_provider.shop.channel" class="Sylius\Bundle\ApiBundle\StateProvider\Shop\ChannelProvider" >
+            <argument type="service" id="Sylius\Bundle\CoreBundle\SectionResolver\SectionProviderInterface" />
+            <tag name="api_platform.state_provider" priority="10" />
+        </service>
+    </services>
+</container>

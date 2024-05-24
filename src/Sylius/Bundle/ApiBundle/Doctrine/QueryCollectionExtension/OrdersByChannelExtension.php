@@ -13,8 +13,9 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\Doctrine\QueryCollectionExtension;
 
-use ApiPlatform\Core\Bridge\Doctrine\Orm\Extension\ContextAwareQueryCollectionExtensionInterface;
-use ApiPlatform\Core\Bridge\Doctrine\Orm\Util\QueryNameGeneratorInterface;
+use ApiPlatform\Doctrine\Orm\Extension\QueryCollectionExtensionInterface;
+use ApiPlatform\Doctrine\Orm\Util\QueryNameGeneratorInterface;
+use ApiPlatform\Metadata\Operation;
 use Doctrine\ORM\QueryBuilder;
 use Sylius\Bundle\ApiBundle\Context\UserContextInterface;
 use Sylius\Bundle\ApiBundle\Serializer\ContextKeys;
@@ -24,17 +25,20 @@ use Sylius\Component\Core\Model\ShopUserInterface;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Webmozart\Assert\Assert;
 
-final class OrdersByChannelExtension implements ContextAwareQueryCollectionExtensionInterface
+final readonly class OrdersByChannelExtension implements QueryCollectionExtensionInterface
 {
     public function __construct(private UserContextInterface $userContext)
     {
     }
 
+    /**
+     * @param array<array-key, mixed> $context
+     */
     public function applyToCollection(
         QueryBuilder $queryBuilder,
         QueryNameGeneratorInterface $queryNameGenerator,
         string $resourceClass,
-        ?string $operationName = null,
+        ?Operation $operation = null,
         array $context = [],
     ): void {
         if (!is_a($resourceClass, OrderInterface::class, true)) {

@@ -13,7 +13,8 @@ declare(strict_types=1);
 
 namespace spec\Sylius\Bundle\ApiBundle\Doctrine\QueryCollectionExtension;
 
-use ApiPlatform\Core\Bridge\Doctrine\Orm\Util\QueryNameGeneratorInterface;
+use ApiPlatform\Doctrine\Orm\Util\QueryNameGeneratorInterface;
+use ApiPlatform\Metadata\Get;
 use Doctrine\ORM\QueryBuilder;
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ApiBundle\Context\UserContextInterface;
@@ -38,7 +39,7 @@ final class ProductsWithEnableFlagExtensionSpec extends ObjectBehavior
         $userContext->getUser()->shouldNotBeCalled();
         $queryBuilder->getRootAliases()->shouldNotBeCalled();
 
-        $this->applyToCollection($queryBuilder, $queryNameGenerator, TaxonInterface::class, 'get', []);
+        $this->applyToCollection($queryBuilder, $queryNameGenerator, TaxonInterface::class, new Get());
     }
 
     function it_does_nothing_if_current_user_is_an_admin_user(
@@ -52,7 +53,7 @@ final class ProductsWithEnableFlagExtensionSpec extends ObjectBehavior
 
         $queryBuilder->getRootAliases()->shouldNotBeCalled();
 
-        $this->applyToCollection($queryBuilder, $queryNameGenerator, ProductInterface::class, 'get', []);
+        $this->applyToCollection($queryBuilder, $queryNameGenerator, ProductInterface::class, new Get());
     }
 
     function it_filters_products_by_enabled_flag_for_shop_user(
@@ -71,6 +72,12 @@ final class ProductsWithEnableFlagExtensionSpec extends ObjectBehavior
         $queryBuilder->andWhere('o.enabled = :enabled')->shouldBeCalled()->willReturn($queryBuilder);
         $queryBuilder->setParameter('enabled', true)->shouldBeCalled()->willReturn($queryBuilder);
 
-        $this->applyToCollection($queryBuilder, $queryNameGenerator, ProductInterface::class, 'get', [ContextKeys::CHANNEL => $channel, ContextKeys::LOCALE_CODE => 'en_US']);
+        $this->applyToCollection(
+            $queryBuilder,
+            $queryNameGenerator,
+            ProductInterface::class,
+            new Get(),
+            [ContextKeys::CHANNEL => $channel, ContextKeys::LOCALE_CODE => 'en_US'],
+        );
     }
 }

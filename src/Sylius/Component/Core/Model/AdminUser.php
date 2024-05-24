@@ -75,7 +75,7 @@ class AdminUser extends User implements AdminUserInterface, EquatableInterface
 
     public function setImage(?ImageInterface $image): void
     {
-        $image->setOwner($this);
+        $image?->setOwner($this);
         $this->avatar = $image;
     }
 

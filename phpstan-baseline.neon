@@ -591,41 +591,6 @@ parameters:
 			path: src/Sylius/Bundle/ApiBundle/Converter/IriToIdentifierConverterInterface.php
 
 		-
-			message: "#^Method Sylius\\\\Bundle\\\\ApiBundle\\\\DataPersister\\\\AddressDataPersister\\:\\:persist\\(\\) has parameter \\$context with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Sylius/Bundle/ApiBundle/DataPersister/AddressDataPersister.php
-
-		-
-			message: "#^Method Sylius\\\\Bundle\\\\ApiBundle\\\\DataPersister\\\\AddressDataPersister\\:\\:persist\\(\\) has parameter \\$data with no type specified\\.$#"
-			count: 1
-			path: src/Sylius/Bundle/ApiBundle/DataPersister/AddressDataPersister.php
-
-		-
-			message: "#^Method Sylius\\\\Bundle\\\\ApiBundle\\\\DataPersister\\\\AddressDataPersister\\:\\:remove\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Sylius/Bundle/ApiBundle/DataPersister/AddressDataPersister.php
-
-		-
-			message: "#^Method Sylius\\\\Bundle\\\\ApiBundle\\\\DataPersister\\\\AddressDataPersister\\:\\:remove\\(\\) has parameter \\$context with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Sylius/Bundle/ApiBundle/DataPersister/AddressDataPersister.php
-
-		-
-			message: "#^Method Sylius\\\\Bundle\\\\ApiBundle\\\\DataPersister\\\\AddressDataPersister\\:\\:remove\\(\\) has parameter \\$data with no type specified\\.$#"
-			count: 1
-			path: src/Sylius/Bundle/ApiBundle/DataPersister/AddressDataPersister.php
-
-		-
-			message: "#^Method Sylius\\\\Bundle\\\\ApiBundle\\\\DataPersister\\\\AddressDataPersister\\:\\:supports\\(\\) has parameter \\$context with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Sylius/Bundle/ApiBundle/DataPersister/AddressDataPersister.php
-
-		-
-			message: "#^Method Sylius\\\\Bundle\\\\ApiBundle\\\\DataPersister\\\\AddressDataPersister\\:\\:supports\\(\\) has parameter \\$data with no type specified\\.$#"
-			count: 1
-			path: src/Sylius/Bundle/ApiBundle/DataPersister/AddressDataPersister.php
-
-		-
 			message: "#^Method Sylius\\\\Bundle\\\\ApiBundle\\\\DataPersister\\\\AdminUserDataPersister\\:\\:persist\\(\\) has parameter \\$context with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Sylius/Bundle/ApiBundle/DataPersister/AdminUserDataPersister.php
@@ -1501,11 +1466,6 @@ parameters:
 			path: src/Sylius/Bundle/ApiBundle/Doctrine/QueryCollectionExtension/AcceptedProductReviewsExtension.php
 
 		-
-			message: "#^Method Sylius\\\\Bundle\\\\ApiBundle\\\\Doctrine\\\\QueryCollectionExtension\\\\AddressesExtension\\:\\:applyToCollection\\(\\) has parameter \\$context with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Sylius/Bundle/ApiBundle/Doctrine/QueryCollectionExtension/AddressesExtension.php
-
-		-
 			message: "#^Method Sylius\\\\Bundle\\\\ApiBundle\\\\Doctrine\\\\QueryCollectionExtension\\\\AvailableProductAssociationsInProductCollectionExtension\\:\\:applyToCollection\\(\\) has parameter \\$context with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Sylius/Bundle/ApiBundle/Doctrine/QueryCollectionExtension/AvailableProductAssociationsInProductCollectionExtension.php
@@ -1594,21 +1554,6 @@ parameters:
 			message: "#^Method Sylius\\\\Bundle\\\\ApiBundle\\\\Doctrine\\\\QueryExtension\\\\ExchangeRateExtension\\:\\:applyToItem\\(\\) has parameter \\$identifiers with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Sylius/Bundle/ApiBundle/Doctrine/QueryExtension/ExchangeRateExtension.php
-
-		-
-			message: "#^Method Sylius\\\\Bundle\\\\ApiBundle\\\\Doctrine\\\\QueryItemExtension\\\\AddressItemExtension\\:\\:applyToItem\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Sylius/Bundle/ApiBundle/Doctrine/QueryItemExtension/AddressItemExtension.php
-
-		-
-			message: "#^Method Sylius\\\\Bundle\\\\ApiBundle\\\\Doctrine\\\\QueryItemExtension\\\\AddressItemExtension\\:\\:applyToItem\\(\\) has parameter \\$context with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Sylius/Bundle/ApiBundle/Doctrine/QueryItemExtension/AddressItemExtension.php
-
-		-
-			message: "#^Method Sylius\\\\Bundle\\\\ApiBundle\\\\Doctrine\\\\QueryItemExtension\\\\AddressItemExtension\\:\\:applyToItem\\(\\) has parameter \\$identifiers with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Sylius/Bundle/ApiBundle/Doctrine/QueryItemExtension/AddressItemExtension.php
 
 		-
 			message: "#^Method Sylius\\\\Bundle\\\\ApiBundle\\\\Doctrine\\\\QueryItemExtension\\\\EnabledProductInProductAssociationItemExtension\\:\\:applyToItem\\(\\) has no return type specified\\.$#"

@@ -18,15 +18,15 @@
     <services>
         <defaults public="false" />
 
-        <service id="Sylius\Bundle\ApiBundle\OpenApi\Factory\OpenApiFactory" decorates="api_platform.openapi.factory">
+        <service id="Sylius\Bundle\ApiBundle\OpenApi\Factory\OpenApiFactory" decorates="lexik_jwt_authentication.api_platform.openapi.factory">
             <argument type="service" id="Sylius\Bundle\ApiBundle\OpenApi\Factory\OpenApiFactory.inner" />
             <argument type="tagged_iterator" tag="sylius.open_api.modifier" />
         </service>
 
-        <service id="Sylius\Bundle\ApiBundle\OpenApi\Documentation\AcceptLanguageHeaderDocumentationModifier">
-            <argument type="service" id="sylius.repository.locale" />
-            <tag name="sylius.open_api.modifier" />
-        </service>
+<!--        <service id="Sylius\Bundle\ApiBundle\OpenApi\Documentation\AcceptLanguageHeaderDocumentationModifier">-->
+<!--            <argument type="service" id="sylius.repository.locale" />-->
+<!--            <tag name="sylius.open_api.modifier" />-->
+<!--        </service>-->
 
         <service id="Sylius\Bundle\ApiBundle\OpenApi\Documentation\AdministratorDocumentationModifier">
             <argument>%sylius.security.new_api_route%</argument>
@@ -38,40 +38,40 @@
             <tag name="sylius.open_api.modifier" />
         </service>
 
-        <service id="Sylius\Bundle\ApiBundle\OpenApi\Documentation\AttributeTypeDocumentationModifier">
-            <argument type="service" id="sylius.registry.attribute_type" />
-            <tag name="sylius.open_api.modifier" />
-        </service>
+<!--        <service id="Sylius\Bundle\ApiBundle\OpenApi\Documentation\AttributeTypeDocumentationModifier">-->
+<!--            <argument type="service" id="sylius.registry.attribute_type" />-->
+<!--            <tag name="sylius.open_api.modifier" />-->
+<!--        </service>-->
 
-        <service id="Sylius\Bundle\ApiBundle\OpenApi\Documentation\ProductDocumentationModifier">
-            <tag name="sylius.open_api.modifier" />
-        </service>
+<!--        <service id="Sylius\Bundle\ApiBundle\OpenApi\Documentation\ProductDocumentationModifier">-->
+<!--            <tag name="sylius.open_api.modifier" />-->
+<!--        </service>-->
 
-        <service id="Sylius\Bundle\ApiBundle\OpenApi\Documentation\ImageDocumentationModifier">
-            <argument type="service" id="Sylius\Bundle\ApiBundle\Provider\ImageFiltersProviderInterface" />
-            <tag name="sylius.open_api.modifier" />
-        </service>
+<!--        <service id="Sylius\Bundle\ApiBundle\OpenApi\Documentation\ImageDocumentationModifier">-->
+<!--            <argument type="service" id="Sylius\Bundle\ApiBundle\Provider\ImageFiltersProviderInterface" />-->
+<!--            <tag name="sylius.open_api.modifier" />-->
+<!--        </service>-->
 
-        <service id="Sylius\Bundle\ApiBundle\OpenApi\Documentation\ProductReviewDocumentationModifier">
-            <argument>%sylius.security.new_api_route%</argument>
-            <tag name="sylius.open_api.modifier" />
-        </service>
+<!--        <service id="Sylius\Bundle\ApiBundle\OpenApi\Documentation\ProductReviewDocumentationModifier">-->
+<!--            <argument>%sylius.security.new_api_route%</argument>-->
+<!--            <tag name="sylius.open_api.modifier" />-->
+<!--        </service>-->
 
-        <service id="Sylius\Bundle\ApiBundle\OpenApi\Documentation\ProductSlugDocumentationModifier">
-            <argument>%sylius.security.new_api_route%</argument>
-            <tag name="sylius.open_api.modifier" />
-        </service>
+<!--        <service id="Sylius\Bundle\ApiBundle\OpenApi\Documentation\ProductSlugDocumentationModifier">-->
+<!--            <argument>%sylius.security.new_api_route%</argument>-->
+<!--            <tag name="sylius.open_api.modifier" />-->
+<!--        </service>-->
 
-        <service id="Sylius\Bundle\ApiBundle\OpenApi\Documentation\ProductVariantDocumentationModifier">
-            <tag name="sylius.open_api.modifier" />
-        </service>
+<!--        <service id="Sylius\Bundle\ApiBundle\OpenApi\Documentation\ProductVariantDocumentationModifier">-->
+<!--            <tag name="sylius.open_api.modifier" />-->
+<!--        </service>-->
 
-        <service id="Sylius\Bundle\ApiBundle\OpenApi\Documentation\ShippingMethodDocumentationModifier">
-            <argument>%sylius.security.new_api_route%</argument>
-            <argument>%sylius.shipping_method_rules%</argument>
-            <argument>%sylius.shipping_calculators%</argument>
-            <tag name="sylius.open_api.modifier" />
-        </service>
+<!--        <service id="Sylius\Bundle\ApiBundle\OpenApi\Documentation\ShippingMethodDocumentationModifier">-->
+<!--            <argument>%sylius.security.new_api_route%</argument>-->
+<!--            <argument>%sylius.shipping_method_rules%</argument>-->
+<!--            <argument>%sylius.shipping_calculators%</argument>-->
+<!--            <tag name="sylius.open_api.modifier" />-->
+<!--        </service>-->
 
         <service id="Sylius\Bundle\ApiBundle\OpenApi\Documentation\CustomerDocumentationModifier">
             <argument>%sylius.security.new_api_route%</argument>
