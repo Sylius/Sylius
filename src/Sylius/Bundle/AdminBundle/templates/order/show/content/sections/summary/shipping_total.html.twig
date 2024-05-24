@@ -1,4 +1,4 @@
-{% import '@SyliusAdmin/shared/helper/money.html.twig' as _money %}
+{% import '@SyliusAdmin/shared/helper/money.html.twig' as money %}
 
 {% set order_shipping_promotion_adjustment = constant('Sylius\\Component\\Core\\Model\\AdjustmentInterface::ORDER_SHIPPING_PROMOTION_ADJUSTMENT') %}
 {% set shipping_adjustment = constant('Sylius\\Component\\Core\\Model\\AdjustmentInterface::SHIPPING_ADJUSTMENT') %}
@@ -15,10 +15,10 @@
                 {% for shipment in order.shipments %}
                     <div {{ sylius_test_html_attribute('shipping', shipment.method.name) }}>
                         {% for adjustment in shipment.adjustments(shipping_adjustment) %}
-                            {{ adjustment.label }}: <span {{ sylius_test_html_attribute('base-value') }}>{{ _money.format(adjustment.amount, order.currencyCode) }}</span>
+                            {{ adjustment.label }}: <span {{ sylius_test_html_attribute('base-value') }}>{{ money.format(adjustment.amount, order.currencyCode) }}</span>
                         {% endfor %}
                         {% for adjustment in shipment.adjustments(tax_adjustment) %}
-                            {{ adjustment.label }}: <span {{ sylius_test_html_attribute('tax-value') }}>{{ _money.format(adjustment.amount, order.currencyCode) }}</span>
+                            {{ adjustment.label }}: <span {{ sylius_test_html_attribute('tax-value') }}>{{ money.format(adjustment.amount, order.currencyCode) }}</span>
                             {% if adjustment.isNeutral %}
                                 <small>({{ 'sylius.ui.included_in_price'|trans }})</small>
                             {% endif %}
@@ -27,11 +27,10 @@
                 {% endfor %}
 
                 {% for label, amount in order_shipping_promotions %}
-                    <div>{{ label }}: <span {{ sylius_test_html_attribute('shipping-promotion-discount') }}>{{ _money.format(amount, order.currencyCode) }}</span></div>
+                    <div>{{ label }}: <span {{ sylius_test_html_attribute('shipping-promotion-discount') }}>{{ money.format(amount, order.currencyCode) }}</span></div>
                 {% endfor %}
             </div>
         </div>
     </td>
-    <td class="text-end" {{ sylius_test_html_attribute('shipping-total') }}>{{ _money.format(order.shippingTotal, order.currencyCode) }}</td>
+    <td class="text-end" {{ sylius_test_html_attribute('shipping-total') }}>{{ money.format(order.shippingTotal, order.currencyCode) }}</td>
 </tr>
-

@@ -61,11 +61,11 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
-            'code' => '#sylius_promotion_coupon_code',
-            'expires_at' => '#sylius_promotion_coupon_expiresAt',
-            'usage_limit' => '#sylius_promotion_coupon_usageLimit',
-            'per_customer_usage_limit' => '#sylius_promotion_coupon_perCustomerUsageLimit',
-            'reusable_from_cancelled_orders' => '#sylius_promotion_coupon_reusableFromCancelledOrders',
+            'code' => '#sylius_admin_promotion_coupon_code',
+            'expires_at' => '#sylius_admin_promotion_coupon_expiresAt',
+            'usage_limit' => '#sylius_admin_promotion_coupon_usageLimit',
+            'per_customer_usage_limit' => '#sylius_admin_promotion_coupon_perCustomerUsageLimit',
+            'reusable_from_cancelled_orders' => '#sylius_admin_promotion_coupon_reusableFromCancelledOrders',
         ]);
     }
 }

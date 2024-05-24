@@ -6,6 +6,8 @@ sylius_admin_customer:
         except: ['delete']
         redirect: update
         grid: sylius_admin_customer
+        form:
+            type: Sylius\Bundle\AdminBundle\Form\Type\CustomerType
         permission: true
         vars:
             all:

@@ -92,13 +92,13 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
-            'email' => '#sylius_customer_email',
-            'enabled' => '#sylius_customer_user_enabled',
-            'first_name' => '#sylius_customer_firstName',
-            'group' => '#sylius_customer_group',
-            'last_name' => '#sylius_customer_lastName',
-            'password' => '#sylius_customer_user_password',
-            'verified_at' => '#sylius_customer_user_verifiedAt',
+            'email' => '#sylius_admin_customer_email',
+            'enabled' => '#sylius_admin_customer_user_enabled',
+            'first_name' => '#sylius_admin_customer_firstName',
+            'group' => '#sylius_admin_customer_group',
+            'last_name' => '#sylius_admin_customer_lastName',
+            'password' => '#sylius_admin_customer_user_password',
+            'verified_at' => '#sylius_admin_customer_user_verifiedAt',
         ]);
     }
 }

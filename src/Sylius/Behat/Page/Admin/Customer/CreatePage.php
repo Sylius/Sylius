@@ -54,12 +54,12 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
 
     public function selectCreateAccount(): void
     {
-        $this->getDocument()->find('css', 'label[for=sylius_customer_createUser]')->click();
+        $this->getDocument()->find('css', 'label[for=sylius_admin_customer_createUser]')->click();
     }
 
     public function hasPasswordField(): bool
     {
-        return null !== $this->getDocument()->find('css', '#sylius_customer_user_plainPassword');
+        return null !== $this->getDocument()->find('css', '#sylius_admin_customer_user_plainPassword');
     }
 
     public function hasCheckedCreateOption(): bool
@@ -69,7 +69,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
 
     public function hasCreateOption(): bool
     {
-        return null !== $this->getDocument()->find('css', '#sylius_customer_createUser');
+        return null !== $this->getDocument()->find('css', '#sylius_admin_customer_createUser');
     }
 
     public function isUserFormHidden(): bool
@@ -80,11 +80,11 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
-            'create_customer_user' => '#sylius_customer_createUser',
-            'email' => '#sylius_customer_email',
-            'first_name' => '#sylius_customer_firstName',
-            'last_name' => '#sylius_customer_lastName',
-            'password' => '#sylius_customer_user_plainPassword',
+            'create_customer_user' => '#sylius_admin_customer_createUser',
+            'email' => '#sylius_admin_customer_email',
+            'first_name' => '#sylius_admin_customer_firstName',
+            'last_name' => '#sylius_admin_customer_lastName',
+            'password' => '#sylius_admin_customer_user_plainPassword',
             'user_form' => '#user-form',
         ]);
     }

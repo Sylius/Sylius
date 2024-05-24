@@ -24,7 +24,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
 
     public function changeName(string $name, string $language): void
     {
-        $this->getDocument()->fillField(sprintf('sylius_product_attribute_translations_%s_name', $language), $name);
+        $this->getDocument()->fillField(sprintf('sylius_admin_product_attribute_translations_%s_name', $language), $name);
     }
 
     public function isTypeDisabled(): bool
@@ -70,10 +70,10 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     {
         return array_merge(parent::getDefinedElements(), [
             'attribute_choice_list_element' => 'input[value="%value%"]',
-            'attribute_choices' => '#sylius_product_attribute_configuration_choices',
-            'code' => '#sylius_product_attribute_code',
-            'type' => '#sylius_product_attribute_type',
-            'name' => '#sylius_product_attribute_translations_en_US_name',
+            'attribute_choices' => '#sylius_admin_product_attribute_configuration_choices',
+            'code' => '#sylius_admin_product_attribute_code',
+            'type' => '#sylius_admin_product_attribute_type',
+            'name' => '#sylius_admin_product_attribute_translations_en_US_name',
         ]);
     }
 

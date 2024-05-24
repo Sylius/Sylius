@@ -29,7 +29,7 @@ class FormComponent
     use DefaultActionTrait;
     use HookableLiveComponentTrait;
 
-    #[LiveProp]
+    #[LiveProp(fieldName: 'resource')]
     public ?Order $order = null;
 
     /** @param class-string $formClass */

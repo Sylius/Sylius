@@ -1,4 +1,4 @@
-{% import '@SyliusAdmin/shared/helper/money.html.twig' as _money %}
+{% import '@SyliusAdmin/shared/helper/money.html.twig' as money %}
 
 {% set order_promotion_adjustment = constant('Sylius\\Component\\Core\\Model\\AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT') %}
 {% set unit_promotion_adjustment = constant('Sylius\\Component\\Core\\Model\\AdjustmentInterface::ORDER_UNIT_PROMOTION_ADJUSTMENT') %}
@@ -9,5 +9,5 @@
 {% set subtotal = (item.unitPrice * item.quantity) + aggregated_unit_promotion_adjustments %}
 
 <td class="text-end" {{ sylius_test_html_attribute('subtotal') }}>
-    {{ _money.format(subtotal, order.currencyCode) }}
+    {{ money.format(subtotal, order.currencyCode) }}
 </td>

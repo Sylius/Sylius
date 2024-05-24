@@ -27,8 +27,8 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
-            'code' => '#sylius_tax_category_code',
-            'name' => '#sylius_tax_category_name',
+            'code' => '#sylius_admin_tax_category_code',
+            'name' => '#sylius_admin_tax_category_name',
         ]);
     }
 }

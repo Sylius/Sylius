@@ -6,6 +6,8 @@ sylius_admin_customer_group:
         except: ['show']
         redirect: update
         grid: sylius_admin_customer_group
+        form:
+            type: Sylius\Bundle\AdminBundle\Form\Type\CustomerGroupType
         permission: true
         vars:
             all:
