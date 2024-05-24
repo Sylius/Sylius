@@ -28,7 +28,7 @@ final class PaymentPreCompleteListener
         foreach ($orderItems as $orderItem) {
             $variant = $orderItem->getVariant();
 
-            if (!$this->canBeCompleted($variant, $orderItem->getQuantity())) {
+            if (!$this->isStockSufficient($variant, $orderItem->getQuantity())) {
                 $event->setMessageType('error');
                 $event->setMessage('sylius.resource.payment.cannot_be_completed');
                 $event->setMessageParameters(['%productVariantCode%' => $variant->getCode()]);
@@ -39,20 +39,15 @@ final class PaymentPreCompleteListener
         }
     }
 
-    private function canBeCompleted(ProductVariantInterface $variant, int $quantity): bool
+    private function isStockSufficient(ProductVariantInterface $variant, int $quantity): bool
     {
         if (!$variant->isTracked()) {
             return true;
         }
 
-        if ($variant->getOnHold() - $quantity < 0) {
-            return false;
-        }
-
-        if ($variant->getOnHand() - $quantity < 0) {
-            return false;
-        }
-
-        return true;
+        return
+            $variant->getOnHold() - $quantity >= 0 &&
+            $variant->getOnHand() - $quantity >= 0
+        ;
     }
 }
