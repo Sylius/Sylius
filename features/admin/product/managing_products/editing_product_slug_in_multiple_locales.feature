@@ -10,7 +10,7 @@ Feature: Editing product's slug in multiple locales
         And the store is also available in "Polish (Poland)"
         And I am logged in as an administrator
 
-    @ui @mink:chromedriver @api
+    @ui @api
     Scenario: Creating a product with custom slugs
         When I want to create a new configurable product
         And I specify its code as "PUG_PUGGINTON_PLUSHIE"
