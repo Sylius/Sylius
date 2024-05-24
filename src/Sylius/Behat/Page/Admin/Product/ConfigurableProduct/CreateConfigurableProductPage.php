@@ -15,6 +15,7 @@ namespace Sylius\Behat\Page\Admin\Product\ConfigurableProduct;
 
 use Behat\Mink\Session;
 use Sylius\Behat\Page\Admin\Crud\CreatePage as BaseCreatePage;
+use Sylius\Behat\Page\Admin\Product\Common\ProductMediaTrait;
 use Sylius\Behat\Service\AutocompleteHelper;
 use Sylius\Behat\Service\DriverHelper;
 use Sylius\Behat\Service\Helper\AutocompleteHelperInterface;
@@ -24,6 +25,7 @@ use Symfony\Component\Routing\RouterInterface;
 class CreateConfigurableProductPage extends BaseCreatePage implements CreateConfigurableProductPageInterface
 {
     use ConfigurableProductFormTrait;
+    use ProductMediaTrait;
 
     public function __construct(
         Session $session,
@@ -80,14 +82,15 @@ class CreateConfigurableProductPage extends BaseCreatePage implements CreateConf
         return $validationError->getText();
     }
 
+    /**
+     * @return string[]
+     */
     protected function getDefinedElements(): array
     {
         return array_merge(
             parent::getDefinedElements(),
-            [
-                'images' => '#sylius_product_images',
-            ],
             $this->getDefinedFormElements(),
+            $this->getDefinedProductMediaElements(),
         );
     }
 

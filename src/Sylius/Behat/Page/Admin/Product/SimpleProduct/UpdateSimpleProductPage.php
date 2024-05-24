@@ -17,6 +17,7 @@ use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Session;
 use Sylius\Behat\Behaviour\ChecksCodeImmutability;
 use Sylius\Behat\Page\Admin\Crud\UpdatePage as BaseUpdatePage;
+use Sylius\Behat\Page\Admin\Product\Common\ProductMediaTrait;
 use Sylius\Behat\Service\AutocompleteHelper;
 use Sylius\Behat\Service\DriverHelper;
 use Sylius\Behat\Service\Helper\AutocompleteHelperInterface;
@@ -29,6 +30,7 @@ use Symfony\Component\Routing\RouterInterface;
 class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProductPageInterface
 {
     use ChecksCodeImmutability;
+    use ProductMediaTrait;
     use SimpleProductFormTrait;
 
     public function __construct(
@@ -40,8 +42,6 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
     ) {
         parent::__construct($session, $minkParameters, $router, $routeName);
     }
-
-    private array $imageUrls = [];
 
     public function saveChanges(): void
     {
@@ -204,22 +204,6 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
         );
     }
 
-    public function isImageWithTypeDisplayed(string $type): bool
-    {
-        $imageElement = $this->getImageElementByType($type);
-
-        $imageUrl = $imageElement ? $imageElement->find('css', 'img')->getAttribute('src') : $this->provideImageUrlForType($type);
-        if (null === $imageElement && null === $imageUrl) {
-            return false;
-        }
-
-        $this->getDriver()->visit($imageUrl);
-        $statusCode = $this->getDriver()->getStatusCode();
-        $this->getDriver()->back();
-
-        return in_array($statusCode, [200, 304], true);
-    }
-
     public function isSlugReadonlyIn(string $locale): bool
     {
         return SlugGenerationHelper::isSlugReadonly(
@@ -336,10 +320,10 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
         return array_merge(
             parent::getDefinedElements(),
             [
-                'images' => '#sylius_product_images',
                 'show_product_button' => '[data-test-view-in-store]',
             ],
             $this->getDefinedFormElements(),
+            $this->getDefinedProductMediaElements(),
         );
     }
 
@@ -354,22 +338,5 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
         if (!$attributesTab->hasClass('active')) {
             $attributesTab->click();
         }
-    }
-
-    private function getImageElementByType(string $type): ?NodeElement
-    {
-        $images = $this->getElement('images');
-        $typeInput = $images->find('css', 'input[value="' . $type . '"]');
-
-        if (null === $typeInput) {
-            return null;
-        }
-
-        return $typeInput->getParent()->getParent()->getParent();
-    }
-
-    private function provideImageUrlForType(string $type): ?string
-    {
-        return $this->imageUrls[$type] ?? null;
     }
 }
