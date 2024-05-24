@@ -16,8 +16,6 @@ namespace Sylius\Behat\Page\Admin\Product\SimpleProduct;
 use Behat\Mink\Element\NodeElement;
 use Sylius\Behat\Service\DriverHelper;
 use Sylius\Component\Core\Model\ChannelInterface;
-use Sylius\Component\Core\Model\ProductInterface;
-use Sylius\Component\Product\Model\ProductAssociationTypeInterface;
 
 trait SimpleProductFormTrait
 {
@@ -30,7 +28,6 @@ trait SimpleProductFormTrait
             'channels' => '[data-test-channels]',
             'code' => '[data-test-code]',
             'enabled' => '[data-test-enabled]',
-            'field_associations' => '[name="sylius_admin_product[associations][%association%][]"]',
             'field_name' => '[data-test-name="%locale%"]',
             'field_original_price' => '[data-test-original-price-in-channel="%channelCode%"]',
             'field_price' => '[data-test-price-in-channel="%channelCode%"]',
@@ -189,45 +186,6 @@ trait SimpleProductFormTrait
             $this->getElement('product_attribute_input')->getXpath(),
             $attributeName,
         );
-    }
-
-    /*
-     * Associations management
-     */
-
-    public function associateProducts(ProductAssociationTypeInterface $productAssociationType, array $productsNames): void
-    {
-        $this->changeTab('associations');
-        $associationField = $this->getElement('field_associations', ['%association%' => $productAssociationType->getCode()]);
-
-        foreach ($productsNames as $productName) {
-            $this->autocompleteHelper->selectByName(
-                $this->getDriver(),
-                $associationField->getXpath(),
-                $productName,
-            );
-            $this->waitForFormUpdate();
-        }
-    }
-
-    public function removeAssociatedProduct(ProductInterface $product, ProductAssociationTypeInterface $productAssociationType): void
-    {
-        $this->changeTab('associations');
-        $associationField = $this->getElement('field_associations', ['%association%' => $productAssociationType->getCode()]);
-
-        $this->autocompleteHelper->removeByValue(
-            $this->getDriver(),
-            $associationField->getXpath(),
-            $product->getCode(),
-        );
-    }
-
-    public function hasAssociatedProduct(ProductInterface $product, ProductAssociationTypeInterface $productAssociationType): bool
-    {
-        $this->changeTab('associations');
-        $associationField = $this->getElement('field_associations', ['%association%' => $productAssociationType->getCode()]);
-
-        return in_array($product->getCode(), $associationField->getValue(), true);
     }
 
     protected function getElement(string $name, array $parameters = []): NodeElement

@@ -15,6 +15,7 @@ namespace Sylius\Behat\Page\Admin\Product\SimpleProduct;
 
 use Behat\Mink\Session;
 use Sylius\Behat\Page\Admin\Crud\CreatePage as BaseCreatePage;
+use Sylius\Behat\Page\Admin\Product\Common\ProductAssociationsTrait;
 use Sylius\Behat\Page\Admin\Product\Common\ProductMediaTrait;
 use Sylius\Behat\Service\AutocompleteHelper;
 use Sylius\Behat\Service\DriverHelper;
@@ -24,6 +25,7 @@ use Symfony\Component\Routing\RouterInterface;
 
 class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProductPageInterface
 {
+    use ProductAssociationsTrait;
     use ProductMediaTrait;
     use SimpleProductFormTrait;
 
@@ -148,6 +150,7 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
             ],
             $this->getDefinedFormElements(),
             $this->getDefinedProductMediaElements(),
+            $this->getDefinedProductAssociationsElements(),
         );
     }
 
