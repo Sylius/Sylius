@@ -1,0 +1,23 @@
+{% from '@SyliusAdmin/shared/helper/icon.html.twig' import icon %}
+
+{% set author = hookable_metadata.context.resource.author %}
+
+<div class="card mb-3">
+    <div class="card-header">
+        <strong>{{ 'sylius.ui.author'|trans }}</strong>
+    </div>
+    <div class="card-body">
+        <div class="card-title" {{ sylius_test_html_attribute('author-name') }}>
+            <a href="{{ path('sylius_admin_customer_update', {'id': author.id}) }}">{{ author.fullName }}</a>
+        </div>
+        <div class="card-subtitle">
+            {{ 'sylius.ui.customer_since'|trans }} {{ author.createdAt|date('Y-m-d') }}
+        </div>
+    </div>
+    <div class="card-footer">
+        <div class="py-1">{{ icon({icon: 'mail'}) }}<a href="mailto:{{ author.email }}">{{ author.email }}</a></div>
+        {% if author.phoneNumber is not empty %}
+            <div class="py-1">{{ icon({icon: 'phone'}) }} {{ author.phoneNumber }}</div>
+        {% endif %}
+    </div>
+</div>

@@ -82,6 +82,7 @@ sylius:
         available_until: 'Available until'
         avatar: 'Avatar'
         average_order_value: 'Average order value'
+        average_rating: 'Average rating'
         awaiting_payment: 'Awaiting payment'
         back: 'Back'
         back_to_details: 'Back to details'

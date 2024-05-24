@@ -1,0 +1,31 @@
+twig_hooks:
+    hooks:
+        'sylius_admin.product_review.update.content':
+            form:
+                template: '@SyliusAdmin/shared/crud/update/content/form.html.twig'
+                configuration:
+                    render_rest: false
+
+        'sylius_admin.product_review.update.content.form':
+            sections:
+                template: '@SyliusAdmin/product_review/form/sections.html.twig'
+
+        'sylius_admin.product_review.update.content.form.sections':
+            details:
+                template: '@SyliusAdmin/product_review/form/sections/details.html.twig'
+            info:
+                template: '@SyliusAdmin/product_review/form/sections/info.html.twig'
+
+        'sylius_admin.product_review.update.content.form.sections.details':
+            rating:
+                template: '@SyliusAdmin/product_review/form/sections/details/rating.html.twig'
+            title:
+                template: '@SyliusAdmin/product_review/form/sections/details/title.html.twig'
+            comment:
+                template: '@SyliusAdmin/product_review/form/sections/details/comment.html.twig'
+
+        'sylius_admin.product_review.update.content.form.sections.info':
+            author:
+                template: '@SyliusAdmin/product_review/form/sections/info/author.html.twig'
+            product:
+                template: '@SyliusAdmin/product_review/form/sections/info/product.html.twig'
