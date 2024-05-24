@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Behat\Page\Admin\Product;
+namespace Sylius\Behat\Page\Admin\Product\ConfigurableProduct;
 
 use Sylius\Behat\Page\Admin\Crud\UpdatePageInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;

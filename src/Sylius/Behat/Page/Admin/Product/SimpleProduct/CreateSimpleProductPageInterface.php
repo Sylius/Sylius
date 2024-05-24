@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Behat\Page\Admin\Product;
+namespace Sylius\Behat\Page\Admin\Product\SimpleProduct;
 
 use Sylius\Behat\Page\Admin\Crud\CreatePageInterface as BaseCreatePageInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
