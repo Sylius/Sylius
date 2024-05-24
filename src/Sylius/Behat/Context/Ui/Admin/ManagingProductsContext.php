@@ -90,17 +90,32 @@ final readonly class ManagingProductsContext implements Context
 
     /**
      * @When I do not name it
+     */
+    public function iDoNotNameIt(): void
+    {
+        // Intentionally left blank to fulfill context expectation
+    }
+
+    /**
      * @When I name it :name in :language
      * @When I rename it to :name in :language
      * @When I should be able to name it :name in :language
      */
-    public function iRenameItToIn(?string $name = null, ?string $language = null): void
+    public function iRenameItToIn(string $name, string $language): void
     {
-        if ($name !== null && $language !== null) {
-            $currentPage = $this->resolveCurrentPage();
+        $currentPage = $this->resolveCurrentPage();
 
-            $currentPage->nameItIn($name, $language);
-        }
+        $currentPage->nameItIn($name, $language);
+    }
+
+    /**
+     * @When I remove its name from :language translation
+     */
+    public function iRemoveItsNameFromTranslation($language)
+    {
+        $currentPage = $this->resolveCurrentPage();
+
+        $currentPage->nameItIn('', $language);
     }
 
     /**
@@ -727,16 +742,6 @@ final readonly class ManagingProductsContext implements Context
         $this->iWantToBrowseProducts();
 
         Assert::false($this->indexPage->isSingleResourceOnPage([$element => $value]));
-    }
-
-    /**
-     * @When I remove its name from :language translation
-     */
-    public function iRemoveItsNameFromTranslation($language)
-    {
-        $currentPage = $this->resolveCurrentPage();
-
-        $currentPage->nameItIn('', $language);
     }
 
     /**
