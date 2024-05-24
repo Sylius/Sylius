@@ -53,7 +53,7 @@
                                 </div>
                             {% endif %}
 
-                            {% hook 'channel_pricing' with { channelPricing } %}
+                            {% hook 'channel_pricing' with { channelCode, channelPricing } %}
                         </div>
                     {% endfor %}
                 </div>
