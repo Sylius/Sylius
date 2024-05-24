@@ -28,7 +28,6 @@ final class SyliusAdminExtension extends Extension
         $container->setParameter('sylius.admin.notification.enabled', $config['notifications']['enabled']);
         $container->setParameter('sylius.admin.notification.frequency', $config['notifications']['frequency']);
         $container->setParameter('sylius.admin.shop_enabled', false);
-        $container->setParameter('sylius.admin.templates.item_action', $config['templates']['item_action']);
 
         $bundles = $container->getParameter('kernel.bundles');
         if (array_key_exists('SyliusShopBundle', $bundles)) {
