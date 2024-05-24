@@ -17,7 +17,6 @@ use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Session;
 use Sylius\Behat\Behaviour\ChecksCodeImmutability;
 use Sylius\Behat\Page\Admin\Crud\UpdatePage as BaseUpdatePage;
-use Sylius\Behat\Page\Admin\Product\FormTrait;
 use Sylius\Behat\Service\AutocompleteHelper;
 use Sylius\Behat\Service\DriverHelper;
 use Sylius\Behat\Service\Helper\AutocompleteHelperInterface;
@@ -26,12 +25,11 @@ use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Currency\Model\CurrencyInterface;
 use Symfony\Component\Routing\RouterInterface;
-use Webmozart\Assert\Assert;
 
 class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProductPageInterface
 {
     use ChecksCodeImmutability;
-    use FormTrait;
+    use SimpleProductFormTrait;
 
     public function __construct(
         Session $session,
@@ -338,30 +336,8 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
         return array_merge(
             parent::getDefinedElements(),
             [
-                'association_dropdown' => '.field > label:contains("%association%") ~ .product-select',
-                'association_dropdown_item' => '.field > label:contains("%association%") ~ .product-select > div.menu > div.item:contains("%item%")',
-                'association_dropdown_item_selected' => '.field > label:contains("%association%") ~ .product-select > a.label:contains("%item%")',
-                'attribute' => '#attributesContainer [data-test-product-attribute-value-in-locale="%attributeName% %localeCode%"] input',
-                'attribute_select' => '#attributesContainer [data-test-product-attribute-value-in-locale="%attributeName% %localeCode%"] select',
-                'attribute_element' => '.attribute',
-                'attribute_delete_button' => '#attributesContainer .attributes-group .attributes-header:contains("%attributeName%") button',
                 'images' => '#sylius_product_images',
-                'language_tab' => '[data-locale="%locale%"] .title',
-                'locale_tab' => '#attributesContainer [data-test-product-attribute-value-in-locale="%attributeName% %localeCode%"]',
-                'prices' => '#sylius_admin_product_variant_channelPricings',
-                'original_price' => '#sylius_admin_product_variant_channelPricings input[name$="[originalPrice]"][id*="%channelCode%"]',
-                'price' => '#sylius_admin_product_variant_channelPricings input[id*="%channelCode%"]',
-                'pricing_configuration' => '#sylius_calculator_container',
-                'main_taxon' => '#sylius_product_mainTaxon',
-                'non_translatable_attribute' => '#attributesContainer [data-test-product-attribute-value-in-locale="%attributeName% "] input',
-                'product_taxon' => '#sylius-product-taxonomy-tree .item .header:contains("%taxonName%") input',
-                'product_taxons' => '#sylius_product_productTaxons',
-                'shipping_required' => '#sylius_admin_product_variant_shippingRequired',
                 'show_product_button' => '[data-test-view-in-store]',
-                'tab' => '.menu [data-tab="%name%"]',
-                'taxonomy' => 'a[data-tab="taxonomy"]',
-                'tracked' => '#sylius_admin_product_variant_tracked',
-                'toggle_slug_modification_button' => '[data-locale="%locale%"] .toggle-product-slug-modification',
             ],
             $this->getDefinedFormElements(),
         );
@@ -380,20 +356,6 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
         }
     }
 
-    private function clickTab(string $tabName): void
-    {
-        $attributesTab = $this->getElement('tab', ['%name%' => $tabName]);
-        $attributesTab->click();
-    }
-
-    private function clickLocaleTabIfItsNotActive(string $localeCode): void
-    {
-        $localeTab = $this->getElement('locale_tab', ['%localeCode%' => $localeCode]);
-        if (!$localeTab->hasClass('active')) {
-            $localeTab->click();
-        }
-    }
-
     private function getImageElementByType(string $type): ?NodeElement
     {
         $images = $this->getElement('images');
@@ -406,51 +368,8 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
         return $typeInput->getParent()->getParent()->getParent();
     }
 
-    /**
-     * @return NodeElement[]
-     */
-    private function getImageElements(): array
-    {
-        $images = $this->getElement('images');
-
-        return $images->findAll('css', 'div[data-form-collection="item"]');
-    }
-
-    private function getLastImageElement(): NodeElement
-    {
-        $imageElements = $this->getImageElements();
-
-        Assert::notEmpty($imageElements);
-
-        return end($imageElements);
-    }
-
-    private function getFirstImageElement(): NodeElement
-    {
-        $imageElements = $this->getImageElements();
-
-        Assert::notEmpty($imageElements);
-
-        return reset($imageElements);
-    }
-
-    private function setImageType(NodeElement $imageElement, string $type): void
-    {
-        $typeField = $imageElement->findField('Type');
-        $typeField->setValue($type);
-    }
-
     private function provideImageUrlForType(string $type): ?string
     {
         return $this->imageUrls[$type] ?? null;
-    }
-
-    private function saveImageUrlForType(string $type, string $imageUrl): void
-    {
-        if (str_contains($imageUrl, 'data:image/jpeg')) {
-            return;
-        }
-
-        $this->imageUrls[$type] = $imageUrl;
     }
 }

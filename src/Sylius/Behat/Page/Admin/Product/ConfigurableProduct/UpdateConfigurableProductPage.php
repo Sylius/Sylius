@@ -17,19 +17,20 @@ use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Session;
 use Sylius\Behat\Behaviour\ChecksCodeImmutability;
 use Sylius\Behat\Page\Admin\Crud\UpdatePage as BaseUpdatePage;
-use Sylius\Behat\Page\Admin\Product\FormTrait;
 use Sylius\Behat\Service\AutocompleteHelper;
 use Sylius\Behat\Service\Helper\AutocompleteHelperInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
 use Symfony\Component\Routing\RouterInterface;
-use Webmozart\Assert\Assert;
 
 class UpdateConfigurableProductPage extends BaseUpdatePage implements UpdateConfigurableProductPageInterface
 {
     use ChecksCodeImmutability;
-    use FormTrait;
+    use ConfigurableProductFormTrait;
 
+    /**
+     * @param array<array-key, string> $minkParameters
+     */
     public function __construct(
         Session $session,
         $minkParameters,
@@ -40,6 +41,7 @@ class UpdateConfigurableProductPage extends BaseUpdatePage implements UpdateConf
         parent::__construct($session, $minkParameters, $router, $routeName);
     }
 
+    /** @var string[] */
     private array $imageUrls = [];
 
     public function saveChanges(): void
@@ -142,13 +144,7 @@ class UpdateConfigurableProductPage extends BaseUpdatePage implements UpdateConf
             parent::getDefinedElements(),
             [
                 'images' => '#sylius_product_images',
-                'main_taxon' => '#sylius_product_mainTaxon',
                 'options' => '[data-test-options]',
-                'price' => '#sylius_admin_product_variant_price',
-                'search' => '.ui.fluid.search.selection.dropdown',
-                'search_item_selected' => 'div.menu > div.item.selected',
-                'tab' => '.menu [data-tab="%name%"]',
-                'taxonomy' => 'a[data-tab="taxonomy"]',
             ],
             $this->getDefinedFormElements(),
         );
@@ -157,14 +153,6 @@ class UpdateConfigurableProductPage extends BaseUpdatePage implements UpdateConf
     private function openTaxonBookmarks(): void
     {
         $this->getElement('taxonomy')->click();
-    }
-
-    private function clickTabIfItsNotActive(string $tabName): void
-    {
-        $attributesTab = $this->getElement('tab', ['%name%' => $tabName]);
-        if (!$attributesTab->hasClass('active')) {
-            $attributesTab->click();
-        }
     }
 
     private function getImageElementByType(string $type): ?NodeElement
@@ -179,47 +167,8 @@ class UpdateConfigurableProductPage extends BaseUpdatePage implements UpdateConf
         return $typeInput->getParent()->getParent()->getParent();
     }
 
-    /**
-     * @return NodeElement[]
-     */
-    private function getImageElements(): array
-    {
-        $images = $this->getElement('images');
-
-        return $images->findAll('css', 'div[data-form-collection="item"]');
-    }
-
-    private function getLastImageElement(): NodeElement
-    {
-        $imageElements = $this->getImageElements();
-
-        Assert::notEmpty($imageElements);
-
-        return end($imageElements);
-    }
-
-    private function getFirstImageElement(): NodeElement
-    {
-        $imageElements = $this->getImageElements();
-
-        Assert::notEmpty($imageElements);
-
-        return reset($imageElements);
-    }
-
-    private function setImageType(NodeElement $imageElement, string $type): void
-    {
-        $typeField = $imageElement->findField('Type');
-        $typeField->setValue($type);
-    }
-
     private function provideImageUrlForType(string $type): ?string
     {
         return $this->imageUrls[$type] ?? null;
-    }
-
-    private function saveImageUrlForType(string $type, string $imageUrl): void
-    {
-        $this->imageUrls[$type] = $imageUrl;
     }
 }

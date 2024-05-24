@@ -13,22 +13,17 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Page\Admin\Product\SimpleProduct;
 
-use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Session;
-use Sylius\Behat\Behaviour\SpecifiesItsField;
 use Sylius\Behat\Page\Admin\Crud\CreatePage as BaseCreatePage;
-use Sylius\Behat\Page\Admin\Product\FormTrait;
 use Sylius\Behat\Service\AutocompleteHelper;
 use Sylius\Behat\Service\DriverHelper;
 use Sylius\Behat\Service\Helper\AutocompleteHelperInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Symfony\Component\Routing\RouterInterface;
-use Webmozart\Assert\Assert;
 
 class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProductPageInterface
 {
-    use FormTrait;
-    use SpecifiesItsField;
+    use SimpleProductFormTrait;
 
     public function __construct(
         Session $session,
@@ -77,12 +72,6 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
         $validationError = $this->getElement('attribute')->find('css', '.sylius-validation-error');
 
         return $validationError->getText();
-    }
-
-    public function checkAttributeErrors($attributeName, $localeCode): void
-    {
-        $this->clickTabIfItsNotActive('attributes');
-        $this->clickLocaleTabIfItsNotActive($localeCode);
     }
 
     public function selectMainTaxon(TaxonInterface $taxon): void
@@ -153,31 +142,8 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
         return array_merge(
             parent::getDefinedElements(),
             [
-                'association_dropdown' => '.field > label:contains("%association%") ~ .product-select',
-                'association_dropdown_item' => '.field > label:contains("%association%") ~ .product-select > div.menu > div.item:contains("%item%")',
-                'association_dropdown_item_selected' => '.field > label:contains("%association%") ~ .product-select > a.label:contains("%item%")',
-                'attribute' => '.attribute',
-                'attribute_delete_button' => '#attributesContainer .attributes-group .attributes-header:contains("%attributeName%") button',
                 'attribute_value' => '#attributesContainer [data-test-product-attribute-value-in-locale="%attributeName% %localeCode%"] input',
-                'attribute_value_select' => '#attributesContainer [data-test-product-attribute-value-in-locale="%attributeName% %localeCode%"] select',
-                'attributes_choice' => '#sylius_product_attribute_choice',
-                'cancel_button' => '[data-test-cancel-changes-button]',
-                'form' => 'form[name="sylius_product"]',
                 'images' => '#sylius_product_images',
-                'language_tab' => '[data-locale="%locale%"] .title',
-                'locale_tab' => '#attributesContainer .menu [data-tab="%localeCode%"]',
-                'main_taxon' => '#sylius_product_mainTaxon',
-                'product_taxons' => '#sylius_product_productTaxons',
-                'non_translatable_attribute_value' => '#attributesContainer [data-test-product-attribute-value-in-locale="%attributeName% "] input',
-                'original_price' => '[data-test-original-price-in-channel="%channelCode%"]',
-                'price' => '[data-test-price-in-channel="%channelCode%"]',
-                'prices_validation_message' => '[data-test-missing-channel-price]',
-                'price_calculator' => '#sylius_product_variant_pricingCalculator',
-                'shipping_category' => '#sylius_product_variant_shippingCategory',
-                'shipping_required' => '#sylius_product_variant_shippingRequired',
-                'tab' => '.menu [data-tab="%name%"]',
-                'taxonomy' => 'a[data-tab="taxonomy"]',
-                'toggle_slug_modification_button' => '.toggle-product-slug-modification',
             ],
             $this->getDefinedFormElements(),
         );
@@ -206,29 +172,5 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
         if (!$attributesTab->hasClass('active')) {
             $attributesTab->click();
         }
-    }
-
-    private function clickTab(string $tabName): void
-    {
-        $attributesTab = $this->getElement('tab', ['%name%' => $tabName]);
-        $attributesTab->click();
-    }
-
-    private function clickLocaleTabIfItsNotActive(string $localeCode): void
-    {
-        $localeTab = $this->getElement('locale_tab', ['%localeCode%' => $localeCode]);
-        if (!$localeTab->hasClass('active')) {
-            $localeTab->click();
-        }
-    }
-
-    private function getLastImageElement(): NodeElement
-    {
-        $images = $this->getElement('images');
-        $items = $images->findAll('css', 'div[data-form-collection="item"]');
-
-        Assert::notEmpty($items);
-
-        return end($items);
     }
 }
