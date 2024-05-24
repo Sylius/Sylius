@@ -11,7 +11,7 @@ Feature: Browsing product reviews
         And this product has a new review titled "Bad" and rated 1 added by customer "ross@teammike.com"
         And I am logged in as an administrator
 
-    @todo @ui @api
+    @ui @api
     Scenario: Browsing accepted reviews
         When I want to browse product reviews
         And I choose "accepted" as a status filter

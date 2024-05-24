@@ -52,7 +52,7 @@ final class ManagingProductReviewsContext implements Context
      */
     public function iChooseStateAsStatusFilter(string $state): void
     {
-        $this->indexPage->chooseState($state);
+        $this->indexPage->filterByState($state);
     }
 
     /**
