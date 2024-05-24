@@ -15,7 +15,7 @@ Feature: Adding a new product with associations
         When I want to create a new simple product
         And I specify its code as "lg_g3"
         And I name it "LG G3" in "English (United States)"
-        And I generate its slug in "English (United States)"
+        And I set its slug to "lg-g3"
         And I set its price to "$400.00" for "United States" channel
         And I associate as "Accessories" the "LG headphones" and "LG earphones" products
         And I associate as "Alternatives" the "LG G4" and "LG G5" products
@@ -30,7 +30,7 @@ Feature: Adding a new product with associations
         When I want to create a new simple product
         And I specify its code as "lg_g3"
         And I name it "LG G3" in "English (United States)"
-        And I generate its slug in "English (United States)"
+        And I set its slug to "lg-g3"
         And I set its price to "$400.00" for "United States" channel
         And I associate as "Accessories" the "LG headphones" and "LG earphones" products
         And I remove an associated product "LG earphones" from "Accessories"
@@ -46,7 +46,7 @@ Feature: Adding a new product with associations
         When I want to create a new simple product
         And I specify its code as "lg_g3"
         And I name it "LG G3" in "English (United States)"
-        And I generate its slug in "English (United States)"
+        And I set its slug to "lg-g3"
         And I set its price to "$400.00" for "United States" channel
         And I associate as 123 the "LG headphones" and "LG earphones" products
         And I add it

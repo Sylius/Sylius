@@ -29,25 +29,26 @@ Feature: Products validation
         And I try to save my changes
         Then I should be notified that the locale is not available
 
-    @ui @mink:chromedriver @no-api
+    @ui @no-api
     Scenario: Adding a new simple product with duplicated code among products
         Given the store has a product "7 Wonders" with code "AWESOME_GAME"
         When I want to create a new simple product
         And I specify its code as "AWESOME_GAME"
         And I name it "Dice Brewing" in "English (United States)"
-        And I generate its slug in "English (United States)"
+        And I set its slug to "dice-brewing"
         And I set its price to "$10.00" for "Web" channel
         And I try to add it
         Then I should be notified that code has to be unique
         And product with name "Dice Brewing" should not be added
 
-    @ui @mink:chromedriver @no-api
+    @ui @no-api
     Scenario: Adding a new simple product with duplicated code among product variants
         Given the store has a product "7 Wonders"
         And this product has "7 Wonders: Cities" variant priced at "$30.00" identified by "AWESOME_GAME"
         When I want to create a new simple product
         And I specify its code as "AWESOME_GAME"
         And I name it "Dice Brewing" in "English (United States)"
+        And I set its slug to "dice-brewing"
         And I set its price to "$10.00" for "Web" channel
         And I try to add it
         Then I should be notified that simple product code has to be unique
@@ -67,6 +68,7 @@ Feature: Products validation
     Scenario: Adding a new simple product without specifying its name
         When I want to create a new simple product
         And I specify its code as "BOARD_DICE_BREWING"
+        And I set its slug to "dice-brewing"
         And I set its price to "$10.00" for "Web" channel
         And I try to add it
         Then I should be notified that name is required
@@ -102,7 +104,7 @@ Feature: Products validation
         And I try to add it
         Then I should be notified that code is too long
 
-    @ui @mink:chromedriver @api
+    @ui @api
     Scenario: Adding a new configurable product with duplicated code
         Given the store has a product "7 Wonders" with code "AWESOME_GAME"
         When I want to create a new configurable product
@@ -117,7 +119,7 @@ Feature: Products validation
     Scenario: Adding a new configurable product without specifying its name
         When I want to create a new configurable product
         And I specify its code as "BOARD_DICE_BREWING"
-        When I do not name it
+        But I do not name it
         And I try to add it
         Then I should be notified that name is required
         And product with code "BOARD_DICE_BREWING" should not be added
