@@ -1,11 +1,17 @@
-{% macro image(product) %}
-    {% if product.imagesByType('thumbnail') is not empty %}
-        {% set path = product.imagesByType('thumbnail').first.path|imagine_filter(filter|default('sylius_admin_product_thumbnail')) %}
+{% macro image(product, config = {}) %}
+    {% set config = {
+        class: 'avatar',
+        type: 'thumbnail',
+        filter: 'sylius_admin_product_thumbnail'
+    }|merge(config) %}
+
+    {% if product.imagesByType(config.type) is not empty %}
+        {% set path = product.imagesByType(config.type).first.path|imagine_filter(config.filter) %}
     {% elseif product.images.first %}
-        {% set path = product.images.first.path|imagine_filter(filter|default('sylius_admin_product_thumbnail')) %}
+        {% set path = product.images.first.path|imagine_filter(config.filter) %}
     {% else %}
         {% set path = asset('build/admin/images/200x200.png', 'admin') %}
     {% endif %}
 
-    <img src="{{ path }}" alt="{{ product.name }}" class="avatar" />
+    <img src="{{ path }}" alt="{{ product.name }}" class="{{ config.class }}" />
 {% endmacro %}

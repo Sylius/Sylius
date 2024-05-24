@@ -10,7 +10,7 @@ Feature: Product review validation
         And this product has a review titled "Awesome" and rated 4 with a comment "Nice product" added by customer "ross@teammike.com"
         And I am logged in as an administrator
 
-    @todo @ui @api
+    @ui @api
     Scenario: Trying to remove title from an existing product review
         When I want to modify the "Awesome" product review
         And I remove its title
@@ -18,7 +18,7 @@ Feature: Product review validation
         Then I should be notified that title is required
         And this product review should still be titled "Awesome"
 
-    @todo @ui @api
+    @ui @api
     Scenario: Trying to remove comment from an existing product review
         When I want to modify the "Awesome" product review
         And I remove its comment

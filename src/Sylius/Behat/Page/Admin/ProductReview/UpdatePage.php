@@ -41,23 +41,23 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
 
     public function getProductName(): string
     {
-        return $this->getElement('product_name')->getHtml();
+        return $this->getElement('product_name')->getText();
     }
 
     public function getCustomerName(): string
     {
-        return $this->getElement('customer_name')->getHtml();
+        return $this->getElement('customer_name')->getText();
     }
 
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
             'checked_rating' => 'input[checked="checked"]',
-            'comment' => '#sylius_admin_product_review_comment',
+            'comment' => '[data-test-comment]',
             'rating' => '#sylius_admin_product_review_rating_%position%',
-            'customer_name' => '.sylius-customer-name',
-            'product_name' => '.sylius-product-name',
-            'title' => '#sylius_admin_product_review_title',
+            'customer_name' => '[data-test-author-name]',
+            'product_name' => '[data-test-product-name]',
+            'title' => '[data-test-title]',
         ]);
     }
 }

@@ -1,0 +1,20 @@
+{% from '@SyliusAdmin/shared/helper/product_image.html.twig' import image %}
+
+{% set product = hookable_metadata.context.resource.reviewSubject %}
+
+<div class="card mb-3">
+    <div class="card-header">
+        <strong>{{ 'sylius.ui.product'|trans }}</strong>
+    </div>
+    {{ image(product, {class: 'card-img', type: 'thumbnail', filter: 'sylius_large'}) }}
+    <div class="card-body">
+        <div class="card-title" {{ sylius_test_html_attribute('product-name') }}>
+            <a href="{{ path('sylius_admin_product_show', {'id': product.id}) }}">{{ product.name }}</a>
+        </div>
+    </div>
+    <div class="card-footer">
+        <div class="card-text">
+            {{ 'sylius.ui.average_rating'|trans }}: {{ product.averageRating|default(0)|round(2) }}
+        </div>
+    </div>
+</div>
