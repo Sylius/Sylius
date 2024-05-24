@@ -38,7 +38,7 @@
             <td{% if field.options.vars.td_class is defined %} class="{{ field.options.vars.td_class }}"{% endif %} {{ sylius_test_html_attribute('actions') }}>
                 <div class="d-flex gap-1 justify-content-end">
                     {% for action in definition.getEnabledActions('item')|sort_by('position') %}
-                        {{ sylius_grid_render_item_action(grid, action, row) }}
+                        {{ sylius_grid_render_action(grid, action, row) }}
                     {% endfor %}
 
                     {% if definition.actionGroups.subitem is defined and definition.getEnabledActions('subitem')|length > 0 %}
