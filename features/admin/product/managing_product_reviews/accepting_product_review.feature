@@ -10,7 +10,7 @@ Feature: Accepting a product review
         And this product has a new review titled "Awesome" and rated 4 added by customer "ross@teammike.com"
         And I am logged in as an administrator
 
-    @todo @ui @api
+    @ui @api
     Scenario: Accepting a product review
         When I want to browse product reviews
         And I accept the "Awesome" product review

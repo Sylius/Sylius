@@ -13,40 +13,38 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Page\Admin\ProductReview;
 
-use Behat\Mink\Element\NodeElement;
 use Sylius\Behat\Page\Admin\Crud\IndexPage as BaseIndexPage;
+use Webmozart\Assert\Assert;
 
 class IndexPage extends BaseIndexPage implements IndexPageInterface
 {
     public function accept(array $parameters): void
     {
-        $this->getActionButtonsField($parameters)->pressButton('Accept');
+        $this->changeState('accept', $parameters);
     }
 
     public function reject(array $parameters): void
     {
-        $this->getActionButtonsField($parameters)->pressButton('Reject');
+        $this->changeState('reject', $parameters);
     }
 
-    public function chooseState(string $state): void
+    public function filterByState(string $state): void
     {
         $this->getElement('filter_state')->selectOption($state);
     }
 
-    private function getActionButtonsField(array $parameters): NodeElement
+    private function changeState(string $state, array $parameters): void
     {
-        $tableAccessor = $this->getTableAccessor();
-        $table = $this->getElement('table');
+        $action = $this->getActionsForResource($parameters)->find('css', sprintf('[data-test-action="%s"]', $state));
+        Assert::notNull($action, sprintf('There is no "%s" action available for this resource', $state));
 
-        $row = $tableAccessor->getRowWithFields($table, $parameters);
-
-        return $tableAccessor->getFieldFromRow($table, $row, 'actions');
+        $action->find('css', 'button')->click();
     }
 
     protected function getDefinedElements(): array
     {
-        return parent::getDefinedElements() + [
+        return array_merge(parent::getDefinedElements(), [
             'filter_state' => '#criteria_status',
-        ];
+        ]);
     }
 }

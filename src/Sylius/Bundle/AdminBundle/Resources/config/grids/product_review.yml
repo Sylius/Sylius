@@ -60,7 +60,7 @@ sylius_grid:
                             sylius.ui.accepted: accepted
                             sylius.ui.rejected: rejected
             actions:
-                item:                
+                item:
                     accept:
                         type: apply_transition
                         label: sylius.ui.accept
@@ -71,6 +71,7 @@ sylius_grid:
                                 parameters:
                                     id: resource.id
                             class: btn-success btn-icon
+                            show_disabled: false
                             transition: accept
                             graph: sylius_product_review
                     reject:
@@ -83,6 +84,7 @@ sylius_grid:
                                 parameters:
                                     id: resource.id
                             class: btn-warning btn-icon
+                            show_disabled: false
                             transition: reject
                             graph: sylius_product_review
                     update:
