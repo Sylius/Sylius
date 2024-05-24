@@ -1,4 +1,4 @@
-{% set channelPricing = hookable_metadata.context.channelPricing %}
-{% set channelCode = hookable_metadata.context.channelCode %}
+{% set channel_pricing = hookable_metadata.context.channel_pricing %}
+{% set channel_code = hookable_metadata.context.channel_code %}
 
-{{ form_row(channelPricing.originalPrice, sylius_test_form_attribute('original-price-in-channel', channelCode)) }}
+{{ form_row(channel_pricing.originalPrice, sylius_test_form_attribute('original-price-in-channel', channel_code)) }}
