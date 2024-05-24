@@ -25,6 +25,9 @@
             {% endif %}
             {{ form_start(form, {'action': path(configuration.vars.route.name|default(configuration.getRouteName('create')), configuration.vars.route.parameters|default({})), 'attr': {'class': 'ui loadable form', 'novalidate': 'novalidate', 'id': form.vars.id}}) }}
                 {% block form_content %}
+                    {{ form_errors(form) }}
+                    {%- if form._token is defined %}{{ form_widget(form._token) }}{% endif %}
+
                     {% hook 'form' with { form } %}
                 {% endblock %}
             {{ form_end(form, {'render_rest': renderRest}) }}
