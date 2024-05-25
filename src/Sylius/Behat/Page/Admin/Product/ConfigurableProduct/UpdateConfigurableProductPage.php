@@ -18,6 +18,7 @@ use Behat\Mink\Session;
 use Sylius\Behat\Behaviour\ChecksCodeImmutability;
 use Sylius\Behat\Page\Admin\Crud\UpdatePage as BaseUpdatePage;
 use Sylius\Behat\Page\Admin\Product\Common\ProductMediaTrait;
+use Sylius\Behat\Page\Admin\Product\Common\ProductTranslationsTrait;
 use Sylius\Behat\Service\AutocompleteHelper;
 use Sylius\Behat\Service\Helper\AutocompleteHelperInterface;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
@@ -28,6 +29,7 @@ class UpdateConfigurableProductPage extends BaseUpdatePage implements UpdateConf
     use ChecksCodeImmutability;
     use ConfigurableProductFormTrait;
     use ProductMediaTrait;
+    use ProductTranslationsTrait;
 
     /**
      * @param array<array-key, string> $minkParameters
@@ -47,16 +49,6 @@ class UpdateConfigurableProductPage extends BaseUpdatePage implements UpdateConf
         $this->waitForFormUpdate();
 
         parent::saveChanges();
-    }
-
-    public function setMetaKeywords(string $keywords, string $localeCode): void
-    {
-        $this->getElement('meta_keywords', ['%locale%' => $localeCode])->setValue($keywords);
-    }
-
-    public function setMetaDescription(string $description, string $localeCode): void
-    {
-        $this->getElement('meta_description', ['%locale%' => $localeCode])->setValue($description);
     }
 
     public function isProductOptionChosen(string $option): bool
@@ -124,6 +116,7 @@ class UpdateConfigurableProductPage extends BaseUpdatePage implements UpdateConf
             ],
             $this->getDefinedFormElements(),
             $this->getDefinedProductMediaElements(),
+            $this->getDefinedProductTranslationsElements(),
         );
     }
 

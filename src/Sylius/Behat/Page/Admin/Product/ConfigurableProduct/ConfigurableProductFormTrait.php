@@ -26,16 +26,9 @@ trait ConfigurableProductFormTrait
             'channels' => '[data-test-channels]',
             'code' => '[data-test-code]',
             'enabled' => '[data-test-enabled]',
-            'field_name' => '[data-test-name="%locale%"]',
             'form' => '[data-live-name-value="sylius_admin:product:form"]',
-            'generate_product_slug_button' => '[data-test-generate-product-slug-button="%localeCode%"]',
-            'meta_description' => '[data-test-meta-description="%locale%"]',
-            'meta_keywords' => '[data-test-meta-keywords="%locale%"]',
-            'name' => '[data-test-name="%locale%"]',
             'product_options_autocomplete' => '[data-test-product-options-autocomplete]',
-            'product_translation_accordion' => '[data-test-product-translations-accordion="%localeCode%"]',
             'side_navigation_tab' => '[data-test-side-navigation-tab="%name%"]',
-            'slug' => '[data-test-slug="%locale%"]',
         ];
     }
 
@@ -49,26 +42,12 @@ trait ConfigurableProductFormTrait
         $this->getElement(lcfirst($field))->setValue($value);
     }
 
-    public function nameItIn(string $name, string $localeCode): void
-    {
-        $this->changeTab('translations');
-        $this->expandTranslationAccordion($localeCode);
-
-        $this->getElement('name', ['%locale%' => $localeCode])->setValue($name);
-    }
-
     public function selectOption(string $optionName): void
     {
         $this->changeTab('details');
         $productOptionsAutocomplete = $this->getElement('product_options_autocomplete');
 
         $this->autocompleteHelper->selectByName($this->getDriver(), $productOptionsAutocomplete->getXpath(), $optionName);
-    }
-
-    public function generateSlug(string $localeCode): void
-    {
-        $this->getElement('generate_product_slug_button', ['%localeCode%' => $localeCode])->click();
-        $this->waitForFormUpdate();
     }
 
     public function hasTab(string $name): bool
@@ -85,10 +64,6 @@ trait ConfigurableProductFormTrait
         return parent::getElement($name, $parameters);
     }
 
-    /*
-     * Helpers
-     */
-
     private function waitForFormUpdate(): void
     {
         $form = $this->getElement('form');
@@ -98,25 +73,6 @@ trait ConfigurableProductFormTrait
         });
     }
 
-    private function clickButton(string $locator): void
-    {
-        if (DriverHelper::isJavascript($this->getDriver())) {
-            $this->getDocument()->pressButton($locator);
-        }
-    }
-
-    /*
-     * Tabs management
-     */
-    private function changeTab(string $tabName): void
-    {
-        if (DriverHelper::isNotJavascript($this->getDriver())) {
-            return;
-        }
-
-        $this->getElement('side_navigation_tab', ['%name%' => $tabName])->click();
-    }
-
     private function changeChannelTab(string $channelCode): void
     {
         if (DriverHelper::isNotJavascript($this->getDriver())) {
@@ -124,20 +80,5 @@ trait ConfigurableProductFormTrait
         }
 
         $this->getElement('channel_tab', ['%channelCode%' => $channelCode])->click();
-    }
-
-    private function expandTranslationAccordion(string $localeCode): void
-    {
-        if (DriverHelper::isNotJavascript($this->getDriver())) {
-            return;
-        }
-
-        $translationAccordion = $this->getElement('product_translation_accordion', ['%localeCode%' => $localeCode]);
-
-        if ($translationAccordion->getAttribute('aria-expanded') === 'true') {
-            return;
-        }
-
-        $translationAccordion->click();
     }
 }

@@ -18,6 +18,7 @@ use Sylius\Behat\Page\Admin\Crud\CreatePage as BaseCreatePage;
 use Sylius\Behat\Page\Admin\Product\Common\ProductAssociationsTrait;
 use Sylius\Behat\Page\Admin\Product\Common\ProductAttributesTrait;
 use Sylius\Behat\Page\Admin\Product\Common\ProductMediaTrait;
+use Sylius\Behat\Page\Admin\Product\Common\ProductTranslationsTrait;
 use Sylius\Behat\Service\AutocompleteHelper;
 use Sylius\Behat\Service\DriverHelper;
 use Sylius\Behat\Service\Helper\AutocompleteHelperInterface;
@@ -27,8 +28,9 @@ use Symfony\Component\Routing\RouterInterface;
 class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProductPageInterface
 {
     use ProductAssociationsTrait;
-    use ProductMediaTrait;
     use ProductAttributesTrait;
+    use ProductMediaTrait;
+    use ProductTranslationsTrait;
     use SimpleProductFormTrait;
 
     public function __construct(
@@ -51,11 +53,6 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
         $this->waitForFormUpdate();
 
         parent::create();
-    }
-
-    public function specifySlugIn(?string $slug, string $locale): void
-    {
-        $this->getElement('slug', ['%locale%' => $locale])->setValue($slug);
     }
 
     public function selectMainTaxon(TaxonInterface $taxon): void
@@ -99,18 +96,6 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
         $this->getElement('channel', ['%channel_code%' => $channelCode])->check();
     }
 
-    public function activateLanguageTab(string $locale): void
-    {
-        if (DriverHelper::isNotJavascript($this->getDriver())) {
-            return;
-        }
-
-        $languageTabTitle = $this->getElement('language_tab', ['%locale%' => $locale]);
-        if (!$languageTabTitle->hasClass('active')) {
-            $languageTabTitle->click();
-        }
-    }
-
     public function getChannelPricingValidationMessage(): string
     {
         return $this->getElement('prices_validation_message')->getText();
@@ -121,6 +106,15 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
         $this->getElement('cancel_button')->click();
     }
 
+    private function changeTab(string $tabName): void
+    {
+        if (DriverHelper::isNotJavascript($this->getDriver())) {
+            return;
+        }
+
+        $this->getElement('side_navigation_tab', ['%name%' => $tabName])->click();
+    }
+
     protected function getDefinedElements(): array
     {
         return array_merge(
@@ -129,6 +123,7 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
             $this->getDefinedProductMediaElements(),
             $this->getDefinedProductAssociationsElements(),
             $this->getDefinedProductAttributesElements(),
+            $this->getDefinedProductTranslationsElements(),
         );
     }
 

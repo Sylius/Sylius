@@ -24,8 +24,6 @@ interface UpdateSimpleProductPageInterface extends BaseUpdatePageInterface
 {
     public function isCodeDisabled(): bool;
 
-    public function isSlugReadonlyIn(string $locale): bool;
-
     public function specifyPrice(ChannelInterface $channel, string $price): void;
 
     public function specifyOriginalPrice(ChannelInterface $channel, string $originalPrice): void;
@@ -67,8 +65,6 @@ interface UpdateSimpleProductPageInterface extends BaseUpdatePageInterface
     public function enableTracking(): void;
 
     public function isTracked(): bool;
-
-    public function enableSlugModification(string $locale): void;
 
     public function isImageWithTypeDisplayed(string $type): bool;
 

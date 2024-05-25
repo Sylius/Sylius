@@ -20,10 +20,10 @@ use Sylius\Behat\Page\Admin\Crud\UpdatePage as BaseUpdatePage;
 use Sylius\Behat\Page\Admin\Product\Common\ProductAssociationsTrait;
 use Sylius\Behat\Page\Admin\Product\Common\ProductAttributesTrait;
 use Sylius\Behat\Page\Admin\Product\Common\ProductMediaTrait;
+use Sylius\Behat\Page\Admin\Product\Common\ProductTranslationsTrait;
 use Sylius\Behat\Service\AutocompleteHelper;
 use Sylius\Behat\Service\DriverHelper;
 use Sylius\Behat\Service\Helper\AutocompleteHelperInterface;
-use Sylius\Behat\Service\SlugGenerationHelper;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Currency\Model\CurrencyInterface;
@@ -35,6 +35,7 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
     use ProductAssociationsTrait;
     use ProductAttributesTrait;
     use ProductMediaTrait;
+    use ProductTranslationsTrait;
     use SimpleProductFormTrait;
 
     public function __construct(
@@ -155,22 +156,6 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
         return $this->getElement('tracked')->isChecked();
     }
 
-    public function enableSlugModification(string $locale): void
-    {
-        SlugGenerationHelper::enableSlugModification(
-            $this->getSession(),
-            $this->getElement('toggle_slug_modification_button', ['%locale%' => $locale]),
-        );
-    }
-
-    public function isSlugReadonlyIn(string $locale): bool
-    {
-        return SlugGenerationHelper::isSlugReadonly(
-            $this->getSession(),
-            $this->getElement('slug', ['%locale%' => $locale]),
-        );
-    }
-
     public function getPricingConfigurationForChannelAndCurrencyCalculator(ChannelInterface $channel, CurrencyInterface $currency): string
     {
         $priceConfigurationElement = $this->getElement('pricing_configuration');
@@ -178,30 +163,6 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
             ->find('css', sprintf('label:contains("%s %s")', $channel->getCode(), $currency->getCode()))->getParent();
 
         return $priceElement->find('css', 'input')->getValue();
-    }
-
-    public function getSlug(string $locale): string
-    {
-        return $this->getElement('slug', ['%locale%' => $locale])->getValue();
-    }
-
-    public function specifySlugIn(string $slug, string $locale): void
-    {
-        $this->activateLanguageTab($locale);
-
-        $this->getElement('slug', ['%locale%' => $locale])->setValue($slug);
-    }
-
-    public function activateLanguageTab(string $locale): void
-    {
-        if (DriverHelper::isNotJavascript($this->getDriver())) {
-            return;
-        }
-
-        $languageTabTitle = $this->getElement('language_tab', ['%locale%' => $locale]);
-        if (!$languageTabTitle->hasClass('active')) {
-            $languageTabTitle->click();
-        }
     }
 
     public function getPriceForChannel(ChannelInterface $channel): string
@@ -285,6 +246,7 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
             $this->getDefinedProductMediaElements(),
             $this->getDefinedProductAssociationsElements(),
             $this->getDefinedProductAttributesElements(),
+            $this->getDefinedProductTranslationsElements(),
         );
     }
 

@@ -27,20 +27,14 @@ trait SimpleProductFormTrait
             'channels' => '[data-test-channels]',
             'code' => '[data-test-code]',
             'enabled' => '[data-test-enabled]',
-            'field_name' => '[data-test-name="%locale%"]',
             'field_original_price' => '[data-test-original-price-in-channel="%channelCode%"]',
             'field_price' => '[data-test-price-in-channel="%channelCode%"]',
             'field_shipping_category' => '[name="sylius_admin_product[variant][shippingCategory]"]',
             'field_shipping_required' => '[name="sylius_admin_product[variant][shippingRequired]"]',
             'form' => '[data-live-name-value="sylius_admin:product:form"]',
-            'generate_product_slug_button' => '[data-test-generate-product-slug-button="%localeCode%"]',
-            'name' => '[data-test-name="%locale%"]',
-            'meta_description' => '[data-test-meta-description="%locale%"]',
-            'meta_keywords' => '[data-test-meta-keywords="%locale%"]',
             'prices_validation_message' => '[data-test-missing-channel-price]',
             'product_translation_accordion' => '[data-test-product-translations-accordion="%localeCode%"]',
             'side_navigation_tab' => '[data-test-side-navigation-tab="%name%"]',
-            'slug' => '[data-test-slug="%locale%"]',
         ];
     }
 
@@ -52,13 +46,6 @@ trait SimpleProductFormTrait
     public function specifyField(string $field, string $value): void
     {
         $this->getElement($field)->setValue($value);
-    }
-
-    public function nameItIn(string $name, string $localeCode): void
-    {
-        $this->changeTab('translations');
-        $this->expandTranslationAccordion($localeCode);
-        $this->getElement('field_name', ['%localeCode%' => $localeCode])->setValue($name);
     }
 
     public function specifyPrice(ChannelInterface $channel, string $price): void
@@ -99,12 +86,6 @@ trait SimpleProductFormTrait
         return $this->getElement('field_shipping_required')->isChecked();
     }
 
-    public function generateSlug(string $localeCode): void
-    {
-        $this->getElement('generate_product_slug_button', ['%localeCode%' => $localeCode])->click();
-        $this->waitForFormUpdate();
-    }
-
     public function hasTab(string $name): bool
     {
         return $this->hasElement('side_navigation_tab', ['%name%' => $name]);
@@ -128,20 +109,6 @@ trait SimpleProductFormTrait
         });
     }
 
-
-
-    /*
-     * Tabs management
-     */
-    private function changeTab(string $tabName): void
-    {
-        if (DriverHelper::isNotJavascript($this->getDriver())) {
-            return;
-        }
-
-        $this->getElement('side_navigation_tab', ['%name%' => $tabName])->click();
-    }
-
     private function changeChannelTab(string $channelCode): void
     {
         if (DriverHelper::isNotJavascript($this->getDriver())) {
@@ -149,20 +116,5 @@ trait SimpleProductFormTrait
         }
 
         $this->getElement('channel_tab', ['%channelCode%' => $channelCode])->click();
-    }
-
-    private function expandTranslationAccordion(string $localeCode): void
-    {
-        if (DriverHelper::isNotJavascript($this->getDriver())) {
-            return;
-        }
-
-        $translationAccordion = $this->getElement('product_translation_accordion', ['%localeCode%' => $localeCode]);
-
-        if ($translationAccordion->getAttribute('aria-expanded') === 'true') {
-            return;
-        }
-
-        $translationAccordion->click();
     }
 }
