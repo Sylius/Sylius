@@ -27,8 +27,6 @@ interface UpdatePageInterface extends BaseUpdatePageInterface
 
     public function isSlugReadonly(string $languageCode = 'en_US'): bool;
 
-    public function enableSlugModification(string $languageCode = 'en_US'): void;
-
     public function getParent(): string;
 
     public function getSlug(string $languageCode = 'en_US'): string;

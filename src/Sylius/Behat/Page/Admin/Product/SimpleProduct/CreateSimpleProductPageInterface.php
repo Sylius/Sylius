@@ -33,7 +33,7 @@ interface CreateSimpleProductPageInterface extends BaseCreatePageInterface
 
     public function nameItIn(string $name, string $localeCode): void;
 
-    public function specifySlugIn(?string $slug, string $locale): void;
+    public function specifySlugIn(string $slug, string $locale): void;
 
     public function addAttribute(string $attributeName): void;
 

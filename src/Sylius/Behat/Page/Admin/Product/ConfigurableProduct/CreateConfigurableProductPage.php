@@ -17,6 +17,7 @@ use Behat\Mink\Session;
 use Sylius\Behat\Page\Admin\Crud\CreatePage as BaseCreatePage;
 use Sylius\Behat\Page\Admin\Product\Common\ProductAttributesTrait;
 use Sylius\Behat\Page\Admin\Product\Common\ProductMediaTrait;
+use Sylius\Behat\Page\Admin\Product\Common\ProductTranslationsTrait;
 use Sylius\Behat\Service\AutocompleteHelper;
 use Sylius\Behat\Service\DriverHelper;
 use Sylius\Behat\Service\Helper\AutocompleteHelperInterface;
@@ -28,6 +29,7 @@ class CreateConfigurableProductPage extends BaseCreatePage implements CreateConf
     use ConfigurableProductFormTrait;
     use ProductMediaTrait;
     use ProductAttributesTrait;
+    use ProductTranslationsTrait;
 
     public function __construct(
         Session $session,
@@ -63,18 +65,6 @@ class CreateConfigurableProductPage extends BaseCreatePage implements CreateConf
         AutocompleteHelper::chooseValue($this->getSession(), $mainTaxonElement, $taxon->getName());
     }
 
-    public function activateLanguageTab(string $localeCode): void
-    {
-        if (DriverHelper::isNotJavascript($this->getDriver())) {
-            return;
-        }
-
-        $languageTabTitle = $this->getElement('language_tab', ['%localeCode%' => $localeCode]);
-        if (!$languageTabTitle->hasClass('active')) {
-            $languageTabTitle->click();
-        }
-    }
-
     /**
      * @return string[]
      */
@@ -85,6 +75,7 @@ class CreateConfigurableProductPage extends BaseCreatePage implements CreateConf
             $this->getDefinedFormElements(),
             $this->getDefinedProductMediaElements(),
             $this->getDefinedProductAttributesElements(),
+            $this->getDefinedProductTranslationsElements(),
         );
     }
 
