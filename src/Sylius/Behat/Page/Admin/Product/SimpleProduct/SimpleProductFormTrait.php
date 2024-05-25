@@ -22,7 +22,6 @@ trait SimpleProductFormTrait
     public function getDefinedFormElements(): array
     {
         return [
-            'attribute_value' => '[data-test-attribute-value][data-test-locale-code="%localeCode%"][data-test-attribute-name="%attributeName%"]',
             'channel' => '[data-test-channel-code="%channel_code%"]',
             'channel_tab' => '[data-test-channel-tab="%channelCode%"]',
             'channels' => '[data-test-channels]',
@@ -39,9 +38,6 @@ trait SimpleProductFormTrait
             'meta_description' => '[data-test-meta-description="%locale%"]',
             'meta_keywords' => '[data-test-meta-keywords="%locale%"]',
             'prices_validation_message' => '[data-test-missing-channel-price]',
-            'product_attribute_delete_button' => '[data-test-product-attribute-delete-button="%attributeName%"]',
-            'product_attribute_input' => 'input[name="product_attributes"]',
-            'product_attribute_tab' => '[data-test-product-attribute-tab="%name%"]',
             'product_translation_accordion' => '[data-test-product-translations-accordion="%localeCode%"]',
             'side_navigation_tab' => '[data-test-side-navigation-tab="%name%"]',
             'slug' => '[data-test-slug="%locale%"]',
@@ -114,80 +110,6 @@ trait SimpleProductFormTrait
         return $this->hasElement('side_navigation_tab', ['%name%' => $name]);
     }
 
-    /*
-     * Attribute management
-     */
-    public function addAttribute(string $attributeName): void
-    {
-        $this->changeTab('attributes');
-        $this->selectAttributeToBeAdded($attributeName);
-        $this->clickButton('Add');
-
-        $this->waitForFormUpdate();
-    }
-
-    public function updateAttribute(string $attributeName, string $value, string $localeCode): void
-    {
-        $this->changeTab('attributes');
-        $this->changeAttributeTab($attributeName);
-
-        $attributeValue = $this->getElement('attribute_value', ['%attributeName%' => $attributeName, '%localeCode%' => $localeCode]);
-
-        match ($attributeValue->getTagName()) {
-            'input' => $attributeValue->setValue($value),
-            'select' => $attributeValue->selectOption($value),
-            default => throw new \InvalidArgumentException('Unsupported attribute value type'),
-        };
-
-        $attributeValue->blur();
-        $this->waitForFormUpdate();
-    }
-
-    public function removeAttribute(string $attributeName, string $localeCode): void
-    {
-        $this->changeTab('attributes');
-
-        $this->getElement('product_attribute_delete_button', ['%attributeName%' => $attributeName])->press();
-
-        $this->waitForFormUpdate();
-    }
-
-    public function getAttributeValue(string $attribute, string $localeCode): string
-    {
-        $this->changeTab('attributes');
-        $this->changeAttributeTab($attribute);
-
-        $attributeValue = $this->getElement('attribute_value', ['%attributeName%' => $attribute, '%localeCode%' => $localeCode]);
-
-        return match ($attributeValue->getTagName()) {
-            'input' => $attributeValue->getValue(),
-            'select' => $attributeValue->getText(),
-            default => throw new \InvalidArgumentException('Unsupported attribute value type'),
-        };
-    }
-
-    public function addSelectedAttributes(): void
-    {
-        $this->changeTab('attributes');
-        $this->clickButton('Add');
-        $this->waitForFormUpdate();
-    }
-
-    public function getNumberOfAttributes(): int
-    {
-        return count($this->getDocument()->findAll('css', '[data-test-product-attribute-tab]'));
-    }
-
-    private function selectAttributeToBeAdded(string $attributeName): void
-    {
-        $driver = $this->getDriver();
-        $this->autocompleteHelper->selectByName(
-            $driver,
-            $this->getElement('product_attribute_input')->getXpath(),
-            $attributeName,
-        );
-    }
-
     protected function getElement(string $name, array $parameters = []): NodeElement
     {
         if (!isset($parameters['%locale%'])) {
@@ -206,12 +128,7 @@ trait SimpleProductFormTrait
         });
     }
 
-    private function clickButton(string $locator): void
-    {
-        if (DriverHelper::isJavascript($this->getDriver())) {
-            $this->getDocument()->pressButton($locator);
-        }
-    }
+
 
     /*
      * Tabs management
@@ -232,15 +149,6 @@ trait SimpleProductFormTrait
         }
 
         $this->getElement('channel_tab', ['%channelCode%' => $channelCode])->click();
-    }
-
-    private function changeAttributeTab(string $attributeName): void
-    {
-        if (DriverHelper::isNotJavascript($this->getDriver())) {
-            return;
-        }
-
-        $this->getElement('product_attribute_tab', ['%name%' => $attributeName])->click();
     }
 
     private function expandTranslationAccordion(string $localeCode): void

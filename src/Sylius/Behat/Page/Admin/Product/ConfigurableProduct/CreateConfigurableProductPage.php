@@ -15,6 +15,7 @@ namespace Sylius\Behat\Page\Admin\Product\ConfigurableProduct;
 
 use Behat\Mink\Session;
 use Sylius\Behat\Page\Admin\Crud\CreatePage as BaseCreatePage;
+use Sylius\Behat\Page\Admin\Product\Common\ProductAttributesTrait;
 use Sylius\Behat\Page\Admin\Product\Common\ProductMediaTrait;
 use Sylius\Behat\Service\AutocompleteHelper;
 use Sylius\Behat\Service\DriverHelper;
@@ -26,6 +27,7 @@ class CreateConfigurableProductPage extends BaseCreatePage implements CreateConf
 {
     use ConfigurableProductFormTrait;
     use ProductMediaTrait;
+    use ProductAttributesTrait;
 
     public function __construct(
         Session $session,
@@ -73,15 +75,6 @@ class CreateConfigurableProductPage extends BaseCreatePage implements CreateConf
         }
     }
 
-    public function getAttributeValidationErrors(string $attributeName, string $localeCode): string
-    {
-        $this->clickTabIfItsNotActive('attributes');
-
-        $validationError = $this->getElement('attribute')->find('css', '.sylius-validation-error');
-
-        return $validationError->getText();
-    }
-
     /**
      * @return string[]
      */
@@ -91,19 +84,12 @@ class CreateConfigurableProductPage extends BaseCreatePage implements CreateConf
             parent::getDefinedElements(),
             $this->getDefinedFormElements(),
             $this->getDefinedProductMediaElements(),
+            $this->getDefinedProductAttributesElements(),
         );
     }
 
     private function openTaxonBookmarks(): void
     {
         $this->getElement('taxonomy')->click();
-    }
-
-    private function clickTabIfItsNotActive(string $tabName): void
-    {
-        $attributesTab = $this->getElement('tab', ['%name%' => $tabName]);
-        if (!$attributesTab->hasClass('active')) {
-            $attributesTab->click();
-        }
     }
 }

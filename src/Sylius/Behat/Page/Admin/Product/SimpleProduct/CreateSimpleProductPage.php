@@ -16,6 +16,7 @@ namespace Sylius\Behat\Page\Admin\Product\SimpleProduct;
 use Behat\Mink\Session;
 use Sylius\Behat\Page\Admin\Crud\CreatePage as BaseCreatePage;
 use Sylius\Behat\Page\Admin\Product\Common\ProductAssociationsTrait;
+use Sylius\Behat\Page\Admin\Product\Common\ProductAttributesTrait;
 use Sylius\Behat\Page\Admin\Product\Common\ProductMediaTrait;
 use Sylius\Behat\Service\AutocompleteHelper;
 use Sylius\Behat\Service\DriverHelper;
@@ -27,6 +28,7 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
 {
     use ProductAssociationsTrait;
     use ProductMediaTrait;
+    use ProductAttributesTrait;
     use SimpleProductFormTrait;
 
     public function __construct(
@@ -54,28 +56,6 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
     public function specifySlugIn(?string $slug, string $locale): void
     {
         $this->getElement('slug', ['%locale%' => $locale])->setValue($slug);
-    }
-
-    public function addNonTranslatableAttribute(string $attributeName, string $value): void
-    {
-        $this->clickTabIfItsNotActive('attributes');
-
-        $attributeOption = $this->getElement('attributes_choice')->find('css', sprintf('option:contains("%s")', $attributeName));
-        $this->selectElementFromAttributesDropdown($attributeOption->getAttribute('value'));
-
-        $this->getDocument()->pressButton('Add attributes');
-        $this->waitForFormElement();
-
-        $this->getElement('non_translatable_attribute_value', ['%attributeName%' => $attributeName])->setValue($value);
-    }
-
-    public function getAttributeValidationErrors(string $attributeName, string $localeCode): string
-    {
-        $this->clickTabIfItsNotActive('attributes');
-
-        $validationError = $this->getElement('attribute')->find('css', '.sylius-validation-error');
-
-        return $validationError->getText();
     }
 
     public function selectMainTaxon(TaxonInterface $taxon): void
@@ -145,12 +125,10 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
     {
         return array_merge(
             parent::getDefinedElements(),
-            [
-                'attribute_value' => '#attributesContainer [data-test-product-attribute-value-in-locale="%attributeName% %localeCode%"] input',
-            ],
             $this->getDefinedFormElements(),
             $this->getDefinedProductMediaElements(),
             $this->getDefinedProductAssociationsElements(),
+            $this->getDefinedProductAttributesElements(),
         );
     }
 

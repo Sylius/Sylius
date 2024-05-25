@@ -18,6 +18,7 @@ use Behat\Mink\Session;
 use Sylius\Behat\Behaviour\ChecksCodeImmutability;
 use Sylius\Behat\Page\Admin\Crud\UpdatePage as BaseUpdatePage;
 use Sylius\Behat\Page\Admin\Product\Common\ProductAssociationsTrait;
+use Sylius\Behat\Page\Admin\Product\Common\ProductAttributesTrait;
 use Sylius\Behat\Page\Admin\Product\Common\ProductMediaTrait;
 use Sylius\Behat\Service\AutocompleteHelper;
 use Sylius\Behat\Service\DriverHelper;
@@ -32,6 +33,7 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
 {
     use ChecksCodeImmutability;
     use ProductAssociationsTrait;
+    use ProductAttributesTrait;
     use ProductMediaTrait;
     use SimpleProductFormTrait;
 
@@ -66,51 +68,6 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
         $this->changeChannelTab($channel->getCode());
 
         $this->getElement('field_original_price', ['%channelCode%' => $channel->getCode()])->setValue($originalPrice);
-    }
-
-    public function removeAttribute(string $attributeName, string $localeCode): void
-    {
-        $this->clickTabIfItsNotActive('attributes');
-
-        $this->getElement('attribute_delete_button', ['%attributeName%' => $attributeName, '$localeCode%' => $localeCode])->press();
-    }
-
-    public function getAttributeSelectText(string $attribute, string $localeCode): string
-    {
-        $this->clickTabIfItsNotActive('attributes');
-
-        return $this->getElement('attribute_select', ['%attributeName%' => $attribute, '%localeCode%' => $localeCode])->getText();
-    }
-
-    public function getNonTranslatableAttributeValue(string $attribute): string
-    {
-        $this->clickTabIfItsNotActive('attributes');
-
-        return $this->getElement('non_translatable_attribute', ['%attributeName%' => $attribute])->getValue();
-    }
-
-    public function getAttributeValidationErrors(string $attributeName, string $localeCode): string
-    {
-        $this->clickTabIfItsNotActive('attributes');
-
-        $validationError = $this->getElement('attribute_element')->find('css', '.sylius-validation-error');
-
-        return $validationError->getText();
-    }
-
-    public function hasAttribute(string $attributeName): bool
-    {
-        return null !== $this->getDocument()->find('css', sprintf('.attribute .label:contains("%s")', $attributeName));
-    }
-
-    public function hasNonTranslatableAttributeWithValue(string $attributeName, string $value): bool
-    {
-        $attribute = $this->getDocument()->find('css', sprintf('.attribute .attribute-label:contains("%s")', $attributeName));
-
-        return
-            $attribute->getParent()->getParent()->find('css', '.attribute-input input')->getValue() === $value &&
-            $attribute->find('css', '.globe.icon') !== null
-        ;
     }
 
     public function selectMainTaxon(TaxonInterface $taxon): void
@@ -327,19 +284,12 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
             $this->getDefinedFormElements(),
             $this->getDefinedProductMediaElements(),
             $this->getDefinedProductAssociationsElements(),
+            $this->getDefinedProductAttributesElements(),
         );
     }
 
     private function openTaxonBookmarks(): void
     {
         $this->getElement('taxonomy')->click();
-    }
-
-    private function clickTabIfItsNotActive(string $tabName): void
-    {
-        $attributesTab = $this->getElement('tab', ['%name%' => $tabName]);
-        if (!$attributesTab->hasClass('active')) {
-            $attributesTab->click();
-        }
     }
 }
