@@ -17,18 +17,17 @@ use Behat\Mink\Session;
 use Sylius\Behat\Page\Admin\Crud\CreatePage as BaseCreatePage;
 use Sylius\Behat\Page\Admin\Product\Common\ProductAttributesTrait;
 use Sylius\Behat\Page\Admin\Product\Common\ProductMediaTrait;
+use Sylius\Behat\Page\Admin\Product\Common\ProductTaxonomyTrait;
 use Sylius\Behat\Page\Admin\Product\Common\ProductTranslationsTrait;
-use Sylius\Behat\Service\AutocompleteHelper;
-use Sylius\Behat\Service\DriverHelper;
 use Sylius\Behat\Service\Helper\AutocompleteHelperInterface;
-use Sylius\Component\Core\Model\TaxonInterface;
 use Symfony\Component\Routing\RouterInterface;
 
 class CreateConfigurableProductPage extends BaseCreatePage implements CreateConfigurableProductPageInterface
 {
     use ConfigurableProductFormTrait;
-    use ProductMediaTrait;
     use ProductAttributesTrait;
+    use ProductMediaTrait;
+    use ProductTaxonomyTrait;
     use ProductTranslationsTrait;
 
     public function __construct(
@@ -48,23 +47,6 @@ class CreateConfigurableProductPage extends BaseCreatePage implements CreateConf
         parent::create();
     }
 
-    public function hasMainTaxonWithName(string $taxonName): bool
-    {
-        $this->openTaxonBookmarks();
-        $mainTaxonElement = $this->getElement('main_taxon')->getParent();
-
-        return $taxonName === $mainTaxonElement->find('css', '.search > .text')->getText();
-    }
-
-    public function selectMainTaxon(TaxonInterface $taxon): void
-    {
-        $this->openTaxonBookmarks();
-
-        $mainTaxonElement = $this->getElement('main_taxon')->getParent();
-
-        AutocompleteHelper::chooseValue($this->getSession(), $mainTaxonElement, $taxon->getName());
-    }
-
     /**
      * @return string[]
      */
@@ -76,11 +58,7 @@ class CreateConfigurableProductPage extends BaseCreatePage implements CreateConf
             $this->getDefinedProductMediaElements(),
             $this->getDefinedProductAttributesElements(),
             $this->getDefinedProductTranslationsElements(),
+            $this->getDefinedProductTaxonomyElements(),
         );
-    }
-
-    private function openTaxonBookmarks(): void
-    {
-        $this->getElement('taxonomy')->click();
     }
 }

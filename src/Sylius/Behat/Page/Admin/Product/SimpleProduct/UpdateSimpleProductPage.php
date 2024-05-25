@@ -20,12 +20,10 @@ use Sylius\Behat\Page\Admin\Crud\UpdatePage as BaseUpdatePage;
 use Sylius\Behat\Page\Admin\Product\Common\ProductAssociationsTrait;
 use Sylius\Behat\Page\Admin\Product\Common\ProductAttributesTrait;
 use Sylius\Behat\Page\Admin\Product\Common\ProductMediaTrait;
+use Sylius\Behat\Page\Admin\Product\Common\ProductTaxonomyTrait;
 use Sylius\Behat\Page\Admin\Product\Common\ProductTranslationsTrait;
-use Sylius\Behat\Service\AutocompleteHelper;
-use Sylius\Behat\Service\DriverHelper;
 use Sylius\Behat\Service\Helper\AutocompleteHelperInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
-use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Currency\Model\CurrencyInterface;
 use Symfony\Component\Routing\RouterInterface;
 
@@ -35,6 +33,7 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
     use ProductAssociationsTrait;
     use ProductAttributesTrait;
     use ProductMediaTrait;
+    use ProductTaxonomyTrait;
     use ProductTranslationsTrait;
     use SimpleProductFormTrait;
 
@@ -69,76 +68,6 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
         $this->changeChannelTab($channel->getCode());
 
         $this->getElement('field_original_price', ['%channelCode%' => $channel->getCode()])->setValue($originalPrice);
-    }
-
-    public function selectMainTaxon(TaxonInterface $taxon): void
-    {
-        $this->openTaxonBookmarks();
-
-        $mainTaxonElement = $this->getElement('main_taxon')->getParent();
-
-        AutocompleteHelper::chooseValue($this->getSession(), $mainTaxonElement, $taxon->getName());
-    }
-
-    public function isTaxonVisibleInMainTaxonList(string $taxonName): bool
-    {
-        $this->openTaxonBookmarks();
-
-        $mainTaxonElement = $this->getElement('main_taxon')->getParent();
-
-        return AutocompleteHelper::isValueVisible($this->getSession(), $mainTaxonElement, $taxonName);
-    }
-
-    public function selectProductTaxon(TaxonInterface $taxon): void
-    {
-        $productTaxonsCodes = [];
-        $productTaxonsElement = $this->getElement('product_taxons');
-        if ($productTaxonsElement->getValue() !== '') {
-            $productTaxonsCodes = explode(',', $productTaxonsElement->getValue());
-        }
-        $productTaxonsCodes[] = $taxon->getCode();
-
-        $productTaxonsElement->setValue(implode(',', $productTaxonsCodes));
-    }
-
-    public function unselectProductTaxon(TaxonInterface $taxon): void
-    {
-        $productTaxonsCodes = [];
-        $productTaxonsElement = $this->getElement('product_taxons');
-        if ($productTaxonsElement->getValue() !== '') {
-            $productTaxonsCodes = explode(',', $productTaxonsElement->getValue());
-        }
-
-        $key = array_search($taxon->getCode(), $productTaxonsCodes);
-        if ($key !== false) {
-            unset($productTaxonsCodes[$key]);
-        }
-
-        $productTaxonsElement->setValue(implode(',', $productTaxonsCodes));
-    }
-
-    public function hasMainTaxon(): bool
-    {
-        $this->openTaxonBookmarks();
-
-        return $this->getDocument()->find('css', '.search > .text')->getText() !== '';
-    }
-
-    public function hasMainTaxonWithName(string $taxonName): bool
-    {
-        $this->openTaxonBookmarks();
-        $mainTaxonElement = $this->getElement('main_taxon')->getParent();
-
-        return $taxonName === $mainTaxonElement->find('css', '.search > .text')->getText();
-    }
-
-    public function isTaxonChosen(string $taxonName): bool
-    {
-        $productTaxonsElement = $this->getElement('product_taxons');
-
-        $taxonName = strtolower(str_replace('-', '_', $taxonName));
-
-        return str_contains($productTaxonsElement->getValue(), $taxonName);
     }
 
     public function disableTracking(): void
@@ -247,11 +176,7 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
             $this->getDefinedProductAssociationsElements(),
             $this->getDefinedProductAttributesElements(),
             $this->getDefinedProductTranslationsElements(),
+            $this->getDefinedProductTaxonomyElements(),
         );
-    }
-
-    private function openTaxonBookmarks(): void
-    {
-        $this->getElement('taxonomy')->click();
     }
 }
