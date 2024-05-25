@@ -18,11 +18,10 @@ use Sylius\Behat\Page\Admin\Crud\CreatePage as BaseCreatePage;
 use Sylius\Behat\Page\Admin\Product\Common\ProductAssociationsTrait;
 use Sylius\Behat\Page\Admin\Product\Common\ProductAttributesTrait;
 use Sylius\Behat\Page\Admin\Product\Common\ProductMediaTrait;
+use Sylius\Behat\Page\Admin\Product\Common\ProductTaxonomyTrait;
 use Sylius\Behat\Page\Admin\Product\Common\ProductTranslationsTrait;
-use Sylius\Behat\Service\AutocompleteHelper;
 use Sylius\Behat\Service\DriverHelper;
 use Sylius\Behat\Service\Helper\AutocompleteHelperInterface;
-use Sylius\Component\Core\Model\TaxonInterface;
 use Symfony\Component\Routing\RouterInterface;
 
 class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProductPageInterface
@@ -30,6 +29,7 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
     use ProductAssociationsTrait;
     use ProductAttributesTrait;
     use ProductMediaTrait;
+    use ProductTaxonomyTrait;
     use ProductTranslationsTrait;
     use SimpleProductFormTrait;
 
@@ -39,7 +39,8 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
         RouterInterface $router,
         string $routeName,
         private readonly AutocompleteHelperInterface $autocompleteHelper,
-    ) {
+    )
+    {
         parent::__construct($session, $minkParameters, $router, $routeName);
     }
 
@@ -53,37 +54,6 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
         $this->waitForFormUpdate();
 
         parent::create();
-    }
-
-    public function selectMainTaxon(TaxonInterface $taxon): void
-    {
-        $this->openTaxonBookmarks();
-
-        $mainTaxonElement = $this->getElement('main_taxon')->getParent();
-
-        AutocompleteHelper::chooseValue($this->getSession(), $mainTaxonElement, $taxon->getName());
-    }
-
-    public function hasMainTaxonWithName(string $taxonName): bool
-    {
-        $this->openTaxonBookmarks();
-        $mainTaxonElement = $this->getElement('main_taxon')->getParent();
-
-        return $taxonName === $mainTaxonElement->find('css', '.search > .text')->getText();
-    }
-
-    public function checkProductTaxon(TaxonInterface $taxon): void
-    {
-        $this->openTaxonBookmarks();
-
-        $productTaxonsCodes = [];
-        $productTaxonsElement = $this->getElement('product_taxons');
-        if ($productTaxonsElement->getValue() !== '') {
-            $productTaxonsCodes = explode(',', $productTaxonsElement->getValue());
-        }
-        $productTaxonsCodes[] = $taxon->getCode();
-
-        $productTaxonsElement->setValue(implode(',', $productTaxonsCodes));
     }
 
     public function choosePricingCalculator(string $name): void
@@ -124,12 +94,8 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
             $this->getDefinedProductAssociationsElements(),
             $this->getDefinedProductAttributesElements(),
             $this->getDefinedProductTranslationsElements(),
+            $this->getDefinedProductTaxonomyElements(),
         );
-    }
-
-    private function openTaxonBookmarks(): void
-    {
-        $this->getElement('taxonomy')->click();
     }
 
     private function selectElementFromAttributesDropdown(string $id): void
@@ -141,7 +107,7 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
     private function waitForFormElement(int $timeout = 5): void
     {
         $form = $this->getElement('form');
-        $this->getDocument()->waitFor($timeout, fn () => !str_contains($form->getAttribute('class'), 'loading'));
+        $this->getDocument()->waitFor($timeout, fn() => !str_contains($form->getAttribute('class'), 'loading'));
     }
 
     private function clickTabIfItsNotActive(string $tabName): void

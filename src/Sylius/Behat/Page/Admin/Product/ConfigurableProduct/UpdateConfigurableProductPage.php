@@ -18,10 +18,10 @@ use Behat\Mink\Session;
 use Sylius\Behat\Behaviour\ChecksCodeImmutability;
 use Sylius\Behat\Page\Admin\Crud\UpdatePage as BaseUpdatePage;
 use Sylius\Behat\Page\Admin\Product\Common\ProductMediaTrait;
+use Sylius\Behat\Page\Admin\Product\Common\ProductTaxonomyTrait;
 use Sylius\Behat\Page\Admin\Product\Common\ProductTranslationsTrait;
 use Sylius\Behat\Service\AutocompleteHelper;
 use Sylius\Behat\Service\Helper\AutocompleteHelperInterface;
-use Sylius\Component\Taxonomy\Model\TaxonInterface;
 use Symfony\Component\Routing\RouterInterface;
 
 class UpdateConfigurableProductPage extends BaseUpdatePage implements UpdateConfigurableProductPageInterface
@@ -29,6 +29,7 @@ class UpdateConfigurableProductPage extends BaseUpdatePage implements UpdateConf
     use ChecksCodeImmutability;
     use ConfigurableProductFormTrait;
     use ProductMediaTrait;
+    use ProductTaxonomyTrait;
     use ProductTranslationsTrait;
 
     /**
@@ -61,25 +62,6 @@ class UpdateConfigurableProductPage extends BaseUpdatePage implements UpdateConf
     public function isProductOptionsDisabled(): bool
     {
         return 'disabled' === $this->getElement('options')->getAttribute('disabled');
-    }
-
-    public function hasMainTaxonWithName(string $taxonName): bool
-    {
-        $this->openTaxonBookmarks();
-        $mainTaxonElement = $this->getElement('main_taxon')->getParent();
-
-        return $taxonName === $mainTaxonElement->find('css', '.search > .text')->getText();
-    }
-
-    public function selectMainTaxon(TaxonInterface $taxon): void
-    {
-        $this->openTaxonBookmarks();
-
-        $this->getDriver()->executeScript(sprintf('$(\'input.search\').val(\'%s\')', $taxon->getName()));
-        $this->getElement('search')->click();
-        $this->getElement('search')->waitFor(10, fn () => $this->hasElement('search_item_selected'));
-        $itemSelected = $this->getElement('search_item_selected');
-        $itemSelected->click();
     }
 
     public function checkChannel(string $channelCode): void
@@ -117,11 +99,7 @@ class UpdateConfigurableProductPage extends BaseUpdatePage implements UpdateConf
             $this->getDefinedFormElements(),
             $this->getDefinedProductMediaElements(),
             $this->getDefinedProductTranslationsElements(),
+            $this->getDefinedProductTaxonomyElements(),
         );
-    }
-
-    private function openTaxonBookmarks(): void
-    {
-        $this->getElement('taxonomy')->click();
     }
 }
