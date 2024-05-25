@@ -22,17 +22,11 @@ trait SimpleProductFormTrait
     public function getDefinedFormElements(): array
     {
         return [
-            'channel' => '[data-test-channel-code="%channel_code%"]',
-            'channel_tab' => '[data-test-channel-tab="%channelCode%"]',
-            'channels' => '[data-test-channels]',
             'code' => '[data-test-code]',
             'enabled' => '[data-test-enabled]',
-            'field_original_price' => '[data-test-original-price-in-channel="%channelCode%"]',
-            'field_price' => '[data-test-price-in-channel="%channelCode%"]',
             'field_shipping_category' => '[name="sylius_admin_product[variant][shippingCategory]"]',
             'field_shipping_required' => '[name="sylius_admin_product[variant][shippingRequired]"]',
             'form' => '[data-live-name-value="sylius_admin:product:form"]',
-            'prices_validation_message' => '[data-test-missing-channel-price]',
             'product_translation_accordion' => '[data-test-product-translations-accordion="%localeCode%"]',
             'side_navigation_tab' => '[data-test-side-navigation-tab="%name%"]',
         ];
@@ -48,19 +42,6 @@ trait SimpleProductFormTrait
         $this->getElement($field)->setValue($value);
     }
 
-    public function specifyPrice(ChannelInterface $channel, string $price): void
-    {
-        $this->changeTab('channel-pricing');
-        $this->changeChannelTab($channel->getCode());
-        $this->getElement('field_price', ['%channelCode%' => $channel->getCode()])->setValue($price);
-    }
-
-    public function specifyOriginalPrice(ChannelInterface $channel, int $originalPrice): void
-    {
-        $this->changeTab('channel-pricing');
-        $this->changeChannelTab($channel->getCode());
-        $this->getElement('field_original_price', ['%channelCode%' => $channel->getCode()])->setValue($originalPrice);
-    }
 
     public function selectShippingCategory(string $shippingCategoryName): void
     {
@@ -107,14 +88,5 @@ trait SimpleProductFormTrait
         $form->waitFor(1500, function () use ($form) {
             return !$form->hasAttribute('busy');
         });
-    }
-
-    private function changeChannelTab(string $channelCode): void
-    {
-        if (DriverHelper::isNotJavascript($this->getDriver())) {
-            return;
-        }
-
-        $this->getElement('channel_tab', ['%channelCode%' => $channelCode])->click();
     }
 }

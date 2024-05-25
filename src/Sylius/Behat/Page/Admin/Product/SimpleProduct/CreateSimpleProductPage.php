@@ -28,6 +28,7 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
 {
     use ProductAssociationsTrait;
     use ProductAttributesTrait;
+    use ProductChannelPricingsTrait;
     use ProductMediaTrait;
     use ProductTaxonomyTrait;
     use ProductTranslationsTrait;
@@ -54,11 +55,6 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
         $this->waitForFormUpdate();
 
         parent::create();
-    }
-
-    public function choosePricingCalculator(string $name): void
-    {
-        $this->getElement('price_calculator')->selectOption($name);
     }
 
     public function checkChannel(string $channelCode): void
@@ -95,6 +91,7 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
             $this->getDefinedProductAttributesElements(),
             $this->getDefinedProductTranslationsElements(),
             $this->getDefinedProductTaxonomyElements(),
+            $this->getDefinedProductChannelPricingsElements(),
         );
     }
 
