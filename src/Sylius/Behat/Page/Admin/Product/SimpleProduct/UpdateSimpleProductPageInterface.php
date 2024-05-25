@@ -26,7 +26,7 @@ interface UpdateSimpleProductPageInterface extends BaseUpdatePageInterface
 
     public function specifyPrice(ChannelInterface $channel, string $price): void;
 
-    public function specifyOriginalPrice(ChannelInterface $channel, string $originalPrice): void;
+    public function specifyOriginalPrice(ChannelInterface $channel, int $originalPrice): void;
 
     public function nameItIn(string $name, string $localeCode): void;
 

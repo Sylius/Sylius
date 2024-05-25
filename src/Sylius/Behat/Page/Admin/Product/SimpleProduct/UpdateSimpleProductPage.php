@@ -32,6 +32,7 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
     use ChecksCodeImmutability;
     use ProductAssociationsTrait;
     use ProductAttributesTrait;
+    use ProductChannelPricingsTrait;
     use ProductMediaTrait;
     use ProductTaxonomyTrait;
     use ProductTranslationsTrait;
@@ -52,22 +53,6 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
         $this->waitForFormUpdate();
 
         parent::saveChanges();
-    }
-
-    public function specifyPrice(ChannelInterface $channel, string $price): void
-    {
-        $this->changeTab('channel-pricing');
-        $this->changeChannelTab($channel->getCode());
-
-        $this->getElement('field_price', ['%channelCode%' => $channel->getCode()])->setValue($price);
-    }
-
-    public function specifyOriginalPrice(ChannelInterface $channel, string $originalPrice): void
-    {
-        $this->changeTab('channel-pricing');
-        $this->changeChannelTab($channel->getCode());
-
-        $this->getElement('field_original_price', ['%channelCode%' => $channel->getCode()])->setValue($originalPrice);
     }
 
     public function disableTracking(): void
@@ -92,16 +77,6 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
             ->find('css', sprintf('label:contains("%s %s")', $channel->getCode(), $currency->getCode()))->getParent();
 
         return $priceElement->find('css', 'input')->getValue();
-    }
-
-    public function getPriceForChannel(ChannelInterface $channel): string
-    {
-        return $this->getElement('field_price', ['%channelCode%' => $channel->getCode()])->getValue();
-    }
-
-    public function getOriginalPriceForChannel(ChannelInterface $channel): string
-    {
-        return $this->getElement('field_original_price', ['%channelCode%' => $channel->getCode()])->getValue();
     }
 
     public function goToVariantsList(): void
@@ -154,11 +129,6 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
         $this->getElement('enabled')->check();
     }
 
-    public function hasNoPriceForChannel(string $channelName): bool
-    {
-        return !str_contains($this->getElement('prices')->getHtml(), $channelName);
-    }
-
     protected function getCodeElement(): NodeElement
     {
         return $this->getElement('code');
@@ -168,15 +138,16 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
     {
         return array_merge(
             parent::getDefinedElements(),
-            [
-                'show_product_button' => '[data-test-view-in-store]',
-            ],
             $this->getDefinedFormElements(),
             $this->getDefinedProductMediaElements(),
             $this->getDefinedProductAssociationsElements(),
             $this->getDefinedProductAttributesElements(),
             $this->getDefinedProductTranslationsElements(),
             $this->getDefinedProductTaxonomyElements(),
+            $this->getDefinedProductChannelPricingsElements(),
+            [
+                'show_product_button' => '[data-test-view-in-store]',
+            ],
         );
     }
 }

@@ -598,7 +598,7 @@ final readonly class ManagingProductsContext implements Context
     /**
      * @When /^I change its original price to "(?:€|£|\$)([^"]+)" for ("([^"]+)" channel)$/
      */
-    public function iChangeItsOriginalPriceTo(string $originalPrice, ChannelInterface $channel)
+    public function iChangeItsOriginalPriceTo(int $originalPrice, ChannelInterface $channel): void
     {
         $this->updateSimpleProductPage->specifyOriginalPrice($channel, $originalPrice);
     }
