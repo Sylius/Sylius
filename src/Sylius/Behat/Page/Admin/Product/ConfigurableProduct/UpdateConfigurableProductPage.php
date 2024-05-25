@@ -27,7 +27,6 @@ use Symfony\Component\Routing\RouterInterface;
 class UpdateConfigurableProductPage extends BaseUpdatePage implements UpdateConfigurableProductPageInterface
 {
     use ChecksCodeImmutability;
-    use ConfigurableProductFormTrait;
     use ProductMediaTrait;
     use ProductTaxonomyTrait;
     use ProductTranslationsTrait;
@@ -64,6 +63,11 @@ class UpdateConfigurableProductPage extends BaseUpdatePage implements UpdateConf
         return 'disabled' === $this->getElement('options')->getAttribute('disabled');
     }
 
+    public function hasTab(string $name): bool
+    {
+        return $this->hasElement('side_navigation_tab', ['%name%' => $name]);
+    }
+
     public function checkChannel(string $channelCode): void
     {
         $this->getElement('channel', ['%channel_code%' => $channelCode])->check();
@@ -84,22 +88,68 @@ class UpdateConfigurableProductPage extends BaseUpdatePage implements UpdateConf
         $this->getDocument()->clickLink('Generate');
     }
 
+    public function specifyCode(string $code): void
+    {
+        $this->getElement('code')->setValue($code);
+    }
+
+    public function specifyField(string $field, string $value): void
+    {
+        $this->getElement(lcfirst($field))->setValue($value);
+    }
+
+    public function selectOption(string $optionName): void
+    {
+        $this->changeTab('details');
+        $productOptionsAutocomplete = $this->getElement('product_options_autocomplete');
+
+        $this->autocompleteHelper->selectByName($this->getDriver(), $productOptionsAutocomplete->getXpath(), $optionName);
+    }
+
     protected function getCodeElement(): NodeElement
     {
         return $this->getElement('code');
     }
 
+    /**
+     * @return string[]
+     */
     protected function getDefinedElements(): array
     {
         return array_merge(
             parent::getDefinedElements(),
-            [
-                'options' => '[data-test-options]',
-            ],
-            $this->getDefinedFormElements(),
             $this->getDefinedProductMediaElements(),
             $this->getDefinedProductTranslationsElements(),
             $this->getDefinedProductTaxonomyElements(),
+            [
+                'channel' => '[data-test-channel-code="%channel_code%"]',
+                'channel_tab' => '[data-test-channel-tab="%channelCode%"]',
+                'channels' => '[data-test-channels]',
+                'code' => '[data-test-code]',
+                'enabled' => '[data-test-enabled]',
+                'form' => '[data-live-name-value="sylius_admin:product:form"]',
+                'options' => '[data-test-options]',
+                'product_options_autocomplete' => '[data-test-product-options-autocomplete]',
+                'side_navigation_tab' => '[data-test-side-navigation-tab="%name%"]',
+            ],
         );
+    }
+
+    protected function getElement(string $name, array $parameters = []): NodeElement
+    {
+        if (!isset($parameters['%locale%'])) {
+            $parameters['%locale%'] = 'en_US';
+        }
+
+        return parent::getElement($name, $parameters);
+    }
+
+    private function waitForFormUpdate(): void
+    {
+        $form = $this->getElement('form');
+        sleep(1); // we need to sleep, as sometimes the check below is executed faster than the form sets the busy attribute
+        $form->waitFor(1500, function () use ($form) {
+            return !$form->hasAttribute('busy');
+        });
     }
 }
