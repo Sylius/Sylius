@@ -33,7 +33,7 @@ final class ApiPlatformSecurityClient implements ApiSecurityClientInterface
     public function prepareLoginRequest(): void
     {
         $this->request['url'] = sprintf(
-            '%s/%s/token',
+            '%s/%s',
             $this->apiUrlPrefix,
             $this->section,
         );
