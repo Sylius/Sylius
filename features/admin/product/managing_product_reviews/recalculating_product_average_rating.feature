@@ -11,7 +11,7 @@ Feature: Recalculating product average rating
         And this product has a review titled "Not bad" and rated 3 with a comment "Not bad car" added by customer "specter@teamharvey.com"
         And I am logged in as an administrator
 
-    @ui @todo @javascript @api
+    @ui @javascript @api
     Scenario: Product's average rating is correctly recalculated after review's rate change
         When I want to modify the "Awesome" product review
         And I choose 5 as its rating
@@ -19,7 +19,7 @@ Feature: Recalculating product average rating
         Then I should be notified that it has been successfully edited
         And average rating of product "Lamborghini Gallardo Model" should be 4
 
-    @ui @todo @api
+    @ui @api
     Scenario: Product's average rating is correctly recalculated after review's rate change
         When I delete the "Awesome" product review
         Then I should be notified that it has been successfully deleted

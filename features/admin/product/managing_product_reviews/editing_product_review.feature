@@ -28,7 +28,7 @@ Feature: Editing product reviews
         Then I should be notified that it has been successfully edited
         And this product review comment should be "Nice product"
 
-    @ui @todo @api
+    @ui @javascript @api
     Scenario: Changing a rating of a product review
         When I want to modify the "Awesome" product review
         And I choose 5 as its rating

@@ -2,6 +2,6 @@
 
 {% block _sylius_admin_product_review_rating_widget %}
     {% for entry in form.children %}
-        {{ form_widget(entry, {'required': false, 'label_attr': {'class': 'radio-inline'}}) }}
+        {{ form_widget(entry, sylius_test_form_attribute('rating', entry.vars.value)|merge({'required': false, 'label_attr': {'class': 'radio-inline'}})) }}
     {% endfor %}
 {% endblock %}
