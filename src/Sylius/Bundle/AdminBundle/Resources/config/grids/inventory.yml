@@ -8,11 +8,14 @@ sylius_grid:
                     repository:
                         method: createInventoryListQueryBuilder
                         arguments: ["%locale%"]
+            sorting:
+                name: asc
             fields:
                 name:
                     type: twig
                     path: .
                     label: sylius.ui.name
+                    sortable: product.translations.name
                     options:
                         template: "@SyliusAdmin/inventory/grid/field/name.html.twig"
                         vars:
@@ -20,6 +23,7 @@ sylius_grid:
                 code:
                     type: twig
                     label: sylius.ui.code
+                    sortable: ~
                     options:
                         template: "@SyliusAdmin/shared/grid/field/code.html.twig"
                         vars:
