@@ -8,6 +8,7 @@ parameters:
         - "%sylius.security.new_api_route%/admin/catalog-promotion-actions/{id}"
         - "%sylius.security.new_api_route%/admin/catalog-promotion-scopes/{id}"
         - "%sylius.security.new_api_route%/admin/channel-pricings/{id}"
+        - "%sylius.security.new_api_route%/shop/adjustments/{id}"
     sylius.security.new_api_route: "/api/v2"
     sylius.security.new_api_regex: "^%sylius.security.new_api_route%"
     sylius.security.new_api_admin_route: "%sylius.security.new_api_route%/admin"
