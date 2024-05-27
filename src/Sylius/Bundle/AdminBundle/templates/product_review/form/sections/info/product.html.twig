@@ -4,12 +4,20 @@
 
 <div class="card mb-3">
     <div class="card-header">
-        <strong>{{ 'sylius.ui.product'|trans }}</strong>
+        <div class="card-title">
+            {{ 'sylius.ui.product'|trans }}
+        </div>
     </div>
-    {{ image(product, {class: 'card-img', type: 'thumbnail', filter: 'sylius_large'}) }}
     <div class="card-body">
-        <div class="card-title" {{ sylius_test_html_attribute('product-name') }}>
-            <a href="{{ path('sylius_admin_product_show', {'id': product.id}) }}">{{ product.name }}</a>
+        <div class="row align-items-center">
+            <div class="col-auto">
+                {{ image(product) }}
+            </div>
+            <div class="col">
+                <div class="mb-0" {{ sylius_test_html_attribute('product-name') }}>
+                    <a href="{{ path('sylius_admin_product_show', {'id': product.id}) }}">{{ product.name }}</a>
+                </div>
+            </div>
         </div>
     </div>
     <div class="card-footer">

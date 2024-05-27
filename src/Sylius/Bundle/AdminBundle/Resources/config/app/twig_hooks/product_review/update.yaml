@@ -17,15 +17,17 @@ twig_hooks:
                 template: '@SyliusAdmin/product_review/form/sections/info.html.twig'
 
         'sylius_admin.product_review.update.content.form.sections.details':
-            rating:
-                template: '@SyliusAdmin/product_review/form/sections/details/rating.html.twig'
             title:
                 template: '@SyliusAdmin/product_review/form/sections/details/title.html.twig'
             comment:
                 template: '@SyliusAdmin/product_review/form/sections/details/comment.html.twig'
+            rating:
+                template: '@SyliusAdmin/product_review/form/sections/details/rating.html.twig'
 
         'sylius_admin.product_review.update.content.form.sections.info':
-            author:
-                template: '@SyliusAdmin/product_review/form/sections/info/author.html.twig'
+            status:
+                template: '@SyliusAdmin/product_review/form/sections/info/status.html.twig'
             product:
                 template: '@SyliusAdmin/product_review/form/sections/info/product.html.twig'
+            author:
+                template: '@SyliusAdmin/product_review/form/sections/info/author.html.twig'

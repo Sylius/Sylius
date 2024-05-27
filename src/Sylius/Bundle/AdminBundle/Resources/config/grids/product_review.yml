@@ -43,7 +43,7 @@ sylius_grid:
                     label: sylius.ui.status
                     sortable: ~
                     options:
-                        template: "@SyliusAdmin/product_review/grid/field/state.html.twig"
+                        template: "@SyliusAdmin/product_review/grid/field/status.html.twig"
                         vars:
                             th_class: "w-1 text-center"
                             td_class: "text-center"
