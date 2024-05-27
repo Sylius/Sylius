@@ -43,6 +43,17 @@ sylius_grid:
                     label: sylius.ui.name
                     options:
                         fields: [translation.name]
+                product:
+                    type: ux_translatable_autocomplete
+                    label: sylius.ui.product
+                    form_options:
+                        multiple: false
+                        extra_options:
+                            class: '%sylius.model.product.class%'
+                            translation_fields: [name]
+                            choice_label: name
+                    options:
+                        fields: [product.id]
             actions:
                 item:
                     update_product:

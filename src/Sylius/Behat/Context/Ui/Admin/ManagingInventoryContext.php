@@ -44,6 +44,15 @@ final class ManagingInventoryContext implements Context
     }
 
     /**
+     * @When I filter tracked variants by :productName product
+     */
+    public function iFilterTrackedVariantsByProduct(string $productName): void
+    {
+        $this->indexPage->filterByProduct($productName);
+        $this->indexPage->filter();
+    }
+
+    /**
      * @When I sort the tracked variants :sortingOrder by :field
      */
     public function iSortTrackedVariantsBy(string $sortingOrder, string $field): void
