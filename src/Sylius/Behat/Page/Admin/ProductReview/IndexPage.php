@@ -13,11 +13,26 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Page\Admin\ProductReview;
 
+use Behat\Mink\Session;
 use Sylius\Behat\Page\Admin\Crud\IndexPage as BaseIndexPage;
+use Sylius\Behat\Service\Accessor\TableAccessorInterface;
+use Sylius\Behat\Service\Helper\AutocompleteHelperInterface;
+use Symfony\Component\Routing\RouterInterface;
 use Webmozart\Assert\Assert;
 
 class IndexPage extends BaseIndexPage implements IndexPageInterface
 {
+    public function __construct(
+        Session $session,
+        array|\ArrayAccess $minkParameters,
+        RouterInterface $router,
+        TableAccessorInterface $tableAccessor,
+        string $routeName,
+        private AutocompleteHelperInterface $autocompleteHelper,
+    ) {
+        parent::__construct($session, $minkParameters, $router, $tableAccessor, $routeName);
+    }
+
     public function accept(array $parameters): void
     {
         $this->changeState('accept', $parameters);
@@ -30,7 +45,24 @@ class IndexPage extends BaseIndexPage implements IndexPageInterface
 
     public function filterByState(string $state): void
     {
-        $this->getElement('filter_state')->selectOption($state);
+        $this->getElement('state_filter')->selectOption($state);
+    }
+
+    public function filterByTitle(string $phrase): void
+    {
+        $this->getElement('title_filter')->setValue($phrase);
+    }
+
+
+    public function filterByProduct(string $productName): void
+    {
+        $this->autocompleteHelper->selectByName(
+            $this->getDriver(),
+            $this->getElement('product_filter')->getXpath(),
+            $productName,
+        );
+
+        $this->waitForFormUpdate();
     }
 
     private function changeState(string $state, array $parameters): void
@@ -44,7 +76,9 @@ class IndexPage extends BaseIndexPage implements IndexPageInterface
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
-            'filter_state' => '#criteria_status',
+            'product_filter' => '#criteria_product',
+            'state_filter' => '#criteria_status',
+            'title_filter' => '#criteria_title_value',
         ]);
     }
 }

@@ -24,4 +24,8 @@ interface IndexPageInterface extends BaseIndexPageInterface
     public function reject(array $parameters): void;
 
     public function filterByState(string $state): void;
+
+    public function filterByTitle(string $phrase): void;
+
+    public function filterByProduct(string $productName): void;
 }

@@ -59,6 +59,17 @@ sylius_grid:
                             sylius.ui.new: new
                             sylius.ui.accepted: accepted
                             sylius.ui.rejected: rejected
+                product:
+                    type: ux_translatable_autocomplete
+                    label: sylius.ui.product
+                    form_options:
+                        multiple: false
+                        extra_options:
+                            class: '%sylius.model.product.class%'
+                            translation_fields: [ name ]
+                            choice_label: name
+                    options:
+                        fields: [ reviewSubject.id ]
             actions:
                 item:
                     accept:

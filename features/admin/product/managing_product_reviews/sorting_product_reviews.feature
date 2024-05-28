@@ -5,8 +5,7 @@ Feature: Sorting product reviews
     I want to be able to sort product reviews in the list
 
     Background:
-        Given the store has customer "John Doe" with email "john@example.com"
-        And the store has a product "PHP Book"
+        Given the store has a product "PHP Book"
         And this product has a new review titled "Awesome" and rated 5 added by customer "john@example.com", created 6 days ago
         And this product has an accepted review titled "Not bad" and rated 3 added by customer "joe@example.com", created 4 days ago
         And this product has a rejected review titled "Great book" and rated 4 added by customer "tom@example.com", created 2 days ago
