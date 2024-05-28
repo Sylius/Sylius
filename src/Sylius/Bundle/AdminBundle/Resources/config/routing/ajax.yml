@@ -39,6 +39,6 @@ sylius_admin_ajax_get_version:
         _controller: sylius.controller.admin.notification::getVersionAction
         _format: json
 
-sylius_admin_entity_autocomplete_admin:
+sylius_admin_entity_autocomplete:
     controller: ux.autocomplete.entity_autocomplete_controller
     path: '/autocomplete/{alias}'

@@ -11,21 +11,20 @@ Feature: Filtering products by a channel
         And the store also has a product "MacBook Pro" in channel "Web-EU"
         And the store also has a product "HP Spectre" in channel "Web-US"
         And I am logged in as an administrator
+        And I am browsing products
 
-    @todo @ui @api
+    @ui @api
     Scenario: Filtering products by a chosen channel
-        When I browse products
-        And I choose "Web-EU" as a channel filter
+        When I choose "Web-EU" as a channel filter
         And I filter
         Then I should see 2 products in the list
         And I should see a product with name "MacBook Air"
         And I should see a product with name "MacBook Pro"
         But I should not see any product with name "HP Spectre"
 
-    @todo @ui @api
+    @ui @api
     Scenario: Filtering products by a chosen channel
-        When I browse products
-        And I choose "Web-US" as a channel filter
+        When I choose "Web-US" as a channel filter
         And I filter
         Then I should see a single product in the list
         And I should not see any product with name "MacBook Air"

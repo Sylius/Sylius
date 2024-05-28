@@ -36,10 +36,10 @@ final class TranslatableAutocompleteType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefault('entity_fields', ['code']);
-        $resolver->setAllowedTypes('entity_fields', 'array');
-        $resolver->setNormalizer('entity_fields', fn (Options $options, array $entityFields) => array_map(
+        $resolver->setAllowedTypes('entity_fields', ['array', 'null']);
+        $resolver->setNormalizer('entity_fields', fn (Options $options, ?array $entityFields) => array_map(
             fn (string $field) => self::ENTITY_ALIAS . '.' . $field,
-            $entityFields,
+            $entityFields ?? [],
         ));
 
         $resolver->setDefault('translation_fields', ['name']);

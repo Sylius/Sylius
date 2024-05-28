@@ -183,6 +183,7 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
             'confirmation_button' => '[data-confirm-btn-true]',
             'enabled_filter' => '#criteria_enabled',
             'filter' => '[data-test-filter]',
+            'filters_form' => '[data-test-filters-form]',
             'filters_toggle' => '.accordion-button',
             'table' => '.table',
         ]);
