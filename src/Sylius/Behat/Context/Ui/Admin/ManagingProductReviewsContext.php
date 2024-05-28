@@ -31,10 +31,11 @@ final class ManagingProductReviewsContext implements Context
     }
 
     /**
+     * @Given I am browsing product reviews
      * @When I browse product reviews
      * @When I want to browse product reviews
      */
-    public function iWantToBrowseProductReviews()
+    public function iWantToBrowseProductReviews(): void
     {
         $this->indexPage->open();
     }
@@ -64,28 +65,19 @@ final class ManagingProductReviewsContext implements Context
     }
 
     /**
+     * @When I sort the product reviews :sortingOrder by :field
+     */
+    public function iSortProductReviewsBy(string $sortingOrder, string $field): void
+    {
+        $this->indexPage->sortBy($field, $sortingOrder === 'descending' ? 'desc' : 'asc');
+    }
+
+    /**
      * @When I delete them
      */
     public function iDeleteThem(): void
     {
         $this->indexPage->bulkDelete();
-    }
-
-    /**
-     * @Then I should (also) see the product review :title in the list
-     */
-    public function iShouldSeeTheProductReviewTitleInTheList($title)
-    {
-        Assert::true($this->indexPage->isSingleResourceOnPage(['title' => $title]));
-    }
-
-    /**
-     * @Then I should see a single product review in the list
-     * @Then I should see :amount reviews in the list
-     */
-    public function iShouldSeeReviewsInTheList(int $amount = 1): void
-    {
-        Assert::same($this->indexPage->countItems(), $amount);
     }
 
     /**
@@ -124,43 +116,11 @@ final class ManagingProductReviewsContext implements Context
     }
 
     /**
-     * @Then /^this product review (comment|title) should be "([^"]+)"$/
-     */
-    public function thisProductReviewElementShouldBeValue($element, $value)
-    {
-        $this->assertElementValue($element, $value);
-    }
-
-    /**
-     * @Then this product review rating should be :rating
-     */
-    public function thisProductReviewRatingShouldBe($rating)
-    {
-        Assert::same($this->updatePage->getRating(), $rating);
-    }
-
-    /**
      * @When I choose :rating as its rating
      */
     public function iChooseAsItsRating($rating)
     {
         $this->updatePage->chooseRating($rating);
-    }
-
-    /**
-     * @Then I should be editing review of product :productName
-     */
-    public function iShouldBeEditingReviewOfProduct($productName)
-    {
-        Assert::same($this->updatePage->getProductName(), $productName);
-    }
-
-    /**
-     * @Then I should see the customer's name :customerName
-     */
-    public function iShouldSeeTheCustomerSName($customerName)
-    {
-        Assert::same($this->updatePage->getCustomerName(), $customerName);
     }
 
     /**
@@ -177,6 +137,55 @@ final class ManagingProductReviewsContext implements Context
     public function iRejectTheProductReview(ReviewInterface $productReview)
     {
         $this->indexPage->reject(['title' => $productReview->getTitle()]);
+    }
+
+    /**
+     * @Then I should (also) see the product review :title in the list
+     */
+    public function iShouldSeeTheProductReviewTitleInTheList($title)
+    {
+        Assert::true($this->indexPage->isSingleResourceOnPage(['title' => $title]));
+    }
+
+    /**
+     * @Then I should see a single product review in the list
+     * @Then I should see :amount reviews in the list
+     */
+    public function iShouldSeeReviewsInTheList(int $amount = 1): void
+    {
+        Assert::same($this->indexPage->countItems(), $amount);
+    }
+
+    /**
+     * @Then /^this product review (comment|title) should be "([^"]+)"$/
+     */
+    public function thisProductReviewElementShouldBeValue($element, $value)
+    {
+        $this->assertElementValue($element, $value);
+    }
+
+    /**
+     * @Then this product review rating should be :rating
+     */
+    public function thisProductReviewRatingShouldBe($rating)
+    {
+        Assert::same($this->updatePage->getRating(), $rating);
+    }
+
+    /**
+     * @Then I should be editing review of product :productName
+     */
+    public function iShouldBeEditingReviewOfProduct($productName)
+    {
+        Assert::same($this->updatePage->getProductName(), $productName);
+    }
+
+    /**
+     * @Then I should see the customer's name :customerName
+     */
+    public function iShouldSeeTheCustomerSName($customerName)
+    {
+        Assert::same($this->updatePage->getCustomerName(), $customerName);
     }
 
     /**
@@ -247,19 +256,31 @@ final class ManagingProductReviewsContext implements Context
     }
 
     /**
-     * @param string $element
-     * @param string $value
+     * @Then the first product review in the list should have title :title
      */
-    private function assertElementValue($element, $value)
+    public function theFirstProductReviewInTheListShouldHaveTitle(string $title): void
+    {
+        $titles = $this->indexPage->getColumnFields('title');
+
+        Assert::contains(reset($titles), $title);
+    }
+
+    /**
+     * @Then the last product review in the list should have title :title
+     */
+    public function theLastProductReviewInTheListShouldHaveTitle(string $title): void
+    {
+        $titles = $this->indexPage->getColumnFields('title');
+
+        Assert::contains(end($titles), $title);
+    }
+
+    private function assertElementValue(string $element, string $value): void
     {
         Assert::true($this->updatePage->hasResourceValues([$element => $value]));
     }
 
-    /**
-     * @param string $element
-     * @param string $expectedMessage
-     */
-    private function assertFieldValidationMessage($element, $expectedMessage)
+    private function assertFieldValidationMessage(string $element, string $expectedMessage): void
     {
         Assert::same($this->updatePage->getValidationMessage($element), $expectedMessage);
     }

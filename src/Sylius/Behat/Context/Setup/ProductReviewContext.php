@@ -45,18 +45,51 @@ final class ProductReviewContext implements Context
 
     /**
      * @Given /^(this product) has(?:| also) a review titled "([^"]+)" and rated (\d+) added by (customer "[^"]+")(?:|, created (\d+) days ago)$/
+     * @Given /^(this product) has(?:| also) an accepted review titled "([^"]+)" and rated (\d+) added by (customer "[^"]+")(?:|, created (\d+) days ago)$/
      */
-    public function thisProductHasAReviewTitledAndRatedAddedByCustomer(
+    public function thisProductHasAnAcceptedReviewTitledAndRatedAddedByCustomer(
         ProductInterface $product,
-        $title,
-        $rating,
+        string $title,
+        int $rating,
         CustomerInterface $customer,
-        $daysSinceCreation = null,
+        int $daysSinceCreation = null,
     ) {
         $review = $this->createProductReview($product, $title, $rating, $title, $customer);
         if (null !== $daysSinceCreation) {
             $review->setCreatedAt(new \DateTime('-' . $daysSinceCreation . ' days'));
         }
+
+        $this->productReviewRepository->add($review);
+    }
+
+    /**
+     * @Given /^(this product) has(?:| also) a rejected review titled "([^"]+)" and rated (\d+) added by (customer "[^"]+")(?:|, created (\d+) days ago)$/
+     */
+    public function thisProductHasARejectedReviewTitledAndRatedAddedByCustomer(
+        ProductInterface $product,
+        string $title,
+        int $rating,
+        CustomerInterface $customer,
+        int $daysSinceCreation,
+    ) {
+        $review = $this->createProductReview($product, $title, $rating, $title, $customer, ProductReviewTransitions::TRANSITION_REJECT);
+        $review->setCreatedAt(new \DateTime('-' . $daysSinceCreation . ' days'));
+
+        $this->productReviewRepository->add($review);
+    }
+
+    /**
+     * @Given /^(this product) has(?:| also) a new review titled "([^"]+)" and rated (\d+) added by (customer "[^"]+")(?:|, created (\d+) days ago)$/
+     */
+    public function thisProductHasANewReviewTitledAndRatedAddedByCustomer(
+        ProductInterface $product,
+        string $title,
+        int $rating,
+        CustomerInterface $customer,
+        int $daysSinceCreation,
+    ) {
+        $review = $this->createProductReview($product, $title, $rating, $title, $customer, null);
+        $review->setCreatedAt(new \DateTime('-' . $daysSinceCreation . ' days'));
 
         $this->productReviewRepository->add($review);
     }
@@ -133,16 +166,16 @@ final class ProductReviewContext implements Context
      */
     private function createProductReview(
         ProductInterface $product,
-        $title,
-        $rating,
-        $comment,
+        string $title,
+        int $rating,
+        string $comment,
         ?CustomerInterface $customer = null,
-        $transition = ProductReviewTransitions::TRANSITION_ACCEPT,
+        ?string $transition = ProductReviewTransitions::TRANSITION_ACCEPT,
     ) {
         /** @var ReviewInterface $review */
         $review = $this->productReviewFactory->createNew();
         $review->setTitle($title);
-        $review->setRating((int) $rating);
+        $review->setRating($rating);
         $review->setComment($comment);
         $review->setReviewSubject($product);
         $review->setAuthor($customer);
