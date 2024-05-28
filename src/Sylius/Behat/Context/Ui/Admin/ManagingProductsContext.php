@@ -97,25 +97,25 @@ final readonly class ManagingProductsContext implements Context
     }
 
     /**
-     * @When I name it :name in :language
-     * @When I rename it to :name in :language
-     * @When I should be able to name it :name in :language
+     * @When I name it :name in :localeCode
+     * @When I rename it to :name in :localeCode
+     * @When I should be able to name it :name in :localeCode
      */
-    public function iRenameItToIn(string $name, string $language): void
+    public function iRenameItToIn(string $name, string $localeCode): void
     {
         $currentPage = $this->resolveCurrentPage();
 
-        $currentPage->nameItIn($name, $language);
+        $currentPage->nameItIn($name, $localeCode);
     }
 
     /**
-     * @When I remove its name from :language translation
+     * @When I remove its name from :localeCode translation
      */
-    public function iRemoveItsNameFromTranslation(string $language): void
+    public function iRemoveItsNameFromTranslation(string $localeCode): void
     {
         $currentPage = $this->resolveCurrentPage();
 
-        $currentPage->nameItIn('', $language);
+        $currentPage->nameItIn('', $localeCode);
     }
 
     /**
@@ -189,12 +189,12 @@ final readonly class ManagingProductsContext implements Context
 
     /**
      * @When I set its slug to :slug
-     * @When I set its slug to :slug in :language
+     * @When I set its slug to :slug in :localeCode
      * @When I remove its slug
      */
-    public function iSetItsSlugToIn(?string $slug = null, string $language = 'en_US'): void
+    public function iSetItsSlugToIn(?string $slug = null, string $localeCode = 'en_US'): void
     {
-        $this->createSimpleProductPage->specifySlugIn($slug, $language);
+        $this->createSimpleProductPage->specifySlugIn($slug, $localeCode);
     }
 
     /**
@@ -608,11 +608,11 @@ final readonly class ManagingProductsContext implements Context
     }
 
     /**
-     * @When I select :value value in :language for the :attribute attribute
+     * @When I select :value value in :localeCode for the :attribute attribute
      */
-    public function iSelectValueInLanguageForTheAttribute(string $value, string $language, string $attribute): void
+    public function iSelectValueInLanguageForTheAttribute(string $value, string $localeCode, string $attribute): void
     {
-        $this->createSimpleProductPage->updateAttribute($attribute, $value, $language);
+        $this->createSimpleProductPage->updateAttribute($attribute, $value, $localeCode);
     }
 
     /**
@@ -633,11 +633,11 @@ final readonly class ManagingProductsContext implements Context
 
     /**
      * @When I remove its :attribute attribute
-     * @When I remove its :attribute attribute from :language
+     * @When I remove its :attribute attribute from :localeCode
      */
-    public function iRemoveItsAttribute(string $attribute, string $language = 'en_US'): void
+    public function iRemoveItsAttribute(string $attribute, string $localeCode = 'en_US'): void
     {
-        $this->createSimpleProductPage->removeAttribute($attribute, $language);
+        $this->createSimpleProductPage->removeAttribute($attribute, $localeCode);
     }
 
     /**
@@ -658,13 +658,13 @@ final readonly class ManagingProductsContext implements Context
 
     /**
      * @Then attribute :attributeName of product :product should be :value
-     * @Then attribute :attributeName of product :product should be :value in :language
+     * @Then attribute :attributeName of product :product should be :value in :localeCode
      */
-    public function itsAttributeShouldBe(string $attributeName, ProductInterface $product, string $value, string $language = 'en_US'): void
+    public function itsAttributeShouldBe(string $attributeName, ProductInterface $product, string $value, string $localeCode = 'en_US'): void
     {
         $this->updateSimpleProductPage->open(['id' => $product->getId()]);
 
-        Assert::same($this->updateSimpleProductPage->getAttributeValue($attributeName, $language), $value);
+        Assert::same($this->updateSimpleProductPage->getAttributeValue($attributeName, $localeCode), $value);
     }
 
     /**
@@ -722,19 +722,19 @@ final readonly class ManagingProductsContext implements Context
     }
 
     /**
-     * @When I set its meta keywords to too long string in :language
+     * @When I set its meta keywords to too long string in :localeCode
      */
-    public function iSetItsMetaKeywordsToTooLongStringIn(string $language): void
+    public function iSetItsMetaKeywordsToTooLongStringIn(string $localeCode): void
     {
-        $this->updateConfigurableProductPage->setMetaKeywords(str_repeat('a', 256), $language);
+        $this->updateConfigurableProductPage->setMetaKeywords(str_repeat('a', 256), $localeCode);
     }
 
     /**
-     * @When I set its meta description to too long string in :language
+     * @When I set its meta description to too long string in :localeCode
      */
-    public function iSetItsMetaDescriptionToTooLongStringIn(string $language): void
+    public function iSetItsMetaDescriptionToTooLongStringIn(string $localeCode): void
     {
-        $this->updateConfigurableProductPage->setMetaDescription(str_repeat('a', 256), $language);
+        $this->updateConfigurableProductPage->setMetaDescription(str_repeat('a', 256), $localeCode);
     }
 
     /**
@@ -1169,12 +1169,12 @@ final readonly class ManagingProductsContext implements Context
     }
 
     /**
-     * @Then this product should( still) have slug :value in :language (locale)
+     * @Then this product should( still) have slug :value in :localeCode (locale)
      */
-    public function thisProductElementShouldHaveSlugIn(string $slug, string $language): void
+    public function thisProductElementShouldHaveSlugIn(string $slug, string $localeCode): void
     {
-        $this->testHelper->waitUntilAssertionPasses(function () use ($language, $slug): void {
-            Assert::same($this->updateSimpleProductPage->getSlug($language), $slug);
+        $this->testHelper->waitUntilAssertionPasses(function () use ($localeCode, $slug): void {
+            Assert::same($this->updateSimpleProductPage->getSlug($localeCode), $slug);
         });
     }
 
@@ -1245,23 +1245,23 @@ final readonly class ManagingProductsContext implements Context
     }
 
     /**
-     * @Then I should be notified that I have to define the :attribute attribute in :language
+     * @Then I should be notified that I have to define the :attribute attribute in :localeCode
      */
-    public function iShouldBeNotifiedThatIHaveToDefineTheAttributeIn(string $attribute, string $language): void
+    public function iShouldBeNotifiedThatIHaveToDefineTheAttributeIn(string $attribute, string $localeCode): void
     {
         Assert::same(
-            $this->resolveCurrentPage()->getAttributeValidationErrors($attribute, $language),
+            $this->resolveCurrentPage()->getAttributeValidationErrors($attribute, $localeCode),
             'This value should not be blank.',
         );
     }
 
     /**
-     * @Then I should be notified that the :attribute attribute in :language should be longer than :number
+     * @Then I should be notified that the :attribute attribute in :localeCode should be longer than :number
      */
-    public function iShouldBeNotifiedThatTheAttributeInShouldBeLongerThan(string $attribute, string $language, int $number): void
+    public function iShouldBeNotifiedThatTheAttributeInShouldBeLongerThan(string $attribute, string $localeCode, int $number): void
     {
         Assert::same(
-            $this->resolveCurrentPage()->getAttributeValidationErrors($attribute, $language),
+            $this->resolveCurrentPage()->getAttributeValidationErrors($attribute, $localeCode),
             sprintf('This value is too short. It should have %s characters or more.', $number),
         );
     }
