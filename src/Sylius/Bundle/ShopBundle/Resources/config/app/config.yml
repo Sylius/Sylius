@@ -200,41 +200,6 @@ sylius_ui:
                     context:
                         event: sylius.shop.contact.request.form
 
-        sylius.shop.checkout.address.billing_address_form:
-            blocks:
-                legacy:
-                    template: "@SyliusUi/Block/_legacySonataEvent.html.twig"
-                    context:
-                        event: sylius.shop.checkout.address.billing_address_form
-
-        sylius.shop.checkout.address.shipping_address_form:
-            blocks:
-                legacy:
-                    template: "@SyliusUi/Block/_legacySonataEvent.html.twig"
-                    context:
-                        event: sylius.shop.checkout.address.shipping_address_form
-
-        sylius.shop.checkout.select_payment.before_form:
-            blocks:
-                legacy:
-                    template: "@SyliusUi/Block/_legacySonataEvent.html.twig"
-                    context:
-                        event: sylius.shop.checkout.select_payment.before_form
-
-        sylius.shop.checkout.address.before_form:
-            blocks:
-                legacy:
-                    template: "@SyliusUi/Block/_legacySonataEvent.html.twig"
-                    context:
-                        event: sylius.shop.checkout.address.before_form
-
-        sylius.shop.checkout.select_shipping.before_form:
-            blocks:
-                legacy:
-                    template: "@SyliusUi/Block/_legacySonataEvent.html.twig"
-                    context:
-                        event: sylius.shop.checkout.select_shipping.before_form
-
         sylius.shop.account.layout.menu:
             blocks:
                 before_legacy:
@@ -278,13 +243,6 @@ sylius_ui:
                     template: "@SyliusUi/Block/_legacySonataEvent.html.twig"
                     context:
                         event: sylius.shop.account.profile.update.after_content_header
-
-        sylius.shop.checkout.complete.after_content_header:
-            blocks:
-                legacy:
-                    template: "@SyliusUi/Block/_legacySonataEvent.html.twig"
-                    context:
-                        event: sylius.shop.checkout.complete.after_content_header
 
         sylius.shop.login.after_content_header:
             blocks:
@@ -409,19 +367,9 @@ sylius_ui:
 
         sylius.shop.checkout.header:
             blocks:
-                before_header_legacy:
-                    template: "@SyliusUi/Block/_legacySonataEvent.html.twig"
-                    priority: 15
-                    context:
-                        event: sylius.shop.checkout.address.before_header # Intentionally using "address" event for backwards compatibility
                 header:
-                    template: "@SyliusShop/Checkout/_header.html.twig"
+                    template: "@SyliusShop/Checkout/shared/header.html.twig"
                     priority: 10
-                after_header_legacy:
-                    template: "@SyliusUi/Block/_legacySonataEvent.html.twig"
-                    priority: 5
-                    context:
-                        event: sylius.shop.checkout.address.after_header # Intentionally using "address" event for backwards compatibility
 
         sylius.shop.account.order.index.header.content:
             blocks:
@@ -622,7 +570,7 @@ sylius_ui:
         sylius.shop.checkout.steps:
             blocks:
                 steps:
-                    template: "@SyliusShop/Checkout/_steps.html.twig"
+                    template: "@SyliusShop/Checkout/shared/steps.html.twig"
                     priority: 10
 
         sylius.shop.checkout.address.steps:
@@ -633,38 +581,11 @@ sylius_ui:
                     context:
                         event: sylius.shop.checkout.address.after_steps
 
-        sylius.shop.checkout.complete.steps:
-            blocks:
-                legacy:
-                    template: "@SyliusUi/Block/_legacySonataEvent.html.twig"
-                    priority: 0
-                    context:
-                        event: sylius.shop.checkout.complete.after_steps
-
-        sylius.shop.checkout.select_payment.steps:
-            blocks:
-                legacy:
-                    template: "@SyliusUi/Block/_legacySonataEvent.html.twig"
-                    priority: 0
-                    context:
-                        event: sylius.shop.checkout.select_payment.after_steps
-
-        sylius.shop.checkout.select_shipping.steps:
-            blocks:
-                legacy:
-                    template: "@SyliusUi/Block/_legacySonataEvent.html.twig"
-                    priority: 0
-                    context:
-                        event: sylius.shop.checkout.select_shipping.after_steps
-
         sylius.shop.checkout.sidebar:
             blocks:
                 summary:
-                    template: "@SyliusShop/Checkout/_summary.html.twig"
+                    template: "@SyliusShop/Checkout/shared/summary.html.twig"
                     priority: 20
-                support:
-                    template: "@SyliusShop/Checkout/_support.html.twig"
-                    priority: 10
 
         sylius.shop.checkout.address.sidebar:
             blocks:
@@ -722,47 +643,9 @@ sylius_ui:
 
         sylius.shop.checkout.complete.summary:
             blocks:
-                before_legacy:
-                    template: "@SyliusUi/Block/_legacySonataEvent.html.twig"
-                    priority: 15
-                    context:
-                        event: sylius.shop.checkout.complete.before_summary
                 content:
-                    template: "@SyliusShop/Common/Order/_summary.html.twig"
+                    template: "@SyliusShop/Common/Order/summary.html.twig"
                     priority: 10
-                after_legacy:
-                    template: "@SyliusUi/Block/_legacySonataEvent.html.twig"
-                    priority: 5
-                    context:
-                        event: sylius.shop.checkout.complete.after_summary
-
-        sylius.shop.checkout.address.before_navigation:
-            blocks:
-                legacy:
-                    template: "@SyliusUi/Block/_legacySonataEvent.html.twig"
-                    context:
-                        event: sylius.shop.checkout.address.before_navigation
-
-        sylius.shop.checkout.complete.before_navigation:
-            blocks:
-                legacy:
-                    template: "@SyliusUi/Block/_legacySonataEvent.html.twig"
-                    context:
-                        event: sylius.shop.checkout.complete.before_navigation
-
-        sylius.shop.checkout.select_payment.before_navigation:
-            blocks:
-                legacy:
-                    template: "@SyliusUi/Block/_legacySonataEvent.html.twig"
-                    context:
-                        event: sylius.shop.checkout.select_payment.before_navigation
-
-        sylius.shop.checkout.select_shipping.before_navigation:
-            blocks:
-                legacy:
-                    template: "@SyliusUi/Block/_legacySonataEvent.html.twig"
-                    context:
-                        event: sylius.shop.checkout.select_shipping.before_navigation
 
         sylius.shop.product.show.header:
             blocks:

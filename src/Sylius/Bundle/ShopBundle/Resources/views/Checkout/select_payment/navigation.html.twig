@@ -1,0 +1,18 @@
+{% from '@SyliusShop/Shared/icon.html.twig' import icon as icon %}
+{% set enabled = order.payments|length %}
+
+<div class="d-flex justify-content-between">
+    {% if sylius_is_shipping_required(order) %}
+        <a class="btn btn-light btn-icon" href="{{ path('sylius_shop_checkout_select_shipping') }}">
+            {{ icon('chevron-left') }} {{ 'sylius.ui.change_shipping_method'|trans }}
+        </a>
+    {% else %}
+        <a class="btn btn-light btn-icon" href="{{ path('sylius_shop_checkout_address') }}">
+            {{ icon('chevron-left') }} {{ 'sylius.ui.change_address'|trans }}
+        </a>
+    {% endif %}
+
+    <button type="submit" class="btn btn-primary btn-icon{% if not enabled %} disabled{% endif %}"{% if not enabled %} disabled{% endif %} {{ sylius_test_html_attribute('next-step') }}>
+        {{ 'sylius.ui.next'|trans }} {{ icon('chevron-right') }}
+    </button>
+</div>

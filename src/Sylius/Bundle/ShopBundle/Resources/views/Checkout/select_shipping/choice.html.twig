@@ -1,0 +1,20 @@
+{% import '@SyliusShop/Common/Macro/money.html.twig' as money %}
+
+<div class="card bg-body-tertiary border-0 mb-3" {{ sylius_test_html_attribute('shipping-item') }}>
+    <label class="d-flex gap-3 card-body">
+        <div class="flex-grow-1">
+            <div {{ sylius_test_html_attribute('shipping-method-checkbox') }}>
+                {{ form_widget(form, sylius_test_form_attribute('shipping-method-select')) }}
+            </div>
+
+            {% if method.description is not null %}
+                <div class="ps-4"><small class="text-black-50">{{ method.description }}</small></div>
+            {% endif %}
+        </div>
+        <div>
+            <div {{ sylius_test_html_attribute('shipping-method-fee') }}>
+                {{ money.convertAndFormat(fee) }}
+            </div>
+        </div>
+    </label>
+</div>

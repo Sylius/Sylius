@@ -1,0 +1,10 @@
+{% from '@SyliusShop/Shared/icon.html.twig' import icon as icon %}
+
+<div class="d-flex justify-content-between">
+    <a class="btn btn-light btn-icon" href="{{ path('sylius_shop_homepage') }}">
+        {{ icon('chevron-left') }} {{ 'sylius.ui.back_to_store'|trans }}
+    </a>
+    <button type="submit" class="btn btn-primary btn-icon" {{ sylius_test_html_attribute('next-step') }}>
+        {{ 'sylius.ui.next'|trans }} {{ icon('chevron-right') }}
+    </button>
+</div>

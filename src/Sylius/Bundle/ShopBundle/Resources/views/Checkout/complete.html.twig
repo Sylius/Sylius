@@ -1,18 +1,16 @@
-{% extends '@SyliusShop/Checkout/layout.html.twig' %}
+{% extends '@SyliusShop/Checkout/shared/layout.html.twig' %}
 
 {% form_theme form '@SyliusShop/Form/theme.html.twig' %}
 
 {% block title %}{{ 'sylius.ui.complete'|trans }} | {{ parent() }}{% endblock %}
+{% block content_title %}{{ 'sylius.ui.summary_of_your_order'|trans }}{% endblock %}
+
+{% set active_step = 'complete' %}
 
 {% block content %}
-    {{ sylius_template_event(['sylius.shop.checkout.complete.steps', 'sylius.shop.checkout.steps'], _context|merge({'active': 'complete', 'orderTotal': order.total})) }}
-
     <div>
-        {% include '@SyliusShop/Checkout/Complete/_header.html.twig' %}
-
-        {{ sylius_template_event('sylius.shop.checkout.complete.after_content_header', {'order': order}) }}
-
-        {% include '@SyliusShop/_flashes.html.twig' %}
+        {% include '@SyliusShop/Checkout/complete/header.html.twig' %}
+        {% include '@SyliusShop/Shared/flashes.html.twig' %}
 
         {{ form_start(form, {'action': path('sylius_shop_checkout_complete'), 'attr': {'novalidate': 'novalidate'}}) }}
         {{ form_errors(form) }}
@@ -20,13 +18,13 @@
 
         {{ sylius_template_event('sylius.shop.checkout.complete.summary', _context) }}
 
-        {% include '@SyliusShop/Checkout/Complete/_form.html.twig' %}
-
-        {{ sylius_template_event('sylius.shop.checkout.complete.before_navigation', {'order': order}) }}
-
-        {% include '@SyliusShop/Checkout/Complete/_navigation.html.twig' %}
+        {% include '@SyliusShop/Checkout/complete/form.html.twig' %}
+        {% include '@SyliusShop/Checkout/complete/navigation.html.twig' %}
 
         {{ form_row(form._token) }}
         {{ form_end(form, {'render_rest': false}) }}
     </div>
+{% endblock %}
+
+{% block sidebar %}
 {% endblock %}

@@ -1,0 +1,22 @@
+{% extends '@SyliusShop/Checkout/shared/layout.html.twig' %}
+
+{% form_theme form '@SyliusShop/Form/theme.html.twig' %}
+
+{% block title %}{{ 'sylius.ui.payment'|trans }} | {{ parent() }}{% endblock %}
+{% block content_title %}{{ 'sylius.ui.payment'|trans }}{% endblock %}
+
+{% set active_step = 'select_payment' %}
+
+{% block content %}
+    <div>
+        {{ form_start(form, {'action': path('sylius_shop_checkout_select_payment'), 'attr': {'novalidate': 'novalidate'}}) }}
+        {{ form_errors(form) }}
+        <input type="hidden" name="_method" value="PUT" />
+
+        {% include '@SyliusShop/Checkout/select_payment/form.html.twig' %}
+        {% include '@SyliusShop/Checkout/select_payment/navigation.html.twig' %}
+
+        {{ form_row(form._token) }}
+        {{ form_end(form, {'render_rest': false}) }}
+    </div>
+{% endblock %}

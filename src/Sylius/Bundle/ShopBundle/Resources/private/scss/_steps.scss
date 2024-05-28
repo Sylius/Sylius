@@ -68,8 +68,11 @@
             }
         }
 
+        &.active ~ *,
         &.disabled {
             color: $gray-400;
+            pointer-events: none;
+            cursor: not-allowed;
 
             &::before {
                 background-color: $gray-400;
