@@ -1,8 +1,8 @@
 @managing_orders
-Feature: Finalizing order's payment when at least one item has become tracked after the purchase
-    In order to mark order's payment state as complete when there is a sufficient stock
+Feature: Being unable to finalize order's payment when at least one item has become tracked after the purchase
+    In order to mark order's payment state as complete when there is a sufficient reserved stock
     As an Administrator
-    I want to be able to finalize payment
+    I want to be able to finalize payment only when there is a sufficient reserved stock
 
     Background:
         Given the store operates on a single channel in "United States"
@@ -24,7 +24,7 @@ Feature: Finalizing order's payment when at least one item has become tracked af
         And it should have payment state "New"
 
     @api @ui
-    Scenario: Finalizing order's payment when one item has become tracked after the purchase
+    Scenario: Being unable to finalize order's payment when one item has become tracked after the purchase
         Given I am viewing the summary of the order "#00000001"
         And the "PHP T-Shirt" product's inventory has become tracked with 6 items
         When I mark this order as paid
