@@ -117,7 +117,7 @@ final class ProductReviewContext implements Context
      * @Given /^(this product)(?:| also) has accepted reviews rated (\d+), (\d+), (\d+), (\d+) and (\d+)$/
      * @Given /^(this product)(?:| also) has accepted reviews rated (\d+), (\d+) and (\d+)$/
      */
-    public function thisProductHasAcceptedReviewsRated(ProductInterface $product, ...$rates): void
+    public function thisProductHasAcceptedReviewsRated(ProductInterface $product, int ...$rates): void
     {
         $customer = $this->sharedStorage->get('customer');
         foreach ($rates as $key => $rate) {

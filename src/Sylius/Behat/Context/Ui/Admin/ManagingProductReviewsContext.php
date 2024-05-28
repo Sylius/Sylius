@@ -136,7 +136,7 @@ final class ManagingProductReviewsContext implements Context
     /**
      * @When I choose :rating as its rating
      */
-    public function iChooseAsItsRating(int $rating): void
+    public function iChooseAsItsRating(string $rating): void
     {
         $this->updatePage->chooseRating($rating);
     }
