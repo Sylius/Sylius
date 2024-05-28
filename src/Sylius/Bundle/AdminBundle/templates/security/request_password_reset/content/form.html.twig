@@ -1,0 +1,8 @@
+{% set form = hookable_metadata.context.form %}
+
+{% form_theme form '@SyliusAdmin/shared/form_theme.html.twig' %}
+
+{{ form_start(form, {'action': path('sylius_admin_request_password_reset'), 'attr': {'class': 'ui large loadable form', 'novalidate': 'novalidate'}}) }}
+    {% hook 'form' with { form } %}
+    {{ form_row(form._token) }}
+{{ form_end(form, {'render_rest': false}) }}
