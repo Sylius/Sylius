@@ -22,34 +22,36 @@
     <body data-route="{{ app.request.get('_route') }}">
         {{ sylius_template_event('sylius.shop.layout.before_body') }}
 
-        <div class="d-flex flex-column min-vh-100">
-            {% block top %}
-                {{ sylius_template_event('sylius.shop.layout.topbar') }}
-            {% endblock %}
+        {% block body %}
+            <div class="d-flex flex-column min-vh-100">
+                {% block top %}
+                    {{ sylius_template_event('sylius.shop.layout.topbar') }}
+                {% endblock %}
 
-            {% block header %}
-                {{ sylius_template_event('sylius.shop.layout.header') }}
-            {% endblock %}
+                {% block header %}
+                    {{ sylius_template_event('sylius.shop.layout.header') }}
+                {% endblock %}
 
-            {% block nav %}
-                {{ sylius_template_event('sylius.shop.layout.navbar') }}
-            {% endblock %}
+                {% block nav %}
+                    {{ sylius_template_event('sylius.shop.layout.navbar') }}
+                {% endblock %}
 
-            <div class="container mb-4">
-                {% include '@SyliusShop/Shared/flashes.html.twig' %}
+                <div class="container mb-4">
+                    {% include '@SyliusShop/Shared/flashes.html.twig' %}
+                </div>
+
+                {{ sylius_template_event('sylius.shop.layout.before_content') }}
+
+                {% block content %}
+                {% endblock %}
+
+                {{ sylius_template_event('sylius.shop.layout.after_content') }}
+
+                {% block footer %}
+                    {{ sylius_template_event('sylius.shop.layout.footer') }}
+                {% endblock %}
             </div>
-
-            {{ sylius_template_event('sylius.shop.layout.before_content') }}
-
-            {% block content %}
-            {% endblock %}
-
-            {{ sylius_template_event('sylius.shop.layout.after_content') }}
-
-            {% block footer %}
-                {{ sylius_template_event('sylius.shop.layout.footer') }}
-            {% endblock %}
-        </div>
+        {% endblock %}
 
         {% block javascripts %}
             {{ sylius_template_event('sylius.shop.layout.javascripts') }}

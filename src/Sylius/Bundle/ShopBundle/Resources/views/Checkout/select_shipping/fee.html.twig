@@ -1,0 +1,5 @@
+{% import '@SyliusShop/Shared/macro/money.html.twig' as money %}
+
+<div {{ sylius_test_html_attribute('shipping-method-fee') }}>
+    {{ money.convertAndFormat(fee) }}
+</div>

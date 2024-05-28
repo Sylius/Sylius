@@ -1,0 +1,11 @@
+{% from '@SyliusShop/Shared/icon.html.twig' import icon as icon %}
+{% set enabled = order.shipments|length %}
+
+<div class="d-flex justify-content-between">
+    <a class="btn btn-light btn-icon" href="{{ path('sylius_shop_checkout_address') }}">
+        {{ icon('chevron-left') }} {{ 'sylius.ui.change_address'|trans }}
+    </a>
+    <button type="submit" class="btn btn-primary btn-icon{% if not enabled %} disabled{% endif %}"{% if not enabled %} disabled{% endif %}>
+        {{ 'sylius.ui.next'|trans }} {{ icon('chevron-right') }}
+    </button>
+</div>

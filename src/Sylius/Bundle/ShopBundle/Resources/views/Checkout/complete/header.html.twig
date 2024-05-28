@@ -1,0 +1,10 @@
+{% import '@SyliusShop/Shared/macro/flags.html.twig' as flags %}
+
+<div class="d-flex">
+    <div {{ sylius_test_html_attribute('order-currency-code') }}>
+        {{ order.currencyCode }}
+    </div>
+    <div {{ sylius_test_html_attribute('order-locale-name') }}>
+        {{ flags.fromLocaleCode(sylius.localeCode) }}{{ sylius.localeCode|sylius_locale_name }}
+    </div>
+</div>

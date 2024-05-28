@@ -12,7 +12,7 @@
         {{ sylius_template_event('sylius.shop.account.address_book.create.after_content_header', {'address': address}) }}
 
         {{ form_start(form, {'action': path('sylius_shop_account_address_book_create'), 'attr': {'novalidate': 'novalidate'}}) }}
-        {% include '@SyliusShop/Common/Form/_address.html.twig' with {'form': form} %}
+        {% include '@SyliusShop/Shared/form/_address.html.twig' with {'form': form} %}
         <div>
             <div>
                 <a href="{{ path('sylius_shop_account_address_book_index') }}">

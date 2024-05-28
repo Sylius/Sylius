@@ -37,7 +37,7 @@ sylius_shop_checkout_select_shipping:
         _sylius:
             event: select_shipping
             flash: false
-            template: "@SyliusShop/Checkout/selectShipping.html.twig"
+            template: "@SyliusShop/Checkout/select_shipping.html.twig"
             form: Sylius\Bundle\CoreBundle\Form\Type\Checkout\SelectShippingType
             repository:
                 method: findCartForSelectingShipping
@@ -55,7 +55,7 @@ sylius_shop_checkout_select_payment:
         _sylius:
             event: payment
             flash: false
-            template: "@SyliusShop/Checkout/selectPayment.html.twig"
+            template: "@SyliusShop/Checkout/select_payment.html.twig"
             form: Sylius\Bundle\CoreBundle\Form\Type\Checkout\SelectPaymentType
             repository:
                 method: findCartForSelectingPayment

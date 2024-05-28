@@ -1,0 +1,9 @@
+{% set channel = order.channel %}
+
+{% block content %}
+    {% if channel.shippingAddressInCheckoutRequired %}
+        {% include '@SyliusShop/Checkout/address/shipping_address_required.html.twig' %}
+    {% else %}
+        {% include '@SyliusShop/Checkout/address/billing_address_required.html.twig' %}
+    {% endif %}
+{% endblock %}
