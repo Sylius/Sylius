@@ -2,9 +2,9 @@ twig_hooks:
     hooks:
         'sylius_admin.security.login':
             logo:
-                template: '@SyliusAdmin/security/login/logo.html.twig'
+                template: '@SyliusAdmin/security/common/logo.html.twig'
             content:
-                template: '@SyliusAdmin/security/login/content.html.twig'
+                template: '@SyliusAdmin/security/common/content.html.twig'
 
         'sylius_admin.security.login.content':
             header:
