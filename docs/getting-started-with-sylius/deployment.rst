@@ -8,7 +8,7 @@ Check out our deployment cookbooks:
 
 .. tip::
 
-    - 👉 :doc:`How to deploy Sylius to Platform.sh? </cookbook/deployment/platform-sh>`
+    - 👉 :doc:`/cookbook/deployment/introduction-to-sylius-cloud`
 
 Learn more about the deployment platforms
 -----------------------------------------
