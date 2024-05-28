@@ -3,7 +3,7 @@
 <div class="h5 pb-3 mb-3 border-bottom">{{ 'sylius.ui.shipments'|trans }}</div>
 
 {% if state != 'cart' %}
-    {% include "@SyliusShop/Common/Order/Label/ShipmentState/orderShipmentState.html.twig" %}
+    {% include "@SyliusShop/Shared/order/Label/shipment_state/order_shipment_state.html.twig" %}
 {% endif %}
 {% for shipment in order.shipments %}
     {% set state = shipment.state %}
@@ -13,7 +13,7 @@
         </div>
         {% if state != 'cart' %}
             <div {{ sylius_test_html_attribute('shipment-state') }}>
-                {% include "@SyliusShop/Common/Order/Label/ShipmentState/singleShipmentState.html.twig" with { 'state': state } %}
+                {% include "@SyliusShop/Shared/order/Label/shipment_state/single_shipment_state.html.twig" with { 'state': state } %}
             </div>
         {% endif %}
     </div>

@@ -12,7 +12,7 @@
 {{ form_row(form.company, sylius_test_form_attribute(type ~ 'company')) }}
 {{ form_row(form.street, sylius_test_form_attribute(type ~ 'street')) }}
 
-{% include '@SyliusShop/Common/Form/country_code.html.twig' with {'form': form.countryCode} %}
+{% include '@SyliusShop/Shared/form/country_code.html.twig' with {'form': form.countryCode} %}
 
 <div data-url="{{ path('sylius_shop_ajax_render_province_form') }}">
     {% if form.provinceCode is defined %}

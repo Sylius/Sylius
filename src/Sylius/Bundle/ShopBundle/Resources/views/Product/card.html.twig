@@ -1,6 +1,6 @@
 {#{{ sylius_template_event('sylius.shop.product.index.box', {'product': product}) }}#}
 
-{% import "@SyliusShop/Common/Macro/money.html.twig" as money %}
+{% import "@SyliusShop/Shared/macro/money.html.twig" as money %}
 
 <div {{ sylius_test_html_attribute('product') }}>
     <a class="link-reset" href="{{ path('sylius_shop_product_show', {'slug': product.slug, '_locale': product.translation.locale}) }}" {{ sylius_test_html_attribute('product-content') }}>

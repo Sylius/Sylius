@@ -450,7 +450,7 @@ sylius_ui:
         sylius.shop.logo:
             blocks:
                 logo:
-                    template: "@SyliusShop/Shared/syliusLogo.html.twig"
+                    template: "@SyliusShop/Shared/sylius_logo.html.twig"
                     priority: 10
 
         sylius.shop.layout.stylesheets:
@@ -559,7 +559,7 @@ sylius_ui:
                     context:
                         event: sylius.shop.account.order.show.after_content_header
                 summary:
-                    template: "@SyliusShop/Common/Order/_summary.html.twig"
+                    template: "@SyliusShop/Shared/order/_summary.html.twig"
                     priority: 10
                 after_summary_legacy:
                     template: "@SyliusUi/Block/_legacySonataEvent.html.twig"
@@ -644,7 +644,7 @@ sylius_ui:
         sylius.shop.checkout.complete.summary:
             blocks:
                 content:
-                    template: "@SyliusShop/Common/Order/summary.html.twig"
+                    template: "@SyliusShop/Shared/order/summary.html.twig"
                     priority: 10
 
         sylius.shop.product.show.header:

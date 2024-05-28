@@ -1,11 +1,11 @@
-{% import "@SyliusShop/Common/Macro/money.html.twig" as money %}
+{% import "@SyliusShop/Shared/macro/money.html.twig" as money %}
 
 {% set state = order.paymentState %}
 
 <div class="h5 pb-3 mb-3 border-bottom">{{ 'sylius.ui.payments'|trans }}</div>
 
 {% if state != 'cart' %}
-    {% include "@SyliusShop/Common/Order/Label/PaymentState/orderPaymentState.html.twig" %}
+    {% include "@SyliusShop/Shared/order/Label/payment_state/order_payment_state.html.twig" %}
 {% endif %}
 
 {% for payment in order.payments %}
@@ -18,7 +18,7 @@
         <div {{ sylius_test_html_attribute('payment-price') }}>{{ money.format(payment.amount, payment.currencyCode) }}</div>
         {% if state != 'cart' %}
             <p {{ sylius_test_html_attribute('payment-state') }}>
-                {% include "@SyliusShop/Common/Order/Label/PaymentState/singlePaymentState.html.twig" with { 'state': state } %}
+                {% include "@SyliusShop/Shared/order/Label/payment_state/single_payment_state.html.twig" with { 'state': state } %}
             </p>
         {% endif %}
     </div>

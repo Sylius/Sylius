@@ -1,4 +1,4 @@
-{% import "@SyliusShop/Common/Macro/money.html.twig" as money %}
+{% import "@SyliusShop/Shared/macro/money.html.twig" as money %}
 
 {% set itemsSubtotal = order.getItemsSubtotal() %}
 {% set taxIncluded = order.getTaxIncludedTotal() %}
@@ -44,7 +44,7 @@
     </td>
 </tr>
 <tr>
-    {% include '@SyliusShop/Common/Order/Table/shipping.html.twig' with {'order': order} %}
+    {% include '@SyliusShop/Shared/order/table/shipping.html.twig' with {'order': order} %}
 </tr>
 <tr>
     <td class="h5 text-end border-top pt-4" colspan="3" {{ sylius_test_html_attribute('order-total') }}>

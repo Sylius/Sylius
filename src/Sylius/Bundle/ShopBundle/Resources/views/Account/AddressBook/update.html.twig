@@ -13,7 +13,7 @@
 
         {{ form_start(form, {'action': path('sylius_shop_account_address_book_update', {'id': address.id}), 'method': 'PUT', 'attr': {'novalidate': 'novalidate'}}) }}
 
-        {% include '@SyliusShop/Common/Form/_address.html.twig' with {'form': form} %}
+        {% include '@SyliusShop/Shared/form/_address.html.twig' with {'form': form} %}
 
         <div>
             <div>
