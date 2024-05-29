@@ -55,12 +55,12 @@ final class PricingElement extends Element implements PricingElementInterface
         return array_map(fn (NodeElement $element): string => $element->getAttribute('href'), $appliedPromotions);
     }
 
-    public function getLowestPriceBeforeDiscountForChannel(string $channelName): string
+    public function getLowestPriceBeforeDiscountForChannel(string $channelCode): string
     {
-        $channelPriceRow = $this->getSimpleProductPricingRowForChannel($channelName);
+        $channelPriceRow = $this->getSimpleProductPricingRowForChannel($channelCode);
 
         if (null === $channelPriceRow) {
-            throw new \InvalidArgumentException(sprintf('Channel "%s" does not exist', $channelName));
+            throw new \InvalidArgumentException(sprintf('Channel "%s" does not exist', $channelCode));
         }
 
         $priceForChannel = $channelPriceRow->find('css', 'td:nth-child(4)');
@@ -68,24 +68,24 @@ final class PricingElement extends Element implements PricingElementInterface
         return $priceForChannel->getText();
     }
 
-    public function getSimpleProductPricingRowForChannel(string $channelName): NodeElement
+    public function getSimpleProductPricingRowForChannel(string $channelCode): NodeElement
     {
-        return $this->getElement('simple_product_pricing_row', ['%channelName%' => $channelName]);
+        return $this->getElement('simple_product_pricing_row', ['%channelCode%' => $channelCode]);
     }
 
-    public function getVariantPricingRowForChannel(string $variantName, string $channelName): NodeElement
+    public function getVariantPricingRowForChannel(string $variantCode, string $channelCode): NodeElement
     {
         return $this->getElement('variant_pricing_row', [
-            '%variantName%' => $variantName,
-            '%channelName%' => $channelName,
+            '%variantCode%' => $variantCode,
+            '%channelCode%' => $channelCode,
         ]);
     }
 
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
-            'simple_product_pricing_row' => '[data-test-simple-product="%channelName%"]',
-            'variant_pricing_row' => '[data-test-variants="%channelName%.%variantName%"]',
+            'simple_product_pricing_row' => '[data-test-simple-product="%channelCode%"]',
+            'variant_pricing_row' => '[data-test-variant-pricing="%channelCode%.%variantCode%"]',
         ]);
     }
 

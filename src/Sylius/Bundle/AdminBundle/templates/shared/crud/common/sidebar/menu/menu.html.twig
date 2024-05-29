@@ -3,7 +3,7 @@
 {% from '@SyliusAdmin/shared/helper/icon.html.twig' import icon %}
 
 {% block root %}
-    <ul class="navbar-nav pt-lg-3">
+    <ul class="sidebar navbar-nav pt-lg-3">
         {{ parent() }}
     </ul>
 {% endblock %}
@@ -29,7 +29,8 @@
         {%- set classes = classes|merge([options.lastClass]) %}
     {%- endif %}
 
-    {% set isActive = matcher.isCurrent(item) or matcher.isAncestor(item, options.matchingDepth) %}
+    {% set alwaysOpen = ['catalog', 'sales', 'customers'] %}
+    {% set isActive = matcher.isCurrent(item) or matcher.isAncestor(item, options.matchingDepth) or item.name in alwaysOpen %}
 
     {# Mark item as "leaf" (no children) or as "branch" (has children that are displayed) #}
     {% if item.hasChildren and options.depth is not same as(0) %}

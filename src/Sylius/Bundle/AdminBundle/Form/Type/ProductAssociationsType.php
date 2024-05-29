@@ -54,4 +54,9 @@ final class ProductAssociationsType extends AbstractType
     {
         return BaseProductAssociationsType::class;
     }
+
+    public function getBlockPrefix(): string
+    {
+        return 'sylius_admin_product_associations';
+    }
 }

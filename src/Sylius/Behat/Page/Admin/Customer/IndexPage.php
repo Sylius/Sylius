@@ -74,16 +74,6 @@ class IndexPage extends BaseIndexPage implements IndexPageInterface
         return array_merge(parent::getDefinedElements(), [
             'filter_group' => '#criteria_group',
             'filter_search' => '#criteria_search_value',
-            'filters_form' => '[data-test-filters-form]',
         ]);
-    }
-
-    private function waitForFormUpdate(): void
-    {
-        $form = $this->getElement('filters_form');
-        sleep(1); // we need to sleep, as sometimes the check below is executed faster than the form sets the busy attribute
-        $form->waitFor(1500, function () use ($form) {
-            return !$form->hasAttribute('busy');
-        });
     }
 }

@@ -18,7 +18,7 @@ use Sylius\Component\Core\Model\OrderInterface;
 
 interface ShowPageInterface extends SymfonyPageInterface
 {
-    public function hasCustomer(string $customerName): bool;
+    public function hasCustomer(string $customerEmail): bool;
 
     public function hasShippingAddress(string $customerName, string $street, string $postcode, string $city, string $countryName): bool;
 
@@ -37,6 +37,8 @@ interface ShowPageInterface extends SymfonyPageInterface
     public function shipOrder(OrderInterface $order): void;
 
     public function hasPayment(string $paymentMethodName): bool;
+
+    public function hasPaymentWithState(string $state);
 
     public function canCompleteOrderLastPayment(OrderInterface $order): bool;
 

@@ -27,7 +27,7 @@ sylius_admin_shipment_ship:
                 transition: ship
             redirect: referer
             flash: sylius.shipment.shipped
-            form: Sylius\Bundle\ShippingBundle\Form\Type\ShipmentShipType
+            form: Sylius\Bundle\AdminBundle\Form\Type\ShipmentShipType
 
 sylius_admin_shipment_resend_confirmation_email:
     path: /shipments/{id}/resend-confirmation-email

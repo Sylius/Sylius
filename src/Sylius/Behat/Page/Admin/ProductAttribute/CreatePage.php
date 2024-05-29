@@ -25,7 +25,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
 
     public function nameIt(string $name, string $language): void
     {
-        $this->getDocument()->fillField(sprintf('sylius_product_attribute_translations_%s_name', $language), $name);
+        $this->getDocument()->fillField(sprintf('sylius_admin_product_attribute_translations_%s_name', $language), $name);
     }
 
     public function isTypeDisabled(): bool
@@ -80,14 +80,14 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     {
         return array_merge(parent::getDefinedElements(), [
             'attribute_choice_list' => 'div[data-form-collection="list"]',
-            'attribute_choice_list_element' => '#sylius_product_attribute_configuration_choices_%index%_%localeCode%',
-            'code' => '#sylius_product_attribute_code',
-            'max' => '#sylius_product_attribute_configuration_max',
-            'min' => '#sylius_product_attribute_configuration_min',
-            'multiple' => 'label[for=sylius_product_attribute_configuration_multiple]',
-            'name' => '#sylius_product_attribute_translations_en_US_name',
-            'type' => '#sylius_product_attribute_type',
-            'translation' => '#sylius_product_attribute_translatable',
+            'attribute_choice_list_element' => '#sylius_admin_product_attribute_configuration_choices_%index%_%localeCode%',
+            'code' => '#sylius_admin_product_attribute_code',
+            'max' => '#sylius_admin_product_attribute_configuration_max',
+            'min' => '#sylius_admin_product_attribute_configuration_min',
+            'multiple' => 'label[for=sylius_admin_product_attribute_configuration_multiple]',
+            'name' => '#sylius_admin_product_attribute_translations_en_US_name',
+            'type' => '#sylius_admin_product_attribute_type',
+            'translation' => '#sylius_admin_product_attribute_translatable',
         ]);
     }
 }

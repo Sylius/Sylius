@@ -1,4 +1,4 @@
-{% import '@SyliusAdmin/shared/helper/money.html.twig' as _money %}
+{% import '@SyliusAdmin/shared/helper/money.html.twig' as money %}
 
 {% set order = hookable_metadata.context.resource %}
 
@@ -21,7 +21,7 @@
         {% block footer %}
             <div class="d-flex justify-content-between">
                 <div class="h3 mb-0">{{ 'sylius.ui.order_total'|trans }}:</div>
-                <div class="h3 mb-0">{{ _money.format(order.total, order.currencyCode) }}</div>
+                <div class="h3 mb-0" {{ sylius_test_html_attribute('order-total') }}>{{ money.format(order.total, order.currencyCode) }}</div>
             </div>
         {% endblock %}
     </div>

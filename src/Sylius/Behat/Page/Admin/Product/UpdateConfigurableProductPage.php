@@ -153,7 +153,7 @@ class UpdateConfigurableProductPage extends BaseUpdatePage implements UpdateConf
                 'main_taxon' => '#sylius_product_mainTaxon',
                 'name' => '#sylius_product_translations_en_US_name',
                 'options' => '#sylius_product_options',
-                'price' => '#sylius_product_variant_price',
+                'price' => '#sylius_admin_product_variant_price',
                 'search' => '.ui.fluid.search.selection.dropdown',
                 'search_item_selected' => 'div.menu > div.item.selected',
                 'tab' => '.menu [data-tab="%name%"]',

@@ -150,21 +150,21 @@ final class FormElement extends BaseFormElement implements FormElementInterface
     {
         return [
             'add_rule_button' => '[data-test-rules] [data-test-add-%type%]',
-            'calculator' => '#sylius_shipping_method_calculator',
-            'calculator_configuration_amount' => '#sylius_shipping_method_configuration_%channelCode%_amount',
+            'calculator' => '#sylius_admin_shipping_method_calculator',
+            'calculator_configuration_amount' => '#sylius_admin_shipping_method_configuration_%channelCode%_amount',
             'calculator_configuration_channel_tab' => '[data-test-calculator-configuration] [data-test-channel-tab="%channelCode%"]',
             'calculator_configuration_channel_tab_content' => '[data-test-calculator-configuration] [data-test-channel-tab-content="%channelCode%"]',
-            'channel' => '[name="sylius_shipping_method[channels][]"][value="%channelCode%"]',
-            'code' => '#sylius_shipping_method_code',
-            'description' => '#sylius_shipping_method_translations_%localeCode%_description',
-            'enabled' => '#sylius_shipping_method_enabled',
+            'channel' => '[name="sylius_admin_shipping_method[channels][]"][value="%channelCode%"]',
+            'code' => '#sylius_admin_shipping_method_code',
+            'description' => '#sylius_admin_shipping_method_translations_%localeCode%_description',
+            'enabled' => '#sylius_admin_shipping_method_enabled',
             'form' => '[data-live-name-value="sylius_admin:shipping_method:form"]',
             'last_rule' => '[data-test-rules] [data-test-entry-row]:last-child',
             'last_rule_amount' => '[data-test-rules] [data-test-entry-row]:last-child [id$="_configuration_%channelCode%_amount"]',
             'last_rule_weight' => '[data-test-rules] [data-test-entry-row]:last-child [id$="_configuration_weight"]',
-            'name' => '#sylius_shipping_method_translations_%localeCode%_name',
-            'position' => '#sylius_shipping_method_position',
-            'zone' => '#sylius_shipping_method_zone',
+            'name' => '#sylius_admin_shipping_method_translations_%localeCode%_name',
+            'position' => '#sylius_admin_shipping_method_position',
+            'zone' => '#sylius_admin_shipping_method_zone',
         ];
     }
 

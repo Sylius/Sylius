@@ -36,8 +36,12 @@ final class TaxonType extends AbstractType
                 'button_delete_options' => [
                     'label' => 'sylius.ui.delete',
                 ],
-            ])
-        ;
+            ]);
+    }
+
+    public function getBlockPrefix(): string
+    {
+        return 'sylius_admin_taxon';
     }
 
     public function getParent(): string

@@ -20,16 +20,16 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\UX\Autocomplete\Form\AsEntityAutocompleteField;
 use Symfony\UX\Autocomplete\Form\BaseEntityAutocompleteType;
 
-#[AsEntityAutocompleteField(route: 'sylius_admin_entity_autocomplete_admin')]
+#[AsEntityAutocompleteField(
+    alias: 'sylius_admin_grid_filter_autocomplete',
+    route: 'sylius_admin_entity_autocomplete',
+)]
 final class UxAutocompleteFilterType extends AbstractType
 {
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver
             ->setRequired('extra_options')
-            ->setDefault('class', function (Options $options): string {
-                return $options['extra_options']['class'] ?? '';
-            })
             ->setNormalizer('extra_options', static function (Options $options, array $extraOptions): array {
                 if (!isset($extraOptions['class'])) {
                     throw new MissingOptionsException('Missing node "class" within the "extra_options" option.');
@@ -37,11 +37,22 @@ final class UxAutocompleteFilterType extends AbstractType
 
                 return $extraOptions;
             })
+            ->setDefault('class', function (Options $options): string {
+                return $options['extra_options']['class'] ?? '';
+            })
+            ->setDefault('choice_label', function (Options $options, mixed $label): mixed {
+                return $options['extra_options']['choice_label'] ?? $label;
+            })
         ;
     }
 
     public function getParent(): string
     {
         return BaseEntityAutocompleteType::class;
+    }
+
+    public function getBlockPrefix(): string
+    {
+        return 'sylius_admin_ux_autocomplete';
     }
 }

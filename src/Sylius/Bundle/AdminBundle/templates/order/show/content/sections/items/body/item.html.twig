@@ -1,0 +1,21 @@
+{% import '@SyliusAdmin/shared/helper/product_image.html.twig' as product_image %}
+
+{% set product = hookable_metadata.context.product %}
+{% set variant = hookable_metadata.context.variant %}
+
+<td>
+    <div class="d-flex gap-3 align-items-center">
+        <div>
+            {{ product_image.image(product) }}
+        </div>
+        <div>
+            <div>
+                <a href="{{ path('sylius_admin_product_show', { id: product.id }) }}">
+                    <strong>{{ product.name }}</strong>
+                </a>
+            </div>
+            <div class="text-muted small" {{ sylius_test_html_attribute('code') }}>{{ variant.code }}</div>
+            <div class="text-muted small">{{ variant.name }}</div>
+        </div>
+    </div>
+</td>

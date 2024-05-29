@@ -6,6 +6,8 @@ sylius_admin_catalog_promotion:
         except: ['delete']
         redirect: update
         grid: sylius_admin_catalog_promotion
+        form:
+            type: Sylius\Bundle\AdminBundle\Form\Type\CatalogPromotionType
         permission: true
     type: sylius.resource
 

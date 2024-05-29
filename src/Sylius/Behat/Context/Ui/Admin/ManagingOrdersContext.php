@@ -485,7 +485,7 @@ final readonly class ManagingOrdersContext implements Context
     /**
      * @Then /^(its) unit price should be ([^"]+)$/
      */
-    public function itemUnitPriceShouldBe(string $itemName, int $unitPrice): void
+    public function itemUnitPriceShouldBe(string $itemName, string $unitPrice): void
     {
         Assert::eq($this->showPage->getItemUnitPrice($itemName), $unitPrice);
     }
@@ -493,7 +493,7 @@ final readonly class ManagingOrdersContext implements Context
     /**
      * @Then /^(its) discounted unit price should be ([^"]+)$/
      */
-    public function itemDiscountedUnitPriceShouldBe(string $itemName, int $discountedUnitPrice): void
+    public function itemDiscountedUnitPriceShouldBe(string $itemName, string $discountedUnitPrice): void
     {
         Assert::eq($this->showPage->getItemDiscountedUnitPrice($itemName), $discountedUnitPrice);
     }
@@ -509,7 +509,7 @@ final readonly class ManagingOrdersContext implements Context
     /**
      * @Then /^(its) subtotal should be ([^"]+)$/
      */
-    public function itemSubtotalShouldBe(string $itemName, int $subtotal): void
+    public function itemSubtotalShouldBe(string $itemName, string $subtotal): void
     {
         Assert::eq($this->showPage->getItemSubtotal($itemName), $subtotal);
     }
@@ -517,7 +517,7 @@ final readonly class ManagingOrdersContext implements Context
     /**
      * @Then /^(its) discount should be ([^"]+)$/
      */
-    public function theItemShouldHaveDiscount(string $itemName, int $discount): void
+    public function theItemShouldHaveDiscount(string $itemName, string $discount): void
     {
         Assert::eq($this->showPage->getItemDiscount($itemName), $discount);
     }
@@ -525,7 +525,7 @@ final readonly class ManagingOrdersContext implements Context
     /**
      * @Then /^(its) tax should be ([^"]+)$/
      */
-    public function itemTaxShouldBe(string $itemName, int $tax): void
+    public function itemTaxShouldBe(string $itemName, string $tax): void
     {
         Assert::eq($this->showPage->getItemTax($itemName), $tax);
     }
@@ -541,7 +541,7 @@ final readonly class ManagingOrdersContext implements Context
     /**
      * @Then /^(its) total should be ([^"]+)$/
      */
-    public function itemTotalShouldBe(string $itemName, int $total): void
+    public function itemTotalShouldBe(string $itemName, string $total): void
     {
         Assert::eq($this->showPage->getItemTotal($itemName), $total);
     }
@@ -585,7 +585,7 @@ final readonly class ManagingOrdersContext implements Context
      */
     public function itShouldHavePaymentState(string $paymentState): void
     {
-        Assert::true($this->showPage->hasPayment($paymentState));
+        Assert::true($this->showPage->hasPaymentWithState($paymentState));
     }
 
     /**
@@ -1031,10 +1031,6 @@ final readonly class ManagingOrdersContext implements Context
     }
 
     /**
-     * @param string $type
-     * @param string $element
-     * @param string $expectedMessage
-     *
      * @throws \InvalidArgumentException
      */
     private function assertElementValidationMessage(string $type, string $element, string $expectedMessage): void

@@ -53,7 +53,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     public function nameItIn(string $name, string $language): void
     {
         $this->getDocument()->fillField(
-            sprintf('sylius_product_variant_translations_%s_name', $language),
+            sprintf('sylius_admin_product_variant_translations_%s_name', $language),
             $name,
         );
     }
@@ -104,21 +104,21 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
-            'code' => '#sylius_product_variant_code',
-            'depth' => '#sylius_product_variant_depth',
-            'form' => 'form[name="sylius_product_variant"]',
-            'height' => '#sylius_product_variant_height',
-            'minimum_price' => '#sylius_product_variant_channelPricings_%channelCode%_minimumPrice',
-            'on_hand' => '#sylius_product_variant_onHand',
-            'option_select' => '#sylius_product_variant_optionValues_%option-name%',
-            'price_calculator' => '#sylius_product_variant_pricingCalculator',
-            'shipping_category' => '#sylius_product_variant_shippingCategory',
-            'shipping_required' => '#sylius_product_variant_shippingRequired',
-            'original_price' => '#sylius_product_variant_channelPricings_%channelCode%_originalPrice',
-            'price' => '#sylius_product_variant_channelPricings_%channelCode%_price',
+            'code' => '#sylius_admin_product_variant_code',
+            'depth' => '#sylius_admin_product_variant_depth',
+            'form' => 'form[name="sylius_admin_product_variant"]',
+            'height' => '#sylius_admin_product_variant_height',
+            'minimum_price' => '#sylius_admin_product_variant_channelPricings_%channelCode%_minimumPrice',
+            'on_hand' => '#sylius_admin_product_variant_onHand',
+            'option_select' => '#sylius_admin_product_variant_optionValues_%option-name%',
+            'price_calculator' => '#sylius_admin_product_variant_pricingCalculator',
+            'shipping_category' => '#sylius_admin_product_variant_shippingCategory',
+            'shipping_required' => '#sylius_admin_product_variant_shippingRequired',
+            'original_price' => '#sylius_admin_product_variant_channelPricings_%channelCode%_originalPrice',
+            'price' => '#sylius_admin_product_variant_channelPricings_%channelCode%_price',
             'prices-body' => '[data-test-product-channel-pricings-accordion-body]',
-            'weight' => '#sylius_product_variant_weight',
-            'width' => '#sylius_product_variant_width',
+            'weight' => '#sylius_admin_product_variant_weight',
+            'width' => '#sylius_admin_product_variant_width',
         ]);
     }
 }

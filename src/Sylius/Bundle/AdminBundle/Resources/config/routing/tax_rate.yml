@@ -6,6 +6,8 @@ sylius_admin_tax_rate:
         except: ['show']
         redirect: update
         grid: sylius_admin_tax_rate
+        form:
+            type: Sylius\Bundle\AdminBundle\Form\Type\TaxRateType
         permission: true
         vars:
             all:

@@ -6,6 +6,8 @@ sylius_admin_shipping_category:
         except: ['show']
         redirect: update
         grid: sylius_admin_shipping_category
+        form:
+            type: Sylius\Bundle\AdminBundle\Form\Type\ShippingCategoryType
         permission: true
         vars:
             all:

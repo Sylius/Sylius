@@ -6,6 +6,8 @@ sylius_admin_zone:
         except: ['show', 'create']
         redirect: update
         grid: sylius_admin_zone
+        form:
+            type: Sylius\Bundle\AdminBundle\Form\Type\ZoneType
         permission: true
         vars:
             all:
@@ -25,6 +27,8 @@ sylius_admin_zone_create:
                 method: createTyped
                 arguments:
                     type: $type
+            form:
+                type: Sylius\Bundle\AdminBundle\Form\Type\ZoneType
             template: "@SyliusAdmin/shared/crud/create.html.twig"
             redirect: sylius_admin_zone_update
             permission: true

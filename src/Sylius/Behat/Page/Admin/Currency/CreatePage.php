@@ -28,8 +28,8 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
-            'code' => '#sylius_currency_code',
-            'exchangeRate' => '#sylius_currency_exchangeRate',
+            'code' => '#sylius_admin_currency_code',
+            'exchangeRate' => '#sylius_admin_currency_exchangeRate',
         ]);
     }
 }

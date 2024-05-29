@@ -45,9 +45,9 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
-            'source currency' => '#sylius_exchange_rate_sourceCurrency',
-            'target currency' => '#sylius_exchange_rate_targetCurrency',
-            'ratio' => '#sylius_exchange_rate_ratio',
+            'source currency' => '#sylius_admin_exchange_rate_sourceCurrency',
+            'target currency' => '#sylius_admin_exchange_rate_targetCurrency',
+            'ratio' => '#sylius_admin_exchange_rate_ratio',
         ]);
     }
 }

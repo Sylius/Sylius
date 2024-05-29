@@ -176,6 +176,8 @@ final class ManagingProductsContext implements Context
     {
         $this->client->addFilter('productTaxons.taxon.code', $taxon->getCode());
         $this->client->filter();
+
+        $this->sharedStorage->set('response', $this->client->getLastResponse());
     }
 
     /**

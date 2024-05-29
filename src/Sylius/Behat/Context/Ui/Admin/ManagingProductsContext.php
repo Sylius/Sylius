@@ -225,6 +225,15 @@ final class ManagingProductsContext implements Context
     }
 
     /**
+     * @When I search for products with :phrase
+     */
+    public function iSearchForProductsWith(string $phrase): void
+    {
+        $this->indexPage->setFilterSearch($phrase);
+        $this->indexPage->filter();
+    }
+
+    /**
      * @When I filter
      */
     public function iFilter(): void
@@ -278,6 +287,16 @@ final class ManagingProductsContext implements Context
     public function iFilterThemByTaxon($taxonName)
     {
         $this->indexPage->filterByTaxon($taxonName);
+        $this->indexPage->filter();
+    }
+
+    /**
+     * @When I filter them by :taxonName main taxon
+     */
+    public function iFilterThemByMainTaxon($taxonName)
+    {
+        $this->indexPage->filterByMainTaxon($taxonName);
+        $this->indexPage->filter();
     }
 
     /**

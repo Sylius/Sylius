@@ -85,10 +85,6 @@
             <argument type="service" id="sylius.repository.channel" />
             <tag name="twig.extension"/>
         </service>
-        <service id="Sylius\Bundle\AdminBundle\Twig\GridExtension">
-            <argument type="service" id="sylius.grid.renderer" />
-            <tag name="twig.extension" />
-        </service>
         <service id="Sylius\Bundle\AdminBundle\Twig\OrderUnitTaxesExtension">
             <tag name="twig.extension"/>
         </service>

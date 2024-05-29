@@ -15,7 +15,7 @@ Feature: Seeing shipment shipping date
         And it is "20-02-2020 10:30:05" now
         And I am logged in as an administrator
 
-    @api @todo @ui
+    @api @ui
     Scenario: Seeing shipped at date
         When I view the summary of the order "#00000777"
         And I ship this order

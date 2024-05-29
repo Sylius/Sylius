@@ -63,7 +63,7 @@ class IndexPage extends BaseIndexPage implements IndexPageInterface
         /** @var NodeElement $actions */
         $actions = $this->getField($orderNumber, 'actions');
 
-        $actions->fillField('sylius_shipment_ship_tracking', $trackingCode);
+        $actions->fillField('sylius_admin_shipment_ship_tracking', $trackingCode);
         $actions->pressButton('Ship');
     }
 

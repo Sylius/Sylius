@@ -6,6 +6,8 @@ sylius_admin_tax_category:
         except: ['show']
         redirect: update
         grid: sylius_admin_tax_category
+        form:
+            type: Sylius\Bundle\AdminBundle\Form\Type\TaxCategoryType
         permission: true
         vars:
             all:

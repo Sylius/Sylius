@@ -7,7 +7,7 @@ sylius_grid:
                     class: "%sylius.model.product.class%"
                     repository:
                         method: createListQueryBuilder
-                        arguments: ["expr:service('sylius.context.locale').getLocaleCode()", $taxonId]
+                        arguments: ["expr:service('sylius.context.locale').getLocaleCode()"]
             sorting:
                 code: asc
             fields:
@@ -22,7 +22,7 @@ sylius_grid:
                     label: sylius.ui.name
                     sortable: translation.name
                     options:
-                        template: "@SyliusAdmin/shared/grid/field/name.html.twig"
+                        template: "@SyliusAdmin/product/grid/field/name.html.twig"
                         vars:
                             th_class: "w-75"
                 code:
@@ -49,6 +49,8 @@ sylius_grid:
                     label: sylius.ui.search
                     options:
                         fields: [code, translation.name]
+                    form_options:
+                        type: !php/const Sylius\Component\Grid\Filter\StringFilter::TYPE_CONTAINS
                 enabled:
                     type: boolean
                     label: sylius.ui.enabled
@@ -59,6 +61,28 @@ sylius_grid:
                         class: "%sylius.model.channel.class%"
                     options:
                         field: "channels.id"
+                taxon:
+                    type: ux_translatable_autocomplete
+                    label: sylius.ui.taxon
+                    form_options:
+                        multiple: false
+                        extra_options:
+                            class: '%sylius.model.taxon.class%'
+                            translation_fields: [name]
+                            choice_label: fullname
+                    options:
+                        fields: [productTaxons.taxon.id]
+                main_taxon:
+                    type: ux_translatable_autocomplete
+                    label: sylius.ui.main_taxon
+                    form_options:
+                        multiple: false
+                        extra_options:
+                            class: '%sylius.model.taxon.class%'
+                            translation_fields: [name]
+                            choice_label: fullname
+                    options:
+                        fields: [mainTaxon.id]
             actions:
                 main:
                     create:

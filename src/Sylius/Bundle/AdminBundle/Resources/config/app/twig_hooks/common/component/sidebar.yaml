@@ -1,6 +1,8 @@
 twig_hooks:
     hooks:
         'sylius_admin.common.component.sidebar':
+            toggle_button:
+                template: '@SyliusAdmin/shared/crud/common/sidebar/toggle_button.html.twig'
             logo:
                 template: '@SyliusAdmin/shared/crud/common/sidebar/logo.html.twig'
             user_dropdown:

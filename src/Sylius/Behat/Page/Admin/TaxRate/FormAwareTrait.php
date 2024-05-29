@@ -59,17 +59,17 @@ trait FormAwareTrait
     protected function getDefinedFormElements(): array
     {
         return [
-            'field_amount' => '#sylius_tax_rate_amount',
-            'field_calculator' => '#sylius_tax_rate_calculator',
-            'field_category' => '#sylius_tax_rate_category',
-            'field_code' => '#sylius_tax_rate_code',
-            'field_end_date' => '#sylius_tax_rate_endDate_date',
-            'field_end_date_time' => '#sylius_tax_rate_endDate_time',
-            'field_included_in_price' => '#sylius_tax_rate_includedInPrice',
-            'field_name' => '#sylius_tax_rate_name',
-            'field_start_date' => '#sylius_tax_rate_startDate_date',
-            'field_start_date_time' => '#sylius_tax_rate_startDate_time',
-            'field_zone' => '#sylius_tax_rate_zone',
+            'field_amount' => '#sylius_admin_tax_rate_amount',
+            'field_calculator' => '#sylius_admin_tax_rate_calculator',
+            'field_category' => '#sylius_admin_tax_rate_category',
+            'field_code' => '#sylius_admin_tax_rate_code',
+            'field_end_date' => '#sylius_admin_tax_rate_endDate_date',
+            'field_end_date_time' => '#sylius_admin_tax_rate_endDate_time',
+            'field_included_in_price' => '#sylius_admin_tax_rate_includedInPrice',
+            'field_name' => '#sylius_admin_tax_rate_name',
+            'field_start_date' => '#sylius_admin_tax_rate_startDate_date',
+            'field_start_date_time' => '#sylius_admin_tax_rate_startDate_time',
+            'field_zone' => '#sylius_admin_tax_rate_zone',
         ];
     }
 }
