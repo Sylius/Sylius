@@ -94,7 +94,7 @@ supplied with a section named Shop Billing Data, which is editable on the Channe
 Business Units
 ~~~~~~~~~~~~~~
 
-Sylius Plus is supplied with an enhanced version of Shop Billing Data from open source edition. It is also used for Invoicing and Refunds purposes,
+Sylius Plus is supplied with an enhanced version of Shop Billing Data from Sylius CE. It is also used for Invoicing and Refunds purposes,
 but it is a separate entity, that you can create outside of the Channel and then just pick a previously created Business Unit
 on the Channel form.
 
