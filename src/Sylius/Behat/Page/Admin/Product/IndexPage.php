@@ -123,13 +123,4 @@ class IndexPage extends CrudIndexPage implements IndexPageInterface
             'taxon_filter' => '#criteria_taxon',
         ]);
     }
-
-    private function waitForFormUpdate(): void
-    {
-        $form = $this->getElement('filters_form');
-        sleep(1); // we need to sleep, as sometimes the check below is executed faster than the form sets the busy attribute
-        $form->waitFor(1500, function () use ($form) {
-            return !$form->hasAttribute('busy');
-        });
-    }
 }
