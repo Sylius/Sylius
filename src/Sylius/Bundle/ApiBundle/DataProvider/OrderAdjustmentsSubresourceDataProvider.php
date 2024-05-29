@@ -18,7 +18,7 @@ use ApiPlatform\Core\DataProvider\SubresourceDataProviderInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Order\Model\AdjustmentInterface;
-use Webmozart\Assert\Assert;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /** @experimental */
 final class OrderAdjustmentsSubresourceDataProvider implements RestrictedDataProviderInterface, SubresourceDataProviderInterface
@@ -44,7 +44,10 @@ final class OrderAdjustmentsSubresourceDataProvider implements RestrictedDataPro
 
         /** @var OrderInterface|null $order */
         $order = $this->orderRepository->findOneBy(['tokenValue' => $subresourceIdentifiers['tokenValue']]);
-        Assert::notNull($order);
+
+        if ($order === null) {
+            throw new NotFoundHttpException('Order not found');
+        }
 
         return $order->getAdjustmentsRecursively();
     }
