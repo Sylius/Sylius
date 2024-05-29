@@ -6,7 +6,7 @@ Customer Pools
 Customer Pool is a collection of Customers that is assigned to a specific channel. Thanks to this concept, if you have two
 channels, each of them has a separate customer pool, then customers that have accounts in channel A, and have not registered in channel B,
 will not be able to log in to channel B with credentials they have specified in channel A (which is the behaviour happening in
-Sylius open source edition). This feature allows you to sell via multiple channels, creating a illusion of shopping in
+Sylius CE). This feature allows you to sell via multiple channels, creating a illusion of shopping in
 completely different stores, while you still have one administration panel.
 
 Managing Customer Pools
