@@ -13,12 +13,12 @@ Feature: Browsing inventory
         And there are 5 units of product "Iron Maiden T-Shirt" available in the inventory
         And I am logged in as an administrator
 
-    @todo @ui @no-api
+    @ui @no-api
     Scenario: Browsing only tracked product variants in the store
         When I want to browse inventory
         Then I should see only one tracked variant in the list
 
-    @todo @ui @no-api
+    @ui @no-api
     Scenario: Being informed about on hand quantity of a product variant
         When I want to browse inventory
         Then I should see that the "Iron Maiden T-Shirt" variant has 5 quantity on hand

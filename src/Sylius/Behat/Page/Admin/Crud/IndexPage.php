@@ -176,6 +176,15 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
         return !$this->getElement('filters_toggle')->hasClass('collapsed');
     }
 
+    protected function waitForFormUpdate(): void
+    {
+        $form = $this->getElement('filters_form');
+        usleep(500000); // we need to sleep, as sometimes the check below is executed faster than the form sets the busy attribute
+        $form->waitFor(1500, function () use ($form) {
+            return !$form->hasAttribute('busy');
+        });
+    }
+
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
