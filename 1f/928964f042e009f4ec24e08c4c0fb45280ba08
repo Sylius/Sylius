@@ -1,0 +1,18 @@
+---------------------------------------------------------------------------
+
+by GSadee at 2024-05-29T09:06:16Z
+
+The base of this pull-request was changed, you need fetch and reset your local branch
+if you want to add new commits to this pull request. **Reset before you pull, else commits
+may become messed-up.**
+
+Unless you added new commits (to this branch) locally that you did not push yet,
+execute `git fetch origin && git reset "docs/sylius-ce"` to update your local branch.
+
+Feel free to ask for assistance when you get stuck :+1:
+
+---------------------------------------------------------------------------
+
+by GSadee at 2024-05-29T09:08:07Z
+
+Thank you, Magdalena! :1st_place_medal:
