@@ -52,6 +52,12 @@ The Developer's guide to leveraging the flexibility of Sylius. Here you will fin
 Sylius Plus
 -----------
 
+.. image:: /_images/ce_plus_banner.png
+    :align: center
+    :target: https://sylius.com/plus/?utm_source=docs&utm_medium=cta&utm_campaign=plus
+
+|
+
 `Sylius Plus <https://sylius.com/plus/?utm_source=docs&utm_medium=cta&utm_campaign=plus>`_, which is a licensed edition of Sylius, gives you all the power of Open Source and much more.
 It comes with a set of enterprise-grade features and technical support from its creators.
 As the state-of-the-art eCommerce platform, it reduces risks and increases your ROI.
