@@ -3,8 +3,8 @@
 Multi-Source Inventory
 ======================
 
-Sylius Plus has a much more complex approach to inventory management than the open source version. Unlike the open source
-version, that allows to specify one stock amount value for each variant, the Sylius Plus Multi-Source Inventory gives you
+Sylius Plus has a much more complex approach to inventory management than the open source version. Unlike the Community Edition,
+that allows to specify one stock amount value for each variant, the Sylius Plus Multi-Source Inventory gives you
 a possibility to create several Inventory Sources and specify different stock amounts of variants for different Inventory Sources.
 
 Admin can create multiple Inventory Sources (IS). For each IS they can choose Channels it will be available for.
