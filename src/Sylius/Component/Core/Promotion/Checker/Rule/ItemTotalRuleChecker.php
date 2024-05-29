@@ -20,6 +20,8 @@ use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 
 final class ItemTotalRuleChecker implements RuleCheckerInterface
 {
+    public const TYPE = 'item_total';
+
     public function __construct(private ?RuleCheckerInterface $itemTotalRuleChecker = null)
     {
         if ($this->itemTotalRuleChecker instanceof self) {
