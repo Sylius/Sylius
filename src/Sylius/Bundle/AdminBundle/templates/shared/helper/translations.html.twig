@@ -32,7 +32,7 @@
                 {{ accordion_header(locale, accordionId, loop.first) }}
                 <div id="translation-{{ locale }}" class="accordion-collapse collapse {% if loop.first %}show{% endif %}" data-bs-parent="#{{ accordionId }}">
                     <div class="accordion-body">
-                        {% hook hook_name|default('translations') with { form: translationForm, _prefixes: prefixes } %}
+                        {% hook hook_name|default('translations') with { form: translationForm, locale, _prefixes: prefixes } %}
                     </div>
                 </div>
             </div>
