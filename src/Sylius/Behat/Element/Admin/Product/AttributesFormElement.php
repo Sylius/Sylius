@@ -140,6 +140,16 @@ final class AttributesFormElement extends BaseFormElement implements AttributesF
         return count($this->getDocument()->findAll('css', '[data-test-product-attribute-tab]'));
     }
 
+    public function hasAttributeError(string $attributeName, string $localeCode): bool
+    {
+        $this->changeTab();
+        $this->changeAttributeTab($attributeName);
+
+        $attributeValue = $this->getElement('attribute_value', ['%attributeName%' => $attributeName, '%localeCode%' => $localeCode]);
+
+        return $attributeValue->hasClass('is-invalid');
+    }
+
     protected function getDefinedElements(): array
     {
         return [

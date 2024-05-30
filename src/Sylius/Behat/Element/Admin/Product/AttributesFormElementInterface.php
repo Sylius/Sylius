@@ -38,4 +38,6 @@ interface AttributesFormElementInterface
     public function addSelectedAttributes(): void;
 
     public function getNumberOfAttributes(): int;
+
+    public function hasAttributeError(string $attributeName, string $localeCode): bool;
 }
