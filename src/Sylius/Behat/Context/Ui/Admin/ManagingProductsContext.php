@@ -42,6 +42,7 @@ use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
+use Sylius\Component\Locale\Model\LocaleInterface;
 use Sylius\Component\Product\Model\ProductAssociationTypeInterface;
 use Webmozart\Assert\Assert;
 
@@ -1427,6 +1428,14 @@ final readonly class ManagingProductsContext implements Context
             $showProductPageUrl,
             sprintf('/%s/products/%s', $localeCode, $productTranslation->getSlug()),
         );
+    }
+
+    /**
+     * @Then I should be notified that the :attributeName attribute value for :locale is required
+     */
+    public function iShouldBeNotifiedThatTheAttributeValueIsRequired(string $attributeName, LocaleInterface $locale): void
+    {
+        Assert::true($this->productAttributesFormElement->hasAttributeError($attributeName, $locale->getCode()));
     }
 
     private function assertValidationMessage(string $element, string $message): void
