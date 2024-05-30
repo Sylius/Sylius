@@ -18,7 +18,7 @@
 %}
 
 {{ _breadcrumbs.default([
-    { name: 'Dashboard', url: path('sylius_admin_dashboard'), active: false },
+    { name: 'sylius.ui.dashboard', url: path('sylius_admin_dashboard'), active: false },
     { name: resource_name, url: index_url, active: false },
     { name: resource.name|default(resource.code|default(resource.id)), active: true },
     { name: 'sylius.ui.edit'|trans, active: false }
