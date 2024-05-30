@@ -28,16 +28,16 @@
             {% endif %}
             <div class="card-header">
                 <ul class="nav nav-tabs card-header-tabs" data-bs-toggle="tabs" role="tablist">
-                    {% for channelCode, channelPricing in variant_form.channelPricings %}
+                    {% for channel_code, channel_pricing in variant_form.channelPricings %}
                         <li class="nav-item">
                             <a
                                 class="nav-link {% if loop.index0 == 0 %}active{% endif %}"
                                 data-bs-toggle="tab"
-                                href="#{{ channelCode }}"
+                                href="#{{ channel_code }}"
                                 role="tab"
-                                {{ sylius_test_html_attribute('channel-tab', channelCode) }}
+                                {{ sylius_test_html_attribute('channel-tab', channel_code) }}
                             >
-                                {{ channelPricing.vars.label }}
+                                {{ channel_pricing.vars.label }}
                             </a>
                         </li>
                     {% endfor %}
@@ -45,14 +45,14 @@
             </div>
             <div class="card-body">
                 <div class="tab-content">
-                    {% for channelCode, channelPricing in variant_form.channelPricings %}
-                        <div class="tab-pane fade {% if loop.index0 == 0 %}show{% endif %} active" id="{{ channelCode }}" role="tabpanel">
-                            {% if channelCode not in product.channels|map(channel => channel.code) %}
+                    {% for channel_code, channel_pricing in variant_form.channelPricings %}
+                        <div class="tab-pane fade {% if loop.index0 == 0 %}show{% endif %} active" id="{{ channel_code }}" role="tabpanel">
+                            {% if channel_code not in product.channels|map(channel => channel.code) %}
                                 <div class="alert alert-info">
                                     {{ 'sylius.ui.product.product_not_active_in_channel'|trans }}
                                 </div>
                             {% endif %}
-                            {{ form_row(channelPricing, {'label': false}) }}
+                            {{ form_row(channel_pricing, {'label': false}) }}
                         </div>
                     {% endfor %}
                 </div>
