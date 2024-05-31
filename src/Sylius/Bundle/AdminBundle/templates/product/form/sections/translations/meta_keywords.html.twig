@@ -1,5 +1,5 @@
 {% set form = hookable_metadata.context.form %}
-{% set locale = hookable_metadata.context._locale %}
+{% set locale = hookable_metadata.context.locale %}
 
 <div class="col-12 col-md-6">
     {{ form_row(form.metaKeywords, sylius_test_form_attribute('meta-keywords', locale)) }}
