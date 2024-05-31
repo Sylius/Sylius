@@ -16,20 +16,12 @@ namespace Sylius\Behat\Page\Admin\Product\ConfigurableProduct;
 use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Session;
 use Sylius\Behat\Page\Admin\Crud\CreatePage as BaseCreatePage;
-use Sylius\Behat\Page\Admin\Product\Common\ProductAttributesTrait;
-use Sylius\Behat\Page\Admin\Product\Common\ProductMediaTrait;
-use Sylius\Behat\Page\Admin\Product\Common\ProductTaxonomyTrait;
-use Sylius\Behat\Page\Admin\Product\Common\ProductTranslationsTrait;
+use Sylius\Behat\Service\DriverHelper;
 use Sylius\Behat\Service\Helper\AutocompleteHelperInterface;
 use Symfony\Component\Routing\RouterInterface;
 
 class CreateConfigurableProductPage extends BaseCreatePage implements CreateConfigurableProductPageInterface
 {
-    use ProductAttributesTrait;
-    use ProductMediaTrait;
-    use ProductTaxonomyTrait;
-    use ProductTranslationsTrait;
-
     public function __construct(
         Session $session,
         $minkParameters,
@@ -59,7 +51,7 @@ class CreateConfigurableProductPage extends BaseCreatePage implements CreateConf
 
     public function selectOption(string $optionName): void
     {
-        $this->changeTab('details');
+        $this->changeTab();
         $productOptionsAutocomplete = $this->getElement('product_options_autocomplete');
 
         $this->autocompleteHelper->selectByName($this->getDriver(), $productOptionsAutocomplete->getXpath(), $optionName);
@@ -72,10 +64,6 @@ class CreateConfigurableProductPage extends BaseCreatePage implements CreateConf
     {
         return array_merge(
             parent::getDefinedElements(),
-            $this->getDefinedProductMediaElements(),
-            $this->getDefinedProductAttributesElements(),
-            $this->getDefinedProductTranslationsElements(),
-            $this->getDefinedProductTaxonomyElements(),
             [
                 'channel' => '[data-test-channel-code="%channel_code%"]',
                 'channel_tab' => '[data-test-channel-tab="%channelCode%"]',
@@ -105,5 +93,14 @@ class CreateConfigurableProductPage extends BaseCreatePage implements CreateConf
         $form->waitFor(1500, function () use ($form) {
             return !$form->hasAttribute('busy');
         });
+    }
+
+    private function changeTab(): void
+    {
+        if (DriverHelper::isNotJavascript($this->getDriver())) {
+            return;
+        }
+
+        $this->getElement('side_navigation_tab', ['%name%' => 'details'])->click();
     }
 }

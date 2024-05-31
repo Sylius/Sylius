@@ -17,9 +17,6 @@ use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Session;
 use Sylius\Behat\Behaviour\ChecksCodeImmutability;
 use Sylius\Behat\Page\Admin\Crud\UpdatePage as BaseUpdatePage;
-use Sylius\Behat\Page\Admin\Product\Common\ProductMediaTrait;
-use Sylius\Behat\Page\Admin\Product\Common\ProductTaxonomyTrait;
-use Sylius\Behat\Page\Admin\Product\Common\ProductTranslationsTrait;
 use Sylius\Behat\Service\AutocompleteHelper;
 use Sylius\Behat\Service\Helper\AutocompleteHelperInterface;
 use Symfony\Component\Routing\RouterInterface;
@@ -27,9 +24,6 @@ use Symfony\Component\Routing\RouterInterface;
 class UpdateConfigurableProductPage extends BaseUpdatePage implements UpdateConfigurableProductPageInterface
 {
     use ChecksCodeImmutability;
-    use ProductMediaTrait;
-    use ProductTaxonomyTrait;
-    use ProductTranslationsTrait;
 
     /**
      * @param array<array-key, string> $minkParameters
@@ -118,9 +112,6 @@ class UpdateConfigurableProductPage extends BaseUpdatePage implements UpdateConf
     {
         return array_merge(
             parent::getDefinedElements(),
-            $this->getDefinedProductMediaElements(),
-            $this->getDefinedProductTranslationsElements(),
-            $this->getDefinedProductTaxonomyElements(),
             [
                 'channel' => '[data-test-channel-code="%channel_code%"]',
                 'channel_tab' => '[data-test-channel-tab="%channelCode%"]',

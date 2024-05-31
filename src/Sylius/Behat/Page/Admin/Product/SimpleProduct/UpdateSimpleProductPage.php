@@ -17,11 +17,6 @@ use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Session;
 use Sylius\Behat\Behaviour\ChecksCodeImmutability;
 use Sylius\Behat\Page\Admin\Crud\UpdatePage as BaseUpdatePage;
-use Sylius\Behat\Page\Admin\Product\Common\ProductAssociationsTrait;
-use Sylius\Behat\Page\Admin\Product\Common\ProductAttributesTrait;
-use Sylius\Behat\Page\Admin\Product\Common\ProductMediaTrait;
-use Sylius\Behat\Page\Admin\Product\Common\ProductTaxonomyTrait;
-use Sylius\Behat\Page\Admin\Product\Common\ProductTranslationsTrait;
 use Sylius\Behat\Service\Helper\AutocompleteHelperInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Currency\Model\CurrencyInterface;
@@ -30,12 +25,6 @@ use Symfony\Component\Routing\RouterInterface;
 class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProductPageInterface
 {
     use ChecksCodeImmutability;
-    use ProductAssociationsTrait;
-    use ProductAttributesTrait;
-    use ProductChannelPricingsTrait;
-    use ProductMediaTrait;
-    use ProductTaxonomyTrait;
-    use ProductTranslationsTrait;
 
     public function __construct(
         Session $session,
@@ -67,15 +56,6 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
     public function isTracked(): bool
     {
         return $this->getElement('tracked')->isChecked();
-    }
-
-    public function getPricingConfigurationForChannelAndCurrencyCalculator(ChannelInterface $channel, CurrencyInterface $currency): string
-    {
-        $priceConfigurationElement = $this->getElement('pricing_configuration');
-        $priceElement = $priceConfigurationElement
-            ->find('css', sprintf('label:contains("%s %s")', $channel->getCode(), $currency->getCode()))->getParent();
-
-        return $priceElement->find('css', 'input')->getValue();
     }
 
     public function goToVariantsList(): void
@@ -138,26 +118,6 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
         $this->getElement($field)->setValue($value);
     }
 
-
-    public function selectShippingCategory(string $shippingCategoryName): void
-    {
-        $this->changeTab('shipping');
-        $this->getElement('field_shipping_category')->selectOption($shippingCategoryName);
-    }
-
-    public function setShippingRequired(bool $isShippingRequired): void
-    {
-        $this->changeTab('details');
-
-        if ($isShippingRequired) {
-            $this->getElement('field_shipping_required')->check();
-
-            return;
-        }
-
-        $this->getElement('field_shipping_required')->uncheck();
-    }
-
     public function isShippingRequired(): bool
     {
         return $this->getElement('field_shipping_required')->isChecked();
@@ -195,12 +155,6 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
     {
         return array_merge(
             parent::getDefinedElements(),
-            $this->getDefinedProductMediaElements(),
-            $this->getDefinedProductAssociationsElements(),
-            $this->getDefinedProductAttributesElements(),
-            $this->getDefinedProductTranslationsElements(),
-            $this->getDefinedProductTaxonomyElements(),
-            $this->getDefinedProductChannelPricingsElements(),
             [
                 'code' => '[data-test-code]',
                 'enabled' => '[data-test-enabled]',
