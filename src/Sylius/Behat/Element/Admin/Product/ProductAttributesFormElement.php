@@ -11,25 +11,26 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Behat\Page\Admin\Product\Common;
+namespace Sylius\Behat\Element\Admin\Product;
 
+use Behat\Mink\Session;
+use Sylius\Behat\Element\Admin\Crud\FormElement as BaseFormElement;
 use Sylius\Behat\Service\DriverHelper;
+use Sylius\Behat\Service\Helper\AutocompleteHelperInterface;
 
-trait ProductAttributesTrait
+final class ProductAttributesFormElement extends BaseFormElement implements ProductAttributesFormElementInterface
 {
-    public function getDefinedProductAttributesElements(): array
-    {
-        return [
-            'product_attribute_delete_button' => '[data-test-product-attribute-delete-button="%attributeName%"]',
-            'product_attribute_input' => 'input[name="product_attributes"]',
-            'product_attribute_tab' => '[data-test-product-attribute-tab="%name%"]',
-            'attribute_value' => '[data-test-attribute-value][data-test-locale-code="%localeCode%"][data-test-attribute-name="%attributeName%"]',
-        ];
+    public function __construct(
+        Session $session,
+        $minkParameters,
+        private readonly AutocompleteHelperInterface $autocompleteHelper,
+    ) {
+        parent::__construct($session, $minkParameters);
     }
 
     public function getAttributeValidationErrors(string $attributeName, string $localeCode): string
     {
-        $this->clickTabIfItsNotActive('attributes');
+        $this->clickTabIfItsNotActive();
 
         $validationError = $this->getElement('attribute')->find('css', '.sylius-validation-error');
 
@@ -38,7 +39,7 @@ trait ProductAttributesTrait
 
     public function removeAttribute(string $attributeName, string $localeCode): void
     {
-        $this->changeTab('attributes');
+        $this->changeTab();
 
         $this->getElement('product_attribute_delete_button', ['%attributeName%' => $attributeName])->press();
 
@@ -47,14 +48,14 @@ trait ProductAttributesTrait
 
     public function getAttributeSelectText(string $attribute, string $localeCode): string
     {
-        $this->clickTabIfItsNotActive('attributes');
+        $this->clickTabIfItsNotActive();
 
         return $this->getElement('attribute_select', ['%attributeName%' => $attribute, '%localeCode%' => $localeCode])->getText();
     }
 
     public function getNonTranslatableAttributeValue(string $attribute): string
     {
-        $this->clickTabIfItsNotActive('attributes');
+        $this->clickTabIfItsNotActive();
 
         return $this->getElement('non_translatable_attribute', ['%attributeName%' => $attribute])->getValue();
     }
@@ -71,12 +72,12 @@ trait ProductAttributesTrait
         return
             $attribute->getParent()->getParent()->find('css', '.attribute-input input')->getValue() === $value &&
             $attribute->find('css', '.globe.icon') !== null
-            ;
+        ;
     }
 
     public function addNonTranslatableAttribute(string $attributeName, string $value): void
     {
-        $this->clickTabIfItsNotActive('attributes');
+        $this->clickTabIfItsNotActive();
 
         $attributeOption = $this->getElement('attributes_choice')->find('css', sprintf('option:contains("%s")', $attributeName));
         $this->selectElementFromAttributesDropdown($attributeOption->getAttribute('value'));
@@ -89,7 +90,7 @@ trait ProductAttributesTrait
 
     public function addAttribute(string $attributeName): void
     {
-        $this->changeTab('attributes');
+        $this->changeTab();
         $this->selectAttributeToBeAdded($attributeName);
         $this->clickButton('Add');
 
@@ -98,7 +99,7 @@ trait ProductAttributesTrait
 
     public function updateAttribute(string $attributeName, string $value, string $localeCode): void
     {
-        $this->changeTab('attributes');
+        $this->changeTab();
         $this->changeAttributeTab($attributeName);
 
         $attributeValue = $this->getElement('attribute_value', ['%attributeName%' => $attributeName, '%localeCode%' => $localeCode]);
@@ -115,7 +116,7 @@ trait ProductAttributesTrait
 
     public function getAttributeValue(string $attribute, string $localeCode): string
     {
-        $this->changeTab('attributes');
+        $this->changeTab();
         $this->changeAttributeTab($attribute);
 
         $attributeValue = $this->getElement('attribute_value', ['%attributeName%' => $attribute, '%localeCode%' => $localeCode]);
@@ -129,7 +130,7 @@ trait ProductAttributesTrait
 
     public function addSelectedAttributes(): void
     {
-        $this->changeTab('attributes');
+        $this->changeTab();
         $this->clickButton('Add');
         $this->waitForFormUpdate();
     }
@@ -137,6 +138,18 @@ trait ProductAttributesTrait
     public function getNumberOfAttributes(): int
     {
         return count($this->getDocument()->findAll('css', '[data-test-product-attribute-tab]'));
+    }
+
+    protected function getDefinedElements(): array
+    {
+        return [
+            'product_attribute_delete_button' => '[data-test-product-attribute-delete-button="%attributeName%"]',
+            'product_attribute_input' => 'input[name="product_attributes"]',
+            'product_attribute_tab' => '[data-test-product-attribute-tab="%name%"]',
+            'attribute_value' => '[data-test-attribute-value][data-test-locale-code="%localeCode%"][data-test-attribute-name="%attributeName%"]',
+            'side_navigation_tab' => '[data-test-side-navigation-tab="%name%"]',
+            'form' => '[data-live-name-value="sylius_admin:product:form"]',
+        ];
     }
 
     private function selectAttributeToBeAdded(string $attributeName): void
@@ -149,9 +162,9 @@ trait ProductAttributesTrait
         );
     }
 
-    private function clickTabIfItsNotActive(string $tabName): void
+    private function clickTabIfItsNotActive(): void
     {
-        $attributesTab = $this->getElement('tab', ['%name%' => $tabName]);
+        $attributesTab = $this->getElement('tab', ['%name%' => 'attributes']);
         if (!$attributesTab->hasClass('active')) {
             $attributesTab->click();
         }
@@ -171,5 +184,14 @@ trait ProductAttributesTrait
         if (DriverHelper::isJavascript($this->getDriver())) {
             $this->getDocument()->pressButton($locator);
         }
+    }
+
+    private function changeTab(): void
+    {
+        if (DriverHelper::isNotJavascript($this->getDriver())) {
+            return;
+        }
+
+        $this->getElement('side_navigation_tab', ['%name%' => 'attributes'])->click();
     }
 }

@@ -11,20 +11,15 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Behat\Page\Admin\Product\Common;
+namespace Sylius\Behat\Element\Admin\Product;
 
+use Sylius\Behat\Element\Admin\Crud\FormElement as BaseFormElement;
 use Sylius\Behat\Service\AutocompleteHelper;
+use Sylius\Behat\Service\DriverHelper;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
 
-trait ProductTaxonomyTrait
+final class ProductTaxonomyFormElement extends BaseFormElement implements ProductTaxonomyFormElementInterface
 {
-    public function getDefinedProductTaxonomyElements(): array
-    {
-        return [
-            'main_taxon' => '#sylius_product_mainTaxon',
-        ];
-    }
-
     public function selectMainTaxon(TaxonInterface $taxon): void
     {
         $this->openTaxonBookmarks();
@@ -107,6 +102,13 @@ trait ProductTaxonomyTrait
         $taxonName = strtolower(str_replace('-', '_', $taxonName));
 
         return str_contains($productTaxonsElement->getValue(), $taxonName);
+    }
+
+    protected function getDefinedElements(): array
+    {
+        return [
+            'main_taxon' => '#sylius_product_mainTaxon',
+        ];
     }
 
     private function openTaxonBookmarks(): void
