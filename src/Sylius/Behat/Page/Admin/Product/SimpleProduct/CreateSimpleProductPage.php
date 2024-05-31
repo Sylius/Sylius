@@ -16,32 +16,19 @@ namespace Sylius\Behat\Page\Admin\Product\SimpleProduct;
 use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Session;
 use Sylius\Behat\Page\Admin\Crud\CreatePage as BaseCreatePage;
-use Sylius\Behat\Page\Admin\Product\Common\ProductAssociationsTrait;
-use Sylius\Behat\Page\Admin\Product\Common\ProductAttributesTrait;
-use Sylius\Behat\Page\Admin\Product\Common\ProductMediaTrait;
-use Sylius\Behat\Page\Admin\Product\Common\ProductTaxonomyTrait;
-use Sylius\Behat\Page\Admin\Product\Common\ProductTranslationsTrait;
 use Sylius\Behat\Service\DriverHelper;
 use Sylius\Behat\Service\Helper\AutocompleteHelperInterface;
 use Symfony\Component\Routing\RouterInterface;
 
 class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProductPageInterface
 {
-    use ProductAssociationsTrait;
-    use ProductAttributesTrait;
-    use ProductChannelPricingsTrait;
-    use ProductMediaTrait;
-    use ProductTaxonomyTrait;
-    use ProductTranslationsTrait;
-
     public function __construct(
         Session $session,
         $minkParameters,
         RouterInterface $router,
         string $routeName,
         private readonly AutocompleteHelperInterface $autocompleteHelper,
-    )
-    {
+    ) {
         parent::__construct($session, $minkParameters, $router, $routeName);
     }
 
@@ -60,11 +47,6 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
     public function checkChannel(string $channelCode): void
     {
         $this->getElement('channel', ['%channel_code%' => $channelCode])->check();
-    }
-
-    public function getChannelPricingValidationMessage(): string
-    {
-        return $this->getElement('prices_validation_message')->getText();
     }
 
     public function cancelChanges(): void
@@ -91,7 +73,6 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
         $this->getElement($field)->setValue($value);
     }
 
-
     public function selectShippingCategory(string $shippingCategoryName): void
     {
         $this->changeTab('shipping');
@@ -116,11 +97,6 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
         return $this->getElement('field_shipping_required')->isChecked();
     }
 
-    public function hasTab(string $name): bool
-    {
-        return $this->hasElement('side_navigation_tab', ['%name%' => $name]);
-    }
-
     protected function getElement(string $name, array $parameters = []): NodeElement
     {
         if (!isset($parameters['%locale%'])) {
@@ -134,13 +110,8 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
     {
         return array_merge(
             parent::getDefinedElements(),
-            $this->getDefinedProductMediaElements(),
-            $this->getDefinedProductAssociationsElements(),
-            $this->getDefinedProductAttributesElements(),
-            $this->getDefinedProductTranslationsElements(),
-            $this->getDefinedProductTaxonomyElements(),
-            $this->getDefinedProductChannelPricingsElements(),
             [
+                'channel' => '[data-test-channel-code="%channel_code%"]',
                 'code' => '[data-test-code]',
                 'enabled' => '[data-test-enabled]',
                 'field_shipping_category' => '[name="sylius_admin_product[variant][shippingCategory]"]',
@@ -159,25 +130,5 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
         $form->waitFor(1500, function () use ($form) {
             return !$form->hasAttribute('busy');
         });
-    }
-
-    private function selectElementFromAttributesDropdown(string $id): void
-    {
-        $this->getDriver()->executeScript('$(\'#sylius_product_attribute_choice\').dropdown(\'show\');');
-        $this->getDriver()->executeScript(sprintf('$(\'#sylius_product_attribute_choice\').dropdown(\'set selected\', \'%s\');', $id));
-    }
-
-    private function waitForFormElement(int $timeout = 5): void
-    {
-        $form = $this->getElement('form');
-        $this->getDocument()->waitFor($timeout, fn() => !str_contains($form->getAttribute('class'), 'loading'));
-    }
-
-    private function clickTabIfItsNotActive(string $tabName): void
-    {
-        $attributesTab = $this->getElement('tab', ['%name%' => $tabName]);
-        if (!$attributesTab->hasClass('active')) {
-            $attributesTab->click();
-        }
     }
 }
