@@ -11,29 +11,32 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Behat\Page\Admin\Product\Common;
+namespace Sylius\Behat\Element\Admin\Product;
 
 use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Exception\ElementNotFoundException;
+use Behat\Mink\Session;
+use Sylius\Behat\Element\Admin\Crud\FormElement as BaseFormElement;
+use Sylius\Behat\Service\DriverHelper;
+use Sylius\Behat\Service\Helper\AutocompleteHelperInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 
-trait ProductMediaTrait
+final class ProductMediaFormElement extends BaseFormElement implements ProductMediaFormElementInterface
 {
     /** @var string[] */
     private array $imageUrls = [];
 
-    public function getDefinedProductMediaElements(): array
-    {
-        return [
-            'add-image' => '[data-test-add-image]',
-            'image_subform_with_type' => '[data-test-image-subform][data-test-type="%type%"]',
-            'images' => '[data-test-images]',
-        ];
+    public function __construct(
+        Session $session,
+        $minkParameters,
+        private readonly AutocompleteHelperInterface $autocompleteHelper,
+    ) {
+        parent::__construct($session, $minkParameters);
     }
 
     public function attachImage(string $path, ?string $type = null, ?ProductVariantInterface $productVariant = null): void
     {
-        $this->changeTab('media');
+        $this->changeTab();
         $this->getElement('add-image')->click();
 
         $this->waitForFormUpdate();
@@ -73,7 +76,7 @@ trait ProductMediaTrait
 
     public function removeImageWithType(string $type): void
     {
-        $this->changeTab('media');
+        $this->changeTab();
 
         $imageSubform = $this->getElement('image_subform_with_type', ['%type%' => $type]);
         $imageSubform->find('css', '[data-test-image-delete]')->click();
@@ -82,14 +85,14 @@ trait ProductMediaTrait
 
     public function removeFirstImage(): void
     {
-        $this->changeTab('media');
+        $this->changeTab();
         $firstSubform = $this->getFirstImageSubform();
         $firstSubform->findAll('css', '[data-test-image-delete]')[0]->click();
     }
 
     public function hasImageWithType(string $type): bool
     {
-        $this->changeTab('media');
+        $this->changeTab();
 
         try {
             $imageSubform = $this->getElement('image_subform_with_type', ['%type%' => $type]);
@@ -107,10 +110,10 @@ trait ProductMediaTrait
 
     public function hasImageWithVariant(ProductVariantInterface $productVariant): bool
     {
-        $this->changeTab('media');
+        $this->changeTab();
         $images = $this->getElement('images');
 
-        return $images->has('css', sprintf('[data-test-product-variant="%s"]', $productVariant->getCode()));
+        return $images->has('css', sprintf('[data-test-product-variant*="%s"]', $productVariant->getCode()));
     }
 
     public function countImages(): int
@@ -123,7 +126,7 @@ trait ProductMediaTrait
 
     public function modifyFirstImageType(string $type): void
     {
-        $this->changeTab('media');
+        $this->changeTab();
 
         $firstImageSubform = $this->getFirstImageSubform();
 
@@ -132,7 +135,7 @@ trait ProductMediaTrait
 
     public function selectVariantForFirstImage(ProductVariantInterface $productVariant): void
     {
-        $this->changeTab('media');
+        $this->changeTab();
 
         $imageSubform = $this->getFirstImageSubform();
         $this->autocompleteHelper->selectByValue(
@@ -158,6 +161,17 @@ trait ProductMediaTrait
         return in_array($statusCode, [200, 304], true);
     }
 
+    protected function getDefinedElements(): array
+    {
+        return [
+            'add-image' => '[data-test-add-image]',
+            'image_subform_with_type' => '[data-test-image-subform][data-test-type="%type%"]',
+            'images' => '[data-test-images]',
+            'side_navigation_tab' => '[data-test-side-navigation-tab="%name%"]',
+            'form' => 'form',
+        ];
+    }
+
     private function getFirstImageSubform(): NodeElement
     {
         $images = $this->getElement('images');
@@ -181,5 +195,14 @@ trait ProductMediaTrait
     private function provideImageUrlForType(string $type): ?string
     {
         return $this->imageUrls[$type] ?? null;
+    }
+
+    private function changeTab(): void
+    {
+        if (DriverHelper::isNotJavascript($this->getDriver())) {
+            return;
+        }
+
+        $this->getElement('side_navigation_tab', ['%name%' => 'media'])->click();
     }
 }

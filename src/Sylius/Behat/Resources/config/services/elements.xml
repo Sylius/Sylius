@@ -16,9 +16,7 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
 >
     <imports>
-        <import resource="elements/admin.xml" />
-        <import resource="elements/shop.xml" />
-        <import resource="elements/product.xml" />
+        <import resource="elements/**/*.xml" />
     </imports>
 
     <services>
