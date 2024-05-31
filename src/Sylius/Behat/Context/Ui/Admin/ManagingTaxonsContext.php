@@ -19,7 +19,7 @@ use Sylius\Behat\Context\Ui\Admin\Helper\ValidationTrait;
 use Sylius\Behat\Element\Admin\Taxon\FormElementInterface;
 use Sylius\Behat\Element\Admin\Taxon\ImageFormElementInterface;
 use Sylius\Behat\NotificationType;
-use Sylius\Behat\Page\Admin\Product\SimpleProduct\UpdateSimpleProductPageInterface;
+use Sylius\Behat\Page\Admin\Product\UpdateSimpleProductPageInterface;
 use Sylius\Behat\Page\Admin\Taxon\CreateForParentPageInterface;
 use Sylius\Behat\Page\Admin\Taxon\CreatePageInterface;
 use Sylius\Behat\Page\Admin\Taxon\UpdatePageInterface;

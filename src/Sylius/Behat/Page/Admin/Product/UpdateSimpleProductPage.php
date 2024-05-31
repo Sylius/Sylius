@@ -11,15 +11,13 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Behat\Page\Admin\Product\SimpleProduct;
+namespace Sylius\Behat\Page\Admin\Product;
 
 use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Session;
 use Sylius\Behat\Behaviour\ChecksCodeImmutability;
 use Sylius\Behat\Page\Admin\Crud\UpdatePage as BaseUpdatePage;
 use Sylius\Behat\Service\Helper\AutocompleteHelperInterface;
-use Sylius\Component\Core\Model\ChannelInterface;
-use Sylius\Component\Currency\Model\CurrencyInterface;
 use Symfony\Component\Routing\RouterInterface;
 
 class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProductPageInterface

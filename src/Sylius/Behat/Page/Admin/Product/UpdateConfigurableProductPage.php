@@ -11,32 +11,75 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Behat\Page\Admin\Product\ConfigurableProduct;
+namespace Sylius\Behat\Page\Admin\Product;
 
 use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Session;
-use Sylius\Behat\Page\Admin\Crud\CreatePage as BaseCreatePage;
-use Sylius\Behat\Service\DriverHelper;
+use Sylius\Behat\Behaviour\ChecksCodeImmutability;
+use Sylius\Behat\Page\Admin\Crud\UpdatePage as BaseUpdatePage;
+use Sylius\Behat\Service\AutocompleteHelper;
 use Sylius\Behat\Service\Helper\AutocompleteHelperInterface;
 use Symfony\Component\Routing\RouterInterface;
 
-class CreateConfigurableProductPage extends BaseCreatePage implements CreateConfigurableProductPageInterface
+class UpdateConfigurableProductPage extends BaseUpdatePage implements UpdateConfigurableProductPageInterface
 {
+    use ChecksCodeImmutability;
+
+    /**
+     * @param array<array-key, string> $minkParameters
+     */
     public function __construct(
         Session $session,
         $minkParameters,
         RouterInterface $router,
         string $routeName,
-        private readonly AutocompleteHelperInterface $autocompleteHelper,
+        private AutocompleteHelperInterface $autocompleteHelper,
     ) {
         parent::__construct($session, $minkParameters, $router, $routeName);
     }
 
-    public function create(): void
+    public function saveChanges(): void
     {
         $this->waitForFormUpdate();
 
-        parent::create();
+        parent::saveChanges();
+    }
+
+    public function isProductOptionChosen(string $option): bool
+    {
+        $optionElement = $this->getElement('options')->getParent();
+
+        return AutocompleteHelper::isValueVisible($this->getSession(), $optionElement, $option);
+    }
+
+    public function isProductOptionsDisabled(): bool
+    {
+        return 'disabled' === $this->getElement('options')->getAttribute('disabled');
+    }
+
+    public function hasTab(string $name): bool
+    {
+        return $this->hasElement('side_navigation_tab', ['%name%' => $name]);
+    }
+
+    public function checkChannel(string $channelCode): void
+    {
+        $this->getElement('channel', ['%channel_code%' => $channelCode])->check();
+    }
+
+    public function goToVariantsList(): void
+    {
+        $this->getDocument()->clickLink('List variants');
+    }
+
+    public function goToVariantCreation(): void
+    {
+        $this->getDocument()->clickLink('Create');
+    }
+
+    public function goToVariantGeneration(): void
+    {
+        $this->getDocument()->clickLink('Generate');
     }
 
     public function specifyCode(string $code): void
@@ -51,10 +94,15 @@ class CreateConfigurableProductPage extends BaseCreatePage implements CreateConf
 
     public function selectOption(string $optionName): void
     {
-        $this->changeTab();
+        $this->changeTab('details');
         $productOptionsAutocomplete = $this->getElement('product_options_autocomplete');
 
         $this->autocompleteHelper->selectByName($this->getDriver(), $productOptionsAutocomplete->getXpath(), $optionName);
+    }
+
+    protected function getCodeElement(): NodeElement
+    {
+        return $this->getElement('code');
     }
 
     /**
@@ -71,6 +119,7 @@ class CreateConfigurableProductPage extends BaseCreatePage implements CreateConf
                 'code' => '[data-test-code]',
                 'enabled' => '[data-test-enabled]',
                 'form' => '[data-live-name-value="sylius_admin:product:form"]',
+                'options' => '[data-test-options]',
                 'product_options_autocomplete' => '[data-test-product-options-autocomplete]',
                 'side_navigation_tab' => '[data-test-side-navigation-tab="%name%"]',
             ],
@@ -93,14 +142,5 @@ class CreateConfigurableProductPage extends BaseCreatePage implements CreateConf
         $form->waitFor(1500, function () use ($form) {
             return !$form->hasAttribute('busy');
         });
-    }
-
-    private function changeTab(): void
-    {
-        if (DriverHelper::isNotJavascript($this->getDriver())) {
-            return;
-        }
-
-        $this->getElement('side_navigation_tab', ['%name%' => 'details'])->click();
     }
 }

@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Behat\Page\Admin\Product\SimpleProduct;
+namespace Sylius\Behat\Page\Admin\Product;
 
 use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Session;
