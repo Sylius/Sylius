@@ -48,7 +48,9 @@ abstract class AbstractRoleCommand extends ContainerAwareCommand
             }
         }
 
-        if (!$input->getArgument('email')) {
+        $email = $input->getArgument('email');
+
+        if ($email === null) {
             $question = new Question('Please enter an email:');
             $question->setValidator(function (?string $email) {
                 if (!filter_var($email, \FILTER_VALIDATE_EMAIL)) {
@@ -61,7 +63,9 @@ abstract class AbstractRoleCommand extends ContainerAwareCommand
             $input->setArgument('email', $email);
         }
 
-        if (!$input->getArgument('roles')) {
+        $roles = $input->getArgument('roles');
+
+        if ($roles === null) {
             $question = new Question('Please enter user\'s roles (separated by space):');
             $question->setValidator(function (?string $roles) {
                 if ('' === $roles) {
