@@ -8,7 +8,7 @@ Feature: Blocking login for disabled administrators
         Given the store operates on a single channel in "United States"
         And there is an administrator "admin@example.com" identified by "sylius"
 
-    @todo @ui @api
+    @ui @api
     Scenario: Sign in with email and password
         Given this administrator account is disabled
         And I want to log in
@@ -17,7 +17,7 @@ Feature: Blocking login for disabled administrators
         And I log in
         Then I should not be logged in
 
-    @todo @ui @api
+    @ui @api
     Scenario: Revoking the access while administrator is logged in
         Given I am logged in as "admin@example.com" administrator
         When this administrator account becomes disabled
