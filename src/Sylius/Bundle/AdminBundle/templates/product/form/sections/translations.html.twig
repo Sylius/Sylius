@@ -3,7 +3,7 @@
 {% set form = hookable_metadata.context.form %}
 {% set prefixes = hookable_metadata.prefixes %}
 
-<div class="tab-pane" id="product-translations" role="tabpanel" tabindex="0">
+<div class="tab-pane {% if hookable_metadata.configuration.active|default(false) %}show active{% endif %}" id="product-translations" role="tabpanel" tabindex="0">
     <div class="bg-white mb-3">
         <div class="row">
             {{ translations.with_hook(form.translations, prefixes, null, {accordion_id: 'product-translations'}) }}
