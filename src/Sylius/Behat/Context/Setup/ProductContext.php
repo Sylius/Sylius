@@ -620,26 +620,25 @@ final class ProductContext implements Context
     /**
      * @Given /^there (?:is|are) (\d+) unit(?:|s) of (product "([^"]+)") available in the inventory$/
      */
-    public function thereIsQuantityOfProducts($quantity, ProductInterface $product)
+    public function thereIsQuantityOfProductAvailableInTheInventory(int $quantity, ProductInterface $product): void
     {
-        /** @var ProductVariantInterface $productVariant */
-        $productVariant = $this->defaultVariantResolver->getVariant($product);
-        $productVariant->setOnHand((int) $quantity);
+        $this->updateOnHand($product, $quantity);
+    }
 
-        $this->objectManager->flush();
+    /**
+     * @Given /^there (?:is|are) (\d+) unit(?:|s) of tracked (product "([^"]+)") available in the inventory$/
+     */
+    public function thereIsQuantityOfTrackedProductAvailableInTheInventory(int $quantity, ProductInterface $product): void
+    {
+        $this->updateOnHand($product, $quantity, true);
     }
 
     /**
      * @Given /^the (product "([^"]+)") is out of stock$/
      */
-    public function theProductIsOutOfStock(ProductInterface $product)
+    public function theProductIsOutOfStock(ProductInterface $product): void
     {
-        /** @var ProductVariantInterface $productVariant */
-        $productVariant = $this->defaultVariantResolver->getVariant($product);
-        $productVariant->setTracked(true);
-        $productVariant->setOnHand(0);
-
-        $this->objectManager->flush();
+        $this->updateOnHand($product, 0, true);
     }
 
     /**
@@ -1392,5 +1391,18 @@ final class ProductContext implements Context
         }
 
         return $productTaxon;
+    }
+
+    private function updateOnHand(ProductInterface $product, int $onHand, ?bool $tracked = null): void
+    {
+        /** @var ProductVariantInterface $productVariant */
+        $productVariant = $this->defaultVariantResolver->getVariant($product);
+        $productVariant->setOnHand($onHand);
+
+        if ($tracked !== null) {
+            $productVariant->setTracked($tracked);
+        }
+
+        $this->objectManager->flush();
     }
 }

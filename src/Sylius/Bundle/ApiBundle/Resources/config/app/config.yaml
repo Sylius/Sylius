@@ -51,6 +51,8 @@ api_platform:
         Sylius\Bundle\ApiBundle\Exception\ProvinceCannotBeRemoved: 422
         Sylius\Bundle\ApiBundle\Exception\ShippingMethodCannotBeRemoved: 422
         Sylius\Bundle\ApiBundle\Exception\ZoneCannotBeRemoved: 422
+        Sylius\Component\Core\Inventory\Exception\NotEnoughUnitsOnHandException: 422
+        Sylius\Component\Core\Inventory\Exception\NotEnoughUnitsOnHoldException: 422
         Symfony\Component\Serializer\Exception\MissingConstructorArgumentsException: 400
     collection:
         pagination:
