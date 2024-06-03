@@ -290,12 +290,6 @@
             <path d="M18 20l3 -3l-3 -3"></path>
         {% endif %}
 
-        {% if icon == 'history' %}
-            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-            <path d="M12 8l0 4l2 2"></path>
-            <path d="M3.05 11a9 9 0 1 1 .5 4m-.5 5v-5h5"></path>
-        {% endif %}
-
         {% if icon == 'arrow-back-up' %}
             <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
             <path d="M9 14l-4 -4l4 -4"></path>
@@ -331,6 +325,17 @@
             <path d="M5 12m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" ></path>
             <path d="M12 12m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" ></path>
             <path d="M19 12m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" ></path>
+        {% endif %}
+
+        {% if icon == 'mail' %}
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+            <path d="M3 7a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v10a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-10z"></path>
+            <path d="M3 7l9 6l9 -6"></path>
+        {% endif %}
+
+        {% if icon == 'phone' %}
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+            <path d="M5 4h4l2 5l-2.5 1.5a11 11 0 0 0 5 5l1.5 -2.5l5 2v4a2 2 0 0 1 -2 2a16 16 0 0 1 -15 -15a2 2 0 0 1 2 -2"></path>
         {% endif %}
     </svg>
 {% endmacro %}

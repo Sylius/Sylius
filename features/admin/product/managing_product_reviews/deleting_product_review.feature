@@ -10,7 +10,7 @@ Feature: Deleting product reviews
         And this product has a review titled "Awesome" and rated 5 with a comment "Nice product" added by customer "ross@teammike.com"
         And I am logged in as an administrator
 
-    @todo @ui @api
+    @ui @api
     Scenario: Deleting a product review
         When I delete the "Awesome" product review
         Then I should be notified that it has been successfully deleted

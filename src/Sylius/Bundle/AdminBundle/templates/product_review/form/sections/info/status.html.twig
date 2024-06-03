@@ -1,0 +1,20 @@
+{% from '@SyliusAdmin/shared/helper/icon.html.twig' import icon %}
+
+{% set status = hookable_metadata.context.resource.status %}
+{% set label = 'sylius.ui.' ~ status %}
+
+{% set status_badge = {
+    accepted: 'success',
+    new: 'secondary',
+    rejected: 'warning',
+} %}
+
+
+<div class="card mb-3">
+    <div class="card-status-top bg-{{ status_badge[status] }}"></div>
+    <div class="card-header">
+        <div class="card-title">
+            {{ label|trans }}
+        </div>
+    </div>
+</div>
