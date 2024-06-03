@@ -1,7 +1,7 @@
 {% set form = hookable_metadata.context.form %}
 {% set product = hookable_metadata.context.resource %}
 
-<div class="tab-pane" id="product-media" role="tabpanel" tabindex="0">
+<div class="tab-pane {% if hookable_metadata.configuration.active|default(false) %}show active{% endif %}" id="product-media" role="tabpanel" tabindex="0">
     <div class="card mb-3">
         <div class="card-header">
             <h2 id="productMedia" class="card-title">
