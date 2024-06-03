@@ -111,7 +111,6 @@
         </service>
 
         <service id="Sylius\Bundle\CoreBundle\EventListener\PaymentPreCompleteListener">
-            <argument type="service" id="sylius.availability_checker" />
             <tag name="kernel.event_listener" event="sylius.payment.pre_complete" method="checkStockAvailability" />
         </service>
 
