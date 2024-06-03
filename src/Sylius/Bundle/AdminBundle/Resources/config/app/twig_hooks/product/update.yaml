@@ -142,7 +142,7 @@ twig_hooks:
                 props:
                     form: '@=_context.form'
                 configuration:
-                    auto_open: true
+                    auto_open: false
 
         'sylius_admin.product.update.content.form.sections.associations':
             associations:
