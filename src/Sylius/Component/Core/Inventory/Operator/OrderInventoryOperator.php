@@ -13,10 +13,11 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Core\Inventory\Operator;
 
+use Sylius\Component\Core\Inventory\Exception\NotEnoughUnitsOnHandException;
+use Sylius\Component\Core\Inventory\Exception\NotEnoughUnitsOnHoldException;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\OrderPaymentStates;
-use Webmozart\Assert\Assert;
 
 final class OrderInventoryOperator implements OrderInventoryOperatorInterface
 {
@@ -59,23 +60,13 @@ final class OrderInventoryOperator implements OrderInventoryOperatorInterface
                 continue;
             }
 
-            Assert::greaterThanEq(
-                ($variant->getOnHold() - $orderItem->getQuantity()),
-                0,
-                sprintf(
-                    'Not enough units to decrease on hold quantity from the inventory of a variant "%s".',
-                    $variant->getName(),
-                ),
-            );
+            if (($variant->getOnHold() - $orderItem->getQuantity()) < 0) {
+                throw new NotEnoughUnitsOnHoldException($variant->getName());
+            }
 
-            Assert::greaterThanEq(
-                ($variant->getOnHand() - $orderItem->getQuantity()),
-                0,
-                sprintf(
-                    'Not enough units to decrease on hand quantity from the inventory of a variant "%s".',
-                    $variant->getName(),
-                ),
-            );
+            if (($variant->getOnHand() - $orderItem->getQuantity()) < 0) {
+                throw new NotEnoughUnitsOnHandException($variant->getName());
+            }
 
             $variant->setOnHold($variant->getOnHold() - $orderItem->getQuantity());
             $variant->setOnHand($variant->getOnHand() - $orderItem->getQuantity());
@@ -95,14 +86,9 @@ final class OrderInventoryOperator implements OrderInventoryOperatorInterface
                 continue;
             }
 
-            Assert::greaterThanEq(
-                ($variant->getOnHold() - $orderItem->getQuantity()),
-                0,
-                sprintf(
-                    'Not enough units to decrease on hold quantity from the inventory of a variant "%s".',
-                    $variant->getName(),
-                ),
-            );
+            if (($variant->getOnHold() - $orderItem->getQuantity()) < 0) {
+                throw new NotEnoughUnitsOnHoldException($variant->getName());
+            }
 
             $variant->setOnHold($variant->getOnHold() - $orderItem->getQuantity());
         }

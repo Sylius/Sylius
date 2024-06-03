@@ -1,6 +1,6 @@
 {% from '@SyliusAdmin/shared/helper/icon.html.twig' import icon as _icon %}
 
-{% set statisticsData = hookable_metadata.context.statisticsData %}
+{% set statistics_data = hookable_metadata.context.statistics_data %}
 
 <div class="col-sm-6 col-lg-3 mb-3">
     <div class="card card-sm">
@@ -18,7 +18,7 @@
                 </div>
                 <div class="col">
                     <div class="subheader">{{ 'sylius.ui.average_order_value'|trans }}</div>
-                    <div class="h2 mb-0 me-2">{{ _context.statisticsData.statistics.average_order_value }}</div>
+                    <div class="h2 mb-0 me-2">{{ _context.statistics_data.statistics.average_order_value }}</div>
                 </div>
             </div>
         </div>

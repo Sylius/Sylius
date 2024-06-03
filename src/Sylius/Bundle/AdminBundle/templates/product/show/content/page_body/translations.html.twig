@@ -2,8 +2,8 @@
 
 <div class="bg-white mb-3">
     <div class="accordion" id="product-translations">
-        {% for productTranslation in product.translations %}
-            {% set locale = productTranslation.locale %}
+        {% for product_translation in product.translations %}
+            {% set locale = product_translation.locale %}
 
             <div class="accordion-item">
                 <h2 class="accordion-header">
@@ -21,7 +21,7 @@
                                 </div>
                                 <div class="card-body">
                                     <div class="divide-y">
-                                        {% hook 'translations' with { productTranslation } %}
+                                        {% hook 'translations' with { product_translation } %}
                                     </div>
                                 </div>
                             </div>

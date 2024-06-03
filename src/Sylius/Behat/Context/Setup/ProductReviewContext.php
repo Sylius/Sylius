@@ -36,7 +36,7 @@ final class ProductReviewContext implements Context
     /**
      * @Given /^(this product) has one review from (customer "[^"]+")$/
      */
-    public function productHasAReview(ProductInterface $product, CustomerInterface $customer)
+    public function productHasAReview(ProductInterface $product, CustomerInterface $customer): void
     {
         $review = $this->createProductReview($product, 'Title', 5, 'Comment', $customer);
 
@@ -45,15 +45,52 @@ final class ProductReviewContext implements Context
 
     /**
      * @Given /^(this product) has(?:| also) a review titled "([^"]+)" and rated (\d+) added by (customer "[^"]+")(?:|, created (\d+) days ago)$/
+     * @Given /^(this product) has(?:| also) an accepted review titled "([^"]+)" and rated (\d+) added by (customer "[^"]+")(?:|, created (\d+) days ago)$/
      */
-    public function thisProductHasAReviewTitledAndRatedAddedByCustomer(
+    public function thisProductHasAnAcceptedReviewTitledAndRatedAddedByCustomer(
         ProductInterface $product,
-        $title,
-        $rating,
+        string $title,
+        int $rating,
         CustomerInterface $customer,
-        $daysSinceCreation = null,
-    ) {
+        ?int $daysSinceCreation = null,
+    ): void {
         $review = $this->createProductReview($product, $title, $rating, $title, $customer);
+        if (null !== $daysSinceCreation) {
+            $review->setCreatedAt(new \DateTime('-' . $daysSinceCreation . ' days'));
+        }
+
+        $this->productReviewRepository->add($review);
+    }
+
+    /**
+     * @Given /^(this product) has(?:| also) a rejected review titled "([^"]+)" and rated (\d+) added by (customer "[^"]+")(?:|, created (\d+) days ago)$/
+     */
+    public function thisProductHasARejectedReviewTitledAndRatedAddedByCustomer(
+        ProductInterface $product,
+        string $title,
+        int $rating,
+        CustomerInterface $customer,
+        ?int $daysSinceCreation = null,
+    ): void {
+        $review = $this->createProductReview($product, $title, $rating, $title, $customer, ProductReviewTransitions::TRANSITION_REJECT);
+        if (null !== $daysSinceCreation) {
+            $review->setCreatedAt(new \DateTime('-' . $daysSinceCreation . ' days'));
+        }
+
+        $this->productReviewRepository->add($review);
+    }
+
+    /**
+     * @Given /^(this product) has(?:| also) a new review titled "([^"]+)" and rated (\d+) added by (customer "[^"]+")(?:|, created (\d+) days ago)$/
+     */
+    public function thisProductHasANewReviewTitledAndRatedAddedByCustomer(
+        ProductInterface $product,
+        string $title,
+        int $rating,
+        CustomerInterface $customer,
+        ?int $daysSinceCreation = null,
+    ): void {
+        $review = $this->createProductReview($product, $title, $rating, $title, $customer, null);
         if (null !== $daysSinceCreation) {
             $review->setCreatedAt(new \DateTime('-' . $daysSinceCreation . ' days'));
         }
@@ -66,26 +103,12 @@ final class ProductReviewContext implements Context
      */
     public function thisProductHasAReviewTitledAndRatedWithACommentAddedByCustomer(
         ProductInterface $product,
-        $title,
-        $rating,
-        $comment,
+        string $title,
+        int $rating,
+        string $comment,
         CustomerInterface $customer,
-    ) {
+    ): void {
         $review = $this->createProductReview($product, $title, $rating, $comment, $customer);
-
-        $this->productReviewRepository->add($review);
-    }
-
-    /**
-     * @Given /^(this product) has(?:| also) a new review titled "([^"]+)" and rated (\d+) added by (customer "[^"]+")$/
-     */
-    public function thisProductHasAReviewTitledAndRatedAddedByCustomerWhichIsNotAcceptedYet(
-        ProductInterface $product,
-        $title,
-        $rating,
-        CustomerInterface $customer,
-    ) {
-        $review = $this->createProductReview($product, $title, $rating, $title, $customer, null);
 
         $this->productReviewRepository->add($review);
     }
@@ -94,7 +117,7 @@ final class ProductReviewContext implements Context
      * @Given /^(this product)(?:| also) has accepted reviews rated (\d+), (\d+), (\d+), (\d+) and (\d+)$/
      * @Given /^(this product)(?:| also) has accepted reviews rated (\d+), (\d+) and (\d+)$/
      */
-    public function thisProductHasAcceptedReviewsRated(ProductInterface $product, ...$rates)
+    public function thisProductHasAcceptedReviewsRated(ProductInterface $product, int ...$rates): void
     {
         $customer = $this->sharedStorage->get('customer');
         foreach ($rates as $key => $rate) {
@@ -106,7 +129,7 @@ final class ProductReviewContext implements Context
     /**
      * @Given /^(this product)(?:| also) has review rated (\d+) which is not accepted yet$/
      */
-    public function itAlsoHasReviewRatedWhichIsNotAcceptedYet(ProductInterface $product, $rate)
+    public function itAlsoHasReviewRatedWhichIsNotAcceptedYet(ProductInterface $product, int $rate): void
     {
         $customer = $this->sharedStorage->get('customer');
         $review = $this->createProductReview($product, 'Title', $rate, 'Comment', $customer, null);
@@ -116,7 +139,7 @@ final class ProductReviewContext implements Context
     /**
      * @Given /^(this product) also has review rated (\d+) which is rejected$/
      */
-    public function itAlsoHasReviewRatedWhichIsRejected(ProductInterface $product, $rate)
+    public function itAlsoHasReviewRatedWhichIsRejected(ProductInterface $product, int $rate): void
     {
         $customer = $this->sharedStorage->get('customer');
         $review = $this->createProductReview($product, 'Title', $rate, 'Comment', $customer, ProductReviewTransitions::TRANSITION_REJECT);
@@ -133,16 +156,16 @@ final class ProductReviewContext implements Context
      */
     private function createProductReview(
         ProductInterface $product,
-        $title,
-        $rating,
-        $comment,
+        string $title,
+        int $rating,
+        string $comment,
         ?CustomerInterface $customer = null,
-        $transition = ProductReviewTransitions::TRANSITION_ACCEPT,
+        ?string $transition = ProductReviewTransitions::TRANSITION_ACCEPT,
     ) {
         /** @var ReviewInterface $review */
         $review = $this->productReviewFactory->createNew();
         $review->setTitle($title);
-        $review->setRating((int) $rating);
+        $review->setRating($rating);
         $review->setComment($comment);
         $review->setReviewSubject($product);
         $review->setAuthor($customer);

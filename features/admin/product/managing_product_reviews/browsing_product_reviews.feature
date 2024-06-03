@@ -11,7 +11,7 @@ Feature: Browsing product reviews
         And this product has also a review titled "Bad" and rated 1 with a comment "Really bad" added by customer "ross@teammike.com"
         And I am logged in as an administrator
 
-    @todo @ui @api
+    @ui @api
     Scenario: Browsing all product reviews in store
         When I want to browse product reviews
         Then I should see 2 reviews in the list
