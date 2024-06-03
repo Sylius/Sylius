@@ -1,0 +1,16 @@
+{% from '@SyliusAdmin/shared/helper/product_image.html.twig' import image %}
+
+{% set product = hookable_metadata.context.resource.reviewSubject %}
+
+<div class="card-body">
+    <div class="row align-items-center">
+        <div class="col-auto">
+            {{ image(product) }}
+        </div>
+        <div class="col">
+            <div class="mb-0" {{ sylius_test_html_attribute('product-name') }}>
+                <a href="{{ path('sylius_admin_product_show', {'id': product.id}) }}">{{ product.name }}</a>
+            </div>
+        </div>
+    </div>
+</div>
