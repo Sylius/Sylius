@@ -31,3 +31,19 @@ twig_hooks:
                 template: '@SyliusAdmin/product_review/form/sections/info/product.html.twig'
             author:
                 template: '@SyliusAdmin/product_review/form/sections/info/author.html.twig'
+
+        'sylius_admin.product_review.update.content.form.sections.info.product':
+            header:
+                template: '@SyliusAdmin/product_review/form/sections/info/product/header.html.twig'
+            body:
+                template: '@SyliusAdmin/product_review/form/sections/info/product/body.html.twig'
+            footer:
+                template: '@SyliusAdmin/product_review/form/sections/info/product/footer.html.twig'
+
+        'sylius_admin.product_review.update.content.form.sections.info.author':
+            header:
+                template: '@SyliusAdmin/product_review/form/sections/info/author/header.html.twig'
+            body:
+                template: '@SyliusAdmin/product_review/form/sections/info/author/body.html.twig'
+            footer:
+                template: '@SyliusAdmin/product_review/form/sections/info/author/footer.html.twig'
