@@ -16,6 +16,7 @@
   "dependencies": {
     "@sylius-ui/admin": "file:src/Sylius/Bundle/AdminBundle",
     "chart.js": "^3.7.1",
+    "infinite-tree": "^1.17.1",
     "jquery": "^3.5.0",
     "jquery.dirtyforms": "^2.0.0",
     "lightbox2": "^2.9.0",
