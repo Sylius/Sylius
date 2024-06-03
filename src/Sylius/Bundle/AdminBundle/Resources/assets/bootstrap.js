@@ -13,6 +13,7 @@ import '@symfony/ux-live-component/styles/live.css';
 import SlugController from "./controllers/SlugController";
 import TaxonSlugController from "./controllers/TaxonSlugController";
 import ProductAttributeAutocomplete from "./controllers/ProductAttributeAutocomplete";
+import ProductTaxonTree from "./controllers/ProductTaxonTreeController";
 import SavePositionsController from "./controllers/SavePositionsController";
 import CompoundFormErrorsController from "./controllers/CompoundFormErrorsController";
 
@@ -27,5 +28,6 @@ app.register('live', LiveController);
 app.register('slug', SlugController);
 app.register('taxon-slug', TaxonSlugController);
 app.register('product-attribute-autocomplete', ProductAttributeAutocomplete);
+app.register('product-taxon-tree', ProductTaxonTree);
 app.register('save-positions', SavePositionsController);
 app.register('compound-form-errors', CompoundFormErrorsController);

@@ -12,6 +12,7 @@
     "apexcharts": "^3.41.0",
     "bootstrap": "^5.3.0",
     "choices.js": "^10.2.0",
+    "infinite-tree": "^1.17.1",
     "slugify": "^1.6",
     "stimulus-use": "^0.52"
   },
