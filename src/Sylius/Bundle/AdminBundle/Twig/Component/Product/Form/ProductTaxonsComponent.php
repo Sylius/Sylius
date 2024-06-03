@@ -23,11 +23,17 @@ class ProductTaxonsComponent
     {
     }
 
+    /** @return array<array-key, mixed> */
     public function getTree(): array
     {
         return $this->buildTree($this->allTaxons->getArrayResult());
     }
 
+    /**
+     * @param array<array-key, mixed> $taxons
+     *
+     * @return array<array-key, mixed>
+     */
     private function buildTree(array $taxons): array
     {
         $tree = [];
