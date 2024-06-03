@@ -58,7 +58,7 @@ final class AllTaxons implements AllTaxonsInterface
                 'taxon',
                 'sylius_taxon_translation',
                 'current_translation',
-                $qb->expr()->and(
+                (string) $qb->expr()->and(
                     $qb->expr()->eq('current_translation.translatable_id', 'taxon.id'),
                     $qb->expr()->eq('current_translation.locale', ':currentLocale')
                 )
@@ -67,7 +67,7 @@ final class AllTaxons implements AllTaxonsInterface
                 'taxon',
                 'sylius_taxon_translation',
                 'fallback_translation',
-                $qb->expr()->and(
+                (string) $qb->expr()->and(
                     $qb->expr()->eq('fallback_translation.translatable_id', 'taxon.id'),
                     $qb->expr()->eq('fallback_translation.locale', ':fallbackLocale')
                 )

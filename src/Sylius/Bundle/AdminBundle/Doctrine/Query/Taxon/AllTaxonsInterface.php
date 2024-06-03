@@ -15,5 +15,6 @@ namespace Sylius\Bundle\AdminBundle\Doctrine\Query\Taxon;
 
 interface AllTaxonsInterface
 {
+    /** @return array<array-key, mixed> */
     public function getArrayResult(): array;
 }
