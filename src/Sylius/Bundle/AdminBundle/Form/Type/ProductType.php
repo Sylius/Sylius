@@ -36,6 +36,10 @@ final class ProductType extends AbstractType
             ->add('associations', ProductAssociationsType::class, [
                 'label' => false,
             ])
+            ->add('mainTaxon', TaxonAutocompleteType::class, [
+                'label' => 'sylius.form.product.main_taxon',
+                'multiple' => false,
+            ])
         ;
     }
 
