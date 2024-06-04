@@ -1,10 +1,10 @@
-{% from '@SyliusAdmin/shared/helper/icon.html.twig' import icon as _icon %}
+{% from '@SyliusAdmin/shared/helper/icon.html.twig' import icon as icon %}
 {% set product = hookable_metadata.context.product %}
 {% set variant = hookable_metadata.context.variant %}
 
 <td class="text-end">
     <a href="{{ path('sylius_admin_product_variant_update', { id: variant.id, productId: product.id }) }}" class="btn">
-        {{ _icon({ icon: 'pencil' }) }}
+        {{ icon({ icon: 'pencil' }) }}
         {{ 'sylius.ui.edit'|trans }}
     </a>
 </td>

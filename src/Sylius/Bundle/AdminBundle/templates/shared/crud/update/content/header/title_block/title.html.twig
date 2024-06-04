@@ -1,4 +1,4 @@
-{% import '@SyliusAdmin/shared/helper/header.html.twig' as _header %}
+{% import '@SyliusAdmin/shared/helper/header.html.twig' as header %}
 
 {% if hookable_metadata.context.metadata is defined and hookable_metadata.context.configuration is defined %}
     {% set configuration = hookable_metadata.context.configuration %}
@@ -13,6 +13,6 @@
 
 <div class="col-12 col-md-6">
     <div class="d-md-flex gap-2 align-items-center">
-        {{ _header.h1(header is not null ? header|trans : 'sylius.ui.edit'|trans ~ ' ' ~ singular_name|trans) }}
+        {{ header.h1(header is not null ? header|trans : 'sylius.ui.edit'|trans ~ ' ' ~ singular_name|trans) }}
     </div>
 </div>

@@ -1,11 +1,11 @@
-{% import '@SyliusAdmin/shared/helper/breadcrumbs.html.twig' as _breadcrumbs %}
+{% import '@SyliusAdmin/shared/helper/breadcrumbs.html.twig' as breadcrumbs %}
 
 {% set configuration = hookable_metadata.context.resources.requestConfiguration %}
 
 {% set product_variant = configuration.vars.product_variant %}
 {% set product = configuration.vars.product_variant.product %}
 
-{{ _breadcrumbs.default([
+{{ breadcrumbs.default([
     { name: 'sylius.ui.dashboard', url: path('sylius_admin_dashboard'), active: false },
     { name: 'sylius.ui.products'|trans, url: path('sylius_admin_product_index'), active: false },
     { name: product.name|default(product.code), url: path('sylius_admin_product_show', {'id': product.id }), active: false },

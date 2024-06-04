@@ -1,4 +1,4 @@
-{% from '@SyliusAdmin/shared/helper/icon.html.twig' import icon as _icon %}
+{% from '@SyliusAdmin/shared/helper/icon.html.twig' import icon as icon %}
 
 {% set statistics_data = hookable_metadata.context.statistics_data %}
 
@@ -13,7 +13,7 @@
             <div class="row align-items-center">
                 <div class="col-auto">
                     <span class="bg-gray text-black-50 avatar">
-                        {{ _icon({ icon: 'coins' }) }}
+                        {{ icon({ icon: 'coins' }) }}
                     </span>
                 </div>
                 <div class="col">

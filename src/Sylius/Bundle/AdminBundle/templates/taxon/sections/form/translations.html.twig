@@ -1,4 +1,4 @@
-{% import '@SyliusAdmin/shared/helper/translations.html.twig' as _translations %}
+{% import '@SyliusAdmin/shared/helper/translations.html.twig' as translations %}
 
 <div class="bg-white mb-3">
     {% set body %}
@@ -22,5 +22,5 @@
             </div>
         {% endverbatim %}
     {% endset %}
-    {{ _translations.default(hookable_metadata.context.form.translations, body, { accordion_id: 'taxon-translations'}) }}
+    {{ translations.default(hookable_metadata.context.form.translations, body, { accordion_id: 'taxon-translations'}) }}
 </div>

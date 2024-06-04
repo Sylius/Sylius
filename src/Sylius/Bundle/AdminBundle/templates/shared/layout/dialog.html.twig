@@ -1,4 +1,4 @@
-{% import '@SyliusAdmin/shared/helper/button.html.twig' as _button %}
+{% import '@SyliusAdmin/shared/helper/button.html.twig' as button %}
 
 <dialog data-confirm-dialog>
     <div class="card">
@@ -8,8 +8,8 @@
             </div>
         </div>
         <div class="card-footer">
-            {{ _button.default({ text: 'sylius.ui.cancel'|trans, attr: 'data-confirm-btn-false' }) }}
-            {{ _button.default({ text: 'sylius.ui.delete'|trans, class: 'btn-danger', attr: 'data-confirm-btn-true' }) }}
+            {{ button.default({ text: 'sylius.ui.cancel'|trans, attr: 'data-confirm-btn-false' }) }}
+            {{ button.default({ text: 'sylius.ui.delete'|trans, class: 'btn-danger', attr: 'data-confirm-btn-true' }) }}
         </div>
     </div>
 </dialog>

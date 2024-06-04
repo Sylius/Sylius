@@ -1,11 +1,11 @@
-{% import '@SyliusAdmin/shared/helper/button.html.twig' as _button %}
+{% import '@SyliusAdmin/shared/helper/button.html.twig' as button %}
 
 {% set path = options.link.url|default(path(options.link.route|default(grid.requestConfiguration.getRouteName('bulk_delete')), options.link.parameters|default({}))) %}
 
 <form action="{{ path }}" method="post" data-bulk-delete="index">
     <input type="hidden" name="_method" value="DELETE" />
     <input type="hidden" name="_csrf_token" value="{{ csrf_token('bulk_delete') }}" />
-    {{ _button.delete({
+    {{ button.delete({
         text: action.label|default('sylius.ui.delete')|trans,
         disabled: true,
         type: 'submit',

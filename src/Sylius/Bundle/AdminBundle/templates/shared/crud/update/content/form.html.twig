@@ -1,4 +1,4 @@
-{% import '@SyliusAdmin/shared/helper/button.html.twig' as _button %}
+{% import '@SyliusAdmin/shared/helper/button.html.twig' as button %}
 
 {% set resource = hookable_metadata.context.resource %}
 {% set configuration = hookable_metadata.context.configuration %}
@@ -37,8 +37,8 @@
                     <div class="row align-items-center">
                         <div class="col"></div>
                         <div class="col-auto">
-                            {{ _button.cancel({ text: 'sylius.ui.cancel'|trans, url: index_url, class: 'btn btn-ghost-secondary' }) }}
-                            {{ _button.primary({ text: 'sylius.ui.update'|trans, type: 'submit', form: form.vars.id }) }}
+                            {{ button.cancel({ text: 'sylius.ui.cancel'|trans, url: index_url, class: 'btn btn-ghost-secondary' }) }}
+                            {{ button.primary({ text: 'sylius.ui.update'|trans, type: 'submit', form: form.vars.id }) }}
                         </div>
                     </div>
                 </div>

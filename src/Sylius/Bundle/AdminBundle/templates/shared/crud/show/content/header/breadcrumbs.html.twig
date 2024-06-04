@@ -1,4 +1,4 @@
-{% import '@SyliusAdmin/shared/helper/breadcrumbs.html.twig' as _breadcrumbs %}
+{% import '@SyliusAdmin/shared/helper/breadcrumbs.html.twig' as breadcrumbs %}
 
 {% set configuration = hookable_metadata.context.configuration %}
 {% set resource = hookable_metadata.context.resource %}
@@ -16,7 +16,7 @@
 )
 %}
 
-{{ _breadcrumbs.default([
+{{ breadcrumbs.default([
     { name: 'sylius.ui.dashboard', url: path('sylius_admin_dashboard'), active: false },
     { name: metadata.applicationName~'.ui.'~metadata.pluralName, url: index_url, active: false },
     { name: resource.name|default(resource.code|default(resource.id)), active: true },
