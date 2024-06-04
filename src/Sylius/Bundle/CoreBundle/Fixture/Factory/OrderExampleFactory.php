@@ -75,6 +75,14 @@ class OrderExampleFactory extends AbstractExampleFactory implements ExampleFacto
         $options = $this->optionsResolver->resolve($options);
 
         $order = $this->createOrder($options['channel'], $options['customer'], $options['country'], $options['complete_date']);
+
+        /** @var CustomerInterface $customer */
+        $customer = $order->getCustomer();
+
+        if ($customer->hasUser()) {
+            $order->setCustomerWithAuthorization($customer);
+        }
+
         $this->setOrderCompletedDate($order, $options['complete_date']);
         if ($options['fulfilled']) {
             $this->fulfillOrder($order);
