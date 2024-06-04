@@ -17,10 +17,7 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Extension\QueryItemExtensionInterface;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Util\QueryNameGeneratorInterface;
 use Doctrine\ORM\QueryBuilder;
 use Sylius\Bundle\ApiBundle\Context\UserContextInterface;
-use Sylius\Bundle\ApiBundle\Serializer\ContextKeys;
 use Sylius\Component\Core\Model\OrderInterface;
-use Sylius\Component\Core\OrderCheckoutStates;
-use Symfony\Component\HttpFoundation\Request;
 
 final class OrderVisitorItemExtension implements QueryItemExtensionInterface
 {
@@ -52,25 +49,17 @@ final class OrderVisitorItemExtension implements QueryItemExtensionInterface
         $queryBuilder
             ->leftJoin(sprintf('%s.customer', $rootAlias), 'customer')
             ->leftJoin('customer.user', 'user')
-            ->andWhere(
-                $queryBuilder->expr()->orX(
-                    $queryBuilder->expr()->andX(
-                        $queryBuilder->expr()->isNotNull('user'),
-                        $queryBuilder->expr()->neq(sprintf('%s.checkoutState', $rootAlias), ':checkoutState'),
-                        $queryBuilder->expr()->eq(sprintf('%s.createdByGuest', $rootAlias), ':createdByGuest'),
-                    ),
-                    $queryBuilder->expr()->andX(
-                        $queryBuilder->expr()->isNull('user'),
-                        $queryBuilder->expr()->eq(sprintf('%s.createdByGuest', $rootAlias), ':createdByGuest'),
-                    ),
+            ->andWhere($queryBuilder->expr()->orX(
+                'user IS NULL',
+                sprintf('%s.customer IS NULL', $rootAlias),
+                $queryBuilder->expr()->andX(
+                    sprintf('%s.customer IS NOT NULL', $rootAlias),
+                    sprintf('%s.createdByGuest = :createdByGuest', $rootAlias),
                 ),
-            )->setParameter('createdByGuest', true)
-            ->setParameter('checkoutState', OrderCheckoutStates::STATE_COMPLETED)
+            ))->setParameter('createdByGuest', true)
         ;
 
-        $httpRequestMethodType = $context[ContextKeys::HTTP_REQUEST_METHOD_TYPE];
-
-        if ($httpRequestMethodType === Request::METHOD_GET || in_array($operationName, $this->nonFilteredCartAllowedOperations, true)) {
+        if (in_array($operationName, $this->nonFilteredCartAllowedOperations, true)) {
             return;
         }
 
