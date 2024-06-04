@@ -1,4 +1,4 @@
-{% macro tree_dropdown(taxonId) %}
+{% macro tree_dropdown(taxon_id) %}
     <div class="dropdown">
         <button class="btn btn-sm" type="button" data-bs-toggle="dropdown">
             <svg xmlns="http://www.w3.org/2000/svg" class="" width="16" height="16" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -12,13 +12,13 @@
             <li>
                 <a
                     class="dropdown-item"
-                    href="{{ path('sylius_admin_taxon_create_for_parent', { 'id': taxonId }) }}"
+                    href="{{ path('sylius_admin_taxon_create_for_parent', { 'id': taxon_id }) }}"
                 >
                     {{ 'sylius.ui.create'|trans }}
                 </a>
             </li>
             <li>
-                <a class="dropdown-item" href="{{ path('sylius_admin_taxon_update', { id: taxonId }) }}">
+                <a class="dropdown-item" href="{{ path('sylius_admin_taxon_update', { id: taxon_id }) }}">
                     {{ 'sylius.ui.edit'|trans }}
                 </a>
             </li>
@@ -28,7 +28,7 @@
                     class="dropdown-item"
                     data-action="live#action"
                     data-live-action-param="prevent|delete"
-                    data-live-taxon-id-param="{{ taxonId }}"
+                    data-live-taxon-id-param="{{ taxon_id }}"
                 >
                     {{ 'sylius.ui.delete'|trans }}
                 </button>
@@ -39,7 +39,7 @@
                     class="dropdown-item"
                     data-action="live#action"
                     data-live-action-param="prevent|moveUp"
-                    data-live-taxon-id-param="{{ taxonId }}"
+                    data-live-taxon-id-param="{{ taxon_id }}"
                 >
                     {{ 'sylius.ui.move_up'|trans }}
                 </button>
@@ -50,7 +50,7 @@
                     class="dropdown-item"
                     data-action="live#action"
                     data-live-action-param="prevent|moveDown"
-                    data-live-taxon-id-param="{{ taxonId }}"
+                    data-live-taxon-id-param="{{ taxon_id }}"
                 >
                     {{ 'sylius.ui.move_down'|trans }}
                 </button>

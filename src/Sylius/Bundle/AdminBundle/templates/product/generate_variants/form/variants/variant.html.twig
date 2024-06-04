@@ -3,8 +3,8 @@
 <div class="card mb-3" id="{{ form.vars.id }}">
     <div class="card-header d-flex justify-content-between">
         <div>
-            {% for optionValue in form.optionValues  %}
-                {{ optionValue.vars.label|trans }}: <span class="fw-bold me-1">{{ optionValue.vars.value }}</span>
+            {% for option_value in form.optionValues  %}
+                {{ option_value.vars.label|trans }}: <span class="fw-bold me-1">{{ option_value.vars.value }}</span>
             {% endfor %}
         </div>
         {% if form.vars.value.id is null %}

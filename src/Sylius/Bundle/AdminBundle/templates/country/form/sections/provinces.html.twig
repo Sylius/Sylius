@@ -5,39 +5,39 @@
         {{ form_errors(hookable_metadata.context.form.provinces) }}
 
         <div {{ sylius_test_html_attribute('provinces') }}>
-            {% for key, provinceForm in hookable_metadata.context.form.provinces %}
+            {% for key, province_form in hookable_metadata.context.form.provinces %}
                 <div class="card mb-3" {{ sylius_test_html_attribute('province') }}>
                     <div class="card-body">
                         <div class="row">
                             <div class="col">
                                 <div class="row">
-                                    {{ form_label(provinceForm.code, null, {label_attr: {class: 'col-form-label col-auto'}}) }}
+                                    {{ form_label(province_form.code, null, {label_attr: {class: 'col-form-label col-auto'}}) }}
                                     <div class="col">
-                                        {{ form_widget(provinceForm.code, sylius_test_form_attribute('province-code')) }}
-                                        {{ form_errors(provinceForm.code) }}
+                                        {{ form_widget(province_form.code, sylius_test_form_attribute('province-code')) }}
+                                        {{ form_errors(province_form.code) }}
                                     </div>
                                 </div>
                             </div>
                             <div class="col">
                                 <div class="row">
-                                    {{ form_label(provinceForm.name, null, {label_attr: {class: 'col-form-label col-auto'}}) }}
+                                    {{ form_label(province_form.name, null, {label_attr: {class: 'col-form-label col-auto'}}) }}
                                     <div class="col">
-                                        {{ form_widget(provinceForm.name, sylius_test_form_attribute('province-name')) }}
-                                        {{ form_errors(provinceForm.name) }}
+                                        {{ form_widget(province_form.name, sylius_test_form_attribute('province-name')) }}
+                                        {{ form_errors(province_form.name) }}
                                     </div>
                                 </div>
                             </div>
                             <div class="col">
                                 <div class="row">
-                                    {{ form_label(provinceForm.abbreviation, null, {label_attr: {class: 'col-form-label col-auto'}}) }}
+                                    {{ form_label(province_form.abbreviation, null, {label_attr: {class: 'col-form-label col-auto'}}) }}
                                     <div class="col">
-                                        {{ form_widget(provinceForm.abbreviation, sylius_test_form_attribute('province-abbreviation')) }}
-                                        {{ form_errors(provinceForm.abbreviation) }}
+                                        {{ form_widget(province_form.abbreviation, sylius_test_form_attribute('province-abbreviation')) }}
+                                        {{ form_errors(province_form.abbreviation) }}
                                     </div>
                                 </div>
                             </div>
                             <div class="col-auto" {{ sylius_test_html_attribute('delete-province') }}>
-                                {{ form_row(provinceForm.vars.button_delete, {attr: {class: 'btn btn-outline-danger'}}) }}
+                                {{ form_row(province_form.vars.button_delete, {attr: {class: 'btn btn-outline-danger'}}) }}
                             </div>
                         </div>
                     </div>

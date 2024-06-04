@@ -56,7 +56,7 @@
             <div class="dropdown-menu {{ is_active ? 'show' : '' }}">
                 <div class="dropdown-menu-columns">
                     <div class="dropdown-menu-column">
-                        {{ block('childrenList') }}
+                        {{ block('children_list') }}
                     </div>
                 </div>
             </div>
@@ -75,13 +75,13 @@
     {% endif %}
 {% endblock %}
 
-{% block childrenList %}
+{% block children_list %}
     {% for item in item.children %}
-        {{ block('childItem') }}
+        {{ block('child_item') }}
     {% endfor %}
 {% endblock %}
 
-{% block childItem %}
+{% block child_item %}
     {%- set classes = item.attribute('class') is not empty ? [item.attribute('class')] : [] %}
     {%- set target = item.linkAttributes and item.linkAttributes['target'] ? item.linkAttributes['target'] : '_self' %}
     {%- if matcher.isCurrent(item) %}

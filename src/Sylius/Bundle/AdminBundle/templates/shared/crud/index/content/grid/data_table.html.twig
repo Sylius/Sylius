@@ -17,7 +17,7 @@
                     </div>
                 {% endif %}
                 <div class="ms-auto">
-                    {{ _pagination.numberOfResultsSelector(data, definition.limits) }}
+                    {{ _pagination.number_of_results_selector(data, definition.limits) }}
                 </div>
             </div>
         </div>
@@ -37,7 +37,7 @@
         </div>
         <div class="card-footer d-flex align-items-center">
             <div class="text-muted">
-                {{ _pagination.resultsCount(data) }}
+                {{ _pagination.results_count(data) }}
             </div>
             <div class="ms-auto">
                 {{ _pagination.simple(data) }}

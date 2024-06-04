@@ -5,10 +5,10 @@
         {% if form.configuration is defined %}
             {{ form_row(form.configuration) }}
         {% else %}
-            {% for name, calculatorConfigurationPrototype in form.vars.prototypes %}
+            {% for name, calculator_configuration_prototype in form.vars.prototypes %}
                 {% set chosen_calculator = 'calculators_' ~ form.calculator.vars.value %}
                 {% if chosen_calculator == name %}
-                    {{ form_row(calculatorConfigurationPrototype) }}
+                    {{ form_row(calculator_configuration_prototype) }}
                 {% endif %}
             {% endfor %}
         {% endif %}
