@@ -171,7 +171,7 @@ Feature: Products validation
         Then I should be notified that slug has to be unique
         And product with code "7-WONDERS-BABEL" should not be added
 
-    @ui @mink:chromedriver @api
+    @ui @javascript @api
     Scenario: Trying to add a new product with a text attribute without specifying its value in default locale
         When I want to create a new configurable product
         And I specify its code as "X-18-MUG"
@@ -182,7 +182,7 @@ Feature: Products validation
         Then I should be notified that I have to define the "Mug material" attribute in "English (United States)" locale
         And product with code "X-18-MUG" should not be added
 
-    @ui @mink:chromedriver @api
+    @ui @javascript @api
     Scenario: Trying to add a new product with a text attribute without specifying its value in additional locale with proper length
         When I want to create a new configurable product
         And I specify its code as "X-18-MUG"
