@@ -6,8 +6,8 @@
 <div class="mb-2">
     <div class="card">
         <div class="card-body">
-            {% for channelStatistics in this.statistics %}
-                {% set channel = channelStatistics.channel %}
+            {% for channel_statistics in this.statistics %}
+                {% set channel = channel_statistics.channel %}
 
                 {% set title %}
                     <div class="h3">
@@ -29,7 +29,7 @@
                                         </div>
                                         <div class="col">
                                             <div>{{ 'sylius.ui.orders'|trans }}</div>
-                                            <div class="h2 mb-0 me-2" {{ sylius_test_html_attribute('customer-statistics-' ~ channel.code ~ '-orders-count') }}>{{ channelStatistics.ordersCount }}</div>
+                                            <div class="h2 mb-0 me-2" {{ sylius_test_html_attribute('customer-statistics-' ~ channel.code ~ '-orders-count') }}>{{ channel_statistics.ordersCount }}</div>
                                         </div>
                                     </div>
                                 </div>
@@ -46,7 +46,7 @@
                                         </div>
                                         <div class="col">
                                             <div>{{ 'sylius.ui.total_value_of_orders'|trans }}</div>
-                                            <div class="h2 mb-0 me-2" {{ sylius_test_html_attribute('customer-statistics-' ~ channel.code ~ '-orders-total') }}>{{ _money(channelStatistics.ordersValue, channel.baseCurrency.code) }}</div>
+                                            <div class="h2 mb-0 me-2" {{ sylius_test_html_attribute('customer-statistics-' ~ channel.code ~ '-orders-total') }}>{{ _money(channel_statistics.ordersValue, channel.baseCurrency.code) }}</div>
                                         </div>
                                     </div>
                                 </div>
@@ -63,7 +63,7 @@
                                         </div>
                                         <div class="col">
                                             <div>{{ 'sylius.ui.average_order_value'|trans }}</div>
-                                            <div class="h2 mb-0 me-2" {{ sylius_test_html_attribute('customer-statistics-' ~ channel.code ~ '-orders-average') }}>{{ _money(channelStatistics.averageOrderValue, channel.baseCurrency.code) }}</div>
+                                            <div class="h2 mb-0 me-2" {{ sylius_test_html_attribute('customer-statistics-' ~ channel.code ~ '-orders-average') }}>{{ _money(channel_statistics.averageOrderValue, channel.baseCurrency.code) }}</div>
                                         </div>
                                     </div>
                                 </div>
