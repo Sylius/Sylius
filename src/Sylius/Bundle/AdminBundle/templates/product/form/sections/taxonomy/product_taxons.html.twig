@@ -1,6 +1,6 @@
 {% set productTaxonsForm = form.productTaxons %}
 
-<div>
+<div {{ sylius_test_html_attribute('product-taxons') }}>
     {{ form_label(productTaxonsForm) }}
     <div class="card"
         {{ stimulus_controller('product-taxon-tree', {treeData: this.tree, autoOpen: hookableMetadata.configuration.auto_open}) }}

@@ -13,101 +13,89 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Element\Admin\Product;
 
+use Behat\Mink\Session;
+use FriendsOfBehat\SymfonyExtension\Mink\MinkParameters;
 use Sylius\Behat\Element\Admin\Crud\FormElement as BaseFormElement;
-use Sylius\Behat\Service\AutocompleteHelper;
 use Sylius\Behat\Service\DriverHelper;
+use Sylius\Behat\Service\Helper\AutocompleteHelperInterface;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
 
 final class TaxonomyFormElement extends BaseFormElement implements TaxonomyFormElementInterface
 {
-    public function selectMainTaxon(TaxonInterface $taxon): void
-    {
-        $this->changeTab();
-
-        $mainTaxonElement = $this->getElement('main_taxon')->getParent();
-
-        AutocompleteHelper::chooseValue($this->getSession(), $mainTaxonElement, $taxon->getName());
+    public function __construct(
+        Session $session,
+        array|MinkParameters $minkParameters,
+        private readonly AutocompleteHelperInterface $autocompleteHelper,
+    ) {
+        parent::__construct($session, $minkParameters);
     }
 
-    public function hasMainTaxonWithName(string $taxonName): bool
+    public function selectMainTaxon(string $taxonName): void
     {
         $this->changeTab();
-        $mainTaxonElement = $this->getElement('main_taxon')->getParent();
 
-        return $taxonName === $mainTaxonElement->find('css', '.search > .text')->getText();
+        $this->autocompleteHelper->selectByName(
+            $this->getDriver(),
+            $this->getElement('main_taxon')->getXpath(),
+            $taxonName,
+        );
+        $this->waitForFormUpdate();
+    }
+
+    public function getMainTaxon(): string
+    {
+        $this->changeTab();
+
+        return $this->getElement('selected_main_taxon')->getText();
     }
 
     public function checkProductTaxon(TaxonInterface $taxon): void
     {
         $this->changeTab();
 
-        $productTaxonsCodes = [];
-        $productTaxonsElement = $this->getElement('product_taxons');
-        if ($productTaxonsElement->getValue() !== '') {
-            $productTaxonsCodes = explode(',', $productTaxonsElement->getValue());
-        }
-        $productTaxonsCodes[] = $taxon->getCode();
-
-        $productTaxonsElement->setValue(implode(',', $productTaxonsCodes));
+        $this->getElement('product_taxons_checkbox', ['%code%' => $taxon->getCode()])->check();
     }
 
-    public function selectProductTaxon(TaxonInterface $taxon): void
-    {
-        $productTaxonsCodes = [];
-        $productTaxonsElement = $this->getElement('product_taxons');
-        if ($productTaxonsElement->getValue() !== '') {
-            $productTaxonsCodes = explode(',', $productTaxonsElement->getValue());
-        }
-        $productTaxonsCodes[] = $taxon->getCode();
-
-        $productTaxonsElement->setValue(implode(',', $productTaxonsCodes));
-    }
-
-    public function unselectProductTaxon(TaxonInterface $taxon): void
-    {
-        $productTaxonsCodes = [];
-        $productTaxonsElement = $this->getElement('product_taxons');
-        if ($productTaxonsElement->getValue() !== '') {
-            $productTaxonsCodes = explode(',', $productTaxonsElement->getValue());
-        }
-
-        $key = array_search($taxon->getCode(), $productTaxonsCodes);
-        if ($key !== false) {
-            unset($productTaxonsCodes[$key]);
-        }
-
-        $productTaxonsElement->setValue(implode(',', $productTaxonsCodes));
-    }
-
-    public function hasMainTaxon(): bool
+    public function uncheckProductTaxon(TaxonInterface $taxon): void
     {
         $this->changeTab();
 
-        return $this->getDocument()->find('css', '.search > .text')->getText() !== '';
+        $this->getElement('product_taxons_checkbox', ['%code%' => $taxon->getCode()])->uncheck();
     }
 
     public function isTaxonVisibleInMainTaxonList(string $taxonName): bool
     {
         $this->changeTab();
 
-        $mainTaxonElement = $this->getElement('main_taxon')->getParent();
+        $elements = $this->autocompleteHelper->search(
+            $this->getDriver(),
+            $this->getElement('main_taxon')->getXpath(),
+            $taxonName,
+        );
 
-        return AutocompleteHelper::isValueVisible($this->getSession(), $mainTaxonElement, $taxonName);
+        foreach ($elements as $element) {
+            if (str_contains($element, $taxonName)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
-    public function isTaxonChosen(string $taxonName): bool
+    public function isTaxonChosen(string $taxonCode): bool
     {
-        $productTaxonsElement = $this->getElement('product_taxons');
+        $this->changeTab();
 
-        $taxonName = strtolower(str_replace('-', '_', $taxonName));
-
-        return str_contains($productTaxonsElement->getValue(), $taxonName);
+        return $this->getElement('product_taxons_checkbox', ['%code%' => $taxonCode])->isChecked();
     }
 
     protected function getDefinedElements(): array
     {
         return [
+            'form' => '[data-live-name-value="sylius_admin:product:form"]',
             'main_taxon' => '[data-test-main-taxon]',
+            'product_taxons_checkbox' => '[data-test-product-taxons] [data-id="%code%"] input[type="checkbox"]',
+            'selected_main_taxon' => '[data-test-main-taxon] option:selected',
             'side_navigation_tab' => '[data-test-side-navigation-tab="%name%"]',
         ];
     }

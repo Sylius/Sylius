@@ -15,16 +15,14 @@ namespace Sylius\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Element\Admin\Product\TaxonomyFormElementInterface;
-use Sylius\Behat\Page\Admin\Product\UpdateSimpleProductPageInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
+use Webmozart\Assert\Assert;
 
-final readonly class ManagingProductTaxonsContext implements Context
+final class ManagingProductTaxonsContext implements Context
 {
-    public function __construct(
-        private UpdateSimpleProductPageInterface $updateSimpleProductPage,
-        private TaxonomyFormElementInterface $taxonomyFormElement,
-    ) {
+    public function __construct(private TaxonomyFormElementInterface $taxonomyFormElement)
+    {
     }
 
     /**
@@ -33,9 +31,7 @@ final readonly class ManagingProductTaxonsContext implements Context
      */
     public function iAddTaxonToTheProduct(ProductInterface $product, TaxonInterface $taxon): void
     {
-        $this->updateSimpleProductPage->open(['id' => $product->getId()]);
-        $this->taxonomyFormElement->selectProductTaxon($taxon);
-        $this->updateSimpleProductPage->saveChanges();
+        $this->taxonomyFormElement->checkProductTaxon($taxon);
     }
 
     /**
@@ -45,8 +41,22 @@ final readonly class ManagingProductTaxonsContext implements Context
         ProductInterface $product,
         TaxonInterface $taxon,
     ): void {
-        $this->updateSimpleProductPage->open(['id' => $product->getId()]);
-        $this->taxonomyFormElement->unselectProductTaxon($taxon);
-        $this->updateSimpleProductPage->saveChanges();
+        $this->taxonomyFormElement->uncheckProductTaxon($taxon);
+    }
+
+    /**
+     * @Then the product :product should have the :taxon taxon
+     */
+    public function thisProductTaxonShouldHaveTheTaxon(TaxonInterface $taxon): void
+    {
+        Assert::true($this->taxonomyFormElement->isTaxonChosen($taxon->getCode()));
+    }
+
+    /**
+     * @Then the product :product should not have the :taxon taxon
+     */
+    public function thisProductTaxonShouldNotHaveTheTaxon(TaxonInterface $taxon): void
+    {
+        Assert::false($this->taxonomyFormElement->isTaxonChosen($taxon->getCode()));
     }
 }
