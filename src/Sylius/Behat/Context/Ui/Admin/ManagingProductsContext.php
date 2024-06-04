@@ -777,9 +777,7 @@ final readonly class ManagingProductsContext implements Context
      */
     public function iShouldBeAbleToChooseTaxonForThisProduct(string $taxonName): void
     {
-        $currentPage = $this->resolveCurrentPage();
-
-        Assert::true($currentPage->isTaxonVisibleInMainTaxonList($taxonName));
+        Assert::true($this->productTaxonomyFormElement->isTaxonVisibleInMainTaxonList($taxonName));
     }
 
     /**
@@ -787,9 +785,7 @@ final readonly class ManagingProductsContext implements Context
      */
     public function iShouldNotBeAbleToChooseTaxonForThisProduct(string $taxonName): void
     {
-        $currentPage = $this->resolveCurrentPage();
-
-        Assert::false($currentPage->isTaxonVisibleInMainTaxonList($taxonName));
+        Assert::false($this->productTaxonomyFormElement->isTaxonVisibleInMainTaxonList($taxonName));
     }
 
     /**
@@ -814,9 +810,7 @@ final readonly class ManagingProductsContext implements Context
      */
     public function iChooseMainTaxon(TaxonInterface $taxon): void
     {
-        $currentPage = $this->resolveCurrentPage();
-
-        $currentPage->selectMainTaxon($taxon);
+        $this->productTaxonomyFormElement->selectMainTaxon($taxon->getName());
     }
 
     /**
@@ -844,21 +838,7 @@ final readonly class ManagingProductsContext implements Context
      */
     public function thisProductMainTaxonShouldBe(ProductInterface $product, string $taxonName): void
     {
-        $currentPage = $this->resolveCurrentPage();
-        $currentPage->open(['id' => $product->getId()]);
-
-        Assert::true($currentPage->hasMainTaxonWithName($taxonName));
-    }
-
-    /**
-     * @Then the product :product should have the :taxon taxon
-     */
-    public function thisProductTaxonShouldBe(ProductInterface $product, string $taxonName): void
-    {
-        $currentPage = $this->resolveCurrentPage();
-        $currentPage->open(['id' => $product->getId()]);
-
-        Assert::true($currentPage->isTaxonChosen($taxonName));
+        Assert::same($taxonName, $this->productTaxonomyFormElement->getMainTaxon());
     }
 
     /**

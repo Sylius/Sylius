@@ -14,13 +14,15 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
+use Sylius\Behat\Element\Admin\Product\ProductTaxonomyFormElementInterface;
 use Sylius\Behat\Page\Admin\Product\UpdateSimpleProductPageInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
+use Webmozart\Assert\Assert;
 
 final class ManagingProductTaxonsContext implements Context
 {
-    public function __construct(private UpdateSimpleProductPageInterface $updateSimpleProductPage)
+    public function __construct(private ProductTaxonomyFormElementInterface $productTaxonomyFormElement)
     {
     }
 
@@ -30,9 +32,7 @@ final class ManagingProductTaxonsContext implements Context
      */
     public function iAddTaxonToTheProduct(ProductInterface $product, TaxonInterface $taxon): void
     {
-        $this->updateSimpleProductPage->open(['id' => $product->getId()]);
-        $this->updateSimpleProductPage->selectProductTaxon($taxon);
-        $this->updateSimpleProductPage->saveChanges();
+        $this->productTaxonomyFormElement->checkProductTaxon($taxon);
     }
 
     /**
@@ -42,8 +42,22 @@ final class ManagingProductTaxonsContext implements Context
         ProductInterface $product,
         TaxonInterface $taxon,
     ): void {
-        $this->updateSimpleProductPage->open(['id' => $product->getId()]);
-        $this->updateSimpleProductPage->unselectProductTaxon($taxon);
-        $this->updateSimpleProductPage->saveChanges();
+        $this->productTaxonomyFormElement->uncheckProductTaxon($taxon);
+    }
+
+    /**
+     * @Then the product :product should have the :taxon taxon
+     */
+    public function thisProductTaxonShouldHaveTheTaxon(TaxonInterface $taxon): void
+    {
+        Assert::true($this->productTaxonomyFormElement->isTaxonChosen($taxon->getCode()));
+    }
+
+    /**
+     * @Then the product :product should not have the :taxon taxon
+     */
+    public function thisProductTaxonShouldNotHaveTheTaxon(TaxonInterface $taxon): void
+    {
+        Assert::false($this->productTaxonomyFormElement->isTaxonChosen($taxon->getCode()));
     }
 }

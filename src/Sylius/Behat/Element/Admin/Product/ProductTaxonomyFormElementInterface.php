@@ -17,19 +17,15 @@ use Sylius\Component\Taxonomy\Model\TaxonInterface;
 
 interface ProductTaxonomyFormElementInterface
 {
-    public function selectMainTaxon(TaxonInterface $taxon): void;
+    public function selectMainTaxon(string $taxonName): void;
 
-    public function hasMainTaxonWithName(string $taxonName): bool;
+    public function getMainTaxon(): string;
 
     public function checkProductTaxon(TaxonInterface $taxon): void;
 
-    public function selectProductTaxon(TaxonInterface $taxon): void;
-
-    public function unselectProductTaxon(TaxonInterface $taxon): void;
-
-    public function hasMainTaxon(): bool;
+    public function uncheckProductTaxon(TaxonInterface $taxon): void;
 
     public function isTaxonVisibleInMainTaxonList(string $taxonName): bool;
 
-    public function isTaxonChosen(string $taxonName): bool;
+    public function isTaxonChosen(string $taxonCode): bool;
 }
