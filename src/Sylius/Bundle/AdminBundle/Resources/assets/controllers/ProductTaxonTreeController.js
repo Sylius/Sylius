@@ -20,7 +20,6 @@ export default class extends Controller {
   connect() {
     this.tree = this.createInfiniteTree();
 
-    this.tree.on('click', (event) => this.handleTreeClick(event));
     this.tree.on('contentDidUpdate', () => this.updateIndeterminateState());
     this.tree.on('clusterDidChange', () => this.updateIndeterminateState());
     this.tree.on('checkNode', (node) => this.updateProductTaxons(node));
@@ -54,7 +53,7 @@ export default class extends Controller {
     }
 
     const toggler = `<span class="${treeOptions.togglerClass} ${togglerClass}" style="width: ${nodeMargin}px"></span>`;
-    const checkbox = `<span class="infinite-tree-check" style="width: ${nodeMargin}px;"><input class="form-check-input" type="checkbox" ${indeterminate && !checked ? 'data-indeterminate' : ''} ${checked ? 'checked' : ''}></span>`;
+    const checkbox = `<span class="infinite-tree-check" style="width: ${nodeMargin}px;"><input class="form-check-input" type="checkbox" data-action="product-taxon-tree#clickNode" ${indeterminate && !checked ? 'data-indeterminate' : ''} ${checked ? 'checked' : ''}></span>`;
     const treeNode = `<div class="infinite-tree-node" style="margin-left: ${(depth * nodeMargin)}px">${toggler}${checkbox}<span class="infinite-tree-title">${name}</span></div>`;
 
     return `<div
@@ -70,12 +69,9 @@ export default class extends Controller {
         </div>`;
   }
 
-  handleTreeClick(event) {
-    const currentNode = this.tree.getNodeFromPoint(event.clientX, event.clientY);
-    if (currentNode && event.target.classList.contains('form-check-input')) {
-      event.stopPropagation();
-      this.checkNode(currentNode);
-    }
+  clickNode(event) {
+    const id = event.target.closest('.infinite-tree-item').dataset.id;
+    this.checkNode(this.tree.getNodeById(id));
   }
 
   checkNode(node, checked) {
@@ -163,10 +159,10 @@ export default class extends Controller {
 
   uncheckAll(event) {
     event.preventDefault();
-    this.toggleAllNodes(event, false);
+    this.toggleAllNodes(false);
   }
 
-  toggleAllNodes(event, isChecked) {
+  toggleAllNodes(isChecked) {
     this.tree.nodes.forEach((node) => {
       if (!this.tree.filtered || node.state.filtered) {
         this.checkNode(node, isChecked);
