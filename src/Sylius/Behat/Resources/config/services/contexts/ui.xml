@@ -231,7 +231,6 @@
         </service>
 
         <service id="Sylius\Behat\Context\Ui\Admin\ManagingProductTaxonsContext">
-            <argument type="service" id="sylius.behat.page.admin.product.update_simple" />
             <argument type="service" id="sylius.behat.element.admin.product.taxonomy_form" />
         </service>
 

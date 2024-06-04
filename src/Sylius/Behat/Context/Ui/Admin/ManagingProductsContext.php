@@ -810,7 +810,7 @@ final readonly class ManagingProductsContext implements Context
      */
     public function iChooseMainTaxon(TaxonInterface $taxon): void
     {
-        $this->taxonomyFormElement->selectMainTaxon($taxon);
+        $this->taxonomyFormElement->selectMainTaxon($taxon->getName());
     }
 
     /**
@@ -838,15 +838,7 @@ final readonly class ManagingProductsContext implements Context
      */
     public function thisProductMainTaxonShouldBe(ProductInterface $product, string $taxonName): void
     {
-        Assert::true($this->taxonomyFormElement->hasMainTaxonWithName($taxonName));
-    }
-
-    /**
-     * @Then the product :product should have the :taxon taxon
-     */
-    public function thisProductTaxonShouldBe(ProductInterface $product, string $taxonName): void
-    {
-        Assert::true($this->taxonomyFormElement->isTaxonChosen($taxonName));
+        Assert::same($taxonName, $this->taxonomyFormElement->getMainTaxon());
     }
 
     /**

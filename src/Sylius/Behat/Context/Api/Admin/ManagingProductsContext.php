@@ -707,6 +707,20 @@ final class ManagingProductsContext implements Context
     }
 
     /**
+     * @Then the product :product should not have the :taxon taxon
+     */
+    public function thisProductTaxonShouldHaveNotTheTaxon(ProductInterface $product, TaxonInterface $taxon): void
+    {
+        $this->client->index(Resources::PRODUCT_TAXONS);
+        Assert::false(
+            $this->responseChecker->hasItemWithValues($this->client->getLastResponse(), [
+                'product' => $this->sectionAwareIriConverter->getIriFromResourceInSection($product, 'admin'),
+                'taxon' => $this->sectionAwareIriConverter->getIriFromResourceInSection($taxon, 'admin'),
+            ]),
+        );
+    }
+
+    /**
      * @Then /^(this product) name should be "([^"]+)" in ("([^"]+)" locale)$/
      */
     public function thisProductNameShouldBe(ProductInterface $product, string $name, string $localeCode): void
