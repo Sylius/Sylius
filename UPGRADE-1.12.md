@@ -1,3 +1,15 @@
+# UPGRADING FROM `v1.12.16` TO `v1.12.17`
+
+1. Due to a bug that was causing wrong calculation of available stock during completing a payment [REF](https://github.com/Sylius/Sylius/issues/16160),
+   The constructor of `Sylius\Bundle\CoreBundle\EventListener\PaymentPreCompleteListener` has been modified as follows:
+
+   ```diff
+    public function __construct(
+    +   private OrderItemAvailabilityCheckerInterface $orderItemAvailabilityChecker,
+    -   private AvailabilityCheckerInterface $availabilityChecker,
+    )
+    ```
+
 # UPGRADING FROM `v1.12.13` TO `v1.12.14`
 
 1. The `Accept-Language` header should now correctly resolve locale codes based on RFC 4647 using Symfony's request language negotiation,
