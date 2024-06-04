@@ -19,6 +19,7 @@ use Doctrine\ORM\QueryBuilder;
 use Sylius\Bundle\ApiBundle\Context\UserContextInterface;
 use Sylius\Bundle\ApiBundle\Serializer\ContextKeys;
 use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Core\OrderCheckoutStates;
 use Symfony\Component\HttpFoundation\Request;
 
 final class OrderVisitorItemExtension implements QueryItemExtensionInterface
@@ -51,14 +52,20 @@ final class OrderVisitorItemExtension implements QueryItemExtensionInterface
         $queryBuilder
             ->leftJoin(sprintf('%s.customer', $rootAlias), 'customer')
             ->leftJoin('customer.user', 'user')
-            ->andWhere($queryBuilder->expr()->orX(
-                'user IS NULL',
-                sprintf('%s.customer IS NULL', $rootAlias),
-                $queryBuilder->expr()->andX(
-                    sprintf('%s.customer IS NOT NULL', $rootAlias),
-                    sprintf('%s.createdByGuest = :createdByGuest', $rootAlias),
+            ->andWhere(
+                $queryBuilder->expr()->orX(
+                    $queryBuilder->expr()->andX(
+                        $queryBuilder->expr()->isNotNull('user'),
+                        $queryBuilder->expr()->neq(sprintf('%s.checkoutState', $rootAlias), ':checkoutState'),
+                        $queryBuilder->expr()->eq(sprintf('%s.createdByGuest', $rootAlias), ':createdByGuest'),
+                    ),
+                    $queryBuilder->expr()->andX(
+                        $queryBuilder->expr()->isNull('user'),
+                        $queryBuilder->expr()->eq(sprintf('%s.createdByGuest', $rootAlias), ':createdByGuest'),
+                    ),
                 ),
-            ))->setParameter('createdByGuest', true)
+            )->setParameter('createdByGuest', true)
+            ->setParameter('checkoutState', OrderCheckoutStates::STATE_COMPLETED)
         ;
 
         $httpRequestMethodType = $context[ContextKeys::HTTP_REQUEST_METHOD_TYPE];

@@ -21,6 +21,7 @@ use Prophecy\Argument;
 use Sylius\Bundle\ApiBundle\Context\UserContextInterface;
 use Sylius\Bundle\ApiBundle\Serializer\ContextKeys;
 use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Core\OrderCheckoutStates;
 use Sylius\Component\User\Model\UserInterface;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -60,26 +61,45 @@ final class OrderVisitorItemExtensionSpec extends ObjectBehavior
             ->willReturn($expr)
         ;
 
+        $expr->isNotNull('user')->shouldBeCalled()->willReturn('user IS NOT NULL');
+        $expr->neq('o.checkoutState', ':checkoutState')->shouldBeCalled()->willReturn('o.checkoutState != :checkoutState');
+        $expr->eq('o.createdByGuest', ':createdByGuest')->shouldBeCalled()->willReturn('o.createdByGuest = :createdByGuest');
+
+        $expr
+            ->andX('user IS NOT NULL', 'o.checkoutState != :checkoutState', 'o.createdByGuest = :createdByGuest')
+            ->shouldBeCalled()
+            ->willReturn('user IS NOT NULL AND o.checkoutState != :checkoutState AND o.createdByGuest = :createdByGuest')
+        ;
+
+        $expr->isNull('user')->shouldBeCalled()->willReturn('user IS NULL');
+        $expr->eq('o.createdByGuest', ':createdByGuest')->shouldBeCalled()->willReturn('o.createdByGuest = :createdByGuest');
+
+        $expr
+            ->andX('user IS NULL', 'o.createdByGuest = :createdByGuest')
+            ->shouldBeCalled()
+            ->willReturn('user IS NULL AND o.createdByGuest = :createdByGuest')
+        ;
+
+        $expr
+            ->orX('user IS NOT NULL AND o.checkoutState != :checkoutState AND o.createdByGuest = :createdByGuest', 'user IS NULL AND o.createdByGuest = :createdByGuest')
+            ->shouldBeCalled()
+            ->willReturn('(user IS NOT NULL AND o.checkoutState != :checkoutState AND o.createdByGuest = :createdByGuest) OR (user IS NULL AND o.createdByGuest = :createdByGuest)')
+        ;
+
+        $queryBuilder
+            ->andWhere('(user IS NOT NULL AND o.checkoutState != :checkoutState AND o.createdByGuest = :createdByGuest) OR (user IS NULL AND o.createdByGuest = :createdByGuest)')
+            ->shouldBeCalled()
+            ->willReturn($queryBuilder)
+        ;
+
         $queryBuilder
             ->setParameter('createdByGuest', true)
             ->shouldBeCalled()
-            ->willReturn($expr)
-        ;
-
-        $expr
-            ->andX('o.customer IS NOT NULL', 'o.createdByGuest = :createdByGuest')
-            ->shouldBeCalled()
-            ->willReturn('o.customer IS NOT NULL AND o.createdByGuest = :createdByGuest')
-        ;
-
-        $expr
-            ->orX('user IS NULL', 'o.customer IS NULL', 'o.customer IS NOT NULL AND o.createdByGuest = :createdByGuest')
-            ->shouldBeCalled()
-            ->willReturn('user IS NULL OR o.customer IS NULL OR (o.customer IS NOT NULL AND o.createdByGuest = :createdByGuest)')
+            ->willReturn($queryBuilder)
         ;
 
         $queryBuilder
-            ->andWhere('user IS NULL OR o.customer IS NULL OR (o.customer IS NOT NULL AND o.createdByGuest = :createdByGuest)')
+            ->setParameter('checkoutState', OrderCheckoutStates::STATE_COMPLETED)
             ->shouldBeCalled()
             ->willReturn($queryBuilder)
         ;
@@ -161,26 +181,45 @@ final class OrderVisitorItemExtensionSpec extends ObjectBehavior
             ->willReturn($expr)
         ;
 
+        $expr->isNotNull('user')->shouldBeCalled()->willReturn('user IS NOT NULL');
+        $expr->neq('o.checkoutState', ':checkoutState')->shouldBeCalled()->willReturn('o.checkoutState != :checkoutState');
+        $expr->eq('o.createdByGuest', ':createdByGuest')->shouldBeCalled()->willReturn('o.createdByGuest = :createdByGuest');
+
+        $expr
+            ->andX('user IS NOT NULL', 'o.checkoutState != :checkoutState', 'o.createdByGuest = :createdByGuest')
+            ->shouldBeCalled()
+            ->willReturn('user IS NOT NULL AND o.checkoutState != :checkoutState AND o.createdByGuest = :createdByGuest')
+        ;
+
+        $expr->isNull('user')->shouldBeCalled()->willReturn('user IS NULL');
+        $expr->eq('o.createdByGuest', ':createdByGuest')->shouldBeCalled()->willReturn('o.createdByGuest = :createdByGuest');
+
+        $expr
+            ->andX('user IS NULL', 'o.createdByGuest = :createdByGuest')
+            ->shouldBeCalled()
+            ->willReturn('user IS NULL AND o.createdByGuest = :createdByGuest')
+        ;
+
+        $expr
+            ->orX('user IS NOT NULL AND o.checkoutState != :checkoutState AND o.createdByGuest = :createdByGuest', 'user IS NULL AND o.createdByGuest = :createdByGuest')
+            ->shouldBeCalled()
+            ->willReturn('(user IS NOT NULL AND o.checkoutState != :checkoutState AND o.createdByGuest = :createdByGuest) OR (user IS NULL AND o.createdByGuest = :createdByGuest)')
+        ;
+
+        $queryBuilder
+            ->andWhere('(user IS NOT NULL AND o.checkoutState != :checkoutState AND o.createdByGuest = :createdByGuest) OR (user IS NULL AND o.createdByGuest = :createdByGuest)')
+            ->shouldBeCalled()
+            ->willReturn($queryBuilder)
+        ;
+
         $queryBuilder
             ->setParameter('createdByGuest', true)
             ->shouldBeCalled()
-            ->willReturn($expr)
-        ;
-
-        $expr
-            ->andX('o.customer IS NOT NULL', 'o.createdByGuest = :createdByGuest')
-            ->shouldBeCalled()
-            ->willReturn('o.customer IS NOT NULL AND o.createdByGuest = :createdByGuest')
-        ;
-
-        $expr
-            ->orX('user IS NULL', 'o.customer IS NULL', 'o.customer IS NOT NULL AND o.createdByGuest = :createdByGuest')
-            ->shouldBeCalled()
-            ->willReturn('user IS NULL OR o.customer IS NULL OR (o.customer IS NOT NULL AND o.createdByGuest = :createdByGuest)')
+            ->willReturn($queryBuilder)
         ;
 
         $queryBuilder
-            ->andWhere('user IS NULL OR o.customer IS NULL OR (o.customer IS NOT NULL AND o.createdByGuest = :createdByGuest)')
+            ->setParameter('checkoutState', OrderCheckoutStates::STATE_COMPLETED)
             ->shouldBeCalled()
             ->willReturn($queryBuilder)
         ;
