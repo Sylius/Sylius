@@ -23,7 +23,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 abstract class AbstractResourceFixture implements FixtureInterface
 {
-    private OptionsResolver $optionsResolver;
+    protected OptionsResolver $optionsResolver;
 
     public function __construct(private ObjectManager $objectManager, private ExampleFactoryInterface $exampleFactory)
     {

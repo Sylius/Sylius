@@ -8,6 +8,7 @@ sylius_fixtures:
                 cap_taxon:
                     name: taxon
                     options:
+                        random: 7
                         custom:
                             category:
                                 code: 'MENU_CATEGORY'
