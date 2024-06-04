@@ -15,20 +15,13 @@ namespace Sylius\Behat\Page\Admin\Product;
 
 use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Session;
-use Sylius\Behat\Behaviour\SpecifiesItsField;
 use Sylius\Behat\Page\Admin\Crud\CreatePage as BaseCreatePage;
-use Sylius\Behat\Service\AutocompleteHelper;
 use Sylius\Behat\Service\DriverHelper;
 use Sylius\Behat\Service\Helper\AutocompleteHelperInterface;
-use Sylius\Component\Core\Model\TaxonInterface;
 use Symfony\Component\Routing\RouterInterface;
-use Webmozart\Assert\Assert;
 
 class CreateConfigurableProductPage extends BaseCreatePage implements CreateConfigurableProductPageInterface
 {
-    use SpecifiesItsField;
-    use FormTrait;
-
     public function __construct(
         Session $session,
         $minkParameters,
@@ -46,86 +39,68 @@ class CreateConfigurableProductPage extends BaseCreatePage implements CreateConf
         parent::create();
     }
 
-    public function hasMainTaxonWithName(string $taxonName): bool
+    public function specifyCode(string $code): void
     {
-        $this->openTaxonBookmarks();
-        $mainTaxonElement = $this->getElement('main_taxon')->getParent();
-
-        return $taxonName === $mainTaxonElement->find('css', '.search > .text')->getText();
+        $this->getElement('code')->setValue($code);
     }
 
-    public function selectMainTaxon(TaxonInterface $taxon): void
+    public function specifyField(string $field, string $value): void
     {
-        $this->openTaxonBookmarks();
-
-        $mainTaxonElement = $this->getElement('main_taxon')->getParent();
-
-        AutocompleteHelper::chooseValue($this->getSession(), $mainTaxonElement, $taxon->getName());
+        $this->getElement(lcfirst($field))->setValue($value);
     }
 
-    public function activateLanguageTab(string $localeCode): void
+    public function selectOption(string $optionName): void
     {
-        if (DriverHelper::isNotJavascript($this->getDriver())) {
-            return;
-        }
+        $this->changeTab();
+        $productOptionsAutocomplete = $this->getElement('product_options_autocomplete');
 
-        $languageTabTitle = $this->getElement('language_tab', ['%localeCode%' => $localeCode]);
-        if (!$languageTabTitle->hasClass('active')) {
-            $languageTabTitle->click();
-        }
+        $this->autocompleteHelper->selectByName($this->getDriver(), $productOptionsAutocomplete->getXpath(), $optionName);
     }
 
-    public function getAttributeValidationErrors(string $attributeName, string $localeCode): string
-    {
-        $this->clickTabIfItsNotActive('attributes');
-
-        $validationError = $this->getElement('attribute')->find('css', '.sylius-validation-error');
-
-        return $validationError->getText();
-    }
-
+    /**
+     * @return string[]
+     */
     protected function getDefinedElements(): array
     {
         return array_merge(
             parent::getDefinedElements(),
             [
-                'attribute' => '.attribute',
-                'code' => '#sylius_product_code',
-                'images' => '#sylius_product_images',
-                'language_tab' => '[data-locale="%localeCode%"] .title',
-                'main_taxon' => '#sylius_product_mainTaxon',
-                'name' => '#sylius_product_translations_en_US_name',
-                'options_choice' => '#sylius_product_options',
-                'search' => '.ui.fluid.search.selection.dropdown',
-                'search_item_selected' => 'div.menu > div.item.selected',
-                'slug' => '#sylius_product_translations_en_US_slug',
-                'tab' => '.menu [data-tab="%name%"]',
-                'taxonomy' => 'a[data-tab="taxonomy"]',
+                'channel' => '[data-test-channel-code="%channel_code%"]',
+                'channel_tab' => '[data-test-channel-tab="%channelCode%"]',
+                'channels' => '[data-test-channels]',
+                'code' => '[data-test-code]',
+                'enabled' => '[data-test-enabled]',
+                'form' => '[data-live-name-value="sylius_admin:product:form"]',
+                'product_options_autocomplete' => '[data-test-product-options-autocomplete]',
+                'side_navigation_tab' => '[data-test-side-navigation-tab="%name%"]',
             ],
-            $this->getDefinedFormElements(),
         );
     }
 
-    private function openTaxonBookmarks(): void
+    protected function getElement(string $name, array $parameters = []): NodeElement
     {
-        $this->getElement('taxonomy')->click();
-    }
-
-    private function clickTabIfItsNotActive(string $tabName): void
-    {
-        $attributesTab = $this->getElement('tab', ['%name%' => $tabName]);
-        if (!$attributesTab->hasClass('active')) {
-            $attributesTab->click();
+        if (!isset($parameters['%locale%'])) {
+            $parameters['%locale%'] = 'en_US';
         }
+
+        return parent::getElement($name, $parameters);
     }
 
-    private function getLastImageElement(): NodeElement
+    private function waitForFormUpdate(): void
     {
-        $images = $this->getElement('images');
-        $items = $images->findAll('css', 'div[data-form-collection="item"]');
+        $form = $this->getElement('form');
+        sleep(1); // we need to sleep, as sometimes the check below is executed faster than the form sets the busy attribute
+        $form->waitFor(1500, function () use ($form) {
+            return !$form->hasAttribute('busy');
+        });
+    }
 
-        Assert::notEmpty($items);
+    private function changeTab(): void
+    {
+        if (DriverHelper::isNotJavascript($this->getDriver())) {
+            return;
+        }
 
-        return end($items);
+        $this->getElement('side_navigation_tab', ['%name%' => 'details'])->click();
     }
 }

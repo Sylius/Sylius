@@ -1,0 +1,8 @@
+{% set form = hookable_metadata.context.form %}
+{% set product = hookable_metadata.context.product %}
+
+{% if product.isSimple %}
+    <div class="mb-3">
+        {{ form_row(form.variant.shippingRequired) }}
+    </div>
+{% endif %}

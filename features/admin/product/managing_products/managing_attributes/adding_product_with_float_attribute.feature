@@ -14,6 +14,7 @@ Feature: Adding a new product with a float attribute
         When I want to create a new configurable product
         And I specify its code as "display_size"
         And I name it "Smartphone" in "English (United States)"
+        And I set its slug to "smartphone"
         And I add the "Display Size" attribute to it
         And I set its non-translatable "Display Size" attribute to 12.5
         And I add it
@@ -26,6 +27,7 @@ Feature: Adding a new product with a float attribute
         When I want to create a new configurable product
         And I specify its code as "44_MAGNUM"
         And I name it "44 Magnum" in "English (United States)"
+        And I set its slug to "44-magnum"
         And I set the invalid string value of the non-translatable "Display Size" attribute to "12.5"
         And I try to add it
         Then I should be notified that the value of the "Display Size" attribute has invalid type

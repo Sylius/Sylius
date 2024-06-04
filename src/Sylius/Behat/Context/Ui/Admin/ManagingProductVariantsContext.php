@@ -399,9 +399,9 @@ final class ManagingProductVariantsContext implements Context
     /**
      * @When /^I change its price to "(?:€|£|\$)([^"]+)" for ("[^"]+" channel)$/
      */
-    public function iChangeItsPriceToForChannel(int $originalPrice, ChannelInterface $channel): void
+    public function iChangeItsPriceToForChannel(int $price, ChannelInterface $channel): void
     {
-        $this->updatePage->specifyPrice($originalPrice, $channel);
+        $this->updatePage->specifyPrice($price, $channel);
     }
 
     /**

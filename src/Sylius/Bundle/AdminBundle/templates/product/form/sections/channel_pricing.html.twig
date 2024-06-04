@@ -14,7 +14,7 @@
                     <div>
                         {{ _icon({ 'icon': 'danger', 'class': 'alert-icon' }) }}
                     </div>
-                    <div>
+                    <div {{ sylius_test_html_attribute('missing-channel-price') }}>
                         {% set first_error = variant_form.channelPricings.vars.errors|first %}
                         {{ first_error.messageTemplate|trans({}, 'validators') }}
                     </div>
@@ -52,7 +52,8 @@
                                     {{ 'sylius.ui.product.product_not_active_in_channel'|trans }}
                                 </div>
                             {% endif %}
-                            {{ form_row(channel_pricing, {'label': false}) }}
+
+                            {% hook 'channel_pricing' with { channel_code, channel_pricing } %}
                         </div>
                     {% endfor %}
                 </div>

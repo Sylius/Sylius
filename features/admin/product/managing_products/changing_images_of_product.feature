@@ -28,7 +28,7 @@ Feature: Changing images of an existing product
         Then I should be notified that it has been successfully edited
         And this product should have an image with "thumbnail" type
 
-    @ui @javascript @api
+    @ui @mink:chromedriver @api
     Scenario: Changing the type of image of a simple product
         Given the store has a product "Lamborghini Gallardo Model"
         And this product has an image "lamborghini.jpg" with "thumbnail" type
@@ -40,7 +40,7 @@ Feature: Changing images of an existing product
         And this product should still have 2 images
         But it should not have any images with "thumbnail" type
 
-    @ui @javascript @api
+    @ui @mink:chromedriver @api
     Scenario: Changing the type of image of a configurable product
         Given the store has a "Lamborghini Gallardo Model" configurable product
         And this product has an image "lamborghini.jpg" with "thumbnail" type

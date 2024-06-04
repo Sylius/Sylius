@@ -19,16 +19,15 @@ use Sylius\Behat\Behaviour\ChecksCodeImmutability;
 use Sylius\Behat\Page\Admin\Crud\UpdatePage as BaseUpdatePage;
 use Sylius\Behat\Service\AutocompleteHelper;
 use Sylius\Behat\Service\Helper\AutocompleteHelperInterface;
-use Sylius\Component\Core\Model\ProductVariantInterface;
-use Sylius\Component\Taxonomy\Model\TaxonInterface;
 use Symfony\Component\Routing\RouterInterface;
-use Webmozart\Assert\Assert;
 
 class UpdateConfigurableProductPage extends BaseUpdatePage implements UpdateConfigurableProductPageInterface
 {
     use ChecksCodeImmutability;
-    use FormTrait;
 
+    /**
+     * @param array<array-key, string> $minkParameters
+     */
     public function __construct(
         Session $session,
         $minkParameters,
@@ -39,29 +38,11 @@ class UpdateConfigurableProductPage extends BaseUpdatePage implements UpdateConf
         parent::__construct($session, $minkParameters, $router, $routeName);
     }
 
-    private array $imageUrls = [];
-
     public function saveChanges(): void
     {
         $this->waitForFormUpdate();
 
         parent::saveChanges();
-    }
-
-    public function setMetaKeywords(string $keywords, string $localeCode): void
-    {
-        $this->getDocument()->fillField(
-            sprintf('sylius_product_translations_%s_metaKeywords', $localeCode),
-            $keywords,
-        );
-    }
-
-    public function setMetaDescription(string $description, string $localeCode): void
-    {
-        $this->getDocument()->fillField(
-            sprintf('sylius_product_translations_%s_metaDescription', $localeCode),
-            $description,
-        );
     }
 
     public function isProductOptionChosen(string $option): bool
@@ -76,49 +57,14 @@ class UpdateConfigurableProductPage extends BaseUpdatePage implements UpdateConf
         return 'disabled' === $this->getElement('options')->getAttribute('disabled');
     }
 
-    public function hasMainTaxonWithName(string $taxonName): bool
+    public function hasTab(string $name): bool
     {
-        $this->openTaxonBookmarks();
-        $mainTaxonElement = $this->getElement('main_taxon')->getParent();
-
-        return $taxonName === $mainTaxonElement->find('css', '.search > .text')->getText();
+        return $this->hasElement('side_navigation_tab', ['%name%' => $name]);
     }
 
-    public function selectMainTaxon(TaxonInterface $taxon): void
+    public function checkChannel(string $channelCode): void
     {
-        $this->openTaxonBookmarks();
-
-        $this->getDriver()->executeScript(sprintf('$(\'input.search\').val(\'%s\')', $taxon->getName()));
-        $this->getElement('search')->click();
-        $this->getElement('search')->waitFor(10, fn () => $this->hasElement('search_item_selected'));
-        $itemSelected = $this->getElement('search_item_selected');
-        $itemSelected->click();
-    }
-
-    public function checkChannel(string $channelName): void
-    {
-        $this->getElement('channel_checkbox', ['%channel%' => $channelName])->check();
-    }
-
-    public function isImageWithTypeDisplayed(string $type): bool
-    {
-        $imageElement = $this->getImageElementByType($type);
-
-        $imageUrl = $imageElement ? $imageElement->find('css', 'img')->getAttribute('src') : $this->provideImageUrlForType($type);
-        if (null === $imageElement && null === $imageUrl) {
-            return false;
-        }
-
-        $this->getDriver()->visit($imageUrl);
-        $statusCode = $this->getDriver()->getStatusCode();
-        $this->getDriver()->back();
-
-        return in_array($statusCode, [200, 304], true);
-    }
-
-    public function hasLastImageAVariant(ProductVariantInterface $productVariant): bool
-    {
-        return $this->hasImageWithVariant($productVariant);
+        $this->getElement('channel', ['%channel_code%' => $channelCode])->check();
     }
 
     public function goToVariantsList(): void
@@ -136,99 +82,65 @@ class UpdateConfigurableProductPage extends BaseUpdatePage implements UpdateConf
         $this->getDocument()->clickLink('Generate');
     }
 
+    public function specifyCode(string $code): void
+    {
+        $this->getElement('code')->setValue($code);
+    }
+
+    public function specifyField(string $field, string $value): void
+    {
+        $this->getElement(lcfirst($field))->setValue($value);
+    }
+
+    public function selectOption(string $optionName): void
+    {
+        $this->changeTab('details');
+        $productOptionsAutocomplete = $this->getElement('product_options_autocomplete');
+
+        $this->autocompleteHelper->selectByName($this->getDriver(), $productOptionsAutocomplete->getXpath(), $optionName);
+    }
+
     protected function getCodeElement(): NodeElement
     {
         return $this->getElement('code');
     }
 
+    /**
+     * @return string[]
+     */
     protected function getDefinedElements(): array
     {
         return array_merge(
             parent::getDefinedElements(),
             [
-                'channel_checkbox' => '.checkbox:contains("%channel%") input',
-                'channels' => '#sylius_product_channels',
-                'code' => '#sylius_product_code',
-                'images' => '#sylius_product_images',
-                'main_taxon' => '#sylius_product_mainTaxon',
-                'name' => '#sylius_product_translations_en_US_name',
-                'options' => '#sylius_product_options',
-                'price' => '#sylius_admin_product_variant_price',
-                'search' => '.ui.fluid.search.selection.dropdown',
-                'search_item_selected' => 'div.menu > div.item.selected',
-                'tab' => '.menu [data-tab="%name%"]',
-                'taxonomy' => 'a[data-tab="taxonomy"]',
+                'channel' => '[data-test-channel-code="%channel_code%"]',
+                'channel_tab' => '[data-test-channel-tab="%channelCode%"]',
+                'channels' => '[data-test-channels]',
+                'code' => '[data-test-code]',
+                'enabled' => '[data-test-enabled]',
+                'form' => '[data-live-name-value="sylius_admin:product:form"]',
+                'options' => '[data-test-options]',
+                'product_options_autocomplete' => '[data-test-product-options-autocomplete]',
+                'side_navigation_tab' => '[data-test-side-navigation-tab="%name%"]',
             ],
-            $this->getDefinedFormElements(),
         );
     }
 
-    private function openTaxonBookmarks(): void
+    protected function getElement(string $name, array $parameters = []): NodeElement
     {
-        $this->getElement('taxonomy')->click();
-    }
-
-    private function clickTabIfItsNotActive(string $tabName): void
-    {
-        $attributesTab = $this->getElement('tab', ['%name%' => $tabName]);
-        if (!$attributesTab->hasClass('active')) {
-            $attributesTab->click();
-        }
-    }
-
-    private function getImageElementByType(string $type): ?NodeElement
-    {
-        $images = $this->getElement('images');
-        $typeInput = $images->find('css', 'input[value="' . $type . '"]');
-
-        if (null === $typeInput) {
-            return null;
+        if (!isset($parameters['%locale%'])) {
+            $parameters['%locale%'] = 'en_US';
         }
 
-        return $typeInput->getParent()->getParent()->getParent();
+        return parent::getElement($name, $parameters);
     }
 
-    /**
-     * @return NodeElement[]
-     */
-    private function getImageElements(): array
+    private function waitForFormUpdate(): void
     {
-        $images = $this->getElement('images');
-
-        return $images->findAll('css', 'div[data-form-collection="item"]');
-    }
-
-    private function getLastImageElement(): NodeElement
-    {
-        $imageElements = $this->getImageElements();
-
-        Assert::notEmpty($imageElements);
-
-        return end($imageElements);
-    }
-
-    private function getFirstImageElement(): NodeElement
-    {
-        $imageElements = $this->getImageElements();
-
-        Assert::notEmpty($imageElements);
-
-        return reset($imageElements);
-    }
-
-    private function setImageType(NodeElement $imageElement, string $type): void
-    {
-        $typeField = $imageElement->findField('Type');
-        $typeField->setValue($type);
-    }
-
-    private function provideImageUrlForType(string $type): ?string
-    {
-        return $this->imageUrls[$type] ?? null;
-    }
-
-    private function saveImageUrlForType(string $type, string $imageUrl): void
-    {
-        $this->imageUrls[$type] = $imageUrl;
+        $form = $this->getElement('form');
+        sleep(1); // we need to sleep, as sometimes the check below is executed faster than the form sets the busy attribute
+        $form->waitFor(1500, function () use ($form) {
+            return !$form->hasAttribute('busy');
+        });
     }
 }

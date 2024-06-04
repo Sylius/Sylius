@@ -15,20 +15,13 @@ namespace Sylius\Behat\Page\Admin\Product;
 
 use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Session;
-use Sylius\Behat\Behaviour\SpecifiesItsField;
 use Sylius\Behat\Page\Admin\Crud\CreatePage as BaseCreatePage;
-use Sylius\Behat\Service\AutocompleteHelper;
 use Sylius\Behat\Service\DriverHelper;
 use Sylius\Behat\Service\Helper\AutocompleteHelperInterface;
-use Sylius\Component\Core\Model\TaxonInterface;
 use Symfony\Component\Routing\RouterInterface;
-use Webmozart\Assert\Assert;
 
 class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProductPageInterface
 {
-    use FormTrait;
-    use SpecifiesItsField;
-
     public function __construct(
         Session $session,
         $minkParameters,
@@ -51,102 +44,57 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
         parent::create();
     }
 
-    public function specifySlugIn(?string $slug, string $locale): void
+    public function checkChannel(string $channelCode): void
     {
-        $this->activateLanguageTab($locale);
-
-        $this->getElement('slug', ['%locale%' => $locale])->setValue($slug);
-    }
-
-    public function addNonTranslatableAttribute(string $attributeName, string $value): void
-    {
-        $this->clickTabIfItsNotActive('attributes');
-
-        $attributeOption = $this->getElement('attributes_choice')->find('css', sprintf('option:contains("%s")', $attributeName));
-        $this->selectElementFromAttributesDropdown($attributeOption->getAttribute('value'));
-
-        $this->getDocument()->pressButton('Add attributes');
-        $this->waitForFormElement();
-
-        $this->getElement('non_translatable_attribute_value', ['%attributeName%' => $attributeName])->setValue($value);
-    }
-
-    public function getAttributeValidationErrors(string $attributeName, string $localeCode): string
-    {
-        $this->clickTabIfItsNotActive('attributes');
-
-        $validationError = $this->getElement('attribute')->find('css', '.sylius-validation-error');
-
-        return $validationError->getText();
-    }
-
-    public function checkAttributeErrors($attributeName, $localeCode): void
-    {
-        $this->clickTabIfItsNotActive('attributes');
-        $this->clickLocaleTabIfItsNotActive($localeCode);
-    }
-
-    public function selectMainTaxon(TaxonInterface $taxon): void
-    {
-        $this->openTaxonBookmarks();
-
-        $mainTaxonElement = $this->getElement('main_taxon')->getParent();
-
-        AutocompleteHelper::chooseValue($this->getSession(), $mainTaxonElement, $taxon->getName());
-    }
-
-    public function hasMainTaxonWithName(string $taxonName): bool
-    {
-        $this->openTaxonBookmarks();
-        $mainTaxonElement = $this->getElement('main_taxon')->getParent();
-
-        return $taxonName === $mainTaxonElement->find('css', '.search > .text')->getText();
-    }
-
-    public function checkProductTaxon(TaxonInterface $taxon): void
-    {
-        $this->openTaxonBookmarks();
-
-        $productTaxonsCodes = [];
-        $productTaxonsElement = $this->getElement('product_taxons');
-        if ($productTaxonsElement->getValue() !== '') {
-            $productTaxonsCodes = explode(',', $productTaxonsElement->getValue());
-        }
-        $productTaxonsCodes[] = $taxon->getCode();
-
-        $productTaxonsElement->setValue(implode(',', $productTaxonsCodes));
-    }
-
-    public function choosePricingCalculator(string $name): void
-    {
-        $this->getElement('price_calculator')->selectOption($name);
-    }
-
-    public function checkChannel(string $channelName): void
-    {
-        $this->getElement('channel_checkbox', ['%channelName%' => $channelName])->check();
-    }
-
-    public function activateLanguageTab(string $locale): void
-    {
-        if (DriverHelper::isNotJavascript($this->getDriver())) {
-            return;
-        }
-
-        $languageTabTitle = $this->getElement('language_tab', ['%locale%' => $locale]);
-        if (!$languageTabTitle->hasClass('active')) {
-            $languageTabTitle->click();
-        }
-    }
-
-    public function getChannelPricingValidationMessage(): string
-    {
-        return $this->getElement('prices_validation_message')->getText();
+        $this->getElement('channel', ['%channel_code%' => $channelCode])->check();
     }
 
     public function cancelChanges(): void
     {
         $this->getElement('cancel_button')->click();
+    }
+
+    private function changeTab(string $tabName): void
+    {
+        if (DriverHelper::isNotJavascript($this->getDriver())) {
+            return;
+        }
+
+        $this->getElement('side_navigation_tab', ['%name%' => $tabName])->click();
+    }
+
+    public function specifyCode(string $code): void
+    {
+        $this->getElement('code')->setValue($code);
+    }
+
+    public function specifyField(string $field, string $value): void
+    {
+        $this->getElement($field)->setValue($value);
+    }
+
+    public function selectShippingCategory(string $shippingCategoryName): void
+    {
+        $this->changeTab('shipping');
+        $this->getElement('field_shipping_category')->selectOption($shippingCategoryName);
+    }
+
+    public function setShippingRequired(bool $isShippingRequired): void
+    {
+        $this->changeTab('details');
+
+        if ($isShippingRequired) {
+            $this->getElement('field_shipping_required')->check();
+
+            return;
+        }
+
+        $this->getElement('field_shipping_required')->uncheck();
+    }
+
+    public function isShippingRequired(): bool
+    {
+        return $this->getElement('field_shipping_required')->isChecked();
     }
 
     protected function getElement(string $name, array $parameters = []): NodeElement
@@ -163,86 +111,24 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
         return array_merge(
             parent::getDefinedElements(),
             [
-                'association_dropdown' => '.field > label:contains("%association%") ~ .product-select',
-                'association_dropdown_item' => '.field > label:contains("%association%") ~ .product-select > div.menu > div.item:contains("%item%")',
-                'association_dropdown_item_selected' => '.field > label:contains("%association%") ~ .product-select > a.label:contains("%item%")',
-                'attribute' => '.attribute',
-                'attribute_delete_button' => '#attributesContainer .attributes-group .attributes-header:contains("%attributeName%") button',
-                'attribute_value' => '#attributesContainer [data-test-product-attribute-value-in-locale="%attributeName% %localeCode%"] input',
-                'attribute_value_select' => '#attributesContainer [data-test-product-attribute-value-in-locale="%attributeName% %localeCode%"] select',
-                'attributes_choice' => '#sylius_product_attribute_choice',
-                'cancel_button' => '[data-test-cancel-changes-button]',
-                'channel_checkbox' => '.checkbox:contains("%channelName%") input',
-                'code' => '#sylius_product_code',
-                'form' => 'form[name="sylius_product"]',
-                'images' => '#sylius_product_images',
-                'language_tab' => '[data-locale="%locale%"] .title',
-                'locale_tab' => '#attributesContainer .menu [data-tab="%localeCode%"]',
-                'main_taxon' => '#sylius_product_mainTaxon',
-                'product_taxons' => '#sylius_product_productTaxons',
-                'name' => '#sylius_product_translations_%locale%_name',
-                'non_translatable_attribute_value' => '#attributesContainer [data-test-product-attribute-value-in-locale="%attributeName% "] input',
-                'original_price' => '#sylius_admin_product_variant_channelPricings_%channelCode%_originalPrice',
-                'price' => '#sylius_admin_product_variant_channelPricings_%channelCode%_price',
-                'prices_validation_message' => '#sylius_admin_product_variant_channelPricings ~ .sylius-validation-error, #sylius_admin_product_variant_channelPricings .sylius-validation-error',
-                'price_calculator' => '#sylius_admin_product_variant_pricingCalculator',
-                'shipping_category' => '#sylius_admin_product_variant_shippingCategory',
-                'shipping_required' => '#sylius_admin_product_variant_shippingRequired',
-                'slug' => '#sylius_product_translations_%locale%_slug',
-                'tab' => '.menu [data-tab="%name%"]',
-                'taxonomy' => 'a[data-tab="taxonomy"]',
-                'toggle_slug_modification_button' => '.toggle-product-slug-modification',
+                'channel' => '[data-test-channel-code="%channel_code%"]',
+                'code' => '[data-test-code]',
+                'enabled' => '[data-test-enabled]',
+                'field_shipping_category' => '[name="sylius_admin_product[variant][shippingCategory]"]',
+                'field_shipping_required' => '[name="sylius_admin_product[variant][shippingRequired]"]',
+                'form' => '[data-live-name-value="sylius_admin:product:form"]',
+                'product_translation_accordion' => '[data-test-product-translations-accordion="%localeCode%"]',
+                'side_navigation_tab' => '[data-test-side-navigation-tab="%name%"]',
             ],
-            $this->getDefinedFormElements(),
         );
     }
 
-    private function openTaxonBookmarks(): void
-    {
-        $this->getElement('taxonomy')->click();
-    }
-
-    private function selectElementFromAttributesDropdown(string $id): void
-    {
-        $this->getDriver()->executeScript('$(\'#sylius_product_attribute_choice\').dropdown(\'show\');');
-        $this->getDriver()->executeScript(sprintf('$(\'#sylius_product_attribute_choice\').dropdown(\'set selected\', \'%s\');', $id));
-    }
-
-    private function waitForFormElement(int $timeout = 5): void
+    private function waitForFormUpdate(): void
     {
         $form = $this->getElement('form');
-        $this->getDocument()->waitFor($timeout, fn () => !str_contains($form->getAttribute('class'), 'loading'));
-    }
-
-    private function clickTabIfItsNotActive(string $tabName): void
-    {
-        $attributesTab = $this->getElement('tab', ['%name%' => $tabName]);
-        if (!$attributesTab->hasClass('active')) {
-            $attributesTab->click();
-        }
-    }
-
-    private function clickTab(string $tabName): void
-    {
-        $attributesTab = $this->getElement('tab', ['%name%' => $tabName]);
-        $attributesTab->click();
-    }
-
-    private function clickLocaleTabIfItsNotActive(string $localeCode): void
-    {
-        $localeTab = $this->getElement('locale_tab', ['%localeCode%' => $localeCode]);
-        if (!$localeTab->hasClass('active')) {
-            $localeTab->click();
-        }
-    }
-
-    private function getLastImageElement(): NodeElement
-    {
-        $images = $this->getElement('images');
-        $items = $images->findAll('css', 'div[data-form-collection="item"]');
-
-        Assert::notEmpty($items);
-
-        return end($items);
+        sleep(1); // we need to sleep, as sometimes the check below is executed faster than the form sets the busy attribute
+        $form->waitFor(1500, function () use ($form) {
+            return !$form->hasAttribute('busy');
+        });
     }
 }

@@ -15,6 +15,7 @@ Feature: Adding a new product with an integer attribute
         When I want to create a new configurable product
         And I specify its code as "44_MAGNUM"
         And I name it "44 Magnum" in "English (United States)"
+        And I set its slug to "44-magnum"
         And I add the "Production year" attribute to it
         And I set the "Production year" attribute value to 1955 in "English (United States)"
         And I add it
@@ -27,6 +28,7 @@ Feature: Adding a new product with an integer attribute
         When I want to create a new configurable product
         And I specify its code as "44_MAGNUM"
         And I name it "44 Magnum" in "English (United States)"
+        And I set its slug to "44-magnum"
         And I add the "Weight" attribute to it
         And I set its non-translatable "Weight" attribute to 10
         And I add it

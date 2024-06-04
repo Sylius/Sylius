@@ -8,21 +8,7 @@
                 <h2 id="shipping" class="card-title">{{ 'sylius.ui.shipping'|trans }}</h2>
             </div>
             <div class="card-body">
-                <div class="mb-3">
-                    {{ form_row( variant_form.shippingCategory) }}
-                </div>
-                <div class="mb-3">
-                    {{ form_row( variant_form.width) }}
-                </div>
-                <div class="mb-3">
-                    {{ form_row( variant_form.height) }}
-                </div>
-                <div class="mb-3">
-                    {{ form_row( variant_form.depth) }}
-                </div>
-                <div class="mb-3">
-                    {{ form_row( variant_form.weight) }}
-                </div>
+                {% hook 'shipping' %}
             </div>
         </div>
     </div>

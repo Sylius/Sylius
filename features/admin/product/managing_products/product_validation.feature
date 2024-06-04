@@ -13,7 +13,7 @@ Feature: Products validation
         And this product attribute has set min value as 3 and max value as 30
         And I am logged in as an administrator
 
-    @todo @ui @no-api
+    @ui @no-api
     Scenario: Adding a new simple product without specifying its code
         When I want to create a new simple product
         And I name it "Dice Brewing" in "English (United States)"
@@ -29,50 +29,52 @@ Feature: Products validation
         And I try to save my changes
         Then I should be notified that the locale is not available
 
-    @todo @ui @no-api
+    @ui @no-api
     Scenario: Adding a new simple product with duplicated code among products
         Given the store has a product "7 Wonders" with code "AWESOME_GAME"
         When I want to create a new simple product
         And I specify its code as "AWESOME_GAME"
         And I name it "Dice Brewing" in "English (United States)"
+        And I set its slug to "dice-brewing"
         And I set its price to "$10.00" for "Web" channel
         And I try to add it
         Then I should be notified that code has to be unique
         And product with name "Dice Brewing" should not be added
 
-    @todo @ui @no-api
+    @ui @no-api
     Scenario: Adding a new simple product with duplicated code among product variants
         Given the store has a product "7 Wonders"
         And this product has "7 Wonders: Cities" variant priced at "$30.00" identified by "AWESOME_GAME"
         When I want to create a new simple product
         And I specify its code as "AWESOME_GAME"
         And I name it "Dice Brewing" in "English (United States)"
+        And I set its slug to "dice-brewing"
         And I set its price to "$10.00" for "Web" channel
         And I try to add it
         Then I should be notified that simple product code has to be unique
         And product with name "Dice Brewing" should not be added
 
-    @todo @ui @no-api
+    @ui @no-api
     Scenario: Adding a new simple product without specifying its slug
         When I want to create a new simple product
         And I specify its code as "BOARD_DICE_BREWING"
         And I name it "Dice Brewing" in "English (United States)"
         And I set its price to "$10.00" for "Web" channel
-        And I remove its slug
         And I try to add it
         Then I should be notified that slug is required
         And product with name "Dice Brewing" should not be added
 
-    @todo @ui @no-api
+    @ui @no-api
     Scenario: Adding a new simple product without specifying its name
         When I want to create a new simple product
         And I specify its code as "BOARD_DICE_BREWING"
+        And I set its slug to "dice-brewing"
         And I set its price to "$10.00" for "Web" channel
         And I try to add it
         Then I should be notified that name is required
         And product with code "BOARD_DICE_BREWING" should not be added
 
-    @todo @ui @no-api
+    @ui @no-api
     Scenario: Adding a new simple product without specifying its price for every channel
         Given the store operates on another channel named "Web-GB"
         When I want to create a new simple product
@@ -81,11 +83,12 @@ Feature: Products validation
         And I make it available in channel "Web-GB"
         And I set its price to "$10.00" for "Web" channel
         And I name it "Dice Brewing" in "English (United States)"
+        And I set its slug to "dice-brewing"
         And I try to add it
         Then I should be notified that price must be defined for every channel
         And product with code "BOARD_DICE_BREWING" should not be added
 
-    @todo @ui @api
+    @ui @api
     Scenario: Adding a new configurable product without specifying its code
         When I want to create a new configurable product
         And I name it "Dice Brewing" in "English (United States)"
@@ -93,7 +96,7 @@ Feature: Products validation
         Then I should be notified that code is required
         And product with name "Dice Brewing" should not be added
 
-    @todo @ui @api
+    @ui @api
     Scenario: Adding a new configurable product with too long code
         When I want to create a new configurable product
         And I name it "Dice Brewing" in "English (United States)"
@@ -101,26 +104,27 @@ Feature: Products validation
         And I try to add it
         Then I should be notified that code is too long
 
-    @todo @ui @api
+    @ui @api
     Scenario: Adding a new configurable product with duplicated code
         Given the store has a product "7 Wonders" with code "AWESOME_GAME"
         When I want to create a new configurable product
         And I specify its code as "AWESOME_GAME"
         And I name it "Dice Brewing" in "English (United States)"
+        And I set its slug to "dice-brewing"
         And I try to add it
         Then I should be notified that code has to be unique
         And product with name "Dice Brewing" should not be added
 
-    @todo @ui @api
+    @ui @api
     Scenario: Adding a new configurable product without specifying its name
         When I want to create a new configurable product
         And I specify its code as "BOARD_DICE_BREWING"
-        When I do not name it
+        But I do not name it
         And I try to add it
         Then I should be notified that name is required
         And product with code "BOARD_DICE_BREWING" should not be added
 
-    @todo @ui @api
+    @ui @api
     Scenario: Trying to set too long meta keywords for a product
         Given the store has a "Dice Brewing" product
         When I want to modify this product
@@ -128,7 +132,7 @@ Feature: Products validation
         And I try to save my changes
         Then I should be notified that meta keywords are too long
 
-    @todo @ui @api
+    @ui @api
     Scenario: Trying to set too long meta keywords for a product
         Given the store has a "Dice Brewing" product
         When I want to modify this product
@@ -136,7 +140,7 @@ Feature: Products validation
         And I try to save my changes
         Then I should be notified that meta description is too long
 
-    @todo @ui @api
+    @ui @api
     Scenario: Trying to remove name from existing product
         Given the store has a "Dice Brewing" product
         When I want to modify this product
@@ -145,18 +149,18 @@ Feature: Products validation
         Then I should be notified that name is required
         And this product should still be named "Dice Brewing"
 
-    @todo @ui @api
-    Scenario: Trying to assign new channel to an existing configurable product without specifying its all variant prices for this channel
+    @ui @api
+    Scenario: Trying to enable a configurable product in another channel without specifying the variant prices for it
         Given the store has a "7 Wonders" configurable product
         And this product has "7 Wonders: Cities" variant priced at "$30.00"
         And this product has "7 Wonders: Leaders" variant priced at "$20.00"
         And the store operates on another channel named "Mobile Channel"
         When I want to modify the "7 Wonders" product
-        And I assign it to channel "Mobile Channel"
+        And I enable it in channel "Mobile Channel"
         And I save my changes
         Then I should be notified that I have to define product variants' prices for newly assigned channels first
 
-    @todo @ui @api
+    @ui @api
     Scenario: Adding a new product with duplicated slug
         Given the store has a "7 Wonders" configurable product with "7-wonders" slug
         When I want to create a new configurable product

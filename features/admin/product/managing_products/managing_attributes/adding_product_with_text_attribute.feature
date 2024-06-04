@@ -16,6 +16,7 @@ Feature: Adding a new product with text attribute
         When I want to create a new configurable product
         And I specify its code as "44_MAGNUM"
         And I name it "44 Magnum" in "English (United States)"
+        And I set its slug to "44-magnum"
         And I add the "Gun caliber" attribute
         And I set the "Gun caliber" attribute value to "11 mm" in "English (United States)"
         And I add it
@@ -28,6 +29,7 @@ Feature: Adding a new product with text attribute
         When I want to create a new configurable product
         And I specify its code as "44_MAGNUM"
         And I name it "44 Magnum" in "English (United States)"
+        And I set its slug to "44-magnum"
         And I add the "Author" attribute to it
         And I set its non-translatable "Author" attribute to "Colt"
         And I add it
@@ -40,6 +42,7 @@ Feature: Adding a new product with text attribute
         When I want to create a new configurable product
         And I specify its code as "44_MAGNUM"
         And I name it "44 Magnum" in "English (United States)"
+        And I set its slug to "44-magnum"
         And I add the "Gun caliber" attribute
         And I set the "Gun caliber" attribute value to "11 mm" in "English (United States)"
         And I add the "Overall length" attribute
@@ -56,6 +59,7 @@ Feature: Adding a new product with text attribute
         When I want to create a new configurable product
         And I specify its code as "44_MAGNUM"
         And I name it "44 Magnum" in "English (United States)"
+        And I set its slug to "44-magnum"
         And I set the invalid integer value of the non-translatable "Author" attribute to 5
         And I try to add it
         Then I should be notified that the value of the "Author" attribute has invalid type

@@ -15,6 +15,12 @@ namespace Sylius\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Context\Ui\Admin\Helper\ValidationTrait;
+use Sylius\Behat\Element\Admin\Product\ProductAssociationsFormElementInterface;
+use Sylius\Behat\Element\Admin\Product\ProductAttributesFormElementInterface;
+use Sylius\Behat\Element\Admin\Product\ProductChannelPricingsFormElementInterface;
+use Sylius\Behat\Element\Admin\Product\ProductMediaFormElementInterface;
+use Sylius\Behat\Element\Admin\Product\ProductTaxonomyFormElementInterface;
+use Sylius\Behat\Element\Admin\Product\ProductTranslationsFormElementInterface;
 use Sylius\Behat\NotificationType;
 use Sylius\Behat\Page\Admin\Crud\CreatePageInterface;
 use Sylius\Behat\Page\Admin\Crud\UpdatePageInterface;
@@ -39,7 +45,7 @@ use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Product\Model\ProductAssociationTypeInterface;
 use Webmozart\Assert\Assert;
 
-final class ManagingProductsContext implements Context
+final readonly class ManagingProductsContext implements Context
 {
     use ValidationTrait;
 
@@ -58,6 +64,12 @@ final class ManagingProductsContext implements Context
         private NotificationCheckerInterface $notificationChecker,
         private VariantUpdatePageInterface $variantUpdatePage,
         private JavaScriptTestHelperInterface $testHelper,
+        private ProductAssociationsFormElementInterface $productAssociationsFormElement,
+        private ProductAttributesFormElementInterface $productAttributesFormElement,
+        private ProductChannelPricingsFormElementInterface $productChannelPricingsFormElement,
+        private ProductMediaFormElementInterface $productMediaFormElement,
+        private ProductTaxonomyFormElementInterface $productTaxonomyFormElement,
+        private ProductTranslationsFormElementInterface $productTranslationsFormElement,
     ) {
     }
 
@@ -90,24 +102,43 @@ final class ManagingProductsContext implements Context
 
     /**
      * @When I do not name it
-     * @When I name it :name in :language
-     * @When I rename it to :name in :language
-     * @When I should be able to name it :name in :language
      */
-    public function iRenameItToIn(?string $name = null, ?string $language = null): void
+    public function iDoNotNameIt(): void
     {
-        if ($name !== null && $language !== null) {
-            $currentPage = $this->resolveCurrentPage();
+        // Intentionally left blank to fulfill context expectation
+    }
 
-            $currentPage->nameItIn($name, $language);
-        }
+    /**
+     * @When I name it :name in :localeCode
+     * @When I rename it to :name in :localeCode
+     * @When I should be able to name it :name in :localeCode
+     */
+    public function iRenameItToIn(string $name, string $localeCode): void
+    {
+        $this->productTranslationsFormElement->nameItIn($name, $localeCode);
+    }
+
+    /**
+     * @When I remove its name from :localeCode translation
+     */
+    public function iRemoveItsNameFromTranslation(string $localeCode): void
+    {
+        $this->productTranslationsFormElement->nameItIn('', $localeCode);
+    }
+
+    /**
+     * @When I generate its slug in :localeCode
+     */
+    public function iGenerateItsSlugIn(string $localeCode): void
+    {
+        $this->productTranslationsFormElement->generateSlug($localeCode);
     }
 
     /**
      * @When I add it
      * @When I try to add it
      */
-    public function iAddIt()
+    public function iAddIt(): void
     {
         /** @var CreatePageInterface $currentPage */
         $currentPage = $this->resolveCurrentPage();
@@ -118,7 +149,7 @@ final class ManagingProductsContext implements Context
     /**
      * @When I disable its inventory tracking
      */
-    public function iDisableItsTracking()
+    public function iDisableItsTracking(): void
     {
         $this->updateSimpleProductPage->disableTracking();
     }
@@ -126,7 +157,7 @@ final class ManagingProductsContext implements Context
     /**
      * @When I enable its inventory tracking
      */
-    public function iEnableItsTracking()
+    public function iEnableItsTracking(): void
     {
         $this->updateSimpleProductPage->enableTracking();
     }
@@ -134,52 +165,44 @@ final class ManagingProductsContext implements Context
     /**
      * @When /^I set its(?:| default) price to "(?:€|£|\$)([^"]+)" for ("([^"]+)" channel)$/
      */
-    public function iSetItsPriceTo(string $price, ChannelInterface $channel)
+    public function iSetItsPriceTo(string $price, ChannelInterface $channel): void
     {
-        $this->createSimpleProductPage->specifyPrice($channel, $price);
+        $this->productChannelPricingsFormElement->specifyPrice($channel, $price);
     }
 
     /**
      * @When /^I set its original price to "(?:€|£|\$)([^"]+)" for ("([^"]+)" channel)$/
      */
-    public function iSetItsOriginalPriceTo(int $originalPrice, ChannelInterface $channel)
+    public function iSetItsOriginalPriceTo(int $originalPrice, ChannelInterface $channel): void
     {
-        $this->createSimpleProductPage->specifyOriginalPrice($channel, $originalPrice);
+        $this->productChannelPricingsFormElement->specifyOriginalPrice($channel, $originalPrice);
     }
 
     /**
      * @When I make it available in channel :channel
      */
-    public function iMakeItAvailableInChannel(ChannelInterface $channel)
+    public function iMakeItAvailableInChannel(ChannelInterface $channel): void
     {
-        $this->createSimpleProductPage->checkChannel($channel->getName());
+        $this->createSimpleProductPage->checkChannel($channel->getCode());
     }
 
     /**
-     * @When I assign it to channel :channel
+     * @When I enable it in channel :channel
      */
-    public function iAssignItToChannel(ChannelInterface $channel)
+    public function iEnableItInChannel(ChannelInterface $channel): void
     {
         // Temporary solution until we will make current page resolver work with product pages
-        $this->updateConfigurableProductPage->checkChannel($channel->getName());
-    }
-
-    /**
-     * @When I choose :calculatorName calculator
-     */
-    public function iChooseCalculator($calculatorName)
-    {
-        $this->createSimpleProductPage->choosePricingCalculator($calculatorName);
+        $this->updateConfigurableProductPage->checkChannel($channel->getCode());
     }
 
     /**
      * @When I set its slug to :slug
-     * @When I set its slug to :slug in :language
+     * @When I set its slug to :slug in :localeCode
      * @When I remove its slug
      */
-    public function iSetItsSlugToIn(?string $slug = null, $language = 'en_US')
+    public function iSetItsSlugToIn(?string $slug = null, string $localeCode = 'en_US'): void
     {
-        $this->createSimpleProductPage->specifySlugIn($slug, $language);
+        $this->productTranslationsFormElement->specifySlugIn($slug, $localeCode);
     }
 
     /**
@@ -196,16 +219,6 @@ final class ManagingProductsContext implements Context
     public function iChooseToShowThisProductInThisChannel(): void
     {
         $this->updateSimpleProductPage->showProductInSingleChannel();
-    }
-
-    /**
-     * @When I enable slug modification
-     * @When I enable slug modification in :localeCode
-     */
-    public function iEnableSlugModification($localeCode = 'en_US')
-    {
-        $this->updateSimpleProductPage->activateLanguageTab($localeCode);
-        $this->updateSimpleProductPage->enableSlugModification($localeCode);
     }
 
     /**
@@ -259,7 +272,7 @@ final class ManagingProductsContext implements Context
      * @When I browse products
      * @When I want to browse products
      */
-    public function iWantToBrowseProducts()
+    public function iWantToBrowseProducts(): void
     {
         $this->indexPage->open();
     }
@@ -267,7 +280,7 @@ final class ManagingProductsContext implements Context
     /**
      * @When /^I am browsing products from ("([^"]+)" taxon)$/
      */
-    public function iAmBrowsingProductsFromTaxon(TaxonInterface $taxon)
+    public function iAmBrowsingProductsFromTaxon(TaxonInterface $taxon): void
     {
         $this->indexPerTaxonPage->open(['taxonId' => $taxon->getId()]);
     }
@@ -284,7 +297,7 @@ final class ManagingProductsContext implements Context
     /**
      * @When I filter them by :taxonName taxon
      */
-    public function iFilterThemByTaxon($taxonName)
+    public function iFilterThemByTaxon(string $taxonName): void
     {
         $this->indexPage->filterByTaxon($taxonName);
         $this->indexPage->filter();
@@ -293,7 +306,7 @@ final class ManagingProductsContext implements Context
     /**
      * @When I filter them by :taxonName main taxon
      */
-    public function iFilterThemByMainTaxon($taxonName)
+    public function iFilterThemByMainTaxon(string $taxonName): void
     {
         $this->indexPage->filterByMainTaxon($taxonName);
         $this->indexPage->filter();
@@ -318,7 +331,7 @@ final class ManagingProductsContext implements Context
     /**
      * @Then I should( still) see a product with :field :value
      */
-    public function iShouldSeeProductWith($field, $value)
+    public function iShouldSeeProductWith(string $field, string $value): void
     {
         Assert::true($this->indexPage->isSingleResourceOnPage([$field => $value]));
     }
@@ -326,7 +339,7 @@ final class ManagingProductsContext implements Context
     /**
      * @Then I should not see any product with :field :value
      */
-    public function iShouldNotSeeAnyProductWith($field, $value)
+    public function iShouldNotSeeAnyProductWith(string $field, string $value): void
     {
         Assert::false($this->indexPage->isSingleResourceOnPage([$field => $value]));
     }
@@ -335,7 +348,7 @@ final class ManagingProductsContext implements Context
      * @Then the first product on the list should have :field :value
      * @Then the first product on the list within this taxon should have :field :value
      */
-    public function theFirstProductOnTheListShouldHave($field, $value)
+    public function theFirstProductOnTheListShouldHave(string $field, string $value): void
     {
         $currentPage = $this->resolveCurrentPage();
 
@@ -392,7 +405,7 @@ final class ManagingProductsContext implements Context
      * @Then the last product on the list should have :field :value
      * @Then the last product on the list within this taxon should have :field :value
      */
-    public function theLastProductOnTheListShouldHave($field, $value)
+    public function theLastProductOnTheListShouldHave(string $field, string $value): void
     {
         $values = $this->indexPerTaxonPage->getColumnFields($field);
 
@@ -442,13 +455,13 @@ final class ManagingProductsContext implements Context
      */
     public function iShouldSeeProductsInTheList(int $numberOfProducts = 1): void
     {
-        Assert::same($this->indexPage->countItems(), (int) $numberOfProducts);
+        Assert::same($this->indexPage->countItems(), $numberOfProducts);
     }
 
     /**
      * @Then /^(this product) should not exist in the product catalog$/
      */
-    public function productShouldNotExist(ProductInterface $product)
+    public function productShouldNotExist(ProductInterface $product): void
     {
         $this->iWantToBrowseProducts();
 
@@ -458,18 +471,18 @@ final class ManagingProductsContext implements Context
     /**
      * @Then I should be notified that this product is in use and cannot be deleted
      */
-    public function iShouldBeNotifiedOfFailure()
+    public function iShouldBeNotifiedOfFailure(): void
     {
         $this->notificationChecker->checkNotification(
             'Cannot delete, the Product is in use.',
-            NotificationType::failure(),
+            NotificationType::error(),
         );
     }
 
     /**
      * @Then /^(this product) should still exist in the product catalog$/
      */
-    public function productShouldExistInTheProductCatalog(ProductInterface $product)
+    public function productShouldExistInTheProductCatalog(ProductInterface $product): void
     {
         $this->theProductShouldAppearInTheShop($product->getName());
     }
@@ -483,12 +496,6 @@ final class ManagingProductsContext implements Context
     public function iWantToModifyAProduct(ProductInterface $product): void
     {
         $this->sharedStorage->set('product', $product);
-
-        if ($product->isSimple()) {
-            $this->testHelper->waitUntilPageOpens($this->updateSimpleProductPage, ['id' => $product->getId()]);
-
-            return;
-        }
 
         $this->testHelper->waitUntilPageOpens($this->updateSimpleProductPage, ['id' => $product->getId()]);
     }
@@ -512,28 +519,29 @@ final class ManagingProductsContext implements Context
     }
 
     /**
-     * @Then the slug field should not be editable
-     * @Then the slug field in :localeCode (also )should not be editable
-     */
-    public function theSlugFieldShouldNotBeEditable($localeCode = 'en_US')
-    {
-        Assert::true($this->updateSimpleProductPage->isSlugReadonlyIn($localeCode));
-    }
-
-    /**
      * @Then this product name should be :name
      */
-    public function thisProductElementShouldBe($name)
+    public function thisProductNameShouldBe(string $name, string $localeCode = 'en_US'): void
     {
-        $this->assertElementValue('name', $name);
+        Assert::true(
+            $this->productTranslationsFormElement->hasNameInLocale($name, $localeCode),
+            sprintf('Product should have "%s" name in "%s" locale.', $name, $localeCode),
+        );
     }
 
     /**
      * @Then /^I should be notified that (code|name|slug) is required$/
      */
-    public function iShouldBeNotifiedThatIsRequired($element)
+    public function iShouldBeNotifiedThatIsRequired(string $element, string $localeCode = 'en_US'): void
     {
-        $this->assertValidationMessage($element, sprintf('Please enter product %s.', $element));
+        $validationMessage = match($element) {
+            'name' => $this->productTranslationsFormElement->getValidationMessage('name', ['%locale_code%' => $localeCode]),
+            'slug' => $this->productTranslationsFormElement->getValidationMessage('slug', ['%locale_code%' => $localeCode]),
+            'code' => $this->resolveCurrentPage()->getValidationMessage('code'),
+            default => throw new \InvalidArgumentException(sprintf('There is no validation message for "%s" element.', $element)),
+        };
+
+        Assert::same($validationMessage, sprintf('Please enter product %s.', $element));
     }
 
     /**
@@ -541,7 +549,10 @@ final class ManagingProductsContext implements Context
      */
     public function iShouldBeNotifiedThatMetaKeywordsAreTooLong(): void
     {
-        $this->assertValidationMessage('meta_keywords', 'Product meta keywords must not be longer than 255 characters.');
+        Assert::same(
+            $this->productTranslationsFormElement->getValidationMessage('meta_keywords', ['%locale_code%' => 'en_US']),
+            'Product meta keywords must not be longer than 255 characters.',
+        );
     }
 
     /**
@@ -549,7 +560,10 @@ final class ManagingProductsContext implements Context
      */
     public function iShouldBeNotifiedThatMetaDescriptionIsTooLong(): void
     {
-        $this->assertValidationMessage('meta_description', 'Product meta description must not be longer than 255 characters.');
+        Assert::same(
+            $this->productTranslationsFormElement->getValidationMessage('meta_description', ['%locale_code%' => 'en_US']),
+            'Product meta description must not be longer than 255 characters.',
+        );
     }
 
     /**
@@ -557,7 +571,7 @@ final class ManagingProductsContext implements Context
      * @When I try to save my changes
      * @When I save my changes to the images
      */
-    public function iSaveMyChanges()
+    public function iSaveMyChanges(): void
     {
         $currentPage = $this->resolveCurrentPage();
 
@@ -577,23 +591,23 @@ final class ManagingProductsContext implements Context
     /**
      * @When /^I change its price to (?:€|£|\$)([^"]+) for ("([^"]+)" channel)$/
      */
-    public function iChangeItsPriceTo(string $price, ChannelInterface $channel)
+    public function iChangeItsPriceTo(string $price, ChannelInterface $channel): void
     {
-        $this->updateSimpleProductPage->specifyPrice($channel, $price);
+        $this->productChannelPricingsFormElement->specifyPrice($channel, $price);
     }
 
     /**
      * @When /^I change its original price to "(?:€|£|\$)([^"]+)" for ("([^"]+)" channel)$/
      */
-    public function iChangeItsOriginalPriceTo(string $price, ChannelInterface $channel)
+    public function iChangeItsOriginalPriceTo(int $originalPrice, ChannelInterface $channel): void
     {
-        $this->updateSimpleProductPage->specifyOriginalPrice($channel, $price);
+        $this->productChannelPricingsFormElement->specifyOriginalPrice($channel, $originalPrice);
     }
 
     /**
      * @Given I add the :optionName option to it
      */
-    public function iAddTheOptionToIt($optionName)
+    public function iAddTheOptionToIt(string $optionName): void
     {
         $this->createConfigurableProductPage->selectOption($optionName);
     }
@@ -604,7 +618,7 @@ final class ManagingProductsContext implements Context
      */
     public function iAddTheAttribute(string $attributeName): void
     {
-        $this->createSimpleProductPage->addAttribute($attributeName);
+        $this->productAttributesFormElement->addAttribute($attributeName);
     }
 
     /**
@@ -612,17 +626,17 @@ final class ManagingProductsContext implements Context
      * @When I do not set its :attributeName attribute in :localeCode
      * @When I set the :attributeName attribute value to :value in :localeCode
      */
-    public function iSetItsAttributeTo(string $attributeName, ?string $value = null, $localeCode = 'en_US'): void
+    public function iSetItsAttributeTo(string $attributeName, ?string $value = null, string $localeCode = 'en_US'): void
     {
-        $this->createSimpleProductPage->updateAttribute($attributeName, $value ?? '', $localeCode);
+        $this->productAttributesFormElement->updateAttribute($attributeName, $value ?? '', $localeCode);
     }
 
     /**
-     * @When I select :value value in :language for the :attribute attribute
+     * @When I select :value value in :localeCode for the :attribute attribute
      */
-    public function iSelectValueInLanguageForTheAttribute(string $value, string $language, string $attribute): void
+    public function iSelectValueInLanguageForTheAttribute(string $value, string $localeCode, string $attribute): void
     {
-        $this->createSimpleProductPage->updateAttribute($attribute, $value, $language);
+        $this->productAttributesFormElement->updateAttribute($attribute, $value, $localeCode);
     }
 
     /**
@@ -630,7 +644,7 @@ final class ManagingProductsContext implements Context
      */
     public function iSelectValueForTheAttribute(string $value, string $attribute): void
     {
-        $this->createSimpleProductPage->updateAttribute($attribute, $value, '');
+        $this->productAttributesFormElement->updateAttribute($attribute, $value, '');
     }
 
     /**
@@ -638,43 +652,43 @@ final class ManagingProductsContext implements Context
      */
     public function iSetItsNonTranslatableAttributeTo(string $attributeName, string $value): void
     {
-        $this->createSimpleProductPage->updateAttribute($attributeName, $value, '');
+        $this->productAttributesFormElement->updateAttribute($attributeName, $value, '');
     }
 
     /**
      * @When I remove its :attribute attribute
-     * @When I remove its :attribute attribute from :language
+     * @When I remove its :attribute attribute from :localeCode
      */
-    public function iRemoveItsAttribute($attribute, $language = 'en_US')
+    public function iRemoveItsAttribute(string $attribute, string $localeCode = 'en_US'): void
     {
-        $this->createSimpleProductPage->removeAttribute($attribute, $language);
+        $this->productAttributesFormElement->removeAttribute($attribute, $localeCode);
     }
 
     /**
      * @When I try to add new attributes
      */
-    public function iTryToAddNewAttributes()
+    public function iTryToAddNewAttributes(): void
     {
-        $this->updateSimpleProductPage->addSelectedAttributes();
+        $this->productAttributesFormElement->addSelectedAttributes();
     }
 
     /**
      * @When I do not want to have shipping required for this product
      */
-    public function iDoNotWantToHaveShippingRequiredForThisProduct()
+    public function iDoNotWantToHaveShippingRequiredForThisProduct(): void
     {
         $this->createSimpleProductPage->setShippingRequired(false);
     }
 
     /**
      * @Then attribute :attributeName of product :product should be :value
-     * @Then attribute :attributeName of product :product should be :value in :language
+     * @Then attribute :attributeName of product :product should be :value in :localeCode
      */
-    public function itsAttributeShouldBe($attributeName, ProductInterface $product, $value, $language = 'en_US')
+    public function itsAttributeShouldBe(string $attributeName, ProductInterface $product, string $value, string $localeCode = 'en_US'): void
     {
         $this->updateSimpleProductPage->open(['id' => $product->getId()]);
 
-        Assert::same($this->updateSimpleProductPage->getAttributeValue($attributeName, $language), $value);
+        Assert::same($this->productAttributesFormElement->getAttributeValue($attributeName, $localeCode), $value);
     }
 
     /**
@@ -689,7 +703,7 @@ final class ManagingProductsContext implements Context
     ): void {
         $this->updateSimpleProductPage->open(['id' => $product->getId()]);
 
-        Assert::same($this->updateSimpleProductPage->getAttributeValue($attributeName, $localeCode), $value);
+        Assert::same($this->productAttributesFormElement->getAttributeValue($attributeName, $localeCode), $value);
     }
 
     /**
@@ -699,32 +713,32 @@ final class ManagingProductsContext implements Context
     {
         $this->updateSimpleProductPage->open(['id' => $product->getId()]);
 
-        Assert::same($this->updateSimpleProductPage->getAttributeValue($attributeName, ''), $value);
+        Assert::same($this->productAttributesFormElement->getAttributeValue($attributeName, ''), $value);
     }
 
     /**
      * @Then /^(product "[^"]+") should not have a "([^"]+)" attribute$/
      */
-    public function productShouldNotHaveAttribute(ProductInterface $product, $attribute)
+    public function productShouldNotHaveAttribute(ProductInterface $product, string $attribute): void
     {
         $this->updateSimpleProductPage->open(['id' => $product->getId()]);
 
-        Assert::false($this->updateSimpleProductPage->hasAttribute($attribute));
+        Assert::false($this->productAttributesFormElement->hasAttribute($attribute));
     }
 
     /**
      * @Then /^product "[^"]+" should not have any attributes$/
      * @Then /^product "[^"]+" should have (\d+) attributes?$/
      */
-    public function productShouldNotHaveAnyAttributes($count = 0)
+    public function productShouldNotHaveAnyAttributes(int $count = 0): void
     {
-        Assert::same($this->updateSimpleProductPage->getNumberOfAttributes(), (int) $count);
+        Assert::same($this->productAttributesFormElement->getNumberOfAttributes(), $count);
     }
 
     /**
      * @Then product with :element :value should not be added
      */
-    public function productWithNameShouldNotBeAdded($element, $value)
+    public function productWithNameShouldNotBeAdded(string $element, string $value): void
     {
         $this->iWantToBrowseProducts();
 
@@ -732,29 +746,19 @@ final class ManagingProductsContext implements Context
     }
 
     /**
-     * @When I remove its name from :language translation
+     * @When I set its meta keywords to too long string in :localeCode
      */
-    public function iRemoveItsNameFromTranslation($language)
+    public function iSetItsMetaKeywordsToTooLongStringIn(string $localeCode): void
     {
-        $currentPage = $this->resolveCurrentPage();
-
-        $currentPage->nameItIn('', $language);
+        $this->productTranslationsFormElement->setMetaKeywords(str_repeat('a', 256), $localeCode);
     }
 
     /**
-     * @When I set its meta keywords to too long string in :language
+     * @When I set its meta description to too long string in :localeCode
      */
-    public function iSetItsMetaKeywordsToTooLongStringIn(string $language): void
+    public function iSetItsMetaDescriptionToTooLongStringIn(string $localeCode): void
     {
-        $this->updateConfigurableProductPage->setMetaKeywords(str_repeat('a', 256), $language);
-    }
-
-    /**
-     * @When I set its meta description to too long string in :language
-     */
-    public function iSetItsMetaDescriptionToTooLongStringIn(string $language): void
-    {
-        $this->updateConfigurableProductPage->setMetaDescription(str_repeat('a', 256), $language);
+        $this->productTranslationsFormElement->setMetaDescription(str_repeat('a', 256), $localeCode);
     }
 
     /**
@@ -791,7 +795,7 @@ final class ManagingProductsContext implements Context
     /**
      * @Then /^this product should have (?:a|an) "([^"]+)" option$/
      */
-    public function thisProductShouldHaveOption($productOption)
+    public function thisProductShouldHaveOption(string $productOption): void
     {
         $this->updateConfigurableProductPage->isProductOptionChosen($productOption);
     }
@@ -808,7 +812,7 @@ final class ManagingProductsContext implements Context
      * @When /^I choose main (taxon "[^"]+")$/
      * @Then /^I should be able to choose main (taxon "[^"]+")$/
      */
-    public function iChooseMainTaxon(TaxonInterface $taxon)
+    public function iChooseMainTaxon(TaxonInterface $taxon): void
     {
         $currentPage = $this->resolveCurrentPage();
 
@@ -820,25 +824,25 @@ final class ManagingProductsContext implements Context
      */
     public function iShouldSeeNonTranslatableAttributeWithValue(string $attribute, string $value): void
     {
-        Assert::true($this->updateSimpleProductPage->hasNonTranslatableAttributeWithValue($attribute, $value));
+        Assert::true($this->productAttributesFormElement->hasNonTranslatableAttributeWithValue($attribute, $value));
     }
 
     /**
      * @Then /^the slug of the ("[^"]+" product) should(?:| still) be "([^"]+)"$/
      * @Then /^the slug of the ("[^"]+" product) should(?:| still) be "([^"]+)" (in the "[^"]+" locale)$/
      */
-    public function productSlugShouldBe(ProductInterface $product, $slug, $locale = 'en_US')
+    public function productSlugShouldBe(ProductInterface $product, string $slug, string $locale = 'en_US'): void
     {
         $this->updateSimpleProductPage->open(['id' => $product->getId()]);
 
-        Assert::same($this->updateSimpleProductPage->getSlug($locale), $slug);
+        Assert::same($this->productTranslationsFormElement->getSlug($locale), $slug);
     }
 
     /**
      * @Then /^(this product) main taxon should be "([^"]+)"$/
      * @Then /^main taxon of (product "[^"]+") should be "([^"]+)"$/
      */
-    public function thisProductMainTaxonShouldBe(ProductInterface $product, $taxonName)
+    public function thisProductMainTaxonShouldBe(ProductInterface $product, string $taxonName): void
     {
         $currentPage = $this->resolveCurrentPage();
         $currentPage->open(['id' => $product->getId()]);
@@ -860,7 +864,7 @@ final class ManagingProductsContext implements Context
     /**
      * @Then /^inventory of (this product) should not be tracked$/
      */
-    public function thisProductShouldNotBeTracked(ProductInterface $product)
+    public function thisProductShouldNotBeTracked(ProductInterface $product): void
     {
         $this->iWantToModifyAProduct($product);
 
@@ -870,7 +874,7 @@ final class ManagingProductsContext implements Context
     /**
      * @Then /^inventory of (this product) should be tracked$/
      */
-    public function thisProductShouldBeTracked(ProductInterface $product)
+    public function thisProductShouldBeTracked(ProductInterface $product): void
     {
         $this->iWantToModifyAProduct($product);
 
@@ -885,9 +889,7 @@ final class ManagingProductsContext implements Context
      */
     public function iAttachImageWithType(string $path, ?string $type = null): void
     {
-        $currentPage = $this->resolveCurrentPage();
-
-        $currentPage->attachImage($path, $type);
+        $this->productMediaFormElement->attachImage($path, $type);
     }
 
     /**
@@ -897,7 +899,7 @@ final class ManagingProductsContext implements Context
         string $path,
         ProductVariantInterface $productVariant,
     ): void {
-        $this->updateConfigurableProductPage->attachImage(path: $path, productVariant: $productVariant);
+        $this->productMediaFormElement->attachImage(path: $path, productVariant: $productVariant);
     }
 
     /**
@@ -905,7 +907,7 @@ final class ManagingProductsContext implements Context
      */
     public function iSelectVariantForTheFirstImage(ProductVariantInterface $productVariant): void
     {
-        $this->updateConfigurableProductPage->selectVariantForFirstImage($productVariant);
+        $this->productMediaFormElement->selectVariantForFirstImage($productVariant);
     }
 
     /**
@@ -915,11 +917,9 @@ final class ManagingProductsContext implements Context
      */
     public function iAssociateProductsAsProductAssociation(
         ProductAssociationTypeInterface $productAssociationType,
-        ...$productsNames,
-    ) {
-        $currentPage = $this->resolveCurrentPage();
-
-        $currentPage->associateProducts($productAssociationType, $productsNames);
+        string ...$productsNames,
+    ): void {
+        $this->productAssociationsFormElement->associateProducts($productAssociationType, $productsNames);
     }
 
     /**
@@ -928,10 +928,8 @@ final class ManagingProductsContext implements Context
     public function iRemoveAnAssociatedProductFromProductAssociation(
         ProductInterface $product,
         ProductAssociationTypeInterface $productAssociationType,
-    ) {
-        $currentPage = $this->resolveCurrentPage();
-
-        $currentPage->removeAssociatedProduct($product, $productAssociationType);
+    ): void {
+        $this->productAssociationsFormElement->removeAssociatedProduct($product, $productAssociationType);
     }
 
     /**
@@ -963,9 +961,7 @@ final class ManagingProductsContext implements Context
      */
     public function thisProductShouldHaveAnImageWithType(string $type): void
     {
-        $currentPage = $this->resolveCurrentPage();
-
-        Assert::true($currentPage->hasImageWithType($type));
+        Assert::true($this->productMediaFormElement->hasImageWithType($type));
     }
 
     /**
@@ -973,7 +969,7 @@ final class ManagingProductsContext implements Context
      */
     public function itsImageShouldHaveVariantSelected(ProductVariantInterface $productVariant): void
     {
-        Assert::true($this->updateConfigurableProductPage->hasLastImageAVariant($productVariant));
+        Assert::true($this->productMediaFormElement->hasLastImageAVariant($productVariant));
     }
 
     /**
@@ -987,81 +983,67 @@ final class ManagingProductsContext implements Context
     /**
      * @Then /^(?:this product|it)(?:| also) should not have any images with "([^"]*)" type$/
      */
-    public function thisProductShouldNotHaveAnyImagesWithType($code)
+    public function thisProductShouldNotHaveAnyImagesWithType(string $code): void
     {
-        $currentPage = $this->resolveCurrentPage();
-
-        Assert::false($currentPage->hasImageWithType($code));
+        Assert::false($this->productMediaFormElement->hasImageWithType($code));
     }
 
     /**
      * @When I change the image with the :type type to :path
      */
-    public function iChangeItsImageToPathForTheType($type, $path)
+    public function iChangeItsImageToPathForTheType(string $type, string $path): void
     {
-        $currentPage = $this->resolveCurrentPage();
-
-        $currentPage->changeImageWithType($type, $path);
+        $this->productMediaFormElement->changeImageWithType($type, $path);
     }
 
     /**
      * @When /^I(?:| also) remove an image with "([^"]*)" type$/
      */
-    public function iRemoveAnImageWithType($code)
+    public function iRemoveAnImageWithType(string $code): void
     {
-        $currentPage = $this->resolveCurrentPage();
-
-        $currentPage->removeImageWithType($code);
+        $this->productMediaFormElement->removeImageWithType($code);
     }
 
     /**
      * @When I remove the first image
      */
-    public function iRemoveTheFirstImage()
+    public function iRemoveTheFirstImage(): void
     {
-        $currentPage = $this->resolveCurrentPage();
-
-        $currentPage->removeFirstImage();
+        $this->productMediaFormElement->removeFirstImage();
     }
 
     /**
      * @When I change the first image type to :type
      */
-    public function iChangeTheFirstImageTypeTo($type)
+    public function iChangeTheFirstImageTypeTo(string $type): void
     {
-        $currentPage = $this->resolveCurrentPage();
-
-        $currentPage->modifyFirstImageType($type);
+        $this->productMediaFormElement->modifyFirstImageType($type);
     }
 
     /**
      * @Then /^(this product) should not have any images$/
      */
-    public function thisProductShouldNotHaveImages(ProductInterface $product)
+    public function thisProductShouldNotHaveImages(ProductInterface $product): void
     {
         $this->iWantToModifyAProduct($product);
 
-        $currentPage = $this->resolveCurrentPage();
-
-        Assert::same($currentPage->countImages(), 0);
+        Assert::same($this->productMediaFormElement->countImages(), 0);
     }
 
     /**
      * @Then /^(this product) should(?:| still) have (?:only one|(\d+)) images?$/
      */
-    public function thereShouldStillBeOnlyOneImageInThisProduct(ProductInterface $product, $count = 1)
+    public function thereShouldStillBeOnlyOneImageInThisProduct(ProductInterface $product, int $count = 1): void
     {
         $this->iWantToModifyAProduct($product);
 
-        $currentPage = $this->resolveCurrentPage();
-
-        Assert::same($currentPage->countImages(), (int) $count);
+        Assert::same($this->productMediaFormElement->countImages(), $count);
     }
 
     /**
      * @Then /^there should be no reviews of (this product)$/
      */
-    public function thereAreNoProductReviews(ProductInterface $product)
+    public function thereAreNoProductReviews(ProductInterface $product): void
     {
         $this->productReviewIndexPage->open();
 
@@ -1074,9 +1056,9 @@ final class ManagingProductsContext implements Context
     public function theProductShouldHaveAnAssociationWithProduct(
         ProductAssociationTypeInterface $productAssociationType,
         ProductInterface $product,
-    ) {
+    ): void {
         Assert::true(
-            $this->updateSimpleProductPage->hasAssociatedProduct($product, $productAssociationType),
+            $this->productAssociationsFormElement->hasAssociatedProduct($product, $productAssociationType),
             sprintf(
                 'This product should have an association %s with product %s.',
                 $productAssociationType->getName(),
@@ -1107,7 +1089,7 @@ final class ManagingProductsContext implements Context
         ProductAssociationTypeInterface $productAssociationType,
         ProductInterface $product,
     ): void {
-        Assert::false($this->updateSimpleProductPage->hasAssociatedProduct($product, $productAssociationType));
+        Assert::false($this->productAssociationsFormElement->hasAssociatedProduct($product, $productAssociationType));
     }
 
     /**
@@ -1116,7 +1098,7 @@ final class ManagingProductsContext implements Context
     public function iShouldBeNotifiedThatOriginalPriceCanNotBeDefinedWithoutPrice(): void
     {
         Assert::same(
-            $this->createSimpleProductPage->getChannelPricingValidationMessage(),
+            $this->productChannelPricingsFormElement->getChannelPricingValidationMessage(),
             'Original price can not be defined without price',
         );
     }
@@ -1124,7 +1106,7 @@ final class ManagingProductsContext implements Context
     /**
      * @Then I should be notified that simple product code has to be unique
      */
-    public function iShouldBeNotifiedThatSimpleProductCodeHasToBeUnique()
+    public function iShouldBeNotifiedThatSimpleProductCodeHasToBeUnique(): void
     {
         $this->assertValidationMessage('code', 'Simple product code must be unique among all products and product variants.');
     }
@@ -1132,15 +1114,18 @@ final class ManagingProductsContext implements Context
     /**
      * @Then I should be notified that slug has to be unique
      */
-    public function iShouldBeNotifiedThatSlugHasToBeUnique()
+    public function iShouldBeNotifiedThatSlugHasToBeUnique(): void
     {
-        $this->assertValidationMessage('slug', 'Product slug must be unique.');
+        Assert::same(
+            $this->productTranslationsFormElement->getValidationMessage('slug', ['%locale_code%' => 'en_US']),
+            'Product slug must be unique.',
+        );
     }
 
     /**
      * @Then I should be notified that code has to be unique
      */
-    public function iShouldBeNotifiedThatCodeHasToBeUnique()
+    public function iShouldBeNotifiedThatCodeHasToBeUnique(): void
     {
         $this->assertValidationMessage('code', 'Product code must be unique.');
     }
@@ -1148,10 +1133,10 @@ final class ManagingProductsContext implements Context
     /**
      * @Then I should be notified that price must be defined for every channel
      */
-    public function iShouldBeNotifiedThatPriceMustBeDefinedForEveryChannel()
+    public function iShouldBeNotifiedThatPriceMustBeDefinedForEveryChannel(): void
     {
         Assert::same(
-            $this->createSimpleProductPage->getChannelPricingValidationMessage(),
+            $this->productChannelPricingsFormElement->getChannelPricingValidationMessage(),
             'You must define price for every enabled channel.',
         );
     }
@@ -1159,7 +1144,7 @@ final class ManagingProductsContext implements Context
     /**
      * @Then they should have order like :firstProductName, :secondProductName and :thirdProductName
      */
-    public function theyShouldHaveOrderLikeAnd(...$productNames)
+    public function theyShouldHaveOrderLikeAnd(string ...$productNames): void
     {
         Assert::true($this->indexPerTaxonPage->hasProductsInOrder($productNames));
     }
@@ -1167,7 +1152,7 @@ final class ManagingProductsContext implements Context
     /**
      * @When I save my new configuration
      */
-    public function iSaveMyNewConfiguration()
+    public function iSaveMyNewConfiguration(): void
     {
         $this->indexPerTaxonPage->savePositions();
     }
@@ -1189,19 +1174,19 @@ final class ManagingProductsContext implements Context
     }
 
     /**
-     * @Then this product should( still) have slug :value in :language (locale)
+     * @Then this product should( still) have slug :value in :localeCode (locale)
      */
-    public function thisProductElementShouldHaveSlugIn($slug, $language)
+    public function thisProductElementShouldHaveSlugIn(string $slug, string $localeCode): void
     {
-        $this->testHelper->waitUntilAssertionPasses(function () use ($language, $slug): void {
-            Assert::same($this->updateSimpleProductPage->getSlug($language), $slug);
+        $this->testHelper->waitUntilAssertionPasses(function () use ($localeCode, $slug): void {
+            Assert::same($this->productTranslationsFormElement->getSlug($localeCode), $slug);
         });
     }
 
     /**
      * @When I set its shipping category as :shippingCategoryName
      */
-    public function iSetItsShippingCategoryAs($shippingCategoryName)
+    public function iSetItsShippingCategoryAs(string $shippingCategoryName): void
     {
         $this->createSimpleProductPage->selectShippingCategory($shippingCategoryName);
     }
@@ -1210,22 +1195,22 @@ final class ManagingProductsContext implements Context
      * @Then /^(it|this product) should be priced at (?:€|£|\$)([^"]+) for (channel "([^"]+)")$/
      * @Then /^(product "[^"]+") should be priced at (?:€|£|\$)([^"]+) for (channel "([^"]+)")$/
      */
-    public function itShouldBePricedAtForChannel(ProductInterface $product, string $price, ChannelInterface $channel)
+    public function itShouldBePricedAtForChannel(ProductInterface $product, string $price, ChannelInterface $channel): void
     {
         $this->updateSimpleProductPage->open(['id' => $product->getId()]);
 
-        Assert::same($this->updateSimpleProductPage->getPriceForChannel($channel), $price);
+        Assert::same($this->productChannelPricingsFormElement->getPriceForChannel($channel), $price);
     }
 
     /**
      * @Then /^(its|this products) original price should be "(?:€|£|\$)([^"]+)" for (channel "([^"]+)")$/
      */
-    public function itsOriginalPriceForChannel(ProductInterface $product, string $originalPrice, ChannelInterface $channel)
+    public function itsOriginalPriceForChannel(ProductInterface $product, string $originalPrice, ChannelInterface $channel): void
     {
         $this->updateSimpleProductPage->open(['id' => $product->getId()]);
 
         Assert::same(
-            $this->updateSimpleProductPage->getOriginalPriceForChannel($channel),
+            $this->productChannelPricingsFormElement->getOriginalPriceForChannel($channel),
             $originalPrice,
         );
     }
@@ -1233,12 +1218,12 @@ final class ManagingProductsContext implements Context
     /**
      * @Then /^(this product) should no longer have price for channel "([^"]+)"$/
      */
-    public function thisProductShouldNoLongerHavePriceForChannel(ProductInterface $product, $channelName)
+    public function thisProductShouldNoLongerHavePriceForChannel(ProductInterface $product, string $channelName): void
     {
         $this->updateSimpleProductPage->open(['id' => $product->getId()]);
 
         Assert::true(
-            $this->updateSimpleProductPage->hasNoPriceForChannel($channelName),
+            $this->productChannelPricingsFormElement->hasNoPriceForChannel($channelName),
             sprintf('Product "%s" should not have price defined for channel "%s".', $product->getName(), $channelName),
         );
     }
@@ -1246,7 +1231,7 @@ final class ManagingProductsContext implements Context
     /**
      * @Then I should be notified that I have to define product variants' prices for newly assigned channels first
      */
-    public function iShouldBeNotifiedThatIHaveToDefineProductVariantsPricesForNewlyAssignedChannelsFirst()
+    public function iShouldBeNotifiedThatIHaveToDefineProductVariantsPricesForNewlyAssignedChannelsFirst(): void
     {
         Assert::same(
             $this->updateConfigurableProductPage->getValidationMessage('channels'),
@@ -1257,7 +1242,7 @@ final class ManagingProductsContext implements Context
     /**
      * @Then /^the (product "[^"]+") should not have shipping required$/
      */
-    public function theProductWithCodeShouldNotHaveShippingRequired(ProductInterface $product)
+    public function theProductWithCodeShouldNotHaveShippingRequired(ProductInterface $product): void
     {
         $this->updateSimpleProductPage->open(['id' => $product->getId()]);
 
@@ -1265,23 +1250,23 @@ final class ManagingProductsContext implements Context
     }
 
     /**
-     * @Then I should be notified that I have to define the :attribute attribute in :language
+     * @Then I should be notified that I have to define the :attribute attribute in :localeCode
      */
-    public function iShouldBeNotifiedThatIHaveToDefineTheAttributeIn($attribute, $language)
+    public function iShouldBeNotifiedThatIHaveToDefineTheAttributeIn(string $attribute, string $localeCode): void
     {
         Assert::same(
-            $this->resolveCurrentPage()->getAttributeValidationErrors($attribute, $language),
+            $this->resolveCurrentPage()->getAttributeValidationErrors($attribute, $localeCode),
             'This value should not be blank.',
         );
     }
 
     /**
-     * @Then I should be notified that the :attribute attribute in :language should be longer than :number
+     * @Then I should be notified that the :attribute attribute in :localeCode should be longer than :number
      */
-    public function iShouldBeNotifiedThatTheAttributeInShouldBeLongerThan($attribute, $language, $number)
+    public function iShouldBeNotifiedThatTheAttributeInShouldBeLongerThan(string $attribute, string $localeCode, int $number): void
     {
         Assert::same(
-            $this->resolveCurrentPage()->getAttributeValidationErrors($attribute, $language),
+            $this->resolveCurrentPage()->getAttributeValidationErrors($attribute, $localeCode),
             sprintf('This value is too short. It should have %s characters or more.', $number),
         );
     }
@@ -1325,7 +1310,7 @@ final class ManagingProductsContext implements Context
     {
         $this->notificationChecker->checkNotification(
             sprintf('The position "%s" is invalid.', $invalidPosition),
-            NotificationType::failure(),
+            NotificationType::error(),
         );
     }
 
@@ -1390,7 +1375,7 @@ final class ManagingProductsContext implements Context
      */
     public function iShouldNotHaveConfiguredPriceForChannel(ChannelInterface $channel): void
     {
-        Assert::same($this->updateSimpleProductPage->getPriceForChannel($channel), '');
+        Assert::same($this->productChannelPricingsFormElement->getPriceForChannel($channel), '');
     }
 
     /**
@@ -1398,7 +1383,7 @@ final class ManagingProductsContext implements Context
      */
     public function iShouldHaveOriginalPriceEqualInChannel(string $price, ChannelInterface $channel): void
     {
-        Assert::contains($price, $this->updateSimpleProductPage->getOriginalPriceForChannel($channel));
+        Assert::contains($price, $this->productChannelPricingsFormElement->getOriginalPriceForChannel($channel));
     }
 
     /**
@@ -1464,28 +1449,7 @@ final class ManagingProductsContext implements Context
         );
     }
 
-    /**
-     * @param string $element
-     * @param string $value
-     */
-    private function assertElementValue($element, $value)
-    {
-        /** @var UpdatePageInterface $currentPage */
-        $currentPage = $this->resolveCurrentPage();
-
-        Assert::isInstanceOf($currentPage, UpdatePageInterface::class);
-
-        Assert::true(
-            $currentPage->hasResourceValues([$element => $value]),
-            sprintf('Product should have %s with %s value.', $element, $value),
-        );
-    }
-
-    /**
-     * @param string $element
-     * @param string $message
-     */
-    private function assertValidationMessage($element, $message)
+    private function assertValidationMessage(string $element, string $message): void
     {
         /** @var CreatePageInterface|UpdatePageInterface $currentPage */
         $currentPage = $this->resolveCurrentPage();
@@ -1493,7 +1457,7 @@ final class ManagingProductsContext implements Context
         Assert::same($currentPage->getValidationMessage($element), $message);
     }
 
-    private function resolveCurrentPage(): CreateConfigurableProductPageInterface|CreateSimpleProductPageInterface|IndexPerTaxonPageInterface|\Sylius\Behat\Page\Admin\Product\IndexPageInterface|UpdateConfigurableProductPageInterface|UpdateSimpleProductPageInterface
+    private function resolveCurrentPage(): CreateConfigurableProductPageInterface|CreateSimpleProductPageInterface|IndexPageInterface|IndexPerTaxonPageInterface|UpdateConfigurableProductPageInterface|UpdateSimpleProductPageInterface
     {
         return $this->currentPageResolver->getCurrentPageWithForm([
             $this->indexPage,
