@@ -14,11 +14,16 @@ declare(strict_types=1);
 namespace Sylius\Bundle\CoreBundle\EventListener;
 
 use Sylius\Bundle\ResourceBundle\Event\ResourceControllerEvent;
+use Sylius\Component\Core\Inventory\Checker\OrderItemAvailabilityCheckerInterface;
 use Sylius\Component\Core\Model\PaymentInterface;
-use Sylius\Component\Core\Model\ProductVariantInterface;
 
 final class PaymentPreCompleteListener
 {
+    public function __construct(
+        private OrderItemAvailabilityCheckerInterface $orderItemAvailabilityChecker,
+    ) {
+    }
+
     public function checkStockAvailability(ResourceControllerEvent $event): void
     {
         /** @var PaymentInterface $payment */
@@ -26,9 +31,9 @@ final class PaymentPreCompleteListener
         $orderItems = $payment->getOrder()->getItems();
 
         foreach ($orderItems as $orderItem) {
-            $variant = $orderItem->getVariant();
+            if (!$this->orderItemAvailabilityChecker->isReservedStockSufficient($orderItem)) {
+                $variant = $orderItem->getVariant();
 
-            if (!$this->isStockSufficient($variant, $orderItem->getQuantity())) {
                 $event->setMessageType('error');
                 $event->setMessage('sylius.resource.payment.cannot_be_completed');
                 $event->setMessageParameters(['%productVariantCode%' => $variant->getCode()]);
@@ -37,17 +42,5 @@ final class PaymentPreCompleteListener
                 break;
             }
         }
-    }
-
-    private function isStockSufficient(ProductVariantInterface $variant, int $quantity): bool
-    {
-        if (!$variant->isTracked()) {
-            return true;
-        }
-
-        return
-            $variant->getOnHold() - $quantity >= 0 &&
-            $variant->getOnHand() - $quantity >= 0
-        ;
     }
 }
