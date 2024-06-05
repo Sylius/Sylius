@@ -26,5 +26,7 @@
         <service id="Sylius\Bundle\ApiBundle\Provider\ProductImageFilterProviderInterface" class="Sylius\Bundle\ApiBundle\Provider\LiipProductImageFilterProvider">
             <argument>%liip_imagine.filter_sets%</argument>
         </service>
+
+        <service id="Sylius\Bundle\ApiBundle\Provider\AdjustmentOrderProviderInterface" class="Sylius\Bundle\ApiBundle\Provider\AdjustmentOrderProvider" />
     </services>
 </container>

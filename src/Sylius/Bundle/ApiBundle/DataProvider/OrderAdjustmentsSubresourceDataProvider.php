@@ -44,7 +44,6 @@ final class OrderAdjustmentsSubresourceDataProvider implements RestrictedDataPro
 
         /** @var OrderInterface|null $order */
         $order = $this->orderRepository->findOneBy(['tokenValue' => $subresourceIdentifiers['tokenValue']]);
-
         if ($order === null) {
             throw new NotFoundHttpException('Order not found');
         }

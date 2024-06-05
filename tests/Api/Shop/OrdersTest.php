@@ -85,7 +85,7 @@ final class OrdersTest extends JsonApiTestCase
     }
 
     /** @test */
-    public function it_returns_nothing_if_visitor_tries_to_get_the_order_items_of_logged_in_user(): void
+    public function it_returns_nothing_if_visitor_tries_to_get_the_items_of_a_user_order(): void
     {
         $this->loadFixturesFromFiles([
             'channel.yaml',
@@ -121,7 +121,7 @@ final class OrdersTest extends JsonApiTestCase
     }
 
     /** @test */
-    public function it_prevents_visitor_from_trying_to_get_the_order_adjustments_of_logged_in_user(): void
+    public function it_prevents_visitors_from_getting_the_adjustments_of_a_user_order(): void
     {
         $this->loadFixturesFromFiles([
             'channel.yaml',
@@ -142,7 +142,7 @@ final class OrdersTest extends JsonApiTestCase
     }
 
     /** @test */
-    public function it_prevents_visitor_from_trying_to_get_the_order_item_adjustments_of_logged_in_user(): void
+    public function it_prevents_visitors_from_getting_the_item_adjustments_of_a_user_order(): void
     {
         $this->loadFixturesFromFiles([
             'channel.yaml',
@@ -163,7 +163,7 @@ final class OrdersTest extends JsonApiTestCase
         $this->assertResponseCode($response, Response::HTTP_UNAUTHORIZED);
     }
 
-    public function it_returns_nothing_if_logged_in_shop_user_tries_to_get_the_order_item_adjustments_of_another_user(): void
+    public function it_returns_nothing_if_a_user_tries_to_get_the_order_item_adjustments_of_another_user(): void
     {
         $this->loadFixturesFromFiles([
             'channel.yaml',

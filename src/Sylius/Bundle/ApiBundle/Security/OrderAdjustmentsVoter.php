@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Bundle\ApiBundle\Security;
 
 use Doctrine\Common\Collections\Collection;
+use Sylius\Bundle\ApiBundle\Provider\AdjustmentOrderProviderInterface;
 use Sylius\Component\Core\Model\AdjustmentInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
@@ -21,11 +22,15 @@ use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 
 final class OrderAdjustmentsVoter extends Voter
 {
+    public function __construct(private AdjustmentOrderProviderInterface $adjustmentOrderProvider)
+    {
+    }
+
     public const SYLIUS_ORDER_ADJUSTMENT = 'SYLIUS_ORDER_ADJUSTMENT';
 
     protected function supports(string $attribute, mixed $subject): bool
     {
-        return $subject instanceof Collection || $subject instanceof AdjustmentInterface;
+        return $subject instanceof Collection;
     }
 
     public function supportsAttribute(string $attribute): bool
@@ -37,28 +42,22 @@ final class OrderAdjustmentsVoter extends Voter
     {
         $user = $token->getUser();
 
-        if ($subject === [] || $subject->isEmpty()) {
+        if ($subject === [] || $subject->isEmpty() || !$subject->first() instanceof AdjustmentInterface) {
             return true;
         }
 
-        /** @var AdjustmentInterface $item */
-        $item = $subject->first();
+        /** @var AdjustmentInterface $subjectItem */
+        foreach ($subject as $subjectItem) {
+            if ($this->adjustmentOrderProvider->provide($subjectItem)) {
+                /** @var OrderInterface $order */
+                $order = $this->adjustmentOrderProvider->provide($subjectItem);
 
-        if ($item->getOrder()) {
-            /** @var OrderInterface $order */
-            $order = $item->getOrder();
-        } else {
-            if ($item->getOrderItem()){
-                /** @var OrderInterface $order */
-                $order = $item->getOrderItem()->getOrder();
-            } else {
-                /** @var OrderInterface $order */
-                $order = $item->getOrderItemUnit()->getOrderItem()->getOrder();
+                if (!$order->isCreatedByGuest() || $order->getUser()) {
+                    return $order->getUser() === $user;
+                }
+
+                break;
             }
-        }
-
-        if (!$order->isCreatedByGuest() || $order->getUser()) {
-            return $order->getUser() === $user;
         }
 
         return true;
