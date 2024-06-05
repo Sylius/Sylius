@@ -781,7 +781,7 @@ final class ManagingProductsContext implements Context
      * @Then /^the slug of the ("[^"]+" product) should(?:| still) be "([^"]+)" (in the "[^"]+" locale)$/
      * @Then /^(this product) should(?:| still) have slug "([^"]+)" in ("[^"]+" locale)$/
      */
-    public function productSlugShouldBe(ProductInterface $product, string $slug, $localeCode = 'en_US'): void
+    public function productSlugShouldBe(ProductInterface $product, string $slug, string $localeCode = 'en_US'): void
     {
         $response = $this->client->show(Resources::PRODUCTS, $product->getCode());
 

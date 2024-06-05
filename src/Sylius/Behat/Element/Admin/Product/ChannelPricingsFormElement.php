@@ -17,7 +17,7 @@ use Sylius\Behat\Element\Admin\Crud\FormElement as BaseFormElement;
 use Sylius\Behat\Service\DriverHelper;
 use Sylius\Component\Core\Model\ChannelInterface;
 
-final class ProductChannelPricingsFormElement extends BaseFormElement implements ProductChannelPricingsFormElementInterface
+final class ChannelPricingsFormElement extends BaseFormElement implements ChannelPricingsFormElementInterface
 {
     public function specifyPrice(ChannelInterface $channel, string $price): void
     {

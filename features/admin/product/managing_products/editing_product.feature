@@ -20,7 +20,7 @@ Feature: Editing a product
         And I rename it to "7 Wonders" in "English (United States)"
         And I save my changes
         Then I should be notified that it has been successfully edited
-        And this product name should be "7 Wonders"
+        And this product name should be "7 Wonders" in "English (United States)"
 
     @ui @no-api
     Scenario: Renaming a simple product does not change its variant name
@@ -56,7 +56,7 @@ Feature: Editing a product
         And I rename it to "Sobieski Vodka" in "English (United States)"
         And I save my changes
         Then I should be notified that it has been successfully edited
-        And this product name should be "Sobieski Vodka"
+        And this product name should be "Sobieski Vodka" in "English (United States)"
 
     @ui @api
     Scenario: Renaming a configurable product with option
@@ -67,7 +67,7 @@ Feature: Editing a product
         And I rename it to "Sobieski Vodka" in "English (United States)"
         And I save my changes
         Then I should be notified that it has been successfully edited
-        And this product name should be "Sobieski Vodka"
+        And this product name should be "Sobieski Vodka" in "English (United States)"
 
     @ui @mink:chromedriver @api
     Scenario: Changing options of configurable product without any variant defined

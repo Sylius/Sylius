@@ -18,7 +18,7 @@ use Sylius\Behat\Element\Admin\Crud\FormElement as BaseFormElement;
 use Sylius\Behat\Service\DriverHelper;
 use Sylius\Behat\Service\Helper\AutocompleteHelperInterface;
 
-final class ProductAttributesFormElement extends BaseFormElement implements ProductAttributesFormElementInterface
+final class AttributesFormElement extends BaseFormElement implements AttributesFormElementInterface
 {
     public function __construct(
         Session $session,
@@ -30,11 +30,12 @@ final class ProductAttributesFormElement extends BaseFormElement implements Prod
 
     public function getAttributeValidationErrors(string $attributeName, string $localeCode): string
     {
-        $this->clickTabIfItsNotActive();
+        $this->changeTab();
 
-        $validationError = $this->getElement('attribute')->find('css', '.sylius-validation-error');
-
-        return $validationError->getText();
+        return $this->getValidationMessage(
+            'product_attribute_input_in_locale',
+            ['%name%' => $attributeName, '%locale_code%' => $localeCode],
+        );
     }
 
     public function removeAttribute(string $attributeName, string $localeCode): void
@@ -48,14 +49,14 @@ final class ProductAttributesFormElement extends BaseFormElement implements Prod
 
     public function getAttributeSelectText(string $attribute, string $localeCode): string
     {
-        $this->clickTabIfItsNotActive();
+        $this->changeTab();
 
         return $this->getElement('attribute_select', ['%attributeName%' => $attribute, '%localeCode%' => $localeCode])->getText();
     }
 
     public function getNonTranslatableAttributeValue(string $attribute): string
     {
-        $this->clickTabIfItsNotActive();
+        $this->changeTab();
 
         return $this->getElement('non_translatable_attribute', ['%attributeName%' => $attribute])->getValue();
     }
@@ -67,17 +68,14 @@ final class ProductAttributesFormElement extends BaseFormElement implements Prod
 
     public function hasNonTranslatableAttributeWithValue(string $attributeName, string $value): bool
     {
-        $attribute = $this->getDocument()->find('css', sprintf('.attribute .attribute-label:contains("%s")', $attributeName));
+        $attributeInput = $this->getElement('product_attribute_input', ['%name%' => $attributeName]);
 
-        return
-            $attribute->getParent()->getParent()->find('css', '.attribute-input input')->getValue() === $value &&
-            $attribute->find('css', '.globe.icon') !== null
-        ;
+        return $attributeInput->getValue() === $value;
     }
 
     public function addNonTranslatableAttribute(string $attributeName, string $value): void
     {
-        $this->clickTabIfItsNotActive();
+        $this->changeTab();
 
         $attributeOption = $this->getElement('attributes_choice')->find('css', sprintf('option:contains("%s")', $attributeName));
         $this->selectElementFromAttributesDropdown($attributeOption->getAttribute('value'));
@@ -97,12 +95,12 @@ final class ProductAttributesFormElement extends BaseFormElement implements Prod
         $this->waitForFormUpdate();
     }
 
-    public function updateAttribute(string $attributeName, string $value, string $localeCode): void
+    public function updateAttributeInLocale(string $attributeName, string $value, string $localeCode): void
     {
         $this->changeTab();
         $this->changeAttributeTab($attributeName);
 
-        $attributeValue = $this->getElement('attribute_value', ['%attributeName%' => $attributeName, '%localeCode%' => $localeCode]);
+        $attributeValue = $this->getElement('product_attribute_input_in_locale', ['%name%' => $attributeName, '%locale_code%' => $localeCode]);
 
         match ($attributeValue->getTagName()) {
             'input' => $attributeValue->setValue($value),
@@ -114,12 +112,12 @@ final class ProductAttributesFormElement extends BaseFormElement implements Prod
         $this->waitForFormUpdate();
     }
 
-    public function getAttributeValue(string $attribute, string $localeCode): string
+    public function getAttributeValue(string $attributeName, string $localeCode): string
     {
         $this->changeTab();
-        $this->changeAttributeTab($attribute);
+        $this->changeAttributeTab($attributeName);
 
-        $attributeValue = $this->getElement('attribute_value', ['%attributeName%' => $attribute, '%localeCode%' => $localeCode]);
+        $attributeValue = $this->getElement('product_attribute_value', ['%attribute_name%' => $attributeName, '%locale_code%' => $localeCode]);
 
         return match ($attributeValue->getTagName()) {
             'input' => $attributeValue->getValue(),
@@ -143,12 +141,14 @@ final class ProductAttributesFormElement extends BaseFormElement implements Prod
     protected function getDefinedElements(): array
     {
         return [
-            'product_attribute_delete_button' => '[data-test-product-attribute-delete-button="%attributeName%"]',
-            'product_attribute_input' => 'input[name="product_attributes"]',
-            'product_attribute_tab' => '[data-test-product-attribute-tab="%name%"]',
-            'attribute_value' => '[data-test-attribute-value][data-test-locale-code="%localeCode%"][data-test-attribute-name="%attributeName%"]',
-            'side_navigation_tab' => '[data-test-side-navigation-tab="%name%"]',
+            'product_attribute_value' => '[data-test-product-attribute-name="%attribute_name%"][data-test-locale-code="%locale_code%"]',
             'form' => '[data-live-name-value="sylius_admin:product:form"]',
+            'product_attribute_delete_button' => '[data-test-product-attribute-delete-button="%attributeName%"]',
+            'product_attribute_search_input' => 'input[name="product_attributes"]',
+            'product_attribute_input' => '[data-test-product-attribute-name="%name%"]',
+            'product_attribute_input_in_locale' => '[data-test-product-attribute-name="%name%"][data-test-locale-code="%locale_code%"]',
+            'product_attribute_tab' => '[data-test-product-attribute-tab="%name%"]',
+            'side_navigation_tab' => '[data-test-side-navigation-tab="%name%"]',
         ];
     }
 
@@ -157,17 +157,9 @@ final class ProductAttributesFormElement extends BaseFormElement implements Prod
         $driver = $this->getDriver();
         $this->autocompleteHelper->selectByName(
             $driver,
-            $this->getElement('product_attribute_input')->getXpath(),
+            $this->getElement('product_attribute_search_input')->getXpath(),
             $attributeName,
         );
-    }
-
-    private function clickTabIfItsNotActive(): void
-    {
-        $attributesTab = $this->getElement('tab', ['%name%' => 'attributes']);
-        if (!$attributesTab->hasClass('active')) {
-            $attributesTab->click();
-        }
     }
 
     private function changeAttributeTab(string $attributeName): void

@@ -20,7 +20,7 @@ use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Behat\Element\Admin\Crud\FormElement as BaseFormElement;
 use Sylius\Component\Product\Model\ProductAssociationTypeInterface;
 
-final class ProductAssociationsFormElement extends BaseFormElement implements ProductAssociationsFormElementInterface
+final class AssociationsFormElement extends BaseFormElement implements AssociationsFormElementInterface
 {
     public function __construct(
         Session $session,
@@ -33,7 +33,7 @@ final class ProductAssociationsFormElement extends BaseFormElement implements Pr
     public function associateProducts(ProductAssociationTypeInterface $productAssociationType, array $productsNames): void
     {
         $this->changeTab();
-        $associationField = $this->getElement('field_associations', ['%association%' => $productAssociationType->getCode()]);
+        $associationField = $this->getElement('associations', ['%association%' => $productAssociationType->getCode()]);
 
         foreach ($productsNames as $productName) {
             $this->autocompleteHelper->selectByName(
@@ -48,7 +48,7 @@ final class ProductAssociationsFormElement extends BaseFormElement implements Pr
     public function removeAssociatedProduct(ProductInterface $product, ProductAssociationTypeInterface $productAssociationType): void
     {
         $this->changeTab();
-        $associationField = $this->getElement('field_associations', ['%association%' => $productAssociationType->getCode()]);
+        $associationField = $this->getElement('associations', ['%association%' => $productAssociationType->getCode()]);
 
         $this->autocompleteHelper->removeByValue(
             $this->getDriver(),
@@ -60,7 +60,7 @@ final class ProductAssociationsFormElement extends BaseFormElement implements Pr
     public function hasAssociatedProduct(ProductInterface $product, ProductAssociationTypeInterface $productAssociationType): bool
     {
         $this->changeTab();
-        $associationField = $this->getElement('field_associations', ['%association%' => $productAssociationType->getCode()]);
+        $associationField = $this->getElement('associations', ['%association%' => $productAssociationType->getCode()]);
 
         return in_array($product->getCode(), $associationField->getValue(), true);
     }
@@ -68,7 +68,7 @@ final class ProductAssociationsFormElement extends BaseFormElement implements Pr
     protected function getDefinedElements(): array
     {
         return [
-            'field_associations' => '[name="sylius_admin_product[associations][%association%][]"]',
+            'associations' => '[name="sylius_admin_product[associations][%association%][]"]',
             'form' => 'form',
             'side_navigation_tab' => '[data-test-side-navigation-tab="%name%"]',
         ];

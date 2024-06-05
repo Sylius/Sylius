@@ -14,15 +14,22 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
+use Sylius\Behat\Element\Admin\Product\ChannelPricingsFormElementInterface;
+use Sylius\Behat\Element\Admin\Product\TaxonomyFormElementInterface;
+use Sylius\Behat\Element\Admin\Product\TranslationsFormElementInterface;
 use Sylius\Behat\Page\Admin\Product\CreateSimpleProductPageInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 
-final class ProductCreationContext implements Context
+final readonly class ProductCreationContext implements Context
 {
-    public function __construct(private CreateSimpleProductPageInterface $createPage)
-    {
+    public function __construct(
+        private CreateSimpleProductPageInterface $createPage,
+        private TranslationsFormElementInterface $productTranslationsFormElement,
+        private ChannelPricingsFormElementInterface $productChannelPricingsFormElement,
+        private TaxonomyFormElementInterface $productTaxonomyFormElement,
+    ) {
     }
 
     /**
@@ -38,13 +45,15 @@ final class ProductCreationContext implements Context
 
         $this->createPage->open();
 
-        $this->createPage->nameItIn(str_replace('"', '', $name), $localeCode);
-        $this->createPage->specifySlugIn(StringInflector::nameToSlug($name), $localeCode);
+        $this->productTranslationsFormElement->nameItIn(str_replace('"', '', $name), $localeCode);
+        $this->productTranslationsFormElement->specifySlugIn(StringInflector::nameToSlug($name), $localeCode);
         $this->createPage->specifyCode(str_replace('"', '', StringInflector::nameToUppercaseCode($name)));
-        $this->createPage->specifyPrice($channel, $price);
-        $this->createPage->checkChannel($channel->getName());
-        $this->createPage->selectMainTaxon($taxon);
-        $this->createPage->checkProductTaxon($taxon);
+
+        $this->productChannelPricingsFormElement->specifyPrice($channel, $price);
+        $this->createPage->checkChannel($channel->getCode());
+
+        $this->productTaxonomyFormElement->selectMainTaxon($taxon);
+        $this->productTaxonomyFormElement->checkProductTaxon($taxon);
 
         $this->createPage->create();
     }
