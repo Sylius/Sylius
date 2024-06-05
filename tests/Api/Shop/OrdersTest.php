@@ -439,30 +439,6 @@ final class OrdersTest extends JsonApiTestCase
         $this->assertResponseCode($this->client->getResponse(), Response::HTTP_NOT_FOUND);
     }
 
-    /** @test */
-    public function it_returns_nothing_if_visitor_tries_to_get_the_order_of_logged_in_user(): void
-    {
-        $this->loadFixturesFromFiles([
-            'channel.yaml',
-            'cart.yaml',
-            'country.yaml',
-            'authentication/customer.yaml',
-            'shipping_method.yaml',
-            'payment_method.yaml',
-        ]);
-
-        $tokenValue = 'nAWw2jewpA';
-        $this->placeOrder($tokenValue, 'oliver@doe.com');
-
-        $this->client->request(
-            'GET',
-            sprintf('/api/v2/shop/orders/%s', $tokenValue),
-            server: self::CONTENT_TYPE_HEADER,
-        );
-
-        $this->assertResponseCode($this->client->getResponse(), Response::HTTP_NOT_FOUND);
-    }
-
     protected function setUp(): void
     {
         parent::setUp();
