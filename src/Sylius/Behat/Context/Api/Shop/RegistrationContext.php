@@ -200,7 +200,7 @@ final class RegistrationContext implements Context
         $content = $this->getResponseContent();
 
         Assert::same(
-            $content['hydra:description'],
+            $content['message'],
             'Request does not have the following required fields specified: ' . implode(', ', $fields) . '.',
         );
         Assert::same($this->shopClient->getLastResponse()->getStatusCode(), 400);

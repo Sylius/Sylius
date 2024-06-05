@@ -39,9 +39,67 @@
                     </values>
                 </normalizationContext>
                 <filters>
+                    <filter>sylius.api.product_variant_position_filter</filter>
+                    <filter>sylius.api.product_variant_product_filter</filter>
                     <filter>Sylius\Bundle\ApiBundle\Filter\Doctrine\ProductVariantCatalogPromotionFilter</filter>
                 </filters>
             </operation>
+
+            <operation class="ApiPlatform\Metadata\Post" uriTemplate="/admin/product-variants">
+                <denormalizationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius:admin:product_variant:create</value>
+                            </values>
+                        </value>
+                    </values>
+                </denormalizationContext>
+                <normalizationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius:admin:product_variant:show</value>
+                            </values>
+                        </value>
+                    </values>
+                </normalizationContext>
+            </operation>
+
+            <operation class="ApiPlatform\Metadata\Get" uriTemplate="/admin/product-variants/{code}">
+                <normalizationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius:admin:product_variant:show</value>
+                            </values>
+                        </value>
+                    </values>
+                </normalizationContext>
+            </operation>
+
+            <operation class="ApiPlatform\Metadata\Put" uriTemplate="/admin/product-variants/{code}">
+                <normalizationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius:admin:product_variant:show</value>
+                            </values>
+                        </value>
+                    </values>
+                </normalizationContext>
+                <denormalizationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius:admin:product_variant:update</value>
+                            </values>
+                        </value>
+                    </values>
+                </denormalizationContext>
+            </operation>
+
+            <operation class="ApiPlatform\Metadata\Delete" uriTemplate="/admin/product-variants/{code}" />
 
             <operation class="ApiPlatform\Metadata\Get" uriTemplate="/shop/product-variants/{code}">
                 <normalizationContext>
@@ -53,6 +111,22 @@
                         </value>
                     </values>
                 </normalizationContext>
+            </operation>
+
+            <operation class="ApiPlatform\Metadata\GetCollection" uriTemplate="/shop/product-variants">
+                <normalizationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius:shop:product_variant:index</value>
+                            </values>
+                        </value>
+                    </values>
+                </normalizationContext>
+                <filters>
+                    <filter>sylius.api.product_variant_product_filter</filter>
+                    <filter>Sylius\Bundle\ApiBundle\Filter\Doctrine\ProductVariantCatalogPromotionFilter</filter>
+                </filters>
             </operation>
         </operations>
     </resource>

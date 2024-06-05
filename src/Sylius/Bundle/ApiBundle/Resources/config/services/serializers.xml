@@ -38,32 +38,32 @@
             <tag name="serializer.normalizer" />
         </service>
 
-<!--        <service id="Sylius\Bundle\ApiBundle\Serializer\HydraErrorNormalizer" decorates="api_platform.hydra.normalizer.error">-->
-<!--            <argument type="service" id="Sylius\Bundle\ApiBundle\Serializer\HydraErrorNormalizer.inner" />-->
-<!--            <argument type="service" id="request_stack" />-->
-<!--            <argument>%sylius.security.new_api_route%</argument>-->
-<!--        </service>-->
+        <service id="Sylius\Bundle\ApiBundle\Serializer\HydraErrorNormalizer" decorates="api_platform.hydra.normalizer.error">
+            <argument type="service" id="Sylius\Bundle\ApiBundle\Serializer\HydraErrorNormalizer.inner" />
+            <argument type="service" id="request_stack" />
+            <argument>%sylius.security.new_api_route%</argument>
+        </service>
 
-<!--        <service id="Sylius\Bundle\ApiBundle\Serializer\ProductNormalizer">-->
-<!--            <argument type="service" id="Sylius\Component\Product\Resolver\ProductVariantResolverInterface" />-->
-<!--            <argument type="service" id="api_platform.symfony.iri_converter" />-->
-<!--            <tag name="serializer.normalizer" priority="64" />-->
-<!--        </service>-->
+        <service id="Sylius\Bundle\ApiBundle\Serializer\ProductNormalizer">
+            <argument type="service" id="Sylius\Component\Product\Resolver\ProductVariantResolverInterface" />
+            <argument type="service" id="api_platform.symfony.iri_converter" />
+            <tag name="serializer.normalizer" priority="64" />
+        </service>
 
-<!--        <service id="Sylius\Bundle\ApiBundle\Serializer\ProductAttributeValueDenormalizer">-->
-<!--            <argument type="service" id="api_platform.symfony.iri_converter" />-->
-<!--            <tag name="serializer.normalizer" priority="64" />-->
-<!--        </service>-->
+        <service id="Sylius\Bundle\ApiBundle\Serializer\ProductAttributeValueDenormalizer">
+            <argument type="service" id="api_platform.symfony.iri_converter" />
+            <tag name="serializer.normalizer" priority="64" />
+        </service>
 
-<!--        <service id="Sylius\Bundle\ApiBundle\Serializer\ProductDenormalizer">-->
-<!--            <tag name="serializer.normalizer" priority="64" />-->
-<!--        </service>-->
+        <service id="Sylius\Bundle\ApiBundle\Serializer\ProductDenormalizer">
+            <tag name="serializer.normalizer" priority="64" />
+        </service>
 
-<!--        <service id="Sylius\Bundle\ApiBundle\Serializer\ProductAttributeValueNormalizer">-->
-<!--            <argument type="service" id="sylius.locale_provider.channel_based" />-->
-<!--            <argument>%locale%</argument>-->
-<!--            <tag name="serializer.normalizer" priority="64" />-->
-<!--        </service>-->
+        <service id="Sylius\Bundle\ApiBundle\Serializer\ProductAttributeValueNormalizer">
+            <argument type="service" id="sylius.locale_provider.channel_based" />
+            <argument>%locale%</argument>
+            <tag name="serializer.normalizer" priority="64" />
+        </service>
 
 <!--        <service id="Sylius\Bundle\ApiBundle\Serializer\ImageNormalizer">-->
 <!--            <argument type="service" id="liip_imagine.cache.manager" />-->
@@ -72,10 +72,10 @@
 <!--            <tag name="serializer.normalizer" priority="64" />-->
 <!--        </service>-->
 
-<!--        <service id="Sylius\Bundle\ApiBundle\Serializer\CommandNormalizer">-->
-<!--            <argument type="service" id="serializer.normalizer.object" />-->
-<!--            <tag name="serializer.normalizer" priority="64" />-->
-<!--        </service>-->
+        <service id="Sylius\Bundle\ApiBundle\Serializer\CommandNormalizer">
+            <argument type="service" id="serializer.normalizer.object" />
+            <tag name="serializer.normalizer" priority="64" />
+        </service>
 
         <service id="Sylius\Bundle\ApiBundle\Serializer\ProductVariantNormalizer">
             <argument type="service" id="sylius.calculator.product_variant_price" />

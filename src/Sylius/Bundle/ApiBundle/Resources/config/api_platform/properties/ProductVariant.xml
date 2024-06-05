@@ -17,4 +17,24 @@
 >
     <property resource="Sylius\Component\Core\Model\ProductVariant" name="id" identifier="false"/>
     <property resource="Sylius\Component\Core\Model\ProductVariant" name="code" identifier="true"/>
+    <property resource="Sylius\Component\Core\Model\ProductVariant" name="name" required="true"/>
+    <property resource="Sylius\Component\Core\Model\ProductVariant" name="product" />
+    <property resource="Sylius\Component\Core\Model\ProductVariant" name="translations" readable="true" writable="true">
+        <openapiContext>
+            <values>
+                <value name="type">object</value>
+                <value name="example">
+                    <values>
+                        <value name="en_US">
+                            <values>
+                                <value name="name">string</value>
+                            </values>
+                        </value>
+                    </values>
+                </value>
+            </values>
+        </openapiContext>
+    </property>
+    <property resource="Sylius\Component\Core\Model\ProductVariant" name="channelPricings" />
+    <property resource="Sylius\Component\Core\Model\ProductVariant" name="optionValues" readable="true" />
 </properties>

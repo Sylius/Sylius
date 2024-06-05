@@ -17,7 +17,7 @@ use Sylius\Bundle\ApiBundle\Creator\ImageCreatorInterface;
 use Sylius\Component\Core\Model\ImageInterface;
 use Symfony\Component\HttpFoundation\Request;
 
-final class UploadProductImageAction
+final readonly class UploadProductImageAction
 {
     public function __construct(private ImageCreatorInterface $productImageCreator)
     {

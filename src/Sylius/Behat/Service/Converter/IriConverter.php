@@ -29,7 +29,7 @@ final readonly class IriConverter implements IriConverterInterface
     ) {
     }
 
-    public function getResourceFromIri(string $iri, array $context = [], Operation $operation = null): object
+    public function getResourceFromIri(string $iri, array $context = [], ?Operation $operation = null): object
     {
         return $this->decoratedIriConverter->getResourceFromIri($iri, $context, $operation);
     }
@@ -37,7 +37,7 @@ final readonly class IriConverter implements IriConverterInterface
     public function getIriFromResource(
         object|string $resource,
         int $referenceType = UrlGeneratorInterface::ABS_PATH,
-        Operation $operation = null,
+        ?Operation $operation = null,
         array $context = [],
     ): ?string {
         return $this->decoratedIriConverter->getIriFromResource($resource, $referenceType, $operation, $context);
@@ -47,7 +47,7 @@ final readonly class IriConverter implements IriConverterInterface
         object|string $resource,
         string $section,
         int $referenceType = UrlGeneratorInterface::ABS_PATH,
-        Operation $operation = null,
+        ?Operation $operation = null,
         array $context = [],
     ): ?string {
         $resourceClass = $context['force_resource_class'] ?? (\is_string($resource) ? $resource : $this->getObjectClass($resource));

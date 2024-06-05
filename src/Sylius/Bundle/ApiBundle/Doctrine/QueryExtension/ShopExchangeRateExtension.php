@@ -38,7 +38,7 @@ final readonly class ShopExchangeRateExtension implements QueryCollectionExtensi
         QueryBuilder $queryBuilder,
         QueryNameGeneratorInterface $queryNameGenerator,
         string $resourceClass,
-        Operation $operation = null,
+        ?Operation $operation = null,
         array $context = [],
     ): void {
         $this->applyCondition($queryBuilder, $queryNameGenerator, $resourceClass, $context);
@@ -49,7 +49,7 @@ final readonly class ShopExchangeRateExtension implements QueryCollectionExtensi
         QueryNameGeneratorInterface $queryNameGenerator,
         string $resourceClass,
         array $identifiers,
-        Operation $operation = null,
+        ?Operation $operation = null,
         array $context = [],
     ): void {
         $this->applyCondition($queryBuilder, $queryNameGenerator, $resourceClass, $context);

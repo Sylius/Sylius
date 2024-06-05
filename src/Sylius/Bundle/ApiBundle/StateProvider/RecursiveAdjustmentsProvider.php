@@ -29,7 +29,7 @@ final readonly class RecursiveAdjustmentsProvider implements ProviderInterface
         $classname = $this->repository->getClassName();
         if (false === is_a($classname, RecursiveAdjustmentsAwareInterface::class, true)) {
             throw new \LogicException(
-                sprintf('Class "%s" does not implement "%s".', $classname, RecursiveAdjustmentsAwareInterface::class)
+                sprintf('Class "%s" does not implement "%s".', $classname, RecursiveAdjustmentsAwareInterface::class),
             );
         }
     }

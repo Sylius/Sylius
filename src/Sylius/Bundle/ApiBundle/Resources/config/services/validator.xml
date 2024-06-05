@@ -146,11 +146,11 @@
             <tag name="validator.constraint_validator" alias="sylius_api_validator_single_value_for_product_variant_option" />
         </service>
 
-<!--        <service id="Sylius\Bundle\ApiBundle\Validator\Constraints\UniqueReviewerEmailValidator">-->
-<!--            <argument type="service" id="sylius.repository.shop_user" />-->
-<!--            <argument type="service" id="Sylius\Bundle\ApiBundle\Context\UserContextInterface" />-->
-<!--            <tag name="validator.constraint_validator" alias="sylius_api_unique_reviewer_email_validator" />-->
-<!--        </service>-->
+        <service id="Sylius\Bundle\ApiBundle\Validator\Constraints\UniqueReviewerEmailValidator">
+            <argument type="service" id="sylius.repository.shop_user" />
+            <argument type="service" id="Sylius\Bundle\ApiBundle\Context\UserContextInterface" />
+            <tag name="validator.constraint_validator" alias="sylius_api_unique_reviewer_email_validator" />
+        </service>
 
         <service id="Sylius\Bundle\ApiBundle\Validator\Constraints\AdminResetPasswordTokenNonExpiredValidator">
             <argument type="service" id="sylius.repository.admin_user" />
