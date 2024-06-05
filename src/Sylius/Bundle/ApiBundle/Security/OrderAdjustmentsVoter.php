@@ -25,7 +25,7 @@ final class OrderAdjustmentsVoter extends Voter
 
     protected function supports(string $attribute, mixed $subject): bool
     {
-        return $subject instanceof Collection;
+        return $subject instanceof Collection || $subject instanceof AdjustmentInterface;
     }
 
     public function supportsAttribute(string $attribute): bool
@@ -48,8 +48,13 @@ final class OrderAdjustmentsVoter extends Voter
             /** @var OrderInterface $order */
             $order = $item->getOrder();
         } else {
-            /** @var OrderInterface $order */
-            $order = $item->getOrderItem()->getOrder();
+            if ($item->getOrderItem()){
+                /** @var OrderInterface $order */
+                $order = $item->getOrderItem()->getOrder();
+            } else {
+                /** @var OrderInterface $order */
+                $order = $item->getOrderItemUnit()->getOrderItem()->getOrder();
+            }
         }
 
         if (!$order->isCreatedByGuest() || $order->getUser()) {
