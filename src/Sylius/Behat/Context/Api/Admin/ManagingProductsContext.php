@@ -712,6 +712,7 @@ final class ManagingProductsContext implements Context
     public function thisProductTaxonShouldHaveNotTheTaxon(ProductInterface $product, TaxonInterface $taxon): void
     {
         $this->client->index(Resources::PRODUCT_TAXONS);
+
         Assert::false(
             $this->responseChecker->hasItemWithValues($this->client->getLastResponse(), [
                 'product' => $this->sectionAwareIriConverter->getIriFromResourceInSection($product, 'admin'),
