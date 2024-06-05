@@ -55,6 +55,7 @@ final class ProductReviewContext implements Context
         ?int $daysSinceCreation = null,
     ): void {
         $review = $this->createProductReview($product, $title, $rating, $title, $customer);
+
         if (null !== $daysSinceCreation) {
             $review->setCreatedAt(new \DateTime('-' . $daysSinceCreation . ' days'));
         }
@@ -73,6 +74,7 @@ final class ProductReviewContext implements Context
         ?int $daysSinceCreation = null,
     ): void {
         $review = $this->createProductReview($product, $title, $rating, $title, $customer, ProductReviewTransitions::TRANSITION_REJECT);
+
         if (null !== $daysSinceCreation) {
             $review->setCreatedAt(new \DateTime('-' . $daysSinceCreation . ' days'));
         }
@@ -91,6 +93,7 @@ final class ProductReviewContext implements Context
         ?int $daysSinceCreation = null,
     ): void {
         $review = $this->createProductReview($product, $title, $rating, $title, $customer, null);
+
         if (null !== $daysSinceCreation) {
             $review->setCreatedAt(new \DateTime('-' . $daysSinceCreation . ' days'));
         }

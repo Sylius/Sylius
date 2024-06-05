@@ -1,7 +1,14 @@
 {% extends '@SyliusAdmin/shared/form_theme.html.twig' %}
 
 {% block _sylius_admin_product_review_rating_widget %}
-    {% for entry in form.children %}
-        {{ form_widget(entry, sylius_test_form_attribute('rating', entry.vars.value)|merge({'required': false, 'label_attr': {'class': 'radio-inline'}})) }}
-    {% endfor %}
+    {% from '@SyliusAdmin/shared/helper/icon.html.twig' import icon %}
+
+    <div class="sylius-rating">
+        {% for entry in form.children %}
+            <label>
+                <input type="radio" value="{{ entry.vars.value }}" id="{{ entry.vars.id }}" name="{{ entry.vars.full_name }}" {{ sylius_test_html_attribute('rating', entry.vars.value) }} {{ entry.vars.checked ? 'checked' }}>
+                {{ icon({ icon: 'star' }) }}
+            </label>
+        {% endfor %}
+    </div>
 {% endblock %}

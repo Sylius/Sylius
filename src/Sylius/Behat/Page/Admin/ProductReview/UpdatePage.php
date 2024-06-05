@@ -29,7 +29,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
 
     public function chooseRating(string $rating): void
     {
-        $this->getElement('rating', ['%value%' => $rating])->click();
+        $this->getElement('rating', ['%value%' => $rating])->getParent()->click();
     }
 
     public function getRating(): string
@@ -51,7 +51,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     {
         return array_merge(parent::getDefinedElements(), [
             'author_name' => '[data-test-author-name]',
-            'checked_rating' => 'input[checked="checked"]',
+            'checked_rating' => 'input[checked]',
             'comment' => '[data-test-comment]',
             'product_name' => '[data-test-product-name]',
             'rating' => '[data-test-rating="%value%"]',
