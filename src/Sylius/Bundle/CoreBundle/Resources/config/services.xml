@@ -108,6 +108,9 @@
         </service>
         <service id="Sylius\Component\Customer\Context\CustomerContextInterface" alias="sylius.context.customer" />
 
+        <service id="sylius.inventory.order_item_availability_checker" class="Sylius\Component\Core\Inventory\Checker\OrderItemAvailabilityChecker"/>
+        <service id="Sylius\Component\Core\Inventory\Checker\OrderItemAvailabilityCheckerInterface" alias="sylius.inventory.order_item_availability_checker" />
+
         <service id="sylius.inventory.order_inventory_operator" class="Sylius\Component\Core\Inventory\Operator\OrderInventoryOperator"/>
         <service id="Sylius\Component\Core\Inventory\Operator\OrderInventoryOperatorInterface" alias="sylius.inventory.order_inventory_operator" />
 
