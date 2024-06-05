@@ -5,7 +5,7 @@
         {{ form_errors(hookable_metadata.context.form.provinces) }}
 
         <div {{ sylius_test_html_attribute('provinces') }}>
-            {% for key, province_form in hookable_metadata.context.form.provinces %}
+            {% for province_form in hookable_metadata.context.form.provinces %}
                 <div class="card mb-3" {{ sylius_test_html_attribute('province') }}>
                     <div class="card-body">
                         <div class="row">
