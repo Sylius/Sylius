@@ -23,9 +23,6 @@ use Sylius\Component\Core\Model\ProductVariantInterface;
 
 final class MediaFormElement extends BaseFormElement implements MediaFormElementInterface
 {
-    /** @var string[] */
-    private array $imageUrls = [];
-
     public function __construct(
         Session $session,
         $minkParameters,
@@ -37,6 +34,7 @@ final class MediaFormElement extends BaseFormElement implements MediaFormElement
     public function attachImage(string $path, ?string $type = null, ?ProductVariantInterface $productVariant = null): void
     {
         $this->changeTab();
+
         $this->getElement('add_image')->click();
 
         $this->waitForFormUpdate();
@@ -61,11 +59,6 @@ final class MediaFormElement extends BaseFormElement implements MediaFormElement
         $imageSubform->find('css', '[data-test-file]')->attachFile($filesPath . $path);
     }
 
-    public function hasLastImageAVariant(ProductVariantInterface $productVariant): bool
-    {
-        return $this->hasImageWithVariant($productVariant);
-    }
-
     public function changeImageWithType(string $type, string $path): void
     {
         $filesPath = $this->getParameter('files_path');
@@ -86,8 +79,9 @@ final class MediaFormElement extends BaseFormElement implements MediaFormElement
     public function removeFirstImage(): void
     {
         $this->changeTab();
+
         $firstSubform = $this->getFirstImageSubform();
-        $firstSubform->findAll('css', '[data-test-image-delete]')[0]->click();
+        $firstSubform->find('css', '[data-test-image-delete]')->click();
     }
 
     public function hasImageWithType(string $type): bool
@@ -111,6 +105,7 @@ final class MediaFormElement extends BaseFormElement implements MediaFormElement
     public function hasImageWithVariant(ProductVariantInterface $productVariant): bool
     {
         $this->changeTab();
+
         $images = $this->getElement('images');
 
         return $images->has('css', sprintf('[data-test-product-variant*="%s"]', $productVariant->getCode()));
@@ -145,22 +140,6 @@ final class MediaFormElement extends BaseFormElement implements MediaFormElement
         );
     }
 
-    public function isImageWithTypeDisplayed(string $type): bool
-    {
-        $imageElement = $this->getImageElementByType($type);
-
-        $imageUrl = $imageElement ? $imageElement->find('css', 'img')->getAttribute('src') : $this->provideImageUrlForType($type);
-        if (null === $imageElement && null === $imageUrl) {
-            return false;
-        }
-
-        $this->getDriver()->visit($imageUrl);
-        $statusCode = $this->getDriver()->getStatusCode();
-        $this->getDriver()->back();
-
-        return in_array($statusCode, [200, 304], true);
-    }
-
     protected function getDefinedElements(): array
     {
         return [
@@ -178,23 +157,6 @@ final class MediaFormElement extends BaseFormElement implements MediaFormElement
         $imageSubforms = $images->findAll('css', '[data-test-image-subform]');
 
         return reset($imageSubforms);
-    }
-
-    private function getImageElementByType(string $type): ?NodeElement
-    {
-        $images = $this->getElement('images');
-        $typeInput = $images->find('css', 'input[value="' . $type . '"]');
-
-        if (null === $typeInput) {
-            return null;
-        }
-
-        return $typeInput->getParent()->getParent()->getParent();
-    }
-
-    private function provideImageUrlForType(string $type): ?string
-    {
-        return $this->imageUrls[$type] ?? null;
     }
 
     private function changeTab(): void

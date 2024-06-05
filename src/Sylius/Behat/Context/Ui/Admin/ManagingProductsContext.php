@@ -957,7 +957,7 @@ final readonly class ManagingProductsContext implements Context
      */
     public function itsImageShouldHaveVariantSelected(ProductVariantInterface $productVariant): void
     {
-        Assert::true($this->mediaFormElement->hasLastImageAVariant($productVariant));
+        Assert::true($this->mediaFormElement->hasImageWithVariant($productVariant));
     }
 
     /**
