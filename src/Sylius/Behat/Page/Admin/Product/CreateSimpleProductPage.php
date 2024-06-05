@@ -126,13 +126,4 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
             ],
         );
     }
-
-    private function waitForFormUpdate(): void
-    {
-        $form = $this->getElement('form');
-        sleep(1); // we need to sleep, as sometimes the check below is executed faster than the form sets the busy attribute
-        $form->waitFor(1500, function () use ($form) {
-            return !$form->hasAttribute('busy');
-        });
-    }
 }
