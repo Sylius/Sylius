@@ -76,7 +76,7 @@ final class TwigComponentTagPassTest extends AbstractCompilerPassTestCase
         $this->setDefinition('my_twig_component', $twigComponent);
 
         $this->expectException(\InvalidArgumentException::class);
-        $this->expectExceptionMessage('The "key" attribute is required for the "sylius.twig_component" tag');
+        $this->expectExceptionMessage('The "key" and "template" attributes are required for the "sylius.twig_component" tag');
 
         $this->compile();
     }
@@ -89,7 +89,7 @@ final class TwigComponentTagPassTest extends AbstractCompilerPassTestCase
         $this->setDefinition('my_twig_component', $twigComponent);
 
         $this->expectException(\InvalidArgumentException::class);
-        $this->expectExceptionMessage('The "template" attribute is required for the "sylius.twig_component" tag');
+        $this->expectExceptionMessage('The "key" and "template" attributes are required for the "sylius.twig_component" tag');
 
         $this->compile();
     }

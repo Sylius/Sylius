@@ -178,7 +178,6 @@
         <service
             id="sylius_admin.twig.component.product.form.product_taxons"
             class="Sylius\Bundle\AdminBundle\Twig\Component\Product\Form\ProductTaxonsComponent"
-            autoconfigure="true"
         >
             <argument type="service" id="sylius_admin.doctrine.query.taxon.all_taxons" />
 

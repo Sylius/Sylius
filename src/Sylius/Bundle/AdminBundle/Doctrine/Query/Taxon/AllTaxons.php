@@ -38,11 +38,10 @@ final class AllTaxons implements AllTaxonsInterface
             $currentLocale = $fallbackLocale;
         }
 
-        $qb = $this->entityManager->getConnection()->createQueryBuilder();
+        $queryBuilder = $this->entityManager->getConnection()->createQueryBuilder();
 
-        $qb
+        $queryBuilder
             ->select([
-                'taxon.id as indexed',
                 'taxon.id as id',
                 'taxon.tree_root as tree_root',
                 'taxon.parent_id as parent_id',
@@ -58,18 +57,18 @@ final class AllTaxons implements AllTaxonsInterface
                 'taxon',
                 'sylius_taxon_translation',
                 'current_translation',
-                (string) $qb->expr()->and(
-                    $qb->expr()->eq('current_translation.translatable_id', 'taxon.id'),
-                    $qb->expr()->eq('current_translation.locale', ':currentLocale')
+                (string) $queryBuilder->expr()->and(
+                    $queryBuilder->expr()->eq('current_translation.translatable_id', 'taxon.id'),
+                    $queryBuilder->expr()->eq('current_translation.locale', ':currentLocale')
                 )
             )
             ->leftJoin(
                 'taxon',
                 'sylius_taxon_translation',
                 'fallback_translation',
-                (string) $qb->expr()->and(
-                    $qb->expr()->eq('fallback_translation.translatable_id', 'taxon.id'),
-                    $qb->expr()->eq('fallback_translation.locale', ':fallbackLocale')
+                (string) $queryBuilder->expr()->and(
+                    $queryBuilder->expr()->eq('fallback_translation.translatable_id', 'taxon.id'),
+                    $queryBuilder->expr()->eq('fallback_translation.locale', ':fallbackLocale')
                 )
             )
             ->orderBy('taxon.tree_level', Criteria::DESC)
@@ -78,6 +77,6 @@ final class AllTaxons implements AllTaxonsInterface
             ->setParameter('fallbackLocale', $fallbackLocale, Types::STRING)
         ;
 
-        return $qb->executeQuery()->fetchAllAssociativeIndexed();
+        return $queryBuilder->executeQuery()->fetchAllAssociative();
     }
 }
