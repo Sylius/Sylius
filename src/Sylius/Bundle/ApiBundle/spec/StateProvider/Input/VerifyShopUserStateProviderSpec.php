@@ -55,7 +55,7 @@ final class VerifyShopUserStateProviderSpec extends ObjectBehavior
 
         $this
             ->provide($operation, ['token' => 'TOKEN'], [ContextKeys::CHANNEL => $channel, ContextKeys::LOCALE_CODE => 'en_US'])
-            ->shouldBeLike(new VerifyShopUser('TOKEN',  'WEB', 'en_US'))
+            ->shouldBeLike(new VerifyShopUser('TOKEN', 'WEB', 'en_US'))
         ;
     }
 }

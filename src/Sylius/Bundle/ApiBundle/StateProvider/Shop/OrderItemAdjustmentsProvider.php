@@ -25,7 +25,7 @@ final readonly class OrderItemAdjustmentsProvider implements ProviderInterface
     ) {
     }
 
-    public function provide(Operation $operation, array $uriVariables = [], array $context = []): Collection|array
+    public function provide(Operation $operation, array $uriVariables = [], array $context = []): array|Collection
     {
         if (false === isset($uriVariables['id'], $uriVariables['tokenValue'])) {
             return [];

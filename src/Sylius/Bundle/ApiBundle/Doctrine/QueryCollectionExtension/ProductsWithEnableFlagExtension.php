@@ -33,7 +33,7 @@ final readonly class ProductsWithEnableFlagExtension implements QueryCollectionE
         QueryBuilder $queryBuilder,
         QueryNameGeneratorInterface $queryNameGenerator,
         string $resourceClass,
-        Operation $operation = null,
+        ?Operation $operation = null,
         array $context = [],
     ): void {
         if (!is_a($resourceClass, ProductInterface::class, true)) {

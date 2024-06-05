@@ -125,14 +125,14 @@
 <!--            <tag name="messenger.message_handler" bus="sylius_default.bus" />-->
 <!--        </service>-->
 
-<!--        <service id="Sylius\Bundle\ApiBundle\CommandHandler\Catalog\AddProductReviewHandler">-->
-<!--            <argument type="service" id="sylius.factory.product_review" />-->
-<!--            <argument type="service" id="sylius.repository.product_review" />-->
-<!--            <argument type="service" id="sylius.repository.product" />-->
-<!--            <argument type="service" id="Sylius\Bundle\CoreBundle\Resolver\CustomerResolverInterface" />-->
-<!--            <tag name="messenger.message_handler" bus="sylius.command_bus"/>-->
-<!--            <tag name="messenger.message_handler" bus="sylius_default.bus" />-->
-<!--        </service>-->
+        <service id="Sylius\Bundle\ApiBundle\CommandHandler\Catalog\AddProductReviewHandler">
+            <argument type="service" id="sylius.factory.product_review" />
+            <argument type="service" id="sylius.repository.product_review" />
+            <argument type="service" id="sylius.repository.product" />
+            <argument type="service" id="Sylius\Bundle\CoreBundle\Resolver\CustomerResolverInterface" />
+            <tag name="messenger.message_handler" bus="sylius.command_bus"/>
+            <tag name="messenger.message_handler" bus="sylius_default.bus" />
+        </service>
 
 <!--        <service id="Sylius\Bundle\ApiBundle\CommandHandler\Cart\BlameCartHandler">-->
 <!--            <argument type="service" id="sylius.repository.shop_user" />-->

@@ -104,21 +104,21 @@
             <argument>%sylius.security.new_api_route%</argument>
         </service>
 
-<!--        <service id="sylius.behat.context.api.shop.product" class="Sylius\Behat\Context\Api\Shop\ProductContext">-->
-<!--            <argument type="service" id="sylius.behat.api_platform_client.shop" />-->
-<!--            <argument type="service" id="Sylius\Behat\Client\ResponseCheckerInterface" />-->
-<!--            <argument type="service" id="sylius.behat.shared_storage" />-->
-<!--            <argument type="service" id="api_platform.iri_converter" />-->
-<!--            <argument type="service" id="sylius.behat.channel_context_setter" />-->
-<!--            <argument type="service" id="sylius.behat.request_factory" />-->
-<!--            <argument>%sylius.security.new_api_route%</argument>-->
-<!--        </service>-->
+        <service id="sylius.behat.context.api.shop.product" class="Sylius\Behat\Context\Api\Shop\ProductContext">
+            <argument type="service" id="sylius.behat.api_platform_client.shop" />
+            <argument type="service" id="Sylius\Behat\Client\ResponseCheckerInterface" />
+            <argument type="service" id="sylius.behat.shared_storage" />
+            <argument type="service" id="api_platform.iri_converter" />
+            <argument type="service" id="sylius.behat.channel_context_setter" />
+            <argument type="service" id="sylius.behat.request_factory" />
+            <argument>%sylius.security.new_api_route%</argument>
+        </service>
 
-<!--        <service id="sylius.behat.context.api.shop.product_attribute" class="Sylius\Behat\Context\Api\Shop\ProductAttributeContext">-->
-<!--            <argument type="service" id="sylius.behat.api_platform_client.shop" />-->
-<!--            <argument type="service" id="Sylius\Behat\Client\ResponseCheckerInterface" />-->
-<!--            <argument type="service" id="sylius.behat.shared_storage" />-->
-<!--        </service>-->
+        <service id="sylius.behat.context.api.shop.product_attribute" class="Sylius\Behat\Context\Api\Shop\ProductAttributeContext">
+            <argument type="service" id="sylius.behat.api_platform_client.shop" />
+            <argument type="service" id="Sylius\Behat\Client\ResponseCheckerInterface" />
+            <argument type="service" id="sylius.behat.shared_storage" />
+        </service>
 
         <service id="sylius.behat.context.api.shop.product_variant" class="Sylius\Behat\Context\Api\Shop\ProductVariantContext">
             <argument type="service" id="sylius.behat.api_platform_client.shop" />
@@ -127,12 +127,12 @@
             <argument type="service" id="api_platform.iri_converter" />
         </service>
 
-<!--        <service id="sylius.behat.context.api.shop.product_review" class="Sylius\Behat\Context\Api\Shop\ProductReviewContext">-->
-<!--            <argument type="service" id="sylius.behat.api_platform_client.shop" />-->
-<!--            <argument type="service" id="Sylius\Behat\Client\ResponseCheckerInterface" />-->
-<!--            <argument type="service" id="sylius.behat.shared_storage" />-->
-<!--            <argument type="service" id="api_platform.iri_converter" />-->
-<!--        </service>-->
+        <service id="sylius.behat.context.api.shop.product_review" class="Sylius\Behat\Context\Api\Shop\ProductReviewContext">
+            <argument type="service" id="sylius.behat.api_platform_client.shop" />
+            <argument type="service" id="Sylius\Behat\Client\ResponseCheckerInterface" />
+            <argument type="service" id="sylius.behat.shared_storage" />
+            <argument type="service" id="api_platform.iri_converter" />
+        </service>
 
         <service id="sylius.behat.context.api.shop.registration" class="Sylius\Behat\Context\Api\Shop\RegistrationContext">
             <argument type="service" id="sylius.behat.api_platform_client.shop" />
@@ -190,11 +190,11 @@
 <!--            <argument type="service" id="sylius.behat.api_platform_client.shop" />-->
 <!--        </service>-->
 
-<!--        <service id="Sylius\Behat\Context\Api\Shop\TaxonContext">-->
-<!--            <argument type="service" id="sylius.behat.api_platform_client.shop" />-->
-<!--            <argument type="service" id="Sylius\Behat\Client\ResponseCheckerInterface" />-->
-<!--            <argument type="service" id="api_platform.iri_converter" />-->
-<!--            <argument type="service" id="doctrine.orm.entity_manager" />-->
-<!--        </service>-->
+        <service id="Sylius\Behat\Context\Api\Shop\TaxonContext">
+            <argument type="service" id="sylius.behat.api_platform_client.shop" />
+            <argument type="service" id="Sylius\Behat\Client\ResponseCheckerInterface" />
+            <argument type="service" id="api_platform.iri_converter" />
+            <argument type="service" id="doctrine.orm.entity_manager" />
+        </service>
     </services>
 </container>

@@ -1,0 +1,318 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Sylius Sp. z o.o.
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<resources
+    xmlns="https://api-platform.com/schema/metadata/resources-3.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="https://api-platform.com/schema/metadata/resources-3.0 https://api-platform.com/schema/metadata/resources-3.0.xsd"
+>
+    <resource class="Sylius\Component\Core\Model\Product" shortName="Product">
+        <validationContext>
+            <values>
+                <value name="groups">
+                    <values>
+                        <value>sylius</value>
+                    </values>
+                </value>
+            </values>
+        </validationContext>
+
+        <order>
+            <values>
+                <value name="code">ASC</value>
+            </values>
+        </order>
+
+        <operations>
+            <operation class="ApiPlatform\Metadata\GetCollection" uriTemplate="/admin/products">
+                <normalizationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius:admin:product:index</value>
+                            </values>
+                        </value>
+                    </values>
+                </normalizationContext>
+                <filters>
+                    <filter>sylius.api.product_name_filter</filter>
+                    <filter>sylius.api.product_order_filter</filter>
+                    <filter>sylius.api.product_taxon_code_filter</filter>
+                    <filter>Sylius\Bundle\ApiBundle\Filter\Doctrine\ChannelsAwareChannelFilter</filter>
+                    <filter>Sylius\Bundle\ApiBundle\Filter\Doctrine\TranslationOrderNameAndLocaleFilter</filter>
+                </filters>
+                <openapiContext>
+                    <values>
+                        <value name="parameters">
+                            <values>
+                                <value name="imageFilter">
+                                    <values>
+                                        <value name="name">imageFilter</value>
+                                        <value name="in">query</value>
+                                        <value name="description">Provide one of supported image liip imagine filters</value>
+                                        <value name="schema">
+                                            <values>
+                                                <value name="type">string</value>
+                                            </values>
+                                        </value>
+                                    </values>
+                                </value>
+                            </values>
+                        </value>
+                    </values>
+                </openapiContext>
+            </operation>
+
+            <operation class="ApiPlatform\Metadata\GetCollection" uriTemplate="/shop/products">
+                <normalizationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius:shop:product:index</value>
+                            </values>
+                        </value>
+                    </values>
+                </normalizationContext>
+                <filters>
+                    <filter>sylius.api.product_name_filter</filter>
+                    <filter>sylius.api.product_order_filter</filter>
+                    <filter>sylius.api.product_taxon_code_filter</filter>
+                    <filter>Sylius\Bundle\ApiBundle\Filter\Doctrine\ProductPriceOrderFilter</filter>
+                    <filter>Sylius\Bundle\ApiBundle\Filter\Doctrine\TranslationOrderNameAndLocaleFilter</filter>
+                    <filter>Sylius\Bundle\ApiBundle\Filter\Doctrine\TaxonFilter</filter>
+                </filters>
+                <openapiContext>
+                    <values>
+                        <value name="parameters">
+                            <values>
+                                <value name="imageFilter">
+                                    <values>
+                                        <value name="name">imageFilter</value>
+                                        <value name="in">query</value>
+                                        <value name="description">Provide one of supported image liip imagine filters</value>
+                                        <value name="schema">
+                                            <values>
+                                                <value name="type">string</value>
+                                            </values>
+                                        </value>
+                                    </values>
+                                </value>
+                            </values>
+                        </value>
+                    </values>
+                </openapiContext>
+            </operation>
+
+            <operation class="ApiPlatform\Metadata\Post" uriTemplate="/admin/products">
+                <denormalizationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius:admin:product:create</value>
+                            </values>
+                        </value>
+                    </values>
+                </denormalizationContext>
+                <normalizationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius:admin:product:show</value>
+                            </values>
+                        </value>
+                    </values>
+                </normalizationContext>
+            </operation>
+
+            <operation class="ApiPlatform\Metadata\Get" uriTemplate="/admin/products/{code}">
+                <normalizationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius:admin:product:show</value>
+                            </values>
+                        </value>
+                    </values>
+                </normalizationContext>
+                <openapiContext>
+                    <values>
+                        <value name="summary">Use code to retrieve a product resource.</value>
+                        <value name="parameters">
+                            <values>
+                                <value name="imageFilter">
+                                    <values>
+                                        <value name="name">imageFilter</value>
+                                        <value name="in">query</value>
+                                        <value name="description">Provide one of supported image liip imagine filters</value>
+                                        <value name="schema">
+                                            <values>
+                                                <value name="type">string</value>
+                                            </values>
+                                        </value>
+                                    </values>
+                                </value>
+                            </values>
+                        </value>
+                    </values>
+                </openapiContext>
+            </operation>
+
+            <operation class="ApiPlatform\Metadata\Get" uriTemplate="/shop/products/{code}">
+                <normalizationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius:shop:product:show</value>
+                            </values>
+                        </value>
+                    </values>
+                </normalizationContext>
+                <openapiContext>
+                    <values>
+                        <value name="summary">Use code to retrieve a product resource.</value>
+                        <value name="parameters">
+                            <values>
+                                <value name="imageFilter">
+                                    <values>
+                                        <value name="name">imageFilter</value>
+                                        <value name="in">query</value>
+                                        <value name="description">Provide one of supported image liip imagine filters</value>
+                                        <value name="schema">
+                                            <values>
+                                                <value name="type">string</value>
+                                            </values>
+                                        </value>
+                                    </values>
+                                </value>
+                            </values>
+                        </value>
+                    </values>
+                </openapiContext>
+            </operation>
+
+            <operation
+                class="ApiPlatform\Metadata\Get"
+                uriTemplate="/shop/products-by-slug/{slug}"
+                controller="Sylius\Bundle\ApiBundle\Controller\GetProductBySlugAction"
+                read="false"
+            >
+                <normalizationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius:shop:product:show</value>
+                            </values>
+                        </value>
+                    </values>
+                </normalizationContext>
+                <openapiContext>
+                    <values>
+                        <value name="summary">Use slug to retrieve a product resource.</value>
+                        <value name="parameters">
+                            <values>
+                                <value name="slug">
+                                    <values>
+                                        <value name="name">slug</value>
+                                        <value name="in">path</value>
+                                        <value name="required">true</value>
+                                        <value name="schema">
+                                            <values>
+                                                <value name="type">string</value>
+                                            </values>
+                                        </value>
+                                    </values>
+                                </value>
+                                <value name="imageFilter">
+                                    <values>
+                                        <value name="name">imageFilter</value>
+                                        <value name="in">query</value>
+                                        <value name="description">Provide one of supported image liip imagine filters</value>
+                                        <value name="schema">
+                                            <values>
+                                                <value name="type">string</value>
+                                            </values>
+                                        </value>
+                                    </values>
+                                </value>
+                            </values>
+                        </value>
+                    </values>
+                </openapiContext>
+            </operation>
+
+            <operation class="ApiPlatform\Metadata\Put" uriTemplate="/admin/products/{code}">
+                <denormalizationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius:admin:product:update</value>
+                            </values>
+                        </value>
+                    </values>
+                </denormalizationContext>
+                <normalizationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius:admin:product:show</value>
+                            </values>
+                        </value>
+                    </values>
+                </normalizationContext>
+            </operation>
+
+            <operation class="ApiPlatform\Metadata\Delete" uriTemplate="/admin/products/{code}" />
+
+        </operations>
+    </resource>
+
+    <resource class="Sylius\Component\Core\Model\Product" uriTemplate="/admin/products/{code}/images">
+        <uriVariables>
+            <uriVariable parameterName="code" fromClass="Sylius\Component\Core\Model\Product" fromProperty="images"/>
+        </uriVariables>
+        <operations>
+            <operation class="ApiPlatform\Metadata\GetCollection">
+                <openapiContext>
+                    <values>
+                        <value name="parameters">
+                            <values>
+                                <value name="imageFilter">
+                                    <values>
+                                        <value name="name">imageFilter</value>
+                                        <value name="in">query</value>
+                                        <value name="description">Provide one of supported image liip imagine filters</value>
+                                        <value name="schema">
+                                            <values>
+                                                <value name="type">string</value>
+                                            </values>
+                                        </value>
+                                    </values>
+                                </value>
+                            </values>
+                        </value>
+                    </values>
+                </openapiContext>
+            </operation>
+        </operations>
+    </resource>
+
+    <resource class="Sylius\Component\Core\Model\Product" uriTemplate="/shop/products/{code}/attributes">
+        <uriVariables>
+            <uriVariable parameterName="code" fromClass="Sylius\Component\Core\Model\Product" fromProperty="attributes"/>
+        </uriVariables>
+        <operations>
+            <operation class="ApiPlatform\Metadata\GetCollection" />
+        </operations>
+    </resource>
+
+</resources>

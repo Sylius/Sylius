@@ -25,7 +25,7 @@ use Sylius\Component\Review\Model\ReviewInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 
-final class AddProductReviewHandler implements MessageHandlerInterface
+final readonly class AddProductReviewHandler implements MessageHandlerInterface
 {
     public function __construct(
         private FactoryInterface $productReviewFactory,

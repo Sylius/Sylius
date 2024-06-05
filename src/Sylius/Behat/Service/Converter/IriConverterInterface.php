@@ -23,7 +23,7 @@ interface IriConverterInterface extends BaseIriConverterInterface
         object|string $resource,
         string $section,
         int $referenceType = UrlGeneratorInterface::ABS_PATH,
-        Operation $operation = null,
+        ?Operation $operation = null,
         array $context = [],
     ): ?string;
 }

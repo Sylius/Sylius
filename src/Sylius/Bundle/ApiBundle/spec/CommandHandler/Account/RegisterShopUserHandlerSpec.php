@@ -66,7 +66,7 @@ final class RegisterShopUserHandlerSpec extends ObjectBehavior
         GeneratorInterface $generator,
         MessageBusInterface $commandBus,
     ): void {
-        $command = new RegisterShopUser('Will', 'Smith', 'WILL.SMITH@example.com', 'iamrobot',  'CHANNEL_CODE', 'en_US', true);
+        $command = new RegisterShopUser('Will', 'Smith', 'WILL.SMITH@example.com', 'iamrobot', 'CHANNEL_CODE', 'en_US', true);
 
         $shopUserFactory->createNew()->willReturn($shopUser);
         $customerResolver->resolve('WILL.SMITH@example.com')->willReturn($customer);
@@ -165,7 +165,7 @@ final class RegisterShopUserHandlerSpec extends ObjectBehavior
 
         $this
             ->shouldThrow(\DomainException::class)
-            ->during('__invoke', [new RegisterShopUser( 'Will', 'Smith', 'WILL.SMITH@example.com', 'iamrobot', 'CHANNEL_CODE', 'en_US', true)])
+            ->during('__invoke', [new RegisterShopUser('Will', 'Smith', 'WILL.SMITH@example.com', 'iamrobot', 'CHANNEL_CODE', 'en_US', true)])
         ;
     }
 }

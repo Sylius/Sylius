@@ -42,6 +42,26 @@
                     </values>
                 </normalizationContext>
             </operation>
+            <operation class="ApiPlatform\Metadata\Put" uriTemplate="admin/administrators/{id}.{_format}">
+                <denormalizationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius:admin:admin_user:update</value>
+                            </values>
+                        </value>
+                    </values>
+                </denormalizationContext>
+                <normalizationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius:admin:admin_user:show</value>
+                            </values>
+                        </value>
+                    </values>
+                </normalizationContext>
+            </operation>
         </operations>
     </resource>
 </resources>

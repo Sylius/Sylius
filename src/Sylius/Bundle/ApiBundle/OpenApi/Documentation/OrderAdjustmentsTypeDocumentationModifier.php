@@ -21,7 +21,7 @@ final readonly class OrderAdjustmentsTypeDocumentationModifier implements Docume
 {
     public function __construct(
         private string $apiRoute,
-        private string $adjustmentResourceClass
+        private string $adjustmentResourceClass,
     ) {
     }
 

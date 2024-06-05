@@ -16,7 +16,6 @@ namespace Sylius\Tests\Api\Shop;
 use Sylius\Tests\Api\JsonApiTestCase;
 use Sylius\Tests\Api\Utils\OrderPlacerTrait;
 use Sylius\Tests\Api\Utils\ShopUserLoginTrait;
-use Symfony\Component\HttpFoundation\Response;
 
 final class PaymentsTest extends JsonApiTestCase
 {
@@ -56,7 +55,7 @@ final class PaymentsTest extends JsonApiTestCase
 
         $this->assertResponse(
             $this->client->getResponse(),
-            'shop/payment/get_payment'
+            'shop/payment/get_payment',
         );
     }
 }

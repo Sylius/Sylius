@@ -26,7 +26,7 @@ use Webmozart\Assert\Assert;
  */
 final class VerifyShopUserStateProvider implements ProviderInterface
 {
-    public function provide(Operation $operation, array $uriVariables = [], array $context = []): object|array|null
+    public function provide(Operation $operation, array $uriVariables = [], array $context = []): array|object|null
     {
         if (!is_a($operation->getClass(), VerifyShopUser::class, true)) {
             return null;
@@ -34,6 +34,6 @@ final class VerifyShopUserStateProvider implements ProviderInterface
 
         Assert::stringNotEmpty($uriVariables['token'] ?? null, 'Token is required.');
 
-        return new VerifyShopUser($uriVariables['token'], $context[ContextKeys::CHANNEL]->getCode(), $context[ContextKeys::LOCALE_CODE],);
+        return new VerifyShopUser($uriVariables['token'], $context[ContextKeys::CHANNEL]->getCode(), $context[ContextKeys::LOCALE_CODE], );
     }
 }

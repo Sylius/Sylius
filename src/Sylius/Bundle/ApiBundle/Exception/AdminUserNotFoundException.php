@@ -21,7 +21,7 @@ final class AdminUserNotFoundException extends NotFoundHttpException
 {
     public function __construct(
         string $message = 'Admin user not found.',
-        Throwable $previous = null,
+        ?Throwable $previous = null,
         int $code = 0,
         array $headers = [],
     ) {
