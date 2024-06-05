@@ -628,7 +628,7 @@ final readonly class ManagingProductsContext implements Context
      */
     public function iSetItsAttributeTo(string $attributeName, ?string $value = null, string $localeCode = 'en_US'): void
     {
-        $this->attributesFormElement->updateAttributeInLocale($attributeName, $value ?? '', $localeCode);
+        $this->attributesFormElement->updateAttribute($attributeName, $value ?? '', $localeCode);
     }
 
     /**
@@ -636,7 +636,7 @@ final readonly class ManagingProductsContext implements Context
      */
     public function iSelectValueInLanguageForTheAttribute(string $value, string $localeCode, string $attribute): void
     {
-        $this->attributesFormElement->updateAttributeInLocale($attribute, $value, $localeCode);
+        $this->attributesFormElement->updateAttribute($attribute, $value, $localeCode);
     }
 
     /**
@@ -644,7 +644,7 @@ final readonly class ManagingProductsContext implements Context
      */
     public function iSelectValueForTheAttribute(string $value, string $attribute): void
     {
-        $this->attributesFormElement->updateAttributeInLocale($attribute, $value, '');
+        $this->attributesFormElement->updateAttribute($attribute, $value, '');
     }
 
     /**
@@ -652,7 +652,7 @@ final readonly class ManagingProductsContext implements Context
      */
     public function iSetItsNonTranslatableAttributeTo(string $attributeName, string $value): void
     {
-        $this->attributesFormElement->updateAttributeInLocale($attributeName, $value, '');
+        $this->attributesFormElement->updateAttribute($attributeName, $value, '');
     }
 
     /**
