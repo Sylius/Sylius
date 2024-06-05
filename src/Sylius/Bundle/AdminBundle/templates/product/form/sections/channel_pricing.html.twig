@@ -1,13 +1,13 @@
 {% set product = hookable_metadata.context.resource %}
 
 {% if product.isSimple %}
-    <div class="tab-pane" id="product-channel-pricing" role="tabpanel" tabindex="0">
+    <div class="tab-pane {% if hookable_metadata.configuration.active|default(false) %}show active{% endif %}" id="product-channel-pricing" role="tabpanel" tabindex="0">
         {% set variant_form = hookable_metadata.context.form.variant %}
 
         {% set is_channel_pricing_invalid = variant_form.channelPricings.vars.errors is not empty %}
 
         {% if is_channel_pricing_invalid %}
-            {% from '@SyliusAdmin/shared/helper/icon.html.twig' import icon as icon %}
+            {% from '@SyliusAdmin/shared/helper/icon.html.twig' import icon %}
 
             <div class="alert alert-danger" role="alert">
                 <div class="d-flex">

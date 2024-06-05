@@ -1,4 +1,4 @@
-{% from '@SyliusAdmin/shared/helper/icon.html.twig' import icon as icon %}
+{% from '@SyliusAdmin/shared/helper/icon.html.twig' import icon %}
 
 {% set statistics_data = hookable_metadata.context.statistics_data %}
 
@@ -18,7 +18,7 @@
                 </div>
                 <div class="col">
                     <div class="subheader">{{ 'sylius.ui.sales'|trans }}</div>
-                    <div class="h2 mb-0 me-2">{{ _context.statistics_data.statistics.total_sales }}</div>
+                    <div class="h2 mb-0 me-2">{{ statistics_data.statistics.total_sales }}</div>
                 </div>
             </div>
         </div>

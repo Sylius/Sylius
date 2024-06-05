@@ -1,4 +1,4 @@
-{% from '@SyliusAdmin/shared/helper/icon.html.twig' import icon as icon %}
+{% from '@SyliusAdmin/shared/helper/icon.html.twig' import icon %}
 
 <a class="dropdown-item" href="{{ path('sylius_admin_customer_order_index', {'id': hookable_metadata.context.resource.id}) }}">
     {{ icon({ icon: 'shopping-bag', class: 'icon dropdown-item-icon icon-tabler' }) }}

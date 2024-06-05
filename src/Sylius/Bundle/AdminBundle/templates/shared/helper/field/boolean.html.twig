@@ -1,5 +1,5 @@
 {% macro default(data) %}
-    {% from '@SyliusAdmin/shared/helper/icon.html.twig' import icon as icon %}
+    {% from '@SyliusAdmin/shared/helper/icon.html.twig' import icon %}
 
     {% if true == data %}
         <div class="text-center" {{ sylius_test_html_attribute('status-enabled') }}>{{ icon({ icon: 'check', class: 'icon text-green' }) }}</div>

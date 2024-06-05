@@ -8,12 +8,12 @@
                 {% set is_channel_pricing_invalid = channel_pricing_form.vars.errors.form.parent.errors is not empty %}
 
                 {% if is_channel_pricing_invalid %}
-                    {% from '@SyliusAdmin/shared/helper/icon.html.twig' import icon as _icon %}
+                    {% from '@SyliusAdmin/shared/helper/icon.html.twig' import icon %}
 
                     <div class="alert alert-danger" role="alert">
                         <div class="d-flex">
                             <div>
-                                {{ _icon({ 'icon': 'danger', 'class': 'alert-icon' }) }}
+                                {{ icon({ 'icon': 'danger', 'class': 'alert-icon' }) }}
                             </div>
                             <div>
                                 {% set first_error = channel_pricing_form.vars.errors.form.parent.errors|first %}

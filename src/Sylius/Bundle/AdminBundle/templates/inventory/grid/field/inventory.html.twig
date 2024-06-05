@@ -1,8 +1,8 @@
-{% import '@SyliusAdmin/shared/helper/icon.html.twig' as icon %}
+{% from '@SyliusAdmin/shared/helper/icon.html.twig' import icon %}
 
 {% if data.isTracked %}
     <div class="badge {{ data.onHand > 0 ? 'text-bg-success' : 'text-bg-danger' }}  d-flex w-fit-content">
-        {{ icon.icon({ icon: 'cube', class: 'icon icon-tabler mr-1' }) }}
+        {{ icon({ icon: 'cube', class: 'icon icon-tabler mr-1' }) }}
         <div class="text-start">
             <span>{{ data.onHand }}</span> {{ 'sylius.ui.available_on_hand'|trans }}
             {% if data.onHold > 0 %}
