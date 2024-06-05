@@ -1,11 +1,10 @@
-{% set productTaxonsForm = form.productTaxons %}
+{% set product_taxons_form = form.productTaxons %}
 
 <div {{ sylius_test_html_attribute('product-taxons') }}>
-    {{ form_label(productTaxonsForm) }}
-    <div class="card"
-        {{ stimulus_controller('product-taxon-tree', {treeData: this.tree, autoOpen: hookableMetadata.configuration.auto_open}) }}
-    >
-        {{ form_widget(productTaxonsForm, {attr: {'data-product-taxon-tree-target': 'productTaxons'}}) }}
+    {{ form_label(product_taxons_form) }}
+    <div class="card"{{ stimulus_controller('product-taxon-tree', {treeData: this.tree, autoOpen: hookableMetadata.configuration.auto_open}) }}>
+        {{ form_widget(product_taxons_form, {attr: {'data-product-taxon-tree-target': 'productTaxons'}}) }}
+
         <div class="p-3 pb-5">
             <div class="d-flex align-items-center mb-4">
                 <div class="input-group input-group-flat">

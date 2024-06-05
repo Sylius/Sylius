@@ -24,10 +24,14 @@ final class TwigComponentTagPass implements CompilerPassInterface
     {
         foreach ($container->findTaggedServiceIds('sylius.twig_component') as $id => $tags) {
             foreach ($tags as $tag) {
-                $liveComponentService = $container->getDefinition($id);
-                $liveComponentService->addTag('twig.component', [
-                    'key' => $tag['key'] ?? throw new InvalidArgumentException('The "key" attribute is required for the "sylius.twig_component" tag'),
-                    'template' => $tag['template'] ?? throw new InvalidArgumentException('The "template" attribute is required for the "sylius.twig_component" tag'),
+                if (!isset($tag['key'], $tag['template'])) {
+                    throw new InvalidArgumentException('The "key" and "template" attributes are required for the "sylius.twig_component" tag');
+                }
+
+                $twigComponentService = $container->getDefinition($id);
+                $twigComponentService->addTag('twig.component', [
+                    'key' => $tag['key'],
+                    'template' => $tag['template'],
                     'expose_public_props' => $tag['expose_public_props'] ?? true,
                     'attributes_var' => $tag['attributes_var'] ?? 'attributes',
                 ]);
