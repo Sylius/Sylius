@@ -112,17 +112,20 @@ final class ManagingProductsContext implements Context
     }
 
     /**
-     * @When I name it :name in :localeCode
-     * @When I rename it to :name in :localeCode
      * @When I do not name it
      */
-    public function iRenameItToIn(?string $name = null, string $localeCode = 'en_US'): void
+    public function iDoNotNameIt(): void
     {
-        $data['translations'][$localeCode] = [];
+        // Intentionally left blank.
+    }
 
-        if ($name !== null) {
-            $data['translations'][$localeCode]['name'] = $name;
-        }
+    /**
+     * @When I name it :name in :localeCode locale
+     * @When I rename it to :name in :localeCode locale
+     */
+    public function iRenameItToIn(?string $name, string $localeCode = 'en_US'): void
+    {
+        $data['translations'][$localeCode]['name'] = $name;
 
         $this->client->updateRequestData($data);
     }
@@ -704,14 +707,14 @@ final class ManagingProductsContext implements Context
     }
 
     /**
-     * @Then /^(this product) name should be "([^"]+)"$/
+     * @Then /^(this product) name should be "([^"]+)" in ("([^"]+)" locale)$/
      */
-    public function thisProductNameShouldBe(ProductInterface $product, string $name): void
+    public function thisProductNameShouldBe(ProductInterface $product, string $name, string $localeCode): void
     {
         $response = $this->client->show(Resources::PRODUCTS, $product->getCode());
 
         Assert::true(
-            $this->responseChecker->hasTranslation($response, 'en_US', 'name', $name),
+            $this->responseChecker->hasTranslation($response, $localeCode, 'name', $name),
             sprintf('Product\'s name %s does not exist', $name),
         );
     }
