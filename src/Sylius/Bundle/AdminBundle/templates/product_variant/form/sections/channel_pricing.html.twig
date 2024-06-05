@@ -1,5 +1,6 @@
-{% set product_variant = hookable_metadata.context.form.vars.data%}
 {% import '@SyliusAdmin/shared/helper/channelPricings.html.twig' as _channelPricings %}
+
+{% set product_variant = hookable_metadata.context.form.vars.data %}
 
 <div class="tab-pane" id="product-variant-channel-pricing" role="tabpanel" tabindex="0">
     <div class="bg-white mb-3">
@@ -29,7 +30,7 @@
                                 </div>
                             </div>
                         {% endif %}
-                        {% if channelCode not in product_variant.product.channels|map(channel => channel.code) %}
+                        {% if channel_code not in product_variant.product.channels|map(channel => channel.code) %}
                             <div class="alert alert-info">
                                 {{ 'sylius.ui.product.product_not_active_in_channel'|trans }}
                             </div>
