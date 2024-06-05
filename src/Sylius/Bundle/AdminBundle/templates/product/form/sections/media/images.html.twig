@@ -22,16 +22,7 @@
                     {% endif %}
                 </div>
                 <div class="mt-3 d-flex items-center">
-                    {{ form_widget(
-                        image_form.vars.button_delete,
-                        {
-                            label: 'sylius.ui.delete'|trans,
-                            attr: {
-                            class: 'btn btn-outline-danger w-100',
-                            'data-test-image-delete': '',
-                        }
-                        }
-                    ) }}
+                    {{ form_widget(image_form.vars.button_delete, { label: 'sylius.ui.delete'|trans, attr: { class: 'btn btn-outline-danger w-100','data-test-image-delete': '' }}) }}
                 </div>
             </div>
             <div class="col">
