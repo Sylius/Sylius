@@ -16,24 +16,24 @@ Feature: Adding text attributes in different locales to a product
     Scenario: Adding a product with a text attribute in different locales
         When I want to create a new configurable product
         And I specify its code as "mug"
-        And I name it "PHP Mug" in "English (United States)"
+        And I name it "PHP Mug" in "English (United States)" locale
         And I set its slug to "php-mug"
         And I add the "Mug material" attribute
-        And I set the "Mug material" attribute value to "Wood" in "English (United States)"
-        And I set the "Mug material" attribute value to "Drewno" in "Polish (Poland)"
+        And I set the "Mug material" attribute value to "Wood" in "English (United States)" locale
+        And I set the "Mug material" attribute value to "Drewno" in "Polish (Poland)" locale
         And I add it
         Then I should be notified that it has been successfully created
         And the product "PHP Mug" should appear in the store
-        And attribute "Mug material" of product "PHP Mug" should be "Wood" in "English (United States)"
-        And attribute "Mug material" of product "PHP Mug" should be "Drewno" in "Polish (Poland)"
+        And attribute "Mug material" of product "PHP Mug" should be "Wood" in "English (United States)" locale
+        And attribute "Mug material" of product "PHP Mug" should be "Drewno" in "Polish (Poland)" locale
 
     @ui @mink:chromedriver @api
     Scenario: Adding a text attribute in different locales to an existing product
         When I want to modify the "Symfony Mug" product
         And I add the "Mug material" attribute
-        And I set the "Mug material" attribute value to "Wood" in "English (United States)"
-        And I set the "Mug material" attribute value to "Drewno" in "Polish (Poland)"
+        And I set the "Mug material" attribute value to "Wood" in "English (United States)" locale
+        And I set the "Mug material" attribute value to "Drewno" in "Polish (Poland)" locale
         And I save my changes
         Then I should be notified that it has been successfully edited
-        And attribute "Mug material" of product "Symfony Mug" should be "Wood" in "English (United States)"
-        And attribute "Mug material" of product "Symfony Mug" should be "Drewno" in "Polish (Poland)"
+        And attribute "Mug material" of product "Symfony Mug" should be "Wood" in "English (United States)" locale
+        And attribute "Mug material" of product "Symfony Mug" should be "Drewno" in "Polish (Poland)" locale

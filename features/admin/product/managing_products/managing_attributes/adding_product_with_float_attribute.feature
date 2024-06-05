@@ -13,7 +13,7 @@ Feature: Adding a new product with a float attribute
     Scenario: Adding a float attribute to a product
         When I want to create a new configurable product
         And I specify its code as "display_size"
-        And I name it "Smartphone" in "English (United States)"
+        And I name it "Smartphone" in "English (United States)" locale
         And I set its slug to "smartphone"
         And I add the "Display Size" attribute to it
         And I set its non-translatable "Display Size" attribute to 12.5
@@ -26,7 +26,7 @@ Feature: Adding a new product with a float attribute
     Scenario: Trying to add an invalid float attribute to product
         When I want to create a new configurable product
         And I specify its code as "44_MAGNUM"
-        And I name it "44 Magnum" in "English (United States)"
+        And I name it "44 Magnum" in "English (United States)" locale
         And I set its slug to "44-magnum"
         And I set the invalid string value of the non-translatable "Display Size" attribute to "12.5"
         And I try to add it

@@ -13,7 +13,7 @@ Feature: Adding a new product with a datetime attribute
     Scenario: Adding a datetime attribute to a product
         When I want to create a new configurable product
         And I specify its code as "mug"
-        And I name it "Mug" in "English (United States)"
+        And I name it "Mug" in "English (United States)" locale
         And I set its non-translatable "Manufactured" attribute to "2023-10-10 10:20:30"
         And I add it
         Then I should be notified that it has been successfully created
@@ -24,7 +24,7 @@ Feature: Adding a new product with a datetime attribute
     Scenario: Trying to add an invalid datetime attribute to product
         When I want to create a new configurable product
         And I specify its code as "44_MAGNUM"
-        And I name it "44 Magnum" in "English (United States)"
+        And I name it "44 Magnum" in "English (United States)" locale
         And I set the invalid integer value of the non-translatable "Manufactured" attribute to 10
         And I try to add it
         Then I should be notified that the value of the "Manufactured" attribute has invalid type

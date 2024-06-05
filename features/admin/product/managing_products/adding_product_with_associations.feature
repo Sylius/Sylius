@@ -14,7 +14,7 @@ Feature: Adding a new product with associations
     Scenario: Adding a new product with associations
         When I want to create a new simple product
         And I specify its code as "lg_g3"
-        And I name it "LG G3" in "English (United States)"
+        And I name it "LG G3" in "English (United States)" locale
         And I set its slug to "lg-g3"
         And I set its price to "$400.00" for "United States" channel
         And I associate as "Accessories" the "LG headphones" and "LG earphones" products
@@ -29,7 +29,7 @@ Feature: Adding a new product with associations
     Scenario: Adding a new product with associations after changing associated items
         When I want to create a new simple product
         And I specify its code as "lg_g3"
-        And I name it "LG G3" in "English (United States)"
+        And I name it "LG G3" in "English (United States)" locale
         And I set its slug to "lg-g3"
         And I set its price to "$400.00" for "United States" channel
         And I associate as "Accessories" the "LG headphones" and "LG earphones" products
@@ -45,7 +45,7 @@ Feature: Adding a new product with associations
         Given the store has 123 product association type
         When I want to create a new simple product
         And I specify its code as "lg_g3"
-        And I name it "LG G3" in "English (United States)"
+        And I name it "LG G3" in "English (United States)" locale
         And I set its slug to "lg-g3"
         And I set its price to "$400.00" for "United States" channel
         And I associate as 123 the "LG headphones" and "LG earphones" products
