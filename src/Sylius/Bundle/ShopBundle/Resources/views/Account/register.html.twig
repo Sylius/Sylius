@@ -1,0 +1,20 @@
+{% extends '@SyliusShop/layout.html.twig' %}
+
+{% form_theme form '@SyliusShop/Form/theme.html.twig' %}
+
+{% block title %}{{ 'sylius.ui.register_in_the_store'|trans }} | {{ parent() }}{% endblock %}
+
+{% block content %}
+    <div class="container">
+        {{ form_start(form, {'action': path('sylius_shop_register'), 'attr': {'novalidate': 'novalidate'}}) }}
+
+        <div class="row justify-content-center mt-4 mb-5">
+            <div class="col-12 col-md-6">
+                {{ sylius_template_event('sylius.shop.account.register', _context) }}
+            </div>
+        </div>
+
+        {{ form_row(form._token) }}
+        {{ form_end(form, {'render_rest': false}) }}
+    </div>
+{% endblock %}
