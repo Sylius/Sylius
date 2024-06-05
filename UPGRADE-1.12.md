@@ -5,10 +5,12 @@
 
    ```diff
     public function __construct(
-    +   private OrderItemAvailabilityCheckerInterface $orderItemAvailabilityChecker,
+    +   private OrderItemAvailabilityCheckerInterface|AvailabilityCheckerInterface $availabilityChecker,
     -   private AvailabilityCheckerInterface $availabilityChecker,
     )
     ```
+
+   If you have overwritten the service or its argument, check the correct functioning.
 
 # UPGRADING FROM `v1.12.13` TO `v1.12.14`
 
