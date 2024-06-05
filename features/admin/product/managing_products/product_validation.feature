@@ -171,39 +171,43 @@ Feature: Products validation
         Then I should be notified that slug has to be unique
         And product with code "7-WONDERS-BABEL" should not be added
 
-    @ui @javascript @api
+    @ui @mink:chromedriver @api
     Scenario: Trying to add a new product with a text attribute without specifying its value in default locale
         When I want to create a new configurable product
         And I specify its code as "X-18-MUG"
         And I name it "PHP Mug" in "English (United States)" locale
+        And I add the "Mug material" attribute
         And I set its "Mug material" attribute to "Drewno" in "Polish (Poland)" locale
         But I do not set its "Mug material" attribute in "English (United States)" locale
         And I add it
         Then I should be notified that I have to define the "Mug material" attribute in "English (United States)" locale
         And product with code "X-18-MUG" should not be added
 
-    @ui @javascript @api
+    @ui @mink:chromedriver @api
     Scenario: Trying to add a new product with a text attribute without specifying its value in additional locale with proper length
         When I want to create a new configurable product
         And I specify its code as "X-18-MUG"
         And I name it "PHP Mug" in "English (United States)" locale
+        And I add the "Mug material" attribute
         And I set its "Mug material" attribute to "Dr" in "Polish (Poland)" locale
         And I set its "Mug material" attribute to "Wood" in "English (United States)" locale
         And I add it
         Then I should be notified that the "Mug material" attribute in "Polish (Poland)" locale should be longer than 3
         And product with code "X-18-MUG" should not be added
 
-    @ui @javascript @api
+    @ui @mink:chromedriver @api
     Scenario: Trying to add a text attribute in different locales to an existing product without specifying its value in default locale
         When I want to modify the "Symfony Mug" product
+        And I add the "Mug material" attribute
         And I set its "Mug material" attribute to "Drewno" in "Polish (Poland)" locale
         But I do not set its "Mug material" attribute in "English (United States)" locale
         And I save my changes
         Then I should be notified that I have to define the "Mug material" attribute in "English (United States)" locale
 
-    @ui @javascript @api
+    @ui @mink:chromedriver @api
     Scenario: Trying to add a text attribute in different locales to an existing product without specifying its value in additional locale with proper length
         When I want to modify the "Symfony Mug" product
+        And I add the "Mug material" attribute
         And I set its "Mug material" attribute to "Dr" in "Polish (Poland)" locale
         And I set its "Mug material" attribute to "Wood" in "English (United States)" locale
         And I save my changes

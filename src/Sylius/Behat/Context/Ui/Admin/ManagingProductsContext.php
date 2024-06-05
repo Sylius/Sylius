@@ -819,7 +819,7 @@ final readonly class ManagingProductsContext implements Context
      */
     public function iShouldSeeNonTranslatableAttributeWithValue(string $attribute, string $value): void
     {
-        Assert::true($this->attributesFormElement->hasNonTranslatableAttributeWithValue($attribute, $value));
+        Assert::same($this->attributesFormElement->getValueNonTranslatableAttribute($attribute), $value);
     }
 
     /**
@@ -1247,7 +1247,7 @@ final readonly class ManagingProductsContext implements Context
     public function iShouldBeNotifiedThatTheAttributeInShouldBeLongerThan(string $attribute, string $localeCode, int $number): void
     {
         Assert::same(
-            $this->resolveCurrentPage()->getAttributeValidationErrors($attribute, $localeCode),
+            $this->attributesFormElement->getAttributeValidationErrors($attribute, $localeCode),
             sprintf('This value is too short. It should have %s characters or more.', $number),
         );
     }
@@ -1435,7 +1435,7 @@ final readonly class ManagingProductsContext implements Context
      */
     public function iShouldBeNotifiedThatTheAttributeValueIsRequired(string $attributeName, LocaleInterface $locale): void
     {
-        Assert::true($this->productAttributesFormElement->hasAttributeError($attributeName, $locale->getCode()));
+        Assert::true($this->attributesFormElement->hasAttributeError($attributeName, $locale->getCode()));
     }
 
     private function assertValidationMessage(string $element, string $message): void
