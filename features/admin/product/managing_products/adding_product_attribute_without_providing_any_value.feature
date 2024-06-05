@@ -11,7 +11,7 @@ Feature: Adding a product attribute without providing any value
         And the store has text product attribute "Color"
         And I am logged in as an administrator
 
-    @ui @javascript @no-api
+    @ui @mink:chromedriver @no-api
     Scenario: Adding a product attribute without providing any value
         When I want to create a new configurable product
         And I specify its code as "Jeans"
