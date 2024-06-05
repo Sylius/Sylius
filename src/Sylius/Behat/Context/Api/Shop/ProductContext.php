@@ -776,11 +776,6 @@ final class ProductContext implements Context
 
         foreach ($productVariants as $productVariant) {
             foreach ($productVariant['optionValues'] as $optionValueIri) {
-
-                if (is_array($optionValueIri)) {
-                    continue;
-                }
-
                 $optionValueData = $this->fetchItemByIri($optionValueIri);
                 $optionData = $this->fetchItemByIri($optionValueData['option']);
 
