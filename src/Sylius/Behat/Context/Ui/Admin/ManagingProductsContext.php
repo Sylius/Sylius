@@ -113,7 +113,7 @@ final readonly class ManagingProductsContext implements Context
      * @When I rename it to :name in :localeCode locale
      * @When I should be able to name it :name in :localeCode locale
      */
-    public function iRenameItToIn(string $name, string $localeCode): void
+    public function iRenameItToInLocale(string $name, string $localeCode): void
     {
         $this->translationsFormElement->nameItIn($name, $localeCode);
     }
@@ -127,7 +127,7 @@ final readonly class ManagingProductsContext implements Context
     }
 
     /**
-     * @When I generate its slug in :localeCode
+     * @When I generate its slug in :localeCode locale
      */
     public function iGenerateItsSlugIn(string $localeCode): void
     {
@@ -197,7 +197,7 @@ final readonly class ManagingProductsContext implements Context
 
     /**
      * @When I set its slug to :slug
-     * @When I set its slug to :slug in :localeCode
+     * @When I set its slug to :slug in :localeCode locale
      * @When I remove its slug
      */
     public function iSetItsSlugToIn(?string $slug = null, string $localeCode = 'en_US'): void
@@ -622,11 +622,11 @@ final readonly class ManagingProductsContext implements Context
     }
 
     /**
-     * @When I set its :attributeName attribute to :value in :localeCode
-     * @When I do not set its :attributeName attribute in :localeCode
-     * @When I set the :attributeName attribute value to :value in :localeCode
+     * @When I set its :attributeName attribute to :value in :localeCode locale
+     * @When I do not set its :attributeName attribute in :localeCode locale
+     * @When I set the :attributeName attribute value to :value in :localeCode locale
      */
-    public function iSetItsAttributeTo(string $attributeName, ?string $value = null, string $localeCode = 'en_US'): void
+    public function iSetItsAttributeToInLocale(string $attributeName, ?string $value = null, string $localeCode = 'en_US'): void
     {
         $this->attributesFormElement->updateAttribute($attributeName, $value ?? '', $localeCode);
     }
@@ -682,7 +682,7 @@ final readonly class ManagingProductsContext implements Context
 
     /**
      * @Then attribute :attributeName of product :product should be :value
-     * @Then attribute :attributeName of product :product should be :value in :localeCode
+     * @Then attribute :attributeName of product :product should be :value in :localeCode locale
      */
     public function itsAttributeShouldBe(string $attributeName, ProductInterface $product, string $value, string $localeCode = 'en_US'): void
     {
@@ -692,10 +692,10 @@ final readonly class ManagingProductsContext implements Context
     }
 
     /**
-     * @Then select attribute :attributeName of product :product should be :value in :localeCode
+     * @Then select attribute :attributeName of product :product should be :value in :localeCode locale
      * @Then select attribute :attributeName of product :product should be :value
      */
-    public function itsSelectAttributeShouldBeIn(
+    public function itsSelectAttributeShouldBeInLocale(
         string $attributeName,
         ProductInterface $product,
         string $value,
@@ -1238,9 +1238,9 @@ final readonly class ManagingProductsContext implements Context
     }
 
     /**
-     * @Then I should be notified that I have to define the :attribute attribute in :localeCode
+     * @Then I should be notified that I have to define the :attribute attribute in :localeCode locale
      */
-    public function iShouldBeNotifiedThatIHaveToDefineTheAttributeIn(string $attribute, string $localeCode): void
+    public function iShouldBeNotifiedThatIHaveToDefineTheAttributeInLocale(string $attribute, string $localeCode): void
     {
         Assert::same(
             $this->attributesFormElement->getAttributeValidationErrors($attribute, $localeCode),
@@ -1249,7 +1249,7 @@ final readonly class ManagingProductsContext implements Context
     }
 
     /**
-     * @Then I should be notified that the :attribute attribute in :localeCode should be longer than :number
+     * @Then I should be notified that the :attribute attribute in :localeCode locale should be longer than :number
      */
     public function iShouldBeNotifiedThatTheAttributeInShouldBeLongerThan(string $attribute, string $localeCode, int $number): void
     {

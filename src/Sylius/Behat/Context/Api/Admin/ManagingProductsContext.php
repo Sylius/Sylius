@@ -123,7 +123,7 @@ final class ManagingProductsContext implements Context
      * @When I name it :name in :localeCode locale
      * @When I rename it to :name in :localeCode locale
      */
-    public function iRenameItToIn(?string $name, string $localeCode = 'en_US'): void
+    public function iRenameItToInLocale(string $name, string $localeCode): void
     {
         $data['translations'][$localeCode]['name'] = $name;
 
@@ -131,7 +131,7 @@ final class ManagingProductsContext implements Context
     }
 
     /**
-     * @When I generate its slug in :localeCode
+     * @When I generate its slug in :localeCode locale
      */
     public function iGenerateItsSlugIn(string $localeCode): void
     {
@@ -140,7 +140,7 @@ final class ManagingProductsContext implements Context
 
     /**
      * @When I set its slug to :slug
-     * @When I set its slug to :slug in :localeCode
+     * @When I set its slug to :slug in :localeCode locale
      * @When I remove its slug
      */
     public function iSetItsSlugTo(?string $slug = null, $localeCode = 'en_US'): void
@@ -320,9 +320,9 @@ final class ManagingProductsContext implements Context
 
     /**
      * @When I set its :attribute attribute to :value
-     * @When I set its :attribute attribute to :value in :localeCode
-     * @When I do not set its :attribute attribute in :localeCode
-     * @When I set the :attribute attribute value to :value in :localeCode
+     * @When I set its :attribute attribute to :value in :localeCode locale
+     * @When I do not set its :attribute attribute in :localeCode locale
+     * @When I set the :attribute attribute value to :value in :localeCode locale
      */
     public function iSetItsAttributeTo(
         ProductAttributeInterface $attribute,
@@ -867,8 +867,8 @@ final class ManagingProductsContext implements Context
 
     /**
      * @Then attribute :attribute of product :product should be :value
-     * @Then attribute :attribute of product :product should be :value in :localeCode
-     * @Then select attribute :attribute of product :product should be :value in :localeCode
+     * @Then attribute :attribute of product :product should be :value in :localeCode locale
+     * @Then select attribute :attribute of product :product should be :value in :localeCode locale
      */
     public function attributeOfProductShouldBe(
         ProductAttributeInterface $attribute,
@@ -936,9 +936,9 @@ final class ManagingProductsContext implements Context
     }
 
     /**
-     * @Then I should be notified that I have to define the :attributeName attribute in :localeCode
+     * @Then I should be notified that I have to define the :attributeName attribute in :localeCode locale
      */
-    public function iShouldBeNotifiedThatIHaveToDefineTheAttributeIn(string $attributeName, string $localeCode): void
+    public function iShouldBeNotifiedThatIHaveToDefineTheAttributeInLocale(string $attributeName, string $localeCode): void
     {
         Assert::regex(
             $this->responseChecker->getError($this->client->getLastResponse()),
@@ -947,7 +947,7 @@ final class ManagingProductsContext implements Context
     }
 
     /**
-     * @Then I should be notified that the :attributeName attribute in :localeCode should be longer than :number
+     * @Then I should be notified that the :attributeName attribute in :localeCode locale should be longer than :number
      */
     public function iShouldBeNotifiedThatTheAttributeInShouldBeLongerThan(
         string $attributeName,

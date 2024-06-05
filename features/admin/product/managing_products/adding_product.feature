@@ -13,7 +13,7 @@ Feature: Adding a new product
     Scenario: Adding a new simple product with price
         When I want to create a new simple product
         And I specify its code as "BOARD_DICE_BREWING"
-        And I name it "Dice Brewing" in "English (United States)"
+        And I name it "Dice Brewing" in "English (United States)" locale
         And I set its slug to "dice-brewing"
         And I set its price to "$10.00" for "United States" channel
         And I add it
@@ -24,7 +24,7 @@ Feature: Adding a new product
     Scenario: Adding a new simple product with discounted price
         When I want to create a new simple product
         And I specify its code as "BOARD_DICE_BREWING"
-        And I name it "Dice Brewing" in "English (United States)"
+        And I name it "Dice Brewing" in "English (United States)" locale
         And I set its slug to "dice-brewing"
         And I set its price to "$10.00" for "United States" channel
         And I set its original price to "$20.00" for "United States" channel
@@ -36,7 +36,7 @@ Feature: Adding a new product
     Scenario: Adding a new simple free product
         When I want to create a new simple product
         And I specify its code as "BOARD_DICE_BREWING"
-        And I name it "Dice Brewing" in "English (United States)"
+        And I name it "Dice Brewing" in "English (United States)" locale
         And I set its slug to "dice-brewing"
         And I set its price to "$0.00" for "United States" channel
         And I add it
@@ -47,7 +47,7 @@ Feature: Adding a new product
     Scenario: Adding a new simple product with specific shipping category
         When I want to create a new simple product
         And I specify its code as "BOARD_DICE_BREWING"
-        And I name it "Dice Brewing" in "English (United States)"
+        And I name it "Dice Brewing" in "English (United States)" locale
         And I set its slug to "dice-brewing"
         And I set its price to "$10.00" for "United States" channel
         And I set its shipping category as "Standard"
@@ -59,7 +59,7 @@ Feature: Adding a new product
     Scenario: Adding a new simple product without shipping required
         When I want to create a new simple product
         And I specify its code as "BOARD_DICE_BREWING"
-        And I name it "Dice Brewing" in "English (United States)"
+        And I name it "Dice Brewing" in "English (United States)" locale
         And I set its slug to "dice-brewing"
         And I set its price to "$10.00" for "United States" channel
         And I do not want to have shipping required for this product
@@ -72,7 +72,7 @@ Feature: Adding a new product
     Scenario: Adding a new configurable product without options
         When I want to create a new configurable product
         And I specify its code as "WHISKEY_GENTLEMEN"
-        And I name it "Gentleman Jack" in "English (United States)"
+        And I name it "Gentleman Jack" in "English (United States)" locale
         And I set its slug to "gentleman-jack"
         And I add it
         Then I should be notified that it has been successfully created
@@ -85,7 +85,7 @@ Feature: Adding a new product
         And this product option has also the "0.5" option value with code "bottle_size_small"
         When I want to create a new configurable product
         And I specify its code as "WHISKEY_GENTLEMEN"
-        And I name it "Gentleman Jack" in "English (United States)"
+        And I name it "Gentleman Jack" in "English (United States)" locale
         And I set its slug to "gentleman-jack"
         And I add the "Bottle size" option to it
         And I add it
