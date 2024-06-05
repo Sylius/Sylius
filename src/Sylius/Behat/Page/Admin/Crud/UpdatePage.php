@@ -86,6 +86,15 @@ class UpdatePage extends SymfonyPage implements UpdatePageInterface
         return $this->getDocument()->find('css', '.ui.icon.negative.message')->getText();
     }
 
+    protected function waitForFormUpdate(): void
+    {
+        $form = $this->getElement('form');
+        sleep(1); // we need to sleep, as sometimes the check below is executed faster than the form sets the busy attribute
+        $form->waitFor(1500, function () use ($form) {
+            return !$form->hasAttribute('busy');
+        });
+    }
+
     protected function verifyStatusCode(): void
     {
         try {

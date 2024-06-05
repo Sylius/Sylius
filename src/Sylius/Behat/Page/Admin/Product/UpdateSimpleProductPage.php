@@ -135,15 +135,6 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
         return parent::getElement($name, $parameters);
     }
 
-    private function waitForFormUpdate(): void
-    {
-        $form = $this->getElement('form');
-        sleep(1); // we need to sleep, as sometimes the check below is executed faster than the form sets the busy attribute
-        $form->waitFor(1500, function () use ($form) {
-            return !$form->hasAttribute('busy');
-        });
-    }
-
     protected function getCodeElement(): NodeElement
     {
         return $this->getElement('code');
