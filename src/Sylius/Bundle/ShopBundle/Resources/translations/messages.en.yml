@@ -2,6 +2,9 @@
 # (c) Sylius Sp. z o.o.
 
 sylius:
+    account:
+        dont_have_an_account: "Don't have an account?"
+        register_here: 'Register here'
     email:
         order_confirmation:
             has_been_successfully_placed: 'has been successfully placed.'

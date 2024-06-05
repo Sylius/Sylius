@@ -9,12 +9,8 @@
             {{ sylius_template_event('sylius.shop.account.layout.menu') }}
         </div>
         <div>
-            {{ sylius_template_event('sylius.shop.account.layout.before_subcontent') }}
-
             {% block subcontent %}
             {% endblock %}
-
-            {{ sylius_template_event('sylius.shop.account.layout.after_subcontent') }}
         </div>
     </div>
 {% endblock %}
