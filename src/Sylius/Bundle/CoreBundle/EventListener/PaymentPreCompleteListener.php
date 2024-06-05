@@ -14,11 +14,18 @@ declare(strict_types=1);
 namespace Sylius\Bundle\CoreBundle\EventListener;
 
 use Sylius\Bundle\ResourceBundle\Event\ResourceControllerEvent;
+use Sylius\Component\Core\Inventory\Checker\OrderItemAvailabilityCheckerInterface;
 use Sylius\Component\Core\Model\PaymentInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
+use Sylius\Component\Inventory\Checker\AvailabilityCheckerInterface;
 
 final class PaymentPreCompleteListener
 {
+    public function __construct(
+        private OrderItemAvailabilityCheckerInterface|AvailabilityCheckerInterface $availabilityChecker,
+    ) {
+    }
+
     public function checkStockAvailability(ResourceControllerEvent $event): void
     {
         /** @var PaymentInterface $payment */
@@ -28,11 +35,18 @@ final class PaymentPreCompleteListener
         foreach ($orderItems as $orderItem) {
             $variant = $orderItem->getVariant();
 
+            if ($this->availabilityChecker instanceof OrderItemAvailabilityCheckerInterface) {
+                if (!$this->availabilityChecker->isReservedStockSufficient($orderItem)) {
+                    $this->stopEvent($event, $variant->getCode());
+
+                    break;
+                }
+
+                continue;
+            }
+
             if (!$this->isStockSufficient($variant, $orderItem->getQuantity())) {
-                $event->setMessageType('error');
-                $event->setMessage('sylius.resource.payment.cannot_be_completed');
-                $event->setMessageParameters(['%productVariantCode%' => $variant->getCode()]);
-                $event->stopPropagation();
+                $this->stopEvent($event, $variant->getCode());
 
                 break;
             }
@@ -49,5 +63,13 @@ final class PaymentPreCompleteListener
             $variant->getOnHold() - $quantity >= 0 &&
             $variant->getOnHand() - $quantity >= 0
         ;
+    }
+
+    private function stopEvent(ResourceControllerEvent $event, string $variantCode): void
+    {
+        $event->setMessageType('error');
+        $event->setMessage('sylius.resource.payment.cannot_be_completed');
+        $event->setMessageParameters(['%productVariantCode%' => $variantCode]);
+        $event->stopPropagation();
     }
 }
