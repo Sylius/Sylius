@@ -14,14 +14,17 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
+use Sylius\Behat\Element\Admin\Product\TaxonomyFormElementInterface;
 use Sylius\Behat\Page\Admin\Product\UpdateSimpleProductPageInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 
-final class ManagingProductTaxonsContext implements Context
+final readonly class ManagingProductTaxonsContext implements Context
 {
-    public function __construct(private UpdateSimpleProductPageInterface $updateSimpleProductPage)
-    {
+    public function __construct(
+        private UpdateSimpleProductPageInterface $updateSimpleProductPage,
+        private TaxonomyFormElementInterface $taxonomyFormElement,
+    ) {
     }
 
     /**
@@ -31,7 +34,7 @@ final class ManagingProductTaxonsContext implements Context
     public function iAddTaxonToTheProduct(ProductInterface $product, TaxonInterface $taxon): void
     {
         $this->updateSimpleProductPage->open(['id' => $product->getId()]);
-        $this->updateSimpleProductPage->selectProductTaxon($taxon);
+        $this->taxonomyFormElement->selectProductTaxon($taxon);
         $this->updateSimpleProductPage->saveChanges();
     }
 
@@ -43,7 +46,7 @@ final class ManagingProductTaxonsContext implements Context
         TaxonInterface $taxon,
     ): void {
         $this->updateSimpleProductPage->open(['id' => $product->getId()]);
-        $this->updateSimpleProductPage->unselectProductTaxon($taxon);
+        $this->taxonomyFormElement->unselectProductTaxon($taxon);
         $this->updateSimpleProductPage->saveChanges();
     }
 }
