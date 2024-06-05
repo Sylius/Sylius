@@ -15,7 +15,7 @@ namespace Sylius\Behat\Element\Admin\Product;
 
 use Sylius\Component\Core\Model\ProductVariantInterface;
 
-interface ProductMediaFormElementInterface
+interface MediaFormElementInterface
 {
     public function attachImage(string $path, ?string $type = null, ?ProductVariantInterface $productVariant = null): void;
 

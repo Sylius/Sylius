@@ -46,6 +46,8 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
 
     public function checkChannel(string $channelCode): void
     {
+        $this->changeTab('details');
+
         $this->getElement('channel', ['%channel_code%' => $channelCode])->check();
     }
 
@@ -65,6 +67,8 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
 
     public function specifyCode(string $code): void
     {
+        $this->changeTab('details');
+
         $this->getElement('code')->setValue($code);
     }
 

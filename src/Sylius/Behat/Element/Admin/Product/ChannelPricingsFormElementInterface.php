@@ -15,7 +15,7 @@ namespace Sylius\Behat\Element\Admin\Product;
 
 use Sylius\Component\Core\Model\ChannelInterface;
 
-interface ProductChannelPricingsFormElementInterface
+interface ChannelPricingsFormElementInterface
 {
     public function specifyPrice(ChannelInterface $channel, string $price): void;
 

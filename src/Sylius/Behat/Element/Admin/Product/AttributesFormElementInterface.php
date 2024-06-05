@@ -13,7 +13,9 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Element\Admin\Product;
 
-interface ProductAttributesFormElementInterface
+use Sylius\Behat\Element\Admin\Crud\FormElementInterface as BaseFormElementInterface;
+
+interface AttributesFormElementInterface extends BaseFormElementInterface
 {
     public function getAttributeValidationErrors(string $attributeName, string $localeCode): string;
 
@@ -31,9 +33,9 @@ interface ProductAttributesFormElementInterface
 
     public function addAttribute(string $attributeName): void;
 
-    public function updateAttribute(string $attributeName, string $value, string $localeCode): void;
+    public function updateAttributeInLocale(string $attributeName, string $value, string $localeCode): void;
 
-    public function getAttributeValue(string $attribute, string $localeCode): string;
+    public function getAttributeValue(string $attributeName, string $localeCode): string;
 
     public function addSelectedAttributes(): void;
 

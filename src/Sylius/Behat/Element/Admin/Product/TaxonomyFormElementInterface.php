@@ -15,7 +15,7 @@ namespace Sylius\Behat\Element\Admin\Product;
 
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
 
-interface ProductTaxonomyFormElementInterface
+interface TaxonomyFormElementInterface
 {
     public function selectMainTaxon(TaxonInterface $taxon): void;
 
