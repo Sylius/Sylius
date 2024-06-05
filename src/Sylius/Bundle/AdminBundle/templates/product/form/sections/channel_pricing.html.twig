@@ -7,12 +7,12 @@
         {% set is_channel_pricing_invalid = variant_form.channelPricings.vars.errors is not empty %}
 
         {% if is_channel_pricing_invalid %}
-            {% from '@SyliusAdmin/shared/helper/icon.html.twig' import icon as _icon %}
+            {% from '@SyliusAdmin/shared/helper/icon.html.twig' import icon %}
 
             <div class="alert alert-danger" role="alert">
                 <div class="d-flex">
                     <div>
-                        {{ _icon({ 'icon': 'danger', 'class': 'alert-icon' }) }}
+                        {{ icon({ 'icon': 'danger', 'class': 'alert-icon' }) }}
                     </div>
                     <div {{ sylius_test_html_attribute('missing-channel-price') }}>
                         {% set first_error = variant_form.channelPricings.vars.errors|first %}

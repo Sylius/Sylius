@@ -1,5 +1,7 @@
-{% import '@SyliusAdmin/shared/helper/translations.html.twig' as _translations %}
+{% import '@SyliusAdmin/shared/helper/translations.html.twig' as translations %}
+
+{% set form = hookable_metadata.context.form %}
 
 <div class="bg-white mb-3">
-    {{ _translations.default(hookable_metadata.context.form.translations, null, { accordion_id: 'promotion-translations'}) }}
+    {{ translations.default(form.translations, null, { accordion_id: 'promotion-translations'}) }}
 </div>

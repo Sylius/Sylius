@@ -1,4 +1,4 @@
-{% from '@SyliusAdmin/shared/helper/icon.html.twig' import icon as _icon %}
+{% from '@SyliusAdmin/shared/helper/icon.html.twig' import icon %}
 
 {% set user = hookable_metadata.context.resource.user %}
 
@@ -7,7 +7,7 @@
         <input type="hidden" name="_method" value="DELETE" />
         <input type="hidden" name="_csrf_token" value="{{ csrf_token(user.id) }}" />
         <button type="submit" class="dropdown-item" {{ sylius_test_html_attribute('customer-actions-delete') }}>
-            {{ _icon({ icon: 'trash-x', class: 'icon dropdown-item-icon icon-tabler' }) }}
+            {{ icon({ icon: 'trash-x', class: 'icon dropdown-item-icon icon-tabler' }) }}
             {{ 'sylius.ui.delete'|trans }}
         </button>
     </form>
