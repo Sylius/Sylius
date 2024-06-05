@@ -17,16 +17,16 @@ Feature: Editing a product
     @ui @no-api
     Scenario: Renaming a simple product
         When I want to modify the "Dice Brewing" product
-        And I rename it to "7 Wonders" in "English (United States)"
+        And I rename it to "7 Wonders" in "English (United States)" locale
         And I save my changes
         Then I should be notified that it has been successfully edited
-        And this product name should be "7 Wonders" in "English (United States)"
+        And this product name should be "7 Wonders" in "English (United States)" locale
 
     @ui @no-api
     Scenario: Renaming a simple product does not change its variant name
         Given this product only variant was renamed to "Dice Brewing: The Game"
         When I want to modify this product
-        And I rename it to "7 Wonders" in "English (United States)"
+        And I rename it to "7 Wonders" in "English (United States)" locale
         And I save my changes
         And I want to view all variants of this product
         Then the first variant in the list should have name "Dice Brewing: The Game"
@@ -53,10 +53,10 @@ Feature: Editing a product
     Scenario: Renaming a configurable product
         Given the store has a "Wyborowa Vodka" configurable product
         When I want to modify this product
-        And I rename it to "Sobieski Vodka" in "English (United States)"
+        And I rename it to "Sobieski Vodka" in "English (United States)" locale
         And I save my changes
         Then I should be notified that it has been successfully edited
-        And this product name should be "Sobieski Vodka" in "English (United States)"
+        And this product name should be "Sobieski Vodka" in "English (United States)" locale
 
     @ui @api
     Scenario: Renaming a configurable product with option
@@ -64,10 +64,10 @@ Feature: Editing a product
         And the store has a product option "Bottle size" with a code "bottle_size"
         And this product has this product option
         When I want to modify this product
-        And I rename it to "Sobieski Vodka" in "English (United States)"
+        And I rename it to "Sobieski Vodka" in "English (United States)" locale
         And I save my changes
         Then I should be notified that it has been successfully edited
-        And this product name should be "Sobieski Vodka" in "English (United States)"
+        And this product name should be "Sobieski Vodka" in "English (United States)" locale
 
     @ui @mink:chromedriver @api
     Scenario: Changing options of configurable product without any variant defined

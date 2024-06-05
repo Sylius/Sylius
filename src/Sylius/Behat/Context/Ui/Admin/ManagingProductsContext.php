@@ -109,9 +109,9 @@ final readonly class ManagingProductsContext implements Context
     }
 
     /**
-     * @When I name it :name in :localeCode
-     * @When I rename it to :name in :localeCode
-     * @When I should be able to name it :name in :localeCode
+     * @When I name it :name in :localeCode locale
+     * @When I rename it to :name in :localeCode locale
+     * @When I should be able to name it :name in :localeCode locale
      */
     public function iRenameItToIn(string $name, string $localeCode): void
     {
@@ -519,9 +519,9 @@ final readonly class ManagingProductsContext implements Context
     }
 
     /**
-     * @Then this product name should be :name in :localeCode
+     * @Then this product name should be :name in :localeCode locale
      */
-    public function thisProductNameShouldBe(string $name, string $localeCode = 'en_US'): void
+    public function thisProductNameShouldBe(string $name, string $localeCode): void
     {
         Assert::true(
             $this->translationsFormElement->hasNameInLocale($name, $localeCode),
