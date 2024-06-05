@@ -331,7 +331,7 @@ final class ManagingTaxonsContext implements Context
     /**
      * @Then /^(?:this taxon|it) should not have(?:| also) any images with "([^"]*)" type$/
      */
-    public function thisTaxonShouldNotHaveAnImageWithType($code)
+    public function thisTaxonShouldNotHaveAnImageWithType(string $code): void
     {
         Assert::false($this->imageFormElement->isImageWithTypeDisplayed($code));
     }
