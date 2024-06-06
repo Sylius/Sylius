@@ -65,12 +65,12 @@
             <tag name="serializer.normalizer" priority="64" />
         </service>
 
-<!--        <service id="Sylius\Bundle\ApiBundle\Serializer\ImageNormalizer">-->
-<!--            <argument type="service" id="liip_imagine.cache.manager" />-->
-<!--            <argument type="service" id="request_stack" />-->
-<!--            <argument type="string">%sylius_api.default_image_filter%</argument>-->
-<!--            <tag name="serializer.normalizer" priority="64" />-->
-<!--        </service>-->
+        <service id="Sylius\Bundle\ApiBundle\Serializer\ImageNormalizer">
+            <argument type="service" id="liip_imagine.cache.manager" />
+            <argument type="service" id="request_stack" />
+            <argument type="string">%sylius_api.default_image_filter%</argument>
+            <tag name="serializer.normalizer" priority="64" />
+        </service>
 
         <service id="Sylius\Bundle\ApiBundle\Serializer\CommandNormalizer">
             <argument type="service" id="serializer.normalizer.object" />
