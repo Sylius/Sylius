@@ -16,7 +16,7 @@ namespace Sylius\Behat\Element\Admin\Product;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Product\Model\ProductAssociationTypeInterface;
 
-interface ProductAssociationsFormElementInterface
+interface AssociationsFormElementInterface
 {
     /**
      * @param string[] $productsNames

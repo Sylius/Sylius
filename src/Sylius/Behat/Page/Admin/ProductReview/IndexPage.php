@@ -53,7 +53,6 @@ class IndexPage extends BaseIndexPage implements IndexPageInterface
         $this->getElement('title_filter')->setValue($phrase);
     }
 
-
     public function filterByProduct(string $productName): void
     {
         $this->autocompleteHelper->selectByName(

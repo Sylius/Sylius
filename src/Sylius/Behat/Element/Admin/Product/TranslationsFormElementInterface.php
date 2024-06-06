@@ -15,7 +15,7 @@ namespace Sylius\Behat\Element\Admin\Product;
 
 use Sylius\Behat\Element\Admin\Crud\FormElementInterface as BaseFormElementInterface;
 
-interface ProductTranslationsFormElementInterface extends BaseFormElementInterface
+interface TranslationsFormElementInterface extends BaseFormElementInterface
 {
     public function nameItIn(string $name, string $localeCode): void;
 

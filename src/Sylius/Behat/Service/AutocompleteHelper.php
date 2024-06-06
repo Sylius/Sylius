@@ -78,9 +78,12 @@ abstract class AutocompleteHelper
 
     private static function waitForElementToBeVisible(Session $session, NodeElement $element)
     {
+        $escapedXPath = str_replace('"', '\"', $element->getXpath());
+
         $session->wait(5000, sprintf(
-            '$(document.evaluate("%s", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue).dropdown("is visible")',
-            str_replace('"', '\"', $element->getXpath()),
+            'document.evaluate("%s", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeStep.nodeType === 1 && document.evaluate("%s", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeStep.offsetParent !== null',
+            $escapedXPath,
+            $escapedXPath,
         ));
     }
 }

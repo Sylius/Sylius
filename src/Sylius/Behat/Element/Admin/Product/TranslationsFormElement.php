@@ -13,11 +13,10 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Element\Admin\Product;
 
-use Behat\Mink\Exception\ElementNotFoundException;
 use Sylius\Behat\Element\Admin\Crud\FormElement as BaseFormElement;
 use Sylius\Behat\Service\DriverHelper;
 
-final class ProductTranslationsFormElement extends BaseFormElement implements ProductTranslationsFormElementInterface
+final class TranslationsFormElement extends BaseFormElement implements TranslationsFormElementInterface
 {
     public function nameItIn(string $name, string $localeCode): void
     {
@@ -75,7 +74,6 @@ final class ProductTranslationsFormElement extends BaseFormElement implements Pr
     protected function getDefinedElements(): array
     {
         return [
-            'field_name' => '[data-test-name="%locale_code%"]',
             'form' => 'form',
             'generate_product_slug_button' => '[data-test-generate-product-slug-button="%locale_code%"]',
             'meta_description' => '[data-test-meta-description="%locale_code%"]',

@@ -18,7 +18,7 @@ use Sylius\Behat\Element\Admin\Crud\FormElement as BaseFormElement;
 use Sylius\Behat\Service\DriverHelper;
 use Sylius\Behat\Service\Helper\AutocompleteHelperInterface;
 
-final class ProductAttributesFormElement extends BaseFormElement implements ProductAttributesFormElementInterface
+final class AttributesFormElement extends BaseFormElement implements AttributesFormElementInterface
 {
     public function __construct(
         Session $session,

@@ -15,11 +15,9 @@ namespace Sylius\Behat\Element\Admin\Product;
 
 use Sylius\Component\Core\Model\ProductVariantInterface;
 
-interface ProductMediaFormElementInterface
+interface MediaFormElementInterface
 {
     public function attachImage(string $path, ?string $type = null, ?ProductVariantInterface $productVariant = null): void;
-
-    public function hasLastImageAVariant(ProductVariantInterface $productVariant): bool;
 
     public function changeImageWithType(string $type, string $path): void;
 
@@ -36,6 +34,4 @@ interface ProductMediaFormElementInterface
     public function modifyFirstImageType(string $type): void;
 
     public function selectVariantForFirstImage(ProductVariantInterface $productVariant): void;
-
-    public function isImageWithTypeDisplayed(string $type): bool;
 }

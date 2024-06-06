@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Element\Admin\Product;
 
-interface ProductAttributesFormElementInterface
+interface AttributesFormElementInterface
 {
     public function getAttributeValidationErrors(string $attributeName, string $localeCode): string;
 

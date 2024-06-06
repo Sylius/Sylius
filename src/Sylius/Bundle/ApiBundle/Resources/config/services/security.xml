@@ -21,5 +21,10 @@
         </defaults>
 
         <service id="sylius_api.security.voter.shop_user" class="Sylius\Bundle\ApiBundle\Security\ShopUserVoter" />
+
+<!--        <service id="sylius_api.security.voter.order" class="Sylius\Bundle\ApiBundle\Security\OrderAdjustmentsVoter">-->
+<!--            <argument type="service" id="Sylius\Bundle\ApiBundle\Provider\AdjustmentOrderProviderInterface" />-->
+<!--            <tag name="security.voter" />-->
+<!--        </service>-->
     </services>
 </container>
