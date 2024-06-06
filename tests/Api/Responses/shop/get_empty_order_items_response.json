@@ -1,0 +1,7 @@
+{
+  "@context": "\/api\/v2\/contexts\/OrderItem",
+  "@id": "\/api\/v2\/shop\/orders\/nAWw2jewpA\/items",
+  "@type": "hydra:Collection",
+  "hydra:member": [],
+  "hydra:totalItems": 0
+}
