@@ -1,5 +1,5 @@
-{% import '@SyliusAdmin/shared/helper/breadcrumbs.html.twig' as breadcrumbs %}
+{% from '@SyliusAdmin/shared/helper/breadcrumbs.html.twig' import breadcrumbs %}
 
-{{ breadcrumbs.default([
+{{ breadcrumbs([
     { 'name': 'Dashboard', 'active': true },
 ]) }}
