@@ -83,7 +83,7 @@ abstract class AutocompleteHelper
         $session->wait(5000, sprintf(
             'document.evaluate("%s", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeStep.nodeType === 1 && document.evaluate("%s", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeStep.offsetParent !== null',
             $escapedXPath,
-            $escapedXPath
+            $escapedXPath,
         ));
     }
 }

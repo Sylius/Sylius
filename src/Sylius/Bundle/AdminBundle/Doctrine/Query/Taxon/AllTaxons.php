@@ -32,6 +32,7 @@ final class AllTaxons implements AllTaxonsInterface
     public function getArrayResult(): array
     {
         $fallbackLocale = $this->translationLocaleProvider->getDefaultLocaleCode();
+
         try {
             $currentLocale = $this->localeContext->getLocaleCode();
         } catch (LocaleNotFoundException) {
@@ -59,8 +60,8 @@ final class AllTaxons implements AllTaxonsInterface
                 'current_translation',
                 (string) $queryBuilder->expr()->and(
                     $queryBuilder->expr()->eq('current_translation.translatable_id', 'taxon.id'),
-                    $queryBuilder->expr()->eq('current_translation.locale', ':currentLocale')
-                )
+                    $queryBuilder->expr()->eq('current_translation.locale', ':currentLocale'),
+                ),
             )
             ->leftJoin(
                 'taxon',
@@ -68,8 +69,8 @@ final class AllTaxons implements AllTaxonsInterface
                 'fallback_translation',
                 (string) $queryBuilder->expr()->and(
                     $queryBuilder->expr()->eq('fallback_translation.translatable_id', 'taxon.id'),
-                    $queryBuilder->expr()->eq('fallback_translation.locale', ':fallbackLocale')
-                )
+                    $queryBuilder->expr()->eq('fallback_translation.locale', ':fallbackLocale'),
+                ),
             )
             ->orderBy('taxon.tree_level', Criteria::DESC)
             ->addOrderBy('taxon.position', Criteria::ASC)

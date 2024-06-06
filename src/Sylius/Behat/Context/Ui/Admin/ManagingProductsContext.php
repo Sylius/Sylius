@@ -534,7 +534,7 @@ final readonly class ManagingProductsContext implements Context
      */
     public function iShouldBeNotifiedThatIsRequired(string $element, string $localeCode = 'en_US'): void
     {
-        $validationMessage = match($element) {
+        $validationMessage = match ($element) {
             'name' => $this->translationsFormElement->getValidationMessage('name', ['%locale_code%' => $localeCode]),
             'slug' => $this->translationsFormElement->getValidationMessage('slug', ['%locale_code%' => $localeCode]),
             'code' => $this->resolveCurrentPage()->getValidationMessage('code'),

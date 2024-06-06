@@ -17,7 +17,6 @@ use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractCompilerPassTestCase
 use Sylius\Bundle\UiBundle\DependencyInjection\Compiler\TwigComponentTagPass;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
-use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 final class TwigComponentTagPassTest extends AbstractCompilerPassTestCase
 {
