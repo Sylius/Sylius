@@ -1,4 +1,4 @@
-{% import "@SyliusAdmin/shared/helper/accordion.html.twig" as _accordion %}
+{% from "@SyliusAdmin/shared/helper/accordion.html.twig" import accordion %}
 {% import "@SyliusAdmin/shared/helper/button.html.twig" as button %}
 
 {% set resources = hookable_metadata.context.resources %}
@@ -25,7 +25,7 @@
         </div>
     {% endset %}
 
-    {{ _accordion.default([{
+    {{ accordion.default([{
         title: 'sylius.ui.filters'|trans,
         content: content,
         icon: 'adjustments',

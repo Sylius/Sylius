@@ -1,4 +1,4 @@
-{% from '@SyliusAdmin/shared/helper/accordion.html.twig' import default as _accordion %}
+{% from '@SyliusAdmin/shared/helper/accordion.html.twig' import accordion %}
 {% from '@SyliusAdmin/shared/helper/icon.html.twig' import icon %}
 {% import '@SyliusAdmin/shared/helper/money.html.twig' as money %}
 
@@ -78,7 +78,7 @@
             {% endfor %}
 
             {% if items is not empty %}
-                {{ _accordion(items, false, null, true) }}
+                {{ accordion(items, false, null, true) }}
             {% else %}
                 <div class="h3 text-muted" {{ sylius_test_html_attribute('customer-statistics-no-orders') }}>{{ 'sylius.ui.there_are_no_orders_for_this_customer_to_display'|trans }}</div>
             {% endif %}

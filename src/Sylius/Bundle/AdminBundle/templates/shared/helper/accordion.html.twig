@@ -1,4 +1,4 @@
-{% macro default(items, open = false, auto_close = null, flush = false) %}
+{% macro accordion(items, open = false, auto_close = null, flush = false) %}
     {% from "@SyliusAdmin/shared/helper/icon.html.twig" import icon %}
 
     {% set auto_close = auto_close|default(true) %}
