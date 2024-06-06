@@ -16,7 +16,6 @@ namespace Sylius\Bundle\UiBundle\DependencyInjection\Compiler;
 use InvalidArgumentException;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 final class TwigComponentTagPass implements CompilerPassInterface
 {
