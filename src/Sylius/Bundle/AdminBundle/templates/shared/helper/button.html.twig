@@ -1,7 +1,7 @@
 {% macro default(params = {}) %}
-    {% from '@SyliusAdmin/shared/helper/icon.html.twig' import icon as i %}
+    {% from '@SyliusAdmin/shared/helper/icon.html.twig' import icon %}
 
-    {% set p = {
+    {% set params = {
         attr: null,
         class: null,
         text: "Button",
@@ -17,89 +17,84 @@
     }|merge(params) %}
 
     {% set button_class = 'btn' ~
-        (p.class ? ' ' ~ p.class : '') ~
-        (p.dropdown ? ' dropdown-toggle' : '') ~
-        (p.iconOnly ? ' btn-icon' : '') ~
-        (p.size == 'large' ? ' btn-lg' : '') ~
-        (p.size == 'small' ? ' btn-sm' : '') %}
+        (params.class ? ' ' ~ params.class : '') ~
+        (params.dropdown ? ' dropdown-toggle' : '') ~
+        (params.iconOnly ? ' btn-icon' : '') ~
+        (params.size == 'large' ? ' btn-lg' : '') ~
+        (params.size == 'small' ? ' btn-sm' : '') %}
 
-    {% if p.url %}
-        <a href="{{ p.url }}"
-           {% if p.id %}id="{{ p.id }}"{% endif %}
+    {% if params.url %}
+        <a href="{{ params.url }}"
+           {% if params.id %}id="{{ params.id }}"{% endif %}
            class="{{ button_class }}"
-            {% if p.disabled %}aria-disabled="true"{% endif %}
-            {% if p.dropdown %}data-bs-toggle="dropdown"{% endif %}
-            {{ p.attr is iterable ? block('attributes') : (p.attr ? ' ' ~ p.attr) }}>
-            {{ p.icon ? i({ icon: p.icon }) }}
-            {{ not p.iconOnly ? p.text }}
+            {% if params.disabled %}aria-disabled="true"{% endif %}
+            {% if params.dropdown %}data-bs-toggle="dropdown"{% endif %}
+            {{ params.attr is iterable ? block('attributes') : (params.attr ? ' ' ~ params.attr) }}>
+            {{ params.icon ? icon({ icon: params.icon }) }}
+            {{ not params.iconOnly ? params.text }}
         </a>
     {% else %}
-        <button type="{{ p.type }}"
-                {% if p.id %}id="{{ p.id }}"{% endif %}
-                {% if p.form %}form="{{ p.form }}"{% endif %}
+        <button type="{{ params.type }}"
+                {% if params.id %}id="{{ params.id }}"{% endif %}
+                {% if params.form %}form="{{ params.form }}"{% endif %}
                 class="{{ button_class }}"
-            {% if p.disabled %}disabled{% endif %}
-            {% if p.dropdown %}data-bs-toggle="dropdown"{% endif %}
-            {{ p.attr is iterable ? block('attributes') : (p.attr ? ' ' ~ p.attr ) }}>
-            {{ p.icon ? i({ icon: p.icon }) }}
-            {{ not p.iconOnly ? p.text }}
+            {% if params.disabled %}disabled{% endif %}
+            {% if params.dropdown %}data-bs-toggle="dropdown"{% endif %}
+            {{ params.attr is iterable ? block('attributes') : (params.attr ? ' ' ~ params.attr) }}>
+            {{ params.icon ? icon({ icon: params.icon }) }}
+            {{ not params.iconOnly ? params.text }}
         </button>
     {% endif %}
 {% endmacro %}
 
 {% macro primary(params = {}) %}
-    {% import _self as _ %}
     {% set params = {
         class: null,
     }|merge(params) %}
 
     {% set new_params = params|merge({ class: 'btn-primary ' ~ params.class }) %}
-    {{ _.default( new_params) }}
+    {{ _self.default( new_params) }}
 {% endmacro %}
 
 {% macro delete(params = {}) %}
-    {% import _self as _ %}
     {% set params = {
         class: null,
     }|merge(params) %}
 
     {% set new_params = { text: 'Delete' }|merge(params)|merge({ class: 'btn btn-ghost-danger ' ~ params.class }) %}
-    {{ _.default( new_params) }}
+    {{ _self.default( new_params) }}
 {% endmacro %}
 
 {% macro create(params = {}) %}
-    {% import _self as _ %}
     {% set params = {
         type: 'submit',
         text: 'sylius.ui.create'|trans,
     }|merge(params) %}
 
-    {{ _.primary(params) }}
+    {{ _self.primary(params) }}
 {% endmacro %}
 
 {% macro update(params = {}) %}
-    {% import _self as _ %}
     {% set params = {
         type: 'submit',
         text: 'sylius.ui.save_changes'|trans,
     }|merge(params) %}
 
-    {{ _.primary(params) }}
+    {{ _self.primary(params) }}
 {% endmacro %}
 
 {% macro cancel(params = {}) %}
-    {% import _self as _ %}
     {% set params = {
         class: null,
         text: 'sylius.ui.cancel'|trans,
         url: app.request.headers.get('referer'),
     }|merge(params)%}
 
-    {{ _.default(params) }}
+    {{ _self.default(params) }}
 {% endmacro %}
 
 {% block attributes -%}
-    {%- for attrname, attrvalue in p.attr -%}
+    {%- for attrname, attrvalue in params.attr -%}
         {{- " " -}}
         {%- if attrvalue is same as(true) -%}
             {{- attrname }}="{{ attrname }}"
