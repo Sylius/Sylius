@@ -15,7 +15,7 @@ Feature: Adding a product attribute without providing any value
     Scenario: Adding a product attribute without providing any value
         When I want to create a new configurable product
         And I specify its code as "Jeans"
-        And I name it "Colored jeans" in "English (United States)"
+        And I name it "Colored jeans" in "English (United States)" locale
         And I add the "Color" attribute
         And I try to add it
         Then I should be notified that the "Color" attribute value for "English (United States)" is required
