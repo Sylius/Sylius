@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Element\Admin\Product;
 
-use Behat\Mink\Exception\ElementNotFoundException;
 use Sylius\Behat\Element\Admin\Crud\FormElement as BaseFormElement;
 use Sylius\Behat\Service\DriverHelper;
 

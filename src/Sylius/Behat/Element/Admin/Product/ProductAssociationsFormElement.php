@@ -14,10 +14,10 @@ declare(strict_types=1);
 namespace Sylius\Behat\Element\Admin\Product;
 
 use Behat\Mink\Session;
+use Sylius\Behat\Element\Admin\Crud\FormElement as BaseFormElement;
 use Sylius\Behat\Service\DriverHelper;
 use Sylius\Behat\Service\Helper\AutocompleteHelperInterface;
 use Sylius\Component\Core\Model\ProductInterface;
-use Sylius\Behat\Element\Admin\Crud\FormElement as BaseFormElement;
 use Sylius\Component\Product\Model\ProductAssociationTypeInterface;
 
 final class ProductAssociationsFormElement extends BaseFormElement implements ProductAssociationsFormElementInterface

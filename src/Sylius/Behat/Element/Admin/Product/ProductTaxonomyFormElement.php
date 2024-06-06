@@ -15,7 +15,6 @@ namespace Sylius\Behat\Element\Admin\Product;
 
 use Sylius\Behat\Element\Admin\Crud\FormElement as BaseFormElement;
 use Sylius\Behat\Service\AutocompleteHelper;
-use Sylius\Behat\Service\DriverHelper;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
 
 final class ProductTaxonomyFormElement extends BaseFormElement implements ProductTaxonomyFormElementInterface

@@ -150,9 +150,6 @@ final class ProductReviewContext implements Context
     }
 
     /**
-     * @param string $title
-     * @param int $rating
-     * @param string $comment
      * @param string $transition
      *
      * @return ReviewInterface
