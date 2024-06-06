@@ -29,8 +29,8 @@
         {%- set classes = classes|merge([options.lastClass]) %}
     {%- endif %}
 
-    {% set alwaysOpen = ['catalog', 'sales', 'customers'] %}
-    {% set isActive = matcher.isCurrent(item) or matcher.isAncestor(item, options.matchingDepth) or item.name in alwaysOpen %}
+    {% set always_open = ['catalog', 'sales', 'customers'] %}
+    {% set is_active = matcher.isCurrent(item) or matcher.isAncestor(item, options.matchingDepth)  or item.name in always_open %}
 
     {# Mark item as "leaf" (no children) or as "branch" (has children that are displayed) #}
     {% if item.hasChildren and options.depth is not same as(0) %}
@@ -47,13 +47,13 @@
     {%- endif %}
     {% if item.hasChildren %}
         <li class="nav-item {% if attributes.class is defined %}{{ attributes.class }}{% endif %}">
-            <a class="nav-link dropdown-toggle {{ isActive ? 'show' : '' }}" href="#navbar-{{ item.name }}" data-bs-toggle="dropdown" data-bs-auto-close="false" role="button" aria-expanded="{{ isActive ? 'true' : 'false' }}">
+            <a class="nav-link dropdown-toggle {{ is_active ? 'show' : '' }}" href="#navbar-{{ item.name }}" data-bs-toggle="dropdown" data-bs-auto-close="false" role="button" aria-expanded="{{ is_active ? 'true' : 'false' }}">
                 <span class="nav-link-icon d-md-none d-lg-inline-block">
                     {{ block('icon') }}
                 </span>
                 <span class="nav-link-title">{{ item.label|trans }}</span>
             </a>
-            <div class="dropdown-menu {{ isActive ? 'show' : '' }}">
+            <div class="dropdown-menu {{ is_active ? 'show' : '' }}">
                 <div class="dropdown-menu-columns">
                     <div class="dropdown-menu-column">
                         {{ block('childrenList') }}
@@ -92,14 +92,14 @@
         {%- set attributes = attributes|merge({'class': classes|join(' ')}) %}
     {%- endif %}
 
-    {% set isActive = matcher.isCurrent(item) %}
+    {% set is_active = matcher.isCurrent(item) %}
 
-    <a class="dropdown-item {{ isActive ? '' : 'text-muted' }} {% if attributes.class is defined %}{{ attributes.class }}{% endif %}" href="{{ item.uri }}" target="{{ target }}">
+    <a class="dropdown-item {{ is_active ? '' : 'text-muted' }} {% if attributes.class is defined %}{{ attributes.class }}{% endif %}" href="{{ item.uri }}" target="{{ target }}">
         {{ item.label|trans }}{% if target == '_blank' %}{{ icon({ icon: 'external-link', class: 'icon icon-tabler icon-sm ms-1 mb-2 opacity-75' }) }}{% endif %}
     </a>
 {% endblock %}
 
 {% block icon %}
-    {% set iconName = item.labelAttribute('icon') %}
-    {% if iconName %}{{ icon({ icon: iconName }) }}{% endif %}
+    {% set icon_name = item.labelAttribute('icon') %}
+    {% if icon_name %}{{ icon({ icon: icon_name }) }}{% endif %}
 {% endblock %}

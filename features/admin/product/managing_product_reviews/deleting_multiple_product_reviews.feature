@@ -11,7 +11,7 @@ Feature: Deleting multiple product reviews
         And this product has also a review titled "Cool" and rated 4 with a comment "Quite cool" added by customer "aquaman@dc.com"
         And I am logged in as an administrator
 
-    @todo @ui @mink:chromedriver @no-api
+    @ui @mink:chromedriver @no-api
     Scenario: Deleting multiple product reviews at once
         When I browse product reviews
         And I check the "Awesome" product review

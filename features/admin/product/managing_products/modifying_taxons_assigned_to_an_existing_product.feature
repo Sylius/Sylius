@@ -12,16 +12,22 @@ Feature: Modifying taxons assigned to an existing product
         And the product "T-Shirt" belongs to taxon "Clothes"
         And I am logged in as an administrator
 
-    @todo @ui @api
+    @ui @mink:chromedriver @api
     Scenario: Modifying taxons assigned to a product
-        When I change that the "T-Shirt" product does not belong to the "Clothes" taxon
+        When I want to modify the "T-Shirt" product
+        And I change that the "T-Shirt" product does not belong to the "Clothes" taxon
         And I add "T-Shirts" taxon to the "T-Shirt" product
+        And I save my changes
         Then the product "T-Shirt" should have the "T-Shirts" taxon
+        And the product "T-Shirt" should not have the "Clothes" taxon
 
-    @todo @ui @api
+    @ui @mink:chromedriver @api
     Scenario: Adding taxons to product
-        When I add "Clothes" taxon to the "Shirt" product
+        When I want to modify the "Shirt" product
+        And I add "Clothes" taxon to the "Shirt" product
+        And I save my changes
         Then the product "Shirt" should have the "Clothes" taxon
+        And the product "Shirt" should not have the "T-Shirts" taxon
 
     @api @no-ui
     Scenario: Being prevented from adding the same taxon twice

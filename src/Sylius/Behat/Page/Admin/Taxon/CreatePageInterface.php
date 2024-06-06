@@ -39,7 +39,7 @@ interface CreatePageInterface extends BaseCreatePageInterface
      */
     public function getLeaves(?TaxonInterface $parentTaxon = null): array;
 
-    public function activateLanguageTab(string $locale): void;
+    public function activateLanguageTab(string $localeCode): void;
 
     public function moveUpTaxon(string $name): void;
 

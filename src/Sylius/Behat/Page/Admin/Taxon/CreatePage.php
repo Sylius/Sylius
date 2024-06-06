@@ -76,13 +76,13 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
         return $this->getDocument()->findAll('css', '.sylius-tree__item');
     }
 
-    public function activateLanguageTab(string $locale): void
+    public function activateLanguageTab(string $localeCode): void
     {
         if (DriverHelper::isNotJavascript($this->getDriver())) {
             return;
         }
 
-        $languageTabTitle = $this->getElement('language_tab', ['%locale%' => $locale]);
+        $languageTabTitle = $this->getElement('language_tab', ['%locale_code%' => $localeCode]);
         if (!$languageTabTitle->hasClass('active')) {
             $languageTabTitle->click();
         }
@@ -135,7 +135,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
             'code' => '#sylius_taxon_code',
             'confirmation_button' => '#confirmation-button',
             'description' => '#sylius_taxon_translations_en_US_description',
-            'language_tab' => '[data-locale="%locale%"] .title',
+            'language_tab' => '[data-locale="%locale_code%"] .title',
             'name' => '#sylius_taxon_translations_%language%_name',
             'slug' => '#sylius_taxon_translations_%language%_slug',
             'tree' => '.sylius-tree',

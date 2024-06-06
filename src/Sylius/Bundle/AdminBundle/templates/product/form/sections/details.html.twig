@@ -1,7 +1,7 @@
 {% set form = hookable_metadata.context.form %}
 {% set product = form.vars.data %}
 
-<div class="tab-pane show active" id="product-details" role="tabpanel" tabindex="0">
+<div class="tab-pane {% if hookable_metadata.configuration.active|default(false) %}show active{% endif %}" id="product-details" role="tabpanel" tabindex="0">
     <div class="card mb-3">
         <div class="card-header">
             <h2 id="product-details" class="card-title">
@@ -9,31 +9,7 @@
             </h2>
         </div>
         <div class="card-body">
-            <div class="mb-3">
-                {{ form_row(form.code) }}
-            </div>
-            <div class="mb-3">
-                {{ form_row(form.enabled) }}
-            </div>
-            {% if product.isSimple %}
-                <div class="mb-3">
-                    {{ form_row(form.variant.shippingRequired) }}
-                </div>
-                <div class="d-none">
-                    {{ form_row(form.variant.translations) }}
-                </div>
-            {% endif %}
-            <div class="mb-3">
-                {{ form_row(form.channels) }}
-            </div>
-            {% if product.isSimple == false %}
-                <div class="mb-3">
-                    {{ form_row(form.options, {'search_url': path('sylius_admin_ajax_product_options_by_phrase'), 'init_load_url': path('sylius_admin_ajax_find_product_options')}) }}
-                </div>
-            {% endif %}
-            <div class="mb-3 {% if product.isSimple %}d-none{% endif %}">
-                {{ form_row(form.variantSelectionMethod) }}
-            </div>
+            {% hook 'details' with { product } %}
         </div>
     </div>
 </div>

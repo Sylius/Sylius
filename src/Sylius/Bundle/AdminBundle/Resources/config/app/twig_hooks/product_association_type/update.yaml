@@ -2,12 +2,20 @@ twig_hooks:
     hooks:
         'sylius_admin.product_association_type.update.content':
             form:
-                template: '@SyliusAdmin/product_association_type/form.html.twig'
+                template: '@SyliusAdmin/shared/crud/update/content/form.html.twig'
                 configuration:
-                    method: PUT
+                    render_rest: false
 
         'sylius_admin.product_association_type.update.content.form':
-            code:
-                template: '@SyliusAdmin/product_association_type/form/code.html.twig'
+            details:
+                template: '@SyliusAdmin/product_association_type/form/details.html.twig'
             translations:
                 template: '@SyliusAdmin/product_association_type/form/translations.html.twig'
+
+        'sylius_admin.product_association_type.update.content.form.details':
+            code:
+                template: '@SyliusAdmin/product_association_type/form/details/code.html.twig'
+
+        'sylius_admin.product_association_type.update.content.form.translations':
+            name:
+                template: '@SyliusAdmin/product_association_type/form/translations/name.html.twig'

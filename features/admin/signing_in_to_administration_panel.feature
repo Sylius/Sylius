@@ -9,7 +9,7 @@ Feature: Signing in to the administration panel
         And there is a user "ted@example.com" identified by "bear"
         And there is an administrator "admin@example.com" identified by "sylius"
 
-    @todo @ui @api
+    @ui @api
     Scenario: Sign in with email and password
         When I want to log in
         And I specify the username as "admin@example.com"
@@ -17,7 +17,7 @@ Feature: Signing in to the administration panel
         And I log in
         Then I should be logged in
 
-    @todo @ui @api
+    @ui @api
     Scenario: Sign in with bad credentials
         When I want to log in
         And I specify the username as "admin@example.com"
@@ -26,7 +26,7 @@ Feature: Signing in to the administration panel
         Then I should be notified about bad credentials
         And I should not be logged in
 
-    @todo @ui @api
+    @ui @api
     Scenario: Sign in using customer account
         When I want to log in
         And I specify the username as "ted@example.com"

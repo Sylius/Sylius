@@ -1,44 +1,12 @@
-{% import '@SyliusAdmin/shared/helper/translations.html.twig' as _translations %}
+{% import '@SyliusAdmin/shared/helper/translations.html.twig' as translations %}
 
-<div class="tab-pane" id="product-translations" role="tabpanel" tabindex="0">
+{% set form = hookable_metadata.context.form %}
+{% set prefixes = hookable_metadata.prefixes %}
+
+<div class="tab-pane {% if hookable_metadata.configuration.active|default(false) %}show active{% endif %}" id="product-translations" role="tabpanel" tabindex="0">
     <div class="bg-white mb-3">
-        {% set body %}
-            {% verbatim %}
-                <div class="row">
-                    <div class="col-12 col-md-6">
-                        {{ form_row(translationForm.name) }}
-                    </div>
-                    <div class="col-12 col-md-6">
-                        {{ form_label(translationForm.slug) }}
-                        <div class="input-group mb-3">
-                            {{ form_widget(translationForm.slug) }}
-                            <button
-                                class="btn btn-outline-secondary"
-                                type="button"
-                                data-action="live#action"
-                                data-live-action-param="debounce(300)|generateProductSlug"
-                                data-live-locale-code-param="{{ locale }}"
-                                {{ sylius_test_html_attribute('generate-product-slug-button', locale) }}
-                            >
-                                ⚡️
-                            </button>
-                        </div>
-                    </div>
-                    <div class="col-12">
-                        {{ form_row(translationForm.description) }}
-                    </div>
-                    <div class="col-12 col-md-6">
-                        {{ form_row(translationForm.metaKeywords) }}
-                    </div>
-                    <div class="col-12 col-md-6">
-                        {{ form_row(translationForm.metaDescription) }}
-                    </div>
-                    <div class="col-12">
-                        {{ form_row(translationForm.shortDescription) }}
-                    </div>
-                </div>
-            {% endverbatim %}
-        {% endset %}
-        {{ _translations.default(hookable_metadata.context.form.translations, body, {accordionId: 'product-translations'}) }}
+        <div class="row">
+            {{ translations.with_hook(form.translations, prefixes, null, {accordion_id: 'product-translations'}) }}
+        </div>
     </div>
 </div>

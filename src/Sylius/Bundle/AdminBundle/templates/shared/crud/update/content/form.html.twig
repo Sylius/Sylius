@@ -5,10 +5,10 @@
 {% set form = hookable_metadata.context.form %}
 
 {% set route = configuration.vars.route|default(null) %}
-{% set indexRoute = configuration.vars.index.route|default(null) %}
+{% set index_route = configuration.vars.index.route|default(null) %}
 {% set index_url = path(
-    indexRoute.name|default(_context.configuration.getRouteName('index')),
-    indexRoute.parameters|default(route.parameters|default({}))
+    index_route.name|default(_context.configuration.getRouteName('index')),
+    index_route.parameters|default(route.parameters|default({}))
 ) %}
 
 {% form_theme form '@SyliusAdmin/shared/form_theme.html.twig' %}
@@ -16,20 +16,22 @@
 <div class="page-body">
     <div class="container-xl">
         {% block content %}
-            {% set renderRest = hookable_metadata.configuration.render_rest %}
+            {% set render_rest = hookable_metadata.configuration.render_rest %}
 
-            {% if renderRest %}
+            {% if render_rest %}
                 <div class="card">
                 <div class="card-body">
             {% endif %}
             {{ form_start(form, {'action': path(configuration.vars.route.name|default(configuration.getRouteName('update')), configuration.vars.route.parameters|default({ 'id': resource.id })), 'attr': {'class': 'ui loadable form', 'novalidate': 'novalidate', 'id': form.vars.id}}) }}
             {% block form_content %}
                 <input type="hidden" name="_method" value="PUT"/>
+                {{ form_errors(form) }}
+                {%- if form._token is defined %}{{ form_widget(form._token) }}{% endif %}
 
                 {% hook 'form' with { form } %}
             {% endblock %}
-            {{ form_end(form, {'render_rest': renderRest}) }}
-            {% if renderRest %}
+            {{ form_end(form, {'render_rest': render_rest}) }}
+            {% if render_rest %}
                 </div>
                 <div class="card-footer">
                     <div class="row align-items-center">

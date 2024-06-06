@@ -1,0 +1,6 @@
+{% set images = hookable_metadata.context.form.images %}
+{% set attributes = sylius_test_form_attribute('add-image')|sylius_merge_recursive({ label: 'sylius.ui.add_image'|trans, attr: { class: 'btn btn-outline-primary '}}) %}
+
+<div class="d-grid gap-2">
+    {{ form_widget(images.vars.button_add, attributes) }}
+</div>

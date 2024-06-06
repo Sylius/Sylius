@@ -14,9 +14,10 @@ Feature: Adding a new product with an integer attribute
     Scenario: Adding an integer attribute to product
         When I want to create a new configurable product
         And I specify its code as "44_MAGNUM"
-        And I name it "44 Magnum" in "English (United States)"
+        And I name it "44 Magnum" in "English (United States)" locale
+        And I set its slug to "44-magnum"
         And I add the "Production year" attribute to it
-        And I set the "Production year" attribute value to 1955 in "English (United States)"
+        And I set the "Production year" attribute value to 1955 in "English (United States)" locale
         And I add it
         Then I should be notified that it has been successfully created
         And the product "44 Magnum" should appear in the store
@@ -26,7 +27,8 @@ Feature: Adding a new product with an integer attribute
     Scenario: Adding an integer non-translatable attribute to product
         When I want to create a new configurable product
         And I specify its code as "44_MAGNUM"
-        And I name it "44 Magnum" in "English (United States)"
+        And I name it "44 Magnum" in "English (United States)" locale
+        And I set its slug to "44-magnum"
         And I add the "Weight" attribute to it
         And I set its non-translatable "Weight" attribute to 10
         And I add it
@@ -38,7 +40,7 @@ Feature: Adding a new product with an integer attribute
     Scenario: Trying to add an invalid integer attribute to product
         When I want to create a new configurable product
         And I specify its code as "44_MAGNUM"
-        And I name it "44 Magnum" in "English (United States)"
+        And I name it "44 Magnum" in "English (United States)" locale
         And I set the invalid string value of the non-translatable "Weight" attribute to "ten"
         And I try to add it
         Then I should be notified that the value of the "Weight" attribute has invalid type

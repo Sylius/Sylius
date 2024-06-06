@@ -176,6 +176,19 @@
         </service>
 
         <service
+            id="sylius_admin.twig.component.product.form.product_taxons"
+            class="Sylius\Bundle\AdminBundle\Twig\Component\Product\Form\ProductTaxonsComponent"
+        >
+            <argument type="service" id="sylius_admin.doctrine.query.taxon.all_taxons" />
+
+            <tag
+                name="sylius.twig_component"
+                key="sylius_admin:product:form:product_taxons"
+                template="@SyliusAdmin/product/form/sections/taxonomy/product_taxons.html.twig"
+            />
+        </service>
+
+        <service
             id="sylius_admin.twig.component.product.product_attribute_autocomplete"
             class="Sylius\Bundle\AdminBundle\Twig\Component\Product\ProductAttributeAutocompleteComponent"
         >

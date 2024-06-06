@@ -16,7 +16,7 @@
         form: null,
     }|merge(params) %}
 
-    {% set buttonClass = 'btn' ~
+    {% set button_class = 'btn' ~
         (p.class ? ' ' ~ p.class : '') ~
         (p.dropdown ? ' dropdown-toggle' : '') ~
         (p.iconOnly ? ' btn-icon' : '') ~
@@ -26,7 +26,7 @@
     {% if p.url %}
         <a href="{{ p.url }}"
            {% if p.id %}id="{{ p.id }}"{% endif %}
-           class="{{ buttonClass }}"
+           class="{{ button_class }}"
             {% if p.disabled %}aria-disabled="true"{% endif %}
             {% if p.dropdown %}data-bs-toggle="dropdown"{% endif %}
             {{ p.attr is iterable ? block('attributes') : (p.attr ? ' ' ~ p.attr) }}>
@@ -37,7 +37,7 @@
         <button type="{{ p.type }}"
                 {% if p.id %}id="{{ p.id }}"{% endif %}
                 {% if p.form %}form="{{ p.form }}"{% endif %}
-                class="{{ buttonClass }}"
+                class="{{ button_class }}"
             {% if p.disabled %}disabled{% endif %}
             {% if p.dropdown %}data-bs-toggle="dropdown"{% endif %}
             {{ p.attr is iterable ? block('attributes') : (p.attr ? ' ' ~ p.attr ) }}>
@@ -53,8 +53,8 @@
         class: null,
     }|merge(params) %}
 
-    {% set newParams = params|merge({ class: 'btn-primary ' ~ params.class }) %}
-    {{ _.default(newParams) }}
+    {% set new_params = params|merge({ class: 'btn-primary ' ~ params.class }) %}
+    {{ _.default( new_params) }}
 {% endmacro %}
 
 {% macro delete(params = {}) %}
@@ -63,8 +63,8 @@
         class: null,
     }|merge(params) %}
 
-    {% set newParams = { text: 'Delete' }|merge(params)|merge({ class: 'btn btn-ghost-danger ' ~ params.class }) %}
-    {{ _.default(newParams) }}
+    {% set new_params = { text: 'Delete' }|merge(params)|merge({ class: 'btn btn-ghost-danger ' ~ params.class }) %}
+    {{ _.default( new_params) }}
 {% endmacro %}
 
 {% macro create(params = {}) %}

@@ -1,8 +1,8 @@
-{% set catalogPromotion = hookable_metadata.context.resource %}
+{% set catalog_promotion = hookable_metadata.context.resource %}
 
 <div class="bg-white mb-3">
     <div class="accordion" id="catalog-promotion-translations">
-        {% for translation in catalogPromotion.translations %}
+        {% for translation in catalog_promotion.translations %}
             {% set locale = translation.locale %}
 
             <div class="accordion-item">

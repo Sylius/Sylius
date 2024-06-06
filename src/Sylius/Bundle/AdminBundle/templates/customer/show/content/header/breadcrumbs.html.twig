@@ -5,9 +5,9 @@
 
 {% if hookable_metadata.context.metadata is defined %}
     {% set metadata = hookable_metadata.context.metadata %}
-    {% set resourceName = hookable_metadata.configuration.resource_name|default(metadata.applicationName~'.ui.'~metadata.pluralName) %}
+    {% set resource_name = hookable_metadata.configuration.resource_name|default(metadata.applicationName~'.ui.'~metadata.pluralName) %}
 {% else %}
-    {% set resourceName = hookable_metadata.configuration.resource_name %}
+    {% set resource_name = hookable_metadata.configuration.resource_name %}
 {% endif %}
 
 {% set index_url = path(
@@ -17,7 +17,7 @@
 %}
 
 {{ _breadcrumbs.default([
-    { name: 'Dashboard', url: path('sylius_admin_dashboard'), active: false },
+    { name: 'sylius.ui.dashboard', url: path('sylius_admin_dashboard'), active: false },
     { name: metadata.applicationName~'.ui.'~metadata.pluralName, url: index_url, active: false },
     { name: resource.email, active: true },
 ]) }}

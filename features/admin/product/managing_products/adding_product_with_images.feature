@@ -12,7 +12,8 @@ Feature: Adding a new product with images
     Scenario: Adding a new simple product with a single image
         When I want to create a new simple product
         And I specify its code as "LAMBORGHINI_GALLARDO"
-        And I name it "Lamborghini Gallardo Model" in "English (United States)"
+        And I name it "Lamborghini Gallardo Model" in "English (United States)" locale
+        And I set its slug to "lamborghini-gallardo-model" in "English (United States)" locale
         And I set its price to "$100.00" for "United States" channel
         And I attach the "lamborghini.jpg" image with "banner" type
         And I add it
@@ -23,7 +24,8 @@ Feature: Adding a new product with images
     Scenario: Adding a new simple product with multiple images
         When I want to create a new simple product
         And I specify its code as "LAMBORGHINI_GALLARDO"
-        And I name it "Lamborghini Gallardo Model" in "English (United States)"
+        And I name it "Lamborghini Gallardo Model" in "English (United States)" locale
+        And I set its slug to "lamborghini-gallardo-model" in "English (United States)" locale
         And I set its price to "$100.00" for "United States" channel
         And I attach the "lamborghini.jpg" image with "banner" type
         And I attach the "lamborghini.jpg" image with "thumbnail" type
@@ -39,7 +41,8 @@ Feature: Adding a new product with images
         And this product option has also the "1:18" option value with code "model_scale_big"
         When I want to create a new configurable product
         And I specify its code as "LAMBORGHINI_GALLARDO"
-        And I name it "Lamborghini Gallardo Model" in "English (United States)"
+        And I name it "Lamborghini Gallardo Model" in "English (United States)" locale
+        And I set its slug to "lamborghini-gallardo-model" in "English (United States)" locale
         And I add the "Model scale" option to it
         And I attach the "lamborghini.jpg" image with "banner" type
         And I add it

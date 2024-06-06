@@ -13,7 +13,8 @@ Feature: Adding a new product with a select attribute
     Scenario: Adding a product with a select attribute with choices in different locales
         When I want to create a new configurable product
         And I specify its code as "mug"
-        And I name it "PHP Mug" in "English (United States)"
+        And I name it "PHP Mug" in "English (United States)" locale
+        And I set its slug to "php-mug"
         And I add the "Mug material" attribute
         And I select "Ceramic" value for the "Mug material" attribute
         And I add it
@@ -25,7 +26,8 @@ Feature: Adding a new product with a select attribute
     Scenario: Trying to add an invalid select attribute to product
         When I want to create a new configurable product
         And I specify its code as "mug"
-        And I name it "PHP Mug" in "English (United States)"
+        And I name it "PHP Mug" in "English (United States)" locale
+        And I set its slug to "php-mug"
         And I add the "Mug material" attribute
         And I set the invalid string value of the non-translatable "Mug material" attribute to "ceramic"
         And I add it

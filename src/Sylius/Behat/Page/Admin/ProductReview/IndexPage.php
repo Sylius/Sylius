@@ -13,40 +13,71 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Page\Admin\ProductReview;
 
-use Behat\Mink\Element\NodeElement;
+use Behat\Mink\Session;
 use Sylius\Behat\Page\Admin\Crud\IndexPage as BaseIndexPage;
+use Sylius\Behat\Service\Accessor\TableAccessorInterface;
+use Sylius\Behat\Service\Helper\AutocompleteHelperInterface;
+use Symfony\Component\Routing\RouterInterface;
+use Webmozart\Assert\Assert;
 
 class IndexPage extends BaseIndexPage implements IndexPageInterface
 {
+    public function __construct(
+        Session $session,
+        array|\ArrayAccess $minkParameters,
+        RouterInterface $router,
+        TableAccessorInterface $tableAccessor,
+        string $routeName,
+        private AutocompleteHelperInterface $autocompleteHelper,
+    ) {
+        parent::__construct($session, $minkParameters, $router, $tableAccessor, $routeName);
+    }
+
     public function accept(array $parameters): void
     {
-        $this->getActionButtonsField($parameters)->pressButton('Accept');
+        $this->changeState('accept', $parameters);
     }
 
     public function reject(array $parameters): void
     {
-        $this->getActionButtonsField($parameters)->pressButton('Reject');
+        $this->changeState('reject', $parameters);
     }
 
-    public function chooseState(string $state): void
+    public function filterByState(string $state): void
     {
-        $this->getElement('filter_state')->selectOption($state);
+        $this->getElement('state_filter')->selectOption($state);
     }
 
-    private function getActionButtonsField(array $parameters): NodeElement
+    public function filterByTitle(string $phrase): void
     {
-        $tableAccessor = $this->getTableAccessor();
-        $table = $this->getElement('table');
+        $this->getElement('title_filter')->setValue($phrase);
+    }
 
-        $row = $tableAccessor->getRowWithFields($table, $parameters);
+    public function filterByProduct(string $productName): void
+    {
+        $this->autocompleteHelper->selectByName(
+            $this->getDriver(),
+            $this->getElement('product_filter')->getXpath(),
+            $productName,
+        );
 
-        return $tableAccessor->getFieldFromRow($table, $row, 'actions');
+        $this->waitForFormUpdate();
+    }
+
+    private function changeState(string $state, array $parameters): void
+    {
+        $action = $this->getActionsForResource($parameters)->find('css', sprintf('[data-test-action="%s"]', $state));
+        Assert::notNull($action, sprintf('There is no "%s" action available for this resource', $state));
+
+        $action->find('css', 'button')->click();
     }
 
     protected function getDefinedElements(): array
     {
-        return parent::getDefinedElements() + [
-            'filter_state' => '#criteria_status',
-        ];
+        return array_merge(parent::getDefinedElements(), [
+            'product_filter' => '#criteria_product',
+            'state_filter' => '#criteria_status',
+            'title_filter' => '#criteria_title_value',
+        ]);
     }
 }

@@ -1,0 +1,31 @@
+{% extends '@SyliusAdmin/shared/form_theme.html.twig' %}
+
+{% block _sylius_admin_product_channels_row %}
+    {{ form_label(form) }}
+
+    {% for channel in form %}
+        {{ form_row(channel, sylius_test_form_attribute('channel-code', channel.vars.value)|merge({ label_attr: { class: 'checkbox-switch' } })) }}
+    {% endfor %}
+
+    {{ form_errors(form) }}
+{% endblock %}
+
+{% block _sylius_admin_product_translations_entry_slug_row %}
+    {% set locale = form.parent.vars.name %}
+
+    {{ form_label(form) }}
+    <div class="input-group mb-3">
+        {{ form_widget(form, sylius_test_form_attribute('slug', locale)) }}
+        <button
+            class="btn btn-outline-secondary"
+            type="button"
+            data-action="live#action"
+            data-live-action-param="debounce(300)|generateProductSlug"
+            data-live-locale-code-param="{{ locale }}"
+            {{ sylius_test_html_attribute('generate-product-slug-button', locale) }}
+        >
+            ⚡️
+        </button>
+    </div>
+    {{ form_errors(form) }}
+{% endblock %}

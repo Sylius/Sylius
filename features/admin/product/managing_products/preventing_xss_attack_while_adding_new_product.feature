@@ -13,7 +13,7 @@ Feature: Preventing a potential XSS attack while adding a new product
     @ui @mink:chromedriver @no-api
     Scenario: Preventing a potential XSS attack while adding new product
         When I want to create a new simple product
-        Then I should be able to name it "No XSS" in "English (United States)"
+        Then I should be able to name it "No XSS" in "English (United States)" locale
 
     @todo @ui @javascript @no-api
     Scenario: Preventing a potential XSS attack while choosing main taxon for a new product

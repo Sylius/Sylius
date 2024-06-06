@@ -1,11 +1,10 @@
-<div class="tab-pane" id="product-taxonomy" role="tabpanel" tabindex="0">
-    <div class="card mb-3">
+<div class="tab-pane {% if hookable_metadata.configuration.active|default(false) %}show active{% endif %}" id="product-taxonomy" role="tabpanel" tabindex="0">
+    <div class="card mb-3 pb-2">
         <div class="card-header">
             <h2 id="product-taxonomy" class="card-title">{{ 'sylius.ui.taxonomy'|trans }}</h2>
         </div>
         <div class="card-body">
-            {{ form_row(hookable_metadata.context.form.mainTaxon, { 'search_url': path('sylius_admin_ajax_taxon_by_name_phrase'), 'init_load_url': path('sylius_admin_ajax_taxon_by_code') }) }}
+            {% hook 'taxonomy' %}
         </div>
     </div>
-
 </div>

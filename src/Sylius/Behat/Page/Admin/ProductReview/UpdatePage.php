@@ -29,9 +29,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
 
     public function chooseRating(string $rating): void
     {
-        $position = (int) $rating - 1;
-
-        $this->getElement('rating', ['%position%' => $position])->getParent()->click();
+        $this->getElement('rating', ['%value%' => $rating])->getParent()->click();
     }
 
     public function getRating(): string
@@ -41,23 +39,23 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
 
     public function getProductName(): string
     {
-        return $this->getElement('product_name')->getHtml();
+        return $this->getElement('product_name')->getText();
     }
 
     public function getCustomerName(): string
     {
-        return $this->getElement('customer_name')->getHtml();
+        return $this->getElement('author_name')->getText();
     }
 
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
-            'checked_rating' => 'input[checked="checked"]',
-            'comment' => '#sylius_admin_product_review_comment',
-            'rating' => '#sylius_admin_product_review_rating_%position%',
-            'customer_name' => '.sylius-customer-name',
-            'product_name' => '.sylius-product-name',
-            'title' => '#sylius_admin_product_review_title',
+            'author_name' => '[data-test-author-name]',
+            'checked_rating' => 'input[checked]',
+            'comment' => '[data-test-comment]',
+            'product_name' => '[data-test-product-name]',
+            'rating' => '[data-test-rating="%value%"]',
+            'title' => '[data-test-title]',
         ]);
     }
 }

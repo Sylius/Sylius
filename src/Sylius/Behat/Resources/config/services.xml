@@ -24,7 +24,8 @@
         <parameter key="sylius.behat.notification_accessor.admin.locator" type="string">[data-test-sylius-flash-message]</parameter>
         <parameter key="sylius.behat.notification_accessor.shop.locator" type="string">.sylius-flash-message</parameter>
         <parameter key="sylius.behat.notification_checker.admin.class_map" type="collection">
-            <parameter key="failure">alert-danger</parameter>
+            <parameter key="failure">alert-danger</parameter> <!-- Deprecated and will be removed in Sylius 2.0, use "error" instead -->
+            <parameter key="error">alert-danger</parameter>
             <parameter key="info">alert-info</parameter>
             <parameter key="success">alert-success</parameter>
         </parameter>

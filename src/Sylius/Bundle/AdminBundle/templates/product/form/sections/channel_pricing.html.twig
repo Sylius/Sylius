@@ -1,12 +1,12 @@
 {% set product = hookable_metadata.context.resource %}
 
 {% if product.isSimple %}
-    <div class="tab-pane" id="product-channel-pricing" role="tabpanel" tabindex="0">
-        {% set variantForm = hookable_metadata.context.form.variant %}
+    <div class="tab-pane {% if hookable_metadata.configuration.active|default(false) %}show active{% endif %}" id="product-channel-pricing" role="tabpanel" tabindex="0">
+        {% set variant_form = hookable_metadata.context.form.variant %}
 
-        {% set isChannelPricingInvalid = variantForm.channelPricings.vars.errors is not empty %}
+        {% set is_channel_pricing_invalid = variant_form.channelPricings.vars.errors is not empty %}
 
-        {% if isChannelPricingInvalid %}
+        {% if is_channel_pricing_invalid %}
             {% from '@SyliusAdmin/shared/helper/icon.html.twig' import icon as _icon %}
 
             <div class="alert alert-danger" role="alert">
@@ -14,30 +14,30 @@
                     <div>
                         {{ _icon({ 'icon': 'danger', 'class': 'alert-icon' }) }}
                     </div>
-                    <div>
-                        {% set firstError = variantForm.channelPricings.vars.errors|first %}
-                        {{ firstError.messageTemplate|trans({}, 'validators') }}
+                    <div {{ sylius_test_html_attribute('missing-channel-price') }}>
+                        {% set first_error = variant_form.channelPricings.vars.errors|first %}
+                        {{ first_error.messageTemplate|trans({}, 'validators') }}
                     </div>
                 </div>
             </div>
         {% endif %}
 
         <div class="card mb-3">
-            {% if isChannelPricingInvalid %}
+            {% if is_channel_pricing_invalid %}
                 <div class="card-status-top bg-danger"></div>
             {% endif %}
             <div class="card-header">
                 <ul class="nav nav-tabs card-header-tabs" data-bs-toggle="tabs" role="tablist">
-                    {% for channelCode, channelPricing in variantForm.channelPricings %}
+                    {% for channel_code, channel_pricing in variant_form.channelPricings %}
                         <li class="nav-item">
                             <a
                                 class="nav-link {% if loop.index0 == 0 %}active{% endif %}"
                                 data-bs-toggle="tab"
-                                href="#{{ channelCode }}"
+                                href="#{{ channel_code }}"
                                 role="tab"
-                                {{ sylius_test_html_attribute('channel-tab', channelCode) }}
+                                {{ sylius_test_html_attribute('channel-tab', channel_code) }}
                             >
-                                {{ channelPricing.vars.label }}
+                                {{ channel_pricing.vars.label }}
                             </a>
                         </li>
                     {% endfor %}
@@ -45,14 +45,15 @@
             </div>
             <div class="card-body">
                 <div class="tab-content">
-                    {% for channelCode, channelPricing in variantForm.channelPricings %}
-                        <div class="tab-pane fade {% if loop.index0 == 0 %}show{% endif %} active" id="{{ channelCode }}" role="tabpanel">
-                            {% if channelCode not in product.channels|map(channel => channel.code) %}
+                    {% for channel_code, channel_pricing in variant_form.channelPricings %}
+                        <div class="tab-pane fade {% if loop.index0 == 0 %}show{% endif %} active" id="{{ channel_code }}" role="tabpanel">
+                            {% if channel_code not in product.channels|map(channel => channel.code) %}
                                 <div class="alert alert-info">
                                     {{ 'sylius.ui.product.product_not_active_in_channel'|trans }}
                                 </div>
                             {% endif %}
-                            {{ form_row(channelPricing, {'label': false}) }}
+
+                            {% hook 'channel_pricing' with { channel_code, channel_pricing } %}
                         </div>
                     {% endfor %}
                 </div>

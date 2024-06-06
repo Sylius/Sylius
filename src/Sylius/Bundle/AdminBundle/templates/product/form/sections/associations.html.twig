@@ -1,4 +1,4 @@
-<div class="tab-pane" id="product-associations" role="tabpanel" tabindex="0">
+<div class="tab-pane {% if hookable_metadata.configuration.active|default(false) %}show active{% endif %}" id="product-associations" role="tabpanel" tabindex="0">
     <div class="card mb-3">
         <div class="card-header">
             <h2 class="card-title">
@@ -7,7 +7,7 @@
         </div>
         <div class="card-body">
             <div class="row">
-                {{ form_row(hookable_metadata.context.form.associations) }}
+                {% hook 'associations' %}
             </div>
         </div>
     </div>

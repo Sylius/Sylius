@@ -16,6 +16,8 @@ namespace spec\Sylius\Component\Core\Inventory\Operator;
 use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Sylius\Component\Core\Inventory\Exception\NotEnoughUnitsOnHandException;
+use Sylius\Component\Core\Inventory\Exception\NotEnoughUnitsOnHoldException;
 use Sylius\Component\Core\Inventory\Operator\OrderInventoryOperatorInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
@@ -123,7 +125,7 @@ final class OrderInventoryOperatorSpec extends ObjectBehavior
         $this->cancel($order);
     }
 
-    function it_throws_an_invalid_argument_exception_if_difference_between_on_hold_and_item_quantity_is_smaller_than_zero_during_cancelling(
+    function it_throws_a_not_enough_units_on_hold_exception_if_difference_between_on_hold_and_item_quantity_is_smaller_than_zero_during_cancelling(
         OrderInterface $order,
         OrderItemInterface $orderItem,
         ProductVariantInterface $variant,
@@ -139,10 +141,10 @@ final class OrderInventoryOperatorSpec extends ObjectBehavior
 
         $variant->getName()->willReturn('Red Skirt');
 
-        $this->shouldThrow(\InvalidArgumentException::class)->during('cancel', [$order]);
+        $this->shouldThrow(NotEnoughUnitsOnHoldException::class)->during('cancel', [$order]);
     }
 
-    function it_throws_an_invalid_argument_exception_if_difference_between_on_hold_and_item_quantity_is_smaller_than_zero_during_selling(
+    function it_throws_a_not_enough_units_on_hold_exception_if_difference_between_on_hold_and_item_quantity_is_smaller_than_zero_during_selling(
         OrderInterface $order,
         OrderItemInterface $orderItem,
         ProductVariantInterface $variant,
@@ -156,10 +158,10 @@ final class OrderInventoryOperatorSpec extends ObjectBehavior
 
         $variant->getName()->willReturn('Red Skirt');
 
-        $this->shouldThrow(\InvalidArgumentException::class)->during('sell', [$order]);
+        $this->shouldThrow(NotEnoughUnitsOnHoldException::class)->during('sell', [$order]);
     }
 
-    function it_throws_an_invalid_argument_exception_if_difference_between_on_hand_and_item_quantity_is_smaller_than_zero_during_selling(
+    function it_throws_a_not_enough_units_on_hand_exception_if_difference_between_on_hand_and_item_quantity_is_smaller_than_zero_during_selling(
         OrderInterface $order,
         OrderItemInterface $orderItem,
         ProductVariantInterface $variant,
@@ -174,7 +176,7 @@ final class OrderInventoryOperatorSpec extends ObjectBehavior
 
         $variant->getName()->willReturn('Red Skirt');
 
-        $this->shouldThrow(\InvalidArgumentException::class)->during('sell', [$order]);
+        $this->shouldThrow(NotEnoughUnitsOnHandException::class)->during('sell', [$order]);
     }
 
     function it_does_nothing_if_variant_is_not_tracked_during_cancelling(

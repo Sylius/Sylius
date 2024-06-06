@@ -6,8 +6,8 @@
             {{ form_row(form.configuration) }}
         {% else %}
             {% for name, calculatorConfigurationPrototype in form.vars.prototypes %}
-                {% set chosenCalculator = 'calculators_' ~ form.calculator.vars.value %}
-                {% if chosenCalculator == name %}
+                {% set chosen_calculator = 'calculators_' ~ form.calculator.vars.value %}
+                {% if chosen_calculator == name %}
                     {{ form_row(calculatorConfigurationPrototype) }}
                 {% endif %}
             {% endfor %}

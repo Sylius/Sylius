@@ -18,12 +18,13 @@ Feature: Adding select attributes in different locales to a product
     Scenario: Adding a product with a select attribute with choices in different locales
         When I want to create a new configurable product
         And I specify its code as "mug"
-        And I name it "PHP Mug" in "English (United States)"
+        And I name it "PHP Mug" in "English (United States)" locale
+        And I set its slug to "php-mug"
         And I add the "Mug material" attribute
         And I select "Ceramic" value in "English (United States)" for the "Mug material" attribute
         And I select "Ceramika" value in "Polish (Poland)" for the "Mug material" attribute
         And I add it
         Then I should be notified that it has been successfully created
         And the product "PHP Mug" should appear in the store
-        And select attribute "Mug material" of product "PHP Mug" should be "Ceramic" in "English (United States)"
-        And select attribute "Mug material" of product "PHP Mug" should be "Ceramika" in "Polish (Poland)"
+        And select attribute "Mug material" of product "PHP Mug" should be "Ceramic" in "English (United States)" locale
+        And select attribute "Mug material" of product "PHP Mug" should be "Ceramika" in "Polish (Poland)" locale
