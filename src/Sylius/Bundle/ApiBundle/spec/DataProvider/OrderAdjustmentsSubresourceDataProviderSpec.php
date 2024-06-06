@@ -20,6 +20,7 @@ use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Order\Model\AdjustmentInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 final class OrderAdjustmentsSubresourceDataProviderSpec extends ObjectBehavior
 {
@@ -54,7 +55,7 @@ final class OrderAdjustmentsSubresourceDataProviderSpec extends ObjectBehavior
         $orderRepository->findOneBy(['tokenValue' => 'TOKEN'])->willReturn(null);
 
         $this
-            ->shouldThrow(\InvalidArgumentException::class)
+            ->shouldThrow(NotFoundHttpException::class)
             ->during('getSubresource', [
                 AdjustmentInterface::class,
                 [],
