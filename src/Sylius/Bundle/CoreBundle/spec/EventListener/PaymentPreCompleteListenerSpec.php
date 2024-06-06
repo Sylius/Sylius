@@ -74,6 +74,7 @@ final class PaymentPreCompleteListenerSpec extends ObjectBehavior
 
         $this->checkStockAvailability($event);
     }
+
     function it_does_nothing_if_no_item_is_tracked_when_order_item_availability_checker_is_not_passed(
         AvailabilityCheckerInterface $availabilityChecker,
         ResourceControllerEvent $event,
