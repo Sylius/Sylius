@@ -41,7 +41,7 @@ sylius_admin_promotion_coupon_update:
     defaults:
         _controller: sylius.controller.promotion_coupon::updateAction
         _sylius:
-            template: "@SyliusAdmin/crud/update.html.twig"
+            template: "@SyliusAdmin/shared/crud/update.html.twig"
             grid: sylius_admin_promotion_coupon
             form:
                 type: Sylius\Bundle\AdminBundle\Form\Type\PromotionCouponType
@@ -55,10 +55,6 @@ sylius_admin_promotion_coupon_update:
                     parameters:
                         id: $id
                         promotionId: $promotionId
-                templates:
-                    form: "@SyliusAdmin/PromotionCoupon/_form.html.twig"
-                    breadcrumb: "@SyliusAdmin/PromotionCoupon/Update/_breadcrumb.html.twig"
-                subheader: sylius.ui.manage_discounts_and_promotional_campaigns
 
 sylius_admin_promotion_coupon_generate:
     path: /generate
