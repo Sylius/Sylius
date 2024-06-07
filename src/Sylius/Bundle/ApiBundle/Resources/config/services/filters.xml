@@ -222,10 +222,10 @@
             <tag name="api_platform.filter" />
         </service>
 
-<!--        <service id="Sylius\Bundle\ApiBundle\Filter\Doctrine\ProductPriceOrderFilter" public="true">-->
-<!--            <argument type="service" id="doctrine" />-->
-<!--            <tag name="api_platform.filter" />-->
-<!--        </service>-->
+        <service id="Sylius\Bundle\ApiBundle\Filter\Doctrine\ProductPriceOrderFilter" public="true">
+            <argument type="service" id="doctrine" />
+            <tag name="api_platform.filter" />
+        </service>
 
 <!--        <service id="Sylius\Bundle\ApiBundle\Filter\PaymentMethodFilter" public="true">-->
 <!--            <tag name="api_platform.filter" />-->

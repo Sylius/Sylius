@@ -121,15 +121,15 @@
 <!--            <tag name="api_platform.doctrine.orm.query_extension.item" />-->
 <!--        </service>-->
 
-<!--        <service id="Sylius\Bundle\ApiBundle\Doctrine\QueryItemExtension\EnabledProductVariantItemExtension">-->
-<!--            <argument type="service" id="Sylius\Bundle\ApiBundle\Context\UserContextInterface" />-->
-<!--            <tag name="api_platform.doctrine.orm.query_extension.item" />-->
-<!--        </service>-->
+        <service id="Sylius\Bundle\ApiBundle\Doctrine\QueryItemExtension\EnabledProductVariantItemExtension">
+            <argument type="service" id="Sylius\Bundle\ApiBundle\Context\UserContextInterface" />
+            <tag name="api_platform.doctrine.orm.query_extension.item" />
+        </service>
 
-<!--        <service id="Sylius\Bundle\ApiBundle\Doctrine\QueryItemExtension\EnabledProductInProductAssociationItemExtension">-->
-<!--            <argument type="service" id="Sylius\Bundle\ApiBundle\Context\UserContextInterface" />-->
-<!--            <tag name="api_platform.doctrine.orm.query_extension.item" />-->
-<!--        </service>-->
+        <service id="Sylius\Bundle\ApiBundle\Doctrine\QueryItemExtension\EnabledProductInProductAssociationItemExtension">
+            <argument type="service" id="Sylius\Bundle\ApiBundle\Context\UserContextInterface" />
+            <tag name="api_platform.doctrine.orm.query_extension.item" />
+        </service>
 
         <service id="Sylius\Bundle\ApiBundle\Doctrine\QueryExtension\ShopExchangeRateExtension">
             <argument type="service" id="sylius.section_resolver.uri_based_section_resolver" />

@@ -47,7 +47,7 @@ imports:
     - api/product/viewing_product_in_admin_panel.yaml
 #    - api/product/viewing_product_reviews.yml
 #    - api/product/viewing_product_variants.yml
-#    - api/product/viewing_products.yml
+    - api/product/viewing_products.yml
 #    - api/promotion/applying_catalog_promotions.yml TODO: Enable after making product and product variant resources available in API
 #    - api/promotion/applying_promotion_coupon.yml
 #    - api/promotion/applying_promotion_rules.yml
