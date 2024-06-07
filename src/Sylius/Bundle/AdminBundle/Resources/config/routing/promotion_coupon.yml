@@ -21,7 +21,7 @@ sylius_admin_promotion_coupon_create:
                 method: createForPromotion
                 arguments:
                     - expr:notFoundOnNull(service('sylius.repository.promotion').find($promotionId))
-            template: "@SyliusAdmin/crud/create.html.twig"
+            template: "@SyliusAdmin/shared/crud/create.html.twig"
             grid: sylius_admin_promotion_coupon
             form:
                 type: Sylius\Bundle\AdminBundle\Form\Type\PromotionCouponType
@@ -34,10 +34,6 @@ sylius_admin_promotion_coupon_create:
                 route:
                     parameters:
                         promotionId: $promotionId
-                templates:
-                    form: "@SyliusAdmin/PromotionCoupon/_form.html.twig"
-                    breadcrumb: "@SyliusAdmin/PromotionCoupon/Create/_breadcrumb.html.twig"
-                    header_title: "@SyliusAdmin/PromotionCoupon/Create/_headerTitle.html.twig"
 
 sylius_admin_promotion_coupon_update:
     path: /{id}/edit
