@@ -82,12 +82,12 @@ final class AttributesFormElement extends BaseFormElement implements AttributesF
         return count($this->getDocument()->findAll('css', '[data-test-attribute-tab]'));
     }
 
-    public function getAttributeValue(string $attribute, string $localeCode): string
+    public function getAttributeValue(string $attributeName, string $localeCode): string
     {
         $this->changeTab();
-        $this->changeAttributeTab($attribute);
+        $this->changeAttributeTab($attributeName);
 
-        $attributeValue = $this->getElement('attribute_value', ['%attribute_name%' => $attribute, '%locale_code%' => $localeCode]);
+        $attributeValue = $this->getElement('attribute_value', ['%attribute_name%' => $attributeName, '%locale_code%' => $localeCode]);
 
         return match ($attributeValue->getTagName()) {
             'input' => $attributeValue->getValue(),
@@ -96,11 +96,11 @@ final class AttributesFormElement extends BaseFormElement implements AttributesF
         };
     }
 
-    public function getAttributeSelectText(string $attribute, string $localeCode): string
+    public function getAttributeSelectText(string $attributeName, string $localeCode): string
     {
         $this->clickTabIfItsNotActive();
 
-        return $this->getElement('attribute_select', ['%attribute_name%' => $attribute, '%locale_code%' => $localeCode])->getText();
+        return $this->getElement('attribute_select', ['%attribute_name%' => $attributeName, '%locale_code%' => $localeCode])->getText();
     }
 
     public function getValueNonTranslatableAttribute(string $attributeName): string

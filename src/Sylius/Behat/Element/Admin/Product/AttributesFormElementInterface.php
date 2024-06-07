@@ -29,9 +29,9 @@ interface AttributesFormElementInterface extends FormElementInterface
 
     public function getNumberOfAttributes(): int;
 
-    public function getAttributeValue(string $attribute, string $localeCode): string;
+    public function getAttributeValue(string $attributeName, string $localeCode): string;
 
-    public function getAttributeSelectText(string $attribute, string $localeCode): string;
+    public function getAttributeSelectText(string $attributeName, string $localeCode): string;
 
     public function getValueNonTranslatableAttribute(string $attributeName): string;
 
