@@ -23,7 +23,6 @@
         <import resource="services/context_builders.xml" />
         <import resource="services/contexts.xml" />
         <import resource="services/controllers.xml" />
-        <import resource="services/converters.xml" />
         <import resource="services/creators.xml" />
         <import resource="services/event_handlers.xml" />
         <import resource="services/event_subscribers.xml" />
@@ -177,6 +176,7 @@
             <argument type="service" id=".inner" />
             <argument type="service" id="Sylius\Bundle\ApiBundle\Provider\PathPrefixProviderInterface" />
             <argument type="service" id="Sylius\Bundle\ApiBundle\Resolver\OperationResolverInterface" />
+            <argument type="service" id="api_platform.router" />
         </service>
 
     </services>
