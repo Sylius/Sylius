@@ -1,5 +1,23 @@
 # CHANGELOG FOR `1.12.X`
 
+## v1.12.17 (2024-06-07)
+
+#### Details
+
+- [#16290](https://github.com/Sylius/Sylius/issues/16290) Update bunnyshell.yaml, use network type volumes for mysql-data ([@mihaichitic](https://github.com/mihaichitic))
+- [#16293](https://github.com/Sylius/Sylius/issues/16293) [Core] Add Sylius Plus info Command ([@mpysiak](https://github.com/mpysiak))
+- [#16297](https://github.com/Sylius/Sylius/issues/16297) [Core] Change Show Plus Info command namespace ([@mpysiak](https://github.com/mpysiak))
+- [#16279](https://github.com/Sylius/Sylius/issues/16279) [Docs] Sylius Cloud by Platform.sh ([@senghe](https://github.com/senghe), [@CoderMaggie](https://github.com/CoderMaggie))
+- [#16323](https://github.com/Sylius/Sylius/issues/16323) Sylius Community Edition naming in docs ([@CoderMaggie](https://github.com/CoderMaggie))
+- [#16324](https://github.com/Sylius/Sylius/issues/16324) Mark `tracked` and `shippingRequired` as not required fields ([@loevgaard](https://github.com/loevgaard))
+- [#16329](https://github.com/Sylius/Sylius/issues/16329) [PHPStan] `Negated Boolean Expression Is Always True` Issue Fix ([@Rafikooo](https://github.com/Rafikooo))
+- [#16307](https://github.com/Sylius/Sylius/issues/16307) Fix wrong calculation of available stock during completing a payment ([@GSadee](https://github.com/GSadee))
+- [#16335](https://github.com/Sylius/Sylius/issues/16335) [Inventory] Adjust OrderInventoryOperator spec for exceptions changes ([@GSadee](https://github.com/GSadee))
+- [#16344](https://github.com/Sylius/Sylius/issues/16344) [Inventory] Extract service for checking reserved stock availability for given order item ([@GSadee](https://github.com/GSadee))
+- [#16342](https://github.com/Sylius/Sylius/issues/16342) Resolve createdByGuest on order fixtures ([@TheMilek](https://github.com/TheMilek))
+- [#16321](https://github.com/Sylius/Sylius/issues/16321) Improve Order get endpoints ([@TheMilek](https://github.com/TheMilek))
+- [#16352](https://github.com/Sylius/Sylius/issues/16352) [CS][DX] Refactor
+
 ## v1.12.16 (2024-05-10)
 
 #### Details
