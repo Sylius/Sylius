@@ -1431,11 +1431,11 @@ final readonly class ManagingProductsContext implements Context
     }
 
     /**
-     * @Then I should be notified that the :attributeName attribute value for :locale is required
+     * @Then I should be notified that the :attributeName attribute value for :localeCode is required
      */
-    public function iShouldBeNotifiedThatTheAttributeValueIsRequired(string $attributeName, LocaleInterface $locale): void
+    public function iShouldBeNotifiedThatTheAttributeValueIsRequired(string $attributeName, string $localeCode): void
     {
-        Assert::true($this->attributesFormElement->hasAttributeError($attributeName, $locale->getCode()));
+        Assert::true($this->attributesFormElement->hasAttributeError($attributeName, $localeCode));
     }
 
     private function assertValidationMessage(string $element, string $message): void
