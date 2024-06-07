@@ -1,0 +1,66 @@
+twig_hooks:
+    hooks:
+        'sylius_admin.promotion_coupon.generate':
+            sidebar:
+                template: '@SyliusAdmin/shared/crud/common/sidebar.html.twig'
+            navbar:
+                template: '@SyliusAdmin/shared/crud/common/navbar.html.twig'
+            content:
+                template: '@SyliusAdmin/shared/crud/common/content.html.twig'
+
+        'sylius_admin.promotion_coupon.generate.content':
+            flashes:
+                template: '@SyliusAdmin/shared/crud/common/content/flashes.html.twig'
+            header:
+                template: '@SyliusAdmin/shared/crud/common/content/header.html.twig'
+            form:
+                template: '@SyliusAdmin/promotion_coupon/generate/form.html.twig'
+
+        'sylius_admin.promotion_coupon.generate.content.header':
+            breadcrumbs:
+                template: '@SyliusAdmin/promotion_coupon/generate/content/header/breadcrumbs.html.twig'
+            title_block:
+                template: '@SyliusAdmin/shared/crud/common/content/header/title_block.html.twig'
+
+        'sylius_admin.promotion_coupon.generate.content.header.title_block':
+            title:
+                template: '@SyliusAdmin/shared/crud/common/content/header/title_block/title.html.twig'
+                configuration:
+                    title: 'sylius.ui.generate_coupons'
+            actions:
+                template: '@SyliusAdmin/shared/crud/update/content/header/title_block/actions.html.twig'
+
+        'sylius_admin.promotion_coupon.generate.content.header.title_block.actions':
+            cancel:
+                template: '@SyliusAdmin/shared/crud/common/content/header/title_block/actions/cancel.html.twig'
+            generate:
+                template: '@SyliusAdmin/promotion_coupon/generate/content/header/title_block/actions/generate.html.twig'
+
+        'sylius_admin.promotion_coupon.generate.content.form':
+            sections:
+                template: '@SyliusAdmin/promotion_coupon/generate/form/sections.html.twig'
+
+        'sylius_admin.promotion_coupon.generate.content.form.sections#left':
+            general:
+                template: '@SyliusAdmin/promotion_coupon/generate/form/sections/general.html.twig'
+        
+        'sylius_admin.promotion_coupon.generate.content.form.sections#right':
+            configuration:
+                template: '@SyliusAdmin/promotion_coupon/generate/form/sections/configuration.html.twig'
+        
+        
+        'sylius_admin.promotion_coupon.generate.content.form.sections.general':
+            code:
+                template: '@SyliusAdmin/promotion_coupon/generate/form/sections/general/prefix.html.twig'
+            code_length:
+                template: '@SyliusAdmin/promotion_coupon/generate/form/sections/general/code_length.html.twig'
+            suffix:
+                template: '@SyliusAdmin/promotion_coupon/generate/form/sections/general/suffix.html.twig'
+
+        'sylius_admin.promotion_coupon.generate.content.form.sections.configuration':
+            amount:
+                template: '@SyliusAdmin/promotion_coupon/generate/form/sections/configuration/amount.html.twig'
+            expires_at:
+                template: '@SyliusAdmin/promotion_coupon/generate/form/sections/configuration/expires_at.html.twig'
+            usage_limit:
+                template: '@SyliusAdmin/promotion_coupon/generate/form/sections/configuration/usage_limit.html.twig'

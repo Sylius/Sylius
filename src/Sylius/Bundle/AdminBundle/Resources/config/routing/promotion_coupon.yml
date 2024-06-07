@@ -68,6 +68,10 @@ sylius_admin_promotion_coupon_generate:
                 route: sylius_admin_promotion_coupon_index
                 parameters: { promotionId: $promotionId }
             permission: true
+            vars:
+                route:
+                    parameters:
+                        promotionId: $promotionId
 
 sylius_admin_promotion_coupon_bulk_delete:
     path: /bulk-delete
