@@ -4,18 +4,12 @@ sylius_admin_promotion_coupon_index:
     defaults:
         _controller: sylius.controller.promotion_coupon::indexAction
         _sylius:
-            template: "@SyliusAdmin/PromotionCoupon/index.html.twig"
+            template: "@SyliusAdmin/shared/crud/index.html.twig"
             grid: sylius_admin_promotion_coupon
             section: admin
             permission: true
             vars:
-                route:
-                    parameters:
-                        promotionId: $promotionId
-                templates:
-                    breadcrumb: "@SyliusAdmin/PromotionCoupon/Index/_breadcrumb.html.twig"
-                icon: tags
-                subheader: sylius.ui.manage_coupons
+                promotion: "expr:service('sylius.repository.promotion').find($promotionId)"
 
 sylius_admin_promotion_coupon_create:
     path: /new
