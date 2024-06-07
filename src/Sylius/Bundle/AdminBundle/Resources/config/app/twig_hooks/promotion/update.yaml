@@ -9,6 +9,10 @@ twig_hooks:
                 configuration:
                     method: 'PUT'
 
+        'sylius_admin.promotion.update.content.header.title_block.actions':
+            manage_coupons:
+                template: '@SyliusAdmin/promotion/form/content/update/header/title_block/actions/manage_coupons.html.twig'
+
         'sylius_admin.promotion.update.content.form':
             sections:
                 template: '@SyliusAdmin/promotion/form/sections.html.twig'
