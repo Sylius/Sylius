@@ -1,3 +1,17 @@
+# UPGRADING FROM `v1.13.1` TO `v1.13.2`
+
+1. Due to a bug that was causing wrong calculation of available stock during completing a payment [REF](https://github.com/Sylius/Sylius/issues/16160),
+   The constructor of `Sylius\Bundle\CoreBundle\EventListener\PaymentPreCompleteListener` has been modified as follows:
+
+   ```diff
+    public function __construct(
+    +   private OrderItemAvailabilityCheckerInterface|AvailabilityCheckerInterface $availabilityChecker,
+    -   private AvailabilityCheckerInterface $availabilityChecker,
+    )
+    ```
+
+   If you have overwritten the service or its argument, check the correct functioning.
+
 # UPGRADE FROM `v1.12.X` TO `v1.13.0`
 
 ## Preconditions
