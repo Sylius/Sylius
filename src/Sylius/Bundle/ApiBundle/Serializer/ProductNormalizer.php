@@ -13,16 +13,16 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\Serializer;
 
-use Sylius\Bundle\ApiBundle\Converter\IriConverterInterface;
+use ApiPlatform\Api\IriConverterInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Product\Model\ProductVariantInterface;
 use Sylius\Component\Product\Resolver\ProductVariantResolverInterface;
-use Symfony\Component\Serializer\Normalizer\ContextAwareNormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareTrait;
+use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 use Webmozart\Assert\Assert;
 
-final class ProductNormalizer implements ContextAwareNormalizerInterface, NormalizerAwareInterface
+final class ProductNormalizer implements NormalizerInterface, NormalizerAwareInterface
 {
     use NormalizerAwareTrait;
 
@@ -45,13 +45,13 @@ final class ProductNormalizer implements ContextAwareNormalizerInterface, Normal
 
         $data['variants'] = $object
             ->getEnabledVariants()
-            ->map(fn (ProductVariantInterface $variant): string => $this->iriConverter->getIriFromResourceInSection($variant, 'shop'))
+            ->map(fn (ProductVariantInterface $variant): string => $this->iriConverter->getIriFromResource($variant))
             ->getValues()
         ;
 
         $defaultVariant = $this->defaultProductVariantResolver->getVariant($object);
 
-        $data['defaultVariant'] = $defaultVariant === null ? null : $this->iriConverter->getIriFromResourceInSection($defaultVariant, 'shop');
+        $data['defaultVariant'] = $defaultVariant === null ? null : $this->iriConverter->getIriFromResource($defaultVariant);
 
         return $data;
     }

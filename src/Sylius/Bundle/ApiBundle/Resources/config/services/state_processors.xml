@@ -48,5 +48,11 @@
             <argument type="service" id="sylius.repository.avatar_image" />
             <tag name="api_platform.state_processor" />
         </service>
+
+        <service id="Sylius\Bundle\ApiBundle\StateProcessor\ProductProcessor">
+            <argument type="service" id="api_platform.doctrine.orm.state.persist_processor" />
+            <argument type="service" id="api_platform.doctrine.orm.state.remove_processor" />
+            <tag name="api_platform.state_processor" />
+        </service>
     </services>
 </container>

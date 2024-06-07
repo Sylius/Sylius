@@ -15,6 +15,7 @@ namespace Sylius\Bundle\ApiBundle\Resolver;
 
 use ApiPlatform\Metadata\CollectionOperationInterface;
 use ApiPlatform\Metadata\Operation;
+use ApiPlatform\Metadata\Post;
 use ApiPlatform\Metadata\Resource\Factory\ResourceMetadataCollectionFactoryInterface;
 
 /** @experimental */
@@ -34,6 +35,10 @@ final readonly class PathPrefixBasedOperationResolver implements OperationResolv
         foreach ($resourceMetadataCollection as $resourceMetadata) {
             foreach ($resourceMetadata->getOperations() as $operationName => $resourceOperation) {
                 if ($resourceOperation instanceof CollectionOperationInterface) {
+                    continue;
+                }
+
+                if ($resourceOperation instanceof Post) {
                     continue;
                 }
 
