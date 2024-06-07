@@ -1,0 +1,12 @@
+{% import '@SyliusAdmin/shared/helper/breadcrumbs.html.twig' as breadcrumbs %}
+
+{% set coupon = hookable_metadata.context.resource %}
+{% set promotion = coupon.promotion %}
+
+{{ breadcrumbs.default([
+    { name: 'sylius.ui.dashboard', url: path('sylius_admin_dashboard'), active: false },
+    { name: 'sylius.ui.promotions'|trans, url: path('sylius_admin_promotion_index'), active: false },
+    { name: promotion.name|default(promotion.code), url: path('sylius_admin_promotion_update', {'id': promotion.id }), active: false },
+    { name: 'sylius.ui.coupons'|trans, url: path('sylius_admin_promotion_coupon_index', {'promotionId': promotion.id }), active: false },
+    { name: 'sylius.ui.edit'|trans, active: true },
+]) }}
