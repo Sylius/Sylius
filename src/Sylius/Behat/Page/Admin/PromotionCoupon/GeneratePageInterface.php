@@ -17,23 +17,5 @@ use FriendsOfBehat\PageObjectExtension\Page\SymfonyPageInterface;
 
 interface GeneratePageInterface extends SymfonyPageInterface
 {
-    public function checkAmountValidation(string $message): bool;
-
-    public function checkCodeLengthValidation(string $message): bool;
-
-    public function checkGenerationValidation(string $message): bool;
-
     public function generate(): void;
-
-    public function specifyAmount(?int $amount): void;
-
-    public function specifyCodeLength(?int $codeLength): void;
-
-    public function setExpiresAt(\DateTimeInterface $date): void;
-
-    public function setUsageLimit(int $limit): void;
-
-    public function specifyPrefix(string $prefix): void;
-
-    public function specifySuffix(string $suffix): void;
 }

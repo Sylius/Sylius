@@ -50,14 +50,12 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
 
     public function isCouponManagementAvailable(): bool
     {
-        $element = $this->getDocument()->find('css', 'a:contains("Manage coupons")');
-
-        return null !== $element;
+        return $this->hasElement('manage_coupons_button');
     }
 
     public function manageCoupons(): void
     {
-        $this->getDocument()->clickLink('Manage coupons');
+        $this->getElement('manage_coupons_button')->click();
     }
 
     public function hasAnyRule(): bool
@@ -137,6 +135,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
             'ends_at_time' => '#sylius_admin_promotion_endsAt_time',
             'exclusive' => '#sylius_admin_promotion_exclusive',
             'coupon_based' => '#sylius_admin_promotion_couponBased',
+            'manage_coupons_button' => '[data-test-manage-coupons]',
             'name' => '#sylius_admin_promotion_name',
             'order_percentage_action_field' => '[id^="sylius_admin_promotion_actions_"][id$="_configuration_percentage"]',
             'priority' => '#sylius_admin_promotion_priority',
