@@ -23,6 +23,7 @@
         <import resource="services/context_builders.xml" />
         <import resource="services/contexts.xml" />
         <import resource="services/controllers.xml" />
+        <import resource="services/converters.xml" />
         <import resource="services/creators.xml" />
         <import resource="services/event_handlers.xml" />
         <import resource="services/event_subscribers.xml" />

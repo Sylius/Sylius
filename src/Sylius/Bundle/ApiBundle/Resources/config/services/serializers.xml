@@ -46,7 +46,7 @@
 
         <service id="Sylius\Bundle\ApiBundle\Serializer\ProductNormalizer">
             <argument type="service" id="Sylius\Component\Product\Resolver\ProductVariantResolverInterface" />
-            <argument type="service" id="api_platform.symfony.iri_converter" />
+            <argument type="service" id="Sylius\Bundle\ApiBundle\Converter\IriConverter" />
             <tag name="serializer.normalizer" priority="64" />
         </service>
 
@@ -156,8 +156,8 @@
 <!--            <tag name="serializer.normalizer" priority="96" />-->
 <!--        </service>-->
 
-<!--        <service id="Sylius\Bundle\ApiBundle\Serializer\DoctrineCollectionValuesNormalizer">-->
-<!--            <tag name="serializer.normalizer" priority="64" />-->
-<!--        </service>-->
+        <service id="Sylius\Bundle\ApiBundle\Serializer\DoctrineCollectionValuesNormalizer">
+            <tag name="serializer.normalizer" priority="64" />
+        </service>
     </services>
 </container>
