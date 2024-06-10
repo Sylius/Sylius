@@ -13,7 +13,8 @@ declare(strict_types=1);
 
 namespace spec\Sylius\Bundle\ApiBundle\Doctrine\QueryCollectionExtension;
 
-use ApiPlatform\Core\Bridge\Doctrine\Orm\Util\QueryNameGeneratorInterface;
+
+use ApiPlatform\Doctrine\Orm\Util\QueryNameGeneratorInterface;
 use Doctrine\ORM\QueryBuilder;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
