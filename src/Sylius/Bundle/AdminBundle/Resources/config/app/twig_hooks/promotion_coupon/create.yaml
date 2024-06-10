@@ -9,6 +9,7 @@ twig_hooks:
         'sylius_admin.promotion_coupon.create.content.header':
             breadcrumbs:
                 template: '@SyliusAdmin/promotion_coupon/form/content/create/header/breadcrumbs.html.twig'
+
         'sylius_admin.promotion_coupon.create.content.header.title_block':
             title:
                 template: '@SyliusAdmin/shared/crud/common/content/header/title_block/title.html.twig'

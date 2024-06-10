@@ -1,7 +1,6 @@
 {% import '@SyliusAdmin/shared/helper/breadcrumbs.html.twig' as breadcrumbs %}
 
-{% set configuration = hookable_metadata.context.resources.requestConfiguration %}
-{% set promotion = configuration.vars.promotion %}
+{% set promotion = hookable_metadata.context.resources.requestConfiguration.vars.promotion %}
 
 {{ breadcrumbs.default([
     { name: 'sylius.ui.dashboard', url: path('sylius_admin_dashboard'), active: false },

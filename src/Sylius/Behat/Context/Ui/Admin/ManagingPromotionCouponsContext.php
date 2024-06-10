@@ -15,7 +15,6 @@ namespace Sylius\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Element\Admin\PromotionCoupon\FormElementInterface;
-use Sylius\Behat\Element\Admin\PromotionCoupon\GenerateFormElementInterface;
 use Sylius\Behat\NotificationType;
 use Sylius\Behat\Page\Admin\Crud\CreatePageInterface;
 use Sylius\Behat\Page\Admin\Crud\UpdatePageInterface;
@@ -34,7 +33,6 @@ final class ManagingPromotionCouponsContext implements Context
         private readonly IndexPageInterface $indexPage,
         private readonly UpdatePageInterface $updatePage,
         private readonly FormElementInterface $formElement,
-        private readonly GenerateFormElementInterface $generateFormElement,
         private readonly NotificationCheckerInterface $notificationChecker,
     ) {
     }
@@ -80,7 +78,7 @@ final class ManagingPromotionCouponsContext implements Context
      */
     public function iSpecifyTheirCodeLengthAs(?int $codeLength = null): void
     {
-        $this->generateFormElement->specifyCodeLength($codeLength);
+        $this->generatePage->specifyCodeLength($codeLength);
     }
 
     /**
@@ -88,7 +86,7 @@ final class ManagingPromotionCouponsContext implements Context
      */
     public function specifyPrefixAs(string $prefix): void
     {
-        $this->generateFormElement->specifyPrefix($prefix);
+        $this->generatePage->specifyPrefix($prefix);
     }
 
     /**
@@ -96,7 +94,7 @@ final class ManagingPromotionCouponsContext implements Context
      */
     public function specifySuffixAs(string $suffix): void
     {
-        $this->generateFormElement->specifySuffix($suffix);
+        $this->generatePage->specifySuffix($suffix);
     }
 
     /**
@@ -104,7 +102,7 @@ final class ManagingPromotionCouponsContext implements Context
      */
     public function iSetGeneratedCouponsUsageLimitTo(int $limit): void
     {
-        $this->generateFormElement->setUsageLimit($limit);
+        $this->generatePage->setUsageLimit($limit);
     }
 
     /**
@@ -112,7 +110,7 @@ final class ManagingPromotionCouponsContext implements Context
      */
     public function iMakeGeneratedCouponsValidUntil(\DateTimeInterface $date): void
     {
-        $this->generateFormElement->setExpiresAt($date);
+        $this->generatePage->setExpiresAt($date);
     }
 
     /**
@@ -155,7 +153,7 @@ final class ManagingPromotionCouponsContext implements Context
      */
     public function iSpecifyItsAmountAs(?int $amount = null): void
     {
-        $this->generateFormElement->specifyAmount($amount);
+        $this->generatePage->specifyAmount($amount);
     }
 
     /**
@@ -412,7 +410,7 @@ final class ManagingPromotionCouponsContext implements Context
     }
 
     /**
-     * @Then /^I should be notified that coupon with this code already exists$/
+     * @Then I should be notified that coupon with this code already exists
      */
     public function iShouldBeNotifiedThatCouponWithThisCodeAlreadyExists(): void
     {
@@ -432,7 +430,7 @@ final class ManagingPromotionCouponsContext implements Context
      */
     public function iShouldBeNotifiedThatGenerateAmountIsRequired(): void
     {
-        Assert::same($this->generateFormElement->getValidationMessage('amount'), 'Please enter amount of coupons to generate.');
+        Assert::same($this->generatePage->getValidationMessage('amount'), 'Please enter amount of coupons to generate.');
     }
 
     /**
@@ -440,7 +438,7 @@ final class ManagingPromotionCouponsContext implements Context
      */
     public function iShouldBeNotifiedThatCodeLengthIsRequired(): void
     {
-        Assert::same($this->generateFormElement->getValidationMessage('code_length'), 'Please enter coupon code length.');
+        Assert::same($this->generatePage->getValidationMessage('code_length'), 'Please enter coupon code length.');
     }
 
     /**
@@ -448,7 +446,7 @@ final class ManagingPromotionCouponsContext implements Context
      */
     public function iShouldBeNotifiedThatCodeLengthIsOutOfRange(): void
     {
-        Assert::same($this->generateFormElement->getValidationMessage('code_length'), 'Coupon code length must be between 1 and 40.');
+        Assert::same($this->generatePage->getValidationMessage('code_length'), 'Coupon code length must be between 1 and 40.');
     }
 
     /**
@@ -518,7 +516,7 @@ final class ManagingPromotionCouponsContext implements Context
     public function iShouldBeNotifiedThatGeneratingCouponsWithCodeLengthIsNotPossible(int $amount, int $codeLength): void
     {
         Assert::contains(
-            $this->generateFormElement->getFormValidationMessage(),
+            $this->generatePage->getFormValidationMessage(),
             sprintf('Invalid coupons code length or coupons amount. It is not possible to generate %d unique coupons with code length %d.', $amount, $codeLength)
         );
     }
