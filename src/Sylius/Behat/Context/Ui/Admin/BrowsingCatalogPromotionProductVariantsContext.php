@@ -31,6 +31,7 @@ final readonly class BrowsingCatalogPromotionProductVariantsContext implements C
 
     /**
      * @When I browse variants affected by catalog promotion :catalogPromotion
+     * @Given I am browsing variants affected by catalog promotion :catalogPromotion
      */
     public function iBrowseVariantsAffectedByCatalogPromotion(CatalogPromotionInterface $catalogPromotion): void
     {
@@ -43,6 +44,24 @@ final readonly class BrowsingCatalogPromotionProductVariantsContext implements C
     public function iWantToViewTheProductOfVariant(ProductVariantInterface $variant): void
     {
         $this->catalogPromotionProductVariantIndexPage->showProductOf($variant->getId());
+    }
+
+    /**
+     * @When I filter by code containing :phrase
+     */
+    public function iFilterByCodeContaining(string $phrase): void
+    {
+        $this->catalogPromotionProductVariantIndexPage->filterByCode($phrase);
+        $this->catalogPromotionProductVariantIndexPage->filter();
+    }
+
+    /**
+     * @When I filter by name containing :phrase
+     */
+    public function iFilterByNameContaining(string $phrase): void
+    {
+        $this->catalogPromotionProductVariantIndexPage->filterByName($phrase);
+        $this->catalogPromotionProductVariantIndexPage->filter();
     }
 
     /**

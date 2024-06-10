@@ -22,9 +22,21 @@ class IndexPage extends BaseIndexPage implements IndexPageInterface
         $this->getElement('show_product_button', ['%variant_id%' => $variantId])->click();
     }
 
+    public function filterByCode(string $code): void
+    {
+        $this->getElement('code_filter')->setValue($code);
+    }
+
+    public function filterByName(string $name): void
+    {
+        $this->getElement('name_filter')->setValue($name);
+    }
+
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
+            'code_filter' => '#criteria_code_value',
+            'name_filter' => '#criteria_name_value',
             'show_product_button' => '[data-test-resource-id="%variant_id%"] [data-test-show-action="Show product"]',
         ]);
     }
