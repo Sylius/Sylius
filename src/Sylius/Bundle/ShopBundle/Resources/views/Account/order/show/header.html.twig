@@ -1,0 +1,19 @@
+{% import '@SyliusShop/Shared/buttons.html.twig' as buttons %}
+
+<div class="d-flex gap-3 mb-4">
+    <div>
+        {% include [('@SyliusShop/Account/Order/Label/State' ~ '/' ~ order.state ~ '.html.twig'), '@SyliusUi/Label/_default.html.twig'] with {'value': ('sylius.ui.' ~ order.state)|trans} %}
+    </div>
+    <div>
+        {{ order.checkoutCompletedAt|format_date }}
+    </div>
+    <div>
+        {{ order.currencyCode }}
+    </div>
+</div>
+
+<div>
+    {% if order.paymentState in ['awaiting_payment'] %}
+        {{ buttons.default(path('sylius_shop_order_show', {'tokenValue': order.tokenValue}), 'sylius.ui.pay', null, 'credit card alternative', 'green') }}
+    {% endif %}
+</div>
