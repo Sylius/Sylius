@@ -15,7 +15,7 @@
     <parameters>
         <parameter key="sylius.behat.page.admin.promotion_coupon.create.class">%sylius.behat.page.admin.crud.create.class%</parameter>
         <parameter key="sylius.behat.page.admin.promotion_coupon.generate.class">Sylius\Behat\Page\Admin\PromotionCoupon\GeneratePage</parameter>
-        <parameter key="sylius.behat.page.admin.promotion_coupon.index.class">%sylius.behat.page.admin.crud.index.class%</parameter>
+        <parameter key="sylius.behat.page.admin.promotion_coupon.index.class">Sylius\Behat\Page\Admin\PromotionCoupon\IndexPage</parameter>
         <parameter key="sylius.behat.page.admin.promotion_coupon.update.class">%sylius.behat.page.admin.crud.update.class%</parameter>
     </parameters>
 
