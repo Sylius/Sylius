@@ -1,0 +1,11 @@
+twig_hooks:
+    hooks:
+        'sylius_admin.catalog_promotion.product_variant.index.content.header':
+            breadcrumbs:
+                template: '@SyliusAdmin/catalog_promotion/product_variant/index/content/header/breadcrumbs.html.twig'
+                configuration:
+                    title: 'sylius.ui.inventory'
+
+        'sylius_admin.catalog_promotion.product_variant.index.content.header.title_block':
+            title:
+                template: '@SyliusAdmin/catalog_promotion/product_variant/index/content/header/title_block/title.html.twig'

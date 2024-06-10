@@ -21,7 +21,7 @@ use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Webmozart\Assert\Assert;
 
-final class BrowsingCatalogPromotionProductVariantsContext implements Context
+final readonly class BrowsingCatalogPromotionProductVariantsContext implements Context
 {
     public function __construct(
         private IndexPageInterface $catalogPromotionProductVariantIndexPage,
@@ -42,7 +42,7 @@ final class BrowsingCatalogPromotionProductVariantsContext implements Context
      */
     public function iWantToViewTheProductOfVariant(ProductVariantInterface $variant): void
     {
-        $this->catalogPromotionProductVariantIndexPage->showProductOf($variant->getCode());
+        $this->catalogPromotionProductVariantIndexPage->showProductOf($variant->getId());
     }
 
     /**

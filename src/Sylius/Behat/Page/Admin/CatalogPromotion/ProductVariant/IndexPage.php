@@ -17,15 +17,15 @@ use Sylius\Behat\Page\Admin\Crud\IndexPage as BaseIndexPage;
 
 class IndexPage extends BaseIndexPage implements IndexPageInterface
 {
-    public function showProductOf(string $variantCode): void
+    public function showProductOf(int $variantId): void
     {
-        $this->getElement('show_product_button')->click();
+        $this->getElement('show_product_button', ['%variant_id%' => $variantId])->click();
     }
 
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
-            'show_product_button' => 'a.ui.button:contains("Show product")',
+            'show_product_button' => '[data-test-resource-id="%variant_id%"] [data-test-show-action="Show product"]',
         ]);
     }
 }

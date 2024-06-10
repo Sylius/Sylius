@@ -1,0 +1,11 @@
+{% import '@SyliusAdmin/shared/helper/header.html.twig' as header %}
+
+{% set configuration = hookable_metadata.context.resources.requestConfiguration %}
+{% set catalog_promotion = configuration.vars.catalogPromotion %}
+
+
+<div class="col-12 col-md">
+    <div class="d-md-flex gap-2 align-items-center">
+        {{ header.h1(catalog_promotion.name) }}
+    </div>
+</div>
