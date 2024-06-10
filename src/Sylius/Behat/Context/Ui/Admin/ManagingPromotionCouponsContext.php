@@ -14,17 +14,14 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
-use FriendsOfBehat\PageObjectExtension\Page\SymfonyPageInterface;
-use Sylius\Behat\Context\Ui\Admin\Helper\ValidationTrait;
 use Sylius\Behat\Element\Admin\PromotionCoupon\FormElementInterface;
 use Sylius\Behat\Element\Admin\PromotionCoupon\GenerateFormElementInterface;
 use Sylius\Behat\NotificationType;
 use Sylius\Behat\Page\Admin\Crud\CreatePageInterface;
-use Sylius\Behat\Page\Admin\Crud\IndexPageInterface;
 use Sylius\Behat\Page\Admin\Crud\UpdatePageInterface;
 use Sylius\Behat\Page\Admin\PromotionCoupon\GeneratePageInterface;
+use Sylius\Behat\Page\Admin\PromotionCoupon\IndexPageInterface;
 use Sylius\Behat\Service\NotificationCheckerInterface;
-use Sylius\Behat\Service\Resolver\CurrentPageResolverInterface;
 use Sylius\Component\Core\Model\PromotionCouponInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
 use Webmozart\Assert\Assert;
@@ -38,7 +35,6 @@ final class ManagingPromotionCouponsContext implements Context
         private readonly UpdatePageInterface $updatePage,
         private readonly FormElementInterface $formElement,
         private readonly GenerateFormElementInterface $generateFormElement,
-        private readonly CurrentPageResolverInterface $currentPageResolver,
         private readonly NotificationCheckerInterface $notificationChecker,
     ) {
     }
@@ -307,6 +303,15 @@ final class ManagingPromotionCouponsContext implements Context
     }
 
     /**
+     * @When I filter by code containing :phrase
+     */
+    public function iFilterByCodeContaining(string $phrase): void
+    {
+        $this->indexPage->filterByCode($phrase);
+        $this->indexPage->filter();
+    }
+
+    /**
      * @Then all of the coupon codes should be prefixed with :prefix
      */
     public function allOfTheCouponCodesShouldBePrefixedWith(string $prefix): void
@@ -337,6 +342,7 @@ final class ManagingPromotionCouponsContext implements Context
     /**
      * @Then there should be a coupon with code :code
      * @Then there should be a :promotion promotion with a coupon code :code
+     * @Then I should see the promotion coupon :code in the list
      */
     public function thereShouldBeCouponWithCode(string $code): void
     {
@@ -539,6 +545,15 @@ final class ManagingPromotionCouponsContext implements Context
     public function theFirstCouponShouldHaveCode(string $code): void
     {
         Assert::same($this->indexPage->getColumnFields('code')[0], $code);
+    }
+
+    /**
+     * @Then I should see a single promotion coupon in the list
+     * @Then there should be :amount promotion coupons
+     */
+    public function thereShouldBePromotionCoupon(int $amount = 1): void
+    {
+        Assert::same($this->indexPage->countItems(), $amount);
     }
 
     private function sortBy(string $order, string $field): void
