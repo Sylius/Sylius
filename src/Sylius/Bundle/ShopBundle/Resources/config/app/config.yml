@@ -23,7 +23,7 @@ sylius_grid:
     templates:
         action:
             shop_show: "@SyliusShop/Grid/Action/show.html.twig"
-            shop_pay: "@SyliusShop/Account/Order/Grid/Action/pay.html.twig"
+            shop_pay: "@SyliusShop/Account/order/grid/action/pay.html.twig"
         filter:
             shop_string: "@SyliusShop/Grid/Filter/string.html.twig"
 
@@ -144,33 +144,12 @@ sylius_ui:
                     template: "@SyliusShop/Cart/summary/checkout.html.twig"
                     priority: 10
 
-        sylius.shop.account.change_password.form:
-            blocks:
-                legacy:
-                    template: "@SyliusUi/Block/_legacySonataEvent.html.twig"
-                    context:
-                        event: sylius.shop.account.change_password.form
-
         sylius.shop.account.profile.update.form:
             blocks:
                 legacy:
                     template: "@SyliusUi/Block/_legacySonataEvent.html.twig"
                     context:
                         event: sylius.shop.account.profile.update.form
-
-        sylius.shop.account.address_book.create.form:
-            blocks:
-                legacy:
-                    template: "@SyliusUi/Block/_legacySonataEvent.html.twig"
-                    context:
-                        event: sylius.shop.account.address_book.create.form
-
-        sylius.shop.account.address_book.update.form:
-            blocks:
-                legacy:
-                    template: "@SyliusUi/Block/_legacySonataEvent.html.twig"
-                    context:
-                        event: sylius.shop.account.address_book.update.form
 
         sylius.shop.contact.request.form:
             blocks:
@@ -182,7 +161,7 @@ sylius_ui:
         sylius.shop.account.layout.menu:
             blocks:
                 menu:
-                    template: "@SyliusShop/Account/Menu/_content.html.twig"
+                    template: "@SyliusShop/Account/menu/content.html.twig"
                     priority: 10
         
         sylius.shop.account.login:
@@ -214,48 +193,6 @@ sylius_ui:
                 submit:
                     template: "@SyliusShop/Account/register/submit.html.twig"
                     priority: 10
-
-        sylius.shop.account.change_password.after_content_header:
-            blocks:
-                legacy:
-                    template: "@SyliusUi/Block/_legacySonataEvent.html.twig"
-                    context:
-                        event: sylius.shop.account.change_password.after_content_header
-
-        sylius.shop.account.profile.update.after_content_header:
-            blocks:
-                legacy:
-                    template: "@SyliusUi/Block/_legacySonataEvent.html.twig"
-                    context:
-                        event: sylius.shop.account.profile.update.after_content_header
-
-        sylius.shop.account.dashboard.after_content_header:
-            blocks:
-                legacy:
-                    template: "@SyliusUi/Block/_legacySonataEvent.html.twig"
-                    context:
-                        event: sylius.shop.account.dashboard.after_content_header
-
-        sylius.shop.account.address_book.create.after_content_header:
-            blocks:
-                legacy:
-                    template: "@SyliusUi/Block/_legacySonataEvent.html.twig"
-                    context:
-                        event: sylius.shop.account.address_book.create.after_content_header
-
-        sylius.shop.account.address_book.update.after_content_header:
-            blocks:
-                legacy:
-                    template: "@SyliusUi/Block/_legacySonataEvent.html.twig"
-                    context:
-                        event: sylius.shop.account.address_book.create.after_content_header # Intentionally using "create" event for backwards compatibility
-
-        sylius.shop.account.address_book.index.after_content_header:
-            blocks:
-                legacy:
-                    template: "@SyliusUi/Block/_legacySonataEvent.html.twig"
-                    context:
-                        event: sylius.shop.account.address_book.index.after_content_header
 
         sylius.shop.account.order.show.after_content_header:
             blocks:
@@ -334,20 +271,6 @@ sylius_ui:
                 header:
                     template: "@SyliusShop/Checkout/shared/header.html.twig"
                     priority: 10
-
-        sylius.shop.account.order.index.header.content:
-            blocks:
-                legacy:
-                    template: "@SyliusUi/Block/_legacySonataEvent.html.twig"
-                    context:
-                        event: sylius.shop.account.order.index.header
-
-        sylius.shop.account.address_book.index.after_add_address_button:
-            blocks:
-                legacy:
-                    template: "@SyliusUi/Block/_legacySonataEvent.html.twig"
-                    context:
-                        event: sylius.shop.account.address_book.index.after_add_address_button
 
         sylius.shop.layout.footer:
             blocks:
@@ -447,50 +370,20 @@ sylius_ui:
                     context:
                         event: sylius.shop.layout.after_body
 
-        sylius.shop.account.dashboard.after_information:
-            blocks:
-                legacy:
-                    template: "@SyliusUi/Block/_legacySonataEvent.html.twig"
-                    context:
-                        event: sylius.shop.account.dashboard.after_information
-
-        sylius.shop.account.order.index.subcontent:
-            blocks:
-                header:
-                    template: "@SyliusShop/Account/Order/Index/_header.html.twig"
-                    priority: 20
-                after_content_header_legacy:
-                    template: "@SyliusUi/Block/_legacySonataEvent.html.twig"
-                    priority: 15
-                    context:
-                        event: sylius.shop.account.order.index.after_content_header
-                subcontent:
-                    template: "@SyliusShop/Account/Order/Index/_subcontent.html.twig"
+        sylius.shop.account.order.index.content:
+            blocks:            
+                content:
+                    template: "@SyliusShop/Account/order/index/content.html.twig"
                     priority: 10
-                after_grid_legacy:
-                    template: "@SyliusUi/Block/_legacySonataEvent.html.twig"
-                    priority: 5
-                    context:
-                        event: sylius.shop.account.order.index.after_grid
 
-        sylius.shop.account.order.show.subcontent:
+        sylius.shop.account.order.show.content:
             blocks:
                 header:
-                    template: "@SyliusShop/Account/Order/Show/_header.html.twig"
+                    template: "@SyliusShop/Account/order/show/header.html.twig"
                     priority: 20
-                after_content_header_legacy:
-                    template: "@SyliusUi/Block/_legacySonataEvent.html.twig"
-                    priority: 15
-                    context:
-                        event: sylius.shop.account.order.show.after_content_header
                 summary:
-                    template: "@SyliusShop/Shared/order/_summary.html.twig"
+                    template: "@SyliusShop/Shared/order/summary.html.twig"
                     priority: 10
-                after_summary_legacy:
-                    template: "@SyliusUi/Block/_legacySonataEvent.html.twig"
-                    priority: 5
-                    context:
-                        event: sylius.shop.account.order.show.after_summary
 
         sylius.shop.checkout.steps:
             blocks:

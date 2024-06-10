@@ -1,16 +1,27 @@
 {% extends '@SyliusShop/layout.html.twig' %}
 
 {% block content %}
-    {% block breadcrumb %}
-    {% endblock %}
+    <div class="container">
+        {% block breadcrumb %}
+        {% endblock %}
 
-    <div>
-        <div>
-            {{ sylius_template_event('sylius.shop.account.layout.menu') }}
-        </div>
-        <div>
-            {% block subcontent %}
-            {% endblock %}
+        <div class="row">
+            <div class="col-12 col-md-3">
+                {{ sylius_template_event('sylius.shop.account.layout.menu') }}
+            </div>
+            <div class="col-12 col-md-9">
+                {% block account_header %}
+                    <div class="mb-4">
+                        <h1>{{ title|default('sylius.ui.my_account'|trans) }}</h1>
+                        {% if description is defined %}
+                            <div>{{ description }}</div>
+                        {% endif %}
+                    </div>
+                {% endblock %}
+
+                {% block account_content %}
+                {% endblock %}
+            </div>
         </div>
     </div>
 {% endblock %}

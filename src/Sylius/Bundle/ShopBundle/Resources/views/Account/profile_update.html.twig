@@ -1,0 +1,55 @@
+{% extends '@SyliusShop/Account/layout.html.twig' %}
+{% from '@SyliusShop/Shared/breadcrumbs.html.twig' import breadcrumbs as breadcrumbs %}
+
+{% form_theme form '@SyliusShop/Form/theme.html.twig' %}
+
+{% block title %}{{ 'sylius.ui.your_profile'|trans }} | {{ parent() }}{% endblock %}
+
+{% block breadcrumb %}
+    {{ breadcrumbs([
+        { label: 'sylius.ui.home'|trans, path: path('sylius_shop_homepage')},
+        { label: 'sylius.ui.my_account'|trans, path: path('sylius_shop_account_dashboard')},
+        { label: 'sylius.ui.personal_information'|trans, active: true }
+    ]) }}
+{% endblock %}
+
+{% block account_header %}
+    {% set title = 'sylius.ui.your_profile'|trans %}
+    {% set description = 'sylius.ui.edit_your_personal_information'|trans %}
+    {{ parent() }}
+{% endblock %}
+
+{% block account_content %}
+    <div>
+        {{ form_start(form, {'action': path('sylius_shop_account_profile_update'), 'attr': {'class': 'ui loadable form', 'novalidate': 'novalidate'}}) }}
+
+        <input type="hidden" name="_method" value="PUT" />
+
+        <div class="row">
+            <div class="col-12 col-md-6">{{ form_row(form.firstName, sylius_test_form_attribute('first-name')) }}</div>
+            <div class="col-12 col-md-6">{{ form_row(form.lastName, sylius_test_form_attribute('last-name')) }}</div>
+        </div>
+
+        <div>{{ form_row(form.email, sylius_test_form_attribute('email')) }}</div>
+
+        <div class="row">
+            <div class="col-12 col-md-6">{{ form_row(form.birthday) }}</div>
+            <div class="col-12 col-md-6">{{ form_row(form.gender) }}</div>
+        </div>
+
+        <div>{{ form_row(form.phoneNumber) }}</div>
+
+        <div class="mb-4">
+            {{ form_row(form.subscribedToNewsletter, sylius_test_form_attribute('subscribe-newsletter')) }}
+        </div>
+
+        {{ sylius_template_event('sylius.shop.account.profile.update.form', {'customer': customer, 'form': form}) }}
+
+        <button class="btn btn-primary" type="submit" {{ sylius_test_html_attribute('save-changes') }}>
+            {{ 'sylius.ui.save_changes'|trans }}
+        </button>
+
+        {{ form_row(form._token) }}
+        {{ form_end(form, {'render_rest': false}) }}
+    </div>
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends '@SyliusShop/Account/layout.html.twig' %}
+{% from '@SyliusShop/Shared/breadcrumbs.html.twig' import breadcrumbs as breadcrumbs %}
+
+{% block title %}{{ 'sylius.ui.order_history'|trans }} | {{ parent() }}{% endblock %}
+
+{% block breadcrumb %}
+    {{ breadcrumbs([
+        { label: 'sylius.ui.home'|trans, path: path('sylius_shop_homepage')},
+        { label: 'sylius.ui.my_account'|trans, path: path('sylius_shop_account_dashboard')},
+        { label: 'sylius.ui.order_history'|trans, active: true }
+    ]) }}
+{% endblock %}
+
+{% block account_header %}
+    {% set title = 'sylius.ui.order_history'|trans %}
+    {% set description = 'sylius.ui.browse_your_orders_from_the_past'|trans %}
+    {{ parent() }}
+{% endblock %}
+
+{% block account_content %}
+    {{ sylius_template_event('sylius.shop.account.order.index.content', _context) }}
+{% endblock %}
