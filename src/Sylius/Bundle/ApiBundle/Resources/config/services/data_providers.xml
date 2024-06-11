@@ -48,14 +48,14 @@
             <tag name="api_platform.item_data_provider" priority="10" />
         </service>
 
-        <service id="Sylius\Bundle\ApiBundle\DataProvider\ProductAttributesSubresourceDataProvider">
-            <argument type="tagged_iterator" tag="api_platform.doctrine.orm.query_extension.collection" />
-            <argument type="service" id="sylius.repository.product_attribute_value" />
-            <argument type="service" id="sylius.context.locale" />
-            <argument type="service" id="sylius.locale_provider.channel_based" />
-            <argument>%locale%</argument>
-            <tag name="api_platform.subresource_data_provider" priority="10" />
-        </service>
+<!--        <service id="Sylius\Bundle\ApiBundle\DataProvider\ProductAttributesSubresourceDataProvider">-->
+<!--            <argument type="tagged_iterator" tag="api_platform.doctrine.orm.query_extension.collection" />-->
+<!--            <argument type="service" id="sylius.repository.product_attribute_value" />-->
+<!--            <argument type="service" id="sylius.context.locale" />-->
+<!--            <argument type="service" id="sylius.locale_provider.channel_based" />-->
+<!--            <argument>%locale%</argument>-->
+<!--            <tag name="api_platform.subresource_data_provider" priority="10" />-->
+<!--        </service>-->
 
         <service id="Sylius\Bundle\ApiBundle\DataProvider\CustomerItemDataProvider">
             <argument type="service" id="Sylius\Bundle\ApiBundle\Context\UserContextInterface" />

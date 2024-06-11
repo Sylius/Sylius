@@ -306,17 +306,17 @@
         </operations>
     </resource>
 
-    <resource class="Sylius\Component\Core\Model\Product" uriTemplate="/shop/products/{code}/attributes">
+    <resource class="Sylius\Component\Product\Model\ProductAttributeValue" uriTemplate="/shop/products/{code}/attributes">
         <uriVariables>
             <uriVariable parameterName="code" fromClass="Sylius\Component\Core\Model\Product" fromProperty="attributes"/>
         </uriVariables>
         <operations>
-            <operation class="ApiPlatform\Metadata\GetCollection">
+            <operation class="ApiPlatform\Metadata\GetCollection" provider="Sylius\Bundle\ApiBundle\StateProvider\ProductAttributesProvider">
                 <normalizationContext>
                     <values>
                         <value name="groups">
                             <values>
-                                <value>sylius:shop:product:show</value>
+                                <value>sylius:shop:product_attribute_value:show</value>
                             </values>
                         </value>
                     </values>
