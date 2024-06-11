@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\ProductBundle\Doctrine\ORM\Query\AST\Function;
+// namespace Sylius\Bundle\ProductBundle\Doctrine\ORM\Query\AST\Function;
 
 use Doctrine\DBAL\Exception;
 use Doctrine\DBAL\Platforms\PostgreSQLPlatform;
