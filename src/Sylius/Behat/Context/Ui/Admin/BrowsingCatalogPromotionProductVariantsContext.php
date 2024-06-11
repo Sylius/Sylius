@@ -21,7 +21,7 @@ use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Webmozart\Assert\Assert;
 
-final class BrowsingCatalogPromotionProductVariantsContext implements Context
+final readonly class BrowsingCatalogPromotionProductVariantsContext implements Context
 {
     public function __construct(
         private IndexPageInterface $catalogPromotionProductVariantIndexPage,
@@ -31,6 +31,7 @@ final class BrowsingCatalogPromotionProductVariantsContext implements Context
 
     /**
      * @When I browse variants affected by catalog promotion :catalogPromotion
+     * @Given I am browsing variants affected by catalog promotion :catalogPromotion
      */
     public function iBrowseVariantsAffectedByCatalogPromotion(CatalogPromotionInterface $catalogPromotion): void
     {
@@ -42,7 +43,25 @@ final class BrowsingCatalogPromotionProductVariantsContext implements Context
      */
     public function iWantToViewTheProductOfVariant(ProductVariantInterface $variant): void
     {
-        $this->catalogPromotionProductVariantIndexPage->showProductOf($variant->getCode());
+        $this->catalogPromotionProductVariantIndexPage->showProductOf($variant->getId());
+    }
+
+    /**
+     * @When I filter by code containing :phrase
+     */
+    public function iFilterByCodeContaining(string $phrase): void
+    {
+        $this->catalogPromotionProductVariantIndexPage->filterByCode($phrase);
+        $this->catalogPromotionProductVariantIndexPage->filter();
+    }
+
+    /**
+     * @When I filter by name containing :phrase
+     */
+    public function iFilterByNameContaining(string $phrase): void
+    {
+        $this->catalogPromotionProductVariantIndexPage->filterByName($phrase);
+        $this->catalogPromotionProductVariantIndexPage->filter();
     }
 
     /**
