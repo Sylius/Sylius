@@ -1,0 +1,16 @@
+{% from '@SyliusAdmin/shared/helper/product_image.html.twig' import image %}
+
+{% set product = hookable_metadata.context.item.variant.product %}
+
+<td>
+    <div class="d-flex gap-3 align-items-center">
+        <div>{{ image(product) }}</div>
+        <div>
+            <div>
+                <a href="{{ path('sylius_admin_product_show', { id: product.id }) }}">
+                    <strong>{{ product.name }}</strong>
+                </a>
+            </div>
+        </div>
+    </div>
+</td>
