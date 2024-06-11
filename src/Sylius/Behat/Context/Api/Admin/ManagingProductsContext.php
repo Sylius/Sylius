@@ -713,8 +713,8 @@ final readonly class ManagingProductsContext implements Context
 
         Assert::false(
             $this->responseChecker->hasItemWithValues($this->client->getLastResponse(), [
-                'product' => $this->sectionAwareIriConverter->getIriFromResourceInSection($product, 'admin'),
-                'taxon' => $this->sectionAwareIriConverter->getIriFromResourceInSection($taxon, 'admin'),
+                'product' => $this->iriConverter->getIriFromResourceInSection($product, 'admin'),
+                'taxon' => $this->iriConverter->getIriFromResourceInSection($taxon, 'admin'),
             ]),
         );
     }
