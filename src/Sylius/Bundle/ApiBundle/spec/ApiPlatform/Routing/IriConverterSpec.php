@@ -21,6 +21,7 @@ use Sylius\Bundle\ApiBundle\Provider\PathPrefixProviderInterface;
 use Sylius\Bundle\ApiBundle\Resolver\OperationResolverInterface;
 use Sylius\Component\Addressing\Model\Country;
 use Sylius\Component\Addressing\Model\CountryInterface;
+use Symfony\Component\Routing\RouterInterface;
 
 final class IriConverterSpec extends ObjectBehavior
 {
@@ -28,8 +29,9 @@ final class IriConverterSpec extends ObjectBehavior
         IriConverterInterface $decoratedIriConverter,
         PathPrefixProviderInterface $pathPrefixProvider,
         OperationResolverInterface $operationResolver,
+        RouterInterface $router,
     ): void {
-        $this->beConstructedWith($decoratedIriConverter, $pathPrefixProvider, $operationResolver);
+        $this->beConstructedWith($decoratedIriConverter, $pathPrefixProvider, $operationResolver, $router);
     }
 
     function it_implements_the_iri_converter_interface(): void
