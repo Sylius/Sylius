@@ -33,8 +33,8 @@
         "sylius/money-bundle": "^2.0",
         "sylius/resource-bundle": "^1.10",
         "sylius/shipping": "^2.0",
-        "symfony/clock": "^6.4.0",
-        "symfony/framework-bundle": "^6.4.1"
+        "symfony/clock": "^6.4.0 || ^7.0",
+        "symfony/framework-bundle": "^6.4.1 || ^7.0"
     },
     "conflict": {
         "doctrine/orm": "2.15.2",
@@ -46,10 +46,10 @@
         "phpspec/phpspec": "^7.2",
         "phpunit/phpunit": "^9.5",
         "polishsymfonycommunity/symfony-mocker-container": "^1.0",
-        "symfony/browser-kit": "^6.4.0",
-        "symfony/dependency-injection": "^6.4.1",
-        "symfony/form": "^6.4.1",
-        "symfony/validator": "^6.4.0"
+        "symfony/browser-kit": "^6.4.0 || ^7.0",
+        "symfony/dependency-injection": "^6.4.1 || ^7.0",
+        "symfony/form": "^6.4.1 || ^7.0",
+        "symfony/validator": "^6.4.0 || ^7.0"
     },
     "config": {
         "allow-plugins": {

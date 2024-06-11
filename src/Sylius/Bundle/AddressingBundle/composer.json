@@ -30,8 +30,8 @@
         "stof/doctrine-extensions-bundle": "^1.4",
         "sylius/addressing": "^2.0",
         "sylius/resource-bundle": "^1.10",
-        "symfony/framework-bundle": "^6.4.1",
-        "symfony/intl": "^6.4.0"
+        "symfony/framework-bundle": "^6.4.1 || ^7.0",
+        "symfony/intl": "^6.4.0 || ^7.0"
     },
     "conflict": {
         "doctrine/orm": ">= 2.16.0",
@@ -44,10 +44,10 @@
         "phpspec/prophecy-phpunit": "^2.0",
         "phpunit/phpunit": "^9.5",
         "polishsymfonycommunity/symfony-mocker-container": "^1.0",
-        "symfony/browser-kit": "^6.4.0",
-        "symfony/dependency-injection": "^6.4.1",
-        "symfony/form": "^6.4.1",
-        "symfony/validator": "^6.4.0",
+        "symfony/browser-kit": "^6.4.0 || ^7.0",
+        "symfony/dependency-injection": "^6.4.1 || ^7.0",
+        "symfony/form": "^6.4.1 || ^7.0",
+        "symfony/validator": "^6.4.0 || ^7.0",
         "theofidry/alice-data-fixtures": "^1.4"
     },
     "config": {
@@ -60,7 +60,7 @@
             "dev-main": "2.0-dev"
         },
         "symfony": {
-            "require": "6.3.*"
+            "require": "7.0.*"
         }
     },
     "autoload": {
