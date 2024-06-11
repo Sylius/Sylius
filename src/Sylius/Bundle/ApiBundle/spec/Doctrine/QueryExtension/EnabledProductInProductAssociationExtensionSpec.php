@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 
-namespace spec\Sylius\Bundle\ApiBundle\Doctrine\QueryCollectionExtension;
+namespace spec\Sylius\Bundle\ApiBundle\Doctrine\QueryExtension;
 
 use ApiPlatform\Doctrine\Orm\Extension\QueryCollectionExtensionInterface;
 use ApiPlatform\Doctrine\Orm\Util\QueryNameGeneratorInterface;
@@ -28,7 +28,7 @@ use Sylius\Component\Core\Model\TaxonInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\User\UserInterface;
 
-final class AvailableProductAssociationsInProductCollectionExtensionSpec extends ObjectBehavior
+final class EnabledProductInProductAssociationExtensionSpec extends ObjectBehavior
 {
     function let(UserContextInterface $userContext): void
     {
