@@ -14,8 +14,8 @@ declare(strict_types=1);
 namespace Sylius\Bundle\ApiBundle\Resolver;
 
 use ApiPlatform\Metadata\CollectionOperationInterface;
+use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\Operation;
-use ApiPlatform\Metadata\Post;
 use ApiPlatform\Metadata\Resource\Factory\ResourceMetadataCollectionFactoryInterface;
 
 /** @experimental */
@@ -38,7 +38,7 @@ final readonly class PathPrefixBasedOperationResolver implements OperationResolv
                     continue;
                 }
 
-                if ($resourceOperation instanceof Post) {
+                if (!$resourceOperation instanceof Get) {
                     continue;
                 }
 
