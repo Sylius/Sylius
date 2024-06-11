@@ -133,10 +133,12 @@ final class TaxonSpec extends ObjectBehavior
     {
         $rootTaxon = new Taxon();
         $rootTaxon->setCurrentLocale('en_US');
+        $rootTaxon->setFallbackLocale('en_US');
         $rootTaxon->setName('Category');
 
         $clothesTaxon = new Taxon();
         $clothesTaxon->setCurrentLocale('en_US');
+        $clothesTaxon->setFallbackLocale('en_US');
         $clothesTaxon->setName('Clothes');
         $clothesTaxon->setParent($rootTaxon);
 

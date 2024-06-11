@@ -29,8 +29,8 @@
         "php": "^8.2",
         "sylius/core-bundle": "^2.0",
         "sylius/ui-bundle": "^2.0",
-        "symfony/framework-bundle": "^6.4.1",
-        "symfony/security-bundle": "^6.4.0",
+        "symfony/framework-bundle": "^6.4.1 || ^7.0",
+        "symfony/security-bundle": "^6.4.0 || ^7.0",
         "symfony/webpack-encore-bundle": "^1.17.1",
         "twig/intl-extra": "~3.8.0",
         "twig/twig": "~3.8.0"
@@ -41,7 +41,7 @@
         "mockery/mockery": "^1.4",
         "phpspec/phpspec": "^7.2",
         "phpunit/phpunit": "^9.5",
-        "symfony/dependency-injection": "^6.4.1"
+        "symfony/dependency-injection": "^6.4.1 || ^7.0"
     },
     "config": {
         "allow-plugins": {

@@ -29,9 +29,9 @@
         "php": "^8.2",
         "sylius/inventory": "^2.0",
         "sylius/resource-bundle": "^1.10",
-        "symfony/framework-bundle": "^6.4.1",
-        "symfony/templating": "^6.4.0",
-        "symfony/validator": "^6.4.0"
+        "symfony/framework-bundle": "^6.4.1 || ^7.0",
+        "symfony/templating": "^6.4.0 || ^7.0",
+        "symfony/validator": "^6.4.0 || ^7.0"
     },
     "conflict": {
         "doctrine/orm": ">= 2.16.0",
@@ -42,8 +42,8 @@
         "phpspec/phpspec": "^7.2",
         "phpunit/phpunit": "^9.5",
         "polishsymfonycommunity/symfony-mocker-container": "^1.0",
-        "symfony/browser-kit": "^6.4.0",
-        "symfony/dependency-injection": "^6.4.1",
+        "symfony/browser-kit": "^6.4.0 || ^7.0",
+        "symfony/dependency-injection": "^6.4.1 || ^7.0",
         "twig/twig": "~3.8.0"
     },
     "config": {
@@ -54,6 +54,9 @@
     "extra": {
         "branch-alias": {
             "dev-main": "2.0-dev"
+        },
+        "symfony": {
+            "require": "7.0.*"
         }
     },
     "autoload": {

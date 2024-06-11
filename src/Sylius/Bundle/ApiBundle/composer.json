@@ -29,7 +29,7 @@
         "enshrined/svg-sanitize": "^0.16",
         "lexik/jwt-authentication-bundle": "^2.11",
         "sylius/core-bundle": "^2.0",
-        "symfony/messenger": "^6.4.0"
+        "symfony/messenger": "^6.4.0 || ^7.0"
     },
     "require-dev": {
         "ext-sqlite3": "*",
@@ -40,9 +40,9 @@
         "phpspec/phpspec": "^7.2",
         "phpspec/prophecy-phpunit": "^2.0",
         "phpunit/phpunit": "^9.5",
-        "symfony/browser-kit": "^6.4.0",
-        "symfony/debug-bundle": "^6.4.0",
-        "symfony/dotenv": "^6.4.0",
+        "symfony/browser-kit": "^6.4.0 || ^7.0",
+        "symfony/debug-bundle": "^6.4.0 || ^7.0",
+        "symfony/dotenv": "^6.4.0 || ^7.0",
         "symfony/webpack-encore-bundle": "^1.17.1",
         "theofidry/alice-data-fixtures": "^1.4"
     },

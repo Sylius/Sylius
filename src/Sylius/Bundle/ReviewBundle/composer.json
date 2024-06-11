@@ -44,7 +44,7 @@
         "sylius/resource-bundle": "^1.10",
         "sylius/review": "^2.0",
         "sylius/user-bundle": "^2.0",
-        "symfony/framework-bundle": "^6.4.1"
+        "symfony/framework-bundle": "^6.4.1 || ^7.0"
     },
     "conflict": {
         "stof/doctrine-extensions-bundle": "1.8.0"
@@ -54,11 +54,11 @@
         "phpspec/prophecy-phpunit": "^2.0",
         "phpunit/phpunit": "^9.5",
         "polishsymfonycommunity/symfony-mocker-container": "^1.0",
-        "symfony/browser-kit": "^6.4.0",
-        "symfony/dependency-injection": "^6.4.1",
-        "symfony/form": "^6.4.1",
-        "symfony/security-bundle": "^6.4.0",
-        "symfony/validator": "^6.4.0"
+        "symfony/browser-kit": "^6.4.0 || ^7.0",
+        "symfony/dependency-injection": "^6.4.1 || ^7.0",
+        "symfony/form": "^6.4.1 || ^7.0",
+        "symfony/security-bundle": "^6.4.0 || ^7.0",
+        "symfony/validator": "^6.4.0 || ^7.0"
     },
     "config": {
         "allow-plugins": {
