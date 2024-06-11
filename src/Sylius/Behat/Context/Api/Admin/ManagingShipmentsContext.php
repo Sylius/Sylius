@@ -321,6 +321,21 @@ final class ManagingShipmentsContext implements Context
         );
     }
 
+    /**
+     * @Then I should see the shipment state as :shipmentState
+     */
+    public function iShouldSeeTheShipmentStateAs(string $shipmentState): void
+    {
+        Assert::true(
+            $this->responseChecker->hasValue(
+                $this->client->getLastResponse(),
+                'state',
+                StringInflector::nameToLowercaseCode($shipmentState),
+            ),
+            sprintf('Shipment state is not %s', $shipmentState),
+        );
+    }
+
     private function isShipmentForOrder(OrderInterface $order): bool
     {
         return $this->responseChecker->hasItemWithValue(

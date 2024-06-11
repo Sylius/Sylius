@@ -202,4 +202,12 @@ final class ManagingShipmentsContext implements Context
     {
         Assert::same($this->indexPage->getShippedAtDate($orderNumber), $dateTime);
     }
+
+    /**
+     * @Then I should see the shipment state as :shipmentState
+     */
+    public function iShouldSeeTheShipmentStateAs(string $shipmentState): void
+    {
+        Assert::same($this->showPage->getState(), $shipmentState);
+    }
 }

@@ -16,8 +16,9 @@ Feature: Seeing basic information about shipment
         And the customer chose "UPS" shipping method with "Cash on Delivery" payment
         And I am logged in as an administrator
 
-    @todo @ui @api
+    @ui @api
     Scenario: Seeing basic information about shipment
         When I view the first shipment of the order "#00000001"
-        Then I should see 2 "Apple" units in the list
+        Then I should see the shipment state as "Ready"
+        And I should see 2 "Apple" units in the list
         And I should see 3 "Banana" units in the list
