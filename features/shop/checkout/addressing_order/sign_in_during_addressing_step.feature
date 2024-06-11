@@ -16,7 +16,7 @@ Feature: Sign in to the store during checkout
         When I specify the email as "francis@underwood.com"
         Then I should be able to log in
 
-    @ui @no-api @javascript
+    @ui @no-api @mink:chromedriver
     Scenario: Successful sign in
         Given I have product "PHP T-Shirt" in the cart
         And I am at the checkout addressing step

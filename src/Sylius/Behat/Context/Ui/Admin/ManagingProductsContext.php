@@ -42,6 +42,7 @@ use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
+use Sylius\Component\Locale\Model\LocaleInterface;
 use Sylius\Component\Product\Model\ProductAssociationTypeInterface;
 use Webmozart\Assert\Assert;
 
@@ -818,7 +819,7 @@ final readonly class ManagingProductsContext implements Context
      */
     public function iShouldSeeNonTranslatableAttributeWithValue(string $attribute, string $value): void
     {
-        Assert::true($this->attributesFormElement->hasNonTranslatableAttributeWithValue($attribute, $value));
+        Assert::same($this->attributesFormElement->getValueNonTranslatableAttribute($attribute), $value);
     }
 
     /**
@@ -1246,7 +1247,7 @@ final readonly class ManagingProductsContext implements Context
     public function iShouldBeNotifiedThatTheAttributeInShouldBeLongerThan(string $attribute, string $localeCode, int $number): void
     {
         Assert::same(
-            $this->resolveCurrentPage()->getAttributeValidationErrors($attribute, $localeCode),
+            $this->attributesFormElement->getAttributeValidationErrors($attribute, $localeCode),
             sprintf('This value is too short. It should have %s characters or more.', $number),
         );
     }
@@ -1427,6 +1428,14 @@ final readonly class ManagingProductsContext implements Context
             $showProductPageUrl,
             sprintf('/%s/products/%s', $localeCode, $productTranslation->getSlug()),
         );
+    }
+
+    /**
+     * @Then I should be notified that the :attributeName attribute value for :localeCode is required
+     */
+    public function iShouldBeNotifiedThatTheAttributeValueIsRequired(string $attributeName, string $localeCode): void
+    {
+        Assert::true($this->attributesFormElement->hasAttributeError($attributeName, $localeCode));
     }
 
     private function assertValidationMessage(string $element, string $message): void
