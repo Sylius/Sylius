@@ -13,11 +13,7 @@
                 {{ sylius_template_event('sylius.shop.product_review.create.sidebar', _context) }}
             </div>
             <div class="col-12 col-md-7 col-lg-8">
-                <div>
-                    {{ 'sylius.ui.write_your_own_review'|trans }}
-                    {{ 'sylius.ui.you_are_reviewing'|trans }}
-                    <strong>{{ product.name }}</strong>.
-                </div>
+                <h1>{{ 'sylius.ui.add_your_review'|trans }}</h1>
 
                 {{ sylius_template_event('sylius.shop.product_review.create.main', _context) }}
             </div>

@@ -1,0 +1,11 @@
+<div class="d-sm-flex gap-3">
+    <div class="flex-grow-1 mb-3">
+        <h1>{{ 'sylius.ui.reviews'|trans }}</h1>
+        <div>{{ product_reviews|length }} {{ 'sylius.ui.votes'|trans|lower }}</div>
+    </div>
+    <div class="mb-3">
+        <a class="btn btn-primary" href="{{ path('sylius_shop_product_review_create', {'slug': app.request.get('slug')}) }}">
+            {{ 'sylius.ui.add_your_review'|trans }}
+        </a>
+    </div>
+</div>
