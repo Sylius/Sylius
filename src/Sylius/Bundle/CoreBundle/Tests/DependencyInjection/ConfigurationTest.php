@@ -73,6 +73,42 @@ final class ConfigurationTest extends TestCase
     }
 
     /** @test */
+    public function it_has_a_set_default_order_token_length(): void
+    {
+        $this->assertProcessedConfigurationEquals(
+            [[]],
+            ['order_token_length' => 64],
+            'order_token_length',
+        );
+    }
+
+    /** @test */
+    public function it_allows_changing_the_order_token_length(): void
+    {
+        $this->assertProcessedConfigurationEquals(
+            [['order_token_length' => 128]],
+            ['order_token_length' => 128],
+            'order_token_length',
+        );
+    }
+
+    /** @test */
+    public function it_throws_exception_when_order_token_length_is_invalid(): void
+    {
+        $this->assertConfigurationIsInvalid([['order_token_length' => 'string']]);
+        $this->assertConfigurationIsInvalid(
+            [['order_token_length' => 0]],
+            '/Should be greater than or equal to 1$/',
+            true,
+        );
+        $this->assertConfigurationIsInvalid(
+            [['order_token_length' => 256]],
+            '/Should be less than or equal to 255$/',
+            true,
+        );
+    }
+
+    /** @test */
     public function it_throws_an_exception_if_value_other_then_integer_is_declared_as_batch_size(): void
     {
         $this->assertConfigurationIsInvalid([['catalog_promotions' => ['batch_size' => 'rep']]]);
