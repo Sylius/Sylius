@@ -74,7 +74,8 @@
                                         </div>
                                         <div class="flex-grow-1">
                                             <div class="d-flex justify-content-between align-items-center">
-                                                {{ form_label(product_attribute_value.value) }}
+                                                {% set required_class = not locale_code or locale_code == sylius_base_locale ? 'required' : '' %}
+                                                {{ form_label(product_attribute_value.value, null, {label_attr: {class: required_class}}) }}
                                                 {% if locale_code is not null %}
                                                     <button
                                                         class="btn btn-secondary btn-sm"
