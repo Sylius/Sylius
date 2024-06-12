@@ -17,6 +17,7 @@ use Behat\Behat\Context\Context;
 use FriendsOfBehat\PageObjectExtension\Page\UnexpectedPageException;
 use Sylius\Behat\Page\Admin\DashboardPageInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
+use Sylius\Component\Core\Model\ProductInterface;
 use Webmozart\Assert\Assert;
 
 final class DashboardContext implements Context
@@ -79,6 +80,14 @@ final class DashboardContext implements Context
     public function iChooseChannel(string $channelName): void
     {
         $this->dashboardPage->chooseChannel($channelName);
+    }
+
+    /**
+     * @When I search for product :product
+     */
+    public function iSearchForProduct(ProductInterface $product): void
+    {
+        $this->dashboardPage->searchForProduct($product);
     }
 
     /**

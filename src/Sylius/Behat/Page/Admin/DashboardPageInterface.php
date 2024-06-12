@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Behat\Page\Admin;
 
 use FriendsOfBehat\PageObjectExtension\Page\SymfonyPageInterface;
+use Sylius\Component\Core\Model\ProductInterface;
 
 interface DashboardPageInterface extends SymfonyPageInterface
 {
@@ -44,4 +45,6 @@ interface DashboardPageInterface extends SymfonyPageInterface
     public function choosePreviousPeriod(): void;
 
     public function chooseNextPeriod(): void;
+
+    public function searchForProduct(ProductInterface $productName): void;
 }
