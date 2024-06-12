@@ -14,7 +14,7 @@
         {
           "php": "8.2",
           "symfony": "^6.4",
-          "mariadb": "10.4.10",
+          "mariadb": "10.4.34",
           "dbal": "^3.0",
           "state_machine_adapter": "symfony_workflow"
         }
