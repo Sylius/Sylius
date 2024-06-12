@@ -19,16 +19,19 @@
     </parameters>
 
     <services>
-        <defaults public="true" />
-
-        <service id="sylius.behat.page.admin.country.index" class="%sylius.behat.page.admin.country.index.class%" parent="sylius.behat.page.admin.crud.index" public="false">
+        <service id="sylius.behat.page.admin.country.index" class="%sylius.behat.page.admin.country.index.class%" parent="sylius.behat.page.admin.crud.index">
             <argument type="string">sylius_admin_country_index</argument>
         </service>
-        <service id="sylius.behat.page.admin.country.create" class="%sylius.behat.page.admin.country.create.class%" parent="sylius.behat.page.admin.crud.create" public="false">
+        <service id="Sylius\Behat\Page\Admin\Country\IndexPageInterface" alias="sylius.behat.page.admin.country.index" />
+
+        <service id="sylius.behat.page.admin.country.create" class="%sylius.behat.page.admin.country.create.class%" parent="sylius.behat.page.admin.crud.create">
             <argument type="string">sylius_admin_country_create</argument>
         </service>
-        <service id="sylius.behat.page.admin.country.update" class="%sylius.behat.page.admin.country.update.class%" parent="sylius.behat.page.admin.crud.update" public="false">
+        <service id="Sylius\Behat\Page\Admin\Country\CreatePageInterface" alias="sylius.behat.page.admin.country.create" />
+
+        <service id="sylius.behat.page.admin.country.update" class="%sylius.behat.page.admin.country.update.class%" parent="sylius.behat.page.admin.crud.update">
             <argument type="string">sylius_admin_country_update</argument>
         </service>
+        <service id="Sylius\Behat\Page\Admin\Country\UpdatePageInterface" alias="sylius.behat.page.admin.country.update" />
     </services>
 </container>

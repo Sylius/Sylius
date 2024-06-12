@@ -23,20 +23,24 @@
     </parameters>
 
     <services>
-        <defaults public="true" />
 
-        <service id="sylius.behat.page" class="FriendsOfBehat\PageObjectExtension\Page\Page" abstract="true" public="false">
+        <service id="sylius.behat.page" class="FriendsOfBehat\PageObjectExtension\Page\Page" abstract="true">
             <argument type="service" id="behat.mink.default_session" />
             <argument type="service" id="behat.mink.parameters" />
         </service>
-        <service id="sylius.behat.symfony_page" class="FriendsOfBehat\PageObjectExtension\Page\SymfonyPage" parent="sylius.behat.page" abstract="true" public="false">
+        <service id="FriendsOfBehat\PageObjectExtension\Page\PageInterface" alias="sylius.behat.page" />
+
+        <service id="sylius.behat.symfony_page" class="FriendsOfBehat\PageObjectExtension\Page\SymfonyPage" parent="sylius.behat.page" abstract="true">
             <argument type="service" id="router" />
         </service>
+        <service id="FriendsOfBehat\PageObjectExtension\Page\SymfonyPageInterface" alias="sylius.behat.symfony_page" />
 
         <service id="sylius.behat.page.error" class="%sylius.behat.page.error.class%" parent="sylius.behat.page" public="false" />
+        <service id="Sylius\Behat\Page\ErrorPageInterface" alias="sylius.behat.page.error" />
 
-        <service id="sylius.behat.page.external.paypal_checkout_express" class="Sylius\Behat\Page\External\PaypalExpressCheckoutPage" parent="sylius.behat.page" public="false" >
+        <service id="sylius.behat.page.external.paypal_checkout_express" class="Sylius\Behat\Page\External\PaypalExpressCheckoutPage" parent="sylius.behat.page">
             <argument type="service" id="sylius.repository.payment_security_token" />
         </service>
+        <service id="Sylius\Behat\Page\External\PaypalExpressCheckoutPageInterface" alias="sylius.behat.page.external.paypal_checkout_express" />
     </services>
 </container>

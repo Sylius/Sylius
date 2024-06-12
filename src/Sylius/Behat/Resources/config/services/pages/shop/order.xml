@@ -18,9 +18,12 @@
     </parameters>
 
     <services>
-        <defaults public="true" />
+        <defaults />
 
-        <service id="sylius.behat.page.shop.order.thank_you" class="%sylius.behat.page.shop.order.thank_you.class%" parent="sylius.behat.symfony_page" public="false" />
-        <service id="sylius.behat.page.shop.order.show" class="%sylius.behat.page.shop.order.show.class%" parent="sylius.behat.symfony_page" public="false" />
+        <service id="sylius.behat.page.shop.order.thank_you" class="%sylius.behat.page.shop.order.thank_you.class%" parent="sylius.behat.symfony_page" />
+        <service id="Sylius\Behat\Page\Shop\Order\ThankYouPageInterface" alias="sylius.behat.page.shop.order.thank_you" />
+
+        <service id="sylius.behat.page.shop.order.show" class="%sylius.behat.page.shop.order.show.class%" parent="sylius.behat.symfony_page" />
+        <service id="Sylius\Behat\Page\Shop\Order\ShowPageInterface" alias="sylius.behat.page.shop.order.show" />
     </services>
 </container>
