@@ -2,6 +2,10 @@
     display: inline-block;
 }
 
+.sylius-rating.hoverless {
+    pointer-events: none;
+}
+
 .sylius-rating label {
     cursor: pointer;
 }

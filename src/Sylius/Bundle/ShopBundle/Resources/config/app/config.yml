@@ -1,6 +1,6 @@
 # This file is part of the Sylius package.
 # (c) Sylius Sp. z o.o.
-        
+
 imports:
     - { resource: "@SyliusUiBundle/Resources/config/app/config.yml" }
 
@@ -14,7 +14,7 @@ parameters:
 twig:
     paths:
         '%kernel.project_dir%/src/Sylius/Bundle/ShopBundle/Resources/private/': 'SyliusShopAssets'
-        
+
 webpack_encore:
     builds:
         shop: '%kernel.project_dir%/public/build/shop'
@@ -72,7 +72,7 @@ sylius_ui:
                 topbar:
                     template: "@SyliusShop/Layout/_topBar.html.twig"
                     priority: 10
-                    
+
         sylius.shop.layout.topbar.content:
             blocks:
                 before_switchers_legacy:
@@ -163,7 +163,7 @@ sylius_ui:
                 menu:
                     template: "@SyliusShop/Account/menu/content.html.twig"
                     priority: 10
-        
+
         sylius.shop.account.login:
             blocks:
                 header:
@@ -178,7 +178,7 @@ sylius_ui:
                 forgot_password:
                     template: "@SyliusShop/Account/login/forgot_password.html.twig"
                     priority: 10
-                    
+
         sylius.shop.account.register:
             blocks:
                 header:
@@ -216,18 +216,18 @@ sylius_ui:
 
         sylius.shop.product_review.index.main:
             blocks:
+                header:
+                    template: "@SyliusShop/ProductReview/list/header.html.twig"
+                    priority: 20
                 list:
                     template: "@SyliusShop/ProductReview/list.html.twig"
-                    priority: 20
-                actions:
-                    template: "@SyliusShop/ProductReview/actions.html.twig"
                     priority: 10
 
         sylius.shop.product_review.create.sidebar:
             blocks:
                 card:
                     template: "@SyliusShop/Product/card.html.twig"
-                    priority: 10         
+                    priority: 10
 
         sylius.shop.product_review.create.main:
             blocks:
@@ -240,13 +240,13 @@ sylius_ui:
                 breadcrumbs:
                     template: "@SyliusShop/Product/index/header/breadcrumbs.html.twig"
                     priority: 10
-                    
+
         sylius.shop.product.index.sidebar:
             blocks:
                 content:
                     template: "@SyliusShop/Product/index/sidebar/taxonomy.html.twig"
                     priority: 10
-                    
+
         sylius.shop.product.index.main:
             blocks:
                 header:
@@ -258,7 +258,7 @@ sylius_ui:
                 footer:
                     template: "@SyliusShop/Product/index/main/footer.html.twig"
                     priority: 10
-            
+
         sylius.shop.order.thank_you.after_message:
             blocks:
                 legacy:
@@ -294,7 +294,7 @@ sylius_ui:
                 cart:
                     template: "@SyliusShop/Layout/Header/_cart.html.twig"
                     priority: 10
-                        
+
         sylius.shop.logo:
             blocks:
                 logo:
@@ -349,7 +349,7 @@ sylius_ui:
                 header:
                     template: "@SyliusShop/Layout/_header.html.twig"
                     priority: 10
-                        
+
         sylius.shop.layout.navbar:
             blocks:
                 nav:
@@ -470,7 +470,7 @@ sylius_ui:
                 breadcrumb:
                     template: "@SyliusShop/Product/show/header/breadcrumbs.html.twig"
                     priority: 10
-                    
+
         sylius.shop.product.show.summary:
             blocks:
                 header:
@@ -497,7 +497,7 @@ sylius_ui:
                 tabs:
                     template: "@SyliusShop/Product/show/main/accordion.html.twig"
                     priority: 20
-                    
+
         sylius.shop.product.show.accordion:
             blocks:
                 details:
@@ -508,8 +508,8 @@ sylius_ui:
                     priority: 20
                 reviews:
                     template: "@SyliusShop/Product/show/accordion/reviews.html.twig"
-                    priority: 10                    
-                
+                    priority: 10
+
         sylius.shop.product.show.footer:
             blocks:
                 associations:

@@ -1,11 +1,19 @@
-<div {{ sylius_test_html_attribute('title', review.title) }}>
-    <div>
-        <div>{{ review.author.firstName }}</div>
-        <div>
-            <div><strong>{{ review.title }}</strong></div>
-            <div>{{ review.createdAt|format_date }}</div>
-            <div data-rating="{{ review.rating }}" data-max-rating="5" style="pointer-events: none;"></div>
+{% import '@SyliusShop/shared/macro/rating.html.twig' as rating %}
+
+<div class="border-bottom py-4">
+    <div class="d-sm-flex w-100 justify-content-between align-items-center mb-2">
+        <div class="h6 mb-1">{{ review.title }}</div>
+        <div class="mb-3">
+            {{ rating.show(review.rating) }}
         </div>
-        <div>{{ review.comment }}</div>
     </div>
+    <div class="mb-2">
+        {{ review.comment }}
+    </div>
+    <small>
+        {% if review.author.firstName is not null %}
+            {{ review.author.firstName }},
+        {% endif %}
+        {{ review.createdAt|format_date }}
+    </small>
 </div>

@@ -965,6 +965,7 @@ sylius:
         view_your_store: 'View your store'
         void: 'Void'
         volume_based_pricing: 'Volume based pricing'
+        votes: 'Votes'
         warning: 'Warning'
         weight: 'Weight'
         welcome: 'Welcome'
