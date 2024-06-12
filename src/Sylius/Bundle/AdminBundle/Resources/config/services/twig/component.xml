@@ -54,6 +54,20 @@
         </service>
 
         <service
+            id="sylius_admin.twig.component.product_option.form"
+            class="Sylius\Bundle\AdminBundle\Twig\Component\ProductOption\FormComponent"
+        >
+            <argument type="service" id="form.factory" />
+            <argument>Sylius\Bundle\AdminBundle\Form\Type\ProductOptionType</argument>
+
+            <tag
+                name="sylius.live_component"
+                key="sylius_admin:product_option:form"
+                template="@SyliusAdmin/product_option/form.html.twig"
+            />
+        </service>
+
+        <service
             id="sylius_admin.twig.component.customer.order_statistics"
             class="Sylius\Bundle\AdminBundle\Twig\Component\Customer\OrderStatisticsComponent"
         >
