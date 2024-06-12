@@ -1,12 +1,10 @@
-<form action="#" method="get" autocomplete="off" novalidate="">
-    <div class="input-icon">
-        <input type="text" placeholder="Search..." aria-label="Search in website" class="form-control      ">
-        <span class="input-icon-addon">
-            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                <path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0"></path>
-                <path d="M21 21l-6 -6"></path>
+<form action="{{ path('sylius_admin_product_index') }}" method="get">
+    <div class="input-group">
+        <input type="text" name="criteria[search][value]" placeholder="{{ 'sylius.ui.search_products'|trans }}..." class="form-control" {{ sylius_test_html_attribute('product-search') }}>
+        <button type="submit" class="btn" {{ sylius_test_html_attribute('search-button') }}>
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
             </svg>
-        </span>
+        </button>
     </div>
 </form>
