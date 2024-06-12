@@ -39,14 +39,16 @@
         "doctrine/orm": "^2.13",
         "egulias/email-validator": "^3.1",
         "sylius/customer": "^2.0",
-        "sylius/resource-bundle": "^1.10",
+        "sylius/resource-bundle": "^1.10 || dev-symfony-7",
         "symfony/framework-bundle": "^6.4.1 || ^7.0",
         "webmozart/assert": "^1.9"
     },
     "conflict": {
-        "doctrine/orm": ">= 2.16.0"
+        "doctrine/orm": ">= 3.0.0"
     },
     "require-dev": {
+        "friendsofsymfony/rest-bundle": "^3.0",
+        "jms/serializer-bundle": "^5.0",
         "phpspec/phpspec": "^7.2",
         "phpunit/phpunit": "^9.5",
         "polishsymfonycommunity/symfony-mocker-container": "^1.0",
