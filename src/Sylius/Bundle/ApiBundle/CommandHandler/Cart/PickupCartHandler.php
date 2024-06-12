@@ -37,6 +37,7 @@ final class PickupCartHandler implements MessageHandlerInterface
         private ObjectManager $orderManager,
         private RandomnessGeneratorInterface $generator,
         private CustomerRepositoryInterface $customerRepository,
+        private int $tokenLength = 10,
     ) {
     }
 
@@ -62,7 +63,7 @@ final class PickupCartHandler implements MessageHandlerInterface
         }
 
         if (null === $activeCart->getTokenValue()) {
-            $activeCart->setTokenValue($pickupCart->tokenValue ?? $this->generator->generateUriSafeString(10));
+            $activeCart->setTokenValue($pickupCart->tokenValue ?? $this->generateTokenValue());
             $this->orderManager->persist($activeCart);
         }
 
@@ -75,7 +76,7 @@ final class PickupCartHandler implements MessageHandlerInterface
             $channel,
             $customer,
             $this->getLocaleCode($pickupCart->getLocaleCode(), $channel),
-            $pickupCart->tokenValue ?? $this->generator->generateUriSafeString(10),
+            $pickupCart->tokenValue ?? $this->generateTokenValue(),
         );
 
         $this->orderManager->persist($cart);
@@ -111,5 +112,10 @@ final class PickupCartHandler implements MessageHandlerInterface
         }
 
         return $localeCode;
+    }
+
+    private function generateTokenValue(): string
+    {
+        return $this->generator->generateUriSafeString($this->tokenLength);
     }
 }

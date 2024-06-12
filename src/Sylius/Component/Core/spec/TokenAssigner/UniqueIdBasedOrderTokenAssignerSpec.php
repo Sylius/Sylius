@@ -21,9 +21,11 @@ use Sylius\Component\Resource\Generator\RandomnessGeneratorInterface;
 
 final class UniqueIdBasedOrderTokenAssignerSpec extends ObjectBehavior
 {
+    private const TOKEN_LENGTH = 32;
+
     public function let(RandomnessGeneratorInterface $generator)
     {
-        $this->beConstructedWith($generator);
+        $this->beConstructedWith($generator, self::TOKEN_LENGTH);
     }
 
     function it_is_an_order_token_assigner(): void
@@ -34,16 +36,19 @@ final class UniqueIdBasedOrderTokenAssignerSpec extends ObjectBehavior
     function it_assigns_a_token_value_for_order(RandomnessGeneratorInterface $generator, OrderInterface $order): void
     {
         $order->getTokenValue()->willReturn(null);
-        $generator->generateUriSafeString(10)->willReturn('yahboiiiii');
+        $generator->generateUriSafeString(self::TOKEN_LENGTH)->willReturn('yahboiiiii');
         $order->setTokenValue('yahboiiiii')->shouldBeCalled();
 
         $this->assignTokenValue($order);
         $this->assignTokenValueIfNotSet($order);
     }
 
-    function it_does_nothing_if_token_is_already_assigned(RandomnessGeneratorInterface $generator, OrderInterface $order)
-    {
+    function it_does_nothing_if_token_is_already_assigned(
+        RandomnessGeneratorInterface $generator,
+        OrderInterface $order
+    ): void {
         $order->getTokenValue()->willReturn('yahboiiiii');
+        $generator->generateUriSafeString(Argument::any())->shouldNotBeCalled();
         $order->setTokenValue(Argument::any())->shouldNotBeCalled();
 
         $this->assignTokenValueIfNotSet($order);
