@@ -18,7 +18,6 @@ use Sylius\Bundle\LocaleBundle\Templating\Helper\LocaleHelperInterface;
 use Sylius\Component\Locale\Context\LocaleContextInterface;
 use Sylius\Component\Locale\Context\LocaleNotFoundException;
 use Sylius\Component\Locale\Converter\LocaleConverterInterface;
-use Symfony\Component\Templating\Helper\Helper;
 
 final class LocaleHelperSpec extends ObjectBehavior
 {
@@ -27,11 +26,6 @@ final class LocaleHelperSpec extends ObjectBehavior
         LocaleContextInterface $localeContext,
     ): void {
         $this->beConstructedWith($localeConverter, $localeContext);
-    }
-
-    function it_is_a_helper(): void
-    {
-        $this->shouldHaveType(Helper::class);
     }
 
     function it_is_a_locale_helper(): void

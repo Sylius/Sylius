@@ -16,10 +16,11 @@ namespace Sylius\Bundle\LocaleBundle\Templating\Helper;
 use Sylius\Component\Locale\Context\LocaleContextInterface;
 use Sylius\Component\Locale\Context\LocaleNotFoundException;
 use Sylius\Component\Locale\Converter\LocaleConverterInterface;
-use Symfony\Component\Templating\Helper\Helper;
 
-final class LocaleHelper extends Helper implements LocaleHelperInterface
+final class LocaleHelper implements LocaleHelperInterface
 {
+    private string $charset = 'UTF-8';
+
     public function __construct(
         private readonly LocaleConverterInterface $localeConverter,
         private readonly LocaleContextInterface $localeContext,
@@ -38,6 +39,22 @@ final class LocaleHelper extends Helper implements LocaleHelperInterface
     public function getName(): string
     {
         return 'sylius_locale';
+    }
+
+    /**
+     * Sets the default charset.
+     */
+    public function setCharset(string $charset): void
+    {
+        $this->charset = $charset;
+    }
+
+    /**
+     * Gets the default charset.
+     */
+    public function getCharset(): string
+    {
+        return $this->charset;
     }
 
     private function getLocaleCode(?string $localeCode): ?string
