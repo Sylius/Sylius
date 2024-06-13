@@ -1491,11 +1491,6 @@ parameters:
 			path: src/Sylius/Bundle/ApiBundle/Doctrine/QueryCollectionExtension/HideArchivedShippingMethodExtension.php
 
 		-
-			message: "#^Method Sylius\\\\Bundle\\\\ApiBundle\\\\Doctrine\\\\QueryCollectionExtension\\\\LocaleCollectionExtension\\:\\:applyToCollection\\(\\) has parameter \\$context with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Sylius/Bundle/ApiBundle/Doctrine/QueryCollectionExtension/LocaleCollectionExtension.php
-
-		-
 			message: "#^Method Sylius\\\\Bundle\\\\ApiBundle\\\\Doctrine\\\\QueryCollectionExtension\\\\OrdersByChannelExtension\\:\\:applyToCollection\\(\\) has parameter \\$context with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Sylius/Bundle/ApiBundle/Doctrine/QueryCollectionExtension/OrdersByChannelExtension.php

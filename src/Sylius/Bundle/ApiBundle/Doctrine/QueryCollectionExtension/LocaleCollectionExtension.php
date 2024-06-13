@@ -17,21 +17,19 @@ use ApiPlatform\Doctrine\Orm\Extension\QueryCollectionExtensionInterface;
 use ApiPlatform\Doctrine\Orm\Util\QueryNameGeneratorInterface;
 use ApiPlatform\Metadata\Operation;
 use Doctrine\ORM\QueryBuilder;
-use Sylius\Bundle\ApiBundle\Context\UserContextInterface;
+use Sylius\Bundle\ApiBundle\SectionResolver\ShopApiSection;
 use Sylius\Bundle\ApiBundle\Serializer\ContextKeys;
-use Sylius\Component\Core\Model\AdminUserInterface;
+use Sylius\Bundle\CoreBundle\SectionResolver\SectionProviderInterface;
 use Sylius\Component\Locale\Model\LocaleInterface;
 use Webmozart\Assert\Assert;
 
 final readonly class LocaleCollectionExtension implements QueryCollectionExtensionInterface
 {
-    public function __construct(private UserContextInterface $userContext)
+    public function __construct(private SectionProviderInterface $sectionProvider)
     {
     }
 
-    /**
-     * @param array<array-key, mixed> $context
-     */
+    /** @param array<array-key, mixed> $context */
     public function applyToCollection(
         QueryBuilder $queryBuilder,
         QueryNameGeneratorInterface $queryNameGenerator,
@@ -43,18 +41,17 @@ final readonly class LocaleCollectionExtension implements QueryCollectionExtensi
             return;
         }
 
-        $user = $this->userContext->getUser();
-        if ($user instanceof AdminUserInterface && in_array('ROLE_API_ACCESS', $user->getRoles(), true)) {
+        if (!$this->sectionProvider->getSection() instanceof ShopApiSection) {
             return;
         }
 
         Assert::keyExists($context, ContextKeys::CHANNEL);
         $channel = $context[ContextKeys::CHANNEL];
 
-        $localesParameterName = $queryNameGenerator->generateParameterName('locales');
-
         if ($channel->getLocales()->count() > 0) {
+            $localesParameterName = $queryNameGenerator->generateParameterName('locales');
             $rootAlias = $queryBuilder->getRootAliases()[0];
+
             $queryBuilder
                 ->andWhere(sprintf('%s.id in (:%s)', $rootAlias, $localesParameterName))
                 ->setParameter($localesParameterName, $channel->getLocales())
