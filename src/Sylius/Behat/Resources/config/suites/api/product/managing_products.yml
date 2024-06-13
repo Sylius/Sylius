@@ -49,7 +49,7 @@ default:
                 - sylius.behat.context.api.admin.managing_products
                 - sylius.behat.context.api.admin.response
                 - sylius.behat.context.api.admin.save
-                - Sylius\Behat\Context\Api\Admin\ManagingProductTaxonsContext
+                - sylius.behat.context.api.admin.managing_product_taxons
                 - sylius.behat.context.api.admin.translation
 
             filters:
