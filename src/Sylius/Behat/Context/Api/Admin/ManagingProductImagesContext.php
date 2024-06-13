@@ -33,7 +33,7 @@ final readonly class ManagingProductImagesContext implements Context
         private ResponseCheckerInterface $responseChecker,
         private SharedStorageInterface $sharedStorage,
         private \ArrayAccess $minkParameters,
-        private IriConverterInterface $sectionAwareIriConverter,
+        private IriConverterInterface $iriConverter,
     ) {
     }
 
@@ -120,7 +120,7 @@ final readonly class ManagingProductImagesContext implements Context
         Assert::notFalse($productImage);
 
         $this->client->buildUpdateRequest(Resources::PRODUCT_IMAGES, (string) $productImage->getId());
-        $this->client->updateRequestData(['productVariants' => [$this->sectionAwareIriConverter->getIriFromResourceInSection($productVariant, 'admin')]]);
+        $this->client->updateRequestData(['productVariants' => [$this->iriConverter->getIriFromResourceInSection($productVariant, 'admin')]]);
         $this->client->update();
     }
 
@@ -153,7 +153,7 @@ final readonly class ManagingProductImagesContext implements Context
 
         Assert::notEmpty($images);
         Assert::inArray(
-            $this->sectionAwareIriConverter->getIriFromResourceInSection($productVariant, 'admin'),
+            $this->iriConverter->getIriFromResourceInSection($productVariant, 'admin'),
             $images[0]['productVariants'],
         );
     }
@@ -242,7 +242,7 @@ final readonly class ManagingProductImagesContext implements Context
         if (0 !== count($variants)) {
             $variantsIris = [];
             foreach ($variants as $variant) {
-                $variantsIris[] = $this->sectionAwareIriConverter->getIriFromResourceInSection($variant, 'admin');
+                $variantsIris[] = $this->iriConverter->getIriFromResourceInSection($variant, 'admin');
             }
             $builder->withParameter('productVariants', $variantsIris);
         }

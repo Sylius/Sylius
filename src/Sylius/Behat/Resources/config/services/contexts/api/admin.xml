@@ -62,7 +62,7 @@
             <argument type="service" id="behat.mink.parameters" />
         </service>
 
-        <service id="Sylius\Behat\Context\Api\Admin\ManagingProductTaxonsContext">
+        <service id="sylius.behat.context.api.admin.managing_product_taxons" class="Sylius\Behat\Context\Api\Admin\ManagingProductTaxonsContext">
             <argument type="service" id="sylius.behat.api_platform_client.admin" />
             <argument type="service" id="api_platform.iri_converter" />
             <argument type="service" id="Sylius\Behat\Client\ResponseCheckerInterface" />

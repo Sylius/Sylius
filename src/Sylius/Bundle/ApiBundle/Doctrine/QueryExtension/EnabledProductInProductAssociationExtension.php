@@ -18,12 +18,13 @@ use ApiPlatform\Doctrine\Orm\Extension\QueryItemExtensionInterface;
 use ApiPlatform\Doctrine\Orm\Util\QueryNameGeneratorInterface;
 use ApiPlatform\Metadata\Operation;
 use Doctrine\ORM\QueryBuilder;
-use Sylius\Bundle\ApiBundle\Context\UserContextInterface;
+use Sylius\Bundle\ApiBundle\SectionResolver\AdminApiSection;
+use Sylius\Bundle\CoreBundle\SectionResolver\SectionProviderInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 
 final readonly class EnabledProductInProductAssociationExtension implements QueryItemExtensionInterface, QueryCollectionExtensionInterface
 {
-    public function __construct(private UserContextInterface $userContext)
+    public function __construct(private SectionProviderInterface $sectionProvider)
     {
     }
 
@@ -57,8 +58,7 @@ final readonly class EnabledProductInProductAssociationExtension implements Quer
             return;
         }
 
-        $user = $this->userContext->getUser();
-        if ($user !== null && in_array('ROLE_API_ACCESS', $user->getRoles(), true)) {
+        if (!$this->sectionProvider->getSection() instanceof AdminApiSection) {
             return;
         }
 

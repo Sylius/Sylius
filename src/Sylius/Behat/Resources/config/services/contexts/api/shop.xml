@@ -190,7 +190,7 @@
 <!--            <argument type="service" id="sylius.behat.api_platform_client.shop" />-->
 <!--        </service>-->
 
-        <service id="Sylius\Behat\Context\Api\Shop\TaxonContext">
+        <service id="sylius.behat.context.api.shop.taxon" class="Sylius\Behat\Context\Api\Shop\TaxonContext">
             <argument type="service" id="sylius.behat.api_platform_client.shop" />
             <argument type="service" id="Sylius\Behat\Client\ResponseCheckerInterface" />
             <argument type="service" id="api_platform.iri_converter" />

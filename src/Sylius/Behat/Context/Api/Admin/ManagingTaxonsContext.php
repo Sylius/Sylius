@@ -32,7 +32,7 @@ final readonly class ManagingTaxonsContext implements Context
     public function __construct(
         private ApiClientInterface $client,
         private ResponseCheckerInterface $responseChecker,
-        private IriConverterInterface $sectionAwareIriConverter,
+        private IriConverterInterface $iriConverter,
         private SharedStorageInterface $sharedStorage,
     ) {
     }
@@ -125,7 +125,7 @@ final readonly class ManagingTaxonsContext implements Context
      */
     public function iSetItsParentTaxonTo(TaxonInterface $parentTaxon): void
     {
-        $this->client->addRequestData('parent', $this->sectionAwareIriConverter->getIriFromResourceInSection($parentTaxon, 'admin'));
+        $this->client->addRequestData('parent', $this->iriConverter->getIriFromResourceInSection($parentTaxon, 'admin'));
     }
 
     /**
@@ -256,7 +256,7 @@ final readonly class ManagingTaxonsContext implements Context
             $this->client->getLastResponse(),
             [
                 'code' => $taxon->getCode(),
-                'parent' => $this->sectionAwareIriConverter->getIriFromResourceInSection($parentTaxon, 'admin'),
+                'parent' => $this->iriConverter->getIriFromResourceInSection($parentTaxon, 'admin'),
             ],
         ));
     }
