@@ -15,7 +15,6 @@ namespace spec\Sylius\Bundle\ChannelBundle\Context\FakeChannel;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ChannelBundle\Context\FakeChannel\FakeChannelCodeProviderInterface;
-use Symfony\Component\HttpFoundation\ParameterBag;
 use Symfony\Component\HttpFoundation\Request;
 
 final class FakeChannelCodeProviderSpec extends ObjectBehavior
@@ -25,38 +24,27 @@ final class FakeChannelCodeProviderSpec extends ObjectBehavior
         $this->shouldImplement(FakeChannelCodeProviderInterface::class);
     }
 
-    function it_returns_fake_channel_code_from_query_string(Request $request, ParameterBag $queryBag): void
+    function it_returns_fake_channel_code_from_query_string(): void
     {
-        $queryBag->get('_channel_code')->willReturn('channel_code_form_get');
-        $request->query = $queryBag;
+        $request = new Request(query: ['_channel_code' => 'channel_code_form_get']);
 
         $this->getCode($request)->shouldReturn('channel_code_form_get');
     }
 
-    function it_returns_fake_channel_code_from_cookie_if_there_is_none_in_query_string(
-        Request $request,
-        ParameterBag $queryBag,
-        ParameterBag $cookiesBag,
-    ): void {
-        $queryBag->get('_channel_code')->willReturn(null);
-        $request->query = $queryBag;
-
-        $cookiesBag->get('_channel_code')->willReturn('channel_code_form_cookie');
-        $request->cookies = $cookiesBag;
+    function it_returns_fake_channel_code_from_cookie_if_there_is_none_in_query_string(): void {
+        $request = new Request(
+            query: ['_channel_code' => null],
+            cookies: ['_channel_code' => 'channel_code_form_cookie'],
+        );
 
         $this->getCode($request)->shouldReturn('channel_code_form_cookie');
     }
 
-    function it_returns_null_channel_code_if_no_fake_channel_code_was_found(
-        Request $request,
-        ParameterBag $queryBag,
-        ParameterBag $cookiesBag,
-    ): void {
-        $queryBag->get('_channel_code')->willReturn(null);
-        $request->query = $queryBag;
-
-        $cookiesBag->get('_channel_code')->willReturn(null);
-        $request->cookies = $cookiesBag;
+    function it_returns_null_channel_code_if_no_fake_channel_code_was_found(): void {
+        $request = new Request(
+            query: ['_channel_code' => null],
+            cookies: ['_channel_code' => null],
+        );
 
         $this->getCode($request)->shouldReturn(null);
     }
