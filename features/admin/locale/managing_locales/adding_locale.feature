@@ -7,7 +7,7 @@ Feature: Adding a new locale
     Background:
         Given I am logged in as an administrator
 
-    @todo @ui @api
+    @api @ui
     Scenario: Adding a new locale
         When I want to create a new locale
         And I choose Norwegian
