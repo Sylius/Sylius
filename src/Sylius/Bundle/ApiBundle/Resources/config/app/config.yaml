@@ -33,7 +33,7 @@ sylius_api:
         restricted_resources:
             '%sylius.model.product.class%':
                 operations:
-                    shop_get: ~
+                    _api_/shop/products_get_collection: ~
     order_states_to_filter_out:
         - !php/const Sylius\Component\Core\Model\OrderInterface::STATE_CART
 

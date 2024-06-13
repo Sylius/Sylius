@@ -101,7 +101,7 @@ final class ProductsTest extends JsonApiTestCase
         );
     }
 
-    /** @todo */
+    /** @test */
     public function it_returns_products_collection_with_only_available_associations(): void
     {
         $this->loadFixturesFromFile('product/products_with_associations.yaml');
