@@ -41,7 +41,7 @@ final class ProductsToProductAssociationsTransformer implements DataTransformerI
     ) {
     }
 
-    public function transform($value)
+    public function transform(mixed $value): mixed
     {
         $this->setProductAssociations($value);
 
@@ -61,7 +61,7 @@ final class ProductsToProductAssociationsTransformer implements DataTransformerI
         return $values;
     }
 
-    public function reverseTransform($value): ?Collection
+    public function reverseTransform(mixed $value): ?Collection
     {
         if (null === $value || '' === $value || !is_array($value)) {
             return null;
