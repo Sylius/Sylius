@@ -11,19 +11,21 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Behat\Page\Admin\ProductOption;
+namespace Sylius\Behat\Element\Admin\ProductOption;
 
-use Sylius\Behat\Page\Admin\Crud\UpdatePageInterface as BaseUpdatePageInterface;
+use Sylius\Behat\Element\Admin\Crud\FormElementInterface as BaseFormElementInterface;
 
-interface UpdatePageInterface extends BaseUpdatePageInterface
+interface FormElementInterface extends BaseFormElementInterface
 {
     public function isCodeDisabled(): bool;
 
-    public function nameItIn(string $name, string $languageCode): void;
+    public function nameItIn(string $name, string $localeCode): void;
 
     public function isThereOptionValue(string $optionValue): bool;
 
     public function addOptionValue(string $code, string $value): void;
 
     public function removeOptionValue(string $optionValue): void;
+
+    public function specifyCode(string $code): void;
 }
