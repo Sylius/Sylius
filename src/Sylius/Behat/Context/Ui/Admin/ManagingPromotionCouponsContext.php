@@ -517,7 +517,7 @@ final class ManagingPromotionCouponsContext implements Context
     {
         Assert::contains(
             $this->generatePage->getFormValidationMessage(),
-            sprintf('Invalid coupons code length or coupons amount. It is not possible to generate %d unique coupons with code length %d.', $amount, $codeLength)
+            sprintf('Invalid coupons code length or coupons amount. It is not possible to generate %d unique coupons with code length %d.', $amount, $codeLength),
         );
     }
 
