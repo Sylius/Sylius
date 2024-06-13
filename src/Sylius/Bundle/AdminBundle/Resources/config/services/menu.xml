@@ -28,12 +28,6 @@
             <tag name="knp_menu.menu_builder" method="createMenu" alias="sylius.admin.main" />
         </service>
 
-        <service id="sylius.admin.menu_builder.promotion.update" class="Sylius\Bundle\AdminBundle\Menu\PromotionUpdateMenuBuilder">
-            <argument type="service" id="knp_menu.factory" />
-            <argument type="service" id="event_dispatcher" />
-            <tag name="knp_menu.menu_builder" method="createMenu" alias="sylius.admin.promotion.update" />
-        </service>
-
         <service id="sylius.admin.menu_builder.order.show" class="Sylius\Bundle\AdminBundle\Menu\OrderShowMenuBuilder">
             <argument type="service" id="knp_menu.factory" />
             <argument type="service" id="event_dispatcher" />

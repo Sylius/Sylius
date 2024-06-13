@@ -11,21 +11,19 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Behat\Page\Admin\PromotionCoupon;
+namespace Sylius\Behat\Element\Admin\PromotionCoupon;
 
-use Sylius\Behat\Page\Admin\Crud\UpdatePageInterface as BaseUpdatePageInterface;
+use Sylius\Behat\Element\Admin\Crud\FormElementInterface as BaseFormElementInterface;
 
-interface UpdatePageInterface extends BaseUpdatePageInterface
+interface FormElementInterface extends BaseFormElementInterface
 {
-    public function isCodeDisabled(): bool;
+    public function setUsageLimit(int $limit): void;
 
     public function setCustomerUsageLimit(int $limit): void;
 
     public function setExpiresAt(\DateTimeInterface $date): void;
 
-    public function setUsageLimit(string $limit): void;
+    public function toggleReusableFromCancelledOrders(bool $reusable): void;
 
     public function isReusableFromCancelledOrders(): bool;
-
-    public function toggleReusableFromCancelledOrders(bool $reusable): void;
 }

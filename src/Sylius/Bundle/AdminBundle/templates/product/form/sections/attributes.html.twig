@@ -4,13 +4,13 @@
     <div class="card mb-3">
         <div class="card-header">
             <h2 id="product-attributes" class="card-title">
-                {{ 'sylius.ui.attributes'|trans }} <span class="badge">{{ 'sylius.ui.work_in_progress'|trans }}</span>
+                {{ 'sylius.ui.attributes'|trans }}
             </h2>
         </div>
         <div class="card-body py-4 border-bottom">
             <div class="sylius-admin-product-attribute-autocomplete">
                 <twig:sylius_admin:product:product_attribute_autocomplete data-model="attributesToBeAdded:selectedAttributeCodes" :excludedAttributeCodes="product_attributes|keys" />
-                <button type="button" class="btn btn-primary" data-action="live#action" data-live-action-param="prevent|addAttributes">
+                <button type="button" class="btn btn-primary" data-action="live#action" data-live-action-param="prevent|addAttributes" {{ sylius_test_html_attribute('attribute-add-button') }}>
                     {{ 'sylius.ui.add'|trans }}
                 </button>
             </div>
@@ -27,7 +27,7 @@
                                 data-bs-target="#{{ product_attribute_code }}"
                                 aria-selected="{{ loop.first ? 'true' : 'false' }}"
                                 role="tab"
-                                {{ sylius_test_html_attribute('product-attribute-tab', product_attribute_name) }}
+                                {{ sylius_test_html_attribute('attribute-tab', product_attribute_name) }}
                             >
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div>{{ product_attribute_name }}</div>
@@ -38,7 +38,7 @@
                                             data-action="live#action:stop"
                                             data-live-action-param="prevent|removeAttribute"
                                             data-live-attribute-code-param="{{ product_attribute_code }}"
-                                            {{ sylius_test_html_attribute('product-attribute-delete-button', product_attribute_name) }}
+                                            {{ sylius_test_html_attribute('attribute-delete-button', product_attribute_name) }}
                                         >
                                             <svg xmlns="http://www.w3.org/2000/svg" class="text-muted" width="12" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                                                 <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
@@ -64,7 +64,7 @@
                             >
                                 {% for product_attribute_value in product_attribute_values %}
                                     {% set locale_code = product_attribute_value.vars.data.localeCode %}
-                                    <div class="d-flex gap-2 mb-3">
+                                    <div class="field d-flex gap-2 mb-3">
                                         <div>
                                             {% if locale_code is not null %}
                                                 <span class="flag flag-sm flag-country-{{ locale_code|lower|split('_')|last }} me-3"></span>
@@ -74,7 +74,8 @@
                                         </div>
                                         <div class="flex-grow-1">
                                             <div class="d-flex justify-content-between align-items-center">
-                                                {{ form_label(product_attribute_value.value) }}
+                                                {% set required_class = not locale_code or locale_code == sylius_base_locale ? 'required' : '' %}
+                                                {{ form_label(product_attribute_value.value, null, {label_attr: {class: required_class}}) }}
                                                 {% if locale_code is not null %}
                                                     <button
                                                         class="btn btn-secondary btn-sm"
@@ -93,7 +94,7 @@
                                                     'locale-code': product_attribute_value.localeCode.vars.value,
                                                 })
                                             ) }}
-
+                                            {{ form_errors(product_attribute_value.value) }}
                                             <input type="hidden" name="{{ product_attribute_value.attribute.vars.full_name }}" value="{{ product_attribute_value.attribute.vars.value }}">
                                             <input type="hidden" name="{{ product_attribute_value.localeCode.vars.full_name }}" value="{{ product_attribute_value.localeCode.vars.value }}">
                                         </div>

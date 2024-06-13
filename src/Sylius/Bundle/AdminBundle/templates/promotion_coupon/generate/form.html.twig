@@ -1,0 +1,14 @@
+{% set form = hookable_metadata.context.form %}
+
+    {% form_theme form '@SyliusAdmin/shared/form_theme.html.twig' %}
+
+<div class="container-xl">
+    {{ form_start(form, {'attr': {'class': 'ui loadable form', 'novalidate': 'novalidate', 'id': form.vars.id}}) }}
+    <div class="row">
+        {{ form_errors(form) }}
+        {{ form_widget(form._token) }}
+
+        {% hook 'form' with { form } %}
+    </div>
+    {{ form_end(form, {render_rest: hookable.configuration.render_rest|default(false)}) }}
+</div>

@@ -13,29 +13,29 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Element\Admin\Product;
 
-interface AttributesFormElementInterface
+use Sylius\Behat\Element\Admin\Crud\FormElementInterface;
+
+interface AttributesFormElementInterface extends FormElementInterface
 {
-    public function getAttributeValidationErrors(string $attributeName, string $localeCode): string;
-
-    public function removeAttribute(string $attributeName, string $localeCode): void;
-
-    public function getAttributeSelectText(string $attribute, string $localeCode): string;
-
-    public function getNonTranslatableAttributeValue(string $attribute): string;
-
-    public function hasAttribute(string $attributeName): bool;
-
-    public function hasNonTranslatableAttributeWithValue(string $attributeName, string $value): bool;
-
-    public function addNonTranslatableAttribute(string $attributeName, string $value): void;
-
     public function addAttribute(string $attributeName): void;
-
-    public function updateAttribute(string $attributeName, string $value, string $localeCode): void;
-
-    public function getAttributeValue(string $attribute, string $localeCode): string;
 
     public function addSelectedAttributes(): void;
 
+    public function updateAttribute(string $attributeName, string $value, string $localeCode): void;
+
+    public function removeAttribute(string $attributeName): void;
+
+    public function hasAttribute(string $attributeName): bool;
+
     public function getNumberOfAttributes(): int;
+
+    public function getAttributeValue(string $attributeName, string $localeCode): string;
+
+    public function getAttributeSelectText(string $attributeName, string $localeCode): string;
+
+    public function getValueNonTranslatableAttribute(string $attributeName): string;
+
+    public function getAttributeValidationErrors(string $attributeName, string $localeCode): string;
+
+    public function hasAttributeError(string $attributeName, string $localeCode): bool;
 }

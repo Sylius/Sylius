@@ -269,7 +269,7 @@
             <argument type="service" id="sylius.behat.page.admin.promotion_coupon.generate" />
             <argument type="service" id="sylius.behat.page.admin.promotion_coupon.index" />
             <argument type="service" id="sylius.behat.page.admin.promotion_coupon.update" />
-            <argument type="service" id="sylius.behat.current_page_resolver" />
+            <argument type="service" id="sylius.behat.element.admin.promotion_coupon.form" />
             <argument type="service" id="sylius.behat.notification_checker.admin" />
         </service>
 

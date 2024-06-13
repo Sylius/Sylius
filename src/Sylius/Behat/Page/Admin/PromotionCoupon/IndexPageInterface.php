@@ -17,5 +17,5 @@ use Sylius\Behat\Page\Admin\Crud\IndexPageInterface as BaseIndexPageInterface;
 
 interface IndexPageInterface extends BaseIndexPageInterface
 {
-    public function getCouponCodes(): iterable;
+    public function filterByCode(string $code): void;
 }

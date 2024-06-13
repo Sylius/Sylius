@@ -87,7 +87,7 @@ class FormComponent
     {
         $mappedAttributes = [];
 
-        $attributes = $this->getForm()->createView()->children['attributes'];
+        $attributes = $this->getFormView()->children['attributes'];
 
         foreach ($attributes->children as $attribute) {
             /** @var ProductAttributeValueInterface $productAttributeValue */

@@ -13,100 +13,61 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Page\Admin\PromotionCoupon;
 
-use Behat\Mink\Element\NodeElement;
-use Behat\Mink\Exception\ElementNotFoundException;
-use FriendsOfBehat\PageObjectExtension\Page\SymfonyPage;
+use Sylius\Behat\Page\Admin\Crud\CreatePage as BasePage;
 
-class GeneratePage extends SymfonyPage implements GeneratePageInterface
+class GeneratePage extends BasePage implements GeneratePageInterface
 {
-    public function checkAmountValidation(string $message): bool
-    {
-        return $this->checkValidationMessageFor('amount', $message);
-    }
-
-    public function checkCodeLengthValidation(string $message): bool
-    {
-        return $this->checkValidationMessageFor('code_length', $message);
-    }
-
-    public function checkGenerationValidation(string $message): bool
-    {
-        return str_contains($this->getElement('form')->find('css', '.ui.red.label')->getText(), $message);
-    }
-
     public function generate(): void
     {
-        $this->getDocument()->pressButton('Generate');
-    }
-
-    public function specifyAmount(?int $amount): void
-    {
-        $this->getDocument()->fillField('Amount', $amount);
-    }
-
-    public function specifyCodeLength(?int $codeLength): void
-    {
-        $this->getDocument()->fillField('Code length', $codeLength);
-    }
-
-    public function setExpiresAt(\DateTimeInterface $date): void
-    {
-        $timestamp = $date->getTimestamp();
-
-        $this->getDocument()->fillField('Expires at', date('Y-m-d', $timestamp));
-    }
-
-    public function setUsageLimit(int $limit): void
-    {
-        $this->getDocument()->fillField('Usage limit', $limit);
+        $this->getElement('generate_button')->press();
     }
 
     public function specifyPrefix(string $prefix): void
     {
-        $this->getDocument()->fillField('Prefix', $prefix);
+        $this->getElement('prefix')->setValue($prefix);
+    }
+
+    public function specifyCodeLength(?int $codeLength): void
+    {
+        $this->getElement('code_length')->setValue($codeLength);
     }
 
     public function specifySuffix(string $suffix): void
     {
-        $this->getDocument()->fillField('Suffix', $suffix);
+        $this->getElement('suffix')->setValue($suffix);
     }
 
-    public function getRouteName(): string
+    public function specifyAmount(?int $amount): void
     {
-        return 'sylius_admin_promotion_coupon_generate';
+        $this->getElement('amount')->setValue($amount);
+    }
+
+    public function setExpiresAt(\DateTimeInterface $date): void
+    {
+        $this->getElement('expires_at')->setValue($date->format('Y-m-d'));
+    }
+
+    public function setUsageLimit(int $limit): void
+    {
+        $this->getElement('usage_limit')->setValue($limit);
+    }
+
+    public function getFormValidationMessage(): string
+    {
+        return $this->getElement('form_validation_message')->getText();
     }
 
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
-            'amount' => '#sylius_promotion_coupon_generator_instruction_amount',
-            'code_length' => '#sylius_promotion_coupon_generator_instruction_codeLength',
-            'expires_at' => '#sylius_promotion_coupon_generator_instruction_expiresAt',
-            'form' => '.two.column.stackable.grid',
-            'usage_limit' => '#sylius_promotion_coupon_generator_instruction_usageLimit',
+            'amount' => '[data-test-amount]',
+            'code_length' => '[data-test-code-length]',
+            'expires_at' => '[data-test-expires-at]',
+            'form_validation_message' => 'form div.alert.alert-danger.d-block',
+            'generate_button' => '[data-test-generate-button]',
+            'prefix' => '[data-test-prefix]',
+            'suffix' => '[data-test-suffix]',
+            'usage_limit' => '[data-test-usage-limit]',
         ]);
-    }
-
-    /**
-     * @throws ElementNotFoundException
-     */
-    private function checkValidationMessageFor(string $element, string $message): bool
-    {
-        $foundElement = $this->getElement($element);
-        $validatedField = $this->getValidatedField($foundElement);
-
-        return $message === $validatedField->find('css', '[data-test-validation-error]')->getText();
-    }
-
-    /**
-     * @throws ElementNotFoundException
-     */
-    private function getValidatedField(NodeElement $element): NodeElement
-    {
-        while (null !== $element && !$element->hasClass('field')) {
-            $element = $element->getParent();
-        }
-
-        return $element;
     }
 }
