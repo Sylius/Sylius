@@ -23,8 +23,6 @@ use Sylius\Component\Product\Model\ProductAttributeValue;
 use Sylius\Component\Product\Repository\ProductAttributeValueRepositoryInterface;
 
 /**
- * @experimental
- *
  * @implements ProviderInterface<ProductAttributeValue>
  */
 final readonly class ProductAttributesProvider implements ProviderInterface
