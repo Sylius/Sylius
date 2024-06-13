@@ -87,5 +87,11 @@
             class="Sylius\Behat\Element\Admin\Taxon\ImageFormElement"
             parent="sylius.behat.element.admin.crud.form"
         />
+
+        <service
+            id="sylius.behat.element.admin.promotion_coupon.form"
+            class="Sylius\Behat\Element\Admin\PromotionCoupon\FormElement"
+            parent="sylius.behat.element.admin.crud.form"
+        />
     </services>
 </container>

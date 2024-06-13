@@ -11,7 +11,7 @@ Feature: Filtering promotions by coupon code
         And the store has promotion "Christmas sale" with coupon "MAGIC"
         And I am logged in as an administrator
 
-    @api @todo @ui
+    @api @ui
     Scenario: Filtering promotions by coupon code
         When I want to browse promotions
         And I filter promotions by coupon code equal "MAGIC"

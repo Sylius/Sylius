@@ -17,5 +17,9 @@ use Sylius\Behat\Page\Admin\Crud\IndexPageInterface as BaseIndexPageInterface;
 
 interface IndexPageInterface extends BaseIndexPageInterface
 {
-    public function showProductOf(string $variantCode): void;
+    public function showProductOf(int $variantId): void;
+
+    public function filterByCode(string $code): void;
+
+    public function filterByName(string $name): void;
 }
