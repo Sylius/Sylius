@@ -10,7 +10,11 @@
 
 {% block list %}
     {% for item in item.children %}
-        {{ block('item') }}
+        {% if item.extras.template is defined %}
+            {% include item.extras.template %}
+        {% else %}
+            {{ block('item') }}
+        {% endif %}
     {% endfor %}
 {% endblock %}
 
@@ -77,7 +81,11 @@
 
 {% block childrenList %}
     {% for item in item.children %}
-        {{ block('childItem') }}
+        {% if item.extras.template is defined %}
+            {% include item.extras.template %}
+        {% else %}
+            {{ block('childItem') }}
+        {% endif %}
     {% endfor %}
 {% endblock %}
 
