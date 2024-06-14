@@ -779,9 +779,12 @@ final readonly class ManagingOrdersContext implements Context
     /**
      * @Then I should see the order :orderNumber with total :total
      */
-    public function iShouldSeeTheOrderWithTotal(string $orderNumber, int $total): void
+    public function iShouldSeeTheOrderWithTotal(string $orderNumber, string $total): void
     {
-        Assert::true($this->indexPage->isSingleResourceOnPage(['total' => $total]));
+        Assert::true($this->indexPage->isSingleResourceOnPage([
+            'number' => $orderNumber,
+            'total' => $total,
+        ]));
     }
 
     /**
@@ -911,7 +914,7 @@ final readonly class ManagingOrdersContext implements Context
     /**
      * @Then /^(the administrator) should see the order with total "([^"]+)" in order list$/
      */
-    public function theAdministratorShouldSeeTheOrderWithTotalInOrderList(AdminUserInterface $user, int $total): void
+    public function theAdministratorShouldSeeTheOrderWithTotalInOrderList(AdminUserInterface $user, string $total): void
     {
         $this->sharedSecurityService->performActionAsAdminUser($user, function () use ($total) {
             $this->indexPage->open();

@@ -17,7 +17,7 @@ Feature: Seeing the currency in which all orders have been placed
         And there is a customer "Satin" identified by an email "satin@teamlucifer.com" and a password "pswd"
         And I am logged in as an administrator
 
-    @todo @ui @api
+    @api @ui
     Scenario: Seeing an order placed in the base currency
         Given there is a customer "lucy@teamlucifer.com" that placed an order "#00000666"
         And the customer bought a single "Angel T-Shirt"
