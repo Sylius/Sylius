@@ -39,22 +39,17 @@ class IndexPage extends BaseIndexPage implements IndexPageInterface
     public function archiveShippingMethod(string $name): void
     {
         $actions = $this->getActionsForResource(['name' => $name]);
-        $actions->pressButton('archive');
-        $this->getElement('confirm_action_button')->press();
-    }
-
-    public function deleteShippingMethod(string $name): void
-    {
-        $this->open();
-        $this->deleteResourceOnPage(['name' => $name]);
-        $this->getElement('confirm_action_button')->press();
+        $archiveRestoreModal = $actions->find('css', '[data-test-modal="archive-restore"]');
+        $archiveRestoreModal->find('css', '[data-test-trigger-button="Archive"]')->press();
+        $archiveRestoreModal->find('css', '[data-test-confirm-button]')->press();
     }
 
     public function restoreShippingMethod(string $name): void
     {
         $actions = $this->getActionsForResource(['name' => $name]);
-        $actions->pressButton('Restore');
-        $this->getElement('confirm_action_button')->press();
+        $archiveRestoreModal = $actions->find('css', '[data-test-modal="archive-restore"]');
+        $archiveRestoreModal->find('css', '[data-test-trigger-button="Restore"]')->press();
+        $archiveRestoreModal->find('css', '[data-test-confirm-button]')->press();
     }
 
     public function isShippingMethodDisabled(ShippingMethodInterface $shippingMethod): bool
@@ -79,7 +74,6 @@ class IndexPage extends BaseIndexPage implements IndexPageInterface
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
-            'confirm_action_button' => '[data-confirm-btn-true]',
             'filter_archival' => '#criteria_archival',
             'row' => '[data-test-row][data-test-resource-id="%resourceId%"]',
         ]);
