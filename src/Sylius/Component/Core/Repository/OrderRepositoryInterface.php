@@ -31,12 +31,12 @@ interface OrderRepositoryInterface extends BaseOrderRepositoryInterface
     public function createListQueryBuilder(): QueryBuilder;
 
     /**
-     * @param array{product: string, variant: string}|null $criteria
+     * @param array<string, mixed>|null $criteria
      */
     public function createCriteriaAwareSearchListQueryBuilder(?array $criteria): QueryBuilder;
 
     /**
-     * @param array{product: string, variant: string}|null $criteria
+     * @param array<string, mixed>|null $criteria
      */
     public function createByCustomerIdCriteriaAwareQueryBuilder(?array $criteria, string $customerId): QueryBuilder;
 

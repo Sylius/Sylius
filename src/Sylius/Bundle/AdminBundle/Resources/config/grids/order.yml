@@ -78,39 +78,35 @@ sylius_grid:
                     sortable: ~
             filters:
                 product:
-                    type: resource_autocomplete
+                    type: ux_translatable_autocomplete
                     label: sylius.ui.product
                     form_options:
-                        resource: sylius.product
-                        choice_name: descriptor
-                        choice_value: code
                         multiple: true
-                        remote_path: sylius_admin_ajax_products_by_phrase
-                        load_edit_path: sylius_admin_ajax_product_by_code
-                    options:
-                        fields: [product.code]
+                        extra_options:
+                            class: '%sylius.model.product.class%'
+                            translation_fields: [name]
+                            choice_label: name
                 variant:
-                    type: resource_autocomplete
+                    type: ux_translatable_autocomplete
                     label: sylius.ui.variant
                     form_options:
-                        resource: sylius.product_variant
-                        choice_name: descriptor
-                        choice_value: code
                         multiple: true
-                        remote_path: sylius_admin_ajax_all_product_variants_by_phrase
-                        load_edit_path: sylius_admin_ajax_all_product_variants_by_codes
-                    options:
-                        fields: [variant.code]
+                        extra_options:
+                            class: '%sylius.model.product_variant.class%'
+                            translation_fields: [name]
+                            choice_label: descriptor
                 number:
                     type: string
                     label: sylius.ui.number
                     form_options:
                         type: !php/const Sylius\Component\Grid\Filter\StringFilter::TYPE_CONTAINS
                 customer:
-                    type: string
+                    type: ux_autocomplete
                     label: sylius.ui.customer
-                    options:
-                        fields: [customer.email, customer.firstName, customer.lastName]
+                    form_options:
+                        extra_options:
+                            class: '%sylius.model.customer.class%'
+                            choice_label: fullname
                 date:
                     type: date
                     label: sylius.ui.date
@@ -118,22 +114,27 @@ sylius_grid:
                         field: checkoutCompletedAt
                         inclusive_to: true
                 channel:
-                    type: entity
+                    type: ux_autocomplete
                     label: sylius.ui.channel
                     form_options:
-                        class: "%sylius.model.channel.class%"
+                        extra_options:
+                            class: "%sylius.model.channel.class%"
+                            choice_label: name
                 total:
                     type: money
                     label: sylius.ui.total
                     options:
                         currency_field: currencyCode
                 shipping_method:
-                    type: entity
+                    type: ux_autocomplete
                     label: sylius.ui.shipping_method
-                    options:
-                        fields: [shipments.method]
                     form_options:
-                        class: "%sylius.model.shipping_method.class%"
+                        extra_options:
+                            class: "%sylius.model.shipping_method.class%"
+                            translation_fields: [name]
+                            choice_label: name
+                    options:
+                        fields: [shipments.method.id]
             actions:
                 item:
                     show:
