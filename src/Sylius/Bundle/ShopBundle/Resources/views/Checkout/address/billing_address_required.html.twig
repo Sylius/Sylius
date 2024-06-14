@@ -12,7 +12,7 @@
     {{ form_row(form.differentShippingAddress, sylius_test_form_attribute('different-shipping-address')|sylius_merge_recursive({'attr': {'data-toggles': 'sylius-shipping-address'}, 'label_attr': {'data-test-different-shipping-address-label': ''}} )) }}
 </div>
 
-<div class="mb-5" {{ sylius_test_html_attribute('shipping-address') }}>
+<div class="mb-5 d-none" id="sylius_checkout_shipping_address" {{ sylius_test_html_attribute('shipping-address') }}>
     {% include '@SyliusShop/Checkout/address/address_book_select.html.twig' %}
 
     <div class="h4 mb-5">{{ 'sylius.ui.shipping_address'|trans }}</div>
