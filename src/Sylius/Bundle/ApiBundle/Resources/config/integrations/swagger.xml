@@ -43,7 +43,7 @@
 <!--            <tag name="sylius.open_api.modifier" />-->
 <!--        </service>-->
 
-        <service id="Sylius\Bundle\ApiBundle\OpenApi\Documentation\ProductDocumentationModifier">
+        <service id="sylius.api.open_api.product_documentation_modifier" class="Sylius\Bundle\ApiBundle\OpenApi\Documentation\ProductDocumentationModifier">
             <tag name="sylius.open_api.modifier" />
         </service>
 

@@ -11,7 +11,7 @@ Feature: Viewing product's enabled variants only
         And the product "Super Cool T-Shirt" has also an "Extra Large" variant
         And the "Extra Large" product variant is disabled
 
-    @ui @api @todo
+    @todo-api @ui
     Scenario: Seeing only enabled variants
         When I view product "Super Cool T-Shirt"
         Then I should be able to select between 3 variants
