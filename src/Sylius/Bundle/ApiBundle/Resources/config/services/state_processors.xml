@@ -43,7 +43,7 @@
             <tag name="api_platform.state_processor" />
         </service>
 
-        <service id="sylius_api.state_processor.delete.product" class="Sylius\Bundle\ApiBundle\StateProcessor\ProductProcessor">
+        <service id="sylius_api.state_processor.delete.product" class="Sylius\Bundle\ApiBundle\StateProcessor\Delete\ProductProcessor">
             <argument type="service" id="api_platform.doctrine.orm.state.persist_processor" />
             <argument type="service" id="api_platform.doctrine.orm.state.remove_processor" />
             <tag name="api_platform.state_processor" />

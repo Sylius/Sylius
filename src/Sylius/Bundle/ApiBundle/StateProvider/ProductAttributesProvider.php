@@ -22,10 +22,8 @@ use Sylius\Component\Locale\Provider\LocaleProviderInterface;
 use Sylius\Component\Product\Model\ProductAttributeValue;
 use Sylius\Component\Product\Repository\ProductAttributeValueRepositoryInterface;
 
-/**
- * @implements ProviderInterface<ProductAttributeValue>
- */
-final readonly class ProductAttributesProvider implements ProviderInterface
+/** @implements ProviderInterface<ProductAttributeValue> */
+final class ProductAttributesProvider implements ProviderInterface
 {
     public function __construct(
         private iterable $collectionExtensions,
@@ -61,7 +59,7 @@ final readonly class ProductAttributesProvider implements ProviderInterface
                 $extension instanceof QueryResultCollectionExtensionInterface &&
                 $extension->supportsResult($resourceClass, $operation)
             ) {
-                return $extension->getResult($queryBuilder)->getIterator();
+                return $extension->getResult($queryBuilder);
             }
         }
 
