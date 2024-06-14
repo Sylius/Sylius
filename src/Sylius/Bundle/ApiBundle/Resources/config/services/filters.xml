@@ -62,7 +62,7 @@
             <tag name="api_platform.filter" />
         </service>
 
-        <service id="Sylius\Bundle\ApiBundle\Filter\Doctrine\TaxonFilter" public="true">
+        <service id="sylius.api.taxon_filter" class="Sylius\Bundle\ApiBundle\Filter\Doctrine\TaxonFilter" public="true">
             <argument type="service" id="doctrine" />
             <argument type="service" id="api_platform.symfony.iri_converter" />
             <tag name="api_platform.filter" />
@@ -205,7 +205,7 @@
             <tag name="api_platform.filter" />
         </service>
 
-        <service id="Sylius\Bundle\ApiBundle\Filter\Doctrine\TranslationOrderNameAndLocaleFilter" public="true">
+        <service id="sylius.api.translation_order_and_locale_filter" class="Sylius\Bundle\ApiBundle\Filter\Doctrine\TranslationOrderNameAndLocaleFilter" public="true">
             <argument type="service" id="doctrine" />
             <tag name="api_platform.filter" />
         </service>
@@ -222,7 +222,7 @@
             <tag name="api_platform.filter" />
         </service>
 
-        <service id="Sylius\Bundle\ApiBundle\Filter\Doctrine\ProductPriceOrderFilter" public="true">
+        <service id="sylius.api.product_price_order_filter" class="Sylius\Bundle\ApiBundle\Filter\Doctrine\ProductPriceOrderFilter" public="true">
             <argument type="service" id="doctrine" />
             <tag name="api_platform.filter" />
         </service>
@@ -275,7 +275,7 @@
 <!--            <tag name="api_platform.filter" />-->
 <!--        </service>-->
 
-        <service id="Sylius\Bundle\ApiBundle\Filter\Doctrine\ChannelsAwareChannelFilter" public="true">
+        <service id="sylius.api.channel_aware_filter" class="Sylius\Bundle\ApiBundle\Filter\Doctrine\ChannelsAwareChannelFilter" public="true">
             <argument type="service" id="api_platform.symfony.iri_converter" />
             <argument type="service" id="doctrine" />
             <tag name="api_platform.filter" />

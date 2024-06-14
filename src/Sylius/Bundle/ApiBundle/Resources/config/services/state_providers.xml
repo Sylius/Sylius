@@ -50,7 +50,7 @@
             <tag name="api_platform.state_provider" priority="10" />
         </service>
 
-        <service id="Sylius\Bundle\ApiBundle\StateProvider\ProductAttributesProvider">
+        <service id="sylius_api.state_provider.shop.product_attributes" class="Sylius\Bundle\ApiBundle\StateProvider\ProductAttributesProvider">
             <argument type="tagged_iterator" tag="api_platform.doctrine.orm.query_extension.collection" />
             <argument type="service" id="sylius.repository.product_attribute_value" />
             <argument type="service" id="sylius.context.locale" />
