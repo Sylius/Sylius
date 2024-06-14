@@ -8,7 +8,7 @@ Feature: Locale unique code validation
         Given the store has locale "Norwegian (Norway)"
         And I am logged in as an administrator
 
-    @todo @ui @api
+    @api @ui
     Scenario: Trying to add new locale with used code
         When I want to add a new locale
         Then I should not be able to choose "Norwegian (Norway)"

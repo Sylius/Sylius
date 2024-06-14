@@ -17,4 +17,5 @@
 >
     <property resource="Sylius\Component\Locale\Model\Locale" name="id" identifier="false" writable="false" />
     <property resource="Sylius\Component\Locale\Model\Locale" name="code" identifier="true" required="true" />
+    <property resource="Sylius\Component\Locale\Model\Locale" name="name" writable="false" />
 </properties>

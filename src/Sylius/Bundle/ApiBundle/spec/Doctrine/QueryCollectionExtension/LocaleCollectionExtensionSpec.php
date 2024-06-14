@@ -18,44 +18,45 @@ use ApiPlatform\Metadata\Get;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\QueryBuilder;
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\ApiBundle\Context\UserContextInterface;
+use Prophecy\Argument;
+use Sylius\Bundle\ApiBundle\SectionResolver\AdminApiSection;
+use Sylius\Bundle\ApiBundle\SectionResolver\ShopApiSection;
 use Sylius\Bundle\ApiBundle\Serializer\ContextKeys;
-use Sylius\Component\Core\Model\AdminUserInterface;
+use Sylius\Bundle\CoreBundle\SectionResolver\SectionProviderInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Locale\Model\LocaleInterface;
 use Symfony\Component\HttpFoundation\Request;
 
 final class LocaleCollectionExtensionSpec extends ObjectBehavior
 {
-    function let(UserContextInterface $userContext): void
+    function let(SectionProviderInterface $sectionProvider): void
     {
-        $this->beConstructedWith($userContext);
+        $this->beConstructedWith($sectionProvider);
     }
 
-    function it_throws_an_exception_if_context_has_not_channel(
+    public function it_does_not_apply_conditions_to_collection_for_unsupported_resource(
+        SectionProviderInterface $sectionProvider,
         QueryBuilder $queryBuilder,
         QueryNameGeneratorInterface $queryNameGenerator,
     ): void {
-        $this
-            ->shouldThrow(\InvalidArgumentException::class)
-            ->during('applyToCollection', [$queryBuilder, $queryNameGenerator, LocaleInterface::class, new Get()])
-        ;
+        $sectionProvider->getSection()->shouldNotBeCalled();
+        $queryBuilder->getRootAliases()->shouldNotBeCalled();
+        $queryBuilder->andWhere(Argument::any())->shouldNotBeCalled();
+
+        $this->applyToCollection($queryBuilder, $queryNameGenerator, \stdClass::class);
     }
 
-    function it_does_not_apply_conditions_for_admin(
-        UserContextInterface $userContext,
+    function it_does_not_apply_conditions_for_non_shop_api_section(
+        SectionProviderInterface $sectionProvider,
+        AdminApiSection $adminApiSection,
         QueryBuilder $queryBuilder,
-        AdminUserInterface $admin,
         QueryNameGeneratorInterface $queryNameGenerator,
         ChannelInterface $channel,
     ): void {
-        $queryBuilder->getRootAliases()->willReturn(['o']);
+        $sectionProvider->getSection()->willReturn($adminApiSection);
 
-        $userContext->getUser()->willReturn($admin);
-        $admin->getRoles()->willReturn(['ROLE_API_ACCESS']);
-
-        $queryBuilder->andWhere('o..id in :locales')->shouldNotBeCalled();
-        $queryBuilder->setParameter('locales', $channel->getLocales())->shouldNotBeCalled();
+        $queryBuilder->getRootAliases()->shouldNotBeCalled();
+        $queryBuilder->andWhere(Argument::any())->shouldNotBeCalled();
 
         $this->applyToCollection(
             $queryBuilder,
@@ -69,25 +70,24 @@ final class LocaleCollectionExtensionSpec extends ObjectBehavior
         );
     }
 
-    function it_applies_conditions_for_non_admin(
-        UserContextInterface $userContext,
+    function it_applies_conditions_for_shop_api_section(
+        SectionProviderInterface $sectionProvider,
+        ShopApiSection $shopApiSection,
         QueryBuilder $queryBuilder,
         QueryNameGeneratorInterface $queryNameGenerator,
         ChannelInterface $channel,
         LocaleInterface $locale,
     ): void {
+        $sectionProvider->getSection()->willReturn($shopApiSection);
+
         $queryNameGenerator->generateParameterName('locales')->shouldBeCalled()->willReturn('locales');
+
+        $locales = new ArrayCollection([$locale->getWrappedObject()]);
+        $channel->getLocales()->shouldBeCalled()->willReturn($locales);
+
         $queryBuilder->getRootAliases()->willReturn(['o']);
-
-        $userContext->getUser()->willReturn(null);
-
         $queryBuilder->andWhere('o.id in (:locales)')->shouldBeCalled()->willReturn($queryBuilder->getWrappedObject());
-
-        $localesCollection = new ArrayCollection([$locale]);
-
-        $channel->getLocales()->shouldBeCalled()->willReturn($localesCollection);
-
-        $queryBuilder->setParameter('locales', $localesCollection)->shouldBeCalled()->willReturn($queryBuilder->getWrappedObject());
+        $queryBuilder->setParameter('locales', $locales)->shouldBeCalled()->willReturn($queryBuilder->getWrappedObject());
 
         $this->applyToCollection(
             $queryBuilder,
@@ -99,5 +99,19 @@ final class LocaleCollectionExtensionSpec extends ObjectBehavior
                 ContextKeys::HTTP_REQUEST_METHOD_TYPE => Request::METHOD_GET,
             ],
         );
+    }
+
+    function it_throws_an_exception_if_context_has_no_channel(
+        SectionProviderInterface $sectionProvider,
+        ShopApiSection $shopApiSection,
+        QueryBuilder $queryBuilder,
+        QueryNameGeneratorInterface $queryNameGenerator,
+    ): void {
+        $sectionProvider->getSection()->willReturn($shopApiSection);
+
+        $this
+            ->shouldThrow(\InvalidArgumentException::class)
+            ->during('applyToCollection', [$queryBuilder, $queryNameGenerator, LocaleInterface::class, new Get()])
+        ;
     }
 }

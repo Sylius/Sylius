@@ -40,12 +40,63 @@
                 </normalizationContext>
             </operation>
 
+            <operation class="ApiPlatform\Metadata\GetCollection" uriTemplate="/admin/locales">
+                <normalizationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius:admin:locale:index</value>
+                            </values>
+                        </value>
+                    </values>
+                </normalizationContext>
+            </operation>
+
+            <operation class="ApiPlatform\Metadata\Post" uriTemplate="/admin/locales">
+                <denormalizationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius:admin:locale:create</value>
+                            </values>
+                        </value>
+                    </values>
+                </denormalizationContext>
+                <normalizationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius:admin:locale:show</value>
+                            </values>
+                        </value>
+                    </values>
+                </normalizationContext>
+            </operation>
+
+            <operation
+                class="ApiPlatform\Metadata\Delete"
+                uriTemplate="/admin/locales/{code}"
+                processor="sylius_api.state_processor.delete.locale"
+            />
+
             <operation class="ApiPlatform\Metadata\Get" uriTemplate="/shop/locales/{code}">
                 <normalizationContext>
                     <values>
                         <value name="groups">
                             <values>
                                 <value>sylius:shop:locale:show</value>
+                            </values>
+                        </value>
+                    </values>
+                </normalizationContext>
+            </operation>
+
+            <operation class="ApiPlatform\Metadata\GetCollection" uriTemplate="/shop/locales" paginationEnabled="false">
+                <normalizationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius:shop:locale:index</value>
                             </values>
                         </value>
                     </values>

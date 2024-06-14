@@ -96,10 +96,10 @@
             <tag name="api_platform.doctrine.orm.query_extension.item" />
         </service>
 
-<!--        <service id="Sylius\Bundle\ApiBundle\Doctrine\QueryCollectionExtension\LocaleCollectionExtension">-->
-<!--            <argument type="service" id="Sylius\Bundle\ApiBundle\Context\UserContextInterface" />-->
-<!--            <tag name="api_platform.doctrine.orm.query_extension.collection" />-->
-<!--        </service>-->
+        <service id="sylius_api.doctrine.query_extension.collection.locale" class="Sylius\Bundle\ApiBundle\Doctrine\QueryCollectionExtension\LocaleCollectionExtension">
+            <argument type="service" id="sylius.section_resolver.uri_based_section_resolver" />
+            <tag name="api_platform.doctrine.orm.query_extension.collection" />
+        </service>
 
 <!--        <service-->
 <!--            id="Sylius\Bundle\ApiBundle\Doctrine\QueryCollectionExtension\RestrictingFilterEagerLoadingExtension"-->

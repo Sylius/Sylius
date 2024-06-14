@@ -27,8 +27,8 @@ imports:
 #    - api/inventory/cart_inventory.yml
 #    - api/inventory/checkout_inventory.yaml
 #    - api/inventory/managing_inventory.yaml
-#    - api/locale/locales.yaml
-#    - api/locale/managing_locales.yml
+    - api/locale/locales.yaml
+    - api/locale/managing_locales.yaml
 #    - api/order/managing_orders.yml
 #    - api/order/modifying_placed_order_address.yaml
 #    - api/order/order_history.yaml
