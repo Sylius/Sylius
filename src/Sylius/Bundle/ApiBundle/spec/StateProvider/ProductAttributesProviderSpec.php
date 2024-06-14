@@ -26,7 +26,7 @@ use Sylius\Component\Locale\Provider\LocaleProviderInterface;
 use Sylius\Component\Product\Model\ProductAttributeValue;
 use Sylius\Component\Product\Repository\ProductAttributeValueRepositoryInterface;
 
-class ProductAttributesProviderSpec extends ObjectBehavior
+final class ProductAttributesProviderSpec extends ObjectBehavior
 {
     public function let(
         ProductAttributeValueRepositoryInterface $attributeValueRepository,
