@@ -49,25 +49,19 @@ sylius_grid:
                     label: sylius.ui.state
                     sortable: ~
                     options:
-                        template: "@SyliusUi/Grid/Field/state.html.twig"
-                        vars:
-                            labels: "@SyliusAdmin/Order/Label/State"
+                        template: '@SyliusAdmin/order/grid/field/order_state.html.twig'
                 paymentState:
                     type: twig
                     label: sylius.ui.payment_state
                     sortable: ~
                     options:
-                        template: "@SyliusUi/Grid/Field/state.html.twig"
-                        vars:
-                            labels: "@SyliusAdmin/Order/Label/PaymentState"
+                        template: '@SyliusAdmin/order/grid/field/payment_state.html.twig'
                 shippingState:
                     type: twig
                     label: sylius.ui.shipping_state
                     sortable: ~
                     options:
-                        template: "@SyliusUi/Grid/Field/state.html.twig"
-                        vars:
-                            labels: "@SyliusAdmin/Order/Label/ShippingState"
+                        template: '@SyliusAdmin/order/grid/field/shipping_state.html.twig'
                 total:
                     type: twig
                     label: sylius.ui.total
@@ -110,6 +104,8 @@ sylius_grid:
                 number:
                     type: string
                     label: sylius.ui.number
+                    form_options:
+                        type: !php/const Sylius\Component\Grid\Filter\StringFilter::TYPE_CONTAINS
                 customer:
                     type: string
                     label: sylius.ui.customer
