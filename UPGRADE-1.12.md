@@ -1,3 +1,23 @@
+# UPGRADING FROM `v1.12.17` TO `v1.12.18`
+
+1. Due to concerns about brute forcing user's reset and verification tokens,
+   the upper limit of 40 has been changed to 255 and their default length has been changed from 16 to 64.
+   If you prefer shorter (or longer) tokens, you can change their length via the configuration:
+
+   ```yml
+    sylius_user:
+        resources:
+            _user_:
+                user:
+                    resetting:
+                        token:
+                            length: 128
+                    verification:
+                        token:
+                            length: 12
+   ```
+   where `_user_` can be `admin`, `shop`, `oauth`, or your own custom user type.
+
 # UPGRADING FROM `v1.12.16` TO `v1.12.17`
 
 1. Due to a bug that was causing wrong calculation of available stock during completing a payment [REF](https://github.com/Sylius/Sylius/issues/16160),
