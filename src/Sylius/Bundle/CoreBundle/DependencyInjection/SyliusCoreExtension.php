@@ -61,6 +61,7 @@ final class SyliusCoreExtension extends AbstractResourceExtension implements Pre
 
         $container->setParameter('sylius_core.taxation.shipping_address_based_taxation', $config['shipping_address_based_taxation']);
         $container->setParameter('sylius_core.order_by_identifier', $config['order_by_identifier']);
+        $container->setParameter('sylius_core.order_token_length', $config['order_token_length']);
         $container->setParameter('sylius_core.catalog_promotions.batch_size', $config['catalog_promotions']['batch_size']);
 
         /** @var string $env */

@@ -18,6 +18,15 @@
    ```
    where `_user_` can be `admin`, `shop`, `oauth`, or your own custom user type.
 
+1. The order token length has been parametrized and is now configurable, instead of being hardcoded to `10`.
+   When not specified its default value is `64`.
+   The new parameter can be set by configuration:
+
+   ```yml
+    sylius_core:
+        order_token_length: 128
+   ```
+
 # UPGRADING FROM `v1.12.16` TO `v1.12.17`
 
 1. Due to a bug that was causing wrong calculation of available stock during completing a payment [REF](https://github.com/Sylius/Sylius/issues/16160),
