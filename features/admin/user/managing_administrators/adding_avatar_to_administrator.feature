@@ -7,7 +7,7 @@ Feature: Adding an avatar to an administrator
     Background:
         Given I am logged in as an administrator
 
-    @ui @api @avatar # temporarily enabled to test only the avatar
+    @ui @api
     Scenario: Adding an avatar to administrator account
         Given I am editing my details
         When I upload the "troll.jpg" image as my avatar
