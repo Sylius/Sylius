@@ -17,7 +17,7 @@ Feature: Limiting the number of orders
         And the customer chose "Free" shipping method to "United States" with "Offline" payment
         And I am logged in as an administrator
 
-    @api
+    @api @no-ui
     Scenario: Limiting the number of orders
         When I browse orders
         And I limit number of items to 1
