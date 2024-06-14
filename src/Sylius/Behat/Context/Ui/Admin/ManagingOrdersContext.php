@@ -131,7 +131,7 @@ final readonly class ManagingOrdersContext implements Context
      */
     public function iChooseChannelAsAChannelFilter(string $channelName): void
     {
-        $this->indexPage->chooseChannelFilter($channelName);
+        $this->indexPage->specifyFilterChannel($channelName);
     }
 
     /**
@@ -139,7 +139,7 @@ final readonly class ManagingOrdersContext implements Context
      */
     public function iChooseMethodAsAShippingMethodFilter(string $methodName): void
     {
-        $this->indexPage->chooseShippingMethodFilter($methodName);
+        $this->indexPage->specifyFilterShippingMethod($methodName);
     }
 
     /**
@@ -147,7 +147,7 @@ final readonly class ManagingOrdersContext implements Context
      */
     public function iChooseCurrencyAsTheFilterCurrency(string $currencyName): void
     {
-        $this->indexPage->chooseCurrencyFilter($currencyName);
+        $this->indexPage->chooseFilterCurrency($currencyName);
     }
 
     /**
@@ -201,6 +201,15 @@ final readonly class ManagingOrdersContext implements Context
     }
 
     /**
+     * @When I filter by customer :customerName
+     */
+    public function iFilterByCustomer(string $customerName): void
+    {
+        $this->indexPage->specifyFilterCustomer($customerName);
+        $this->iFilter();
+    }
+
+    /**
      * @When I resend the order confirmation email
      */
     public function iResendTheOrderConfirmationEmail(): void
@@ -248,11 +257,12 @@ final readonly class ManagingOrdersContext implements Context
     }
 
     /**
+     * @Then I should see :amount orders in the list
      * @Then I should see a single order in the list
      */
-    public function iShouldSeeASingleOrderInTheList(): void
+    public function iShouldSeeASingleOrderInTheList(int $count = 1): void
     {
-        Assert::same($this->indexPage->countItems(), 1);
+        Assert::same($this->indexPage->countItems(), $count);
     }
 
     /**
@@ -364,7 +374,6 @@ final readonly class ManagingOrdersContext implements Context
 
     /**
      * @Then /^it should have (\d+) items$/
-     * @Then I should see :amount orders in the list
      */
     public function itShouldHaveAmountOfItems(int $amount = 1): void
     {
