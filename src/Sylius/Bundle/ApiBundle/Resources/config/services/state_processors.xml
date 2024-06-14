@@ -16,6 +16,18 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
 >
     <services>
+        <service id="sylius.api.state_processor.delete.admin_user" class="Sylius\Bundle\ApiBundle\StateProcessor\Delete\AdminUserProcessor">
+            <argument type="service" id="api_platform.doctrine.orm.state.remove_processor" />
+            <argument type="service" id="security.token_storage" />
+            <tag name="api_platform.state_processor" />
+        </service>
+
+        <service id="sylius.api.state_processor.put.admin_user" class="Sylius\Bundle\ApiBundle\StateProcessor\Put\AdminUserProcessor">
+            <argument type="service" id="api_platform.doctrine.orm.state.persist_processor" />
+            <argument type="service" id="sylius.security.password_updater" />
+            <tag name="api_platform.state_processor" />
+        </service>
+
         <service id="Sylius\Bundle\ApiBundle\StateProcessor\CountryProcessor">
             <argument type="service" id="api_platform.doctrine.orm.state.persist_processor" />
             <argument type="service" id="api_platform.doctrine.orm.state.remove_processor" />
