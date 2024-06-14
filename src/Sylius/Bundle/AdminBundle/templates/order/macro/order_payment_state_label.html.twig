@@ -1,0 +1,18 @@
+{%- macro label(state) -%}
+    {% set label = 'sylius.ui.' ~ state %}
+
+    {% set state_badge = {
+        (constant('Sylius\\Component\\Core\\OrderPaymentStates::STATE_AWAITING_PAYMENT')): 'bg-blue-lt',
+        (constant('Sylius\\Component\\Core\\OrderPaymentStates::STATE_PARTIALLY_AUTHORIZED')): 'bg-secondary-lt',
+        (constant('Sylius\\Component\\Core\\OrderPaymentStates::STATE_AUTHORIZED')): 'bg-secondary-lt',
+        (constant('Sylius\\Component\\Core\\OrderPaymentStates::STATE_PARTIALLY_PAID')): 'bg-info-lt',
+        (constant('Sylius\\Component\\Core\\OrderPaymentStates::STATE_CANCELLED')): 'bg-orange-lt',
+        (constant('Sylius\\Component\\Core\\OrderPaymentStates::STATE_PAID')): 'bg-green-lt',
+        (constant('Sylius\\Component\\Core\\OrderPaymentStates::STATE_PARTIALLY_REFUNDED')): 'bg-yellow-lt',
+        (constant('Sylius\\Component\\Core\\OrderPaymentStates::STATE_REFUNDED')): 'bg-secondary-lt',
+    } %}
+
+    <span class="badge {{ state_badge[state]|default('') }}" {{ sylius_test_html_attribute('order-payment-state') }}>
+        {{ label|trans|title }}
+    </span>
+{%- endmacro -%}

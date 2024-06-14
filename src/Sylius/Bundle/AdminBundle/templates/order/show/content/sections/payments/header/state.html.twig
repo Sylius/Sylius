@@ -1,5 +1,7 @@
+{% from '@SyliusAdmin/order/macro/order_payment_state_label.html.twig' import label %}
+
 {% set order = hookable_metadata.context.resource %}
 
 <span class="ms-2" {{ sylius_test_html_attribute('order-payment-state') }}>
-    {{ include('@SyliusAdmin/order/common/label/payment_state/' ~ order.paymentState ~ '.html.twig') }}
+    {{ label(order.paymentState) }}
 </span>
