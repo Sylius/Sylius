@@ -12,12 +12,13 @@
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
         <service
-            id="sylius_admin.twig.ux.component_template_finder"
-            class="Sylius\Bundle\AdminBundle\Twig\Ux\ComponentTemplateFinder"
+            id="sylius_ui.twig.ux.component_template_finder"
+            class="Sylius\Bundle\UiBundle\Twig\Ux\ComponentTemplateFinder"
             decorates="ux.twig_component.component_template_finder"
         >
             <argument type="service" id=".inner" />
             <argument type="service" id="twig.loader.native_filesystem" />
+            <argument>%sylius_ui.twig_ux.anonymous_component_template_prefixes%</argument>
         </service>
     </services>
 </container>

@@ -315,6 +315,24 @@ final class ConfigurationTest extends TestCase
         );
     }
 
+    /** @test */
+    public function it_allows_empty_twig_ux_configuration(): void
+    {
+        $this->assertConfigurationIsValid([['twig_ux' => []]], 'twig_ux');
+    }
+
+    /** @test */
+    public function it_allows_to_configure_anonymous_component_template_prefixes(): void
+    {
+        $this->assertProcessedConfigurationEquals(
+            [
+                ['twig_ux' => ['anonymous_component_template_prefixes' => ['sylius_ui' => '@SyliusUi']]],
+            ],
+            ['twig_ux' => ['anonymous_component_template_prefixes' => ['sylius_ui' => '@SyliusUi']]],
+            'twig_ux.anonymous_component_template_prefixes',
+        );
+    }
+
     protected function getConfiguration(): ConfigurationInterface
     {
         return new Configuration();

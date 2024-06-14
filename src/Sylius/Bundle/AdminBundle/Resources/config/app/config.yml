@@ -81,6 +81,11 @@ sylius_grid:
             ux_autocomplete: '@SyliusAdmin/shared/grid/filter/autocomplete.html.twig'
             ux_translatable_autocomplete: '@SyliusAdmin/shared/grid/filter/autocomplete.html.twig'
 
+sylius_ui:
+    twig_ux:
+        anonymous_component_template_prefixes:
+            sylius_admin: "@SyliusAdmin/shared/components"
+
 liip_imagine:
     filter_sets:
         sylius_admin_product_original: ~
