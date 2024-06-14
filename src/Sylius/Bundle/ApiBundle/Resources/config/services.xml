@@ -178,12 +178,5 @@
             <argument type="service" id="Sylius\Bundle\ApiBundle\Resolver\OperationResolverInterface" />
         </service>
 
-        <service id="api_platform.listener.view.write" class="Sylius\Bundle\ApiBundle\ApiPlatform\Symfony\EventListener\WriteListener">
-            <argument type="service" id="api_platform.state_processor.write" />
-            <argument type="service" id="api_platform.metadata.resource.metadata_collection_factory" />
-
-            <tag name="kernel.event_listener" event="kernel.view" method="onKernelView" priority="32" />
-        </service>
-
     </services>
 </container>

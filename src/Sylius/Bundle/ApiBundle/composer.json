@@ -25,7 +25,7 @@
     "require": {
         "php": "^8.2",
         "doctrine/dbal": "^3.0",
-        "api-platform/core": "^3.1",
+        "api-platform/core": "^3.3.5",
         "enshrined/svg-sanitize": "^0.16",
         "lexik/jwt-authentication-bundle": "^2.11",
         "sylius/core-bundle": "^2.0",
