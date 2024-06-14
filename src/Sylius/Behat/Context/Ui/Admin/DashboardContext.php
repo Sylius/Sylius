@@ -83,11 +83,19 @@ final class DashboardContext implements Context
     }
 
     /**
-     * @When I search for product :product
+     * @When I search for product :product via the navbar
      */
-    public function iSearchForProduct(ProductInterface $product): void
+    public function iSearchForProductViaTheNavbar(ProductInterface $product): void
     {
-        $this->dashboardPage->searchForProduct($product);
+        $this->dashboardPage->searchForProductViaNavbar($product);
+    }
+
+    /**
+     * @When I search for product :product via the menu
+     */
+    public function iSearchForProductViaTheMenu(ProductInterface $product): void
+    {
+        $this->dashboardPage->searchForProductViaSidebar($product);
     }
 
     /**

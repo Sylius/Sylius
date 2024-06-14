@@ -1,9 +1,9 @@
 {% from '@SyliusAdmin/shared/helper/icon.html.twig' import icon %}
 
-<form action="{{ path('sylius_admin_product_index') }}" method="get" class="mb-3 mt-3 mt-md-0">
+<form action="{{ path('sylius_admin_product_index') }}" method="get" class="mb-3 mt-3 mt-md-0" {{ sylius_test_html_attribute('sidebar-product-search') }}>
     <div class="input-group">
-        <input type="text" name="criteria[search][value]" placeholder="{{ 'sylius.ui.search_products'|trans }}..." class="form-control" {{ sylius_test_html_attribute('product-search') }}>
-        <button type="submit" class="btn" {{ sylius_test_html_attribute('search-button') }}>
+        <input type="text" name="criteria[search][value]" placeholder="{{ 'sylius.ui.search_products'|trans }}..." class="form-control">
+        <button type="submit" class="btn">
             {{ icon({icon: 'search', class: 'icon icon-tabler mx-0'}) }}
         </button>
     </div>
