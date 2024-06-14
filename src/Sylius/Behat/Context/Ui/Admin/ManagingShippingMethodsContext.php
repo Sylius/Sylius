@@ -477,9 +477,10 @@ final readonly class ManagingShippingMethodsContext implements Context
      * @When I delete shipping method :shippingMethod
      * @When I try to delete shipping method :shippingMethod
      */
-    public function iDeleteShippingMethod(ShippingMethodInterface $shippingMethod)
+    public function iDeleteShippingMethod(ShippingMethodInterface $shippingMethod): void
     {
-        $this->indexPage->deleteShippingMethod($shippingMethod->getName());
+        $this->indexPage->open();
+        $this->indexPage->deleteResourceOnPage(['name' => $shippingMethod->getName()]);
     }
 
     /**
