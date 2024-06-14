@@ -17,7 +17,7 @@ Feature: Seeing order's payment amount including all fees
         And the customer chose "DHL" shipping method to "United States" with "Cash on Delivery" payment
         And I am logged in as an administrator
 
-    @todo @ui @api
+    @api @ui
     Scenario: Seeing total payment
         When I view the summary of the order "#00000666"
         Then it should have 2 items
