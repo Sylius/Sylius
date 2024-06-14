@@ -62,4 +62,22 @@
         </operations>
     </resource>
 
+    <resource class="Sylius\Component\Product\Model\ProductAttributeValue" uriTemplate="/shop/products/{code}/attributes">
+        <uriVariables>
+            <uriVariable parameterName="code" fromClass="Sylius\Component\Core\Model\Product" fromProperty="attributes"/>
+        </uriVariables>
+        <operations>
+            <operation class="ApiPlatform\Metadata\GetCollection" provider="sylius_api.state_provider.shop.product_attributes">
+                <normalizationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius:shop:product_attribute_value:show</value>
+                            </values>
+                        </value>
+                    </values>
+                </normalizationContext>
+            </operation>
+        </operations>
+    </resource>
 </resources>

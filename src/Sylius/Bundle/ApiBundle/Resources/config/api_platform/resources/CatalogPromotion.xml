@@ -55,7 +55,7 @@
                     <filter>sylius.api.catalog_promotion_enabled_filter</filter>
                     <filter>sylius.api.catalog_promotion_start_date_filter</filter>
                     <filter>sylius.api.catalog_promotion_end_date_filter</filter>
-                    <filter>Sylius\Bundle\ApiBundle\Filter\Doctrine\ChannelsAwareChannelFilter</filter>
+                    <filter>sylius.api.channel_aware_filter</filter>
                     <filter>sylius.api.order_filter.code</filter>
                     <filter>sylius.api.order_filter.name</filter>
                     <filter>sylius.api.order_filter.start_date</filter>
