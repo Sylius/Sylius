@@ -34,7 +34,8 @@ final readonly class MainMenuBuilder
     {
         $menu = $this->factory->createItem('root');
 
-        $this->addDashboardSubmenu($menu);
+        $this->addSearchForm($menu);
+        $this->addDashboardItem($menu);
         $this->addCatalogSubMenu($menu);
         $this->addSalesSubMenu($menu);
         $this->addCustomersSubMenu($menu);
@@ -47,7 +48,15 @@ final readonly class MainMenuBuilder
         return $menu;
     }
 
-    private function addDashboardSubmenu(ItemInterface $menu): void
+    private function addSearchForm(ItemInterface $menu): void
+    {
+        $menu
+            ->addChild('search')
+            ->setExtra('template', '@SyliusAdmin/shared/crud/common/sidebar/search.html.twig')
+        ;
+    }
+
+    private function addDashboardItem(ItemInterface $menu): void
     {
         $menu
             ->addChild('dashboard')
