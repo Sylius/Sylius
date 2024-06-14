@@ -37,7 +37,7 @@ final class PickupCartHandler implements MessageHandlerInterface
         private ObjectManager $orderManager,
         private RandomnessGeneratorInterface $generator,
         private CustomerRepositoryInterface $customerRepository,
-        private int $tokenLength = 10,
+        private int $tokenLength = 64,
     ) {
     }
 

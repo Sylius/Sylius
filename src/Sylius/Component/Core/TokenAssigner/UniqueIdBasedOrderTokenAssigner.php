@@ -20,7 +20,7 @@ final class UniqueIdBasedOrderTokenAssigner implements OrderTokenAssignerInterfa
 {
     public function __construct(
         private RandomnessGeneratorInterface $generator,
-        private int $tokenLength = 10,
+        private int $tokenLength = 64,
     ) {
     }
 
