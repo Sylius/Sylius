@@ -1,0 +1,33 @@
+@import "tom-select/dist/css/tom-select.bootstrap5.css";
+
+.ts-control {
+    padding: 0.5625rem 2.3rem 0.5625rem 0.8rem;
+    line-height: 1.4285714286;
+    color: var(--tblr-body-color);
+    border: var(--tblr-border-width) solid var(--tblr-border-color);
+    border-radius: var(--tblr-border-radius);
+    box-shadow: var(--tblr-box-shadow-input);
+}
+
+.focus .ts-control {
+    border-color: #adb5bd;
+    outline: 0;
+    box-shadow: var(--tblr-box-shadow-input), 0 0 0 0.25rem rgba(173, 181, 189, 0.25);
+}
+
+.ts-dropdown, .ts-dropdown.form-control, .ts-dropdown.form-select {
+    padding: 5px;
+    background: #ffffff;
+    border: 1px solid #00000017;
+    border-radius: 0.175rem;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.075);
+}
+
+.ts-wrapper.single .ts-control, .ts-wrapper.single .ts-control input {
+    cursor: unset;
+}
+
+.plugin-clear_button .clear-button {
+    top: 14px !important;
+    font-size: 24px;
+}

@@ -33,14 +33,11 @@ body {
 @import "navbar";
 @import "rating";
 @import "sidebar";
+@import "tom-select";
 @import "tree";
 
 @import "body";
 @import "choices";
-
-.focus .ts-control {
-    box-shadow: none;
-}
 
 .sylius-admin-product-attribute-autocomplete {
     display: grid;
