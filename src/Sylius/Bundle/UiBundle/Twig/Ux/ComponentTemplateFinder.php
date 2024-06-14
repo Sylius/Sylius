@@ -18,6 +18,7 @@ use Twig\Loader\LoaderInterface;
 
 final readonly class ComponentTemplateFinder implements ComponentTemplateFinderInterface
 {
+    /** @param array<string, string> $anonymousComponentTemplatePrefixes */
     public function __construct(
         private ComponentTemplateFinderInterface $decorated,
         private LoaderInterface $loader,
