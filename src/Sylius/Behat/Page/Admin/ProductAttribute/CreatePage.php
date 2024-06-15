@@ -83,7 +83,6 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
             'choices' => '[data-test-choice-key]',
             'code' => '[data-test-code]',
             'delete_button' => '[data-test-choice-removal="%key%"]',
-            'form' => 'form',
             'max' => '#sylius_admin_product_attribute_configuration_max',
             'min' => '#sylius_admin_product_attribute_configuration_min',
             'multiple' => 'label[for=sylius_admin_product_attribute_configuration_multiple]',
