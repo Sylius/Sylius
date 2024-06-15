@@ -288,6 +288,20 @@
         </service>
 
         <service
+            id="sylius_admin.twig_component.product_attribute.form"
+            class="Sylius\Bundle\AdminBundle\Twig\Component\ProductAttribute\FormComponent"
+        >
+            <argument type="service" id="form.factory" />
+            <argument>Sylius\Bundle\AdminBundle\Form\Type\ProductAttributeType</argument>
+
+            <tag
+                name="sylius.live_component"
+                key="sylius_admin:product_attribute:form"
+                template="@SyliusAdmin/product_attribute/form.html.twig"
+            />
+        </service>
+
+        <service
             id="sylius_admin.twig.component.shipment.ship_form"
             class="Sylius\Bundle\AdminBundle\Twig\Component\Shipment\ShipFormComponent"
         >

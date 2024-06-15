@@ -28,9 +28,11 @@ sylius_grid:
                     enabled: false
                     sortable: ~
                 type:
-                    type: string
+                    type: twig
                     label: sylius.ui.type
                     sortable: ~
+                    options:
+                        template: "@SyliusUi/Grid/Field/label.html.twig"
                 translatable:
                     type: twig
                     label: sylius.ui.translatable
