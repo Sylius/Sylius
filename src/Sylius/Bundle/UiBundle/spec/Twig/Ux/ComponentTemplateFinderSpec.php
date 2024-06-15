@@ -28,7 +28,7 @@ final class ComponentTemplateFinderSpec extends ObjectBehavior
             [
                 'sylius_ui' => '@SyliusUi/components',
                 'sylius_ui_shop' => '@SyliusUi/shop/components',
-            ]
+            ],
         );
     }
 
