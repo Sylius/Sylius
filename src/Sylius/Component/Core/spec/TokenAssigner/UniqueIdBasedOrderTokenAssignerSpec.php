@@ -45,7 +45,7 @@ final class UniqueIdBasedOrderTokenAssignerSpec extends ObjectBehavior
 
     function it_does_nothing_if_token_is_already_assigned(
         RandomnessGeneratorInterface $generator,
-        OrderInterface $order
+        OrderInterface $order,
     ): void {
         $order->getTokenValue()->willReturn('yahboiiiii');
         $generator->generateUriSafeString(Argument::any())->shouldNotBeCalled();
