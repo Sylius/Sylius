@@ -94,7 +94,7 @@ final class OrderItemsTest extends JsonApiTestCase
         $order = $this->placeOrder('token', 'oliver@doe.com');
 
         $this->requestGet(
-            uri: '/api/v2/shop/orders/token/items/'.$order->getItems()->first()->getId().'/adjustments',
+            uri: '/api/v2/shop/orders/token/items/' . $order->getItems()->first()->getId() . '/adjustments',
             headers: $this->headerBuilder()->withShopUserAuthorization('dave@doe.com')->build(),
         );
 
