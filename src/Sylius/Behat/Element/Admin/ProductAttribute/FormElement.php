@@ -99,7 +99,8 @@ class FormElement extends BaseFormElement implements FormElementInterface
 
     protected function getDefinedElements(): array
     {
-        return array_merge(parent::getDefinedElements(), [
+        return array_merge(
+            parent::getDefinedElements(), [
             'add_button' => '#sylius_admin_product_attribute_configuration_choices_add',
             'choice' => '[data-test-choice-key="%key%"] input[data-test-locale="%locale_code%"]',
             'choice_direct_input' => 'input[value="%value%"][data-test-locale="%locale_code%"]',

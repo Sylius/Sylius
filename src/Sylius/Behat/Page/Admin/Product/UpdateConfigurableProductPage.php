@@ -118,7 +118,6 @@ class UpdateConfigurableProductPage extends BaseUpdatePage implements UpdateConf
                 'channels' => '[data-test-channels]',
                 'code' => '[data-test-code]',
                 'enabled' => '[data-test-enabled]',
-                'form' => '[data-live-name-value="sylius_admin:product:form"]',
                 'options' => '[data-test-options]',
                 'product_options_autocomplete' => '[data-test-product-options-autocomplete]',
                 'side_navigation_tab' => '[data-test-side-navigation-tab="%name%"]',

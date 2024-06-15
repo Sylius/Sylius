@@ -228,7 +228,6 @@ final class FormElement extends BaseFormElement implements FormElementInterface
             'ends_at_date' => '#sylius_admin_promotion_endsAt_date',
             'ends_at_time' => '#sylius_admin_promotion_endsAt_time',
             'exclusive' => '#sylius_admin_promotion_exclusive',
-            'form' => '[data-live-name-value="sylius_admin:promotion:form"]',
             'label' => '[name="sylius_admin_promotion[translations][%locale_code%][label]"]',
             'last_action' => '[data-test-actions] [data-test-entry-row]:last-child',
             'last_rule' => '[data-test-rules] [data-test-entry-row]:last-child',

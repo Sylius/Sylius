@@ -142,12 +142,13 @@ final class MediaFormElement extends BaseFormElement implements MediaFormElement
 
     protected function getDefinedElements(): array
     {
-        return [
+        return array_merge(
+            parent::getDefinedElements(), [
             'add_image' => '[data-test-add-image]',
             'image_subform_with_type' => '[data-test-image-subform][data-test-type="%type%"]',
             'images' => '[data-test-images]',
             'side_navigation_tab' => '[data-test-side-navigation-tab="%name%"]',
-        ];
+        ]);
     }
 
     private function getFirstImageSubform(): NodeElement
