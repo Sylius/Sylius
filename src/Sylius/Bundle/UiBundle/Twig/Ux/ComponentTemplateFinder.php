@@ -40,7 +40,7 @@ final readonly class ComponentTemplateFinder implements ComponentTemplateFinderI
 
     private function getTemplatePath(string $name, string $prefixName, string $prefixTemplatePath): ?string
     {
-        $templatePath =  sprintf('%s/%s.html.twig', $prefixTemplatePath, $this->normalizeName($name, $prefixName));
+        $templatePath = sprintf('%s/%s.html.twig', $prefixTemplatePath, $this->normalizeName($name, $prefixName));
 
         if ($this->loader->exists($templatePath)) {
             return $templatePath;
@@ -51,6 +51,6 @@ final readonly class ComponentTemplateFinder implements ComponentTemplateFinderI
 
     private function normalizeName(string $name, string $prefixName): string
     {
-        return str_replace(':', '/',  str_replace($prefixName, '', $name));
+        return str_replace(':', '/', str_replace($prefixName, '', $name));
     }
 }
