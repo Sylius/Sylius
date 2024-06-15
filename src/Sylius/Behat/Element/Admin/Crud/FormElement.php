@@ -19,12 +19,12 @@ use FriendsOfBehat\PageObjectExtension\Element\Element;
 
 class FormElement extends Element implements FormElementInterface
 {
+    /**
+     * @param array<string, string> $parameters
+     */
     public function getValidationMessage(string $element, array $parameters = []): string
     {
         $foundElement = $this->getFieldElement($element, $parameters);
-        if (null === $foundElement) {
-            throw new ElementNotFoundException($this->getSession(), 'Field element');
-        }
 
         $validationMessage = $foundElement->find('css', '.invalid-feedback');
         if (null === $validationMessage) {
@@ -32,6 +32,17 @@ class FormElement extends Element implements FormElementInterface
         }
 
         return $validationMessage->getText();
+    }
+
+    /**
+     * @return array<string, string>
+     */
+    protected function getDefinedElements(): array
+    {
+        return array_merge(
+            parent::getDefinedElements(),
+            ['form' => 'form'],
+        );
     }
 
     protected function waitForFormUpdate(): void
@@ -43,8 +54,12 @@ class FormElement extends Element implements FormElementInterface
         });
     }
 
-    /** @throws ElementNotFoundException */
-    private function getFieldElement(string $element, array $parameters): ?NodeElement
+    /**
+     * @param array<string, string> $parameters
+     *
+     * @throws ElementNotFoundException
+     */
+    private function getFieldElement(string $element, array $parameters): NodeElement
     {
         $element = $this->getElement($element, $parameters);
         while (null !== $element && !$element->hasClass('field')) {

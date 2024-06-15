@@ -13,10 +13,10 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Element\Admin\Crud;
 
-use Behat\Mink\Exception\ElementNotFoundException;
-
 interface FormElementInterface
 {
-    /** @throws ElementNotFoundException */
+    /**
+     * @param array<string, string> $parameters
+     */
     public function getValidationMessage(string $element, array $parameters = []): string;
 }
