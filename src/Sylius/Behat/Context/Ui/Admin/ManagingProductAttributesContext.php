@@ -14,10 +14,10 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
+use Sylius\Behat\Element\Admin\ProductAttribute\FormElementInterface;
 use Sylius\Behat\Page\Admin\Crud\IndexPageInterface;
 use Sylius\Behat\Page\Admin\ProductAttribute\CreatePageInterface;
 use Sylius\Behat\Page\Admin\ProductAttribute\UpdatePageInterface;
-use Sylius\Behat\Service\Resolver\CurrentPageResolverInterface;
 use Sylius\Component\Product\Model\ProductAttributeInterface;
 use Webmozart\Assert\Assert;
 
@@ -27,7 +27,7 @@ final readonly class ManagingProductAttributesContext implements Context
         private CreatePageInterface $createPage,
         private IndexPageInterface $indexPage,
         private UpdatePageInterface $updatePage,
-        private CurrentPageResolverInterface $currentPageResolver,
+        private FormElementInterface $formElement,
     ) {
     }
 
@@ -45,7 +45,7 @@ final readonly class ManagingProductAttributesContext implements Context
      */
     public function iSpecifyItsCodeAs(string $code = null): void
     {
-        $this->createPage->specifyCode($code ?? '');
+        $this->formElement->specifyCode($code ?? '');
     }
 
     /**
@@ -53,7 +53,7 @@ final readonly class ManagingProductAttributesContext implements Context
      */
     public function iSpecifyItsNameAs(string $name, string $localeCode): void
     {
-        $this->createPage->nameIt($name, $localeCode);
+        $this->formElement->nameIt($name, $localeCode);
     }
 
     /**
@@ -61,7 +61,7 @@ final readonly class ManagingProductAttributesContext implements Context
      */
     public function iDisableItsTranslatability(): void
     {
-        $this->createPage->disableTranslatability();
+        $this->formElement->disableTranslatability();
     }
 
     /**
@@ -78,10 +78,7 @@ final readonly class ManagingProductAttributesContext implements Context
      */
     public function iAddValue(string $value, string $localeCode): void
     {
-        /** @var CreatePageInterface|UpdatePageInterface $currentPage */
-        $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
-
-        $currentPage->addAttributeValue($value, $localeCode);
+        $this->formElement->addAttributeValue($value, $localeCode);
     }
 
     /**
@@ -89,7 +86,7 @@ final readonly class ManagingProductAttributesContext implements Context
      */
     public function iDeleteValue(string $value, string $localeCode = 'en_US'): void
     {
-        $this->updatePage->deleteAttributeValue($value, $localeCode);
+        $this->formElement->deleteAttributeValue($value, $localeCode);
     }
 
     /**
@@ -97,7 +94,7 @@ final readonly class ManagingProductAttributesContext implements Context
      */
     public function iChangeItsValueTo(string $oldValue, string $newValue): void
     {
-        $this->updatePage->changeAttributeValue($oldValue, $newValue, 'en_US');
+        $this->formElement->changeAttributeValue($oldValue, $newValue, 'en_US');
     }
 
     /**
@@ -137,7 +134,7 @@ final readonly class ManagingProductAttributesContext implements Context
      */
     public function iChangeItNameToIn(string $name, string $localeCode): void
     {
-        $this->updatePage->changeName($name, $localeCode);
+        $this->formElement->changeName($name, $localeCode);
     }
 
     /**
@@ -154,7 +151,7 @@ final readonly class ManagingProductAttributesContext implements Context
      */
     public function iShouldNotBeAbleToEditItsCode(): void
     {
-        Assert::true($this->updatePage->isCodeDisabled());
+        Assert::true($this->formElement->isCodeDisabled());
     }
 
     /**
@@ -163,10 +160,7 @@ final readonly class ManagingProductAttributesContext implements Context
      */
     public function theTypeFieldShouldBeDisabled(): void
     {
-        /** @var CreatePageInterface|UpdatePageInterface $currentPage */
-        $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
-
-        Assert::true($currentPage->isTypeDisabled());
+        Assert::true($this->formElement->isTypeDisabled());
     }
 
     /**
@@ -174,7 +168,7 @@ final readonly class ManagingProductAttributesContext implements Context
      */
     public function iShouldBeNotifiedThatProductAttributeWithThisCodeAlreadyExists(): void
     {
-        Assert::same($this->updatePage->getValidationMessage('code'), 'This code is already in use.');
+        Assert::same($this->formElement->getValidationMessage('code'), 'This code is already in use.');
     }
 
     /**
@@ -218,7 +212,7 @@ final readonly class ManagingProductAttributesContext implements Context
      */
     public function iRemoveItsNameFromTranslation(string $localeCode): void
     {
-        $this->updatePage->changeName('', $localeCode);
+        $this->formElement->changeName('', $localeCode);
     }
 
     /**
@@ -236,7 +230,7 @@ final readonly class ManagingProductAttributesContext implements Context
      */
     public function iSpecifyItsMinValueAs(int $min): void
     {
-        $this->createPage->specifyMinValue($min);
+        $this->formElement->specifyMinValue($min);
     }
 
     /**
@@ -245,7 +239,7 @@ final readonly class ManagingProductAttributesContext implements Context
      */
     public function iSpecifyItsMaxLengthAs(int $max): void
     {
-        $this->createPage->specifyMaxValue($max);
+        $this->formElement->specifyMaxValue($max);
     }
 
     /**
@@ -253,7 +247,7 @@ final readonly class ManagingProductAttributesContext implements Context
      */
     public function iCheckMultipleOption(): void
     {
-        $this->createPage->checkMultiple();
+        $this->formElement->checkMultiple();
     }
 
     /**
@@ -331,7 +325,7 @@ final readonly class ManagingProductAttributesContext implements Context
      */
     public function iShouldSeeTheValue(string $value, string $localeCode): void
     {
-        Assert::true($this->updatePage->hasAttributeValue($value, $localeCode));
+        Assert::true($this->formElement->hasAttributeValue($value, $localeCode));
     }
 
     /**
@@ -339,7 +333,7 @@ final readonly class ManagingProductAttributesContext implements Context
      */
     public function iShouldNotSeeTheValue(string $value, string $localeCode): void
     {
-        Assert::false($this->updatePage->hasAttributeValue($value, $localeCode));
+        Assert::false($this->formElement->hasAttributeValue($value, $localeCode));
     }
 
     /**
@@ -349,7 +343,7 @@ final readonly class ManagingProductAttributesContext implements Context
     {
         $this->iWantToEditThisAttribute($productAttribute);
 
-        Assert::true($this->updatePage->hasAttributeValue($value, 'en_US'));
+        Assert::true($this->formElement->hasAttributeValue($value, 'en_US'));
     }
 
     /**
@@ -357,7 +351,8 @@ final readonly class ManagingProductAttributesContext implements Context
      */
     public function iShouldBeNotifiedThatMaxLengthMustBeGreaterOrEqualToTheMinLength(): void
     {
-        $this->assertValidationMessage(
+        Assert::same(
+            $this->formElement->getValidationErrors(),
             'Configuration max length must be greater or equal to the min length.',
         );
     }
@@ -367,7 +362,8 @@ final readonly class ManagingProductAttributesContext implements Context
      */
     public function iShouldBeNotifiedThatMaxEntriesValueMustBeGreaterOrEqualToTheMinEntriesValue(): void
     {
-        $this->assertValidationMessage(
+        Assert::same(
+            $this->formElement->getValidationErrors(),
             'Configuration max entries value must be greater or equal to the min entries value.',
         );
     }
@@ -377,7 +373,8 @@ final readonly class ManagingProductAttributesContext implements Context
      */
     public function iShouldBeNotifiedThatMinEntriesValueMustBeLowerOrEqualToTheNumberOfAddedChoices(): void
     {
-        $this->assertValidationMessage(
+        Assert::same(
+            $this->formElement->getValidationErrors(),
             'Configuration min entries value must be lower or equal to the number of added choices.',
         );
     }
@@ -387,7 +384,8 @@ final readonly class ManagingProductAttributesContext implements Context
      */
     public function iShouldBeNotifiedThatMultipleMustBeTrueIfMinOrMaxEntriesValuesAreSpecified(): void
     {
-        $this->assertValidationMessage(
+        Assert::same(
+            $this->formElement->getValidationErrors(),
             'Configuration multiple must be true if min or max entries values are specified.',
         );
     }
@@ -399,22 +397,10 @@ final readonly class ManagingProductAttributesContext implements Context
     {
         $this->iWantToEditThisAttribute($productAttribute);
 
-        Assert::false($this->updatePage->hasAttributeValue($value, 'en_US'));
+        Assert::false($this->formElement->hasAttributeValue($value, 'en_US'));
     }
-
     private function assertFieldValidationMessage(string $element, string $expectedMessage): void
     {
-        /** @var CreatePageInterface|UpdatePageInterface $currentPage */
-        $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
-
-        Assert::same($currentPage->getValidationMessage($element), $expectedMessage);
-    }
-
-    private function assertValidationMessage(string $expectedMessage): void
-    {
-        /** @var CreatePageInterface|UpdatePageInterface $currentPage */
-        $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
-
-        Assert::same($currentPage->getValidationErrors(), $expectedMessage);
+        Assert::same($this->formElement->getValidationMessage($element), $expectedMessage);
     }
 }
