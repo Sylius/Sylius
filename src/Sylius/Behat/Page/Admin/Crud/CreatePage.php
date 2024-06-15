@@ -39,6 +39,8 @@ class CreatePage extends SymfonyPage implements CreatePageInterface
             $this->getDocument()->find('css', 'body')->click();
         }
         $this->getDocument()->pressButton('Create');
+
+        $this->waitForFormUpdate();
     }
 
     public function getValidationMessage(string $element): string
