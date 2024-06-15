@@ -49,11 +49,11 @@ final class ManagingProductAttributesContext implements Context
     }
 
     /**
-     * @When I name it :name in :language
+     * @When I name it :name in :localeCode
      */
-    public function iSpecifyItsNameAs($name, $language)
+    public function iSpecifyItsNameAs(string $name, string $localeCode): void
     {
-        $this->createPage->nameIt($name, $language);
+        $this->createPage->nameIt($name, $localeCode);
     }
 
     /**
@@ -61,14 +61,14 @@ final class ManagingProductAttributesContext implements Context
      */
     public function iDisableItsTranslatability(): void
     {
-        $this->createPage->disableTranslation();
+        $this->createPage->disableTranslatability();
     }
 
     /**
      * @When I add it
      * @When I try to add it
      */
-    public function iAddIt()
+    public function iAddIt(): void
     {
         $this->createPage->create();
     }
@@ -87,9 +87,9 @@ final class ManagingProductAttributesContext implements Context
     /**
      * @When I delete value :value
      */
-    public function iDeleteValue(string $value): void
+    public function iDeleteValue(string $value, $localeCode = 'en_US'): void
     {
-        $this->updatePage->deleteAttributeValue($value);
+        $this->updatePage->deleteAttributeValue($value, $localeCode);
     }
 
     /**
@@ -114,7 +114,7 @@ final class ManagingProductAttributesContext implements Context
      * @Then the :type attribute :name should appear in the store
      * @Then the :type attribute :name should still be in the store
      */
-    public function theAttributeShouldAppearInTheStore($type, $name)
+    public function theAttributeShouldAppearInTheStore(string $type, string $name): void
     {
         $this->indexPage->open();
 
@@ -327,11 +327,19 @@ final class ManagingProductAttributesContext implements Context
     }
 
     /**
-     * @Then I should see the value :value
+     * @Then I should see the value :value in :localeCode locale
      */
-    public function iShouldSeeTheValue(string $value): void
+    public function iShouldSeeTheValue(string $value, string $localeCode): void
     {
-        Assert::true($this->updatePage->hasAttributeValue($value));
+        Assert::true($this->updatePage->hasAttributeValue($value, $localeCode));
+    }
+
+    /**
+     * @Then I should not see the value :value in :localeCode locale
+     */
+    public function iShouldNotSeeTheValue(string $value, string $localeCode): void
+    {
+        Assert::false($this->updatePage->hasAttributeValue($value, $localeCode));
     }
 
     /**

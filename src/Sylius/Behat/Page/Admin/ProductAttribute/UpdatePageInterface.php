@@ -23,11 +23,11 @@ interface UpdatePageInterface extends BaseUpdatePageInterface
 
     public function isTypeDisabled(): bool;
 
-    public function changeAttributeValue(string $oldValue, string $newValue): void;
+    public function changeAttributeValue(string $oldValue, string $newValue, string $localeCode): void;
 
-    public function hasAttributeValue(string $value): bool;
+    public function hasAttributeValue(string $value, string $localeCode): bool;
 
     public function addAttributeValue(string $value, string $localeCode): void;
 
-    public function deleteAttributeValue(string $value): void;
+    public function deleteAttributeValue(string $value, string $localeCode): void;
 }
