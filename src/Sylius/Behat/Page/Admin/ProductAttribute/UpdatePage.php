@@ -78,7 +78,6 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
             'choices' => '[data-test-choice-key="%key%"]',
             'code' => '[data-test-code]',
             'delete_button' => '[data-test-choice-removal="%key%"]',
-            'form' => 'form',
             'name' => '[data-test-name]',
             'type' => '[data-test-type]',
         ]);

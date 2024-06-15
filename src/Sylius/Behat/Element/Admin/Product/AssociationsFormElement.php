@@ -69,7 +69,6 @@ final class AssociationsFormElement extends BaseFormElement implements Associati
     {
         return [
             'associations' => '[name="sylius_admin_product[associations][%association%][]"]',
-            'form' => 'form',
             'side_navigation_tab' => '[data-test-side-navigation-tab="%name%"]',
         ];
     }

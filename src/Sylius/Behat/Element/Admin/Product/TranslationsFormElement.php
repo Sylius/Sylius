@@ -74,7 +74,6 @@ final class TranslationsFormElement extends BaseFormElement implements Translati
     protected function getDefinedElements(): array
     {
         return [
-            'form' => 'form',
             'generate_product_slug_button' => '[data-test-generate-product-slug-button="%locale_code%"]',
             'meta_description' => '[data-test-meta-description="%locale_code%"]',
             'meta_keywords' => '[data-test-meta-keywords="%locale_code%"]',
