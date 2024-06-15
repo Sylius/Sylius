@@ -1,0 +1,31 @@
+twig_hooks:
+    hooks:
+        'sylius_admin.product_attribute.create.content':
+            form:
+                component: 'sylius_admin:product_attribute:form'
+                props:
+                    form: '@=_context.form'
+                    type: '@=_context.resource.getType()'
+                    resource: '@=_context.resource'
+
+        'sylius_admin.product_attribute.create.content.form':
+            details:
+                template: '@SyliusAdmin/product_attribute/form/details.html.twig'
+            configuration:
+                template: '@SyliusAdmin/product_attribute/form/configuration.html.twig'
+            translations:
+                template: '@SyliusAdmin/product_attribute/form/translations.html.twig'
+
+        'sylius_admin.product_attribute.create.content.form.details':
+            code:
+                template: '@SyliusAdmin/product_attribute/form/details/code.html.twig'
+            type:
+                template: '@SyliusAdmin/product_attribute/form/details/type.html.twig'
+            position:
+                template: '@SyliusAdmin/product_attribute/form/details/position.html.twig'
+            translatable:
+                template: '@SyliusAdmin/product_attribute/form/details/translatable.html.twig'
+
+        'sylius_admin.product_attribute.create.content.form.translations':
+            name:
+                template: '@SyliusAdmin/product_attribute/form/translations/name.html.twig'
