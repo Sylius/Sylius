@@ -1,0 +1,13 @@
+{% extends '@SyliusAdmin/shared/form_theme.html.twig' %}
+
+{% block sylius_select_attribute_value_translations_row %}
+    {% import '@SyliusAdmin/shared/helper/translations.html.twig' as translations %}
+
+    {% set parts = form.vars.full_name|split('[') %}
+    {% set key = parts[3]|replace({']': ''}) %}
+
+    <div {{ sylius_test_html_attribute('choice-key', key) }}>
+        {{ translations.single_field(form, key) }}
+        {{ form_row(form.vars.button_delete, sylius_test_form_attribute('choice-removal', key)|sylius_merge_recursive({ label: 'Delete', attr: { class: 'mt-2 mb-4 btn btn-outline-danger' } })) }}
+    </div>
+{% endblock %}

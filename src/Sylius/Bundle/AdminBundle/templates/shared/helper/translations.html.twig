@@ -40,6 +40,25 @@
     </div>
 {% endmacro %}
 
+{% macro single_field(translationFields, key, options = {}) %}
+    {% from _self import accordion_header %}
+
+    {% set accordion_id = options. accordion_id|default('translations') %}
+    <div class="accordion" {{ sylius_test_html_attribute('accordion-key', key)}} id="{{ accordion_id }}">
+        {% for locale, translationForm in translationFields %}
+            <div class="accordion-item">
+                {{ accordion_header(locale, accordion_id, loop.first) }}
+                <div id="translation-{{ locale }}" class="accordion-collapse collapse {% if loop.first %}show{% endif %}" data-bs-parent="#{{ accordion_id }}">
+                    <div class="accordion-body">
+                        {%  set attributes = sylius_test_form_attribute('key', key)|sylius_merge_recursive(sylius_test_form_attribute('locale', locale)) %}
+                        {{ form_widget(translationForm, attributes) }}
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endmacro %}
+
 {% macro accordion_header(locale, accordion_id, is_first = false) %}
     <h2 class="accordion-header">
         <button
