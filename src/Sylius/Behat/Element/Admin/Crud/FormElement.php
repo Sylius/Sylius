@@ -34,6 +34,16 @@ class FormElement extends Element implements FormElementInterface
         return $validationMessage->getText();
     }
 
+    public function getValidationErrors(): string
+    {
+        $validationMessage = $this->getDocument()->find('css', '.sylius-validation-error, .alert.alert-danger');
+        if (null === $validationMessage) {
+            throw new ElementNotFoundException($this->getSession(), 'Validation message', 'css', '.sylius-validation-error, .alert.alert-danger');
+        }
+
+        return $validationMessage->getText();
+    }
+
     /**
      * @return array<string, string>
      */
