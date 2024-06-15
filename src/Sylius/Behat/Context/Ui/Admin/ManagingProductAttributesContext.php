@@ -21,7 +21,7 @@ use Sylius\Behat\Service\Resolver\CurrentPageResolverInterface;
 use Sylius\Component\Product\Model\ProductAttributeInterface;
 use Webmozart\Assert\Assert;
 
-final class ManagingProductAttributesContext implements Context
+final readonly class ManagingProductAttributesContext implements Context
 {
     public function __construct(
         private CreatePageInterface $createPage,
@@ -34,7 +34,7 @@ final class ManagingProductAttributesContext implements Context
     /**
      * @When I want to create a new :type product attribute
      */
-    public function iWantToCreateANewTextProductAttribute($type)
+    public function iWantToCreateANewTextProductAttribute(string $type): void
     {
         $this->createPage->open(['type' => $type]);
     }
@@ -43,7 +43,7 @@ final class ManagingProductAttributesContext implements Context
      * @When I specify its code as :code
      * @When I do not specify its code
      */
-    public function iSpecifyItsCodeAs($code = null)
+    public function iSpecifyItsCodeAs(string $code = null): void
     {
         $this->createPage->specifyCode($code ?? '');
     }
@@ -87,7 +87,7 @@ final class ManagingProductAttributesContext implements Context
     /**
      * @When I delete value :value
      */
-    public function iDeleteValue(string $value, $localeCode = 'en_US'): void
+    public function iDeleteValue(string $value, string $localeCode = 'en_US'): void
     {
         $this->updatePage->deleteAttributeValue($value, $localeCode);
     }
@@ -97,13 +97,13 @@ final class ManagingProductAttributesContext implements Context
      */
     public function iChangeItsValueTo(string $oldValue, string $newValue): void
     {
-        $this->updatePage->changeAttributeValue($oldValue, $newValue);
+        $this->updatePage->changeAttributeValue($oldValue, $newValue, 'en_US');
     }
 
     /**
      * @Then I should see the product attribute :name in the list
      */
-    public function iShouldSeeTheProductAttributeInTheList($name)
+    public function iShouldSeeTheProductAttributeInTheList(string $name): void
     {
         $this->indexPage->open();
 
@@ -127,24 +127,24 @@ final class ManagingProductAttributesContext implements Context
     /**
      * @When /^I want to edit (this product attribute)$/
      */
-    public function iWantToEditThisAttribute(ProductAttributeInterface $productAttribute)
+    public function iWantToEditThisAttribute(ProductAttributeInterface $productAttribute): void
     {
         $this->updatePage->open(['id' => $productAttribute->getId()]);
     }
 
     /**
-     * @When I change its name to :name in :language
+     * @When I change its name to :name in :localeCode
      */
-    public function iChangeItNameToIn($name, $language)
+    public function iChangeItNameToIn(string $name, string $localeCode): void
     {
-        $this->updatePage->changeName($name, $language);
+        $this->updatePage->changeName($name, $localeCode);
     }
 
     /**
      * @When I save my changes
      * @When I try to save my changes
      */
-    public function iSaveMyChanges()
+    public function iSaveMyChanges(): void
     {
         $this->updatePage->saveChanges();
     }
@@ -172,7 +172,7 @@ final class ManagingProductAttributesContext implements Context
     /**
      * @Then I should be notified that product attribute with this code already exists
      */
-    public function iShouldBeNotifiedThatProductAttributeWithThisCodeAlreadyExists()
+    public function iShouldBeNotifiedThatProductAttributeWithThisCodeAlreadyExists(): void
     {
         Assert::same($this->updatePage->getValidationMessage('code'), 'This code is already in use.');
     }
@@ -180,7 +180,7 @@ final class ManagingProductAttributesContext implements Context
     /**
      * @Then there should still be only one product attribute with code :code
      */
-    public function thereShouldStillBeOnlyOneProductAttributeWithCode($code)
+    public function thereShouldStillBeOnlyOneProductAttributeWithCode(string $code): void
     {
         $this->indexPage->open();
 
@@ -190,7 +190,7 @@ final class ManagingProductAttributesContext implements Context
     /**
      * @When I do not name it
      */
-    public function iDoNotNameIt()
+    public function iDoNotNameIt(): void
     {
         // Intentionally left blank to fulfill context expectation
     }
@@ -198,7 +198,7 @@ final class ManagingProductAttributesContext implements Context
     /**
      * @Then I should be notified that :element is required
      */
-    public function iShouldBeNotifiedThatIsRequired($element)
+    public function iShouldBeNotifiedThatIsRequired(string $element): void
     {
         $this->assertFieldValidationMessage($element, sprintf('Please enter attribute %s.', $element));
     }
@@ -206,7 +206,7 @@ final class ManagingProductAttributesContext implements Context
     /**
      * @Given the attribute with :elementName :elementValue should not appear in the store
      */
-    public function theAttributeWithCodeShouldNotAppearInTheStore($elementName, $elementValue)
+    public function theAttributeWithCodeShouldNotAppearInTheStore(string $elementName, string $elementValue): void
     {
         $this->indexPage->open();
 
@@ -214,18 +214,18 @@ final class ManagingProductAttributesContext implements Context
     }
 
     /**
-     * @When I remove its name from :language translation
+     * @When I remove its name from :localeCode translation
      */
-    public function iRemoveItsNameFromTranslation($language)
+    public function iRemoveItsNameFromTranslation(string $localeCode): void
     {
-        $this->updatePage->changeName('', $language);
+        $this->updatePage->changeName('', $localeCode);
     }
 
     /**
      * @When I browse product attributes
      * @When I want to see all product attributes in store
      */
-    public function iWantToSeeAllProductAttributesInStore()
+    public function iWantToSeeAllProductAttributesInStore(): void
     {
         $this->indexPage->open();
     }
@@ -292,7 +292,7 @@ final class ManagingProductAttributesContext implements Context
     /**
      * @When /^I(?:| try to) delete (this product attribute)$/
      */
-    public function iDeleteThisProductAttribute(ProductAttributeInterface $productAttribute)
+    public function iDeleteThisProductAttribute(ProductAttributeInterface $productAttribute): void
     {
         $this->indexPage->open();
         $this->indexPage->deleteResourceOnPage(['code' => $productAttribute->getCode(), 'name' => $productAttribute->getName()]);
@@ -301,7 +301,7 @@ final class ManagingProductAttributesContext implements Context
     /**
      * @Then /^(this product attribute) should no longer exist in the registry$/
      */
-    public function thisProductAttributeShouldNoLongerExistInTheRegistry(ProductAttributeInterface $productAttribute)
+    public function thisProductAttributeShouldNoLongerExistInTheRegistry(ProductAttributeInterface $productAttribute): void
     {
         Assert::false($this->indexPage->isSingleResourceOnPage(['code' => $productAttribute->getCode()]));
     }
@@ -309,7 +309,7 @@ final class ManagingProductAttributesContext implements Context
     /**
      * @Then the first product attribute on the list should have name :name
      */
-    public function theFirstProductAttributeOnTheListShouldHave($name)
+    public function theFirstProductAttributeOnTheListShouldHave(string $name): void
     {
         $names = $this->indexPage->getColumnFields('name');
 
@@ -319,7 +319,7 @@ final class ManagingProductAttributesContext implements Context
     /**
      * @Then the last product attribute on the list should have name :name
      */
-    public function theLastProductAttributeOnTheListShouldHave($name)
+    public function theLastProductAttributeOnTheListShouldHave(string $name): void
     {
         $names = $this->indexPage->getColumnFields('name');
 
@@ -349,7 +349,7 @@ final class ManagingProductAttributesContext implements Context
     {
         $this->iWantToEditThisAttribute($productAttribute);
 
-        Assert::true($this->updatePage->hasAttributeValue($value));
+        Assert::true($this->updatePage->hasAttributeValue($value, 'en_US'));
     }
 
     /**
@@ -399,12 +399,9 @@ final class ManagingProductAttributesContext implements Context
     {
         $this->iWantToEditThisAttribute($productAttribute);
 
-        Assert::false($this->updatePage->hasAttributeValue($value));
+        Assert::false($this->updatePage->hasAttributeValue($value, 'en_US'));
     }
 
-    /**
-     * @throws \InvalidArgumentException
-     */
     private function assertFieldValidationMessage(string $element, string $expectedMessage): void
     {
         /** @var CreatePageInterface|UpdatePageInterface $currentPage */
@@ -413,9 +410,6 @@ final class ManagingProductAttributesContext implements Context
         Assert::same($currentPage->getValidationMessage($element), $expectedMessage);
     }
 
-    /**
-     * @throws \InvalidArgumentException
-     */
     private function assertValidationMessage(string $expectedMessage): void
     {
         /** @var CreatePageInterface|UpdatePageInterface $currentPage */

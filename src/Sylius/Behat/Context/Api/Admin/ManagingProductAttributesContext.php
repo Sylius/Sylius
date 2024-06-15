@@ -22,7 +22,7 @@ use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Product\Model\ProductAttributeInterface;
 use Webmozart\Assert\Assert;
 
-final class ManagingProductAttributesContext implements Context
+final readonly class ManagingProductAttributesContext implements Context
 {
     public function __construct(
         private ApiClientInterface $client,
