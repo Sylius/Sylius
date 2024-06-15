@@ -22,7 +22,7 @@ interface CreatePageInterface extends BaseCreatePageInterface
 
     public function nameIt(string $name, string $language): void;
 
-    public function disableTranslation(): void;
+    public function disableTranslatability(): void;
 
     public function isTypeDisabled(): bool;
 

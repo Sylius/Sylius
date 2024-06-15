@@ -16,11 +16,12 @@ namespace Sylius\Behat\Page\Admin\ProductAttribute;
 use Behat\Mink\Element\NodeElement;
 use Sylius\Behat\Behaviour\ChecksCodeImmutability;
 use Sylius\Behat\Page\Admin\Crud\UpdatePage as BaseUpdatePage;
-use Webmozart\Assert\Assert;
 
 class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
 {
     use ChecksCodeImmutability;
+
+    private ?int $choiceListIndex = null;
 
     public function changeName(string $name, string $language): void
     {
@@ -37,62 +38,82 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
         return $this->getElement('code');
     }
 
-    public function changeAttributeValue(string $oldValue, string $newValue): void
+    public function changeAttributeValue(string $oldValue, string $newValue, string $localeCode = 'en_US'): void
     {
-        $this->getElement('attribute_choice_list_element', ['%value%' => $oldValue])->setValue($newValue);
+        $this->getElement('choice_direct_input', ['%value%' => $oldValue, '%locale_code%' => $localeCode])->setValue($newValue);
     }
 
-    public function hasAttributeValue(string $value): bool
+    public function hasAttributeValue(string $value, string $localeCode = 'en_US'): bool
     {
-        return $this->hasElement('attribute_choice_list_element', ['%value%' => $value]);
+        return $this->hasElement('choice_direct_input', ['%value%' => $value, '%locale_code%' => $localeCode]);
     }
 
     public function addAttributeValue(string $value, string $localeCode): void
     {
-        $this->getDocument()->clickLink('Add');
-        $this
-            ->getLastAttributeChoiceElement()
-            ->find('css', 'div[data-locale="' . $localeCode . '"] input')
-            ->setValue($value)
-        ;
+        $this->addEmptyChoice();
+        $this->waitForFormUpdate();
+        $lastChoice = $this->getLastChoiceElement();
+        $lastChoice->find('css', 'input[data-test-locale="' . $localeCode . '"]')->setValue($value);
+
+        ++$this->choiceListIndex;
     }
 
-    public function deleteAttributeValue(string $value): void
+    public function deleteAttributeValue(string $value, string $localeCode): void
     {
-        $attributeChoiceElement = $this
-            ->getElement('attribute_choice_list_element', ['%value%' => $value])
-            ->getParent()->getParent()->getParent()->getParent()
-        ;
-        $attributeChoiceElement->clickLink('Delete');
+        if (null === $this->choiceListIndex) {
+            $this->choiceListIndex = $this->getChoicesCount();
+        }
+
+        $input = $this->getElement('choice_direct_input', ['%value%' => $value, '%locale_code%' => $localeCode]);
+        $this->getElement('delete_button', ['%key%' => $input->getAttribute('data-test-key')])->click();
+        $this->waitForFormUpdate();
     }
 
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
-            'attribute_choice_list_element' => 'input[value="%value%"]',
-            'attribute_choices' => '#sylius_admin_product_attribute_configuration_choices',
-            'code' => '#sylius_admin_product_attribute_code',
-            'type' => '#sylius_admin_product_attribute_type',
-            'name' => '#sylius_admin_product_attribute_translations_en_US_name',
+            'add_button' => '#sylius_admin_product_attribute_configuration_choices_add',
+            'choice' => '[data-test-choice-key="%key%"] input[data-test-locale="%locale_code%"]',
+            'choice_direct_input' => 'input[value="%value%"][data-test-locale="%locale_code%"]',
+            'choices' => '[data-test-choice-key="%key%"]',
+            'code' => '[data-test-code]',
+            'delete_button' => '[data-test-choice-removal="%key%"]',
+            'form' => 'form',
+            'name' => '[data-test-name]',
+            'type' => '[data-test-type]',
         ]);
     }
 
-    /**
-     * @return NodeElement[]
-     */
-    private function getAttributeChoiceElements(): array
+    private function getChoicesCount(): int
     {
-        $attributeChoices = $this->getElement('attribute_choices');
-
-        return $attributeChoices->findAll('css', 'div[data-form-collection="item"]');
+        return count($this->getDocument()->findAll('css', '[data-test-choices]'));
     }
 
-    private function getLastAttributeChoiceElement(): NodeElement
+    private function getLastChoiceElement(): NodeElement
     {
-        $elements = $this->getAttributeChoiceElements();
+        $choices = $this->getDocument()->findAll('css', '[data-test-choice-key]');
 
-        Assert::notEmpty($elements);
+        return end($choices);
+    }
 
-        return end($elements);
+    private function getAttributeValues(): array
+    {
+        $attributeChoices = $this->getChoicesCount();
+        $values = [];
+
+        foreach ($attributeChoices as $attributeChoice) {
+            $values[] = $attributeChoice->find('css', 'input')->getValue();
+        }
+
+        return $values;
+    }
+
+    private function addEmptyChoice(): void
+    {
+        if (null === $this->choiceListIndex) {
+            $this->choiceListIndex = $this->getChoicesCount();
+        }
+
+        $this->getElement('add_button')->click();
     }
 }
