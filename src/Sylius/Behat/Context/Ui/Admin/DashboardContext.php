@@ -91,14 +91,6 @@ final class DashboardContext implements Context
     }
 
     /**
-     * @When I search for product :product via the menu
-     */
-    public function iSearchForProductViaTheMenu(ProductInterface $product): void
-    {
-        $this->dashboardPage->searchForProductViaSidebar($product);
-    }
-
-    /**
      * @When I log out
      */
     public function iLogOut(): void

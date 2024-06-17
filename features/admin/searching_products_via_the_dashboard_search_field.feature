@@ -15,10 +15,3 @@ Feature: Searching products via the search field
         And I search for product "Onion" via the navbar
         Then I should see a single product in the list
         And I should see a product with name "Onion"
-
-    @ui @no-api
-    Scenario: Searching for a product via the menu search field
-        When I open administration dashboard
-        And I search for product "Onion" via the menu
-        Then I should see a single product in the list
-        And I should see a product with name "Onion"
