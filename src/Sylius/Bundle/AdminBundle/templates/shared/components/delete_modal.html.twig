@@ -1,0 +1,21 @@
+{% extends '@SyliusAdmin/shared/components/confirmation_modal.html.twig' %}
+{% import '@SyliusAdmin/shared/helper/button.html.twig' as button %}
+
+{% props id = null, path = null, label = 'sylius.ui.delete', icon = 'trash-x', disabled = false, form_attr = null, type = 'delete' %}
+{% set modal_id = 'modal-delete-' ~ id %}
+
+{% block trigger %}
+    <div data-bs-toggle="tooltip" data-bs-title="{{ label|trans }}">
+        {{ button.default({icon: icon, icon_class: 'icon icon-tabler text-danger', icon_only: true, disabled: disabled, attr: 'data-bs-toggle=modal data-bs-target=#' ~ modal_id }) }}
+    </div>
+{% endblock %}
+
+{% block footer %}
+    <form action="{{ path }}" method="post" {{ form_attr }}>
+        <input type="hidden" name="_method" value="DELETE">
+        <input type="hidden" name="_csrf_token" value="{{ csrf_token(id) }}" />
+
+        {{ button.default({ text: 'sylius.ui.cancel'|trans, attr: 'data-bs-dismiss=modal' }) }}
+        {{ button.default({ text: label|trans, type: 'submit', class: 'btn-danger', attr: sylius_test_html_attribute('confirm-button') }) }}
+    </form>
+{% endblock %}

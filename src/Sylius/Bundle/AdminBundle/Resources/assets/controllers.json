@@ -8,7 +8,7 @@
         "enabled": true,
         "autoimport": {
           "tom-select/dist/css/tom-select.default.css": false,
-          "tom-select/dist/css/tom-select.bootstrap5.css": true
+          "tom-select/dist/css/tom-select.bootstrap5.css": false
         }
       }
     }

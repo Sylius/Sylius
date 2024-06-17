@@ -98,7 +98,7 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
         $deletedRow = $tableAccessor->getRowWithFields($table, $parameters);
         $actionButtons = $tableAccessor->getFieldFromRow($table, $deletedRow, 'actions');
 
-        $actionButtons->pressButton('delete');
+        $actionButtons->find('css', '[data-test-modal="delete"] [data-test-confirm-button]')->press();
     }
 
     public function getActionsForResource(array $parameters): NodeElement
@@ -132,7 +132,7 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
     public function bulkDelete(): void
     {
         $this->getElement('bulk_actions')->pressButton('Delete');
-        $this->getElement('confirmation_button')->click();
+        $this->getElement('bulk_delete_confirm_button')->click();
     }
 
     public function sort(string $order): void
@@ -189,7 +189,7 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
     {
         return array_merge(parent::getDefinedElements(), [
             'bulk_actions' => '.sylius-grid-nav__bulk',
-            'confirmation_button' => '[data-confirm-btn-true]',
+            'bulk_delete_confirm_button' => '[data-test-modal="bulk-delete"] [data-test-confirm-button]',
             'enabled_filter' => '#criteria_enabled',
             'filter' => '[data-test-filter]',
             'filters_form' => '[data-test-filters-form]',
