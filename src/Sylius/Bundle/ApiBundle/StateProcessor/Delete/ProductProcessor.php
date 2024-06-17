@@ -24,7 +24,6 @@ use Webmozart\Assert\Assert;
 final readonly class ProductProcessor implements ProcessorInterface
 {
     public function __construct(
-        private ProcessorInterface $persistProcessor,
         private ProcessorInterface $removeProcessor,
     ) {
     }
@@ -36,14 +35,15 @@ final readonly class ProductProcessor implements ProcessorInterface
     {
         Assert::isInstanceOf($data, ProductInterface::class);
 
-        if ($operation instanceof DeleteOperationInterface) {
-            try {
-                return $this->removeProcessor->process($data, $operation, $uriVariables, $context);
-            } catch (ForeignKeyConstraintViolationException) {
-                throw new ProductCannotBeRemoved();
-            }
+        if (!$operation instanceof DeleteOperationInterface) {
+            return;
         }
+        Assert::isInstanceOf($operation, DeleteOperationInterface::class);
 
-        return $this->persistProcessor->process($data, $operation, $uriVariables, $context);
+        try {
+            return $this->removeProcessor->process($data, $operation, $uriVariables, $context);
+        } catch (ForeignKeyConstraintViolationException) {
+            throw new ProductCannotBeRemoved();
+        }
     }
 }

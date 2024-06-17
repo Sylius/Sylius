@@ -25,22 +25,12 @@ final class ProductProcessorSpec extends ObjectBehavior
 {
     function let(ProcessorInterface $persistProcessor, ProcessorInterface $removeProcessor): void
     {
-        $this->beConstructedWith($persistProcessor, $removeProcessor);
+        $this->beConstructedWith($removeProcessor);
     }
 
     function it_is_a_processor_interface(): void
     {
         $this->shouldImplement(ProcessorInterface::class);
-    }
-
-    public function it_processes_persist_operation(
-        ProcessorInterface $persistProcessor,
-        Operation $operation,
-        ProductInterface $product,
-    ) {
-        $persistProcessor->process($product, $operation, [], [])->willReturn($product);
-
-        $this->process($product, $operation, [], [])->shouldReturn($product);
     }
 
     public function it_processes_remove_operation(
