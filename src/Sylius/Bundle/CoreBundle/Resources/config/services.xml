@@ -156,6 +156,7 @@
 
         <service id="sylius.unique_id_based_order_token_assigner" class="Sylius\Component\Core\TokenAssigner\UniqueIdBasedOrderTokenAssigner">
             <argument type="service" id="sylius.random_generator" />
+            <argument>%sylius_core.order_token_length%</argument>
         </service>
         <service id="Sylius\Component\Core\TokenAssigner\OrderTokenAssignerInterface" alias="sylius.unique_id_based_order_token_assigner" />
 
