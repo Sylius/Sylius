@@ -34,7 +34,7 @@ class NewOrdersComponent
     /**
      * @return array<OrderInterface>
      */
-    #[ExposeInTemplate('new_orders')]
+    #[ExposeInTemplate(name: 'new_orders')]
     public function getNewOrders(): array
     {
         return $this->orderRepository->findLatest($this->limit);

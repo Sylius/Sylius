@@ -3,8 +3,8 @@
         name="product_attributes"
         data-model="selectedAttributeCodes"
         {{ stimulus_controller('product-attribute-autocomplete', {
-            url: path('sylius_admin_entity_autocomplete', { alias: 'sylius_admin_product_attribute', 'extra_options': extraOptions }),
-            selectedAttributeCodes: selectedAttributeCodes|join(','),
+            url: path('sylius_admin_entity_autocomplete', { alias: 'sylius_admin_product_attribute', 'extra_options': extra_options }),
+            selectedAttributeCodes: selected_attribute_codes|join(','),
         }) }}
     />
 </div>

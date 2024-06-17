@@ -20,7 +20,7 @@ class NotificationsComponent
     /**
      * @return array<string, mixed>
      */
-    #[ExposeInTemplate]
+    #[ExposeInTemplate(name: 'notifications')]
     public function getNotifications(): array
     {
         return [];

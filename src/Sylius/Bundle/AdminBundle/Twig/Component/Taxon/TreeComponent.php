@@ -41,7 +41,7 @@ class TreeComponent
     /**
      * @return array<TaxonInterface>
      */
-    #[ExposeInTemplate]
+    #[ExposeInTemplate(name: 'root_nodes')]
     public function getRootNodes(): array
     {
         return $this->taxonRepository->findHydratedRootNodes();

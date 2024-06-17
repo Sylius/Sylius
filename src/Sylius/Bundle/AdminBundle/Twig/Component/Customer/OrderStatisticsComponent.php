@@ -44,7 +44,7 @@ class OrderStatisticsComponent
     /**
      * @return PerChannelCustomerStatistics[]
      */
-    #[ExposeInTemplate]
+    #[ExposeInTemplate(name: 'statistics')]
     public function getStatistics(): array
     {
         $customer = $this->customerRepository->find($this->customerId);
