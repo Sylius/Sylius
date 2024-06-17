@@ -36,6 +36,7 @@
             <argument type="service" id="sylius.manager.order" />
             <argument type="service" id="sylius.random_generator" />
             <argument type="service" id="sylius.repository.customer" />
+            <argument>%sylius_core.order_token_length%</argument>
             <tag name="messenger.message_handler" bus="sylius.command_bus" />
             <tag name="messenger.message_handler" bus="sylius_default.bus"/>
         </service>

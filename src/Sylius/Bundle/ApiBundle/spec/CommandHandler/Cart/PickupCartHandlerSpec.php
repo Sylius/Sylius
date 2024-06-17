@@ -31,6 +31,8 @@ use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 
 final class PickupCartHandlerSpec extends ObjectBehavior
 {
+    private const TOKEN_LENGTH = 20;
+
     function let(
         OrderFactoryInterface $cartFactory,
         OrderRepositoryInterface $cartRepository,
@@ -46,6 +48,7 @@ final class PickupCartHandlerSpec extends ObjectBehavior
             $orderManager,
             $generator,
             $customerRepository,
+            self::TOKEN_LENGTH,
         );
     }
 
@@ -77,7 +80,7 @@ final class PickupCartHandlerSpec extends ObjectBehavior
 
         $cartRepository->findLatestNotEmptyCartByChannelAndCustomer($channel, $customer)->willReturn(null);
 
-        $generator->generateUriSafeString(10)->willReturn('urisafestr');
+        $generator->generateUriSafeString(self::TOKEN_LENGTH)->willReturn('urisafestr');
         $locale->getCode()->willReturn('en_US');
 
         $channel->getLocales()->willReturn(new ArrayCollection([$locale->getWrappedObject()]));
@@ -111,7 +114,7 @@ final class PickupCartHandlerSpec extends ObjectBehavior
 
         $cartRepository->findLatestNotEmptyCartByChannelAndCustomer($channel, $customer)->willReturn(null);
 
-        $generator->generateUriSafeString(10)->willReturn('urisafestr');
+        $generator->generateUriSafeString(self::TOKEN_LENGTH)->willReturn('urisafestr');
         $locale->getCode()->willReturn('en_US');
 
         $channel->getLocales()->willReturn(new ArrayCollection([$locale->getWrappedObject()]));
@@ -165,7 +168,7 @@ final class PickupCartHandlerSpec extends ObjectBehavior
 
         $customerRepository->findOneBy(['email' => 'sample@email.com'])->willReturn($customer);
 
-        $generator->generateUriSafeString(10)->willReturn('urisafestr');
+        $generator->generateUriSafeString(self::TOKEN_LENGTH)->willReturn('urisafestr');
 
         $cartRepository->findLatestNotEmptyCartByChannelAndCustomer($channel, $customer)->willReturn($cart);
         $orderManager->persist($cart);
@@ -191,7 +194,7 @@ final class PickupCartHandlerSpec extends ObjectBehavior
 
         $cartRepository->findLatestNotEmptyCartByChannelAndCustomer($channel, Argument::any())->shouldNotBeCalled(null);
 
-        $generator->generateUriSafeString(10)->willReturn('urisafestr');
+        $generator->generateUriSafeString(self::TOKEN_LENGTH)->willReturn('urisafestr');
         $locale->getCode()->willReturn('en_US');
 
         $channel->getLocales()->willReturn(new ArrayCollection([$locale->getWrappedObject()]));
@@ -223,7 +226,7 @@ final class PickupCartHandlerSpec extends ObjectBehavior
 
         $cartRepository->findLatestNotEmptyCartByChannelAndCustomer($channel, Argument::any())->shouldNotBeCalled(null);
 
-        $generator->generateUriSafeString(10)->willReturn('urisafestr');
+        $generator->generateUriSafeString(self::TOKEN_LENGTH)->willReturn('urisafestr');
         $locale->getCode()->willReturn('en_US');
 
         $cartFactory->createNewCart($channel, null, 'en_US', 'urisafestr')->willReturn($cart);
@@ -253,7 +256,7 @@ final class PickupCartHandlerSpec extends ObjectBehavior
 
         $cartRepository->findLatestNotEmptyCartByChannelAndCustomer($channel, Argument::any())->shouldNotBeCalled(null);
 
-        $generator->generateUriSafeString(10)->willReturn('urisafestr');
+        $generator->generateUriSafeString(self::TOKEN_LENGTH)->willReturn('urisafestr');
 
         $cartFactory->createNewCart($channel, null, 'en_US', 'urisafestr')->willReturn($cart);
 
