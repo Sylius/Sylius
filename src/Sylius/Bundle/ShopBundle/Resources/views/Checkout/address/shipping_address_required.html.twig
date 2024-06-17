@@ -9,10 +9,10 @@
 
     {% include '@SyliusShop/Shared/form/address.html.twig' with {'form': form.shippingAddress, 'order': order, 'type': 'shipping'} %}
 
-    {{ form_row(form.differentBillingAddress, sylius_test_form_attribute('different-shipping-address')|sylius_merge_recursive({'attr': {'data-toggles': 'sylius-billing-address'}, 'label_attr': {'data-test-different-billing-address-label': ''}} )) }}
+    {{ form_row(form.differentBillingAddress, sylius_test_form_attribute('different-shipping-address')|sylius_merge_recursive({'attr': {'data-bs-toggle': 'collapse', 'data-bs-target': '[data-js-sylius-checkout-billing-address]'}, 'label_attr': {'data-test-different-billing-address-label': ''}} )) }}
 </div>
 
-<div class="mb-5" {{ sylius_test_html_attribute('billing-address') }}>
+<div class="mb-5 collapse" data-js-sylius-checkout-billing-address {{ sylius_test_html_attribute('billing-address') }}>
     {% include '@SyliusShop/Checkout/address/address_book_select.html.twig' %}
 
     <div class="h4 mb-5">{{ 'sylius.ui.billing_address'|trans }}</div>
