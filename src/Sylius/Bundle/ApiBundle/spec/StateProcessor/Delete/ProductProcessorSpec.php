@@ -55,6 +55,13 @@ final class ProductProcessorSpec extends ObjectBehavior
         $this->shouldThrow(ProductCannotBeRemoved::class)->during('process', [$product, $operation, [], []]);
     }
 
+    public function it_throws_exception_if_operation_is_not_delete(
+        Operation $operation,
+        ProductInterface $product,
+    ) {
+        $this->shouldThrow(\InvalidArgumentException::class)->during('process', [$product, $operation, [], []]);
+    }
+
     public function it_throws_exception_if_data_is_not_product_interface(
         Operation $operation,
         \stdClass $nonProduct,

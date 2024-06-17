@@ -34,10 +34,6 @@ final readonly class ProductProcessor implements ProcessorInterface
     public function process(mixed $data, Operation $operation, array $uriVariables = [], array $context = [])
     {
         Assert::isInstanceOf($data, ProductInterface::class);
-
-        if (!$operation instanceof DeleteOperationInterface) {
-            return;
-        }
         Assert::isInstanceOf($operation, DeleteOperationInterface::class);
 
         try {
