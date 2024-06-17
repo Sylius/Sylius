@@ -67,7 +67,7 @@
             <uriVariable parameterName="code" fromClass="Sylius\Component\Core\Model\Product" fromProperty="attributes"/>
         </uriVariables>
         <operations>
-            <operation class="ApiPlatform\Metadata\GetCollection" provider="sylius_api.state_provider.shop.product_attributes">
+            <operation class="ApiPlatform\Metadata\GetCollection" provider="sylius_api.state_provider.product_attributes">
                 <normalizationContext>
                     <values>
                         <value name="groups">

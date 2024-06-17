@@ -42,7 +42,7 @@
                     </values>
                 </normalizationContext>
             </operation>
-            <operation class="ApiPlatform\Metadata\Put" uriTemplate="admin/administrators/{id}.{_format}">
+            <operation class="ApiPlatform\Metadata\Put" uriTemplate="admin/administrators/{id}">
                 <denormalizationContext>
                     <values>
                         <value name="groups">
