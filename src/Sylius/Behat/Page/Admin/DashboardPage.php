@@ -127,12 +127,9 @@ class DashboardPage extends SymfonyPage implements DashboardPageInterface
 
     public function searchForProductViaNavbar(ProductInterface $productName): void
     {
-        $this->searchForProductIn($productName->getName(), 'product_navbar_search');
-    }
-
-    public function searchForProductViaSidebar(ProductInterface $productName): void
-    {
-        $this->searchForProductIn($productName->getName(), 'product_sidebar_search');
+        $form = $this->getElement('product_navbar_search');
+        $form->find('css', 'input')->setValue($productName);
+        $form->find('css', 'button')->click();
     }
 
     public function getRouteName(): string
@@ -157,17 +154,9 @@ class DashboardPage extends SymfonyPage implements DashboardPageInterface
             'new_orders' => '#new-orders',
             'order_list' => '#orders',
             'product_navbar_search' => '[data-test-navbar-product-search]',
-            'product_sidebar_search' => '[data-test-sidebar-product-search]',
             'sub_header' => '.ui.header .content .sub.header',
             'total_sales' => '#total-sales',
             'year_split_by_months_statistics_button' => 'button[data-stats-button="year"]',
         ]);
-    }
-
-    private function searchForProductIn(string $productName, string $searchForm): void
-    {
-        $form = $this->getElement($searchForm);
-        $form->find('css', 'input')->setValue($productName);
-        $form->find('css', 'button')->click();
     }
 }

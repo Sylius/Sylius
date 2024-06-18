@@ -20,13 +20,13 @@ Feature: Sorting orders by their number
         And the customer chose "Free" shipping method to "United States" with "Offline" payment
         And I am logged in as an administrator
 
-    @todo @ui @api
+    @api @ui
     Scenario: Orders are sorted by descending numbers by default
         When I browse orders
         Then I should see an order with "#000000001" number
         But the first order should have number "#000000003"
 
-    @todo @ui @api
+    @api @ui
     Scenario: Changing the number sorting order
         Given I am browsing orders
         When I switch the way orders are sorted by number

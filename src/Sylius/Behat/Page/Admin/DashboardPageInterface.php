@@ -47,6 +47,4 @@ interface DashboardPageInterface extends SymfonyPageInterface
     public function chooseNextPeriod(): void;
 
     public function searchForProductViaNavbar(ProductInterface $productName): void;
-
-    public function searchForProductViaSidebar(ProductInterface $productName): void;
 }

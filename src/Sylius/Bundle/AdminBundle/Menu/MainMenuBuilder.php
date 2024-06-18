@@ -34,7 +34,6 @@ final readonly class MainMenuBuilder
     {
         $menu = $this->factory->createItem('root');
 
-        $this->addSearchForm($menu);
         $this->addDashboardItem($menu);
         $this->addCatalogSubMenu($menu);
         $this->addSalesSubMenu($menu);
@@ -46,14 +45,6 @@ final readonly class MainMenuBuilder
         $this->eventDispatcher->dispatch(new MenuBuilderEvent($this->factory, $menu), self::EVENT_NAME);
 
         return $menu;
-    }
-
-    private function addSearchForm(ItemInterface $menu): void
-    {
-        $menu
-            ->addChild('search')
-            ->setExtra('template', '@SyliusAdmin/shared/crud/common/sidebar/search.html.twig')
-        ;
     }
 
     private function addDashboardItem(ItemInterface $menu): void
