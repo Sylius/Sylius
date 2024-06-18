@@ -14,7 +14,7 @@
 
                 {% if lastPayment != false %}
                     {%  if lastPayment.method.instructions is not null %}
-                        <div class="d-flex" {{ sylius_test_html_attribute('payment-method-instructions') }}>
+                        <div {{ sylius_test_html_attribute('payment-method-instructions') }}>
                             {{ lastPayment.method.instructions }}
                         </div>
                     {% endif %}
