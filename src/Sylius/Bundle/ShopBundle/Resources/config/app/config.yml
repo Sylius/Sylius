@@ -259,13 +259,6 @@ sylius_ui:
                     template: "@SyliusShop/Product/index/main/footer.html.twig"
                     priority: 10
 
-        sylius.shop.order.thank_you.after_message:
-            blocks:
-                legacy:
-                    template: "@SyliusUi/Block/_legacySonataEvent.html.twig"
-                    context:
-                        event: sylius.shop.order.thank_you.after_message
-
         sylius.shop.checkout.header:
             blocks:
                 header:
@@ -371,7 +364,7 @@ sylius_ui:
                         event: sylius.shop.layout.after_body
 
         sylius.shop.account.order.index.content:
-            blocks:            
+            blocks:
                 content:
                     template: "@SyliusShop/Account/order/index/content.html.twig"
                     priority: 10
