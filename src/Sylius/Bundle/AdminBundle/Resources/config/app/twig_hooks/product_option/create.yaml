@@ -4,7 +4,7 @@ twig_hooks:
             form:
                 component: 'sylius_admin:product_option:form'
                 props:
-                    productOption: '@=_context.resource'
+                    resource: '@=_context.resource'
                     form: '@=_context.form'
 
         'sylius_admin.product_option.create.content.form':
