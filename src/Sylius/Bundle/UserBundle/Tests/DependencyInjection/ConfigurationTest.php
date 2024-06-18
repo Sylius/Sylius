@@ -33,7 +33,7 @@ final class ConfigurationTest extends TestCase
                         'resetting' => [
                             'token' => [
                                 'ttl' => 'P1D',
-                                'length' => 16,
+                                'length' => 64,
                                 'field_name' => 'passwordResetToken',
                             ],
                             'pin' => [
