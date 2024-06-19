@@ -4,7 +4,7 @@
 
 <div class="container-xl" {{ attributes }}>
     {{ form_start(form, {'attr': {'novalidate': 'novalidate', 'id': form.vars.id}}) }}
-    <div class="row">
+    <div class="grid gap-4">
         {% if hookable_metadata.configuration.method is defined %}
             <input type="hidden" name="_method" value="{{ hookable_metadata.configuration.method }}" />
         {% endif %}
@@ -12,14 +12,6 @@
         {{ form_widget(form._token) }}
 
         {% hook 'form' with { form } %}
-    </div>
-    <div class="row">
-        <div class="col-6">
-            {% hook 'form#left' with { form } %}
-        </div>
-        <div class="col-6">
-            {% hook 'form#right' with { form } %}
-        </div>
     </div>
     {{ form_end(form, {render_rest: hookable_metadata.configuration.render_rest|default(false)}) }}
 </div>

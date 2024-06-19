@@ -11,10 +11,10 @@ twig_hooks:
         'sylius_admin.product_attribute.create.content.form':
             details:
                 template: '@SyliusAdmin/product_attribute/form/details.html.twig'
-            configuration:
-                template: '@SyliusAdmin/product_attribute/form/configuration.html.twig'
             translations:
                 template: '@SyliusAdmin/product_attribute/form/translations.html.twig'
+            configuration:
+                template: '@SyliusAdmin/product_attribute/form/configuration.html.twig'
 
         'sylius_admin.product_attribute.create.content.form.details':
             code:
