@@ -29,3 +29,13 @@ twig_hooks:
         'sylius_admin.product_attribute.create.content.form.translations':
             name:
                 template: '@SyliusAdmin/product_attribute/form/translations/name.html.twig'
+
+        'sylius_admin.product_attribute.create.content.form.configuration.select':
+            min_entries:
+                template: '@SyliusAdmin/product_attribute/form/configuration/select/min_entries.html.twig'
+            max_entries:
+                template: '@SyliusAdmin/product_attribute/form/configuration/select/max_entries.html.twig'
+            multiple:
+                template: '@SyliusAdmin/product_attribute/form/configuration/select/multiple.html.twig'
+            choices:
+                template: '@SyliusAdmin/product_attribute/form/configuration/select/choices.html.twig'
