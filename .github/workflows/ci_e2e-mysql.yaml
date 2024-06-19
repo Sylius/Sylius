@@ -133,7 +133,7 @@ jobs:
                     database_version: ${{ matrix.mysql }}
                     php_version: ${{ matrix.php }}
                     symfony_version: ${{ matrix.symfony }}
-                    chrome_version: 1315742
+                    chrome_version: stable
 
             -   name: Install Behat driver
                 run: vendor/bin/bdi detect drivers
