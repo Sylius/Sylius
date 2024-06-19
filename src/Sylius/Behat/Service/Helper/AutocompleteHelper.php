@@ -111,7 +111,7 @@ final class AutocompleteHelper implements AutocompleteHelperInterface
         $this->removeItemByValue($driver, $selector, $value);
     }
 
-    private function addItemByValue(DriverInterface $driver, string $selector, string|int $value): void
+    private function addItemByValue(DriverInterface $driver, string $selector, int|string $value): void
     {
         $driver->executeScript(<<<SCRIPT
             (function () {
@@ -122,7 +122,7 @@ final class AutocompleteHelper implements AutocompleteHelperInterface
         SCRIPT);
     }
 
-    private function removeItemByValue(DriverInterface $driver, string $selector, string|int $value): void
+    private function removeItemByValue(DriverInterface $driver, string $selector, int|string $value): void
     {
         $driver->executeScript(<<<SCRIPT
             (function () {
@@ -133,7 +133,7 @@ final class AutocompleteHelper implements AutocompleteHelperInterface
         SCRIPT);
     }
 
-    private function getValueByPhrase(array $foundItems, string $phrase): string|int
+    private function getValueByPhrase(array $foundItems, string $phrase): int|string
     {
         foreach ($foundItems as $foundName => $foundValue) {
             if (str_contains($foundName, $phrase)) {
