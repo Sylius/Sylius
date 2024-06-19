@@ -30,6 +30,20 @@ twig_hooks:
             name:
                 template: '@SyliusAdmin/product_attribute/form/translations/name.html.twig'
 
+        'sylius_admin.product_attribute.create.content.form.configuration.text':
+            min_length:
+                template: '@SyliusAdmin/product_attribute/form/configuration/text/min_length.html.twig'    
+            max_length:
+                template: '@SyliusAdmin/product_attribute/form/configuration/text/max_length.html.twig'
+
+        'sylius_admin.product_attribute.create.content.form.configuration.datetime':
+            format:
+                template: '@SyliusAdmin/product_attribute/form/configuration/datetime/format.html.twig'
+
+        'sylius_admin.product_attribute.create.content.form.configuration.date':
+            format:
+                template: '@SyliusAdmin/product_attribute/form/configuration/date/format.html.twig'
+
         'sylius_admin.product_attribute.create.content.form.configuration.select':
             min_entries:
                 template: '@SyliusAdmin/product_attribute/form/configuration/select/min_entries.html.twig'
