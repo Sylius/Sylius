@@ -34,10 +34,14 @@ default:
                     chrome:
                         api_url: http://127.0.0.1:9222
                         validate_certificate: false
+                        socket_timeout: 30
+                        dom_wait_timeout: 30
                 chrome_headless_second_session:
                     chrome:
                         api_url: http://127.0.0.1:9222
                         validate_certificate: false
+                        socket_timeout: 30
+                        dom_wait_timeout: 30
                 panther:
                     panther:
                         manager_options:
