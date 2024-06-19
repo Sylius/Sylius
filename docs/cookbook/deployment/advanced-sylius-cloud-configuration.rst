@@ -123,7 +123,7 @@ So the crons section may look like below:
             cmd: "php bin/console sylius:promotion:generate-coupons"
         remove-expired-carts:
             spec: "0 2 * * *"
-            cmd: "php bin/console sylius:cancel-unpaid-orders"
+            cmd: "php bin/console sylius:remove-expired-carts"
 
 
 The frequency of running these commands depends on your business requirements.
