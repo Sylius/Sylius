@@ -289,7 +289,7 @@ sylius_ui:
                     template: "@SyliusShop/Layout/Header/_logo.html.twig"
                     priority: 30
                 security_widget:
-                    template: "@SyliusShop/Layout/Header/_securityWidget.html.twig"
+                    template: "@SyliusShop/Layout/Header/security_widget.html.twig"
                     priority: 20
                 cart:
                     template: "@SyliusShop/Layout/Header/_cart.html.twig"
@@ -371,7 +371,7 @@ sylius_ui:
                         event: sylius.shop.layout.after_body
 
         sylius.shop.account.order.index.content:
-            blocks:            
+            blocks:
                 content:
                     template: "@SyliusShop/Account/order/index/content.html.twig"
                     priority: 10
