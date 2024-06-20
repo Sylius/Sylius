@@ -1,0 +1,20 @@
+{% macro default(back_text, back_link, can_submit = true) %}
+    {% from '@SyliusShop/Shared/icon.html.twig' import icon as icon %}
+
+    <div class="d-flex justify-content-between">
+        <a class="btn btn-light btn-icon" href="{{ back_link }}">
+            {{ icon('chevron-left') }} {{ back_text }}
+        </a>
+        <button type="submit" class="btn btn-primary btn-icon{% if not can_submit%} disabled{% endif %}"{% if not can_submit %} disabled{% endif %} {{ sylius_test_html_attribute('next-step') }}>
+            {{ 'sylius.ui.next'|trans }} {{ icon('chevron-right') }}
+        </button>
+    </div>
+{% endmacro %}
+
+{% macro complete(confirm_text) %}
+    <div class="text-center">
+        <button type="submit" class="btn btn-primary" {{ sylius_test_html_attribute('confirmation-button') }}>
+            {{ confirm_text }}
+        </button>
+    </div>
+{% endmacro %}

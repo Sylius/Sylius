@@ -1,6 +1,7 @@
 {% extends '@SyliusShop/Checkout/shared/layout.html.twig' %}
 
 {% form_theme form '@SyliusShop/Form/theme.html.twig' %}
+{% import '@SyliusShop/Shared/macro/navigation_buttons.html.twig' as navigation %}
 
 {% block title %}{{ 'sylius.ui.shipping'|trans }} | {{ parent() }}{% endblock %}
 {% block content_title %}{{ 'sylius.ui.shipping'|trans }}{% endblock %}
@@ -14,7 +15,9 @@
         <input type="hidden" name="_method" value="PUT" />
 
         {% include '@SyliusShop/Checkout/select_shipping/form.html.twig' %}
-        {% include '@SyliusShop/Checkout/select_shipping/navigation.html.twig' %}
+
+        {% set enabled = order.shipments|length %}
+        {{ navigation.default('sylius.ui.change_address'|trans, path('sylius_shop_checkout_address'), enabled) }}
 
         {{ form_row(form._token) }}
         {{ form_end(form, {'render_rest': false}) }}
