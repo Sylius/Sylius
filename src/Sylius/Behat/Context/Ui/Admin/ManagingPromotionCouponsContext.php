@@ -366,9 +366,9 @@ final class ManagingPromotionCouponsContext implements Context
     /**
      * @Then /^("[^"]+" coupon) should be used (\d+) time(?:|s)$/
      */
-    public function couponShouldHaveUsageLimit(PromotionCouponInterface $promotionCoupon, $used): void
+    public function couponShouldHaveUsageLimit(PromotionCouponInterface $promotionCoupon, int $used): void
     {
-        Assert::true($this->indexPage->isSingleResourceOnPage(['code' => $promotionCoupon->getCode(), 'used' => $used]));
+        Assert::same($this->indexPage->getUsedNumber($promotionCoupon->getCode()), $used);
     }
 
     /**

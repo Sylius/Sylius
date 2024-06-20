@@ -1,5 +1,6 @@
-{% set product_variant = hookable_metadata.context.form.vars.data%}
 {% import '@SyliusAdmin/shared/helper/channelPricings.html.twig' as _channelPricings %}
+
+{% set product_variant = hookable_metadata.context.form.vars.data %}
 
 <div class="tab-pane" id="product-variant-channel-pricing" role="tabpanel" tabindex="0">
     <div class="bg-white mb-3">
@@ -12,7 +13,7 @@
             {% verbatim %}
                 <div class="row">
                     <div class="col-12 col-md-6">
-                        {% set is_channel_pricing_invalid = channelPricingForm.vars.errors.form.parent.errors is not empty %}
+                        {% set is_channel_pricing_invalid = channel_pricing_form.vars.errors.form.parent.errors is not empty %}
 
                         {% if is_channel_pricing_invalid %}
                             {% from '@SyliusAdmin/shared/helper/icon.html.twig' import icon as _icon %}
@@ -23,13 +24,13 @@
                                         {{ _icon({ 'icon': 'danger', 'class': 'alert-icon' }) }}
                                     </div>
                                     <div>
-                                        {% set first_error = channelPricingForm.vars.errors.form.parent.errors|first %}
+                                        {% set first_error = channel_pricing_form.vars.errors.form.parent.errors|first %}
                                         {{ first_error.messageTemplate|trans({}, 'validators') }}
                                     </div>
                                 </div>
                             </div>
                         {% endif %}
-                        {% if channelCode not in product_variant.product.channels|map(channel => channel.code) %}
+                        {% if channel_code not in product_variant.product.channels|map(channel => channel.code) %}
                             <div class="alert alert-info">
                                 {{ 'sylius.ui.product.product_not_active_in_channel'|trans }}
                             </div>
@@ -38,13 +39,13 @@
                 </div>
                 <div class="row">
                     <div class="col-sm">
-                        {{ form_row(channelPricingForm.price) }}
+                        {{ form_row(channel_pricing_form.price) }}
                     </div>
                     <div class="col-sm">
-                        {{ form_row(channelPricingForm.originalPrice) }}
+                        {{ form_row(channel_pricing_form.originalPrice) }}
                     </div>
                     <div class="col-sm">
-                        {{ form_row(channelPricingForm.minimumPrice) }}
+                        {{ form_row(channel_pricing_form.minimumPrice) }}
                     </div>
                 </div>
             {% endverbatim %}

@@ -25,9 +25,12 @@ sylius_grid:
                     label: sylius.ui.per_customer_usage_limit
                     sortable: ~
                 used:
-                    type: string
+                    type: twig
                     label: sylius.ui.used
+                    path: .
                     sortable: ~
+                    options:
+                        template: "@SyliusAdmin/promotion_coupon/grid/field/used.html.twig"
                 expiresAt:
                     type: datetime
                     label: sylius.ui.expires_at

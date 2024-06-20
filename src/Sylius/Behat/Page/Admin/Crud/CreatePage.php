@@ -66,6 +66,14 @@ class CreatePage extends SymfonyPage implements CreatePageInterface
         return $this->getDocument()->find('css', '.ui.icon.negative.message')->getText();
     }
 
+    protected function getDefinedElements(): array
+    {
+        return array_merge(
+            parent::getDefinedElements(),
+            ['form' => 'form'],
+        );
+    }
+
     protected function waitForFormUpdate(): void
     {
         $form = $this->getElement('form');

@@ -23,7 +23,7 @@ class IndexPage extends BaseIndexPage implements IndexPageInterface
     {
         $usage = $this->getPromotionFieldsWithHeader($promotion, 'usage');
 
-        return (int) $usage->find('css', 'span:first-child')->getText();
+        return (int) $usage->find('css', '[data-test-used]')->getText();
     }
 
     public function isAbleToManageCouponsFor(PromotionInterface $promotion): bool
@@ -69,9 +69,6 @@ class IndexPage extends BaseIndexPage implements IndexPageInterface
 
     private function getPromotionFieldsWithHeader(PromotionInterface $promotion, string $header): NodeElement
     {
-        $tableAccessor = $this->getTableAccessor();
-        $table = $this->getElement('table');
-
-        return $tableAccessor->getFieldFromRow($table, $tableAccessor->getRowWithFields($table, ['code' => $promotion->getCode()]), $header);
+        return $this->getCellForResource($header, ['code' => $promotion->getCode()]);
     }
 }

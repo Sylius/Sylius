@@ -651,10 +651,10 @@ final class ManagingPromotionsContext implements Context
      * @Then the promotion :promotion should be used :usage time(s)
      * @Then the promotion :promotion should not be used
      */
-    public function thePromotionShouldBeUsedTime(PromotionInterface $promotion, $usage = 0)
+    public function thePromotionShouldBeUsedTime(PromotionInterface $promotion, int $usage = 0): void
     {
         Assert::same(
-            (int) $usage,
+            $usage,
             $this->indexPage->getUsageNumber($promotion),
             'Promotion should be used %s times, but is %2$s.',
         );

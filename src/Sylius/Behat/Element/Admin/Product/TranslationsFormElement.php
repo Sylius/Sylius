@@ -73,8 +73,8 @@ final class TranslationsFormElement extends BaseFormElement implements Translati
 
     protected function getDefinedElements(): array
     {
-        return [
-            'form' => 'form',
+        return array_merge(
+            parent::getDefinedElements(), [
             'generate_product_slug_button' => '[data-test-generate-product-slug-button="%locale_code%"]',
             'meta_description' => '[data-test-meta-description="%locale_code%"]',
             'meta_keywords' => '[data-test-meta-keywords="%locale_code%"]',
@@ -82,7 +82,7 @@ final class TranslationsFormElement extends BaseFormElement implements Translati
             'product_translation_accordion' => '[data-test-product-translations-accordion="%locale_code%"]',
             'side_navigation_tab' => '[data-test-side-navigation-tab="%name%"]',
             'slug' => '[data-test-slug="%locale_code%"]',
-        ];
+        ]);
     }
 
     private function expandTranslationAccordion(string $localeCode): void

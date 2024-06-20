@@ -78,11 +78,11 @@ class GeneratePage extends SymfonyPage implements GeneratePageInterface
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
-            'generate_button' => '[data-test-generate-button]',
-            'delete_button' => '#sylius_admin_product_generate_variants_variants_%position% [data-test-delete-button]',
-            'code' => '#sylius_admin_product_generate_variants_variants_%position% [data-test-code]',
             'channel_pricings' => '#sylius_admin_product_generate_variants_variants_%position% [data-test-channel-pricings]',
-            'form' => '[data-live-name-value="sylius_admin:product:generate_product_variants_form"]',
+            'code' => '#sylius_admin_product_generate_variants_variants_%position% [data-test-code]',
+            'delete_button' => '#sylius_admin_product_generate_variants_variants_%position% [data-test-delete-button]',
+            'form' => 'form',
+            'generate_button' => '[data-test-generate-button]',
         ]);
     }
 

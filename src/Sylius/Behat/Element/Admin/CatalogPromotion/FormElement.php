@@ -210,7 +210,6 @@ final class FormElement extends BaseFormElement implements FormElementInterface
             'end_date_date' => '#sylius_admin_catalog_promotion_endDate_date',
             'end_date_time' => '#sylius_admin_catalog_promotion_endDate_time',
             'exclusive' => '#sylius_admin_catalog_promotion_exclusive',
-            'form' => '[data-live-name-value="sylius_admin:catalog_promotion:form"]',
             'label' => '[name="sylius_admin_catalog_promotion[translations][%locale_code%][label]"]',
             'last_action' => '[data-test-actions] [data-test-entry-row]:last-child',
             'last_scope' => '[data-test-scopes] [data-test-entry-row]:last-child',

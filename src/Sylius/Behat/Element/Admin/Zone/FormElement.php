@@ -98,7 +98,6 @@ class FormElement extends BaseFormElement implements FormElementInterface
         return array_merge(parent::getDefinedElements(), [
             'add_member' => '[data-test-add-member]',
             'code' => '[data-test-code]',
-            'form' => 'form',
             'form_validation_message' => 'form > div.alert.alert-danger.d-block',
             'name' => '[data-test-name]',
             'scope' => '[data-test-scope]',

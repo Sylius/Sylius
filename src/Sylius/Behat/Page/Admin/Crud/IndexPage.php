@@ -90,6 +90,17 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
         }
     }
 
+    public function getCellForResource(string $header, array $parameters): NodeElement
+    {
+        $tableAccessor = $this->getTableAccessor();
+        $table = $this->getElement('table');
+
+        $resourceRow = $tableAccessor->getRowWithFields($table, $parameters);
+
+        return $tableAccessor->getFieldFromRow($table, $resourceRow, $header);
+
+    }
+
     public function deleteResourceOnPage(array $parameters): void
     {
         $tableAccessor = $this->getTableAccessor();

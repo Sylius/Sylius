@@ -23,6 +23,7 @@ class ProductAttributeAutocompleteComponent
 {
     /** @var array<string> */
     #[LiveProp(writable: true, hydrateWith: 'hydrateSelectedAttributeCodes', dehydrateWith: 'dehydrateSelectedAttributeCodes', updateFromParent: true)]
+    #[ExposeInTemplate(name: 'selected_attribute_codes')]
     public array $selectedAttributeCodes = [];
 
     /** @var array<string> */
@@ -37,7 +38,7 @@ class ProductAttributeAutocompleteComponent
     ) {
     }
 
-    #[ExposeInTemplate]
+    #[ExposeInTemplate(name: 'extra_options')]
     public function getExtraOptions(): string
     {
         return base64_encode(json_encode(

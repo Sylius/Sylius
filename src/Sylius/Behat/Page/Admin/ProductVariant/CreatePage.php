@@ -106,7 +106,6 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
         return array_merge(parent::getDefinedElements(), [
             'code' => '#sylius_admin_product_variant_code',
             'depth' => '#sylius_admin_product_variant_depth',
-            'form' => 'form[name="sylius_admin_product_variant"]',
             'height' => '#sylius_admin_product_variant_height',
             'minimum_price' => '#sylius_admin_product_variant_channelPricings_%channelCode%_minimumPrice',
             'on_hand' => '#sylius_admin_product_variant_onHand',

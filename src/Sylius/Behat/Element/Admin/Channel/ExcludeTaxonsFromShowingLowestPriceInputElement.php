@@ -64,7 +64,6 @@ final class ExcludeTaxonsFromShowingLowestPriceInputElement extends BaseFormElem
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
-            'form' => 'form',
             'taxons_excluded_from_showing_lowest_price' => '[data-test-taxons-excluded-from-showing-lowest-price]',
         ]);
     }

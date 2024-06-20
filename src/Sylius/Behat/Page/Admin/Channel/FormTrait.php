@@ -29,7 +29,6 @@ trait FormTrait
             'default_tax_zone' => '[data-test-default-tax-zone]',
             'discounted_products_checking_period' => '[data-test-lowest-price-for-discounted-products-checking-period]',
             'enabled' => '[data-test-enabled]',
-            'form' => 'form',
             'hostname' => '[data-test-hostname]',
             'locales' => '[data-test-locales]',
             'menu_taxon' => '[data-test-menu-taxon]',

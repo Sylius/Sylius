@@ -30,7 +30,7 @@ class FormComponent
     use LiveCollectionTrait;
 
     #[LiveProp(fieldName: 'resource')]
-    public ?ProductOption $productOption = null;
+    public ?ProductOption $resource = null;
 
     /** @param class-string $formClass */
     public function __construct(
@@ -41,6 +41,6 @@ class FormComponent
 
     protected function instantiateForm(): FormInterface
     {
-        return $this->formFactory->create($this->formClass, $this->productOption);
+        return $this->formFactory->create($this->formClass, $this->resource);
     }
 }

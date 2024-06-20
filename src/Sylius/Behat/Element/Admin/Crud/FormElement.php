@@ -19,12 +19,14 @@ use FriendsOfBehat\PageObjectExtension\Element\Element;
 
 class FormElement extends Element implements FormElementInterface
 {
+    private ?NodeElement $form = null;
+
+    /**
+     * @param array<string, string> $parameters
+     */
     public function getValidationMessage(string $element, array $parameters = []): string
     {
         $foundElement = $this->getFieldElement($element, $parameters);
-        if (null === $foundElement) {
-            throw new ElementNotFoundException($this->getSession(), 'Field element');
-        }
 
         $validationMessage = $foundElement->find('css', '.invalid-feedback');
         if (null === $validationMessage) {
@@ -34,17 +36,43 @@ class FormElement extends Element implements FormElementInterface
         return $validationMessage->getText();
     }
 
-    protected function waitForFormUpdate(): void
+    public function getValidationErrors(): string
     {
-        $form = $this->getElement('form');
-        usleep(500000); // we need to sleep, as sometimes the check below is executed faster than the form sets the busy attribute
-        $form->waitFor(1500, function () use ($form) {
-            return !$form->hasAttribute('busy');
-        });
+        $validationMessage = $this->getDocument()->find('css', '.sylius-validation-error, .alert.alert-danger');
+        if (null === $validationMessage) {
+            throw new ElementNotFoundException($this->getSession(), 'Validation message', 'css', '.sylius-validation-error, .alert.alert-danger');
+        }
+
+        return $validationMessage->getText();
     }
 
-    /** @throws ElementNotFoundException */
-    private function getFieldElement(string $element, array $parameters): ?NodeElement
+    /**
+     * @return array<string, string>
+     */
+    protected function getDefinedElements(): array
+    {
+        return array_merge(
+            parent::getDefinedElements(), [
+            'form' => 'form',
+        ]);
+    }
+
+    protected function waitForFormUpdate(): void
+    {
+        if (null === $this->form) {
+            $this->form = $this->getElement('form');
+        }
+
+        usleep(500000); // we need to sleep, as sometimes the check below is executed faster than the form sets the busy attribute
+        $this->form->waitFor(1500, fn () => !$this->form->hasAttribute('busy'));
+    }
+
+    /**
+     * @param array<string, string> $parameters
+     *
+     * @throws ElementNotFoundException
+     */
+    private function getFieldElement(string $element, array $parameters): NodeElement
     {
         $element = $this->getElement($element, $parameters);
         while (null !== $element && !$element->hasClass('field')) {

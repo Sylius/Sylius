@@ -679,6 +679,7 @@ sylius:
         product_association_type: 'Product association type'
         product_association_types: 'Product association types'
         product_associations: 'Product associations'
+        product_attribute: 'Product attribute'
         product_attributes: 'Product attributes'
         product_details_viewing_product_product: 'Product details <small>Viewing product "<strong>%product%</strong>"</small>'
         product_option: 'Product option'

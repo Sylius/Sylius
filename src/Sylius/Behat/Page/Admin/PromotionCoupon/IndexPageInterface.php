@@ -14,8 +14,11 @@ declare(strict_types=1);
 namespace Sylius\Behat\Page\Admin\PromotionCoupon;
 
 use Sylius\Behat\Page\Admin\Crud\IndexPageInterface as BaseIndexPageInterface;
+use Sylius\Component\Core\Model\PromotionCouponInterface;
 
 interface IndexPageInterface extends BaseIndexPageInterface
 {
     public function filterByCode(string $code): void;
+
+    public function getUsedNumber(string $promotionCouponCode): int;
 }

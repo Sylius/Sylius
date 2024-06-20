@@ -9,7 +9,7 @@ Feature: Editing a select product attribute
         And the store has a select product attribute "T-Shirt material" with value "Banana skin"
         And I am logged in as an administrator
 
-    @todo @ui @api
+    @ui @api
     Scenario: Editing a select product attribute name
         When I want to edit this product attribute
         And I change its name to "T-Shirt material" in "English (United States)"
@@ -17,7 +17,7 @@ Feature: Editing a select product attribute
         Then I should be notified that it has been successfully edited
         And the select attribute "T-Shirt material" should appear in the store
 
-    @todo @ui @api
+    @ui @api
     Scenario: Editing a select product attribute value
         When I want to edit this product attribute
         And I change its value "Banana skin" to "Orange skin"
@@ -25,7 +25,7 @@ Feature: Editing a select product attribute
         Then I should be notified that it has been successfully edited
         And this product attribute should have value "Orange skin"
 
-    @todo @ui @javascript @api
+    @ui @mink:chromedriver @api
     Scenario: Adding a new value to an existing select product attribute
         When I want to edit this product attribute
         And I add value "Orange skin" in "English (United States)"
@@ -33,7 +33,7 @@ Feature: Editing a select product attribute
         Then I should be notified that it has been successfully edited
         And this product attribute should have value "Orange skin"
 
-    @todo @ui @javascript @api
+    @ui @mink:chromedriver @api
     Scenario: Deleting a value from an existing select product attribute
         When I want to edit this product attribute
         And I delete value "Banana skin"
@@ -41,12 +41,12 @@ Feature: Editing a select product attribute
         Then I should be notified that it has been successfully edited
         And this product attribute should not have value "Banana skin"
 
-    @todo @ui @api
+    @ui @api
     Scenario: Being unable to change code of an existing product attribute
         When I want to edit this product attribute
         Then I should not be able to edit its code
 
-    @todo @ui @api
+    @ui @api
     Scenario: Being unable to change type of an existing product attribute
         When I want to edit this product attribute
         Then I should not be able to edit its type

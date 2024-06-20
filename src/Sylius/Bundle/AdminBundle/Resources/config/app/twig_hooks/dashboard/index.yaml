@@ -16,7 +16,7 @@ twig_hooks:
             statistics:
                 component: 'sylius_admin:dashboard:statistics'
                 props:
-                    channelCode: '@=_context.channelCode'
+                    channelCode: '@=_context.channel_code'
             latest_statistics:
                 template: '@SyliusAdmin/dashboard/index/content/latest_statistics.html.twig'
 
