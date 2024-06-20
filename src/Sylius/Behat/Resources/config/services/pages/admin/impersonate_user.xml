@@ -17,9 +17,9 @@
     </parameters>
 
     <services>
-        <defaults public="true" />
+        <defaults public="false" />
 
-        <service id="sylius.behat.page.admin.impersonate_user" class="%sylius.behat.page.admin.impersonate_user.class%" parent="sylius.behat.symfony_page" public="false">
-        </service>
+        <service id="sylius.behat.page.admin.impersonate_user" class="%sylius.behat.page.admin.impersonate_user.class%" parent="sylius.behat.symfony_page" />
+        <service id="Sylius\Behat\Page\Admin\Administrator\ImpersonateUserPageInterface" alias="sylius.behat.page.admin.impersonate_user" />
     </services>
 </container>

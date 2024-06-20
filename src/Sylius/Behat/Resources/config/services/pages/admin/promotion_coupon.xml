@@ -20,17 +20,24 @@
     </parameters>
 
     <services>
-        <defaults public="true" />
+        <defaults public="false" />
 
-        <service id="sylius.behat.page.admin.promotion_coupon.create" class="%sylius.behat.page.admin.promotion_coupon.create.class%" parent="sylius.behat.page.admin.crud.create" public="false">
+        <service id="sylius.behat.page.admin.promotion_coupon.create" class="%sylius.behat.page.admin.promotion_coupon.create.class%" parent="sylius.behat.page.admin.crud.create">
             <argument type="string">sylius_admin_promotion_coupon_create</argument>
         </service>
-        <service id="sylius.behat.page.admin.promotion_coupon.generate" class="%sylius.behat.page.admin.promotion_coupon.generate.class%" parent="sylius.behat.symfony_page" public="false" />
-        <service id="sylius.behat.page.admin.promotion_coupon.index" class="%sylius.behat.page.admin.promotion_coupon.index.class%" parent="sylius.behat.page.admin.crud.index" public="false">
+        <service id="Sylius\Behat\Page\Admin\PromotionCoupon\CreatePageInterface" alias="sylius.behat.page.admin.promotion_coupon.create" />
+
+        <service id="sylius.behat.page.admin.promotion_coupon.generate" class="%sylius.behat.page.admin.promotion_coupon.generate.class%" parent="sylius.behat.symfony_page" />
+        <service id="Sylius\Behat\Page\Admin\PromotionCoupon\GeneratePageInterface" alias="sylius.behat.page.admin.promotion_coupon.generate" />
+
+        <service id="sylius.behat.page.admin.promotion_coupon.index" class="%sylius.behat.page.admin.promotion_coupon.index.class%" parent="sylius.behat.page.admin.crud.index" >
             <argument type="string">sylius_admin_promotion_coupon_index</argument>
         </service>
-        <service id="sylius.behat.page.admin.promotion_coupon.update" class="%sylius.behat.page.admin.promotion_coupon.update.class%" parent="sylius.behat.page.admin.crud.update" public="false">
+        <service id="Sylius\Behat\Page\Admin\PromotionCoupon\IndexPageInterface" alias="sylius.behat.page.admin.promotion_coupon.index" />
+
+        <service id="sylius.behat.page.admin.promotion_coupon.update" class="%sylius.behat.page.admin.promotion_coupon.update.class%" parent="sylius.behat.page.admin.crud.update">
             <argument type="string">sylius_admin_promotion_coupon_update</argument>
         </service>
+        <service id="Sylius\Behat\Page\Admin\PromotionCoupon\UpdatePageInterface" alias="sylius.behat.page.admin.promotion_coupon.update" />
     </services>
 </container>

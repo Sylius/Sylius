@@ -20,18 +20,25 @@
     </parameters>
 
     <services>
-        <defaults public="true" />
+        <defaults public="false" />
 
-        <service id="sylius.behat.page.admin.order.index" class="%sylius.behat.page.admin.order.index.class%" parent="sylius.behat.page.admin.crud.index" public="false">
+        <service id="sylius.behat.page.admin.order.index" class="%sylius.behat.page.admin.order.index.class%" parent="sylius.behat.page.admin.crud.index">
             <argument type="string">sylius_admin_order_index</argument>
         </service>
-        <service id="sylius.behat.page.admin.order.show" class="%sylius.behat.page.admin.order.show.class%" parent="sylius.behat.symfony_page" public="false">
+        <service id="Sylius\Behat\Page\Admin\Order\IndexPageInterface" alias="sylius.behat.page.admin.order.index" />
+
+        <service id="sylius.behat.page.admin.order.show" class="%sylius.behat.page.admin.order.show.class%" parent="sylius.behat.symfony_page">
             <argument type="service" id="sylius.behat.table_accessor" />
             <argument type="service" id="sylius.money_formatter" />
         </service>
-        <service id="sylius.behat.page.admin.order.update" class="%sylius.behat.page.admin.order.update.class%" parent="sylius.behat.page.admin.crud.update" public="false">
+        <service id="Sylius\Behat\Page\Admin\Order\ShowPageInterface" alias="sylius.behat.page.admin.order.show" />
+
+        <service id="sylius.behat.page.admin.order.update" class="%sylius.behat.page.admin.order.update.class%" parent="sylius.behat.page.admin.crud.update">
             <argument type="string">sylius_admin_order_update</argument>
         </service>
-        <service id="sylius.behat.page.admin.order.history" class="%sylius.behat.page.admin.order.history.class%" parent="sylius.behat.symfony_page" public="false" />
+        <service id="Sylius\Behat\Page\Admin\Order\UpdatePageInterface" alias="sylius.behat.page.admin.order.update" />
+
+        <service id="sylius.behat.page.admin.order.history" class="%sylius.behat.page.admin.order.history.class%" parent="sylius.behat.symfony_page" />
+        <service id="Sylius\Behat\Page\Admin\Order\HistoryPageInterface" alias="sylius.behat.page.admin.order.history" />
     </services>
 </container>

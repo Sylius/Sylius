@@ -5,16 +5,21 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
-        <defaults public="true" />
+        <defaults public="false" />
 
-        <service id="sylius.behat.page.admin.administrator.create" class="Sylius\Behat\Page\Admin\Administrator\CreatePage" parent="sylius.behat.page.admin.crud.create" public="false">
+        <service id="sylius.behat.page.admin.administrator.create" class="Sylius\Behat\Page\Admin\Administrator\CreatePage" parent="sylius.behat.page.admin.crud.create">
             <argument type="string">sylius_admin_admin_user_create</argument>
         </service>
-        <service id="sylius.behat.page.admin.administrator.index" class="Sylius\Behat\Page\Admin\Crud\IndexPage" parent="sylius.behat.page.admin.crud.index" public="false">
+        <service id="Sylius\Behat\Page\Admin\Administrator\CreatePageInterface" alias="sylius.behat.page.admin.administrator.create" />
+
+        <service id="sylius.behat.page.admin.administrator.index" class="Sylius\Behat\Page\Admin\Administrator\IndexPage" parent="sylius.behat.page.admin.crud.index">
             <argument type="string">sylius_admin_admin_user_index</argument>
         </service>
-        <service id="sylius.behat.page.admin.administrator.update" class="Sylius\Behat\Page\Admin\Administrator\UpdatePage" parent="sylius.behat.page.admin.crud.update" public="false">
+        <service id="Sylius\Behat\Page\Admin\Administrator\IndexPageInterface" alias="sylius.behat.page.admin.administrator.index" />
+
+        <service id="sylius.behat.page.admin.administrator.update" class="Sylius\Behat\Page\Admin\Administrator\UpdatePage" parent="sylius.behat.page.admin.crud.update">
             <argument type="string">sylius_admin_admin_user_update</argument>
         </service>
+        <service id="Sylius\Behat\Page\Admin\Administrator\UpdatePageInterface" alias="sylius.behat.page.admin.administrator.update" />
     </services>
 </container>
