@@ -32,7 +32,7 @@ sylius_grid:
             delete_catalog_promotion: "@SyliusAdmin/catalog_promotion/grid/action/delete.html.twig"
             generate_variants: "@SyliusAdmin/product/grid/action/generate_variants.html.twig"
             ship_with_tracking_code: '@SyliusAdmin/shipment/grid/action/ship_with_tracking_code.html.twig'
-            update_product_positions: "@SyliusAdmin/product/grid/action/update_positions.html.twig"
+            update_product_taxon_positions: "@SyliusAdmin/product_taxon/grid/action/update_positions.html.twig"
             update_product_variant_positions: "@SyliusAdmin/product_variant/grid/action/update_positions.html.twig"
         bulk_action:
             delete: '@SyliusAdmin/shared/grid/bulk_action/delete.html.twig'
