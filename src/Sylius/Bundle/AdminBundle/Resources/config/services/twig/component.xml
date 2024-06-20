@@ -135,6 +135,19 @@
         </service>
 
         <service
+            id="sylius_admin.twig.component.render_resource"
+            class="Sylius\Bundle\AdminBundle\Twig\Component\Shared\RenderEntityComponent"
+        >
+            <argument type="service" id="doctrine.orm.entity_manager" />
+
+            <tag
+                name="twig.component"
+                key="sylius_admin:render_entity"
+                template="@SyliusAdmin/shared/components/render_entity.html.twig"
+            />
+        </service>
+
+        <service
             id="sylius_admin.twig.component.order.form"
             class="Sylius\Bundle\AdminBundle\Twig\Component\Order\FormComponent"
         >
