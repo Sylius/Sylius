@@ -5,7 +5,7 @@ System Requirements
 ===================
 
 Here you will find the list of system requirements that have to be adhered to be able to use **Sylius**.
-First of all have a look at the `requirements for running Symfony <https://symfony.com/doc/current/reference/requirements.html>`_.
+First of all, have a look at the `requirements for running Symfony <https://symfony.com/doc/current/reference/requirements.html>`_.
 
 Read about the `LAMP stack <https://en.wikipedia.org/wiki/LAMP_(software_bundle)>`_ and the `MAMP stack <https://en.wikipedia.org/wiki/MAMP>`_.
 
@@ -17,11 +17,11 @@ The recommended operating systems for running Sylius are the Unix systems - **Li
 Web server and configuration
 ----------------------------
 
-In the production environment we do recommend using Apache web server ≥ 2.2.
+In the production environment, we recommend using the Apache web server ≥ 2.2.
 
-While developing the recommended way to work with your Symfony application is to use PHP's built-in web server.
+While developing, the recommended way to work with your Symfony application is to use PHP's built-in web server.
 
-`Go there <https://symfony.com/doc/current/cookbook/configuration/web_server_configuration.html>`_ to see the full reference to the web server configuration.
+For more details on how to setup a web server for a Symfony app, please, see `the related Symfony documentation <https://symfony.com/doc/current/cookbook/configuration/web_server_configuration.html>`_.
 
 PHP required modules and configuration
 --------------------------------------
@@ -69,10 +69,10 @@ By default, the database connection is pre-configured to work with a following M
 
     You might also use any other RDBMS (like PostgreSQL), but our database migrations support MySQL only.
 
-NPM Package Manager
--------------------
+NPM and Node
+------------
 
-Sylius Frontend depends on `npm packages <https://docs.npmjs.com/about-npm>`_ for it to run you need to have Node.js installed.
+The Sylius Frontend depends on `npm packages <https://docs.npmjs.com/about-npm>`_, so you need to have Node.js and npm installed.
 Current supported versions of Node.js are:
 
 +---------------+-----------------------+
