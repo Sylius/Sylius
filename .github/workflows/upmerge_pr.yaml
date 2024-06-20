@@ -25,10 +25,10 @@ jobs:
                         target_branch: "1.13"
                     -
                         base_branch: "1.13"
-                        target_branch: "2.0"
+                        target_branch: "1.14"
                     -
-                        base_branch: "2.0"
-                        target_branch: "bootstrap-admin-panel"
+                        base_branch: "1.14"
+                        target_branch: "2.0"
                     -
                         base_branch: "2.0"
                         target_branch: "api-platform-3"
