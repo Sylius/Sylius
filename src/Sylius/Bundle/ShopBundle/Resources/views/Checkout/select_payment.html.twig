@@ -1,6 +1,7 @@
 {% extends '@SyliusShop/Checkout/shared/layout.html.twig' %}
 
 {% form_theme form '@SyliusShop/Form/theme.html.twig' %}
+{% import '@SyliusShop/Shared/macro/navigation_buttons.html.twig' as navigation %}
 
 {% block title %}{{ 'sylius.ui.payment'|trans }} | {{ parent() }}{% endblock %}
 {% block content_title %}{{ 'sylius.ui.payment'|trans }}{% endblock %}
@@ -14,7 +15,11 @@
         <input type="hidden" name="_method" value="PUT" />
 
         {% include '@SyliusShop/Checkout/select_payment/form.html.twig' %}
-        {% include '@SyliusShop/Checkout/select_payment/navigation.html.twig' %}
+        {% if sylius_is_shipping_required(order) %}
+            {{ navigation.default('sylius.ui.change_shipping_method'|trans, path('sylius_shop_checkout_select_shipping')) }}
+        {% else %}
+            {{ navigation.default('sylius.ui.change_address'|trans, path('sylius_shop_checkout_address')) }}
+        {% endif %}
 
         {{ form_row(form._token) }}
         {{ form_end(form, {'render_rest': false}) }}
