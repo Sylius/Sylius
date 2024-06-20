@@ -1,0 +1,49 @@
+{% from '@SyliusShop/Shared/icon.html.twig' import icon as icon %}
+
+{% if is_granted('ROLE_USER') %}
+    <div class="d-lg-none">
+        <button class="btn btn-icon btn-transparent px-0" data-bs-toggle="dropdown" aria-expanded="false">
+            {{ icon('user') }}
+        </button>
+        <ul class="dropdown-menu dropdown-menu-end">
+            <li>
+                <a class="dropdown-item link-reset" href="{{ path('sylius_shop_account_dashboard') }}">
+                    {{ 'sylius.ui.my_account'|trans }}
+                </a>
+            </li>
+            <li>
+                <a class="dropdown-item link-reset" href="{{ path('sylius_shop_logout') }}">
+                    {{ 'sylius.ui.logout'|trans }}
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="d-none d-lg-flex gap-2 align-items-center ps-2">
+        {{ icon('user') }}
+        <span {{ sylius_test_html_attribute('full-name') }}>
+            {{ 'sylius.ui.hello'|trans }} {{ app.user.customer.firstName }}!
+        </span>
+        <small class="text-black-50 px-1">|</small>
+        <a class="link-reset" href="{{ path('sylius_shop_account_dashboard') }}">
+            {{ 'sylius.ui.my_account'|trans }}
+        </a>
+        <small class="text-black-50 px-1">|</small>
+        <a class="link-reset" href="{{ path('sylius_shop_logout') }}" {{ sylius_test_html_attribute('logout-button') }}>
+            {{ 'sylius.ui.logout'|trans }}
+        </a>
+    </div>
+{% else %}
+    <div class="d-flex align-items-center">
+        <div class="d-lg-none">
+            <a class="link-reset" href="{{ path('sylius_shop_login') }}">{{ icon('user') }}</a>
+        </div>
+
+        <div class="d-none d-lg-flex align-items-center gap-2 ps-2">
+            {{ icon('user') }}
+            <a class="link-reset" href="{{ path('sylius_shop_login') }}">{{ 'sylius.ui.login'|trans }}</a>
+            <small class="text-black-50 px-1">|</small>
+            <a class="link-reset" href="{{ path('sylius_shop_register') }}">{{ 'sylius.ui.register'|trans }}</a>
+        </div>
+    </div>
+{% endif %}
