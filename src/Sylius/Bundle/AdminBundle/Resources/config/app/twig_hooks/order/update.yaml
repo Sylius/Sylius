@@ -1,19 +1,22 @@
 twig_hooks:
     hooks:
-        sylius_admin.order.update.content:
+        'sylius_admin.order.update.content':
             form:
                 component: 'sylius_admin:order:form'
                 props:
                     order: '@=_context.resource'
                     form: '@=_context.form'
+                configuration:
+                    method: 'PUT'
 
-        sylius_admin.order.update.content.form:
+
+        'sylius_admin.order.update.content.form':
             billing_address:
                 template: '@SyliusAdmin/order/form/billing_address.html.twig'
             shipping_address:
                 template: '@SyliusAdmin/order/form/shipping_address.html.twig'
 
-        sylius_admin.order.update.content.form.billing_address:
+        'sylius_admin.order.update.content.form.billing_address':
             company:
                 template: '@SyliusAdmin/order/form/common/company.html.twig'
             first_name:
@@ -33,7 +36,7 @@ twig_hooks:
             province:
                 template: '@SyliusAdmin/order/form/common/province.html.twig'
 
-        sylius_admin.order.update.content.form.shipping_address:
+        'sylius_admin.order.update.content.form.shipping_address':
             company:
                 template: '@SyliusAdmin/order/form/common/company.html.twig'
             first_name:

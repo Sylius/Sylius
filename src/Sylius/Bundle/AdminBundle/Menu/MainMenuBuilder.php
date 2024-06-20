@@ -34,7 +34,7 @@ final readonly class MainMenuBuilder
     {
         $menu = $this->factory->createItem('root');
 
-        $this->addDashboardSubmenu($menu);
+        $this->addDashboardItem($menu);
         $this->addCatalogSubMenu($menu);
         $this->addSalesSubMenu($menu);
         $this->addCustomersSubMenu($menu);
@@ -47,7 +47,7 @@ final readonly class MainMenuBuilder
         return $menu;
     }
 
-    private function addDashboardSubmenu(ItemInterface $menu): void
+    private function addDashboardItem(ItemInterface $menu): void
     {
         $menu
             ->addChild('dashboard')

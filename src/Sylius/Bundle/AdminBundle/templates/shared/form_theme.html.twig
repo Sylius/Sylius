@@ -80,3 +80,8 @@
     </div>
     {{ form_errors(form) }}
 {% endblock %}
+
+{%- block button_widget -%}
+    {% set attr = attr|merge({'class': (attr.class|default('') ~ ' btn btn-outline-primary')|trim}) %}
+    {{ parent() }}
+{%- endblock -%}

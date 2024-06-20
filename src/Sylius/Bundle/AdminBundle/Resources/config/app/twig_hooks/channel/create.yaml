@@ -14,10 +14,10 @@ twig_hooks:
         'sylius_admin.channel.create.content.form.sections':
             general:
                 template: '@SyliusAdmin/channel/form/sections/general.html.twig'
-            money:
-                template: '@SyliusAdmin/channel/form/sections/money.html.twig'
             shop_billing_data:
                 template: '@SyliusAdmin/channel/form/sections/shop_billing_data.html.twig'
+            money:
+                template: '@SyliusAdmin/channel/form/sections/money.html.twig'
             omnibus:
                 template: '@SyliusAdmin/channel/form/sections/omnibus.html.twig'
             look_and_feel:
@@ -26,12 +26,12 @@ twig_hooks:
         'sylius_admin.channel.create.content.form.sections.general':
             code:
                 template: '@SyliusAdmin/channel/form/sections/general/code.html.twig'
+            color:
+                template: '@SyliusAdmin/channel/form/sections/general/color.html.twig'
             enabled:
                 template: '@SyliusAdmin/channel/form/sections/general/enabled.html.twig'
             channel_name:
                 template: '@SyliusAdmin/channel/form/sections/general/name.html.twig'
-            color:
-                template: '@SyliusAdmin/channel/form/sections/general/color.html.twig'
             hostname:
                 template: '@SyliusAdmin/channel/form/sections/general/hostname.html.twig'
             contact_email:
@@ -52,14 +52,14 @@ twig_hooks:
                 template: '@SyliusAdmin/channel/form/sections/general/account_verification_required.html.twig'
 
         'sylius_admin.channel.create.content.form.sections.money':
-            base_currency:
-                template: '@SyliusAdmin/channel/form/sections/money/base_currency.html.twig'
-            currencies:
-                template: '@SyliusAdmin/channel/form/sections/money/currencies.html.twig'
             default_tax_zone:
                 template: '@SyliusAdmin/channel/form/sections/money/default_tax_zone.html.twig'
             tax_calculation_strategy:
                 template: '@SyliusAdmin/channel/form/sections/money/tax_calculation_strategy.html.twig'
+            currencies:
+                template: '@SyliusAdmin/channel/form/sections/money/currencies.html.twig'
+            base_currency:
+                template: '@SyliusAdmin/channel/form/sections/money/base_currency.html.twig'
 
         'sylius_admin.channel.create.content.form.sections.shop_billing_data':
             company:
@@ -88,7 +88,7 @@ twig_hooks:
                 template: '@SyliusAdmin/channel/form/sections/look_and_feel/theme.html.twig'
             menu_taxon:
                 template: '@SyliusAdmin/channel/form/sections/look_and_feel/menu_taxon.html.twig'
-            default_locale:
-                template: '@SyliusAdmin/channel/form/sections/look_and_feel/default_locale.html.twig'
             locales:
                 template: '@SyliusAdmin/channel/form/sections/look_and_feel/locales.html.twig'
+            default_locale:
+                template: '@SyliusAdmin/channel/form/sections/look_and_feel/default_locale.html.twig'

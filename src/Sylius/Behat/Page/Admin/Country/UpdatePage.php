@@ -121,7 +121,6 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
             'provinces' => '[data-test-provinces]',
             'last_province' => '[data-test-provinces] [data-test-province]:last-child',
             'add_province' => '[data-test-add-province]',
-            'form' => 'form',
         ]);
     }
 

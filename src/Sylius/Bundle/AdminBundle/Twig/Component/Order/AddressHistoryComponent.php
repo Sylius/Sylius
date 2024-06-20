@@ -32,7 +32,7 @@ class AddressHistoryComponent
     }
 
     /** @return AddressLogEntry[] */
-    #[ExposeInTemplate]
+    #[ExposeInTemplate(name: 'address_logs')]
     public function getAddressLogs(): array
     {
         return $this->addressLogRepository->findBy(

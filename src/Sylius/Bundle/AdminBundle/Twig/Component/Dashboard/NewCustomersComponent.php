@@ -34,7 +34,7 @@ class NewCustomersComponent
     /**
      * @return array<CustomerInterface>
      */
-    #[ExposeInTemplate]
+    #[ExposeInTemplate(name: 'new_customers')]
     public function getNewCustomers(): array
     {
         return $this->customerRepository->findLatest($this->limit);

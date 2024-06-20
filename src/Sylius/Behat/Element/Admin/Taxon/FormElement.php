@@ -36,7 +36,6 @@ final class FormElement extends BaseFormElement implements FormElementInterface
     {
         return array_merge(parent::getDefinedElements(), [
             'code' => '[data-test-code]',
-            'form' => '[data-live-name-value="sylius_admin:taxon:form"]',
             'name' => '[name="sylius_admin_taxon[translations][%locale_code%][name]"]',
             'slug' => '[name="sylius_admin_taxon[translations][%locale_code%][slug]"]',
         ]);

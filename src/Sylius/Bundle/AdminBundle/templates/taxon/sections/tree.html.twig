@@ -1,6 +1,6 @@
 {# Rendered with \Sylius\Bundle\AdminBundle\Twig\Component\Taxon\TreeComponent #}
 
-{% import '@SyliusAdmin/taxon/helper/tree.html.twig' as taxonTree %}
+{% import '@SyliusAdmin/taxon/helper/tree.html.twig' as taxon_tree %}
 
 <div {{ attributes }}>
     <div class="card mb-5" data-js-tree="container">
@@ -9,7 +9,7 @@
                 <button data-js-tree="toggle-all" type="button" class="btn btn-sm">Toggle All</button>
             </div>
             <div>
-                {{ taxonTree.render(rootNodes) }}
+                {{ taxon_tree.render(root_nodes) }}
             </div>
         </div>
     </div>

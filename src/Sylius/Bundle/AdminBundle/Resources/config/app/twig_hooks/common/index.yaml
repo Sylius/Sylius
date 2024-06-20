@@ -15,6 +15,9 @@ twig_hooks:
                 template: '@SyliusAdmin/shared/crud/common/content/header.html.twig'
             grid:
                 template: '@SyliusAdmin/shared/crud/index/content/grid.html.twig'
+            footer:
+                template: '@SyliusAdmin/shared/crud/common/content/footer.html.twig'
+                priority: -100
 
         'sylius_admin.common.index.content.header':
             breadcrumbs:

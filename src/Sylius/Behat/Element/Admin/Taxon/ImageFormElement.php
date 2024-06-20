@@ -85,7 +85,6 @@ final class ImageFormElement extends BaseFormElement implements ImageFormElement
             'add_image' => '[data-test-images] [data-test-add-image]',
             'delete_image' => '[data-test-images] [data-test-image][data-test-type="%type%"] [data-test-delete-image]',
             'first_image' => '[data-test-images] [data-test-image]:first-child',
-            'form' => '[data-live-name-value="sylius_admin:taxon:form"]',
             'image_with_type' => '[data-test-images] [data-test-image][data-test-type="%type%"]',
             'images' => '[data-test-images]',
             'last_image' => '[data-test-images] [data-test-image]:last-child',

@@ -1,0 +1,38 @@
+twig_hooks:
+    hooks:
+        'sylius_admin.product_option.update.content':
+            form:
+                component: 'sylius_admin:product_option:form'
+                props:
+                    resource: '@=_context.resource'
+                    form: '@=_context.form'
+                configuration:
+                    method: 'PUT'
+        
+        'sylius_admin.product_option.update.content.form':
+            sections:
+                template: '@SyliusAdmin/product_option/form/sections.html.twig'
+
+        'sylius_admin.product_option.update.content.form.sections':
+            details:
+                template: '@SyliusAdmin/product_option/form/sections/details.html.twig'
+            values:
+                template: '@SyliusAdmin/product_option/form/sections/values.html.twig'
+        
+        'sylius_admin.product_option.update.content.form.sections.details':
+            code:
+                template: '@SyliusAdmin/product_option/form/sections/details/code.html.twig'
+            position:
+                template: '@SyliusAdmin/product_option/form/sections/details/position.html.twig'
+            translations:
+                template: '@SyliusAdmin/product_option/form/sections/details/translations.html.twig'
+        
+        'sylius_admin.product_option.update.content.form.sections.values':
+            value:
+                template: '@SyliusAdmin/product_option/form/sections/values/value.html.twig'
+        
+        'sylius_admin.product_option.update.content.form.sections.values.value':
+            code:
+                template: '@SyliusAdmin/product_option/form/sections/values/value/code.html.twig'
+            translations:
+                template: '@SyliusAdmin/product_option/form/sections/values/value/translations.html.twig'

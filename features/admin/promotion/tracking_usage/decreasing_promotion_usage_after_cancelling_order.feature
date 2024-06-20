@@ -12,7 +12,7 @@ Feature: Decreasing a promotion usage after cancelling an order
         And there is a promotion "Limited promotion" limited to 5 usages
         And I am logged in as an administrator
 
-    @api @todo @ui
+    @api @ui
     Scenario: Seeing promotion usage decreased after order cancellation
         Given there is a customer "john.doe@gmail.com" that placed an order "#00000022"
         And the customer bought a single "PHP T-Shirt"

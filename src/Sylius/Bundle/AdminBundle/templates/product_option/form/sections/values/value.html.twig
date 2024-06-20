@@ -1,0 +1,9 @@
+<div class="card mb-3">
+    <div class="card-body" {{ sylius_test_html_attribute('product-option-value') }}>
+        <div class="row align-items-end" >
+            <div class="col">
+                {% hook 'value' with { form: hookable_metadata.context.value_form } %}
+            </div>
+        </div>
+    </div>
+</div>

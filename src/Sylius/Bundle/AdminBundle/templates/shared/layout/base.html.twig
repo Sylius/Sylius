@@ -20,8 +20,6 @@
             {% block body %}{% endblock %}
         </div>
 
-        {% include '@SyliusAdmin/shared/layout/dialog.html.twig' %}
-
         {{ encore_entry_script_tags('admin-entry', null, 'admin') }}
         {% block javascripts %}
             {% hook generic_hook ~ '#javascripts' %}

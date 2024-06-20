@@ -1,0 +1,26 @@
+{% for translation_form in hookable_metadata.context.value_form.translations %}
+    <div class="row">
+        <div class="col">
+                {% if translation_form.vars.name is not null %}
+                <div class="d-flex">
+                    <span class="flag flag-sm flag-country-{{ translation_form.vars.name|lower|split('_')|last }} me-2 mt-3"></span>
+                    <div class="me-3 mt-1">{{ form_label(translation_form, translation_form.vars.name|sylius_locale_name) }}</div>
+                </div>
+                {% else %}
+                    <span class="flag flag-sm flag-country-eu me-3"></span>
+                {% endif %}
+        </div>
+        <div class="col-9">
+            <div class="d-flex">
+                <div class="p-2 w-100">
+                    {{ form_widget(
+                        translation_form.value,
+                        sylius_test_form_attribute('option-value-translation')
+                    ) }}
+
+                    {{ form_errors(translation_form.value) }}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endfor %}

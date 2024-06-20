@@ -69,6 +69,21 @@ final class Configuration implements ConfigurationInterface
                                             ->end()
                                         ->end()
                                         ->integerNode('priority')->defaultNull()->end()
+                                    ->end()
+                                ->end()
+                            ->end()
+                        ->end()
+                    ->end()
+                ->end()
+                ->arrayNode('twig_ux')
+                    ->children()
+                        ->arrayNode('anonymous_component_template_prefixes')
+                            ->useAttributeAsKey('prefix_name')
+                            ->scalarPrototype()->end()
+                        ->end()
+                    ->end()
+                ->end()
+            ->end()
         ;
 
         return $treeBuilder;

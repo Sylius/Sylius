@@ -1,4 +1,4 @@
-{% macro headers(grid, definition, requestAttributes) %}
+{% macro headers(grid, definition, request_attributes) %}
     {% import '@SyliusAdmin/shared/helper/sorting.html.twig' as sorting %}
 
     {% if definition.actionGroups.bulk is defined and definition.getEnabledActions('bulk')|length > 0 %}
@@ -10,7 +10,7 @@
     {% for field in definition.fields|sort_by('position') %}
         {% if field.enabled %}
             {% if field.isSortable %}
-                {{ sorting.tableHeader(grid, field, requestAttributes) }}
+                {{ sorting.table_header(grid, field, request_attributes) }}
             {% else %}
                 <th class="text-body sylius-table-column-{{ field.name }} {{ field.options.vars.th_class|default('') }}">{{ field.label|trans }}</th>
             {% endif %}

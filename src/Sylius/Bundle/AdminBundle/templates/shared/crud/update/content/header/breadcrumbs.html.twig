@@ -3,7 +3,6 @@
 {% set configuration = hookable_metadata.context.configuration %}
 {% set resource = hookable_metadata.context.resource %}
 
-
 {% if hookable_metadata.context.metadata is defined %}
     {% set metadata = hookable_metadata.context.metadata %}
     {% set resource_name = hookable_metadata.configuration.resource_name|default(metadata.applicationName~'.ui.'~metadata.pluralName) %}

@@ -1,17 +1,17 @@
-{% macro default(translationFields, body = null, options = {}) %}
+{% macro default(translation_fields, body = null, options = {}) %}
     {% from _self import accordion_header %}
 
-    {% set accordion_id = options. accordion_id|default('translations') %}
+    {% set accordion_id = options.accordion_id|default('translations') %}
     <div class="accordion" id="{{ accordion_id }}">
-        {% for locale, translationForm in translationFields %}
+        {% for locale, translation_form in translation_fields %}
             <div class="accordion-item">
                 {{ accordion_header(locale, accordion_id, loop.first) }}
-                <div id="translation-{{ locale }}" class="accordion-collapse collapse {% if loop.first %}show{% endif %}" data-bs-parent="#{{ accordion_id }}">
+                <div id="translation-{{ accordion_id }}-{{ locale }}" class="accordion-collapse collapse {% if loop.first %}show{% endif %}" data-bs-parent="#{{ accordion_id }}">
                     <div class="accordion-body">
                         {% if body is not null %}
-                            {{ include(template_from_string(body), { locale: locale, translationForm: translationForm }) }}
+                            {{ include(template_from_string(body), { locale: locale, translation_form: translation_form }) }}
                         {% else %}
-                            {% for field in translationForm %}
+                            {% for field in translation_form %}
                                 {{ form_row(field) }}
                             {% endfor %}
                         {% endif %}
@@ -22,17 +22,36 @@
     </div>
 {% endmacro %}
 
-{% macro with_hook(translationFields, prefixes, hook_name = null, options = {}) %}
+{% macro with_hook(translation_fields, prefixes, hook_name = null, options = {}) %}
     {% from _self import accordion_header %}
 
-    {% set accordion_id = options. accordion_id|default('translations') %}
+    {% set accordion_id = options.accordion_id|default('translations') %}
     <div class="accordion" id="{{ accordion_id }}">
+        {% for locale, translation_form in translation_fields %}
+            <div class="accordion-item">
+                {{ accordion_header(locale, accordion_id, loop.first) }}
+                <div id="translation-{{ accordion_id }}-{{ locale }}" class="accordion-collapse collapse {% if loop.first %}show{% endif %}" data-bs-parent="#{{ accordion_id }}">
+                    <div class="accordion-body row">
+                        {% hook hook_name|default('translations') with { form: translation_form, locale, _prefixes: prefixes } %}
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endmacro %}
+
+{% macro single_field(translationFields, key, options = {}) %}
+    {% from _self import accordion_header %}
+
+    {% set accordion_id = options.accordion_id|default('translations') %}
+    <div class="accordion" {{ sylius_test_html_attribute('accordion-key', key)}} id="{{ accordion_id }}">
         {% for locale, translationForm in translationFields %}
             <div class="accordion-item">
                 {{ accordion_header(locale, accordion_id, loop.first) }}
-                <div id="translation-{{ locale }}" class="accordion-collapse collapse {% if loop.first %}show{% endif %}" data-bs-parent="#{{ accordion_id }}">
-                    <div class="accordion-body row">
-                        {% hook hook_name|default('translations') with { form: translationForm, locale, _prefixes: prefixes } %}
+                <div id="translation-{{ accordion_id }}-{{ locale }}" class="accordion-collapse collapse {% if loop.first %}show{% endif %}" data-bs-parent="#{{ accordion_id }}">
+                    <div class="accordion-body">
+                        {%  set attributes = sylius_test_form_attribute('key', key)|sylius_merge_recursive(sylius_test_form_attribute('locale', locale)) %}
+                        {{ form_widget(translationForm, attributes) }}
                     </div>
                 </div>
             </div>
@@ -46,9 +65,9 @@
             class="accordion-button {% if is_first == false %}collapsed{% endif %}"
             type="button"
             data-bs-toggle="collapse"
-            data-bs-target="#translation-{{ locale }}"
+            data-bs-target="#translation-{{ accordion_id }}-{{ locale }}"
             aria-expanded="{% if is_first %}true{% else %}false{% endif %}"
-            aria-controls="translation-{{ locale }}"
+            aria-controls="translation-{{ accordion_id }}-{{ locale }}"
             {{ sylius_test_html_attribute( accordion_id ~ '-accordion', locale) }}
         >
             <span class="flag flag-sm flag-country-{{ locale|lower|split('_')|last }} me-3"></span>
