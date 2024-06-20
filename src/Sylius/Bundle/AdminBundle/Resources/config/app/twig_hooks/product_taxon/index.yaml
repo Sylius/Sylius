@@ -1,0 +1,18 @@
+twig_hooks:
+    hooks:
+        'sylius_admin.product_taxon.index.content.header':
+            breadcrumbs:
+                component: sylius_admin:render_entity
+                props:
+                    entity: Sylius\Component\Core\Model\Taxon
+                    identifier: '@=_context.resources.getRequestConfiguration().getRequest().attributes.get("id")'
+                    template: '@SyliusAdmin/product_taxon/index/content/header/breadcrumbs.html.twig'
+
+
+        'sylius_admin.product_taxon.index.content.header.title_block':
+            title:
+                component: sylius_admin:render_entity
+                props:
+                    entity: Sylius\Component\Core\Model\Taxon
+                    identifier: '@=_context.resources.getRequestConfiguration().getRequest().attributes.get("id")'
+                    template: '@SyliusAdmin/product_taxon/index/content/header/title_block/title.html.twig'
