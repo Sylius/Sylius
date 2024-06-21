@@ -1,5 +1,1 @@
-{% for product_taxon in data.productTaxons %}
-    {% if product_taxon.taxon.id == app.request.get('id') %}
-        <input type='text' value="{{ product_taxon.position }}" data-id="{{ product_taxon.id }}" class="sylius-product-taxon-position form-control text-center" />
-    {% endif %}
-{% endfor %}
+<input type='text' value="{{ data.position }}" data-id="{{ data.id }}" class="sylius-product-taxon-position form-control text-center" />

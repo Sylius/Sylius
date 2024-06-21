@@ -1,1 +1,5 @@
 {% extends template %}
+
+{% if hookableMetadata is defined %}
+    {% set hookable_metadata = hookableMetadata %}
+{% endif %}
