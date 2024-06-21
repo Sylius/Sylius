@@ -56,7 +56,8 @@ final class ChannelPricingsFormElement extends BaseFormElement implements Channe
     protected function getDefinedElements(): array
     {
         return array_merge(
-            parent::getDefinedElements(), [
+            parent::getDefinedElements(),
+            [
             'channel' => '[data-test-channel-code="%channel_code%"]',
             'channel_tab' => '[data-test-channel-tab="%channel_code%"]',
             'channels' => '[data-test-channels]',
@@ -64,7 +65,8 @@ final class ChannelPricingsFormElement extends BaseFormElement implements Channe
             'price' => '[data-test-price-in-channel="%channel_code%"]',
             'prices_validation_message' => '[data-test-missing-channel-price]',
             'side_navigation_tab' => '[data-test-side-navigation-tab="%name%"]',
-        ]);
+        ],
+        );
     }
 
     private function changeChannelTab(string $channelCode): void

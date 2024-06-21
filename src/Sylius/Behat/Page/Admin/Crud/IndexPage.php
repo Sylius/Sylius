@@ -98,7 +98,6 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
         $resourceRow = $tableAccessor->getRowWithFields($table, $parameters);
 
         return $tableAccessor->getFieldFromRow($table, $resourceRow, $header);
-
     }
 
     public function deleteResourceOnPage(array $parameters): void
