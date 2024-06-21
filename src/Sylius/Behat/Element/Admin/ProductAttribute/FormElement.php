@@ -100,7 +100,8 @@ class FormElement extends BaseFormElement implements FormElementInterface
     protected function getDefinedElements(): array
     {
         return array_merge(
-            parent::getDefinedElements(), [
+            parent::getDefinedElements(),
+            [
             'add_button' => '#sylius_admin_product_attribute_configuration_choices_add',
             'choice' => '[data-test-choice-key="%key%"] input[data-test-locale="%locale_code%"]',
             'choice_direct_input' => 'input[value="%value%"][data-test-locale="%locale_code%"]',
@@ -113,7 +114,8 @@ class FormElement extends BaseFormElement implements FormElementInterface
             'name' => '[data-test-name]',
             'translatable' => '[data-test-translatable]',
             'type' => '[data-test-type]',
-        ]);
+        ],
+        );
     }
 
     private function getChoicesCount(): int
@@ -139,7 +141,7 @@ class FormElement extends BaseFormElement implements FormElementInterface
                 $this->getSession(),
                 'Last choice element',
                 'css',
-                '[data-test-choice-key]'
+                '[data-test-choice-key]',
             );
         }
 

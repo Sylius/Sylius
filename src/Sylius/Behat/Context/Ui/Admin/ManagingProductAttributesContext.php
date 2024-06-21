@@ -15,8 +15,8 @@ namespace Sylius\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Element\Admin\ProductAttribute\FormElementInterface;
-use Sylius\Behat\Page\Admin\Crud\IndexPageInterface;
 use Sylius\Behat\Page\Admin\Crud\CreatePageInterface;
+use Sylius\Behat\Page\Admin\Crud\IndexPageInterface;
 use Sylius\Behat\Page\Admin\Crud\UpdatePageInterface;
 use Sylius\Component\Product\Model\ProductAttributeInterface;
 use Webmozart\Assert\Assert;
@@ -43,7 +43,7 @@ final readonly class ManagingProductAttributesContext implements Context
      * @When I specify its code as :code
      * @When I do not specify its code
      */
-    public function iSpecifyItsCodeAs(string $code = null): void
+    public function iSpecifyItsCodeAs(?string $code = null): void
     {
         $this->formElement->specifyCode($code ?? '');
     }
@@ -399,6 +399,7 @@ final readonly class ManagingProductAttributesContext implements Context
 
         Assert::false($this->formElement->hasAttributeValue($value, 'en_US'));
     }
+
     private function assertFieldValidationMessage(string $element, string $expectedMessage): void
     {
         Assert::same($this->formElement->getValidationMessage($element), $expectedMessage);

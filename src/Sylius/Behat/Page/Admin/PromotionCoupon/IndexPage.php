@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace Sylius\Behat\Page\Admin\PromotionCoupon;
 
 use Sylius\Behat\Page\Admin\Crud\IndexPage as BaseIndexPage;
-use Sylius\Component\Core\Model\PromotionCouponInterface;
 
 class IndexPage extends BaseIndexPage implements IndexPageInterface
 {

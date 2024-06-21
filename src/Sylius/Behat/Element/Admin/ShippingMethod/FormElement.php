@@ -149,7 +149,8 @@ final class FormElement extends BaseFormElement implements FormElementInterface
     protected function getDefinedElements(): array
     {
         return array_merge(
-            parent::getDefinedElements(), [
+            parent::getDefinedElements(),
+            [
             'add_rule_button' => '[data-test-rules] [data-test-add-%type%]',
             'calculator' => '#sylius_admin_shipping_method_calculator',
             'calculator_configuration_amount' => '#sylius_admin_shipping_method_configuration_%channelCode%_amount',
@@ -165,7 +166,8 @@ final class FormElement extends BaseFormElement implements FormElementInterface
             'name' => '#sylius_admin_shipping_method_translations_%localeCode%_name',
             'position' => '#sylius_admin_shipping_method_position',
             'zone' => '#sylius_admin_shipping_method_zone',
-        ]);
+        ],
+        );
     }
 
     private function selectCalculatorConfigurationChannelTab(string $channelCode): void
