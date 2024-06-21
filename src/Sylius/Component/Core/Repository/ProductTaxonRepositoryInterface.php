@@ -24,7 +24,7 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
  */
 interface ProductTaxonRepositoryInterface extends RepositoryInterface
 {
-    public function createListQueryBuilderForTaxon(string $locale, string|int $taxonId): QueryBuilder;
+    public function createListQueryBuilderForTaxon(string $locale, int|string $taxonId): QueryBuilder;
 
     public function findOneByProductCodeAndTaxonCode(string $productCode, string $taxonCode): ?ProductTaxonInterface;
 }

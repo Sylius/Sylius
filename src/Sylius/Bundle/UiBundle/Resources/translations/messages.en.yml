@@ -254,6 +254,7 @@ sylius:
         default_shipping_address: 'Default shipping address'
         delete: 'Delete'
         delete_image: 'Delete image'
+        delete_products: 'Delete products'
         deleted: 'Deleted'
         delivery_and_shipping: 'Delivery & Shipping'
         depth: 'Depth'

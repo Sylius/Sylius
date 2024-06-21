@@ -1,6 +1,6 @@
 sylius_grid:
     grids:
-        sylius_admin_product_taxons:
+        sylius_admin_product_taxon:
             driver:
                 name: doctrine/orm
                 options:
@@ -8,7 +8,6 @@ sylius_grid:
                     repository:
                         method: createListQueryBuilderForTaxon
                         arguments: ["expr:service('sylius.context.locale').getLocaleCode()", $taxonId]
-                    data: resource.product
             sorting:
                 position: asc
             fields:
@@ -123,3 +122,12 @@ sylius_grid:
                                     visible: resource.product.hasOptions
                                     parameters:
                                         productId: resource.product.id
+                bulk:
+                    delete:
+                        label: sylius.ui.delete_products
+                        type: delete
+                        options:
+                            link:
+                                route: sylius_admin_product_taxon_bulk_delete_products
+                                parameters:
+                                    taxonId: $taxonId

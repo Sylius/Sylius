@@ -26,7 +26,7 @@ use Sylius\Component\Core\Repository\ProductTaxonRepositoryInterface;
  */
 class ProductTaxonRepository extends EntityRepository implements ProductTaxonRepositoryInterface
 {
-    public function createListQueryBuilderForTaxon(string $locale, mixed $taxonId): QueryBuilder
+    public function createListQueryBuilderForTaxon(string $locale, int|string $taxonId): QueryBuilder
     {
         return $this->createQueryBuilder('o')
             ->innerJoin('o.product', 'product')

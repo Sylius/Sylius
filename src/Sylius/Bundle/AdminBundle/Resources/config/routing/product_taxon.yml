@@ -2,18 +2,29 @@ sylius_admin_product_taxon_index:
     path: /
     methods: [GET]
     defaults:
-        _controller: sylius.controller.product::indexAction
+        _controller: sylius.controller.product_taxon::indexAction
         _sylius:
             section: admin
             permission: true
-            grid: sylius_admin_product_taxons
+            grid: sylius_admin_product_taxon
             template: "@SyliusAdmin/product_taxon/index.html.twig"
-            vars:
-                subheader: sylius.ui.manage_your_product_catalog
-                icon: cube
 
 sylius_admin_product_taxon_update_position:
     path: /update
     methods: [PUT]
     defaults:
         _controller: sylius.controller.product_taxon::updateProductTaxonsPositionsAction
+
+sylius_admin_product_taxon_bulk_delete_products:
+    path: /bulk-delete
+    methods: [DELETE]
+    defaults:
+        _controller: sylius.controller.product::bulkDeleteAction
+        _sylius:
+            section: admin
+            redirect: referer
+            permission: true
+            paginate: false
+            repository:
+                method: findByProductTaxonIds
+                arguments: [$ids]
