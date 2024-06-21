@@ -36,5 +36,7 @@ twig_hooks:
         'sylius_admin.common.update.content.header.title_block.actions':
             cancel:
                 template: '@SyliusAdmin/shared/crud/common/content/header/title_block/actions/cancel.html.twig'
+                priority: 200
             create:
                 template: '@SyliusAdmin/shared/crud/common/content/header/title_block/actions/update.html.twig'
+                priority: 100
