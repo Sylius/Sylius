@@ -25,6 +25,7 @@ Sylius can create or even reset the database/schema for you, simply call:
 
 The command will check if your database schema exists. If yes, you may decide to recreate it from scratch, otherwise Sylius will take care of this automatically.
 It also allows you to load sample data.
+You can review the Sylius Database Schema `here <https://drawsql.app/templates/sylius>`_.
 
 Loading sample data
 -------------------
