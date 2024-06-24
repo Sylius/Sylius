@@ -1,2 +1,11 @@
+{% if taxon.images.first %}
+    <div class="mb-3">
+        <img src="{{ asset(taxon.images.first.path|imagine_filter('sylius_shop_taxon_thumbnail')) }}"
+             alt="{{ taxon.name }} Thumbnail"
+             class="img-fluid object-fit-cover"
+             style="height: 300px;"
+        >
+    </div>
+{% endif %}
 <h1 class="mb-3">{{ taxon.name }}</h1>
 <div>{{ taxon.description }}</div>
