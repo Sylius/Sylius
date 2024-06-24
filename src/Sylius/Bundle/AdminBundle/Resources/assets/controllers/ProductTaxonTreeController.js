@@ -154,7 +154,7 @@ export default class extends Controller {
 
   checkAll(event) {
     event.preventDefault();
-    this.toggleAllNodes(event, true);
+    this.toggleAllNodes(true);
   }
 
   uncheckAll(event) {
