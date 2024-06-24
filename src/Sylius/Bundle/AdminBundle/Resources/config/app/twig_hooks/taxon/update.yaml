@@ -35,6 +35,14 @@ twig_hooks:
             enabled:
                 template: '@SyliusAdmin/taxon/sections/form/details/enabled.html.twig'
         
+        'sylius_admin.taxon.update.content.sections.form.translations':
+            name:
+                template: '@SyliusAdmin/taxon/sections/form/translations/name.html.twig'
+            slug:
+                template: '@SyliusAdmin/taxon/sections/form/translations/slug.html.twig'
+            description:
+                template: '@SyliusAdmin/taxon/sections/form/translations/description.html.twig'
+        
         'sylius_admin.taxon.update.content.sections.form.images':
             image:
                 template: '@SyliusAdmin/taxon/sections/form/images/image.html.twig'
