@@ -25,7 +25,15 @@ interface TaxonomyFormElementInterface
 
     public function uncheckProductTaxon(TaxonInterface $taxon): void;
 
+    public function checkAllTaxons(): void;
+
+    public function uncheckAllTaxons(): void;
+
+    public function filterTaxonsBy(string $phrase): void;
+
     public function isTaxonVisibleInMainTaxonList(string $taxonName): bool;
 
     public function isTaxonChosen(string $taxonCode): bool;
+
+    public function hasTaxon(string $taxonCode): bool;
 }

@@ -63,6 +63,27 @@ final class TaxonomyFormElement extends BaseFormElement implements TaxonomyFormE
         $this->getElement('product_taxons_checkbox', ['%code%' => $taxon->getCode()])->uncheck();
     }
 
+    public function checkAllTaxons(): void
+    {
+        $this->changeTab();
+
+        $this->getElement('product_taxons_check_all')->click();
+    }
+
+    public function uncheckAllTaxons(): void
+    {
+        $this->changeTab();
+
+        $this->getElement('product_taxons_uncheck_all')->click();
+    }
+
+    public function filterTaxonsBy(string $phrase): void
+    {
+        $this->changeTab();
+
+        $this->getElement('product_taxons_filter')->setValue($phrase);
+    }
+
     public function isTaxonVisibleInMainTaxonList(string $taxonName): bool
     {
         $this->changeTab();
@@ -89,12 +110,22 @@ final class TaxonomyFormElement extends BaseFormElement implements TaxonomyFormE
         return $this->getElement('product_taxons_checkbox', ['%code%' => $taxonCode])->isChecked();
     }
 
+    public function hasTaxon(string $taxonCode): bool
+    {
+        $this->changeTab();
+
+        return $this->hasElement('product_taxons_checkbox', ['%code%' => $taxonCode]);
+    }
+
     protected function getDefinedElements(): array
     {
         return array_merge(
             parent::getDefinedElements(), [
             'main_taxon' => '[data-test-main-taxon]',
+            'product_taxons_check_all' => '[data-test-product-taxons-check-all]',
             'product_taxons_checkbox' => '[data-test-product-taxons] [data-id="%code%"] input[type="checkbox"]',
+            'product_taxons_filter' => '[data-test-product-taxons-filter]',
+            'product_taxons_uncheck_all' => '[data-test-product-taxons-uncheck-all]',
             'selected_main_taxon' => '[data-test-main-taxon] option:selected',
             'side_navigation_tab' => '[data-test-side-navigation-tab="%name%"]',
         ]);
