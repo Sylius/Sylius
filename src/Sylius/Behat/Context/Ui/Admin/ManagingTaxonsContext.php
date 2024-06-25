@@ -17,6 +17,7 @@ use Behat\Behat\Context\Context;
 use Sylius\Behat\Element\Admin\Taxon\FormElementInterface;
 use Sylius\Behat\Element\Admin\Taxon\ImageFormElementInterface;
 use Sylius\Behat\NotificationType;
+use Sylius\Behat\Page\Admin\Crud\CreatePageInterface as BaseCreatePageInterface;
 use Sylius\Behat\Page\Admin\Crud\UpdatePageInterface;
 use Sylius\Behat\Page\Admin\Product\UpdateSimpleProductPageInterface;
 use Sylius\Behat\Page\Admin\Taxon\CreatePageInterface;
@@ -32,7 +33,7 @@ final class ManagingTaxonsContext implements Context
     public function __construct(
         private readonly SharedStorageInterface $sharedStorage,
         private readonly CreatePageInterface $createPage,
-        private readonly CreatePageInterface $createForParentPage,
+        private readonly BaseCreatePageInterface $createForParentPage,
         private readonly UpdatePageInterface $updatePage,
         private readonly FormElementInterface $formElement,
         private readonly ImageFormElementInterface $imageFormElement,
@@ -132,11 +133,19 @@ final class ManagingTaxonsContext implements Context
 
     /**
      * @Given /^I set its (parent taxon to "[^"]+")$/
+     */
+    public function iSetItsParentTaxonTo(TaxonInterface $taxon): void
+    {
+        $this->formElement->chooseParent($taxon);
+    }
+
+    /**
      * @Given /^I change its (parent taxon to "[^"]+")$/
      * @Then /^I should be able to change its (parent taxon to "[^"]+")$/
      */
     public function iChangeItsParentTaxonTo(TaxonInterface $taxon): void
     {
+        $this->formElement->removeCurrentParent();
         $this->formElement->chooseParent($taxon);
     }
 

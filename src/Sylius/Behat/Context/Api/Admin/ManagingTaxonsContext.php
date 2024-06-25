@@ -106,7 +106,7 @@ final class ManagingTaxonsContext implements Context
      */
     public function iGenerateItsSlugIn(string $localeCode): void
     {
-        // Intentionally left blank, as this is a UI-specific action.
+        $this->updateTranslations($localeCode, 'slug', '');
     }
 
     /**

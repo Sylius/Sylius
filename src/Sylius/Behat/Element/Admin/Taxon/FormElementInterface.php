@@ -36,6 +36,8 @@ interface FormElementInterface extends BaseFormElementInterface
 
     public function chooseParent(TaxonInterface $taxon): void;
 
+    public function removeCurrentParent(): void;
+
     public function getTranslationFieldValue(string $element, string $localeCode): string;
 
     public function enable(): void;

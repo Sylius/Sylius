@@ -71,12 +71,18 @@ final class FormElement extends BaseFormElement implements FormElementInterface
 
     public function chooseParent(TaxonInterface $taxon): void
     {
+        $this->autocompleteHelper->removeByName($this->getDriver(), $this->getElement('parent')->getXpath(), '');
         $this->autocompleteHelper->selectByName(
             $this->getDriver(),
             $this->getElement('parent')->getXpath(),
             $taxon->getName(),
         );
-        $this->getDocument()->find('css', 'body')->click();
+        $this->waitForFormUpdate();
+    }
+
+    public function removeCurrentParent(): void
+    {
+        $this->autocompleteHelper->clear($this->getDriver(), $this->getElement('parent')->getXpath());
         $this->waitForFormUpdate();
     }
 
@@ -106,6 +112,7 @@ final class FormElement extends BaseFormElement implements FormElementInterface
             'code' => '[data-test-code]',
             'description' => '[data-test-description="%locale_code%"]',
             'enabled' => '[data-test-enabled]',
+            'form' => '[data-live-name-value="sylius_admin:taxon:form"]',
             'generate_slug_button' => '[data-test-generate-slug-button="%locale_code%"]',
             'name' => '[data-test-name="%locale_code%"]',
             'parent' => '[data-test-parent]',
