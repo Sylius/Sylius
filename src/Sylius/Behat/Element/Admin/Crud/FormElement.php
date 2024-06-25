@@ -52,9 +52,11 @@ class FormElement extends Element implements FormElementInterface
     protected function getDefinedElements(): array
     {
         return array_merge(
-            parent::getDefinedElements(), [
+            parent::getDefinedElements(),
+            [
             'form' => 'form',
-        ]);
+        ],
+        );
     }
 
     protected function waitForFormUpdate(): void
