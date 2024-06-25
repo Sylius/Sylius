@@ -11,14 +11,18 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Behat\Page\Admin\Customer;
+namespace Sylius\Behat\Element\Admin\Customer;
 
 use Behat\Mink\Element\NodeElement;
+use Sylius\Behat\Behaviour\NamesIt;
+use Sylius\Behat\Behaviour\SpecifiesItsField;
 use Sylius\Behat\Behaviour\Toggles;
-use Sylius\Behat\Page\Admin\Crud\UpdatePage as BaseUpdatePage;
+use Sylius\Behat\Element\Admin\Crud\FormElement as BaseFormElement;
 
-class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
+class FormElement extends BaseFormElement implements FormElementInterface
 {
+    use NamesIt;
+    use SpecifiesItsField;
     use Toggles;
 
     public function getFullName(): string
@@ -29,34 +33,14 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
         return sprintf('%s %s', $firstNameElement, $lastNameElement);
     }
 
-    public function changeFirstName(string $firstName): void
-    {
-        $this->getDocument()->fillField('First name', $firstName);
-    }
-
     public function getFirstName(): string
     {
         return $this->getElement('first_name')->getValue();
     }
 
-    public function changeLastName(string $lastName): void
-    {
-        $this->getDocument()->fillField('Last name', $lastName);
-    }
-
     public function getLastName(): string
     {
         return $this->getElement('last_name')->getValue();
-    }
-
-    public function changeEmail(string $email): void
-    {
-        $this->getDocument()->fillField('Email', $email);
-    }
-
-    public function changePassword(string $password): void
-    {
-        $this->getDocument()->fillField('Password', $password);
     }
 
     public function getPassword(): string
@@ -84,6 +68,41 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
         $this->getDocument()->checkField('Verified');
     }
 
+    public function specifyFirstName(string $name): void
+    {
+        $this->getElement('first_name')->setValue($name);
+    }
+
+    public function specifyLastName(string $name): void
+    {
+        $this->getElement('last_name')->setValue($name);
+    }
+
+    public function specifyEmail(string $email): void
+    {
+        $this->getElement('email')->setValue($email);
+    }
+
+    public function specifyBirthday(string $birthday): void
+    {
+        $this->getElement('birthday')->setValue($birthday);
+    }
+
+    public function specifyPassword(string $password): void
+    {
+        $this->getElement('password')->setValue($password);
+    }
+
+    public function chooseGender(string $gender): void
+    {
+        $this->getElement('gender')->selectOption($gender);
+    }
+
+    public function chooseGroup(string $group): void
+    {
+        $this->getElement('group')->selectOption($group);
+    }
+
     protected function getToggleableElement(): NodeElement
     {
         return $this->getElement('enabled');
@@ -92,13 +111,14 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
-            'email' => '#sylius_admin_customer_email',
-            'enabled' => '#sylius_admin_customer_user_enabled',
-            'first_name' => '#sylius_admin_customer_firstName',
-            'group' => '#sylius_admin_customer_group',
-            'last_name' => '#sylius_admin_customer_lastName',
-            'password' => '#sylius_admin_customer_user_password',
-            'verified_at' => '#sylius_admin_customer_user_verifiedAt',
+            'birthday' => '[data-test-birthday]',
+            'email' => '[data-test-email]',
+            'enabled' => '[data-test-enabled]',
+            'first_name' => '[data-test-first-name]',
+            'gender' => '[data-test-gender]',
+            'group' => '[data-test-group]',
+            'last_name' => '[data-test-last-name]',
+            'password' => '[data-test-password]',
         ]);
     }
 }
