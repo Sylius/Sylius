@@ -14,7 +14,7 @@ Feature: Checking taxons of a product
         And I am logged in as an administrator
 
     @ui @no-api @mink:chromedriver
-    Scenario: Check all taxons
+    Scenario: Checking all taxons
         When I want to modify the "Shirt" product
         And I check all taxons
         And I save my changes
@@ -22,7 +22,7 @@ Feature: Checking taxons of a product
         And the product "Shirt" should have the "T-Shirts" taxon
 
     @ui @no-api @mink:chromedriver
-    Scenario: Uncheck all taxons
+    Scenario: Unchecking all taxons
         When I want to modify the "T-Shirt" product
         And I uncheck all taxons
         And I save my changes
@@ -30,19 +30,19 @@ Feature: Checking taxons of a product
         And the product "Shirt" should not have the "T-Shirts" taxon
 
     @ui @no-api @mink:chromedriver
-    Scenario: Check all filtered taxons
+    Scenario: Checking all filtered taxons
         When I want to modify the "Shirt" product
         And I filter taxons by "T-Shirts"
         And I check all taxons
         And I save my changes
         Then the product "Shirt" should have the "T-Shirts" taxon
-        And the product "Shirt" should not have the "Clothes" taxon
+        But the product "Shirt" should not have the "Clothes" taxon
 
     @ui @no-api @mink:chromedriver
-    Scenario: Uncheck all filtered taxons
+    Scenario: Unchecking all filtered taxons
         When I want to modify the "T-Shirt" product
         And I filter taxons by "T-Shirts"
         And I uncheck all taxons
         And I save my changes
         Then the product "Shirt" should not have the "T-Shirts" taxon
-        And the product "Shirt" should have the "Clothes" taxon
+        But the product "Shirt" should have the "Clothes" taxon
