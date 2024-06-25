@@ -15,7 +15,7 @@
                 {{ form_start(form, {'action': path('sylius_shop_order_show', {'tokenValue': order.tokenValue}), 'attr': {'novalidate': 'novalidate'}}) }}
                 <input type="hidden" name="_method" value="PUT" />
 
-            {% include '@SyliusShop/Checkout/SelectPayment/_form.html.twig' %}
+                {% include '@SyliusShop/Checkout/select_payment/form.html.twig' %}
 
                 {% set order_cannot_be_paid = not sylius_order_can_be_paid(order) %}
                 <button type="submit" class="btn btn-primary{% if order_cannot_be_paid %} disabled{% endif %}" {{ sylius_test_html_attribute('pay-link') }} {% if order_cannot_be_paid %}disabled{% endif %}>
