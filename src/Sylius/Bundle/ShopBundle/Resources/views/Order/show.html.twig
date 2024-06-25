@@ -7,24 +7,26 @@
 {% block title %}{{ 'sylius.ui.summary_of_your_order'|trans }} | {{ parent() }}{% endblock %}
 
 {% block content %}
-    <div>
-        {% include '@SyliusShop/Order/_summary.html.twig' %}
+    <div class="container">
+        <div class="row gap-4 mt-4 mb-5">
+            {% include '@SyliusShop/Order/_summary.html.twig' %}
 
-        {% if order.paymentState in ['awaiting_payment'] %}
-            {{ form_start(form, {'action': path('sylius_shop_order_show', {'tokenValue': order.tokenValue}), 'attr': {'novalidate': 'novalidate'}}) }}
-            <input type="hidden" name="_method" value="PUT" />
+            {% if order.paymentState in ['awaiting_payment'] %}
+                {{ form_start(form, {'action': path('sylius_shop_order_show', {'tokenValue': order.tokenValue}), 'attr': {'novalidate': 'novalidate'}}) }}
+                <input type="hidden" name="_method" value="PUT" />
 
             {% include '@SyliusShop/Checkout/SelectPayment/_form.html.twig' %}
 
-            {% set order_cannot_be_paid = not sylius_order_can_be_paid(order) %}
-            <button type="submit" class="{% if order_cannot_be_paid %}disabled{% endif %}" {{ sylius_test_html_attribute('pay-link') }} {% if order_cannot_be_paid %}disabled{% endif %}>
-                {{ 'sylius.ui.pay'|trans }}
-            </button>
+                {% set order_cannot_be_paid = not sylius_order_can_be_paid(order) %}
+                <button type="submit" class="btn btn-primary{% if order_cannot_be_paid %} disabled{% endif %}" {{ sylius_test_html_attribute('pay-link') }} {% if order_cannot_be_paid %}disabled{% endif %}>
+                    {{ 'sylius.ui.pay'|trans }}
+                </button>
 
-            {{ form_row(form._token) }}
-            {{ form_end(form, {'render_rest': false}) }}
-        {% else %}
-            {{ messages.info('sylius.ui.you_can_no_longer_change_payment_method_of_this_order') }}
-        {% endif %}
+                {{ form_row(form._token) }}
+                {{ form_end(form, {'render_rest': false}) }}
+            {% else %}
+                {{ messages.info('sylius.ui.you_can_no_longer_change_payment_method_of_this_order') }}
+            {% endif %}
+        </div>
     </div>
 {% endblock %}
