@@ -8,7 +8,7 @@ Feature: Resetting a customer's password
         Given there is a user "goodman@example.com" identified by "heisenberg"
         And I am logged in as an administrator
 
-    @todo @ui @todo
+    @ui @todo
     Scenario: Sending reset password email to a customer
         When I view details of the customer "goodman@example.com"
         And I reset their password
