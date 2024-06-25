@@ -15,6 +15,7 @@ namespace Sylius\Bundle\AdminBundle\Twig\Component\Taxon;
 
 use Sylius\Bundle\AdminBundle\Generator\TaxonSlugGeneratorInterface;
 use Sylius\Component\Core\Model\Taxon;
+use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Taxonomy\Repository\TaxonRepositoryInterface;
 use Sylius\TwigHooks\LiveComponent\HookableLiveComponentTrait;
 use Symfony\Component\Form\FormFactoryInterface;
@@ -36,7 +37,10 @@ class FormComponent
     #[LiveProp(fieldName: 'resource')]
     public ?Taxon $resource = null;
 
-    /** @param class-string $formClass */
+    /**
+     * @param class-string $formClass
+     * @param TaxonRepositoryInterface<TaxonInterface> $taxonRepository
+     */
     public function __construct(
         private readonly FormFactoryInterface $formFactory,
         private readonly string $formClass,
