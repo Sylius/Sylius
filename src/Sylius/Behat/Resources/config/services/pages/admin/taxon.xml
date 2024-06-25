@@ -14,8 +14,8 @@
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <parameters>
         <parameter key="sylius.behat.page.admin.taxon.create.class">Sylius\Behat\Page\Admin\Taxon\CreatePage</parameter>
-        <parameter key="sylius.behat.page.admin.taxon.create_for_parent.class">Sylius\Behat\Page\Admin\Taxon\CreateForParentPage</parameter>
-        <parameter key="sylius.behat.page.admin.taxon.update.class">Sylius\Behat\Page\Admin\Taxon\UpdatePage</parameter>
+        <parameter key="sylius.behat.page.admin.taxon.create_for_parent.class">%sylius.behat.page.admin.taxon.create.class%</parameter>
+        <parameter key="sylius.behat.page.admin.taxon.update.class">%sylius.behat.page.admin.crud.update.class%</parameter>
     </parameters>
 
     <services>
@@ -25,7 +25,7 @@
             <argument type="string">sylius_admin_taxon_create</argument>
         </service>
         <service id="sylius.behat.page.admin.taxon.create_for_parent" class="%sylius.behat.page.admin.taxon.create_for_parent.class%" parent="sylius.behat.page.admin.taxon.create" public="false">
-            <argument type="string">sylius_admin_taxon_create</argument>
+            <argument type="string">sylius_admin_taxon_create_for_parent</argument>
         </service>
         <service id="sylius.behat.page.admin.taxon.update" class="%sylius.behat.page.admin.taxon.update.class%" parent="sylius.behat.page.admin.crud.update" public="false">
             <argument type="string">sylius_admin_taxon_update</argument>

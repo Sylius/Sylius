@@ -8,7 +8,7 @@ Feature: Adding a new taxon
         Given the store is available in "English (United States)"
         And I am logged in as an administrator
 
-    @todo @ui @api
+    @api @ui
     Scenario: Adding a new taxon
         When I want to create a new taxon
         And I specify its code as "t-shirts"
@@ -18,7 +18,7 @@ Feature: Adding a new taxon
         Then I should be notified that it has been successfully created
         And the "T-Shirts" taxon should appear in the registry
 
-    @todo @ui @api
+    @api @ui
     Scenario: Adding a new taxon with slug and description
         When I want to create a new taxon
         And I specify its code as "category"

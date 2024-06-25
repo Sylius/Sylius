@@ -86,7 +86,9 @@
             id="sylius.behat.element.admin.taxon.form"
             class="Sylius\Behat\Element\Admin\Taxon\FormElement"
             parent="sylius.behat.element.admin.crud.form"
-        />
+        >
+            <argument type="service" id="Sylius\Behat\Service\Helper\AutocompleteHelperInterface" />
+        </service>
 
         <service
             id="sylius.behat.element.admin.taxon.image_form"

@@ -8,7 +8,7 @@ Feature: Taxon validation
         Given the store is available in "English (United States)"
         And I am logged in as an administrator
 
-    @no-ui @api
+    @api @no-ui
     Scenario: Trying to add taxon translation in unexisting locale
         Given the store classifies its products as "Jeans"
         When I want to modify the "Jeans" taxon
@@ -16,7 +16,7 @@ Feature: Taxon validation
         And I save my changes
         Then I should be notified that the locale is not available
 
-    @todo @ui @api
+    @api @ui
     Scenario: Trying to add a taxon without specifying its code
         When I want to create a new taxon
         And I do not specify its code
@@ -25,7 +25,7 @@ Feature: Taxon validation
         Then I should be notified that code is required
         And taxon named "T-Shirts" should not be added
 
-    @todo @ui @api
+    @api @ui
     Scenario: Trying to add a taxon without specifying its name
         When I want to create a new taxon
         And I specify its code as "t-shirts"
@@ -33,7 +33,7 @@ Feature: Taxon validation
         And I try to add it
         Then I should be notified that name is required
 
-    @todo @ui @api
+    @api @ui
     Scenario: Trying to add a taxon with a too long code
         When I want to create a new taxon
         And I name it "T-Shirts" in "English (United States)"
@@ -41,7 +41,7 @@ Feature: Taxon validation
         And I try to add it
         Then I should be notified that code is too long
 
-    @todo @ui @no-api
+    @no-api @ui
     Scenario: Trying to add a taxon without specifying its slug
         When I want to create a new taxon
         And I specify its code as "t-shirts"
@@ -50,7 +50,7 @@ Feature: Taxon validation
         And I try to add it
         Then I should be notified that slug is required
 
-    @todo @ui @api
+    @api @ui
     Scenario: Trying to add a taxon with non unique slug
         Given the store classifies its products as "T-Shirts"
         When I want to create a new taxon
