@@ -92,12 +92,14 @@ final class TaxonomyFormElement extends BaseFormElement implements TaxonomyFormE
     protected function getDefinedElements(): array
     {
         return array_merge(
-            parent::getDefinedElements(), [
+            parent::getDefinedElements(),
+            [
             'main_taxon' => '[data-test-main-taxon]',
             'product_taxons_checkbox' => '[data-test-product-taxons] [data-id="%code%"] input[type="checkbox"]',
             'selected_main_taxon' => '[data-test-main-taxon] option:selected',
             'side_navigation_tab' => '[data-test-side-navigation-tab="%name%"]',
-        ]);
+        ],
+        );
     }
 
     private function changeTab(): void

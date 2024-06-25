@@ -132,7 +132,8 @@ final class AttributesFormElement extends BaseFormElement implements AttributesF
     protected function getDefinedElements(): array
     {
         return array_merge(
-            parent::getDefinedElements(), [
+            parent::getDefinedElements(),
+            [
             'attribute_add_button' => '[data-test-attribute-add-button]',
             'attribute_autocomplete' => '[data-test-attribute-autocomplete] input[name="product_attributes"]',
             'attribute_delete_button' => '[data-test-attribute-delete-button="%attribute_name%"]',
@@ -140,7 +141,8 @@ final class AttributesFormElement extends BaseFormElement implements AttributesF
             'attribute_tab' => '[data-test-attribute-tab="%name%"]',
             'attribute_value' => '[data-test-attribute-value][data-test-locale-code="%locale_code%"][data-test-attribute-name="%attribute_name%"]',
             'side_navigation_tab' => '[data-test-side-navigation-tab="%name%"]',
-        ]);
+        ],
+        );
     }
 
     private function selectAttributeToBeAdded(string $attributeName): void

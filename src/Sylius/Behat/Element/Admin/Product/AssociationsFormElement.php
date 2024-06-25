@@ -68,10 +68,12 @@ final class AssociationsFormElement extends BaseFormElement implements Associati
     protected function getDefinedElements(): array
     {
         return array_merge(
-            parent::getDefinedElements(), [
+            parent::getDefinedElements(),
+            [
             'associations' => '[name="sylius_admin_product[associations][%association%][]"]',
             'side_navigation_tab' => '[data-test-side-navigation-tab="%name%"]',
-        ]);
+        ],
+        );
     }
 
     private function changeTab(): void
