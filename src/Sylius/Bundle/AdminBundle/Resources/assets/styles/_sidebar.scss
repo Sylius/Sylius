@@ -47,3 +47,36 @@
         }
     }
 }
+
+.menu-search {
+    .btn,
+    .form-control {
+        border: 0;
+        background: var(--tblr-navbar-border-color);
+        transition: opacity 0.1s;
+    }
+
+    > * {
+        opacity: 0.5;
+    }
+
+    &:has(input[data-menu-search]:focus) > * {
+        opacity: 0.8;
+    }
+
+    [data-menu-search-clear] {
+        display: none;
+    }
+
+    [data-menu-search-icon] {
+        display: inherit;
+    }
+
+    &:has(input[data-menu-search]:not(:placeholder-shown)) [data-menu-search-clear] {
+        display: inherit;
+    }
+
+    &:has(input[data-menu-search]:not(:placeholder-shown)) [data-menu-search-icon] {
+        display: none;
+    }
+}
