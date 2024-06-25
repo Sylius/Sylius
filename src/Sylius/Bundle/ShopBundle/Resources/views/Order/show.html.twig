@@ -9,7 +9,7 @@
 {% block content %}
     <div class="container">
         <div class="row gap-4 mt-4 mb-5">
-            {% include '@SyliusShop/Order/_summary.html.twig' %}
+            {% include '@SyliusShop/Order/header.html.twig' %}
 
             {% if order.paymentState in ['awaiting_payment'] %}
                 {{ form_start(form, {'action': path('sylius_shop_order_show', {'tokenValue': order.tokenValue}), 'attr': {'novalidate': 'novalidate'}}) }}
