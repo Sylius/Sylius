@@ -47,21 +47,24 @@ final class ManagingProductTaxonsContext implements Context
     /**
      * @When I check all taxons
      */
-    public function iCheckAllTaxons(): void {
+    public function iCheckAllTaxons(): void
+    {
         $this->taxonomyFormElement->checkAllTaxons();
     }
 
     /**
      * @When I uncheck all taxons
      */
-    public function iUncheckAllTaxons(): void {
+    public function iUncheckAllTaxons(): void
+    {
         $this->taxonomyFormElement->uncheckAllTaxons();
     }
 
     /**
      * @When I filter taxons by :phrase
      */
-    public function iFilterTaxonsBy(string $phrase): void {
+    public function iFilterTaxonsBy(string $phrase): void
+    {
         $this->taxonomyFormElement->filterTaxonsBy($phrase);
     }
 
