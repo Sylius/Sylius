@@ -1,7 +1,7 @@
 {% import "@SyliusShop/Shared/macro/money.html.twig" as money %}
 
-<div>
-    <h1>{{ 'sylius.ui.summary_of_your_order'|trans }} #{{ order.number }}</h1>
+<div class="mb-4">
+    <h1 class="h2">{{ 'sylius.ui.summary_of_your_order'|trans }} #{{ order.number }}</h1>
     <div>
         {{ order.checkoutCompletedAt|date }}
         {{ money.convertAndFormat(order.total) }}
