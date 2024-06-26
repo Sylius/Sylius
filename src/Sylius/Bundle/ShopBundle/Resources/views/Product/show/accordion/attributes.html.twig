@@ -1,5 +1,5 @@
 {% if product.attributes|length > 0 %}
-    {% embed '@SyliusShop/shared/accordion/accordion_item.html.twig' with { accordion_item_id: 'attributes' } %}
+    {% embed '@SyliusShop/Shared/accordion/accordion_item.html.twig' with { accordion_item_id: 'attributes' } %}
 
         {% block accordion_item_title %}
             <span {{ sylius_test_html_attribute('tab', 'attributes') }}>
