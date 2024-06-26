@@ -119,7 +119,7 @@ If all is well the output should look like:
 
 .. tip::
 
-    In some cases you will see an error stating that the there is something wrong with the resource configuration:
+    In some cases you will see an error stating that there is something wrong with the resource configuration:
     ``Unrecognized option "classes" under...``
     When this happens, please refer to :ref:`resource-configuration`.
 
