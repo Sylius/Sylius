@@ -132,7 +132,7 @@ final class ManagingTaxonsContext implements Context
     }
 
     /**
-     * @Given /^I set its (parent taxon to "[^"]+")$/
+     * @When /^I set its (parent taxon to "[^"]+")$/
      */
     public function iSetItsParentTaxonTo(TaxonInterface $taxon): void
     {
@@ -140,7 +140,7 @@ final class ManagingTaxonsContext implements Context
     }
 
     /**
-     * @Given /^I change its (parent taxon to "[^"]+")$/
+     * @When /^I change its (parent taxon to "[^"]+")$/
      * @Then /^I should be able to change its (parent taxon to "[^"]+")$/
      */
     public function iChangeItsParentTaxonTo(TaxonInterface $taxon): void

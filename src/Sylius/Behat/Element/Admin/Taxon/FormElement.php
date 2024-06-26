@@ -71,7 +71,6 @@ final class FormElement extends BaseFormElement implements FormElementInterface
 
     public function chooseParent(TaxonInterface $taxon): void
     {
-        $this->autocompleteHelper->removeByName($this->getDriver(), $this->getElement('parent')->getXpath(), '');
         $this->autocompleteHelper->selectByName(
             $this->getDriver(),
             $this->getElement('parent')->getXpath(),

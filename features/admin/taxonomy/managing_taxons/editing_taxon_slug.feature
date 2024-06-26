@@ -74,8 +74,7 @@ Feature: Editing taxon's slug
         And I save my changes
         Then the slug of the "Pikes" taxon should still be "pikes"
 
-#    @api
-    @ui @mink:chromedriver
+    @api @ui @mink:chromedriver
     Scenario: Not editing the slug while changing the taxon's parent
         Given the store has "Medieval weapons" taxonomy
         And the store has "Renaissance weapons" taxonomy
