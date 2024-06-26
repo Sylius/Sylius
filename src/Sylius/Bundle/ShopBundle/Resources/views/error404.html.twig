@@ -1,8 +1,8 @@
 {% extends '@SyliusShop/layout.html.twig' %}
 
 {% block content %}
-    <h2>
-        <img src="{{ asset('build/shop/images/logo.png', 'shop') }}" alt="Sylius logo" />
-        {{ 'sylius.ui.the_page_you_are_looking_for_does_not_exist'|trans }}
-    </h2>
+    <div class="container d-flex flex-column align-items-center my-4">
+        <img src="{{ asset('build/shop/images/logo.png', 'shop') }}" alt="Sylius logo" class="img-fluid mb-5" style="max-height: 140px;" />
+        <h1 class="h2 text-center">{{ 'sylius.ui.the_page_you_are_looking_for_does_not_exist'|trans }}</h1>
+    </div>
 {% endblock %}
