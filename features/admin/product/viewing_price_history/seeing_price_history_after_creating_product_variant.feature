@@ -8,7 +8,7 @@ Feature: Seeing the correct catalog price history after creating a product varia
         Given the store operates on a single channel in "United States"
         And I am logged in as an administrator
 
-    @api @todo @ui
+    @api @ui
     Scenario: Seeing historical product variant prices after the product variant has been created without any promotion applied
         Given the store has a "Wyborowa Vodka" configurable product
         When I want to create a new variant of this product
@@ -20,7 +20,7 @@ Feature: Seeing the correct catalog price history after creating a product varia
         Then I should see a single log entry in the catalog price history
         And there should be a log entry with the "$20.00" selling price, "$25.00" original price and datetime of the price change
 
-    @api @todo @ui
+    @api @ui
     Scenario: Seeing historical product variant prices after the product variant has been created without original price and any promotion applied
         Given the store has a "Wyborowa Vodka" configurable product
         When I want to create a new variant of this product
@@ -31,7 +31,7 @@ Feature: Seeing the correct catalog price history after creating a product varia
         Then I should see a single log entry in the catalog price history
         And there should be a log entry with the "$20.00" selling price, no original price and datetime of the price change
 
-    @api @todo @ui
+    @api @ui
     Scenario: Seeing historical product variant prices after the product variant has been created with catalog promotions applied
         Given the store has a "Wyborowa Vodka" configurable product
         And there is a catalog promotion "Christmas sale" that reduces price by "50%" and applies on "Wyborowa Vodka" product
