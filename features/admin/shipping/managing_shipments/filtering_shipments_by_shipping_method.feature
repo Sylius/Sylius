@@ -21,7 +21,7 @@ Feature: Filtering shipments by a shipping method
         And the customer chose "DHL" shipping method to "United States" with "Offline" payment
         And I am logged in as an administrator
 
-    @todo @ui @api
+    @ui @api
     Scenario: Filtering shipments by a shipping method
         When I browse shipments
         And I choose "DHL" as a shipping method filter

@@ -27,7 +27,7 @@ Feature: Browsing shipments from multiple channels
         And the customer chose "FEDEX" shipping method with "Bank transfer" payment
         And I am logged in as an administrator
 
-    @todo @ui @api
+    @ui @api
     Scenario: Browsing shipments and their states from multiple channels
         When I browse shipments
         And I should see 2 shipments in the list
