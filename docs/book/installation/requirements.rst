@@ -67,7 +67,9 @@ By default, the database connection is pre-configured to work with a following M
 
 .. note::
 
-    You might also use any other RDBMS (like PostgreSQL), but our database migrations support MySQL only.
+    You might also use any other RDBMS (like PostgreSQL).
+
+The Sylius Database Schema is available `here <https://drawsql.app/templates/sylius>`_.
 
 NPM Package Manager
 -------------------
