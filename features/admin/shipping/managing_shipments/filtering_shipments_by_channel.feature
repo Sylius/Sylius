@@ -27,7 +27,7 @@ Feature: Filtering shipments by a channel
         And the customer chose "FEDEX" shipping method with "Bank transfer" payment
         And I am logged in as an administrator
 
-    @ui @api
+    @api @ui @mink:chromedriver
     Scenario: Filtering shipments by channel on index
         When I browse shipments
         And I choose "United States" as a channel filter

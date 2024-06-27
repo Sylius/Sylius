@@ -26,7 +26,7 @@ sylius_grid:
                         template: "@SyliusAdmin/shared/grid/field/date.html.twig"
                         vars:
                             th_class: "w-1 text-center"
-                number:
+                order:
                     type: twig
                     label: sylius.ui.order
                     path: order
@@ -58,17 +58,24 @@ sylius_grid:
                             sylius.ui.ready: ready
                             sylius.ui.shipped: shipped
                 channel:
-                    type: entity
-                    label: sylius.ui.channel
-                    options:
-                        fields: [order.channel]
-                    form_options:
-                        class: "%sylius.model.channel.class%"
-                method:
-                    type: entity
+                    type: ux_autocomplete
                     label: sylius.ui.shipping_method
                     form_options:
-                        class: "%sylius.model.shipping_method.class%"
+                        extra_options:
+                            class: "%sylius.model.channel.class%"
+                            choice_label: name
+                    options:
+                        fields: [order.channel.id]
+                method:
+                    type: ux_translatable_autocomplete
+                    label: sylius.ui.shipping_method
+                    form_options:
+                        extra_options:
+                            class: "%sylius.model.shipping_method.class%"
+                            translation_fields: [name]
+                            choice_label: name
+                    options:
+                        fields: [method.id]
             actions:
                 item:
                     ship:
