@@ -1,28 +1,25 @@
-{% macro default(message, icon, type, header) %}
-    <div class="ui icon {{ type|default('') }} message" {{ sylius_test_html_attribute('flash-message', type) }}>
-        <i class="{{ icon }} icon"></i>
-        <div class="content">
-            {% if type is not empty %}
-                <div class="header">
-                    {{ header|default(type)|trans }}
-                </div>
-            {% endif %}
-            <p>{{ message|trans }}</p>
-        </div>
+{% macro default(message, type, header) %}
+    <div class="alert {{ type|default('alert-light') }}" {{ sylius_test_html_attribute('flash-message', type) }}>
+        {% if type is not empty %}
+            <div class="fw-bold">
+                {{ header|default(type)|trans }}
+            </div>
+        {% endif %}
+        {{ message|trans }}
     </div>
 {% endmacro %}
 
 {% macro info(message) %}
     {% import _self as messages %}
-    {{ messages.default(message, 'info circle', 'info', 'sylius.ui.info') }}
+    {{ messages.default(message, 'alert-info', 'sylius.ui.info') }}
 {% endmacro %}
 
 {% macro success(message) %}
     {% import _self as messages %}
-    {{ messages.default(message, 'checkmark', 'success', 'sylius.ui.success') }}
+    {{ messages.default(message, 'alert-success', 'sylius.ui.success') }}
 {% endmacro %}
 
 {% macro error(message) %}
     {% import _self as messages %}
-    {{ messages.default(message, 'remove', 'negative', 'sylius.ui.error') }}
+    {{ messages.default(message, 'alert-danger', 'sylius.ui.error') }}
 {% endmacro %}
