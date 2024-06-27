@@ -126,7 +126,7 @@ sylius_grid:
                     options:
                         currency_field: currencyCode
                 shipping_method:
-                    type: ux_autocomplete
+                    type: ux_translatable_autocomplete
                     label: sylius.ui.shipping_method
                     form_options:
                         extra_options:

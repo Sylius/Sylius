@@ -16,7 +16,7 @@ Feature: Seeing basic information about shipment
         And the customer chose "UPS" shipping method with "Cash on Delivery" payment
         And I am logged in as an administrator
 
-    @ui @api
+    @api @ui
     Scenario: Seeing basic information about shipment
         When I view the first shipment of the order "#00000001"
         Then I should see the shipment state as "Ready"
