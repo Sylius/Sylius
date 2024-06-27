@@ -55,6 +55,7 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
+     * @Given I am browsing catalog promotions
      * @When I browse catalog promotions
      */
     public function iBrowseCatalogPromotions(): void
@@ -554,16 +555,6 @@ final class ManagingCatalogPromotionsContext implements Context
     public function iFilterByState(string $state): void
     {
         $this->filterElement->chooseState(ucfirst($state));
-        $this->filterElement->filter();
-    }
-
-    /**
-     * @When I search by :phrase name
-     * @When I search by :phrase code
-     */
-    public function iSearchBy(string $phrase): void
-    {
-        $this->filterElement->search($phrase);
         $this->filterElement->filter();
     }
 
