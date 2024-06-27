@@ -2,7 +2,7 @@
 
 <button class="btn primary"
     {{ stimulus_controller('save-positions', {
-        url: path('sylius_admin_product_taxon_update_position', {taxonId: app.request.get('taxonId')}),
+        url: path('sylius_admin_ajax_product_taxons_update_position', {taxonId: app.request.get('taxonId')}),
         csrfToken: csrf_token('update-product-taxon-position'),
         inputSelector: '.sylius-product-taxon-position',
         dataKey: 'productTaxons',
