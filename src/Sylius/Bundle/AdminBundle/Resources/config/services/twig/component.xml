@@ -321,6 +321,8 @@
         >
             <argument type="service" id="form.factory" />
             <argument>Sylius\Bundle\AdminBundle\Form\Type\TaxonType</argument>
+            <argument type="service" id="sylius.repository.taxon" />
+            <argument type="service" id="sylius_admin.generator.taxon_slug" />
 
             <tag
                 name="sylius.live_component"

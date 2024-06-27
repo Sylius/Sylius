@@ -15,7 +15,6 @@ namespace Sylius\Behat\Page\Admin\Taxon;
 
 use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Exception\ElementNotFoundException;
-use Sylius\Behat\Behaviour\SpecifiesItsField;
 use Sylius\Behat\Page\Admin\Crud\CreatePage as BaseCreatePage;
 use Sylius\Behat\Service\DriverHelper;
 use Sylius\Behat\Service\JQueryHelper;
@@ -23,8 +22,6 @@ use Sylius\Component\Core\Model\TaxonInterface;
 
 class CreatePage extends BaseCreatePage implements CreatePageInterface
 {
-    use SpecifiesItsField;
-
     public function countTaxons(): int
     {
         return count($this->getLeaves());
@@ -61,11 +58,6 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
         throw new ElementNotFoundException($this->getDriver(), 'Delete button');
     }
 
-    public function describeItAs(string $description, string $languageCode): void
-    {
-        $this->getDocument()->fillField(sprintf('sylius_taxon_translations_%s_description', $languageCode), $description);
-    }
-
     public function hasTaxonWithName(string $name): bool
     {
         return 0 !== $this->countTaxonsByName($name);
@@ -74,18 +66,6 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     public function getLeaves(?TaxonInterface $parentTaxon = null): array
     {
         return $this->getDocument()->findAll('css', '.sylius-tree__item');
-    }
-
-    public function activateLanguageTab(string $localeCode): void
-    {
-        if (DriverHelper::isNotJavascript($this->getDriver())) {
-            return;
-        }
-
-        $languageTabTitle = $this->getElement('language_tab', ['%locale_code%' => $localeCode]);
-        if (!$languageTabTitle->hasClass('active')) {
-            $languageTabTitle->click();
-        }
     }
 
     public function moveUpTaxon(string $name): void
@@ -120,24 +100,10 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
         return $leaves[count($leaves) - 1]->getText();
     }
 
-    protected function getElement(string $name, array $parameters = []): NodeElement
-    {
-        if (!isset($parameters['%language%'])) {
-            $parameters['%language%'] = 'en_US';
-        }
-
-        return parent::getElement($name, $parameters);
-    }
-
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
-            'code' => '#sylius_taxon_code',
             'confirmation_button' => '#confirmation-button',
-            'description' => '#sylius_taxon_translations_en_US_description',
-            'language_tab' => '[data-locale="%locale_code%"] .title',
-            'name' => '#sylius_taxon_translations_%language%_name',
-            'slug' => '#sylius_taxon_translations_%language%_slug',
             'tree' => '.sylius-tree',
             'tree_item' => '.sylius-tree__item a:contains("%taxon%")',
         ]);

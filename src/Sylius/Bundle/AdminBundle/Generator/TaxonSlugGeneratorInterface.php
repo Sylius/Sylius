@@ -11,12 +11,11 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Behat\Page\Admin\Taxon;
+namespace Sylius\Bundle\AdminBundle\Generator;
 
-class CreateForParentPage extends CreatePage implements CreateForParentPageInterface
+use Sylius\Component\Core\Model\TaxonInterface;
+
+interface TaxonSlugGeneratorInterface
 {
-    public function getRouteName(): string
-    {
-        return 'sylius_admin_taxon_create_for_parent';
-    }
+    public function generate(string $name, string $localeCode, ?TaxonInterface $parent = null): string;
 }

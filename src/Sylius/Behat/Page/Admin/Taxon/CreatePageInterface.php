@@ -26,11 +26,7 @@ interface CreatePageInterface extends BaseCreatePageInterface
 
     public function deleteTaxonOnPageByName(string $name): void;
 
-    public function describeItAs(string $description, string $languageCode): void;
-
     public function hasTaxonWithName(string $name): bool;
-
-    public function specifyCode(string $code): void;
 
     /**
      * @return NodeElement[]
@@ -38,8 +34,6 @@ interface CreatePageInterface extends BaseCreatePageInterface
      * @throws ElementNotFoundException
      */
     public function getLeaves(?TaxonInterface $parentTaxon = null): array;
-
-    public function activateLanguageTab(string $localeCode): void;
 
     public function moveUpTaxon(string $name): void;
 
