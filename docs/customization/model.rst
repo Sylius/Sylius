@@ -406,3 +406,8 @@ Which we strongly recommend over updating the schema.
 you'll need to update its form type. Check how to do it :doc:`here </customization/form>`.
 
 .. include:: /customization/plugins.rst
+
+Learn more
+----------
+
+* `Sylius Database Schema <https://drawsql.app/templates/sylius>`_
