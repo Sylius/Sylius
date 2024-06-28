@@ -9,7 +9,7 @@ Feature: Product association type validation
         And the store has a product association type "Cross sell"
         And I am logged in as an administrator
 
-    @ui @api
+    @api @ui
     Scenario: Trying to add a new product association type without specifying its code
         When I want to create a new product association type
         And I name it "Up sell" in "English (United States)"
@@ -18,7 +18,7 @@ Feature: Product association type validation
         Then I should be notified that code is required
         And the product association type with name "Up sell" should not be added
 
-    @ui @api
+    @api @ui
     Scenario: Trying to add a new product association type without specifying its name
         When I want to create a new product association type
         And I specify its code as "up_sell"
@@ -27,7 +27,7 @@ Feature: Product association type validation
         Then I should be notified that name is required
         And the product association type with code "up_sell" should not be added
 
-    @ui @api
+    @api @ui
     Scenario: Trying to remove name from an existing product association type
         When I want to modify the "Cross sell" product association type
         And I remove its name from "English (United States)" translation
@@ -35,7 +35,7 @@ Feature: Product association type validation
         Then I should be notified that name is required
         And this product association type should still be named "Cross sell"
 
-    @no-ui @api
+    @api @no-ui
     Scenario: Trying to add product association type translation in unexisting locale
         When I want to modify the "Cross sell" product association type
         And I name it "Vente croisée" in "French (France)"
