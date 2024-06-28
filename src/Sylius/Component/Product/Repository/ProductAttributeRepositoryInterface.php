@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Product\Repository;
 
+use Doctrine\ORM\QueryBuilder;
 use Sylius\Component\Product\Model\ProductAttributeInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
@@ -23,4 +24,5 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
  */
 interface ProductAttributeRepositoryInterface extends RepositoryInterface
 {
+    public function createListQueryBuilder(string $locale): QueryBuilder;
 }
