@@ -1,6 +1,6 @@
 @managing_product_options
 Feature: Filtering product options
-    In order quickly find specific product options
+    In order to quickly find specific product options
     As an Administrator
     I want to filter product options by name and code
 

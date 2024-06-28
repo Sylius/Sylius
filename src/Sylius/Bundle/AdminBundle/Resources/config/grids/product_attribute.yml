@@ -5,6 +5,10 @@ sylius_grid:
                 name: doctrine/orm
                 options:
                     class: "%sylius.model.product_attribute.class%"
+                    repository:
+                        method: createListQueryBuilder
+                        arguments: ["expr:service('sylius.context.locale').getLocaleCode()"]
+
             sorting:
                 position: asc
             fields:
@@ -51,7 +55,7 @@ sylius_grid:
                     form_options:
                         type: !php/const Sylius\Component\Grid\Filter\StringFilter::TYPE_CONTAINS
                     options:
-                        fields: [name, code]
+                        fields: [translations.name, code]
                 type:
                     type: select
                     label: sylius.ui.type
