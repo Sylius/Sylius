@@ -42,6 +42,15 @@
                     transform: scale(0.75) rotate(-90deg);
                 }
 
+                &.infinite-tree-leaf::before {
+                    content: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><circle cx="8" cy="8" r="3.5"/></svg>');
+                    display: block;
+                    width: 16px;
+                    height: 16px;
+                    margin-top: 2px;
+                    opacity: 0.5;
+                }
+
                 &:hover::before {
                     opacity: 0.8 !important;
                 }

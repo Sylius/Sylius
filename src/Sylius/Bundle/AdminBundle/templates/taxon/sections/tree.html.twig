@@ -1,16 +1,65 @@
-{# Rendered with \Sylius\Bundle\AdminBundle\Twig\Component\Taxon\TreeComponent #}
+{% from '@SyliusAdmin/shared/helper/icon.html.twig' import icon %}
+{% import '@SyliusAdmin/shared/helper/button.html.twig' as button %}
 
-{% import '@SyliusAdmin/taxon/helper/tree.html.twig' as taxon_tree %}
-
-<div {{ attributes }}>
-    <div class="card mb-5" data-js-tree="container">
-        <div class="card-body relative">
-            <div class="mb-3">
-                <button data-js-tree="toggle-all" type="button" class="btn btn-sm">Toggle All</button>
+<div {{ attributes.defaults(stimulus_controller('taxon-tree', {treeData: this.tree, autoOpen: true})) }}>
+    <div class="card mb-5">
+        <div class="card-body">
+            <div data-loading>
+                <div class="sylius-loader">
+                    <img src="{{ asset('build/admin/images/loader.gif', 'admin') }}" alt="{{ 'sylius.ui.loading'|trans }}"/>
+                </div>
             </div>
-            <div>
-                {{ taxon_tree.render(root_nodes) }}
+            <div class="d-none" data-taxon-tree-target="itemPrototyp">
+                <div class="d-flex justify-content-between infinite-tree-item" {{ sylius_test_html_attribute('tree-taxon', '__TAXON_NAME__') }}>
+                    <div class="infinite-tree-node">
+                        <span class="infinite-tree-toggler" data-infinite-tree-toggler></span>
+                        <span class="infinite-tree-toggler infinite-tree-title">__TAXON_NAME__</span>
+                    </div>
+                    <div class="d-flex">
+                        <a href="{{ path('sylius_admin_taxon_update', {id: '__TAXON_ID__'}) }}" class="btn btn-icon btn-sm" data-bs-toggle="tooltip" data-bs-title="{{ 'sylius.ui.edit'|trans }}">
+                            {{ icon({ icon: 'pencil', class: 'icon' }) }}
+                        </a>
+                        <div class="dropdown">
+                            <button class="btn btn-icon btn-sm" type="button" data-bs-toggle="dropdown" {{ sylius_test_html_attribute('actions') }}>
+                                {{ icon({ icon: 'dots', class: 'icon' }) }}
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a class="dropdown-item" href="{{ path('sylius_admin_taxon_create_for_parent', { id: '__TAXON_ID__' }) }}">
+                                        {{ 'sylius.ui.create_child'|trans }}
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="{{ path('sylius_admin_product_taxon_index', { taxonId: '__TAXON_ID__' }) }}">
+                                        {{ 'sylius.ui.products_positions'|trans }}
+                                    </a>
+                                </li>
+                                <li>
+                                    <button class="dropdown-item"
+                                        data-action="live#action:prevent"
+                                        data-live-action-param="moveUp"
+                                        data-live-taxon-id-param="__TAXON_ID__"
+                                        {{ sylius_test_html_attribute('move-up') }}
+                                    >
+                                        {{ 'sylius.ui.move_up'|trans }}
+                                    </button>
+                                </li>
+                                <li>
+                                    <button class="dropdown-item"
+                                        data-action="live#action:prevent"
+                                        data-live-action-param="moveDown"
+                                        data-live-taxon-id-param="__TAXON_ID__"
+                                        {{ sylius_test_html_attribute('move-down') }}
+                                    >
+                                        {{ 'sylius.ui.move_down'|trans }}
+                                    </button>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
             </div>
+            <div data-taxon-tree-target="tree" {{ sylius_test_html_attribute('tree-taxons') }}></div>
         </div>
     </div>
 </div>
