@@ -22,22 +22,58 @@ use Sylius\Component\Core\Model\TaxonInterface;
 
 class CreatePage extends BaseCreatePage implements CreatePageInterface
 {
-    public function countTaxons(): int
+    public function getTaxonsNames(): array
     {
-        return count($this->getLeaves());
+        $treeTaxons = $this->getElement('tree_taxons');
+        $taxons = [];
+
+        foreach ($treeTaxons->findAll('css', '[data-test-tree-taxon]') as $taxon) {
+            $taxons[] = $taxon->getText();
+        }
+
+        return $taxons;
     }
 
-    public function countTaxonsByName(string $name): int
+    public function countTaxons(): int
     {
-        $matchedLeavesCounter = 0;
-        $leaves = $this->getLeaves();
-        foreach ($leaves as $leaf) {
-            if (str_contains($leaf->getText(), $name)) {
-                ++$matchedLeavesCounter;
+        return count($this->getElement('tree_taxons')->findAll('css', '[data-test-tree-taxon]'));
+    }
+
+    public function isTaxonOnTheList(string $taxonName): bool
+    {
+        $taxons = $this->getElement('tree_taxons')->findAll('css', '[data-test-tree-taxon]');
+
+        foreach ($taxons as $taxon) {
+            if ($taxonName === $taxon->getText()) {
+                return true;
             }
         }
 
-        return $matchedLeavesCounter;
+        return false;
+    }
+
+    public function getFirstTaxonOnTheList(): string
+    {
+        return $this->getElement('first_tree_taxon')->getText();
+    }
+
+    public function getLastTaxonOnTheList(): string
+    {
+        return $this->getElement('last_tree_taxon')->getText();
+    }
+
+    public function moveUpTaxon(string $name): void
+    {
+        $this->getElement('tree_taxon_actions', ['%name%' => $name])->click();
+        $this->getElement('tree_taxon_move_up', ['%name%' => $name])->click();
+        $this->waitForUpdate();
+    }
+
+    public function moveDownTaxon(string $name): void
+    {
+        $this->getElement('tree_taxon_actions', ['%name%' => $name])->click();
+        $this->getElement('tree_taxon_move_down', ['%name%' => $name])->click();
+        $this->waitForUpdate();
     }
 
     public function deleteTaxonOnPageByName(string $name): void
@@ -58,54 +94,25 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
         throw new ElementNotFoundException($this->getDriver(), 'Delete button');
     }
 
-    public function hasTaxonWithName(string $name): bool
-    {
-        return 0 !== $this->countTaxonsByName($name);
-    }
-
-    public function getLeaves(?TaxonInterface $parentTaxon = null): array
-    {
-        return $this->getDocument()->findAll('css', '.sylius-tree__item');
-    }
-
-    public function moveUpTaxon(string $name): void
-    {
-        $taxonElement = $this->getElement('tree_item', ['%taxon%' => $name]);
-        $treeAction = $taxonElement->getParent()->getParent()->find('css', '.sylius-tree__action');
-        $treeAction->click();
-        JQueryHelper::waitForAsynchronousActionsToFinish($this->getSession());
-        $treeAction->find('css', '.sylius-taxon-move-up .up')->click();
-        JQueryHelper::waitForAsynchronousActionsToFinish($this->getSession());
-    }
-
-    public function moveDownTaxon(string $name): void
-    {
-        $taxonElement = $this->getElement('tree_item', ['%taxon%' => $name]);
-        $treeAction = $taxonElement->getParent()->getParent()->find('css', '.sylius-tree__action');
-        $treeAction->click();
-        JQueryHelper::waitForAsynchronousActionsToFinish($this->getSession());
-        $treeAction->find('css', '.sylius-taxon-move-down .down')->click();
-        JQueryHelper::waitForAsynchronousActionsToFinish($this->getSession());
-    }
-
-    public function getFirstTaxonOnTheList(): string
-    {
-        return $this->getLeaves()[0]->getText();
-    }
-
-    public function getLastTaxonOnTheList(): string
-    {
-        $leaves = $this->getLeaves();
-
-        return $leaves[count($leaves) - 1]->getText();
-    }
-
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
-            'confirmation_button' => '#confirmation-button',
-            'tree' => '.sylius-tree',
-            'tree_item' => '.sylius-tree__item a:contains("%taxon%")',
+            'tree_taxons' => '[data-test-tree-taxons]',
+            'tree_taxon_actions' => '[data-test-tree-taxons] [data-test-tree-taxon="%name%"] [data-test-actions]',
+            'tree_taxon_move_down' => '[data-test-tree-taxons] [data-test-tree-taxon="%name%"] [data-test-move-down]',
+            'tree_taxon_move_up' => '[data-test-tree-taxons] [data-test-tree-taxon="%name%"] [data-test-move-up]',
+            'first_tree_taxon' => '[data-test-tree-taxons] [data-test-tree-taxon]:first-child',
+            'last_tree_taxon' => '[data-test-tree-taxons] [data-test-tree-taxon]:last-child',
+            'tree_taxon_component' => '[data-live-name-value="sylius_admin:taxon:tree"]',
         ]);
+    }
+
+    protected function waitForUpdate(): void
+    {
+        $treeTaxonComponent = $this->getElement('tree_taxon_component');
+        sleep(1); // we need to sleep, as sometimes the check below is executed faster than the treeTaxonComponent sets the busy attribute
+        $treeTaxonComponent->waitFor(1500, function () use ($treeTaxonComponent) {
+            return !$treeTaxonComponent->hasAttribute('busy');
+        });
     }
 }

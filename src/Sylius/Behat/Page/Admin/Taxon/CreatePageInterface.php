@@ -20,26 +20,19 @@ use Sylius\Component\Core\Model\TaxonInterface;
 
 interface CreatePageInterface extends BaseCreatePageInterface
 {
+    public function getTaxonsNames(): array;
+
     public function countTaxons(): int;
 
-    public function countTaxonsByName(string $name): int;
+    public function isTaxonOnTheList(string $taxonName): bool;
 
-    public function deleteTaxonOnPageByName(string $name): void;
+    public function getFirstTaxonOnTheList(): string;
 
-    public function hasTaxonWithName(string $name): bool;
-
-    /**
-     * @return NodeElement[]
-     *
-     * @throws ElementNotFoundException
-     */
-    public function getLeaves(?TaxonInterface $parentTaxon = null): array;
+    public function getLastTaxonOnTheList(): string;
 
     public function moveUpTaxon(string $name): void;
 
     public function moveDownTaxon(string $name): void;
 
-    public function getFirstTaxonOnTheList(): string;
-
-    public function getLastTaxonOnTheList(): string;
+    public function deleteTaxonOnPageByName(string $name): void;
 }
