@@ -59,7 +59,9 @@ final class DashboardContext implements Context
         string $period,
         string $interval,
     ): void {
-        $this->dashboardPage->open(['channel' => $channel->getCode()]);
+        if (!$this->dashboardPage->isOpen(['channel' => $channel->getCode()])) {
+            $this->dashboardPage->open(['channel' => $channel->getCode()]);
+        }
 
         match ($interval) {
             'month' => $this->dashboardPage->chooseYearSplitByMonthsInterval(),
@@ -99,12 +101,11 @@ final class DashboardContext implements Context
     }
 
     /**
-     * @Then I should see :number new orders
      * @Then I should see :number paid orders
      */
-    public function iShouldSeeNewOrders(int $number): void
+    public function iShouldSeePaidOrders(int $number): void
     {
-        Assert::same($this->dashboardPage->getNumberOfNewOrders(), $number);
+        Assert::same($this->dashboardPage->getNumberOfPaidOrders(), $number);
     }
 
     /**
