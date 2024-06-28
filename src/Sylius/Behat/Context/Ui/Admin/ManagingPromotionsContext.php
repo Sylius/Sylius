@@ -680,12 +680,12 @@ final class ManagingPromotionsContext implements Context
     /**
      * @Then I should see :count promotions on the list
      */
-    public function iShouldSeePromotionsOnTheList($count): void
+    public function iShouldSeePromotionsOnTheList(int $count): void
     {
         $actualCount = $this->indexPage->countItems();
 
         Assert::same(
-            (int) $count,
+            $count,
             $actualCount,
             'There should be %s promotion, but there\'s %2$s.',
         );
@@ -694,7 +694,7 @@ final class ManagingPromotionsContext implements Context
     /**
      * @Then the first promotion on the list should have :field :value
      */
-    public function theFirstPromotionOnTheListShouldHave($field, $value): void
+    public function theFirstPromotionOnTheListShouldHave(string $field, string $value): void
     {
         $fields = $this->indexPage->getColumnFields($field);
         $actualValue = reset($fields);
@@ -709,7 +709,7 @@ final class ManagingPromotionsContext implements Context
     /**
      * @Then the last promotion on the list should have :field :value
      */
-    public function theLastPromotionOnTheListShouldHave($field, $value): void
+    public function theLastPromotionOnTheListShouldHave(string $field, string $value): void
     {
         $fields = $this->indexPage->getColumnFields($field);
         $actualValue = end($fields);
