@@ -94,7 +94,7 @@ final class DashboardContext implements Context
     /**
      * @Then I should see :count paid orders
      */
-    public function iShouldSeeNewOrders(int $count): void
+    public function iShouldSeePaidOrders(int $count): void
     {
         Assert::true(
             $this->responseChecker->hasValuesInSubresourceObject(
