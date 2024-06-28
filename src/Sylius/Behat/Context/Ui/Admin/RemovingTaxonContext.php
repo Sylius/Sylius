@@ -49,7 +49,7 @@ final class RemovingTaxonContext implements Context
     {
         $this->createPage->open();
 
-        Assert::true($this->createPage->hasTaxonWithName($taxon->getName()));
+        Assert::true($this->createPage->isTaxonOnTheList($taxon->getName()));
     }
 
     /**

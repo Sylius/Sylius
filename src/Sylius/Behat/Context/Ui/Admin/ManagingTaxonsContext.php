@@ -358,7 +358,7 @@ final class ManagingTaxonsContext implements Context
             $this->createPage->open();
         }
 
-        Assert::same($this->createPage->countTaxonsByName($name), 0);
+        Assert::false($this->createPage->isTaxonOnTheList($name));
     }
 
     /**
@@ -366,7 +366,7 @@ final class ManagingTaxonsContext implements Context
      */
     public function iShouldSeeTaxonsInTheList(int $number): void
     {
-        Assert::same($this->createPage->countTaxons(), (int) $number);
+        Assert::same($this->createPage->countTaxons(), $number);
     }
 
     /**
@@ -374,7 +374,17 @@ final class ManagingTaxonsContext implements Context
      */
     public function iShouldSeeTheTaxonNamedInTheList(string $name): void
     {
-        Assert::same($this->createPage->countTaxonsByName($name), 1);
+        Assert::true($this->createPage->isTaxonOnTheList($name));
+    }
+
+    /**
+     * @Then the order of taxons should be :firstTaxon, :secondTaxon, :thirdTaxon and :fourthTaxon
+     */
+    public function theOrderOfTaxonsShouldBe(string ...$taxonsName): void
+    {
+        $taxons = $this->createPage->getTaxonsNames();
+
+        Assert::same($taxons, $taxonsName);
     }
 
     /**
