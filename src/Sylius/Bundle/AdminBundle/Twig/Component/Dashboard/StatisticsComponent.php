@@ -16,6 +16,7 @@ namespace Sylius\Bundle\AdminBundle\Twig\Component\Dashboard;
 use Sylius\Bundle\AdminBundle\Provider\StatisticsDataProviderInterface;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
+use Sylius\Component\Core\Statistics\Provider\StatisticsProviderInterface;
 use Sylius\TwigHooks\LiveComponent\HookableLiveComponentTrait;
 use Symfony\UX\LiveComponent\Attribute\AsLiveComponent;
 use Symfony\UX\LiveComponent\Attribute\LiveAction;
@@ -42,18 +43,19 @@ class StatisticsComponent
     public string $endDate = 'first day of january next year';
 
     #[LiveProp]
-    public string $range = 'month';
+    public string $period = 'year';
 
     #[LiveProp]
-    public string $rangeName = 'year';
+    public string $interval = 'month';
 
     /**
      * @param ChannelRepositoryInterface<ChannelInterface> $channelRepository
      */
     public function __construct(
         private readonly ChannelRepositoryInterface $channelRepository,
-        private readonly StatisticsDataProviderInterface $statisticsDataProvider,
-    ) {
+        private readonly StatisticsProviderInterface $statisticsProvider,
+    )
+    {
     }
 
     /**
@@ -67,24 +69,49 @@ class StatisticsComponent
         /** @var ChannelInterface $channel */
         $channel = $this->channelRepository->findOneByCode($this->channelCode);
 
-        return $this->statisticsDataProvider->getRawData(
+        $statistics = $this->statisticsProvider->provide(
+            $this->interval,
+            new \DatePeriod(new \DateTime($this->startDate), new \DateInterval('P1M'), new \DateTime($this->endDate)),
             $channel,
-            new \DateTime($this->startDate),
-            new \DateTime($this->endDate),
-            $this->range,
         );
+
+        $result['business_activity_summary'] = $statistics->getBusinessActivitySummary();
+
+        $saleList = $statistics->getSales();
+        $result['sales_summary'] = [
+            'intervals' => array_column($saleList, 'period'),
+            'sales' => array_map(
+                static function (int $total): string {
+                    return number_format(abs($total / 100), 2, '.', '');
+                },
+                array_column($saleList, 'total'),
+            ),
+        ];
+
+        return $result;
     }
 
     #[LiveAction]
     public function changeRange(
-        #[LiveArg] string $name,
-        #[LiveArg] string $range,
-        #[LiveArg] string $startDate,
-        #[LiveArg] string $endDate,
-    ): void {
-        $this->rangeName = $name;
-        $this->range = $range;
-        $this->startDate = date('Y-m-d', strtotime($startDate));
-        $this->endDate = date('Y-m-d', strtotime($endDate));
+        #[LiveArg] string $period,
+        #[LiveArg] string $interval,
+    ): void
+    {
+        $this->period = $period;
+        $this->interval = $interval;
+    }
+
+    #[LiveAction]
+    public function getPreviousPeriod(): void
+    {
+        $this->startDate = date('Y-m-d', strtotime($this->startDate . ' -1 ' . $this->period));
+        $this->endDate = date('Y-m-d', strtotime($this->endDate . ' -1 ' . $this->period));
+    }
+
+    #[LiveAction]
+    public function getNextPeriod(): void
+    {
+        $this->startDate = date('Y-m-d', strtotime($this->startDate . ' +1 ' . $this->period));
+        $this->endDate = date('Y-m-d', strtotime($this->endDate . ' +1 ' . $this->period));
     }
 }

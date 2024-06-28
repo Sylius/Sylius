@@ -112,7 +112,7 @@
             class="Sylius\Bundle\AdminBundle\Twig\Component\Dashboard\StatisticsComponent"
         >
             <argument type="service" id="sylius.repository.channel" />
-            <argument type="service" id="Sylius\Bundle\AdminBundle\Provider\StatisticsDataProviderInterface" />
+            <argument type="service" id="Sylius\Component\Core\Statistics\Provider\StatisticsProviderInterface" />
 
             <tag
                 name="sylius.live_component"

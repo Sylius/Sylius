@@ -1,6 +1,9 @@
-<div class="container-xl" {{ attributes }}>
+<div
+    {{ sylius_test_html_attribute('statistics-component')}}
+    class="container-xl card m-3" {{ attributes }}
+>
     {% hook 'statistics' with {
         statistics_data: statistics,
-        range,
+        period,
     } %}
 </div>
