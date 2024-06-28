@@ -20,7 +20,9 @@ use Sylius\Component\Core\Model\ProductTaxonInterface;
 use Sylius\Component\Core\Positioner\PositionerInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\Resource\ResourceActions;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpKernel\Exception\HttpException;
@@ -32,25 +34,28 @@ class ProductTaxonController extends ResourceController
         $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
         $this->validateCsrfProtection($request, $configuration);
         $this->isGrantedOr403($configuration, ResourceActions::UPDATE);
+
         $productTaxonsPositions = $request->request->all('productTaxons');
+        $productTaxonsPositions = array_combine(
+            array_column($productTaxonsPositions, 'id'),
+            array_column($productTaxonsPositions, 'position'),
+        );
 
         if (!$this->shouldProductsPositionsBeUpdated($request, $productTaxonsPositions)) {
-            return $this->redirectHandler->redirectToReferer($configuration);
+            return new JsonResponse();
         }
 
-        $maxPosition = $this->getMaxPosition($configuration);
+        $maxPosition = $this->getMaxPosition(array_keys($productTaxonsPositions)[0]);
 
         try {
             $this->updatePositions($productTaxonsPositions, $maxPosition);
         } catch (\InvalidArgumentException $exception) {
             /** @var Session $session */
-            $session = $request->getSession();
+            $session = $this->getMainRequest()->getSession();
             $session->getFlashBag()->add('error', $exception->getMessage());
-
-            return $this->redirectHandler->redirectToReferer($configuration);
         }
 
-        return $this->redirectHandler->redirectToReferer($configuration);
+        return new JsonResponse();
     }
 
     /** @param array<int, string> $productTaxonPositions */
@@ -86,15 +91,13 @@ class ProductTaxonController extends ResourceController
         }
     }
 
-    private function getMaxPosition(RequestConfiguration $configuration): int
+    private function getMaxPosition(mixed $productTaxonId): int
     {
         /** @var ProductTaxonInterface $productTaxon */
-        $productTaxon = $this->findOr404($configuration);
+        $productTaxon = $this->repository->find($productTaxonId);
 
-        /** @var EntityRepository&RepositoryInterface $repository */
-        $repository = $this->repository;
-
-        return $repository->count(['taxon' => $productTaxon->getTaxon()]) - 1;
+        /** @phpstan-ignore-next-line */
+        return $this->repository->count(['taxon' => $productTaxon->getTaxon()]) - 1;
     }
 
     private function validateCsrfProtection(Request $request, RequestConfiguration $configuration): void
@@ -119,5 +122,13 @@ class ProductTaxonController extends ResourceController
         $positioner = $this->get(PositionerInterface::class);
 
         return $positioner;
+    }
+
+    private function getMainRequest(): Request
+    {
+        /** @var RequestStack $requestStack */
+        $requestStack = $this->get('request_stack');
+
+        return $requestStack->getMainRequest();
     }
 }

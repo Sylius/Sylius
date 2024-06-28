@@ -17,20 +17,6 @@ sylius_admin_product:
                 icon: cube
     type: sylius.resource
 
-sylius_admin_product_per_taxon_index:
-    path: /products/taxon/{taxonId}
-    methods: [GET]
-    defaults:
-        _controller: sylius.controller.product::indexAction
-        _sylius:
-            section: admin
-            permission: true
-            grid: sylius_admin_product_from_taxon
-            template: "@SyliusAdmin/Product/index.html.twig"
-            vars:
-                subheader: sylius.ui.manage_your_product_catalog
-                icon: cube
-
 sylius_admin_product_create_simple:
     path: /products/new/simple
     methods: [GET, POST]

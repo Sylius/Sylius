@@ -1,5 +1,7 @@
 {% from '@SyliusAdmin/shared/helper/icon.html.twig' import icon %}
 
-{% set path = options.link.url|default(path(options.link.route|default(grid.requestConfiguration.getRouteName('delete')), options.link.parameters|default({'id': data.id}))) %}
+{% set id = options.link.parameters['id']|default(data.id)  %}
 
-{{ component('sylius_admin:delete_modal', {id: data.id, path: path, label: action.label, icon: action.icon}) }}
+{% set path = options.link.url|default(path(options.link.route|default(grid.requestConfiguration.getRouteName('delete')), options.link.parameters|default({'id': id}))) %}
+
+{{ component('sylius_admin:delete_modal', {id: id, path: path, label: action.label, icon: action.icon}) }}

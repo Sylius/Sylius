@@ -5,7 +5,12 @@ twig_hooks:
                 enabled: false
             sections:
                 template: '@SyliusAdmin/taxon/sections.html.twig'
-        
+
+        'sylius_admin.taxon.update.content.header.title_block.actions':
+            manage_product_positions:
+                template: '@SyliusAdmin/taxon/update/content/header/title_block/actions/manage_product_positions.html.twig'
+                priority: 150
+
         'sylius_admin.taxon.update.content.sections#left':
             tree:
                 component: 'sylius_admin:taxon:tree'
@@ -18,7 +23,7 @@ twig_hooks:
                     resource: '@=_context.resource'
                 configuration:
                     method: 'PUT'
-        
+
         'sylius_admin.taxon.update.content.sections.form':
             details:
                 template: '@SyliusAdmin/taxon/sections/form/details.html.twig'
@@ -26,7 +31,7 @@ twig_hooks:
                 template: '@SyliusAdmin/taxon/sections/form/translations.html.twig'
             images:
                 template: '@SyliusAdmin/taxon/sections/form/images.html.twig'
-        
+
         'sylius_admin.taxon.update.content.sections.form.details':
             code:
                 template: '@SyliusAdmin/taxon/sections/form/details/code.html.twig'
@@ -34,7 +39,7 @@ twig_hooks:
                 template: '@SyliusAdmin/taxon/sections/form/details/parent.html.twig'
             enabled:
                 template: '@SyliusAdmin/taxon/sections/form/details/enabled.html.twig'
-        
+
         'sylius_admin.taxon.update.content.sections.form.translations':
             name:
                 template: '@SyliusAdmin/taxon/sections/form/translations/name.html.twig'
@@ -42,17 +47,17 @@ twig_hooks:
                 template: '@SyliusAdmin/taxon/sections/form/translations/slug.html.twig'
             description:
                 template: '@SyliusAdmin/taxon/sections/form/translations/description.html.twig'
-        
+
         'sylius_admin.taxon.update.content.sections.form.images':
             image:
                 template: '@SyliusAdmin/taxon/sections/form/images/image.html.twig'
-        
+
         'sylius_admin.taxon.update.content.sections.form.images.image#left':
             picture:
                 template: '@SyliusAdmin/taxon/sections/form/images/image/picture.html.twig'
             button_delete:
                 template: '@SyliusAdmin/taxon/sections/form/images/image/button_delete.html.twig'
-        
+
         'sylius_admin.taxon.update.content.sections.form.images.image#right':
             type:
                 template: '@SyliusAdmin/taxon/sections/form/images/image/type.html.twig'
