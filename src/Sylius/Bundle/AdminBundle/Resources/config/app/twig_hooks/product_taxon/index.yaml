@@ -2,7 +2,7 @@ twig_hooks:
     hooks:
         'sylius_admin.product_taxon.index.content.header':
             breadcrumbs:
-                component: sylius_admin:render_entity
+                component: sylius_admin:render_entity_with_template
                 props:
                     entity: '%sylius.model.taxon.class%'
                     identifier: '@=_context.resources.getRequestConfiguration().getRequest().attributes.get("taxonId")'
@@ -10,7 +10,7 @@ twig_hooks:
 
         'sylius_admin.product_taxon.index.content.header.title_block':
             title:
-                component: sylius_admin:render_entity
+                component: sylius_admin:render_entity_with_template
                 props:
                     entity: '%sylius.model.taxon.class%'
                     identifier: '@=_context.resources.getRequestConfiguration().getRequest().attributes.get("taxonId")'

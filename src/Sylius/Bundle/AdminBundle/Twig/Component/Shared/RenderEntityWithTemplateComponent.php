@@ -16,7 +16,7 @@ namespace Sylius\Bundle\AdminBundle\Twig\Component\Shared;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\UX\TwigComponent\Attribute\ExposeInTemplate;
 
-class RenderEntityComponent
+class RenderEntityWithTemplateComponent
 {
     public function __construct(
         private EntityManagerInterface $entityManager,

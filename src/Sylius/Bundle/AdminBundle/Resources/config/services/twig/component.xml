@@ -135,15 +135,15 @@
         </service>
 
         <service
-            id="sylius_admin.twig.component.render_resource"
-            class="Sylius\Bundle\AdminBundle\Twig\Component\Shared\RenderEntityComponent"
+            id="sylius_admin.twig.component.render_entity_with_template"
+            class="Sylius\Bundle\AdminBundle\Twig\Component\Shared\RenderEntityWithTemplateComponent"
         >
             <argument type="service" id="doctrine.orm.entity_manager" />
 
             <tag
                 name="twig.component"
-                key="sylius_admin:render_entity"
-                template="@SyliusAdmin/shared/components/render_entity.html.twig"
+                key="sylius_admin:render_entity_with_template"
+                template="@SyliusAdmin/shared/components/render_entity_with_template.html.twig"
             />
         </service>
 
