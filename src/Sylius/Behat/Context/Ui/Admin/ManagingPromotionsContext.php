@@ -680,7 +680,7 @@ final class ManagingPromotionsContext implements Context
     /**
      * @Then I should see :count promotions on the list
      */
-    public function iShouldSeePromotionsOnTheList($count)
+    public function iShouldSeePromotionsOnTheList($count): void
     {
         $actualCount = $this->indexPage->countItems();
 
@@ -694,7 +694,7 @@ final class ManagingPromotionsContext implements Context
     /**
      * @Then the first promotion on the list should have :field :value
      */
-    public function theFirstPromotionOnTheListShouldHave($field, $value)
+    public function theFirstPromotionOnTheListShouldHave($field, $value): void
     {
         $fields = $this->indexPage->getColumnFields($field);
         $actualValue = reset($fields);
@@ -709,7 +709,7 @@ final class ManagingPromotionsContext implements Context
     /**
      * @Then the last promotion on the list should have :field :value
      */
-    public function theLastPromotionOnTheListShouldHave($field, $value)
+    public function theLastPromotionOnTheListShouldHave($field, $value): void
     {
         $fields = $this->indexPage->getColumnFields($field);
         $actualValue = end($fields);
