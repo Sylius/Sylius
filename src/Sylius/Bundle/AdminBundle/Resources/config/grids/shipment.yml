@@ -59,7 +59,7 @@ sylius_grid:
                             sylius.ui.shipped: shipped
                 channel:
                     type: ux_autocomplete
-                    label: sylius.ui.shipping_method
+                    label: sylius.ui.channel
                     form_options:
                         extra_options:
                             class: "%sylius.model.channel.class%"
@@ -68,7 +68,7 @@ sylius_grid:
                         fields: [order.channel.id]
                 method:
                     type: ux_translatable_autocomplete
-                    label: sylius.ui.shipping_method
+                    label: sylius.ui.method
                     form_options:
                         extra_options:
                             class: "%sylius.model.shipping_method.class%"
