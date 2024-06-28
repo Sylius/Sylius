@@ -17,16 +17,16 @@ use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Context\Api\Resources;
-use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Product\Model\ProductAssociationTypeInterface;
 use Webmozart\Assert\Assert;
 
-final class ManagingProductAssociationTypesContext implements Context
+final readonly class ManagingProductAssociationTypesContext implements Context
 {
+    public const SORT_TYPES = ['ascending' => 'asc', 'descending' => 'desc'];
+
     public function __construct(
         private ApiClientInterface $client,
         private ResponseCheckerInterface $responseChecker,
-        private SharedStorageInterface $sharedStorage,
     ) {
     }
 
@@ -284,5 +284,33 @@ final class ManagingProductAssociationTypesContext implements Context
                 ],
             ],
         ]);
+    }
+
+    /**
+     * @When I sort the product associations :sortType by code
+     */
+    public function iSortProductAssociationsByCode(string $sortType = 'ascending'): void
+    {
+        $this->client->sort(['code' => self::SORT_TYPES[$sortType]]);
+    }
+
+    /**
+     * @Then the first product association on the list should have code :value
+     */
+    public function theFirstProductAssociationOnTheListShouldHave(string $value): void
+    {
+        $productAssociations = $this->responseChecker->getCollection($this->client->getLastResponse());
+
+        Assert::same(reset($productAssociations)['code'], $value);
+    }
+
+    /**
+     * @Then the last product association on the list should have code :value
+     */
+    public function theLastProductAssociationOnTheListShouldHave(string $value): void
+    {
+        $productAssociations = $this->responseChecker->getCollection($this->client->getLastResponse());
+
+        Assert::same(end($productAssociations)['code'], $value);
     }
 }
