@@ -303,6 +303,20 @@
             <path d="M9 10h7a4 4 0 1 1 0 8h-1"></path>
         {% endif %}
 
+        {% if icon == 'arrow-left' %}
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+            <path d="M5 12l14 0"></path>
+            <path d="M5 12l4 4"></path>
+            <path d="M5 12l4 -4"></path>
+        {% endif %}
+
+        {% if icon == 'arrow-right' %}
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+            <path d="M5 12l14 0"></path>
+            <path d="M15 16l4 -4"></path>
+            <path d="M15 8l4 4"></path>
+        {% endif %}
+
         {% if icon == 'archive' %}
             <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
             <path d="M3 4m0 2a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v0a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2z"></path>
