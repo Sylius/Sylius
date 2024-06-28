@@ -61,11 +61,6 @@ class IndexPage extends CrudIndexPage implements IndexPageInterface
         $this->waitForFormUpdate();
     }
 
-    public function setFilterSearch(string $phrase): void
-    {
-        $this->getElement('search_filter')->setValue($phrase);
-    }
-
     public function chooseChannelFilter(string $channelName): void
     {
         $this->getElement('channel_filter')->selectOption($channelName);
@@ -119,7 +114,6 @@ class IndexPage extends CrudIndexPage implements IndexPageInterface
             'page_number' => '.sylius-grid-nav__pagination .active',
             'pagination_button' => '.sylius-grid-nav__pagination a.item:contains("%page%")',
             'pagination_buttons' => '.sylius-grid-nav__pagination',
-            'search_filter' => '#criteria_search_value',
             'taxon_filter' => '#criteria_taxon',
         ]);
     }

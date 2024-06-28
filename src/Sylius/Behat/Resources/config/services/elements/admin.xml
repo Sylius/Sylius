@@ -18,6 +18,8 @@
     <services>
         <service id="sylius.behat.element.admin.crud.form" class="Sylius\Behat\Element\Admin\Crud\FormElement" parent="sylius.behat.element" />
 
+        <service id="sylius.behat.element.admin.crud.index.search_filter" class="Sylius\Behat\Element\Admin\Crud\Index\SearchFilterElement" parent="sylius.behat.element" />
+
         <service id="sylius.behat.element.admin.account.reset" class="Sylius\Behat\Element\Admin\Account\ResetElement" parent="sylius.behat.element" />
 
         <service id="sylius.behat.element.admin.channel.shipping_address_in_checkout_required" class="Sylius\Behat\Element\Admin\Channel\ShippingAddressInCheckoutRequiredElement" parent="sylius.behat.element" />
