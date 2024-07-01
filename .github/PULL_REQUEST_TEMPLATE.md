@@ -9,7 +9,7 @@
 | License         | MIT
 
 <!--
- - Bug fixes must be submitted against the 1.13 branches
+ - Bug fixes must be submitted against the 1.13 branch
  - Features and deprecations must be submitted against the 1.14 branch
  - Features, removing deprecations and BC breaks must be submitted against the 2.0 branch
  - Make sure that the correct base branch is set
