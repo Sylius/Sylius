@@ -72,7 +72,7 @@ class ProductTaxonController extends ResourceController
             return $this->redirectHandler->redirectToReferer($configuration);
         }
 
-        $maxPosition = $this->getMaxPosition($configuration);
+        $maxPosition = $this->getMaxPosition($productTaxonsPositions);
 
         try {
             $this->updatePositions($productTaxonsPositions, $maxPosition);
@@ -120,13 +120,16 @@ class ProductTaxonController extends ResourceController
         }
     }
 
-    private function getMaxPosition(RequestConfiguration $configuration): int
+    /** @param array<int, string> $productTaxonsPositions */
+    private function getMaxPosition(array $productTaxonsPositions): int
     {
-        /** @var ProductTaxonInterface $productTaxon */
-        $productTaxon = $this->findOr404($configuration);
+        $firstProductTaxonId = array_keys($productTaxonsPositions)[0];
 
         /** @var EntityRepository&RepositoryInterface $repository */
         $repository = $this->repository;
+
+        /** @var ProductTaxonInterface $productTaxon */
+        $productTaxon = $repository->find($firstProductTaxonId);
 
         return $repository->count(['taxon' => $productTaxon->getTaxon()]) - 1;
     }
