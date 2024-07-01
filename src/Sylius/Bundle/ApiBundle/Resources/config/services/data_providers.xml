@@ -18,18 +18,6 @@
     <services>
         <defaults public="true" />
 
-        <service id="Sylius\Bundle\ApiBundle\DataProvider\OrderItemItemDataProvider">
-            <argument type="service" id="sylius.repository.order_item" />
-            <argument type="service" id="Sylius\Bundle\ApiBundle\Context\UserContextInterface" />
-            <tag name="api_platform.item_data_provider" priority="10" />
-        </service>
-
-        <service id="Sylius\Bundle\ApiBundle\DataProvider\OrderItemUnitItemDataProvider">
-            <argument type="service" id="sylius.repository.order_item_unit" />
-            <argument type="service" id="Sylius\Bundle\ApiBundle\Context\UserContextInterface" />
-            <tag name="api_platform.item_data_provider" priority="10" />
-        </service>
-
         <service id="Sylius\Bundle\ApiBundle\DataProvider\PaymentItemDataProvider">
             <argument type="service" id="sylius.repository.payment" />
             <argument type="service" id="Sylius\Bundle\ApiBundle\Context\UserContextInterface" />

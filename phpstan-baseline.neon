@@ -1066,46 +1066,6 @@ parameters:
 			path: src/Sylius/Bundle/ApiBundle/DataProvider/OrderAdjustmentsSubresourceDataProvider.php
 
 		-
-			message: "#^Method Sylius\\\\Bundle\\\\ApiBundle\\\\DataProvider\\\\OrderItemItemDataProvider\\:\\:__construct\\(\\) has parameter \\$orderItemRepository with generic interface Sylius\\\\Component\\\\Core\\\\Repository\\\\OrderItemRepositoryInterface but does not specify its types\\: T$#"
-			count: 1
-			path: src/Sylius/Bundle/ApiBundle/DataProvider/OrderItemItemDataProvider.php
-
-		-
-			message: "#^Method Sylius\\\\Bundle\\\\ApiBundle\\\\DataProvider\\\\OrderItemItemDataProvider\\:\\:getItem\\(\\) has parameter \\$context with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Sylius/Bundle/ApiBundle/DataProvider/OrderItemItemDataProvider.php
-
-		-
-			message: "#^Method Sylius\\\\Bundle\\\\ApiBundle\\\\DataProvider\\\\OrderItemItemDataProvider\\:\\:getItem\\(\\) has parameter \\$id with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Sylius/Bundle/ApiBundle/DataProvider/OrderItemItemDataProvider.php
-
-		-
-			message: "#^Method Sylius\\\\Bundle\\\\ApiBundle\\\\DataProvider\\\\OrderItemItemDataProvider\\:\\:supports\\(\\) has parameter \\$context with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Sylius/Bundle/ApiBundle/DataProvider/OrderItemItemDataProvider.php
-
-		-
-			message: "#^Method Sylius\\\\Bundle\\\\ApiBundle\\\\DataProvider\\\\OrderItemUnitItemDataProvider\\:\\:__construct\\(\\) has parameter \\$orderItemUnitRepository with generic interface Sylius\\\\Component\\\\Core\\\\Repository\\\\OrderItemUnitRepositoryInterface but does not specify its types\\: T$#"
-			count: 1
-			path: src/Sylius/Bundle/ApiBundle/DataProvider/OrderItemUnitItemDataProvider.php
-
-		-
-			message: "#^Method Sylius\\\\Bundle\\\\ApiBundle\\\\DataProvider\\\\OrderItemUnitItemDataProvider\\:\\:getItem\\(\\) has parameter \\$context with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Sylius/Bundle/ApiBundle/DataProvider/OrderItemUnitItemDataProvider.php
-
-		-
-			message: "#^Method Sylius\\\\Bundle\\\\ApiBundle\\\\DataProvider\\\\OrderItemUnitItemDataProvider\\:\\:getItem\\(\\) has parameter \\$id with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Sylius/Bundle/ApiBundle/DataProvider/OrderItemUnitItemDataProvider.php
-
-		-
-			message: "#^Method Sylius\\\\Bundle\\\\ApiBundle\\\\DataProvider\\\\OrderItemUnitItemDataProvider\\:\\:supports\\(\\) has parameter \\$context with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Sylius/Bundle/ApiBundle/DataProvider/OrderItemUnitItemDataProvider.php
-
-		-
 			message: "#^Method Sylius\\\\Bundle\\\\ApiBundle\\\\DataProvider\\\\PaymentItemDataProvider\\:\\:__construct\\(\\) has parameter \\$paymentRepository with generic interface Sylius\\\\Component\\\\Core\\\\Repository\\\\PaymentRepositoryInterface but does not specify its types\\: T$#"
 			count: 1
 			path: src/Sylius/Bundle/ApiBundle/DataProvider/PaymentItemDataProvider.php
