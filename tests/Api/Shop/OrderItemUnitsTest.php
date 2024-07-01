@@ -82,7 +82,7 @@ final class OrderItemUnitsTest extends JsonApiTestCase
     }
 
     /** @test */
-    public function it_does_not_return_an_order_item_unit_as_a_guest(): void
+    public function it_does_not_return_an_order_item_unit_being_a_guest(): void
     {
         $this->setUpDefaultGetHeaders();
         $fixtures = $this->loadFixturesFromFiles([
