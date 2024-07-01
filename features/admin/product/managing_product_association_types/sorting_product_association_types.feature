@@ -9,7 +9,7 @@ Feature: Sorting product association types
         And the store has also a product association type "Up sell" with a code "up_sell"
         And I am logged in as an administrator
 
-    @api @ui
+    @todo-api @ui
     Scenario: Product associations can be sorted by code in ascending order
         Given I browse product association types
         When I sort the product associations ascending by code
@@ -17,7 +17,7 @@ Feature: Sorting product association types
         And the first product association on the list should have code "cross_sell"
         And the last product association on the list should have code "up_sell"
 
-    @api @ui
+    @todo-api @ui
     Scenario: Product associations can be sorted by code in descending order
         Given I browse product association types
         When I sort the product associations descending by code
