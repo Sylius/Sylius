@@ -40,7 +40,7 @@
         "symfony/stimulus-bundle": "^2.12",
         "symfony/ux-autocomplete": "^2.17",
         "symfony/ux-live-component": "^2.17",
-        "symfony/webpack-encore-bundle": "^1.17.1",
+        "symfony/webpack-encore-bundle": "^2.1",
         "twig/extra-bundle": "~3.8.0",
         "twig/twig": "~3.8.0"
     },

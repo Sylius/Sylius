@@ -34,7 +34,7 @@
         "knplabs/knp-menu-bundle": "^3.0",
         "sonata-project/block-bundle": "^4.2 || ^5.0",
         "sylius-labs/polyfill-symfony-event-dispatcher": "^1.0.1",
-        "sylius/grid-bundle": "^1.12",
+        "sylius/grid-bundle": "^1.12 || dev-symfony-7",
         "symfony/config": "^6.4.0 || ^7.0",
         "symfony/expression-language": "^6.4.0 || ^7.0",
         "symfony/framework-bundle": "^6.4.1 || ^7.0",
@@ -43,15 +43,15 @@
         "symfony/templating": "^6.4.0 || ^7.0",
         "symfony/ux-live-component": "^2.17",
         "symfony/ux-twig-component": "^2.17",
-        "symfony/webpack-encore-bundle": "^1.17.1",
+        "symfony/webpack-encore-bundle": "^2.1",
         "laminas/laminas-stdlib": "^3.3.1"
     },
     "conflict": {
         "twig/twig": "3.9.0"
     },
     "require-dev": {
-        "matthiasnoback/symfony-config-test": "^4.2",
-        "matthiasnoback/symfony-dependency-injection-test": "^4.2",
+        "matthiasnoback/symfony-config-test": "^5.1",
+        "matthiasnoback/symfony-dependency-injection-test": "^5.1",
         "phpspec/phpspec": "^7.2",
         "phpunit/phpunit": "^9.5",
         "symfony/dependency-injection": "^6.4.1 || ^7.0",
@@ -69,7 +69,7 @@
         },
         "symfony": {
             "allow-contrib": false,
-            "require": "6.4.*"
+            "require": "7.0.*"
         }
     },
     "autoload": {
