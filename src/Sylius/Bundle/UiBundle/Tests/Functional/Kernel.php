@@ -43,7 +43,7 @@ final class Kernel extends HttpKernel
         ];
     }
 
-    protected function build(ContainerBuilder $container)
+    protected function build(ContainerBuilder $container): void
     {
         $container->register(CustomContextProvider::class)->addTag('sylius.ui.template_event.context_provider');
 
