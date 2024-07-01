@@ -1,12 +1,10 @@
+{% import '@SyliusShop/Shared/buttons.html.twig' as buttons %}
+
 <div class="d-flex justify-content-between">
-    <button class="btn btn-light" type="submit" {{ sylius_test_html_attribute('cart-update-button') }} form="{{ main_form }}">
-        {{ 'sylius.ui.update_cart'|trans }}
-    </button>
+    {{ buttons.submit('sylius.ui.update_cart'|trans, 'cart-update-button', null, 'btn-light') }}
     <form method="post" action="{{ path('sylius_shop_cart_clear') }}" >
         <input type="hidden" name="_method" value="DELETE" />
         <input type="hidden" name="_csrf_token" value="{{ csrf_token(cart.id) }}" />
-        <button class="btn btn-light" type="submit" {{ sylius_test_html_attribute('cart-clear-button') }}>
-            {{ 'sylius.ui.clear_cart'|trans }}
-        </button>
+        {{ buttons.submit('sylius.ui.clear_cart'|trans, 'cart-clear-button', null, 'btn-light') }}
     </form>
 </div>

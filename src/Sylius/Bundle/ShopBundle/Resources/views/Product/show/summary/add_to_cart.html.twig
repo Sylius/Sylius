@@ -1,3 +1,5 @@
+{% import '@SyliusShop/Shared/buttons.html.twig' as buttons %}
+
 {% set product = order_item.variant.product %}
 
 {% form_theme form '@SyliusShop/Form/theme.html.twig' %}
@@ -23,7 +25,7 @@
     </div>
 
     <div class="mb-3">
-        <button class="btn btn-icon btn-primary" type="submit" {{ sylius_test_html_attribute('add-to-cart-button') }}>{{ 'sylius.ui.add_to_cart'|trans }}</button>
+        {{ buttons.submit('sylius.ui.add_to_cart'|trans, 'add-to-cart-button', null, 'btn-primary') }}
     </div>
 
     {{ form_row(form._token) }}

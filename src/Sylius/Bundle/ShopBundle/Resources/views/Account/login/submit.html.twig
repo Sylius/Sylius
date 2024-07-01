@@ -1,5 +1,5 @@
+{% import '@SyliusShop/Shared/buttons.html.twig' as buttons %}
+
 <div class="d-grid mb-2">
-    <button class="btn btn-primary" type="submit" {{ sylius_test_html_attribute('login-button') }}>
-        {{ 'sylius.ui.login'|trans }}
-    </button>
+    {{ buttons.submit('sylius.ui.login'|trans, 'login-button', null, 'btn-primary') }}
 </div>
