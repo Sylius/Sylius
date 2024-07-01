@@ -29,17 +29,19 @@
         "php": "^8.2",
         "stof/doctrine-extensions-bundle": "^1.4",
         "sylius/addressing": "^2.0",
-        "sylius/resource-bundle": "^1.10",
+        "sylius/resource-bundle": "^1.10 || dev-symfony-7",
         "symfony/framework-bundle": "^6.4.1 || ^7.0",
         "symfony/intl": "^6.4.0 || ^7.0"
     },
     "conflict": {
-        "doctrine/orm": ">= 2.16.0",
+        "doctrine/orm": ">= 3.0",
         "stof/doctrine-extensions-bundle": "1.8.0"
     },
     "require-dev": {
         "doctrine/data-fixtures": "^1.4",
         "doctrine/orm": "^2.13",
+        "friendsofsymfony/rest-bundle": "^3.0",
+        "jms/serializer-bundle": "^5.0",
         "phpspec/phpspec": "^7.2",
         "phpspec/prophecy-phpunit": "^2.0",
         "phpunit/phpunit": "^9.5",
