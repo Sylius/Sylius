@@ -59,7 +59,7 @@ imports:
 #    - api/shipping/applying_shipping_method_rules.yml
 #    - api/shipping/viewing_shipping_methods.yml
 #    - api/shipping/managing_shipments.yml
-#    - api/shipping/managing_shipping_categories.yml
+    - api/shipping/managing_shipping_categories.yml
 #    - api/shipping/managing_shipping_methods.yml
 #    - api/taxation/applying_taxes.yml
 #    - api/taxation/managing_tax_categories.yml
