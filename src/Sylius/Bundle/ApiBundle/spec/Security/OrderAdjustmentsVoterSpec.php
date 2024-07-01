@@ -38,9 +38,12 @@ final class OrderAdjustmentsVoterSpec extends ObjectBehavior
 
     function it_votes_granted_when_collection_is_empty(TokenInterface $token): void
     {
-        $collection = new ArrayCollection();
+        $this->vote($token, new ArrayCollection(), [OrderAdjustmentsVoter::SYLIUS_ORDER_ADJUSTMENT])->shouldReturn(VoterInterface::ACCESS_GRANTED);
+    }
 
-        $this->vote($token, $collection, [OrderAdjustmentsVoter::SYLIUS_ORDER_ADJUSTMENT])->shouldReturn(VoterInterface::ACCESS_GRANTED);
+    function it_votes_granted_when_collection_is_an_empty_array(TokenInterface $token): void
+    {
+        $this->vote($token, [], [OrderAdjustmentsVoter::SYLIUS_ORDER_ADJUSTMENT])->shouldReturn(VoterInterface::ACCESS_GRANTED);
     }
 
     function it_votes_granted_when_order_user_matches_token_user(

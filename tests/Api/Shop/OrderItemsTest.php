@@ -45,15 +45,64 @@ final class OrderItemsTest extends JsonApiTestCase
         ]);
         /** @var CustomerInterface $customer */
         $customer = $fixtures['customer_oliver'];
-        $headers = $this->headerBuilder()->withShopUserAuthorization($customer->getEmailCanonical())->build();
         $order = $this->placeOrder('token', $customer->getEmailCanonical());
 
         $this->requestGet(
             uri: '/api/v2/shop/order-items/' . $order->getItems()->first()->getId(),
-            headers: $headers,
+            headers: $this->headerBuilder()->withShopUserAuthorization($customer->getEmailCanonical())->build(),
         );
 
         $this->assertResponse($this->client->getResponse(), 'shop/order_item/get_order_item');
+    }
+
+    /** @test */
+    public function it_does_not_return_an_order_item_of_another_user(): void
+    {
+        $this->setUpDefaultGetHeaders();
+        $fixtures = $this->loadFixturesFromFiles([
+            'authentication/shop_user.yaml',
+            'channel.yaml',
+            'cart.yaml',
+            'country.yaml',
+            'shipping_method.yaml',
+            'payment_method.yaml',
+        ]);
+
+        /** @var CustomerInterface $customer */
+        $customer = $fixtures['customer_oliver'];
+        $order = $this->placeOrder('token', $customer->getEmailCanonical());
+
+        $this->requestGet(
+            uri: '/api/v2/shop/order-items/' . $order->getItems()->first()->getId(),
+            headers: $this->headerBuilder()->withShopUserAuthorization('dave@doe.com')->build(),
+        );
+
+        $this->assertResponseCode($this->client->getResponse(), Response::HTTP_NOT_FOUND);
+    }
+
+    /** @test */
+    public function it_does_not_return_an_order_item_as_a_guest(): void
+    {
+        $this->setUpDefaultGetHeaders();
+        $fixtures = $this->loadFixturesFromFiles([
+            'authentication/shop_user.yaml',
+            'channel.yaml',
+            'cart.yaml',
+            'country.yaml',
+            'shipping_method.yaml',
+            'payment_method.yaml',
+        ]);
+
+        /** @var CustomerInterface $customer */
+        $customer = $fixtures['customer_oliver'];
+        $order = $this->placeOrder('token', $customer->getEmailCanonical());
+
+        $this->requestGet(
+            uri: '/api/v2/shop/order-items/' . $order->getItems()->first()->getId(),
+            headers: $this->headerBuilder()->build(),
+        );
+
+        $this->assertResponseCode($this->client->getResponse(), Response::HTTP_NOT_FOUND);
     }
 
     /** @test */
