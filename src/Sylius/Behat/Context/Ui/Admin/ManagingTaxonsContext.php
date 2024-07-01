@@ -16,6 +16,7 @@ namespace Sylius\Behat\Context\Ui\Admin;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Element\Admin\Taxon\FormElementInterface;
 use Sylius\Behat\Element\Admin\Taxon\ImageFormElementInterface;
+use Sylius\Behat\Element\Admin\Taxon\TreeElementInterface;
 use Sylius\Behat\NotificationType;
 use Sylius\Behat\Page\Admin\Crud\CreatePageInterface as BaseCreatePageInterface;
 use Sylius\Behat\Page\Admin\Crud\UpdatePageInterface;
@@ -37,6 +38,7 @@ final class ManagingTaxonsContext implements Context
         private readonly UpdatePageInterface $updatePage,
         private readonly FormElementInterface $formElement,
         private readonly ImageFormElementInterface $imageFormElement,
+        private readonly TreeElementInterface $treeElement,
         private readonly NotificationCheckerInterface $notificationChecker,
         private readonly JavaScriptTestHelper $testHelper,
         private readonly UpdateSimpleProductPageInterface $updateSimpleProductPage,
@@ -200,7 +202,7 @@ final class ManagingTaxonsContext implements Context
      */
     public function iMoveUpTaxon(string $taxonName): void
     {
-        $this->createPage->moveUpTaxon($taxonName);
+        $this->treeElement->moveUpTaxon($taxonName);
     }
 
     /**
@@ -208,7 +210,7 @@ final class ManagingTaxonsContext implements Context
      */
     public function iMoveDownTaxon(string $taxonName): void
     {
-        $this->createPage->moveDownTaxon($taxonName);
+        $this->treeElement->moveDownTaxon($taxonName);
     }
 
     /**
@@ -358,7 +360,7 @@ final class ManagingTaxonsContext implements Context
             $this->createPage->open();
         }
 
-        Assert::false($this->createPage->isTaxonOnTheList($name));
+        Assert::false($this->treeElement->isTaxonOnTheList($name));
     }
 
     /**
@@ -366,7 +368,7 @@ final class ManagingTaxonsContext implements Context
      */
     public function iShouldSeeTaxonsInTheList(int $number): void
     {
-        Assert::same($this->createPage->countTaxons(), $number);
+        Assert::same($this->treeElement->countTaxons(), $number);
     }
 
     /**
@@ -374,17 +376,17 @@ final class ManagingTaxonsContext implements Context
      */
     public function iShouldSeeTheTaxonNamedInTheList(string $name): void
     {
-        Assert::true($this->createPage->isTaxonOnTheList($name));
+        Assert::true($this->treeElement->isTaxonOnTheList($name));
     }
 
     /**
      * @Then the order of taxons should be :firstTaxon, :secondTaxon, :thirdTaxon and :fourthTaxon
      */
-    public function theOrderOfTaxonsShouldBe(string ...$taxonsName): void
+    public function theOrderOfTaxonsShouldBe(string ...$taxonsNames): void
     {
-        $taxons = $this->createPage->getTaxonsNames();
+        $taxons = $this->treeElement->getTaxonsNames();
 
-        Assert::same($taxons, $taxonsName);
+        Assert::same($taxons, $taxonsNames);
     }
 
     /**
@@ -467,7 +469,7 @@ final class ManagingTaxonsContext implements Context
      */
     public function theFirstTaxonOnTheListShouldBe(string $taxonName): void
     {
-        Assert::same($this->createPage->getFirstTaxonOnTheList(), $taxonName);
+        Assert::same($this->treeElement->getFirstTaxonOnTheList(), $taxonName);
     }
 
     /**
@@ -475,7 +477,7 @@ final class ManagingTaxonsContext implements Context
      */
     public function theLastTaxonOnTheListShouldBe(string $taxonName): void
     {
-        Assert::same($this->createPage->getLastTaxonOnTheList(), $taxonName);
+        Assert::same($this->treeElement->getLastTaxonOnTheList(), $taxonName);
     }
 
     /**
