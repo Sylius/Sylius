@@ -173,9 +173,15 @@ header .ui.three.column.stackable.grid > .column:nth-child(3) .button span {
 
 #products.three.cards {
     display: grid;
-    grid-template-columns: repeat(3, minmax(240px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
     gap: 30px;
     margin: 0 !important;
+}
+
+@media (min-width: 1200px) {
+    #products.three.cards {
+        grid-template-columns: repeat(3, minmax(240px, 1fr));
+    }
 }
 
 #products.three.cards .card {
@@ -326,9 +332,15 @@ header .ui.three.column.stackable.grid > .column:nth-child(3) .button span {
 
 .ui.four.doubling.cards {
     display: grid;
-    grid-template-columns: repeat(4, minmax(240px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
     gap: 30px;
     margin: 0 !important;
+}
+
+@media (min-width: 1200px) {
+    .ui.four.doubling.cards {
+        grid-template-columns: repeat(4, minmax(240px, 1fr));
+    }
 }
 
 .ui.four.doubling.cards .card {

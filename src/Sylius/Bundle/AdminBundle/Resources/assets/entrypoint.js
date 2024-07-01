@@ -16,7 +16,6 @@ import './scripts/check-all';
 import './scripts/choices';
 import './scripts/statistics_chart';
 import './scripts/sticky-header';
-import './scripts/tree';
 
 import './scripts/bootstrap';
 

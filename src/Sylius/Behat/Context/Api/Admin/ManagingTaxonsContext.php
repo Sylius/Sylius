@@ -102,10 +102,9 @@ final readonly class ManagingTaxonsContext implements Context
     }
 
     /**
-     * @When I enable slug modification
-     * @When I enable slug modification in :localeCode
+     * @When I generate its slug in :localeCode
      */
-    public function iEnableSlugModification(string $localeCode = 'en_US'): void
+    public function iGenerateItsSlugIn(string $localeCode): void
     {
         $this->updateTranslations($localeCode, 'slug', '');
     }

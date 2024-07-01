@@ -21,8 +21,6 @@ interface IndexPageInterface extends CrudIndexPageInterface
 
     public function filterByMainTaxon(string $taxonName): void;
 
-    public function setFilterSearch(string $phrase): void;
-
     public function hasProductAccessibleImage(string $productCode): bool;
 
     public function showProductPage(string $productName): void;

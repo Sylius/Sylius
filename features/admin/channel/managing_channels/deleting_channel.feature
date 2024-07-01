@@ -9,7 +9,7 @@ Feature: Deleting a channel
         And the store operates on another channel named "Mobile Store"
         And I am logged in as an administrator
 
-    @api @todo @ui
+    @api @@ui
     Scenario: Deleted channel should disappear from the registry
         When I delete channel "Web Store"
         Then I should be notified that it has been successfully deleted

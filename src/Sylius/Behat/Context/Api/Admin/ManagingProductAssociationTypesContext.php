@@ -17,16 +17,16 @@ use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Context\Api\Resources;
-use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Product\Model\ProductAssociationTypeInterface;
 use Webmozart\Assert\Assert;
 
-final class ManagingProductAssociationTypesContext implements Context
+final readonly class ManagingProductAssociationTypesContext implements Context
 {
+    public const SORT_TYPES = ['ascending' => 'asc', 'descending' => 'desc'];
+
     public function __construct(
         private ApiClientInterface $client,
         private ResponseCheckerInterface $responseChecker,
-        private SharedStorageInterface $sharedStorage,
     ) {
     }
 
@@ -41,7 +41,7 @@ final class ManagingProductAssociationTypesContext implements Context
     /**
      * @When I specify its code as :productAssociationTypeCode
      */
-    public function iSpecifyItsCodeAs($productAssociationTypeCode): void
+    public function iSpecifyItsCodeAs(string $productAssociationTypeCode): void
     {
         $this->client->addRequestData('code', $productAssociationTypeCode);
     }
@@ -70,6 +70,87 @@ final class ManagingProductAssociationTypesContext implements Context
     }
 
     /**
+     * @When I remove its name from :localeCode translation
+     */
+    public function iRemoveItsNameFromTranslation(string $localeCode): void
+    {
+        $this->client->updateRequestData([
+            'translations' => [
+                $localeCode => [
+                    'name' => null,
+                ],
+            ],
+        ]);
+    }
+
+    /**
+     * @When I sort the product associations :sortType by code
+     */
+    public function iSortProductAssociationsByCode(string $sortingOrder = 'ascending'): void
+    {
+        $this->client->sort(['code' => self::SORT_TYPES[$sortingOrder]]);
+    }
+
+    /**
+     * @When I am browsing product association types
+     * @When I want to browse product association types
+     */
+    public function iBrowseProductAssociationTypes(): void
+    {
+        $this->client->index(Resources::PRODUCT_ASSOCIATION_TYPES);
+    }
+
+    /**
+     * @When I delete the :productAssociationType product association type
+     */
+    public function iDeleteTheProductAssociationType(ProductAssociationTypeInterface $productAssociationType): void
+    {
+        $this->client->delete(Resources::PRODUCT_ASSOCIATION_TYPES, $productAssociationType->getCode());
+    }
+
+    /**
+     * @When I want to modify the :productAssociationType product association type
+     */
+    public function iWantToModifyTheProductAssociationType(ProductAssociationTypeInterface $productAssociationType): void
+    {
+        $this->client->buildUpdateRequest(Resources::PRODUCT_ASSOCIATION_TYPES, $productAssociationType->getCode());
+    }
+
+    /**
+     * @When I rename it to :name in :localeCode
+     */
+    public function iRenameItToIn(string $name, string $localeCode): void
+    {
+        $this->client->updateRequestData(['translations' => [$localeCode => ['name' => $name]]]);
+    }
+
+    /**
+     * @When I filter product association types with code containing :value
+     */
+    public function iFilterProductAssociationTypesWithCodeContaining(string $value): void
+    {
+        $this->client->addFilter('code', $value);
+        $this->client->filter();
+    }
+
+    /**
+     * @When I filter product association types with name containing :value
+     */
+    public function iFilterProductAssociationTypesWithNameContaining(string $value): void
+    {
+        $this->client->addFilter('translations.name', $value);
+        $this->client->filter();
+    }
+
+    /**
+     * @When I do not specify its code
+     */
+    public function iDoNotSpecifyItsCode(): void
+    {
+        // Intentionally left blank
+    }
+
+    /**
      * @Then I should be notified that it has been successfully created
      */
     public function iShouldBeNotifiedThatItHasBeenSuccessfullyCreated(): void
@@ -92,15 +173,6 @@ final class ManagingProductAssociationTypesContext implements Context
     }
 
     /**
-     * @When I browse product association types
-     * @When I want to browse product association types
-     */
-    public function iBrowseProductAssociationTypes(): void
-    {
-        $this->client->index(Resources::PRODUCT_ASSOCIATION_TYPES);
-    }
-
-    /**
      * @Then I should see :count product association types in the list
      * @Then I should see a single product association type in the list
      */
@@ -119,14 +191,6 @@ final class ManagingProductAssociationTypesContext implements Context
             $this->responseChecker->hasItemWithValue($this->client->index(Resources::PRODUCT_ASSOCIATION_TYPES), 'name', $name),
             sprintf('There is no product association type with name "%s"', $name),
         );
-    }
-
-    /**
-     * @When I delete the :productAssociationType product association type
-     */
-    public function iDeleteTheProductAssociationType(ProductAssociationTypeInterface $productAssociationType): void
-    {
-        $this->client->delete(Resources::PRODUCT_ASSOCIATION_TYPES, $productAssociationType->getCode());
     }
 
     /**
@@ -154,22 +218,6 @@ final class ManagingProductAssociationTypesContext implements Context
     }
 
     /**
-     * @When I want to modify the :productAssociationType product association type
-     */
-    public function iWantToModifyTheProductAssociationType(ProductAssociationTypeInterface $productAssociationType): void
-    {
-        $this->client->buildUpdateRequest(Resources::PRODUCT_ASSOCIATION_TYPES, $productAssociationType->getCode());
-    }
-
-    /**
-     * @When I rename it to :name in :localeCode
-     */
-    public function iRenameItToIn(string $name, string $localeCode): void
-    {
-        $this->client->updateRequestData(['translations' => [$localeCode => ['name' => $name]]]);
-    }
-
-    /**
      * @Then /^(this product association type) name should be "([^"]+)"$/
      */
     public function thisProductAssociationTypeNameShouldBe(ProductAssociationTypeInterface $productAssociationType, string $name): void
@@ -191,24 +239,6 @@ final class ManagingProductAssociationTypesContext implements Context
             $this->responseChecker->hasValue($this->client->update(), 'code', 'NEW_CODE'),
             'The shipping category code should not be changed to "NEW_CODE", but it is',
         );
-    }
-
-    /**
-     * @When I filter product association types with code containing :value
-     */
-    public function iFilterProductAssociationTypesWithCodeContaining(string $value): void
-    {
-        $this->client->addFilter('code', $value);
-        $this->client->filter();
-    }
-
-    /**
-     * @When I filter product association types with name containing :value
-     */
-    public function iFilterProductAssociationTypesWithNameContaining(string $value): void
-    {
-        $this->client->addFilter('translations.name', $value);
-        $this->client->filter();
     }
 
     /**
@@ -243,14 +273,6 @@ final class ManagingProductAssociationTypesContext implements Context
     }
 
     /**
-     * @When I do not specify its code
-     */
-    public function iDoNotSpecifyItsCode(): void
-    {
-        // Intentionally left blank
-    }
-
-    /**
      * @Then I should be notified that :type is required
      */
     public function iShouldBeNotifiedThatCodeIsRequired(string $type): void
@@ -272,17 +294,24 @@ final class ManagingProductAssociationTypesContext implements Context
         );
     }
 
+
     /**
-     * @When I remove its name from :localeCode translation
+     * @Then the first product association on the list should have code :value
      */
-    public function iRemoveItsNameFromTranslation(string $localeCode): void
+    public function theFirstProductAssociationOnTheListShouldHave(string $value): void
     {
-        $this->client->updateRequestData([
-            'translations' => [
-                $localeCode => [
-                    'name' => null,
-                ],
-            ],
-        ]);
+        $productAssociations = $this->responseChecker->getCollection($this->client->getLastResponse());
+
+        Assert::same(reset($productAssociations)['code'], $value);
+    }
+
+    /**
+     * @Then the last product association on the list should have code :value
+     */
+    public function theLastProductAssociationOnTheListShouldHave(string $value): void
+    {
+        $productAssociations = $this->responseChecker->getCollection($this->client->getLastResponse());
+
+        Assert::same(end($productAssociations)['code'], $value);
     }
 }

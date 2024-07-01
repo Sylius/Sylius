@@ -110,7 +110,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
 
     public function getActionValidationErrorsCount(string $channelCode): int
     {
-        return $this->countChannelErrors($this->getElement('actions'), $channelCode);
+        return $this->countChannelErrors($this->getElement('actions', ['%name%' => $channelCode]), $channelCode);
     }
 
     public function getRuleValidationErrorsCount(string $channelCode): int
@@ -127,7 +127,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     {
         return array_merge(parent::getDefinedElements(), [
             'action_field' => '[id^="sylius_admin_promotion_actions_"][id$="_configuration_%channelCode%_%field%"]',
-            'actions' => '#actions',
+            'actions' => '#sylius_admin_promotion_actions',
             'applies_to_discounted' => '#sylius_admin_promotion_appliesToDiscounted',
             'code' => '#sylius_admin_promotion_code',
             'ends_at' => '#sylius_admin_promotion_endsAt',
@@ -140,7 +140,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
             'order_percentage_action_field' => '[id^="sylius_admin_promotion_actions_"][id$="_configuration_percentage"]',
             'priority' => '#sylius_admin_promotion_priority',
             'rule_amount' => '[id^="sylius_admin_promotion_rules_"][id$="_configuration_%channelCode%_amount"]',
-            'rules' => '#rules',
+            'rules' => '#sylius_admin_promotion_rules',
             'usage_limit' => '#sylius_admin_promotion_usageLimit',
             'starts_at' => '#sylius_admin_promotion_startsAt',
             'starts_at_date' => '#sylius_admin_promotion_startsAt_date',

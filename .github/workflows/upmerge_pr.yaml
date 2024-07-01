@@ -35,6 +35,9 @@ jobs:
                     -
                         base_branch: "2.0"
                         target_branch: "bootstrap-shop"
+                    -
+                        base_branch: "2.0"
+                        target_branch: "symfony-7"                        
 
         steps:
             -

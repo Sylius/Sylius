@@ -23,7 +23,7 @@ use Sylius\Component\Locale\Model\LocaleInterface;
 use Sylius\Component\Product\Model\ProductAssociationTypeInterface;
 use Webmozart\Assert\Assert;
 
-final class ManagingProductAssociationTypesContext implements Context
+final readonly class ManagingProductAssociationTypesContext implements Context
 {
     public function __construct(
         private CreatePageInterface $createPage,
@@ -36,9 +36,10 @@ final class ManagingProductAssociationTypesContext implements Context
 
     /**
      * @When I browse product association types
+     * @When I am browsing product association types
      * @When I want to browse product association types
      */
-    public function iWantToBrowseProductAssociationTypes()
+    public function iWantToBrowseProductAssociationTypes(): void
     {
         $this->indexPage->open();
     }
@@ -46,7 +47,7 @@ final class ManagingProductAssociationTypesContext implements Context
     /**
      * @When I want to create a new product association type
      */
-    public function iWantToCreateANewProductAssociationType()
+    public function iWantToCreateANewProductAssociationType(): void
     {
         $this->createPage->open();
     }
@@ -54,7 +55,7 @@ final class ManagingProductAssociationTypesContext implements Context
     /**
      * @When I want to modify the :productAssociationType product association type
      */
-    public function iWantToModifyAPaymentMethod(ProductAssociationTypeInterface $productAssociationType)
+    public function iWantToModifyAPaymentMethod(ProductAssociationTypeInterface $productAssociationType): void
     {
         $this->updatePage->open(['id' => $productAssociationType->getId()]);
     }
@@ -62,7 +63,7 @@ final class ManagingProductAssociationTypesContext implements Context
     /**
      * @When I name it :name in :language
      */
-    public function iNameItIn($name, $language)
+    public function iNameItIn(string $name, string $language): void
     {
         $this->formElement->setName($name, $language);
     }
@@ -70,7 +71,7 @@ final class ManagingProductAssociationTypesContext implements Context
     /**
      * @When I do not name it
      */
-    public function iDoNotNameIt()
+    public function iDoNotNameIt(): void
     {
         // Intentionally left blank to fulfill context expectation
     }
@@ -88,7 +89,7 @@ final class ManagingProductAssociationTypesContext implements Context
      * @When I specify its code as :code
      * @When I do not specify its code
      */
-    public function iSpecifyItsCodeAs(string $code = '')
+    public function iSpecifyItsCodeAs(string $code = ''): void
     {
         $this->formElement->setCode($code);
     }
@@ -97,7 +98,7 @@ final class ManagingProductAssociationTypesContext implements Context
      * @When I add it
      * @When I try to add it
      */
-    public function iAddIt()
+    public function iAddIt(): void
     {
         $this->createPage->create();
     }
@@ -106,7 +107,7 @@ final class ManagingProductAssociationTypesContext implements Context
      * @When I save my changes
      * @When I try to save my changes
      */
-    public function iSaveMyChanges()
+    public function iSaveMyChanges(): void
     {
         $this->updatePage->saveChanges();
     }
@@ -114,7 +115,7 @@ final class ManagingProductAssociationTypesContext implements Context
     /**
      * @When I delete the :productAssociationType product association type
      */
-    public function iDeleteTheProductAssociationType(ProductAssociationTypeInterface $productAssociationType)
+    public function iDeleteTheProductAssociationType(ProductAssociationTypeInterface $productAssociationType): void
     {
         $this->iWantToBrowseProductAssociationTypes();
 
@@ -143,7 +144,7 @@ final class ManagingProductAssociationTypesContext implements Context
     /**
      * @When /^I filter product association types with (code|name) containing "([^"]+)"/
      */
-    public function iFilterProductAssociationTypesWithFieldContaining($field, $value)
+    public function iFilterProductAssociationTypesWithFieldContaining(string $field, string $value): void
     {
         $this->indexPage->specifyFilterType($field, 'Contains');
         $this->indexPage->specifyFilterValue($field, $value);
@@ -152,11 +153,19 @@ final class ManagingProductAssociationTypesContext implements Context
     }
 
     /**
+     * @When I sort the product associations :sortType by :field
+     */
+    public function iSortProductAssociationsBy(string $sortingOrder, string $field): void
+    {
+        $this->indexPage->sortBy($field, $sortingOrder === 'descending' ? 'desc' : 'asc');
+    }
+
+    /**
      * @Then I should see a single product association type in the list
      * @Then I should see only one product association type in the list
      * @Then I should see :amount product association types in the list
      */
-    public function iShouldSeeProductAssociationTypesInTheList($amount = 1)
+    public function iShouldSeeProductAssociationTypesInTheList(int $amount = 1): void
     {
         Assert::same($this->indexPage->countItems(), (int) $amount);
     }
@@ -164,7 +173,7 @@ final class ManagingProductAssociationTypesContext implements Context
     /**
      * @Then I should see the product association type :name in the list
      */
-    public function iShouldSeeTheProductAssociationTypeInTheList($name)
+    public function iShouldSeeTheProductAssociationTypeInTheList(string $name):void
     {
         $this->iWantToBrowseProductAssociationTypes();
 
@@ -174,7 +183,7 @@ final class ManagingProductAssociationTypesContext implements Context
     /**
      * @Then the product association type :productAssociationType should appear in the store
      */
-    public function theProductAssociationTypeShouldAppearInTheStore(ProductAssociationTypeInterface $productAssociationType)
+    public function theProductAssociationTypeShouldAppearInTheStore(ProductAssociationTypeInterface $productAssociationType): void
     {
         $this->indexPage->open();
 
@@ -187,8 +196,8 @@ final class ManagingProductAssociationTypesContext implements Context
      */
     public function thisProductAssociationTypeNameShouldBe(
         ProductAssociationTypeInterface $productAssociationType,
-        $productAssociationTypeName,
-    ) {
+        string $productAssociationTypeName,
+    ): void {
         $this->iWantToBrowseProductAssociationTypes();
 
         Assert::true($this->indexPage->isSingleResourceOnPage([
@@ -210,7 +219,7 @@ final class ManagingProductAssociationTypesContext implements Context
      */
     public function thisProductAssociationTypeShouldNoLongerExistInTheRegistry(
         ProductAssociationTypeInterface $productAssociationType,
-    ) {
+    ): void {
         Assert::false($this->indexPage->isSingleResourceOnPage([
             'code' => $productAssociationType->getCode(),
             'name' => $productAssociationType->getName(),
@@ -220,7 +229,7 @@ final class ManagingProductAssociationTypesContext implements Context
     /**
      * @Then I should be notified that product association type with this code already exists
      */
-    public function iShouldBeNotifiedThatProductAssociationTypeWithThisCodeAlreadyExists()
+    public function iShouldBeNotifiedThatProductAssociationTypeWithThisCodeAlreadyExists(): void
     {
         Assert::same(
             $this->formElement->getValidationMessage('code'),
@@ -231,7 +240,7 @@ final class ManagingProductAssociationTypesContext implements Context
     /**
      * @Then there should still be only one product association type with a :element :code
      */
-    public function thereShouldStillBeOnlyOneProductAssociationTypeWith($element, $code)
+    public function thereShouldStillBeOnlyOneProductAssociationTypeWith(string $element, string $code): void
     {
         $this->iWantToBrowseProductAssociationTypes();
 
@@ -241,7 +250,7 @@ final class ManagingProductAssociationTypesContext implements Context
     /**
      * @Then I should be notified that :element is required
      */
-    public function iShouldBeNotifiedThatIsRequired($element)
+    public function iShouldBeNotifiedThatIsRequired(string $element): void
     {
         /** @var LocaleInterface $locale */
         $locale = $this->sharedStorage->get('locale');
@@ -255,10 +264,30 @@ final class ManagingProductAssociationTypesContext implements Context
     /**
      * @Then the product association type with :element :value should not be added
      */
-    public function theProductAssociationTypeWithElementValueShouldNotBeAdded($element, $value)
+    public function theProductAssociationTypeWithElementValueShouldNotBeAdded(string $element, string $value): void
     {
         $this->iWantToBrowseProductAssociationTypes();
 
         Assert::false($this->indexPage->isSingleResourceOnPage([$element => $value]));
+    }
+
+    /**
+     * @Then the first product association on the list should have :field :value
+     */
+    public function theFirstProductAssociationOnTheListShouldHave(string $field, string $value): void
+    {
+        $fields = $this->indexPage->getColumnFields($field);
+
+        Assert::same(reset($fields), $value);
+    }
+
+    /**
+     * @Then the last product association on the list should have :field :value
+     */
+    public function theLastProductAssociationOnTheListShouldHave(string $field, string $value): void
+    {
+        $fields = $this->indexPage->getColumnFields($field);
+
+        Assert::same(end($fields), $value);
     }
 }

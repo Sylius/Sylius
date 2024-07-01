@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
+use Sylius\Behat\Element\Admin\ProductAttribute\FilterElementInterface;
 use Sylius\Behat\Element\Admin\ProductAttribute\FormElementInterface;
 use Sylius\Behat\Page\Admin\Crud\CreatePageInterface;
 use Sylius\Behat\Page\Admin\Crud\IndexPageInterface;
@@ -28,6 +29,7 @@ final readonly class ManagingProductAttributesContext implements Context
         private IndexPageInterface $indexPage,
         private UpdatePageInterface $updatePage,
         private FormElementInterface $formElement,
+        private FilterElementInterface $filterElement,
     ) {
     }
 
@@ -98,12 +100,37 @@ final readonly class ManagingProductAttributesContext implements Context
     }
 
     /**
-     * @Then I should see the product attribute :name in the list
+     * @When I choose :type in the type filter
+     * @When I choose :firstType and :secondType in the type filter
+     */
+    public function iChooseInTheTypeFilter(string ...$types): void
+    {
+        foreach ($types as $type) {
+            $this->filterElement->chooseType($type);
+        }
+    }
+
+    /**
+     * @When I choose :translatable in the translatable filter
+     */
+    public function iChooseInTheTranslatableFilter(string $translatable): void
+    {
+        $this->filterElement->chooseTranslatable(ucfirst($translatable));
+    }
+
+    /**
+     * @When I filter
+     */
+    public function iFilter(): void
+    {
+        $this->filterElement->filter();
+    }
+
+    /**
+     * @Then /^I should(?:| also) see the product attribute "([^"]+)" in the list$/
      */
     public function iShouldSeeTheProductAttributeInTheList(string $name): void
     {
-        $this->indexPage->open();
-
         Assert::true($this->indexPage->isSingleResourceOnPage(['name' => $name]));
     }
 
@@ -216,6 +243,7 @@ final readonly class ManagingProductAttributesContext implements Context
     }
 
     /**
+     * @Given I am browsing product attributes
      * @When I browse product attributes
      * @When I want to see all product attributes in store
      */

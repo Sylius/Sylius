@@ -8,7 +8,7 @@ Feature: Deleting product association types
         Given the store has a product association type "Cross sell"
         And I am logged in as an administrator
 
-    @ui @api
+    @api @ui
     Scenario: Deleting a product association type
         When I delete the "Cross sell" product association type
         Then I should be notified that it has been successfully deleted

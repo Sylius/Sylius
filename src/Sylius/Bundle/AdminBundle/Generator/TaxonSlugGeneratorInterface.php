@@ -11,8 +11,11 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Behat\Page\Admin\Taxon;
+namespace Sylius\Bundle\AdminBundle\Generator;
 
-interface CreateForParentPageInterface extends CreatePageInterface
+use Sylius\Component\Core\Model\TaxonInterface;
+
+interface TaxonSlugGeneratorInterface
 {
+    public function generate(string $name, string $localeCode, ?TaxonInterface $parent = null): string;
 }

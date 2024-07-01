@@ -16,7 +16,27 @@ twig_hooks:
                 props:
                     form: '@=_context.form'
                     resource: '@=_context.resource'
-                
+
+        'sylius_admin.taxon.create.content.sections.tree':
+            actions:
+                template: '@SyliusAdmin/taxon/sections/tree/actions.html.twig'
+
+        'sylius_admin.taxon.create.content.sections.tree.actions':
+            edit:
+                template: '@SyliusAdmin/taxon/sections/tree/actions/edit.html.twig'
+            dropdown:
+                template: '@SyliusAdmin/taxon/sections/tree/actions/dropdown.html.twig'
+
+        'sylius_admin.taxon.create.content.sections.tree.actions.dropdown':
+            create_child:
+                template: '@SyliusAdmin/taxon/sections/tree/actions/dropdown/create_child.html.twig'
+            products_positions:
+                template: '@SyliusAdmin/taxon/sections/tree/actions/dropdown/products_positions.html.twig'
+            move_up:
+                template: '@SyliusAdmin/taxon/sections/tree/actions/dropdown/move_up.html.twig'
+            move_down:
+                template: '@SyliusAdmin/taxon/sections/tree/actions/dropdown/move_down.html.twig'
+
         'sylius_admin.taxon.create.content.sections.form':
             details:
                 template: '@SyliusAdmin/taxon/sections/form/details.html.twig'
@@ -32,6 +52,14 @@ twig_hooks:
                 template: '@SyliusAdmin/taxon/sections/form/details/parent.html.twig'
             enabled:
                 template: '@SyliusAdmin/taxon/sections/form/details/enabled.html.twig'
+        
+        'sylius_admin.taxon.create.content.sections.form.translations':
+            name:
+                template: '@SyliusAdmin/taxon/sections/form/translations/name.html.twig'
+            slug:
+                template: '@SyliusAdmin/taxon/sections/form/translations/slug.html.twig'
+            description:
+                template: '@SyliusAdmin/taxon/sections/form/translations/description.html.twig'
         
         'sylius_admin.taxon.create.content.sections.form.images':
             image:

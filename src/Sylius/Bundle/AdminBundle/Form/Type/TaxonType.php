@@ -36,7 +36,13 @@ final class TaxonType extends AbstractType
                 'button_delete_options' => [
                     'label' => 'sylius.ui.delete',
                 ],
-            ]);
+            ])
+            ->add('parent', TaxonAutocompleteType::class, [
+                'label' => 'sylius.form.taxon.parent',
+                'multiple' => false,
+                'required' => false,
+            ])
+        ;
     }
 
     public function getBlockPrefix(): string

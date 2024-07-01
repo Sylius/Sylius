@@ -11,12 +11,13 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Behat\Page\Admin\Taxon;
+namespace Sylius\Behat\Element\Admin\ProductAttribute;
 
-class CreateForParentPage extends CreatePage implements CreateForParentPageInterface
+interface FilterElementInterface
 {
-    public function getRouteName(): string
-    {
-        return 'sylius_admin_taxon_create_for_parent';
-    }
+    public function chooseType(string $type): void;
+
+    public function chooseTranslatable(string $translatable): void;
+
+    public function filter(): void;
 }

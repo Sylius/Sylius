@@ -53,7 +53,7 @@ final class ManagingShipmentsContext implements Context
         ?Channel $channel = null,
     ): void {
         $parameters = [
-            'number' => $orderNumber,
+            'order' => $orderNumber,
             'state' => $shippingState,
             'customer' => $customer->getEmail(),
         ];
@@ -119,7 +119,7 @@ final class ManagingShipmentsContext implements Context
      */
     public function iShouldSeeShipmentWithOrderNumber(string $orderNumber): void
     {
-        Assert::true($this->indexPage->isSingleResourceOnPage(['number' => $orderNumber]));
+        Assert::true($this->indexPage->isSingleResourceOnPage(['order' => $orderNumber]));
     }
 
     /**
@@ -127,7 +127,7 @@ final class ManagingShipmentsContext implements Context
      */
     public function iShouldNotSeeShipmentWithOrderNumber(string $orderNumber): void
     {
-        Assert::false($this->indexPage->isSingleResourceOnPage(['number' => $orderNumber]));
+        Assert::false($this->indexPage->isSingleResourceOnPage(['order' => $orderNumber]));
     }
 
     /**
