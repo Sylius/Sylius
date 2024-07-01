@@ -41,23 +41,30 @@ final class ProductContext implements Context
     }
 
     /**
-     * @Then I should be able to access product :product
+     * @When I open page :url
      */
-    public function iShouldBeAbleToAccessProduct(ProductInterface $product): void
+    public function iOpenPage($url): void
     {
-        $this->showPage->tryToOpen(['slug' => $product->getSlug()]);
-
-        Assert::true($this->showPage->isOpen(['slug' => $product->getSlug()]));
+        $this->showPage->visit($url);
     }
 
     /**
-     * @Then I should not be able to access product :product
+     * @When I try to reach unexistent product
      */
-    public function iShouldNotBeAbleToAccessProduct(ProductInterface $product): void
+    public function iTryToReachUnexistentProductPage(?string $localeCode = 'en_US'): void
     {
-        $this->showPage->tryToOpen(['slug' => $product->getSlug()]);
+        $this->showPage->tryToOpen([
+            'slug' => 'unexistent_product',
+            '_locale' => $localeCode,
+        ]);
+    }
 
-        Assert::false($this->showPage->isOpen(['slug' => $product->getSlug()]));
+    /**
+     * @When /^I try to browse products from (taxon "([^"]+)")$/
+     */
+    public function iTryToBrowseProductsFrom(TaxonInterface $taxon): void
+    {
+        $this->indexPage->tryToOpen(['slug' => $taxon->getSlug()]);
     }
 
     /**
@@ -113,17 +120,6 @@ final class ProductContext implements Context
     }
 
     /**
-     * @When I try to reach unexistent product
-     */
-    public function iTryToReachUnexistentProductPage($localeCode = 'en_US'): void
-    {
-        $this->showPage->tryToOpen([
-            'slug' => 'unexisten_product',
-            '_locale' => $localeCode,
-        ]);
-    }
-
-    /**
      * @Then /^I should not be able to view (this product) in the ("([^"]+)" locale)$/
      */
     public function iShouldNotBeAbleToViewThisProductInLocale(ProductInterface $product, $localeCode = 'en_US'): void
@@ -150,14 +146,6 @@ final class ProductContext implements Context
     public function iShouldSeeTheProductDescription(string $description): void
     {
         Assert::same($this->showPage->getDescription(), $description);
-    }
-
-    /**
-     * @When I open page :url
-     */
-    public function iOpenPage($url): void
-    {
-        $this->showPage->visit($url);
     }
 
     /**
@@ -831,14 +819,6 @@ final class ProductContext implements Context
     }
 
     /**
-     * @When /^I try to browse products from (taxon "([^"]+)")$/
-     */
-    public function iTryToBrowseProductsFrom(TaxonInterface $taxon): void
-    {
-        $this->indexPage->tryToOpen(['slug' => $taxon->getSlug()]);
-    }
-
-    /**
      * @Then I should be informed that the taxon does not exist
      */
     public function iShouldBeInformedThatTheTaxonDoesNotExist(): void
@@ -917,6 +897,26 @@ final class ProductContext implements Context
     public function iShouldNotSeeInformationAboutItsLowestPrice(): void
     {
         Assert::false($this->lowestPriceInformationElement->isThereInformationAboutProductLowestPrice());
+    }
+
+    /**
+     * @Then I should be able to access product :product
+     */
+    public function iShouldBeAbleToAccessProduct(ProductInterface $product): void
+    {
+        $this->showPage->tryToOpen(['slug' => $product->getSlug()]);
+
+        Assert::true($this->showPage->isOpen(['slug' => $product->getSlug()]));
+    }
+
+    /**
+     * @Then I should not be able to access product :product
+     */
+    public function iShouldNotBeAbleToAccessProduct(ProductInterface $product): void
+    {
+        $this->showPage->tryToOpen(['slug' => $product->getSlug()]);
+
+        Assert::false($this->showPage->isOpen(['slug' => $product->getSlug()]));
     }
 
     /**

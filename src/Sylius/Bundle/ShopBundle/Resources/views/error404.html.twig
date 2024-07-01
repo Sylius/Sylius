@@ -1,7 +1,7 @@
 {% extends '@SyliusShop/layout.html.twig' %}
 
 {% block content %}
-    <h2 class="ui center aligned icon header">
+    <h2 class="ui center aligned icon header" {{ sylius_test_html_attribute('shop-not-found-page') }}>
         <img src="{{ asset('build/shop/images/logo.png', 'shop') }}" alt="Sylius logo" class="ui small image" />
         <br/><br/>
         {{ 'sylius.ui.the_page_you_are_looking_for_does_not_exist'|trans }}
