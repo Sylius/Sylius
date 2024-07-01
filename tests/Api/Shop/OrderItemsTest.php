@@ -34,21 +34,26 @@ final class OrderItemsTest extends JsonApiTestCase
     /** @test */
     public function it_gets_an_order_item(): void
     {
-        $fixtures = $this->loadFixturesFromFiles(['authentication/customer.yaml', 'channel.yaml', 'cart.yaml', 'country.yaml', 'shipping_method.yaml', 'payment_method.yaml']);
+        $this->setUpDefaultGetHeaders();
+        $fixtures = $this->loadFixturesFromFiles([
+            'authentication/shop_user.yaml',
+            'channel.yaml',
+            'cart.yaml',
+            'country.yaml',
+            'shipping_method.yaml',
+            'payment_method.yaml',
+        ]);
         /** @var CustomerInterface $customer */
         $customer = $fixtures['customer_oliver'];
-        $header = array_merge($this->logInShopUser($customer->getEmailCanonical()), self::CONTENT_TYPE_HEADER);
+        $headers = $this->headerBuilder()->withShopUserAuthorization($customer->getEmailCanonical())->build();
         $order = $this->placeOrder('token', $customer->getEmailCanonical());
 
-        $this->client->request(
-            method: 'GET',
+        $this->requestGet(
             uri: '/api/v2/shop/order-items/' . $order->getItems()->first()->getId(),
-            server: $header,
+            headers: $headers,
         );
 
-        $response = $this->client->getResponse();
-
-        $this->assertResponse($response, 'shop/order_item/get_order_item', Response::HTTP_OK);
+        $this->assertResponse($this->client->getResponse(), 'shop/order_item/get_order_item');
     }
 
     /** @test */
@@ -66,15 +71,29 @@ final class OrderItemsTest extends JsonApiTestCase
 
         $order = $this->placeOrder('token');
 
-        $this->client->request(
-            method: 'GET',
-            uri: '/api/v2/shop/orders/token/items/' . $order->getItems()->first()->getId() . '/adjustments',
-            server: self::CONTENT_TYPE_HEADER,
-        );
-
         $this->requestGet(sprintf('/api/v2/shop/orders/token/items/%s/adjustments', $order->getItems()->first()->getId()));
 
         $this->assertResponse($this->client->getResponse(), 'shop/order_item/get_order_item_adjustments');
+    }
+
+    /** @test */
+    public function it_gets_empty_order_item_adjustments_if_order_token_is_wrong(): void
+    {
+        $this->setUpDefaultGetHeaders();
+        $this->loadFixturesFromFiles([
+            'channel.yaml',
+            'cart.yaml',
+            'country.yaml',
+            'shipping_method.yaml',
+            'payment_method.yaml',
+            'cart/promotion.yaml',
+        ]);
+
+        $order = $this->placeOrder('token');
+
+        $this->requestGet('/api/v2/shop/orders/WRONG_TOKEN/items/' . $order->getItems()->first()->getId() . '/adjustments');
+
+        $this->assertResponse($this->client->getResponse(), 'shop/order_item/get_empty_order_item_adjustments');
     }
 
     /** @test */
@@ -85,7 +104,7 @@ final class OrderItemsTest extends JsonApiTestCase
             'channel.yaml',
             'cart.yaml',
             'country.yaml',
-            'authentication/customer.yaml',
+            'authentication/shop_user.yaml',
             'shipping_method.yaml',
             'payment_method.yaml',
             'cart/promotion.yaml',
@@ -109,7 +128,7 @@ final class OrderItemsTest extends JsonApiTestCase
             'channel.yaml',
             'cart.yaml',
             'country.yaml',
-            'authentication/customer.yaml',
+            'authentication/shop_user.yaml',
             'shipping_method.yaml',
             'payment_method.yaml',
             'cart/promotion.yaml',
@@ -118,29 +137,6 @@ final class OrderItemsTest extends JsonApiTestCase
         $order = $this->placeOrder('token', 'oliver@doe.com');
 
         $this->requestGet(sprintf('/api/v2/shop/orders/token/items/%s/adjustments', $order->getItems()->first()->getId()));
-
-        $this->assertResponseCode($this->client->getResponse(), Response::HTTP_UNAUTHORIZED);
-    }
-
-    /** @test */
-    public function it_gets_empty_order_item_adjustments_if_order_token_is_wrong(): void
-    {
-        $this->loadFixturesFromFiles([
-            'channel.yaml',
-            'cart.yaml',
-            'country.yaml',
-            'shipping_method.yaml',
-            'payment_method.yaml',
-            'cart/promotion.yaml',
-        ]);
-
-        $order = $this->placeOrder('token');
-
-        $this->client->request(
-            method: 'GET',
-            uri: '/api/v2/shop/orders/WRONG_TOKEN/items/' . $order->getItems()->first()->getId() . '/adjustments',
-            server: self::CONTENT_TYPE_HEADER,
-        );
 
         $this->assertResponseCode($this->client->getResponse(), Response::HTTP_UNAUTHORIZED);
     }
