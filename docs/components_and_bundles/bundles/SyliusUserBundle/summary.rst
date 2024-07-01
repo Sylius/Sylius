@@ -27,7 +27,6 @@ Configuration reference
                         controller: Sylius\Bundle\UserBundle\Controller\UserController
                         factory: Sylius\Component\Resource\Factory\Factory
                     templates: 'SyliusUserBundle:User'
-                    encoder: null
                     login_tracking_interval: null
                     resetting:
                         token:
@@ -51,7 +50,6 @@ Configuration reference
                         controller: Sylius\Bundle\UserBundle\Controller\UserController
                         factory: Sylius\Component\Resource\Factory\Factory
                     templates: 'SyliusUserBundle:User'
-                    encoder: null
                     login_tracking_interval: null
                     resetting:
                         token:

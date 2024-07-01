@@ -2,9 +2,6 @@ parameters:
     test_default_state_machine_adapter: 'symfony_workflow'
     test_sylius_state_machine_adapter: '%env(string:default:test_default_state_machine_adapter:TEST_SYLIUS_STATE_MACHINE_ADAPTER)%'
 
-sylius_user:
-    encoder: plaintext
-
 sylius_api:
     enabled: true
 
