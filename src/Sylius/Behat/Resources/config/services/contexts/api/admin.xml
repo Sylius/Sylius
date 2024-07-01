@@ -290,6 +290,11 @@
 <!--            <argument type="service" id="sylius.behat.shared_storage" />-->
 <!--        </service>-->
 
+        <service id="sylius.behat.context.api.admin.managing_customer_groups" class="Sylius\Behat\Context\Api\Admin\ManagingCustomerGroupsContext">
+            <argument type="service" id="sylius.behat.api_platform_client.admin" />
+            <argument type="service" id="Sylius\Behat\Client\ResponseCheckerInterface" />
+        </service>
+
 <!--        <service id="sylius.behat.context.api.admin.managing_placed_order_addresses" class="Sylius\Behat\Context\Api\Admin\ManagingPlacedOrderAddressesContext">-->
 <!--            <argument type="service" id="sylius.behat.api_platform_client.admin" />-->
 <!--            <argument type="service" id="Sylius\Behat\Client\ResponseCheckerInterface" />-->

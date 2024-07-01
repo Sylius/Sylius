@@ -67,6 +67,6 @@ imports:
 #    - api/taxon/managing_taxons.yml
 #    - api/taxon/managing_taxons_ajax.yml
     - api/user/managing_administrators.yml
-#    - api/user/managing_customer_groups.yml
+    - api/user/managing_customer_groups.yml
 #    - api/user/managing_customers.yml
 #    - api/user/managing_users.yml
