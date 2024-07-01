@@ -15,7 +15,6 @@ namespace Sylius\Tests\Api\Admin;
 
 use Sylius\Tests\Api\JsonApiTestCase;
 use Sylius\Tests\Api\Utils\OrderPlacerTrait;
-use Symfony\Component\HttpFoundation\Response;
 
 final class OrderItemUnitsTest extends JsonApiTestCase
 {
@@ -26,6 +25,27 @@ final class OrderItemUnitsTest extends JsonApiTestCase
         $this->setUpOrderPlacer();
 
         parent::setUp();
+    }
+
+    /** @test */
+    public function it_gets_an_order_item_unit(): void
+    {
+        $this->loadFixturesFromFiles([
+            'authentication/api_administrator.yaml',
+            'channel.yaml',
+            'cart.yaml',
+            'country.yaml',
+            'shipping_method.yaml',
+            'payment_method.yaml',
+        ]);
+        $order = $this->placeOrder('token');
+
+        $this->requestGet(
+            uri: '/api/v2/admin/order-item-units/' . $order->getItems()->first()->getUnits()->first()->getId(),
+            headers: $this->headerBuilder()->withJsonLdAccept()->withAdminUserAuthorization('api@example.com')->build(),
+        );
+
+        $this->assertResponse($this->client->getResponse(), 'admin/order_item_units/get_order_item_unit_response');
     }
 
     /** @test */
@@ -44,14 +64,11 @@ final class OrderItemUnitsTest extends JsonApiTestCase
         $order = $this->placeOrder('token');
         $orderItemUnit = $order->getItems()->first()->getUnits()->first();
 
-        $this->client->request(
-            method: 'GET',
+        $this->requestGet(
             uri: '/api/v2/admin/order-item-units/' . $orderItemUnit->getId() . '/adjustments',
-            server: $this->headerBuilder()->withJsonLdAccept()->withAdminUserAuthorization('api@example.com')->build(),
+            headers: $this->headerBuilder()->withJsonLdAccept()->withAdminUserAuthorization('api@example.com')->build(),
         );
 
-        $response = $this->client->getResponse();
-
-        $this->assertResponse($response, 'admin/order_item_units/get_order_item_unit_adjustments', Response::HTTP_OK);
+        $this->assertResponse($this->client->getResponse(), 'admin/order_item_units/get_order_item_unit_adjustments');
     }
 }
