@@ -178,10 +178,10 @@
 <!--            <argument type="service" id="behat.mink.parameters" />-->
 <!--        </service>-->
 
-<!--        <service id="sylius.behat.context.api.admin.managing_shipping_categories" class="Sylius\Behat\Context\Api\Admin\ManagingShippingCategoriesContext">-->
-<!--            <argument type="service" id="sylius.behat.api_platform_client.admin" />-->
-<!--            <argument type="service" id="Sylius\Behat\Client\ResponseCheckerInterface" />-->
-<!--        </service>-->
+        <service id="sylius.behat.context.api.admin.managing_shipping_categories" class="Sylius\Behat\Context\Api\Admin\ManagingShippingCategoriesContext">
+            <argument type="service" id="sylius.behat.api_platform_client.admin" />
+            <argument type="service" id="Sylius\Behat\Client\ResponseCheckerInterface" />
+        </service>
 
 <!--        <service id="sylius.behat.context.api.admin.managing_shipping_methods" class="Sylius\Behat\Context\Api\Admin\ManagingShippingMethodsContext">-->
 <!--            <argument type="service" id="sylius.behat.api_platform_client.admin" />-->

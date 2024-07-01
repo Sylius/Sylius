@@ -9,7 +9,7 @@ Feature: Shipping category unique code validation
         And the store has "Standard" shipping category identified by "STANDARD"
         And I am logged in as an administrator
 
-    @todo @ui @api
+    @api @ui
     Scenario: Trying to add shipping category with taken code
         When I want to create a new shipping category
         And I specify its code as "STANDARD"
