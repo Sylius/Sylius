@@ -71,7 +71,7 @@ class StatisticsComponent
 
         $statistics = $this->statisticsProvider->provide(
             $this->interval,
-            new \DatePeriod(new \DateTime($this->startDate), new \DateInterval('P1M'), new \DateTime($this->endDate)),
+            new \DatePeriod(new \DateTime($this->startDate), $this->resolveInterval(), new \DateTime($this->endDate)),
             $channel,
         );
 
@@ -99,19 +99,64 @@ class StatisticsComponent
     {
         $this->period = $period;
         $this->interval = $interval;
+
+        $this->resolveDates();
     }
 
     #[LiveAction]
     public function getPreviousPeriod(): void
     {
-        $this->startDate = date('Y-m-d', strtotime($this->startDate . ' -1 ' . $this->period));
-        $this->endDate = date('Y-m-d', strtotime($this->endDate . ' -1 ' . $this->period));
+        $this->startDate = (new \DateTime($this->startDate))->sub(new \DateInterval($this->resolveChangePeriodInterval()))->format('Y-m-d');
+        $this->endDate = (new \DateTime($this->endDate))->sub(new \DateInterval($this->resolveChangePeriodInterval()))->format('Y-m-d');
     }
 
     #[LiveAction]
     public function getNextPeriod(): void
     {
-        $this->startDate = date('Y-m-d', strtotime($this->startDate . ' +1 ' . $this->period));
-        $this->endDate = date('Y-m-d', strtotime($this->endDate . ' +1 ' . $this->period));
+        $this->startDate = (new \DateTime($this->startDate))->add(new \DateInterval($this->resolveChangePeriodInterval()))->format('Y-m-d');
+        $this->endDate = (new \DateTime($this->endDate))->add(new \DateInterval($this->resolveChangePeriodInterval()))->format('Y-m-d');
+    }
+
+    private function resolveInterval(): \DateInterval
+    {
+        $interval = match ($this->interval) {
+            'day' => 'P1D',
+            'month' => 'P1M',
+            default => throw new \InvalidArgumentException(sprintf('Interval "%s" is not supported.', $this->interval)),
+        };
+
+        return new \DateInterval($interval);
+    }
+
+    private function resolveDates(): void
+    {
+        [$startDate, $endDate] = match ($this->period) {
+            'year' => [
+                (new \DateTime('first day of January this year'))->format('Y-m-d'),
+                (new \DateTime('first day of January next year'))->format('Y-m-d'),
+            ],
+            'month' => [
+                (new \DateTime('first day of this month'))->format('Y-m-d'),
+                (new \DateTime('first day of next month'))->format('Y-m-d'),
+            ],
+            '2 weeks' => [
+                (new \DateTime('monday previous week'))->format('Y-m-d'),
+                (new \DateTime('monday next week'))->format('Y-m-d'),
+            ],
+            default => throw new \InvalidArgumentException(sprintf('Period "%s" is not supported.', $this->period)),
+        };
+
+        $this->startDate = $startDate;
+        $this->endDate = $endDate;
+    }
+
+    private function resolveChangePeriodInterval(): string
+    {
+        return match ($this->period) {
+            'year' => 'P1Y',
+            'month' => 'P1M',
+            '2 weeks' => 'P2W',
+            default => throw new \InvalidArgumentException(sprintf('Period "%s" is not supported.', $this->period)),
+        };
     }
 }
