@@ -15,7 +15,7 @@ Every time a customer registers via the registration form, a user registration e
 
 **Code**: ``user_registration``
 
-**The default template**: ``@SyliusShop/Email/userRegistration.html.twig``
+**The default template**: ``@SyliusShop/Email/user_registration.html.twig``
 
 You also have the following parameters available:
 
@@ -45,7 +45,7 @@ This e-mail is used when the user requests to reset their password in the login 
 
 **Code**: ``reset_password_token``
 
-**The default template**: ``@SyliusShop/Email/passwordReset.html.twig``
+**The default template**: ``@SyliusShop/Email/password_reset.html.twig``
 
 You also have the following parameters available:
 
@@ -60,7 +60,7 @@ This e-mail is sent when order is placed.
 
 **Code**: ``order_confirmation``
 
-**The default template**: ``@SyliusShop/Email/orderConfirmation.html.twig``
+**The default template**: ``@SyliusShop/Email/order_confirmation.html.twig``
 
 You also have the following parameters available:
 
@@ -91,7 +91,7 @@ This e-mail is sent when a customer validates contact form.
 
 **Code**: ``contact_request``
 
-**The default template**: ``@SyliusShop/Email/contactRequest.html.twig``
+**The default template**: ``@SyliusShop/Email/contact_request.html.twig``
 
 You have the following parameters available:
 
