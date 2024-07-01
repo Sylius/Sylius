@@ -36,6 +36,7 @@ final readonly class ManagingProductAssociationTypesContext implements Context
 
     /**
      * @When I browse product association types
+     * @When I am browsing product association types
      * @When I want to browse product association types
      */
     public function iWantToBrowseProductAssociationTypes(): void
@@ -54,7 +55,7 @@ final readonly class ManagingProductAssociationTypesContext implements Context
     /**
      * @When I want to modify the :productAssociationType product association type
      */
-    public function iWantToModifyAPaymentMethod(ProductAssociationTypeInterface $productAssociationType)
+    public function iWantToModifyAPaymentMethod(ProductAssociationTypeInterface $productAssociationType): void
     {
         $this->updatePage->open(['id' => $productAssociationType->getId()]);
     }
@@ -152,6 +153,14 @@ final readonly class ManagingProductAssociationTypesContext implements Context
     }
 
     /**
+     * @When I sort the product associations :sortType by :field
+     */
+    public function iSortProductAssociationsBy(string $sortingOrder, string $field): void
+    {
+        $this->indexPage->sortBy($field, $sortingOrder === 'descending' ? 'desc' : 'asc');
+    }
+
+    /**
      * @Then I should see a single product association type in the list
      * @Then I should see only one product association type in the list
      * @Then I should see :amount product association types in the list
@@ -187,7 +196,7 @@ final readonly class ManagingProductAssociationTypesContext implements Context
      */
     public function thisProductAssociationTypeNameShouldBe(
         ProductAssociationTypeInterface $productAssociationType,
-        $productAssociationTypeName,
+        string $productAssociationTypeName,
     ): void {
         $this->iWantToBrowseProductAssociationTypes();
 
@@ -260,14 +269,6 @@ final readonly class ManagingProductAssociationTypesContext implements Context
         $this->iWantToBrowseProductAssociationTypes();
 
         Assert::false($this->indexPage->isSingleResourceOnPage([$element => $value]));
-    }
-
-    /**
-     * @When I sort the product associations :sortType by :field
-     */
-    public function iSortProductAssociationsBy(string $sortingOrder, string $field): void
-    {
-        $this->indexPage->sortBy($field, $sortingOrder === 'descending' ? 'desc' : 'asc');
     }
 
     /**

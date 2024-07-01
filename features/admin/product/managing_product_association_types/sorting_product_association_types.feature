@@ -11,7 +11,7 @@ Feature: Sorting product association types
 
     @todo-api @ui
     Scenario: Product associations can be sorted by code in ascending order
-        Given I browse product association types
+        Given I am browsing product association types
         When I sort the product associations ascending by code
         Then I should see 2 product association types in the list
         And the first product association on the list should have code "cross_sell"
@@ -19,7 +19,7 @@ Feature: Sorting product association types
 
     @todo-api @ui
     Scenario: Product associations can be sorted by code in descending order
-        Given I browse product association types
+        Given I am browsing product association types
         When I sort the product associations descending by code
         Then I should see 2 product association types in the list
         And the first product association on the list should have code "up_sell"
