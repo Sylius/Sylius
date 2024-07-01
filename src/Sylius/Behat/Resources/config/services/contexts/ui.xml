@@ -19,6 +19,10 @@
             <argument type="service" id="sylius.behat.page.admin.dashboard" />
         </service>
 
+        <service id="sylius.behat.context.ui.admin.error_page" class="Sylius\Behat\Context\Ui\Admin\ErrorPageContext">
+            <argument type="service" id="sylius.behat.page.error" />
+        </service>
+
         <service id="sylius.behat.context.ui.admin.locale" class="Sylius\Behat\Context\Ui\Admin\LocaleContext">
             <argument type="service" id="sylius.behat.page.admin.dashboard" />
             <argument type="service" id="translator" />
@@ -510,6 +514,10 @@
 
         <service id="sylius.behat.context.ui.shop.currency" class="Sylius\Behat\Context\Ui\Shop\CurrencyContext">
             <argument type="service" id="sylius.behat.page.shop.home" />
+        </service>
+
+        <service id="sylius.behat.context.ui.shop.error_page" class="Sylius\Behat\Context\Ui\Shop\ErrorPageContext">
+            <argument type="service" id="sylius.behat.page.error" />
         </service>
 
         <service id="sylius.behat.context.ui.shop.homepage" class="Sylius\Behat\Context\Ui\Shop\HomepageContext">
