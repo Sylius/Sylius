@@ -15,19 +15,11 @@
     <services>
         <defaults public="true" />
 
-        <service id="Sylius\Bundle\ShopBundle\Twig\ErrorTemplateFinder\ErrorTemplateFinder">
+        <service id="Sylius\Bundle\AdminBundle\Twig\ErrorTemplateFinder\ErrorTemplateFinder">
             <argument type="service" id="Sylius\Bundle\CoreBundle\SectionResolver\SectionProviderInterface" />
+            <argument type="service" id="request_stack" />
             <argument type="service" id="twig" />
             <tag name="sylius.twig.error_template_finder" />
-        </service>
-
-        <service id="sylius.twig.extension.original_price_to_display" class="Sylius\Bundle\ShopBundle\Twig\OrderItemOriginalPriceToDisplayExtension" public="false">
-            <tag name="twig.extension" />
-        </service>
-
-        <service id="Sylius\Bundle\ShopBundle\Twig\OrderPaymentsExtension" public="false">
-            <argument type="service" id="sylius.payment_methods_resolver" />
-            <tag name="twig.extension" />
         </service>
     </services>
 </container>

@@ -54,9 +54,9 @@
         </service>
 
         <service id="Sylius\Bundle\CoreBundle\Twig\ErrorRenderer\TwigErrorRenderer" decorates="twig.error_renderer.html" decoration-priority="64">
-            <argument type="service" id="twig"/>
             <argument type="service" id="Sylius\Bundle\CoreBundle\Twig\ErrorRenderer\TwigErrorRenderer.inner"/>
-            <argument type="service" id="Sylius\Bundle\CoreBundle\SectionResolver\SectionProviderInterface" />
+            <argument type="service" id="twig" />
+            <argument type="tagged_iterator" tag="sylius.twig.error_template_finder" />
             <argument>%kernel.debug%</argument>
         </service>
 

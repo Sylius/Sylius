@@ -13,8 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Twig\ErrorRenderer;
 
-use Sylius\Bundle\AdminBundle\SectionResolver\AdminSection;
-use Sylius\Bundle\CoreBundle\SectionResolver\SectionProviderInterface;
+use Sylius\Bundle\CoreBundle\Twig\ErrorTemplateFinder\ErrorTemplateFinderInterface;
 use Symfony\Bridge\Twig\ErrorRenderer\TwigErrorRenderer as DecoratedTwigErrorRenderer;
 use Symfony\Component\ErrorHandler\ErrorRenderer\ErrorRendererInterface;
 use Symfony\Component\ErrorHandler\Exception\FlattenException;
@@ -22,10 +21,13 @@ use Twig\Environment;
 
 class TwigErrorRenderer implements ErrorRendererInterface
 {
+    /**
+     * @param iterable<ErrorTemplateFinderInterface> $templateFinders
+     */
     public function __construct(
-        private Environment $twig,
         private DecoratedTwigErrorRenderer $decoratedTwigErrorRenderer,
-        private SectionProviderInterface $sectionProvider,
+        private Environment $twig,
+        private iterable $templateFinders,
         private bool $debug,
     ) {
     }
@@ -47,22 +49,10 @@ class TwigErrorRenderer implements ErrorRendererInterface
 
     private function findTemplate(int $statusCode): ?string
     {
-        $section = $this->sectionProvider->getSection();
-
-        $template = ($section instanceof AdminSection) ?
-            sprintf('@Twig/Exception/Admin/error%s.html.twig', $statusCode) :
-            sprintf('@Twig/Exception/Shop/error%s.html.twig', $statusCode);
-
-        if ($this->twig->getLoader()->exists($template)) {
-            return $template;
-        }
-
-        $template = ($section instanceof AdminSection) ?
-            '@Twig/Exception/Admin/error.html.twig' :
-            '@Twig/Exception/Shop/error.html.twig';
-
-        if ($this->twig->getLoader()->exists($template)) {
-            return $template;
+        foreach ($this->templateFinders as $templateFinder) {
+            if (null !== $template = $templateFinder->findTemplate($statusCode)) {
+                return $template;
+            }
         }
 
         return null;
