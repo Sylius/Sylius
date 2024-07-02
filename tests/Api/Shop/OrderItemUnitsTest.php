@@ -16,16 +16,15 @@ namespace Sylius\Tests\Api\Shop;
 use Sylius\Component\Customer\Model\CustomerInterface;
 use Sylius\Tests\Api\JsonApiTestCase;
 use Sylius\Tests\Api\Utils\OrderPlacerTrait;
-use Sylius\Tests\Api\Utils\ShopUserLoginTrait;
 use Symfony\Component\HttpFoundation\Response;
 
 final class OrderItemUnitsTest extends JsonApiTestCase
 {
     use OrderPlacerTrait;
-    use ShopUserLoginTrait;
 
     protected function setUp(): void
     {
+        $this->setUpDefaultGetHeaders();
         $this->setUpOrderPlacer();
 
         parent::setUp();
@@ -34,7 +33,6 @@ final class OrderItemUnitsTest extends JsonApiTestCase
     /** @test */
     public function it_gets_an_order_item_unit(): void
     {
-        $this->setUpDefaultGetHeaders();
         $fixtures = $this->loadFixturesFromFiles([
             'authentication/shop_user.yaml',
             'channel.yaml',
@@ -59,7 +57,6 @@ final class OrderItemUnitsTest extends JsonApiTestCase
     /** @test */
     public function it_does_not_return_an_order_item_unit_of_another_user(): void
     {
-        $this->setUpDefaultGetHeaders();
         $fixtures = $this->loadFixturesFromFiles([
             'authentication/shop_user.yaml',
             'channel.yaml',
@@ -84,7 +81,6 @@ final class OrderItemUnitsTest extends JsonApiTestCase
     /** @test */
     public function it_does_not_return_an_order_item_unit_being_a_guest(): void
     {
-        $this->setUpDefaultGetHeaders();
         $fixtures = $this->loadFixturesFromFiles([
             'authentication/shop_user.yaml',
             'channel.yaml',
@@ -98,10 +94,7 @@ final class OrderItemUnitsTest extends JsonApiTestCase
         $customer = $fixtures['customer_oliver'];
         $order = $this->placeOrder('token', $customer->getEmailCanonical());
 
-        $this->requestGet(
-            uri: '/api/v2/shop/order-item-units/' . $order->getItems()->first()->getUnits()->first()->getId(),
-            headers: $this->headerBuilder()->build(),
-        );
+        $this->requestGet('/api/v2/shop/order-item-units/' . $order->getItems()->first()->getUnits()->first()->getId());
 
         $this->assertResponseCode($this->client->getResponse(), Response::HTTP_NOT_FOUND);
     }

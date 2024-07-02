@@ -16,16 +16,15 @@ namespace Sylius\Tests\Api\Shop;
 use Sylius\Component\Customer\Model\CustomerInterface;
 use Sylius\Tests\Api\JsonApiTestCase;
 use Sylius\Tests\Api\Utils\OrderPlacerTrait;
-use Sylius\Tests\Api\Utils\ShopUserLoginTrait;
 use Symfony\Component\HttpFoundation\Response;
 
 final class OrderItemsTest extends JsonApiTestCase
 {
     use OrderPlacerTrait;
-    use ShopUserLoginTrait;
 
     protected function setUp(): void
     {
+        $this->setUpDefaultGetHeaders();
         $this->setUpOrderPlacer();
 
         parent::setUp();
@@ -34,7 +33,6 @@ final class OrderItemsTest extends JsonApiTestCase
     /** @test */
     public function it_gets_an_order_item(): void
     {
-        $this->setUpDefaultGetHeaders();
         $fixtures = $this->loadFixturesFromFiles([
             'authentication/shop_user.yaml',
             'channel.yaml',
@@ -58,7 +56,6 @@ final class OrderItemsTest extends JsonApiTestCase
     /** @test */
     public function it_does_not_return_an_order_item_of_another_user(): void
     {
-        $this->setUpDefaultGetHeaders();
         $fixtures = $this->loadFixturesFromFiles([
             'authentication/shop_user.yaml',
             'channel.yaml',
@@ -83,7 +80,6 @@ final class OrderItemsTest extends JsonApiTestCase
     /** @test */
     public function it_does_not_return_an_order_item_as_a_guest(): void
     {
-        $this->setUpDefaultGetHeaders();
         $fixtures = $this->loadFixturesFromFiles([
             'authentication/shop_user.yaml',
             'channel.yaml',
@@ -108,7 +104,6 @@ final class OrderItemsTest extends JsonApiTestCase
     /** @test */
     public function it_gets_order_item_adjustments(): void
     {
-        $this->setUpDefaultGetHeaders();
         $this->loadFixturesFromFiles([
             'channel.yaml',
             'cart.yaml',
@@ -128,7 +123,6 @@ final class OrderItemsTest extends JsonApiTestCase
     /** @test */
     public function it_gets_empty_order_item_adjustments_if_order_token_is_wrong(): void
     {
-        $this->setUpDefaultGetHeaders();
         $this->loadFixturesFromFiles([
             'channel.yaml',
             'cart.yaml',
@@ -148,7 +142,6 @@ final class OrderItemsTest extends JsonApiTestCase
     /** @test */
     public function it_returns_nothing_if_a_user_tries_to_get_the_order_item_adjustments_of_another_user(): void
     {
-        $this->setUpDefaultGetHeaders();
         $this->loadFixturesFromFiles([
             'channel.yaml',
             'cart.yaml',
@@ -172,7 +165,6 @@ final class OrderItemsTest extends JsonApiTestCase
     /** @test */
     public function it_prevents_visitors_from_getting_the_item_adjustments_of_a_user_order(): void
     {
-        $this->setUpDefaultGetHeaders();
         $this->loadFixturesFromFiles([
             'channel.yaml',
             'cart.yaml',

@@ -22,6 +22,8 @@ final class OrderItemUnitsTest extends JsonApiTestCase
 
     protected function setUp(): void
     {
+        $this->setUpAdminContext();
+        $this->setUpDefaultGetHeaders();
         $this->setUpOrderPlacer();
 
         parent::setUp();
@@ -40,10 +42,7 @@ final class OrderItemUnitsTest extends JsonApiTestCase
         ]);
         $order = $this->placeOrder('token');
 
-        $this->requestGet(
-            uri: '/api/v2/admin/order-item-units/' . $order->getItems()->first()->getUnits()->first()->getId(),
-            headers: $this->headerBuilder()->withJsonLdAccept()->withAdminUserAuthorization('api@example.com')->build(),
-        );
+        $this->requestGet('/api/v2/admin/order-item-units/' . $order->getItems()->first()->getUnits()->first()->getId());
 
         $this->assertResponse($this->client->getResponse(), 'admin/order_item_units/get_order_item_unit_response');
     }
@@ -64,10 +63,7 @@ final class OrderItemUnitsTest extends JsonApiTestCase
         $order = $this->placeOrder('token');
         $orderItemUnit = $order->getItems()->first()->getUnits()->first();
 
-        $this->requestGet(
-            uri: '/api/v2/admin/order-item-units/' . $orderItemUnit->getId() . '/adjustments',
-            headers: $this->headerBuilder()->withJsonLdAccept()->withAdminUserAuthorization('api@example.com')->build(),
-        );
+        $this->requestGet('/api/v2/admin/order-item-units/' . $orderItemUnit->getId() . '/adjustments');
 
         $this->assertResponse($this->client->getResponse(), 'admin/order_item_units/get_order_item_unit_adjustments');
     }
