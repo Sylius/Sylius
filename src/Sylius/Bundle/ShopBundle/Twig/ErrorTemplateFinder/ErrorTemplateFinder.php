@@ -14,8 +14,8 @@ declare(strict_types=1);
 namespace Sylius\Bundle\ShopBundle\Twig\ErrorTemplateFinder;
 
 use Sylius\Bundle\CoreBundle\SectionResolver\SectionProviderInterface;
-use Sylius\Bundle\CoreBundle\Twig\ErrorTemplateFinder\ErrorTemplateFinderInterface;
 use Sylius\Bundle\ShopBundle\SectionResolver\ShopSection;
+use Sylius\Bundle\UiBundle\Twig\ErrorTemplateFinder\ErrorTemplateFinderInterface;
 use Twig\Environment;
 
 class ErrorTemplateFinder implements ErrorTemplateFinderInterface

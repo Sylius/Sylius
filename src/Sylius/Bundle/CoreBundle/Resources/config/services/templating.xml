@@ -53,13 +53,6 @@
             <tag name="twig.extension" />
         </service>
 
-        <service id="Sylius\Bundle\CoreBundle\Twig\ErrorRenderer\TwigErrorRenderer" decorates="twig.error_renderer.html" decoration-priority="64">
-            <argument type="service" id="Sylius\Bundle\CoreBundle\Twig\ErrorRenderer\TwigErrorRenderer.inner"/>
-            <argument type="service" id="twig" />
-            <argument type="tagged_iterator" tag="sylius.twig.error_template_finder" />
-            <argument>%kernel.debug%</argument>
-        </service>
-
         <service id="sylius.twig.extension.product_translation" class="Sylius\Bundle\CoreBundle\Twig\ProductTranslationExtension" public="false">
             <argument type="service" id="Sylius\Bundle\CoreBundle\Provider\ChannelBasedProductTranslationProviderInterface" />
             <tag name="twig.extension" />

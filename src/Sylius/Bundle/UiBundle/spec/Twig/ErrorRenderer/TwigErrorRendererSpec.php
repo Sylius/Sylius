@@ -11,11 +11,11 @@
 
 declare(strict_types=1);
 
-namespace spec\Sylius\Bundle\CoreBundle\Twig\ErrorRenderer;
+namespace spec\Sylius\Bundle\UiBundle\Twig\ErrorRenderer;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\AdminBundle\Twig\ErrorTemplateFinder\ErrorTemplateFinder as AdminErrorTemplateFinder;
-use Sylius\Bundle\ShopBundle\Twig\ErrorTemplateFinder\ErrorTemplateFinder as ShopErrorTemplateFinder;
+use Sylius\Bundle\UiBundle\Twig\ErrorTemplateFinder\ErrorTemplateFinderInterface as AdminErrorTemplateFinder;
+use Sylius\Bundle\UiBundle\Twig\ErrorTemplateFinder\ErrorTemplateFinderInterface as ShopErrorTemplateFinder;
 use Symfony\Bridge\Twig\ErrorRenderer\TwigErrorRenderer as DecoratedTwigErrorRenderer;
 use Symfony\Component\ErrorHandler\ErrorRenderer\ErrorRendererInterface;
 use Symfony\Component\ErrorHandler\Exception\FlattenException;
@@ -34,7 +34,7 @@ final class TwigErrorRendererSpec extends ObjectBehavior
         $this->beConstructedWith($decoratedTwigErrorRenderer, $twig, [$shopTemplateFinder, $adminTemplateFinder], false);
     }
 
-    function it_implements_error_renderer_interface()
+    function it_implements_error_renderer_interface(): void
     {
         $this->shouldImplement(ErrorRendererInterface::class);
     }
@@ -56,14 +56,12 @@ final class TwigErrorRendererSpec extends ObjectBehavior
         DecoratedTwigErrorRenderer $decoratedTwigErrorRenderer,
         Environment $twig,
         AdminErrorTemplateFinder $adminTemplateFinder,
-        ShopErrorTemplateFinder $shopTemplateFinder,
     ): void {
         $exception = new NotFoundHttpException('Not Found', null, 404, []);
         $templateName = '@Twig/Exception/Admin/error404.html.twig';
         $fallbackTemplateName = '@Twig/Exception/Admin/error.html.twig';
         $flattenException = FlattenException::createFromThrowable($exception);
         $adminTemplateFinder->findTemplate(404)->willReturn(null);
-        $shopTemplateFinder->findTemplate(404)->willReturn(null);
 
         $decoratedTwigErrorRenderer->render($exception)->willReturn($flattenException);
 

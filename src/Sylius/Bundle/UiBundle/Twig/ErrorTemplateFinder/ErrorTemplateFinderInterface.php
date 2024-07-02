@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\CoreBundle\Twig\ErrorTemplateFinder;
+namespace Sylius\Bundle\UiBundle\Twig\ErrorTemplateFinder;
 
 interface ErrorTemplateFinderInterface
 {

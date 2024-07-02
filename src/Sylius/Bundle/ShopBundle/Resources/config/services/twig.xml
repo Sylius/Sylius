@@ -15,7 +15,7 @@
     <services>
         <defaults public="true" />
 
-        <service id="Sylius\Bundle\ShopBundle\Twig\ErrorTemplateFinder\ErrorTemplateFinder">
+        <service id="sylius_shop.twig.error_template_finder" class="Sylius\Bundle\ShopBundle\Twig\ErrorTemplateFinder\ErrorTemplateFinder">
             <argument type="service" id="Sylius\Bundle\CoreBundle\SectionResolver\SectionProviderInterface" />
             <argument type="service" id="twig" />
             <tag name="sylius.twig.error_template_finder" />
