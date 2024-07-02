@@ -17,7 +17,7 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\AdminBundle\SectionResolver\AdminSection;
 use Sylius\Bundle\CoreBundle\SectionResolver\SectionInterface;
 use Sylius\Bundle\CoreBundle\SectionResolver\SectionProviderInterface;
-use Sylius\Bundle\CoreBundle\Twig\ErrorTemplateFinder\ErrorTemplateFinderInterface;
+use Sylius\Bundle\UiBundle\Twig\ErrorTemplateFinder\ErrorTemplateFinderInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Twig\Environment;
@@ -30,7 +30,7 @@ final class ErrorTemplateFinderSpec extends ObjectBehavior
         $this->beConstructedWith($sectionProvider, $requestStack, $twig);
     }
 
-    function it_implements_error_template_finder_interface()
+    function it_implements_error_template_finder_interface(): void
     {
         $this->shouldImplement(ErrorTemplateFinderInterface::class);
     }

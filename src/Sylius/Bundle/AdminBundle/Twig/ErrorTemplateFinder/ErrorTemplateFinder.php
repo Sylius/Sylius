@@ -15,7 +15,7 @@ namespace Sylius\Bundle\AdminBundle\Twig\ErrorTemplateFinder;
 
 use Sylius\Bundle\AdminBundle\SectionResolver\AdminSection;
 use Sylius\Bundle\CoreBundle\SectionResolver\SectionProviderInterface;
-use Sylius\Bundle\CoreBundle\Twig\ErrorTemplateFinder\ErrorTemplateFinderInterface;
+use Sylius\Bundle\UiBundle\Twig\ErrorTemplateFinder\ErrorTemplateFinderInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Twig\Environment;
 

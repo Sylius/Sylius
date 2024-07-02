@@ -16,8 +16,8 @@ namespace spec\Sylius\Bundle\ShopBundle\Twig\ErrorTemplateFinder;
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\CoreBundle\SectionResolver\SectionInterface;
 use Sylius\Bundle\CoreBundle\SectionResolver\SectionProviderInterface;
-use Sylius\Bundle\CoreBundle\Twig\ErrorTemplateFinder\ErrorTemplateFinderInterface;
 use Sylius\Bundle\ShopBundle\SectionResolver\ShopSection;
+use Sylius\Bundle\UiBundle\Twig\ErrorTemplateFinder\ErrorTemplateFinderInterface;
 use Twig\Environment;
 use Twig\Loader\LoaderInterface;
 
@@ -28,7 +28,7 @@ final class ErrorTemplateFinderSpec extends ObjectBehavior
         $this->beConstructedWith($sectionProvider, $twig);
     }
 
-    function it_implements_error_template_finder_interface()
+    function it_implements_error_template_finder_interface(): void
     {
         $this->shouldImplement(ErrorTemplateFinderInterface::class);
     }
