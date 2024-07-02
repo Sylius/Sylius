@@ -1,5 +1,20 @@
 # CHANGELOG FOR `1.12.X`
 
+## v1.12.18 (2024-07-02)
+
+#### Details
+
+- [#16393](https://github.com/Sylius/Sylius/issues/16393) [User] Update the default tokens' length and the upper limit ([@NoResponseMate](https://github.com/NoResponseMate))
+- [#16392](https://github.com/Sylius/Sylius/issues/16392) [Core] Add order token length to configuration ([@NoResponseMate](https://github.com/NoResponseMate))
+- [#16410](https://github.com/Sylius/Sylius/issues/16410) [CS][DX] Refactor
+- [#16431](https://github.com/Sylius/Sylius/issues/16431) [CI] Change the version of Chrome ([@GSadee](https://github.com/GSadee))
+- [#16432](https://github.com/Sylius/Sylius/issues/16432) [CI] Change the version of Chrome from hardcoded one to stable ([@GSadee](https://github.com/GSadee))
+- [#16439](https://github.com/Sylius/Sylius/issues/16439) Correct wrong command in the platform's cron example docs ([@TheMilek](https://github.com/TheMilek))
+- [#16436](https://github.com/Sylius/Sylius/issues/16436) Sylius Plus modular installation and upgrading ([@CoderMaggie](https://github.com/CoderMaggie))
+- [#16500](https://github.com/Sylius/Sylius/issues/16500) [Documentation] Update Sylius 1.12 version on the release cycle page + update PR template ([@GSadee](https://github.com/GSadee))
+- [#16477](https://github.com/Sylius/Sylius/issues/16477) Fix ProductTaxons' positioning logic ([@NoResponseMate](https://github.com/NoResponseMate))
+- [#16380](https://github.com/Sylius/Sylius/issues/16380) Fix products grid for mobile ([@Yanick-K](https://github.com/Yanick-K))
+
 ## v1.12.17 (2024-06-07)
 
 #### Details
