@@ -15,7 +15,7 @@ Feature: Accessing shipment's order from the shipments index
         And the customer chose "UPS" shipping method with "Cash on Delivery" payment
         And I am logged in as an administrator
 
-    @todo @ui @api
+    @api @ui
     Scenario: Accessing shipment's order from the shipment
         When I browse shipments
         And I move to the details of first shipment's order

@@ -45,6 +45,30 @@ final class ManagingProductTaxonsContext implements Context
     }
 
     /**
+     * @When I check all taxons
+     */
+    public function iCheckAllTaxons(): void
+    {
+        $this->taxonomyFormElement->checkAllTaxons();
+    }
+
+    /**
+     * @When I uncheck all taxons
+     */
+    public function iUncheckAllTaxons(): void
+    {
+        $this->taxonomyFormElement->uncheckAllTaxons();
+    }
+
+    /**
+     * @When I filter taxons by :phrase
+     */
+    public function iFilterTaxonsBy(string $phrase): void
+    {
+        $this->taxonomyFormElement->filterTaxonsBy($phrase);
+    }
+
+    /**
      * @Then the product :product should have the :taxon taxon
      */
     public function thisProductTaxonShouldHaveTheTaxon(TaxonInterface $taxon): void
@@ -58,5 +82,21 @@ final class ManagingProductTaxonsContext implements Context
     public function thisProductTaxonShouldNotHaveTheTaxon(TaxonInterface $taxon): void
     {
         Assert::false($this->taxonomyFormElement->isTaxonChosen($taxon->getCode()));
+    }
+
+    /**
+     * @Then I should see the :taxon taxon
+     */
+    public function iShouldSeeTheTaxon(TaxonInterface $taxon): void
+    {
+        Assert::true($this->taxonomyFormElement->hasTaxon($taxon->getCode()));
+    }
+
+    /**
+     * @Then I should not see the :taxon taxon
+     */
+    public function iShouldNotSeeTheTaxon(TaxonInterface $taxon): void
+    {
+        Assert::false($this->taxonomyFormElement->hasTaxon($taxon->getCode()));
     }
 }

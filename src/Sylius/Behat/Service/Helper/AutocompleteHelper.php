@@ -111,6 +111,18 @@ final class AutocompleteHelper implements AutocompleteHelperInterface
         $this->removeItemByValue($driver, $selector, $value);
     }
 
+    public function clear(DriverInterface $driver, string $selector): void
+    {
+        $selector = $this->normalizeSelector($selector);
+        $driver->executeScript(<<<SCRIPT
+            (function () {
+                let element = document.evaluate("{$selector}", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
+                element.tomselect.clear();
+                element.tomselect.refreshOptions();
+            })();
+        SCRIPT);
+    }
+
     private function addItemByValue(DriverInterface $driver, string $selector, int|string $value): void
     {
         $driver->executeScript(<<<SCRIPT

@@ -119,7 +119,7 @@ If all is well the output should look like:
 
 .. tip::
 
-    In some cases you will see an error stating that the there is something wrong with the resource configuration:
+    In some cases you will see an error stating that there is something wrong with the resource configuration:
     ``Unrecognized option "classes" under...``
     When this happens, please refer to :ref:`resource-configuration`.
 
@@ -406,3 +406,8 @@ Which we strongly recommend over updating the schema.
 you'll need to update its form type. Check how to do it :doc:`here </customization/form>`.
 
 .. include:: /customization/plugins.rst
+
+Learn more
+----------
+
+* `Sylius Database Schema <https://drawsql.app/templates/sylius>`_

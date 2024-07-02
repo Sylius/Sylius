@@ -11,8 +11,13 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Behat\Page\Admin\Taxon;
+namespace Sylius\Behat\Element\Admin\ProductAttribute;
 
-interface CreateForParentPageInterface extends CreatePageInterface
+interface FilterElementInterface
 {
+    public function chooseType(string $type): void;
+
+    public function chooseTranslatable(string $translatable): void;
+
+    public function filter(): void;
 }

@@ -9,7 +9,7 @@ Feature: Taxon unique code validation
         And the store classifies its products as "T-Shirts"
         And I am logged in as an administrator
 
-    @todo @ui @api
+    @api @ui
     Scenario: Trying to add taxon with taken code
         When I want to create a new taxon
         And I specify its code as "t_shirts"

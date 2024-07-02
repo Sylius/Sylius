@@ -238,15 +238,6 @@ final readonly class ManagingProductsContext implements Context
     }
 
     /**
-     * @When I search for products with :phrase
-     */
-    public function iSearchForProductsWith(string $phrase): void
-    {
-        $this->indexPage->setFilterSearch($phrase);
-        $this->indexPage->filter();
-    }
-
-    /**
      * @When I filter
      */
     public function iFilter(): void

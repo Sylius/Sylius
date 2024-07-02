@@ -10,7 +10,7 @@ Feature: Preventing a potential XSS attack while adding a new taxon
         And the store has "<script>alert('xss')</script>" taxonomy
         And I am logged in as an administrator
 
-    @todo @ui @javascript @no-api
+    @no-api @ui @mink:chromedriver
     Scenario: Preventing a potential XSS attack while adding new taxon
         When I want to create a new taxon
         Then I should be able to change its parent taxon to "Category"

@@ -21,6 +21,14 @@ use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Validator\Constraints\Valid;
 use Webmozart\Assert\Assert;
 
+trigger_deprecation(
+    'sylius/core-bundle',
+    '1.14',
+    'The "%s" class is deprecated and will be removed in Sylius 2.0.',
+    AddUserFormSubscriber::class,
+);
+
+/** @deprecated since Sylius 1.14 and will be removed in Sylius 2.0. */
 final class AddUserFormSubscriber implements EventSubscriberInterface
 {
     public function __construct(private string $entryType)

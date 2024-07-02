@@ -11,14 +11,15 @@
                     <input class="form-control" placeholder="{{ 'sylius.ui.filter'|trans }}" type="text"
                            data-product-taxon-tree-target="filter"
                            data-action="input->product-taxon-tree#filter"
+                           {{ sylius_test_html_attribute('product-taxons-filter') }}
                     />
                     <span class="input-group-text">
-                        <a class="input-group-link link-reset" data-action="product-taxon-tree#clearFilter" >{{ 'sylius.ui.clear'|trans }}</a>
+                        <a class="input-group-link link-reset" type="button" data-action="product-taxon-tree#clearFilter" >{{ 'sylius.ui.clear'|trans }}</a>
                     </span>
                 </div>
                 <div class="d-flex gap-3 align-items-center ms-4 me-2">
-                    <a class="fs-5 text-nowrap link-reset" data-action="product-taxon-tree#checkAll">{{ 'sylius.ui.check_all'|trans }}</a>
-                    <a class="fs-5 text-nowrap link-reset" data-action="product-taxon-tree#uncheckAll">{{ 'sylius.ui.uncheck_all'|trans }}</a>
+                    <a class="fs-5 text-nowrap link-reset" type="button" data-action="product-taxon-tree#checkAll" {{ sylius_test_html_attribute('product-taxons-check-all') }}>{{ 'sylius.ui.check_all'|trans }}</a>
+                    <a class="fs-5 text-nowrap link-reset" type="button" data-action="product-taxon-tree#uncheckAll" {{ sylius_test_html_attribute('product-taxons-uncheck-all') }}>{{ 'sylius.ui.uncheck_all'|trans }}</a>
                 </div>
             </div>
             <div data-product-taxon-tree-target="tree"></div>

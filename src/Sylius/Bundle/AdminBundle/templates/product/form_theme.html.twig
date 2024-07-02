@@ -11,6 +11,8 @@
 {% endblock %}
 
 {% block _sylius_admin_product_translations_entry_slug_row %}
+    {% from '@SyliusAdmin/shared/helper/icon.html.twig' import icon %}
+
     {% set locale = form.parent.vars.name %}
 
     {{ form_label(form) }}
@@ -24,7 +26,7 @@
             data-live-locale-code-param="{{ locale }}"
             {{ sylius_test_html_attribute('generate-product-slug-button', locale) }}
         >
-            ⚡️
+            {{ icon({ icon: 'wand' }) }}
         </button>
     </div>
     {{ form_errors(form) }}

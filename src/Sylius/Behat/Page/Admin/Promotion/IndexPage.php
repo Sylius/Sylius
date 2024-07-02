@@ -36,8 +36,9 @@ class IndexPage extends BaseIndexPage implements IndexPageInterface
     public function isCouponBasedFor(PromotionInterface $promotion): bool
     {
         $coupons = $this->getPromotionFieldsWithHeader($promotion, 'couponBased');
+        $isCouponBased = $coupons->find('css', '[data-test-status-enabled]');
 
-        return 'Yes' === $coupons->getText();
+        return $isCouponBased !== null;
     }
 
     public function specifyFilterType(string $field, string $type): void

@@ -93,15 +93,6 @@ final class ManagingCustomersContext implements Context
     }
 
     /**
-     * @When I search for customer by :phrase
-     */
-    public function iSearchForCustomersWith(string $phrase): void
-    {
-        $this->indexPage->setFilterSearch($phrase);
-        $this->indexPage->filter();
-    }
-
-    /**
      * @When I filter by group :groupName
      * @When I filter by groups :firstGroup and :secondGroup
      */

@@ -116,5 +116,10 @@
                  form-type="Sylius\Bundle\AttributeBundle\Form\Type\AttributeType\SelectAttributeType"
                  configuration-form-type="Sylius\Bundle\AdminBundle\Form\Type\AttributeType\Configuration\SelectAttributeConfigurationType" />
         </service>
+
+        <service id="sylius_admin.generator.taxon_slug" class="Sylius\Bundle\AdminBundle\Generator\TaxonSlugGenerator">
+            <argument type="service" id="sylius.generator.taxon_slug" />
+        </service>
+        <service id="Sylius\Bundle\AdminBundle\Generator\TaxonSlugGeneratorInterface" alias="sylius_admin.generator.taxon_slug" />
     </services>
 </container>

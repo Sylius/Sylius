@@ -13,7 +13,7 @@ Feature: Seeing the price history of a simple product after changes to catalog p
         And it reduces price by "90%"
         And I am logged in as an administrator
 
-    @api @todo @ui
+    @api @ui
     Scenario: Seeing the catalog price history of a simple product
         Given the "Winter sale" catalog promotion is enabled
         When I disable "Winter sale" catalog promotion
@@ -23,7 +23,7 @@ Feature: Seeing the price history of a simple product after changes to catalog p
         And there should be a log entry on the 2nd position with the "$10.00" selling price, "$100.00" original price and datetime of the price change
         And there should be a log entry on the 3rd position with the "$100.00" selling price, no original price and datetime of the price change
 
-    @api @todo @ui
+    @api @ui
     Scenario: Seeing the catalog price history of a simple product with a price different than an original price
         Given "Wyborowa Vodka" variant is originally priced at "$120.00" in "United States" channel
         And the "Winter sale" catalog promotion is enabled

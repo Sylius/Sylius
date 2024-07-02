@@ -64,16 +64,10 @@ class IndexPage extends BaseIndexPage implements IndexPageInterface
         $this->waitForFormUpdate();
     }
 
-    public function setFilterSearch(string $phrase): void
-    {
-        $this->getElement('filter_search')->setValue($phrase);
-    }
-
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
             'filter_group' => '#criteria_group',
-            'filter_search' => '#criteria_search_value',
         ]);
     }
 }
