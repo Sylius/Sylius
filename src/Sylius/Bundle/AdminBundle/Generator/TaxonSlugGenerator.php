@@ -19,7 +19,6 @@ use Sylius\Component\Taxonomy\Generator\TaxonSlugGeneratorInterface as BaseTaxon
 
 final readonly class TaxonSlugGenerator implements TaxonSlugGeneratorInterface
 {
-
     public function __construct(private BaseTaxonSlugGeneratorInterface $slugGenerator)
     {
     }

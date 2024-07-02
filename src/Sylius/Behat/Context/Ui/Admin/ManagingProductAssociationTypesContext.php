@@ -173,7 +173,7 @@ final readonly class ManagingProductAssociationTypesContext implements Context
     /**
      * @Then I should see the product association type :name in the list
      */
-    public function iShouldSeeTheProductAssociationTypeInTheList(string $name):void
+    public function iShouldSeeTheProductAssociationTypeInTheList(string $name): void
     {
         $this->iWantToBrowseProductAssociationTypes();
 

@@ -294,7 +294,6 @@ final readonly class ManagingProductAssociationTypesContext implements Context
         );
     }
 
-
     /**
      * @Then the first product association on the list should have code :value
      */
