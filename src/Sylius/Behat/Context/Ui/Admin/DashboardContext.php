@@ -77,6 +77,26 @@ final class DashboardContext implements Context
     }
 
     /**
+     * @When /^I view statistics for ("[^"]+" channel) and (previous|next) year$/
+     *
+     * @throws UnexpectedPageException
+     */
+    public function iViewStatisticsForPreviousPeriod(
+        ChannelInterface $channel,
+        string $period,
+    ): void {
+        if (!$this->dashboardPage->isOpen(['channel' => $channel->getCode()])) {
+            $this->dashboardPage->open(['channel' => $channel->getCode()]);
+        }
+
+        match ($period) {
+            'previous' => $this->dashboardPage->choosePreviousPeriod(),
+            'next' => $this->dashboardPage->chooseNextPeriod(),
+            default => null,
+        };
+    }
+
+    /**
      * @When I choose :channelName channel
      */
     public function iChooseChannel(string $channelName): void

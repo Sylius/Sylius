@@ -47,7 +47,7 @@ Feature: Statistics
         And 4 more new customers have paid 5 orders placed for total of "$5,000.37"
         And 2 more new customers have paid 2 orders placed for total of "$5,000.37"
         When I view statistics for "United States" channel and previous year split by month
-        And I view statistics for "United States" channel and next year split by month
+        And I view statistics for "United States" channel and next year
         Then I should see 6 new customers
         And I should see 7 paid orders
         And there should be total sales of "$10,000.74"
