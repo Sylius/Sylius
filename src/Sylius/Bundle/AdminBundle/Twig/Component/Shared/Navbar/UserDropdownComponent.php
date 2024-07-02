@@ -28,7 +28,7 @@ class UserDropdownComponent
     ) {
     }
 
-    #[ExposeInTemplate]
+    #[ExposeInTemplate(name: 'user')]
     public function getUser(): UserInterface
     {
         $user = $this->security->getUser();
@@ -45,7 +45,7 @@ class UserDropdownComponent
      *
      * @psalm-suppress InvalidReturnType
      */
-    #[ExposeInTemplate]
+    #[ExposeInTemplate(name: 'menu_items')]
     public function getMenuItems(): array
     {
         /**

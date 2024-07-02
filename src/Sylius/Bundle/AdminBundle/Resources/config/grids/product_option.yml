@@ -40,6 +40,8 @@ sylius_grid:
                 search:
                     type: string
                     label: sylius.ui.search
+                    form_options:
+                        type: !php/const Sylius\Component\Grid\Filter\StringFilter::TYPE_CONTAINS
                     options:
                         fields: [code, translation.name]
             actions:

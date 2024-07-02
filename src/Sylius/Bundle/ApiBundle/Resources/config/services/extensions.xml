@@ -53,6 +53,16 @@
             <tag name="api_platform.doctrine.orm.query_extension.collection" />
         </service>
 
+        <service id="Sylius\Bundle\ApiBundle\Doctrine\QueryCollectionExtension\OrderItemsByVisitorExtension">
+            <argument type="service" id="Sylius\Bundle\ApiBundle\Context\UserContextInterface" />
+            <tag name="api_platform.doctrine.orm.query_extension.collection" />
+        </service>
+
+        <service id="Sylius\Bundle\ApiBundle\Doctrine\QueryCollectionExtension\OrderItemsByShopUserExtension">
+            <argument type="service" id="Sylius\Bundle\ApiBundle\Context\UserContextInterface" />
+            <tag name="api_platform.doctrine.orm.query_extension.collection" />
+        </service>
+
         <service id="Sylius\Bundle\ApiBundle\Doctrine\QueryCollectionExtension\OrdersByLoggedInUserExtension">
             <argument type="service" id="Sylius\Bundle\ApiBundle\Context\UserContextInterface" />
             <tag name="api_platform.doctrine.orm.query_extension.collection" />

@@ -61,7 +61,7 @@ class StatisticsComponent
      *
      * @throws \Exception
      */
-    #[ExposeInTemplate]
+    #[ExposeInTemplate(name: 'statistics')]
     public function getStatistics(): array
     {
         /** @var ChannelInterface $channel */

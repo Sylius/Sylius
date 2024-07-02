@@ -135,26 +135,45 @@ final class OrdersTest extends JsonApiTestCase
     }
 
     /** @test */
-    public function it_gets_order_adjustments(): void
+    public function it_returns_nothing_if_visitor_tries_to_get_the_items_of_a_user_order(): void
     {
         $this->setUpDefaultGetHeaders();
         $this->loadFixturesFromFiles([
             'channel.yaml',
             'cart.yaml',
             'country.yaml',
+            'authentication/customer.yaml',
             'shipping_method.yaml',
             'payment_method.yaml',
         ]);
 
         $tokenValue = 'nAWw2jewpA';
-        $this->placeOrder($tokenValue);
+        $this->placeOrder($tokenValue, 'oliver@doe.com');
+
+        $this->requestGet(sprintf('/api/v2/shop/orders/%s/items', $tokenValue));
+
+        $this->assertResponse($this->client->getResponse(), 'shop/get_empty_order_items_response');
+    }
+
+    /** @test */
+    public function it_prevents_visitors_from_getting_the_adjustments_of_a_user_order(): void
+    {
+        $this->setUpDefaultGetHeaders();
+        $this->loadFixturesFromFiles([
+            'channel.yaml',
+            'cart.yaml',
+            'country.yaml',
+            'authentication/customer.yaml',
+            'shipping_method.yaml',
+            'payment_method.yaml',
+        ]);
+
+        $tokenValue = 'nAWw2jewpA';
+        $this->placeOrder($tokenValue, 'oliver@doe.com');
 
         $this->requestGet(sprintf('/api/v2/shop/orders/%s/adjustments', $tokenValue));
 
-        $this->assertResponse(
-            $this->client->getResponse(),
-            'shop/order/get_order_adjustments',
-        );
+        $this->assertResponseCode($this->client->getResponse(), Response::HTTP_UNAUTHORIZED);
     }
 
     /** @test */

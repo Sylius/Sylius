@@ -70,7 +70,6 @@ class CreateConfigurableProductPage extends BaseCreatePage implements CreateConf
                 'channels' => '[data-test-channels]',
                 'code' => '[data-test-code]',
                 'enabled' => '[data-test-enabled]',
-                'form' => '[data-live-name-value="sylius_admin:product:form"]',
                 'product_options_autocomplete' => '[data-test-product-options-autocomplete]',
                 'side_navigation_tab' => '[data-test-side-navigation-tab="%name%"]',
             ],
@@ -84,15 +83,6 @@ class CreateConfigurableProductPage extends BaseCreatePage implements CreateConf
         }
 
         return parent::getElement($name, $parameters);
-    }
-
-    private function waitForFormUpdate(): void
-    {
-        $form = $this->getElement('form');
-        sleep(1); // we need to sleep, as sometimes the check below is executed faster than the form sets the busy attribute
-        $form->waitFor(1500, function () use ($form) {
-            return !$form->hasAttribute('busy');
-        });
     }
 
     private function changeTab(): void

@@ -1,0 +1,35 @@
+twig_hooks:
+    hooks:
+        'sylius_admin.shipment.show.content':
+            page_body:
+                template: '@SyliusAdmin/shipment/show/content/page_body.html.twig'
+
+        'sylius_admin.shipment.show.content.header':
+            breadcrumbs:
+                template: '@SyliusAdmin/shipment/show/content/header/breadcrumbs.html.twig'
+
+        'sylius_admin.shipment.show.content.header.title_block':
+            title:
+                template: '@SyliusAdmin/shipment/show/content/header/title_block/title.html.twig'
+
+        'sylius_admin.shipment.show.content.page_body':
+            items:
+                template: '@SyliusAdmin/shipment/show/content/page_body/items.html.twig'
+
+        'sylius_admin.shipment.show.content.page_body.items':
+            head:
+                template: '@SyliusAdmin/shipment/show/content/page_body/items/head.html.twig'
+            body:
+                template: '@SyliusAdmin/shipment/show/content/page_body/items/body.html.twig'
+
+        'sylius_admin.shipment.show.content.page_body.items.head':
+            product:
+                template: '@SyliusAdmin/shipment/show/content/page_body/items/head/product.html.twig'
+            variant:
+                template: '@SyliusAdmin/shipment/show/content/page_body/items/head/variant.html.twig'
+
+        'sylius_admin.shipment.show.content.page_body.items.body':
+            product:
+                template: '@SyliusAdmin/shipment/show/content/page_body/items/body/product.html.twig'
+            variant:
+                template: '@SyliusAdmin/shipment/show/content/page_body/items/body/variant.html.twig'

@@ -3,7 +3,7 @@ Customizing Repositories
 
 .. warning::
     In **Sylius** we are using both default Doctrine repositories and the custom ones.
-    Often you will be needing to add your very own methods to them. You need to check before which repository is your resource using.
+    Often you will need to add your very own methods to them. You need to check before which repository is your resource using.
 
 Why would you customize a Repository?
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

@@ -17,6 +17,7 @@ use Behat\Mink\Exception\ElementNotFoundException;
 use Behat\Mink\Session;
 use FriendsOfBehat\PageObjectExtension\Page\SymfonyPage;
 use Sylius\Behat\Service\Accessor\TableAccessorInterface;
+use Sylius\Component\Core\Model\ProductInterface;
 use Symfony\Component\Routing\RouterInterface;
 
 class DashboardPage extends SymfonyPage implements DashboardPageInterface
@@ -124,6 +125,13 @@ class DashboardPage extends SymfonyPage implements DashboardPageInterface
         usleep(500000);
     }
 
+    public function searchForProductViaNavbar(ProductInterface $productName): void
+    {
+        $form = $this->getElement('product_navbar_search');
+        $form->find('css', 'input')->setValue($productName);
+        $form->find('css', 'button')->click();
+    }
+
     public function getRouteName(): string
     {
         return 'sylius_admin_dashboard';
@@ -145,6 +153,7 @@ class DashboardPage extends SymfonyPage implements DashboardPageInterface
             'new_customers' => '#new-customers',
             'new_orders' => '#new-orders',
             'order_list' => '#orders',
+            'product_navbar_search' => '[data-test-navbar-product-search]',
             'sub_header' => '.ui.header .content .sub.header',
             'total_sales' => '#total-sales',
             'year_split_by_months_statistics_button' => 'button[data-stats-button="year"]',

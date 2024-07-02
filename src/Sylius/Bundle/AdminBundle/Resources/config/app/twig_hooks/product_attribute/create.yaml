@@ -1,0 +1,55 @@
+twig_hooks:
+    hooks:
+        'sylius_admin.product_attribute.create.content':
+            form:
+                component: 'sylius_admin:product_attribute:form'
+                props:
+                    form: '@=_context.form'
+                    type: '@=_context.resource.getType()'
+                    resource: '@=_context.resource'
+
+        'sylius_admin.product_attribute.create.content.form':
+            details:
+                template: '@SyliusAdmin/product_attribute/form/details.html.twig'
+            translations:
+                template: '@SyliusAdmin/product_attribute/form/translations.html.twig'
+            configuration:
+                template: '@SyliusAdmin/product_attribute/form/configuration.html.twig'
+
+        'sylius_admin.product_attribute.create.content.form.details':
+            code:
+                template: '@SyliusAdmin/product_attribute/form/details/code.html.twig'
+            type:
+                template: '@SyliusAdmin/product_attribute/form/details/type.html.twig'
+            position:
+                template: '@SyliusAdmin/product_attribute/form/details/position.html.twig'
+            translatable:
+                template: '@SyliusAdmin/product_attribute/form/details/translatable.html.twig'
+
+        'sylius_admin.product_attribute.create.content.form.translations':
+            name:
+                template: '@SyliusAdmin/product_attribute/form/translations/name.html.twig'
+
+        'sylius_admin.product_attribute.create.content.form.configuration.text':
+            min_length:
+                template: '@SyliusAdmin/product_attribute/form/configuration/text/min_length.html.twig'    
+            max_length:
+                template: '@SyliusAdmin/product_attribute/form/configuration/text/max_length.html.twig'
+
+        'sylius_admin.product_attribute.create.content.form.configuration.datetime':
+            format:
+                template: '@SyliusAdmin/product_attribute/form/configuration/datetime/format.html.twig'
+
+        'sylius_admin.product_attribute.create.content.form.configuration.date':
+            format:
+                template: '@SyliusAdmin/product_attribute/form/configuration/date/format.html.twig'
+
+        'sylius_admin.product_attribute.create.content.form.configuration.select':
+            min_entries:
+                template: '@SyliusAdmin/product_attribute/form/configuration/select/min_entries.html.twig'
+            max_entries:
+                template: '@SyliusAdmin/product_attribute/form/configuration/select/max_entries.html.twig'
+            multiple:
+                template: '@SyliusAdmin/product_attribute/form/configuration/select/multiple.html.twig'
+            choices:
+                template: '@SyliusAdmin/product_attribute/form/configuration/select/choices.html.twig'

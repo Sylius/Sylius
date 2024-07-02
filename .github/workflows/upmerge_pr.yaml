@@ -31,10 +31,13 @@ jobs:
                         target_branch: "2.0"
                     -
                         base_branch: "2.0"
-                        target_branch: "bootstrap-admin-panel"
+                        target_branch: "api-platform-3"
                     -
                         base_branch: "2.0"
-                        target_branch: "api-platform-3"
+                        target_branch: "bootstrap-shop"
+                    -
+                        base_branch: "2.0"
+                        target_branch: "symfony-7"                        
 
         steps:
             -

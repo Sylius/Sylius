@@ -54,6 +54,20 @@
         </service>
 
         <service
+            id="sylius_admin.twig.component.product_option.form"
+            class="Sylius\Bundle\AdminBundle\Twig\Component\ProductOption\FormComponent"
+        >
+            <argument type="service" id="form.factory" />
+            <argument>Sylius\Bundle\AdminBundle\Form\Type\ProductOptionType</argument>
+
+            <tag
+                name="sylius.live_component"
+                key="sylius_admin:product_option:form"
+                template="@SyliusAdmin/product_option/form.html.twig"
+            />
+        </service>
+
+        <service
             id="sylius_admin.twig.component.customer.order_statistics"
             class="Sylius\Bundle\AdminBundle\Twig\Component\Customer\OrderStatisticsComponent"
         >
@@ -121,6 +135,19 @@
         </service>
 
         <service
+            id="sylius_admin.twig.component.render_entity_with_template"
+            class="Sylius\Bundle\AdminBundle\Twig\Component\Shared\RenderEntityWithTemplateComponent"
+        >
+            <argument type="service" id="doctrine.orm.entity_manager" />
+
+            <tag
+                name="twig.component"
+                key="sylius_admin:render_entity_with_template"
+                template="@SyliusAdmin/shared/components/render_entity_with_template.html.twig"
+            />
+        </service>
+
+        <service
             id="sylius_admin.twig.component.order.form"
             class="Sylius\Bundle\AdminBundle\Twig\Component\Order\FormComponent"
         >
@@ -172,6 +199,19 @@
                 name="sylius.live_component"
                 key="sylius_admin:product:generate_product_variants_form"
                 template="@SyliusAdmin/product/generate_variants/form.html.twig"
+            />
+        </service>
+
+        <service
+            id="sylius_admin.twig.component.product.form.product_taxons"
+            class="Sylius\Bundle\AdminBundle\Twig\Component\Product\Form\ProductTaxonsComponent"
+        >
+            <argument type="service" id="sylius_admin.doctrine.query.taxon.all_taxons" />
+
+            <tag
+                name="sylius.twig_component"
+                key="sylius_admin:product:form:product_taxons"
+                template="@SyliusAdmin/product/form/sections/taxonomy/product_taxons.html.twig"
             />
         </service>
 
@@ -261,6 +301,20 @@
         </service>
 
         <service
+            id="sylius_admin.twig_component.product_attribute.form"
+            class="Sylius\Bundle\AdminBundle\Twig\Component\ProductAttribute\FormComponent"
+        >
+            <argument type="service" id="form.factory" />
+            <argument>Sylius\Bundle\AdminBundle\Form\Type\ProductAttributeType</argument>
+
+            <tag
+                name="sylius.live_component"
+                key="sylius_admin:product_attribute:form"
+                template="@SyliusAdmin/product_attribute/form.html.twig"
+            />
+        </service>
+
+        <service
             id="sylius_admin.twig.component.shipment.ship_form"
             class="Sylius\Bundle\AdminBundle\Twig\Component\Shipment\ShipFormComponent"
         >
@@ -280,6 +334,8 @@
         >
             <argument type="service" id="form.factory" />
             <argument>Sylius\Bundle\AdminBundle\Form\Type\TaxonType</argument>
+            <argument type="service" id="sylius.repository.taxon" />
+            <argument type="service" id="sylius_admin.generator.taxon_slug" />
 
             <tag
                 name="sylius.live_component"
@@ -292,6 +348,7 @@
             id="sylius_admin.twig.component.taxon.tree"
             class="Sylius\Bundle\AdminBundle\Twig\Component\Taxon\TreeComponent"
         >
+            <argument type="service" id="sylius_admin.doctrine.query.taxon.all_taxons" />
             <argument type="service" id="sylius.repository.taxon" />
             <argument type="service" id="sylius.manager.taxon" />
 

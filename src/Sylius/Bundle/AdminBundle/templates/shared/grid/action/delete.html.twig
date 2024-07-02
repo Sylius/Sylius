@@ -1,12 +1,7 @@
 {% from '@SyliusAdmin/shared/helper/icon.html.twig' import icon %}
 
-{% set path = options.link.url|default(path(options.link.route|default(grid.requestConfiguration.getRouteName('delete')), options.link.parameters|default({'id': data.id}))) %}
-{% set message = action.label|default('sylius.ui.delete') %}
+{% set id = options.link.parameters['id']|default(data.id)  %}
 
-<form action="{{ path }}" method="post">
-    <input type="hidden" name="_method" value="DELETE">
-    <button name="delete" class="btn btn-icon" type="submit" data-confirm-btn-submit {{ sylius_test_html_attribute('delete-button') }} data-bs-toggle="tooltip" data-bs-title="{{ message|trans }}">
-        {{ icon({ icon: action.icon ?? 'trash-x', class: 'icon icon-tabler text-danger' }) }}
-    </button>
-    <input type="hidden" name="_csrf_token" value="{{ csrf_token(data.id) }}" />
-</form>
+{% set path = options.link.url|default(path(options.link.route|default(grid.requestConfiguration.getRouteName('delete')), options.link.parameters|default({'id': id}))) %}
+
+{{ component('sylius_admin:delete_modal', {id: id, path: path, label: action.label, icon: action.icon}) }}

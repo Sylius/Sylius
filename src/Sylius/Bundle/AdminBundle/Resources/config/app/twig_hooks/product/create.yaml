@@ -44,6 +44,8 @@ twig_hooks:
         'sylius_admin.product.create.content.form.sections':
             details:
                 template: '@SyliusAdmin/product/form/sections/details.html.twig'
+                configuration:
+                    active: true
             channel_pricing:
                 template: '@SyliusAdmin/product/form/sections/channel_pricing.html.twig'
             taxes:
@@ -128,6 +130,12 @@ twig_hooks:
         'sylius_admin.product.create.content.form.sections.taxonomy':
             main_taxon:
                 template: '@SyliusAdmin/product/form/sections/taxonomy/main_taxon.html.twig'
+            product_taxons:
+                component: 'sylius_admin:product:form:product_taxons'
+                props:
+                    form: '@=_context.form'
+                configuration:
+                    auto_open: false
 
         'sylius_admin.product.create.content.form.sections.associations':
             associations:

@@ -14,7 +14,7 @@ Feature: Prevent deletion of used payment method
         And the customer chose "DHL Express" shipping method to "United States" with "Cash on Delivery" payment
         And I am logged in as an administrator
 
-    @todo @ui @api
+    @ui @api
     Scenario: Being unable to delete a payment method which is in use
         When I try to delete the "Cash on Delivery" payment method
         Then I should be notified that it is in use

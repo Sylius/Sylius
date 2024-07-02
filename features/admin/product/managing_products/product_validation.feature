@@ -16,7 +16,7 @@ Feature: Products validation
     @ui @no-api
     Scenario: Adding a new simple product without specifying its code
         When I want to create a new simple product
-        And I name it "Dice Brewing" in "English (United States)"
+        And I name it "Dice Brewing" in "English (United States)" locale
         And I set its price to "$10.00" for "Web" channel
         And I try to add it
         Then I should be notified that code is required
@@ -25,7 +25,7 @@ Feature: Products validation
     @no-ui @api
     Scenario: Trying to add product translation in unexisting locale
         When I want to modify the "Symfony Mug" product
-        And I name it "Symfony tasse" in "French (France)"
+        And I name it "Symfony tasse" in "French (France)" locale
         And I try to save my changes
         Then I should be notified that the locale is not available
 
@@ -34,7 +34,7 @@ Feature: Products validation
         Given the store has a product "7 Wonders" with code "AWESOME_GAME"
         When I want to create a new simple product
         And I specify its code as "AWESOME_GAME"
-        And I name it "Dice Brewing" in "English (United States)"
+        And I name it "Dice Brewing" in "English (United States)" locale
         And I set its slug to "dice-brewing"
         And I set its price to "$10.00" for "Web" channel
         And I try to add it
@@ -47,7 +47,7 @@ Feature: Products validation
         And this product has "7 Wonders: Cities" variant priced at "$30.00" identified by "AWESOME_GAME"
         When I want to create a new simple product
         And I specify its code as "AWESOME_GAME"
-        And I name it "Dice Brewing" in "English (United States)"
+        And I name it "Dice Brewing" in "English (United States)" locale
         And I set its slug to "dice-brewing"
         And I set its price to "$10.00" for "Web" channel
         And I try to add it
@@ -58,7 +58,7 @@ Feature: Products validation
     Scenario: Adding a new simple product without specifying its slug
         When I want to create a new simple product
         And I specify its code as "BOARD_DICE_BREWING"
-        And I name it "Dice Brewing" in "English (United States)"
+        And I name it "Dice Brewing" in "English (United States)" locale
         And I set its price to "$10.00" for "Web" channel
         And I try to add it
         Then I should be notified that slug is required
@@ -82,7 +82,7 @@ Feature: Products validation
         And I make it available in channel "Web"
         And I make it available in channel "Web-GB"
         And I set its price to "$10.00" for "Web" channel
-        And I name it "Dice Brewing" in "English (United States)"
+        And I name it "Dice Brewing" in "English (United States)" locale
         And I set its slug to "dice-brewing"
         And I try to add it
         Then I should be notified that price must be defined for every channel
@@ -91,7 +91,7 @@ Feature: Products validation
     @ui @api
     Scenario: Adding a new configurable product without specifying its code
         When I want to create a new configurable product
-        And I name it "Dice Brewing" in "English (United States)"
+        And I name it "Dice Brewing" in "English (United States)" locale
         And I try to add it
         Then I should be notified that code is required
         And product with name "Dice Brewing" should not be added
@@ -99,7 +99,7 @@ Feature: Products validation
     @ui @api
     Scenario: Adding a new configurable product with too long code
         When I want to create a new configurable product
-        And I name it "Dice Brewing" in "English (United States)"
+        And I name it "Dice Brewing" in "English (United States)" locale
         And I specify a too long code
         And I try to add it
         Then I should be notified that code is too long
@@ -109,7 +109,7 @@ Feature: Products validation
         Given the store has a product "7 Wonders" with code "AWESOME_GAME"
         When I want to create a new configurable product
         And I specify its code as "AWESOME_GAME"
-        And I name it "Dice Brewing" in "English (United States)"
+        And I name it "Dice Brewing" in "English (United States)" locale
         And I set its slug to "dice-brewing"
         And I try to add it
         Then I should be notified that code has to be unique
@@ -165,46 +165,50 @@ Feature: Products validation
         Given the store has a "7 Wonders" configurable product with "7-wonders" slug
         When I want to create a new configurable product
         And I specify its code as "7-WONDERS-BABEL"
-        And I name it "7 Wonders Babel" in "English (United States)"
-        And I set its slug to "7-wonders" in "English (United States)"
+        And I name it "7 Wonders Babel" in "English (United States)" locale
+        And I set its slug to "7-wonders" in "English (United States)" locale
         And I try to add it
         Then I should be notified that slug has to be unique
         And product with code "7-WONDERS-BABEL" should not be added
 
-    @todo @ui @mink:chromedriver @api
+    @ui @mink:chromedriver @api
     Scenario: Trying to add a new product with a text attribute without specifying its value in default locale
         When I want to create a new configurable product
         And I specify its code as "X-18-MUG"
-        And I name it "PHP Mug" in "English (United States)"
-        And I set its "Mug material" attribute to "Drewno" in "Polish (Poland)"
-        But I do not set its "Mug material" attribute in "English (United States)"
+        And I name it "PHP Mug" in "English (United States)" locale
+        And I add the "Mug material" attribute
+        And I set its "Mug material" attribute to "Drewno" in "Polish (Poland)" locale
+        But I do not set its "Mug material" attribute in "English (United States)" locale
         And I add it
-        Then I should be notified that I have to define the "Mug material" attribute in "English (United States)"
+        Then I should be notified that I have to define the "Mug material" attribute in "English (United States)" locale
         And product with code "X-18-MUG" should not be added
 
-    @todo @ui @mink:chromedriver @api
+    @ui @mink:chromedriver @api
     Scenario: Trying to add a new product with a text attribute without specifying its value in additional locale with proper length
         When I want to create a new configurable product
         And I specify its code as "X-18-MUG"
-        And I name it "PHP Mug" in "English (United States)"
-        And I set its "Mug material" attribute to "Dr" in "Polish (Poland)"
-        And I set its "Mug material" attribute to "Wood" in "English (United States)"
+        And I name it "PHP Mug" in "English (United States)" locale
+        And I add the "Mug material" attribute
+        And I set its "Mug material" attribute to "Dr" in "Polish (Poland)" locale
+        And I set its "Mug material" attribute to "Wood" in "English (United States)" locale
         And I add it
-        Then I should be notified that the "Mug material" attribute in "Polish (Poland)" should be longer than 3
+        Then I should be notified that the "Mug material" attribute in "Polish (Poland)" locale should be longer than 3
         And product with code "X-18-MUG" should not be added
 
-    @todo @ui @javascript @api
+    @ui @mink:chromedriver @api
     Scenario: Trying to add a text attribute in different locales to an existing product without specifying its value in default locale
         When I want to modify the "Symfony Mug" product
-        And I set its "Mug material" attribute to "Drewno" in "Polish (Poland)"
-        But I do not set its "Mug material" attribute in "English (United States)"
+        And I add the "Mug material" attribute
+        And I set its "Mug material" attribute to "Drewno" in "Polish (Poland)" locale
+        But I do not set its "Mug material" attribute in "English (United States)" locale
         And I save my changes
-        Then I should be notified that I have to define the "Mug material" attribute in "English (United States)"
+        Then I should be notified that I have to define the "Mug material" attribute in "English (United States)" locale
 
-    @todo @ui @javascript @api
+    @ui @mink:chromedriver @api
     Scenario: Trying to add a text attribute in different locales to an existing product without specifying its value in additional locale with proper length
         When I want to modify the "Symfony Mug" product
-        And I set its "Mug material" attribute to "Dr" in "Polish (Poland)"
-        And I set its "Mug material" attribute to "Wood" in "English (United States)"
+        And I add the "Mug material" attribute
+        And I set its "Mug material" attribute to "Dr" in "Polish (Poland)" locale
+        And I set its "Mug material" attribute to "Wood" in "English (United States)" locale
         And I save my changes
-        Then I should be notified that the "Mug material" attribute in "Polish (Poland)" should be longer than 3
+        Then I should be notified that the "Mug material" attribute in "Polish (Poland)" locale should be longer than 3

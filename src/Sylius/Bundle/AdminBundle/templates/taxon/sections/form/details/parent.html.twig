@@ -1,5 +1,1 @@
-{{ form_row(hookable_metadata.context.form.parent, {
-    parent_label_class: 'checkbox-switch',
-    search_url: path('sylius_admin_ajax_taxon_by_name_phrase'),
-    init_load_url: path('sylius_admin_ajax_taxon_by_code')
-}) }}
+{{ form_row(hookable_metadata.context.form.parent, sylius_test_form_attribute('parent')) }}

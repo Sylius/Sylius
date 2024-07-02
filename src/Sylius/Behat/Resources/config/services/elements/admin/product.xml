@@ -25,48 +25,48 @@
         </service>
 
         <service
-            id="sylius.behat.element.admin.product_association.form"
-            class="Sylius\Behat\Element\Admin\Product\ProductAssociationsFormElement"
+            id="sylius.behat.element.admin.product.association_form"
+            class="Sylius\Behat\Element\Admin\Product\AssociationsFormElement"
             parent="sylius.behat.element.admin.crud.form"
         >
             <argument type="service" id="Sylius\Behat\Service\Helper\AutocompleteHelperInterface" />
         </service>
 
         <service
-            id="sylius.behat.element.admin.product_attributes.form"
-            class="Sylius\Behat\Element\Admin\Product\ProductAttributesFormElement"
+            id="sylius.behat.element.admin.product.attributes_form"
+            class="Sylius\Behat\Element\Admin\Product\AttributesFormElement"
             parent="sylius.behat.element.admin.crud.form"
         >
             <argument type="service" id="Sylius\Behat\Service\Helper\AutocompleteHelperInterface" />
         </service>
 
         <service
-            id="sylius.behat.element.admin.product_channel_pricing.form"
-            class="Sylius\Behat\Element\Admin\Product\ProductChannelPricingsFormElement"
+            id="sylius.behat.element.admin.product.channel_pricing_form"
+            class="Sylius\Behat\Element\Admin\Product\ChannelPricingsFormElement"
             parent="sylius.behat.element.admin.crud.form"
         >
             <argument type="service" id="Sylius\Behat\Service\Helper\AutocompleteHelperInterface" />
         </service>
 
         <service
-            id="sylius.behat.element.admin.product_media.form"
-            class="Sylius\Behat\Element\Admin\Product\ProductMediaFormElement"
+            id="sylius.behat.element.admin.product.media_form"
+            class="Sylius\Behat\Element\Admin\Product\MediaFormElement"
             parent="sylius.behat.element.admin.crud.form"
         >
             <argument type="service" id="Sylius\Behat\Service\Helper\AutocompleteHelperInterface" />
         </service>
 
         <service
-            id="sylius.behat.element.admin.product_taxonomy.form"
-            class="Sylius\Behat\Element\Admin\Product\ProductTaxonomyFormElement"
+            id="sylius.behat.element.admin.product.taxonomy_form"
+            class="Sylius\Behat\Element\Admin\Product\TaxonomyFormElement"
             parent="sylius.behat.element.admin.crud.form"
         >
             <argument type="service" id="Sylius\Behat\Service\Helper\AutocompleteHelperInterface" />
         </service>
 
         <service
-            id="sylius.behat.element.admin.product_translations.form"
-            class="Sylius\Behat\Element\Admin\Product\ProductTranslationsFormElement"
+            id="sylius.behat.element.admin.product.translations_form"
+            class="Sylius\Behat\Element\Admin\Product\TranslationsFormElement"
             parent="sylius.behat.element.admin.crud.form"
         >
             <argument type="service" id="Sylius\Behat\Service\Helper\AutocompleteHelperInterface" />

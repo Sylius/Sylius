@@ -22,7 +22,7 @@ use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Product\Model\ProductAttributeInterface;
 use Webmozart\Assert\Assert;
 
-final class ManagingProductAttributesContext implements Context
+final readonly class ManagingProductAttributesContext implements Context
 {
     public function __construct(
         private ApiClientInterface $client,
@@ -304,15 +304,15 @@ final class ManagingProductAttributesContext implements Context
     }
 
     /**
-     * @Then I should see the value :value
+     * @Then I should see the value :value in :localeCode locale
      */
-    public function iShouldSeeTheValue(string $value): void
+    public function iShouldSeeTheValueInLocale(string $value, string $localeCode): void
     {
         $content = $this->responseChecker->getResponseContent($this->client->getLastResponse());
         $choices = $content['configuration']['choices'];
 
         foreach ($choices as $values) {
-            if (in_array($value, $values)) {
+            if ($values[$localeCode] === $value) {
                 return;
             }
         }
@@ -333,7 +333,7 @@ final class ManagingProductAttributesContext implements Context
     ): void {
         $this->client->show(Resources::PRODUCT_ATTRIBUTES, $productAttribute->getCode());
 
-        $this->iShouldSeeTheValue($value);
+        $this->iShouldSeeTheValueInLocale($value, 'en_US');
     }
 
     /**

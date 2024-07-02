@@ -37,6 +37,8 @@ final class SyliusUiExtension extends Extension
         }
 
         $this->loadEvents($config['events'], $container);
+
+        $container->setParameter('sylius_ui.twig_ux.anonymous_component_template_prefixes', $config['twig_ux']['anonymous_component_template_prefixes'] ?? []);
     }
 
     /**

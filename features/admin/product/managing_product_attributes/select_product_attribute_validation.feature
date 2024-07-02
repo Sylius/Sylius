@@ -8,7 +8,7 @@ Feature: Select product attribute validation
         Given the store is available in "English (United States)"
         And I am logged in as an administrator
 
-    @todo @ui @mink:chromedriver @api
+    @ui @mink:chromedriver @api
     Scenario: Trying to add a new select product attribute with wrong max entries value
         When I want to create a new select product attribute
         And I name it "Mug material" in "English (United States)"
@@ -22,7 +22,7 @@ Feature: Select product attribute validation
         Then I should be notified that max entries value must be greater or equal to the min entries value
         And the attribute with code "mug_material" should not appear in the store
 
-    @todo @ui @mink:chromedriver @api
+    @ui @mink:chromedriver @api
     Scenario: Trying to add a new select product attribute with wrong min entries value
         When I want to create a new select product attribute
         And I name it "Mug material" in "English (United States)"
@@ -36,7 +36,7 @@ Feature: Select product attribute validation
         Then I should be notified that min entries value must be lower or equal to the number of added choices
         And the attribute with code "mug_material" should not appear in the store
 
-    @todo @ui @mink:chromedriver @api
+    @ui @mink:chromedriver @api
     Scenario: Trying to add a new select product attribute with specified entries values but without multiple option
         When I want to create a new select product attribute
         And I name it "Mug material" in "English (United States)"

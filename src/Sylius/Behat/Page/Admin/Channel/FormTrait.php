@@ -29,7 +29,6 @@ trait FormTrait
             'default_tax_zone' => '[data-test-default-tax-zone]',
             'discounted_products_checking_period' => '[data-test-lowest-price-for-discounted-products-checking-period]',
             'enabled' => '[data-test-enabled]',
-            'form' => 'form',
             'hostname' => '[data-test-hostname]',
             'locales' => '[data-test-locales]',
             'menu_taxon' => '[data-test-menu-taxon]',
@@ -134,14 +133,5 @@ trait FormTrait
             ->find('css', 'option:selected')
             ->getText()
         ;
-    }
-
-    private function waitForFormUpdate(): void
-    {
-        $form = $this->getElement('form');
-        sleep(1); // we need to sleep, as sometimes the check below is executed faster than the form sets the busy attribute
-        $form->waitFor(1500, function () use ($form) {
-            return !$form->hasAttribute('busy');
-        });
     }
 }

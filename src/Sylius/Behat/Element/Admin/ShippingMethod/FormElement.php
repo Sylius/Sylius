@@ -148,7 +148,9 @@ final class FormElement extends BaseFormElement implements FormElementInterface
      */
     protected function getDefinedElements(): array
     {
-        return [
+        return array_merge(
+            parent::getDefinedElements(),
+            [
             'add_rule_button' => '[data-test-rules] [data-test-add-%type%]',
             'calculator' => '#sylius_admin_shipping_method_calculator',
             'calculator_configuration_amount' => '#sylius_admin_shipping_method_configuration_%channelCode%_amount',
@@ -158,14 +160,14 @@ final class FormElement extends BaseFormElement implements FormElementInterface
             'code' => '#sylius_admin_shipping_method_code',
             'description' => '#sylius_admin_shipping_method_translations_%localeCode%_description',
             'enabled' => '#sylius_admin_shipping_method_enabled',
-            'form' => '[data-live-name-value="sylius_admin:shipping_method:form"]',
             'last_rule' => '[data-test-rules] [data-test-entry-row]:last-child',
             'last_rule_amount' => '[data-test-rules] [data-test-entry-row]:last-child [id$="_configuration_%channelCode%_amount"]',
             'last_rule_weight' => '[data-test-rules] [data-test-entry-row]:last-child [id$="_configuration_weight"]',
             'name' => '#sylius_admin_shipping_method_translations_%localeCode%_name',
             'position' => '#sylius_admin_shipping_method_position',
             'zone' => '#sylius_admin_shipping_method_zone',
-        ];
+        ],
+        );
     }
 
     private function selectCalculatorConfigurationChannelTab(string $channelCode): void

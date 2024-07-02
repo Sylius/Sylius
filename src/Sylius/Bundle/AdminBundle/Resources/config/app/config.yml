@@ -3,39 +3,7 @@ imports:
 
     - { resource: 'twig_hooks/**/*.yaml' }
     - { resource: "@SyliusAdminBundle/Resources/config/app/sylius/sylius_mailer.yml" }
-    - { resource: "@SyliusAdminBundle/Resources/config/grids/address_log_entry.yml" }
-    - { resource: "@SyliusAdminBundle/Resources/config/grids/admin_user.yml" }
-    - { resource: "@SyliusAdminBundle/Resources/config/grids/catalog_promotion.yml" }
-    - { resource: "@SyliusAdminBundle/Resources/config/grids/channel.yml" }
-    - { resource: "@SyliusAdminBundle/Resources/config/grids/channel_pricing_log_entry.yml" }
-    - { resource: "@SyliusAdminBundle/Resources/config/grids/country.yml" }
-    - { resource: "@SyliusAdminBundle/Resources/config/grids/currency.yml" }
-    - { resource: "@SyliusAdminBundle/Resources/config/grids/customer.yml" }
-    - { resource: "@SyliusAdminBundle/Resources/config/grids/customer_group.yml" }
-    - { resource: "@SyliusAdminBundle/Resources/config/grids/customer_order.yml" }
-    - { resource: "@SyliusAdminBundle/Resources/config/grids/exchange_rate.yml" }
-    - { resource: "@SyliusAdminBundle/Resources/config/grids/inventory.yml" }
-    - { resource: "@SyliusAdminBundle/Resources/config/grids/locale.yml" }
-    - { resource: "@SyliusAdminBundle/Resources/config/grids/order.yml" }
-    - { resource: "@SyliusAdminBundle/Resources/config/grids/payment.yml" }
-    - { resource: "@SyliusAdminBundle/Resources/config/grids/payment_method.yml" }
-    - { resource: "@SyliusAdminBundle/Resources/config/grids/product.yml" }
-    - { resource: "@SyliusAdminBundle/Resources/config/grids/product_association_type.yml" }
-    - { resource: "@SyliusAdminBundle/Resources/config/grids/product_attribute.yml" }
-    - { resource: "@SyliusAdminBundle/Resources/config/grids/product_from_taxon.yml" }
-    - { resource: "@SyliusAdminBundle/Resources/config/grids/product_option.yml" }
-    - { resource: "@SyliusAdminBundle/Resources/config/grids/product_review.yml" }
-    - { resource: "@SyliusAdminBundle/Resources/config/grids/product_variant.yml" }
-    - { resource: "@SyliusAdminBundle/Resources/config/grids/product_variant_with_catalog_promotion.yml" }
-    - { resource: "@SyliusAdminBundle/Resources/config/grids/promotion.yml" }
-    - { resource: "@SyliusAdminBundle/Resources/config/grids/promotion_coupon.yml" }
-    - { resource: "@SyliusAdminBundle/Resources/config/grids/shipment.yml" }
-    - { resource: "@SyliusAdminBundle/Resources/config/grids/shipping_category.yml" }
-    - { resource: "@SyliusAdminBundle/Resources/config/grids/shipping_method.yml" }
-    - { resource: "@SyliusAdminBundle/Resources/config/grids/tax_category.yml" }
-    - { resource: "@SyliusAdminBundle/Resources/config/grids/tax_rate.yml" }
-    - { resource: "@SyliusAdminBundle/Resources/config/grids/taxon.yml" }
-    - { resource: "@SyliusAdminBundle/Resources/config/grids/zone.yml" }
+    - { resource: "@SyliusAdminBundle/Resources/config/grids/*.yml" }
 
 parameters:
     env(SYLIUS_ADMIN_ROUTING_PATH_NAME): admin
@@ -64,7 +32,7 @@ sylius_grid:
             delete_catalog_promotion: "@SyliusAdmin/catalog_promotion/grid/action/delete.html.twig"
             generate_variants: "@SyliusAdmin/product/grid/action/generate_variants.html.twig"
             ship_with_tracking_code: '@SyliusAdmin/shipment/grid/action/ship_with_tracking_code.html.twig'
-            update_product_positions: "@SyliusAdmin/product/grid/action/update_positions.html.twig"
+            update_product_taxon_positions: "@SyliusAdmin/product_taxon/grid/action/update_positions.html.twig"
             update_product_variant_positions: "@SyliusAdmin/product_variant/grid/action/update_positions.html.twig"
         bulk_action:
             delete: '@SyliusAdmin/shared/grid/bulk_action/delete.html.twig'
@@ -80,6 +48,11 @@ sylius_grid:
             string: '@SyliusAdmin/shared/grid/filter/string.html.twig'
             ux_autocomplete: '@SyliusAdmin/shared/grid/filter/autocomplete.html.twig'
             ux_translatable_autocomplete: '@SyliusAdmin/shared/grid/filter/autocomplete.html.twig'
+
+sylius_ui:
+    twig_ux:
+        anonymous_component_template_prefixes:
+            sylius_admin: "@SyliusAdmin/shared/components"
 
 liip_imagine:
     filter_sets:

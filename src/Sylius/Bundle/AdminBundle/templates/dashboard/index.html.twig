@@ -5,7 +5,5 @@
 {% endblock %}
 
 {% block body %}
-    {% hook ['sylius_admin.dashboard.index', 'sylius_admin.common.index'] with {
-        channelCode: channel.code,
-    } %}
+    {% hook ['sylius_admin.dashboard.index', 'sylius_admin.common.index'] with { channel_code: channel.code } %}
 {% endblock %}

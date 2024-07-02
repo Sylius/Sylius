@@ -1,0 +1,17 @@
+{# Rendered with \Sylius\Bundle\AdminBundle\Twig\Component\ProductAttribute\FormComponent #}
+
+{% form_theme form '@SyliusAdmin/product_attribute/form_theme.html.twig' %}
+
+<div class="container-xl" {{ attributes }}>
+    {{ form_start(form, {'attr': {'novalidate': 'novalidate', 'id': form.vars.id}}) }}
+    <div class="grid gap-4">
+        {% if hookable_metadata.configuration.method is defined %}
+            <input type="hidden" name="_method" value="{{ hookable_metadata.configuration.method }}" />
+        {% endif %}
+        {{ form_errors(form) }}
+        {{ form_widget(form._token) }}
+
+        {% hook 'form' with { form } %}
+    </div>
+    {{ form_end(form, {render_rest: hookable_metadata.configuration.render_rest|default(false)}) }}
+</div>

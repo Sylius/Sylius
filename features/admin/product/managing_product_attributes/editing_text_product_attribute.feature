@@ -9,7 +9,7 @@ Feature: Editing a text product attribute
         And the store has a text product attribute "T-Shirt cotton brand" with code "t_shirt_brand"
         And I am logged in as an administrator
 
-    @todo @ui @api
+    @ui @api
     Scenario: Editing product attribute name
         When I want to edit this product attribute
         And I change its name to "T-Shirt material" in "English (United States)"
@@ -17,12 +17,12 @@ Feature: Editing a text product attribute
         Then I should be notified that it has been successfully edited
         And the text attribute "T-Shirt material" should appear in the store
 
-    @todo @ui @api
+    @ui @api
     Scenario: Being unable to change code of an existing product attribute
         When I want to edit this product attribute
         Then I should not be able to edit its code
 
-    @todo @ui @api
+    @ui @api
     Scenario: Being unable to change type of an existing product attribute
         When I want to edit this product attribute
         Then I should not be able to edit its type

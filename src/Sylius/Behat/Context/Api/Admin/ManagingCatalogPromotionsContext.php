@@ -48,6 +48,15 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
+     * @Given I am browsing catalog promotions
+     * @When I browse catalog promotions
+     */
+    public function iBrowseCatalogPromotions(): void
+    {
+        $this->client->index(Resources::CATALOG_PROMOTIONS);
+    }
+
+    /**
      * @When I create a new catalog promotion with :code code and :name name
      */
     public function iCreateANewCatalogPromotionWithCodeAndName(string $code, string $name): void
@@ -326,14 +335,6 @@ final class ManagingCatalogPromotionsContext implements Context
     public function iMakeCatalogPromotionOperateFrom(string $startDate): void
     {
         $this->client->updateRequestData(['startDate' => $startDate]);
-    }
-
-    /**
-     * @When I browse catalog promotions
-     */
-    public function iBrowseCatalogPromotions(): void
-    {
-        $this->client->index(Resources::CATALOG_PROMOTIONS);
     }
 
     /**

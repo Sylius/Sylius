@@ -13,8 +13,8 @@
             {% for association in product.associations %}
                 <strong>{{ association.type.name }}:</strong>
                 <ul>
-                    {% for associatedProduct in association.associatedProducts %}
-                        <li>{{ associatedProduct.name }}</li>
+                    {% for associated_product in association.associatedProducts %}
+                        <li>{{ associated_product.name }}</li>
                     {% endfor %}
                 </ul>
             {% endfor %}

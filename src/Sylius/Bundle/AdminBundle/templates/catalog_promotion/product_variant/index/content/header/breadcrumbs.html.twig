@@ -1,0 +1,11 @@
+{% import '@SyliusAdmin/shared/helper/breadcrumbs.html.twig' as breadcrumbs %}
+
+{% set configuration = hookable_metadata.context.resources.requestConfiguration %}
+{% set catalog_promotion = configuration.vars.catalogPromotion %}
+
+{{ breadcrumbs.default([
+    { name: 'sylius.ui.dashboard', url: path('sylius_admin_dashboard'), active: false },
+    { name: 'sylius.ui.catalog_promotions'|trans, url: path('sylius_admin_catalog_promotion_index'), active: false },
+    { name: catalog_promotion.name|default(catalog_promotion.code), url: path('sylius_admin_catalog_promotion_update', {'id': catalog_promotion.id }), active: false },
+    { name: 'sylius.ui.variants'|trans, active: true },
+]) }}

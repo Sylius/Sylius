@@ -135,15 +135,6 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
         return parent::getElement($name, $parameters);
     }
 
-    private function waitForFormUpdate(): void
-    {
-        $form = $this->getElement('form');
-        sleep(1); // we need to sleep, as sometimes the check below is executed faster than the form sets the busy attribute
-        $form->waitFor(1500, function () use ($form) {
-            return !$form->hasAttribute('busy');
-        });
-    }
-
     protected function getCodeElement(): NodeElement
     {
         return $this->getElement('code');
@@ -158,7 +149,6 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
                 'enabled' => '[data-test-enabled]',
                 'field_shipping_category' => '[name="sylius_admin_product[variant][shippingCategory]"]',
                 'field_shipping_required' => '[name="sylius_admin_product[variant][shippingRequired]"]',
-                'form' => '[data-live-name-value="sylius_admin:product:form"]',
                 'product_translation_accordion' => '[data-test-product-translations-accordion="%localeCode%"]',
                 'show_product_button' => '[data-test-view-in-store]',
                 'side_navigation_tab' => '[data-test-side-navigation-tab="%name%"]',

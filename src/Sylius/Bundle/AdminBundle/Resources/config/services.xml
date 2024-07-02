@@ -73,18 +73,22 @@
             <argument>%sylius.admin.notification.frequency%</argument>
             <tag name="twig.extension" />
         </service>
+
         <service id="sylius.twig.extension.attribute" class="Sylius\Bundle\AdminBundle\Twig\AttributeExtension">
             <argument type="service" id="sylius.registry.attribute_type" />
             <tag name="twig.extension" />
         </service>
+
         <service id="sylius.twig.extension.shop" class="Sylius\Bundle\AdminBundle\Twig\ShopExtension">
             <argument>%sylius.admin.shop_enabled%</argument>
             <tag name="twig.extension" />
         </service>
+
         <service id="sylius.twig.extension.channels_currencies" class="Sylius\Bundle\AdminBundle\Twig\ChannelsCurrenciesExtension">
             <argument type="service" id="sylius.repository.channel" />
             <tag name="twig.extension"/>
         </service>
+
         <service id="Sylius\Bundle\AdminBundle\Twig\OrderUnitTaxesExtension">
             <tag name="twig.extension"/>
         </service>
@@ -106,5 +110,16 @@
         </service>
 
         <service id="sylius.http_client" alias="Psr\Http\Client\ClientInterface" public="false" />
+
+        <service id="sylius.attribute_type.select" class="Sylius\Component\Attribute\AttributeType\SelectAttributeType">
+            <tag name="sylius.attribute.type" attribute-type="select" label="Select"
+                 form-type="Sylius\Bundle\AttributeBundle\Form\Type\AttributeType\SelectAttributeType"
+                 configuration-form-type="Sylius\Bundle\AdminBundle\Form\Type\AttributeType\Configuration\SelectAttributeConfigurationType" />
+        </service>
+
+        <service id="sylius_admin.generator.taxon_slug" class="Sylius\Bundle\AdminBundle\Generator\TaxonSlugGenerator">
+            <argument type="service" id="sylius.generator.taxon_slug" />
+        </service>
+        <service id="Sylius\Bundle\AdminBundle\Generator\TaxonSlugGeneratorInterface" alias="sylius_admin.generator.taxon_slug" />
     </services>
 </container>

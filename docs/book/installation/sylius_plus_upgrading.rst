@@ -3,16 +3,16 @@
 Upgrading Sylius Plus
 =====================
 
-Sylius regularly releases new versions, usually every two weeks.
+Sylius regularly releases new versions of Sylius Plus modules.
 Each release comes with an ``UPGRADE.md`` file, which is meant to help in the upgrading process.
 
-1. **Update the Sylius Plus version constraint by modifying the ``composer.json`` file:**
+1. **Update the version constraint of your Sylius Plus modules by modifying the ``composer.json`` file:**
 
     .. code-block:: yaml
 
         {
             "require": {
-                "sylius/plus": "^1.0.0@beta"
+                "sylius/plus-marketplace-suite-plugin": "^2.6"
             }
         }
 
@@ -20,17 +20,17 @@ Each release comes with an ``UPGRADE.md`` file, which is meant to help in the up
 
     .. code-block:: bash
 
-        composer update sylius/plus --with-all-dependencies
+        composer update sylius/plus-marketplace-suite-plugin --with-all-dependencies
 
     If this does not help, it is a matter of debugging the conflicting versions and working out how your ``composer.json``
     should look after the upgrade.
-    You can check what version of Sylius is installed by running ``composer show sylius/plus`` command.
+    You can check what version is installed by running ``composer show sylius/plus-marketplace-suite-plugin`` command.
 
 3. **Follow the instructions found in the ``UPGRADE.md`` file for a given minor release.**
 
    .. note::
 
-      As Sylius Plus is a private repository its README files (and CHANGELOG) have been exposed in a separate public
+      As Sylius Plus modules are private repositories their UPGRADE files (and CHANGELOGs) have been exposed in a separate public
       repository which can be found here: `<https://github.com/Sylius/PlusInformationCenter>`_
 
 

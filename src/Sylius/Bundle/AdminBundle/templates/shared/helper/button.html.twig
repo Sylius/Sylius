@@ -8,7 +8,8 @@
         disabled: false,
         dropdown: false,
         icon: null,
-        iconOnly: false,
+        icon_class: null,
+        icon_only: false,
         id: null,
         size: null,
         type: "button",
@@ -19,7 +20,7 @@
     {% set button_class = 'btn' ~
         (p.class ? ' ' ~ p.class : '') ~
         (p.dropdown ? ' dropdown-toggle' : '') ~
-        (p.iconOnly ? ' btn-icon' : '') ~
+        (p.icon_only ? ' btn-icon' : '') ~
         (p.size == 'large' ? ' btn-lg' : '') ~
         (p.size == 'small' ? ' btn-sm' : '') %}
 
@@ -30,8 +31,8 @@
             {% if p.disabled %}aria-disabled="true"{% endif %}
             {% if p.dropdown %}data-bs-toggle="dropdown"{% endif %}
             {{ p.attr is iterable ? block('attributes') : (p.attr ? ' ' ~ p.attr) }}>
-            {{ p.icon ? i({ icon: p.icon }) }}
-            {{ not p.iconOnly ? p.text }}
+            {{ p.icon ? i({ icon: p.icon, class: p.icon_class }) }}
+            {{ not p.icon_only ? p.text }}
         </a>
     {% else %}
         <button type="{{ p.type }}"
@@ -41,8 +42,8 @@
             {% if p.disabled %}disabled{% endif %}
             {% if p.dropdown %}data-bs-toggle="dropdown"{% endif %}
             {{ p.attr is iterable ? block('attributes') : (p.attr ? ' ' ~ p.attr ) }}>
-            {{ p.icon ? i({ icon: p.icon }) }}
-            {{ not p.iconOnly ? p.text }}
+            {{ p.icon ? i({ icon: p.icon, class: p.icon_class }) }}
+            {{ not p.icon_only ? p.text }}
         </button>
     {% endif %}
 {% endmacro %}
@@ -63,7 +64,7 @@
         class: null,
     }|merge(params) %}
 
-    {% set new_params = { text: 'Delete' }|merge(params)|merge({ class: 'btn btn-ghost-danger ' ~ params.class }) %}
+    {% set new_params = { text: 'Delete' }|merge(params)|merge({ class: 'btn-ghost-danger ' ~ params.class }) %}
     {{ _.default( new_params) }}
 {% endmacro %}
 

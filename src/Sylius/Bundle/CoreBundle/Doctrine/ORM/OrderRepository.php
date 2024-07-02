@@ -62,8 +62,8 @@ class OrderRepository extends BaseOrderRepository implements OrderRepositoryInte
             return $this->createListQueryBuilder();
         }
 
-        $hasProductCriteria = '' !== $criteria['product'];
-        $hasVariantCriteria = '' !== $criteria['variant'];
+        $hasProductCriteria = '' !== ($criteria['product'] ?? '');
+        $hasVariantCriteria = '' !== ($criteria['variant'] ?? '');
 
         $queryBuilder = $this->createListQueryBuilder();
 

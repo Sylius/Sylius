@@ -8,7 +8,7 @@ Feature: Browsing taxons
         Given the store classifies its products as "T-Shirts" and "Accessories"
         And I am logged in as an administrator
 
-    @todo @ui @api
+    @api @ui @javascript
     Scenario: Browsing taxons in store
         When I want to see all taxons in store
         Then I should see 2 taxons on the list

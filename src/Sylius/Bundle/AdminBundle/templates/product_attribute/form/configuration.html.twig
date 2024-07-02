@@ -1,0 +1,16 @@
+{% set form = hookable_metadata.context.form %}
+
+{% if form.configuration is defined %}
+    {% set attribute_type = form.vars.value.type %}
+    <div class="card g-col-12 g-col-xl-12" {{ sylius_test_html_attribute('configuration') }}>
+        <div class="card-header">
+            <div class="card-title">
+                {{ 'sylius.ui.configuration'|trans }}
+            </div>
+        </div>
+        <div class="card-body row">
+            {% hook 'configuration' %}
+            {% hook 'configuration.' ~ attribute_type %}
+        </div>
+    </div>
+{% endif %}

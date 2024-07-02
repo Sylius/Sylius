@@ -1,0 +1,70 @@
+@import 'infinite-tree/dist/infinite-tree.css';
+
+.infinite-tree-scroll {
+    max-height: 800px;
+}
+
+.infinite-tree-content {
+    .infinite-tree-title {
+        cursor: default;
+    }
+
+    .infinite-tree-item {
+        padding-top: 2px;
+        padding-bottom: 2px;
+        border: none;
+        border-radius: 5px;
+
+        &:hover {
+            background: #F7F8FB;
+            border: none;
+        }
+
+        .infinite-tree-node {
+            display: flex;
+
+            .infinite-tree-toggler {
+                flex-shrink: 0;
+                height: 20px;
+
+                &.infinite-tree-open::before,
+                &.infinite-tree-closed::before {
+                    content: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/></svg>');
+                    display: block;
+                    width: 16px;
+                    height: 16px;
+                    margin-top: 2px;
+                    opacity: 0.5;
+                    transform: scale(0.75) rotate(0deg);
+                }
+
+                &.infinite-tree-closed::before {
+                    transform: scale(0.75) rotate(-90deg);
+                }
+
+                &.infinite-tree-leaf::before {
+                    content: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><circle cx="8" cy="8" r="3.5"/></svg>');
+                    display: block;
+                    width: 16px;
+                    height: 16px;
+                    margin-top: 2px;
+                    opacity: 0.5;
+                }
+
+                &:hover::before {
+                    opacity: 0.8 !important;
+                }
+            }
+
+            .infinite-tree-check {
+                flex-shrink: 0;
+                transform: scale(0.75);
+            }
+        }
+    }
+
+    .form-check-input[type=checkbox]:indeterminate {
+        background-color: #c7c7c7;
+        border-color: #afafaf;
+    }
+}

@@ -21,7 +21,11 @@ class IndexPerTaxonPage extends CrudIndexPage implements IndexPerTaxonPageInterf
 {
     public function getProductPosition(string $productName): int
     {
-        return (int) $this->getElement('product_taxon_position', ['%name%' => $productName])->getValue();
+        /** @var NodeElement $productsRow */
+        $productsRow = $this->getElement('table')->find('css', sprintf('tbody > tr:contains("%s")', $productName));
+        Assert::notNull($productsRow, 'There are no row with given product\'s name!');
+
+        return (int) $productsRow->find('css', '.sylius-product-taxon-position')->getValue();
     }
 
     public function hasProductsInOrder(array $productNames): bool
@@ -57,8 +61,7 @@ class IndexPerTaxonPage extends CrudIndexPage implements IndexPerTaxonPageInterf
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
-            'product_taxon_position' => '.sylius-product-taxon-position[data-test-product-name="%name%"]',
-            'save_configuration_button' => '.sylius-save-position',
+            'save_configuration_button' => '[data-test-save-configuration-button]',
         ]);
     }
 }

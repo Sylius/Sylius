@@ -42,6 +42,7 @@ final class ManagingProductOptionsContext implements Context
     }
 
     /**
+     * @Given I am browsing product options
      * @When I browse product options
      */
     public function iBrowseProductOptions(): void

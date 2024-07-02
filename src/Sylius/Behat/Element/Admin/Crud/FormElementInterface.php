@@ -17,6 +17,13 @@ use Behat\Mink\Exception\ElementNotFoundException;
 
 interface FormElementInterface
 {
-    /** @throws ElementNotFoundException */
+    /**
+     * @param array<string, string> $parameters
+     */
     public function getValidationMessage(string $element, array $parameters = []): string;
+
+    /**
+     * @throws ElementNotFoundException
+     */
+    public function getValidationErrors(): string;
 }

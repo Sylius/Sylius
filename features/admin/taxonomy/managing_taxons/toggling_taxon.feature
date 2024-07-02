@@ -9,7 +9,7 @@ Feature: Toggling the taxon
         And the store classifies its products as "T-Shirts" and "Accessories"
         And I am logged in as an administrator
 
-    @todo @ui @api
+    @api @ui
     Scenario: Adding a disabled taxon
         When I want to create a new taxon
         And I specify its code as "jeans"
@@ -21,7 +21,7 @@ Feature: Toggling the taxon
         And the "Jeans" taxon should appear in the registry
         And it should be disabled
 
-    @todo @ui @api
+    @api @ui
     Scenario: Enabling a Taxon
         Given the "T-Shirts" taxon is disabled
         When I want to modify the "T-Shirts" taxon
@@ -30,7 +30,7 @@ Feature: Toggling the taxon
         Then I should be notified that it has been successfully edited
         And it should be enabled
 
-    @todo @ui @api
+    @api @ui
     Scenario: Disabling a Taxon
         Given the "T-Shirts" taxon is enabled
         When I want to modify the "T-Shirts" taxon
