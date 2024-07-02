@@ -99,9 +99,10 @@
             class="Sylius\Bundle\AdminBundle\Twig\Component\Dashboard\NewOrdersComponent"
         >
             <argument type="service" id="sylius.repository.order" />
+            <argument type="service" id="sylius.repository.channel" />
 
             <tag
-                name="twig.component"
+                name="sylius.live_component"
                 key="sylius_admin:dashboard:new_orders"
                 template="@SyliusAdmin/dashboard/index/component/new_orders.html.twig"
             />

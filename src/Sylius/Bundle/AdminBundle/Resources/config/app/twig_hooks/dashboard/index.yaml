@@ -59,3 +59,5 @@ twig_hooks:
                 component: 'sylius_admin:dashboard:new_customers'
             new_orders:
                 component: 'sylius_admin:dashboard:new_orders'
+                props:
+                    channelCode: '@=_context.channel_code'
