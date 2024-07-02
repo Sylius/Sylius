@@ -94,7 +94,9 @@ class DashboardPage extends SymfonyPage implements DashboardPageInterface
     /** @throws ElementNotFoundException */
     public function chooseChannel(string $channelName): void
     {
-        $this->getElement('channel_choosing_link', ['%channelName%' => $channelName])->click();
+        $this->getElement('channel_choosing_button')->click();
+        $this->getElement('channel_choosing_list', ['%channelName%' => $channelName])->click();
+        $this->waitForAjaxUpdate();
     }
 
     /** @throws ElementNotFoundException */
@@ -144,14 +146,15 @@ class DashboardPage extends SymfonyPage implements DashboardPageInterface
         return array_merge(parent::getDefinedElements(), [
             'admin_menu' => '.sylius-admin-menu',
             'average_order_value' => '[data-test-average-order-value]',
-            'channel_choosing_link' => 'a:contains("%channelName%")',
+            'channel_choosing_button' => '[data-test-choose-channel-button]',
+            'channel_choosing_list' => '[data-test-choose-channel-list] a:contains("%channelName%")',
             'customer_list' => '#customers',
             'dropdown' => 'i.dropdown',
             'logout' => '[data-test-user-dropdown-item="Logout"]',
             'month_split_by_days_statistics_button' => 'button[data-stats-button="month"]',
             'new_customers' => '[data-test-new-customers]',
             'next_period' => '[data-test-next-period]',
-            'order_list' => '#orders',
+            'order_list' => '[data-test-new-orders]',
             'paid_orders' => '[data-test-paid-orders]',
             'previous_period' => '[data-test-previous-period]',
             'product_navbar_search' => '[data-test-navbar-product-search]',
