@@ -20,7 +20,7 @@
                 <div class="col">
                     <div class="subheader">{{ 'sylius.ui.sales'|trans }}</div>
                     <div class="h2 mb-0 me-2" {{ sylius_test_html_attribute('total-sales') }}>
-                        {{ statistics_data.business_activity_summary.totalSales|sylius_format_money(sylius.currencyCode, sylius.localeCode) }}
+                        {{ statistics_data.business_activity_summary.totalSales|sylius_format_money(statistics_data.channel.baseCurrency.code, statistics_data.channel.defaultLocale.code) }}
                     </div>
                 </div>
             </div>

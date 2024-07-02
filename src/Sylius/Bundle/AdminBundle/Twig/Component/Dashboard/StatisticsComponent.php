@@ -14,13 +14,16 @@ declare(strict_types=1);
 namespace Sylius\Bundle\AdminBundle\Twig\Component\Dashboard;
 
 use Sylius\Bundle\AdminBundle\Provider\StatisticsDataProviderInterface;
+use Sylius\Bundle\MoneyBundle\Formatter\MoneyFormatterInterface;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Statistics\Provider\StatisticsProviderInterface;
 use Sylius\TwigHooks\LiveComponent\HookableLiveComponentTrait;
+use Symfony\Component\Intl\Currencies;
 use Symfony\UX\LiveComponent\Attribute\AsLiveComponent;
 use Symfony\UX\LiveComponent\Attribute\LiveAction;
 use Symfony\UX\LiveComponent\Attribute\LiveArg;
+use Symfony\UX\LiveComponent\Attribute\LiveListener;
 use Symfony\UX\LiveComponent\Attribute\LiveProp;
 use Symfony\UX\LiveComponent\ComponentToolsTrait;
 use Symfony\UX\LiveComponent\DefaultActionTrait;
@@ -75,10 +78,8 @@ class StatisticsComponent
             $channel,
         );
 
-        $result['business_activity_summary'] = $statistics->getBusinessActivitySummary();
-
         $saleList = $statistics->getSales();
-        $result['sales_summary'] = [
+        $salesSummary = [
             'intervals' => array_column($saleList, 'period'),
             'sales' => array_map(
                 static function (int $total): string {
@@ -88,7 +89,12 @@ class StatisticsComponent
             ),
         ];
 
-        return $result;
+        return [
+            'business_activity_summary' => $statistics->getBusinessActivitySummary(),
+            'channel' => $channel,
+            'currency_symbol' => Currencies::getSymbol($channel->getBaseCurrency()->getCode()),
+            'sales_summary' => $salesSummary,
+        ];
     }
 
     #[LiveAction]
@@ -101,6 +107,15 @@ class StatisticsComponent
         $this->interval = $interval;
 
         $this->resolveDates();
+    }
+
+
+    #[LiveListener('channelChanged')]
+    public function changeChannel(
+        #[LiveArg] string $channelCode,
+    ): void
+    {
+        $this->channelCode = $channelCode;
     }
 
     #[LiveAction]
