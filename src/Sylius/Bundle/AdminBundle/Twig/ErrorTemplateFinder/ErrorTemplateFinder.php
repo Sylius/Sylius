@@ -19,7 +19,7 @@ use Sylius\Bundle\UiBundle\Twig\ErrorTemplateFinder\ErrorTemplateFinderInterface
 use Symfony\Component\HttpFoundation\RequestStack;
 use Twig\Environment;
 
-class ErrorTemplateFinder implements ErrorTemplateFinderInterface
+final readonly class ErrorTemplateFinder implements ErrorTemplateFinderInterface
 {
     public function __construct(
         private SectionProviderInterface $sectionProvider,
@@ -33,12 +33,12 @@ class ErrorTemplateFinder implements ErrorTemplateFinderInterface
         $section = $this->sectionProvider->getSection();
 
         if ($section instanceof AdminSection && $this->isLoggedInAdmin()) {
-            $template = sprintf('@Twig/Exception/Admin/error%s.html.twig', $statusCode);
+            $template = sprintf('@SyliusAdmin/errors/error%s.html.twig', $statusCode);
             if ($this->twig->getLoader()->exists($template)) {
                 return $template;
             }
 
-            $template = '@Twig/Exception/Admin/error.html.twig';
+            $template = '@SyliusAdmin/errors/error.html.twig';
             if ($this->twig->getLoader()->exists($template)) {
                 return $template;
             }

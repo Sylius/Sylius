@@ -18,10 +18,12 @@ use Sylius\Bundle\ShopBundle\SectionResolver\ShopSection;
 use Sylius\Bundle\UiBundle\Twig\ErrorTemplateFinder\ErrorTemplateFinderInterface;
 use Twig\Environment;
 
-class ErrorTemplateFinder implements ErrorTemplateFinderInterface
+final readonly class ErrorTemplateFinder implements ErrorTemplateFinderInterface
 {
-    public function __construct(private SectionProviderInterface $sectionProvider, private Environment $twig)
-    {
+    public function __construct(
+        private SectionProviderInterface $sectionProvider,
+        private Environment $twig
+    ) {
     }
 
     public function findTemplate(int $statusCode): ?string
@@ -29,12 +31,12 @@ class ErrorTemplateFinder implements ErrorTemplateFinderInterface
         $section = $this->sectionProvider->getSection();
 
         if ($section instanceof ShopSection) {
-            $template = sprintf('@Twig/Exception/Shop/error%s.html.twig', $statusCode);
+            $template = sprintf('@SyliusShop/Errors/error%s.html.twig', $statusCode);
             if ($this->twig->getLoader()->exists($template)) {
                 return $template;
             }
 
-            $template = '@Twig/Exception/Shop/error.html.twig';
+            $template = '@SyliusShop/Errors/error.html.twig';
             if ($this->twig->getLoader()->exists($template)) {
                 return $template;
             }
