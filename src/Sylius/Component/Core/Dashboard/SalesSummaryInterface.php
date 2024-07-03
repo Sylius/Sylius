@@ -13,6 +13,13 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Core\Dashboard;
 
+trigger_deprecation(
+    'sylius/core',
+    '1.14',
+    'The "%s" class is deprecated and will be removed in Sylius 2.0.',
+    SalesSummaryInterface::class,
+);
+
 interface SalesSummaryInterface
 {
     public function getIntervals(): array;

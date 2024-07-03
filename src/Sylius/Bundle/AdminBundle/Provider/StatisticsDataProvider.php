@@ -18,7 +18,19 @@ use Sylius\Component\Core\Dashboard\DashboardStatisticsProviderInterface;
 use Sylius\Component\Core\Dashboard\Interval;
 use Sylius\Component\Core\Dashboard\SalesDataProviderInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
+use Sylius\Component\Core\Statistics\Provider\StatisticsProvider;
 
+trigger_deprecation(
+    'sylius/admin-bundle',
+    '1.14',
+    'The "%s" class is deprecated and will be removed in Sylius 2.0. Use "%s" instead.',
+    StatisticsDataProvider::class,
+    StatisticsProvider::class,
+);
+
+/**
+ * @deprecated since 1.14 and will be removed in Sylius 2.0. Use Sylius\Component\Core\Statistics\Provider\StatisticsProvider instead
+ */
 class StatisticsDataProvider implements StatisticsDataProviderInterface
 {
     public function __construct(

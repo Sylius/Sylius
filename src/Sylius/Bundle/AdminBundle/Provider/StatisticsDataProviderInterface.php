@@ -14,7 +14,19 @@ declare(strict_types=1);
 namespace Sylius\Bundle\AdminBundle\Provider;
 
 use Sylius\Component\Core\Model\ChannelInterface;
+use Sylius\Component\Core\Statistics\Provider\StatisticsProviderInterface;
 
+trigger_deprecation(
+    'sylius/admin-bundle',
+    '1.14',
+    'The "%s" class is deprecated and will be removed in Sylius 2.0. Use "%s" instead.',
+    StatisticsDataProviderInterface::class,
+    StatisticsProviderInterface::class,
+);
+
+/**
+ * @deprecated since 1.14 and will be removed in Sylius 2.0. Use Sylius\Component\Core\Statistics\Provider\StatisticsProviderInterface instead
+ */
 interface StatisticsDataProviderInterface
 {
     /** @return array<array-key, array<array-key, mixed>> */

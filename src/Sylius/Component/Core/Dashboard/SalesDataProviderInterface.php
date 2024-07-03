@@ -15,6 +15,13 @@ namespace Sylius\Component\Core\Dashboard;
 
 use Sylius\Component\Core\Model\ChannelInterface;
 
+trigger_deprecation(
+    'sylius/core',
+    '1.14',
+    'The "%s" class is deprecated and will be removed in Sylius 2.0.',
+    SalesDataProviderInterface::class,
+);
+
 interface SalesDataProviderInterface
 {
     public function getSalesSummary(

@@ -17,6 +17,13 @@ use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Repository\CustomerRepositoryInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 
+trigger_deprecation(
+    'sylius/core',
+    '1.14',
+    'The "%s" class is deprecated and will be removed in Sylius 2.0.',
+    DashboardStatisticsProvider::class,
+);
+
 class DashboardStatisticsProvider implements DashboardStatisticsProviderInterface
 {
     public function __construct(private OrderRepositoryInterface $orderRepository, private CustomerRepositoryInterface $customerRepository)
