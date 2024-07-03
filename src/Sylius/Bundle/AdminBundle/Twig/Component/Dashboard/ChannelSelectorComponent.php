@@ -54,14 +54,13 @@ class ChannelSelectorComponent
     #[LiveAction]
     public function changeChannel(
         #[LiveArg] string $channelCode,
-    ): void
-    {
+    ): void {
         $this->channelCode = $channelCode;
 
         $this->emit('channelChanged', ['channelCode' => $channelCode]);
     }
 
-    #[ExposeInTemplate(name: 'channelName')]
+    #[ExposeInTemplate(name: 'channel_name')]
     public function getChannelName(): string
     {
         $channel = $this->channelRepository->findOneByCode($this->channelCode);

@@ -108,7 +108,6 @@
             />
         </service>
 
-
         <service
             id="sylius_admin.twig.component.dashboard.channel_selector"
             class="Sylius\Bundle\AdminBundle\Twig\Component\Dashboard\ChannelSelectorComponent"
@@ -125,7 +124,6 @@
                 template="@SyliusAdmin/dashboard/index/component/channel_selector.html.twig"
             />
         </service>
-
 
         <service
             id="sylius_admin.twig.component.dashboard.statistics"

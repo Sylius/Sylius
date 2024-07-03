@@ -57,8 +57,7 @@ class StatisticsComponent
     public function __construct(
         private readonly ChannelRepositoryInterface $channelRepository,
         private readonly StatisticsProviderInterface $statisticsProvider,
-    )
-    {
+    ) {
     }
 
     /**
@@ -109,12 +108,10 @@ class StatisticsComponent
         $this->resolveDates();
     }
 
-
     #[LiveListener('channelChanged')]
     public function changeChannel(
         #[LiveArg] string $channelCode,
-    ): void
-    {
+    ): void {
         $this->channelCode = $channelCode;
     }
 

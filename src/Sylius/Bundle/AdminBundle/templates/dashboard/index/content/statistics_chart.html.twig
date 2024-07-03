@@ -12,18 +12,20 @@
     <div class="card-body">
         <div class="d-flex justify-content-end">
             <div class="btn-group" role="group">
-                <button type="button"
-                        class="btn navigation navigation-prev"
-                        data-action="live#action"
-                        data-live-action-param="prevent|getPreviousPeriod"
+                <button
+                    type="button"
+                    class="btn navigation navigation-prev"
+                    data-action="live#action"
+                    data-live-action-param="prevent|getPreviousPeriod"
                     {{ sylius_test_html_attribute('previous-period') }}
                 >
                     {{ icon({ icon: 'arrow-left', class: 'icon dropdown-item-icon icon-tabler' }) }}
                 </button>
-                <button type="button"
-                        class="btn navigation navigation-prev"
-                        data-action="live#action"
-                        data-live-action-param="prevent|getNextPeriod"
+                <button
+                    type="button"
+                    class="btn navigation navigation-prev"
+                    data-action="live#action"
+                    data-live-action-param="prevent|getNextPeriod"
                     {{ sylius_test_html_attribute('next-period') }}
                 >
                     {{ icon({ icon: 'arrow-right', class: 'icon dropdown-item-icon icon-tabler' }) }}

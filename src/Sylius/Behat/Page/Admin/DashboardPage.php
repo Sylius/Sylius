@@ -96,16 +96,14 @@ class DashboardPage extends SymfonyPage implements DashboardPageInterface
     {
         $this->getElement('channel_choosing_button')->click();
         $this->getElement('channel_choosing_list', ['%channelName%' => $channelName])->click();
-        $this->waitForAjaxUpdate();
+        $this->waitForStatisticsUpdate();
     }
 
     /** @throws ElementNotFoundException */
     public function chooseYearSplitByMonthsInterval(): void
     {
-        $this->waitForAjaxUpdate();
         $this->getElement('year_split_by_months_statistics_button')->click();
-        $this->waitForAjaxUpdate();
-
+        $this->waitForStatisticsUpdate();
     }
 
     /** @throws ElementNotFoundException */
@@ -118,14 +116,14 @@ class DashboardPage extends SymfonyPage implements DashboardPageInterface
     public function choosePreviousPeriod(): void
     {
         $this->getElement('previous_period')->click();
-        $this->waitForAjaxUpdate();
+        $this->waitForStatisticsUpdate();
     }
 
     /** @throws ElementNotFoundException */
     public function chooseNextPeriod(): void
     {
         $this->getElement('next_period')->click();
-        $this->waitForAjaxUpdate();
+        $this->waitForStatisticsUpdate();
     }
 
     public function searchForProductViaNavbar(ProductInterface $productName): void
@@ -165,7 +163,7 @@ class DashboardPage extends SymfonyPage implements DashboardPageInterface
         ]);
     }
 
-    private function waitForAjaxUpdate(): void
+    private function waitForStatisticsUpdate(): void
     {
         sleep(1); // we need to sleep, as sometimes the check below is executed faster than the form sets the busy attribute
         $liveElement = $this->getElement('statistics_component');
