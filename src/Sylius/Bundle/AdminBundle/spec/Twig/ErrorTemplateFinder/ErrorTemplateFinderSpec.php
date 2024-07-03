@@ -18,16 +18,23 @@ use Sylius\Bundle\AdminBundle\SectionResolver\AdminSection;
 use Sylius\Bundle\CoreBundle\SectionResolver\SectionInterface;
 use Sylius\Bundle\CoreBundle\SectionResolver\SectionProviderInterface;
 use Sylius\Bundle\UiBundle\Twig\ErrorTemplateFinder\ErrorTemplateFinderInterface;
+use Sylius\Component\Core\Model\AdminUserInterface;
+use Symfony\Component\HttpFoundation\Exception\SessionNotFoundException;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
 use Twig\Environment;
 use Twig\Loader\LoaderInterface;
 
 final class ErrorTemplateFinderSpec extends ObjectBehavior
 {
-    function let(SectionProviderInterface $sectionProvider, RequestStack $requestStack, Environment $twig): void
+    private const TEMPLATE_PREFIX = '@SyliusAdmin/errors';
+
+    function let(SectionProviderInterface $sectionProvider, TokenStorageInterface $tokenStorage, Environment $twig): void
     {
-        $this->beConstructedWith($sectionProvider, $requestStack, $twig);
+        $this->beConstructedWith($sectionProvider, $tokenStorage, $twig);
     }
 
     function it_implements_error_template_finder_interface(): void
@@ -35,58 +42,130 @@ final class ErrorTemplateFinderSpec extends ObjectBehavior
         $this->shouldImplement(ErrorTemplateFinderInterface::class);
     }
 
+    function it_does_not_find_template_for_other_sections_than_admin(
+        SectionProviderInterface $sectionProvider,
+        TokenStorageInterface $tokenStorage,
+        Environment $twig,
+        SectionInterface $section,
+    ): void {
+        $sectionProvider->getSection()->willReturn($section);
+
+        $tokenStorage->getToken()->shouldNotBeCalled();
+        $twig->getLoader()->shouldNotBeCalled();
+
+        $this->findTemplate(404)->shouldReturn(null);
+    }
+
+    function it_does_not_find_template_when_there_is_no_token_in_admin_section(
+        SectionProviderInterface $sectionProvider,
+        TokenStorageInterface $tokenStorage,
+        Environment $twig,
+    ): void {
+        $sectionProvider->getSection()->willReturn(new AdminSection());
+        $tokenStorage->getToken()->willReturn(null);
+
+        $twig->getLoader()->shouldNotBeCalled();
+
+        $this->findTemplate(404)->shouldReturn(null);
+    }
+
+    function it_does_not_find_template_when_there_is_no_token_user_in_admin_section(
+        SectionProviderInterface $sectionProvider,
+        TokenStorageInterface $tokenStorage,
+        Environment $twig,
+        TokenInterface $token,
+    ): void {
+        $sectionProvider->getSection()->willReturn(new AdminSection());
+
+        $token->getUser()->willReturn(null);
+        $tokenStorage->getToken()->willReturn($token);
+
+        $twig->getLoader()->shouldNotBeCalled();
+
+        $this->findTemplate(404)->shouldReturn(null);
+    }
+
+    function it_does_not_find_template_when_the_token_user_is_not_an_admin_in_admin_section(
+        SectionProviderInterface $sectionProvider,
+        TokenStorageInterface $tokenStorage,
+        Environment $twig,
+        TokenInterface $token,
+        UserInterface $user,
+    ): void {
+        $sectionProvider->getSection()->willReturn(new AdminSection());
+
+        $token->getUser()->willReturn($user);
+        $tokenStorage->getToken()->willReturn($token);
+
+        $twig->getLoader()->shouldNotBeCalled();
+
+        $this->findTemplate(404)->shouldReturn(null);
+    }
+
     function it_finds_template_for_admin(
         SectionProviderInterface $sectionProvider,
-        RequestStack $requestStack,
+        TokenStorageInterface $tokenStorage,
         Environment $twig,
-        SessionInterface $session,
         LoaderInterface $loader,
+        TokenInterface $token,
+        AdminUserInterface $adminUser,
     ): void {
-        $templateName = '@Twig/Exception/Admin/error404.html.twig';
+        $templateName = self::TEMPLATE_PREFIX . '/error404.html.twig';
+
         $sectionProvider->getSection()->willReturn(new AdminSection());
-        $requestStack->getSession()->willReturn($session);
-        $session->get('_security_admin')->willReturn(true);
+
+        $token->getUser()->willReturn($adminUser);
+        $tokenStorage->getToken()->willReturn($token);
 
         $twig->getLoader()->willReturn($loader);
-        $loader->exists($templateName)->willReturn($templateName);
+        $loader->exists($templateName)->shouldBeCalled()->willReturn(true);
 
         $this->findTemplate(404)->shouldReturn($templateName);
     }
 
-    function it_finds_fallback_template_for_admin(
+    function it_returns_null_if_neither_template_can_be_found(
         SectionProviderInterface $sectionProvider,
-        RequestStack $requestStack,
+        TokenStorageInterface $tokenStorage,
         Environment $twig,
-        SessionInterface $session,
         LoaderInterface $loader,
+        TokenInterface $token,
+        AdminUserInterface $adminUser,
     ): void {
-        $templateName = '@Twig/Exception/Admin/error404.html.twig';
-        $fallbackTemplateName = '@Twig/Exception/Admin/error404.html.twig';
+        $templateName = self::TEMPLATE_PREFIX . '/error404.html.twig';
+        $fallbackTemplateName = self::TEMPLATE_PREFIX . '/error.html.twig';
+
         $sectionProvider->getSection()->willReturn(new AdminSection());
-        $requestStack->getSession()->willReturn($session);
-        $session->get('_security_admin')->willReturn(true);
+
+        $token->getUser()->willReturn($adminUser);
+        $tokenStorage->getToken()->willReturn($token);
 
         $twig->getLoader()->willReturn($loader);
-        $loader->exists($templateName)->willReturn(null);
-        $loader->exists($fallbackTemplateName)->willReturn($fallbackTemplateName);
-
-        $this->findTemplate(404)->shouldReturn($fallbackTemplateName);
-    }
-
-    function it_does_not_find_template_for_other_sections_than_admin(
-        SectionProviderInterface $sectionProvider,
-        Environment $twig,
-        LoaderInterface $loader,
-        SectionInterface $section,
-    ): void {
-        $templateName = '@Twig/Exception/Admin/error404.html.twig';
-        $fallbackTemplateName = '@Twig/Exception/Admin/error404.html.twig';
-        $sectionProvider->getSection()->willReturn($section);
-
-        $twig->getLoader()->willReturn($loader);
-        $loader->exists($templateName)->willReturn(null);
-        $loader->exists($fallbackTemplateName)->willReturn(null);
+        $loader->exists($templateName)->shouldBeCalled()->willReturn(false);
+        $loader->exists($fallbackTemplateName)->shouldBeCalled()->willReturn(false);
 
         $this->findTemplate(404)->shouldReturn(null);
+    }
+
+    function it_finds_fallback_template_for_admin(
+        SectionProviderInterface $sectionProvider,
+        TokenStorageInterface $tokenStorage,
+        Environment $twig,
+        LoaderInterface $loader,
+        TokenInterface $token,
+        AdminUserInterface $adminUser,
+    ): void {
+        $templateName = self::TEMPLATE_PREFIX . '/error404.html.twig';
+        $fallbackTemplateName = self::TEMPLATE_PREFIX . '/error.html.twig';
+
+        $sectionProvider->getSection()->willReturn(new AdminSection());
+
+        $token->getUser()->willReturn($adminUser);
+        $tokenStorage->getToken()->willReturn($token);
+
+        $twig->getLoader()->willReturn($loader);
+        $loader->exists($templateName)->shouldBeCalled()->willReturn(false);
+        $loader->exists($fallbackTemplateName)->shouldBeCalled()->willReturn(true);
+
+        $this->findTemplate(404)->shouldReturn($fallbackTemplateName);
     }
 }
