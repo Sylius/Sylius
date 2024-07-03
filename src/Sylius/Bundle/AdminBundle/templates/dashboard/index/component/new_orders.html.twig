@@ -1,12 +1,12 @@
 {% from '@SyliusAdmin/shared/helper/icon.html.twig' import icon %}
 
-<div class="col-12 col-md-6">
+<div class="col-12 col-md-6" {{ attributes }}>
     <div class="card mb-3">
         <div class="card-header">
             <h3 class="card-title">{{ 'sylius.ui.new_orders'|trans }}</h3>
         </div>
         <div class="table-responsive">
-            <table class="table table-vcenter card-table">
+            <table class="table table-vcenter card-table" {{ sylius_test_html_attribute('new-orders') }}>
                 <thead>
                 <tr>
                     <th>{{ 'sylius.ui.customer'|trans }}</th>

@@ -303,6 +303,20 @@
             <path d="M9 10h7a4 4 0 1 1 0 8h-1"></path>
         {% endif %}
 
+        {% if icon == 'arrow-left' %}
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+            <path d="M5 12l14 0"></path>
+            <path d="M5 12l4 4"></path>
+            <path d="M5 12l4 -4"></path>
+        {% endif %}
+
+        {% if icon == 'arrow-right' %}
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+            <path d="M5 12l14 0"></path>
+            <path d="M15 16l4 -4"></path>
+            <path d="M15 8l4 4"></path>
+        {% endif %}
+
         {% if icon == 'archive' %}
             <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
             <path d="M3 4m0 2a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v0a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2z"></path>
@@ -349,6 +363,13 @@
             <path d="M15 6l3 3" />
             <path d="M9 3a2 2 0 0 0 2 2a2 2 0 0 0 -2 2a2 2 0 0 0 -2 -2a2 2 0 0 0 2 -2" />
             <path d="M19 13a2 2 0 0 0 2 2a2 2 0 0 0 -2 2a2 2 0 0 0 -2 -2a2 2 0 0 0 2 -2" />
+        {% endif %}
+
+        {% if icon == 'truck' %}
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+            <path d="M7 17m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
+            <path d="M17 17m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
+            <path d="M5 17h-2v-11a1 1 0 0 1 1 -1h9v12m-4 0h6m4 0h2v-6h-8m0 -5h5l3 5" />
         {% endif %}
     </svg>
 {% endmacro %}
