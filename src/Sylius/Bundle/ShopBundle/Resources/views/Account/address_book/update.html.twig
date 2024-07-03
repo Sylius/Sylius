@@ -1,4 +1,5 @@
 {% extends '@SyliusShop/Account/address_book/layout.html.twig' %}
+{% import '@SyliusShop/Shared/buttons.html.twig' as buttons %}
 
 {% form_theme form '@SyliusShop/Form/theme.html.twig' %}
 
@@ -18,12 +19,8 @@
             {% include '@SyliusShop/Shared/form/address.html.twig' with {'form': form} %}
         </div>
         <div class="d-flex gap-2">
-            <button class="btn btn-primary" type="submit" {{ sylius_test_html_attribute('save-changes') }}>
-                {{ 'sylius.ui.save_changes'|trans}}
-            </button>
-            <a class="btn btn-outline-gray" href="{{ path('sylius_shop_account_address_book_index') }}">
-                {{ 'sylius.ui.cancel'|trans }}
-            </a>
+            {{ buttons.submit('sylius.ui.save_changes'|trans, 'save-changes', null, 'btn-primary') }}
+            {{ buttons.default(path('sylius_shop_account_address_book_index'), 'sylius.ui.cancel'|trans, null, null, 'btn-outline-gray') }}
         </div>
 
         {{ form_row(form._token) }}

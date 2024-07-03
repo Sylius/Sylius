@@ -1,6 +1,7 @@
 {% extends '@SyliusShop/Account/address_book/layout.html.twig' %}
 
 {% import '@SyliusShop/Shared/messages.html.twig' as messages %}
+{% import '@SyliusShop/Shared/buttons.html.twig' as buttons %}
 
 {% block title %}{{ 'sylius.ui.address_book'|trans }} | {{ parent() }}{% endblock %}
 
@@ -12,7 +13,7 @@
 
 {% block account_content %}
     <div class="text-end mb-4">
-        <a class="btn btn-primary" href="{{ path('sylius_shop_account_address_book_create') }}">{{ 'sylius.ui.add_address'|trans }}</a>
+        {{ buttons.primary(path('sylius_shop_account_address_book_create'), 'sylius.ui.add_address'|trans, null, null, 'btn-primary') }}
     </div>
 
     {% if addresses|length > 0 %}

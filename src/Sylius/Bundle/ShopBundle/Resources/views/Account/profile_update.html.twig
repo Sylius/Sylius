@@ -1,5 +1,6 @@
 {% extends '@SyliusShop/Account/layout.html.twig' %}
 {% from '@SyliusShop/Shared/breadcrumbs.html.twig' import breadcrumbs as breadcrumbs %}
+{% import '@SyliusShop/Shared/buttons.html.twig' as buttons %}
 
 {% form_theme form '@SyliusShop/Form/theme.html.twig' %}
 
@@ -45,9 +46,7 @@
 
         {{ sylius_template_event('sylius.shop.account.profile.update.form', {'customer': customer, 'form': form}) }}
 
-        <button class="btn btn-primary" type="submit" {{ sylius_test_html_attribute('save-changes') }}>
-            {{ 'sylius.ui.save_changes'|trans }}
-        </button>
+        {{ buttons.submit('sylius.ui.save_changes'|trans, 'save-changes', null, 'btn-primary') }}
 
         {{ form_row(form._token) }}
         {{ form_end(form, {'render_rest': false}) }}

@@ -1,9 +1,9 @@
+{% import '@SyliusShop/Shared/buttons.html.twig' as buttons %}
+
 {% set id = app.request.attributes.get('id') %}
 
 {{ form_start(form, {'action': path('sylius_shop_account_address_book_set_as_default', {'id': id}), 'method': 'PATCH'}) }}
 <input type="hidden" name="{{ form.defaultAddress.vars['full_name'] }}" value="{{ id }}" />
-<button class="btn btn-sm btn-icon btn-outline-gray" type="submit" {{ sylius_test_html_attribute('set-as-default-button') }}>
-    {{ 'sylius.ui.set_as_default'|trans }}
-</button>
+{{ buttons.submit('sylius.ui.set_as_default'|trans, 'set-as-default-button', null, 'btn-sm btn-icon btn-outline-gray') }}
 {{ form_row(form._token) }}
 {{ form_end(form, {'render_rest': false}) }}

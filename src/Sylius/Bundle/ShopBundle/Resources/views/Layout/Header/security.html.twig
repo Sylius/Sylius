@@ -1,4 +1,5 @@
 {% from '@SyliusShop/Shared/icon.html.twig' import icon as icon %}
+{% import '@SyliusShop/Shared/buttons.html.twig' as buttons %}
 
 {% if is_granted('ROLE_USER') %}
     <div class="d-lg-none">
@@ -7,14 +8,10 @@
         </button>
         <ul class="dropdown-menu dropdown-menu-end">
             <li>
-                <a class="dropdown-item link-reset" href="{{ path('sylius_shop_account_dashboard') }}">
-                    {{ 'sylius.ui.my_account'|trans }}
-                </a>
+                {{ buttons.transparent(path('sylius_shop_account_dashboard'), 'sylius.ui.my_account'|trans, 'mobile-my-account-button', null, 'dropdown-item') }}
             </li>
             <li>
-                <a class="dropdown-item link-reset" href="{{ path('sylius_shop_logout') }}">
-                    {{ 'sylius.ui.logout'|trans }}
-                </a>
+                {{ buttons.transparent(path('sylius_shop_logout'), 'sylius.ui.logout'|trans, 'mobile-logout-button', null, 'dropdown-item') }}
             </li>
         </ul>
     </div>
@@ -25,25 +22,21 @@
             {{ 'sylius.ui.hello'|trans }} {{ app.user.customer.firstName }}!
         </span>
         <small class="text-black-50 px-1">|</small>
-        <a class="link-reset" href="{{ path('sylius_shop_account_dashboard') }}">
-            {{ 'sylius.ui.my_account'|trans }}
-        </a>
+        {{ buttons.transparent(path('sylius_shop_account_dashboard'), 'sylius.ui.my_account'|trans, 'my-account-button', null, null) }}
         <small class="text-black-50 px-1">|</small>
-        <a class="link-reset" href="{{ path('sylius_shop_logout') }}" {{ sylius_test_html_attribute('logout-button') }}>
-            {{ 'sylius.ui.logout'|trans }}
-        </a>
+        {{ buttons.transparent(path('sylius_shop_logout'), 'sylius.ui.logout'|trans, 'logout-button', null, null) }}
     </div>
 {% else %}
     <div class="d-flex align-items-center">
         <div class="d-lg-none">
-            <a class="link-reset" href="{{ path('sylius_shop_login') }}">{{ icon('user') }}</a>
+            {{ buttons.transparent(path('sylius_shop_login'), null, 'mobile-login-button', 'user', null) }}
         </div>
 
         <div class="d-none d-lg-flex align-items-center gap-2 ps-2">
             {{ icon('user') }}
-            <a class="link-reset" href="{{ path('sylius_shop_login') }}">{{ 'sylius.ui.login'|trans }}</a>
+            {{ buttons.transparent(path('sylius_shop_login'), 'sylius.ui.login'|trans, 'login-button', null, null) }}
             <small class="text-black-50 px-1">|</small>
-            <a class="link-reset" href="{{ path('sylius_shop_register') }}">{{ 'sylius.ui.register'|trans }}</a>
+            {{ buttons.transparent(path('sylius_shop_register'), 'sylius.ui.register'|trans, 'register-button', null, null) }}
         </div>
     </div>
 {% endif %}

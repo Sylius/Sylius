@@ -1,4 +1,5 @@
 {% extends '@SyliusShop/layout.html.twig' %}
+{% import '@SyliusShop/Shared/buttons.html.twig' as buttons %}
 
 {% block title %}{{ 'sylius.ui.thank_you'|trans }} | {{ parent() }}{% endblock %}
 
@@ -19,16 +20,10 @@
 
         <div class="d-flex flex-column flex-xl-row justify-content-center gap-2 mt-4">
             {% if order.customer.user is not null %}
-                <a href="{{ path('sylius_shop_account_order_show', {'number': order.number}) }}" class="btn btn-primary" {{ sylius_test_html_attribute('show-order-in-account') }}>
-                    {{ 'sylius.ui.view_order'|trans }}
-                </a>
+                {{ buttons.primary(path('sylius_shop_account_order_show', {'number': order.number}), 'sylius.ui.view_order'|trans, 'show-order-in-account', null) }}
             {% else %}
-                <a href="{{ path('sylius_shop_order_show', {'tokenValue': order.tokenValue}) }}" class="btn btn-primary" {{ sylius_test_html_attribute('payment-method-page') }}>
-                    {{ 'sylius.ui.change_payment_method'|trans }}
-                </a>
-                <a href="{{ path('sylius_shop_register_after_checkout', {'tokenValue': order.tokenValue}) }}" class="btn btn-secondary" {{ sylius_test_html_attribute('create-an-account') }}>
-                    {{ 'sylius.ui.create_an_account'|trans }}
-                </a>
+                {{ buttons.primary(path('sylius_shop_order_show', {'tokenValue': order.tokenValue}), 'sylius.ui.change_payment_method'|trans, 'payment-method-page', null) }}
+                {{ buttons.secondary(path('sylius_shop_register_after_checkout', {'tokenValue': order.tokenValue}), 'sylius.ui.create_an_account'|trans, 'create-an-account', null) }}
             {% endif %}
         </div>
     </div>
