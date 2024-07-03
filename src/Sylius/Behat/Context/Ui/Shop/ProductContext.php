@@ -49,12 +49,12 @@ final class ProductContext implements Context
     }
 
     /**
-     * @When I try to reach unexistent product
+     * @When I try to reach nonexistent product
      */
-    public function iTryToReachUnexistentProductPage(?string $localeCode = 'en_US'): void
+    public function iTryToReachNonexistentProductPage(?string $localeCode = 'en_US'): void
     {
         $this->showPage->tryToOpen([
-            'slug' => 'unexistent_product',
+            'slug' => 'nonexistent_product',
             '_locale' => $localeCode,
         ]);
     }

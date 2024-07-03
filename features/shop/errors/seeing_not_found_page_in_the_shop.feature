@@ -11,5 +11,5 @@ Feature: Seeing not found page in the shop
 
     @no-api @ui
     Scenario: Seeing not found page when the product does not exist in the shop
-        When I try to reach unexistent product
+        When I try to reach nonexistent product
         Then I should see the not found page
