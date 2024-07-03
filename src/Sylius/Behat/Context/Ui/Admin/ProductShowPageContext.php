@@ -65,8 +65,7 @@ final class ProductShowPageContext implements Context
      */
     public function iTryToReachUnexistentProductPage(): void
     {
-        putenv('APP_DEBUG=0');
-        $this->productShowPage->tryToOpen(['id' => 'd', '_locale' => 'en_US']);
+        $this->productShowPage->tryToOpen(['id' => 0, '_locale' => 'en_US']);
     }
 
     /**

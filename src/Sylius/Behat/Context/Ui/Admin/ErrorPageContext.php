@@ -28,6 +28,6 @@ final class ErrorPageContext implements Context
      */
     public function iShouldSeeTheNotFoundPageWithTheLinkToTheDashboard(): void
     {
-        Assert::true($this->errorPage->isItAdminNotFoundPage());
+        Assert::true($this->errorPage->isItAdminNotFoundPage(), 'This test might require to be run without debug mode enabled.');
     }
 }
