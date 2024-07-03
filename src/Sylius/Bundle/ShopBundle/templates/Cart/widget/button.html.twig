@@ -1,7 +1,7 @@
 {% import "@SyliusShop/shared/macro/money.html.twig" as money %}
 {% from '@SyliusShop/shared/icon.html.twig' import icon as icon %}
 
-<button class="btn btn-icon btn-transparent px-2 position-relative" data-bs-toggle="offcanvas" data-bs-target="#offcanvasCart">
+<button class="btn btn-icon btn-transparent px-0 position-relative" data-bs-toggle="offcanvas" data-bs-target="#offcanvasCart">
     {{ icon('bag') }}
     <span class="d-none d-lg-block ps-1" {{ sylius_test_html_attribute('cart-total') }}>
         {{- money.convertAndFormat(cart.itemsTotal) -}}

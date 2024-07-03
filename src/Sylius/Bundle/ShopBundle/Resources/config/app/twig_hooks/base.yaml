@@ -33,6 +33,8 @@ twig_hooks:
                 template: "@SyliusShop/shared/layout/base/header/content/security_widget.html.twig"
             cart:
                 template: "@SyliusShop/shared/layout/base/header/content/cart.html.twig"
+            taxon_hamburger:
+                template: "@SyliusShop/shared/layout/base/header/content/taxon_hamburger.html.twig"
 
         'sylius_shop.base.header.content.logo':
             content:
