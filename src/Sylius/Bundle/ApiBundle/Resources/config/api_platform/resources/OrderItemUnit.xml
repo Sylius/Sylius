@@ -30,7 +30,11 @@
                 </normalizationContext>
             </operation>
 
-            <operation class="ApiPlatform\Metadata\Get" uriTemplate="/shop/order-item-units/{id}">
+            <operation
+                class="ApiPlatform\Metadata\Get"
+                uriTemplate="/shop/order-item-units/{id}"
+                provider="sylius_api.state_provider.shop.order_item_unit.item"
+            >
                 <normalizationContext>
                     <values>
                         <value name="groups">
