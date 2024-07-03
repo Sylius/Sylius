@@ -30,12 +30,12 @@ class ErrorPage extends Page implements ErrorPageInterface
 
     public function isItAdminNotFoundPage(): bool
     {
-        return $this->getCode() === 404 && $this->getDocument()->has('css', '[data-test-back-to-dashboard-link]');
+        return $this->getCode() === 404 && $this->hasElement('admin_back_to_dashboard_link');
     }
 
     public function isItShopNotFoundPage(): bool
     {
-        return $this->getCode() === 404 && $this->getDocument()->has('css', '[data-test-shop-not-found-page]');
+        return $this->getCode() === 404 && $this->hasElement('shop_not_found_page');
     }
 
     protected function getDefinedElements(): array
