@@ -1,8 +1,5 @@
-{% extends '@SyliusShop/layout.html.twig' %}
+{% extends '@SyliusShop/error.html.twig' %}
 
-{% block content %}
-    <h2>
-        <img src="{{ asset('build/shop/images/logo.png', 'shop') }}" alt="Sylius logo" />
-        {{ 'sylius.ui.the_page_you_are_looking_for_is_forbidden'|trans }}
-    </h2>
+{% block error_message %}
+    {{ 'sylius.ui.the_page_you_are_looking_for_is_forbidden'|trans }}
 {% endblock %}

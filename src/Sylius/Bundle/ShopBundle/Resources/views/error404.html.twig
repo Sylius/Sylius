@@ -1,10 +1,5 @@
-{% extends '@SyliusShop/layout.html.twig' %}
+{% extends '@SyliusShop/error.html.twig' %}
 
-{% block content %}
-    <div class="container d-flex flex-column align-items-center my-4">
-        <div class="mb-5">
-            {% include '@SyliusShop/Shared/sylius_logo.html.twig'%}
-        </div>
-        <h1 class="h2 text-center">{{ 'sylius.ui.the_page_you_are_looking_for_does_not_exist'|trans }}</h1>
-    </div>
+{% block error_message %}
+    {{ 'sylius.ui.the_page_you_are_looking_for_does_not_exist'|trans }}
 {% endblock %}

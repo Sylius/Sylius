@@ -1,8 +1,5 @@
-{% extends '@SyliusShop/layout.html.twig' %}
+{% extends '@SyliusShop/error.html.twig' %}
 
-{% block content %}
-    <h2>
-        <img src="{{ asset('build/shop/images/logo.png', 'shop') }}" alt="Sylius logo" />
-        {{ 'sylius.ui.server_has_encountered_some_errors'|trans }}
-    </h2>
+{% block error_message %}
+    {{ 'sylius.ui.server_has_encountered_some_errors'|trans }}
 {% endblock %}
