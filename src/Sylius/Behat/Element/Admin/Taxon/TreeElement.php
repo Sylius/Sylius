@@ -83,15 +83,15 @@ final class TreeElement extends BaseElement implements TreeElementInterface
     {
         return array_merge(parent::getDefinedElements(), [
             'confirm_delete_button' => '[data-test-tree-taxons] [data-test-tree-taxon="%name%"] [data-test-delete-modal] [data-test-confirm-button]',
-            'tree_taxons' => '[data-test-tree-taxons]',
-            'tree_taxon_actions' => '[data-test-tree-taxons] [data-test-tree-taxon="%name%"] [data-test-actions]',
-            'tree_taxon_delete' => '[data-test-tree-taxons] [data-test-tree-taxon="%name%"] [data-test-delete]',
-            'tree_taxon_move_down' => '[data-test-tree-taxons] [data-test-tree-taxon="%name%"] [data-test-move-down]',
-            'tree_taxon_move_up' => '[data-test-tree-taxons] [data-test-tree-taxon="%name%"] [data-test-move-up]',
             'first_tree_taxon' => '[data-test-tree-taxons] [data-test-tree-taxon]:first-child',
             'last_tree_taxon' => '[data-test-tree-taxons] [data-test-tree-taxon]:last-child',
-            'tree_taxon_delete_component' => '[data-live-name-value="sylius_admin:taxon:delete"]',
+            'tree_taxons' => '[data-test-tree-taxons]',
+            'tree_taxon_actions' => '[data-test-tree-taxons] [data-test-tree-taxon="%name%"] [data-test-actions]',
             'tree_taxon_component' => '[data-live-name-value="sylius_admin:taxon:tree"]',
+            'tree_taxon_delete' => '[data-test-tree-taxons] [data-test-tree-taxon="%name%"] [data-test-delete]',
+            'tree_taxon_delete_component' => '[data-live-name-value="sylius_admin:taxon:delete"]',
+            'tree_taxon_move_down' => '[data-test-tree-taxons] [data-test-tree-taxon="%name%"] [data-test-move-down]',
+            'tree_taxon_move_up' => '[data-test-tree-taxons] [data-test-tree-taxon="%name%"] [data-test-move-up]',
         ]);
     }
 
