@@ -17,7 +17,7 @@ use Behat\Behat\Context\Context;
 use Sylius\Behat\Page\ErrorPageInterface;
 use Webmozart\Assert\Assert;
 
-final class ErrorPageContext implements Context
+final readonly class ErrorPageContext implements Context
 {
     public function __construct(private ErrorPageInterface $errorPage)
     {
