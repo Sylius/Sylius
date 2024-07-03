@@ -1,0 +1,47 @@
+twig_hooks:
+    hooks:
+        'sylius_admin.customer.create.content':
+            form:
+                template: '@SyliusAdmin/shared/crud/create/content/form.html.twig'
+                configuration:
+                    render_rest: false
+        
+        'sylius_admin.customer.create.content.form':
+            sections:
+                template: '@SyliusAdmin/customer/form/sections.html.twig'
+
+        'sylius_admin.customer.create.content.form.sections':
+            details:
+                template: '@SyliusAdmin/customer/form/sections/details.html.twig'
+            extra_information:
+                template: '@SyliusAdmin/customer/form/sections/extra_information.html.twig'
+            account_credentials:
+                template: '@SyliusAdmin/customer/form/sections/account_credentials.html.twig'
+
+        'sylius_admin.customer.create.content.form.sections.details':
+            first_name:
+                template: '@SyliusAdmin/customer/form/sections/details/first_name.html.twig'
+            last_name:
+                template: '@SyliusAdmin/customer/form/sections/details/last_name.html.twig'
+            email:
+                template: '@SyliusAdmin/customer/form/sections/details/email.html.twig'
+            group:
+                template: '@SyliusAdmin/customer/form/sections/details/group.html.twig'
+
+        'sylius_admin.customer.create.content.form.sections.extra_information':
+            gender:
+                template: '@SyliusAdmin/customer/form/sections/extra_information/gender.html.twig'
+            birthday:
+                template: '@SyliusAdmin/customer/form/sections/extra_information/birthday.html.twig'
+            phone_number:
+                template: '@SyliusAdmin/customer/form/sections/extra_information/phone_number.html.twig'
+            subscribe_to_the_newsletter:
+                template: '@SyliusAdmin/customer/form/sections/extra_information/subscribe_to_the_newsletter.html.twig'
+                
+        'sylius_admin.customer.create.content.form.sections.account_credentials':
+            password:
+                template: '@SyliusAdmin/customer/form/sections/account_credentials/password.html.twig'
+            enabled:
+                template: '@SyliusAdmin/customer/form/sections/account_credentials/enabled.html.twig'
+            verified:
+                template: '@SyliusAdmin/customer/form/sections/account_credentials/verified.html.twig'

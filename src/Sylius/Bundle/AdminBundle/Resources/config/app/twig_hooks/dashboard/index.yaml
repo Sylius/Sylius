@@ -21,10 +21,14 @@ twig_hooks:
                 template: '@SyliusAdmin/dashboard/index/content/latest_statistics.html.twig'
 
         'sylius_admin.dashboard.index.content.header':
-            title_block:
-                template: '@SyliusAdmin/shared/crud/common/content/header/title_block.html.twig'
             breadcrumbs:
                 template: '@SyliusAdmin/dashboard/index/content/header/breadcrumbs.html.twig'
+            title_block:
+                template: '@SyliusAdmin/dashboard/index/content/header/title_block/title.html.twig'
+            channel_selector:
+                component: 'sylius_admin:dashboard:channel_selector'
+                props:
+                    channelCode: '@=_context.channel_code'
 
         'sylius_admin.dashboard.index.content.header.title_block':
             title:
@@ -55,3 +59,5 @@ twig_hooks:
                 component: 'sylius_admin:dashboard:new_customers'
             new_orders:
                 component: 'sylius_admin:dashboard:new_orders'
+                props:
+                    channelCode: '@=_context.channel_code'

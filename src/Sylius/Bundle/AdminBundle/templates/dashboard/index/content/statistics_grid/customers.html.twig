@@ -18,7 +18,9 @@
                 </div>
                 <div class="col">
                     <div class="subheader">{{ 'sylius.ui.customers'|trans }}</div>
-                    <div class="h2 mb-0 me-2">{{ statistics_data.statistics.number_of_new_customers }}</div>
+                    <div class="h2 mb-0 me-2" {{ sylius_test_html_attribute('new-customers') }}>
+                        {{ statistics_data.business_activity_summary.newCustomersCount }}
+                    </div>
                 </div>
             </div>
         </div>

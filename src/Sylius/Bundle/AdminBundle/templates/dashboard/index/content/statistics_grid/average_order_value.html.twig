@@ -18,7 +18,9 @@
                 </div>
                 <div class="col">
                     <div class="subheader">{{ 'sylius.ui.average_order_value'|trans }}</div>
-                    <div class="h2 mb-0 me-2">{{ statistics_data.statistics.average_order_value }}</div>
+                    <div class="h2 mb-0 me-2" {{ sylius_test_html_attribute('average-order-value') }}>
+                        {{ statistics_data.business_activity_summary.averageOrderValue|sylius_format_money(statistics_data.channel.baseCurrency.code, statistics_data.channel.defaultLocale.code) }}
+                    </div>
                 </div>
             </div>
         </div>
