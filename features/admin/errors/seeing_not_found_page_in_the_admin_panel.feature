@@ -12,5 +12,5 @@ Feature: Seeing not found page in the admin panel
 
     @no-api @ui
     Scenario: Seeing not found page when the product does not exist in the admin panel
-        When I try to reach unexistent product
+        When I try to reach nonexistent product
         Then I should see the not found page with the link to the dashboard
