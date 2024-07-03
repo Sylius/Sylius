@@ -23,6 +23,8 @@ use Twig\Loader\LoaderInterface;
 
 final class ErrorTemplateFinderSpec extends ObjectBehavior
 {
+    private const TEMPLATE_PREFIX = '@SyliusShop/Errors';
+
     function let(SectionProviderInterface $sectionProvider, Environment $twig): void
     {
         $this->beConstructedWith($sectionProvider, $twig);
@@ -33,18 +35,46 @@ final class ErrorTemplateFinderSpec extends ObjectBehavior
         $this->shouldImplement(ErrorTemplateFinderInterface::class);
     }
 
+    function it_does_not_find_template_for_other_sections_than_shop(
+        SectionProviderInterface $sectionProvider,
+        Environment $twig,
+        SectionInterface $section,
+    ): void {
+        $sectionProvider->getSection()->willReturn($section);
+
+        $twig->getLoader()->shouldNotBeCalled();
+
+        $this->findTemplate(404)->shouldReturn(null);
+    }
+
     function it_finds_template_for_shop(
         SectionProviderInterface $sectionProvider,
         Environment $twig,
         LoaderInterface $loader,
     ): void {
-        $templateName = '@Twig/Exception/Shop/error404.html.twig';
+        $templateName = self::TEMPLATE_PREFIX . '/error404.html.twig';
         $sectionProvider->getSection()->willReturn(new ShopSection());
 
         $twig->getLoader()->willReturn($loader);
-        $loader->exists($templateName)->willReturn($templateName);
+        $loader->exists($templateName)->shouldBeCalled()->willReturn(true);
 
         $this->findTemplate(404)->shouldReturn($templateName);
+    }
+
+    function it_returns_null_if_neither_template_can_be_found(
+        SectionProviderInterface $sectionProvider,
+        Environment $twig,
+        LoaderInterface $loader,
+    ): void {
+        $templateName = self::TEMPLATE_PREFIX . '/error404.html.twig';
+        $fallbackTemplateName = self::TEMPLATE_PREFIX . '/error.html.twig';
+        $sectionProvider->getSection()->willReturn(new ShopSection());
+
+        $twig->getLoader()->willReturn($loader);
+        $loader->exists($templateName)->shouldBeCalled()->willReturn(false);
+        $loader->exists($fallbackTemplateName)->shouldBeCalled()->willReturn(false);
+
+        $this->findTemplate(404)->shouldReturn(null);
     }
 
     function it_finds_fallback_template_for_shop(
@@ -52,31 +82,14 @@ final class ErrorTemplateFinderSpec extends ObjectBehavior
         Environment $twig,
         LoaderInterface $loader,
     ): void {
-        $templateName = '@Twig/Exception/Shop/error404.html.twig';
-        $fallbackTemplateName = '@Twig/Exception/Shop/error404.html.twig';
+        $templateName = self::TEMPLATE_PREFIX . '/error404.html.twig';
+        $fallbackTemplateName = self::TEMPLATE_PREFIX . '/error.html.twig';
         $sectionProvider->getSection()->willReturn(new ShopSection());
 
         $twig->getLoader()->willReturn($loader);
-        $loader->exists($templateName)->willReturn(null);
-        $loader->exists($fallbackTemplateName)->willReturn($fallbackTemplateName);
+        $loader->exists($templateName)->shouldBeCalled()->willReturn(false);
+        $loader->exists($fallbackTemplateName)->shouldBeCalled()->willReturn(true);
 
         $this->findTemplate(404)->shouldReturn($fallbackTemplateName);
-    }
-
-    function it_does_not_find_template_for_other_sections_than_shop(
-        SectionProviderInterface $sectionProvider,
-        Environment $twig,
-        LoaderInterface $loader,
-        SectionInterface $section,
-    ): void {
-        $templateName = '@Twig/Exception/Shop/error404.html.twig';
-        $fallbackTemplateName = '@Twig/Exception/Shop/error404.html.twig';
-        $sectionProvider->getSection()->willReturn($section);
-
-        $twig->getLoader()->willReturn($loader);
-        $loader->exists($templateName)->willReturn(null);
-        $loader->exists($fallbackTemplateName)->willReturn(null);
-
-        $this->findTemplate(404)->shouldReturn(null);
     }
 }
