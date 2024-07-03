@@ -12,7 +12,7 @@ Feature: Statistics
         And this product has "Red XL" variant priced at "$40.00"
         And I am logged in as an administrator
 
-    @ui @no-api
+    @no-api @ui
     Scenario: Seeing statistics for the current year and default channel when expectations are not specified
         Given it is "last day of December last year" now
         And 2 new customers have fulfilled 2 orders placed for total of "$1,000.00"
@@ -39,7 +39,7 @@ Feature: Statistics
         And there should be total sales of "$2,000.00"
         And the average order value should be "$1,000.00"
 
-    @ui @mink:chromedriver @no-api
+    @no-api @ui @mink:chromedriver
     Scenario: Seeing statistics for the next year
         Given it is "first day of January last year" now
         And 3 new customers have fulfilled 2 orders placed for total of "$2,000.00"
