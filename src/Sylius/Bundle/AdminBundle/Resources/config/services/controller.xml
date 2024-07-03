@@ -73,12 +73,6 @@
             <argument type="service" id="sylius.repository.channel" />
             <argument type="service" id="twig" />
             <argument type="service" id="router" />
-            <argument type="service" id="Sylius\Bundle\AdminBundle\Provider\StatisticsDataProviderInterface" />
-        </service>
-
-        <service id="sylius.controller.admin.dashboard.statistics" class="Sylius\Bundle\AdminBundle\Controller\Dashboard\StatisticsController">
-            <argument type="service" id="twig" />
-            <argument type="service" id="Sylius\Bundle\AdminBundle\Provider\StatisticsDataProviderInterface" />
         </service>
 
         <service id="sylius.controller.customer_statistics" class="Sylius\Bundle\AdminBundle\Controller\CustomerStatisticsController" public="true">
