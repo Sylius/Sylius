@@ -20,7 +20,7 @@ interface DashboardPageInterface extends SymfonyPageInterface
 {
     public function getTotalSales(): string;
 
-    public function getNumberOfNewOrders(): int;
+    public function getNumberOfPaidOrders(): int;
 
     public function getNumberOfNewOrdersInTheList(): int;
 

@@ -99,11 +99,29 @@
             class="Sylius\Bundle\AdminBundle\Twig\Component\Dashboard\NewOrdersComponent"
         >
             <argument type="service" id="sylius.repository.order" />
+            <argument type="service" id="sylius.repository.channel" />
 
             <tag
-                name="twig.component"
+                name="sylius.live_component"
                 key="sylius_admin:dashboard:new_orders"
                 template="@SyliusAdmin/dashboard/index/component/new_orders.html.twig"
+            />
+        </service>
+
+        <service
+            id="sylius_admin.twig.component.dashboard.channel_selector"
+            class="Sylius\Bundle\AdminBundle\Twig\Component\Dashboard\ChannelSelectorComponent"
+        >
+            <argument type="service" id="sylius.repository.channel" />
+
+            <call method="setLiveResponder">
+                <argument type="service" id="ux.live_component.live_responder"/>
+            </call>
+
+            <tag
+                name="sylius.live_component"
+                key="sylius_admin:dashboard:channel_selector"
+                template="@SyliusAdmin/dashboard/index/component/channel_selector.html.twig"
             />
         </service>
 
@@ -112,7 +130,7 @@
             class="Sylius\Bundle\AdminBundle\Twig\Component\Dashboard\StatisticsComponent"
         >
             <argument type="service" id="sylius.repository.channel" />
-            <argument type="service" id="Sylius\Bundle\AdminBundle\Provider\StatisticsDataProviderInterface" />
+            <argument type="service" id="Sylius\Component\Core\Statistics\Provider\StatisticsProviderInterface" />
 
             <tag
                 name="sylius.live_component"

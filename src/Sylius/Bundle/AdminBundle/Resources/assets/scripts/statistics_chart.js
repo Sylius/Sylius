@@ -9,7 +9,7 @@
 
 import ApexCharts from 'apexcharts';
 
-var chart = null;
+let chart = null;
 function renderChart() {
   // eslint-disable-next-line no-undef
   const statisticsChart = document.querySelector('#statistics-chart');
@@ -45,7 +45,8 @@ function renderChart() {
     dataLabels: {
       enabled: true,
       formatter(val) {
-        return `${val}`;
+        const { currency } = statisticsChart.dataset;
+        return `${currency}${val}`;
       },
       offsetY: -20,
       style: {
@@ -88,7 +89,8 @@ function renderChart() {
       labels: {
         show: false,
         formatter(val) {
-          return `${val}%`;
+          const { currency } = statisticsChart.dataset;
+          return `${currency}${val}`;
         },
       },
 
@@ -109,10 +111,10 @@ function renderChart() {
 
 renderChart();
 
-let element = document.querySelector('#statistics-chart');
+const element = document.querySelector('#statistics-chart');
 
 if (element) {
-  let observer = new MutationObserver(function(mutations) {
+  const observer = new MutationObserver(function(mutations) {
     mutations.forEach(function(mutation) {
       if (mutation.attributeName === 'data-sales' || mutation.attributeName === 'data-intervals') {
         chart.destroy();

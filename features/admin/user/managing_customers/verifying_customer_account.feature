@@ -7,7 +7,7 @@ Feature: Toggling a customer account
     Background:
         Given I am logged in as an administrator
 
-    @api @todo @ui
+    @api @ui
     Scenario: Verifying customer account
         Given there is enabled customer account "f.baggins@example.com" with password "psw"
         When I want to verify "f.baggins@example.com"

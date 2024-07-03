@@ -11,11 +11,11 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Behat\Page\Admin\Customer;
+namespace Sylius\Behat\Element\Admin\Customer;
 
-use Sylius\Behat\Page\Admin\Crud\CreatePageInterface as BaseCreatePageInterface;
+use Sylius\Behat\Element\Admin\Crud\FormElementInterface as BaseFormElementInterface;
 
-interface CreatePageInterface extends BaseCreatePageInterface
+interface FormElementInterface extends BaseFormElementInterface
 {
     public function specifyFirstName(string $name): void;
 
@@ -31,13 +31,23 @@ interface CreatePageInterface extends BaseCreatePageInterface
 
     public function chooseGroup(string $group): void;
 
-    public function selectCreateAccount(): void;
+    public function getFullName(): string;
 
-    public function hasPasswordField(): bool;
+    public function getFirstName(): string;
 
-    public function hasCheckedCreateOption(): bool;
+    public function getLastName(): string;
 
-    public function hasCreateOption(): bool;
+    public function enable(): void;
 
-    public function isUserFormHidden(): bool;
+    public function disable(): void;
+
+    public function getPassword(): string;
+
+    public function subscribeToTheNewsletter(): void;
+
+    public function isSubscribedToTheNewsletter(): bool;
+
+    public function getGroupName(): string;
+
+    public function verifyUser(): void;
 }

@@ -33,14 +33,15 @@ class IndexPage extends BaseIndexPage implements IndexPageInterface
         parent::__construct($session, $minkParameters, $router, $tableAccessor, $routeName);
     }
 
-    public function getCustomerAccountStatus(CustomerInterface $customer): string
+    public function isCustomerEnabled(CustomerInterface $customer): bool
     {
         $tableAccessor = $this->getTableAccessor();
         $table = $this->getElement('table');
 
         $row = $tableAccessor->getRowWithFields($table, ['email' => $customer->getEmail()]);
+        $enabledField = $tableAccessor->getFieldFromRow($table, $row, 'enabled');
 
-        return $tableAccessor->getFieldFromRow($table, $row, 'enabled')->getText();
+        return $enabledField->has('css', '[data-test-status-enabled]') ? true : false;
     }
 
     public function isCustomerVerified(CustomerInterface $customer): bool
@@ -49,8 +50,9 @@ class IndexPage extends BaseIndexPage implements IndexPageInterface
         $table = $this->getElement('table');
 
         $row = $tableAccessor->getRowWithFields($table, ['email' => $customer->getEmail()]);
+        $verifiedField = $tableAccessor->getFieldFromRow($table, $row, 'verified');
 
-        return $tableAccessor->getFieldFromRow($table, $row, 'verified')->getText() === 'Yes';
+        return $verifiedField->has('css', '[data-test-status-enabled]') ? true : false;
     }
 
     public function setFilterGroup(string $groupName): void
