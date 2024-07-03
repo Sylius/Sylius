@@ -71,25 +71,36 @@ final class TreeElement extends BaseElement implements TreeElementInterface
         $this->waitForUpdate();
     }
 
+    public function deleteTaxon(string $name): void
+    {
+        $this->getElement('tree_taxon_actions', ['%name%' => $name])->click();
+        $this->getElement('tree_taxon_delete', ['%name%' => $name])->click();
+        $this->waitForUpdate('tree_taxon_delete_component');
+        $this->getElement('confirm_delete_button', ['%name%' => $name])->click();
+    }
+
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
+            'confirm_delete_button' => '[data-test-tree-taxons] [data-test-tree-taxon="%name%"] [data-test-delete-modal] [data-test-confirm-button]',
             'tree_taxons' => '[data-test-tree-taxons]',
             'tree_taxon_actions' => '[data-test-tree-taxons] [data-test-tree-taxon="%name%"] [data-test-actions]',
+            'tree_taxon_delete' => '[data-test-tree-taxons] [data-test-tree-taxon="%name%"] [data-test-delete]',
             'tree_taxon_move_down' => '[data-test-tree-taxons] [data-test-tree-taxon="%name%"] [data-test-move-down]',
             'tree_taxon_move_up' => '[data-test-tree-taxons] [data-test-tree-taxon="%name%"] [data-test-move-up]',
             'first_tree_taxon' => '[data-test-tree-taxons] [data-test-tree-taxon]:first-child',
             'last_tree_taxon' => '[data-test-tree-taxons] [data-test-tree-taxon]:last-child',
+            'tree_taxon_delete_component' => '[data-live-name-value="sylius_admin:taxon:delete"]',
             'tree_taxon_component' => '[data-live-name-value="sylius_admin:taxon:tree"]',
         ]);
     }
 
-    protected function waitForUpdate(): void
+    protected function waitForUpdate(string $element = 'tree_taxon_component'): void
     {
-        $treeTaxonComponent = $this->getElement('tree_taxon_component');
+        $elementComponent = $this->getElement($element);
         sleep(1); // we need to sleep, as sometimes the check below is executed faster than the treeTaxonComponent sets the busy attribute
-        $treeTaxonComponent->waitFor(1500, function () use ($treeTaxonComponent) {
-            return !$treeTaxonComponent->hasAttribute('busy');
+        $elementComponent->waitFor(1500, function () use ($elementComponent) {
+            return !$elementComponent->hasAttribute('busy');
         });
     }
 }

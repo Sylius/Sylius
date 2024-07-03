@@ -14,11 +14,11 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
-use Sylius\Behat\Page\Admin\Taxon\CreatePage;
+use Sylius\Behat\Page\Admin\Crud\CreatePageInterface;
 
-final class ManagingTranslatableEntitiesContext implements Context
+final readonly class ManagingTranslatableEntitiesContext implements Context
 {
-    public function __construct(private CreatePage $taxonCreatePage)
+    public function __construct(private CreatePageInterface $taxonCreatePage)
     {
     }
 
