@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Element\Admin\Product;
 
+use Behat\Mink\Exception\ElementNotFoundException;
 use Behat\Mink\Session;
 use FriendsOfBehat\SymfonyExtension\Mink\MinkParameters;
 use Sylius\Behat\Element\Admin\Crud\FormElement as BaseFormElement;
@@ -42,11 +43,15 @@ final class TaxonomyFormElement extends BaseFormElement implements TaxonomyFormE
         $this->waitForFormUpdate();
     }
 
-    public function getMainTaxon(): string
+    public function getMainTaxon(): ?string
     {
         $this->changeTab();
 
-        return $this->getElement('selected_main_taxon')->getText();
+        try {
+            return $this->getElement('selected_main_taxon')->getText();
+        } catch (ElementNotFoundException) {
+            return null;
+        }
     }
 
     public function checkProductTaxon(TaxonInterface $taxon): void

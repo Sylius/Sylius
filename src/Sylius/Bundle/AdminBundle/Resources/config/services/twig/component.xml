@@ -376,5 +376,22 @@
                 template="@SyliusAdmin/taxon/sections/tree.html.twig"
             />
         </service>
+
+        <service
+            id="sylius_admin.twig.component.taxon.delete"
+            class="Sylius\Bundle\AdminBundle\Twig\Component\Taxon\DeleteComponent"
+        >
+            <argument type="service" id="security.csrf.token_manager" />
+
+            <call method="setLiveResponder">
+                <argument type="service" id="ux.live_component.live_responder"/>
+            </call>
+
+            <tag
+                name="sylius.live_component"
+                key="sylius_admin:taxon:delete"
+                template="@SyliusAdmin/taxon/sections/tree/actions/dropdown/delete.html.twig"
+            />
+        </service>
     </services>
 </container>
