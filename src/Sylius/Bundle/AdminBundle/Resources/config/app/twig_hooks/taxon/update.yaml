@@ -37,6 +37,8 @@ twig_hooks:
         'sylius_admin.taxon.update.content.sections.tree.actions.dropdown':
             create_child:
                 template: '@SyliusAdmin/taxon/sections/tree/actions/dropdown/create_child.html.twig'
+            delete:
+                component: 'sylius_admin:taxon:delete'
             products_positions:
                 template: '@SyliusAdmin/taxon/sections/tree/actions/dropdown/products_positions.html.twig'
             move_up:
