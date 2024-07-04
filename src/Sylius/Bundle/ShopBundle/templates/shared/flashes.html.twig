@@ -6,7 +6,7 @@
                 {% set type = 'danger' %}
             {% endif %}
 
-            <div class="alert alert-{{ type }}" role="alert" data-test-flash-message>
+            <div class="alert alert-{{ type }} my-0" role="alert" data-test-flash-message>
                 <div class="fw-bold">{{ header|trans }}</div>
                 <div {{ sylius_test_html_attribute('flash-messages') }}>
                     {% if flash is iterable %}
