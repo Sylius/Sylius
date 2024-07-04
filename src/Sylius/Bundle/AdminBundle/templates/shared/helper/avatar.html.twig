@@ -1,16 +1,14 @@
-{% macro default(img, content, class) %}
+{% macro default(img, class) %}
     {% from '@SyliusAdmin/shared/helper/icon.html.twig' import icon %}
 
     <span class="sylius avatar {{ class }}" {% if img %} style="background-image: url({{ img }})" {% endif %}>
-        {% if content %}
-            {{ content }}
-        {% else %}
+        {% if img is not defined or img is empty %}
             {{ icon({ icon: 'user' }) }}
         {% endif %}
     </span>
 {% endmacro %}
 
-{% macro small(img, content, class) %}
+{% macro small(img, class) %}
     {% import _self as _ %}
-    {{ _.default(img, content, 'avatar-sm ' ~ class) }}
+    {{ _.default(img,  'avatar-sm ' ~ class) }}
 {% endmacro %}
