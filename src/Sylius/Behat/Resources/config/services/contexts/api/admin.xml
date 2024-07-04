@@ -243,11 +243,10 @@
 <!--            <argument type="service" id="Sylius\Behat\Client\ResponseCheckerInterface" />-->
 <!--        </service>-->
 
-<!--        <service id="Sylius\Behat\Context\Api\Admin\RemovingTaxonContext">-->
-<!--            <argument type="service" id="sylius.behat.api_platform_client.admin" />-->
-<!--            <argument type="service" id="Sylius\Behat\Client\ResponseCheckerInterface" />-->
-<!--            <argument type="service" id="sylius.behat.shared_storage" />-->
-<!--        </service>-->
+        <service id="Sylius\Behat\Context\Api\Admin\RemovingTaxonContext">
+            <argument type="service" id="sylius.behat.api_platform_client.admin" />
+            <argument type="service" id="Sylius\Behat\Client\ResponseCheckerInterface" />
+        </service>
 
 <!--        <service id="sylius.behat.context.api.admin.managing_promotions" class="Sylius\Behat\Context\Api\Admin\ManagingPromotionsContext">-->
 <!--            <argument type="service" id="sylius.behat.api_platform_client.admin" />-->

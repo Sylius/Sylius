@@ -64,6 +64,7 @@ sylius:
         account: Account
         admin_user: Administrator
         add_new_entry: Add a new entry
+        back_to_dashboard: Back to dashboard
         catalog_promotion:
             dates_details: This operation is time-consuming! Please consider a 2-10 minutes delay starting from the specified dates. The delay depends on the size of the catalog.
         channel:
@@ -94,6 +95,7 @@ sylius:
         order:
             date: 'Order date'
         original_price_details: Original price - this is the price of the product variant It is displayed as crossed-out in the catalog. It is used as the base for current price calculations. If this value is not defined, Catalog Promotion logic will copy value from Price to Original Price.
+        page_not_found: Page not found
         pagination:
             number_of_results: 'Showing %from% to %to% of %total% entries'
         partially_refunded: 'Partially refunded'

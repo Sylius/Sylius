@@ -19,6 +19,7 @@ import './scripts/sticky-header';
 
 import './scripts/bootstrap';
 
+import './images/404.svg';
 import './images/loader.gif';
 import './images/no_data.svg';
 import './images/sylius-logo.svg';

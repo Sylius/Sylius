@@ -19,7 +19,7 @@ interface TaxonomyFormElementInterface
 {
     public function selectMainTaxon(string $taxonName): void;
 
-    public function getMainTaxon(): string;
+    public function getMainTaxon(): ?string;
 
     public function checkProductTaxon(TaxonInterface $taxon): void;
 
