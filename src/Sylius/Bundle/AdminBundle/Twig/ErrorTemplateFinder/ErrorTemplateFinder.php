@@ -17,6 +17,7 @@ use Sylius\Bundle\AdminBundle\SectionResolver\AdminSection;
 use Sylius\Bundle\CoreBundle\SectionResolver\SectionProviderInterface;
 use Sylius\Bundle\UiBundle\Twig\ErrorTemplateFinder\ErrorTemplateFinderInterface;
 use Sylius\Component\Core\Model\AdminUserInterface;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Twig\Environment;
 
@@ -25,6 +26,7 @@ final readonly class ErrorTemplateFinder implements ErrorTemplateFinderInterface
     public function __construct(
         private SectionProviderInterface $sectionProvider,
         private TokenStorageInterface $tokenStorage,
+        private RequestStack $requestStack,
         private Environment $twig,
     ) {
     }
@@ -50,6 +52,9 @@ final readonly class ErrorTemplateFinder implements ErrorTemplateFinderInterface
 
     private function isLoggedInAdmin(): bool
     {
-        return $this->tokenStorage->getToken()?->getUser() instanceof AdminUserInterface;
+        return
+            $this->tokenStorage->getToken()?->getUser() instanceof AdminUserInterface ||
+            null !== $this->requestStack->getMainRequest()?->getSession()->get('_security_admin')
+        ;
     }
 }

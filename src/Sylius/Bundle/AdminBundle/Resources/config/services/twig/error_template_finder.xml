@@ -16,6 +16,7 @@
         <service id="sylius_admin.twig.error_template_finder" class="Sylius\Bundle\AdminBundle\Twig\ErrorTemplateFinder\ErrorTemplateFinder">
             <argument type="service" id="Sylius\Bundle\CoreBundle\SectionResolver\SectionProviderInterface" />
             <argument type="service" id="security.token_storage" />
+            <argument type="service" id="request_stack" />
             <argument type="service" id="twig" />
             <tag name="sylius.twig.error_template_finder" />
         </service>
