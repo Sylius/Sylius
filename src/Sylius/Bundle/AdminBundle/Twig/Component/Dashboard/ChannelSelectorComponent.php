@@ -34,7 +34,6 @@ class ChannelSelectorComponent
     #[LiveProp]
     public string $channelCode = '';
 
-
     /**
      * @param ChannelRepositoryInterface<ChannelInterface> $channelRepository
      */

@@ -45,7 +45,7 @@ final class DeleteComponent
         $this->taxonId = $taxonId;
         $this->dispatchBrowserEvent(
             self::OPEN_DELETE_MODAL_EVENT,
-            ['csrfToken' => $this->csrfTokenManager->getToken($taxonId)->getValue()]
+            ['csrfToken' => $this->csrfTokenManager->getToken($taxonId)->getValue()],
         );
     }
 }
