@@ -32,6 +32,14 @@ final class DashboardController
         private RouterInterface $router,
         private ?StatisticsDataProviderInterface $statisticsDataProvider = null,
     ) {
+        trigger_deprecation(
+            'sylius/admin-bundle',
+            '1.14',
+            sprintf(
+                'Passing an instance of "%s" as the fourth argument is deprecated. It will be removed in Sylius 2.0.',
+                StatisticsDataProviderInterface::class,
+            ),
+        );
     }
 
     public function indexAction(Request $request): Response

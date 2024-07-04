@@ -17,8 +17,15 @@ use Doctrine\ORM\EntityRepository;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\OrderPaymentStates;
 
+trigger_deprecation(
+    'sylius/core',
+    '1.14',
+    'The "%s" class is deprecated and will be removed in Sylius 2.0.',
+    SalesDataProvider::class,
+);
+
 /**
- * @experimental
+ * @deprecated since 1.14 and will be removed in Sylius 2.0.
  */
 final class SalesDataProvider implements SalesDataProviderInterface
 {

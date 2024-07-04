@@ -15,6 +15,16 @@ namespace Sylius\Component\Core\Dashboard;
 
 use Sylius\Component\Core\Model\ChannelInterface;
 
+trigger_deprecation(
+    'sylius/core',
+    '1.14',
+    'The "%s" class is deprecated and will be removed in Sylius 2.0.',
+    DashboardStatisticsProviderInterface::class,
+);
+
+/**
+ * @deprecated since 1.14 and will be removed in Sylius 2.0.
+ */
 interface DashboardStatisticsProviderInterface
 {
     public function getStatisticsForChannel(ChannelInterface $channel): DashboardStatistics;
