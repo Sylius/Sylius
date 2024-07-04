@@ -1,0 +1,19 @@
+twig_hooks:
+    hooks:
+        'sylius_admin.locale.update.content':
+            form:
+                template: '@SyliusAdmin/shared/crud/update/content/form.html.twig'
+                configuration:
+                    render_rest: false
+
+        'sylius_admin.locale.update.content.form':
+            sections:
+                template: '@SyliusAdmin/locale/form/sections.html.twig'
+
+        'sylius_admin.locale.update.content.form.sections':
+            general:
+                template: '@SyliusAdmin/locale/form/sections/general.html.twig'
+
+        'sylius_admin.locale.update.content.form.sections.general':
+            code:
+                template: '@SyliusAdmin/locale/form/sections/general/code.html.twig'
