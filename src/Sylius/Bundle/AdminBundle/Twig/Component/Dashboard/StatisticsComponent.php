@@ -98,8 +98,7 @@ class StatisticsComponent
     public function changeRange(
         #[LiveArg] string $period,
         #[LiveArg] string $interval,
-    ): void
-    {
+    ): void {
         $this->period = $period;
         $this->interval = $interval;
 
