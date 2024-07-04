@@ -22,6 +22,9 @@ trigger_deprecation(
     DashboardStatisticsProviderInterface::class,
 );
 
+/**
+ * @deprecated since 1.14 and will be removed in Sylius 2.0.
+ */
 interface DashboardStatisticsProviderInterface
 {
     public function getStatisticsForChannel(ChannelInterface $channel): DashboardStatistics;

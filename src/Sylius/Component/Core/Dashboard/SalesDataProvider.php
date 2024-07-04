@@ -25,7 +25,7 @@ trigger_deprecation(
 );
 
 /**
- * @experimental
+ * @deprecated since 1.14 and will be removed in Sylius 2.0.
  */
 final class SalesDataProvider implements SalesDataProviderInterface
 {

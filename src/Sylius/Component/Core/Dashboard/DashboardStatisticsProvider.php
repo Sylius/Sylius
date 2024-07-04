@@ -24,6 +24,9 @@ trigger_deprecation(
     DashboardStatisticsProvider::class,
 );
 
+/**
+ * @deprecated since 1.14 and will be removed in Sylius 2.0.
+ */
 class DashboardStatisticsProvider implements DashboardStatisticsProviderInterface
 {
     public function __construct(private OrderRepositoryInterface $orderRepository, private CustomerRepositoryInterface $customerRepository)

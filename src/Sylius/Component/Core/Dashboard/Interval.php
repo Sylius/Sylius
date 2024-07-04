@@ -20,6 +20,9 @@ trigger_deprecation(
     Interval::class,
 );
 
+/**
+ * @deprecated since 1.14 and will be removed in Sylius 2.0.
+ */
 final class Interval
 {
     private function __construct(private string $interval)

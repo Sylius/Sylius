@@ -20,6 +20,9 @@ trigger_deprecation(
     SalesSummaryInterface::class,
 );
 
+/**
+ * @deprecated since 1.14 and will be removed in Sylius 2.0.
+ */
 interface SalesSummaryInterface
 {
     public function getIntervals(): array;
