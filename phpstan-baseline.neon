@@ -3621,11 +3621,6 @@ parameters:
 			path: src/Sylius/Bundle/CoreBundle/Form/EventSubscriber/CustomerRegistrationFormSubscriber.php
 
 		-
-			message: "#^Method Sylius\\\\Bundle\\\\CoreBundle\\\\Form\\\\Extension\\\\LocaleTypeExtension\\:\\:__construct\\(\\) has parameter \\$localeRepository with generic interface Sylius\\\\Component\\\\Resource\\\\Repository\\\\RepositoryInterface but does not specify its types\\: T$#"
-			count: 1
-			path: src/Sylius/Bundle/CoreBundle/Form/Extension/LocaleTypeExtension.php
-
-		-
 			message: "#^Method Sylius\\\\Bundle\\\\CoreBundle\\\\Form\\\\Type\\\\CatalogPromotionScope\\\\ForProductsScopeConfigurationType\\:\\:__construct\\(\\) has parameter \\$productsToCodesTransformer with generic interface Symfony\\\\Component\\\\Form\\\\DataTransformerInterface but does not specify its types\\: T, R$#"
 			count: 1
 			path: src/Sylius/Bundle/CoreBundle/Form/Type/CatalogPromotionScope/ForProductsScopeConfigurationType.php
