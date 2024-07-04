@@ -1,11 +1,13 @@
+{# Rendered with \Sylius\Bundle\AdminBundle\Twig\Component\Taxon\TreeComponent #}
+
 <div {{ attributes.defaults(stimulus_controller('taxon-tree', {treeData: this.tree, autoOpen: true})) }}>
+    <div data-loading>
+        <div class="sylius-loader">
+            <img src="{{ asset('build/admin/images/loader.gif', 'admin') }}" alt="{{ 'sylius.ui.loading'|trans }}"/>
+        </div>
+    </div>
     <div class="card mb-5">
         <div class="card-body">
-            <div data-loading>
-                <div class="sylius-loader">
-                    <img src="{{ asset('build/admin/images/loader.gif', 'admin') }}" alt="{{ 'sylius.ui.loading'|trans }}"/>
-                </div>
-            </div>
             <div class="d-none" data-taxon-tree-target="itemPrototyp">
                 <div class="d-flex justify-content-between infinite-tree-item" {{ sylius_test_html_attribute('tree-taxon', '__TAXON_NAME__') }}>
                     <div class="infinite-tree-node">

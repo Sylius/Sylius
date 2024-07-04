@@ -13,13 +13,17 @@
 
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
-        <defaults public="true" />
+        <service id="sylius_shop.twig.error_template_finder" class="Sylius\Bundle\ShopBundle\Twig\ErrorTemplateFinder\ErrorTemplateFinder">
+            <argument type="service" id="Sylius\Bundle\CoreBundle\SectionResolver\SectionProviderInterface" />
+            <argument type="service" id="twig" />
+            <tag name="sylius.twig.error_template_finder" />
+        </service>
 
-        <service id="sylius.twig.extension.original_price_to_display" class="Sylius\Bundle\ShopBundle\Twig\OrderItemOriginalPriceToDisplayExtension" public="false">
+        <service id="sylius.twig.extension.original_price_to_display" class="Sylius\Bundle\ShopBundle\Twig\OrderItemOriginalPriceToDisplayExtension">
             <tag name="twig.extension" />
         </service>
 
-        <service id="Sylius\Bundle\ShopBundle\Twig\OrderPaymentsExtension" public="false">
+        <service id="Sylius\Bundle\ShopBundle\Twig\OrderPaymentsExtension">
             <argument type="service" id="sylius.payment_methods_resolver" />
             <tag name="twig.extension" />
         </service>

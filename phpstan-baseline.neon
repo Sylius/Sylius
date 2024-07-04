@@ -5401,41 +5401,6 @@ parameters:
 			path: src/Sylius/Component/Core/Customer/Statistics/CustomerStatisticsProvider.php
 
 		-
-			message: "#^Method Sylius\\\\Component\\\\Core\\\\Dashboard\\\\DashboardStatisticsProvider\\:\\:__construct\\(\\) has parameter \\$customerRepository with generic interface Sylius\\\\Component\\\\Core\\\\Repository\\\\CustomerRepositoryInterface but does not specify its types\\: T$#"
-			count: 1
-			path: src/Sylius/Component/Core/Dashboard/DashboardStatisticsProvider.php
-
-		-
-			message: "#^Method Sylius\\\\Component\\\\Core\\\\Dashboard\\\\DashboardStatisticsProvider\\:\\:__construct\\(\\) has parameter \\$orderRepository with generic interface Sylius\\\\Component\\\\Core\\\\Repository\\\\OrderRepositoryInterface but does not specify its types\\: T$#"
-			count: 1
-			path: src/Sylius/Component/Core/Dashboard/DashboardStatisticsProvider.php
-
-		-
-			message: "#^Method Sylius\\\\Component\\\\Core\\\\Dashboard\\\\SalesDataProvider\\:\\:__construct\\(\\) has parameter \\$orderRepository with generic class Doctrine\\\\ORM\\\\EntityRepository but does not specify its types\\: TEntityClass$#"
-			count: 1
-			path: src/Sylius/Component/Core/Dashboard/SalesDataProvider.php
-
-		-
-			message: "#^Method Sylius\\\\Component\\\\Core\\\\Dashboard\\\\SalesSummary\\:\\:getIntervals\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Sylius/Component/Core/Dashboard/SalesSummary.php
-
-		-
-			message: "#^Method Sylius\\\\Component\\\\Core\\\\Dashboard\\\\SalesSummary\\:\\:getSales\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Sylius/Component/Core/Dashboard/SalesSummary.php
-
-		-
-			message: "#^Method Sylius\\\\Component\\\\Core\\\\Dashboard\\\\SalesSummaryInterface\\:\\:getIntervals\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Sylius/Component/Core/Dashboard/SalesSummaryInterface.php
-
-		-
-			message: "#^Method Sylius\\\\Component\\\\Core\\\\Dashboard\\\\SalesSummaryInterface\\:\\:getSales\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Sylius/Component/Core/Dashboard/SalesSummaryInterface.php
-
-		-
 			message: "#^Method Sylius\\\\Component\\\\Core\\\\Distributor\\\\IntegerDistributor\\:\\:distribute\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Sylius/Component/Core/Distributor/IntegerDistributor.php

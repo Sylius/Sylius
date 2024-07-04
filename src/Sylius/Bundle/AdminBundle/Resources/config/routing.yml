@@ -9,12 +9,7 @@ sylius_admin_ajax:
 sylius_admin_dashboard:
     path: /
     defaults:
-        _controller: sylius.controller.admin.dashboard::indexAction
-
-sylius_admin_dashboard_statistics:
-    path: /statistics
-    defaults:
-        _controller: sylius.controller.admin.dashboard::getRawData
+        _controller: sylius.controller.admin.dashboard
 
 sylius_admin_impersonate_user:
     path: /impersonate/{username}

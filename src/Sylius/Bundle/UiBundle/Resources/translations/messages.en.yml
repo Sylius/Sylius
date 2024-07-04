@@ -17,7 +17,7 @@ sylius:
         access_token: 'Access Token'
         access_your_store_account_or_create_a_new_one: 'Access your store account or create a new one'
         account_credentials: 'Account credentials'
-        account_credentials_details: 'This section is optional. If filled in, it will be used to create a shop account for the customer or update password of an existing one.'
+        account_credentials_details: 'This section is optional. If you pass the password, a user account will be created for the customer.'
         account_panel_outline: 'Enjoy all the features that are available on your personal space to view, track and manage all your data'
         action: 'Action'
         actions: 'Actions'

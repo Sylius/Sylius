@@ -21,7 +21,6 @@
     "Behat\\Testwork\\Tester\\Setup\\Setup",
     "Behat\\Testwork\\Tester\\Setup\\Teardown",
     "Doctrine\\DBAL\\Platforms\\MySqlPlatform",
-    "Doctrine\\DBAL\\Platforms\\MySQLPlatform",
     "Http\\Client\\HttpClient",
     "HWI\\Bundle\\OAuthBundle\\Connect\\AccountConnectorInterface",
     "HWI\\Bundle\\OAuthBundle\\OAuth\\Response\\UserResponseInterface",
@@ -61,6 +60,9 @@
     "Psr\\Http\\Message\\RequestFactoryInterface",
     "Psr\\Http\\Message\\StreamFactoryInterface",
     "Sylius\\Bundle\\UiBundle\\Registry\\TemplateBlockRegistryInterface",
+    "Symfony\\Bridge\\Twig\\ErrorRenderer\\TwigErrorRenderer",
+    "Symfony\\Component\\ErrorHandler\\ErrorRenderer\\ErrorRendererInterface",
+    "Symfony\\Component\\ErrorHandler\\Exception\\FlattenException",
     "Symfony\\Component\\Security\\Core\\Encoder\\EncoderFactoryInterface"
   ],
   "php-core-extensions" : [
