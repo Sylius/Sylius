@@ -61,6 +61,14 @@ final class ProductShowPageContext implements Context
     }
 
     /**
+     * @When I try to reach nonexistent product
+     */
+    public function iTryToReachNonexistentProductPage(): void
+    {
+        $this->productShowPage->tryToOpen(['id' => 0, '_locale' => 'en_US']);
+    }
+
+    /**
      * @When I access :product product page
      * @When I access the :product product
      */

@@ -28,4 +28,6 @@ interface TreeElementInterface
     public function moveUpTaxon(string $name): void;
 
     public function moveDownTaxon(string $name): void;
+
+    public function deleteTaxon(string $name): void;
 }

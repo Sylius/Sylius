@@ -9,5 +9,5 @@ Feature: Accessing a product which does not exist
 
     @ui @api
     Scenario: Accessing a product which does not exist
-        When I try to reach unexistent product
+        When I try to reach nonexistent product
         Then I should be informed that the product does not exist

@@ -23,7 +23,6 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\RouterInterface;
 use Twig\Environment;
 
@@ -47,7 +46,7 @@ final readonly class RenderResetPasswordPageAction
         /** @var AdminUserInterface|null $admin */
         $admin = $this->userRepository->findOneBy(['passwordResetToken' => $token]);
         if (null === $admin) {
-            throw new NotFoundHttpException('Token not found');
+            return new RedirectResponse($this->router->generate('sylius_admin_login'));
         }
 
         $lifetime = new \DateInterval($this->tokenTtl);

@@ -14,14 +14,15 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
+use Sylius\Behat\Element\Admin\Product\TaxonomyFormElementInterface;
 use Sylius\Behat\Element\Admin\Taxon\FormElementInterface;
 use Sylius\Behat\Element\Admin\Taxon\ImageFormElementInterface;
 use Sylius\Behat\Element\Admin\Taxon\TreeElementInterface;
 use Sylius\Behat\NotificationType;
+use Sylius\Behat\Page\Admin\Crud\CreatePageInterface;
 use Sylius\Behat\Page\Admin\Crud\CreatePageInterface as BaseCreatePageInterface;
 use Sylius\Behat\Page\Admin\Crud\UpdatePageInterface;
 use Sylius\Behat\Page\Admin\Product\UpdateSimpleProductPageInterface;
-use Sylius\Behat\Page\Admin\Taxon\CreatePageInterface;
 use Sylius\Behat\Service\Helper\JavaScriptTestHelper;
 use Sylius\Behat\Service\NotificationCheckerInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
@@ -29,19 +30,20 @@ use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Webmozart\Assert\Assert;
 
-final class ManagingTaxonsContext implements Context
+final readonly class ManagingTaxonsContext implements Context
 {
     public function __construct(
-        private readonly SharedStorageInterface $sharedStorage,
-        private readonly CreatePageInterface $createPage,
-        private readonly BaseCreatePageInterface $createForParentPage,
-        private readonly UpdatePageInterface $updatePage,
-        private readonly FormElementInterface $formElement,
-        private readonly ImageFormElementInterface $imageFormElement,
-        private readonly TreeElementInterface $treeElement,
-        private readonly NotificationCheckerInterface $notificationChecker,
-        private readonly JavaScriptTestHelper $testHelper,
-        private readonly UpdateSimpleProductPageInterface $updateSimpleProductPage,
+        private SharedStorageInterface $sharedStorage,
+        private CreatePageInterface $createPage,
+        private BaseCreatePageInterface $createForParentPage,
+        private UpdatePageInterface $updatePage,
+        private FormElementInterface $formElement,
+        private ImageFormElementInterface $imageFormElement,
+        private TreeElementInterface $treeElement,
+        private NotificationCheckerInterface $notificationChecker,
+        private JavaScriptTestHelper $testHelper,
+        private UpdateSimpleProductPageInterface $updateSimpleProductPage,
+        private TaxonomyFormElementInterface $productTaxonomyFormElement,
     ) {
     }
 
@@ -271,7 +273,7 @@ final class ManagingTaxonsContext implements Context
     {
         $this->updateSimpleProductPage->open(['id' => $product->getId()]);
 
-        Assert::false($this->updateSimpleProductPage->hasMainTaxon());
+        Assert::null($this->productTaxonomyFormElement->getMainTaxon());
     }
 
     /**
