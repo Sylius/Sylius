@@ -21,7 +21,7 @@
   if (menuSearchInput) {
     menuSearchInput.addEventListener('input', function(e) {
       const query = e.target.value.toLowerCase();
-      const navItems = document.querySelectorAll('.nav-item');
+      const navItems = document.querySelectorAll('.sidebar .nav-item');
 
       navItems.forEach(navItem => {
         const navLink = navItem.querySelector('.nav-link');

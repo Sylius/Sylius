@@ -51,17 +51,33 @@
 .menu-search {
     .btn,
     .form-control {
-        border: 0;
-        background: var(--tblr-navbar-border-color);
+        border: 1px solid transparent;
+        background: transparent;
         transition: opacity 0.1s;
+    }
+
+    .btn {
+        padding-left: 0.4rem;
+        border-right: 0;
+    }
+
+    .form-control {
+        border-left: 0;
     }
 
     > * {
         opacity: 0.5;
     }
 
-    &:has(input[data-menu-search]:focus) > * {
-        opacity: 0.8;
+    &:has(input[data-menu-search]:focus) {
+        > * {
+            opacity: 0.8;
+        }
+
+        .btn,
+        .form-control {
+            border-color: var(--tblr-navbar-border-color);
+        }
     }
 
     [data-menu-search-clear] {
