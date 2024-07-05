@@ -10,7 +10,7 @@ Feature: Adding a new payment method
 
     @ui @api
     Scenario: Adding a new payment method
-        When I want to create a new Offline payment method
+        When I want to create a new offline payment method
         And I name it "Offline" in "English (United States)"
         And I specify its code as "OFF"
         And I add it
@@ -19,7 +19,7 @@ Feature: Adding a new payment method
 
     @ui @api
     Scenario: Adding a new payment method with description
-        When I want to create a new Offline payment method
+        When I want to create a new offline payment method
         And I name it "Offline" in "English (United States)"
         And I specify its code as "OFF"
         And I describe it as "Payment method Offline" in "English (United States)"
@@ -29,7 +29,7 @@ Feature: Adding a new payment method
 
     @ui @api
     Scenario: Adding a new payment method with instructions
-        When I want to create a new Offline payment method
+        When I want to create a new offline payment method
         And I name it "Offline" in "English (United States)"
         And I specify its code as "OFF"
         And I set its instruction as "Bank account: 0000 1111 2222 3333" in "English (United States)"
@@ -40,7 +40,7 @@ Feature: Adding a new payment method
 
     @ui @api
     Scenario: Adding a new payment method for channel
-        When I want to create a new Offline payment method
+        When I want to create a new offline payment method
         And I name it "Offline" in "English (United States)"
         And I specify its code as "OFF"
         And make it available in channel "United States"
