@@ -3,7 +3,7 @@ sylius_admin_locale:
         alias: sylius.locale
         section: admin
         templates: "@SyliusAdmin\\shared\\crud"
-        except: ['show', 'delete']
+        only: ['index', 'create']
         redirect: index
         grid: sylius_admin_locale
         form:
