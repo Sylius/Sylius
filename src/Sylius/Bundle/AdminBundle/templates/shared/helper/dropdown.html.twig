@@ -37,14 +37,14 @@
             }|merge(item) %}
 
             {% if item.type == 'header' %}
-                <span class="dropdown-header">{{ item.title }}</span>
+                <span class="dropdown-header">{{ item.title|trans }}</span>
             {% elseif item.type == 'divider' %}
                 <hr class="dropdown-divider">
             {% else %}
                 {% set extra_class = item.class ? ' ' ~ item.class %}
-                <a class="dropdown-item{{ item.class ? extra_class }}" href="{{ item.url }}" {{ sylius_test_html_attribute('user-dropdown-item', item.title) }}>
+                <a class="dropdown-item{{ item.class ? extra_class }}" href="{{ item.url }}" {{ sylius_test_html_attribute('user-dropdown-item', item.title|trans({}, null, 'en_US')) }}>
                     {{ item.icon ? icon({ icon: item.icon, class: 'icon dropdown-item-icon icon-tabler' ~ extra_class }) }}
-                    {{ item.title }}
+                    {{ item.title|trans }}
                 </a>
             {% endif %}
         {% endfor %}
