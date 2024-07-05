@@ -1,0 +1,23 @@
+twig_hooks:
+    hooks:
+        'sylius_admin.tax_category.create.content':
+            form:
+                template: '@SyliusAdmin/shared/crud/create/content/form.html.twig'
+                configuration:
+                    render_rest: false
+
+        'sylius_admin.tax_category.create.content.form':
+            sections:
+                template: '@SyliusAdmin/tax_category/form/sections.html.twig'
+
+        'sylius_admin.tax_category.create.content.form.sections':
+            details:
+                template: '@SyliusAdmin/tax_category/form/sections/details.html.twig'
+
+        'sylius_admin.tax_category.create.content.form.sections.details':
+            name:
+                template: '@SyliusAdmin/tax_category/form/sections/details/name.html.twig'
+            code:
+                template: '@SyliusAdmin/tax_category/form/sections/details/code.html.twig'
+            description:
+                template: '@SyliusAdmin/tax_category/form/sections/details/description.html.twig'
