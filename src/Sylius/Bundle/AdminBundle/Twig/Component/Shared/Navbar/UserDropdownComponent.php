@@ -13,40 +13,27 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\AdminBundle\Twig\Component\Shared\Navbar;
 
+use Sylius\Bundle\AdminBundle\Provider\LoggedInUserProviderInterface;
 use Sylius\Component\Core\Model\AdminUserInterface;
-use Sylius\Component\User\Repository\UserRepositoryInterface;
-use Symfony\Bundle\SecurityBundle\Security;
-use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
-use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Symfony\UX\TwigComponent\Attribute\ExposeInTemplate;
 
 class UserDropdownComponent
 {
-    /** @param UserRepositoryInterface<AdminUserInterface> $adminUserRepository */
     public function __construct(
         private UrlGeneratorInterface $urlGenerator,
         private TranslatorInterface $translator,
-        private Security $security,
-        private RequestStack $requestStack,
-        private UserRepositoryInterface $adminUserRepository,
+        private LoggedInUserProviderInterface $loggedInUserProvider,
     ) {
     }
 
     #[ExposeInTemplate(name: 'user')]
     public function getUser(): AdminUserInterface
     {
-        $user = $this->security->getUser();
-        if (null === $user) {
-            $user = $this->requestStack->getMainRequest()->getUser();
-        }
-        if (null === $user) {
-            $user = $this->getUserFromSession();
-        }
-
+        $user = $this->loggedInUserProvider->getUser();
         if (!$user instanceof AdminUserInterface) {
-            throw new \RuntimeException('User must be an instance of Sylius\Component\User\Model\UserInterface');
+            throw new \RuntimeException('User must be an instance of ' . AdminUserInterface::class . '.');
         }
 
         return $user;
@@ -92,26 +79,5 @@ class UserDropdownComponent
                 'class' => 'small text-muted',
             ],
         ];
-    }
-
-    public function getUserFromSession(): ?AdminUserInterface
-    {
-        $serializedToken = $this->requestStack->getSession()->get('_security_admin');
-        if (null === $serializedToken) {
-            return null;
-        }
-
-        /** @var false|TokenInterface $token */
-        $token = unserialize($serializedToken);
-        if (false === $token) {
-            return null;
-        }
-
-        $user = $token->getUser();
-        if (!$user instanceof AdminUserInterface) {
-            return null;
-        }
-
-        return $this->adminUserRepository->find($user->getId());
     }
 }

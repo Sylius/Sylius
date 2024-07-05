@@ -13,20 +13,17 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\AdminBundle\Twig\ErrorTemplateFinder;
 
+use Sylius\Bundle\AdminBundle\Provider\LoggedInUserProviderInterface;
 use Sylius\Bundle\AdminBundle\SectionResolver\AdminSection;
 use Sylius\Bundle\CoreBundle\SectionResolver\SectionProviderInterface;
 use Sylius\Bundle\UiBundle\Twig\ErrorTemplateFinder\ErrorTemplateFinderInterface;
-use Sylius\Component\Core\Model\AdminUserInterface;
-use Symfony\Component\HttpFoundation\RequestStack;
-use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Twig\Environment;
 
 final readonly class ErrorTemplateFinder implements ErrorTemplateFinderInterface
 {
     public function __construct(
         private SectionProviderInterface $sectionProvider,
-        private TokenStorageInterface $tokenStorage,
-        private RequestStack $requestStack,
+        private LoggedInUserProviderInterface $loggedInUserProvider,
         private Environment $twig,
     ) {
     }
@@ -35,7 +32,7 @@ final readonly class ErrorTemplateFinder implements ErrorTemplateFinderInterface
     {
         $section = $this->sectionProvider->getSection();
 
-        if ($section instanceof AdminSection && $this->isLoggedInAdmin()) {
+        if ($section instanceof AdminSection && $this->loggedInUserProvider->hasUser()) {
             $template = sprintf('@SyliusAdmin/errors/error%s.html.twig', $statusCode);
             if ($this->twig->getLoader()->exists($template)) {
                 return $template;
@@ -48,13 +45,5 @@ final readonly class ErrorTemplateFinder implements ErrorTemplateFinderInterface
         }
 
         return null;
-    }
-
-    private function isLoggedInAdmin(): bool
-    {
-        return
-            $this->tokenStorage->getToken()?->getUser() instanceof AdminUserInterface ||
-            null !== $this->requestStack->getMainRequest()?->getSession()->get('_security_admin')
-        ;
     }
 }

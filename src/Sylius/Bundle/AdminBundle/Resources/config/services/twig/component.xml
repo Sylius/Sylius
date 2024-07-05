@@ -309,9 +309,7 @@
         >
             <argument type="service" id="router" />
             <argument type="service" id="translator" />
-            <argument type="service" id="security.helper" />
-            <argument type="service" id="request_stack" />
-            <argument type="service" id="sylius.repository.admin_user" />
+            <argument type="service" id="sylius_admin.logged_in_user_provider" />
 
             <tag
                 name="twig.component"
