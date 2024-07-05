@@ -19,7 +19,7 @@ use Sylius\Behat\Page\Admin\DashboardPageInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Webmozart\Assert\Assert;
 
-final class LocaleContext implements Context
+final readonly class LocaleContext implements Context
 {
     public function __construct(
         private DashboardPageInterface $dashboardPage,
@@ -29,15 +29,17 @@ final class LocaleContext implements Context
     }
 
     /**
-     * @Then I should be viewing the administration panel in :localeCode
-     * @Then I should still be viewing the administration panel in :localeCode
-     * @Then they should be viewing the administration panel in :localeCode
+     * @Then I should be viewing the administration panel in :localeCode locale
+     * @Then I should still be viewing the administration panel in :localeCode locale
+     * @Then they should be viewing the administration panel in :localeCode locale
      */
-    public function iShouldBeViewingTheAdministrationPanelIn($localeCode)
+    public function iShouldBeViewingTheAdministrationPanelIn(string $localeCode): void
     {
-        $this->dashboardPage->open();
+        if (!$this->dashboardPage->isOpen()) {
+            $this->dashboardPage->open();
+        }
 
-        Assert::same($this->dashboardPage->getSubHeader(), $this->translate('sylius.ui.overview_of_your_store', $localeCode));
+        Assert::same($this->dashboardPage->getDashboardTitle(), $this->translate('sylius.ui.dashboard', $localeCode));
     }
 
     /**
@@ -45,15 +47,7 @@ final class LocaleContext implements Context
      */
     public function iShouldBeNotifiedThatThisEmailIsNotValidInLocale(string $localeCode): void
     {
-        Assert::same($this->createPage->getValidationMessage('email'), $this->translate('sylius.contact.email.invalid', $localeCode, 'validators'));
-    }
-
-    /**
-     * @Then I should see sidebar catalog section configuration in :localeCode locale
-     */
-    public function iShouldSeeSidebarSectionConfigurationInLocale(string $localeCode): void
-    {
-        Assert::true($this->dashboardPage->isSectionWithLabelVisible($this->translate('sylius.menu.admin.main.catalog.header', $localeCode)));
+        Assert::same($this->createPage->getValidationMessage('field_email'), $this->translate('sylius.contact.email.invalid', $localeCode, 'validators'));
     }
 
     private function translate(string $text, string $localeCode, ?string $domain = null): string

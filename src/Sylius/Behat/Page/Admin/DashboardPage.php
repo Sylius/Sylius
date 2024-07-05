@@ -73,16 +73,9 @@ class DashboardPage extends SymfonyPage implements DashboardPageInterface
         return $this->getElement('average_order_value')->getText();
     }
 
-    /** @throws ElementNotFoundException */
-    public function getSubHeader(): string
+    public function getDashboardTitle(): string
     {
-        return trim($this->getElement('sub_header')->getText());
-    }
-
-    /** @throws ElementNotFoundException */
-    public function isSectionWithLabelVisible(string $name): bool
-    {
-        return $this->getElement('admin_menu')->find('css', sprintf('div:contains(%s)', $name)) !== null;
+        return $this->getElement('dashboard_title')->getText();
     }
 
     /** @throws ElementNotFoundException */
@@ -142,11 +135,11 @@ class DashboardPage extends SymfonyPage implements DashboardPageInterface
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
-            'admin_menu' => '.sylius-admin-menu',
             'average_order_value' => '[data-test-average-order-value]',
             'channel_choosing_button' => '[data-test-choose-channel-button]',
             'channel_choosing_list' => '[data-test-choose-channel-list] a:contains("%channelName%")',
             'customer_list' => '#customers',
+            'dashboard_title' => '[data-test-dashboard-title]',
             'dropdown' => 'i.dropdown',
             'logout' => '[data-test-user-dropdown-item="Logout"]',
             'month_split_by_days_statistics_button' => 'button[data-stats-button="month"]',
@@ -157,7 +150,6 @@ class DashboardPage extends SymfonyPage implements DashboardPageInterface
             'previous_period' => '[data-test-previous-period]',
             'product_navbar_search' => '[data-test-navbar-product-search]',
             'statistics_component' => '[data-test-statistics-component]',
-            'sub_header' => '.ui.header .content .sub.header',
             'total_sales' => '[data-test-total-sales]',
             'year_split_by_months_statistics_button' => '[data-test-year-split-into-months]',
         ]);

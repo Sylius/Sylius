@@ -10,7 +10,7 @@ Feature: Removing locales
         And it uses the "English (United States)" locale by default
         And I am logged in as an administrator
 
-    @todo @ui @api
+    @api @ui
     Scenario: Deleting unused locale
         Given the store has a product "T-Shirt banana"
         And this product is named "Banana T-Shirt with Minions" in the "English (United States)" locale
@@ -19,7 +19,7 @@ Feature: Removing locales
         Then I should be informed that locale "Polish (Poland)" has been deleted
         And only the "English (United States)" locale should be present in the system
 
-    @todo @ui @api
+    @api @ui
     Scenario: Deleting a locale in use
         Given the store has a product "T-Shirt banana"
         And this product is named "Banana T-Shirt with Minions" in the "English (United States)" locale

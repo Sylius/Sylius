@@ -14,20 +14,20 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
+use Sylius\Behat\Element\Admin\Locale\FormElementInterface;
 use Sylius\Behat\NotificationType;
+use Sylius\Behat\Page\Admin\Crud\CreatePageInterface;
 use Sylius\Behat\Page\Admin\Crud\IndexPageInterface;
-use Sylius\Behat\Page\Admin\Locale\CreatePageInterface;
 use Sylius\Behat\Service\NotificationCheckerInterface;
-use Sylius\Component\Locale\Converter\LocaleConverterInterface;
 use Webmozart\Assert\Assert;
 
-final class ManagingLocalesContext implements Context
+final readonly class ManagingLocalesContext implements Context
 {
     public function __construct(
         private CreatePageInterface $createPage,
         private IndexPageInterface $indexPage,
+        private FormElementInterface $formElement,
         private NotificationCheckerInterface $notificationChecker,
-        private LocaleConverterInterface $localeConverter,
     ) {
     }
 
@@ -35,7 +35,7 @@ final class ManagingLocalesContext implements Context
      * @When I want to create a new locale
      * @When I want to add a new locale
      */
-    public function iWantToCreateNewLocale()
+    public function iWantToCreateNewLocale(): void
     {
         $this->createPage->open();
     }
@@ -43,15 +43,15 @@ final class ManagingLocalesContext implements Context
     /**
      * @When I choose :name
      */
-    public function iChoose($name)
+    public function iChoose(string $name): void
     {
-        $this->createPage->chooseName($name);
+        $this->formElement->chooseLocale($name);
     }
 
     /**
      * @When I add it
      */
-    public function iAdd()
+    public function iAdd(): void
     {
         $this->createPage->create();
     }
@@ -68,7 +68,7 @@ final class ManagingLocalesContext implements Context
     /**
      * @Then the store should be available in the :name language
      */
-    public function storeShouldBeAvailableInLanguage($name)
+    public function storeShouldBeAvailableInLanguage(string $name): void
     {
         $doesLocaleExist = $this->indexPage->isSingleResourceOnPage(['name' => $name]);
 
@@ -78,9 +78,9 @@ final class ManagingLocalesContext implements Context
     /**
      * @Then I should not be able to choose :name
      */
-    public function iShouldNotBeAbleToChoose($name)
+    public function iShouldNotBeAbleToChoose(string $name): void
     {
-        Assert::false($this->createPage->isOptionAvailable($name));
+        Assert::false($this->formElement->isLocaleAvailable($name));
     }
 
     /**
