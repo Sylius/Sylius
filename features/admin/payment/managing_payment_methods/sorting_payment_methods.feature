@@ -15,14 +15,14 @@ Feature: Sorting listed payment methods
         And this payment method is named "Płatność Przy Odbiorze" in the "Polish (Poland)" locale
         And I am logged in as an administrator
 
-    @todo @ui @api
+    @todo @api @ui
     Scenario: Payment methods can be sorted by their codes
         Given I am browsing payment methods
         When I start sorting payment methods by code
         Then I should see 3 payment methods in the list
         And the first payment method on the list should have code "cash_on_delivery"
 
-    @todo @ui @api
+    @todo @api @ui
     Scenario: Changing the order of sorting payment methods by their codes
         Given I am browsing payment methods
         And the payment methods are already sorted by code
@@ -30,14 +30,14 @@ Feature: Sorting listed payment methods
         Then I should see 3 payment methods in the list
         And the first payment method on the list should have code "PAYPAL"
 
-    @todo @ui @api
+    @todo @api @ui
     Scenario: Payment methods can be sorted by their names
         Given I am browsing payment methods
         When I start sorting payment methods by name
         Then I should see 3 payment methods in the list
         And the first payment method on the list should have name "Cash on Delivery"
 
-    @todo @ui @api
+    @todo @api @ui
     Scenario: Changing the order of sorting payment methods by their names
         Given I am browsing payment methods
         And the payment methods are already sorted by name
@@ -45,7 +45,7 @@ Feature: Sorting listed payment methods
         Then I should see 3 payment methods in the list
         And the first payment method on the list should have name "PayPal Express Checkout"
 
-    @todo @ui @api
+    @todo @api @ui
     Scenario: Payment methods are always sorted in the default locale
         Given I change my locale to "Polish (Poland)"
         And I am browsing payment methods
