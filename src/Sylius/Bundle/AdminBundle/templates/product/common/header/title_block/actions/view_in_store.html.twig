@@ -41,7 +41,7 @@
                 {% set url = sylius_channel_url(path('sylius_shop_product_show', {'slug': product_translation.slug, '_locale': product_translation.locale}), channel) %}
             {% endif %}
 
-            <a class="btn" href="{{ (url is not defined) ? '#' : url|raw }}" target="_blank" {{ sylius_test_html_attribute('view-in-store') }}>
+            <a class="btn {% if url is not defined %}disabled{% endif %}" href="{{ (url is not defined) ? '#' : url|raw }}" target="_blank" {{ sylius_test_html_attribute('view-in-store') }}>
                 {{ _icon({ icon: 'arrow-up-right', class: 'icon icon-tabler' }) }}
                 {{ 'sylius.ui.view_in_store'|trans }}
             </a>

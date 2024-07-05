@@ -10,12 +10,12 @@ Feature: Preventing a potential XSS attack while adding a new product
         And the store has "No XSS" taxonomy
         And I am logged in as an administrator
 
-    @ui @mink:chromedriver @no-api
+    @no-api @ui @mink:chromedriver
     Scenario: Preventing a potential XSS attack while adding new product
         When I want to create a new simple product
         Then I should be able to name it "No XSS" in "English (United States)" locale
 
-    @todo @ui @javascript @no-api
+    @no-api @ui @mink:chromedriver
     Scenario: Preventing a potential XSS attack while choosing main taxon for a new product
         When I want to create a new simple product
         Then I should be able to choose main taxon "No XSS"

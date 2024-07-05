@@ -1,0 +1,10 @@
+{% from '@SyliusAdmin/shared/helper/icon.html.twig' import icon %}
+
+{% set product = hookable_metadata.context.resource %}
+
+<li>
+    <a class="dropdown-item" href="{{ path('sylius_admin_product_variant_create', {'productId': product.id}) }}">
+        {{ icon({ icon: 'plus', class: 'icon dropdown-item-icon icon-tabler' }) }}
+        {{ 'sylius.ui.create'|trans }}
+    </a>
+</li>

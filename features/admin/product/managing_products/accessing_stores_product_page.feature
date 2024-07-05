@@ -10,7 +10,7 @@ Feature: Accessing a store's product page
         And I am logged in as an administrator
         And I am using "Polish (Poland)" locale for my panel
 
-    @todo @ui @no-api
+    @no-api @ui
     Scenario: Accessing the product shop page from the admin panel when the product has a translation with a defined slug in the administrator's chosen language
         Given the locale "Polish (Poland)" is enabled
         And this product is named "Bulldog francuski T-Shirt" in the "Polish (Poland)" locale
@@ -18,7 +18,7 @@ Feature: Accessing a store's product page
         Then the show product's page button should be enabled
         And it should be leading to the product's page in the "Polish (Poland)" locale
 
-    @todo @ui @no-api
+    @no-api @ui
     Scenario: Accessing the product shop page from the admin panel when the product has a translation with a defined slug in the default channel's language
         Given the locale "French (France)" is enabled
         And this product is named "Tee-shirt bouledogue français" in the "French (France)" locale
@@ -26,7 +26,7 @@ Feature: Accessing a store's product page
         Then the show product's page button should be enabled
         And it should be leading to the product's page in the "German (Germany)" locale
 
-    @todo @ui @no-api
+    @no-api @ui
     Scenario: Accessing the product shop page from the admin panel with using first available locale with slug and enabled in the channel
         Given the locale "French (France)" is enabled
         And the store also operates in "French (France)" locale
@@ -36,7 +36,7 @@ Feature: Accessing a store's product page
         Then the show product's page button should be enabled
         And it should be leading to the product's page in the "French (France)" locale
 
-    @todo @ui @no-api
+    @no-api @ui
     Scenario: Not being able to access the product shop page from the admin panel when the product has no translations meeting the criteria
         Given this product has no translations with a defined slug
         When I want to edit this product

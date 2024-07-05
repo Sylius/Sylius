@@ -10,19 +10,19 @@ Feature: Accessing the variants management from the product edit page
         And this product has option "Model" with values "RS6" and "RS7"
         And I am logged in as an administrator
 
-    @todo @ui @no-api
+    @no-api @ui
     Scenario: Being able to access the variants list page
         When I modify the "Audi" product
         And I go to the variants list
         Then I should be on the list of this product's variants
 
-    @todo @ui @no-api
+    @no-api @ui
     Scenario: Being able to access the variant creation page
         When I modify the "Audi" product
         And I go to the variant creation page
         Then I should be on the variant creation page for this product
 
-    @todo @ui @no-api
+    @no-api @ui
     Scenario: Being able to access the variant generation page
         When I modify the "Audi" product
         And I go to the variant generation page
