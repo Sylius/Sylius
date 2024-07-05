@@ -121,5 +121,12 @@
             <argument type="service" id="sylius.generator.taxon_slug" />
         </service>
         <service id="Sylius\Bundle\AdminBundle\Generator\TaxonSlugGeneratorInterface" alias="sylius_admin.generator.taxon_slug" />
+
+        <service id="sylius_admin.logged_in_user_provider" class="Sylius\Bundle\AdminBundle\Provider\LoggedInAdminProvider">
+            <argument type="service" id="security.helper" />
+            <argument type="service" id="security.token_storage" />
+            <argument type="service" id="request_stack" />
+            <argument type="service" id="sylius.repository.admin_user" />
+        </service>
     </services>
 </container>
