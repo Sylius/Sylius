@@ -25,6 +25,6 @@ final class HomepageController
 
     public function indexAction(Request $request): Response
     {
-        return new Response($this->templatingEngine->render('@SyliusShop/Homepage/index.html.twig'));
+        return new Response($this->templatingEngine->render('@SyliusShop/homepage/index.html.twig'));
     }
 }

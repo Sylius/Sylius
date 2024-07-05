@@ -1,0 +1,11 @@
+twig_hooks:
+    hooks:
+        'sylius_shop.homepage.index':
+            banner:
+                template: '@SyliusShop/homepage/banner.html.twig'
+            latest_deals:
+                template: '@SyliusShop/homepage/latest_deals.html.twig'
+            new_collection:
+                template: '@SyliusShop/homepage/new_collection.html.twig'
+            latest_products:
+                template: '@SyliusShop/homepage/latest_products.html.twig'

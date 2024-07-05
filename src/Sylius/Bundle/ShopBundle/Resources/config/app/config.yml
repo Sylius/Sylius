@@ -4,6 +4,7 @@
 imports:
     - { resource: "@SyliusUiBundle/Resources/config/app/config.yml" }
 
+    - { resource: 'twig_hooks/**/*.yaml' }
     - { resource: "@SyliusShopBundle/Resources/config/app/sylius/sylius_mailer.yml" }
     - { resource: "@SyliusShopBundle/Resources/config/grids/account/order.yml" }
     - { resource: "@SyliusShopBundle/Resources/config/grids/product.yml" }
@@ -92,21 +93,6 @@ sylius_ui:
                 locale_switcher:
                     template: "@SyliusShop/Layout/TopBar/_localeSwitcher.html.twig"
                     priority: 20
-
-        sylius.shop.homepage:
-            blocks:
-                banner:
-                    template: "@SyliusShop/Homepage/banner.html.twig"
-                    priority: 40
-                latest_deals:
-                    template: "@SyliusShop/Homepage/latest_deals.html.twig"
-                    priority: 30
-                new_collection:
-                    template: "@SyliusShop/Homepage/new_collection.html.twig"
-                    priority: 20
-                latest_products:
-                    template: "@SyliusShop/Homepage/latest_products.html.twig"
-                    priority: 10
 
         sylius.shop.cart.widget.button:
             blocks:
