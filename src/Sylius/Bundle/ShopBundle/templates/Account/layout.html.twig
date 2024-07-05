@@ -1,11 +1,13 @@
 {% extends '@SyliusShop/shared/layout/base.html.twig' %}
 
 {% block content %}
-    <div class="container">
-        {% block breadcrumb %}
-        {% endblock %}
+    <div class="container mb-auto">
+        <div class="row my-4">
+            <div class="col-12">
+                {% block breadcrumb %}
+                {% endblock %}
+            </div>
 
-        <div class="row">
             <div class="col-12 col-md-3">
                 {{ sylius_template_event('sylius.shop.account.layout.menu') }}
             </div>

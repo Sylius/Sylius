@@ -3,7 +3,7 @@
 {% block title %}{{ product.name }} | {{ parent() }}{% endblock %}
 
 {% block content %}
-    <div class="container">
+    <div class="container mt-4 mb-5">
         {{ sylius_template_event('sylius.shop.product.show.header', _context) }}
 
         <div class="row g-lg-5 g-xl-6 mb-6">
@@ -17,7 +17,7 @@
             </div>
         </div>
 
-        <div class="mb-6">
+        <div>
             {{ sylius_template_event('sylius.shop.product.show.footer', _context) }}
         </div>
     </div>
