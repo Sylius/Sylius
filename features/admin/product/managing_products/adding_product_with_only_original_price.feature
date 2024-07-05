@@ -8,12 +8,12 @@ Feature: Adding a product with only original price
         Given the store operates on a single channel in "United States"
         And I am logged in as an administrator
 
-    @todo @ui @no-api
+    @no-api @ui
     Scenario: Adding a new simple product without price
         When I want to create a new simple product
         And I specify its code as "BOARD_DICE_BREWING"
-        And I name it "Dice Brewing" in "English (United States)"
-        And I set its slug to "games/Dice-brewing" in "English (United States)"
+        And I name it "Dice Brewing" in "English (United States)" locale
+        And I set its slug to "games/Dice-brewing" in "English (United States)" locale
         And I set its original price to "$100.00" for "United States" channel
         And I add it
         Then I should be notified that it has been successfully created
