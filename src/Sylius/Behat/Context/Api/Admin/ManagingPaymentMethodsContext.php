@@ -418,7 +418,7 @@ final readonly class ManagingPaymentMethodsContext implements Context
     {
         $response = $this->client->index(Resources::PAYMENT_METHODS);
 
-        if ($field === 'Name') {
+        if ($field === 'name') {
             $paymentMethods = $this->responseChecker->getCollection($response);
 
             Assert::same(end($paymentMethods)['translations']['en_US']['name'], $value);
