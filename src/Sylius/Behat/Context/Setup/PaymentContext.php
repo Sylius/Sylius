@@ -128,7 +128,7 @@ final readonly class PaymentContext implements Context
 
     /**
      * @Given the payment method :paymentMethod is disabled
-     * @Given /^(this payment method) has been disabled$/
+     * @Given /^(this payment method) (?:has been|is) disabled$/
      * @When the payment method :paymentMethod gets disabled
      */
     public function theStoreHasAPaymentMethodDisabled(PaymentMethodInterface $paymentMethod)
