@@ -9,7 +9,7 @@ Feature: Editing payment method configured with a Stripe Checkout gateway
         And the store has a payment method "Stripe Checkout" with a code "stripe" and "Stripe Checkout" gateway
         And I am logged in as an administrator
 
-    @ui @no-api
+    @no-api @ui
     Scenario: Changing Stripe Checkout gateway publishable key
         When I want to modify the "Stripe Checkout" payment method
         And I update its "Publishable key" with "some_publishable_key"
@@ -17,7 +17,7 @@ Feature: Editing payment method configured with a Stripe Checkout gateway
         Then I should be notified that it has been successfully edited
         And this payment method "Publishable key" should be "some_publishable_key"
 
-    @ui @no-api
+    @no-api @ui
     Scenario: Changing Stripe Checkout gateway secret key
         When I want to modify the "Stripe Checkout" payment method
         And I update its "Secret key" with "some_secret_key"
