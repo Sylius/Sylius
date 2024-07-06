@@ -2,9 +2,13 @@ twig_hooks:
     hooks:
         'sylius_admin.customer_group.update.content':
             form:
-                template: '@SyliusAdmin/shared/crud/update/content/form.html.twig'
+                component: 'sylius_admin:customer_group:form'
+                props:
+                    resource: '@=_context.resource'
+                    form: '@=_context.form'
                 configuration:
                     render_rest: false
+                    method: 'PUT'
         
         'sylius_admin.customer_group.update.content.form':
             sections:
