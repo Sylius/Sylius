@@ -14,7 +14,7 @@ twig_hooks:
             header:
                 template: '@SyliusAdmin/shared/crud/common/content/header.html.twig'
             form:
-                template: '@SyliusAdmin/shared/crud/update/content/form.html.twig'
+                template: '@SyliusAdmin/shared/crud/common/content/form.html.twig'
                 configuration:
                     render_rest: true
             footer:
