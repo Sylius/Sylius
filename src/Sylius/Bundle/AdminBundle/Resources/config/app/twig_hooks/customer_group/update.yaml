@@ -1,0 +1,21 @@
+twig_hooks:
+    hooks:
+        'sylius_admin.customer_group.update.content':
+            form:
+                template: '@SyliusAdmin/shared/crud/update/content/form.html.twig'
+                configuration:
+                    render_rest: false
+        
+        'sylius_admin.customer_group.update.content.form':
+            sections:
+                template: '@SyliusAdmin/customer_group/form/sections.html.twig'
+
+        'sylius_admin.customer_group.update.content.form.sections':
+            details:
+                template: '@SyliusAdmin/customer_group/form/sections/details.html.twig'
+
+        'sylius_admin.customer_group.update.content.form.sections.details':
+            code:
+                template: '@SyliusAdmin/customer_group/form/sections/details/code.html.twig'
+            name:
+                template: '@SyliusAdmin/customer_group/form/sections/details/name.html.twig'
