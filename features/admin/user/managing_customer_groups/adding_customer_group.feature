@@ -7,7 +7,7 @@ Feature: Adding a new customer group
     Background:
         Given I am logged in as an administrator
 
-    @todo @ui @api
+    @api @ui
     Scenario: Adding a new customer group
         When I want to create a new customer group
         And I specify its code as "RETAIL"
