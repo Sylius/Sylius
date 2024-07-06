@@ -8,7 +8,7 @@ Feature: Deleting customer groups
         Given the store has a customer group "Retail"
         And I am logged in as an administrator
 
-    @todo @ui @api
+    @api @ui
     Scenario: Deleting a customer group
         When I delete the "Retail" customer group
         Then I should be notified that it has been successfully deleted
