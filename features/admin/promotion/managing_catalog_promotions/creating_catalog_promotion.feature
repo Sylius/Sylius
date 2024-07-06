@@ -105,7 +105,7 @@ Feature: Creating a catalog promotion
         And it should have "winter_sale" code and "Winter sale" name
         And the "Winter sale" catalog promotion should apply to all variants of "T-Shirt" product
 
-    @api @todo-ui @mink:chromedriver
+    @api @ui @mink:chromedriver
     Scenario: Creating a catalog promotion with start and end date
         When I want to create a new catalog promotion
         And I specify its code as "winter_sale"
