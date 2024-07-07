@@ -11,5 +11,5 @@ Feature: Browsing currencies
     @api @ui
     Scenario: Browsing currencies in store
         When I want to browse currencies of the store
-        Then I should see 2 currencies in the list
-        And I should see the currency "British Pound" in the list
+        Then I should see 2 currencies on the list
+        And I should see the currency "British Pound" on the list

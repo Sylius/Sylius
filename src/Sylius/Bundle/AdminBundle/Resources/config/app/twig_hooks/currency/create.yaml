@@ -1,0 +1,19 @@
+twig_hooks:
+    hooks:
+        'sylius_admin.currency.create.content':
+            form:
+                template: '@SyliusAdmin/shared/crud/create/content/form.html.twig'
+                configuration:
+                    render_rest: false
+
+        'sylius_admin.currency.create.content.form':
+            sections:
+                template: '@SyliusAdmin/currency/form/sections.html.twig'
+
+        'sylius_admin.currency.create.content.form.sections':
+            general:
+                template: '@SyliusAdmin/currency/form/sections/general.html.twig'
+
+        'sylius_admin.currency.create.content.form.sections.general':
+            code:
+                template: '@SyliusAdmin/currency/form/sections/general/code.html.twig'
