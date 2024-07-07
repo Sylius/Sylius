@@ -7,7 +7,7 @@ Feature: Adding a new currency
     Background:
         Given I am logged in as an administrator
 
-    @api @ui
+    @api @ui @mink:chromedriver
     Scenario: Adding a new currency
         When I want to add a new currency
         And I choose "Euro"
