@@ -8,7 +8,7 @@ Feature: Deleting multiple customer groups
         Given the store has customer groups "Retail", "Wholesale" and "General"
         And I am logged in as an administrator
 
-    @todo @ui @mink:chromedriver @no-api
+    @no-api @ui @mink:chromedriver
     Scenario: Deleting multiple customer groups at once
         When I browse customer groups
         And I check the "Retail" customer group
