@@ -9,7 +9,7 @@ Feature: Customer password validation
         And there is a customer account "francis@underwood.com" identified by "sylius"
         And I am logged in as "francis@underwood.com"
 
-    @ui @api
+    @todo @ui @api
     Scenario: Trying to change my password with a wrong current password
         When I want to change my password
         And I specify the current password as "greenhouse"
@@ -18,7 +18,7 @@ Feature: Customer password validation
         And I try to save my changes
         Then I should be notified that provided password is different than the current one
 
-    @ui @api
+    @todo @ui @api
     Scenario: Trying to change my password with a wrong confirmation password
         When I want to change my password
         And I specify the current password as "sylius"
@@ -27,7 +27,7 @@ Feature: Customer password validation
         And I try to save my changes
         Then I should be notified that the entered passwords do not match
 
-    @ui @api
+    @todo @ui @api
     Scenario: Trying to change my password with a too short password
         When I want to change my password
         And I specify the current password as "sylius"

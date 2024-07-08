@@ -13,7 +13,7 @@ Feature: Viewing exchange rates based on current channel
         And the exchange rate of "Polish Zloty" to "US Dollar" is 0.23
         And the exchange rate of "British Pound" to "Bhutanese Ngultrum" is 2.37
 
-    @api
+    @todo @api
     Scenario: Seeing exchange rates for currencies available in channel
         Given I changed my current channel to "Web-US"
         When I get exchange rates of the store

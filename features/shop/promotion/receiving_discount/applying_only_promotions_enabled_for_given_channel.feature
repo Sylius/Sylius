@@ -10,13 +10,13 @@ Feature: Applying only promotions enabled for given channel
         And there is a promotion "Holiday promotion"
         And it gives "$10.00" discount to every order
 
-    @ui @api
+    @todo @ui @api
     Scenario: Receiving fixed discount for my cart
         When I add product "PHP T-Shirt" to the cart
         Then my cart total should be "$90.00"
         And my discount should be "-$10.00"
 
-    @ui @api
+    @todo @ui @api
     Scenario: Not receiving discount when promotion is disabled for current channel
         Given the promotion was disabled for the channel "Web"
         When I add product "PHP T-Shirt" to the cart

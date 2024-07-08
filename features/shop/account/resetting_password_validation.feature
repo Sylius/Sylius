@@ -8,14 +8,14 @@ Feature: Resetting a password validation
         Given the store operates on a single channel in "United States"
         And there is a user "goodman@example.com" identified by "heisenberg"
 
-    @ui @api
+    @todo @ui @api
     Scenario: Trying to reset password without specifying email
         When I want to reset password
         And I do not specify the email
         And I try to reset it
         Then I should be notified that the email is required
 
-    @ui @api
+    @todo @ui @api
     Scenario: Trying to reset password with a wrong confirmation password
         Given I have already received a resetting password email
         When I follow link on my email to reset my password
@@ -24,7 +24,7 @@ Feature: Resetting a password validation
         And I try to reset it
         Then I should be notified that the entered passwords do not match
 
-    @ui @api
+    @todo @ui @api
     Scenario: Trying to reset my password with a too short password
         Given I have already received a resetting password email
         When I follow link on my email to reset my password

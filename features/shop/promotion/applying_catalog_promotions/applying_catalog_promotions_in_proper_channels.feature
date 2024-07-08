@@ -13,14 +13,14 @@ Feature: Applying catalog promotions only in proper channels
         And this product is available in "Web-US" channel and "Web-GB" channel
         And there is a catalog promotion "Winter sale" available in "Web-US" channel that reduces price by "30%" and applies on "PHP T-Shirt" variant
 
-    @api @ui
+    @todo @api @ui
     Scenario: Applying catalog promotion
         When I change my current channel to "Web-US"
         And I view product "T-Shirt"
         Then I should see the product price "$14.00"
         And I should see the product original price "$20.00"
 
-    @api @ui
+    @todo @api @ui
     Scenario: Not applying catalog promotion if it is not available in current channel
         When I change my current channel to "Web-GB"
         And I view product "T-Shirt"

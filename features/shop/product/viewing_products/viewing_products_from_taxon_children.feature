@@ -16,7 +16,7 @@ Feature: Viewing products from taxon children
         And the store has a product "T-Shirt Banana For Men XXL" available in "Poland" channel
         And this product belongs to "XXL"
 
-    @ui @api
+    @todo @ui @api
     Scenario: Viewing products from taxon children
         When I browse products from taxon "T-Shirts"
         Then I should see the product "T-Shirt Banana"

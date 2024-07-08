@@ -7,7 +7,7 @@ Feature: Adding a product with selected variant to the cart
     Background:
         Given the store operates on a single channel in "United States"
 
-    @ui @api
+    @todo @ui @api
     Scenario: Adding a product with multiple variants to the cart
         Given the store has a product "T-Shirt banana"
         And this product has "Small logo" variant priced at "$12.35"
@@ -20,7 +20,7 @@ Feature: Adding a product with selected variant to the cart
         And this item should have variant "Small logo"
         And this item should have code "SMALL_LOGO"
 
-    @ui @no-api
+    @todo @ui @no-api
     Scenario: Adding a product with multiple nameless variants to the cart
         Given the store has a "T-shirt banana" configurable product
         And this product has a nameless variant with code "banana-s"

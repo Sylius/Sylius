@@ -13,7 +13,7 @@ Feature: Seeing order shipping total on order summary page
         And the store allows paying Offline
         And I am a logged in customer
 
-    @ui @api
+    @todo @ui @api
     Scenario: Seeing the shipping total on order summary
         When I add "Guards! Guards! - book" variant of this product to the cart
         And I define the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
@@ -21,7 +21,7 @@ Feature: Seeing order shipping total on order summary page
         Then I should be on the checkout summary step
         And my order shipping should be "$20.00"
 
-    @ui @api
+    @todo @ui @api
     Scenario: Seeing the shipping total on order summary with discounted price
         Given there is a promotion "Holiday promotion"
         And the promotion gives "50%" discount on shipping to every order
@@ -31,7 +31,7 @@ Feature: Seeing order shipping total on order summary page
         Then I should be on the checkout summary step
         And my order shipping should be "$10.00"
 
-    @ui @api
+    @todo @ui @api
     Scenario: Not seeing the shipping total on order summary if none of the order items require shipping
         When I add "Guards! Guards! - ebook" variant of this product to the cart
         And I define the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"

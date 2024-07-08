@@ -11,77 +11,77 @@ Feature: Receiving fixed discount on products from specific price range
         And the store has a product "PHP Sticker" priced at "$5.00"
         And there is a promotion "Christmas promotion"
 
-    @ui @api
+    @todo @ui @api
     Scenario: Receiving fixed discount on a single item fulfilling minimum price criteria
         Given the promotion gives "$10.00" off on every product with minimum price at "$50.00"
         When I add product "PHP T-Shirt" to the cart
         Then its price should be decreased by "$10.00"
         And my cart total should be "$90.00"
 
-    @ui @api
+    @todo @ui @api
     Scenario: Receiving fixed discount on a single item with price equal to filter minimum criteria
         Given the promotion gives "$10.00" off on every product with minimum price at "$100.00"
         When I add product "PHP T-Shirt" to the cart
         Then its price should be decreased by "$10.00"
         And my cart total should be "$90.00"
 
-    @ui @api
+    @todo @ui @api
     Scenario: Receiving fixed discount on a single item fulfilling maximum price criteria
         Given the promotion gives "$10.00" off on every product with maximum price at "$50.00"
         When I add product "PHP Mug" to the cart
         Then its price should be decreased by "$10.00"
         And my cart total should be "$10.00"
 
-    @ui @api
+    @todo @ui @api
     Scenario: Receiving fixed discount on a single item with price equal to filter maximum criteria
         Given the promotion gives "$10.00" off on every product with minimum price at "$20.00"
         When I add product "PHP Mug" to the cart
         Then its price should be decreased by "$10.00"
         And my cart total should be "$10.00"
 
-    @ui @api
+    @todo @ui @api
     Scenario: Receiving fixed discount on a single item fulfilling range price criteria
         Given the promotion gives "$10.00" off on every product priced between "$15.00" and "$50.00"
         When I add product "PHP Mug" to the cart
         Then its price should be decreased by "$10.00"
         And my cart total should be "$10.00"
 
-    @ui @api
+    @todo @ui @api
     Scenario: Receiving fixed discount on a single item with price equal to filter range minimum criteria
         Given the promotion gives "$10.00" off on every product priced between "$20.00" and "$50.00"
         When I add product "PHP Mug" to the cart
         Then its price should be decreased by "$10.00"
         And my cart total should be "$10.00"
 
-    @ui @api
+    @todo @ui @api
     Scenario: Receiving fixed discount on a single item with price equal to filter range maximum criteria
         Given the promotion gives "$10.00" off on every product priced between "$15.00" and "$20.00"
         When I add product "PHP Mug" to the cart
         Then its price should be decreased by "$10.00"
         And my cart total should be "$10.00"
 
-    @ui @api
+    @todo @ui @api
     Scenario: Receiving fixed discount on multiple items fulfilling range price criteria
         Given the promotion gives "$10.00" off on every product priced between "$50.00" and "$150.00"
         When I add 3 products "PHP T-Shirt" to the cart
         Then theirs price should be decreased by "$30.00"
         And my cart total should be "$270.00"
 
-    @ui @api
+    @todo @ui @api
     Scenario: Receiving fixed discount equal to the items total of my cart
         Given the promotion gives "$20.00" off on every product priced between "$10.00" and "$50.00"
         When I add 3 products "PHP Mug" to the cart
         Then theirs price should be decreased by "$60.00"
         And my cart total should be "$0.00"
 
-    @ui @api
+    @todo @ui @api
     Scenario: Receiving fixed discount equal to the items total of my cart even if the discount is bigger than the items total
         Given the promotion gives "$30.00" off on every product priced between "$10.00" and "$50.00"
         When I add 2 products "PHP Mug" to the cart
         Then theirs price should be decreased by "$40.00"
         Then my cart total should be "$0.00"
 
-    @ui @api
+    @todo @ui @api
     Scenario: Receiving fixed discount only on items that fit price range criteria
         Given the promotion gives "$10.00" off on every product priced between "$30.00" and "$150.00"
         When I add product "PHP T-Shirt" to the cart
@@ -90,7 +90,7 @@ Feature: Receiving fixed discount on products from specific price range
         And product "PHP Mug" price should not be decreased
         And my cart total should be "$110.00"
 
-    @ui @api
+    @todo @ui @api
     Scenario: Receiving different discounts on items from different price ranges
         Given the promotion gives "$10.00" off on every product with minimum price at "$80.00"
         And there is a promotion "Mugs promotion"

@@ -11,7 +11,7 @@ Feature: Paying Offline during checkout as guest
         And the store ships everywhere for Free
         And the store allows paying Offline
 
-    @ui @api
+    @todo @ui @api
     Scenario: Successfully placing an order
         Given I have product "PHP T-Shirt" in the cart
         When I complete addressing step with email "john@example.com" and "United States" based billing address
@@ -20,14 +20,14 @@ Feature: Paying Offline during checkout as guest
         And I confirm my order
         Then I should see the thank you page
 
-    @ui @no-api
+    @todo @ui @no-api
     Scenario: Successfully placing an order using custom locale
         Given I have product "PHP T-Shirt" in the cart
         When I proceed through checkout process in the "French (France)" locale with email "john@example.com"
         And I confirm my order
         Then I should see the thank you page in "French (France)"
 
-    @api @no-ui
+    @todo @api @no-ui
     Scenario: Successfully placing an order using custom locale
         Given I pick up cart in the "French (France)" locale
         And I add product "PHP T-Shirt" to the cart

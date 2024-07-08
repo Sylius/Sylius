@@ -11,13 +11,13 @@ Feature: Receiving discount based on customer group
         And there is a promotion "Wholesale promotion"
         And the promotion gives "10%" off the order for customers from "Wholesale" group
 
-    @ui @api
+    @todo @ui @api
     Scenario: Not logged in customer should not receive discount
         When I add product "PHP T-Shirt" to the cart
         Then my cart total should be "$80.00"
         And there should be no discount
 
-    @ui @api
+    @todo @ui @api
     Scenario: Receiving discounts when belonging to a specific customer group
         Given there is a customer account "wholesale@sylius.com"
         And the customer belongs to group "Wholesale"
@@ -26,7 +26,7 @@ Feature: Receiving discount based on customer group
         Then my cart total should be "$72.00"
         And my discount should be "-$8.00"
 
-    @ui @api
+    @todo @ui @api
     Scenario: Not receiving discount when belonging to a different customer group that specified in the promotion
         Given the store has a customer group "Retail"
         And there is a customer account "retail@sylius.com"

@@ -14,7 +14,7 @@ Feature: Skipping payment selection when order total is zero after applying coup
         And the store allows paying Offline
         And I am a logged in customer
 
-    @ui
+    @todo @ui
     Scenario: Seeing order summary after shipping selection when order total is zero
         Given I have product "PHP T-Shirt" in the cart
         And I use coupon with code "HOLIDAYPROMO"

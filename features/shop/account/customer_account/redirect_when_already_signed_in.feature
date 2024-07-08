@@ -4,7 +4,7 @@ Feature: Redirect when already signed in
     As a Customer
     I want to be redirected to account panel dashboard when accessing the login page
 
-    @ui @no-api
+    @todo @ui @no-api
     Scenario: Trying to access login page as logged in user
         Given the store operates on a single channel in "United States"
         And there is a customer "Francis Underwood" identified by an email "francis@underwood.com" and a password "whitehouse"

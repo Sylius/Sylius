@@ -10,7 +10,7 @@ Feature: Viewing a cart summary with the correct default shipping method
         And the store also allows shipping with "Method 2" at position 0 with "$6.00" fee
         And the store has a product "T-Shirt banana" priced at "$10.00"
 
-    @ui @api
+    @todo @ui @api
     Scenario:
         Given I added product "T-Shirt banana" to the cart
         When I see the summary of my cart

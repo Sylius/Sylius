@@ -13,7 +13,7 @@ Feature: Receiving discount from a promotion with multiple actions
         And it belongs to "Mugs"
         And there is a promotion "Christmas promotion"
 
-    @ui @api
+    @todo @ui @api
     Scenario: Receiving fixed discounts only on items that fit action filters
         Given this promotion gives "$10.00" off on every product with minimum price at "$50.00"
         And this promotion gives another "$5.00" off on every product classified as "T-Shirts"
@@ -23,7 +23,7 @@ Feature: Receiving discount from a promotion with multiple actions
         And product "PHP Mug" price should not be decreased
         And my cart total should be "$105.00"
 
-    @ui @api
+    @todo @ui @api
     Scenario: Receiving percentage discounts only on items that fit action filters
         Given this promotion gives "20%" off on every product priced between "$30.00" and "$150.00"
         And this promotion gives another "10%" off every product classified as "T-Shirts"

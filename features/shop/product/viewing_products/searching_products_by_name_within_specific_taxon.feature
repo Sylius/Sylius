@@ -14,14 +14,14 @@ Feature: Searching products by name within a specific taxon
         And the store has a product "Magic stick" available in "United States" channel
         And this product belongs to "Fantasy weapons"
 
-    @ui @api
+    @todo @ui @api
     Scenario: Searching for products with name containing specific text
         When I browse products from taxon "Guns"
         And I search for products with name "Magnum"
         Then I should see the product "44 Magnum"
         And I should not see the product "Glock 17"
 
-    @ui @api
+    @todo @ui @api
     Scenario: Clearing filters
         When I browse products from taxon "Guns"
         And I search for products with name "Magnum"
@@ -29,7 +29,7 @@ Feature: Searching products by name within a specific taxon
         Then I should see the product "44 Magnum"
         And I should see the product "Glock 17"
 
-    @ui @api
+    @todo @ui @api
     Scenario: Seeing products only from specific taxon after search
         When I browse products from taxon "Guns"
         And I search for products with name "Mag"

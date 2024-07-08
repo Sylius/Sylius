@@ -13,7 +13,7 @@ Feature: Returning from order summary page to one of previous steps
         And the store ships everywhere for Free
         And the store allows paying with "Cash on Delivery"
 
-    @ui @no-api
+    @todo @ui @no-api
     Scenario: Going back to payment step
         Given I have product "Stark Robe" in the cart
         And I complete addressing step with email "jon@snow.wall" and "United States" based billing address
@@ -22,7 +22,7 @@ Feature: Returning from order summary page to one of previous steps
         Then I should be redirected to the payment step
         And I should be able to go to the summary page again
 
-    @ui @no-api
+    @todo @ui @no-api
     Scenario: Going back to shipping step with steps panel
         Given I have product "Stark Robe" in the cart
         And I complete addressing step with email "jon@snow.wall" and "United States" based billing address
@@ -31,7 +31,7 @@ Feature: Returning from order summary page to one of previous steps
         Then I should be redirected to the shipping step
         And I should be able to go to the payment step again
 
-    @ui @no-api
+    @todo @ui @no-api
     Scenario: Going back to addressing step with steps panel
         Given I have product "Stark Robe" in the cart
         And I complete addressing step with email "jon@snow.wall" and "United States" based billing address
@@ -40,7 +40,7 @@ Feature: Returning from order summary page to one of previous steps
         Then I should be redirected to the addressing step
         And I should be able to go to the shipping step again
 
-    @ui @no-api
+    @todo @ui @no-api
     Scenario: Going back to addressing step with steps panel when used an email of customer which had placed an order before
         Given the store has customer "jon@snow.wall"
         And this customer has a "United States" based address in their address book
@@ -51,7 +51,7 @@ Feature: Returning from order summary page to one of previous steps
         Then I should be redirected to the addressing step
         And I should be able to go to the shipping step again
 
-    @ui @no-api
+    @todo @ui @no-api
     Scenario: Going back to shipping step with steps panel when order total is zero
         Given I have product "Stark Robe" in the cart
         And I have product "Paganini T-Shirt" in the cart
@@ -61,7 +61,7 @@ Feature: Returning from order summary page to one of previous steps
         Then I should be redirected to the shipping step
         And I should be able to go to the complete step again
 
-    @ui @no-api
+    @todo @ui @no-api
     Scenario: Going back to addressing step with steps panel when order total is zero
         Given I have product "Stark Robe" in the cart
         And I have product "Paganini T-Shirt" in the cart

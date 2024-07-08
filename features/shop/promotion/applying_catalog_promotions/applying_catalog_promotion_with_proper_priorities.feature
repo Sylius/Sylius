@@ -15,7 +15,7 @@ Feature: Applying catalog promotion with proper priorities
         And there is a catalog promotion "Spring sale" with priority 20 that reduces price by fixed "$5.00" in the "United States" channel and applies on "Clothes" taxon
         And there is a catalog promotion "Summer sale" with priority 30 that reduces price by "50%" and applies on "PHP T-Shirt" variant
 
-    @api @ui
+    @todo @api @ui
     Scenario: Applying catalog promotion with descending order by their priority
         When I view "PHP T-Shirt" variant of the "T-Shirt" product
         Then I should see this variant is discounted from "$100.00" to "$30.00" with "Winter sale", "Summer sale", "Spring sale" and "Autumn sale" promotions

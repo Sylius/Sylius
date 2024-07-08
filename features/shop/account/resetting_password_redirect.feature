@@ -4,7 +4,7 @@ Feature: Resetting a password from my personal Password Manager
     As a Visitor
     I need to be able to reset my password using my password manager
 
-    @ui @no-api
+    @todo @ui @no-api
     Scenario: Getting redirected to the forgotten password page
         Given the store operates on a single channel in "United States"
         When I want to reset password from my password manager

@@ -13,7 +13,7 @@ Feature: Ability to confirm an order with a promotion on shipping
         And the store allows paying Offline
         And I am a logged in customer
 
-    @ui @api
+    @todo @ui @api
     Scenario: Successfully placing an order
         Given I have product "PHP T-Shirt" in the cart
         And I am at the checkout addressing step

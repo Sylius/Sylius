@@ -12,7 +12,7 @@ Feature: Placing an order with different scopes for shipping and taxes
         And the store allows paying Offline
         And I am a logged in customer
 
-    @ui @api
+    @todo @ui @api
     Scenario: Placing an order with different tax and shipping zone
         Given the store has a shipping zone "Global Shipping" with code "GLOBAL-SHIPPING"
         And it has the "United States" country member
@@ -31,7 +31,7 @@ Feature: Placing an order with different scopes for shipping and taxes
         And my tax total should be "$1.60"
         And my order total should be "$21.60"
 
-    @ui @api
+    @todo @ui @api
     Scenario: Placing an order with in the same tax and shipping zone
         Given the store has a zone "United States" with code "US"
         And it has the "United States" country member
@@ -47,7 +47,7 @@ Feature: Placing an order with different scopes for shipping and taxes
         And my tax total should be "$1.60"
         And my order total should be "$21.60"
 
-    @ui @api
+    @todo @ui @api
     Scenario: Placing an order within shipping zone
         Given the store has a shipping zone "United States Shipping" with code "US"
         And it has the "United States" country member

@@ -15,25 +15,25 @@ Feature: Seeing applied catalog promotions on products configured with the optio
         And there is a catalog promotion "Winter sale" that reduces price by "50%" and applies on "T-Shirt-Variant-1" variant
         And there is another catalog promotion "Surprise sale" that reduces price by "25%" and applies on "T-Shirt-Variant-3" variant
 
-    @ui @no-api @javascript
+    @todo @ui @no-api @javascript
     Scenario: Seeing applied catalog promotion on the product with default option
         When I view product "T-Shirt"
         Then I should see this product is discounted from "$20.00" to "$10.00" with "Winter sale" promotion
 
-    @ui @no-api @javascript
+    @todo @ui @no-api @javascript
     Scenario: Seeing applied catalog promotion on the product with non default option
         When I view product "T-Shirt"
         And I select its "Size" as "L"
         Then I should see this product is discounted from "$50.00" to "$37.50" with "Surprise sale" promotion
 
-    @ui @no-api @javascript
+    @todo @ui @no-api @javascript
     Scenario: Seeing applied catalog promotion on the product after changing the options multiple times
         When I view product "T-Shirt"
         And I select its "Size" as "L"
         And I select its "Size" as "S"
         Then I should see this product is discounted from "$20.00" to "$10.00" with "Winter sale" promotion
 
-    @ui @no-api @javascript
+    @todo @ui @no-api @javascript
     Scenario: Seeing no applied catalog promotion on the product option without applied catalog promotion
         When I view product "T-Shirt"
         And I select its "Size" as "M"

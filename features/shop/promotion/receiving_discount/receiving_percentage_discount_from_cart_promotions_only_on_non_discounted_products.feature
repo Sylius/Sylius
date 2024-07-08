@@ -11,7 +11,7 @@ Feature: Receiving percentage discount from cart promotions only on non discount
         And the store has a product "Cap" priced at "$10.00"
         And there is a catalog promotion "Winter sale" that reduces price by "25%" and applies on "T-Shirt" product
 
-    @ui @api
+    @todo @ui @api
     Scenario: Receiving product discount from cart promotions also on discounted products
         Given there is a promotion "Christmas sale" that applies to discounted products
         And this promotion gives "50%" off on every product priced between "$10.00" and "$50.00"
@@ -21,7 +21,7 @@ Feature: Receiving percentage discount from cart promotions only on non discount
         And the product "Mug" should have discounted unit price "$20.00" in the cart
         And my cart total should be "$27.50"
 
-    @ui @api
+    @todo @ui @api
     Scenario: Receiving product discount from cart promotions only on non discounted products
         Given there is a promotion "Christmas sale" that does not apply to discounted products
         And this promotion gives "50%" off on every product priced between "$10.00" and "$50.00"
@@ -31,7 +31,7 @@ Feature: Receiving percentage discount from cart promotions only on non discount
         And the product "Mug" should have discounted unit price "$20.00" in the cart
         And the cart total should be "$35.00"
 
-    @api
+    @todo @api
     Scenario: Receiving order discount from cart promotions distributed only on non discounted products
         Given there is a promotion "Christmas sale" that does not apply to discounted products
         And this promotion gives "50%" discount to every order

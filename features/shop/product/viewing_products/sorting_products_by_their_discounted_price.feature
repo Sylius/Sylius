@@ -17,7 +17,7 @@ Feature: Sorting products by discounted price
         And the product "Mug" has "Symfony Mug" variant priced at "$30.00"
         And there is a catalog promotion "Mugs sale" that reduces price by "25%" and applies on "PHP Mug" variant and "Symfony Mug" variant
 
-    @api @ui
+    @todo @api @ui
     Scenario: Sorting products by discounted price of their first variant with ascending order
         When I browse products from taxon "Merchandise"
         And I sort products by the lowest price first

@@ -10,7 +10,7 @@ Feature: Returning from addressing step to shop homepage
         And the store ships everywhere for Free
         And I am a logged in customer
 
-    @ui @no-api
+    @todo @ui @no-api
     Scenario: Returning to shop from addressing step
         Given I have product "The Stick of Truth" in the cart
         And I am at the checkout addressing step

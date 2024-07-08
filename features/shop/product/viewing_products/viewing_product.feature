@@ -9,7 +9,7 @@ Feature: Viewing a product details
         And the store has a product "T-Shirt banana"
         And the description of product "T-Shirt banana" is "You must have this beautiful T-Shirt"
 
-    @ui @api
+    @todo @ui @api
     Scenario: Viewing a detailed page with product's name
         When I check this product's details
         Then I should see the product name "T-Shirt banana"

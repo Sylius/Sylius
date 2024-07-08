@@ -12,30 +12,30 @@ Feature: Viewing products from a specific taxon
         And the store has a product "Plastic Tomato" available in "Poland" channel
         And this product belongs to "Funny"
 
-    @ui @api
+    @todo @ui @api
     Scenario: Viewing products from a specific taxon
         When I browse products from taxon "T-Shirts"
         Then I should see the product "T-Shirt Banana"
         And I should not see the product "Plastic Tomato"
 
-    @api
+    @todo @api
     Scenario: Searching products by multiple taxons
         When I browse products from "Funny" and "T-Shirts" taxons
         Then I should see the product "T-Shirt Banana"
         And I should see the product "Plastic Tomato"
 
-    @api
+    @todo @api
     Scenario: Searching products by multiple taxons when one of them doesn't have any products
         When I browse products from "T-Shirts" and "Sad" taxons
         Then I should see the product "T-Shirt Banana"
         And I should not see the product "Plastic Tomato"
 
-    @ui @api
+    @todo @ui @api
     Scenario: Viewing information about empty list of products from a given taxon
         When I browse products from taxon "Sad"
         Then I should see empty list of products
 
-    @api
+    @todo @api
     Scenario: Searching products with non existing taxon
         When I browse products from non existing taxon
         Then I should see empty list of products

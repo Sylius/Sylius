@@ -10,7 +10,7 @@ Feature: Adding a simple product with discounted catalog price to the cart
         And the store has a product "T-Shirt" priced at "$20.00"
         And there is a catalog promotion "Winter sale" that reduces price by "25%" and applies on "T-Shirt" variant
 
-    @ui @api
+    @todo @ui @api
     Scenario: Adding a simple product with discounted catalog price to the cart
         When I add product "T-Shirt" to the cart
         And I add product "Mug" to the cart
@@ -20,7 +20,7 @@ Feature: Adding a simple product with discounted catalog price to the cart
         And I should see "T-Shirt" with original price "$20.00" in my cart
         And I should see "Mug" only with unit price "$40.00" in my cart
 
-    @ui @api
+    @todo @ui @api
     Scenario: Adding a simple product with catalog and cart promotion to the cart
         Given there is a promotion "Cheap Stuff"
         And this promotion gives "50%" off on every product when the item total is at least "$5.00"

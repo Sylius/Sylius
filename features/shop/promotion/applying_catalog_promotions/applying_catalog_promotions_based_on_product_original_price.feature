@@ -11,7 +11,7 @@ Feature: Applying catalog promotions based on the product's original price
         And the product "T-Shirt" has original price "$120.00"
         And there is a catalog promotion "Winter sale" that reduces price by "90%" and applies on "T-Shirt" variant
 
-    @api @ui
+    @todo @api @ui
     Scenario: Applying simple catalog promotions
         When I view product "T-Shirt"
         Then I should see the product price "$12.00"

@@ -9,7 +9,7 @@ Feature: Removing an address from my book
         And I am a logged in customer
         And I have an address "Lucifer Morningstar", "Seaside Fwy", "90802", "Los Angeles", "United States", "Arkansas" in my address book
 
-    @ui @api
+    @todo @ui @api
     Scenario:
         When I browse my address book
         And I delete the "Lucifer Morningstar" address

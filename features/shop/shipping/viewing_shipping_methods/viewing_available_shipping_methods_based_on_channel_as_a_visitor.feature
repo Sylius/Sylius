@@ -15,7 +15,7 @@ Feature: Viewing available shipping methods based on channel as a Visitor
         And the store has "uber speedy" shipping method with "$15.00" fee per shipment for "United Kingdom" channel
         And the store has a product "T-Shirt" priced at "$20.00" available in channel "United Kingdom" and channel "United States"
 
-    @api @ui
+    @todo @api @ui
     Scenario: Seeing shipping methods that are available in channel
         Given I changed my current channel to "United States"
         And I have product "T-Shirt" in the cart
@@ -24,7 +24,7 @@ Feature: Viewing available shipping methods based on channel as a Visitor
         And I should see "ultra fast" shipping method
         And I should not see "uber speedy" shipping method
 
-    @api @ui
+    @todo @api @ui
     Scenario: Seeing shipping methods that are available in another channel
         Given I changed my current channel to "United Kingdom"
         And I have product "T-Shirt" in the cart

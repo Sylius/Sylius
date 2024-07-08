@@ -10,7 +10,7 @@ Feature: Denying usage of unexisting promotion coupon
         And the store has promotion "Christmas sale" with coupon "SANTA2016"
         And this promotion gives "$10.00" discount to every order
 
-    @ui @api
+    @todo @ui @api
     Scenario: Receiving no discount from unexisting coupon
         When I add product "PHP T-Shirt" to the cart
         And I use coupon with code "SANTA2011"

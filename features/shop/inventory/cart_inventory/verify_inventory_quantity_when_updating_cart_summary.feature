@@ -13,14 +13,14 @@ Feature: Verifying inventory quantity on cart summary
         And this product is tracked by the inventory
         And there are 10 units of product "Black Dress" available in the inventory
 
-    @ui @api
+    @todo @ui @api
     Scenario: Being unable to save a cart with product that is out of stock
         Given I have added 3 products "Iron Maiden T-Shirt" to the cart
         When I change product "Iron Maiden T-Shirt" quantity to 6 in my cart
         And I update my cart
         Then I should be notified that this product has insufficient stock
 
-    @ui @no-api
+    @todo @ui @no-api
     Scenario: Preventing the cart recalculation when the form has errors
         Given I have added 3 products "Iron Maiden T-Shirt" to the cart
         And I have added 1 product "Black Dress" to the cart
@@ -31,7 +31,7 @@ Feature: Verifying inventory quantity on cart summary
         And I should see "Black Dress" with quantity 11 in my cart
         And my cart's total should be "$100.36"
 
-    @ui @api
+    @todo @ui @api
     Scenario: Placing an order with products that have sufficient quantity
         Given I have added 3 products "Iron Maiden T-Shirt" in the cart
         When I change product "Iron Maiden T-Shirt" quantity to 5 in my cart

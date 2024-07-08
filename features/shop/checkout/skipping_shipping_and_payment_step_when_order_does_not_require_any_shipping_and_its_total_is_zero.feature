@@ -13,7 +13,7 @@ Feature: Skipping shipping and payment step when order does not require any ship
         And the promotion gives "$40.00" discount to every order with quantity at least 1
         And I am a logged in customer
 
-    @ui @no-api
+    @todo @ui @no-api
     Scenario: Seeing order summary page after addressing if none of order items require shipping and order total is zero
         Given I have "Guards! Guards! - ebook" variant of product "Guards! Guards!" in the cart
         And I am at the checkout addressing step

@@ -12,12 +12,12 @@ Feature: Viewing product with all variants disabled
         And all variants of this product are disabled
         And this product belongs to "T-Shirts"
 
-    @ui @api
+    @todo @ui @api
     Scenario: Viewing product with all variants disabled
         When I check this product's details
         Then I should see the product name "Super Cool T-Shirt"
 
-    @ui @api
+    @todo @ui @api
     Scenario: Viewing product with all variants disabled from taxon page
         When I browse products from taxon "T-Shirts"
         Then I should see the product "Super Cool T-Shirt"

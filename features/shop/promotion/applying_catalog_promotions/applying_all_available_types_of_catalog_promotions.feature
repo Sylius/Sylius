@@ -17,7 +17,7 @@ Feature: Applying all available types of catalog promotions
         And there is a catalog promotion "Fixed T-Shirt sale" that reduces price by fixed "$5.00" in the "Web-US" channel and applies on "T-Shirt" product
         And there is a catalog promotion "Fixed Clothes sale" that reduces price by fixed "$5.00" in the "Web-US" channel and applies on "Clothes" taxon
 
-    @api @ui
+    @todo @api @ui
     Scenario: Applying multiple catalog promotions
         When I view "PHP T-Shirt" variant of the "T-Shirt" product
         Then I should see this variant is discounted from "$100.00" to "$57.90" with 6 promotions

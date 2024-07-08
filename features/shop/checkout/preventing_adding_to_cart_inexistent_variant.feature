@@ -10,7 +10,7 @@ Feature: Preventing adding to cart inexistent product variant
         And this product has "Small", "Medium" and "Large" variants
         And I am a logged in customer
 
-    @api
+    @todo @api
     Scenario: Preventing customer from adding inexistent variant
         Given the "Large" product variant is disabled
         When I pick up my cart

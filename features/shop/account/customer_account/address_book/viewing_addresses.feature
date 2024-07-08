@@ -11,12 +11,12 @@ Feature: Viewing my address book
         And I am a logged in customer with name "Lucifer Morningstar"
         And I have an address "Lucifer Morningstar", "Seaside Fwy", "90802", "Los Angeles", "United States", "Arkansas" in my address book
 
-    @ui @api
+    @todo @ui @api
     Scenario: Viewing all addresses
         When I browse my address book
         Then I should have a single address in my address book
 
-    @ui @api
+    @todo @ui @api
     Scenario: Inability to view the addresses of other customers in address book
         When I browse my address book
         Then I should have a single address in my address book

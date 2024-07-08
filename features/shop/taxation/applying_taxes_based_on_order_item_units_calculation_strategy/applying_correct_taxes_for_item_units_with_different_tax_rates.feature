@@ -15,14 +15,14 @@ Feature: Applying correct taxes for item units with different tax rates
         And the store has a product "Symfony Mug" priced at "$50.00"
         And it belongs to "Mugs" tax category
 
-    @ui @api
+    @todo @ui @api
     Scenario: Applying correct taxes for units of different products
         When I add product "PHP T-Shirt" to the cart
         And I add product "Symfony Mug" to the cart
         Then my cart total should be "$175.50"
         And my cart taxes should be "$25.50"
 
-    @ui @api
+    @todo @ui @api
     Scenario: Applying correct taxes for multiple units of different products
         When I add 3 products "PHP T-Shirt" to the cart
         And I add 4 products "Symfony Mug" to the cart

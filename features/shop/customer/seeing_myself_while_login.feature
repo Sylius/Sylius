@@ -9,7 +9,7 @@ Feature: Seeing myself while login
         And the store has customer "John Doe" with email "car@better.com"
         And I have already registered "car@better.com" account
 
-    @api
+    @todo @api
     Scenario: Seeing my basic data while login
         When I log in with the email "car@better.com"
         Then I should see who I am

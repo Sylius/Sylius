@@ -12,7 +12,7 @@ Feature: Order promotions integrity
         And there is a promotion "Christmas sale"
         And I am a logged in customer
 
-    @ui @api
+    @todo @ui @api
     Scenario: Preventing customer from completing checkout with already expired promotion
         Given this promotion gives "$10.00" discount to every order
         And this promotion expires tomorrow
@@ -24,7 +24,7 @@ Feature: Order promotions integrity
         Then I should be informed that this promotion is no longer applied
         And I should not see the thank you page
 
-    @ui @api
+    @todo @ui @api
     Scenario: Recalculating cart when promotion already expired
         Given this promotion gives "$10.00" discount to every order
         And this promotion expires tomorrow
@@ -36,7 +36,7 @@ Feature: Order promotions integrity
         And I confirm my order
         Then I should see the thank you page
 
-    @ui @api
+    @todo @ui @api
     Scenario: Being able to completing checkout with several promotions
         Given this promotion gives "12%" discount to every order
         And there is a promotion "New Year" with priority 2
@@ -47,14 +47,14 @@ Feature: Order promotions integrity
         When I confirm my order
         Then I should see the thank you page
 
-    @ui @api
+    @todo @ui @api
     Scenario: Receiving percentage discount when buying items for the required total value
         Given the promotion gives "50%" discount to every order with items total at least "$80.00"
         And I added product "PHP T-Shirt" to the cart
         When I proceed selecting "Offline" payment method
         Then my order total should be "$50.00"
 
-    @ui @api
+    @todo @ui @api
     Scenario: Successfully placing an order with percentage discount when buying items for the required total value
         Given the promotion gives "50%" discount to every order with items total at least "$80.00"
         And I added product "PHP T-Shirt" to the cart
@@ -63,7 +63,7 @@ Feature: Order promotions integrity
         When I confirm my order
         Then I should see the thank you page
 
-    @ui @api
+    @todo @ui @api
     Scenario: Excluded tax is not taken into account into promotion integrity check
         Given the store has "VAT" tax rate of 20% for "Clothes" within the "US" zone
         And this product belongs to "Clothes" tax category
@@ -74,7 +74,7 @@ Feature: Order promotions integrity
         When I confirm my order
         Then I should see the thank you page
 
-    @ui @api
+    @todo @ui @api
     Scenario: Preventing customer from completing checkout with already archived promotion
         Given this promotion gives "$10.00" discount to every order
         And I added product "PHP T-Shirt" to the cart

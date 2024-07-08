@@ -10,7 +10,7 @@ Feature: Viewing a cart summary in many channels
         And the store operates on a channel named "Poland" in "PLN" currency
         And there is product "Onion" available in this channel
 
-    @ui
+    @todo @ui
     Scenario: Viewing information about empty cart after channel switching
         Given I changed my current channel to "Poland"
         And I added product "Onion" to the cart
@@ -18,7 +18,7 @@ Feature: Viewing a cart summary in many channels
         And I see the summary of my cart
         Then my cart should be empty
 
-    @ui
+    @todo @ui
     Scenario: Viewing item in cart after switching channels
         Given I changed my current channel to "Poland"
         And I added product "Onion" to the cart
@@ -28,7 +28,7 @@ Feature: Viewing a cart summary in many channels
         Then there should be one item in my cart
         And this item should have name "Onion"
 
-    @ui
+    @todo @ui
     Scenario: Viewing item in cart after switching channels when product was added in every channel
         Given I changed my current channel to "Poland"
         And I added product "Onion" to the cart

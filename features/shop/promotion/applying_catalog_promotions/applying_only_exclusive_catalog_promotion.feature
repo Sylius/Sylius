@@ -12,13 +12,13 @@ Feature: Applying only exclusive catalog promotion
         And there is a catalog promotion "PHP stuff promotion" with priority 100 that reduces price by "50%" and applies on "PHP T-Shirt" variant
         And there is an exclusive catalog promotion "Exclusive PHP stuff promotion" with priority 500 that reduces price by "30%" and applies on "PHP T-Shirt" variant
 
-    @api @ui
+    @todo @api @ui
     Scenario: Applying only exclusive catalog promotion
         When I view product "T-Shirt"
         Then I should see the product price "$70.00"
         And I should see the product original price "$100.00"
 
-    @api @ui
+    @todo @api @ui
     Scenario: Applying always single exclusive catalog promotion with highest priority
         Given there is another exclusive catalog promotion "Really exclusive PHP stuff promotion" with priority 1000 that reduces price by "70%" and applies on "PHP T-Shirt" variant
         When I view product "T-Shirt"

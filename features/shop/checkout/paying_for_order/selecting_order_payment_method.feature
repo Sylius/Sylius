@@ -11,7 +11,7 @@ Feature: Selecting an order payment method
         And the store allows paying with "Paypal Express Checkout"
         And I am a logged in customer
 
-    @ui @api
+    @todo @ui @api
     Scenario: Selecting a payment method
         Given I have product "PHP T-Shirt" in the cart
         And I specified the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"

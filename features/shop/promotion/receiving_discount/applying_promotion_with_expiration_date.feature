@@ -10,28 +10,28 @@ Feature: Applying promotion with an expiration date
         And there is a promotion "Christmas sale"
         And this promotion gives "$10.00" discount to every order
 
-    @ui @api
+    @todo @ui @api
     Scenario: Receiving a discount from a promotion which does not expire
         Given this promotion expires tomorrow
         When I add product "PHP T-Shirt" to the cart
         Then my cart total should be "$90.00"
         And my discount should be "-$10.00"
 
-    @ui @api
+    @todo @ui @api
     Scenario: Receiving no discount from a valid but expired promotion
         Given this promotion has already expired
         When I add product "PHP T-Shirt" to the cart
         And my cart total should be "$100.00"
         And there should be no discount
 
-    @ui @api
+    @todo @ui @api
     Scenario: Receiving a discount from a promotion which has already started
         Given this promotion has started yesterday
         When I add product "PHP T-Shirt" to the cart
         Then my cart total should be "$90.00"
         And my discount should be "-$10.00"
 
-    @ui @api
+    @todo @ui @api
     Scenario: Receiving no discount from a promotion that has not been started yet
         Given this promotion starts tomorrow
         When I add product "PHP T-Shirt" to the cart

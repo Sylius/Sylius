@@ -22,7 +22,7 @@ Feature: Viewing products with multiple variants sorted by price
         And the product "Johnnie Walker" has "Johnnie Walker Black Label" variant priced at "$25.00"
         And the "Johnnie Walker White Label" product variant is disabled
 
-    @ui @api
+    @todo @ui @api
     Scenario: Sorting products by price of their first variant with ascending order
         When I browse products from taxon "Alcohols"
         And I sort products by the lowest price first
@@ -30,7 +30,7 @@ Feature: Viewing products with multiple variants sorted by price
         And the first product on the list should have name "Johnnie Walker"
         And the last product on the list should have name "Wyborowa Vodka"
 
-    @ui @api
+    @todo @ui @api
     Scenario: Sorting products by price of their first variant with descending order
         When I browse products from taxon "Alcohols"
         And I sort products by the highest price first

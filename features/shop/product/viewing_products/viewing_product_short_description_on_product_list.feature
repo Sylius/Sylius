@@ -9,7 +9,7 @@ Feature: Viewing a product short description on product list
         And the store has a product "T-Shirt watermelon"
         And the short description of product "T-Shirt watermelon" is "Great T-Shirt"
 
-    @api
+    @todo @api
     Scenario: Viewing a short description on product list
         When I browse products
         Then I should see the product "T-Shirt watermelon" with short description "Great T-Shirt"

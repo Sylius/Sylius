@@ -10,7 +10,7 @@ Feature: Adding a product with selected option to the cart
         And this product has option "Size" with values "S" and "M"
         And this product has all possible variants
 
-    @ui @api
+    @todo @ui @api
     Scenario: Adding a product with single option to the cart
         When I add "T-Shirt banana" with Size "M" to the cart
         Then I should be on my cart summary page

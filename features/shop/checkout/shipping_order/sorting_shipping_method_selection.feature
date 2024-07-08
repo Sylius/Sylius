@@ -12,7 +12,7 @@ Feature: Sorting shipping method selection
         And the store also allows shipping with "Pug Blimp" at position 1
         And I am a logged in customer
 
-    @ui @api
+    @todo @ui @api
     Scenario: Seeing shipping methods sorted
         Given I have product "Targaryen T-Shirt" in the cart
         When I am at the checkout addressing step

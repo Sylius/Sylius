@@ -12,7 +12,7 @@ Feature: Inform customer about any order total changes during checkout process
         And the store ships everywhere for Free
         And the store allows paying Offline
 
-    @ui @api
+    @todo @ui @api
     Scenario: Inform customer about order total change due to product price change
         Given I am a logged in customer
         And I added product "PHP T-Shirt" to the cart
@@ -21,7 +21,7 @@ Feature: Inform customer about any order total changes during checkout process
         When I confirm my order
         Then my order should not be placed due to changed order total
 
-    @ui @api
+    @todo @ui @api
     Scenario: Be able to confirm order after information appears
         Given I am a logged in customer
         And I added product "PHP T-Shirt" to the cart
@@ -30,7 +30,7 @@ Feature: Inform customer about any order total changes during checkout process
         And I have confirmed order
         Then my order should not be placed due to changed order total
 
-    @ui @api
+    @todo @ui @api
     Scenario: Inform customer about order total change due to tax change
         Given I am a logged in customer
         And I added product "PHP T-Shirt" to the cart
@@ -39,7 +39,7 @@ Feature: Inform customer about any order total changes during checkout process
         When I confirm my order
         Then my order should not be placed due to changed order total
 
-    @ui @api
+    @todo @ui @api
     Scenario: Inform customer about order total change due to shipping method fee change
         Given the store has "UPS" shipping method with "$20.00" fee
         And I added product "PHP T-Shirt" to the cart

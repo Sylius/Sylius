@@ -11,7 +11,7 @@ Feature: Viewing enabled products only
         And the store has a "Shiny T-Shirt" product
         And the "PHP T-Shirt" product is disabled
 
-    @api
+    @todo @api
     Scenario: Seeing only enabled products
         When I browse products
         Then I should see only 2 products

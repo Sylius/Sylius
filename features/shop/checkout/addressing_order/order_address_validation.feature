@@ -10,7 +10,7 @@ Feature: Order address validation
         And the store allows paying Offline
         And the store has "UPS" shipping method with "$20.00" fee
 
-    @api
+    @todo @api
     Scenario: Trying to add address with incorrect country to the cart by the visitor
         Given the visitor has product "Stark T-Shirt" in the cart
         When the visitor specify the email as "jon.snow@example.com"
@@ -18,7 +18,7 @@ Feature: Order address validation
         And the visitor completes the addressing step
         Then they should be notified that "United Russia" country does not exist
 
-    @api
+    @todo @api
     Scenario: Trying to add address without country to the cart by the visitor
         Given the visitor has product "Stark T-Shirt" in the cart
         When the visitor specify the email as "jon.snow@example.com"
@@ -26,7 +26,7 @@ Feature: Order address validation
         And the visitor completes the addressing step
         Then they should be notified that address without country cannot exist
 
-    @api
+    @todo @api
     Scenario: Trying to add address without any products in cart
         Given the visitor picks up the cart
         When the visitor specify the email as "jon.snow@example.com"

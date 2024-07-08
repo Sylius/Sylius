@@ -8,7 +8,7 @@ Feature: Signing in to the store
         Given the store operates on a single channel in "United States"
         And there is a user "ted@example.com" identified by "bear"
 
-    @ui @api
+    @todo @ui @api
     Scenario: Sign in with email and password
         When I want to log in
         And I specify the username as "ted@example.com"

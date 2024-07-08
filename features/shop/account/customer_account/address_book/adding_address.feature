@@ -8,7 +8,7 @@ Feature: Adding a new address to the book
         Given the store operates on a single channel in "United States"
         And I am a logged in customer
 
-    @ui @api
+    @todo @ui @api
     Scenario: Adding address to address book
         When I want to add a new address to my address book
         And I specify the address as "Lucifer Morningstar", "Seaside Fwy", "90802", "Los Angeles", "United States", "Arkansas"

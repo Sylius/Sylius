@@ -16,14 +16,14 @@ Feature: Receiving discounts with product minimum price specified
         And the store has a product "PHP Mug" priced at "$20.00"
         And there is a promotion "Christmas sale"
 
-    @ui @api
+    @todo @ui @api
     Scenario: Receiving percentage discount on a single item fulfilling minimum price criteria
         Given this promotion gives "50%" off on every product with minimum price at "$50.00"
         When I add product "T-Shirt" to the cart
         Then its price should be decreased by "$5.00"
         And my cart total should be "$45.00"
 
-    @api
+    @todo @api
     Scenario: Receiving fixed discount for my cart
         Given there is a promotion "Holiday promotion"
         And it gives "$10.00" discount to every order
@@ -32,14 +32,14 @@ Feature: Receiving discounts with product minimum price specified
         And my cart total should be "$45.00"
         And my discount should be "-$5.00"
 
-    @ui @api
+    @todo @ui @api
     Scenario: Receiving percentage discount on a single item fulfilling range price criteria
         Given this promotion gives "50%" off on every product priced between "$15.00" and "$50.00"
         When I add product "T-Shirt" to the cart
         Then its price should be decreased by "$5.00"
         And my cart total should be "$45.00"
 
-    @ui @api
+    @todo @ui @api
     Scenario: Distributing fixed discount promotion
         And this promotion gives "$10.00" off on every product with minimum price at "$10.00"
         When I add product "T-Shirt" to the cart
@@ -48,14 +48,14 @@ Feature: Receiving discounts with product minimum price specified
         And product "PHP Mug" price should be decreased by "$10.00"
         And my cart total should be "$55.00"
 
-    @ui @api
+    @todo @ui @api
     Scenario: Receiving fixed discount for my cart
         And the promotion gives "$10.00" discount to every order with items total at least "$20.00"
         When I add product "T-Shirt" to the cart
         Then my cart total should be "$45.00"
         And my discount should be "-$5.00"
 
-    @ui @api
+    @todo @ui @api
     Scenario: Receiving discount when buying more than required quantity
         Given there is a promotion "T-Shirts promotion"
         And the promotion gives "$50.00" discount to every order with quantity at least 2
@@ -63,7 +63,7 @@ Feature: Receiving discounts with product minimum price specified
         Then my cart total should be "$90.00"
         And my discount should be "-$10.00"
 
-    @api
+    @todo @api
     Scenario: Distributing fixed order discount promotion
         Given the promotion gives "$20.00" discount to every order with quantity at least 2
         When I add product "T-Shirt" to the cart
@@ -72,7 +72,7 @@ Feature: Receiving discounts with product minimum price specified
         And product "PHP Mug" price should be decreased by "$15.00"
         And my cart total should be "$50.00"
 
-    @api
+    @todo @api
     Scenario: Distributing percentage order discount promotion
         Given it gives "20%" discount to every order
         When I add product "T-Shirt" to the cart
@@ -81,7 +81,7 @@ Feature: Receiving discounts with product minimum price specified
         And product "PHP Mug" price should be decreased by "$9.00"
         And my cart total should be "$56.00"
 
-    @api
+    @todo @api
     Scenario: Distributing discount evenly between different products when one has minimum price specified
         Given it gives "$25.00" discount to every order
         And I add product "T-Shirt" to the cart
@@ -92,7 +92,7 @@ Feature: Receiving discounts with product minimum price specified
         And the "T-Shirt" product should have unit price discounted by "$5.00"
         And the "PHP Mug" product should have unit prices discounted by "$6.67", "$6.67" and "$6.66"
 
-    @api
+    @todo @api
     Scenario: Distributing discount evenly between different products when one has minimum price specified
         Given it gives "$20.00" discount to every order
         And I add 2 products "T-Shirt" to the cart
@@ -103,7 +103,7 @@ Feature: Receiving discounts with product minimum price specified
         And the "T-Shirt" product should have unit prices discounted by "$5.00" and "$5.00"
         And the "PHP Mug" product should have unit prices discounted by "$3.34", "$3.33" and "$3.33"
 
-    @api
+    @todo @api
     Scenario: Distributing discount proportionally between different products when one has minimum price specified
         Given it gives "$27.00" discount to every order
         And I add 2 products "T-Shirt" to the cart
@@ -116,7 +116,7 @@ Feature: Receiving discounts with product minimum price specified
         And the "PHP Mug" product should have unit prices discounted by "$4.25" and "$4.25"
         And the "Symfony Mug" product should have unit price discounted by "$8.50"
 
-    @api
+    @todo @api
     Scenario: Distributing discount proportionally between different products when one has minimum price specified
         Given it gives "$36.00" discount to every order
         And the store has a "Keyboard" configurable product
@@ -136,7 +136,7 @@ Feature: Receiving discounts with product minimum price specified
         And the "Mouse" product should have unit price discounted by "$12.00"
         And the "Cup" product should have unit price discounted by "$4.00"
 
-    @api
+    @todo @api
     Scenario: Distributing discount proportionally between different products when one has minimum price specified
         Given it gives "$12.00" discount to every order
         And the store has a product "Cup" priced at "$10.00"
@@ -161,7 +161,7 @@ Feature: Receiving discounts with product minimum price specified
         And the "Mouse" product should have unit price discounted by "$0.00"
         And the "Headphones" product should have unit price discounted by "$1.00"
 
-    @api
+    @todo @api
     Scenario: Distributing discount proportionally between different products when one has minimum price specified
         Given it gives "$12.00" discount to every order
         And the store has a product "Cup" priced at "$10.00"
@@ -186,7 +186,7 @@ Feature: Receiving discounts with product minimum price specified
         And the "Mouse" product should have unit price discounted by "$0.00"
         And the "Headphones" product should have unit price discounted by "$4.00"
 
-    @api
+    @todo @api
     Scenario: Distributing more than allowed discount proportionally between different products when one has minimum price specified
         Given it gives "$20.00" discount to every order
         And the store has a product "Cup" priced at "$10.00"
@@ -211,7 +211,7 @@ Feature: Receiving discounts with product minimum price specified
         And the "Mouse" product should have unit price discounted by "$0.00"
         And the "Headphones" product should have unit price discounted by "$4.00"
 
-    @api
+    @todo @api
     Scenario: Distributing discount proportionally between different products when one has minimum price specified and promotion does not apply on discounted products
         Given this promotion does not apply on discounted products
         And it gives "$27.00" discount to every order

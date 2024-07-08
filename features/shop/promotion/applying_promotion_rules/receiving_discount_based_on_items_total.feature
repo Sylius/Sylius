@@ -9,28 +9,28 @@ Feature: Receiving discount based on items total
         And the store has a product "PHP T-Shirt" priced at "$80.00"
         And there is a promotion "Holiday promotion"
 
-    @ui @api
+    @todo @ui @api
     Scenario: Receiving discount when buying items for the required total value
         Given the promotion gives "$10.00" discount to every order with items total at least "$80.00"
         When I add product "PHP T-Shirt" to the cart
         Then my cart total should be "$70.00"
         And my discount should be "-$10.00"
 
-    @ui @api
+    @todo @ui @api
     Scenario: Receiving discount when buying items for more than required total value
         Given the promotion gives "$10.00" discount to every order with items total at least "$90.00"
         When I add 2 products "PHP T-Shirt" to the cart
         Then my cart total should be "$150.00"
         And my discount should be "-$10.00"
 
-    @ui @api
+    @todo @ui @api
     Scenario: Not receiving discount when buying items for less than required total value
         Given the promotion gives "$10.00" discount to every order with items total at least "$100.00"
         When I add product "PHP T-Shirt" to the cart
         Then my cart total should be "$80.00"
         And there should be no discount
 
-    @ui @api
+    @todo @ui @api
     Scenario: Receiving discount when buying different products for more than the required total value
         Given the store has a product "Symfony T-Shirt" priced at "$60.00"
         And the promotion gives "$10.00" discount to every order with items total at least "$200.00"

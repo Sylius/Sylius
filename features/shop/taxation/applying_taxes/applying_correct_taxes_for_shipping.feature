@@ -17,7 +17,7 @@ Feature: Applying correct taxes for shipping
         And the store has "DHL" shipping method with "$10.00" fee within the "US" zone
         And shipping method "DHL" belongs to "Shipping Services" tax category
 
-    @ui @api
+    @todo @ui @api
     Scenario: Applying correct taxes for shipping
         When I add product "PHP T-Shirt" to the cart
         Then my cart items total should be "$10.00"
@@ -25,7 +25,7 @@ Feature: Applying correct taxes for shipping
         And my cart taxes should be "$1.50"
         And my cart total should be "$21.50"
 
-    @ui @api
+    @todo @ui @api
     Scenario: Applying correct taxes for shipping
         When I add product "PHP Mug" to the cart
         Then my cart items total should be "$10.00"

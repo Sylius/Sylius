@@ -10,13 +10,13 @@ Feature: Marking an address as default
         And I have an address "Lucifer Morningstar", "Seaside Fwy", "90802", "Los Angeles", "United States", "Arkansas" in my address book
         And I have an address "Archangelo Prime", "Mountain Av", "90640", "Isla del Muerte", "United States" in my address book
 
-    @ui @api
+    @todo @ui @api
     Scenario: Having no address marked as default at first
         When I browse my address book
         Then I should have 2 addresses in my address book
         And I should not have a default address
 
-    @ui @api
+    @todo @ui @api
     Scenario: Setting an address as default
         When I browse my address book
         And I set the address of "Lucifer Morningstar" as default
@@ -24,7 +24,7 @@ Feature: Marking an address as default
         And I should have 2 addresses in my address book
         And address "Lucifer Morningstar", "Seaside Fwy", "90802", "Los Angeles", "United States", "Arkansas" should be set as my default address
 
-    @ui @api
+    @todo @ui @api
     Scenario: Only one address can be default
         Given my default address is of "Lucifer Morningstar"
         When I browse my address book

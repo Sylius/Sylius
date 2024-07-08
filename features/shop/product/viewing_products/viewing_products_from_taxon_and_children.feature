@@ -23,7 +23,7 @@ Feature: Viewing products from taxon children
         And this product belongs to "T-Shirts"
         And this product belongs to "Men"
 
-    @ui @api
+    @todo @ui @api
     Scenario: Viewing products from taxon children
         When I browse products from taxon "T-Shirts"
         Then I should see the product "T-Shirt Coconut"

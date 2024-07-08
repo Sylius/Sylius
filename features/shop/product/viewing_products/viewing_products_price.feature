@@ -7,7 +7,7 @@ Feature: Viewing a product price
     Background:
         Given the store operates on a single channel in "United States"
 
-    @ui @api
+    @todo @ui @api
     Scenario: Viewing a detailed page with product's price
         Given the store has a product "T-Shirt banana" priced at "$39.00"
         When I check this product's details

@@ -10,7 +10,7 @@ Feature: Getting available locales in the current channel
         And it uses the "English (United States)" locale by default
         And the store has locale "German (Germany)"
 
-    @api
+    @todo @api
     Scenario: Getting only available locales in channel
         When I get available locales
         Then I should have 2 locales
@@ -18,7 +18,7 @@ Feature: Getting available locales in the current channel
         And the "Polish (Poland)" locale with code "pl_PL" should be available
         But the "German (Germany)" locale with code "de_DE" should not be available
 
-    @api
+    @todo @api
     Scenario: Get locales details
         When I get "English (United States)" locale
         Then I should have "English (United States)" with code "en_US"

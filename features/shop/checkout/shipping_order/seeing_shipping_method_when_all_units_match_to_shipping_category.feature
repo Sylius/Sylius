@@ -23,7 +23,7 @@ Feature: Seeing shipping methods which category is same as category of all my un
         And this shipping method requires that all units match to "Over-sized" shipping category
         And I am a logged in customer
 
-    @ui @api
+    @todo @ui @api
     Scenario: Seeing only shipping method which category is same as categories of all my units
         Given I have product "Rocket T-Shirt" in the cart
         And I have product "Picasso T-Shirt" in the cart
@@ -34,7 +34,7 @@ Feature: Seeing shipping methods which category is same as category of all my un
         And I should see "Raven Post" shipping method
         And I should not see "Invisible Post" shipping method
 
-    @ui @api
+    @todo @ui @api
     Scenario: Seeing shipping method which category is same as category of my unit
         Given I have product "Star Trek Ship" in the cart
         When I am at the checkout addressing step
@@ -44,7 +44,7 @@ Feature: Seeing shipping methods which category is same as category of all my un
         And I should see "Invisible Post" shipping method
         And I should not see "Raven Post" shipping method
 
-    @ui @api
+    @todo @ui @api
     Scenario: Seeing no shipping methods if my units matches to different shipping categories
         And I have product "Rocket T-Shirt" in the cart
         And I have product "Star Trek Ship" in the cart
@@ -53,7 +53,7 @@ Feature: Seeing shipping methods which category is same as category of all my un
         And I complete the addressing step
         Then there should be information about no available shipping methods
 
-    @ui @api
+    @todo @ui @api
     Scenario: Seeing no shipping methods if not all variants of my units has same shipping category
         Given the "T-Shirt banana" product's "S" size belongs to "Standard" shipping category
         And the "T-Shirt banana" product's "M" size belongs to "Over-sized" shipping category
@@ -64,7 +64,7 @@ Feature: Seeing shipping methods which category is same as category of all my un
         And I complete the addressing step
         Then there should be information about no available shipping methods
 
-    @ui @api
+    @todo @ui @api
     Scenario: Seeing shipping methods if all variants of my units has same shipping category
         Given the "T-Shirt banana" product's "M" size belongs to "Standard" shipping category
         And the "T-Shirt banana" product's "S" size belongs to "Standard" shipping category

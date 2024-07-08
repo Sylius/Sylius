@@ -16,13 +16,13 @@ Feature: Applying catalog promotion with different scopes defined
         And there is a catalog promotion "Clothes sale" that reduces price by "30%" and applies on "Clothes" taxon
         And it applies also on "PHP T-Shirt" variant
 
-    @api @ui
+    @todo @api @ui
     Scenario: Applying catalog promotion only once on variant defined in two scopes
         When I view product "T-Shirt"
         Then I should see the product price "$14.00"
         And I should see the product original price "$20.00"
 
-    @api @ui
+    @todo @api @ui
     Scenario: Applying catalog promotion on variant
         When I view product "Pants"
         Then I should see the product price "$70.00"

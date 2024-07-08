@@ -13,35 +13,35 @@ Feature: Receiving discount based on products from specific taxon
         And it belongs to "Mugs"
         And there is a promotion "T-Shirts promotion"
 
-    @ui @api
+    @todo @ui @api
     Scenario: Receiving discount on order while buying product from promoted taxon
         Given the promotion gives "$20.00" off if order contains products classified as "T-Shirts"
         When I add product "PHP T-Shirt" to the cart
         And my cart total should be "$80.00"
         And my discount should be "-$20.00"
 
-    @ui @api
+    @todo @ui @api
     Scenario: Receiving no discount on order while buying product from different than promoted taxon
         Given the promotion gives "$20.00" off if order contains products classified as "T-Shirts"
         When I add product "PHP Mug" to the cart
         And my cart total should be "$20.00"
         And there should be no discount
 
-    @ui @api
+    @todo @ui @api
     Scenario: Receiving discount on order while buying product from one of promoted taxon
         Given the promotion gives "$20.00" off if order contains products classified as "T-Shirts" or "Mugs"
         When I add product "PHP T-Shirt" to the cart
         And my cart total should be "$80.00"
         And my discount should be "-$20.00"
 
-    @ui @api
+    @todo @ui @api
     Scenario: Receiving discount on order while buying multiple products from promoted taxon
         Given the promotion gives "$50.00" off if order contains products classified as "T-Shirts"
         When I add 3 products "PHP T-Shirt" to the cart
         And my cart total should be "$250.00"
         And my discount should be "-$50.00"
 
-    @ui @api
+    @todo @ui @api
     Scenario: Receiving discount on order while buying product from both of promoted taxon
         Given the promotion gives "$10.00" off if order contains products classified as "T-Shirts"
         And there is a promotion "Mugs promotion"

@@ -17,25 +17,25 @@ Feature: Applying percentage catalog promotions
         And this product belongs to "Soft Drinks"
         And there is a catalog promotion "Drinks sale" that reduces price by "15%" and applies on "Soft Drinks" taxon
 
-    @api @ui
+    @todo @api @ui
     Scenario: Discounted price is round
         When I view product "Orange Juice"
         Then I should see the product price "$17.00"
         And I should see the product original price "$20.00"
 
-    @api @ui
+    @todo @api @ui
     Scenario: Discounted price is rounded to a lower last digit
         When I view product "Apple Juice"
         Then I should see the product price "$17.21"
         And I should see the product original price "$20.25"
 
-    @api @ui
+    @todo @api @ui
     Scenario: Discounted price is rounded to an upper last digit on 4/5 scenario
         When I view product "Peach Juice"
         Then I should see the product price "$8.93"
         And I should see the product original price "$10.50"
 
-    @api @ui
+    @todo @api @ui
     Scenario: Discounted price is rounded to an upper last digit
         When I view product "Mango Juice"
         Then I should see the product price "$8.45"

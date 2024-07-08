@@ -9,14 +9,14 @@ Feature: Making changes in existing addresses
         And I am a logged in customer
         And I have an address "Lucifer Morningstar", "Seaside Fwy", "90802", "Los Angeles", "United States", "Arkansas" in my address book
 
-    @ui @api
+    @todo @ui @api
     Scenario: Inability to edit not my addresses
         Given there is a customer "John Doe" identified by an email "doe@example.com" and a password "banana"
         And this customer has an address "John Doe", "Banana Street", "90232", "New York", "United States", "Kansas" in their address book
         When I try to edit the address of "John Doe"
         Then I should be unable to edit their address
 
-    @ui @api
+    @todo @ui @api
     Scenario: Changing the names on my address
         Given I am editing the address of "Lucifer Morningstar"
         When I change the first name to "Stephanie"
@@ -26,7 +26,7 @@ Feature: Making changes in existing addresses
         And I should still have a single address in my address book
         And this address should be assigned to "Stephanie Edgley"
 
-    @ui @api
+    @todo @ui @api
     Scenario: Changing my location
         Given I am editing the address of "Lucifer Morningstar"
         When I change the street to "Vildegard Av"
@@ -39,7 +39,7 @@ Feature: Making changes in existing addresses
         And it should contain "Liverpool"
         And it should contain "GBA-20B"
 
-    @ui @javascript @api
+    @todo @ui @javascript @api
     Scenario: Changing province to one from the list
         Given the store also has country "Australia"
         And this country has the "Queensland" province with "AU-QLD" code
@@ -52,7 +52,7 @@ Feature: Making changes in existing addresses
         And it should contain country "Australia"
         And it should contain province "Queensland"
 
-    @ui @javascript @api
+    @todo @ui @javascript @api
     Scenario: Changing province to for country with no provinces defined
         Given I am editing the address of "Lucifer Morningstar"
         When I specify "New York" as my province

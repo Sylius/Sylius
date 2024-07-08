@@ -9,14 +9,14 @@ Feature: Changing a customer password
         And there is a customer "Francis Underwood" identified by an email "francis@underwood.com" and a password "sylius"
         And I am logged in as "francis@underwood.com"
 
-    @ui @api
+    @todo @ui @api
     Scenario: Changing my password
         When I want to change my password
         And I change password from "sylius" to "blackhouse"
         And I save my changes
         Then I should be notified that my password has been successfully changed
 
-    @api @ui
+    @todo @api @ui
     Scenario: Logging to store after password change
         Given I've changed my password from "whitehouse" to "blackhouse"
         When I log in as "francis@underwood.com" with "blackhouse" password

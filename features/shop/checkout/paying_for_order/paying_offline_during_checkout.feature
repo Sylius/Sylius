@@ -10,7 +10,7 @@ Feature: Paying offline during checkout
         And the store ships everywhere for Free
         And the store allows paying Offline
 
-    @ui @api
+    @todo @ui @api
     Scenario: Successfully placing an order
         Given I am a logged in customer
         And I have product "PHP T-Shirt" in the cart

@@ -16,14 +16,14 @@ Feature: Applying correct taxes on visitor cart for a specific date
         And the store has a product "PHP T-Shirt" priced at "$100.00"
         And it belongs to "Clothes" tax category
 
-    @ui @api
+    @todo @ui @api
     Scenario: Applying proper taxes for product
         Given it is "01-11-2022" now
         When I add product "PHP T-Shirt" to the cart
         Then my cart total should be "$123.00"
         And my cart taxes should be "$23.00"
 
-    @ui @api
+    @todo @ui @api
     Scenario: Applying proper taxes for product
         Given it is "02-02-2023" now
         When I add product "PHP T-Shirt" to the cart

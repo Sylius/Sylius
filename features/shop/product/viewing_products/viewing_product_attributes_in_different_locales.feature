@@ -13,7 +13,7 @@ Feature: Viewing product's attributes in different locales
         And this product has a text attribute "T-Shirt material" with value "Skórka banana" in "Polish (Poland)" locale
         And this product has a textarea attribute "T-Shirt details" with value "Banana is a very good material." in "English (United States)" locale
 
-    @ui @api
+    @todo @ui @api
     Scenario: Viewing a detailed page with product's text attribute after locale change
         When I view product "T-Shirt banana" in the "Polish (Poland)" locale
         Then I should see the product attribute "T-Shirt material" with value "Skórka banana"

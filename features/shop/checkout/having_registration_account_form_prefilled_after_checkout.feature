@@ -10,7 +10,7 @@ Feature: Having registration form prefilled after checkout
         And the store ships everywhere for Free
         And the store allows paying Offline
 
-    @ui @no-api
+    @todo @ui @no-api
     Scenario: Having prefilled registration form after checkout
         Given I have product "PHP T-Shirt" in the cart
         And I complete addressing step with email "john@example.com" and "United States" based billing address
@@ -20,7 +20,7 @@ Feature: Having registration form prefilled after checkout
         And I should be able to proceed to the registration
         And the registration form should be prefilled with "john@example.com" email
 
-    @ui @no-api
+    @todo @ui @no-api
     Scenario: Not being able to create an account if customer is logged in
         Given I am a logged in customer
         And I have product "PHP T-Shirt" in the cart

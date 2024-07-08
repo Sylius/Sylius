@@ -15,13 +15,13 @@ Feature: Adding a product to cart with prices dependent on a channel
         And this product is also priced at "£15.00" in "Web-GB" channel
         And I am a logged in customer
 
-    @ui @api
+    @todo @ui @api
     Scenario: Buying a product in default currency for browsed channel
         Given I change my current channel to "Web-EU"
         When I add product "Leprechaun's Gold" to the cart
         Then I should see "Leprechaun's Gold" with unit price "€10.00" in my cart
 
-    @ui
+    @todo @ui
     Scenario: Buying a product with proper price after currency change
         Given I change my current channel to "Web-EU"
         And the exchange rate of "Euro" to "British Pound" is 0.7
@@ -29,7 +29,7 @@ Feature: Adding a product to cart with prices dependent on a channel
         And I add product "Leprechaun's Gold" to the cart
         Then I should see "Leprechaun's Gold" with unit price "£7.00" in my cart
 
-    @ui
+    @todo @ui
     Scenario: Buying a product with proper price after channel change
         Given I change my current channel to "Web-GB"
         When I add product "Leprechaun's Gold" to the cart

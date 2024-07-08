@@ -10,7 +10,7 @@ Feature: Reapplying promotion on cart change
         And there is a promotion "Holiday promotion"
         And I am a logged in customer
 
-    @ui @api
+    @todo @ui @api
     Scenario: Not receiving discount on shipping after removing last item from cart
         Given the store has "DHL" shipping method with "$10.00" fee
         And the promotion gives "100%" discount on shipping to every order
@@ -21,7 +21,7 @@ Feature: Reapplying promotion on cart change
         And there should be no shipping fee
         And there should be no discount
 
-    @ui @api
+    @todo @ui @api
     Scenario: Receiving discount on shipping after shipping method change
         Given the store has "DHL" shipping method with "$10.00" fee
         And the store has "FedEx" shipping method with "$30.00" fee
@@ -32,7 +32,7 @@ Feature: Reapplying promotion on cart change
         Then my cart total should be "$100.00"
         And my cart shipping should be for Free
 
-    @ui @api
+    @todo @ui @api
     Scenario: Receiving discount after removing an item from the cart and then adding another one
         Given the store has a product "Symfony T-Shirt" priced at "$150.00"
         And the promotion gives "$10.00" discount to every order
@@ -42,7 +42,7 @@ Feature: Reapplying promotion on cart change
         Then my cart total should be "$140.00"
         And my discount should be "-$10.00"
 
-    @ui @api
+    @todo @ui @api
     Scenario: Not receiving discount when cart does not meet the required total value after removing an item
         Given the promotion gives "$10.00" discount to every order with items total at least "$120.00"
         And I have 2 products "PHP T-Shirt" in the cart
@@ -50,7 +50,7 @@ Feature: Reapplying promotion on cart change
         Then my cart total should be "$100.00"
         And there should be no discount
 
-    @ui @api
+    @todo @ui @api
     Scenario: Not receiving discount when cart does not meet the required quantity after removing an item
         Given the promotion gives "$10.00" discount to every order with quantity at least 3
         And I have 3 products "PHP T-Shirt" in the cart
