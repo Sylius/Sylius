@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace spec\Sylius\Bundle\AdminBundle\Twig\ErrorTemplateFinder;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\AdminBundle\Provider\LoggedInUserProviderInterface;
+use Sylius\Bundle\AdminBundle\Provider\LoggedInAdminUserProviderInterface;
 use Sylius\Bundle\AdminBundle\SectionResolver\AdminSection;
 use Sylius\Bundle\CoreBundle\SectionResolver\SectionInterface;
 use Sylius\Bundle\CoreBundle\SectionResolver\SectionProviderInterface;
@@ -28,10 +28,10 @@ final class ErrorTemplateFinderSpec extends ObjectBehavior
 
     function let(
         SectionProviderInterface $sectionProvider,
-        LoggedInUserProviderInterface $loggedInUserProvider,
+        LoggedInAdminUserProviderInterface $loggedInAdminUserProvider,
         Environment $twig,
     ): void {
-        $this->beConstructedWith($sectionProvider, $loggedInUserProvider, $twig);
+        $this->beConstructedWith($sectionProvider, $loggedInAdminUserProvider, $twig);
     }
 
     function it_implements_error_template_finder_interface(): void
@@ -41,13 +41,13 @@ final class ErrorTemplateFinderSpec extends ObjectBehavior
 
     function it_does_not_find_template_for_other_sections_than_admin(
         SectionProviderInterface $sectionProvider,
-        LoggedInUserProviderInterface $loggedInUserProvider,
+        LoggedInAdminUserProviderInterface $loggedInAdminUserProvider,
         Environment $twig,
         SectionInterface $section,
     ): void {
         $sectionProvider->getSection()->willReturn($section);
 
-        $loggedInUserProvider->hasUser()->shouldNotBeCalled();
+        $loggedInAdminUserProvider->hasUser()->shouldNotBeCalled();
         $twig->getLoader()->shouldNotBeCalled();
 
         $this->findTemplate(404)->shouldReturn(null);
@@ -55,12 +55,12 @@ final class ErrorTemplateFinderSpec extends ObjectBehavior
 
     function it_does_not_find_template_when_there_is_no_admin_user(
         SectionProviderInterface $sectionProvider,
-        LoggedInUserProviderInterface $loggedInUserProvider,
+        LoggedInAdminUserProviderInterface $loggedInAdminUserProvider,
         Environment $twig,
     ): void {
         $sectionProvider->getSection()->willReturn(new AdminSection());
 
-        $loggedInUserProvider->hasUser()->willReturn(false);
+        $loggedInAdminUserProvider->hasUser()->willReturn(false);
 
         $twig->getLoader()->shouldNotBeCalled();
 
@@ -69,14 +69,14 @@ final class ErrorTemplateFinderSpec extends ObjectBehavior
 
     function it_finds_template_for_admin(
         SectionProviderInterface $sectionProvider,
-        LoggedInUserProviderInterface $loggedInUserProvider,
+        LoggedInAdminUserProviderInterface $loggedInAdminUserProvider,
         Environment $twig,
         LoaderInterface $loader,
     ): void {
         $templateName = self::TEMPLATE_PREFIX . '/error404.html.twig';
 
         $sectionProvider->getSection()->willReturn(new AdminSection());
-        $loggedInUserProvider->hasUser()->willReturn(true);
+        $loggedInAdminUserProvider->hasUser()->willReturn(true);
 
         $twig->getLoader()->willReturn($loader);
         $loader->exists($templateName)->shouldBeCalled()->willReturn(true);
@@ -86,7 +86,7 @@ final class ErrorTemplateFinderSpec extends ObjectBehavior
 
     function it_returns_null_if_neither_template_can_be_found(
         SectionProviderInterface $sectionProvider,
-        LoggedInUserProviderInterface $loggedInUserProvider,
+        LoggedInAdminUserProviderInterface $loggedInAdminUserProvider,
         Environment $twig,
         LoaderInterface $loader,
     ): void {
@@ -94,7 +94,7 @@ final class ErrorTemplateFinderSpec extends ObjectBehavior
         $fallbackTemplateName = self::TEMPLATE_PREFIX . '/error.html.twig';
 
         $sectionProvider->getSection()->willReturn(new AdminSection());
-        $loggedInUserProvider->hasUser()->willReturn(true);
+        $loggedInAdminUserProvider->hasUser()->willReturn(true);
 
         $twig->getLoader()->willReturn($loader);
         $loader->exists($templateName)->shouldBeCalled()->willReturn(false);
@@ -105,7 +105,7 @@ final class ErrorTemplateFinderSpec extends ObjectBehavior
 
     function it_finds_fallback_template_for_admin(
         SectionProviderInterface $sectionProvider,
-        LoggedInUserProviderInterface $loggedInUserProvider,
+        LoggedInAdminUserProviderInterface $loggedInAdminUserProvider,
         Environment $twig,
         LoaderInterface $loader,
     ): void {
@@ -113,7 +113,7 @@ final class ErrorTemplateFinderSpec extends ObjectBehavior
         $fallbackTemplateName = self::TEMPLATE_PREFIX . '/error.html.twig';
 
         $sectionProvider->getSection()->willReturn(new AdminSection());
-        $loggedInUserProvider->hasUser()->willReturn(true);
+        $loggedInAdminUserProvider->hasUser()->willReturn(true);
 
         $twig->getLoader()->willReturn($loader);
         $loader->exists($templateName)->shouldBeCalled()->willReturn(false);

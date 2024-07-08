@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\AdminBundle\Twig\Component\Shared\Navbar;
 
-use Sylius\Bundle\AdminBundle\Provider\LoggedInUserProviderInterface;
+use Sylius\Bundle\AdminBundle\Provider\LoggedInAdminUserProviderInterface;
 use Sylius\Component\Core\Model\AdminUserInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
@@ -24,14 +24,14 @@ class UserDropdownComponent
     public function __construct(
         private UrlGeneratorInterface $urlGenerator,
         private TranslatorInterface $translator,
-        private LoggedInUserProviderInterface $loggedInUserProvider,
+        private LoggedInAdminUserProviderInterface $loggedInAdminUserProvider,
     ) {
     }
 
     #[ExposeInTemplate(name: 'user')]
     public function getUser(): AdminUserInterface
     {
-        $user = $this->loggedInUserProvider->getUser();
+        $user = $this->loggedInAdminUserProvider->getUser();
         if (!$user instanceof AdminUserInterface) {
             throw new \RuntimeException('User must be an instance of ' . AdminUserInterface::class . '.');
         }

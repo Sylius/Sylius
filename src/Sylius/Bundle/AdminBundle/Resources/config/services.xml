@@ -122,11 +122,12 @@
         </service>
         <service id="Sylius\Bundle\AdminBundle\Generator\TaxonSlugGeneratorInterface" alias="sylius_admin.generator.taxon_slug" />
 
-        <service id="sylius_admin.logged_in_user_provider" class="Sylius\Bundle\AdminBundle\Provider\LoggedInAdminProvider">
+        <service id="sylius_admin.logged_in_admin_user_provider" class="Sylius\Bundle\AdminBundle\Provider\LoggedInAdminUserProvider">
             <argument type="service" id="security.helper" />
             <argument type="service" id="security.token_storage" />
             <argument type="service" id="request_stack" />
             <argument type="service" id="sylius.repository.admin_user" />
         </service>
+        <service id="Sylius\Bundle\AdminBundle\Provider\LoggedInAdminUserProviderInterface" alias="sylius_admin.logged_in_admin_user_provider" />
     </services>
 </container>
