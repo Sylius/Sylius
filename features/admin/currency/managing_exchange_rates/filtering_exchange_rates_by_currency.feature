@@ -11,7 +11,7 @@ Feature: Filtering exchange rates by a currency
         And the exchange rate of "Polish Zloty" to "Euro" is 0.22
         And I am logged in as an administrator
 
-    @todo @ui @api
+    @api @ui
     Scenario: Filtering exchange rates by a chosen currency
         When I browse exchange rates of the store
         And I choose "Euro" as a currency filter
