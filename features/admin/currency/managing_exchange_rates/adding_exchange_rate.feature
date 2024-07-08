@@ -8,7 +8,7 @@ Feature: Adding a new exchange rate
         Given the store has currency "US Dollar" and "British Pound"
         And I am logged in as an administrator
 
-    @todo @ui @api
+    @api @ui
     Scenario: Adding a new exchange rate
         When I want to add a new exchange rate
         And I specify its ratio as 1.20
