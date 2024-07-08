@@ -24,7 +24,7 @@ To render a simple menu of categories in any twig template use:
 
 .. code-block:: twig
 
-    {{ render(url('sylius_shop_partial_taxon_index_by_code', {'code': 'category', 'template': '@SyliusShop/Taxon/_horizontalMenu.html.twig'})) }}
+    {{ render(url('sylius_shop_partial_taxon_index_by_code', {'code': 'MENU_CATEGORY', 'template': '@SyliusShop/Taxon/_horizontalMenu.html.twig'})) }}
 
 You can of course customize the template or enclose the menu into html to make it look better.
 
