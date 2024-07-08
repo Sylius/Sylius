@@ -15,7 +15,7 @@ namespace spec\Sylius\Bundle\AdminBundle\Provider;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Bundle\AdminBundle\Provider\LoggedInUserProviderInterface;
+use Sylius\Bundle\AdminBundle\Provider\LoggedInAdminUserProviderInterface;
 use Sylius\Component\Core\Model\AdminUserInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
 use Symfony\Bundle\SecurityBundle\Security;
@@ -26,7 +26,7 @@ use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 
-final class LoggedInAdminProviderSpec extends ObjectBehavior
+final class LoggedInAdminUserProviderSpec extends ObjectBehavior
 {
     private const SECURITY_SESSION_KEY = '_security_admin';
     private const SERIALIZED_TOKEN = 'O:74:"Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken":3:{i:0;N;i:1;s:5:"admin";i:2;a:5:{i:0;O:37:"Sylius\Component\Core\Model\AdminUser":8:{i:0;s:38:"sylius{x33enl1y0askgkgw8k0skocc4ko0kg}";i:1;s:30:"x33enl1y0askgkgw8k0skocc4ko0kg";i:2;s:6:"sylius";i:3;s:6:"sylius";i:4;b:0;i:5;b:1;i:6;i:404;i:7;s:9:"plaintext";}i:1;b:1;i:2;N;i:3;a:0:{}i:4;a:1:{i:0;s:26:"ROLE_ADMINISTRATION_ACCESS";}}}';
@@ -40,9 +40,9 @@ final class LoggedInAdminProviderSpec extends ObjectBehavior
         $this->beConstructedWith($security, $tokenStorage, $requestStack, $adminUserRepository);
     }
 
-    function it_implements_logged_in_user_provider(): void
+    function it_implements_logged_in_admin_user_provider(): void
     {
-        $this->shouldImplement(LoggedInUserProviderInterface::class);
+        $this->shouldImplement(LoggedInAdminUserProviderInterface::class);
     }
 
     function it_returns_true_when_user_is_in_security(

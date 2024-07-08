@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace Sylius\Bundle\AdminBundle\Provider;
 
 use Sylius\Component\Core\Model\AdminUserInterface;
-use Sylius\Component\User\Model\UserInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\Exception\SessionNotFoundException;
@@ -22,7 +21,7 @@ use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 
-final readonly class LoggedInAdminProvider implements LoggedInUserProviderInterface
+final readonly class LoggedInAdminUserProvider implements LoggedInAdminUserProviderInterface
 {
     private const SECURITY_SESSION_KEY = '_security_admin';
 
@@ -35,7 +34,7 @@ final readonly class LoggedInAdminProvider implements LoggedInUserProviderInterf
     ) {
     }
 
-    public function getUser(): ?UserInterface
+    public function getUser(): ?AdminUserInterface
     {
         $user = $this->security->getUser();
         if ($user instanceof AdminUserInterface) {

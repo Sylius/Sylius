@@ -15,7 +15,7 @@
     <services>
         <service id="sylius_admin.twig.error_template_finder" class="Sylius\Bundle\AdminBundle\Twig\ErrorTemplateFinder\ErrorTemplateFinder">
             <argument type="service" id="Sylius\Bundle\CoreBundle\SectionResolver\SectionProviderInterface" />
-            <argument type="service" id="sylius_admin.logged_in_user_provider" />
+            <argument type="service" id="sylius_admin.logged_in_admin_user_provider" />
             <argument type="service" id="twig" />
             <tag name="sylius.twig.error_template_finder" />
         </service>

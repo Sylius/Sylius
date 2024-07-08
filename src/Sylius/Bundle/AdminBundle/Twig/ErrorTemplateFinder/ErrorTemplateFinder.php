@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\AdminBundle\Twig\ErrorTemplateFinder;
 
-use Sylius\Bundle\AdminBundle\Provider\LoggedInUserProviderInterface;
+use Sylius\Bundle\AdminBundle\Provider\LoggedInAdminUserProviderInterface;
 use Sylius\Bundle\AdminBundle\SectionResolver\AdminSection;
 use Sylius\Bundle\CoreBundle\SectionResolver\SectionProviderInterface;
 use Sylius\Bundle\UiBundle\Twig\ErrorTemplateFinder\ErrorTemplateFinderInterface;
@@ -23,7 +23,7 @@ final readonly class ErrorTemplateFinder implements ErrorTemplateFinderInterface
 {
     public function __construct(
         private SectionProviderInterface $sectionProvider,
-        private LoggedInUserProviderInterface $loggedInUserProvider,
+        private LoggedInAdminUserProviderInterface $loggedInAdminUserProvider,
         private Environment $twig,
     ) {
     }
@@ -32,7 +32,7 @@ final readonly class ErrorTemplateFinder implements ErrorTemplateFinderInterface
     {
         $section = $this->sectionProvider->getSection();
 
-        if ($section instanceof AdminSection && $this->loggedInUserProvider->hasUser()) {
+        if ($section instanceof AdminSection && $this->loggedInAdminUserProvider->hasUser()) {
             $template = sprintf('@SyliusAdmin/errors/error%s.html.twig', $statusCode);
             if ($this->twig->getLoader()->exists($template)) {
                 return $template;
