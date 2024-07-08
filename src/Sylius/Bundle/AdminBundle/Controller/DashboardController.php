@@ -29,6 +29,14 @@ final readonly class DashboardController
         private Environment $templatingEngine,
         private RouterInterface $router,
     ) {
+        trigger_deprecation(
+            'sylius/admin-bundle',
+            '1.14',
+            sprintf(
+                'Passing an instance of "%s" as the fourth argument is deprecated. It will be removed in Sylius 2.0.',
+                StatisticsDataProviderInterface::class,
+            ),
+        );
     }
 
     public function __invoke(Request $request): Response
