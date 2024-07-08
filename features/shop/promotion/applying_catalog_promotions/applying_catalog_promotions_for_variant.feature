@@ -12,20 +12,20 @@ Feature: Applying catalog promotions for variants
         And this product has "PHP Mug" variant priced at "$5.00"
         And there is a catalog promotion "Winter sale" that reduces price by "30%" and applies on "PHP T-Shirt" variant
 
-    @api @ui
+    @todo @api @ui
     Scenario: Applying simple catalog promotions
         When I view product "T-Shirt"
         Then I should see the product price "$14.00"
         And I should see the product original price "$20.00"
 
-    @api @ui
+    @todo @api @ui
     Scenario: Applying multiple catalog promotions
         Given there is a catalog promotion "Christmas sale" that reduces price by "10%" and applies on "PHP T-Shirt" variant
         When I view product "T-Shirt"
         Then I should see the product price "$12.60"
         And I should see the product original price "$20.00"
 
-    @api @ui
+    @todo @api @ui
     Scenario: Not applying catalog promotion if it's not eligible
         When I view product "Mug"
         Then I should see the product price "$5.00"

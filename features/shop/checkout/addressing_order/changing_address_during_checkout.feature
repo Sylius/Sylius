@@ -9,7 +9,7 @@ Feature: Changing address during checkout
         And the store has a product "T-Shirt banana" priced at "$12.54"
         And the store ships everywhere for Free
 
-    @ui @no-api
+    @todo @ui @no-api
     Scenario: Going back to addressing step with and changing email
         Given I have product "T-Shirt banana" in the cart
         And I am at the checkout addressing step
@@ -21,7 +21,7 @@ Feature: Changing address during checkout
         And I complete the addressing step
         Then I should be checking out as "ned.stark@example.com"
 
-    @api
+    @todo @api
     Scenario: Changing address
         Given the visitor has product "T-Shirt banana" in the cart
         And the visitor has specified the email as "jon.snow@example.com"

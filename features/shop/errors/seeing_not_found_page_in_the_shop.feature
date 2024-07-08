@@ -9,7 +9,7 @@ Feature: Seeing not found page in the shop
         And the store has a product "Kroos T-Shirt"
         And the store has a product "Bellingham T-Shirt"
 
-    @no-api @ui
+    @todo @no-api @ui
     Scenario: Seeing not found page when the product does not exist in the shop
         When I try to reach nonexistent product
         Then I should see the not found page

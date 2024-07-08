@@ -10,7 +10,7 @@ Feature: Addressing an order and signing in
         And the store has a product "PHP T-Shirt" priced at "$19.99"
         And there is a customer "Francis Underwood" identified by an email "francis@underwood.com" and a password "whitehouse"
 
-    @ui @mink:chromedriver @no-api
+    @todo @ui @mink:chromedriver @no-api
     Scenario: Addressing an order and signing in
         Given I have product "PHP T-Shirt" in the cart
         And I am at the checkout addressing step

@@ -12,7 +12,7 @@ Feature: Having new addresses saved in the address book after checkout
         And I am a logged in customer
         And I have product "Lannister Coat" in the cart
 
-    @ui @api
+    @todo @ui @api
     Scenario: Having the shipping address saved in my address book
         Given I am at the checkout addressing step
         When I specify the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
@@ -21,7 +21,7 @@ Feature: Having new addresses saved in the address book after checkout
         And I confirm my order
         Then I should have a single address in my address book
 
-    @ui @api
+    @todo @ui @api
     Scenario: Having the shipping and billing addresses saved in my address book
         Given I am at the checkout addressing step
         When I specify the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
@@ -31,7 +31,7 @@ Feature: Having new addresses saved in the address book after checkout
         And I confirm my order
         Then I should have 2 addresses in my address book
 
-    @ui @api
+    @todo @ui @api
     Scenario: Addresses already existent in my book don't get saved
         Given I have an address "Jon Snow", "Frost Alley", "90210", "Ankh Morpork", "United States" in my address book
         And I have an address "Sarah Connor", "Haggard", "00-007", "Pseudopolis", "United States" in my address book

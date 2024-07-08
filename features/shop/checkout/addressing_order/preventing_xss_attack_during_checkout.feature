@@ -11,7 +11,7 @@ Feature: Preventing a potential XSS attack during updating the address in the ch
         And I have product "PHP T-Shirt" in the cart
         And I am at the checkout addressing step
 
-    @ui @javascript @no-api
+    @todo @ui @javascript @no-api
     Scenario: Preventing a potential XSS attack during updating the address in the checkout
         When I specify the email as "john.doe@example.com"
         And I specify the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Doe"

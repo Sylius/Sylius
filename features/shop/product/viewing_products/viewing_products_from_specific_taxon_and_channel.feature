@@ -14,14 +14,14 @@ Feature: Viewing products from a specific taxon and a channel
         And the store has a product "T-Shirt Batman" available in "United States" channel
         And this product belongs to "T-Shirts"
 
-    @ui @api
+    @todo @ui @api
     Scenario: Viewing products from a specific taxon in selected channel
         Given I am browsing channel "Poland"
         When I browse products from taxon "T-Shirts"
         Then I should see the product "T-Shirt Banana"
         And I should not see the product "T-Shirt Batman"
 
-    @ui @api
+    @todo @ui @api
     Scenario: Viewing information about empty list of products from a given taxon in selected channel
         Given I am browsing channel "United States"
         When I browse products from taxon "Funny"

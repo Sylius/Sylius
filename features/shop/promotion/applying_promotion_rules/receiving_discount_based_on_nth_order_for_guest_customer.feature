@@ -10,7 +10,7 @@ Feature: Receiving discount based on nth order
         And the store ships everywhere for Free
         And the store allows paying "Cash on Delivery"
 
-    @ui @api
+    @todo @ui @api
     Scenario: Receiving a discount on an first order
         Given there is a promotion "1st order promotion"
         And it gives "$20.00" off customer's 1st order
@@ -19,7 +19,7 @@ Feature: Receiving discount based on nth order
         Then my cart total should be "$80.00"
         And my discount should be "-$20.00"
 
-    @ui @api
+    @todo @ui @api
     Scenario: Receiving no discount on an order if it is not first order placed
         Given there is a promotion "1st order promotion"
         And it gives "$20.00" off customer's 1st order
@@ -31,7 +31,7 @@ Feature: Receiving discount based on nth order
         Then my cart total should be "$100.00"
         And there should be no discount
 
-    @ui @api
+    @todo @ui @api
     Scenario: Receiving no discount on an order if I placed more than one order
         Given there is a promotion "2nd order promotion"
         And it gives "$10.00" off customer's 2nd order

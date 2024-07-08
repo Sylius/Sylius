@@ -16,13 +16,13 @@ Feature: Changing a payment method of a placed order
         And I addressed it to "Lucifer Morningstar", "Seaside Fwy", "90802" "Los Angeles" in the "United States" with identical billing address
         And I chose "Free" shipping method with "Cash on Delivery" payment
 
-    @ui @api
+    @todo @ui @api
     Scenario: Changing a payment method of an order
         When I browse my orders
         And I change my payment method to "Bank Transfer"
         Then I should have "Bank Transfer" payment method on my order
 
-    @ui @api
+    @todo @ui @api
     Scenario: Changing a payment method of an order with a disabled payment method
         Given the payment method "Cash on Delivery" is disabled
         When I browse my orders

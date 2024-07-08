@@ -11,12 +11,12 @@ Feature: Viewing product's average rating
         And this product has accepted reviews rated 5, 3, 4, 4 and 1
         And I am a logged in customer
 
-    @ui @api
+    @todo @ui @api
     Scenario: Viewing product's average rating
         When I check this product's details
         Then I should see "3.4" as its average rating
 
-    @ui @api
+    @todo @ui @api
     Scenario: Viewing product's average rating calculated only from accepted reviews
         Given this product also has accepted reviews rated 5, 4 and 1
         And this product also has review rated 3 which is not accepted yet

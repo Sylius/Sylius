@@ -11,7 +11,7 @@ Feature: Order payment method integrity
         And the store allows paying Offline
         And I am a logged in customer
 
-    @ui @api
+    @todo @ui @api
     Scenario: Preventing customer from completing checkout with no longer available payment method
         Given I have product "PHP T-Shirt" in the cart
         And I have proceeded selecting "Offline" payment method

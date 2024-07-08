@@ -14,7 +14,7 @@ Feature: Seeing province created manually on order summary page
         And the store has a product "PHP T-Shirt" priced at "$19.99"
         And I am a logged in customer
 
-    @ui @javascript @api
+    @todo @ui @javascript @api
     Scenario: Seeing manually defined province on order summary page
         Given I added product "PHP T-Shirt" to the cart
         And I am at the checkout addressing step

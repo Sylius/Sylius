@@ -11,13 +11,13 @@ Feature: Retrying to pay the order from my account panel
         And the store ships everywhere for Free
         And I have one unpaid order #000001 with total $29.99
 
-    @todo
+    @todo @todo
     Scenario: Seeing the unpaid order in the list
         Given I am logged in as "john@example.com"
         When I view my order history
         Then I should see one order with total of $29.99 and pending payment
 
-    @todo
+    @todo @todo
     Scenario: Accessing the order payment page
         Given I am viewing my order history
         And I am logged in as "john@example.com"

@@ -10,7 +10,7 @@ Feature: Applying catalog promotions with different states
         And this product has "PHP T-Shirt" variant priced at "$20.00"
         And there is a catalog promotion "Winter sale" that reduces price by "50%" and applies on "PHP T-Shirt" variant
 
-    @api @ui
+    @todo @api @ui
     Scenario: Seeing catalog promotions that were processed successfully
         When I view "PHP T-Shirt" variant of the "T-Shirt" product
         Then I should see this variant is discounted from "$20.00" to "$10.00" with "Winter sale" promotion

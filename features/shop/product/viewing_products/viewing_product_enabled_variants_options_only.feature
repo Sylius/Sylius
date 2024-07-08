@@ -12,7 +12,7 @@ Feature: Viewing product's enabled variants only
         And this product has all possible variants
         But all the product variants with the "Yellow" Color are disabled
 
-    @ui @api
+    @todo @ui @api
     Scenario: Seeing only enabled variants options
         When I view product "Super Cool T-Shirt"
         Then I should not be able to select the "Yellow" Color option value

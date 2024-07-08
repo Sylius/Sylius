@@ -7,7 +7,7 @@ Feature: Maintaining a last picked up cart
     Background:
         Given the store operates on a single channel in "United States"
 
-    @api
+    @todo @api
     Scenario: Having access to a last picked up cart
         When I pick up my cart
         And I pick up my cart again

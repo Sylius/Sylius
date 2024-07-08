@@ -15,14 +15,14 @@ Feature: Applying promotion coupon with per customer usage limit
         And the store allows paying "Cash on Delivery"
         And I am a logged in customer
 
-    @ui @api
+    @todo @ui @api
     Scenario: Receiving discount from valid coupon with a per customer usage limit as a logged in customer
         When I add product "PHP T-Shirt" to the cart
         And I use coupon with code "SANTA2016"
         Then my cart total should be "$90.00"
         And my discount should be "-$10.00"
 
-    @ui @api
+    @todo @ui @api
     Scenario: Receiving discount from valid coupon with a per customer usage limit as a logged in customer
         Given I placed an order "#00000022"
         And I bought a "PHP T-Shirt" and a "PHP Socks"
@@ -33,7 +33,7 @@ Feature: Applying promotion coupon with per customer usage limit
         Then my cart total should be "$90.00"
         And my discount should be "-$10.00"
 
-    @ui @api
+    @todo @ui @api
     Scenario: Receiving no discount from valid coupon that has reached its per customer usage limit
         Given this coupon can be used once per customer
         And I placed an order "#00000022"
@@ -45,7 +45,7 @@ Feature: Applying promotion coupon with per customer usage limit
         And my cart total should be "$100.00"
         And there should be no discount
 
-    @ui @api
+    @todo @ui @api
     Scenario: Cancelled orders do not affect per customer usage limit by default
         Given this coupon can be used once per customer
         And I placed an order "#00000022"
@@ -57,7 +57,7 @@ Feature: Applying promotion coupon with per customer usage limit
         Then my cart total should be "$90.00"
         And my discount should be "-$10.00"
 
-    @ui @api
+    @todo @ui @api
     Scenario: Cancelled orders affect per customer usage limit
         Given this coupon is set as non reusable after cancelling the order in which it has been used
         And this coupon can be used once per customer

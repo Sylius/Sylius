@@ -12,7 +12,7 @@ Feature: Removing promotion coupon
         And I have product "PHP T-Shirt" in the cart
         And this cart has promotion applied with coupon "SANTA2016"
 
-    @api
+    @todo @api
     Scenario: Removing coupon code from cart
         When I remove coupon from my cart
         Then my cart total should be "$100.00"

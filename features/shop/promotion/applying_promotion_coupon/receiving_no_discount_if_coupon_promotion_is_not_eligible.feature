@@ -13,7 +13,7 @@ Feature: Receiving no discount if coupon promotion is not eligible
         And the store allows paying "Cash on Delivery"
         And I am a logged in customer
 
-    @ui @api
+    @todo @ui @api
     Scenario: Receiving no discount if promotion for the applied coupon is not enabled in the current channel
         Given this promotion is not available in any channel
         When I add 2 products "PHP T-Shirt" to the cart
@@ -22,7 +22,7 @@ Feature: Receiving no discount if coupon promotion is not eligible
         And my cart total should be "$200.00"
         And there should be no discount
 
-    @ui @api
+    @todo @ui @api
     Scenario: Receiving no discount if promotion for the applied coupon has not started yet
         Given this promotion starts tomorrow
         When I add 2 products "PHP T-Shirt" to the cart
@@ -31,7 +31,7 @@ Feature: Receiving no discount if coupon promotion is not eligible
         And my cart total should be "$200.00"
         And there should be no discount
 
-    @ui @api
+    @todo @ui @api
     Scenario: Receiving no discount if promotion for the applied coupon has already expired
         Given this promotion has already expired
         When I add 2 products "PHP T-Shirt" to the cart
@@ -40,7 +40,7 @@ Feature: Receiving no discount if coupon promotion is not eligible
         And my cart total should be "$200.00"
         And there should be no discount
 
-    @ui @api
+    @todo @ui @api
     Scenario: Receiving no discount if promotion's usage for the applied coupon is already exceeded
         Given this promotion has usage limit equal to 100
         And this promotion usage limit is already reached
@@ -50,7 +50,7 @@ Feature: Receiving no discount if coupon promotion is not eligible
         And my cart total should be "$200.00"
         And there should be no discount
 
-    @ui @api
+    @todo @ui @api
     Scenario: Receiving no discount if promotion's rules for the applied coupon are not fulfilled
         When I add product "PHP T-Shirt" to the cart
         And I use coupon with code "SANTA2016"

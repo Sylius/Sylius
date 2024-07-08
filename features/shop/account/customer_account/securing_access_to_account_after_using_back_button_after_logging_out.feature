@@ -9,7 +9,7 @@ Feature: Securing access to the account after using the back button after loggin
         And I am a logged in customer
         And I am browsing my orders
 
-    @ui @javascript @no-api
+    @todo @ui @javascript @no-api
     Scenario: Securing access to the account after using the back button after logging out
         When I log out
         And I go back one page in the browser

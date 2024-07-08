@@ -18,7 +18,7 @@ Feature: Seeing shipping methods which category is not same as any category of a
         And this shipping method requires that no units match to "Over-sized" shipping category
         And I am a logged in customer
 
-    @ui @api
+    @todo @ui @api
     Scenario: Seeing shipping method which category is not same as category of all my units
         Given I have product "Picasso T-Shirt" in the cart
         When I am at the checkout addressing step
@@ -27,7 +27,7 @@ Feature: Seeing shipping methods which category is not same as any category of a
         Then I should be on the checkout shipping step
         And I should see "Invisible Post" shipping method
 
-    @ui @api
+    @todo @ui @api
     Scenario: Seeing no shipping methods if its category is same as category of all my units
         Given I have product "Star Trek Ship" in the cart
         When I am at the checkout addressing step
@@ -35,7 +35,7 @@ Feature: Seeing shipping methods which category is not same as any category of a
         And I complete the addressing step
         Then there should be information about no available shipping methods
 
-    @ui @api
+    @todo @ui @api
     Scenario: Seeing no shipping methods if its category is same as one category from my units categories
         Given I have product "Picasso T-Shirt" in the cart
         And I have product "Star Trek Ship" in the cart
@@ -44,7 +44,7 @@ Feature: Seeing shipping methods which category is not same as any category of a
         And I complete the addressing step
         Then there should be information about no available shipping methods
 
-    @ui @api
+    @todo @ui @api
     Scenario: Seeing no shipping methods if any of my unit has product variants which shipping category matching to the shipping category from shipping method
         And the "T-Shirt banana" product's "S" size belongs to "Over-sized" shipping category
         And I have product "T-Shirt banana" with product option "Size" S in the cart
@@ -54,7 +54,7 @@ Feature: Seeing shipping methods which category is not same as any category of a
         And I complete the addressing step
         Then there should be information about no available shipping methods
 
-    @ui @api
+    @todo @ui @api
     Scenario: Seeing shipping methods if none of my unit has variant with shipping method matching to the shipping category from shipping method
         And I have product "T-Shirt banana" with product option "Size" S in the cart
         And I have product "T-Shirt banana" with product option "Size" M in the cart

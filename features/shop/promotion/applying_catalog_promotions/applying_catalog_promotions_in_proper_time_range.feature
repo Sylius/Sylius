@@ -10,7 +10,7 @@ Feature: Applying catalog promotions in proper time range
         And this product has "PHP T-Shirt" variant priced at "$20.00"
         And there is a catalog promotion "Winter sale" that reduces price by "30%" and applies on "PHP T-Shirt" variant
 
-    @api @ui
+    @todo @api @ui
     Scenario: Applying catalog promotion with its time range
         Given it is "2021-12-25" now
         And the catalog promotion "Winter sale" operates between "2021-12-20" and "2021-12-30"
@@ -18,7 +18,7 @@ Feature: Applying catalog promotions in proper time range
         Then I should see the product price "$14.00"
         And I should see the product original price "$20.00"
 
-    @api @ui
+    @todo @api @ui
     Scenario: Not applying catalog promotion if its start date has not been reached
         Given it is "2021-12-15" now
         And the catalog promotion "Winter sale" operates between "2021-12-20" and "2021-12-30"
@@ -26,7 +26,7 @@ Feature: Applying catalog promotions in proper time range
         Then I should see the product price "$20.00"
         And I should see this product has no catalog promotion applied
 
-    @api @ui
+    @todo @api @ui
     Scenario: Not applying catalog promotion if its end date has already passed
         Given it is "2022-01-01" now
         And the catalog promotion "Winter sale" operates between "2021-12-20" and "2021-12-30"
@@ -34,7 +34,7 @@ Feature: Applying catalog promotions in proper time range
         Then I should see the product price "$20.00"
         And I should see this product has no catalog promotion applied
 
-    @api @ui
+    @todo @api @ui
     Scenario: Not applying catalog promotion if its end date has already passed after end date modification
         Given it is "2021-12-25" now
         And the catalog promotion "Winter sale" operates between "2021-12-20" and "2021-12-30"

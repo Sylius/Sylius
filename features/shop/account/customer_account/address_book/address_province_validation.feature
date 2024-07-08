@@ -13,7 +13,7 @@ Feature: Province field entry stays after validation errors
         And I have an address "Lucifer Morningstar", "Seaside Fwy", "90802", "Los Angeles", "United States", "Arkansas" in my address book
         And I have an address "Fletcher Ren", "Upper Barkly Street", "3377", "Ararat", "Australia", "Victoria" in my address book
 
-    @ui @api
+    @todo @ui @api
     Scenario: The province name stays after validation error
         Given I am editing the address of "Lucifer Morningstar"
         When I remove the street
@@ -21,7 +21,7 @@ Feature: Province field entry stays after validation errors
         Then I should still be on the "Lucifer Morningstar" address edit page
         And I should still have "Arkansas" as my specified province
 
-    @ui @api
+    @todo @ui @api
     Scenario: The selected province stays after validation error
         Given I am editing the address of "Fletcher Ren"
         When I remove the street

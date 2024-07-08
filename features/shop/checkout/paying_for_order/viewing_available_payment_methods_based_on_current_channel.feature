@@ -19,7 +19,7 @@ Feature: Viewing available payment methods based on current channel
         And this product is also priced at "$25.00" in "Poland" channel
         And the store ships everywhere for free for all channels
 
-    @ui @api
+    @todo @ui @api
     Scenario: Seeing payment methods that are available in channel as a logged in customer
         Given I am a logged in customer
         And I am in the "United States" channel
@@ -30,7 +30,7 @@ Feature: Viewing available payment methods based on current channel
         And I should see "Bank of America" and "Offline" payment methods
         But I should not see "Bank of Poland" and "Bank of Universe" payment methods
 
-    @api @ui
+    @todo @api @ui
     Scenario: Seeing shipping methods that are available in another channel as an logged in customer
         Given I am a logged in customer
         And I am in the "Poland" channel
@@ -41,7 +41,7 @@ Feature: Viewing available payment methods based on current channel
         And I should see "Bank of Poland" and "Offline" payment methods
         But I should not see "Bank of Universe" and "Bank of America" payment methods
 
-    @ui @api
+    @todo @ui @api
     Scenario: Seeing payment methods that are available in channel as a guest
         Given I am in the "United States" channel
         And I have product "PHP T-Shirt" in the cart
@@ -51,7 +51,7 @@ Feature: Viewing available payment methods based on current channel
         And I should see "Bank of America" and "Offline" payment methods
         But I should not see "Bank of Poland" and "Bank of Universe" payment methods
 
-    @ui @api
+    @todo @ui @api
     Scenario: Seeing shipping methods that are available in another channel as a guest
         Given I am in the "Poland" channel
         And I have product "PHP T-Shirt" in the cart

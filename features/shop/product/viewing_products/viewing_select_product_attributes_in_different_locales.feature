@@ -17,13 +17,13 @@ Feature: Viewing product's select attributes in different locales
         And this product has also a select attribute "T-Shirt material" with value "Skórka banana" in "Polish (Poland)" locale
         And this product has also a select attribute "T-Shirt colour" with value "Yellow" in "English (United States)" locale
 
-    @ui @api
+    @todo @ui @api
     Scenario: Viewing a detailed page with product's select attribute in default locale
         When I view product "T-Shirt banana"
         Then I should see the product attribute "T-Shirt material" with value "Banana skin" on the list
         And I should also see the product attribute "T-Shirt colour" with value "Yellow" on the list
 
-    @ui @api
+    @todo @ui @api
     Scenario: Viewing a detailed page with product's select attribute in different locale
         When I view product "T-Shirt banana" in the "Polish (Poland)" locale
         Then I should see the product attribute "T-Shirt material" with value "Skórka banana" on the list

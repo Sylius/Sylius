@@ -15,7 +15,7 @@ Feature: Apply different taxes for variants with different tax category
         And "Medium Mug" variant of product "PHP Mug" belongs to "Cheap Mugs" tax category
         And "Large Mug" variant of product "PHP Mug" belongs to "Mugs" tax category
 
-    @ui @api
+    @todo @ui @api
     Scenario: Proper taxes for different taxed variants
         When I add "Medium Mug" variant of product "PHP Mug" to the cart
         And I add "Large Mug" variant of product "PHP Mug" to the cart

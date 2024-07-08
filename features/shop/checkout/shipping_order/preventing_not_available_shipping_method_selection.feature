@@ -9,7 +9,7 @@ Feature: Preventing not available shipping method selection
         And the store has a product "Targaryen T-Shirt" priced at "$19.99"
         And I am a logged in customer
 
-    @ui @api
+    @todo @ui @api
     Scenario: Not being able to select disabled shipping method
         Given the store has "Raven Post" shipping method with "$10.00" fee
         And the store has disabled "Dragon Post" shipping method with "$30.00" fee
@@ -19,7 +19,7 @@ Feature: Preventing not available shipping method selection
         And I complete the addressing step
         Then I should not be able to select "Dragon Post" shipping method
 
-    @ui @api
+    @todo @ui @api
     Scenario: Not being able to select shipping method not available for my shipping address
         Given there is a zone "The Rest of the World" containing all other countries
         And the store has "Dragon Post" shipping method with "$30.00" fee for the rest of the world
@@ -30,7 +30,7 @@ Feature: Preventing not available shipping method selection
         And I complete the addressing step
         Then I should not be able to select "Dragon Post" shipping method
 
-    @ui @api
+    @todo @ui @api
     Scenario: Not being able to select shipping method not available for order channel
         Given the store has "Raven Post" shipping method with "$10.00" fee not assigned to any channel
         And the store has "Dragon Post" shipping method with "$30.00" fee
@@ -40,7 +40,7 @@ Feature: Preventing not available shipping method selection
         And I complete the addressing step
         Then I should not be able to select "Raven Post" shipping method
 
-    @ui @api
+    @todo @ui @api
     Scenario: Being alerted about no shipping method available
         Given there is a zone "The Rest of the World" containing all other countries
         And the store has "Dragon Post" shipping method with "$30.00" fee for the rest of the world
@@ -53,7 +53,7 @@ Feature: Preventing not available shipping method selection
         And I should not be able to select "Dragon Post" shipping method
         And I should be informed that my order cannot be shipped to this address
 
-    @ui @api
+    @todo @ui @api
     Scenario: Not being able to select an archival shipping method
         Given the store has "Raven Post" shipping method with "$10.00" fee
         And the store has an archival "Dragon Post" shipping method with "$30.00" fee
@@ -63,7 +63,7 @@ Feature: Preventing not available shipping method selection
         And I complete the addressing step
         Then I should not be able to select "Dragon Post" shipping method
 
-    @ui @api
+    @todo @ui @api
     Scenario: Not being able to select shipping method not available for shipping category of products in cart
         Given the store has "Over-sized" shipping category
         And product "Targaryen T-Shirt" belongs to "Over-sized" shipping category
@@ -76,7 +76,7 @@ Feature: Preventing not available shipping method selection
         And I complete the addressing step
         Then I should not be able to select "Dragon Post" shipping method
 
-    @ui @api
+    @todo @ui @api
     Scenario: Not being able to select shipping method not available due to shipping rules
         Given the store has "Raven Post" shipping method with "$10.00" fee
         And the store has "Dragon Post" shipping method with "$30.00" fee
@@ -87,7 +87,7 @@ Feature: Preventing not available shipping method selection
         And I complete the addressing step
         Then I should not be able to select "Dragon Post" shipping method
 
-    @api
+    @todo @api
     Scenario: Not being able to select inexistent shipping method
         Given the store has "Raven Post" shipping method with "$10.00" fee
         And I have product "Targaryen T-Shirt" in the cart

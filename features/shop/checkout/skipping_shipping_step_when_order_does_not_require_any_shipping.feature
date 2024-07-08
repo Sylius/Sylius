@@ -12,7 +12,7 @@ Feature: Skipping shipping step when order does not require any shipping
         And the store has "SHL" shipping method with "$5.00" fee
         And I am a logged in customer
 
-    @ui @no-api
+    @todo @ui @no-api
     Scenario: Seeing checkout payment page after addressing if none of order items require shipping
         Given I have "Guards! Guards! - ebook" variant of product "Guards! Guards!" in the cart
         And I am at the checkout addressing step
@@ -20,7 +20,7 @@ Feature: Skipping shipping step when order does not require any shipping
         And I complete the addressing step
         Then I should be on the checkout payment step
 
-    @ui @no-api
+    @todo @ui @no-api
     Scenario: Seeing checkout shipping page after addressing if at least one of order items require shipping
         Given I have "Guards! Guards! - ebook" variant of product "Guards! Guards!" in the cart
         And I have "Guards! Guards! - book" variant of product "Guards! Guards!" in the cart

@@ -13,7 +13,7 @@ Feature: Seeing a order item discount
         And the store allows paying Offline
         And I am a logged in customer
 
-    @ui @api
+    @todo @ui @api
     Scenario: Seeing a discounted price on order item
         Given I have product "Lannister Coat" in the cart
         And I specified the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"

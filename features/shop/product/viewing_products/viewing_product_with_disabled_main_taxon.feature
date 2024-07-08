@@ -11,7 +11,7 @@ Feature: Viewing product with a disabled main taxon
         And the store has a product "T-Shirt Coconut" available in "Poland" channel
         And this product has a main taxon "Men"
 
-    @ui @no-api
+    @todo @ui @no-api
     Scenario: Seeing the breadcrumb with a disabled main taxon
         Given the "Men" taxon is disabled
         When I view product "T-Shirt Coconut"

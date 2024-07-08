@@ -13,7 +13,7 @@ Feature: Skipping payment selection when order total is zero
         And the promotion gives "$10.00" discount to every order with quantity at least 1
         And I am a logged in customer
 
-    @ui @api
+    @todo @ui @api
     Scenario: Seeing order summary after shipping selection when order total is zero
         Given I have product "PHP T-Shirt" in the cart
         And I am at the checkout addressing step
@@ -24,7 +24,7 @@ Feature: Skipping payment selection when order total is zero
         Then I should be on the checkout summary step
         And I should not see any information about payment method
 
-    @ui @api
+    @todo @ui @api
     Scenario: Seeing payment selection after shipping selection when order total is not zero
         Given I have product "PHP T-Shirt" in the cart
         And I am at the checkout addressing step

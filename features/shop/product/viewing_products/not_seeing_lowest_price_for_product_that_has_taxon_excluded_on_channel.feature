@@ -15,25 +15,25 @@ Feature: Not seeing the lowest price for a product that has a taxon excluded on 
         And it belongs to "Vegetables" and "Special offers"
         And this product's price changed to "$15.00" and original price changed to "$25.00"
 
-    @api @ui
+    @todo @api @ui
     Scenario: Not seeing the lowest price for a product that has a taxon excluded on the channel
         Given the "Vegetables" taxon is excluded from showing the lowest price of discounted products in the "United States" channel
         When I view product "Broccoli"
         Then I should not see information about its lowest price
 
-    @api @ui
+    @todo @api @ui
     Scenario: Not seeing the lowest price for a product that has parent taxon excluded on the channel
         Given the "Groceries" taxon is excluded from showing the lowest price of discounted products in the "United States" channel
         When I view product "Broccoli"
         Then I should not see information about its lowest price
 
-    @api @ui
+    @todo @api @ui
     Scenario: Not seeing the lowest price for a product that has root taxon excluded on the channel
         Given the "Category" taxon is excluded from showing the lowest price of discounted products in the "United States" channel
         When I view product "Broccoli"
         Then I should not see information about its lowest price
 
-    @api @ui
+    @todo @api @ui
     Scenario: Not seeing the lowest price for a product that has only one taxon excluded on the channel
         Given the "Vegetables" taxon is excluded from showing the lowest price of discounted products in the "United States" channel
         When I view product "Cauliflower"

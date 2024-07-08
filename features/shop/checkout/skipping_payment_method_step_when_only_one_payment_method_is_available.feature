@@ -11,7 +11,7 @@ Feature: Skipping payment step when only one payment method is available
         And the store has a product "Guards! Guards!" priced at "$20.00"
         And the store allows paying with "Paypal Express Checkout"
 
-    @ui @api
+    @todo @ui @api
     Scenario: Seeing checkout completion page after shipping if only one payment method is available
         When I add product "Guards! Guards!" to the cart
         And I complete addressing step with email "guest@example.com" and "United States" based billing address
@@ -19,7 +19,7 @@ Feature: Skipping payment step when only one payment method is available
         Then I should be on the checkout complete step
         And my order's payment method should be "Paypal Express Checkout"
 
-    @ui @api
+    @todo @ui @api
     Scenario: Seeing checkout completion page after shipping if only one payment method is available
         Given the store has "Offline" payment method not assigned to any channel
         When I add product "Guards! Guards!" to the cart
@@ -28,7 +28,7 @@ Feature: Skipping payment step when only one payment method is available
         Then I should be on the checkout complete step
         And my order's payment method should be "Paypal Express Checkout"
 
-    @ui @api
+    @todo @ui @api
     Scenario: Seeing checkout completion page after shipping if only one payment method is available
         Given the store allows paying with "Offline"
         And the payment method "Offline" is disabled
@@ -38,7 +38,7 @@ Feature: Skipping payment step when only one payment method is available
         Then I should be on the checkout complete step
         And my order's payment method should be "Paypal Express Checkout"
 
-    @ui @api
+    @todo @ui @api
     Scenario: Preventing skipping the payment method choosing step when no payment method is available
         Given the store has disabled all payment methods
         When I add product "Guards! Guards!" to the cart

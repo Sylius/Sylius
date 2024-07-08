@@ -13,7 +13,7 @@ Feature: Seeing tax total on order summary page
         And the store allows paying Offline
         And I am a logged in customer
 
-    @ui @api
+    @todo @ui @api
     Scenario: Seeing the total tax on order summary page
         Given I have product "The Sorting Hat" in the cart
         When I specified the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"

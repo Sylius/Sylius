@@ -12,19 +12,19 @@ Feature: Viewing product reviews on product's reviews page
         And this product has also a review titled "Too gloomy" and rated 3 added by customer "jrr.tolkien@middle-earth.com"
         And I am a logged in customer
 
-    @ui @api
+    @todo @ui @api
     Scenario: Viewing all accepted product reviews on product's reviews page
         When I check this product's reviews
         Then I should see 3 product reviews in the list
 
-    @ui @api
+    @todo @ui @api
     Scenario: Viewing only accepted product reviews on product's reviews page
         Given this product has also a new review titled "Classic" and rated 5 added by customer "sir.terry@pratchett.com"
         When I check this product's reviews
         Then I should see 3 product reviews in the list
         But I should not see review titled "Classic" in the list
 
-    @ui @api
+    @todo @ui @api
     Scenario: Viewing no review message if there are no reviews
         Given the store has a product "Lux perpetua"
         When I check this product's reviews

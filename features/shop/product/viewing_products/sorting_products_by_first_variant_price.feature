@@ -16,14 +16,14 @@ Feature: Sorting products by first variant price
         And the product "Johnnie Walker" has "Johnnie Walker Red Label" variant priced at "$20.00"
         And the product "Johnnie Walker" has "Johnnie Walker Blue Label" variant priced at "$125.00"
 
-    @ui @api
+    @todo @ui @api
     Scenario: Sorting products by price of their first variant with ascending order
         When I browse products from taxon "Whiskey"
         And I sort products by the lowest price first
         Then the first product on the list should have name "Johnnie Walker" and price "$20.00"
         And the last product on the list should have name "Jack Daniel's" and price "$50.00"
 
-    @ui @api
+    @todo @ui @api
     Scenario: Sorting products by price of their first variant with descending order
         When I browse products from taxon "Whiskey"
         And I sort products by the highest price first

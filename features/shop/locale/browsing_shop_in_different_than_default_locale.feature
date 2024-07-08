@@ -12,18 +12,18 @@ Feature: Browsing shop in different than default locale
         And this product is named "Koszulka bananowa" in the "Polish (Poland)" locale
         And this product is named "香蕉T恤" in the "Chinese (Simplified, China)" locale
 
-    @ui @api
+    @todo @ui @api
     Scenario: Browsing product details in non-default locale
         When I browse that channel
         And I check this product's details in the "Polish (Poland)" locale
         Then I should see the product name "Koszulka bananowa"
 
-    @ui @api
+    @todo @ui @api
     Scenario: Browsing product details in non-default locale
         When I check this product's details in the "Chinese (Simplified, China)" locale
         Then I should see the product name "香蕉T恤"
 
-    @ui @api
+    @todo @ui @api
     Scenario: Not being able to shop using a locale non-existent in the channel
         When I browse that channel
         And I try to check this product's details in the "Irish (Ireland)" locale

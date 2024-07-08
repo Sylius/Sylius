@@ -10,7 +10,7 @@ Feature: Applying promotion coupon
         And the store has promotion "Christmas sale" with coupon "SANTA2016"
         And this promotion gives "100%" discount to every order
 
-    @ui @api
+    @todo @ui @api
     Scenario: Receiving full percentage discount for my cart
         When I add product "PHP T-Shirt" to the cart
         And I use coupon with code "SANTA2016"

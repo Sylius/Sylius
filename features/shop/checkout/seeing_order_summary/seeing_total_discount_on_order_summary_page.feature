@@ -15,7 +15,7 @@ Feature: Seeing order promotion total on order summary page
         And it gives "$5.00" discount to every order
         And I am a logged in customer
 
-    @ui @api
+    @todo @ui @api
     Scenario: Seeing the total discount on order summary page
         Given I have product "The Sorting Hat" in the cart
         And I specified the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"

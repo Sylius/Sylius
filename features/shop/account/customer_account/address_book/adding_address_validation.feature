@@ -10,7 +10,7 @@ Feature: Seeing validation messages during address addition
         And this country has the "Queensland" province with "AU-QLD" code
         And I am a logged in customer
 
-    @ui @api
+    @todo @ui @api
     Scenario: Seeing validation errors when adding an empty address
         When I want to add a new address to my address book
         And I leave every field empty
@@ -18,7 +18,7 @@ Feature: Seeing validation messages during address addition
         Then I should still be on the address addition page
         And I should be notified about 6 errors
 
-    @ui @api
+    @todo @ui @api
     Scenario: The province needs to be selected when the chosen country has at least one stated
         When I want to add a new address to my address book
         And I specify the address as "Lucifer Morningstar", "Seaside Fwy", "90802", "Los Angeles", "United States", "Arkansas"

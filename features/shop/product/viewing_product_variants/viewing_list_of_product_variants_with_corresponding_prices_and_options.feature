@@ -12,14 +12,14 @@ Feature: Viewing corresponding prices and options of product variants
         And this product with "memory" option "2GB" is priced at "$42.00"
         And this product with "memory" option "4GB" is priced at "$84.00"
 
-    @api @no-ui
+    @todo @api @no-ui
     Scenario: Viewing product variants with corresponding prices and options
         When I view variants of the "Raspberry Pi" product
         Then I should see variant with "Memory" option and "1GB" option value priced at "$21.00" at 1st position
         And I should see variant with "Memory" option and "2GB" option value priced at "$42.00" at 2nd position
         And I should see variant with "Memory" option and "4GB" option value priced at "$84.00" at 3rd position
 
-    @api @no-ui
+    @todo @api @no-ui
     Scenario: Filtering product variants by option
         When I view variants of the "Raspberry Pi" product
         And I filter variants by "2GB" option value

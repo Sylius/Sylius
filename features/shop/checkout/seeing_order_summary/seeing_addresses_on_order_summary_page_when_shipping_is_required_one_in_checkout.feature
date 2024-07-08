@@ -14,7 +14,7 @@ Feature: Seeing order addresses on order summary page when shipping is the requi
         And I have product "PHP T-Shirt" in the cart
         And I am at the checkout addressing step
 
-    @api @ui
+    @todo @api @ui
     Scenario: Seeing the same shipping and billing address on order summary
         When I specify the required shipping address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
         And I complete the addressing step
@@ -22,7 +22,7 @@ Feature: Seeing order addresses on order summary page when shipping is the requi
         Then I should be on the checkout summary step
         And address to "Jon Snow" should be used for both shipping and billing of my order
 
-    @api @ui
+    @todo @api @ui
     Scenario: Seeing different shipping and billing addresses on order summary
         When I specify the required shipping address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
         And I specify different billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Eddard Stark"

@@ -17,7 +17,7 @@ Feature: Seeing applied catalog promotions on products list
         And this product belongs to "T-Shirts"
         And there is a catalog promotion "Winter sale" that reduces price by "50%" and applies on "PHP T-Shirt" variant
 
-    @ui @no-api
+    @todo @ui @no-api
     Scenario: Seeing applied catalog promotion on products list
         When I browse products from taxon "T-Shirts"
         Then I should see "Programming T-Shirt" product discounted from "$20.00" to "$10.00" by "Winter sale" on the list

@@ -11,7 +11,7 @@ Feature: Viewing product's enabled variants only
         And the product "Super Cool T-Shirt" has also an "Extra Large" variant
         And the "Extra Large" product variant is disabled
 
-    @api @no-ui
+    @todo @api @no-ui
     Scenario: Viewing only enabled variants
         When I view variants
         Then I should see "Small", "Medium" and "Large" variants

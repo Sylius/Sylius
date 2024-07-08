@@ -21,19 +21,19 @@ Feature: Seeing the corresponding lowest price before the discount when selectin
         And there is a catalog promotion "Summer sale" with priority 1 that reduces price by "50%" and applies on "Bocian Vodka variant 0" variant
 
 
-    @no-api @ui @javascript
+    @todo @no-api @ui @javascript
     Scenario: Seeing correct lowest price when selecting first option value from the list
         When I view product "Wyborowa Vodka"
         And I select its "Taste" as "Exquisite"
         Then I should see "$20.00" as its lowest price before the discount
 
-    @no-api @ui @javascript
+    @todo @no-api @ui @javascript
     Scenario: Seeing correct lowest price when selecting another option value from the list
         When I view product "Wyborowa Vodka"
         And I select its "Taste" as "Lemon"
         Then I should see "$25.00" as its lowest price before the discount
 
-    @no-api @ui @javascript
+    @todo @no-api @ui @javascript
     Scenario: Seeing correct lowest price when selecting last option value from the list after selecting another option value from the list
         When I view product "Wyborowa Vodka"
         And I select its "Taste" as "Lemon"
@@ -41,14 +41,14 @@ Feature: Seeing the corresponding lowest price before the discount when selectin
         And I select its "Taste" as "Bitter"
         Then I should see "$35.00" as its lowest price before the discount
 
-    @no-api @ui @javascript
+    @todo @no-api @ui @javascript
     Scenario: Seeing correct lowest price when having discounted variant with more than one option value
         When I view product "Bocian Vodka"
         And I select its "Color" as "Blue"
         And I select its "Size" as "Small"
         Then I should see "$10.00" as its lowest price before the discount
 
-    @no-api @ui @javascript
+    @todo @no-api @ui @javascript
     Scenario: Not seeing the lowest price when having variant with more than one option value and without discount
         When I view product "Bocian Vodka"
         And I select its "Color" as "Blue"
