@@ -39,7 +39,7 @@ final readonly class LocaleContext implements Context
             $this->dashboardPage->open();
         }
 
-        Assert::same($this->dashboardPage->getDashboardTitle(), $this->translate('sylius.ui.dashboard', $localeCode));
+        Assert::same($this->dashboardPage->getDashboardHeader(), $this->translate('sylius.ui.dashboard', $localeCode));
     }
 
     /**

@@ -73,9 +73,9 @@ class DashboardPage extends SymfonyPage implements DashboardPageInterface
         return $this->getElement('average_order_value')->getText();
     }
 
-    public function getDashboardTitle(): string
+    public function getDashboardHeader(): string
     {
-        return $this->getElement('dashboard_title')->getText();
+        return $this->getElement('dashboard_header')->getText();
     }
 
     /** @throws ElementNotFoundException */
@@ -139,7 +139,7 @@ class DashboardPage extends SymfonyPage implements DashboardPageInterface
             'channel_choosing_button' => '[data-test-choose-channel-button]',
             'channel_choosing_list' => '[data-test-choose-channel-list] a:contains("%channelName%")',
             'customer_list' => '#customers',
-            'dashboard_title' => '[data-test-dashboard-title]',
+            'dashboard_header' => '[data-test-dashboard-header]',
             'dropdown' => 'i.dropdown',
             'logout' => '[data-test-user-dropdown-item="Logout"]',
             'month_split_by_days_statistics_button' => 'button[data-stats-button="month"]',

@@ -30,7 +30,7 @@ interface DashboardPageInterface extends SymfonyPageInterface
 
     public function getAverageOrderValue(): string;
 
-    public function getDashboardTitle(): string;
+    public function getDashboardHeader(): string;
 
     public function logOut(): void;
 

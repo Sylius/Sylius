@@ -14,7 +14,7 @@
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <parameters>
         <parameter key="sylius.behat.page.admin.locale.create.class">%sylius.behat.page.admin.crud.create.class%</parameter>
-        <parameter key="sylius.behat.page.admin.locale.index.class">%sylius.behat.page.admin.crud.index.class%</parameter>
+        <parameter key="sylius.behat.page.admin.locale.index.class">Sylius\Behat\Page\Admin\Locale\IndexPage</parameter>
     </parameters>
 
     <services>

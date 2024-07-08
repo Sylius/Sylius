@@ -17,7 +17,7 @@ use Behat\Behat\Context\Context;
 use Sylius\Behat\Element\Admin\Locale\FormElementInterface;
 use Sylius\Behat\NotificationType;
 use Sylius\Behat\Page\Admin\Crud\CreatePageInterface;
-use Sylius\Behat\Page\Admin\Crud\IndexPageInterface;
+use Sylius\Behat\Page\Admin\Locale\IndexPageInterface;
 use Sylius\Behat\Service\NotificationCheckerInterface;
 use Webmozart\Assert\Assert;
 
@@ -29,6 +29,14 @@ final readonly class ManagingLocalesContext implements Context
         private FormElementInterface $formElement,
         private NotificationCheckerInterface $notificationChecker,
     ) {
+    }
+
+    /**
+     * @Given I am browsing locales
+     */
+    public function iWantToBrowseLocales(): void
+    {
+        $this->indexPage->open();
     }
 
     /**
@@ -63,6 +71,15 @@ final readonly class ManagingLocalesContext implements Context
     {
         $this->indexPage->open();
         $this->indexPage->deleteResourceOnPage(['code' => $localeCode]);
+    }
+
+    /**
+     * @When I filter by code containing :phrase
+     */
+    public function iFilterByCodeContaining(string $phrase): void
+    {
+        $this->indexPage->filterByCode($phrase);
+        $this->indexPage->filter();
     }
 
     /**
@@ -120,5 +137,21 @@ final readonly class ManagingLocalesContext implements Context
     public function theLocaleShouldBeStillPresentInTheSystem(string $localeCode): void
     {
         Assert::true($this->indexPage->isSingleResourceOnPage(['code' => $localeCode]));
+    }
+
+    /**
+     * @Then I should see a single locale in the list
+     */
+    public function iShouldSeeLocaleInTheList(): void
+    {
+        Assert::same($this->indexPage->countItems(), 1);
+    }
+
+    /**
+     * @Then I should see the local :localName
+     */
+    public function IShouldSeeTheLocal(string $localName): void
+    {
+        Assert::true($this->indexPage->isSingleResourceOnPage(['name' => $localName]));
     }
 }
