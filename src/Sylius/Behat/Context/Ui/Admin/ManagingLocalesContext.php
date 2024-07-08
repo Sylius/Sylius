@@ -34,7 +34,7 @@ final readonly class ManagingLocalesContext implements Context
     /**
      * @Given I am browsing locales
      */
-    public function iWantToBrowseLocales(): void
+    public function iAmBrowsingLocales(): void
     {
         $this->indexPage->open();
     }
@@ -148,10 +148,10 @@ final readonly class ManagingLocalesContext implements Context
     }
 
     /**
-     * @Then I should see the local :localName
+     * @Then I should see the locale :localeName
      */
-    public function IShouldSeeTheLocal(string $localName): void
+    public function iShouldSeeTheLocale(string $localeName): void
     {
-        Assert::true($this->indexPage->isSingleResourceOnPage(['name' => $localName]));
+        Assert::true($this->indexPage->isSingleResourceOnPage(['name' => $localeName]));
     }
 }

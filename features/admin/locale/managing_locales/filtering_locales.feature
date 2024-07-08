@@ -15,4 +15,4 @@ Feature: Filtering locales
     Scenario: Filtering locales by code
         When I filter by code containing "pl"
         Then I should see a single locale in the list
-        And I should see the local "Polish (Poland)"
+        And I should see the locale "Polish (Poland)"
