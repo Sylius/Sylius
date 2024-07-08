@@ -27,6 +27,8 @@ sylius_grid:
                     label: sylius.ui.search
                     options:
                         fields: [code, name]
+                    form_options:
+                        type: !php/const Sylius\Component\Grid\Filter\StringFilter::TYPE_CONTAINS
             actions:
                 main:
                     create:

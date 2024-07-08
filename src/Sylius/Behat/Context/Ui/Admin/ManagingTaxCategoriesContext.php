@@ -50,11 +50,11 @@ final readonly class ManagingTaxCategoriesContext implements Context
     }
 
     /**
-     * @When I specify a too long code
+     * @When I specify a too long :field
      */
-    public function iSpecifyATooLongCode(): void
+    public function iSpecifyATooLongCode(string $field): void
     {
-        $this->formElement->setCode(str_repeat('a', 256));
+        $this->formElement->fillElement(str_repeat('a', 256), $field);
     }
 
     /**
@@ -104,6 +104,7 @@ final readonly class ManagingTaxCategoriesContext implements Context
     }
 
     /**
+     * @Given I am browsing tax categories
      * @When I browse tax categories
      */
     public function iWantToBrowseTaxCategories(): void
@@ -208,19 +209,36 @@ final readonly class ManagingTaxCategoriesContext implements Context
 
     /**
      * @Then I should see a single tax category in the list
+     * @Then I should see :amount tax categories in the list
      */
-    public function iShouldSeeTaxCategoriesInTheList(): void
+    public function iShouldSeeTaxCategoriesInTheList(int $amount = 1): void
     {
-        Assert::same($this->indexPage->countItems(), 1);
+        Assert::same($this->indexPage->countItems(), $amount);
     }
 
     /**
-     * @Then I should be notified that code is too long
+     * @Then I should see the tax category :taxCategoryName
      */
-    public function iShouldBeNotifiedThatCodeIsTooLong(): void
+    public function IShouldSeeTheTaxCategory(string $taxCategoryName): void
+    {
+        Assert::true($this->indexPage->isSingleResourceOnPage(['nameAndDescription' => $taxCategoryName]));
+    }
+
+    /**
+     * @Then I should not see the tax category :taxCategoryName
+     */
+    public function IShouldNotSeeTheTaxCategory(string $taxCategoryName): void
+    {
+        Assert::false($this->indexPage->isSingleResourceOnPage(['nameAndDescription' => $taxCategoryName]));
+    }
+
+    /**
+     * @Then I should be notified that :field is too long
+     */
+    public function iShouldBeNotifiedThatIsTooLong(string $field): void
     {
         Assert::contains(
-            $this->formElement->getValidationMessage('code'),
+            $this->formElement->getValidationMessage($field),
             'must not be longer than 255 characters.',
         );
     }

@@ -21,6 +21,12 @@ class FormElement extends Element implements FormElementInterface
 {
     private ?NodeElement $form = null;
 
+    public function fillElement(string $value, string $element, array $parameters = []): void
+    {
+        $foundElement = $this->getElement($element, $parameters);
+        $foundElement->setValue($value);
+    }
+
     /**
      * @param array<string, string> $parameters
      */
