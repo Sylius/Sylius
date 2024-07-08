@@ -2,7 +2,7 @@ twig_hooks:
     hooks:
         'sylius_admin.locale.create.content':
             form:
-                template: '@SyliusAdmin/shared/crud/create/content/form.html.twig'
+                template: '@SyliusAdmin/shared/crud/common/content/form.html.twig'
                 configuration:
                     render_rest: false
 
