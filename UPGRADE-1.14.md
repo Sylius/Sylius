@@ -2,16 +2,22 @@
 
 ### Deprecations
 
-1. The `Sylius\Bundle\AdminBundle\Form\Extension\CatalogPromotionScopeTypeExtension` and `Sylius\Bundle\AdminBundle\Form\Extension\CatalogPromotionActionTypeExtension` 
-   have been deprecated and will be removed in Sylius 2.0. Starting with this version, form types will be extended using 
-   the parent form instead of through form extensions, like it's done in the `Sylius\Bundle\AdminBundle\Form\Type\CatalogPromotionScopeType` 
-   and `Sylius\Bundle\AdminBundle\Form\Type\CatalogPromotionActionType` classes.
+1. The following form extensions have been deprecated and will be removed in Sylius 2.0:
+    - `Sylius\Bundle\AdminBundle\Form\Extension\CatalogPromotionScopeTypeExtension`
+    - `Sylius\Bundle\AdminBundle\Form\Extension\CatalogPromotionActionTypeExtension`
+    - `Sylius\Bundle\CoreBundle\Form\Extension\CustomerTypeExtension`
+    - `Sylius\Bundle\CoreBundle\Form\Extension\LocaleTypeExtension`
+
+   Starting with this version, form types will be extended using the parent form instead of through form extensions,
+   like it's done in the `Sylius\Bundle\AdminBundle\Form\Type\CatalogPromotionScopeType` and `Sylius\Bundle\AdminBundle\Form\Type\CatalogPromotionActionType` classes.
 
 1. The class `Sylius\Bundle\CoreBundle\Twig\StateMachineExtension` has been deprecated and will be removed in Sylius 2.0. Use `Sylius\Abstraction\StateMachine\Twig\StateMachineExtension` instead.
 
 1. The class `Sylius\Bundle\CoreBundle\Console\Command\ShowAvailablePluginsCommand` has been deprecated and will be removed in Sylius 2.0.
 
 1. The class `Sylius\Bundle\CoreBundle\Console\Command\Model\PluginInfo` has been deprecated and will be removed in Sylius 2.0.
+
+1. The class `\Sylius\Bundle\CoreBundle\Form\EventSubscriber\AddUserFormSubscriber` has been deprecated and will be removed in Sylius 2.0.
 
 1. Extending `\InvalidArgumentException` by `Sylius\Component\Core\Inventory\Exception\NotEnoughUnitsOnHandException` 
    and `Sylius\Component\Core\Inventory\Exception\NotEnoughUnitsOnHoldException` is deprecated, instead they will extend 
