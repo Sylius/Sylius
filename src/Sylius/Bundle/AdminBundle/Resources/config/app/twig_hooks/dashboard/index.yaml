@@ -22,7 +22,7 @@ twig_hooks:
 
         'sylius_admin.dashboard.index.content.header':
             breadcrumbs:
-                template: '@SyliusAdmin/dashboard/index/content/header/breadcrumbs.html.twig'
+                enabled: false
             title_block:
                 template: '@SyliusAdmin/dashboard/index/content/header/title_block/title.html.twig'
             channel_selector:
