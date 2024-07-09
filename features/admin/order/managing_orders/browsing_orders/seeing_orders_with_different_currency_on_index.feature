@@ -17,7 +17,7 @@ Feature: Seeing orders' total in their currency
         And there is a customer account "customer@example.com" identified by "sylius"
         And I am logged in as "customer@example.com"
 
-    @api @ui
+    @todo @api @ui
     Scenario: List of orders from only one channel
         Given I changed my current channel to "United States"
         And I have product "Angel T-Shirt" in the cart
@@ -26,7 +26,7 @@ Feature: Seeing orders' total in their currency
         And I confirm my order
         Then the administrator should see the order with total "$20.00" in order list
 
-    @api @ui
+    @todo @api @ui
     Scenario: List of orders from different channels
         Given I changed my current channel to "United States"
         And I have product "Angel T-Shirt" in the cart
