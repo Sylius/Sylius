@@ -99,7 +99,7 @@ Let's remove the registration column in this example:
 
 .. code-block:: twig
 
-   {% extends '@SyliusShop/layout.html.twig' %}
+   {% extends '@SyliusShop/base.html.twig' %}
 
    {% form_theme form '@SyliusShop/Form/theme.html.twig' %}
 

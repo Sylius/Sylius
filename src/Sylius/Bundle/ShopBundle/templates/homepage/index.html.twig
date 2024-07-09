@@ -1,5 +1,8 @@
-{% extends '@SyliusShop/layout.html.twig' %}
+{% set homepage_hook = 'sylius_shop.homepage.index' %}
+{% set prefixes = [homepage_hook] %}
+
+{% extends '@SyliusShop/base.html.twig' %}
 
 {% block content %}
-    {% hook 'sylius_shop.homepage.index' %}
+    {% hook homepage_hook %}
 {% endblock %}

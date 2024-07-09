@@ -1,0 +1,59 @@
+twig_hooks:
+    hooks:
+        'sylius_shop.base.#stylesheets': # TODO: contribute to TwigHooks so that it does not generate dots
+            styles:
+                template: '@SyliusShop/base/styles.html.twig'
+
+        'sylius_shop.base.#javascripts': # TODO: contribute to TwigHooks so that it does not generate dots
+            scripts:
+                template: '@SyliusShop/base/scripts.html.twig'
+
+        'sylius_shop.base.header':
+            top_bar:
+                template: '@SyliusShop/base/header/top_bar.html.twig'
+            content:
+                template: '@SyliusShop/base/header/content.html.twig'
+            navbar:
+                template: '@SyliusShop/base/header/navbar.html.twig'
+            flashes:
+                template: '@SyliusShop/base/header/flashes.html.twig'
+
+        'sylius_shop.base.header.top_bar':
+            info_message:
+                template: '@SyliusShop/base/header/top_bar/info_message.html.twig'
+            currency_switcher:
+                template: '@SyliusShop/base/header/top_bar/currency_switcher.html.twig'
+            locale_switcher:
+                template: '@SyliusShop/base/header/top_bar/locale_switcher.html.twig'
+
+        'sylius_shop.base.header.content':
+            logo:
+                template: "@SyliusShop/base/header/content/logo.html.twig"
+            security_widget:
+                template: "@SyliusShop/base/header/content/security_widget.html.twig"
+            cart:
+                template: "@SyliusShop/base/header/content/cart.html.twig"
+
+        'sylius_shop.base.header.content.logo':
+            content:
+                template: "@SyliusShop/Shared/sylius_logo.html.twig"
+
+        'sylius_shop.base.header.navbar':
+            menu:
+                template: "@SyliusShop/base/header/navbar/menu.html.twig"
+
+        'sylius_shop.base.header.flashes':
+            content:
+                template: "@SyliusShop/Shared/flashes.html.twig"
+
+        'sylius_shop.base.footer':
+            content:
+                template: '@SyliusShop/base/footer/content.html.twig'
+
+        'sylius_shop.base.footer.content':
+            menu:
+                template: '@SyliusShop/base/footer/content/menu.html.twig'
+            payment_methods:
+                template: '@SyliusShop/base/footer/content/payment_methods.html.twig'
+            copy:
+                template: '@SyliusShop/base/footer/content/copy.html.twig'

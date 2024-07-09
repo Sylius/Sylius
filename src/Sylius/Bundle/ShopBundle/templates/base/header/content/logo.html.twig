@@ -1,5 +1,5 @@
 <div class="col">
     <a href="{{ path('sylius_shop_homepage') }}" class="d-inline-block py-lg-2" style="width: 10rem">
-        {{ sylius_template_event('sylius.shop.logo') }}
+        {% hook 'logo' %}
     </a>
 </div>

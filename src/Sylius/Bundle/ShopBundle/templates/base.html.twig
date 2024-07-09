@@ -1,0 +1,45 @@
+{% set generic_hook = 'sylius_shop.base' %}
+{% set prefixes = prefixes|default([])|merge([generic_hook]) %}
+
+<!DOCTYPE html>
+
+<html lang="{{ app.request.locale|slice(0, 2) }}">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+        <title>{% block title %}{{ sylius.channel.name }}{% endblock %}</title>
+
+        <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+
+        {% block metatags %}
+            {% hook '#metatags' with { _prefixes: prefixes } %}
+        {% endblock %}
+
+        {% block stylesheets %}
+            {% hook '#stylesheets' with { _prefixes: prefixes } %}
+        {% endblock %}
+
+        {% hook 'head' with { _prefixes: prefixes } %}
+    </head>
+
+    <body data-route="{{ app.request.get('_route') }}">
+        {% block body %}
+            <div class="d-flex flex-column min-vh-100">
+                {% block header %}
+                    {% hook 'header' with { _prefixes: prefixes } %}
+                {% endblock %}
+
+                {% block content %}{% endblock %}
+
+                {% block footer %}
+                    {% hook 'footer' with { _prefixes: prefixes } %}
+                {% endblock %}
+            </div>
+        {% endblock %}
+
+        {% block javascripts %}
+            {% hook '#javascripts' with { _prefixes: prefixes } %}
+        {% endblock %}
+    </body>
+</html>
