@@ -19,7 +19,7 @@
                 {% endif %}
             {% endif %}
 
-            <div class="d-flex flex-column flex-xl-row justify-content-center gap-2 mt-4">
+            <div class="d-flex flex-column flex-lg-row justify-content-center gap-2 mt-4">
                 {% if order.customer.user is not null %}
                     {{ buttons.primary(path('sylius_shop_account_order_show', {'number': order.number}), 'sylius.ui.view_order'|trans, 'show-order-in-account', null) }}
                 {% else %}
