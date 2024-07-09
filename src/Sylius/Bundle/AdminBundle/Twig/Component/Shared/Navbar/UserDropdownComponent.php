@@ -38,7 +38,7 @@ class UserDropdownComponent
     }
 
     /**
-     * @return array<array-key, array<array-key, array{title?: string, url?: string, icon?: string, type?: string, class?: string, attr?: array<string, mixed>}>>
+     * @return array<array-key, array{title?: string, url?: string, icon?: string, type?: string, class?: string}>
      */
     #[ExposeInTemplate(name: 'menu_items')]
     public function getMenuItems(): array
