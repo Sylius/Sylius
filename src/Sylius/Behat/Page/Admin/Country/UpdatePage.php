@@ -91,18 +91,18 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
 
     public function getFormValidationErrors(): array
     {
-        $errors = $this->getElement('form')->findAll('css', '[data-test-validation-error]:not(.pointing)');
+        $errors = $this->getElement('form')->findAll('css', '.alert-danger');
 
         return array_map(fn (NodeElement $element) => $element->getText(), $errors);
     }
 
     public function getValidationMessage(string $element): string
     {
-        $provinceForm = $this->getElement('last_province');
+        $province = $this->getElement('last_province');
 
-        $foundElement = $provinceForm->find('css', '[data-test-validation-error]');
+        $foundElement = $province->find('css', '.invalid-feedback');
         if (null === $foundElement) {
-            throw new ElementNotFoundException($this->getSession(), 'Tag', 'css', '[data-test-validation-error]');
+            throw new ElementNotFoundException($this->getSession(), 'Tag', 'css', '.invalid-feedback');
         }
 
         return $foundElement->getText();

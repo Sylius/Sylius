@@ -48,9 +48,9 @@ class CreatePage extends SymfonyPage implements CreatePageInterface
             throw new ElementNotFoundException($this->getSession(), 'Field element');
         }
 
-        $validationMessage = $foundElement->find('css', '[data-test-validation-error]');
+        $validationMessage = $foundElement->find('css', '.invalid-feedback');
         if (null === $validationMessage) {
-            throw new ElementNotFoundException($this->getSession(), 'Validation message', 'css', '[data-test-validation-error]');
+            throw new ElementNotFoundException($this->getSession(), 'Validation message', 'css', '.invalid-feedback');
         }
 
         return $validationMessage->getText();
