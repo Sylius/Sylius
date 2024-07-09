@@ -26,10 +26,10 @@ final readonly class NotificationAccessor implements NotificationAccessorInterfa
 
     public function getMessageElements(): array
     {
-        $messageElements = $this->session->getPage()->findAll('css', '[data-test-flash-message]');
+        $messageElements = $this->session->getPage()->findAll('css', $this->locator);
 
         if (empty($messageElements)) {
-            throw new ElementNotFoundException($this->session->getDriver(), 'message element', 'css', '[data-test-flash-message]');
+            throw new ElementNotFoundException($this->session->getDriver(), 'message element', 'css', $this->locator);
         }
 
         return $messageElements;
