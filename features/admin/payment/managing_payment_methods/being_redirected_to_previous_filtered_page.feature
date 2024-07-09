@@ -11,7 +11,7 @@ Feature: Being redirected to previous filtered page
         And this payment method has been disabled
         And I am logged in as an administrator
 
-    @todo @ui @no-api
+    @no-api @ui
     Scenario: Being redirected to previous filtered page after cancelling creating a new payment method
         When I browse payment methods
         And I choose enabled filter

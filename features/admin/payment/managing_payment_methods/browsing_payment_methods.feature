@@ -7,7 +7,7 @@ Feature: Browsing payment methods
     Background:
         Given I am logged in as an administrator
 
-    @todo @ui @api
+    @api @ui
     Scenario: Browsing defined payment methods
         Given the store has a payment method "Offline" with a code "OFF"
         And the store has a payment method "PayPal Express Checkout" with a code "PAYPAL" and "Paypal Express Checkout" gateway

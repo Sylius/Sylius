@@ -9,7 +9,7 @@ Feature: Editing payment method configured with a PayPal Express Checkout gatewa
         And the store has a payment method "PayPal Express Checkout" with a code "paypal" and "Paypal Express Checkout" gateway
         And I am logged in as an administrator
 
-    @ui @no-api
+    @no-api @ui
     Scenario: Changing gateway username
         When I want to modify the "PayPal Express Checkout" payment method
         And I update its "Username" with "new_username"
@@ -17,7 +17,7 @@ Feature: Editing payment method configured with a PayPal Express Checkout gatewa
         Then I should be notified that it has been successfully edited
         And its gateway configuration "Username" should be "new_username"
 
-    @ui @no-api
+    @no-api @ui
     Scenario: Changing gateway password
         When I want to modify the "PayPal Express Checkout" payment method
         And I update its "Password" with "new_password"
@@ -25,7 +25,7 @@ Feature: Editing payment method configured with a PayPal Express Checkout gatewa
         Then I should be notified that it has been successfully edited
         And its gateway configuration "Password" should be "new_password"
 
-    @ui @no-api
+    @no-api @ui
     Scenario: Changing gateway signature
         When I want to modify the "PayPal Express Checkout" payment method
         And I update its "Signature" with "new_signature"
@@ -33,7 +33,7 @@ Feature: Editing payment method configured with a PayPal Express Checkout gatewa
         Then I should be notified that it has been successfully edited
         And its gateway configuration "Signature" should be "new_signature"
 
-    @ui @no-api
+    @no-api @ui
     Scenario: Changing gateway sandbox mode
         When I want to modify the "PayPal Express Checkout" payment method
         And I enable sandbox mode

@@ -13,9 +13,9 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\AdminBundle\Twig\Component\Shared\Navbar;
 
-use Sylius\Component\User\Model\UserInterface;
+use Sylius\Bundle\AdminBundle\Provider\LoggedInAdminUserProviderInterface;
+use Sylius\Component\Core\Model\AdminUserInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
-use Symfony\Component\Security\Core\Security;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Symfony\UX\TwigComponent\Attribute\ExposeInTemplate;
 
@@ -24,35 +24,28 @@ class UserDropdownComponent
     public function __construct(
         private UrlGeneratorInterface $urlGenerator,
         private TranslatorInterface $translator,
-        private Security $security,
+        private LoggedInAdminUserProviderInterface $loggedInAdminUserProvider,
     ) {
     }
 
     #[ExposeInTemplate(name: 'user')]
-    public function getUser(): UserInterface
+    public function getUser(): AdminUserInterface
     {
-        $user = $this->security->getUser();
-
-        if (!$user instanceof UserInterface) {
-            throw new \RuntimeException('User must be an instance of Sylius\Component\User\Model\UserInterface');
+        $user = $this->loggedInAdminUserProvider->getUser();
+        if (!$user instanceof AdminUserInterface) {
+            throw new \RuntimeException('User must be an instance of ' . AdminUserInterface::class . '.');
         }
 
         return $user;
     }
 
     /**
-     * @return array<string, array<string, array{title?: string, url?: string, icon?: string, type?: string, class?: string}>>
-     *
-     * @psalm-suppress InvalidReturnType
+     * @return array<array-key, array<array-key, array{title?: string, url?: string, icon?: string, type?: string, class?: string, attr?: array<string, mixed>}>>
      */
     #[ExposeInTemplate(name: 'menu_items')]
     public function getMenuItems(): array
     {
-        /**
-         * @phpstan-ignore-next-line PHPStan complains the declared return type does not match the returned value
-         *
-         * @psalm-suppress InvalidReturnStatement
-         */
+        // TODO: Would be nice to have these set via hook //
         return [
             [
                 'title' => $this->translator->trans('sylius.ui.my_account'),
