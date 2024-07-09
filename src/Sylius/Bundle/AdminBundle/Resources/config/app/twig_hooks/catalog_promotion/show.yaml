@@ -11,8 +11,8 @@ twig_hooks:
                 template: '@SyliusAdmin/catalog_promotion/show/content/header/title_block/actions.html.twig'
 
         'sylius_admin.catalog_promotion.show.content.header.title_block.actions':
-            update:
-                template: '@SyliusAdmin/catalog_promotion/show/content/header/title_block/actions/update.html.twig'
+            edit:
+                template: '@SyliusAdmin/shared/crud/show/content/header/title_block/actions/edit.html.twig'
 
         'sylius_admin.catalog_promotion.show.content.sections#left':
             details:

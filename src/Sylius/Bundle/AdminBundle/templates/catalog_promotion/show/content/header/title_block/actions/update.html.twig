@@ -1,8 +1,0 @@
-{% from '@SyliusAdmin/shared/helper/icon.html.twig' import icon %}
-
-{% set resource = hookable_metadata.context.resource %}
-
-<a class="btn primary" href="{{ path('sylius_admin_catalog_promotion_update', {'id': resource.id}) }}">
-    {{ icon({icon: 'pencil'}) }}
-    {{ 'sylius.ui.update'|trans }}
-</a>
