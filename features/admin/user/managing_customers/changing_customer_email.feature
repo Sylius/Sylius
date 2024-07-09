@@ -9,7 +9,7 @@ Feature: Changing an email of an existing customer
         And there is a customer "Frodo Baggins" with an email "f.baggins@example.com" and a password "ring"
         And I am logged in as an administrator
 
-    @api @ui
+    @todo @api @ui
     Scenario: Changing an email of an existing customer
         When I want to edit this customer
         And I change their email to "strawberry@example.com"

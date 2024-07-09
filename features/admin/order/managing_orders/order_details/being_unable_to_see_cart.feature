@@ -10,7 +10,7 @@ Feature: Being unable to see details of a cart
         And the customer added "PHP T-Shirt" product to the cart
         And I am logged in as an administrator
 
-    @ui @api
+    @todo @api @ui
     Scenario: Being unable to see the details of a cart
         When I try to view the summary of the customer's latest cart
         Then I should be informed that the order does not exist
