@@ -16,7 +16,7 @@ namespace Sylius\Behat\Context\Ui\Admin;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Element\Admin\Crud\Index\SearchFilterElementInterface;
 
-final class SearchFilterContext implements Context
+final readonly class SearchFilterContext implements Context
 {
     public function __construct(
         private SearchFilterElementInterface $searchFilterElement,
