@@ -116,6 +116,7 @@
             <argument type="service" id="sylius.behat.page.admin.exchange_rate.create" />
             <argument type="service" id="sylius.behat.page.admin.exchange_rate.index" />
             <argument type="service" id="sylius.behat.page.admin.exchange_rate.update" />
+            <argument type="service" id="sylius.behat.element.admin.exchange_rate.form" />
         </service>
 
         <service id="sylius.behat.context.ui.admin.managing_inventory" class="Sylius\Behat\Context\Ui\Admin\ManagingInventoryContext">

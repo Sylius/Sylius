@@ -12,8 +12,6 @@ sylius_admin_exchange_rate:
         vars:
             all:
                 subheader: sylius.ui.manage_exchange_rates
-                templates:
-                    form: "@SyliusAdmin/ExchangeRate/_form.html.twig"
             index:
                 icon: sliders
     type: sylius.resource

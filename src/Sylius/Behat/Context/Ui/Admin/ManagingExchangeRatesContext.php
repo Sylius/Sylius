@@ -14,9 +14,10 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
-use Sylius\Behat\Page\Admin\ExchangeRate\CreatePageInterface;
+use Sylius\Behat\Element\Admin\ExchangeRate\FormElementInterface;
+use Sylius\Behat\Page\Admin\Crud\CreatePageInterface;
+use Sylius\Behat\Page\Admin\Crud\UpdatePageInterface;
 use Sylius\Behat\Page\Admin\ExchangeRate\IndexPageInterface;
-use Sylius\Behat\Page\Admin\ExchangeRate\UpdatePageInterface;
 use Sylius\Component\Currency\Model\CurrencyInterface;
 use Sylius\Component\Currency\Model\ExchangeRateInterface;
 use Webmozart\Assert\Assert;
@@ -27,6 +28,7 @@ final readonly class ManagingExchangeRatesContext implements Context
         private CreatePageInterface $createPage,
         private IndexPageInterface $indexPage,
         private UpdatePageInterface $updatePage,
+        private FormElementInterface $formElement,
     ) {
     }
 
@@ -63,7 +65,7 @@ final readonly class ManagingExchangeRatesContext implements Context
      */
     public function iSpecifyItsRatioAs(?string $ratio = null): void
     {
-        $this->createPage->specifyRatio($ratio ?? '');
+        $this->formElement->specifyField('Ratio', $ratio ?? '');
     }
 
     /**
@@ -71,7 +73,7 @@ final readonly class ManagingExchangeRatesContext implements Context
      */
     public function iChooseAsSourceCurrency(string $currencyCode): void
     {
-        $this->createPage->chooseSourceCurrency($currencyCode);
+        $this->formElement->specifyField('Source currency', $currencyCode);
     }
 
     /**
@@ -79,7 +81,7 @@ final readonly class ManagingExchangeRatesContext implements Context
      */
     public function iChooseAsTargetCurrency(string $currencyCode): void
     {
-        $this->createPage->chooseTargetCurrency($currencyCode);
+        $this->formElement->specifyField('Target currency', $currencyCode);
     }
 
     /**
@@ -95,7 +97,7 @@ final readonly class ManagingExchangeRatesContext implements Context
      */
     public function iChangeRatioTo(string $ratio): void
     {
-        $this->updatePage->changeRatio($ratio);
+        $this->formElement->specifyField('Ratio', $ratio);
     }
 
     /**
@@ -205,7 +207,7 @@ final readonly class ManagingExchangeRatesContext implements Context
      */
     public function thisExchangeRateShouldHaveRatioOf(string $ratio): void
     {
-        Assert::eq($this->updatePage->getRatio(), $ratio);
+        Assert::eq($this->formElement->getRatio(), $ratio);
     }
 
     /**
@@ -245,7 +247,7 @@ final readonly class ManagingExchangeRatesContext implements Context
      */
     public function iShouldNotBeAbleToEditItsSourceCurrency(): void
     {
-        Assert::true($this->updatePage->isSourceCurrencyDisabled());
+        Assert::true($this->formElement->isFieldDisabled('source_currency'));
     }
 
     /**
@@ -253,7 +255,7 @@ final readonly class ManagingExchangeRatesContext implements Context
      */
     public function iShouldNotBeAbleToEditItsTargetCurrency(): void
     {
-        Assert::true($this->updatePage->isTargetCurrencyDisabled());
+        Assert::true($this->formElement->isFieldDisabled('target_currency'));
     }
 
     /**
@@ -262,7 +264,7 @@ final readonly class ManagingExchangeRatesContext implements Context
     public function iShouldBeNotifiedThatIsRequired(string $element): void
     {
         Assert::same(
-            $this->createPage->getValidationMessage($element),
+            $this->formElement->getValidationMessage($element),
             sprintf('Please enter exchange rate %s.', $element),
         );
     }
@@ -272,7 +274,7 @@ final readonly class ManagingExchangeRatesContext implements Context
      */
     public function iShouldBeNotifiedThatRatioMustBeGreaterThanZero(): void
     {
-        Assert::same($this->createPage->getValidationMessage('ratio'), 'The ratio must be greater than 0.');
+        Assert::same($this->formElement->getValidationMessage('ratio'), 'The ratio must be greater than 0.');
     }
 
     /**
@@ -350,7 +352,7 @@ final readonly class ManagingExchangeRatesContext implements Context
     private function assertFormHasValidationMessage(string $expectedMessage): void
     {
         Assert::true(
-            $this->createPage->hasFormValidationError($expectedMessage),
+            $this->formElement->hasFormValidationError($expectedMessage),
             sprintf(
                 'The validation message "%s" was not found on the page.',
                 $expectedMessage,
