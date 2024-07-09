@@ -29,6 +29,9 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
         return $this->getElement('show_product_button')->hasClass('disabled');
     }
 
+    /**
+     * @return string[]
+     */
     public function getAppliedCatalogPromotionsLinks(string $variantName, string $channelName): array
     {
         $appliedPromotions = $this->getAppliedCatalogPromotions($variantName, $channelName);
@@ -36,6 +39,9 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
         return array_map(fn (NodeElement $element): string => $element->getAttribute('href'), $appliedPromotions);
     }
 
+    /**
+     * @return string[]
+     */
     public function getAppliedCatalogPromotionsNames(string $variantName, string $channelName): array
     {
         $appliedPromotions = $this->getAppliedCatalogPromotions($variantName, $channelName);
@@ -78,18 +84,24 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
         $this->getElement('edit_variant_button', ['%variant_code%' => $variant->getCode()])->click();
     }
 
+    /**
+     * @return array<string, string>
+     */
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
             'breadcrumb' => '.breadcrumb',
-            'edit_product_button' => '[data-test-edit-product-button]',
-            'edit_variant_button' => '[data-test-edit-variant-button="%variant_code%"]',
+            'edit_product_button' => '[data-test-edit-product]',
+            'edit_variant_button' => '[data-test-edit-variant="%variant_code%"]',
             'product_name' => '[data-test-product-name]',
             'show_product_button' => '[data-test-view-in-store]',
             'variants' => '[data-test-variant-pricing]',
         ]);
     }
 
+    /**
+     * @return NodeElement[]
+     */
     private function getAppliedCatalogPromotions(string $variantName, string $channelName): array
     {
         $pricingElement = $this->getPricingRow($variantName, $channelName);
