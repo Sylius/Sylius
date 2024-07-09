@@ -1,10 +1,10 @@
 twig_hooks:
     hooks:
-        'sylius_shop.base.#stylesheets': # TODO: contribute to TwigHooks so that it does not generate dots
+        'sylius_shop.base#stylesheets':
             styles:
                 template: '@SyliusShop/base/styles.html.twig'
 
-        'sylius_shop.base.#javascripts': # TODO: contribute to TwigHooks so that it does not generate dots
+        'sylius_shop.base#javascripts':
             scripts:
                 template: '@SyliusShop/base/scripts.html.twig'
 
