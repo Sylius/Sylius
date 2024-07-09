@@ -29,7 +29,7 @@
         {%- set classes = classes|merge([options.lastClass]) %}
     {%- endif %}
 
-    {% set always_open = ['catalog', 'sales', 'customers'] %}
+    {% set always_open = ['catalog', 'sales', 'customers', 'marketing', 'configuration'] %}
     {% set is_active = matcher.isCurrent(item) or matcher.isAncestor(item, options.matchingDepth)  or item.name in always_open %}
 
     {# Mark item as "leaf" (no children) or as "branch" (has children that are displayed) #}
