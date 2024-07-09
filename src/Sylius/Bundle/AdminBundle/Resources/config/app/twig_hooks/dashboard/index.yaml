@@ -24,11 +24,7 @@ twig_hooks:
             breadcrumbs:
                 enabled: false
             title_block:
-                template: '@SyliusAdmin/dashboard/index/content/header/title_block/title.html.twig'
-            channel_selector:
-                component: 'sylius_admin:dashboard:channel_selector'
-                props:
-                    channelCode: '@=_context.channel_code'
+                template: '@SyliusAdmin/shared/crud/common/content/header/title_block.html.twig'
 
         'sylius_admin.dashboard.index.content.header.title_block':
             title:
@@ -36,7 +32,9 @@ twig_hooks:
                 configuration:
                     title: sylius.ui.dashboard
             actions:
-                enabled: false
+                component: 'sylius_admin:dashboard:channel_selector'
+                props:
+                    channelCode: '@=_context.channel_code'
 
         'sylius_admin.dashboard.index.content.statistics':
             statistics_grid:
