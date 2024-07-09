@@ -31,6 +31,7 @@ twig_hooks:
                 template: '@SyliusAdmin/shared/crud/common/content/header/title_block/title.html.twig'
                 configuration:
                     title: sylius.ui.dashboard
+                    sylius_test_html_attribute: 'dashboard-header'
             actions:
                 component: 'sylius_admin:dashboard:channel_selector'
                 props:
