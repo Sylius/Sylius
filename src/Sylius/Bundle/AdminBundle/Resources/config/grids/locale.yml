@@ -30,7 +30,5 @@ sylius_grid:
                     create:
                         type: create
                 item:
-                    update:
-                        type: update
                     delete:
                         type: delete

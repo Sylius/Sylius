@@ -71,16 +71,6 @@ final readonly class ManagingCustomerGroupsContext implements Context
     }
 
     /**
-     * @Then the customer group :customerGroup should appear in the store
-     */
-    public function theCustomerGroupShouldAppearInTheStore(CustomerGroupInterface $customerGroup): void
-    {
-        $this->indexPage->open();
-
-        Assert::true($this->indexPage->isSingleResourceOnPage(['name' => $customerGroup->getName()]));
-    }
-
-    /**
      * @When /^I want to edit (this customer group)$/
      */
     public function iWantToEditThisCustomerGroup(CustomerGroupInterface $customerGroup): void
@@ -114,6 +104,33 @@ final readonly class ManagingCustomerGroupsContext implements Context
     }
 
     /**
+     * @When I browse customer groups
+     * @When I want to browse customer groups
+     */
+    public function iWantToBrowseCustomerGroups(): void
+    {
+        $this->indexPage->open();
+    }
+
+    /**
+     * @When /^I sort them by the (code|name) in (asc|desc)ending order$/
+     */
+    public function iSortThemByTheField(string $field, string $order): void
+    {
+        $this->indexPage->sortBy($field, $order);
+    }
+
+    /**
+     * @Then the customer group :customerGroup should appear in the store
+     */
+    public function theCustomerGroupShouldAppearInTheStore(CustomerGroupInterface $customerGroup): void
+    {
+        $this->indexPage->open();
+
+        Assert::true($this->indexPage->isSingleResourceOnPage(['name' => $customerGroup->getName()]));
+    }
+
+    /**
      * @Then this customer group with name :name should appear in the store
      * @Then I should see the customer group :name in the list
      */
@@ -125,23 +142,43 @@ final readonly class ManagingCustomerGroupsContext implements Context
     }
 
     /**
-     * @When I browse customer groups
-     * @When I want to browse customer groups
+     * @Then there should be :amountOfCustomerGroups customer groups in the list
      */
-    public function iWantToBrowseCustomerGroups(): void
+    public function thereShouldBeCustomerGroupsInTheList(int $amountOfCustomerGroups = 1): void
     {
-        $this->indexPage->open();
+        Assert::same($this->indexPage->countItems(), $amountOfCustomerGroups);
     }
 
     /**
      * @Then I should see a single customer group in the list
      * @Then I should see :amountOfCustomerGroups customer groups in the list
+     *
+     * This step is a duplicate of the above because some scenarios require to open the index page before checking anything
      */
     public function iShouldSeeCustomerGroupsInTheList(int $amountOfCustomerGroups = 1): void
     {
         $this->indexPage->open();
 
         Assert::same($this->indexPage->countItems(), $amountOfCustomerGroups);
+    }
+
+    /**
+     * @Then /^the (\d+)(?:|st|nd|rd|th) customer group on the list should have (name|code) "([^"]+)" and (name|code) "([^"]+)"$/
+     */
+    public function theFirstCustomerGroupOnTheListShouldHave(
+        int $position,
+        string $firstField,
+        string $firstValue,
+        string $secondField,
+        string $secondValue,
+    ): void {
+        $fields = $this->indexPage->getColumnFields($firstField);
+
+        Assert::same($fields[$position - 1], $firstValue);
+
+        $fields = $this->indexPage->getColumnFields($secondField);
+
+        Assert::same($fields[$position - 1], $secondValue);
     }
 
     /**

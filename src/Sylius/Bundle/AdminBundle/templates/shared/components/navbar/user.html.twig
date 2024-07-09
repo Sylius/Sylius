@@ -12,7 +12,7 @@
         </div>
         <div class="d-none d-xl-block ps-2">
             <div class="mb-1 small text-muted">Hello</div>
-            <div>{{ user.firstName }}</div>
+            <div>{{ user.firstName|default(user.username) }}</div>
         </div>
     </div>
 {% endset %}

@@ -308,8 +308,7 @@
             class="Sylius\Bundle\AdminBundle\Twig\Component\Shared\Navbar\UserDropdownComponent"
         >
             <argument type="service" id="router" />
-            <argument type="service" id="translator" />
-            <argument type="service" id="security.helper" />
+            <argument type="service" id="sylius_admin.logged_in_admin_user_provider" />
 
             <tag
                 name="twig.component"
