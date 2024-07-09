@@ -144,6 +144,7 @@
         </service>
 
         <service id="sylius_admin.form.type.currency" class="Sylius\Bundle\AdminBundle\Form\Type\CurrencyType" >
+            <argument type="service" id="sylius.repository.currency" />
             <tag name="form.type" />
         </service>
 

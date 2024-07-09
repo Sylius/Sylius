@@ -8,7 +8,7 @@ Feature: Deleting payment methods
         Given the store has a payment method "Offline" with a code "Offline"
         And I am logged in as an administrator
 
-    @ui @api
+    @api @ui
     Scenario: Deleted payment method should disappear from the registry
         When I delete the "Offline" payment method
         Then I should be notified that it has been successfully deleted

@@ -9,11 +9,4 @@ sylius_admin_tax_rate:
         form:
             type: Sylius\Bundle\AdminBundle\Form\Type\TaxRateType
         permission: true
-        vars:
-            all:
-                subheader: sylius.ui.manage_taxation_of_your_products
-                templates:
-                    form: "@SyliusAdmin/TaxRate/_form.html.twig"
-            index:
-                icon: money
     type: sylius.resource

@@ -20,6 +20,11 @@ interface FormElementInterface
     /**
      * @param array<string, string> $parameters
      */
+    public function fillElement(string $value, string $element, array $parameters = []): void;
+
+    /**
+     * @param array<string, string> $parameters
+     */
     public function getValidationMessage(string $element, array $parameters = []): string;
 
     /**
