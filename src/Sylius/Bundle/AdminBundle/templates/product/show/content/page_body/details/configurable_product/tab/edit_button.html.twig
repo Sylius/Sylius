@@ -4,7 +4,11 @@
 {% set variant = hookable_metadata.context.variant %}
 
 <td class="text-end">
-    <a href="{{ path('sylius_admin_product_variant_update', { id: variant.id, productId: product.id }) }}" class="btn" {{ sylius_test_html_attribute('edit-variant-button', variant.code)}}>
+    <a
+        href="{{ path('sylius_admin_product_variant_update', { id: variant.id, productId: product.id }) }}"
+        class="btn"
+        {{ sylius_test_html_attribute('edit-variant', variant.code) }}
+    >
         {{ _icon({ icon: 'pencil' }) }}
         {{ 'sylius.ui.edit'|trans }}
     </a>
