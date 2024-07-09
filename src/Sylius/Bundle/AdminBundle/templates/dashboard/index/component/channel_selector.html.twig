@@ -6,7 +6,7 @@
             <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false" {{ sylius_test_html_attribute('choose-channel-button') }}>
                 {{ channel_name }}
             </a>
-            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink" {{ sylius_test_html_attribute('choose-channel-list') }}>
+            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuLink" {{ sylius_test_html_attribute('choose-channel-list') }}>
                 {% for channel in channels %}
                     <li>
                         <a
