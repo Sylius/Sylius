@@ -18,7 +18,7 @@ use ApiTestCase\JsonApiTestCase;
 final class AdminSectionNotFoundPageTest extends JsonApiTestCase
 {
     private const ADMIN_404_PAGE_HOOK = 'data-test-back-to-dashboard-link';
-    private const SHOP_404_PAGE_HOOK = 'data-test-shop-not-found-page';
+    private const SHOP_404_PAGE_HOOK = 'The page you are looking for does not exist.';
 
     /** @before */
     public function setUpClient(): void
