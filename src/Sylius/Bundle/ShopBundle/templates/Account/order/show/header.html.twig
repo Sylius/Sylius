@@ -2,7 +2,7 @@
 
 <div class="d-flex gap-3 mb-4">
     <div>
-        {% include [('@SyliusShop/Account/Order/Label/State' ~ '/' ~ order.state ~ '.html.twig'), '@SyliusUi/Label/_default.html.twig'] with {'value': ('sylius.ui.' ~ order.state)|trans} %}
+        {% include [('@SyliusShop/Account/order/label/state' ~ '/' ~ order.state ~ '.html.twig'), '@SyliusUi/Label/_default.html.twig'] with {'value': ('sylius.ui.' ~ order.state)|trans} %}
     </div>
     <div>
         {{ order.checkoutCompletedAt|format_date }}

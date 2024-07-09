@@ -8,7 +8,7 @@ sylius_shop_account_order_index:
         _controller: sylius.controller.order::indexAction
         _sylius:
             section: shop_account
-            template: "@SyliusShop/Account/Order/index.html.twig"
+            template: "@SyliusShop/Account/order/index.html.twig"
             grid: sylius_shop_account_order
 
 sylius_shop_account_order_show:
@@ -18,7 +18,7 @@ sylius_shop_account_order_show:
         _controller: sylius.controller.order::showAction
         _sylius:
             section: shop_account
-            template: "@SyliusShop/Account/Order/show.html.twig"
+            template: "@SyliusShop/Account/order/show.html.twig"
             repository:
                 method: findOneByNumberAndCustomer
                 arguments:
