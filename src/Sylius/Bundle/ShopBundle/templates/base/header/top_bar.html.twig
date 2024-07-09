@@ -1,7 +1,7 @@
 <div class="bg-black">
     <div class="container py-2 fs-7">
         <div class="row align-items-center">
-            {{ sylius_template_event('sylius.shop.layout.topbar.content') }}
+            {% hook 'top_bar' %}
         </div>
     </div>
 </div>

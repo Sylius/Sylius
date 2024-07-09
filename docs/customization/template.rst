@@ -56,7 +56,7 @@ Copy the contents of the original template to make your work easier. And then mo
 
 .. code-block:: twig
 
-    {% extends '@SyliusShop/layout.html.twig' %}
+    {% extends '@SyliusShop/base.html.twig' %}
 
     {% import '@SyliusUi/Macro/messages.html.twig' as messages %}
 

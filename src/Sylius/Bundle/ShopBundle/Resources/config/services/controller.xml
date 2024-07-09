@@ -25,10 +25,6 @@
             <argument type="service" id="sylius.mailer.contact_email_manager.shop" />
         </service>
 
-        <service id="sylius.controller.shop.homepage" class="Sylius\Bundle\ShopBundle\Controller\HomepageController">
-            <argument type="service" id="twig" />
-        </service>
-
         <service id="sylius.controller.shop.currency_switch" class="Sylius\Bundle\ShopBundle\Controller\CurrencySwitchController">
             <argument type="service" id="twig" />
             <argument type="service" id="sylius.context.currency" />

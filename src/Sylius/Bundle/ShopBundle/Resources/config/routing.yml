@@ -12,8 +12,10 @@ sylius_shop_partial:
 sylius_shop_homepage:
     path: /
     methods: [GET]
+    controller: Symfony\Bundle\FrameworkBundle\Controller\TemplateController::templateAction
     defaults:
-        _controller: sylius.controller.shop.homepage::indexAction
+        template: "@SyliusShop/homepage/index.html.twig"
+
 
 sylius_shop_security:
     resource: "@SyliusShopBundle/Resources/config/routing/security.yml"
