@@ -256,15 +256,29 @@ final readonly class ManagingPaymentMethodsContext implements Context
     }
 
     /**
+     * @Then I should see the payment method :paymentMethodName
+     */
+    public function IShouldSeeThePaymentMethod(string $paymentMethodName): void
+    {
+        Assert::true($this->indexPage->isSingleResourceOnPage(['name' => $paymentMethodName]));
+    }
+
+    /**
+     * @Then I should not see the payment method :paymentMethodName
+     */
+    public function IShouldNotSeeThePaymentMethod(string $paymentMethodName): void
+    {
+        Assert::false($this->indexPage->isSingleResourceOnPage(['name' => $paymentMethodName]));
+    }
+
+    /**
      * @Then the payment method :paymentMethodName should appear in the registry
      * @Then the payment method :paymentMethodName should be in the registry
      * @Then I should see the payment method :paymentMethodName in the list
      */
     public function thePaymentMethodShouldAppearInTheRegistry(string $paymentMethodName): void
     {
-        $this->indexPage->open();
-
-        Assert::true($this->indexPage->isSingleResourceOnPage(['name' => $paymentMethodName]));
+        $this->thereShouldStillBeOnlyOnePaymentMethodWith('name', $paymentMethodName);
     }
 
     /**

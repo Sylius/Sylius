@@ -68,6 +68,8 @@ sylius:
                 different_shipping_address: Use different address for shipping?
             payment_method: Payment Method
             shipping_method: Shipping Method
+        currency:
+            select: Select currency
         promotion:
             channels: Channels
         promotion_action:

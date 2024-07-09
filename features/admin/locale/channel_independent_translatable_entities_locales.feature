@@ -10,9 +10,10 @@ Feature: Channel independent translatable entities locales
         And it uses the "English (United States)" locale by default
         And I am logged in as an administrator
 
-    @todo @ui
+    @todo-api @ui
     Scenario: Using all locales to translate an entity
         Given the store has locale "German (Germany)"
         When I want to create a new translatable entity
         Then I should be able to translate it in "English (United States)"
         And I should be able to translate it in "German (Germany)"
+        But I should not be able to translate it in "Polish (Poland)"

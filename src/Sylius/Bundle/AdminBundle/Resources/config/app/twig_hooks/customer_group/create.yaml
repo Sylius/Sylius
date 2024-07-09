@@ -1,0 +1,24 @@
+twig_hooks:
+    hooks:
+        'sylius_admin.customer_group.create.content':
+            form:
+                component: 'sylius_admin:customer_group:form'
+                props:
+                    resource: '@=_context.resource'
+                    form: '@=_context.form'
+                configuration:
+                    render_rest: false
+
+        'sylius_admin.customer_group.create.content.form':
+            sections:
+                template: '@SyliusAdmin/customer_group/form/sections.html.twig'
+
+        'sylius_admin.customer_group.create.content.form.sections':
+            details:
+                template: '@SyliusAdmin/customer_group/form/sections/details.html.twig'
+
+        'sylius_admin.customer_group.create.content.form.sections.details':
+            code:
+                template: '@SyliusAdmin/customer_group/form/sections/details/code.html.twig'
+            name:
+                template: '@SyliusAdmin/customer_group/form/sections/details/name.html.twig'

@@ -1,5 +1,9 @@
 {% extends '@SyliusAdmin/shared/layout/base.html.twig' %}
 
+{%- block title -%}
+    {{ 'sylius.ui.page_not_found'|trans }} | {{ parent() }}
+{%- endblock -%}
+
 {% block body %}
     {% hook 'sylius_admin.errors.404' %}
 {% endblock %}

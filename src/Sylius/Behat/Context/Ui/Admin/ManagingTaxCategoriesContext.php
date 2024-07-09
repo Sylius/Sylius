@@ -14,48 +14,28 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
-use FriendsOfBehat\PageObjectExtension\Page\SymfonyPageInterface;
-use Sylius\Behat\Context\Ui\Admin\Helper\ValidationTrait;
+use Sylius\Behat\Element\Admin\TaxCategory\FormElementInterface;
+use Sylius\Behat\Page\Admin\Crud\CreatePageInterface;
 use Sylius\Behat\Page\Admin\Crud\IndexPageInterface;
-use Sylius\Behat\Page\Admin\TaxCategory\CreatePageInterface;
-use Sylius\Behat\Page\Admin\TaxCategory\UpdatePageInterface;
-use Sylius\Behat\Service\Resolver\CurrentPageResolverInterface;
+use Sylius\Behat\Page\Admin\Crud\UpdatePageInterface;
 use Sylius\Component\Taxation\Model\TaxCategoryInterface;
 use Webmozart\Assert\Assert;
 
-final class ManagingTaxCategoriesContext implements Context
+final readonly class ManagingTaxCategoriesContext implements Context
 {
-    use ValidationTrait;
 
     public function __construct(
         private IndexPageInterface $indexPage,
         private CreatePageInterface $createPage,
         private UpdatePageInterface $updatePage,
-        private CurrentPageResolverInterface $currentPageResolver,
+        private FormElementInterface $formElement,
     ) {
-    }
-
-    /**
-     * @When I delete tax category :taxCategory
-     */
-    public function iDeletedTaxCategory(TaxCategoryInterface $taxCategory)
-    {
-        $this->indexPage->open();
-        $this->indexPage->deleteResourceOnPage(['code' => $taxCategory->getCode()]);
-    }
-
-    /**
-     * @Then /^(this tax category) should no longer exist in the registry$/
-     */
-    public function thisTaxCategoryShouldNoLongerExistInTheRegistry(TaxCategoryInterface $taxCategory)
-    {
-        Assert::false($this->indexPage->isSingleResourceOnPage(['code' => $taxCategory->getCode()]));
     }
 
     /**
      * @When I want to create a new tax category
      */
-    public function iWantToCreateNewTaxCategory()
+    public function iWantToCreateNewTaxCategory(): void
     {
         $this->createPage->open();
     }
@@ -66,7 +46,15 @@ final class ManagingTaxCategoriesContext implements Context
      */
     public function iSpecifyItsCodeAs(?string $code = null): void
     {
-        $this->createPage->specifyCode($code ?? '');
+        $this->formElement->setCode($code ?? '');
+    }
+
+    /**
+     * @When I specify a too long :field
+     */
+    public function iSpecifyATooLongCode(string $field): void
+    {
+        $this->formElement->fillElement(str_repeat('a', 256), $field);
     }
 
     /**
@@ -75,43 +63,33 @@ final class ManagingTaxCategoriesContext implements Context
      * @When I do not name it
      * @When I remove its name
      */
-    public function iNameIt($name = null)
+    public function iNameIt($name = null): void
     {
-        $this->createPage->nameIt($name ?? '');
+        $this->formElement->setName($name ?? '');
+    }
+
+    /**
+     * @When I describe it as :description
+     */
+    public function iDescribeItAs($description): void
+    {
+        $this->formElement->setDescription($description);
     }
 
     /**
      * @When I add it
      * @When I try to add it
      */
-    public function iAddIt()
+    public function iAddIt(): void
     {
         $this->createPage->create();
-    }
-
-    /**
-     * @Then I should see the tax category :taxCategoryName in the list
-     * @Then the tax category :taxCategoryName should appear in the registry
-     */
-    public function theTaxCategoryShouldAppearInTheRegistry(string $taxCategoryName): void
-    {
-        $this->indexPage->open();
-        Assert::true($this->indexPage->isSingleResourceOnPage(['nameAndDescription' => $taxCategoryName]));
-    }
-
-    /**
-     * @When I describe it as :description
-     */
-    public function iDescribeItAs($description)
-    {
-        $this->createPage->describeItAs($description);
     }
 
     /**
      * @When I want to modify a tax category :taxCategory
      * @When /^I want to modify (this tax category)$/
      */
-    public function iWantToModifyTaxCategory(TaxCategoryInterface $taxCategory)
+    public function iWantToModifyTaxCategory(TaxCategoryInterface $taxCategory): void
     {
         $this->updatePage->open(['id' => $taxCategory->getId()]);
     }
@@ -120,12 +98,13 @@ final class ManagingTaxCategoriesContext implements Context
      * @When I save my changes
      * @When I try to save my changes
      */
-    public function iSaveMyChanges()
+    public function iSaveMyChanges(): void
     {
         $this->updatePage->saveChanges();
     }
 
     /**
+     * @Given I am browsing tax categories
      * @When I browse tax categories
      */
     public function iWantToBrowseTaxCategories(): void
@@ -150,18 +129,45 @@ final class ManagingTaxCategoriesContext implements Context
     }
 
     /**
+     * @When I delete tax category :taxCategory
+     */
+    public function iDeletedTaxCategory(TaxCategoryInterface $taxCategory): void
+    {
+        $this->indexPage->open();
+        $this->indexPage->deleteResourceOnPage(['code' => $taxCategory->getCode()]);
+    }
+
+    /**
+     * @Then /^(this tax category) should no longer exist in the registry$/
+     */
+    public function thisTaxCategoryShouldNoLongerExistInTheRegistry(TaxCategoryInterface $taxCategory): void
+    {
+        Assert::false($this->indexPage->isSingleResourceOnPage(['code' => $taxCategory->getCode()]));
+    }
+
+    /**
+     * @Then I should see the tax category :taxCategoryName in the list
+     * @Then the tax category :taxCategoryName should appear in the registry
+     */
+    public function theTaxCategoryShouldAppearInTheRegistry(string $taxCategoryName): void
+    {
+        $this->indexPage->open();
+        Assert::true($this->indexPage->isSingleResourceOnPage(['nameAndDescription' => $taxCategoryName]));
+    }
+
+    /**
      * @Then I should not be able to edit its code
      */
     public function iShouldNotBeAbleToEditItsCode(): void
     {
-        Assert::true($this->updatePage->isCodeDisabled());
+        Assert::true($this->formElement->isCodeDisabled());
     }
 
     /**
      * @Then /^(this tax category) name should be "([^"]+)"$/
      * @Then /^(this tax category) should still be named "([^"]+)"$/
      */
-    public function thisTaxCategoryNameShouldBe(TaxCategoryInterface $taxCategory, $taxCategoryName)
+    public function thisTaxCategoryNameShouldBe(TaxCategoryInterface $taxCategory, $taxCategoryName): void
     {
         $this->indexPage->open();
         Assert::true($this->indexPage->isSingleResourceOnPage(['code' => $taxCategory->getCode(), 'nameAndDescription' => $taxCategoryName]));
@@ -170,15 +176,15 @@ final class ManagingTaxCategoriesContext implements Context
     /**
      * @Then I should be notified that tax category with this code already exists
      */
-    public function iShouldBeNotifiedThatTaxCategoryWithThisCodeAlreadyExists()
+    public function iShouldBeNotifiedThatTaxCategoryWithThisCodeAlreadyExists(): void
     {
-        Assert::same($this->createPage->getValidationMessage('code'), 'The tax category with given code already exists.');
+        Assert::same($this->formElement->getValidationMessage('code'), 'The tax category with given code already exists.');
     }
 
     /**
      * @Then there should still be only one tax category with :element :code
      */
-    public function thereShouldStillBeOnlyOneTaxCategoryWith($element, $code)
+    public function thereShouldStillBeOnlyOneTaxCategoryWith($element, $code): void
     {
         $this->indexPage->open();
         Assert::true($this->indexPage->isSingleResourceOnPage([$element => $code]));
@@ -187,18 +193,15 @@ final class ManagingTaxCategoriesContext implements Context
     /**
      * @Then I should be notified that :element is required
      */
-    public function iShouldBeNotifiedThatIsRequired($element)
+    public function iShouldBeNotifiedThatIsRequired($element): void
     {
-        /** @var CreatePageInterface|UpdatePageInterface $currentPage */
-        $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
-
-        Assert::same($currentPage->getValidationMessage($element), sprintf('Please enter tax category %s.', $element));
+        Assert::same($this->formElement->getValidationMessage($element), sprintf('Please enter tax category %s.', $element));
     }
 
     /**
      * @Then tax category with :element :name should not be added
      */
-    public function taxCategoryWithElementValueShouldNotBeAdded($element, $name)
+    public function taxCategoryWithElementValueShouldNotBeAdded($element, $name): void
     {
         $this->indexPage->open();
         Assert::false($this->indexPage->isSingleResourceOnPage([$element => $name]));
@@ -206,14 +209,37 @@ final class ManagingTaxCategoriesContext implements Context
 
     /**
      * @Then I should see a single tax category in the list
+     * @Then I should see :amount tax categories in the list
      */
-    public function iShouldSeeTaxCategoriesInTheList(): void
+    public function iShouldSeeTaxCategoriesInTheList(int $amount = 1): void
     {
-        Assert::same($this->indexPage->countItems(), 1);
+        Assert::same($this->indexPage->countItems(), $amount);
     }
 
-    protected function resolveCurrentPage(): SymfonyPageInterface
+    /**
+     * @Then I should see the tax category :taxCategoryName
+     */
+    public function IShouldSeeTheTaxCategory(string $taxCategoryName): void
     {
-        return $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
+        Assert::true($this->indexPage->isSingleResourceOnPage(['nameAndDescription' => $taxCategoryName]));
+    }
+
+    /**
+     * @Then I should not see the tax category :taxCategoryName
+     */
+    public function IShouldNotSeeTheTaxCategory(string $taxCategoryName): void
+    {
+        Assert::false($this->indexPage->isSingleResourceOnPage(['nameAndDescription' => $taxCategoryName]));
+    }
+
+    /**
+     * @Then I should be notified that :field is too long
+     */
+    public function iShouldBeNotifiedThatIsTooLong(string $field): void
+    {
+        Assert::contains(
+            $this->formElement->getValidationMessage($field),
+            'must not be longer than 255 characters.',
+        );
     }
 }

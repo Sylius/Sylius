@@ -2,6 +2,8 @@ sylius:
     tax_category:
         name:
             not_blank: Please enter tax category name.
+            min_length: Tax category name must be at least 1 character long.|Tax category name must be at least {{ limit }} characters long.
+            max_length: Tax category name must not be longer than 1 character.|Tax category name must not be longer than {{ limit }} characters.
         code:
             max_length: The code must not be longer than {{ limit }} characters.
             not_blank: Please enter tax category code.
@@ -12,6 +14,8 @@ sylius:
             not_blank: Please select tax category.
         name:
             not_blank: Please enter tax rate name.
+            min_length: Tax rate name must be at least 1 character long.|Tax rate name must be at least {{ limit }} characters long.
+            max_length: Tax rate name must not be longer than 1 character.|Tax rate name must not be longer than {{ limit }} characters.
         amount:
             invalid: The tax rate amount is invalid.
             not_blank: Please enter tax rate amount.

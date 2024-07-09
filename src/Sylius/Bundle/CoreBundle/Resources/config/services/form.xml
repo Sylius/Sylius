@@ -70,10 +70,6 @@
         <service id="sylius.form.extension.type.channel" class="Sylius\Bundle\CoreBundle\Form\Extension\ChannelTypeExtension">
             <tag name="form.type_extension" extended-type="Sylius\Bundle\ChannelBundle\Form\Type\ChannelType" priority="100" />
         </service>
-        <service id="sylius.form.extension.type.locale" class="Sylius\Bundle\CoreBundle\Form\Extension\LocaleTypeExtension">
-            <argument type="service" id="sylius.repository.locale" />
-            <tag name="form.type_extension" extended-type="Sylius\Bundle\LocaleBundle\Form\Type\LocaleType" priority="100" />
-        </service>
         <service id="sylius.form.extension.type.order" class="Sylius\Bundle\CoreBundle\Form\Extension\OrderTypeExtension">
             <tag name="form.type_extension" extended-type="Sylius\Bundle\OrderBundle\Form\Type\OrderType" priority="100" />
         </service>

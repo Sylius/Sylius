@@ -8,12 +8,12 @@ Feature: Editing tax category
         Given the store has a tax category "Alcohol" with a code "alcohol"
         And I am logged in as an administrator
 
-    @todo @ui @api
+    @api @ui
     Scenario: Inability of changing the code of an existing tax category
         When I want to modify a tax category "Alcohol"
         Then I should not be able to edit its code
 
-    @todo @ui @api
+    @api @ui
     Scenario: Renaming the tax category
         When I want to modify a tax category "Alcohol"
         And I rename it to "Food & Alcohol"
