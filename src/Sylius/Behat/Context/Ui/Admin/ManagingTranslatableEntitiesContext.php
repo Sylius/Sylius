@@ -50,7 +50,7 @@ final readonly class ManagingTranslatableEntitiesContext implements Context
     {
         Assert::throws(
             fn () => $this->taxonFormElement->describeItAs('Description', $localeCode),
-            ElementNotFoundException::class
+            ElementNotFoundException::class,
         );
     }
 }
