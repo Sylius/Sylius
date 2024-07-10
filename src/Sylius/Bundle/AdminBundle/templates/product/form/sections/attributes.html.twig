@@ -78,9 +78,12 @@
                                                 {{ form_label(product_attribute_value.value, null, {label_attr: {class: required_class}}) }}
                                                 {% if locale_code is not null %}
                                                     <button
+                                                        type="button"
                                                         class="btn btn-secondary btn-sm"
                                                         data-action="live#action"
-                                                        data-live-action-param="prevent|applyToAll(attributeCode={{ product_attribute_code }},localeCode={{ product_attribute_value.vars.data.localeCode }})"
+                                                        data-live-action-param="applyToAll"
+                                                        data-live-attribute-code-param="{{ product_attribute_code }}"
+                                                        data-live-locale-code-param="{{ product_attribute_value.vars.data.localeCode }}"
                                                     >
                                                         {{ 'sylius.ui.apply_to_all'|trans }}
                                                     </button>
