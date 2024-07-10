@@ -18,11 +18,11 @@ use Sylius\Behat\Element\Product\ShowPage\AssociationsElementInterface;
 use Sylius\Behat\Element\Product\ShowPage\AttributesElementInterface;
 use Sylius\Behat\Element\Product\ShowPage\DetailsElementInterface;
 use Sylius\Behat\Element\Product\ShowPage\MediaElementInterface;
-use Sylius\Behat\Element\Product\ShowPage\MoreDetailsElementInterface;
 use Sylius\Behat\Element\Product\ShowPage\OptionsElementInterface;
 use Sylius\Behat\Element\Product\ShowPage\PricingElementInterface;
 use Sylius\Behat\Element\Product\ShowPage\ShippingElementInterface;
 use Sylius\Behat\Element\Product\ShowPage\TaxonomyElementInterface;
+use Sylius\Behat\Element\Product\ShowPage\TranslationsElementInterface;
 use Sylius\Behat\Element\Product\ShowPage\VariantsElementInterface;
 use Sylius\Behat\Page\Admin\Product\IndexPageInterface;
 use Sylius\Behat\Page\Admin\Product\ShowPageInterface;
@@ -30,6 +30,7 @@ use Sylius\Component\Core\Model\CatalogPromotionInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
+use Sylius\Component\Locale\Model\LocaleInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Webmozart\Assert\Assert;
 
@@ -42,7 +43,7 @@ final class ProductShowPageContext implements Context
         private AttributesElementInterface $attributesElement,
         private DetailsElementInterface $detailsElement,
         private MediaElementInterface $mediaElement,
-        private MoreDetailsElementInterface $moreDetailsElement,
+        private TranslationsElementInterface $translationsElement,
         private PricingElementInterface $pricingElement,
         private ShippingElementInterface $shippingElement,
         private TaxonomyElementInterface $taxonomyElement,
@@ -172,15 +173,15 @@ final class ProductShowPageContext implements Context
      */
     public function iShouldSeeBreadcrumb(string $breadcrumb): void
     {
-        Assert::same($breadcrumb, $this->productShowPage->getBreadcrumb());
+        Assert::contains($this->productShowPage->getBreadcrumb(), $breadcrumb);
     }
 
     /**
-     * @Then I should see price :price for channel :channelName
+     * @Then I should see price :price for channel :channel
      */
-    public function iShouldSeePriceForChannel(string $price, string $channelName): void
+    public function iShouldSeePriceForChannel(string $price, ChannelInterface $channel): void
     {
-        Assert::same($this->pricingElement->getPriceForChannel($channelName), $price);
+        Assert::same($this->pricingElement->getPriceForChannel($channel->getCode()), $price);
     }
 
     /**
@@ -239,11 +240,11 @@ final class ProductShowPageContext implements Context
     }
 
     /**
-     * @Then I should see original price :price for channel :channelName
+     * @Then I should see original price :price for channel :channel
      */
-    public function iShouldSeeOriginalPriceForChannel(string $originalPrice, string $channelName): void
+    public function iShouldSeeOriginalPriceForChannel(string $originalPrice, ChannelInterface $channel): void
     {
-        Assert::same($this->pricingElement->getOriginalPriceForChannel($channelName), $originalPrice);
+        Assert::same($this->pricingElement->getOriginalPriceForChannel($channel->getCode()), $originalPrice);
     }
 
     /**
@@ -257,9 +258,9 @@ final class ProductShowPageContext implements Context
     /**
      * @Then I should see the product is enabled for channel :channel
      */
-    public function iShouldSeeProductIsEnabledForChannels(string $channel): void
+    public function iShouldSeeProductIsEnabledForChannels(ChannelInterface $channel): void
     {
-        Assert::true($this->detailsElement->hasChannel($channel));
+        Assert::true($this->detailsElement->hasChannel($channel->getCode()));
     }
 
     /**
@@ -299,7 +300,7 @@ final class ProductShowPageContext implements Context
      */
     public function iShouldSeeProductTaxon(string $taxonName): void
     {
-        Assert::true($this->taxonomyElement->hasProductTaxon($taxonName));
+        Assert::contains($this->taxonomyElement->getProductTaxons(), $taxonName);
     }
 
     /**
@@ -355,7 +356,7 @@ final class ProductShowPageContext implements Context
      */
     public function iShouldSeeProductNameIs(string $name): void
     {
-        Assert::same($this->moreDetailsElement->getName(), $name);
+        Assert::same($this->translationsElement->getName(), $name);
     }
 
     /**
@@ -363,7 +364,7 @@ final class ProductShowPageContext implements Context
      */
     public function iShouldSeeProductSlugIs(string $slug): void
     {
-        Assert::same($this->moreDetailsElement->getSlug(), $slug);
+        Assert::same($this->translationsElement->getSlug(), $slug);
     }
 
     /**
@@ -371,7 +372,7 @@ final class ProductShowPageContext implements Context
      */
     public function iShouldSeeProductSDescriptionIs(string $description): void
     {
-        Assert::same($this->moreDetailsElement->getDescription(), $description);
+        Assert::same($this->translationsElement->getDescription(), $description);
     }
 
     /**
@@ -379,7 +380,7 @@ final class ProductShowPageContext implements Context
      */
     public function iShouldSeeProductMetaKeywordsAre(string $metaKeywords): void
     {
-        Assert::same($this->moreDetailsElement->getProductMetaKeywords(), $metaKeywords);
+        Assert::same($this->translationsElement->getProductMetaKeywords(), $metaKeywords);
     }
 
     /**
@@ -387,7 +388,7 @@ final class ProductShowPageContext implements Context
      */
     public function iShouldSeeProductShortDescriptionIs(string $shortDescription): void
     {
-        Assert::same($this->moreDetailsElement->getShortDescription(), $shortDescription);
+        Assert::same($this->translationsElement->getShortDescription(), $shortDescription);
     }
 
     /**
@@ -450,11 +451,11 @@ final class ProductShowPageContext implements Context
     }
 
     /**
-     * @Then I should see attribute :attribute with value :value in :nameOfLocale locale
+     * @Then I should see attribute :attribute with value :value in :locale locale
      */
-    public function iShouldSeeAttributeWithValueInLocale(string $attribute, string $value, string $nameOfLocale): void
+    public function iShouldSeeAttributeWithValueInLocale(string $attribute, string $value, LocaleInterface $locale): void
     {
-        Assert::true($this->attributesElement->hasAttributeInLocale($attribute, $nameOfLocale, $value));
+        Assert::true($this->attributesElement->hasAttributeInLocale($attribute, $locale->getCode(), $value));
     }
 
     /**
@@ -462,7 +463,7 @@ final class ProductShowPageContext implements Context
      */
     public function iShouldSeeNonTranslatableAttributeWithValue(string $attribute, string $value): void
     {
-        Assert::true($this->attributesElement->hasNonTranslatableAttribute($attribute, $value));
+        Assert::true($this->attributesElement->hasNonTranslatableAttribute($attribute, (float) $value / 100));
     }
 
     /**
@@ -474,19 +475,19 @@ final class ProductShowPageContext implements Context
     }
 
     /**
-     * @Then this product price should be decreased by catalog promotion :catalogPromotion in :channelName channel
+     * @Then this product price should be decreased by catalog promotion :catalogPromotion in :channel channel
      */
     public function thisProductPriceShouldBeDecreasedByCatalogPromotion(
         CatalogPromotionInterface $catalogPromotion,
-        string $channelName,
+        ChannelInterface $channel,
     ): void {
         Assert::inArray(
             $catalogPromotion->getName(),
-            $this->pricingElement->getCatalogPromotionsNamesForChannel($channelName),
+            $this->pricingElement->getCatalogPromotionsNamesForChannel($channel->getCode()),
         );
 
         $url = $this->urlGenerator->generate('sylius_admin_catalog_promotion_show', ['id' => $catalogPromotion->getId()]);
-        Assert::inArray($url, $this->pricingElement->getCatalogPromotionLinksForChannel($channelName));
+        Assert::inArray($url, $this->pricingElement->getCatalogPromotionLinksForChannel($channel->getCode()));
     }
 
     /**

@@ -17,27 +17,30 @@ use FriendsOfBehat\PageObjectExtension\Element\Element;
 
 final class AttributesElement extends Element implements AttributesElementInterface
 {
-    public function hasAttributeInLocale(string $attribute, string $locale, string $value): bool
+    public function hasAttributeInLocale(string $attribute, string $localeCode, string $value): bool
     {
-        $values = $this->getDocument()->find('css', sprintf('#attributes .tab.segment[data-tab="%s"]', $locale));
+        $attributeValue = $this->getDocument()->find('css', sprintf('[data-test-attribute-with-locale="%s"]', $localeCode));
 
-        $attributeValue = $values->find('css', sprintf('tr:contains("%s") td:nth-child(2)', $attribute))->getText();
-
-        return $attributeValue === $value;
+        return str_contains($attributeValue->getText(), $value) && str_contains($attributeValue->getText(), $attribute);
     }
 
-    public function hasNonTranslatableAttribute(string $attribute, string $value): bool
+    public function hasNonTranslatableAttribute(string $attribute, float|string $value): bool
     {
-        $attributeValue = $this->getDocument()->find('css', sprintf('.ui.segment[data-tab="non-translatable"] tr:contains("%s") td:nth-child(2)', $attribute))->getText();
+        $hasName = $this->hasElement('non_translatable_attribute_name', ['%name%' => $attribute]);
+        $hasValue = $this->hasElement('non_translatable_attribute_value', ['%value%' => $value]);
 
-        return str_contains($attributeValue, $value);
+        return $hasName && $hasValue;
     }
 
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
-            'attribute_value_in_locale' => '.attributes:contains("%locale%") ~ table tr:contains("%attribute%") td:nth-child(2)',
-            'attributes_in_locale' => '#attributes :contains("%locale%")',
+            'attribute_name' => '[data-test-attribute-name="%name%"]',
+            'attribute_value' => '[data-test-attribute-value]',
+            'attribute_with_locale' => '[data-test-attribute-with-locale="%locale%"]',
+            'attribute_without_locale' => '[data-test-attribute-without-locale]',
+            'non_translatable_attribute_name' => '[data-test-non-translatable-attribute-name="%name%"]',
+            'non_translatable_attribute_value' => '[data-test-non-translatable-attribute-value="%value%"]',
         ]);
     }
 }

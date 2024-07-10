@@ -14,43 +14,44 @@ declare(strict_types=1);
 namespace Sylius\Behat\Element\Product\ShowPage;
 
 use Behat\Mink\Element\NodeElement;
+use Behat\Mink\Exception\ElementNotFoundException;
 use FriendsOfBehat\PageObjectExtension\Element\Element;
 
 final class PricingElement extends Element implements PricingElementInterface
 {
-    public function getPriceForChannel(string $channelName): string
+    public function getPriceForChannel(string $channelCode): string
     {
-        $channelPriceRow = $this->getChannelPriceRow($channelName);
+        $channelPriceRow = $this->getChannelPriceRow($channelCode);
 
         if (null === $channelPriceRow) {
             return '';
         }
 
-        $priceForChannel = $channelPriceRow->find('css', 'td:nth-child(2)');
+        $priceForChannel = $channelPriceRow->find('css', '[data-test-price]');
 
         return $priceForChannel->getText();
     }
 
-    public function getOriginalPriceForChannel(string $channelName): string
+    public function getOriginalPriceForChannel(string $channelCode): string
     {
-        $channelPriceRow = $this->getChannelPriceRow($channelName);
+        $channelPriceRow = $this->getChannelPriceRow($channelCode);
 
-        $priceForChannel = $channelPriceRow->find('css', 'td:nth-child(3)');
+        $priceForChannel = $channelPriceRow->find('css', '[data-test-original-price]');
 
         return $priceForChannel->getText();
     }
 
-    public function getCatalogPromotionsNamesForChannel(string $channelName): array
+    public function getCatalogPromotionsNamesForChannel(string $channelCode): array
     {
         /** @var NodeElement[] $appliedPromotions */
-        $appliedPromotions = $this->getAppliedPromotionsForChannel($channelName);
+        $appliedPromotions = $this->getAppliedPromotionsForChannel($channelCode);
 
         return array_map(fn (NodeElement $element): string => $element->getText(), $appliedPromotions);
     }
 
-    public function getCatalogPromotionLinksForChannel(string $channelName): array
+    public function getCatalogPromotionLinksForChannel(string $channelCode): array
     {
-        $appliedPromotions = $this->getAppliedPromotionsForChannel($channelName);
+        $appliedPromotions = $this->getAppliedPromotionsForChannel($channelCode);
 
         return array_map(fn (NodeElement $element): string => $element->getAttribute('href'), $appliedPromotions);
     }
@@ -86,19 +87,24 @@ final class PricingElement extends Element implements PricingElementInterface
         return array_merge(parent::getDefinedElements(), [
             'simple_product_pricing_row' => '[data-test-simple-product="%channelCode%"]',
             'variant_pricing_row' => '[data-test-variant-pricing="%channelCode%.%variantCode%"]',
+            'price_row' => '[data-test-pricing="%channelCode%"]',
         ]);
     }
 
-    private function getAppliedPromotionsForChannel(string $channelName): array
+    private function getAppliedPromotionsForChannel(string $channelCode): array
     {
         /** @var NodeElement $channelPriceRow */
-        $channelPriceRow = $this->getChannelPriceRow($channelName);
+        $channelPriceRow = $this->getChannelPriceRow($channelCode);
 
-        return $channelPriceRow->findAll('css', '.applied-promotion');
+        return $channelPriceRow->findAll('css', '[data-test-applied-promotion]');
     }
 
-    private function getChannelPriceRow(string $channelName): ?NodeElement
+    private function getChannelPriceRow(string $channelCode): ?NodeElement
     {
-        return $this->getDocument()->find('css', sprintf('#pricing tr:contains("%s")', $channelName));
+        try {
+            return $this->getElement('price_row', ['%channelCode%' => $channelCode]);
+        } catch (ElementNotFoundException) {
+            return null;
+        }
     }
 }

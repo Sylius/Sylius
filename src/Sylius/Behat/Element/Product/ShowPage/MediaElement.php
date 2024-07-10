@@ -19,7 +19,7 @@ final class MediaElement extends Element implements MediaElementInterface
 {
     public function isImageDisplayed(): bool
     {
-        $imageElement = $this->getDocument()->find('css', '#media a img');
+        $imageElement = $this->getDocument()->find('css', '[data-test-media]');
         if ($imageElement === null) {
             return false;
         }
