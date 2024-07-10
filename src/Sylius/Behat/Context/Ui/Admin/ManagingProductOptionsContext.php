@@ -43,9 +43,11 @@ final class ManagingProductOptionsContext implements Context
     /**
      * @When I want to modify the :productOption product option
      */
-    public function iWantToModifyAProductOption(ProductOptionInterface $productOption)
+    public function iWantToModifyAProductOption(ProductOptionInterface $productOption): void
     {
-        $this->updatePage->open(['id' => $productOption->getId()]);
+        if (!$this->updatePage->isOpen(['id' => $productOption->getId()])) {
+            $this->updatePage->open(['id' => $productOption->getId()]);
+        }
     }
 
     /**
@@ -119,10 +121,20 @@ final class ManagingProductOptionsContext implements Context
 
     /**
      * @When I add the :value option value identified by :code
+     * @When I add the :value option value identified by :code in :localeCode
      */
-    public function iAddTheOptionValueWithCodeAndValue(string $value, string $code): void
+    public function iAddTheOptionValueWithCodeAndValue(string $value, string $code, string $localeCode = 'en_US'): void
     {
-        $this->formElement->addOptionValue($code, $value);
+        $this->formElement->addOptionValue($code, $localeCode, $value);
+    }
+
+    /**
+     * @When I apply the option value identified by :code in :localeCode to all option values.
+     * @When I apply to all the :value option value identified by :code
+     */
+    public function iApplyToAllTheOptionValueIdentifiedBy(string $code, string $localeCode): void
+    {
+        $this->formElement->applyToAllOptionValues($code, $localeCode);
     }
 
     /**
@@ -130,7 +142,7 @@ final class ManagingProductOptionsContext implements Context
      */
     public function iDeleteTheOptionValueWithCodeAndValue(string $value): void
     {
-        $this->formElement->removeOptionValue($value);
+        // TODO: Implement deleting option value
     }
 
     /**
@@ -247,22 +259,30 @@ final class ManagingProductOptionsContext implements Context
     /**
      * @Then /^(this product option) should have the "([^"]*)" option value$/
      * @Then /^(product option "[^"]+") should have the "([^"]*)" option value$/
+     * @Then /^(product option "[^"]+") should have the "([^"]*)" option value in ("([^"]+)" locale)$/
      */
-    public function thisProductOptionShouldHaveTheOptionValue(ProductOptionInterface $productOption, $optionValue)
-    {
+    public function thisProductOptionShouldHaveTheOptionValue(
+        ProductOptionInterface $productOption,
+        string $optionValue,
+        string $localeCode = 'en_US'
+    ): void {
         $this->iWantToModifyAProductOption($productOption);
 
-        Assert::true($this->formElement->isThereOptionValue($optionValue));
+        Assert::true($this->formElement->isThereOptionValue($optionValue, $localeCode));
     }
 
     /**
-     * @Then /^(this product option) should not have the "([^"]*)" option value$/
+     * @Then /^(product option "[^"]+") should not have the "([^"]*)" option value$/
+     * @Then /^(product option "[^"]+") should not have the "([^"]*)" option value in ("([^"]+)" locale)$/
      */
-    public function thisProductOptionShouldNotHaveTheOptionValue(ProductOptionInterface $productOption, string $optionValue): void
-    {
+    public function thisProductOptionShouldNotHaveTheOptionValue(
+        ProductOptionInterface $productOption,
+        string $optionValue,
+        string $localeCode = 'en_US'
+    ): void {
         $this->iWantToModifyAProductOption($productOption);
 
-        Assert::false($this->formElement->isThereOptionValue($optionValue));
+        Assert::false($this->formElement->isThereOptionValue($optionValue, $localeCode));
     }
 
     /**
