@@ -9,6 +9,7 @@ sylius:
     exchange_rate:
         ratio:
             greater_than: The ratio must be greater than 0.
+            less_than: The ratio must be less than 100000.
             invalid: The ratio must be a number.
             not_blank: Please enter exchange rate ratio.
         source_currency:
