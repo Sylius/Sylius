@@ -9,7 +9,7 @@ Feature: Product option validation
         And the store has a product option "T-Shirt color" with a code "t_shirt_color"
         And I am logged in as an administrator
 
-    @ui @api
+    @api @ui
     Scenario: Trying to add a new product option without specifying its code
         When I want to create a new product option
         And I name it "T-Shirt size" in "English (United States)"
@@ -18,14 +18,14 @@ Feature: Product option validation
         Then I should be notified that code is required
         And the product option with name "T-Shirt size" should not be added
 
-    @no-ui @api
+    @api @no-ui
     Scenario: Trying to add a new product option translation in unexsting locale
         When I want to modify the "T-Shirt color" product option
         And I name it "T-Shirt color" in "French (France)"
         And I try to save my changes
         Then I should be notified that the locale is not available
 
-    @ui @api
+    @api @ui
     Scenario: Trying to add a new product option with a too long code
         When I want to create a new product option
         And I name it "T-Shirt size" in "English (United States)"
@@ -33,7 +33,7 @@ Feature: Product option validation
         And I try to add it
         Then I should be notified that code is too long
 
-    @ui @api
+    @api @ui
     Scenario: Trying to add a new product option without specifying its name
         When I want to create a new product option
         And I specify its code as "t_shirt_size"
@@ -42,7 +42,7 @@ Feature: Product option validation
         Then I should be notified that name is required
         And the product option with code "t_shirt_size" should not be added
 
-    @ui @api
+    @api @ui
     Scenario: Trying to remove name from an existing product option
         When I want to modify the "T-Shirt color" product option
         And I remove its name from "English (United States)" translation
