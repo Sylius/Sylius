@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 
-namespace spec\Sylius\Bundle\ApiBundle\StateProcessor\Delete;
+namespace spec\Sylius\Bundle\ApiBundle\StateProcessor\Admin\Locale;
 
 use ApiPlatform\Metadata\Delete;
 use ApiPlatform\Metadata\Post;
@@ -22,7 +22,7 @@ use Sylius\Bundle\ApiBundle\Exception\LocaleIsUsedException;
 use Sylius\Bundle\LocaleBundle\Checker\LocaleUsageCheckerInterface;
 use Sylius\Component\Locale\Model\LocaleInterface;
 
-final class LocaleProcessorSpec extends ObjectBehavior
+final class RemoveProcessorSpec extends ObjectBehavior
 {
     function let(
         ProcessorInterface $removeProcessor,

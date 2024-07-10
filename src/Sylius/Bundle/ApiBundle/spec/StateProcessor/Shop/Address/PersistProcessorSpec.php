@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 
-namespace spec\Sylius\Bundle\ApiBundle\StateProcessor\Post;
+namespace spec\Sylius\Bundle\ApiBundle\StateProcessor\Shop\Address;
 
 use ApiPlatform\Metadata\Delete;
 use ApiPlatform\Metadata\Post;
@@ -23,7 +23,7 @@ use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
 
-final class AddressProcessorSpec extends ObjectBehavior
+final class PersistProcessorSpec extends ObjectBehavior
 {
     function let(
         ProcessorInterface $persistProcessor,
