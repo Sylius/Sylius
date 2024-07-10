@@ -13,6 +13,12 @@ twig_hooks:
                 configuration:
                     method: 'PUT'
 
+        'sylius_admin.product.update.content.header':
+            breadcrumbs:
+                template: '@SyliusAdmin/shared/crud/update/content/header/breadcrumbs.html.twig'
+                configuration:
+                    has_show_page: true
+
         'sylius_admin.product.update.content.header.title_block.actions':
             view_in_store:
                 template: '@SyliusAdmin/product/common/header/title_block/actions/view_in_store.html.twig'
