@@ -29,6 +29,7 @@ use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 final class LoggedInAdminUserProviderSpec extends ObjectBehavior
 {
     private const SECURITY_SESSION_KEY = '_security_admin';
+
     private const SERIALIZED_TOKEN = 'O:74:"Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken":3:{i:0;N;i:1;s:5:"admin";i:2;a:5:{i:0;O:37:"Sylius\Component\Core\Model\AdminUser":8:{i:0;s:38:"sylius{x33enl1y0askgkgw8k0skocc4ko0kg}";i:1;s:30:"x33enl1y0askgkgw8k0skocc4ko0kg";i:2;s:6:"sylius";i:3;s:6:"sylius";i:4;b:0;i:5;b:1;i:6;i:404;i:7;s:9:"plaintext";}i:1;b:1;i:2;N;i:3;a:0:{}i:4;a:1:{i:0;s:26:"ROLE_ADMINISTRATION_ACCESS";}}}';
 
     function let(
