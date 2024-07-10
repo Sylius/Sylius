@@ -1,6 +1,8 @@
-{% set channel = hookable_metadata.context.channel %}
-
-<td>
-    <span class="badge me-2" style="background-color: {{ channel.color }};" ></span>
-    {{ channel.name }}
-</td>
+{% if hookable_metadata.context.channel is defined %}
+    <td {{ sylius_test_html_attribute('channel', "%s"|format(hookable_metadata.context.channel.code)) }}>
+        <span class="badge me-2" style="background-color: {{ hookable_metadata.context.channel.color }};" ></span>
+        {{ hookable_metadata.context.channel.name }}
+    </td>
+{% else %}
+    <td></td>
+{% endif %}

@@ -1,0 +1,25 @@
+{% set product = hookable_metadata.context.resource %}
+
+<div class="bg-white mb-3">
+<div class="accordion" id="media" >
+        <div class="accordion-item">
+            <h1 class="accordion-header">
+                <button class="accordion-button me-3" type="button" data-bs-toggle="collapse" data-bs-target="#media-body" aria-expanded="false" aria-controls="media" >
+                    {{ 'sylius.ui.media'|trans }}
+                </button>
+            </h1>
+            <div id="media-body" class="accordion-collapse collapse" data-bs-parent="#media">
+                <div class="accordion-body">
+                {% if product.images|length >= 1 %}
+                    {% for image in product.images %}
+                        {% set path = image.path is not null ? image.path|imagine_filter('sylius_admin_product_small_thumbnail') : asset('build/admin/images/200x200.png', 'admin') %}
+                        <a href="{{ image.path|imagine_filter('sylius_admin_product_original') }}" data-lightbox="sylius-product-image">
+                            <img {{ sylius_test_html_attribute('media') }} src="{{ path }}" data-large-thumbnail="{{ image.path|imagine_filter('sylius_admin_product_large_thumbnail') }}" alt="{{ product.name }}" />
+                        </a>
+                    {% endfor %}
+                {% endif %}
+            </div>
+            </div>
+        </div>
+    </div>
+</div>

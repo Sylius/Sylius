@@ -2,7 +2,7 @@
 
 <div class="row">
     <div class="col-12 col-md-4 fw-bold">{{ 'sylius.ui.height'|trans }}:</div>
-    <div class="col-12 col-md-8">
+    <div class="col-12 col-md-8" {{ sylius_test_html_attribute('height') }}>
         {% if variant.height is null %}
             <i>{{ 'sylius.ui.no_height'|trans }}</i>
         {% else %}
