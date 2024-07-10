@@ -46,7 +46,7 @@
 
             <operation
                 class="ApiPlatform\Metadata\Post"
-                processor="sylius_api.state_processor.post.upload_avatar_image"
+                processor="sylius_api.state_processor.admin.avatar_image.persist"
                 deserialize="false"
             >
                 <inputFormats>

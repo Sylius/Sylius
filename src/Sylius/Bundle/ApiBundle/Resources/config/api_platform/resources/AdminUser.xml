@@ -83,7 +83,7 @@
                 </normalizationContext>
             </operation>
 
-            <operation class="ApiPlatform\Metadata\Put" processor="sylius.api.state_processor.put.admin_user">
+            <operation class="ApiPlatform\Metadata\Put" processor="sylius.api.state_processor.admin.admin_user.persist">
                 <denormalizationContext>
                     <values>
                         <value name="groups">
@@ -104,7 +104,7 @@
                 </normalizationContext>
             </operation>
 
-            <operation class="ApiPlatform\Metadata\Delete" processor="sylius.api.state_processor.delete.admin_user"/>
+            <operation class="ApiPlatform\Metadata\Delete" processor="sylius_api.state_processor.admin.admin_user.remove"/>
         </operations>
     </resource>
 </resources>

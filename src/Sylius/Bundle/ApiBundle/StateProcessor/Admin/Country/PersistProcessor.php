@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\ApiBundle\StateProcessor;
+namespace Sylius\Bundle\ApiBundle\StateProcessor\Admin\Country;
 
 use ApiPlatform\Metadata\DeleteOperationInterface;
 use ApiPlatform\Metadata\Operation;
@@ -21,16 +21,10 @@ use Sylius\Component\Addressing\Checker\CountryProvincesDeletionCheckerInterface
 use Sylius\Component\Addressing\Model\CountryInterface;
 use Webmozart\Assert\Assert;
 
-/**
- * @experimental
- *
- * @implements ProcessorInterface<CountryInterface>
- */
-final readonly class CountryProcessor implements ProcessorInterface
+final readonly class PersistProcessor implements ProcessorInterface
 {
     public function __construct(
         private ProcessorInterface $persistProcessor,
-        private ProcessorInterface $removeProcessor,
         private CountryProvincesDeletionCheckerInterface $countryProvincesDeletionChecker,
     ) {
     }
@@ -43,7 +37,7 @@ final readonly class CountryProcessor implements ProcessorInterface
         Assert::isInstanceOf($data, CountryInterface::class);
 
         if ($operation instanceof DeleteOperationInterface) {
-            return $this->removeProcessor->process($data, $operation, $uriVariables, $context);
+            return;
         }
 
         if (!$this->countryProvincesDeletionChecker->isDeletable($data)) {

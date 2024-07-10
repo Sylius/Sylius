@@ -11,20 +11,18 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\ApiBundle\StateProcessor\Post;
+namespace Sylius\Bundle\ApiBundle\StateProcessor\Shop\Address;
 
 use ApiPlatform\Metadata\Operation;
 use ApiPlatform\Metadata\Post;
 use ApiPlatform\State\ProcessorInterface;
 use Sylius\Bundle\ApiBundle\Context\UserContextInterface;
 use Sylius\Component\Core\Model\AddressInterface;
+use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
 use Webmozart\Assert\Assert;
 
-/**
- * @implements ProcessorInterface<AddressInterface>
- */
-final readonly class AddressProcessor implements ProcessorInterface
+final readonly class PersistProcessor implements ProcessorInterface
 {
     public function __construct(
         private ProcessorInterface $persistProcessor,
@@ -41,6 +39,8 @@ final readonly class AddressProcessor implements ProcessorInterface
         Assert::isInstanceOf($operation, Post::class);
 
         $user = $this->userContext->getUser();
+
+        /** @var CustomerInterface $customer */
         $customer = $user instanceof ShopUserInterface ? $user->getCustomer() : null;
 
         if (null !== $customer) {

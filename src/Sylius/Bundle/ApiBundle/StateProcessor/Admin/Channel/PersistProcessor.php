@@ -11,31 +11,31 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\ApiBundle\StateProcessor\Put;
+namespace Sylius\Bundle\ApiBundle\StateProcessor\Admin\Channel;
 
 use ApiPlatform\Metadata\DeleteOperationInterface;
 use ApiPlatform\Metadata\Operation;
-use ApiPlatform\Metadata\Put;
 use ApiPlatform\State\ProcessorInterface;
-use Sylius\Component\Core\Model\AdminUserInterface;
-use Sylius\Component\User\Security\PasswordUpdaterInterface;
+use Sylius\Component\Core\Model\ChannelInterface;
 use Webmozart\Assert\Assert;
 
-/** @implements ProcessorInterface<AdminUserInterface> */
-final readonly class AdminUserProcessor implements ProcessorInterface
+/**
+ * @implements ProcessorInterface<ChannelInterface>
+ */
+final readonly class PersistProcessor implements ProcessorInterface
 {
     public function __construct(
         private ProcessorInterface $persistProcessor,
-        private PasswordUpdaterInterface $passwordUpdater,
     ) {
     }
 
     public function process($data, Operation $operation, array $uriVariables = [], array $context = [])
     {
-        Assert::isInstanceOf($data, AdminUserInterface::class);
-        Assert::isInstanceOf($operation, Put::class);
+        Assert::isInstanceOf($data, ChannelInterface::class);
 
-        $this->passwordUpdater->updatePassword($data);
+        if ($operation instanceof DeleteOperationInterface) {
+            return;
+        }
 
         return $this->persistProcessor->process($data, $operation, $uriVariables, $context);
     }
