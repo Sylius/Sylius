@@ -22,21 +22,20 @@ twig_hooks:
 
         'sylius_admin.dashboard.index.content.header':
             breadcrumbs:
-                template: '@SyliusAdmin/dashboard/index/content/header/breadcrumbs.html.twig'
+                enabled: false
             title_block:
-                template: '@SyliusAdmin/dashboard/index/content/header/title_block/title.html.twig'
-            channel_selector:
-                component: 'sylius_admin:dashboard:channel_selector'
-                props:
-                    channelCode: '@=_context.channel_code'
+                template: '@SyliusAdmin/shared/crud/common/content/header/title_block.html.twig'
 
         'sylius_admin.dashboard.index.content.header.title_block':
             title:
                 template: '@SyliusAdmin/shared/crud/common/content/header/title_block/title.html.twig'
                 configuration:
                     title: sylius.ui.dashboard
+                    sylius_test_html_attribute: 'dashboard-header'
             actions:
-                enabled: false
+                component: 'sylius_admin:dashboard:channel_selector'
+                props:
+                    channelCode: '@=_context.channel_code'
 
         'sylius_admin.dashboard.index.content.statistics':
             statistics_grid:
