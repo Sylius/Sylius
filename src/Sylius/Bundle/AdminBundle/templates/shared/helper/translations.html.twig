@@ -2,7 +2,8 @@
     {% from _self import accordion_header %}
 
     {% set accordion_id = options.accordion_id|default('translations') %}
-    <div class="accordion" id="{{ accordion_id }}">
+    {% set accordion_flush = options.accordion_flush|default(false) %}
+    <div class="accordion {{ accordion_flush ? 'accordion-flush' : null }}" id="{{ accordion_id }}">
         {% for locale, translation_form in translation_fields %}
             <div class="accordion-item">
                 {{ accordion_header(locale, accordion_id, loop.first) }}
@@ -26,7 +27,8 @@
     {% from _self import accordion_header %}
 
     {% set accordion_id = options.accordion_id|default('translations') %}
-    <div class="accordion" id="{{ accordion_id }}">
+    {% set accordion_flush = options.accordion_flush|default(false) %}
+    <div class="accordion {{ accordion_flush ? 'accordion-flush' : null }}" id="{{ accordion_id }}">
         {% for locale, translation_form in translation_fields %}
             <div class="accordion-item">
                 {{ accordion_header(locale, accordion_id, loop.first) }}
@@ -44,7 +46,8 @@
     {% from _self import accordion_header %}
 
     {% set accordion_id = options.accordion_id|default('translations') %}
-    <div class="accordion" {{ sylius_test_html_attribute('accordion-key', key)}} id="{{ accordion_id }}">
+    {% set accordion_flush = options.accordion_flush|default(false) %}
+    <div class="accordion {{ accordion_flush ? 'accordion-flush' : null }}" {{ sylius_test_html_attribute('accordion-key', key)}} id="{{ accordion_id }}">
         {% for locale, translationForm in translationFields %}
             <div class="accordion-item">
                 {{ accordion_header(locale, accordion_id, loop.first) }}
