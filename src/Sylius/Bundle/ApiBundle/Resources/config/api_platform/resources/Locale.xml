@@ -76,7 +76,7 @@
             <operation
                 class="ApiPlatform\Metadata\Delete"
                 uriTemplate="/admin/locales/{code}"
-                processor="sylius_api.state_processor.delete.locale"
+                processor="sylius_api.state_processor.admin.locale.remove"
             />
 
             <operation class="ApiPlatform\Metadata\Get" uriTemplate="/shop/locales/{code}">

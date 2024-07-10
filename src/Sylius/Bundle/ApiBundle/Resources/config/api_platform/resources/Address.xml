@@ -98,7 +98,7 @@
                 uriTemplate="/shop/addresses"
                 security="is_granted('SYLIUS_SHOP_USER')"
                 itemUriTemplate="/shop/addresses/{id}"
-                processor="sylius_api.state_processor.post.address"
+                processor="sylius_api.state_processor.shop.address.persist"
             >
                 <denormalizationContext>
                     <values>

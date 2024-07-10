@@ -11,15 +11,19 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\ApiBundle\StateProcessor\Post;
+namespace Sylius\Bundle\ApiBundle\StateProcessor\Admin\AvatarImage;
 
 use ApiPlatform\Metadata\Operation;
 use ApiPlatform\State\ProcessorInterface;
 use Sylius\Bundle\ApiBundle\Creator\ImageCreatorInterface;
+use Sylius\Component\Core\Model\AvatarImageInterface;
 use Sylius\Component\Core\Repository\AvatarImageRepositoryInterface;
 
-final readonly class UploadAvatarImageProcessor implements ProcessorInterface
+final readonly class PersistProcessor implements ProcessorInterface
 {
+    /**
+     * @param AvatarImageRepositoryInterface<AvatarImageInterface> $avatarImageRepository
+     */
     public function __construct(
         private ProcessorInterface $processor,
         private ImageCreatorInterface $avatarImageCreator,

@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\ApiBundle\StateProcessor\Delete;
+namespace Sylius\Bundle\ApiBundle\StateProcessor\Admin\AdminUser;
 
 use ApiPlatform\Metadata\DeleteOperationInterface;
 use ApiPlatform\Metadata\Operation;
@@ -22,8 +22,7 @@ use Sylius\Component\User\Model\UserInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Webmozart\Assert\Assert;
 
-/** @implements ProcessorInterface<AdminUserInterface> */
-final readonly class AdminUserProcessor implements ProcessorInterface
+final readonly class RemoveProcessor implements ProcessorInterface
 {
     public function __construct(
         private ProcessorInterface $removeProcessor,
@@ -31,7 +30,7 @@ final readonly class AdminUserProcessor implements ProcessorInterface
     ) {
     }
 
-    public function process($data, Operation $operation, array $uriVariables = [], array $context = [])
+    public function process($data, Operation $operation, array $uriVariables = [], array $context = []): void
     {
         Assert::isInstanceOf($data, AdminUserInterface::class);
         Assert::isInstanceOf($operation, DeleteOperationInterface::class);
@@ -40,7 +39,7 @@ final readonly class AdminUserProcessor implements ProcessorInterface
             throw new CannotRemoveCurrentlyLoggedInUser();
         }
 
-        return $this->removeProcessor->process($data, $operation, $uriVariables, $context);
+        $this->removeProcessor->process($data, $operation, $uriVariables, $context);
     }
 
     private function isTryingToRemoveLoggedInUser(UserInterface $user): bool

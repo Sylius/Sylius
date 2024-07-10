@@ -16,7 +16,7 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="https://api-platform.com/schema/metadata/resources-3.0 https://api-platform.com/schema/metadata/resources-3.0.xsd"
 >
-    <resource class="Sylius\Component\Core\Model\Channel" shortName="Channel" processor="sylius_api.state_processor.shop.channel">
+    <resource class="Sylius\Component\Core\Model\Channel" shortName="Channel">
         <validationContext>
             <values>
                 <value name="groups">
@@ -76,7 +76,7 @@
                 </normalizationContext>
             </operation>
 
-            <operation class="ApiPlatform\Metadata\Post" uriTemplate="/admin/channels">
+            <operation class="ApiPlatform\Metadata\Post" uriTemplate="/admin/channels" processor="sylius_api.state_processor.admin.channel.persist">
                 <normalizationContext>
                     <values>
                         <value name="groups">
@@ -118,7 +118,7 @@
                 </denormalizationContext>
             </operation>
 
-            <operation class="ApiPlatform\Metadata\Delete" uriTemplate="/admin/channels/{code}" />
+            <operation class="ApiPlatform\Metadata\Delete" uriTemplate="/admin/channels/{code}" processor="sylius_api.state_processor.admin.channel.remove"/>
         </operations>
     </resource>
 </resources>

@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\ApiBundle\StateProcessor\Delete;
+namespace Sylius\Bundle\ApiBundle\StateProcessor\Admin\Locale;
 
 use ApiPlatform\Metadata\DeleteOperationInterface;
 use ApiPlatform\Metadata\Operation;
@@ -21,8 +21,7 @@ use Sylius\Bundle\LocaleBundle\Checker\LocaleUsageCheckerInterface;
 use Sylius\Component\Locale\Model\LocaleInterface;
 use Webmozart\Assert\Assert;
 
-/** @implements ProcessorInterface<LocaleInterface> */
-final readonly class LocaleProcessor implements ProcessorInterface
+final readonly class RemoveProcessor implements ProcessorInterface
 {
     public function __construct(
         private ProcessorInterface $removeProcessor,
@@ -30,7 +29,7 @@ final readonly class LocaleProcessor implements ProcessorInterface
     ) {
     }
 
-    public function process($data, Operation $operation, array $uriVariables = [], array $context = [])
+    public function process($data, Operation $operation, array $uriVariables = [], array $context = []): void
     {
         Assert::isInstanceOf($data, LocaleInterface::class);
         Assert::isInstanceOf($operation, DeleteOperationInterface::class);
@@ -39,6 +38,6 @@ final readonly class LocaleProcessor implements ProcessorInterface
             throw new LocaleIsUsedException($data->getCode());
         }
 
-        return $this->removeProcessor->process($data, $operation, $uriVariables, $context);
+        $this->removeProcessor->process($data, $operation, $uriVariables, $context);
     }
 }

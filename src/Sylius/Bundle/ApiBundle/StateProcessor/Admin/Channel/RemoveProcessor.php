@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\ApiBundle\StateProcessor;
+namespace Sylius\Bundle\ApiBundle\StateProcessor\Admin\Channel;
 
 use ApiPlatform\Metadata\DeleteOperationInterface;
 use ApiPlatform\Metadata\Operation;
@@ -22,30 +22,26 @@ use Sylius\Component\Core\Model\ChannelInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Webmozart\Assert\Assert;
 
-/**
- * @implements ProcessorInterface<ChannelInterface>
- */
-final readonly class ChannelProcessor implements ProcessorInterface
+final readonly class RemoveProcessor implements ProcessorInterface
 {
     public function __construct(
-        private ProcessorInterface $persistProcessor,
         private ProcessorInterface $removeProcessor,
         private ChannelDeletionCheckerInterface $channelDeletionChecker,
     ) {
     }
 
-    public function process($data, Operation $operation, array $uriVariables = [], array $context = [])
+    public function process($data, Operation $operation, array $uriVariables = [], array $context = []): void
     {
         Assert::isInstanceOf($data, ChannelInterface::class);
 
-        if (!$this->channelDeletionChecker->isDeletable($data) && $operation instanceof DeleteOperationInterface) {
+        if (!$operation instanceof DeleteOperationInterface) {
+            return;
+        }
+
+        if (!$this->channelDeletionChecker->isDeletable($data)) {
             throw new ChannelCannotBeRemoved('The channel cannot be deleted. At least one enabled channel is required.', Response::HTTP_UNPROCESSABLE_ENTITY);
         }
 
-        if ($operation instanceof DeleteOperationInterface) {
-            return $this->removeProcessor->process($data, $operation, $uriVariables, $context);
-        }
-
-        return $this->persistProcessor->process($data, $operation, $uriVariables, $context);
+        $this->removeProcessor->process($data, $operation, $uriVariables, $context);
     }
 }
