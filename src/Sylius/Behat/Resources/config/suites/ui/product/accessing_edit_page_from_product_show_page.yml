@@ -3,7 +3,7 @@
 
 default:
     suites:
-        ui_viewing_products:
+        ui_accessing_edit_page_from_product_show_page:
             contexts:
                 - sylius.behat.context.hook.doctrine_orm
                 - sylius.behat.context.hook.session
