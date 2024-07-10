@@ -15,6 +15,12 @@ twig_hooks:
                 configuration:
                     has_show_page: true
 
+        'sylius_admin.catalog_promotion.update.content.header.title_block.actions':
+            show:
+                template: '@SyliusAdmin/shared/crud/update/content/header/title_block/actions/show.html.twig'
+                configuration:
+                    has_show_page: true
+
         'sylius_admin.catalog_promotion.update.content.form':
             sections:
                 template: '@SyliusAdmin/catalog_promotion/form/sections.html.twig'
