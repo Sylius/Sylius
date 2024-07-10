@@ -65,7 +65,7 @@ Feature: Viewing details of a simple product
         And I should see product's depth is 20
         And I should see product's weight is 25
 
-    @ui @javascript @api
+    @ui @mink:chromedriver @api
     Scenario: Viewing media block
         Given the "Iron Shield" product has an image "mugs.jpg" with "main" type
         When I access the "Iron Shield" product
