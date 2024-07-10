@@ -56,7 +56,7 @@ final readonly class ManagingCustomerGroupsContext implements Context
      * @When I specify its name as :name
      * @When I remove its name
      */
-    public function iSpecifyItsNameAs(string $name = null): void
+    public function iSpecifyItsNameAs(?string $name = null): void
     {
         $this->createPage->nameIt($name ?? '');
     }

@@ -22,7 +22,7 @@ final readonly class ErrorTemplateFinder implements ErrorTemplateFinderInterface
 {
     public function __construct(
         private SectionProviderInterface $sectionProvider,
-        private Environment $twig
+        private Environment $twig,
     ) {
     }
 
