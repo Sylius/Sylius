@@ -27,6 +27,11 @@
                 <div class="card-status-top bg-danger"></div>
             {% endif %}
             <div class="card-header">
+                <div class="card-title">
+                    {{ 'sylius.ui.channel_pricings'|trans }}
+                </div>
+            </div>
+            <div class="card-header">
                 <ul class="nav nav-tabs card-header-tabs" data-bs-toggle="tabs" role="tablist">
                     {% for channel_code, channel_pricing in variant_form.channelPricings %}
                         {% set channel_error_count = variant_form.channelPricings.vars.channels_errors_count[channel_code] %}
