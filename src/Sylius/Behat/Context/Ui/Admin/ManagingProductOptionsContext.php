@@ -196,7 +196,7 @@ final class ManagingProductOptionsContext implements Context
      */
     public function iShouldBeNotifiedThatElementIsRequired($element)
     {
-        Assert::same($this->formElement->getValidationMessage($element, ['%localeCode%' => 'en_US']), sprintf('Please enter option %s.', $element));
+        Assert::same($this->formElement->getValidationMessage($element, ['%locale_code%' => 'en_US']), sprintf('Please enter option %s.', $element));
     }
 
     /**
