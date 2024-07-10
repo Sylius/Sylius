@@ -12,7 +12,6 @@ sylius_grid:
                     type: twig
                     label: sylius.ui.name
                     path: .
-                    sortable: code
                     options:
                         template: "@SyliusAdmin/locale/grid/field/name.html.twig"
                 code:
