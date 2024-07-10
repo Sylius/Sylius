@@ -1,4 +1,4 @@
-{% import '@SyliusShop/Shared/buttons.html.twig' as buttons %}
+{% import '@SyliusShop/shared/buttons.html.twig' as buttons %}
 
 {% set path = options.link.url|default(path(options.link.route|default(grid.requestConfiguration.getRouteName('show')), options.link.parameters|default({'id': data.id}))) %}
 

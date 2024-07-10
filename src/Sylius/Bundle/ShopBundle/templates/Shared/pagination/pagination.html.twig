@@ -1,5 +1,0 @@
-{% macro simple(paginator, options) %}
-    {% if paginator.haveToPaginate() %}
-        {{ pagerfanta(paginator, 'twig', options|default({'template': '@SyliusShop/Shared/pagination/bootstrap_5.html.twig'})) }}
-    {% endif %}
-{% endmacro %}

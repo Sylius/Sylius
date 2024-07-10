@@ -1,7 +1,7 @@
 {% set homepage_hook = 'sylius_shop.homepage.index' %}
 {% set prefixes = [homepage_hook] %}
 
-{% extends '@SyliusShop/base.html.twig' %}
+{% extends '@SyliusShop/shared/layout/base.html.twig' %}
 
 {% block content %}
     {% hook homepage_hook %}

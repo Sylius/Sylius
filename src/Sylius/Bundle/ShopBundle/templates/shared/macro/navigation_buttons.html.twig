@@ -1,6 +1,6 @@
 {% macro default(back_text, back_link, can_submit = true) %}
-    {% import '@SyliusShop/Shared/buttons.html.twig' as buttons %}
-    {% from '@SyliusShop/Shared/icon.html.twig' import icon as icon %}
+    {% import '@SyliusShop/shared/buttons.html.twig' as buttons %}
+    {% from '@SyliusShop/shared/icon.html.twig' import icon as icon %}
 
     <div class="d-flex justify-content-between">
         {{ buttons.default(back_link, back_text, null, 'chevron-left', 'btn-light') }}
@@ -11,7 +11,7 @@
 {% endmacro %}
 
 {% macro complete(confirm_text) %}
-    {% import '@SyliusShop/Shared/buttons.html.twig' as buttons %}
+    {% import '@SyliusShop/shared/buttons.html.twig' as buttons %}
 
     <div class="text-center">
         {{ buttons.submit(confirm_text, 'confirmation-button', null, 'btn-primary') }}

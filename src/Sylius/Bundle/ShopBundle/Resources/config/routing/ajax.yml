@@ -15,4 +15,4 @@ sylius_shop_ajax_render_province_form:
     defaults:
         _controller: sylius.controller.province::choiceOrTextFieldFormAction
         _sylius:
-            template: "@SyliusShop/Shared/form/_province.html.twig"
+            template: "@SyliusShop/shared/form/_province.html.twig"
