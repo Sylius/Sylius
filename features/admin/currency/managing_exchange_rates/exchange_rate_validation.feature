@@ -29,6 +29,16 @@ Feature: Exchange rate validation
         And the exchange rate between "US Dollar" and "British Pound" should not be added
 
     @api @ui
+    Scenario: Trying to add a new exchange rate with large ratio
+        When I want to add a new exchange rate
+        And I choose "US Dollar" as the source currency
+        And I choose "British Pound" as the target currency
+        And I specify its ratio as 123450000
+        And I try to add it
+        Then I should be notified that the ratio must be less than 100000
+        And the exchange rate between "US Dollar" and "British Pound" should not be added
+
+    @api @ui
     Scenario: Trying to add a new exchange rate with same target currency as source
         When I want to add a new exchange rate
         And I specify its ratio as 1.23

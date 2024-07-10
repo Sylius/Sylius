@@ -159,7 +159,7 @@ final readonly class ManagingExchangeRatesContext implements Context
     /**
      * @Then I should see :count exchange rates on the list
      */
-    public function iShouldSeeExchangeRatesOnTheList(int $count = 0): void
+    public function iShouldSeeExchangeRatesOnTheList(int $count): void
     {
         $this->assertCountOfExchangeRatesOnTheList($count);
     }
@@ -275,6 +275,14 @@ final readonly class ManagingExchangeRatesContext implements Context
     public function iShouldBeNotifiedThatRatioMustBeGreaterThanZero(): void
     {
         Assert::same($this->formElement->getValidationMessage('ratio'), 'The ratio must be greater than 0.');
+    }
+
+    /**
+     * @Then /^I should be notified that the ratio must be less than ([^"]+)$/
+     */
+    public function iShouldBeNotifiedThatRatioMustBeLessThan(string $value): void
+    {
+        Assert::same($this->formElement->getValidationMessage('ratio'), sprintf('The ratio must be less than %s.', $value));
     }
 
     /**
