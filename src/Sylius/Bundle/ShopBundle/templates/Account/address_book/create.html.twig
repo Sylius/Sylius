@@ -1,5 +1,5 @@
 {% extends '@SyliusShop/Account/address_book/layout.html.twig' %}
-{% import '@SyliusShop/Shared/buttons.html.twig' as buttons %}
+{% import '@SyliusShop/shared/buttons.html.twig' as buttons %}
 
 {% form_theme form '@SyliusShop/Form/theme.html.twig' %}
 
@@ -16,7 +16,7 @@
         {{ form_start(form, {'action': path('sylius_shop_account_address_book_create'), 'attr': {'novalidate': 'novalidate'}}) }}
 
         <div class="mb-4">
-            {% include '@SyliusShop/Shared/form/address.html.twig' with {'form': form} %}
+            {% include '@SyliusShop/shared/form/address.html.twig' with {'form': form} %}
         </div>
         <div class="d-flex gap-2">
             {{ buttons.submit('sylius.ui.add'|trans, 'add-address', null, 'btn-primary') }}

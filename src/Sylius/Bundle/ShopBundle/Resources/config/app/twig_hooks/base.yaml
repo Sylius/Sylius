@@ -36,7 +36,7 @@ twig_hooks:
 
         'sylius_shop.base.header.content.logo':
             content:
-                template: "@SyliusShop/Shared/sylius_logo.html.twig"
+                template: "@SyliusShop/shared/sylius_logo.html.twig"
 
         'sylius_shop.base.header.navbar':
             menu:
@@ -44,7 +44,7 @@ twig_hooks:
 
         'sylius_shop.base.header.flashes':
             content:
-                template: "@SyliusShop/Shared/flashes.html.twig"
+                template: "@SyliusShop/shared/flashes.html.twig"
 
         'sylius_shop.base.footer':
             content:

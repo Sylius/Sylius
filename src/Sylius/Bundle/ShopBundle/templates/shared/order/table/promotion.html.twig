@@ -1,4 +1,4 @@
-{% import "@SyliusShop/Shared/macro/money.html.twig" as money %}
+{% import "@SyliusShop/shared/macro/money.html.twig" as money %}
 
 {% set orderPromotionAdjustment = constant('Sylius\\Component\\Core\\Model\\AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT') %}
 {% set orderPromotions = sylius_aggregate_adjustments(order.getAdjustmentsRecursively(orderPromotionAdjustment)) %}

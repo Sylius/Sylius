@@ -264,7 +264,7 @@ sylius_ui:
                     template: "@SyliusShop/Account/order/show/header.html.twig"
                     priority: 20
                 summary:
-                    template: "@SyliusShop/Shared/order/summary.html.twig"
+                    template: "@SyliusShop/shared/order/summary.html.twig"
                     priority: 10
 
         sylius.shop.checkout.steps:
@@ -344,7 +344,7 @@ sylius_ui:
         sylius.shop.checkout.complete.summary:
             blocks:
                 content:
-                    template: "@SyliusShop/Shared/order/summary.html.twig"
+                    template: "@SyliusShop/shared/order/summary.html.twig"
                     priority: 10
 
         sylius.shop.product.show.header:

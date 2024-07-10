@@ -1,5 +1,5 @@
-{% import '@SyliusShop/Shared/buttons.html.twig' as buttons %}
-{% from '@SyliusShop/Shared/icon.html.twig' import icon as icon %}
+{% import '@SyliusShop/shared/buttons.html.twig' as buttons %}
+{% from '@SyliusShop/shared/icon.html.twig' import icon as icon %}
 
 <div class="card border-0 bg-body-tertiary mb-3">
     <div class="card-body" {{ sylius_test_html_attribute('default-address') }}>
@@ -8,7 +8,7 @@
         </div>
         <div {{ sylius_test_html_attribute('address', "%s %s"|format(address.firstName, address.lastName)) }}>
             <div>
-                {% include '@SyliusShop/Shared/address.html.twig' with {'address': address} %}
+                {% include '@SyliusShop/shared/address.html.twig' with {'address': address} %}
             </div>
             <div class="d-flex gap-2">
                 <a class="btn btn-sm btn-icon btn-outline-gray" href="{{ path('sylius_shop_account_address_book_update', { 'id': address.id }) }}">

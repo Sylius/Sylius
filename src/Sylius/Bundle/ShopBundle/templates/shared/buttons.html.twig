@@ -1,5 +1,5 @@
 {% macro default(url, message, id, icon, class) %}
-    {% from '@SyliusShop/Shared/icon.html.twig' import icon as icon %}
+    {% from '@SyliusShop/shared/icon.html.twig' import icon as icon %}
 
     <a class="btn {% if class is not empty %}{{ class }}{% endif %}" {% if id is not null %} id="{{ id }}"{% endif %} href="{{ url }}" {{ sylius_test_html_attribute('button', id|default(message)) }}>
         {% if icon is not empty %}
@@ -12,7 +12,7 @@
 {% endmacro %}
 
 {% macro submit(message, id, icon, class) %}
-    {% from '@SyliusShop/Shared/icon.html.twig' import icon as icon %}
+    {% from '@SyliusShop/shared/icon.html.twig' import icon as icon %}
 
     <button type="submit" class="btn {% if class is not empty %}{{ class }}{% endif %}" {% if id is not null %}id="{{ id }}"{% endif %} {{ sylius_test_html_attribute('button', id|default(message)) }}>
         {% if icon is not empty %}
@@ -25,7 +25,7 @@
 {% endmacro %}
 
 {% macro transparent(url, message, id, icon, class) %}
-    {% from '@SyliusShop/Shared/icon.html.twig' import icon as icon %}
+    {% from '@SyliusShop/shared/icon.html.twig' import icon as icon %}
 
     <a href="{{ url }}" class="link-reset{% if class is not empty %} {{ class }}{% endif %}"{% if id is not null %} id="{{ id }}"{% endif %} {{ sylius_test_html_attribute('link', id|default(message)) }}>
         {% if icon is not empty %}
