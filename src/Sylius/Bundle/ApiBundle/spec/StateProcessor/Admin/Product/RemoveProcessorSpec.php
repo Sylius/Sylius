@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 
-namespace spec\Sylius\Bundle\ApiBundle\StateProcessor\Delete;
+namespace spec\Sylius\Bundle\ApiBundle\StateProcessor\Admin\Product;
 
 use ApiPlatform\Metadata\DeleteOperationInterface;
 use ApiPlatform\Metadata\Operation;
@@ -21,9 +21,9 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ApiBundle\Exception\ProductCannotBeRemoved;
 use Sylius\Component\Core\Model\ProductInterface;
 
-final class ProductProcessorSpec extends ObjectBehavior
+final class RemoveProcessorSpec extends ObjectBehavior
 {
-    function let(ProcessorInterface $persistProcessor, ProcessorInterface $removeProcessor): void
+    function let(ProcessorInterface $removeProcessor): void
     {
         $this->beConstructedWith($removeProcessor);
     }
@@ -39,9 +39,9 @@ final class ProductProcessorSpec extends ObjectBehavior
         ProductInterface $product,
     ) {
         $operation->implement(DeleteOperationInterface::class);
-        $removeProcessor->process($product, $operation, [], [])->willReturn($product);
+        $removeProcessor->process($product, $operation, [], [])->willReturn(null);
 
-        $this->process($product, $operation, [], [])->shouldReturn($product);
+        $this->process($product, $operation, [], [])->shouldReturn(null);
     }
 
     public function it_throws_exception_when_foreign_key_constraint_violation_occurs(

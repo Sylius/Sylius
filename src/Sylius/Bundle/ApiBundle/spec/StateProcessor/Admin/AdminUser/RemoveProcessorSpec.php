@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 
-namespace spec\Sylius\Bundle\ApiBundle\StateProcessor\Delete;
+namespace spec\Sylius\Bundle\ApiBundle\StateProcessor\Admin\AdminUser;
 
 use ApiPlatform\Metadata\Delete;
 use ApiPlatform\State\ProcessorInterface;
@@ -21,7 +21,7 @@ use Sylius\Component\Core\Model\AdminUserInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 
-final class AdminUserProcessorSpec extends ObjectBehavior
+final class RemoveProcessorSpec extends ObjectBehavior
 {
     function let(
         ProcessorInterface $removeProcessor,

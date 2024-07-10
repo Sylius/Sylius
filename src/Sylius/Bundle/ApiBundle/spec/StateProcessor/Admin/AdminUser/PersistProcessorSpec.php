@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 
-namespace spec\Sylius\Bundle\ApiBundle\StateProcessor\Put;
+namespace spec\Sylius\Bundle\ApiBundle\StateProcessor\Admin\AdminUser;
 
 use ApiPlatform\Metadata\Delete;
 use ApiPlatform\Metadata\Patch;
@@ -22,7 +22,7 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\AdminUserInterface;
 use Sylius\Component\User\Security\PasswordUpdaterInterface;
 
-final class AdminUserProcessorSpec extends ObjectBehavior
+final class PersistProcessorSpec extends ObjectBehavior
 {
     function let(
         ProcessorInterface $persistProcessor,

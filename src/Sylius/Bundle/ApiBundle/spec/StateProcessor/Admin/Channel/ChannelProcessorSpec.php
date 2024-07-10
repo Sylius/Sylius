@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 
-namespace spec\Sylius\Bundle\ApiBundle\StateProcessor;
+namespace StateProcessor\Admin\Channel;
 
 use ApiPlatform\Metadata\Delete;
 use ApiPlatform\Metadata\Post;

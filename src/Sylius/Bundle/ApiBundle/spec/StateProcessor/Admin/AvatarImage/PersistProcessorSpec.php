@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 
-namespace spec\Sylius\Bundle\ApiBundle\StateProcessor\Post;
+namespace spec\Sylius\Bundle\ApiBundle\StateProcessor\Admin\AvatarImage;
 
 use ApiPlatform\Metadata\Post;
 use ApiPlatform\State\ProcessorInterface;
@@ -23,7 +23,7 @@ use Sylius\Component\Core\Repository\AvatarImageRepositoryInterface;
 use Symfony\Component\HttpFoundation\ParameterBag;
 use Symfony\Component\HttpFoundation\Request;
 
-final class UploadAvatarImageProcessorSpec extends ObjectBehavior
+final class PersistProcessorSpec extends ObjectBehavior
 {
     function let(
         ProcessorInterface $processor,
