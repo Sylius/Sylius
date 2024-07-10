@@ -6,11 +6,10 @@
         <div class="row" {{ sylius_test_html_attribute('values') }}>
             {{ form_errors(hookable_metadata.context.form.values) }}
 
-            {% for value_form in hookable_metadata.context.form.values %}
-                {% hook 'values' with { value_form } %}
+            {% for value_form_key, value_form in hookable_metadata.context.form.values %}
+                {% hook 'values' with { value_form, value_form_key } %}
             {% endfor %}
-
-            {{ form_row(hookable_metadata.context.form.values.vars.button_add, sylius_test_form_attribute('add-value')) }}
         </div>
+        {{ form_row(hookable_metadata.context.form.values.vars.button_add, sylius_test_form_attribute('add-value')) }}
     </div>
 </div>

@@ -18,6 +18,8 @@ use Sylius\TwigHooks\LiveComponent\HookableLiveComponentTrait;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\UX\LiveComponent\Attribute\AsLiveComponent;
+use Symfony\UX\LiveComponent\Attribute\LiveAction;
+use Symfony\UX\LiveComponent\Attribute\LiveArg;
 use Symfony\UX\LiveComponent\Attribute\LiveProp;
 use Symfony\UX\LiveComponent\DefaultActionTrait;
 use Symfony\UX\LiveComponent\LiveCollectionTrait;
@@ -42,5 +44,15 @@ class FormComponent
     protected function instantiateForm(): FormInterface
     {
         return $this->formFactory->create($this->formClass, $this->resource);
+    }
+
+    #[LiveAction]
+    public function applyToAll(#[LiveArg] string $valueKey, #[LiveArg] string $translationKey): void
+    {
+        $value = $this->formValues['values'][$valueKey]['translations'][$translationKey]['value'];
+
+        foreach ($this->formValues['values'][$valueKey]['translations'] as &$translation) {
+            $translation['value'] = $value;
+        }
     }
 }
