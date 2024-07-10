@@ -44,11 +44,18 @@
 {% endset %}
 
 <div class="tab-pane" id="product-variant-channel-pricing" role="tabpanel" tabindex="0">
-    <div class="bg-white mb-3">
-        <div class="alert alert-info">
-            <p>{{ 'sylius.ui.price_details'|trans }}</p>
-            <p>{{ 'sylius.ui.original_price_details'|trans }}</p>
-            <p>{{ 'sylius.ui.minimum_price_details'|trans }}</p>
+    <div class="card mb-3">
+        <div class="card-header">
+            <h2 class="card-title">
+                {{ 'sylius.ui.channel_pricings'|trans }}
+            </h2>
+        </div>
+        <div class="card-body">
+            <div class="alert alert-info">
+                <p>{{ 'sylius.ui.price_details'|trans }}</p>
+                <p>{{ 'sylius.ui.original_price_details'|trans }}</p>
+                <p>{{ 'sylius.ui.minimum_price_details'|trans }}</p>
+            </div>
         </div>
 
         {{ channel_pricings(hookable_metadata.context.form.channelPricings, product_variant, body) }}
