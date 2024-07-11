@@ -278,7 +278,7 @@ final readonly class ManagingExchangeRatesContext implements Context
     }
 
     /**
-     * @Then /^I should be notified that the ratio must be less than ([^"]+)$/
+     * @Then I should be notified that the ratio must be less than :value
      */
     public function iShouldBeNotifiedThatRatioMustBeLessThan(string $value): void
     {
