@@ -22,6 +22,7 @@ use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
 use Webmozart\Assert\Assert;
 
+/** @implements ProcessorInterface<AddressInterface> */
 final readonly class PersistProcessor implements ProcessorInterface
 {
     public function __construct(

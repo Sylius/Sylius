@@ -22,6 +22,7 @@ use Sylius\Component\User\Model\UserInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Webmozart\Assert\Assert;
 
+/** @implements ProcessorInterface<AdminUserInterface> */
 final readonly class RemoveProcessor implements ProcessorInterface
 {
     public function __construct(

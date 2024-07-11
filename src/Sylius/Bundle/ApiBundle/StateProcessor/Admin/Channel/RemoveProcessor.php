@@ -22,6 +22,7 @@ use Sylius\Component\Core\Model\ChannelInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Webmozart\Assert\Assert;
 
+/** @implements ProcessorInterface<ChannelInterface> */
 final readonly class RemoveProcessor implements ProcessorInterface
 {
     public function __construct(

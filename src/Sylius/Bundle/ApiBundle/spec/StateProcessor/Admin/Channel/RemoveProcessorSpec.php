@@ -11,10 +11,9 @@
 
 declare(strict_types=1);
 
-namespace StateProcessor\Admin\Channel;
+namespace spec\Sylius\Bundle\ApiBundle\StateProcessor\Admin\Channel;
 
 use ApiPlatform\Metadata\Delete;
-use ApiPlatform\Metadata\Post;
 use ApiPlatform\State\ProcessorInterface;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
@@ -22,24 +21,20 @@ use Sylius\Bundle\ApiBundle\Exception\ChannelCannotBeRemoved;
 use Sylius\Component\Channel\Checker\ChannelDeletionCheckerInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 
-final class ChannelProcessorSpec extends ObjectBehavior
+final class RemoveProcessorSpec extends ObjectBehavior
 {
     function let(
-        ProcessorInterface $persistProcessor,
         ProcessorInterface $removeProcessor,
         ChannelDeletionCheckerInterface $channelDeletionChecker,
     ): void {
-        $this->beConstructedWith($persistProcessor, $removeProcessor, $channelDeletionChecker);
+        $this->beConstructedWith($removeProcessor, $channelDeletionChecker);
     }
 
     function it_throws_an_exception_if_object_is_not_a_channel(
-        ProcessorInterface $persistProcessor,
         ProcessorInterface $removeProcessor,
         ChannelDeletionCheckerInterface $channelDeletionChecker,
     ): void {
         $channelDeletionChecker->isDeletable(Argument::any())->shouldNotBeCalled();
-
-        $persistProcessor->process(Argument::cetera())->shouldNotBeCalled();
         $removeProcessor->process(Argument::cetera())->shouldNotBeCalled();
 
         $this
@@ -49,7 +44,6 @@ final class ChannelProcessorSpec extends ObjectBehavior
     }
 
     function it_throws_exception_if_channel_is_not_deletable(
-        ProcessorInterface $persistProcessor,
         ProcessorInterface $removeProcessor,
         ChannelDeletionCheckerInterface $channelDeletionChecker,
         ChannelInterface $channel,
@@ -59,7 +53,6 @@ final class ChannelProcessorSpec extends ObjectBehavior
 
         $channelDeletionChecker->isDeletable($channel)->willReturn(false);
 
-        $persistProcessor->process(Argument::cetera())->shouldNotBeCalled();
         $removeProcessor->process(Argument::cetera())->shouldNotBeCalled();
 
         $this
@@ -69,7 +62,6 @@ final class ChannelProcessorSpec extends ObjectBehavior
     }
 
     function it_uses_decorated_data_persister_to_remove_channel(
-        ProcessorInterface $persistProcessor,
         ProcessorInterface $removeProcessor,
         ChannelDeletionCheckerInterface $channelDeletionChecker,
         ChannelInterface $channel,
@@ -80,27 +72,8 @@ final class ChannelProcessorSpec extends ObjectBehavior
 
         $channelDeletionChecker->isDeletable($channel)->willReturn(true);
 
-        $persistProcessor->process(Argument::cetera())->shouldNotBeCalled();
         $removeProcessor->process($channel, $operation, $uriVariables, $context)->willReturn($channel);
 
-        $this->process($channel, $operation, $uriVariables, $context)->shouldReturn($channel);
-    }
-
-    function it_uses_decorated_data_persister_to_persist_channel(
-        ProcessorInterface $persistProcessor,
-        ProcessorInterface $removeProcessor,
-        ChannelDeletionCheckerInterface $channelDeletionChecker,
-        ChannelInterface $channel,
-    ): void {
-        $operation = new Post();
-        $uriVariables = [];
-        $context = [];
-
-        $channelDeletionChecker->isDeletable($channel)->willReturn(true);
-
-        $removeProcessor->process(Argument::cetera())->shouldNotBeCalled();
-        $persistProcessor->process($channel, $operation, $uriVariables, $context)->willReturn($channel);
-
-        $this->process($channel, $operation, $uriVariables, $context)->shouldReturn($channel);
+        $this->process($channel, $operation, $uriVariables, $context);
     }
 }

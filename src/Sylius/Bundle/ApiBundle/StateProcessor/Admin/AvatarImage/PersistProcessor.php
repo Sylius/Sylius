@@ -19,6 +19,7 @@ use Sylius\Bundle\ApiBundle\Creator\ImageCreatorInterface;
 use Sylius\Component\Core\Model\AvatarImageInterface;
 use Sylius\Component\Core\Repository\AvatarImageRepositoryInterface;
 
+/** @implements ProcessorInterface<AvatarImageInterface> */
 final readonly class PersistProcessor implements ProcessorInterface
 {
     /**

@@ -21,6 +21,7 @@ use Sylius\Bundle\LocaleBundle\Checker\LocaleUsageCheckerInterface;
 use Sylius\Component\Locale\Model\LocaleInterface;
 use Webmozart\Assert\Assert;
 
+/** @implements ProcessorInterface<LocaleInterface> */
 final readonly class RemoveProcessor implements ProcessorInterface
 {
     public function __construct(
