@@ -17,10 +17,10 @@ twig_hooks:
                 template: '@SyliusAdmin/tax_rate/form/sections/configuration.html.twig'
 
         'sylius_admin.tax_rate.create.content.form.sections.details':
-            name:
-                template: '@SyliusAdmin/tax_rate/form/sections/details/name.html.twig'
             code:
                 template: '@SyliusAdmin/tax_rate/form/sections/details/code.html.twig'
+            name:
+                template: '@SyliusAdmin/tax_rate/form/sections/details/name.html.twig'
 
         'sylius_admin.tax_rate.create.content.form.sections.configuration':
             category:
