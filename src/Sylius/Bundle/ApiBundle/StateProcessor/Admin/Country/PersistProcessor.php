@@ -36,10 +36,7 @@ final readonly class PersistProcessor implements ProcessorInterface
     public function process($data, Operation $operation, array $uriVariables = [], array $context = [])
     {
         Assert::isInstanceOf($data, CountryInterface::class);
-
-        if ($operation instanceof DeleteOperationInterface) {
-            return;
-        }
+        Assert::notInstanceOf($operation, DeleteOperationInterface::class);
 
         if (!$this->countryProvincesDeletionChecker->isDeletable($data)) {
             throw new ProvinceCannotBeRemoved();

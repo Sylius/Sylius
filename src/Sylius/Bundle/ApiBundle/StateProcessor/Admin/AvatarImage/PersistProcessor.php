@@ -13,11 +13,13 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\StateProcessor\Admin\AvatarImage;
 
+use ApiPlatform\Metadata\DeleteOperationInterface;
 use ApiPlatform\Metadata\Operation;
 use ApiPlatform\State\ProcessorInterface;
 use Sylius\Bundle\ApiBundle\Creator\ImageCreatorInterface;
 use Sylius\Component\Core\Model\AvatarImageInterface;
 use Sylius\Component\Core\Repository\AvatarImageRepositoryInterface;
+use Webmozart\Assert\Assert;
 
 /** @implements ProcessorInterface<AvatarImageInterface> */
 final readonly class PersistProcessor implements ProcessorInterface
@@ -34,6 +36,8 @@ final readonly class PersistProcessor implements ProcessorInterface
 
     public function process(mixed $data, Operation $operation, array $uriVariables = [], array $context = [])
     {
+        Assert::notInstanceOf($operation, DeleteOperationInterface::class);
+
         if ($data !== null) {
             $this->avatarImageRepository->remove($data);
         }

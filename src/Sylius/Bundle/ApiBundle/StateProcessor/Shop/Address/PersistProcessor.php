@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\StateProcessor\Shop\Address;
 
+use ApiPlatform\Metadata\DeleteOperationInterface;
 use ApiPlatform\Metadata\Operation;
 use ApiPlatform\Metadata\Post;
 use ApiPlatform\State\ProcessorInterface;
@@ -37,18 +38,20 @@ final readonly class PersistProcessor implements ProcessorInterface
     public function process($data, Operation $operation, array $uriVariables = [], array $context = [])
     {
         Assert::isInstanceOf($data, AddressInterface::class);
-        Assert::isInstanceOf($operation, Post::class);
+        Assert::notInstanceOf($operation, DeleteOperationInterface::class);
 
-        $user = $this->userContext->getUser();
+        if ($operation instanceof Post) {
+            $user = $this->userContext->getUser();
 
-        /** @var CustomerInterface $customer */
-        $customer = $user instanceof ShopUserInterface ? $user->getCustomer() : null;
+            /** @var CustomerInterface $customer */
+            $customer = $user instanceof ShopUserInterface ? $user->getCustomer() : null;
 
-        if (null !== $customer) {
-            $data->setCustomer($customer);
+            if (null !== $customer) {
+                $data->setCustomer($customer);
 
-            if (null === $customer->getDefaultAddress()) {
-                $customer->setDefaultAddress($data);
+                if (null === $customer->getDefaultAddress()) {
+                    $customer->setDefaultAddress($data);
+                }
             }
         }
 
