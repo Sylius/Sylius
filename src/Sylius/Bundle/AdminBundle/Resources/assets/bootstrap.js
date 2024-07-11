@@ -18,6 +18,7 @@ import ProductAttributeAutocomplete from "./controllers/ProductAttributeAutocomp
 import ProductTaxonTree from "./controllers/ProductTaxonTreeController";
 import SavePositionsController from "./controllers/SavePositionsController";
 import CompoundFormErrorsController from "./controllers/CompoundFormErrorsController";
+import TabsErrorsController from './controllers/TabsErrorsController';
 
 // Registers Stimulus controllers from controllers.json and in the controllers/ directory
 export const app = startStimulusApp(require.context(
@@ -35,3 +36,4 @@ app.register('product-attribute-autocomplete', ProductAttributeAutocomplete);
 app.register('product-taxon-tree', ProductTaxonTree);
 app.register('save-positions', SavePositionsController);
 app.register('compound-form-errors', CompoundFormErrorsController);
+app.register('tabs-errors', TabsErrorsController);

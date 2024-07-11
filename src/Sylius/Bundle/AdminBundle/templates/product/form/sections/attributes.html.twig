@@ -15,7 +15,7 @@
                 </button>
             </div>
         </div>
-        <div class="row">
+        <div class="row" {{ stimulus_controller('tabs-errors') }}>
             <div class="col-12 col-sm-4">
                 <div class="border-end">
                     <div id="product_attribute_tabs" class="list-group list-group-flush" role="tablist">
@@ -23,6 +23,7 @@
                             {% set product_attribute_name = (product_attribute_value|first).vars.data.name %}
                             <div
                                 class="py-2 cursor-pointer list-group-item list-group-item-action {% if loop.first %}active{% endif %}"
+                                data-tabs-errors-target="tab"
                                 data-bs-toggle="tab"
                                 data-bs-target="#{{ product_attribute_code }}"
                                 aria-selected="{{ loop.first ? 'true' : 'false' }}"
@@ -31,7 +32,7 @@
                             >
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div>{{ product_attribute_name }}</div>
-                                    <div style="transform: translateX(1rem)">
+                                    <div class="tab-icons d-flex align-items-center" style="transform: translateX(1rem)">
                                         <button
                                             type="button"
                                             class="btn btn-sm border-0 shadow-none"
