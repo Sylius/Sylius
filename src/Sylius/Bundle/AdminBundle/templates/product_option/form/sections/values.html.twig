@@ -3,13 +3,13 @@
         <div class="card-title">{{ 'sylius.ui.values'|trans }}</div>
     </div>
     <div class="card-body" >
-        <div class="row" {{ sylius_test_html_attribute('values') }}>
+        <div class="row" {{ sylius_test_html_attribute('option-values') }}>
             {{ form_errors(hookable_metadata.context.form.values) }}
 
             {% for value_form_key, value_form in hookable_metadata.context.form.values %}
                 {% hook 'values' with { value_form, value_form_key } %}
             {% endfor %}
         </div>
-        {{ form_row(hookable_metadata.context.form.values.vars.button_add, sylius_test_form_attribute('add-value')) }}
+        {{ form_row(hookable_metadata.context.form.values.vars.button_add, sylius_test_form_attribute('add-option-value')) }}
     </div>
 </div>

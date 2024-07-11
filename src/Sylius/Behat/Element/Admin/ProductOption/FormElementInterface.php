@@ -21,11 +21,11 @@ interface FormElementInterface extends BaseFormElementInterface
 
     public function isCodeDisabled(): bool;
 
-    public function nameItIn(string $name, string $localeCode): void;
+    public function setName(string $name, string $localeCode): void;
 
     public function addOptionValue(string $code, string $localeCode, string $value): void;
 
-    public function isThereOptionValue(string $optionValue, string $localeCode): bool;
+    public function hasOptionValue(string $optionValue, string $localeCode): bool;
 
     public function applyToAllOptionValues(string $code, string $localeCode): void;
 }
