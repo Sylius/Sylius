@@ -16,144 +16,136 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
 >
     <services>
-<!--        <defaults public="true" />-->
-
-<!--        <service id="Sylius\Bundle\ApiBundle\Doctrine\QueryCollectionExtension\HideArchivedShippingMethodExtension">-->
-<!--            <argument>%sylius.model.shipping_method.class%</argument>-->
-<!--            <tag name="api_platform.doctrine.orm.query_extension.collection" />-->
-<!--        </service>-->
-
-        <service id="Sylius\Bundle\ApiBundle\Doctrine\QueryCollectionExtension\AcceptedProductReviewsExtension">
+        <service id="Sylius\Bundle\ApiBundle\Doctrine\ORM\QueryExtension\Shop\AcceptedProductReviewsExtension">
             <argument>%sylius.model.product_review.class%</argument>
             <tag name="api_platform.doctrine.orm.query_extension.collection" />
         </service>
 
-        <service id="sylius_api.doctrine.query_extension.address" class="Sylius\Bundle\ApiBundle\Doctrine\QueryExtension\AddressExtension">
+        <service id="sylius_api.doctrine.query_extension.address" class="Sylius\Bundle\ApiBundle\Doctrine\ORM\QueryExtension\Shop\AddressExtension">
             <argument type="service" id="sylius.section_resolver.uri_based_section_resolver" />
             <argument type="service" id="Sylius\Bundle\ApiBundle\Context\UserContextInterface" />
             <tag name="api_platform.doctrine.orm.query_extension.collection" />
             <tag name="api_platform.doctrine.orm.query_extension.item" />
         </service>
 
-        <service id="Sylius\Bundle\ApiBundle\Doctrine\QueryCollectionExtension\ProductsByChannelAndLocaleCodeExtension">
+        <service id="Sylius\Bundle\ApiBundle\Doctrine\ORM\QueryExtension\Shop\ProductsByChannelAndLocaleCodeExtension">
             <argument type="service" id="Sylius\Bundle\ApiBundle\Context\UserContextInterface" />
             <tag name="api_platform.doctrine.orm.query_extension.collection" />
         </service>
 
-        <service id="Sylius\Bundle\ApiBundle\Doctrine\QueryCollectionExtension\ProductsByTaxonExtension">
+        <service id="Sylius\Bundle\ApiBundle\Doctrine\ORM\QueryExtension\Shop\ProductsByTaxonExtension">
             <argument type="service" id="Sylius\Bundle\ApiBundle\Context\UserContextInterface" />
             <tag name="api_platform.doctrine.orm.query_extension.collection" />
         </service>
 
-<!--        <service id="Sylius\Bundle\ApiBundle\Doctrine\QueryCollectionExtension\OrdersByChannelExtension">-->
+<!--        <service id="Sylius\Bundle\ApiBundle\Doctrine\ORM\QueryExtension\Shop\OrdersByChannelExtension">-->
 <!--            <argument type="service" id="Sylius\Bundle\ApiBundle\Context\UserContextInterface" />-->
 <!--            <tag name="api_platform.doctrine.orm.query_extension.collection" />-->
 <!--        </service>-->
 
-<!--        <service id="Sylius\Bundle\ApiBundle\Doctrine\QueryCollectionExtension\OrderItemsByVisitorExtension">-->
+<!--        <service id="Sylius\Bundle\ApiBundle\Doctrine\ORM\QueryExtension\Shop\OrderItemsByVisitorExtension">-->
 <!--            <argument type="service" id="Sylius\Bundle\ApiBundle\Context\UserContextInterface" />-->
 <!--            <tag name="api_platform.doctrine.orm.query_extension.collection" />-->
 <!--        </service>-->
 
-<!--        <service id="Sylius\Bundle\ApiBundle\Doctrine\QueryCollectionExtension\OrderItemsByShopUserExtension">-->
+<!--        <service id="Sylius\Bundle\ApiBundle\Doctrine\ORM\QueryExtension\Shop\OrderItemsByShopUserExtension">-->
 <!--            <argument type="service" id="Sylius\Bundle\ApiBundle\Context\UserContextInterface" />-->
 <!--            <tag name="api_platform.doctrine.orm.query_extension.collection" />-->
 <!--        </service>-->
 
-<!--        <service id="Sylius\Bundle\ApiBundle\Doctrine\QueryCollectionExtension\OrdersByLoggedInUserExtension">-->
+<!--        <service id="Sylius\Bundle\ApiBundle\Doctrine\ORM\QueryExtension\Shop\OrdersByLoggedInUserExtension">-->
 <!--            <argument type="service" id="Sylius\Bundle\ApiBundle\Context\UserContextInterface" />-->
 <!--            <tag name="api_platform.doctrine.orm.query_extension.collection" />-->
 <!--        </service>-->
 
-        <service id="Sylius\Bundle\ApiBundle\Doctrine\QueryCollectionExtension\ProductsWithEnableFlagExtension">
+        <service id="Sylius\Bundle\ApiBundle\Doctrine\ORM\QueryExtension\Shop\ProductsWithEnableFlagExtension">
             <argument type="service" id="Sylius\Bundle\ApiBundle\Context\UserContextInterface" />
             <tag name="api_platform.doctrine.orm.query_extension.collection" />
         </service>
 
-        <service id="Sylius\Bundle\ApiBundle\Doctrine\QueryCollectionExtension\EnabledProductVariantsExtension">
+        <service id="Sylius\Bundle\ApiBundle\Doctrine\ORM\QueryExtension\Shop\EnabledProductVariantsExtension">
             <argument type="service" id="Sylius\Bundle\ApiBundle\Context\UserContextInterface" />
             <tag name="api_platform.doctrine.orm.query_extension.collection" />
         </service>
 
-        <service id="Sylius\Bundle\ApiBundle\Doctrine\QueryCollectionExtension\CountryCollectionExtension">
+        <service id="Sylius\Bundle\ApiBundle\Doctrine\ORM\QueryExtension\Shop\CountryCollectionExtension">
             <argument type="service" id="Sylius\Bundle\ApiBundle\Context\UserContextInterface" />
             <tag name="api_platform.doctrine.orm.query_extension.collection" />
         </service>
 
-        <service id="Sylius\Bundle\ApiBundle\Doctrine\QueryCollectionExtension\TaxonCollectionExtension">
+        <service id="Sylius\Bundle\ApiBundle\Doctrine\ORM\QueryExtension\Shop\TaxonCollectionExtension">
             <argument type="service" id="Sylius\Bundle\ApiBundle\Context\UserContextInterface" />
             <tag name="api_platform.doctrine.orm.query_extension.collection" />
         </service>
 
-        <service id="Sylius\Bundle\ApiBundle\Doctrine\QueryExtension\ShopCurrencyExtension">
+        <service id="Sylius\Bundle\ApiBundle\Doctrine\ORM\QueryExtension\Shop\ShopCurrencyExtension">
             <argument type="service" id="sylius.section_resolver.uri_based_section_resolver" />
             <tag name="api_platform.doctrine.orm.query_extension.collection" />
             <tag name="api_platform.doctrine.orm.query_extension.item" />
         </service>
 
-        <service id="sylius_api.doctrine.query_extension.collection.locale" class="Sylius\Bundle\ApiBundle\Doctrine\QueryCollectionExtension\LocaleCollectionExtension">
+        <service id="sylius_api.doctrine.query_extension.collection.locale" class="Sylius\Bundle\ApiBundle\Doctrine\ORM\QueryExtension\Shop\LocaleCollectionExtension">
             <argument type="service" id="sylius.section_resolver.uri_based_section_resolver" />
             <tag name="api_platform.doctrine.orm.query_extension.collection" />
         </service>
 
         <service
-            id="Sylius\Bundle\ApiBundle\Doctrine\QueryCollectionExtension\RestrictingFilterEagerLoadingExtension"
+            id="Sylius\Bundle\ApiBundle\Doctrine\ORM\QueryExtension\Common\RestrictingFilterEagerLoadingExtension"
             decorates="api_platform.doctrine.orm.query_extension.filter_eager_loading"
         >
             <argument type="service" id="Sylius\Bundle\ApiBundle\Doctrine\QueryCollectionExtension\RestrictingFilterEagerLoadingExtension.inner" />
             <argument>%sylius_api.filter_eager_loading_extension.restricted_resources%</argument>
         </service>
 
-<!--        <service id="Sylius\Bundle\ApiBundle\Doctrine\QueryItemExtension\OrderShopUserItemExtension">-->
+<!--        <service id="Sylius\Bundle\ApiBundle\Doctrine\ORM\QueryExtension\Shop\OrderShopUserItemExtension">-->
 <!--            <argument type="service" id="Sylius\Bundle\ApiBundle\Context\UserContextInterface" />-->
 <!--            <argument>%sylius.api.doctrine_extension.order_shop_user_item.filter_cart.allowed_non_get_operations%</argument>-->
 <!--            <tag name="api_platform.doctrine.orm.query_extension.item" />-->
 <!--        </service>-->
 
-<!--        <service id="Sylius\Bundle\ApiBundle\Doctrine\QueryItemExtension\OrderVisitorItemExtension">-->
+<!--        <service id="Sylius\Bundle\ApiBundle\Doctrine\ORM\QueryExtension\Shop\OrderVisitorItemExtension">-->
 <!--            <argument type="service" id="Sylius\Bundle\ApiBundle\Context\UserContextInterface" />-->
 <!--            <argument>%sylius.api.doctrine_extension.order_visitor_item.filter_cart.allowed_non_get_operations%</argument>-->
 <!--            <tag name="api_platform.doctrine.orm.query_extension.item" />-->
 <!--        </service>-->
 
-        <service id="Sylius\Bundle\ApiBundle\Doctrine\QueryItemExtension\EnabledProductVariantItemExtension">
+        <service id="Sylius\Bundle\ApiBundle\Doctrine\ORM\QueryExtension\Shop\EnabledProductVariantItemExtension">
             <argument type="service" id="Sylius\Bundle\ApiBundle\Context\UserContextInterface" />
             <tag name="api_platform.doctrine.orm.query_extension.item" />
         </service>
 
-        <service id="Sylius\Bundle\ApiBundle\Doctrine\QueryItemExtension\EnabledProductInProductAssociationItemExtension">
+        <service id="Sylius\Bundle\ApiBundle\Doctrine\ORM\QueryExtension\Shop\EnabledProductInProductAssociationItemExtension">
             <argument type="service" id="Sylius\Bundle\ApiBundle\Context\UserContextInterface" />
             <tag name="api_platform.doctrine.orm.query_extension.item" />
         </service>
 
-        <service id="Sylius\Bundle\ApiBundle\Doctrine\QueryExtension\ShopExchangeRateExtension">
+        <service id="Sylius\Bundle\ApiBundle\Doctrine\ORM\QueryExtension\Shop\ShopExchangeRateExtension">
             <argument type="service" id="sylius.section_resolver.uri_based_section_resolver" />
             <tag name="api_platform.doctrine.orm.query_extension.collection" />
             <tag name="api_platform.doctrine.orm.query_extension.item" />
         </service>
 
-<!--        <service id="Sylius\Bundle\ApiBundle\Doctrine\QueryExtension\OrderExtension">-->
+<!--        <service id="Sylius\Bundle\ApiBundle\Doctrine\ORM\QueryExtension\Admin\OrderExtension">-->
 <!--            <argument type="service" id="Sylius\Bundle\CoreBundle\SectionResolver\SectionProviderInterface" />-->
 <!--            <argument>%sylius_api.order_states_to_filter_out%</argument>-->
 <!--            <tag name="api_platform.doctrine.orm.query_extension.collection" />-->
 <!--            <tag name="api_platform.doctrine.orm.query_extension.item" />-->
 <!--        </service>-->
 
-<!--        <service id="Sylius\Bundle\ApiBundle\Doctrine\QueryItemExtension\TaxonItemExtension">-->
+<!--        <service id="Sylius\Bundle\ApiBundle\Doctrine\ORM\QueryExtension\Shop\TaxonItemExtension">-->
 <!--            <argument type="service" id="Sylius\Bundle\ApiBundle\Context\UserContextInterface" />-->
 <!--            <tag name="api_platform.doctrine.orm.query_extension.item" />-->
 <!--        </service>-->
 
-<!--        <service id="Sylius\Bundle\ApiBundle\Doctrine\QueryCollectionExtension\HideArchivedPromotionExtension">-->
+<!--        <service id="Sylius\Bundle\ApiBundle\Doctrine\ORM\QueryExtension\Common\HideArchivedPromotionExtension">-->
 <!--            <argument>%sylius.model.promotion.class%</argument>-->
 <!--            <tag name="api_platform.doctrine.orm.query_extension.collection" />-->
 <!--        </service>-->
 
-        <service id="Sylius\Bundle\ApiBundle\Doctrine\QueryExtension\EnabledProductInProductAssociationExtension">
+        <service id="Sylius\Bundle\ApiBundle\Doctrine\ORM\QueryExtension\Shop\EnabledProductInProductAssociationExtension">
             <argument type="service" id="sylius.section_resolver.uri_based_section_resolver" />
             <tag name="api_platform.doctrine.orm.query_extension.collection" />
             <tag name="api_platform.doctrine.orm.query_extension.item" />
         </service>
-
     </services>
 </container>
