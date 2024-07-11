@@ -20,6 +20,7 @@ use Sylius\Component\Core\Model\AdminUserInterface;
 use Sylius\Component\User\Security\PasswordUpdaterInterface;
 use Webmozart\Assert\Assert;
 
+/** @implements ProcessorInterface<AdminUserInterface> */
 final readonly class PersistProcessor implements ProcessorInterface
 {
     public function __construct(

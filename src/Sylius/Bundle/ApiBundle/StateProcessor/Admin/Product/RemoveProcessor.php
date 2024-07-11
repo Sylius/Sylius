@@ -21,6 +21,7 @@ use Sylius\Bundle\ApiBundle\Exception\ProductCannotBeRemoved;
 use Sylius\Component\Core\Model\ProductInterface;
 use Webmozart\Assert\Assert;
 
+/** @implements ProcessorInterface<ProductInterface> */
 final readonly class RemoveProcessor implements ProcessorInterface
 {
     public function __construct(

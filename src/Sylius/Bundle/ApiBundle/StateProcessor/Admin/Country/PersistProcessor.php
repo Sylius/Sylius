@@ -21,6 +21,7 @@ use Sylius\Component\Addressing\Checker\CountryProvincesDeletionCheckerInterface
 use Sylius\Component\Addressing\Model\CountryInterface;
 use Webmozart\Assert\Assert;
 
+/** @implements ProcessorInterface<CountryInterface> */
 final readonly class PersistProcessor implements ProcessorInterface
 {
     public function __construct(
