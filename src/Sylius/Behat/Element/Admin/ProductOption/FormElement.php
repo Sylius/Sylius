@@ -23,43 +23,43 @@ class FormElement extends BaseFormElement implements FormElementInterface
     use SpecifiesItsField;
     use ChecksCodeImmutability;
 
-    public function nameItIn(string $name, string $localeCode): void
+    public function setName(string $name, string $localeCode): void
     {
         $this->getElement('name', ['%locale_code%' => $localeCode])->setValue($name);
     }
 
     public function addOptionValue(string $code, string $localeCode, string $value): void
     {
-        $this->getElement('add_value')->press();
+        $this->getElement('add_option_value')->press();
         $this->waitForFormUpdate();
 
-        $lastValue = $this->getElement('last_value');
-        $lastValue->fillField('Code', $code);
+        $lastValue = $this->getElement('last_option_value');
+        $lastValue->find('css', '[data-test-code]')->setValue($code);
         $lastValue->find('css', sprintf('[id$="_translations_%s_value"]', $localeCode))->setValue($value);
         $this->waitForFormUpdate();
     }
 
-    public function isThereOptionValue(string $optionValue, string $localeCode): bool
+    public function hasOptionValue(string $optionValue, string $localeCode): bool
     {
-        return $this->getElement('values')->has('css', sprintf('input[id$="_translations_%s_value"][value="%s"]', $localeCode, $optionValue));
+        return $this->hasElement('option_value', ['%option_value%' => $optionValue, '%locale_code%' => $localeCode]);
     }
 
     public function applyToAllOptionValues(string $code, string $localeCode): void
     {
-        $this->getElement('apply_to_all_value', ['%value_code%' => $code, '%locale_code%' => $localeCode])->click();
+        $this->getElement('apply_to_all', ['%value_code%' => $code, '%locale_code%' => $localeCode])->click();
         $this->waitForFormUpdate();
     }
 
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
-            'add_value' => '[data-test-add-value]',
-            'apply_to_all_value' => '[data-test-value="%value_code%"] [data-test-value-locale="%locale_code%"] [data-test-apply-to-all]',
+            'add_option_value' => '[data-test-add-option-value]',
+            'apply_to_all' => '[data-test-option-value="%value_code%"] [data-test-option-value-locale="%locale_code%"] [data-test-apply-to-all]',
             'code' => '[data-test-code]',
             'form' => '[data-live-name-value="sylius_admin:product_option:form"]',
-            'last_value' => '[data-test-values] [data-test-value]:last-child',
+            'last_option_value' => '[data-test-option-values] [data-test-option-value]:last-child',
             'name' => '#sylius_admin_product_option_translations_%locale_code%_name',
-            'values' => '[data-test-values]',
+            'option_value' => '[data-test-option-values] input[id$="_translations_%locale_code%_value"][value="%option_value%"]',
         ]);
     }
 

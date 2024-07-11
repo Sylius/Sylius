@@ -1,4 +1,4 @@
-<div class="col-12 col-md-6" {{ sylius_test_html_attribute('value', hookable_metadata.context.value_form.code.vars.value) }}>
+<div class="col-12 col-md-6" {{ sylius_test_html_attribute('option-value', hookable_metadata.context.value_form.code.vars.value) }}>
     <div class="card mb-3">
         <div class="card-body">
             {% hook 'value' with { form: hookable_metadata.context.value_form } %}
