@@ -61,7 +61,7 @@
                 class="ApiPlatform\Metadata\Patch"
                 uriTemplate="/shop/customers/verify/{token}"
                 input="Sylius\Bundle\ApiBundle\Command\Account\VerifyShopUser"
-                provider="Sylius\Bundle\ApiBundle\StateProvider\Input\VerifyShopUserStateProvider"
+                provider="sylius_api.state_provider.shop.account.verify_shop_user.item"
             >
                 <denormalizationContext>
                     <values>

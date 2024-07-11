@@ -11,16 +11,19 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\ApiBundle\StateProvider;
+namespace Sylius\Bundle\ApiBundle\StateProvider\Common\Adjustment;
 
+use ApiPlatform\Metadata\GetCollection;
 use ApiPlatform\Metadata\Operation;
 use ApiPlatform\State\ProviderInterface;
 use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Core\Model\AdjustmentInterface;
 use Sylius\Component\Order\Model\RecursiveAdjustmentsAwareInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Webmozart\Assert\Assert;
 
-final readonly class RecursiveAdjustmentsProvider implements ProviderInterface
+/** @implements ProviderInterface<AdjustmentInterface> */
+final readonly class CollectionProvider implements ProviderInterface
 {
     public function __construct(
         private RepositoryInterface $repository,
@@ -37,10 +40,10 @@ final readonly class RecursiveAdjustmentsProvider implements ProviderInterface
     /** @return Collection<AdjustmentInterface> */
     public function provide(Operation $operation, array $uriVariables = [], array $context = []): Collection
     {
+        Assert::true(is_a($operation->getClass(), AdjustmentInterface::class, true));
+        Assert::isInstanceOf($operation, GetCollection::class);
         $identifier = $uriVariables[$this->identifier] ?? null;
-        if (null === $identifier) {
-            throw new \RuntimeException('No identifier provided in `uri_variables`.');
-        }
+        Assert::notNull($identifier, 'No identifier provided in `uri_variables`.');
 
         /** @var RecursiveAdjustmentsAwareInterface|null $adjustable */
         $adjustable = $this->repository->findOneBy([$this->identifier => $identifier]);

@@ -11,8 +11,9 @@
 
 declare(strict_types=1);
 
-namespace spec\Sylius\Bundle\ApiBundle\StateProvider;
+namespace spec\Sylius\Bundle\ApiBundle\StateProvider\Common\Adjustment;
 
+use ApiPlatform\Metadata\GetCollection;
 use ApiPlatform\Metadata\Operation;
 use ApiPlatform\State\ProviderInterface;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -23,7 +24,7 @@ use Sylius\Component\Core\Model\OrderItem;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 
-final class RecursiveAdjustmentsProviderSpec extends ObjectBehavior
+final class CollectionProviderSpec extends ObjectBehavior
 {
     private const IDENTIFIER = 'id';
 
@@ -49,20 +50,20 @@ final class RecursiveAdjustmentsProviderSpec extends ObjectBehavior
 
     function it_throws_exception_when_identifier_is_missing_from_uri_variables(
         RepositoryInterface $repository,
-        Operation $operation,
     ): void {
+        $operation = new GetCollection(class: AdjustmentInterface::class);
         $repository->findOneBy(Argument::any())->shouldNotBeCalled();
 
         $this
-            ->shouldThrow(\RuntimeException::class)
+            ->shouldThrow(\InvalidArgumentException::class)
             ->during('provide', [$operation, []])
         ;
     }
 
     function it_throws_exception_when_resource_cannot_be_found(
         RepositoryInterface $repository,
-        Operation $operation,
     ): void {
+        $operation = new GetCollection(class: AdjustmentInterface::class);
         $repository->findOneBy([self::IDENTIFIER => 1])->willReturn(null);
 
         $this
@@ -75,11 +76,11 @@ final class RecursiveAdjustmentsProviderSpec extends ObjectBehavior
         RepositoryInterface $repository,
         Request $request,
         Request $queryRequest,
-        Operation $operation,
         OrderItem $orderItem,
         AdjustmentInterface $firstAdjustment,
         AdjustmentInterface $secondAdjustment,
     ): void {
+        $operation = new GetCollection(class: AdjustmentInterface::class);
         $request->query = $queryRequest;
         $queryRequest->get('type')->willReturn('type');
         $adjustments = new ArrayCollection([
