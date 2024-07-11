@@ -9,9 +9,4 @@ sylius_admin_exchange_rate:
         form:
             type: Sylius\Bundle\AdminBundle\Form\Type\ExchangeRateType
         permission: true
-        vars:
-            all:
-                subheader: sylius.ui.manage_exchange_rates
-            index:
-                icon: sliders
     type: sylius.resource
