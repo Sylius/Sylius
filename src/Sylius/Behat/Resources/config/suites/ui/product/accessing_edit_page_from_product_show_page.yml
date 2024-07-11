@@ -18,7 +18,6 @@ default:
                 - sylius.behat.context.setup.product
 
                 - sylius.behat.context.ui.admin.move_to_edit_product_page
-                - sylius.behat.context.ui.admin.product_showpage
 
             filters:
                 tags: "@accessing_edit_page_from_product_show_page&&@ui"

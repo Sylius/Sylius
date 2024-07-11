@@ -34,7 +34,7 @@ use Sylius\Component\Locale\Model\LocaleInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Webmozart\Assert\Assert;
 
-final class ProductShowPageContext implements Context
+final readonly class ProductShowPageContext implements Context
 {
     public function __construct(
         private IndexPageInterface $indexPage,
@@ -95,27 +95,11 @@ final class ProductShowPageContext implements Context
     }
 
     /**
-     * @When I go to edit page
-     */
-    public function iGoToEditPage(): void
-    {
-        $this->productShowPage->showProductEditPage();
-    }
-
-    /**
      * @When I access :product product
      */
     public function iAccessProduct(ProductInterface $product): void
     {
         $this->productShowPage->open(['id' => $product->getId()]);
-    }
-
-    /**
-     * @When I go to edit page of :variant variant
-     */
-    public function iGoToEditPageOfVariant(ProductVariantInterface $variant): void
-    {
-        $this->productShowPage->showVariantEditPage($variant);
     }
 
     /**

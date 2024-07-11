@@ -14,8 +14,13 @@ declare(strict_types=1);
 namespace Sylius\Behat\Page\Admin\Product;
 
 use Sylius\Behat\Page\Admin\Crud\UpdatePageInterface as BaseUpdatePageInterface;
+use Sylius\Behat\Page\Admin\EditToShowPageSwitcherInterface;
+use Sylius\Behat\Page\Admin\ShowPageButtonCheckerInterface;
 
-interface UpdateSimpleProductPageInterface extends BaseUpdatePageInterface
+interface UpdateSimpleProductPageInterface extends
+    BaseUpdatePageInterface,
+    EditToShowPageSwitcherInterface,
+    ShowPageButtonCheckerInterface
 {
     public function isCodeDisabled(): bool;
 
