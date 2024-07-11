@@ -4,7 +4,7 @@
     }|merge(options) %}
     {% set accordion_flush = options.accordion_flush|default(false) %}
 
-    <div class="accordion {{ options.accordion_flush ? 'accordion-flush' : null }}" id="{{ options. accordion_id }}">
+    <div class="accordion {{ accordion_flush ? 'accordion-flush' : null }}" id="{{ options.accordion_id }}">
         {% for channel_code, channel_pricing_form in channel_pricing_forms %}
             <div class="accordion-item">
                 <h2 class="accordion-header">

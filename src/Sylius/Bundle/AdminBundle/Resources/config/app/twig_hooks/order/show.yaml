@@ -144,8 +144,8 @@ twig_hooks:
         'sylius_admin.order.show.content.sections.shipments.item':
             state:
                 template: '@SyliusAdmin/order/show/content/sections/shipments/item/state.html.twig'
-            details:
-                template: '@SyliusAdmin/order/show/content/sections/shipments/item/details.html.twig'
+            general:
+                template: '@SyliusAdmin/order/show/content/sections/shipments/item/general.html.twig'
             actions:
                 template: '@SyliusAdmin/order/show/content/sections/shipments/item/actions.html.twig'
 
@@ -160,20 +160,20 @@ twig_hooks:
                 template: '@SyliusAdmin/order/show/content/sections/shipments/item/actions/show.html.twig'
 
         'sylius_admin.order.show.content.sections#right':
-            details:
-                template: '@SyliusAdmin/order/show/content/sections/details.html.twig'
+            general:
+                template: '@SyliusAdmin/order/show/content/sections/general.html.twig'
             customer:
                 template: '@SyliusAdmin/order/show/content/sections/customer.html.twig'
 
-        'sylius_admin.order.show.content.sections.details':
+        'sylius_admin.order.show.content.sections.general':
             order_date:
-                template: '@SyliusAdmin/order/show/content/sections/details/order_date.html.twig'
+                template: '@SyliusAdmin/order/show/content/sections/general/order_date.html.twig'
             currency:
-                template: '@SyliusAdmin/order/show/content/sections/details/currency.html.twig'
+                template: '@SyliusAdmin/order/show/content/sections/general/currency.html.twig'
             language:
-                template: '@SyliusAdmin/order/show/content/sections/details/language.html.twig'
+                template: '@SyliusAdmin/order/show/content/sections/general/language.html.twig'
             channel:
-                template: '@SyliusAdmin/order/show/content/sections/details/channel.html.twig'
+                template: '@SyliusAdmin/order/show/content/sections/general/channel.html.twig'
 
         'sylius_admin.order.show.content.sections.customer':
             full_name:

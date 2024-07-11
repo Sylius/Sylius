@@ -1,12 +1,14 @@
-<div class="col-12 col-md-6">
+<div class="col-12 p-2">
     <div class="card">
         <div class="card-header">
             <div class="card-title">
-                {{ 'sylius.ui.customer_details'|trans }}
+                {{ 'sylius.ui.general'|trans }}
             </div>
         </div>
         <div class="card-body">
-            {% hook 'details' %}
+            <div class="row align-items-center">
+                {% hook 'general' %}
+            </div>
         </div>
     </div>
 </div>

@@ -19,8 +19,10 @@
                     </tr>
                     <tr class="bg-gray-400">
                         <td colspan="9" class="p-0 border-0">
-                            <div class="py-3 px-5 collapse" id="product-variant-details-{{ variant.code }}">
-                                {% hook 'configurable_product#details' with { variant } %}
+                            <div class="px-5 collapse" id="product-variant-details-{{ variant.code }}">
+                                <div class="py-3">
+                                    {% hook 'configurable_product#details' with { variant } %}
+                                </div>
                             </div>
                         </td>
                     </tr>

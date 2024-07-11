@@ -11,9 +11,9 @@ twig_hooks:
                 template: '@SyliusAdmin/locale/form/sections.html.twig'
 
         'sylius_admin.locale.create.content.form.sections':
-            details:
-                template: '@SyliusAdmin/locale/form/sections/details.html.twig'
+            general:
+                template: '@SyliusAdmin/locale/form/sections/general.html.twig'
 
-        'sylius_admin.locale.create.content.form.sections.details':
+        'sylius_admin.locale.create.content.form.sections.general':
             code:
-                template: '@SyliusAdmin/locale/form/sections/details/code.html.twig'
+                template: '@SyliusAdmin/locale/form/sections/general/code.html.twig'

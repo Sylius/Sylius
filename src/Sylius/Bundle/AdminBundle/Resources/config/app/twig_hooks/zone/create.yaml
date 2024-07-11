@@ -13,8 +13,8 @@ twig_hooks:
                 template: '@SyliusAdmin/zone/form/sections.html.twig'
 
         'sylius_admin.zone.create.content.form.sections':
-            details:
-                template: '@SyliusAdmin/zone/form/sections/details.html.twig'
+            general:
+                template: '@SyliusAdmin/zone/form/sections/general.html.twig'
             members:
                 template: '@SyliusAdmin/zone/form/sections/members.html.twig'
 
@@ -22,12 +22,12 @@ twig_hooks:
             member:
                 template: '@SyliusAdmin/zone/form/sections/members/member.html.twig'
 
-        'sylius_admin.zone.create.content.form.sections.details':
+        'sylius_admin.zone.create.content.form.sections.general':
             code:
-                template: '@SyliusAdmin/zone/form/sections/details/code.html.twig'
+                template: '@SyliusAdmin/zone/form/sections/general/code.html.twig'
             type:
-                template: '@SyliusAdmin/zone/form/sections/details/type.html.twig'
+                template: '@SyliusAdmin/zone/form/sections/general/type.html.twig'
             name:
-                template: '@SyliusAdmin/zone/form/sections/details/name.html.twig'
+                template: '@SyliusAdmin/zone/form/sections/general/name.html.twig'
             scope:
-                template: '@SyliusAdmin/zone/form/sections/details/scope.html.twig'
+                template: '@SyliusAdmin/zone/form/sections/general/scope.html.twig'

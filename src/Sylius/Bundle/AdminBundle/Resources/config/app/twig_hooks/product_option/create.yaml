@@ -12,18 +12,18 @@ twig_hooks:
                 template: '@SyliusAdmin/product_option/form/sections.html.twig'
 
         'sylius_admin.product_option.create.content.form.sections':
-            details:
-                template: '@SyliusAdmin/product_option/form/sections/details.html.twig'
+            general:
+                template: '@SyliusAdmin/product_option/form/sections/general.html.twig'
             translations:
                 template: '@SyliusAdmin/product_option/form/sections/translations.html.twig'
             values:
                 template: '@SyliusAdmin/product_option/form/sections/values.html.twig'
                 
-        'sylius_admin.product_option.create.content.form.sections.details':
+        'sylius_admin.product_option.create.content.form.sections.general':
             code:
-                template: '@SyliusAdmin/product_option/form/sections/details/code.html.twig'
+                template: '@SyliusAdmin/product_option/form/sections/general/code.html.twig'
             position:
-                template: '@SyliusAdmin/product_option/form/sections/details/position.html.twig'
+                template: '@SyliusAdmin/product_option/form/sections/general/position.html.twig'
                 
         'sylius_admin.product_option.create.content.form.sections.translations':
             translations:

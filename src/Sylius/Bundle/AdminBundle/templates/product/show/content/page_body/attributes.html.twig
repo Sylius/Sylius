@@ -6,9 +6,9 @@
             {{ 'sylius.ui.attributes'|trans }}
         </div>
     </div>
-    <div class="card-body" {{ sylius_test_html_attribute('attributes') }}>
+    <div {{ sylius_test_html_attribute('attributes') }}>
         <div class="bg-white mb-3">
-            <div class="accordion" id="attribute-translations">
+            <div class="accordion accordion-flush" id="attribute-translations">
                 {% set set_locale_codes = [] %}
                 {% if product.attributes|length == 0 %}
                     {{ 'sylius.ui.there_are_no_attributes_configured'|trans }}
