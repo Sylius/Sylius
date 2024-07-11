@@ -15,9 +15,9 @@ twig_hooks:
                 template: '@SyliusAdmin/tax_category/form/sections/details.html.twig'
 
         'sylius_admin.tax_category.update.content.form.sections.details':
-            name:
-                template: '@SyliusAdmin/tax_category/form/sections/details/name.html.twig'
             code:
                 template: '@SyliusAdmin/tax_category/form/sections/details/code.html.twig'
+            name:
+                template: '@SyliusAdmin/tax_category/form/sections/details/name.html.twig'
             description:
                 template: '@SyliusAdmin/tax_category/form/sections/details/description.html.twig'
