@@ -25,10 +25,10 @@ twig_hooks:
                 template: '@SyliusAdmin/zone/form/sections/members/member.html.twig'
 
         'sylius_admin.zone.update.content.form.sections.details':
-            type:
-                template: '@SyliusAdmin/zone/form/sections/details/type.html.twig'
             code:
                 template: '@SyliusAdmin/zone/form/sections/details/code.html.twig'
+            type:
+                template: '@SyliusAdmin/zone/form/sections/details/type.html.twig'
             name:
                 template: '@SyliusAdmin/zone/form/sections/details/name.html.twig'
             scope:
