@@ -27,7 +27,9 @@ final class OrderItemsByShopUserExtension implements QueryCollectionExtensionInt
     {
     }
 
-    /** @param array<string, mixed> $context */
+    /**
+     * @param array<string, mixed> $context
+     */
     public function applyToCollection(
         QueryBuilder $queryBuilder,
         QueryNameGeneratorInterface $queryNameGenerator,
@@ -40,7 +42,7 @@ final class OrderItemsByShopUserExtension implements QueryCollectionExtensionInt
         }
 
         $user = $this->userContext->getUser();
-        if (!$user instanceof ShopUserInterface) {
+        if (!$user instanceof ShopUserInterface || null === $customer = $user->getCustomer()) {
             return;
         }
 
@@ -53,7 +55,7 @@ final class OrderItemsByShopUserExtension implements QueryCollectionExtensionInt
             ->leftJoin(sprintf('%s.order', $rootAlias), $orderParameterName)
             ->leftJoin(sprintf('%s.customer', $orderParameterName), $customerJoinParameterName)
             ->andWhere(sprintf('%s = :%s', $customerJoinParameterName, $customerParameterName))
-            ->setParameter($customerParameterName, $user->getCustomer()->getId())
+            ->setParameter($customerParameterName, $customer->getId())
             ->addOrderBy(sprintf('%s.id', $rootAlias), 'ASC')
         ;
     }

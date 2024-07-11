@@ -24,8 +24,13 @@ use Doctrine\ORM\QueryBuilder;
  */
 final readonly class RestrictingFilterEagerLoadingExtension implements QueryCollectionExtensionInterface
 {
-    public function __construct(private QueryCollectionExtensionInterface $decoratedExtension, private array $restrictedResources)
-    {
+    /**
+     * @param array<string, array<string, mixed>> $restrictedResources
+     */
+    public function __construct(
+        private QueryCollectionExtensionInterface $decoratedExtension,
+        private array $restrictedResources
+    ) {
     }
 
     /**
@@ -38,7 +43,7 @@ final readonly class RestrictingFilterEagerLoadingExtension implements QueryColl
         ?Operation $operation = null,
         array $context = [],
     ): void {
-        if ($this->isOperationRestricted($resourceClass, $operation)) {
+        if (null === $operation || $this->isOperationRestricted($resourceClass, $operation)) {
             return;
         }
 
@@ -47,6 +52,8 @@ final readonly class RestrictingFilterEagerLoadingExtension implements QueryColl
 
     private function isOperationRestricted(string $resourceClass, Operation $operation): bool
     {
-        return $this->restrictedResources[$resourceClass]['operations'][$operation->getName()]['enabled'] ?? false;
+        return
+            $this->restrictedResources[$resourceClass]['operations'][$operation->getName()]['enabled'] ?? false
+        ;
     }
 }

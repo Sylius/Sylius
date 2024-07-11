@@ -26,6 +26,10 @@ final readonly class EnabledProductVariantItemExtension implements QueryItemExte
     {
     }
 
+    /**
+     * @param array<array-key, mixed> $identifiers
+     * @param array<array-key, mixed> $context
+     */
     public function applyToItem(
         QueryBuilder $queryBuilder,
         QueryNameGeneratorInterface $queryNameGenerator,

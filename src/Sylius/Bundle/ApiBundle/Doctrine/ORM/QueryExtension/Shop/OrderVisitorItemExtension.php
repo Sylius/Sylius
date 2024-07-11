@@ -24,12 +24,19 @@ use Symfony\Component\HttpFoundation\Request;
 
 final readonly class OrderVisitorItemExtension implements QueryItemExtensionInterface
 {
+    /**
+     * @param array<array-key, mixed> $nonFilteredCartAllowedOperations
+     */
     public function __construct(
         private UserContextInterface $userContext,
         private array $nonFilteredCartAllowedOperations = [],
     ) {
     }
 
+    /**
+     * @param array<array-key, mixed> $identifiers
+     * @param array<array-key, mixed> $context
+     */
     public function applyToItem(
         QueryBuilder $queryBuilder,
         QueryNameGeneratorInterface $queryNameGenerator,
@@ -38,7 +45,7 @@ final readonly class OrderVisitorItemExtension implements QueryItemExtensionInte
         ?Operation $operation = null,
         array $context = [],
     ): void {
-        if (!is_a($resourceClass, OrderInterface::class, true)) {
+        if (!is_a($resourceClass, OrderInterface::class, true) || null === $operation) {
             return;
         }
 

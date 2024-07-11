@@ -25,14 +25,18 @@ use Sylius\Component\Core\Model\OrderInterface;
 
 final readonly class OrderExtension implements QueryCollectionExtensionInterface, QueryItemExtensionInterface
 {
-    /** @param array<string> $orderStatesToFilterOut */
+    /**
+     * @param array<string> $orderStatesToFilterOut
+     */
     public function __construct(
         private SectionProviderInterface $sectionProvider,
         private array $orderStatesToFilterOut,
     ) {
     }
 
-    /** @param array<array-key, mixed> $context */
+    /**
+     * @param array<array-key, mixed> $context
+     */
     public function applyToCollection(
         QueryBuilder $queryBuilder,
         QueryNameGeneratorInterface $queryNameGenerator,
@@ -44,8 +48,8 @@ final readonly class OrderExtension implements QueryCollectionExtensionInterface
     }
 
     /**
-     * @param array<mixed> $identifiers
-     * @param array<mixed> $context
+     * @param array<array-key, mixed> $identifiers
+     * @param array<array-key, mixed> $context
      */
     public function applyToItem(
         QueryBuilder $queryBuilder,

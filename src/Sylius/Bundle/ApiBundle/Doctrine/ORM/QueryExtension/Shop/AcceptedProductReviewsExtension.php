@@ -35,7 +35,7 @@ final readonly class AcceptedProductReviewsExtension implements QueryCollectionE
         ?Operation $operation = null,
         array $context = [],
     ): void {
-        if ($this->productReviewClass !== $resourceClass) {
+        if ($this->productReviewClass !== $resourceClass || null === $operation) {
             return;
         }
 

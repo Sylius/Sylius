@@ -28,6 +28,10 @@ final readonly class EnabledProductInProductAssociationExtension implements Quer
     {
     }
 
+    /**
+     * @param array<array-key, mixed> $identifiers
+     * @param array<array-key, mixed> $context
+     */
     public function applyToItem(
         QueryBuilder $queryBuilder,
         QueryNameGeneratorInterface $queryNameGenerator,
@@ -39,6 +43,9 @@ final readonly class EnabledProductInProductAssociationExtension implements Quer
         $this->modifyQueryBuilder($queryBuilder, $queryNameGenerator, $resourceClass);
     }
 
+    /**
+     * @param array<array-key, mixed> $context
+     */
     public function applyToCollection(
         QueryBuilder $queryBuilder,
         QueryNameGeneratorInterface $queryNameGenerator,

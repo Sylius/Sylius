@@ -26,7 +26,9 @@ final class OrderItemsByVisitorExtension implements QueryCollectionExtensionInte
     {
     }
 
-    /** @param array<string, mixed> $context */
+    /**
+     * @param array<string, mixed> $context
+     */
     public function applyToCollection(
         QueryBuilder $queryBuilder,
         QueryNameGeneratorInterface $queryNameGenerator,
