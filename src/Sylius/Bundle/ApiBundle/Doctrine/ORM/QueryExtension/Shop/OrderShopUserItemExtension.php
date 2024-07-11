@@ -25,12 +25,19 @@ use Symfony\Component\HttpFoundation\Request;
 
 final readonly class OrderShopUserItemExtension implements QueryItemExtensionInterface
 {
+    /**
+     * @param array<array-key, mixed> $nonFilteredCartAllowedOperations
+     */
     public function __construct(
         private UserContextInterface $userContext,
         private array $nonFilteredCartAllowedOperations = [],
     ) {
     }
 
+    /**
+     * @param array<array-key, mixed> $identifiers
+     * @param array<array-key, mixed> $context
+     */
     public function applyToItem(
         QueryBuilder $queryBuilder,
         QueryNameGeneratorInterface $queryNameGenerator,
@@ -39,12 +46,12 @@ final readonly class OrderShopUserItemExtension implements QueryItemExtensionInt
         ?Operation $operation = null,
         array $context = [],
     ): void {
-        if (!is_a($resourceClass, OrderInterface::class, true)) {
+        if (!is_a($resourceClass, OrderInterface::class, true) || null === $operation) {
             return;
         }
 
         $user = $this->userContext->getUser();
-        if (!$user instanceof ShopUserInterface) {
+        if (!$user instanceof ShopUserInterface || null === $customer = $user->getCustomer()) {
             return;
         }
 
@@ -53,7 +60,7 @@ final readonly class OrderShopUserItemExtension implements QueryItemExtensionInt
 
         $queryBuilder
             ->andWhere(sprintf('%s.customer = :%s', $rootAlias, $customerParameterName))
-            ->setParameter($customerParameterName, $user->getCustomer()->getId())
+            ->setParameter($customerParameterName, $customer->getId())
         ;
 
         $httpRequestMethodType = $context[ContextKeys::HTTP_REQUEST_METHOD_TYPE];

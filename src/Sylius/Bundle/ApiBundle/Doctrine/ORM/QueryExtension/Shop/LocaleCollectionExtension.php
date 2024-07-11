@@ -29,7 +29,9 @@ final readonly class LocaleCollectionExtension implements QueryCollectionExtensi
     {
     }
 
-    /** @param array<array-key, mixed> $context */
+    /**
+     * @param array<array-key, mixed> $context
+     */
     public function applyToCollection(
         QueryBuilder $queryBuilder,
         QueryNameGeneratorInterface $queryNameGenerator,

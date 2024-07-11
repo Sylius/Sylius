@@ -24,7 +24,9 @@ final readonly class HideArchivedPromotionExtension implements QueryCollectionEx
     {
     }
 
-    /** @param array<array-key, mixed> $context */
+    /**
+     * @param array<array-key, mixed> $context
+     */
     public function applyToCollection(
         QueryBuilder $queryBuilder,
         QueryNameGeneratorInterface $queryNameGenerator,

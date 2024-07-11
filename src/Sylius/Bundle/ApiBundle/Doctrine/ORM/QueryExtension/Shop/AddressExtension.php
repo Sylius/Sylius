@@ -32,7 +32,9 @@ final readonly class AddressExtension implements QueryCollectionExtensionInterfa
     ) {
     }
 
-    /** @param array<array-key, mixed> $context */
+    /**
+     * @param array<array-key, mixed> $context
+     */
     public function applyToCollection(
         QueryBuilder $queryBuilder,
         QueryNameGeneratorInterface $queryNameGenerator,

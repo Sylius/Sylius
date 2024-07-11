@@ -32,6 +32,9 @@ final readonly class ShopCurrencyExtension implements QueryCollectionExtensionIn
     {
     }
 
+    /**
+     * @param array<array-key, mixed> $context
+     */
     public function applyToCollection(
         QueryBuilder $queryBuilder,
         QueryNameGeneratorInterface $queryNameGenerator,
@@ -42,6 +45,10 @@ final readonly class ShopCurrencyExtension implements QueryCollectionExtensionIn
         $this->applyCondition($queryBuilder, $queryNameGenerator, $resourceClass, $context);
     }
 
+    /**
+     * @param array<array-key, mixed> $identifiers
+     * @param array<array-key, mixed> $context
+     */
     public function applyToItem(
         QueryBuilder $queryBuilder,
         QueryNameGeneratorInterface $queryNameGenerator,
@@ -53,6 +60,9 @@ final readonly class ShopCurrencyExtension implements QueryCollectionExtensionIn
         $this->applyCondition($queryBuilder, $queryNameGenerator, $resourceClass, $context);
     }
 
+    /**
+     * @param array<array-key, mixed> $context
+     */
     private function applyCondition(
         QueryBuilder $queryBuilder,
         QueryNameGeneratorInterface $queryNameGenerator,
