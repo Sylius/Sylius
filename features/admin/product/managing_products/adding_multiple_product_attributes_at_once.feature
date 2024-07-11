@@ -10,11 +10,14 @@ Feature: Adding a new integer product attribute
         And the store has a non-translatable text product attribute "ISBN"
         And I am logged in as an administrator
 
-    @todo @ui @javascript @api
+    @api @ui @mink:chromedriver
     Scenario: Adding two text attributes to a product
         When I want to create a new configurable product
         And I specify its code as "HARRY_POTTER_1"
-        And I name it "Harry Potter and the Sorcerer's Stone" in "English (United States)"
+        And I name it "Harry Potter and the Sorcerer's Stone" in "English (United States)" locale
+        And I generate its slug in "English (United States)" locale
+        And I add the "Author" attribute
+        And I add the "ISBN" attribute
         And I set its non-translatable "Author" attribute to "J.K. Rowling"
         And I set its non-translatable "ISBN" attribute to "978-1338878929"
         And I add it
