@@ -76,7 +76,7 @@
                 </normalizationContext>
             </operation>
 
-            <operation class="ApiPlatform\Metadata\Post" uriTemplate="/admin/channels" processor="sylius_api.state_processor.admin.channel.persist">
+            <operation class="ApiPlatform\Metadata\Post" uriTemplate="/admin/channels">
                 <normalizationContext>
                     <values>
                         <value name="groups">

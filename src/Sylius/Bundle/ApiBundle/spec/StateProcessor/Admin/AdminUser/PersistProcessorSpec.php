@@ -43,28 +43,28 @@ final class PersistProcessorSpec extends ObjectBehavior
         $this->shouldThrow(\InvalidArgumentException::class)->during('process', [$adminUser, $operation, [], []]);
     }
 
-    function it_does_not_process_post_operation(
+    function it_does_not_update_password_on_post_operation(
         AdminUserInterface $adminUser,
         ProcessorInterface $persistProcessor,
         PasswordUpdaterInterface $passwordUpdater,
     ): void {
         $operation = new Post();
         $passwordUpdater->updatePassword($adminUser)->shouldNotBeCalled();
-        $persistProcessor->process($adminUser, $operation, [], [])->shouldNotBeCalled();
+        $persistProcessor->process($adminUser, $operation, [], [])->shouldBeCalled();
 
-        $this->shouldThrow(\InvalidArgumentException::class)->during('process', [$adminUser, $operation, [], []]);
+        $this->process($adminUser, $operation, [], []);
     }
 
-    function it_does_not_process_patch_operation(
+    function it_does_not_update_password_on_patch_operation(
         AdminUserInterface $adminUser,
         ProcessorInterface $persistProcessor,
         PasswordUpdaterInterface $passwordUpdater,
     ): void {
         $operation = new Patch();
         $passwordUpdater->updatePassword($adminUser)->shouldNotBeCalled();
-        $persistProcessor->process($adminUser, $operation, [], [])->shouldNotBeCalled();
+        $persistProcessor->process($adminUser, $operation, [], [])->shouldBeCalled();
 
-        $this->shouldThrow(\InvalidArgumentException::class)->during('process', [$adminUser, $operation, [], []]);
+        $this->process($adminUser, $operation, [], []);
     }
 
     function it_processes_put_operation(

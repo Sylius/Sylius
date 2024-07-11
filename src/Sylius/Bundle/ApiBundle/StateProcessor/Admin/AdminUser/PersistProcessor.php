@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\StateProcessor\Admin\AdminUser;
 
+use ApiPlatform\Metadata\DeleteOperationInterface;
 use ApiPlatform\Metadata\Operation;
 use ApiPlatform\Metadata\Put;
 use ApiPlatform\State\ProcessorInterface;
@@ -32,9 +33,11 @@ final readonly class PersistProcessor implements ProcessorInterface
     public function process($data, Operation $operation, array $uriVariables = [], array $context = [])
     {
         Assert::isInstanceOf($data, AdminUserInterface::class);
-        Assert::isInstanceOf($operation, Put::class);
+        Assert::notInstanceOf($operation, DeleteOperationInterface::class);
 
-        $this->passwordUpdater->updatePassword($data);
+        if ($operation instanceof Put) {
+            $this->passwordUpdater->updatePassword($data);
+        }
 
         return $this->persistProcessor->process($data, $operation, $uriVariables, $context);
     }

@@ -22,20 +22,15 @@
             <tag name="api_platform.state_processor" />
         </service>
 
-        <service id="sylius.api.state_processor.admin.admin_user.persist" class="Sylius\Bundle\ApiBundle\StateProcessor\Admin\AdminUser\PersistProcessor">
+        <service id="sylius_api.state_processor.admin.admin_user.persist" class="Sylius\Bundle\ApiBundle\StateProcessor\Admin\AdminUser\PersistProcessor">
             <argument type="service" id="api_platform.doctrine.orm.state.persist_processor" />
             <argument type="service" id="sylius.security.password_updater" />
             <tag name="api_platform.state_processor" />
         </service>
 
-        <service id="sylius.api.state_processor.admin.country.persist" class="Sylius\Bundle\ApiBundle\StateProcessor\Admin\Country\PersistProcessor">
+        <service id="sylius_api.state_processor.admin.country.persist" class="Sylius\Bundle\ApiBundle\StateProcessor\Admin\Country\PersistProcessor">
             <argument type="service" id="api_platform.doctrine.orm.state.persist_processor" />
             <argument type="service" id="Sylius\Component\Addressing\Checker\CountryProvincesDeletionCheckerInterface" />
-            <tag name="api_platform.state_processor" />
-        </service>
-
-        <service id="sylius_api.state_processor.admin.channel.persist" class="Sylius\Bundle\ApiBundle\StateProcessor\Admin\Channel\PersistProcessor">
-            <argument type="service" id="api_platform.doctrine.orm.state.persist_processor" />
             <tag name="api_platform.state_processor" />
         </service>
 
