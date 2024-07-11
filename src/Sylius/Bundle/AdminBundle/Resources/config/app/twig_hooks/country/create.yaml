@@ -14,11 +14,11 @@ twig_hooks:
         'sylius_admin.country.create.content.form.sections':
             details:
                 template: '@SyliusAdmin/country/form/sections/details.html.twig'
-            provinces:
-                template: '@SyliusAdmin/country/form/sections/provinces.html.twig'
 
         'sylius_admin.country.create.content.form.sections.details':
             code:
                 template: '@SyliusAdmin/country/form/sections/details/code.html.twig'
             enabled:
                 template: '@SyliusAdmin/country/form/sections/details/enabled.html.twig'
+            provinces:
+                template: '@SyliusAdmin/country/form/sections/details/provinces.html.twig'
