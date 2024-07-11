@@ -3,7 +3,7 @@
 
 default:
     suites:
-        ui_accessing_edit_page_from_product_show_page:
+        ui_navigating_between_product_show_and_edit_pages:
             contexts:
                 - sylius.behat.context.hook.doctrine_orm
                 - sylius.behat.context.hook.session
@@ -17,7 +17,7 @@ default:
                 - sylius.behat.context.setup.channel
                 - sylius.behat.context.setup.product
 
-                - sylius.behat.context.ui.admin.move_to_edit_product_page
+                - sylius.behat.context.ui.admin.navigating_between_product_show_and_edit_pages_context
 
             filters:
-                tags: "@accessing_edit_page_from_product_show_page&&@ui"
+                tags: "@navigating_between_product_show_and_edit_pages&&@ui"
