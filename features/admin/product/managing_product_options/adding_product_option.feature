@@ -54,7 +54,7 @@ Feature: Adding a new product option
         And I add it
         Then I should be notified that it has been successfully created
         And the product option "T-Shirt size" should appear in the registry
-        And product option "T-Shirt size" should have the "S" option value in "English (United States)" locale
-        And product option "T-Shirt size" should have the "S" option value in "Polish (Poland)" locale
-        And product option "T-Shirt size" should have the "M" option value in "English (United States)" locale
-        But product option "T-Shirt size" should not have the "M" option value in "Polish (Poland)" locale
+        And this product option should have the "S" option value in "English (United States)" locale
+        And this product option should have the "S" option value in "Polish (Poland)" locale
+        And this product option should have the "M" option value in "English (United States)" locale
+        But this product option should not have the "M" option value in "Polish (Poland)" locale

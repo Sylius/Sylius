@@ -228,6 +228,7 @@
             <argument type="service" id="sylius.behat.page.admin.product_option.create" />
             <argument type="service" id="sylius.behat.page.admin.product_option.update" />
             <argument type="service" id="sylius.behat.element.admin.product_option.form" />
+            <argument type="service" id="sylius.behat.shared_storage" />
         </service>
 
         <service id="sylius.behat.context.ui.admin.managing_product_reviews" class="Sylius\Behat\Context\Ui\Admin\ManagingProductReviewsContext">
