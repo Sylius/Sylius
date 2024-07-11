@@ -33,22 +33,22 @@ use Sylius\Component\Product\Repository\ProductAttributeValueRepositoryInterface
 final class CollectionProviderSpec extends ObjectBehavior
 {
     public function let(
+        SectionProviderInterface $sectionProvider,
         ProductAttributeValueRepositoryInterface $attributeValueRepository,
         LocaleContextInterface $localeContext,
         LocaleProviderInterface $localeProvider,
         QueryResultCollectionExtensionInterface $extension,
-        SectionProviderInterface $sectionProvider,
     ) {
         $defaultLocaleCode = 'en_US';
         $collectionExtensions = [$extension];
 
         $this->beConstructedWith(
             $collectionExtensions,
+            $sectionProvider,
             $attributeValueRepository,
             $localeContext,
             $localeProvider,
             $defaultLocaleCode,
-            $sectionProvider,
         );
     }
 
