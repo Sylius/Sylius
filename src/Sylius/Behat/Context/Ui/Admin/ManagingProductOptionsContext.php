@@ -18,6 +18,7 @@ use Sylius\Behat\Element\Admin\ProductOption\FormElementInterface;
 use Sylius\Behat\Page\Admin\Crud\CreatePageInterface;
 use Sylius\Behat\Page\Admin\Crud\IndexPageInterface;
 use Sylius\Behat\Page\Admin\Crud\UpdatePageInterface;
+use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Product\Model\ProductOptionInterface;
 use Webmozart\Assert\Assert;
@@ -29,6 +30,7 @@ final readonly class ManagingProductOptionsContext implements Context
         private CreatePageInterface $createPage,
         private UpdatePageInterface $updatePage,
         private FormElementInterface $formElement,
+        private SharedStorageInterface $sharedStorage,
     ) {
     }
 
@@ -162,15 +164,16 @@ final readonly class ManagingProductOptionsContext implements Context
     }
 
     /**
-     * @Then I should see the product option :productOptionName in the list
-     * @Then the product option :productOptionName should appear in the registry
-     * @Then the product option :productOptionName should be in the registry
+     * @Then I should see the product option :productOption in the list
+     * @Then the product option :productOption should appear in the registry
+     * @Then the product option :productOption should be in the registry
      */
-    public function theProductOptionShouldAppearInTheRegistry(string $productOptionName): void
+    public function theProductOptionShouldAppearInTheRegistry(ProductOptionInterface $productOption): void
     {
+        $this->sharedStorage->set('product_option', $productOption);
         $this->iBrowseProductOptions();
 
-        Assert::true($this->indexPage->isSingleResourceOnPage(['name' => $productOptionName]));
+        Assert::true($this->indexPage->isSingleResourceOnPage(['name' => $productOption->getName()]));
     }
 
     /**
@@ -251,7 +254,6 @@ final readonly class ManagingProductOptionsContext implements Context
     /**
      * @Then /^(this product option) should have the "([^"]*)" option value$/
      * @Then /^(product option "[^"]+") should have the "([^"]*)" option value$/
-     * @Then /^(product option "[^"]+") should have the "([^"]*)" option value in ("([^"]+)" locale)$/
      * @Then /^(this product option) should have the "([^"]*)" option value in ("([^"]+)" locale)$/
      */
     public function thisProductOptionShouldHaveTheOptionValue(
@@ -265,8 +267,8 @@ final readonly class ManagingProductOptionsContext implements Context
     }
 
     /**
-     * @Then /^(product option "[^"]+") should not have the "([^"]*)" option value$/
-     * @Then /^(product option "[^"]+") should not have the "([^"]*)" option value in ("([^"]+)" locale)$/
+     * @Then /^(this product option) should not have the "([^"]*)" option value$/
+     * @Then /^(this product option) should not have the "([^"]*)" option value in ("([^"]+)" locale)$/
      */
     public function thisProductOptionShouldNotHaveTheOptionValue(
         ProductOptionInterface $productOption,
