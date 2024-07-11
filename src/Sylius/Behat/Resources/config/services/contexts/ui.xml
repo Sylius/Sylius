@@ -591,8 +591,8 @@
         </service>
 
         <service
-            id="sylius.behat.context.ui.admin.move_to_edit_product_page"
-            class="Sylius\Behat\Context\Ui\Admin\AccessingEditPageFromProductShowPageContext"
+            id="sylius.behat.context.ui.admin.navigating_between_product_show_and_edit_pages_context"
+            class="Sylius\Behat\Context\Ui\Admin\NavigatingBetweenProductShowAndEditPagesContext"
         >
             <argument type="service" id="sylius.behat.page.admin.product.update_simple" />
             <argument type="service" id="sylius.behat.page.admin.product_variant.update" />

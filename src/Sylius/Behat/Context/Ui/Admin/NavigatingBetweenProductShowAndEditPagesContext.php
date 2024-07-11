@@ -29,7 +29,7 @@ enum ProductType: string
     case configurable = 'configurable';
 }
 
-final class AccessingEditPageFromProductShowPageContext implements Context
+final class NavigatingBetweenProductShowAndEditPagesContext implements Context
 {
     private ProductType $currentProductType;
 

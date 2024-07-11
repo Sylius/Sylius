@@ -1,8 +1,8 @@
-@accessing_edit_page_from_product_show_page
-Feature: Accessing the product edit page from the show page
-    In order to edit product in the simple way
+@navigating_between_product_show_and_edit_pages
+Feature: Navigating between product show and edit pages
+    In order to navigate between product show and edit pages
     As an Administrator
-    I want to be able to move to edit page directly from product show page
+    I want to be able to move to edit page directly from product show page and vice versa
 
     Background:
         Given the store operates on a single channel in "United States"
