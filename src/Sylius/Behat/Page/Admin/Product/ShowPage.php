@@ -14,11 +14,28 @@ declare(strict_types=1);
 namespace Sylius\Behat\Page\Admin\Product;
 
 use Behat\Mink\Element\NodeElement;
+use Behat\Mink\Session;
 use FriendsOfBehat\PageObjectExtension\Page\SymfonyPage;
+use Sylius\Behat\Context\Ui\Admin\Helper\ShowToEditPageSwitcherTrait;
 use Sylius\Component\Core\Model\ProductVariantInterface;
+use Symfony\Component\Routing\RouterInterface;
 
 class ShowPage extends SymfonyPage implements ShowPageInterface
 {
+    use ShowToEditPageSwitcherTrait;
+
+    public function __construct(Session $session, $minkParameters, RouterInterface $router)
+    {
+        parent::__construct($session, $minkParameters, $router);
+
+        $this->defineResourceName();
+    }
+
+    public function defineResourceName(): void
+    {
+        $this->resourceName = 'product';
+    }
+
     public function isSimpleProductPage(): bool
     {
         return !$this->hasElement('variants');
@@ -72,11 +89,6 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     public function showProductInSingleChannel(): void
     {
         $this->getElement('show_product_button')->click();
-    }
-
-    public function showProductEditPage(): void
-    {
-        $this->getElement('edit_product_button')->click();
     }
 
     public function showVariantEditPage(ProductVariantInterface $variant): void

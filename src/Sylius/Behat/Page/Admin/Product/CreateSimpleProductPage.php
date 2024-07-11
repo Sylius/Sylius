@@ -15,6 +15,7 @@ namespace Sylius\Behat\Page\Admin\Product;
 
 use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Session;
+use Sylius\Behat\Context\Ui\Admin\Helper\ShowPageButtonCheckerTrait;
 use Sylius\Behat\Page\Admin\Crud\CreatePage as BaseCreatePage;
 use Sylius\Behat\Service\DriverHelper;
 use Sylius\Behat\Service\Helper\AutocompleteHelperInterface;
@@ -22,6 +23,8 @@ use Symfony\Component\Routing\RouterInterface;
 
 class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProductPageInterface
 {
+    use ShowPageButtonCheckerTrait;
+
     public function __construct(
         Session $session,
         $minkParameters,
@@ -30,6 +33,13 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
         private readonly AutocompleteHelperInterface $autocompleteHelper,
     ) {
         parent::__construct($session, $minkParameters, $router, $routeName);
+
+        $this->defineResourceName();
+    }
+
+    public function defineResourceName(): void
+    {
+        $this->resourceName = 'product';
     }
 
     public function getRouteName(): string
@@ -121,6 +131,7 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
                 'field_shipping_category' => '[name="sylius_admin_product[variant][shippingCategory]"]',
                 'field_shipping_required' => '[name="sylius_admin_product[variant][shippingRequired]"]',
                 'product_translation_accordion' => '[data-test-product-translations-accordion="%localeCode%"]',
+                'show_product_button' => '[data-test-show-product]',
                 'side_navigation_tab' => '[data-test-side-navigation-tab="%name%"]',
             ],
         );

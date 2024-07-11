@@ -16,6 +16,8 @@ namespace Sylius\Behat\Page\Admin\Product;
 use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Session;
 use Sylius\Behat\Behaviour\ChecksCodeImmutability;
+use Sylius\Behat\Context\Ui\Admin\Helper\EditToShowPageSwitcherTrait;
+use Sylius\Behat\Context\Ui\Admin\Helper\ShowPageButtonCheckerTrait;
 use Sylius\Behat\Page\Admin\Crud\UpdatePage as BaseUpdatePage;
 use Sylius\Behat\Service\AutocompleteHelper;
 use Sylius\Behat\Service\Helper\AutocompleteHelperInterface;
@@ -24,6 +26,8 @@ use Symfony\Component\Routing\RouterInterface;
 class UpdateConfigurableProductPage extends BaseUpdatePage implements UpdateConfigurableProductPageInterface
 {
     use ChecksCodeImmutability;
+    use EditToShowPageSwitcherTrait;
+    use ShowPageButtonCheckerTrait;
 
     /**
      * @param array<array-key, string> $minkParameters
@@ -36,6 +40,13 @@ class UpdateConfigurableProductPage extends BaseUpdatePage implements UpdateConf
         private AutocompleteHelperInterface $autocompleteHelper,
     ) {
         parent::__construct($session, $minkParameters, $router, $routeName);
+
+        $this->defineResourceName();
+    }
+
+    protected function defineResourceName(): void
+    {
+        $this->resourceName = 'product';
     }
 
     public function saveChanges(): void
@@ -120,6 +131,7 @@ class UpdateConfigurableProductPage extends BaseUpdatePage implements UpdateConf
                 'enabled' => '[data-test-enabled]',
                 'options' => '[data-test-options]',
                 'product_options_autocomplete' => '[data-test-product-options-autocomplete]',
+                'show_product_button' => '[data-test-show-product]',
                 'side_navigation_tab' => '[data-test-side-navigation-tab="%name%"]',
             ],
         );

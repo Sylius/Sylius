@@ -15,6 +15,7 @@ namespace Sylius\Behat\Page\Admin\Product;
 
 use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Session;
+use Sylius\Behat\Context\Ui\Admin\Helper\ShowPageButtonCheckerTrait;
 use Sylius\Behat\Page\Admin\Crud\CreatePage as BaseCreatePage;
 use Sylius\Behat\Service\DriverHelper;
 use Sylius\Behat\Service\Helper\AutocompleteHelperInterface;
@@ -22,6 +23,8 @@ use Symfony\Component\Routing\RouterInterface;
 
 class CreateConfigurableProductPage extends BaseCreatePage implements CreateConfigurableProductPageInterface
 {
+    use ShowPageButtonCheckerTrait;
+
     public function __construct(
         Session $session,
         $minkParameters,
@@ -30,6 +33,13 @@ class CreateConfigurableProductPage extends BaseCreatePage implements CreateConf
         private readonly AutocompleteHelperInterface $autocompleteHelper,
     ) {
         parent::__construct($session, $minkParameters, $router, $routeName);
+
+        $this->defineResourceName();
+    }
+
+    public function defineResourceName(): void
+    {
+        $this->resourceName = 'product';
     }
 
     public function create(): void
@@ -71,6 +81,7 @@ class CreateConfigurableProductPage extends BaseCreatePage implements CreateConf
                 'code' => '[data-test-code]',
                 'enabled' => '[data-test-enabled]',
                 'product_options_autocomplete' => '[data-test-product-options-autocomplete]',
+                'show_product_button' => '[data-test-show-product]',
                 'side_navigation_tab' => '[data-test-side-navigation-tab="%name%"]',
             ],
         );
