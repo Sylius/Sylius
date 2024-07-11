@@ -18,7 +18,6 @@ use Sylius\Behat\Element\Admin\ProductOption\FormElementInterface;
 use Sylius\Behat\Page\Admin\Crud\CreatePageInterface;
 use Sylius\Behat\Page\Admin\Crud\IndexPageInterface;
 use Sylius\Behat\Page\Admin\Crud\UpdatePageInterface;
-use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Product\Model\ProductOptionInterface;
 use Webmozart\Assert\Assert;
@@ -30,7 +29,6 @@ final readonly class ManagingProductOptionsContext implements Context
         private CreatePageInterface $createPage,
         private UpdatePageInterface $updatePage,
         private FormElementInterface $formElement,
-        private SharedStorageInterface $sharedStorage,
     ) {
     }
 
