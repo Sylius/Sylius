@@ -16,8 +16,6 @@ twig_hooks:
             show:
                 template: '@SyliusAdmin/shared/crud/update/content/header/title_block/actions/show.html.twig'
                 priority: 300
-                configuration:
-                    has_show_page: true
 
         'sylius_admin.customer.update.content.form':
             sections:

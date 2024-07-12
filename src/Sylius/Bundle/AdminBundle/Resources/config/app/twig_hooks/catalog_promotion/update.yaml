@@ -9,17 +9,9 @@ twig_hooks:
                 configuration:
                     method: 'PUT'
 
-        'sylius_admin.catalog_promotion.update.content.header':
-            breadcrumbs:
-                template: '@SyliusAdmin/shared/crud/update/content/header/breadcrumbs.html.twig'
-                configuration:
-                    has_show_page: true
-
         'sylius_admin.catalog_promotion.update.content.header.title_block.actions':
             show:
                 template: '@SyliusAdmin/shared/crud/update/content/header/title_block/actions/show.html.twig'
-                configuration:
-                    has_show_page: true
 
         'sylius_admin.catalog_promotion.update.content.form':
             sections:
