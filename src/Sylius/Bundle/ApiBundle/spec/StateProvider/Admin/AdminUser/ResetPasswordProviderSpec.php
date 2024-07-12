@@ -11,40 +11,36 @@
 
 declare(strict_types=1);
 
-namespace spec\Sylius\Bundle\ApiBundle\StateProvider\Shop\Account\VerifyShopUser;
+namespace spec\Sylius\Bundle\ApiBundle\StateProvider\Admin\AdminUser;
 
 use ApiPlatform\Metadata\Operation;
 use ApiPlatform\Metadata\Patch;
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\ApiBundle\Command\Account\VerifyShopUser;
 use Sylius\Bundle\ApiBundle\SectionResolver\AdminApiSection;
 use Sylius\Bundle\ApiBundle\SectionResolver\ShopApiSection;
-use Sylius\Bundle\ApiBundle\Serializer\ContextKeys;
+use Sylius\Bundle\CoreBundle\Message\Admin\Account\ResetPassword;
 use Sylius\Bundle\CoreBundle\SectionResolver\SectionProviderInterface;
-use Sylius\Component\Core\Model\ChannelInterface;
 
-final class ItemProviderSpec extends ObjectBehavior
+final class ResetPasswordProviderSpec extends ObjectBehavior
 {
     function let(SectionProviderInterface $sectionProvider): void
     {
         $this->beConstructedWith($sectionProvider);
     }
 
-    function it_returns_verify_customer_account_command_when_token_is_provided(
-        ChannelInterface $channel,
+    function it_provides_reset_password_class(
         SectionProviderInterface $sectionProvider,
     ): void {
-        $operation = new Patch(class: VerifyShopUser::class);
-        $sectionProvider->getSection()->willReturn(new ShopApiSection());
-        $channel->getCode()->willReturn('WEB');
+        $operation = new Patch(class: ResetPassword::class);
+        $sectionProvider->getSection()->willReturn(new AdminApiSection());
 
         $this
-            ->provide($operation, ['token' => 'TOKEN'], [ContextKeys::CHANNEL => $channel, ContextKeys::LOCALE_CODE => 'en_US'])
-            ->shouldBeLike(new VerifyShopUser('TOKEN', 'WEB', 'en_US'))
+            ->provide($operation, ['token' => 'resetToken'])
+            ->shouldBeLike(new ResetPassword('resetToken'))
         ;
     }
 
-    function it_throws_an_exception_when_operation_class_is_not_verify_shop_user(
+    function it_throws_an_exception_when_operation_class_is_not_reset_password(
         Operation $operation,
     ): void {
         $operation->getClass()->willReturn(\stdClass::class);
@@ -58,8 +54,8 @@ final class ItemProviderSpec extends ObjectBehavior
         Operation $operation,
         SectionProviderInterface $sectionProvider,
     ): void {
-        $operation->getClass()->willReturn(VerifyShopUser::class);
-        $sectionProvider->getSection()->willReturn(new ShopApiSection());
+        $operation->getClass()->willReturn(ResetPassword::class);
+        $sectionProvider->getSection()->willReturn(new AdminApiSection());
 
         $this->shouldThrow(\InvalidArgumentException::class)
             ->during('provide', [$operation])
@@ -69,8 +65,8 @@ final class ItemProviderSpec extends ObjectBehavior
     function it_throws_an_exception_when_operation_is_not_in_shop_api_section(
         SectionProviderInterface $sectionProvider,
     ): void {
-        $operation = new Patch(class: VerifyShopUser::class);
-        $sectionProvider->getSection()->willReturn(new AdminApiSection());
+        $operation = new Patch(class: ResetPassword::class);
+        $sectionProvider->getSection()->willReturn(new ShopApiSection());
 
         $this->shouldThrow(\InvalidArgumentException::class)
             ->during('provide', [$operation])
@@ -80,8 +76,8 @@ final class ItemProviderSpec extends ObjectBehavior
     function it_throws_invalid_argument_exception_when_no_token_is_provided(
         SectionProviderInterface $sectionProvider,
     ): void {
-        $operation = new Patch(class: VerifyShopUser::class);
-        $sectionProvider->getSection()->willReturn(new ShopApiSection());
+        $operation = new Patch(class: ResetPassword::class);
+        $sectionProvider->getSection()->willReturn(new AdminApiSection());
 
         $this
             ->shouldThrow(\InvalidArgumentException::class)

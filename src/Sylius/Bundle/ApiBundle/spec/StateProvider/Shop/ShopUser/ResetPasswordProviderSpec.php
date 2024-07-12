@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 
-namespace spec\Sylius\Bundle\ApiBundle\StateProvider\Shop\Account\ResetPassword;
+namespace spec\Sylius\Bundle\ApiBundle\StateProvider\Shop\ShopUser;
 
 use ApiPlatform\Metadata\Operation;
 use ApiPlatform\Metadata\Patch;
@@ -21,7 +21,7 @@ use Sylius\Bundle\ApiBundle\SectionResolver\AdminApiSection;
 use Sylius\Bundle\ApiBundle\SectionResolver\ShopApiSection;
 use Sylius\Bundle\CoreBundle\SectionResolver\SectionProviderInterface;
 
-final class ItemProviderSpec extends ObjectBehavior
+final class ResetPasswordProviderSpec extends ObjectBehavior
 {
     function let(SectionProviderInterface $sectionProvider): void
     {

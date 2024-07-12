@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\ApiBundle\StateProvider\Shop\Account\VerifyShopUser;
+namespace Sylius\Bundle\ApiBundle\StateProvider\Shop\ShopUser;
 
 use ApiPlatform\Metadata\Operation;
 use ApiPlatform\Metadata\Patch;
@@ -23,7 +23,7 @@ use Sylius\Bundle\CoreBundle\SectionResolver\SectionProviderInterface;
 use Webmozart\Assert\Assert;
 
 /** @implements ProviderInterface<VerifyShopUser> */
-final readonly class ItemProvider implements ProviderInterface
+final readonly class VerifyShopUserProvider implements ProviderInterface
 {
     public function __construct(private SectionProviderInterface $sectionProvider)
     {
