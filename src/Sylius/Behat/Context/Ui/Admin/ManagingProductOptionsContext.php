@@ -132,7 +132,6 @@ final readonly class ManagingProductOptionsContext implements Context
 
     /**
      * @When I apply the option value identified by :code in :localeCode to all option values.
-     * @When I apply to all the :value option value identified by :code
      */
     public function iApplyToAllTheOptionValueIdentifiedBy(string $code, string $localeCode): void
     {
