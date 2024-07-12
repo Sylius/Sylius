@@ -24,9 +24,7 @@ use Webmozart\Assert\Assert;
 /** @implements ProcessorInterface<AvatarImageInterface> */
 final readonly class PersistProcessor implements ProcessorInterface
 {
-    /**
-     * @param AvatarImageRepositoryInterface<AvatarImageInterface> $avatarImageRepository
-     */
+    /** @param AvatarImageRepositoryInterface<AvatarImageInterface> $avatarImageRepository */
     public function __construct(
         private ProcessorInterface $processor,
         private ImageCreatorInterface $avatarImageCreator,
