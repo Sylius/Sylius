@@ -17,11 +17,15 @@ use Sylius\Behat\Element\Admin\Crud\FormElementInterface as BaseFormElementInter
 
 interface FormElementInterface extends BaseFormElementInterface
 {
-    public function specifyField(string $field, string $value): void;
-
     public function isFieldDisabled(string $fieldName): bool;
 
     public function getRatio(): string;
 
     public function hasFormValidationError(string $expectedMessage): bool;
+
+    public function specifyRatio(string $ratio): void;
+
+    public function specifySourceCurrency(string $sourceCurrency): void;
+
+    public function specifyTargetCurrency(string $targetCurrency): void;
 }
