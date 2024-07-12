@@ -65,7 +65,7 @@ final readonly class ManagingExchangeRatesContext implements Context
      */
     public function iSpecifyItsRatioAs(?string $ratio = null): void
     {
-        $this->formElement->specifyField('Ratio', $ratio ?? '');
+        $this->formElement->specifyRatio($ratio ?? '');
     }
 
     /**
@@ -73,7 +73,7 @@ final readonly class ManagingExchangeRatesContext implements Context
      */
     public function iChooseAsSourceCurrency(string $currencyCode): void
     {
-        $this->formElement->specifyField('Source currency', $currencyCode);
+        $this->formElement->specifySourceCurrency($currencyCode);
     }
 
     /**
@@ -81,7 +81,7 @@ final readonly class ManagingExchangeRatesContext implements Context
      */
     public function iChooseAsTargetCurrency(string $currencyCode): void
     {
-        $this->formElement->specifyField('Target currency', $currencyCode);
+        $this->formElement->specifyTargetCurrency($currencyCode);
     }
 
     /**
@@ -97,7 +97,7 @@ final readonly class ManagingExchangeRatesContext implements Context
      */
     public function iChangeRatioTo(string $ratio): void
     {
-        $this->formElement->specifyField('Ratio', $ratio);
+        $this->formElement->specifyRatio($ratio);
     }
 
     /**

@@ -18,8 +18,6 @@ use Sylius\Behat\Element\Admin\Crud\FormElement as BaseFormElement;
 
 final class FormElement extends BaseFormElement implements FormElementInterface
 {
-    use SpecifiesItsField;
-
     public function isFieldDisabled(string $fieldName): bool
     {
         return null !== $this->getElement($fieldName)->getAttribute('disabled');
@@ -32,13 +30,22 @@ final class FormElement extends BaseFormElement implements FormElementInterface
 
     public function hasFormValidationError(string $expectedMessage): bool
     {
-        $formValidationErrors = $this->getDocument()->find('css', '#sylius_admin_exchange_rate .alert-danger');
+        return $expectedMessage === $this->getValidationErrors();
+    }
 
-        if (null === $formValidationErrors) {
-            return false;
-        }
+    public function specifyRatio(string $ratio): void
+    {
+        $this->getElement('ratio')->setValue($ratio);
+    }
 
-        return $expectedMessage === $formValidationErrors->getText();
+    public function specifySourceCurrency(string $sourceCurrency): void
+    {
+        $this->getElement('source_currency')->setValue($sourceCurrency);
+    }
+
+    public function specifyTargetCurrency(string $targetCurrency): void
+    {
+        $this->getElement('target_currency')->setValue($targetCurrency);
     }
 
     protected function getDefinedElements(): array
