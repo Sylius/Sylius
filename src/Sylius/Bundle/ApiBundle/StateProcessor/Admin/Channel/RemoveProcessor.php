@@ -34,10 +34,7 @@ final readonly class RemoveProcessor implements ProcessorInterface
     public function process($data, Operation $operation, array $uriVariables = [], array $context = []): void
     {
         Assert::isInstanceOf($data, ChannelInterface::class);
-
-        if (!$operation instanceof DeleteOperationInterface) {
-            return;
-        }
+        Assert::isInstanceOf($operation, DeleteOperationInterface::class);
 
         if (!$this->channelDeletionChecker->isDeletable($data)) {
             throw new ChannelCannotBeRemoved('The channel cannot be deleted. At least one enabled channel is required.', Response::HTTP_UNPROCESSABLE_ENTITY);
