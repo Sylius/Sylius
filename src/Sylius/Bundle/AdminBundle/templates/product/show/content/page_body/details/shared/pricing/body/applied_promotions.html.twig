@@ -1,9 +1,13 @@
 {% set channel_pricing = hookable_metadata.context.channel_pricing %}
 
 <td class="text-end">
-    <ul>
-        {% for promotion in channel_pricing.appliedPromotions %}
-            <li>{{ promotion.name }}</li>
-        {% endfor %}
-    </ul>
+    {% if channel_pricing.appliedPromotions|length > 0 %}
+        <ul>
+            {% for promotion in channel_pricing.appliedPromotions %}
+                <li>{{ promotion.name }}</li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        -
+    {% endif %}
 </td>
