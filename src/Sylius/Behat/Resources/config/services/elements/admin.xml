@@ -137,5 +137,12 @@
         >
             <argument type="service" id="Sylius\Behat\Service\Helper\AutocompleteHelperInterface" />
         </service>
+
+        <service
+            id="sylius.behat.element.admin.exchange_rate.form"
+            class="Sylius\Behat\Element\Admin\ExchangeRate\FormElement"
+            parent="sylius.behat.element.admin.crud.form"
+        >
+        </service>
     </services>
 </container>

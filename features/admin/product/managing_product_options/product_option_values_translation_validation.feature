@@ -11,7 +11,7 @@ Feature: Product option values translation validation
         And this product option has also the "M" option value with code "OV2"
         And I am logged in as an administrator
 
-    @no-ui @api
+    @api @no-ui
     Scenario: Trying to add product option value translation in unexisting locale
         When I want to modify the "T-Shirt size" product option
         And I add the "X" option value identified by "OV3" in "French (France)"

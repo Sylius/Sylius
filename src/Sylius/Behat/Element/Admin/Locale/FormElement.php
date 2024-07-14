@@ -60,5 +60,4 @@ final class FormElement extends BaseFormElement implements FormElementInterface
             'code' => '[data-test-code]',
         ]);
     }
-
 }

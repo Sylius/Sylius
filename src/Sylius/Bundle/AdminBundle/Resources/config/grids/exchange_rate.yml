@@ -14,9 +14,11 @@ sylius_grid:
                     sortable: ~
                 sourceCurrency:
                     type: string
+                    path: sourceCurrency.name
                     label: sylius.ui.source_currency
                 targetCurrency:
                     type: string
+                    path: targetCurrency.name
                     label: sylius.ui.target_currency
                 ratio:
                     type: string

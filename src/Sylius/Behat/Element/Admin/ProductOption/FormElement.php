@@ -14,92 +14,57 @@ declare(strict_types=1);
 namespace Sylius\Behat\Element\Admin\ProductOption;
 
 use Behat\Mink\Element\NodeElement;
-use Behat\Mink\Exception\ElementNotFoundException;
 use Sylius\Behat\Behaviour\ChecksCodeImmutability;
-use Sylius\Behat\Behaviour\NamesIt;
 use Sylius\Behat\Behaviour\SpecifiesItsField;
 use Sylius\Behat\Element\Admin\Crud\FormElement as BaseFormElement;
-use Webmozart\Assert\Assert;
 
 class FormElement extends BaseFormElement implements FormElementInterface
 {
-    use NamesIt;
     use SpecifiesItsField;
     use ChecksCodeImmutability;
 
-    public function addOptionValue(string $code, string $value): void
+    public function setName(string $name, string $localeCode): void
     {
-        $count = count($this->getProductOptionValues());
-
-        $this->getElement('add_value')->click();
-        $this->getDocument()->waitFor(5, fn () => $count + 1 === count($this->getProductOptionValues()));
-
-        $optionValueForm = $this->getLastOptionValueElement();
-
-        $optionValueForm->fillField('Code', $code);
-
-        $optionValueForm->find('css', '[data-test-option-value-translation]')->setValue($value);
+        $this->getElement('name', ['%locale_code%' => $localeCode])->setValue($name);
     }
 
-    public function removeOptionValue(string $optionValue): void
+    public function addOptionValue(string $code, string $localeCode, string $value): void
     {
-        $count = count($this->getProductOptionValues());
+        $this->getElement('add_option_value')->press();
+        $this->waitForFormUpdate();
 
-        $optionValues = $this->getProductOptionValues();
-
-        foreach ($optionValues as $optionValueElement) {
-            if ($optionValueElement->has('css', sprintf('input[value="%s"]', $optionValue))) {
-                $optionValueElement->find('css', '[data-test-delete-value]')->click();
-
-                $this->getDocument()->waitFor(5, fn () => $count - 1 === count($this->getProductOptionValues()));
-
-                return;
-            }
-        }
-
-        throw new ElementNotFoundException($this->getSession(), 'option value', 'css', sprintf('input[value="%s"]', $optionValue));
+        $lastValue = $this->getElement('last_option_value');
+        $lastValue->find('css', '[data-test-code]')->setValue($code);
+        $lastValue->find('css', sprintf('[id$="_translations_%s_value"]', $localeCode))->setValue($value);
+        $this->waitForFormUpdate();
     }
 
-    public function nameItIn(string $name, string $localeCode): void
+    public function hasOptionValue(string $optionValue, string $localeCode): bool
     {
-        $this->getElement('name', ['%localeCode%' => $localeCode])->setValue($name);
+        return $this->hasElement('option_value', ['%option_value%' => $optionValue, '%locale_code%' => $localeCode]);
     }
 
-    public function isThereOptionValue(string $optionValue): bool
+    public function applyToAllOptionValues(string $code, string $localeCode): void
     {
-        $optionValues = $this->getElement('values');
-
-        return $optionValues->has('css', sprintf('input[value="%s"]', $optionValue));
-    }
-
-    protected function getCodeElement(): NodeElement
-    {
-        return $this->getElement('code');
+        $this->getElement('apply_to_all', ['%value_code%' => $code, '%locale_code%' => $localeCode])->click();
+        $this->waitForFormUpdate();
     }
 
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
-            'add_value' => '[data-test-add-value]',
+            'add_option_value' => '[data-test-add-option-value]',
+            'apply_to_all' => '[data-test-option-value="%value_code%"] [data-test-option-value-locale="%locale_code%"] [data-test-apply-to-all]',
             'code' => '[data-test-code]',
-            'name' => '#sylius_admin_product_option_translations_%localeCode%_name',
-            'product_option_value' => '[data-test-product-option-value]',
-            'values' => '[data-test-values]',
+            'form' => '[data-live-name-value="sylius_admin:product_option:form"]',
+            'last_option_value' => '[data-test-option-values] [data-test-option-value]:last-child',
+            'name' => '#sylius_admin_product_option_translations_%locale_code%_name',
+            'option_value' => '[data-test-option-values] input[id$="_translations_%locale_code%_value"][value="%option_value%"]',
         ]);
     }
 
-    private function getLastOptionValueElement(): NodeElement
+    protected function getCodeElement(): NodeElement
     {
-        $values = $this->getProductOptionValues();
-
-        return end($values);
-    }
-
-    private function getProductOptionValues(): array
-    {
-        $items = $this->getElement('values')->findAll('css', '[data-test-product-option-value]');
-        Assert::isArray($items);
-
-        return $items;
+        return $this->getElement('code');
     }
 }

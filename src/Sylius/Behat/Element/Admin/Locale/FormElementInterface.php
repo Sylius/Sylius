@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace Sylius\Behat\Element\Admin\Locale;
 
 use Sylius\Behat\Element\Admin\Crud\FormElementInterface as BaseFormElementInterface;
-use Sylius\Component\Core\Model\TaxonInterface;
 
 interface FormElementInterface extends BaseFormElementInterface
 {

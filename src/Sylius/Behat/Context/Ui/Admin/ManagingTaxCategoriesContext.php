@@ -23,7 +23,6 @@ use Webmozart\Assert\Assert;
 
 final readonly class ManagingTaxCategoriesContext implements Context
 {
-
     public function __construct(
         private IndexPageInterface $indexPage,
         private CreatePageInterface $createPage,
