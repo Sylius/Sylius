@@ -1,9 +1,12 @@
+{% from '@SyliusAdmin/shared/helper/icon.html.twig' import icon %}
+
 {% set product = hookable_metadata.context.product %}
 {% set variant = hookable_metadata.context.variant %}
 {% set channel_pricing = hookable_metadata.context.channel_pricing %}
 
 <td class="text-end">
-    <a class="btn btn-primary" {{ sylius_test_html_attribute('price-history') }} href="{{ path('sylius_admin_channel_pricing_log_entry_index', { productId: product.id, variantId: variant.id, channelPricingId: channel_pricing.id }) }}">
-        {{ 'sylius.ui.price_history'|trans }}
+    <a class="btn" {{ sylius_test_html_attribute('price-history') }} href="{{ path('sylius_admin_channel_pricing_log_entry_index', { productId: product.id, variantId: variant.id, channelPricingId: channel_pricing.id }) }}">
+        {{ icon({icon: 'eye'}) }}
+        {{ 'sylius.ui.show'|trans }}
     </a>
 </td>
