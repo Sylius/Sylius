@@ -17,6 +17,8 @@
     xsi:schemaLocation="https://api-platform.com/schema/metadata/resources-3.0 https://api-platform.com/schema/metadata/resources-3.0.xsd"
 >
     <resource class="Sylius\Component\Core\Model\ShippingMethod">
+        <!-- Admin operations-->
+
         <operations>
             <operation class="ApiPlatform\Metadata\GetCollection" uriTemplate="/admin/shipping-methods">
                 <normalizationContext>
@@ -228,6 +230,57 @@ Example configuration for `flat_rate` shipping charges calculator:
                 uriTemplate="/admin/shipping-methods/{code}"
                 processor="sylius_api.state_processor.admin.shipping_method.remove"
             />
+
+            <!-- Shop operations-->
+
+            <operation
+                class="ApiPlatform\Metadata\GetCollection"
+                uriTemplate="/shop/shipping-methods"
+                provider="sylius_api.state_provider.shop.shipping_method.collection"
+                paginationEnabled="false"
+            >
+                <normalizationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius:shop:shipping_method:index</value>
+                            </values>
+                        </value>
+                    </values>
+                </normalizationContext>
+            </operation>
+
+            <operation class="ApiPlatform\Metadata\Get"  uriTemplate="/shop/shipping-methods/{code}">
+                <normalizationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius:shop:shipping_method:show</value>
+                            </values>
+                        </value>
+                    </values>
+                </normalizationContext>
+            </operation>
+        </operations>
+    </resource>
+
+    <resource class="Sylius\Component\Core\Model\ShippingMethod" uriTemplate="/shop/orders/{tokenValue}/shipments/{shipmentId}/methods">
+        <uriVariables>
+            <uriVariable parameterName="tokenValue" fromClass="Sylius\Component\Core\Model\Order" fromProperty="shipments" />
+            <uriVariable parameterName="shipmentId" fromClass="Sylius\Component\Core\Model\Shipment" fromProperty="method" />
+        </uriVariables>
+        <operations>
+            <operation class="ApiPlatform\Metadata\GetCollection" provider="sylius_api.state_provider.shop.order.shipment.shipping_method.collection">
+                <normalizationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius:shop:shipping_method:index</value>
+                            </values>
+                        </value>
+                    </values>
+                </normalizationContext>
+            </operation>
         </operations>
     </resource>
 </resources>

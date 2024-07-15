@@ -91,14 +91,14 @@
             <argument>%sylius.security.new_api_route%</argument>
         </service>
 
-<!--        <service id="Sylius\Bundle\ApiBundle\Serializer\ShippingMethodNormalizer">-->
-<!--            <argument type="service" id="sylius.repository.order" />-->
-<!--            <argument type="service" id="sylius.repository.shipment" />-->
-<!--            <argument type="service" id="sylius.registry.shipping_calculator" />-->
-<!--            <argument type="service" id="Symfony\Component\HttpFoundation\RequestStack" />-->
-<!--            <argument type="service" id="Sylius\Component\Channel\Context\ChannelContextInterface" />-->
-<!--            <tag name="serializer.normalizer" priority="64" />-->
-<!--        </service>-->
+        <service id="sylius_api.normalizer.shipping_method" class="Sylius\Bundle\ApiBundle\Serializer\Normalizer\ShippingMethodNormalizer">
+            <argument type="service" id="sylius.section_resolver.uri_based_section_resolver" />
+            <argument type="service" id="sylius.repository.order" />
+            <argument type="service" id="sylius.repository.shipment" />
+            <argument type="service" id="sylius.registry.shipping_calculator" />
+            <argument type="service" id="Symfony\Component\HttpFoundation\RequestStack" />
+            <tag name="serializer.normalizer" priority="64" />
+        </service>
 
 <!--        <service id="Sylius\Bundle\ApiBundle\Serializer\ZoneDenormalizer">-->
 <!--            <argument type="service" id="api_platform.symfony.iri_converter" />-->
