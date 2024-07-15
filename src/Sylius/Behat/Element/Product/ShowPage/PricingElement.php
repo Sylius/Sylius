@@ -71,23 +71,23 @@ final class PricingElement extends Element implements PricingElementInterface
 
     public function getSimpleProductPricingRowForChannel(string $channelCode): NodeElement
     {
-        return $this->getElement('simple_product_pricing_row', ['%channelCode%' => $channelCode]);
+        return $this->getElement('simple_product_pricing_row', ['%channel_code%' => $channelCode]);
     }
 
     public function getVariantPricingRowForChannel(string $variantCode, string $channelCode): NodeElement
     {
         return $this->getElement('variant_pricing_row', [
-            '%variantCode%' => $variantCode,
-            '%channelCode%' => $channelCode,
+            '%variant_code%' => $variantCode,
+            '%channel_code%' => $channelCode,
         ]);
     }
 
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
-            'simple_product_pricing_row' => '[data-test-simple-product="%channelCode%"]',
-            'variant_pricing_row' => '[data-test-variant-pricing="%channelCode%.%variantCode%"]',
-            'price_row' => '[data-test-pricing="%channelCode%"]',
+            'price_row' => '[data-test-pricing="%channel_code%"]',
+            'simple_product_pricing_row' => '[data-test-simple-product="%channel_code%"]',
+            'variant_pricing_row' => '[data-test-variant-pricing="%channel_code%.%variant_code%"]',
         ]);
     }
 
@@ -102,7 +102,7 @@ final class PricingElement extends Element implements PricingElementInterface
     private function getChannelPriceRow(string $channelCode): ?NodeElement
     {
         try {
-            return $this->getElement('price_row', ['%channelCode%' => $channelCode]);
+            return $this->getElement('price_row', ['%channel_code%' => $channelCode]);
         } catch (ElementNotFoundException) {
             return null;
         }

@@ -21,23 +21,14 @@ final class VariantsElement extends Element implements VariantsElementInterface
     public function countVariantsOnPage(): int
     {
         /** @var NodeElement $variants|array */
-        $variants = $this->getDocument()->findAll('css', '#variants .item');
+        $variants = $this->getDocument()->findAll('css', '[data-test-variant]');
 
         return \count($variants);
     }
 
-    public function hasProductVariant(string $name): bool
+    public function hasProductVariant(string $code): bool
     {
-        $variantRows = $this->getDocument()->findAll('css', '#variants .variants-accordion__title');
-
-        /** @var NodeElement $variant */
-        foreach ($variantRows as $variant) {
-            if ($variant->find('css', '.content .variant-name')->getText() === $name) {
-                return true;
-            }
-        }
-
-        return false;
+        return $this->hasElement('variant', ['%code%' => $code]);
     }
 
     public function hasProductVariantWithCodePriceAndCurrentStock(
@@ -45,10 +36,10 @@ final class VariantsElement extends Element implements VariantsElementInterface
         string $code,
         string $price,
         string $currentStock,
-        string $channel,
+        string $channelCode,
     ): bool {
         /** @var NodeElement $variantRow */
-        $variantRows = $this->getDocument()->findAll('css', '#variants .variants-accordion__title');
+        $variantRows = $this->getDocument()->findAll('css', '[data-test-variant]');
 
         /** @var NodeElement $variant */
         foreach ($variantRows as $variant) {
@@ -59,7 +50,7 @@ final class VariantsElement extends Element implements VariantsElementInterface
                     $code,
                     $price,
                     $currentStock,
-                    $channel,
+                    $channelCode,
                 )
             ) {
                 return true;
@@ -84,33 +75,34 @@ final class VariantsElement extends Element implements VariantsElementInterface
         return false;
     }
 
+    protected function getDefinedElements(): array
+    {
+        return array_merge(parent::getDefinedElements(), [
+            'variant' => '[data-test-variant="%code%"]',
+            'variant_pricing_row' => '[data-test-variant-pricing="%channel_code%.%variant_code%"]',
+        ]);
+    }
+
     private function hasProductWithGivenNameCodePriceAndCurrentStock(
         NodeElement $variant,
         string $name,
         string $code,
         string $price,
         string $currentStock,
-        string $channel,
+        string $channelCode,
     ): bool {
-        $variantContent = $variant->getParent()->find(
-            'css',
-            sprintf('.variants-accordion__content.%s', $this->getItemIndexClass($variant)),
-        );
-
         if (
-            $variant->find('css', '.content .variant-name')->getText() === $name &&
-            $variant->find('css', '.content .variant-code')->getText() === $code &&
-            $variantContent->find('css', sprintf('tr.pricing:contains("%s") td:nth-child(2)', $channel))->getText() === $price &&
-            $variant->find('css', '.current-stock')->getText() === $currentStock
+            $variant->find('css', '[data-test-product-variant-code]')->getText() === $code &&
+            $variant->find('css', '[data-test-product-variant-name]')->getText() === $name &&
+            $this->getElement('variant_pricing_row', [
+                '%channel_code%' => $channelCode,
+                '%variant_code%' => $code,
+            ])->find('css', '[data-test-price]')->getText() === $price &&
+            $variant->find('css', '[data-test-current-stock]')->getText() === $currentStock
         ) {
             return true;
         }
 
         return false;
-    }
-
-    private function getItemIndexClass(NodeElement $variant): string
-    {
-        return explode(' ', $variant->getAttribute('class'))[1];
     }
 }

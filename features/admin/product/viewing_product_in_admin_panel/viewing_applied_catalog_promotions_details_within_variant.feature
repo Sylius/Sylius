@@ -22,7 +22,7 @@ Feature: Seeing applied catalog promotions details within variant
         And I am logged in as an administrator
         And I am browsing products
 
-    @ui @no-api
+    @no-api @ui
     Scenario: Seeing applied catalog promotion details within variant
         When I access "Wyborowa Vodka" product
         Then "Wyborowa Vodka Exquisite" variant price should be decreased by catalog promotion "Winter sale" in "United States" channel

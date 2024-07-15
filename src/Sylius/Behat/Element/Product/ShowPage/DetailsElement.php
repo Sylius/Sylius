@@ -24,7 +24,7 @@ final class DetailsElement extends Element implements DetailsElementInterface
 
     public function hasChannel(string $channelCode): bool
     {
-        if ($this->hasElement('channel', ['%channelCode%' => $channelCode])) {
+        if ($this->hasElement('channel', ['%channel_code%' => $channelCode])) {
             return true;
         }
 
@@ -55,7 +55,7 @@ final class DetailsElement extends Element implements DetailsElementInterface
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
-            'channel' => '[data-test-channel="%channelCode%"]',
+            'channel' => '[data-test-channel="%channel_code%"]',
             'current_stock' => '[data-test-current-stock]',
             'product_code' => '[data-test-product-code]',
             'tax_category' => '[data-test-tax-category]',

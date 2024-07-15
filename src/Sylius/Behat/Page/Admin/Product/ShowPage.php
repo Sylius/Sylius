@@ -75,7 +75,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
 
     public function showVariantEditPage(ProductVariantInterface $variant): void
     {
-        $this->getElement('edit_variant_button', ['%variantCode%' => $variant->getCode()])->click();
+        $this->getElement('edit_variant_button', ['%variant_code%' => $variant->getCode()])->click();
     }
 
     protected function getDefinedElements(): array
@@ -83,7 +83,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
         return array_merge(parent::getDefinedElements(), [
             'breadcrumb' => '.breadcrumb',
             'edit_product_button' => '[data-test-edit-product-button]',
-            'edit_variant_button' => '[data-test-edit-variant-button="%variantCode%"]',
+            'edit_variant_button' => '[data-test-edit-variant-button="%variant_code%"]',
             'product_name' => '[data-test-product-name]',
             'show_product_button' => '[data-test-view-in-store]',
             'variants' => '[data-test-variant-pricing]',

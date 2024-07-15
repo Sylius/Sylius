@@ -431,23 +431,23 @@ final class ProductShowPageContext implements Context
         string $code,
         string $price,
         string $currentStock,
-        string $channel,
+        ChannelInterface $channel,
     ): void {
         Assert::true($this->variantsElement->hasProductVariantWithCodePriceAndCurrentStock(
             $variantName,
             $code,
             $price,
             $currentStock,
-            $channel,
+            $channel->getCode(),
         ));
     }
 
     /**
-     * @Then I should see the :variantName variant
+     * @Then I should see the :variant variant
      */
-    public function iShouldSeeTheVariant(string $variantName): void
+    public function iShouldSeeTheVariant(ProductVariantInterface $variant): void
     {
-        Assert::true($this->variantsElement->hasProductVariant($variantName));
+        Assert::true($this->variantsElement->hasProductVariant($variant->getCode()));
     }
 
     /**
