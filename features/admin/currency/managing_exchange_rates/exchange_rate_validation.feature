@@ -8,7 +8,7 @@ Feature: Exchange rate validation
         Given the store has currency "US Dollar" and "British Pound"
         And I am logged in as an administrator
 
-    @todo @ui @api
+    @api @ui
     Scenario: Trying to add a new exchange rate without ratio
         When I want to add a new exchange rate
         And I choose "US Dollar" as the source currency
@@ -18,7 +18,7 @@ Feature: Exchange rate validation
         Then I should be notified that ratio is required
         And the exchange rate between "US Dollar" and "British Pound" should not be added
 
-    @todo @ui @api
+    @api @ui
     Scenario: Trying to add a new exchange rate with negative ratio
         When I want to add a new exchange rate
         And I choose "US Dollar" as the source currency
@@ -28,7 +28,27 @@ Feature: Exchange rate validation
         Then I should be notified that the ratio must be greater than zero
         And the exchange rate between "US Dollar" and "British Pound" should not be added
 
-    @todo @ui @api
+    @api @ui
+    Scenario: Trying to add a new exchange rate with an excessively high ratio
+        When I want to add a new exchange rate
+        And I choose "US Dollar" as the source currency
+        And I choose "British Pound" as the target currency
+        And I specify its ratio as 123450000
+        And I try to add it
+        Then I should be notified that the ratio must be less than 100000
+        And the exchange rate between "US Dollar" and "British Pound" should not be added
+
+    @api @ui
+    Scenario: Trying to add a new exchange rate with an zero ratio
+        When I want to add a new exchange rate
+        And I choose "US Dollar" as the source currency
+        And I choose "British Pound" as the target currency
+        And I specify its ratio as 0
+        And I try to add it
+        Then I should be notified that the ratio must be greater than zero
+        And the exchange rate between "US Dollar" and "British Pound" should not be added
+
+    @api @ui
     Scenario: Trying to add a new exchange rate with same target currency as source
         When I want to add a new exchange rate
         And I specify its ratio as 1.23

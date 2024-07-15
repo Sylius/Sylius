@@ -9,7 +9,7 @@ Feature: Product option unique code validation
         And the store has a product option "T-Shirt size" with a code "t_shirt_size"
         And I am logged in as an administrator
 
-    @ui @api
+    @api @ui
     Scenario: Trying to add product option with a taken code
         When I want to create a new product option
         And I name it "T-Shirt color" in "English (United States)"

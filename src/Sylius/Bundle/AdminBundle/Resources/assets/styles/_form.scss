@@ -38,3 +38,7 @@ textarea.form-control {
     border-left-width: 2px;
     border-left-color: #ff0017;
 }
+
+.form-select:disabled {
+    color: var(--tblr-gray-500);
+}

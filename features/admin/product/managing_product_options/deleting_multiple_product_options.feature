@@ -10,7 +10,7 @@ Feature: Deleting multiple product options
         And the store has also a product option "T-Shirt brand"
         And I am logged in as an administrator
 
-    @ui @mink:chromedriver @no-api
+    @no-api @ui @mink:chromedriver
     Scenario: Deleting multiple product options at once
         When I browse product options
         And I check the "T-Shirt size" product option

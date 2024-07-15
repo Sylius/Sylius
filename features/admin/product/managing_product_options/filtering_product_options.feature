@@ -11,14 +11,14 @@ Feature: Filtering product options
         And I am logged in as an administrator
         And I am browsing product options
 
-    @ui @todo-api
+    @todo-api @ui
     Scenario: Filtering product options by name
         When I search for product options with "T-Shirt"
         Then I should see 2 product options in the list
         And the product option "T-Shirt size" should be in the registry
         And the product option "T-Shirt color" should be in the registry
 
-    @ui @todo-api
+    @todo-api @ui
     Scenario: Filtering product options by code
         When I search for product options with "xyz"
         Then I should see 2 product options in the list

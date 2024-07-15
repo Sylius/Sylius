@@ -32,7 +32,7 @@ final class AttributesFormElement extends BaseFormElement implements AttributesF
     {
         $this->changeTab();
         $this->selectAttributeToBeAdded($attributeName);
-        $this->clickButton('Add');
+        $this->getElement('attribute_add_button')->click();
 
         $this->waitForFormUpdate();
     }
@@ -40,7 +40,8 @@ final class AttributesFormElement extends BaseFormElement implements AttributesF
     public function addSelectedAttributes(): void
     {
         $this->changeTab();
-        $this->clickButton('Add');
+        $this->getElement('attribute_add_button')->click();
+
         $this->waitForFormUpdate();
     }
 
@@ -131,9 +132,7 @@ final class AttributesFormElement extends BaseFormElement implements AttributesF
 
     protected function getDefinedElements(): array
     {
-        return array_merge(
-            parent::getDefinedElements(),
-            [
+        return array_merge(parent::getDefinedElements(), [
             'attribute_add_button' => '[data-test-attribute-add-button]',
             'attribute_autocomplete' => '[data-test-attribute-autocomplete] input[name="product_attributes"]',
             'attribute_delete_button' => '[data-test-attribute-delete-button="%attribute_name%"]',
@@ -141,8 +140,7 @@ final class AttributesFormElement extends BaseFormElement implements AttributesF
             'attribute_tab' => '[data-test-attribute-tab="%name%"]',
             'attribute_value' => '[data-test-attribute-value][data-test-locale-code="%locale_code%"][data-test-attribute-name="%attribute_name%"]',
             'side_navigation_tab' => '[data-test-side-navigation-tab="%name%"]',
-        ],
-        );
+        ]);
     }
 
     private function selectAttributeToBeAdded(string $attributeName): void
@@ -160,11 +158,6 @@ final class AttributesFormElement extends BaseFormElement implements AttributesF
         if (!$attributesTab->hasClass('active')) {
             $attributesTab->click();
         }
-    }
-
-    private function clickButton(string $locator): void
-    {
-        $this->getElement('attribute_add_button')->click();
     }
 
     private function changeTab(): void

@@ -142,17 +142,15 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
 
     protected function getDefinedElements(): array
     {
-        return array_merge(
-            parent::getDefinedElements(),
-            [
-                'code' => '[data-test-code]',
-                'enabled' => '[data-test-enabled]',
-                'field_shipping_category' => '[name="sylius_admin_product[variant][shippingCategory]"]',
-                'field_shipping_required' => '[name="sylius_admin_product[variant][shippingRequired]"]',
-                'product_translation_accordion' => '[data-test-product-translations-accordion="%localeCode%"]',
-                'show_product_button' => '[data-test-view-in-store]',
-                'side_navigation_tab' => '[data-test-side-navigation-tab="%name%"]',
-            ],
-        );
+        return array_merge(parent::getDefinedElements(), [
+            'code' => '[data-test-code]',
+            'enabled' => '[data-test-enabled]',
+            'field_shipping_category' => '[name="sylius_admin_product[variant][shippingCategory]"]',
+            'field_shipping_required' => '[name="sylius_admin_product[variant][shippingRequired]"]',
+            'product_translation_accordion' => '[data-test-product-translations-accordion="%localeCode%"]',
+            'show_product_button' => '[data-test-view-in-store]',
+            'side_navigation_tab' => '[data-test-side-navigation-tab="%name%"]',
+            'tracked' => '[name="sylius_admin_product[variant][tracked]"]',
+        ]);
     }
 }

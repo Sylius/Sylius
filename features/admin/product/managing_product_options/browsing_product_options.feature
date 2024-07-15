@@ -4,7 +4,7 @@ Feature: Browsing product options
     As an Administrator
     I want to be able to browse product options
 
-    @ui @api
+    @api @ui
     Scenario: Browsing defined product options
         Given I am logged in as an administrator
         And the store has a product option "T-Shirt size" with a code "t_shirt_size"
