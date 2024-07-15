@@ -29,11 +29,6 @@
             <tag name="api_platform.data_persister" />
         </service>
 
-        <service id="Sylius\Bundle\ApiBundle\DataPersister\ShippingMethodDataPersister">
-            <argument type="service" id="api_platform.doctrine.orm.data_persister" />
-            <tag name="api_platform.data_persister" />
-        </service>
-
         <service id="Sylius\Bundle\ApiBundle\DataPersister\PaymentMethodDataPersister">
             <argument type="service" id="api_platform.doctrine.orm.data_persister" />
             <tag name="api_platform.data_persister" />
