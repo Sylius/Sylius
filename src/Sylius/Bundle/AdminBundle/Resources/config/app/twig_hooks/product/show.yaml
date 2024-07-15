@@ -25,16 +25,36 @@ twig_hooks:
                 template: '@SyliusAdmin/product/show/content/page_body/taxonomy.html.twig'
             associations:
                 template: '@SyliusAdmin/product/show/content/page_body/associations.html.twig'
+            options:
+                template: '@SyliusAdmin/product/show/content/page_body/options.html.twig'
             attributes:
                 template: '@SyliusAdmin/product/show/content/page_body/attributes.html.twig'
             media:
                 template: '@SyliusAdmin/product/show/content/page_body/media.html.twig'
+                
+        'sylius_admin.product.show.content.page_body.attributes#head':
+            translatable_head:
+                template: '@SyliusAdmin/product/show/content/page_body/attributes/translatable/head/name.html.twig'
+            non_translatable_head:
+                template: '@SyliusAdmin/product/show/content/page_body/attributes/non_translatable/head/name.html.twig'
             
-        'sylius_admin.product.show.content.page_body.attributes':
+        'sylius_admin.product.show.content.page_body.attributes#body':
+            translatable_body:
+                template: '@SyliusAdmin/product/show/content/page_body/attributes/translatable.html.twig'
+            non_translatable_body:
+                template: '@SyliusAdmin/product/show/content/page_body/attributes/non_translatable.html.twig'
+        
+        'sylius_admin.product.show.content.page_body.attributes.translatable':
             name:
-                template: '@SyliusAdmin/product/show/content/page_body/attributes/name.html.twig'
+                template: '@SyliusAdmin/product/show/content/page_body/attributes/translatable/body/name.html.twig'
             value:
-                template: '@SyliusAdmin/product/show/content/page_body/attributes/value.html.twig'
+                template: '@SyliusAdmin/product/show/content/page_body/attributes/translatable/body/value.html.twig'
+                
+        'sylius_admin.product.show.content.page_body.attributes.non_translatable':
+            name:
+                template: '@SyliusAdmin/product/show/content/page_body/attributes/non_translatable/body/name.html.twig'
+            value:
+                template: '@SyliusAdmin/product/show/content/page_body/attributes/non_translatable/body/value.html.twig'
 
         'sylius_admin.product.show.content.page_body.translations':
             product_name:
