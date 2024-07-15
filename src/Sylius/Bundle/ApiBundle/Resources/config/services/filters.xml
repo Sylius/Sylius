@@ -40,12 +40,19 @@
 <!--            <tag name="api_platform.filter" />-->
 <!--        </service>-->
 
-<!--        <service id="sylius.api.archived_shipping_methods_filter" parent="api_platform.doctrine.orm.exists_filter" public="true">-->
-<!--            <argument type="collection">-->
-<!--                <argument key="archivedAt">false</argument>-->
-<!--            </argument>-->
-<!--            <tag name="api_platform.filter" />-->
-<!--        </service>-->
+        <service id="sylius_api.exists_filter.shipping_method" parent="api_platform.doctrine.orm.exists_filter" public="true">
+            <argument type="collection">
+                <argument key="archivedAt">false</argument>
+            </argument>
+            <tag name="api_platform.filter" />
+        </service>
+
+        <service id="sylius_api.order_filter.shipping_method" parent="api_platform.doctrine.orm.order_filter" public="true">
+            <argument type="collection">
+                <argument key="code" />
+            </argument>
+            <tag name="api_platform.filter" />
+        </service>
 
         <service id="sylius.api.product_association_filter" parent="api_platform.doctrine.orm.search_filter" public="true">
             <argument type="collection">
@@ -177,13 +184,6 @@
             </argument>
             <tag name="api_platform.filter" />
         </service>
-
-<!--        <service id="sylius.api.shipping_method_order_filter" parent="api_platform.doctrine.orm.order_filter" public="true">-->
-<!--            <argument type="collection">-->
-<!--                <argument key="code" />-->
-<!--            </argument>-->
-<!--            <tag name="api_platform.filter" />-->
-<!--        </service>-->
 
 <!--        <service id="sylius.api.payment_method_order_filter" parent="api_platform.doctrine.orm.order_filter" public="true">-->
 <!--            <argument type="collection">-->

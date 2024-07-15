@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Sylius Sp. z o.o.
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<resources
+    xmlns="https://api-platform.com/schema/metadata/resources-3.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="https://api-platform.com/schema/metadata/resources-3.0 https://api-platform.com/schema/metadata/resources-3.0.xsd"
+>
+    <resource class="Sylius\Component\Core\Model\ShippingMethod">
+        <operations>
+            <operation class="ApiPlatform\Metadata\GetCollection" uriTemplate="/admin/shipping-methods">
+                <normalizationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius:admin:shipping_method:index</value>
+                            </values>
+                        </value>
+                    </values>
+                </normalizationContext>
+                <filters>
+                    <filter>sylius_api.exists_filter.shipping_method</filter>
+                    <filter>sylius_api.order_filter.shipping_method</filter>
+                    <filter>sylius.api.translation_order_and_locale_filter</filter>
+                </filters>
+            </operation>
+
+            <operation class="ApiPlatform\Metadata\Get"  uriTemplate="/admin/shipping-methods/{code}">
+                <normalizationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius:admin:shipping_method:show</value>
+                            </values>
+                        </value>
+                    </values>
+                </normalizationContext>
+            </operation>
+
+            <operation class="ApiPlatform\Metadata\Post" uriTemplate="/admin/shipping-methods" >
+                <validationContext>
+                    <values>
+                        <value name="groups">sylius_api.shipping_method_configuration_groups_generator</value>
+                    </values>
+                </validationContext>
+                <denormalizationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius:admin:shipping_method:create</value>
+                            </values>
+                        </value>
+                    </values>
+                </denormalizationContext>
+                <normalizationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius:admin:shipping_method:show</value>
+                            </values>
+                        </value>
+                    </values>
+                </normalizationContext>
+                <openapiContext>
+                    <values>
+                        <value name="description">
+Example configuration for `total_weight_greater_than_or_equal` rule type:
+
+```
+{
+    "type": "total_weight_greater_than_or_equal",
+    "configuration": {
+        "weight": int
+    }
+}
+```
+
+Example configuration for `order_total_greater_than_or_equal` rule type:
+
+```
+{
+    "type": "order_total_greater_than_or_equal",
+    "configuration": {
+        "channel-code": [
+            "amount": int,
+        ]
+    }
+}
+```
+
+Example configuration for `flat_rate` shipping charges calculator:
+
+```
+"shippingChargesCalculator": "flat_rate",
+"shippingChargesCalculatorConfiguration": {
+    "channel-code": [
+        "amount": int,
+    ]
+}
+```
+                        </value>
+                    </values>
+                </openapiContext>
+            </operation>
+
+            <operation class="ApiPlatform\Metadata\Put" uriTemplate="/admin/shipping-methods/{code}">
+                <validationContext>
+                    <values>
+                        <value name="groups">sylius_api.shipping_method_configuration_groups_generator</value>
+                    </values>
+                </validationContext>
+                <denormalizationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius:admin:shipping_method:update</value>
+                            </values>
+                        </value>
+                    </values>
+                </denormalizationContext>
+                <normalizationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius:admin:shipping_method:show</value>
+                            </values>
+                        </value>
+                    </values>
+                </normalizationContext>
+                <openapiContext>
+                    <values>
+                        <value name="description">
+Example configuration for `total_weight_greater_than_or_equal` rule type:
+
+```
+{
+    "type": "total_weight_greater_than_or_equal",
+    "configuration": {
+        "weight": int
+    }
+}
+```
+
+Example configuration for `order_total_greater_than_or_equal` rule type:
+
+```
+{
+    "type": "order_total_greater_than_or_equal",
+    "configuration": {
+        "channel-code": [
+            "amount": int,
+        ]
+    }
+}
+```
+
+Example configuration for `flat_rate` shipping charges calculator:
+
+```
+"shippingChargesCalculator": "flat_rate",
+"shippingChargesCalculatorConfiguration": {
+    "channel-code": [
+        "amount": int,
+    ]
+}
+```
+                        </value>
+                    </values>
+                </openapiContext>
+            </operation>
+
+            <operation
+                class="ApiPlatform\Metadata\Patch"
+                uriTemplate="/admin/shipping-methods/{code}/archive"
+                input="false"
+                controller="Sylius\Bundle\ApiBundle\Applicator\ArchivingShippingMethodApplicatorInterface::archive"
+            >
+                <normalizationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius:admin:shipping_method:show</value>
+                            </values>
+                        </value>
+                    </values>
+                </normalizationContext>
+                <openapiContext>
+                    <values>
+                        <value name="summary">Archives Shipping Method.</value>
+                    </values>
+                </openapiContext>
+            </operation>
+
+            <operation
+                class="ApiPlatform\Metadata\Patch"
+                uriTemplate="/admin/shipping-methods/{code}/restore"
+                input="false"
+                controller="Sylius\Bundle\ApiBundle\Applicator\ArchivingShippingMethodApplicatorInterface::restore"
+            >
+                <normalizationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius:admin:shipping_method:show</value>
+                            </values>
+                        </value>
+                    </values>
+                </normalizationContext>
+                <openapiContext>
+                    <values>
+                        <value name="summary">Restores archived Shipping Method.</value>
+                    </values>
+                </openapiContext>
+            </operation>
+
+            <operation
+                class="ApiPlatform\Metadata\Delete"
+                uriTemplate="/admin/shipping-methods/{code}"
+                processor="sylius_api.state_processor.admin.shipping_method.remove"
+            />
+        </operations>
+    </resource>
+</resources>

@@ -23,17 +23,6 @@
         </attribute>
 
         <itemOperations>
-            <itemOperation name="admin_get">
-                <attribute name="method">GET</attribute>
-                <attribute name="path">/admin/shipping-methods/{code}</attribute>
-                <attribute name="normalization_context">
-                    <attribute name="groups">
-                        <attribute>admin:shipping_method:show</attribute>
-                        <attribute>sylius:admin:shipping_method:show</attribute>
-                    </attribute>
-                </attribute>
-            </itemOperation>
-
             <itemOperation name="shop_get">
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/shop/shipping-methods/{code}</attribute>
@@ -44,116 +33,9 @@
                     </attribute>
                 </attribute>
             </itemOperation>
-
-            <itemOperation name="admin_put">
-                <attribute name="method">PUT</attribute>
-                <attribute name="path">/admin/shipping-methods/{code}</attribute>
-                <attribute name="denormalization_context">
-                    <attribute name="groups">
-                        <attribute>admin:shipping_method:update</attribute>
-                        <attribute>sylius:admin:shipping_method:update</attribute>
-                    </attribute>
-                </attribute>
-                <attribute name="normalization_context">
-                    <attribute name="groups">
-                        <attribute>admin:shipping_method:show</attribute>
-                        <attribute>sylius:admin:shipping_method:show</attribute>
-                    </attribute>
-                </attribute>
-                <attribute name="openapi_context">
-                    <attribute name="description">
-Example configuration for `total_weight_greater_than_or_equal` rule type:
-
-```
-{
-    "type": "total_weight_greater_than_or_equal",
-    "configuration": {
-        "weight": int
-    }
-}
-```
-
-Example configuration for `order_total_greater_than_or_equal` rule type:
-
-```
-{
-    "type": "order_total_greater_than_or_equal",
-    "configuration": {
-        "channel-code": [
-            "amount": int,
-        ]
-    }
-}
-```
-
-Example configuration for `flat_rate` shipping charges calculator:
-
-```
-"shippingChargesCalculator": "flat_rate",
-"shippingChargesCalculatorConfiguration": {
-    "channel-code": [
-        "amount": int,
-    ]
-}
-```
-                    </attribute>
-                </attribute>
-            </itemOperation>
-
-            <itemOperation name="admin_delete">
-                <attribute name="method">DELETE</attribute>
-                <attribute name="path">/admin/shipping-methods/{code}</attribute>
-            </itemOperation>
-
-            <itemOperation name="admin_archive">
-                <attribute name="method">PATCH</attribute>
-                <attribute name="path">/admin/shipping-methods/{code}/archive</attribute>
-                <attribute name="input">false</attribute>
-                <attribute name="controller">Sylius\Bundle\ApiBundle\Applicator\ArchivingShippingMethodApplicatorInterface::archive</attribute>
-                <attribute name="openapi_context">
-                    <attribute name="summary">Archives Shipping Method.</attribute>
-                </attribute>
-                <attribute name="normalization_context">
-                    <attribute name="groups">
-                        <attribute>admin:shipping_method:show</attribute>
-                        <attribute>sylius:admin:shipping_method:show</attribute>
-                    </attribute>
-                </attribute>
-            </itemOperation>
-
-            <itemOperation name="admin_restore">
-                <attribute name="method">PATCH</attribute>
-                <attribute name="path">/admin/shipping-methods/{code}/restore</attribute>
-                <attribute name="input">false</attribute>
-                <attribute name="controller">Sylius\Bundle\ApiBundle\Applicator\ArchivingShippingMethodApplicatorInterface::restore</attribute>
-                <attribute name="openapi_context">
-                    <attribute name="summary">Restores archived Shipping Method.</attribute>
-                </attribute>
-                <attribute name="normalization_context">
-                    <attribute name="groups">
-                        <attribute>admin:shipping_method:show</attribute>
-                        <attribute>sylius:admin:shipping_method:show</attribute>
-                    </attribute>
-                </attribute>
-            </itemOperation>
         </itemOperations>
 
         <collectionOperations>
-            <collectionOperation name="admin_get">
-                <attribute name="method">GET</attribute>
-                <attribute name="path">/admin/shipping-methods</attribute>
-                <attribute name="filters">
-                    <attribute>sylius.api.archived_shipping_methods_filter</attribute>
-                    <attribute>sylius.api.shipping_method_order_filter</attribute>
-                    <attribute>Sylius\Bundle\ApiBundle\Filter\Doctrine\TranslationOrderNameAndLocaleFilter</attribute>
-                </attribute>
-                <attribute name="normalization_context">
-                    <attribute name="groups">
-                        <attribute>admin:shipping_method:index</attribute>
-                        <attribute>sylius:admin:shipping_method:index</attribute>
-                    </attribute>
-                </attribute>
-            </collectionOperation>
             <collectionOperation name="shop_get">
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/shop/shipping-methods</attribute>
@@ -165,61 +47,6 @@ Example configuration for `flat_rate` shipping charges calculator:
                     <attribute name="groups">
                         <attribute>shop:shipping_method:index</attribute>
                         <attribute>sylius:shop:shipping_method:index</attribute>
-                    </attribute>
-                </attribute>
-            </collectionOperation>
-
-            <collectionOperation name="admin_post">
-                <attribute name="method">POST</attribute>
-                <attribute name="path">/admin/shipping-methods</attribute>
-                <attribute name="denormalization_context">
-                    <attribute name="groups">
-                        <attribute>admin:shipping_method:create</attribute>
-                        <attribute>sylius:admin:shipping_method:create</attribute>
-                    </attribute>
-                </attribute>
-                <attribute name="normalization_context">
-                    <attribute name="groups">
-                        <attribute>admin:shipping_method:show</attribute>
-                        <attribute>sylius:admin:shipping_method:show</attribute>
-                    </attribute>
-                </attribute>
-                <attribute name="openapi_context">
-                    <attribute name="description">
-Example configuration for `total_weight_greater_than_or_equal` rule type:
-
-```
-{
-    "type": "total_weight_greater_than_or_equal",
-    "configuration": {
-        "weight": int
-    }
-}
-```
-
-Example configuration for `order_total_greater_than_or_equal` rule type:
-
-```
-{
-    "type": "order_total_greater_than_or_equal",
-    "configuration": {
-        "channel-code": [
-            "amount": int,
-        ]
-    }
-}
-```
-
-Example configuration for `flat_rate` shipping charges calculator:
-
-```
-"shippingChargesCalculator": "flat_rate",
-"shippingChargesCalculatorConfiguration": {
-    "channel-code": [
-        "amount": int,
-    ]
-}
-```
                     </attribute>
                 </attribute>
             </collectionOperation>
