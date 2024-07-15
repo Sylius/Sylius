@@ -6,7 +6,10 @@ twig_hooks:
 
         'sylius_admin.order.show.content.header':
             breadcrumbs:
-                template: '@SyliusAdmin/order/show/content/header/breadcrumbs.html.twig'
+                template: '@SyliusAdmin/shared/crud/show/content/header/breadcrumbs.html.twig'
+                configuration:
+                    rendered_field_prefix: '#'
+                    rendered_field: number
 
         'sylius_admin.order.show.content.header.title_block':
             title:
