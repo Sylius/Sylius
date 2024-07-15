@@ -51,14 +51,6 @@
             <tag name="api_platform.item_data_provider" priority="10" />
         </service>
 
-        <service id="Sylius\Bundle\ApiBundle\DataProvider\ShippingMethodsCollectionDataProvider">
-            <argument type="service" id="sylius.repository.shipment" />
-            <argument type="service" id="sylius.repository.shipping_method" />
-            <argument type="service" id="sylius.shipping_methods_resolver" />
-            <argument type="service" id="Sylius\Component\Channel\Context\ChannelContextInterface" />
-            <tag name="api_platform.collection_data_provider" priority="10" />
-        </service>
-
         <service id="Sylius\Bundle\ApiBundle\DataProvider\PaymentMethodsCollectionDataProvider">
             <argument type="service" id="sylius.repository.order" />
             <argument type="service" id="sylius.repository.payment_method" />
