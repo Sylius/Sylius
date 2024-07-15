@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 
-namespace spec\Sylius\Bundle\ApiBundle\StateProvider\Shop;
+namespace spec\Sylius\Bundle\ApiBundle\StateProvider\Shop\Channel;
 
 use ApiPlatform\Metadata\GetCollection;
 use ApiPlatform\Metadata\Operation;
@@ -22,15 +22,17 @@ use Sylius\Bundle\CoreBundle\SectionResolver\SectionProviderInterface;
 use Sylius\Component\Core\Model\Channel;
 use Sylius\Component\Core\Model\ChannelInterface;
 
-final class ChannelProviderSpec extends ObjectBehavior
+final class CollectionProviderSpec extends ObjectBehavior
 {
     function let(SectionProviderInterface $sectionProvider): void
     {
         $this->beConstructedWith($sectionProvider);
     }
 
-    function it_provides_channel(ChannelInterface $channel, SectionProviderInterface $sectionProvider): void
-    {
+    function it_provides_channel(
+        ChannelInterface $channel,
+        SectionProviderInterface $sectionProvider,
+    ): void {
         $operation = new GetCollection(class: Channel::class);
         $sectionProvider->getSection()->willReturn(new ShopApiSection());
 
@@ -40,23 +42,48 @@ final class ChannelProviderSpec extends ObjectBehavior
         ;
     }
 
-    function it_throws_an_exception_when_operation_is_not_get_collection(Operation $operation, SectionProviderInterface $sectionProvider): void
-    {
-        $operation->getClass()->willReturn(Channel::class);
-        $sectionProvider->getSection()->willReturn(new ShopApiSection());
+    function it_throws_an_exception_when_operation_class_is_not_channel(
+        Operation $operation,
+    ): void {
+        $operation->getClass()->willReturn(\stdClass::class);
 
-        $this->shouldThrow(\RuntimeException::class)
+        $this->shouldThrow(\InvalidArgumentException::class)
             ->during('provide', [$operation])
         ;
     }
 
-    function it_throws_exception_if_operation_is_not_shop(ChannelInterface $channel, SectionProviderInterface $sectionProvider): void
-    {
+    function it_throws_an_exception_when_operation_is_not_get_collection(
+        Operation $operation,
+        SectionProviderInterface $sectionProvider,
+    ): void {
+        $operation->getClass()->willReturn(Channel::class);
+        $sectionProvider->getSection()->willReturn(new ShopApiSection());
+
+        $this->shouldThrow(\InvalidArgumentException::class)
+            ->during('provide', [$operation])
+        ;
+    }
+
+    function it_throws_an_exception_when_operation_is_not_in_shop_api_section(
+        ChannelInterface $channel,
+        SectionProviderInterface $sectionProvider,
+    ): void {
         $operation = new GetCollection(class: Channel::class);
         $sectionProvider->getSection()->willReturn(new AdminApiSection());
 
-        $this->shouldThrow(\RuntimeException::class)
+        $this->shouldThrow(\InvalidArgumentException::class)
             ->during('provide', [$operation, [], ['sylius_api_channel' => $channel]])
+        ;
+    }
+
+    function it_throws_an_exception_when_context_does_not_have_channel(
+        SectionProviderInterface $sectionProvider,
+    ): void {
+        $operation = new GetCollection(class: Channel::class);
+        $sectionProvider->getSection()->willReturn(new ShopApiSection());
+
+        $this->shouldThrow(\InvalidArgumentException::class)
+            ->during('provide', [$operation, [], []])
         ;
     }
 }

@@ -64,7 +64,7 @@
                 </normalizationContext>
             </operation>
 
-            <operation class="ApiPlatform\Metadata\GetCollection" provider="sylius_api.state_provider.shop.channel" uriTemplate="/shop/channels">
+            <operation class="ApiPlatform\Metadata\GetCollection" provider="sylius_api.state_provider.shop.channel.collection" uriTemplate="/shop/channels">
                 <normalizationContext>
                     <values>
                         <value name="groups">
