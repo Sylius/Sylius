@@ -9,45 +9,35 @@
     <div class="card-body" {{ sylius_test_html_attribute('attributes') }}>
         <div class="bg-white mb-3">
             <div class="accordion" id="attribute-translations">
-                {% set setLocales = [] %}
-                {% for attribute in product.attributes %}
-                    {% if attribute.localeCode not in setLocales %}
-                        {% set locale = attribute.localeCode %}
-                            <div class="accordion-item">
-                                <h2 class="accordion-header">
-                                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#translation-{% if attribute.localeCode %}{{ locale }}{% else %}non-translatable{% endif%}" aria-expanded="{% if loop.first %}true{% else %}false{% endif %}" aria-controls="translation-{% if attribute.localeCode %}{{ locale }}{% else %}non-translatable{% endif %}">
-                                        {% if attribute.localeCode %}
-                                                <span class="flag flag-sm flag-country-{{ locale|lower|split('_')|last }} me-3"></span>
-                                            {% else %}
-                                                <span class="flag flag-sm flag-country-eu me-3"></span>
+                {% set set_locale_codes = [] %}
+                {% if product.attributes|length == 0 %}
+                    {{ 'sylius.ui.there_are_no_attributes_configured'|trans }}
+                {% else %}
+                    {% for attribute in product.attributes %}
+                        {% if attribute.localeCode not in set_locale_codes %}
+                            {% set locale_code = attribute.localeCode %}
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header">
+                                        {% if locale_code %}
+                                            {% hook 'attributes#head' with { locale_code, loop } %}
+                                        {% else %}
+                                            {% hook 'attributes#head' with { loop } %}
                                         {% endif %}
-                                        {% if attribute.localeCode %}{{ locale|sylius_locale_name }}{% endif %}
-                                    </button>
-                                </h2>
-                                <div id="translation-{% if attribute.localeCode %}{{ locale }}{% else %}non-translatable{% endif %}" class="accordion-collapse collapse" data-bs-parent="#attribute-translations">
-                                    <div class="accordion-body bg-gray-400">
-                                        <div class="py-3 px-5">
-                                            <div class="card mb-3">
-                                                <div class="card-header">
-                                                    <div class="card-title">{{ 'sylius.ui.content'|trans }}</div>
-                                                </div>
-                                                <div class="card-body">
-                                                    <div class="row" {% if attribute.localeCode %}{{ sylius_test_html_attribute('attribute-with-locale', '%s'|format(locale)) }}{% else %}{{ sylius_test_html_attribute('attribute-without-locale')}}{% endif%} >
-                                                        {% if attribute.localeCode %}
-                                                            {% hook 'attributes' with { 'attributes': product.attributes, locale } %}
-                                                        {% else %}
-                                                            {% hook 'attributes' with { 'attributes': product.attributes } %}
-                                                        {% endif %}
-                                                    </div>
-                                                </div>
-                                            </div>
+                                    </h2>
+                                    {% if locale_code %}
+                                        <div {{ sylius_test_html_attribute('translatable-attribute') }}>
+                                            {% hook 'attributes#body' with { 'attributes': product.attributes, locale_code } %}
                                         </div>
-                                    </div>
+                                    {% else %}
+                                        <div {{ sylius_test_html_attribute('non-translatable-attribute') }}>
+                                            {% hook 'attributes#body' with { 'attributes': product.attributes } %}
+                                        </div>
+                                    {% endif %}
                                 </div>
-                            </div>
-                            {%  set setLocales = setLocales|merge([locale]) %}
-                    {% endif %}
-                {% endfor %}
+                                {%  set set_locale_codes = set_locale_codes|merge([locale_code]) %}
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
             </div>
         </div>
     </div>

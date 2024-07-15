@@ -4,20 +4,35 @@
 <div class="accordion" id="media" >
         <div class="accordion-item">
             <h1 class="accordion-header">
-                <button class="accordion-button me-3" type="button" data-bs-toggle="collapse" data-bs-target="#media-body" aria-expanded="false" aria-controls="media" >
+                <button class="accordion-button me-3" type="button" data-bs-toggle="collapse" data-bs-target="#media-body" aria-expanded="true" aria-controls="media" >
                     {{ 'sylius.ui.media'|trans }}
                 </button>
             </h1>
             <div id="media-body" class="accordion-collapse collapse" data-bs-parent="#media">
                 <div class="accordion-body">
-                {% if product.images|length >= 1 %}
-                    {% for image in product.images %}
-                        {% set path = image.path is not null ? image.path|imagine_filter('sylius_admin_product_small_thumbnail') : asset('build/admin/images/200x200.png', 'admin') %}
-                        <a href="{{ image.path|imagine_filter('sylius_admin_product_original') }}" data-lightbox="sylius-product-image">
-                            <img {{ sylius_test_html_attribute('media') }} src="{{ path }}" data-large-thumbnail="{{ image.path|imagine_filter('sylius_admin_product_large_thumbnail') }}" alt="{{ product.name }}" />
-                        </a>
-                    {% endfor %}
-                {% endif %}
+                    {% if product.images|length >= 1 %}
+                        <div {{ sylius_test_html_attribute('media') }}>
+                            {% for image in product.images %}
+                                {% set path = image.path is not null ? image.path|imagine_filter('sylius_admin_product_small_thumbnail') : asset('build/admin/images/200x200.png', 'admin') %}
+                                    {% if product.isConfigurable() and product.variants|length > 0 %}
+                                        {% if product.getVariantSelectionMethod() == 'match' %}
+                                            {% for variant in image.productVariants %}
+                                                <div data-variant-options="{% for option in variant.optionValues %}{{ option.code }} {% endfor %}"></div>
+                                            {% endfor %}
+                                        {% else %}
+                                            {% for variant in image.productVariants %}
+                                                <div data-variant-code="{{ variant.code }}"></div>
+                                            {% endfor %}
+                                        {% endif %}
+                                    {% endif %}
+                                    <a href="{{ image.path|imagine_filter('sylius_admin_product_original') }}" data-lightbox="sylius-product-image">
+                                        <img src="{{ path }}" data-large-thumbnail="{{ image.path|imagine_filter('sylius_admin_product_large_thumbnail') }}" alt="{{ product.name }}" />
+                                    </a>
+                            {% endfor %}
+                        </div>
+                        {% else %}
+                            {{ 'sylius.ui.there_are_no_images_for_this_product'|trans }}
+                    {% endif %}
             </div>
             </div>
         </div>

@@ -4,10 +4,9 @@
     {% if channel_pricing.appliedPromotions|length > 0 %}
         <div class="row">
             {% for promotion in channel_pricing.appliedPromotions %}
-                <a class="mb-1"
+                <a class="mb-1 applied-promotion"
                     {{ sylius_test_html_attribute('applied-promotion') }}
-                    href="{{ path('sylius_admin_catalog_promotion_show', {'id': promotion.id}) }}"
-                    class="applied-promotion"
+                   href="{{ path('sylius_admin_catalog_promotion_show', {'id': promotion.id}) }}"
                 >
                     {{ promotion.name }}
                 </a>
