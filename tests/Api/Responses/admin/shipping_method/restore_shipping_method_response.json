@@ -1,6 +1,6 @@
 {
     "@context": "\/api\/v2\/contexts\/ShippingMethod",
-    "@id": "\/api\/v2\/admin\/shipping-methods\/UPS",
+    "@id": "\/api\/v2\/admin\/shipping-methods\/UPS\/restore",
     "@type": "ShippingMethod",
     "id": "@integer@",
     "code": "UPS",
@@ -9,6 +9,7 @@
     "enabled": true,
     "createdAt": @date@,
     "updatedAt": @date@,
+    "archivedAt": null,
     "shippingChargesCalculatorConfiguration": {
         "WEB": {
             "amount": 500
@@ -25,7 +26,7 @@
     "rules": [],
     "translations": {
         "en_US": {
-            "@id": "\/api\/v2\/admin\/shipping-method-translations\/@integer@",
+            "@id": "\/api\/v2\/admin\/shipping-methods\/UPS\/translations\/en_US",
             "@type": "ShippingMethodTranslation",
             "id": @integer@,
             "name": "UPS",

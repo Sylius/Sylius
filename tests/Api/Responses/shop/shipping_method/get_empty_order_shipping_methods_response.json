@@ -1,30 +1,7 @@
 {
     "@context": "\/api\/v2\/contexts\/ShippingMethod",
-    "@id": "\/api\/v2\/shop\/shipping-methods",
+    "@id": "\/api\/v2\/shop\/orders\/@string@\/shipments\/@integer@\/methods",
     "@type": "hydra:Collection",
     "hydra:member": [],
-    "hydra:totalItems": 0,
-    "hydra:view": {
-        "@id": "\/api\/v2\/shop\/shipping-methods?shipmentId=@integer@&tokenValue=@string@",
-        "@type": "hydra:PartialCollectionView"
-    },
-    "hydra:search": {
-        "@type": "hydra:IriTemplate",
-        "hydra:template": "\/api\/v2\/shop\/shipping-methods{?shipmentId,tokenValue}",
-        "hydra:variableRepresentation": "BasicRepresentation",
-        "hydra:mapping": [
-            {
-                "@type": "IriTemplateMapping",
-                "variable": "shipmentId",
-                "property": null,
-                "required": false
-            },
-            {
-                "@type": "IriTemplateMapping",
-                "variable": "tokenValue",
-                "property": null,
-                "required": false
-            }
-        ]
-    }
+    "hydra:totalItems": 0
 }

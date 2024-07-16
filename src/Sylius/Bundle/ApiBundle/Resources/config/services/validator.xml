@@ -16,8 +16,6 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
 >
     <services>
-<!--        <defaults public="true" />-->
-
         <service id="Sylius\Bundle\ApiBundle\Validator\Constraints\UniqueShopUserEmailValidator">
             <argument type="service" id="sylius.canonicalizer" />
             <argument type="service" id="sylius.repository.shop_user" />
@@ -198,6 +196,15 @@
         <service id="sylius.validator.order_address_requirement" class="Sylius\Bundle\ApiBundle\Validator\Constraints\OrderAddressRequirementValidator">
             <argument type="service" id="sylius.repository.order" />
             <tag name="validator.constraint_validator" alias="sylius_order_address_requirement_validator" />
+        </service>
+
+        <service
+            id="sylius_api.shipping_method_configuration_groups_generator"
+            class="Sylius\Bundle\ShippingBundle\Validator\GroupsGenerator\ShippingMethodConfigurationGroupsGenerator"
+            decorates="Sylius\Bundle\ShippingBundle\Validator\GroupsGenerator\ShippingMethodConfigurationGroupsGenerator"
+        >
+            <argument>%sylius.shipping.shipping_method_calculator.validation_groups%</argument>
+            <tag name="api_platform.validation_groups_generator" />
         </service>
     </services>
 </container>

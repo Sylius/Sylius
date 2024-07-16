@@ -876,41 +876,6 @@ parameters:
 			path: src/Sylius/Bundle/ApiBundle/DataPersister/PromotionDataPersister.php
 
 		-
-			message: "#^Method Sylius\\\\Bundle\\\\ApiBundle\\\\DataPersister\\\\ShippingMethodDataPersister\\:\\:persist\\(\\) has parameter \\$context with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Sylius/Bundle/ApiBundle/DataPersister/ShippingMethodDataPersister.php
-
-		-
-			message: "#^Method Sylius\\\\Bundle\\\\ApiBundle\\\\DataPersister\\\\ShippingMethodDataPersister\\:\\:persist\\(\\) has parameter \\$data with no type specified\\.$#"
-			count: 1
-			path: src/Sylius/Bundle/ApiBundle/DataPersister/ShippingMethodDataPersister.php
-
-		-
-			message: "#^Method Sylius\\\\Bundle\\\\ApiBundle\\\\DataPersister\\\\ShippingMethodDataPersister\\:\\:remove\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Sylius/Bundle/ApiBundle/DataPersister/ShippingMethodDataPersister.php
-
-		-
-			message: "#^Method Sylius\\\\Bundle\\\\ApiBundle\\\\DataPersister\\\\ShippingMethodDataPersister\\:\\:remove\\(\\) has parameter \\$context with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Sylius/Bundle/ApiBundle/DataPersister/ShippingMethodDataPersister.php
-
-		-
-			message: "#^Method Sylius\\\\Bundle\\\\ApiBundle\\\\DataPersister\\\\ShippingMethodDataPersister\\:\\:remove\\(\\) has parameter \\$data with no type specified\\.$#"
-			count: 1
-			path: src/Sylius/Bundle/ApiBundle/DataPersister/ShippingMethodDataPersister.php
-
-		-
-			message: "#^Method Sylius\\\\Bundle\\\\ApiBundle\\\\DataPersister\\\\ShippingMethodDataPersister\\:\\:supports\\(\\) has parameter \\$context with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Sylius/Bundle/ApiBundle/DataPersister/ShippingMethodDataPersister.php
-
-		-
-			message: "#^Method Sylius\\\\Bundle\\\\ApiBundle\\\\DataPersister\\\\ShippingMethodDataPersister\\:\\:supports\\(\\) has parameter \\$data with no type specified\\.$#"
-			count: 1
-			path: src/Sylius/Bundle/ApiBundle/DataPersister/ShippingMethodDataPersister.php
-
-		-
 			message: "#^Method Sylius\\\\Bundle\\\\ApiBundle\\\\DataPersister\\\\TranslatableDataPersister\\:\\:supports\\(\\) has parameter \\$data with no type specified\\.$#"
 			count: 1
 			path: src/Sylius/Bundle/ApiBundle/DataPersister/TranslatableDataPersister.php
@@ -1189,36 +1154,6 @@ parameters:
 			message: "#^Method Sylius\\\\Bundle\\\\ApiBundle\\\\DataProvider\\\\ShipmentItemDataProvider\\:\\:supports\\(\\) has parameter \\$context with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Sylius/Bundle/ApiBundle/DataProvider/ShipmentItemDataProvider.php
-
-		-
-			message: "#^Method Sylius\\\\Bundle\\\\ApiBundle\\\\DataProvider\\\\ShippingMethodsCollectionDataProvider\\:\\:__construct\\(\\) has parameter \\$shipmentRepository with generic interface Sylius\\\\Component\\\\Core\\\\Repository\\\\ShipmentRepositoryInterface but does not specify its types\\: T$#"
-			count: 1
-			path: src/Sylius/Bundle/ApiBundle/DataProvider/ShippingMethodsCollectionDataProvider.php
-
-		-
-			message: "#^Method Sylius\\\\Bundle\\\\ApiBundle\\\\DataProvider\\\\ShippingMethodsCollectionDataProvider\\:\\:__construct\\(\\) has parameter \\$shippingMethodRepository with generic interface Sylius\\\\Component\\\\Core\\\\Repository\\\\ShippingMethodRepositoryInterface but does not specify its types\\: T$#"
-			count: 1
-			path: src/Sylius/Bundle/ApiBundle/DataProvider/ShippingMethodsCollectionDataProvider.php
-
-		-
-			message: "#^Method Sylius\\\\Bundle\\\\ApiBundle\\\\DataProvider\\\\ShippingMethodsCollectionDataProvider\\:\\:getCollection\\(\\) has parameter \\$context with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Sylius/Bundle/ApiBundle/DataProvider/ShippingMethodsCollectionDataProvider.php
-
-		-
-			message: "#^Method Sylius\\\\Bundle\\\\ApiBundle\\\\DataProvider\\\\ShippingMethodsCollectionDataProvider\\:\\:getCollection\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Sylius/Bundle/ApiBundle/DataProvider/ShippingMethodsCollectionDataProvider.php
-
-		-
-			message: "#^Method Sylius\\\\Bundle\\\\ApiBundle\\\\DataProvider\\\\ShippingMethodsCollectionDataProvider\\:\\:isShopGetCollectionOperation\\(\\) has parameter \\$context with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Sylius/Bundle/ApiBundle/DataProvider/ShippingMethodsCollectionDataProvider.php
-
-		-
-			message: "#^Method Sylius\\\\Bundle\\\\ApiBundle\\\\DataProvider\\\\ShippingMethodsCollectionDataProvider\\:\\:supports\\(\\) has parameter \\$context with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Sylius/Bundle/ApiBundle/DataProvider/ShippingMethodsCollectionDataProvider.php
 
 		-
 			message: "#^Method Sylius\\\\Bundle\\\\ApiBundle\\\\DataProvider\\\\VerifyCustomerAccountItemDataProvider\\:\\:getItem\\(\\) has parameter \\$context with no value type specified in iterable type array\\.$#"
@@ -1659,21 +1594,6 @@ parameters:
 			message: "#^PHPDoc tag @var for variable \\$appliedPromotions contains generic class Doctrine\\\\Common\\\\Collections\\\\ArrayCollection but does not specify its types\\: TKey, T$#"
 			count: 1
 			path: src/Sylius/Bundle/ApiBundle/Serializer/ProductVariantNormalizer.php
-
-		-
-			message: "#^Method Sylius\\\\Bundle\\\\ApiBundle\\\\Serializer\\\\ShippingMethodNormalizer\\:\\:__construct\\(\\) has parameter \\$orderRepository with generic interface Sylius\\\\Component\\\\Core\\\\Repository\\\\OrderRepositoryInterface but does not specify its types\\: T$#"
-			count: 1
-			path: src/Sylius/Bundle/ApiBundle/Serializer/ShippingMethodNormalizer.php
-
-		-
-			message: "#^Method Sylius\\\\Bundle\\\\ApiBundle\\\\Serializer\\\\ShippingMethodNormalizer\\:\\:__construct\\(\\) has parameter \\$shipmentRepository with generic interface Sylius\\\\Component\\\\Core\\\\Repository\\\\ShipmentRepositoryInterface but does not specify its types\\: T$#"
-			count: 1
-			path: src/Sylius/Bundle/ApiBundle/Serializer/ShippingMethodNormalizer.php
-
-		-
-			message: "#^Method Sylius\\\\Bundle\\\\ApiBundle\\\\Serializer\\\\ShippingMethodNormalizer\\:\\:isShopGetCollectionOperation\\(\\) has parameter \\$context with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Sylius/Bundle/ApiBundle/Serializer/ShippingMethodNormalizer.php
 
 		-
 			message: "#^Method Sylius\\\\Bundle\\\\ApiBundle\\\\Serializer\\\\TranslatableDenormalizer\\:\\:hasDefaultTranslation\\(\\) has parameter \\$translations with no value type specified in iterable type array\\.$#"

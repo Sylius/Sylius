@@ -13,6 +13,7 @@
             "enabled": true,
             "createdAt": @date@,
             "updatedAt": @date@,
+            "archivedAt": null,
             "shippingChargesCalculatorConfiguration": {
                 "WEB": {
                     "amount": 500
@@ -28,7 +29,7 @@
             ],
             "translations": {
                 "en_US": {
-                    "@id": "\/api\/v2\/admin\/shipping-method-translations\/@integer@",
+                    "@id": "\/api\/v2\/admin\/shipping-methods\/UPS\/translations\/en_US",
                     "@type": "ShippingMethodTranslation",
                     "id": @integer@,
                     "name": "UPS",
@@ -46,6 +47,7 @@
             "enabled": true,
             "createdAt": @date@,
             "updatedAt": @date@,
+            "archivedAt": null,
             "shippingChargesCalculatorConfiguration": {
                 "WEB": {
                     "amount": 1000
@@ -61,16 +63,50 @@
             ],
             "translations": {
                 "en_US": {
-                    "@id": "\/api\/v2\/admin\/shipping-method-translations\/@integer@",
+                    "@id": "\/api\/v2\/admin\/shipping-methods\/DHL\/translations\/en_US",
                     "@type": "ShippingMethodTranslation",
                     "id": @integer@,
                     "name": "DHL",
                     "description": @string@
                 }
             }
+        },
+        {
+            "@id": "\/api\/v2\/admin\/shipping-methods\/FEDEX",
+            "@type": "ShippingMethod",
+            "id": "@integer@",
+            "code": "FEDEX",
+            "position": 2,
+            "shippingChargesCalculator": "flat_rate",
+            "enabled": true,
+            "createdAt": @date@,
+            "updatedAt": @date@,
+            "archivedAt": null,
+            "shippingChargesCalculatorConfiguration": {
+                "WEB": {
+                    "amount": 1000
+                },
+                "MOBILE": {
+                    "amount": 2000
+                }
+            },
+            "rules": [],
+            "zone": "\/api\/v2\/admin\/zones\/WORLD",
+            "channels": [
+                "\/api\/v2\/admin\/channels\/MOBILE"
+            ],
+            "translations": {
+                "en_US": {
+                    "@id": "\/api\/v2\/admin\/shipping-methods\/FEDEX\/translations\/en_US",
+                    "@type": "ShippingMethodTranslation",
+                    "id": @integer@,
+                    "name": "FedEx",
+                    "description": @string@
+                }
+            }
         }
     ],
-    "hydra:totalItems": 2,
+    "hydra:totalItems": 3,
     "hydra:search": {
         "@type": "hydra:IriTemplate",
         "hydra:template": "\/api\/v2\/admin\/shipping-methods{?exists[archivedAt],order[code],order[translation.name],localeCode for order[translation.name]}",
