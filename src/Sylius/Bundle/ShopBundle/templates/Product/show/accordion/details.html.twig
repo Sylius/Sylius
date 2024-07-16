@@ -1,4 +1,5 @@
 {% embed '@SyliusShop/shared/accordion/accordion_item.html.twig' with { accordion_item_id: 'details' } %}
+    {% set product = hookable_metadata.context.product %}
 
     {% block accordion_item_title %}
         {{ 'sylius.ui.details'|trans }}

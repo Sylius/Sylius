@@ -4,21 +4,21 @@
 
 {% block content %}
     <div class="container mt-4 mb-5">
-        {{ sylius_template_event('sylius.shop.product.show.header', _context) }}
+        {% hook 'sylius_shop.product.show.header' with { product } %}
 
         <div class="row g-lg-5 g-xl-6 mb-6">
             <div class="col-12 col-lg-4 order-lg-1">
                 <div class="sticky-top pt-2" style="top: 3rem;" {{ sylius_test_html_attribute('product-box') }}>
-                    {{ sylius_template_event('sylius.shop.product.show.summary', _context) }}
+                    {% hook 'sylius_shop.product.show.summary' with { product } %}
                 </div>
             </div>
             <div class="col-12 col-lg-8">
-                {{ sylius_template_event('sylius.shop.product.show.main', _context) }}
+                {% hook 'sylius_shop.product.show.main' with { product, configuration } %}
             </div>
         </div>
 
         <div>
-            {{ sylius_template_event('sylius.shop.product.show.footer', _context) }}
+            {% hook 'sylius_shop.product.show.footer' with { product } %}
         </div>
     </div>
 {% endblock %}

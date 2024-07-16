@@ -1,4 +1,6 @@
-{% set variant = product|sylius_resolve_variant %}
+{% set variant = hookable_metadata.context.product|sylius_resolve_variant %}
+{% set appliedPromotions = hookable_metadata.context.appliedPromotions|default({}) %}
+{% set withDescription = hookable_metadata.context.withDescription|default({}) %}
 
 {% if variant is not null %}
     {% set appliedPromotions = variant.getChannelPricingForChannel(sylius.channel).getAppliedPromotions() %}

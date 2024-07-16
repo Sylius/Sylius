@@ -1,3 +1,6 @@
+{% set product = hookable_metadata.context.product %}
+{% set configuration = hookable_metadata.context.configuration %}
+
 {% if product.attributes|length > 0 %}
     {% embed '@SyliusShop/shared/accordion/accordion_item.html.twig' with { accordion_item_id: 'attributes' } %}
 

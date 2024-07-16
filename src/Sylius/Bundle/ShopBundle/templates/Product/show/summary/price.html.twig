@@ -1,6 +1,6 @@
 {% import "@SyliusShop/shared/macro/money.html.twig" as money %}
 
-{% set variant = product|sylius_resolve_variant %}
+{% set variant = hookable_metadata.context.product|sylius_resolve_variant %}
 {% set hasDiscount = variant|sylius_has_discount({'channel': sylius.channel}) %}
 {% set days = sylius.channel.channelPriceHistoryConfig.lowestPriceForDiscountedProductsCheckingPeriod %}
 {% set hasLowestPrice = variant|sylius_has_lowest_price({'channel': sylius.channel}) %}

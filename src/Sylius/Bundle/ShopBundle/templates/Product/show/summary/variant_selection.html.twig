@@ -1,5 +1,7 @@
 {% import "@SyliusShop/shared/macro/money.html.twig" as money %}
 
+{% set product = hookable_metadata.context.product %}
+
 {% if product.isConfigurable() and product.getVariantSelectionMethod() == 'match' and not product.enabledVariants.empty() %}
     {% set pricing = sylius_product_variants_map(product, {'channel': sylius.channel}) %}
     {% set days = sylius.channel.channelPriceHistoryConfig.lowestPriceForDiscountedProductsCheckingPeriod %}

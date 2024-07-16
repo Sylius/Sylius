@@ -1,6 +1,7 @@
 {% from '@SyliusShop/shared/breadcrumbs.html.twig' import breadcrumbs as breadcrumbs %}
 
 {% set items = [] %}
+{% set product = hookable_metadata.context.product %}
 
 {% set items = items|merge([{ path: path('sylius_shop_homepage'), label: 'sylius.ui.home'|trans }]) %}
 

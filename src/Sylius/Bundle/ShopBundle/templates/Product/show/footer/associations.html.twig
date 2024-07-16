@@ -1,3 +1,5 @@
+{% set product = hookable_metadata.context.product %}
+
 {% for association in product.associations %}
     {{ render(url('sylius_shop_partial_product_association_show', {'productId': product.id, 'id': association.id, 'template': '@SyliusShop/Product/show/footer/association.html.twig'})) }}
 {% else %}

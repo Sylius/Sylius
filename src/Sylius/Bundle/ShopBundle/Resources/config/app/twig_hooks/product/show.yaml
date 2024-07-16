@@ -1,0 +1,35 @@
+twig_hooks:
+    hooks:
+        'sylius_shop.product.show.header':
+            breadcrumbs:
+                template: '@SyliusShop/Product/show/header/breadcrumbs.html.twig'
+
+        'sylius_shop.product.show.summary':
+            header:
+                template: "@SyliusShop/Product/show/summary/header.html.twig"
+            price:
+                template: "@SyliusShop/Product/show/summary/price.html.twig"
+            catalog_promotions:
+                template: "@SyliusShop/Product/show/summary/catalog_promotions.html.twig"
+            variant_selection:
+                template: "@SyliusShop/Product/show/summary/variant_selection.html.twig"
+            short_description:
+                template: "@SyliusShop/Product/show/summary/short_description.html.twig"
+
+        'sylius_shop.product.show.main':
+            images:
+                template: "@SyliusShop/Product/show/main/images.html.twig"
+            tabs:
+                template: "@SyliusShop/Product/show/main/accordion.html.twig"
+
+        'sylius_shop.product.show.main.accordion':
+            details:
+                template: "@SyliusShop/Product/show/accordion/details.html.twig"
+            attributes:
+                template: "@SyliusShop/Product/show/accordion/attributes.html.twig"
+            reviews:
+                template: "@SyliusShop/Product/show/accordion/reviews.html.twig"
+
+        'sylius_shop.product.show.footer':
+            associations:
+                template: "@SyliusShop/Product/show/footer/associations.html.twig"

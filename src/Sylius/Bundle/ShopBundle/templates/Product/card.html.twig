@@ -20,7 +20,7 @@
             {% set originalPrice = money.calculateOriginalPrice(variant) %}
             {% set appliedPromotions = variant.getAppliedPromotionsForChannel(sylius.channel) %}
 
-            {% include '@SyliusShop/Product/show/summary/catalog_promotions.html.twig' with {'appliedPromotions': appliedPromotions, 'withDescription': false} %}
+            {% hook 'sylius_shop.product.show.summary.catalog_promotions' with { product, appliedPromotions, 'withDescription': false } %}
 
             {% if variant|sylius_has_discount({'channel': sylius.channel}) %}
                 <span {{ sylius_test_html_attribute('product-original-price') }}><del>{{ originalPrice }}</del></span>
