@@ -39,7 +39,7 @@ twig_hooks:
                 priority: 300
             cancel:
                 template: '@SyliusAdmin/shared/crud/common/content/header/title_block/actions/cancel.html.twig'
-                priority: 200
+                priority: -200
             update:
                 template: '@SyliusAdmin/shared/crud/common/content/header/title_block/actions/update.html.twig'
-                priority: 100
+                priority: -300
