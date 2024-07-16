@@ -112,9 +112,7 @@ class UpdateConfigurableProductPage extends BaseUpdatePage implements UpdateConf
         return $this->getElement('code');
     }
 
-    /**
-     * @return string[]
-     */
+    /** @return array<string, string> */
     protected function getDefinedElements(): array
     {
         return array_merge(

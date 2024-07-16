@@ -19,14 +19,10 @@ use Sylius\Component\Core\Model\ProductVariantInterface;
 
 interface ShowPageInterface extends SymfonyPageInterface, ShowToEditPageSwitcherInterface
 {
-    /**
-     * @return string[]
-     */
+    /** @return string[] */
     public function getAppliedCatalogPromotionsLinks(string $variantName, string $channelName): array;
 
-    /**
-     * @return string[]
-     */
+    /** @return string[] */
     public function getAppliedCatalogPromotionsNames(string $variantName, string $channelName): array;
 
     public function getName(): string;

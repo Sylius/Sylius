@@ -24,6 +24,12 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
 {
     use NavigationTrait;
 
+    /**
+     * @template TKey of array-key
+     * @template TValue
+     *
+     * @param array<TKey, TValue>|\ArrayAccess<TKey, TValue> $minkParameters
+     */
     public function __construct(Session $session, $minkParameters, RouterInterface $router)
     {
         parent::__construct($session, $minkParameters, $router);
@@ -44,9 +50,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
         return $this->getElement('show_product_button')->hasClass('disabled');
     }
 
-    /**
-     * @return string[]
-     */
+    /** @return string[] */
     public function getAppliedCatalogPromotionsLinks(string $variantName, string $channelName): array
     {
         $appliedPromotions = $this->getAppliedCatalogPromotions($variantName, $channelName);
@@ -54,9 +58,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
         return array_map(fn (NodeElement $element): string => $element->getAttribute('href'), $appliedPromotions);
     }
 
-    /**
-     * @return string[]
-     */
+    /** @return string[] */
     public function getAppliedCatalogPromotionsNames(string $variantName, string $channelName): array
     {
         $appliedPromotions = $this->getAppliedCatalogPromotions($variantName, $channelName);
@@ -94,9 +96,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
         $this->getElement('edit_variant_button', ['%variant_code%' => $variant->getCode()])->click();
     }
 
-    /**
-     * @return array<string, string>
-     */
+    /** @return array<string, string> */
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
@@ -109,9 +109,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
         ]);
     }
 
-    /**
-     * @return NodeElement[]
-     */
+    /** @return NodeElement[] */
     private function getAppliedCatalogPromotions(string $variantName, string $channelName): array
     {
         $pricingElement = $this->getPricingRow($variantName, $channelName);

@@ -104,6 +104,7 @@ class IndexPage extends CrudIndexPage implements IndexPageInterface
         return (int) $this->getElement('page_number')->getText();
     }
 
+    /** @return array<string, string> */
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [

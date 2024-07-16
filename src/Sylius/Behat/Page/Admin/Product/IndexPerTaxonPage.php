@@ -58,6 +58,7 @@ class IndexPerTaxonPage extends CrudIndexPage implements IndexPerTaxonPageInterf
         $this->getDocument()->waitFor(5, fn () => null === $saveConfigurationButton->find('css', '.loading'));
     }
 
+    /** @return array<string, string> */
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
