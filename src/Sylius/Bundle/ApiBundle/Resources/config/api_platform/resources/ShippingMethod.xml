@@ -236,7 +236,6 @@ Example configuration for `flat_rate` shipping charges calculator:
             <operation
                 class="ApiPlatform\Metadata\GetCollection"
                 uriTemplate="/shop/shipping-methods"
-                provider="sylius_api.state_provider.shop.shipping_method.collection"
                 paginationEnabled="false"
             >
                 <normalizationContext>
@@ -250,7 +249,7 @@ Example configuration for `flat_rate` shipping charges calculator:
                 </normalizationContext>
             </operation>
 
-            <operation class="ApiPlatform\Metadata\Get"  uriTemplate="/shop/shipping-methods/{code}">
+            <operation class="ApiPlatform\Metadata\Get" uriTemplate="/shop/shipping-methods/{code}">
                 <normalizationContext>
                     <values>
                         <value name="groups">

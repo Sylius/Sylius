@@ -20,6 +20,7 @@ use Sylius\Component\Core\Model\Address;
 use Sylius\Component\Core\Model\ShipmentInterface;
 use Sylius\Component\Core\Repository\ShipmentRepositoryInterface;
 use Sylius\Tests\Api\JsonApiTestCase;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Messenger\MessageBusInterface;
 
 final class ShippingMethodsTest extends JsonApiTestCase
@@ -39,6 +40,26 @@ final class ShippingMethodsTest extends JsonApiTestCase
         $this->requestGet('/api/v2/shop/shipping-methods');
 
         $this->assertResponse($this->client->getResponse(), 'shop/shipping_method/get_shipping_methods_response');
+    }
+
+    /** @test */
+    public function it_gets_a_shipping_method(): void
+    {
+        $this->loadFixturesFromFiles(['channel.yaml', 'cart.yaml', 'country.yaml', 'shipping_method.yaml']);
+
+        $this->requestGet('/api/v2/shop/shipping-methods/UPS');
+
+        $this->assertResponse($this->client->getResponse(), 'shop/shipping_method/get_shipping_method_response');
+    }
+
+    /** @test */
+    public function it_does_not_get_a_shipping_method_not_available_in_given_channel(): void
+    {
+        $this->loadFixturesFromFiles(['channel.yaml', 'cart.yaml', 'country.yaml', 'shipping_method.yaml']);
+
+        $this->requestGet('/api/v2/shop/shipping-methods/FEDEX');
+
+        $this->assertResponseCode($this->client->getResponse(), Response::HTTP_NOT_FOUND);
     }
 
     /** @test */
@@ -62,7 +83,7 @@ final class ShippingMethodsTest extends JsonApiTestCase
     }
 
     /** @test */
-    public function it_returns_list_of_available_shipping_methods_of_assigned_cart_for_visitor(): void
+    public function it_gets_available_shipping_methods_of_assigned_cart_for_visitor(): void
     {
         $this->loadFixturesFromFiles([
             'authentication/shop_user.yaml',
@@ -86,7 +107,7 @@ final class ShippingMethodsTest extends JsonApiTestCase
     }
 
     /** @test */
-    public function it_returns_list_of_available_shipping_methods_of_assigned_cart_for_other_users_if_shipment_id_and_cart_provided(): void
+    public function it_gets_available_shipping_methods_of_assigned_cart_for_other_users_if_shipment_id_and_cart_provided(): void
     {
         $this->loadFixturesFromFiles([
             'authentication/shop_user.yaml',
@@ -114,7 +135,7 @@ final class ShippingMethodsTest extends JsonApiTestCase
     }
 
     /** @test */
-    public function it_returns_empty_list_of_available_shipping_methods_for_not_existent_shipment(): void
+    public function it_gets_empty_list_of_available_shipping_methods_for_not_existent_shipment(): void
     {
         $this->loadFixturesFromFiles([
             'authentication/shop_user.yaml',
@@ -130,7 +151,7 @@ final class ShippingMethodsTest extends JsonApiTestCase
     }
 
     /** @test */
-    public function it_returns_empty_list_of_available_shipping_methods_for_not_existent_order(): void
+    public function it_gets_empty_list_of_available_shipping_methods_for_not_existent_order(): void
     {
         $this->loadFixturesFromFiles([
             'authentication/shop_user.yaml',
