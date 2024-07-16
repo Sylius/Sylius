@@ -17,15 +17,15 @@ use Sylius\Behat\Element\Admin\Crud\FormElementInterface as BaseFormElementInter
 
 interface FormElementInterface extends BaseFormElementInterface
 {
+    public function specifyCode(string $code): void;
+
     public function isCodeDisabled(): bool;
 
-    public function nameItIn(string $name, string $localeCode): void;
+    public function setName(string $name, string $localeCode): void;
 
-    public function isThereOptionValue(string $optionValue): bool;
+    public function addOptionValue(string $code, string $localeCode, string $value): void;
 
-    public function addOptionValue(string $code, string $value): void;
+    public function hasOptionValue(string $optionValue, string $localeCode): bool;
 
-    public function removeOptionValue(string $optionValue): void;
-
-    public function specifyCode(string $code): void;
+    public function applyToAllOptionValues(string $code, string $localeCode): void;
 }

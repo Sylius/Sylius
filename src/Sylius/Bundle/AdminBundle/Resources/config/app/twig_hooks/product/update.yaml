@@ -12,11 +12,22 @@ twig_hooks:
                     isSimple: '@=_context.resource.isSimple()'
                 configuration:
                     method: 'PUT'
-        
+
         'sylius_admin.product.update.content.header.title_block.actions':
             view_in_store:
                 template: '@SyliusAdmin/product/common/header/title_block/actions/view_in_store.html.twig'
-                priority: 32
+                priority: 0
+            manage_variants:
+                template: '@SyliusAdmin/product/common/header/title_block/actions/manage_variants.html.twig'
+                priority: 300
+
+        'sylius_admin.product.update.content.header.title_block.actions.manage_variants':
+            list:
+                template: '@SyliusAdmin/product/common/header/title_block/actions/manage_variants/list.html.twig'
+            create:
+                template: '@SyliusAdmin/product/common/header/title_block/actions/manage_variants/create.html.twig'
+            generate:
+                template: '@SyliusAdmin/product/common/header/title_block/actions/manage_variants/generate.html.twig'
 
         'sylius_admin.product.update.content.form':
             side_navigation:

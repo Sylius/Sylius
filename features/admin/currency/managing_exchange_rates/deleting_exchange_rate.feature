@@ -8,7 +8,7 @@ Feature: Deleting exchange rates
         Given the store has currency "US Dollar", "British Pound" and "Bhutanese Ngultrum"
         And I am logged in as an administrator
 
-    @todo @ui @api
+    @api @ui
     Scenario: Deleted exchange rate should disappear from the list
         Given the exchange rate of "US Dollar" to "British Pound" is 1.2
         When I delete the exchange rate between "US Dollar" and "British Pound"

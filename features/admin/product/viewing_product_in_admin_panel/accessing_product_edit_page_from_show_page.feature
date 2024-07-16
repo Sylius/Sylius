@@ -1,5 +1,5 @@
 @accessing_edit_page_from_product_show_page
-Feature: Accessing to product edit page from show page
+Feature: Accessing the product edit page from the show page
     In order to edit product in the simple way
     As an Administrator
     I want to be able to move to edit page directly from product show page
@@ -14,12 +14,12 @@ Feature: Accessing to product edit page from show page
 
     @todo @ui @no-api
     Scenario: Accessing to product edit page from product show page
-        When I access the "Iron Shield" product
+        When I access the "Iron shield" product
         And I go to edit page
         Then I should be on "Iron shield" product edit page
 
     @todo @ui @no-api
     Scenario: Accessing to variant edit page from product show page
-        When I access the "Iron Shield" product
+        When I access the "Iron shield" product
         And I go to edit page of "Iron shield - very big" variant
         Then I should be on "Iron shield - very big" variant edit page

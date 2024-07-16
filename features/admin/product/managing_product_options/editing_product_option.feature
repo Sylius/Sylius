@@ -9,7 +9,7 @@ Feature: Editing product options
         And the store has a product option "T-Shirt size" with a code "t_shirt_size"
         And I am logged in as an administrator
 
-    @ui @todo-api
+    @todo-api @ui
     Scenario: Renaming the product option
         Given this product option has the "S" option value with code "t_shirt_size_s"
         And this product option has also the "M" option value with code "t_shirt_size_m"

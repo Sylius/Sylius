@@ -8,12 +8,12 @@ Feature: Adding a new exchange rate
         Given the store has currency "US Dollar" and "British Pound"
         And I am logged in as an administrator
 
-    @todo @ui @api
+    @api @ui
     Scenario: Adding a new exchange rate
         When I want to add a new exchange rate
-        And I specify its ratio as 1.20
+        And I specify its ratio as 1.2
         And I choose "US Dollar" as the source currency
         And I choose "British Pound" as the target currency
         And I add it
         Then I should be notified that it has been successfully created
-        And the exchange rate with ratio 1.20000 between "US Dollar" and "British Pound" should appear in the store
+        And the exchange rate with ratio 1.2 between "US Dollar" and "British Pound" should appear in the store

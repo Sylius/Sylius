@@ -43,7 +43,7 @@ final class LocaleType extends AbstractType
             $locale = $event->getData();
             if ($locale instanceof LocaleInterface && null !== $locale->getCode()) {
                 $options['disabled'] = true;
-                $options['choices'] = [ Locales::getName($locale->getCode()) => $locale->getCode()];
+                $options['choices'] = [Locales::getName($locale->getCode()) => $locale->getCode()];
             } else {
                 $options['choices'] = array_flip($this->getAvailableLocales());
             }

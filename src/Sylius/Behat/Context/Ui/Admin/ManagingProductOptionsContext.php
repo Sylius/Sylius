@@ -18,24 +18,26 @@ use Sylius\Behat\Element\Admin\ProductOption\FormElementInterface;
 use Sylius\Behat\Page\Admin\Crud\CreatePageInterface;
 use Sylius\Behat\Page\Admin\Crud\IndexPageInterface;
 use Sylius\Behat\Page\Admin\Crud\UpdatePageInterface;
+use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Product\Model\ProductOptionInterface;
 use Webmozart\Assert\Assert;
 
-final class ManagingProductOptionsContext implements Context
+final readonly class ManagingProductOptionsContext implements Context
 {
     public function __construct(
         private IndexPageInterface $indexPage,
         private CreatePageInterface $createPage,
         private UpdatePageInterface $updatePage,
         private FormElementInterface $formElement,
+        private SharedStorageInterface $sharedStorage,
     ) {
     }
 
     /**
      * @When I want to create a new product option
      */
-    public function iWantToCreateANewProductOption()
+    public function iWantToCreateANewProductOption(): void
     {
         $this->createPage->open();
     }
@@ -43,9 +45,11 @@ final class ManagingProductOptionsContext implements Context
     /**
      * @When I want to modify the :productOption product option
      */
-    public function iWantToModifyAProductOption(ProductOptionInterface $productOption)
+    public function iWantToModifyAProductOption(ProductOptionInterface $productOption): void
     {
-        $this->updatePage->open(['id' => $productOption->getId()]);
+        if (!$this->updatePage->isOpen(['id' => $productOption->getId()])) {
+            $this->updatePage->open(['id' => $productOption->getId()]);
+        }
     }
 
     /**
@@ -60,7 +64,7 @@ final class ManagingProductOptionsContext implements Context
      * @Given I am browsing product options
      * @When I browse product options
      */
-    public function iBrowseProductOptions()
+    public function iBrowseProductOptions(): void
     {
         $this->indexPage->open();
     }
@@ -69,7 +73,7 @@ final class ManagingProductOptionsContext implements Context
      * @When I add it
      * @When I try to add it
      */
-    public function iAddIt()
+    public function iAddIt(): void
     {
         $this->createPage->create();
     }
@@ -78,7 +82,7 @@ final class ManagingProductOptionsContext implements Context
      * @When I save my changes
      * @When I try to save my changes
      */
-    public function iSaveMyChanges()
+    public function iSaveMyChanges(): void
     {
         $this->updatePage->saveChanges();
     }
@@ -86,9 +90,9 @@ final class ManagingProductOptionsContext implements Context
     /**
      * @When I name it :name in :language
      */
-    public function iNameItInLanguage($name, $language)
+    public function iNameItInLanguage($name, $language): void
     {
-        $this->formElement->nameItIn($name, $language);
+        $this->formElement->setName($name, $language);
     }
 
     /**
@@ -97,13 +101,13 @@ final class ManagingProductOptionsContext implements Context
      */
     public function iRenameItToInLanguage(string $language, ?string $name = null): void
     {
-        $this->formElement->nameItIn($name ?? '', $language);
+        $this->formElement->setName($name ?? '', $language);
     }
 
     /**
      * @When I do not name it
      */
-    public function iDoNotNameIt()
+    public function iDoNotNameIt(): void
     {
         // Intentionally left blank to fulfill context expectation
     }
@@ -119,10 +123,19 @@ final class ManagingProductOptionsContext implements Context
 
     /**
      * @When I add the :value option value identified by :code
+     * @When I add the :value option value identified by :code in :localeCode
      */
-    public function iAddTheOptionValueWithCodeAndValue(string $value, string $code): void
+    public function iAddTheOptionValueWithCodeAndValue(string $value, string $code, string $localeCode = 'en_US'): void
     {
-        $this->formElement->addOptionValue($code, $value);
+        $this->formElement->addOptionValue($code, $localeCode, $value);
+    }
+
+    /**
+     * @When I apply the option value identified by :code in :localeCode to all option values.
+     */
+    public function iApplyToAllTheOptionValueIdentifiedBy(string $code, string $localeCode): void
+    {
+        $this->formElement->applyToAllOptionValues($code, $localeCode);
     }
 
     /**
@@ -130,7 +143,7 @@ final class ManagingProductOptionsContext implements Context
      */
     public function iDeleteTheOptionValueWithCodeAndValue(string $value): void
     {
-        $this->formElement->removeOptionValue($value);
+        // TODO: Implement deleting option value
     }
 
     /**
@@ -150,21 +163,22 @@ final class ManagingProductOptionsContext implements Context
     }
 
     /**
-     * @Then I should see the product option :productOptionName in the list
-     * @Then the product option :productOptionName should appear in the registry
-     * @Then the product option :productOptionName should be in the registry
+     * @Then I should see the product option :productOption in the list
+     * @Then the product option :productOption should appear in the registry
+     * @Then the product option :productOption should be in the registry
      */
-    public function theProductOptionShouldAppearInTheRegistry(string $productOptionName): void
+    public function theProductOptionShouldAppearInTheRegistry(ProductOptionInterface $productOption): void
     {
+        $this->sharedStorage->set('product_option', $productOption);
         $this->iBrowseProductOptions();
 
-        Assert::true($this->indexPage->isSingleResourceOnPage(['name' => $productOptionName]));
+        Assert::true($this->indexPage->isSingleResourceOnPage(['name' => $productOption->getName()]));
     }
 
     /**
      * @Then I should be notified that product option with this code already exists
      */
-    public function iShouldBeNotifiedThatProductOptionWithThisCodeAlreadyExists()
+    public function iShouldBeNotifiedThatProductOptionWithThisCodeAlreadyExists(): void
     {
         Assert::same($this->formElement->getValidationMessage('code'), 'The option with given code already exists.');
     }
@@ -172,7 +186,7 @@ final class ManagingProductOptionsContext implements Context
     /**
      * @Then there should still be only one product option with :element :value
      */
-    public function thereShouldStillBeOnlyOneProductOptionWith($element, $value)
+    public function thereShouldStillBeOnlyOneProductOptionWith(string $element, string $value): void
     {
         $this->iBrowseProductOptions();
 
@@ -182,15 +196,15 @@ final class ManagingProductOptionsContext implements Context
     /**
      * @Then I should be notified that :element is required
      */
-    public function iShouldBeNotifiedThatElementIsRequired($element)
+    public function iShouldBeNotifiedThatElementIsRequired(string $element): void
     {
-        Assert::same($this->formElement->getValidationMessage($element, ['%localeCode%' => 'en_US']), sprintf('Please enter option %s.', $element));
+        Assert::same($this->formElement->getValidationMessage($element, ['%locale_code%' => 'en_US']), sprintf('Please enter option %s.', $element));
     }
 
     /**
      * @Then the product option with :element :value should not be added
      */
-    public function theProductOptionWithElementValueShouldNotBeAdded($element, $value)
+    public function theProductOptionWithElementValueShouldNotBeAdded(string $element, string $value): void
     {
         $this->iBrowseProductOptions();
 
@@ -201,7 +215,7 @@ final class ManagingProductOptionsContext implements Context
      * @Then /^(this product option) should still be named "([^"]+)"$/
      * @Then /^(this product option) name should be "([^"]+)"$/
      */
-    public function thisProductOptionNameShouldStillBe(ProductOptionInterface $productOption, $productOptionName)
+    public function thisProductOptionNameShouldStillBe(ProductOptionInterface $productOption, string $productOptionName): void
     {
         $this->iBrowseProductOptions();
 
@@ -228,14 +242,6 @@ final class ManagingProductOptionsContext implements Context
     }
 
     /**
-     * @Then I should be notified that at least two option values are required
-     */
-    public function iShouldBeNotifiedThatAtLeastTwoOptionValuesAreRequired()
-    {
-        Assert::true($this->createPage->checkValidationMessageForOptionValues('Please add at least 2 option values.'));
-    }
-
-    /**
      * @Then I should see a single product option in the list
      * @Then I should see :amount product options in the list
      */
@@ -247,28 +253,36 @@ final class ManagingProductOptionsContext implements Context
     /**
      * @Then /^(this product option) should have the "([^"]*)" option value$/
      * @Then /^(product option "[^"]+") should have the "([^"]*)" option value$/
+     * @Then /^(this product option) should have the "([^"]*)" option value in ("([^"]+)" locale)$/
      */
-    public function thisProductOptionShouldHaveTheOptionValue(ProductOptionInterface $productOption, $optionValue)
-    {
+    public function thisProductOptionShouldHaveTheOptionValue(
+        ProductOptionInterface $productOption,
+        string $optionValue,
+        string $localeCode = 'en_US',
+    ): void {
         $this->iWantToModifyAProductOption($productOption);
 
-        Assert::true($this->formElement->isThereOptionValue($optionValue));
+        Assert::true($this->formElement->hasOptionValue($optionValue, $localeCode));
     }
 
     /**
      * @Then /^(this product option) should not have the "([^"]*)" option value$/
+     * @Then /^(this product option) should not have the "([^"]*)" option value in ("([^"]+)" locale)$/
      */
-    public function thisProductOptionShouldNotHaveTheOptionValue(ProductOptionInterface $productOption, string $optionValue): void
-    {
+    public function thisProductOptionShouldNotHaveTheOptionValue(
+        ProductOptionInterface $productOption,
+        string $optionValue,
+        string $localeCode = 'en_US',
+    ): void {
         $this->iWantToModifyAProductOption($productOption);
 
-        Assert::false($this->formElement->isThereOptionValue($optionValue));
+        Assert::false($this->formElement->hasOptionValue($optionValue, $localeCode));
     }
 
     /**
      * @Then the first product option in the list should have :field :value
      */
-    public function theFirstProductOptionInTheListShouldHave($field, $value)
+    public function theFirstProductOptionInTheListShouldHave(string $field, string $value): void
     {
         Assert::same($this->indexPage->getColumnFields($field)[0], $value);
     }
@@ -276,7 +290,7 @@ final class ManagingProductOptionsContext implements Context
     /**
      * @Then the last product option in the list should have :field :value
      */
-    public function theLastProductOptionInTheListShouldHave($field, $value)
+    public function theLastProductOptionInTheListShouldHave(string $field, string $value): void
     {
         $values = $this->indexPage->getColumnFields($field);
 
