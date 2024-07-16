@@ -11,7 +11,7 @@
 ) %}
 
 {% set rendered_field_prefix = hookable_metadata.configuration.rendered_field_prefix|default(null) %}
-{% set field_name = hookable_metadata.configuration.rendered_field|default(null) %}
+{% set field_name = hookable_metadata.configuration.rendered_field|default('') %}
 {% set rendered_field = rendered_field_prefix ~ (attribute(resource, field_name) is defined ? attribute(resource, field_name) : null) %}
 
 {% set resource_edit_name = rendered_field|default(resource.translations[app.locale].name|default(resource.code|default(resource.id))) %}
@@ -27,6 +27,6 @@
 {{ breadcrumbs.default([
     { name: 'sylius.ui.dashboard', url: path('sylius_admin_dashboard'), active: false },
     { name: resource_index, url: index_url, active: false },
-    { name: resource_edit, active: true },
+    resource_edit,
     { name: 'sylius.ui.edit'|trans, active: false }
 ]) }}
