@@ -5,9 +5,9 @@
 
 In effect from version: 2.0
 
-Related PRs: #16543
+Related PRs: #16567
 
-## Context and Problem Statement
+## Context and Problem Stratement
 
 Until version 2.0, we supported API Platform version 2, which utilized
 `DataProviders` to deliver data to the API. These `DataProviders` were all
@@ -17,8 +17,8 @@ and did not provide clear organization for individual resources.
 As a result, it became challenging to manage and maintain the codebase
 as the number of providers grew.
 
-With Sylius 2.0, the API Platform has been upgraded to version 3.0.
-One of the significant changes in API Platform 3.0 is the shift from 
+With Sylius 2.0, the API Platform has been upgraded to version 3.
+One of the significant changes in API Platform 3 is the shift from 
 `DataProviders` to `StateProviders`. This change necessitates a 
 reconsideration of how we organize and structure our data-providing
 classes to ensure clarity, maintainability, and scalability.
@@ -65,8 +65,7 @@ classes to ensure clarity, maintainability, and scalability.
 ## Decision Outcome
 
 Chosen option: `Separate StateProviders by sections and resources`,
-because it provides a clear and manageable way to customize form types
-for different contexts.
+because it provides a clear and manageable way to organize state providers.
 
 New Structure:
 
