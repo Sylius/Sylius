@@ -18,12 +18,17 @@
 >
     <resource class="Sylius\Component\Shipping\Model\ShippingMethodTranslation" uriTemplate="/admin/shipping-methods/{code}/translations/{localeCode}">
         <uriVariables>
-            <uriVariable parameterName="code" fromClass="Sylius\Component\Core\Model\ShippingMethod" fromProperty="translatable" />
+            <uriVariable parameterName="code" fromClass="Sylius\Component\Core\Model\ShippingMethod" fromProperty="translations" />
             <uriVariable parameterName="localeCode" fromClass="Sylius\Component\Shipping\Model\ShippingMethodTranslation" fromProperty="locale" />
         </uriVariables>
 
         <operations>
-            <operation class="ApiPlatform\Metadata\Get" />
+            <operation
+                class="ApiPlatform\Metadata\Get"
+                controller="ApiPlatform\Action\NotFoundAction"
+                read="false"
+                output="false"
+            />
         </operations>
     </resource>
 </resources>

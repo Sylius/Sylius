@@ -17,6 +17,7 @@ parameters:
         - "%sylius.security.new_api_route%/admin/promotion-actions/{id}"
         - "%sylius.security.new_api_route%/admin/promotion-rules/{id}"
         - "%sylius.security.new_api_route%/admin/shipping-method-rules/{id}"
+        - "%sylius.security.new_api_route%/admin/shipping-methods/{code}/translations/{localeCode}"
         - "%sylius.security.new_api_route%/admin/shop-users/{id}"
         - "%sylius.security.new_api_route%/shop/adjustments/{id}"
     sylius.security.new_api_route: "/api/v2"
