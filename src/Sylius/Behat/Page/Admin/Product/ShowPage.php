@@ -16,24 +16,22 @@ namespace Sylius\Behat\Page\Admin\Product;
 use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Session;
 use FriendsOfBehat\PageObjectExtension\Page\SymfonyPage;
-use Sylius\Behat\Context\Ui\Admin\Helper\ShowToEditPageSwitcherTrait;
+use Sylius\Behat\Context\Ui\Admin\Helper\NavigationTrait;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Symfony\Component\Routing\RouterInterface;
 
 class ShowPage extends SymfonyPage implements ShowPageInterface
 {
-    use ShowToEditPageSwitcherTrait;
+    use NavigationTrait;
 
     public function __construct(Session $session, $minkParameters, RouterInterface $router)
     {
         parent::__construct($session, $minkParameters, $router);
-
-        $this->defineResourceName();
     }
 
-    public function defineResourceName(): void
+    public function getResourceName(): string
     {
-        $this->resourceName = 'product';
+        return 'product';
     }
 
     public function isSimpleProductPage(): bool
