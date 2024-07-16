@@ -322,9 +322,7 @@ class AddressPage extends SymfonyPage implements AddressPageInterface
         ]);
     }
 
-    /**
-     * @return string[]
-     */
+    /** @return string[] */
     private function getOptionsFromSelect(NodeElement $element): array
     {
         return array_map(

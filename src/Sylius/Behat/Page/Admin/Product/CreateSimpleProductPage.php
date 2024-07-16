@@ -25,6 +25,12 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
 {
     use NavigationTrait;
 
+    /**
+     * @template TKey of array-key
+     * @template TValue
+     *
+     * @param array<TKey, TValue>|\ArrayAccess<TKey, TValue> $minkParameters
+     */
     public function __construct(
         Session $session,
         $minkParameters,
@@ -118,6 +124,7 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
         return parent::getElement($name, $parameters);
     }
 
+    /** @return array<string, string> */
     protected function getDefinedElements(): array
     {
         return array_merge(
