@@ -29,6 +29,7 @@
             <div class="card-header">
                 <ul class="nav nav-tabs card-header-tabs" data-bs-toggle="tabs" role="tablist">
                     {% for channel_code, channel_pricing in variant_form.channelPricings %}
+                        {% set channel_error_count = variant_form.channelPricings.vars.channels_errors_count[channel_code] %}
                         <li class="nav-item">
                             <a
                                 class="nav-link {% if loop.index0 == 0 %}active{% endif %}"
@@ -38,6 +39,9 @@
                                 {{ sylius_test_html_attribute('channel-tab', channel_code) }}
                             >
                                 {{ channel_pricing.vars.label }}
+                                {% if channel_error_count > 0 %}
+                                    <span class="text-white badge rounded-pill bg-danger ms-1">{{ channel_error_count }}</span>
+                                {% endif %}
                             </a>
                         </li>
                     {% endfor %}
