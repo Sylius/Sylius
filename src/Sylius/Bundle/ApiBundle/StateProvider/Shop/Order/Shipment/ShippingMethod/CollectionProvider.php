@@ -17,6 +17,7 @@ use ApiPlatform\Metadata\GetCollection;
 use ApiPlatform\Metadata\Operation;
 use ApiPlatform\State\ProviderInterface;
 use Sylius\Bundle\ApiBundle\SectionResolver\ShopApiSection;
+use Sylius\Bundle\ApiBundle\Serializer\ContextKeys;
 use Sylius\Bundle\CoreBundle\SectionResolver\SectionProviderInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ShipmentInterface;
@@ -44,7 +45,7 @@ final readonly class CollectionProvider implements ProviderInterface
         Assert::keyExists($uriVariables, 'shipmentId');
 
         /** @var ChannelInterface $channel */
-        $channel = $context['sylius_api_channel'];
+        $channel = $context[ContextKeys::CHANNEL];
 
         /** @var ShipmentInterface|null $shipment */
         $shipment = $this->shipmentRepository->findOneByOrderTokenAndChannel(

@@ -15,6 +15,7 @@ namespace Sylius\Bundle\ApiBundle\Serializer\Normalizer;
 
 use ApiPlatform\Metadata\HttpOperation;
 use Sylius\Bundle\ApiBundle\SectionResolver\ShopApiSection;
+use Sylius\Bundle\ApiBundle\Serializer\ContextKeys;
 use Sylius\Bundle\CoreBundle\SectionResolver\SectionProviderInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\OrderInterface;
@@ -60,7 +61,7 @@ final class ShippingMethodNormalizer implements NormalizerInterface, NormalizerA
         }
 
         /** @var ChannelInterface $channel */
-        $channel = $context['sylius_api_channel'];
+        $channel = $context[ContextKeys::CHANNEL];
 
         /** @var OrderInterface|null $cart */
         $cart = $this->orderRepository->findCartByTokenValueAndChannel($tokenValue, $channel);

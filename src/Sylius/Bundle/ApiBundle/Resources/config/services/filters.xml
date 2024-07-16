@@ -201,7 +201,7 @@
             <tag name="api_platform.filter" />
         </service>
 
-        <service id="sylius.api.translation_order_and_locale_filter" class="Sylius\Bundle\ApiBundle\Filter\Doctrine\TranslationOrderNameAndLocaleFilter" public="true">
+        <service id="sylius_api.translation_order_and_locale_filter" class="Sylius\Bundle\ApiBundle\Filter\Doctrine\TranslationOrderNameAndLocaleFilter" public="true">
             <argument type="service" id="doctrine" />
             <tag name="api_platform.filter" />
         </service>
