@@ -15,7 +15,7 @@ Feature: Product variant validation
         And I specify its code as "VODKA_WYBOROWA_PREMIUM"
         But I do not set its price
         And I try to add it
-        Then I should be notified that prices in all channels must be defined
+        Then I should be notified that prices in "United States" channel must be defined
         And the "VODKA_WYBOROWA_PREMIUM" variant of the "Wyborowa Vodka" product should not appear in the store
 
     @no-ui @api

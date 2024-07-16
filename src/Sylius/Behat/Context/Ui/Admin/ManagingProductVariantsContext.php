@@ -585,13 +585,13 @@ final class ManagingProductVariantsContext implements Context
     }
 
     /**
-     * @Then I should be notified that prices in all channels must be defined
+     * @Then I should be notified that prices in :channel channel must be defined
      */
-    public function iShouldBeNotifiedThatPricesInAllChannelsMustBeDefined()
+    public function iShouldBeNotifiedThatPricesInAllChannelsMustBeDefined(ChannelInterface $channel): void
     {
         Assert::contains(
-            $this->createPage->getPricesValidationMessage(),
-            'You must define price for every enabled channel.',
+            $this->createPage->getValidationMessage('price', ['%channelCode%' => $channel->getCode()]),
+            'You must define price',
         );
     }
 
