@@ -18,6 +18,11 @@
 >
     <resource class="Sylius\Component\Core\Model\ShippingMethod">
         <!-- Admin operations-->
+        <order>
+            <values>
+                <value name="position">ASC</value>
+            </values>
+        </order>
 
         <operations>
             <operation class="ApiPlatform\Metadata\GetCollection" uriTemplate="/admin/shipping-methods">

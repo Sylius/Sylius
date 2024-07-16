@@ -16,10 +16,10 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
 >
     <services>
-<!--        <service id="sylius_api.doctrine.orm.query_extension.common.shipping_method.non_archived" class="Sylius\Bundle\ApiBundle\Doctrine\ORM\QueryExtension\Common\ShippingMethod\NonArchivedExtension">-->
-<!--            <argument>%sylius.model.shipping_method.class%</argument>-->
-<!--            <tag name="api_platform.doctrine.orm.query_extension.collection" />-->
-<!--        </service>-->
+        <service id="sylius_api.doctrine.orm.query_extension.common.shipping_method.non_archived" class="Sylius\Bundle\ApiBundle\Doctrine\ORM\QueryExtension\Common\ShippingMethod\NonArchivedExtension">
+            <argument>%sylius.model.shipping_method.class%</argument>
+            <tag name="api_platform.doctrine.orm.query_extension.collection" />
+        </service>
 
         <service id="sylius_api.doctrine.orm.query_extension.shop.product_review.accepted" class="Sylius\Bundle\ApiBundle\Doctrine\ORM\QueryExtension\Shop\ProductReview\AcceptedExtension">
             <argument>%sylius.model.product_review.class%</argument>

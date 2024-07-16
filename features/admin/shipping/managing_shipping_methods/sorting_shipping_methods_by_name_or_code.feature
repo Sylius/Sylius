@@ -15,14 +15,14 @@ Feature: Sorting listed shipping methods by name or code
         And this shipping method is named "Sterowiec Mopsów" in the "Polish (Poland)" locale
         And I am logged in as an administrator
 
-    @ui @api
+    @api @ui
     Scenario: Shipping methods can be sorted by code in ascending order
         Given I am browsing shipping methods
         When I sort the shipping methods ascending by code
         Then I should see 3 shipping methods in the list
         And the first shipping method on the list should have code "aerial"
 
-    @ui @api
+    @api @ui
     Scenario: Changing the order of sorting by code
         Given I am browsing shipping methods
         When I sort the shipping methods ascending by code
@@ -30,14 +30,14 @@ Feature: Sorting listed shipping methods by name or code
         Then I should see 3 shipping methods in the list
         And the first shipping method on the list should have code "marine"
 
-    @ui @api
+    @api @ui
     Scenario: Shipping methods can be sorted by their names
         Given I am browsing shipping methods
         When I sort the shipping methods ascending by name
         Then I should see 3 shipping methods in the list
         And the first shipping method on the list should have name "Aardvark Stagecoach"
 
-    @ui @api
+    @api @ui
     Scenario: Changing the order of sorting shipping methods by their names
         Given I am browsing shipping methods
         When the shipping methods are already sorted ascending by name
@@ -45,7 +45,7 @@ Feature: Sorting listed shipping methods by name or code
         Then I should see 3 shipping methods in the list
         And the first shipping method on the list should have name "Pug Blimp"
 
-    @ui @api
+    @api @ui
     Scenario: Sorting shipping methods ascending by name from chosen locale translation
         When I change my locale to "Polish (Poland)"
         And I browse shipping methods
@@ -53,7 +53,7 @@ Feature: Sorting listed shipping methods by name or code
         Then I should see 3 shipping methods in the list
         And the first shipping method on the list should have name "Łódź Podwodna Morskich Jednorożców"
 
-    @ui @api
+    @api @ui
     Scenario: Sorting shipping methods descending by name from chosen locale translation
         When I change my locale to "Polish (Poland)"
         And I browse shipping methods
