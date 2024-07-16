@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace Sylius\Tests\Api;
 
 use ApiTestCase\JsonApiTestCase as BaseJsonApiTestCase;
-use Sylius\Tests\Api\Utils\HeadersBuilder;
 
 abstract class JsonApiTestCase extends BaseJsonApiTestCase
 {
@@ -56,15 +55,5 @@ abstract class JsonApiTestCase extends BaseJsonApiTestCase
         $this->assertIsString($authorizationHeader);
 
         return ['HTTP_' . $authorizationHeader => 'Bearer ' . $token];
-    }
-
-    protected function headerBuilder(): HeadersBuilder
-    {
-        return new HeadersBuilder(
-            $this->get('lexik_jwt_authentication.jwt_manager'),
-            $this->get('sylius.repository.admin_user'),
-            $this->get('sylius.repository.shop_user'),
-            self::$kernel->getContainer()->getParameter('sylius.api.authorization_header'),
-        );
     }
 }

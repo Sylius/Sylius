@@ -37,10 +37,9 @@ final class AdjustmentsTest extends JsonApiTestCase
         $this->client->request(
             method: 'GET',
             uri: '/api/v2/shop/adjustments/' . $order->getAdjustments()->first()->getId(),
-            server: $this->headerBuilder()->withJsonLdAccept()->build(),
+            server: self::CONTENT_TYPE_HEADER,
         );
 
         $this->assertResponseStatusCodeSame(Response::HTTP_NOT_FOUND);
     }
-
 }
