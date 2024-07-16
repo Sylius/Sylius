@@ -33,12 +33,14 @@
                     <div>{{ customer.email }}</div>
                 </div>
             </div>
-            <div class="d-flex gap-2">
+            <div class="d-flex flex-column align-items-center flex-sm-row gap-2">
                 <a href="{{ path('sylius_shop_account_profile_update') }}" class="btn btn-sm btn-icon btn-outline-gray">
-                    {{ icon('pencil', 'width: 16px; height: 16px;') }} Edit
+                    {{ icon('pencil', 'width: 16px; height: 16px;') }}
+                    {{ 'sylius.ui.edit'|trans }}
                 </a>
                 <a href="{{ path('sylius_shop_account_change_password') }}" class="btn btn-sm btn-icon btn-outline-gray">
-                    {{ icon('lock', 'width: 16px; height: 16px;') }} Change password
+                    {{ icon('lock', 'width: 16px; height: 16px;') }}
+                    {{ 'sylius.ui.change_password'|trans }}
                 </a>
                 {% if not customer.user.verified %}
                     <form {{ sylius_test_html_attribute('verification-form') }} action="{{ path('sylius_shop_user_request_verification_token') }}" method="post">

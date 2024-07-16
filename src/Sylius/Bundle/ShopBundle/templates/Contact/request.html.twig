@@ -5,7 +5,7 @@
 {% block title %}{{ 'sylius.ui.contact_us'|trans }} | {{ parent() }}{% endblock %}
 
 {% block content %}
-    <div class="container">
+    <div class="container my-auto">
         <div class="row justify-content-center mt-4 mb-5">
             <div class="col-12 col-md-6">
                 {{ form_start(form, {'action': path('sylius_shop_contact_request'), 'attr': {'novalidate': 'novalidate'}}) }}

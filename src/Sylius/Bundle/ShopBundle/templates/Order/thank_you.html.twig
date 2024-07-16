@@ -4,27 +4,29 @@
 {% block title %}{{ 'sylius.ui.thank_you'|trans }} | {{ parent() }}{% endblock %}
 
 {% block content %}
-    <div class="container text-center my-4">
-        {% set lastPayment = order.payments.last() %}
+    <div class="container text-center my-auto">
+        <div class="row flex-column my-4">
+            {% set lastPayment = order.payments.last() %}
 
-        <h1 class="h2" {{ sylius_test_html_attribute('thank-you') }}>{{ 'sylius.ui.thank_you'|trans }}</h1>
-        {{ 'sylius.ui.placed_an_order'|trans }}
+            <h1 class="h2" {{ sylius_test_html_attribute('thank-you') }}>{{ 'sylius.ui.thank_you'|trans }}</h1>
+            {{ 'sylius.ui.placed_an_order'|trans }}
 
-        {% if lastPayment != false %}
-            {%  if lastPayment.method.instructions is not null %}
-                <div {{ sylius_test_html_attribute('payment-method-instructions') }}>
-                    {{ lastPayment.method.instructions }}
-                </div>
+            {% if lastPayment != false %}
+                {%  if lastPayment.method.instructions is not null %}
+                    <div {{ sylius_test_html_attribute('payment-method-instructions') }}>
+                        {{ lastPayment.method.instructions }}
+                    </div>
+                {% endif %}
             {% endif %}
-        {% endif %}
 
-        <div class="d-flex flex-column flex-xl-row justify-content-center gap-2 mt-4">
-            {% if order.customer.user is not null %}
-                {{ buttons.primary(path('sylius_shop_account_order_show', {'number': order.number}), 'sylius.ui.view_order'|trans, 'show-order-in-account', null) }}
-            {% else %}
-                {{ buttons.primary(path('sylius_shop_order_show', {'tokenValue': order.tokenValue}), 'sylius.ui.change_payment_method'|trans, 'payment-method-page', null) }}
-                {{ buttons.secondary(path('sylius_shop_register_after_checkout', {'tokenValue': order.tokenValue}), 'sylius.ui.create_an_account'|trans, 'create-an-account', null) }}
-            {% endif %}
+            <div class="d-flex flex-column flex-lg-row justify-content-center gap-2 mt-4">
+                {% if order.customer.user is not null %}
+                    {{ buttons.primary(path('sylius_shop_account_order_show', {'number': order.number}), 'sylius.ui.view_order'|trans, 'show-order-in-account', null) }}
+                {% else %}
+                    {{ buttons.primary(path('sylius_shop_order_show', {'tokenValue': order.tokenValue}), 'sylius.ui.change_payment_method'|trans, 'payment-method-page', null) }}
+                    {{ buttons.secondary(path('sylius_shop_register_after_checkout', {'tokenValue': order.tokenValue}), 'sylius.ui.create_an_account'|trans, 'create-an-account', null) }}
+                {% endif %}
+            </div>
         </div>
     </div>
 {% endblock %}
