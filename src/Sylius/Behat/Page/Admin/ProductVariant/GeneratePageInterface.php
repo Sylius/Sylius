@@ -13,9 +13,9 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Page\Admin\ProductVariant;
 
-use FriendsOfBehat\PageObjectExtension\Page\SymfonyPageInterface;
+use Sylius\Behat\Page\Admin\Crud\CreatePageInterface as BaseCreatePageInterface;
 
-interface GeneratePageInterface extends SymfonyPageInterface
+interface GeneratePageInterface extends BaseCreatePageInterface
 {
     public function generate(): void;
 
@@ -24,8 +24,6 @@ interface GeneratePageInterface extends SymfonyPageInterface
     public function specifyCode(int $nth, string $code): void;
 
     public function removeVariant(int $nth): void;
-
-    public function getValidationMessage(string $element, int $position): string;
 
     public function isGenerationPossible(): bool;
 
