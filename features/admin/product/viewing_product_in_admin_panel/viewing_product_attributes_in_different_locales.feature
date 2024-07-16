@@ -15,7 +15,7 @@ Feature: Viewing product's attributes in different locales
         And I am logged in as an administrator
         And I am browsing products
 
-    @todo @ui @api
+    @api @ui
     Scenario: Viewing product's attributes defined in different locales
         When I access the "Iron Shield" product
         Then I should see attribute "material" with value "oak wood" in "English (United States)" locale

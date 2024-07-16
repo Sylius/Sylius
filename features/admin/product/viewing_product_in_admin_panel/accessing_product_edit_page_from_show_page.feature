@@ -12,13 +12,13 @@ Feature: Accessing the product edit page from the show page
         And I am logged in as an administrator
         And I am browsing products
 
-    @todo @ui @no-api
+    @no-api @ui
     Scenario: Accessing to product edit page from product show page
         When I access the "Iron shield" product
         And I go to edit page
         Then I should be on "Iron shield" product edit page
 
-    @todo @ui @no-api
+    @no-api @ui
     Scenario: Accessing to variant edit page from product show page
         When I access the "Iron shield" product
         And I go to edit page of "Iron shield - very big" variant

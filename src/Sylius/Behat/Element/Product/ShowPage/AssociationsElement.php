@@ -40,7 +40,7 @@ final class AssociationsElement extends Element implements AssociationsElementIn
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
-            'associations' => '#associations',
+            'associations' => '[data-test-associations]',
         ]);
     }
 

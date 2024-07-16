@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Element\Product\ShowPage;
 
-interface MoreDetailsElementInterface
+interface TranslationsElementInterface
 {
     public function getName(): string;
 

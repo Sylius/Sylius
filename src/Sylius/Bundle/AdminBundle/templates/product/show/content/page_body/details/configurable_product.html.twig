@@ -14,15 +14,13 @@
             </thead>
             <tbody>
                 {% for variant in product.variants %}
-                    <tr>
+                    <tr {{ sylius_test_html_attribute('variant', "%s"|format(variant.code)) }}>
                         {% hook 'configurable_product#tab' with { variant, product } %}
                     </tr>
                     <tr class="bg-gray-400">
                         <td colspan="9" class="p-0 border-0">
                             <div class="py-3 px-5 collapse" id="product-variant-details-{{ variant.code }}">
-                                <div class="card mb-3">
-                                    {% hook 'configurable_product#details' with { variant } %}
-                                </div>
+                                {% hook 'configurable_product#details' with { variant } %}
                             </div>
                         </td>
                     </tr>

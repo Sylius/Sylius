@@ -4,9 +4,13 @@
 {% set variant = hookable_metadata.context.variant %}
 {% set channel_pricing = hookable_metadata.context.channel_pricing %}
 
-<td class="text-end">
-    <a class="btn" {{ sylius_test_html_attribute('price-history') }} href="{{ path('sylius_admin_channel_pricing_log_entry_index', { productId: product.id, variantId: variant.id, channelPricingId: channel_pricing.id }) }}">
-        {{ icon({icon: 'eye'}) }}
+{% if hookable_metadata.context.channel is defined %}
+    <td class="text-end">
+        <a class="btn" {{ sylius_test_html_attribute('price-history') }} href="{{ path('sylius_admin_channel_pricing_log_entry_index', { productId: product.id, variantId: variant.id, channelPricingId: channel_pricing.id }) }}">
+            {{ icon({icon: 'eye'}) }}
         {{ 'sylius.ui.show'|trans }}
-    </a>
-</td>
+        </a>
+    </td>
+{% else %}
+    <td></td>
+{% endif %}

@@ -21,20 +21,13 @@ final class OptionsElement extends Element implements OptionsElementInterface
     {
         $options = $this->getElement('options');
 
-        /** @var NodeElement $option */
-        foreach ($options->findAll('css', 'li') as $option) {
-            if ($option->getText() === $optionName) {
-                return true;
-            }
-        }
-
-        return false;
+        return $options->has('css', sprintf('div:contains("%s")', $optionName));
     }
 
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
-            'options' => '#options ul',
+            'options' => '[data-test-options]',
         ]);
     }
 }

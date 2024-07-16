@@ -2,11 +2,16 @@
 
 <td class="text-end">
     {% if channel_pricing.appliedPromotions|length > 0 %}
-        <ul>
+        <div class="row">
             {% for promotion in channel_pricing.appliedPromotions %}
-                <li>{{ promotion.name }}</li>
+                <a class="mb-1 applied-promotion"
+                    {{ sylius_test_html_attribute('applied-promotion') }}
+                   href="{{ path('sylius_admin_catalog_promotion_show', {'id': promotion.id}) }}"
+                >
+                    {{ promotion.name }}
+                </a>
             {% endfor %}
-        </ul>
+        </div>
     {% else %}
         -
     {% endif %}

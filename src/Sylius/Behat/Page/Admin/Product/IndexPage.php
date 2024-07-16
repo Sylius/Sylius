@@ -80,7 +80,8 @@ class IndexPage extends CrudIndexPage implements IndexPageInterface
         $table = $this->getElement('table');
         $row = $tableAccessor->getRowWithFields($table, ['name' => $productName]);
         $field = $tableAccessor->getFieldFromRow($table, $row, 'actions');
-        $field->clickLink('details');
+
+        $field->find('css', '[data-test-show-action="Details"]')->click();
     }
 
     public function goToPage(int $page): void

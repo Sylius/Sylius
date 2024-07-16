@@ -1,0 +1,7 @@
+{% if hookable_metadata.context.locale_code is not defined %}
+    {% set loop = hookable_metadata.context.loop %}
+
+    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#translation-non-translatable" aria-expanded="{% if loop.first %}true{% else %}false{% endif %}" aria-controls="translation-non-translatable">
+        <span class="flag flag-sm flag-country-eu me-3"></span>
+    </button>
+{% endif %}

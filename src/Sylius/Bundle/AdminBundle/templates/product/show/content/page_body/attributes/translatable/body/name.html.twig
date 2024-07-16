@@ -1,0 +1,7 @@
+{% set attributes = hookable_metadata.context.attributes  %}
+
+<div class="col-12 col-md-4">
+    {% for attribute_value in attributes|filter(attribute_value => attribute_value.localeCode == hookable_metadata.context.locale_code) %}
+        <p {{ sylius_test_html_attribute('attribute-name', "%s"|format(attribute_value.name)) }}>{{ attribute_value.name }}</p>
+    {% endfor %}
+</div>
