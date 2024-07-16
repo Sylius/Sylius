@@ -14,15 +14,10 @@ twig_hooks:
                     method: 'PUT'
 
         'sylius_admin.product.update.content.header.title_block.actions':
-            show:
-                template: '@SyliusAdmin/shared/crud/update/content/header/title_block/actions/show.html.twig'
-                priority: 300
             view_in_store:
                 template: '@SyliusAdmin/product/common/header/title_block/actions/view_in_store.html.twig'
-                priority: 400
             manage_variants:
                 template: '@SyliusAdmin/product/common/header/title_block/actions/manage_variants.html.twig'
-                priority: 300
 
         'sylius_admin.product.update.content.header.title_block.actions.manage_variants':
             list:
