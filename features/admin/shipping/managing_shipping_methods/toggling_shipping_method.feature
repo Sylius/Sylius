@@ -9,7 +9,7 @@ Feature: Toggling a shipping method
         And the store allows shipping with "UPS Carrier" identified by "UPS_CARRIER"
         And I am logged in as an administrator
 
-    @ui @api
+    @api @ui
     Scenario: Disabling the shipping method
         Given the shipping method "UPS Carrier" is enabled
         When I want to modify this shipping method
@@ -18,7 +18,7 @@ Feature: Toggling a shipping method
         Then I should be notified that it has been successfully edited
         And this shipping method should be disabled
 
-    @ui @api
+    @api @ui
     Scenario: Enabling the shipping method
         Given the shipping method "UPS Carrier" is disabled
         When I want to modify this shipping method

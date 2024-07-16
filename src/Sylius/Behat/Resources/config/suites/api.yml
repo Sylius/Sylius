@@ -56,11 +56,11 @@ imports:
 #    - api/promotion/managing_promotions.yml
 #    - api/promotion/receiving_discount.yml
     - api/promotion/removing_catalog_promotions.yml
-#    - api/shipping/applying_shipping_method_rules.yml
+#    - api/shipping/applying_shipping_method_rules.yml 
 #    - api/shipping/viewing_shipping_methods.yml
 #    - api/shipping/managing_shipments.yml
     - api/shipping/managing_shipping_categories.yml
-#    - api/shipping/managing_shipping_methods.yml
+    - api/shipping/managing_shipping_methods.yml
 #    - api/taxation/applying_taxes.yml
 #    - api/taxation/managing_tax_categories.yml
 #    - api/taxation/managing_tax_rates.yml

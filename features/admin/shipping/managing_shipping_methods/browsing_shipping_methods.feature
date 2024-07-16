@@ -9,7 +9,7 @@ Feature: Browsing shipping methods
         And the store allows shipping with "UPS Carrier" and "FedEx Carrier"
         And I am logged in as an administrator
 
-    @ui @api
+    @api @ui
     Scenario: Browsing defined shipping methods
         When I want to browse shipping methods
         Then I should see 2 shipping methods in the list
