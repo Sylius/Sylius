@@ -790,6 +790,7 @@ sylius:
         show: 'Show'
         show_all: 'Show all'
         show_deleted: 'Show deleted'
+        show_disabled_channels: 'Show disabled channels'
         show_history_for_channel_pricing: 'Show history for channel pricing'
         show_in: 'Show in'
         show_in_store: 'Show in store'

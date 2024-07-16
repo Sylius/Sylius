@@ -212,6 +212,7 @@ sylius:
         shipping_category: 'Categoria d''enviament'
         shipping_methods: 'Mètodes d''enviament'
         short_description: 'Descripció breu'
+        show_disabled_channels: 'Mostra canals desactivats'
         show_product: 'Mostrar el producte'
         show_product_in_shop_page: 'Mostrar el producte en pàgina de la botiga'
         sku: 'SKU'

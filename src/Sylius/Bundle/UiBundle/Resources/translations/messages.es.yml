@@ -756,6 +756,7 @@ sylius:
         show: 'Mostrar'
         show_all: 'Ver todos'
         show_deleted: 'Mostrar eliminados'
+        show_disabled_channels: 'Mostrar canales desactivados'
         show_in: 'Mostrar en'
         show_in_store: 'Mostrar en la tienda'
         show_metadata: 'Mostrar metadatos'
