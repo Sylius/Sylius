@@ -7,6 +7,9 @@
         <br/>
         {{ 'sylius.ui.minimum_price_details'|trans }}
     </div>
+    <div class="ui segment">
+        {{ form_row(form.showDisabledChannels) }}
+    </div>
     <div id="sylius_product_variant_channelPricings">
         {{ form_errors(form.channelPricings) }}
         {% for channelCode, channelPricing in form.channelPricings %}
