@@ -29,7 +29,7 @@ final class AdjustmentsTest extends JsonApiTestCase
     }
 
     /** @test */
-    public function it_gets_shipment_adjustment(): void
+    public function it_returns_not_found_on_get_adjustment(): void
     {
         $this->loadFixturesFromFiles([
             'channel.yaml',
@@ -47,38 +47,6 @@ final class AdjustmentsTest extends JsonApiTestCase
             server: $this->headerBuilder()->withJsonLdAccept()->build(),
         );
 
-        $this->assertResponse(
-            $this->client->getResponse(),
-            'shop/adjustments/get_shipment_adjustment_response',
-            Response::HTTP_OK,
-        );
-    }
-
-    /** @test */
-    public function it_gets_promotion_adjustments(): void
-    {
-        $this->loadFixturesFromFiles([
-            'channel.yaml',
-            'cart.yaml',
-            'country.yaml',
-            'shipping_method.yaml',
-            'payment_method.yaml',
-            'promotion/promotion.yaml',
-        ]);
-
-        $order = $this->placeOrder(tokenValue: 'token', quantity: 2, couponCode: 'XYZ1');
-        $unit = $order->getItemUnits()->first();
-
-        $this->client->request(
-            method: 'GET',
-            uri: '/api/v2/shop/adjustments/' . $unit->getAdjustments()->first()->getId(),
-            server: $this->headerBuilder()->withJsonLdAccept()->build(),
-        );
-
-        $this->assertResponse(
-            $this->client->getResponse(),
-            'shop/adjustments/get_promotion_adjustment_response',
-            Response::HTTP_OK,
-        );
+        $this->assertResponseStatusCodeSame(Response::HTTP_NOT_FOUND);
     }
 }

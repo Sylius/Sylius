@@ -33,12 +33,9 @@
             <itemOperation name="shop_get">
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/shop/adjustments/{id}</attribute>
-                <attribute name="normalization_context">
-                    <attribute name="groups">
-                        <attribute>shop:adjustment:show</attribute>
-                        <attribute>sylius:shop:adjustment:show</attribute>
-                    </attribute>
-                </attribute>
+                <attribute name="controller">ApiPlatform\Core\Action\NotFoundAction</attribute>
+                <attribute name="read">false</attribute>
+                <attribute name="output">false</attribute>
             </itemOperation>
         </itemOperations>
 
