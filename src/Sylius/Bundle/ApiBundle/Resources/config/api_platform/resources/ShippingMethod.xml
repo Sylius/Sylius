@@ -18,14 +18,14 @@
 >
     <resource class="Sylius\Component\Core\Model\ShippingMethod">
         <!-- Admin operations-->
-        <order>
-            <values>
-                <value name="position">ASC</value>
-            </values>
-        </order>
 
         <operations>
             <operation class="ApiPlatform\Metadata\GetCollection" uriTemplate="/admin/shipping-methods">
+                <order>
+                    <values>
+                        <value name="position">ASC</value>
+                    </values>
+                </order>
                 <normalizationContext>
                     <values>
                         <value name="groups">
@@ -243,6 +243,11 @@ Example configuration for `flat_rate` shipping charges calculator:
                 uriTemplate="/shop/shipping-methods"
                 paginationEnabled="false"
             >
+                <order>
+                    <values>
+                        <value name="position">ASC</value>
+                    </values>
+                </order>
                 <normalizationContext>
                     <values>
                         <value name="groups">
