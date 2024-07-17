@@ -1,3 +1,7 @@
+# UPGRADE FROM `v1.13.3` TO `v1.13.4`
+
+1. The `api/v2/shop/adjustments/{id}` endpoint has been disabled.
+
 # UPGRADE FROM `v1.12.x` TO `v1.13.0`
 
 ApiBundle is no longer experimental and is now following the same support policy as the rest of Sylius.
