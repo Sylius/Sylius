@@ -89,4 +89,11 @@ interface ChannelInterface extends
     public function removeCountry(CountryInterface $country): void;
 
     public function hasCountry(CountryInterface $country): bool;
+
+    /**
+     * @return Collection|CountryInterface[]
+     *
+     * @psalm-return Collection<array-key, CountryInterface>
+     */
+    public function getEnabledCountries(): Collection;
 }

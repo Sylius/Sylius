@@ -13,8 +13,10 @@ declare(strict_types=1);
 
 namespace spec\Sylius\Component\Core\Model;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Addressing\Model\CountryInterface;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Channel\Model\Channel as BaseChannel;
 use Sylius\Component\Core\Model\ChannelInterface;
@@ -187,5 +189,18 @@ final class ChannelSpec extends ObjectBehavior
     {
         $this->setMenuTaxon($taxon);
         $this->getMenuTaxon()->shouldReturn($taxon);
+    }
+
+    function it_returns_enabled_countries(CountryInterface $country1, CountryInterface $country2): void
+    {
+        $country1->isEnabled()->willReturn(true);
+        $country2->isEnabled()->willReturn(false);
+
+        $countries = new ArrayCollection([$country1, $country2]);
+
+        $this->addCountry($country1);
+        $this->addCountry($country2);
+
+        $this->getEnabledCountries()->shouldHaveCount(1);
     }
 }
