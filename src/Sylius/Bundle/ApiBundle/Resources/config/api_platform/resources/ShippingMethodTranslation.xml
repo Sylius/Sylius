@@ -18,12 +18,22 @@
 >
     <resource class="Sylius\Component\Shipping\Model\ShippingMethodTranslation" uriTemplate="/admin/shipping-methods/{code}/translations/{localeCode}">
         <uriVariables>
-            <uriVariable parameterName="code" fromClass="Sylius\Component\Core\Model\ShippingMethod" fromProperty="translatable" />
-            <uriVariable parameterName="localeCode" fromClass="Sylius\Component\Shipping\Model\ShippingMethodTranslation" fromProperty="locale" />
+            <uriVariable parameterName="code" fromClass="Sylius\Component\Core\Model\ShippingMethod" fromProperty="translations" />
+            <uriVariable parameterName="localeCode" fromClass="Sylius\Component\Shipping\Model\ShippingMethodTranslation" />
         </uriVariables>
 
         <operations>
-            <operation class="ApiPlatform\Metadata\Get" />
+            <operation class="ApiPlatform\Metadata\Get">
+                <normalizationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius:admin:shipping_method_translation:show</value>
+                            </values>
+                        </value>
+                    </values>
+                </normalizationContext>
+            </operation>
         </operations>
     </resource>
 </resources>
