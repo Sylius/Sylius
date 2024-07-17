@@ -23,11 +23,12 @@ use Sylius\Component\Core\Model\Address;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Symfony\Component\Messenger\MessageBusInterface;
+use Symfony\Component\Messenger\Stamp\HandledStamp;
 use Webmozart\Assert\Assert;
 
 trait OrderPlacerTrait
 {
-    protected function placeOrder(string $tokenValue, string $email = 'sylius@example.com'): void
+    protected function placeOrder(string $tokenValue, string $email = 'sylius@example.com'): OrderInterface
     {
         /** @var MessageBusInterface $commandBus */
         $commandBus = self::getContainer()->get('sylius.command_bus');
@@ -70,6 +71,8 @@ trait OrderPlacerTrait
 
         $completeOrderCommand = new CompleteOrder();
         $completeOrderCommand->setOrderTokenValue($tokenValue);
-        $commandBus->dispatch($completeOrderCommand);
+        $envelope = $commandBus->dispatch($completeOrderCommand);
+
+        return $envelope->last(HandledStamp::class)->getResult();
     }
 }
