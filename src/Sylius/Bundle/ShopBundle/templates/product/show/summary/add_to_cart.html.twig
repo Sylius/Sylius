@@ -13,9 +13,9 @@
     <div class="mb-3">
         {% if not product.simple %}
             {% if product.variantSelectionMethodChoice %}
-                {% include '@SyliusShop/Product/show/summary/variants.html.twig' %}
+                {% include '@SyliusShop/product/show/summary/variants.html.twig' %}
             {% else %}
-                {% include '@SyliusShop/Product/show/summary/options.html.twig' %}
+                {% include '@SyliusShop/product/show/summary/options.html.twig' %}
             {% endif %}
         {% endif %}
     </div>

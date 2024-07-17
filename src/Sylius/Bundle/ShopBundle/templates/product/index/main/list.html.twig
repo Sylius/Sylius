@@ -3,7 +3,7 @@
 {% if resources.data|length > 0 %}
     <div class="products-grid" {{ sylius_test_html_attribute('products') }}>
         {% for product in resources.data %}
-            <div>{% include '@SyliusShop/Product/card.html.twig' %}</div>
+            <div>{% include '@SyliusShop/product/card.html.twig' %}</div>
         {% endfor %}
     </div>
 {% else %}

@@ -1,16 +1,16 @@
 <div class="mb-4">
     {{ render(url('sylius_shop_partial_taxon_show_by_slug', {
         'slug': app.request.attributes.get('slug'),
-        'template': '@SyliusShop/Product/index/main/header_taxonomy.html.twig'
+        'template': '@SyliusShop/product/index/main/header_taxonomy.html.twig'
     })) }}
 </div>
 
 <div class="row flex-column flex-md-row align-items-end justify-content-end gap-2 gap-md-0 mb-5">
     <div class="col">
-        {% include '@SyliusShop/Product/index/main/search.html.twig' %}
+        {% include '@SyliusShop/product/index/main/search.html.twig' %}
     </div>
     <div class="col-auto d-flex gap-2">
-        {% include '@SyliusShop/Product/index/main/limit.html.twig' %}
-        {% include '@SyliusShop/Product/index/main/sorting.html.twig' %}
+        {% include '@SyliusShop/product/index/main/limit.html.twig' %}
+        {% include '@SyliusShop/product/index/main/sorting.html.twig' %}
     </div>
 </div>

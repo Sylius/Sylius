@@ -196,7 +196,7 @@ sylius_ui:
         sylius.shop.product_review.create.sidebar:
             blocks:
                 card:
-                    template: "@SyliusShop/Product/card.html.twig"
+                    template: "@SyliusShop/product/card.html.twig"
                     priority: 10
 
         sylius.shop.product_review.create.main:
@@ -208,25 +208,25 @@ sylius_ui:
         sylius.shop.product.index.header:
             blocks:
                 breadcrumbs:
-                    template: "@SyliusShop/Product/index/header/breadcrumbs.html.twig"
+                    template: "@SyliusShop/product/index/header/breadcrumbs.html.twig"
                     priority: 10
 
         sylius.shop.product.index.sidebar:
             blocks:
                 content:
-                    template: "@SyliusShop/Product/index/sidebar/taxonomy.html.twig"
+                    template: "@SyliusShop/product/index/sidebar/taxonomy.html.twig"
                     priority: 10
 
         sylius.shop.product.index.main:
             blocks:
                 header:
-                    template: "@SyliusShop/Product/index/main/header.html.twig"
+                    template: "@SyliusShop/product/index/main/header.html.twig"
                     priority: 50
                 list:
-                    template: "@SyliusShop/Product/index/main/list.html.twig"
+                    template: "@SyliusShop/product/index/main/list.html.twig"
                     priority: 20
                 footer:
-                    template: "@SyliusShop/Product/index/main/footer.html.twig"
+                    template: "@SyliusShop/product/index/main/footer.html.twig"
                     priority: 10
 
         sylius.shop.checkout.header:
@@ -345,55 +345,4 @@ sylius_ui:
             blocks:
                 content:
                     template: "@SyliusShop/shared/order/summary.html.twig"
-                    priority: 10
-
-        sylius.shop.product.show.header:
-            blocks:
-                breadcrumb:
-                    template: "@SyliusShop/Product/show/header/breadcrumbs.html.twig"
-                    priority: 10
-
-        sylius.shop.product.show.summary:
-            blocks:
-                header:
-                    template: "@SyliusShop/Product/show/summary/header.html.twig"
-                    priority: 50
-                price:
-                    template: "@SyliusShop/Product/show/summary/price.html.twig"
-                    priority: 40
-                catalog_promotions:
-                    template: "@SyliusShop/Product/show/summary/catalog_promotions.html.twig"
-                    priority: 30
-                variant_selection:
-                    template: "@SyliusShop/Product/show/summary/variant_selection.html.twig"
-                    priority: 20
-                short_description:
-                    template: "@SyliusShop/Product/show/summary/short_description.html.twig"
-                    priority: 10
-
-        sylius.shop.product.show.main:
-            blocks:
-                images:
-                    template: "@SyliusShop/Product/show/main/images.html.twig"
-                    priority: 30
-                tabs:
-                    template: "@SyliusShop/Product/show/main/accordion.html.twig"
-                    priority: 20
-
-        sylius.shop.product.show.accordion:
-            blocks:
-                details:
-                    template: "@SyliusShop/Product/show/accordion/details.html.twig"
-                    priority: 30
-                attributes:
-                    template: "@SyliusShop/Product/show/accordion/attributes.html.twig"
-                    priority: 20
-                reviews:
-                    template: "@SyliusShop/Product/show/accordion/reviews.html.twig"
-                    priority: 10
-
-        sylius.shop.product.show.footer:
-            blocks:
-                associations:
-                    template: "@SyliusShop/Product/show/footer/associations.html.twig"
                     priority: 10

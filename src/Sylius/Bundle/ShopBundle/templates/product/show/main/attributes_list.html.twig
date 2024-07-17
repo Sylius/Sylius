@@ -7,10 +7,10 @@
             <th scope="row" {{ sylius_test_html_attribute('product-attribute-name', attribute.name) }}>{{ attribute.name }}</th>
             <td {{ sylius_test_html_attribute('product-attribute-value', attribute.name) }}>
                 {% include [
-                    '@SyliusShop/Product/show/types/'~attribute.attribute.type~'.html.twig',
-                    '@SyliusShop/Product/show/main/attribute.html.twig',
+                    '@SyliusShop/product/show/types/'~attribute.attribute.type~'.html.twig',
+                    '@SyliusShop/product/show/main/attribute.html.twig',
                     '@SyliusAttribute/Types/'~attribute.attribute.type~'.html.twig',
-                    '@SyliusShop/Product/Show/Types/default.html.twig'
+                    '@SyliusShop/product/Show/Types/default.html.twig'
                 ] with {
                     'attribute': attribute,
                     'locale': configuration.request.locale,

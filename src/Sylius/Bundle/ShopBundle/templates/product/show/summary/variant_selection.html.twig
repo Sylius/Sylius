@@ -22,5 +22,5 @@
 {% if product.enabledVariants.empty() or product.simple and not sylius_inventory_is_available(product.enabledVariants.first) %}
     <div {{ sylius_test_html_attribute('product-out-of-stock') }}>{{ 'sylius.ui.out_of_stock'|trans }}</div>
 {% else %}
-    {{ render(url('sylius_shop_partial_cart_add_item', {'template': '@SyliusShop/Product/show/summary/add_to_cart.html.twig', 'productId': product.id})) }}
+    {{ render(url('sylius_shop_partial_cart_add_item', {'template': '@SyliusShop/product/show/summary/add_to_cart.html.twig', 'productId': product.id})) }}
 {% endif %}

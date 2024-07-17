@@ -4,9 +4,9 @@
     <div style="width: 6rem;">
         <div class="overflow-auto bg-light rounded-3" style="aspect-ratio: 3/4; ">
             {% if variant.hasImages %}
-                {% include '@SyliusShop/Product/main_image.html.twig' with {'product': variant, 'filter': 'sylius_shop_product_tiny_thumbnail', 'class': 'w-100 h-100 object-fit-cover'} %}
+                {% include '@SyliusShop/product/main_image.html.twig' with {'product': variant, 'filter': 'sylius_shop_product_tiny_thumbnail', 'class': 'w-100 h-100 object-fit-cover'} %}
             {% else %}
-                {% include '@SyliusShop/Product/main_image.html.twig' with {'product': product, 'filter': 'sylius_shop_product_tiny_thumbnail', 'class': 'w-100 h-100 object-fit-cover'} %}
+                {% include '@SyliusShop/product/main_image.html.twig' with {'product': product, 'filter': 'sylius_shop_product_tiny_thumbnail', 'class': 'w-100 h-100 object-fit-cover'} %}
             {% endif %}
         </div>
     </div>

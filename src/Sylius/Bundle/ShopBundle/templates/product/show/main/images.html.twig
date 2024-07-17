@@ -25,7 +25,7 @@
                 {% set path = image.path is not null ? image.path|imagine_filter('sylius_shop_product_small_thumbnail') : asset('build/shop/images/200x200.png') %}
                 <div>
                     {% if product.isConfigurable() and product.enabledVariants|length > 0 %}
-                        {% include '@SyliusShop/Product/show/image_variants.html.twig' %}
+                        {% include '@SyliusShop/product/show/image_variants.html.twig' %}
                     {% endif %}
                     <a href="{{ image.path|imagine_filter('sylius_shop_product_original') }}">
                         <img src="{{ path }}" data-large-thumbnail="{{ image.path|imagine_filter('sylius_shop_product_large_thumbnail') }}" alt="{{ product.name }}" />

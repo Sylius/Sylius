@@ -6,7 +6,7 @@
     <a class="link-reset" href="{{ path('sylius_shop_product_show', {'slug': product.slug, '_locale': product.translation.locale}) }}" {{ sylius_test_html_attribute('product-content') }}>
         <div class="mb-4">
             <div class="overflow-auto bg-light rounded-3" style="aspect-ratio: 3/4; ">
-                {% include '@SyliusShop/Product/main_image.html.twig' with {'product': product, class: 'w-100 h-100 object-fit-cover'} %}
+                {% include '@SyliusShop/product/main_image.html.twig' with {'product': product, class: 'w-100 h-100 object-fit-cover'} %}
             </div>
         </div>
         <div class="h6" {{ sylius_test_html_attribute('product-name', product.name) }}>
