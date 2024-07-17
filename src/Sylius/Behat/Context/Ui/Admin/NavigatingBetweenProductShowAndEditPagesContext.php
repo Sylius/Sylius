@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
+use Sylius\Behat\Context\Ui\Admin\Helper\ProductTypeEnum;
 use Sylius\Behat\Page\Admin\Product\CreateConfigurableProductPageInterface;
 use Sylius\Behat\Page\Admin\Product\CreateSimpleProductPageInterface;
 use Sylius\Behat\Page\Admin\Product\ShowPageInterface;
@@ -23,15 +24,9 @@ use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Webmozart\Assert\Assert;
 
-enum ProductType: string
-{
-    case simple = 'simple';
-    case configurable = 'configurable';
-}
-
 final class NavigatingBetweenProductShowAndEditPagesContext implements Context
 {
-    private ProductType $currentProductType;
+    private ProductTypeEnum $currentProductType;
 
     public function __construct(
         private readonly UpdateSimpleProductPageInterface $updateSimpleProductPage,
@@ -77,15 +72,16 @@ final class NavigatingBetweenProductShowAndEditPagesContext implements Context
     /**
      * @When /^I want to create a new (simple|configurable) product$/
      */
-    public function iWantToCreateANewProduct(string $resourceType): void
+    public function iWantToCreateANewProduct(string $productType): void
     {
-        match ($resourceType) {
-            'simple' => $this->createSimpleProductPage->open(),
-            'configurable' => $this->createConfigurableProductPage->open(),
-            default => throw new \InvalidArgumentException(sprintf('There is no page for %s product type', $resourceType)),
+        $productType = ProductTypeEnum::from($productType);
+
+        match ($productType) {
+            ProductTypeEnum::simple => $this->createSimpleProductPage->open(),
+            ProductTypeEnum::configurable => $this->createConfigurableProductPage->open(),
         };
 
-        $this->currentProductType = ProductType::from($resourceType);
+        $this->currentProductType = $productType;
     }
 
     /**
@@ -125,9 +121,9 @@ final class NavigatingBetweenProductShowAndEditPagesContext implements Context
      */
     public function iShouldNotBeAbleToAccessTheProductShowPage(): void
     {
-        match (ProductType::from($this->currentProductType->value)) {
-            ProductType::simple => Assert::false($this->updateSimpleProductPage->hasShowPageButton()),
-            ProductType::configurable => Assert::false($this->createConfigurableProductPage->hasShowPageButton()),
+        match (ProductTypeEnum::from($this->currentProductType->value)) {
+            ProductTypeEnum::simple => Assert::false($this->updateSimpleProductPage->hasShowPageButton()),
+            ProductTypeEnum::configurable => Assert::false($this->createConfigurableProductPage->hasShowPageButton()),
         };
     }
 }
