@@ -17,13 +17,13 @@ Feature: Viewing details of a product with variants
         And I am logged in as an administrator
         And I am browsing products
 
-    @todo @ui @no-api
+    @no-api @ui
     Scenario: Viewing a configurable product
         When I access the "Iron Shield" product
         Then I should see product show page with variants
         And I should see product name "Iron Shield"
 
-    @todo @ui @api
+    @api @ui
     Scenario: Viewing taxonomies
         Given the store classifies its products as "Shield" and "Equipment"
         And the product "Iron Shield" has a main taxon "Equipment"
@@ -32,32 +32,32 @@ Feature: Viewing details of a product with variants
         Then I should see main taxon is "Equipment"
         And I should see product taxon "Shield"
 
-    @todo @ui @api
+    @api @ui
     Scenario: Viewing options
         When I access the "Iron Shield" product
         Then I should see option "Shield size"
 
-    @todo @ui @api
+    @api @ui
     Scenario: Viewing variants
         When I access the "Iron Shield" product
         Then I should see 2 variants
         And I should see the "Iron Shield - very big" variant
         And I should see the "Iron Shield - very small" variant
 
-    @todo @ui @no-api
+    @no-api @ui
     Scenario: Viewing variants' details
         When I access the "Iron Shield" product
         Then I should see 2 variants
         And I should see "Iron Shield - very big" variant with code "123456789-xl", priced "$25.00" and current stock 5 and in "United States" channel
         And I should see "Iron Shield - very small" variant with code "123456789-xs", priced "$15.00" and current stock 12 and in "United States" channel
 
-    @todo @ui @javascript @api
+    @api @ui @mink:chromedriver
     Scenario: Viewing media
         Given the "Iron Shield" product has an image "mugs.jpg" with "main" type
         When I access the "Iron Shield" product
         Then I should see an image related to this product
 
-    @todo @ui @api
+    @api @ui
     Scenario: Viewing more details
         Given the product "Iron Shield" has the slug "iron-shield"
         And the description of product "Iron Shield" is "Shield created by dwarf"
@@ -70,14 +70,14 @@ Feature: Viewing details of a product with variants
         And I should see product's meta keywords is "shield"
         And I should see product's short description is "good shield"
 
-    @todo @ui @api
+    @todo-api @ui
     Scenario: Viewing association types
         Given the store has a "Glass shield" product
         And the product "Iron Shield" has an association "Similar" with product "Glass shield"
         When I access the "Iron Shield" product
         Then I should see product association type "Similar"
 
-    @todo @ui @no-api
+    @no-api @ui
     Scenario: Viewing associations
         Given the store has a "Glass shield" product
         And the product "Iron Shield" has an association "Similar" with product "Glass shield"

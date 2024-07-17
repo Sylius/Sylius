@@ -6,7 +6,9 @@ twig_hooks:
 
         'sylius_admin.customer.show.content.header':
             breadcrumbs:
-                template: '@SyliusAdmin/customer/show/content/header/breadcrumbs.html.twig'
+                template: '@SyliusAdmin/shared/crud/show/content/header/breadcrumbs.html.twig'
+                configuration:
+                    rendered_field: email
 
         'sylius_admin.customer.show.content.header.title_block':
             title:

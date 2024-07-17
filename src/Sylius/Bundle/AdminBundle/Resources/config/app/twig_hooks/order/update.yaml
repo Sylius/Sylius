@@ -9,6 +9,12 @@ twig_hooks:
                 configuration:
                     method: 'PUT'
 
+        'sylius_admin.order.update.content.header':
+            breadcrumbs:
+                template: '@SyliusAdmin/shared/crud/update/content/header/breadcrumbs.html.twig'
+                configuration:
+                    rendered_field_prefix: '#'
+                    rendered_field: number
 
         'sylius_admin.order.update.content.form':
             billing_address:

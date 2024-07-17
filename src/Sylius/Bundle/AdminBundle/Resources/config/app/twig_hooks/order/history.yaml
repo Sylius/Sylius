@@ -17,10 +17,14 @@ twig_hooks:
                 template: '@SyliusAdmin/order/history/content/sections.html.twig'
 
         'sylius_admin.order.history.content.header':
+            breadcrumbs:
+                template: '@SyliusAdmin/shared/crud/show/content/header/breadcrumbs.html.twig'
+                configuration:
+                    rendered_field_prefix: '#'
+                    rendered_field: number
+                    action: 'sylius.ui.history'
             title_block:
                 template: '@SyliusAdmin/shared/crud/common/content/header/title_block.html.twig'
-            breadcrumbs:
-                template: '@SyliusAdmin/order/history/content/header/breadcrumbs.html.twig'
 
         'sylius_admin.order.history.content.header.title_block':
             title:

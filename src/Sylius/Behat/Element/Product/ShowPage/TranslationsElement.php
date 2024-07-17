@@ -15,7 +15,7 @@ namespace Sylius\Behat\Element\Product\ShowPage;
 
 use FriendsOfBehat\PageObjectExtension\Element\Element;
 
-final class MoreDetailsElement extends Element implements MoreDetailsElementInterface
+final class TranslationsElement extends Element implements TranslationsElementInterface
 {
     public function getDescription(): string
     {
@@ -50,12 +50,12 @@ final class MoreDetailsElement extends Element implements MoreDetailsElementInte
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
-            'description' => '#more-details tr:contains("Description") td:nth-child(2)',
-            'meta_description' => '#more-details tr:contains("Meta description") td:nth-child(2)',
-            'meta_keywords' => '#more-details tr:contains("Meta keywords") td:nth-child(2)',
-            'name' => '#more-details tr:contains("Name") td:nth-child(2)',
-            'short_description' => '#more-details tr:contains("Short description") td:nth-child(2)',
-            'slug' => '#more-details tr:contains("Slug") td:nth-child(2)',
+            'description' => '#product-translations [data-test-description]',
+            'meta_description' => '#product-translations [data-test-meta-description]',
+            'meta_keywords' => '#product-translations [data-test-meta-keywords]',
+            'name' => '#product-translations [data-test-product-name]',
+            'short_description' => '#product-translations [data-test-short-description]',
+            'slug' => '#product-translations [data-test-slug]',
         ]);
     }
 }
