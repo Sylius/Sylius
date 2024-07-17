@@ -33,7 +33,7 @@ Feature: Generating product variant generation
         And I specify that the 1st variant costs "$90.00" in "United States" channel
         And I try to generate it
         Then I should be notified that code is required for the 2nd variant
-        And I should be notified that price for the 2st variant in "United States" channel must be defined
+        And I should be notified that price for the 2nd variant in "United States" channel must be defined
         And I should not see any variants in the list
 
     @ui @no-api
@@ -56,7 +56,7 @@ Feature: Generating product variant generation
         Then I should be notified that code is required for the 1st variant
         And I should be notified that price for the 1st variant in "United States" channel must be defined
         And I should be notified that code is required for the 2nd variant
-        And I should be notified that price for the 2st variant in "United States" channel must be defined
+        And I should be notified that price for the 2nd variant in "United States" channel must be defined
         And I should not see any variants in the list
 
     @ui @no-api

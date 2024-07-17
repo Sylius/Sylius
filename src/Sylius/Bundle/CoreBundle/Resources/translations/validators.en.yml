@@ -151,7 +151,6 @@ sylius:
         channel_pricing:
             price:
                 not_defined: 'You must define price.'
-            all_defined: 'You must define price for every enabled channel.'
             existing_code: Channel with code {{ channelCode }} does not exist.
     promotion_coupon:
         per_customer_usage_limit:
