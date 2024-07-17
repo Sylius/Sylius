@@ -1,5 +1,12 @@
 # CHANGELOG FOR `1.12.X`
 
+## v1.12.19 (2024-07-17)
+
+#### Details
+
+- [#16544](https://github.com/Sylius/Sylius/issues/16544) [Docs] Update Taxon-Menu Page To Reflect Current Fixtures Configuration ([@Rafikooo](https://github.com/Rafikooo))
+- [#16592](https://github.com/Sylius/Sylius/issues/16592) [API] Disable shop GET adjustment endpoint ([@mpysiak](https://github.com/mpysiak), [@GSadee](https://github.com/GSadee))
+
 ## v1.12.18 (2024-07-02)
 
 #### Details
