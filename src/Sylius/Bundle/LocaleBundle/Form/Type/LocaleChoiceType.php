@@ -41,7 +41,7 @@ final class LocaleChoiceType extends AbstractType
         parent::configureOptions($resolver);
 
         $resolver->setDefaults([
-            'choices' => fn (Options $options): array => $this->localeRepository->findAll(),
+            'choices' => fn (): array => $this->localeRepository->findAll(),
             'choice_value' => 'code',
             'choice_label' => 'name',
             'choice_translation_domain' => false,
