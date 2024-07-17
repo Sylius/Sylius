@@ -27,21 +27,26 @@ export default class extends Controller {
   findErrors() {
     this.tabTargets.forEach((tab) => {
       const tabContentId = tab.attributes['data-bs-target'].value;
+      const errorsCount = this.countTabErrors(this.element.querySelector(tabContentId));
 
-      this.tabHasErrors(this.element.querySelector(tabContentId)) ? this.appendIndicator(tab) : this.removeIndicator(tab);
+      if (errorsCount > 0) {
+        this.appendIndicator(tab, errorsCount)
+      } else {
+        this.removeIndicator(tab)
+      }
     });
   }
 
-  tabHasErrors(target) {
-    return target.querySelectorAll('.is-invalid').length > 0;
+  countTabErrors(target) {
+    return target.querySelectorAll('.is-invalid').length;
   }
 
-  appendIndicator(target) {
+  appendIndicator(target, errorsCount) {
     const errorElement = document.createElement('div');
     const errorContainer = target.querySelector('.tab-icons');
 
     errorElement.classList.add('tab-error');
-    errorElement.innerText = '!';
+    errorElement.innerText = errorsCount;
 
     if (!errorContainer.querySelector('.tab-error')) {
       errorContainer.insertBefore(errorElement, errorContainer.firstChild);
