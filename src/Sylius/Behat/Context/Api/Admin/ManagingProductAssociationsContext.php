@@ -13,12 +13,11 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Api\Admin;
 
-use ApiPlatform\Api\IriConverterInterface;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Context\Api\Resources;
-use Sylius\Behat\Service\Converter\SectionAwareIriConverterInterface;
+use Sylius\Behat\Service\Converter\IriConverterInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Repository\ProductAssociationRepositoryInterface;
 use Sylius\Component\Product\Model\ProductAssociationInterface;
@@ -26,13 +25,12 @@ use Sylius\Component\Product\Model\ProductAssociationTypeInterface;
 use Sylius\Component\Product\Model\ProductInterface;
 use Webmozart\Assert\Assert;
 
-class ManagingProductAssociationsContext implements Context
+final readonly class ManagingProductAssociationsContext implements Context
 {
     public function __construct(
         private ApiClientInterface $client,
         private ResponseCheckerInterface $responseChecker,
         private IriConverterInterface $iriConverter,
-        private SectionAwareIriConverterInterface $sectionAwareIriConverter,
         private ProductAssociationRepositoryInterface $associationRepository,
         private SharedStorageInterface $sharedStorage,
     ) {
@@ -60,12 +58,12 @@ class ManagingProductAssociationsContext implements Context
         $associatedProductsData = [];
         /** @var ProductInterface $product */
         foreach ($products as $product) {
-            $associatedProductsData[] = $this->iriConverter->getIriFromItem($product);
+            $associatedProductsData[] = $this->iriConverter->getIriFromResource($product);
         }
 
         $this->client->buildCreateRequest(Resources::PRODUCT_ASSOCIATIONS);
-        $this->client->addRequestData('type', $this->iriConverter->getIriFromItem($type));
-        $this->client->addRequestData('owner', $this->iriConverter->getIriFromItem($owner));
+        $this->client->addRequestData('type', $this->iriConverter->getIriFromResource($type));
+        $this->client->addRequestData('owner', $this->iriConverter->getIriFromResource($owner));
         $this->client->addRequestData('associatedProducts', $associatedProductsData);
         $this->client->create();
 
@@ -88,9 +86,9 @@ class ManagingProductAssociationsContext implements Context
     ): void {
         $this->client->buildUpdateRequest(Resources::PRODUCT_ASSOCIATIONS, (string) $association->getId());
 
-        $associatedProducts = [$this->iriConverter->getIriFromItem($product)];
+        $associatedProducts = [$this->iriConverter->getIriFromResource($product)];
         foreach ($association->getAssociatedProducts() as $associatedProduct) {
-            $associatedProducts[] = $this->iriConverter->getIriFromItem($associatedProduct);
+            $associatedProducts[] = $this->iriConverter->getIriFromResource($associatedProduct);
         }
 
         $this->client->setRequestData(['associatedProducts' => $associatedProducts]);
@@ -107,7 +105,7 @@ class ManagingProductAssociationsContext implements Context
         ProductInterface $product,
     ): void {
         $this->client->buildUpdateRequest(Resources::PRODUCT_ASSOCIATIONS, (string) $association->getId());
-        $this->client->addRequestData('associatedProducts', [$this->iriConverter->getIriFromItem($product)]);
+        $this->client->addRequestData('associatedProducts', [$this->iriConverter->getIriFromResource($product)]);
         $this->client->update();
 
         $this->sharedStorage->set('association', $association);
@@ -125,7 +123,7 @@ class ManagingProductAssociationsContext implements Context
         $associatedProducts = [];
         foreach ($association->getAssociatedProducts() as $associatedProduct) {
             if ($associatedProduct->getCode() !== $product->getCode()) {
-                $associatedProducts[] = $this->iriConverter->getIriFromItem($associatedProduct);
+                $associatedProducts[] = $this->iriConverter->getIriFromResource($associatedProduct);
             }
         }
 
@@ -145,7 +143,7 @@ class ManagingProductAssociationsContext implements Context
         $response = $this->client->show(Resources::PRODUCTS, $product->getCode());
         $associations = $this->responseChecker->getValue($response, 'associations');
 
-        $associationTypeIri = $this->sectionAwareIriConverter->getIriFromResourceInSection($type, 'admin');
+        $associationTypeIri = $this->iriConverter->getIriFromResourceInSection($type, 'admin');
 
         foreach ($associations as $associationIri) {
             $response = $this->client->showByIri($associationIri);
@@ -190,7 +188,7 @@ class ManagingProductAssociationsContext implements Context
         /** @var ProductInterface $product */
         foreach ($products as $product) {
             Assert::inArray(
-                $this->sectionAwareIriConverter->getIriFromResourceInSection($product, 'admin'),
+                $this->iriConverter->getIriFromResourceInSection($product, 'admin'),
                 $associatedProducts,
             );
         }

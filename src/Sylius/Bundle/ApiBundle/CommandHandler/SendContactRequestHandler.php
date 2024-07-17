@@ -51,7 +51,7 @@ final class SendContactRequestHandler implements MessageHandlerInterface
             ],
             [$channel->getContactEmail()],
             $channel,
-            $command->localeCode,
+            $command->getLocaleCode(),
         );
     }
 }

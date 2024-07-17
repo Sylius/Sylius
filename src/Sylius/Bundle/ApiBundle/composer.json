@@ -25,7 +25,7 @@
     "require": {
         "php": "^8.2",
         "doctrine/dbal": "^3.0",
-        "api-platform/core": "^2.7.10",
+        "api-platform/core": "^3.3.5",
         "enshrined/svg-sanitize": "^0.16",
         "lexik/jwt-authentication-bundle": "^2.11",
         "sylius/core-bundle": "^2.0",
@@ -47,9 +47,7 @@
         "theofidry/alice-data-fixtures": "^1.4"
     },
     "conflict": {
-        "api-platform/core": "2.7.17",
-        "doctrine/doctrine-bundle": "2.3.0",
-        "lexik/jwt-authentication-bundle": "^2.18"
+        "doctrine/doctrine-bundle": "2.3.0"
     },
     "config": {
         "allow-plugins": {

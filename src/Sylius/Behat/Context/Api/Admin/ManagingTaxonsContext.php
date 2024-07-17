@@ -18,21 +18,21 @@ use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Context\Api\Admin\Helper\ValidationTrait;
 use Sylius\Behat\Context\Api\Resources;
-use Sylius\Behat\Service\Converter\SectionAwareIriConverterInterface;
+use Sylius\Behat\Service\Converter\IriConverterInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Webmozart\Assert\Assert;
 
-final class ManagingTaxonsContext implements Context
+final readonly class ManagingTaxonsContext implements Context
 {
     use ValidationTrait;
 
     public function __construct(
         private ApiClientInterface $client,
         private ResponseCheckerInterface $responseChecker,
-        private SectionAwareIriConverterInterface $sectionAwareIriConverter,
+        private IriConverterInterface $iriConverter,
         private SharedStorageInterface $sharedStorage,
     ) {
     }
@@ -124,7 +124,7 @@ final class ManagingTaxonsContext implements Context
      */
     public function iSetItsParentTaxonTo(TaxonInterface $parentTaxon): void
     {
-        $this->client->addRequestData('parent', $this->sectionAwareIriConverter->getIriFromResourceInSection($parentTaxon, 'admin'));
+        $this->client->addRequestData('parent', $this->iriConverter->getIriFromResourceInSection($parentTaxon, 'admin'));
     }
 
     /**
@@ -255,7 +255,7 @@ final class ManagingTaxonsContext implements Context
             $this->client->getLastResponse(),
             [
                 'code' => $taxon->getCode(),
-                'parent' => $this->sectionAwareIriConverter->getIriFromResourceInSection($parentTaxon, 'admin'),
+                'parent' => $this->iriConverter->getIriFromResourceInSection($parentTaxon, 'admin'),
             ],
         ));
     }

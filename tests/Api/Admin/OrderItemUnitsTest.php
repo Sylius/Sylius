@@ -15,7 +15,6 @@ namespace Sylius\Tests\Api\Admin;
 
 use Sylius\Tests\Api\JsonApiTestCase;
 use Sylius\Tests\Api\Utils\OrderPlacerTrait;
-use Symfony\Component\HttpFoundation\Response;
 
 final class OrderItemUnitsTest extends JsonApiTestCase
 {
@@ -23,6 +22,8 @@ final class OrderItemUnitsTest extends JsonApiTestCase
 
     protected function setUp(): void
     {
+        $this->setUpAdminContext();
+        $this->setUpDefaultGetHeaders();
         $this->setUpOrderPlacer();
 
         parent::setUp();
@@ -31,19 +32,19 @@ final class OrderItemUnitsTest extends JsonApiTestCase
     /** @test */
     public function it_gets_an_order_item_unit(): void
     {
-        $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel.yaml', 'cart.yaml', 'country.yaml', 'shipping_method.yaml', 'payment_method.yaml']);
+        $this->loadFixturesFromFiles([
+            'authentication/api_administrator.yaml',
+            'channel.yaml',
+            'cart.yaml',
+            'country.yaml',
+            'shipping_method.yaml',
+            'payment_method.yaml',
+        ]);
         $order = $this->placeOrder('token');
-        $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
 
-        $this->client->request(
-            method: 'GET',
-            uri: '/api/v2/admin/order-item-units/' . $order->getItems()->first()->getUnits()->first()->getId(),
-            server: $header,
-        );
+        $this->requestGet('/api/v2/admin/order-item-units/' . $order->getItems()->first()->getUnits()->first()->getId());
 
-        $response = $this->client->getResponse();
-
-        $this->assertResponse($response, 'admin/order_item_units/get_order_item_unit_response', Response::HTTP_OK);
+        $this->assertResponse($this->client->getResponse(), 'admin/order_item_units/get_order_item_unit_response');
     }
 
     /** @test */
@@ -62,14 +63,8 @@ final class OrderItemUnitsTest extends JsonApiTestCase
         $order = $this->placeOrder('token');
         $orderItemUnit = $order->getItems()->first()->getUnits()->first();
 
-        $this->client->request(
-            method: 'GET',
-            uri: '/api/v2/admin/order-item-units/' . $orderItemUnit->getId() . '/adjustments',
-            server: $this->headerBuilder()->withJsonLdAccept()->withAdminUserAuthorization('api@example.com')->build(),
-        );
+        $this->requestGet('/api/v2/admin/order-item-units/' . $orderItemUnit->getId() . '/adjustments');
 
-        $response = $this->client->getResponse();
-
-        $this->assertResponse($response, 'admin/order_item_units/get_order_item_unit_adjustments', Response::HTTP_OK);
+        $this->assertResponse($this->client->getResponse(), 'admin/order_item_units/get_order_item_unit_adjustments');
     }
 }

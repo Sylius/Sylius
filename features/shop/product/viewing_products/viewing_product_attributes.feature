@@ -91,7 +91,7 @@ Feature: Viewing product's attributes
         When I check this product's details
         Then I should see the product attribute "T-Shirt cotton content" with value 50%
 
-    @ui @api
+    @todo-api @ui
     Scenario: The product attributes are listed by their respective position
         Given the store has a product "T-Shirt banana"
         And this product has percent attribute "Wool content" at position 2

@@ -19,22 +19,39 @@
         <defaults public="false" />
 
         <service
-            id="Sylius\Bundle\ApiBundle\SerializerContextBuilder\ChannelContextBuilder"
-            decorates="api_platform.serializer.context_builder"
-            decoration-priority="64"
-        >
-            <argument type="service" id="Sylius\Bundle\ApiBundle\SerializerContextBuilder\ChannelContextBuilder.inner" />
-            <argument type="service" id="sylius.context.channel" />
-        </service>
-
-        <service
-            id="Sylius\Bundle\ApiBundle\SerializerContextBuilder\ReadOperationContextBuilder"
+            id="Sylius\Bundle\ApiBundle\SerializerContextBuilder\ChannelCodeAwareContextBuilder"
             decorates="api_platform.serializer.context_builder"
             decoration-priority="64"
         >
             <argument type="service" id=".inner" />
-            <argument>%sylius_api.serialization_groups.skip_adding_read_group%</argument>
-            <argument>%sylius_api.serialization_groups.skip_adding_index_and_show_groups%</argument>
+            <argument type="service" id="sylius.context.channel" />
+        </service>
+
+        <service
+            id="Sylius\Bundle\ApiBundle\SerializerContextBuilder\LoggedInCustomerEmailIfNotSetAwareContextBuilder"
+            decorates="api_platform.serializer.context_builder"
+            decoration-priority="64"
+        >
+            <argument type="service" id=".inner" />
+            <argument type="service" id="Sylius\Bundle\ApiBundle\Context\UserContextInterface" />
+        </service>
+
+        <service
+            id="Sylius\Bundle\ApiBundle\SerializerContextBuilder\ChannelContextBuilder"
+            decorates="api_platform.serializer.context_builder"
+            decoration-priority="64"
+        >
+            <argument type="service" id=".inner" />
+            <argument type="service" id="sylius.context.channel" />
+        </service>
+
+        <service
+            id="Sylius\Bundle\ApiBundle\SerializerContextBuilder\LocaleCodeAwareContextBuilder"
+            decorates="api_platform.serializer.context_builder"
+            decoration-priority="64"
+        >
+            <argument type="service" id=".inner" />
+            <argument type="service" id="sylius.context.locale" />
         </service>
 
         <service
@@ -42,7 +59,7 @@
             decorates="api_platform.serializer.context_builder"
             decoration-priority="64"
         >
-            <argument type="service" id="Sylius\Bundle\ApiBundle\SerializerContextBuilder\LocaleContextBuilder.inner" />
+            <argument type="service" id=".inner" />
             <argument type="service" id="sylius.context.locale" />
         </service>
 
@@ -51,7 +68,16 @@
             decorates="api_platform.serializer.context_builder"
             decoration-priority="64"
         >
-            <argument type="service" id="Sylius\Bundle\ApiBundle\SerializerContextBuilder\HttpRequestMethodTypeContextBuilder.inner" />
+            <argument type="service" id=".inner" />
+        </service>
+
+        <service
+            id="Sylius\Bundle\ApiBundle\SerializerContextBuilder\LoggedInShopUserIdAwareContextBuilder"
+            decorates="api_platform.serializer.context_builder"
+            decoration-priority="64"
+        >
+            <argument type="service" id=".inner" />
+            <argument type="service" id="Sylius\Bundle\ApiBundle\Context\UserContextInterface" />
         </service>
     </services>
 </container>

@@ -13,9 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\Command;
 
-interface ChannelCodeAwareInterface extends CommandAwareDataTransformerInterface
+interface ChannelCodeAwareInterface
 {
     public function getChannelCode(): ?string;
-
-    public function setChannelCode(?string $channelCode): void;
 }

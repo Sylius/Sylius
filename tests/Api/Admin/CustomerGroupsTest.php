@@ -15,13 +15,10 @@ namespace Sylius\Tests\Api\Admin;
 
 use Sylius\Component\Customer\Model\CustomerGroupInterface;
 use Sylius\Tests\Api\JsonApiTestCase;
-use Sylius\Tests\Api\Utils\AdminUserLoginTrait;
 use Symfony\Component\HttpFoundation\Response;
 
 final class CustomerGroupsTest extends JsonApiTestCase
 {
-    use AdminUserLoginTrait;
-
     protected function setUp(): void
     {
         parent::setUp();

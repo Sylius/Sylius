@@ -18,7 +18,7 @@ use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\RequestBuilder;
 use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Context\Api\Resources;
-use Sylius\Behat\Service\Converter\SectionAwareIriConverter;
+use Sylius\Behat\Service\Converter\IriConverterInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
@@ -26,14 +26,14 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Webmozart\Assert\Assert;
 
-final class ManagingProductImagesContext implements Context
+final readonly class ManagingProductImagesContext implements Context
 {
     public function __construct(
         private ApiClientInterface $client,
         private ResponseCheckerInterface $responseChecker,
         private SharedStorageInterface $sharedStorage,
         private \ArrayAccess $minkParameters,
-        private SectionAwareIriConverter $sectionAwareIriConverter,
+        private IriConverterInterface $iriConverter,
     ) {
     }
 
@@ -120,7 +120,7 @@ final class ManagingProductImagesContext implements Context
         Assert::notFalse($productImage);
 
         $this->client->buildUpdateRequest(Resources::PRODUCT_IMAGES, (string) $productImage->getId());
-        $this->client->updateRequestData(['productVariants' => [$this->sectionAwareIriConverter->getIriFromResourceInSection($productVariant, 'admin')]]);
+        $this->client->updateRequestData(['productVariants' => [$this->iriConverter->getIriFromResourceInSection($productVariant, 'admin')]]);
         $this->client->update();
     }
 
@@ -153,7 +153,7 @@ final class ManagingProductImagesContext implements Context
 
         Assert::notEmpty($images);
         Assert::inArray(
-            $this->sectionAwareIriConverter->getIriFromResourceInSection($productVariant, 'admin'),
+            $this->iriConverter->getIriFromResourceInSection($productVariant, 'admin'),
             $images[0]['productVariants'],
         );
     }
@@ -242,7 +242,7 @@ final class ManagingProductImagesContext implements Context
         if (0 !== count($variants)) {
             $variantsIris = [];
             foreach ($variants as $variant) {
-                $variantsIris[] = $this->sectionAwareIriConverter->getIriFromResourceInSection($variant, 'admin');
+                $variantsIris[] = $this->iriConverter->getIriFromResourceInSection($variant, 'admin');
             }
             $builder->withParameter('productVariants', $variantsIris);
         }

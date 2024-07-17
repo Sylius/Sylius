@@ -13,12 +13,13 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\Filter\Doctrine;
 
-use ApiPlatform\Core\Bridge\Doctrine\Common\Filter\OrderFilterInterface;
-use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\AbstractContextAwareFilter;
-use ApiPlatform\Core\Bridge\Doctrine\Orm\Util\QueryNameGeneratorInterface;
+use ApiPlatform\Doctrine\Common\Filter\OrderFilterInterface;
+use ApiPlatform\Doctrine\Orm\Filter\AbstractFilter;
+use ApiPlatform\Doctrine\Orm\Util\QueryNameGeneratorInterface;
+use ApiPlatform\Metadata\Operation;
 use Doctrine\ORM\QueryBuilder;
 
-final class TranslationOrderNameAndLocaleFilter extends AbstractContextAwareFilter
+final class TranslationOrderNameAndLocaleFilter extends AbstractFilter
 {
     protected function filterProperty(
         string $property,
@@ -26,7 +27,8 @@ final class TranslationOrderNameAndLocaleFilter extends AbstractContextAwareFilt
         QueryBuilder $queryBuilder,
         QueryNameGeneratorInterface $queryNameGenerator,
         string $resourceClass,
-        ?string $operationName = null,
+        ?Operation $operation = null,
+        array $context = [],
     ): void {
         if ('order' === $property) {
             if (!isset($value['translation.name'])) {

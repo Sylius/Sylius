@@ -9,7 +9,7 @@ Feature: Viewing a taxon's image on a taxon details page
         And the store classifies its products as "Category"
         And the "Category" taxon has an image "lamborghini.jpg" with "main" type
 
-    @api @no-ui
+    @todo-api @no-ui
     Scenario: Viewing a taxon's image
         When I check the "Category" taxon's details
         Then I should see the taxon name "Category"

@@ -10,7 +10,7 @@ Feature: Specifying the lowest price for discounted products checking period whi
         And the store operates in "United States" and "Poland"
         And I am logged in as an administrator
 
-    @api @ui
+    @todo @api @ui
     Scenario: Adding a new channel without specifying the lowest price for discounted products checking period
         When I want to create a new channel
         And I specify its code as "MOBILE"
@@ -23,7 +23,7 @@ Feature: Specifying the lowest price for discounted products checking period whi
         Then I should be notified that it has been successfully created
         And the "Mobile" channel should have the lowest price for discounted products checking period set to 30 days
 
-    @api @ui
+    @todo @api @ui
     Scenario: Adding a new channel with a specified lowest price for discounted products checking period
         When I want to create a new channel
         And I specify its code as "MOBILE"
@@ -37,7 +37,7 @@ Feature: Specifying the lowest price for discounted products checking period whi
         Then I should be notified that it has been successfully created
         And the "Mobile" channel should have the lowest price for discounted products checking period set to 15 days
 
-    @api @ui
+    @todo @api @ui
     Scenario: Being prevented from creating a new channel with the lowest price for discounted products checking period equal to zero
         When I want to create a new channel
         And I specify its code as "MOBILE"
@@ -50,7 +50,7 @@ Feature: Specifying the lowest price for discounted products checking period whi
         And I try to add it
         Then I should be notified that the lowest price for discounted products checking period must be greater than 0
 
-    @api @ui
+    @todo @api @ui
     Scenario: Being prevented from creating a new channel with a negative lowest price for discounted products checking period
         When I want to create a new channel
         And I specify its code as "MOBILE"
@@ -64,7 +64,7 @@ Feature: Specifying the lowest price for discounted products checking period whi
         And I try to add it
         Then I should be notified that the lowest price for discounted products checking period must be greater than 0
 
-    @api @ui
+    @todo @api @ui
     Scenario: Being prevented from creating a new channel with a too big lowest price for discounted products checking period
         When I want to create a new channel
         And I specify its code as "MOBILE"

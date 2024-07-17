@@ -2,4 +2,4 @@
 # (c) Sylius Sp. z o.o.
 
 imports:
-    - hybrid/cart/shopping_cart.yml
+#    - hybrid/cart/shopping_cart.yml

@@ -1,6 +1,6 @@
 {
     "@context": "\/api\/v2\/contexts\/ShippingMethod",
-    "@id": "\/api\/v2\/admin\/shipping-methods\/UPS",
+    "@id": "\/api\/v2\/admin\/shipping-methods\/UPS\/archive",
     "@type": "ShippingMethod",
     "id": "@integer@",
     "code": "UPS",
@@ -25,7 +25,7 @@
     ],
     "translations": {
         "en_US": {
-            "@id": "\/api\/v2\/admin\/shipping-method-translations\/@integer@",
+            "@id": "\/api\/v2\/admin\/shipping-methods\/UPS\/translations\/en_US",
             "@type": "ShippingMethodTranslation",
             "id": @integer@,
             "name": "UPS",

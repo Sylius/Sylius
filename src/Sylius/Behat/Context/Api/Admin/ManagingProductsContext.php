@@ -13,13 +13,12 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Api\Admin;
 
-use ApiPlatform\Api\IriConverterInterface;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Context\Api\Admin\Helper\ValidationTrait;
 use Sylius\Behat\Context\Api\Resources;
-use Sylius\Behat\Service\Converter\SectionAwareIriConverterInterface;
+use Sylius\Behat\Service\Converter\IriConverterInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Attribute\Model\AttributeValueInterface;
 use Sylius\Component\Core\Model\AdminUserInterface;
@@ -36,7 +35,7 @@ use Sylius\Component\Product\Model\ProductOptionInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Webmozart\Assert\Assert;
 
-final class ManagingProductsContext implements Context
+final readonly class ManagingProductsContext implements Context
 {
     use ValidationTrait;
 
@@ -46,7 +45,6 @@ final class ManagingProductsContext implements Context
         private ApiClientInterface $client,
         private ResponseCheckerInterface $responseChecker,
         private IriConverterInterface $iriConverter,
-        private SectionAwareIriConverterInterface $sectionAwareIriConverter,
         private SharedStorageInterface $sharedStorage,
         private string $apiUrlPrefix,
     ) {
@@ -169,7 +167,7 @@ final class ManagingProductsContext implements Context
      */
     public function iAddTheOptionToIt(ProductOptionInterface $productOption): void
     {
-        $this->client->updateRequestData(['options' => [$this->sectionAwareIriConverter->getIriFromResourceInSection($productOption, 'admin')]]);
+        $this->client->updateRequestData(['options' => [$this->iriConverter->getIriFromResourceInSection($productOption, 'admin')]]);
     }
 
     /**
@@ -177,7 +175,7 @@ final class ManagingProductsContext implements Context
      */
     public function iChooseMainTaxon(TaxonInterface $taxon): void
     {
-        $this->client->updateRequestData(['mainTaxon' => $this->sectionAwareIriConverter->getIriFromResourceInSection($taxon, 'admin')]);
+        $this->client->updateRequestData(['mainTaxon' => $this->iriConverter->getIriFromResourceInSection($taxon, 'admin')]);
     }
 
     /**
@@ -332,7 +330,7 @@ final class ManagingProductsContext implements Context
         $this->client->addSubResourceData(
             'attributes',
             [
-                'attribute' => $this->sectionAwareIriConverter->getIriFromResourceInSection($attribute, 'admin'),
+                'attribute' => $this->iriConverter->getIriFromResourceInSection($attribute, 'admin'),
                 'value' => $value !== null ? $this->getAttributeValueInProperType($attribute, $value) : null,
                 'localeCode' => $localeCode,
             ],
@@ -344,7 +342,7 @@ final class ManagingProductsContext implements Context
      */
     public function iRemoveItsAttribute(ProductAttributeInterface $attribute): void
     {
-        $attributeIri = $this->sectionAwareIriConverter->getIriFromResourceInSection($attribute, 'admin');
+        $attributeIri = $this->iriConverter->getIriFromResourceInSection($attribute, 'admin');
 
         $content = $this->client->getContent();
         foreach ($content['attributes'] as $key => $attributeValue) {
@@ -448,7 +446,7 @@ final class ManagingProductsContext implements Context
     {
         Assert::same(
             $this->responseChecker->getValue($this->client->getLastResponse(), 'mainTaxon'),
-            $this->sectionAwareIriConverter->getIriFromResourceInSection($taxon, 'admin'),
+            $this->iriConverter->getIriFromResourceInSection($taxon, 'admin'),
         );
     }
 
@@ -467,7 +465,7 @@ final class ManagingProductsContext implements Context
         Assert::true($this->responseChecker->hasValueInCollection(
             $this->client->getLastResponse(),
             'productTaxons',
-            $this->sectionAwareIriConverter->getIriFromResourceInSection($productTaxon, 'admin'),
+            $this->iriConverter->getIriFromResourceInSection($productTaxon, 'admin'),
         ));
     }
 
@@ -479,7 +477,7 @@ final class ManagingProductsContext implements Context
         Assert::true($this->responseChecker->hasValueInCollection(
             $this->client->getLastResponse(),
             'options',
-            $this->sectionAwareIriConverter->getIriFromResourceInSection($productOption, 'admin'),
+            $this->iriConverter->getIriFromResourceInSection($productOption, 'admin'),
         ));
     }
 
@@ -502,7 +500,7 @@ final class ManagingProductsContext implements Context
         Assert::true($this->responseChecker->hasValueInCollection(
             $this->client->getLastResponse(),
             'variants',
-            $this->sectionAwareIriConverter->getIriFromResourceInSection($variant, 'admin'),
+            $this->iriConverter->getIriFromResourceInSection($variant, 'admin'),
         ));
     }
 
@@ -689,7 +687,7 @@ final class ManagingProductsContext implements Context
 
         $mainTaxon = $this->responseChecker->getValue($response, 'mainTaxon');
 
-        Assert::same($mainTaxon, $this->sectionAwareIriConverter->getIriFromResourceInSection($taxon, 'admin'));
+        Assert::same($mainTaxon, $this->iriConverter->getIriFromResourceInSection($taxon, 'admin'));
     }
 
     /**
@@ -700,8 +698,8 @@ final class ManagingProductsContext implements Context
         $this->client->index(Resources::PRODUCT_TAXONS);
         Assert::true(
             $this->responseChecker->hasItemWithValues($this->client->getLastResponse(), [
-                'product' => $this->sectionAwareIriConverter->getIriFromResourceInSection($product, 'admin'),
-                'taxon' => $this->sectionAwareIriConverter->getIriFromResourceInSection($taxon, 'admin'),
+                'product' => $this->iriConverter->getIriFromResourceInSection($product, 'admin'),
+                'taxon' => $this->iriConverter->getIriFromResourceInSection($taxon, 'admin'),
             ]),
         );
     }
@@ -715,8 +713,8 @@ final class ManagingProductsContext implements Context
 
         Assert::false(
             $this->responseChecker->hasItemWithValues($this->client->getLastResponse(), [
-                'product' => $this->sectionAwareIriConverter->getIriFromResourceInSection($product, 'admin'),
-                'taxon' => $this->sectionAwareIriConverter->getIriFromResourceInSection($taxon, 'admin'),
+                'product' => $this->iriConverter->getIriFromResourceInSection($product, 'admin'),
+                'taxon' => $this->iriConverter->getIriFromResourceInSection($taxon, 'admin'),
             ]),
         );
     }
@@ -757,7 +755,7 @@ final class ManagingProductsContext implements Context
         $productFromResponse = $this->responseChecker->getResponseContent($response);
 
         Assert::true(
-            in_array($this->sectionAwareIriConverter->getIriFromResourceInSection($productOption, 'admin'), $productFromResponse['options'], true),
+            in_array($this->iriConverter->getIriFromResourceInSection($productOption, 'admin'), $productFromResponse['options'], true),
             sprintf('Product with option %s does not exist', $productOption->getName()),
         );
     }
@@ -820,7 +818,7 @@ final class ManagingProductsContext implements Context
             $this->responseChecker->getCollectionItemsWithValue(
                 $response,
                 'reviewSubject',
-                $this->sectionAwareIriConverter->getIriFromResourceInSection($product, 'admin'),
+                $this->iriConverter->getIriFromResourceInSection($product, 'admin'),
             ),
             'Should be no reviews, but some exist',
         );
@@ -903,7 +901,7 @@ final class ManagingProductsContext implements Context
     {
         $attributes = $this->responseChecker->getValue($this->client->getLastResponse(), 'attributes');
         foreach ($attributes as $attributeValue) {
-            if ($attributeValue['attribute'] === $this->sectionAwareIriConverter->getIriFromResourceInSection($attribute, 'admin')) {
+            if ($attributeValue['attribute'] === $this->iriConverter->getIriFromResourceInSection($attribute, 'admin')) {
                 throw new \InvalidArgumentException(
                     sprintf('Product %s have attribute %s', $product->getName(), $attribute->getName()),
                 );
@@ -917,7 +915,7 @@ final class ManagingProductsContext implements Context
     public function iShouldNotBeAbleToEditItsOptions(): void
     {
         $productOption = $this->sharedStorage->get('product_option');
-        $productOptionIri = $this->sectionAwareIriConverter->getIriFromResourceInSection($productOption, 'admin');
+        $productOptionIri = $this->iriConverter->getIriFromResourceInSection($productOption, 'admin');
         $this->client->updateRequestData(['options' => [$productOptionIri]]);
 
         $res = $this->client->update();
@@ -1094,7 +1092,7 @@ final class ManagingProductsContext implements Context
         string $value,
         ?string $localeCode = null,
     ): void {
-        $attributeIri = $this->sectionAwareIriConverter->getIriFromResourceInSection($attribute, 'admin');
+        $attributeIri = $this->iriConverter->getIriFromResourceInSection($attribute, 'admin');
 
         $attributes = $this->responseChecker->getValue($this->client->getLastResponse(), 'attributes');
         foreach ($attributes as $attributeValue) {

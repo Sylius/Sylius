@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Sylius Sp. z o.o.
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<resources
+    xmlns="https://api-platform.com/schema/metadata/resources-3.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="https://api-platform.com/schema/metadata/resources-3.0 https://api-platform.com/schema/metadata/resources-3.0.xsd"
+>
+    <resource class="Sylius\Component\Product\Model\ProductAttribute">
+        <validationContext>
+            <values>
+                <value name="groups">
+                    <values>
+                        <value>sylius</value>
+                    </values>
+                </value>
+            </values>
+        </validationContext>
+
+        <order>
+            <values>
+                <value name="position">ASC</value>
+            </values>
+        </order>
+
+        <operations>
+            <operation class="ApiPlatform\Metadata\GetCollection" uriTemplate="/admin/product-attributes">
+                <normalizationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius:admin:product_attribute:index</value>
+                            </values>
+                        </value>
+                    </values>
+                </normalizationContext>
+                <filters>
+                    <filter>sylius.api.order_filter.position</filter>
+                </filters>
+            </operation>
+
+            <operation class="ApiPlatform\Metadata\Post" uriTemplate="/admin/product-attributes">
+                <denormalizationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius:admin:product_attribute:create</value>
+                            </values>
+                        </value>
+                    </values>
+                </denormalizationContext>
+                <normalizationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius:admin:product_attribute:show</value>
+                            </values>
+                        </value>
+                    </values>
+                </normalizationContext>
+                <openapiContext>
+                    <values>
+                        <value name="description">
+                            Example configuration for a `text` type attribute:
+
+                            ```
+                            {
+                                "type": "text",
+                                "configuration": {
+                                    "min": 5,
+                                    "max": 255
+                                }
+                            }
+                            ```
+
+                            Example configuration for a `datetime` type attribute:
+
+                            ```
+                            {
+                                "type": "datetime",
+                                "configuration": {
+                                    "format": "Y-m-d H:i:s"
+                                }
+                            }
+                            ```
+
+                            Example configuration for a `date` type attribute:
+
+                            ```
+                            {
+                                "type": "date",
+                                "configuration": {
+                                    "format": "Y-m-d"
+                                }
+                            }
+                            ```
+
+                            Example configuration for a `select` type attribute:
+
+                            ```
+                            {
+                                "type": "select",
+                                "configuration": {
+                                    "choices": {
+                                        "0afb212e-cd08-11ec-871e-0242ac120005": {
+                                            "en_US": "Plastic",
+                                            "fr_FR": "Plastique"
+                                        },
+                                        "3bfb211f-cd08-11ec-871e-0242ac120005": {
+                                            "en_US": "Cotton",
+                                            "fr_FR": "Coton"
+                                        }
+                                    },
+                                    "multiple": true,
+                                    "min": 1,
+                                    "max": 3
+                                }
+                            }
+                            ```
+                        </value>
+                    </values>
+                </openapiContext>
+            </operation>
+
+            <operation class="ApiPlatform\Metadata\Get" uriTemplate="/admin/product-attributes/{code}">
+                <normalizationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius:admin:product_attribute:show</value>
+                            </values>
+                        </value>
+                    </values>
+                </normalizationContext>
+            </operation>
+
+            <operation class="ApiPlatform\Metadata\Get" uriTemplate="/shop/product-attributes/{code}">
+                <normalizationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius:shop:product_attribute:show</value>
+                            </values>
+                        </value>
+                    </values>
+                </normalizationContext>
+            </operation>
+
+            <operation class="ApiPlatform\Metadata\Put" uriTemplate="/admin/product-attributes/{code}">
+                <denormalizationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius:admin:product_attribute:update</value>
+                            </values>
+                        </value>
+                    </values>
+                </denormalizationContext>
+                <normalizationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius:admin:product_attribute:show</value>
+                            </values>
+                        </value>
+                    </values>
+                </normalizationContext>
+                <openapiContext>
+                    <values>
+                        <value name="description">
+                            Example configuration for a `text` type attribute:
+
+                            ```
+                            {
+                                "type": "text",
+                                "configuration": {
+                                    "min": 5,
+                                    "max": 255
+                                }
+                            }
+                            ```
+
+                            Example configuration for a `datetime` type attribute:
+
+                            ```
+                            {
+                                "type": "datetime",
+                                "configuration": {
+                                    "format": "Y-m-d H:i:s"
+                                }
+                            }
+                            ```
+
+                            Example configuration for a `date` type attribute:
+
+                            ```
+                            {
+                                "type": "date",
+                                "configuration": {
+                                    "format": "Y-m-d"
+                                }
+                            }
+                            ```
+
+                            Example configuration for a `select` type attribute:
+
+                            ```
+                            {
+                                "type": "select",
+                                "configuration": {
+                                    "choices": {
+                                        "0afb212e-cd08-11ec-871e-0242ac120005": {
+                                            "en_US": "Plastic",
+                                            "fr_FR": "Plastique"
+                                        },
+                                        "3bfb211f-cd08-11ec-871e-0242ac120005": {
+                                            "en_US": "Cotton",
+                                            "fr_FR": "Coton"
+                                        }
+                                    },
+                                    "multiple": true,
+                                    "min": 1,
+                                    "max": 3
+                                }
+                            }
+                            ```
+                        </value>
+                    </values>
+                </openapiContext>
+            </operation>
+
+            <operation class="ApiPlatform\Metadata\Delete" uriTemplate="/admin/product-attributes/{code}" />
+
+        </operations>
+    </resource>
+
+</resources>

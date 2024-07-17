@@ -19,7 +19,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Event\ExceptionEvent;
 
-final class PostgreSQLDriverExceptionListener
+final readonly class PostgreSQLDriverExceptionListener
 {
     public function onKernelException(ExceptionEvent $event): void
     {

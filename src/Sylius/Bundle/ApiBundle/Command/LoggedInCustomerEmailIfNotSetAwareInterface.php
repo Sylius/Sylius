@@ -13,9 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\Command;
 
-interface LoggedInCustomerEmailIfNotSetAwareInterface extends CommandAwareDataTransformerInterface
+interface LoggedInCustomerEmailIfNotSetAwareInterface
 {
     public function getEmail(): ?string;
-
-    public function setEmail(string $email): void;
 }

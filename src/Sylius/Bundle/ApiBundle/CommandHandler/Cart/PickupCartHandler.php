@@ -27,7 +27,7 @@ use Sylius\Component\Resource\Generator\RandomnessGeneratorInterface;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 use Webmozart\Assert\Assert;
 
-final class PickupCartHandler implements MessageHandlerInterface
+final readonly class PickupCartHandler implements MessageHandlerInterface
 {
     public function __construct(
         private OrderFactoryInterface $cartFactory,

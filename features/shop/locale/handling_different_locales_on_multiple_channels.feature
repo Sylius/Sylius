@@ -12,20 +12,21 @@ Feature: Handling different locales on multiple channels
         And that channel allows to shop using "Polish (Poland)" and "Norwegian (Norway)" locales
         And it uses the "Polish (Poland)" locale by default
 
-    @ui @api
+#   These scenarios should be implemented after implementing Order resource in APIP3
+    @todo-api @ui
     Scenario: Showing locales only from the current channel
         When I browse the "Mobile" channel
         Then I should shop using the "Polish (Poland)" locale
         And I should be able to shop using the "Norwegian (Norway)" locale
         And I should not be able to shop using the "English (United States)" locale
 
-    @ui @api
+    @todo-api @ui
     Scenario: Browsing channels using their default locales
         When I browse the "Web" channel
         And I start browsing the "Mobile" channel
         Then I should shop using the "Polish (Poland)" locale
 
-    @ui @api
+    @todo-api @ui
     Scenario: Switching a locale applies only to the current channel
         When I browse the "Web" channel
         And I switch to the "Norwegian (Norway)" locale

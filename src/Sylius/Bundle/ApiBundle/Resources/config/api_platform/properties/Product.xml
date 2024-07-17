@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Sylius Sp. z o.o.
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<properties xmlns="https://api-platform.com/schema/metadata/properties-3.0"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xsi:schemaLocation="https://api-platform.com/schema/metadata/properties-3.0 https://api-platform.com/schema/metadata/properties-3.0.xsd"
+>
+    <property resource="Sylius\Component\Core\Model\Product" name="id" identifier="false" writable="false"/>
+    <property resource="Sylius\Component\Core\Model\Product" name="code" identifier="true"/>
+    <property resource="Sylius\Component\Core\Model\Product" name="createdAt" writable="false"/>
+    <property resource="Sylius\Component\Core\Model\Product" name="updatedAt" writable="false"/>
+    <property resource="Sylius\Component\Core\Model\Product" name="translations" readable="true" writable="true">
+        <openapiContext>
+            <values>
+                <value name="type">object</value>
+                <value name="example">
+                    <values>
+                        <value name="en_US">
+                            <values>
+                                <value name="name">string</value>
+                                <value name="slug">string</value>
+                                <value name="description">string</value>
+                                <value name="shortDescription">string</value>
+                                <value name="metaKeywords">string</value>
+                                <value name="metaDescription">string</value>
+                            </values>
+                        </value>
+                    </values>
+                </value>
+            </values>
+        </openapiContext>
+    </property>
+    <property resource="Sylius\Component\Core\Model\Product" name="productTaxons" readable="true" writable="true"/>
+    <property resource="Sylius\Component\Core\Model\Product" name="reviews" required="false"/>
+    <property resource="Sylius\Component\Core\Model\Product" name="options" required="false"/>
+    <property resource="Sylius\Component\Core\Model\Product" name="channels" required="false"/>
+    <property resource="Sylius\Component\Core\Model\Product" name="mainTaxon" required="false"/>
+    <property resource="Sylius\Component\Core\Model\Product" name="variants" readable="true"/>
+    <property resource="Sylius\Component\Core\Model\Product" name="averageRating" readable="true"/>
+    <property resource="Sylius\Component\Core\Model\Product" name="description" readable="true"/>
+    <property resource="Sylius\Component\Core\Model\Product" name="slug" readable="true"/>
+    <property resource="Sylius\Component\Core\Model\Product" name="shortDescription" readable="true"/>
+    <property resource="Sylius\Component\Core\Model\Product" name="name" readable="true"/>
+    <property resource="Sylius\Component\Core\Model\Product" name="associations" readable="true"/>
+    <property resource="Sylius\Component\Core\Model\Product" name="attributes" readable="true" writable="true" />
+    <property resource="Sylius\Component\Core\Model\Product" name="images" writable="false" required="false"/>
+</properties>
