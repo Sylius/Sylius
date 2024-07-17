@@ -8,7 +8,7 @@
         <input type="hidden" name="_method" value="PUT">
         <input type="hidden" name="_csrf_token" value="{{ csrf_token(payment.id) }}" />
         <button type="submit" class="btn btn-yellow" {{ sylius_test_html_attribute('refund-payment', payment.id) }}>
-            {{ icon({ icon: 'arrow-back-up-double' }) }} {{ 'sylius.ui.refund'|trans }}
+            {{ icon({ icon: 'arrow_back_up_double' }) }} {{ 'sylius.ui.refund'|trans }}
         </button>
     </form>
 {% endif %}

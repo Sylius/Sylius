@@ -7,7 +7,7 @@
         <input type="hidden" name="_method" value="PUT">
         <input type="hidden" name="_csrf_token" value="{{ csrf_token(order.id) }}" />
         <button type="submit" class="dropdown-item" {{ sylius_test_html_attribute('cancel-order') }}>
-            {{ icon({ icon: 'circle-check', class: 'icon dropdown-item-icon icon-tabler' }) }}
+            {{ icon({ icon: 'circle_check', class: 'icon dropdown-item-icon icon-tabler' }) }}
             {{ 'sylius.ui.cancel'|trans }}
         </button>
     </form>

@@ -6,7 +6,7 @@
 {% if sylius_bundle_loaded_checker('SyliusShopBundle') %}
     {% if not product.enabled or enabled_channels|length < 1 %}
         <a class="btn disabled" href="{{ (url is not defined) ? '#' : url|raw }}" target="_blank" {{ sylius_test_html_attribute('view-in-store') }}>
-            {{ icon({ icon: 'arrow-up-right', class: 'icon icon-tabler' }) }}
+            {{ icon({ icon: 'arrow_up_right', class: 'icon icon-tabler' }) }}
             {{ 'sylius.ui.view_in_store'|trans }}
         </a>
     {% elseif enabled_channels|length > 1 %}
@@ -27,7 +27,7 @@
                             href="{{ (url is not defined) ? '#' : url|raw }}"
                             target="_blank"
                         >
-                            {{ icon({ icon: 'arrow-up-right', class: 'icon dropdown-item-icon icon-tabler' }) }}
+                            {{ icon({ icon: 'arrow_up_right', class: 'icon dropdown-item-icon icon-tabler' }) }}
                             {{ channel.name }} ({{ channel.code }})
                         </a>
                     </li>
@@ -42,7 +42,7 @@
             {% endif %}
 
             <a class="btn {% if url is not defined %}disabled{% endif %}" href="{{ (url is not defined) ? '#' : url|raw }}" target="_blank" {{ sylius_test_html_attribute('view-in-store') }}>
-                {{ icon({ icon: 'arrow-up-right', class: 'icon icon-tabler' }) }}
+                {{ icon({ icon: 'arrow_up_right', class: 'icon icon-tabler' }) }}
                 {{ 'sylius.ui.view_in_store'|trans }}
             </a>
         {% endfor %}
