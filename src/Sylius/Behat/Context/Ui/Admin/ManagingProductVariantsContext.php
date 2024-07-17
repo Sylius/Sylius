@@ -557,19 +557,21 @@ final class ManagingProductVariantsContext implements Context
     public function iShouldBeNotifiedThatCodeIsRequiredForVariant($position)
     {
         Assert::same(
-            $this->generatePage->getValidationMessage('code', $position - 1),
+            $this->generatePage->getValidationMessage('code', ['%position%' => $position - 1]),
             'Please enter the code.',
         );
     }
 
     /**
-     * @Then /^I should be notified that prices in all channels must be defined for the (\d)(?:st|nd|rd|th) variant$/
+     * @Then /^I should be notified that price for the (\d+)(?:|st|nd|rd|th) variant in ("([^"]+)" channel) must be defined$/
      */
-    public function iShouldBeNotifiedThatPricesInAllChannelsMustBeDefinedForTheVariant($position): void
-    {
+    public function iShouldBeNotifiedThatPriceForTheVariantInChannelMustBeDefined(
+        int $position,
+        ChannelInterface $channel,
+    ): void {
         Assert::same(
-            $this->generatePage->getValidationMessage('channel_pricings', $position - 1),
-            'You must define price for every enabled channel.',
+            $this->generatePage->getValidationMessage('price', ['%channel_code%' => $channel->getCode(), '%position%' => $position - 1]),
+            'You must define price.',
         );
     }
 
@@ -579,19 +581,19 @@ final class ManagingProductVariantsContext implements Context
     public function iShouldBeNotifiedThatVariantCodeMustBeUniqueWithinThisProductForYheVariant($position)
     {
         Assert::same(
-            $this->generatePage->getValidationMessage('code', $position - 1),
+            $this->generatePage->getValidationMessage('code', ['%position%' => $position - 1]),
             'This code must be unique within this product.',
         );
     }
 
     /**
-     * @Then I should be notified that prices in all channels must be defined
+     * @Then I should be notified that prices in :channel channel must be defined
      */
-    public function iShouldBeNotifiedThatPricesInAllChannelsMustBeDefined()
+    public function iShouldBeNotifiedThatPricesInAllChannelsMustBeDefined(ChannelInterface $channel): void
     {
         Assert::contains(
-            $this->createPage->getPricesValidationMessage(),
-            'You must define price for every enabled channel.',
+            $this->createPage->getValidationMessage('price', ['%channel_code%' => $channel->getCode()]),
+            'You must define price',
         );
     }
 

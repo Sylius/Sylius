@@ -48,11 +48,6 @@ final class ChannelPricingsFormElement extends BaseFormElement implements Channe
         return !str_contains($this->getElement('channels')->getText(), $channelName);
     }
 
-    public function getChannelPricingValidationMessage(): string
-    {
-        return $this->getElement('prices_validation_message')->getText();
-    }
-
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
@@ -61,7 +56,6 @@ final class ChannelPricingsFormElement extends BaseFormElement implements Channe
             'channels' => '[data-test-channels]',
             'original_price' => '[data-test-original-price-in-channel="%channel_code%"]',
             'price' => '[data-test-price-in-channel="%channel_code%"]',
-            'prices_validation_message' => '[data-test-missing-channel-price]',
             'side_navigation_tab' => '[data-test-side-navigation-tab="%name%"]',
         ]);
     }

@@ -41,9 +41,9 @@ class CreatePage extends SymfonyPage implements CreatePageInterface
         $this->getDocument()->pressButton('Create');
     }
 
-    public function getValidationMessage(string $element): string
+    public function getValidationMessage(string $element, array $parameters = []): string
     {
-        $foundElement = $this->getFieldElement($element);
+        $foundElement = $this->getFieldElement($element, $parameters);
         if (null === $foundElement) {
             throw new ElementNotFoundException($this->getSession(), 'Field element');
         }
@@ -104,9 +104,9 @@ class CreatePage extends SymfonyPage implements CreatePageInterface
     /**
      * @throws ElementNotFoundException
      */
-    private function getFieldElement(string $element): ?NodeElement
+    private function getFieldElement(string $element, array $parameters = []): ?NodeElement
     {
-        $element = $this->getElement($element);
+        $element = $this->getElement($element, $parameters);
         while (null !== $element && !$element->hasClass('field')) {
             $element = $element->getParent();
         }

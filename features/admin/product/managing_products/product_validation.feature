@@ -85,7 +85,7 @@ Feature: Products validation
         And I name it "Dice Brewing" in "English (United States)" locale
         And I set its slug to "dice-brewing"
         And I try to add it
-        Then I should be notified that price must be defined for every channel
+        Then I should be notified that price must be defined for "Web-GB" channel
         And product with code "BOARD_DICE_BREWING" should not be added
 
     @ui @api

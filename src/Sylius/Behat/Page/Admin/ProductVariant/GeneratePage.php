@@ -13,12 +13,10 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Page\Admin\ProductVariant;
 
-use Behat\Mink\Element\NodeElement;
-use Behat\Mink\Exception\ElementNotFoundException;
-use FriendsOfBehat\PageObjectExtension\Page\SymfonyPage;
+use Sylius\Behat\Page\Admin\Crud\CreatePage as BaseCreatePage;
 use Sylius\Behat\Service\TabsHelper;
 
-class GeneratePage extends SymfonyPage implements GeneratePageInterface
+class GeneratePage extends BaseCreatePage implements GeneratePageInterface
 {
     public function getRouteName(): string
     {
@@ -50,21 +48,6 @@ class GeneratePage extends SymfonyPage implements GeneratePageInterface
         $this->waitForFormUpdate();
     }
 
-    public function getValidationMessage(string $element, int $position): string
-    {
-        $foundElement = $this->getFieldElement($element, ['%position%' => $position]);
-        if (null === $foundElement) {
-            throw new ElementNotFoundException($this->getSession(), 'Field element');
-        }
-
-        $validationMessage = $foundElement->find('css', '.invalid-feedback');
-        if (null === $validationMessage) {
-            throw new ElementNotFoundException($this->getSession(), 'Validation message', 'css', '.invalid-feedback');
-        }
-
-        return $validationMessage->getText();
-    }
-
     public function isGenerationPossible(): bool
     {
         return !$this->getElement('generate_button')->hasAttribute('disabled');
@@ -83,28 +66,7 @@ class GeneratePage extends SymfonyPage implements GeneratePageInterface
             'delete_button' => '#sylius_admin_product_generate_variants_variants_%position% [data-test-delete-button]',
             'form' => 'form',
             'generate_button' => '[data-test-generate-button]',
+            'price' => '#sylius_admin_product_generate_variants_variants_%position%_channelPricings_%channel_code%_price',
         ]);
-    }
-
-    private function waitForFormUpdate(): void
-    {
-        $form = $this->getElement('form');
-        sleep(1); // we need to sleep, as sometimes the check below is executed faster than the form sets the busy attribute
-        $form->waitFor(1500, function () use ($form) {
-            return !$form->hasAttribute('busy');
-        });
-    }
-
-    /**
-     * @throws ElementNotFoundException
-     */
-    private function getFieldElement(string $element, array $parameters = []): ?NodeElement
-    {
-        $element = $this->getElement($element, $parameters);
-        while (null !== $element && !$element->hasClass('field')) {
-            $element = $element->getParent();
-        }
-
-        return $element;
     }
 }
