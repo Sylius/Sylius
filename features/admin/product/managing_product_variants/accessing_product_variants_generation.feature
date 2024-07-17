@@ -1,8 +1,8 @@
 @managing_product_variants
-Feature: Product variant generation access
+Feature: Accessing product variants generation
     In order to avoid making mistakes when generating product variants
     As an Administrator
-    I want to be able to access the product variant generation page only for products with configured options
+    I want to be able to access the product variants generation page only for products with configured options
 
     Background:
         Given the store operates on a single channel in "United States"
