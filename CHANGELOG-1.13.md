@@ -1,5 +1,15 @@
 # CHANGELOG FOR `1.13.X`
 
+## v1.13.4 (2024-07-17)
+
+#### Details
+
+- [#16469](https://github.com/Sylius/Sylius/issues/16469) Use interface for a response checker dependency ([@jaroslavtyc](https://github.com/jaroslavtyc))
+- [#16544](https://github.com/Sylius/Sylius/issues/16544) [Docs] Update Taxon-Menu Page To Reflect Current Fixtures Configuration ([@Rafikooo](https://github.com/Rafikooo))
+- [#16550](https://github.com/Sylius/Sylius/issues/16550) [Behat] Enable Accessing The Product Edit Page From The Show Page Scenarios ([@Rafikooo](https://github.com/Rafikooo))
+- [#16581](https://github.com/Sylius/Sylius/issues/16581) [CS][DX] Refactor
+- [#16592](https://github.com/Sylius/Sylius/issues/16592) [API] Disable shop GET adjustment endpoint ([@mpysiak](https://github.com/mpysiak), [@GSadee](https://github.com/GSadee))
+
 ## v1.13.3 (2024-07-02)
 
 #### Details
