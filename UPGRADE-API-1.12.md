@@ -1,3 +1,7 @@
+# UPGRADE FROM `v1.12.18` TO `v1.12.19`
+
+1. The `api/v2/shop/adjustments/{id}` endpoint has been disabled.
+
 # UPGRADE FROM `v1.12.13` TO `v1.12.14`
 
 1. The `api/v2/admin/zone-members/{code}` endpoint has been changed to `api/v2/admin/zone-members/{id}`.
