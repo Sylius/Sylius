@@ -405,6 +405,30 @@ final class ManagingProductVariantsContext implements Context
     }
 
     /**
+     * @When I want to see the list of variants of the :product product
+     */
+    public function iWantToSeeTheListOfVariantsOfTheProduct(ProductInterface $product): void
+    {
+        $this->indexPage->open(['productId' => $product->getId()]);
+    }
+
+    /**
+     * @When I go to generate variants page
+     */
+    public function iGoToGenerateVariantsPage(): void
+    {
+        $this->indexPage->goToVariantGeneration();
+    }
+
+    /**
+     * @Then I should be on the :product product generate variants page
+     */
+    public function iShouldBeOnTheProductGenerateVariantsPage(ProductInterface $product): void
+    {
+        $this->generatePage->verify(['productId' => $product->getId()]);
+    }
+
+    /**
      * @Then /^the (variant with code "[^"]+") should be priced at (?:€|£|\$)([^"]+) for (channel "([^"]+)")$/
      * @Then /^the (variant with code "[^"]+") should be priced at "(?:€|£|\$)([^"]+)" for (channel "([^"]+)")$/
      */
@@ -767,6 +791,14 @@ final class ManagingProductVariantsContext implements Context
     public function iShouldBeAbleToRemove(int $nthVariant): void
     {
         Assert::true($this->generatePage->isProductVariantRemovable($nthVariant - 1));
+    }
+
+    /**
+     * @Then I should not be able to go to the generate variants page
+     */
+    public function iShouldNotBeAbleToGoToTheGenerateVariantsPage(): void
+    {
+        Assert::false($this->indexPage->hasGenerateVariantsButton(), 'Generate variants button should not be visible');
     }
 
     /**
