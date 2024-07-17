@@ -1,0 +1,23 @@
+twig_hooks:
+    hooks:
+        'sylius_admin.shipping_category.create.content':
+            form:
+                template: '@SyliusAdmin/shared/crud/common/content/form.html.twig'
+                configuration:
+                    render_rest: false
+
+        'sylius_admin.shipping_category.create.content.form':
+            sections:
+                template: '@SyliusAdmin/shipping_category/form/sections.html.twig'
+
+        'sylius_admin.shipping_category.create.content.form.sections':
+            details:
+                template: '@SyliusAdmin/shipping_category/form/sections/details.html.twig'
+
+        'sylius_admin.shipping_category.create.content.form.sections.details':
+            name:
+                template: '@SyliusAdmin/shipping_category/form/sections/details/name.html.twig'
+            code:
+                template: '@SyliusAdmin/shipping_category/form/sections/details/code.html.twig'
+            description:
+                template: '@SyliusAdmin/shipping_category/form/sections/details/description.html.twig'
