@@ -18,4 +18,4 @@ Feature: Adding a product variant with only original price
         And I add it
         Then I should be notified that it has been successfully created
         And the "VODKA_WYBOROWA_DELUX" variant of the "Wyborowa Vodka" product should appear in the store
-#        And the variant with code "VODKA_WYBOROWA_DELUX" should be originally priced at "$100.00" for channel "United States"
+        And the variant with code "VODKA_WYBOROWA_DELUX" should be originally priced at "$100.00" for channel "United States"
