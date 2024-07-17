@@ -73,9 +73,14 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
         $this->getDocument()->clickLink('Create');
     }
 
+    public function hasGenerateVariantsButton(): bool
+    {
+        return $this->hasElement('generate_variants_button');
+    }
+
     public function goToVariantGeneration(): void
     {
-        $this->getDocument()->clickLink('Generate');
+        $this->getElement('generate_variants_button')->click();
     }
 
     public function getShowProductInSingleChannelUrl(): string
@@ -152,9 +157,12 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
     {
         return array_merge(parent::getDefinedElements(), [
             'code' => '[data-test-code]',
+            'create_variant_button' => '[data-test-create]',
             'enabled' => '[data-test-enabled]',
             'field_shipping_category' => '[name="sylius_admin_product[variant][shippingCategory]"]',
             'field_shipping_required' => '[name="sylius_admin_product[variant][shippingRequired]"]',
+            'generate_variants_button' => '[data-test-generate]',
+            'list_variants_button' => '[data-test-list]',
             'product_translation_accordion' => '[data-test-product-translations-accordion="%localeCode%"]',
             'show_product_button' => '[data-test-show-product]',
             'side_navigation_tab' => '[data-test-side-navigation-tab="%name%"]',

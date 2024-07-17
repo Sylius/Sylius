@@ -36,6 +36,8 @@ interface UpdateSimpleProductPageInterface extends
 
     public function goToVariantCreation(): void;
 
+    public function hasGenerateVariantsButton(): bool;
+
     public function goToVariantGeneration(): void;
 
     public function hasTab(string $name): bool;

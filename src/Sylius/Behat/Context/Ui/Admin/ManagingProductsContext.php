@@ -1428,6 +1428,14 @@ final readonly class ManagingProductsContext implements Context
         Assert::true($this->attributesFormElement->hasAttributeError($attributeName, $localeCode));
     }
 
+    /**
+     * @Then I should not be able to go to the generate variants page
+     */
+    public function iShouldNotBeAbleToGoToTheGenerateVariantsPage(): void
+    {
+        Assert::false($this->updateSimpleProductPage->hasGenerateVariantsButton(), 'Generate variants button should not be visible');
+    }
+
     private function assertValidationMessage(string $element, string $message): void
     {
         /** @var CreatePageInterface|UpdatePageInterface $currentPage */
