@@ -24,11 +24,11 @@ twig_hooks:
 
         'sylius_shop.product.show.main.accordion':
             details:
-                template: "@SyliusShop/product/show/accordion/details.html.twig"
+                template: "@SyliusShop/product/show/main/accordion/details.html.twig"
             attributes:
-                template: "@SyliusShop/product/show/accordion/attributes.html.twig"
+                template: "@SyliusShop/product/show/main/accordion/attributes.html.twig"
             reviews:
-                template: "@SyliusShop/product/show/accordion/reviews.html.twig"
+                template: "@SyliusShop/product/show/main/accordion/reviews.html.twig"
 
         'sylius_shop.product.show.footer':
             associations:
