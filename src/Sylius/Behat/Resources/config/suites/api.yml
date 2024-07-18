@@ -63,7 +63,7 @@ imports:
     - api/shipping/managing_shipping_methods.yml
 #    - api/taxation/applying_taxes.yml
     - api/taxation/managing_tax_categories.yml
-#    - api/taxation/managing_tax_rates.yml
+    - api/taxation/managing_tax_rates.yml
 #    - api/taxon/managing_taxons.yml
 #    - api/taxon/managing_taxons_ajax.yml
     - api/user/managing_administrators.yml

@@ -265,33 +265,19 @@
             <tag name="api_platform.filter" />
         </service>
 
-<!--        <service id="sylius.api.tax_rates_start_date_filter" parent="api_platform.doctrine.orm.date_filter" public="true">-->
-<!--            <argument type="collection">-->
-<!--                <argument key="startDate">exclude_null</argument>-->
-<!--            </argument>-->
-<!--            <tag name="api_platform.filter" />-->
-<!--        </service>-->
-
-<!--        <service id="sylius.api.tax_rates_end_date_filter" parent="api_platform.doctrine.orm.date_filter" public="true">-->
-<!--            <argument type="collection">-->
-<!--                <argument key="endDate">exclude_null</argument>-->
-<!--            </argument>-->
-<!--            <tag name="api_platform.filter" />-->
-<!--        </service>-->
-
         <service id="sylius.api.channel_aware_filter" class="Sylius\Bundle\ApiBundle\Filter\Doctrine\ChannelsAwareChannelFilter" public="true">
             <argument type="service" id="api_platform.symfony.iri_converter" />
             <argument type="service" id="doctrine" />
             <tag name="api_platform.filter" />
         </service>
 
-<!--        <service id="sylius.api.tax_rate.date_filter" parent="ApiPlatform\Doctrine\Orm\Filter\DateFilter" public="true">-->
-<!--            <argument type="collection">-->
-<!--                <argument key="startDate"/>-->
-<!--                <argument key="endDate"/>-->
-<!--            </argument>-->
-<!--            <tag name="api_platform.filter" />-->
-<!--        </service>-->
+        <service id="sylius_api.date_filter.tax_rate" parent="ApiPlatform\Doctrine\Orm\Filter\DateFilter" public="true">
+            <argument type="collection">
+                <argument key="startDate"/>
+                <argument key="endDate"/>
+            </argument>
+            <tag name="api_platform.filter" />
+        </service>
 
 <!--        <service id="sylius.api.channel_pricing_channel_filter" parent="api_platform.doctrine.orm.search_filter" public="true">-->
 <!--            <argument type="collection">-->
