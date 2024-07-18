@@ -19,8 +19,17 @@ use Sylius\Behat\Page\Admin\Crud\CreatePage as BaseCreatePage;
 
 class CreatePage extends BaseCreatePage implements CreatePageInterface
 {
-    use NamesIt;
     use SpecifiesItsField;
+
+    public function nameIt(string $name): void
+    {
+        $this->getElement('name')->setValue($name);
+    }
+
+    public function specifyCode(string $code): void
+    {
+        $this->getElement('code')->setValue($code);
+    }
 
     public function specifyDescription(string $description): void
     {
@@ -30,8 +39,9 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
-            'code' => '#sylius_admin_shipping_category_code',
-            'description' => '#sylius_admin_shipping_category_description',
+            'code' => '[data-test-code]',
+            'description' => '[data-test-description]',
+            'name' => '[data-test-name]',
         ]);
     }
 }

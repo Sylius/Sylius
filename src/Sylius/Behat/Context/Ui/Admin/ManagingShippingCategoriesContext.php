@@ -36,7 +36,7 @@ class ManagingShippingCategoriesContext implements Context
     /**
      * @When I want to create a new shipping category
      */
-    public function iWantToCreateANewShippingCategory()
+    public function iWantToCreateANewShippingCategory(): void
     {
         $this->createPage->open();
     }
@@ -44,7 +44,7 @@ class ManagingShippingCategoriesContext implements Context
     /**
      * @When /^I browse shipping categories$/
      */
-    public function iWantToBrowseShippingCategories()
+    public function iWantToBrowseShippingCategories(): void
     {
         $this->indexPage->open();
     }
@@ -61,7 +61,7 @@ class ManagingShippingCategoriesContext implements Context
     /**
      * @When I specify its description as :shippingCategoryDescription
      */
-    public function iSpecifyItsDescriptionAs($shippingCategoryDescription)
+    public function iSpecifyItsDescriptionAs(string $shippingCategoryDescription): void
     {
         $this->createPage->specifyDescription($shippingCategoryDescription);
     }
@@ -70,7 +70,7 @@ class ManagingShippingCategoriesContext implements Context
      * @When I add it
      * @When I try to add it
      */
-    public function iAddIt()
+    public function iAddIt(): void
     {
         $this->createPage->create();
     }
@@ -78,7 +78,7 @@ class ManagingShippingCategoriesContext implements Context
     /**
      * @Then I should be notified that :element is required
      */
-    public function iShouldBeNotifiedThatCodeIsRequired($element)
+    public function iShouldBeNotifiedThatCodeIsRequired(string $element): void
     {
         Assert::same(
             $this->updatePage->getValidationMessage($element),
@@ -99,7 +99,7 @@ class ManagingShippingCategoriesContext implements Context
      * @When I name it :shippingCategoryName
      * @When I do not specify its name
      */
-    public function iNameIt($shippingCategoryName = null)
+    public function iNameIt($shippingCategoryName = null): void
     {
         $this->createPage->nameIt($shippingCategoryName ?? '');
     }
@@ -116,7 +116,7 @@ class ManagingShippingCategoriesContext implements Context
      * @Then /^the (shipping category "([^"]+)") should be in the registry$/
      * @Then /^the (shipping category "([^"]+)") should appear in the registry$/
      */
-    public function theShippingCategoryShouldAppearInTheRegistry(ShippingCategoryInterface $shippingCategory)
+    public function theShippingCategoryShouldAppearInTheRegistry(ShippingCategoryInterface $shippingCategory): void
     {
         $this->iWantToBrowseShippingCategories();
 
@@ -126,7 +126,7 @@ class ManagingShippingCategoriesContext implements Context
     /**
      * @When I delete shipping category :shippingCategoryName
      */
-    public function iDeleteShippingCategory($shippingCategoryName)
+    public function iDeleteShippingCategory(string $shippingCategoryName): void
     {
         $this->iWantToBrowseShippingCategories();
         $this->indexPage->deleteResourceOnPage(['name' => $shippingCategoryName]);
@@ -143,7 +143,7 @@ class ManagingShippingCategoriesContext implements Context
     /**
      * @Then shipping category with name :shippingCategoryName should not be added
      */
-    public function shippingCategoryWithNameShouldNotBeAdded($shippingCategoryName)
+    public function shippingCategoryWithNameShouldNotBeAdded(string $shippingCategoryName): void
     {
         Assert::false($this->indexPage->isSingleResourceOnPage(['name' => $shippingCategoryName]));
     }
@@ -152,7 +152,7 @@ class ManagingShippingCategoriesContext implements Context
      * @When /^I modify a (shipping category "([^"]+)")$/
      * @When /^I want to modify a (shipping category "([^"]+)")$/
      */
-    public function iWantToModifyAShippingCategory(ShippingCategoryInterface $shippingCategory)
+    public function iWantToModifyAShippingCategory(ShippingCategoryInterface $shippingCategory): void
     {
         $this->updatePage->open(['id' => $shippingCategory->getId()]);
     }
@@ -160,7 +160,7 @@ class ManagingShippingCategoriesContext implements Context
     /**
      * @When I rename it to :name
      */
-    public function iNameItIn($name)
+    public function iNameItIn(string $name): void
     {
         $this->createPage->nameIt($name ?? '');
     }
@@ -168,7 +168,7 @@ class ManagingShippingCategoriesContext implements Context
     /**
      * @When I save my changes
      */
-    public function iSaveMyChanges()
+    public function iSaveMyChanges(): void
     {
         $this->updatePage->saveChanges();
     }
@@ -200,7 +200,7 @@ class ManagingShippingCategoriesContext implements Context
     /**
      * @Then this shipping category name should be :shippingCategoryName
      */
-    public function thisShippingCategoryNameShouldBe($shippingCategoryName)
+    public function thisShippingCategoryNameShouldBe(string $shippingCategoryName): void
     {
         Assert::true($this->updatePage->hasResourceValues(['name' => $shippingCategoryName]));
     }
@@ -208,7 +208,7 @@ class ManagingShippingCategoriesContext implements Context
     /**
      * @Then I should be notified that shipping category with this code already exists
      */
-    public function iShouldBeNotifiedThatShippingCategoryWithThisCodeAlreadyExists()
+    public function iShouldBeNotifiedThatShippingCategoryWithThisCodeAlreadyExists(): void
     {
         Assert::same(
             $this->createPage->getValidationMessage('code'),
@@ -219,7 +219,7 @@ class ManagingShippingCategoriesContext implements Context
     /**
      * @Then there should still be only one shipping category with code :code
      */
-    public function thereShouldStillBeOnlyOneShippingCategoryWith($code)
+    public function thereShouldStillBeOnlyOneShippingCategoryWith(string $code): void
     {
         $this->iWantToBrowseShippingCategories();
 
