@@ -11,7 +11,7 @@ Feature: Filtering tax rates by end date
         And the store has "3 weeks tax rate" tax rate of 25% for "Clothes" within the "US" zone with dates between "2022-12-24" and "2023-01-15"
         And I am logged in as an administrator
 
-    @ui @api
+    @api @ui
     Scenario: Filtering tax rates from end date
         When I browse tax rates
         And I filter tax rates by end date from "2022-12-26"
@@ -19,7 +19,7 @@ Feature: Filtering tax rates by end date
         And I should see the tax rate "2022 tax rate" in the list
         And I should see the tax rate "3 weeks tax rate" in the list
 
-    @ui @api
+    @api @ui
     Scenario: Filtering tax rates up to end date
         When I browse tax rates
         And I filter tax rates by end date up to "2022-12-31"
@@ -27,7 +27,7 @@ Feature: Filtering tax rates by end date
         And I should not see a tax rate with name "3 weeks tax rate"
         But I should see the tax rate "2022 tax rate" in the list
 
-    @ui @api
+    @api @ui
     Scenario: Filtering tax rates in a end date range
         When I browse tax rates
         And I filter tax rates by end date from "2023-01-02" up to "2023-01-31"

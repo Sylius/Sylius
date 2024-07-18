@@ -36,14 +36,14 @@
             "updatedAt": @datetime@
         }
     ],
-        "hydra:totalItems": 2,
-        "hydra:search": {
-            "@type": "hydra:IriTemplate",
-            "hydra:template": "\/api\/v2\/admin\/tax-rates{?startDate[before],startDate[strictly_before],startDate[after],startDate[strictly_after],endDate[before],endDate[strictly_before],endDate[after],endDate[strictly_after]}",
-            "hydra:variableRepresentation": "BasicRepresentation",
-            "hydra:mapping": [
-                {
-                    "@type": "IriTemplateMapping",
+    "hydra:totalItems": 2,
+    "hydra:search": {
+        "@type": "hydra:IriTemplate",
+        "hydra:template": "\/api\/v2\/admin\/tax-rates{?startDate[before],startDate[strictly_before],startDate[after],startDate[strictly_after],endDate[before],endDate[strictly_before],endDate[after],endDate[strictly_after]}",
+        "hydra:variableRepresentation": "BasicRepresentation",
+        "hydra:mapping": [
+            {
+                "@type": "IriTemplateMapping",
                 "variable": "startDate[before]",
                 "property": "startDate",
                 "required": false
