@@ -1,0 +1,33 @@
+{% from '@SyliusAdmin/shared/helper/icon.html.twig' import icon %}
+
+{% set product_variant = hookable_metadata.context.resource %}
+
+{% if product_variant.channelPricings|length < 1 %}
+    <button class="btn disabled">
+        {{ icon({ icon: 'eye', class: 'icon dropdown-item-icon icon-tabler' }) }}
+        {{ 'sylius.ui.price_history'|trans }}
+    </button>
+{% else %}
+    <div class="dropdown">
+        <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            {{ 'sylius.ui.price_history'|trans }}
+        </button>
+        <ul class="dropdown-menu">
+            {% for channel_pricing in product_variant.channelPricings %}
+                {% set parameters = { 'productId': product_variant.product.id, 'variantId': product_variant.id, 'channelPricingId': channel_pricing.id } %}
+                {% set url = path('sylius_admin_channel_pricing_log_entry_index', parameters) %}
+                <li>
+                    <a
+                        class="dropdown-item{% if url is not defined %} disabled{% endif %}"
+                        href="{{ url }}"
+                    >
+                        {{ icon({ icon: action.icon|default('eye'), class: 'icon icon-tabler' }) }}
+                        <span>
+                            <span class="text-nowrap">{{ channel_pricing.channelCode|sylius_channel_name }}</span>
+                        </span>
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endif %}

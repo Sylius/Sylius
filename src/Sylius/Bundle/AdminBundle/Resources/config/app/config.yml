@@ -34,6 +34,7 @@ sylius_grid:
             ship_with_tracking_code: '@SyliusAdmin/shipment/grid/action/ship_with_tracking_code.html.twig'
             update_product_taxon_positions: "@SyliusAdmin/product_taxon/grid/action/update_positions.html.twig"
             update_product_variant_positions: "@SyliusAdmin/product_variant/grid/action/update_positions.html.twig"
+            price_history: "@SyliusAdmin/product_variant/grid/action/price_history.html.twig"
         bulk_action:
             delete: '@SyliusAdmin/shared/grid/bulk_action/delete.html.twig'
         filter:

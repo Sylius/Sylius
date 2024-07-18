@@ -10,6 +10,10 @@ twig_hooks:
             breadcrumbs:
                 template: '@SyliusAdmin/product_variant/form/content/update/header/breadcrumbs.html.twig'
 
+        'sylius_admin.product_variant.update.content.header.title_block.actions':
+            price_history:
+                template: '@SyliusAdmin/product_variant/form/content/update/header/actions/price_history.html.twig'
+
         'sylius_admin.product_variant.update.content.form':
             side_navigation:
                 template: '@SyliusAdmin/product_variant/form/side_navigation.html.twig'
