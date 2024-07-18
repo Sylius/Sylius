@@ -28,6 +28,8 @@ abstract class JsonApiTestCase extends BaseJsonApiTestCase
 
     public const PATCH_CONTENT_TYPE_HEADER = ['CONTENT_TYPE' => 'application/merge-patch+json', 'HTTP_ACCEPT' => 'application/ld+json'];
 
+    public const FILE_CONTENT_TYPE_HEADER = ['CONTENT_TYPE' => 'multipart/form-data', 'HTTP_ACCEPT' => 'application/ld+json'];
+
     private bool $isAdminContext = false;
 
     /** @var array <string, string> */
