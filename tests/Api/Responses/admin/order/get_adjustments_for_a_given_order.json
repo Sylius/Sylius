@@ -1,0 +1,70 @@
+{
+    "@context": "/api/v2/contexts/Adjustment",
+    "@id": "/api/v2/admin/orders/nAWw2jewpA/adjustments",
+    "@type": "hydra:Collection",
+    "hydra:totalItems": 4,
+    "hydra:member": [
+        {
+            "@id": "/api/v2/admin/adjustments/@integer@",
+            "@type": "Adjustment",
+            "shipment": "/api/v2/admin/shipments/@integer@",
+            "id": @integer@,
+            "order": "/api/v2/admin/orders/nAWw2jewpA",
+            "orderItem": null,
+            "orderItemUnit": null,
+            "type": "shipping",
+            "label": "UPS",
+            "amount": 500,
+            "neutral": false,
+            "locked": false
+        },
+        {
+            "@id": "/api/v2/admin/adjustments/@integer@",
+            "@type": "Adjustment",
+            "shipment": null,
+            "id": @integer@,
+            "order": null,
+            "orderItem": null,
+            "orderItemUnit": "/api/v2/admin/order-item-units/@integer@",
+            "type": "order_promotion",
+            "label": "50% Off on your first order",
+            "amount": -1000,
+            "neutral": false,
+            "locked": false
+        },
+        {
+            "@id": "/api/v2/admin/adjustments/@integer@",
+            "@type": "Adjustment",
+            "shipment": null,
+            "id": @integer@,
+            "order": null,
+            "orderItem": null,
+            "orderItemUnit": "/api/v2/admin/order-item-units/@integer@",
+            "type": "order_promotion",
+            "label": "50% Off on your first order",
+            "amount": -1000,
+            "neutral": false,
+            "locked": false
+        },
+        {
+            "@id": "/api/v2/admin/adjustments/@integer@",
+            "@type": "Adjustment",
+            "shipment": null,
+            "id": @integer@,
+            "order": null,
+            "orderItem": null,
+            "orderItemUnit": "/api/v2/admin/order-item-units/@integer@",
+            "type": "order_promotion",
+            "label": "50% Off on your first order",
+            "amount": -1000,
+            "neutral": false,
+            "locked": false
+        }
+    ],
+    "hydra:search": {
+        "@type": "hydra:IriTemplate",
+        "hydra:template": "\/api\/v2\/admin\/orders\/nAWw2jewpA\/adjustments{?}",
+        "hydra:variableRepresentation": "BasicRepresentation",
+        "hydra:mapping": []
+    }
+}

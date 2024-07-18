@@ -14,18 +14,19 @@ declare(strict_types=1);
 namespace Sylius\Bundle\ApiBundle\Filter\Doctrine;
 
 use ApiPlatform\Api\IriConverterInterface;
-use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\AbstractContextAwareFilter;
-use ApiPlatform\Core\Bridge\Doctrine\Orm\Util\QueryNameGeneratorInterface;
+use ApiPlatform\Doctrine\Orm\Filter\AbstractFilter;
+use ApiPlatform\Doctrine\Orm\Util\QueryNameGeneratorInterface;
+use ApiPlatform\Metadata\Operation;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Serializer\NameConverter\NameConverterInterface;
 
-final class ProductVariantOptionValueFilter extends AbstractContextAwareFilter
+final class ProductVariantOptionValueFilter extends AbstractFilter
 {
     public function __construct(
-        private IriConverterInterface $iriConverter,
+        private readonly IriConverterInterface $iriConverter,
         ManagerRegistry $managerRegistry,
         ?RequestStack $requestStack = null,
         ?LoggerInterface $logger = null,
@@ -41,7 +42,8 @@ final class ProductVariantOptionValueFilter extends AbstractContextAwareFilter
         QueryBuilder $queryBuilder,
         QueryNameGeneratorInterface $queryNameGenerator,
         string $resourceClass,
-        ?string $operationName = null,
+        ?Operation $operation = null,
+        array $context = [],
     ): void {
         if ($property !== 'optionValues') {
             return;

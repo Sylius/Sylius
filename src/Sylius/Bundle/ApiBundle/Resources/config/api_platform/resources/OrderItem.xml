@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Sylius Sp. z o.o.
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<resources
+    xmlns="https://api-platform.com/schema/metadata/resources-3.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="https://api-platform.com/schema/metadata/resources-3.0 https://api-platform.com/schema/metadata/resources-3.0.xsd"
+>
+    <resource class="Sylius\Component\Core\Model\OrderItem">
+        <operations>
+            <operation class="ApiPlatform\Metadata\Get" uriTemplate="/admin/order-items/{id}">
+                <normalizationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius:admin:order_item:show</value>
+                            </values>
+                        </value>
+                    </values>
+                </normalizationContext>
+            </operation>
+
+            <operation
+                class="ApiPlatform\Metadata\Get"
+                uriTemplate="/shop/order-items/{id}"
+                provider="sylius_api.state_provider.shop.order_item.item"
+            >
+                <normalizationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius:shop:order_item:show</value>
+                            </values>
+                        </value>
+                    </values>
+                </normalizationContext>
+            </operation>
+        </operations>
+    </resource>
+
+    <resource class="Sylius\Component\Core\Model\OrderItem" uriTemplate="/shop/orders/{tokenValue}/items">
+        <uriVariables>
+            <uriVariable parameterName="tokenValue" fromClass="Sylius\Component\Core\Model\Order" fromProperty="items" />
+        </uriVariables>
+        <operations>
+            <operation class="ApiPlatform\Metadata\GetCollection">
+                <normalizationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius:shop:cart:show</value>
+                            </values>
+                        </value>
+                    </values>
+                </normalizationContext>
+            </operation>
+        </operations>
+    </resource>
+</resources>

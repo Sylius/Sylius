@@ -13,13 +13,13 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\EventSubscriber;
 
-use ApiPlatform\Core\EventListener\EventPriorities;
+use ApiPlatform\Symfony\EventListener\EventPriorities;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\RequestEvent;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\HttpKernel\KernelEvents;
 
-final class KernelRequestEventSubscriber implements EventSubscriberInterface
+final readonly class KernelRequestEventSubscriber implements EventSubscriberInterface
 {
     public function __construct(
         private bool $apiEnabled,
@@ -27,7 +27,7 @@ final class KernelRequestEventSubscriber implements EventSubscriberInterface
     ) {
     }
 
-    public static function getSubscribedEvents()
+    public static function getSubscribedEvents(): array
     {
         return [
             KernelEvents::REQUEST => ['validateApi', EventPriorities::PRE_VALIDATE],

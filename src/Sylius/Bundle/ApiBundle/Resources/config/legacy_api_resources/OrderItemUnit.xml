@@ -1,0 +1,50 @@
+<?xml version="1.0" ?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Sylius Sp. z o.o.
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<resources xmlns="https://api-platform.com/schema/metadata"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="https://api-platform.com/schema/metadata https://api-platform.com/schema/metadata/metadata-2.0.xsd"
+>
+    <resource class="%sylius.model.order_item_unit.class%" shortName="OrderItemUnit">
+        <collectionOperations />
+
+        <itemOperations>
+            <itemOperation name="admin_get">
+                <attribute name="method">GET</attribute>
+                <attribute name="path">/admin/order-item-units/{id}</attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">
+                        <attribute>admin:order_item_unit:show</attribute>
+                        <attribute>sylius:admin:order_item_unit:show</attribute>
+                    </attribute>
+                </attribute>
+            </itemOperation>
+
+            <itemOperation name="shop_get">
+                <attribute name="method">GET</attribute>
+                <attribute name="path">/shop/order-item-units/{id}</attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">
+                        <attribute>shop:order_item_unit:show</attribute>
+                        <attribute>sylius:shop:order_item_unit:show</attribute>
+                    </attribute>
+                </attribute>
+            </itemOperation>
+        </itemOperations>
+
+        <property name="id" identifier="true" writable="false" />
+        <property name="adjustments" readable="true">
+            <subresource resourceClass="%sylius.model.adjustment.class%" />
+        </property>
+    </resource>
+</resources>

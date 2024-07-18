@@ -9,7 +9,7 @@ Feature: Browsing shipping categories
         And the store has "Over sized" and "Standard" shipping category
         And I am logged in as an administrator
 
-    @todo @ui @api
+    @api @ui
     Scenario: Browsing defined shipping categories
         When I browse shipping categories
         Then I should see 2 shipping categories in the list

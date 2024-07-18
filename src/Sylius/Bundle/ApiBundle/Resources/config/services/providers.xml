@@ -15,12 +15,18 @@
            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
 >
+    <parameters>
+        <parameter key="sylius.api_path_prefixes" type="collection">
+            <parameter type="constant">Sylius\Bundle\ApiBundle\Provider\PathPrefixes::ADMIN_PREFIX</parameter>
+            <parameter type="constant">Sylius\Bundle\ApiBundle\Provider\PathPrefixes::SHOP_PREFIX</parameter>
+        </parameter>
+    </parameters>
     <services>
         <defaults public="true" />
 
         <service id="Sylius\Bundle\ApiBundle\Provider\PathPrefixProviderInterface" class="Sylius\Bundle\ApiBundle\Provider\PathPrefixProvider">
-            <argument type="service" id="Sylius\Bundle\ApiBundle\Context\UserContextInterface" />
             <argument>%sylius.security.new_api_route%</argument>
+            <argument>%sylius.api_path_prefixes%</argument>
         </service>
 
         <service id="sylius.api.provider.liip_image_filters" class="Sylius\Bundle\ApiBundle\Provider\LiipImageFiltersProvider">

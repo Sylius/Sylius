@@ -1,0 +1,27 @@
+{
+    "@context": "/api/v2/contexts/Adjustment",
+    "@id": "/api/v2/shop/orders/TOKEN/adjustments",
+    "@type": "hydra:Collection",
+    "hydra:totalItems": 1,
+    "hydra:member": [
+        {
+            "@id": "/api/v2/shop/adjustments/@integer@",
+            "@type": "Adjustment",
+            "id": @integer@,
+            "type": "shipping",
+            "label": "UPS",
+            "amount": 500,
+            "neutral": false
+        }
+    ],
+    "hydra:view": {
+        "@id": "\/api\/v2\/shop\/orders\/TOKEN\/adjustments?type=shipping",
+        "@type": "hydra:PartialCollectionView"
+    },
+    "hydra:search": {
+        "@type": "hydra:IriTemplate",
+        "hydra:template": "\/api\/v2\/shop\/orders\/TOKEN\/adjustments{?}",
+        "hydra:variableRepresentation": "BasicRepresentation",
+        "hydra:mapping": []
+    }
+}

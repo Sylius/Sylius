@@ -1,0 +1,10 @@
+{
+    "@context": "\/api\/v2\/contexts\/ShippingMethodTranslation",
+    "@id": "\/api\/v2\/admin\/shipping-methods\/UPS\/translations\/en_US",
+    "@type": "ShippingMethodTranslation",
+    "id": @integer@,
+    "name": "UPS",
+    "description": "@string@",
+    "locale": "en_US",
+    "shippingMethod": "\/api\/v2\/admin\/shipping-methods\/UPS"
+}

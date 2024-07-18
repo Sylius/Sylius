@@ -34,8 +34,12 @@ parameters:
         - 'src/Sylius/Bundle/CoreBundle/Doctrine/DQL/**.php'
         - 'src/Sylius/Bundle/CoreBundle/Doctrine/ORM/SqlWalker/**.php'
 
+        # Temporary exclusion during upgrade to API Platform 3
+        - 'src/Sylius/Bundle/ApiBundle/**.php'
+
         # Random errors related to Template Events (we're going to replace them with Twig Events anyway)
         - 'src/Sylius/Bundle/UiBundle/Console/Command/DebugTemplateEventCommand.php'
+
     ignoreErrors:
         - '/(Interface|Class) [a-zA-Z\\]+ specifies template type (\w+) of interface [a-zA-Z\\]+ as [a-zA-Z\\]+ (of [a-zA-Z\\]+ )?but it''s already specified as/' # turns off a weird generics check behavior, we are basing on Psalm for generics checks
         - '/Access to an undefined property Doctrine\\Common\\Collections\\ArrayCollection/'

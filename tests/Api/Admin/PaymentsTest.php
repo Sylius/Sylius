@@ -46,7 +46,7 @@ final class PaymentsTest extends JsonApiTestCase
 
         $this->requestGet(uri: '/api/v2/admin/payments');
 
-        $this->assertResponseSuccessful('admin/payment/get_payments_response');
+        $this->assertResponseSuccessful('admin/payment/get_payments');
     }
 
     /** @test */
@@ -70,7 +70,7 @@ final class PaymentsTest extends JsonApiTestCase
 
         $this->requestGet(uri: '/api/v2/admin/payments', queryParameters: ['state' => 'new']);
 
-        $this->assertResponseSuccessful('admin/payment/get_payments_filtered_by_state_response');
+        $this->assertResponseSuccessful('admin/payment/get_payments_filtered_by_state');
     }
 
     /** @test */
@@ -94,7 +94,7 @@ final class PaymentsTest extends JsonApiTestCase
 
         $this->requestGet(uri: '/api/v2/admin/payments/' . $orderResponse['payments'][0]['id']);
 
-        $this->assertResponseSuccessful('admin/payment/get_payment_response');
+        $this->assertResponseSuccessful('admin/payment/get_payment');
     }
 
     /** @test */
@@ -115,7 +115,7 @@ final class PaymentsTest extends JsonApiTestCase
 
         $this->requestPatch(uri: sprintf('/api/v2/admin/payments/%s/complete', $order->getPayments()->first()->getId()));
 
-        $this->assertResponseSuccessful('admin/payment/patch_complete_payment_response');
+        $this->assertResponseSuccessful('admin/payment/patch_complete_payment');
     }
 
     /** @test */
@@ -137,6 +137,6 @@ final class PaymentsTest extends JsonApiTestCase
         $this->payOrder($order);
         $this->requestPatch(uri: sprintf('/api/v2/admin/payments/%s/complete', $order->getPayments()->first()->getId()));
 
-        $this->assertResponseUnprocessableEntity('admin/payment/patch_not_complete_payment_response');
+        $this->assertResponseUnprocessableEntity('admin/payment/patch_not_complete_payment');
     }
 }

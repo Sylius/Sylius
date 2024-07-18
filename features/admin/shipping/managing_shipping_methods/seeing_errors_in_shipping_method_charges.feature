@@ -11,7 +11,7 @@ Feature: Seeing errors in shipping method charges
         And the store has a zone "United States" with code "US"
         And I am logged in as an administrator
 
-    @ui @mink:chromedriver @no-api
+    @no-api @ui @mink:chromedriver
     Scenario: Seeing the number of errors with per shipment charges
         Given the store has "FedEx Carrier" shipping method with "$20.00" fee per shipment for "Web" channel and "$15.00" for "Mobile" channel
         When I want to modify this shipping method
@@ -19,7 +19,7 @@ Feature: Seeing errors in shipping method charges
         And I try to save my changes
         Then I should see that the shipping charges for "Mobile" channel has 1 validation error
 
-    @ui @mink:chromedriver @no-api
+    @no-api @ui @mink:chromedriver
     Scenario: Seeing the number of errors with per unit charges
         Given the store has "FedEx Carrier" shipping method with "$20.00" fee per unit for "Web" channel and "$15.00" for "Mobile" channel
         When I want to modify this shipping method

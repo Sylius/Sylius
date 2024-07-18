@@ -17,11 +17,12 @@ use Sylius\Bundle\ApiBundle\Command\ShopUserIdAwareInterface;
 
 class ChangeShopUserPassword implements ShopUserIdAwareInterface
 {
-    /** @var mixed|null */
-    public $shopUserId;
-
-    public function __construct(public string $newPassword, public string $confirmNewPassword, public string $currentPassword)
-    {
+    public function __construct(
+        protected mixed $shopUserId,
+        protected string $newPassword,
+        protected string $confirmNewPassword,
+        protected string $currentPassword,
+    ) {
     }
 
     public function getShopUserId()
@@ -29,8 +30,18 @@ class ChangeShopUserPassword implements ShopUserIdAwareInterface
         return $this->shopUserId;
     }
 
-    public function setShopUserId($shopUserId): void
+    public function getNewPassword(): string
     {
-        $this->shopUserId = $shopUserId;
+        return $this->newPassword;
+    }
+
+    public function getConfirmNewPassword(): string
+    {
+        return $this->confirmNewPassword;
+    }
+
+    public function getCurrentPassword(): string
+    {
+        return $this->currentPassword;
     }
 }

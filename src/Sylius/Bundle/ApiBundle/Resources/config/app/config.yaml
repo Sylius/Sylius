@@ -10,6 +10,7 @@ parameters:
     sylius.api.doctrine_extension.order_visitor_item.filter_cart.allowed_non_get_operations:
         - "shop_select_payment_method"
     sylius.api.paths_to_hide:
+        - "%sylius.security.new_api_route%/admin/address-log-entry/{id}"
         - "%sylius.security.new_api_route%/admin/catalog-promotion-actions/{id}"
         - "%sylius.security.new_api_route%/admin/catalog-promotion-scopes/{id}"
         - "%sylius.security.new_api_route%/admin/channel-pricings/{id}"
@@ -32,7 +33,7 @@ sylius_api:
         restricted_resources:
             '%sylius.model.product.class%':
                 operations:
-                    shop_get: ~
+                    _api_/shop/products_get_collection: ~
     order_states_to_filter_out:
         - !php/const Sylius\Component\Core\Model\OrderInterface::STATE_CART
 
@@ -43,7 +44,7 @@ api_platform:
     swagger:
         versions: [3]
         api_keys:
-            apiKey:
+            JWT:
                 name: "%sylius.api.authorization_header%"
                 type: header
     exception_to_status:
@@ -86,13 +87,13 @@ api_platform:
         Symfony\Component\Serializer\Exception\MissingConstructorArgumentsException: 400
         Sylius\Bundle\ApiBundle\CommandHandler\Checkout\Exception\OrderTotalHasChangedException: 409
         Sylius\Bundle\ApiBundle\Serializer\Exception\InvalidAmountTypeException: 400
-    collection:
-        pagination:
-            client_items_per_page: true
+    defaults:
+        normalization_context:
+            skip_null_values: false
+        pagination_client_items_per_page: true
 
 lexik_jwt_authentication:
-    token_extractors:
-        authorization_header:
-            enabled: true
-            prefix: Bearer
-            name: "%sylius.api.authorization_header%"
+    api_platform:
+        check_path: "%sylius.security.new_api_route%/administrators/token"
+        username_path: email
+        password_path: password

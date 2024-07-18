@@ -203,7 +203,7 @@ final class RegistrationContext implements Context
             $content['message'],
             'Request does not have the following required fields specified: ' . implode(', ', $fields) . '.',
         );
-        Assert::same($content['code'], 400);
+        Assert::same($this->shopClient->getLastResponse()->getStatusCode(), 400);
     }
 
     /**

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Sylius Sp. z o.o.
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<resources
+    xmlns="https://api-platform.com/schema/metadata/resources-3.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="https://api-platform.com/schema/metadata/resources-3.0 https://api-platform.com/schema/metadata/resources-3.0.xsd"
+>
+    <resource class="Sylius\Component\Product\Model\ProductAttributeValue">
+        <validationContext>
+            <values>
+                <value name="groups">
+                    <values>
+                        <value>sylius</value>
+                    </values>
+                </value>
+            </values>
+        </validationContext>
+
+        <order>
+            <values>
+                <value name="attribute.position">ASC</value>
+            </values>
+        </order>
+
+        <operations>
+
+            <operation class="ApiPlatform\Metadata\Get" uriTemplate="/admin/product-attribute-values/{id}">
+                <normalizationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius:admin:product_attribute_value:show</value>
+                            </values>
+                        </value>
+                    </values>
+                </normalizationContext>
+            </operation>
+
+            <operation class="ApiPlatform\Metadata\Get" uriTemplate="/shop/product-attribute-values/{id}">
+                <normalizationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius:shop:product_attribute_value:show</value>
+                            </values>
+                        </value>
+                    </values>
+                </normalizationContext>
+            </operation>
+
+        </operations>
+    </resource>
+
+    <resource class="Sylius\Component\Product\Model\ProductAttributeValue" uriTemplate="/shop/products/{code}/attributes">
+        <uriVariables>
+            <uriVariable parameterName="code" fromClass="Sylius\Component\Core\Model\Product" fromProperty="attributes"/>
+        </uriVariables>
+        <operations>
+            <operation class="ApiPlatform\Metadata\GetCollection" provider="sylius_api.state_provider.shop.product.product_attribute_value.collection">
+                <normalizationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius:shop:product_attribute_value:show</value>
+                            </values>
+                        </value>
+                    </values>
+                </normalizationContext>
+            </operation>
+        </operations>
+    </resource>
+</resources>

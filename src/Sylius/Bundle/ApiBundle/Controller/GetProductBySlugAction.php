@@ -24,7 +24,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Webmozart\Assert\Assert;
 
-final class GetProductBySlugAction
+final readonly class GetProductBySlugAction
 {
     public function __construct(
         private ChannelContextInterface $channelContext,

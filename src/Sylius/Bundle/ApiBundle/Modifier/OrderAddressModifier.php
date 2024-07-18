@@ -22,7 +22,7 @@ use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\OrderCheckoutTransitions;
 use Webmozart\Assert\Assert;
 
-final class OrderAddressModifier implements OrderAddressModifierInterface
+final readonly class OrderAddressModifier implements OrderAddressModifierInterface
 {
     public function __construct(
         private StateMachineFactoryInterface|StateMachineInterface $stateMachineFactory,

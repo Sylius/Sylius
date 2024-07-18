@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Sylius Sp. z o.o.
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
+>
+    <services>
+        <service id="sylius_api.state_provider.admin.order.adjustment.collection" class="Sylius\Bundle\ApiBundle\StateProvider\Common\Adjustment\CollectionProvider">
+            <argument type="service" id="sylius.repository.order" />
+            <argument type="string">tokenValue</argument>
+            <tag name="api_platform.state_provider" priority="10"/>
+        </service>
+
+        <service id="sylius_api.state_provider.shop.order.adjustment.collection" class="Sylius\Bundle\ApiBundle\StateProvider\Common\Adjustment\CollectionProvider">
+            <argument type="service" id="sylius.repository.order" />
+            <argument type="string">tokenValue</argument>
+            <tag name="api_platform.state_provider" priority="10"/>
+        </service>
+
+
+        <service id="sylius_api.state_provider.admin.order_item.adjustment.collection" class="Sylius\Bundle\ApiBundle\StateProvider\Common\Adjustment\CollectionProvider">
+            <argument type="service" id="sylius.repository.order_item" />
+            <argument type="string">id</argument>
+            <tag name="api_platform.state_provider" priority="10"/>
+        </service>
+
+        <service id="sylius_api.state_provider.shop.order.order_item.adjustment.collection" class="Sylius\Bundle\ApiBundle\StateProvider\Shop\Order\OrderItem\Adjustment\CollectionProvider">
+            <argument type="service" id="sylius.repository.order_item" />
+            <argument type="service" id="Sylius\Bundle\CoreBundle\SectionResolver\SectionProviderInterface" />
+            <tag name="api_platform.state_provider" priority="10"/>
+        </service>
+
+        <service id="sylius_api.state_provider.shop.shop_user.reset_password" class="Sylius\Bundle\ApiBundle\StateProvider\Shop\ShopUser\ResetPasswordProvider">
+            <argument type="service" id="Sylius\Bundle\CoreBundle\SectionResolver\SectionProviderInterface" />
+            <tag name="api_platform.state_provider" priority="10" />
+        </service>
+
+        <service id="sylius_api.state_provider.shop.shop_user.verify_shop_user" class="Sylius\Bundle\ApiBundle\StateProvider\Shop\ShopUser\VerifyShopUserProvider">
+            <argument type="service" id="Sylius\Bundle\CoreBundle\SectionResolver\SectionProviderInterface" />
+            <tag name="api_platform.state_provider" priority="10" />
+        </service>
+
+        <service id="sylius_api.state_provider.admin.admin_user.reset_password" class="Sylius\Bundle\ApiBundle\StateProvider\Admin\AdminUser\ResetPasswordProvider">
+            <argument type="service" id="Sylius\Bundle\CoreBundle\SectionResolver\SectionProviderInterface" />
+            <tag name="api_platform.state_provider" priority="10" />
+        </service>
+
+        <service id="sylius_api.state_provider.shop.channel.collection" class="Sylius\Bundle\ApiBundle\StateProvider\Shop\Channel\CollectionProvider" >
+            <argument type="service" id="Sylius\Bundle\CoreBundle\SectionResolver\SectionProviderInterface" />
+            <tag name="api_platform.state_provider" priority="10" />
+        </service>
+
+        <service id="sylius_api.state_provider.shop.product.product_attribute_value.collection" class="Sylius\Bundle\ApiBundle\StateProvider\Shop\Product\ProductAttributeValue\CollectionProvider">
+            <argument type="tagged_iterator" tag="api_platform.doctrine.orm.query_extension.collection" />
+            <argument type="service" id="Sylius\Bundle\CoreBundle\SectionResolver\SectionProviderInterface" />
+            <argument type="service" id="sylius.repository.product_attribute_value" />
+            <argument type="service" id="sylius.context.locale" />
+            <argument type="service" id="sylius.locale_provider.channel_based" />
+            <argument>%locale%</argument>
+            <tag name="api_platform.state_provider" priority="10"/>
+        </service>
+
+        <service id="sylius_api.state_provider.shop.order.shipment.shipping_method.collection" class="Sylius\Bundle\ApiBundle\StateProvider\Shop\Order\Shipment\ShippingMethod\CollectionProvider">
+            <argument type="service" id="sylius.section_resolver.uri_based_section_resolver" />
+            <argument type="service" id="sylius.repository.shipment" />
+            <argument type="service" id="sylius.shipping_methods_resolver" />
+            <tag name="api_platform.state_provider" />
+        </service>
+
+        <service id="sylius_api.state_provider.shop.order_item.item" class="Sylius\Bundle\ApiBundle\StateProvider\Shop\OrderItem\ItemProvider">
+            <argument type="service" id="sylius.section_resolver.uri_based_section_resolver" />
+            <argument type="service" id="Sylius\Bundle\ApiBundle\Context\UserContextInterface" />
+            <argument type="service" id="sylius.repository.order_item" />
+            <tag name="api_platform.state_provider" />
+        </service>
+
+        <service id="sylius_api.state_provider.shop.order_item_unit.item" class="Sylius\Bundle\ApiBundle\StateProvider\Shop\OrderItemUnit\ItemProvider">
+            <argument type="service" id="sylius.section_resolver.uri_based_section_resolver" />
+            <argument type="service" id="Sylius\Bundle\ApiBundle\Context\UserContextInterface" />
+            <argument type="service" id="sylius.repository.order_item_unit" />
+            <tag name="api_platform.state_provider" />
+        </service>
+    </services>
+</container>
