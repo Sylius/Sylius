@@ -3,7 +3,7 @@
     "@id": "\/api\/v2\/admin\/payments\/@integer@\/complete",
     "@type": "Payment",
     "order": "\/api\/v2\/admin\/orders\/nAWw2jewpA",
-    "id": @integer@,
+    "id": "@integer@",
     "method": {
         "@id": "\/api\/v2\/admin\/payment-methods\/CASH_ON_DELIVERY",
         "@type": "PaymentMethod",
@@ -13,6 +13,6 @@
     "amount": 6500,
     "state": "completed",
     "details": [],
-    "createdAt": @string@,
-    "updatedAt": @string@
+    "createdAt": "@string@",
+    "updatedAt": "@string@"
 }

@@ -7,7 +7,7 @@
         {
             "propertyPath": "code",
             "message": "The promotion with given code already exists.",
-            "code": @string@
+            "code": "@string@"
         }
     ]
 }

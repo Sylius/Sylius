@@ -7,7 +7,7 @@
         {
             "propertyPath": "code",
             "message": "This value is not a valid currency code.",
-            "code": @string@
+            "code": "@string@"
         }
     ]
 }

@@ -7,12 +7,12 @@
         {
             "propertyPath": "firstName",
             "message": "First name must be at least 2 characters long.",
-            "code": @string@
+            "code": "@string@"
         },
         {
             "propertyPath": "lastName",
             "message": "Last name must be at least 2 characters long.",
-            "code": @string@
+            "code": "@string@"
         }
     ]
 }

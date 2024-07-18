@@ -26,7 +26,7 @@
                 "en_US": {
                     "@id": "\/api\/v2\/admin\/product-variant-translations\/@integer@",
                     "@type": "ProductVariantTranslation",
-                    "id": @integer@,
+                    "id": "@integer@",
                     "name": "Mug"
                 }
             },
@@ -42,8 +42,8 @@
             "taxCategory": "\/api\/v2\/admin\/tax-categories\/default",
             "shippingCategory": "\/api\/v2\/admin\/shipping-categories\/default",
             "shippingRequired": true,
-            "createdAt": @date@,
-            "updatedAt": @date@
+            "createdAt": "@date@",
+            "updatedAt": "@date@"
         },
         {
             "@id": "\/api\/v2\/admin\/product-variants/MUG_2",
@@ -66,7 +66,7 @@
                 "en_US": {
                     "@id": "\/api\/v2\/admin\/product-variant-translations\/@integer@",
                     "@type": "ProductVariantTranslation",
-                    "id": @integer@,
+                    "id": "@integer@",
                     "name": "Mug 2"
                 }
             },
@@ -82,8 +82,8 @@
             "taxCategory": null,
             "shippingCategory": null,
             "shippingRequired": true,
-            "createdAt": @date@,
-            "updatedAt": @date@
+            "createdAt": "@date@",
+            "updatedAt": "@date@"
         }
     ],
     "hydra:totalItems": 2,

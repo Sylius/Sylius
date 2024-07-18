@@ -10,7 +10,7 @@
                 "\/api\/v2\/admin\/channels\/WEB"
             ],
             "gatewayConfig": "\/api\/v2\/admin\/gateway-configs\/@integer@",
-            "id": @integer@,
+            "id": "@integer@",
             "code": "CASH_ON_DELIVERY",
             "position": 0,
             "enabled": true,
@@ -18,9 +18,9 @@
                 "en_US": {
                     "@id": "\/api\/v2\/admin\/payment-method-translations\/@integer@",
                     "@type": "PaymentMethodTranslation",
-                    "id": @integer@,
+                    "id": "@integer@",
                     "name": "Cash on delivery",
-                    "description": @string@,
+                    "description": "@string@",
                     "instructions": null
                 }
             }
@@ -32,7 +32,7 @@
                 "\/api\/v2\/admin\/channels\/WEB"
             ],
             "gatewayConfig": "\/api\/v2\/admin\/gateway-configs\/@integer@",
-            "id": @integer@,
+            "id": "@integer@",
             "code": "BANK_TRANSFER",
             "position": 1,
             "enabled": true,
@@ -40,9 +40,9 @@
                 "en_US": {
                     "@id": "\/api\/v2\/admin\/payment-method-translations\/@integer@",
                     "@type": "PaymentMethodTranslation",
-                    "id": @integer@,
+                    "id": "@integer@",
                     "name": "Bank transfer",
-                    "description": @string@,
+                    "description": "@string@",
                     "instructions": null
                 }
             }
@@ -54,7 +54,7 @@
                 "\/api\/v2\/admin\/channels\/WEB"
             ],
             "gatewayConfig": "\/api\/v2\/admin\/gateway-configs\/@integer@",
-            "id": @integer@,
+            "id": "@integer@",
             "code": "DISABLED_PAYMENT_METHOD",
             "position": 2,
             "enabled": false,
@@ -62,9 +62,9 @@
                 "en_US": {
                     "@id": "\/api\/v2\/admin\/payment-method-translations\/@integer@",
                     "@type": "PaymentMethodTranslation",
-                    "id": @integer@,
+                    "id": "@integer@",
                     "name": "Disabled payment method",
-                    "description": @string@,
+                    "description": "@string@",
                     "instructions": null
                 }
             }
@@ -76,7 +76,7 @@
                 "\/api\/v2\/admin\/channels\/WEB"
             ],
             "gatewayConfig": "\/api\/v2\/admin\/gateway-configs\/@integer@",
-            "id": @integer@,
+            "id": "@integer@",
             "code": "PAYPAL",
             "position": 3,
             "enabled": true,
@@ -84,9 +84,9 @@
                 "en_US": {
                     "@id": "\/api\/v2\/admin\/payment-method-translations\/@integer@",
                     "@type": "PaymentMethodTranslation",
-                    "id": @integer@,
+                    "id": "@integer@",
                     "name": "PayPal",
-                    "description": @string@,
+                    "description": "@string@",
                     "instructions": null
                 }
             }

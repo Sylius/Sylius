@@ -7,12 +7,12 @@
         {
             "propertyPath": "code",
             "message": "Please enter attribute code.",
-            "code": @string@
+            "code": "@string@"
         },
         {
             "propertyPath": "translations[en_US].name",
             "message": "Please enter attribute name.",
-            "code": @string@
+            "code": "@string@"
         }
     ]
 }

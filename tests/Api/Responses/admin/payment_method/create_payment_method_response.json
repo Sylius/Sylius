@@ -4,7 +4,7 @@
     "@type": "PaymentMethod",
     "channels": [],
     "gatewayConfig": "\/api\/v2\/admin\/gateway-configs\/@integer@",
-    "id": @integer@,
+    "id": "@integer@",
     "code": "test",
     "position": 0,
     "enabled": true,
@@ -12,7 +12,7 @@
         "en_US": {
             "@id": "\/api\/v2\/admin\/payment-method-translations\/@integer@",
             "@type": "PaymentMethodTranslation",
-            "id": @integer@,
+            "id": "@integer@",
             "name": "Test",
             "description": "Test",
             "instructions": "Testing instructions"

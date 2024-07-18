@@ -4,7 +4,7 @@
     "@type": "Customer",
     "defaultAddress": null,
     "user": null,
-    "id": @integer@,
+    "id": "@integer@",
     "email": "api@example.com",
     "firstName": "John",
     "lastName": "Doe",
@@ -13,6 +13,6 @@
     "group": null,
     "phoneNumber": "+48123456789",
     "subscribedToNewsletter": true,
-    "createdAt": @date@,
+    "createdAt": "@date@",
     "fullName": "John Doe"
 }

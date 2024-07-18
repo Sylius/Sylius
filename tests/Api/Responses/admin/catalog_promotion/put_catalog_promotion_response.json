@@ -2,13 +2,13 @@
     "@context": "\/api\/v2\/contexts\/CatalogPromotion",
     "@id": "\/api\/v2\/admin\/catalog-promotions\/mugs_discount",
     "@type": "CatalogPromotion",
-    "id": @integer@,
+    "id": "@integer@",
     "name": "T-Shirts discount",
     "code": "mugs_discount",
     "startDate": null,
     "endDate": null,
     "priority": 0,
-    "state": @string@,
+    "state": "@string@",
     "channels": [
         "\/api\/v2\/admin\/channels\/MOBILE"
     ],
@@ -16,7 +16,7 @@
         {
             "@type": "CatalogPromotionScope",
             "@id": "\/api\/v2\/admin\/catalog-promotion-scopes\/@integer@",
-            "id": @integer@,
+            "id": "@integer@",
             "type": "for_variants",
             "configuration": {
                 "variants": [
@@ -29,22 +29,22 @@
         {
             "@type": "CatalogPromotionAction",
             "@id": "\/api\/v2\/admin\/catalog-promotion-actions\/@integer@",
-            "id": @integer@,
+            "id": "@integer@",
             "type": "percentage_discount",
             "configuration": {
                 "amount": 0.4
             }
         }
     ],
-  "enabled": @boolean@,
+  "enabled": "@boolean@",
   "exclusive": false,
   "translations": {
         "en_US": {
             "@id": "\/api\/v2\/admin\/catalog-promotion-translations\/@integer@",
             "@type": "CatalogPromotionTranslation",
-            "id": @integer@,
+            "id": "@integer@",
             "label": "T-Shirts discount",
-            "description": @string@
+            "description": "@string@"
         }
     }
 }

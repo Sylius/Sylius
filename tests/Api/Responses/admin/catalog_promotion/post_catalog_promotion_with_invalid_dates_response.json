@@ -7,7 +7,7 @@
         {
             "propertyPath": "endDate",
             "message": "End date cannot be set before start date.",
-            "code": @string@
+            "code": "@string@"
         }
     ]
 }

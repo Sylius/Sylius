@@ -15,7 +15,7 @@
         {
             "@id": "\/api\/v2\/admin\/taxon-images\/@integer@",
             "@type": "TaxonImage",
-            "id": @integer@,
+            "id": "@integer@",
             "type": "thumbnail",
             "path": "@string@.contains('sylius_small').endsWith('category.jpeg')"
         }
@@ -24,7 +24,7 @@
         "en_US": {
             "@id": "\/api\/v2\/admin\/taxon-translations\/@integer@",
             "@type": "TaxonTranslation",
-            "id": @integer@,
+            "id": "@integer@",
             "name": "Categories",
             "slug": "categories",
             "description": "Some description Lorem ipsum dolor sit amet."

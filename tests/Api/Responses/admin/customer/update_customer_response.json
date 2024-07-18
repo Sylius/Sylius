@@ -9,7 +9,7 @@
         "enabled": false,
         "verified": false
     },
-    "id": @integer@,
+    "id": "@integer@",
     "email": "api@example.com",
     "firstName": "John",
     "lastName": "Lim",
@@ -18,6 +18,6 @@
     "group": "\/api\/v2\/admin\/customer-groups\/premium",
     "phoneNumber": "+48987654321",
     "subscribedToNewsletter": true,
-    "createdAt": @date@,
+    "createdAt": "@date@",
     "fullName": "John Lim"
 }

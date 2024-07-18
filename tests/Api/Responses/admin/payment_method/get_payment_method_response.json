@@ -6,7 +6,7 @@
         "\/api\/v2\/admin\/channels\/WEB"
     ],
     "gatewayConfig": "\/api\/v2\/admin\/gateway-configs\/@integer@",
-    "id": @integer@,
+    "id": "@integer@",
     "code": "CASH_ON_DELIVERY",
     "position": 0,
     "enabled": true,
@@ -14,9 +14,9 @@
         "en_US": {
             "@id": "\/api\/v2\/admin\/payment-method-translations\/@integer@",
             "@type": "PaymentMethodTranslation",
-            "id": @integer@,
+            "id": "@integer@",
             "name": "Cash on delivery",
-            "description": @string@,
+            "description": "@string@",
             "instructions": null
         }
     }

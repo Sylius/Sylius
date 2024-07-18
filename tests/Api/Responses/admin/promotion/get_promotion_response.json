@@ -2,7 +2,7 @@
     "@context": "\/api\/v2\/contexts\/Promotion",
     "@id": "\/api\/v2\/admin\/promotions\/50_off",
     "@type": "Promotion",
-    "id": @integer@,
+    "id": "@integer@",
     "code": "50_off",
     "name": "50% Off on your first order",
     "description": "Get 50% off of your first purchase",
@@ -21,13 +21,13 @@
     "rules": [],
     "actions": [],
     "archivedAt": null,
-    "createdAt": @date@,
-    "updatedAt": @date@,
+    "createdAt": "@date@",
+    "updatedAt": "@date@",
     "translations": {
         "en_US": {
             "@id": "\/api\/v2\/admin\/promotion-translations\/@integer@",
             "@type": "PromotionTranslation",
-            "id": @integer@,
+            "id": "@integer@",
             "label": "-50% on first order!"
         }
     }

@@ -14,7 +14,7 @@
     ],
     "hydra:totalItems": 1,
     "hydra:view": {
-        "@id": @string@,
+        "@id": "@string@",
         "@type": "hydra:PartialCollectionView"
     },
     "hydra:search": {

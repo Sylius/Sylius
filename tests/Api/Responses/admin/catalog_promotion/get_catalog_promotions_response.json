@@ -6,31 +6,31 @@
         {
             "@id": "\/api\/v2\/admin\/catalog-promotions\/mugs_discount",
             "@type": "CatalogPromotion",
-            "id": @integer@,
+            "id": "@integer@",
             "name": "Mugs discount",
             "code": "mugs_discount",
             "startDate": null,
             "endDate": null,
-            "state": @string@,
+            "state": "@string@",
             "priority": 0,
             "channels": [
                 "\/api\/v2\/admin\/channels\/WEB"
             ],
             "scopes": [],
             "actions": [],
-            "enabled": @boolean@,
+            "enabled": "@boolean@",
             "exclusive": false,
             "translations": {
                 "en_US": {
                     "@id": "\/api\/v2\/admin\/catalog-promotion-translations\/@integer@",
                     "@type": "CatalogPromotionTranslation",
-                    "id": @integer@,
+                    "id": "@integer@",
                     "label": "Mugs discount",
-                    "description": @string@
+                    "description": "@string@"
                 }
             }
         }
     ],
     "hydra:totalItems": 1,
-    "hydra:search": @array@
+    "hydra:search": "@array@"
 }

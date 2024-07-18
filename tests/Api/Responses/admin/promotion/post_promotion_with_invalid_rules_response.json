@@ -2,12 +2,12 @@
     "@context": "\/api\/v2\/contexts\/ConstraintViolationList",
     "@type": "ConstraintViolationList",
     "hydra:title": "An error occurred",
-    "hydra:description": @string@,
+    "hydra:description": "@string@",
     "violations": [
         {
             "propertyPath": "rules[0].configuration[count]",
             "message": "This value should be of type numeric.",
-            "code": @string@
+            "code": "@string@"
         },
         {
             "propertyPath": "rules[1].configuration[group_code]",
@@ -17,7 +17,7 @@
         {
             "propertyPath": "rules[2].configuration[nth]",
             "message": "This value should be of type numeric.",
-            "code": @string@
+            "code": "@string@"
         },
         {
             "propertyPath": "rules[3].configuration[country]",
@@ -32,7 +32,7 @@
         {
             "propertyPath": "rules[5].configuration[WEB][amount]",
             "message": "This value should be of type numeric.",
-            "code": @string@
+            "code": "@string@"
         },
         {
             "propertyPath": "rules[5].configuration[WEB][taxon]",
@@ -47,7 +47,7 @@
         {
             "propertyPath": "rules[7].configuration[WEB]",
             "message": "This field is missing.",
-            "code": @string@
+            "code": "@string@"
         },
         {
             "propertyPath": "rules[8].type",
