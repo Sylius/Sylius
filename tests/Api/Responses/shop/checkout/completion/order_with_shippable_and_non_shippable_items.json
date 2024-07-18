@@ -27,7 +27,7 @@
         {
             "@id": "\/api\/v2\/shop\/payments\/@integer@",
             "@type": "Payment",
-            "id": @integer@,
+            "id": "@integer@",
             "method": "\/api\/v2\/shop\/payment-methods\/BANK_TRANSFER"
         }
     ],
@@ -35,7 +35,7 @@
         {
             "@id": "\/api\/v2\/shop\/shipments\/@integer@",
             "@type": "Shipment",
-            "id": @integer@,
+            "id": "@integer@",
             "method": "\/api\/v2\/shop\/shipping-methods\/DHL"
         }
     ],
@@ -45,7 +45,7 @@
     "paymentState": "awaiting_payment",
     "shippingState": "ready",
     "tokenValue": "nAWw2jewpA",
-    "id": @integer@,
+    "id": "@integer@",
     "number": "000000001",
     "items": [
         {
@@ -53,7 +53,7 @@
             "@type": "OrderItem",
             "variant": "\/api\/v2\/shop\/product-variants\/MUG_BLUE",
             "productName": "Mug",
-            "id": @integer@,
+            "id": "@integer@",
             "quantity": 3,
             "unitPrice": 2000,
             "originalUnitPrice": 2000,
@@ -66,7 +66,7 @@
             "@type": "OrderItem",
             "variant": "\/api\/v2\/shop\/product-variants\/MUG_NFT",
             "productName": "Mug",
-            "id": @integer@,
+            "id": "@integer@",
             "quantity": 1,
             "unitPrice": 3000,
             "originalUnitPrice": 3000,

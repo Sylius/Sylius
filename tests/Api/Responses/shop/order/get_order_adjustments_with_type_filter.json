@@ -7,7 +7,7 @@
         {
             "@id": "/api/v2/shop/adjustments/@integer@",
             "@type": "Adjustment",
-            "id": @integer@,
+            "id": "@integer@",
             "type": "shipping",
             "label": "UPS",
             "amount": 500,

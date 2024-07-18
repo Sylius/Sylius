@@ -10,7 +10,7 @@
             "code": "UPS",
             "position": 0,
             "name": "UPS",
-            "description": @string@
+            "description": "@string@"
         },
         {
             "@id": "\/api\/v2\/shop\/shipping-methods\/DHL",
@@ -19,7 +19,7 @@
             "code": "DHL",
             "position": 1,
             "name": "DHL",
-            "description": @string@
+            "description": "@string@"
         }
     ],
     "hydra:totalItems": 2

@@ -2,7 +2,7 @@
     "@context": "\/api\/v2\/contexts\/ProductTaxon",
     "@id": "\/api\/v2\/shop\/product-taxons\/@integer@",
     "@type": "ProductTaxon",
-    "id": @integer@,
+    "id": "@integer@",
     "product": "\/api\/v2\/shop\/products\/MUG",
     "taxon": "\/api\/v2\/shop\/taxons\/MUGS",
     "position": 1

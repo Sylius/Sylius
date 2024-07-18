@@ -39,7 +39,7 @@
     "localeCode": "en_US",
     "checkoutState": "completed",
     "tokenValue": "nAWw2jewpA",
-    "id": @integer@,
+    "id": "@integer@",
     "number": "000000001",
     "items": [
         {
@@ -47,7 +47,7 @@
             "@type": "OrderItem",
             "variant": "\/api\/v2\/shop\/product-variants\/MUG_BLUE",
             "productName": "Mug",
-            "id": @integer@,
+            "id": "@integer@",
             "quantity": 3
         }
     ],

@@ -27,7 +27,7 @@
         {
             "@id": "\/api\/v2\/shop\/payments\/@integer@",
             "@type": "Payment",
-            "id": @integer@,
+            "id": "@integer@",
             "method": "\/api\/v2\/shop\/payment-methods\/BANK_TRANSFER"
         }
     ],
@@ -38,7 +38,7 @@
     "paymentState": "awaiting_payment",
     "shippingState": "shipped",
     "tokenValue": "nAWw2jewpA",
-    "id": @integer@,
+    "id": "@integer@",
     "number": "000000001",
     "items": [
         {
@@ -46,7 +46,7 @@
             "@type": "OrderItem",
             "variant": "\/api\/v2\/shop\/product-variants\/MUG_NFT",
             "productName": "Mug",
-            "id": @integer@,
+            "id": "@integer@",
             "quantity": 1,
             "unitPrice": 3000,
             "originalUnitPrice": 3000,

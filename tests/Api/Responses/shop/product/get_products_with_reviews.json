@@ -8,9 +8,9 @@
             "@type": "Product",
             "productTaxons": [],
             "mainTaxon": null,
-            "averageRating": @integer@,
+            "averageRating": "@integer@",
             "images": [],
-            "id": @integer@,
+            "id": "@integer@",
             "code": "CAP",
             "variants": [
                 "\/api\/v2\/shop\/product-variants\/CAP_RED"
@@ -19,8 +19,8 @@
                 "\/api\/v2\/shop\/product-options\/COLOR"
             ],
             "associations": [],
-            "createdAt": @date@,
-            "updatedAt": @date@,
+            "createdAt": "@date@",
+            "updatedAt": "@date@",
             "shortDescription": null,
             "reviews": [],
             "name": "Cap",
@@ -35,17 +35,17 @@
                 "\/api\/v2\/shop\/product-taxons\/@integer@"
             ],
             "mainTaxon": "\/api\/v2\/shop\/taxons\/MUGS",
-            "averageRating": @integer@,
+            "averageRating": "@integer@",
             "images": [
                 {
                     "@id": "\/api\/v2\/shop\/product-images\/@integer@",
                     "@type": "ProductImage",
-                    "id": @integer@,
+                    "id": "@integer@",
                     "type": "thumbnail",
                     "path": "@string@.contains('sylius_original').endsWith('product.jpg')"
                 }
             ],
-            "id": @integer@,
+            "id": "@integer@",
             "code": "MUG",
             "variants": [
                 "\/api\/v2\/shop\/product-variants\/MUG_BLUE",
@@ -57,9 +57,9 @@
             "associations": [
                 "\/api\/v2\/shop\/product-associations\/@integer@"
             ],
-            "createdAt": @date@,
-            "updatedAt": @date@,
-            "shortDescription": @string@,
+            "createdAt": "@date@",
+            "updatedAt": "@date@",
+            "shortDescription": "@string@",
             "reviews": [
                 {
                     "@id": "\/api\/v2\/shop\/product-reviews\/@integer@",
@@ -67,7 +67,7 @@
                 }
             ],
             "name": "Mug",
-            "description": @string@,
+            "description": "@string@",
             "slug": "mug",
             "defaultVariant": "\/api\/v2\/shop\/product-variants\/MUG_BLUE"
         },
@@ -76,16 +76,16 @@
             "@type": "Product",
             "productTaxons": [],
             "mainTaxon": null,
-            "averageRating": @integer@,
+            "averageRating": "@integer@",
             "images": [],
-            "id": @integer@,
+            "id": "@integer@",
             "code": "SOCKS",
             "variants": [],
             "options": [
                 "\/api\/v2\/shop\/product-options\/COLOR"
             ],
-            "createdAt": @date@,
-            "updatedAt": @date@,
+            "createdAt": "@date@",
+            "updatedAt": "@date@",
             "shortDescription": null,
             "reviews": [],
             "name": "Socks",

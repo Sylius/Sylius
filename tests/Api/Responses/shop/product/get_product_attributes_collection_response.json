@@ -6,7 +6,7 @@
         {
             "@id": "\/api\/v2\/shop\/product-attribute-values\/@integer@",
             "@type": "ProductAttributeValue",
-            "id": @integer@,
+            "id": "@integer@",
             "attribute": "\/api\/v2\/shop\/product-attributes\/dishwasher_safe",
             "localeCode": "pl_PL",
             "name": "mozna myc w zmywarce",
@@ -17,7 +17,7 @@
         {
             "@id": "\/api\/v2\/shop\/product-attribute-values\/@integer@",
             "@type": "ProductAttributeValue",
-            "id": @integer@,
+            "id": "@integer@",
             "attribute": "\/api\/v2\/shop\/product-attributes\/manufactured",
             "localeCode": "en_US",
             "name": "manufactured",
@@ -28,7 +28,7 @@
         {
             "@id": "\/api\/v2\/shop\/product-attribute-values\/@integer@",
             "@type": "ProductAttributeValue",
-            "id": @integer@,
+            "id": "@integer@",
             "attribute": "\/api\/v2\/shop\/product-attributes\/available_until",
             "localeCode": "en_US",
             "name": "available until",
@@ -39,7 +39,7 @@
         {
             "@id": "\/api\/v2\/shop\/product-attribute-values\/@integer@",
             "@type": "ProductAttributeValue",
-            "id": @integer@,
+            "id": "@integer@",
             "attribute": "\/api\/v2\/shop\/product-attributes\/capacity",
             "localeCode": "en_US",
             "name": "capacity",
@@ -50,7 +50,7 @@
         {
             "@id": "\/api\/v2\/shop\/product-attribute-values\/@integer@",
             "@type": "ProductAttributeValue",
-            "id": @integer@,
+            "id": "@integer@",
             "attribute": "\/api\/v2\/shop\/product-attributes\/yixing_clay",
             "localeCode": "en_US",
             "name": "yixing clay",
@@ -61,7 +61,7 @@
         {
             "@id": "\/api\/v2\/shop\/product-attribute-values\/@integer@",
             "@type": "ProductAttributeValue",
-            "id": @integer@,
+            "id": "@integer@",
             "attribute": "\/api\/v2\/shop\/product-attributes\/extra_info",
             "localeCode": "pl_PL",
             "name": "extra info",
@@ -75,7 +75,7 @@
         {
             "@id": "\/api\/v2\/shop\/product-attribute-values\/@integer@",
             "@type": "ProductAttributeValue",
-            "id": @integer@,
+            "id": "@integer@",
             "attribute": "\/api\/v2\/shop\/product-attributes\/note",
             "localeCode": "en_US",
             "name": "note",
@@ -86,7 +86,7 @@
         {
             "@id": "\/api\/v2\/shop\/product-attribute-values\/@integer@",
             "@type": "ProductAttributeValue",
-            "id": @integer@,
+            "id": "@integer@",
             "attribute": "\/api\/v2\/shop\/product-attributes\/origin",
             "localeCode": "pl_PL",
             "name": "origin",
