@@ -2,7 +2,7 @@
     "@context": "\/api\/v2\/contexts\/AvatarImage",
     "@id": "\/api\/v2\/admin\/administrators\/@integer@\/avatar-image",
     "@type": "AvatarImage",
-    "id": @integer@,
+    "id": "@integer@",
     "path": "@string@.contains('sylius_original').endsWith('avatar_image.jpg')",
     "owner": "\/api\/v2\/admin\/administrators\/@integer@"
 }
