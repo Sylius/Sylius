@@ -11,13 +11,13 @@ twig_hooks:
                 template: '@SyliusAdmin/shipping_category/form/sections.html.twig'
 
         'sylius_admin.shipping_category.create.content.form.sections':
-            details:
-                template: '@SyliusAdmin/shipping_category/form/sections/details.html.twig'
+            general:
+                template: '@SyliusAdmin/shipping_category/form/sections/general.html.twig'
 
-        'sylius_admin.shipping_category.create.content.form.sections.details':
+        'sylius_admin.shipping_category.create.content.form.sections.general':
             name:
-                template: '@SyliusAdmin/shipping_category/form/sections/details/name.html.twig'
+                template: '@SyliusAdmin/shipping_category/form/sections/general/name.html.twig'
             code:
-                template: '@SyliusAdmin/shipping_category/form/sections/details/code.html.twig'
+                template: '@SyliusAdmin/shipping_category/form/sections/general/code.html.twig'
             description:
-                template: '@SyliusAdmin/shipping_category/form/sections/details/description.html.twig'
+                template: '@SyliusAdmin/shipping_category/form/sections/general/description.html.twig'
