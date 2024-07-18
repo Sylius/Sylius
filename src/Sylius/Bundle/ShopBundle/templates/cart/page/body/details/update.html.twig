@@ -1,7 +1,10 @@
 {% import '@SyliusShop/shared/buttons.html.twig' as buttons %}
 
+{% set form = hookable_metadata.context.form %}
+{% set cart = hookable_metadata.context.cart %}
+
 <div class="d-flex justify-content-between">
-    <button class="btn btn-light" type="submit" {{ sylius_test_html_attribute('cart-update-button') }} form="{{ main_form }}">
+    <button class="btn btn-light" type="submit" {{ sylius_test_html_attribute('cart-update-button') }} form="{{ form.vars.id }}">
         {{ 'sylius.ui.update_cart'|trans }}
     </button>
     <form method="post" action="{{ path('sylius_shop_cart_clear') }}" >

@@ -1,0 +1,18 @@
+{% extends '@SyliusShop/shared/layout/base.html.twig' %}
+
+{% form_theme form '@SyliusShop/Form/theme.html.twig' %}
+{% import '@SyliusShop/shared/messages.html.twig' as messages %}
+
+{% set header = 'sylius.ui.your_shopping_cart' %}
+
+{% block title %}{{ header|trans }} | {{ parent() }}{% endblock %}
+
+{% block content %}
+    <div class="container mt-4 mb-5">
+        {% if not cart.empty %}
+            {% hook 'sylius_shop.cart.page' with { cart, form, header } %}
+        {% else %}
+            {{ messages.info('sylius.ui.your_cart_is_empty') }}
+        {% endif %}
+    </div>
+{% endblock %}

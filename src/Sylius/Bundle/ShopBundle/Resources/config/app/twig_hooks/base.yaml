@@ -51,6 +51,8 @@ twig_hooks:
         'sylius_shop.base.footer':
             content:
                 template: '@SyliusShop/shared/layout/base/footer/content.html.twig'
+            offcanvas:
+                template: '@SyliusShop/shared/layout/base/footer/offcanvas.html.twig'
 
         'sylius_shop.base.footer.content':
             menu:
