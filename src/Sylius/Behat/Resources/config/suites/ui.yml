@@ -40,7 +40,7 @@ imports:
     - ui/order/order_history.yml
     - ui/payment/managing_payment_methods.yml
     - ui/payment/managing_payments.yml
-    - ui/product/accessing_edit_page_from_product_show_page.yml
+    - ui/product/navigating_between_product_show_and_edit_pages.yaml
     - ui/product/accessing_price_history.yml
     - ui/product/adding_product_review.yml
     - ui/product/managing_product_association_types.yml

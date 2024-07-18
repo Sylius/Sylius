@@ -14,8 +14,9 @@ declare(strict_types=1);
 namespace Sylius\Behat\Page\Admin\Product;
 
 use Sylius\Behat\Page\Admin\Crud\CreatePageInterface as BaseCreatePageInterface;
+use Sylius\Behat\Page\Admin\ShowPageButtonCheckerInterface;
 
-interface CreateConfigurableProductPageInterface extends BaseCreatePageInterface
+interface CreateConfigurableProductPageInterface extends BaseCreatePageInterface, ShowPageButtonCheckerInterface
 {
     public function selectOption(string $optionName): void;
 

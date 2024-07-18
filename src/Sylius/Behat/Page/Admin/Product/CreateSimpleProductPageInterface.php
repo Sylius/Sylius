@@ -14,8 +14,9 @@ declare(strict_types=1);
 namespace Sylius\Behat\Page\Admin\Product;
 
 use Sylius\Behat\Page\Admin\Crud\CreatePageInterface as BaseCreatePageInterface;
+use Sylius\Behat\Page\Admin\ShowPageButtonCheckerInterface;
 
-interface CreateSimpleProductPageInterface extends BaseCreatePageInterface
+interface CreateSimpleProductPageInterface extends BaseCreatePageInterface, ShowPageButtonCheckerInterface
 {
     public function checkChannel(string $channelCode): void;
 

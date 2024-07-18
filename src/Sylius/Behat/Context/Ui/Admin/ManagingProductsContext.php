@@ -1102,13 +1102,13 @@ final readonly class ManagingProductsContext implements Context
     }
 
     /**
-     * @Then I should be notified that price must be defined for every channel
+     * @Then I should be notified that price must be defined for :channel channel
      */
-    public function iShouldBeNotifiedThatPriceMustBeDefinedForEveryChannel(): void
+    public function iShouldBeNotifiedThatPriceMustBeDefinedForChannel(ChannelInterface $channel): void
     {
         Assert::same(
-            $this->channelPricingsFormElement->getChannelPricingValidationMessage(),
-            'You must define price for every enabled channel.',
+            $this->channelPricingsFormElement->getValidationMessage('price', ['%channel_code%' => $channel->getCode()]),
+            'You must define price.',
         );
     }
 
@@ -1426,6 +1426,14 @@ final readonly class ManagingProductsContext implements Context
     public function iShouldBeNotifiedThatTheAttributeValueIsRequired(string $attributeName, string $localeCode): void
     {
         Assert::true($this->attributesFormElement->hasAttributeError($attributeName, $localeCode));
+    }
+
+    /**
+     * @Then I should not be able to go to the generate variants page
+     */
+    public function iShouldNotBeAbleToGoToTheGenerateVariantsPage(): void
+    {
+        Assert::false($this->updateSimpleProductPage->hasGenerateVariantsButton(), 'Generate variants button should not be visible');
     }
 
     private function assertValidationMessage(string $element, string $message): void

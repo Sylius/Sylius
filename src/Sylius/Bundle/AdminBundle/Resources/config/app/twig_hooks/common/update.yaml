@@ -34,9 +34,12 @@ twig_hooks:
                 template: '@SyliusAdmin/shared/crud/update/content/header/title_block/actions.html.twig'
 
         'sylius_admin.common.update.content.header.title_block.actions':
+            show:
+                template: '@SyliusAdmin/shared/crud/update/content/header/title_block/actions/show.html.twig'
+                priority: 300
             cancel:
                 template: '@SyliusAdmin/shared/crud/common/content/header/title_block/actions/cancel.html.twig'
-                priority: 200
-            create:
+                priority: -200
+            update:
                 template: '@SyliusAdmin/shared/crud/common/content/header/title_block/actions/update.html.twig'
-                priority: 100
+                priority: -300

@@ -16,10 +16,8 @@ twig_hooks:
         'sylius_admin.product.update.content.header.title_block.actions':
             view_in_store:
                 template: '@SyliusAdmin/product/common/header/title_block/actions/view_in_store.html.twig'
-                priority: 0
             manage_variants:
                 template: '@SyliusAdmin/product/common/header/title_block/actions/manage_variants.html.twig'
-                priority: 300
 
         'sylius_admin.product.update.content.header.title_block.actions.manage_variants':
             list:

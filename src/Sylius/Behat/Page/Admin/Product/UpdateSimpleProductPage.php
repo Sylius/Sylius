@@ -16,6 +16,7 @@ namespace Sylius\Behat\Page\Admin\Product;
 use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Session;
 use Sylius\Behat\Behaviour\ChecksCodeImmutability;
+use Sylius\Behat\Context\Ui\Admin\Helper\NavigationTrait;
 use Sylius\Behat\Page\Admin\Crud\UpdatePage as BaseUpdatePage;
 use Sylius\Behat\Service\Helper\AutocompleteHelperInterface;
 use Symfony\Component\Routing\RouterInterface;
@@ -23,6 +24,7 @@ use Symfony\Component\Routing\RouterInterface;
 class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProductPageInterface
 {
     use ChecksCodeImmutability;
+    use NavigationTrait;
 
     public function __construct(
         Session $session,
@@ -32,6 +34,11 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
         private readonly AutocompleteHelperInterface $autocompleteHelper,
     ) {
         parent::__construct($session, $minkParameters, $router, $routeName);
+    }
+
+    protected function getResourceName(): string
+    {
+        return 'product';
     }
 
     public function saveChanges(): void
@@ -66,29 +73,34 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
         $this->getDocument()->clickLink('Create');
     }
 
+    public function hasGenerateVariantsButton(): bool
+    {
+        return $this->hasElement('generate_variants_button');
+    }
+
     public function goToVariantGeneration(): void
     {
-        $this->getDocument()->clickLink('Generate');
+        $this->getElement('generate_variants_button')->click();
     }
 
     public function getShowProductInSingleChannelUrl(): string
     {
-        return $this->getElement('show_product_button')->getAttribute('href');
+        return $this->getElement('view_in_store')->getAttribute('href');
     }
 
     public function isShowInShopButtonDisabled(): bool
     {
-        return $this->getElement('show_product_button')->hasClass('disabled');
+        return $this->getElement('view_in_store')->hasClass('disabled');
     }
 
     public function showProductInChannel(string $channel): void
     {
-        $this->getElement('show_product_button')->clickLink($channel);
+        $this->getElement('view_in_store')->clickLink($channel);
     }
 
     public function showProductInSingleChannel(): void
     {
-        $this->getElement('show_product_button')->click();
+        $this->getElement('view_in_store')->click();
     }
 
     public function disable(): void
@@ -140,17 +152,22 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
         return $this->getElement('code');
     }
 
+    /** @return array<string, string> */
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
             'code' => '[data-test-code]',
+            'create_variant_button' => '[data-test-create]',
             'enabled' => '[data-test-enabled]',
             'field_shipping_category' => '[name="sylius_admin_product[variant][shippingCategory]"]',
             'field_shipping_required' => '[name="sylius_admin_product[variant][shippingRequired]"]',
+            'generate_variants_button' => '[data-test-generate]',
+            'list_variants_button' => '[data-test-list]',
             'product_translation_accordion' => '[data-test-product-translations-accordion="%localeCode%"]',
-            'show_product_button' => '[data-test-view-in-store]',
+            'show_product_button' => '[data-test-show-product]',
             'side_navigation_tab' => '[data-test-side-navigation-tab="%name%"]',
             'tracked' => '[name="sylius_admin_product[variant][tracked]"]',
+            'view_in_store' => '[data-test-view-in-store]',
         ]);
     }
 }

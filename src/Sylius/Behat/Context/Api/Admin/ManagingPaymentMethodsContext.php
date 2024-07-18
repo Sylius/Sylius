@@ -847,9 +847,7 @@ final readonly class ManagingPaymentMethodsContext implements Context
         return null;
     }
 
-    /**
-     * @return string[]
-     */
+    /** @return string[] */
     private function getPaymentMethodNamesFromCollection(): array
     {
         $paymentMethods = $this->responseChecker->getCollection($this->client->index(Resources::PAYMENT_METHODS));
