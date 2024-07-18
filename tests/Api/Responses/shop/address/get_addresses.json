@@ -7,7 +7,7 @@
     {
       "@id": "\/api\/v2\/shop\/addresses\/@integer@",
       "@type": "Address",
-      "id": @integer@,
+      "id": "@integer@",
       "firstName": "John",
       "lastName": "Doe",
       "phoneNumber": "123456789",

@@ -2,7 +2,7 @@
     "@context": "\/api\/v2\/contexts\/ProductAssociationType",
     "@id": "\/api\/v2\/shop\/product-association-types\/similar_products",
     "@type": "ProductAssociationType",
-    "id": @integer@,
+    "id": "@integer@",
     "code": "similar_products",
     "name": "Similar products"
 }

@@ -5,7 +5,7 @@
     "hydra:member": [],
    "hydra:totalItems": 0,
    "hydra:view": {
-      "@id": @string@,
+      "@id": "@string@",
       "@type": "hydra:PartialCollectionView"
    },
    "hydra:search": {

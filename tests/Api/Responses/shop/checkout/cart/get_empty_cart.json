@@ -10,7 +10,7 @@
     "paymentState": "cart",
     "shippingState": "cart",
     "tokenValue": "nAWw2jewpA",
-    "id": @integer@,
+    "id": "@integer@",
     "items": [],
     "itemsTotal": 0,
     "total": 0,
