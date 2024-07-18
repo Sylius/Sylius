@@ -6,14 +6,14 @@
         {
             "@id": "\/api\/v2\/admin\/zone-members\/@integer@",
             "@type": "ZoneMember",
-            "id": @integer@,
+            "id": "@integer@",
             "code": "NL",
             "belongsTo": "\/api\/v2\/admin\/zones\/EU"
         },
         {
             "@id": "\/api\/v2\/admin\/zone-members\/@integer@",
             "@type": "ZoneMember",
-            "id": @integer@,
+            "id": "@integer@",
             "code": "BE",
             "belongsTo": "\/api\/v2\/admin\/zones\/EU"
         }

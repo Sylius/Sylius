@@ -5,7 +5,7 @@
     "channels": [
         "\/api\/v2\/admin\/channels\/MOBILE"
     ],
-    "id": @integer@,
+    "id": "@integer@",
     "code": "50_off",
     "name": "Christmas",
     "description": "Get 50% off of your first purchase",
@@ -22,7 +22,7 @@
         {
             "@id": "\/api\/v2\/admin\/promotion-rules\/@integer@",
             "@type": "PromotionRule",
-            "id": @integer@,
+            "id": "@integer@",
             "type": "cart_quantity",
             "configuration": {
                 "count": 1
@@ -33,7 +33,7 @@
         {
             "@id": "\/api\/v2\/admin\/promotion-actions\/@integer@",
             "@type": "PromotionAction",
-            "id": @integer@,
+            "id": "@integer@",
             "type": "order_fixed_discount",
             "configuration": {
                 "WEB": {
@@ -46,13 +46,13 @@
         }
     ],
     "appliesToDiscounted": true,
-    "createdAt": @date@,
-    "updatedAt": @date@,
+    "createdAt": "@date@",
+    "updatedAt": "@date@",
     "translations": {
         "en_US": {
             "@id": "\/api\/v2\/admin\/promotion-translations\/@integer@",
             "@type": "PromotionTranslation",
-            "id": @integer@,
+            "id": "@integer@",
             "label": "Christmas"
         }
     }

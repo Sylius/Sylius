@@ -20,7 +20,7 @@
         "en_US": {
             "@id": "\/api\/v2\/admin\/product-variant-translations\/@integer@",
             "@type": "ProductVariantTranslation",
-            "id": @integer@,
+            "id": "@integer@",
             "name": null
         }
     },
@@ -36,6 +36,6 @@
     "taxCategory": null,
     "shippingCategory": null,
     "shippingRequired": true,
-    "createdAt": @date@,
-    "updatedAt": @date@
+    "createdAt": "@date@",
+    "updatedAt": "@date@"
 }

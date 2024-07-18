@@ -2,7 +2,7 @@
     "@context": "\/api\/v2\/contexts\/GatewayConfig",
     "@id": "\/api\/v2\/admin\/gateway-configs\/@integer@",
     "@type": "GatewayConfig",
-    "id": @integer@,
+    "id": "@integer@",
     "factoryName": "paypal_express_checkout",
     "gatewayName": "paypal_express_checkout",
     "config": {

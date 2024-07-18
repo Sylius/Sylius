@@ -7,7 +7,7 @@
         {
             "propertyPath": "owner",
             "message": "An association with this owner and type already exists.",
-            "code": @string@
+            "code": "@string@"
         }
     ]
 }

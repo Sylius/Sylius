@@ -2,7 +2,7 @@
     "@context": "\/api\/v2\/contexts\/Product",
     "@id": "\/api\/v2\/admin\/products\/MUG",
     "@type": "Product",
-    "id": @integer@,
+    "id": "@integer@",
     "code": "MUG",
     "variantSelectionMethod": "choice",
     "enabled": true,
@@ -32,7 +32,7 @@
         {
             "@id": "\/api\/v2\/admin\/product-attribute-values\/@integer@",
             "@type": "ProductAttributeValue",
-            "id": @integer@,
+            "id": "@integer@",
             "attribute": "\/api\/v2\/admin\/product-attributes\/MATERIAL",
             "value": "Ceramic",
             "localeCode": "en_US"
@@ -40,7 +40,7 @@
         {
             "@id": "\/api\/v2\/admin\/product-attribute-values\/@integer@",
             "@type": "ProductAttributeValue",
-            "id": @integer@,
+            "id": "@integer@",
             "attribute": "\/api\/v2\/admin\/product-attributes\/MATERIAL",
             "value": "Ceramika",
             "localeCode": "pl_PL"
@@ -51,7 +51,7 @@
         {
             "@id": "\/api\/v2\/admin\/product-images\/@integer@",
             "@type": "ProductImage",
-            "id": @integer@,
+            "id": "@integer@",
             "type": "thumbnail",
             "path": "@string@.contains('sylius_original').endsWith('product.jpg')",
             "productVariants": []
@@ -61,7 +61,7 @@
         "en_US": {
             "@id": "\/api\/v2\/admin\/product-translations\/@integer@",
             "@type": "ProductTranslation",
-            "id": @integer@,
+            "id": "@integer@",
             "name": "Mug",
             "slug": "mug",
             "description": "This is a mug",
@@ -72,7 +72,7 @@
         "pl_PL": {
             "@id": "\/api\/v2\/admin\/product-translations\/@integer@",
             "@type": "ProductTranslation",
-            "id": @integer@,
+            "id": "@integer@",
             "name": "Kubek",
             "slug": "kubek",
             "description": "To jest kubek",
@@ -81,6 +81,6 @@
             "metaDescription": "Opis kubka"
         }
     },
-    "createdAt": @date@,
-    "updatedAt": @date@
+    "createdAt": "@date@",
+    "updatedAt": "@date@"
 }

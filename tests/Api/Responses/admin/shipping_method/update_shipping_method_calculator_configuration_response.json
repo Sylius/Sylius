@@ -6,7 +6,7 @@
     "channels": [
         "\/api\/v2\/admin\/channels\/WEB"
     ],
-    "id": @integer@,
+    "id": "@integer@",
     "code": "UPS",
     "position": 0,
     "shippingChargesCalculator": "per_unit_rate",
@@ -27,9 +27,9 @@
         "en_US": {
             "@id": "\/api\/v2\/admin\/shipping-methods\/UPS\/translations\/en_US",
             "@type": "ShippingMethodTranslation",
-            "id": @integer@,
+            "id": "@integer@",
             "name": "UPS",
-            "description": @string@
+            "description": "@string@"
         }
     }
 }

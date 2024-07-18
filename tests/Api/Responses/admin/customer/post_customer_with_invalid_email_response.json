@@ -7,7 +7,7 @@
         {
             "propertyPath": "email",
             "message": "This email is invalid.",
-            "code": @string@
+            "code": "@string@"
         }
     ]
 }

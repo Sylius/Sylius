@@ -6,7 +6,7 @@
         {
             "@id": "\/api\/v2\/admin\/zones\/EU",
             "@type": "Zone",
-            "id": @integer@,
+            "id": "@integer@",
             "code": "EU",
             "name": "European Union",
             "type": "country",

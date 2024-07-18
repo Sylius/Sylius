@@ -6,7 +6,7 @@
         "\/api\/v2\/admin\/channels\/MOBILE"
     ],
     "gatewayConfig": "\/api\/v2\/admin\/gateway-configs\/@integer@",
-    "id": @integer@,
+    "id": "@integer@",
     "code": "PAYPAL",
     "position": 1,
     "enabled": false,
@@ -14,7 +14,7 @@
         "en_US": {
             "@id": "\/api\/v2\/admin\/payment-method-translations\/@integer@",
             "@type": "PaymentMethodTranslation",
-            "id": @integer@,
+            "id": "@integer@",
             "name": "Different name",
             "description": "Different description",
             "instructions": "Different instructions"

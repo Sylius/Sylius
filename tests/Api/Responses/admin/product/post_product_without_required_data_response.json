@@ -7,17 +7,17 @@
         {
             "propertyPath": "code",
             "message": "Please enter product code.",
-            "code": @string@
+            "code": "@string@"
         },
         {
             "propertyPath": "translations[en_US].name",
             "message": "Please enter product name.",
-            "code": @string@
+            "code": "@string@"
         },
         {
             "propertyPath": "translations[en_US].slug",
             "message": "Please enter product slug.",
-            "code": @string@
+            "code": "@string@"
         }
     ]
 }

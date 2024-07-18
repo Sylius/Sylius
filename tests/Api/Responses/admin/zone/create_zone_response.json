@@ -2,7 +2,7 @@
     "@context": "\/api\/v2\/contexts\/Zone",
     "@id": "\/api\/v2\/admin\/zones\/US",
     "@type": "Zone",
-    "id": @integer@,
+    "id": "@integer@",
     "code": "US",
     "name": "UnitedStates",
     "type": "province",

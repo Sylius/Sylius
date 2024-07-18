@@ -42,7 +42,7 @@
             "paymentState": "paid",
             "shippingState": "ready",
             "tokenValue": "secondToken",
-            "id": @integer@,
+            "id": "@integer@",
             "items": [],
             "itemsTotal": 0,
             "total": 0,

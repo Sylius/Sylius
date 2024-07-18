@@ -11,8 +11,8 @@
             "position": 0,
             "shippingChargesCalculator": "flat_rate",
             "enabled": true,
-            "createdAt": @date@,
-            "updatedAt": @date@,
+            "createdAt": "@date@",
+            "updatedAt": "@date@",
             "archivedAt": null,
             "shippingChargesCalculatorConfiguration": {
                 "WEB": {
@@ -31,9 +31,9 @@
                 "en_US": {
                     "@id": "\/api\/v2\/admin\/shipping-methods\/UPS\/translations\/en_US",
                     "@type": "ShippingMethodTranslation",
-                    "id": @integer@,
+                    "id": "@integer@",
                     "name": "UPS",
-                    "description": @string@
+                    "description": "@string@"
                 }
             }
         },
@@ -45,8 +45,8 @@
             "position": 1,
             "shippingChargesCalculator": "flat_rate",
             "enabled": true,
-            "createdAt": @date@,
-            "updatedAt": @date@,
+            "createdAt": "@date@",
+            "updatedAt": "@date@",
             "archivedAt": null,
             "shippingChargesCalculatorConfiguration": {
                 "WEB": {
@@ -65,9 +65,9 @@
                 "en_US": {
                     "@id": "\/api\/v2\/admin\/shipping-methods\/DHL\/translations\/en_US",
                     "@type": "ShippingMethodTranslation",
-                    "id": @integer@,
+                    "id": "@integer@",
                     "name": "DHL",
-                    "description": @string@
+                    "description": "@string@"
                 }
             }
         },
@@ -79,8 +79,8 @@
             "position": 2,
             "shippingChargesCalculator": "flat_rate",
             "enabled": true,
-            "createdAt": @date@,
-            "updatedAt": @date@,
+            "createdAt": "@date@",
+            "updatedAt": "@date@",
             "archivedAt": null,
             "shippingChargesCalculatorConfiguration": {
                 "WEB": {
@@ -99,9 +99,9 @@
                 "en_US": {
                     "@id": "\/api\/v2\/admin\/shipping-methods\/FEDEX\/translations\/en_US",
                     "@type": "ShippingMethodTranslation",
-                    "id": @integer@,
+                    "id": "@integer@",
                     "name": "FedEx",
-                    "description": @string@
+                    "description": "@string@"
                 }
             }
         }

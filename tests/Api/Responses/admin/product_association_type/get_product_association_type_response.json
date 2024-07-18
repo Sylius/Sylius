@@ -2,16 +2,16 @@
     "@context": "\/api\/v2\/contexts\/ProductAssociationType",
     "@id": "\/api\/v2\/admin\/product-association-types\/similar_products",
     "@type": "ProductAssociationType",
-    "id": @integer@,
+    "id": "@integer@",
     "code": "similar_products",
     "name": "Similar products",
-    "createdAt": @string@,
-    "updatedAt": @string@,
+    "createdAt": "@string@",
+    "updatedAt": "@string@",
     "translations": {
       "en_US": {
         "@id": "\/api\/v2\/admin\/product-association-type-translations\/@integer@",
         "@type": "ProductAssociationTypeTranslation",
-        "id": @integer@,
+        "id": "@integer@",
         "name": "Similar products"
       }
     }

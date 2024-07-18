@@ -22,7 +22,7 @@
         "en_US": {
             "@id": "\/api\/v2\/admin\/product-variant-translations\/@integer@",
             "@type": "ProductVariantTranslation",
-            "id": @integer@,
+            "id": "@integer@",
             "name": "Mug"
         }
     },
@@ -38,6 +38,6 @@
     "taxCategory": "\/api\/v2\/admin\/tax-categories\/default",
     "shippingCategory": "\/api\/v2\/admin\/shipping-categories\/default",
     "shippingRequired": true,
-    "createdAt": @date@,
-    "updatedAt": @date@
+    "createdAt": "@date@",
+    "updatedAt": "@date@"
 }

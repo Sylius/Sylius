@@ -6,6 +6,6 @@
     "code": "default",
     "name": "Not so default",
     "description": null,
-    "createdAt": @date@,
-    "updatedAt": @date@
+    "createdAt": "@date@",
+    "updatedAt": "@date@"
 }

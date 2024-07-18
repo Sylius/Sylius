@@ -7,7 +7,7 @@
         {
             "propertyPath": "translations[en_US].locale",
             "message": "A translation for the \"en_US\" locale code already exists.",
-            "code": @string@
+            "code": "@string@"
         }
     ]
 }

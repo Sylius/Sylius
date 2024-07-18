@@ -32,7 +32,7 @@
                 {
                     "@id": "\/api\/v2\/admin\/payments\/@integer@",
                     "@type": "Payment",
-                    "id": @integer@,
+                    "id": "@integer@",
                     "method": "\/api\/v2\/admin\/payment-methods\/CASH_ON_DELIVERY"
                 }
             ],
@@ -40,7 +40,7 @@
                 {
                     "@id": "\/api\/v2\/admin\/shipments\/@integer@",
                     "@type": "Shipment",
-                    "id": @integer@,
+                    "id": "@integer@",
                     "method": "\/api\/v2\/admin\/shipping-methods\/UPS"
                 }
             ],
@@ -50,15 +50,15 @@
             "paymentState": "awaiting_payment",
             "shippingState": "ready",
             "tokenValue": "firstOrderToken",
-            "id": @integer@,
-            "number": @string@,
+            "id": "@integer@",
+            "number": "@string@",
             "items": [
                 {
                     "@id": "\/api\/v2\/admin\/order-items\/@integer@",
                     "@type": "OrderItem",
                     "variant": "\/api\/v2\/admin\/product-variants\/MUG_BLUE",
                     "productName": "Mug",
-                    "id": @integer@,
+                    "id": "@integer@",
                     "quantity": 3,
                     "unitPrice": 2000,
                     "originalUnitPrice": 2000,

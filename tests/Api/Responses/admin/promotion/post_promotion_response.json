@@ -22,7 +22,7 @@
         {
             "@id": "\/api\/v2\/admin\/promotion-rules\/@integer@",
             "@type": "PromotionRule",
-            "id": @integer@,
+            "id": "@integer@",
             "type": "cart_quantity",
             "configuration": {
                 "count": 6
@@ -31,7 +31,7 @@
         {
             "@id": "\/api\/v2\/admin\/promotion-rules\/@integer@",
             "@type": "PromotionRule",
-            "id": @integer@,
+            "id": "@integer@",
             "type": "customer_group",
             "configuration": {
                 "group_code": "vip"
@@ -40,7 +40,7 @@
         {
             "@id": "\/api\/v2\/admin\/promotion-rules\/@integer@",
             "@type": "PromotionRule",
-            "id": @integer@,
+            "id": "@integer@",
             "type": "nth_order",
             "configuration": {
                 "nth": 2
@@ -49,7 +49,7 @@
         {
             "@id": "\/api\/v2\/admin\/promotion-rules\/@integer@",
             "@type": "PromotionRule",
-            "id": @integer@,
+            "id": "@integer@",
             "type": "shipping_country",
             "configuration": {
                 "country": "US"
@@ -58,7 +58,7 @@
         {
             "@id": "\/api\/v2\/admin\/promotion-rules\/@integer@",
             "@type": "PromotionRule",
-            "id": @integer@,
+            "id": "@integer@",
             "type": "has_taxon",
             "configuration": {
                 "taxons": [
@@ -70,7 +70,7 @@
         {
             "@id": "\/api\/v2\/admin\/promotion-rules\/@integer@",
             "@type": "PromotionRule",
-            "id": @integer@,
+            "id": "@integer@",
             "type": "total_of_items_from_taxon",
             "configuration": {
                 "WEB": {
@@ -86,7 +86,7 @@
         {
             "@id": "\/api\/v2\/admin\/promotion-rules\/@integer@",
             "@type": "PromotionRule",
-            "id": @integer@,
+            "id": "@integer@",
             "type": "contains_product",
             "configuration": {
                 "product_code": "CAP"
@@ -95,7 +95,7 @@
         {
             "@id": "\/api\/v2\/admin\/promotion-rules\/@integer@",
             "@type": "PromotionRule",
-            "id": @integer@,
+            "id": "@integer@",
             "type": "item_total",
             "configuration": {
                 "WEB": {
@@ -111,7 +111,7 @@
         {
             "@id": "\/api\/v2\/admin\/promotion-actions\/@integer@",
             "@type": "PromotionAction",
-            "id": @integer@,
+            "id": "@integer@",
             "type": "order_fixed_discount",
             "configuration": {
                 "WEB": {
@@ -125,7 +125,7 @@
         {
             "@id": "\/api\/v2\/admin\/promotion-actions\/@integer@",
             "@type": "PromotionAction",
-            "id": @integer@,
+            "id": "@integer@",
             "type": "unit_fixed_discount",
             "configuration": {
                 "WEB": {
@@ -145,7 +145,7 @@
         {
             "@id": "\/api\/v2\/admin\/promotion-actions\/@integer@",
             "@type": "PromotionAction",
-            "id": @integer@,
+            "id": "@integer@",
             "type": "order_percentage_discount",
             "configuration": {
                 "percentage": 0.5
@@ -154,7 +154,7 @@
         {
             "@id": "\/api\/v2\/admin\/promotion-actions\/@integer@",
             "@type": "PromotionAction",
-            "id": @integer@,
+            "id": "@integer@",
             "type": "unit_percentage_discount",
             "configuration": {
                 "WEB": {
@@ -168,7 +168,7 @@
         {
             "@id": "\/api\/v2\/admin\/promotion-actions\/@integer@",
             "@type": "PromotionAction",
-            "id": @integer@,
+            "id": "@integer@",
             "type": "shipping_percentage_discount",
             "configuration": {
                 "percentage": 0.2
@@ -176,13 +176,13 @@
         }
     ],
     "appliesToDiscounted": false,
-    "createdAt": @string@,
-    "updatedAt": @string@,
+    "createdAt": "@string@",
+    "updatedAt": "@string@",
     "translations": {
         "en_US": {
             "@id": "\/api\/v2\/admin\/promotion-translations\/@integer@",
             "@type": "PromotionTranslation",
-            "id": @integer@,
+            "id": "@integer@",
             "label": "T-Shirts discount"
         }
     }

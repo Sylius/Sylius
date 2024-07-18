@@ -2,7 +2,7 @@
     "@context": "\/api\/v2\/contexts\/OrderItemUnit",
     "@id": "\/api\/v2\/admin\/order-item-units\/@integer@",
     "@type": "OrderItemUnit",
-    "id": @integer@,
+    "id": "@integer@",
     "shippable": {
         "@id": "\/api\/v2\/admin\/product-variants\/MUG_BLUE",
         "@type": "ProductVariant"

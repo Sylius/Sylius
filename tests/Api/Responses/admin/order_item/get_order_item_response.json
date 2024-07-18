@@ -4,7 +4,7 @@
     "@type": "OrderItem",
     "variant": "\/api\/v2\/admin\/product-variants\/MUG_BLUE",
     "productName": "Mug",
-    "id": @integer@,
+    "id": "@integer@",
     "order": "\/api\/v2\/admin\/orders\/token",
     "quantity": 3,
     "unitPrice": 2000,

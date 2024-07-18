@@ -2,13 +2,13 @@
     "@context": "\/api\/v2\/contexts\/ProductOptionValue",
     "@id": "\/api\/v2\/admin\/product-option-values\/COLOR_RED",
     "@type": "ProductOptionValue",
-    "id": @integer@,
+    "id": "@integer@",
     "code": "COLOR_RED",
     "option": "\/api\/v2\/admin\/product-options\/COLOR",
     "translations": {
         "en_US": {
             "@type": "ProductOptionValueTranslation",
-            "id": @integer@,
+            "id": "@integer@",
             "value": "Red"
         }
     },
