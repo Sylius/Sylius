@@ -9,6 +9,14 @@
 
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
+        <service id="sylius_api.search_filter.tax_category" parent="api_platform.doctrine.orm.search_filter" public="true">
+            <argument type="collection">
+                <argument key="code">partial</argument>
+                <argument key="name">partial</argument>
+            </argument>
+            <tag name="api_platform.filter" />
+        </service>
+
         <service id="sylius.api.search_filter.state" parent="api_platform.doctrine.orm.search_filter" public="true">
             <argument type="collection">
                 <argument key="state">exact</argument>
