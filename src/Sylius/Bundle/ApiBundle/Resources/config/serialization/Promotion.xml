@@ -30,49 +30,36 @@
         <attribute name="name">
             <group>sylius:admin:promotion:index</group>
             <group>sylius:admin:promotion:show</group>
-            <group>sylius:admin:promotion:create</group>
-            <group>sylius:admin:promotion:update</group>
         </attribute>
 
         <attribute name="code">
             <group>sylius:admin:promotion:index</group>
             <group>sylius:admin:promotion:show</group>
-            <group>sylius:admin:promotion:create</group>
         </attribute>
 
         <attribute name="description">
             <group>sylius:admin:promotion:index</group>
             <group>sylius:admin:promotion:show</group>
-            <group>sylius:admin:promotion:create</group>
-            <group>sylius:admin:promotion:update</group>
         </attribute>
 
         <attribute name="priority">
             <group>sylius:admin:promotion:index</group>
             <group>sylius:admin:promotion:show</group>
-            <group>sylius:admin:promotion:create</group>
-            <group>sylius:admin:promotion:update</group>
         </attribute>
 
         <attribute name="exclusive">
             <group>sylius:admin:promotion:index</group>
             <group>sylius:admin:promotion:show</group>
-            <group>sylius:admin:promotion:create</group>
-            <group>sylius:admin:promotion:update</group>
         </attribute>
 
         <attribute name="appliesToDiscounted">
             <group>sylius:admin:promotion:index</group>
             <group>sylius:admin:promotion:show</group>
-            <group>sylius:admin:promotion:create</group>
-            <group>sylius:admin:promotion:update</group>
         </attribute>
 
         <attribute name="usageLimit">
             <group>sylius:admin:promotion:index</group>
             <group>sylius:admin:promotion:show</group>
-            <group>sylius:admin:promotion:create</group>
-            <group>sylius:admin:promotion:update</group>
         </attribute>
 
         <attribute name="used">
@@ -83,22 +70,16 @@
         <attribute name="startsAt">
             <group>sylius:admin:promotion:index</group>
             <group>sylius:admin:promotion:show</group>
-            <group>sylius:admin:promotion:create</group>
-            <group>sylius:admin:promotion:update</group>
         </attribute>
 
         <attribute name="endsAt">
             <group>sylius:admin:promotion:index</group>
             <group>sylius:admin:promotion:show</group>
-            <group>sylius:admin:promotion:create</group>
-            <group>sylius:admin:promotion:update</group>
         </attribute>
 
         <attribute name="couponBased">
             <group>sylius:admin:promotion:index</group>
             <group>sylius:admin:promotion:show</group>
-            <group>sylius:admin:promotion:create</group>
-            <group>sylius:admin:promotion:update</group>
         </attribute>
 
         <attribute name="coupons">
@@ -109,29 +90,21 @@
         <attribute name="rules">
             <group>sylius:admin:promotion:index</group>
             <group>sylius:admin:promotion:show</group>
-            <group>sylius:admin:promotion:create</group>
-            <group>sylius:admin:promotion:update</group>
         </attribute>
 
         <attribute name="actions">
             <group>sylius:admin:promotion:index</group>
             <group>sylius:admin:promotion:show</group>
-            <group>sylius:admin:promotion:create</group>
-            <group>sylius:admin:promotion:update</group>
         </attribute>
 
         <attribute name="channels">
             <group>sylius:admin:promotion:index</group>
             <group>sylius:admin:promotion:show</group>
-            <group>sylius:admin:promotion:create</group>
-            <group>sylius:admin:promotion:update</group>
         </attribute>
 
         <attribute name="translations">
             <group>sylius:admin:promotion:index</group>
             <group>sylius:admin:promotion:show</group>
-            <group>sylius:admin:promotion:create</group>
-            <group>sylius:admin:promotion:update</group>
         </attribute>
 
         <attribute name="archivedAt">
