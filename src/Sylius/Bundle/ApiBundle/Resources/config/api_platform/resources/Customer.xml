@@ -16,7 +16,7 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="https://api-platform.com/schema/metadata/resources-3.0 https://api-platform.com/schema/metadata/resources-3.0.xsd"
 >
-    <resource class="Sylius\Component\Core\Model\Customer" shortName="Customer">
+    <resource class="Sylius\Component\Core\Model\Customer">
         <validationContext>
             <values>
                 <value name="groups">
@@ -28,10 +28,25 @@
         </validationContext>
 
         <operations>
-            <operation
-                class="ApiPlatform\Metadata\Get"
-                uriTemplate="/admin/customers/{id}"
-            >
+
+            <!-- Admin operations-->
+
+            <operation class="ApiPlatform\Metadata\GetCollection" uriTemplate="/admin/customers">
+                <normalizationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius:admin:customer:index</value>
+                            </values>
+                        </value>
+                    </values>
+                </normalizationContext>
+                <filters>
+                    <filter>sylius.api.customer_group_filter</filter>
+                </filters>
+            </operation>
+
+            <operation class="ApiPlatform\Metadata\Get" uriTemplate="/admin/customers/{id}">
                 <normalizationContext>
                     <values>
                         <value name="groups">
@@ -42,6 +57,92 @@
                     </values>
                 </normalizationContext>
             </operation>
+
+            <operation
+                class="ApiPlatform\Metadata\Get"
+                uriTemplate="/admin/customers/{id}/statistics"
+                controller="Sylius\Bundle\ApiBundle\Controller\GetCustomerStatisticsAction"
+            >
+                <normalizationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius:admin:customer:statistics:show</value>
+                            </values>
+                        </value>
+                    </values>
+                </normalizationContext>
+            </operation>
+
+            <operation class="ApiPlatform\Metadata\Post" uriTemplate="/admin/customers" >
+                <validationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius</value>
+                                <value>sylius_user_create</value>
+                                <value>sylius_api_user_create</value>
+                            </values>
+                        </value>
+                    </values>
+                </validationContext>
+                <denormalizationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius:admin:customer:create</value>
+                            </values>
+                        </value>
+                    </values>
+                </denormalizationContext>
+                <normalizationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius:admin:customer:show</value>
+                            </values>
+                        </value>
+                    </values>
+                </normalizationContext>
+            </operation>
+
+            <operation class="ApiPlatform\Metadata\Put" uriTemplate="/admin/customers/{id}" >
+                <validationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius_api_user_update</value>
+                            </values>
+                        </value>
+                    </values>
+                </validationContext>
+                <denormalizationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius:admin:customer:update</value>
+                            </values>
+                        </value>
+                    </values>
+                </denormalizationContext>
+                <normalizationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius:admin:customer:show</value>
+                            </values>
+                        </value>
+                    </values>
+                </normalizationContext>
+            </operation>
+
+            <operation
+                class="ApiPlatform\Metadata\Delete"
+                uriTemplate="/admin/customers/{id}/user"
+                controller="Sylius\Bundle\ApiBundle\Controller\RemoveCustomerShopUserAction"
+            />
+
+            <!-- Shop operations-->
 
             <operation
                 class="ApiPlatform\Metadata\Post"
@@ -66,10 +167,37 @@
                 </openapiContext>
             </operation>
 
-            <operation
-                class="ApiPlatform\Metadata\Get"
-                uriTemplate="/shop/customers/{id}"
-            >
+            <operation class="ApiPlatform\Metadata\Put" uriTemplate="/shop/customers/{id}" >
+                <validationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius_api_user_update</value>
+                            </values>
+                        </value>
+                    </values>
+                </validationContext>
+                <denormalizationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius:shop:customer:update</value>
+                            </values>
+                        </value>
+                    </values>
+                </denormalizationContext>
+                <normalizationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius:shop:customer:show</value>
+                            </values>
+                        </value>
+                    </values>
+                </normalizationContext>
+            </operation>
+
+            <operation class="ApiPlatform\Metadata\Get" uriTemplate="/shop/customers/{id}">
                 <normalizationContext>
                     <values>
                         <value name="groups">

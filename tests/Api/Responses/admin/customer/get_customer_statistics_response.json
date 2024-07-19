@@ -9,10 +9,11 @@
     "@id": "\/api\/v2\/.well-known\/genid\/@string@",
     "perChannelsStatistics": {
         "@context": "\/api\/v2\/contexts\/Customer",
-        "@id": "\/api\/v2\/admin\/customers",
+        "@id": "\/api\/v2\/admin\/customers\/@string@\/statistics",
         "@type": "hydra:Collection",
         "hydra:member": [
             {
+                "@id": "\/api\/v2\/.well-known\/genid\/@string@",
                 "@type": "PerChannelCustomerStatistics",
                 "ordersCount": 1,
                 "ordersValue": 0,

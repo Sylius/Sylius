@@ -20,7 +20,7 @@ use Sylius\Component\Core\Exception\CustomerNotFoundException;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Repository\CustomerRepositoryInterface;
 
-final class GetCustomerStatisticsHandler
+final readonly class GetCustomerStatisticsHandler
 {
     /**
      * @param CustomerRepositoryInterface<CustomerInterface> $customerRepository

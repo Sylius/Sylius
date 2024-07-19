@@ -11,21 +11,21 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\ApiBundle\Serializer;
+namespace Sylius\Bundle\ApiBundle\Serializer\Denormalizer;
 
 use Sylius\Component\Core\Model\CustomerInterface;
 use Symfony\Component\Clock\ClockInterface;
-use Symfony\Component\Serializer\Normalizer\ContextAwareDenormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
+use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 
-final class CustomerDenormalizer implements ContextAwareDenormalizerInterface, DenormalizerAwareInterface
+final class CustomerDenormalizer implements DenormalizerInterface, DenormalizerAwareInterface
 {
     use DenormalizerAwareTrait;
 
     private const ALREADY_CALLED = 'sylius_customer_denormalizer_already_called';
 
-    public function __construct(private ClockInterface $clock)
+    public function __construct(private readonly ClockInterface $clock)
     {
     }
 

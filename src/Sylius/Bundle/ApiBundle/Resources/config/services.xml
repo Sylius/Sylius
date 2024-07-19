@@ -30,6 +30,7 @@
         <import resource="services/filters.xml" />
         <import resource="services/payments.xml" />
         <import resource="services/providers.xml" />
+        <import resource="services/query_handlers.xml" />
         <import resource="services/resolvers.xml" />
         <import resource="services/section_resolver.xml" />
         <import resource="services/security.xml" />
