@@ -16,11 +16,6 @@
             xsi:schemaLocation="http://symfony.com/schema/dic/serializer-mapping https://symfony.com/schema/dic/serializer-mapping/serializer-mapping-1.0.xsd"
 >
     <class name="Sylius\Component\Promotion\Model\PromotionTranslation">
-        <attribute name="id">
-            <group>sylius:admin:promotion:index</group>
-            <group>sylius:admin:promotion:show</group>
-        </attribute>
-
         <attribute name="label">
             <group>sylius:admin:promotion:index</group>
             <group>sylius:admin:promotion:show</group>

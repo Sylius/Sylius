@@ -17,27 +17,12 @@
     xsi:schemaLocation="https://api-platform.com/schema/metadata/resources-3.0 https://api-platform.com/schema/metadata/resources-3.0.xsd"
 >
     <resource class="Sylius\Component\Promotion\Model\PromotionTranslation">
-        <validationContext>
-            <values>
-                <value name="groups">
-                    <values>
-                        <value>sylius</value>
-                    </values>
-                </value>
-            </values>
-        </validationContext>
-
         <operations>
-            <operation class="ApiPlatform\Metadata\Get" uriTemplate="/admin/promotion-translations/{id}">
-                <normalizationContext>
-                    <values>
-                        <value name="groups">
-                            <values>
-                                <value>sylius:admin:promotion:show</value>
-                            </values>
-                        </value>
-                    </values>
-                </normalizationContext>
+            <operation class="ApiPlatform\Metadata\NotExposed" uriTemplate="/admin/promotions/{code}/translations/{localeCode}">
+                <uriVariables>
+                    <uriVariable parameterName="code" fromClass="Sylius\Component\Core\Model\Promotion" fromProperty="translations"/>
+                    <uriVariable parameterName="localeCode" fromClass="Sylius\Component\Promotion\Model\PromotionTranslation"/>
+                </uriVariables>
             </operation>
         </operations>
     </resource>
