@@ -28,7 +28,6 @@
         </validationContext>
 
         <operations>
-
             <operation class="ApiPlatform\Metadata\Get" uriTemplate="/admin/product-variant-translations/{id}">
                 <normalizationContext>
                     <values>
@@ -41,8 +40,6 @@
                     </values>
                 </normalizationContext>
             </operation>
-
         </operations>
     </resource>
-
 </resources>
