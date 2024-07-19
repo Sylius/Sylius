@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 
-namespace spec\Sylius\Bundle\ApiBundle\Serializer;
+namespace spec\Sylius\Bundle\ApiBundle\Serializer\Denormalizer;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\TaxRateInterface;

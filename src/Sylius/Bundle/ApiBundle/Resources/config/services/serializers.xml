@@ -131,13 +131,13 @@
             <tag name="serializer.normalizer" priority="64" />
         </service>
 
-        <service id="sylius.api.denormalizer.numeric_to_string.tax_rate" class="Sylius\Bundle\ApiBundle\Serializer\NumericToStringDenormalizer">
+        <service id="sylius_api.denormalizer.numeric_to_string.tax_rate" class="Sylius\Bundle\ApiBundle\Serializer\Denormalizer\NumericToStringDenormalizer">
             <argument type="string">%sylius.model.tax_rate.class%</argument>
             <argument type="string">amount</argument>
             <tag name="serializer.normalizer" priority="64" />
         </service>
 
-        <service id="sylius.api.denormalizer.numeric_to_string.exchange_rate" class="Sylius\Bundle\ApiBundle\Serializer\NumericToStringDenormalizer">
+        <service id="sylius_api.denormalizer.numeric_to_string.exchange_rate" class="Sylius\Bundle\ApiBundle\Serializer\Denormalizer\NumericToStringDenormalizer">
             <argument type="string">%sylius.model.exchange_rate.class%</argument>
             <argument type="string">ratio</argument>
             <tag name="serializer.normalizer" priority="64" />

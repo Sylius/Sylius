@@ -17,9 +17,4 @@
 >
     <property resource="Sylius\Component\Taxation\Model\TaxCategory" name="id" identifier="false" writable="false" />
     <property resource="Sylius\Component\Taxation\Model\TaxCategory" name="code" identifier="true" required="true" />
-    <property resource="Sylius\Component\Taxation\Model\TaxCategory" name="createdAt" writable="false" />
-    <property resource="Sylius\Component\Taxation\Model\TaxCategory" name="updatedAt" writable="false" />
-    <property resource="Sylius\Component\Taxation\Model\TaxCategory" name="name" writable="true" />
-    <property resource="Sylius\Component\Taxation\Model\TaxCategory" name="description" writable="true" />
-    <property resource="Sylius\Component\Taxation\Model\TaxCategory" name="rates" writable="false" />
 </properties>
