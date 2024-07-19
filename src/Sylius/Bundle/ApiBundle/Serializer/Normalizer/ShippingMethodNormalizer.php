@@ -93,8 +93,7 @@ final class ShippingMethodNormalizer implements NormalizerInterface, NormalizerA
             $data instanceof ShippingMethodInterface &&
             $this->sectionProvider->getSection() instanceof ShopApiSection &&
             $operation instanceof HttpOperation &&
-            isset($operation->getUriVariables()['tokenValue']) &&
-            isset($operation->getUriVariables()['shipmentId'])
+            isset($operation->getUriVariables()['tokenValue'], $operation->getUriVariables()['shipmentId'])
         ;
     }
 }
