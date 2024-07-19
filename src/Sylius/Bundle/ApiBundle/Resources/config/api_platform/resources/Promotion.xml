@@ -29,6 +29,12 @@
                     </values>
                 </normalizationContext>
             </operation>
+
+            <operation
+                class="ApiPlatform\Metadata\Delete"
+                uriTemplate="/admin/promotions/{code}"
+                processor="sylius_api.state_processor.admin.promotion.remove"
+            />
         </operations>
     </resource>
 </resources>

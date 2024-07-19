@@ -173,10 +173,6 @@ Example configuration for `order_fixed_discount` action type:
                     </attribute>
                 </attribute>
             </itemOperation>
-
-            <itemOperation name="admin_delete">
-                <attribute name="method">DELETE</attribute>
-            </itemOperation>
         </itemOperations>
 
         <subresourceOperations>
