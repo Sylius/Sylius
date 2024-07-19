@@ -17,14 +17,4 @@
 >
     <property resource="Sylius\Component\Core\Model\TaxRate" name="id" identifier="false" writable="false" />
     <property resource="Sylius\Component\Core\Model\TaxRate" name="code" identifier="true" required="true" />
-    <property resource="Sylius\Component\Core\Model\TaxRate" name="createdAt" writable="false" />
-    <property resource="Sylius\Component\Core\Model\TaxRate" name="updatedAt" writable="false" />
-    <property resource="Sylius\Component\Core\Model\TaxRate" name="name" writable="true" />
-    <property resource="Sylius\Component\Core\Model\TaxRate" name="zone" writable="true" />
-    <property resource="Sylius\Component\Core\Model\TaxRate" name="category" writable="true" />
-    <property resource="Sylius\Component\Core\Model\TaxRate" name="calculator" writable="true" />
-    <property resource="Sylius\Component\Core\Model\TaxRate" name="amount" writable="true" />
-    <property resource="Sylius\Component\Core\Model\TaxRate" name="includedInPrice" writable="true" />
-    <property resource="Sylius\Component\Core\Model\TaxRate" name="startDate" writable="true" />
-    <property resource="Sylius\Component\Core\Model\TaxRate" name="endDate" writable="true" />
 </properties>
