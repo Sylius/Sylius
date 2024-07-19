@@ -17,7 +17,6 @@
 >
     <class name="Sylius\Bundle\ApiBundle\Command\Checkout\ShipShipment">
         <attribute name="trackingCode">
-            <group>admin:shipment:update</group>
             <group>sylius:admin:shipment:update</group>
         </attribute>
     </class>

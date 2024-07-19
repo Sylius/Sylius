@@ -49,7 +49,7 @@ final class ShipShipmentHandler implements MessageHandlerInterface
     public function __invoke(ShipShipment $shipShipment): ShipmentInterface
     {
         /** @var ShipmentInterface|null $shipment */
-        $shipment = $this->shipmentRepository->find($shipShipment->shipmentId);
+        $shipment = $this->shipmentRepository->find($shipShipment->getShipmentId());
 
         Assert::notNull($shipment, 'Shipment has not been found.');
 
@@ -65,7 +65,7 @@ final class ShipShipmentHandler implements MessageHandlerInterface
 
         $stateMachine->apply($shipment, ShipmentTransitions::GRAPH, ShipmentTransitions::TRANSITION_SHIP);
 
-        $this->eventBus->dispatch(new SendShipmentConfirmationEmail($shipShipment->shipmentId), [new DispatchAfterCurrentBusStamp()]);
+        $this->eventBus->dispatch(new SendShipmentConfirmationEmail($shipShipment->getShipmentId()), [new DispatchAfterCurrentBusStamp()]);
 
         return $shipment;
     }

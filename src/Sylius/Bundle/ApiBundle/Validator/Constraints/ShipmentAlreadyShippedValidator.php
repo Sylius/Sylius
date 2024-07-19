@@ -33,7 +33,7 @@ final class ShipmentAlreadyShippedValidator extends ConstraintValidator
         Assert::isInstanceOf($value, ShipShipment::class);
 
         /** @var ShipmentInterface $shipment */
-        $shipment = $this->shipmentRepository->find($value->shipmentId);
+        $shipment = $this->shipmentRepository->find($value->getShipmentId());
 
         if ($shipment->getState() === OrderShippingStates::STATE_SHIPPED) {
             $this->context->addViolation($constraint->message);

@@ -55,9 +55,9 @@
 <!--            <tag name="sylius.api.command_data_transformer" priority="1000" />-->
 <!--        </service>-->
 
-<!--        <service id="Sylius\Bundle\ApiBundle\DataTransformer\ShipmentIdAwareInputCommandDataTransformer">-->
-<!--            <tag name="sylius.api.command_data_transformer" />-->
-<!--        </service>-->
+        <service id="Sylius\Bundle\ApiBundle\DataTransformer\ShipmentIdAwareInputCommandDataTransformer">
+            <tag name="sylius.api.command_data_transformer" />
+        </service>
 
 <!--        <service id="Sylius\Bundle\ApiBundle\DataTransformer\LoggedInShopUserIdAwareCommandDataTransformer">-->
 <!--            <argument type="service" id="Sylius\Bundle\ApiBundle\Context\UserContextInterface" />-->

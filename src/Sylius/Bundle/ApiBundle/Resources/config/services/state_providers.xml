@@ -28,7 +28,6 @@
             <tag name="api_platform.state_provider" priority="10"/>
         </service>
 
-
         <service id="sylius_api.state_provider.admin.order_item.adjustment.collection" class="Sylius\Bundle\ApiBundle\StateProvider\Common\Adjustment\CollectionProvider">
             <argument type="service" id="sylius.repository.order_item" />
             <argument type="string">id</argument>
