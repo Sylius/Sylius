@@ -861,21 +861,6 @@ parameters:
 			path: src/Sylius/Bundle/ApiBundle/DataPersister/PromotionCouponDataPersister.php
 
 		-
-			message: "#^Method Sylius\\\\Bundle\\\\ApiBundle\\\\DataPersister\\\\PromotionDataPersister\\:\\:persist\\(\\) has parameter \\$data with no type specified\\.$#"
-			count: 1
-			path: src/Sylius/Bundle/ApiBundle/DataPersister/PromotionDataPersister.php
-
-		-
-			message: "#^Method Sylius\\\\Bundle\\\\ApiBundle\\\\DataPersister\\\\PromotionDataPersister\\:\\:remove\\(\\) has parameter \\$data with no type specified\\.$#"
-			count: 1
-			path: src/Sylius/Bundle/ApiBundle/DataPersister/PromotionDataPersister.php
-
-		-
-			message: "#^Method Sylius\\\\Bundle\\\\ApiBundle\\\\DataPersister\\\\PromotionDataPersister\\:\\:supports\\(\\) has parameter \\$data with no type specified\\.$#"
-			count: 1
-			path: src/Sylius/Bundle/ApiBundle/DataPersister/PromotionDataPersister.php
-
-		-
 			message: "#^Method Sylius\\\\Bundle\\\\ApiBundle\\\\DataPersister\\\\TranslatableDataPersister\\:\\:supports\\(\\) has parameter \\$data with no type specified\\.$#"
 			count: 1
 			path: src/Sylius/Bundle/ApiBundle/DataPersister/TranslatableDataPersister.php

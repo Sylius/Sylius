@@ -71,11 +71,6 @@
             <tag name="api_platform.data_persister" />
         </service>
 
-        <service id="Sylius\Bundle\ApiBundle\DataPersister\PromotionDataPersister">
-            <argument type="service" id="api_platform.doctrine.orm.data_persister" />
-            <tag name="api_platform.data_persister" />
-        </service>
-
         <service id="Sylius\Bundle\ApiBundle\DataPersister\CustomerDataPersister">
             <argument type="service" id="api_platform.doctrine.orm.data_persister" />
             <argument type="service" id="sylius.security.password_updater" />
