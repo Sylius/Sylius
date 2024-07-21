@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Page\Admin\ShippingCategory;
 
-use Sylius\Behat\Behaviour\NamesIt;
 use Sylius\Behat\Behaviour\SpecifiesItsField;
 use Sylius\Behat\Page\Admin\Crud\CreatePage as BaseCreatePage;
 
