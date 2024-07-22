@@ -1,7 +1,7 @@
 {% import "@SyliusShop/shared/macro/money.html.twig" as money %}
 
 {% set variant = hookable_metadata.context.product|sylius_resolve_variant %}
-{% set has_discount = hookable_metadata.context.hasDiscount %}
+{% set has_discount = hookable_metadata.context.has_discount %}
 
 <div class="mb-2">
     <div class="d-flex gap-3 align-items-center">
