@@ -1,4 +1,4 @@
-{% import '@SyliusAdmin/shared/helper/product_image.html.twig' as product_image %}
+{% from '@SyliusAdmin/shared/helper/product_image.html.twig' import image %}
 
 {% set variant = hookable_metadata.context.variant %}
 {% set product = hookable_metadata.context.product %}
@@ -6,7 +6,7 @@
 <td>
     <div class="d-flex gap-3 align-items-center">
         <div>
-            {{ product_image.image(product) }}
+            {{ image(product) }}
         </div>
         <div>
             <div><strong {{ sylius_test_html_attribute('product-variant-name') }}>{{ variant.name }}</strong></div>

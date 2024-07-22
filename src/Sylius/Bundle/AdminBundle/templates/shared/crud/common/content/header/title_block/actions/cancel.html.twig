@@ -1,4 +1,4 @@
-{% import '@SyliusAdmin/shared/helper/button.html.twig' as _button %}
+{% import '@SyliusAdmin/shared/helper/button.html.twig' as button %}
 
 {% set configuration = hookable_metadata.context.configuration %}
 
@@ -7,4 +7,4 @@
     configuration.vars.index.route.parameters|default(configuration.vars.route.parameters|default({}))
 ))) %}
 
-{{ _button.cancel(sylius_test_form_attribute('cancel-changes-button')|merge({ text: 'sylius.ui.cancel'|trans, url: index_url, class: 'btn' })) }}
+{{ button.cancel(sylius_test_form_attribute('cancel-changes-button')|merge({ text: 'sylius.ui.cancel'|trans, url: index_url, class: 'btn' })) }}

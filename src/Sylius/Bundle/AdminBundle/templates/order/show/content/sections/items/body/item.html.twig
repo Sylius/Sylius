@@ -1,4 +1,4 @@
-{% import '@SyliusAdmin/shared/helper/product_image.html.twig' as product_image %}
+{% from '@SyliusAdmin/shared/helper/product_image.html.twig' import image %}
 
 {% set product = hookable_metadata.context.product %}
 {% set variant = hookable_metadata.context.variant %}
@@ -6,7 +6,7 @@
 <td>
     <div class="d-flex gap-3 align-items-center">
         <div>
-            {{ product_image.image(product) }}
+            {{ image(product) }}
         </div>
         <div>
             <div>

@@ -1,4 +1,4 @@
-{% from '@SyliusAdmin/shared/helper/icon.html.twig' import icon as _icon %}
+{% from '@SyliusAdmin/shared/helper/icon.html.twig' import icon %}
 
 {% set product = (hookable_metadata.context.resource) %}
 {% set enabled_channels = product.channels|filter(channel => channel.enabled == true) %}
@@ -6,7 +6,7 @@
 {% if sylius_bundle_loaded_checker('SyliusShopBundle') %}
     {% if not product.enabled or enabled_channels|length < 1 %}
         <a class="btn disabled" href="{{ (url is not defined) ? '#' : url|raw }}" target="_blank" {{ sylius_test_html_attribute('view-in-store') }}>
-            {{ _icon({ icon: 'arrow-up-right', class: 'icon icon-tabler' }) }}
+            {{ icon({ icon: 'arrow_up_right', class: 'icon icon-tabler' }) }}
             {{ 'sylius.ui.view_in_store'|trans }}
         </a>
     {% elseif enabled_channels|length > 1 %}
@@ -27,7 +27,7 @@
                             href="{{ (url is not defined) ? '#' : url|raw }}"
                             target="_blank"
                         >
-                            {{ _icon({ icon: 'arrow-up-right', class: 'icon dropdown-item-icon icon-tabler' }) }}
+                            {{ icon({ icon: 'arrow_up_right', class: 'icon dropdown-item-icon icon-tabler' }) }}
                             {{ channel.name }} ({{ channel.code }})
                         </a>
                     </li>
@@ -42,7 +42,7 @@
             {% endif %}
 
             <a class="btn {% if url is not defined %}disabled{% endif %}" href="{{ (url is not defined) ? '#' : url|raw }}" target="_blank" {{ sylius_test_html_attribute('view-in-store') }}>
-                {{ _icon({ icon: 'arrow-up-right', class: 'icon icon-tabler' }) }}
+                {{ icon({ icon: 'arrow_up_right', class: 'icon icon-tabler' }) }}
                 {{ 'sylius.ui.view_in_store'|trans }}
             </a>
         {% endfor %}
