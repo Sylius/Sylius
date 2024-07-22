@@ -1,6 +1,6 @@
 {
     "@context": "\/api\/v2\/contexts\/Promotion",
-    "@id": "\/api\/v2\/admin\/promotions\/50_off",
+    "@id": "\/api\/v2\/admin\/promotions\/50_off/archive",
     "@type": "Promotion",
     "channels": [
         "\/api\/v2\/admin\/channels\/MOBILE"
@@ -23,9 +23,8 @@
     "updatedAt": "@date@",
     "translations": {
         "en_US": {
-            "@id": "\/api\/v2\/admin\/promotion-translations\/@integer@",
+            "@id": "\/api\/v2\/admin\/promotions\/50_off\/translations\/en_US",
             "@type": "PromotionTranslation",
-            "id": "@integer@",
             "label": "-50% on first order!"
         }
     }
