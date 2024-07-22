@@ -29,7 +29,7 @@
             "rules": [],
             "actions": [
                 {
-                    "@id": "\/api\/v2\/admin\/promotion-actions\/@integer@",
+                    "@id": "\/api\/v2\/admin\/promotions\/dollar_off\/actions\/@integer@",
                     "@type": "PromotionAction",
                     "id": "@integer@",
                     "type": "unit_fixed_discount",
@@ -45,9 +45,8 @@
             "updatedAt": "@date@",
             "translations": {
                 "en_US": {
-                    "@id": "\/api\/v2\/admin\/promotion-translations\/@integer@",
+                    "@id": "\/api\/v2\/admin\/promotions\/dollar_off\/translations\/en_US",
                     "@type": "PromotionTranslation",
-                    "id": "@integer@",
                     "label": "1$ off every item!"
                 }
             }
@@ -78,9 +77,8 @@
             "updatedAt": "@date@",
             "translations": {
                 "en_US": {
-                    "@id": "\/api\/v2\/admin\/promotion-translations\/@integer@",
+                    "@id": "\/api\/v2\/admin\/promotions\/50_off\/translations\/en_US",
                     "@type": "PromotionTranslation",
-                    "id": "@integer@",
                     "label": "-50% on first order!"
                 }
             }
