@@ -31,6 +31,76 @@
             </operation>
 
             <operation
+                class="ApiPlatform\Metadata\Patch"
+                uriTemplate="/admin/promotions/{code}/archive"
+                input="false"
+                controller="Sylius\Bundle\ApiBundle\Applicator\ArchivingPromotionApplicatorInterface::archive"
+            >
+                <validationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius</value>
+                                <value>sylius_api</value>
+                            </values>
+                        </value>
+                    </values>
+                </validationContext>
+
+                <openapiContext>
+                    <values>
+                        <value name="summary">Archives Promotion.</value>
+                    </values>
+                </openapiContext>
+
+                <normalizationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius:admin:promotion:show</value>
+                            </values>
+                        </value>
+                        <value name="skip_null_values">true</value>
+                    </values>
+                </normalizationContext>
+            </operation>
+
+            <operation
+                class="ApiPlatform\Metadata\Patch"
+                uriTemplate="/admin/promotions/{code}/restore"
+                input="false"
+                controller="Sylius\Bundle\ApiBundle\Applicator\ArchivingPromotionApplicatorInterface::restore"
+            >
+                <validationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius</value>
+                                <value>sylius_api</value>
+                            </values>
+                        </value>
+                    </values>
+                </validationContext>
+
+                <openapiContext>
+                    <values>
+                        <value name="summary">Restores Archived Promotion.</value>
+                    </values>
+                </openapiContext>
+
+                <normalizationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius:admin:promotion:show</value>
+                            </values>
+                        </value>
+                        <value name="skip_null_values">true</value>
+                    </values>
+                </normalizationContext>
+            </operation>
+
+            <operation
                 class="ApiPlatform\Metadata\Delete"
                 uriTemplate="/admin/promotions/{code}"
                 processor="sylius_api.state_processor.admin.promotion.remove"
