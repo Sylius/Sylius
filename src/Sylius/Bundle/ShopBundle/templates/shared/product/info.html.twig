@@ -1,0 +1,36 @@
+{% set product = variant.product %}
+
+<div class="d-flex align-items-center gap-4">
+    <div style="width: 6rem;">
+        <div class="overflow-auto bg-light rounded-3" style="aspect-ratio: 3/4; ">
+            {% if variant.hasImages %}
+                {% include '@SyliusShop/shared/product/main_image.html.twig' with {'product': variant, 'filter': 'sylius_shop_product_tiny_thumbnail', 'class': 'w-100 h-100 object-fit-cover'} %}
+            {% else %}
+                {% include '@SyliusShop/shared/product/main_image.html.twig' with {'product': product, 'filter': 'sylius_shop_product_tiny_thumbnail', 'class': 'w-100 h-100 object-fit-cover'} %}
+            {% endif %}
+        </div>
+    </div>
+    <div>
+        <div class="h6">
+            <a class="link-reset" href="{{ path('sylius_shop_product_show', {'slug': product.slug, '_locale': product.translation.locale}) }}" {{ sylius_test_html_attribute('product-name', item.productName) }}>
+                {{ item.productName }}
+            </a>
+        </div>
+
+        <small class="text-body-tertiary" {{ sylius_test_html_attribute('product-variant-code', variant.code) }}>{{ variant.code }}</small>
+
+        {% if product.hasOptions() %}
+            <div {{ sylius_test_html_attribute('product-options') }}>
+                {% for optionValue in variant.optionValues %}
+                    <small class="text-body-tertiary" data-sylius-option-name="{{ optionValue.name }}" {{ sylius_test_html_attribute('option-name', optionValue.name) }}>
+                        {{ optionValue.name }}: {{ optionValue.value }}
+                    </small>
+                {% endfor %}
+            </div>
+        {% elseif item.variantName is not null %}
+            <small class="text-body-tertiary" {{ sylius_test_html_attribute('product-variant-name') }}>
+                {{ item.variantName }}
+            </small>
+        {% endif %}
+    </div>
+</div>

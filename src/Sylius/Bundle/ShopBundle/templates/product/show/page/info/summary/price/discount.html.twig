@@ -1,0 +1,16 @@
+{% import "@SyliusShop/shared/macro/money.html.twig" as money %}
+
+{% set variant = hookable_metadata.context.product|sylius_resolve_variant %}
+{% set hasDiscount = hookable_metadata.context.hasDiscount %}
+{% set days = hookable_metadata.context.days %}
+{% set hasLowestPrice = hookable_metadata.context.hasLowestPrice %}
+
+<div data-test-lowest-price-before-discount>
+    {% if hasDiscount and hasLowestPrice %}
+        <div>
+            <small class="text-body-tertiary">
+                {{ 'sylius.ui.lowest_price_days_before_discount_was'|trans({'%days%': days, '%price%': money.calculateLowestPrice(variant)}) }}
+            </small>
+        </div>
+    {% endif %}
+</div>

@@ -196,7 +196,7 @@ sylius_ui:
         sylius.shop.product_review.create.sidebar:
             blocks:
                 card:
-                    template: "@SyliusShop/product/card.html.twig"
+                    template: "@SyliusShop/shared/product/card.html.twig"
                     priority: 10
 
         sylius.shop.product_review.create.main:

@@ -1,8 +1,0 @@
-{% embed '@SyliusShop/shared/accordion/accordion.html.twig' %}
-    {% set product = hookable_metadata.context.product %}
-
-    {% block accordion_content %}
-        {% hook 'accordion' with { product, configuratioin: hookable_metadata.context.configuration } %}
-    {% endblock %}
-
-{% endembed %}

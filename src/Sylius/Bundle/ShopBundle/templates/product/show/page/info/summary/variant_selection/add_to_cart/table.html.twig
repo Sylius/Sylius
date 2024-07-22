@@ -1,0 +1,12 @@
+{% set product = hookable_metadata.context.product %}
+{% set form = hookable_metadata.context.form %}
+
+<div class="mb-3">
+    {% if not product.simple %}
+        {% if product.variantSelectionMethodChoice %}
+            {% include '@SyliusShop/product/show/page/info/summary/variants.html.twig' %}
+        {% else %}
+            {% include '@SyliusShop/product/show/page/info/summary/options.html.twig' %}
+        {% endif %}
+    {% endif %}
+</div>
