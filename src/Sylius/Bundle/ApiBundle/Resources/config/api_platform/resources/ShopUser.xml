@@ -21,8 +21,6 @@
             <operation
                 class="ApiPlatform\Metadata\Get"
                 uriTemplate="/admin/shop-users/{id}"
-                read="false"
-                output="false"
                 controller="ApiPlatform\Action\NotFoundAction"
             />
         </operations>

@@ -148,7 +148,7 @@
             <tag name="serializer.normalizer" priority="64" />
         </service>
 
-        <service id="Sylius\Bundle\ApiBundle\Serializer\Denormalizer\CustomerDenormalizer">
+        <service id="sylius_api.denormalizer.customer" class="Sylius\Bundle\ApiBundle\Serializer\Denormalizer\CustomerDenormalizer">
             <argument type="service" id="clock" />
             <tag name="serializer.normalizer" priority="64" />
         </service>

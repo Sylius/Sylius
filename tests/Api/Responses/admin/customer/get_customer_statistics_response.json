@@ -9,7 +9,7 @@
     "@id": "\/api\/v2\/.well-known\/genid\/@string@",
     "perChannelsStatistics": {
         "@context": "\/api\/v2\/contexts\/Customer",
-        "@id": "\/api\/v2\/admin\/customers\/@string@\/statistics",
+        "@id": "\/api\/v2\/admin\/customers\/@integer@\/statistics",
         "@type": "hydra:Collection",
         "hydra:member": [
             {
