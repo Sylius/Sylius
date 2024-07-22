@@ -117,7 +117,7 @@ final class ManagingCustomersContext implements Context
      */
     public function iSelectGroup(CustomerGroupInterface $customerGroup): void
     {
-        $this->client->addRequestData('group', $this->iriConverter->getIriFromItem($customerGroup));
+        $this->client->addRequestData('group', $this->iriConverter->getIriFromResource($customerGroup));
     }
 
     /**
@@ -579,7 +579,7 @@ final class ManagingCustomersContext implements Context
     {
         Assert::same(
             $this->responseChecker->getValue($this->client->getLastResponse(), 'group'),
-            $this->iriConverter->getIriFromItem($customerGroup),
+            $this->iriConverter->getIriFromResource($customerGroup),
         );
     }
 
