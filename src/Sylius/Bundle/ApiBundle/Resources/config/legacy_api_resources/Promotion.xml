@@ -28,54 +28,6 @@
         </attribute>
 
         <collectionOperations>
-            <collectionOperation name="admin_post">
-                <attribute name="method">POST</attribute>
-                <attribute name="denormalization_context">
-                    <attribute name="groups">
-                        <attribute>admin:promotion:create</attribute>
-                        <attribute>sylius:admin:promotion:create</attribute>
-                    </attribute>
-                </attribute>
-                <attribute name="normalization_context">
-                    <attribute name="groups">
-                        <attribute>admin:promotion:show</attribute>
-                        <attribute>sylius:admin:promotion:show</attribute>
-                    </attribute>
-                    <!-- It auto-turned on when adding PATCH itemOperations: https://github.com/api-platform/core/issues/3600 -->
-                    <attribute name="skip_null_values">false</attribute>
-                </attribute>
-                <attribute name="openapi_context">
-                    <attribute name="description">
-Example configuration for `total_of_items_from_taxon` rule type:
-
-```
-{
-    "type": "total_of_items_from_taxon",
-    "configuration": {
-        "channel-code": {
-            "taxon": "taxon-code",
-            "amount": int
-        }
-    }
-}
-```
-
-Example configuration for `order_fixed_discount` action type:
-
-```
-{
-    "type": "order_fixed_discount",
-    "configuration": {
-        "channel-code": {
-            "amount": int,
-        }
-    }
-}
-```
-                    </attribute>
-                </attribute>
-            </collectionOperation>
-
             <collectionOperation name="admin_get">
                 <attribute name="method">GET</attribute>
                 <attribute name="normalization_context">
