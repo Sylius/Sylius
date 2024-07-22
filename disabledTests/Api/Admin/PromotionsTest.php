@@ -23,21 +23,6 @@ final class PromotionsTest extends JsonApiTestCase
     use AdminUserLoginTrait;
 
     /** @test */
-    public function it_gets_promotions(): void
-    {
-        $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel.yaml', 'promotion/promotion.yaml']);
-        $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
-
-        $this->client->request(method: 'GET', uri: '/api/v2/admin/promotions', server: $header);
-
-        $this->assertResponse(
-            $this->client->getResponse(),
-            'admin/promotion/get_promotions_response',
-            Response::HTTP_OK,
-        );
-    }
-
-    /** @test */
     public function it_gets_promotion_coupons(): void
     {
         $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel.yaml', 'promotion/promotion.yaml']);
