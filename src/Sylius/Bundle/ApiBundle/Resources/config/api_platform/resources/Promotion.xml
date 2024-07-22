@@ -301,6 +301,72 @@ Example configuration for `order_fixed_discount` action type:
                 </openapiContext>
             </operation>
 
+            <operation class="ApiPlatform\Metadata\Put" uriTemplate="/admin/promotions/{code}">
+                <validationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius</value>
+                                <value>sylius_api</value>
+                            </values>
+                        </value>
+                    </values>
+                </validationContext>
+
+                <denormalizationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius:admin:promotion:update</value>
+                            </values>
+                        </value>
+                    </values>
+                </denormalizationContext>
+
+                <normalizationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius:admin:promotion:show</value>
+                            </values>
+                        </value>
+                    </values>
+                </normalizationContext>
+
+                <openapiContext>
+                    <values>
+                        <value name="description">
+Example configuration for `total_of_items_from_taxon` rule type:
+
+```
+{
+    "type": "total_of_items_from_taxon",
+    "configuration": {
+        "channel-code": {
+            "taxon": "taxon-code",
+            "amount": int
+        }
+    }
+}
+```
+
+Example configuration for `order_fixed_discount` action type:
+
+```
+{
+    "type": "order_fixed_discount",
+    "configuration": {
+        "channel-code": {
+            "amount": int
+        }
+    }
+}
+```
+                        </value>
+                    </values>
+                </openapiContext>
+            </operation>
+
             <operation
                 class="ApiPlatform\Metadata\Delete"
                 uriTemplate="/admin/promotions/{code}"
