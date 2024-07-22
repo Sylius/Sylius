@@ -20,7 +20,7 @@
     "coupons": [],
     "rules": [
         {
-            "@id": "\/api\/v2\/admin\/promotion-rules\/@integer@",
+            "@id": "\/api\/v2\/admin\/promotions\/tshirts_discount\/rules\/@integer@",
             "@type": "PromotionRule",
             "id": "@integer@",
             "type": "cart_quantity",
@@ -29,7 +29,7 @@
             }
         },
         {
-            "@id": "\/api\/v2\/admin\/promotion-rules\/@integer@",
+            "@id": "\/api\/v2\/admin\/promotions\/tshirts_discount\/rules\/@integer@",
             "@type": "PromotionRule",
             "id": "@integer@",
             "type": "customer_group",
@@ -38,7 +38,7 @@
             }
         },
         {
-            "@id": "\/api\/v2\/admin\/promotion-rules\/@integer@",
+            "@id": "\/api\/v2\/admin\/promotions\/tshirts_discount\/rules\/@integer@",
             "@type": "PromotionRule",
             "id": "@integer@",
             "type": "nth_order",
@@ -47,7 +47,7 @@
             }
         },
         {
-            "@id": "\/api\/v2\/admin\/promotion-rules\/@integer@",
+            "@id": "\/api\/v2\/admin\/promotions\/tshirts_discount\/rules\/@integer@",
             "@type": "PromotionRule",
             "id": "@integer@",
             "type": "shipping_country",
@@ -56,7 +56,7 @@
             }
         },
         {
-            "@id": "\/api\/v2\/admin\/promotion-rules\/@integer@",
+            "@id": "\/api\/v2\/admin\/promotions\/tshirts_discount\/rules\/@integer@",
             "@type": "PromotionRule",
             "id": "@integer@",
             "type": "has_taxon",
@@ -68,7 +68,7 @@
             }
         },
         {
-            "@id": "\/api\/v2\/admin\/promotion-rules\/@integer@",
+            "@id": "\/api\/v2\/admin\/promotions\/tshirts_discount\/rules\/@integer@",
             "@type": "PromotionRule",
             "id": "@integer@",
             "type": "total_of_items_from_taxon",
@@ -84,7 +84,7 @@
             }
         },
         {
-            "@id": "\/api\/v2\/admin\/promotion-rules\/@integer@",
+            "@id": "\/api\/v2\/admin\/promotions\/tshirts_discount\/rules\/@integer@",
             "@type": "PromotionRule",
             "id": "@integer@",
             "type": "contains_product",
@@ -93,7 +93,7 @@
             }
         },
         {
-            "@id": "\/api\/v2\/admin\/promotion-rules\/@integer@",
+            "@id": "\/api\/v2\/admin\/promotions\/tshirts_discount\/rules\/@integer@",
             "@type": "PromotionRule",
             "id": "@integer@",
             "type": "item_total",
@@ -109,7 +109,7 @@
     ],
     "actions": [
         {
-            "@id": "\/api\/v2\/admin\/promotion-actions\/@integer@",
+            "@id": "\/api\/v2\/admin\/promotions\/tshirts_discount\/actions\/@integer@",
             "@type": "PromotionAction",
             "id": "@integer@",
             "type": "order_fixed_discount",
@@ -123,7 +123,7 @@
             }
         },
         {
-            "@id": "\/api\/v2\/admin\/promotion-actions\/@integer@",
+            "@id": "\/api\/v2\/admin\/promotions\/tshirts_discount\/actions\/@integer@",
             "@type": "PromotionAction",
             "id": "@integer@",
             "type": "unit_fixed_discount",
@@ -143,7 +143,7 @@
             }
         },
         {
-            "@id": "\/api\/v2\/admin\/promotion-actions\/@integer@",
+            "@id": "\/api\/v2\/admin\/promotions\/tshirts_discount\/actions\/@integer@",
             "@type": "PromotionAction",
             "id": "@integer@",
             "type": "order_percentage_discount",
@@ -152,7 +152,7 @@
             }
         },
         {
-            "@id": "\/api\/v2\/admin\/promotion-actions\/@integer@",
+            "@id": "\/api\/v2\/admin\/promotions\/tshirts_discount\/actions\/@integer@",
             "@type": "PromotionAction",
             "id": "@integer@",
             "type": "unit_percentage_discount",
@@ -166,7 +166,7 @@
             }
         },
         {
-            "@id": "\/api\/v2\/admin\/promotion-actions\/@integer@",
+            "@id": "\/api\/v2\/admin\/promotions\/tshirts_discount\/actions\/@integer@",
             "@type": "PromotionAction",
             "id": "@integer@",
             "type": "shipping_percentage_discount",
@@ -180,9 +180,8 @@
     "updatedAt": "@string@",
     "translations": {
         "en_US": {
-            "@id": "\/api\/v2\/admin\/promotion-translations\/@integer@",
+            "@id": "\/api\/v2\/admin\/promotions\/tshirts_discount\/translations\/en_US",
             "@type": "PromotionTranslation",
-            "id": "@integer@",
             "label": "T-Shirts discount"
         }
     }
