@@ -135,10 +135,10 @@
             <tag name="api_platform.doctrine.orm.query_extension.item" />
         </service>
 
-<!--        <service id="sylius_api.doctrine.orm.query_extension.common.promotion.non_archived" class="Sylius\Bundle\ApiBundle\Doctrine\ORM\QueryExtension\Common\Promotion\NonArchivedExtension">-->
-<!--            <argument>%sylius.model.promotion.class%</argument>-->
-<!--            <tag name="api_platform.doctrine.orm.query_extension.collection" />-->
-<!--        </service>-->
+        <service id="sylius_api.doctrine.orm.query_extension.common.promotion.non_archived" class="Sylius\Bundle\ApiBundle\Doctrine\ORM\QueryExtension\Common\Promotion\NonArchivedExtension">
+            <argument>%sylius.model.promotion.class%</argument>
+            <tag name="api_platform.doctrine.orm.query_extension.collection" />
+        </service>
 
         <service id="sylius_api.doctrine.orm.query_extension.shop.product.enabled_within_product_association" class="Sylius\Bundle\ApiBundle\Doctrine\ORM\QueryExtension\Shop\Product\EnabledWithinProductAssociationExtension">
             <argument type="service" id="sylius.section_resolver.uri_based_section_resolver" />
