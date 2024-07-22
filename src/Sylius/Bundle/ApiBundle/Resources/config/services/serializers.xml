@@ -100,6 +100,11 @@
             <tag name="serializer.normalizer" priority="64" />
         </service>
 
+        <service id="sylius_api.normalizer.generated_promotion_coupons" class="Sylius\Bundle\ApiBundle\Serializer\Normalizer\GeneratedPromotionCouponsNormalizer">
+            <argument type="service" id="sylius.section_resolver.uri_based_section_resolver" />
+            <tag name="serializer.normalizer" priority="64" />
+        </service>
+
 <!--        <service id="Sylius\Bundle\ApiBundle\Serializer\ZoneDenormalizer">-->
 <!--            <argument type="service" id="api_platform.symfony.iri_converter" />-->
 <!--            <tag name="serializer.normalizer" priority="64" />-->

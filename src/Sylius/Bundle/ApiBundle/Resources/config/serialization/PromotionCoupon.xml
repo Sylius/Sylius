@@ -17,85 +17,57 @@
 >
     <class name="Sylius\Component\Core\Model\PromotionCoupon">
         <attribute name="createdAt">
-            <group>admin:promotion_coupon:index</group>
             <group>sylius:admin:promotion_coupon:index</group>
-            <group>admin:promotion_coupon:show</group>
             <group>sylius:admin:promotion_coupon:show</group>
         </attribute>
 
         <attribute name="updatedAt">
-            <group>admin:promotion_coupon:index</group>
             <group>sylius:admin:promotion_coupon:index</group>
-            <group>admin:promotion_coupon:show</group>
             <group>sylius:admin:promotion_coupon:show</group>
         </attribute>
 
         <attribute name="code">
-            <group>admin:promotion_coupon:index</group>
             <group>sylius:admin:promotion_coupon:index</group>
-            <group>admin:promotion_coupon:show</group>
             <group>sylius:admin:promotion_coupon:show</group>
-            <group>admin:promotion_coupon:create</group>
             <group>sylius:admin:promotion_coupon:create</group>
         </attribute>
 
         <attribute name="usageLimit">
-            <group>admin:promotion_coupon:index</group>
             <group>sylius:admin:promotion_coupon:index</group>
-            <group>admin:promotion_coupon:show</group>
             <group>sylius:admin:promotion_coupon:show</group>
-            <group>admin:promotion_coupon:create</group>
             <group>sylius:admin:promotion_coupon:create</group>
-            <group>admin:promotion_coupon:update</group>
             <group>sylius:admin:promotion_coupon:update</group>
         </attribute>
 
         <attribute name="perCustomerUsageLimit">
-            <group>admin:promotion_coupon:index</group>
             <group>sylius:admin:promotion_coupon:index</group>
-            <group>admin:promotion_coupon:show</group>
             <group>sylius:admin:promotion_coupon:show</group>
-            <group>admin:promotion_coupon:create</group>
             <group>sylius:admin:promotion_coupon:create</group>
-            <group>admin:promotion_coupon:update</group>
             <group>sylius:admin:promotion_coupon:update</group>
         </attribute>
 
         <attribute name="used">
-            <group>admin:promotion_coupon:index</group>
             <group>sylius:admin:promotion_coupon:index</group>
-            <group>admin:promotion_coupon:show</group>
             <group>sylius:admin:promotion_coupon:show</group>
         </attribute>
 
         <attribute name="reusableFromCancelledOrders">
-            <group>admin:promotion_coupon:index</group>
             <group>sylius:admin:promotion_coupon:index</group>
-            <group>admin:promotion_coupon:show</group>
             <group>sylius:admin:promotion_coupon:show</group>
-            <group>admin:promotion_coupon:create</group>
             <group>sylius:admin:promotion_coupon:create</group>
-            <group>admin:promotion_coupon:update</group>
             <group>sylius:admin:promotion_coupon:update</group>
         </attribute>
 
         <attribute name="promotion">
-            <group>admin:promotion_coupon:index</group>
             <group>sylius:admin:promotion_coupon:index</group>
-            <group>admin:promotion_coupon:show</group>
             <group>sylius:admin:promotion_coupon:show</group>
-            <group>admin:promotion_coupon:create</group>
             <group>sylius:admin:promotion_coupon:create</group>
         </attribute>
 
         <attribute name="expiresAt">
-            <group>admin:promotion_coupon:index</group>
             <group>sylius:admin:promotion_coupon:index</group>
-            <group>admin:promotion_coupon:show</group>
             <group>sylius:admin:promotion_coupon:show</group>
-            <group>admin:promotion_coupon:create</group>
             <group>sylius:admin:promotion_coupon:create</group>
-            <group>admin:promotion_coupon:update</group>
             <group>sylius:admin:promotion_coupon:update</group>
         </attribute>
     </class>
