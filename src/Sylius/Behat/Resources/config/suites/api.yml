@@ -52,7 +52,7 @@ imports:
 #    - api/promotion/applying_promotion_coupon.yml
 #    - api/promotion/applying_promotion_rules.yml
     - api/promotion/managing_catalog_promotions.yml
-#    - api/promotion/managing_promotion_coupons.yml
+    - api/promotion/managing_promotion_coupons.yml
 #    - api/promotion/managing_promotions.yml
 #    - api/promotion/receiving_discount.yml
     - api/promotion/removing_catalog_promotions.yml
