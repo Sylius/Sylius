@@ -393,7 +393,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
         return array_merge(parent::getDefinedElements(), [
             'billing_address' => '[data-test-billing-address]',
             'cancel_order' => '[data-test-cancel-order]',
-            'currency' => '#sylius-order-currency',
+            'currency' => '[data-test-currency]',
             'customer_email' => '[data-test-customer] [data-test-email]',
             'ip_address' => '#ipAddress',
             'item' => '[data-test-item="%name%"]',
