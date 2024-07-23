@@ -20,7 +20,7 @@ Feature: Filtering tax rates by start date
         But I should see the tax rate "2023 tax rate" in the list
 
     @api @ui
-    Scenario: Filtering catalog promotions up to start date
+    Scenario: Filtering tax rates up to start date
         When I browse tax rates
         And I filter tax rates by start date up to "2022-12-22"
         Then I should not see a tax rate with name "2023 tax rate"
@@ -28,7 +28,7 @@ Feature: Filtering tax rates by start date
         But I should see the tax rate "2022 tax rate" in the list
 
     @api @ui
-    Scenario: Filtering catalog promotions in a start date range
+    Scenario: Filtering tax rates in a start date range
         When I browse tax rates
         And I filter tax rates by start date from "2022-08-20" up to "2022-12-26"
         Then I should not see a tax rate with name "2023 tax rate"
