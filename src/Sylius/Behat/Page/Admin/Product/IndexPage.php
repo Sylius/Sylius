@@ -84,11 +84,6 @@ class IndexPage extends CrudIndexPage implements IndexPageInterface
         $field->find('css', '[data-test-show-action="Details"]')->click();
     }
 
-    public function goToPage(int $page): void
-    {
-        $this->getElement('pagination_button', ['%page%' => $page])->click();
-    }
-
     public function checkFirstProductHasDataAttribute(string $attributeName): bool
     {
         return $this->getElement('first_product')->find('css', sprintf('[%s]', $attributeName)) !== null;
@@ -97,11 +92,6 @@ class IndexPage extends CrudIndexPage implements IndexPageInterface
     public function checkLastProductHasDataAttribute(string $attributeName): bool
     {
         return $this->getElement('last_product')->find('css', sprintf('[%s]', $attributeName)) !== null;
-    }
-
-    public function getPageNumber(): int
-    {
-        return (int) $this->getElement('page_number')->getText();
     }
 
     /** @return array<string, string> */
@@ -113,9 +103,6 @@ class IndexPage extends CrudIndexPage implements IndexPageInterface
             'first_product' => '.table > tbody > tr:first-child',
             'last_product' => '.table > tbody > tr:last-child',
             'main_taxon_filter' => '#criteria_main_taxon',
-            'page_number' => '.sylius-grid-nav__pagination .active',
-            'pagination_button' => '.sylius-grid-nav__pagination a.item:contains("%page%")',
-            'pagination_buttons' => '.sylius-grid-nav__pagination',
             'taxon_filter' => '#criteria_taxon',
         ]);
     }
