@@ -16,6 +16,7 @@ namespace Sylius\Behat\Page\Admin\Product;
 use Sylius\Behat\Page\Admin\Crud\UpdatePageInterface as BaseUpdatePageInterface;
 use Sylius\Behat\Page\Admin\EditToShowPageSwitcherInterface;
 use Sylius\Behat\Page\Admin\ShowPageButtonCheckerInterface;
+use Sylius\Component\Core\Model\ChannelInterface;
 
 interface UpdateSimpleProductPageInterface extends
     BaseUpdatePageInterface,
@@ -46,7 +47,7 @@ interface UpdateSimpleProductPageInterface extends
 
     public function isShowInShopButtonDisabled(): bool;
 
-    public function showProductInChannel(string $channel): void;
+    public function showProductInChannel(ChannelInterface $channel): void;
 
     public function showProductInSingleChannel(): void;
 
