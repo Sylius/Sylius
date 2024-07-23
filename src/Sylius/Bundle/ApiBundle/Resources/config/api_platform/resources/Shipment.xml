@@ -16,6 +16,8 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="https://api-platform.com/schema/metadata/resources-3.0 https://api-platform.com/schema/metadata/resources-3.0.xsd"
 >
+
+    <!-- Admin Section -->
     <resource class="Sylius\Component\Core\Model\Shipment" shortName="Shipment">
         <operations>
             <operation class="ApiPlatform\Metadata\GetCollection" uriTemplate="/admin/shipments">
@@ -50,16 +52,28 @@
                 </normalizationContext>
             </operation>
 
-            <operation class="ApiPlatform\Metadata\Get" uriTemplate="/shop/shipments/{id}">
-                <normalizationContext>
+            <operation
+                class="ApiPlatform\Metadata\Post"
+                uriTemplate="/admin/shipments/{id}/resend-confirmation-email"
+                messenger="input"
+                input="Sylius\Bundle\ApiBundle\Command\ResendShipmentConfirmationEmail"
+                output="false"
+                status="202"
+            >
+                <validationContext>
                     <values>
                         <value name="groups">
                             <values>
-                                <value>sylius:shop:shipment:show</value>
+                                <value>sylius</value>
                             </values>
                         </value>
                     </values>
-                </normalizationContext>
+                </validationContext>
+                <openapiContext>
+                    <values>
+                        <value name="summary">Resends shipment confirmation email.</value>
+                    </values>
+                </openapiContext>
             </operation>
 
             <operation
@@ -95,28 +109,18 @@
                 </openapiContext>
             </operation>
 
-            <operation
-                class="ApiPlatform\Metadata\Post"
-                uriTemplate="/admin/shipments/{id}/resend-confirmation-email"
-                messenger="input"
-                input="Sylius\Bundle\ApiBundle\Command\ResendShipmentConfirmationEmail"
-                output="false"
-                status="202"
-            >
-                <validationContext>
+            <!-- Shop Section -->
+
+            <operation class="ApiPlatform\Metadata\Get" uriTemplate="/shop/shipments/{id}">
+                <normalizationContext>
                     <values>
                         <value name="groups">
                             <values>
-                                <value>sylius</value>
+                                <value>sylius:shop:shipment:show</value>
                             </values>
                         </value>
                     </values>
-                </validationContext>
-                <openapiContext>
-                    <values>
-                        <value name="summary">Resends shipment confirmation email.</value>
-                    </values>
-                </openapiContext>
+                </normalizationContext>
             </operation>
         </operations>
     </resource>
