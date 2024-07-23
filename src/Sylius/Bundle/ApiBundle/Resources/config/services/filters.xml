@@ -300,7 +300,7 @@
 <!--            <tag name="api_platform.filter" />-->
 <!--        </service>-->
 
-        <service id="sylius.api.customer_group_filter" parent="api_platform.doctrine.orm.search_filter" public="true">
+        <service id="sylius_api.filter.customer_group" parent="api_platform.doctrine.orm.search_filter" public="true">
             <argument type="collection">
                 <argument key="group.name">exact</argument>
             </argument>
