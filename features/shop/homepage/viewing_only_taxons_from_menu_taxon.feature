@@ -11,7 +11,7 @@ Feature: Viewing only taxons from the menu taxon
         And the "Clothes" taxon has children taxons "T-Shirts" and "Caps"
         And the "Guns" taxon has children taxons "Rifles" and "Revolvers"
 
-    @todo @ui @api
+    @api @ui
     Scenario: Viewing taxons list only from the channel menu taxon
         Given this channel has menu taxon "Guns"
         When I check available taxons
@@ -19,14 +19,14 @@ Feature: Viewing only taxons from the menu taxon
         And I should not see "Pens" and "Pencils" in the menu
         And I should not see "T-Shirts" and "Caps" in the menu
 
-    @todo @ui @api
+    @api @ui
     Scenario: Using general taxon if channel does not have a menu taxon specified
         When I check available taxons
         Then I should see "Pens" and "Pencils" in the menu
         And I should not see "T-Shirts" and "Guns" in the menu
         And I should not see "Rifles" and "Revolvers" in the menu
 
-    @todo @ui @api
+    @api @ui
     Scenario: Seeing correct taxons after switching the channel
         Given the store also operates on a channel named "Poland" with hostname "pl.store.com"
         And channel "United States" has menu taxon "Guns"

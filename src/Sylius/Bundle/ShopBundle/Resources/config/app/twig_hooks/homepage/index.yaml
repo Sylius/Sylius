@@ -4,8 +4,12 @@ twig_hooks:
             banner:
                 template: '@SyliusShop/homepage/banner.html.twig'
             latest_deals:
-                template: '@SyliusShop/homepage/latest_deals.html.twig'
+                component: 'sylius_shop:homepage:latest_deals'
+                props:
+                    limit: 4
             new_collection:
                 template: '@SyliusShop/homepage/new_collection.html.twig'
             latest_products:
-                template: '@SyliusShop/homepage/latest_products.html.twig'
+                component: 'sylius_shop:homepage:latest_products'
+                props:
+                    limit: 8

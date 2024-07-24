@@ -89,11 +89,11 @@ class HomePage extends SymfonyPage implements HomePageInterface
         $this->getElement('locale_selector')->clickLink($localeCode);
     }
 
-    public function getLatestProductsNames(): array
+    public function getProductsNames(string $elementName): array
     {
         return array_map(
             fn (NodeElement $element) => $element->getText(),
-            $this->getElement('latest_products')->findAll('css', '[data-test-product-name]'),
+            $this->getElement($elementName)->findAll('css', '[data-test-product-name]'),
         );
     }
 

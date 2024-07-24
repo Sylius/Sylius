@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  ~ This file is part of the Sylius package.
+  ~
+  ~ (c) Sylius Sp. z o.o.
+  ~
+  ~ For the full copyright and license information, please view the LICENSE
+  ~ file that was distributed with this source code.
+  -->
+
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <service
+            id="sylius_shop.twig.component.latest_deals"
+            class="Sylius\Bundle\ShopBundle\Twig\Component\Homepage\LatestDealsComponent"
+        >
+            <argument type="service" id="sylius.repository.product" />
+            <argument type="service" id="sylius.context.locale" />
+            <argument type="service" id="sylius.context.channel" />
+
+            <tag
+                name="twig.component"
+                key="sylius_shop:homepage:latest_deals"
+                template="@SyliusShop/homepage/latest_deals.html.twig"
+            />
+        </service>
+
+        <service
+            id="sylius_shop.twig.component.latest_products"
+            class="Sylius\Bundle\ShopBundle\Twig\Component\Homepage\LatestProductsComponent"
+        >
+            <argument type="service" id="sylius.repository.product" />
+            <argument type="service" id="sylius.context.locale" />
+            <argument type="service" id="sylius.context.channel" />
+
+            <tag
+                name="twig.component"
+                key="sylius_shop:homepage:latest_products"
+                template="@SyliusShop/homepage/latest_products.html.twig"
+            />
+        </service>
+
+    </services>
+</container>

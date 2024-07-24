@@ -2,6 +2,10 @@
     <h2 class="mb-5">{{ 'sylius.ui.latest_products'|trans }}</h2>
 
     <div {{ sylius_test_html_attribute('latest-products') }}>
-        {{ render(url('sylius_shop_partial_product_index_latest', {'count': 8, 'template': '@SyliusShop/shared/product/horizontal_list.html.twig'})) }}
+        <div class="products-grid">
+            {% for product in latest_products %}
+                <div>{% include '@SyliusShop/Product/card.html.twig' %}</div>
+            {% endfor %}
+        </div>
     </div>
 </div>
