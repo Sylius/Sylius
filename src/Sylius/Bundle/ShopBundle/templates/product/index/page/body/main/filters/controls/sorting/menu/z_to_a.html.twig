@@ -1,0 +1,3 @@
+{% set from_z_to_a_path = path(hookable_metadata.context.route, hookable_metadata.context.route_parameters|merge({'sorting': {'name': 'desc'}, 'criteria': hookable_metadata.context.criteria})) %}
+
+<a class="dropdown-item" href="{{ from_z_to_a_path }}" data-text="{{ 'sylius.ui.from_z_to_a'|trans|lower }}">{{ 'sylius.ui.from_z_to_a'|trans }}</a>

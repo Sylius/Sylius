@@ -1,0 +1,83 @@
+twig_hooks:
+    hooks:
+        'sylius.shop.product.index.page':
+            breadcrumbs:
+                template: "@SyliusShop/product/index/page/breadcrumbs.html.twig"
+            body:
+                template: "@SyliusShop/product/index/page/body.html.twig"
+
+        'sylius.shop.product.index.page.body':
+            sidebar:
+                template: "@SyliusShop/product/index/page/body/sidebar.html.twig"
+            main:
+                template: "@SyliusShop/product/index/page/body/main.html.twig"
+
+        'sylius.shop.product.index.page.body.sidebar':
+            taxonomy:
+                template: "@SyliusShop/product/index/page/body/sidebar/taxonomy.html.twig"
+
+        'sylius.shop.product.index.page.body.main':
+            header:
+                template: "@SyliusShop/product/index/page/body/main/header.html.twig"
+            filters:
+                template: "@SyliusShop/product/index/page/body/main/filters.html.twig"
+            products:
+                template: "@SyliusShop/product/index/page/body/main/products.html.twig"
+            pagination:
+                template: "@SyliusShop/product/index/page/body/main/pagination.html.twig"
+
+        'sylius.shop.product.index.page.body.main.header':
+            image:
+                template: "@SyliusShop/product/index/page/body/main/header/image.html.twig"
+            name:
+                template: "@SyliusShop/product/index/page/body/main/header/name.html.twig"
+            description:
+                template: "@SyliusShop/product/index/page/body/main/header/description.html.twig"
+
+        'sylius.shop.product.index.page.body.main.filters':
+            search:
+                template: "@SyliusShop/product/index/page/body/main/filters/search.html.twig"
+            controls:
+                template: "@SyliusShop/product/index/page/body/main/filters/controls.html.twig"
+
+        'sylius.shop.product.index.page.body.main.filters.search':
+            filter:
+                template: "@SyliusShop/product/index/page/body/main/filters/search/filter.html.twig"
+            submit:
+                template: "@SyliusShop/product/index/page/body/main/filters/search/submit.html.twig"
+            clear:
+                template: "@SyliusShop/product/index/page/body/main/filters/search/clear.html.twig"
+
+        'sylius.shop.product.index.page.body.main.filters.controls':
+            limit:
+                template: "@SyliusShop/product/index/page/body/main/filters/controls/limit.html.twig"
+            sort:
+                template: "@SyliusShop/product/index/page/body/main/filters/controls/sorting.html.twig"
+
+        'sylius.shop.product.index.page.body.main.filters.controls.limit':
+            toggle:
+                template: "@SyliusShop/product/index/page/body/main/filters/controls/limit/toggle.html.twig"
+            menu:
+                template: "@SyliusShop/product/index/page/body/main/filters/controls/limit/menu.html.twig"
+
+        'sylius.shop.product.index.page.body.main.filters.controls.sorting':
+            toggle:
+                template: "@SyliusShop/product/index/page/body/main/filters/controls/sorting/toggle.html.twig"
+            menu:
+                template: "@SyliusShop/product/index/page/body/main/filters/controls/sorting/menu.html.twig"
+
+        'sylius.shop.product.index.page.body.main.filters.controls.sorting.menu':
+            default:
+                template: "@SyliusShop/product/index/page/body/main/filters/controls/sorting/menu/default.html.twig"
+            a_to_z:
+                template: "@SyliusShop/product/index/page/body/main/filters/controls/sorting/menu/a_to_z.html.twig"
+            z_to_a:
+                template: "@SyliusShop/product/index/page/body/main/filters/controls/sorting/menu/z_to_a.html.twig"
+            newest:
+                template: "@SyliusShop/product/index/page/body/main/filters/controls/sorting/menu/newest.html.twig"
+            oldest:
+                template: "@SyliusShop/product/index/page/body/main/filters/controls/sorting/menu/oldest.html.twig"
+            cheapest:
+                template: "@SyliusShop/product/index/page/body/main/filters/controls/sorting/menu/cheapest.html.twig"
+            most_expensive:
+                template: "@SyliusShop/product/index/page/body/main/filters/controls/sorting/menu/most_expensive.html.twig"
