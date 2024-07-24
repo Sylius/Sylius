@@ -18,6 +18,18 @@
 >
     <resource class="Sylius\Component\Addressing\Model\Zone">
         <operations>
+            <operation class="ApiPlatform\Metadata\GetCollection" uriTemplate="/admin/zones">
+                <normalizationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius:admin:zone:index</value>
+                            </values>
+                        </value>
+                    </values>
+                </normalizationContext>
+            </operation>
+
             <operation class="ApiPlatform\Metadata\Get" uriTemplate="/admin/zones/{code}">
                 <normalizationContext>
                     <values>
@@ -29,6 +41,72 @@
                     </values>
                 </normalizationContext>
             </operation>
+
+            <operation class="ApiPlatform\Metadata\Post" uriTemplate="/admin/zones">
+                <normalizationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius:admin:zone:show</value>
+                            </values>
+                        </value>
+                    </values>
+                </normalizationContext>
+                <denormalizationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius:admin:zone:create</value>
+                            </values>
+                        </value>
+                    </values>
+                </denormalizationContext>
+                <validationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius</value>
+                            </values>
+                        </value>
+                    </values>
+                </validationContext>
+            </operation>
+
+            <operation class="ApiPlatform\Metadata\Put" uriTemplate="/admin/zones/{code}">
+                <normalizationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius:admin:zone:show</value>
+                            </values>
+                        </value>
+                    </values>
+                </normalizationContext>
+                <denormalizationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius:admin:zone:update</value>
+                            </values>
+                        </value>
+                    </values>
+                </denormalizationContext>
+                <validationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius</value>
+                            </values>
+                        </value>
+                    </values>
+                </validationContext>
+            </operation>
+
+            <operation
+                class="ApiPlatform\Metadata\Delete"
+                uriTemplate="/admin/zones/{code}"
+                processor="sylius_api.state_processor.admin.zone.remove"
+            />
         </operations>
     </resource>
 </resources>
