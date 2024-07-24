@@ -56,7 +56,7 @@ const toggleSimpleProduct = (isChecked) => {
 
 $.fn.extend({
   toggleDisabledChannelPricings() {
-    const $toggle = $('input[id="sylius_product_variant_showDisabledChannels"]');
+    const $toggle = $('#sylius_product_variant_showDisabledChannels');
 
     if ($toggle.length === 0) return;
 
