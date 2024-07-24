@@ -65,12 +65,6 @@
             <tag name="api_platform.data_persister" priority="128" />
         </service>
 
-        <service id="Sylius\Bundle\ApiBundle\DataPersister\ZoneDataPersister">
-            <argument type="service" id="api_platform.doctrine.orm.data_persister" />
-            <argument type="service" id="Sylius\Component\Addressing\Checker\ZoneDeletionCheckerInterface" />
-            <tag name="api_platform.data_persister" />
-        </service>
-
         <service id="Sylius\Bundle\ApiBundle\DataPersister\CustomerDataPersister">
             <argument type="service" id="api_platform.doctrine.orm.data_persister" />
             <argument type="service" id="sylius.security.password_updater" />
