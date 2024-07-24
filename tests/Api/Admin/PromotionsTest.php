@@ -72,6 +72,7 @@ final class PromotionsTest extends JsonApiTestCase
             'promotion/promotion_order.yaml',
         ]);
         $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
+
         /** @var PromotionInterface $promotion */
         $promotion = $fixtures['promotion_50_off'];
 
@@ -82,5 +83,55 @@ final class PromotionsTest extends JsonApiTestCase
         );
 
         $this->assertResponseCode($this->client->getResponse(), Response::HTTP_UNPROCESSABLE_ENTITY);
+    }
+
+    /** @test */
+    public function it_archives_a_promotion(): void
+    {
+        $fixtures = $this->loadFixturesFromFiles([
+            'authentication/api_administrator.yaml',
+            'channel.yaml',
+            'promotion/promotion.yaml',
+        ]);
+
+        /** @var PromotionInterface $promotion */
+        $promotion = $fixtures['promotion_50_off'];
+
+        $this->client->request(
+            method: 'PATCH',
+            uri: sprintf('/api/v2/admin/promotions/%s/archive', $promotion->getCode()),
+            server: $this->headerBuilder()->withJsonLdAccept()->withAdminUserAuthorization('api@example.com')->build(),
+        );
+
+        $this->assertResponse(
+            $this->client->getResponse(),
+            'admin/promotion/archive_promotion',
+            Response::HTTP_OK,
+        );
+    }
+
+    /** @test */
+    public function it_restores_a_promotion(): void
+    {
+        $fixtures = $this->loadFixturesFromFiles([
+            'authentication/api_administrator.yaml',
+            'channel.yaml',
+            'promotion/promotion.yaml',
+        ]);
+
+        /** @var PromotionInterface $promotion */
+        $promotion = $fixtures['promotion_back_to_school'];
+
+        $this->client->request(
+            method: 'PATCH',
+            uri: sprintf('/api/v2/admin/promotions/%s/restore', $promotion->getCode()),
+            server: $this->headerBuilder()->withJsonLdAccept()->withAdminUserAuthorization('api@example.com')->build(),
+        );
+
+        $this->assertResponse(
+            $this->client->getResponse(),
+            'admin/promotion/restore_promotion',
+            Response::HTTP_OK,
+        );
     }
 }

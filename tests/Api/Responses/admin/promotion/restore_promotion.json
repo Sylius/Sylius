@@ -1,6 +1,6 @@
 {
     "@context": "\/api\/v2\/contexts\/Promotion",
-    "@id": "\/api\/v2\/admin\/promotions\/back_to_school",
+    "@id": "\/api\/v2\/admin\/promotions\/back_to_school\/restore",
     "@type": "Promotion",
     "channels": [
         "\/api\/v2\/admin\/channels\/WEB",
@@ -22,9 +22,8 @@
     "updatedAt": "@date@",
     "translations": {
         "en_US": {
-            "@id": "\/api\/v2\/admin\/promotion-translations\/@integer@",
+            "@id": "\/api\/v2\/admin\/promotions\/back_to_school\/translations\/en_US",
             "@type": "PromotionTranslation",
-            "id": "@integer@",
             "label": "Back to school sale!"
         }
     }
