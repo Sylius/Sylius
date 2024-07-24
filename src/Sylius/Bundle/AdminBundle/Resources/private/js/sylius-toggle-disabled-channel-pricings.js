@@ -9,12 +9,18 @@
 
 import $ from 'jquery';
 
-const toggleConfigurableProduct = function toggleConfigurableProduct(toggle) {
-  $('#sylius_product_variant_channelPricings .ui.segment[data-disabled-channel-pricing]:not(.bottom.attached.tab)')
-    .toggle(toggle.is(':checked'));
+/**
+ * Toggle visibility within the configurable product form.
+ */
+const toggleConfigurableProduct = (isChecked) => {
+  const $segments = $('#sylius_product_variant_channelPricings .ui.segment[data-disabled-channel-pricing]:not(.bottom.attached.tab)');
+  $segments.toggle(isChecked);
 };
 
-const toggleSimpleProduct = function toggleSimpleProduct(toggle) {
+/**
+ * Toggle visibility within the simple product form.
+ */
+const toggleSimpleProduct = (isChecked) => {
   const $tabs = $('#sylius_product_variant_channelPricings div.ui.top.attached.tabular.menu a.item[data-disabled-channel-pricing]');
   const $segments = $('#sylius_product_variant_channelPricings div.ui.bottom.attached.tab.segment[data-disabled-channel-pricing]');
   if ($tabs.length !== $segments.length || $tabs.length === 0) {
@@ -23,7 +29,7 @@ const toggleSimpleProduct = function toggleSimpleProduct(toggle) {
 
   // Tabs visibility
   $tabs.each(function () {
-    $(this).toggle(toggle.is(':checked'));
+    $(this).toggle(isChecked);
 
     // Attached segment visibility symmetry
     const thisChannelCode = $(this).data('tab');
