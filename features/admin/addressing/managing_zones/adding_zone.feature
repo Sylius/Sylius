@@ -12,7 +12,7 @@ Feature: Adding a new zone with country type members
         And the store has a zone "North America" with code "NA"
         And I am logged in as an administrator
 
-    @ui @mink:chromedriver @api
+    @api @ui @mink:chromedriver
     Scenario: Adding a zone with a country type member
         When I want to create a new zone consisting of country
         And I name it "European Union"
@@ -22,7 +22,7 @@ Feature: Adding a new zone with country type members
         Then I should be notified that it has been successfully created
         And the zone named "European Union" with the "France" country member should appear in the registry
 
-    @ui @mink:chromedriver @api
+    @api @ui @mink:chromedriver
     Scenario: Adding a zone with province type member
         When I want to create a new zone consisting of province
         And I name it "United States"
@@ -32,7 +32,7 @@ Feature: Adding a new zone with country type members
         Then I should be notified that it has been successfully created
         And the zone named "United States" with the "Alabama" province member should appear in the registry
 
-    @ui @mink:chromedriver @api
+    @api @ui @mink:chromedriver
     Scenario: Adding a zone with zone type member
         When I want to create a new zone consisting of zone
         And I name it "America"
@@ -42,7 +42,7 @@ Feature: Adding a new zone with country type members
         Then I should be notified that it has been successfully created
         And the zone named "America" with the "North America" zone member should appear in the registry
 
-    @no-ui @api
+    @api @no-ui
     Scenario: Adding a zone with a zone type member, but the member's code is too long
         When I want to create a new zone consisting of zone
         And I name it "America"
@@ -51,7 +51,7 @@ Feature: Adding a new zone with country type members
         And I add it
         Then I should be informed that the provided zone member code is too long
 
-    @ui @mink:chromedriver @api
+    @api @ui @mink:chromedriver
     Scenario: Adding a zone with a country type member and a shipping scope
         When I want to create a new zone consisting of country
         And I name it "European Union"
@@ -63,7 +63,7 @@ Feature: Adding a new zone with country type members
         And the zone named "European Union" with the "France" country member should appear in the registry
         And its scope should be "shipping"
 
-    @ui @mink:chromedriver @api
+    @api @ui @mink:chromedriver
     Scenario: Adding zone with disabled country
         When I want to create a new zone consisting of country
         And I name it "European Union"

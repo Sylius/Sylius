@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Api\Admin;
 
-use ApiPlatform\Api\IriConverterInterface;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
@@ -26,7 +25,7 @@ use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Addressing\Model\ZoneMemberInterface;
 use Webmozart\Assert\Assert;
 
-final class ManagingZonesContext implements Context
+final readonly class ManagingZonesContext implements Context
 {
     use ValidationTrait;
 
@@ -34,8 +33,6 @@ final class ManagingZonesContext implements Context
         private ApiClientInterface $client,
         private ResponseCheckerInterface $responseChecker,
         private SharedStorageInterface $sharedStorage,
-        private IriConverterInterface $iriConverter,
-        private string $zoneMemberClass,
     ) {
     }
 
@@ -211,11 +208,11 @@ final class ManagingZonesContext implements Context
         ZoneInterface $zone,
         CountryInterface $country,
     ): void {
-        Assert::true($this->responseChecker->hasItemWithValue(
-            $this->client->subResourceIndex(Resources::ZONES, 'members', $zone->getCode()),
-            'code',
-            $country->getCode(),
-        ));
+        $members = $this->responseChecker->getValue(
+            $this->client->getLastResponse(),
+            'members'
+        );
+        Assert::inArray($country->getCode(), array_column($members, 'code'));
     }
 
     /**
@@ -253,11 +250,11 @@ final class ManagingZonesContext implements Context
         ZoneInterface $zone,
         ProvinceInterface $province,
     ): void {
-        Assert::true($this->responseChecker->hasItemWithValue(
-            $this->client->subResourceIndex(Resources::ZONES, 'members', $zone->getCode()),
-            'code',
-            $province->getCode(),
-        ));
+        $members = $this->responseChecker->getValue(
+            $this->client->getLastResponse(),
+            'members'
+        );
+        Assert::inArray($province->getCode(), array_column($members, 'code'));
     }
 
     /**
@@ -267,11 +264,11 @@ final class ManagingZonesContext implements Context
         ZoneInterface $zone,
         ZoneInterface $otherZone,
     ): void {
-        Assert::true($this->responseChecker->hasItemWithValue(
-            $this->client->subResourceIndex(Resources::ZONES, 'members', $zone->getCode()),
-            'code',
-            $otherZone->getCode(),
-        ));
+        $members = $this->responseChecker->getValue(
+            $this->client->getLastResponse(),
+            'members'
+        );
+        Assert::inArray($otherZone->getCode(), array_column($members, 'code'));
     }
 
     /**
@@ -345,16 +342,12 @@ final class ManagingZonesContext implements Context
      */
     public function thisZoneShouldHaveOnlyTheProvinceMember(ZoneInterface $zone, ZoneMemberInterface $zoneMember): void
     {
-        Assert::true($this->responseChecker->hasItemWithValue(
-            $this->client->subResourceIndex(Resources::ZONES, 'members', $zone->getCode()),
-            'code',
-            $zoneMember->getCode(),
-        ));
-
-        Assert::same(
-            $this->responseChecker->countCollectionItems($this->client->getLastResponse()),
-            1,
+        $members = $this->responseChecker->getValue(
+            $this->client->getLastResponse(),
+            'members'
         );
+        Assert::inArray($zoneMember->getCode(), array_column($members, 'code'));
+        Assert::count($members, 1);
     }
 
     /**
@@ -473,19 +466,15 @@ final class ManagingZonesContext implements Context
 
     private function removeZoneMember(CountryInterface|ProvinceInterface|ZoneInterface $objectToRemove): void
     {
-        /** @var ZoneInterface $zone */
-        $zone = $this->sharedStorage->get('zone');
+        $members = $this->client->getContent()['members'];
 
-        $members = $zone->getMembers();
-
-        foreach ($members as $member) {
-            if ($member->getCode() === $objectToRemove->getCode()) {
-                $objectToRemove = $member;
+        foreach ($members as $key => $member) {
+            if ($member['code'] === $objectToRemove->getCode()) {
+                unset($members[$key]);
+                break;
             }
         }
 
-        $iri = $this->iriConverter->getItemIriFromResourceClass($this->zoneMemberClass, ['id' => $objectToRemove->getId()]);
-
-        $this->client->removeSubResource('members', $iri);
+        $this->client->setSubResourceData('members', $members);
     }
 }
