@@ -1,0 +1,50 @@
+{
+    "@context": "\/api\/v2\/contexts\/Zone",
+    "@id": "\/api\/v2\/admin\/zones",
+    "@type": "hydra:Collection",
+    "hydra:member": [
+        {
+            "@id": "\/api\/v2\/admin\/zones\/weimar",
+            "@type": "Zone",
+            "id": "@integer@",
+            "code": "weimar",
+            "name": "Weimar Triangle",
+            "type": "country",
+            "scope": "all",
+            "members": [
+                {
+                    "@type": "ZoneMember",
+                    "code": "DE"
+                },
+                {
+                    "@type": "ZoneMember",
+                    "code": "FR"
+                },
+                {
+                    "@type": "ZoneMember",
+                    "code": "PL"
+                }
+            ]
+        },
+        {
+            "@id": "\/api\/v2\/admin\/zones\/EU",
+            "@type": "Zone",
+            "id": "@integer@",
+            "code": "EU",
+            "name": "European Union",
+            "type": "country",
+            "scope": "all",
+            "members": [
+                {
+                    "@type": "ZoneMember",
+                    "code": "NL"
+                },
+                {
+                    "@type": "ZoneMember",
+                    "code": "BE"
+                }
+            ]
+        }
+    ],
+    "hydra:totalItems": 2
+}

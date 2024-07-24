@@ -1,8 +1,13 @@
 Sylius\Component\Addressing\Model\ZoneMember:
-    member_{NL, BE}:
+    member_{DE, FR, PL, NL, BE}:
         code: <current()>
 
 Sylius\Component\Addressing\Model\Zone:
+    zone_weimar:
+        code: weimar
+        name: Weimar Triangle
+        type: country
+        members: ["@member_DE", "@member_FR", "@member_PL"]
     zone_eu:
         code: EU
         name: European Union
