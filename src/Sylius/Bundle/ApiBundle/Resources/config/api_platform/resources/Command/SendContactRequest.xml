@@ -17,7 +17,7 @@
 >
     <resource
         class="Sylius\Bundle\ApiBundle\Command\SendContactRequest"
-        shortName="SendContactRequest"
+        shortName="Contact"
         routePrefix="shop"
         messenger="input"
         output="false"
@@ -25,7 +25,7 @@
         status="202"
     >
         <operations>
-            <operation name="shop_send_contact_request" class="ApiPlatform\Metadata\Post" uriTemplate="/contact">
+            <operation class="ApiPlatform\Metadata\Post" uriTemplate="/contact">
                 <validationContext>
                     <values>
                         <value name="groups">

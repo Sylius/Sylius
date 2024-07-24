@@ -17,7 +17,7 @@
 >
     <resource
         class="Sylius\Bundle\ApiBundle\Command\Account\VerifyShopUser"
-        shortName="VerifyShopUser"
+        shortName="Customer"
         messenger="input"
         output="false"
         status="202"
@@ -34,7 +34,6 @@
 
         <operations>
             <operation
-                name="shop_request_shop_user_verification"
                 class="ApiPlatform\Metadata\Post"
                 uriTemplate="/shop/customers/verify"
                 input="Sylius\Bundle\ApiBundle\Command\Account\RequestShopUserVerification"
@@ -57,7 +56,6 @@
             </operation>
 
             <operation
-                name="shop_verify_shop_user"
                 class="ApiPlatform\Metadata\Patch"
                 uriTemplate="/shop/customers/verify/{token}"
                 input="Sylius\Bundle\ApiBundle\Command\Account\VerifyShopUser"
