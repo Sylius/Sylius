@@ -41,5 +41,22 @@
             />
         </service>
 
+        <service
+            id="sylius_shop.twig.component.product_card"
+            class="Sylius\Bundle\ShopBundle\Twig\Component\Common\ProductCardComponent"
+        >
+            <argument type="service" id="Sylius\Component\Product\Resolver\ProductVariantResolverInterface" />
+            <argument type="service" id="sylius.context.channel" />
+            <argument type="service" id="sylius.context.currency" />
+            <argument type="service" id="sylius.calculator.product_variant_price" />
+            <argument type="service" id="sylius.context.locale" />
+            <argument type="service" id="sylius.templating.helper.format_money" />
+
+            <tag
+                name="twig.component"
+                key="sylius_shop:common:product_card"
+                template="@SyliusShop/Product/card_component.html.twig"
+            />
+        </service>
     </services>
 </container>
