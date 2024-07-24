@@ -2,6 +2,11 @@
 
 {% set form = hookable_metadata.context.form %}
 
-<div class="bg-white mb-3">
-    {{ translations.default(form.translations) }}
+<div class="card mb-3">
+    <div class="card-header">
+        <div class="card-title">
+            {{ 'sylius.ui.translations'|trans }}
+        </div>
+    </div>
+    {{ translations.default(form.translations, null, { accordion_flush: true }) }}
 </div>

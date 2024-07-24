@@ -7,14 +7,14 @@ twig_hooks:
                     render_rest: false
 
         'sylius_admin.product_association_type.create.content.form':
-            details:
-                template: '@SyliusAdmin/product_association_type/form/details.html.twig'
+            general:
+                template: '@SyliusAdmin/product_association_type/form/general.html.twig'
             translations:
                 template: '@SyliusAdmin/product_association_type/form/translations.html.twig'
 
-        'sylius_admin.product_association_type.create.content.form.details':
+        'sylius_admin.product_association_type.create.content.form.general':
             code:
-                template: '@SyliusAdmin/product_association_type/form/details/code.html.twig'
+                template: '@SyliusAdmin/product_association_type/form/general/code.html.twig'
 
         'sylius_admin.product_association_type.create.content.form.translations':
             name:

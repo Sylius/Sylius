@@ -15,8 +15,8 @@ twig_hooks:
                 template: '@SyliusAdmin/product_variant/form/sections.html.twig'
 
         'sylius_admin.product_variant.create.content.form.side_navigation':
-            details:
-                template: '@SyliusAdmin/product_variant/form/side_navigation/details.html.twig'
+            general:
+                template: '@SyliusAdmin/product_variant/form/side_navigation/general.html.twig'
                 configuration:
                     active: true
             channel_pricing:
@@ -29,8 +29,8 @@ twig_hooks:
                 template: '@SyliusAdmin/product_variant/form/side_navigation/taxes.html.twig'
 
         'sylius_admin.product_variant.create.content.form.sections':
-            details:
-                template: '@SyliusAdmin/product_variant/form/sections/details.html.twig'
+            general:
+                template: '@SyliusAdmin/product_variant/form/sections/general.html.twig'
             channel_pricing:
                 template: '@SyliusAdmin/product_variant/form/sections/channel_pricing.html.twig'
             inventory:

@@ -17,22 +17,22 @@ twig_hooks:
                 template: '@SyliusAdmin/customer/form/sections.html.twig'
 
         'sylius_admin.customer.update.content.form.sections':
-            details:
-                template: '@SyliusAdmin/customer/form/sections/details.html.twig'
+            general:
+                template: '@SyliusAdmin/customer/form/sections/general.html.twig'
             extra_information:
                 template: '@SyliusAdmin/customer/form/sections/extra_information.html.twig'
             account_credentials:
                 template: '@SyliusAdmin/customer/form/sections/account_credentials.html.twig'
 
-        'sylius_admin.customer.update.content.form.sections.details':
+        'sylius_admin.customer.update.content.form.sections.general':
             first_name:
-                template: '@SyliusAdmin/customer/form/sections/details/first_name.html.twig'
+                template: '@SyliusAdmin/customer/form/sections/general/first_name.html.twig'
             last_name:
-                template: '@SyliusAdmin/customer/form/sections/details/last_name.html.twig'
+                template: '@SyliusAdmin/customer/form/sections/general/last_name.html.twig'
             email:
-                template: '@SyliusAdmin/customer/form/sections/details/email.html.twig'
+                template: '@SyliusAdmin/customer/form/sections/general/email.html.twig'
             group:
-                template: '@SyliusAdmin/customer/form/sections/details/group.html.twig'
+                template: '@SyliusAdmin/customer/form/sections/general/group.html.twig'
 
         'sylius_admin.customer.update.content.form.sections.extra_information':
             gender:

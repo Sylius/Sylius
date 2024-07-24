@@ -9,9 +9,7 @@
             {{ 'sylius.ui.translations'|trans }}
         </div>
     </div>
-    <div class="card-body">
-        <div class="row align-items-center">
-            {{ translations.with_hook(form.translations, prefixes, null, {accordion_id: 'product-attribute-translations'}) }}
-        </div>
+    <div>
+        {{ translations.with_hook(form.translations, prefixes, null, { accordion_id: 'product-attribute-translations', accordion_flush: true }) }}
     </div>
 </div>
