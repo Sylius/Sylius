@@ -45,7 +45,8 @@ final class ShipmentsTest extends JsonApiTestCase
             server: $this->buildHeadersWithJsonLd('api@example.com'),
         );
 
-        $this->assertResponse($this
+        $this->assertResponse(
+            $this
             ->client->getResponse(),
             'admin/shipment/get_shipments_response',
             Response::HTTP_OK,

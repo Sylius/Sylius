@@ -19,7 +19,7 @@ class ShipShipment implements ShipmentIdAwareInterface
 {
     public function __construct(
         private ?int $shipmentId = null,
-        public ?string $trackingCode = null
+        public ?string $trackingCode = null,
     ) {
     }
 
