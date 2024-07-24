@@ -47,19 +47,17 @@ const toggleSimpleProduct = function toggleSimpleProduct(toggle) {
 
 $.fn.extend({
   toggleDisabledChannelPricings() {
-    const toggle = $('input[id="sylius_product_variant_showDisabledChannels"]');
-    if (toggle.length === 0) {
-      return;
-    }
+    const $toggle = $('input[id="sylius_product_variant_showDisabledChannels"]');
 
-    // Show disabled channels for the simple product form
-    toggleConfigurableProduct(toggle);
+    if ($toggle.length === 0) return;
 
-    // Show disabled channels for the configurable product form
-    toggleSimpleProduct(toggle);
+    const toggleHandler = () => {
+      const isChecked = $toggle.is(':checked');
+      toggleConfigurableProduct(isChecked);
+      toggleSimpleProduct(isChecked);
+    };
 
-    toggle.off('change').on('change', function () {
-      $.fn.toggleDisabledChannelPricings();
-    });
+    toggleHandler();
+    $toggle.off('change').on('change', toggleHandler);
   },
 });
