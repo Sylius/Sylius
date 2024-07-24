@@ -72,6 +72,7 @@ final class PromotionsTest extends JsonApiTestCase
             'promotion/promotion_order.yaml',
         ]);
         $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
+
         /** @var PromotionInterface $promotion */
         $promotion = $fixtures['promotion_50_off'];
 
