@@ -15,9 +15,8 @@ const toggleConfigurableProduct = function toggleConfigurableProduct(toggle) {
 };
 
 const toggleSimpleProduct = function toggleSimpleProduct(toggle) {
-  const $tabs = $('#sylius_product_variant_channelPricings .ui.top.attached.tabular.menu .item[data-disabled-channel-pricing]');
-  const $segments = $('#sylius_product_variant_channelPricings .ui.bottom.attached.tab.segment[data-disabled-channel-pricing]');
-
+  const $tabs = $('#sylius_product_variant_channelPricings div.ui.top.attached.tabular.menu a.item[data-disabled-channel-pricing]');
+  const $segments = $('#sylius_product_variant_channelPricings div.ui.bottom.attached.tab.segment[data-disabled-channel-pricing]');
   if ($tabs.length !== $segments.length || $tabs.length === 0) {
     return;
   }
@@ -27,22 +26,22 @@ const toggleSimpleProduct = function toggleSimpleProduct(toggle) {
     $(this).toggle(toggle.is(':checked'));
 
     // Attached segment visibility symmetry
-    const dataTab = $(this).data('tab');
-    const segment = $(`#sylius_product_variant_channelPricings div.ui.bottom.attached.tab.segment[data-disabled-channel-pricing][data-tab="${dataTab}"]`);
-    segment.attr('style', $(this).attr('style'));
+    const thisChannelCode = $(this).data('tab');
+    $(`#sylius_product_variant_channelPricings div.ui.bottom.attached.tab.segment[data-disabled-channel-pricing][data-tab="${thisChannelCode}"]`)
+      .attr('style', $(this).attr('style'));
   });
 
-  // Handle active tab-segment
-  const $activeTab = $('#sylius_product_variant_channelPricings a.item.active');
-  const $activeSegment = $(`#sylius_product_variant_channelPricings div.ui.bottom.attached.tab.segment[data-disabled-channel-pricing][data-tab="${($activeTab.data('tab'))}"]`);
-  if ($activeTab.is(':hidden')) {
-    $activeTab.removeClass('active');
-    $activeSegment.removeClass('active');
+  // Active tab and segment after visibility update
+  const $tabActive = $('#sylius_product_variant_channelPricings a.item.active');
+  const $segmentActive = $('#sylius_product_variant_channelPricings div.ui.bottom.attached.tab.segment.active');
+  if ($tabActive.is(':hidden')) {
+    const $firstTabVisible = $('#sylius_product_variant_channelPricings a.item:visible').first();
 
-    const $firstVisibleTab = $('#sylius_product_variant_channelPricings a.item:visible').first();
-    const $firstSegment = $(`div.ui.bottom.attached.tab.segment[data-tab="${($firstVisibleTab.data('tab'))}"]`);
-    $firstVisibleTab.addClass('active');
-    $firstSegment.addClass('active');
+    $tabActive.removeClass('active');
+    $segmentActive.removeClass('active');
+    $firstTabVisible.addClass('active');
+    $(`#sylius_product_variant_channelPricings div.ui.bottom.attached.tab.segment[data-tab="${($firstTabVisible.data('tab'))}"]`)
+      .addClass('active');
   }
 };
 
@@ -53,10 +52,10 @@ $.fn.extend({
       return;
     }
 
-    // Show disabled channels for a simple product
+    // Show disabled channels for the simple product form
     toggleConfigurableProduct(toggle);
 
-    // Show disabled channels for a configurable product
+    // Show disabled channels for the configurable product form
     toggleSimpleProduct(toggle);
 
     toggle.off('change').on('change', function () {
