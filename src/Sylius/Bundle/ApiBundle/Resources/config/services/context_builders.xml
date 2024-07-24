@@ -87,5 +87,12 @@
         >
             <argument type="service" id=".inner" />
         </service>
+
+        <service
+            id="Sylius\Bundle\ApiBundle\SerializerContextBuilder\AnonymousContextBuilder"
+            decorates="api_platform.jsonld.context_builder"
+        >
+            <argument type="service" id=".inner" />
+        </service>
     </services>
 </container>

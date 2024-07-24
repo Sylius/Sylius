@@ -13,7 +13,6 @@
         "@type": "hydra:Collection",
         "hydra:member": [
             {
-                "@id": "\/api\/v2\/.well-known\/genid\/@string@",
                 "@type": "PerChannelCustomerStatistics",
                 "ordersCount": 1,
                 "ordersValue": 0,
