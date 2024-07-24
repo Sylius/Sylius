@@ -29,7 +29,7 @@ final readonly class RestrictingFilterEagerLoadingExtension implements QueryColl
      */
     public function __construct(
         private QueryCollectionExtensionInterface $decoratedExtension,
-        private array $restrictedResources
+        private array $restrictedResources,
     ) {
     }
 

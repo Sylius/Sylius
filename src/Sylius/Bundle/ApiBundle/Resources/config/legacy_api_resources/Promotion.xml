@@ -95,18 +95,6 @@ Example configuration for `order_fixed_discount` action type:
         </collectionOperations>
 
         <itemOperations>
-            <itemOperation name="admin_get">
-                <attribute name="method">GET</attribute>
-                <attribute name="normalization_context">
-                    <attribute name="groups">
-                        <attribute>admin:promotion:show</attribute>
-                        <attribute>sylius:admin:promotion:show</attribute>
-                    </attribute>
-                    <!-- It auto-turned on when adding PATCH itemOperations: https://github.com/api-platform/core/issues/3600 -->
-                    <attribute name="skip_null_values">false</attribute>
-                </attribute>
-            </itemOperation>
-
             <itemOperation name="admin_put">
                 <attribute name="method">PUT</attribute>
                 <attribute name="denormalization_context">
@@ -184,10 +172,6 @@ Example configuration for `order_fixed_discount` action type:
                         <attribute>sylius:admin:promotion:read</attribute>
                     </attribute>
                 </attribute>
-            </itemOperation>
-
-            <itemOperation name="admin_delete">
-                <attribute name="method">DELETE</attribute>
             </itemOperation>
         </itemOperations>
 

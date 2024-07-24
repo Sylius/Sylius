@@ -36,28 +36,6 @@ final class PromotionsTest extends JsonApiTestCase
     use AdminUserLoginTrait;
 
     /** @test */
-    public function it_gets_a_promotion(): void
-    {
-        $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel.yaml', 'promotion/promotion.yaml']);
-        $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
-
-        /** @var PromotionInterface $promotion */
-        $promotion = $fixtures['promotion_50_off'];
-
-        $this->client->request(
-            method: 'GET',
-            uri: sprintf('/api/v2/admin/promotions/%s', $promotion->getCode()),
-            server: $header,
-        );
-
-        $this->assertResponse(
-            $this->client->getResponse(),
-            'admin/promotion/get_promotion_response',
-            Response::HTTP_OK,
-        );
-    }
-
-    /** @test */
     public function it_gets_promotions(): void
     {
         $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel.yaml', 'promotion/promotion.yaml']);
@@ -624,45 +602,5 @@ final class PromotionsTest extends JsonApiTestCase
             'admin/promotion/restore_promotion',
             Response::HTTP_OK,
         );
-    }
-
-    /** @test */
-    public function it_deletes_a_promotion(): void
-    {
-        $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel.yaml', 'promotion/promotion.yaml']);
-        $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
-
-        /** @var PromotionInterface $promotion */
-        $promotion = $fixtures['promotion_50_off'];
-
-        $this->client->request(
-            method: 'DELETE',
-            uri: sprintf('/api/v2/admin/promotions/%s', $promotion->getCode()),
-            server: $header,
-        );
-
-        $this->assertResponseCode($this->client->getResponse(), Response::HTTP_NO_CONTENT);
-    }
-
-    /** @test */
-    public function it_does_not_delete_the_promotion_in_use(): void
-    {
-        $fixtures = $this->loadFixturesFromFiles([
-            'authentication/api_administrator.yaml',
-            'channel.yaml',
-            'promotion/promotion.yaml',
-            'promotion/promotion_order.yaml',
-        ]);
-        $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
-        /** @var PromotionInterface $promotion */
-        $promotion = $fixtures['promotion_50_off'];
-
-        $this->client->request(
-            method: 'DELETE',
-            uri: sprintf('/api/v2/admin/promotions/%s', $promotion->getCode()),
-            server: $header,
-        );
-
-        $this->assertResponseCode($this->client->getResponse(), Response::HTTP_UNPROCESSABLE_ENTITY);
     }
 }

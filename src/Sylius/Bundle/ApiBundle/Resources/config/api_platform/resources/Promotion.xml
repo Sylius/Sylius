@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+<?xml version="1.0" ?>
 
 <!--
 
@@ -16,30 +16,25 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="https://api-platform.com/schema/metadata/resources-3.0 https://api-platform.com/schema/metadata/resources-3.0.xsd"
 >
-    <resource class="Sylius\Component\Product\Model\ProductVariantTranslation">
-        <validationContext>
-            <values>
-                <value name="groups">
-                    <values>
-                        <value>sylius</value>
-                    </values>
-                </value>
-            </values>
-        </validationContext>
-
+    <resource class="Sylius\Component\Core\Model\Promotion">
         <operations>
-            <operation class="ApiPlatform\Metadata\Get" uriTemplate="/admin/product-variant-translations/{id}">
+            <operation class="ApiPlatform\Metadata\Get" uriTemplate="/admin/promotions/{code}">
                 <normalizationContext>
                     <values>
                         <value name="groups">
                             <values>
-                                <value>sylius:admin:product_attribute:show</value>
-                                <value>sylius:admin:product_attribute_translation:show</value>
+                                <value>sylius:admin:promotion:show</value>
                             </values>
                         </value>
                     </values>
                 </normalizationContext>
             </operation>
+
+            <operation
+                class="ApiPlatform\Metadata\Delete"
+                uriTemplate="/admin/promotions/{code}"
+                processor="sylius_api.state_processor.admin.promotion.remove"
+            />
         </operations>
     </resource>
 </resources>
