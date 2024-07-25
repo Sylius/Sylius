@@ -17,15 +17,10 @@ use Sylius\Bundle\ApiBundle\Command\ShipmentIdAwareInterface;
 
 class ShipShipment implements ShipmentIdAwareInterface
 {
-    /** @var int|null */
-    public $shipmentId;
-
-    /** @var string|null */
-    public $trackingCode;
-
-    public function __construct(?string $trackingCode = null)
-    {
-        $this->trackingCode = $trackingCode;
+    public function __construct(
+        private ?int $shipmentId = null,
+        public ?string $trackingCode = null,
+    ) {
     }
 
     public function getShipmentId(): ?int

@@ -11,6 +11,8 @@
         "16": "\/api\/v2\/shop\/order-item-units\/@integer@",
         "17": "\/api\/v2\/shop\/order-item-units\/@integer@"
     },
+    "tracking": null,
+    "shippedAt": null,
     "createdAt": "@datetime@",
     "updatedAt": "@datetime@"
 }

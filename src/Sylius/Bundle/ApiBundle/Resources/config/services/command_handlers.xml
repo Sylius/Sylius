@@ -103,13 +103,13 @@
             <tag name="messenger.message_handler" bus="sylius_default.bus" />
         </service>
 
-<!--        <service id="Sylius\Bundle\ApiBundle\CommandHandler\Checkout\ShipShipmentHandler">-->
-<!--            <argument type="service" id="sylius.repository.shipment" />-->
-<!--            <argument type="service" id="sylius_abstraction.state_machine" />-->
-<!--            <argument type="service" id="sylius.command_bus" />-->
-<!--            <tag name="messenger.message_handler" bus="sylius.command_bus" />-->
-<!--            <tag name="messenger.message_handler" bus="sylius_default.bus" />-->
-<!--        </service>-->
+        <service id="Sylius\Bundle\ApiBundle\CommandHandler\Checkout\ShipShipmentHandler">
+            <argument type="service" id="sylius.repository.shipment" />
+            <argument type="service" id="sylius_abstraction.state_machine" />
+            <argument type="service" id="sylius.command_bus" />
+            <tag name="messenger.message_handler" bus="sylius.command_bus" />
+            <tag name="messenger.message_handler" bus="sylius_default.bus" />
+        </service>
 
 <!--        <service id="Sylius\Bundle\ApiBundle\CommandHandler\Account\ChangePaymentMethodHandler">-->
 <!--            <argument type="service" id="Sylius\Bundle\ApiBundle\Changer\PaymentMethodChangerInterface" />-->
@@ -204,12 +204,12 @@
             <tag name="messenger.message_handler" bus="sylius_default.bus" />
         </service>
 
-<!--        <service id="Sylius\Bundle\ApiBundle\CommandHandler\Checkout\SendShipmentConfirmationEmailHandler">-->
-<!--            <argument type="service" id="sylius.repository.shipment" />-->
-<!--            <argument type="service" id="Sylius\Bundle\CoreBundle\Mailer\ShipmentEmailManagerInterface" />-->
-<!--            <tag name="messenger.message_handler" bus="sylius.command_bus" />-->
-<!--            <tag name="messenger.message_handler" bus="sylius_default.bus" />-->
-<!--        </service>-->
+        <service id="Sylius\Bundle\ApiBundle\CommandHandler\Checkout\SendShipmentConfirmationEmailHandler">
+            <argument type="service" id="sylius.repository.shipment" />
+            <argument type="service" id="Sylius\Bundle\CoreBundle\Mailer\ShipmentEmailManagerInterface" />
+            <tag name="messenger.message_handler" bus="sylius.command_bus" />
+            <tag name="messenger.message_handler" bus="sylius_default.bus" />
+        </service>
 
         <service id="Sylius\Bundle\ApiBundle\CommandHandler\Account\VerifyShopUserHandler">
             <argument type="service" id="sylius.repository.shop_user" />

@@ -57,11 +57,12 @@ imports:
 #    - api/promotion/receiving_discount.yml
     - api/promotion/removing_catalog_promotions.yml
 #    - api/shipping/applying_shipping_method_rules.yml TODO: Enable after making checkout resource available in API
+#    - api/shipping/applying_shipping_fee.yaml TODO: Enable after making checkout resource available in API
 #    - api/shipping/viewing_shipping_methods.yml TODO: Enable after making checkout resource available in API
-#    - api/shipping/managing_shipments.yml
+    - api/shipping/managing_shipments.yml
     - api/shipping/managing_shipping_categories.yml
     - api/shipping/managing_shipping_methods.yml
-#    - api/taxation/applying_taxes.yml
+#    - api/taxation/applying_taxes.yml TODO: Enable after making checkout resource available in API
     - api/taxation/managing_tax_categories.yml
     - api/taxation/managing_tax_rates.yml
 #    - api/taxon/managing_taxons.yml

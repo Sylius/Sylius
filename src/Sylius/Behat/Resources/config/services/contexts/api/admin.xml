@@ -203,6 +203,14 @@
             <argument>%sylius.security.new_api_route%</argument>
         </service>
 
+        <service id="sylius.behat.context.api.admin.managing_shipments" class="Sylius\Behat\Context\Api\Admin\ManagingShipmentsContext">
+            <argument type="service" id="sylius.behat.api_platform_client.admin" />
+            <argument type="service" id="Sylius\Behat\Client\ResponseCheckerInterface" />
+            <argument type="service" id="Sylius\Behat\Service\Converter\IriConverter" />
+            <argument type="service" id="sylius.behat.shared_storage" />
+            <argument>%sylius.security.new_api_route%</argument>
+        </service>
+
 <!--        <service id="sylius.behat.context.api.admin.managing_orders" class="Sylius\Behat\Context\Api\Admin\ManagingOrdersContext">-->
 <!--            <argument type="service" id="sylius.behat.api_platform_client.admin" />-->
 <!--            <argument type="service" id="Sylius\Behat\Client\ResponseCheckerInterface" />-->
