@@ -1,0 +1,12 @@
+{% set product = order_item.variant.product %}
+
+{% form_theme form '@SyliusShop/Form/theme.html.twig' %}
+
+<div class="my-4" {{ sylius_test_html_attribute('product-selecting-variant') }}>
+    {{ form_start(form, {'action': path('sylius_shop_ajax_cart_add_item', {'productId': product.id}), 'attr': {'id': 'sylius-product-adding-to-cart', 'novalidate': 'novalidate', 'autocomplete': 'off', 'data-redirect': path(configuration.getRedirectRoute('summary'))}}) }}
+
+    {% hook 'sylius_shop.product.show.page.info.summary.variant_selection.add_to_cart' with { product, form } %}
+
+    {{ form_row(form._token) }}
+    {{ form_end(form, {'render_rest': false}) }}
+</div>
