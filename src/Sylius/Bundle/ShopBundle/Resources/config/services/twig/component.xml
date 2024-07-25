@@ -47,15 +47,46 @@
         >
             <argument type="service" id="Sylius\Component\Product\Resolver\ProductVariantResolverInterface" />
             <argument type="service" id="sylius.context.channel" />
-            <argument type="service" id="sylius.context.currency" />
             <argument type="service" id="sylius.calculator.product_variant_price" />
-            <argument type="service" id="sylius.context.locale" />
-            <argument type="service" id="sylius.templating.helper.format_money" />
 
             <tag
                 name="twig.component"
                 key="sylius_shop:common:product_card"
-                template="@SyliusShop/Product/card_component.html.twig"
+                template="@SyliusShop/Product/component/card.html.twig"
+            />
+        </service>
+
+        <service
+            id="sylius_shop.twig.component.product_price"
+            class="Sylius\Bundle\ShopBundle\Twig\Component\Common\ProductPriceComponent"
+        >
+            <argument type="service" id="sylius.calculator.product_variant_price" />
+            <argument type="service" id="sylius.templating.helper.format_money" />
+            <argument type="service" id="sylius.context.channel" />
+            <argument type="service" id="sylius.context.locale" />
+            <argument type="service" id="sylius.context.currency" />
+
+            <tag
+                name="twig.component"
+                key="sylius_shop:common:product_price"
+                template="@SyliusShop/Product/component/price.html.twig"
+            />
+        </service>
+
+        <service
+            id="sylius_shop.twig.component.product_original_price"
+            class="Sylius\Bundle\ShopBundle\Twig\Component\Common\ProductOriginalPriceComponent"
+        >
+            <argument type="service" id="sylius.calculator.product_variant_price" />
+            <argument type="service" id="sylius.templating.helper.format_money" />
+            <argument type="service" id="sylius.context.channel" />
+            <argument type="service" id="sylius.context.locale" />
+            <argument type="service" id="sylius.context.currency" />
+
+            <tag
+                name="twig.component"
+                key="sylius_shop:common:product_original_price"
+                template="@SyliusShop/Product/component/original_price.html.twig"
             />
         </service>
     </services>
