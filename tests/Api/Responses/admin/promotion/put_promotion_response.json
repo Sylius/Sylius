@@ -20,7 +20,7 @@
     "coupons": [],
     "rules": [
         {
-            "@id": "\/api\/v2\/admin\/promotion-rules\/@integer@",
+            "@id": "\/api\/v2\/admin\/promotions\/50_off\/rules\/@integer@",
             "@type": "PromotionRule",
             "id": "@integer@",
             "type": "cart_quantity",
@@ -31,7 +31,7 @@
     ],
     "actions": [
         {
-            "@id": "\/api\/v2\/admin\/promotion-actions\/@integer@",
+            "@id": "\/api\/v2\/admin\/promotions\/50_off\/actions\/@integer@",
             "@type": "PromotionAction",
             "id": "@integer@",
             "type": "order_fixed_discount",
@@ -50,9 +50,8 @@
     "updatedAt": "@date@",
     "translations": {
         "en_US": {
-            "@id": "\/api\/v2\/admin\/promotion-translations\/@integer@",
+            "@id": "\/api\/v2\/admin\/promotions\/50_off\/translations\/en_US",
             "@type": "PromotionTranslation",
-            "id": "@integer@",
             "label": "Christmas"
         }
     }
