@@ -9,7 +9,7 @@ Feature: Deleting a coupon
         And the store has promotion "Christmas sale" with coupon "SANTA2016"
         And I am logged in as an administrator
 
-    @ui @api
+    @api @ui
     Scenario: Deleted coupon should disappear from the registry
         When I delete "SANTA2016" coupon related to this promotion
         Then I should be notified that it has been successfully deleted
