@@ -1,7 +1,7 @@
 <div class="container mb-6">
     <h2 class="mb-5">{{ 'sylius.homepage.latest_deals'|trans }}</h2>
 
-    <div {{ sylius_test_html_attribute('latest-products') }}>
+    <div {{ sylius_test_html_attribute('latest-deals') }}>
         <div class="products-grid">
             {% for product in latest_deals %}
                 <div>{{ component('sylius_shop:common:product_card', { product: product }) }}</div>

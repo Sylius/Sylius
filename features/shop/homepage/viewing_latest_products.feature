@@ -11,7 +11,7 @@ Feature: Viewing a latest product list
     @api @ui
     Scenario: Viewing latest products
         When I check latest products
-        Then I should see 8 products in the list
+        Then I should see 4 products in the list
 
     @api @ui
     Scenario: Viewing latest products with translation
@@ -20,4 +20,4 @@ Feature: Viewing a latest product list
         And the product "Chopin Chocolate Liquer" is named "Chopin Likier Czekoladowy" in the "Polish (Poland)" locale
         And the product "Capitan Morgan White Rum" is named "Capitan Morgan Biały Rum" in the "Polish (Poland)" locale
         When I check latest products
-        Then I should see 8 products in the list
+        Then I should see 4 products in the list

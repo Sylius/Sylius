@@ -103,6 +103,7 @@ class HomePage extends SymfonyPage implements HomePageInterface
             'currency_selector' => '[data-test-currency-selector]',
             'full_name' => '[data-test-full-name]',
             'latest_products' => '[data-test-latest-products]',
+            'latest_deals' => '[data-test-latest-deals]',
             'locale_selector' => '[data-test-locale-selector]',
             'logout_button' => '[data-test-logout-button]',
         ]);
