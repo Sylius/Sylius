@@ -79,7 +79,7 @@ twig_hooks:
         'sylius_shop.product.show.page.info.overview':
             images:
                 template: "@SyliusShop/product/show/page/info/overview/images.html.twig"
-            tabs:
+            accordion:
                 template: "@SyliusShop/product/show/page/info/overview/accordion.html.twig"
 
         'sylius_shop.product.show.page.info.overview.images':
