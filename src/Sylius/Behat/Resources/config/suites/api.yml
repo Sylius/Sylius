@@ -8,7 +8,7 @@ imports:
     - api/account/email_verification.yml
     - api/account/login.yaml
     - api/addressing/managing_countries.yaml
-#    - api/addressing/managing_zones.yml
+    - api/addressing/managing_zones.yml
 #    - api/admin/dashboard.yaml
     - api/admin/login.yml
 #    - api/admin/security.yml

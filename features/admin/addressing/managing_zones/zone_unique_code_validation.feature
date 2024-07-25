@@ -10,7 +10,7 @@ Feature: Zone unique code validation
         And this zone has the "United States" country member
         And I am logged in as an administrator
 
-    @ui @api
+    @api @ui
     Scenario: Trying to add zone with taken code
         When I want to create a new zone consisting of country
         And I specify its code as "US"

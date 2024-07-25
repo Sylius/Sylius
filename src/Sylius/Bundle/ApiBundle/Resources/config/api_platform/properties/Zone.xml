@@ -17,4 +17,5 @@
 >
     <property resource="Sylius\Component\Addressing\Model\Zone" name="id" identifier="false"/>
     <property resource="Sylius\Component\Addressing\Model\Zone" name="code" identifier="true"/>
+    <property resource="Sylius\Component\Addressing\Model\Zone" name="members" genId="false" />
 </properties>
