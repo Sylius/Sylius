@@ -31,4 +31,6 @@ interface FormElementInterface
      * @throws ElementNotFoundException
      */
     public function getValidationErrors(): string;
+
+    public function hasFormErrorAlert(): bool;
 }

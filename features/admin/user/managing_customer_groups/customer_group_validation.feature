@@ -12,7 +12,7 @@ Feature: Customer group validation
         When I want to create a new customer group
         And I try to add it
         Then I should be notified that name is required
-#        And I should be informed that this form contains errors #TODO: Uncomment when flash messages are brought back
+        And I should be informed that this form contains errors
 
     @api @ui
     Scenario: Trying to remove name from an existing customer group
@@ -21,7 +21,7 @@ Feature: Customer group validation
         And I remove its name
         And I try to save my changes
         Then I should be notified that name is required
-#        And I should be informed that this form contains errors #TODO: Uncomment when flash messages are brought back
+        And I should be informed that this form contains errors
         And this customer group should still be named "Retail"
 
     @api @ui

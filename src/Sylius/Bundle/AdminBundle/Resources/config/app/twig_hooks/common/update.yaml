@@ -13,6 +13,8 @@ twig_hooks:
                 template: '@SyliusAdmin/shared/crud/common/content/flashes.html.twig'
             header:
                 template: '@SyliusAdmin/shared/crud/common/content/header.html.twig'
+            form_error_alert:
+                template: '@SyliusAdmin/shared/crud/common/content/form_error_alert.html.twig'
             form:
                 template: '@SyliusAdmin/shared/crud/common/content/form.html.twig'
                 configuration:

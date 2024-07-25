@@ -14,24 +14,20 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
-use FriendsOfBehat\PageObjectExtension\Page\SymfonyPageInterface;
-use Sylius\Behat\Context\Ui\Admin\Helper\ValidationTrait;
+use Sylius\Behat\Element\Admin\CustomerGroup\FormElementInterface;
 use Sylius\Behat\Page\Admin\Crud\IndexPageInterface;
-use Sylius\Behat\Page\Admin\CustomerGroup\CreatePageInterface;
-use Sylius\Behat\Page\Admin\CustomerGroup\UpdatePageInterface;
-use Sylius\Behat\Service\Resolver\CurrentPageResolverInterface;
+use Sylius\Behat\Page\Admin\Crud\CreatePageInterface;
+use Sylius\Behat\Page\Admin\Crud\UpdatePageInterface;
 use Sylius\Component\Customer\Model\CustomerGroupInterface;
 use Webmozart\Assert\Assert;
 
 final readonly class ManagingCustomerGroupsContext implements Context
 {
-    use ValidationTrait;
-
     public function __construct(
         private CreatePageInterface $createPage,
         private IndexPageInterface $indexPage,
-        private CurrentPageResolverInterface $currentPageResolver,
         private UpdatePageInterface $updatePage,
+        private FormElementInterface $formElement,
     ) {
     }
 
@@ -49,7 +45,15 @@ final readonly class ManagingCustomerGroupsContext implements Context
      */
     public function iSpecifyItsCodeAs(?string $code = null): void
     {
-        $this->createPage->specifyCode($code ?? '');
+        $this->formElement->fillElement($code ?? '', 'code');
+    }
+
+    /**
+     * @When I specify a too long code
+     */
+    public function iSpecifyATooLongCode(): void
+    {
+        $this->formElement->fillElement(str_repeat('a', 256), 'code');
     }
 
     /**
@@ -58,7 +62,7 @@ final readonly class ManagingCustomerGroupsContext implements Context
      */
     public function iSpecifyItsNameAs(?string $name = null): void
     {
-        $this->createPage->nameIt($name ?? '');
+        $this->formElement->fillElement($name ?? '', 'name');
     }
 
     /**
@@ -198,7 +202,7 @@ final readonly class ManagingCustomerGroupsContext implements Context
     public function iShouldBeNotifiedThatNameIsRequired(): void
     {
         Assert::same(
-            $this->updatePage->getValidationMessage('name'),
+            $this->formElement->getValidationMessage('name'),
             'Please enter a customer group name.',
         );
     }
@@ -208,7 +212,18 @@ final readonly class ManagingCustomerGroupsContext implements Context
      */
     public function iShouldBeNotifiedThatCustomerGroupWithThisCodeAlreadyExists(): void
     {
-        Assert::same($this->createPage->getValidationMessage('code'), 'Customer group code has to be unique.');
+        Assert::same($this->formElement->getValidationMessage('code'), 'Customer group code has to be unique.');
+    }
+
+    /**
+     * @Then I should be notified that code is too long
+     */
+    public function iShouldBeNotifiedThatCodeIsTooLong(): void
+    {
+        Assert::contains(
+            $this->formElement->getValidationMessage('code'),
+            'must not be longer than 255 characters.',
+        );
     }
 
     /**
@@ -216,10 +231,7 @@ final readonly class ManagingCustomerGroupsContext implements Context
      */
     public function iShouldBeInformedThatThisFormContainsErrors(): void
     {
-        /** @var CreatePageInterface|UpdatePageInterface $currentPage */
-        $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
-
-        Assert::contains($currentPage->getMessageInvalidForm(), 'This form contains errors');
+        Assert::true($this->formElement->hasFormErrorAlert());
     }
 
     /**
@@ -227,7 +239,7 @@ final readonly class ManagingCustomerGroupsContext implements Context
      */
     public function iShouldNotBeAbleToEditItsCode(): void
     {
-        Assert::true($this->updatePage->isCodeDisabled());
+        Assert::true($this->formElement->isCodeDisabled());
     }
 
     /**
@@ -252,10 +264,5 @@ final readonly class ManagingCustomerGroupsContext implements Context
                 $customerGroup->getName(),
             ),
         );
-    }
-
-    protected function resolveCurrentPage(): SymfonyPageInterface
-    {
-        return $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
     }
 }
