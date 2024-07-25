@@ -5,9 +5,9 @@
     {{ variant.name|default(variant.descriptor) }}
     {% if product.hasOptions() %}
         <div>
-            {% for optionValue in variant.optionValues %}
+            {% for option_value in variant.optionValues %}
                 <div>
-                    {{ optionValue.value }}
+                    {{ option_value.value }}
                 </div>
             {% endfor %}
         </div>
