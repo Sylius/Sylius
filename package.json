@@ -15,6 +15,7 @@
   },
   "dependencies": {
     "@sylius-ui/admin": "file:src/Sylius/Bundle/AdminBundle",
+    "@sylius-ui/shop": "file:src/Sylius/Bundle/ShopBundle",
     "chart.js": "^3.7.1",
     "jquery": "^3.5.0",
     "jquery.dirtyforms": "^2.0.0",

@@ -14,7 +14,7 @@ parameters:
 
 twig:
     paths:
-        '%kernel.project_dir%/src/Sylius/Bundle/ShopBundle/Resources/private/': 'SyliusShopAssets'
+        '%kernel.project_dir%/src/Sylius/Bundle/ShopBundle/Resources/assets/': 'SyliusShopAssets'
 
 webpack_encore:
     builds:

@@ -1,0 +1,23 @@
+{
+  "name": "@sylius-ui/shop",
+  "version": "1.0.0",
+  "license": "MIT",
+  "author": "Sylius Sp. z o.o.",
+  "dependencies": {
+    "@symfony/webpack-encore": "^3.1.0",
+    "bootstrap": "^5.3.0"
+  },
+  "devDependencies": {
+    "sass": "^1.54.8",
+    "sass-loader": "^13.0.0"
+  },
+  "engines": {
+    "node": "^18 || ^20"
+  },
+  "engineStrict": true,
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Sylius/SyliusShopBundle.git"
+  }
+}
