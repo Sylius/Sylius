@@ -232,7 +232,6 @@ Example configuration for `order_fixed_discount` action type:
                 </normalizationContext>
             </operation>
 
-
             <operation
                 class="ApiPlatform\Metadata\Delete"
                 uriTemplate="/admin/promotions/{code}"
