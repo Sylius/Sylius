@@ -67,7 +67,7 @@ final class ZonesTest extends JsonApiTestCase
         $this->client->request(
             method: 'POST',
             uri: '/api/v2/admin/zones',
-            server: $this->headerBuilder()->withJsonLdContentType()->withJsonLdAccept()->withAdminUserAuthorization('api@example.com')->build(),
+            server: $this->buildHeaders(),
             content: json_encode([
                 'code' => 'US',
                 'name' => 'UnitedStates',
@@ -101,7 +101,7 @@ final class ZonesTest extends JsonApiTestCase
         $this->client->request(
             method: 'PUT',
             uri: sprintf('/api/v2/admin/zones/%s', $zone->getCode()),
-            server: $this->headerBuilder()->withJsonLdContentType()->withJsonLdAccept()->withAdminUserAuthorization('api@example.com')->build(),
+            server: $this->buildHeaders(),
             content: json_encode([
                 'name' => 'EuropeanUnion',
                 'members' => [
@@ -133,5 +133,16 @@ final class ZonesTest extends JsonApiTestCase
         $this->requestDelete(sprintf('/api/v2/admin/zones/%s', $zone->getCode()));
 
         $this->assertResponseCode($this->client->getResponse(), Response::HTTP_NO_CONTENT);
+    }
+
+    /** @return array<string, string> */
+    private function buildHeaders(): array
+    {
+        return $this
+            ->headerBuilder()
+            ->withJsonLdContentType()
+            ->withJsonLdAccept()
+            ->withAdminUserAuthorization('api@example.com')
+            ->build();
     }
 }

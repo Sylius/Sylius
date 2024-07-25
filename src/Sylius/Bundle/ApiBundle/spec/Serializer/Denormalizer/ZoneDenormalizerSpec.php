@@ -39,7 +39,6 @@ final class ZoneDenormalizerSpec extends ObjectBehavior
         ZoneInterface $zone
     ): void {
         $sectionProvider->getSection()->willReturn(new AdminApiSection());
-
         $this
             ->supportsDenormalization([], ZoneInterface::class, null, [AbstractNormalizer::OBJECT_TO_POPULATE => $zone])
             ->shouldReturn(true)
