@@ -1,7 +1,0 @@
-<div>
-    {% for payment_form in form.payments %}
-        {% include '@SyliusShop/Checkout/select_payment/payment.html.twig' with {'form': payment_form} %}
-    {% else %}
-        {% include '@SyliusShop/Checkout/select_payment/unavailable.html.twig' %}
-    {% endfor %}
-</div>

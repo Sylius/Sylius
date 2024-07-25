@@ -1,4 +1,4 @@
-{% extends '@SyliusShop/Checkout/shared/layout.html.twig' %}
+{% extends '@SyliusShop/checkout/shared/layout.html.twig' %}
 
 {% form_theme form '@SyliusShop/Form/theme.html.twig' %}
 {% import '@SyliusShop/shared/macro/navigation_buttons.html.twig' as navigation %}
@@ -14,7 +14,7 @@
         {{ form_errors(form) }}
         <input type="hidden" name="_method" value="PUT" />
 
-        {% include '@SyliusShop/Checkout/select_payment/form.html.twig' %}
+        {% include '@SyliusShop/checkout/select_payment/form.html.twig' %}
         {% if sylius_is_shipping_required(order) %}
             {{ navigation.default('sylius.ui.change_shipping_method'|trans, path('sylius_shop_checkout_select_shipping')) }}
         {% else %}

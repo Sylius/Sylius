@@ -1,5 +1,8 @@
+{% set form = hookable_metadata.context.form %}
+{% set order = hookable_metadata.context.order %}
+
 <div class="mb-5" {{ sylius_test_html_attribute('shipping-address') }}>
-    {% include '@SyliusShop/Checkout/address/address_book_select.html.twig' %}
+    {% include '@SyliusShop/checkout/address/form/addresses/address_book_select.html.twig' %}
 
     <div class="h4 mb-5">{{ 'sylius.ui.shipping_address'|trans }}</div>
 
@@ -13,7 +16,7 @@
 </div>
 
 <div class="mb-5 collapse" data-js-sylius-checkout-billing-address {{ sylius_test_html_attribute('billing-address') }}>
-    {% include '@SyliusShop/Checkout/address/address_book_select.html.twig' %}
+    {% include '@SyliusShop/checkout/address/form/addresses/address_book_select.html.twig' %}
 
     <div class="h4 mb-5">{{ 'sylius.ui.billing_address'|trans }}</div>
 

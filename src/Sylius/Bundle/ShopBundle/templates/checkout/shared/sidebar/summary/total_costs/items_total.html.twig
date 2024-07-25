@@ -1,0 +1,9 @@
+{% import "@SyliusShop/shared/macro/money.html.twig" as money %}
+
+{% set order = hookable_metadata.context.order %}
+{% set itemsSubtotal = order.getItemsSubtotal() %}
+
+<tr>
+    <td>{{ 'sylius.ui.items_total'|trans }}:</td>
+    <td class="text-end">{{ money.convertAndFormat(itemsSubtotal) }}</td>
+</tr>

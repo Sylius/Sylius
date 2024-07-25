@@ -1,0 +1,12 @@
+{% extends '@SyliusShop/checkout/shared/layout.html.twig' %}
+
+{% set header = 'sylius.ui.address'|trans %}
+{% set active_step = 'address' %}
+
+{% block title %}
+    {{ 'sylius.ui.address'|trans }} | {{ parent() }}
+{% endblock %}
+
+{% block content %}
+    {% hook 'sylius_shop.checkout.address' with { active_step, form, header, order } %}
+{% endblock %}

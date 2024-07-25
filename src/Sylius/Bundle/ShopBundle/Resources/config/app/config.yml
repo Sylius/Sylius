@@ -235,7 +235,7 @@ sylius_ui:
         sylius.shop.checkout.header:
             blocks:
                 header:
-                    template: "@SyliusShop/Checkout/shared/header.html.twig"
+                    template: "@SyliusShop/checkout/shared/header.html.twig"
                     priority: 10
 
         sylius.shop.layout.footer:
@@ -273,7 +273,7 @@ sylius_ui:
         sylius.shop.checkout.steps:
             blocks:
                 steps:
-                    template: "@SyliusShop/Checkout/shared/steps.html.twig"
+                    template: "@SyliusShop/checkout/shared/steps.html.twig"
                     priority: 10
 
         sylius.shop.checkout.address.steps:
@@ -287,7 +287,7 @@ sylius_ui:
         sylius.shop.checkout.sidebar:
             blocks:
                 summary:
-                    template: "@SyliusShop/Checkout/shared/summary.html.twig"
+                    template: "@SyliusShop/checkout/shared/summary.html.twig"
                     priority: 20
 
         sylius.shop.checkout.address.sidebar:

@@ -1,0 +1,7 @@
+{% set channel = hookable_metadata.context.order.channel %}
+
+{% if channel.shippingAddressInCheckoutRequired %}
+    {% include '@SyliusShop/checkout/address/form/addresses/shipping_address_required.html.twig' %}
+{% else %}
+    {% include '@SyliusShop/checkout/address/form/addresses/billing_address_required.html.twig' %}
+{% endif %}

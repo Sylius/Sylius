@@ -1,0 +1,7 @@
+{% import "@SyliusShop/shared/macro/money.html.twig" as money %}
+
+{% set order = hookable_metadata.context.order %}
+
+<table class="table table-borderless mb-3">
+    {% hook 'total_costs' with { order } %}
+</table>

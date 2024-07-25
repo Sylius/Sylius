@@ -1,7 +1,9 @@
+{% set order = hookable_metadata.context.order %}
+{% set active_step = hookable_metadata.context.active_step|default('') %}
 {% set order_requires_shipping = sylius_is_shipping_required(order) %}
 {% set order_requires_payment = sylius_is_payment_required(order) %}
 
-<div class="steps">
+<div class="steps mt-4 mb-5">
     <div class="steps-item{{ active_step == 'address' ? ' active' }}">
         <a href="{{ path('sylius_shop_checkout_address') }}" {{ sylius_test_html_attribute('step-address') }}>
             {{ 'sylius.ui.address'|trans }}
