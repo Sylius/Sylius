@@ -243,7 +243,7 @@
             <argument type="service" id="sylius.behat.shared_storage" />
         </service>
 
-        <service id="Sylius\Behat\Context\Api\Admin\RemovingProductContext">
+        <service id="sylius.behat.context.api.admin.removing_product" class="Sylius\Behat\Context\Api\Admin\RemovingProductContext">
             <argument type="service" id="sylius.behat.api_platform_client.admin" />
             <argument type="service" id="Sylius\Behat\Client\ResponseCheckerInterface" />
         </service>

@@ -36,9 +36,9 @@
                 </order>
 
                 <filters>
-                    <filter>sylius_api.promotion_coupon_search_filter</filter>
-                    <filter>sylius_api.promotion_order_filter</filter>
-                    <filter>sylius_api.exists_filter.archived_at</filter>
+                    <filter>sylius_api.search_filter.promotion</filter>
+                    <filter>sylius_api.order_filter.promotion</filter>
+                    <filter>sylius_api.exists_filter.promotion</filter>
                 </filters>
             </operation>
 
