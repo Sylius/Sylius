@@ -32,7 +32,7 @@
                     </values>
                 </normalizationContext>
                 <filters>
-                    <filter>sylius_api.filter.customer_group</filter>
+                    <filter>sylius_api.search_filter.customer_group</filter>
                 </filters>
             </operation>
 
