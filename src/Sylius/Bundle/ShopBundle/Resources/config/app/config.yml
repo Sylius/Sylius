@@ -24,7 +24,7 @@ sylius_grid:
     templates:
         action:
             shop_show: "@SyliusShop/Grid/Action/show.html.twig"
-            shop_pay: "@SyliusShop/Account/order/grid/action/pay.html.twig"
+            shop_pay: "@SyliusShop/account/order/grid/action/pay.html.twig"
         filter:
             shop_string: "@SyliusShop/Grid/Filter/string.html.twig"
 
@@ -138,37 +138,37 @@ sylius_ui:
         sylius.shop.account.layout.menu:
             blocks:
                 menu:
-                    template: "@SyliusShop/Account/menu/content.html.twig"
+                    template: "@SyliusShop/account/menu/content.html.twig"
                     priority: 10
 
         sylius.shop.account.login:
             blocks:
                 header:
-                    template: "@SyliusShop/Account/login/header.html.twig"
+                    template: "@SyliusShop/account/login/header.html.twig"
                     priority: 40
                 form:
-                    template: "@SyliusShop/Account/login/form.html.twig"
+                    template: "@SyliusShop/account/login/form.html.twig"
                     priority: 30
                 submit:
-                    template: "@SyliusShop/Account/login/submit.html.twig"
+                    template: "@SyliusShop/account/login/submit.html.twig"
                     priority: 20
                 forgot_password:
-                    template: "@SyliusShop/Account/login/forgot_password.html.twig"
+                    template: "@SyliusShop/account/login/forgot_password.html.twig"
                     priority: 10
 
         sylius.shop.account.register:
             blocks:
                 header:
-                    template: "@SyliusShop/Account/register/header.html.twig"
+                    template: "@SyliusShop/account/register/header.html.twig"
                     priority: 40
                 information:
-                    template: "@SyliusShop/Account/register/information.html.twig"
+                    template: "@SyliusShop/account/register/information.html.twig"
                     priority: 30
                 credentials:
-                    template: "@SyliusShop/Account/register/credentials.html.twig"
+                    template: "@SyliusShop/account/register/credentials.html.twig"
                     priority: 20
                 submit:
-                    template: "@SyliusShop/Account/register/submit.html.twig"
+                    template: "@SyliusShop/account/register/submit.html.twig"
                     priority: 10
 
         sylius.shop.account.order.show.after_content_header:
@@ -255,13 +255,13 @@ sylius_ui:
         sylius.shop.account.order.index.content:
             blocks:
                 content:
-                    template: "@SyliusShop/Account/order/index/content.html.twig"
+                    template: "@SyliusShop/account/order/index/content.html.twig"
                     priority: 10
 
         sylius.shop.account.order.show.content:
             blocks:
                 header:
-                    template: "@SyliusShop/Account/order/show/header.html.twig"
+                    template: "@SyliusShop/account/order/show/header.html.twig"
                     priority: 20
                 summary:
                     template: "@SyliusShop/shared/order/summary.html.twig"

@@ -23,7 +23,7 @@ sylius_shop_account_dashboard:
     defaults:
         _controller: sylius.controller.customer::showAction
         _sylius:
-            template: "@SyliusShop/Account/dashboard.html.twig"
+            template: "@SyliusShop/account/dashboard.html.twig"
             repository:
                 method: find
                 arguments:
@@ -35,7 +35,7 @@ sylius_shop_account_profile_update:
     defaults:
         _controller: sylius.controller.customer::updateAction
         _sylius:
-            template: "@SyliusShop/Account/profile_update.html.twig"
+            template: "@SyliusShop/account/profile_update.html.twig"
             form: Sylius\Bundle\CustomerBundle\Form\Type\CustomerProfileType
             repository:
                 method: find
@@ -51,5 +51,5 @@ sylius_shop_account_change_password:
     defaults:
         _controller: sylius.controller.shop_user::changePasswordAction
         _sylius:
-            template: "@SyliusShop/Account/change_password.html.twig"
+            template: "@SyliusShop/account/change_password.html.twig"
             redirect: sylius_shop_account_dashboard
