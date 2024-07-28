@@ -39,19 +39,20 @@ const toggleSimpleProduct = (isChecked) => {
   });
 
   // Update the active tab and segment
+  if ($tabs.length === 1) return;
+
   const $activeTab = $channelPricings.find('a.item.active');
   const $activeSegment = $channelPricings.find('div.ui.bottom.attached.tab.segment.active');
 
-  if ($activeTab.is(':hidden')) {
-    const $firstVisibleTab = $channelPricings.find('a.item:visible').first();
+  if (!$activeTab.is(':hidden')) return;
 
-    $activeTab.removeClass('active');
-    $activeSegment.removeClass('active');
-
-    $firstVisibleTab.addClass('active');
-    $channelPricings.find(`div.ui.bottom.attached.tab.segment[data-tab="${$firstVisibleTab.data('tab')}"]`)
-      .addClass('active');
-  }
+  const $firstVisibleTab = $channelPricings.find('a.item:visible').first();
+  $activeTab.removeClass('active');
+  $activeSegment.removeClass('active');
+  $firstVisibleTab.addClass('active');
+  $channelPricings
+    .find(`div.ui.bottom.attached.tab.segment[data-tab="${$firstVisibleTab.data('tab')}"]`)
+    .addClass('active');
 };
 
 $.fn.extend({
