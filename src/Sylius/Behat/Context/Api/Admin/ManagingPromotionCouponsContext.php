@@ -49,8 +49,21 @@ final class ManagingPromotionCouponsContext implements Context
     {
         $this->client->index(Resources::PROMOTION_COUPONS);
         $this->client->addFilter(
-            'promotion',
-            $this->iriConverter->getIriFromResourceInSection($promotion, 'admin'),
+            'promotion.code',
+            $promotion->getCode(),
+        );
+        $this->client->filter();
+    }
+
+    /**
+     * @When I filter by code containing :phrase
+     */
+    public function iFilterByCodeContaining(string $phrase): void
+    {
+        $this->client->index(Resources::PROMOTION_COUPONS);
+        $this->client->addFilter(
+            'code',
+            $phrase,
         );
         $this->client->filter();
     }
@@ -630,6 +643,26 @@ final class ManagingPromotionCouponsContext implements Context
             $used,
             sprintf('The promotion coupon %s has been used %s times', $promotionCoupon->getCode(), $returnedPromotionCoupon['used']),
         );
+    }
+
+    /**
+     * @Then I should see a single promotion coupon in the list
+     */
+    public function iShouldSeeASinglePromotionCouponInTheList(): void
+    {
+        Assert::same($this->responseChecker->countCollectionItems($this->client->getLastResponse()), 1);
+    }
+
+    /**
+     * @Then I should see the promotion coupon :coupon in the list
+     */
+    public function iShouldSeeThePromotionCouponInTheList(PromotionCouponInterface $coupon): void
+    {
+        Assert::true($this->responseChecker->hasItemWithValue(
+            $this->client->getLastResponse(),
+            'code',
+            $coupon->getCode(),
+        ));
     }
 
     private function sortBy(string $order, string $field): void

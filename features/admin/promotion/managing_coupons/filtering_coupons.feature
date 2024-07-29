@@ -19,7 +19,7 @@ Feature: Filtering coupons
         And this coupon expires on "20-02-2023"
         And I am logged in as an administrator
 
-    @ui @todo-api
+    @api @ui
     Scenario: Filtering coupons by code
         Given I am browsing coupons of this promotion
         When I filter by code containing "X"
