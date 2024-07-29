@@ -38,12 +38,8 @@ final class TotalOfItemsFromTaxonRuleChecker implements RuleCheckerInterface
             throw new UnsupportedTypeException($subject, OrderInterface::class);
         }
 
-        $channelCode = $subject->getChannel()->getCode();
-        if (!isset($configuration[$channelCode])) {
-            return false;
-        }
-
-        $configuration = $configuration[$channelCode];
+        $channel = $subject->getChannel();
+        $configuration = $configuration[$channel->getCode()] ?? null;
 
         if (!isset($configuration['taxon']) || !isset($configuration['amount'])) {
             return false;
@@ -59,7 +55,9 @@ final class TotalOfItemsFromTaxonRuleChecker implements RuleCheckerInterface
         /** @var OrderItemInterface $item */
         foreach ($subject->getItems() as $item) {
             if ($item->getProduct()->hasTaxon($targetTaxon)) {
-                $itemsWithTaxonTotal += $item->getTotal();
+                $channelPricing = $item->getVariant()->getChannelPricingForChannel($channel);
+
+                $itemsWithTaxonTotal += $channelPricing->getPrice();
             }
         }
 
