@@ -40,6 +40,7 @@
     "require-dev": {
         "doctrine/data-fixtures": "^1.4",
         "doctrine/orm": "^2.13",
+        "matthiasnoback/symfony-config-test": "^4.2",
         "phpspec/phpspec": "^7.2",
         "phpspec/prophecy-phpunit": "^2.0",
         "phpunit/phpunit": "^9.5",
