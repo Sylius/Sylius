@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\AdminBundle\Message;
+namespace Sylius\Bundle\AdminBundle\Command;
 
 final class CreateAdminUser
 {

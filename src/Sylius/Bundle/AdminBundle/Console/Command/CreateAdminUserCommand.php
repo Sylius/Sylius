@@ -15,7 +15,7 @@ namespace Sylius\Bundle\AdminBundle\Console\Command;
 
 use Sylius\Bundle\AdminBundle\Console\Command\Factory\QuestionFactoryInterface;
 use Sylius\Bundle\AdminBundle\Exception\CreateAdminUserFailedException;
-use Sylius\Bundle\AdminBundle\Message\CreateAdminUser;
+use Sylius\Bundle\AdminBundle\Command\CreateAdminUser;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
