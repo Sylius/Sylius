@@ -11,8 +11,8 @@
             <i class="{{ user.verified ? 'green checkmark' : 'red remove' }} icon"></i>
             {{ 'sylius.ui.email_verified'|trans }}
         </div>
+        {% if is_shop_enabled() and user.isAccountNonLocked and user.enabled %}
         <br />
-        {% if is_shop_enabled() %}
             {{ buttons.default(path('sylius_admin_impersonate_user', {'username': user.emailCanonical}), 'sylius.ui.impersonate', 'impersonate', 'unhide', 'blue') }}
         {% endif %}
     {% endif %}
