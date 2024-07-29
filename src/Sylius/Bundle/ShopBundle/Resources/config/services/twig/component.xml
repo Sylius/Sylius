@@ -52,7 +52,7 @@
             <tag
                 name="twig.component"
                 key="sylius_shop:common:product_card"
-                template="@SyliusShop/product/component/card.html.twig"
+                template="@SyliusShop/product/common/card.html.twig"
             />
         </service>
 
@@ -69,7 +69,7 @@
             <tag
                 name="twig.component"
                 key="sylius_shop:common:product_price"
-                template="@SyliusShop/product/component/price.html.twig"
+                template="@SyliusShop/product/common/price.html.twig"
             />
         </service>
 
@@ -86,7 +86,7 @@
             <tag
                 name="twig.component"
                 key="sylius_shop:common:product_original_price"
-                template="@SyliusShop/product/component/original_price.html.twig"
+                template="@SyliusShop/product/common/original_price.html.twig"
             />
         </service>
     </services>
