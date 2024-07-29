@@ -299,5 +299,11 @@
         </service>
 
         <service id="Sylius\Component\Core\Positioner\PositionerInterface" class="Sylius\Component\Core\Positioner\Positioner" />
+
+        <service id="Sylius\Bundle\CoreBundle\Security\AuthenticatedVoter" decorates="security.access.authenticated_voter">
+            <argument type="service" id="Sylius\Bundle\CoreBundle\Security\AuthenticatedVoter.inner" />
+            <argument type="service" id="request_stack" />
+            <argument type="service" id="security.firewall.map" />
+        </service>
     </services>
 </container>
