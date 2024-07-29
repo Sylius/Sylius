@@ -16,8 +16,8 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
 >
     <services>
-        <service id="sylius_api.doctrine.orm.query_extension.common.shipping_method.non_archived" class="Sylius\Bundle\ApiBundle\Doctrine\ORM\QueryExtension\Common\ShippingMethod\NonArchivedExtension">
-            <argument>%sylius.model.shipping_method.class%</argument>
+        <service id="sylius_api.doctrine.orm.query_extension.common.non_archived" class="Sylius\Bundle\ApiBundle\Doctrine\ORM\QueryExtension\Common\NonArchivedExtension">
+            <argument>%sylius_api.non_archived_classes%</argument>
             <tag name="api_platform.doctrine.orm.query_extension.collection" />
         </service>
 
@@ -134,11 +134,6 @@
             <argument type="service" id="Sylius\Bundle\ApiBundle\Context\UserContextInterface" />
             <tag name="api_platform.doctrine.orm.query_extension.item" />
         </service>
-
-<!--        <service id="sylius_api.doctrine.orm.query_extension.common.promotion.non_archived" class="Sylius\Bundle\ApiBundle\Doctrine\ORM\QueryExtension\Common\Promotion\NonArchivedExtension">-->
-<!--            <argument>%sylius.model.promotion.class%</argument>-->
-<!--            <tag name="api_platform.doctrine.orm.query_extension.collection" />-->
-<!--        </service>-->
 
         <service id="sylius_api.doctrine.orm.query_extension.shop.product.enabled_within_product_association" class="Sylius\Bundle\ApiBundle\Doctrine\ORM\QueryExtension\Shop\Product\EnabledWithinProductAssociationExtension">
             <argument type="service" id="sylius.section_resolver.uri_based_section_resolver" />

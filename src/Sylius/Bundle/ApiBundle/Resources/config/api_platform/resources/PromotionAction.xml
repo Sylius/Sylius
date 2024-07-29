@@ -20,7 +20,7 @@
         <operations>
             <operation class="ApiPlatform\Metadata\NotExposed" uriTemplate="/admin/promotions/{code}/actions/{id}">
                 <uriVariables>
-                    <uriVariable parameterName="code" fromClass="Sylius\Component\Core\Model\Promotion" fromProperty="rules"/>
+                    <uriVariable parameterName="code" fromClass="Sylius\Component\Core\Model\Promotion" fromProperty="actions"/>
                     <uriVariable parameterName="id" fromClass="Sylius\Component\Promotion\Model\PromotionAction"/>
                 </uriVariables>
             </operation>

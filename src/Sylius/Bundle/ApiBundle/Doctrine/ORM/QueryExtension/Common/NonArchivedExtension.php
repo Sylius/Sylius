@@ -11,23 +11,21 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\ApiBundle\Doctrine\ORM\QueryExtension\Common\Promotion;
+namespace Sylius\Bundle\ApiBundle\Doctrine\ORM\QueryExtension\Common;
 
 use ApiPlatform\Doctrine\Orm\Extension\QueryCollectionExtensionInterface;
 use ApiPlatform\Doctrine\Orm\Util\QueryNameGeneratorInterface;
 use ApiPlatform\Metadata\Operation;
 use Doctrine\ORM\QueryBuilder;
 
-// TODO: refactor it to allow passing an array of classes //
 final readonly class NonArchivedExtension implements QueryCollectionExtensionInterface
 {
-    public function __construct(private string $promotionClass)
+    /** @param array<int, string> $nonArchivedClasses */
+    public function __construct(private array $nonArchivedClasses)
     {
     }
 
-    /**
-     * @param array<array-key, mixed> $context
-     */
+    /** @param array<array-key, mixed> $context */
     public function applyToCollection(
         QueryBuilder $queryBuilder,
         QueryNameGeneratorInterface $queryNameGenerator,
@@ -35,7 +33,7 @@ final readonly class NonArchivedExtension implements QueryCollectionExtensionInt
         ?Operation $operation = null,
         array $context = [],
     ): void {
-        if ($this->promotionClass !== $resourceClass) {
+        if (!in_array($resourceClass, $this->nonArchivedClasses, true)) {
             return;
         }
 

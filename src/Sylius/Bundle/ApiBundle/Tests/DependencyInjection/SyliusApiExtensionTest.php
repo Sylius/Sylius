@@ -107,6 +107,24 @@ final class SyliusApiExtensionTest extends AbstractExtensionTestCase
     }
 
     /** @test */
+    public function it_loads_non_archived_classes_properly(): void
+    {
+        $this->container->setParameter('kernel.bundles_metadata', ['SyliusApiBundle' => ['path' => __DIR__ . '../..']]);
+
+        $this->load([
+            'non_archived_classes' => [
+                "%sylius.model.shipping_method.class%",
+                "%sylius.model.promotion.class%",
+            ],
+        ]);
+
+        $this->assertContainerBuilderHasParameter(
+            'sylius_api.non_archived_classes',
+            ["%sylius.model.shipping_method.class%",  "%sylius.model.promotion.class%"],
+        );
+    }
+
+    /** @test */
     public function it_loads_skip_read_and_skip_index_and_show_serialization_groups_parameters_properly(): void
     {
         $this->container->setParameter('kernel.bundles_metadata', ['SyliusApiBundle' => ['path' => __DIR__ . '../..']]);

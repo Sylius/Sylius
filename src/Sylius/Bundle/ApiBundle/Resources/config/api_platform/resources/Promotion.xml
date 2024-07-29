@@ -18,6 +18,30 @@
 >
     <resource class="Sylius\Component\Core\Model\Promotion">
         <operations>
+            <operation class="ApiPlatform\Metadata\GetCollection" uriTemplate="/admin/promotions">
+                <normalizationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius:admin:promotion:index</value>
+                            </values>
+                        </value>
+                    </values>
+                </normalizationContext>
+
+                <order>
+                    <values>
+                        <value name="priority">DESC</value>
+                    </values>
+                </order>
+
+                <filters>
+                    <filter>sylius_api.search_filter.promotion</filter>
+                    <filter>sylius_api.order_filter.promotion</filter>
+                    <filter>sylius_api.exists_filter.promotion</filter>
+                </filters>
+            </operation>
+
             <operation class="ApiPlatform\Metadata\Get" uriTemplate="/admin/promotions/{code}">
                 <normalizationContext>
                     <values>

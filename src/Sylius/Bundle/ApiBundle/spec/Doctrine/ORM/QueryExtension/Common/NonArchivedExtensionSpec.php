@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 
-namespace spec\Sylius\Bundle\ApiBundle\Doctrine\ORM\QueryExtension\Common\Promotion;
+namespace spec\Sylius\Bundle\ApiBundle\Doctrine\ORM\QueryExtension\Common;
 
 use ApiPlatform\Doctrine\Orm\Util\QueryNameGeneratorInterface;
 use ApiPlatform\Metadata\Get;
@@ -24,10 +24,10 @@ final class NonArchivedExtensionSpec extends ObjectBehavior
 {
     function let(): void
     {
-        $this->beConstructedWith('promotionClass');
+        $this->beConstructedWith(['promotionClass', 'shippingMethodClass']);
     }
 
-    function it_does_nothing_if_current_resource_is_not_a_promotion(
+    function it_does_nothing_if_current_resource_is_not_an_instance_of_non_archived_classes(
         QueryBuilder $queryBuilder,
         QueryNameGeneratorInterface $queryNameGenerator,
     ): void {
@@ -73,6 +73,25 @@ final class NonArchivedExtensionSpec extends ObjectBehavior
             $queryBuilder,
             $queryNameGenerator,
             'promotionClass',
+            new Get(name: Request::METHOD_GET),
+        );
+    }
+
+    function it_filters_archived_shipping_methods(
+        QueryBuilder $queryBuilder,
+        Expr $expr,
+        QueryNameGeneratorInterface $queryNameGenerator,
+    ): void {
+        $queryBuilder->getRootAliases()->willReturn(['o']);
+
+        $expr->isNull('o.archivedAt')->willReturn('o.archivedAt IS NULL');
+        $queryBuilder->expr()->willReturn($expr);
+        $queryBuilder->andWhere('o.archivedAt IS NULL')->shouldBeCalled();
+
+        $this->applyToCollection(
+            $queryBuilder,
+            $queryNameGenerator,
+            'shippingMethodClass',
             new Get(name: Request::METHOD_GET),
         );
     }
