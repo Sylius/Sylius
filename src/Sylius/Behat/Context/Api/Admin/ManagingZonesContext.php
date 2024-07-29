@@ -414,9 +414,9 @@ final readonly class ManagingZonesContext implements Context
      */
     public function iShouldBeNotifiedThatThisZoneCannotBeDeleted(): void
     {
-        Assert::false(
-            $this->responseChecker->isDeletionSuccessful($this->client->getLastResponse()),
-            'Zone can be deleted, but it should not',
+        Assert::contains(
+            $this->responseChecker->getError($this->client->getLastResponse()),
+            'Cannot delete, the Zone is in use.',
         );
     }
 
