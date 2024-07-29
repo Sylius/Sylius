@@ -63,5 +63,3 @@ EOT
         return 0;
     }
 }
-
-class_alias(InstallDatabaseCommand::class, '\Sylius\Bundle\CoreBundle\Command\InstallDatabaseCommand');
