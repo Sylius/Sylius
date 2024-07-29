@@ -538,6 +538,17 @@ final class CartContext implements Context
     }
 
     /**
+     * @Then I should be notified that the cart has been updated
+     */
+    public function iShouldBeNotifiedThatTheCartHasBeenUpdated(): void
+    {
+        $this->notificationChecker->checkNotification(
+            'The cart has been successfully updated',
+            NotificationType::success(),
+        );
+    }
+
+    /**
      * @Then total price of :productName item should be :productPrice
      */
     public function thisItemPriceShouldBe(string $productName, string $productPrice): void
