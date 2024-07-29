@@ -70,6 +70,9 @@ sonata_block:
     default_contexts: ~
 
 sylius_ui:
+    twig_ux:
+        anonymous_component_template_prefixes:
+            sylius_shop: "@SyliusShop/shared/components"
     events:
         sylius.shop.layout.topbar:
             blocks:
