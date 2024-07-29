@@ -102,6 +102,16 @@ final readonly class ManagingZonesContext implements Context
     }
 
     /**
+     * @When I add a member with a code :code
+     */
+    public function iAddAMemberWithACode(string $code): void
+    {
+        $this->client->addSubResourceData('members', [
+            'code' => $code,
+        ]);
+    }
+
+    /**
      * @When I provide a too long zone member code
      */
     public function iProvideATooLongZoneMemberCode(): void
@@ -461,6 +471,17 @@ final readonly class ManagingZonesContext implements Context
         Assert::contains(
             $this->responseChecker->getError($this->client->getLastResponse()),
             'The zone member code must not be longer than',
+        );
+    }
+
+    /**
+     * @Then /^I should be notified that "([^"]*)" is not a valid (country|province|zone) code$/
+     */
+    public function iShouldBeNotifiedThatIsNotAValidElementCode(string $code, string $element): void
+    {
+        Assert::contains(
+            $this->responseChecker->getError($this->client->getLastResponse()),
+            sprintf('%s with code %s does not exist.', ucfirst($element), $code),
         );
     }
 

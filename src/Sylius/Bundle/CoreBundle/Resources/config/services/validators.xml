@@ -123,5 +123,15 @@
             <argument>%sylius_core.max_int_value%</argument>
             <tag name="validator.constraint_validator" alias="sylius_max_integer" />
         </service>
+
+        <service id="sylius.validator.province_code_exists" class="Sylius\Bundle\CoreBundle\Validator\Constraints\ProvinceCodeExistsValidator">
+            <argument type="service" id="sylius.repository.province" />
+            <tag name="validator.constraint_validator" alias="sylius_province_code_exists" />
+        </service>
+
+        <service id="sylius.validator.zone_code_exists" class="Sylius\Bundle\CoreBundle\Validator\Constraints\ZoneCodeExistsValidator">
+            <argument type="service" id="sylius.repository.zone" />
+            <tag name="validator.constraint_validator" alias="sylius_zone_code_exists" />
+        </service>
     </services>
 </container>
