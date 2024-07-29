@@ -264,18 +264,6 @@
             <argument type="string">%sylius.shop_user.token.password_reset.ttl%</argument>
         </service>
 
-        <service id="Sylius\Bundle\CoreBundle\MessageDispatcher\ResetPasswordDispatcher">
-            <argument type="service" id="sylius.command_bus" />
-        </service>
-
-        <service id="Sylius\Bundle\CoreBundle\MessageDispatcher\ResendOrderConfirmationEmailDispatcherInterface" class="Sylius\Bundle\CoreBundle\MessageDispatcher\ResendOrderConfirmationEmailDispatcher">
-            <argument type="service" id="sylius.command_bus" />
-        </service>
-
-        <service id="Sylius\Bundle\CoreBundle\MessageDispatcher\ResendShipmentConfirmationEmailDispatcher">
-            <argument type="service" id="sylius.command_bus" />
-        </service>
-
         <service id="Sylius\Bundle\CoreBundle\Resolver\CustomerResolverInterface" class="Sylius\Bundle\CoreBundle\Resolver\CustomerResolver">
             <argument type="service" id="sylius.factory.customer" />
             <argument type="service" id="Sylius\Bundle\CoreBundle\Provider\CustomerProviderInterface" />
