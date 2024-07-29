@@ -44,12 +44,17 @@ class FormElement extends Element implements FormElementInterface
 
     public function getValidationErrors(): string
     {
-        $validationMessage = $this->getDocument()->find('css', '.sylius-validation-error, .alert.alert-danger');
+        $validationMessage = $this->getDocument()->find('css', 'form .alert.alert-danger');
         if (null === $validationMessage) {
-            throw new ElementNotFoundException($this->getSession(), 'Validation message', 'css', '.sylius-validation-error, .alert.alert-danger');
+            throw new ElementNotFoundException($this->getSession(), 'Validation message', 'css', 'form .alert.alert-danger');
         }
 
         return $validationMessage->getText();
+    }
+
+    public function hasFormErrorAlert(): bool
+    {
+        return $this->hasElement('form_error_alert');
     }
 
     /**
@@ -59,6 +64,7 @@ class FormElement extends Element implements FormElementInterface
     {
         return array_merge(parent::getDefinedElements(), [
             'form' => 'form',
+            'form_error_alert' => '[data-test-form-error-alert]',
         ]);
     }
 

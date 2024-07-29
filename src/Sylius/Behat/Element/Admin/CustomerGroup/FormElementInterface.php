@@ -11,13 +11,11 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Behat\Page\Admin\CustomerGroup;
+namespace Sylius\Behat\Element\Admin\CustomerGroup;
 
-use Sylius\Behat\Page\Admin\Crud\UpdatePageInterface as BaseUpdatePageInterface;
+use Sylius\Behat\Element\Admin\Crud\FormElementInterface as BaseFormElementInterface;
 
-interface UpdatePageInterface extends BaseUpdatePageInterface
+interface FormElementInterface extends BaseFormElementInterface
 {
-    public function nameIt(string $name): void;
-
     public function isCodeDisabled(): bool;
 }
