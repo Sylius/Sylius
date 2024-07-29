@@ -20,8 +20,8 @@ use Sylius\Bundle\AdminBundle\DependencyInjection\Compiler\BackwardsCompatibilit
 use Sylius\Bundle\AdminBundle\EmailManager\OrderEmailManagerInterface;
 use Sylius\Bundle\AdminBundle\EmailManager\ShipmentEmailManagerInterface;
 use Sylius\Bundle\AdminBundle\EventListener\ShipmentShipListener;
-use Sylius\Bundle\CoreBundle\MessageDispatcher\ResendOrderConfirmationEmailDispatcher;
-use Sylius\Bundle\CoreBundle\MessageDispatcher\ResendShipmentConfirmationEmailDispatcher;
+use Sylius\Bundle\CoreBundle\CommandDispatcher\ResendOrderConfirmationEmailDispatcher;
+use Sylius\Bundle\CoreBundle\CommandDispatcher\ResendShipmentConfirmationEmailDispatcher;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Reference;
