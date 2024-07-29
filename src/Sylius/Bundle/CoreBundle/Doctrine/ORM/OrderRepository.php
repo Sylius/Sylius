@@ -398,7 +398,7 @@ class OrderRepository extends BaseOrderRepository implements OrderRepositoryInte
         ;
     }
 
-    public function findOrdersUnpaidSince(\DateTimeInterface $terminalDate, ?int $limit = null): array
+    public function findOrdersUnpaidSince(\DateTimeInterface $terminalDate, ?int $limit = null, ?ChannelInterface $channel = null): array
     {
         $queryBuilder = $this->createQueryBuilder('o')
             ->where('o.checkoutState = :checkoutState')
@@ -414,6 +414,10 @@ class OrderRepository extends BaseOrderRepository implements OrderRepositoryInte
         if (null !== $limit) {
             Assert::positiveInteger($limit);
             $queryBuilder->setMaxResults($limit);
+        }
+
+        if (null !== $channel) {
+            $queryBuilder->andWhere('o.channel = :channel')->setParameter('channel', $channel);
         }
 
         return $queryBuilder->getQuery()->getResult();

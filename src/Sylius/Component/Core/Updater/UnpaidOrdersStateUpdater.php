@@ -20,6 +20,7 @@ use SM\Factory\FactoryInterface;
 use Sylius\Abstraction\StateMachine\Exception\StateMachineExecutionException;
 use Sylius\Abstraction\StateMachine\StateMachineInterface;
 use Sylius\Abstraction\StateMachine\WinzouStateMachineAdapter;
+use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Order\Model\OrderInterface;
 use Sylius\Component\Order\OrderTransitions;
@@ -65,11 +66,11 @@ final class UnpaidOrdersStateUpdater implements UnpaidOrdersStateUpdaterInterfac
         $this->logger = $logger;
     }
 
-    public function cancel(): void
+    public function cancel(?ChannelInterface $channel = null): void
     {
         $batchSize = null === $this->orderManager ? null : $this->batchSize;
 
-        while ([] !== $expiredUnpaidOrders = $this->findExpiredUnpaidOrders($batchSize)) {
+        while ([] !== $expiredUnpaidOrders = $this->findExpiredUnpaidOrders($batchSize, $channel)) {
             foreach ($expiredUnpaidOrders as $expiredUnpaidOrder) {
                 $this->cancelOrder($expiredUnpaidOrder);
             }
@@ -83,11 +84,12 @@ final class UnpaidOrdersStateUpdater implements UnpaidOrdersStateUpdaterInterfac
         }
     }
 
-    private function findExpiredUnpaidOrders(?int $batchSize): array
+    private function findExpiredUnpaidOrders(?int $batchSize, ?ChannelInterface $channel = null): array
     {
         return $this->orderRepository->findOrdersUnpaidSince(
             new \DateTime('-' . $this->expirationPeriod),
             $batchSize,
+            $channel,
         );
     }
 
