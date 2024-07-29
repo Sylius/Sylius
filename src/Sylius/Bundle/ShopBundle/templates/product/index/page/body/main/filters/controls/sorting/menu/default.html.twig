@@ -1,3 +1,0 @@
-{% set default_path = path(hookable_metadata.context.route, hookable_metadata.context.route_parameters|merge({'sorting': null, 'criteria': hookable_metadata.context.criteria})) %}
-
-<a class="dropdown-item" href="{{ default_path }}" data-text="{{ 'sylius.ui.by_position'|trans|lower }}">{{ 'sylius.ui.by_position'|trans }}</a>

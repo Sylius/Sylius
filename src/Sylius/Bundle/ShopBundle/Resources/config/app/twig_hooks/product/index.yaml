@@ -68,16 +68,49 @@ twig_hooks:
 
         'sylius_shop.product.index.page.body.main.filters.controls.sorting.menu':
             default:
-                template: "@SyliusShop/product/index/page/body/main/filters/controls/sorting/menu/default.html.twig"
+                template: "@SyliusShop/product/index/page/body/main/filters/controls/sorting/menu/item.html.twig"
+                configuration:
+                    title: 'sylius.ui.by_position'
+                    sorting: ''
             a_to_z:
-                template: "@SyliusShop/product/index/page/body/main/filters/controls/sorting/menu/a_to_z.html.twig"
+                template: "@SyliusShop/product/index/page/body/main/filters/controls/sorting/menu/item.html.twig"
+                configuration:
+                    title: 'sylius.ui.from_a_to_z'
+                    sorting:
+                        key: 'name'
+                        value: 'asc'
             z_to_a:
-                template: "@SyliusShop/product/index/page/body/main/filters/controls/sorting/menu/z_to_a.html.twig"
+                template: "@SyliusShop/product/index/page/body/main/filters/controls/sorting/menu/item.html.twig"
+                configuration:
+                    title: 'sylius.ui.from_z_to_a'
+                    sorting:
+                        key: 'name'
+                        value: 'desc'
             newest:
-                template: "@SyliusShop/product/index/page/body/main/filters/controls/sorting/menu/newest.html.twig"
+                template: "@SyliusShop/product/index/page/body/main/filters/controls/sorting/menu/item.html.twig"
+                configuration:
+                    title: 'sylius.ui.newest_first'
+                    sorting:
+                        key: 'createdAt'
+                        value: 'desc'
             oldest:
-                template: "@SyliusShop/product/index/page/body/main/filters/controls/sorting/menu/oldest.html.twig"
+                template: "@SyliusShop/product/index/page/body/main/filters/controls/sorting/menu/item.html.twig"
+                configuration:
+                    title: 'sylius.ui.oldest_first'
+                    sorting:
+                        key: 'createdAt'
+                        value: 'asc'
             cheapest:
-                template: "@SyliusShop/product/index/page/body/main/filters/controls/sorting/menu/cheapest.html.twig"
+                template: "@SyliusShop/product/index/page/body/main/filters/controls/sorting/menu/item.html.twig"
+                configuration:
+                    title: 'sylius.ui.cheapest_first'
+                    sorting:
+                        key: 'price'
+                        value: 'asc'
             most_expensive:
-                template: "@SyliusShop/product/index/page/body/main/filters/controls/sorting/menu/most_expensive.html.twig"
+                template: "@SyliusShop/product/index/page/body/main/filters/controls/sorting/menu/item.html.twig"
+                configuration:
+                    title: 'sylius.ui.most_expensive_first'
+                    sorting:
+                        key: 'price'
+                        value: 'desc'

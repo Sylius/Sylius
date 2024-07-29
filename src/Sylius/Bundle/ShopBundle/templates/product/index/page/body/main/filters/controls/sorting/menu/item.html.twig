@@ -1,0 +1,11 @@
+{% if hookable_metadata.configuration.sorting %}
+    {% set sorting = {
+        (hookable_metadata.configuration.sorting.key): hookable_metadata.configuration.sorting.value
+    } %}
+{% else %}
+    {% set sorting = null %}
+{% endif %}
+
+{% set path = path(hookable_metadata.context.route, hookable_metadata.context.route_parameters|merge({sorting, 'criteria': hookable_metadata.context.criteria})) %}
+
+<a class="dropdown-item" href="{{ path }}" data-text="{{ 'sylius.ui.from_a_to_z'|trans|lower }}">{{ hookable_metadata.configuration.title|trans }}</a>

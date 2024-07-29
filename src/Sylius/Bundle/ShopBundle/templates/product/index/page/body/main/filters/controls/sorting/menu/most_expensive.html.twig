@@ -1,3 +1,0 @@
-{% set most_expensive_first_path = path(hookable_metadata.context.route, hookable_metadata.context.route_parameters|merge({'sorting': {'price': 'desc'}, 'criteria': hookable_metadata.context.criteria})) %}
-
-<a class="dropdown-item" href="{{ most_expensive_first_path }}" data-text="{{ 'sylius.ui.most_expensive_first'|trans|lower }}">{{ 'sylius.ui.most_expensive_first'|trans }}</a>

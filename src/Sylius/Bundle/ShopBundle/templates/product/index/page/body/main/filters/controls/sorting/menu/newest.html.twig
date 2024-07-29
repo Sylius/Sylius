@@ -1,3 +1,0 @@
-{% set newest_first_path = path(hookable_metadata.context.route, hookable_metadata.context.route_parameters|merge({'sorting': {'createdAt': 'desc'}, 'criteria': hookable_metadata.context.criteria})) %}
-
-<a class="dropdown-item" href="{{ newest_first_path }}" data-text="{{ 'sylius.ui.newest_first'|trans|lower }}">{{ 'sylius.ui.newest_first'|trans }}</a>
