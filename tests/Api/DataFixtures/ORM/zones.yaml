@@ -1,3 +1,7 @@
+Sylius\Component\Addressing\Model\Country:
+    country_{DE, FR, PL, NL, BE}:
+        code: <current()>
+
 Sylius\Component\Addressing\Model\ZoneMember:
     member_{DE, FR, PL, NL, BE}:
         code: <current()>

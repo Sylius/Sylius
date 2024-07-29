@@ -5,20 +5,20 @@
     "id": "@integer@",
     "code": "US",
     "name": "UnitedStates",
-    "type": "province",
+    "type": "country",
     "scope": "all",
     "members": [
         {
             "@type": "ZoneMember",
-            "code": "AL"
+            "code": "NL"
         },
         {
             "@type": "ZoneMember",
-            "code": "CA"
+            "code": "BE"
         },
         {
             "@type": "ZoneMember",
-            "code": "NY"
+            "code": "PL"
         }
     ]
 }
