@@ -16,6 +16,7 @@ namespace Sylius\Component\Core\Provider\ProductVariantMap;
 use Sylius\Component\Core\Calculator\ProductVariantPricesCalculatorInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
+use Webmozart\Assert\Assert;
 
 final class ProductVariantLowestPriceMapProvider implements ProductVariantMapProviderInterface
 {
@@ -25,6 +26,8 @@ final class ProductVariantLowestPriceMapProvider implements ProductVariantMapPro
 
     public function provide(ProductVariantInterface $variant, array $context): array
     {
+        Assert::methodExists($this->calculator, 'calculateLowestPriceBeforeDiscount');
+
         return [
             'lowest-price-before-discount' => $this->calculator->calculateLowestPriceBeforeDiscount($variant, $context),
         ];
@@ -32,6 +35,17 @@ final class ProductVariantLowestPriceMapProvider implements ProductVariantMapPro
 
     public function supports(ProductVariantInterface $variant, array $context): bool
     {
+        if (!\method_exists($this->calculator, 'calculateLowestPriceBeforeDiscount')) {
+            trigger_deprecation(
+                'sylius/sylius',
+                '1.13',
+                'Not having `calculateLowestPriceBeforeDiscount` method on %s is deprecated since Sylius 1.13 and will be required in Sylius 2.0.',
+                $this->calculator::class,
+            );
+
+            return false;
+        }
+
         return
             isset($context['channel']) &&
             $context['channel'] instanceof ChannelInterface &&

@@ -72,10 +72,20 @@ final class ProductVariantsPricesProvider implements ProductVariantsPricesProvid
             return $optionMap;
         }
 
-        $lowestPriceBeforeDiscount = $this->productVariantPriceCalculator->calculateLowestPriceBeforeDiscount($variant, ['channel' => $channel]);
 
-        if ($lowestPriceBeforeDiscount !== null) {
-            $optionMap['lowest-price-before-discount'] = $lowestPriceBeforeDiscount;
+        if (\method_exists($this->productVariantPriceCalculator, 'calculateLowestPriceBeforeDiscount')) {
+            $lowestPriceBeforeDiscount = $this->productVariantPriceCalculator->calculateLowestPriceBeforeDiscount($variant, ['channel' => $channel]);
+
+            if ($lowestPriceBeforeDiscount !== null) {
+                $optionMap['lowest-price-before-discount'] = $lowestPriceBeforeDiscount;
+            }
+        } else {
+            trigger_deprecation(
+                'sylius/sylius',
+                '1.13',
+                'Not having `calculateLowestPriceBeforeDiscount` method on %s is deprecated since Sylius 1.13 and will be required in Sylius 2.0.',
+                $this->productVariantPriceCalculator::class,
+            );
         }
 
         $originalPrice = $this->productVariantPriceCalculator->calculateOriginal($variant, ['channel' => $channel]);

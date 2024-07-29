@@ -57,10 +57,21 @@ class PriceHelper extends Helper
         Assert::keyExists($context, 'channel');
         Assert::isInstanceOf($this->productVariantPriceCalculator, ProductVariantPricesCalculatorInterface::class);
 
-        return $this
-            ->productVariantPriceCalculator
-            ->calculateLowestPriceBeforeDiscount($productVariant, $context)
-        ;
+        if (\method_exists($this->productVariantPriceCalculator, 'calculateLowestPriceBeforeDiscount')) {
+            return $this
+                ->productVariantPriceCalculator
+                ->calculateLowestPriceBeforeDiscount($productVariant, $context)
+            ;
+        }
+
+        trigger_deprecation(
+            'sylius/sylius',
+            '1.13',
+            'Not having `calculateLowestPriceBeforeDiscount` method on %s is deprecated since Sylius 1.13 and will be required in Sylius 2.0.',
+            $this->productVariantPriceCalculator::class,
+        );
+
+        return $this->getPrice($productVariant, $context);
     }
 
     public function hasLowestPriceBeforeDiscount(ProductVariantInterface $productVariant, array $context): bool
