@@ -204,6 +204,24 @@
       `Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository` to
       `Sylius\Bundle\ProductBundle\Doctrine\ORM\ProductAssociationRepository`
 
+* A new parameter has been added to specify the validation groups for a given zone.
+  If you have any custom validation groups for zone member, you need to add them to
+  your `config/packages/_sylius.yaml` file.
+  This is handled by `Sylius\Bundle\AddressingBundle\Validator\Constraints\ZoneMemberGroup` and it resolves the groups
+  based on the type of the passed zone.
+
+  ```yaml
+  sylius_addressing:
+    zone_member:
+      validation_groups:
+        country:
+          - 'sylius'
+          - 'sylius_zone_member_country'
+        zone:
+          - 'sylius'
+          - 'sylius_zone_member_zone'
+  ```
+
 ## Frontend
 
 * `use_webpack` option was removed from the `sylius_ui` configuration, and the Webpack has become the only module
