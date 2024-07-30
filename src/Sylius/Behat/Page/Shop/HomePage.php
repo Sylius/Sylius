@@ -96,15 +96,7 @@ class HomePage extends SymfonyPage implements HomePageInterface
 
     public function getLatestDealsNames(): array
     {
-        return $this->getProductsNames('latest_products');
-    }
-
-    private function getProductsNames(string $elementName): array
-    {
-        return array_map(
-            fn (NodeElement $element) => $element->getText(),
-            $this->getElement($elementName)->findAll('css', '[data-test-product-name]'),
-        );
+        return $this->getProductsNames('latest_deals');
     }
 
     protected function getDefinedElements(): array
@@ -117,5 +109,13 @@ class HomePage extends SymfonyPage implements HomePageInterface
             'locale_selector' => '[data-test-locale-selector]',
             'logout_button' => '[data-test-logout-button]',
         ]);
+    }
+
+    private function getProductsNames(string $elementName): array
+    {
+        return array_map(
+            fn (NodeElement $element) => $element->getText(),
+            $this->getElement($elementName)->findAll('css', '[data-test-product-name]'),
+        );
     }
 }

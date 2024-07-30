@@ -2,7 +2,7 @@
     <a class="link-reset" href="{{ path('sylius_shop_product_show', {'slug': product.slug, '_locale': product.translation.locale}) }}" {{ sylius_test_html_attribute('product-content') }}>
         <div class="mb-4">
             <div class="overflow-auto bg-light rounded-3" style="aspect-ratio: 3/4; ">
-                <twig:sylius_shop:main_image product="{{ product }}" class="w-100 h-100 object-fit-cover" />
+                {{ component('sylius_shop:main_image', { product: product, class: "w-100 h-100 object-fit-cover" }) }}
             </div>
         </div>
         <div class="h6" {{ sylius_test_html_attribute('product-name', product.name) }}>
@@ -11,7 +11,7 @@
     </a>
     <div>
         {% if not product.enabledVariants.empty() %}
-            <twig:sylius_shop:catalog_promotions variant="{{ variant }}" appliedPromotions="{{ applied_promotions }}" withDescription="false" />
+            {{ component('sylius_shop:catalog_promotions', { variant: variant, appliedPromotions: applied_promotions, withDescription: false }) }}
 
             {% if has_discount %}
                 <span {{ sylius_test_html_attribute('product-original-price') }}><del>{{ component('sylius_shop:common:product_original_price', { productVariant: variant }) }}</del></span>

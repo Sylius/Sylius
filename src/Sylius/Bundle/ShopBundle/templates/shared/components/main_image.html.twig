@@ -6,4 +6,4 @@
     {% set path = asset('build/shop/images/200x200.png', 'shop') %}
 {% endif %}
 
-<img class="{{ class|default('img-fluid') }}" src="{{ path }}" {{ sylius_test_html_attribute('main-image') }} alt="{{ product.name }}" />
+<img {{ attributes.defaults({ class: 'img-fluid' }) }} src="{{ path }}" {{ sylius_test_html_attribute('main-image') }} alt="{{ product.name }}" />
