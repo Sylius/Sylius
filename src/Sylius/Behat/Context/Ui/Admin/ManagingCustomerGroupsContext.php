@@ -15,8 +15,8 @@ namespace Sylius\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Element\Admin\CustomerGroup\FormElementInterface;
-use Sylius\Behat\Page\Admin\Crud\IndexPageInterface;
 use Sylius\Behat\Page\Admin\Crud\CreatePageInterface;
+use Sylius\Behat\Page\Admin\Crud\IndexPageInterface;
 use Sylius\Behat\Page\Admin\Crud\UpdatePageInterface;
 use Sylius\Component\Customer\Model\CustomerGroupInterface;
 use Webmozart\Assert\Assert;
