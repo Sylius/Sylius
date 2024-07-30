@@ -1,0 +1,22 @@
+<div {{ sylius_test_html_attribute('product') }}>
+    <a class="link-reset" href="{{ path('sylius_shop_product_show', {'slug': product.slug, '_locale': product.translation.locale}) }}" {{ sylius_test_html_attribute('product-content') }}>
+        <div class="mb-4">
+            <div class="overflow-auto bg-light rounded-3" style="aspect-ratio: 3/4; ">
+                {{ component('sylius_shop:main_image', { product: product, class: "w-100 h-100 object-fit-cover" }) }}
+            </div>
+        </div>
+        <div class="h6" {{ sylius_test_html_attribute('product-name', product.name) }}>
+            {{ product.name }}
+        </div>
+    </a>
+    <div>
+        {% if not product.enabledVariants.empty() %}
+            {{ component('sylius_shop:catalog_promotions', { variant: variant, appliedPromotions: applied_promotions, withDescription: false }) }}
+
+            {% if has_discount %}
+                <span {{ sylius_test_html_attribute('product-original-price') }}><del>{{ component('sylius_shop:common:product_original_price', { productVariant: variant }) }}</del></span>
+            {% endif %}
+            <span {{ sylius_test_html_attribute('product-price') }}>{{ component('sylius_shop:common:product_price', { productVariant: variant }) }}</span>
+        {% endif %}
+    </div>
+</div>

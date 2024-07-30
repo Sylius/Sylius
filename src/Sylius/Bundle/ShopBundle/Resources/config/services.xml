@@ -17,7 +17,7 @@
         <import resource="services/email.xml" />
         <import resource="services/listeners.xml" />
         <import resource="services/menu.xml" />
-        <import resource="services/twig.xml" />
+        <import resource="services/twig/**.xml" />
     </imports>
     <services>
         <defaults public="true" />
