@@ -77,40 +77,38 @@ twig_hooks:
                 configuration:
                     title: 'sylius.ui.from_a_to_z'
                     sorting:
-                        key: 'name'
-                        value: 'asc'
+                        name: 'sorting'
+                        value:
+                            name: 'asc'
             z_to_a:
                 template: "@SyliusShop/product/index/page/body/main/filters/controls/sorting/menu/item.html.twig"
                 configuration:
                     title: 'sylius.ui.from_z_to_a'
                     sorting:
-                        key: 'name'
-                        value: 'desc'
+                        name: 'sorting'
+                        value:
+                            name: 'desc'
             newest:
                 template: "@SyliusShop/product/index/page/body/main/filters/controls/sorting/menu/item.html.twig"
                 configuration:
                     title: 'sylius.ui.newest_first'
                     sorting:
-                        key: 'createdAt'
-                        value: 'desc'
+                        createdAt: 'desc'
             oldest:
                 template: "@SyliusShop/product/index/page/body/main/filters/controls/sorting/menu/item.html.twig"
                 configuration:
                     title: 'sylius.ui.oldest_first'
                     sorting:
-                        key: 'createdAt'
-                        value: 'asc'
+                        createdAt: 'asc'
             cheapest:
                 template: "@SyliusShop/product/index/page/body/main/filters/controls/sorting/menu/item.html.twig"
                 configuration:
                     title: 'sylius.ui.cheapest_first'
                     sorting:
-                        key: 'price'
-                        value: 'asc'
+                        price: 'asc'
             most_expensive:
                 template: "@SyliusShop/product/index/page/body/main/filters/controls/sorting/menu/item.html.twig"
                 configuration:
                     title: 'sylius.ui.most_expensive_first'
                     sorting:
-                        key: 'price'
-                        value: 'desc'
+                        price: 'desc'
