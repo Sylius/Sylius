@@ -485,6 +485,17 @@ final readonly class ManagingZonesContext implements Context
         );
     }
 
+    /**
+     * @Then I should be notified that :type is not a valid zone type
+     */
+    public function iShouldBeNotifiedThatIsNotAValidZoneType(string $type): void
+    {
+        Assert::contains(
+            $this->responseChecker->getError($this->client->getLastResponse()),
+            sprintf('Type "%s" is invalid. Allowed types are:', $type),
+        );
+    }
+
     private function removeZoneMember(CountryInterface|ProvinceInterface|ZoneInterface $objectToRemove): void
     {
         $members = $this->client->getContent()['members'];

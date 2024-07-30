@@ -99,3 +99,13 @@ Feature: Zone validation
         And I try to add it
         Then I should be notified that "NA" is not a valid zone code
         And zone with name "America" should not be added
+
+    @api @no-ui
+    Scenario: Trying to add a zone with wrong type
+        When I want to create a new zone consisting of wrong_type
+        And I name it "European Union"
+        And I specify its code as "EU"
+        And I add a country "France"
+        And I try to add it
+        Then I should be notified that "wrong_type" is not a valid zone type
+        And zone with name "European Union" should not be added
