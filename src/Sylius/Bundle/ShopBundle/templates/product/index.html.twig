@@ -2,16 +2,6 @@
 
 {% block content %}
     <div class="container mt-4 mb-5">
-        {{ sylius_template_event('sylius.shop.product.index.header', _context) }}
-
-        <div class="row mt-5">
-            <div class="col-12 col-lg-3">
-                {{ sylius_template_event('sylius.shop.product.index.sidebar', _context) }}
-            </div>
-
-            <div class="col-12 col-lg-9">
-                {{ sylius_template_event('sylius.shop.product.index.main', _context) }}
-            </div>
-        </div>
+        {% hook 'sylius_shop.product.index.page' with { products, resources } %}
     </div>
 {% endblock %}

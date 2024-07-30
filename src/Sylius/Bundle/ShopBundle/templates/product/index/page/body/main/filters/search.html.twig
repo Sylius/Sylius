@@ -1,0 +1,7 @@
+<div class="col">
+    <form method="get" action="{{ path('sylius_shop_product_index', {'slug': app.request.attributes.get('slug')}) }}">
+        <div class="input-group">
+            {% hook 'search' %}
+        </div>
+    </form>
+</div>
