@@ -71,6 +71,7 @@ class ProductCardComponent
                 ->calculateOriginal($this->variant, ['channel' => $this->channelContext->getChannel()])
             >
             $this->productVariantPricesCalculator
-                ->calculate($this->variant, ['channel' => $this->channelContext->getChannel()]);
+                ->calculate($this->variant, ['channel' => $this->channelContext->getChannel()])
+        ;
     }
 }

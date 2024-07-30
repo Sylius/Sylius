@@ -49,7 +49,7 @@ final class HomepageContext implements Context
      */
     public function iShouldSeeProductsInTheList(int $numberOfProducts): void
     {
-        Assert::same(count($this->homePage->getProductsNames('latest_products')), $numberOfProducts);
+        Assert::same(count($this->homePage->getLatestProductsNames()), $numberOfProducts);
     }
 
     /**
@@ -57,7 +57,7 @@ final class HomepageContext implements Context
      */
     public function iShouldSeeProduct(string $productName): void
     {
-        Assert::inArray($productName, $this->homePage->getProductsNames('latest_products'));
+        Assert::inArray($productName, $this->homePage->getLatestProductsNames());
     }
 
     /**
@@ -65,7 +65,7 @@ final class HomepageContext implements Context
      */
     public function iShouldNotSeeProduct(string $productName): void
     {
-        Assert::true(!in_array($productName, $this->homePage->getProductsNames('latest_products')));
+        Assert::true(!in_array($productName, $this->homePage->getLatestProductsNames()));
     }
 
     /**
@@ -106,6 +106,6 @@ final class HomepageContext implements Context
      */
     public function iShouldSeeProductsInTheDealsList(int $numberOfProducts): void
     {
-        Assert::same(count($this->homePage->getProductsNames('latest_deals')), $numberOfProducts);
+        Assert::same(count($this->homePage->getLatestDealsNames()), $numberOfProducts);
     }
 }

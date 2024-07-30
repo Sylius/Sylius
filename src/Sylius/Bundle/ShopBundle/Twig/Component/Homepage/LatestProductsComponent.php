@@ -40,7 +40,7 @@ class LatestProductsComponent
      * @return array<ProductInterface>
      */
     #[ExposeInTemplate(name: 'latest_products')]
-    public function getLatestDeals(): array
+    public function getLatestProducts(): array
     {
         /** @var ChannelInterface $channel */
         $channel = $this->channelContext->getChannel();

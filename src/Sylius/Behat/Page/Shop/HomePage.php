@@ -89,7 +89,17 @@ class HomePage extends SymfonyPage implements HomePageInterface
         $this->getElement('locale_selector')->clickLink($localeCode);
     }
 
-    public function getProductsNames(string $elementName): array
+    public function getLatestProductsNames(): array
+    {
+        return $this->getProductsNames('latest_products');
+    }
+
+    public function getLatestDealsNames(): array
+    {
+        return $this->getProductsNames('latest_products');
+    }
+
+    private function getProductsNames(string $elementName): array
     {
         return array_map(
             fn (NodeElement $element) => $element->getText(),
@@ -102,8 +112,8 @@ class HomePage extends SymfonyPage implements HomePageInterface
         return array_merge(parent::getDefinedElements(), [
             'currency_selector' => '[data-test-currency-selector]',
             'full_name' => '[data-test-full-name]',
-            'latest_products' => '[data-test-latest-products]',
             'latest_deals' => '[data-test-latest-deals]',
+            'latest_products' => '[data-test-latest-products]',
             'locale_selector' => '[data-test-locale-selector]',
             'logout_button' => '[data-test-logout-button]',
         ]);
