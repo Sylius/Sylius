@@ -71,11 +71,11 @@ final class ZonesTest extends JsonApiTestCase
             content: json_encode([
                 'code' => 'US',
                 'name' => 'UnitedStates',
-                'type' => 'province',
+                'type' => 'country',
                 'members' => [
-                    ['code' => 'AL'],
-                    ['code' => 'CA'],
-                    ['code' => 'NY'],
+                    ['code' => 'NL'],
+                    ['code' => 'BE'],
+                    ['code' => 'PL'],
                 ],
             ]),
         );

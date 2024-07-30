@@ -158,6 +158,9 @@ sylius:
     product_translation:
         short_description:
             max: Short description must not be longer then {{ limit }} characters.
+    province:
+        code:
+            not_exist: Province with code {{ code }} does not exist.
     review:
         author:
             not_blank: Please enter your email.
@@ -192,3 +195,6 @@ sylius:
             max: Last name must not be longer than {{ limit }} characters.
         locale_code:
             not_blank: Please choose a locale.
+    zone:
+        code:
+            not_exist: Zone with code {{ code }} does not exist.

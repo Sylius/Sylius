@@ -16,6 +16,7 @@ namespace Sylius\Bundle\ApiBundle\StateProcessor\Admin\Zone;
 use ApiPlatform\Metadata\DeleteOperationInterface;
 use ApiPlatform\Metadata\Operation;
 use ApiPlatform\State\ProcessorInterface;
+use Doctrine\DBAL\Exception\ForeignKeyConstraintViolationException;
 use Sylius\Bundle\ApiBundle\Exception\ZoneCannotBeRemoved;
 use Sylius\Component\Addressing\Checker\ZoneDeletionCheckerInterface;
 use Sylius\Component\Addressing\Model\ZoneInterface;
@@ -39,6 +40,10 @@ final readonly class RemoveProcessor implements ProcessorInterface
             throw new ZoneCannotBeRemoved();
         }
 
-        $this->removeProcessor->process($data, $operation, $uriVariables, $context);
+        try {
+            $this->removeProcessor->process($data, $operation, $uriVariables, $context);
+        } catch (ForeignKeyConstraintViolationException) {
+            throw new ZoneCannotBeRemoved();
+        }
     }
 }

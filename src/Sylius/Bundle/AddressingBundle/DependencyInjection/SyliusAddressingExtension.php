@@ -30,5 +30,6 @@ final class SyliusAddressingExtension extends AbstractResourceExtension
         $loader->load('services.xml');
 
         $container->setParameter('sylius.scope.zone', $config['scopes']);
+        $container->setParameter('sylius.addressing.zone_member.validation_groups', $config['zone_member']['validation_groups']);
     }
 }
