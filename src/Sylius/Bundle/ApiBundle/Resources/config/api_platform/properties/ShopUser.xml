@@ -16,4 +16,12 @@
             xsi:schemaLocation="https://api-platform.com/schema/metadata/properties-3.0 https://api-platform.com/schema/metadata/properties-3.0.xsd"
 >
     <property resource="Sylius\Component\Core\Model\ShopUser" name="id" identifier="true" />
+    <property resource="Sylius\Component\Core\Model\ShopUser" name="verifiedAt" >
+        <openapiContext>
+            <values>
+                <value name="type">boolean</value>
+                <value name="example">true</value>
+            </values>
+        </openapiContext>
+    </property>
 </properties>
