@@ -37,7 +37,7 @@ final class SyliusAddressingExtensionTest extends AbstractExtensionTestCase
     }
 
     /** @test */
-    public function it_loads_empty_promotion_action_validation_groups_parameter_value(): void
+    public function it_loads_empty_zone_member_validation_groups_parameter_value(): void
     {
         $this->load();
 
