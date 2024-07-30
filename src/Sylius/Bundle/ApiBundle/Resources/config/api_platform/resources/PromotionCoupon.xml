@@ -21,7 +21,7 @@
             <operation class="ApiPlatform\Metadata\GetCollection" uriTemplate="/admin/promotion-coupons">
                 <filters>
                     <filter>sylius.api.order_filter.promotion_coupon</filter>
-                    <filter>sylius_api.doctrine.orm.filter.promotion_coupon_promotion</filter>
+                    <filter>sylius_api.search_filter.promotion_coupon</filter>
                 </filters>
 
                 <order>
