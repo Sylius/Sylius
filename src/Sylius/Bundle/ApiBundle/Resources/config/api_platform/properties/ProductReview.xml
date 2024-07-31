@@ -16,12 +16,4 @@
             xsi:schemaLocation="https://api-platform.com/schema/metadata/properties-3.0 https://api-platform.com/schema/metadata/properties-3.0.xsd"
 >
     <property resource="Sylius\Component\Core\Model\ProductReview" name="id" identifier="true" writable="false"/>
-    <property resource="Sylius\Component\Core\Model\ProductReview" name="createdAt" writable="false"/>
-    <property resource="Sylius\Component\Core\Model\ProductReview" name="updatedAt" writable="false"/>
-    <property resource="Sylius\Component\Core\Model\ProductReview" name="title" required="true" readable="true" writable="true"/>
-    <property resource="Sylius\Component\Core\Model\ProductReview" name="rating" readable="true" writable="true"/>
-    <property resource="Sylius\Component\Core\Model\ProductReview" name="comment" readable="true" writable="true"/>
-    <property resource="Sylius\Component\Core\Model\ProductReview" name="author" readable="true" writable="true"/>
-    <property resource="Sylius\Component\Core\Model\ProductReview" name="status" readable="true" writable="true"/>
-    <property resource="Sylius\Component\Core\Model\ProductReview" name="reviewSubject" readable="true" writable="true"/>
 </properties>

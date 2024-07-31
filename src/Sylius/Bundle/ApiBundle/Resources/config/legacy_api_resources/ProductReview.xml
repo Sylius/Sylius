@@ -20,20 +20,6 @@
         <attribute name="validation_groups">sylius</attribute>
 
         <collectionOperations>
-            <collectionOperation name="admin_get">
-                <attribute name="method">GET</attribute>
-                <attribute name="path">/admin/product-reviews</attribute>
-                <attribute name="filters">
-                    <attribute>sylius.api.product_review_status_filter</attribute>
-                </attribute>
-                <attribute name="normalization_context">
-                    <attribute name="groups">
-                        <attribute>admin:product_review:index</attribute>
-                        <attribute>sylius:admin:product_review:index</attribute>
-                    </attribute>
-                </attribute>
-            </collectionOperation>
-
             <collectionOperation name="shop_post">
                 <attribute name="method">POST</attribute>
                 <attribute name="path">/shop/product-reviews</attribute>
@@ -70,17 +56,6 @@
         </collectionOperations>
 
         <itemOperations>
-            <itemOperation name="admin_get">
-                <attribute name="method">GET</attribute>
-                <attribute name="path">/admin/product-reviews/{id}</attribute>
-                <attribute name="normalization_context">
-                    <attribute name="groups">
-                        <attribute>admin:product_review:show</attribute>
-                        <attribute>sylius:admin:product_review:show</attribute>
-                    </attribute>
-                </attribute>
-            </itemOperation>
-
             <itemOperation name="shop_get">
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/shop/product-reviews/{id}</attribute>
@@ -88,66 +63,6 @@
                     <attribute name="groups">
                         <attribute>shop:product_review:show</attribute>
                         <attribute>sylius:shop:product_review:show</attribute>
-                    </attribute>
-                </attribute>
-            </itemOperation>
-
-            <itemOperation name="admin_delete">
-                <attribute name="method">DELETE</attribute>
-                <attribute name="path">/admin/product-reviews/{id}</attribute>
-                <attribute name="denormalization_context">
-                    <attribute name="groups">
-                        <attribute>admin:product_review:update</attribute>
-                        <attribute>sylius:admin:product_review:update</attribute>
-                    </attribute>
-                </attribute>
-            </itemOperation>
-
-            <itemOperation name="admin_put">
-                <attribute name="method">PUT</attribute>
-                <attribute name="path">/admin/product-reviews/{id}</attribute>
-                <attribute name="denormalization_context">
-                    <attribute name="groups">
-                        <attribute>admin:product_review:update</attribute>
-                        <attribute>sylius:admin:product_review:update</attribute>
-                    </attribute>
-                </attribute>
-                <attribute name="normalization_context">
-                    <attribute name="groups">
-                        <attribute>admin:product_review:show</attribute>
-                        <attribute>sylius:admin:product_review:show</attribute>
-                    </attribute>
-                </attribute>
-            </itemOperation>
-
-            <itemOperation name="admin_accept">
-                <attribute name="method">PATCH</attribute>
-                <attribute name="path">/admin/product-reviews/{id}/accept</attribute>
-                <attribute name="input">false</attribute>
-                <attribute name="controller">Sylius\Bundle\ApiBundle\Applicator\ProductReviewStateMachineTransitionApplicatorInterface::accept</attribute>
-                <attribute name="openapi_context">
-                    <attribute name="summary">Accepts Product Review.</attribute>
-                </attribute>
-                <attribute name="normalization_context">
-                    <attribute name="groups">
-                        <attribute>admin:product_review:show</attribute>
-                        <attribute>sylius:admin:product_review:show</attribute>
-                    </attribute>
-                </attribute>
-            </itemOperation>
-
-            <itemOperation name="admin_reject">
-                <attribute name="method">PATCH</attribute>
-                <attribute name="path">/admin/product-reviews/{id}/reject</attribute>
-                <attribute name="input">false</attribute>
-                <attribute name="controller">Sylius\Bundle\ApiBundle\Applicator\ProductReviewStateMachineTransitionApplicatorInterface::reject</attribute>
-                <attribute name="openapi_context">
-                    <attribute name="summary">Rejects Product Review.</attribute>
-                </attribute>
-                <attribute name="normalization_context">
-                    <attribute name="groups">
-                        <attribute>admin:product_review:show</attribute>
-                        <attribute>sylius:admin:product_review:show</attribute>
                     </attribute>
                 </attribute>
             </itemOperation>

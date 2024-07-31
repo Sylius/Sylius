@@ -1,6 +1,6 @@
 {
     "@context": "\/api\/v2\/contexts\/ProductReview",
-    "@id": "\/api\/v2\/admin\/product-reviews\/@integer@",
+    "@id": "\/api\/v2\/admin\/product-reviews\/@integer@\/reject",
     "@type": "ProductReview",
     "id": "@integer@",
     "title": "Hello",
