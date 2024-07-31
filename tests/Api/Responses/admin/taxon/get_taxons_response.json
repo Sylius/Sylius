@@ -26,7 +26,7 @@
             ],
             "translations": {
                 "en_US": {
-                    "@id": "\/api\/v2\/admin\/taxon-translations\/@integer@",
+                    "@id": "\/api\/v2\/admin\/taxon\/CATEGORY\/translations\/en_US",
                     "@type": "TaxonTranslation",
                     "id": "@integer@",
                     "name": "Categories",
@@ -46,7 +46,7 @@
             "images": [],
             "translations": {
                 "en_US": {
-                    "@id": "\/api\/v2\/admin\/taxon-translations\/@integer@",
+                    "@id": "\/api\/v2\/admin\/taxon\/MUG\/translations\/en_US",
                     "@type": "TaxonTranslation",
                     "id": "@integer@",
                     "name": "Mugs",
@@ -54,7 +54,7 @@
                     "description": "Some description Lorem ipsum dolor sit amet."
                 },
                 "de_DE": {
-                    "@id": "\/api\/v2\/admin\/taxon-translations\/@integer@",
+                    "@id": "\/api\/v2\/admin\/taxon\/MUG\/translations\/de_DE",
                     "@type": "TaxonTranslation",
                     "id": "@integer@",
                     "name": "Tassen",
@@ -75,7 +75,7 @@
             "images": [],
             "translations": {
                 "en_US": {
-                    "@id": "\/api\/v2\/admin\/taxon-translations\/@integer@",
+                    "@id": "\/api\/v2\/admin\/taxon\/HAT\/translations\/en_US",
                     "@type": "TaxonTranslation",
                     "id": "@integer@",
                     "name": "Hats",
@@ -83,7 +83,7 @@
                     "description": "Some description Lorem ipsum dolor sit amet."
                 },
                 "de_DE": {
-                    "@id": "\/api\/v2\/admin\/taxon-translations\/@integer@",
+                    "@id": "\/api\/v2\/admin\/taxon\/HAT\/translations\/de_DE",
                     "@type": "TaxonTranslation",
                     "id": "@integer@",
                     "name": "Hüte",
@@ -115,7 +115,7 @@
             ],
             "translations": {
                 "en_US": {
-                    "@id": "\/api\/v2\/admin\/taxon-translations\/@integer@",
+                    "@id": "\/api\/v2\/admin\/taxon\/T_SHIRTS\/translations\/en_US",
                     "@type": "TaxonTranslation",
                     "id": "@integer@",
                     "name": "T-Shirts",
@@ -123,7 +123,7 @@
                     "description": "Some description Lorem ipsum dolor sit amet."
                 },
                 "de_DE": {
-                    "@id": "\/api\/v2\/admin\/taxon-translations\/@integer@",
+                    "@id": "\/api\/v2\/admin\/taxon\/T_SHIRTS\/translations\/de_DE",
                     "@type": "TaxonTranslation",
                     "id": "@integer@",
                     "name": "T-Shirts",
@@ -144,7 +144,7 @@
             "images": [],
             "translations": {
                 "en_US": {
-                    "@id": "\/api\/v2\/admin\/taxon-translations\/@integer@",
+                    "@id": "\/api\/v2\/admin\/taxon\/MEN_T_SHIRTS\/translations\/en_US",
                     "@type": "TaxonTranslation",
                     "id": "@integer@",
                     "name": "Men T-Shirts",
@@ -152,7 +152,7 @@
                     "description": "Some description Lorem ipsum dolor sit amet."
                 },
                 "de_DE": {
-                    "@id": "\/api\/v2\/admin\/taxon-translations\/@integer@",
+                    "@id": "\/api\/v2\/admin\/taxon\/MEN_T_SHIRTS\/translations\/de_DE",
                     "@type": "TaxonTranslation",
                     "id": "@integer@",
                     "name": "Männer T-Shirts",
@@ -173,7 +173,7 @@
             "images": [],
             "translations": {
                 "en_US": {
-                    "@id": "\/api\/v2\/admin\/taxon-translations\/@integer@",
+                    "@id": "\/api\/v2\/admin\/taxon\/WOMEN_T_SHIRTS\/translations\/en_US",
                     "@type": "TaxonTranslation",
                     "id": "@integer@",
                     "name": "Women T-Shirts",
@@ -181,7 +181,7 @@
                     "description": "Some description Lorem ipsum dolor sit amet."
                 },
                 "de_DE": {
-                    "@id": "\/api\/v2\/admin\/taxon-translations\/@integer@",
+                    "@id": "\/api\/v2\/admin\/taxon\/WOMEN_T_SHIRTS\/translations\/de_DE",
                     "@type": "TaxonTranslation",
                     "id": "@integer@",
                     "name": "Frauen T-Shirts",
@@ -202,7 +202,7 @@
             "images": [],
             "translations": {
                 "en_US": {
-                    "@id": "\/api\/v2\/admin\/taxon-translations\/@integer@",
+                    "@id": "\/api\/v2\/admin\/taxon\/BRAND\/translations\/en_US",
                     "@type": "TaxonTranslation",
                     "id": "@integer@",
                     "name": "Brands",
@@ -210,7 +210,7 @@
                     "description": "Some description Lorem ipsum dolor sit amet."
                 },
                 "de_DE": {
-                    "@id": "\/api\/v2\/admin\/taxon-translations\/@integer@",
+                    "@id": "\/api\/v2\/admin\/taxon\/BRAND\/translations\/de_DE",
                     "@type": "TaxonTranslation",
                     "id": "@integer@",
                     "name": "Marken",
@@ -231,7 +231,7 @@
             "images": [],
             "translations": {
                 "en_US": {
-                    "@id": "\/api\/v2\/admin\/taxon-translations\/@integer@",
+                    "@id": "\/api\/v2\/admin\/taxon\/de%3Flol=xd%23boom\/translations\/en_US",
                     "@type": "TaxonTranslation",
                     "id": "@integer@",
                     "name": "Yet another taxon",

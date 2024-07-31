@@ -19,7 +19,11 @@
     <resource class="Sylius\Component\Taxonomy\Model\TaxonTranslation">
         <operations>
 
-            <operation class="ApiPlatform\Metadata\Get" uriTemplate="/admin/taxon-translations/{id}">
+            <operation class="ApiPlatform\Metadata\NotExposed" uriTemplate="/admin/taxon/{code}/translations/{localeCode}">
+                <uriVariables>
+                    <uriVariable parameterName="code" fromClass="Sylius\Component\Core\Model\Taxon" fromProperty="translations"/>
+                    <uriVariable parameterName="localeCode" fromClass="Sylius\Component\Taxonomy\Model\TaxonTranslation"/>
+                </uriVariables>
                 <normalizationContext>
                     <values>
                         <value name="groups">
@@ -30,15 +34,6 @@
                         </value>
                     </values>
                 </normalizationContext>
-                <validationContext>
-                    <values>
-                        <value name="groups">
-                            <values>
-                                <value>sylius</value>
-                            </values>
-                        </value>
-                    </values>
-                </validationContext>
             </operation>
 
         </operations>
