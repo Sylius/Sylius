@@ -14,6 +14,7 @@ import $ from 'jquery';
  */
 const toggleConfigurableProduct = (isChecked) => {
   const $segments = $('#sylius_product_variant_channelPricings .ui.segment[data-disabled-channel-pricing]:not(.bottom.attached.tab)');
+  if ($segments.length === 0) return;
   $segments.toggle(isChecked);
 };
 
