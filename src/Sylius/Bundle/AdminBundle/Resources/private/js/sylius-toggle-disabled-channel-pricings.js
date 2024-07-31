@@ -39,7 +39,8 @@ const toggleSimpleProduct = (isChecked) => {
   });
 
   // Update the active tab and segment
-  if ($tabs.length === 1) return;
+  const $allTabs = $channelPricings.find('div.ui.top.attached.tabular.menu a.item');
+  if ($allTabs.length === $tabs.length) return;
 
   const $activeTab = $channelPricings.find('a.item.active');
   const $activeSegment = $channelPricings.find('div.ui.bottom.attached.tab.segment.active');
