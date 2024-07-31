@@ -17,16 +17,6 @@
     xsi:schemaLocation="https://api-platform.com/schema/metadata/resources-3.0 https://api-platform.com/schema/metadata/resources-3.0.xsd"
 >
     <resource class="Sylius\Component\Taxonomy\Model\TaxonTranslation">
-        <validationContext>
-            <values>
-                <value name="groups">
-                    <values>
-                        <value>sylius</value>
-                    </values>
-                </value>
-            </values>
-        </validationContext>
-
         <operations>
 
             <operation class="ApiPlatform\Metadata\Get" uriTemplate="/admin/taxon-translations/{id}">
@@ -40,6 +30,15 @@
                         </value>
                     </values>
                 </normalizationContext>
+                <validationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius</value>
+                            </values>
+                        </value>
+                    </values>
+                </validationContext>
             </operation>
 
         </operations>
