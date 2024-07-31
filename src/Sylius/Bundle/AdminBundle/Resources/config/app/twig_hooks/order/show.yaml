@@ -174,6 +174,8 @@ twig_hooks:
                 template: '@SyliusAdmin/order/show/content/sections/general/language.html.twig'
             channel:
                 template: '@SyliusAdmin/order/show/content/sections/general/channel.html.twig'
+            notes:
+                template: '@SyliusAdmin/order/show/content/sections/general/notes.html.twig'
 
         'sylius_admin.order.show.content.sections.customer':
             full_name:
