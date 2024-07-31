@@ -17,6 +17,12 @@
 >
     <property resource="Sylius\Component\Core\Model\Taxon" name="id" identifier="false" />
     <property resource="Sylius\Component\Core\Model\Taxon" name="code" identifier="true" />
+    <property resource="Sylius\Component\Core\Model\Taxon" name="name" required="true"/>
+    <property resource="Sylius\Component\Core\Model\Taxon" name="slug" required="true"/>
+    <property resource="Sylius\Component\Core\Model\Taxon" name="description" required="true"/>
+    <property resource="Sylius\Component\Core\Model\Taxon" name="parent" readableLink="false" writableLink="false"/>
+    <property resource="Sylius\Component\Core\Model\Taxon" name="children" readableLink="false"/>
+    <property resource="Sylius\Component\Core\Model\Taxon" name="position" writable="true"/>
     <property resource="Sylius\Component\Core\Model\Taxon" name="translations" readable="true" writable="true">
         <openapiContext>
             <values>
@@ -35,4 +41,6 @@
             </values>
         </openapiContext>
     </property>
+
+    <property resource="Sylius\Component\Core\Model\Taxon" name="images" writable="false" required="false"/>
 </properties>
