@@ -17,19 +17,19 @@ interface VariantsElementInterface
 {
     public function countVariantsOnPage(): int;
 
-    public function hasProductVariant(string $name): bool;
+    public function hasProductVariant(string $code): bool;
 
     public function hasProductVariantWithCodePriceAndCurrentStock(
         string $name,
         string $code,
         string $price,
         string $currentStock,
-        string $channel,
+        string $channelCode,
     ): bool;
 
     public function hasProductVariantWithLowestPriceBeforeDiscountInChannel(
-        string $productVariantName,
+        string $productVariantCode,
         string $lowestPriceBeforeDiscount,
-        string $channelName,
+        string $channelCode,
     ): bool;
 }

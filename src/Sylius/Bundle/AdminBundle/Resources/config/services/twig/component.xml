@@ -1,0 +1,410 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  ~ This file is part of the Sylius package.
+  ~
+  ~ (c) Sylius Sp. z o.o.
+  ~
+  ~ For the full copyright and license information, please view the LICENSE
+  ~ file that was distributed with this source code.
+  -->
+
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <service
+            id="sylius_admin.twig.component.catalog_promotion.form"
+            class="Sylius\Bundle\AdminBundle\Twig\Component\CatalogPromotion\FormComponent"
+        >
+            <argument type="service" id="form.factory" />
+            <argument>Sylius\Bundle\AdminBundle\Form\Type\CatalogPromotionType</argument>
+
+            <tag
+                name="sylius.live_component"
+                key="sylius_admin:catalog_promotion:form"
+                template="@SyliusAdmin/catalog_promotion/form.html.twig"
+            />
+        </service>
+
+        <service
+            id="sylius_admin.twig.component.channel.form"
+            class="Sylius\Bundle\AdminBundle\Twig\Component\Channel\FormComponent"
+        >
+            <argument type="service" id="form.factory" />
+            <argument>Sylius\Bundle\AdminBundle\Form\Type\ChannelType</argument>
+
+            <tag
+                name="sylius.live_component"
+                key="sylius_admin:channel:form"
+                template="@SyliusAdmin/channel/form.html.twig"
+            />
+        </service>
+
+        <service
+            id="sylius_admin.twig.component.country.form"
+            class="Sylius\Bundle\AdminBundle\Twig\Component\Country\FormComponent"
+        >
+            <argument type="service" id="form.factory" />
+            <argument>Sylius\Bundle\AdminBundle\Form\Type\CountryType</argument>
+
+            <tag
+                name="sylius.live_component"
+                key="sylius_admin:country:form"
+                template="@SyliusAdmin/country/form.html.twig"
+            />
+        </service>
+
+        <service
+            id="sylius_admin.twig.component.customer_group.form"
+            class="Sylius\Bundle\AdminBundle\Twig\Component\CustomerGroup\FormComponent"
+        >
+            <argument type="service" id="form.factory" />
+            <argument>Sylius\Bundle\AdminBundle\Form\Type\CustomerGroupType</argument>
+
+            <tag
+                name="sylius.live_component"
+                key="sylius_admin:customer_group:form"
+                template="@SyliusAdmin/shared/crud/common/content/form.html.twig"
+            />
+        </service>
+
+        <service
+            id="sylius_admin.twig.component.product_option.form"
+            class="Sylius\Bundle\AdminBundle\Twig\Component\ProductOption\FormComponent"
+        >
+            <argument type="service" id="form.factory" />
+            <argument>Sylius\Bundle\AdminBundle\Form\Type\ProductOptionType</argument>
+
+            <tag
+                name="sylius.live_component"
+                key="sylius_admin:product_option:form"
+                template="@SyliusAdmin/product_option/form.html.twig"
+            />
+        </service>
+
+        <service
+            id="sylius_admin.twig.component.customer.order_statistics"
+            class="Sylius\Bundle\AdminBundle\Twig\Component\Customer\OrderStatisticsComponent"
+        >
+            <argument type="service" id="sylius.repository.customer" />
+            <argument type="service" id="sylius.customer_statistics_provider" />
+
+            <tag
+                name="sylius.live_component"
+                key="sylius_admin:customer:order_statistics"
+                template="@SyliusAdmin/customer/show/component/order_statistics.html.twig"
+            />
+        </service>
+
+        <service
+            id="sylius_admin.twig.component.dashboard.new_customers"
+            class="Sylius\Bundle\AdminBundle\Twig\Component\Dashboard\NewCustomersComponent"
+        >
+            <argument type="service" id="sylius.repository.customer" />
+
+            <tag
+                name="twig.component"
+                key="sylius_admin:dashboard:new_customers"
+                template="@SyliusAdmin/dashboard/index/component/new_customers.html.twig"
+            />
+        </service>
+
+        <service
+            id="sylius_admin.twig.component.dashboard.new_orders"
+            class="Sylius\Bundle\AdminBundle\Twig\Component\Dashboard\NewOrdersComponent"
+        >
+            <argument type="service" id="sylius.repository.order" />
+            <argument type="service" id="sylius.repository.channel" />
+
+            <tag
+                name="sylius.live_component"
+                key="sylius_admin:dashboard:new_orders"
+                template="@SyliusAdmin/dashboard/index/component/new_orders.html.twig"
+            />
+        </service>
+
+        <service
+            id="sylius_admin.twig.component.dashboard.channel_selector"
+            class="Sylius\Bundle\AdminBundle\Twig\Component\Dashboard\ChannelSelectorComponent"
+        >
+            <argument type="service" id="sylius.repository.channel" />
+
+            <call method="setLiveResponder">
+                <argument type="service" id="ux.live_component.live_responder"/>
+            </call>
+
+            <tag
+                name="sylius.live_component"
+                key="sylius_admin:dashboard:channel_selector"
+                template="@SyliusAdmin/dashboard/index/component/channel_selector.html.twig"
+            />
+        </service>
+
+        <service
+            id="sylius_admin.twig.component.dashboard.statistics"
+            class="Sylius\Bundle\AdminBundle\Twig\Component\Dashboard\StatisticsComponent"
+        >
+            <argument type="service" id="sylius.repository.channel" />
+            <argument type="service" id="Sylius\Component\Core\Statistics\Provider\StatisticsProviderInterface" />
+
+            <tag
+                name="sylius.live_component"
+                key="sylius_admin:dashboard:statistics"
+                template="@SyliusAdmin/dashboard/index/component/statistics.html.twig"
+            />
+        </service>
+
+        <service
+            id="sylius_admin.twig.component.order.address_history"
+            class="Sylius\Bundle\AdminBundle\Twig\Component\Order\AddressHistoryComponent"
+        >
+            <argument type="service" id="sylius.repository.address_log_entry" />
+
+            <tag
+                name="twig.component"
+                key="sylius_admin:order:address_history"
+                template="@SyliusAdmin/order/history/content/sections/addresses/address.html.twig"
+            />
+        </service>
+
+        <service
+            id="sylius_admin.twig.component.render_entity_with_template"
+            class="Sylius\Bundle\AdminBundle\Twig\Component\Shared\RenderEntityWithTemplateComponent"
+        >
+            <argument type="service" id="doctrine.orm.entity_manager" />
+
+            <tag
+                name="twig.component"
+                key="sylius_admin:render_entity_with_template"
+                template="@SyliusAdmin/shared/components/render_entity_with_template.html.twig"
+            />
+        </service>
+
+        <service
+            id="sylius_admin.twig.component.order.form"
+            class="Sylius\Bundle\AdminBundle\Twig\Component\Order\FormComponent"
+        >
+            <argument type="service" id="form.factory" />
+            <argument>Sylius\Bundle\AdminBundle\Form\Type\OrderType</argument>
+
+            <tag name="sylius.live_component" key="sylius_admin:order:form" template="@SyliusAdmin/order/form.html.twig" />
+        </service>
+
+        <service
+            id="sylius_admin.twig.component.payment_method.form"
+            class="Sylius\Bundle\AdminBundle\Twig\Component\PaymentMethod\FormComponent"
+        >
+            <argument type="service" id="form.factory" />
+            <argument>Sylius\Bundle\AdminBundle\Form\Type\PaymentMethodType</argument>
+
+            <tag
+                name="twig.component"
+                key="sylius_admin:payment_method:form"
+                template="@SyliusAdmin/payment_method/form.html.twig"
+            />
+        </service>
+
+        <service
+            id="sylius_admin.twig.component.product.form"
+            class="Sylius\Bundle\AdminBundle\Twig\Component\Product\FormComponent"
+        >
+            <argument type="service" id="form.factory" />
+            <argument>Sylius\Bundle\AdminBundle\Form\Type\ProductType</argument>
+            <argument type="service" id="sylius.generator.slug" />
+            <argument type="service" id="sylius.repository.product_attribute" />
+            <argument type="service" id="sylius.factory.product" />
+
+            <call method="setLiveResponder">
+                <argument type="service" id="ux.live_component.live_responder"/>
+            </call>
+
+            <tag name="sylius.live_component" key="sylius_admin:product:form" template="@SyliusAdmin/product/form.html.twig" />
+        </service>
+
+        <service
+            id="sylius_admin.twig.component.product.generate_product_variants_form"
+            class="Sylius\Bundle\AdminBundle\Twig\Component\Product\GenerateProductVariantsFormComponent"
+        >
+            <argument type="service" id="form.factory" />
+            <argument>Sylius\Bundle\AdminBundle\Form\Type\ProductGenerateVariantsType</argument>
+
+            <tag
+                name="sylius.live_component"
+                key="sylius_admin:product:generate_product_variants_form"
+                template="@SyliusAdmin/product/generate_variants/form.html.twig"
+            />
+        </service>
+
+        <service
+            id="sylius_admin.twig.component.product.form.product_taxons"
+            class="Sylius\Bundle\AdminBundle\Twig\Component\Product\Form\ProductTaxonsComponent"
+        >
+            <argument type="service" id="sylius_admin.doctrine.query.taxon.all_taxons" />
+
+            <tag
+                name="sylius.twig_component"
+                key="sylius_admin:product:form:product_taxons"
+                template="@SyliusAdmin/product/form/sections/taxonomy/product_taxons.html.twig"
+            />
+        </service>
+
+        <service
+            id="sylius_admin.twig.component.product.product_attribute_autocomplete"
+            class="Sylius\Bundle\AdminBundle\Twig\Component\Product\ProductAttributeAutocompleteComponent"
+        >
+            <argument type="service" id="ux.autocomplete.checksum_calculator" />
+
+            <call method="setLiveResponder">
+                <argument type="service" id="ux.live_component.live_responder"/>
+            </call>
+
+            <tag
+                name="sylius.live_component"
+                key="sylius_admin:product:product_attribute_autocomplete"
+                template="@SyliusAdmin/product/product_attribute_autocomplete.html.twig"
+            />
+        </service>
+
+        <service
+            id="sylius_admin.twig.component.promotion.form"
+            class="Sylius\Bundle\AdminBundle\Twig\Component\Promotion\FormComponent"
+        >
+            <argument type="service" id="form.factory" />
+            <argument>Sylius\Bundle\AdminBundle\Form\Type\PromotionType</argument>
+
+            <tag
+                name="sylius.live_component"
+                key="sylius_admin:promotion:form"
+                template="@SyliusAdmin/promotion/form.html.twig"
+            />
+        </service>
+
+        <service
+            id="sylius_admin.twig.component.zone.form"
+            class="Sylius\Bundle\AdminBundle\Twig\Component\Zone\FormComponent"
+        >
+            <argument type="service" id="form.factory" />
+            <argument>Sylius\Bundle\AdminBundle\Form\Type\ZoneType</argument>
+
+            <tag
+                name="sylius.live_component"
+                key="sylius_admin:zone:form"
+                template="@SyliusAdmin/zone/form.html.twig"
+            />
+        </service>
+
+        <service
+            id="sylius_admin.twig.component.shared.navbar.notifications"
+            class="Sylius\Bundle\AdminBundle\Twig\Component\Shared\Navbar\NotificationsComponent"
+        >
+            <tag
+                name="twig.component"
+                key="sylius_admin:navbar:notifications"
+                template="@SyliusAdmin/shared/components/navbar/notifications.html.twig"
+            />
+        </service>
+
+        <service
+            id="sylius_admin.twig.component.shared.navbar.user_dropdown"
+            class="Sylius\Bundle\AdminBundle\Twig\Component\Shared\Navbar\UserDropdownComponent"
+        >
+            <argument type="service" id="router" />
+            <argument type="service" id="sylius_admin.logged_in_admin_user_provider" />
+
+            <tag
+                name="twig.component"
+                key="sylius_admin:navbar:user_dropdown"
+                template="@SyliusAdmin/shared/components/navbar/user.html.twig"
+            />
+        </service>
+
+        <service
+            id="sylius_admin.twig_component.shipping_method.form"
+            class="Sylius\Bundle\AdminBundle\Twig\Component\ShippingMethod\FormComponent"
+        >
+            <argument type="service" id="form.factory" />
+            <argument>Sylius\Bundle\AdminBundle\Form\Type\ShippingMethodType</argument>
+
+            <tag
+                name="sylius.live_component"
+                key="sylius_admin:shipping_method:form"
+                template="@SyliusAdmin/shipping_method/form.html.twig"
+            />
+        </service>
+
+        <service
+            id="sylius_admin.twig_component.product_attribute.form"
+            class="Sylius\Bundle\AdminBundle\Twig\Component\ProductAttribute\FormComponent"
+        >
+            <argument type="service" id="form.factory" />
+            <argument>Sylius\Bundle\AdminBundle\Form\Type\ProductAttributeType</argument>
+
+            <tag
+                name="sylius.live_component"
+                key="sylius_admin:product_attribute:form"
+                template="@SyliusAdmin/product_attribute/form.html.twig"
+            />
+        </service>
+
+        <service
+            id="sylius_admin.twig.component.shipment.ship_form"
+            class="Sylius\Bundle\AdminBundle\Twig\Component\Shipment\ShipFormComponent"
+        >
+            <argument type="service" id="form.factory" />
+            <argument>Sylius\Bundle\AdminBundle\Form\Type\ShipmentShipType</argument>
+
+            <tag
+                name="sylius.live_component"
+                key="sylius_admin:shipment:ship_form"
+                template="@SyliusAdmin/shipment/component/ship.html.twig"
+            />
+        </service>
+
+        <service
+            id="sylius_admin.twig.component.taxon.form"
+            class="Sylius\Bundle\AdminBundle\Twig\Component\Taxon\FormComponent"
+        >
+            <argument type="service" id="form.factory" />
+            <argument>Sylius\Bundle\AdminBundle\Form\Type\TaxonType</argument>
+            <argument type="service" id="sylius.repository.taxon" />
+            <argument type="service" id="sylius_admin.generator.taxon_slug" />
+
+            <tag
+                name="sylius.live_component"
+                key="sylius_admin:taxon:form"
+                template="@SyliusAdmin/taxon/sections/form.html.twig"
+            />
+        </service>
+
+        <service
+            id="sylius_admin.twig.component.taxon.tree"
+            class="Sylius\Bundle\AdminBundle\Twig\Component\Taxon\TreeComponent"
+        >
+            <argument type="service" id="sylius_admin.doctrine.query.taxon.all_taxons" />
+            <argument type="service" id="sylius.repository.taxon" />
+            <argument type="service" id="sylius.manager.taxon" />
+
+            <tag
+                name="sylius.live_component"
+                key="sylius_admin:taxon:tree"
+                template="@SyliusAdmin/taxon/sections/tree.html.twig"
+            />
+        </service>
+
+        <service
+            id="sylius_admin.twig.component.taxon.delete"
+            class="Sylius\Bundle\AdminBundle\Twig\Component\Taxon\DeleteComponent"
+        >
+            <argument type="service" id="security.csrf.token_manager" />
+
+            <call method="setLiveResponder">
+                <argument type="service" id="ux.live_component.live_responder"/>
+            </call>
+
+            <tag
+                name="sylius.live_component"
+                key="sylius_admin:taxon:delete"
+                template="@SyliusAdmin/taxon/sections/tree/actions/dropdown/delete.html.twig"
+            />
+        </service>
+    </services>
+</container>

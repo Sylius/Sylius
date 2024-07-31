@@ -1,0 +1,9 @@
+{% from '@SyliusAdmin/shared/helper/icon.html.twig' import icon %}
+
+{% set path = options.link.url|default(path(options.link.route, options.link.parameters|default({}))) %}
+{% set message = action.label %}
+
+<a href="{{ path }}" class="btn">
+    {% if action.icon is not null %}{{ icon({ icon: action.icon, class: 'icon icon-tabler' }) }}{% endif %}
+    {% if message %}{{ message|trans }}{% endif %}
+</a>

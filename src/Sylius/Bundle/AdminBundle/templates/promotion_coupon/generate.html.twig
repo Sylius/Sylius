@@ -1,0 +1,9 @@
+{% extends '@SyliusAdmin/shared/layout/base.html.twig' %}
+
+{% block title %}
+    {{ 'sylius.ui.generate_coupons'|trans }} {{ parent() }}
+{% endblock %}
+
+{% block body %}
+    {% hook 'sylius_admin.promotion_coupon.generate' with { resource: promotion, metadata, configuration, form } %}
+{% endblock %}

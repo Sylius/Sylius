@@ -1,0 +1,46 @@
+twig_hooks:
+    hooks:
+        'sylius_admin.shipping_method.update.content':
+            form:
+                component: 'sylius_admin:shipping_method:form'
+                props:
+                    form: '@=_context.form'
+                    resource: '@=_context.resource'
+                configuration:
+                    method: PUT
+
+        'sylius_admin.shipping_method.update.content.form#left':
+            general:
+                template: '@SyliusAdmin/shipping_method/form/general.html.twig'
+            configuration:
+                template: '@SyliusAdmin/shipping_method/form/configuration.html.twig'
+            rules:
+                template: '@SyliusAdmin/shipping_method/form/rules.html.twig'
+        
+        'sylius_admin.shipping_method.update.content.form#right':
+            translations:
+                template: '@SyliusAdmin/shipping_method/form/translations.html.twig'
+
+        'sylius_admin.shipping_method.update.content.form.general':
+            code:
+                template: '@SyliusAdmin/shipping_method/form/general/code.html.twig'
+            enabled:
+                template: '@SyliusAdmin/shipping_method/form/general/enabled.html.twig'            
+            zone:
+                template: '@SyliusAdmin/shipping_method/form/general/zone.html.twig'
+            position:
+                template: '@SyliusAdmin/shipping_method/form/general/position.html.twig'
+
+        'sylius_admin.shipping_method.update.content.form.configuration':
+            category:
+                template: '@SyliusAdmin/shipping_method/form/configuration/category.html.twig'
+            category_requirement:
+                template: '@SyliusAdmin/shipping_method/form/configuration/category_requirement.html.twig'
+            tax_category:
+                template: '@SyliusAdmin/shipping_method/form/configuration/tax_category.html.twig'
+            calculator:
+                template: '@SyliusAdmin/shipping_method/form/configuration/calculator.html.twig'
+            channels:
+                template: '@SyliusAdmin/shipping_method/form/configuration/channels.html.twig'
+            channels_configuration:
+                template: '@SyliusAdmin/shipping_method/form/configuration/channels_configuration.html.twig'            

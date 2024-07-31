@@ -1,0 +1,17 @@
+{% import '@SyliusAdmin/shared/helper/translations.html.twig' as translations %}
+
+{% set form = hookable_metadata.context.form %}
+{% set prefixes = hookable_metadata.prefixes %}
+
+<div class="tab-pane {% if hookable_metadata.configuration.active|default(false) %}show active{% endif %}" id="product-translations" role="tabpanel" tabindex="0">
+    <div class="card mb-3">
+        <div class="card-header">
+            <h2 class="card-title">
+                {{ 'sylius.ui.translations'|trans }}
+            </h2>
+        </div>
+        <div>
+            {{ translations.with_hook(form.translations, prefixes, null, {accordion_id: 'product-translations', accordion_flush: true}) }}
+        </div>
+    </div>
+</div>

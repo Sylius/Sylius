@@ -66,14 +66,6 @@ final class LocaleContext implements Context
     }
 
     /**
-     * @Transform :localeName
-     */
-    public function castToLocaleName(string $localeCode): string
-    {
-        return $this->localeNameConverter->convertCodeToName($localeCode);
-    }
-
-    /**
      * @Transform :locale
      */
     public function getLocaleByName(string $name): LocaleInterface

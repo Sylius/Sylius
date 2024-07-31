@@ -1,0 +1,7 @@
+<div>
+    {% if hookable_metadata.context.form.vars.value.path is not null %}
+        <span class="avatar avatar-xl" style="background-image: url('{{ hookable_metadata.context.form.vars.value.path|imagine_filter('sylius_small') }}')"></span>
+    {% else %}
+        <span class="avatar avatar-xl"></span>
+    {% endif %}
+</div>

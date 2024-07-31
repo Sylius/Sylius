@@ -14,15 +14,14 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
+use Sylius\Behat\Element\Admin\NotificationsElementInterface;
 use Sylius\Behat\NotificationType;
-use Sylius\Behat\Service\Helper\JavaScriptTestHelperInterface;
-use Sylius\Behat\Service\NotificationCheckerInterface;
+use Webmozart\Assert\Assert;
 
-final class NotificationContext implements Context
+final readonly class NotificationContext implements Context
 {
     public function __construct(
-        private NotificationCheckerInterface $notificationChecker,
-        private JavaScriptTestHelperInterface $testHelper,
+        private NotificationsElementInterface $notificationsElement,
     ) {
     }
 
@@ -31,11 +30,7 @@ final class NotificationContext implements Context
      */
     public function iShouldBeNotifiedItHasBeenSuccessfullyCreated(): void
     {
-        $this->testHelper->waitUntilNotificationPopups(
-            $this->notificationChecker,
-            NotificationType::success(),
-            'has been successfully created.',
-        );
+        Assert::true($this->notificationsElement->hasNotification((string) NotificationType::success(), 'has been successfully created.'));
     }
 
     /**
@@ -45,11 +40,7 @@ final class NotificationContext implements Context
      */
     public function iShouldBeNotifiedThatItHasBeenSuccessfullyEdited(): void
     {
-        $this->testHelper->waitUntilNotificationPopups(
-            $this->notificationChecker,
-            NotificationType::success(),
-            'has been successfully updated.',
-        );
+        Assert::true($this->notificationsElement->hasNotification((string) NotificationType::success(), 'has been successfully updated.'));
     }
 
     /**
@@ -58,10 +49,11 @@ final class NotificationContext implements Context
      */
     public function iShouldBeNotifiedThatItHasBeenSuccessfullyDeleted(string $hasHave): void
     {
-        $this->testHelper->waitUntilNotificationPopups(
-            $this->notificationChecker,
-            NotificationType::success(),
-            sprintf('%s been successfully deleted.', $hasHave),
+        Assert::true(
+            $this->notificationsElement->hasNotification(
+                (string) NotificationType::success(),
+                sprintf('%s been successfully deleted.', $hasHave),
+            ),
         );
     }
 
@@ -70,10 +62,11 @@ final class NotificationContext implements Context
      */
     public function iShouldBeNotifiedThatTheRemovalOperationHasStartedSuccessfully(): void
     {
-        $this->testHelper->waitUntilNotificationPopups(
-            $this->notificationChecker,
-            NotificationType::success(),
-            'has been requested. This process can take a while depending on the number of affected products.',
+        Assert::true(
+            $this->notificationsElement->hasNotification(
+                (string) NotificationType::success(),
+                'has been requested. This process can take a while depending on the number of affected products.',
+            ),
         );
     }
 
@@ -82,10 +75,6 @@ final class NotificationContext implements Context
      */
     public function iShouldBeNotifiedThatItIsInUse(): void
     {
-        $this->testHelper->waitUntilNotificationPopups(
-            $this->notificationChecker,
-            NotificationType::failure(),
-            'Cannot delete',
-        );
+        Assert::true($this->notificationsElement->hasNotification((string) NotificationType::error(), 'Cannot delete'));
     }
 }

@@ -1,0 +1,20 @@
+{# Rendered with using \Sylius\Bundle\AdminBundle\TwigComponent\Shipment\ShipType #}
+
+{% form_theme form '@SyliusAdmin/shared/form_theme.html.twig' %}
+{% from '@SyliusAdmin/shared/helper/icon.html.twig' import icon %}
+
+{% if sylius_sm_can(shipment, 'sylius_shipment', 'ship') %}
+    <div {{ attributes }}>
+        {{ form_start(form, {'action': path('sylius_admin_shipment_ship', {id: shipment.id}), 'attr': {'class': 'ui loadable form', 'novalidate': 'novalidate'}}) }}
+        <input type="hidden" name="_method" value="PUT">
+        <div class="input-group flex-nowrap">
+            {{ form_widget(form.tracking, sylius_test_form_attribute('shipment-tracking')|sylius_merge_recursive({'attr': {'placeholder': 'sylius.ui.tracking_code'|trans ~ '...', 'style': 'min-width: 130px;'}})) }}
+            <button type="submit" class="btn btn-primary" {{ sylius_test_html_attribute('shipment-ship-button') }}>
+                {{ icon({icon: 'truck'}) }}
+                {{ 'sylius.ui.ship'|trans }}
+            </button>
+        </div>
+        {{ form_row(form._token) }}
+        {{ form_end(form, {'render_rest': false}) }}
+    </div>
+{% endif %}

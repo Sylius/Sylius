@@ -370,6 +370,7 @@ final class PromotionContext implements Context
     {
         $coupon = $this->createCoupon($couponCode);
         $promotion->addCoupon($coupon);
+        $promotion->setCouponBased(true);
 
         $this->sharedStorage->set('coupon', $coupon);
         $this->objectManager->flush();

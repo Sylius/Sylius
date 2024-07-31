@@ -1,0 +1,148 @@
+twig_hooks:
+    hooks:
+        'sylius_admin.product.create#javascripts':
+            scripts:
+                template: '@SyliusAdmin/product/scripts.html.twig'
+        'sylius_admin.product.create.content':
+            form:
+                component: 'sylius_admin:product:form'
+                props:
+                    form: '@=_context.form'
+                    resource: '@=_context.resource'
+                    isSimple: '@=_context.resource.isSimple()'
+
+        'sylius_admin.product.create.content.form':
+            side_navigation:
+                template: '@SyliusAdmin/product/form/side_navigation.html.twig'
+            sections:
+                template: '@SyliusAdmin/product/form/sections.html.twig'
+
+        'sylius_admin.product.create.content.form.side_navigation':
+            general:
+                template: '@SyliusAdmin/product/form/side_navigation/general.html.twig'
+                configuration:
+                    active: true
+            channel_pricing:
+                template: '@SyliusAdmin/product/form/side_navigation/channel_pricing.html.twig'
+            taxes:
+                template: '@SyliusAdmin/product/form/side_navigation/taxes.html.twig'
+            shipping:
+                template: '@SyliusAdmin/product/form/side_navigation/shipping.html.twig'
+            inventory:
+                template: '@SyliusAdmin/product/form/side_navigation/inventory.html.twig'
+            translations:
+                template: '@SyliusAdmin/product/form/side_navigation/translations.html.twig'
+            taxonomy:
+                template: '@SyliusAdmin/product/form/side_navigation/taxonomy.html.twig'
+            attributes:
+                template: '@SyliusAdmin/product/form/side_navigation/attributes.html.twig'
+            associations:
+                template: '@SyliusAdmin/product/form/side_navigation/associations.html.twig'
+            media:
+                template: '@SyliusAdmin/product/form/side_navigation/media.html.twig'
+
+        'sylius_admin.product.create.content.form.sections':
+            general:
+                template: '@SyliusAdmin/product/form/sections/general.html.twig'
+                configuration:
+                    active: true
+            channel_pricing:
+                template: '@SyliusAdmin/product/form/sections/channel_pricing.html.twig'
+            taxes:
+                template: '@SyliusAdmin/product/form/sections/taxes.html.twig'
+            shipping:
+                template: '@SyliusAdmin/product/form/sections/shipping.html.twig'
+            inventory:
+                template: '@SyliusAdmin/product/form/sections/inventory.html.twig'
+            translations:
+                template: '@SyliusAdmin/product/form/sections/translations.html.twig'
+            taxonomy:
+                template: '@SyliusAdmin/product/form/sections/taxonomy.html.twig'
+            attributes:
+                template: '@SyliusAdmin/product/form/sections/attributes.html.twig'
+            associations:
+                template: '@SyliusAdmin/product/form/sections/associations.html.twig'
+            media:
+                template: '@SyliusAdmin/product/form/sections/media.html.twig'
+
+        'sylius_admin.product.create.content.form.sections.general':
+            code:
+                template: '@SyliusAdmin/product/form/sections/general/code.html.twig'
+            enabled:
+                template: '@SyliusAdmin/product/form/sections/general/enabled.html.twig'
+            shipping_required:
+                template: '@SyliusAdmin/product/form/sections/general/shipping_required.html.twig'
+            channels:
+                template: '@SyliusAdmin/product/form/sections/general/channels.html.twig'
+            translations:
+                template: '@SyliusAdmin/product/form/sections/general/translations.html.twig'
+            options:
+                template: '@SyliusAdmin/product/form/sections/general/options.html.twig'
+            variant_selection_method:
+                template: '@SyliusAdmin/product/form/sections/general/variant_selection_method.html.twig'
+
+        'sylius_admin.product.create.content.form.sections.translations':
+            name:
+                template: '@SyliusAdmin/product/form/sections/translations/name.html.twig'
+            slug:
+                template: '@SyliusAdmin/product/form/sections/translations/slug.html.twig'
+            description:
+                template: '@SyliusAdmin/product/form/sections/translations/description.html.twig'
+            meta_keywords:
+                template: '@SyliusAdmin/product/form/sections/translations/meta_keywords.html.twig'
+            meta_description:
+                template: '@SyliusAdmin/product/form/sections/translations/meta_description.html.twig'
+            short_description:
+                template: '@SyliusAdmin/product/form/sections/translations/short_description.html.twig'
+
+        'sylius_admin.product.create.content.form.sections.channel_pricing':
+            price:
+                template: '@SyliusAdmin/product/form/sections/channel_pricing/price.html.twig'
+            original_price:
+                template: '@SyliusAdmin/product/form/sections/channel_pricing/original_price.html.twig'
+            minimum_price:
+                template: '@SyliusAdmin/product/form/sections/channel_pricing/minimum_price.html.twig'
+
+        'sylius_admin.product.create.content.form.sections.taxes':
+            taxes:
+                template: '@SyliusAdmin/product/form/sections/taxes/taxes.html.twig'
+
+        'sylius_admin.product.create.content.form.sections.shipping':
+            shipping_category:
+                template: '@SyliusAdmin/product/form/sections/shipping/shipping_category.html.twig'
+            width:
+                template: '@SyliusAdmin/product/form/sections/shipping/width.html.twig'
+            height:
+                template: '@SyliusAdmin/product/form/sections/shipping/height.html.twig'
+            depth:
+                template: '@SyliusAdmin/product/form/sections/shipping/depth.html.twig'
+            weight:
+                template: '@SyliusAdmin/product/form/sections/shipping/weight.html.twig'
+
+        'sylius_admin.product.create.content.form.sections.inventory':
+            on_hand:
+                template: '@SyliusAdmin/product/form/sections/inventory/on_hand.html.twig'
+            tracked:
+                template: '@SyliusAdmin/product/form/sections/inventory/tracked.html.twig'
+            version:
+                template: '@SyliusAdmin/product/form/sections/inventory/version.html.twig'
+
+        'sylius_admin.product.create.content.form.sections.taxonomy':
+            main_taxon:
+                template: '@SyliusAdmin/product/form/sections/taxonomy/main_taxon.html.twig'
+            product_taxons:
+                component: 'sylius_admin:product:form:product_taxons'
+                props:
+                    form: '@=_context.form'
+                configuration:
+                    auto_open: false
+
+        'sylius_admin.product.create.content.form.sections.associations':
+            associations:
+                template: '@SyliusAdmin/product/form/sections/associations/associations.html.twig'
+
+        'sylius_admin.product.create.content.form.sections.media':
+            images:
+                template: '@SyliusAdmin/product/form/sections/media/images.html.twig'
+            add_image:
+                template: '@SyliusAdmin/product/form/sections/media/add_image.html.twig'

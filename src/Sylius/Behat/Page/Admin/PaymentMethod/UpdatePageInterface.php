@@ -29,11 +29,19 @@ interface UpdatePageInterface extends BaseUpdatePageInterface
 
     public function setPaypalGatewaySignature(string $signature): void;
 
+    public function enableSandboxMode(): void;
+
+    public function setStripeSecretKey(string $secretKey): void;
+
+    public function setStripePublishableKey(string $publishableKey): void;
+
     public function isCodeDisabled(): bool;
 
     public function isFactoryNameFieldDisabled(): bool;
 
     public function isPaymentMethodEnabled(): bool;
+
+    public function isPaymentMethodInSandboxMode(): bool;
 
     public function isAvailableInChannel(string $channelName): bool;
 

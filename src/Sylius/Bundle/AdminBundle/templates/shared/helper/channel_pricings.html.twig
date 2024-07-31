@@ -1,0 +1,37 @@
+{% macro channel_pricings(channel_pricing_forms, product_variant, body = null, options = {}) %}
+    {% set options = {
+        accordion_id: 'product-channel-pricings'
+    }|merge(options) %}
+    {% set accordion_flush = options.accordion_flush|default(false) %}
+
+    <div class="accordion {{ accordion_flush ? 'accordion-flush' : null }}" id="{{ options.accordion_id }}">
+        {% for channel_code, channel_pricing_form in channel_pricing_forms %}
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button
+                        class="accordion-button {% if loop.first == false %}collapsed{% endif %}"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#channel-pricing-{{ channel_code }}"
+                        aria-expanded="{% if loop.first %}true{% else %}false{% endif %}"
+                        aria-controls="channel-pricing-{{ channel_code }}"
+                        {{ sylius_test_html_attribute('product-channel-pricings-accordion', channel_code) }}
+                    >
+                        {{ channel_pricing_form.vars.label }}
+                    </button>
+                </h2>
+                <div id="channel-pricing-{{ channel_code }}" class="accordion-collapse collapse {% if loop.first %}show{% endif %}" data-bs-parent="#product-channel-pricings">
+                    <div class="accordion-body" {{ sylius_test_html_attribute('product-channel-pricings-accordion-body') }}>
+                        {% if body is not null %}
+                            {{ include(template_from_string(body), { channel_code: channel_code, channel_pricing_form: channel_pricing_form, product_variant: product_variant}) }}
+                        {% else %}
+                            {% for field in channel_pricing_form %}
+                                {{ form_row(field) }}
+                            {% endfor %}
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endmacro %}

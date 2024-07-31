@@ -3,10 +3,12 @@ sylius_admin_product_association_type:
         alias: sylius.product_association_type
         section: admin
         permission: true
-        templates: "@SyliusAdmin\\Crud"
+        templates: "@SyliusAdmin\\shared\\crud"
         except: ['show']
         redirect: update
         grid: sylius_admin_product_association_type
+        form:
+            type: Sylius\Bundle\AdminBundle\Form\Type\ProductAssociationTypeType
         vars:
             all:
                 subheader: sylius.ui.manage_association_types_of_your_products

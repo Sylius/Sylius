@@ -1,0 +1,6 @@
+{% from '@SyliusAdmin/shared/helper/icon.html.twig' import icon %}
+
+<a class="dropdown-item" href="{{ path('sylius_admin_customer_update', {'id': hookable_metadata.context.resource.id}) }}">
+    {{ icon({ icon: 'pencil', class: 'icon dropdown-item-icon icon-tabler' }) }}
+    {{ 'sylius.ui.edit'|trans }}
+</a>

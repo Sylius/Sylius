@@ -14,11 +14,25 @@ declare(strict_types=1);
 namespace Sylius\Behat\Page\Admin\Order;
 
 use Behat\Mink\Element\NodeElement;
+use Behat\Mink\Session;
 use Sylius\Behat\Page\Admin\Crud\IndexPage as BaseIndexPage;
-use Sylius\Behat\Service\AutocompleteHelper;
+use Sylius\Behat\Service\Accessor\TableAccessorInterface;
+use Sylius\Behat\Service\Helper\AutocompleteHelperInterface;
+use Symfony\Component\Routing\RouterInterface;
 
 class IndexPage extends BaseIndexPage implements IndexPageInterface
 {
+    public function __construct(
+        Session $session,
+        $minkParameters,
+        RouterInterface $router,
+        TableAccessorInterface $tableAccessor,
+        string $routeName,
+        private AutocompleteHelperInterface $autocompleteHelper,
+    ) {
+        parent::__construct($session, $minkParameters, $router, $tableAccessor, $routeName);
+    }
+
     public function specifyFilterDateFrom(string $dateTime): void
     {
         $dateAndTime = explode(' ', $dateTime);
@@ -35,17 +49,17 @@ class IndexPage extends BaseIndexPage implements IndexPageInterface
         $this->getDocument()->fillField('criteria_date_to_time', $dateAndTime[1] ?? '');
     }
 
-    public function chooseChannelFilter(string $channelName): void
+    public function specifyFilterChannel(string $channelName): void
     {
-        $this->getElement('filter_channel')->selectOption($channelName);
+        $this->specifyAutocompleteFilter($this->getElement('filter_channel'), $channelName);
     }
 
-    public function chooseShippingMethodFilter(string $methodName): void
+    public function specifyFilterShippingMethod(string $methodName): void
     {
-        $this->getElement('filter_shipping_method')->selectOption($methodName);
+        $this->specifyAutocompleteFilter($this->getElement('filter_shipping_method'), $methodName);
     }
 
-    public function chooseCurrencyFilter(string $currencyName): void
+    public function chooseFilterCurrency(string $currencyName): void
     {
         $this->getElement('filter_currency')->selectOption($currencyName);
     }
@@ -62,16 +76,17 @@ class IndexPage extends BaseIndexPage implements IndexPageInterface
 
     public function specifyFilterProduct(string $productName): void
     {
-        $productFilterElement = $this->getElement('filter_product')->getParent();
-
-        $this->specifyAutocompleteFilter($productFilterElement, $productName);
+        $this->specifyAutocompleteFilter($this->getElement('filter_product'), $productName);
     }
 
     public function specifyFilterVariant(string $variantName): void
     {
-        $variantFilterElement = $this->getElement('filter_variant')->getParent();
+        $this->specifyAutocompleteFilter($this->getElement('filter_variant'), $variantName);
+    }
 
-        $this->specifyAutocompleteFilter($variantFilterElement, $variantName);
+    public function specifyFilterCustomer(string $customerName): void
+    {
+        $this->specifyAutocompleteFilter($this->getElement('filter_customer'), $customerName);
     }
 
     protected function getDefinedElements(): array
@@ -79,27 +94,25 @@ class IndexPage extends BaseIndexPage implements IndexPageInterface
         return array_merge(parent::getDefinedElements(), [
             'filter_channel' => '#criteria_channel',
             'filter_currency' => '#criteria_total_currency',
+            'filter_customer' => '#criteria_customer',
             'filter_product' => '#criteria_product',
             'filter_shipping_method' => '#criteria_shipping_method',
             'filter_variant' => '#criteria_variant',
-            'filters' => '.ui.styled.fluid.accordion:contains("Filters")',
         ]);
     }
 
     private function specifyAutocompleteFilter(NodeElement $autocomplete, string $value): void
     {
-        $this->showFilters();
-
-        AutocompleteHelper::chooseValue($this->getSession(), $autocomplete, $value);
-    }
-
-    private function showFilters(): void
-    {
-        $filters = $this->getElement('filters');
-        if ($filters->find('css', '.title')->hasClass('active')) {
-            return;
+        if (!$this->areFiltersVisible()) {
+            $this->toggleFilters();
         }
 
-        $filters->click();
+        $this->autocompleteHelper->selectByName(
+            $this->getDriver(),
+            $autocomplete->getXpath(),
+            $value,
+        );
+
+        $this->waitForFormUpdate();
     }
 }

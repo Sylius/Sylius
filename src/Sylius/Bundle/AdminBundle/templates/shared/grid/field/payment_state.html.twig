@@ -1,0 +1,18 @@
+{%
+    set viewOptions = {
+    authorized: { color: 'bg-orange-lt' },
+    cancelled: { color: 'bg-yellow-lt' },
+    cart: { color: 'bg-lime-lt' },
+    completed: { color: 'bg-green-lt' },
+    failed: { color: 'bg-red-lt' },
+    new: { color: '' },
+    processing: { color: 'bg-indigo-lt' },
+    refunded: { color: 'bg-purple-lt' },
+}
+%}
+
+{% set value = 'sylius.ui.' ~ data %}
+
+<span class="badge {{ viewOptions[data]['color'] }}">
+    {{ value|trans }}
+</span>

@@ -8,7 +8,8 @@ sylius:
             not_blank: Please enter exchange rate.
     exchange_rate:
         ratio:
-            greater_than: The ratio must be greater than 0.
+            greater_than: The ratio must be greater than {{ compared_value }}.
+            less_than: The ratio must be less than {{ compared_value }}.
             invalid: The ratio must be a number.
             not_blank: Please enter exchange rate ratio.
         source_currency:

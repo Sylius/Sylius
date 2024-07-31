@@ -48,14 +48,6 @@
         <service id="Sylius\Component\Core\Filesystem\Adapter\FlysystemFilesystemAdapter">
             <argument type="service" id="sylius.storage" />
         </service>
-        <service id="Sylius\Component\Core\Filesystem\Adapter\GaufretteFilesystemAdapter">
-            <argument type="service">
-                <service class="Gaufrette\Filesystem">
-                    <argument>%sylius.uploader.filesystem%</argument>
-                    <factory service="knp_gaufrette.filesystem_map" method="get" />
-                </service>
-            </argument>
-        </service>
 
         <service
             id="Sylius\Component\Core\Generator\ImagePathGeneratorInterface"
@@ -139,11 +131,6 @@
         </service>
         <service id="Sylius\Component\Core\Factory\CustomerAfterCheckoutFactoryInterface" alias="sylius.factory.customer_after_checkout" />
 
-        <service id="sylius.twig.extension.product_variants_prices" class="Sylius\Bundle\CoreBundle\Twig\ProductVariantsPricesExtension" public="false">
-            <argument type="service" id="sylius.templating.helper.product_variants_prices" />
-            <tag name="twig.extension" />
-        </service>
-
         <service id="Sylius\Bundle\CoreBundle\Twig\ProductVariantsMapExtension">
             <argument type="service" id="Sylius\Component\Core\Provider\ProductVariantMap\ProductVariantsMapProviderInterface" />
             <tag name="twig.extension" />
@@ -184,7 +171,7 @@
         >
             <argument type="service" id="Sylius\Component\Core\Checker\ProductVariantLowestPriceDisplayCheckerInterface" />
         </service>
-        <service id="Sylius\Component\Core\Calculator\ProductVariantPriceCalculatorInterface" alias="sylius.calculator.product_variant_price" />
+        <service id="Sylius\Component\Core\Calculator\ProductVariantPricesCalculatorInterface" alias="sylius.calculator.product_variant_price" />
 
         <service id="sylius.section_resolver.uri_based_section_resolver" class="Sylius\Bundle\CoreBundle\SectionResolver\UriBasedSectionProvider">
             <argument type="service" id="request_stack" />
@@ -202,7 +189,7 @@
         <service id="Sylius\Bundle\CoreBundle\PriceHistory\Remover\ChannelPricingLogEntriesRemoverInterface" class="Sylius\Bundle\CoreBundle\PriceHistory\Remover\ChannelPricingLogEntriesRemover">
             <argument type="service" id="sylius.repository.channel_pricing_log_entry" />
             <argument type="service" id="doctrine.orm.entity_manager" />
-            <argument type="service" id="Sylius\Calendar\Provider\DateTimeProviderInterface" />
+            <argument type="service" id="clock" />
             <argument type="service" id="event_dispatcher" />
             <argument>%sylius.channel_pricing_log_entry.old_logs_removal_batch_size%</argument>
         </service>

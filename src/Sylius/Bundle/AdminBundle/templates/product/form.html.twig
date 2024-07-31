@@ -1,0 +1,22 @@
+{# Rendered with using \Sylius\Bundle\AdminBundle\TwigComponent\Product\FormComponent #}
+
+{% form_theme form '@SyliusAdmin/product/form_theme.html.twig' %}
+
+<div class="container-xl" {{ attributes }}>
+    {{ form_start(form, {'attr': {'class': 'ui loadable form', 'novalidate': 'novalidate', 'id': form.vars.id}}) }}
+        <div class="row">
+            {% if hookable_metadata.configuration.method is defined %}
+                <input type="hidden" name="_method" value="{{ hookable_metadata.configuration.method }}" />
+            {% endif %}
+            {{ form_errors(form) }}
+            {{ form_widget(form._token) }}
+
+            {% hook 'form' with {
+                mapped_product_attributes,
+                attributes_to_be_added,
+                resource,
+                form,
+            } %}
+        </div>
+    {{ form_end(form, {render_rest: hookable.configuration.render_rest|default(false)}) }}
+</div>

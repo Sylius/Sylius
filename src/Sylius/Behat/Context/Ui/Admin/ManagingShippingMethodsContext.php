@@ -14,34 +14,36 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
-use FriendsOfBehat\PageObjectExtension\Page\SymfonyPageInterface;
-use Sylius\Behat\Context\Ui\Admin\Helper\ValidationTrait;
+use Sylius\Behat\Element\Admin\ShippingMethod\FormElementInterface;
 use Sylius\Behat\Page\Admin\ShippingMethod\CreatePageInterface;
 use Sylius\Behat\Page\Admin\ShippingMethod\IndexPageInterface;
 use Sylius\Behat\Page\Admin\ShippingMethod\UpdatePageInterface;
-use Sylius\Behat\Service\NotificationCheckerInterface;
-use Sylius\Behat\Service\Resolver\CurrentPageResolverInterface;
+use Sylius\Behat\Service\SharedStorageInterface;
+use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Channel\Model\ChannelInterface;
+use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\ShippingMethodInterface;
+use Sylius\Component\Core\Shipping\Checker\Rule\OrderTotalGreaterThanOrEqualRuleChecker;
+use Sylius\Component\Core\Shipping\Checker\Rule\OrderTotalLessThanOrEqualRuleChecker;
+use Sylius\Component\Shipping\Checker\Rule\TotalWeightGreaterThanOrEqualRuleChecker;
+use Sylius\Component\Shipping\Checker\Rule\TotalWeightLessThanOrEqualRuleChecker;
 use Webmozart\Assert\Assert;
 
-final class ManagingShippingMethodsContext implements Context
+final readonly class ManagingShippingMethodsContext implements Context
 {
-    use ValidationTrait;
-
     public function __construct(
         private IndexPageInterface $indexPage,
         private CreatePageInterface $createPage,
         private UpdatePageInterface $updatePage,
-        private CurrentPageResolverInterface $currentPageResolver,
-        private NotificationCheckerInterface $notificationChecker,
+        private FormElementInterface $shippingMethodFormElement,
+        private SharedStorageInterface $sharedStorage,
     ) {
     }
 
     /**
      * @When I want to create a new shipping method
      */
-    public function iWantToCreateANewShippingMethod()
+    public function iWantToCreateANewShippingMethod(): void
     {
         $this->createPage->open();
     }
@@ -52,56 +54,56 @@ final class ManagingShippingMethodsContext implements Context
      */
     public function iSpecifyItsCodeAs(?string $code = null): void
     {
-        $this->createPage->specifyCode($code ?? '');
+        $this->shippingMethodFormElement->setCode($code ?? '');
     }
 
     /**
      * @When I specify its position as :position
      */
-    public function iSpecifyItsPositionAs(?int $position = null)
+    public function iSpecifyItsPositionAs(int $position): void
     {
-        $this->createPage->specifyPosition($position);
+        $this->shippingMethodFormElement->setPosition($position);
     }
 
     /**
      * @When I name it :name in :language
      * @When I rename it to :name in :language
      */
-    public function iNameItIn($name, $language)
+    public function iNameItIn(string $name, string $language): void
     {
-        $this->createPage->nameIt($name, $language);
+        $this->shippingMethodFormElement->setName($name, $language);
     }
 
     /**
      * @When I describe it as :description in :language
      */
-    public function iDescribeItAsIn($description, $language)
+    public function iDescribeItAsIn(string $description, string $language): void
     {
-        $this->createPage->describeIt($description, $language);
+        $this->shippingMethodFormElement->setDescription($description, $language);
     }
 
     /**
-     * @When I define it for the zone named :zoneName
+     * @When I define it for the zone named :zone
      */
-    public function iDefineItForTheZone(string $zoneName): void
+    public function iDefineItForTheZone(ZoneInterface $zone): void
     {
-        $this->createPage->chooseZone($zoneName);
+        $this->shippingMethodFormElement->setZoneCode($zone->getCode());
+    }
+
+    /**
+     * @When I make it available in channel :channel
+     */
+    public function iMakeItAvailableInChannel(ChannelInterface $channel): void
+    {
+        $this->shippingMethodFormElement->checkChannel($channel->getCode());
     }
 
     /**
      * @When I specify its amount as :amount for :channel channel
      */
-    public function iSpecifyItsAmountForChannel($amount, ChannelInterface $channel)
+    public function iSpecifyItsAmountForChannel(int $amount, ChannelInterface $channel): void
     {
-        $this->createPage->specifyAmountForChannel($channel->getCode(), $amount);
-    }
-
-    /**
-     * @When I make it available in channel :channelName
-     */
-    public function iMakeItAvailableInChannel($channelName)
-    {
-        $this->createPage->checkChannel($channelName);
+        $this->shippingMethodFormElement->setCalculatorConfigurationAmountForChannel($channel->getCode(), $amount);
     }
 
     /**
@@ -117,9 +119,9 @@ final class ManagingShippingMethodsContext implements Context
      * @When I choose :calculatorName calculator
      * @When I do not specify amount for :calculatorName calculator
      */
-    public function iChooseCalculator($calculatorName)
+    public function iChooseCalculator(string $calculatorName): void
     {
-        $this->createPage->chooseCalculator($calculatorName);
+        $this->shippingMethodFormElement->chooseCalculator($calculatorName);
     }
 
     /**
@@ -169,15 +171,22 @@ final class ManagingShippingMethodsContext implements Context
     }
 
     /**
-     * @Then the shipping method :shippingMethod should be available in channel :channelName
+     * @Then the shipping method :shippingMethod should be available in channel :channel
      */
     public function theShippingMethodShouldBeAvailableInChannel(
         ShippingMethodInterface $shippingMethod,
-        $channelName,
-    ) {
+        ChannelInterface $channel,
+    ): void {
         $this->iWantToModifyAShippingMethod($shippingMethod);
 
-        Assert::true($this->updatePage->isAvailableInChannel($channelName));
+        Assert::true(
+            $this->shippingMethodFormElement->hasCheckedChannel($channel->getCode()),
+            sprintf(
+                'Shipping method %s should be available in channel %s, but it is not.',
+                $shippingMethod->getName(),
+                $channel->getCode(),
+            ),
+        );
     }
 
     /**
@@ -185,7 +194,7 @@ final class ManagingShippingMethodsContext implements Context
      */
     public function iShouldBeNotifiedThatShippingMethodWithThisCodeAlreadyExists()
     {
-        Assert::same($this->createPage->getValidationMessage('code'), 'The shipping method with given code already exists.');
+        Assert::same($this->shippingMethodFormElement->getValidationMessage('code'), 'The shipping method with given code already exists.');
     }
 
     /**
@@ -212,7 +221,7 @@ final class ManagingShippingMethodsContext implements Context
      */
     public function theCodeFieldShouldBeDisabled()
     {
-        Assert::true($this->updatePage->isCodeDisabled());
+        Assert::true($this->shippingMethodFormElement->isCodeDisabled());
     }
 
     /**
@@ -239,11 +248,25 @@ final class ManagingShippingMethodsContext implements Context
     }
 
     /**
-     * @Then I should be notified that :element is required
+     * @Then /^I should be notified that (code) is required$/
      */
-    public function iShouldBeNotifiedThatIsRequired($element)
+    public function iShouldBeNotifiedThatCodeIsRequired(string $field): void
     {
-        $this->assertFieldValidationMessage($element, sprintf('Please enter shipping method %s.', $element));
+        Assert::same(
+            $this->shippingMethodFormElement->getValidationMessage($field),
+            sprintf('Please enter shipping method %s.', $field),
+        );
+    }
+
+    /**
+     * @Then I should be notified that name is required
+     */
+    public function iShouldBeNotifiedThatNameIsRequired($localeCode = 'en_US'): void
+    {
+        Assert::same(
+            $this->shippingMethodFormElement->getValidationMessage('name', ['%localeCode%' => $localeCode]),
+            'Please enter shipping method name.',
+        );
     }
 
     /**
@@ -260,19 +283,17 @@ final class ManagingShippingMethodsContext implements Context
     /**
      * @When I archive the :name shipping method
      */
-    public function iArchiveTheShippingMethod($name)
+    public function iArchiveTheShippingMethod(string $name): void
     {
-        $actions = $this->indexPage->getActionsForResource(['name' => $name]);
-        $actions->pressButton('Archive');
+        $this->indexPage->archiveShippingMethod($name);
     }
 
     /**
      * @When I restore the :name shipping method
      */
-    public function iRestoreTheShippingMethod($name)
+    public function iRestoreTheShippingMethod(string $name): void
     {
-        $actions = $this->indexPage->getActionsForResource(['name' => $name]);
-        $actions->pressButton('Restore');
+        $this->indexPage->restoreShippingMethod($name);
     }
 
     /**
@@ -331,9 +352,9 @@ final class ManagingShippingMethodsContext implements Context
     /**
      * @When I remove its zone
      */
-    public function iRemoveItsZone()
+    public function iRemoveItsZone(): void
     {
-        $this->updatePage->removeZone();
+        $this->shippingMethodFormElement->setZoneCode('');
     }
 
     /**
@@ -348,9 +369,9 @@ final class ManagingShippingMethodsContext implements Context
     /**
      * @When I remove its name from :language translation
      */
-    public function iRemoveItsNameFromTranslation($language)
+    public function iRemoveItsNameFromTranslation(string $language): void
     {
-        $this->createPage->nameIt('', $language);
+        $this->shippingMethodFormElement->setName('', $language);
     }
 
     /**
@@ -417,7 +438,7 @@ final class ManagingShippingMethodsContext implements Context
      */
     public function iEnableIt()
     {
-        $this->updatePage->enable();
+        $this->shippingMethodFormElement->enable();
     }
 
     /**
@@ -425,7 +446,15 @@ final class ManagingShippingMethodsContext implements Context
      */
     public function iDisableIt()
     {
-        $this->updatePage->disable();
+        $this->shippingMethodFormElement->disable();
+    }
+
+    /**
+     * @When I specify a too long :field
+     */
+    public function iSpecifyATooLong(string $field): void
+    {
+        $this->shippingMethodFormElement->setField(ucwords($field), str_repeat('a', 256));
     }
 
     /**
@@ -433,7 +462,7 @@ final class ManagingShippingMethodsContext implements Context
      */
     public function thisShippingMethodShouldBeDisabled(ShippingMethodInterface $shippingMethod)
     {
-        $this->assertShippingMethodState($shippingMethod, false);
+        Assert::true($this->indexPage->isShippingMethodDisabled($shippingMethod));
     }
 
     /**
@@ -441,14 +470,14 @@ final class ManagingShippingMethodsContext implements Context
      */
     public function thisShippingMethodShouldBeEnabled(ShippingMethodInterface $shippingMethod)
     {
-        $this->assertShippingMethodState($shippingMethod, true);
+        Assert::true($this->indexPage->isShippingMethodEnabled($shippingMethod));
     }
 
     /**
      * @When I delete shipping method :shippingMethod
      * @When I try to delete shipping method :shippingMethod
      */
-    public function iDeleteShippingMethod(ShippingMethodInterface $shippingMethod)
+    public function iDeleteShippingMethod(ShippingMethodInterface $shippingMethod): void
     {
         $this->indexPage->open();
         $this->indexPage->deleteResourceOnPage(['name' => $shippingMethod->getName()]);
@@ -467,11 +496,8 @@ final class ManagingShippingMethodsContext implements Context
      */
     public function iShouldBeNotifiedThatAmountForChannelShouldNotBeBlank(ChannelInterface $channel)
     {
-        /** @var CreatePageInterface|UpdatePageInterface $currentPage */
-        $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
-
         Assert::same(
-            $currentPage->getValidationMessageForAmount($channel->getCode()),
+            $this->shippingMethodFormElement->getValidationMessage('calculator_configuration_amount', ['%channelCode%' => $channel->getCode()]),
             'This value should not be blank.',
         );
     }
@@ -481,11 +507,8 @@ final class ManagingShippingMethodsContext implements Context
      */
     public function iShouldBeNotifiedThatShippingChargeForChannelCannotBeLowerThan0(ChannelInterface $channel): void
     {
-        /** @var CreatePageInterface|UpdatePageInterface $currentPage */
-        $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
-
         Assert::same(
-            $currentPage->getValidationMessageForAmount($channel->getCode()),
+            $this->shippingMethodFormElement->getValidationMessage('calculator_configuration_amount', ['%channelCode%' => $channel->getCode()]),
             'Shipping charge cannot be lower than 0.',
         );
     }
@@ -495,8 +518,8 @@ final class ManagingShippingMethodsContext implements Context
      */
     public function iAddTheTotalWeightGreaterThanOrEqualRuleConfiguredWith(int $weight): void
     {
-        $this->createPage->addRule('Total weight greater than or equal');
-        $this->createPage->fillRuleOption('Weight', (string) $weight);
+        $this->shippingMethodFormElement->addRule(TotalWeightGreaterThanOrEqualRuleChecker::TYPE);
+        $this->shippingMethodFormElement->fillLastRuleOption('Weight', (string) $weight);
     }
 
     /**
@@ -504,8 +527,8 @@ final class ManagingShippingMethodsContext implements Context
      */
     public function iAddTheTotalWeightGreaterThanOrEqualRuleConfiguredWithInvalidData(): void
     {
-        $this->createPage->addRule('Total weight greater than or equal');
-        $this->createPage->fillRuleOption('Weight', 'invalid data');
+        $this->shippingMethodFormElement->addRule(TotalWeightGreaterThanOrEqualRuleChecker::TYPE);
+        $this->shippingMethodFormElement->fillLastRuleOption('Weight', 'invalid data');
     }
 
     /**
@@ -513,8 +536,8 @@ final class ManagingShippingMethodsContext implements Context
      */
     public function iAddTheTotalWeightLessThanOrEqualRuleConfiguredWith(int $weight): void
     {
-        $this->createPage->addRule('Total weight less than or equal');
-        $this->createPage->fillRuleOption('Weight', (string) $weight);
+        $this->shippingMethodFormElement->addRule(TotalWeightLessThanOrEqualRuleChecker::TYPE);
+        $this->shippingMethodFormElement->fillLastRuleOption('Weight', (string) $weight);
     }
 
     /**
@@ -522,8 +545,13 @@ final class ManagingShippingMethodsContext implements Context
      */
     public function iAddTheItemsTotalLessThanOrEqualRuleConfiguredWith(string $rule, mixed $value, ChannelInterface $channel): void
     {
-        $this->createPage->addRule($rule);
-        $this->createPage->fillRuleOptionForChannel($channel->getCode(), 'Amount', (string) $value);
+        $ruleTypes = [
+            'Items total less than or equal' => OrderTotalLessThanOrEqualRuleChecker::TYPE,
+            'Items total greater than or equal' => OrderTotalGreaterThanOrEqualRuleChecker::TYPE,
+        ];
+
+        $this->shippingMethodFormElement->addRule($ruleTypes[$rule]);
+        $this->shippingMethodFormElement->fillLastRuleOptionForChannel($channel->getCode(), 'Amount', (string) $value);
     }
 
     /**
@@ -531,8 +559,8 @@ final class ManagingShippingMethodsContext implements Context
      */
     public function iAddTheItemsTotalLessThanOrEqualRuleConfiguredWithInvalidData(ChannelInterface $channel): void
     {
-        $this->createPage->addRule('Items total less than or equal');
-        $this->createPage->fillRuleOptionForChannel($channel->getCode(), 'Amount', 'Invalid data');
+        $this->shippingMethodFormElement->addRule(OrderTotalLessThanOrEqualRuleChecker::TYPE);
+        $this->shippingMethodFormElement->fillLastRuleOptionForChannel($channel->getCode(), 'Amount', 'Invalid data');
     }
 
     /**
@@ -540,7 +568,7 @@ final class ManagingShippingMethodsContext implements Context
      */
     public function iRemoveTheShippingChargesOfChannel(ChannelInterface $channel): void
     {
-        $this->updatePage->removeShippingChargesAmount($channel->getCode());
+        $this->shippingMethodFormElement->setCalculatorConfigurationAmountForChannel($channel->getCode(), null);
     }
 
     /**
@@ -551,7 +579,7 @@ final class ManagingShippingMethodsContext implements Context
         int $count,
     ): void {
         Assert::same(
-            $this->updatePage->getShippingChargesValidationErrorsCount($channel->getCode()),
+            $this->shippingMethodFormElement->getShippingChargesValidationErrorsCount($channel->getCode()),
             $count,
         );
     }
@@ -561,7 +589,11 @@ final class ManagingShippingMethodsContext implements Context
      */
     public function iShouldBeNotifiedThatTheWeightRuleHasAnInvalidConfiguration(): void
     {
-        $this->assertFieldValidationMessage('weight', 'Please enter a number.');
+        $channel = $this->sharedStorage->get('channel');
+        Assert::same(
+            $this->shippingMethodFormElement->getValidationMessage('last_rule_weight'),
+            'Please enter a number.',
+        );
     }
 
     /**
@@ -569,42 +601,37 @@ final class ManagingShippingMethodsContext implements Context
      */
     public function iShouldBeNotifiedThatTheAmountRuleHasAnInvalidConfigurationInChannel(ChannelInterface $channel): void
     {
-        /** @var CreatePageInterface|UpdatePageInterface $currentPage */
-        $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
-
         Assert::same(
-            $currentPage->getValidationMessageForRuleAmount($channel->getCode()),
+            $this->shippingMethodFormElement->getValidationMessage('last_rule_amount', ['%channelCode%' => $channel->getCode()]),
             'Please enter a valid money amount.',
         );
     }
 
     /**
-     * @param string $element
-     * @param string $expectedMessage
+     * @Then I should be notified that :field is too long
+     * @Then I should be notified that :field should be no longer than :maxLength characters
      */
-    private function assertFieldValidationMessage($element, $expectedMessage)
+    public function iShouldBeNotifiedThatFieldValueIsTooLong(string $field, int $maxLength = 255): void
     {
-        /** @var CreatePageInterface|UpdatePageInterface $currentPage */
-        $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
+        $validationMessage = $this->shippingMethodFormElement->getValidationMessage(StringInflector::nameToLowercaseCode($field));
 
-        Assert::same($currentPage->getValidationMessage($element), $expectedMessage);
+        Assert::contains(
+            $validationMessage,
+            sprintf('must not be longer than %d characters.', $maxLength),
+        );
     }
 
     /**
-     * @param bool $state
+     * @Then the :shippingMethod shipping method should be successfully created
      */
-    private function assertShippingMethodState(ShippingMethodInterface $shippingMethod, $state)
+    public function theShippingMethodShouldBeSuccessfullyCreated(ShippingMethodInterface $shippingMethod): void
     {
-        $this->iWantToBrowseShippingMethods();
-
-        Assert::true($this->indexPage->isSingleResourceOnPage([
-            'name' => $shippingMethod->getName(),
-            'enabled' => $state ? 'Enabled' : 'Disabled',
-        ]));
+        $this->updatePage->verify(['id' => $shippingMethod->getId()]);
+        $this->theShipmentMethodShouldAppearInTheRegistry($shippingMethod->getName());
     }
 
-    protected function resolveCurrentPage(): SymfonyPageInterface
+    private function assertFieldValidationMessage(string $element, string $expectedMessage): void
     {
-        return $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
+        Assert::same($this->shippingMethodFormElement->getValidationMessage($element), $expectedMessage);
     }
 }

@@ -1,0 +1,12 @@
+{% import '@SyliusAdmin/shared/helper/dropdown.html.twig' as dropdown %}
+
+{{ dropdown.list(
+    {
+        direction: 'down-end',
+        button: { text: 'sylius.ui.create'|trans, icon: 'plus' },
+    },
+    sylius_attribute_types()|map((value, key) => {
+        title: ('sylius.form.attribute_type.' ~ value.type)|trans,
+        url: path(grid.requestConfiguration.getRouteName('create'), { type: key })
+    })
+) }}

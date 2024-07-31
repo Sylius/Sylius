@@ -1,0 +1,15 @@
+{% from '@SyliusAdmin/shared/helper/icon.html.twig' import icon %}
+
+{% set configuration = hookable_metadata.context.configuration %}
+{% set show_route_name = configuration.vars.index.route.name|default(configuration.getRouteName('show')) %}
+
+{% if sylius_route_exists(show_route_name) %}
+    {% set resource_id = hookable_metadata.context.resource.id %}
+    {% set resource_name = hookable_metadata.context.metadata.name %}
+    {% set url = 'sylius_admin_' ~ resource_name ~ '_show' %}
+
+    <a class="btn" href="{{ path(url, {'id': resource_id}) }}" {{ sylius_test_html_attribute('show-' ~ resource_name) }}>
+        {{ icon({icon: 'eye'}) }}
+        {{ 'sylius.ui.show'|trans }}
+    </a>
+{% endif %}

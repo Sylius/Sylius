@@ -1,0 +1,63 @@
+{% macro headers(grid, definition, request_attributes) %}
+    {% import '@SyliusAdmin/shared/helper/sorting.html.twig' as sorting %}
+
+    {% if definition.actionGroups.bulk is defined and definition.getEnabledActions('bulk')|length > 0 %}
+        <th class="w-1 {{ field.options.vars.th_class|default('') }}">
+            <input data-check-all="index" type="checkbox" class="form-check-input">
+        </th>
+    {% endif %}
+
+    {% for field in definition.fields|sort_by('position') %}
+        {% if field.enabled %}
+            {% if field.isSortable %}
+                {{ sorting.table_header(grid, field, request_attributes) }}
+            {% else %}
+                <th class="text-body sylius-table-column-{{ field.name }} {{ field.options.vars.th_class|default('') }}">{{ field.label|trans }}</th>
+            {% endif %}
+        {% endif %}
+    {% endfor %}
+    {% if definition.actionGroups.item is defined and definition.getEnabledActions('item')|length > 0 %}
+        <th class="w-1 text-body text-center sylius-table-column-actions {{ field.options.vars.th_class|default('') }}">{{ 'sylius.ui.actions'|trans }}</th>
+    {% endif %}
+{% endmacro %}
+
+{% macro row(grid, definition, row) %}
+    {% import '@SyliusAdmin/shared/helper/dropdown.html.twig' as dropdown %}
+    {% from '@SyliusAdmin/shared/helper/icon.html.twig' import icon %}
+
+    <tr class="item" {{ sylius_test_html_attribute('row') }} {{ sylius_test_html_attribute('resource-id', row.id) }}>
+        {% if definition.actionGroups.bulk is defined and definition.getEnabledActions('bulk')|length > 0 %}
+            <td class="center aligned"><input data-check-all-group="index" class="form-check-input" type="checkbox" value="{{ row.id }}" /></td>
+        {% endif %}
+        {% for field in definition.enabledFields|sort_by('position') %}
+            <td{% if field.options.vars.td_class is defined %} class="{{ field.options.vars.td_class }}"{% endif %}>
+                {{ sylius_grid_render_field(grid, field, row) }}
+            </td>
+        {% endfor %}
+        {% if definition.actionGroups.item is defined and definition.getEnabledActions('item')|length > 0 %}
+            <td{% if field.options.vars.td_class is defined %} class="{{ field.options.vars.td_class }}"{% endif %} {{ sylius_test_html_attribute('actions') }}>
+                <div class="d-flex gap-1 justify-content-end">
+                    {% for action in definition.getEnabledActions('item')|sort_by('position') %}
+                        {{ sylius_grid_render_action(grid, action, row) }}
+                    {% endfor %}
+
+                    {% if definition.actionGroups.subitem is defined and definition.getEnabledActions('subitem')|length > 0 %}
+                        {% set subactions %}
+                            {% for action in definition.getEnabledActions('subitem')|sort_by('position') %}
+                                {{ sylius_grid_render_action(grid, action, row) }}
+                            {% endfor %}
+                        {% endset %}
+                        {% set more_button %}
+                            <button class="btn btn-icon dropdown-static" data-bs-toggle="tooltip" data-bs-title="{{ 'sylius.ui.more'|trans }}">
+                                {{ icon({ icon: 'dots', class: 'icon icon-tabler' }) }}
+                            </button>
+                        {% endset %}
+                        {% if subactions|trim|length > 0 %}
+                            {{ dropdown.default({ customTrigger: more_button, content: subactions, direction: 'down-end' }) }}
+                        {% endif %}
+                    {% endif %}
+                </div>
+            </td>
+        {% endif %}
+    </tr>
+{% endmacro %}

@@ -52,6 +52,7 @@ sylius_admin_ajax_taxon_by_name_phrase:
                     phrase: expr:service('request_stack').getCurrentRequest().query.get('phrase', '')
                     locale: null
                     limit: 25
+                    excludes: $excludes
 
 sylius_admin_ajax_generate_taxon_slug:
     path: /generate-slug/
@@ -59,32 +60,3 @@ sylius_admin_ajax_generate_taxon_slug:
     defaults:
         _controller: sylius.controller.taxon_slug::generateAction
         _format: json
-
-# This route is deprecated since Sylius 1.13.0 and will be removed in 2.0.0.
-sylius_admin_ajax_taxon_move:
-    path: /{id}/move
-    methods: [PUT]
-    defaults:
-        _controller: sylius.controller.taxon::updateAction
-        _format: json
-        _sylius:
-            permission: true
-            form: Sylius\Bundle\TaxonomyBundle\Form\Type\TaxonPositionType
-
-sylius_admin_ajax_taxon_move_up:
-    path: /{id}/move-up
-    methods: [PUT]
-    defaults:
-        _controller: sylius.controller.taxon_position::moveUpAction
-        _format: json
-        _sylius:
-            permission: true
-
-sylius_admin_ajax_taxon_move_down:
-    path: /{id}/move-down
-    methods: [PUT]
-    defaults:
-        _controller: sylius.controller.taxon_position::moveDownAction
-        _format: json
-        _sylius:
-            permission: true

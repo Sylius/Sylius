@@ -1,0 +1,58 @@
+twig_hooks:
+    hooks:
+        'sylius_admin.product.generate_variants':
+            sidebar:
+                template: '@SyliusAdmin/shared/crud/common/sidebar.html.twig'
+            navbar:
+                template: '@SyliusAdmin/shared/crud/common/navbar.html.twig'
+            content:
+                template: '@SyliusAdmin/shared/crud/common/content.html.twig'
+
+        'sylius_admin.product.generate_variants.content':
+            flashes:
+                template: '@SyliusAdmin/shared/crud/common/content/flashes.html.twig'
+            header:
+                template: '@SyliusAdmin/shared/crud/common/content/header.html.twig'
+            form:
+                component: 'sylius_admin:product:generate_product_variants_form'
+                props:
+                    resource: '@=_context.resource'
+                    form: '@=_context.form'
+            footer:
+                template: '@SyliusAdmin/shared/crud/common/content/footer.html.twig'
+
+        'sylius_admin.product.generate_variants.content.header':
+            breadcrumbs:
+                template: '@SyliusAdmin/product/generate_variants/header/breadcrumbs.html.twig'
+            title_block:
+                template: '@SyliusAdmin/shared/crud/common/content/header/title_block.html.twig'
+
+        'sylius_admin.product.generate_variants.content.header.title_block':
+            title:
+                template: '@SyliusAdmin/product/generate_variants/header/title_block/title.html.twig'
+            actions:
+                template: '@SyliusAdmin/shared/crud/update/content/header/title_block/actions.html.twig'
+
+        'sylius_admin.product.generate_variants.content.header.title_block.actions':
+            cancel:
+                template: '@SyliusAdmin/shared/crud/common/content/header/title_block/actions/cancel.html.twig'
+            generate:
+                template: '@SyliusAdmin/product/generate_variants/header/title_block/actions/generate.html.twig'
+
+        'sylius_admin.product.generate_variants.content.form':
+            variants:
+                template: '@SyliusAdmin/product/generate_variants/form/variants.html.twig'
+
+        'sylius_admin.product.generate_variants.content.form.variants':
+            variant:
+                template: '@SyliusAdmin/product/generate_variants/form/variants/variant.html.twig'
+
+        'sylius_admin.product.generate_variants.content.form.variants.variant#left':
+            code:
+                template: '@SyliusAdmin/product/generate_variants/form/variants/variant/code.html.twig'
+            name:
+                template: '@SyliusAdmin/product/generate_variants/form/variants/variant/name.html.twig'
+
+        'sylius_admin.product.generate_variants.content.form.variants.variant#right':
+            channel_pricing:
+                template: '@SyliusAdmin/product/generate_variants/form/variants/variant/channel_pricings.html.twig'

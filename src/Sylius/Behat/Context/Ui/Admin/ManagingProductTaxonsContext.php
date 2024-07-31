@@ -14,13 +14,14 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
-use Sylius\Behat\Page\Admin\Product\UpdateSimpleProductPageInterface;
+use Sylius\Behat\Element\Admin\Product\TaxonomyFormElementInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
+use Webmozart\Assert\Assert;
 
 final class ManagingProductTaxonsContext implements Context
 {
-    public function __construct(private UpdateSimpleProductPageInterface $updateSimpleProductPage)
+    public function __construct(private TaxonomyFormElementInterface $taxonomyFormElement)
     {
     }
 
@@ -30,9 +31,7 @@ final class ManagingProductTaxonsContext implements Context
      */
     public function iAddTaxonToTheProduct(ProductInterface $product, TaxonInterface $taxon): void
     {
-        $this->updateSimpleProductPage->open(['id' => $product->getId()]);
-        $this->updateSimpleProductPage->selectProductTaxon($taxon);
-        $this->updateSimpleProductPage->saveChanges();
+        $this->taxonomyFormElement->checkProductTaxon($taxon);
     }
 
     /**
@@ -42,8 +41,62 @@ final class ManagingProductTaxonsContext implements Context
         ProductInterface $product,
         TaxonInterface $taxon,
     ): void {
-        $this->updateSimpleProductPage->open(['id' => $product->getId()]);
-        $this->updateSimpleProductPage->unselectProductTaxon($taxon);
-        $this->updateSimpleProductPage->saveChanges();
+        $this->taxonomyFormElement->uncheckProductTaxon($taxon);
+    }
+
+    /**
+     * @When I check all taxons
+     */
+    public function iCheckAllTaxons(): void
+    {
+        $this->taxonomyFormElement->checkAllTaxons();
+    }
+
+    /**
+     * @When I uncheck all taxons
+     */
+    public function iUncheckAllTaxons(): void
+    {
+        $this->taxonomyFormElement->uncheckAllTaxons();
+    }
+
+    /**
+     * @When I filter taxons by :phrase
+     */
+    public function iFilterTaxonsBy(string $phrase): void
+    {
+        $this->taxonomyFormElement->filterTaxonsBy($phrase);
+    }
+
+    /**
+     * @Then the product :product should have the :taxon taxon
+     */
+    public function thisProductTaxonShouldHaveTheTaxon(TaxonInterface $taxon): void
+    {
+        Assert::true($this->taxonomyFormElement->isTaxonChosen($taxon->getCode()));
+    }
+
+    /**
+     * @Then the product :product should not have the :taxon taxon
+     */
+    public function thisProductTaxonShouldNotHaveTheTaxon(TaxonInterface $taxon): void
+    {
+        Assert::false($this->taxonomyFormElement->isTaxonChosen($taxon->getCode()));
+    }
+
+    /**
+     * @Then I should see the :taxon taxon
+     */
+    public function iShouldSeeTheTaxon(TaxonInterface $taxon): void
+    {
+        Assert::true($this->taxonomyFormElement->hasTaxon($taxon->getCode()));
+    }
+
+    /**
+     * @Then I should not see the :taxon taxon
+     */
+    public function iShouldNotSeeTheTaxon(TaxonInterface $taxon): void
+    {
+        Assert::false($this->taxonomyFormElement->hasTaxon($taxon->getCode()));
     }
 }

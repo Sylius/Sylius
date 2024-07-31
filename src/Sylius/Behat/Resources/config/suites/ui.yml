@@ -26,6 +26,8 @@ imports:
     - ui/currency/currencies.yml
     - ui/currency/managing_currencies.yml
     - ui/currency/managing_exchange_rates.yml
+    - ui/errors/admin/error_page.yaml
+    - ui/errors/shop/error_page.yaml
     - ui/homepage/viewing_products.yml
     - ui/inventory/cart_inventory.yml
     - ui/inventory/checkout_inventory.yml
@@ -38,7 +40,7 @@ imports:
     - ui/order/order_history.yml
     - ui/payment/managing_payment_methods.yml
     - ui/payment/managing_payments.yml
-    - ui/product/accessing_edit_page_from_product_show_page.yml
+    - ui/product/navigating_between_product_show_and_edit_pages.yaml
     - ui/product/accessing_price_history.yml
     - ui/product/adding_product_review.yml
     - ui/product/managing_product_association_types.yml

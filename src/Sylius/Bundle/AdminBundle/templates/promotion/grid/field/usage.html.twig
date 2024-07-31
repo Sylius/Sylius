@@ -1,0 +1,20 @@
+{% if data.usageLimit is empty %}
+    <div class="d-flex align-items-center gap-2">
+        <div class="text-blue"><span {{ sylius_test_html_attribute('used') }}>{{ data.used }}</span> / &#8734;</div>
+    </div>
+{% else %}
+    {% if data.used == data.usageLimit %}
+        {% set color = 'danger' %}
+    {% elseif data.used > data.usageLimit / 2 %}
+        {% set color = 'warning' %}
+    {% else %}
+        {% set color = 'success' %}
+    {% endif %}
+
+    <div class="d-flex align-items-center gap-2">
+        <div class="progress usage-progress-bar">
+            <div class="progress-bar bg-{{ color }}" style="width: {{ (data.used / data.usageLimit)|format_number(style='percent') }}" role="progressbar"></div>
+        </div>
+        <div class="text-{{ color }}"><span {{ sylius_test_html_attribute('used') }}>{{ data.used }}</span> / {{ data.usageLimit }}</div>
+    </div>
+{% endif %}

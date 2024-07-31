@@ -1,5 +1,0 @@
-{% if use_webpack %}
-    {{ encore_entry_link_tags('admin-entry', null, 'admin') }}
-{% else %}
-    {% include '@SyliusUi/_stylesheets.html.twig' with {'path': 'assets/admin/css/style.css'} %}
-{% endif %}

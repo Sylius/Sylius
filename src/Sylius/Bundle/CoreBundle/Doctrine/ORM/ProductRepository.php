@@ -13,8 +13,9 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Doctrine\ORM;
 
-use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Mapping\ClassMetadata;
+use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\ORM\QueryBuilder;
 use Sylius\Bundle\ProductBundle\Doctrine\ORM\ProductRepository as BaseProductRepository;
 use Sylius\Component\Core\Model\ChannelInterface;
@@ -34,7 +35,7 @@ class ProductRepository extends BaseProductRepository implements ProductReposito
 {
     protected AssociationHydrator $associationHydrator;
 
-    public function __construct(EntityManager $entityManager, ClassMetadata $class)
+    public function __construct(EntityManagerInterface $entityManager, ClassMetadata $class)
     {
         parent::__construct($entityManager, $class);
 
@@ -253,6 +254,16 @@ class ProductRepository extends BaseProductRepository implements ProductReposito
             ->innerJoin('product.productTaxons', 'productTaxon')
             ->andWhere('productTaxon.taxon = :taxon')
             ->setParameter('taxon', $taxon)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+    public function findByProductTaxonIds(array $ids): array
+    {
+        return $this->createQueryBuilder('o')
+            ->innerJoin('o.productTaxons', 'productTaxon', Join::WITH, 'productTaxon.id IN (:ids)')
+            ->setParameter('ids', $ids)
             ->getQuery()
             ->getResult()
         ;

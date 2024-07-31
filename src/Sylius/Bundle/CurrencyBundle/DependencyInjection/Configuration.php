@@ -13,6 +13,8 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CurrencyBundle\DependencyInjection;
 
+use Sylius\Bundle\CurrencyBundle\Doctrine\ORM\CurrencyRepository;
+use Sylius\Bundle\CurrencyBundle\Doctrine\ORM\ExchangeRateRepository;
 use Sylius\Bundle\CurrencyBundle\Form\Type\CurrencyType;
 use Sylius\Bundle\CurrencyBundle\Form\Type\ExchangeRateType;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
@@ -64,7 +66,7 @@ final class Configuration implements ConfigurationInterface
                                         ->scalarNode('model')->defaultValue(Currency::class)->cannotBeEmpty()->end()
                                         ->scalarNode('interface')->defaultValue(CurrencyInterface::class)->cannotBeEmpty()->end()
                                         ->scalarNode('controller')->defaultValue(ResourceController::class)->cannotBeEmpty()->end()
-                                        ->scalarNode('repository')->cannotBeEmpty()->end()
+                                        ->scalarNode('repository')->defaultValue(CurrencyRepository::class)->cannotBeEmpty()->end()
                                         ->scalarNode('factory')->defaultValue(Factory::class)->cannotBeEmpty()->end()
                                         ->scalarNode('form')->defaultValue(CurrencyType::class)->cannotBeEmpty()->end()
                                     ->end()
@@ -83,7 +85,7 @@ final class Configuration implements ConfigurationInterface
                                         ->scalarNode('model')->defaultValue(ExchangeRate::class)->cannotBeEmpty()->end()
                                         ->scalarNode('interface')->defaultValue(ExchangeRateInterface::class)->cannotBeEmpty()->end()
                                         ->scalarNode('controller')->defaultValue(ResourceController::class)->cannotBeEmpty()->end()
-                                        ->scalarNode('repository')->cannotBeEmpty()->end()
+                                        ->scalarNode('repository')->defaultValue(ExchangeRateRepository::class)->cannotBeEmpty()->end()
                                         ->scalarNode('factory')->defaultValue(Factory::class)->cannotBeEmpty()->end()
                                         ->scalarNode('form')->defaultValue(ExchangeRateType::class)->cannotBeEmpty()->end()
                                     ->end()

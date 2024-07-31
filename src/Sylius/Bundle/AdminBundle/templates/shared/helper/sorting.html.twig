@@ -1,0 +1,37 @@
+{% macro table_header(grid, field, attributes) %}
+    {% set sorting_order = grid.getSortingOrder(field.name) %}
+
+    {% if grid.isSortedBy(field.name) %}
+        <th class="sortable sorted {{ sorting_order == 'desc' ? 'descending' : 'ascending' }} sylius-table-column-{{ field.name }} {{ field.options.vars.th_class|default('') }}">
+            <a class="link-reset" href="{{ _self.link(field.name, attributes, (sorting_order == 'desc' ? 'asc' : 'desc'), grid.parameters.all) }}">
+                {{ field.label|trans }}
+                {% if sorting_order == 'desc' %}
+                    <svg style="transform: translateY(-1px)" xmlns="http://www.w3.org/2000/svg" width="11" height="11" fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708"/>
+                    </svg>
+                {% endif %}
+                {% if sorting_order == 'asc' %}
+                    <svg style="transform: translateY(-1px)" xmlns="http://www.w3.org/2000/svg" width="11" height="11" fill="currentColor" class="bi bi-chevron-up" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M7.646 4.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8 5.707l-5.646 5.647a.5.5 0 0 1-.708-.708z"/>
+                    </svg>
+                {% endif %}
+            </a>
+        </th>
+    {% else %}
+        <th class="sortable sylius-table-column-{{ field.name }} {{ field.options.vars.th_class|default('') }}">
+            <a class="link-reset" href="{{ _self.link(field.name, attributes, sorting_order, grid.parameters.all) }}">
+                {{ field.label|trans }}
+                <svg style="opacity: 0.7; transform: translateY(-1px)" xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" class="bi bi-chevron-expand" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M3.646 9.146a.5.5 0 0 1 .708 0L8 12.793l3.646-3.647a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 0-.708m0-2.292a.5.5 0 0 0 .708 0L8 3.207l3.646 3.647a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 0 0 0 .708"/>
+                </svg>
+            </a>
+        </th>
+    {% endif %}
+{% endmacro %}
+
+{% macro link(field_name, attributes, sorting_order, parameters) %}
+    {% set params = attributes.all('_route_params')|merge(parameters) %}
+    {% set sorting = {'sorting': {(field_name): (sorting_order)}} %}
+
+    {{ path(attributes.get('_route'), params|merge(sorting)|merge({'page': 1})) }}
+{% endmacro %}

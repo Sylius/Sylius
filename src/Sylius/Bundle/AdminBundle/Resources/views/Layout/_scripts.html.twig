@@ -1,5 +1,0 @@
-{% if use_webpack %}
-    {{ encore_entry_script_tags('admin-entry', null, 'admin') }}
-{% else %}
-    {% include '@SyliusUi/_javascripts.html.twig' with {'path': 'assets/admin/js/app.js'} %}
-{% endif %}

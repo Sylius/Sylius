@@ -28,15 +28,8 @@ final class OrderShipmentProcessor implements OrderProcessorInterface
     public function __construct(
         private DefaultShippingMethodResolverInterface $defaultShippingMethodResolver,
         private FactoryInterface $shipmentFactory,
-        private ?ShippingMethodsResolverInterface $shippingMethodsResolver = null,
+        private ShippingMethodsResolverInterface $shippingMethodsResolver,
     ) {
-        if (2 === func_num_args() || null === $shippingMethodsResolver) {
-            trigger_deprecation(
-                'sylius/core',
-                '1.2',
-                'Not passing a $shippingMethodsResolver explicitly is deprecated and will be prohibited in Sylius 2.0',
-            );
-        }
     }
 
     public function process(BaseOrderInterface $order): void
@@ -104,10 +97,6 @@ final class OrderShipmentProcessor implements OrderProcessorInterface
         $shipment = $order->getShipments()->first();
 
         $this->processShipmentUnits($order, $shipment);
-
-        if (null === $this->shippingMethodsResolver) {
-            return;
-        }
 
         if (!in_array($shipment->getMethod(), $this->shippingMethodsResolver->getSupportedMethods($shipment), true)) {
             try {

@@ -11,14 +11,14 @@ Feature: Browsing administration panel in a proper locale
         And I am logged in as an administrator
         And I am using "Polish (Poland)" locale for my panel
 
-    @ui
+    @todo-api @ui
     Scenario: Getting errors in my language
         Given I am editing my details
         When I change its email to "wrong-email"
         And I save my changes
         Then I should be notified that this email is not valid in "Polish (Poland)" locale
 
-    @ui
+    @no-api @ui
     Scenario: Seeing menu in my language
         When I open administration dashboard
-        Then I should see sidebar catalog section configuration in "Polish (Poland)" locale
+        Then I should be viewing the administration panel in "Polish (Poland)" locale

@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Installer\Provider;
 
-use Doctrine\Bundle\DoctrineBundle\Registry;
 use Doctrine\DBAL\Exception;
 use Doctrine\DBAL\Platforms\MySQLPlatform;
 use Doctrine\DBAL\Platforms\PostgreSQLPlatform;
@@ -24,29 +23,14 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\ConfirmationQuestion;
 use Symfony\Component\Console\Style\SymfonyStyle;
-use Webmozart\Assert\Assert;
 
 final class DatabaseSetupCommandsProvider implements DatabaseSetupCommandsProviderInterface
 {
     /** @var AbstractSchemaManager<PostgreSQLPlatform|MySQLPlatform>|null */
     private ?AbstractSchemaManager $schemaManager = null;
 
-    public function __construct(private EntityManagerInterface|Registry $entityManager)
+    public function __construct(private readonly EntityManagerInterface $entityManager)
     {
-        if ($this->entityManager instanceof Registry) {
-            trigger_deprecation(
-                'sylius/sylius',
-                '1.13',
-                'Passing a $registry to the "%s" constructor is deprecated and will be prohibited in Sylius 2.0. Pass an instance of "%s" instead.',
-                self::class,
-                EntityManagerInterface::class,
-            );
-
-            $objectManager = $this->entityManager->getManager();
-            Assert::isInstanceOf($objectManager, EntityManagerInterface::class);
-
-            $this->entityManager = $objectManager;
-        }
     }
 
     /**
