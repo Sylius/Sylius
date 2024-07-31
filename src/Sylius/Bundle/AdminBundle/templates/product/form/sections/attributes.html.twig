@@ -66,13 +66,11 @@
                                 {% for product_attribute_value in product_attribute_values %}
                                     {% set locale_code = product_attribute_value.vars.data.localeCode %}
                                     <div class="field d-flex gap-2 mb-3">
-                                        <div>
-                                            {% if locale_code is not null %}
-                                                <span class="flag flag-sm flag-country-{{ locale_code|lower|split('_')|last }} me-3"></span>
-                                            {% else %}
-                                                <span class="flag flag-sm flag-country-eu me-3"></span>
-                                            {% endif %}
-                                        </div>
+                                        {% if locale_code is not null %}
+                                            <div>
+                                                <span class="flag flag-sm flag-country-{{ locale_code|sylius_locale_country|lower }} me-2"></span>
+                                            </div>
+                                        {% endif %}
                                         <div class="flex-grow-1">
                                             <div class="d-flex justify-content-between align-items-center">
                                                 {% set required_class = not locale_code or locale_code == sylius_base_locale ? 'required' : '' %}
