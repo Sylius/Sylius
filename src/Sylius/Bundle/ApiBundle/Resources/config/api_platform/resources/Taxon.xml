@@ -17,55 +17,14 @@
     xsi:schemaLocation="https://api-platform.com/schema/metadata/resources-3.0 https://api-platform.com/schema/metadata/resources-3.0.xsd"
 >
     <resource class="Sylius\Component\Core\Model\Taxon">
-        <validationContext>
-            <values>
-                <value name="groups">
-                    <values>
-                        <value>sylius</value>
-                    </values>
-                </value>
-            </values>
-        </validationContext>
-
         <operations>
+
             <operation class="ApiPlatform\Metadata\GetCollection" uriTemplate="/admin/taxons">
                 <normalizationContext>
                     <values>
                         <value name="groups">
                             <values>
                                 <value>sylius:admin:taxon:index</value>
-                            </values>
-                        </value>
-                    </values>
-                </normalizationContext>
-                <openapiContext>
-                    <values>
-                        <value name="parameters">
-                            <values>
-                                <value name="imageFilter">
-                                    <values>
-                                        <value name="name">imageFilter</value>
-                                        <value name="in">query</value>
-                                        <value name="description">Provide one of supported image liip imagine filters</value>
-                                        <value name="schema">
-                                            <values>
-                                                <value name="type">string</value>
-                                            </values>
-                                        </value>
-                                    </values>
-                                </value>
-                            </values>
-                        </value>
-                    </values>
-                </openapiContext>
-            </operation>
-
-            <operation class="ApiPlatform\Metadata\GetCollection" uriTemplate="/shop/taxons">
-                <normalizationContext>
-                    <values>
-                        <value name="groups">
-                            <values>
-                                <value>sylius:shop:taxon:index</value>
                             </values>
                         </value>
                     </values>
@@ -111,6 +70,15 @@
                         </value>
                     </values>
                 </normalizationContext>
+                <validationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius</value>
+                            </values>
+                        </value>
+                    </values>
+                </validationContext>
             </operation>
 
             <operation class="ApiPlatform\Metadata\Get" uriTemplate="/admin/taxons/{code}">
@@ -164,16 +132,57 @@
                         </value>
                     </values>
                 </normalizationContext>
+                <validationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius</value>
+                            </values>
+                        </value>
+                    </values>
+                </validationContext>
             </operation>
 
             <operation class="ApiPlatform\Metadata\Delete" uriTemplate="/admin/taxons/{code}" />
+
+            <operation class="ApiPlatform\Metadata\GetCollection" uriTemplate="/shop/taxons">
+                <normalizationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius:shop:taxon:index</value>
+                            </values>
+                        </value>
+                    </values>
+                </normalizationContext>
+                <openapiContext>
+                    <values>
+                        <value name="parameters">
+                            <values>
+                                <value name="imageFilter">
+                                    <values>
+                                        <value name="name">imageFilter</value>
+                                        <value name="in">query</value>
+                                        <value name="description">Provide one of supported image liip imagine filters</value>
+                                        <value name="schema">
+                                            <values>
+                                                <value name="type">string</value>
+                                            </values>
+                                        </value>
+                                    </values>
+                                </value>
+                            </values>
+                        </value>
+                    </values>
+                </openapiContext>
+            </operation>
 
             <operation class="ApiPlatform\Metadata\Get" uriTemplate="/shop/taxons/{code}">
                 <normalizationContext>
                     <values>
                         <value name="groups">
                             <values>
-                                <value>sylius:shop:taxons:show</value>
+                                <value>sylius:shop:taxon:show</value>
                             </values>
                         </value>
                     </values>
