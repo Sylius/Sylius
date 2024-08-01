@@ -2,6 +2,7 @@
     "@context": "\/api\/v2\/contexts\/Payment",
     "@id": "\/api\/v2\/admin\/orders\/nAWw2jewpA\/payments",
     "@type": "hydra:Collection",
+    "hydra:totalItems": 1,
     "hydra:member": [
         {
             "@id": "\/api\/v2\/admin\/payments\/@integer@",
@@ -26,6 +27,5 @@
             "createdAt": "@datetime@",
             "updatedAt": "@datetime@"
         }
-    ],
-    "hydra:totalItems": 1
+    ]
 }

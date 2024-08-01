@@ -52,10 +52,6 @@
             <tag name="property_info.list_extractor" priority="-2000" />
         </service>
 
-<!--        <service id="Sylius\Bundle\ApiBundle\DataTransformer\OrderTokenValueAwareInputCommandDataTransformer">-->
-<!--            <tag name="sylius.api.command_data_transformer" priority="1000" />-->
-<!--        </service>-->
-
 <!--        <service id="Sylius\Bundle\ApiBundle\DataTransformer\LoggedInShopUserIdAwareCommandDataTransformer">-->
 <!--            <argument type="service" id="Sylius\Bundle\ApiBundle\Context\UserContextInterface" />-->
 <!--            <tag name="sylius.api.command_data_transformer" />-->
@@ -75,11 +71,6 @@
             <argument type="service" id="sylius.repository.payment" />
             <argument type="service" id="sylius.repository.payment_method" />
         </service>
-
-<!--        <service id="Sylius\Bundle\ApiBundle\Controller\GetOrderAdjustmentsAction">-->
-<!--            <argument type="service" id="sylius.repository.order" />-->
-<!--            <tag name="controller.service_arguments" />-->
-<!--        </service>-->
 
 <!--        <service id="Sylius\Bundle\ApiBundle\DataProvider\ChannelAwareItemDataProvider" decorates="api_platform.item_data_provider">-->
 <!--            <argument type="service" id="Sylius\Bundle\ApiBundle\DataProvider\ChannelAwareItemDataProvider.inner" />-->

@@ -17,17 +17,32 @@
     xsi:schemaLocation="https://api-platform.com/schema/metadata/resources-3.0 https://api-platform.com/schema/metadata/resources-3.0.xsd"
 >
     <resource class="Sylius\Component\Core\Model\Order">
-        <validationContext>
-            <values>
-                <value name="groups">
-                    <values>
-                        <value>sylius</value>
-                    </values>
-                </value>
-            </values>
-        </validationContext>
-
         <operations>
+            <!-- Admin Section -->
+
+            <operation class="ApiPlatform\Metadata\GetCollection" uriTemplate="/admin/orders">
+                <normalizationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius:admin:order:index</value>
+                            </values>
+                        </value>
+                    </values>
+                </normalizationContext>
+                <order>
+                    <values>
+                        <value name="number">DESC</value>
+                    </values>
+                </order>
+                <filters>
+                    <filter>sylius_api.admin.search_filter.order</filter>
+                    <filter>sylius_api.admin.date_filter.order</filter>
+                    <filter>sylius_api.admin.range_filter.order</filter>
+                    <filter>sylius_api.admin.order_filter.order</filter>
+                </filters>
+            </operation>
+
             <operation class="ApiPlatform\Metadata\Get" uriTemplate="/admin/orders/{tokenValue}">
                 <normalizationContext>
                     <values>
@@ -39,6 +54,63 @@
                     </values>
                 </normalizationContext>
             </operation>
+
+            <operation
+                class="ApiPlatform\Metadata\Patch"
+                uriTemplate="/admin/orders/{tokenValue}/resend-confirmation-email"
+                messenger="input"
+                input="Sylius\Bundle\ApiBundle\Command\ResendOrderConfirmationEmail"
+                output="false"
+                status="202"
+            >
+                <validationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius</value>
+                            </values>
+                        </value>
+                    </values>
+                </validationContext>
+                <openapiContext>
+                    <values>
+                        <value name="summary">Resends order confirmation email.</value>
+                    </values>
+                </openapiContext>
+            </operation>
+
+            <operation
+                class="ApiPlatform\Metadata\Patch"
+                uriTemplate="/admin/orders/{tokenValue}/cancel"
+                input="false"
+                controller="Sylius\Bundle\ApiBundle\Applicator\OrderStateMachineTransitionApplicatorInterface::cancel"
+            >
+                <validationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius</value>
+                            </values>
+                        </value>
+                    </values>
+                </validationContext>
+                <normalizationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius:admin:order:show</value>
+                            </values>
+                        </value>
+                    </values>
+                </normalizationContext>
+                <openapiContext>
+                    <values>
+                        <value name="summary">Cancels Order.</value>
+                    </values>
+                </openapiContext>
+            </operation>
+
+            <!-- Shop Section -->
 
             <operation class="ApiPlatform\Metadata\Get" uriTemplate="/shop/orders/{tokenValue}">
                 <normalizationContext>

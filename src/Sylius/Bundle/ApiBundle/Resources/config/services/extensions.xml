@@ -123,12 +123,12 @@
             <tag name="api_platform.doctrine.orm.query_extension.item" />
         </service>
 
-<!--        <service id="sylius_api.doctrine.orm.query_extension.admin.order.state_based" class="Sylius\Bundle\ApiBundle\Doctrine\ORM\QueryExtension\Admin\Order\StateBasedExtension">-->
-<!--            <argument type="service" id="Sylius\Bundle\CoreBundle\SectionResolver\SectionProviderInterface" />-->
-<!--            <argument>%sylius_api.order_states_to_filter_out%</argument>-->
-<!--            <tag name="api_platform.doctrine.orm.query_extension.collection" />-->
-<!--            <tag name="api_platform.doctrine.orm.query_extension.item" />-->
-<!--        </service>-->
+        <service id="sylius_api.doctrine.orm.query_extension.admin.order.state_based" class="Sylius\Bundle\ApiBundle\Doctrine\ORM\QueryExtension\Admin\Order\StateBasedExtension">
+            <argument type="service" id="Sylius\Bundle\CoreBundle\SectionResolver\SectionProviderInterface" />
+            <argument>%sylius_api.order_states_to_filter_out%</argument>
+            <tag name="api_platform.doctrine.orm.query_extension.collection" />
+            <tag name="api_platform.doctrine.orm.query_extension.item" />
+        </service>
 
         <service id="sylius_api.doctrine.orm.query_extension.shop.taxon.enabled" class="Sylius\Bundle\ApiBundle\Doctrine\ORM\QueryExtension\Shop\Taxon\EnabledExtension">
             <argument type="service" id="Sylius\Bundle\ApiBundle\Context\UserContextInterface" />

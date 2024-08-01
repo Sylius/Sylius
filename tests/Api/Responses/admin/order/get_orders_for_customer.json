@@ -2,25 +2,13 @@
     "@context": "\/api\/v2\/contexts\/Order",
     "@id": "\/api\/v2\/admin\/orders",
     "@type": "hydra:Collection",
+    "hydra:totalItems": 1,
     "hydra:member": [
         {
             "@id": "\/api\/v2\/admin\/orders\/token",
             "@type": "Order",
             "customer": "\/api\/v2\/admin\/customers\/@integer@",
             "channel": "\/api\/v2\/admin\/channels\/WEB",
-            "billingAddress": {
-                "@id": "\/api\/v2\/admin\/addresses\/@integer@",
-                "@type": "Address",
-                "firstName": "Andrzej",
-                "lastName": "Legs",
-                "phoneNumber": "111999222",
-                "company": "Polmotors office",
-                "countryCode": "PL",
-                "provinceName": "kujawsko-pomorskie",
-                "street": "Moniuszki 16\/20",
-                "city": "Pabianice",
-                "postcode": "31-999"
-            },
             "shippingAddress": {
                 "@id": "\/api\/v2\/admin\/addresses\/@integer@",
                 "@type": "Address",
@@ -28,6 +16,19 @@
                 "lastName": "Legs",
                 "phoneNumber": "111999222",
                 "company": "Polmotors manufactory",
+                "countryCode": "PL",
+                "provinceName": "kujawsko-pomorskie",
+                "street": "Moniuszki 16\/20",
+                "city": "Pabianice",
+                "postcode": "31-999"
+            },
+            "billingAddress": {
+                "@id": "\/api\/v2\/admin\/addresses\/@integer@",
+                "@type": "Address",
+                "firstName": "Andrzej",
+                "lastName": "Legs",
+                "phoneNumber": "111999222",
+                "company": "Polmotors office",
                 "countryCode": "PL",
                 "provinceName": "kujawsko-pomorskie",
                 "street": "Moniuszki 16\/20",
@@ -43,6 +44,8 @@
             "shippingState": "ready",
             "tokenValue": "token",
             "id": "@integer@",
+            "number": null,
+            "notes": null,
             "items": [],
             "itemsTotal": 0,
             "total": 0,
@@ -57,14 +60,13 @@
             "shippingPromotionTotal": 0
         }
     ],
-    "hydra:totalItems": 1,
     "hydra:view": {
         "@id": "\/api\/v2\/admin\/orders?customer.id=@integer@",
         "@type": "hydra:PartialCollectionView"
     },
     "hydra:search": {
         "@type": "hydra:IriTemplate",
-        "hydra:template": "\/api\/v2\/admin\/orders{?channel.code,currencyCode,currencyCode[],customer.id,customer.id[],checkoutCompletedAt[before],checkoutCompletedAt[strictly_before],checkoutCompletedAt[after],checkoutCompletedAt[strictly_after],order[number],items.productName,items.productName[],shipments.method.code,shipments.method.code[],total[between],total[gt],total[gte],total[lt],total[lte],items.variant.translations.name,items.variant.translations.name[]}",
+        "hydra:template": "/api/v2/admin/orders{?channel.code,currencyCode,currencyCode[],customer.id,customer.id[],items.productName,items.productName[],shipments.method.code,shipments.method.code[],items.variant.translations.name,items.variant.translations.name[],checkoutCompletedAt[before],checkoutCompletedAt[strictly_before],checkoutCompletedAt[after],checkoutCompletedAt[strictly_after],total[between],total[gt],total[gte],total[lt],total[lte],order[number]}",
         "hydra:variableRepresentation": "BasicRepresentation",
         "hydra:mapping": [
             {
@@ -99,36 +101,6 @@
             },
             {
                 "@type": "IriTemplateMapping",
-                "variable": "checkoutCompletedAt[before]",
-                "property": "checkoutCompletedAt",
-                "required": false
-            },
-            {
-                "@type": "IriTemplateMapping",
-                "variable": "checkoutCompletedAt[strictly_before]",
-                "property": "checkoutCompletedAt",
-                "required": false
-            },
-            {
-                "@type": "IriTemplateMapping",
-                "variable": "checkoutCompletedAt[after]",
-                "property": "checkoutCompletedAt",
-                "required": false
-            },
-            {
-                "@type": "IriTemplateMapping",
-                "variable": "checkoutCompletedAt[strictly_after]",
-                "property": "checkoutCompletedAt",
-                "required": false
-            },
-            {
-                "@type": "IriTemplateMapping",
-                "variable": "order[number]",
-                "property": "number",
-                "required": false
-            },
-            {
-                "@type": "IriTemplateMapping",
                 "variable": "items.productName",
                 "property": "items.productName",
                 "required": false
@@ -149,6 +121,42 @@
                 "@type": "IriTemplateMapping",
                 "variable": "shipments.method.code[]",
                 "property": "shipments.method.code",
+                "required": false
+            },
+            {
+                "@type": "IriTemplateMapping",
+                "variable": "items.variant.translations.name",
+                "property": "items.variant.translations.name",
+                "required": false
+            },
+            {
+                "@type": "IriTemplateMapping",
+                "variable": "items.variant.translations.name[]",
+                "property": "items.variant.translations.name",
+                "required": false
+            },
+            {
+                "@type": "IriTemplateMapping",
+                "variable": "checkoutCompletedAt[before]",
+                "property": "checkoutCompletedAt",
+                "required": false
+            },
+            {
+                "@type": "IriTemplateMapping",
+                "variable": "checkoutCompletedAt[strictly_before]",
+                "property": "checkoutCompletedAt",
+                "required": false
+            },
+            {
+                "@type": "IriTemplateMapping",
+                "variable": "checkoutCompletedAt[after]",
+                "property": "checkoutCompletedAt",
+                "required": false
+            },
+            {
+                "@type": "IriTemplateMapping",
+                "variable": "checkoutCompletedAt[strictly_after]",
+                "property": "checkoutCompletedAt",
                 "required": false
             },
             {
@@ -183,14 +191,8 @@
             },
             {
                 "@type": "IriTemplateMapping",
-                "variable": "items.variant.translations.name",
-                "property": "items.variant.translations.name",
-                "required": false
-            },
-            {
-                "@type": "IriTemplateMapping",
-                "variable": "items.variant.translations.name[]",
-                "property": "items.variant.translations.name",
+                "variable": "order[number]",
+                "property": "number",
                 "required": false
             }
         ]

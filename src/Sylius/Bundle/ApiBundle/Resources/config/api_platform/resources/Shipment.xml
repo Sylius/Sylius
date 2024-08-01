@@ -134,7 +134,7 @@
                     <values>
                         <value name="groups">
                             <values>
-                                <value>sylius:admin:order:show</value>
+                                <value>sylius:admin:shipment:show</value>
                             </values>
                         </value>
                     </values>
