@@ -1,0 +1,57 @@
+twig_hooks:
+    hooks:
+        'sylius.shop.product_review.index':
+            sidebar:
+                template: "@SyliusShop/product_review/index/sidebar.html.twig"
+            main:
+                template: "@SyliusShop/product_review/index/main.html.twig"
+
+        'sylius.shop.product_review.index.sidebar':
+            product_card:
+                template: "@SyliusShop/product_review/index/sidebar/product_card.html.twig"
+
+        'sylius.shop.product_review.index.main':
+            header:
+                template: "@SyliusShop/product_review/index/main/header.html.twig"
+            list:
+                template: "@SyliusShop/product_review/index/main/list.html.twig"
+
+        'sylius.shop.product_review.index.main.header':
+            title:
+                template: "@SyliusShop/product_review/index/main/header/details.html.twig"
+            buttons:
+                template: "@SyliusShop/product_review/index/main/header/buttons.html.twig"
+
+        'sylius.shop.product_review.index.main.header.details':
+            title:
+                template: "@SyliusShop/product_review/index/main/header/details/title.html.twig"
+            reviews_count:
+                template: "@SyliusShop/product_review/index/main/header/details/reviews_count.html.twig"
+
+        'sylius.shop.product_review.index.main.header.buttons':
+            add_review:
+                template: "@SyliusShop/product_review/index/main/header/buttons/add_review.html.twig"
+
+        'sylius.shop.product_review.index.main.list':
+            review:
+                template: "@SyliusShop/product_review/index/main/list/review.html.twig"
+
+        'sylius.shop.product_review.index.main.list.review':
+            header:
+                template: "@SyliusShop/product_review/index/main/list/review/header.html.twig"
+            content:
+                template: "@SyliusShop/product_review/index/main/list/review/content.html.twig"
+            footer:
+                template: "@SyliusShop/product_review/index/main/list/review/footer.html.twig"
+
+        'sylius.shop.product_review.index.main.list.review.header':
+            title:
+                template: "@SyliusShop/product_review/index/main/list/review/header/title.html.twig"
+            rating:
+                template: "@SyliusShop/product_review/index/main/list/review/header/rating.html.twig"
+
+        'sylius.shop.product_review.index.main.list.review.footer':
+            author:
+                template: "@SyliusShop/product_review/index/main/list/review/footer/author.html.twig"
+            date:
+                template: "@SyliusShop/product_review/index/main/list/review/footer/date.html.twig"

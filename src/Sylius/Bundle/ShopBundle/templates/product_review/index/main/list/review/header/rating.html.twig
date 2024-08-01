@@ -1,0 +1,7 @@
+{% import '@SyliusShop/shared/macro/rating.html.twig' as rating %}
+
+{% set review = hookable_metadata.context.review %}
+
+<div class="mb-3">
+    {{ rating.show(review.rating) }}
+</div>
