@@ -1,0 +1,35 @@
+twig_hooks:
+    hooks:
+        'sylius_shop.account.login':
+            form:
+                template: '@SyliusShop/account/login/form.html.twig'
+
+        'sylius_shop.account.login.form':
+            login_container:
+                template: '@SyliusShop/account/login/form/login_container.html.twig'
+            register_container:
+                template: '@SyliusShop/account/login/form/register_container.html.twig'
+
+        'sylius_shop.account.login.form.login_container':
+            header:
+                template: "@SyliusShop/account/login/form/login_container/header.html.twig"
+            errors:
+                template: "@SyliusShop/account/login/form/login_container/errors.html.twig"
+            form_fields:
+                template: "@SyliusShop/account/login/form/login_container/form_fields.html.twig"
+            submit:
+                template: "@SyliusShop/account/login/form/login_container/submit.html.twig"
+            forgot_password:
+                template: "@SyliusShop/account/login/form/login_container/forgot_password.html.twig"
+
+        'sylius_shop.account.login.form.login_container.form_fields':
+            username:
+                template: "@SyliusShop/account/login/form/login_container/form_fields/username.html.twig"
+            password:
+                template: "@SyliusShop/account/login/form/login_container/form_fields/password.html.twig"
+            remember_me:
+                template: "@SyliusShop/account/login/form/login_container/form_fields/remember_me.html.twig"
+
+        'sylius_shop.account.login.form.register_container':
+            register_here:
+                template: "@SyliusShop/shared/account/register_box.html.twig"

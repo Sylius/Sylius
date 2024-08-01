@@ -1,4 +1,4 @@
-{% extends '@SyliusShop/Account/address_book/layout.html.twig' %}
+{% extends '@SyliusShop/account/address_book/layout.html.twig' %}
 
 {% import '@SyliusShop/shared/messages.html.twig' as messages %}
 {% import '@SyliusShop/shared/buttons.html.twig' as buttons %}
@@ -20,12 +20,12 @@
         {% set default_address = (sylius.customer.defaultAddress) %}
 
         {% if default_address is not null %}
-            {% include '@SyliusShop/Account/address_book/default_item.html.twig' with {'address': default_address} %}
+            {% include '@SyliusShop/account/address_book/default_item.html.twig' with {'address': default_address} %}
         {% endif %}
 
         <div {{ sylius_test_html_attribute('addresses') }}>
             {% for address in addresses|filter(address => default_address is null or address.id != default_address.id) %}
-                {% include '@SyliusShop/Account/address_book/item.html.twig' %}
+                {% include '@SyliusShop/account/address_book/item.html.twig' %}
             {% endfor %}
         </div>
     {% else %}

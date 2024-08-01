@@ -1,0 +1,7 @@
+{% import '@SyliusShop/shared/messages.html.twig' as messages %}
+
+{% set last_error = hookable_metadata.context.last_error|default() %}
+
+{% if last_error is not empty %}
+    {{ messages.error(last_error.messageKey|trans(last_error.messageData, 'security')) }}
+{% endif %}
