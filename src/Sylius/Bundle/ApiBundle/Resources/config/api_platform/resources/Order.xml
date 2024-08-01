@@ -36,10 +36,10 @@
                     </values>
                 </order>
                 <filters>
-                    <filter>sylius_api.admin.search_filter.order</filter>
-                    <filter>sylius_api.admin.date_filter.order</filter>
-                    <filter>sylius_api.admin.range_filter.order</filter>
-                    <filter>sylius_api.admin.order_filter.order</filter>
+                    <filter>sylius_api.search_filter.admin.order</filter>
+                    <filter>sylius_api.date_filter.admin.order</filter>
+                    <filter>sylius_api.range_filter.admin.order</filter>
+                    <filter>sylius_api.order_filter.admin.order</filter>
                 </filters>
             </operation>
 
