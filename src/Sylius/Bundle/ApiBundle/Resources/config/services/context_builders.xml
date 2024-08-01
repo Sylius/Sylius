@@ -87,5 +87,13 @@
         >
             <argument type="service" id=".inner" />
         </service>
+
+        <service
+            id="Sylius\Bundle\ApiBundle\SerializerContextBuilder\OrderTokenValueAwareContextBuilder"
+            decorates="api_platform.serializer.context_builder"
+            decoration-priority="64"
+        >
+            <argument type="service" id=".inner" />
+        </service>
     </services>
 </container>

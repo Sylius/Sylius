@@ -23,6 +23,16 @@ Sylius\Component\Core\Model\Order:
         customer: "@customer_dave"
         billingAddress: "@second_order_billing_address"
         shippingAddress: "@second_order_shipping_address"
+    cart_order:
+        channel: "@channel_web"
+        currencyCode: "USD"
+        localeCode: "en_US"
+        state: "cart"
+        paymentState: "paid"
+        shippingState: "ready"
+        checkoutState: "completed"
+        tokenValue: "cartToken"
+        customer: "@customer_dave"
 
 Sylius\Component\Core\Model\Address:
     first_order_billing_address:

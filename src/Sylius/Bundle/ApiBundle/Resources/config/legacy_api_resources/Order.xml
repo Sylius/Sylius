@@ -19,31 +19,6 @@
         <attribute name="validation_groups">sylius</attribute>
 
         <collectionOperations>
-            <collectionOperation name="admin_get">
-                <attribute name="method">GET</attribute>
-                <attribute name="path">/admin/orders</attribute>
-                <attribute name="filters">
-                    <attribute>sylius.api.order_channel_filter</attribute>
-                    <attribute>sylius.api.order_currency_filter</attribute>
-                    <attribute>sylius.api.order_customer_filter</attribute>
-                    <attribute>sylius.api.order_date_filter</attribute>
-                    <attribute>sylius.api.order_number_filter</attribute>
-                    <attribute>sylius.api.order_product_filter</attribute>
-                    <attribute>sylius.api.order_shipping_method_filter</attribute>
-                    <attribute>sylius.api.order_total_filter</attribute>
-                    <attribute>sylius.api.order_variants_filter</attribute>
-                </attribute>
-                <attribute name="order">
-                    <attribute name="number">DESC</attribute>
-                </attribute>
-                <attribute name="normalization_context">
-                    <attribute name="groups">
-                        <attribute>admin:order:index</attribute>
-                        <attribute>sylius:admin:order:index</attribute>
-                    </attribute>
-                </attribute>
-            </collectionOperation>
-
             <collectionOperation name="shop_post">
                 <attribute name="method">POST</attribute>
                 <attribute name="path">/shop/orders</attribute>
@@ -81,30 +56,6 @@
         </collectionOperations>
 
         <itemOperations>
-            <itemOperation name="admin_get">
-                <attribute name="method">GET</attribute>
-                <attribute name="path">/admin/orders/{tokenValue}</attribute>
-                <attribute name="normalization_context">
-                    <attribute name="groups">
-                        <attribute>admin:order:show</attribute>
-                        <attribute>sylius:admin:order:show</attribute>
-                    </attribute>
-                </attribute>
-            </itemOperation>
-
-            <itemOperation name="admin_adjustments">
-                <attribute name="method">GET</attribute>
-                <attribute name="path">/admin/orders/{tokenValue}/adjustments</attribute>
-                <attribute name="controller">Sylius\Bundle\ApiBundle\Controller\GetOrderAdjustmentsAction</attribute>
-                <attribute name="write">false</attribute>
-                <attribute name="normalization_context">
-                    <attribute name="groups">
-                        <attribute>admin:adjustment:show</attribute>
-                        <attribute>sylius:admin:adjustment:show</attribute>
-                    </attribute>
-                </attribute>
-            </itemOperation>
-
             <itemOperation name="shop_get">
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/shop/orders/{tokenValue}</attribute>
@@ -127,28 +78,6 @@
                         <attribute>shop:order:show</attribute>
                         <attribute>sylius:shop:order:show</attribute>
                     </attribute>
-                </attribute>
-            </itemOperation>
-
-            <itemOperation name="admin_cancel">
-                <attribute name="method">PATCH</attribute>
-                <attribute name="path">/admin/orders/{tokenValue}/cancel</attribute>
-                <attribute name="input">false</attribute>
-                <attribute name="controller">Sylius\Bundle\ApiBundle\Applicator\OrderStateMachineTransitionApplicatorInterface::cancel</attribute>
-                <attribute name="denormalization_context">
-                    <attribute name="groups">
-                        <attribute>admin:order:update</attribute>
-                        <attribute>sylius:admin:order:update</attribute>
-                    </attribute>
-                </attribute>
-                <attribute name="normalization_context">
-                    <attribute name="groups">
-                        <attribute>admin:order:show</attribute>
-                        <attribute>sylius:admin:order:show</attribute>
-                    </attribute>
-                </attribute>
-                <attribute name="openapi_context">
-                    <attribute name="summary">Cancels Order.</attribute>
                 </attribute>
             </itemOperation>
 
@@ -452,34 +381,12 @@
                     <attribute name="summary">Addresses cart to given location, logged in Customer does not have to provide an email. Applies coupon to cart.</attribute>
                 </attribute>
             </itemOperation>
-
-            <itemOperation name="admin_resend_confirmation">
-                <attribute name="method">POST</attribute>
-                <attribute name="path">/admin/orders/{tokenValue}/resend-confirmation-email</attribute>
-                <attribute name="messenger">input</attribute>
-                <attribute name="input">Sylius\Bundle\ApiBundle\Command\ResendOrderConfirmationEmail</attribute>
-                <attribute name="output">false</attribute>
-                <attribute name="status">202</attribute>
-                <attribute name="openapi_context">
-                    <attribute name="summary">Resends order confirmation email.</attribute>
-                </attribute>
-            </itemOperation>
         </itemOperations>
 
         <subresourceOperations>
             <subresourceOperation name="items_get_subresource">
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/shop/orders/{tokenValue}/items</attribute>
-            </subresourceOperation>
-
-            <subresourceOperation name="shipments_get_subresource">
-                <attribute name="method">GET</attribute>
-                <attribute name="path">/admin/orders/{tokenValue}/shipments</attribute>
-            </subresourceOperation>
-
-            <subresourceOperation name="payments_get_subresource">
-                <attribute name="method">GET</attribute>
-                <attribute name="path">/admin/orders/{tokenValue}/payments</attribute>
             </subresourceOperation>
         </subresourceOperations>
 

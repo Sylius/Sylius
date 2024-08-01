@@ -10,7 +10,7 @@
     },
     "hydra:search": {
         "@type": "hydra:IriTemplate",
-        "hydra:template": "\/api\/v2\/admin\/orders{?channel.code,currencyCode,currencyCode[],customer.id,customer.id[],checkoutCompletedAt[before],checkoutCompletedAt[strictly_before],checkoutCompletedAt[after],checkoutCompletedAt[strictly_after],order[number],items.productName,items.productName[],shipments.method.code,shipments.method.code[],total[between],total[gt],total[gte],total[lt],total[lte],items.variant.translations.name,items.variant.translations.name[]}",
+        "hydra:template": "/api/v2/admin/orders{?channel.code,currencyCode,currencyCode[],customer.id,customer.id[],items.productName,items.productName[],shipments.method.code,shipments.method.code[],items.variant.translations.name,items.variant.translations.name[],checkoutCompletedAt[before],checkoutCompletedAt[strictly_before],checkoutCompletedAt[after],checkoutCompletedAt[strictly_after],total[between],total[gt],total[gte],total[lt],total[lte],order[number]}",
         "hydra:variableRepresentation": "BasicRepresentation",
         "hydra:mapping": [
             {
@@ -45,36 +45,6 @@
             },
             {
                 "@type": "IriTemplateMapping",
-                "variable": "checkoutCompletedAt[before]",
-                "property": "checkoutCompletedAt",
-                "required": false
-            },
-            {
-                "@type": "IriTemplateMapping",
-                "variable": "checkoutCompletedAt[strictly_before]",
-                "property": "checkoutCompletedAt",
-                "required": false
-            },
-            {
-                "@type": "IriTemplateMapping",
-                "variable": "checkoutCompletedAt[after]",
-                "property": "checkoutCompletedAt",
-                "required": false
-            },
-            {
-                "@type": "IriTemplateMapping",
-                "variable": "checkoutCompletedAt[strictly_after]",
-                "property": "checkoutCompletedAt",
-                "required": false
-            },
-            {
-                "@type": "IriTemplateMapping",
-                "variable": "order[number]",
-                "property": "number",
-                "required": false
-            },
-            {
-                "@type": "IriTemplateMapping",
                 "variable": "items.productName",
                 "property": "items.productName",
                 "required": false
@@ -95,6 +65,42 @@
                 "@type": "IriTemplateMapping",
                 "variable": "shipments.method.code[]",
                 "property": "shipments.method.code",
+                "required": false
+            },
+            {
+                "@type": "IriTemplateMapping",
+                "variable": "items.variant.translations.name",
+                "property": "items.variant.translations.name",
+                "required": false
+            },
+            {
+                "@type": "IriTemplateMapping",
+                "variable": "items.variant.translations.name[]",
+                "property": "items.variant.translations.name",
+                "required": false
+            },
+            {
+                "@type": "IriTemplateMapping",
+                "variable": "checkoutCompletedAt[before]",
+                "property": "checkoutCompletedAt",
+                "required": false
+            },
+            {
+                "@type": "IriTemplateMapping",
+                "variable": "checkoutCompletedAt[strictly_before]",
+                "property": "checkoutCompletedAt",
+                "required": false
+            },
+            {
+                "@type": "IriTemplateMapping",
+                "variable": "checkoutCompletedAt[after]",
+                "property": "checkoutCompletedAt",
+                "required": false
+            },
+            {
+                "@type": "IriTemplateMapping",
+                "variable": "checkoutCompletedAt[strictly_after]",
+                "property": "checkoutCompletedAt",
                 "required": false
             },
             {
@@ -129,14 +135,8 @@
             },
             {
                 "@type": "IriTemplateMapping",
-                "variable": "items.variant.translations.name",
-                "property": "items.variant.translations.name",
-                "required": false
-            },
-            {
-                "@type": "IriTemplateMapping",
-                "variable": "items.variant.translations.name[]",
-                "property": "items.variant.translations.name",
+                "variable": "order[number]",
+                "property": "number",
                 "required": false
             }
         ]

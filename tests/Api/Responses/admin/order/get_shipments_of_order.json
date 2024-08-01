@@ -2,6 +2,7 @@
     "@context": "\/api\/v2\/contexts\/Shipment",
     "@id": "\/api\/v2\/admin\/orders\/nAWw2jewpA\/shipments",
     "@type": "hydra:Collection",
+    "hydra:totalItems": 1,
     "hydra:member": [
         {
             "@id": "\/api\/v2\/admin\/shipments\/@integer@",
@@ -15,9 +16,10 @@
                 "16": "\/api\/v2\/admin\/order-item-units\/@integer@",
                 "17": "\/api\/v2\/admin\/order-item-units\/@integer@"
             },
+            "tracking": null,
+            "shippedAt": null,
             "createdAt": "@datetime@",
             "updatedAt": "@datetime@"
         }
-    ],
-    "hydra:totalItems": 1
+    ]
 }
