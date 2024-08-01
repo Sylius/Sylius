@@ -10,6 +10,8 @@
 
         {% hook 'sylius_shop.account.login' with { form, last_error } %}
 
+        {% include '@SyliusShop/account/login/csrf_token.html.twig' %}
+
         {{ form_end(form, {'render_rest': false}) }}
     </div>
 {% endblock %}

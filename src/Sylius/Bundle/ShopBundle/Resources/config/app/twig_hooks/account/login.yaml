@@ -3,8 +3,6 @@ twig_hooks:
         'sylius_shop.account.login':
             form:
                 template: '@SyliusShop/account/login/form.html.twig'
-            csrf_token:
-                template: '@SyliusShop/account/login/csrf_token.html.twig'
 
         'sylius_shop.account.login.form':
             login_container:
