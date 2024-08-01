@@ -1,0 +1,47 @@
+twig_hooks:
+    hooks:
+        'sylius_shop.account.register':
+            header:
+                template: '@SyliusShop/account/register/header.html.twig'
+            form:
+                template: '@SyliusShop/account/register/form.html.twig'
+
+        'sylius_shop.account.register.header':
+            title:
+                template: '@SyliusShop/account/register/header/title.html.twig'
+            subtitle:
+                template: '@SyliusShop/account/register/header/subtitle.html.twig'
+
+        'sylius_shop.account.register.form':
+            personal_information:
+                template: '@SyliusShop/account/register/form/personal_information.html.twig'
+            credentials:
+                template: '@SyliusShop/account/register/form/credentials.html.twig'
+            buttons:
+                template: '@SyliusShop/account/register/form/buttons.html.twig'
+
+        'sylius_shop.account.register.form.personal_information':
+            header:
+                template: '@SyliusShop/account/register/form/personal_information/header.html.twig'
+            first_name:
+                template: '@SyliusShop/account/register/form/personal_information/first_name.html.twig'
+            last_name:
+                template: '@SyliusShop/account/register/form/personal_information/last_name.html.twig'
+            email:
+                template: '@SyliusShop/account/register/form/personal_information/email.html.twig'
+            phone_number:
+                template: '@SyliusShop/account/register/form/personal_information/phone_number.html.twig'
+            newsletter:
+                template: '@SyliusShop/account/register/form/personal_information/newsletter.html.twig'
+
+        'sylius_shop.account.register.form.credentials':
+            header:
+                template: '@SyliusShop/account/register/form/credentials/header.html.twig'
+            password:
+                template: '@SyliusShop/account/register/form/credentials/password.html.twig'
+            password_confirmation:
+                template: '@SyliusShop/account/register/form/credentials/password_confirmation.html.twig'
+
+        'sylius_shop.account.register.form.buttons':
+            submit:
+                template: '@SyliusShop/account/register/form/buttons/submit.html.twig'

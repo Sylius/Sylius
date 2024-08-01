@@ -159,21 +159,6 @@ sylius_ui:
                     template: "@SyliusShop/account/login/forgot_password.html.twig"
                     priority: 10
 
-        sylius.shop.account.register:
-            blocks:
-                header:
-                    template: "@SyliusShop/account/register/header.html.twig"
-                    priority: 40
-                information:
-                    template: "@SyliusShop/account/register/information.html.twig"
-                    priority: 30
-                credentials:
-                    template: "@SyliusShop/account/register/credentials.html.twig"
-                    priority: 20
-                submit:
-                    template: "@SyliusShop/account/register/submit.html.twig"
-                    priority: 10
-
         sylius.shop.account.order.show.after_content_header:
             blocks:
                 legacy:
