@@ -4,5 +4,5 @@
     <div>
         <strong>{{ 'sylius.ui.currency'|trans }}:</strong>
     </div>
-    <div class="mb-3">{{ order.currencyCode }}</div>
+    <div class="mb-3" {{ sylius_test_html_attribute('currency') }}>{{ order.currencyCode }}</div>
 </div>

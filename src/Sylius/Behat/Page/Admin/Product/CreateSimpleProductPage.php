@@ -65,11 +65,6 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
         $this->getElement('channel', ['%channel_code%' => $channelCode])->check();
     }
 
-    public function cancelChanges(): void
-    {
-        $this->getElement('cancel_button')->click();
-    }
-
     private function changeTab(string $tabName): void
     {
         if (DriverHelper::isNotJavascript($this->getDriver())) {

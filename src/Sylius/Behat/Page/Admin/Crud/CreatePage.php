@@ -28,7 +28,7 @@ class CreatePage extends SymfonyPage implements CreatePageInterface
         Session $session,
         $minkParameters,
         RouterInterface $router,
-        private string $routeName,
+        private readonly string $routeName,
     ) {
         parent::__construct($session, $minkParameters, $router);
     }
@@ -61,17 +61,25 @@ class CreatePage extends SymfonyPage implements CreatePageInterface
         return $this->routeName;
     }
 
+    public function cancelChanges(): void
+    {
+        $this->getElement('cancel_button')->click();
+    }
+
     public function getMessageInvalidForm(): string
     {
         return $this->getDocument()->find('css', '.ui.icon.negative.message')->getText();
     }
 
+    /**
+     * @return array<string, string>
+     */
     protected function getDefinedElements(): array
     {
-        return array_merge(
-            parent::getDefinedElements(),
-            ['form' => 'form'],
-        );
+        return array_merge(parent::getDefinedElements(), [
+            'form' => 'form',
+            'cancel_button' => '[data-test-cancel-changes-button]',
+        ]);
     }
 
     protected function waitForFormUpdate(): void

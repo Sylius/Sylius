@@ -52,7 +52,7 @@ final readonly class ProductCreationContext implements Context
         $this->productChannelPricingsFormElement->specifyPrice($channel, $price);
         $this->createPage->checkChannel($channel->getCode());
 
-        $this->productTaxonomyFormElement->selectMainTaxon($taxon);
+        $this->productTaxonomyFormElement->selectMainTaxon($taxon->getName());
         $this->productTaxonomyFormElement->checkProductTaxon($taxon);
 
         $this->createPage->create();

@@ -277,11 +277,11 @@ final class ManagingProductVariantsContext implements Context
     }
 
     /**
-     * @When I choose to show this product in the :channelName channel
+     * @When /^I choose to show this product in the (channel "([^"]+)")$/
      */
-    public function iChooseToShowThisProductInTheChannel(string $channelName): void
+    public function iChooseToShowThisProductInTheChannel(ChannelInterface $channel): void
     {
-        $this->updatePage->showProductInChannel($channelName);
+        $this->updatePage->showProductInChannel($channel);
     }
 
     /**

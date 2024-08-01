@@ -15,14 +15,17 @@ namespace Sylius\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Element\Admin\Product\TaxonomyFormElementInterface;
+use Sylius\Behat\Page\Admin\Product\UpdateSimpleProductPageInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Webmozart\Assert\Assert;
 
-final class ManagingProductTaxonsContext implements Context
+final readonly class ManagingProductTaxonsContext implements Context
 {
-    public function __construct(private TaxonomyFormElementInterface $taxonomyFormElement)
-    {
+    public function __construct(
+        private UpdateSimpleProductPageInterface $updateSimpleProductPage,
+        private TaxonomyFormElementInterface $taxonomyFormElement,
+    ) {
     }
 
     /**
@@ -41,6 +44,10 @@ final class ManagingProductTaxonsContext implements Context
         ProductInterface $product,
         TaxonInterface $taxon,
     ): void {
+        if (!$this->updateSimpleProductPage->isOpen(['id' => $product->getId()])) {
+            $this->updateSimpleProductPage->open(['id' => $product->getId()]);
+        }
+
         $this->taxonomyFormElement->uncheckProductTaxon($taxon);
     }
 
