@@ -24,16 +24,6 @@
                     <uriVariable parameterName="code" fromClass="Sylius\Component\Core\Model\Taxon" fromProperty="translations"/>
                     <uriVariable parameterName="localeCode" fromClass="Sylius\Component\Taxonomy\Model\TaxonTranslation"/>
                 </uriVariables>
-                <normalizationContext>
-                    <values>
-                        <value name="groups">
-                            <values>
-                                <value>sylius:admin:taxon:show</value>
-                                <value>sylius:admin:taxon_translation:show</value>
-                            </values>
-                        </value>
-                    </values>
-                </normalizationContext>
             </operation>
 
         </operations>
