@@ -1,9 +1,11 @@
 {% import '@SyliusShop/shared/messages.html.twig' as messages %}
 
+{% set product_reviews = hookable_metadata.context.product_reviews %}
+
 {% if product_reviews|length > 0 %}
     <div class="mb-5">
         {% for review in product_reviews %}
-            {% include '@SyliusShop/ProductReview/single.html.twig' %}
+            {% hook 'list' with { review } %}
         {% endfor %}
     </div>
 {% else %}

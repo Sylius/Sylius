@@ -181,21 +181,6 @@ sylius_ui:
                     context:
                         event: sylius.shop.account.order.show.after_content_header
 
-        sylius.shop.product_review.index.sidebar:
-            blocks:
-                card:
-                    template: "@SyliusShop/ProductReview/product_card.html.twig"
-                    priority: 10
-
-        sylius.shop.product_review.index.main:
-            blocks:
-                header:
-                    template: "@SyliusShop/ProductReview/list/header.html.twig"
-                    priority: 20
-                list:
-                    template: "@SyliusShop/ProductReview/list.html.twig"
-                    priority: 10
-
         sylius.shop.product_review.create.sidebar:
             blocks:
                 card:
@@ -205,7 +190,7 @@ sylius_ui:
         sylius.shop.product_review.create.main:
             blocks:
                 form:
-                    template: "@SyliusShop/ProductReview/form.html.twig"
+                    template: "@SyliusShop/product_review/form.html.twig"
                     priority: 10
 
         sylius.shop.product.index.header:
