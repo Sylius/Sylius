@@ -14,8 +14,9 @@ twig_hooks:
             price_history:
                 template: '@SyliusAdmin/product_variant/form/content/update/header/actions/price_history.html.twig'
             view_in_store:
-                template: '@SyliusAdmin/product/common/header/title_block/actions/view_in_store.html.twig'
-                
+                component: 'sylius_admin:view_in_store'
+                props:
+                    product: '@=_context.resource.getProduct()'
 
         'sylius_admin.product_variant.update.content.form':
             side_navigation:

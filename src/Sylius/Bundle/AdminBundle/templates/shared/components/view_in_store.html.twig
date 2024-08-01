@@ -1,7 +1,6 @@
 {% if sylius_bundle_loaded_checker('SyliusShopBundle') %}
     {% from '@SyliusAdmin/shared/helper/icon.html.twig' import icon %}
 
-    {% set product = hookable_metadata.context.resource.product|default(hookable_metadata.context.resource) %}
     {% set enabled_channels = product.channels|filter(channel => channel.enabled == true) %}
 
     {% if not product.enabled or enabled_channels|length < 1 %}
